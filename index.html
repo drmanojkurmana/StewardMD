@@ -14653,14 +14653,15 @@ window.INF = (function(){
 
   function renderHome(){
     var h=tabsHtml('home');
-    h+='<div class="inf-sec"><p class="inf-mono" style="margin:0">Tap any drug for a one-tap pump-rate calculator, weight-based dosing, full monograph and Nurse Mode. Or use the Universal Calculator for any infusion, or the ICU Dashboard for live vitals + running infusions.</p></div>';
+    h+='<div class="inf-sec"><p class="inf-mono" style="margin:0 0 9px">Tap any drug for a one-tap pump-rate calculator, weight-based dosing, full monograph and Nurse Mode. Or use the Universal Calculator for any infusion, or the ICU Dashboard for live vitals + running infusions.</p>'+
+      '<button class="inf-minibtn" onclick="INF.openProtocols()">🏥 Edit hospital preparation protocols</button></div>';
     CATS.forEach(function(cat){
       var keys=Object.keys(INFUSION_DRUGS).filter(function(k){return INFUSION_DRUGS[k].cat===cat;});
       if(!keys.length)return;
       h+='<div class="inf-cat">'+esc(cat)+'</div><div class="inf-grid">';
-      keys.forEach(function(k){var d=INFUSION_DRUGS[k];
-        h+='<div class="inf-card" onclick="INF.openDrug(\''+k+'\')"><b>'+esc(d.name.split(' (')[0])+'</b>'+
-          '<span>'+esc(d.prep.amt+' '+d.prep.unit+'/'+d.prep.vol+' mL · '+d.line)+'</span></div>';
+      keys.forEach(function(k){var d=INFUSION_DRUGS[k], ep=effPrep(k);
+        h+='<div class="inf-card" onclick="INF.openDrug(\''+k+'\')"><b>'+esc(d.name.split(' (')[0])+(ep._custom?' 🏥':'')+'</b>'+
+          '<span>'+esc(ep.amt+' '+ep.unit+'/'+ep.vol+' mL · '+d.line)+'</span></div>';
       });
       h+='</div>';
     });
@@ -14699,7 +14700,8 @@ window.INF = (function(){
 
   function renderDrug(){
     var d=INFUSION_DRUGS[S.drug]; if(!d)return renderHome();
-    if(S._pk!==S.drug){ S.prep={amt:d.prep.amt,unit:d.prep.unit,vol:d.prep.vol}; S.dose=d.start; S.doseUnit=d.doseUnit; S._pk=S.drug; if(!S.weight)S.weight=70; }
+    if(S._pk!==S.drug){ var ep0=effPrep(S.drug); S.prep={amt:ep0.amt,unit:ep0.unit,vol:ep0.vol}; S.prepFluid=ep0.fluid; S.dose=d.start; S.doseUnit=d.doseUnit; S._pk=S.drug; if(!S.weight)S.weight=70; }
+    var ep=effPrep(S.drug);
     var needWt=d.weightBased;
     var h='<div class="inf-tabs"><button class="inf-tab" onclick="INF._go(\'home\')">← Library</button>'+
       '<span class="inf-line '+d.line+'" style="align-self:center;margin-left:auto">'+esc(d.line==='central'?'Central line':d.line==='peripheral'?'Peripheral OK':'Central preferred')+'</span></div>';
@@ -14707,7 +14709,10 @@ window.INF = (function(){
       '<div class="inf-row"><div class="inf-field"><label class="inf-label">Amount</label><input class="inf-input" type="number" value="'+S.prep.amt+'" oninput="INF._d(\'amt\',this.value)"></div>'+
       '<div class="inf-field"><label class="inf-label">Unit</label><input class="inf-input" value="'+esc(S.prep.unit)+'" oninput="INF._d(\'unit\',this.value)"></div>'+
       '<div class="inf-field"><label class="inf-label">in volume (mL)</label><input class="inf-input" type="number" value="'+S.prep.vol+'" oninput="INF._d(\'vol\',this.value)"></div></div>'+
-      '<div class="inf-disc" style="border:none;padding:0;margin:-4px 0 8px">Standard: '+esc(d.prep.amt+' '+d.prep.unit+' in '+d.prep.vol+' mL '+d.prep.fluid)+(d.alt?(' · Alt: '+esc(d.alt)):'')+'</div>'+
+      '<div class="inf-disc" style="border:none;padding:0;margin:-4px 0 6px">'+(ep._custom?'🏥 Hospital protocol: ':'Standard: ')+esc(ep.amt+' '+ep.unit+' in '+ep.vol+' mL '+ep.fluid)+(d.alt?(' · Alt: '+esc(d.alt)):'')+
+        ' · <a href="javascript:void(0)" onclick="INF.openProtocols()" style="color:var(--teal);font-weight:700">edit protocols</a></div>'+
+      '<div class="inf-btnrow" style="margin:0 0 9px"><button class="inf-minibtn" onclick="INF._protoSaveCurrent(this)">🏥 Save these values as hospital protocol</button>'+
+        (ep._custom?'<button class="inf-minibtn" style="border-color:var(--red);color:var(--red)" onclick="INF._protoReset(\''+S.drug+'\')">Reset to standard</button>':'')+'</div>'+
       (needWt?'<div class="inf-field"><label class="inf-label">Patient weight (kg)</label><input class="inf-input" type="number" value="'+S.weight+'" oninput="INF._d(\'wt\',this.value)"></div>':'')+
       '<div class="inf-field"><label class="inf-label">Dose ('+esc(d.doseUnit)+')</label>'+
       '<div class="inf-titrate"><button class="inf-tbtn" onclick="INF._titrate(-1)">−</button>'+
@@ -14746,7 +14751,7 @@ window.INF = (function(){
       warn+'<div class="inf-stats">'+stats+'</div>'+nurseCard(d,r);
   }
   function nurseCard(d,r){
-    var prep='Prepare: '+S.prep.amt+' '+S.prep.unit+' '+d.name.split(' (')[0]+' in '+S.prep.vol+' mL '+(d.prep.fluid||'');
+    var prep='Prepare: '+S.prep.amt+' '+S.prep.unit+' '+d.name.split(' (')[0]+' in '+S.prep.vol+' mL '+(S.prepFluid||d.prep.fluid||'');
     var pump='Set pump: '+fmt(r.pump,1)+' mL/hr'+(d.weightBased?(' (for '+S.dose+' '+d.doseUnit+' at '+S.weight+' kg)'):(' (for '+S.dose+' '+d.doseUnit+')'));
     var txt=prep+'\n'+pump;
     return '<div class="inf-nurse"><div class="nl">Nurse Mode</div><div class="nv">'+esc(prep)+'</div><div class="nl">Pump</div><div class="nv">'+esc(pump)+'</div>'+
@@ -14766,8 +14771,8 @@ window.INF = (function(){
   function dashInit(){ if(!S.dash){ S.dash = dashLoad() || {vitals:{weight:70,map:'',hr:'',uo:'',lactate:''}, infusions:[], log:[]}; if(!S.dash.log)S.dash.log=[]; if(!S.dash.infusions)S.dash.infusions=[]; if(!S.dash.vitals)S.dash.vitals={weight:70}; } }
   function nowStr(){ try{ return new Date().toLocaleString(); }catch(e){ return ''; } }
   function dashLog(type,text){ S.dash.log.unshift({t:nowStr(), type:type, text:text}); if(S.dash.log.length>50)S.dash.log=S.dash.log.slice(0,50); }
-  function dashPump(inf){ var d=INFUSION_DRUGS[inf.key]; if(!d)return null; var wt=d.weightBased?(+S.dash.vitals.weight||70):0;
-    var r=compute(d.prep.amt,d.prep.unit,d.prep.vol,+inf.dose,d.doseUnit,wt); return r.error?null:r.pump; }
+  function dashPump(inf){ var d=INFUSION_DRUGS[inf.key]; if(!d)return null; var ep=effPrep(inf.key); var wt=d.weightBased?(+S.dash.vitals.weight||70):0;
+    var r=compute(ep.amt,ep.unit,ep.vol,+inf.dose,d.doseUnit,wt); return r.error?null:r.pump; }
   function dashStatusHtml(){
     var v=S.dash.vitals, wt=+v.weight||0, chips='';
     if(v.map!==''&&v.map!=null){ var m=+v.map; chips+='<span class="dash-chip '+(m<65?'red':'ok')+'">MAP '+m+' '+(m<65?'< target (≥65)':'≥65 ✓')+'</span>'; }
@@ -14811,11 +14816,46 @@ window.INF = (function(){
     var l=document.getElementById('dashInfList'); if(l)l.innerHTML=dashInfListHtml();
     var lg=document.getElementById('dashLog'); if(lg)lg.innerHTML=dashLogHtml(); }
 
+  /* ---------- hospital-editable preparation protocols ---------- */
+  var PROTO_KEY='smd_infusion_protocols_v1';
+  function protoLoad(){ try{ return JSON.parse(localStorage.getItem(PROTO_KEY))||{}; }catch(e){ return {}; } }
+  function protoSaveStore(){ try{ localStorage.setItem(PROTO_KEY, JSON.stringify(S.proto||{})); }catch(e){} }
+  function protoInit(){ if(!S.proto) S.proto=protoLoad(); }
+  function effPrep(key){ protoInit(); var d=INFUSION_DRUGS[key]; if(!d)return null; var o=S.proto[key];
+    if(o) return {amt:o.amt, unit:o.unit, vol:o.vol, fluid:(o.fluid!=null?o.fluid:d.prep.fluid), _custom:true};
+    return {amt:d.prep.amt, unit:d.prep.unit, vol:d.prep.vol, fluid:d.prep.fluid, _custom:false}; }
+  function renderProtocols(){
+    protoInit();
+    var h='<div class="inf-tabs"><button class="inf-tab" onclick="INF._go(\'home\')">← Library</button></div>';
+    h+='<div class="inf-sec"><div class="inf-h">Hospital-editable preparation protocols</div>'+
+      '<p class="inf-mono" style="margin:0 0 9px">Customise the default preparation (amount / volume / diluent) for your institution. Changes apply across the calculators, Nurse Mode and the ICU dashboard, and are saved on this device. The published standard is always kept for reference.</p>'+
+      '<button class="inf-minibtn" style="border-color:var(--red);color:var(--red)" onclick="INF._protoResetAll()">Reset all to standard</button></div>';
+    CATS.forEach(function(cat){ var keys=Object.keys(INFUSION_DRUGS).filter(function(k){return INFUSION_DRUGS[k].cat===cat;}); if(!keys.length)return;
+      h+='<div class="inf-cat">'+esc(cat)+'</div>'; keys.forEach(function(k){ h+=protoRowHtml(k); }); });
+    return h;
+  }
+  function protoRowHtml(k){
+    var d=INFUSION_DRUGS[k], ep=effPrep(k), custom=ep._custom;
+    return '<div class="inf-sec" style="padding:11px 13px;margin-bottom:9px">'+
+      '<div style="display:flex;align-items:center;gap:8px;margin-bottom:7px"><b style="font-size:13.5px;color:var(--ink);flex:1">'+esc(d.name.split(' (')[0])+'</b>'+
+      '<span class="inf-line '+(custom?'central':'peripheral')+'" id="protobadge_'+k+'" style="'+(custom?'background:var(--teal-soft);color:var(--teal)':'')+'">'+(custom?'Hospital protocol':'Standard')+'</span></div>'+
+      '<div class="inf-row">'+
+        '<div class="inf-field"><label class="inf-label">Amount</label><input class="inf-input" type="number" step="any" value="'+esc(ep.amt)+'" oninput="INF._protoEdit(\''+k+'\',\'amt\',this.value)"></div>'+
+        '<div class="inf-field"><label class="inf-label">Unit</label><input class="inf-input" value="'+esc(ep.unit)+'" oninput="INF._protoEdit(\''+k+'\',\'unit\',this.value)"></div>'+
+        '<div class="inf-field"><label class="inf-label">Volume mL</label><input class="inf-input" type="number" step="any" value="'+esc(ep.vol)+'" oninput="INF._protoEdit(\''+k+'\',\'vol\',this.value)"></div>'+
+      '</div>'+
+      '<div class="inf-field"><label class="inf-label">Diluent / fluid</label><input class="inf-input" value="'+esc(ep.fluid)+'" oninput="INF._protoEdit(\''+k+'\',\'fluid\',this.value)"></div>'+
+      '<div class="inf-disc" style="border:none;padding:0;margin:2px 0 0">Published standard: '+esc(d.prep.amt+' '+d.prep.unit+' / '+d.prep.vol+' mL '+d.prep.fluid)+
+        ' · <a href="javascript:void(0)" onclick="INF._protoReset(\''+k+'\')" style="color:var(--teal);font-weight:700">reset</a></div>'+
+      '</div>';
+  }
+
   function render(){
     var b=document.getElementById('infBody'), title=document.getElementById('infTitle');
     if(S.view==='universal'){ b.innerHTML=renderUniversal(); uniOut(); if(title)title.textContent='Universal Infusion Calculator'; }
     else if(S.view==='drug'){ b.innerHTML=renderDrug(); drugOut(); if(title&&INFUSION_DRUGS[S.drug])title.textContent=INFUSION_DRUGS[S.drug].name.split(' (')[0]; }
     else if(S.view==='dashboard'){ b.innerHTML=renderDashboard(); if(title)title.textContent='ICU Dashboard'; }
+    else if(S.view==='protocols'){ b.innerHTML=renderProtocols(); if(title)title.textContent='Hospital Protocols'; }
     else { b.innerHTML=renderHome(); if(title)title.textContent='ICU Infusion & Vasopressor Calculator'; }
     document.getElementById('infOverlay').scrollTop=0;
   }
@@ -14839,6 +14879,13 @@ window.INF = (function(){
     _dashTitrate:function(i,dir){ dashInit(); var inf=S.dash.infusions[i]; if(!inf)return; var d=INFUSION_DRUGS[inf.key]; var step=(d.high-d.low)/20||1; step=step<0.01?0.01:Math.round(step*1000)/1000; var nv=(+inf.dose||0)+dir*step; if(nv<0)nv=0; inf.dose=Math.round(nv*1000)/1000; dashLog('titrate',d.name.split(' (')[0]+(dir>0?' ↑ ':' ↓ ')+'to '+inf.dose+' '+d.doseUnit); dashSave(); dashRefresh(); },
     _dashRemove:function(i){ dashInit(); var inf=S.dash.infusions[i]; if(!inf)return; var d=INFUSION_DRUGS[inf.key]; dashLog('infusion','Stopped '+(d?d.name.split(' (')[0]:inf.key)); S.dash.infusions.splice(i,1); dashSave(); dashRefresh(); },
     _dashClear:function(){ S.dash={vitals:{weight:70,map:'',hr:'',uo:'',lactate:''}, infusions:[], log:[]}; dashSave(); render(); },
+    openProtocols:function(){ S.view='protocols'; document.getElementById('infOverlay').classList.add('open'); document.body.style.overflow='hidden'; render(); },
+    _protoEdit:function(k,f,v){ protoInit(); if(!S.proto[k]){ var ep=effPrep(k); S.proto[k]={amt:ep.amt,unit:ep.unit,vol:ep.vol,fluid:ep.fluid}; } S.proto[k][f]=(f==='amt'||f==='vol')?(v===''?'':+v):v; protoSaveStore();
+      var bd=document.getElementById('protobadge_'+k); if(bd){ bd.textContent='Hospital protocol'; bd.className='inf-line central'; bd.style.background='var(--teal-soft)'; bd.style.color='var(--teal)'; } },
+    _protoReset:function(k){ protoInit(); delete S.proto[k]; protoSaveStore(); if(S.view==='protocols')render(); else if(S.view==='drug'){ S._pk=null; render(); } },
+    _protoResetAll:function(){ S.proto={}; protoSaveStore(); render(); },
+    _protoSaveCurrent:function(btn){ protoInit(); S.proto[S.drug]={amt:+S.prep.amt,unit:S.prep.unit,vol:+S.prep.vol,fluid:S.prepFluid||(INFUSION_DRUGS[S.drug].prep.fluid)}; protoSaveStore();
+      if(btn){var o=btn.textContent;btn.textContent='✓ Saved as hospital protocol';setTimeout(function(){var d=INFUSION_DRUGS[S.drug]; S._pk=null; render();},900);} },
     matchDrug:function(text){ var s=(text||'').toLowerCase(), keys=Object.keys(INFUSION_DRUGS);
       for(var i=0;i<keys.length;i++){ var n=INFUSION_DRUGS[keys[i]].name.toLowerCase().split(' (')[0]; if(s.indexOf(n)!==-1||s.indexOf(keys[i])!==-1) return keys[i]; } return null; }
   };
