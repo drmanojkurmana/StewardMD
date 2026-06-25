@@ -14368,7 +14368,24 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=docum
   .inf-tab{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;}
   .inf-tab.active{background:var(--teal);color:#fff;border-color:var(--teal);}
   .inf-disc{font-size:10.5px;color:var(--slate-soft);line-height:1.55;border-top:1px solid var(--line);padding-top:10px;margin-top:6px;}
-  @media print{.inf-overlay{position:static;background:#fff;} .inf-top,.inf-close,.inf-fab,.inf-tabs,.inf-titrate{display:none!important;}}
+  /* animated infusion pump / syringe graphic */
+  .inf-viz{display:flex;flex-direction:column;align-items:center;padding:4px 0 0;}
+  .inf-viz svg{width:100%;max-width:360px;height:auto;}
+  .inf-viz .vlabel{font-size:11px;font-weight:700;color:var(--slate-soft);letter-spacing:.04em;margin-top:2px;}
+  .inf-barrel{fill:none;stroke:var(--slate-soft);stroke-width:2.5;}
+  .inf-fluid{transform-box:fill-box;transform-origin:right center;animation:infEmpty 9s linear infinite;}
+  .inf-plunger{animation:infPush 9s linear infinite;}
+  .inf-tube{fill:none;stroke:var(--slate-soft);stroke-width:2.5;}
+  .inf-flow{fill:none;stroke:var(--teal);stroke-width:2.5;stroke-dasharray:3 7;stroke-linecap:round;animation:infFlow var(--fd,1.2s) linear infinite;}
+  .inf-drop{fill:var(--teal);animation:infDrop var(--dd,1.2s) linear infinite;}
+  .inf-drop.d2{animation-delay:calc(var(--dd,1.2s) / 2);}
+  @keyframes infEmpty{0%{transform:scaleX(1)}100%{transform:scaleX(.12)}}
+  @keyframes infPush{0%{transform:translateX(0)}100%{transform:translateX(126px)}}
+  @keyframes infDrop{0%{transform:translateY(0);opacity:0}12%{opacity:1}82%{opacity:1}100%{transform:translateY(24px);opacity:0}}
+  @keyframes infFlow{to{stroke-dashoffset:-20}}
+  .inf-viz.paused .inf-fluid,.inf-viz.paused .inf-plunger,.inf-viz.paused .inf-drop,.inf-viz.paused .inf-flow{animation-play-state:paused;}
+  @media(prefers-reduced-motion:reduce){.inf-fluid,.inf-plunger,.inf-drop,.inf-flow{animation:none!important;}}
+  @media print{.inf-overlay{position:static;background:#fff;} .inf-top,.inf-close,.inf-fab,.inf-tabs,.inf-titrate{display:none!important;} .inf-fluid,.inf-plunger,.inf-drop,.inf-flow{animation:none!important;}}
   @media(max-width:560px){.inf-pumpcard .pv{font-size:34px;}}
 </style>
 <button class="inf-fab" id="infFab" onclick="INF.open()" title="ICU Infusion & Vasopressor Calculator" aria-label="Infusion calculator">💉<small>ICU</small></button>
@@ -14545,6 +14562,47 @@ window.INF = (function(){
     }
     if(fam==='units')return fmt(c,2)+' units/mL'; if(fam==='mmol')return fmt(c,3)+' mmol/mL'; return fmt(c,2)+'/mL'; }
 
+  // Animated syringe-pump graphic; drip/flow speed reflects the pump rate (mL/hr).
+  function pumpGraphic(rate){
+    var r=(rate&&isFinite(rate)&&rate>0)?rate:0;
+    var dd=r>0?Math.max(0.35,Math.min(2.2, 2.2 - r*0.03)):1.2; // drop interval (s) — faster pump → faster drips
+    var paused=r<=0;
+    var lbl=r>0?('Infusing · '+fmt(r,1)+' mL/hr'):'Pump idle';
+    return '<div class="inf-viz'+(paused?' paused':'')+'" style="--dd:'+dd+'s;--fd:'+dd+'s" aria-hidden="true">'+
+      '<svg viewBox="0 0 360 120" role="img">'+
+      '<defs><linearGradient id="infFg" x1="0" x2="0" y1="0" y2="1">'+
+        '<stop offset="0" stop-color="#3fc7b3"/><stop offset="1" stop-color="#0e6e63"/></linearGradient></defs>'+
+      // plunger (rod + thumb rest + stopper) — advances right
+      '<g class="inf-plunger">'+
+        '<rect x="2" y="50" width="10" height="20" rx="2" fill="var(--slate-soft)"/>'+   // thumb rest
+        '<rect x="10" y="56" width="44" height="8" rx="3" fill="var(--slate-soft)"/>'+    // rod
+        '<rect x="50" y="36" width="9" height="48" rx="2" fill="var(--slate)"/>'+         // stopper
+      '</g>'+
+      // fluid (drains toward nozzle)
+      '<rect class="inf-fluid" x="59" y="38" width="144" height="44" rx="3" fill="url(#infFg)"/>'+
+      // barrel outline + flange + graduations
+      '<rect class="inf-barrel" x="52" y="34" width="156" height="52" rx="6"/>'+
+      '<rect x="48" y="28" width="6" height="64" rx="2" fill="var(--slate-soft)"/>'+      // flange
+      '<g stroke="rgba(255,255,255,.45)" stroke-width="1.5">'+
+        '<line x1="90" y1="40" x2="90" y2="50"/><line x1="120" y1="40" x2="120" y2="50"/>'+
+        '<line x1="150" y1="40" x2="150" y2="50"/><line x1="180" y1="40" x2="180" y2="50"/></g>'+
+      // nozzle
+      '<path d="M208 50 L222 56 L222 64 L208 70 Z" fill="var(--slate-soft)"/>'+
+      // tube + flowing dashes from nozzle → drip chamber
+      '<path class="inf-tube" d="M222 60 H252 V74"/>'+
+      '<path class="inf-flow" d="M222 60 H252 V74"/>'+
+      // drip chamber
+      '<rect class="inf-barrel" x="238" y="74" width="28" height="30" rx="6"/>'+
+      // droplets
+      '<ellipse class="inf-drop" cx="252" cy="80" rx="3.2" ry="4.5"/>'+
+      '<ellipse class="inf-drop d2" cx="252" cy="80" rx="3.2" ry="4.5"/>'+
+      // chamber outflow → patient
+      '<path class="inf-tube" d="M252 104 V112 H300"/>'+
+      '<path class="inf-flow" d="M252 104 V112 H300"/>'+
+      '<text x="306" y="116" font-size="9" fill="var(--slate-soft)">patient</text>'+
+      '</svg><div class="vlabel">'+esc(lbl)+'</div></div>';
+  }
+
   function renderHome(){
     var h='<div class="inf-tabs"><button class="inf-tab active" onclick="INF._go(\'home\')">💊 Drug Library</button>'+
       '<button class="inf-tab" onclick="INF._go(\'universal\')">🧮 Universal Calculator</button></div>';
@@ -14584,7 +14642,7 @@ window.INF = (function(){
     var u=S.uni, r=compute(+u.amt,u.amtUnit,+u.vol,+u.rate,u.ru,+u.wt), el=document.getElementById('infUniOut'); if(!el)return;
     if(r.error){ el.innerHTML='<div class="inf-warn red">⚠ '+esc(r.error)+'</div>'; return; }
     var perHrLabel = u.amtUnit==='units'? fmt(r.perHr,2)+' units/hr' : u.amtUnit==='mmol'? fmt(r.perHr,2)+' mmol/hr' : (r.perHr>=1000? fmt(r.perHr/1000,2)+' mg/hr':fmt(r.perHr,1)+' mcg/hr');
-    el.innerHTML =
+    el.innerHTML = pumpGraphic(r.pump)+
       '<div class="inf-pumpcard"><div class="pl">Set pump to</div><div class="pv">'+fmt(r.pump,1)+'</div><div class="pu">mL/hr</div></div>'+
       '<div class="inf-stats"><div class="inf-stat"><div class="k">Concentration</div><div class="v">'+concLabel(r.concCanon,r.concFam,u.amtUnit)+'</div></div>'+
       '<div class="inf-stat"><div class="k">Drug delivered</div><div class="v">'+perHrLabel+'</div></div>'+
@@ -14637,7 +14695,8 @@ window.INF = (function(){
     stats+='<div class="inf-stat"><div class="k">Concentration</div><div class="v">'+concLabel(r.concCanon,r.concFam,S.prep.unit)+'</div></div>'+
       '<div class="inf-stat"><div class="k">Infusion lasts</div><div class="v">'+fmt(r.durationHr,1)+' h</div></div>'+
       '<div class="inf-stat"><div class="k">Usual max</div><div class="v">'+esc(d.high+' '+d.doseUnit)+'</div></div>';
-    el.innerHTML='<div class="inf-pumpcard"><div class="pl">Set pump to</div><div class="pv">'+fmt(r.pump,1)+'</div><div class="pu">mL/hr</div></div>'+
+    el.innerHTML=pumpGraphic(r.pump)+
+      '<div class="inf-pumpcard"><div class="pl">Set pump to</div><div class="pv">'+fmt(r.pump,1)+'</div><div class="pu">mL/hr</div></div>'+
       warn+'<div class="inf-stats">'+stats+'</div>'+nurseCard(d,r);
   }
   function nurseCard(d,r){
