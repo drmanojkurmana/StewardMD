@@ -8530,6 +8530,17 @@ function buildSupportingFindings(f, syn) {
 
 const state = { findings: {}, vitals: {}, lockedSynId: null, activeSystemId: null };
 
+// Restore a saved case: re-apply its findings/vitals and re-render the full clinical decision.
+window.SMD_restoreCase = function(findings, synId, vitals){
+  try{
+    state.findings = (findings && typeof findings === 'object') ? findings : {};
+    state.lockedSynId = synId || null;
+    if (vitals && typeof vitals === 'object') state.vitals = vitals;
+    renderOutput(state.findings, state.lockedSynId, false);
+    return true;
+  } catch(e){ return false; }
+};
+
 // ============================================================
 // SIMPLE MODE — guided, progressive-disclosure flow
 // Vitals strip (always visible) + body-system picker + live top-3
@@ -9882,7 +9893,7 @@ function renderOutput(f, lockedSynId, isContextualUpdate) {
         if (_reg && _reg.drugs) _drugs = _reg.drugs.map(function(d) { return d.drug || d; });
       }
       if (typeof SMD_showSavePrompt === 'function') {
-        SMD_showSavePrompt(syn ? syn.name : '', _drugs);
+        SMD_showSavePrompt(syn ? syn.name : '', _drugs, f, syn ? syn.id : '', state.vitals);
       }
       if (typeof SMD_triggerQuote === 'function') {
         SMD_triggerQuote();
@@ -10475,7 +10486,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ---- Show save prompt after output renders ----
-  window.SMD_showSavePrompt = function(synName, drugs) {
+  window.SMD_showSavePrompt = function(synName, drugs, findings, synId, vitals) {
     var acc = getCurrentUser();
     if (!acc || acc.type === 'guest') return; // guests don't save
     var prompt = document.getElementById('saveCasePrompt');
@@ -10483,6 +10494,9 @@ document.addEventListener('DOMContentLoaded', () => {
     prompt.style.display = 'block';
     prompt.dataset.synName = synName || '';
     prompt.dataset.drugs = JSON.stringify(drugs || []);
+    try { prompt.dataset.findings = JSON.stringify(findings || {}); } catch(e) { prompt.dataset.findings = '{}'; }
+    try { prompt.dataset.vitals = JSON.stringify(vitals || {}); } catch(e) { prompt.dataset.vitals = '{}'; }
+    prompt.dataset.synId = synId || '';
     document.getElementById('scpLabel').value = '';
     document.getElementById('scpCaseId').value = '';
     document.getElementById('scpAge').value = '';
@@ -10520,6 +10534,10 @@ document.addEventListener('DOMContentLoaded', () => {
     var synName = prompt ? prompt.dataset.synName : '';
     var drugs   = [];
     try { drugs = JSON.parse(prompt.dataset.drugs || '[]'); } catch(e) {}
+    var findings = {}, vitals = {};
+    try { findings = JSON.parse(prompt.dataset.findings || '{}'); } catch(e) {}
+    try { vitals = JSON.parse(prompt.dataset.vitals || '{}'); } catch(e) {}
+    var synId = prompt ? (prompt.dataset.synId || '') : '';
 
     // Require name OR case ID
     if (!label && !caseId) {
@@ -10541,7 +10559,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sex:    sex,
       notes:  notes,
       syndrome: synName,
+      synId:    synId,
       drugs:    drugs,
+      findings: findings,
+      vitals:   vitals,
       savedAt:    Date.now(),
       savedAtStr: new Date().toLocaleString()
     };
@@ -10628,6 +10649,7 @@ document.addEventListener('DOMContentLoaded', () => {
     list.innerHTML = '<div style="text-align:center;padding:20px;color:var(--slate-soft);font-size:13px;">Loading…</div>';
 
     SMD_CASES.getAll(uid, isGoogle(acc), function(cases) {
+      window._smdLoadedCases = cases || [];
       countEl.textContent = cases.length ? cases.length + ' case' + (cases.length > 1 ? 's' : '') : '';
       var clearBtn = document.getElementById('mcpClearBtn');
       if (clearBtn) clearBtn.style.display = cases.length ? 'block' : 'none';
@@ -10660,7 +10682,7 @@ document.addEventListener('DOMContentLoaded', () => {
           (drugs ? '<div class="mcp-case-drugs">' + drugs + '</div>' : '') +
           (c.notes ? '<div class="mcp-case-notes">📝 ' + escHtml(c.notes) + '</div>' : '') +
           '<div class="mcp-case-date">Saved ' + escHtml(c.savedAtStr || '') + '</div>' +
-          '<button class="mcp-view-btn" onclick="viewCaseOutput(\'' + escHtml(c.syndrome || '') + '\')">View Last Decision for this Syndrome ↗</button>' +
+          '<button class="mcp-view-btn" onclick="viewCaseOutput(\'' + escHtml(c.id) + '\')">Open clinical decision ↗</button>' +
         '</div>';
       }).join('');
     });
@@ -10719,15 +10741,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  window.viewCaseOutput = function(syndrome) {
-    // Close My Cases panel and scroll to the current output
+  window.viewCaseOutput = function(id) {
+    var cases = window._smdLoadedCases || [];
+    var c = null;
+    for (var i = 0; i < cases.length; i++) { if (cases[i].id === id) { c = cases[i]; break; } }
     closeMyCases();
     setTimeout(function() {
       var out = document.getElementById('outputArea');
-      if (out && out.innerHTML.trim()) {
-        out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      var hasFindings = c && c.findings && typeof c.findings === 'object' && Object.keys(c.findings).length;
+      if (hasFindings && typeof window.SMD_restoreCase === 'function') {
+        var ok = window.SMD_restoreCase(c.findings, c.synId || null, c.vitals || null);
+        if (ok && out) {
+          out.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          showToast('Opened: ' + (c.name || c.label || c.syndrome || 'case'));
+        } else {
+          showToast('Could not reopen this case — please re-run it.');
+        }
       } else {
-        showToast('Run the case first to see the decision');
+        // Legacy case saved before full decisions were stored
+        showToast('This case was saved earlier and has no stored findings — please re-enter it to rebuild the decision.');
+        if (out && out.innerHTML.trim()) out.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }, 350);
   };
@@ -14368,6 +14401,21 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=docum
   .inf-tab{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;}
   .inf-tab.active{background:var(--teal);color:#fff;border-color:var(--teal);}
   .inf-disc{font-size:10.5px;color:var(--slate-soft);line-height:1.55;border-top:1px solid var(--line);padding-top:10px;margin-top:6px;}
+  /* ICU dashboard */
+  .dash-vitals{display:grid;grid-template-columns:repeat(auto-fit,minmax(92px,1fr));gap:8px;}
+  .dash-v{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:7px 9px;display:flex;flex-direction:column;}
+  .dash-v label{font-size:9.5px!important;font-weight:800!important;color:var(--slate-soft)!important;text-transform:uppercase;letter-spacing:.03em;display:block!important;margin:0 0 2px!important;}
+  .dash-v input{width:100%;border:none;background:none;font-size:18px;font-weight:800;color:var(--ink);padding:0;box-sizing:border-box;}
+  .dash-status{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+  .dash-chip{font-size:11.5px;font-weight:700;border-radius:8px;padding:4px 9px;}
+  .dash-chip.ok{background:var(--teal-soft);color:var(--teal);} .dash-chip.amber{background:var(--orange-bg);color:var(--orange);} .dash-chip.red{background:var(--red-bg);color:var(--red);}
+  .dash-inf{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:7px;flex-wrap:wrap;}
+  .dash-inf .nm{flex:1;min-width:120px;font-weight:700;font-size:13px;color:var(--ink);line-height:1.3;}
+  .dash-inf .pump{font-weight:800;color:var(--teal);font-size:14px;}
+  .dash-tb{width:32px;height:32px;border-radius:8px;border:1px solid var(--teal);background:var(--teal-soft);color:var(--teal);font-size:18px;font-weight:800;cursor:pointer;flex:0 0 auto;}
+  .dash-tb:hover{background:var(--teal);color:#fff;}
+  .dash-log{font-size:11.5px;color:var(--slate);max-height:210px;overflow-y:auto;}
+  .dash-log div{padding:5px 0;border-bottom:1px solid var(--line);} .dash-log .t{color:var(--slate-soft);font-size:10px;}
   /* animated infusion pump / syringe graphic */
   .inf-viz{display:flex;flex-direction:column;align-items:center;padding:4px 0 0;}
   .inf-viz svg{width:100%;max-width:360px;height:auto;}
@@ -14604,9 +14652,8 @@ window.INF = (function(){
   }
 
   function renderHome(){
-    var h='<div class="inf-tabs"><button class="inf-tab active" onclick="INF._go(\'home\')">💊 Drug Library</button>'+
-      '<button class="inf-tab" onclick="INF._go(\'universal\')">🧮 Universal Calculator</button></div>';
-    h+='<div class="inf-sec"><p class="inf-mono" style="margin:0">Tap any drug for a one-tap pump-rate calculator, weight-based dosing, full monograph and Nurse Mode. Or use the Universal Calculator for any infusion.</p></div>';
+    var h=tabsHtml('home');
+    h+='<div class="inf-sec"><p class="inf-mono" style="margin:0">Tap any drug for a one-tap pump-rate calculator, weight-based dosing, full monograph and Nurse Mode. Or use the Universal Calculator for any infusion, or the ICU Dashboard for live vitals + running infusions.</p></div>';
     CATS.forEach(function(cat){
       var keys=Object.keys(INFUSION_DRUGS).filter(function(k){return INFUSION_DRUGS[k].cat===cat;});
       if(!keys.length)return;
@@ -14626,8 +14673,7 @@ window.INF = (function(){
     var u=S.uni, massU=['mg','mcg','g','units','mmol'],
         rateU=['mg/hr','mcg/hr','mcg/min','mcg/kg/min','mcg/kg/hr','mg/kg/hr','g/hr','units/hr','units/kg/hr','mmol/hr','mL/hr'],
         needWt=/\/kg\//.test(u.ru);
-    var h='<div class="inf-tabs"><button class="inf-tab" onclick="INF._go(\'home\')">💊 Drug Library</button>'+
-      '<button class="inf-tab active" onclick="INF._go(\'universal\')">🧮 Universal Calculator</button></div>';
+    var h=tabsHtml('universal');
     h+='<div class="inf-sec"><div class="inf-h">Universal Infusion Calculator</div>'+
       '<div class="inf-row"><div class="inf-field"><label class="inf-label">Drug amount</label><input class="inf-input" type="number" value="'+u.amt+'" oninput="INF._u(\'amt\',this.value)"></div>'+
       '<div class="inf-field"><label class="inf-label">Unit</label><select class="inf-select" onchange="INF._u(\'amtUnit\',this.value)">'+massU.map(function(x){return '<option'+(u.amtUnit===x?' selected':'')+'>'+x+'</option>';}).join('')+'</select></div></div>'+
@@ -14705,12 +14751,71 @@ window.INF = (function(){
     var txt=prep+'\n'+pump;
     return '<div class="inf-nurse"><div class="nl">Nurse Mode</div><div class="nv">'+esc(prep)+'</div><div class="nl">Pump</div><div class="nv">'+esc(pump)+'</div>'+
       '<div class="inf-btnrow"><button class="inf-minibtn" style="border-color:#fff;color:#fff" onclick="INF._copy(this,'+JSON.stringify(JSON.stringify(txt))+')">📋 Copy</button>'+
-      '<button class="inf-minibtn" style="border-color:#fff;color:#fff" onclick="window.print()">🖨 Print</button></div></div>';
+      '<button class="inf-minibtn" style="border-color:#fff;color:#fff" onclick="window.print()">🖨 Print</button>'+
+      '<button class="inf-minibtn" style="border-color:#fff;color:#fff" onclick="INF._dashAddCurrent(this)">➕ Add to ICU Dashboard</button></div></div>';
   }
+  function tabsHtml(active){
+    function t(v,lbl){ return '<button class="inf-tab'+(active===v?' active':'')+'" onclick="INF._go(\''+v+'\')">'+lbl+'</button>'; }
+    return '<div class="inf-tabs">'+t('home','💊 Drug Library')+t('universal','🧮 Universal Calculator')+t('dashboard','🩺 ICU Dashboard')+'</div>';
+  }
+
+  /* ---------- persistent live-vitals ICU dashboard ---------- */
+  var DASH_KEY='smd_icu_dashboard_v1';
+  function dashLoad(){ try{ return JSON.parse(localStorage.getItem(DASH_KEY)); }catch(e){ return null; } }
+  function dashSave(){ try{ localStorage.setItem(DASH_KEY, JSON.stringify(S.dash)); }catch(e){} }
+  function dashInit(){ if(!S.dash){ S.dash = dashLoad() || {vitals:{weight:70,map:'',hr:'',uo:'',lactate:''}, infusions:[], log:[]}; if(!S.dash.log)S.dash.log=[]; if(!S.dash.infusions)S.dash.infusions=[]; if(!S.dash.vitals)S.dash.vitals={weight:70}; } }
+  function nowStr(){ try{ return new Date().toLocaleString(); }catch(e){ return ''; } }
+  function dashLog(type,text){ S.dash.log.unshift({t:nowStr(), type:type, text:text}); if(S.dash.log.length>50)S.dash.log=S.dash.log.slice(0,50); }
+  function dashPump(inf){ var d=INFUSION_DRUGS[inf.key]; if(!d)return null; var wt=d.weightBased?(+S.dash.vitals.weight||70):0;
+    var r=compute(d.prep.amt,d.prep.unit,d.prep.vol,+inf.dose,d.doseUnit,wt); return r.error?null:r.pump; }
+  function dashStatusHtml(){
+    var v=S.dash.vitals, wt=+v.weight||0, chips='';
+    if(v.map!==''&&v.map!=null){ var m=+v.map; chips+='<span class="dash-chip '+(m<65?'red':'ok')+'">MAP '+m+' '+(m<65?'< target (≥65)':'≥65 ✓')+'</span>'; }
+    if(v.uo!==''&&v.uo!=null){ var uo=+v.uo, thr=wt?0.5*wt:30; chips+='<span class="dash-chip '+(uo<thr?'amber':'ok')+'">UO '+uo+' mL/hr'+(wt?(' (target ≥'+fmt(thr,1)+')'):'')+'</span>'; }
+    if(v.lactate!==''&&v.lactate!=null){ var l=+v.lactate; chips+='<span class="dash-chip '+(l>4?'red':l>2?'amber':'ok')+'">Lactate '+l+(l>4?' — high':l>2?' — elevated':' ✓')+'</span>'; }
+    if(v.hr!==''&&v.hr!=null){ var hr=+v.hr; chips+='<span class="dash-chip '+((hr>120||hr<50)?'amber':'ok')+'">HR '+hr+'</span>'; }
+    return chips?('<div class="dash-status">'+chips+'</div>'):'<div class="inf-disc" style="border:none;padding:4px 0">Enter vitals to see target status (MAP ≥65, UO ≥0.5 mL/kg/hr, lactate ≤2).</div>';
+  }
+  function dashInfListHtml(){
+    if(!S.dash.infusions.length) return '<div class="inf-disc" style="border:none;padding:4px 0">No active infusions. Add one below, or use a drug calculator → “Add to ICU Dashboard”.</div>';
+    return S.dash.infusions.map(function(inf,i){ var d=INFUSION_DRUGS[inf.key]; if(!d)return ''; var pump=dashPump(inf);
+      return '<div class="dash-inf"><span class="nm">'+esc(d.name.split(' (')[0])+'<br><span style="font-size:11px;color:var(--slate-soft);font-weight:600">'+esc(inf.dose+' '+d.doseUnit)+'</span></span>'+
+        '<button class="dash-tb" onclick="INF._dashTitrate('+i+',-1)">−</button><button class="dash-tb" onclick="INF._dashTitrate('+i+',1)">+</button>'+
+        '<span class="pump">'+(pump!=null?fmt(pump,1)+' mL/hr':'—')+'</span>'+
+        '<button class="inf-minibtn" style="border-color:var(--red);color:var(--red)" onclick="INF._dashRemove('+i+')">Stop</button></div>';
+    }).join('');
+  }
+  function dashLogHtml(){
+    if(!S.dash.log.length) return '<div class="inf-disc" style="border:none;padding:4px 0">No events logged yet.</div>';
+    return '<div class="dash-log">'+S.dash.log.slice(0,15).map(function(e){ return '<div><span class="t">'+esc(e.t)+'</span><br>'+esc(e.text)+'</div>'; }).join('')+'</div>';
+  }
+  function renderDashboard(){
+    dashInit(); var v=S.dash.vitals;
+    var addOpts=Object.keys(INFUSION_DRUGS).map(function(k){return '<option value="'+k+'">'+esc(INFUSION_DRUGS[k].name.split(' (')[0])+'</option>';}).join('');
+    var h=tabsHtml('dashboard');
+    h+='<div class="inf-sec"><div class="inf-h">Patient vitals (live)</div><div class="dash-vitals">'+
+      vf('weight','Weight kg',v.weight)+vf('map','MAP mmHg',v.map)+vf('hr','HR bpm',v.hr)+vf('uo','UO mL/hr',v.uo)+vf('lactate','Lactate',v.lactate)+
+      '</div><div id="dashStatus">'+dashStatusHtml()+'</div>'+
+      '<div class="inf-btnrow"><button class="inf-minibtn" onclick="INF._dashLogVitals()">📌 Log vitals snapshot</button></div></div>';
+    h+='<div class="inf-sec"><div class="inf-h">Active infusions</div><div id="dashInfList">'+dashInfListHtml()+'</div>'+
+      '<div class="inf-row" style="margin-top:10px"><select class="inf-select" id="dashAddSel">'+addOpts+'</select>'+
+      '<button class="inf-minibtn" style="flex:0 0 auto" onclick="INF._dashAdd()">+ Add infusion</button></div>'+
+      '<div class="inf-disc" style="border:none;padding:6px 0 0">Pump rates use each drug’s standard preparation and the weight above. Titrate with −/+; every change is logged.</div></div>';
+    h+='<div class="inf-sec"><div class="inf-h">Event log <span style="font-weight:600;text-transform:none;color:var(--slate-soft)">(auto-saved on this device)</span></div><div id="dashLog">'+dashLogHtml()+'</div>'+
+      '<div class="inf-btnrow"><button class="inf-minibtn" style="border-color:var(--red);color:var(--red)" onclick="INF._dashClear()">Clear dashboard</button></div></div>';
+    h+='<div class="inf-sec"><div class="inf-disc">Vitals, infusions and log persist locally in this browser (not synced, not a medical record). Decision support only — verify against your monitor, pump and chart.</div></div>';
+    return h;
+  }
+  function vf(k,lbl,val){ return '<div class="dash-v"><label>'+esc(lbl)+'</label><input type="number" step="any" value="'+(val==null?'':esc(val))+'" oninput="INF._dashV(\''+k+'\',this.value)"></div>'; }
+  function dashRefresh(){ var s=document.getElementById('dashStatus'); if(s)s.innerHTML=dashStatusHtml();
+    var l=document.getElementById('dashInfList'); if(l)l.innerHTML=dashInfListHtml();
+    var lg=document.getElementById('dashLog'); if(lg)lg.innerHTML=dashLogHtml(); }
+
   function render(){
     var b=document.getElementById('infBody'), title=document.getElementById('infTitle');
     if(S.view==='universal'){ b.innerHTML=renderUniversal(); uniOut(); if(title)title.textContent='Universal Infusion Calculator'; }
     else if(S.view==='drug'){ b.innerHTML=renderDrug(); drugOut(); if(title&&INFUSION_DRUGS[S.drug])title.textContent=INFUSION_DRUGS[S.drug].name.split(' (')[0]; }
+    else if(S.view==='dashboard'){ b.innerHTML=renderDashboard(); if(title)title.textContent='ICU Dashboard'; }
     else { b.innerHTML=renderHome(); if(title)title.textContent='ICU Infusion & Vasopressor Calculator'; }
     document.getElementById('infOverlay').scrollTop=0;
   }
@@ -14726,6 +14831,14 @@ window.INF = (function(){
       var nv=(+S.dose||0)+dir*step; if(nv<0)nv=0; S.dose=Math.round(nv*1000)/1000;
       var inp=document.querySelector('#infBody .inf-titrate .inf-input'); if(inp)inp.value=S.dose; drugOut(); },
     _copy:function(btn,j){ var t=JSON.parse(j); if(navigator.clipboard){ navigator.clipboard.writeText(t).then(function(){var o=btn.textContent;btn.textContent='✓ Copied';setTimeout(function(){btn.textContent=o;},1500);}); } },
+    openDashboard:function(){ S.view='dashboard'; document.getElementById('infOverlay').classList.add('open'); document.body.style.overflow='hidden'; render(); },
+    _dashV:function(k,val){ dashInit(); S.dash.vitals[k]=val; dashSave(); dashRefresh(); },
+    _dashLogVitals:function(){ dashInit(); var v=S.dash.vitals; var parts=[]; if(v.map!==''&&v.map!=null)parts.push('MAP '+v.map); if(v.hr!==''&&v.hr!=null)parts.push('HR '+v.hr); if(v.uo!==''&&v.uo!=null)parts.push('UO '+v.uo); if(v.lactate!==''&&v.lactate!=null)parts.push('Lactate '+v.lactate); dashLog('vitals','Vitals — '+(parts.join(' · ')||'no values')); dashSave(); dashRefresh(); },
+    _dashAdd:function(){ dashInit(); var sel=document.getElementById('dashAddSel'); if(!sel)return; var k=sel.value; var d=INFUSION_DRUGS[k]; if(!d)return; S.dash.infusions.push({key:k,dose:d.start}); dashLog('infusion','Started '+d.name.split(' (')[0]+' at '+d.start+' '+d.doseUnit); dashSave(); render(); },
+    _dashAddCurrent:function(btn){ dashInit(); var d=INFUSION_DRUGS[S.drug]; if(!d)return; S.dash.infusions.push({key:S.drug,dose:+S.dose}); dashLog('infusion','Started '+d.name.split(' (')[0]+' at '+S.dose+' '+d.doseUnit); dashSave(); if(btn){var o=btn.textContent;btn.textContent='✓ Added';setTimeout(function(){btn.textContent=o;},1500);} },
+    _dashTitrate:function(i,dir){ dashInit(); var inf=S.dash.infusions[i]; if(!inf)return; var d=INFUSION_DRUGS[inf.key]; var step=(d.high-d.low)/20||1; step=step<0.01?0.01:Math.round(step*1000)/1000; var nv=(+inf.dose||0)+dir*step; if(nv<0)nv=0; inf.dose=Math.round(nv*1000)/1000; dashLog('titrate',d.name.split(' (')[0]+(dir>0?' ↑ ':' ↓ ')+'to '+inf.dose+' '+d.doseUnit); dashSave(); dashRefresh(); },
+    _dashRemove:function(i){ dashInit(); var inf=S.dash.infusions[i]; if(!inf)return; var d=INFUSION_DRUGS[inf.key]; dashLog('infusion','Stopped '+(d?d.name.split(' (')[0]:inf.key)); S.dash.infusions.splice(i,1); dashSave(); dashRefresh(); },
+    _dashClear:function(){ S.dash={vitals:{weight:70,map:'',hr:'',uo:'',lactate:''}, infusions:[], log:[]}; dashSave(); render(); },
     matchDrug:function(text){ var s=(text||'').toLowerCase(), keys=Object.keys(INFUSION_DRUGS);
       for(var i=0;i<keys.length;i++){ var n=INFUSION_DRUGS[keys[i]].name.toLowerCase().split(' (')[0]; if(s.indexOf(n)!==-1||s.indexOf(keys[i])!==-1) return keys[i]; } return null; }
   };
