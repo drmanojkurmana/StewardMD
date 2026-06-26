@@ -342,12 +342,14 @@
       '</div>' +
       '<div class="dx-body">' +
         '<div class="dx-discl">Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
+        '<div id="dxHosp" class="dx-hosp"></div>' +
         '<div class="dx-find-wrap">' +
           '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. fever, headache, dysuria)…" autocomplete="off">' +
           '<div id="dxSel" class="dx-selected"></div>' +
           '<div id="dxPicker" class="dx-picker"></div>' +
         '</div>' +
         '<div id="dxGate" class="dx-gate"></div>' +
+        '<div id="dxPolicy" class="dx-policy-wrap"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
         '<div id="dxCols" class="dx-cols"></div>' +
       '</div>';
@@ -444,16 +446,74 @@
     return '<div class="dx-col ' + cls + '"><div class="dx-col-h">' + title + ' <span class="dx-col-n">' + rows.length + '</span></div>' + body + '</div>';
   }
 
+  function renderHosp() {
+    var el = root.querySelector("#dxHosp");
+    if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
+    var h = window.HOSPITAL.current();
+    var opts = window.HOSPITAL.list.map(function (x) {
+      return '<option value="' + x.id + '"' + (x.id === h.id ? " selected" : "") + '>' + esc(x.name) + (x.hasPolicy ? "" : " — national guidance") + '</option>';
+    }).join("");
+    el.innerHTML = '<span class="dx-hosp-l">Hospital policy</span>' +
+      (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
+      '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
+    var sel = el.querySelector("#dxHospSel");
+    sel.addEventListener("change", function () { window.HOSPITAL.setProfile(sel.value); });
+  }
+
+  function awareBadge(d) {
+    var c = window.HOSPITAL ? window.HOSPITAL.awareClass(d) : "access";
+    if (c === "reserve") return ' <span class="dx-aware res">Reserve · AMS approval</span>';
+    if (c === "watch") return ' <span class="dx-aware wat">Watch</span>';
+    return "";
+  }
+  function drugRows(arr) {
+    return (arr || []).map(function (x) { return '<div class="dx-drug">' + esc(x) + awareBadge(x) + '</div>'; }).join("");
+  }
+  function renderPolicy(g) {
+    var el = root.querySelector("#dxPolicy");
+    if (!el) return;
+    var info = GATEINFO[g.cls];
+    if (!info.ab || !g.lead || !window.HOSPITAL) { el.innerHTML = ""; return; }
+    var lead = g.lead, pol = window.HOSPITAL.getPolicy(lead.id), h = pol.hospital, e = pol.entry;
+    var src = h.logo
+      ? '<img class="dx-src-logo" src="' + h.logo + '" alt="GIMSR logo"> <b>✓ ' + esc(h.policyName) + '</b> <span>' + esc(h.version || "") + '</span>'
+      : '<b>' + esc(h.policyName || h.name) + '</b>' + (h.version ? ' <span>' + esc(h.version) + '</span>' : "");
+    var html;
+    if (e) {
+      html = '<div class="dx-policy">' +
+        '<div class="dx-policy-src">' + src + '</div>' +
+        '<div class="dx-policy-syn">Empiric therapy — ' + esc(lead.name) + '</div>' +
+        '<div class="dx-policy-sec"><b>Preferred</b>' + drugRows(e.preferred) + '</div>' +
+        (e.alternatives && e.alternatives.length ? '<div class="dx-policy-sec"><b>Alternatives</b>' + drugRows(e.alternatives) + '</div>' : "") +
+        (e.duration ? '<div class="dx-policy-line"><b>Duration:</b> ' + esc(e.duration) + '</div>' : "") +
+        (e.comments ? '<div class="dx-policy-note">' + esc(e.comments) + '</div>' : "") +
+        '<div class="dx-policy-refs">Secondary references: ICMR AMRSN 2024 · IDSA · Surviving Sepsis Campaign</div>' +
+        (e.table ? '<div class="dx-policy-cite">Source: GIMSR Antibiotic Policy ' + esc(e.table) + ', p.' + e.page + '</div>' : "") +
+        '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
+      '</div>';
+    } else {
+      html = '<div class="dx-policy nopol">' +
+        '<div class="dx-policy-src">' + src + '</div>' +
+        '<div class="dx-policy-note">No ' + esc(h.short || h.name) + ' syndrome-specific empiric entry for <b>' + esc(lead.name) + '</b>. ' +
+        (h.note ? esc(h.note) + " " : "") + 'StewardMD shows national/international (ICMR/IDSA) guidance on the full disease page.</div>' +
+        '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
+      '</div>';
+    }
+    el.innerHTML = html;
+    var b = el.querySelector(".dx-select");
+    if (b) b.addEventListener("click", function () { selectDx(lead.id); });
+  }
+
   function recompute() {
     if (!root) return;
-    renderSelected(); renderPicker();
+    renderSelected(); renderPicker(); renderHosp();
     var d = differential();
     var g = gate(d), info = GATEINFO[g.cls];
     root.querySelector("#dxGate").innerHTML =
       '<div class="dx-gate-card ' + info.c + '"><div class="dx-gate-t">' + esc(info.t) + '</div>' +
       (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') +
-      (info.ab && g.lead ? '<div class="dx-gate-hint">Open <b>' + esc(g.lead.name) + '</b> for the full stewardship recommendation (empiric therapy, hospital policy, dosing, de-escalation).</div>' : '') +
       '</div>';
+    renderPolicy(g);
     renderChanged(d);
     root.querySelector("#dxCols").innerHTML =
       colHTML('🔴 Infectious', 'inf', d.inf, S.started ? "No infectious cause suggested by the current findings." : "Add findings to see infectious differentials.") +
@@ -583,6 +643,27 @@
       ".dx-select{margin-top:13px;width:100%;border:none;border-radius:10px;padding:11px;font:800 13px var(--sans);cursor:pointer;color:#fff}",
       ".dx-select.inf{background:var(--red)}.dx-select.ni{background:var(--green)}",
       ".dx-empty{font:500 13px var(--sans);color:var(--slate-soft);padding:14px;text-align:center;border:1px dashed var(--line);border-radius:10px}",
+      ".dx-hosp{display:flex;align-items:center;gap:9px;margin:0 0 12px;flex-wrap:wrap}",
+      ".dx-hosp-l{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft)}",
+      ".dx-hosp-logo{height:24px;border-radius:5px}",
+      ".dx-hosp-sel{border:1px solid var(--line);border-radius:9px;padding:7px 10px;font:600 12.5px var(--sans);background:var(--panel);color:var(--ink);cursor:pointer}",
+      ".dx-policy-wrap{margin:0 0 12px}",
+      ".dx-policy{border:1px solid var(--teal);border-radius:13px;background:var(--panel);padding:13px 15px}",
+      ".dx-policy.nopol{border-color:var(--line)}",
+      ".dx-policy-src{display:flex;align-items:center;gap:9px;flex-wrap:wrap;font:700 12.5px var(--sans);color:var(--teal);border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:10px}",
+      ".dx-src-logo{height:30px;border-radius:5px}",
+      ".dx-policy-src span{font-weight:500;color:var(--slate-soft);font-size:11px}",
+      ".dx-policy-syn{font:800 14px var(--sans);color:var(--ink);margin-bottom:6px}",
+      ".dx-policy-sec{margin:8px 0}",
+      ".dx-policy-sec>b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:4px}",
+      ".dx-drug{font:600 13px var(--sans);color:var(--ink);padding:5px 0;border-bottom:1px dashed var(--line)}",
+      ".dx-aware{font-size:9.5px;font-weight:800;border-radius:5px;padding:1px 6px;vertical-align:middle}",
+      ".dx-aware.wat{background:var(--yellow-bg);color:var(--yellow)}",
+      ".dx-aware.res{background:var(--red-bg);color:var(--red)}",
+      ".dx-policy-line{font:600 12.5px var(--sans);color:var(--ink);margin:9px 0}",
+      ".dx-policy-note{font:500 12px var(--sans);color:var(--slate);line-height:1.55;background:var(--paper);border-radius:8px;padding:9px 11px;margin:8px 0}",
+      ".dx-policy-refs{font:700 11px var(--sans);color:var(--slate-soft);margin-top:9px}",
+      ".dx-policy-cite{font:500 10.5px var(--sans);color:var(--slate-soft);margin-top:4px;font-style:italic}",
       ".dx-more{font:600 11.5px var(--sans);color:var(--slate-soft);text-align:center;padding:8px;border:1px dashed var(--line);border-radius:9px}",
       ".dx-launch{flex:0 0 auto;height:38px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;font:700 12.5px var(--sans);padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}"
     ].join("");
@@ -602,5 +683,6 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.DX = { open: open, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential };
+  window.DX = { open: open, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
+    _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
 })();
