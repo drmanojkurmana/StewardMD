@@ -1,530 +1,596 @@
 /* ============================================================================
-   StewardMD vNext — Clinical Reasoning Engine (Layer 1) + live Differential Dx
-   Modular, deferred. Reads existing globals (window.ASP / ASP_DATA / INF) and
-   hands off to the antimicrobial stewardship engine when infection leads.
-   Decision-support only — never diagnostic. Pending clinician sign-off.
+   StewardMD vNext — Dynamic Clinical Reasoning Engine (Phase 2)
+   FULLY DATA-DRIVEN. The infectious differential is generated live from the
+   entire StewardMD disease database (window.SYNDROMES) — every current and
+   future syndrome auto-participates with NO new reasoning code. A parallel
+   non-infectious knowledge layer (DDX_NI, same schema) drives the green
+   differential. Symptom-first, live-updating, two-section (🔴/🟢), with a
+   transparent Clinical Confidence Score and an infection gate that controls
+   when the stewardship engine activates.
+   Decision support only — never diagnostic. Pending clinician sign-off.
    ========================================================================== */
 (function () {
   "use strict";
 
   /* ---------------------------------------------------------------------- *
-   * 1. FINDINGS CATALOG  — id -> {label, cat}
-   *    cat: symptom | sign | vital | lab | imaging | micro | risk
+   * EXTRA presenting findings (generic symptoms not in the infection-focused
+   * ontology). Merged with window.FIELD_GROUPS to give broad symptom-first
+   * coverage. Adding entries here or to FIELD_GROUPS or to DDX_NI all flow
+   * into the engine automatically.
    * ---------------------------------------------------------------------- */
-  var F = {
-    // chief complaints / symptoms
-    altered_sensorium: { label: "Altered sensorium", cat: "symptom" },
-    fever:             { label: "Fever", cat: "symptom" },
-    headache:          { label: "Headache", cat: "symptom" },
-    seizure:           { label: "Seizure", cat: "symptom" },
-    cough:             { label: "Cough", cat: "symptom" },
-    purulent_sputum:   { label: "Purulent sputum", cat: "symptom" },
-    dyspnea:           { label: "Breathlessness / dyspnea", cat: "symptom" },
-    pleuritic_pain:    { label: "Pleuritic chest pain", cat: "symptom" },
-    orthopnea:         { label: "Orthopnea / PND", cat: "symptom" },
-    polyuria:          { label: "Polyuria / polydipsia", cat: "symptom" },
-    leg_swelling_unil: { label: "Unilateral leg swelling", cat: "symptom" },
-    skin_redness:      { label: "Skin redness / swelling", cat: "symptom" },
-    // signs
-    neck_stiffness:    { label: "Neck stiffness / meningism", cat: "sign" },
-    photophobia:       { label: "Photophobia", cat: "sign" },
-    focal_deficit:     { label: "Focal neuro deficit", cat: "sign" },
-    papilledema:       { label: "Papilledema", cat: "sign" },
-    asterixis:         { label: "Asterixis", cat: "sign" },
-    jaundice:          { label: "Jaundice / stigmata CLD", cat: "sign" },
-    rash:              { label: "Rash", cat: "sign" },
-    crackles:          { label: "Crackles / consolidation", cat: "sign" },
-    bilateral_crackles:{ label: "Bilateral basal crackles", cat: "sign" },
-    raised_jvp:        { label: "Raised JVP / edema", cat: "sign" },
-    calf_tenderness:   { label: "Calf tenderness", cat: "sign" },
-    warm_tender_skin:  { label: "Warm, tender, spreading erythema", cat: "sign" },
-    // vitals
-    hypotension:       { label: "Hypotension (SBP <90 / MAP <65)", cat: "vital" },
-    tachycardia:       { label: "Tachycardia", cat: "vital" },
-    hypoxia:           { label: "Hypoxia (SpO₂ <92%)", cat: "vital" },
-    tachypnea:         { label: "Tachypnea", cat: "vital" },
-    hyperthermia:      { label: "Temp >38.3°C", cat: "vital" },
-    // labs / micro / imaging
-    neutrophilia:      { label: "Neutrophilic leukocytosis", cat: "lab" },
-    raised_lactate:    { label: "Raised lactate (>2)", cat: "lab" },
-    hypoglycemia:      { label: "Hypoglycemia (glucose <70)", cat: "lab" },
-    raised_ammonia:    { label: "Deranged LFT / raised ammonia", cat: "lab" },
-    ketonemia:         { label: "Ketonemia / metabolic acidosis", cat: "lab" },
-    aki:               { label: "Acute kidney injury", cat: "lab" },
-    csf_neutrophilic:  { label: "CSF: neutrophilic pleocytosis", cat: "micro" },
-    csf_lymphocytic:   { label: "CSF: lymphocytic pleocytosis", cat: "micro" },
-    blood_cx_pos:      { label: "Blood culture positive", cat: "micro" },
-    malaria_smear:     { label: "Malaria smear / antigen positive", cat: "micro" },
-    cxr_consolidation: { label: "CXR: lobar consolidation", cat: "imaging" },
-    cxr_bilateral:     { label: "CXR: bilateral infiltrates / edema", cat: "imaging" },
-    ct_infarct:        { label: "CT/MRI: acute infarct", cat: "imaging" },
-    ct_ring_lesion:    { label: "CT/MRI: ring-enhancing lesion", cat: "imaging" },
-    ecg_ischemia:      { label: "ECG: ischemia", cat: "imaging" },
-    // risk factors
-    immunocompromised: { label: "Immunocompromised", cat: "risk" },
-    cirrhosis:         { label: "Known cirrhosis / CLD", cat: "risk" },
-    diabetic:          { label: "Diabetes mellitus", cat: "risk" },
-    travel_endemic:    { label: "Travel / endemic malaria area", cat: "risk" },
-    drug_overdose_hx:  { label: "Sedative / drug overdose history", cat: "risk" },
-    recent_steroids:   { label: "Chronic steroid use", cat: "risk" }
-  };
-
-  /* Chief complaints -> {finding, label}. These seed the candidate set. */
-  var CHIEF = [
-    { f: "altered_sensorium", label: "Altered sensorium / confusion" },
-    { f: "fever",             label: "Fever" },
-    { f: "dyspnea",           label: "Breathlessness" },
-    { f: "cough",             label: "Cough" },
-    { f: "hypotension",       label: "Shock / hypotension" },
-    { f: "skin_redness",      label: "Skin redness & swelling" },
-    { f: "headache",          label: "Headache" },
-    { f: "seizure",           label: "Seizure" }
+  var EXTRA_GROUPS = [
+    { group: "Presenting symptom", fields: [
+      { key: "headache", label: "Headache" },
+      { key: "thunderclapHeadache", label: "Thunderclap / worst-ever headache" },
+      { key: "chestPain", label: "Chest pain" },
+      { key: "pleuriticChestPain", label: "Pleuritic chest pain" },
+      { key: "exertionalChestPain", label: "Exertional / pressure chest pain" },
+      { key: "dyspnea", label: "Breathlessness (dyspnea)" },
+      { key: "orthopnea", label: "Orthopnea / PND" },
+      { key: "palpitations", label: "Palpitations" },
+      { key: "backPain", label: "Back pain" },
+      { key: "visualDisturbance", label: "Visual disturbance / loss" },
+      { key: "polyarthralgia", label: "Joint pain (polyarticular)" },
+      { key: "legSwellingUnilateral", label: "Unilateral leg swelling" },
+      { key: "legSwellingBilateral", label: "Bilateral leg swelling / edema" },
+      { key: "calfTenderness", label: "Calf tenderness" }
+    ]},
+    { group: "Signs & context", fields: [
+      { key: "raisedJVP", label: "Raised JVP / peripheral edema" },
+      { key: "bilateralCrackles", label: "Bilateral basal crackles" },
+      { key: "asterixis", label: "Asterixis / flap" },
+      { key: "ecgIschemia", label: "ECG: ischemic changes" },
+      { key: "ketonemia", label: "Ketonemia / high anion-gap acidosis" },
+      { key: "polyuriaPolydipsia", label: "Polyuria / polydipsia" },
+      { key: "knownCAD", label: "Known coronary artery disease" },
+      { key: "knownHeartFailure", label: "Known heart failure" },
+      { key: "hypertensionHx", label: "Hypertension" },
+      { key: "diabetesHx", label: "Diabetes mellitus" },
+      { key: "steroidUse", label: "Chronic steroid use" },
+      { key: "drugOverdose", label: "Sedative / drug overdose context" },
+      { key: "anticoagulated", label: "On anticoagulation" },
+      { key: "ageOver50", label: "Age > 50" }
+    ]}
   ];
 
   /* ---------------------------------------------------------------------- *
-   * 2. KNOWLEDGE BASE  — diseases with weighted features.
-   *    score = clamp( sum of weights of ENTERED findings , 0 , 100 )
-   *    infectious:true diseases can hand off to the stewardship engine.
-   *    mimicOf links a non-infectious dx to the infection it mimics.
+   * NON-INFECTIOUS knowledge layer (data-driven, extensible).
+   * find: { findingKey: weight }   positive raises, negative lowers.
+   * Add entries freely — they automatically join the differential.
    * ---------------------------------------------------------------------- */
-  var DISEASES = [
-    /* ---- Neuro / altered sensorium cluster ---- */
-    { id:"meningitis", name:"Acute bacterial meningitis", system:"Infectious / Neuro", infectious:true, treat:"MENINGITIS",
-      tools:[], inv:["CSF analysis (urgent LP)","Blood cultures","CT head if focal signs / papilledema","CBC, CRP/procalcitonin"],
-      red:["Do not delay empiric antibiotics ± dexamethasone for LP/CT","Purpura → meningococcemia"],
-      empiric:"Ceftriaxone 2 g IV q12h + Vancomycin (± Ampicillin if >50y/immunocompromised) ± Dexamethasone",
-      F:{ altered_sensorium:55, fever:33, neck_stiffness:22, headache:12, photophobia:10, neutrophilia:8,
-          csf_neutrophilic:30, rash:6, seizure:6, blood_cx_pos:10, immunocompromised:5 } },
+  var DDX_NI = [
+    /* ---- Headache cluster ---- */
+    { id:"migraine", name:"Migraine", system:"Neurology",
+      find:{ headache:42, photophobia:18, visualDisturbance:16, nauseaVomiting:10, fever:-18, neckStiffness:-14, alteredSensorium:-12, focalNeuroDeficit:-6 },
+      inv:["Clinical diagnosis (POUND criteria)","Neuroimaging only if red flags"], red:["New focal deficit, thunderclap onset, or fever → exclude secondary cause"],
+      reason:"Recurrent headache with photophobia and nausea, no fever or meningism, favours primary migraine." },
+    { id:"tension_ha", name:"Tension-type headache", system:"Neurology",
+      find:{ headache:38, fever:-16, neckStiffness:-10, visualDisturbance:-6, focalNeuroDeficit:-8 },
+      inv:["Clinical diagnosis"], red:["Atypical features warrant imaging"],
+      reason:"Bilateral pressure-type headache without systemic or neurological red flags." },
+    { id:"sah", name:"Subarachnoid hemorrhage", system:"Neurology / Vascular",
+      find:{ thunderclapHeadache:55, headache:20, neckStiffness:22, alteredSensorium:18, seizure:8, ageOver50:6, fever:-6 },
+      inv:["Non-contrast CT head (urgent)","LP for xanthochromia if CT negative","CT angiography"], red:["Thunderclap headache is SAH until proven otherwise — image immediately"],
+      reason:"Sudden worst-ever headache ± meningism and reduced consciousness is classic for subarachnoid hemorrhage." },
+    { id:"ischemic_stroke", name:"Acute ischemic stroke", system:"Neurology / Vascular",
+      find:{ focalNeuroDeficit:46, alteredSensorium:16, ageOver50:10, hypertensionHx:8, headache:4, fever:-20, neckStiffness:-14 },
+      inv:["Non-contrast CT head (urgent)","CT/MR angiography","Glucose (stroke mimic)"], red:["Time-critical — thrombolysis/thrombectomy window"],
+      reason:"Acute focal neurological deficit favours a vascular event; image urgently and check the stroke pathway." },
+    { id:"ich", name:"Intracerebral hemorrhage", system:"Neurology / Vascular",
+      find:{ focalNeuroDeficit:36, headache:24, alteredSensorium:24, hypertensionHx:16, anticoagulated:16, ageOver50:6, fever:-10 },
+      inv:["Non-contrast CT head (urgent)","Coagulation profile","BP control"], red:["Reverse anticoagulation; neurosurgical review"],
+      reason:"Headache with focal deficit and reduced consciousness, especially with hypertension or anticoagulation, suggests intracerebral haemorrhage." },
+    { id:"brain_tumour", name:"Brain tumour / mass lesion", system:"Neuro-oncology",
+      find:{ headache:30, focalNeuroDeficit:22, seizure:18, visualDisturbance:12, weightLoss:8, alteredSensorium:8, fever:-10 },
+      inv:["MRI brain with contrast","Refer neuro-oncology"], red:["Progressive headache, morning vomiting, papilloedema"],
+      reason:"Progressive headache with focal signs or new seizures raises concern for an intracranial mass." },
+    { id:"iih", name:"Idiopathic intracranial hypertension", system:"Neurology",
+      find:{ headache:30, visualDisturbance:24, fever:-12, neckStiffness:-8 },
+      inv:["Fundoscopy (papilloedema)","MRI + MR venography","LP with opening pressure"], red:["Progressive visual loss needs urgent treatment"],
+      reason:"Headache with visual disturbance and papilloedema in the right demographic suggests raised intracranial pressure without a mass." },
+    { id:"temporal_arteritis", name:"Giant cell (temporal) arteritis", system:"Rheumatology",
+      find:{ headache:28, visualDisturbance:24, ageOver50:22, polyarthralgia:8, weightLoss:8 },
+      inv:["ESR / CRP (markedly raised)","Temporal artery biopsy","Start high-dose steroids if suspected"], red:["Visual loss is an emergency — do not delay steroids"],
+      reason:"New headache with visual symptoms in a patient over 50 with raised inflammatory markers suggests giant cell arteritis." },
 
-    { id:"viral_enceph", name:"Viral encephalitis", system:"Infectious / Neuro", infectious:true, treat:"",
-      tools:[], inv:["CSF analysis (HSV PCR)","MRI brain","EEG"],
-      red:["Start empiric Acyclovir early if HSV suspected"],
-      empiric:"Acyclovir 10 mg/kg IV q8h (HSV cover) pending CSF PCR",
-      F:{ altered_sensorium:48, fever:31, seizure:18, headache:12, focal_deficit:10,
-          csf_lymphocytic:26, neck_stiffness:6, neutrophilia:-6 } },
+    /* ---- Chest pain cluster ---- */
+    { id:"acs", name:"Acute coronary syndrome", system:"Cardiology",
+      find:{ exertionalChestPain:44, chestPain:24, ecgIschemia:30, knownCAD:18, diabetesHx:8, dyspnea:10, ageOver50:8, pleuriticChestPain:-12 },
+      inv:["12-lead ECG (serial)","Troponin","Aspirin + cardiology referral"], red:["STEMI → immediate reperfusion pathway"],
+      reason:"Pressure-type / exertional chest pain with ischaemic ECG or risk factors favours an acute coronary syndrome." },
+    { id:"aortic_dissection", name:"Aortic dissection", system:"Vascular emergency",
+      find:{ chestPain:30, backPain:30, thunderclapHeadache:6, hypertensionHx:18, ageOver50:8, syncope:10 },
+      inv:["CT aortogram (urgent)","BP in both arms","Control HR & BP"], red:["Tearing chest/back pain with pulse/BP differential — emergency imaging"],
+      reason:"Severe tearing chest pain radiating to the back, especially with hypertension, raises aortic dissection." },
+    { id:"pe", name:"Pulmonary embolism", system:"Pulmonary / Vascular",
+      find:{ pleuriticChestPain:30, dyspnea:34, hypoxia:22, tachycardia:16, legSwellingUnilateral:18, calfTenderness:12, fever:-6 },
+      inv:["CT pulmonary angiogram","D-dimer (if low probability)","ECG, troponin"], red:["Haemodynamic instability → consider thrombolysis"],
+      reason:"Pleuritic chest pain and dyspnoea with hypoxia or DVT features suggest pulmonary embolism." },
+    { id:"pericarditis", name:"Acute pericarditis", system:"Cardiology",
+      find:{ pleuriticChestPain:30, chestPain:18, fever:8, ecgIschemia:-6 },
+      inv:["ECG (diffuse ST elevation, PR depression)","Echocardiogram","Inflammatory markers"], red:["Tamponade if effusion enlarges"],
+      reason:"Sharp pleuritic chest pain relieved by sitting forward, with typical ECG changes, suggests pericarditis." },
+    { id:"gerd_chest", name:"GERD / non-cardiac chest pain", system:"Gastroenterology",
+      find:{ chestPain:20, exertionalChestPain:-10, ecgIschemia:-14, fever:-8 },
+      inv:["Exclude cardiac cause first","Trial of PPI"], red:["Do not attribute to GERD until ACS excluded"],
+      reason:"Chest pain without ischaemic features or risk factors may be oesophageal, but cardiac causes must be excluded first." },
+    { id:"pneumothorax", name:"Pneumothorax", system:"Pulmonary",
+      find:{ pleuriticChestPain:28, dyspnea:26, hypoxia:14, fever:-8 },
+      inv:["CXR (or POCUS)","Decompress if tension"], red:["Tension pneumothorax → immediate needle decompression"],
+      reason:"Sudden pleuritic pain with breathlessness and reduced breath sounds suggests pneumothorax." },
 
-    { id:"sepsis_enceph", name:"Sepsis-associated encephalopathy", system:"Critical care", infectious:true, treat:"SEPSIS",
-      tools:["shock"], inv:["Septic screen / cultures","Lactate","Source identification"],
-      red:["Treat the source; encephalopathy reflects systemic sepsis"],
-      empiric:"Per sepsis source — broad-spectrum after cultures (see stewardship)",
-      F:{ altered_sensorium:70, fever:7, neutrophilia:10, raised_lactate:14, hypotension:12, tachycardia:6, blood_cx_pos:10 } },
+    /* ---- Dyspnea / edema cluster ---- */
+    { id:"heart_failure", name:"Acute heart failure / pulmonary edema", system:"Cardiology",
+      find:{ dyspnea:34, orthopnea:30, bilateralCrackles:28, raisedJVP:26, legSwellingBilateral:20, knownHeartFailure:18, ecgIschemia:8, fever:-16 },
+      inv:["CXR","BNP/NT-proBNP","ECG, troponin","Echocardiogram"], red:["Address precipitant; not an infection"],
+      reason:"Orthopnoea, raised JVP and bilateral crackles favour cardiogenic pulmonary oedema rather than infection." },
+    { id:"copd_exac_ni", name:"COPD exacerbation (non-infective)", system:"Pulmonary",
+      find:{ dyspnea:30, knownHeartFailure:-6, fever:-6 },
+      inv:["ABG","CXR to exclude pneumonia/pneumothorax"], red:["Distinguish infective trigger — may need antibiotics"],
+      reason:"Increased breathlessness in known COPD without consolidation or fever may be a non-infective exacerbation." },
 
-    { id:"metabolic_enceph", name:"Metabolic encephalopathy", system:"Neuro / Metabolic", infectious:false,
-      tools:[], inv:["Electrolytes, glucose, calcium","Renal & liver panel","ABG, ammonia","TSH"],
-      red:["Reversible — correct the metabolic derangement"], mimicOf:["meningitis","viral_enceph"],
-      F:{ altered_sensorium:78, aki:12, raised_ammonia:8, hypoglycemia:10, fever:-14, neck_stiffness:-18 } },
+    /* ---- Shock cluster (mimics of septic shock) ---- */
+    { id:"cardiogenic_shock", name:"Cardiogenic shock", system:"Cardiology / Critical care",
+      find:{ hypotension:40, raisedJVP:24, bilateralCrackles:20, ecgIschemia:30, dyspnea:12, fever:-16 },
+      inv:["ECG, troponin","Echocardiogram","Lactate"], red:["Revascularisation/inotropes — not antibiotics"], tools:["shock"],
+      reason:"Hypotension with pulmonary congestion and ischaemic ECG favours a primary cardiac cause of shock." },
+    { id:"hypovolemic_shock", name:"Hypovolemic / haemorrhagic shock", system:"Critical care",
+      find:{ hypotension:38, tachycardia:22, melena:18, anticoagulated:8, fever:-12 },
+      inv:["Identify bleeding source","Crossmatch","Resuscitate"], red:["GI bleed / occult haemorrhage"], tools:[],
+      reason:"Hypotension with tachycardia and evidence of fluid/blood loss suggests hypovolaemic shock." },
+    { id:"anaphylaxis", name:"Anaphylaxis", system:"Allergy / Emergency",
+      find:{ hypotension:30, dyspnea:24, rash:24, tachycardia:12 },
+      inv:["Clinical diagnosis","Serum tryptase"], red:["IM adrenaline immediately"], tools:[],
+      reason:"Acute hypotension with urticaria/angioedema and bronchospasm after exposure indicates anaphylaxis." },
+    { id:"adrenal_crisis", name:"Adrenal crisis", system:"Endocrine",
+      find:{ hypotension:36, steroidUse:34, fever:-4, alteredSensorium:8 },
+      inv:["Random cortisol","Electrolytes (Na↓ K↑)","Empiric hydrocortisone"], red:["Give IV hydrocortisone if suspected"], tools:["shock"],
+      reason:"Refractory hypotension in a steroid-dependent patient suggests adrenal crisis." },
 
-    { id:"hypoglycemia", name:"Hypoglycemia", system:"Endocrine", infectious:false,
-      tools:[], inv:["Capillary & lab glucose","Insulin / C-peptide if recurrent"],
-      red:["Give IV dextrose immediately — rapidly reversible"], mimicOf:["meningitis","sepsis_enceph"],
-      F:{ altered_sensorium:60, hypoglycemia:35, diabetic:10, seizure:8, fever:-12, neck_stiffness:-15 } },
+    /* ---- Metabolic / neuro non-infectious ---- */
+    { id:"dka", name:"Diabetic ketoacidosis", system:"Endocrine",
+      find:{ ketonemia:40, polyuriaPolydipsia:28, diabetesHx:24, dyspnea:10, abdominalPain:10, alteredSensorium:10, fever:-6 },
+      inv:["Venous gas","Blood & urine ketones","Glucose, electrolytes","Search for precipitant (infection)"], red:["DKA protocol; look for precipitating infection"], tools:["dka"],
+      reason:"High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA — search for a precipitant." },
+    { id:"hypoglycemia", name:"Hypoglycemia", system:"Endocrine",
+      find:{ alteredSensorium:34, diabetesHx:14, seizure:8, fever:-12, neckStiffness:-12 },
+      inv:["Capillary & lab glucose","Give IV dextrose"], red:["Rapidly reversible — check glucose first in any altered patient"],
+      reason:"Altered sensorium with low glucose is rapidly reversible and must be excluded first." },
+    { id:"metabolic_enceph", name:"Metabolic encephalopathy", system:"Neuro / Metabolic",
+      find:{ alteredSensorium:44, asterixis:18, jaundice:10, fever:-14, neckStiffness:-16 },
+      inv:["Electrolytes, glucose, calcium","Renal & liver panel, ammonia","ABG"], red:["Reversible — correct the derangement"],
+      reason:"Diffuse encephalopathy without meningism, driven by a metabolic derangement." },
+    { id:"hepatic_enceph", name:"Hepatic encephalopathy", system:"Hepatology",
+      find:{ alteredSensorium:36, asterixis:30, jaundice:24, ascites:18, fever:-6, neckStiffness:-10 },
+      inv:["Ammonia, LFT, coagulation","Identify precipitant (SBP, GI bleed)"], red:["Look for precipitating infection (e.g. SBP)"],
+      reason:"Encephalopathy with stigmata of chronic liver disease suggests hepatic encephalopathy — seek a precipitant." },
+    { id:"drug_intox", name:"Drug intoxication / poisoning", system:"Toxicology",
+      find:{ alteredSensorium:36, drugOverdose:42, seizure:8, fever:-10, neckStiffness:-12 },
+      inv:["Toxidrome assessment","Paracetamol/salicylate levels","ABG, osmolar gap"], red:["Specific antidotes where available"],
+      reason:"Reduced consciousness with an overdose context points to a toxicological cause." },
 
-    { id:"hepatic_enceph", name:"Hepatic encephalopathy", system:"Hepatology", infectious:false,
-      tools:[], inv:["Ammonia","LFT, coagulation","Identify precipitant (infection/GI bleed/constipation)"],
-      red:["Look for precipitating infection (e.g. SBP)"], mimicOf:["meningitis","sepsis_enceph"],
-      F:{ altered_sensorium:45, asterixis:30, jaundice:20, raised_ammonia:22, cirrhosis:25, fever:-8, neck_stiffness:-12 } },
-
-    { id:"stroke", name:"Acute ischemic stroke", system:"Neuro", infectious:false,
-      tools:[], inv:["Non-contrast CT head (urgent)","CT/MR angiography","Glucose (mimic)"],
-      red:["Time-critical — thrombolysis window","Check stroke pathway"], mimicOf:["meningitis"],
-      F:{ altered_sensorium:64, focal_deficit:35, ct_infarct:30, headache:6, fever:-36, neck_stiffness:-20 } },
-
-    { id:"drug_intox", name:"Drug intoxication / poisoning", system:"Toxicology", infectious:false,
-      tools:[], inv:["Toxidrome assessment","Paracetamol/salicylate levels","ABG, osmolar gap"],
-      red:["Specific antidotes where available"], mimicOf:["meningitis","sepsis_enceph"],
-      F:{ altered_sensorium:41, drug_overdose_hx:40, seizure:8, fever:-10, neck_stiffness:-12 } },
-
-    { id:"brain_abscess", name:"Brain abscess", system:"Infectious / Neuro", infectious:true, treat:"",
-      tools:[], inv:["MRI with contrast","Blood cultures","Source: ENT/dental/endocarditis"],
-      red:["Neurosurgical referral for drainage"],
-      empiric:"Ceftriaxone + Metronidazole (± Vancomycin) IV",
-      F:{ altered_sensorium:40, fever:21, headache:16, focal_deficit:18, ct_ring_lesion:34, seizure:10 } },
-
-    { id:"cerebral_malaria", name:"Cerebral malaria", system:"Tropical / Infectious", infectious:true, treat:"",
-      tools:[], inv:["Malaria smear / RDT (urgent, repeat)","Glucose","Parasite index"],
-      red:["Medical emergency — IV artesunate"],
-      empiric:"IV Artesunate (not an antibacterial — antimalarial)",
-      F:{ altered_sensorium:18, fever:37, travel_endemic:30, malaria_smear:40, seizure:10, neck_stiffness:-6 } },
-
-    /* ---- Respiratory cluster + mimics ---- */
-    { id:"cap", name:"Community-acquired pneumonia", system:"Infectious / Pulmonary", infectious:true, treat:"CAP",
-      tools:[], inv:["CXR","CBC, CRP/procalcitonin","Blood & sputum cultures","SpO₂ / ABG"],
-      red:["Assess severity (CURB-65) → admission/ICU"],
-      empiric:"Per severity: β-lactam + macrolide / respiratory fluoroquinolone (see stewardship)",
-      F:{ cough:28, fever:24, purulent_sputum:22, dyspnea:14, crackles:20, cxr_consolidation:30,
-          neutrophilia:10, tachypnea:8, hypoxia:8, pleuritic_pain:8 } },
-
-    { id:"pulm_edema", name:"Cardiogenic pulmonary edema", system:"Cardiology", infectious:false,
-      tools:[], inv:["CXR","BNP/NT-proBNP","ECG, troponin","Echocardiogram"],
-      red:["Diuresis / afterload reduction, not antibiotics"], mimicOf:["cap"],
-      F:{ dyspnea:38, orthopnea:30, bilateral_crackles:28, raised_jvp:26, cxr_bilateral:24, fever:-18, purulent_sputum:-12 } },
-
-    { id:"pulm_embolism", name:"Pulmonary embolism", system:"Pulmonary / Vascular", infectious:false,
-      tools:[], inv:["CT pulmonary angiogram","D-dimer (if low probability)","ECG, troponin"],
-      red:["Anticoagulation; thrombolysis if massive"], mimicOf:["cap"],
-      F:{ dyspnea:40, pleuritic_pain:28, hypoxia:24, tachycardia:18, leg_swelling_unil:16, fever:-10, crackles:-8 } },
-
-    /* ---- Shock cluster + mimics ---- */
-    { id:"septic_shock", name:"Septic shock", system:"Critical care / Infectious", infectious:true, treat:"SEPSIS",
-      tools:["shock"], inv:["Lactate","Blood cultures ×2","Source screen","Hourly urine output"],
-      red:["Bundle: cultures → broad-spectrum within 1h → 30 mL/kg fluids → vasopressors for MAP ≥65"],
-      empiric:"Broad-spectrum after cultures per source & hospital policy (see stewardship)",
-      F:{ hypotension:40, fever:24, raised_lactate:26, tachycardia:14, neutrophilia:12, blood_cx_pos:14, hypoxia:6 } },
-
-    { id:"cardiogenic_shock", name:"Cardiogenic shock", system:"Cardiology", infectious:false,
-      tools:["shock"], inv:["ECG, troponin","Echocardiogram","CXR"],
-      red:["Revascularization / inotropes — not antibiotics"], mimicOf:["septic_shock"],
-      F:{ hypotension:40, raised_jvp:24, bilateral_crackles:20, ecg_ischemia:30, fever:-16, raised_lactate:10 } },
-
-    { id:"adrenal_crisis", name:"Adrenal crisis", system:"Endocrine", infectious:false,
-      tools:["shock"], inv:["Random cortisol","Electrolytes (Na↓ K↑)","Glucose"],
-      red:["Empiric IV hydrocortisone if suspected"], mimicOf:["septic_shock"],
-      F:{ hypotension:38, recent_steroids:34, hypoglycemia:16, fever:-6 } },
-
-    /* ---- Skin cluster + mimics ---- */
-    { id:"cellulitis", name:"Cellulitis", system:"Infectious / Derm", infectious:true, treat:"CELLULITIS",
-      tools:[], inv:["Mark borders","CBC, CRP","Blood cultures if systemic","Rule out abscess/DVT"],
-      red:["Necrotizing infection if pain out of proportion, crepitus, rapid spread"],
-      empiric:"Cloxacillin / Cefazolin (cover Strep & MSSA); add MRSA cover per risk (see stewardship)",
-      F:{ skin_redness:34, warm_tender_skin:30, fever:18, leg_swelling_unil:8, neutrophilia:10 } },
-
-    { id:"dvt", name:"Deep vein thrombosis", system:"Vascular", infectious:false,
-      tools:[], inv:["Compression ultrasound (Doppler)","D-dimer","Wells score"],
-      red:["Anticoagulation, not antibiotics"], mimicOf:["cellulitis"],
-      F:{ leg_swelling_unil:36, calf_tenderness:30, skin_redness:10, warm_tender_skin:-8, fever:-12 } },
-
-    /* ---- Metabolic emergency (activates protocol, not antibiotics) ---- */
-    { id:"dka", name:"Diabetic ketoacidosis", system:"Endocrine", infectious:false,
-      tools:["dka"], inv:["ABG / venous gas","Blood & urine ketones","Glucose, electrolytes","Search for precipitant (infection)"],
-      red:["DKA protocol: fluids, insulin infusion, K⁺ monitoring","Look for precipitating infection"], mimicOf:["sepsis_enceph"],
-      F:{ polyuria:30, ketonemia:40, diabetic:24, dyspnea:8, altered_sensorium:10, fever:-6 } }
+    /* ---- Vascular / limb ---- */
+    { id:"dvt", name:"Deep vein thrombosis", system:"Vascular",
+      find:{ legSwellingUnilateral:38, calfTenderness:30, anticoagulated:-8, fever:-12 },
+      inv:["Compression ultrasound (Doppler)","D-dimer","Wells score"], red:["Anticoagulate; assess for PE"],
+      reason:"Unilateral leg swelling and calf tenderness suggest DVT rather than cellulitis." }
   ];
 
-  var DMAP = {}; DISEASES.forEach(function (d) { DMAP[d.id] = d; });
+  /* ---------------------------------------------------------------------- *
+   * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
+   * ---------------------------------------------------------------------- */
+  var ONT = null, LABEL = {}, VALID = {};
+  function buildOntology() {
+    if (ONT) return ONT;
+    var groups = [];
+    (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
+    var fg = (window.FIELD_GROUPS || []);
+    fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
+    groups.forEach(function (g) { g.fields.forEach(function (fl) { LABEL[fl.key] = fl.label; VALID[fl.key] = true; }); });
+    ONT = groups;
+    return ONT;
+  }
+  function lbl(k) { return LABEL[k] || k; }
 
   /* ---------------------------------------------------------------------- *
-   * 3. ENGINE
+   * INFECTIOUS introspection — derive each syndrome's associated finding
+   * keys from its match()/baseScore() source (∩ valid keys). Cached.
    * ---------------------------------------------------------------------- */
-  var state = { entered: {}, chief: null, prevRank: {} }; // entered: id->true
+  var ASSOC = {}, IDF = null, NSYN = 0;
+  // specificity: findings shared by many syndromes (e.g. fever) carry little
+  // discriminating weight; rare findings (e.g. neck stiffness) carry a lot.
+  function computeIDF() {
+    if (IDF) return IDF;
+    IDF = {};
+    var syn = window.SYNDROMES || {}, ids = Object.keys(syn), df = {};
+    NSYN = ids.length || 1;
+    ids.forEach(function (id) { assocKeys(syn[id]).forEach(function (k) { df[k] = (df[k] || 0) + 1; }); });
+    Object.keys(VALID).forEach(function (k) { IDF[k] = Math.log((NSYN + 1) / ((df[k] || 0) + 1)) + 0.15; });
+    return IDF;
+  }
+  function assocKeys(s) {
+    if (ASSOC[s.id]) return ASSOC[s.id];
+    var src = "";
+    try { src += s.match ? s.match.toString() : ""; } catch (e) {}
+    try { src += " " + (s.baseScore ? s.baseScore.toString() : ""); } catch (e) {}
+    try { if (s.decision && s.decision.reasoning) src += " " + s.decision.reasoning.toString(); } catch (e) {}
+    var keys = {}, m, re = /\.([a-zA-Z][a-zA-Z0-9_]*)/g;
+    while ((m = re.exec(src))) { if (VALID[m[1]]) keys[m[1]] = true; }
+    ASSOC[s.id] = Object.keys(keys);
+    return ASSOC[s.id];
+  }
 
+  /* ---------------------------------------------------------------------- *
+   * ENGINE state + scoring
+   * ---------------------------------------------------------------------- */
+  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false };
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
-  function score(d) {
-    var s = 0, any = false;
-    for (var f in d.F) {
-      if (state.entered[f]) { s += d.F[f]; any = true; }
+  // Bridge generic presenting symptoms to the infection ontology's specific
+  // keys so a generic pick still engages the relevant syndromes (infectious
+  // scoring only — the non-infectious layer keeps the literal findings).
+  var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"] };
+  function infFindings() {
+    var e = {};
+    for (var k in S.f) { e[k] = true; (ALIAS[k] || []).forEach(function (a) { e[a] = true; }); }
+    return e;
+  }
+
+  function scoreInfectious(s) {
+    var assoc = assocKeys(s);
+    var present = assoc.filter(function (k) { return S.fInf[k]; });
+    if (!present.length) return null;
+    var matched = false;
+    try { matched = !!(s.match && s.match(S.fInf)); } catch (e) {}
+    var sc;
+    if (matched) {
+      try { sc = clamp(Math.round(s.baseScore ? s.baseScore(S.fInf) : 60), 0, 100); } catch (e) { sc = 60; }
+    } else {
+      // soft pre-match suggestion weighted by finding specificity (IDF), so a
+      // shared generic finding (fever) barely surfaces a syndrome while a
+      // specific one (neck stiffness) does. Capped below matched scores.
+      computeIDF();
+      var rel = 0; present.forEach(function (k) { rel += (IDF[k] || 0.5); });
+      sc = clamp(Math.round(rel * 13), 0, 56);
+      if (sc < 16) return null; // below the noise floor — don't list
     }
-    return { score: clamp(Math.round(s), 0, 100), any: any };
+    var missing = assoc.filter(function (k) { return !S.fInf[k]; }).slice(0, 5);
+    var reason = "";
+    try { if (s.decision && s.decision.reasoning) reason = s.decision.reasoning(S.fInf); } catch (e) {}
+    var red = (s.decision && (s.decision.status === "red")) ? [s.decision.label || "Time-critical infection"] : [];
+    var inv = (s.investigations || []).map(function (i) { return i.test ? (i.test) : i; });
+    return { id: s.id, name: s.name, system: s.system || "Infectious", inf: true, matched: matched,
+      score: sc, supporting: present, missing: missing, reason: reason, red: red, inv: inv, _syn: s };
   }
 
-  function supporting(d) {
-    var a = [];
-    for (var f in d.F) { if (state.entered[f] && d.F[f] > 0) a.push({ f: f, w: d.F[f] }); }
-    return a.sort(function (x, y) { return y.w - x.w; });
-  }
-  function contradictory(d) {
-    var a = [];
-    for (var f in d.F) { if (state.entered[f] && d.F[f] < 0) a.push({ f: f, w: d.F[f] }); }
-    return a.sort(function (x, y) { return x.w - y.w; });
-  }
-  function missing(d) {
-    var a = [];
-    for (var f in d.F) { if (!state.entered[f] && d.F[f] >= 12) a.push({ f: f, w: d.F[f] }); }
-    return a.sort(function (x, y) { return y.w - x.w; }).slice(0, 4);
+  function scoreNI(d) {
+    var sup = [], sum = 0, any = false;
+    for (var k in d.find) { if (S.f[k]) { sum += d.find[k]; any = true; if (d.find[k] > 0) sup.push(k); } }
+    if (!any) return null;
+    var sc = clamp(Math.round(sum), 0, 100);
+    if (sc <= 0 && sup.length === 0) return null;
+    var missing = [];
+    for (var k2 in d.find) { if (!S.f[k2] && d.find[k2] >= 12) missing.push(k2); }
+    missing = missing.sort(function (a, b) { return d.find[b] - d.find[a]; }).slice(0, 5);
+    return { id: d.id, name: d.name, system: d.system, inf: false, matched: false,
+      score: sc, supporting: sup.sort(function (a, b) { return d.find[b] - d.find[a]; }),
+      missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], tools: d.tools || [] };
   }
 
-  // candidate diseases = those with >=1 entered supporting finding
-  function ranked() {
-    var rows = [];
-    DISEASES.forEach(function (d) {
-      var sc = score(d);
-      if (sc.any && sc.score > 0) rows.push({ d: d, score: sc.score });
-    });
-    rows.sort(function (a, b) { return b.score - a.score || a.d.name.localeCompare(b.d.name); });
-    return rows;
+  function differential() {
+    buildOntology();
+    S.fInf = infFindings();
+    var inf = [], ni = [];
+    var syn = window.SYNDROMES || {};
+    Object.keys(syn).forEach(function (id) { var r = scoreInfectious(syn[id]); if (r) inf.push(r); });
+    DDX_NI.forEach(function (d) { var r = scoreNI(d); if (r) ni.push(r); });
+    var by = function (a, b) { return b.score - a.score || a.name.localeCompare(b.name); };
+    inf.sort(by); ni.sort(by);
+    return { inf: inf, ni: ni };
   }
 
-  // infection-likelihood gate
-  function infectionGate(rows) {
-    if (!rows.length) return { cls: "none", topInf: 0, lead: null };
-    var topInf = 0, topNon = 0, infLead = null;
-    rows.forEach(function (r) {
-      if (r.d.infectious) { if (r.score > topInf) { topInf = r.score; infLead = r.d; } }
-      else { if (r.score > topNon) topNon = r.score; }
-    });
-    var lead = rows[0];
-    var leadInf = lead.d.infectious;
+  /* Infection gate — keyed off whether infection LEADS overall */
+  function gate(d) {
+    var topInf = d.inf.length ? d.inf[0].score : 0;
+    var topNi = d.ni.length ? d.ni[0].score : 0;
+    var matchedInf = d.inf.some(function (x) { return x.matched; });
     var cls;
-    // antibiotics are gated on infection being the LEADING diagnosis, not merely present
-    if (leadInf && lead.score >= 80) cls = "very_likely";
-    else if (leadInf && lead.score >= 62) cls = "likely";
-    else if (topInf >= 42 && topInf >= topNon - 10) cls = "possible"; // infection competitive but not leading
-    else if (topInf >= 35) cls = "possible";
-    else if (topNon > topInf) cls = "noninfective";
+    if (topInf >= 80 && topInf >= topNi && matchedInf) cls = "very_likely";
+    else if (topInf >= 62 && topInf >= topNi - 4 && matchedInf) cls = "likely";
+    else if (topInf >= 42 && topInf >= topNi - 12) cls = "possible";
+    else if (topInf > 0 && topNi > topInf) cls = "noninfective";
     else if (topInf > 0) cls = "unlikely";
-    else cls = "noninfective";
-    return { cls: cls, topInf: topInf, lead: infLead, leadAll: lead.d, topNon: topNon };
+    else if (topNi > 0) cls = "noninfective";
+    else cls = "none";
+    return { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
   }
-
-  var GATE = {
-    very_likely:  { t: "Infection very likely", c: "g-red",    ab: true,  msg: "Empiric antimicrobial therapy is appropriate — see stewardship recommendation." },
-    likely:       { t: "Infection likely",       c: "g-orange", ab: true,  msg: "Infection leads the differential — empiric therapy may be warranted after cultures." },
-    possible:     { t: "Infection possible",      c: "g-amber",  ab: false, msg: "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics." },
-    unlikely:     { t: "Infection unlikely",      c: "g-teal",   ab: false, msg: "Infection is low on the differential — antibiotics not recommended yet; investigate alternatives." },
-    noninfective: { t: "Non-infectious diagnosis favored", c: "g-slate", ab: false, msg: "A non-infectious cause currently leads — antibiotics not recommended. Address the leading diagnosis." },
-    none:         { t: "Enter findings to begin", c: "g-slate", ab: false, msg: "" }
+  var GATEINFO = {
+    very_likely:  { t: "Infection very likely", c: "g-red",    ab: true },
+    likely:       { t: "Infection likely",       c: "g-orange", ab: true },
+    possible:     { t: "Infection possible",      c: "g-amber",  ab: false },
+    unlikely:     { t: "Infection unlikely",      c: "g-teal",   ab: false },
+    noninfective: { t: "Non-infectious diagnosis favored", c: "g-green2", ab: false },
+    none:         { t: "Add findings to begin reasoning", c: "g-slate", ab: false }
   };
+  function gateMsg(g) {
+    switch (g.cls) {
+      case "very_likely": return "Infection leads the differential — empiric antimicrobial therapy is appropriate. Select the diagnosis to open its stewardship recommendation.";
+      case "likely": return "Infection is the leading consideration — empiric therapy may be warranted after cultures. Confirm before prescribing.";
+      case "possible": return "Infection is in the differential but not dominant — pursue targeted investigations before antibiotics.";
+      case "unlikely": return "Infection is low on the differential — antibiotics are not recommended yet. Investigate the alternatives.";
+      case "noninfective": return "A non-infectious diagnosis currently leads — antibiotics are not recommended. Address the leading diagnosis.";
+      default: return "";
+    }
+  }
 
   /* ---------------------------------------------------------------------- *
-   * 4. UI
+   * UI
    * ---------------------------------------------------------------------- */
-  var root = null, expanded = {};
-
+  var root = null, filter = "";
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
 
   function ensureRoot() {
     if (root) return root;
+    buildOntology();
     root = document.createElement("div");
-    root.id = "dxOverlay";
-    root.className = "dx-overlay";
+    root.id = "dxOverlay"; root.className = "dx-overlay";
     root.innerHTML =
       '<div class="dx-top">' +
         '<button class="dx-back" id="dxClose" aria-label="Close reasoning">‹ Close</button>' +
-        '<div class="dx-title">Clinical Reasoning <span class="dx-beta">beta</span></div>' +
+        '<div class="dx-title">Clinical Reasoning <span class="dx-beta">live</span></div>' +
         '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
       '</div>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl">Decision support — updates live as you add findings. StewardMD supports, but does not replace, your clinical judgment. Nothing here is a confirmed diagnosis.</div>' +
-        '<div id="dxChief" class="dx-chief"></div>' +
-        '<div id="dxPicker" class="dx-picker" style="display:none"></div>' +
+        '<div class="dx-discl">Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
+        '<div class="dx-find-wrap">' +
+          '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. fever, headache, dysuria)…" autocomplete="off">' +
+          '<div id="dxSel" class="dx-selected"></div>' +
+          '<div id="dxPicker" class="dx-picker"></div>' +
+        '</div>' +
         '<div id="dxGate" class="dx-gate"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
-        '<div class="dx-ddx-h" id="dxDdxH" style="display:none">Differential diagnosis <span class="dx-sub">— ranked by Clinical Confidence Score</span></div>' +
-        '<div id="dxList" class="dx-list"></div>' +
+        '<div id="dxCols" class="dx-cols"></div>' +
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#dxClose").addEventListener("click", close);
-    root.querySelector("#dxReset").addEventListener("click", function(){ resetAll(); });
+    root.querySelector("#dxReset").addEventListener("click", resetAll);
+    var si = root.querySelector("#dxSearch");
+    si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
     return root;
   }
 
-  function chipHTML(fid, on){
-    return '<button class="dx-chip'+(on?" on":"")+'" data-f="'+fid+'">'+esc(F[fid].label)+(on?' ✓':'')+'</button>';
-  }
-
-  function renderChief() {
-    var el = root.querySelector("#dxChief");
-    if (state.chief) { el.style.display = "none"; return; }
-    el.style.display = "";
-    el.innerHTML = '<div class="dx-q">What is the chief complaint?</div><div class="dx-cc">' +
-      CHIEF.map(function (c) { return '<button class="dx-cc-btn" data-f="' + c.f + '">' + esc(c.label) + '</button>'; }).join("") +
-      '</div>';
-    el.querySelectorAll(".dx-cc-btn").forEach(function (b) {
-      b.addEventListener("click", function () { state.chief = b.getAttribute("data-f"); state.entered[state.chief] = true; recompute(); });
+  function renderSelected() {
+    var el = root.querySelector("#dxSel");
+    var keys = Object.keys(S.f);
+    if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
+    el.innerHTML = keys.map(function (k) {
+      return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
+    }).join("");
+    el.querySelectorAll(".dx-sel-chip").forEach(function (b) {
+      b.addEventListener("click", function () { delete S.f[b.getAttribute("data-f")]; recompute(); });
     });
   }
 
-  // findings picker — grouped by category, only categories relevant to current candidates
-  var CAT_ORDER = [["symptom","Symptoms"],["sign","Signs"],["vital","Vitals"],["lab","Labs"],["micro","Microbiology"],["imaging","Imaging"],["risk","Risk factors"]];
   function renderPicker() {
     var el = root.querySelector("#dxPicker");
-    if (!state.chief) { el.style.display = "none"; return; }
-    el.style.display = "";
-    // relevant findings = union of features across current candidate diseases
-    var rel = {};
-    ranked().forEach(function (r) { for (var f in r.d.F) rel[f] = true; });
-    // if very few candidates, include all findings
-    var pool = Object.keys(rel).length >= 6 ? rel : F;
-    var html = '<div class="dx-q">Add findings <span class="dx-sub">— tap what is present</span></div>';
-    CAT_ORDER.forEach(function (c) {
-      var ids = Object.keys(F).filter(function (f) { return F[f].cat === c[0] && (pool === F || pool[f]); });
-      if (!ids.length) return;
-      html += '<div class="dx-cat"><div class="dx-cat-h">' + c[1] + '</div><div class="dx-chips">' +
-        ids.map(function (f) { return chipHTML(f, !!state.entered[f]); }).join("") + '</div></div>';
-    });
-    el.innerHTML = html;
-    el.querySelectorAll(".dx-chip").forEach(function (b) {
-      b.addEventListener("click", function () {
-        var f = b.getAttribute("data-f");
-        if (state.entered[f]) delete state.entered[f]; else state.entered[f] = true;
-        recompute();
+    var html = "";
+    ONT.forEach(function (g) {
+      var fields = g.fields.filter(function (fl) {
+        if (S.f[fl.key]) return false;
+        if (!filter) return true;
+        return (fl.label || "").toLowerCase().indexOf(filter) >= 0;
       });
+      if (!fields.length) return;
+      html += '<div class="dx-cat"><div class="dx-cat-h">' + esc(g.group) + '</div><div class="dx-chips">' +
+        fields.map(function (fl) { return '<button class="dx-chip" data-f="' + fl.key + '">' + esc(fl.label) + '</button>'; }).join("") +
+        '</div></div>';
+    });
+    el.innerHTML = html || '<div class="dx-empty">No matching findings.</div>';
+    el.querySelectorAll(".dx-chip").forEach(function (b) {
+      b.addEventListener("click", function () { S.f[b.getAttribute("data-f")] = true; S.started = true; recompute(); });
     });
   }
 
-  function gateHTML(g) {
-    var info = GATE[g.cls];
-    var sourceNote = "";
-    if (info.ab && g.lead) {
-      sourceNote = '<div class="dx-handoff"><button class="dx-handoff-btn" id="dxHandoff">View stewardship recommendation →</button>' +
-        '<div class="dx-src">Recommendation source: national / international guidance · <em>hospital policy (GIMSR) integration next</em></div></div>';
-    }
-    var empiric = (info.ab && g.lead && g.lead.empiric)
-      ? '<div class="dx-empiric"><b>Suggested empiric (' + esc(g.lead.name) + '):</b> ' + esc(g.lead.empiric) + '</div>' : "";
-    return '<div class="dx-gate-card ' + info.c + '">' +
-        '<div class="dx-gate-t">' + esc(info.t) + '</div>' +
-        (info.msg ? '<div class="dx-gate-m">' + esc(info.msg) + '</div>' : "") +
-        empiric + sourceNote +
-      '</div>';
-  }
-
-  function diseaseCard(r, idx) {
-    var d = r.d, open = expanded[d.id];
-    var sup = supporting(d), con = contradictory(d), mis = missing(d);
-    var tag = d.infectious ? '<span class="dx-tag inf">infectious</span>' : '<span class="dx-tag non">non-infectious</span>';
-    var mim = (d.mimicOf || []).map(function (m) { return DMAP[m] ? DMAP[m].name : m; });
+  function card(r, rank) {
+    var open = S.expanded[r.id];
+    var cls = r.inf ? "inf" : "ni";
+    var delta = "";
+    var p = S.prev[r.id];
+    if (p != null && p !== r.score) delta = r.score > p ? '<span class="dx-up">▲</span>' : '<span class="dx-down">▼</span>';
+    else if (p == null && S.started && Object.keys(S.prev).length) delta = '<span class="dx-new">NEW</span>';
     var head =
-      '<div class="dx-row-head" data-id="' + d.id + '">' +
-        '<div class="dx-rank">' + (idx + 1) + '</div>' +
+      '<div class="dx-row-head" data-id="' + r.id + '">' +
+        '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
         '<div class="dx-row-main">' +
-          '<div class="dx-row-name">' + esc(d.name) + ' ' + tag + '</div>' +
-          '<div class="dx-bar"><span style="width:' + r.score + '%"></span></div>' +
-          '<div class="dx-row-sys">' + esc(d.system) + (mim.length ? ' · mimic of ' + esc(mim.join(", ")) : '') + '</div>' +
+          '<div class="dx-row-name">' + esc(r.name) + ' ' + delta + (r.matched ? ' <span class="dx-met">criteria met</span>' : '') + '</div>' +
+          '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
+          '<div class="dx-row-sys">' + esc(r.system) + '</div>' +
         '</div>' +
         '<div class="dx-score">' + r.score + '<small>/100</small></div>' +
       '</div>';
-    if (!open) return '<div class="dx-card">' + head + '</div>';
-    function line(items, cls, sign) {
-      return items.map(function (x) { return '<span class="dx-f ' + cls + '">' + (sign || '') + esc(F[x.f] ? F[x.f].label : x.f) + '</span>'; }).join("");
-    }
-    var det =
-      '<div class="dx-detail">' +
-        (sup.length ? '<div class="dx-d-row"><b>Supporting</b><div>' + line(sup, "sup", "✓ ") + '</div></div>' : '') +
-        (con.length ? '<div class="dx-d-row"><b>Contradictory</b><div>' + line(con, "con", "• ") + '</div></div>' : '') +
-        (mis.length ? '<div class="dx-d-row"><b>Missing / would help</b><div>' + line(mis, "mis", "? ") + '</div></div>' : '') +
-        (d.inv ? '<div class="dx-d-row"><b>Recommended investigations</b><ul>' + d.inv.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join("") + '</ul></div>' : '') +
-        (d.red ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + d.red.map(function (i) { return '<li>' + esc(i) + '</li>'; }).join("") + '</ul></div>' : '') +
-        (d.empiric && d.infectious ? '<div class="dx-d-row"><b>Empiric therapy</b><div>' + esc(d.empiric) + '</div></div>' : '') +
+    if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
+    function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
+    var det = '<div class="dx-detail">' +
+      '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
+      '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
+      (r.reason ? '<div class="dx-d-row"><b>Reasoning</b><div class="dx-reason">' + esc(r.reason) + '</div></div>' : '') +
+      (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
+      (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
+      '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
       '</div>';
-    return '<div class="dx-card open">' + head + det + '</div>';
+    return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
   }
 
-  function renderChanged(rows, gate) {
+  function renderChanged(d) {
     var el = root.querySelector("#dxChanged");
-    var now = {}; rows.forEach(function (r, i) { now[r.d.id] = { rank: i + 1, score: r.score }; });
-    var msgs = [];
-    rows.slice(0, 6).forEach(function (r) {
-      var p = state.prevRank[r.d.id];
-      if (!p) { if (Object.keys(state.prevRank).length) msgs.push("▲ " + r.d.name + " entered the differential"); }
-      else if (now[r.d.id].rank < p.rank) msgs.push("▲ " + r.d.name + " rose to #" + now[r.d.id].rank);
-      else if (now[r.d.id].rank > p.rank) msgs.push("▼ " + r.d.name + " fell to #" + now[r.d.id].rank);
+    if (!Object.keys(S.prev).length) { el.style.display = "none"; return; }
+    var all = d.inf.concat(d.ni), msgs = [];
+    all.slice(0, 12).forEach(function (r) {
+      var p = S.prev[r.id];
+      if (p == null) msgs.push("▲ " + r.name + " entered the differential");
+      else if (r.score - p >= 6) msgs.push("▲ " + r.name + " rose (" + p + "→" + r.score + ")");
+      else if (p - r.score >= 6) msgs.push("▼ " + r.name + " fell (" + p + "→" + r.score + ")");
     });
-    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + msgs.slice(0, 3).map(esc).join(" · "); }
+    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + msgs.slice(0, 3).map(esc).join("  ·  "); }
     else el.style.display = "none";
-    state.prevRank = now;
+  }
+
+  var CAP = 10;
+  function colHTML(title, cls, rows, emptyMsg) {
+    var shown = rows.slice(0, CAP);
+    var more = rows.length - shown.length;
+    var body = rows.length ? shown.map(function (r, i) { return card(r, i + 1); }).join("") : '<div class="dx-empty">' + esc(emptyMsg) + '</div>';
+    if (more > 0) body += '<div class="dx-more">+ ' + more + ' lower-ranked ' + (cls === "inf" ? "infectious" : "non-infectious") + ' possibilities</div>';
+    return '<div class="dx-col ' + cls + '"><div class="dx-col-h">' + title + ' <span class="dx-col-n">' + rows.length + '</span></div>' + body + '</div>';
   }
 
   function recompute() {
     if (!root) return;
-    renderChief(); renderPicker();
-    var rows = ranked();
-    var gate = infectionGate(rows);
-    root.querySelector("#dxGate").innerHTML = state.chief ? gateHTML(gate) : "";
-    var h = root.querySelector("#dxDdxH"); h.style.display = rows.length ? "" : "none";
-    root.querySelector("#dxList").innerHTML = rows.map(function (r, i) { return diseaseCard(r, i); }).join("") ||
-      (state.chief ? '<div class="dx-empty">Add findings above to build the differential.</div>' : "");
-    // wire expand
-    root.querySelectorAll(".dx-row-head").forEach(function (hd) {
-      hd.addEventListener("click", function () { var id = hd.getAttribute("data-id"); expanded[id] = !expanded[id]; recompute(); });
+    renderSelected(); renderPicker();
+    var d = differential();
+    var g = gate(d), info = GATEINFO[g.cls];
+    root.querySelector("#dxGate").innerHTML =
+      '<div class="dx-gate-card ' + info.c + '"><div class="dx-gate-t">' + esc(info.t) + '</div>' +
+      (gateMsg(g) ? '<div class="dx-gate-m">' + esc(gateMsg(g)) + '</div>' : '') +
+      (info.ab && g.lead ? '<div class="dx-gate-hint">Open <b>' + esc(g.lead.name) + '</b> for the full stewardship recommendation (empiric therapy, hospital policy, dosing, de-escalation).</div>' : '') +
+      '</div>';
+    renderChanged(d);
+    root.querySelector("#dxCols").innerHTML =
+      colHTML('🔴 Infectious', 'inf', d.inf, S.started ? "No infectious cause suggested by the current findings." : "Add findings to see infectious differentials.") +
+      colHTML('🟢 Non-infectious', 'ni', d.ni, S.started ? "No non-infectious cause suggested yet." : "Add findings to see non-infectious differentials.");
+    // wire expand + select
+    root.querySelectorAll(".dx-row-head").forEach(function (h) {
+      h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
     });
-    var ho = root.querySelector("#dxHandoff");
-    if (ho) ho.addEventListener("click", function () { handoff(gate.lead); });
-    renderChanged(rows, gate);
+    root.querySelectorAll(".dx-select").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+    });
+    // snapshot scores for delta
+    var snap = {}; d.inf.concat(d.ni).forEach(function (r) { snap[r.id] = r.score; });
+    S.prev = snap;
+  }
+  // re-render only the columns (used on expand so we don't reset prev/delta)
+  function renderColsOnly() {
+    var d = differential();
+    root.querySelector("#dxCols").innerHTML =
+      colHTML('🔴 Infectious', 'inf', d.inf, "No infectious cause suggested by the current findings.") +
+      colHTML('🟢 Non-infectious', 'ni', d.ni, "No non-infectious cause suggested yet.");
+    root.querySelectorAll(".dx-row-head").forEach(function (h) {
+      h.addEventListener("click", function () { var id = h.getAttribute("data-id"); S.expanded[id] = !S.expanded[id]; renderColsOnly(); });
+    });
+    root.querySelectorAll(".dx-select").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+    });
   }
 
-  function handoff(d) {
-    // Phase 1: open the existing stewardship console; deep syndrome-linking comes in P2.
-    try {
-      if (window.ASP && typeof window.ASP.open === "function") {
-        if (d && d.treat && window.ASP_DATA && window.ASP_DATA[d.treat] && typeof window.ASP.openSyndrome === "function") {
-          window.ASP.openSyndrome(d.treat);
-        } else { window.ASP.open(); }
-        return;
-      }
-    } catch (e) {}
-    alert("Stewardship module is loading — please try again.");
+  function selectDx(id) {
+    // infectious -> open the full StewardMD disease page with current findings
+    var syn = window.SYNDROMES || {};
+    if (syn[id]) {
+      try {
+        var vitals = {};
+        if (typeof window.SMD_restoreCase === "function") {
+          close();
+          window.SMD_restoreCase(S.f, id, vitals);
+          return;
+        }
+      } catch (e) {}
+      alert("Opening the disease page — stewardship module is loading.");
+      return;
+    }
+    // non-infectious -> expand its card (no antimicrobial recommendation)
+    S.expanded[id] = true; renderColsOnly();
+    var c = root.querySelector('.dx-card.open .dx-detail');
+    if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function resetAll(){ state.entered = {}; state.chief = null; state.prevRank = {}; expanded = {}; recompute(); }
-
+  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open() { ensureRoot(); root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
 
   /* ---------------------------------------------------------------------- *
-   * 5. STYLES (injected) + launch button
+   * STYLES + launch
    * ---------------------------------------------------------------------- */
   function injectCSS() {
     var css = [
       ".dx-overlay{position:fixed;inset:0;z-index:850;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
-      ".dx-overlay.on{display:flex}",
+      ".dx-overlay.on{display:flex;animation:dxIn .25s ease}",
+      "@keyframes dxIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
       "body.dx-lock{overflow:hidden}",
-      ".dx-top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel);border-bottom:1px solid var(--line);z-index:2}",
+      ".dx-top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel);border-bottom:1px solid var(--line);z-index:3}",
       ".dx-back,.dx-reset{background:transparent;border:1px solid var(--line);border-radius:9px;height:34px;padding:0 12px;font:600 13px var(--sans);color:var(--ink);cursor:pointer}",
       ".dx-back{color:var(--teal);border-color:var(--teal)}",
-      ".dx-title{flex:1;text-align:center;font:700 16px var(--sans);color:var(--ink)}",
+      ".dx-title{flex:1;text-align:center;font:800 16px var(--sans);color:var(--ink)}",
       ".dx-beta{font-size:10px;background:var(--teal-soft);color:var(--teal);border-radius:6px;padding:1px 6px;vertical-align:middle;font-weight:700}",
-      ".dx-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:760px;margin:0 auto;width:100%;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
-      ".dx-discl{font:500 11.5px var(--sans);color:var(--slate-soft);background:var(--teal-soft);border-radius:10px;padding:9px 12px;margin-bottom:14px;line-height:1.5}",
-      ".dx-q{font:700 14px var(--sans);color:var(--ink);margin:6px 0 9px}",
-      ".dx-sub{font-weight:500;color:var(--slate-soft);font-size:12px}",
-      ".dx-cc{display:flex;flex-wrap:wrap;gap:9px}",
-      ".dx-cc-btn{background:var(--panel);border:1.5px solid var(--line);border-radius:11px;padding:11px 15px;font:700 13.5px var(--sans);color:var(--ink);cursor:pointer;transition:all .15s}",
-      ".dx-cc-btn:hover{border-color:var(--teal);color:var(--teal)}",
-      ".dx-cat{margin:12px 0}",
-      ".dx-cat-h{font:700 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft);margin-bottom:7px}",
-      ".dx-chips{display:flex;flex-wrap:wrap;gap:7px}",
-      ".dx-chip{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:7px 12px;font:600 12.5px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
-      ".dx-chip.on{background:var(--teal);border-color:var(--teal);color:#fff}",
-      ".dx-gate{margin:16px 0 6px}",
+      ".dx-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:1100px;margin:0 auto;width:100%;padding-bottom:calc(48px + env(safe-area-inset-bottom))}",
+      ".dx-discl{font:500 11.5px var(--sans);color:var(--slate-soft);background:var(--teal-soft);border-radius:10px;padding:9px 12px;margin-bottom:12px;line-height:1.5}",
+      ".dx-find-wrap{margin-bottom:6px}",
+      ".dx-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:11px;padding:11px 14px;font:500 14px var(--sans);background:var(--panel);color:var(--ink);margin-bottom:9px}",
+      ".dx-search:focus{outline:none;border-color:var(--teal)}",
+      ".dx-selected{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px;min-height:4px}",
+      ".dx-sel-empty{font:500 12px var(--sans);color:var(--slate-soft)}",
+      ".dx-sel-chip{background:var(--teal);border:none;color:#fff;border-radius:16px;padding:6px 11px;font:600 12px var(--sans);cursor:pointer}",
+      ".dx-picker{max-height:212px;overflow-y:auto;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--panel)}",
+      ".dx-cat{margin:4px 0 11px}",
+      ".dx-cat-h{font:700 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft);margin-bottom:6px}",
+      ".dx-chips{display:flex;flex-wrap:wrap;gap:6px}",
+      ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
+      ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
+      ".dx-gate{margin:14px 0 8px}",
       ".dx-gate-card{border-radius:13px;padding:13px 15px;border:1px solid var(--line)}",
       ".dx-gate-t{font:800 15px var(--sans)}",
       ".dx-gate-m{font:500 12.5px var(--sans);margin-top:4px;line-height:1.5;opacity:.92}",
+      ".dx-gate-hint{font:600 12px var(--sans);margin-top:8px;color:var(--ink);background:var(--panel);border-radius:8px;padding:8px 10px}",
       ".g-red{background:var(--red-bg);border-color:var(--red-line)}.g-red .dx-gate-t{color:var(--red)}",
       ".g-orange{background:var(--orange-bg);border-color:var(--orange-line)}.g-orange .dx-gate-t{color:var(--orange)}",
       ".g-amber{background:var(--yellow-bg);border-color:var(--yellow-line)}.g-amber .dx-gate-t{color:var(--yellow)}",
       ".g-teal{background:var(--teal-soft);border-color:var(--teal)}.g-teal .dx-gate-t{color:var(--teal)}",
+      ".g-green2{background:var(--green-bg);border-color:var(--green-line)}.g-green2 .dx-gate-t{color:var(--green)}",
       ".g-slate{background:var(--panel)}.g-slate .dx-gate-t{color:var(--slate)}",
-      ".dx-empiric{margin-top:9px;font:500 12.5px var(--sans);color:var(--ink);background:var(--panel);border-radius:9px;padding:9px 11px;line-height:1.5}",
-      ".dx-handoff{margin-top:10px}",
-      ".dx-handoff-btn{background:var(--teal);border:none;color:#fff;border-radius:9px;padding:10px 14px;font:700 13px var(--sans);cursor:pointer}",
-      ".dx-src{font:500 11px var(--sans);color:var(--slate-soft);margin-top:6px}",
-      ".dx-changed{font:600 12px var(--sans);color:var(--slate);background:var(--panel);border:1px dashed var(--line);border-radius:9px;padding:8px 11px;margin:4px 0 10px}",
-      ".dx-ddx-h{font:800 15px var(--sans);color:var(--ink);margin:14px 0 10px}",
-      ".dx-list{display:flex;flex-direction:column;gap:9px}",
-      ".dx-card{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden}",
+      ".dx-changed{font:600 12px var(--sans);color:var(--slate);background:var(--panel);border:1px dashed var(--line);border-radius:9px;padding:8px 11px;margin:0 0 12px}",
+      ".dx-cols{display:grid;grid-template-columns:1fr;gap:14px}",
+      "@media(min-width:760px){.dx-cols{grid-template-columns:1fr 1fr}}",
+      ".dx-col-h{font:800 14px var(--sans);color:var(--ink);margin:2px 0 10px}",
+      ".dx-col-n{font-size:11px;background:var(--line);color:var(--slate);border-radius:8px;padding:1px 7px;vertical-align:middle}",
+      ".dx-col{display:flex;flex-direction:column;gap:9px}",
+      ".dx-card{border:1px solid var(--line);border-radius:12px;background:var(--panel);overflow:hidden;transition:border-color .15s}",
+      ".dx-card.inf{border-left:3px solid var(--red)}",
+      ".dx-card.ni{border-left:3px solid var(--green)}",
       ".dx-card.open{border-color:var(--teal)}",
       ".dx-row-head{display:flex;align-items:center;gap:11px;padding:11px 13px;cursor:pointer}",
-      ".dx-rank{width:22px;height:22px;flex:0 0 auto;border-radius:50%;background:var(--teal-soft);color:var(--teal);font:800 12px var(--sans);display:flex;align-items:center;justify-content:center}",
+      ".dx-rank{width:22px;height:22px;flex:0 0 auto;border-radius:50%;font:800 12px var(--sans);display:flex;align-items:center;justify-content:center}",
+      ".dx-rank.inf{background:var(--red-bg);color:var(--red)}.dx-rank.ni{background:var(--green-bg);color:var(--green)}",
       ".dx-row-main{flex:1;min-width:0}",
       ".dx-row-name{font:700 13.5px var(--sans);color:var(--ink)}",
-      ".dx-tag{font-size:9.5px;font-weight:700;border-radius:5px;padding:1px 5px;vertical-align:middle;margin-left:5px}",
-      ".dx-tag.inf{background:var(--red-bg);color:var(--red)}.dx-tag.non{background:var(--teal-soft);color:var(--teal)}",
+      ".dx-met{font-size:9.5px;font-weight:700;background:var(--red-bg);color:var(--red);border-radius:5px;padding:1px 5px;vertical-align:middle}",
+      ".dx-up{color:var(--red);font-size:11px}.dx-down{color:var(--teal);font-size:11px}.dx-new{font-size:9px;font-weight:800;background:var(--teal);color:#fff;border-radius:4px;padding:1px 4px}",
       ".dx-bar{height:6px;border-radius:4px;background:var(--line);margin:6px 0 4px;overflow:hidden}",
-      ".dx-bar span{display:block;height:100%;background:linear-gradient(90deg,var(--teal),#0a564e);border-radius:4px}",
+      ".dx-bar span{display:block;height:100%;border-radius:4px;transition:width .35s cubic-bezier(.4,0,.2,1)}",
+      ".dx-bar.inf span{background:linear-gradient(90deg,#d9485f,var(--red))}",
+      ".dx-bar.ni span{background:linear-gradient(90deg,#3fae6b,var(--green))}",
       ".dx-row-sys{font:500 11px var(--sans);color:var(--slate-soft)}",
       ".dx-score{font:800 18px var(--sans);color:var(--ink);flex:0 0 auto}.dx-score small{font-size:10px;color:var(--slate-soft);font-weight:600}",
-      ".dx-detail{padding:0 13px 13px;border-top:1px solid var(--line);margin-top:2px}",
+      ".dx-detail{padding:2px 13px 13px;border-top:1px solid var(--line);animation:dxIn .2s ease}",
       ".dx-d-row{margin-top:11px;font:500 12.5px var(--sans);color:var(--slate)}",
-      ".dx-d-row b{display:block;font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
+      ".dx-d-row b{display:block;font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin-bottom:5px}",
       ".dx-d-row ul{margin:0;padding-left:18px}.dx-d-row li{margin:2px 0}",
       ".dx-d-row.red b{color:var(--red)}",
+      ".dx-reason{line-height:1.55;color:var(--ink)}",
       ".dx-f{display:inline-block;border-radius:6px;padding:3px 8px;margin:0 5px 5px 0;font-size:12px;font-weight:600}",
       ".dx-f.sup{background:var(--green-bg);color:var(--green)}",
-      ".dx-f.con{background:var(--red-bg);color:var(--red)}",
-      ".dx-f.mis{background:var(--panel);border:1px dashed var(--line);color:var(--slate-soft)}",
-      ".dx-empty{font:500 13px var(--sans);color:var(--slate-soft);padding:14px;text-align:center}",
-      // launch button in header
+      ".dx-f.mis{background:var(--paper);border:1px dashed var(--line);color:var(--slate-soft)}",
+      ".dx-none{color:var(--slate-soft);font-size:12px}",
+      ".dx-select{margin-top:13px;width:100%;border:none;border-radius:10px;padding:11px;font:800 13px var(--sans);cursor:pointer;color:#fff}",
+      ".dx-select.inf{background:var(--red)}.dx-select.ni{background:var(--green)}",
+      ".dx-empty{font:500 13px var(--sans);color:var(--slate-soft);padding:14px;text-align:center;border:1px dashed var(--line);border-radius:10px}",
+      ".dx-more{font:600 11.5px var(--sans);color:var(--slate-soft);text-align:center;padding:8px;border:1px dashed var(--line);border-radius:9px}",
       ".dx-launch{flex:0 0 auto;height:38px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;font:700 12.5px var(--sans);padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}"
     ].join("");
-    var st = document.createElement("style");
-    st.id = "dx-styles"; st.textContent = css;
-    document.head.appendChild(st);
+    var st = document.createElement("style"); st.id = "dx-styles"; st.textContent = css; document.head.appendChild(st);
   }
-
   function injectLaunch() {
     var actions = document.querySelector(".app-head-actions");
-    if (!actions) return;
-    if (document.getElementById("dxLaunch")) return;
+    if (!actions || document.getElementById("dxLaunch")) return;
     var b = document.createElement("button");
     b.id = "dxLaunch"; b.className = "dx-launch"; b.type = "button";
     b.setAttribute("aria-label", "Open clinical reasoning");
@@ -532,10 +598,9 @@
     b.addEventListener("click", open);
     actions.insertBefore(b, actions.firstChild);
   }
-
   function init() { injectCSS(); injectLaunch(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.DX = { open: open, close: close, reset: resetAll, _state: state, _diseases: DISEASES };
+  window.DX = { open: open, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential };
 })();
