@@ -750,6 +750,25 @@
     else if (topInf > 0) cls = "unlikely";
     else if (topNi > 0) cls = "noninfective";
     else cls = "none";
+    // Sepsis physiology (Surviving Sepsis): fever/rigors + shock or organ
+    // dysfunction → treat suspected sepsis as infection likely and activate
+    // stewardship even if no single syndrome's criteria matched — PROVIDED an
+    // infective cause is at least competitive (guards against over-calling when
+    // a non-infectious cause clearly leads).
+    var f = S.f || {};
+    var sepsisPhys = (f.fever || f.rigors || f.feverGU || f.highFeverGI) &&
+                     (f.hypotension || f.lactateElevated || f.organDysfunction || f.vasopressorRequirement);
+    if (sepsisPhys && topInf >= 38 && topInf >= topNi - 8) {
+      var hard = f.hypotension || f.lactateElevated || f.vasopressorRequirement;
+      if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = hard ? "very_likely" : "likely";
+      else if (cls === "likely" && hard) cls = "very_likely";
+    }
+    // Febrile neutropenia / fever in an immunocompromised host: low threshold
+    // for empiric antibiotics (oncological emergency) — flag infection likely.
+    var febrileNeutropenia = (f.fever || f.rigors) && (f.absoluteNeutrophilCountLow || f.immunocompromised);
+    if (febrileNeutropenia && topInf >= 30 && topInf >= topNi - 8) {
+      if (cls === "noninfective" || cls === "unlikely" || cls === "possible") cls = "likely";
+    }
     return { cls: cls, topInf: topInf, topNi: topNi, lead: d.inf[0] || null };
   }
   var GATEINFO = {
@@ -1482,5 +1501,13 @@
   else init();
 
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
+    _assess: function () {
+      var d = differential(), g = gate(d), info = GATEINFO[g.cls];
+      return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
+        topInf: d.inf[0] ? { n: d.inf[0].name, s: d.inf[0].score, m: d.inf[0].matched } : null,
+        topNi: d.ni[0] ? { n: d.ni[0].name, s: d.ni[0].score } : null,
+        inf: d.inf.slice(0, 5).map(function (r) { return r.name + " " + r.score; }),
+        ni: d.ni.slice(0, 5).map(function (r) { return r.name + " " + r.score; }) };
+    },
     _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
 })();
