@@ -343,7 +343,18 @@
   /* ---------------------------------------------------------------------- *
    * ENGINE state + scoring
    * ---------------------------------------------------------------------- */
-  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false };
+  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false, workspace: false, advOpen: false, timeline: [] };
+
+  // centralised finding-add so the reasoning timeline is recorded consistently
+  function addFinding(k) {
+    if (S.f[k]) return;
+    S.f[k] = true; S.started = true;
+    try {
+      var d0 = differential(); var top = d0.inf[0] || d0.ni[0];
+      S.timeline.push({ f: LABEL[k] || k, top: top ? (top.name + " · " + top.score + "/100") : "—" });
+    } catch (e) {}
+    recompute();
+  }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
   // Bridge generic presenting symptoms to the infection ontology's specific
@@ -473,6 +484,8 @@
       '<div class="dx-body">' +
         '<div class="dx-discl">Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
+        '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
+        '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
           '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off">' +
           '<div id="dxSel" class="dx-selected"></div>' +
@@ -487,6 +500,7 @@
     document.body.appendChild(root);
     root.querySelector("#dxClose").addEventListener("click", close);
     root.querySelector("#dxReset").addEventListener("click", resetAll);
+    root.querySelector("#dxAdvToggle").addEventListener("click", function () { S.advOpen = !S.advOpen; renderAdv(); });
     var si = root.querySelector("#dxSearch");
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
     return root;
@@ -507,7 +521,7 @@
   function chipBtn(key, label) { return '<button class="dx-chip" data-f="' + key + '">' + esc(label) + '</button>'; }
   function wireAddChips(el) {
     el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
-      b.addEventListener("click", function () { S.f[b.getAttribute("data-f")] = true; S.started = true; recompute(); });
+      b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); });
     });
   }
   // re-render only the picker (system / show-more toggles add no findings)
@@ -575,8 +589,108 @@
     el.innerHTML = '<div class="dx-sugg-h">💡 Suggested next findings</div><div class="dx-chips">' +
       sug.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") + '</div>';
     el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
-      b.addEventListener("click", function () { S.f[b.getAttribute("data-f")] = true; S.started = true; recompute(); });
+      b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); });
     });
+  }
+
+  /* ---- Advanced workspace: free-text, sessions, export/print, timeline ---- */
+  var FT_SYN = {
+    dyspnea:["sob","breathless","short of breath","dyspn"], alteredSensorium:["confus","drowsy","gcs","obtunded","unconscious","altered sensorium","altered mental"],
+    neckStiffness:["neck stiff","stiff neck","meningism","nuchal"], headache:["headache","h/a"], fever:["fever","febrile","pyrexia"],
+    seizure:["seizure","convuls","fits"], hypotension:["hypotens","low bp","septic shock","shock"], hemoptysis:["hemoptysis","coughing blood"],
+    chestPain:["chest pain"], pleuriticChestPain:["pleuritic"], photophobia:["photophobia"], nauseaVomiting:["vomit","nausea"],
+    diarrhea:["diarrhea","diarrhoea","loose stool"], dysuria:["dysuria","burning urine"], flankPain:["flank pain","loin pain"],
+    jaundice:["jaundice","icterus"], cough:["cough"], hypoxia:["hypoxia","desaturat","spo2"], tachycardia:["tachycard"],
+    melena:["melena","melaena","black stool"], hematemesis:["hematemesis","vomiting blood"], rash:["rash"], weightLoss:["weight loss"],
+    palpitations:["palpitation"], syncope:["syncope","collapse","fainted"], backPain:["back pain"], focalNeuroDeficit:["weakness","hemiparesis","facial droop","slurred"]
+  };
+  function parseFreeText(text) {
+    if (!text) return;
+    var t = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g, " ") + " ", added = 0;
+    Object.keys(VALID).forEach(function (k) {
+      if (S.f[k]) return;
+      var hit = false;
+      (FT_SYN[k] || []).forEach(function (s) { if (t.indexOf(s) >= 0) hit = true; });
+      if (!hit) { var lab = (LABEL[k] || "").toLowerCase(); if (lab.length >= 5 && lab.length <= 22 && t.indexOf(" " + lab + " ") >= 0) hit = true; }
+      if (hit) { S.f[k] = true; added++; }
+    });
+    S.started = true;
+    S.timeline.push({ f: "free-text (" + added + " findings extracted)", top: "" });
+    recompute();
+  }
+  function loadSessions() { try { return JSON.parse(localStorage.getItem("stewardmd_rx_sessions") || "[]"); } catch (e) { return []; } }
+  function saveSession() {
+    var s = loadSessions(), keys = Object.keys(S.f);
+    if (!keys.length) return;
+    s.unshift({ label: keys.slice(0, 3).map(lbl).join(", ") + (keys.length > 3 ? " +" + (keys.length - 3) : ""), when: new Date().toLocaleString(), findings: keys });
+    try { localStorage.setItem("stewardmd_rx_sessions", JSON.stringify(s.slice(0, 12))); } catch (e) {}
+    renderAdv();
+  }
+  function loadSession(i) {
+    var s = loadSessions()[i]; if (!s) return;
+    S.f = {}; (s.findings || []).forEach(function (k) { S.f[k] = true; }); S.started = true; S.timeline = []; recompute();
+  }
+  function buildSummary() {
+    var d = differential(), g = gate(d), L = [];
+    L.push("StewardMD — Clinical Reasoning summary");
+    L.push("Generated: " + new Date().toLocaleString()); L.push("");
+    L.push("Findings: " + (Object.keys(S.f).map(lbl).join(", ") || "—")); L.push("");
+    L.push("Infection assessment: " + GATEINFO[g.cls].t); L.push("");
+    L.push("Infectious differential:");
+    d.inf.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
+    if (!d.inf.length) L.push("  (none)");
+    L.push("Non-infectious differential:");
+    d.ni.slice(0, 6).forEach(function (r, i) { L.push("  " + (i + 1) + ". " + r.name + " — " + r.score + "/100"); });
+    if (!d.ni.length) L.push("  (none)");
+    if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL) {
+      var pol = window.HOSPITAL.getPolicy(g.lead.id);
+      L.push(""); L.push("Leading infectious diagnosis: " + g.lead.name);
+      if (pol.entry) L.push("Empiric (" + pol.hospital.short + " policy): " + (pol.entry.preferred || []).join("; "));
+    }
+    L.push(""); L.push("Decision support only — not a confirmed diagnosis. StewardMD supports, not replaces, clinical judgment.");
+    return L.join("\n");
+  }
+  function exportSummary() {
+    var txt = buildSummary();
+    function fallback() {
+      try { var ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); toast("Summary copied"); }
+      catch (e2) { toast("Select the summary text to copy"); }
+    }
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () { toast("Summary copied to clipboard"); }, fallback);
+      } else fallback();
+    } catch (e) { fallback(); }
+  }
+  function printSummary() {
+    try { var w = window.open("", "_blank"); w.document.write("<title>StewardMD reasoning</title><pre style='font:13px monospace;white-space:pre-wrap;padding:18px'>" + esc(buildSummary()) + "</pre>"); w.document.close(); w.focus(); w.print(); } catch (e) {}
+  }
+  function toast(msg) {
+    var t = document.createElement("div"); t.className = "dx-toast"; t.textContent = msg; document.body.appendChild(t);
+    setTimeout(function () { t.classList.add("on"); }, 10);
+    setTimeout(function () { t.classList.remove("on"); setTimeout(function () { t.remove(); }, 300); }, 1800);
+  }
+  function renderAdv() {
+    var el = root.querySelector("#dxAdv"); if (!el) return;
+    el.style.display = S.advOpen ? "" : "none";
+    var tog = root.querySelector("#dxAdvToggle"); if (tog) tog.innerHTML = "🔬 Advanced workspace " + (S.advOpen ? "▲" : "▾");
+    if (!S.advOpen) return;
+    var sessions = loadSessions();
+    el.innerHTML =
+      '<textarea id="dxFreeText" class="dx-free" rows="3" placeholder="Describe the case in plain text — e.g. 65M, 2 days fever, neck stiffness, photophobia, drowsy…"></textarea>' +
+      '<div class="dx-adv-row">' +
+        '<button class="dx-adv-btn primary" id="dxExtract">✨ Extract findings</button>' +
+        '<button class="dx-adv-btn" id="dxSaveSess">💾 Save session</button>' +
+        '<button class="dx-adv-btn" id="dxExport">📋 Export</button>' +
+        '<button class="dx-adv-btn" id="dxPrint">🖨 Print</button>' +
+      '</div>' +
+      (sessions.length ? '<div class="dx-sess-h">Saved sessions</div><div class="dx-sess">' + sessions.map(function (s, i) { return '<button class="dx-sess-item" data-i="' + i + '">' + esc(s.label) + ' <span>' + esc(s.when) + '</span></button>'; }).join("") + '</div>' : '') +
+      (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline</div><div class="dx-tl">' + S.timeline.map(function (t) { return '<div class="dx-tl-item"><b>+ ' + esc(t.f) + '</b>' + (t.top ? ' → leading: ' + esc(t.top) : '') + '</div>'; }).join("") + '</div>' : '');
+    el.querySelector("#dxExtract").addEventListener("click", function () { parseFreeText(el.querySelector("#dxFreeText").value); });
+    el.querySelector("#dxSaveSess").addEventListener("click", saveSession);
+    el.querySelector("#dxExport").addEventListener("click", exportSummary);
+    el.querySelector("#dxPrint").addEventListener("click", printSummary);
+    el.querySelectorAll(".dx-sess-item").forEach(function (b) { b.addEventListener("click", function () { loadSession(+b.getAttribute("data-i")); }); });
   }
 
   function card(r, rank) {
@@ -695,7 +809,7 @@
 
   function recompute() {
     if (!root) return;
-    renderSelected(); renderPicker(); renderHosp();
+    renderSelected(); renderPicker(); renderHosp(); renderAdv();
     var d = differential();
     renderSuggest(d);
 
@@ -785,7 +899,8 @@
   }
 
   function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
-  function open() { ensureRoot(); root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
+  function open(opts) { ensureRoot(); if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; } root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
+  function openWorkspace() { open({ workspace: true }); }
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
 
   /* ---------------------------------------------------------------------- *
@@ -902,7 +1017,22 @@
       ".dx-policy-refs{font:700 11px var(--sans);color:var(--slate-soft);margin-top:9px}",
       ".dx-policy-cite{font:500 10.5px var(--sans);color:var(--slate-soft);margin-top:4px;font-style:italic}",
       ".dx-more{font:600 11.5px var(--sans);color:var(--slate-soft);text-align:center;padding:8px;border:1px dashed var(--line);border-radius:9px}",
-      ".dx-launch{flex:0 0 auto;height:38px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;font:700 12.5px var(--sans);padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}"
+      ".dx-launch{flex:0 0 auto;height:38px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;font:700 12.5px var(--sans);padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}",
+      ".dx-adv-toggle{width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:700 12.5px var(--sans);color:var(--ink);cursor:pointer;margin-bottom:10px}",
+      ".dx-adv{border:1px solid var(--teal);border-radius:12px;background:var(--panel);padding:12px;margin-bottom:12px}",
+      ".dx-free{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:500 13px var(--sans);background:var(--paper);color:var(--ink);resize:vertical}",
+      ".dx-adv-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}",
+      ".dx-adv-btn{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font:700 12px var(--sans);color:var(--ink);cursor:pointer}",
+      ".dx-adv-btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}",
+      ".dx-sess-h,.dx-tl-h{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin:12px 0 6px}",
+      ".dx-sess{display:flex;flex-direction:column;gap:6px}",
+      ".dx-sess-item{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font:600 12.5px var(--sans);color:var(--ink);cursor:pointer}",
+      ".dx-sess-item span{display:block;font:500 10.5px var(--sans);color:var(--slate-soft);margin-top:2px}",
+      ".dx-tl{display:flex;flex-direction:column;gap:5px}",
+      ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);border-left:2px solid var(--teal);padding:3px 0 3px 10px}",
+      ".dx-tl-item b{color:var(--ink)}",
+      ".dx-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(12px);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:10px;font:700 13px var(--sans);z-index:900;opacity:0;transition:all .3s;box-shadow:0 6px 24px rgba(0,0,0,.3)}",
+      ".dx-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}"
     ].join("");
     var st = document.createElement("style"); st.id = "dx-styles"; st.textContent = css; document.head.appendChild(st);
   }
@@ -920,6 +1050,6 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
-  window.DX = { open: open, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
+  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
     _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
 })();
