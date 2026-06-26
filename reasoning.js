@@ -33,7 +33,10 @@
       { key: "polyarthralgia", label: "Joint pain (polyarticular)" },
       { key: "legSwellingUnilateral", label: "Unilateral leg swelling" },
       { key: "legSwellingBilateral", label: "Bilateral leg swelling / edema" },
-      { key: "calfTenderness", label: "Calf tenderness" }
+      { key: "calfTenderness", label: "Calf tenderness" },
+      { key: "hematemesis", label: "Haematemesis" },
+      { key: "hematuria", label: "Haematuria" },
+      { key: "jointSwelling", label: "Joint swelling / hot joint" }
     ]},
     { group: "Signs & context", fields: [
       { key: "raisedJVP", label: "Raised JVP / peripheral edema" },
@@ -49,7 +52,9 @@
       { key: "steroidUse", label: "Chronic steroid use" },
       { key: "drugOverdose", label: "Sedative / drug overdose context" },
       { key: "anticoagulated", label: "On anticoagulation" },
-      { key: "ageOver50", label: "Age > 50" }
+      { key: "ageOver50", label: "Age > 50" },
+      { key: "atrialFibHx", label: "Known atrial fibrillation" },
+      { key: "pulsatileMass", label: "Pulsatile abdominal mass" }
     ]}
   ];
 
@@ -173,8 +178,110 @@
     { id:"dvt", name:"Deep vein thrombosis", system:"Vascular",
       find:{ legSwellingUnilateral:38, calfTenderness:30, anticoagulated:-8, fever:-12 },
       inv:["Compression ultrasound (Doppler)","D-dimer","Wells score"], red:["Anticoagulate; assess for PE"],
-      reason:"Unilateral leg swelling and calf tenderness suggest DVT rather than cellulitis." }
+      reason:"Unilateral leg swelling and calf tenderness suggest DVT rather than cellulitis." },
+
+    /* ---- Pulmonary / cardiac extras ---- */
+    { id:"asthma_exac", name:"Asthma exacerbation", system:"Pulmonary",
+      find:{ dyspnea:34, cough:14, hypoxia:12, fever:-8, purulentSputum:-8 },
+      inv:["Peak flow / spirometry","ABG if severe","CXR if atypical"], red:["Silent chest / exhaustion → life-threatening"],
+      reason:"Episodic breathlessness and wheeze without fever or consolidation suggests bronchospasm." },
+    { id:"atrial_fib", name:"Atrial fibrillation / arrhythmia", system:"Cardiology",
+      find:{ palpitations:38, dyspnea:14, syncope:12, chestPain:8, knownHeartFailure:8 },
+      inv:["12-lead ECG","Electrolytes, TSH","Echocardiogram"], red:["Rate/rhythm control; anticoagulation per CHA₂DS₂-VASc"],
+      reason:"Palpitations ± breathlessness suggest a tachyarrhythmia; an ECG is the key test." },
+    { id:"aortic_stenosis", name:"Aortic stenosis (syncope)", system:"Cardiology",
+      find:{ syncope:32, exertionalChestPain:20, dyspnea:16, ageOver50:12, palpitations:6 },
+      inv:["Echocardiogram","ECG","Examine for ejection systolic murmur"], red:["Exertional syncope is a red flag"],
+      reason:"Exertional syncope with an ejection systolic murmur suggests severe aortic stenosis." },
+
+    /* ---- Abdominal cluster ---- */
+    { id:"pancreatitis", name:"Acute pancreatitis", system:"Gastroenterology",
+      find:{ abdominalPain:34, severeAbdominalPain:24, nauseaVomiting:18, backPain:14, fever:6 },
+      inv:["Serum lipase/amylase (>3× ULN)","CT abdomen if severe/uncertain","Ultrasound for gallstones"], red:["Assess severity (organ failure) — may need ICU"],
+      reason:"Severe epigastric pain radiating to the back with raised lipase indicates pancreatitis." },
+    { id:"peptic_ulcer", name:"Peptic ulcer disease / upper GI bleed", system:"Gastroenterology",
+      find:{ abdominalPain:24, melena:30, hematemesis:30, anticoagulated:10, fever:-10 },
+      inv:["Upper GI endoscopy","CBC, crossmatch","Stop NSAIDs; start PPI infusion"], red:["Haemodynamic instability → resuscitate, urgent endoscopy"], tools:["ppi"],
+      reason:"Epigastric pain with melena or haematemesis suggests bleeding peptic ulcer disease." },
+    { id:"bowel_obstruction", name:"Bowel obstruction", system:"Surgical / GI",
+      find:{ abdominalPain:28, abdominalDistension:30, nauseaVomiting:20, constipationOrDiarrhea:12, fever:-6 },
+      inv:["Erect/supine abdominal X-ray or CT","NG decompression","Surgical review"], red:["Strangulation / perforation → emergency surgery"],
+      reason:"Colicky pain with distension and vomiting and absolute constipation suggests obstruction." },
+    { id:"mesenteric_ischemia", name:"Acute mesenteric ischemia", system:"Vascular / GI",
+      find:{ severeAbdominalPain:36, abdominalPain:18, atrialFibHx:18, ageOver50:12, raised_lactate:16, fever:-4 },
+      inv:["CT angiography (mesenteric)","Lactate","Urgent surgical/vascular review"], red:["Pain out of proportion to exam — time-critical"],
+      reason:"Severe pain out of proportion to examination, especially with AF or vascular disease, suggests mesenteric ischaemia." },
+    { id:"biliary_colic", name:"Biliary colic / cholelithiasis", system:"Gastroenterology",
+      find:{ rightUpperQuadrantPain:34, nauseaVomiting:16, murphySign:10, fever:-12, jaundice:-6 },
+      inv:["Abdominal ultrasound","LFTs"], red:["Fever/jaundice → cholecystitis/cholangitis (infective)"],
+      reason:"Episodic RUQ pain after meals without fever suggests biliary colic rather than infection." },
+    { id:"renal_colic", name:"Renal / ureteric colic", system:"Urology",
+      find:{ flankPain:34, nauseaVomiting:14, hematuria:24, feverGU:-14, dysuria:-6 },
+      inv:["Non-contrast CT KUB","Urinalysis (haematuria)"], red:["Fever with obstruction → emergency (infected obstructed system)"],
+      reason:"Severe colicky flank pain radiating to the groin with haematuria and no fever suggests a stone." },
+    { id:"aaa", name:"Ruptured abdominal aortic aneurysm", system:"Vascular emergency",
+      find:{ abdominalPain:24, backPain:30, hypotension:26, syncope:16, ageOver50:14, pulsatileMass:30 },
+      inv:["Bedside aortic ultrasound / CT","Crossmatch; vascular surgery NOW"], red:["Hypotension + back pain + pulsatile mass = surgical emergency"],
+      reason:"Back/abdominal pain with hypotension in an older patient is a ruptured AAA until proven otherwise." },
+
+    /* ---- Endocrine / metabolic / neuro ---- */
+    { id:"thyroid_storm", name:"Thyroid storm", system:"Endocrine",
+      find:{ fever:18, tachycardia:24, palpitations:20, alteredSensorium:16, diarrhea:10 },
+      inv:["TFTs (TSH↓, free T4/T3↑)","ECG","Burch-Wartofsky score"], red:["Life-threatening — beta-blockade, antithyroid drugs"],
+      reason:"Fever, tachycardia and agitation with thyrotoxic features suggest thyroid storm — a non-infectious cause of fever." },
+    { id:"seizure_epilepsy", name:"Seizure / epilepsy", system:"Neurology",
+      find:{ seizure:44, alteredSensorium:18, fever:-8 },
+      inv:["Glucose, electrolytes, calcium","EEG","Neuroimaging if first seizure/focal"], red:["Status epilepticus → emergency"],
+      reason:"Witnessed convulsion with post-ictal state; exclude metabolic and structural causes." },
+    { id:"vasovagal_syncope", name:"Vasovagal / orthostatic syncope", system:"Neurology / Cardiology",
+      find:{ syncope:36, palpitations:-6, exertionalChestPain:-10, fever:-10 },
+      inv:["Lying/standing BP","ECG (exclude arrhythmia)"], red:["Exertional or cardiac syncope needs cardiac workup"],
+      reason:"Situational syncope with prodrome and rapid recovery, without cardiac features, suggests a vasovagal cause." },
+
+    /* ---- Haematology / oncology / rheumatology ---- */
+    { id:"anemia_sympt", name:"Symptomatic anaemia", system:"Hematology",
+      find:{ dyspnea:22, palpitations:16, weightLoss:8, melena:12, fever:-8 },
+      inv:["CBC, peripheral smear","Iron studies, B12/folate","Identify blood loss"], red:["Active bleeding → resuscitate"],
+      reason:"Exertional breathlessness and palpitations with pallor suggest anaemia; seek the cause." },
+    { id:"malignancy_b", name:"Malignancy (B-symptoms)", system:"Oncology",
+      find:{ weightLoss:34, prolongedFever:16, lymphadenopathy:20, nightSweats:18, hepatosplenomegaly:12 },
+      inv:["Imaging directed to site","Biopsy/histology","LDH, blood film"], red:["Persistent unexplained B-symptoms warrant urgent workup"],
+      reason:"Weight loss, night sweats and lymphadenopathy raise concern for lymphoma or other malignancy." },
+    { id:"crystal_arthritis", name:"Crystal arthritis (gout / pseudogout)", system:"Rheumatology",
+      find:{ polyarthralgia:24, jointSwelling:30, skin_redness:14, fever:8 },
+      inv:["Joint aspiration + polarised microscopy","Serum urate (off-attack)"], red:["Septic arthritis must be excluded by aspiration"],
+      reason:"Acute mono/oligoarticular hot joint may be crystal-induced — but exclude septic arthritis by aspiration." }
   ];
+
+  /* ---------------------------------------------------------------------- *
+   * SMART BEDSIDE-TOOL TRIGGERS — a diagnosis surfaces the relevant existing
+   * StewardMD calculators/protocols. Keyed by diagnosis id (works for both
+   * infectious syndrome ids and non-infectious ids).
+   * ---------------------------------------------------------------------- */
+  function inf(fn) { return function () { try { close(); } catch (e) {} try { if (window.INF) fn(window.INF); } catch (e) {} }; }
+  var TOOLREG = {
+    vaso:       { icon: "💉", label: "Vasopressor / infusion calculator", run: inf(function (I) { I.openDrug("noradrenaline"); }) },
+    dashboard:  { icon: "🩺", label: "ICU dashboard — MAP · lactate · urine output", run: inf(function (I) { I.openDashboard(); }) },
+    insulin:    { icon: "💉", label: "Insulin infusion (DKA)", run: inf(function (I) { I.openDrug("insulin"); }) },
+    ppi:        { icon: "💊", label: "PPI infusion (pantoprazole) — GI bleed", run: inf(function (I) { I.openDrug("pantoprazole"); }) },
+    furosemide: { icon: "💧", label: "Furosemide infusion", run: inf(function (I) { I.openDrug("furosemide"); }) },
+    gtn:        { icon: "💊", label: "Nitroglycerin infusion", run: inf(function (I) { I.openDrug("nitroglycerin"); }) },
+    heparin:    { icon: "🩸", label: "Heparin infusion", run: inf(function (I) { I.openDrug("heparin"); }) },
+    amiodarone: { icon: "❤️", label: "Amiodarone infusion", run: inf(function (I) { I.openDrug("amiodarone"); }) },
+    stroke:     { icon: "🧠", label: "Stroke score (A2DS2)", run: function () { try { close(); } catch (e) {} try { if (window.SB) SB.calc("a2ds2"); } catch (e) {} } }
+  };
+  var TOOLMAP = {
+    // infectious (syndrome ids)
+    SEPTIC_SHOCK: ["vaso", "dashboard"], SEPSIS: ["dashboard"], FEBRILE_NEUTROPENIA: ["dashboard"],
+    // non-infectious
+    cardiogenic_shock: ["vaso", "dashboard", "furosemide"], hypovolemic_shock: ["dashboard", "ppi"],
+    adrenal_crisis: ["vaso", "dashboard"], anaphylaxis: ["vaso"], dka: ["insulin"],
+    peptic_ulcer: ["ppi"], heart_failure: ["furosemide", "gtn"], acs: ["gtn", "heparin"],
+    pe: ["heparin"], atrial_fib: ["amiodarone"], ischemic_stroke: ["stroke"], ich: ["stroke"],
+    sah: ["stroke"], mesenteric_ischemia: ["dashboard"], aaa: ["vaso", "dashboard"]
+  };
+  function toolsFor(id) { return (TOOLMAP[id] || []).filter(function (t) { return TOOLREG[t]; }); }
+  function runTool(id) { if (TOOLREG[id]) TOOLREG[id].run(); }
 
   /* ---------------------------------------------------------------------- *
    * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
@@ -268,17 +375,26 @@
       if (sc < 16) return null; // below the noise floor — don't list
     }
     var missing = assoc.filter(function (k) { return !S.fInf[k]; }).slice(0, 5);
+    // contradictory = entered findings whose removal RAISES the score (data-driven probe)
+    var contra = [];
+    if (matched && s.baseScore) {
+      present.forEach(function (k) {
+        var clone = {}; for (var x in S.fInf) clone[x] = S.fInf[x]; delete clone[k];
+        var without; try { without = clamp(Math.round(s.baseScore(clone)), 0, 100); } catch (e) { without = sc; }
+        if (without > sc) contra.push(k);
+      });
+    }
     var reason = "";
     try { if (s.decision && s.decision.reasoning) reason = s.decision.reasoning(S.fInf); } catch (e) {}
     var red = (s.decision && (s.decision.status === "red")) ? [s.decision.label || "Time-critical infection"] : [];
     var inv = (s.investigations || []).map(function (i) { return i.test ? (i.test) : i; });
     return { id: s.id, name: s.name, system: s.system || "Infectious", inf: true, matched: matched,
-      score: sc, supporting: present, missing: missing, reason: reason, red: red, inv: inv, _syn: s };
+      score: sc, supporting: present, contra: contra, missing: missing, reason: reason, red: red, inv: inv, _syn: s };
   }
 
   function scoreNI(d) {
-    var sup = [], sum = 0, any = false;
-    for (var k in d.find) { if (S.f[k]) { sum += d.find[k]; any = true; if (d.find[k] > 0) sup.push(k); } }
+    var sup = [], contra = [], sum = 0, any = false;
+    for (var k in d.find) { if (S.f[k]) { sum += d.find[k]; any = true; if (d.find[k] > 0) sup.push(k); else if (d.find[k] < 0) contra.push(k); } }
     if (!any) return null;
     var sc = clamp(Math.round(sum), 0, 100);
     if (sc <= 0 && sup.length === 0) return null;
@@ -287,6 +403,7 @@
     missing = missing.sort(function (a, b) { return d.find[b] - d.find[a]; }).slice(0, 5);
     return { id: d.id, name: d.name, system: d.system, inf: false, matched: false,
       score: sc, supporting: sup.sort(function (a, b) { return d.find[b] - d.find[a]; }),
+      contra: contra.sort(function (a, b) { return d.find[a] - d.find[b]; }),
       missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], tools: d.tools || [] };
   }
 
@@ -481,12 +598,15 @@
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
     function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
+    var tools = toolsFor(r.id);
     var det = '<div class="dx-detail">' +
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
+      (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
       '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
       (r.reason ? '<div class="dx-d-row"><b>Reasoning</b><div class="dx-reason">' + esc(r.reason) + '</div></div>' : '') +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
+      (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
       '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
       '</div>';
     return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
@@ -619,6 +739,9 @@
     root.querySelectorAll(".dx-select").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
     });
+    root.querySelectorAll(".dx-tool").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
+    });
     // snapshot scores for delta
     var snap = {}; d.inf.concat(d.ni).forEach(function (r) { snap[r.id] = r.score; });
     S.prev = snap;
@@ -634,6 +757,9 @@
     });
     root.querySelectorAll(".dx-select").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); selectDx(b.getAttribute("data-sel")); });
+    });
+    root.querySelectorAll(".dx-tool").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
     });
   }
 
@@ -745,7 +871,11 @@
       ".dx-reason{line-height:1.55;color:var(--ink)}",
       ".dx-f{display:inline-block;border-radius:6px;padding:3px 8px;margin:0 5px 5px 0;font-size:12px;font-weight:600}",
       ".dx-f.sup{background:var(--green-bg);color:var(--green)}",
+      ".dx-f.con{background:var(--red-bg);color:var(--red)}",
       ".dx-f.mis{background:var(--paper);border:1px dashed var(--line);color:var(--slate-soft)}",
+      ".dx-tools{display:flex;flex-direction:column;gap:6px}",
+      ".dx-tool{text-align:left;background:var(--teal-soft);border:1px solid var(--teal);color:var(--teal);border-radius:9px;padding:9px 11px;font:700 12.5px var(--sans);cursor:pointer}",
+      ".dx-tool:hover{background:var(--teal);color:#fff}",
       ".dx-none{color:var(--slate-soft);font-size:12px}",
       ".dx-select{margin-top:13px;width:100%;border:none;border-radius:10px;padding:11px;font:800 13px var(--sans);cursor:pointer;color:#fff}",
       ".dx-select.inf{background:var(--red)}.dx-select.ni{background:var(--green)}",
