@@ -283,6 +283,17 @@
   function toolsFor(id) { return (TOOLMAP[id] || []).filter(function (t) { return TOOLREG[t]; }); }
   function runTool(id) { if (TOOLREG[id]) TOOLREG[id].run(); }
 
+  // which infection each non-infectious diagnosis can mimic (spec: explain WHY)
+  var MIMIC = {
+    pulm_edema:"pneumonia", pe:"pneumonia", pneumothorax:"pneumonia", asthma_exac:"pneumonia", copd_exac_ni:"pneumonia",
+    cardiogenic_shock:"septic shock", hypovolemic_shock:"septic shock", adrenal_crisis:"septic shock", anaphylaxis:"septic shock",
+    dvt:"cellulitis", crystal_arthritis:"septic arthritis",
+    sah:"meningitis", ischemic_stroke:"meningitis", ich:"meningitis", metabolic_enceph:"CNS infection",
+    hepatic_enceph:"CNS infection / SBP", drug_intox:"CNS infection", seizure_epilepsy:"CNS infection",
+    dka:"sepsis", thyroid_storm:"sepsis", biliary_colic:"cholangitis", mesenteric_ischemia:"intra-abdominal sepsis",
+    pancreatitis:"intra-abdominal sepsis", malignancy_b:"occult infection / PUO"
+  };
+
   /* ---------------------------------------------------------------------- *
    * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
    * ---------------------------------------------------------------------- */
@@ -343,12 +354,12 @@
   /* ---------------------------------------------------------------------- *
    * ENGINE state + scoring
    * ---------------------------------------------------------------------- */
-  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false, workspace: false, advOpen: false, timeline: [], compare: [] };
+  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false, workspace: false, advOpen: false, timeline: [], compare: [], lastAdded: null };
 
   // centralised finding-add so the reasoning timeline is recorded consistently
   function addFinding(k) {
     if (S.f[k]) return;
-    S.f[k] = true; S.started = true;
+    S.f[k] = true; S.started = true; S.lastAdded = LABEL[k] || k;
     try {
       var d0 = differential(); var top = d0.inf[0] || d0.ni[0];
       S.timeline.push({ f: LABEL[k] || k, top: top ? (top.name + " · " + top.score + "/100") : "—" });
@@ -711,7 +722,7 @@
       '<div class="dx-row-head" data-id="' + r.id + '">' +
         '<div class="dx-rank ' + cls + '">' + rank + '</div>' +
         '<div class="dx-row-main">' +
-          '<div class="dx-row-name">' + esc(r.name) + ' ' + delta + (r.matched ? ' <span class="dx-met">criteria met</span>' : '') + '</div>' +
+          '<div class="dx-row-name">' + esc(r.name) + ' ' + delta + (r.matched ? ' <span class="dx-met">criteria met</span>' : '') + (!r.inf && MIMIC[r.id] ? ' <span class="dx-mimic">↔ mimics ' + esc(MIMIC[r.id]) + '</span>' : '') + '</div>' +
           '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
           '<div class="dx-row-sys">' + esc(r.system) + '</div>' +
         '</div>' +
@@ -744,7 +755,7 @@
       else if (r.score - p >= 6) msgs.push("▲ " + r.name + " rose (" + p + "→" + r.score + ")");
       else if (p - r.score >= 6) msgs.push("▼ " + r.name + " fell (" + p + "→" + r.score + ")");
     });
-    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + msgs.slice(0, 3).map(esc).join("  ·  "); }
+    if (msgs.length) { el.style.display = ""; el.innerHTML = '<b>What changed</b> ' + (S.lastAdded ? 'adding <b>' + esc(S.lastAdded) + '</b> — ' : "") + msgs.slice(0, 3).map(esc).join("  ·  "); }
     else el.style.display = "none";
   }
 
@@ -780,6 +791,15 @@
   function drugRows(arr) {
     return (arr || []).map(function (x) { return '<div class="dx-drug">' + esc(x) + awareBadge(x) + '</div>'; }).join("");
   }
+  function orgHTML(syn) {
+    if (!syn || !syn.pathogens) return "";
+    var p = syn.pathogens, list = [].concat(p.veryLikely || [], p.likely || []).slice(0, 5);
+    return list.length ? '<div class="dx-policy-line"><b>Likely organisms:</b> ' + esc(list.join(", ")) + '</div>' : "";
+  }
+  function deescHTML(syn) {
+    if (!syn || !syn.deescalation) return "";
+    return '<div class="dx-policy-note"><b>De-escalation:</b> ' + esc(syn.deescalation) + '</div>';
+  }
   function renderPolicy(g) {
     var el = root.querySelector("#dxPolicy");
     if (!el) return;
@@ -798,6 +818,7 @@
         (e.alternatives && e.alternatives.length ? '<div class="dx-policy-sec"><b>Alternatives</b>' + drugRows(e.alternatives) + '</div>' : "") +
         (e.duration ? '<div class="dx-policy-line"><b>Duration:</b> ' + esc(e.duration) + '</div>' : "") +
         (e.comments ? '<div class="dx-policy-note">' + esc(e.comments) + '</div>' : "") +
+        orgHTML(lead._syn) + deescHTML(lead._syn) +
         '<div class="dx-policy-refs">Secondary references: ICMR AMRSN 2024 · IDSA · Surviving Sepsis Campaign</div>' +
         (e.table ? '<div class="dx-policy-cite">Source: GIMSR Antibiotic Policy ' + esc(e.table) + ', p.' + e.page + '</div>' : "") +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
@@ -946,7 +967,15 @@
   }
 
   function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
-  function open(opts) { ensureRoot(); if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; } root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
+  function open(opts) {
+    ensureRoot();
+    if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; }
+    // Bridge: carry over findings already entered in the legacy checkbox wizard
+    if (!Object.keys(S.f).length && typeof window.SMD_getFindings === "function") {
+      try { var lf = window.SMD_getFindings(), n = 0; for (var k in lf) { if (lf[k] && VALID[k]) { S.f[k] = true; n++; } } if (n) { S.started = true; S.lastAdded = null; } } catch (e) {}
+    }
+    root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
+  }
   function openWorkspace() { open({ workspace: true }); }
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
 
@@ -1018,6 +1047,7 @@
       ".dx-row-main{flex:1;min-width:0}",
       ".dx-row-name{font:700 13.5px var(--sans);color:var(--ink)}",
       ".dx-met{font-size:9.5px;font-weight:700;background:var(--red-bg);color:var(--red);border-radius:5px;padding:1px 5px;vertical-align:middle}",
+      ".dx-mimic{font-size:9.5px;font-weight:700;background:var(--red-bg);color:var(--red);border-radius:5px;padding:1px 6px;vertical-align:middle}",
       ".dx-up{color:var(--red);font-size:11px}.dx-down{color:var(--teal);font-size:11px}.dx-new{font-size:9px;font-weight:800;background:var(--teal);color:#fff;border-radius:4px;padding:1px 4px}",
       ".dx-bar{height:6px;border-radius:4px;background:var(--line);margin:6px 0 4px;overflow:hidden}",
       ".dx-bar span{display:block;height:100%;border-radius:4px;transition:width .35s cubic-bezier(.4,0,.2,1)}",
