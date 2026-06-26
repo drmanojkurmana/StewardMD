@@ -248,9 +248,55 @@
       inv:["Imaging directed to site","Biopsy/histology","LDH, blood film"], red:["Persistent unexplained B-symptoms warrant urgent workup"],
       reason:"Weight loss, night sweats and lymphadenopathy raise concern for lymphoma or other malignancy." },
     { id:"crystal_arthritis", name:"Crystal arthritis (gout / pseudogout)", system:"Rheumatology",
-      find:{ polyarthralgia:24, jointSwelling:30, skin_redness:14, fever:8 },
+      find:{ polyarthralgia:24, jointSwelling:30, fever:8 },
       inv:["Joint aspiration + polarised microscopy","Serum urate (off-attack)"], red:["Septic arthritis must be excluded by aspiration"],
-      reason:"Acute mono/oligoarticular hot joint may be crystal-induced — but exclude septic arthritis by aspiration." }
+      reason:"Acute mono/oligoarticular hot joint may be crystal-induced — but exclude septic arthritis by aspiration." },
+
+    /* ---- Further Internal Medicine breadth ---- */
+    { id:"sle_flare", name:"SLE / autoimmune flare", system:"Rheumatology",
+      find:{ polyarthralgia:28, rash:22, jointSwelling:16, fever:12, weightLoss:8, hematuria:8 },
+      inv:["ANA / anti-dsDNA, complement","Urinalysis (active sediment)","CBC (cytopenias)"], red:["Exclude infection before escalating immunosuppression"],
+      reason:"Polyarthralgia with rash, cytopenias and serositis in the right patient suggests a lupus flare rather than infection." },
+    { id:"vasculitis", name:"Systemic vasculitis", system:"Rheumatology",
+      find:{ rash:20, polyarthralgia:18, fever:14, hematuria:18, weightLoss:14, focalNeuroDeficit:8 },
+      inv:["ANCA, complement","Urinalysis + renal function","Biopsy of affected organ"], red:["Rapidly progressive renal/pulmonary involvement is an emergency"],
+      reason:"Multisystem disease with palpable purpura, glomerulonephritis and constitutional symptoms suggests a systemic vasculitis." },
+    { id:"hyperthyroidism", name:"Thyrotoxicosis (uncomplicated)", system:"Endocrine",
+      find:{ palpitations:28, weightLoss:22, tachycardia:18, diarrhea:8, fever:-6 },
+      inv:["TFTs (TSH↓, free T4/T3↑)","ECG"], red:["Escalation to thyroid storm if fever/altered sensorium"],
+      reason:"Palpitations, weight loss and tachycardia with appetite preserved suggest thyrotoxicosis." },
+    { id:"ild", name:"Interstitial lung disease", system:"Pulmonary",
+      find:{ dyspnea:30, hypoxia:18, bilateralCrackles:24, weightLoss:8, fever:-10 },
+      inv:["High-resolution CT chest","Pulmonary function tests","Autoimmune serology"], red:["Acute exacerbation can be life-threatening"],
+      reason:"Progressive exertional dyspnoea with fine bibasal crackles and no fever points to interstitial lung disease." },
+    { id:"pleural_effusion", name:"Pleural effusion", system:"Pulmonary",
+      find:{ dyspnea:26, pleuriticChestPain:16, hypoxia:10, fever:-4 },
+      inv:["CXR / thoracic ultrasound","Diagnostic pleural tap (Light's criteria)"], red:["Empyema if infected — needs drainage"],
+      reason:"Breathlessness with reduced breath sounds and stony dullness suggests a pleural effusion; tap to characterise." },
+    { id:"tamponade", name:"Cardiac tamponade", system:"Cardiology / Emergency",
+      find:{ dyspnea:24, hypotension:30, raisedJVP:30, tachycardia:18, chestPain:8 },
+      inv:["Urgent echocardiogram","ECG (electrical alternans)"], red:["Obstructive shock — urgent pericardiocentesis"],
+      reason:"Hypotension with raised JVP and muffled heart sounds (Beck's triad) suggests cardiac tamponade." },
+    { id:"htn_emergency", name:"Hypertensive emergency", system:"Cardiology / Neuro",
+      find:{ headache:22, hypertensionHx:24, visualDisturbance:16, chestPain:12, focalNeuroDeficit:10 },
+      inv:["BP (both arms), fundoscopy","ECG, troponin, renal function","CT head if neuro signs"], red:["Controlled BP reduction; identify target-organ damage"],
+      reason:"Severe hypertension with headache, visual or neurological symptoms indicates a hypertensive emergency with end-organ damage." },
+    { id:"glomerulonephritis", name:"Acute glomerulonephritis", system:"Nephrology",
+      find:{ hematuria:30, legSwellingBilateral:22, hypertensionHx:16, headache:6, fever:-4 },
+      inv:["Urinalysis (dysmorphic RBCs, casts)","Renal function, complement","ASO / autoimmune serology"], red:["Rapidly progressive GN needs urgent nephrology"],
+      reason:"Haematuria with oedema and hypertension (nephritic picture) suggests acute glomerulonephritis." },
+    { id:"toxic_hepatitis", name:"Drug-induced / toxic hepatitis", system:"Hepatology / Toxicology",
+      find:{ jaundice:28, rightUpperQuadrantPain:18, nauseaVomiting:12, drugOverdose:18, alteredSensorium:8, fever:-6 },
+      inv:["LFTs, INR (synthetic function)","Paracetamol level","Stop the offending agent"], red:["Acute liver failure (coagulopathy + encephalopathy) → transplant referral"],
+      reason:"Jaundice and transaminitis after a hepatotoxic drug/overdose, without sepsis, suggests toxic hepatitis." },
+    { id:"ibd_flare", name:"Inflammatory bowel disease flare", system:"Gastroenterology",
+      find:{ diarrhea:26, bloodyStool:26, abdominalPain:16, weightLoss:12, fever:6 },
+      inv:["Stool studies (exclude infection/C. difficile)","CRP, faecal calprotectin","Endoscopy"], red:["Toxic megacolon — surgical emergency"],
+      reason:"Chronic bloody diarrhoea with weight loss suggests an IBD flare, but infective colitis must be excluded first." },
+    { id:"ttp_hus", name:"Thrombotic microangiopathy (TTP/HUS)", system:"Hematology",
+      find:{ thrombocytopenia:30, alteredSensorium:16, fever:10, focalNeuroDeficit:8, hematuria:6 },
+      inv:["Blood film (schistocytes)","LDH, haptoglobin, bilirubin","ADAMTS13"], red:["Haematological emergency — urgent plasma exchange"],
+      reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively." }
   ];
 
   /* ---------------------------------------------------------------------- *
@@ -291,7 +337,10 @@
     sah:"meningitis", ischemic_stroke:"meningitis", ich:"meningitis", metabolic_enceph:"CNS infection",
     hepatic_enceph:"CNS infection / SBP", drug_intox:"CNS infection", seizure_epilepsy:"CNS infection",
     dka:"sepsis", thyroid_storm:"sepsis", biliary_colic:"cholangitis", mesenteric_ischemia:"intra-abdominal sepsis",
-    pancreatitis:"intra-abdominal sepsis", malignancy_b:"occult infection / PUO"
+    pancreatitis:"intra-abdominal sepsis", malignancy_b:"occult infection / PUO",
+    ild:"pneumonia", pleural_effusion:"empyema", tamponade:"septic shock", toxic_hepatitis:"viral hepatitis",
+    ibd_flare:"infective colitis", ttp_hus:"sepsis / meningococcaemia", sle_flare:"PUO / sepsis", vasculitis:"endocarditis / PUO",
+    glomerulonephritis:"UTI / post-infectious", htn_emergency:"meningitis / encephalitis"
   };
 
   /* ---------------------------------------------------------------------- *
@@ -620,7 +669,10 @@
     abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"], flankPain:["flank pain","loin pain"],
     polyuriaPolydipsia:["polyuria","polydipsia"], ketonemia:["ketone","ketoacidosis"], orthopnea:["orthopnoea","orthopnea","pnd"],
     exertionalChestPain:["exertional","on exertion"], ecgIschemia:["st elevation","ischemic ecg","ischaemic ecg"], thunderclapHeadache:["thunderclap","worst headache","worst-ever"],
-    hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"]
+    hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"],
+    thrombocytopenia:["thrombocytopenia","low platelet"], polyarthralgia:["arthralgia","polyarthritis","joint pain","joint pains"],
+    visualDisturbance:["visual loss","blurred vision","vision loss","diplopia"], bloodyStool:["bloody stool","blood in stool","hematochezia","rectal bleed"],
+    raisedJVP:["raised jvp","elevated jvp"], hypertensionHx:["hypertensive","high bp","htn"]
   };
   function parseFreeText(text) {
     if (!text) return;
