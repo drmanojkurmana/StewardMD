@@ -179,7 +179,7 @@
   /* ---------------------------------------------------------------------- *
    * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
    * ---------------------------------------------------------------------- */
-  var ONT = null, LABEL = {}, VALID = {};
+  var ONT = null, LABEL = {}, VALID = {}, GENERAL = [], SYSPICK = [];
   function buildOntology() {
     if (ONT) return ONT;
     var groups = [];
@@ -188,7 +188,20 @@
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
     groups.forEach(function (g) { g.fields.forEach(function (fl) { LABEL[fl.key] = fl.label; VALID[fl.key] = true; }); });
     ONT = groups;
+    // Step-1 general findings + Step-2 body systems (from the live app ontology)
+    GENERAL = (window.CORE_VITALS || ["fever","hypotension","tachycardia","tachypnea","alteredSensorium","hypoxia"]).filter(function (k) { return LABEL[k]; });
+    if (LABEL.weightLoss && GENERAL.indexOf("weightLoss") < 0) GENERAL.push("weightLoss");
+    SYSPICK = (window.SYSTEM_PICKER_MAP && window.SYSTEM_PICKER_MAP.length) ? window.SYSTEM_PICKER_MAP
+      : fg.filter(function (g) { return g.group && g.group.indexOf("Vitals") < 0 && g.group.indexOf("MDR") < 0 && g.group.indexOf("Course") < 0; })
+           .map(function (g) { return { id: g.group, label: g.group, icon: "•", groups: [g.group] }; });
     return ONT;
+  }
+  function fieldsForSystem(sysId) {
+    var sp = null; SYSPICK.forEach(function (x) { if (x.id === sysId) sp = x; });
+    if (!sp) return { sp: null, fields: [] };
+    var out = [];
+    (sp.groups || []).forEach(function (gn) { ONT.forEach(function (g) { if (g.group === gn) out = out.concat(g.fields); }); });
+    return { sp: sp, fields: out };
   }
   function lbl(k) { return LABEL[k] || k; }
 
@@ -223,7 +236,7 @@
   /* ---------------------------------------------------------------------- *
    * ENGINE state + scoring
    * ---------------------------------------------------------------------- */
-  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false };
+  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false };
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
   // Bridge generic presenting symptoms to the infection ontology's specific
@@ -344,8 +357,9 @@
         '<div class="dx-discl">Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<div class="dx-find-wrap">' +
-          '<input id="dxSearch" class="dx-search" type="text" placeholder="Search findings (e.g. fever, headache, dysuria)…" autocomplete="off">' +
+          '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off">' +
           '<div id="dxSel" class="dx-selected"></div>' +
+          '<div id="dxSuggest" class="dx-suggest"></div>' +
           '<div id="dxPicker" class="dx-picker"></div>' +
         '</div>' +
         '<div id="dxGate" class="dx-gate"></div>' +
@@ -373,22 +387,77 @@
     });
   }
 
+  function chipBtn(key, label) { return '<button class="dx-chip" data-f="' + key + '">' + esc(label) + '</button>'; }
+  function wireAddChips(el) {
+    el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
+      b.addEventListener("click", function () { S.f[b.getAttribute("data-f")] = true; S.started = true; recompute(); });
+    });
+  }
+  // re-render only the picker (system / show-more toggles add no findings)
+  function renderPickerOnly() { renderPicker(); }
+
   function renderPicker() {
     var el = root.querySelector("#dxPicker");
-    var html = "";
-    ONT.forEach(function (g) {
-      var fields = g.fields.filter(function (fl) {
-        if (S.f[fl.key]) return false;
-        if (!filter) return true;
-        return (fl.label || "").toLowerCase().indexOf(filter) >= 0;
-      });
-      if (!fields.length) return;
-      html += '<div class="dx-cat"><div class="dx-cat-h">' + esc(g.group) + '</div><div class="dx-chips">' +
-        fields.map(function (fl) { return '<button class="dx-chip" data-f="' + fl.key + '">' + esc(fl.label) + '</button>'; }).join("") +
+
+    // --- search mode: flat filtered results across the whole ontology ---
+    if (filter) {
+      var matches = [];
+      ONT.forEach(function (g) { g.fields.forEach(function (fl) {
+        if (!S.f[fl.key] && (fl.label || "").toLowerCase().indexOf(filter) >= 0) matches.push(fl);
+      }); });
+      el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results</div><div class="dx-chips">' +
+        (matches.length ? matches.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">No matching findings.</span>') +
         '</div></div>';
+      wireAddChips(el); return;
+    }
+
+    // --- progressive consultant workflow ---
+    var html = "";
+    // Step 1 · general findings
+    var gen = GENERAL.filter(function (k) { return !S.f[k] && LABEL[k]; });
+    html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">1</span> General findings</div><div class="dx-chips">' +
+      (gen.length ? gen.map(function (k) { return chipBtn(k, LABEL[k]); }).join("") : '<span class="dx-sel-empty">All added.</span>') + '</div></div>';
+    // Step 2 · body system
+    html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">2</span> Involved system</div><div class="dx-sysrow">' +
+      SYSPICK.map(function (s) { return '<button class="dx-sys' + (S.system === s.id ? " on" : "") + '" data-sys="' + s.id + '">' + esc((s.icon ? s.icon + " " : "") + s.label) + '</button>'; }).join("") +
+      '</div></div>';
+    // Step 3 · findings for the chosen system (common first, rare behind Show more)
+    if (S.system) {
+      var fs = fieldsForSystem(S.system);
+      var avail = fs.fields.filter(function (fl) { return !S.f[fl.key]; });
+      var common = avail.slice(0, 6), rare = avail.slice(6);
+      html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">3</span> ' + esc(fs.sp ? fs.sp.label : "") + ' findings</div>' +
+        '<div class="dx-chips">' + (common.length ? common.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">All added.</span>') + '</div>';
+      if (rare.length) {
+        html += '<button class="dx-more-btn" id="dxMoreBtn">' + (S.showRare ? "▲ Show fewer" : "▼ Show more (" + rare.length + ")") + '</button>';
+        if (S.showRare) html += '<div class="dx-chips" style="margin-top:7px">' + rare.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") + '</div>';
+      }
+      html += '</div>';
+    }
+    el.innerHTML = html;
+    el.querySelectorAll(".dx-sys").forEach(function (b) {
+      b.addEventListener("click", function () { var id = b.getAttribute("data-sys"); S.system = (S.system === id ? null : id); S.showRare = false; renderPickerOnly(); });
     });
-    el.innerHTML = html || '<div class="dx-empty">No matching findings.</div>';
-    el.querySelectorAll(".dx-chip").forEach(function (b) {
+    var mb = el.querySelector("#dxMoreBtn");
+    if (mb) mb.addEventListener("click", function () { S.showRare = !S.showRare; renderPickerOnly(); });
+    wireAddChips(el);
+  }
+
+  // smart next-finding suggestions = top missing findings aggregated across the
+  // current leading differentials (data-driven; mimics consultant questioning)
+  function renderSuggest(d) {
+    var el = root.querySelector("#dxSuggest");
+    if (!el) return;
+    if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
+    var counts = {};
+    d.inf.slice(0, 5).concat(d.ni.slice(0, 5)).forEach(function (r) {
+      (r.missing || []).forEach(function (k) { if (!S.f[k] && LABEL[k]) counts[k] = (counts[k] || 0) + 1; });
+    });
+    var sug = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 6);
+    if (!sug.length) { el.innerHTML = ""; return; }
+    el.innerHTML = '<div class="dx-sugg-h">💡 Suggested next findings</div><div class="dx-chips">' +
+      sug.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") + '</div>';
+    el.querySelectorAll(".dx-chip[data-f]").forEach(function (b) {
       b.addEventListener("click", function () { S.f[b.getAttribute("data-f")] = true; S.started = true; recompute(); });
     });
   }
@@ -508,6 +577,31 @@
     if (!root) return;
     renderSelected(); renderPicker(); renderHosp();
     var d = differential();
+    renderSuggest(d);
+
+    // --- Clinical Information Threshold ---------------------------------- *
+    // Don't generate a differential after one nonspecific symptom. Require >=3
+    // findings, OR a highly discriminative finding, OR a syndrome whose own
+    // criteria are already met.
+    var nFind = Object.keys(S.f).length;
+    computeIDF();
+    var discriminative = false;
+    for (var fk in S.f) { if ((IDF[fk] || 0) >= 1.7) { discriminative = true; break; } }
+    var ready = nFind >= 3 || discriminative || d.inf.some(function (x) { return x.matched; });
+    var gateEl = root.querySelector("#dxGate"), polEl = root.querySelector("#dxPolicy"),
+        chEl = root.querySelector("#dxChanged"), colEl = root.querySelector("#dxCols");
+    if (!nFind) {
+      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none";
+      colEl.innerHTML = '<div class="dx-prompt">Select the general findings and the involved system above to begin reasoning.</div>';
+      S.prev = {}; return;
+    }
+    if (!ready) {
+      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none";
+      colEl.innerHTML = '<div class="dx-threshold">🧩 Please add more clinical findings to improve diagnostic accuracy.' +
+        '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential — use the suggestions above.</span></div>';
+      S.prev = {}; return;
+    }
+
     var g = gate(d), info = GATEINFO[g.cls];
     root.querySelector("#dxGate").innerHTML =
       '<div class="dx-gate-card ' + info.c + '"><div class="dx-gate-t">' + esc(info.t) + '</div>' +
@@ -564,7 +658,7 @@
     if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open() { ensureRoot(); root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
 
@@ -590,7 +684,20 @@
       ".dx-selected{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:9px;min-height:4px}",
       ".dx-sel-empty{font:500 12px var(--sans);color:var(--slate-soft)}",
       ".dx-sel-chip{background:var(--teal);border:none;color:#fff;border-radius:16px;padding:6px 11px;font:600 12px var(--sans);cursor:pointer}",
-      ".dx-picker{max-height:212px;overflow-y:auto;border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--panel)}",
+      ".dx-picker{border:1px solid var(--line);border-radius:11px;padding:10px 12px;background:var(--panel)}",
+      ".dx-suggest{margin-bottom:9px}",
+      ".dx-sugg-h{font:700 11px var(--sans);color:var(--teal);margin-bottom:6px}",
+      ".dx-chip.sug{border-color:var(--teal);color:var(--teal);background:var(--teal-soft)}",
+      ".dx-step{margin:2px 0 12px}",
+      ".dx-step-h{font:700 11.5px var(--sans);color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:7px}",
+      ".dx-step-n{width:18px;height:18px;border-radius:50%;background:var(--teal);color:#fff;font:800 11px var(--sans);display:inline-flex;align-items:center;justify-content:center}",
+      ".dx-sysrow{display:flex;flex-wrap:wrap;gap:7px}",
+      ".dx-sys{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px 12px;font:600 12.5px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
+      ".dx-sys.on{background:var(--teal);border-color:var(--teal);color:#fff}",
+      ".dx-more-btn{margin-top:8px;background:transparent;border:1px dashed var(--line);border-radius:9px;padding:7px 12px;font:600 12px var(--sans);color:var(--teal);cursor:pointer}",
+      ".dx-prompt{font:500 13px var(--sans);color:var(--slate-soft);padding:18px;text-align:center;border:1px dashed var(--line);border-radius:11px}",
+      ".dx-threshold{font:700 13.5px var(--sans);color:var(--ink);padding:18px;text-align:center;border:1.5px dashed var(--teal);border-radius:12px;background:var(--teal-soft);line-height:1.5}",
+      ".dx-threshold span{display:block;font:500 12px var(--sans);color:var(--slate-soft);margin-top:6px}",
       ".dx-cat{margin:4px 0 11px}",
       ".dx-cat-h{font:700 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft);margin-bottom:6px}",
       ".dx-chips{display:flex;flex-wrap:wrap;gap:6px}",
