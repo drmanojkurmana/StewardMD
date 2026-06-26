@@ -65,7 +65,11 @@
       { key: "oliguria", label: "Oliguria / anuria" },
       { key: "mucosalLesions", label: "Mucosal erosions / skin detachment" },
       { key: "facialSwelling", label: "Facial / upper-body swelling" },
-      { key: "sickleCellHx", label: "Known sickle cell disease" }
+      { key: "sickleCellHx", label: "Known sickle cell disease" },
+      { key: "headInjury", label: "Recent head injury / fall" },
+      { key: "alcoholExcess", label: "Alcohol excess / dependence" },
+      { key: "ataxia", label: "Ataxia / unsteady gait" },
+      { key: "proteinuria", label: "Frothy urine / heavy proteinuria" }
     ]}
   ];
 
@@ -389,7 +393,91 @@
     { id:"sjs_ten", name:"Stevens-Johnson syndrome / TEN", system:"Dermatology / Emergency",
       find:{ rash:26, mucosalLesions:34, drugOverdose:14, fever:12 },
       inv:["Stop the culprit drug","Dermatology review","SCORTEN severity"], red:["Skin detachment — manage like a burn; high mortality"],
-      reason:"Painful rash with mucosal erosions and skin detachment after a new drug suggests SJS/TEN, not cellulitis." }
+      reason:"Painful rash with mucosal erosions and skin detachment after a new drug suggests SJS/TEN, not cellulitis." },
+
+    /* ---- Neurology (vascular / chronic / deficiency) ---- */
+    { id:"tia", name:"Transient ischaemic attack", system:"Neurology / Vascular",
+      find:{ focalNeuroDeficit:38, ageOver50:12, hypertensionHx:10, atrialFibHx:10, fever:-16, neckStiffness:-12 },
+      inv:["Urgent CT/MRI + carotid imaging","ECG (AF)","ABCD² risk; start antiplatelet/statin"], red:["High early stroke risk — urgent TIA clinic / admission"],
+      reason:"Transient focal neurological deficit that fully resolves suggests a TIA — high short-term stroke risk." },
+    { id:"subdural", name:"Subdural haematoma", system:"Neurology / Vascular",
+      find:{ headache:22, alteredSensorium:22, focalNeuroDeficit:18, headInjury:26, anticoagulated:18, ageOver50:10, fever:-10 },
+      inv:["Non-contrast CT head","Coagulation; reverse anticoagulation","Neurosurgical review"], red:["Expanding bleed — may need evacuation"],
+      reason:"Headache and fluctuating consciousness after a fall, especially elderly/anticoagulated, suggests a subdural haematoma." },
+    { id:"wernicke", name:"Wernicke encephalopathy", system:"Neurology / Nutrition",
+      find:{ alteredSensorium:24, ataxia:26, visualDisturbance:16, alcoholExcess:30, fever:-8 },
+      inv:["Clinical triad (confusion, ataxia, ophthalmoplegia)","Give IV thiamine BEFORE glucose"], red:["Reversible — treat empirically with thiamine, do not delay"],
+      reason:"Confusion, ataxia and eye signs in an alcohol-dependent or malnourished patient is Wernicke until proven otherwise." },
+    { id:"ms", name:"Multiple sclerosis (relapse)", system:"Neurology",
+      find:{ focalNeuroDeficit:30, visualDisturbance:24, ataxia:12, fever:-12 },
+      inv:["MRI brain/cord with contrast","CSF oligoclonal bands","Evoked potentials"], red:["Exclude infection before high-dose steroids"],
+      reason:"Subacute neurological deficits disseminated in time and space (e.g. optic neuritis) suggest demyelination." },
+
+    /* ---- Rheumatology (chronic) ---- */
+    { id:"rheumatoid", name:"Rheumatoid arthritis", system:"Rheumatology",
+      find:{ polyarthralgia:32, jointSwelling:26, weightLoss:6, fever:-6 },
+      inv:["RF, anti-CCP, ESR/CRP","X-rays of hands/feet"], red:["Septic arthritis can complicate a known RA joint"],
+      reason:"Symmetrical small-joint pain and swelling with morning stiffness suggests rheumatoid arthritis." },
+    { id:"pmr", name:"Polymyalgia rheumatica", system:"Rheumatology",
+      find:{ polyarthralgia:28, ageOver50:24, weightLoss:10, fever:4 },
+      inv:["ESR/CRP (markedly raised)","Assess for giant cell arteritis"], red:["Watch for GCA — visual symptoms need urgent steroids"],
+      reason:"Proximal shoulder/hip girdle pain and stiffness in an older patient with high ESR suggests PMR." },
+
+    /* ---- Hepatology / GI (chronic) ---- */
+    { id:"decomp_cirrhosis", name:"Decompensated cirrhosis", system:"Hepatology",
+      find:{ ascites:30, jaundice:24, asterixis:14, legSwellingBilateral:14, alteredSensorium:8, fever:-6 },
+      inv:["LFTs, INR, ammonia","Ascitic tap (exclude SBP)","Identify decompensation trigger"], red:["Always tap ascites to exclude SBP (an infective trigger)"],
+      reason:"Ascites and jaundice with stigmata of chronic liver disease suggest decompensated cirrhosis — look for a precipitant." },
+    { id:"ibs", name:"Irritable bowel syndrome", system:"Gastroenterology",
+      find:{ abdominalPain:24, constipationOrDiarrhea:18, fever:-14, weightLoss:-10, bloodyStool:-12 },
+      inv:["Diagnosis of exclusion (Rome criteria)","Check alarm features absent"], red:["Weight loss, bleeding or anaemia argue AGAINST IBS — investigate"],
+      reason:"Chronic abdominal pain with altered bowel habit and NO alarm features suggests IBS." },
+
+    /* ---- Nephrology (chronic) ---- */
+    { id:"ckd", name:"Chronic kidney disease", system:"Nephrology",
+      find:{ legSwellingBilateral:18, oliguria:10, weightLoss:6, alteredSensorium:6, fever:-8 },
+      inv:["eGFR trend, urinalysis","Renal ultrasound (small kidneys)","Anaemia/bone profile"], red:["Distinguish from AKI; manage complications (K⁺, acidosis, anaemia)"],
+      reason:"Longstanding reduced renal function with anaemia and small kidneys indicates CKD rather than acute injury." },
+    { id:"nephrotic", name:"Nephrotic syndrome", system:"Nephrology",
+      find:{ legSwellingBilateral:28, facialSwelling:22, proteinuria:30, fever:-6 },
+      inv:["Urine protein:creatinine (heavy)","Serum albumin, lipids","Renal biopsy if indicated"], red:["Thrombosis & infection risk; consider underlying cause"],
+      reason:"Heavy proteinuria with oedema and hypoalbuminaemia defines the nephrotic syndrome." },
+
+    /* ---- Haematology / oncology (chronic) ---- */
+    { id:"itp", name:"Immune thrombocytopenia (ITP)", system:"Hematology",
+      find:{ mucocutaneousBleeding:32, thrombocytopenia:30, fever:-10, alteredSensorium:-6 },
+      inv:["CBC + film (isolated thrombocytopenia)","Exclude secondary causes"], red:["Major bleeding / very low platelets need urgent treatment"],
+      reason:"Isolated thrombocytopenia with mucocutaneous bleeding in a well patient suggests ITP." },
+    { id:"myeloma", name:"Multiple myeloma", system:"Hematology / Oncology",
+      find:{ backPain:26, ageOver50:16, weightLoss:14, oliguria:8, fever:-4 },
+      inv:["Serum/urine protein electrophoresis, free light chains","Calcium, renal function, CBC","Skeletal survey/MRI"], red:["Hypercalcaemia, renal failure, cord compression are emergencies (CRAB)"],
+      reason:"Bone pain, anaemia, renal impairment and hypercalcaemia (CRAB) in an older patient suggests myeloma." },
+    { id:"lung_cancer", name:"Lung cancer", system:"Oncology / Pulmonary",
+      find:{ hemoptysis:28, weightLoss:24, ageOver50:14, cough:14, lymphadenopathy:8, fever:-4 },
+      inv:["CXR / CT chest","Bronchoscopy / biopsy","Staging imaging"], red:["Haemoptysis with weight loss in a smoker — urgent 2-week-wait pathway"],
+      reason:"Haemoptysis and weight loss in an older smoker raise concern for bronchogenic carcinoma." },
+    { id:"sarcoidosis", name:"Sarcoidosis", system:"Pulmonary / Multisystem",
+      find:{ lymphadenopathy:22, dyspnea:16, polyarthralgia:14, cough:12, rash:10, fever:6 },
+      inv:["CXR (bilateral hilar lymphadenopathy)","Serum ACE, calcium","Biopsy (non-caseating granuloma)"], red:["Exclude TB/lymphoma before steroids"],
+      reason:"Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma." },
+
+    /* ---- Electrolyte / metabolic / functional ---- */
+    { id:"hyponatremia", name:"Symptomatic hyponatraemia / SIADH", system:"Metabolic",
+      find:{ alteredSensorium:24, seizure:14, nauseaVomiting:12, fever:-8 },
+      inv:["Serum & urine osmolality, urine Na⁺","Volume status assessment"], red:["Correct slowly (osmotic demyelination risk)"],
+      reason:"Confusion or seizures with low sodium suggest symptomatic hyponatraemia — establish the mechanism before correcting." },
+    { id:"hyperkalemia", name:"Hyperkalaemia", system:"Metabolic / Nephrology",
+      find:{ palpitations:18, ascendingWeakness:16, bradycardia:10, oliguria:10 },
+      inv:["Urgent ECG (peaked T waves)","Repeat K⁺, renal function","Calcium gluconate + insulin-dextrose"], red:["Risk of fatal arrhythmia — treat empirically on ECG changes"],
+      reason:"Weakness and bradyarrhythmia with renal impairment suggest hyperkalaemia — an ECG-confirmed emergency." },
+    { id:"panic", name:"Panic attack / anxiety", system:"Functional",
+      find:{ palpitations:28, chestPain:16, dyspnea:16, fever:-16, hypoxia:-12, ecgIschemia:-12 },
+      inv:["Diagnosis of exclusion — rule out ACS/PE first","ECG normal"], red:["Do not anchor on anxiety until cardiac/pulmonary emergencies excluded"],
+      reason:"Palpitations, chest tightness and breathlessness in a young patient with normal workup may be a panic attack — but exclude organic causes." },
+    { id:"angioedema_acei", name:"ACE-inhibitor / hereditary angioedema", system:"Allergy / Emergency",
+      find:{ facialSwelling:34, dyspnea:18, rash:-12, fever:-8 },
+      inv:["Airway assessment","C1-esterase inhibitor / C4 if recurrent"], red:["Airway swelling — secure airway; not always histamine-mediated"],
+      reason:"Facial/tongue swelling WITHOUT urticaria (often on an ACE inhibitor) suggests bradykinin-mediated angioedema." }
   ];
 
   /* ---------------------------------------------------------------------- *
@@ -437,7 +525,11 @@
     gbs:"CNS infection / polio", myasthenic_crisis:"aspiration pneumonia", cord_compression:"spinal/epidural abscess",
     hhs:"sepsis", myxedema:"sepsis", serotonin_nms:"meningitis / sepsis", opioid_od:"CNS infection",
     salicylate_tox:"sepsis", organophosphate:"sepsis", dic:"sepsis", acute_leukemia:"PUO / occult infection",
-    variceal_bleed:"SBP", svc_obstruction:"mediastinitis", aki:"urosepsis", rhabdo:"sepsis", sjs_ten:"cellulitis / SSSS"
+    variceal_bleed:"SBP", svc_obstruction:"mediastinitis", aki:"urosepsis", rhabdo:"sepsis", sjs_ten:"cellulitis / SSSS",
+    tia:"meningitis / encephalitis", subdural:"meningitis", wernicke:"CNS infection", ms:"CNS infection",
+    decomp_cirrhosis:"SBP", ibs:"infective colitis", nephrotic:"cellulitis (oedema)", myeloma:"vertebral osteomyelitis",
+    lung_cancer:"TB / pneumonia", sarcoidosis:"TB", hyponatremia:"CNS infection", panic:"sepsis (tachypnoea)",
+    angioedema_acei:"Ludwig's angina / deep-neck infection"
   };
 
   /* ---------------------------------------------------------------------- *
@@ -775,7 +867,9 @@
     bradypnea:["bradypnea","slow breathing","depressed respiration","low respiratory rate"],
     miosisSecretions:["pinpoint pupil","miosis","salivation","cholinergic"], mucocutaneousBleeding:["bleeding","mucosal bleed","bruising","petechiae"],
     oliguria:["oliguria","anuria","reduced urine","low urine output"], mucosalLesions:["mucosal erosion","skin peeling","skin detachment","mucositis"],
-    facialSwelling:["facial swelling","facial oedema","facial edema"], darkUrine:["dark urine","tea-coloured urine","tea colored urine"]
+    facialSwelling:["facial swelling","facial oedema","facial edema","tongue swelling","lip swelling"], darkUrine:["dark urine","tea-coloured urine","tea colored urine"],
+    headInjury:["head injury","fall","fell","trauma to head"], alcoholExcess:["alcohol","alcoholic","drinks heavily","etoh"],
+    ataxia:["ataxia","unsteady","unsteady gait","incoordination"], proteinuria:["frothy urine","proteinuria","heavy protein"]
   };
   function parseFreeText(text) {
     if (!text) return;
