@@ -54,7 +54,18 @@
       { key: "anticoagulated", label: "On anticoagulation" },
       { key: "ageOver50", label: "Age > 50" },
       { key: "atrialFibHx", label: "Known atrial fibrillation" },
-      { key: "pulsatileMass", label: "Pulsatile abdominal mass" }
+      { key: "pulsatileMass", label: "Pulsatile abdominal mass" },
+      { key: "ascendingWeakness", label: "Ascending weakness / areflexia" },
+      { key: "rigidity", label: "Muscle rigidity" },
+      { key: "hypothermia", label: "Hypothermia" },
+      { key: "bradycardia", label: "Bradycardia" },
+      { key: "bradypnea", label: "Slow / depressed breathing" },
+      { key: "miosisSecretions", label: "Miosis + excess secretions (cholinergic)" },
+      { key: "mucocutaneousBleeding", label: "Mucocutaneous bleeding" },
+      { key: "oliguria", label: "Oliguria / anuria" },
+      { key: "mucosalLesions", label: "Mucosal erosions / skin detachment" },
+      { key: "facialSwelling", label: "Facial / upper-body swelling" },
+      { key: "sickleCellHx", label: "Known sickle cell disease" }
     ]}
   ];
 
@@ -296,7 +307,89 @@
     { id:"ttp_hus", name:"Thrombotic microangiopathy (TTP/HUS)", system:"Hematology",
       find:{ thrombocytopenia:30, alteredSensorium:16, fever:10, focalNeuroDeficit:8, hematuria:6 },
       inv:["Blood film (schistocytes)","LDH, haptoglobin, bilirubin","ADAMTS13"], red:["Haematological emergency — urgent plasma exchange"],
-      reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively." }
+      reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively." },
+
+    /* ---- Neurology / neuromuscular ---- */
+    { id:"gbs", name:"Guillain-Barré syndrome", system:"Neurology",
+      find:{ ascendingWeakness:42, focalNeuroDeficit:12, dyspnea:12, fever:-8, neckStiffness:-6 },
+      inv:["Nerve conduction studies","CSF (albuminocytologic dissociation)","Serial vital capacity / NIF"], red:["Respiratory failure & autonomic instability — monitor FVC, may need ventilation"],
+      reason:"Progressive ascending weakness with areflexia and no fever suggests Guillain-Barré; watch respiratory function." },
+    { id:"myasthenic_crisis", name:"Myasthenic crisis", system:"Neurology",
+      find:{ dyspnea:26, visualDisturbance:18, ascendingWeakness:16, fever:-6 },
+      inv:["Serial FVC/NIF","Anti-AChR / anti-MuSK","Exclude infective trigger"], red:["Bulbar/respiratory weakness — airway support; avoid precipitating drugs"],
+      reason:"Fatigable weakness with diplopia and respiratory compromise suggests a myasthenic crisis." },
+    { id:"cord_compression", name:"Spinal cord compression", system:"Neurology / Emergency",
+      find:{ backPain:28, focalNeuroDeficit:26, urinaryRetention:18, fever:-4 },
+      inv:["Urgent whole-spine MRI","Neurosurgical / oncology review"], red:["Time-critical for neurological recovery; high-dose steroids if malignant"],
+      reason:"Back pain with limb weakness and bladder dysfunction is cord compression until proven otherwise — image urgently." },
+
+    /* ---- Endocrine / metabolic ---- */
+    { id:"hhs", name:"Hyperosmolar hyperglycaemic state", system:"Endocrine",
+      find:{ polyuriaPolydipsia:30, alteredSensorium:26, diabetesHx:22, ketonemia:-10, fever:-4 },
+      inv:["Glucose, osmolality, electrolytes","Venous gas (minimal ketosis)","Search for precipitant"], red:["Profound dehydration — careful fluid/insulin; precipitant often infection"],
+      reason:"Marked hyperglycaemia with hyperosmolar altered sensorium and minimal ketosis suggests HHS rather than DKA." },
+    { id:"myxedema", name:"Myxoedema coma", system:"Endocrine",
+      find:{ alteredSensorium:26, hypothermia:30, bradycardia:14, fever:-8 },
+      inv:["TFTs, cortisol","ECG, electrolytes (Na↓)"], red:["IV thyroxine + hydrocortisone; treat precipitant"],
+      reason:"Altered sensorium with hypothermia and bradycardia in a hypothyroid patient suggests myxoedema coma." },
+    { id:"pheo", name:"Phaeochromocytoma crisis", system:"Endocrine",
+      find:{ palpitations:26, headache:22, hypertensionHx:18, tachycardia:10, rash:-6 },
+      inv:["Plasma/urine metanephrines","CT/MRI adrenals"], red:["Paroxysmal severe hypertension — alpha-blockade before beta"],
+      reason:"Episodic headache, palpitations and sweating with paroxysmal hypertension suggests a catecholamine-secreting tumour." },
+    { id:"hypercalcemia", name:"Hypercalcaemia of malignancy", system:"Oncology / Metabolic",
+      find:{ alteredSensorium:18, polyuriaPolydipsia:18, nauseaVomiting:12, malignancy:24, constipationOrDiarrhea:8 },
+      inv:["Corrected calcium, PTH/PTHrP","Renal function"], red:["Severe hypercalcaemia — IV fluids + bisphosphonate"],
+      reason:"'Stones, bones, groans, moans' with known malignancy suggests hypercalcaemia." },
+
+    /* ---- Toxicology ---- */
+    { id:"opioid_od", name:"Opioid overdose", system:"Toxicology",
+      find:{ alteredSensorium:30, drugOverdose:34, bradypnea:28, fever:-8 },
+      inv:["Clinical (pinpoint pupils, ↓RR)","Trial of naloxone"], red:["Respiratory depression — naloxone + airway support"],
+      reason:"Reduced consciousness with depressed respiration and pinpoint pupils is opioid toxicity until proven otherwise." },
+    { id:"salicylate_tox", name:"Salicylate toxicity", system:"Toxicology",
+      find:{ tachypnea:24, alteredSensorium:18, drugOverdose:24, nauseaVomiting:10, fever:6 },
+      inv:["Salicylate level (serial)","ABG (mixed acid-base)","Glucose, electrolytes"], red:["Consider urinary alkalinisation / dialysis"],
+      reason:"Tachypnoea with a mixed respiratory alkalosis/metabolic acidosis and tinnitus suggests salicylate poisoning." },
+    { id:"serotonin_nms", name:"Serotonin syndrome / NMS", system:"Toxicology / Neuro",
+      find:{ fever:18, rigidity:32, alteredSensorium:18, drugOverdose:16, tachycardia:10 },
+      inv:["Medication review (serotonergics/antipsychotics)","CK, renal function","Temperature"], red:["Hyperthermia + rigidity — stop agent, cooling, supportive ICU care"],
+      reason:"Fever with rigidity/clonus and altered mental state after serotonergic or antipsychotic drugs suggests a toxidrome, not infection." },
+    { id:"organophosphate", name:"Organophosphate / cholinergic poisoning", system:"Toxicology",
+      find:{ miosisSecretions:38, drugOverdose:18, alteredSensorium:12, bradycardia:10 },
+      inv:["Clinical cholinergic toxidrome","Plasma/RBC cholinesterase"], red:["Atropine + pralidoxime; airway/secretion control"],
+      reason:"Miosis, hypersalivation and bradycardia after exposure suggest organophosphate poisoning." },
+
+    /* ---- Haematology / oncology ---- */
+    { id:"dic", name:"Disseminated intravascular coagulation", system:"Hematology",
+      find:{ mucocutaneousBleeding:32, thrombocytopenia:24, hypotension:12, fever:6 },
+      inv:["PT/APTT, fibrinogen, D-dimer","Blood film","Treat the underlying trigger"], red:["Often secondary to sepsis/malignancy — treat the cause"],
+      reason:"Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC — find and treat the trigger." },
+    { id:"acute_leukemia", name:"Acute leukaemia", system:"Hematology / Oncology",
+      find:{ mucocutaneousBleeding:20, lymphadenopathy:16, weightLoss:14, fever:12, hepatosplenomegaly:14, nightSweats:10 },
+      inv:["CBC + peripheral smear (blasts)","Bone marrow","Coagulation (APML risk)"], red:["Febrile neutropenia / leukostasis are emergencies"],
+      reason:"Cytopenias with bleeding, infections and blasts on film suggest acute leukaemia." },
+    { id:"variceal_bleed", name:"Variceal bleeding", system:"Hepatology / GI",
+      find:{ hematemesis:34, melena:22, jaundice:14, ascites:10, hypotension:10 },
+      inv:["Urgent upper GI endoscopy","Crossmatch, coagulation","Vasoactive (terlipressin) + antibiotic prophylaxis"], red:["Major haemorrhage — resuscitate; antibiotics reduce mortality in cirrhotic GI bleed"],
+      reason:"Haematemesis/melaena in a patient with chronic liver disease suggests variceal bleeding." },
+    { id:"svc_obstruction", name:"Superior vena cava obstruction", system:"Oncology / Emergency",
+      find:{ facialSwelling:34, dyspnea:18, malignancy:16, cough:8 },
+      inv:["CT chest with contrast","Tissue diagnosis"], red:["Airway/cerebral oedema — urgent oncology/radiotherapy"],
+      reason:"Facial/upper-body swelling with distended neck veins and dyspnoea suggests SVC obstruction, often malignant." },
+
+    /* ---- Nephrology / dermatology ---- */
+    { id:"aki", name:"Acute kidney injury", system:"Nephrology",
+      find:{ oliguria:30, nauseaVomiting:10, legSwellingBilateral:12, alteredSensorium:8 },
+      inv:["Renal function, electrolytes (K⁺)","Urinalysis, urine output","Renal ultrasound (obstruction)"], red:["Hyperkalaemia / pulmonary oedema / acidosis may need dialysis"],
+      reason:"Falling urine output with rising creatinine indicates AKI — define pre-renal / renal / post-renal and act on hyperkalaemia." },
+    { id:"rhabdo", name:"Rhabdomyolysis", system:"Nephrology / Metabolic",
+      find:{ myalgiaArthralgia:24, darkUrine:30, oliguria:14, alteredSensorium:6 },
+      inv:["Creatine kinase (markedly raised)","Renal function, K⁺","Urine myoglobin"], red:["Aggressive fluids; watch hyperkalaemia and AKI"],
+      reason:"Muscle pain with tea-coloured urine and very high CK indicates rhabdomyolysis with AKI risk." },
+    { id:"sjs_ten", name:"Stevens-Johnson syndrome / TEN", system:"Dermatology / Emergency",
+      find:{ rash:26, mucosalLesions:34, drugOverdose:14, fever:12 },
+      inv:["Stop the culprit drug","Dermatology review","SCORTEN severity"], red:["Skin detachment — manage like a burn; high mortality"],
+      reason:"Painful rash with mucosal erosions and skin detachment after a new drug suggests SJS/TEN, not cellulitis." }
   ];
 
   /* ---------------------------------------------------------------------- *
@@ -340,7 +433,11 @@
     pancreatitis:"intra-abdominal sepsis", malignancy_b:"occult infection / PUO",
     ild:"pneumonia", pleural_effusion:"empyema", tamponade:"septic shock", toxic_hepatitis:"viral hepatitis",
     ibd_flare:"infective colitis", ttp_hus:"sepsis / meningococcaemia", sle_flare:"PUO / sepsis", vasculitis:"endocarditis / PUO",
-    glomerulonephritis:"UTI / post-infectious", htn_emergency:"meningitis / encephalitis"
+    glomerulonephritis:"UTI / post-infectious", htn_emergency:"meningitis / encephalitis",
+    gbs:"CNS infection / polio", myasthenic_crisis:"aspiration pneumonia", cord_compression:"spinal/epidural abscess",
+    hhs:"sepsis", myxedema:"sepsis", serotonin_nms:"meningitis / sepsis", opioid_od:"CNS infection",
+    salicylate_tox:"sepsis", organophosphate:"sepsis", dic:"sepsis", acute_leukemia:"PUO / occult infection",
+    variceal_bleed:"SBP", svc_obstruction:"mediastinitis", aki:"urosepsis", rhabdo:"sepsis", sjs_ten:"cellulitis / SSSS"
   };
 
   /* ---------------------------------------------------------------------- *
@@ -672,7 +769,13 @@
     hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"],
     thrombocytopenia:["thrombocytopenia","low platelet"], polyarthralgia:["arthralgia","polyarthritis","joint pain","joint pains"],
     visualDisturbance:["visual loss","blurred vision","vision loss","diplopia"], bloodyStool:["bloody stool","blood in stool","hematochezia","rectal bleed"],
-    raisedJVP:["raised jvp","elevated jvp"], hypertensionHx:["hypertensive","high bp","htn"]
+    raisedJVP:["raised jvp","elevated jvp"], hypertensionHx:["hypertensive","high bp","htn"],
+    ascendingWeakness:["ascending weakness","areflexia","ascending paralysis"], rigidity:["rigidity","rigid"],
+    hypothermia:["hypothermia","hypothermic","low temperature"], bradycardia:["bradycardia","slow heart"],
+    bradypnea:["bradypnea","slow breathing","depressed respiration","low respiratory rate"],
+    miosisSecretions:["pinpoint pupil","miosis","salivation","cholinergic"], mucocutaneousBleeding:["bleeding","mucosal bleed","bruising","petechiae"],
+    oliguria:["oliguria","anuria","reduced urine","low urine output"], mucosalLesions:["mucosal erosion","skin peeling","skin detachment","mucositis"],
+    facialSwelling:["facial swelling","facial oedema","facial edema"], darkUrine:["dark urine","tea-coloured urine","tea colored urine"]
   };
   function parseFreeText(text) {
     if (!text) return;
