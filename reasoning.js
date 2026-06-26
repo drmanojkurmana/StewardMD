@@ -533,6 +533,51 @@
   };
 
   /* ---------------------------------------------------------------------- *
+   * CONSULTANT REASONING META — weighted findings + organ-system mapping.
+   * Diagnostic value is NOT equal: a disease-defining sign (neck stiffness)
+   * far outweighs a non-specific one (fever). The dominant organ system,
+   * derived from weighted findings, shapes the differential.
+   * ---------------------------------------------------------------------- */
+  var FW_VERYHIGH = {neckStiffness:1,pleuriticChestPain:1,murphySign:1,hemoptysis:1,focalNeuroDeficit:1,hypotension:1,thunderclapHeadache:1,ecgIschemia:1,ascendingWeakness:1,miosisSecretions:1,mucosalLesions:1,costovertebralTenderness:1,exertionalChestPain:1,ketonemia:1,raisedJVP:1,pulsatileMass:1,asterixis:1,petechialRash:1,oliguria:1,proteinuria:1,eschar:1,bilateralCrackles:1,hematemesis:1,facialSwelling:1,sickleCellHx:1,rigidity:1,photophobia:1,bloodyStool:1,jaundice:1,seizure:1,hematuria:1,thrombocytopenia:1};
+  var FW_LOW = {fever:1,headache:1,fatigue:1,weakness:1,malaise:1,tachycardia:1,tachypnea:1,rigors:1,cough:1,nauseaVomiting:1,myalgiaArthralgia:1,weightLoss:1,ageOver50:1};
+  function fw(k) { return FW_VERYHIGH[k] ? 3 : (FW_LOW[k] ? 1 : 2); }
+
+  var GROUP_TAG = { "General / Vitals":"GEN","Respiratory":"RESP","Gastrointestinal":"GI","Genitourinary":"GU","Central Nervous System":"CNS","Cardiac":"CVS","Tropical Fever":"ID","Skin / Soft Tissue":"DERM","Sepsis / Oncology-Specific":"GEN" };
+  var EXTRA_TAG = { headache:"CNS",thunderclapHeadache:"CNS",chestPain:"CVS",pleuriticChestPain:"RESP",exertionalChestPain:"CVS",dyspnea:"RESP",orthopnea:"CVS",palpitations:"CVS",backPain:"MSK",visualDisturbance:"CNS",polyarthralgia:"MSK",legSwellingUnilateral:"CVS",legSwellingBilateral:"CVS",calfTenderness:"CVS",raisedJVP:"CVS",bilateralCrackles:"RESP",asterixis:"HEP",ecgIschemia:"CVS",ketonemia:"ENDO",polyuriaPolydipsia:"ENDO",knownCAD:"CVS",knownHeartFailure:"CVS",hypertensionHx:"CVS",diabetesHx:"ENDO",steroidUse:"ENDO",drugOverdose:"TOX",anticoagulated:"HEME",atrialFibHx:"CVS",pulsatileMass:"CVS",hematemesis:"GI",hematuria:"GU",jointSwelling:"MSK",ascendingWeakness:"CNS",rigidity:"TOX",hypothermia:"GEN",bradycardia:"CVS",bradypnea:"RESP",miosisSecretions:"TOX",mucocutaneousBleeding:"HEME",oliguria:"RENAL",mucosalLesions:"DERM",facialSwelling:"GEN",sickleCellHx:"HEME",headInjury:"CNS",alcoholExcess:"GEN",ataxia:"CNS",proteinuria:"RENAL",jaundice:"HEP",rightUpperQuadrantPain:"HEP",murphySign:"HEP",ascites:"HEP",flankPain:"GU",dysuria:"GU",feverGU:"GU",costovertebralTenderness:"GU" };
+  var FSYS = {}; // findingKey -> organ tag (populated in buildOntology)
+
+  function dzTag(systemStr) {
+    var s = String(systemStr || "").toLowerCase();
+    if (/neuro|cns|central nervous/.test(s)) return "CNS";
+    if (/cardio|cardiac|vascular/.test(s)) return "CVS";
+    if (/pulmon|resp|lung/.test(s)) return "RESP";
+    if (/genitourinary|urolog|urinary/.test(s)) return "GU";
+    if (/hepat|liver|biliary/.test(s)) return "HEP";
+    if (/gastro|gi\b|abdom/.test(s)) return "GI";
+    if (/rheum|musculoskeletal|joint/.test(s)) return "MSK";
+    if (/hemat|heme/.test(s)) return "HEME";
+    if (/endocrin|metabolic/.test(s)) return "ENDO";
+    if (/nephro|renal/.test(s)) return "RENAL";
+    if (/tox/.test(s)) return "TOX";
+    if (/derm|skin/.test(s)) return "DERM";
+    return "GEN";
+  }
+  var TAG_LABEL = { CNS:"Neurological", CVS:"Cardiovascular", RESP:"Respiratory", GU:"Genitourinary", HEP:"Hepatobiliary", GI:"Gastrointestinal", MSK:"Musculoskeletal", HEME:"Haematological", ENDO:"Endocrine/Metabolic", RENAL:"Renal", TOX:"Toxicological", DERM:"Dermatological", ID:"Systemic/Infective", GEN:"General" };
+  // dominant organ system(s) from the weighted findings present
+  function dominantSystems() {
+    var sc = {};
+    for (var k in S.f) { var t = FSYS[k] || "GEN"; if (t === "GEN" || t === "ID") continue; sc[t] = (sc[t] || 0) + fw(k); }
+    var max = 0, t2; for (t2 in sc) if (sc[t2] > max) max = sc[t2];
+    var dom = {}; if (max >= 2) { for (t2 in sc) if (sc[t2] >= max - 1 && sc[t2] >= 2) dom[t2] = sc[t2]; }
+    return { scores: sc, dom: dom, max: max };
+  }
+  function systemMod(tag, hasVHIsupport, dom) {
+    if (!Object.keys(dom).length || tag === "GEN" || tag === "ID") return 0;
+    if (dom[tag]) return 6;                 // diagnosis lies in a dominant system
+    return hasVHIsupport ? 0 : -12;         // outside dominant system & no strong (very-high) evidence
+  }
+
+  /* ---------------------------------------------------------------------- *
    * ONTOLOGY — merge real FIELD_GROUPS with EXTRA_GROUPS
    * ---------------------------------------------------------------------- */
   var ONT = null, LABEL = {}, VALID = {}, GENERAL = [], SYSPICK = [];
@@ -542,7 +587,12 @@
     (EXTRA_GROUPS).forEach(function (g) { groups.push(g); });
     var fg = (window.FIELD_GROUPS || []);
     fg.forEach(function (g) { if (g && g.fields) groups.push({ group: g.group, fields: g.fields }); });
-    groups.forEach(function (g) { g.fields.forEach(function (fl) { LABEL[fl.key] = fl.label; VALID[fl.key] = true; }); });
+    groups.forEach(function (g) {
+      g.fields.forEach(function (fl) {
+        LABEL[fl.key] = fl.label; VALID[fl.key] = true;
+        FSYS[fl.key] = EXTRA_TAG[fl.key] || GROUP_TAG[g.group] || "GEN";
+      });
+    });
     ONT = groups;
     // Step-1 general findings + Step-2 body systems (from the live app ontology)
     GENERAL = (window.CORE_VITALS || ["fever","hypotension","tachycardia","tachypnea","alteredSensorium","hypoxia"]).filter(function (k) { return LABEL[k]; });
@@ -597,7 +647,9 @@
   // centralised finding-add so the reasoning timeline is recorded consistently
   function addFinding(k) {
     if (S.f[k]) return;
-    S.f[k] = true; S.started = true; S.lastAdded = LABEL[k] || k;
+    // snapshot pre-change scores so confidence deltas persist until the next finding
+    try { var dp = differential(); var snap = {}; dp.inf.concat(dp.ni).forEach(function (r) { snap[r.id] = r.score; }); S.prev = snap; } catch (e) {}
+    S.f[k] = true; S.started = true; S.lastAdded = LABEL[k] || k; S.lastAddedKey = k;
     try {
       var d0 = differential(); var top = d0.inf[0] || d0.ni[0];
       S.timeline.push({ f: LABEL[k] || k, top: top ? (top.name + " · " + top.score + "/100") : "—" });
@@ -626,14 +678,17 @@
     if (matched) {
       try { sc = clamp(Math.round(s.baseScore ? s.baseScore(S.fInf) : 60), 0, 100); } catch (e) { sc = 60; }
     } else {
-      // soft pre-match suggestion weighted by finding specificity (IDF), so a
-      // shared generic finding (fever) barely surfaces a syndrome while a
-      // specific one (neck stiffness) does. Capped below matched scores.
+      // soft pre-match suggestion weighted by finding specificity (IDF) AND
+      // diagnostic weight, so a shared generic finding (fever) barely surfaces
+      // a syndrome while a disease-defining one (neck stiffness) does.
       computeIDF();
-      var rel = 0; present.forEach(function (k) { rel += (IDF[k] || 0.5); });
+      var rel = 0; present.forEach(function (k) { rel += (IDF[k] || 0.5) * (fw(k) === 3 ? 1.6 : fw(k) === 1 ? 0.6 : 1); });
       sc = clamp(Math.round(rel * 13), 0, 56);
       if (sc < 16) return null; // below the noise floor — don't list
     }
+    // dominant-organ-system influence (consultant reasoning)
+    var hasVHI = present.some(function (k) { return fw(k) === 3; });
+    sc = clamp(sc + systemMod(dzTag(s.system), hasVHI, S._dom || {}), 0, 100);
     var missing = assoc.filter(function (k) { return !S.fInf[k]; }).slice(0, 5);
     // contradictory = entered findings whose removal RAISES the score (data-driven probe)
     var contra = [];
@@ -658,6 +713,8 @@
     if (!any) return null;
     var sc = clamp(Math.round(sum), 0, 100);
     if (sc <= 0 && sup.length === 0) return null;
+    var hasVHI = sup.some(function (k) { return fw(k) === 3; });
+    sc = clamp(sc + systemMod(dzTag(d.system), hasVHI, S._dom || {}), 0, 100);
     var missing = [];
     for (var k2 in d.find) { if (!S.f[k2] && d.find[k2] >= 12) missing.push(k2); }
     missing = missing.sort(function (a, b) { return d.find[b] - d.find[a]; }).slice(0, 5);
@@ -670,6 +727,7 @@
   function differential() {
     buildOntology();
     S.fInf = infFindings();
+    S._dom = dominantSystems().dom;
     var inf = [], ni = [];
     var syn = window.SYNDROMES || {};
     Object.keys(syn).forEach(function (id) { var r = scoreInfectious(syn[id]); if (r) inf.push(r); });
@@ -745,6 +803,7 @@
         '<div id="dxPolicy" class="dx-policy-wrap"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
         '<div id="dxCompare" class="dx-compare"></div>' +
+        '<div id="dxDom" class="dx-dom-wrap"></div>' +
         '<div id="dxCols" class="dx-cols"></div>' +
       '</div>';
     document.body.appendChild(root);
@@ -981,11 +1040,25 @@
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
     function fl(keys, c, sign) { return keys.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") || '<span class="dx-none">—</span>'; }
     var tools = toolsFor(r.id);
-    var det = '<div class="dx-detail">' +
+    var pv = S.prev[r.id];
+    var confLine = "";
+    if (pv != null && pv !== r.score) {
+      var eff = "";
+      if (S.lastAddedKey && r.supporting && r.supporting.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="up">' + esc(S.lastAdded) + ' supports this</span>';
+      else if (S.lastAddedKey && r.contra && r.contra.indexOf(S.lastAddedKey) >= 0) eff = ' · <span class="down">' + esc(S.lastAdded) + ' argues against this</span>';
+      else if (S.lastAdded) eff = ' · after adding ' + esc(S.lastAdded);
+      confLine = '<div class="dx-conf">Confidence ' + pv + ' → ' + r.score + eff + '</div>';
+    }
+    var whyNot = (rank > 1 && ((r.contra && r.contra.length) || (r.missing && r.missing.length)))
+      ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' +
+        ((r.contra && r.contra.length) ? "Contradicted by " + r.contra.map(lbl).join(", ") + ". " : "") +
+        ((r.missing && r.missing.length) ? "Would rank higher with " + r.missing.slice(0, 3).map(lbl).join(", ") + "." : "") + '</div></div>' : "";
+    var det = '<div class="dx-detail">' + confLine +
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
       '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
-      (r.reason ? '<div class="dx-d-row"><b>Reasoning</b><div class="dx-reason">' + esc(r.reason) + '</div></div>' : '') +
+      (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' + esc(r.reason) + '</div></div>' : '') +
+      whyNot +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
@@ -1133,16 +1206,21 @@
     var ready = nFind >= 3 || discriminative || d.inf.some(function (x) { return x.matched; });
     var gateEl = root.querySelector("#dxGate"), polEl = root.querySelector("#dxPolicy"),
         chEl = root.querySelector("#dxChanged"), colEl = root.querySelector("#dxCols");
+    var domEl = root.querySelector("#dxDom");
     if (!nFind) {
-      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none";
+      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none"; if (domEl) domEl.innerHTML = "";
       colEl.innerHTML = '<div class="dx-prompt">Select the general findings and the involved system above to begin reasoning.</div>';
       S.prev = {}; return;
     }
     if (!ready) {
-      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none";
+      gateEl.innerHTML = ""; polEl.innerHTML = ""; chEl.style.display = "none"; if (domEl) domEl.innerHTML = "";
       colEl.innerHTML = '<div class="dx-threshold">🧩 Please add more clinical findings to improve diagnostic accuracy.' +
         '<span>Add at least 3 findings (or one highly specific finding) to generate a reliable differential — use the suggestions above.</span></div>';
       S.prev = {}; return;
+    }
+    if (domEl) {
+      var domTags = Object.keys(S._dom || {});
+      domEl.innerHTML = domTags.length ? '<div class="dx-dom">🧭 Dominant system: <b>' + domTags.map(function (t) { return esc(TAG_LABEL[t] || t); }).join(" · ") + '</b> — shaping the differential</div>' : "";
     }
 
     var g = gate(d), info = GATEINFO[g.cls];
@@ -1169,9 +1247,8 @@
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
     renderCompare(d);
-    // snapshot scores for delta
-    var snap = {}; d.inf.concat(d.ni).forEach(function (r) { snap[r.id] = r.score; });
-    S.prev = snap;
+    // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
+    // overwrite it here, or confidence deltas would vanish on the next render.
   }
   // re-render only the columns (used on expand so we don't reset prev/delta)
   function renderColsOnly() {
@@ -1226,7 +1303,11 @@
     root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
   }
   function openWorkspace() { open({ workspace: true }); }
-  function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
+  function close() {
+    // sync findings back to the legacy wizard (one source of truth)
+    try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
+    if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
+  }
 
   /* ---------------------------------------------------------------------- *
    * STYLES + launch
@@ -1369,7 +1450,13 @@
       ".dx-cmp-name{font:800 12.5px var(--sans);line-height:1.3}",
       ".dx-cmp-name.inf{color:var(--red)}.dx-cmp-name.ni{color:var(--green)}",
       ".dx-cmp-score{font:800 17px var(--sans);color:var(--ink);margin:3px 0 6px}.dx-cmp-score small{font-size:10px;color:var(--slate-soft)}",
-      ".dx-cmp-lbl{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin:8px 0 3px}"
+      ".dx-cmp-lbl{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin:8px 0 3px}",
+      ".dx-dom-wrap:not(:empty){margin-bottom:10px}",
+      ".dx-dom{font:600 12px var(--sans);color:var(--ink);background:var(--teal-soft);border:1px solid var(--teal);border-radius:9px;padding:8px 12px}",
+      ".dx-dom b{color:var(--teal)}",
+      ".dx-conf{font:700 12px var(--sans);color:var(--ink);background:var(--paper);border-radius:8px;padding:7px 10px;margin:10px 0 2px}",
+      ".dx-conf .up{color:var(--green);font-weight:700}.dx-conf .down{color:var(--red);font-weight:700}",
+      ".dx-mimic{font-size:9.5px}"
     ].join("");
     var st = document.createElement("style"); st.id = "dx-styles"; st.textContent = css; document.head.appendChild(st);
   }
