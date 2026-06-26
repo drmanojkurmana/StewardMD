@@ -652,7 +652,7 @@
     S.f[k] = true; S.started = true; S.lastAdded = LABEL[k] || k; S.lastAddedKey = k;
     try {
       var d0 = differential(); var top = d0.inf[0] || d0.ni[0];
-      S.timeline.push({ f: LABEL[k] || k, top: top ? (top.name + " · " + top.score + "/100") : "—" });
+      S.timeline.push({ f: LABEL[k] || k, topName: top ? top.name : null, topScore: top ? top.score : null });
     } catch (e) {}
     recompute();
   }
@@ -941,7 +941,7 @@
       if (hit) { S.f[k] = true; added++; }
     });
     S.started = true;
-    S.timeline.push({ f: "free-text (" + added + " findings extracted)", top: "" });
+    S.timeline.push({ f: "free-text (" + added + " findings extracted)", topName: null, topScore: null });
     recompute();
   }
   function loadSessions() { try { return JSON.parse(localStorage.getItem("stewardmd_rx_sessions") || "[]"); } catch (e) { return []; } }
@@ -1011,7 +1011,12 @@
         '<button class="dx-adv-btn" id="dxPrint">🖨 Print</button>' +
       '</div>' +
       (sessions.length ? '<div class="dx-sess-h">Saved sessions</div><div class="dx-sess">' + sessions.map(function (s, i) { return '<button class="dx-sess-item" data-i="' + i + '">' + esc(s.label) + ' <span>' + esc(s.when) + '</span></button>'; }).join("") + '</div>' : '') +
-      (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline</div><div class="dx-tl">' + S.timeline.map(function (t) { return '<div class="dx-tl-item"><b>+ ' + esc(t.f) + '</b>' + (t.top ? ' → leading: ' + esc(t.top) : '') + '</div>'; }).join("") + '</div>' : '');
+      (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline — leading diagnosis & confidence</div><div class="dx-tl">' + S.timeline.map(function (t, i) {
+        var arrow = "";
+        if (i > 0) { var pr = S.timeline[i - 1]; if (pr && pr.topName === t.topName && t.topScore != null && pr.topScore != null) { arrow = t.topScore > pr.topScore ? ' <span class="up">▲</span>' : t.topScore < pr.topScore ? ' <span class="down">▼</span>' : ""; } }
+        var lead = t.topName ? ' → ' + esc(t.topName) + (t.topScore != null ? ' <b>' + t.topScore + '/100</b>' + arrow : "") : "";
+        return '<div class="dx-tl-item"><span class="dx-tl-n">' + (i + 1) + '</span> + ' + esc(t.f) + lead + '</div>';
+      }).join("") + '</div>' : '');
     el.querySelector("#dxExtract").addEventListener("click", function () { parseFreeText(el.querySelector("#dxFreeText").value); });
     el.querySelector("#dxSaveSess").addEventListener("click", saveSession);
     el.querySelector("#dxExport").addEventListener("click", exportSummary);
@@ -1436,8 +1441,10 @@
       ".dx-sess-item{text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:8px 11px;font:600 12.5px var(--sans);color:var(--ink);cursor:pointer}",
       ".dx-sess-item span{display:block;font:500 10.5px var(--sans);color:var(--slate-soft);margin-top:2px}",
       ".dx-tl{display:flex;flex-direction:column;gap:5px}",
-      ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);border-left:2px solid var(--teal);padding:3px 0 3px 10px}",
+      ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);border-left:2px solid var(--teal);padding:4px 0 4px 10px;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}",
       ".dx-tl-item b{color:var(--ink)}",
+      ".dx-tl-n{width:16px;height:16px;flex:0 0 auto;border-radius:50%;background:var(--teal);color:#fff;font:800 9.5px var(--sans);display:inline-flex;align-items:center;justify-content:center}",
+      ".dx-tl-item .up{color:var(--red)}.dx-tl-item .down{color:var(--teal)}",
       ".dx-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(12px);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:10px;font:700 13px var(--sans);z-index:900;opacity:0;transition:all .3s;box-shadow:0 6px 24px rgba(0,0,0,.3)}",
       ".dx-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}",
       ".dx-cmp{background:transparent;border:1px solid var(--line);border-radius:7px;width:28px;height:28px;font-size:13px;cursor:pointer;color:var(--slate-soft);flex:0 0 auto;margin-right:6px}",
