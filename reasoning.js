@@ -343,7 +343,7 @@
   /* ---------------------------------------------------------------------- *
    * ENGINE state + scoring
    * ---------------------------------------------------------------------- */
-  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false, workspace: false, advOpen: false, timeline: [] };
+  var S = { f: {}, fInf: {}, prev: {}, expanded: {}, started: false, system: null, showRare: false, workspace: false, advOpen: false, timeline: [], compare: [] };
 
   // centralised finding-add so the reasoning timeline is recorded consistently
   function addFinding(k) {
@@ -495,6 +495,7 @@
         '<div id="dxGate" class="dx-gate"></div>' +
         '<div id="dxPolicy" class="dx-policy-wrap"></div>' +
         '<div id="dxChanged" class="dx-changed" style="display:none"></div>' +
+        '<div id="dxCompare" class="dx-compare"></div>' +
         '<div id="dxCols" class="dx-cols"></div>' +
       '</div>';
     document.body.appendChild(root);
@@ -602,7 +603,13 @@
     diarrhea:["diarrhea","diarrhoea","loose stool"], dysuria:["dysuria","burning urine"], flankPain:["flank pain","loin pain"],
     jaundice:["jaundice","icterus"], cough:["cough"], hypoxia:["hypoxia","desaturat","spo2"], tachycardia:["tachycard"],
     melena:["melena","melaena","black stool"], hematemesis:["hematemesis","vomiting blood"], rash:["rash"], weightLoss:["weight loss"],
-    palpitations:["palpitation"], syncope:["syncope","collapse","fainted"], backPain:["back pain"], focalNeuroDeficit:["weakness","hemiparesis","facial droop","slurred"]
+    palpitations:["palpitation"], syncope:["syncope","collapse","fainted"], backPain:["back pain"], focalNeuroDeficit:["weakness","hemiparesis","facial droop","slurred","focal deficit"],
+    crepitations:["crackle","crepitation","creps"], consolidation:["consolidation"], purulentSputum:["purulent sputum","productive cough","sputum"],
+    calfTenderness:["calf tender","calf pain"], legSwellingUnilateral:["calf swelling","leg swelling","unilateral leg"], legSwellingBilateral:["bilateral leg","pedal edema","ankle swelling","peripheral edema"],
+    abdominalPain:["abdominal pain","belly pain","abdo pain","epigastric pain"], rightUpperQuadrantPain:["right upper quadrant","ruq pain"], flankPain:["flank pain","loin pain"],
+    polyuriaPolydipsia:["polyuria","polydipsia"], ketonemia:["ketone","ketoacidosis"], orthopnea:["orthopnoea","orthopnea","pnd"],
+    exertionalChestPain:["exertional","on exertion"], ecgIschemia:["st elevation","ischemic ecg","ischaemic ecg"], thunderclapHeadache:["thunderclap","worst headache","worst-ever"],
+    hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"]
   };
   function parseFreeText(text) {
     if (!text) return;
@@ -708,6 +715,7 @@
           '<div class="dx-bar ' + cls + '"><span style="width:' + r.score + '%"></span></div>' +
           '<div class="dx-row-sys">' + esc(r.system) + '</div>' +
         '</div>' +
+        '<button class="dx-cmp' + (S.compare.indexOf(r.id) >= 0 ? " on" : "") + '" data-cmp="' + r.id + '" title="Add to compare">⚖</button>' +
         '<div class="dx-score">' + r.score + '<small>/100</small></div>' +
       '</div>';
     if (!open) return '<div class="dx-card ' + cls + '">' + head + '</div>';
@@ -807,6 +815,37 @@
     if (b) b.addEventListener("click", function () { selectDx(lead.id); });
   }
 
+  function toggleCompare(id) {
+    var i = S.compare.indexOf(id);
+    if (i >= 0) S.compare.splice(i, 1);
+    else { if (S.compare.length >= 3) S.compare.shift(); S.compare.push(id); }
+    renderColsOnly();
+  }
+  function renderCompare(d) {
+    var el = root.querySelector("#dxCompare"); if (!el) return;
+    var all = d.inf.concat(d.ni), map = {}; all.forEach(function (r) { map[r.id] = r; });
+    var cols = S.compare.map(function (id) { return map[id]; }).filter(Boolean);
+    if (cols.length < 2) { el.innerHTML = ""; return; }
+    function cell(r, field, sign, c) {
+      var arr = r[field] || [];
+      return arr.length ? arr.map(function (k) { return '<span class="dx-f ' + c + '">' + (sign || "") + esc(lbl(k)) + '</span>'; }).join("") : '<span class="dx-none">—</span>';
+    }
+    var html = '<div class="dx-cmp-h">⚖ Compare diagnoses <button class="dx-cmp-clear" id="dxCmpClear">clear</button></div>' +
+      '<div class="dx-cmp-grid" style="grid-template-columns:repeat(' + cols.length + ',minmax(0,1fr))">';
+    cols.forEach(function (r) {
+      html += '<div class="dx-cmp-col">' +
+        '<div class="dx-cmp-name ' + (r.inf ? "inf" : "ni") + '">' + esc(r.name) + '</div>' +
+        '<div class="dx-cmp-score">' + r.score + '<small>/100</small></div>' +
+        '<div class="dx-cmp-lbl">Supporting</div><div>' + cell(r, "supporting", "✓ ", "sup") + '</div>' +
+        '<div class="dx-cmp-lbl">Contradictory</div><div>' + cell(r, "contra", "✕ ", "con") + '</div>' +
+        '<div class="dx-cmp-lbl">Missing</div><div>' + cell(r, "missing", "? ", "mis") + '</div>' +
+      '</div>';
+    });
+    html += '</div>';
+    el.innerHTML = html;
+    var cl = el.querySelector("#dxCmpClear"); if (cl) cl.addEventListener("click", function () { S.compare = []; renderColsOnly(); });
+  }
+
   function recompute() {
     if (!root) return;
     renderSelected(); renderPicker(); renderHosp(); renderAdv();
@@ -856,6 +895,10 @@
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
     });
+    root.querySelectorAll(".dx-cmp").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
+    });
+    renderCompare(d);
     // snapshot scores for delta
     var snap = {}; d.inf.concat(d.ni).forEach(function (r) { snap[r.id] = r.score; });
     S.prev = snap;
@@ -875,6 +918,10 @@
     root.querySelectorAll(".dx-tool").forEach(function (b) {
       b.addEventListener("click", function (e) { e.stopPropagation(); runTool(b.getAttribute("data-tool")); });
     });
+    root.querySelectorAll(".dx-cmp").forEach(function (b) {
+      b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
+    });
+    renderCompare(d);
   }
 
   function selectDx(id) {
@@ -898,7 +945,7 @@
     if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) { ensureRoot(); if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; } root.classList.add("on"); document.body.classList.add("dx-lock"); recompute(); }
   function openWorkspace() { open({ workspace: true }); }
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); } }
@@ -1032,7 +1079,18 @@
       ".dx-tl-item{font:500 12px var(--sans);color:var(--slate);border-left:2px solid var(--teal);padding:3px 0 3px 10px}",
       ".dx-tl-item b{color:var(--ink)}",
       ".dx-toast{position:fixed;left:50%;bottom:30px;transform:translateX(-50%) translateY(12px);background:var(--ink);color:var(--paper);padding:11px 18px;border-radius:10px;font:700 13px var(--sans);z-index:900;opacity:0;transition:all .3s;box-shadow:0 6px 24px rgba(0,0,0,.3)}",
-      ".dx-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}"
+      ".dx-toast.on{opacity:1;transform:translateX(-50%) translateY(0)}",
+      ".dx-cmp{background:transparent;border:1px solid var(--line);border-radius:7px;width:28px;height:28px;font-size:13px;cursor:pointer;color:var(--slate-soft);flex:0 0 auto;margin-right:6px}",
+      ".dx-cmp.on{background:var(--teal);border-color:var(--teal);color:#fff}",
+      ".dx-compare:not(:empty){margin-bottom:14px}",
+      ".dx-cmp-h{font:800 13.5px var(--sans);color:var(--ink);margin-bottom:9px;display:flex;align-items:center;gap:12px}",
+      ".dx-cmp-clear{font:600 11px var(--sans);background:transparent;border:1px solid var(--line);border-radius:7px;padding:3px 9px;cursor:pointer;color:var(--slate)}",
+      ".dx-cmp-grid{display:grid;gap:10px}",
+      ".dx-cmp-col{border:1px solid var(--line);border-radius:12px;padding:11px;background:var(--panel)}",
+      ".dx-cmp-name{font:800 12.5px var(--sans);line-height:1.3}",
+      ".dx-cmp-name.inf{color:var(--red)}.dx-cmp-name.ni{color:var(--green)}",
+      ".dx-cmp-score{font:800 17px var(--sans);color:var(--ink);margin:3px 0 6px}.dx-cmp-score small{font-size:10px;color:var(--slate-soft)}",
+      ".dx-cmp-lbl{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft);margin:8px 0 3px}"
     ].join("");
     var st = document.createElement("style"); st.id = "dx-styles"; st.textContent = css; document.head.appendChild(st);
   }
