@@ -3501,11 +3501,11 @@ var SMD_CASES = (function() {
 
       <!-- Progress dots -->
       <div class="demo-dots" id="demoDots">
-        <button class="demo-dot-btn active" data-i="0"></button>
-        <button class="demo-dot-btn" data-i="1"></button>
-        <button class="demo-dot-btn" data-i="2"></button>
-        <button class="demo-dot-btn" data-i="3"></button>
-        <button class="demo-dot-btn" data-i="4"></button>
+        <button class="demo-dot-btn active" data-i="0" aria-label="Show preview case 1"></button>
+        <button class="demo-dot-btn" data-i="1" aria-label="Show preview case 2"></button>
+        <button class="demo-dot-btn" data-i="2" aria-label="Show preview case 3"></button>
+        <button class="demo-dot-btn" data-i="3" aria-label="Show preview case 4"></button>
+        <button class="demo-dot-btn" data-i="4" aria-label="Show preview case 5"></button>
       </div>
 
       <button class="demo-cta" id="demoCTABtn">Start Clinical Assessment →</button>
@@ -14496,7 +14496,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=docum
   @media print{.inf-overlay{position:static;background:#fff;} .inf-top,.inf-close,.inf-fab,.inf-tabs,.inf-titrate{display:none!important;} .inf-fluid,.inf-plunger,.inf-drop,.inf-flow{animation:none!important;}}
   @media(max-width:560px){.inf-pumpcard .pv{font-size:34px;}}
 </style>
-<button class="inf-fab" id="infFab" onclick="INF.open()" title="ICU Infusion & Vasopressor Calculator" aria-label="Infusion calculator">💉<small>ICU</small></button>
+<button class="inf-fab" id="infFab" onclick="INF.open()" title="ICU Infusion & Vasopressor Calculator" aria-label="ICU infusion &amp; vasopressor calculator">💉<small>ICU</small></button>
 <div class="inf-overlay" id="infOverlay" role="dialog" aria-modal="true">
   <div class="inf-shell">
     <div class="inf-top">
