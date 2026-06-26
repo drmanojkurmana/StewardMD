@@ -3574,9 +3574,12 @@ var SMD_CASES = (function() {
 
   <header class="app-head">
     <div class="brandrow">
-      <div>
-        <div class="brand">Steward<span class="accent">MD</span></div>
-        <div class="tagline">Antibiotic decision engine · internal medicine syndromes</div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="sb-menu-btn" id="sbMenuBtn" onclick="SB.open()" aria-label="Open menu" title="Menu">☰</button>
+        <div>
+          <div class="brand">Steward<span class="accent">MD</span></div>
+          <div class="tagline">Antibiotic decision engine · internal medicine syndromes</div>
+        </div>
       </div>
       <div style="display:flex;align-items:center;gap:10px;">
         <button class="smd-search-btn" id="smdSearchBtn" onclick="openSearch()" title="Search syndromes, drugs, calculators">🔍</button>
@@ -14905,6 +14908,244 @@ window.INF = (function(){
   };
 })();
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=document.getElementById('infOverlay');if(o&&o.classList.contains('open'))INF.close();}});
+</script>
+
+<!-- ============================================================================
+     NAVIGATION SIDEBAR (slide-in drawer) — ties the platform together.
+     Wires to existing globals; Reference views read window.ASP_*/INFUSION_DRUGS.
+     ============================================================================ -->
+<style id="sb-styles">
+  .sb-burger{display:none;}  /* floating hamburger retired — opener now lives in the header */
+  .sb-menu-btn{border:1px solid var(--line);background:transparent;color:var(--ink);font-size:18px;width:40px;height:40px;border-radius:10px;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 auto;line-height:1;}
+  .sb-menu-btn:hover{background:var(--teal-soft);border-color:var(--teal);color:var(--teal);}
+  .sb-backdrop{position:fixed;inset:0;z-index:9490;background:rgba(8,16,22,.5);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .2s;}
+  .sb-backdrop.open{opacity:1;pointer-events:auto;}
+  .sb-drawer{position:fixed;top:0;left:0;bottom:0;z-index:9500;width:286px;max-width:86vw;background:var(--paper);border-right:1px solid var(--line);
+    transform:translateX(-104%);transition:transform .24s cubic-bezier(.4,0,.2,1);overflow-y:auto;box-shadow:0 0 40px rgba(0,0,0,.25);}
+  .sb-drawer.open{transform:translateX(0);}
+  .sb-head{display:flex;align-items:center;gap:10px;padding:16px 16px 12px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--paper);z-index:2;}
+  .sb-head .sb-logo{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--teal),#0a564e);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;}
+  .sb-head b{font-size:15.5px;color:var(--ink);flex:1;} .sb-head .sb-ver{font-size:10px;color:var(--slate-soft);font-weight:700;}
+  .sb-x{background:none;border:none;color:var(--slate-soft);font-size:22px;cursor:pointer;line-height:1;}
+  .sb-sec{font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--slate-soft);padding:14px 18px 5px;}
+  /* accordion main menus + dropdown sub-menus */
+  .sb-main{display:flex;align-items:center;gap:12px;width:100%;box-sizing:border-box;border:none;background:none;text-align:left;
+    padding:14px 18px;font-size:14.5px;font-weight:700;color:var(--ink);cursor:pointer;font-family:inherit;border-bottom:1px solid var(--line);}
+  .sb-main .ic{width:22px;text-align:center;font-size:17px;flex:0 0 auto;}
+  .sb-main .chev{margin-left:auto;color:var(--slate-soft);font-size:12px;transition:transform .22s;}
+  .sb-main.open{color:var(--teal);background:var(--teal-soft);}
+  .sb-main.open .chev{transform:rotate(90deg);}
+  .sb-sub{overflow:hidden;max-height:0;transition:max-height .26s ease;background:var(--paper);}
+  .sb-sub.open{max-height:520px;}
+  .sb-subitem{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box;border:none;background:none;text-align:left;
+    padding:11px 18px 11px 32px;font-size:13.5px;color:var(--ink);cursor:pointer;font-family:inherit;}
+  .sb-subitem:hover{background:var(--teal-soft);} .sb-subitem .ic{width:18px;text-align:center;font-size:15px;flex:0 0 auto;}
+  .sb-foot{padding:14px 18px 24px;font-size:10.5px;color:var(--slate-soft);line-height:1.5;border-top:1px solid var(--line);margin-top:8px;}
+  .sbref-overlay{position:fixed;inset:0;z-index:9300;background:rgba(8,16,22,.55);backdrop-filter:blur(3px);display:none;overflow-y:auto;}
+  .sbref-overlay.open{display:block;}
+  .sbref-shell{max-width:900px;margin:0 auto;min-height:100%;background:var(--paper);}
+  .sbref-top{position:sticky;top:0;background:var(--teal);color:#fff;padding:13px 16px;display:flex;align-items:center;gap:10px;z-index:3;}
+  .sbref-top h2{margin:0;font-size:16px;font-weight:800;flex:1;}
+  .sbref-body{padding:16px;}
+  .sbref-tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+  .sbref-tab{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 14px;font-size:13px;font-weight:700;color:var(--slate);cursor:pointer;}
+  .sbref-tab.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+  .sbref-sec{background:var(--panel,#fff);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:13px;}
+  body.dark .sbref-sec{background:#0f2129;}
+  .sbref-syn{display:flex;flex-wrap:wrap;gap:7px;} .sbref-syn button{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:8px 11px;font-size:12.5px;color:var(--ink);cursor:pointer;text-align:left;}
+  .sbref-syn button:hover{border-color:var(--teal);background:var(--teal-soft);}
+  .sbref-bar{height:14px;border-radius:4px;background:var(--line);overflow:hidden;} .sbref-bar>i{display:block;height:100%;}
+  .sbref-row{display:grid;grid-template-columns:150px 1fr 52px;gap:9px;align-items:center;font-size:12.5px;margin-bottom:6px;}
+  .sbref-gl{display:flex;align-items:center;gap:10px;text-decoration:none;border:1px solid var(--line);border-radius:9px;
+    padding:10px 12px;margin-bottom:7px;background:var(--paper);}
+  .sbref-gl:hover{border-color:var(--teal);background:var(--teal-soft);}
+  .sbref-gl .gl-n{flex:1;font-size:13px;font-weight:600;color:var(--ink);}
+  .sbref-gl .gl-dom{display:block;font-size:10.5px;font-weight:600;color:var(--slate-soft);margin-top:1px;}
+  .sbref-gl .gl-go{color:var(--teal);font-size:15px;font-weight:800;flex:0 0 auto;}
+  .aware-card{border:1px solid var(--line);border-radius:11px;padding:12px;margin-bottom:10px;}
+  .aware-card h4{margin:0 0 4px;font-size:14px;} .aware-card .ex{font-size:12px;color:var(--slate-soft);margin-top:5px;}
+  @media(max-width:560px){.sbref-row{grid-template-columns:118px 1fr 44px;}}
+</style>
+<div class="sb-backdrop" id="sbBackdrop" onclick="SB.close()"></div>
+<nav class="sb-drawer" id="sbDrawer" aria-label="Main menu">
+  <div class="sb-head"><span class="sb-logo">S</span><b>StewardMD</b><span class="sb-ver">v4</span><button class="sb-x" onclick="SB.close()" aria-label="Close">×</button></div>
+  <div id="sbMenu"></div>
+  <div class="sb-foot">Decision support for qualified clinicians. Verify against local protocol &amp; the individual patient.<br>Support: <a href="mailto:Support@StewardMD.in" style="color:var(--teal)">Support@StewardMD.in</a></div>
+</nav>
+<div class="sbref-overlay" id="sbrefOverlay" role="dialog" aria-modal="true">
+  <div class="sbref-shell">
+    <div class="sbref-top"><h2 id="sbrefTitle">Reference</h2><button class="sb-x" style="color:#fff" onclick="SB.closeRef()" aria-label="Close">×</button></div>
+    <div class="sbref-body" id="sbrefBody"></div>
+  </div>
+</div>
+<script>
+window.SB = (function(){
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  var MENU=[
+    {id:'clinical', ic:'🩺', label:'Clinical', items:[
+      {ic:'🏠',label:'New clinical decision',act:"SB.newDecision()"},
+      {ic:'🔍',label:'Search (diseases · drugs)',act:"SB.act(function(){ if(typeof openSearch==='function')openSearch(); })"},
+      {ic:'📋',label:'My Cases',act:"SB.act(function(){ if(typeof openMyCases==='function')openMyCases(); })"} ]},
+    {id:'calc', ic:'🧮', label:'Calculators', items:[
+      {ic:'🧮',label:'CrCl (Cockcroft-Gault)',act:"SB.calc('crcl')"},
+      {ic:'🧮',label:'MELD score',act:"SB.calc('meld')"},
+      {ic:'🧮',label:'BMI / IBW',act:"SB.calc('bmi')"},
+      {ic:'🧮',label:'A2DS2 stroke score',act:"SB.calc('a2ds2')"} ]},
+    {id:'icu', ic:'💉', label:'Critical Care (ICU)', items:[
+      {ic:'💉',label:'Infusion & Vasopressor',act:"SB.act(function(){ if(window.INF)INF.open(); })"},
+      {ic:'🩺',label:'ICU Dashboard',act:"SB.act(function(){ if(window.INF)INF.openDashboard(); })"},
+      {ic:'🏥',label:'Hospital Protocols',act:"SB.act(function(){ if(window.INF)INF.openProtocols(); })"} ]},
+    {id:'ref', ic:'📚', label:'Reference', items:[
+      {ic:'🦠',label:'Browse syndromes',act:"SB.openRef('syndromes')"},
+      {ic:'📊',label:'ICMR 2024 antibiogram',act:"SB.openRef('antibiogram')"},
+      {ic:'🔵',label:'WHO AWaRe classes',act:"SB.openRef('aware')"},
+      {ic:'📖',label:'Treatment guidelines',act:"SB.openRef('guidelines')"} ]},
+    {id:'set', ic:'⚙️', label:'Settings', items:[
+      {ic:'🌓',label:'Toggle dark / light',act:"SB.toggleTheme()"},
+      {ic:'💾',label:'Case storage',act:"SB.act(function(){ if(typeof openMyCases==='function')openMyCases(); })"} ]},
+    {id:'about', ic:'ℹ️', label:'About & Help', items:[
+      {ic:'ℹ️',label:'About StewardMD',act:"SB.modal('aboutModal')"},
+      {ic:'⚖️',label:'Disclaimer',act:"SB.modal('disclaimerModal')"},
+      {ic:'🔒',label:'Privacy',act:"SB.modal('privacyModal')"},
+      {ic:'📜',label:'Terms',act:"SB.modal('termsModal')"},
+      {ic:'✉️',label:'Contact (Support@StewardMD.in)',act:"SB.modal('contactModal')"},
+      {ic:'🐞',label:'Report a bug',act:"SB.bug()"} ]}
+  ];
+  function renderMenu(){
+    var h=MENU.map(function(m){
+      var sub=m.items.map(function(it){ return '<button class="sb-subitem" onclick="'+it.act+'"><span class="ic">'+it.ic+'</span><span>'+esc(it.label)+'</span></button>'; }).join('');
+      return '<button class="sb-main" id="sbmain_'+m.id+'" onclick="SB.toggleSec(\''+m.id+'\')"><span class="ic">'+m.ic+'</span><span>'+esc(m.label)+'</span><span class="chev">▸</span></button>'+
+        '<div class="sb-sub" id="sbsub_'+m.id+'">'+sub+'</div>';
+    }).join('');
+    document.getElementById('sbMenu').innerHTML=h;
+  }
+  function abgColor(v){ return v>=80?'#2e9e7e':v>=50?'#e0a92e':'#cf4150'; }
+  var GUIDELINES=[
+    {g:'Sepsis & Critical Care', items:[
+      {n:'Surviving Sepsis Campaign (SCCM/ESICM)', u:'https://www.sccm.org/SurvivingSepsisCampaign/Guidelines/Adult-Patients'},
+      {n:'Sepsis-3 Definitions (JAMA 2016)', u:'https://jamanetwork.com/journals/jama/fullarticle/2492881'},
+      {n:'PADIS — Pain/Agitation/Delirium/Sleep (SCCM)', u:'https://www.sccm.org/clinical-resources/guidelines'} ]},
+    {g:'Respiratory', items:[
+      {n:'IDSA/ATS Community-Acquired Pneumonia (2019)', u:'https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/'},
+      {n:'IDSA/ATS Hospital-Acquired / VAP (2016)', u:'https://www.idsociety.org/practice-guideline/hospital-acquired-pneumonia-and-ventilator-associated-pneumonia/'},
+      {n:'GOLD — COPD Strategy', u:'https://goldcopd.org/'},
+      {n:'BTS — Bronchiectasis in Adults', u:'https://www.brit-thoracic.org.uk/quality-improvement/guidelines/bronchiectasis-in-adults/'},
+      {n:'NICE — Respiratory tract infections', u:'https://www.nice.org.uk/guidance/conditions-and-diseases/infections'} ]},
+    {g:'Urinary & Genital', items:[
+      {n:'IDSA — UTI / Pyelonephritis', u:'https://www.idsociety.org/practice-guideline/urinary-tract-infection-uti-in-women/'},
+      {n:'EAU — Urological Infections', u:'https://uroweb.org/guidelines/urological-infections'} ]},
+    {g:'Central Nervous System', items:[
+      {n:'IDSA — Bacterial Meningitis', u:'https://www.idsociety.org/practice-guideline/bacterial-meningitis/'},
+      {n:'IDSA — Encephalitis', u:'https://www.idsociety.org/practice-guideline/encephalitis/'} ]},
+    {g:'Skin & Soft Tissue', items:[
+      {n:'IDSA — Skin & Soft Tissue Infections (2014)', u:'https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/'},
+      {n:'IDSA — Diabetic Foot Infections', u:'https://www.idsociety.org/practice-guideline/diabetic-foot/'},
+      {n:'IWGDF — Diabetic Foot Guidelines', u:'https://iwgdfguidelines.org/'} ]},
+    {g:'Intra-abdominal & Hepatobiliary', items:[
+      {n:'Tokyo Guidelines (TG18) — Cholangitis/Cholecystitis', u:'https://link.springer.com/article/10.1007/s00534-018-1684-x'},
+      {n:'IDSA — Complicated Intra-abdominal Infection', u:'https://www.idsociety.org/practice-guideline/intra-abdominal-infections/'},
+      {n:'AASLD — Ascites / SBP Practice Guidance', u:'https://www.aasld.org/practice-guidelines'},
+      {n:'EASL — Decompensated Cirrhosis', u:'https://easl.eu/publications/clinical-practice-guidelines/'} ]},
+    {g:'Gastrointestinal & Enteric', items:[
+      {n:'IDSA — Infectious Diarrhea', u:'https://www.idsociety.org/practice-guideline/infectious-diarrhea/'},
+      {n:'IDSA/SHEA — Clostridioides difficile (2021)', u:'https://www.idsociety.org/practice-guideline/clostridium-difficile/'},
+      {n:'WHO — Typhoid Fever', u:'https://www.who.int/publications/i/item/9789241550390'},
+      {n:'WHO — Diarrhoeal Disease', u:'https://www.who.int/publications/i/item/9789241598415'} ]},
+    {g:'Cardiac', items:[
+      {n:'AHA — Infective Endocarditis', u:'https://www.ahajournals.org/doi/10.1161/CIR.0000000000001122'},
+      {n:'ESC — Infective Endocarditis', u:'https://www.escardio.org/Guidelines/Clinical-Practice-Guidelines/Infective-Endocarditis'},
+      {n:'Modified Duke Criteria (MDCalc)', u:'https://www.mdcalc.com/calc/1755/duke-criteria-infective-endocarditis'} ]},
+    {g:'Tuberculosis', items:[
+      {n:'WHO — Consolidated Guidelines on Tuberculosis', u:'https://www.who.int/teams/global-tuberculosis-programme/tb-reports'},
+      {n:'NTEP — National TB Elimination Programme (India)', u:'https://tbcindia.gov.in/'} ]},
+    {g:'Tropical & Vector-borne', items:[
+      {n:'WHO — Guidelines for Malaria', u:'https://www.who.int/publications/i/item/9789240086173'},
+      {n:'NVBDCP / NCVBDC (India)', u:'https://ncvbdc.mohfw.gov.in/'},
+      {n:'WHO — Dengue Guidelines', u:'https://www.who.int/publications/i/item/9789241547871'},
+      {n:'NCDC — Rickettsial Diseases (India)', u:'https://ncdc.mohfw.gov.in/index4.php?lang=1&level=0&linkid=358&lid=221'} ]},
+    {g:'AMR, Stewardship & Laboratory', items:[
+      {n:'ICMR — AMR Surveillance Network (AMRSN)', u:'https://www.icmr.gov.in/'},
+      {n:'WHO — AWaRe Antibiotic Book', u:'https://www.who.int/publications/i/item/9789240062382'},
+      {n:'WHO — Essential Medicines List', u:'https://www.who.int/groups/expert-committee-on-selection-and-use-of-essential-medicines/essential-medicines-lists'},
+      {n:'CLSI — M100 Susceptibility Testing Standards', u:'https://clsi.org/standards/products/microbiology/documents/m100/'},
+      {n:'ESCMID — Clinical Guidelines', u:'https://www.escmid.org/'},
+      {n:'CDC — Antibiotic Use & Stewardship', u:'https://www.cdc.gov/antibiotic-use/index.html'},
+      {n:'Indian National Treatment Guidelines (NCDC)', u:'https://ncdc.mohfw.gov.in/WriteReadData/l892s/National_Treatment_Guidelines_for_Antimicrobial_use.pdf'},
+      {n:'Sanford Guide to Antimicrobial Therapy', u:'https://www.sanfordguide.com/'} ]},
+    {g:'Oncology / Immunocompromised', items:[
+      {n:'IDSA — Fever & Neutropenia', u:'https://www.idsociety.org/practice-guideline/fever-and-neutropenia/'},
+      {n:'NCCN — Prevention & Treatment of Cancer-Related Infections', u:'https://www.nccn.org/guidelines/guidelines-detail?category=3&id=1457'} ]},
+    {g:'Other', items:[
+      {n:'IDSA — Group A Streptococcal Pharyngitis', u:'https://www.idsociety.org/practice-guideline/streptococcal-pharyngitis/'},
+      {n:'IDSA — Acute Bacterial Rhinosinusitis', u:'https://www.idsociety.org/practice-guideline/rhinosinusitis/'},
+      {n:'Centor / McIsaac Score (MDCalc)', u:'https://www.mdcalc.com/calc/104/centor-score-modified-mcisaac-strep-pharyngitis'},
+      {n:'Harrison’s Principles of Internal Medicine', u:'https://accessmedicine.mhmedical.com/book.aspx?bookID=3095'} ]}
+  ];
+  function renderRef(view){
+    function t(v,l,a){return '<button class="sbref-tab'+(a===v?' active':'')+'" onclick="SB.openRef(\''+v+'\')">'+l+'</button>';}
+    var h='<div class="sbref-tabs">'+t('syndromes','🦠 Syndromes',view)+t('antibiogram','📊 Antibiogram',view)+t('aware','🔵 AWaRe',view)+t('guidelines','📖 Guidelines',view)+'</div>';
+    if(view==='syndromes'){
+      var D=window.ASP_DATA||{}, keys=Object.keys(D);
+      h+='<div class="sbref-sec"><div style="font-size:12px;color:var(--slate-soft);margin-bottom:10px">'+keys.length+' syndromes with the full stewardship console. Tap to open.</div><div class="sbref-syn">'+
+        keys.map(function(k){return '<button onclick="SB.openSyn(\''+k+'\')">'+esc(D[k].label||k)+'</button>';}).join('')+'</div></div>';
+    } else if(view==='antibiogram'){
+      var AB=(window.ASP_ABG&&window.ASP_ABG.national)?window.ASP_ABG.national:null;
+      if(!AB){ h+='<div class="sbref-sec">Antibiogram data unavailable.</div>'; }
+      else {
+        var orgs=Object.keys(AB.org); if(!SB._abgOrg||orgs.indexOf(SB._abgOrg)<0)SB._abgOrg=orgs[0];
+        h+='<div class="sbref-sec"><div style="font-size:12px;color:var(--slate-soft);margin-bottom:9px">'+esc(AB.source)+'</div>'+
+          '<select class="sbref-tab" style="width:100%;margin-bottom:12px" onchange="SB.abgOrg(this.value)">'+orgs.map(function(o){return '<option'+(SB._abgOrg===o?' selected':'')+'>'+esc(o)+'</option>';}).join('')+'</select>';
+        var od=AB.org[SB._abgOrg].d, DR=window.ASP_DRUGS||{};
+        Object.keys(od).forEach(function(k){ var rec=od[k], v=(typeof rec.s==='number')?rec.s:null; var lbl=(DR[k]&&DR[k].label)||k;
+          h+='<div class="sbref-row"><span>'+esc(lbl)+'</span>'+
+            (v!=null?'<span class="sbref-bar"><i style="width:'+v+'%;background:'+abgColor(v)+'"></i></span><span style="text-align:right;font-weight:800;color:'+abgColor(v)+'">'+(rec.approx?'~':'')+v+'%</span>'
+                   :'<span style="font-size:11.5px;color:var(--slate-soft)">'+esc(rec.q||'—')+'</span><span></span>')+'</div>';
+        });
+        h+='<div style="font-size:11px;color:var(--slate-soft);margin-top:8px">'+esc(AB.note||'')+'</div></div>';
+      }
+    } else if(view==='aware'){
+      var DR=window.ASP_DRUGS||{}, INFD=window.INFUSION_DRUGS||{}, cats={Access:[],Watch:[],Reserve:[]};
+      [DR,INFD].forEach(function(db){ Object.keys(db).forEach(function(k){ var a=db[k].aware, nm=(db[k].label||k).split(' (')[0]; if(cats[a] && cats[a].indexOf(nm)<0 && cats[a].length<10) cats[a].push(nm); }); });
+      var defs={Access:'First-line / narrow-spectrum agents for common infections — widely available, lower resistance risk. Use preferentially.',
+                Watch:'Broader-spectrum agents with higher resistance potential — reserve for specific indications and steward carefully.',
+                Reserve:'Last-resort agents for confirmed/suspected multidrug-resistant organisms — protect; use only when others fail.'};
+      var col={Access:'#2e9e7e',Watch:'#b5800f',Reserve:'#ab1c2c'};
+      ['Access','Watch','Reserve'].forEach(function(c){ h+='<div class="aware-card" style="border-left:4px solid '+col[c]+'"><h4 style="color:'+col[c]+'">'+c+'</h4>'+
+        '<div style="font-size:12.5px;color:var(--slate)">'+defs[c]+'</div>'+(cats[c].length?'<div class="ex"><b>In this app:</b> '+cats[c].map(esc).join(', ')+'</div>':'')+'</div>'; });
+      h+='<div class="sbref-sec" style="font-size:11px;color:var(--slate-soft)">WHO AWaRe Antibiotic Book — a stewardship framework to guide and monitor appropriate antibiotic use.</div>';
+    } else {
+      GUIDELINES.forEach(function(sec){
+        h+='<div class="sbref-sec"><div style="font-weight:800;color:var(--teal);font-size:11px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:9px">'+esc(sec.g)+'</div>';
+        sec.items.forEach(function(it){ var dom=it.u.replace(/^https?:\/\//,'').split('/')[0];
+          h+='<a class="sbref-gl" href="'+it.u+'" target="_blank" rel="noopener"><span class="gl-n">'+esc(it.n)+'<span class="gl-dom">'+esc(dom)+'</span></span><span class="gl-go">↗</span></a>'; });
+        h+='</div>';
+      });
+      h+='<div class="sbref-sec" style="font-size:11px;color:var(--slate-soft)">Links open the official guideline / source pages in a new tab. Always consult the current published version; deep links may change.</div>';
+    }
+    document.getElementById('sbrefBody').innerHTML=h;
+    document.getElementById('sbrefTitle').textContent = view==='syndromes'?'Syndrome library' : view==='antibiogram'?'ICMR 2024 National Antibiogram' : view==='guidelines'?'Guidelines & References' : 'WHO AWaRe Classification';
+  }
+  return {
+    open:function(){ renderMenu(); document.getElementById('sbDrawer').classList.add('open'); document.getElementById('sbBackdrop').classList.add('open'); },
+    toggleSec:function(id){ var sub=document.getElementById('sbsub_'+id), main=document.getElementById('sbmain_'+id); if(!sub)return;
+      var isOpen=sub.classList.contains('open');
+      ['clinical','calc','icu','ref','set','about'].forEach(function(x){ var s=document.getElementById('sbsub_'+x), mm=document.getElementById('sbmain_'+x); if(s)s.classList.remove('open'); if(mm)mm.classList.remove('open'); });
+      if(!isOpen){ sub.classList.add('open'); if(main)main.classList.add('open'); } },
+    close:function(){ document.getElementById('sbDrawer').classList.remove('open'); document.getElementById('sbBackdrop').classList.remove('open'); },
+    act:function(fn){ this.close(); setTimeout(function(){ try{fn();}catch(e){} }, 60); },
+    newDecision:function(){ this.close(); try{ window.scrollTo({top:0,behavior:'smooth'}); }catch(e){} },
+    calc:function(id){ this.act(function(){ if(typeof openCalc==='function') openCalc(id); }); },
+    toggleTheme:function(){ var t=document.getElementById('themeToggle'); if(t){t.click();} else { document.body.classList.toggle('dark'); } },
+    modal:function(id){ this.act(function(){ if(typeof openModal==='function') openModal(id); }); },
+    bug:function(){ this.close(); window.location.href='mailto:Support@StewardMD.in?subject=StewardMD%20Bug%20Report&body=Hi%20StewardMD%20Support%20Team%2C%0A%0AI%20found%20a%20bug%3A%0A%0A'; },
+    openRef:function(view){ this.close(); renderRef(view); var o=document.getElementById('sbrefOverlay'); o.classList.add('open'); o.scrollTop=0; document.body.style.overflow='hidden'; },
+    closeRef:function(){ document.getElementById('sbrefOverlay').classList.remove('open'); document.body.style.overflow=''; },
+    abgOrg:function(o){ this._abgOrg=o; renderRef('antibiogram'); },
+    openSyn:function(k){ this.closeRef(); try{ if(window.ASP && ASP.open) ASP.open(k); }catch(e){} }
+  };
+})();
+document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ var r=document.getElementById('sbrefOverlay'); if(r&&r.classList.contains('open')){SB.closeRef();return;} var d=document.getElementById('sbDrawer'); if(d&&d.classList.contains('open'))SB.close(); } });
 </script>
 </body>
 </html>
