@@ -189,6 +189,7 @@
       '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div></div>' +
       (d.uses ? '<div class="db-sec"><div class="db-sec-h">Uses</div><div class="db-sec-b">' + esc(d.uses) + '</div></div>' : '') +
       (d.side_effects ? '<div class="db-sec"><div class="db-sec-h">Side effects <span class="db-sec-note">(apply to the molecule — all brands below)</span></div><div class="db-sec-b">' + esc(d.side_effects) + '</div></div>' : '') +
+      (!d.uses && !d.side_effects ? '<div class="db-sec"><div class="db-sec-h">Clinical details</div><div class="db-sec-b db-soon">Indication, dosage, pregnancy, renal/hepatic adjustment, interactions &amp; monitoring — being added from open regulatory sources (openFDA / DailyMed).</div></div>' : '') +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
       '<div class="db-filters"><span class="db-filt-l">Show</span>' + tierBtn("all", "All") + tierBtn("branded", "Top branded") + tierBtn("generic", "Top generic") + '</div>' +
       '<div class="db-brands-h"><span>' + (st.total ? st.total.toLocaleString() : st.brands.length) + ' brands</span>' +
@@ -255,6 +256,7 @@
       ".db-sec-h{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin-bottom:5px}",
       ".db-sec-note{text-transform:none;letter-spacing:0;font-weight:500;color:var(--slate-soft,#888)}",
       ".db-sec-b{font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.6}",
+      ".db-soon{color:var(--slate-soft,#888);font-style:italic}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
       ".db-brands-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 2px 9px;font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-sorts{display:flex;gap:6px}",

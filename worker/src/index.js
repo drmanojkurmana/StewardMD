@@ -159,8 +159,10 @@ async function handleComposition(url, env) {
       composition: name, sort, tier: (tier && TIERS[tier]) ? tier : "all",
       class: info ? info.class : "", chem_class: info ? info.chem_class : "",
       action_class: info ? info.action_class : "",
-      uses: info ? info.uses : "", side_effects: info ? info.side_effects : "",
       habit_forming: info ? info.habit_forming : "",
+      // NOTE: scraped uses/side_effects intentionally NOT served (provenance:
+      // third-party Kaggle re-upload of 1mg content). Clinical monograph fields
+      // come from the open `monographs` source instead (openFDA/DailyMed).
       total: total ? total.n : brands.length, brands,
     }, { ttl: TTL.comp });
   } catch (err) {
@@ -173,7 +175,11 @@ async function handleDrug(id, env) {
   const n = parseInt(id, 10);
   if (!Number.isFinite(n)) return json({ error: "bad_id" }, { status: 400 });
   try {
-    const row = await env.DB.prepare(`SELECT * FROM drugs WHERE id = ?1`).bind(n).first();
+    // explicit columns — exclude scraped uses/side_effects/substitutes
+    const row = await env.DB.prepare(
+      `SELECT id, brand, composition, class, chem_class, action_class, manufacturer,
+              form, pack, mrp, habit_forming, discontinued
+         FROM drugs WHERE id = ?1`).bind(n).first();
     if (!row) return json({ error: "not_found" }, { status: 404 });
     return json({ drug: row }, { ttl: TTL.drug });
   } catch (err) {
