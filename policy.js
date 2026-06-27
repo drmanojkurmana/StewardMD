@@ -96,18 +96,18 @@
 
   /* ---- Hospital profiles (extensible) ----------------------------------- */
   var HOSPITALS = [
-    { id:"GIMSR", name:"GIMSR, Visakhapatnam", short:"GIMSR", logo:"/gimsr-logo.png",
-      policyName:"GIMSR Hospital Antimicrobial Policy", version:"HIC-3e · 04.11.2024 (ref NABH/ICMR)",
-      hasPolicy:true, policy:P, watch:WATCH, reserve:RESERVE },
     { id:"ICMR", name:"ICMR (National) — AMRSN 2024", short:"ICMR", logo:null,
       policyName:"ICMR National AMR Treatment Guidelines", version:"AMRSN 2024",
-      hasPolicy:false, note:"National guidance — StewardMD already incorporates ICMR/IDSA evidence in each syndrome page." },
+      hasPolicy:false, recommended:true, note:"National guidance — recommended wherever possible. StewardMD already incorporates ICMR/IDSA evidence in each syndrome page." },
     { id:"AIIMS", name:"AIIMS", short:"AIIMS", logo:null, hasPolicy:false },
     { id:"CMC", name:"CMC Vellore", short:"CMC", logo:null, hasPolicy:false },
     { id:"APOLLO", name:"Apollo Hospitals", short:"Apollo", logo:null, hasPolicy:false },
     { id:"MANIPAL", name:"Manipal Hospitals", short:"Manipal", logo:null, hasPolicy:false },
     { id:"NIMS", name:"NIMS Hyderabad", short:"NIMS", logo:null, hasPolicy:false },
-    { id:"CUSTOM", name:"Custom hospital", short:"Custom", logo:null, hasPolicy:false, note:"Import your hospital's antibiogram & policy (coming soon)." }
+    { id:"CUSTOM", name:"Custom hospital", short:"Custom", logo:null, hasPolicy:false, note:"Import your hospital's antibiogram & policy (coming soon)." },
+    { id:"GIMSR", name:"GIMSR, Visakhapatnam", short:"GIMSR", logo:"/gimsr-logo.png",
+      policyName:"GIMSR Hospital Antimicrobial Policy", version:"HIC-3e · 04.11.2024 (ref NABH/ICMR)",
+      hasPolicy:true, policy:P, watch:WATCH, reserve:RESERVE }
   ];
   var HMAP = {}; HOSPITALS.forEach(function (h) { HMAP[h.id] = h; });
 
@@ -115,7 +115,7 @@
   function current() {
     var id = null;
     try { id = localStorage.getItem(KEY); } catch (e) {}
-    return HMAP[id] || HMAP.GIMSR;
+    return HMAP[id] || HMAP.ICMR;
   }
   function setProfile(id) {
     if (!HMAP[id]) return;

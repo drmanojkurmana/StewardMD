@@ -804,11 +804,11 @@
     root.innerHTML =
       '<div class="dx-top">' +
         '<button class="dx-back" id="dxClose" aria-label="Close reasoning">‹ Close</button>' +
-        '<div class="dx-title">Clinical Reasoning <span class="dx-beta">live</span></div>' +
+        '<div class="dx-title">Clinical Reasoning <span class="dx-beta">beta</span></div>' +
         '<button class="dx-reset" id="dxReset" title="Start over">Reset</button>' +
       '</div>' +
       '<div class="dx-body">' +
-        '<div class="dx-discl">Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
+        '<div class="dx-discl"><b>⚠️ Beta — this clinical reasoning engine is still being built and is under active testing.</b> Treat all output as provisional. Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
@@ -831,6 +831,10 @@
     root.querySelector("#dxAdvToggle").addEventListener("click", function () { S.advOpen = !S.advOpen; renderAdv(); });
     var si = root.querySelector("#dxSearch");
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
+    // Desktop-Chrome fix: stop any document/global key handler from swallowing
+    // the keystrokes typed into the findings search box.
+    si.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    si.addEventListener("keypress", function (e) { e.stopPropagation(); });
     return root;
   }
 
@@ -860,12 +864,19 @@
 
     // --- search mode: flat filtered results across the whole ontology ---
     if (filter) {
-      var matches = [];
-      ONT.forEach(function (g) { g.fields.forEach(function (fl) {
-        if (!S.f[fl.key] && (fl.label || "").toLowerCase().indexOf(filter) >= 0) matches.push(fl);
-      }); });
+      // match the label OR any clinical synonym (FT_SYN) so colloquial terms
+      // ("sob"→dyspnea, "creps"→crackles, "loose stool"→diarrhea) are findable.
+      var matches = [], seen = {};
+      function consider(fl) {
+        if (!fl || S.f[fl.key] || seen[fl.key]) return;
+        var lab = (fl.label || "").toLowerCase();
+        var hit = lab.indexOf(filter) >= 0;
+        if (!hit) { (FT_SYN[fl.key] || []).forEach(function (syn) { if (syn.indexOf(filter) >= 0 || (filter.length >= 3 && filter.indexOf(syn) >= 0)) hit = true; }); }
+        if (hit) { seen[fl.key] = true; matches.push(fl); }
+      }
+      ONT.forEach(function (g) { g.fields.forEach(consider); });
       el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results</div><div class="dx-chips">' +
-        (matches.length ? matches.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">No matching findings.</span>') +
+        (matches.length ? matches.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">No matching findings. Try the free-text “Extract findings” in the Advanced workspace below.</span>') +
         '</div></div>';
       wireAddChips(el); return;
     }
@@ -951,17 +962,27 @@
   };
   function parseFreeText(text) {
     if (!text) return;
-    var t = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g, " ") + " ", added = 0;
+    var t = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ") + " ", added = 0;
+    function present(phrase) {
+      phrase = (phrase || "").trim();
+      if (!phrase) return false;
+      // whole-word match, tolerant of a trailing plural 's'
+      return t.indexOf(" " + phrase + " ") >= 0 || t.indexOf(" " + phrase + "s ") >= 0;
+    }
     Object.keys(VALID).forEach(function (k) {
       if (S.f[k]) return;
       var hit = false;
       (FT_SYN[k] || []).forEach(function (s) { if (t.indexOf(s) >= 0) hit = true; });
-      if (!hit) { var lab = (LABEL[k] || "").toLowerCase(); if (lab.length >= 5 && lab.length <= 22 && t.indexOf(" " + lab + " ") >= 0) hit = true; }
+      if (!hit) {
+        var lab = (LABEL[k] || "").toLowerCase().replace(/\([^)]*\)/g, " ").replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ").trim();
+        if (lab.length >= 5 && lab.length <= 26 && present(lab)) hit = true;
+      }
       if (hit) { S.f[k] = true; added++; }
     });
     S.started = true;
     S.timeline.push({ f: "free-text (" + added + " findings extracted)", topName: null, topScore: null });
     recompute();
+    toast(added ? (added + " finding" + (added > 1 ? "s" : "") + " extracted from the text") : "No findings recognised — try different wording or add them manually below");
   }
   function loadSessions() { try { return JSON.parse(localStorage.getItem("stewardmd_rx_sessions") || "[]"); } catch (e) { return []; } }
   function saveSession() {
@@ -1119,13 +1140,29 @@
     if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
     var h = window.HOSPITAL.current();
     var opts = window.HOSPITAL.list.map(function (x) {
-      return '<option value="' + x.id + '"' + (x.id === h.id ? " selected" : "") + '>' + esc(x.name) + (x.hasPolicy ? "" : " — national guidance") + '</option>';
+      return '<option value="' + x.id + '"' + (x.id === h.id ? " selected" : "") + '>' + esc(x.name) + (x.recommended ? " ⭐ Recommended" : (x.hasPolicy ? "" : " — national guidance")) + '</option>';
     }).join("");
     el.innerHTML = '<span class="dx-hosp-l">Hospital policy</span>' +
       (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
       '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
     var sel = el.querySelector("#dxHospSel");
-    sel.addEventListener("change", function () { window.HOSPITAL.setProfile(sel.value); });
+    sel.addEventListener("change", function () { window.HOSPITAL.setProfile(sel.value); requestAntibiogram(sel.value); });
+  }
+
+  // When a clinician selects a hospital StewardMD has no local antibiogram /
+  // policy for (or a "Custom hospital"), offer to email it so we can add it.
+  // National ICMR guidance needs no upload.
+  function requestAntibiogram(id) {
+    try {
+      var h = null; ((window.HOSPITAL && window.HOSPITAL.list) || []).forEach(function (x) { if (x.id === id) h = x; });
+      if (!h || h.hasPolicy || h.id === "ICMR") return;
+      var name = h.name || h.short || "my hospital";
+      var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in — attach your latest antibiogram PDF before sending.");
+      if (!go) return;
+      var subject = "StewardMD — Local antibiogram upload (" + name + ")";
+      var body = "Hi StewardMD Support Team,\n\nI would like StewardMD to support my hospital's local antimicrobial policy / antibiogram.\n\nHospital: " + name + "\nCity / location: \nDepartment / unit: \n\nI have attached our latest local antibiogram / antibiotic policy PDF.\n(Please attach the PDF before sending.)\n\nThank you!";
+      window.location.href = "mailto:Support@StewardMD.in?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+    } catch (e) {}
   }
 
   function awareBadge(d) {
@@ -1172,8 +1209,8 @@
     } else {
       html = '<div class="dx-policy nopol">' +
         '<div class="dx-policy-src">' + src + '</div>' +
-        '<div class="dx-policy-note">No ' + esc(h.short || h.name) + ' syndrome-specific empiric entry for <b>' + esc(lead.name) + '</b>. ' +
-        (h.note ? esc(h.note) + " " : "") + 'StewardMD shows national/international (ICMR/IDSA) guidance on the full disease page.</div>' +
+        '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
+        (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
     }
@@ -1325,6 +1362,8 @@
       try { var lf = window.SMD_getFindings(), n = 0; for (var k in lf) { if (lf[k] && VALID[k]) { S.f[k] = true; n++; } } if (n) { S.started = true; S.lastAdded = null; } } catch (e) {}
     }
     root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
+    // focus the findings search so the clinician can start typing immediately
+    try { var sif = root.querySelector("#dxSearch"); if (sif) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { open({ workspace: true }); }
   function close() {
@@ -1482,7 +1521,9 @@
       ".dx-dom b{color:var(--teal)}",
       ".dx-conf{font:700 12px var(--sans);color:var(--ink);background:var(--paper);border-radius:8px;padding:7px 10px;margin:10px 0 2px}",
       ".dx-conf .up{color:var(--green);font-weight:700}.dx-conf .down{color:var(--red);font-weight:700}",
-      ".dx-mimic{font-size:9.5px}"
+      ".dx-mimic{font-size:9.5px}",
+      ".sb-beta{font-size:9px;font-weight:800;background:var(--teal);color:#fff;border-radius:5px;padding:1px 5px;margin-left:6px;vertical-align:middle;letter-spacing:.02em}",
+      ".sb-main-link .chev{display:none}"
     ].join("");
     var st = document.createElement("style"); st.id = "dx-styles"; st.textContent = css; document.head.appendChild(st);
   }
