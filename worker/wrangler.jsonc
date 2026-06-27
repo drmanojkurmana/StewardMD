@@ -1,0 +1,37 @@
+{
+  // StewardMD Drug API — Cloudflare Worker configuration.
+  // Deployed independently of the GitHub Pages frontend (via `wrangler deploy`).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "stewardmd-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-06-27",
+
+  // Development: a *.workers.dev URL is provisioned for local/preview testing.
+  "workers_dev": true,
+
+  // Production endpoint (Phase 5). Requires the stewardmd.in zone on Cloudflare.
+  "routes": [
+    { "pattern": "api.stewardmd.in", "custom_domain": true }
+  ],
+
+  // Bind the EXISTING D1 database — do NOT create a new one.
+  // Exposed to the Worker as `env.DB`.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "stewardmd-prod",
+      "database_id": "2da529c4-c061-4f2f-8ae4-9280c70294b1"
+    }
+  ],
+
+  // account_id intentionally omitted from source control; wrangler uses the
+  // authenticated account. Any secrets go via `wrangler secret put`, never here.
+  "observability": { "enabled": true },
+
+  // Edge rate limiting per client IP (protects the open, read-only API).
+  "unsafe": {
+    "bindings": [
+      { "name": "RL", "type": "ratelimit", "namespace_id": "1001", "simple": { "limit": 120, "period": 60 } }
+    ]
+  }
+}

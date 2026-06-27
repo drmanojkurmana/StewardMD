@@ -1,0 +1,11 @@
+# Worker tooling — never commit
+node_modules/
+.wrangler/
+.dev.vars
+*.log
+
+# Local data artifacts (built in Phase 2, never shipped)
+*.sqlite
+*.sqlite3
+*.db
+data/

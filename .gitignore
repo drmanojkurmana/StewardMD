@@ -1,0 +1,15 @@
+# Cloudflare Worker tooling / caches (never commit)
+.wrangler/
+worker/.wrangler/
+worker/node_modules/
+node_modules/
+**/.dev.vars
+
+# Large drug-database source files — NEVER commit (exceed GitHub's 100 MB limit;
+# imported into Cloudflare D1, not shipped via the repo)
+stewardmd_drug_database.*
+*.sqlite
+*.sqlite3
+
+# OS noise
+.DS_Store
