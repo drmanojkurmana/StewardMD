@@ -26,6 +26,8 @@ const ALLOWED_ORIGINS = [
 ];
 const DEV_ORIGIN_RE = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const TTL = { search: 300, suggest: 600, comp: 600, drug: 86400 };
+// Bump to invalidate all edge/Worker-cached responses after a response-shape change.
+const CACHE_VERSION = "2";
 
 function corsHeaders(origin) {
   let allow = "https://stewardmd.in";
@@ -215,7 +217,12 @@ export default {
     const cacheable = path === "/search" || path === "/suggest" || path === "/composition" || path.startsWith("/drug/");
 
     const cache = caches.default;
-    if (cacheable) { const hit = await cache.match(request); if (hit) return withCors(hit, origin); }
+    let cacheKey = request;
+    if (cacheable) {
+      const u = new URL(request.url); u.searchParams.set("_cv", CACHE_VERSION);
+      cacheKey = new Request(u.toString(), { method: "GET" });
+      const hit = await cache.match(cacheKey); if (hit) return withCors(hit, origin);
+    }
 
     let res;
     if (path === "/" || path === "/health") res = await handleHealth(env);
@@ -227,7 +234,7 @@ export default {
 
     const cc = res.headers.get("Cache-Control") || "";
     if (cacheable && res.status === 200 && cc.includes("max-age=") && !cc.includes("max-age=0")) {
-      ctx.waitUntil(cache.put(request, res.clone()));
+      ctx.waitUntil(cache.put(cacheKey, res.clone()));
     }
     return withCors(res, origin);
   },
