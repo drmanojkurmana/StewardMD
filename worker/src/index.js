@@ -27,7 +27,7 @@ const ALLOWED_ORIGINS = [
 const DEV_ORIGIN_RE = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const TTL = { search: 300, suggest: 600, comp: 600, drug: 86400 };
 // Bump to invalidate all edge/Worker-cached responses after a response-shape change.
-const CACHE_VERSION = "2";
+const CACHE_VERSION = "3";
 
 function corsHeaders(origin) {
   let allow = "https://stewardmd.in";
@@ -173,11 +173,21 @@ async function handleComposition(url, env) {
   }
 }
 
-// /monograph -> open-data clinical monograph (openFDA/DailyMed) for a generic
+// /monograph -> clinical monograph for a generic. For combination products
+// (composition contains " + ") we compose each component's monograph.
 async function handleMonograph(url, env) {
   const name = (url.searchParams.get("name") || "").trim();
   if (!name) return json({ error: "missing name" }, { status: 400 });
   try {
+    if (/\s\+\s/.test(name)) {
+      const parts = name.split(/\s*\+\s*/).map((s) => s.trim()).filter(Boolean);
+      const components = [];
+      for (const p of parts) {
+        const m = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(p).first();
+        components.push({ name: p, monograph: m || null });
+      }
+      return json({ composition: name, combo: true, found: components.some((c) => c.monograph), components }, { ttl: 86400 });
+    }
     const m = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(name).first();
     if (!m) return json({ composition: name, found: false }, { ttl: TTL.comp });
     return json({ composition: name, found: true, monograph: m }, { ttl: 86400 });

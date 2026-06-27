@@ -214,21 +214,20 @@
     var c = root.querySelector("#dbMono"); if (!c) return;
     if (monoCache[name] !== undefined) { renderMono(c, monoCache[name]); return; }
     MEDAPI.monograph(name).then(function (resp) {
-      var mono = (resp && resp.found) ? resp.monograph : null;
-      monoCache[name] = mono;
-      if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderMono(cc, mono); }
+      monoCache[name] = resp || null;
+      if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderMono(cc, resp || null); }
     });
   }
-  function renderMono(c, mono) {
-    if (!mono) { c.innerHTML = '<div class="db-mono-none">No U.S. FDA monograph for this molecule (India-only drug or combination product). Brand &amp; price data below.</div>'; return; }
-    var openDefault = { indication: 1, dosage: 1 };
-    var html = '<div class="db-msrc">℞ Prescribing reference · <b>' + esc(mono.source || "openFDA") + '</b><span>U.S. FDA label — not India-specific; verify against local guidance. Decision support only.</span></div>';
+  function sectionsHTML(mono, openKeys) {
+    var html = '<div class="db-msrc">℞ <b>' + esc(mono.source || "openFDA") + '</b><span>Verify against local guidance. Decision support only.</span></div>';
     MONO_SECS.forEach(function (s) {
-      var v = mono[s[1]]; if (!v) return; var op = openDefault[s[1]];
+      var v = mono[s[1]]; if (!v) return; var op = openKeys[s[1]];
       html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button>' +
         '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
     });
-    c.innerHTML = html;
+    return html;
+  }
+  function wireToggles(c) {
     c.querySelectorAll(".db-msec-h").forEach(function (h) {
       h.addEventListener("click", function () {
         var b = h.nextElementSibling, hidden = b.style.display === "none";
@@ -236,6 +235,20 @@
         h.querySelector(".db-msec-x").textContent = hidden ? "−" : "+";
       });
     });
+  }
+  function renderMono(c, resp) {
+    if (!resp || !resp.found) { c.innerHTML = '<div class="db-mono-none">No prescribing monograph for this molecule yet (India-only or not matched). Brand &amp; price data below.</div>'; return; }
+    if (resp.combo) {
+      var html = '<div class="db-msrc">Combination product — prescribing details shown per component. Verify against local guidance.</div>';
+      (resp.components || []).forEach(function (comp) {
+        html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(comp.name) + '</div>' +
+          (comp.monograph ? sectionsHTML(comp.monograph, { indication: 1 }) : '<div class="db-mono-none">No monograph available for this component yet.</div>') +
+          '</div>';
+      });
+      c.innerHTML = html; wireToggles(c); return;
+    }
+    c.innerHTML = sectionsHTML(resp.monograph, { indication: 1, dosage: 1 });
+    wireToggles(c);
   }
   function appendBrands(arr) {
     var c = root.querySelector("#dbBrands"); if (!c) return;
@@ -299,6 +312,8 @@
       ".db-msec-x{color:var(--teal,#0a9396);font-weight:800;font-size:15px;flex:0 0 auto}",
       ".db-msec-b{padding:10px 12px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;white-space:pre-line}",
       ".db-mono-none{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--paper,#f7f7f5);border:1px dashed var(--line,#e5e5e0);border-radius:9px;padding:10px 12px}",
+      ".db-cmono{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px;margin-bottom:9px;background:var(--paper,#f7f7f5)}",
+      ".db-cmono-h{font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-bottom:7px}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
       ".db-brands-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 2px 9px;font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-sorts{display:flex;gap:6px}",
