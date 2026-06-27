@@ -1,0 +1,90 @@
+{
+  "generic": "Pimozide",
+  "cls": "First-generation (typical) antipsychotic - diphenylbutylpiperidine",
+  "pharm": "Potent dopamine D2 receptor antagonist used to suppress motor and phonic tics in Tourette's disorder; prolongs the QT interval.",
+  "tags": ["Typical antipsychotic", "Antipsychotic", "Tourette's disorder", "QT prolongation", "CYP3A4/2D6 substrate", "Narrow indication"],
+  "quick": [
+    ["Adult dose", "Start 1-2 mg/day divided; maintain <0.2 mg/kg/day or 10 mg/day"],
+    ["Meal", "With or without food; avoid grapefruit juice"],
+    ["Pregnancy", "Use only if clearly needed; neonatal EPS/withdrawal risk"],
+    ["Lactation", "Avoid; likely excreted in milk"],
+    ["Renal", "Use caution; no specific adjustment"],
+    ["Hepatic", "Use caution; reduce dose"],
+    ["Alcohol", "Avoid - additive CNS depression"],
+    ["Monitoring", "ECG (QT), electrolytes (K+/Mg2+), CYP2D6 status"]
+  ],
+  "summary": "Pimozide is a typical antipsychotic indicated specifically for suppression of motor and phonic tics in Tourette's disorder in patients who have failed standard treatment. It requires slow, gradual titration with baseline and periodic ECGs because it prolongs the QT interval and has caused fatal arrhythmias. It is contraindicated with QT-prolonging drugs, CYP3A4/CYP2D6 inhibitors, in congenital long-QT syndrome, hypokalemia/hypomagnesemia, and in simple tics not due to Tourette's.",
+  "indications": [
+    "Suppression of motor and phonic tics in Tourette's disorder in patients who have failed to respond satisfactorily to standard treatment"
+  ],
+  "dosage": [
+    {"c": "Tourette's disorder - adults", "r": "Oral", "d": "Start 1-2 mg/day in divided doses; increase every other day", "t": "Divided/once daily", "n": "Maintain at <0.2 mg/kg/day or 10 mg/day, whichever is less; max not above 0.2 mg/kg/day or 10 mg/day"},
+    {"c": "Tourette's disorder - children >=12 y", "r": "Oral", "d": "Start 0.05 mg/kg, preferably at bedtime; increase every third day", "t": "Once at bedtime, then adjust", "n": "Max 0.2 mg/kg/day not to exceed 10 mg/day"},
+    {"c": "CYP2D6 considerations", "r": "Oral", "d": "Genotype if >4 mg/day (adults) or >0.05 mg/kg/day (children)", "t": "Per titration", "n": "In poor CYP2D6 metabolizers do not exceed 4 mg/day (adults) or 0.05 mg/kg/day (children); titrate no faster than every 14 days"}
+  ],
+  "admin": [
+    "Initiate at low dose with slow, gradual titration; balance tic suppression against adverse effects",
+    "Obtain baseline ECG and check periodically, especially during dose adjustment",
+    "Correct hypokalemia/hypomagnesemia before and during therapy",
+    "Avoid grapefruit juice (CYP3A4 inhibition)",
+    "Withdraw gradually; abrupt cessation may cause transient tic worsening"
+  ],
+  "moa": "Potent, selective antagonist of central dopamine D2 receptors, suppressing dopaminergically mediated motor and phonic tics. It also blocks cardiac potassium channels, prolonging cardiac repolarization (QT interval).",
+  "contra": {
+    "absolute": ["Simple tics or tics not associated with Tourette's disorder", "Concurrent drugs that themselves cause tics (pemoline, methylphenidate, amphetamines) until withdrawn", "Congenital long-QT syndrome or history of cardiac arrhythmias", "Concurrent QT-prolonging drugs", "Known hypokalemia or hypomagnesemia", "Concurrent strong CYP3A4 inhibitors (azole antifungals, macrolides, protease inhibitors) and CYP2D6 inhibitors (e.g., certain SSRIs)", "Severe toxic CNS depression or comatose states", "Hypersensitivity to pimozide"],
+    "relative": ["Hepatic or renal impairment", "Cardiovascular disease", "History of seizures (lowers threshold)", "Elderly with dementia-related psychosis (increased mortality - class effect)"],
+    "monitor": ["ECG/QT interval", "Serum potassium and magnesium", "Extrapyramidal symptoms", "CYP2D6 metabolizer status"]
+  },
+  "preg": "Use only if clearly needed. Neonates exposed in the third trimester are at risk for extrapyramidal and/or withdrawal symptoms.",
+  "lact": "It is not known if pimozide is excreted in human milk but it is likely; breastfeeding is not recommended.",
+  "renal": "Use with caution; no specific dosage recommendation - lower doses may be prudent.",
+  "hepatic": "Use with caution and reduce dose; hepatic metabolism (CYP3A4/CYP2D6) is the main elimination route.",
+  "interactions": {
+    "major": ["QT-prolonging drugs (class IA/III antiarrhythmics, certain antipsychotics, macrolides, fluoroquinolones, methadone) - additive QT risk, torsades", "Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, erythromycin, ritonavir) - raise pimozide levels (contraindicated)", "CYP2D6 inhibitors (paroxetine, fluoxetine, sertraline) - raise pimozide levels (contraindicated)", "Drugs causing tics (methylphenidate, amphetamines, pemoline) - contraindicated"],
+    "moderate": ["CNS depressants and alcohol - additive sedation", "Anticholinergics - additive effects", "Drugs causing hypokalemia/hypomagnesemia (diuretics) - increase arrhythmia risk"],
+    "minor": [],
+    "food": "Avoid grapefruit juice (inhibits CYP3A4 and raises pimozide levels).",
+    "alcohol": "Avoid - additive CNS depression.",
+    "diagnostics": "Baseline and periodic ECG (QTc); monitor serum potassium and magnesium; consider CYP2D6 genotyping at higher doses."
+  },
+  "se": {
+    "common": ["Sedation/drowsiness", "Extrapyramidal symptoms (parkinsonism, akathisia, dystonia)", "Dry mouth", "Constipation", "Visual disturbance", "Weight changes"],
+    "serious": ["QT prolongation, ventricular arrhythmias including torsades de pointes, sudden death", "Tardive dyskinesia", "Neuroleptic malignant syndrome", "Seizures"],
+    "rare": ["Cholestatic jaundice", "Blood dyscrasias", "Hyperprolactinemia"],
+    "emergency": ["Torsades de pointes / sudden cardiac death", "Neuroleptic malignant syndrome", "Severe extrapyramidal/dystonic reaction"]
+  },
+  "monitoring": [
+    "ECG (QTc) at baseline and periodically, especially during dose adjustment",
+    "Serum potassium and magnesium (correct before/during therapy)",
+    "Extrapyramidal symptoms and tardive dyskinesia",
+    "CYP2D6 metabolizer status when exceeding threshold doses",
+    "Signs of neuroleptic malignant syndrome (fever, rigidity, autonomic instability)"
+  ],
+  "counsel": [
+    "Take exactly as prescribed; dose changes are made slowly",
+    "Avoid grapefruit juice and alcohol",
+    "Report fainting, palpitations, or irregular heartbeat immediately (heart rhythm risk)",
+    "Report muscle stiffness, tremor, restlessness, or abnormal movements",
+    "Tell every clinician you take pimozide before starting any new medicine (many interactions)"
+  ],
+  "pk": [
+    ["Onset", "Tic suppression over days to weeks of titration"],
+    ["Peak", "~6-8 hours"],
+    ["Half-life", "~55 hours (long; ~66 h in children)"],
+    ["Duration", "Sustained; once-daily dosing feasible"],
+    ["Storage", "Store at room temperature, protect from light"]
+  ],
+  "pearls": [
+    "Reserved for Tourette's tics failing standard therapy - not first-line and not for simple/non-Tourette tics",
+    "QT prolongation and torsades risk drive the contraindications - avoid QT drugs and CYP3A4/2D6 inhibitors and correct K+/Mg2+",
+    "Baseline and periodic ECG monitoring is mandatory",
+    "Long half-life means steady state and offset take days",
+    "CYP2D6 poor metabolizers need dose limits and slower titration"
+  ],
+  "missed": "Take the missed dose when remembered unless it is close to the next dose, then skip it; do not double up. Because of the long half-life and arrhythmia risk, do not take extra doses.",
+  "overdose": "Overdose causes severe extrapyramidal reactions, hypotension, ECG changes (QT prolongation, arrhythmias), and CNS depression up to coma. There is no specific antidote; provide ECG/cardiac monitoring, supportive care, gastric decontamination, and treat arrhythmias and EPS (anticholinergics for dystonia). Avoid drugs that further prolong QT.",
+  "refs": [
+    ["FDA Pimozide (Orap) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pimozide%22"],
+    ["DailyMed - Pimozide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=pimozide"]
+  ]
+}

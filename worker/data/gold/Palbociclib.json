@@ -1,0 +1,93 @@
+{
+  "generic": "Palbociclib",
+  "cls": "Cyclin-dependent kinase (CDK) 4/6 inhibitor",
+  "pharm": "Antineoplastic / kinase inhibitor",
+  "tags": ["breast cancer", "CDK4/6 inhibitor", "HR-positive", "HER2-negative", "antineoplastic", "neutropenia"],
+  "quick": [
+    ["Adult dose", "125 mg PO once daily, 21 days on then 7 days off (28-day cycle)"],
+    ["Meal", "Tablets with or without food; capsules with food; swallow whole"],
+    ["Pregnancy", "Can cause fetal harm; effective contraception required"],
+    ["Lactation", "Do not breastfeed during and for 3 weeks after last dose"],
+    ["Renal", "No adjustment (CrCl >=15 mL/min)"],
+    ["Hepatic", "Severe (Child-Pugh C): reduce to 75 mg once daily"],
+    ["Alcohol", "No specific interaction; limit per general oncology advice"],
+    ["Monitoring", "CBC before start, Day 15 of first 2 cycles, before each cycle; pulmonary symptoms"]
+  ],
+  "summary": "Palbociclib (IBRANCE) is an oral CDK4/6 inhibitor for HR-positive, HER2-negative advanced or metastatic breast cancer, used with an aromatase inhibitor as initial endocrine-based therapy or with fulvestrant after disease progression. The dose is 125 mg once daily for 21 days followed by 7 days off in 28-day cycles. Neutropenia is the most common and dose-limiting toxicity; severe and fatal infections, febrile neutropenia, and interstitial lung disease/pneumonitis can occur. CBC monitoring and CYP3A interaction awareness are essential.",
+  "indications": [
+    "HR-positive, HER2-negative advanced or metastatic breast cancer in combination with an aromatase inhibitor as initial endocrine-based therapy in postmenopausal women or in men",
+    "HR-positive, HER2-negative advanced or metastatic breast cancer in combination with fulvestrant in patients with disease progression following endocrine therapy"
+  ],
+  "dosage": [
+    {"c": "Advanced/metastatic breast cancer (adult)", "r": "Standard", "d": "125 mg once daily for 21 consecutive days, then 7 days off (28-day cycle)", "t": "Once daily, cyclic", "n": "Combine with aromatase inhibitor or fulvestrant"},
+    {"c": "First dose reduction (toxicity)", "r": "Reduced", "d": "100 mg once daily on the 21/7 schedule", "t": "Once daily, cyclic", "n": "For neutropenia/other toxicity per label"},
+    {"c": "Second dose reduction (toxicity)", "r": "Reduced", "d": "75 mg once daily on the 21/7 schedule", "t": "Once daily, cyclic", "n": "If further reduction below 75 mg needed, discontinue"},
+    {"c": "Severe hepatic impairment (Child-Pugh C)", "r": "Reduced", "d": "75 mg once daily on the 21/7 schedule", "t": "Once daily, cyclic", "n": "No adjustment for Child-Pugh A or B"},
+    {"c": "With strong CYP3A inhibitor (unavoidable)", "r": "Reduced", "d": "75 mg once daily", "t": "Once daily, cyclic", "n": "Avoid strong CYP3A inhibitors when possible"},
+    {"c": "Pre/perimenopausal women", "r": "Adjunct", "d": "Add an LHRH agonist to palbociclib plus endocrine partner", "t": "Per LHRH schedule", "n": "Ovarian suppression required"}
+  ],
+  "admin": [
+    "Take 125 mg once daily on the 21-days-on / 7-days-off schedule",
+    "Film-coated tablets may be taken with or without food; capsules should be taken with food",
+    "Swallow whole - do not chew, crush or split prior to swallowing",
+    "Always take with the prescribed aromatase inhibitor or fulvestrant (and LHRH agonist if pre/perimenopausal)",
+    "Avoid grapefruit and grapefruit juice during treatment"
+  ],
+  "moa": "Palbociclib is a selective inhibitor of cyclin-dependent kinases 4 and 6 (CDK4/6), which are downstream of signaling pathways driving cellular proliferation. By inhibiting CDK4/6 it blocks phosphorylation of the retinoblastoma (Rb) protein, preventing cell-cycle progression from G1 into S phase. In ER-positive breast cancer cells, combination with antiestrogens reduces Rb phosphorylation, decreases E2F signaling, and increases growth arrest and cellular senescence compared with either agent alone.",
+  "contra": {
+    "absolute": [],
+    "relative": ["Severe hepatic impairment (Child-Pugh C) - reduce dose", "Pregnancy - can cause fetal harm", "Active or recent serious infection (neutropenia risk)"],
+    "monitor": ["Concomitant strong CYP3A inhibitors or inducers", "Sensitive CYP3A substrates with narrow therapeutic index", "Patients with prior or current pulmonary disease (ILD risk)"]
+  },
+  "preg": "Palbociclib can cause fetal harm based on animal studies and mechanism of action. Verify pregnancy status before starting. Females of reproductive potential should use effective contraception during treatment and for at least 3 weeks after the last dose; males with female partners of reproductive potential should use effective contraception during treatment and for 3 months after the last dose.",
+  "lact": "Advise women not to breastfeed during treatment with palbociclib and for 3 weeks after the last dose because of the potential for serious adverse reactions in the breastfed child.",
+  "renal": "No dose adjustment is required for mild, moderate or severe renal impairment (CrCl >=15 mL/min).",
+  "hepatic": "No dose adjustment is required for mild or moderate hepatic impairment (Child-Pugh A or B). For severe hepatic impairment (Child-Pugh C), reduce the starting dose to 75 mg once daily on the 21/7 schedule.",
+  "interactions": {
+    "major": ["Strong CYP3A inhibitors (e.g., ketoconazole, itraconazole, clarithromycin, ritonavir) - avoid; if unavoidable reduce palbociclib to 75 mg once daily", "Strong CYP3A inducers (e.g., rifampin, phenytoin, carbamazepine, St. John's wort) - avoid concomitant use", "Sensitive CYP3A substrates with narrow therapeutic index - palbociclib may increase their exposure; reduce substrate dose if needed"],
+    "moderate": ["Moderate CYP3A inhibitors - may increase palbociclib exposure; use caution", "Other myelosuppressive agents - additive neutropenia/thrombocytopenia"],
+    "minor": ["Drugs affecting gastric pH - monitor (palbociclib solubility is pH dependent)"],
+    "food": "Tablets may be taken with or without food; capsules are taken with food. Avoid grapefruit and grapefruit juice, which can increase palbociclib exposure.",
+    "alcohol": "No specific alcohol interaction described in labeling.",
+    "diagnostics": "Commonly causes decreased WBC/neutrophils, anemia, thrombocytopenia and increased AST/ALT and creatinine."
+  },
+  "se": {
+    "common": ["Neutropenia / decreased neutrophil count", "Leukopenia", "Infections", "Fatigue", "Nausea", "Stomatitis", "Anemia", "Thrombocytopenia", "Diarrhea", "Alopecia", "Increased AST/ALT", "Increased blood creatinine"],
+    "serious": ["Severe or febrile neutropenia", "Severe, life-threatening or fatal infections", "Interstitial lung disease (ILD) / pneumonitis - can be severe, life-threatening or fatal", "Venous thromboembolism / pulmonary embolism"],
+    "rare": ["Severe hypersensitivity reactions"],
+    "emergency": ["Febrile neutropenia with sepsis", "Acute respiratory failure from severe ILD/pneumonitis", "Pulmonary embolism"]
+  },
+  "monitoring": [
+    "Complete blood count (CBC) prior to starting therapy, on Day 15 of the first 2 cycles, at the beginning of each subsequent cycle, and as clinically indicated",
+    "Signs and symptoms of infection (fever, chills)",
+    "Pulmonary symptoms indicative of ILD/pneumonitis - hypoxia, cough, dyspnea; interrupt and evaluate",
+    "Signs and symptoms of venous thromboembolism"
+  ],
+  "counsel": [
+    "Take exactly as prescribed - 21 days on then 7 days off; tablets with or without food, capsules with food; swallow whole",
+    "Report fever, chills or other signs of infection promptly",
+    "Report new or worsening shortness of breath, cough, or chest pain (possible lung inflammation)",
+    "Avoid grapefruit and grapefruit juice; tell all providers about your other medicines",
+    "Use effective contraception (women during and 3 weeks after last dose; men during and 3 months after); do not breastfeed during and for 3 weeks after the last dose"
+  ],
+  "pk": [
+    ["Onset", "Cell-cycle arrest within days; clinical response over cycles"],
+    ["Peak", "Tmax approximately 6-12 hours after dosing"],
+    ["Half-life", "Mean ~29 (+/-5) hours"],
+    ["Duration", "Steady state reached within ~8 days of once-daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C permitted"]
+  ],
+  "pearls": [
+    "Neutropenia is the most common and dose-limiting adverse reaction - hold/reduce per CBC; check CBC on Day 15 of the first 2 cycles",
+    "Watch for interstitial lung disease/pneumonitis - permanently discontinue for severe ILD/pneumonitis",
+    "Strong CYP3A inhibitors require dose reduction to 75 mg; avoid strong inducers and grapefruit",
+    "Pre/perimenopausal women must also receive an LHRH agonist for ovarian suppression"
+  ],
+  "missed": "If a dose is missed or the patient vomits, an additional dose should not be taken. The next prescribed dose should be taken at the usual time.",
+  "overdose": "There is no specific antidote and the prescribing information contains no dedicated overdose protocol. In the event of overdose, management should be supportive, with monitoring of blood counts and general supportive care.",
+  "refs": [
+    ["DailyMed - IBRANCE (palbociclib) tablets", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=fecbdd7d-b729-41b5-9872-231b8fe104ce"],
+    ["DailyMed - IBRANCE (palbociclib) capsules", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e0e6412f-50b4-4fd4-9364-62818d121a07"],
+    ["FDA Label - IBRANCE tablets (accessdata)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2019/212436lbl.pdf"]
+  ]
+}

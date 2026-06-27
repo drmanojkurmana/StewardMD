@@ -1,0 +1,93 @@
+{
+  "generic": "Cisplatin",
+  "cls": "Platinum-containing alkylating-like antineoplastic",
+  "pharm": "Cytotoxic chemotherapy (DNA cross-linking agent)",
+  "tags": ["chemotherapy", "platinum", "nephrotoxic", "antineoplastic", "testicular cancer"],
+  "quick": [
+    ["Adult dose", "Regimen-specific IV, e.g. 20 mg/m2/day x5 or 75-100 mg/m2 q3-4 wk"],
+    ["Meal", "Not applicable (IV); ensure hydration"],
+    ["Pregnancy", "Contraindicated (Category D); can cause fetal harm"],
+    ["Lactation", "Do not breastfeed; excreted in milk"],
+    ["Renal", "Contraindicated in pre-existing renal impairment"],
+    ["Hepatic", "Use with caution; not primarily hepatically cleared"],
+    ["Alcohol", "Avoid; additive nausea and toxicity"],
+    ["Monitoring", "Renal function, electrolytes, audiometry, CBC, neuro exam"]
+  ],
+  "summary": "Cisplatin is a platinum-based cytotoxic used (usually in combination) for testicular, ovarian and bladder cancers and many other solid tumors. It is given by slow IV infusion with vigorous hydration, never by rapid IV injection or via aluminum-containing sets. A boxed warning highlights severe cumulative nephrotoxicity, plus myelosuppression, severe nausea/vomiting, ototoxicity (especially in children) and anaphylactic-like reactions.",
+  "indications": [
+    "Metastatic testicular tumors (combination therapy after surgery/radiotherapy)",
+    "Metastatic ovarian tumors (combination with cyclophosphamide; or as single agent secondary therapy)",
+    "Advanced bladder cancer (single agent for transitional cell carcinoma no longer amenable to surgery/radiotherapy)",
+    "Other solid tumors per established regimens (e.g., head and neck, lung, cervical) as supported by oncology practice"
+  ],
+  "dosage": [
+    {"c": "Metastatic testicular cancer (combination)", "r": "Standard", "d": "20 mg/m2 IV daily for 5 days per cycle", "t": "Per cycle, repeated as scheduled", "n": "With other agents; slow IV infusion only"},
+    {"c": "Metastatic ovarian cancer (with cyclophosphamide)", "r": "Standard", "d": "75-100 mg/m2 IV once per cycle", "t": "Every 3-4 weeks", "n": "Do not give more often than every 3-4 weeks"},
+    {"c": "Ovarian cancer (single agent)", "r": "Standard", "d": "100 mg/m2 IV once per cycle", "t": "Every 4 weeks", "n": "Secondary therapy"},
+    {"c": "Advanced bladder cancer (single agent)", "r": "Standard", "d": "50-70 mg/m2 IV once per cycle", "t": "Every 3-4 weeks", "n": "Reduce to 50 mg/m2 q4 wk in heavily pretreated patients"}
+  ],
+  "admin": [
+    "Administer only by slow IV infusion - NEVER by rapid IV injection",
+    "Do not use needles or IV sets containing aluminum (aluminum reacts with cisplatin, forming precipitate and loss of potency)",
+    "Pre- and post-hydrate vigorously to maintain urine output and reduce nephrotoxicity; consider mannitol/forced diuresis per protocol",
+    "Give antiemetic prophylaxis (cisplatin is highly emetogenic)",
+    "Verify renal function and electrolytes have recovered before each course; do not repeat more often than every 3-4 weeks"
+  ],
+  "moa": "Cisplatin enters cells and undergoes aquation; the reactive platinum species binds covalently to DNA, forming intrastrand and interstrand cross-links (predominantly at adjacent guanine N7 positions). These cross-links distort the DNA helix, inhibit replication and transcription, and trigger apoptosis. Its action is cell-cycle nonspecific, behaving like a bifunctional alkylating agent.",
+  "contra": {
+    "absolute": ["Pre-existing renal impairment", "Myelosuppression", "Hearing impairment", "History of allergic reaction to cisplatin or other platinum-containing compounds", "Pregnancy"],
+    "relative": ["Pre-existing peripheral neuropathy", "Concurrent nephrotoxic or ototoxic agents (e.g., aminoglycosides)", "Elderly patients (greater nephrotoxicity)", "Dehydration or poor urine output"],
+    "monitor": ["Concomitant anticonvulsants (levels may fall)", "Patients on loop diuretics", "Electrolyte depletion (Mg, K, Ca, Na)"]
+  },
+  "preg": "Pregnancy Category D - cisplatin can cause fetal harm and is contraindicated in pregnancy. Advise females of reproductive potential of the potential hazard and to avoid pregnancy; effective contraception is required during therapy.",
+  "lact": "Cisplatin is excreted in human milk; patients receiving cisplatin should not breastfeed.",
+  "renal": "Contraindicated in pre-existing renal impairment. Cumulative, dose-related nephrotoxicity is the major dose-limiting toxicity; ensure adequate hydration and confirm renal recovery before each course. It is potentiated by aminoglycosides.",
+  "hepatic": "Cisplatin is not primarily cleared hepatically; specific hepatic dose adjustments are not defined, but use with caution and monitor, as hepatotoxicity can occur particularly at high doses/overdose.",
+  "interactions": {
+    "major": ["Aminoglycoside antibiotics - potentiate cumulative nephrotoxicity (and additive ototoxicity); avoid", "Other nephrotoxic or ototoxic drugs (loop diuretics, amphotericin) - additive renal/ear toxicity", "Nephrotoxic contrast and NSAIDs - increased renal injury risk"],
+    "moderate": ["Anticonvulsants (phenytoin) - plasma levels may become subtherapeutic; monitor and adjust", "Live vaccines - avoid in immunosuppressed patients", "Other myelosuppressive chemotherapy/radiation - additive marrow suppression"],
+    "minor": ["Pyridoxine with altretamine - reduced response duration in ovarian cancer (avoid that combination)"],
+    "food": "Not applicable (IV); maintain hydration.",
+    "alcohol": "Avoid; additive nausea/vomiting and general toxicity.",
+    "diagnostics": "Raises BUN/creatinine and uric acid; lowers Mg, K, Ca, Na; causes anemia/leukopenia/thrombocytopenia; may affect audiometry."
+  },
+  "se": {
+    "common": ["Severe nausea and vomiting", "Nephrotoxicity (rising BUN/creatinine)", "Myelosuppression (leukopenia, thrombocytopenia, anemia)", "Electrolyte disturbances (hypomagnesemia, hypokalemia, hypocalcemia, hyponatremia)", "Ototoxicity (tinnitus, high-frequency hearing loss)", "Peripheral neuropathy", "Anorexia"],
+    "serious": ["Acute renal failure / cumulative renal insufficiency", "Severe myelosuppression with infection/bleeding", "Ototoxicity progressing to deafness (more pronounced in children)", "Anaphylactic-like reactions", "Severe peripheral and autonomic neuropathy", "Optic neuritis, papilledema, cortical blindness"],
+    "rare": ["Secondary malignancies (acute leukemia)", "Cardiac abnormalities, vascular events (MI, stroke, thrombotic microangiopathy)", "Hemolytic anemia, SIADH", "Hepatotoxicity at high doses"],
+    "emergency": ["Anaphylaxis (facial edema, bronchospasm, tachycardia, hypotension)", "Acute renal failure", "Severe neutropenic sepsis or hemorrhage", "Intractable vomiting with dehydration"]
+  },
+  "monitoring": [
+    "Serum creatinine, BUN and creatinine clearance before and before each course; confirm recovery",
+    "Serum magnesium, potassium, calcium and sodium before each course and as needed",
+    "Complete blood counts (weekly) for myelosuppression nadir",
+    "Audiometry at baseline and periodically; neurologic exam for neuropathy",
+    "Liver function and signs of allergic reaction during infusion"
+  ],
+  "counsel": [
+    "Expect possible nausea/vomiting; take antiemetics as prescribed and report if uncontrolled",
+    "Drink fluids as advised - good hydration protects the kidneys",
+    "Report reduced urination, ringing in the ears or hearing changes, numbness/tingling, or signs of infection (fever)",
+    "Avoid pregnancy and breastfeeding; use effective contraception during treatment",
+    "Report any rash, facial swelling or breathing difficulty during/after infusion immediately"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic DNA binding within hours of infusion"],
+    ["Peak", "End of slow IV infusion"],
+    ["Half-life", "Initial ~25-50 min; terminal (protein-bound platinum) several days"],
+    ["Duration", "Platinum detectable in tissues for months; dosed every 3-4 weeks"],
+    ["Storage", "Store at 20-25 C; do not refrigerate; protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: severe cumulative nephrotoxicity, plus myelosuppression, severe nausea/vomiting, ototoxicity (worse in children) and anaphylactic-like reactions",
+    "Vigorous hydration (and sometimes mannitol-forced diuresis) is essential to limit kidney injury",
+    "Never give by rapid IV push and never use aluminum-containing needles/sets (precipitation and loss of potency)",
+    "Highly emetogenic - give triple antiemetic prophylaxis; hemodialysis does not remove protein-bound platinum"
+  ],
+  "missed": "Cisplatin is given as scheduled cycles in a supervised oncology setting, so there is no patient-managed missed dose. If a cycle/appointment is missed, contact the oncology team to reschedule; do not attempt to make up doses independently.",
+  "overdose": "Acute overdose may cause renal failure, hepatic failure, deafness, ocular toxicity (including retinal detachment), severe myelosuppression, intractable nausea/vomiting and neuritis; death can occur. There is no proven antidote, and hemodialysis is largely ineffective because of rapid, high protein binding. Provide intensive supportive care and monitoring.",
+  "refs": [
+    ["FDA Cisplatin Injection Prescribing Information with Boxed Warning (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cisplatin%22"],
+    ["FDA DailyMed - Cisplatin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

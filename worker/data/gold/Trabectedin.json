@@ -1,0 +1,114 @@
+{
+  "generic": "Trabectedin",
+  "cls": "Alkylating agent (antineoplastic)",
+  "pharm": "A marine-derived alkylating agent that binds the minor groove of DNA, bending the helix toward the major groove and disrupting transcription and DNA repair, used for advanced liposarcoma and leiomyosarcoma after anthracycline therapy.",
+  "tags": ["Rx only", "Alkylating agent", "Soft tissue sarcoma", "Multiple boxed warnings", "Central line 24h infusion"],
+  "quick": [
+    ["Adult dose", "1.5 mg/m2 IV over 24 hours through a central venous line every 21 days until progression or unacceptable toxicity"],
+    ["Meal", "Not applicable - given as an intravenous infusion, not orally"],
+    ["Pregnancy", "Can cause fetal harm; avoid in pregnancy and use effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for a period after the last dose"],
+    ["Renal", "No adjustment for mild-moderate; not studied in severe impairment/ESRD"],
+    ["Hepatic", "Do not use with elevated bilirubin; avoid in moderate-severe hepatic impairment"],
+    ["Alcohol", "Avoid alcohol due to added hepatotoxicity risk"],
+    ["Monitoring", "CBC, liver function/bilirubin, CPK, and cardiac (LVEF) function"]
+  ],
+  "summary": "Trabectedin (YONDELIS) is an intravenous alkylating agent indicated for unresectable or metastatic liposarcoma or leiomyosarcoma in patients who have received a prior anthracycline-containing regimen. It is given as 1.5 mg/m2 by 24-hour IV infusion through a central venous line every 21 days, with dexamethasone 20 mg IV premedication. Trabectedin carries multiple serious warnings: neutropenic sepsis and serious neutropenia, rhabdomyolysis (with potential for fatal muscle and renal injury), hepatotoxicity including hepatic failure, cardiomyopathy with reduced left ventricular ejection fraction, and severe tissue necrosis from extravasation - which is why it must be administered through a central venous line. Treatment requires baseline and ongoing monitoring of blood counts, liver chemistries, creatine phosphokinase (CPK), and cardiac function, with dose modification or discontinuation for these toxicities.",
+  "indications": [
+    "Unresectable or metastatic liposarcoma in adults who have received a prior anthracycline-containing regimen",
+    "Unresectable or metastatic leiomyosarcoma in adults who have received a prior anthracycline-containing regimen"
+  ],
+  "dosage": [
+    {"c": "Liposarcoma or leiomyosarcoma", "r": "Adult IV", "d": "1.5 mg/m2 as a continuous intravenous infusion over 24 hours, repeated every 21 days, until disease progression or unacceptable toxicity", "t": "Every 21 days (24-hour infusion)", "n": "Administer through a central venous line; premedicate with dexamethasone 20 mg IV 30 minutes prior"},
+    {"c": "Required premedication", "r": "Adult IV", "d": "Dexamethasone 20 mg IV 30 minutes before each trabectedin dose", "t": "Each cycle", "n": "Provides antiemetic and hepatoprotective effect"},
+    {"c": "Dose reduction for toxicity", "r": "Adult IV", "d": "Reduce to 1.2 mg/m2, then 1.0 mg/m2 for severe neutropenia, hepatic, muscle, or cardiac toxicity; do not re-escalate after a reduction", "t": "Every 21 days", "n": "Permanently discontinue for persistent or severe toxicity per label"},
+    {"c": "Moderate hepatic impairment", "r": "Adult IV", "d": "Reduce starting dose to 0.9 mg/m2 every 21 days (moderate impairment); do not initiate if bilirubin is above normal", "t": "Every 21 days", "n": "Avoid in severe hepatic impairment (not studied)"}
+  ],
+  "admin": [
+    "Administer ONLY through a central venous line - extravasation can cause severe tissue necrosis; a peripheral line is not appropriate",
+    "Premedicate with dexamethasone 20 mg IV 30 minutes before each dose",
+    "Reconstitute and dilute per labeling; give as a continuous 24-hour intravenous infusion using an in-line 0.2 micron filter",
+    "Do not initiate a cycle until neutrophils are at least 1500/mcL, platelets at least 100,000/mcL, and bilirubin, transaminases/alkaline phosphatase, and CPK meet label thresholds",
+    "Handle as a hazardous cytotoxic agent; if extravasation is suspected stop the infusion immediately and manage the site"
+  ],
+  "moa": "Trabectedin is an alkylating drug that binds guanine residues in the minor groove of DNA, forming adducts and bending the DNA helix toward the major groove. This binding affects multiple transcription factors, DNA-binding proteins, and DNA repair pathways, resulting in perturbation of the cell cycle. It interferes with transcription-coupled nucleotide excision repair, leading to the formation of lethal DNA strand breaks and ultimately apoptosis of tumor cells; sensitivity is partly dependent on a functional nucleotide excision repair system.",
+  "contra": {
+    "absolute": [
+      "Known severe hypersensitivity to trabectedin",
+      "Do not initiate when total bilirubin is above the upper limit of normal (hepatotoxicity/hepatic failure risk)"
+    ],
+    "relative": [
+      "Baseline neutropenia (<1500/mcL) or thrombocytopenia (<100,000/mcL)",
+      "Elevated CPK or active muscle injury (rhabdomyolysis risk)",
+      "Pre-existing cardiac dysfunction or reduced LVEF (cardiomyopathy risk)",
+      "Moderate to severe hepatic impairment",
+      "Pregnancy and breastfeeding"
+    ],
+    "monitor": [
+      "Complete blood counts (assess neutrophils before each dose and as needed) for neutropenic sepsis/neutropenia",
+      "Creatine phosphokinase (CPK) before each dose for rhabdomyolysis",
+      "Liver function tests and bilirubin before each dose and as indicated for hepatotoxicity/hepatic failure",
+      "Left ventricular ejection fraction (echocardiogram or MUGA) at baseline and periodically for cardiomyopathy; the infusion site for extravasation"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, trabectedin can cause fetal harm when administered to a pregnant woman. Advise pregnant women of the potential risk to the fetus. Advise females of reproductive potential to use effective contraception during treatment and for 2 months after the last dose, and advise males with female partners to use condoms during and after treatment per labeling.",
+  "lact": "There are no data on the presence of trabectedin in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions in a breastfed infant, advise women not to breastfeed during treatment and for a period (e.g., several days) after the final dose.",
+  "renal": "No dosage adjustment is needed for mild to moderate renal impairment (creatinine clearance 30-89 mL/min). Trabectedin has not been studied in severe renal impairment (CrCl <30 mL/min) or end-stage renal disease; use is not recommended in these populations. Maintain adequate hydration given rhabdomyolysis risk.",
+  "hepatic": "Trabectedin causes hepatotoxicity, including cases of hepatic failure. Do not initiate trabectedin in patients with a total bilirubin above the upper limit of normal. Assess liver chemistries (bilirubin, transaminases, alkaline phosphatase) before each dose and as clinically indicated, and manage elevations with dose interruption, reduction, or discontinuation per labeling. For patients with moderate hepatic impairment, reduce the starting dose; avoid use in severe hepatic impairment because it has not been studied. Dexamethasone premedication reduces hepatotoxicity.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (e.g., ketoconazole) - increase trabectedin exposure and toxicity; avoid concomitant use",
+      "Strong CYP3A inducers (e.g., rifampin) - decrease trabectedin exposure/efficacy; avoid concomitant use",
+      "Other hepatotoxic drugs - additive risk of liver injury/hepatic failure"
+    ],
+    "moderate": [
+      "Drugs causing myelosuppression - additive neutropenia and infection risk",
+      "Statins and other myotoxic agents - may add to rhabdomyolysis risk; monitor CPK",
+      "Cardiotoxic agents (including cumulative anthracyclines) - additive cardiomyopathy risk"
+    ],
+    "minor": ["No clinically significant minor interactions specifically documented"],
+    "food": "Not applicable; trabectedin is administered intravenously, not orally. Avoid grapefruit (a CYP3A inhibitor).",
+    "alcohol": "Avoid alcohol because of additive hepatotoxicity risk.",
+    "diagnostics": "Monitor CBC, liver chemistries with bilirubin, creatine phosphokinase (CPK), and left ventricular ejection fraction."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Fatigue", "Constipation", "Decreased appetite", "Diarrhea", "Peripheral edema", "Dyspnea", "Neutropenia, anemia, thrombocytopenia", "Increased transaminases and CPK"],
+    "serious": ["Neutropenic sepsis and serious/severe neutropenia (including fatal)", "Rhabdomyolysis (with potential for fatal muscle injury and acute renal failure)", "Hepatotoxicity including hepatic failure", "Cardiomyopathy with decreased left ventricular ejection fraction and heart failure", "Extravasation causing severe tissue necrosis requiring debridement"],
+    "rare": ["Capillary leak syndrome", "Severe hypersensitivity/anaphylaxis", "Severe infusion-related reactions"],
+    "emergency": ["Neutropenic sepsis (fever with severe neutropenia)", "Rhabdomyolysis with acute kidney injury", "Acute hepatic failure", "Acute decompensated heart failure / cardiomyopathy", "Extravasation with progressive tissue necrosis"]
+  },
+  "monitoring": [
+    "Complete blood counts before each dose and as needed during the cycle; assess for fever/neutropenic sepsis and hold or reduce dose for severe neutropenia",
+    "Creatine phosphokinase (CPK) before each dose; if CPK rises or rhabdomyolysis is suspected, withhold and discontinue as indicated and provide supportive care",
+    "Liver function tests and total bilirubin before each dose; do not initiate if bilirubin is elevated and manage hepatotoxicity by interruption/reduction/discontinuation",
+    "Left ventricular ejection fraction by echocardiogram or MUGA at baseline and periodically; withhold/discontinue for cardiomyopathy or symptomatic LV dysfunction",
+    "Inspect the central line and infusion site for extravasation throughout the 24-hour infusion"
+  ],
+  "counsel": [
+    "This medicine is given through a central line over 24 hours every 3 weeks, with a steroid (dexamethasone) before each dose",
+    "Report fever or signs of infection immediately - low white cells with infection can be life-threatening",
+    "Report muscle pain, weakness, or dark/cola-colored urine right away (muscle breakdown), and any yellowing of skin or eyes (liver injury)",
+    "Report shortness of breath, swelling, or a racing/irregular heartbeat (possible heart effects); tell your team of any pain, redness, or swelling at the infusion site",
+    "Avoid pregnancy and breastfeeding; use effective contraception during and after treatment, and avoid alcohol"
+  ],
+  "pk": [
+    ["Onset", "Antitumor effect over treatment cycles; given as a 24-hour continuous infusion"],
+    ["Peak", "Steady-state concentrations approached during the 24-hour infusion"],
+    ["Half-life", "Terminal half-life approximately 175 hours (long, due to extensive tissue distribution)"],
+    ["Duration", "Dosed every 21 days; prolonged distribution and elimination"],
+    ["Storage", "Store unopened vials refrigerated at 2-8 C; protect from light; use reconstituted/diluted solution within labeled time limits"]
+  ],
+  "pearls": [
+    "Multiple serious warnings: neutropenic sepsis/neutropenia, rhabdomyolysis, hepatotoxicity/hepatic failure, cardiomyopathy, and extravasation necrosis - monitor CBC, CPK, LFTs/bilirubin, and LVEF",
+    "Must be given through a CENTRAL venous line over 24 hours - peripheral extravasation causes severe tissue necrosis",
+    "Always premedicate with dexamethasone 20 mg IV; it reduces hepatotoxicity and nausea",
+    "Do not initiate a cycle if bilirubin is above ULN, neutrophils <1500/mcL, platelets <100,000/mcL, or CPK exceeds the label threshold",
+    "Avoid strong CYP3A inhibitors and inducers; reduce starting dose in moderate hepatic impairment and avoid in severe impairment"
+  ],
+  "missed": "Trabectedin is administered on a 21-day cycle by the oncology team. A dose is delayed (not skipped) until blood counts, liver chemistries, and CPK recover to labeled thresholds; cycles may be extended up to about 3 weeks beyond schedule to allow recovery, and the dose is reduced if recovery is delayed or toxicity occurred. If a planned cycle is missed, the treating team reschedules it after confirming recovery rather than giving a double dose. Do not re-escalate the dose after a reduction.",
+  "overdose": "There is no specific antidote for trabectedin overdose. Overdosage would be expected to intensify adverse effects, particularly myelosuppression (neutropenic sepsis), hepatotoxicity, rhabdomyolysis, and gastrointestinal toxicity. Management is supportive, including close monitoring and treatment of cytopenias (transfusions, growth factors, infection control), liver and muscle/renal function, and other organ toxicities until recovery.",
+  "refs": [
+    ["FDA Label - Trabectedin / YONDELIS (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trabectedin%22"],
+    ["DailyMed - Trabectedin (YONDELIS)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=trabectedin"]
+  ]
+}

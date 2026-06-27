@@ -1,0 +1,93 @@
+{
+  "generic": "Gemcitabine",
+  "cls": "Antineoplastic - nucleoside metabolic inhibitor (pyrimidine antimetabolite)",
+  "pharm": "Cytotoxic chemotherapy agent",
+  "tags": ["chemotherapy", "antimetabolite", "pancreatic cancer", "NSCLC", "myelosuppression"],
+  "quick": [
+    ["Adult dose", "1000-1250 mg/m2 IV over 30 min, schedule by tumor"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Contraindicated; fetal harm"],
+    ["Lactation", "Discontinue breastfeeding"],
+    ["Renal", "Caution; limited data, monitor"],
+    ["Hepatic", "Caution; risk of hepatotoxicity"],
+    ["Alcohol", "Avoid; added hepatic stress"],
+    ["Monitoring", "CBC before each dose, LFTs, renal function"]
+  ],
+  "summary": "Gemcitabine is an intravenous nucleoside antimetabolite used for pancreatic, lung, breast and ovarian cancers. Dosed by body surface area (1000-1250 mg/m2) over 30 minutes on tumor-specific schedules. Myelosuppression is dose-limiting; infusion >60 minutes or more-than-weekly dosing increases toxicity.",
+  "indications": [
+    "Advanced ovarian cancer relapsing >=6 months after platinum therapy (with carboplatin)",
+    "First-line metastatic breast cancer after anthracycline failure (with paclitaxel)",
+    "Non-small cell lung cancer (with cisplatin)",
+    "Pancreatic cancer (single agent), including locally advanced or metastatic"
+  ],
+  "dosage": [
+    {"c": "Pancreatic cancer (single agent)", "r": "Standard", "d": "1000 mg/m2 IV over 30 min weekly x7 then 1 week rest; then weekly x3 of each 28-day cycle", "t": "Weekly", "n": "Adjust for hematologic toxicity"},
+    {"c": "Non-small cell lung cancer", "r": "With cisplatin", "d": "1000 mg/m2 Days 1,8,15 of 28-day cycle OR 1250 mg/m2 Days 1,8 of 21-day cycle", "t": "Per cycle", "n": "Over 30 minutes"},
+    {"c": "Breast cancer", "r": "With paclitaxel", "d": "1250 mg/m2 IV over 30 min Days 1 and 8 of 21-day cycle", "t": "Days 1 and 8", "n": "After paclitaxel on Day 1"},
+    {"c": "Ovarian cancer", "r": "With carboplatin", "d": "1000 mg/m2 IV over 30 min Days 1 and 8 of 21-day cycle", "t": "Days 1 and 8", "n": "Adjust for myelosuppression"}
+  ],
+  "admin": [
+    "For intravenous use only; infuse over 30 minutes",
+    "Do NOT prolong infusion beyond 60 minutes or dose more often than once weekly - increases toxicity",
+    "Reconstitute and dilute per protocol; use cytotoxic handling precautions",
+    "Check absolute neutrophil and platelet counts before each dose and reduce/withhold for myelosuppression",
+    "Assess hepatic and renal function before and periodically during treatment"
+  ],
+  "moa": "A pyrimidine nucleoside analog (2',2'-difluorodeoxycytidine). After intracellular phosphorylation to active diphosphate and triphosphate forms, it inhibits ribonucleotide reductase and is incorporated into DNA, causing chain termination ('masked chain termination') and inhibition of DNA synthesis, leading to apoptosis. Activity is cell-cycle (S-phase) specific.",
+  "contra": {
+    "absolute": ["Known severe hypersensitivity to gemcitabine"],
+    "relative": ["Pre-existing significant myelosuppression", "Significant hepatic impairment", "Renal impairment (hemolytic uremic syndrome risk)", "Prior or concurrent thoracic radiation (radiosensitization)"],
+    "monitor": ["Bone marrow function each cycle", "Hepatic and renal function", "Pulmonary symptoms"]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal data; contraindicated in pregnancy. Advise effective contraception for patients and male partners during and after treatment.",
+  "lact": "Discontinue breastfeeding during treatment and for a period after the last dose due to potential for serious adverse effects in the infant.",
+  "renal": "Use with caution; gemcitabine has been associated with hemolytic uremic syndrome and renal failure. Monitor renal function; withhold for clinically significant impairment.",
+  "hepatic": "Use with caution; fatal and severe hepatotoxicity reported. Monitor liver tests; reduce or withhold for significant impairment or rising bilirubin/transaminases.",
+  "interactions": {
+    "major": ["Concurrent thoracic radiotherapy - severe radiosensitization, mucositis and pneumonitis", "Live vaccines - risk of disseminated infection in immunosuppressed patients"],
+    "moderate": ["Warfarin - altered anticoagulation; monitor INR", "Other myelosuppressive agents - additive marrow toxicity"],
+    "minor": ["None additional"],
+    "food": "Not applicable (intravenous).",
+    "alcohol": "Avoid; adds to hepatic stress.",
+    "diagnostics": "Causes neutropenia, thrombocytopenia, anemia, and may elevate liver enzymes and bilirubin."
+  },
+  "se": {
+    "common": ["Myelosuppression (neutropenia, thrombocytopenia, anemia)", "Nausea and vomiting", "Flu-like symptoms / fever", "Elevated transaminases", "Rash", "Peripheral edema", "Proteinuria/hematuria"],
+    "serious": ["Severe myelosuppression with infection or bleeding", "Pulmonary toxicity / interstitial pneumonitis", "Hemolytic uremic syndrome / renal failure", "Capillary leak syndrome", "Posterior reversible encephalopathy syndrome (PRES)", "Severe cutaneous adverse reactions (SCARs)", "Hepatotoxicity"],
+    "rare": ["Radiation recall", "Thrombotic microangiopathy", "Peripheral gangrene"],
+    "emergency": ["Acute respiratory failure / ARDS", "Severe sepsis from neutropenia", "Hemolytic uremic syndrome", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Complete blood count with platelets before each dose",
+    "Liver function tests at baseline and periodically",
+    "Renal function and urinalysis (proteinuria, hematuria) for HUS",
+    "Pulmonary symptoms (dyspnea, cough) for pneumonitis",
+    "Signs of capillary leak or neurologic changes (PRES)"
+  ],
+  "counsel": [
+    "Report fever, chills or signs of infection immediately (low blood counts)",
+    "Report unusual bruising, bleeding, or shortness of breath/cough",
+    "Use effective contraception during and after treatment",
+    "Do not breastfeed during therapy",
+    "Flu-like symptoms after dosing are common; report if severe"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect over treatment course"],
+    ["Peak", "End of 30-minute infusion"],
+    ["Half-life", "Short (~42-94 min); depends on infusion duration"],
+    ["Duration", "Per cycle schedule"],
+    ["Storage", "Store vials at 20-25 C; reconstituted solution per label, do not refrigerate (crystallization)"]
+  ],
+  "pearls": [
+    "Myelosuppression is dose-limiting - check ANC and platelets before every dose.",
+    "Keep infusion at 30 minutes and no more than weekly; longer/more frequent dosing raises toxicity.",
+    "Watch for hemolytic uremic syndrome - monitor renal function and urinalysis.",
+    "Potent radiosensitizer - avoid concurrent thoracic radiation."
+  ],
+  "missed": "Doses are administered on a fixed cycle schedule by the oncology team; a missed or delayed dose is rescheduled by the clinician based on blood counts and tolerance, not self-administered.",
+  "overdose": "No specific antidote. Anticipated toxicities are myelosuppression, paresthesias and severe rash. Provide supportive care with blood count monitoring, growth factors/transfusions, and management of infection or bleeding as needed.",
+  "refs": [
+    ["FDA Gemcitabine for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22gemcitabine+hydrochloride%22"],
+    ["FDA DailyMed - Gemcitabine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

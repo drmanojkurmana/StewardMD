@@ -1,0 +1,151 @@
+{
+  "generic": "Mifepristone",
+  "cls": "Antiprogestin / progesterone-receptor antagonist; glucocorticoid (GR-II) receptor antagonist",
+  "pharm": "Blocks progesterone (terminates pregnancy; cervical ripening) and cortisol action (Cushing's hyperglycemia)",
+  "tags": ["Antiprogestin", "Medical abortion", "Boxed warning: serious infection/bleeding", "REMS", "Cushing's (Korlym)"],
+  "quick": [
+    ["Adult dose", "Abortion: 200 mg once, then misoprostol; Cushing's: 300 mg/day, titrate"],
+    ["Meal", "Korlym with a meal; abortion regimen per protocol"],
+    ["Pregnancy", "Abortifacient; contraindicated in Cushing's use except for its abortion indication"],
+    ["Lactation", "Discard milk ~during/after dose (abortion); avoid (Korlym)"],
+    ["Renal", "Korlym: do not exceed 600 mg/day in impairment"],
+    ["Hepatic", "Korlym: do not exceed 600 mg/day; avoid in severe"],
+    ["Alcohol", "Avoid"],
+    ["Monitoring", "Bleeding/infection (abortion); K+, ECG, cortisol effects (Korlym)"]
+  ],
+  "summary": "Mifepristone is a progesterone- and glucocorticoid-receptor antagonist with two distinct FDA-approved uses: (1) Mifeprex - medical termination of intrauterine pregnancy through 70 days gestation (with misoprostol), which carries a boxed warning for serious and sometimes fatal infections and bleeding and is dispensed under a REMS; and (2) Korlym - control of hyperglycemia secondary to endogenous Cushing's syndrome in adults with type 2 diabetes/glucose intolerance who failed or are not candidates for surgery. The Korlym label carries a separate boxed warning that, because of its antiprogestational action, it will cause termination of pregnancy - so pregnancy must be excluded and prevented during treatment.",
+  "indications": [
+    "Medical termination of intrauterine pregnancy through 70 days gestation (with misoprostol) - Mifeprex",
+    "Control of hyperglycemia secondary to endogenous Cushing's syndrome in adults with type 2 diabetes/glucose intolerance who failed or are not surgical candidates - Korlym",
+    "Cervical ripening / management of early pregnancy loss (off-label/guideline use in some settings)"
+  ],
+  "dosage": [
+    {"c": "Medical abortion (<=70 days gestation)", "r": "Oral", "d": "Mifepristone 200 mg once, then misoprostol 800 mcg buccal 24-48 h later", "t": "Single dose then misoprostol", "n": "Mifeprex REMS; follow-up to confirm complete abortion"},
+    {"c": "Cushing's hyperglycemia - initial (Korlym)", "r": "Oral", "d": "300 mg once daily", "t": "Once daily with a meal", "n": "Do not start below 300 mg"},
+    {"c": "Cushing's - titration (Korlym)", "r": "Oral", "d": "Increase by 300 mg at intervals of >=2-4 weeks", "t": "Once daily", "n": "Based on tolerability and response"},
+    {"c": "Cushing's - maximum (Korlym)", "r": "Oral", "d": "Up to 1200 mg/day, not exceeding 20 mg/kg/day", "t": "Once daily", "n": "Lower max in renal/hepatic impairment (600 mg/day)"}
+  ],
+  "admin": [
+    "Mifeprex: dispensed only through certified prescribers/pharmacies under a REMS; provide patient counseling and follow-up to confirm complete termination",
+    "Korlym tablets: take once daily with a meal; swallow whole, do not crush/split",
+    "Exclude pregnancy before Korlym and ensure non-hormonal contraception during and 1 month after",
+    "Provide instructions on expected bleeding/cramping after the abortion regimen and warning signs of infection"
+  ],
+  "moa": "Synthetic steroid that competitively antagonizes progesterone at the progesterone receptor (causing decidual breakdown, cervical softening, and uterine contractility - terminating pregnancy) and antagonizes cortisol at the glucocorticoid (GR-II) receptor (reducing the metabolic effects of excess cortisol in Cushing's, improving hyperglycemia) without lowering cortisol levels.",
+  "contra": {
+    "absolute": [
+      "Confirmed or suspected ectopic pregnancy or undiagnosed adnexal mass (abortion use)",
+      "IUD in place (remove before use)",
+      "Chronic adrenal failure",
+      "Concurrent long-term corticosteroid therapy",
+      "Hemorrhagic disorders or concurrent anticoagulant therapy",
+      "Inherited porphyrias",
+      "Hypersensitivity to mifepristone or misoprostol/prostaglandins",
+      "Korlym: pregnancy (will terminate pregnancy); women requiring corticosteroids for life-threatening conditions; endometrial hyperplasia with atypia or endometrial carcinoma; use with strong CYP3A substrates with narrow therapeutic range"
+    ],
+    "relative": [
+      "Severe anemia",
+      "Cardiovascular disease / hypokalemia (Korlym - QT prolongation)",
+      "Renal or hepatic impairment (limit Korlym dose)",
+      "Concurrent CYP3A inhibitors (limit Korlym to 300 mg/day)"
+    ],
+    "monitor": [
+      "Bleeding and signs of infection (abortion)",
+      "Serum potassium and ECG/QT (Korlym)",
+      "Symptoms of adrenal insufficiency (Korlym)",
+      "Pregnancy status (Korlym)"
+    ]
+  },
+  "preg": "Mifepristone is an abortifacient: it terminates pregnancy. For Cushing's (Korlym) use it is contraindicated in pregnancy and pregnancy must be excluded before treatment and prevented with non-hormonal contraception during and for 1 month after stopping (boxed warning). After medical abortion, contraception can be started promptly per protocol.",
+  "lact": "Limited data; mifepristone is present in human milk in small amounts. For single-dose abortion use, breastfeeding can generally continue or be briefly interrupted per local guidance. For chronic Korlym use, avoid breastfeeding.",
+  "renal": "Korlym: in renal impairment, do not exceed 600 mg/day. Use clinical judgment for abortion regimen.",
+  "hepatic": "Korlym: in mild-to-moderate hepatic impairment, do not exceed 600 mg/day; not recommended in severe hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (ketoconazole, itraconazole, clarithromycin) - markedly increase mifepristone; limit Korlym to 300 mg/day",
+      "CYP3A substrates with narrow therapeutic index (e.g., simvastatin, lovastatin, cyclosporine, sirolimus, tacrolimus, fentanyl, ergot alkaloids) - mifepristone inhibits CYP3A; contraindicated/avoid",
+      "Anticoagulants - bleeding risk (abortion contraindication)",
+      "Long-term corticosteroids - antagonized by mifepristone (Korlym contraindication)"
+    ],
+    "moderate": [
+      "Strong CYP3A inducers (rifampin, carbamazepine, phenytoin, St. John's wort) - reduce mifepristone efficacy",
+      "QT-prolonging drugs - additive QT risk (Korlym, with hypokalemia)",
+      "Hormonal contraceptives - reliability reduced for Korlym; use non-hormonal methods",
+      "CYP2C8/2C9 substrates (e.g., warfarin, NSAIDs) - mifepristone may increase levels"
+    ],
+    "minor": [
+      "Grapefruit juice - may increase mifepristone exposure"
+    ],
+    "food": "Take Korlym with a meal; abortion regimen timing per protocol",
+    "alcohol": "Avoid",
+    "diagnostics": "Korlym does not lower serum cortisol/ACTH - these cannot be used to assess efficacy; monitor clinical response and potassium"
+  },
+  "se": {
+    "common": [
+      "Abdominal pain/cramping (abortion)",
+      "Uterine bleeding (abortion)",
+      "Nausea/vomiting",
+      "Diarrhea",
+      "Headache",
+      "Fatigue",
+      "Dizziness",
+      "Korlym: nausea, fatigue, headache, hypokalemia, arthralgia, peripheral edema, endometrial thickening"
+    ],
+    "serious": [
+      "Serious or fatal infection (including atypical/sepsis without fever) - abortion (boxed warning)",
+      "Prolonged or heavy uterine bleeding requiring intervention - abortion (boxed warning)",
+      "Adrenal insufficiency (Korlym)",
+      "Hypokalemia (Korlym)",
+      "QT prolongation (Korlym)",
+      "Endometrial hyperplasia / vaginal bleeding (Korlym)"
+    ],
+    "rare": [
+      "Anaphylaxis/hypersensitivity",
+      "Toxic shock-like syndrome (Clostridium sordellii/perfringens) after abortion",
+      "Opportunistic effects of excess CYP3A interactions"
+    ],
+    "emergency": [
+      "Sepsis/serious infection (severe abdominal pain, weakness, with or without fever, >24 h after misoprostol)",
+      "Heavy bleeding (soaking 2 pads/hour for 2 hours)",
+      "Adrenal crisis (Korlym)",
+      "Anaphylaxis"
+    ]
+  },
+  "monitoring": [
+    "Confirmation of complete abortion (clinical, ultrasound, or hCG follow-up)",
+    "Signs of infection and excessive bleeding after the regimen",
+    "Serum potassium and ECG/QTc (Korlym)",
+    "Symptoms of adrenal insufficiency (Korlym)",
+    "Endometrial monitoring with prolonged Korlym use",
+    "Pregnancy status (Korlym)"
+  ],
+  "counsel": [
+    "Abortion: expect cramping and bleeding; seek urgent care for soaking 2 pads/hour for 2 hours, severe abdominal pain, weakness, or fever - infection can be life-threatening",
+    "Take misoprostol as directed 24-48 hours after mifepristone and attend follow-up",
+    "Korlym: take once daily with a meal; do not become pregnant - use a non-hormonal contraceptive",
+    "Report severe fatigue, dizziness, nausea/vomiting, or low energy (possible adrenal insufficiency)",
+    "Tell all prescribers you take this drug (many drug interactions)",
+    "Avoid grapefruit and alcohol"
+  ],
+  "pk": [
+    ["Onset", "Antiprogestin effect within hours; abortion completed over hours-days with misoprostol"],
+    ["Peak", "Plasma tmax ~1-2 h"],
+    ["Half-life", "~18 h (terminal; nonlinear at higher doses)"],
+    ["Duration", "Prolonged receptor effect; once-daily Korlym dosing"],
+    ["Storage", "20-25 C, protect from light/moisture"]
+  ],
+  "pearls": [
+    "Boxed warning (abortion/Mifeprex): serious and sometimes fatal infection and bleeding; dispensed under a REMS",
+    "Korlym boxed warning: will terminate pregnancy - exclude/prevent pregnancy with non-hormonal contraception",
+    "Korlym does NOT lower cortisol - blocks its receptor; cortisol/ACTH levels cannot gauge efficacy (monitor clinically and potassium)",
+    "Potent CYP3A inhibitor and CYP3A substrate - extensive interaction profile",
+    "Atypical sepsis (Clostridium sordellii) after medical abortion may present without fever - maintain high suspicion"
+  ],
+  "missed": "Abortion regimen is a single supervised dose - follow clinic instructions and do not self-repeat. For Korlym, take a missed dose as soon as remembered the same day; if it is nearly the next day, skip it and resume the once-daily schedule - do not double up.",
+  "overdose": "Up to 600 mg single doses have not caused serious adverse effects; very high doses could produce adrenal insufficiency. Management is supportive with monitoring for adrenal insufficiency, hypokalemia, and (in pregnancy use) bleeding. No specific antidote; corticosteroid supplementation may be needed for adrenal insufficiency.",
+  "refs": [
+    ["FDA Mifepristone (Mifeprex) Information", "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=020687"],
+    ["FDA Korlym (mifepristone) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact:%22Korlym%22"],
+    ["DailyMed - Mifepristone", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=mifepristone"]
+  ]
+}

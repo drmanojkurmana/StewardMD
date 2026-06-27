@@ -1,0 +1,121 @@
+{
+  "generic": "Faropenem",
+  "cls": "Antibacterial (oral penem / beta-lactam)",
+  "pharm": "Penem beta-lactam antibiotic; inhibits bacterial cell-wall synthesis by binding penicillin-binding proteins",
+  "tags": ["antibiotic", "faropenem", "penem", "beta-lactam", "oral penem", "faropenem sodium", "faropenem medoxomil", "cell wall synthesis", "not fda-approved"],
+  "quick": [
+    ["Adult dose", "150-300 mg orally two to three times daily"],
+    ["Meal", "Take with or after food to improve tolerability"],
+    ["Pregnancy", "Use only if clearly needed; limited human data"],
+    ["Lactation", "Caution; limited data, weigh benefit vs risk"],
+    ["Renal", "Caution and dose reduction in significant renal impairment"],
+    ["Hepatic", "Caution; limited data, monitor liver enzymes"],
+    ["Alcohol", "No specific interaction; moderation advised"],
+    ["Monitoring", "Signs of infection response, hypersensitivity, GI/CDI symptoms, LFTs on prolonged use"]
+  ],
+  "summary": "Faropenem is an orally active penem (beta-lactam) antibacterial available in several countries (notably India and Japan) as faropenem sodium and the prodrug faropenem medoxomil. Like other beta-lactams it inhibits bacterial cell-wall synthesis and has activity against many Gram-positive, Gram-negative, and anaerobic organisms, with stability against many beta-lactamases. It is used for respiratory, urinary, skin and soft-tissue, and other community infections. Typical adult oral doses are 150-300 mg two to three times daily. Faropenem is not FDA-approved.",
+  "indications": [
+    "Acute bacterial respiratory tract infections (e.g. bronchitis, pneumonia, sinusitis, pharyngitis/tonsillitis)",
+    "Urinary tract infections including cystitis",
+    "Skin and soft-tissue infections",
+    "Otitis media and other susceptible community-acquired infections"
+  ],
+  "dosage": [
+    {"c": "Mild to moderate infections (adult)", "r": "Oral", "d": "150-200 mg three times daily", "t": "Continue for the prescribed course, typically 5-7 days depending on infection", "n": "Faropenem sodium; dose per local labeling and infection site"},
+    {"c": "Moderate to severe / deep-seated infections (adult)", "r": "Oral", "d": "300 mg three times daily", "t": "Duration guided by clinical response and infection type", "n": "Higher end of range for more severe or less susceptible infections"},
+    {"c": "Faropenem medoxomil (prodrug)", "r": "Oral", "d": "150-300 mg two to three times daily", "t": "Per product labeling; complete full course", "n": "Prodrug hydrolysed to active faropenem; improved oral bioavailability"},
+    {"c": "Renal impairment", "r": "Oral", "d": "Reduce dose/frequency in moderate to severe impairment", "t": "Adjust per renal function and product guidance", "n": "Renally cleared; accumulation possible in significant impairment"}
+  ],
+  "admin": [
+    "Take with or after food to improve gastrointestinal tolerability and, for medoxomil, absorption",
+    "Swallow tablets whole with water",
+    "Space doses evenly through the day to maintain blood levels",
+    "Complete the full prescribed course even if symptoms improve to reduce resistance and relapse",
+    "Counsel patient to report rash, diarrhoea, or signs of allergy promptly"
+  ],
+  "moa": "Faropenem is a penem beta-lactam that inhibits bacterial cell-wall peptidoglycan synthesis by binding to and inactivating penicillin-binding proteins (PBPs), leading to defective cell-wall formation and bacterial lysis. Its penem structure confers stability against many beta-lactamases (including some extended-spectrum and AmpC enzymes) and resistance to renal dehydropeptidase-I, so it does not require a dehydropeptidase inhibitor like cilastatin. It exhibits time-dependent (time-above-MIC) bactericidal activity against susceptible Gram-positive cocci, many Gram-negative bacilli, and anaerobes.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to faropenem or other penem/carbapenem antibiotics",
+      "History of severe hypersensitivity (e.g. anaphylaxis) to beta-lactam antibiotics"
+    ],
+    "relative": [
+      "History of penicillin or cephalosporin allergy (risk of cross-reactivity)",
+      "History of antibiotic-associated colitis",
+      "Significant renal impairment (dose adjustment needed)",
+      "Patients with predisposition to seizures (class effect of beta-lactams)"
+    ],
+    "monitor": [
+      "Signs of hypersensitivity reaction, especially with first doses",
+      "Diarrhoea suggestive of Clostridioides difficile infection",
+      "Renal function in those with impairment",
+      "Liver enzymes on prolonged therapy",
+      "Clinical response and resolution of infection"
+    ]
+  },
+  "preg": "There are limited human data on faropenem in pregnancy. Use only if the expected benefit justifies the potential risk to the fetus, in line with the local product information. Beta-lactams as a class are generally considered relatively safe, but specific data for faropenem are insufficient.",
+  "lact": "Data on excretion of faropenem in human breast milk are limited. Use with caution during breastfeeding, weighing the benefit of treatment against potential effects on the infant (e.g. altered gut flora, diarrhoea, candidiasis).",
+  "renal": "Faropenem is eliminated largely by the kidneys, so reduce the dose or extend the dosing interval in moderate to severe renal impairment according to product labeling. Monitor renal function and clinical response; accumulation may increase the risk of adverse effects.",
+  "hepatic": "Limited data are available in hepatic impairment. Use with caution and monitor liver enzymes, particularly on prolonged courses; transient elevations of transaminases have been reported.",
+  "interactions": {
+    "major": [
+      "Valproic acid / sodium valproate - penems and carbapenems can markedly reduce valproate plasma levels and precipitate seizures; avoid concomitant use"
+    ],
+    "moderate": [
+      "Probenecid - may reduce renal excretion and increase faropenem plasma levels",
+      "Other nephrotoxic agents - monitor renal function when co-administered",
+      "Live bacterial vaccines (e.g. oral typhoid) - antibacterials may reduce efficacy"
+    ],
+    "minor": [
+      "Bacteriostatic antibiotics - theoretical antagonism of bactericidal activity",
+      "Antacids - may modestly affect absorption; separate administration if needed"
+    ],
+    "food": "May be taken with food; food can improve tolerability and, for the medoxomil prodrug, absorption.",
+    "alcohol": "No specific interaction reported; moderation is advised during any acute infection.",
+    "diagnostics": "May cause a false-positive urine glucose test with non-enzymatic (copper-reduction) methods, as seen with other beta-lactams; transient rises in transaminases or eosinophils may occur."
+  },
+  "se": {
+    "common": ["Diarrhoea", "Nausea", "Abdominal pain", "Loose stools", "Rash", "Headache"],
+    "serious": ["Hypersensitivity reactions including anaphylaxis", "Clostridioides difficile-associated diarrhoea/pseudomembranous colitis", "Hepatic enzyme elevation/hepatitis", "Seizures (class effect, especially with valproate or renal impairment)"],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Blood dyscrasias (eosinophilia, leucopenia, thrombocytopenia)", "Interstitial nephritis", "Superinfection/candidiasis"],
+    "emergency": ["Anaphylaxis or angioedema with airway compromise", "Severe cutaneous adverse reaction (SJS/TEN)", "Fulminant or severe C. difficile colitis", "Status epilepticus"]
+  },
+  "monitoring": [
+    "Clinical response and resolution of the infection",
+    "Signs of hypersensitivity, particularly early in therapy",
+    "Bowel symptoms / new diarrhoea (C. difficile risk)",
+    "Renal function in patients with impairment",
+    "Liver function tests on prolonged therapy",
+    "Full blood count if long courses or signs of dyscrasia"
+  ],
+  "counsel": [
+    "Take the medicine with or after food and complete the full course even if you feel better",
+    "Stop the medicine and seek urgent help if you develop a rash, facial or throat swelling, or difficulty breathing",
+    "Report severe or watery/bloody diarrhoea, which can occur during or after treatment",
+    "Tell your doctor if you have ever had an allergic reaction to penicillins, cephalosporins, or other beta-lactam antibiotics",
+    "Tell your doctor if you take valproate (an epilepsy medicine), as the combination should be avoided",
+    "Take doses at evenly spaced intervals to keep the medicine working effectively"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal activity begins after absorption; clinical response over the course"],
+    ["Peak", "Plasma peak approximately 0.5-1.5 h after an oral dose"],
+    ["Half-life", "Approximately 1 h (short; supports two- to three-times-daily dosing)"],
+    ["Duration", "Time-above-MIC dependent; requires multiple daily doses"],
+    ["Storage", "Store below 25-30 C, protected from moisture and light"]
+  ],
+  "pearls": [
+    "Not FDA-approved; pending clinical review.",
+    "Only orally active penem in clinical use; stable to renal dehydropeptidase so no cilastatin needed",
+    "Stability against many beta-lactamases (including some ESBL/AmpC) but it is NOT a substitute for carbapenems in serious resistant infections",
+    "Widely used in India/Japan; overuse has raised antimicrobial-stewardship concerns about driving carbapenem resistance",
+    "Avoid with valproate - penems/carbapenems can crash valproate levels and trigger seizures",
+    "Cross-reactivity possible in penicillin/cephalosporin-allergic patients; take an allergy history first"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and continue with your regular schedule - do not take a double dose. Try to keep doses evenly spaced through the day.",
+  "overdose": "Experience with faropenem overdose is limited. Expected effects are extensions of adverse reactions, mainly gastrointestinal (nausea, vomiting, diarrhoea) and, with very high beta-lactam exposure or in renal impairment, potential central nervous system excitation including seizures. There is no specific antidote; management is supportive with symptomatic care, control of seizures with benzodiazepines if they occur, and maintenance of hydration and renal function. Faropenem may be removed to some extent by haemodialysis in severe renal impairment.",
+  "refs": [
+    ["CDSCO (India) - Faropenem product information", "https://cdsco.gov.in/opencms/opencms/en/Home/"],
+    ["PMDA Japan - Farom (faropenem sodium) prescribing information", "https://www.pmda.go.jp/english/"],
+    ["WHO AWaRe antibiotic classification (faropenem)", "https://www.who.int/publications/i/item/2021-aware-classification"]
+  ]
+}

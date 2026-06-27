@@ -1,0 +1,109 @@
+{
+  "generic": "Natalizumab",
+  "cls": "Integrin receptor antagonist / selective adhesion-molecule inhibitor (humanized anti-alpha-4 integrin monoclonal antibody)",
+  "pharm": "A humanized IgG4 monoclonal antibody against the alpha-4 subunit of integrins; it blocks leukocyte adhesion and migration into inflamed tissue (CNS, gut), reducing inflammation in multiple sclerosis and Crohn disease. It carries a boxed warning for progressive multifocal leukoencephalopathy (PML) and is available only through the TOUCH REMS program.",
+  "tags": ["Rx only", "Boxed warning: PML", "TOUCH REMS", "Multiple sclerosis", "Crohn disease", "Monoclonal antibody", "IV infusion"],
+  "quick": [
+    ["Adult dose", "300 mg IV infusion over 1 hour every 4 weeks"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Can cause fetal harm; neonatal thrombocytopenia/anemia reported - use only if clearly needed"],
+    ["Lactation", "Detected in breast milk; weigh benefit against risk"],
+    ["Renal", "No specific dose adjustment described"],
+    ["Hepatic", "Clinically significant liver injury reported; monitor and stop if it occurs"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "Anti-JCV antibody, MRI, PML signs, liver function, infusion reactions"]
+  ],
+  "summary": "Natalizumab (Tysabri) is a humanized monoclonal antibody against the alpha-4 integrin subunit, used as monotherapy for relapsing forms of multiple sclerosis and for inducing/maintaining response in moderately-to-severely active Crohn disease refractory to conventional therapy or TNF-alpha inhibitors. It is given as a 300 mg IV infusion over 1 hour every 4 weeks. It carries a BOXED WARNING for progressive multifocal leukoencephalopathy (PML), a serious, often fatal opportunistic brain infection; risk rises with anti-JCV antibody positivity, treatment beyond 2 years, and prior immunosuppressant use. Because of this risk it is available only through the restricted TOUCH REMS program, with prescriber/patient certification and scheduled clinical evaluations. It is contraindicated in patients with current or prior PML and in those with hypersensitivity. Other risks include herpes encephalitis/meningitis, hepatotoxicity, hypersensitivity/anaphylaxis, and increased infection risk.",
+  "indications": [
+    "Monotherapy for relapsing forms of multiple sclerosis in adults (clinically isolated syndrome, relapsing-remitting disease, active secondary progressive disease)",
+    "Inducing and maintaining clinical response and remission in adults with moderately-to-severely active Crohn disease with inadequate response/intolerance to conventional therapy and TNF-alpha inhibitors"
+  ],
+  "dosage": [
+    {"c": "Multiple sclerosis", "r": "Adult IV", "d": "300 mg by intravenous infusion over approximately 1 hour", "t": "Every 4 weeks", "n": "Monotherapy; dilute in 100 mL 0.9% sodium chloride; never give as IV push or bolus"},
+    {"c": "Crohn disease", "r": "Adult IV", "d": "300 mg by intravenous infusion over approximately 1 hour", "t": "Every 4 weeks", "n": "Discontinue if no therapeutic benefit by 12 weeks; do not combine with immunosuppressants or TNF inhibitors"},
+    {"c": "Post-infusion observation", "r": "Adult", "d": "Observe during infusion and for 1 hour afterward", "t": "First 12 infusions, then per clinical judgment", "n": "Monitor for hypersensitivity/infusion reactions"}
+  ],
+  "admin": [
+    "Administer only through the TOUCH REMS program by certified prescribers/infusion sites",
+    "Dilute 300 mg in 100 mL of 0.9% sodium chloride; infuse over approximately 1 hour (~5 mg/minute) - never push or bolus",
+    "Use the diluted solution within 48 hours; allow refrigerated solution to reach room temperature before infusion",
+    "Observe the patient during and for 1 hour after each of the first 12 infusions for hypersensitivity",
+    "Do not co-administer other medications through the infusion set side ports",
+    "Obtain anti-JCV antibody status and baseline MRI; reassess for PML risk over time"
+  ],
+  "moa": "Natalizumab binds the alpha-4 subunit of alpha-4-beta-1 (VLA-4) and alpha-4-beta-7 integrins expressed on the surface of leukocytes (except neutrophils). This blocks the interaction of these integrins with their endothelial receptors VCAM-1 and MAdCAM-1, preventing adhesion and transmigration of leukocytes across the endothelium into inflamed parenchymal tissue. In multiple sclerosis this is thought to reduce leukocyte migration across the blood-brain barrier into the CNS; in Crohn disease it reduces leukocyte trafficking into inflamed gut. The same impairment of CNS immune surveillance underlies the increased risk of PML.",
+  "contra": {
+    "absolute": [
+      "Current or prior progressive multifocal leukoencephalopathy (PML)",
+      "Known hypersensitivity to natalizumab (reactions range from urticaria to anaphylaxis)"
+    ],
+    "relative": [
+      "Anti-JCV antibody positivity (markedly increased PML risk)",
+      "Prior immunosuppressant use and treatment duration beyond 2 years (increased PML risk)",
+      "Concurrent immunosuppressants or TNF-alpha inhibitors (do not combine)",
+      "Active or chronic infection; immunocompromised state",
+      "History of clinically significant liver disease"
+    ],
+    "monitor": [
+      "Anti-JCV antibody status at baseline and periodically",
+      "Brain MRI at baseline and as indicated for PML surveillance",
+      "Clinical signs of PML (progressive weakness, vision/speech/cognitive changes)",
+      "Liver function tests for hepatotoxicity",
+      "Signs of infusion reactions and infections"
+    ]
+  },
+  "preg": "Natalizumab can cause fetal harm; neonatal thrombocytopenia and anemia have been reported with third-trimester exposure, and animal studies show immunologic/hematologic effects and reduced offspring survival at higher doses. Use during pregnancy only if the potential benefit justifies the risk. Neonates exposed in utero should have a CBC checked.",
+  "lact": "Natalizumab is detected in human breast milk; the effects on the breastfed infant are unknown. A decision should be made whether to discontinue nursing or the drug, taking into account the importance of treatment to the mother.",
+  "renal": "No specific renal dose adjustment is described in labeling. As a monoclonal antibody it is not renally cleared in a manner requiring dose modification.",
+  "hepatic": "Clinically significant liver injury, including cases requiring transplantation, has been reported, sometimes within days of the first dose. Monitor liver function and discontinue natalizumab if clinically significant liver injury occurs.",
+  "interactions": {
+    "major": [
+      "Other immunosuppressants/immunomodulators (e.g., 6-mercaptopurine, azathioprine, cyclosporine, methotrexate) - increased risk of infection including PML; contraindicated in combination in Crohn disease",
+      "TNF-alpha inhibitors - do not combine with natalizumab in Crohn disease"
+    ],
+    "moderate": [
+      "Chronic corticosteroids - taper off where possible in Crohn disease maintenance; combined immunosuppression raises infection risk"
+    ],
+    "minor": ["Aminosalicylates may be continued in Crohn disease"],
+    "food": "Not applicable - intravenous biologic.",
+    "alcohol": "No specific interaction described.",
+    "diagnostics": "Causes increases in circulating lymphocytes, monocytes, eosinophils, and basophils, and a mild decrease in hemoglobin (mean ~0.6 g/dL); interpret CBC accordingly. Anti-natalizumab antibodies (~9-10%) can reduce efficacy and increase infusion reactions."
+  },
+  "se": {
+    "common": ["Headache", "Fatigue", "Arthralgia", "Urinary tract infection", "Lower/upper respiratory infection", "Depression", "Rash", "Nausea", "Infusion reactions"],
+    "serious": ["Progressive multifocal leukoencephalopathy (PML)", "Herpes encephalitis/meningitis and acute retinal necrosis", "Hepatotoxicity / liver failure", "Hypersensitivity reactions including anaphylaxis", "Opportunistic and other serious infections", "Immune thrombocytopenia"],
+    "rare": ["Anaphylaxis (<1%)", "Opportunistic infections such as PCP, aspergillosis, MAC (<1%)", "Neonatal thrombocytopenia/anemia after in-utero exposure"],
+    "emergency": ["Suspected PML (new/worsening neurologic deficit)", "Anaphylaxis or severe infusion reaction", "Acute hepatic failure", "Severe/herpes CNS infection"]
+  },
+  "monitoring": ["Anti-JCV antibody status at baseline and periodic retesting", "Brain MRI at baseline and for PML surveillance", "Neurologic status for PML symptoms at each visit", "Liver function tests", "CBC (and CBC in neonates exposed in utero)", "Hypersensitivity/infusion reactions during and after infusion", "TOUCH REMS evaluations at 3, 6, and 12 months, then every 6 months"],
+  "counsel": [
+    "This medicine is given only through the TOUCH program - you will sign a consent form and be monitored regularly",
+    "It can rarely cause a serious brain infection called PML - tell your doctor at once about new weakness, clumsiness, vision changes, confusion, or personality changes",
+    "Report any fever, persistent infection, severe headache, or yellowing of the skin or eyes",
+    "Tell your care team if you feel itching, flushing, dizziness, or trouble breathing during the infusion",
+    "Do not take other immune-suppressing medicines with this drug unless your doctor directs",
+    "Tell your doctor if you are pregnant, planning pregnancy, or breastfeeding",
+    "Keep all scheduled appointments, including the every-4-week infusions and JCV antibody/MRI testing"
+  ],
+  "pk": [
+    ["Onset", "Pharmacologic effect on lymphocyte trafficking begins after first infusion; steady state ~16-24 weeks"],
+    ["Peak", "Maximum serum concentration ~101-110 mcg/mL after a 300 mg infusion"],
+    ["Half-life", "Approximately 11 +/- 4 days (MS); ~10 +/- 7 days (Crohn disease)"],
+    ["Duration", "Dosed every 4 weeks; trough ~10-29 mcg/mL at steady state"],
+    ["Storage", "Refrigerate at 2-8 C; do not freeze; use diluted solution within 48 hours"]
+  ],
+  "pearls": [
+    "BOXED WARNING: PML - risk rises with anti-JCV antibody positivity, >2 years of therapy, and prior immunosuppressant use",
+    "Available ONLY through the restricted TOUCH REMS program with mandatory prescriber/patient certification and scheduled evaluations",
+    "Contraindicated in current/prior PML; check anti-JCV antibody and baseline MRI before and during therapy",
+    "Do NOT combine with other immunosuppressants or TNF inhibitors - additive infection/PML risk",
+    "Watch for herpes encephalitis/meningitis, acute retinal necrosis, and rapid-onset hepatotoxicity",
+    "Anti-natalizumab antibodies develop in ~9-10% and can reduce efficacy and increase infusion reactions"
+  ],
+  "missed": "Natalizumab is given by a healthcare provider every 4 weeks. If an infusion appointment is missed, contact the infusion center to reschedule as soon as possible; do not attempt to self-administer. The provider will resume the every-4-week schedule.",
+  "overdose": "Safety of doses above 300 mg has not been established and the maximum tolerated dose is unknown. There is no specific antidote; management is supportive with monitoring for hypersensitivity, infection, and other adverse effects.",
+  "refs": [
+    ["FDA Label - Natalizumab (Tysabri) via openFDA", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22natalizumab%22"],
+    ["DailyMed - Tysabri (natalizumab)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=natalizumab"]
+  ]
+}

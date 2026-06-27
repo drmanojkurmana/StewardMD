@@ -1,0 +1,94 @@
+{
+  "generic": "Aprepitant",
+  "cls": "Substance P / neurokinin-1 (NK1) receptor antagonist",
+  "pharm": "Antiemetic",
+  "tags": ["antiemetic", "NK1 antagonist", "CINV", "chemotherapy", "PONV", "nausea", "vomiting"],
+  "quick": [
+    ["Adult dose", "CINV 125 mg on day 1 then 80 mg days 2-3; PONV 40 mg before anesthesia"],
+    ["Meal", "May be taken with or without food; swallow capsule whole"],
+    ["Pregnancy", "Insufficient human data; use only if clearly needed"],
+    ["Lactation", "Unknown excretion in human milk; weigh benefit vs risk"],
+    ["Renal", "No dose adjustment; not removed by hemodialysis"],
+    ["Hepatic", "No adjustment in mild-moderate; limited data in severe (Child-Pugh >9)"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "INR if on warfarin; contraceptive efficacy; CYP3A4 drug interactions"]
+  ],
+  "summary": "Aprepitant is a selective high-affinity substance P/neurokinin-1 (NK1) receptor antagonist used with a 5-HT3 antagonist and a corticosteroid to prevent acute and delayed chemotherapy-induced nausea and vomiting (CINV) and, at a lower dose, to prevent postoperative nausea and vomiting (PONV). It augments the antiemetic effect of ondansetron and dexamethasone. Because it is a substrate, weak-to-moderate inhibitor and inducer of CYP3A4 (and induces CYP2C9), it has important drug interactions, including reduced hormonal contraceptive efficacy and altered warfarin response.",
+  "indications": [
+    "Prevention of acute and delayed nausea and vomiting with highly emetogenic chemotherapy (including high-dose cisplatin), with other antiemetics, in patients >=12 years",
+    "Prevention of nausea and vomiting with moderately emetogenic chemotherapy, with other antiemetics, in patients >=12 years",
+    "Prevention of postoperative nausea and vomiting (PONV) in adults"
+  ],
+  "dosage": [
+    {"c": "CINV - HEC/MEC (>=12 yr)", "r": "Day 1", "d": "125 mg orally 1 hour before chemotherapy", "t": "Once (day 1)", "n": "With dexamethasone and a 5-HT3 antagonist"},
+    {"c": "CINV - HEC/MEC (>=12 yr)", "r": "Days 2-3", "d": "80 mg once daily in the morning", "t": "Once daily", "n": "Give in the morning if no chemo on those days"},
+    {"c": "PONV (adult)", "r": "Single dose", "d": "40 mg within 3 hours prior to induction of anesthesia", "t": "Single preoperative dose", "n": "Acts as a weak CYP3A4 inhibitor at this dose"},
+    {"c": "Concomitant dexamethasone (CINV)", "r": "Dose reduction", "d": "Reduce oral dexamethasone dose (e.g. ~50%) because aprepitant raises its levels", "t": "Per regimen", "n": "Follow regimen-specific dexamethasone dosing"},
+    {"c": "Chronic continuous use", "r": "Not recommended", "d": "Do not use chronically/continuously", "t": "-", "n": "Not studied for established nausea/vomiting"}
+  ],
+  "admin": [
+    "Give the day-1 dose 1 hour before chemotherapy",
+    "May be administered with or without food; swallow capsules whole",
+    "Use as part of a combination regimen with a 5-HT3 antagonist and a corticosteroid",
+    "Reduce the dose of co-administered oral dexamethasone (CYP3A4 substrate)",
+    "Not intended for treatment of established nausea/vomiting or for chronic use"
+  ],
+  "moa": "Aprepitant is a selective, high-affinity antagonist at human substance P/neurokinin-1 (NK1) receptors, with little affinity for serotonin (5-HT3), dopamine or corticosteroid receptors. It crosses the blood-brain barrier and occupies central NK1 receptors, inhibiting both the acute and delayed phases of chemotherapy-induced emesis and augmenting the antiemetic activity of 5-HT3 antagonists and corticosteroids.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to aprepitant or any component (including anaphylaxis)", "Concurrent use with pimozide (risk of QT prolongation from raised pimozide levels)"],
+    "relative": ["Severe hepatic impairment (limited data)", "Patients relying on hormonal contraception (reduced efficacy)", "Patients on warfarin or other narrow-therapeutic-index CYP3A4/CYP2C9 substrates"],
+    "monitor": ["Concomitant CYP3A4 substrates (e.g. some chemotherapy, midazolam, dexamethasone)", "Concomitant strong CYP3A4 inhibitors/inducers", "Patients on warfarin (INR)"]
+  },
+  "preg": "There are insufficient data on aprepitant use in pregnant women to inform a drug-associated risk; animal studies at ~1.5 times human exposure showed no adverse developmental effects. Use during pregnancy only if clearly needed.",
+  "lact": "It is not known whether aprepitant is excreted in human milk; it is present in the milk of lactating rats. Consider the benefits of breastfeeding and the mother's clinical need against any potential risk to the infant.",
+  "renal": "No dosage adjustment is needed for renal impairment, including end-stage renal disease. Aprepitant is not removed by hemodialysis.",
+  "hepatic": "No dosage adjustment is needed in mild-to-moderate hepatic impairment (Child-Pugh 5-9). There are no clinical or pharmacokinetic data in severe hepatic impairment (Child-Pugh >9); use with caution.",
+  "interactions": {
+    "major": ["Pimozide - contraindicated; increased pimozide levels can cause QT prolongation", "Strong CYP3A4 inhibitors (e.g. ketoconazole, clarithromycin) - markedly increase aprepitant levels", "Strong CYP3A4 inducers (e.g. rifampin, carbamazepine, phenytoin) - reduce aprepitant efficacy", "CYP3A4-substrate chemotherapy and other sensitive CYP3A4 substrates - increased exposure"],
+    "moderate": ["Oral corticosteroids (dexamethasone, methylprednisolone) - raised levels; reduce their dose", "Warfarin - decreased INR (CYP2C9 induction); monitor INR for 2 weeks, particularly days 7-10", "Hormonal contraceptives - reduced efficacy during and for 28 days after the last dose", "Benzodiazepines metabolized by CYP3A4 (e.g. midazolam, alprazolam) - increased exposure"],
+    "minor": ["Tolbutamide and other CYP2C9 substrates - reduced exposure", "Diltiazem - mutual increase in exposure"],
+    "food": "May be taken with or without food; a high-fat meal does not meaningfully affect bioavailability.",
+    "alcohol": "No specific interaction with alcohol.",
+    "diagnostics": "No characteristic laboratory test interference; chemotherapy-related lab changes (e.g. WBC, ALT) may be seen."
+  },
+  "se": {
+    "common": ["Fatigue", "Diarrhea", "Asthenia", "Dyspepsia / abdominal pain", "Hiccups", "Decreased appetite", "Headache", "Constipation and hypotension (PONV setting)"],
+    "serious": ["Hypersensitivity reactions including anaphylaxis", "Stevens-Johnson syndrome / toxic epidermal necrolysis (rare)", "Clinically significant drug interactions (e.g. with pimozide, chemotherapy)"],
+    "rare": ["Angioedema and urticaria", "Severe skin reactions", "Elevated transaminases"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe skin reaction (SJS/TEN)"]
+  },
+  "monitoring": [
+    "INR in patients on warfarin during the 2-week period (particularly days 7-10) after each aprepitant cycle",
+    "Adequacy of contraception (advise back-up non-hormonal method during and for 28 days after dosing)",
+    "Concomitant CYP3A4/CYP2C9 substrate levels and effects",
+    "Signs of hypersensitivity",
+    "Antiemetic efficacy and hydration in chemotherapy patients"
+  ],
+  "counsel": [
+    "Take the first dose one hour before chemotherapy and continue as prescribed",
+    "Hormonal birth control may not work during and for 28 days after treatment - use a back-up method",
+    "If you take warfarin, you will need extra INR checks",
+    "Tell your doctor about all your medicines, including over-the-counter and herbal products",
+    "Report rash, swelling of face/throat or difficulty breathing immediately"
+  ],
+  "pk": [
+    ["Onset", "Antiemetic protection during the day-1 dosing and the delayed phase"],
+    ["Peak", "Tmax approximately 3-4 hours"],
+    ["Half-life", "Approximately 9-13 hours"],
+    ["Duration", "Covers acute and delayed (multi-day) emesis with the 3-day regimen"],
+    ["Storage", "Store at controlled room temperature 20-25 C"]
+  ],
+  "pearls": [
+    "Always use as part of a triple regimen (NK1 antagonist + 5-HT3 antagonist + corticosteroid) for highly emetogenic chemotherapy",
+    "Reduce co-administered oral dexamethasone dose by about half because aprepitant inhibits its CYP3A4 metabolism",
+    "Hormonal contraception can fail - advise a non-hormonal back-up during and for 28 days after the last dose",
+    "Monitor INR closely after each cycle in warfarin-treated patients (CYP2C9 induction lowers INR around days 7-10)",
+    "Pimozide is contraindicated; review all CYP3A4 substrates before prescribing"
+  ],
+  "missed": "Aprepitant is given as a short scheduled regimen around chemotherapy or surgery. If you miss a scheduled dose, contact your healthcare provider for instructions rather than doubling up; for the day-1 chemotherapy dose timing relative to treatment is important.",
+  "overdose": "No specific antidote or treatment for overdose is established; drowsiness and headache occurred in a patient who took ~1,440 mg. Discontinue aprepitant and provide general supportive care and monitoring. Drug-induced emesis is unlikely to help because of aprepitant's antiemetic activity, and aprepitant is not removed by hemodialysis.",
+  "refs": [
+    ["FDA Aprepitant Capsules Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22aprepitant%22"],
+    ["DailyMed - Aprepitant", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

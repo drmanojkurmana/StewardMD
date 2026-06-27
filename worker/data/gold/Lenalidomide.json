@@ -1,0 +1,106 @@
+{
+  "generic": "Lenalidomide",
+  "cls": "Immunomodulatory agent (IMiD); thalidomide analogue",
+  "pharm": "Antineoplastic immunomodulator (cereblon E3 ligase modulator)",
+  "tags": ["Rx", "Oral", "BOXED WARNING", "REMS program", "Teratogen (thalidomide analogue)", "VTE risk", "Myelosuppression", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "25 mg once daily, Days 1-21 of 28-day cycles (MM)"],
+    ["Meal", "With or without food; swallow whole, same time daily"],
+    ["Pregnancy", "CONTRAINDICATED — severe birth defects/embryo-fetal death"],
+    ["Lactation", "Do not breastfeed"],
+    ["Renal", "Reduce starting dose by creatinine clearance"],
+    ["Hepatic", "Monitor liver function; hepatic failure reported"],
+    ["Alcohol", "No specific interaction; avoid if neutropenic/unwell"],
+    ["Monitoring", "CBC, pregnancy tests, thrombosis, liver function"]
+  ],
+  "summary": "Lenalidomide is an oral thalidomide-analogue immunomodulatory drug (IMiD) for multiple myeloma (with dexamethasone and as post-transplant maintenance), del(5q) myelodysplastic syndrome, relapsed/refractory mantle cell lymphoma, and previously treated follicular and marginal zone lymphoma (with rituximab). It carries a BOXED WARNING for embryo-fetal toxicity (a thalidomide analogue, a known human teratogen), hematologic toxicity (neutropenia/thrombocytopenia), and venous/arterial thromboembolism, and is available only through the restricted Lenalidomide REMS program.",
+  "indications": [
+    "Multiple myeloma (MM), in combination with dexamethasone",
+    "MM, as maintenance after autologous hematopoietic stem cell transplant (auto-HSCT)",
+    "Transfusion-dependent anemia in low-/intermediate-1-risk MDS with a deletion 5q abnormality",
+    "Mantle cell lymphoma (MCL) relapsed/progressed after two prior therapies (one including bortezomib)",
+    "Previously treated follicular lymphoma (FL), with a rituximab product",
+    "Previously treated marginal zone lymphoma (MZL), with a rituximab product"
+  ],
+  "dosage": [
+    {"c": "Multiple myeloma (combination)", "r": "Oral", "d": "25 mg once daily on Days 1-21 of repeated 28-day cycles", "t": "Once daily x21 days/cycle", "n": "With dexamethasone; continue until progression or unacceptable toxicity"},
+    {"c": "MM maintenance after auto-HSCT", "r": "Oral", "d": "10 mg once daily continuously, Days 1-28 of 28-day cycles", "t": "Once daily", "n": "May increase to 15 mg after 3 cycles if tolerated"},
+    {"c": "MDS with del(5q)", "r": "Oral", "d": "10 mg once daily", "t": "Once daily", "n": "Adjust for cytopenias"},
+    {"c": "Mantle cell lymphoma", "r": "Oral", "d": "25 mg once daily on Days 1-21 of repeated 28-day cycles", "t": "Once daily x21 days/cycle", "n": "Until progression or unacceptable toxicity"},
+    {"c": "FL or MZL (with rituximab)", "r": "Oral", "d": "20 mg once daily on Days 1-21 of repeated 28-day cycles", "t": "Once daily x21 days/cycle", "n": "For up to 12 cycles"},
+    {"c": "Renal impairment", "r": "Oral", "d": "Reduce starting dose per creatinine clearance (e.g., CrCl 30-60, <30, dialysis)", "t": "Per renal table", "n": "Adjust per full prescribing information"}
+  ],
+  "admin": [
+    "Take at about the same time each day, with or without food",
+    "Swallow capsules whole with water; do not break, open, or chew",
+    "Dispensed only through the restricted Lenalidomide REMS program",
+    "Handle with care; avoid handling by pregnant individuals; wash skin if contact with capsule contents",
+    "Females of reproductive potential must use 2 forms of contraception and have negative pregnancy tests before, during, and after treatment"
+  ],
+  "moa": "Lenalidomide is a thalidomide analogue with immunomodulatory, antiangiogenic, and antineoplastic properties. Its actions are mediated through binding the protein cereblon, a component of a cullin-RING E3 ubiquitin ligase complex; this targets substrate proteins (including Aiolos, Ikaros, and CK1-alpha) for ubiquitination and degradation, producing direct cytotoxic and immunomodulatory effects. It inhibits proliferation and induces apoptosis of certain hematopoietic tumor cells, increases the number/activation of T and NK cells (enhancing antibody-dependent cell-mediated cytotoxicity via IL-2 and IFN-gamma), and inhibits pro-inflammatory cytokines (TNF-alpha, IL-6).",
+  "contra": {
+    "absolute": ["Pregnancy (can cause severe birth defects or embryo-fetal death)", "Demonstrated severe hypersensitivity (e.g., angioedema, Stevens-Johnson syndrome, toxic epidermal necrolysis) to lenalidomide"],
+    "relative": ["Not recommended for chronic lymphocytic leukemia outside controlled trials (increased mortality)", "History of thromboembolism", "Pre-existing significant neutropenia/thrombocytopenia", "Significant hepatic impairment"],
+    "monitor": ["Pregnancy status (females of reproductive potential)", "Complete blood counts", "Signs of thrombosis", "Liver function", "Tumor lysis / tumor flare in lymphoma"]
+  },
+  "preg": "CONTRAINDICATED in pregnancy. Lenalidomide is a thalidomide analogue; thalidomide is a known human teratogen causing severe, life-threatening birth defects (amelia, phocomelia, bone hypoplasia, ear/eye abnormalities, congenital heart defects). Obtain 2 negative pregnancy tests before starting. Females of reproductive potential must use 2 forms of contraception (>=1 highly effective) or abstain during and for 4 weeks after treatment. A pregnancy exposure registry exists; report exposures to the REMS Call Center (1-888-423-5436) and FDA MedWatch.",
+  "lact": "Advise patients not to breastfeed during treatment with lenalidomide because of the potential for serious adverse reactions in the breastfed infant.",
+  "renal": "Lenalidomide is substantially excreted by the kidney; reduce the starting dose based on creatinine clearance (separate adjustments for CrCl 30-60 mL/min, <30 mL/min not on dialysis, and dialysis). On dialysis days, give the dose after dialysis.",
+  "hepatic": "Hepatic failure, including fatalities, has occurred. Monitor liver function; stop lenalidomide and evaluate if hepatotoxicity is suspected. Treatment may be restarted at a lower dose after return to baseline.",
+  "interactions": {
+    "major": [
+      "Erythropoietin-stimulating agents and estrogen-containing therapies — increased risk of thrombosis (use only after benefit-risk assessment)",
+      "Pembrolizumab added to a thalidomide analogue + dexamethasone in MM — increased mortality (not recommended)"
+    ],
+    "moderate": [
+      "Digoxin — lenalidomide increases digoxin Cmax/AUC ~14%; monitor digoxin levels"
+    ],
+    "minor": ["Warfarin — no PK interaction, but monitor PT/INR per standard practice"],
+    "food": "May be taken with or without food (a high-fat meal lowers Cmax ~50% and AUC ~20%, but it is given without regard to food).",
+    "alcohol": "No specific interaction described.",
+    "diagnostics": "Monitor CBC frequently, liver function, thyroid function, and (where applicable) tumor lysis parameters."
+  },
+  "se": {
+    "common": ["Diarrhea", "Fatigue", "Anemia", "Constipation", "Neutropenia", "Thrombocytopenia", "Pyrexia", "Peripheral edema", "Nausea", "Rash", "Muscle cramp/spasm"],
+    "serious": ["Severe neutropenia and thrombocytopenia (boxed)", "Venous and arterial thromboembolism — DVT, PE, MI, stroke (boxed)", "Second primary malignancies", "Hepatotoxicity / hepatic failure", "Severe cutaneous reactions (SJS/TEN/DRESS)", "Tumor lysis syndrome", "Tumor flare reaction", "Increased mortality in CLL"],
+    "rare": ["Thyroid disorders (hypo-/hyperthyroidism)", "Impaired stem-cell mobilization", "Progressive multifocal leukoencephalopathy"],
+    "emergency": ["Symptomatic DVT/PE, MI, or stroke", "Anaphylaxis or angioedema; severe skin reaction (SJS/TEN)", "Tumor lysis syndrome", "Severe neutropenic sepsis"]
+  },
+  "monitoring": [
+    "Pregnancy tests in females of reproductive potential (before, monthly during, and after therapy)",
+    "Complete blood counts (weekly for first cycles, then monthly) for neutropenia/thrombocytopenia",
+    "Signs and symptoms of thromboembolism; consider thromboprophylaxis",
+    "Liver function tests",
+    "Thyroid function; tumor lysis and tumor flare in lymphoma patients"
+  ],
+  "counsel": [
+    "This medicine can cause severe birth defects or fetal death — never take if pregnant or trying to conceive",
+    "Females: use two reliable forms of birth control and complete required pregnancy tests; report any missed period immediately",
+    "Males: use a condom during and for the recommended period after treatment, even after vasectomy, as lenalidomide is present in semen",
+    "Do not share this medicine and do not donate blood (or sperm) during and after treatment per REMS",
+    "Watch for and report signs of clots (leg pain/swelling, chest pain, breathlessness), fever or infection, unusual bleeding/bruising",
+    "Take exactly as directed; swallow capsules whole and do not open them"
+  ],
+  "pk": [
+    ["Onset", "Plasma peak (Tmax) 0.5-6 hours post-dose"],
+    ["Peak", "Cmax/AUC increase proportionally with dose (linear)"],
+    ["Half-life", "~3 hours (healthy subjects; longer in renal impairment)"],
+    ["Duration", "Once-daily dosing; no accumulation at recommended doses"],
+    ["Storage", "20-25C (68-77F); excursions 15-30C (59-86F)"]
+  ],
+  "pearls": [
+    "BOXED WARNINGS: embryo-fetal toxicity (thalidomide analogue), hematologic toxicity (neutropenia/thrombocytopenia), and venous/arterial thromboembolism",
+    "Available only through the restricted Lenalidomide REMS program (formerly RevAssist) — prescribers, pharmacies, and patients must be certified",
+    "Thromboprophylaxis (aspirin or anticoagulation) is recommended, especially in MM with dexamethasone",
+    "Two negative pregnancy tests before starting and ongoing monthly testing are mandatory in females of reproductive potential",
+    "Reduce starting dose in renal impairment; lenalidomide is renally cleared",
+    "Not recommended in CLL outside trials due to increased mortality; watch for second primary malignancies"
+  ],
+  "missed": "If a dose is missed and it is within 12 hours of the scheduled time, take it; if more than 12 hours have passed, skip it and resume the normal schedule. Do not take two doses at once.",
+  "overdose": "There is no specific experience with lenalidomide overdose in patients. In studies up to 200 mg/day and single 400 mg doses, pruritus, urticaria, rash, and elevated transaminases were the main adverse effects; the dose-limiting toxicity is neutropenia and thrombocytopenia. Provide supportive care and monitor blood counts and liver function.",
+  "refs": [
+    ["FDA Label — Lenalidomide Capsules (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lenalidomide%22"],
+    ["Lenalidomide REMS Program", "https://www.lenalidomiderems.com"],
+    ["DailyMed — Lenalidomide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=lenalidomide"]
+  ]
+}

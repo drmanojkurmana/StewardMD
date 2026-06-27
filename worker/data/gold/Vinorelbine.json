@@ -1,0 +1,94 @@
+{
+  "generic": "Vinorelbine",
+  "cls": "Vinca alkaloid antineoplastic",
+  "pharm": "Semisynthetic vinca alkaloid that inhibits microtubule assembly, arresting mitosis at metaphase; used in non-small cell lung cancer.",
+  "tags": ["Vinca alkaloid", "Antineoplastic", "Antimitotic", "Parenteral", "Myelosuppressive", "Vesicant"],
+  "quick": [
+    ["Adult dose", "30 mg/m2 IV once weekly (single agent); 25 mg/m2 weekly with cisplatin"],
+    ["Meal", "N/A (intravenous)"],
+    ["Pregnancy", "Can cause fetal harm; avoid; effective contraception required"],
+    ["Lactation", "Avoid; do not breastfeed during and after therapy"],
+    ["Renal", "No specific adjustment recommended"],
+    ["Hepatic", "Reduce dose for elevated total bilirubin"],
+    ["Alcohol", "No specific interaction; avoid if nauseated"],
+    ["Monitoring", "CBC with neutrophil count before each dose; bilirubin"]
+  ],
+  "summary": "Vinorelbine is a semisynthetic vinca alkaloid given by short IV injection for advanced/metastatic non-small cell lung cancer, alone or combined with cisplatin. It carries a boxed warning for severe myelosuppression. It is a vesicant requiring careful IV administration to avoid extravasation, and the dose must be reduced for low neutrophil counts or elevated bilirubin.",
+  "indications": [
+    "First-line treatment of locally advanced or metastatic non-small cell lung cancer (NSCLC) in combination with cisplatin",
+    "First-line treatment of metastatic NSCLC as a single agent"
+  ],
+  "dosage": [
+    {"c": "Single agent (metastatic NSCLC)", "r": "IV", "d": "30 mg/m2", "t": "Once weekly", "n": "Inject/infuse over 6-10 minutes"},
+    {"c": "With cisplatin 100 mg/m2", "r": "IV", "d": "25 mg/m2", "t": "Days 1, 8, 15, 22 of a 28-day cycle", "n": "Cisplatin given Day 1 only of each cycle"},
+    {"c": "With cisplatin 120 mg/m2", "r": "IV", "d": "30 mg/m2", "t": "Once weekly", "n": "Cisplatin Days 1 and 29, then every 6 weeks"},
+    {"c": "Myelosuppression - neutrophils 1,000-1,499/mm3", "r": "IV", "d": "50% of starting dose", "t": "Per schedule", "n": "Based on neutrophil count on day of treatment"},
+    {"c": "Hepatic impairment (bilirubin 2.1-3 mg/dL)", "r": "IV", "d": "50% of dose", "t": "Per schedule", "n": "Bilirubin >3 mg/dL: 25% of dose"}
+  ],
+  "admin": [
+    "Administer only by intravenous route; intrathecal administration is fatal",
+    "Inject or infuse over 6 to 10 minutes",
+    "Vesicant - ensure correct needle/catheter placement; flush vein with fluid before and after",
+    "If extravasation occurs, stop immediately and manage per institutional protocol",
+    "Verify neutrophil count is adequate before each dose"
+  ],
+  "moa": "Vinca alkaloid that binds tubulin and interferes with microtubule assembly, inhibiting mitosis at metaphase; this antimitotic action produces its antitumor effect, with relative selectivity for mitotic over axonal microtubules.",
+  "contra": {
+    "absolute": ["Intrathecal administration (fatal)"],
+    "relative": ["Pre-existing severe neutropenia", "Hepatic impairment with elevated bilirubin", "Pre-existing neuropathy", "Pregnancy and breastfeeding"],
+    "monitor": ["Neutrophil count before each dose", "Serum total bilirubin", "Neurologic status"]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal data; avoid in pregnancy. Females of reproductive potential should use effective contraception during and after therapy.",
+  "lact": "Unknown if excreted in human milk; advise not to breastfeed during treatment and for a period after the final dose.",
+  "renal": "No specific dose adjustment recommended; eliminated mainly via hepatobiliary route.",
+  "hepatic": "Reduce dose with elevated serum total bilirubin (50% for 2.1-3 mg/dL; 25% for >3 mg/dL).",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (e.g., ketoconazole, ritonavir) - increased vinorelbine exposure and toxicity", "Other myelosuppressive agents and radiation - additive bone marrow suppression"],
+    "moderate": ["CYP3A4 inducers - may reduce efficacy", "Mitomycin - reports of acute pulmonary reactions/bronchospasm"],
+    "minor": ["Drugs causing peripheral neuropathy - additive neurotoxicity"],
+    "food": "N/A (parenteral)",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Obtain CBC with neutrophil count before each dose; check bilirubin before dosing."
+  },
+  "se": {
+    "common": ["Neutropenia", "Nausea and vomiting", "Constipation", "Fatigue/asthenia", "Injection site reactions", "Peripheral neuropathy", "Alopecia (mild)", "Elevated liver enzymes"],
+    "serious": ["Severe myelosuppression with infection/sepsis", "Severe constipation/paralytic ileus", "Extravasation with tissue necrosis", "Interstitial pulmonary changes/ARDS"],
+    "rare": ["Tumor lysis syndrome", "Hyponatremia/SIADH", "Cardiac ischemia"],
+    "emergency": ["Septic shock from severe neutropenia", "Acute respiratory distress/bronchospasm (especially with mitomycin)", "Inadvertent intrathecal injection (fatal ascending neuropathy)"]
+  },
+  "monitoring": [
+    "Complete blood count with neutrophil count before each dose",
+    "Serum total bilirubin and liver enzymes",
+    "Signs of neuropathy (sensory and motor)",
+    "Bowel function (constipation/ileus)",
+    "Pulmonary symptoms (dyspnea, cough)",
+    "Infusion/injection site for extravasation"
+  ],
+  "counsel": [
+    "This chemotherapy is given by injection into a vein, usually weekly",
+    "Report fever, chills, or signs of infection immediately - your white cells may be low",
+    "Report constipation, severe abdominal pain, or numbness/tingling",
+    "Use effective contraception; do not breastfeed",
+    "Report any pain, swelling, or burning at the injection site during infusion"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV); cytotoxic effect over days"],
+    ["Peak", "End of injection/infusion"],
+    ["Half-life", "Terminal ~28-44 hours"],
+    ["Duration", "Weekly dosing maintains effect"],
+    ["Storage", "Refrigerate 2-8 C; protect from light; do not freeze"]
+  ],
+  "pearls": [
+    "Boxed warning: severe myelosuppression can cause serious infection, septic shock, and death",
+    "Vesicant - extravasation causes severe local tissue injury",
+    "Never give intrathecally - it is uniformly fatal",
+    "Granulocytopenia is dose-limiting and usually the reason to hold or reduce the dose",
+    "Reduce dose for hyperbilirubinemia, not for renal impairment"
+  ],
+  "missed": "Administered in a clinical setting on a set schedule; doses are timed to neutrophil recovery. A missed/held dose is rescheduled by the oncology team based on counts. Patients do not self-administer.",
+  "overdose": "No specific antidote. Overdose may produce severe myelosuppression, ileus, and neurotoxicity. Provide supportive care including blood product/growth-factor support, infection prophylaxis/treatment, and management of ileus. Monitor closely.",
+  "refs": [
+    ["FDA Vinorelbine Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vinorelbine%22"],
+    ["DailyMed - Vinorelbine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=vinorelbine"]
+  ]
+}

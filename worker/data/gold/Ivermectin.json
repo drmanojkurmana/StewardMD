@@ -1,0 +1,92 @@
+{
+  "generic": "Ivermectin",
+  "cls": "Anthelmintic (antiparasitic)",
+  "pharm": "Avermectin-class agent; binds glutamate-gated chloride channels in invertebrate nerve/muscle cells",
+  "tags": ["antiparasitic", "anthelmintic", "strongyloidiasis", "onchocerciasis", "weight-based dosing", "single-dose"],
+  "quick": [
+    ["Adult dose", "Strongyloidiasis 200 mcg/kg single oral dose; onchocerciasis 150 mcg/kg single dose"],
+    ["Meal", "Take on empty stomach with water"],
+    ["Pregnancy", "Not recommended; safety not established"],
+    ["Lactation", "Excreted in milk in low concentrations; use only if benefit outweighs risk"],
+    ["Renal", "No specific adjustment; <1% renally excreted"],
+    ["Hepatic", "Hepatically metabolized; use caution in impairment"],
+    ["Alcohol", "No specific interaction documented"],
+    ["Monitoring", "Follow-up stool exams (strongyloidiasis); skin/eye exams (onchocerciasis)"]
+  ],
+  "summary": "Ivermectin is an oral semisynthetic avermectin anthelmintic indicated for intestinal (nondisseminated) strongyloidiasis and onchocerciasis. It is given as a single weight-based oral dose: 200 mcg/kg for strongyloidiasis and 150 mcg/kg for onchocerciasis. It paralyzes parasites by binding invertebrate glutamate-gated chloride channels and has limited mammalian CNS penetration. It does not kill adult Onchocerca worms, so repeated treatment is usually needed, and follow-up stool exams are essential to confirm Strongyloides eradication. Mazzotti and ophthalmologic reactions may occur during onchocerciasis treatment, and rare neurotoxicity and fatal encephalopathy can occur, especially in heavy Loa loa co-infection.",
+  "indications": [
+    "Intestinal (nondisseminated) strongyloidiasis due to Strongyloides stercoralis",
+    "Onchocerciasis due to Onchocerca volvulus (active against microfilariae only, not adult worms)"
+  ],
+  "dosage": [
+    {"c": "Strongyloidiasis (intestinal)", "r": "Oral", "d": "Single dose ~200 mcg/kg (e.g., 15-24 kg: 1x3-mg tab; 25-35 kg: 2 tabs; 36-50 kg: 3 tabs; 51-65 kg: 4 tabs; 66-79 kg: 5 tabs; >=80 kg: 200 mcg/kg)", "t": "Single dose; additional doses generally not needed", "n": "Confirm cure with follow-up stool exams over 3 months; retreat if larvae recur"},
+    {"c": "Onchocerciasis", "r": "Oral", "d": "Single dose ~150 mcg/kg (e.g., 15-25 kg: 1x3-mg tab; 26-44 kg: 2 tabs; 45-64 kg: 3 tabs; 65-84 kg: 4 tabs; >=85 kg: 150 mcg/kg)", "t": "Retreat at intervals as short as 3 months for individuals; 12-month interval common in mass campaigns", "n": "Does not kill adult worms; repeated follow-up and retreatment usually required"}
+  ],
+  "admin": [
+    "Take on an empty stomach with water",
+    "Swallow tablets whole",
+    "Dose is weight-based using 3-mg tablets per dosing tables",
+    "For immunocompromised (including HIV) patients with strongyloidiasis, repeated courses (e.g., every 2 weeks) may be needed; cure may not be achievable"
+  ],
+  "moa": "Binds selectively and with high affinity to glutamate-gated chloride channels in invertebrate nerve and muscle cells, increasing chloride permeability and causing hyperpolarization, paralysis, and death of the parasite. May also interact with GABA-gated chloride channels. Selectivity arises because some mammals lack glutamate-gated chloride channels and ivermectin has low affinity for mammalian ligand-gated channels and poorly crosses the human blood-brain barrier.",
+  "contra": {
+    "absolute": ["Hypersensitivity to ivermectin or any component of the product"],
+    "relative": ["Concurrent heavy Loa loa infection (risk of severe/fatal encephalopathy)", "Pregnancy (safety not established)", "Weight <15 kg (safety/effectiveness not established)"],
+    "monitor": ["Patients from Loa loa-endemic areas of West/Central Africa (pretreatment loiasis assessment and post-treatment follow-up)", "Hyperreactive onchodermatitis (sowda)", "Immunocompromised/HIV patients with strongyloidiasis"]
+  },
+  "preg": "Not recommended; safety in pregnancy has not been established. Teratogenic in mice, rats, and rabbits (cleft palate; clubbed forepaws in rabbits) only at or near maternotoxic doses. No adequate well-controlled studies in pregnant women.",
+  "lact": "Excreted in human milk in low concentrations. Treatment of nursing mothers should be undertaken only when the risk of delaying treatment to the mother outweighs the possible risk to the newborn.",
+  "renal": "Less than 1% of an administered dose is excreted in urine, so renal impairment is unlikely to require dose adjustment. Use caution in elderly patients with decreased renal function.",
+  "hepatic": "Ivermectin is metabolized in the liver (primarily CYP3A4) and excreted almost entirely in feces. Use caution in hepatic impairment; rare postmarketing reports of hepatitis and elevated liver enzymes.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Warfarin (rare postmarketing reports of increased INR with co-administration)", "Strong CYP3A4 inhibitors may increase ivermectin exposure (CYP3A4 is the primary metabolic pathway)"],
+    "minor": [],
+    "food": "High-fat meal increases bioavailability ~2.5-fold; take on empty stomach with water.",
+    "alcohol": "No specific interaction documented.",
+    "diagnostics": "No characteristic laboratory test interference; eosinophilia and transient liver enzyme elevations may occur with treatment."
+  },
+  "se": {
+    "common": ["Pruritus", "Dizziness", "Nausea", "Diarrhea", "Rash", "Asthenia/fatigue", "Abdominal pain"],
+    "serious": ["Mazzotti reaction in onchocerciasis (fever, lymph node enlargement/tenderness, arthralgia, edema, urticarial rash)", "Orthostatic/postural hypotension", "Tachycardia", "Facial and peripheral edema", "Worsening of bronchial asthma", "Hepatitis, elevated liver enzymes/bilirubin"],
+    "rare": ["Ophthalmologic reactions (limbitis, punctate opacity, uveitis, keratitis, conjunctivitis)", "Conjunctival hemorrhage", "Seizures", "Stevens-Johnson syndrome", "Toxic epidermal necrolysis"],
+    "emergency": ["Neurotoxicity with altered consciousness (somnolence, stupor, coma), confusion, disorientation, and death", "Serious or fatal encephalopathy in heavy Loa loa co-infection", "Severe Mazzotti reaction with hypotension", "Severe hypersensitivity/anaphylaxis"]
+  },
+  "monitoring": [
+    "Strongyloidiasis: at least three follow-up stool examinations over the 3 months after treatment to confirm eradication (use concentration techniques such as Baermann apparatus)",
+    "Onchocerciasis: monitor for Mazzotti reactions and ophthalmologic changes; periodic skin and eye exams",
+    "Pretreatment loiasis assessment in patients with West/Central African exposure",
+    "Monitor for neurologic changes (altered consciousness, confusion)",
+    "INR if co-administered with warfarin"
+  ],
+  "counsel": [
+    "Take on an empty stomach with a full glass of water",
+    "Strongyloidiasis: you will need repeated stool tests to confirm the infection is cleared",
+    "Onchocerciasis: this drug does not kill adult worms, so follow-up and repeat treatment are usually needed",
+    "Seek immediate care for confusion, drowsiness, fainting, severe rash, swelling, or difficulty breathing",
+    "Report recent travel to or residence in West/Central Africa (Loa loa risk)",
+    "Mild itching, rash, dizziness, or swollen tender lymph nodes can occur, especially when treating onchocerciasis"
+  ],
+  "pk": [
+    ["Onset", "Microfilaricidal effect within days (onchocerciasis skin microfilariae down ~83% by day 3)"],
+    ["Peak", "Plasma peak ~4 hours after oral dose"],
+    ["Half-life", "Approximately 18 hours"],
+    ["Duration", "Microfilarial suppression maintained for up to 12 months after a single onchocerciasis dose"],
+    ["Storage", "Store below 30 C (86 F)"]
+  ],
+  "pearls": [
+    "Always dose by weight; not approved for patients under 15 kg",
+    "Strongyloidiasis dose (200 mcg/kg) is higher than onchocerciasis dose (150 mcg/kg)",
+    "Screen for Loa loa before treating patients with West/Central African exposure to avoid fatal encephalopathy",
+    "Ivermectin has no activity against adult Onchocerca worms; consider nodulectomy of adult-worm nodules",
+    "In immunocompromised/HIV patients, single dosing often fails; repeated or suppressive courses may be required",
+    "High-fat meals raise bioavailability ~2.5-fold, so consistent empty-stomach dosing is preferred",
+    "Use stool concentration techniques (Baermann) because larval counts may be very low"
+  ],
+  "missed": "Ivermectin is typically given as a single dose, so a routine missed-dose schedule does not apply. If a prescribed dose is not taken, take it as soon as remembered. For recurrent or suppressive regimens in immunocompromised patients, follow the prescriber's specific interval instructions.",
+  "overdose": "Overdose or accidental exposure (including veterinary formulations) may cause rash, edema, headache, dizziness, asthenia, nausea, vomiting, diarrhea, and, more seriously, neurotoxicity with altered consciousness (somnolence, stupor, coma), ataxia, seizures, paresthesia, dyspnea, and hypotension. Management is supportive: parenteral fluids and electrolytes, respiratory support, and pressors for significant hypotension. Consider emesis induction and/or gastric lavage as soon as possible followed by purgatives to limit absorption. Contact a poison control center.",
+  "refs": [
+    ["FDA Label - Ivermectin (DailyMed/openFDA)", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=014e33e7-c07d-4feb-a2cf-7cd160b1facd"],
+    ["openFDA Drug Label API", "https://open.fda.gov/apis/drug/label/"]
+  ]
+}

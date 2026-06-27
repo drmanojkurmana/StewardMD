@@ -1,0 +1,95 @@
+{
+  "generic": "Bleomycin",
+  "cls": "Antitumor glycopeptide antibiotic",
+  "pharm": "Antineoplastic / cytotoxic",
+  "tags": ["chemotherapy", "antineoplastic", "cytotoxic", "germ cell tumor", "lymphoma", "squamous cell carcinoma", "pleurodesis", "boxed warning"],
+  "quick": [
+    ["Adult dose", "0.25-0.5 units/kg (10-20 units/m2) IV/IM/SC weekly or twice weekly"],
+    ["Meal", "Parenteral drug - not related to meals"],
+    ["Pregnancy", "Category D - can cause fetal harm; avoid"],
+    ["Lactation", "Discontinue breastfeeding during therapy"],
+    ["Renal", "Reduce dose in renal impairment (predominantly renally cleared)"],
+    ["Hepatic", "Caution; monitor liver function"],
+    ["Alcohol", "Not directly relevant; avoid hepatotoxic insults"],
+    ["Monitoring", "Pulmonary function/chest imaging, cumulative dose (limit ~400 units), renal/hepatic function"]
+  ],
+  "summary": "Bleomycin is a cytotoxic glycopeptide antibiotic that causes DNA strand breaks and cell-cycle arrest, used as palliative chemotherapy for squamous cell carcinomas, Hodgkin and non-Hodgkin lymphoma, testicular germ cell tumors, and as a sclerosing agent for malignant pleural effusion. Its defining and most severe toxicity is dose-related pulmonary fibrosis (more common over a 400-unit total dose and in older patients), and a severe idiosyncratic reaction (hypotension, fever, chills, wheezing, confusion) occurs in about 1% of lymphoma patients - so first doses in lymphoma should be small test doses.",
+  "indications": [
+    "Squamous cell carcinoma (head and neck, cervix, vulva, penis, skin, larynx) as palliative treatment",
+    "Hodgkin's disease and non-Hodgkin's lymphoma (e.g. ABVD regimen)",
+    "Testicular carcinoma - embryonal cell, choriocarcinoma, teratocarcinoma (e.g. BEP regimen)",
+    "Malignant pleural effusion - intrapleural sclerosing agent to prevent recurrence"
+  ],
+  "dosage": [
+    {"c": "Lymphoma - test dosing", "r": "First 2 doses", "d": "2 units or less for the first two doses, then observe for acute reaction", "t": "Initial test doses", "n": "Risk of idiosyncratic/anaphylactoid reaction"},
+    {"c": "Squamous cell carcinoma / NHL / testicular Ca", "r": "Usual", "d": "0.25-0.50 units/kg (10-20 units/m2) IV, IM or SC", "t": "Weekly or twice weekly", "n": "Route and schedule per regimen"},
+    {"c": "Hodgkin's disease", "r": "Usual", "d": "0.25-0.50 units/kg (10-20 units/m2) weekly or twice weekly; after 50% response maintenance 1 unit daily or 5 units weekly", "t": "Weekly/twice weekly", "n": "IV or IM maintenance"},
+    {"c": "Malignant pleural effusion", "r": "Intrapleural", "d": "60 units as a single intrapleural dose (dissolved per protocol)", "t": "Single instillation", "n": "Sclerosing/pleurodesis use"},
+    {"c": "Cumulative dose limit", "r": "Caution", "d": "Doses over 400 units total markedly raise pulmonary fibrosis risk - give with great caution", "t": "Lifetime cumulative", "n": "Lower thresholds in combination/with risk factors"}
+  ],
+  "admin": [
+    "Administer under supervision of a physician experienced with cytotoxic chemotherapy",
+    "Give lymphoma patients a small test dose (<=2 units) for the first 2 doses and observe for acute reaction",
+    "May be given IV (slowly), IM, SC or intrapleurally; reconstitute in 0.9% sodium chloride (not dextrose)",
+    "Track cumulative lifetime dose and avoid exceeding ~400 units without careful pulmonary assessment",
+    "Handle as a hazardous drug; reduce dose in renal impairment"
+  ],
+  "moa": "Bleomycin's main action is inhibition of DNA synthesis, with lesser effects on RNA and protein synthesis. It binds DNA and, in the presence of oxygen and metal ions (iron), generates free radicals that produce single- and double-strand DNA breaks, causing cell-cycle arrest in G2 and mitosis. Lack of the inactivating enzyme bleomycin hydrolase in skin and lung accounts for its characteristic cutaneous and pulmonary toxicity. Intrapleurally it acts as a chemical sclerosing agent.",
+  "contra": {
+    "absolute": ["Prior hypersensitive or idiosyncratic reaction to bleomycin"],
+    "relative": ["Significant pre-existing pulmonary disease or reduced pulmonary reserve", "Significant renal impairment (reduce dose)", "Cumulative dose approaching or exceeding 400 units", "Elderly patients (higher pulmonary toxicity risk)"],
+    "monitor": ["Prior or concurrent thoracic radiotherapy (additive lung toxicity)", "Concurrent oxygen therapy / high FiO2 during anesthesia", "Concurrent cisplatin or nephrotoxins (reduced bleomycin clearance)", "Concurrent G-CSF / cytokines (possible increased pulmonary toxicity)"]
+  },
+  "preg": "Pregnancy Category D - bleomycin can cause fetal harm when administered to a pregnant woman (teratogenic and embryotoxic in animals). Avoid in pregnancy; advise women of childbearing potential to use effective contraception and inform them of the potential hazard to the fetus.",
+  "lact": "It is not known whether bleomycin is excreted in human milk. Because of the potential for serious adverse reactions in nursing infants, breastfeeding should be discontinued during bleomycin therapy.",
+  "renal": "Bleomycin is eliminated predominantly by renal excretion; impaired renal function reduces clearance, prolongs half-life and increases toxicity. Reduce the dose in renal impairment and avoid nephrotoxic combinations; fatal pulmonary toxicity has occurred with unrecognized cisplatin-induced renal failure.",
+  "hepatic": "Hepatic toxicity (deterioration of liver function tests) has been reported and may occur at any time during therapy. Use with caution and monitor liver function.",
+  "interactions": {
+    "major": ["Nephrotoxic drugs, especially cisplatin - reduce bleomycin renal clearance, raising levels and pulmonary toxicity risk", "Oxygen / high inspired oxygen concentration (e.g. during surgery) - potentiates pulmonary toxicity; keep FiO2 as low as feasible", "Thoracic/prior radiotherapy - additive pulmonary fibrosis"],
+    "moderate": ["G-CSF (filgrastim) and other cytokines - some reports of increased pulmonary toxicity (data conflicting)", "Other antineoplastics - additive myelosuppression and toxicity per regimen", "Anesthetic agents requiring high FiO2 - lung injury risk"],
+    "minor": ["Live vaccines - avoid in immunosuppressed patients", "Phenytoin/digoxin - reduced absorption reported with some cytotoxics"],
+    "food": "Parenteral administration; food interactions not applicable.",
+    "alcohol": "Not directly relevant; avoid additional hepatotoxic exposures.",
+    "diagnostics": "Monitor chest radiographs/CT, pulmonary function tests (especially DLCO), renal and hepatic function."
+  },
+  "se": {
+    "common": ["Fever and chills (often within hours of dosing)", "Mucositis / stomatitis", "Skin changes - erythema, hyperpigmentation, hyperkeratosis, striae, nail changes", "Alopecia", "Anorexia and weight loss", "Vomiting"],
+    "serious": ["Pulmonary toxicity - pneumonitis progressing to pulmonary fibrosis (~10% incidence, ~1% fatal)", "Idiosyncratic anaphylactoid reaction (hypotension, confusion, fever, chills, wheezing) in ~1% of lymphoma patients", "Renal or hepatic toxicity", "Raynaud phenomenon / vascular toxicity"],
+    "rare": ["Severe cutaneous reactions", "Cerebrovascular/thrombotic events (in combination regimens)", "Tumor lysis-related effects", "Myelosuppression (generally mild for bleomycin)"],
+    "emergency": ["Acute idiosyncratic/anaphylactoid reaction (hypotension, wheezing, confusion)", "Acute pneumonitis / respiratory failure", "Severe hypersensitivity / anaphylaxis"]
+  },
+  "monitoring": [
+    "Pulmonary status - symptoms (dyspnea, fine basal rales), chest imaging and pulmonary function tests (DLCO) before and during therapy",
+    "Cumulative lifetime dose (heightened fibrosis risk above ~400 units)",
+    "Renal function (creatinine) and hepatic function tests",
+    "Close observation after the first 1-2 lymphoma doses for idiosyncratic reaction",
+    "Temperature and signs of acute reaction during and after each dose"
+  ],
+  "counsel": [
+    "Report any new or worsening cough, shortness of breath or chest tightness immediately (lung toxicity)",
+    "Fever and chills can occur within hours of a dose; tell your team if severe",
+    "Avoid high-oxygen exposure and tell any anesthetist/surgeon you have received bleomycin",
+    "Use effective contraception; do not breastfeed during treatment",
+    "Skin darkening, rash, mouth sores and hair loss may occur and usually improve after therapy"
+  ],
+  "pk": [
+    ["Onset", "Hodgkin/testicular tumor response often within 2 weeks; squamous cell over 3 weeks"],
+    ["Peak", "Peak plasma concentration 30-60 minutes after IM/SC; immediate after IV"],
+    ["Half-life", "Terminal half-life ~2-4 hours (prolonged in renal impairment, up to ~6 h)"],
+    ["Duration", "Dosed weekly or twice weekly per regimen"],
+    ["Storage", "Store refrigerated 2-8 C; reconstitute in 0.9% sodium chloride (NOT dextrose)"]
+  ],
+  "pearls": [
+    "Boxed warning: pulmonary fibrosis is the most severe toxicity - higher risk over 400 units total dose and in elderly patients, but can occur at low doses",
+    "Boxed warning: severe idiosyncratic reaction (hypotension, confusion, fever, chills, wheezing) in ~1% of lymphoma patients - give the first 2 lymphoma doses as <=2-unit test doses",
+    "Bleomycin causes minimal myelosuppression, making it useful in multidrug regimens (ABVD, BEP)",
+    "Avoid high inspired oxygen (e.g. during surgery) in patients who have received bleomycin - it potentiates lung injury",
+    "Reconstitute only in saline; dextrose degrades it. Reduce dose in renal impairment and avoid concurrent nephrotoxins like cisplatin without monitoring"
+  ],
+  "missed": "Bleomycin is administered by a clinician on a scheduled basis; there is no patient self-administered missed dose. A delayed or missed clinic dose is rescheduled by the oncology team, who will recalculate timing and cumulative dose.",
+  "overdose": "Acute reactions to overdose include hypotension, fever, rapid pulse and general shock-like symptoms; chronic/cumulative overdose increases the risk of pulmonary fibrosis. There is no specific antidote. Treatment is symptomatic and supportive - manage hypotension, fever and respiratory complications; bleomycin is not effectively dialyzable. Watch closely for delayed pulmonary toxicity.",
+  "refs": [
+    ["FDA Bleomycin for Injection USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bleomycin%22"],
+    ["DailyMed - Bleomycin for Injection", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

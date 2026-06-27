@@ -1,0 +1,94 @@
+{
+  "generic": "Bromocriptine",
+  "cls": "Ergot-derivative dopamine D2 receptor agonist",
+  "pharm": "Prolactin inhibitor / antiparkinsonian / acromegaly agent",
+  "tags": ["hyperprolactinemia", "prolactinoma", "acromegaly", "Parkinson disease", "dopamine agonist", "ergot"],
+  "quick": [
+    ["Adult dose", "Hyperprolactinemia: 1.25-2.5 mg/day, titrate to 2.5-15 mg/day"],
+    ["Meal", "Take with food to reduce nausea"],
+    ["Pregnancy", "Category B; withdraw when pregnancy diagnosed (hyperprolactinemia)"],
+    ["Lactation", "Do not use in postpartum women"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "Use caution; extensive hepatic metabolism"],
+    ["Alcohol", "Avoid; may potentiate side effects and intolerance"],
+    ["Monitoring", "Blood pressure, visual fields (macroadenoma), prolactin/GH, somnolence"]
+  ],
+  "summary": "Bromocriptine is an ergot-derived dopamine agonist that suppresses prolactin and growth hormone secretion and stimulates dopamine receptors. It treats hyperprolactinemia-associated disorders, prolactinomas, acromegaly and Parkinson disease. Taken with food and titrated slowly to limit nausea and orthostatic hypotension. Key cautions: postpartum use is contraindicated, sudden sleep onset can occur, and it must be withdrawn for hypertensive disorders of pregnancy.",
+  "indications": [
+    "Hyperprolactinemia-associated dysfunctions: amenorrhea with/without galactorrhea, infertility, hypogonadism",
+    "Prolactin-secreting adenomas (including reduction of macroadenoma size, pre-surgical tumor reduction)",
+    "Acromegaly (alone or adjunctive to surgery/irradiation)",
+    "Parkinson's disease (idiopathic or postencephalitic)"
+  ],
+  "dosage": [
+    {"c": "Hyperprolactinemia (adult)", "r": "Standard", "d": "Initial 1.25-2.5 mg daily; add 2.5 mg every 2-7 days; usual 2.5-15 mg/day", "t": "Daily, with food", "n": "Use mechanical contraception until ovulatory cycles restored"},
+    {"c": "Acromegaly", "r": "Standard", "d": "Initial 1.25-2.5 mg at bedtime x3 days; increase by 1.25-2.5 mg every 3-7 days; usual 20-30 mg/day", "t": "Divided with food", "n": "Max 100 mg/day"},
+    {"c": "Parkinson's disease", "r": "Standard", "d": "Initial 1.25 mg twice daily; increase by 2.5 mg/day every 14-28 days", "t": "Twice daily with food", "n": "Titrate slowly; high doses risk hallucinations/dyskinesia"},
+    {"c": "Children 11-15 yr (prolactinoma)", "r": "Pediatric", "d": "Initial 1.25-2.5 mg daily; usual 2.5-10 mg/day", "t": "Daily with food", "n": "Limited data"}
+  ],
+  "admin": [
+    "Take with food to reduce the high incidence of nausea/vomiting",
+    "Start at the lowest dose, usually with the first dose at bedtime, and titrate slowly",
+    "Evaluate frequently during dose escalation to find the lowest effective dose",
+    "Perform full pituitary evaluation before treating hyperprolactinemia",
+    "Use mechanical contraception in fertility patients until normal ovulatory cycles return"
+  ],
+  "moa": "Bromocriptine is a dopamine D2 receptor agonist. By stimulating dopamine receptors on pituitary lactotrophs it inhibits prolactin secretion (treating hyperprolactinemia and shrinking prolactinomas) and lowers growth hormone in acromegaly. In Parkinson disease it directly stimulates striatal postsynaptic dopamine receptors, improving motor function.",
+  "contra": {
+    "absolute": ["Hypersensitivity to bromocriptine or any ergot alkaloid", "Uncontrolled hypertension", "Use during the postpartum period in women (especially with coronary artery disease/cardiovascular risk)", "Hypertensive disorders of pregnancy (eclampsia, preeclampsia, pregnancy-induced hypertension) unless withdrawal is contraindicated"],
+    "relative": ["History of psychosis or psychiatric disorder", "Cardiovascular disease, peripheral vascular disease", "Severe hepatic impairment", "Peptic ulcer disease / GI bleeding history"],
+    "monitor": ["Blood pressure", "Visual fields if macroadenoma during pregnancy", "Somnolence/sudden sleep onset"]
+  },
+  "preg": "Pregnancy Category B. For hyperprolactinemia, withdraw bromocriptine when pregnancy is diagnosed. If reinstituted for a rapidly expanding macroadenoma and the patient develops a hypertensive disorder of pregnancy, weigh continuation against risk. Monitor closely for tumor expansion and visual field changes during pregnancy.",
+  "lact": "Bromocriptine suppresses lactation and should not be used during the postpartum period or in nursing women. It was associated with serious postpartum cardiovascular events and is contraindicated for postpartum lactation suppression.",
+  "renal": "No specific renal dose adjustment is provided in the labeling; use with caution.",
+  "hepatic": "Bromocriptine undergoes extensive hepatic first-pass metabolism (CYP3A4); use caution and consider dose adjustment in hepatic impairment.",
+  "interactions": {
+    "major": ["Other ergot alkaloids - not recommended; additive ergotism/vasospasm", "Strong CYP3A4 inhibitors (azole antifungals, HIV protease inhibitors) - increase bromocriptine levels", "Macrolides (erythromycin) - increase bromocriptine AUC ~3.7-fold and Cmax ~4.6-fold"],
+    "moderate": ["Dopamine antagonists (phenothiazines, haloperidol, metoclopramide, pimozide) - decrease bromocriptine efficacy", "Antihypertensives - additive hypotension", "Octreotide - increases bromocriptine levels (~38%) in acromegaly"],
+    "minor": ["Sympathomimetics - hypertension/dysrhythmia risk at high bromocriptine doses"],
+    "food": "Take with food; food does not significantly change exposure but markedly reduces nausea/vomiting.",
+    "alcohol": "Alcohol may potentiate side effects and cause disulfiram-like intolerance; avoid.",
+    "diagnostics": "Lowers serum prolactin and growth hormone (therapeutic markers)."
+  },
+  "se": {
+    "common": ["Nausea (very common)", "Headache", "Dizziness", "Fatigue", "Lightheadedness", "Vomiting", "Abdominal cramps", "Nasal congestion", "Constipation", "Orthostatic hypotension"],
+    "serious": ["Symptomatic/severe hypotension", "Sudden sleep onset / somnolence", "Hallucinations and psychiatric disturbances", "Postpartum cardiovascular events (MI, stroke, seizures)"],
+    "rare": ["CSF rhinorrhea (large prolactinomas after surgery/radiation)", "Pleural/pulmonary/retroperitoneal fibrosis (chronic high dose)", "Digital vasospasm / erythromelalgia", "Impulse control disorders"],
+    "emergency": ["Severe hypotension/syncope", "Sudden sleep attack while driving", "Acute MI or stroke (postpartum)", "Hypertensive crisis or seizures (severe headache)"]
+  },
+  "monitoring": [
+    "Blood pressure, especially during initiation and dose escalation (first-dose hypotension)",
+    "Serum prolactin (hyperprolactinemia) or growth hormone/IGF-1 (acromegaly)",
+    "Visual fields in patients with macroadenoma, particularly during pregnancy",
+    "Mental status (hallucinations, impulse control), somnolence",
+    "Pregnancy status; cardiopulmonary symptoms with chronic high-dose use"
+  ],
+  "counsel": [
+    "Take with food and rise slowly to reduce nausea and dizziness",
+    "First dose may cause fainting - take at bedtime and have support nearby",
+    "Do not drive or operate machinery if you experience drowsiness or sudden sleep episodes",
+    "Use a barrier contraceptive until normal cycles return; tell your doctor immediately if you become pregnant",
+    "Report severe headache, chest pain, visual changes, or unusual urges (gambling/shopping)"
+  ],
+  "pk": [
+    ["Onset", "Prolactin falls within 1-2 hours of a dose"],
+    ["Peak", "Plasma peak ~2-3 hours"],
+    ["Half-life", "Elimination half-life ~4.85 hours (effect on prolactin longer)"],
+    ["Duration", "Prolactin suppression up to ~14 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); tight, light-resistant container with desiccant"]
+  ],
+  "pearls": [
+    "Contraindicated postpartum - do NOT use for lactation suppression; serious cardiovascular events (HTN, MI, stroke, seizures) reported",
+    "Take with food and titrate slowly to manage prominent nausea and first-dose hypotension",
+    "Withdraw for any hypertensive disorder of pregnancy unless withdrawal is medically contraindicated",
+    "Warn Parkinson patients about sudden sleep onset and impulse control disorders",
+    "Erythromycin and azole antifungals markedly raise bromocriptine levels"
+  ],
+  "missed": "If a dose is missed, take it with food when remembered unless it is almost time for the next dose; then skip it. Do not double up. Take subsequent doses with food to limit nausea.",
+  "overdose": "Overdose causes nausea, vomiting, dizziness, pallor, severe hypotension, confusion, lethargy, hallucinations and repetitive yawning. The drug has a wide safety margin. Treat with gastric decontamination (emesis if conscious, lavage, activated charcoal), supportive care, fluid balance monitoring, Trendelenburg positioning and IV fluids for hypotension; vasopressors if needed.",
+  "refs": [
+    ["FDA Bromocriptine Mesylate Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bromocriptine+mesylate%22"],
+    ["FDA DailyMed - Bromocriptine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "generic": "Colistimethate Sodium",
+  "cls": "Polymyxin antibacterial (polymyxin E prodrug)",
+  "pharm": "Inactive prodrug hydrolyzed to colistin, a cationic polypeptide that binds lipopolysaccharide and disrupts the gram-negative bacterial cell membrane, causing leakage and cell death.",
+  "tags": ["Rx only", "Polymyxin antibacterial", "Nephrotoxic/neurotoxic", "Reserve/last-line agent"],
+  "quick": [
+    ["Adult dose", "2.5-5 mg/kg/day colistin base activity in 2-4 divided doses"],
+    ["Meal", "Parenteral; not food-related"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Excreted in milk; use with caution"],
+    ["Renal", "Reduce dose; major adjustment by renal function"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal function, neurologic status, urine output"]
+  ],
+  "summary": "Colistimethate sodium is the inactive prodrug of colistin (polymyxin E), used parenterally to treat acute or chronic infections due to susceptible gram-negative bacilli, particularly Pseudomonas aeruginosa and other multidrug-resistant organisms. Dosing is expressed as colistin base activity (150 mg per vial). It is dose-limited by nephrotoxicity and neurotoxicity (including neuromuscular blockade and apnea) and must be dose-adjusted in renal impairment. It is largely a reserve agent for resistant infections.",
+  "indications": [
+    "Treatment of acute or chronic infections due to sensitive strains of certain gram-negative bacilli",
+    "Particularly indicated for infections caused by sensitive strains of Pseudomonas aeruginosa",
+    "Infections due to susceptible Enterobacter aerogenes, Escherichia coli, and Klebsiella pneumoniae"
+  ],
+  "dosage": [
+    {"c": "Systemic gram-negative infection", "r": "Adult/pediatric IV or IM", "d": "2.5-5 mg/kg/day of colistin base activity in 2-4 divided doses (normal renal function)", "t": "Every 6-12 hours", "n": "Vial = 150 mg colistin base activity; reconstitute 150 mg vial with 2 mL sterile water"},
+    {"c": "Renal impairment (CrCl ~50-79)", "r": "Adult IV/IM", "d": "About 2.5-3.8 mg/kg/day in 2 divided doses", "t": "Every 12 hours", "n": "Reduce per labeling table"},
+    {"c": "Renal impairment (CrCl ~30-49)", "r": "Adult IV/IM", "d": "About 2.5 mg/kg/day in 1-2 doses", "t": "Every 12-24 hours", "n": "Reduce per labeling table"},
+    {"c": "Severe renal impairment (CrCl <30)", "r": "Adult IV/IM", "d": "About 1.5 mg/kg every 36 hours", "t": "Every 36 hours", "n": "Marked dose reduction; individualize"}
+  ],
+  "admin": [
+    "Reconstitute the 150 mg vial with 2 mL sterile water for injection; swirl gently to avoid frothing",
+    "Administer by direct slow IV injection over 3-5 minutes (one-half daily dose every 12 h) or by continuous IV infusion, or by deep IM injection",
+    "Express and calculate doses in milligrams of colistin base activity",
+    "Reduce dose according to creatinine clearance and ensure adequate hydration/urine output",
+    "Inspect reconstituted solution for particulates and discoloration before use"
+  ],
+  "moa": "Colistimethate sodium is an inactive prodrug that is hydrolyzed in vivo to colistin (polymyxin E). Colistin is a cationic, amphipathic cyclic polypeptide that binds the anionic lipopolysaccharide and phospholipids of the gram-negative outer membrane, displacing divalent cations and disrupting membrane integrity. This increases membrane permeability, causing leakage of intracellular contents and bactericidal cell death; it also has an antiendotoxin effect.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to colistimethate sodium or polymyxins"
+    ],
+    "relative": [
+      "Renal impairment (dose reduction required)",
+      "Concurrent nephrotoxic or neurotoxic drugs",
+      "Myasthenia gravis or other neuromuscular disorders (risk of neuromuscular blockade)"
+    ],
+    "monitor": [
+      "Renal function and urine output",
+      "Neurologic status (paresthesia, dizziness, respiratory muscle weakness)",
+      "Signs of superinfection"
+    ]
+  },
+  "preg": "Safety in pregnancy has not been established; colistimethate crosses the placenta. Use during pregnancy only when clearly needed and the benefit outweighs the potential risk.",
+  "lact": "Colistimethate is excreted in human milk; use with caution during breastfeeding and monitor the infant for diarrhea, candidiasis, and rash.",
+  "renal": "Colistimethate is excreted primarily by the kidneys; it is both renally cleared and nephrotoxic. Reduce the dose and lengthen the interval according to creatinine clearance, maintain adequate hydration and urine output, and monitor renal function closely. Acute kidney injury is the major dose-limiting toxicity.",
+  "hepatic": "No specific dosage adjustment is described for hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Nephrotoxic drugs (aminoglycosides, vancomycin, amphotericin B) - additive nephrotoxicity",
+      "Neuromuscular blocking agents and curariform drugs - potentiated neuromuscular blockade and apnea"
+    ],
+    "moderate": [
+      "Other neurotoxic agents (additive neurotoxicity)",
+      "Sodium cephalothin (historically associated with increased nephrotoxicity)"
+    ],
+    "minor": ["Live typhoid vaccine (antibacterials may reduce response)"],
+    "food": "Not applicable (parenteral administration).",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "May elevate serum creatinine and BUN reflecting nephrotoxicity."
+  },
+  "se": {
+    "common": ["Nephrotoxicity (rising creatinine, oliguria)", "Paresthesia (perioral, extremities)", "Dizziness/vertigo", "Tingling of the tongue", "Injection-site reactions"],
+    "serious": ["Acute renal failure/acute tubular necrosis", "Neuromuscular blockade with respiratory paralysis/apnea", "Bronchospasm (inhaled use)", "Hypersensitivity reactions"],
+    "rare": ["Seizures", "Severe cutaneous reactions", "C. difficile-associated colitis"],
+    "emergency": ["Respiratory arrest from neuromuscular blockade", "Anaphylaxis", "Acute renal failure"]
+  },
+  "monitoring": ["Serum creatinine, BUN, and urine output", "Neurologic symptoms and respiratory muscle strength", "Drug levels where available (therapeutic monitoring)", "Signs of allergic reaction and superinfection"],
+  "counsel": [
+    "This antibiotic is given by injection, usually in hospital, and reserved for serious resistant infections",
+    "Tell staff about numbness, tingling around the mouth or in the limbs, dizziness, or muscle weakness",
+    "Report decreased urine output or swelling",
+    "Report any difficulty breathing or muscle weakness immediately",
+    "Complete the full prescribed course"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV); prodrug requires conversion to colistin"],
+    ["Peak", "Within 10 minutes of IV injection; ~2 hours after IM"],
+    ["Half-life", "~2-3 hours (colistimethate); prolonged in renal impairment"],
+    ["Duration", "Dosed every 6-12 hours"],
+    ["Storage", "Store dry powder at 20-25 C; use reconstituted solution within labeled time (refrigerate)"]
+  ],
+  "pearls": [
+    "Inactive prodrug converted in vivo to active colistin (polymyxin E)",
+    "Nephrotoxicity is the dose-limiting toxicity; neurotoxicity including neuromuscular blockade/apnea also occurs",
+    "Always dose-adjust by creatinine clearance and express dosing as colistin base activity (150 mg/vial)",
+    "Reserve/last-line agent for multidrug-resistant gram-negative infections (e.g., carbapenem-resistant organisms)",
+    "Avoid concomitant neuromuscular blockers; caution in myasthenia gravis"
+  ],
+  "missed": "Doses are scheduled by clinical staff; a delayed dose should be given as soon as possible while maintaining the prescribed interval. Do not double up.",
+  "overdose": "Overdose can cause neuromuscular blockade leading to respiratory muscle paralysis and apnea, and acute renal failure. There is no specific antidote; management is supportive with airway protection and mechanical ventilation as needed. Calcium may transiently aid neuromuscular blockade; maintain hydration, and hemodialysis or other extracorporeal removal may assist in significant renal impairment.",
+  "refs": [
+    ["FDA Label - Colistimethate Sodium (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22colistimethate%20sodium%22"],
+    ["DailyMed - Colistimethate Sodium", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=colistimethate"]
+  ]
+}

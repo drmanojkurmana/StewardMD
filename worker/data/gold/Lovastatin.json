@@ -1,0 +1,95 @@
+{
+  "generic": "Lovastatin",
+  "cls": "HMG-CoA reductase inhibitor (statin)",
+  "pharm": "Lipid-lowering agent / antihyperlipidemic",
+  "tags": ["statin", "hyperlipidemia", "LDL", "cardiovascular prevention", "CHD"],
+  "quick": [
+    ["Adult dose", "20-40 mg PO once daily with evening meal (range 10-80 mg/day)"],
+    ["Meal", "Take with the evening meal (food improves absorption)"],
+    ["Pregnancy", "Contraindicated; discontinue if pregnancy occurs"],
+    ["Lactation", "Contraindicated; do not breastfeed"],
+    ["Renal", "Caution and lower doses if CrCl <30 mL/min"],
+    ["Hepatic", "Contraindicated in active liver disease"],
+    ["Alcohol", "Limit; raises hepatotoxicity risk"],
+    ["Monitoring", "Lipids, LFTs, CK if myopathy symptoms"]
+  ],
+  "summary": "Lovastatin is an HMG-CoA reductase inhibitor that lowers LDL-C and reduces coronary heart disease risk. It is taken with the evening meal, usually 20-40 mg daily (range 10-80 mg). It is a CYP3A4 substrate with notable interactions; key risks are myopathy and rhabdomyolysis. Contraindicated in active liver disease and pregnancy.",
+  "indications": [
+    "Primary prevention of coronary heart disease in patients without symptomatic CVD with elevated total-C/LDL-C and below-average HDL-C",
+    "Reduce elevated total-C and LDL-C in primary hypercholesterolemia (Fredrickson types IIa and IIb)",
+    "Slow progression of coronary atherosclerosis in patients with coronary heart disease",
+    "Adolescent patients (10-17 years) with heterozygous familial hypercholesterolemia",
+    "Adjunct to diet for hypertriglyceridemia and dysbetalipoproteinemia"
+  ],
+  "dosage": [
+    {"c": "Primary hypercholesterolemia (adult)", "r": "Standard", "d": "Start 20 mg once daily with evening meal; range 10-80 mg/day", "t": "Once daily (or BID for higher doses)", "n": "Start 10 mg if modest LDL reduction needed"},
+    {"c": "Higher-dose therapy", "r": "Higher", "d": "Up to 80 mg/day in single or two divided doses", "t": "Once or twice daily", "n": "Max 80 mg/day; see interaction dose caps"},
+    {"c": "Adolescent HeFH (10-17 yr)", "r": "Pediatric", "d": "10-40 mg once daily", "t": "Once daily with evening meal", "n": "Max 40 mg/day in this group"},
+    {"c": "Severe renal impairment (CrCl <30)", "r": "Renal", "d": "Doses above 20 mg/day only with caution", "t": "Once daily", "n": "Carefully titrate"},
+    {"c": "With CYP3A4 inhibitors / specific drugs", "r": "Capped", "d": "Limit dose (e.g., max 20 mg with amiodarone; 40 mg with diltiazem/verapamil)", "t": "Once daily", "n": "Contraindicated with strong CYP3A4 inhibitors"}
+  ],
+  "admin": [
+    "Take orally with the evening meal; food enhances absorption",
+    "Higher doses (e.g., 80 mg) may be divided into morning and evening doses",
+    "Maintain a standard cholesterol-lowering diet before and during therapy",
+    "Observe dose limits when combined with interacting drugs (amiodarone, verapamil, diltiazem, etc.)",
+    "Avoid strong CYP3A4 inhibitors and large amounts of grapefruit juice"
+  ],
+  "moa": "Lovastatin is a prodrug hydrolyzed to its active beta-hydroxyacid form, which competitively inhibits HMG-CoA reductase, the rate-limiting enzyme in hepatic cholesterol synthesis. Reduced intracellular cholesterol upregulates hepatic LDL receptors, increasing LDL clearance and lowering plasma LDL-C, total cholesterol and triglycerides.",
+  "contra": {
+    "absolute": ["Hypersensitivity to lovastatin", "Active liver disease or unexplained persistent transaminase elevations", "Pregnancy", "Breastfeeding", "Concomitant strong CYP3A4 inhibitors (e.g., itraconazole, ketoconazole, clarithromycin, HIV protease inhibitors, nefazodone)"],
+    "relative": ["History of liver disease", "Heavy alcohol use", "Renal impairment", "Predisposition to myopathy (advanced age, hypothyroidism, debilitation)"],
+    "monitor": ["Concomitant amiodarone, verapamil, diltiazem (dose caps)", "Concomitant fibrates or niacin", "Unexplained muscle pain"]
+  },
+  "preg": "Contraindicated in pregnancy. Cholesterol biosynthesis is important for fetal development; discontinue lovastatin when pregnancy is recognized. Advise effective contraception in women of childbearing potential.",
+  "lact": "Contraindicated during breastfeeding. A small amount of another statin is excreted in human milk; because of potential serious adverse effects in the infant, women taking lovastatin should not breastfeed.",
+  "renal": "Use caution and titrate carefully in severe renal impairment (CrCl <30 mL/min); doses above 20 mg/day should be used only when clearly needed because myopathy risk rises.",
+  "hepatic": "Contraindicated in active liver disease or unexplained persistent transaminase elevations. Use cautiously in patients who consume substantial alcohol or have a history of liver disease.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (itraconazole, ketoconazole, clarithromycin, erythromycin, HIV protease inhibitors, nefazodone, cobicistat) - contraindicated, marked myopathy/rhabdomyolysis risk", "Cyclosporine, gemfibrozil, danazol - avoid or contraindicated"],
+    "moderate": ["Amiodarone - limit lovastatin to 20 mg/day", "Verapamil, diltiazem - limit lovastatin to 40 mg/day", "Other fibrates and niacin (>=1 g/day) - increased myopathy risk", "Colchicine - myopathy risk"],
+    "minor": ["Warfarin - possible increased INR (monitor)", "Digoxin - minimal effect"],
+    "food": "Take with food (improves bioavailability); avoid large amounts of grapefruit juice (raises levels).",
+    "alcohol": "Limit alcohol; heavy use increases hepatotoxicity risk.",
+    "diagnostics": "May elevate transaminases and creatine kinase."
+  },
+  "se": {
+    "common": ["Myalgia", "Headache", "Dyspepsia", "Flatulence", "Abdominal pain", "Constipation/diarrhea"],
+    "serious": ["Myopathy", "Immune-mediated necrotizing myopathy", "Hepatotoxicity"],
+    "rare": ["Rhabdomyolysis with acute renal failure", "Hyperglycemia / new-onset diabetes", "Cognitive impairment (reversible)"],
+    "emergency": ["Rhabdomyolysis (severe muscle pain, weakness, dark urine)", "Acute liver failure", "Severe hypersensitivity reaction"]
+  },
+  "monitoring": [
+    "Lipid panel at baseline and 4-12 weeks after initiation or dose change",
+    "Liver enzymes at baseline and as clinically indicated",
+    "Creatine kinase if unexplained muscle pain, tenderness or weakness",
+    "Blood glucose / HbA1c periodically"
+  ],
+  "counsel": [
+    "Take with the evening meal",
+    "Report unexplained muscle pain, tenderness or weakness promptly",
+    "Avoid large amounts of grapefruit juice and limit alcohol",
+    "Tell your doctor about all medicines - some antibiotics, antifungals and heart drugs interact",
+    "Do not take if pregnant or breastfeeding; use reliable contraception"
+  ],
+  "pk": [
+    ["Onset", "LDL reduction begins within 2 weeks"],
+    ["Peak", "2-4 hours (active metabolite)"],
+    ["Half-life", "Approximately 3 hours (active acid)"],
+    ["Duration", "Maximal lipid effect by 4-6 weeks"],
+    ["Storage", "Store at 20-25 C (68-77 F), protect from light"]
+  ],
+  "pearls": [
+    "Prodrug activated to its beta-hydroxyacid; CYP3A4 substrate with many interactions",
+    "Contraindicated with strong CYP3A4 inhibitors; dose caps with amiodarone (20 mg), diltiazem/verapamil (40 mg)",
+    "Lower potency than atorvastatin/rosuvastatin; best taken with the evening meal",
+    "Avoid in active liver disease and pregnancy",
+    "Monitor for and counsel about muscle symptoms; rhabdomyolysis is rare but serious"
+  ],
+  "missed": "Take the missed dose with food when remembered, unless it is close to the next dose; then skip it and resume the usual schedule. Do not double the dose.",
+  "overdose": "No specific treatment; few cases reported with full recovery. Treat symptomatically and supportively, and monitor for hepatic and muscle effects. Due to extensive protein binding, hemodialysis is not expected to enhance clearance.",
+  "refs": [
+    ["FDA Lovastatin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lovastatin%22"],
+    ["FDA DailyMed - Lovastatin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

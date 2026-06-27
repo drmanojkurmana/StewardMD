@@ -1,0 +1,99 @@
+{
+  "generic": "Chloroquine",
+  "cls": "4-aminoquinoline antimalarial / amebicide",
+  "pharm": "Antiprotozoal (antimalarial and extraintestinal amebicide)",
+  "tags": ["Rx only", "antimalarial", "amebiasis", "QT prolongation", "retinopathy risk", "G6PD caution", "narrow therapeutic index"],
+  "quick": [
+    ["Adult dose", "Malaria tx: 1 g salt (600 mg base) then 500 mg (300 mg base) at 6-8 h, then 500 mg daily x2 days"],
+    ["Meal", "Take with food to reduce GI upset"],
+    ["Pregnancy", "Use only if benefit outweighs risk; no increased malformation rate at antimalarial doses"],
+    ["Lactation", "Excreted in milk (~0.7% maternal dose); not adequate for infant prophylaxis"],
+    ["Renal", "Largely renally excreted; caution and monitor in impairment/elderly"],
+    ["Hepatic", "Concentrates in liver; caution in hepatic disease/alcoholism"],
+    ["Alcohol", "Avoid; adds to hepatotoxicity risk"],
+    ["Monitoring", "Baseline + periodic eye exam (BCVA/VF/SD-OCT), CBC, glucose, ECG/electrolytes"]
+  ],
+  "summary": "Chloroquine phosphate is a 4-aminoquinoline antimalarial and amebicidal agent used to treat and prevent malaria caused by susceptible Plasmodium strains and to treat extraintestinal amebiasis. Doses are expressed as chloroquine base; each 500 mg phosphate tablet equals 300 mg base. It is ineffective against chloroquine-resistant strains (widespread in P. falciparum) and against the hypnozoite liver stages of P. vivax/P. ovale, which require an added 8-aminoquinoline. Major safety concerns are irreversible retinopathy with prolonged/high-dose use, fatal cardiotoxicity (cardiomyopathy, QT prolongation, arrhythmias), severe hypoglycemia, and hemolysis in G6PD deficiency. As little as 1 g can be fatal in a child.",
+  "indications": [
+    "Treatment of uncomplicated malaria due to susceptible P. falciparum, P. malariae, P. ovale, and P. vivax",
+    "Prophylaxis of malaria in geographic areas where chloroquine resistance is not present",
+    "Treatment of extraintestinal amebiasis",
+    "Limitation: not for complicated malaria, not for prophylaxis where resistance occurs, does not prevent P. vivax/P. ovale relapse"
+  ],
+  "dosage": [
+    {"c": "Malaria prophylaxis (chloroquine-sensitive), adult", "r": "Oral", "d": "500 mg salt (300 mg base) once weekly", "t": "Same day each week; start 2 weeks before exposure, continue 8 weeks after leaving endemic area", "n": "If unable to start early: loading 1 g (600 mg base) in two divided doses 6 h apart"},
+    {"c": "Malaria prophylaxis, pediatric", "r": "Oral", "d": "5 mg base/kg once weekly (not to exceed adult dose)", "t": "Same day each week", "n": "Loading option 10 mg base/kg in two divided doses 6 h apart"},
+    {"c": "Uncomplicated malaria treatment, adult", "r": "Oral", "d": "1 g salt (600 mg base) initial, then 500 mg (300 mg base) at 6-8 h, then 500 mg (300 mg base) daily on 2 consecutive days", "t": "Total 2.5 g phosphate (1.5 g base) over 3 days", "n": "Base doses; add 8-aminoquinoline for P. vivax/P. ovale"},
+    {"c": "Uncomplicated malaria treatment, pediatric/low body weight", "r": "Oral", "d": "10 mg base/kg (max 600 mg base), then 5 mg base/kg at 6, 24 and 36 h (max 300 mg base/dose); total 25 mg base/kg", "t": "Over 36 hours", "n": "Never exceed adult dose"},
+    {"c": "Extraintestinal amebiasis, adult", "r": "Oral", "d": "1 g salt (600 mg base) daily x2 days, then 500 mg (300 mg base) daily for at least 2-3 weeks", "t": "Daily", "n": "Usually combined with an effective intestinal amebicide"}
+  ],
+  "admin": [
+    "Doses are expressed in chloroquine base; 500 mg phosphate tablet = 300 mg base",
+    "Take with food to minimize gastrointestinal upset",
+    "Calculate pediatric dose by body weight; never exceed the adult dose",
+    "Keep tablets out of reach of children (small amounts can be fatal)",
+    "Confirm chloroquine is appropriate for the destination region before prophylaxis",
+    "Add an 8-aminoquinoline for radical cure of P. vivax and P. ovale"
+  ],
+  "moa": "Chloroquine, a 4-aminoquinoline, is an antiprotozoal agent whose precise mechanism is not known. Against Plasmodium it is thought to concentrate in the acid vesicles of the parasite and inhibit polymerization of heme; it may also inhibit certain enzymes through interaction with DNA. It is active against erythrocytic forms of susceptible Plasmodium species and against trophozoites of Entamoeba histolytica in vitro, but not against gametocytes or exoerythrocytic (hypnozoite) forms.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to 4-aminoquinoline compounds", "Presence of retinal or visual field changes of any etiology (for indications other than acute malaria)"],
+    "relative": ["Cardiac disease, history of ventricular arrhythmias, uncorrected hypokalemia/hypomagnesemia, bradycardia <50 bpm", "G6PD deficiency", "Psoriasis or porphyria (may be exacerbated)", "History of epilepsy", "Pre-existing auditory damage", "Hepatic disease or alcoholism"],
+    "monitor": ["Concomitant QT-prolonging or arrhythmogenic drugs", "Concomitant drugs with retinal toxicity (e.g., tamoxifen)", "Antidiabetic therapy (hypoglycemia risk)", "Long-term therapy (eye, muscle/nerve, renal, hematologic monitoring)"]
+  },
+  "preg": "In animal studies embryo-fetal developmental toxicity (including ocular malformations) occurred at 3 to 16 times the maximum recommended therapeutic dose. In humans, observational data and a meta-analysis at recommended antimalarial doses have shown no increase in birth defects or spontaneous abortion. Review the individual benefit-risk balance before prescribing in pregnancy.",
+  "lact": "Chloroquine and its metabolite desethylchloroquine are excreted in breast milk; following a single 600 mg base dose the maximum daily amount an infant could receive was about 0.7% of the maternal dose. This is inadequate to protect the infant, so separate chemoprophylaxis is required. Weigh benefit to mother against potential serious adverse reactions in the infant.",
+  "renal": "Chloroquine is substantially excreted by the kidney; the risk of toxic reactions may be greater with impaired renal function. Use care in dose selection in the elderly and monitor renal function. Subnormal glomerular filtration is a significant risk factor for retinopathy. Proteinuria with reduced GFR (phospholipidosis) has been reported; discontinue if renal toxicity is suspected.",
+  "hepatic": "Chloroquine concentrates in the liver, so it should be used with caution in patients with hepatic disease or alcoholism or with other known hepatotoxic drugs. Hepatitis and increased liver enzymes have been reported.",
+  "interactions": {
+    "major": ["QT-prolonging/arrhythmogenic drugs (e.g., amiodarone, moxifloxacin) - increased ventricular arrhythmia risk", "Azithromycin - dose-dependent increase in QTc", "Cyclosporine - sudden increase in serum cyclosporine; monitor levels, discontinue chloroquine if needed", "Cimetidine - inhibits chloroquine metabolism, raising plasma levels; avoid concomitant use", "Tamoxifen and other retinotoxic drugs - not recommended together"],
+    "moderate": ["Insulin and other antidiabetic drugs - enhanced hypoglycemic effect; may need dose reduction", "Mefloquine - increased risk of convulsions", "Ampicillin - reduced bioavailability; separate by at least 2 hours", "Praziquantel - reduced bioavailability"],
+    "minor": ["Antacids and kaolin - reduce chloroquine absorption; separate by at least 4 hours", "Intradermal human diploid-cell rabies vaccine - reduced antibody response at prophylactic doses"],
+    "food": "Take with food to reduce gastrointestinal upset.",
+    "alcohol": "Avoid; alcoholism increases hepatic concentration and hepatotoxicity risk.",
+    "diagnostics": "May cause ECG changes (T-wave inversion/depression, QRS widening, QT prolongation) and may lower blood glucose."
+  },
+  "se": {
+    "common": ["Nausea, vomiting, diarrhea, abdominal cramps, anorexia", "Mild transient headache", "Pruritus", "Visual disturbances (blurring, accommodation difficulty)", "Skin/mucosal pigmentary changes"],
+    "serious": ["Irreversible retinopathy/maculopathy with visual field defects", "Cardiomyopathy and conduction disorders", "Skeletal muscle myopathy/neuromyopathy", "Severe hypoglycemia (including loss of consciousness)", "Hemolytic anemia in G6PD deficiency", "Pancytopenia, aplastic anemia, agranulocytosis, thrombocytopenia"],
+    "rare": ["Convulsions, acute extrapyramidal disorders, polyneuropathy", "Neuropsychiatric changes (psychosis, delirium, depression, suicidal behavior)", "Nerve-type deafness, tinnitus", "Reversible corneal opacities", "Worsening of psoriasis or porphyria"],
+    "emergency": ["QT prolongation, torsades de pointes, ventricular tachycardia/fibrillation (may be fatal)", "Cardiovascular collapse / cardiac arrest", "Severe hypoglycemia", "Anaphylactic reaction/angioedema", "Stevens-Johnson syndrome, toxic epidermal necrolysis, DRESS"]
+  },
+  "monitoring": [
+    "Baseline ophthalmologic exam within first year (BCVA, automated 10-degree visual field, SD-OCT); annual exams if risk factors, otherwise after 5 years",
+    "ECG and serum potassium/magnesium in patients with cardiac risk or on QT-prolonging drugs",
+    "Periodic complete blood counts during prolonged therapy",
+    "Blood glucose if symptoms suggestive of hypoglycemia",
+    "Periodic assessment of muscle strength and deep tendon reflexes on long-term therapy",
+    "Renal function in elderly and impaired patients"
+  ],
+  "counsel": [
+    "Doses are given as chloroquine base; follow exact schedule (500 mg phosphate = 300 mg base)",
+    "Keep out of reach of children - even small amounts can be fatal",
+    "Report visual changes, hearing loss, muscle weakness, mood changes, or palpitations promptly",
+    "Be aware of hypoglycemia symptoms, especially if diabetic",
+    "Take with food; separate antacids/kaolin by at least 4 hours",
+    "For travel prophylaxis, start 2 weeks before and continue 8 weeks after leaving the malaria area"
+  ],
+  "pk": [
+    ["Onset", "Rapid, near-complete GI absorption"],
+    ["Peak", "Symptom relief within minutes to hours; toxic effects can appear within minutes"],
+    ["Half-life", "Slow excretion; extensively tissue-deposited (long elimination)"],
+    ["Duration", "Prophylaxis dosed once weekly; deposits in tissues for prolonged periods"],
+    ["Storage", "Store at 20-25 C (68-77 F); dispense in tight, light-resistant container"]
+  ],
+  "pearls": [
+    "Always express and check the dose as chloroquine base: 500 mg phosphate = 300 mg base",
+    "Resistance is widespread in P. falciparum and reported in P. vivax - confirm regional susceptibility",
+    "Does not eradicate P. vivax/P. ovale hypnozoites; add an 8-aminoquinoline to prevent relapse",
+    "Retinopathy risk rises with daily dose >2.3 mg/kg, use >5 years, renal impairment, and concurrent tamoxifen",
+    "In patients of Asian descent retinal toxicity may appear outside the macula; test the central 24 degrees",
+    "As little as 1 g can be fatal in a child - overdose is a life-threatening emergency"
+  ],
+  "missed": "For weekly malaria prophylaxis, take the missed dose as soon as remembered, then resume the regular weekly schedule. For treatment courses, follow the prescriber's instructions; do not double a dose to make up for a missed one given the narrow margin between therapeutic and toxic doses.",
+  "overdose": "Chloroquine overdose is a life-threatening emergency; toxic symptoms (nausea, vomiting, drowsiness, visual disturbance, cardiovascular collapse, convulsions, hypokalemia, QT prolongation, torsades de pointes, ventricular arrhythmias) can occur within minutes and may progress to fatal respiratory and cardiac arrest. Treatment is symptomatic and prompt: immediate gastric evacuation (emesis or lavage) then activated charcoal, with cardio-respiratory and hemodynamic support, potassium monitoring, and management of arrhythmias and convulsions.",
+  "refs": [
+    ["FDA Chloroquine Phosphate Tablets USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22chloroquine+phosphate%22"],
+    ["FDA DailyMed - Chloroquine Phosphate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

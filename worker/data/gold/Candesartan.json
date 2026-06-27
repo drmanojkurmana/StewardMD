@@ -1,0 +1,106 @@
+{
+  "generic": "Candesartan",
+  "cls": "Angiotensin II receptor blocker (ARB)",
+  "pharm": "Selectively blocks the AT1 receptor, antagonizing angiotensin II to lower blood pressure and reduce heart failure morbidity.",
+  "tags": ["Rx only", "ARB", "Prodrug (candesartan cilexetil)", "Pregnancy boxed warning"],
+  "quick": [
+    ["Adult dose", "Hypertension: start 16 mg once daily; range 8-32 mg/day. Heart failure: start 4 mg once daily, titrate to 32 mg"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Contraindicated; can cause fetal harm/death (boxed warning); stop when pregnancy detected"],
+    ["Lactation", "Avoid; limited data, alternatives preferred"],
+    ["Renal", "Monitor renal function and potassium; caution with volume depletion"],
+    ["Hepatic", "Mild-moderate: usually no adjustment; consider lower starting dose"],
+    ["Alcohol", "May enhance blood-pressure lowering"],
+    ["Monitoring", "Blood pressure, serum potassium, renal function"]
+  ],
+  "summary": "Candesartan (given as the prodrug candesartan cilexetil) is an angiotensin II receptor blocker indicated for hypertension in adults and children 1 to under 17 years and for heart failure (NYHA class II-IV) to reduce cardiovascular death and heart failure hospitalization. By selectively blocking the AT1 receptor it inhibits the vasoconstrictor and aldosterone-secreting effects of angiotensin II independently of its synthesis pathway, and unlike ACE inhibitors it does not affect bradykinin (less cough). Like all renin-angiotensin system blockers it can cause fetal harm and must be stopped in pregnancy.",
+  "indications": [
+    "Treatment of hypertension in adults and in children 1 to <17 years of age",
+    "Treatment of heart failure (NYHA class II-IV) to reduce cardiovascular death and heart failure hospitalization"
+  ],
+  "dosage": [
+    {"c": "Hypertension", "r": "Adult oral", "d": "Usual starting dose 16 mg once daily; total daily dose 8-32 mg given once or twice daily", "t": "Once or twice daily", "n": "Doses above 32 mg add little effect"},
+    {"c": "Hypertension (volume depleted)", "r": "Adult oral", "d": "Lower starting dose and monitor for hypotension", "t": "Once daily", "n": "Correct volume depletion first"},
+    {"c": "Heart failure", "r": "Adult oral", "d": "Start 4 mg once daily; double dose at ~2-week intervals to target 32 mg once daily as tolerated", "t": "Once daily", "n": "Monitor BP, K+, renal function"},
+    {"c": "Hypertension (pediatric 1 to <6 yr)", "r": "Oral suspension", "d": "Start 0.2 mg/kg once daily; range 0.05-0.4 mg/kg/day", "t": "Once daily or divided", "n": "Use oral suspension"},
+    {"c": "Hypertension (pediatric 6 to <17 yr)", "r": "Oral", "d": "<50 kg: start 4-8 mg/day (range 4-16). >50 kg: start 8-16 mg/day (range 4-32)", "t": "Once daily or divided", "n": "Titrate to BP response"}
+  ],
+  "admin": [
+    "Take with or without food at about the same time each day",
+    "Correct volume/salt depletion before starting to reduce hypotension risk",
+    "Monitor potassium and renal function, especially in heart failure or with other RAS agents",
+    "Discontinue immediately if pregnancy is detected"
+  ],
+  "moa": "Angiotensin II, the principal pressor of the renin-angiotensin system, causes vasoconstriction, aldosterone release, cardiac stimulation, and renal sodium reabsorption. Candesartan selectively and with very high affinity (>10,000-fold over AT2) blocks the binding of angiotensin II to the AT1 receptor in tissues such as vascular smooth muscle and the adrenal gland, blocking these effects independently of the pathway of angiotensin II synthesis. Because it does not inhibit ACE (kininase II), it does not affect bradykinin and is less likely to cause cough.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to candesartan or product components",
+      "Pregnancy (can cause fetal injury and death)",
+      "Co-administration with aliskiren in patients with diabetes"
+    ],
+    "relative": [
+      "Volume or salt depletion (risk of symptomatic hypotension)",
+      "Bilateral renal artery stenosis",
+      "Severe heart failure or renal impairment (risk of worsening renal function/hyperkalemia)",
+      "Concurrent ACE inhibitor or other RAS blockade"
+    ],
+    "monitor": [
+      "Blood pressure",
+      "Serum potassium",
+      "Renal function (creatinine)"
+    ]
+  },
+  "preg": "Drugs acting on the renin-angiotensin system can cause fetal harm; use in the second and third trimesters reduces fetal renal function and increases fetal/neonatal morbidity and death. Candesartan is contraindicated in pregnancy and should be discontinued as soon as pregnancy is detected.",
+  "lact": "Limited human data on candesartan in breast milk; because of potential effects on the infant's developing kidney and blood pressure, breastfeeding is generally not recommended, especially in preterm infants, and an alternative agent is preferred.",
+  "renal": "Monitor renal function and potassium; patients with renal impairment, volume depletion, or heart failure may experience increases in serum creatinine and potassium. Changes in renal function may occur in susceptible individuals.",
+  "hepatic": "Exposure is increased in hepatic impairment; in mild to moderate impairment no specific adjustment is generally required but a lower starting dose may be considered. Use with caution.",
+  "interactions": {
+    "major": [
+      "Aliskiren in diabetics (contraindicated; hyperkalemia, hypotension, renal impairment)",
+      "Other RAS blockers/ACE inhibitors (dual blockade increases hypotension, hyperkalemia, renal failure)",
+      "Potassium-sparing diuretics/potassium supplements (hyperkalemia)"
+    ],
+    "moderate": [
+      "NSAIDs (reduced antihypertensive effect and risk of acute renal failure, especially if volume-depleted)",
+      "Lithium (increased lithium levels and toxicity)",
+      "Other antihypertensives (additive hypotension)"
+    ],
+    "minor": ["Trimethoprim (additive hyperkalemia risk)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "May enhance the blood-pressure-lowering effect.",
+    "diagnostics": "May raise serum potassium and creatinine; monitor electrolytes and renal function."
+  },
+  "se": {
+    "common": ["Dizziness", "Hypotension", "Upper respiratory infection", "Back pain", "Headache"],
+    "serious": ["Symptomatic hypotension", "Hyperkalemia", "Acute renal failure", "Angioedema"],
+    "rare": ["Rhabdomyolysis", "Hepatitis", "Neutropenia/agranulocytosis"],
+    "emergency": ["Angioedema with airway compromise", "Severe hypotension", "Anuric acute kidney injury", "Severe hyperkalemia (arrhythmia)"]
+  },
+  "monitoring": ["Blood pressure", "Serum potassium", "Renal function (creatinine, eGFR)", "Signs of hypotension or angioedema"],
+  "counsel": [
+    "Do not take this medicine if you are or may become pregnant; tell your doctor right away if you become pregnant",
+    "Get up slowly to avoid dizziness, especially when starting or after a dose increase",
+    "Avoid potassium supplements or salt substitutes unless your doctor approves",
+    "Avoid regular NSAID/ibuprofen use without advice",
+    "Report swelling of the face, lips, or throat, or trouble breathing immediately"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect begins within hours; most effect within 2 weeks"],
+    ["Peak", "Plasma candesartan peak ~3-4 hours after dosing"],
+    ["Half-life", "Approximately 9 hours"],
+    ["Duration", "~24 hours (supports once-daily dosing)"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "Candesartan cilexetil is a prodrug rapidly converted to active candesartan during absorption",
+    "Less cough and angioedema than ACE inhibitors because it does not affect bradykinin",
+    "Proven heart-failure benefit (CHARM program): reduces CV death and HF hospitalization",
+    "Stop immediately in pregnancy; can injure the fetal kidney"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip it. Do not double up.",
+  "overdose": "The most likely manifestation is hypotension, dizziness, and tachycardia; bradycardia may occur from vagal stimulation. Treatment is supportive, including intravenous fluids for symptomatic hypotension. Candesartan is not removed by hemodialysis.",
+  "refs": [
+    ["FDA Label - Candesartan cilexetil (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22candesartan%22"],
+    ["DailyMed - Candesartan cilexetil", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=candesartan"]
+  ]
+}

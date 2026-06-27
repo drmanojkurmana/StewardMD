@@ -1,0 +1,94 @@
+{
+  "generic": "Potassium Chloride",
+  "cls": "Potassium salt / electrolyte replenisher",
+  "pharm": "Electrolyte supplement (potassium replacement)",
+  "tags": ["potassium", "hypokalemia", "electrolyte", "extended-release", "supplement"],
+  "quick": [
+    ["Adult dose", "20 mEq/day prevent; 40-100 mEq/day (divided) treat"],
+    ["Meal", "Take with meals and a full glass of water"],
+    ["Pregnancy", "Acceptable if hyperkalemia is avoided"],
+    ["Lactation", "Compatible; little effect on milk potassium"],
+    ["Renal", "Start at low end; high hyperkalemia risk"],
+    ["Hepatic", "Cirrhosis: start at low end of dosing range"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Serum potassium, ECG, magnesium, renal function"]
+  ],
+  "summary": "Potassium chloride is an electrolyte supplement for treatment and prophylaxis of hypokalemia. This label is the oral extended-release tablet: 40-100 mEq/day in divided doses (max 40 mEq per dose) for treatment and about 20 mEq/day for prevention, taken with meals and a full glass of water, swallowed whole. If serum potassium is below 2.5 mEq/L, use IV potassium instead. CRITICAL safety rule: concentrated potassium chloride injection must always be diluted and never given by IV push/bolus, which is fatal.",
+  "indications": [
+    "Treatment of hypokalemia with or without metabolic alkalosis in patients for whom dietary management or diuretic dose reduction is insufficient",
+    "Prophylaxis of hypokalemia with or without metabolic alkalosis in patients for whom dietary management or diuretic dose reduction is insufficient"
+  ],
+  "dosage": [
+    {"c": "Treatment of hypokalemia (adult)", "r": "Standard oral ER", "d": "40-100 mEq/day; no more than 40 mEq in a single dose", "t": "Divided doses with meals", "n": "Doses >40 mEq/day must be split into multiple doses"},
+    {"c": "Prevention/maintenance (adult)", "r": "Prophylaxis", "d": "Typically 20 mEq/day", "t": "Once daily (or divided) with food", "n": "Adjust to serum potassium"},
+    {"c": "Severe hypokalemia (K+ <2.5 mEq/L)", "r": "Use IV route", "d": "Use intravenous potassium instead of oral supplementation", "t": "Per IV protocol", "n": "Oral ER tablets are inadequate for severe depletion"},
+    {"c": "Cirrhosis or renal impairment", "r": "Reduced", "d": "Initiate at the low end of the dosing range", "t": "With food", "n": "Higher hyperkalemia risk; monitor closely"}
+  ],
+  "admin": [
+    "Take with meals and with a glass of water or other liquid; do not take on an empty stomach (gastric irritation)",
+    "Swallow tablets whole - do not crush, chew or suck",
+    "Limit any single dose to no more than 40 mEq; divide larger daily amounts",
+    "Use liquid potassium in patients with dysphagia, swallowing disorders or severe GI motility disorders",
+    "CRITICAL (injectable class safety): concentrated potassium chloride injection MUST be diluted before IV use and NEVER given by IV push or bolus - undiluted/rapid IV potassium is FATAL (cardiac arrest)",
+    "Discontinue and evaluate for ulceration, obstruction or perforation if severe vomiting, abdominal pain, distention, or GI bleeding occurs"
+  ],
+  "moa": "Potassium is the major intracellular cation, essential for nerve conduction, cardiac and skeletal muscle contraction, acid-base balance, and maintenance of the resting membrane potential. Supplemental potassium chloride replaces potassium and the accompanying chloride lost in hypokalemia, helping correct associated metabolic alkalosis. The chloride salt is preferred because hypokalemia is frequently accompanied by hypochloremic alkalosis.",
+  "contra": {
+    "absolute": ["Concomitant use with triamterene or amiloride (severe hyperkalemia)", "Hyperkalemia"],
+    "relative": ["Impaired potassium excretion / significant renal impairment", "Conditions causing potassium retention", "Dysphagia or GI obstruction/stricture (for solid oral forms)"],
+    "monitor": ["Concomitant RAAS inhibitors (ACE inhibitors, ARBs, spironolactone, eplerenone, aliskiren)", "Concomitant NSAIDs", "Patients on digitalis"]
+  },
+  "preg": "There are no human data and no animal reproduction studies. Potassium supplementation that does not produce hyperkalemia is not expected to cause fetal harm, since maternal-fetal potassium is normally regulated.",
+  "lact": "The normal potassium content of human milk is about 13 mEq/L. As supplemental oral potassium joins the body potassium pool, supplementation has little or no effect on milk potassium levels as long as body potassium is not excessive. Considered compatible with breastfeeding.",
+  "renal": "Renal impairment markedly increases the risk of dangerous hyperkalemia because potassium excretion is reduced. Initiate therapy at the low end of the dosing range and monitor serum potassium closely; potassium chloride is contraindicated when potassium excretion is severely impaired or hyperkalemia exists.",
+  "hepatic": "In cirrhosis, an oral potassium load can raise serum potassium roughly twice as much as in normal subjects; initiate therapy at the low end of the dosing range and monitor.",
+  "interactions": {
+    "major": ["Triamterene or amiloride - severe hyperkalemia; concomitant use is contraindicated", "Potassium-sparing diuretics generally - hyperkalemia risk"],
+    "moderate": ["RAAS inhibitors (ACE inhibitors, ARBs, spironolactone, eplerenone, aliskiren) - potassium retention; closely monitor potassium", "NSAIDs - reduce potassium excretion; closely monitor potassium", "Digitalis - rapid potassium shifts can affect digitalis effect/toxicity"],
+    "minor": ["Anticholinergics - may delay GI transit and increase local mucosal exposure to solid forms"],
+    "food": "Take with meals and a full glass of water; large intake of potassium-rich foods or salt substitutes adds to potassium load.",
+    "alcohol": "No specific interaction documented.",
+    "diagnostics": "Raises serum potassium; monitor ECG for peaked T-waves, loss of P-wave, ST depression and QT prolongation that signal hyperkalemia."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Flatulence", "Abdominal pain/discomfort", "Diarrhea"],
+    "serious": ["Hyperkalemia", "GI ulceration, bleeding, obstruction or perforation (solid oral forms)"],
+    "rare": ["Skin rash"],
+    "emergency": ["Severe hyperkalemia: muscle paralysis, cardiac arrhythmia and cardiac arrest (9-12 mEq/L)", "Fatal cardiac arrest from undiluted/IV-push concentrated potassium chloride injection - concentrate must ALWAYS be diluted and NEVER given by IV push/bolus", "GI perforation or major GI hemorrhage"]
+  },
+  "monitoring": [
+    "Serum potassium at baseline and periodically during maintenance therapy",
+    "ECG in patients with cardiac or renal disease and when hyperkalemia is suspected",
+    "Serum magnesium, sodium, chloride, calcium, phosphate and acid-base status, especially with cardiac/renal disease or acidosis",
+    "Renal function",
+    "GI symptoms (vomiting, abdominal pain, distention, bleeding) suggesting ulceration or obstruction"
+  ],
+  "counsel": [
+    "Take with food and a full glass of water; never take on an empty stomach",
+    "Swallow the tablet whole - do not crush, chew, suck or split it",
+    "Report severe vomiting, stomach pain, bloating, or any black/bloody stools right away",
+    "Do not use salt substitutes or extra potassium products unless told to by your provider",
+    "Keep all blood-test appointments to check your potassium level"
+  ],
+  "pk": [
+    ["Onset", "Increased urinary potassium ~1 hour after dose"],
+    ["Peak", "Peak urinary excretion ~4 hours; extends to ~8 hours"],
+    ["Half-life", "Not characterized; regulated by renal excretion"],
+    ["Duration", "Extended-release over ~8 hours; wax matrix excreted in feces"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "CRITICAL: concentrated KCl injection must be diluted and NEVER given by IV push/bolus - undiluted/rapid IV potassium causes fatal cardiac arrest",
+    "If serum potassium is <2.5 mEq/L, use IV potassium rather than oral ER tablets",
+    "Limit each oral dose to 40 mEq; divide larger daily totals",
+    "Contraindicated with triamterene or amiloride (severe hyperkalemia)",
+    "The inert wax matrix may appear intact in the stool - this is expected and not treatment failure",
+    "Correct coexisting hypomagnesemia, which makes hypokalemia refractory"
+  ],
+  "missed": "Take the missed dose with food and water when remembered, unless it is almost time for the next dose; then skip it and resume the regular schedule. Do not double up.",
+  "overdose": "Oral overdose rarely causes serious hyperkalemia when potassium excretion is normal, but impaired excretion can produce fatal hyperkalemia. Hyperkalemia is often asymptomatic until ECG changes (peaked T-waves, lost P-wave, ST depression, QT prolongation) and late muscle paralysis or cardiac arrest (9-12 mEq/L). Treatment: stop all potassium sources and potassium-sparing agents; give IV dextrose with insulin, correct acidosis with sodium bicarbonate, and use exchange resins or dialysis. Beware delayed absorption from extended-release tablets; in digitalized patients lower potassium gradually to avoid digitalis toxicity.",
+  "refs": [
+    ["FDA Potassium Chloride Extended-Release Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22potassium+chloride%22"],
+    ["FDA DailyMed - Potassium Chloride", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

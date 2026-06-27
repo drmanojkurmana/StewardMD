@@ -1,0 +1,119 @@
+{
+  "generic": "Cariprazine (Cariprazine hydrochloride)",
+  "cls": "Atypical (second-generation) antipsychotic - dopamine D2/D3 partial agonist",
+  "pharm": "Antipsychotic / mood stabilizer",
+  "tags": ["antipsychotic", "schizophrenia", "bipolar", "D3 partial agonist", "mania", "bipolar depression", "MDD adjunct"],
+  "quick": [
+    ["Adult dose", "Schizophrenia 1.5-6 mg once daily; bipolar mania 3-6 mg; bipolar/MDD adjunct depression 1.5-3 mg once daily"],
+    ["Meal", "Take once daily with or without food"],
+    ["Pregnancy", "Risk of neonatal extrapyramidal/withdrawal symptoms in third trimester; use only if benefit outweighs risk"],
+    ["Lactation", "Limited data; consider drug benefit, infant exposure, and long half-life - caution"],
+    ["Renal", "No adjustment for mild-moderate; not recommended in severe (CrCl <30)"],
+    ["Hepatic", "No adjustment for mild-moderate; not recommended in severe hepatic impairment"],
+    ["Alcohol", "Avoid - additive CNS depression and impaired judgment/motor skills"],
+    ["Monitoring", "Metabolic parameters, weight, EPS/tardive dyskinesia, mood/suicidality, CBC"]
+  ],
+  "summary": "Cariprazine is an atypical antipsychotic that acts as a partial agonist at dopamine D2 and especially D3 and serotonin 5-HT1A receptors, with 5-HT2A antagonism. It treats schizophrenia, bipolar I mania and depression, and is an adjunct for major depressive disorder. It has a boxed warning for increased mortality in elderly patients with dementia-related psychosis and for suicidal thoughts/behaviors. Its long half-life (and that of active metabolites) means effects and adverse reactions can appear or persist for weeks.",
+  "indications": [
+    "Schizophrenia in adults and pediatric patients 13 years and older",
+    "Acute manic or mixed episodes of bipolar I disorder in adults and pediatric patients 10 years and older",
+    "Depressive episodes of bipolar I disorder (bipolar depression) in adults",
+    "Adjunctive therapy to antidepressants for major depressive disorder (MDD) in adults"
+  ],
+  "dosage": [
+    {"c": "Schizophrenia", "r": "Adult", "d": "Start 1.5 mg once daily; range 1.5-6 mg/day", "t": "Once daily", "n": "Max 6 mg/day"},
+    {"c": "Schizophrenia", "r": "Pediatric 13-17 years", "d": "Start 0.5 mg once daily; range 1.5-4.5 mg/day", "t": "Once daily", "n": "Max 4.5 mg/day"},
+    {"c": "Bipolar I mania (acute manic/mixed)", "r": "Adult", "d": "Start 1.5 mg once daily; range 3-6 mg/day", "t": "Once daily", "n": "Max 6 mg/day"},
+    {"c": "Bipolar I mania", "r": "Pediatric 10-17 years", "d": "Start 0.5 mg once daily; target 3 mg or 4.5 mg/day", "t": "Once daily", "n": "Max 4.5 mg/day"},
+    {"c": "Bipolar depression", "r": "Adult", "d": "Start 1.5 mg once daily; 1.5 mg or 3 mg/day", "t": "Once daily", "n": "Max 3 mg/day"},
+    {"c": "MDD adjunct to antidepressant", "r": "Adult", "d": "Start 1.5 mg once daily; 1.5 mg or 3 mg/day", "t": "Once daily", "n": "Max 3 mg/day"},
+    {"c": "With strong CYP3A4 inhibitor", "r": "Adult", "d": "Dose adjustment required (reduce dose per labeling)", "t": "Once daily", "n": "Avoid CYP3A4 inducers"}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Because of the long half-life of cariprazine and its active metabolites, dose changes are not fully reflected in plasma for several weeks - titrate and assess slowly",
+    "Monitor for adverse reactions for several weeks after starting and after each dose change",
+    "Avoid concomitant strong CYP3A4 inducers; reduce dose with strong CYP3A4 inhibitors"
+  ],
+  "moa": "The mechanism is not fully established, but efficacy is thought to result from partial agonism at dopamine D2 and D3 receptors (with notably high D3 affinity) and at serotonin 5-HT1A receptors, combined with antagonism at serotonin 5-HT2A receptors. Partial agonism modulates dopaminergic transmission, reducing positive symptoms while limiting full dopamine blockade. Two long-acting active metabolites, desmethyl- and didesmethyl-cariprazine, contribute to sustained activity.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to cariprazine (reactions have included rash, urticaria, and angioedema)"
+    ],
+    "relative": [
+      "Elderly patients with dementia-related psychosis (increased mortality - not approved)",
+      "Severe renal impairment (CrCl <30) - not recommended",
+      "Severe hepatic impairment - not recommended",
+      "Pre-existing low WBC / history of leukopenia or neutropenia",
+      "History of seizures, cardiovascular/cerebrovascular disease, or conditions predisposing to hypotension"
+    ],
+    "monitor": [
+      "Metabolic profile (glucose, lipids, weight)",
+      "Movement disorders (EPS, tardive dyskinesia)",
+      "CBC in patients with low baseline WBC",
+      "Mood and suicidality"
+    ]
+  },
+  "preg": "Neonates exposed to antipsychotics in the third trimester are at risk for extrapyramidal and/or withdrawal symptoms after delivery. Use cariprazine in pregnancy only if the potential benefit justifies the potential risk; there is a pregnancy exposure registry for antipsychotics.",
+  "lact": "There are no data on the presence of cariprazine in human milk or its effects on the breastfed infant. Given the long half-life, weigh developmental/health benefits of breastfeeding against the infant's potential exposure and the mother's clinical need.",
+  "renal": "No dose adjustment is needed for mild to moderate renal impairment. Cariprazine is not recommended in patients with severe renal impairment (CrCl <30 mL/min) because it has not been evaluated.",
+  "hepatic": "No dose adjustment is needed for mild to moderate hepatic impairment. Cariprazine is not recommended in severe hepatic impairment as it has not been studied.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin) - increase cariprazine exposure; reduce dose",
+      "Strong CYP3A4 inducers (carbamazepine, rifampin, St. John's wort) - reduce exposure; avoid (use not recommended)"
+    ],
+    "moderate": [
+      "Other CNS depressants (additive sedation)",
+      "Antihypertensives (additive orthostatic hypotension)",
+      "Dopaminergic agents / levodopa (antagonism)"
+    ],
+    "minor": [
+      "Drugs lowering seizure threshold"
+    ],
+    "food": "May be taken with or without food; avoid grapefruit (potential CYP3A4 inhibition)",
+    "alcohol": "Avoid - additive central nervous system depression and impairment",
+    "diagnostics": "Monitor fasting glucose, HbA1c, lipids, weight, and CBC"
+  },
+  "se": {
+    "common": ["Extrapyramidal symptoms / akathisia", "Insomnia", "Nausea/vomiting", "Constipation", "Headache", "Dizziness", "Restlessness"],
+    "serious": ["Neuroleptic malignant syndrome", "Tardive dyskinesia", "Metabolic changes (hyperglycemia/diabetes, dyslipidemia, weight gain)", "Leukopenia/neutropenia/agranulocytosis", "Orthostatic hypotension/syncope", "Seizures"],
+    "rare": ["Cerebrovascular events in elderly with dementia", "Severe hypersensitivity/angioedema", "Body temperature dysregulation", "Dysphagia (aspiration risk)"],
+    "emergency": ["Neuroleptic malignant syndrome (hyperthermia, rigidity, autonomic instability)", "Severe allergic reaction/angioedema", "New or worsening suicidal thoughts", "Severe hyperglycemia/diabetic ketoacidosis"]
+  },
+  "monitoring": [
+    "Weight, BMI, fasting glucose/HbA1c, and lipid profile at baseline and periodically",
+    "Extrapyramidal symptoms and tardive dyskinesia",
+    "Complete blood count in patients with low baseline WBC",
+    "Blood pressure (orthostatic) and heart rate",
+    "Mood, behavior, and suicidality (especially early and at dose changes)"
+  ],
+  "counsel": [
+    "Effects build up gradually because the drug stays in the body for weeks - keep taking it as prescribed even if you do not feel immediate change",
+    "Report uncontrolled movements, severe muscle stiffness with fever, or fainting",
+    "Watch for and report any worsening mood or thoughts of self-harm",
+    "Tell your doctor about all medicines - some seizure and antibiotic drugs interact",
+    "Avoid alcohol and rise slowly to prevent dizziness",
+    "Maintain a healthy diet and exercise; weight and blood sugar will be monitored"
+  ],
+  "pk": [
+    ["Onset", "Therapeutic effect develops gradually over days to weeks"],
+    ["Peak", "Peak plasma concentration about 3-6 hours after dosing"],
+    ["Half-life", "Cariprazine about 2-4 days; active metabolite didesmethyl-cariprazine effective half-life 1-3 weeks"],
+    ["Duration", "Prolonged - effects and adverse reactions can persist for weeks after stopping"],
+    ["Storage", "Store at controlled room temperature 20-25 C"]
+  ],
+  "pearls": [
+    "Boxed warnings: increased mortality in elderly dementia-related psychosis and suicidal thoughts/behaviors",
+    "Distinctly high affinity as a D3 partial agonist among antipsychotics",
+    "Very long-acting active metabolites mean dose changes take weeks to reach steady state - adjust slowly",
+    "Late-occurring adverse reactions can appear after starting because of the long half-life",
+    "Akathisia/EPS are among the most common reasons for dose adjustment"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on the same day. If it is almost time for the next day's dose, skip the missed dose and resume the once-daily schedule. Do not take two doses to make up for a missed one.",
+  "overdose": "There is limited overdose experience. Possible effects include orthostatic hypotension, sedation, and extrapyramidal symptoms. Management is supportive: maintain airway/oxygenation, cardiovascular monitoring (continuous ECG for arrhythmias), and treatment of hypotension and EPS. There is no specific antidote; because of high protein binding and large volume of distribution, dialysis is unlikely to help. Effects may be prolonged owing to the long half-life.",
+  "refs": [
+    ["FDA Prescribing Information - Cariprazine (VRAYLAR)", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Cariprazine", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cariprazine%22"]
+  ]
+}

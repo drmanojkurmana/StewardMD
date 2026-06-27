@@ -1,0 +1,91 @@
+{
+  "generic": "Temozolomide",
+  "cls": "Antineoplastic - alkylating agent (imidazotetrazine)",
+  "pharm": "Oral cytotoxic chemotherapy agent",
+  "tags": ["chemotherapy", "alkylating agent", "glioblastoma", "astrocytoma", "myelosuppression"],
+  "quick": [
+    ["Adult dose", "75 mg/m2/day with RT; then 150-200 mg/m2 x5 days/cycle"],
+    ["Meal", "Take on empty stomach to reduce nausea"],
+    ["Pregnancy", "Contraindicated; fetal harm"],
+    ["Lactation", "Discontinue breastfeeding"],
+    ["Renal", "Caution; limited data, monitor"],
+    ["Hepatic", "Caution; monitor LFTs (hepatotoxicity)"],
+    ["Alcohol", "Avoid; added hepatic stress"],
+    ["Monitoring", "CBC each cycle, LFTs, PCP prophylaxis"]
+  ],
+  "summary": "Temozolomide is an oral alkylating agent for newly diagnosed glioblastoma (with radiotherapy then maintenance) and anaplastic astrocytoma. Concomitant dose is 75 mg/m2/day; maintenance is 150-200 mg/m2 on days 1-5 of 28-day cycles. Myelosuppression is dose-limiting; hepatotoxicity and PCP risk require monitoring and prophylaxis.",
+  "indications": [
+    "Newly diagnosed glioblastoma, concomitantly with radiotherapy and then as maintenance treatment",
+    "Adjuvant treatment of adults with newly diagnosed anaplastic astrocytoma",
+    "Treatment of adults with refractory anaplastic astrocytoma"
+  ],
+  "dosage": [
+    {"c": "Glioblastoma - concomitant phase", "r": "With radiotherapy", "d": "75 mg/m2 once daily for 42-49 days with focal radiotherapy", "t": "Once daily", "n": "Provide Pneumocystis pneumonia (PCP) prophylaxis"},
+    {"c": "Glioblastoma - maintenance", "r": "Cycle 1", "d": "150 mg/m2 once daily on Days 1-5 of a 28-day cycle", "t": "Days 1-5 of 28-day cycle", "n": "Begin 4 weeks after concomitant phase"},
+    {"c": "Glioblastoma - maintenance", "r": "Cycles 2-6", "d": "May increase to 200 mg/m2 Days 1-5 if tolerated", "t": "Days 1-5 of 28-day cycle", "n": "Based on toxicity; up to 6 cycles"},
+    {"c": "Anaplastic astrocytoma", "r": "Adjuvant/refractory", "d": "Initial 150 mg/m2 Days 1-5 every 28 days; may increase to 200 mg/m2", "t": "Days 1-5 of 28-day cycle", "n": "Beginning ~4 weeks after radiotherapy"}
+  ],
+  "admin": [
+    "Administer orally or intravenously; take oral capsules consistently, preferably on an empty stomach to reduce nausea/vomiting",
+    "Swallow capsules whole with water; do not open or chew - avoid skin/mucosal contact with contents",
+    "Use antiemetic prophylaxis as needed",
+    "Provide PCP prophylaxis during the concomitant phase and continue in lymphopenic patients until recovery",
+    "Check ANC and platelets before each cycle and on Day 22 / weekly as required; adjust dose for toxicity"
+  ],
+  "moa": "A prodrug that undergoes rapid nonenzymatic conversion at physiologic pH to the active alkylating species MTIC. MTIC methylates DNA primarily at the O6 and N7 positions of guanine. The cytotoxic O6-methylguanine lesion causes futile mismatch repair cycles and DNA strand breaks, triggering apoptosis. Tumors with low MGMT activity are more sensitive.",
+  "contra": {
+    "absolute": ["History of severe hypersensitivity to temozolomide", "Hypersensitivity to dacarbazine (DTIC) - shares MTIC metabolite"],
+    "relative": ["Pre-existing severe myelosuppression", "Significant hepatic impairment", "Severe renal impairment"],
+    "monitor": ["Bone marrow function each cycle", "Liver function tests", "Lymphopenia (PCP risk)"]
+  },
+  "preg": "Can cause fetal harm based on mechanism of action and animal studies; postmarketing reports include spontaneous abortions and congenital malformations. Contraindicated in pregnancy; advise effective contraception for patients and male partners during and after treatment.",
+  "lact": "Discontinue breastfeeding during treatment and for a period after the last dose due to the potential for serious adverse reactions in the breastfed infant.",
+  "renal": "Use with caution; pharmacokinetics in severe renal impairment are not well studied. Monitor closely.",
+  "hepatic": "Use with caution; fatal and severe hepatotoxicity have been reported. Perform liver tests at baseline, midway through the first cycle, before each subsequent cycle, and 2-4 weeks after the last dose.",
+  "interactions": {
+    "major": ["Live vaccines - risk of disseminated infection in immunosuppressed patients", "Other myelosuppressive agents - additive marrow toxicity"],
+    "moderate": ["Valproic acid - slightly decreases temozolomide clearance", "Concomitant corticosteroids/radiotherapy - increased PCP risk"],
+    "minor": ["None additional"],
+    "food": "Food reduces the rate and extent of absorption; take consistently, preferably on an empty stomach, and use antiemetics.",
+    "alcohol": "Avoid; adds to hepatic stress.",
+    "diagnostics": "Causes myelosuppression (neutropenia, thrombocytopenia, lymphopenia) and may elevate liver enzymes."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Fatigue", "Constipation", "Headache", "Alopecia", "Anorexia", "Myelosuppression"],
+    "serious": ["Severe myelosuppression (neutropenia, thrombocytopenia)", "Hepatotoxicity (fatal/severe)", "Pneumocystis pneumonia and other opportunistic infections", "Myelodysplastic syndrome / secondary malignancy", "Severe cutaneous adverse reactions"],
+    "rare": ["Aplastic anemia / prolonged pancytopenia", "Interstitial pneumonitis", "Hemorrhage from thrombocytopenia"],
+    "emergency": ["Febrile neutropenia / severe sepsis", "Acute liver failure", "Stevens-Johnson syndrome / toxic epidermal necrolysis"]
+  },
+  "monitoring": [
+    "Complete blood count with platelets before each cycle, on Day 22 and weekly until recovery",
+    "Liver function tests at baseline, mid-first-cycle, before each cycle and 2-4 weeks after last dose",
+    "Signs of infection, especially Pneumocystis pneumonia in lymphopenic patients",
+    "Lymphocyte counts (PCP prophylaxis decisions)"
+  ],
+  "counsel": [
+    "Take capsules whole, consistently, preferably on an empty stomach with water",
+    "Do not open or crush capsules; avoid contact with skin or eyes",
+    "Report fever, signs of infection, unusual bruising or bleeding promptly",
+    "Use effective contraception during and after treatment; do not breastfeed",
+    "Take prescribed anti-nausea and PCP prophylaxis medications"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect over treatment cycles"],
+    ["Peak", "Approximately 1 hour (fasting)"],
+    ["Half-life", "Approximately 1.8 hours"],
+    ["Duration", "Per dosing schedule"],
+    ["Storage", "Store at 25 C (excursions 15-30 C); protect capsules from moisture"]
+  ],
+  "pearls": [
+    "Myelosuppression is dose-limiting - geriatric patients and women are at higher risk; check counts before each cycle.",
+    "Provide PCP prophylaxis during concomitant radiotherapy phase; continue while lymphopenic.",
+    "Hepatotoxicity can be fatal - monitor liver tests on the defined schedule.",
+    "MGMT promoter methylation status predicts greater benefit."
+  ],
+  "missed": "If a daily dose is missed, do not take a double dose; contact the oncology team for guidance, as missed days can affect the cycle. Resume per the prescribed schedule under clinician direction.",
+  "overdose": "Dose-limiting toxicity is hematologic; overdose can cause severe and prolonged myelosuppression and infection. There is no specific antidote. Provide supportive care with blood count monitoring, growth factors/transfusions and treatment of infection or bleeding.",
+  "refs": [
+    ["FDA Temozolomide Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22temozolomide%22"],
+    ["FDA DailyMed - Temozolomide", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

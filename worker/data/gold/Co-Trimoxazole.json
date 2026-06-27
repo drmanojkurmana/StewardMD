@@ -1,0 +1,179 @@
+{
+  "generic": "Co-Trimoxazole (Trimethoprim/Sulfamethoxazole, TMP-SMX)",
+  "cls": "Folate-synthesis inhibitor antibacterial combination (sulfonamide + diaminopyrimidine)",
+  "pharm": "Fixed-combination antibacterial pairing sulfamethoxazole and trimethoprim in a 5:1 ratio; produces sequential blockade of bacterial folate synthesis with synergistic, broadly bactericidal activity.",
+  "tags": ["Sulfonamide", "Folate inhibitor", "Broad-spectrum", "PCP", "UTI", "SJS/TEN risk", "Hyperkalemia risk", "G6PD caution"],
+  "quick": [
+    ["Adult dose", "1 DS tablet (800/160 mg) PO q12h for most infections"],
+    ["Meal", "Take with a full glass of water; food optional, maintain hydration"],
+    ["Pregnancy", "Avoid, esp. 1st trimester & near term (neural tube defects, kernicterus)"],
+    ["Lactation", "Avoid in ill/premature/jaundiced/G6PD-deficient infants; otherwise caution"],
+    ["Renal", "Reduce dose 50% if CrCl 15-30; avoid/contraindicated if CrCl <15"],
+    ["Hepatic", "Contraindicated in marked hepatic damage"],
+    ["Alcohol", "Avoid; rare disulfiram-like reaction and additive hepatotoxicity"],
+    ["Monitoring", "CBC, serum potassium, renal function; watch for rash"]
+  ],
+  "summary": "Co-trimoxazole is a fixed combination of sulfamethoxazole and trimethoprim (5:1) that blocks two sequential steps of bacterial folate synthesis, giving synergistic activity against many Gram-positive and Gram-negative organisms and Pneumocystis jirovecii. Standard formulations are single-strength (400/80 mg) and double-strength/DS (800/160 mg) tablets, plus oral suspension and IV. Mainstays of use are urinary tract infections and the treatment and prophylaxis of Pneumocystis pneumonia (PCP). Major safety concerns are severe cutaneous reactions (Stevens-Johnson syndrome / toxic epidermal necrolysis), blood dyscrasias, hyperkalemia (especially at high doses, in renal impairment, or with ACE inhibitors/ARBs/potassium-sparing agents), and hemolysis in G6PD deficiency. Dose adjustment is required for moderate renal impairment, and it is contraindicated in severe renal or hepatic disease, megaloblastic anemia from folate deficiency, pregnancy near term, and infants under 2 months.",
+  "indications": [
+    "Urinary tract infections (susceptible E. coli, Klebsiella, Enterobacter, Proteus species)",
+    "Pneumocystis jirovecii (PCP) pneumonia - treatment",
+    "Pneumocystis jirovecii (PCP) pneumonia - prophylaxis (primary and secondary)",
+    "Acute exacerbations of chronic bronchitis in adults (susceptible strains)",
+    "Acute otitis media in children (susceptible S. pneumoniae or H. influenzae)",
+    "Enteritis caused by susceptible Shigella flexneri and Shigella sonnei (shigellosis)",
+    "Traveler's diarrhea due to susceptible enterotoxigenic E. coli",
+    "Other off-label uses: skin and soft-tissue infections incl. MRSA, toxoplasmosis, nocardiosis, Listeria, Stenotrophomonas"
+  ],
+  "dosage": [
+    {"c": "Urinary tract infection / shigellosis / bronchitis (adult)", "r": "PO", "d": "800/160 mg (1 DS tablet)", "t": "Every 12 hours", "n": "UTI/bronchitis 10-14 days; shigellosis 5 days; equivalent to 2 single-strength tablets or 20 mL suspension q12h"},
+    {"c": "Traveler's diarrhea (adult)", "r": "PO", "d": "800/160 mg (1 DS tablet)", "t": "Every 12 hours", "n": "Duration 5 days"},
+    {"c": "UTI / otitis media / shigellosis (pediatric >=2 mo)", "r": "PO", "d": "8 mg/kg TMP + 40 mg/kg SMX per day", "t": "Divided every 12 hours", "n": "UTI/otitis 10 days; shigellosis 5 days; not for infants <2 months"},
+    {"c": "PCP - treatment (adult & pediatric)", "r": "PO or IV", "d": "15-20 mg/kg/day TMP (with 75-100 mg/kg/day SMX)", "t": "Divided every 6-8 hours", "n": "Duration 14-21 days; dose by trimethoprim component; ensure hydration"},
+    {"c": "PCP - prophylaxis (adult)", "r": "PO", "d": "800/160 mg (1 DS tablet)", "t": "Once daily, or 3 times weekly", "n": "Single-strength 400/80 mg daily is an alternative; continue per immune status"},
+    {"c": "PCP - prophylaxis (pediatric)", "r": "PO", "d": "150 mg/m2/day TMP + 750 mg/m2/day SMX", "t": "Divided q12h on 3 consecutive days/week", "n": "Total daily TMP dose should not exceed 320 mg"},
+    {"c": "Renal impairment - CrCl 15-30 mL/min", "r": "PO/IV", "d": "Give 50% of the usual recommended dose", "t": "Per indication", "n": "Reduce dose by one half"},
+    {"c": "Renal impairment - CrCl <15 mL/min", "r": "-", "d": "Use not recommended", "t": "-", "n": "Avoid; contraindicated in severe renal insufficiency where renal function cannot be monitored"}
+  ],
+  "admin": [
+    "Take oral doses with a full glass (8 oz) of water",
+    "Maintain adequate fluid intake throughout therapy to prevent crystalluria and stone formation",
+    "May be taken with or without food; food can reduce GI upset",
+    "Shake oral suspension well before measuring each dose",
+    "IV: dilute each 5 mL in 125 mL of 5% dextrose and infuse over 60-90 minutes; do not give rapid or bolus injection; avoid mixing with other drugs or solutions",
+    "Complete the full prescribed course even if feeling better"
+  ],
+  "moa": "Sequential blockade of the bacterial folic acid pathway: sulfamethoxazole inhibits dihydropteroate synthase (competing with para-aminobenzoic acid to block dihydrofolic acid formation), while trimethoprim inhibits dihydrofolate reductase (blocking conversion of dihydrofolate to tetrahydrofolate). This two-step inhibition of folate synthesis is synergistic and bactericidal, depriving bacteria of the reduced folates needed for nucleic acid and protein synthesis; selectivity arises from the far greater affinity of trimethoprim for bacterial than human dihydrofolate reductase.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to trimethoprim, sulfamethoxazole, or any sulfonamide",
+      "History of drug-induced immune thrombocytopenia with sulfonamides/trimethoprim",
+      "Documented megaloblastic anemia due to folate deficiency",
+      "Marked hepatic damage / severe hepatic insufficiency",
+      "Severe renal insufficiency when renal function cannot be monitored (CrCl <15 mL/min)",
+      "Pregnancy at term and during the period of labor/delivery",
+      "Infants younger than 2 months of age",
+      "Concomitant use with dofetilide"
+    ],
+    "relative": [
+      "Pregnancy (especially first trimester) - neural tube defect risk",
+      "Glucose-6-phosphate dehydrogenase (G6PD) deficiency - hemolysis risk",
+      "Folate deficiency states (elderly, malnourished, alcoholism, anticonvulsant or malabsorption-associated)",
+      "Renal impairment (CrCl 15-30) requiring dose reduction",
+      "Hypothyroidism, severe allergy, or bronchial asthma",
+      "Patients on ACE inhibitors/ARBs/potassium-sparing diuretics (hyperkalemia)",
+      "Porphyria"
+    ],
+    "monitor": [
+      "Complete blood count during prolonged or high-dose therapy",
+      "Serum potassium (hyperkalemia)",
+      "Renal function and serum creatinine",
+      "Skin - discontinue at first appearance of rash"
+    ]
+  },
+  "preg": "Avoid, particularly in the first trimester (folate antagonism associated with neural tube and other defects) and near term (risk of neonatal kernicterus from bilirubin displacement). Use during pregnancy only if the potential benefit clearly outweighs the risk; supplement with folic acid if used. Contraindicated at term/during labor and delivery.",
+  "lact": "Sulfamethoxazole and trimethoprim are excreted in breast milk. Avoid in mothers nursing ill, premature, stressed, jaundiced, or G6PD-deficient infants because of the risk of kernicterus and hemolysis; otherwise use with caution in healthy term infants. Contraindicated in infants younger than 2 months.",
+  "renal": "Requires dose adjustment. For CrCl 15-30 mL/min, give half the usual dose. For CrCl below 15 mL/min, use is not recommended/contraindicated. Maintain hydration; risk of crystalluria and accumulation of both components plus hyperkalemia rises with renal impairment. Monitor renal function and potassium.",
+  "hepatic": "Contraindicated in marked hepatic parenchymal damage. Use with caution in lesser hepatic impairment; rare cases of fulminant hepatic necrosis and cholestatic jaundice have occurred. Discontinue if signs of hepatic injury develop.",
+  "interactions": {
+    "major": [
+      "Warfarin and other coumarin anticoagulants - inhibits metabolism and prolongs INR/bleeding; monitor closely and reduce anticoagulant dose",
+      "Methotrexate - displaces from protein binding and additive antifolate effect, increasing toxicity (myelosuppression); avoid concurrent use",
+      "ACE inhibitors / ARBs / potassium-sparing diuretics (spironolactone, eplerenone) - additive risk of severe, sometimes fatal hyperkalemia",
+      "Dofetilide - trimethoprim raises dofetilide levels, increasing risk of QT prolongation/torsades (contraindicated)",
+      "Sulfonylureas / repaglinide - potentiated hypoglycemia",
+      "Phenytoin - decreased clearance and increased phenytoin levels/effect"
+    ],
+    "moderate": [
+      "Digoxin - increased serum digoxin concentrations, especially in the elderly",
+      "Potassium supplements - additive hyperkalemia",
+      "Cyclosporine - increased nephrotoxicity and decreased cyclosporine levels (renal transplant)",
+      "Pyrimethamine (>25 mg/week) - increased risk of megaloblastic anemia",
+      "Diuretics (thiazides, in the elderly) - increased incidence of thrombocytopenia with purpura",
+      "Amantadine, memantine, dapsone - increased levels of both drugs",
+      "Indomethacin - increased sulfamethoxazole levels"
+    ],
+    "minor": [
+      "Tricyclic antidepressants - decreased efficacy possible",
+      "Procainamide - increased levels via reduced renal clearance"
+    ],
+    "food": "May be taken with or without food; take with a full glass of water and maintain fluid intake. Avoid excessive potassium-rich salt substitutes.",
+    "alcohol": "Avoid alcohol; rare disulfiram-like (flushing) reactions and additive hepatotoxicity have been reported.",
+    "diagnostics": "Trimethoprim interferes with the Jaffe alkaline picrate creatinine assay, falsely raising measured serum creatinine by ~10% (no true loss of renal function); it can also interfere with serum methotrexate assays using competitive binding protein. May produce false-positive urine glucose tests."
+  },
+  "se": {
+    "common": [
+      "Nausea, vomiting, anorexia",
+      "Diarrhea",
+      "Skin rash, urticaria, photosensitivity",
+      "Pruritus",
+      "Glossitis / stomatitis",
+      "Headache"
+    ],
+    "serious": [
+      "Severe cutaneous adverse reactions - Stevens-Johnson syndrome (SJS) and toxic epidermal necrolysis (TEN)",
+      "Blood dyscrasias - agranulocytosis, aplastic anemia, thrombocytopenia, megaloblastic anemia, neutropenia, hemolytic anemia",
+      "Hyperkalemia (dose-related; worse with renal impairment or K-raising drugs)",
+      "Fulminant hepatic necrosis and cholestatic jaundice",
+      "Acute kidney injury, interstitial nephritis, crystalluria",
+      "Clostridioides difficile-associated diarrhea / pseudomembranous colitis",
+      "Hypoglycemia",
+      "Hyponatremia"
+    ],
+    "rare": [
+      "Drug reaction with eosinophilia and systemic symptoms (DRESS)",
+      "Acute generalized exanthematous pustulosis (AGEP)",
+      "Aseptic meningitis",
+      "Pancreatitis",
+      "Peripheral neuritis, ataxia",
+      "Hallucinations, depression, seizures",
+      "Rhabdomyolysis (especially in PCP/AIDS patients)",
+      "Hemolysis in G6PD-deficient patients"
+    ],
+    "emergency": [
+      "Stevens-Johnson syndrome / toxic epidermal necrolysis (any spreading rash, blistering, mucosal lesions, skin peeling)",
+      "Anaphylaxis / severe hypersensitivity",
+      "Agranulocytosis or severe pancytopenia (fever, sore throat, bleeding)",
+      "Life-threatening hyperkalemia (arrhythmia, muscle weakness)"
+    ]
+  },
+  "monitoring": [
+    "Complete blood count (CBC) periodically, especially with prolonged or high-dose therapy; discontinue if a significant reduction in any formed blood element occurs",
+    "Serum potassium, particularly with high doses, renal impairment, or concomitant ACEi/ARB/K-sparing drugs",
+    "Renal function (serum creatinine, BUN) and urinalysis; remember trimethoprim falsely elevates Jaffe creatinine",
+    "Serum sodium and glucose in at-risk patients",
+    "Vigilance for skin rash - stop the drug at the first sign",
+    "INR in patients on warfarin; phenytoin and digoxin levels where co-administered"
+  ],
+  "counsel": [
+    "Stop the medicine and seek medical care immediately if you develop any rash, blistering, peeling skin, mouth or eye sores, or fever - these can signal a serious skin reaction",
+    "Report sore throat, fever, mouth ulcers, pallor, unusual bruising or bleeding (possible blood problems)",
+    "Drink plenty of fluids while taking this medicine to protect your kidneys and prevent stones",
+    "It can make your skin more sensitive to sunlight - use sunscreen and protective clothing and avoid prolonged sun exposure",
+    "Take with a full glass of water and complete the entire course as directed",
+    "Tell your clinician about blood thinners, diabetes medicines, blood pressure medicines (ACE inhibitors/ARBs), potassium supplements, and any history of sulfa allergy or G6PD deficiency",
+    "Avoid alcohol during treatment"
+  ],
+  "pk": [
+    ["Onset", "Antibacterial effect within hours; clinical UTI response over 1-3 days"],
+    ["Peak", "Plasma peak ~1-4 hours after oral dose"],
+    ["Half-life", "Sulfamethoxazole ~10 hours; trimethoprim ~8-10 hours (both prolonged in renal impairment)"],
+    ["Duration", "Supports every-12-hour dosing for most infections"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect tablets and suspension from light; do not refrigerate IV concentrate"]
+  ],
+  "pearls": [
+    "Discontinue immediately at the first appearance of skin rash - co-trimoxazole is a leading cause of Stevens-Johnson syndrome and toxic epidermal necrolysis (SJS/TEN); never re-challenge after a severe reaction",
+    "Can cause serious blood dyscrasias (agranulocytosis, aplastic anemia, thrombocytopenia, megaloblastic anemia) - monitor CBC and stop if counts fall",
+    "Hyperkalemia is dose-related and especially dangerous with high PCP-treatment doses, renal impairment, or combined with ACE inhibitors, ARBs, or potassium-sparing diuretics - check serum potassium",
+    "May trigger acute hemolytic anemia in G6PD-deficient patients - use with caution and consider screening in at-risk populations",
+    "Trimethoprim blocks tubular creatinine secretion and interferes with the Jaffe assay, causing a benign ~10% rise in measured serum creatinine without true loss of renal function",
+    "Dose PCP treatment by the trimethoprim component (15-20 mg/kg/day) divided q6-8h; adjunctive corticosteroids are indicated for moderate-severe PCP in HIV",
+    "Markedly potentiates warfarin (raises INR) and sulfonylureas (hypoglycemia), and raises phenytoin and digoxin levels",
+    "Maintain hydration to avoid crystalluria; avoid in folate-deficient states given antifolate mechanism"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed one and resume the regular schedule. Do not take two doses at once or a double dose to make up. For PCP treatment, contact the prescriber if doses are missed, as therapeutic levels must be maintained.",
+  "overdose": "Signs of acute overdose include nausea, vomiting, headache, dizziness, confusion, and bone marrow depression with prolonged or massive ingestion. Management: induce emesis or gastric lavage if recent; ensure adequate fluid intake and urine output; acidify urine to enhance sulfamethoxazole elimination. Monitor CBC, serum potassium, and electrolytes. Hemodialysis is only moderately effective (peritoneal dialysis is not). Leucovorin (folinic acid) 5-15 mg/day reverses trimethoprim-induced bone marrow suppression/megaloblastic effects. Provide supportive care.",
+  "refs": [
+    ["FDA Sulfamethoxazole and Trimethoprim Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22SULFAMETHOXAZOLE%20AND%20TRIMETHOPRIM%22"],
+    ["DailyMed - Sulfamethoxazole and Trimethoprim", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=sulfamethoxazole+and+trimethoprim"]
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "generic": "Fosaprepitant Dimeglumine",
+  "cls": "Substance P / neurokinin-1 (NK1) receptor antagonist (prodrug of aprepitant)",
+  "pharm": "Antiemetic",
+  "tags": ["antiemetic", "NK1 antagonist", "prodrug", "CINV", "chemotherapy", "nausea", "vomiting", "intravenous"],
+  "quick": [
+    ["Adult dose", "150 mg IV over 20-30 min on day 1, completing ~30 min before chemotherapy"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Insufficient human data; use only if clearly needed"],
+    ["Lactation", "Active moiety aprepitant excretion unknown; weigh benefit vs risk"],
+    ["Renal", "No dose adjustment; not removed by hemodialysis"],
+    ["Hepatic", "No adjustment in mild-moderate; limited data in severe (Child-Pugh >9)"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Infusion-site reactions, hypersensitivity, INR if on warfarin, CYP3A4 interactions, contraceptive efficacy"]
+  ],
+  "summary": "Fosaprepitant is an intravenous prodrug of aprepitant, a selective high-affinity substance P/neurokinin-1 (NK1) receptor antagonist. Given in combination with other antiemetic agents, it is indicated in adults and children 6 months and older to prevent acute and delayed nausea and vomiting with highly emetogenic chemotherapy (including high-dose cisplatin) and delayed nausea and vomiting with moderately emetogenic chemotherapy. After IV administration it is rapidly converted (within about 30 minutes) to aprepitant, which crosses the blood-brain barrier and augments the antiemetic effect of 5-HT3 antagonists and corticosteroids. Because the active moiety is a substrate, inhibitor and inducer of CYP3A4 (and induces CYP2C9), it shares aprepitant's drug interactions, including reduced hormonal contraceptive efficacy and altered warfarin response; it is contraindicated with pimozide. Hypersensitivity and infusion-site reactions are notable IV-specific risks.",
+  "indications": [
+    "Prevention of acute and delayed nausea and vomiting associated with initial and repeat courses of highly emetogenic cancer chemotherapy (HEC), including high-dose cisplatin, in combination with other antiemetics, in adults and pediatric patients 6 months and older",
+    "Prevention of delayed nausea and vomiting associated with initial and repeat courses of moderately emetogenic cancer chemotherapy (MEC), in combination with other antiemetics, in adults and pediatric patients 6 months and older"
+  ],
+  "dosage": [
+    {"c": "CINV (adult)", "r": "Day 1", "d": "150 mg IV infusion over 20-30 minutes", "t": "Single dose on day 1", "n": "Complete infusion approximately 30 minutes before chemotherapy; given with dexamethasone and a 5-HT3 antagonist"},
+    {"c": "CINV (pediatric 6 mo-17 yr, >=6 kg)", "r": "Weight/age-based", "d": "IV infusion on day 1 via central catheter per label; over 30 min (12-17 yr) or 60 min (6 mo-<12 yr)", "t": "Single dose (single-dose regimens) or day 1 of a 3-day regimen", "n": "For single/multi-day regimens, follow IV day 1 with oral aprepitant on days 2-3"},
+    {"c": "Concomitant antiemetics", "r": "All", "d": "Use with a corticosteroid and a 5-HT3 antagonist per regimen", "t": "Per regimen", "n": "Reduce co-administered oral dexamethasone dose (CYP3A4 interaction)"}
+  ],
+  "admin": [
+    "Reconstitute/dilute per label and administer as an intravenous infusion over the specified time",
+    "Complete the infusion about 30 minutes before chemotherapy on day 1",
+    "Administer through a central venous catheter in pediatric patients",
+    "Avoid infusion into small veins; majority of infusion-site reactions occurred with vesicant chemotherapy",
+    "Use as part of a combination regimen with a 5-HT3 antagonist and a corticosteroid; reduce the dose of co-administered oral dexamethasone"
+  ],
+  "moa": "Fosaprepitant is a prodrug rapidly converted to aprepitant, a selective, high-affinity antagonist at human substance P/neurokinin-1 (NK1) receptors with little or no affinity for serotonin (5-HT3), dopamine or corticosteroid receptors. Aprepitant crosses the blood-brain barrier and occupies central NK1 receptors, inhibiting both the acute and delayed phases of chemotherapy-induced emesis and augmenting the antiemetic activity of 5-HT3 antagonists and corticosteroids.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to fosaprepitant, aprepitant, polysorbate 80 or any component", "Concurrent use with pimozide (raised pimozide levels can cause QT prolongation)"],
+    "relative": ["Severe hepatic impairment (limited data)", "Patients relying on hormonal contraception (reduced efficacy)", "Patients on warfarin or narrow-therapeutic-index CYP3A4/CYP2C9 substrates", "Prior hypersensitivity to fosaprepitant/aprepitant (do not reinitiate)"],
+    "monitor": ["Concomitant CYP3A4 substrates (e.g. some chemotherapy, midazolam, dexamethasone)", "Concomitant strong CYP3A4 inhibitors/inducers", "Patients on warfarin (INR)"]
+  },
+  "preg": "There are insufficient human data on fosaprepitant or aprepitant use in pregnancy to inform a drug-associated risk; animal studies did not show clear adverse developmental effects at relevant exposures. Use during pregnancy only if clearly needed.",
+  "lact": "It is not known whether aprepitant, the active moiety, is excreted in human milk; it is present in the milk of lactating rats. Consider the benefits of breastfeeding and the mother's clinical need against any potential risk to the infant.",
+  "renal": "No dosage adjustment is needed for renal impairment, including end-stage renal disease; aprepitant is not removed by hemodialysis.",
+  "hepatic": "No dosage adjustment is needed in mild-to-moderate hepatic impairment (Child-Pugh 5-9). There are no data in severe hepatic impairment (Child-Pugh >9); use with caution.",
+  "interactions": {
+    "major": ["Pimozide - contraindicated; increased pimozide levels can cause QT prolongation", "Strong CYP3A4 inhibitors (e.g. ketoconazole, clarithromycin) - markedly increase aprepitant exposure", "Strong CYP3A4 inducers (e.g. rifampin, carbamazepine, phenytoin) - reduce aprepitant efficacy", "CYP3A4-substrate chemotherapy and other sensitive CYP3A4 substrates - increased exposure"],
+    "moderate": ["Oral corticosteroids (dexamethasone, methylprednisolone) - raised levels; reduce their dose", "Warfarin - decreased INR (CYP2C9 induction); monitor INR for 2 weeks, particularly days 7-10", "Hormonal contraceptives - reduced efficacy during and for 1 month after the last dose", "Benzodiazepines metabolized by CYP3A4 (e.g. midazolam, alprazolam) - increased exposure"],
+    "minor": ["Diltiazem - mutual increase in exposure", "Tolbutamide and other CYP2C9 substrates - reduced exposure"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "No specific interaction with alcohol.",
+    "diagnostics": "No characteristic laboratory interference; chemotherapy-related lab changes may be seen."
+  },
+  "se": {
+    "common": ["Fatigue", "Diarrhea", "Neutropenia", "Asthenia", "Anemia", "Peripheral neuropathy", "Leukopenia", "Dyspepsia", "Urinary tract infection", "Pain in extremity"],
+    "serious": ["Hypersensitivity reactions including anaphylaxis and anaphylactic shock during or soon after infusion", "Infusion-site reactions including thrombophlebitis, necrosis and vasculitis", "Clinically significant drug interactions (e.g. with pimozide, chemotherapy)"],
+    "rare": ["Severe skin reactions (Stevens-Johnson syndrome/toxic epidermal necrolysis)", "Angioedema and urticaria"],
+    "emergency": ["Anaphylaxis / anaphylactic shock", "Severe infusion-site reaction (necrosis/vasculitis)", "Severe skin reaction (SJS/TEN)"]
+  },
+  "monitoring": [
+    "Hypersensitivity reactions during and soon after infusion (discontinue and do not reinitiate if they occur)",
+    "Infusion-site reactions, particularly with vesicant chemotherapy",
+    "INR in patients on warfarin during the 2-week period (especially days 7-10) after dosing",
+    "Adequacy of contraception (back-up method during and for 1 month after dosing)",
+    "Concomitant CYP3A4/CYP2C9 substrate levels and effects; antiemetic efficacy and hydration"
+  ],
+  "counsel": [
+    "This is a one-time IV dose given before chemotherapy to help prevent nausea and vomiting",
+    "Tell staff immediately about flushing, rash, swelling, difficulty breathing or pain/redness at the IV site",
+    "Hormonal birth control may not work during and for 1 month after treatment - use a back-up method",
+    "If you take warfarin, you will need extra INR checks",
+    "Tell your doctor about all medicines, including over-the-counter and herbal products"
+  ],
+  "pk": [
+    ["Onset", "Converted to aprepitant within about 30 minutes of IV administration"],
+    ["Peak", "Aprepitant exposure achieved rapidly after the infusion"],
+    ["Half-life", "Aprepitant terminal half-life approximately 9-13 hours"],
+    ["Duration", "Single day-1 IV dose covers acute and delayed emesis (with oral aprepitant on days 2-3 in some pediatric regimens)"],
+    ["Storage", "Refrigerate ready-to-use injection at 2-8 C; may be kept at room temperature (20-25 C) in original carton for up to 90 days (product-specific)"]
+  ],
+  "pearls": [
+    "Intravenous prodrug of aprepitant - converted to aprepitant within ~30 minutes, sharing its interaction profile",
+    "Use as part of a triple regimen (NK1 antagonist + 5-HT3 antagonist + corticosteroid)",
+    "Reduce co-administered oral dexamethasone dose because the active moiety inhibits CYP3A4",
+    "Watch for infusion-site reactions, especially when given near vesicant chemotherapy; avoid small veins",
+    "Pimozide is contraindicated; advise non-hormonal contraceptive back-up and extra INR monitoring with warfarin"
+  ],
+  "missed": "Fosaprepitant is administered by a healthcare professional as a single intravenous dose on the day of chemotherapy. There is no patient-managed missed dose; if a scheduled treatment is missed, the oncology team will determine timing relative to chemotherapy.",
+  "overdose": "There is no specific information on overdose treatment for fosaprepitant or aprepitant. Drowsiness and headache occurred after a large oral aprepitant ingestion. In the event of overdose, discontinue the drug and provide general supportive care and monitoring; aprepitant is not removed by hemodialysis.",
+  "refs": [
+    ["FDA Fosaprepitant for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fosaprepitant%22"],
+    ["DailyMed - Fosaprepitant", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "generic": "Buprenorphine",
+  "cls": "Partial opioid agonist (mu-agonist / kappa-antagonist)",
+  "pharm": "Opioid for dependence treatment and analgesia",
+  "tags": ["opioid", "partial agonist", "opioid dependence", "analgesia", "controlled substance"],
+  "quick": [
+    ["Adult dose", "Opioid dependence: 12-16 mg/day SL (range 4-24 mg); induction per protocol"],
+    ["Meal", "Allow sublingual tablet to dissolve fully; do not chew/swallow"],
+    ["Pregnancy", "May cause neonatal opioid withdrawal; use if benefit justifies risk"],
+    ["Lactation", "Present in milk; weigh benefit vs neonatal risk"],
+    ["Renal", "No specific adjustment; caution in severe impairment"],
+    ["Hepatic", "Reduce dose; avoid/caution in severe impairment"],
+    ["Alcohol", "Avoid - additive CNS/respiratory depression, can be fatal"],
+    ["Monitoring", "Respiration, sedation, LFTs, misuse/diversion, withdrawal"]
+  ],
+  "summary": "Buprenorphine is a partial mu-opioid agonist used for opioid use disorder and for pain. It has a ceiling on respiratory depression but, combined with benzodiazepines/CNS depressants or alcohol, can cause fatal respiratory depression. Habit forming: Yes - it is a Schedule III controlled substance. It carries the opioid class boxed warning for addiction, abuse, misuse, life-threatening respiratory depression and neonatal opioid withdrawal syndrome.",
+  "indications": [
+    "Treatment of opioid dependence/opioid use disorder (sublingual tablet preferred for induction)",
+    "Maintenance treatment of opioid use disorder as part of a complete treatment plan including counseling and psychosocial support",
+    "Management of pain severe enough to require an opioid analgesic where alternatives are inadequate (transdermal/buccal/injectable formulations)"
+  ],
+  "dosage": [
+    {"c": "Opioid dependence - induction (adult)", "r": "Induction", "d": "Begin 2-4 mg SL when objective withdrawal signs appear; titrate in 2-4 mg increments", "t": "Day 1-2 per protocol", "n": "Induce only with clear withdrawal to avoid precipitated withdrawal"},
+    {"c": "Opioid dependence - maintenance (adult)", "r": "Maintenance", "d": "Target 12-16 mg/day SL once daily (range 4-24 mg/day)", "t": "Once daily", "n": "Transition to buprenorphine/naloxone for maintenance"},
+    {"c": "Pain (transdermal)", "r": "Analgesia", "d": "Start 5 mcg/hr patch; titrate every 72 h (or per product)", "t": "Every 7 days (patch)", "n": "For opioid-tolerant titration per formulation"},
+    {"c": "Pain (buccal film)", "r": "Analgesia", "d": "75-900 mcg per formulation schedule", "t": "Every 12 h", "n": "Individualize and titrate carefully"},
+    {"c": "Hepatic impairment", "r": "Adjusted", "d": "Reduce dose / increase interval", "t": "Adjusted", "n": "Avoid or use lowest dose in severe impairment"}
+  ],
+  "admin": [
+    "Place sublingual tablet under the tongue and allow it to dissolve completely; do not cut, chew or swallow whole",
+    "If more than one tablet, place all under the tongue at the same time or in two doses, allowing each to dissolve",
+    "Begin induction only when objective and clear signs of opioid withdrawal are evident to avoid precipitated withdrawal",
+    "Strongly consider co-prescribing naloxone for overdose rescue",
+    "Taper gradually when discontinuing to avoid withdrawal"
+  ],
+  "moa": "Buprenorphine is a partial agonist at the mu-opioid receptor and an antagonist at the kappa-opioid receptor. Its high receptor affinity and slow dissociation produce prolonged effects and a ceiling on respiratory depression and euphoria, while displacing and blocking full agonists. This reduces opioid craving and withdrawal and provides analgesia.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to buprenorphine", "Significant respiratory depression", "Acute or severe bronchial asthma in unmonitored settings", "Known or suspected gastrointestinal obstruction including paralytic ileus"],
+    "relative": ["Concurrent benzodiazepines or other CNS depressants", "Severe hepatic impairment", "Head injury or raised intracranial pressure", "History of substance abuse", "Elderly or debilitated patients"],
+    "monitor": ["Respiratory depression and sedation", "Signs of misuse, abuse and diversion", "Hepatic function", "QT-prolonging risk factors (certain formulations)"]
+  },
+  "preg": "Prolonged use during pregnancy can cause neonatal opioid withdrawal syndrome, which may be life-threatening if unrecognized. Use only if the benefit justifies the risk; coordinate care for the neonate.",
+  "lact": "Buprenorphine and its metabolite are present in human milk. Monitor breastfed infants for drowsiness, adequate weight gain, breathing difficulty and withdrawal; weigh benefits of breastfeeding against risk.",
+  "renal": "No specific dosage adjustment is generally required for renal impairment, but use with caution in severe impairment and monitor for accumulation of metabolites.",
+  "hepatic": "Buprenorphine is hepatically metabolized; reduce the dose in moderate impairment and use cautiously or avoid in severe hepatic impairment. Monitor liver function, as hepatitis and hepatic events have been reported.",
+  "interactions": {
+    "major": ["Benzodiazepines and other CNS depressants - profound sedation, respiratory depression, coma and death", "Alcohol - additive CNS/respiratory depression, potentially fatal", "Other opioids/full agonists - may precipitate withdrawal or additive toxicity", "MAO inhibitors - serotonin syndrome / opioid toxicity"],
+    "moderate": ["Strong CYP3A4 inhibitors (ketoconazole, ritonavir) - increased buprenorphine levels", "Strong CYP3A4 inducers (rifampin, carbamazepine) - decreased levels/efficacy", "Serotonergic drugs - serotonin syndrome", "QT-prolonging agents - additive QT effects (certain products)"],
+    "minor": ["Naloxone (in combination products) - deters injection misuse"],
+    "food": "Sublingual absorption; food does not substantially affect SL/transdermal forms.",
+    "alcohol": "Avoid alcohol; additive respiratory and CNS depression can be fatal.",
+    "diagnostics": "May be detected on opioid drug screens; can elevate liver enzymes."
+  },
+  "se": {
+    "common": ["Headache", "Constipation", "Nausea and vomiting", "Sweating", "Insomnia", "Pain", "Oral hypoesthesia (SL)"],
+    "serious": ["Respiratory depression", "Dependence and withdrawal", "Hepatitis/hepatic events", "Adrenal insufficiency", "QT prolongation (certain formulations)"],
+    "rare": ["Anaphylaxis/angioedema", "Serotonin syndrome", "Severe precipitated withdrawal"],
+    "emergency": ["Life-threatening respiratory depression (especially with CNS depressants/alcohol)", "Overdose", "Anaphylaxis", "Neonatal opioid withdrawal syndrome"]
+  },
+  "monitoring": [
+    "Respiratory rate and level of sedation, especially during initiation and dose changes",
+    "Signs of misuse, abuse, diversion and continued illicit use",
+    "Liver function tests at baseline and periodically",
+    "Withdrawal symptoms during induction and tapering",
+    "Pregnancy status and neonatal monitoring where applicable"
+  ],
+  "counsel": [
+    "This medicine is habit forming and is a controlled substance - take exactly as prescribed and do not share it",
+    "Never combine with alcohol, sedatives or benzodiazepines - this can stop your breathing",
+    "Let the tablet dissolve fully under the tongue; do not chew or swallow it",
+    "Keep naloxone available and tell household members how to use it",
+    "Do not stop suddenly; your doctor will taper the dose. Keep out of reach of children"
+  ],
+  "pk": [
+    ["Onset", "30-60 minutes (sublingual)"],
+    ["Peak", "Approximately 1-1.5 hours (sublingual)"],
+    ["Half-life", "Approximately 24-42 hours (sublingual)"],
+    ["Duration", "24-72 hours depending on dose/formulation"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep secured from misuse/children"]
+  ],
+  "pearls": [
+    "Habit forming: Yes - Schedule III controlled substance with potential for misuse, abuse and dependence",
+    "BOXED WARNING (opioid class): addiction, abuse and misuse; life-threatening respiratory depression; neonatal opioid withdrawal syndrome; and fatal risk with benzodiazepines/CNS depressants",
+    "Partial agonist ceiling effect limits respiratory depression alone but not when combined with other depressants/alcohol",
+    "Induct only with objective withdrawal present to avoid precipitating withdrawal",
+    "Co-prescribe naloxone and combine with naloxone-containing products for maintenance to deter injection misuse"
+  ],
+  "missed": "For maintenance, take the missed dose as soon as remembered the same day; if it is almost the next day skip it and resume the schedule - do not double up. Contact the prescriber about any missed doses; do not take extra to make up.",
+  "overdose": "Overdose causes pinpoint pupils, sedation and respiratory depression. Establish a patent airway and support ventilation. Naloxone may reverse respiratory depression but, owing to buprenorphine's high receptor affinity, higher or repeated/continuous naloxone doses and prolonged monitoring are often required. Call emergency services.",
+  "refs": [
+    ["FDA Buprenorphine Sublingual Tablet Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22buprenorphine%22"],
+    ["FDA DailyMed - Buprenorphine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

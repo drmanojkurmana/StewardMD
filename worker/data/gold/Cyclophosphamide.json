@@ -1,0 +1,98 @@
+{
+  "generic": "Cyclophosphamide",
+  "cls": "Alkylating agent (nitrogen mustard, oxazaphosphorine)",
+  "pharm": "Antineoplastic / immunosuppressant",
+  "tags": ["alkylating agent", "chemotherapy", "lymphoma", "leukemia", "immunosuppressant", "vasculitis"],
+  "quick": [
+    ["Adult dose", "IV 40-50 mg/kg in divided doses over 2-5 days; oral 1-5 mg/kg/day"],
+    ["Meal", "Take oral doses with food; maintain high fluid intake"],
+    ["Pregnancy", "Contraindicated - causes fetal harm; effective contraception required"],
+    ["Lactation", "Contraindicated - excreted in milk; do not breastfeed"],
+    ["Renal", "Dialyzable; reduce dose and ensure hydration in renal impairment"],
+    ["Hepatic", "Reduce dose in significant hepatic impairment (prodrug activation)"],
+    ["Alcohol", "Avoid; nausea and hepatotoxicity risk"],
+    ["Monitoring", "CBC, urinalysis (hematuria), renal/hepatic function, cardiac"]
+  ],
+  "summary": "Cyclophosphamide is an alkylating prodrug activated by hepatic CYP450 to cytotoxic metabolites that cross-link DNA. It treats lymphomas, leukemias, multiple myeloma and several solid tumors, pediatric minimal-change nephrotic syndrome, and is used (off-label) as an immunosuppressant in severe autoimmune disease. Major toxicities are myelosuppression, hemorrhagic cystitis (mitigated by hydration and mesna), cardiotoxicity at high doses, infertility and secondary malignancy.",
+  "indications": [
+    "Malignant lymphomas (Hodgkin disease, lymphocytic, mixed-cell, histiocytic, Burkitt lymphoma)",
+    "Multiple myeloma",
+    "Leukemias (chronic lymphocytic, chronic granulocytic, acute myelogenous/monocytic, acute lymphoblastic)",
+    "Mycosis fungoides (advanced), neuroblastoma (disseminated), retinoblastoma",
+    "Adenocarcinoma of the ovary and breast carcinoma",
+    "Biopsy-proven minimal change nephrotic syndrome in children who fail or cannot tolerate corticosteroids",
+    "Off-label: severe lupus nephritis, ANCA-associated vasculitis and other refractory autoimmune disease"
+  ],
+  "dosage": [
+    {"c": "Malignant disease (adult/peds) IV", "r": "Initial (no marrow deficiency)", "d": "40-50 mg/kg IV in divided doses over 2-5 days", "t": "Divided 2-5 days", "n": "Give in the morning with hydration"},
+    {"c": "Malignant disease (adult/peds) IV", "r": "Alternative", "d": "10-15 mg/kg IV every 7-10 days, or 3-5 mg/kg twice weekly", "t": "Intermittent", "n": "Adjust to blood counts"},
+    {"c": "Malignant disease (adult/peds) oral", "r": "Initial & maintenance", "d": "1-5 mg/kg/day orally", "t": "Once daily", "n": "Titrate to response and tolerance"},
+    {"c": "Minimal change nephrotic syndrome (peds) oral", "r": "Standard", "d": "2 mg/kg daily for 8-12 weeks", "t": "Once daily", "n": "Max cumulative 168 mg/kg; >90 days raises male sterility risk"},
+    {"c": "Severe autoimmune disease (off-label)", "r": "Pulse", "d": "e.g. 500-1000 mg/m2 IV monthly (varies by protocol)", "t": "Monthly pulses", "n": "Per institutional protocol with mesna/hydration"}
+  ],
+  "admin": [
+    "Administer in the morning and force diuresis with adequate oral or IV fluids during and after dosing to reduce urinary tract toxicity",
+    "Reconstitute lyophilized powder per label; inspect for melting (temperature-sensitive)",
+    "Handle and dispose as a hazardous cytotoxic agent",
+    "Consider mesna and aggressive hydration with high-dose IV regimens to prevent hemorrhagic cystitis",
+    "Antiemetic prophylaxis is recommended; monitor blood counts before each cycle"
+  ],
+  "moa": "Cyclophosphamide is a prodrug metabolized by hepatic cytochrome P450 (CYP2B6, 2A6, 3A, 2C9, 2C19) to active alkylating metabolites (notably phosphoramide mustard). These form covalent cross-links between and within DNA strands, preventing DNA replication and triggering apoptosis of rapidly proliferating cells. The same action suppresses immune effector cells, giving its immunosuppressive effect.",
+  "contra": {
+    "absolute": ["Severe hypersensitivity to cyclophosphamide or its metabolites (anaphylaxis, cross-reactivity with other alkylating agents)", "Urinary outflow obstruction", "Pregnancy"],
+    "relative": ["Pre-existing myelosuppression or active severe infection", "Significant cardiac disease (high-dose cardiotoxicity)", "Prior pelvic irradiation or doxorubicin exposure", "Renal or hepatic impairment"],
+    "monitor": ["Concurrent other myelosuppressive/cardiotoxic chemotherapy", "Strong CYP inducers/inhibitors altering activation", "Live vaccines"]
+  },
+  "preg": "Contraindicated. Cyclophosphamide can cause fetal harm including malformations and fetal death. Advise patients of reproductive potential to use effective contraception during and after treatment (per label, women for 1 year and men for at least 4 months after the last dose).",
+  "lact": "Cyclophosphamide is excreted in human milk; breastfeeding is contraindicated during and for a period after treatment because of the potential for serious adverse effects (neutropenia) in the infant.",
+  "renal": "Active metabolites are renally cleared and the drug is dialyzable; reduce dose and ensure adequate hydration in renal impairment to limit accumulation and urotoxicity.",
+  "hepatic": "Hepatic activation is required, but significant hepatic impairment can reduce activation and increase toxicity; dose reduction may be warranted. Veno-occlusive liver disease can occur, especially at high doses.",
+  "interactions": {
+    "major": ["Other cardiotoxic agents (anthracyclines, trastuzumab, prior chest irradiation) - additive cardiotoxicity at high doses", "Live vaccines - risk of disseminated infection in immunosuppressed patients", "Other myelosuppressive chemo/radiation - additive marrow suppression"],
+    "moderate": ["CYP3A4/2B6 inducers (rifampin, phenobarbital) - increase active metabolite formation/toxicity", "CYP inhibitors - may reduce activation or alter clearance", "Allopurinol - increased myelosuppression", "Warfarin - altered anticoagulant effect", "Succinylcholine - prolonged neuromuscular blockade (reduced pseudocholinesterase)"],
+    "minor": ["Digoxin tablets - reduced absorption", "Thiazide diuretics - prolonged leukopenia"],
+    "food": "Take oral doses with food; maintain high fluid intake to protect the bladder.",
+    "alcohol": "Avoid alcohol due to additive nausea and potential hepatotoxicity.",
+    "diagnostics": "Causes leukopenia/thrombocytopenia, hematuria, and may elevate liver enzymes; can suppress immune response to vaccines."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Alopecia", "Leukopenia/neutropenia", "Amenorrhea and impaired fertility", "Anorexia", "Mucositis"],
+    "serious": ["Severe myelosuppression and bone marrow failure with serious infections", "Hemorrhagic cystitis, pyelitis, ureteritis and hematuria", "Cardiotoxicity - myocarditis, myopericarditis, arrhythmias, congestive heart failure (high dose)", "Pulmonary toxicity - pneumonitis, pulmonary fibrosis, veno-occlusive disease", "Hepatic veno-occlusive disease", "SIADH / hyponatremia"],
+    "rare": ["Secondary malignancies (bladder cancer, leukemia/MDS)", "Anaphylaxis", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Tumor lysis syndrome"],
+    "emergency": ["Severe hemorrhagic cystitis with hematuria", "Cardiac failure or life-threatening arrhythmia", "Febrile neutropenia / overwhelming sepsis", "Anaphylaxis", "Acute respiratory failure from pneumonitis"]
+  },
+  "monitoring": [
+    "Complete blood count (especially neutrophils and platelets) frequently, before each course",
+    "Urinalysis for hematuria and signs of cystitis",
+    "Renal and hepatic function tests",
+    "Cardiac monitoring (ECG, signs of heart failure), especially with high-dose regimens",
+    "Serum sodium (SIADH); pregnancy status before treatment"
+  ],
+  "counsel": [
+    "Drink plenty of fluids and empty the bladder frequently; report pink/red urine or painful urination immediately",
+    "Use effective contraception during and after treatment; discuss fertility preservation",
+    "Report fever, sore throat, bruising or bleeding (low blood counts)",
+    "Expect possible hair loss; it usually regrows after treatment",
+    "Avoid live vaccines and report shortness of breath or chest symptoms"
+  ],
+  "pk": [
+    ["Onset", "Requires hepatic activation; cytotoxic effect over days"],
+    ["Peak", "Parent drug plasma peak shortly after dosing (linear kinetics)"],
+    ["Half-life", "3-12 hours (parent drug)"],
+    ["Duration", "Metabolite effects persist; marrow nadir ~7-14 days"],
+    ["Storage", "Store vials at or below 25 C; avoid heat (powder can melt)"]
+  ],
+  "pearls": [
+    "Hemorrhagic cystitis is the hallmark urinary toxicity - prevent with vigorous hydration, morning dosing and mesna at high doses",
+    "High-dose cyclophosphamide is cardiotoxic (myopericarditis, CHF) - watch in patients with cardiac risk or prior anthracyclines",
+    "Causes dose-dependent infertility; treatment beyond 90 days markedly increases male sterility",
+    "Secondary malignancy (notably bladder cancer and MDS/leukemia) is a long-term risk",
+    "Can cause SIADH with hyponatremia, especially at high doses with fluid loading"
+  ],
+  "missed": "For oral therapy, contact the oncology team rather than self-adjusting; take a missed oral dose only as advised. Do not take a double dose. IV doses are given on schedule by clinicians.",
+  "overdose": "Overdose intensifies myelosuppression, urotoxicity, cardiotoxicity and veno-occlusive disease. There is no specific antidote; cyclophosphamide is dialyzable. Manage with supportive care, hematologic support, mesna and hydration for the bladder, and treat infections and cardiac/hepatic complications.",
+  "refs": [
+    ["FDA Cyclophosphamide for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cyclophosphamide%22"],
+    ["FDA DailyMed - Cyclophosphamide", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

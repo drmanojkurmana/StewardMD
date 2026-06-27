@@ -1,0 +1,117 @@
+{
+  "generic": "Empagliflozin",
+  "cls": "Sodium-glucose co-transporter 2 (SGLT2) inhibitor (oral antidiabetic / cardio-renal protective)",
+  "pharm": "Inhibits renal SGLT2 in the proximal tubule, lowering the glucose reabsorption threshold and increasing urinary glucose excretion; also promotes natriuresis and osmotic diuresis, contributing to cardiovascular and renal benefit.",
+  "tags": ["Rx only", "SGLT2 inhibitor", "Type 2 diabetes", "Heart failure", "DKA risk (incl. euglycemic)", "Genital mycotic infection risk"],
+  "quick": [
+    ["Adult dose", "10 mg once daily in the morning; may increase to 25 mg"],
+    ["Meal", "Take with or without food, in the morning"],
+    ["Pregnancy", "Not recommended in 2nd and 3rd trimesters"],
+    ["Lactation", "Not recommended while breastfeeding"],
+    ["Renal", "Not recommended for glycemic control if eGFR <30; contraindicated on dialysis"],
+    ["Hepatic", "No dose adjustment; exposure rises with severity"],
+    ["Alcohol", "Avoid excess; alcohol abuse predisposes to ketoacidosis"],
+    ["Monitoring", "Renal function, volume status, ketones if acidosis suspected, glucose"]
+  ],
+  "summary": "Empagliflozin (Jardiance) is an SGLT2 inhibitor that lowers blood glucose by increasing urinary glucose excretion and also reduces the risk of cardiovascular death and heart failure hospitalization. CRITICAL SAFETY: it can cause ketoacidosis (DKA) that may be EUGLYCEMIC - present even when blood glucose is less than 250 mg/dL - so any patient with metabolic acidosis must be assessed for ketoacidosis regardless of glucose; fatal cases have occurred. It also causes genital mycotic infections and rare but life-threatening necrotizing fasciitis of the perineum (Fournier's gangrene) in both sexes. Other key risks are volume depletion/hypotension, acute kidney injury, urosepsis/pyelonephritis, and hypoglycemia when combined with insulin or a sulfonylurea. Not for type 1 diabetes and contraindicated in patients on dialysis.",
+  "indications": [
+    "To reduce the risk of cardiovascular death and hospitalization for heart failure in adults with heart failure",
+    "To reduce the risk of cardiovascular death in adults with type 2 diabetes mellitus and established cardiovascular disease",
+    "As an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes / CV risk reduction / heart failure - initiation", "r": "Adult oral", "d": "10 mg once daily", "t": "In the morning, with or without food", "n": "Assess volume status and renal function and correct volume depletion before starting"},
+    {"c": "Type 2 diabetes - additional glycemic control", "r": "Adult oral", "d": "May increase to 25 mg once daily", "t": "Once daily in the morning", "n": "Only in patients tolerating empagliflozin"},
+    {"c": "Glycemic control with eGFR <30 mL/min/1.73 m2", "r": "Adult oral", "d": "Not recommended for glycemic control", "t": "N/A", "n": "Likely ineffective for glucose lowering at this eGFR"},
+    {"c": "Patients on dialysis", "r": "Adult oral", "d": "Contraindicated", "t": "N/A", "n": "Do not use"},
+    {"c": "Scheduled surgery", "r": "Adult oral", "d": "Consider temporarily discontinuing for at least 3 days prior to surgery", "t": "Perioperative", "n": "Reduce ketoacidosis risk; resume after risk factors resolve"}
+  ],
+  "admin": [
+    "Take 10 mg once daily in the morning, with or without food",
+    "Before initiating, assess volume status and renal function; correct volume depletion first",
+    "Educate patients on signs and symptoms of ketoacidosis and to seek care immediately if they occur",
+    "Hold therapy temporarily in situations predisposing to ketoacidosis (acute illness, prolonged fasting, surgery)",
+    "If combined with insulin or a sulfonylurea, consider lowering that agent's dose to reduce hypoglycemia"
+  ],
+  "moa": "Empagliflozin is a selective inhibitor of sodium-glucose co-transporter 2 (SGLT2), the predominant transporter responsible for reabsorbing filtered glucose in the proximal renal tubule. By inhibiting SGLT2, it lowers the renal threshold for glucose and increases urinary glucose excretion, reducing blood glucose independently of insulin. It also reduces sodium reabsorption and increases sodium delivery to the distal tubule, producing osmotic diuresis and natriuresis; these effects may lower cardiac pre- and afterload and downregulate sympathetic activity, contributing to its cardiovascular and renal benefits. Its glucose-lowering effect diminishes as eGFR falls.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to empagliflozin or any excipient (reactions such as angioedema have occurred)",
+      "Patients on dialysis"
+    ],
+    "relative": [
+      "Type 1 diabetes mellitus (not indicated; increased ketoacidosis risk)",
+      "History or risk factors for diabetic ketoacidosis (pancreatic insulin deficiency, caloric restriction, alcohol abuse)",
+      "eGFR less than 30 mL/min/1.73 m2 for glycemic control (likely ineffective)",
+      "Volume depletion, hypotension, elderly, or concurrent loop diuretics (correct/assess before starting)",
+      "Recurrent genital mycotic or urinary tract infections"
+    ],
+    "monitor": [
+      "Renal function before and periodically during therapy",
+      "Volume status and blood pressure",
+      "Ketones (blood/urine) if metabolic acidosis is suspected, regardless of glucose",
+      "Signs of genital/perineal infection (Fournier's gangrene) and urinary tract infection"
+    ]
+  },
+  "preg": "Not recommended during the second and third trimesters of pregnancy based on animal data showing adverse renal effects (renal pelvic and tubule dilatation). Available human data are insufficient to determine drug-associated risk; poorly controlled diabetes in pregnancy itself carries maternal and fetal risk. Advise patients of the potential fetal risk, especially in the second and third trimesters.",
+  "lact": "There is limited information on the presence of empagliflozin in human milk; it is present in rat milk and may accumulate. Because human kidney maturation continues in utero and during the first 2 years of life, there may be risk to the developing kidney. Use of empagliflozin is not recommended while breastfeeding.",
+  "renal": "Assess renal function before initiating and as clinically indicated. Not recommended for glycemic control when eGFR is less than 30 mL/min/1.73 m2 (likely ineffective). Contraindicated in patients on dialysis. Data are insufficient to recommend dosing in type 2 diabetes with established CVD and eGFR <30, or in heart failure with eGFR <20. SGLT2 inhibitors can cause acute kidney injury; impaired renal function increases volume-depletion risk.",
+  "hepatic": "No dosage adjustment is required for hepatic impairment. Empagliflozin AUC increased by approximately 23%, 47%, and 75% in mild, moderate, and severe hepatic impairment (Child-Pugh), respectively; these increases are not considered clinically meaningful.",
+  "interactions": {
+    "major": [
+      "Insulin or insulin secretagogues (e.g., sulfonylureas) - increased hypoglycemia risk; consider lowering their dose"
+    ],
+    "moderate": [
+      "Diuretics (especially loop diuretics) - additive diuresis increases volume-depletion and hypotension risk; assess volume status before starting",
+      "Lithium - SGLT2 inhibitors may decrease serum lithium; monitor lithium levels more frequently on initiation and dose changes"
+    ],
+    "minor": [
+      "No clinically relevant CYP450 interactions; empagliflozin is a P-gp and BCRP substrate but does not inhibit them at therapeutic doses"
+    ],
+    "food": "May be taken with or without food; a high-fat meal slightly lowers exposure but not clinically relevant.",
+    "alcohol": "Avoid excess alcohol; alcohol abuse is a predisposing factor for ketoacidosis.",
+    "diagnostics": "Causes positive urine glucose tests and renders the 1,5-anhydroglucitol (1,5-AG) assay unreliable; do not use these to monitor glycemic control - use alternative methods."
+  },
+  "se": {
+    "common": ["Urinary tract infection", "Female genital mycotic infections", "Male genital mycotic infections", "Increased urination (polyuria, pollakiuria, nocturia)", "Upper respiratory tract infection", "Thirst/polydipsia", "Dyslipidemia"],
+    "serious": ["Ketoacidosis including euglycemic DKA (glucose may be <250 mg/dL)", "Volume depletion / symptomatic hypotension", "Acute kidney injury", "Urosepsis and pyelonephritis", "Hypoglycemia (with insulin or insulin secretagogue)"],
+    "rare": ["Necrotizing fasciitis of the perineum (Fournier's gangrene)", "Serious hypersensitivity reactions including angioedema"],
+    "emergency": ["Diabetic ketoacidosis - assess for ketoacidosis in ANY patient with metabolic acidosis regardless of blood glucose (may be euglycemic, <250 mg/dL); fatal cases reported; discontinue and treat urgently", "Fournier's gangrene - genital/perineal pain, erythema, swelling with fever/malaise; surgical emergency", "Severe volume depletion / hypotension and acute kidney injury", "Urosepsis", "Angioedema / anaphylaxis"]
+  },
+  "monitoring": [
+    "Renal function (eGFR) at baseline and periodically",
+    "Volume status, blood pressure, and signs of dehydration",
+    "Blood or urine ketones whenever metabolic acidosis is suspected, regardless of glucose level",
+    "Signs and symptoms of urinary tract infection, genital mycotic infection, and Fournier's gangrene",
+    "HbA1c and glucose (not via urine glucose or 1,5-AG)"
+  ],
+  "counsel": [
+    "Seek medical care immediately for nausea, vomiting, abdominal pain, tiredness, or trouble breathing - these can signal ketoacidosis even when your blood sugar is not high",
+    "Report any pain, tenderness, redness, or swelling in the genital or perineal area with fever or feeling unwell - this can be a serious infection (Fournier's gangrene)",
+    "Genital yeast infections and urinary tract infections are common; report symptoms so they can be treated",
+    "Drink adequate fluids; stand up slowly as this medicine can lower blood pressure, especially with water pills",
+    "If you take insulin or a sulfonylurea, watch for low blood sugar and learn how to treat it",
+    "Hold this medicine and call your clinician if you are seriously ill, fasting, or before scheduled surgery"
+  ],
+  "pk": [
+    ["Onset", "Urinary glucose excretion increases immediately after the first dose"],
+    ["Peak", "Peak plasma concentration about 1.5 hours post-dose"],
+    ["Half-life", "Approximately 12.4 hours (terminal)"],
+    ["Duration", "Glucosuric effect approaches baseline by about 3 days after stopping; dosed once daily"],
+    ["Storage", "Store at controlled room temperature per labeling"]
+  ],
+  "pearls": [
+    "DKA can be EUGLYCEMIC - assess for ketoacidosis in any patient on an SGLT2 inhibitor with metabolic acidosis regardless of blood glucose; fatal cases have occurred",
+    "Hold for at least 3 days before scheduled surgery and during acute illness, prolonged fasting, or dehydration to reduce ketoacidosis risk",
+    "Watch for genital mycotic infections and the rare but life-threatening Fournier's gangrene (necrotizing fasciitis of the perineum) in both men and women",
+    "Correct volume depletion and assess renal function before starting; risk is higher in the elderly, in renal impairment, and on loop diuretics",
+    "Lower the dose of concomitant insulin or sulfonylurea to limit hypoglycemia; empagliflozin alone rarely causes hypoglycemia",
+    "Causes positive urine glucose tests - use HbA1c/plasma glucose, not urine glucose or 1,5-AG, to monitor control"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember that day. If it is almost time for your next dose, skip the missed dose and take the next one at the usual time. Do not take two doses at once.",
+  "overdose": "In the event of overdose, contact the Poison Control Center and provide supportive care based on the patient's clinical status. Removal of empagliflozin by hemodialysis has not been studied. Monitor for volume depletion and, if metabolic acidosis develops, evaluate for ketoacidosis regardless of glucose.",
+  "refs": [
+    ["FDA Label - Empagliflozin (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22empagliflozin%22"],
+    ["DailyMed - Empagliflozin (Jardiance)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=empagliflozin"]
+  ]
+}

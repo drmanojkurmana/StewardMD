@@ -1,0 +1,91 @@
+{
+  "generic": "Mitomycin",
+  "cls": "Antitumor antibiotic / DNA cross-linking alkylating agent",
+  "pharm": "Antineoplastic (cytotoxic)",
+  "tags": ["antineoplastic", "antitumor antibiotic", "alkylating agent", "DNA cross-linker", "gastric cancer", "pancreatic cancer", "chemotherapy", "myelosuppression", "hemolytic uremic syndrome", "vesicant"],
+  "quick": [
+    ["Adult dose", "20 mg/m2 IV as a single dose every 6-8 weeks (after hematologic recovery), in combination regimens"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Safe use not established; teratogenic in animals; avoid in pregnancy"],
+    ["Lactation", "Discontinue breastfeeding during therapy"],
+    ["Renal", "Avoid in significant renal impairment (serum creatinine >1.7 mg/dL); HUS risk"],
+    ["Hepatic", "Metabolized in liver; use caution; monitor"],
+    ["Alcohol", "Avoid - adds to nausea and hepatic stress"],
+    ["Monitoring", "CBC with platelets (cumulative myelosuppression), renal function, signs of HUS, IV site for extravasation"]
+  ],
+  "summary": "Mitomycin is an antitumor antibiotic that acts as a bifunctional/trifunctional DNA-alkylating agent, selectively inhibiting DNA synthesis through guanine-cytosine cross-linking. It is not recommended as single-agent primary therapy; rather it is used in proven combinations with other chemotherapeutic agents for disseminated adenocarcinoma of the stomach or pancreas and as palliation when other modalities have failed. It carries a boxed warning for bone-marrow suppression - notably cumulative, sometimes irreversible thrombocytopenia and leukopenia - and for hemolytic uremic syndrome (HUS), a serious complication characterized by microangiopathic hemolytic anemia, thrombocytopenia and irreversible renal failure, occurring mostly at cumulative doses of 60 mg or more and potentially exacerbated by blood transfusion. It is a potent vesicant: extravasation can cause severe local necrosis and tissue sloughing.",
+  "indications": [
+    "Treatment, in proven combination regimens with other approved chemotherapeutic agents, of disseminated adenocarcinoma of the stomach or pancreas",
+    "Palliative treatment of disseminated gastric or pancreatic adenocarcinoma when other modalities have failed (not recommended as single-agent primary therapy and not a substitute for surgery or radiotherapy)"
+  ],
+  "dosage": [
+    {"c": "Disseminated gastric/pancreatic adenocarcinoma", "r": "Adult", "d": "20 mg/m2 intravenously as a single dose via a functioning IV catheter", "t": "Every 6 to 8 weeks", "n": "Give only after full hematologic recovery from prior chemotherapy; part of combination regimens"},
+    {"c": "Dose adjustment", "r": "Adult", "d": "Reduce dose based on leukocyte and platelet nadir after the prior dose per the labeled schedule", "t": "Per cycle", "n": "Cumulative myelosuppression - re-evaluate fully after each course"},
+    {"c": "Maximum effective single dose", "r": "Adult", "d": "Doses greater than 20 mg/m2 are not more effective and are more toxic", "t": "-", "n": "Do not exceed without justification"}
+  ],
+  "admin": [
+    "Reconstitute the lyophilized powder with Sterile Water for Injection and shake to dissolve",
+    "Administer intravenously only, via a functioning IV catheter, taking care to avoid extravasation (vesicant)",
+    "If extravasation occurs, manage promptly - cellulitis, ulceration and tissue sloughing may result, sometimes delayed",
+    "Inspect the solution visually for particulates and discoloration before administration",
+    "Administer under the supervision of a physician experienced in cytotoxic chemotherapy; handle as a hazardous drug"
+  ],
+  "moa": "Mitomycin is activated intracellularly to an alkylating agent that selectively inhibits the synthesis of deoxyribonucleic acid (DNA). It forms cross-links between guanine and cytosine bases of DNA, the degree of cross-linking correlating with guanine/cytosine content; at high concentrations cellular RNA and protein synthesis are also suppressed. This cross-linking disrupts DNA replication and leads to cell death.",
+  "contra": {
+    "absolute": ["Hypersensitive or idiosyncratic reaction to mitomycin in the past", "Thrombocytopenia", "Coagulation disorder or increased bleeding tendency due to other causes"],
+    "relative": ["Significant renal impairment (serum creatinine >1.7 mg/dL)", "Pre-existing bone-marrow suppression", "Active infection", "Pregnancy / lactation", "Prior pulmonary disease (pneumonitis risk)"],
+    "monitor": ["Patients receiving other myelosuppressive agents or radiation", "Patients receiving blood-product transfusions (may exacerbate HUS)", "Patients on concurrent vinca alkaloids (acute pulmonary toxicity)"]
+  },
+  "preg": "Safe use of mitomycin in pregnant women has not been established, and teratogenic changes have been noted in animal studies. Avoid in pregnancy; advise females of reproductive potential of the risk and to use effective contraception. The effect on fertility is unknown.",
+  "lact": "It is not known whether mitomycin is excreted in human milk. Because many drugs are excreted in milk and because of the potential for serious adverse reactions in a nursing infant, breastfeeding should be discontinued during mitomycin therapy.",
+  "renal": "Mitomycin is approximately 10% excreted unchanged in the urine, with renal excretion rising at higher doses. Use with caution and generally avoid in significant renal impairment (serum creatinine above 1.7 mg/dL). Renal monitoring is important given the risk of hemolytic uremic syndrome with irreversible renal failure.",
+  "hepatic": "Clearance is effected primarily by hepatic metabolism (with metabolism in other tissues as well). Use with caution and monitoring in hepatic impairment.",
+  "interactions": {
+    "major": ["Vinca alkaloids (e.g. vinblastine, vincristine) - acute dyspnea and bronchospasm/pulmonary toxicity reported with concurrent use", "Other myelosuppressive chemotherapy or radiation - additive, cumulative bone-marrow suppression", "Doxorubicin and other cardiotoxic agents - may increase cardiotoxicity risk"],
+    "moderate": ["Blood product transfusions - may exacerbate hemolytic uremic syndrome", "Anticoagulants / antiplatelets - increased bleeding risk with thrombocytopenia"],
+    "minor": ["Live vaccines - risk of infection in immunosuppressed patients"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "Avoid alcohol because of additive nausea and hepatic stress.",
+    "diagnostics": "Expect cumulative falls in leukocyte and platelet counts; monitor renal function and hemoglobin for microangiopathic hemolytic anemia (HUS)."
+  },
+  "se": {
+    "common": ["Bone marrow suppression (thrombocytopenia and leukopenia)", "Nausea and vomiting", "Anorexia", "Stomatitis", "Alopecia", "Fatigue", "Injection-site cellulitis"],
+    "serious": ["Severe, cumulative and sometimes irreversible myelosuppression leading to overwhelming infection or bleeding", "Hemolytic uremic syndrome (microangiopathic hemolytic anemia, thrombocytopenia, irreversible renal failure)", "Pulmonary toxicity (interstitial pneumonitis, dyspnea, especially with vinca alkaloids)", "Severe local tissue necrosis and sloughing from extravasation", "Congestive heart failure (with prior doxorubicin)"],
+    "rare": ["Delayed erythema or ulceration distant from the injection site", "Hepatic and renal dysfunction", "Bladder fibrosis (with intravesical use)"],
+    "emergency": ["Hemolytic uremic syndrome / acute renal failure", "Severe febrile neutropenia / sepsis", "Severe hemorrhage from thrombocytopenia", "Acute pulmonary toxicity / respiratory failure", "Extravasation with tissue necrosis"]
+  },
+  "monitoring": [
+    "Complete blood count with platelets at baseline and frequently (cumulative myelosuppression; nadir typically around 4 weeks, may occur up to 8 weeks)",
+    "Renal function and hemoglobin for signs of hemolytic uremic syndrome",
+    "Pulmonary symptoms (dyspnea, cough) suggestive of pneumonitis",
+    "Intravenous site for extravasation during and after administration",
+    "Full re-evaluation after each course before re-dosing"
+  ],
+  "counsel": [
+    "This chemotherapy lowers blood counts; report fever, chills, sore throat, unusual bruising or bleeding immediately",
+    "Report decreased urination, swelling or unusual fatigue, which can signal a serious kidney/blood complication",
+    "Tell staff at once about pain, burning or swelling at the IV site during the infusion",
+    "Report new shortness of breath or cough",
+    "Avoid pregnancy and breastfeeding during treatment; mouth sores and hair loss can occur"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect after intracellular activation and DNA cross-linking"],
+    ["Peak", "Maximal serum concentrations immediately after IV bolus (e.g. ~2.4 mcg/mL after 30 mg)"],
+    ["Half-life", "Serum concentration falls by 50% about 17 minutes after a 30 mg IV bolus"],
+    ["Duration", "Dosing every 6-8 weeks because of cumulative, delayed myelosuppression"],
+    ["Storage", "Store dry powder at 25 C (excursions 15-30 C); protect from light; reconstituted solution refrigerated 2-8 C, discard after 14 days (7 days if unrefrigerated)"]
+  ],
+  "pearls": [
+    "Boxed warning: cumulative, sometimes irreversible bone-marrow suppression and hemolytic uremic syndrome (HUS)",
+    "HUS occurs mostly at cumulative doses >=60 mg and may be worsened by blood transfusions",
+    "Potent vesicant - administer IV only with great care; extravasation causes severe, sometimes delayed, tissue necrosis",
+    "Doses above 20 mg/m2 are more toxic without added efficacy",
+    "Concurrent vinca alkaloids can precipitate acute pulmonary toxicity"
+  ],
+  "missed": "Mitomycin is administered by a healthcare professional on a fixed cycle (every 6-8 weeks). There is no patient-managed missed dose; if a treatment appointment is missed, contact the oncology team, who will reschedule based on hematologic recovery.",
+  "overdose": "Overdose would be expected to intensify dose-dependent toxicities, particularly profound and prolonged myelosuppression, along with nausea, vomiting and organ toxicity. There is no specific antidote; management is supportive, including blood-product support, treatment of infection and intensive monitoring of blood counts and renal function.",
+  "refs": [
+    ["FDA Mitomycin for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mitomycin%22"],
+    ["DailyMed - Mitomycin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

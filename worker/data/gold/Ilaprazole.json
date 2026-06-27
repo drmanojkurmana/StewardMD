@@ -1,0 +1,110 @@
+{
+  "generic": "Ilaprazole",
+  "cls": "Proton pump inhibitor (substituted benzimidazole)",
+  "pharm": "Long-acting proton pump inhibitor that irreversibly inhibits gastric H+/K+-ATPase to suppress acid secretion; used for acid-peptic disorders",
+  "tags": ["PPI", "Acid suppression", "Peptic ulcer", "GERD", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "10-20 mg once daily (duodenal ulcer typically 10 mg)"],
+    ["Meal", "Before a meal, usually in the morning"],
+    ["Pregnancy", "Avoid unless clearly needed; limited data"],
+    ["Lactation", "Avoid; limited data"],
+    ["Renal", "No specific adjustment expected"],
+    ["Hepatic", "Caution in severe impairment"],
+    ["Alcohol", "Limit (gastric irritation)"],
+    ["Monitoring", "Symptom response, Mg/B12 on long-term use"]
+  ],
+  "summary": "Ilaprazole is a long-acting substituted-benzimidazole proton pump inhibitor that irreversibly inhibits the gastric H+/K+-ATPase, providing prolonged suppression of gastric acid secretion. It is used for duodenal and gastric ulcers, reflux esophagitis and as part of Helicobacter pylori eradication regimens. Its long half-life and largely CYP3A4-mediated (rather than CYP2C9-dependent) metabolism reduce variability between CYP2C19 metabolizer phenotypes. It is approved in countries such as South Korea, China and India but is not FDA-approved in the United States; long-term PPI class precautions apply.",
+  "indications": [
+    "Duodenal ulcer",
+    "Gastric ulcer",
+    "Reflux esophagitis / gastroesophageal reflux disease",
+    "Helicobacter pylori eradication (combination therapy)"
+  ],
+  "dosage": [
+    {"c": "Duodenal ulcer", "r": "Oral", "d": "10 mg once daily", "t": "OD", "n": "Typically 4 weeks"},
+    {"c": "Gastric ulcer / reflux esophagitis", "r": "Oral", "d": "10-20 mg once daily", "t": "OD", "n": "Typically 6-8 weeks"},
+    {"c": "Helicobacter pylori eradication", "r": "Oral", "d": "10-20 mg twice daily with two antibiotics", "t": "BID", "n": "Usually 7-14 days as part of a regimen"},
+    {"c": "Severe hepatic impairment", "r": "Oral", "d": "Use with caution; consider lower dose", "t": "OD", "n": "Limited data"}
+  ],
+  "admin": [
+    "Take once daily, typically in the morning before food",
+    "Swallow the tablet whole with water; do not crush or chew enteric-coated tablets",
+    "For H. pylori, take together with the prescribed antibiotics",
+    "Use the lowest effective dose for the shortest duration needed"
+  ],
+  "moa": "A prodrug that accumulates in the acidic secretory canaliculi of gastric parietal cells, where it is converted to the active sulfenamide and covalently binds cysteine residues of the H+/K+-ATPase (proton pump), irreversibly inhibiting the final step of gastric acid secretion; its long duration of action gives sustained acid suppression.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to ilaprazole or other substituted benzimidazole PPIs",
+      "Concomitant use with rilpivirine"
+    ],
+    "relative": [
+      "Severe hepatic impairment",
+      "Long-term/high-dose use (osteoporosis, hypomagnesemia, B12 deficiency risk)",
+      "Possible masking of gastric malignancy",
+      "Concurrent drugs needing gastric acid for absorption"
+    ],
+    "monitor": ["Symptom resolution", "Serum magnesium on long-term use", "Vitamin B12 on prolonged therapy", "Bone health with long-term use"]
+  },
+  "preg": "Limited data; avoid in pregnancy unless the benefit clearly outweighs the risk.",
+  "lact": "Limited data on excretion in breast milk; avoid or use with caution during breastfeeding.",
+  "renal": "No specific dose adjustment is generally expected, as elimination is largely non-renal; use clinical judgement.",
+  "hepatic": "Use with caution in severe hepatic impairment, where clearance may be reduced; consider a lower dose.",
+  "interactions": {
+    "major": [
+      "Rilpivirine - reduced absorption and antiviral efficacy (avoid)",
+      "Atazanavir / nelfinavir - markedly reduced antiretroviral levels"
+    ],
+    "moderate": [
+      "Drugs needing acid for absorption (ketoconazole, itraconazole, iron salts, erlotinib) - reduced absorption",
+      "Methotrexate (high dose) - delayed clearance",
+      "Digoxin - increased levels",
+      "Warfarin - possible altered INR"
+    ],
+    "minor": ["CYP3A4 inducers/inhibitors - altered ilaprazole metabolism"],
+    "food": "Best taken before a meal; food may modestly affect absorption",
+    "alcohol": "Limit; alcohol can aggravate gastric irritation",
+    "diagnostics": "Suppressed acid can cause false-negative urea breath tests and elevated chromogranin A; can affect H. pylori testing"
+  },
+  "se": {
+    "common": ["Headache", "Diarrhea", "Constipation", "Abdominal pain", "Nausea", "Flatulence", "Dizziness"],
+    "serious": [
+      "Clostridioides difficile-associated diarrhea",
+      "Hypomagnesemia (long-term use)",
+      "Vitamin B12 deficiency (prolonged use)",
+      "Bone fractures with long-term high-dose use",
+      "Acute interstitial nephritis"
+    ],
+    "rare": ["Severe cutaneous reactions (SJS/TEN, DRESS)", "Subacute cutaneous lupus erythematosus", "Hepatic dysfunction", "Anaphylaxis"],
+    "emergency": ["Anaphylaxis", "Severe skin reaction (SJS/TEN/DRESS)", "Severe C. difficile colitis", "Symptomatic hypomagnesemia (arrhythmia, seizures)"]
+  },
+  "monitoring": ["Symptom and ulcer/reflux response", "Serum magnesium (long-term use)", "Vitamin B12 (prolonged therapy)", "Renal function if interstitial nephritis suspected"],
+  "counsel": [
+    "Take once daily before food, usually in the morning",
+    "Swallow the tablet whole; do not crush or chew",
+    "Use for the shortest effective duration; report ongoing symptoms",
+    "Report persistent diarrhea, muscle cramps, palpitations or severe rash",
+    "Tell your doctor about HIV medicines and other drugs you take",
+    "Long-term use can affect magnesium, vitamin B12 and bone health"
+  ],
+  "pk": [
+    ["Onset", "Acid suppression within hours; full effect over a few days"],
+    ["Peak", "~2-4 h"],
+    ["Half-life", "~3.5-9 h (long for a PPI; prolonged acid suppression)"],
+    ["Duration", "Acid suppression persists well beyond plasma half-life (>24 h)"],
+    ["Storage", "Below 25-30 C, protect from light and moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved; approved in South Korea, China and India among others",
+    "Longer-acting than older PPIs, giving sustained acid suppression",
+    "Metabolism is less dependent on CYP2C19, reducing inter-patient variability",
+    "Apply PPI class cautions: hypomagnesemia, B12 deficiency, fractures, C. difficile, interstitial nephritis",
+    "Avoid with rilpivirine and acid-dependent antiretrovirals; pending clinical review for FDA status"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip it and resume the usual schedule. Do not double up.",
+  "overdose": "Experience is limited; expect exaggerated pharmacologic effects with no specific syndrome. Management is symptomatic and supportive; ilaprazole is highly protein-bound and not readily dialyzable, and there is no specific antidote.",
+  "refs": [
+    ["National SmPC / Approval - Ilaprazole (Korea/China/India)", "https://www.cdsco.gov.in/opencms/opencms/en/Home/"],
+    ["FDA PPI class safety communications (hypomagnesemia, fractures, C. difficile)", "https://www.fda.gov/drugs/drug-safety-and-availability"]
+  ]
+}

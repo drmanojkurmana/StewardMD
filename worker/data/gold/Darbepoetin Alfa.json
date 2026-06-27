@@ -1,0 +1,138 @@
+{
+  "generic": "Darbepoetin Alfa",
+  "cls": "Erythropoiesis-stimulating agent (ESA), recombinant long-acting erythropoietin analogue",
+  "pharm": "Stimulates red blood cell production via erythropoietin receptors; longer half-life than epoetin alfa",
+  "tags": ["ESA", "Anemia", "CKD", "Chemotherapy anemia", "Boxed warning: thrombosis/mortality/tumor progression"],
+  "quick": [
+    ["Adult dose", "CKD: 0.45 mcg/kg IV/SC weekly; cancer: 2.25 mcg/kg SC weekly"],
+    ["Meal", "Not applicable (injectable)"],
+    ["Pregnancy", "Insufficient data; weigh benefit/risk"],
+    ["Lactation", "Likely minimal transfer; large protein"],
+    ["Renal", "Used in CKD anemia; IV preferred in hemodialysis"],
+    ["Hepatic", "No specific dose adjustment established"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Hgb, BP, iron studies, thrombosis, seizures"]
+  ],
+  "summary": "Darbepoetin alfa (Aranesp) is a long-acting erythropoiesis-stimulating agent used to treat anemia due to chronic kidney disease and anemia from myelosuppressive chemotherapy. It carries a boxed warning: ESAs increase the risk of death, myocardial infarction, stroke, venous thromboembolism, thrombosis of vascular access, and tumor progression or recurrence. Use the lowest dose sufficient to avoid red blood cell transfusion, do not target hemoglobin above 11 g/dL in CKD, and ensure adequate iron stores. In cancer, use only for chemotherapy-induced anemia where cure is not the anticipated outcome.",
+  "indications": [
+    "Anemia due to chronic kidney disease (CKD) - dialysis and non-dialysis patients",
+    "Anemia due to concomitant myelosuppressive chemotherapy (with >=2 additional months of planned chemo)"
+  ],
+  "dosage": [
+    {"c": "CKD on dialysis - initial", "r": "IV or SC", "d": "0.45 mcg/kg weekly OR 0.75 mcg/kg every 2 weeks", "t": "Weekly or every 2 weeks", "n": "IV route recommended in hemodialysis"},
+    {"c": "CKD not on dialysis - initial", "r": "IV or SC", "d": "0.45 mcg/kg every 4 weeks", "t": "Every 4 weeks", "n": "May also use 0.75 mcg/kg every 2 weeks"},
+    {"c": "Pediatric CKD - initial", "r": "IV or SC", "d": "0.45 mcg/kg weekly", "t": "Weekly", "n": "Non-dialysis may start 0.75 mcg/kg every 2 weeks"},
+    {"c": "Chemotherapy-induced anemia", "r": "SC", "d": "2.25 mcg/kg weekly OR 500 mcg every 3 weeks", "t": "Weekly or every 3 weeks", "n": "Discontinue after chemotherapy completed"},
+    {"c": "Titration", "r": "IV/SC", "d": "Adjust based on Hgb response", "t": "Per protocol", "n": "Do not exceed Hgb 11 g/dL (CKD); use lowest effective dose"}
+  ],
+  "admin": [
+    "Administer IV or SC; do not shake (may denature/inactivate)",
+    "Evaluate and maintain iron status; supplement iron if needed",
+    "For hemodialysis patients, IV route is recommended",
+    "Use lowest dose sufficient to reduce need for RBC transfusions; do not exceed target Hgb 11 g/dL in CKD"
+  ],
+  "moa": "Stimulates erythropoiesis by the same mechanism as endogenous erythropoietin - binds and activates the erythropoietin receptor on erythroid progenitor cells, promoting proliferation and differentiation into mature red blood cells. Increased glycosylation gives a longer half-life than epoetin alfa.",
+  "contra": {
+    "absolute": [
+      "Uncontrolled hypertension",
+      "Pure red cell aplasia (PRCA) that begins after treatment with darbepoetin or other erythropoietin protein drugs",
+      "Serious allergic reactions to darbepoetin alfa"
+    ],
+    "relative": [
+      "Cardiovascular disease or stroke history",
+      "Active or recent malignancy (tumor progression risk)",
+      "Seizure disorder (in CKD)",
+      "Hypercoagulable states",
+      "Inadequate iron stores (treat first)"
+    ],
+    "monitor": [
+      "Hemoglobin (do not exceed 11 g/dL in CKD)",
+      "Blood pressure",
+      "Iron studies (ferritin, TSAT)",
+      "Thromboembolic signs",
+      "Seizure activity"
+    ]
+  },
+  "preg": "Limited data are insufficient to determine a drug-associated risk; animal studies showed increased early post-implantation loss near clinical starting doses. Weigh maternal benefits and fetal risks.",
+  "lact": "No data on presence in human milk; as a large glycoprotein, significant transfer/oral absorption by the infant is unlikely. Consider maternal need and infant risk.",
+  "renal": "Primary use is CKD-associated anemia; effective in both dialysis and non-dialysis patients. Intravenous administration is recommended for patients on hemodialysis.",
+  "hepatic": "No specific dosage adjustment for hepatic impairment is established; use with general caution.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Other agents increasing thrombosis risk - additive thromboembolic risk"
+    ],
+    "minor": [
+      "Iron deficiency or therapy - inadequate iron blunts response; iron supplementation enhances response"
+    ],
+    "food": "Not applicable (parenteral)",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Increases hemoglobin/hematocrit and reticulocyte count; monitor iron indices"
+  },
+  "se": {
+    "common": [
+      "Hypertension",
+      "Peripheral edema",
+      "Dyspnea",
+      "Cough",
+      "Procedural hypotension (dialysis)",
+      "Injection-site pain",
+      "Arthralgia/myalgia"
+    ],
+    "serious": [
+      "Thromboembolic events (MI, stroke, DVT/PE, vascular access thrombosis)",
+      "Increased mortality/tumor progression in cancer",
+      "Severe hypertension/hypertensive encephalopathy",
+      "Seizures (CKD)",
+      "Pure red cell aplasia"
+    ],
+    "rare": [
+      "Severe cutaneous reactions (SJS/TEN, erythema multiforme)",
+      "Anaphylaxis/serious allergic reactions",
+      "Antibody-mediated PRCA"
+    ],
+    "emergency": [
+      "MI/stroke",
+      "Pulmonary embolism / extensive thrombosis",
+      "Severe hypertensive crisis with encephalopathy/seizure",
+      "Anaphylaxis",
+      "Severe cutaneous reaction"
+    ]
+  },
+  "monitoring": [
+    "Hemoglobin (weekly until stable, then periodically)",
+    "Blood pressure before and during treatment",
+    "Iron studies (ferritin, transferrin saturation)",
+    "Signs/symptoms of thromboembolism",
+    "Seizure activity in CKD patients",
+    "Response (avoid rapid Hgb rise >1 g/dL in 2 weeks)"
+  ],
+  "counsel": [
+    "Anemia improvement may take 2-6 weeks - not an immediate effect",
+    "Report chest pain, shortness of breath, leg swelling, weakness, or slurred speech",
+    "Blood pressure must be controlled; report severe headache",
+    "Iron supplementation is usually needed for the drug to work",
+    "Do not shake the syringe/vial",
+    "If you have cancer, this drug is used only during chemotherapy",
+    "Attend all blood-test appointments"
+  ],
+  "pk": [
+    ["Onset", "Reticulocyte rise in days; Hgb rise ~2-6 weeks"],
+    ["Peak", "SC tmax ~34-48 h"],
+    ["Half-life", "IV ~21 h; SC ~49 h (longer than epoetin)"],
+    ["Duration", "Allows weekly to every-3-4-week dosing"],
+    ["Storage", "Refrigerate 2-8 C; do not freeze or shake; protect from light"]
+  ],
+  "pearls": [
+    "Longer half-life than epoetin alfa allows less frequent dosing",
+    "Boxed warning: increased mortality, thrombosis, and tumor progression - use lowest effective dose, avoid Hgb >11 g/dL in CKD",
+    "Always correct iron deficiency before/while treating - hyporesponsiveness often reflects iron deficiency, infection, or inflammation",
+    "In cancer, avoid when the anticipated chemotherapy outcome is cure; discontinue after chemotherapy course"
+  ],
+  "missed": "If a scheduled dose is missed, administer as soon as possible and resume the regular dosing schedule; do not give two doses close together. Contact the prescriber for rescheduling guidance.",
+  "overdose": "Excessive dosing causes polycythemia with risk of hypertension, headache, and thrombotic events. Management: hold therapy, monitor hemoglobin, manage hypertension; phlebotomy may be considered if clinically indicated.",
+  "refs": [
+    ["FDA Aranesp (darbepoetin alfa) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22DARBEPOETIN%20ALFA%22"],
+    ["DailyMed - Aranesp", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=darbepoetin"]
+  ]
+}

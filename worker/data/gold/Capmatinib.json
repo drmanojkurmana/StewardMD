@@ -1,0 +1,88 @@
+{
+  "generic": "Capmatinib",
+  "cls": "Kinase inhibitor (MET inhibitor)",
+  "pharm": "Antineoplastic / targeted therapy",
+  "tags": ["NSCLC", "MET exon 14 skipping", "kinase inhibitor", "targeted therapy", "antineoplastic"],
+  "quick": [
+    ["Adult dose", "400 mg PO twice daily"],
+    ["Meal", "With or without food; swallow whole"],
+    ["Pregnancy", "Can cause fetal harm; avoid"],
+    ["Lactation", "Do not breastfeed during and 1 week after"],
+    ["Renal", "No adjustment in mild-moderate; not studied in severe/ESRD"],
+    ["Hepatic", "No adjustment in mild-moderate; not studied in severe"],
+    ["Alcohol", "Limit; additive hepatotoxicity risk"],
+    ["Monitoring", "LFTs, pulmonary symptoms (ILD), amylase/lipase"]
+  ],
+  "summary": "Capmatinib is an oral MET kinase inhibitor for adults with metastatic non-small cell lung cancer (NSCLC) whose tumors have a mutation leading to mesenchymal-epithelial transition (MET) exon 14 skipping. The dose is 400 mg twice daily with or without food. Key risks are interstitial lung disease/pneumonitis (which can be fatal), hepatotoxicity, pancreatic enzyme elevation, and photosensitivity.",
+  "indications": [
+    "Metastatic non-small cell lung cancer (NSCLC) in adults whose tumors have a mutation leading to mesenchymal-epithelial transition (MET) exon 14 skipping, as detected by an FDA-approved test"
+  ],
+  "dosage": [
+    {"c": "Metastatic NSCLC with MET exon 14 skipping (adult)", "r": "Standard", "d": "400 mg twice daily", "t": "Twice daily", "n": "Swallow tablets whole; with or without food; continue until disease progression or unacceptable toxicity"},
+    {"c": "Dose reduction - first level", "r": "Reduced", "d": "300 mg twice daily", "t": "Twice daily", "n": "For adverse reactions per label"},
+    {"c": "Dose reduction - second level", "r": "Reduced", "d": "200 mg twice daily", "t": "Twice daily", "n": "Permanently discontinue if unable to tolerate 200 mg twice daily"},
+    {"c": "Interstitial lung disease / pneumonitis", "r": "Discontinue", "d": "Permanently discontinue", "t": "N/A", "n": "Withhold if ILD suspected; discontinue if confirmed"}
+  ],
+  "admin": [
+    "Swallow tablets whole; do not break, crush or chew",
+    "May be taken with or without food",
+    "Take at approximately the same times each day, about 12 hours apart",
+    "If a dose is vomited or missed, skip it and take the next dose at the scheduled time"
+  ],
+  "moa": "Capmatinib is an inhibitor of MET, including the mutant variant produced by exon 14 skipping. MET exon 14 skipping leads to a protein with decreased turnover and resultant increased MET signaling. Capmatinib inhibits MET phosphorylation triggered by ligand binding or MET amplification, as well as MET-mediated downstream signaling and proliferation of tumor cells dependent on MET.",
+  "contra": {
+    "absolute": [],
+    "relative": ["Pregnancy (fetal harm)", "Pre-existing interstitial lung disease/pneumonitis", "Significant hepatic impairment (not studied in severe)"],
+    "monitor": ["Concomitant strong CYP3A inhibitors or inducers", "Drugs sensitive to P-gp or BCRP transport", "Photosensitizing agents"]
+  },
+  "preg": "Based on its mechanism and animal findings, capmatinib can cause fetal harm. Advise pregnant women of the potential risk to a fetus. Females of reproductive potential should use effective non-hormonal contraception during treatment and for 1 week after the final dose; verify pregnancy status before starting.",
+  "lact": "There are no data on the presence of capmatinib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 1 week after the final dose.",
+  "renal": "No dose adjustment is recommended for mild to moderate renal impairment. The pharmacokinetics in severe renal impairment or end-stage renal disease have not been studied.",
+  "hepatic": "No dose adjustment is recommended for mild or moderate hepatic impairment. Capmatinib has not been studied in severe hepatic impairment. Monitor liver function tests; hepatotoxicity can be serious. Withhold, reduce, or discontinue based on the severity of transaminase/bilirubin elevations.",
+  "interactions": {
+    "major": ["Strong CYP3A inhibitors (e.g., ketoconazole, itraconazole) - increase capmatinib exposure and toxicity; monitor and reduce dose if needed", "Strong and moderate CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin, St. John's wort) - decrease capmatinib exposure; avoid coadministration"],
+    "moderate": ["P-gp substrates (e.g., digoxin) - capmatinib may increase their concentrations; monitor for toxicity", "BCRP substrates (e.g., rosuvastatin, sulfasalazine) - capmatinib may increase their concentrations; monitor"],
+    "minor": ["Photosensitizing drugs - additive photosensitivity"],
+    "food": "May be taken with or without food; a high-fat meal does not have a clinically meaningful effect on exposure.",
+    "alcohol": "Limit alcohol owing to additive potential for hepatotoxicity.",
+    "diagnostics": "May increase ALT, AST, bilirubin, amylase and lipase; may cause lymphopenia and decreased albumin."
+  },
+  "se": {
+    "common": ["Peripheral edema", "Nausea", "Fatigue", "Vomiting", "Dyspnea", "Decreased appetite", "Constipation", "Diarrhea", "Cough", "Back pain", "Non-cardiac chest pain"],
+    "serious": ["Interstitial lung disease / pneumonitis (can be fatal)", "Hepatotoxicity", "Increased amylase and lipase / pancreatitis risk", "Photosensitivity"],
+    "rare": ["Severe hepatic injury", "Severe ILD requiring discontinuation"],
+    "emergency": ["Acute interstitial lung disease / pneumonitis with respiratory failure", "Acute hepatic failure"]
+  },
+  "monitoring": [
+    "Pulmonary symptoms (dyspnea, cough, fever) - evaluate promptly for ILD/pneumonitis",
+    "Liver function tests (ALT, AST, total bilirubin) before starting, every 2 weeks during the first 3 months, then monthly or as indicated",
+    "Serum amylase and lipase periodically",
+    "Disease response and tolerance for dose modification"
+  ],
+  "counsel": [
+    "Take twice daily about 12 hours apart, with or without food; swallow whole",
+    "Report any new or worsening shortness of breath, cough, or fever right away (lung inflammation)",
+    "Report yellowing of skin/eyes, dark urine or right-sided abdominal pain (liver injury)",
+    "Avoid prolonged sun exposure; use sunscreen and protective clothing (photosensitivity)",
+    "Use effective non-hormonal contraception; do not breastfeed during and for 1 week after the last dose"
+  ],
+  "pk": [
+    ["Onset", "Inhibits MET signaling rapidly after absorption"],
+    ["Peak", "Median Tmax 1 to 2 hours"],
+    ["Half-life", "Approximately 6.5 hours"],
+    ["Duration", "Twice-daily dosing maintains exposure; steady state by day 3"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Indicated only for MET exon 14 skipping NSCLC confirmed by an FDA-approved test",
+    "ILD/pneumonitis can be fatal - any new respiratory symptom warrants prompt evaluation and treatment interruption",
+    "Avoid strong/moderate CYP3A inducers; they substantially lower capmatinib levels",
+    "Counsel on photosensitivity and sun protection"
+  ],
+  "missed": "If a dose is missed or the patient vomits after taking a dose, do not make up the dose; take the next dose at the regularly scheduled time.",
+  "overdose": "There is no specific antidote for capmatinib overdose. Management consists of stopping the drug and providing general supportive care with monitoring of organ function (especially pulmonary and hepatic) and treatment of symptoms.",
+  "refs": [
+    ["FDA Capmatinib (Tabrecta) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22capmatinib%22"],
+    ["FDA DailyMed - Capmatinib", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

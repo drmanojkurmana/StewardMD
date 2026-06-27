@@ -1,0 +1,101 @@
+{
+  "generic": "Atracurium",
+  "cls": "Nondepolarizing skeletal muscle relaxant (neuromuscular blocker)",
+  "pharm": "Neuromuscular blocking agent",
+  "tags": ["atracurium", "atracurium besylate", "neuromuscular blocker", "nondepolarizing", "intubation", "paralytic"],
+  "quick": [
+    ["Adult dose", "IV bolus 0.4-0.5 mg/kg for intubation; maintenance 0.08-0.1 mg/kg"],
+    ["Meal", "Not applicable; IV use only during anesthesia"],
+    ["Pregnancy", "Potentially teratogenic in rabbits; use only if benefit justifies fetal risk"],
+    ["Lactation", "Unknown if excreted in human milk; use caution"],
+    ["Renal", "No dosage adjustment needed; block not altered by absence of renal function"],
+    ["Hepatic", "No adjustment; cleared by Hofmann elimination and ester hydrolysis, not liver-dependent"],
+    ["Alcohol", "Not applicable to procedural IV use"],
+    ["Monitoring", "Causes respiratory paralysis - mechanical ventilation MANDATORY; monitor with peripheral nerve stimulator"]
+  ],
+  "summary": "Atracurium besylate is an intravenous nondepolarizing neuromuscular blocker used as an adjunct to general anesthesia to facilitate endotracheal intubation and provide skeletal muscle relaxation during surgery or mechanical ventilation. WARNING: it causes respiratory paralysis - the patient MUST be mechanically ventilated, and it should be used only by clinicians skilled in airway management with equipment and personnel for intubation and ventilation (including positive-pressure oxygen) immediately available. It has NO effect on consciousness, pain threshold, or cerebration, so it provides no analgesia or sedation and must be used only with adequate anesthesia. Unique among relaxants, it is inactivated by Hofmann elimination and ester hydrolysis, so dosing is unchanged in renal or hepatic failure.",
+  "indications": [
+    "Adjunct to general anesthesia to facilitate endotracheal intubation",
+    "Skeletal muscle relaxation during surgery",
+    "Skeletal muscle relaxation during mechanical ventilation"
+  ],
+  "dosage": [
+    {"c": "Intubation / initial block (adults)", "r": "IV bolus", "d": "0.4 to 0.5 mg/kg", "t": "Good/excellent intubation conditions in 2-2.5 min; max block 3-5 min; block lasts 20-35 min", "n": "1.7-2.2 times the ED95 (~0.23 mg/kg); do NOT give before unconsciousness is induced"},
+    {"c": "Initial dose under steady-state isoflurane/enflurane", "r": "IV bolus", "d": "0.25 to 0.35 mg/kg (reduce by ~1/3)", "t": "As above", "n": "Adjusts for potentiation by these inhalation agents; smaller reduction with halothane"},
+    {"c": "Maintenance of block (adults)", "r": "IV bolus", "d": "0.08 to 0.1 mg/kg (up to 0.2 mg/kg for longer intervals)", "t": "First dose ~20-45 min after initial; then every 15-25 min", "n": "Lacks cumulative effect; guide by clinical criteria/nerve stimulation"},
+    {"c": "Cardiovascular disease or histamine-release risk", "r": "IV, slow or divided over 1 min", "d": "0.3 to 0.4 mg/kg", "t": "Over 1 minute", "n": "Also for asthma/anaphylactoid history; consider reductions in neuromuscular disease, severe electrolyte disorders, carcinomatosis"},
+    {"c": "Infants (1 month to 2 years) under halothane", "r": "IV bolus", "d": "0.3 to 0.4 mg/kg", "t": "Maintenance may be needed slightly more often than adults", "n": "Children >=2 years use adult dosing; not established below 1 month"},
+    {"c": "Continuous infusion (OR, adults and children >=2 yr)", "r": "IV infusion after bolus", "d": "Initial 9-10 mcg/kg/min, then 5-9 mcg/kg/min (range 2-15)", "t": "Start only after early spontaneous recovery from bolus", "n": "Titrate to peripheral nerve stimulation; reduce ~1/3 with enflurane/isoflurane; ~half during hypothermia (25-28C)"},
+    {"c": "Continuous infusion (ICU, adults)", "r": "IV infusion", "d": "11-13 mcg/kg/min (range 4.5-29.5)", "t": "Continuous; requirements may change over time", "n": "Pediatric ICU rates may be higher; wide interpatient variability"},
+    {"c": "After succinylcholine intubation (adults)", "r": "IV bolus", "d": "0.3 to 0.4 mg/kg", "t": "Only after recovery from succinylcholine block", "n": "Further reduction may be desirable with potent inhalation anesthetics"}
+  ],
+  "admin": [
+    "Give intravenously ONLY - do NOT give by intramuscular administration (causes tissue irritation; no data supporting IM)",
+    "Do not administer before unconsciousness has been induced, to avoid patient distress",
+    "Use only with equipment and personnel immediately available for endotracheal intubation and ventilation, including positive-pressure oxygen; anticholinesterase reversal agents must be immediately available",
+    "Use a peripheral nerve stimulator to guide dosing and assess recovery",
+    "Do NOT mix in the same syringe or give simultaneously through the same needle with alkaline solutions (e.g., barbiturates); atracurium has acid pH and may be inactivated/precipitate",
+    "Dilute for infusion with 5% Dextrose, 0.9% NaCl, or 5% Dextrose/0.9% NaCl; do NOT use Lactated Ringer's (faster degradation); use infusion solutions within 24 hours",
+    "Inspect visually for particulate matter and discoloration before use",
+    "Store vials with cap and ferrule intact and avoid product confusion - accidental administration may be fatal"
+  ],
+  "moa": "Atracurium is a nondepolarizing skeletal muscle relaxant that competitively binds cholinergic receptor sites on the motor end-plate, antagonizing the neurotransmitter action of acetylcholine. This antagonism is reversed by acetylcholinesterase inhibitors such as neostigmine, edrophonium, and pyridostigmine. It is inactivated in plasma by two nonoxidative pathways: ester hydrolysis by nonspecific esterases and Hofmann elimination (a nonenzymatic chemical process at physiologic pH), so its duration is independent of renal, hepatic, and plasma pseudocholinesterase function. It has no effect on consciousness, pain threshold, or cerebration.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to atracurium besylate", "Use of multiple-dose vials containing benzyl alcohol in patients with known hypersensitivity to benzyl alcohol"],
+    "relative": ["Significant cardiovascular disease (use lower dose given slowly due to histamine release/hypotension risk)", "History of anaphylactoid reactions or asthma (greater histamine-release risk)", "Neuromuscular disease, severe electrolyte disorders, or carcinomatosis (altered/potentiated block)", "Neonates - benzyl alcohol-containing vials associated with serious, sometimes fatal complications"],
+    "monitor": ["Degree of block and recovery via peripheral nerve stimulator", "Adequacy of ventilation/respiration", "Hemodynamics and signs of histamine release"]
+  },
+  "preg": "Atracurium besylate has been shown to be potentially teratogenic in rabbits at doses up to approximately one-half the human dose, with respiratory distress, increased post-implantation losses, and skeletal/visceral anomalies in animal studies. There are no adequate and well-controlled studies in pregnant women. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Some placental transfer occurs in humans.",
+  "lact": "It is not known whether atracurium is excreted in human milk. Because many drugs are excreted in human milk, exercise caution when administering atracurium besylate to a nursing woman.",
+  "renal": "No dosage adjustment is required for patients with renal disease. The duration of neuromuscular block does NOT correlate with plasma pseudocholinesterase levels and is NOT altered by the absence of renal function, because atracurium is inactivated by Hofmann elimination and ester hydrolysis rather than renal excretion.",
+  "hepatic": "No dosage adjustment is needed for hepatic impairment. Neither kidney nor liver plays a major role in elimination; atracurium is inactivated by Hofmann elimination and nonspecific ester hydrolysis, so duration of block is independent of hepatic function.",
+  "interactions": {
+    "major": ["Aminoglycoside and polymyxin antibiotics (enhance neuromuscular block)", "Inhalation anesthetics enflurane and isoflurane (potentiate block ~35%; reduce dose)"],
+    "moderate": ["Halothane (marginal ~20% potentiation)", "Lithium, magnesium salts, procainamide, quinidine (enhance block)", "Other muscle relaxants (possible synergistic or antagonist effect)", "Succinylcholine (does not prolong duration but quickens onset and may deepen block; give atracurium only after recovery from succinylcholine block)"],
+    "minor": [],
+    "food": "Not applicable - intravenous use during anesthesia only.",
+    "alcohol": "Not applicable - intravenous use during anesthesia only.",
+    "diagnostics": "Monitor muscle twitch response with a peripheral nerve stimulator to gauge block and recovery; do not mix with alkaline (barbiturate) solutions."
+  },
+  "se": {
+    "common": ["Skin flushing (histamine-mediated, more frequent at higher doses)", "Erythema", "Itching"],
+    "serious": ["Hypotension and vasodilatation", "Bronchospasm, laryngospasm, dyspnea, wheezing", "Tachycardia or bradycardia", "Prolonged or inadequate block"],
+    "rare": ["Severe anaphylactic/anaphylactoid reactions (including cardiac arrest), sometimes life-threatening or fatal", "Seizures in ICU patients on long-term infusion (possible role of metabolite laudanosine)", "Hives, urticaria, injection-site reaction"],
+    "emergency": ["Respiratory paralysis/arrest if ventilation not maintained", "Anaphylaxis with cardiovascular collapse", "Severe bronchospasm/laryngospasm"]
+  },
+  "monitoring": [
+    "Continuous adequacy of ventilation - patient must be mechanically ventilated",
+    "Peripheral nerve stimulator to monitor depth of block, avoid over/underdosing, and assess recovery",
+    "Hemodynamics (blood pressure, heart rate) and signs of histamine release",
+    "Respiratory parameters for prolonged or incomplete block before extubation",
+    "Reversal adequacy when anticholinesterase agents are given"
+  ],
+  "counsel": [
+    "This medication causes complete muscle paralysis including the muscles needed to breathe; you will be on a ventilator and require general anesthesia",
+    "It does not cause sleep or relieve pain - it is always given together with anesthetic/sedative drugs",
+    "Report any prior allergic reactions to muscle relaxants or to benzyl alcohol",
+    "Recovery of muscle strength is monitored before the breathing tube is removed"
+  ],
+  "pk": [
+    ["Onset", "Max block 3-5 min; good/excellent intubation conditions in 2-2.5 min"],
+    ["Peak", "Maximum neuromuscular block ~3-5 min after 0.4-0.5 mg/kg"],
+    ["Half-life", "Elimination half-life ~20 minutes"],
+    ["Duration", "Clinically required block ~20-35 min; 95% recovery ~60-70 min (balanced anesthesia)"],
+    ["Storage", "Refrigerate 2-8C (36-46F); do NOT freeze; protect from light; use within 14 days if kept at 25C"]
+  ],
+  "pearls": [
+    "Causes respiratory paralysis - the patient MUST be mechanically ventilated; use only by clinicians skilled in airway management with intubation/ventilation equipment, positive-pressure oxygen, and anticholinesterase reversal agents immediately available.",
+    "Provides NO analgesia, sedation, or effect on consciousness - must always be used with adequate anesthesia; giving it to a conscious patient causes distress and awareness while paralyzed.",
+    "Eliminated by Hofmann elimination and ester hydrolysis, so NO dose adjustment is needed in renal or hepatic failure and duration is independent of pseudocholinesterase.",
+    "Do NOT give intramuscularly - IV route only.",
+    "Histamine release (flushing, hypotension, bronchospasm) is dose-related; use 0.3-0.4 mg/kg slowly in cardiovascular disease or histamine-sensitive patients.",
+    "Lacks cumulative effect, so maintenance doses can be given at regular predictable intervals.",
+    "Accidental administration of neuromuscular blockers may be fatal - confirm product selection and labeling; reversible with neostigmine/edrophonium/pyridostigmine plus atropine or glycopyrrolate."
+  ],
+  "missed": "Not applicable. Atracurium is administered by a clinician during anesthesia/critical care and titrated to peripheral nerve stimulation; there is no patient-managed dosing schedule. Maintenance doses or infusion adjustments are given based on monitored neuromuscular response rather than a fixed schedule.",
+  "overdose": "Excessive doses produce enhanced and prolonged neuromuscular block with increased risk of histamine release and cardiovascular effects, especially hypotension; minimize risk by monitoring twitch response with a peripheral nerve stimulator. Maintain the airway with manual or mechanical ventilation as needed; if cardiovascular support is required use proper positioning, fluids, and vasopressors. Recovery may be facilitated by an anticholinesterase reversing agent (neostigmine, edrophonium, or pyridostigmine) with an anticholinergic (atropine or glycopyrrolate); animal deaths from overdose were caused by respiratory paralysis.",
+  "refs": [
+    ["DailyMed - Atracurium Besylate Injection, USP label", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=atracurium+besylate"],
+    ["openFDA drug label - atracurium besylate", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:atracurium+besylate"]
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "generic": "Doripenem",
+  "cls": "Carbapenem beta-lactam antibacterial",
+  "pharm": "Broad-spectrum parenteral carbapenem antibiotic that inhibits bacterial cell wall synthesis; active against many Gram-negative, Gram-positive and anaerobic organisms including Pseudomonas aeruginosa",
+  "tags": ["Antibiotic", "Carbapenem", "Beta-lactam", "Broad-spectrum", "Antipseudomonal", "IV"],
+  "quick": [
+    ["Adult dose", "500 mg IV every 8 hours (1 h infusion)"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Caution; limited data"],
+    ["Renal", "Dose-reduce for CrCl <=50 mL/min"],
+    ["Hepatic", "No adjustment needed"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal function, signs of seizure, hypersensitivity, C. difficile"]
+  ],
+  "summary": "Doripenem is a broad-spectrum parenteral carbapenem antibiotic that inhibits bacterial cell wall synthesis and is stable against many beta-lactamases. It is FDA-approved for complicated intra-abdominal infections and complicated urinary tract infections (including pyelonephritis), with activity against Enterobacterales, Pseudomonas aeruginosa, streptococci and anaerobes. It is given as 500 mg every 8 hours by intravenous infusion, with dose reduction in renal impairment. The FDA added a warning against use in ventilator-associated bacterial pneumonia, where a trial showed lower cure rates and higher mortality than imipenem. Hypersensitivity (including cross-reactivity with other beta-lactams), seizures and Clostridioides difficile colitis are key safety concerns.",
+  "indications": [
+    "Complicated intra-abdominal infections",
+    "Complicated urinary tract infections, including pyelonephritis"
+  ],
+  "dosage": [
+    {"c": "Complicated intra-abdominal infection", "r": "IV", "d": "500 mg every 8 hours by infusion over 1 hour", "t": "q8h", "n": "Usual duration 5-14 days"},
+    {"c": "Complicated UTI / pyelonephritis", "r": "IV", "d": "500 mg every 8 hours by infusion over 1 hour", "t": "q8h", "n": "Usual duration 10 days (up to 14 if bacteremic)"},
+    {"c": "Renal impairment CrCl >30 to <=50 mL/min", "r": "IV", "d": "250 mg every 8 hours", "t": "q8h", "n": ""},
+    {"c": "Renal impairment CrCl >=10 to <=30 mL/min", "r": "IV", "d": "250 mg every 12 hours", "t": "q12h", "n": ""},
+    {"c": "Ventilator-associated bacterial pneumonia", "r": "IV", "d": "Not recommended", "t": "Avoid", "n": "Lower cure and higher mortality vs comparator in trial"}
+  ],
+  "admin": [
+    "Reconstitute and dilute per labeling; administer by intravenous infusion over 1 hour (extended infusion used off-label for resistant organisms)",
+    "Do not give as an IV bolus",
+    "Use within stated stability times after reconstitution",
+    "Adjust dose for renal function (CrCl <=50 mL/min)",
+    "Do not mix with or co-infuse incompatible drugs"
+  ],
+  "moa": "A carbapenem that penetrates the bacterial cell wall and binds penicillin-binding proteins (notably PBP2 and PBP3), inhibiting the cross-linking of peptidoglycan during cell wall synthesis. This leads to cell wall instability and bactericidal cell lysis; doripenem is stable against many beta-lactamases, including AmpC and many ESBLs.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity (e.g. anaphylaxis) to doripenem or other carbapenems",
+      "Anaphylactic reaction to beta-lactam antibiotics"
+    ],
+    "relative": [
+      "History of penicillin or cephalosporin allergy (possible cross-reactivity)",
+      "CNS disorders or seizure history",
+      "Concomitant valproic acid (loss of seizure control)",
+      "Renal impairment (dose adjust)"
+    ],
+    "monitor": ["Renal function (for dosing)", "Signs of hypersensitivity", "Neurologic status / seizures", "Diarrhea / C. difficile", "Valproate levels if co-administered"]
+  },
+  "preg": "Limited human data; animal studies have not shown clear teratogenicity. Use during pregnancy only if clearly needed.",
+  "lact": "Limited data on excretion in breast milk; use with caution and consider monitoring the infant for GI flora effects.",
+  "renal": "Dose adjustment is required for moderate to severe renal impairment: 250 mg every 8 hours for CrCl >30 to <=50 mL/min and 250 mg every 12 hours for CrCl >=10 to <=30 mL/min. Doripenem is removed by hemodialysis; specific guidance for dialysis patients is limited.",
+  "hepatic": "No dose adjustment is required for hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Valproic acid / divalproex - markedly reduced valproate levels with loss of seizure control (avoid combination)"
+    ],
+    "moderate": [
+      "Probenecid - reduced renal clearance of doripenem (co-administration not recommended)"
+    ],
+    "minor": ["Other nephrotoxic drugs - monitor renal function"],
+    "food": "Not applicable (intravenous)",
+    "alcohol": "No specific interaction",
+    "diagnostics": "May cause a positive direct Coombs test; can affect some urinary glucose tests"
+  },
+  "se": {
+    "common": ["Headache", "Nausea", "Diarrhea", "Rash", "Phlebitis / infusion-site reactions", "Anemia", "Elevated hepatic enzymes", "Oral or vulvovaginal candidiasis"],
+    "serious": [
+      "Anaphylaxis and serious hypersensitivity reactions",
+      "Clostridioides difficile-associated diarrhea / pseudomembranous colitis",
+      "Seizures",
+      "Interstitial pneumonitis (reported)",
+      "Development of drug-resistant bacteria with inappropriate use"
+    ],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Acute kidney injury", "Leukopenia / neutropenia / thrombocytopenia"],
+    "emergency": ["Anaphylaxis", "Severe skin reaction (SJS/TEN)", "Status epilepticus / seizures", "Severe C. difficile colitis"]
+  },
+  "monitoring": ["Renal function for dose adjustment", "Signs of hypersensitivity during and after infusion", "Neurologic status (seizure risk)", "Diarrhea / C. difficile", "CBC and liver enzymes on prolonged therapy"],
+  "counsel": [
+    "This antibiotic is given by a drip into a vein, usually every 8 hours",
+    "Tell staff at once about rash, itching, swelling, wheeze or difficulty breathing",
+    "Report severe or persistent watery/bloody diarrhea, even after treatment ends",
+    "Mention any penicillin, cephalosporin or carbapenem allergy and any seizure history",
+    "Tell your doctor if you take valproate for seizures",
+    "Complete the full prescribed course"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal during infusion; rapid plasma levels"],
+    ["Peak", "End of 1-hour infusion"],
+    ["Half-life", "~1 hour (prolonged in renal impairment)"],
+    ["Duration", "Dosed every 8 hours"],
+    ["Storage", "Vials at 20-25 C; reconstituted/diluted solution use within labeled stability period"]
+  ],
+  "pearls": [
+    "FDA-approved for complicated intra-abdominal and complicated urinary tract infections (including pyelonephritis)",
+    "Not for ventilator-associated bacterial pneumonia - a trial showed lower cure rates and higher mortality",
+    "Antipseudomonal carbapenem; extended-infusion dosing is used off-label against less-susceptible Gram-negatives",
+    "Avoid with valproic acid (causes loss of seizure control by lowering valproate levels)",
+    "Cross-reactivity with other beta-lactams; reduce dose for CrCl <=50 mL/min"
+  ],
+  "missed": "Administered on a fixed inpatient schedule; if a dose is delayed, give it as soon as possible and adjust the schedule, maintaining the dosing interval. Doses are managed by the healthcare team rather than the patient.",
+  "overdose": "Limited experience; overdose may increase the risk of seizures and other adverse effects. Discontinue the drug and provide supportive care with anticonvulsants if seizures occur. Doripenem is removed by hemodialysis, which may be considered in overdose with renal impairment.",
+  "refs": [
+    ["FDA Prescribing Information - Doribax (doripenem)", "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=022106"],
+    ["FDA Drug Safety Communication - Doribax (doripenem) and ventilator-associated pneumonia", "https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-doribax-doripenem-and-increased-risk-death-and-lower-clinical-cure"]
+  ]
+}

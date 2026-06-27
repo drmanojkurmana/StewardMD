@@ -1,0 +1,103 @@
+{
+  "generic": "Tigecycline",
+  "cls": "Glycylcycline antibacterial (tetracycline class)",
+  "pharm": "Binds the 30S ribosomal subunit and blocks aminoacyl-tRNA entry into the A site, inhibiting bacterial protein synthesis (bacteriostatic).",
+  "tags": ["Rx only", "Glycylcycline", "Broad-spectrum (incl. MRSA, ESBL)", "IV only", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "100 mg IV loading, then 50 mg IV every 12 hours"],
+    ["Meal", "IV only; not affected by food"],
+    ["Pregnancy", "Avoid; tetracycline class causes fetal harm (teeth/bone)"],
+    ["Lactation", "Avoid; potential effects on infant teeth/bone"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Severe (Child-Pugh C): 100 mg then 25 mg q12h"],
+    ["Alcohol", "No specific interaction; avoid in liver disease"],
+    ["Monitoring", "Coagulation/fibrinogen, LFTs, all-cause clinical status"]
+  ],
+  "summary": "Tigecycline is a glycylcycline (a tetracycline-class) intravenous antibacterial with broad activity including MRSA, vancomycin-susceptible enterococci, ESBL-producing Enterobacterales, and many anaerobes. It carries a boxed warning for increased all-cause mortality and should be reserved for situations where alternatives are unsuitable. It is approved for complicated skin/skin-structure infections, complicated intra-abdominal infections, and community-acquired bacterial pneumonia, but NOT for diabetic foot infection or hospital-acquired/ventilator-associated pneumonia.",
+  "indications": [
+    "Complicated skin and skin structure infections (adults >=18 years)",
+    "Complicated intra-abdominal infections (adults >=18 years)",
+    "Community-acquired bacterial pneumonia (adults >=18 years)"
+  ],
+  "dosage": [
+    {"c": "Complicated skin / intra-abdominal infection", "r": "Adult IV", "d": "Loading 100 mg, then 50 mg q12h", "t": "Every 12 hours", "n": "Duration 5-14 days"},
+    {"c": "Community-acquired bacterial pneumonia", "r": "Adult IV", "d": "Loading 100 mg, then 50 mg q12h", "t": "Every 12 hours", "n": "Duration 7-14 days"},
+    {"c": "Severe hepatic impairment (Child-Pugh C)", "r": "Adult IV", "d": "Loading 100 mg, then 25 mg q12h", "t": "Every 12 hours", "n": "Use with caution and monitor"},
+    {"c": "Mild-moderate hepatic impairment (Child-Pugh A/B)", "r": "Adult IV", "d": "No adjustment (100 mg then 50 mg q12h)", "t": "Every 12 hours", "n": "Standard regimen"}
+  ],
+  "admin": [
+    "Reconstitute and dilute per label; infuse IV over approximately 30 to 60 minutes every 12 hours",
+    "Reconstituted solution should be yellow to orange; discard if otherwise",
+    "Obtain baseline coagulation parameters including fibrinogen and monitor regularly",
+    "Reserve for infections where alternative agents are not suitable",
+    "Do not use for diabetic foot infection or hospital-acquired/ventilator-associated pneumonia"
+  ],
+  "moa": "Tigecycline, a glycylcycline derivative of minocycline, reversibly binds the 30S bacterial ribosomal subunit and blocks entry of aminoacyl-transfer RNA into the A site of the ribosome, preventing incorporation of amino acid residues into elongating peptide chains. This inhibits protein synthesis. Its bulky side chain allows it to evade the major tetracycline resistance mechanisms (ribosomal protection and efflux), giving expanded-spectrum, generally bacteriostatic activity.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to tigecycline"
+    ],
+    "relative": [
+      "Known hypersensitivity to tetracycline-class drugs (anaphylaxis risk)",
+      "Severe hepatic impairment (use reduced dose)",
+      "Intestinal perforation / complicated intra-abdominal sepsis with high mortality risk",
+      "Children <8 years and pregnancy (tooth discoloration, bone effects)"
+    ],
+    "monitor": [
+      "Coagulation parameters including fibrinogen",
+      "Liver function tests",
+      "Signs of pancreatitis and superinfection"
+    ]
+  },
+  "preg": "As a tetracycline-class drug, tigecycline can cause permanent tooth discoloration and may affect fetal bone development; use during pregnancy can cause fetal harm. Avoid unless no alternative exists.",
+  "lact": "It is unknown whether tigecycline is excreted in human milk; because of tetracycline-class effects on infant teeth and bone, avoid breastfeeding during therapy.",
+  "renal": "No dosage adjustment is required in patients with renal impairment, including those on hemodialysis; tigecycline is not significantly cleared by hemodialysis.",
+  "hepatic": "No adjustment in mild-to-moderate impairment (Child-Pugh A/B). In severe impairment (Child-Pugh C), reduce the maintenance dose to 25 mg q12h after the 100 mg load and monitor closely; hepatotoxicity has been reported.",
+  "interactions": {
+    "major": [
+      "Warfarin - tigecycline increases warfarin exposure; monitor INR/PT closely"
+    ],
+    "moderate": [
+      "Other drugs affecting coagulation (additive bleeding/hypofibrinogenemia risk)",
+      "Oral contraceptives - tetracyclines may reduce contraceptive efficacy"
+    ],
+    "minor": ["Calcium- or iron-containing products (theoretical chelation; less relevant for IV)"],
+    "food": "Administered intravenously; food has no relevant effect.",
+    "alcohol": "No specific interaction, but avoid in patients with hepatic impairment.",
+    "diagnostics": "Can prolong prothrombin time/aPTT and lower fibrinogen; monitor coagulation studies."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Headache", "Increased liver enzymes", "Infusion-site reactions"],
+    "serious": ["Increased all-cause mortality (boxed warning)", "Hepatotoxicity / hepatic failure", "Acute pancreatitis", "Hypofibrinogenemia and bleeding", "Clostridioides difficile colitis"],
+    "rare": ["Severe cutaneous reactions", "Photosensitivity (tetracycline class)", "Pseudotumor cerebri"],
+    "emergency": ["Anaphylactic / anaphylactoid reaction", "Fulminant hepatic failure", "Severe acute pancreatitis", "Life-threatening bleeding"]
+  },
+  "monitoring": ["Coagulation parameters including fibrinogen at baseline and regularly", "Liver function tests", "Clinical response and signs of superinfection / C. difficile", "Signs of pancreatitis (abdominal pain, amylase/lipase)"],
+  "counsel": [
+    "This antibiotic is reserved for serious infections when other options are not suitable",
+    "Nausea and vomiting are common, especially early in treatment",
+    "Report severe abdominal pain, yellowing of skin/eyes, easy bruising or bleeding",
+    "Report watery or bloody diarrhea, which can occur during or after treatment",
+    "Tell your clinician if you take warfarin or other blood thinners"
+  ],
+  "pk": [
+    ["Onset", "Immediate (IV)"],
+    ["Peak", "End of 30-60 minute infusion"],
+    ["Half-life", "~27 hours (single dose); ~42 hours at steady state"],
+    ["Duration", "Dosed every 12 hours"],
+    ["Storage", "Store dry powder at 20-25 C; use reconstituted/diluted solution promptly per label"]
+  ],
+  "pearls": [
+    "Boxed warning: increased all-cause mortality vs comparators - reserve for when alternatives are unsuitable",
+    "Broad spectrum including MRSA, VSE, ESBL Enterobacterales, and anaerobes, but NOT Pseudomonas or Proteus",
+    "Low serum/urine concentrations make it a poor choice for bacteremia and urinary tract infections",
+    "Not indicated for diabetic foot infection or hospital-acquired/ventilator-associated pneumonia",
+    "Monitor fibrinogen - hypofibrinogenemia is an increasingly recognized adverse effect"
+  ],
+  "missed": "Doses are administered in a healthcare setting; a missed or delayed infusion is managed by the treating team, who resume the q12h schedule as soon as possible without doubling.",
+  "overdose": "No specific antidote. Single doses up to 300 mg over 60 minutes increased nausea and vomiting. Manage overdose with supportive care; tigecycline is not removed by hemodialysis.",
+  "refs": [
+    ["FDA Label - Tigecycline (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tigecycline%22"],
+    ["DailyMed - Tigecycline", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tigecycline"]
+  ]
+}

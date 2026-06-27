@@ -1,0 +1,102 @@
+{
+  "generic": "Vancomycin",
+  "cls": "Glycopeptide antibiotic",
+  "pharm": "Time-dependent bactericidal glycopeptide active against Gram-positive organisms including MRSA; given IV for systemic infection and orally for C. difficile (oral form not systemically absorbed).",
+  "tags": ["Glycopeptide", "Gram-positive", "MRSA", "Bactericidal", "Parenteral", "Nephrotoxic", "Therapeutic drug monitoring"],
+  "quick": [
+    ["Adult dose", "IV 15-20 mg/kg q8-12h (or 500 mg q6h / 1 g q12h); oral 125 mg q6h for C. diff"],
+    ["Meal", "N/A (IV); oral capsule with/without food"],
+    ["Pregnancy", "Use only if clearly needed; appears low risk"],
+    ["Lactation", "Caution; excreted in milk, poor oral absorption"],
+    ["Renal", "Dose/interval adjusted by CrCl and levels"],
+    ["Hepatic", "No adjustment"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Trough/AUC levels, renal function, hearing"]
+  ],
+  "summary": "Vancomycin is a glycopeptide antibiotic for serious Gram-positive infections, especially methicillin-resistant staphylococci (MRSA), and for penicillin-allergic patients or those failing other drugs. Given by slow IV infusion for systemic infection (rapid infusion causes 'vancomycin infusion reaction' / red-man syndrome). The oral capsule is used for Clostridioides difficile colitis and is not appreciably absorbed. It is nephrotoxic at higher exposures and requires therapeutic drug monitoring (trough or AUC-guided) and renal dose adjustment. Infuse over at least 60 minutes at no more than 10 mg/min.",
+  "indications": [
+    "Serious or severe infections caused by methicillin-resistant (beta-lactam-resistant) staphylococci",
+    "Treatment in penicillin-allergic patients or those who cannot take/failed other drugs",
+    "Staphylococcal endocarditis",
+    "Septicemia, bone infections, lower respiratory tract infections, skin and skin-structure infections",
+    "Endocarditis caused by S. viridans or S. bovis (alone or with an aminoglycoside)",
+    "Enterococcal endocarditis (in combination with an aminoglycoside)",
+    "Prosthetic-valve endocarditis caused by S. epidermidis or diphtheroids (with rifampin and/or aminoglycoside)",
+    "Oral vancomycin: Clostridioides difficile-associated diarrhea/pseudomembranous colitis (oral form, separate labeling)"
+  ],
+  "dosage": [
+    {"c": "Serious infection - adults (normal renal function)", "r": "IV", "d": "2 g/day", "t": "500 mg every 6 h or 1 g every 12 h", "n": "Each dose over >=60 min at <=10 mg/min; weight-based 15-20 mg/kg q8-12h is common modern practice"},
+    {"c": "Serious/severe infection - weight-based", "r": "IV", "d": "15-20 mg/kg (actual body weight) per dose", "t": "Every 8-12 h", "n": "Target AUC/MIC or trough per guideline; consider loading dose 25-30 mg/kg in critically ill"},
+    {"c": "Pediatric patients", "r": "IV", "d": "10 mg/kg per dose", "t": "Every 6 h", "n": "Each dose over >=60 min; monitor serum levels"},
+    {"c": "Neonates", "r": "IV", "d": "Initial 15 mg/kg, then 10 mg/kg", "t": "Every 12 h (1st week of life), every 8 h thereafter to 1 month", "n": "Longer intervals in premature infants; monitor levels closely"},
+    {"c": "Clostridioides difficile colitis", "r": "Oral", "d": "125 mg", "t": "Four times daily for 10 days", "n": "Oral form; minimal systemic absorption (separate labeling)"},
+    {"c": "Renal impairment / elderly", "r": "IV", "d": "Reduce dose or extend interval", "t": "Per CrCl and serum levels", "n": "Greater reductions may be needed in premature infants and the elderly"}
+  ],
+  "admin": [
+    "Infuse IV over at least 60 minutes; do not exceed 10 mg/min to reduce infusion reactions",
+    "Use a concentration of no more than 5 mg/mL (up to 10 mg/mL only if fluid-restricted, higher infusion-reaction risk)",
+    "Do not give IM; not absorbed adequately by mouth for systemic infection",
+    "Oral capsules/solution are reserved for C. difficile colitis",
+    "Ensure adequate hydration; monitor renal function during therapy",
+    "Avoid concurrent nephrotoxic/ototoxic drugs where possible"
+  ],
+  "moa": "Inhibits bacterial cell-wall synthesis by binding with high affinity to the D-alanyl-D-alanine terminus of peptidoglycan precursors, blocking transglycosylation and transpeptidation; it also alters cell-membrane permeability and RNA synthesis. Bactericidal against susceptible aerobic Gram-positive organisms.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to vancomycin"],
+    "relative": ["Pre-existing renal impairment", "Pre-existing hearing loss", "Concurrent nephrotoxic/ototoxic drugs", "Elderly and neonates (altered clearance)"],
+    "monitor": ["Renal function", "Serum vancomycin levels (trough/AUC)", "Hearing"]
+  },
+  "preg": "Animal reproduction studies have not been conducted; vancomycin crosses the placenta. In a limited study, no fetal sensorineural hearing loss or nephrotoxicity attributable to vancomycin was noted. Use during pregnancy only if clearly needed.",
+  "lact": "Excreted in human milk; because oral absorption by the infant is poor, systemic effects are unlikely, but exercise caution and weigh the importance of the drug to the mother.",
+  "renal": "Dose adjustment is required in renal impairment - reduce the dose or extend the interval based on CrCl and serum levels. Greater reductions may be needed in premature infants and the elderly. Renal excretion is the major route; monitor renal function and levels closely.",
+  "hepatic": "No specific dose adjustment needed.",
+  "interactions": {
+    "major": ["Other nephrotoxic/ototoxic drugs (aminoglycosides, amphotericin B, polymyxin B/colistin, cisplatin, viomycin, bacitracin) - additive toxicity", "Piperacillin-tazobactam (associated with increased risk of acute kidney injury when combined)"],
+    "moderate": ["Anesthetic agents (erythema, histamine-like flushing, anaphylactoid reactions)", "Neuromuscular blocking agents (possible enhanced blockade)"],
+    "minor": ["Concurrent loop diuretics (additive ototoxicity, theoretical)"],
+    "food": "N/A (IV).",
+    "alcohol": "Not clinically significant.",
+    "diagnostics": "Monitor serum vancomycin levels (trough or AUC-guided dosing) and serial renal function."
+  },
+  "se": {
+    "common": ["Infusion-related flushing of upper body ('red-man'/vancomycin infusion reaction)", "Hypotension during rapid infusion", "Phlebitis at the IV site", "Pruritus, rash"],
+    "serious": ["Nephrotoxicity / acute kidney injury (exposure-dependent)", "Ototoxicity (hearing loss, usually with high levels or renal dysfunction)", "Neutropenia/thrombocytopenia", "Pseudomembranous (C. difficile) colitis", "Interstitial nephritis"],
+    "rare": ["DRESS syndrome and other severe cutaneous reactions (SJS/TEN, AGEP, linear IgA bullous dermatosis)", "Vasculitis", "Drug fever, eosinophilia"],
+    "emergency": ["Anaphylaxis", "Severe infusion reaction with hypotension/cardiac arrest (rapid infusion)", "DRESS / Stevens-Johnson syndrome", "Acute kidney injury"]
+  },
+  "monitoring": [
+    "Serum vancomycin levels - trough or AUC-guided (e.g., AUC/MIC 400-600 for serious MRSA infection)",
+    "Renal function (serum creatinine, urine output) at baseline and during therapy",
+    "Audiometry/hearing in prolonged therapy or high levels",
+    "CBC for neutropenia/thrombocytopenia with prolonged use",
+    "Infusion rate and signs of infusion reaction"
+  ],
+  "counsel": [
+    "This antibiotic is given slowly into a vein over at least an hour to prevent flushing and a drop in blood pressure",
+    "Report flushing, rash, itching, or breathlessness during the infusion",
+    "Report any change in hearing, ringing in the ears, or reduced urination",
+    "Oral vancomycin (for C. difficile) is taken by mouth and works in the gut - complete the full course",
+    "Stay well hydrated and inform staff of any kidney problems or other ear/kidney-affecting medicines"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "End of IV infusion"],
+    ["Half-life", "~4-6 h (normal renal function); markedly prolonged in renal impairment"],
+    ["Duration", "Based on dosing interval; ~80-90% renally excreted unchanged"],
+    ["Storage", "Reconstituted/IV: per labeling; vials at 20-25 C before reconstitution"]
+  ],
+  "pearls": [
+    "Infuse over >=60 min at <=10 mg/min - rapid infusion causes the histamine-mediated 'red-man'/infusion reaction (not a true allergy)",
+    "Modern dosing is AUC-guided (target AUC/MIC 400-600 for serious MRSA); troughs >15-20 increase nephrotoxicity",
+    "Oral vancomycin is NOT absorbed and treats C. difficile colitis - do not use IV for gut C. diff",
+    "Combination with piperacillin-tazobactam raises AKI risk - monitor renal function closely",
+    "Poorly removed by conventional hemodialysis; high-flux membranes and hemoperfusion can enhance clearance",
+    "Synergistic with aminoglycosides for enterococcal endocarditis but adds nephrotoxicity"
+  ],
+  "missed": "Hospital-administered; give as soon as noted and adjust the schedule, then recheck levels if timing changed. Do not double the dose. For oral C. diff therapy, take the missed dose when remembered unless near the next dose.",
+  "overdose": "Provide supportive care with maintenance of glomerular filtration. Vancomycin is poorly removed by conventional dialysis; hemofiltration and hemoperfusion with polysulfone/resin can increase clearance. Monitor renal and auditory function and serum levels.",
+  "refs": [
+    ["FDA Vancomycin Hydrochloride for Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vancomycin%20hydrochloride%22"],
+    ["DailyMed - Vancomycin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=vancomycin"]
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "generic": "Cyanocobalamin (Vitamin B12)",
+  "cls": "Vitamin / hematopoietic agent (cobalamin)",
+  "pharm": "Water-soluble B vitamin for B12 deficiency and pernicious anemia",
+  "tags": ["vitamin B12", "cyanocobalamin", "pernicious anemia", "megaloblastic anemia", "B12 deficiency"],
+  "quick": [
+    ["Adult dose", "Pernicious anemia 100 mcg IM/SC daily x6-7 days, then 100 mcg monthly for life"],
+    ["Meal", "Injection independent of meals; oral may be taken with or without food"],
+    ["Pregnancy", "Generally safe; recommended to meet increased requirement"],
+    ["Lactation", "Safe; B12 is a normal milk constituent and recommended"],
+    ["Renal", "No dose adjustment generally needed"],
+    ["Hepatic", "No specific adjustment; stored in liver"],
+    ["Alcohol", "Chronic alcohol use can impair absorption; no direct drug interaction"],
+    ["Monitoring", "CBC/reticulocytes, serum B12, serum potassium early in therapy"]
+  ],
+  "summary": "Cyanocobalamin is a synthetic form of vitamin B12 used to treat and prevent vitamin B12 deficiency, especially megaloblastic anemia and pernicious anemia from malabsorption. For pernicious anemia the usual regimen is 100 mcg IM or SC daily for 6-7 days then 100 mcg monthly for life. It must not be given intravenously, as most of the dose would be lost in urine. Monitor potassium early in treatment of severe megaloblastic anemia, where hypokalemia and sudden death have occurred.",
+  "indications": [
+    "Vitamin B12 deficiency due to malabsorption (pernicious anemia, gastrointestinal pathology, gastrectomy)",
+    "Vitamin B12 deficiency from fish tapeworm infestation or pancreatic/intestinal malignancy",
+    "Vitamin B12 requirements increased by pregnancy, thyrotoxicosis, hemorrhage or malignancy",
+    "Diagnostic evaluation of vitamin B12 absorption (Schilling test)"
+  ],
+  "dosage": [
+    {"c": "Pernicious anemia (adult)", "r": "Initial", "d": "100 mcg daily IM or SC for 6 or 7 days", "t": "Once daily x6-7 days", "n": "Reticulocyte response expected by day 5-7"},
+    {"c": "Pernicious anemia (adult)", "r": "Maintenance", "d": "100 mcg IM or SC once monthly for life", "t": "Monthly", "n": "Lifelong therapy required due to absent intrinsic factor"},
+    {"c": "Vitamin B12 deficiency (general)", "r": "Standard", "d": "30-100 mcg daily IM/SC, individualized to severity and response", "t": "Daily then maintenance", "n": "Maintenance 100-200 mcg monthly"},
+    {"c": "Schilling test", "r": "Diagnostic", "d": "Flushing dose 1000 mcg IM", "t": "Single dose", "n": "Given to saturate B12 binding sites"}
+  ],
+  "admin": [
+    "Administer by intramuscular or subcutaneous injection; avoid the intravenous route",
+    "Protect the solution from light and inspect for particulate matter before use",
+    "For severe deficiency, ensure adequate intake of iron and folic acid as needed for hematologic response",
+    "Continue maintenance injections lifelong in pernicious anemia (no intrinsic factor)",
+    "Monitor serum potassium during the first 48 hours of treating severe megaloblastic anemia"
+  ],
+  "moa": "Cyanocobalamin is converted in the body to the coenzymes methylcobalamin and adenosylcobalamin. These are essential for DNA synthesis (methionine synthase converts homocysteine to methionine, regenerating tetrahydrofolate) and for fatty acid and amino acid metabolism (methylmalonyl-CoA mutase). Adequate B12 is required for normal hematopoiesis, cell reproduction, nucleoprotein synthesis and maintenance of myelin in the nervous system. It is rapidly absorbed from intramuscular and subcutaneous injection sites.",
+  "contra": {
+    "absolute": ["Known sensitivity to cobalt and/or vitamin B12", "Hereditary optic nerve atrophy (Leber's disease) - B12 can accelerate optic atrophy"],
+    "relative": ["Severe megaloblastic anemia before potassium correction (risk of hypokalemia)", "Concurrent folate deficiency (treat both; folate alone masks B12 deficiency)"],
+    "monitor": ["Serum potassium early in therapy", "Hematologic response (CBC, reticulocytes)", "Neurologic status in pernicious anemia"]
+  },
+  "preg": "Vitamin B12 requirements are increased during pregnancy. Cyanocobalamin is considered safe and is recommended to meet the increased physiologic requirement; doses within the recommended dietary allowance pose no fetal risk.",
+  "lact": "Vitamin B12 is a normal constituent of human milk and is required by the breastfed infant. Supplementation is considered safe and beneficial in breastfeeding women with deficiency.",
+  "renal": "No specific dose adjustment is generally required in renal impairment when treating deficiency. Note that parenteral products may contain aluminum, which can accumulate with prolonged use in impaired renal function.",
+  "hepatic": "No specific dose adjustment is required for hepatic impairment. Vitamin B12 is stored in the liver; large body stores normally cover requirements for years.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Chloramphenicol - may antagonize the hematopoietic response to B12", "Metformin (long-term) - reduces B12 absorption and may cause deficiency", "Proton pump inhibitors / H2 blockers - reduce B12 absorption over time"],
+    "minor": ["Colchicine, aminosalicylic acid, neomycin - may reduce oral B12 absorption", "Oral contraceptives - may lower serum B12 levels"],
+    "food": "Injection is independent of food; dietary B12 (animal products) supplements requirements.",
+    "alcohol": "Chronic excessive alcohol intake can impair B12 absorption and worsen deficiency; no direct drug interaction.",
+    "diagnostics": "Use of antibiotics, methotrexate or pyrimethamine can invalidate B12 assays (microbiologic). B12 should not be given before assays for B12/folate deficiency are drawn."
+  },
+  "se": {
+    "common": ["Mild transient diarrhea", "Itching, transient exanthema", "Pain or injection site reaction", "Feeling of swelling of the whole body"],
+    "serious": ["Hypokalemia and thrombocytosis during conversion of severe megaloblastic anemia", "Pulmonary edema and congestive heart failure early in treatment", "Peripheral vascular thrombosis"],
+    "rare": ["Polycythemia vera", "Optic nerve atrophy in Leber's disease", "Severe and protracted diarrhea"],
+    "emergency": ["Anaphylactic shock and death (reported after parenteral administration)", "Severe hypokalemia with sudden death in treated megaloblastic anemia", "Acute pulmonary edema"]
+  },
+  "monitoring": [
+    "Complete blood count and reticulocyte count for hematologic response",
+    "Serum potassium during the first 48 hours in severe megaloblastic anemia",
+    "Serum vitamin B12 and folate (drawn before starting therapy)",
+    "Serum iron and folate to ensure adequate concurrent repletion",
+    "Neurologic status in pernicious anemia"
+  ],
+  "counsel": [
+    "Pernicious anemia requires lifelong injections - do not stop therapy",
+    "Report any rash, itching, difficulty breathing or swelling promptly",
+    "Eat a balanced diet including animal-source foods unless advised otherwise",
+    "Tell your doctor about metformin, acid-reducing drugs or strict vegan diet, which can lower B12",
+    "Keep regular blood test appointments to confirm response"
+  ],
+  "pk": [
+    ["Onset", "Reticulocyte response in 2-3 days; hematologic improvement within days"],
+    ["Peak", "Plasma peak within 1 hour after intramuscular injection"],
+    ["Half-life", "About 6 days in plasma; large hepatic stores"],
+    ["Duration", "Maintenance effect ~1 month per 100 mcg IM dose"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light"]
+  ],
+  "pearls": [
+    "Do NOT give IV - almost all of an IV dose is lost in the urine",
+    "Folic acid alone will correct the anemia but NOT the neurologic damage of B12 deficiency - always check B12",
+    "Watch potassium early when treating severe megaloblastic anemia (hypokalemia, even sudden death)",
+    "Pernicious anemia needs lifelong monthly injections (no intrinsic factor)",
+    "Contraindicated in Leber's hereditary optic atrophy"
+  ],
+  "missed": "If a scheduled maintenance injection is missed, administer it as soon as remembered, then resume the regular monthly schedule. Do not give a double dose to make up. For pernicious anemia, prolonged interruption can cause recurrence of anemia and neurologic symptoms.",
+  "overdose": "Vitamin B12 has very low toxicity; excess is excreted in the urine. Overdose is unlikely to cause harm and requires no specific treatment. Rare hypersensitivity reactions are managed supportively.",
+  "refs": [
+    ["FDA Cyanocobalamin Injection USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cyanocobalamin%22"],
+    ["FDA DailyMed - Cyanocobalamin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

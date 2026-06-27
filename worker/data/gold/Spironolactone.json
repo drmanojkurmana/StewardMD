@@ -1,0 +1,96 @@
+{
+  "generic": "Spironolactone",
+  "cls": "Aldosterone (mineralocorticoid receptor) antagonist",
+  "pharm": "Potassium-sparing diuretic / antihypertensive",
+  "tags": ["diuretic", "potassium-sparing", "aldosterone antagonist", "heart failure", "hypertension", "hyperaldosteronism", "ascites"],
+  "quick": [
+    ["Adult dose", "Heart failure start 25 mg once daily; hypertension 25-100 mg/day; edema 100 mg/day"],
+    ["Meal", "Take consistently with respect to food (food markedly increases absorption)"],
+    ["Pregnancy", "Avoid; anti-androgenic - risk of feminization of male fetus"],
+    ["Lactation", "Active metabolite (canrenone) in milk; use with caution"],
+    ["Renal", "High hyperkalemia risk; reduce dose/frequency if eGFR 30-50; avoid if severe"],
+    ["Hepatic", "Caution in cirrhosis; electrolyte shifts can precipitate encephalopathy"],
+    ["Alcohol", "Limit; additive hypotension"],
+    ["Monitoring", "Serum potassium and renal function within 1 week then regularly; BP"]
+  ],
+  "summary": "Spironolactone is a competitive aldosterone (mineralocorticoid receptor) antagonist that promotes sodium and water excretion while retaining potassium, acting as both a potassium-sparing diuretic and antihypertensive. It improves survival in NYHA class III-IV heart failure with reduced ejection fraction and is used for resistant hypertension, edema of cirrhosis and nephrotic syndrome, and primary hyperaldosteronism. Its principal danger is hyperkalemia, and its anti-androgenic effects cause gynecomastia.",
+  "indications": [
+    "NYHA class III-IV heart failure with reduced ejection fraction (to increase survival, manage edema, reduce hospitalization)",
+    "Add-on therapy for hypertension to lower blood pressure",
+    "Edema of cirrhosis and of nephrotic syndrome unresponsive to fluid/sodium restriction and other diuretics",
+    "Primary hyperaldosteronism - short-term preoperative treatment and long-term maintenance when surgery is not appropriate",
+    "Off-label: resistant hypertension, hirsutism/acne (anti-androgen), female-pattern hair loss"
+  ],
+  "dosage": [
+    {"c": "Heart failure (adult)", "r": "Initial", "d": "25 mg once daily if K <=5.0 mEq/L and eGFR >50; may increase to 50 mg once daily if tolerated", "t": "Once daily", "n": "If eGFR 30-50 consider 25 mg every other day; reduce to 25 mg QOD if hyperkalemia"},
+    {"c": "Essential hypertension (adult)", "r": "Usual", "d": "25-100 mg daily in single or divided doses", "t": "Once daily or divided", "n": "Allow ~2 weeks for full antihypertensive effect"},
+    {"c": "Edema - cirrhosis / nephrotic (adult)", "r": "Initial", "d": "100 mg daily in single or divided doses (range 25-200 mg)", "t": "Once daily or divided", "n": "Initiate in hospital and titrate slowly"},
+    {"c": "Primary hyperaldosteronism (adult)", "r": "Usual", "d": "100-400 mg daily preoperatively; lowest effective dose for long-term maintenance", "t": "Once daily or divided", "n": "Used diagnostically and therapeutically"},
+    {"c": "Renal impairment (eGFR 30-50)", "r": "Reduced", "d": "Consider 25 mg every other day initial; avoid if severe impairment", "t": "Every other day", "n": "High hyperkalemia risk"}
+  ],
+  "admin": [
+    "Can be taken with or without food but should be taken consistently with respect to meals",
+    "In heart failure, generally discontinue potassium supplements when starting spironolactone",
+    "Recheck serum potassium when ACE inhibitor/ARB therapy is changed",
+    "Titrate edema/HF doses slowly and monitor for hyperkalemia",
+    "Counsel that gynecomastia/breast tenderness may occur and is usually reversible"
+  ],
+  "moa": "Spironolactone and its active metabolites are specific competitive antagonists of aldosterone at the mineralocorticoid receptor of the aldosterone-dependent sodium-potassium exchange site in the distal renal tubule. This increases excretion of sodium and water while sparing potassium, producing diuresis and lowering blood pressure. It also blocks androgen receptors and inhibits steroidogenesis, accounting for anti-androgenic effects such as gynecomastia.",
+  "contra": {
+    "absolute": ["Hyperkalemia", "Addison's disease (adrenal insufficiency)", "Concomitant use of eplerenone", "Anuria / acute renal failure (significant impairment of renal excretory function)"],
+    "relative": ["Significant renal impairment (eGFR <30)", "Pregnancy (anti-androgenic risk to male fetus)", "Concomitant potassium supplements or potassium-sparing agents", "Volume depletion / hyponatremia"],
+    "monitor": ["Concomitant ACE inhibitors, ARBs, NSAIDs, trimethoprim, heparin (hyperkalemia)", "Concomitant lithium", "Cirrhosis with ascites (encephalopathy risk)", "Diabetes (hyperkalemia risk)"]
+  },
+  "preg": "Based on mechanism and animal data, spironolactone may impair sex differentiation of the male fetus (feminization). Limited human data have not clearly shown major malformations, but because of the anti-androgenic risk, avoid spironolactone in pregnancy or counsel a pregnant woman about the potential risk to a male fetus.",
+  "lact": "Spironolactone's active metabolite canrenone is excreted in breast milk. Use with caution while breastfeeding; if a diuretic is required, an alternative may be preferred and the infant monitored.",
+  "renal": "Renal impairment markedly increases the risk of hyperkalemia. Reduce dose/frequency (e.g. 25 mg every other day) when eGFR is 30-50 mL/min/1.73 m2 and avoid in severe impairment or anuria. Monitor potassium and renal function closely.",
+  "hepatic": "Use with caution in hepatic impairment and cirrhosis; spironolactone metabolism may be altered and electrolyte/acid-base disturbances can precipitate hepatic encephalopathy. Reversible coma has occurred in cirrhotic patients with ascites.",
+  "interactions": {
+    "major": ["Potassium supplements / potassium-containing salt substitutes - severe hyperkalemia", "ACE inhibitors and ARBs - additive hyperkalemia (check potassium when therapy changes)", "Eplerenone and other potassium-sparing diuretics - contraindicated/dangerous hyperkalemia", "Lithium - reduced renal clearance and risk of lithium toxicity"],
+    "moderate": ["NSAIDs - reduce diuretic/antihypertensive effect and increase hyperkalemia and renal risk", "Trimethoprim (incl. co-trimoxazole) and heparin/LMWH - additive hyperkalemia", "Cholestyramine - hyperkalemic metabolic acidosis reported", "Other antihypertensives - additive blood-pressure lowering"],
+    "minor": ["Acetylsalicylic acid - may reduce spironolactone efficacy", "Abiraterone - may increase PSA levels"],
+    "food": "Food substantially increases bioavailability; take consistently with respect to meals.",
+    "alcohol": "Alcohol may increase the risk of orthostatic hypotension; limit intake.",
+    "diagnostics": "Interferes with radioimmunoassays of digoxin (falsely altered levels); may raise serum potassium and lower sodium."
+  },
+  "se": {
+    "common": ["Hyperkalemia", "Gynecomastia and breast tenderness", "Dizziness / lightheadedness", "Headache", "Menstrual irregularity or amenorrhea", "Decreased libido / erectile dysfunction", "Nausea, cramping, diarrhea"],
+    "serious": ["Severe hyperkalemia with cardiac arrhythmia", "Hypotension and worsening renal function", "Hyponatremia and metabolic acidosis", "Impaired neurologic function/coma in cirrhotic patients", "Agranulocytosis / leukopenia, thrombocytopenia"],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis / DRESS", "Anaphylactic reactions, vasculitis", "Gastric bleeding / ulceration", "Drug-induced lupus"],
+    "emergency": ["Life-threatening hyperkalemia (weakness, paralysis, peaked T waves, arrhythmia, cardiac arrest)", "Severe hypotension/acute kidney injury", "Hepatic coma in cirrhosis", "Severe cutaneous reaction (SJS/TEN/DRESS)"]
+  },
+  "monitoring": [
+    "Serum potassium within 1 week of initiation/titration, then regularly (more often with other hyperkalemia-causing drugs or renal impairment)",
+    "Renal function (creatinine, eGFR) and volume status",
+    "Serum sodium, other electrolytes, uric acid and blood glucose periodically",
+    "Blood pressure",
+    "Signs of gynecomastia and, in cirrhotics, mental status"
+  ],
+  "counsel": [
+    "Do not use potassium supplements or potassium-containing salt substitutes unless told to",
+    "Report muscle weakness, fatigue, slow or irregular heartbeat (signs of high potassium)",
+    "Breast swelling/tenderness can occur and is usually reversible after stopping",
+    "Take consistently with regard to meals and keep blood-test appointments",
+    "Avoid pregnancy; use effective contraception and tell your doctor if pregnant"
+  ],
+  "pk": [
+    ["Onset", "Diuretic effect builds over 2-3 days; antihypertensive effect over up to 2 weeks"],
+    ["Peak", "Spironolactone ~2.6 h; active metabolite canrenone ~4.3 h"],
+    ["Half-life", "Parent ~1.4 h; active metabolites (canrenone, TMS, HTMS) ~14-17 h"],
+    ["Duration", "Effect persists due to long-acting active metabolites"],
+    ["Storage", "Store at controlled room temperature; protect from light"]
+  ],
+  "pearls": [
+    "Hyperkalemia is the dose-limiting and potentially lethal effect - check potassium within 1 week of starting or titrating and avoid added potassium",
+    "Adding spironolactone to ACE inhibitor/ARB in heart failure (RALES) improves survival but mandates strict potassium monitoring",
+    "Gynecomastia is dose- and duration-related; eplerenone is a more selective alternative with fewer anti-androgenic effects",
+    "Food roughly doubles bioavailability - advise consistent dosing relative to meals",
+    "Spironolactone interferes with digoxin immunoassays - interpret digoxin levels with caution"
+  ],
+  "missed": "Take the missed dose as soon as you remember the same day; if it is almost time for the next dose, skip the missed dose and continue your usual schedule. Do not take two doses at once. Avoid late-evening dosing to reduce night-time urination.",
+  "overdose": "Acute overdose may cause drowsiness, confusion, rash, nausea, vomiting, dizziness or diarrhea; hyperkalemia (especially with renal impairment), hyponatremia and, in severe liver disease, hepatic coma can occur. There is no specific antidote. Treat supportively with maintenance of hydration, electrolyte balance and vital functions; manage hyperkalemia actively and discontinue spironolactone if renal impairment is present.",
+  "refs": [
+    ["FDA Spironolactone Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22spironolactone%22"],
+    ["DailyMed - Spironolactone", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

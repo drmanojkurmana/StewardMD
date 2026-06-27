@@ -1,0 +1,93 @@
+{
+  "generic": "Zoledronic Acid",
+  "cls": "Bisphosphonate (nitrogen-containing)",
+  "pharm": "Bone resorption inhibitor / antiosteoporotic / antihypercalcemic",
+  "tags": ["bisphosphonate", "hypercalcemia of malignancy", "bone metastases", "multiple myeloma", "osteoporosis", "ONJ"],
+  "quick": [
+    ["Adult dose", "4 mg IV over >=15 min (oncology); 5 mg IV yearly for osteoporosis (Reclast)"],
+    ["Meal", "Not relevant (IV); ensure hydration before infusion"],
+    ["Pregnancy", "Avoid - can cause fetal harm; not for women of childbearing potential unless necessary"],
+    ["Lactation", "Avoid; do not breastfeed"],
+    ["Renal", "Contraindicated/avoid if CrCl <35 (osteoporosis); reduce in oncology; do not use if severe"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Serum creatinine before each dose, calcium, vitamin D, dental exam"]
+  ],
+  "summary": "Zoledronic acid is a potent intravenous nitrogen-containing bisphosphonate that inhibits osteoclast-mediated bone resorption. The 4 mg oncology formulation treats hypercalcemia of malignancy and bone metastases/multiple myeloma; the 5 mg formulation (Reclast) treats osteoporosis once yearly. Key risks are renal toxicity, hypocalcemia, acute-phase flu-like reaction, osteonecrosis of the jaw and atypical femoral fractures.",
+  "indications": [
+    "Hypercalcemia of malignancy (albumin-corrected serum calcium >=12 mg/dL)",
+    "Patients with multiple myeloma and documented bone metastases from solid tumors, with standard antineoplastic therapy (prostate cancer must have progressed after at least one hormonal therapy)",
+    "Osteoporosis treatment/prevention and Paget disease (5 mg formulation; not for hypercalcemia or non-tumor hypercalcemia)"
+  ],
+  "dosage": [
+    {"c": "Hypercalcemia of malignancy (adult)", "r": "Standard", "d": "4 mg single IV infusion over no less than 15 minutes", "t": "Single dose", "n": "Retreat after >=7 days if calcium re-rises"},
+    {"c": "Multiple myeloma / bone metastases (adult)", "r": "Standard", "d": "4 mg IV over >=15 minutes every 3-4 weeks (if CrCl >60 mL/min)", "t": "Every 3-4 weeks", "n": "Add oral calcium 500 mg + vitamin D 400 IU daily"},
+    {"c": "Bone metastases - renal impairment", "r": "Reduced", "d": "Reduce dose per baseline CrCl (e.g., 50-60: 3.5 mg; 40-49: 3.3 mg; 30-39: 3.0 mg)", "t": "Every 3-4 weeks", "n": "Not recommended if CrCl <30 mL/min"},
+    {"c": "Osteoporosis treatment (Reclast)", "r": "Standard", "d": "5 mg IV once yearly over >=15 minutes", "t": "Once yearly", "n": "Avoid if CrCl <35 mL/min"}
+  ],
+  "admin": [
+    "Administer as a single IV infusion over no less than 15 minutes through a separate vented infusion line",
+    "Do not allow contact with calcium or other divalent cation-containing solutions (e.g., Ringer's lactate)",
+    "Adequately rehydrate the patient before infusion, especially in hypercalcemia of malignancy",
+    "Coadminister oral calcium 500 mg and vitamin D 400 IU daily for myeloma/bone metastases (correct hypocalcemia first)",
+    "Inspect for particulate matter; check serum creatinine before each dose"
+  ],
+  "moa": "Zoledronic acid binds avidly to hydroxyapatite in mineralized bone. As a nitrogen-containing bisphosphonate it inhibits the enzyme farnesyl pyrophosphate synthase in the mevalonate pathway, disrupting osteoclast cytoskeleton and survival. It inhibits osteoclastic bone resorption and tumor-induced calcium release, lowering serum calcium and reducing skeletal complications.",
+  "contra": {
+    "absolute": ["Hypersensitivity to zoledronic acid or any component (including reported anaphylaxis/angioedema)", "Hypocalcemia (for osteoporosis use)", "Severe renal impairment / acute renal failure (osteoporosis: CrCl <35 mL/min)"],
+    "relative": ["Pre-existing renal impairment", "Uncorrected vitamin D deficiency or low calcium", "Active dental/jaw disease or planned invasive dental procedures", "Concurrent use of the 5 mg (Reclast) and 4 mg products together"],
+    "monitor": ["Concurrent nephrotoxic drugs (aminoglycosides, loop diuretics)", "Other bisphosphonates", "Drugs lowering calcium (aminoglycosides, calcitonin)"]
+  },
+  "preg": "Avoid in pregnancy; bisphosphonates can cause fetal harm and persist in bone. Not for use in women of childbearing potential unless clearly necessary; counsel about fetal risk and contraception.",
+  "lact": "It is not known whether zoledronic acid passes into human milk. Because of potential serious adverse effects, do not breastfeed during therapy.",
+  "renal": "Renal toxicity, including acute renal failure, can occur; risk rises with dehydration, nephrotoxic drugs, rapid infusion and pre-existing impairment. Check serum creatinine before each dose, do not exceed 4 mg, infuse over >=15 minutes, reduce the oncology dose for CrCl 30-60 mL/min and avoid in severe impairment (and CrCl <35 mL/min for osteoporosis).",
+  "hepatic": "No specific dose adjustment is recommended for hepatic impairment; clinical experience is limited.",
+  "interactions": {
+    "major": ["Nephrotoxic drugs (aminoglycosides, amphotericin) - additive renal toxicity", "Loop diuretics - increased hypocalcemia and renal risk through dehydration", "Other bisphosphonates / concurrent Reclast - do not combine"],
+    "moderate": ["Aminoglycosides and calcitonin - additive lowering of serum calcium", "Thalidomide (in myeloma) - may increase renal dysfunction risk", "Anti-angiogenic agents - may increase osteonecrosis of the jaw risk"],
+    "minor": ["Calcium/antacids (oral) - separate from infusion (incompatible IV with divalent cations)"],
+    "food": "Not applicable (IV); ensure adequate hydration around dosing.",
+    "alcohol": "No specific interaction described.",
+    "diagnostics": "Lowers serum calcium and phosphate; may transiently raise creatinine; monitor calcium, phosphate, magnesium and renal function."
+  },
+  "se": {
+    "common": ["Flu-like acute-phase reaction (fever, myalgia, arthralgia, headache) after first infusion", "Nausea and vomiting", "Fatigue", "Hypocalcemia, hypophosphatemia", "Bone/joint/muscle pain", "Anemia (oncology population)"],
+    "serious": ["Renal impairment / acute renal failure", "Severe symptomatic hypocalcemia", "Osteonecrosis of the jaw (ONJ)", "Atypical low-trauma subtrochanteric/diaphyseal femoral fractures", "Severe incapacitating musculoskeletal pain"],
+    "rare": ["Anaphylaxis / angioedema", "Atrial fibrillation", "Uveitis/scleritis", "Bronchospasm in aspirin-sensitive asthma"],
+    "emergency": ["Symptomatic severe hypocalcemia (tetany, seizures, arrhythmia)", "Acute renal failure", "Anaphylaxis", "Osteonecrosis of the jaw with infection"]
+  },
+  "monitoring": [
+    "Serum creatinine before each dose (withhold for renal deterioration)",
+    "Serum calcium, phosphate, magnesium and potassium; correct hypocalcemia and vitamin D deficiency before dosing",
+    "Dental examination and preventive dentistry before therapy; avoid invasive dental procedures during treatment",
+    "Hydration status before infusion",
+    "Signs of thigh/groin pain (atypical femoral fracture) on long-term use"
+  ],
+  "counsel": [
+    "Drink plenty of fluids before and after the infusion",
+    "Take daily calcium and vitamin D supplements as advised",
+    "Flu-like symptoms (fever, aches) may occur in the first 1-3 days and usually settle; paracetamol can help",
+    "Maintain good oral hygiene; have a dental check before treatment and report any jaw pain, swelling or loose teeth",
+    "Report new or unusual thigh, hip or groin pain (possible atypical fracture)"
+  ],
+  "pk": [
+    ["Onset", "Calcium lowering begins within ~1-2 days (hypercalcemia)"],
+    ["Peak", "End of infusion (IV)"],
+    ["Half-life", "Triphasic; long terminal release from bone (years)"],
+    ["Duration", "Prolonged skeletal effect; oncology dosing every 3-4 weeks, osteoporosis yearly"],
+    ["Storage", "Store at 25 C; excursions 15-30 C; discard unused portion"]
+  ],
+  "pearls": [
+    "Osteonecrosis of the jaw - arrange a dental exam and complete invasive dental work before starting; avoid extractions during therapy",
+    "Renal toxicity is dose- and infusion-rate dependent: check creatinine each dose, infuse over >=15 minutes, do not exceed 4 mg, hydrate well",
+    "Correct hypocalcemia and vitamin D deficiency before dosing; supplement calcium/vitamin D in myeloma/bone metastases",
+    "First infusion commonly causes a transient flu-like acute-phase reaction",
+    "Do not co-administer with calcium-containing IV solutions; use a separate vented line"
+  ],
+  "missed": "For yearly osteoporosis dosing, schedule the missed dose as soon as possible and resume yearly administration from that date. For oncology dosing, the treatment team reschedules per protocol; do not self-administer.",
+  "overdose": "Overdose (or excessive dose/rapid infusion) may cause clinically significant renal impairment, hypocalcemia, hypophosphatemia and hypomagnesemia. Monitor and correct electrolytes with IV calcium gluconate, phosphate and magnesium as needed, and provide supportive renal care; there is no specific antidote.",
+  "refs": [
+    ["FDA Zoledronic Acid Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zoledronic+acid%22"],
+    ["FDA DailyMed - Zoledronic Acid", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

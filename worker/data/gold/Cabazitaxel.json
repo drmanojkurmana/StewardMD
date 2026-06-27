@@ -1,0 +1,97 @@
+{
+  "generic": "Cabazitaxel",
+  "cls": "Taxane microtubule inhibitor (antineoplastic)",
+  "pharm": "Antimicrotubule chemotherapy agent",
+  "tags": ["taxane", "chemotherapy", "prostate cancer", "mCRPC", "microtubule inhibitor", "boxed warning"],
+  "quick": [
+    ["Adult dose", "20 mg/m2 IV q3wk with prednisone 10 mg daily"],
+    ["Meal", "Not applicable (IV infusion)"],
+    ["Pregnancy", "Can cause fetal harm; not used in females"],
+    ["Lactation", "No human data; avoid"],
+    ["Renal", "No adjustment for mild-moderate; caution if severe"],
+    ["Hepatic", "Reduce dose; contraindicated if bilirubin >3x ULN"],
+    ["Alcohol", "Limit; added hepatotoxicity risk"],
+    ["Monitoring", "CBC frequently, signs of hypersensitivity, LFTs"]
+  ],
+  "summary": "Cabazitaxel (JEVTANA) is a taxane microtubule inhibitor given IV every 3 weeks with prednisone for metastatic castration-resistant prostate cancer previously treated with docetaxel. It carries a BOXED WARNING for neutropenia (including neutropenic deaths) and severe hypersensitivity. Premedication and frequent blood-count monitoring are mandatory.",
+  "indications": [
+    "Metastatic castration-resistant prostate cancer (mCRPC) previously treated with a docetaxel-containing regimen, in combination with prednisone"
+  ],
+  "dosage": [
+    {"c": "mCRPC (standard)", "r": "With prednisone 10 mg PO daily", "d": "20 mg/m2 IV", "t": "One-hour infusion every 3 weeks", "n": "Based on body surface area (BSA)"},
+    {"c": "mCRPC (select patients)", "r": "Higher dose, provider discretion", "d": "25 mg/m2 IV", "t": "One-hour infusion every 3 weeks", "n": "Consider primary G-CSF prophylaxis in all patients at this dose"},
+    {"c": "Premedication", "r": "30 min before each dose IV", "d": "Antihistamine + dexamethasone 8 mg + H2 antagonist", "t": "At least 30 minutes pre-infusion", "n": "Add antiemetic prophylaxis as needed"},
+    {"c": "Mild hepatic impairment", "r": "Bilirubin >1 to <=1.5x ULN or AST >1.5x ULN", "d": "20 mg/m2 IV", "t": "Every 3 weeks", "n": "Standard dose maintained"},
+    {"c": "Moderate hepatic impairment", "r": "Bilirubin >1.5 to <=3x ULN", "d": "15 mg/m2 IV", "t": "Every 3 weeks", "n": "Efficacy of this dose unknown"},
+    {"c": "Strong CYP3A inhibitor coadministration", "r": "If unavoidable", "d": "Reduce dose by 25%", "t": "Every 3 weeks", "n": "Avoid concomitant strong CYP3A inhibitors when possible"}
+  ],
+  "admin": [
+    "Administer as a one-hour IV infusion at room temperature using a 0.22 micron in-line filter",
+    "Requires two dilutions; do NOT use PVC infusion containers or polyurethane infusion sets",
+    "Premedicate at least 30 minutes before each dose to reduce hypersensitivity risk",
+    "Final infusion concentration must be 0.10-0.26 mg/mL; do not exceed 0.26 mg/mL",
+    "Discard if crystallization or precipitate appears; do not mix with other drugs",
+    "Handle as a hazardous anticancer drug; wash skin/mucosa immediately on contact"
+  ],
+  "moa": "Cabazitaxel is a microtubule inhibitor that binds tubulin and promotes its assembly into microtubules while inhibiting disassembly. This stabilizes microtubules, arresting mitotic and interphase cellular functions and leading to cancer cell death.",
+  "contra": {
+    "absolute": ["Neutrophil count <=1,500 cells/mm3", "History of severe hypersensitivity to cabazitaxel or to drugs formulated with polysorbate 80", "Severe hepatic impairment (total bilirubin >3x ULN)"],
+    "relative": ["Hemoglobin <10 g/dL (monitor closely)", "Age >=65 years (higher rate of fatal outcomes and toxicity)", "Prior pelvic radiation (cystitis risk)"],
+    "monitor": ["Concomitant strong CYP3A inhibitors", "Mild-to-moderate hepatic impairment", "Patients without G-CSF prophylaxis"]
+  },
+  "preg": "Can cause fetal harm and loss of pregnancy; in animal studies cabazitaxel caused embryo-fetal death at doses lower than the human dose. Not established for use in females. Advise males with female partners of reproductive potential to use effective contraception.",
+  "lact": "No human data on presence in breast milk. Because of potential for serious adverse reactions in a breastfed infant, breastfeeding is not advised during treatment.",
+  "renal": "No dose adjustment needed for mild-to-moderate renal impairment. Renal failure, including fatal cases, has been reported; use caution and monitor in severe impairment or end-stage renal disease.",
+  "hepatic": "Cabazitaxel is extensively hepatically metabolized. Reduce dose to 20 mg/m2 (mild) or 15 mg/m2 (moderate) impairment. CONTRAINDICATED if total bilirubin >3x ULN (severe impairment).",
+  "interactions": {
+    "major": ["Strong CYP3A inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir, voriconazole, etc.) - increase cabazitaxel levels; avoid or reduce dose 25%", "Live vaccines - avoid in immunosuppressed patients"],
+    "moderate": ["Strong CYP3A inducers (rifampin, phenytoin, carbamazepine) - may reduce cabazitaxel exposure", "Other myelosuppressive agents - additive bone marrow suppression"],
+    "minor": ["Cabazitaxel is a P-gp substrate; clinical interaction risk low at 25 mg/m2"],
+    "food": "No specific food interactions (IV drug); avoid grapefruit (CYP3A inhibitor) during therapy.",
+    "alcohol": "Limit alcohol; potential added hepatotoxicity and nausea.",
+    "diagnostics": "Causes neutropenia, anemia, thrombocytopenia on CBC; may elevate LFTs."
+  },
+  "se": {
+    "common": ["Neutropenia", "Anemia", "Leukopenia", "Thrombocytopenia", "Diarrhea", "Nausea", "Vomiting", "Fatigue", "Asthenia", "Constipation", "Hematuria", "Back pain", "Decreased appetite", "Peripheral neuropathy", "Alopecia"],
+    "serious": ["Febrile neutropenia", "Neutropenic infection/sepsis", "Severe hypersensitivity reactions", "GI hemorrhage, perforation, neutropenic enterocolitis", "Renal failure", "Interstitial pneumonitis / ARDS", "Hemorrhagic cystitis"],
+    "rare": ["Ventricular fibrillation", "Cerebral hemorrhage", "Calcinosis-type tissue injury", "Interstitial lung disease"],
+    "emergency": ["Severe hypersensitivity (generalized rash/erythema, hypotension, bronchospasm) - discontinue infusion immediately", "Febrile neutropenia / neutropenic sepsis - medical emergency", "GI perforation or hemorrhage", "Acute respiratory distress syndrome"]
+  },
+  "monitoring": [
+    "Frequent complete blood counts to detect neutropenia; do not give if ANC <=1,500/mm3",
+    "Signs of hypersensitivity during and after each infusion",
+    "Liver function tests and total bilirubin before and during treatment",
+    "Renal function and hydration status; watch for diarrhea-related dehydration",
+    "Respiratory symptoms (dyspnea, cough) for pneumonitis/ILD",
+    "Urinary symptoms for cystitis, especially after prior pelvic radiation"
+  ],
+  "counsel": [
+    "Report fever, chills or signs of infection immediately - life-threatening neutropenia can occur",
+    "Tell your team about rash, flushing, difficulty breathing or dizziness during infusion",
+    "Report severe or persistent diarrhea, vomiting, or signs of dehydration",
+    "Report blood in urine, painful urination, or new breathing problems",
+    "Use effective contraception (males with female partners); do not breastfeed",
+    "Premedication and growth-factor (G-CSF) support may be needed to prevent complications"
+  ],
+  "pk": [
+    ["Onset", "Immediate (IV); cytotoxic effect over treatment cycles"],
+    ["Peak", "End of one-hour infusion (Tmax); Cmax ~226 ng/mL at 25 mg/m2"],
+    ["Half-life", "Terminal half-life ~95 hours"],
+    ["Duration", "Dosed every 3 weeks; ~80% eliminated within 2 weeks"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C; do not refrigerate"]
+  ],
+  "pearls": [
+    "BOXED WARNING: neutropenic deaths reported - obtain frequent blood counts; contraindicated if ANC <=1,500/mm3",
+    "BOXED WARNING: severe hypersensitivity (rash, hypotension, bronchospasm) - premedicate and discontinue immediately if it occurs",
+    "Primary G-CSF prophylaxis recommended in high-risk patients and in all patients at the 25 mg/m2 dose",
+    "Contraindicated with prior severe hypersensitivity to polysorbate 80-formulated drugs",
+    "Elderly patients (>=65 yr) have higher rates of fatal outcomes and toxicity - monitor closely",
+    "Use only PVC-free containers and a 0.22 micron in-line filter"
+  ],
+  "missed": "Cabazitaxel is administered in a supervised oncology setting on a fixed every-3-week schedule. Missed or delayed doses are managed by the oncology team based on blood counts and toxicity; patients should not self-administer or reschedule.",
+  "overdose": "No known antidote; overdose (often from improper preparation) worsens bone marrow suppression and GI toxicity and has caused fatal outcomes. Manage in a specialized unit with close monitoring of vital signs and chemistry; give therapeutic G-CSF as soon as possible and provide symptomatic supportive care.",
+  "refs": [
+    ["FDA JEVTANA (cabazitaxel) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cabazitaxel%22"],
+    ["FDA DailyMed - Cabazitaxel (JEVTANA)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

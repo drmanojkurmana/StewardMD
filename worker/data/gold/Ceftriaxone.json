@@ -1,0 +1,143 @@
+{
+  "generic": "Ceftriaxone",
+  "cls": "Antibacterial (cephalosporin)",
+  "pharm": "Third-generation cephalosporin; cell-wall synthesis inhibitor",
+  "tags": ["Rx", "Habit forming: No", "IV", "IM"],
+  "quick": [
+    ["Adult dose", "1-2 g once daily IV/IM"],
+    ["Meal", "Parenteral; N/A"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Low levels in milk; caution"],
+    ["Renal", "No adjustment usually needed"],
+    ["Hepatic", "No adjustment usually needed"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Allergy, CBC, signs of CDAD"]
+  ],
+  "summary": "Ceftriaxone is a long-acting third-generation cephalosporin given IV or IM for many serious bacterial infections, from pneumonia and meningitis to gonorrhea. Once-daily dosing suits most indications. Key safety issue: ceftriaxone-calcium precipitates, so it must not be mixed with calcium-containing IV fluids in neonates.",
+  "indications": [
+    "Lower respiratory tract infections (incl. pneumonia)",
+    "Acute bacterial otitis media",
+    "Skin and skin-structure infections",
+    "Urinary tract infections (complicated and uncomplicated)",
+    "Uncomplicated gonorrhea",
+    "Pelvic inflammatory disease",
+    "Bacterial septicemia",
+    "Bone and joint infections",
+    "Intra-abdominal infections",
+    "Bacterial meningitis",
+    "Surgical (preoperative) prophylaxis"
+  ],
+  "dosage": [
+    {"c": "Most adult infections", "r": "IV/IM", "d": "1-2 g once daily (or divided q12h); max 4 g/day", "t": "4-14 days", "n": "Continue at least 2 days after symptoms resolve"},
+    {"c": "Uncomplicated gonorrhea", "r": "IM", "d": "250 mg single dose", "t": "Single dose", "n": "Add antichlamydial cover if indicated"},
+    {"c": "Surgical prophylaxis", "r": "IV", "d": "1 g single dose", "t": "Once, 0.5-2 h pre-op", "n": "Pre-incision"},
+    {"c": "S. pyogenes infection", "r": "IV/IM", "d": "Usual dose", "t": "At least 10 days", "n": ""},
+    {"c": "Pediatric serious infections (non-meningitis)", "r": "IV/IM", "d": "50-75 mg/kg/day; max 2 g/day", "t": "Per infection", "n": "Once daily or divided q12h"},
+    {"c": "Pediatric meningitis", "r": "IV/IM", "d": "Initial 100 mg/kg (max 4 g), then 100 mg/kg/day; max 4 g/day", "t": "7-14 days", "n": "Once daily or divided q12h"},
+    {"c": "Pediatric acute otitis media", "r": "IM", "d": "50 mg/kg single dose; max 1 g", "t": "Single dose", "n": ""},
+    {"c": "Pediatric skin/skin-structure", "r": "IV/IM", "d": "50-75 mg/kg/day; max 2 g/day", "t": "Per infection", "n": ""}
+  ],
+  "admin": [
+    "Give IV infusion over 30 minutes (over 60 minutes in neonates to reduce bilirubin encephalopathy risk)",
+    "Do NOT reconstitute or dilute with calcium-containing diluents (e.g., Ringer's, Hartmann's)",
+    "Do NOT co-administer with calcium-containing IV solutions in neonates",
+    "In non-neonates, ceftriaxone and calcium solutions may be given sequentially if line is thoroughly flushed",
+    "Do NOT give IV solutions containing lidocaine; lidocaine only as diluent for IM use",
+    "Obtain culture/susceptibility before starting when possible"
+  ],
+  "moa": "Beta-lactam that binds penicillin-binding proteins, inhibiting bacterial cell-wall (peptidoglycan) synthesis; bactericidal. Resistant to many beta-lactamases.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to ceftriaxone, its excipients, or any cephalosporin",
+      "Premature neonates up to post-menstrual age of 41 weeks",
+      "Hyperbilirubinemic neonates (ceftriaxone displaces bilirubin from albumin -> bilirubin encephalopathy risk)",
+      "Neonates (<=28 days) requiring calcium-containing IV solutions (ceftriaxone-calcium precipitation risk)",
+      "IV solutions containing lidocaine"
+    ],
+    "relative": [
+      "Prior hypersensitivity to penicillins/other beta-lactams (cross-reactivity risk)",
+      "History of GI disease, particularly colitis",
+      "Severe renal AND hepatic impairment combined"
+    ],
+    "monitor": [
+      "Signs of allergic/anaphylactic reaction",
+      "Diarrhea suggestive of C. difficile colitis",
+      "Prolonged therapy: CBC, hematologic and hepatic parameters"
+    ]
+  },
+  "preg": "No evidence of harm in animals; no adequate human studies. Use only if clearly needed.",
+  "lact": "Low concentrations excreted in human milk; use with caution.",
+  "renal": "No dosage adjustment usually needed; caution if severe renal AND hepatic impairment.",
+  "hepatic": "No dosage adjustment usually needed; caution if severe renal AND hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Calcium-containing IV solutions (precipitation, fatal in neonates)",
+      "Lidocaine-containing IV solutions (contraindicated IV)"
+    ],
+    "moderate": [
+      "Other potentially nephrotoxic agents (additive risk)"
+    ],
+    "minor": [],
+    "food": "Parenteral drug; food not relevant.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause false-positive urine glucose (non-enzymatic methods) and false-positive Coombs test."
+  },
+  "se": {
+    "common": [
+      "Eosinophilia",
+      "Thrombocytosis",
+      "Elevated AST/ALT",
+      "Diarrhea/loose stools",
+      "Local injection-site pain, induration"
+    ],
+    "serious": [
+      "Anaphylaxis / severe hypersensitivity reactions",
+      "Clostridioides difficile-associated (pseudomembranous) colitis",
+      "Neurological reactions (encephalopathy, seizures, myoclonus)",
+      "Hemolytic anemia",
+      "Ceftriaxone-calcium precipitation (lung/kidney crystals, neonates)"
+    ],
+    "rare": [
+      "Neutropenia, thrombocytopenia, prolonged prothrombin time",
+      "Biliary/renal pseudolithiasis (sludge)",
+      "Severe cutaneous reactions"
+    ],
+    "emergency": [
+      "Anaphylaxis (give epinephrine, supportive measures)",
+      "Severe/persistent bloody diarrhea (possible C. difficile)",
+      "Seizures or encephalopathy"
+    ]
+  },
+  "monitoring": [
+    "Assess for penicillin/cephalosporin/beta-lactam allergy before first dose",
+    "Watch for hypersensitivity during and after administration",
+    "Monitor for diarrhea / signs of C. difficile colitis",
+    "Prolonged therapy: periodic CBC, renal and hepatic function",
+    "Neonates: avoid concurrent calcium-containing IV fluids; monitor bilirubin"
+  ],
+  "counsel": [
+    "Report rash, itching, swelling, or trouble breathing immediately",
+    "Report severe or watery/bloody diarrhea, even weeks after treatment",
+    "Complete the full prescribed course",
+    "Tell clinician about all penicillin or cephalosporin allergies",
+    "Injection-site discomfort may occur"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV); peak IM 2-3 h"],
+    ["Peak", "~151 mcg/mL after 1 g IV (end of infusion)"],
+    ["Half-life", "5.8-8.7 h (adults)"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "Store dry powder per label; use reconstituted solution per stability instructions"]
+  ],
+  "pearls": [
+    "Long half-life (~8 h) allows once-daily dosing in most infections.",
+    "Single 250 mg IM dose treats uncomplicated gonorrhea; add antichlamydial cover as it lacks activity against C. trachomatis.",
+    "Contraindicated in neonates needing calcium-containing IV fluids - ceftriaxone-calcium precipitates have caused fatal lung/kidney crystallization.",
+    "Hyperbilirubinemic and premature neonates must not receive it (bilirubin displacement -> encephalopathy).",
+    "Eliminated by both renal (33-67% unchanged) and biliary routes, so no routine dose change for renal OR hepatic impairment alone.",
+    "Not removed by hemodialysis or peritoneal dialysis."
+  ],
+  "missed": "Parenteral, clinician-administered; resume schedule as directed - do not double up.",
+  "overdose": "Discontinue drug; supportive care. Not reduced by dialysis. Watch for neurological effects (encephalopathy, seizures), especially in renal impairment.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

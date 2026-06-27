@@ -1,0 +1,113 @@
+{
+  "generic": "Sodium Nitroprusside",
+  "cls": "Direct-acting nitric oxide vasodilator (arterial and venous) - parenteral antihypertensive",
+  "pharm": "A potent, rapidly acting intravenous nitric oxide donor that dilates both arteries and veins, reducing preload and afterload; used for hypertensive emergencies, controlled hypotension during surgery, and acute decompensated heart failure, with a continuous infusion that must be titrated to blood pressure.",
+  "tags": ["Rx only", "BOXED WARNING: excessive hypotension & cyanide toxicity", "Hypertensive emergency", "IV infusion only", "ICU/continuous monitoring", "Light-protected"],
+  "quick": [
+    ["Adult dose", "IV infusion start 0.3 mcg/kg/min, titrate to BP; usual ~3 mcg/kg/min; MAX 10 mcg/kg/min"],
+    ["Meal", "Not applicable - continuous IV infusion only"],
+    ["Pregnancy", "Category C; cyanide crosses placenta - use only if clearly needed, limit dose/duration"],
+    ["Lactation", "Excretion in milk unknown; weigh benefit vs risk"],
+    ["Renal", "Thiocyanate accumulates - limit to <=3 mcg/kg/min (<=1 in anuria); monitor thiocyanate"],
+    ["Hepatic", "Impaired cyanide detoxification - use with caution, higher cyanide toxicity risk"],
+    ["Alcohol", "Not relevant during acute IV therapy"],
+    ["Monitoring", "Continuous BP (arterial line), acid-base/lactate, mixed venous O2, thiocyanate/cyanide"]
+  ],
+  "summary": "Sodium nitroprusside is a powerful intravenous vasodilator used for immediate reduction of blood pressure in hypertensive crises, for controlled hypotension during surgery, and for acute decompensated heart failure. It acts as a nitric oxide donor, dilating both resistance (arterial) and capacitance (venous) vessels. Because of its potency and very short half-life it must be given as a continuous, carefully titrated IV infusion, ideally with intra-arterial blood pressure monitoring, starting at 0.3 mcg/kg/min and not exceeding 10 mcg/kg/min (and only briefly at the maximum). Its metabolism releases cyanide, which is converted to thiocyanate; excessive or prolonged infusion - especially with renal impairment or low thiosulfate stores - can cause life-threatening cyanide and thiocyanate toxicity. It carries a boxed warning for excessive hypotension and cyanide toxicity.",
+  "indications": [
+    "Immediate reduction of blood pressure in adults and children with hypertensive crises",
+    "Production of controlled hypotension during anesthesia to reduce intraoperative bleeding",
+    "Treatment of acute congestive (decompensated) heart failure"
+  ],
+  "dosage": [
+    {"c": "Hypertensive crisis / controlled hypotension / acute heart failure", "r": "Adult & pediatric IV infusion", "d": "Start 0.3 mcg/kg/min; titrate upward every few minutes; average effective dose ~3 mcg/kg/min", "t": "Continuous infusion", "n": "Must be diluted in 5% dextrose; titrate to target blood pressure"},
+    {"c": "Maximum infusion rate", "r": "IV infusion", "d": "Do NOT exceed 10 mcg/kg/min", "t": "Continuous", "n": "If BP is not controlled within 10 minutes at the maximum rate, discontinue immediately"},
+    {"c": "Prolonged infusion ceiling (cyanide-limited)", "r": "IV infusion", "d": "Keep prolonged infusions at <=3 mcg/kg/min (and <=1 mcg/kg/min in anuric patients)", "t": "Continuous", "n": "Co-infuse sodium thiosulfate when higher rates are needed to buffer cyanide"},
+    {"c": "Renal impairment / anuria", "r": "IV infusion", "d": "Lower maximum prolonged rate (<=1 mcg/kg/min if anuric)", "t": "Continuous", "n": "Thiocyanate accumulates; monitor thiocyanate levels (keep <1 mmol/L = ~60 mg/L)"}
+  ],
+  "admin": [
+    "NOT for direct injection - must be diluted in 5% dextrose injection before infusion via a controlled infusion device (pump)",
+    "Reconstitute and dilute only in D5W; do not add any other drug or preservative to the solution",
+    "Protect the infusion from light - wrap the container in the supplied opaque sleeve or aluminum foil (tubing need not be wrapped)",
+    "Use continuous, preferably intra-arterial, blood pressure monitoring in an ICU/monitored setting",
+    "A faintly brownish tint is acceptable; discard solution that is blue, green, or dark red (degradation)",
+    "Have sodium thiosulfate (and hydroxocobalamin) available; limit infusion duration and rate to minimize cyanide accumulation"
+  ],
+  "moa": "Sodium nitroprusside is a direct-acting vasodilator. After interacting with sulfhydryl groups and red cells it releases nitric oxide (NO), which activates guanylate cyclase in vascular smooth muscle to increase intracellular cyclic GMP, producing relaxation of both arterial (resistance) and venous (capacitance) vessels. The result is a fall in peripheral vascular resistance (afterload) and venous return (preload), lowering blood pressure and, in heart failure, improving cardiac output. The nitroprusside molecule contains five cyanide groups; its metabolism liberates cyanide, which is converted by rhodanase (using thiosulfate) to thiocyanate and excreted renally.",
+  "contra": {
+    "absolute": [
+      "Compensatory hypertension (e.g., arteriovenous shunt or coarctation of the aorta), where reducing pressure is harmful",
+      "Treatment of acute congestive heart failure associated with reduced peripheral vascular resistance (e.g., high-output states such as sepsis)",
+      "Congenital (Leber's) optic atrophy or tobacco amblyopia (these patients have defective cyanide metabolism via rhodanase)",
+      "Inadequate cerebral circulation / moribund patients (ASA Class 5E) coming to emergency surgery",
+      "Known hypersensitivity to nitroprusside"
+    ],
+    "relative": [
+      "Renal impairment / anuria (thiocyanate accumulation)",
+      "Hepatic impairment (impaired cyanide detoxification)",
+      "Hypothyroidism (thiocyanate inhibits iodine uptake)",
+      "Hyponatremia or hypovolemia (exaggerated hypotension)",
+      "Increased intracranial pressure",
+      "Vitamin B12 deficiency / poor nutritional state"
+    ],
+    "monitor": [
+      "Continuous (intra-arterial) blood pressure - risk of precipitous hypotension",
+      "Acid-base status / serum lactate and mixed venous oxygen (early markers of cyanide toxicity)",
+      "Thiocyanate levels during prolonged infusion or renal impairment; cyanide if toxicity suspected",
+      "Signs of cyanide toxicity: metabolic acidosis, rising venous oxygen, tachycardia/tachyphylaxis to the drug, altered mental status"
+    ]
+  },
+  "preg": "Pregnancy Category C. There are no adequate and well-controlled studies in pregnant women. Cyanide crosses the placenta and fetal cyanide levels are related to maternal nitroprusside dose, raising concern for fetal cyanide toxicity. Use during pregnancy only if the potential benefit justifies the potential risk, using the lowest effective dose for the shortest possible time.",
+  "lact": "It is not known whether nitroprusside or its metabolites (cyanide/thiocyanate) are excreted in human milk. Because of the potential for serious adverse reactions, a decision should be made to discontinue nursing or the drug; given its short duration of use, temporary interruption of breastfeeding around administration is reasonable.",
+  "renal": "Thiocyanate, the metabolite of cyanide, is eliminated by the kidneys (half-life about 3 days, much longer in renal failure). In renal impairment thiocyanate accumulates and can cause toxicity (tinnitus, confusion, hyperreflexia, seizures, psychosis). Limit prolonged infusions to <=3 mcg/kg/min, or <=1 mcg/kg/min in anuric patients, and monitor serum thiocyanate (toxicity >1 mmol/L). Thiocyanate is dialyzable.",
+  "hepatic": "Hepatic impairment reduces the capacity to detoxify cyanide (via rhodanase, which requires thiosulfate), increasing the risk of cyanide accumulation and toxicity. Use with caution, limit dose and duration, and consider co-administration of sodium thiosulfate.",
+  "interactions": {
+    "major": [
+      "Other antihypertensives, volatile anesthetics (halothane, isoflurane), and negative inotropes - additive, potentially profound hypotension",
+      "Phosphodiesterase-5 inhibitors (sildenafil, tadalafil) and other nitric oxide donors/nitrates - severe hypotension"
+    ],
+    "moderate": [
+      "Sympathomimetics/pressors - antagonize the hypotensive effect (may be used to manage overshoot)",
+      "Estrogens / drugs affecting thiocyanate clearance"
+    ],
+    "minor": [],
+    "food": "Not applicable - parenteral therapy.",
+    "alcohol": "Not relevant during acute IV use; alcohol does not modify acute therapy.",
+    "diagnostics": "Cyanide toxicity causes high mixed venous oxygen saturation and metabolic (lactic) acidosis; thiocyanate interferes with thyroid iodine uptake."
+  },
+  "se": {
+    "common": ["Hypotension (often dose-related)", "Nausea", "Retching/vomiting", "Headache", "Diaphoresis", "Apprehension/restlessness", "Palpitations", "Abdominal pain", "Dizziness"],
+    "serious": ["Excessive/precipitous hypotension with ischemic injury", "Cyanide toxicity (metabolic acidosis, increasing venous O2, tachyphylaxis)", "Thiocyanate toxicity (confusion, hyperreflexia, seizures, psychosis)", "Methemoglobinemia", "Increased intracranial pressure", "Reflex tachycardia and worsened myocardial ischemia"],
+    "rare": ["Hypothyroidism (with prolonged use)", "Venous oxygen rise/lactic acidosis", "Ileus", "Rebound hypertension on abrupt withdrawal"],
+    "emergency": ["Cyanide toxicity (worsening metabolic acidosis, rising mixed venous oxygen, altered consciousness, cardiovascular collapse)", "Severe refractory hypotension/shock", "Seizures and coma from thiocyanate or cyanide toxicity"]
+  },
+  "monitoring": ["Continuous arterial blood pressure (intra-arterial line preferred)", "Acid-base status, serum lactate, and mixed venous oxygen saturation (cyanide markers)", "Thiocyanate concentration during prolonged infusion or renal impairment; cyanide if toxicity suspected", "Heart rate and signs of myocardial ischemia", "Mental status and neurologic signs (thiocyanate toxicity)"],
+  "counsel": [
+    "This is a hospital intensive-care medicine given through a vein and adjusted minute-to-minute by your care team",
+    "Your blood pressure will be watched continuously, often with a line in an artery",
+    "Tell the team about dizziness, nausea, headache, sweating, or feeling faint",
+    "Blood tests may be done to check for a rare side effect (cyanide/thiocyanate buildup), especially if used for more than a short time or if your kidneys are not working well",
+    "The infusion bag is covered to protect the medicine from light - this is normal"
+  ],
+  "pk": [
+    ["Onset", "Almost immediate (within seconds to 1-2 minutes)"],
+    ["Peak", "Maximal effect within 1-2 minutes of a rate change"],
+    ["Half-life", "Nitroprusside ~2 minutes; thiocyanate metabolite ~3 days (longer in renal failure)"],
+    ["Duration", "Effect dissipates within 1-10 minutes of stopping the infusion"],
+    ["Storage", "Store at 20-25 C; protect from light. Diluted solution stable 24 h when protected from light"]
+  ],
+  "pearls": [
+    "BOXED WARNING: can cause precipitous, life-threatening hypotension and accumulates cyanide except at low (<2 mcg/kg/min) rates or brief use",
+    "Never give undiluted/direct IV push - dilute in D5W and infuse via pump with continuous BP monitoring",
+    "Maximum 10 mcg/kg/min and only briefly; stop if BP not controlled within 10 minutes at max rate",
+    "Cyanide toxicity clues: worsening metabolic (lactic) acidosis, RISING mixed venous O2 saturation, and tachyphylaxis (needing ever-higher rates)",
+    "Antidotes: sodium thiosulfate (sulfur donor), hydroxocobalamin, and sodium nitrite for cyanide toxicity",
+    "Protect from light (wrap container in foil/opaque sleeve); thiocyanate accumulates in renal failure - limit rate and monitor levels"
+  ],
+  "missed": "Not applicable - sodium nitroprusside is given only as a continuously titrated intravenous infusion by clinical staff; there is no patient-administered or scheduled missed-dose concept.",
+  "overdose": "Overdose manifests primarily as excessive hypotension and cyanide toxicity. For overdose/excessive hypotension: stop or slow the infusion - blood pressure recovers within minutes; place the patient supine with legs elevated and give IV fluids/vasopressors as needed. For cyanide toxicity (metabolic acidosis, high venous oxygen, altered mental status): discontinue immediately, give 100% oxygen, and administer antidotes - sodium thiosulfate (e.g., 150-200 mg/kg IV) with sodium nitrite (to induce ~10% methemoglobinemia) or hydroxocobalamin. Thiocyanate toxicity can be removed by hemodialysis. Provide full supportive care.",
+  "refs": [
+    ["FDA Label - Sodium Nitroprusside Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sodium+nitroprusside%22"],
+    ["DailyMed - Sodium Nitroprusside Injection", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=nitroprusside"]
+  ]
+}

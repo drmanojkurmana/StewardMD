@@ -1,0 +1,105 @@
+{
+  "generic": "Granisetron",
+  "cls": "5-HT3 receptor antagonist (antiemetic)",
+  "pharm": "Selectively blocks serotonin 5-HT3 receptors peripherally on vagal nerve terminals and centrally in the chemoreceptor trigger zone, preventing chemotherapy- and radiation-induced emesis.",
+  "tags": ["Antiemetic", "5-HT3 antagonist", "QT prolongation", "Serotonin syndrome", "Oral"],
+  "quick": [
+    ["Adult dose", "2 mg once daily or 1 mg twice daily on chemo/radiation days"],
+    ["Meal", "May take with or without food"],
+    ["Pregnancy", "Animal data reassuring; use only if clearly needed"],
+    ["Lactation", "Excretion in milk unknown; use with caution"],
+    ["Renal", "No dosage adjustment needed"],
+    ["Hepatic", "No dosage adjustment needed"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "ECG/electrolytes if QT risk factors"]
+  ],
+  "summary": "Granisetron is a selective 5-HT3 receptor antagonist used to prevent nausea and vomiting from emetogenic chemotherapy (including high-dose cisplatin) and radiation. It is generally well tolerated, requires no dose adjustment for renal or hepatic impairment, and carries risks of QT prolongation and serotonin syndrome, particularly with concomitant serotonergic drugs.",
+  "indications": [
+    "Prevention of nausea and vomiting associated with initial and repeat courses of emetogenic cancer chemotherapy, including high-dose cisplatin",
+    "Prevention of nausea and vomiting associated with radiation, including total body irradiation and fractionated abdominal radiation"
+  ],
+  "dosage": [
+    {"c": "Emetogenic chemotherapy (once-daily regimen)", "r": "Adult", "d": "2 mg orally once daily", "t": "Up to 1 hour before chemotherapy", "n": "Given only on day(s) chemotherapy is administered"},
+    {"c": "Emetogenic chemotherapy (twice-daily regimen)", "r": "Adult", "d": "1 mg orally, then 1 mg 12 hours later", "t": "First dose up to 1 hour before chemotherapy", "n": "Continued treatment between chemo cycles is not useful"},
+    {"c": "Radiation (total body or fractionated abdominal)", "r": "Adult", "d": "2 mg orally once daily", "t": "Within 1 hour of radiation", "n": "Given on day(s) of radiation"},
+    {"c": "Renal failure / hepatic impairment / elderly", "r": "Adult", "d": "No dosage adjustment recommended", "t": "Per indication", "n": "Wide pharmacokinetic variability noted in hepatic impairment"}
+  ],
+  "admin": [
+    "Administer up to 1 hour before chemotherapy (within 1 hour of radiation)",
+    "May be given with or without food",
+    "Oral solution: a 2 mg dose (10 mL) is bioequivalent to two 1 mg tablets and may be used interchangeably",
+    "Give only on day(s) of emetogenic therapy; do not continue between cycles",
+    "Assess QT risk factors before use, especially with cardiac disease or QT-prolonging drugs"
+  ],
+  "moa": "Granisetron is a selective 5-HT3 receptor antagonist with little or no affinity for other serotonin, adrenergic, dopaminergic, histaminergic, benzodiazepine, or opioid receptors. Emetogenic chemotherapy and radiation cause release of serotonin from enterochromaffin cells of the small intestine; serotonin stimulates 5-HT3 receptors on vagal afferents and centrally in the chemoreceptor trigger zone of the area postrema, evoking the vomiting reflex. Granisetron blocks this serotonin stimulation to prevent emesis.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to granisetron or any of its components"
+    ],
+    "relative": [
+      "Pre-existing arrhythmias or cardiac conduction disorders",
+      "Congenital long QT syndrome or electrolyte abnormalities",
+      "Concomitant QT-prolonging or cardiotoxic drugs"
+    ],
+    "monitor": [
+      "ECG in patients with QT risk factors",
+      "Serum electrolytes (potassium, magnesium)",
+      "Signs of masked progressive ileus or gastric distention after abdominal surgery"
+    ]
+  },
+  "preg": "Pregnancy Category B (older labeling). Animal reproduction studies in rats and rabbits at doses far exceeding the human dose revealed no evidence of impaired fertility or fetal harm. There are no adequate and well-controlled studies in pregnant women; use during pregnancy only if clearly needed.",
+  "lact": "It is not known whether granisetron is excreted in human milk. Because many drugs are excreted in human milk, exercise caution when administering to a nursing woman.",
+  "renal": "Total clearance of granisetron was not affected in patients with severe renal failure. No dosage adjustment is recommended.",
+  "hepatic": "In patients with hepatic impairment due to neoplastic liver involvement, total clearance was approximately halved; however, given the wide pharmacokinetic variability, no dosage adjustment is necessary.",
+  "interactions": {
+    "major": [
+      "Serotonergic drugs (SSRIs, SNRIs, MAOIs, mirtazapine, fentanyl, lithium, tramadol, IV methylene blue) - serotonin syndrome, sometimes fatal",
+      "QT-prolonging / arrhythmogenic drugs - additive risk of clinically significant QT prolongation"
+    ],
+    "moderate": [
+      "Strong hepatic CYP enzyme inducers (e.g., phenobarbital) may increase clearance (~25% increase observed)",
+      "CYP3A4 inhibitors (e.g., ketoconazole) may inhibit metabolism (clinical significance unknown)"
+    ],
+    "minor": [
+      "No significant interaction with benzodiazepines, neuroleptics, or anti-ulcer agents",
+      "Does not appear to interact with emetogenic cancer chemotherapies"
+    ],
+    "food": "Food slightly decreases AUC (~5%) and increases Cmax (~30%); may be taken with or without food.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Headache", "Constipation", "Asthenia", "Diarrhea", "Abdominal pain", "Dyspepsia"],
+    "serious": ["QT prolongation", "Serotonin syndrome", "Hypersensitivity reactions (including anaphylaxis)"],
+    "rare": ["Hypotension", "Angina pectoris", "Atrial fibrillation", "Syncope", "Extrapyramidal symptoms", "Elevated AST/ALT"],
+    "emergency": ["Anaphylaxis", "Severe arrhythmia/syncope", "Serotonin syndrome (agitation, hyperthermia, rigidity, autonomic instability)"]
+  },
+  "monitoring": ["ECG in patients with pre-existing arrhythmias, cardiac disease, electrolyte abnormalities, or on QT-prolonging/cardiotoxic drugs", "Serum potassium and magnesium", "Signs of serotonin syndrome, especially with concomitant serotonergic drugs", "Liver enzymes (transient AST/ALT elevation reported)"],
+  "counsel": [
+    "Report fast or irregular heartbeat, fainting, or dizziness",
+    "Report agitation, confusion, sweating, tremor, or fever (possible serotonin syndrome)",
+    "Headache and constipation are the most common side effects",
+    "Take only on the days of chemotherapy or radiation as directed",
+    "Inform clinician of all medications, especially antidepressants and heart drugs"
+  ],
+  "pk": [
+    ["Onset", "Within ~1 hour (oral)"],
+    ["Peak", "Cmax ~3.6 ng/mL after a single 1 mg oral dose"],
+    ["Half-life", "~6.2 hours (volunteers); longer in elderly; ~9 h after IV"],
+    ["Duration", "Up to 24 hours (supports once-daily dosing)"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep tightly closed, upright; protect from light"]
+  ],
+  "pearls": [
+    "Once-daily 2 mg and twice-daily 1 mg regimens are comparably effective",
+    "No dose adjustment needed for renal failure, hepatic impairment, or age",
+    "Give only on treatment days; continued dosing between cycles is not useful",
+    "QT prolongation reported; use caution with cardiac disease or QT-prolonging drugs",
+    "Serotonin syndrome can occur, especially with other serotonergic agents"
+  ],
+  "missed": "Used as scheduled prophylaxis on treatment days only. If a dose is missed, take when remembered unless near the next planned dose; do not double up. Confirm timing with the oncology team.",
+  "overdose": "There is no specific antidote. Overdoses up to 38.5 mg of granisetron hydrochloride (injection) have been reported with no symptoms or only a slight headache. Manage symptomatically with supportive care.",
+  "refs": [
+    ["FDA Prescribing Information - Granisetron (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22granisetron%22"],
+    ["DailyMed - Granisetron", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=granisetron"]
+  ]
+}

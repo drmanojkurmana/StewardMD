@@ -1,0 +1,134 @@
+{
+  "generic": "Enalapril",
+  "cls": "Antihypertensive; heart failure agent",
+  "pharm": "Angiotensin-converting enzyme (ACE) inhibitor (prodrug of enalaprilat)",
+  "tags": ["ace inhibitor", "enalapril", "hypertension", "heart failure", "left ventricular dysfunction", "renin-angiotensin system", "acei", "cardiovascular", "prodrug"],
+  "quick": [
+    ["Adult dose", "HTN: 5 mg once daily; usual range 10-40 mg/day"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Boxed warning - fetal toxicity; discontinue when detected"],
+    ["Lactation", "Detected in milk; weigh continuing nursing vs drug"],
+    ["Renal", "CrCl <=30 (SCr >=3): start 2.5 mg/day; 2.5 mg on dialysis days"],
+    ["Hepatic", "Use caution; prodrug requires hepatic activation"],
+    ["Alcohol", "Limit; may worsen hypotension"],
+    ["Monitoring", "BP, serum potassium, renal function (BUN/creatinine)"]
+  ],
+  "summary": "Enalapril is an ACE inhibitor prodrug, hydrolyzed to active enalaprilat, used for hypertension, symptomatic congestive heart failure (usually with diuretics and digitalis), and asymptomatic left ventricular dysfunction (ejection fraction <=35%). It lowers blood pressure and improves outcomes by suppressing the renin-angiotensin-aldosterone system, reducing angiotensin II and aldosterone. In heart failure it improves symptoms, increases survival, and reduces hospitalizations; in asymptomatic LV dysfunction it slows progression to overt heart failure. It carries a boxed warning for fetal toxicity and must be discontinued when pregnancy is detected. Class effects include cough, hyperkalemia, angioedema, and renal function changes requiring monitoring.",
+  "indications": [
+    "Hypertension (alone or with other antihypertensives, especially thiazide-type diuretics)",
+    "Symptomatic congestive heart failure (usually with diuretics and digitalis) - improves symptoms, increases survival, and reduces frequency of hospitalization",
+    "Asymptomatic left ventricular dysfunction (ejection fraction <=35%) - decreases the rate of development of overt heart failure and incidence of hospitalization for heart failure"
+  ],
+  "dosage": [
+    {"c": "Hypertension (not on a diuretic)", "r": "Oral", "d": "Initial 5 mg once daily; usual range 10-40 mg/day as a single dose or two divided doses", "t": "Adjust per BP response; if effect wanes toward end of interval, increase dose or split to twice daily", "n": "If BP uncontrolled on enalapril alone, a diuretic may be added"},
+    {"c": "Hypertension in patients on a diuretic", "r": "Oral", "d": "Initial 2.5 mg once daily under medical supervision", "t": "Resume diuretic if BP not controlled on enalapril alone", "n": "If possible discontinue the diuretic 2-3 days before starting; if it cannot be stopped, observe for at least 2 h after first dose and until BP stable for an additional hour"},
+    {"c": "Symptomatic heart failure", "r": "Oral", "d": "Initial 2.5 mg; usual range 2.5-20 mg twice daily; max 40 mg/day in divided doses", "t": "Titrate upward as tolerated over days to weeks", "n": "Observe under medical supervision at least 2 h after first dose and until BP stable for an additional hour; reduce concomitant diuretic dose if possible"},
+    {"c": "Asymptomatic left ventricular dysfunction", "r": "Oral", "d": "Start 2.5 mg twice daily; titrate to target 20 mg/day in divided doses", "t": "Titrate as tolerated", "n": "Observe at least 2 h after first dose and until BP stable for an additional hour; reduce concomitant diuretic if possible"},
+    {"c": "Hypertension with renal impairment (CrCl <=30 mL/min, SCr >=3 mg/dL)", "r": "Oral", "d": "Initial 2.5 mg once daily; titrate up to a maximum of 40 mg/day", "t": "Titrate until BP controlled", "n": "Dialysis patients: 2.5 mg on dialysis days; adjust nondialysis-day dosing per BP"},
+    {"c": "Heart failure with renal impairment or hyponatremia (Na <130 mEq/L or SCr >1.6 mg/dL)", "r": "Oral", "d": "Initiate at 2.5 mg daily; increase to 2.5 mg BID, then 5 mg BID and higher as needed; max 40 mg/day", "t": "Increase usually at intervals of >=4 days if no excessive hypotension or renal deterioration", "n": "Initiate under close medical supervision"},
+    {"c": "Pediatric hypertension", "r": "Oral", "d": "Start 0.08 mg/kg (up to 5 mg) once daily", "t": "Adjust per BP response", "n": "Doses above 0.58 mg/kg or 40 mg not studied; not recommended in neonates or if GFR <30 mL/min/1.73 m2"}
+  ],
+  "admin": [
+    "May be taken with or without food (absorption is not influenced by food)",
+    "In patients on diuretics, discontinue the diuretic 2-3 days before starting if possible, or use a 2.5 mg initial dose under supervision",
+    "Observe heart failure and LV dysfunction patients for at least 2 h after the first dose and until BP is stable for an additional hour",
+    "An oral suspension (1.0 mg/mL) can be prepared from tablets with sodium citrate/citric acid solution and Ora-Sweet SF for patients unable to swallow tablets",
+    "Avoid potassium supplements, potassium-containing salt substitutes, and potassium-sparing diuretics unless directed"
+  ],
+  "moa": "Enalapril is a prodrug hydrolyzed to enalaprilat, a more potent inhibitor of angiotensin-converting enzyme (ACE). ACE is a peptidyl dipeptidase that converts angiotensin I to the vasoconstrictor angiotensin II, which also stimulates aldosterone secretion. ACE inhibition lowers plasma angiotensin II, decreasing vasopressor activity and aldosterone secretion (with small rises in serum potassium) and increasing plasma renin activity through loss of negative feedback. ACE is identical to kininase II, so inhibition also reduces degradation of bradykinin; the contribution of elevated bradykinin to the therapeutic effect remains to be established. Enalapril is antihypertensive even in low-renin hypertension, though Black patients tend to have a smaller average response to monotherapy.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to enalapril or any product component",
+      "History of angioedema related to previous ACE inhibitor therapy",
+      "Hereditary or idiopathic angioedema",
+      "Concomitant aliskiren in patients with diabetes",
+      "Combination with a neprilysin inhibitor (e.g., sacubitril); do not use within 36 hours of switching to/from sacubitril/valsartan",
+      "Pregnancy (fetal toxicity - boxed warning)"
+    ],
+    "relative": [
+      "Volume or salt depletion, high-dose or recently intensified diuretic therapy (excessive hypotension risk)",
+      "Bilateral or unilateral renal artery stenosis (rise in BUN/creatinine)",
+      "Severe heart failure (renal function may depend on RAAS activity)",
+      "Aortic stenosis or hypertrophic cardiomyopathy with LV outflow obstruction",
+      "Collagen vascular disease with renal impairment (hematologic risk)",
+      "Aliskiren in patients with renal impairment (GFR <60 mL/min) - avoid",
+      "Concomitant mTOR inhibitor (sirolimus, everolimus, temsirolimus) - increased angioedema risk"
+    ],
+    "monitor": [
+      "Serum potassium (hyperkalemia risk)",
+      "Renal function (BUN/creatinine), especially first weeks and with diuretic/NSAID use or renal artery stenosis",
+      "Blood pressure for symptomatic hypotension (closely for first 2 weeks and after dose increases in at-risk patients)",
+      "White blood cell counts in collagen vascular disease with renal impairment",
+      "Signs of angioedema and of hepatic dysfunction"
+    ]
+  },
+  "preg": "Boxed warning - fetal toxicity. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus. When pregnancy is detected, discontinue enalapril as soon as possible. Use in the second and third trimesters reduces fetal renal function and can cause oligohydramnios (with fetal lung hypoplasia and skeletal deformations) and neonatal anuria, hypotension, renal failure, and death. Radioactivity crossed the placenta in pregnant hamsters given labeled drug. Counsel women of childbearing age about these risks and ask them to report suspected pregnancy as soon as possible.",
+  "lact": "Enalapril and enalaprilat have been detected in human breast milk. Because of the potential for serious adverse reactions in nursing infants, decide whether to discontinue nursing or the drug, taking the importance of the drug to the mother into account.",
+  "renal": "Disposition is similar to normal until GFR is 30 mL/min or less, at which point peak and trough enalaprilat levels rise, time to peak and to steady state lengthen, and the effective half-life is prolonged. For CrCl >30 mL/min (SCr up to ~3 mg/dL), the usual dose applies. For CrCl <=30 mL/min (SCr >=3 mg/dL), start 2.5 mg once daily and titrate up to a maximum of 40 mg/day. Dialysis patients: 2.5 mg on dialysis days, with nondialysis-day dosing adjusted to BP; enalaprilat is dialyzable at about 62 mL/min. In heart failure with renal impairment or hyponatremia, initiate at 2.5 mg daily under close supervision. Monitor renal function and potassium, especially early and with diuretics or NSAIDs.",
+  "hepatic": "Enalapril is a prodrug bioactivated by hepatic hydrolysis of its ethyl ester to enalaprilat; impaired hepatic function may slow this conversion. The label does not provide a specific hepatic dose adjustment; use with caution. Rarely, ACE inhibitors have been associated with a syndrome beginning with cholestatic jaundice that can progress to fulminant hepatic necrosis - discontinue if jaundice or marked hepatic enzyme elevations occur.",
+  "interactions": {
+    "major": [
+      "Aliskiren (contraindicated in diabetes; avoid if GFR <60 mL/min - dual RAAS blockade increases hypotension, hyperkalemia, renal dysfunction)",
+      "Neprilysin inhibitors / sacubitril (contraindicated; angioedema risk - observe 36-hour washout)",
+      "Other RAAS inhibitors / ARBs (dual blockade increases hypotension, hyperkalemia, and renal dysfunction; generally avoid)",
+      "Potassium-sparing diuretics (spironolactone, triamterene, amiloride), potassium supplements, potassium-containing salt substitutes (significant hyperkalemia)"
+    ],
+    "moderate": [
+      "Diuretics (excessive hypotension, especially if recently started; minimize by stopping diuretic or increasing salt before starting)",
+      "Lithium (lithium toxicity - monitor serum levels frequently)",
+      "NSAIDs including selective COX-2 inhibitors (deterioration of renal function in elderly, volume-depleted, or renally impaired; may diminish antihypertensive effect)",
+      "mTOR inhibitors - sirolimus, everolimus, temsirolimus (increased angioedema risk)",
+      "Injectable gold (sodium aurothiomalate) - nitritoid reactions (facial flushing, nausea, vomiting, hypotension)"
+    ],
+    "minor": [
+      "Used concomitantly with beta-blockers, methyldopa, nitrates, calcium-channel blockers, hydralazine, prazosin, and digoxin without evidence of clinically significant adverse interactions"
+    ],
+    "food": "Absorption is not influenced by the presence of food; may be given without regard to meals.",
+    "alcohol": "Alcohol may potentiate the blood-pressure-lowering effect and worsen hypotension/dizziness; advise caution.",
+    "diagnostics": "May increase serum potassium, BUN, and creatinine (mean potassium rise ~0.2 mEq/L on monotherapy). Anaphylactoid reactions have occurred with high-flux dialysis membranes and with LDL apheresis using dextran sulfate. A symptom complex with positive ANA, elevated ESR, arthralgia, eosinophilia, and rash has been reported."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness", "Fatigue", "Cough (nonproductive, persistent)", "Hypotension (notably in heart failure patients)"],
+    "serious": ["Symptomatic hypotension/syncope (especially in heart failure)", "Hyperkalemia", "Renal impairment/acute renal failure, oliguria", "Hepatic failure or cholestatic jaundice (rare)", "Neutropenia/agranulocytosis/bone marrow depression (rare)"],
+    "rare": ["Pancreatitis", "Eosinophilic pneumonitis", "Stevens-Johnson syndrome, toxic epidermal necrolysis, pemphigus, erythema multiforme", "Peripheral neuropathy", "Gynecomastia, impotence", "Raynaud's phenomenon"],
+    "emergency": ["Angioedema of the face, lips, tongue, glottis, or larynx (can be fatal - may need subcutaneous epinephrine 1:1000 0.3-0.5 mL and airway management)", "Intestinal angioedema (abdominal pain with or without nausea/vomiting)", "Anaphylactoid reactions (including during venom desensitization or membrane exposure)"]
+  },
+  "monitoring": [
+    "Blood pressure (observe at least 2 h after first dose in heart failure and LV dysfunction)",
+    "Serum potassium",
+    "Renal function (BUN, serum creatinine), especially first weeks and with diuretic/NSAID use or renal artery stenosis",
+    "White blood cell counts in patients with collagen vascular disease and renal disease",
+    "Serum lithium levels if co-administered with lithium",
+    "Signs and symptoms of angioedema and of hepatic dysfunction"
+  ],
+  "counsel": [
+    "Report immediately any swelling of the face, eyes, lips, or tongue or any difficulty swallowing or breathing, and take no more drug until you contact your prescriber (angioedema)",
+    "Report lightheadedness, especially in the first days; if fainting occurs, stop the drug and consult your prescriber",
+    "Excessive sweating, dehydration, vomiting, or diarrhea can cause an excessive fall in blood pressure",
+    "Do not use potassium-containing salt substitutes without consulting your physician",
+    "Report promptly any sign of infection such as sore throat or fever (possible neutropenia)",
+    "Women of childbearing age should know the risks in pregnancy and report a suspected pregnancy as soon as possible",
+    "A dry, persistent cough may occur and resolves after stopping the drug"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within about 1 h of a single oral dose"],
+    ["Peak", "Enalapril Cmax ~1 h; enalaprilat 3-4 h; peak BP effect 4-6 h"],
+    ["Half-life", "Effective accumulation half-life of enalaprilat ~11 h (prolonged when GFR <=30 mL/min)"],
+    ["Duration", "Antihypertensive effect maintained at least 24 h at recommended doses"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep tightly closed, protect from moisture"]
+  ],
+  "pearls": [
+    "Prodrug: enalapril is hydrolyzed to active enalaprilat, a more potent ACE inhibitor; enalaprilat itself is poorly absorbed orally",
+    "ACE-inhibitor cough is bradykinin-mediated, nonproductive, and resolves after discontinuation",
+    "In heart failure (with diuretics and digitalis) enalapril improves symptoms, increases survival, and reduces hospitalizations; in asymptomatic LV dysfunction (EF <=35%) it slows progression to overt heart failure",
+    "ACE inhibitors are less effective as monotherapy in Black patients and carry a higher angioedema incidence in that group",
+    "Avoid dual RAAS blockade (ARBs, aliskiren) - no added benefit and increased hypotension, hyperkalemia, and renal dysfunction",
+    "Enalaprilat is dialyzable (~62 mL/min); use a 2.5 mg dose on dialysis days and watch for anaphylactoid reactions with high-flux membranes"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not take two doses at once to make up for a missed dose.",
+  "overdose": "The most likely manifestation is hypotension, treated with intravenous infusion of normal saline; place the patient supine. Enalaprilat can be removed from the general circulation by hemodialysis and has been removed from neonatal circulation by peritoneal dialysis. Provide supportive care.",
+  "refs": [
+    ["openFDA Drug Label - Enalapril Maleate", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ENALAPRIL+MALEATE%22"],
+    ["DailyMed - Enalapril Maleate Tablets", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=enalapril+maleate"]
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "generic": "Perampanel",
+  "cls": "Antiseizure medication (AMPA glutamate receptor antagonist)",
+  "pharm": "Noncompetitive antagonist of the AMPA-type glutamate receptor; reduces neuronal excitation to control partial-onset and primary generalized tonic-clonic seizures.",
+  "tags": ["Antiseizure", "AMPA antagonist", "Once daily at bedtime", "CYP3A4 substrate", "Schedule III (US)", "Boxed warning - psychiatric"],
+  "quick": [
+    ["Adult dose", "Start 2 mg at bedtime; maintenance 8-12 mg/day"],
+    ["Meal", "Take at bedtime; food delays/lowers peak but ok"],
+    ["Pregnancy", "Limited data; use only if benefit outweighs risk; enroll registry"],
+    ["Lactation", "Present in milk in animals; weigh risk/benefit"],
+    ["Renal", "Severe impairment or hemodialysis: not recommended"],
+    ["Hepatic", "Mild: max 6 mg; moderate: max 4 mg; severe: not recommended"],
+    ["Alcohol", "Avoid - additive CNS effects, worsens anger/aggression"],
+    ["Monitoring", "Mood/behavior, seizure frequency, dizziness/falls"]
+  ],
+  "summary": "Perampanel is a once-daily, bedtime oral antiseizure medication that noncompetitively antagonizes AMPA glutamate receptors. It is used for partial-onset seizures (monotherapy or adjunctive) and as adjunctive therapy for primary generalized tonic-clonic seizures. It carries a boxed warning for serious psychiatric and behavioral reactions (aggression, hostility, homicidal ideation). It is a CYP3A4 substrate (strong inducers reduce levels) and requires slow titration; dose is capped in hepatic impairment.",
+  "indications": [
+    "Treatment of partial-onset seizures with or without secondarily generalized seizures (monotherapy or adjunctive) in patients 4 years and older",
+    "Adjunctive therapy of primary generalized tonic-clonic seizures in patients 12 years and older"
+  ],
+  "dosage": [
+    {"c": "Partial-onset seizures (no enzyme-inducing AEDs)", "r": "Oral", "d": "Start 2 mg once daily; titrate by 2 mg/week", "t": "Once daily at bedtime", "n": "Maintenance 8-12 mg/day"},
+    {"c": "Primary generalized tonic-clonic seizures (adjunctive)", "r": "Oral", "d": "Start 2 mg once daily; titrate by 2 mg/week", "t": "Once daily at bedtime", "n": "Recommended maintenance 8 mg/day (up to 12 mg)"},
+    {"c": "With concomitant moderate/strong CYP3A4 inducers", "r": "Oral", "d": "Start 4 mg once daily; titrate up to higher maintenance", "t": "Once daily at bedtime", "n": "Higher doses may be needed; titrate to response"},
+    {"c": "Mild hepatic impairment", "r": "Oral", "d": "Maximum 6 mg once daily", "t": "Bedtime; slower titration", "n": "Increase no more often than every 2 weeks"},
+    {"c": "Moderate hepatic impairment", "r": "Oral", "d": "Maximum 4 mg once daily", "t": "Bedtime; slower titration", "n": "Increase no more often than every 2 weeks"},
+    {"c": "Severe hepatic/renal impairment or hemodialysis", "r": "Oral", "d": "Not recommended", "t": "N/A", "n": ""},
+    {"c": "Elderly", "r": "Oral", "d": "Titrate cautiously", "t": "Increase no more often than every 2 weeks", "n": "Higher fall risk"}
+  ],
+  "admin": [
+    "Take once daily at bedtime (sedation and dizziness common)",
+    "Titrate slowly (no more often than weekly; every 2 weeks in elderly/hepatic impairment)",
+    "Swallow tablets whole; oral suspension must be shaken and measured with the provided dosing device",
+    "Do not stop abruptly - taper to avoid increased seizure frequency",
+    "Counsel about psychiatric/behavioral monitoring during titration and at higher doses"
+  ],
+  "moa": "Noncompetitive antagonist of the ionotropic AMPA glutamate receptor on postsynaptic neurons, reducing glutamate-mediated excitatory neurotransmission and thereby suppressing seizure activity.",
+  "contra": {
+    "absolute": ["None (per FDA label)"],
+    "relative": ["History of serious psychiatric disorder", "Severe hepatic or severe renal impairment / hemodialysis", "Concurrent CNS depressants or alcohol", "Elderly (fall risk)"],
+    "monitor": ["Mood, behavior, aggression/hostility", "Dizziness, gait, falls", "Seizure frequency"]
+  },
+  "preg": "Limited human data. Use during pregnancy only if benefit outweighs risk; may reduce efficacy of progestin-containing contraceptives at higher doses. Encourage enrollment in a pregnancy registry.",
+  "lact": "Perampanel and metabolites are present in animal milk; presence in human milk uncertain. Consider developmental benefits of breastfeeding against potential risk to the infant.",
+  "renal": "No adjustment for mild renal impairment; not recommended in severe renal impairment or patients on hemodialysis.",
+  "hepatic": "Maximum 6 mg/day in mild and 4 mg/day in moderate hepatic impairment, with titration no more often than every 2 weeks; not recommended in severe hepatic impairment.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inducers (carbamazepine, phenytoin, oxcarbazepine, rifampin, St. John's wort) - markedly reduce perampanel levels; higher dose needed", "CNS depressants and alcohol - additive sedation and increased anger/aggression"],
+    "moderate": ["Progestin-containing contraceptives - perampanel 12 mg reduces levonorgestrel exposure; use additional non-hormonal contraception", "CYP3A4 inhibitors (ketoconazole) - may modestly increase levels"],
+    "minor": ["Other antiseizure drugs - variable interactions"],
+    "food": "May be taken with or without food; food delays and lowers peak concentration but does not change overall exposure.",
+    "alcohol": "Avoid - potentiates CNS depression and significantly increases anger, confusion, and aggression.",
+    "diagnostics": "No routine therapeutic drug level monitoring; monitor clinically."
+  },
+  "se": {
+    "common": ["Dizziness", "Somnolence", "Fatigue", "Irritability", "Falls", "Nausea", "Weight gain", "Ataxia/gait disturbance", "Headache"],
+    "serious": ["Serious psychiatric/behavioral reactions (aggression, hostility, anger, homicidal ideation/threats)", "Suicidal ideation/behavior", "Severe dizziness/falls", "Drug reaction with eosinophilia and systemic symptoms (DRESS)"],
+    "rare": ["DRESS/multiorgan hypersensitivity", "Acute psychosis"],
+    "emergency": ["Homicidal or suicidal ideation/behavior", "DRESS/severe hypersensitivity", "Status epilepticus from abrupt withdrawal"]
+  },
+  "monitoring": [
+    "Psychiatric and behavioral changes (aggression, hostility, mood) - especially during titration and at higher doses",
+    "Suicidal ideation and behavior",
+    "Dizziness, gait, and fall risk",
+    "Seizure frequency and response",
+    "Signs of hypersensitivity (rash, fever, eosinophilia)"
+  ],
+  "counsel": [
+    "Take once daily at bedtime; it can cause drowsiness and dizziness",
+    "Watch for and immediately report anger, aggression, hostile feelings, mood changes, or thoughts of harming yourself or others",
+    "Do not drink alcohol - it worsens these effects",
+    "Do not stop suddenly; this can trigger seizures",
+    "Higher doses can reduce the effectiveness of hormonal birth control - use an additional non-hormonal method"
+  ],
+  "pk": [
+    ["Onset", "Anticonvulsant effect develops over titration"],
+    ["Peak", "~0.5-2.5 hours (delayed by food)"],
+    ["Half-life", "~105 hours (long; supports once-daily dosing)"],
+    ["Duration", "Sustained; steady state in ~2-3 weeks"],
+    ["Storage", "Store at room temperature; protect oral suspension per label"]
+  ],
+  "pearls": [
+    "Boxed warning for serious psychiatric/behavioral reactions - monitor closely during titration and at high doses",
+    "Very long half-life (~105 h) allows once-daily bedtime dosing but means slow steady-state and delayed offset",
+    "Schedule III controlled substance in the US",
+    "Strong CYP3A4 inducers (carbamazepine, phenytoin) substantially lower levels and require higher dosing",
+    "12 mg dose reduces levonorgestrel exposure - advise additional contraception"
+  ],
+  "missed": "If a single dose is missed, resume at the next scheduled dose; do not double up. If more than one dose is missed or therapy is interrupted for more than a few days, consult the prescriber - re-titration may be needed.",
+  "overdose": "Limited experience. Overdose may cause altered mental status, agitation, aggression, and decreased consciousness. There is no specific antidote; provide supportive care and monitor; perampanel is highly protein-bound so dialysis is unlikely to help. Given the long half-life, monitor for a prolonged period.",
+  "refs": [
+    ["FDA Perampanel (Fycompa) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22perampanel%22"],
+    ["DailyMed - Perampanel", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=perampanel"]
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "generic": "Maraviroc",
+  "cls": "CCR5 co-receptor antagonist (antiretroviral, entry inhibitor)",
+  "pharm": "An HIV-1 entry inhibitor that selectively binds the human CCR5 chemokine co-receptor, blocking the interaction with viral gp120 needed for CCR5-tropic HIV-1 to enter CD4 cells.",
+  "tags": ["Rx only", "HIV entry inhibitor", "Boxed hepatotoxicity warning", "Requires CCR5 tropism test", "CYP3A-dose dependent"],
+  "quick": [
+    ["Adult dose", "300 mg twice daily; adjust to 150 mg BID with potent CYP3A inhibitors or 600 mg BID with potent CYP3A inducers (without an inhibitor)"],
+    ["Meal", "Take orally twice daily with or without food; tablets and oral solution available"],
+    ["Pregnancy", "Use only if clearly needed; limited human data, no evidence of major teratogenicity"],
+    ["Lactation", "Breastfeeding not recommended for HIV-infected mothers in the US (transmission risk)"],
+    ["Renal", "Caution and possible dose modification in severe renal impairment, especially with CYP3A inhibitors"],
+    ["Hepatic", "No specific adjustment defined; concentrations may rise - monitor closely (hepatotoxicity warning)"],
+    ["Alcohol", "No specific restriction; avoid hepatotoxins given liver risk"],
+    ["Monitoring", "Liver function tests, signs of hepatitis/allergic reaction, CD4 count and HIV RNA, postural symptoms"]
+  ],
+  "summary": "Maraviroc (SELZENTRY) is a CCR5 co-receptor antagonist used in combination with other antiretrovirals to treat CCR5-tropic HIV-1 infection in adults and children >=2 years weighing >=10 kg. By binding the human CCR5 receptor it prevents CCR5-tropic gp120 from engaging the co-receptor, blocking viral entry into CD4 cells. A tropism assay is required before use because maraviroc is ineffective against CXCR4- or dual/mixed-tropic virus. It carries a BOXED WARNING for hepatotoxicity, which may be preceded by a severe rash or systemic allergic reaction. Dosing is heavily dependent on concomitant CYP3A inhibitors and inducers. Other risks include cardiovascular/postural hypotension events, infection and malignancy from immune effects, and immune reconstitution syndrome.",
+  "indications": [
+    "Treatment of only CCR5-tropic HIV-1 infection, in combination with other antiretroviral agents, in adults and pediatric patients 2 years of age and older weighing at least 10 kg",
+    "Not recommended in patients with dual/mixed- or CXCR4-tropic HIV-1 (requires a tropism assay prior to initiation)"
+  ],
+  "dosage": [
+    {"c": "Standard (no interacting drug)", "r": "Adult oral", "d": "300 mg twice daily when given with drugs that are not potent CYP3A inhibitors or inducers (e.g., NRTIs, tipranavir/ritonavir, nevirapine, raltegravir, enfuvirtide)", "t": "Twice daily", "n": "Confirm CCR5 tropism first"},
+    {"c": "With potent CYP3A inhibitors", "r": "Adult oral", "d": "150 mg twice daily when given with potent CYP3A inhibitors (with or without an inducer), e.g., most protease inhibitors except tipranavir, ketoconazole, clarithromycin", "t": "Twice daily", "n": "Reduced dose"},
+    {"c": "With potent CYP3A inducers (no inhibitor)", "r": "Adult oral", "d": "600 mg twice daily with potent CYP3A inducers without a potent inhibitor (e.g., efavirenz, rifampin, carbamazepine, phenytoin)", "t": "Twice daily", "n": "Increased dose"},
+    {"c": "Pediatric (>=2 yr, >=10 kg)", "r": "Pediatric oral", "d": "Weight-based dosing per the prescribing information, with the dose determined by concomitant medications and body weight", "t": "Twice daily", "n": "Use oral solution for younger/smaller children"}
+  ],
+  "admin": [
+    "Test all patients for CCR5 tropism with a highly sensitive assay before starting maraviroc",
+    "Administer orally twice daily, with or without food, always in combination with other antiretrovirals",
+    "Select the dose based on the other drugs in the regimen (CYP3A inhibitor/inducer status)",
+    "Use the oral solution for pediatric patients or those unable to swallow tablets",
+    "Do not use as monotherapy or in CXCR4/dual-mixed tropic infection"
+  ],
+  "moa": "Maraviroc is a selective, slowly reversible, small-molecule antagonist of the human chemokine receptor CCR5. HIV-1 cellular entry requires sequential interactions of viral gp120 with the CD4 receptor and a co-receptor (CCR5 or CXCR4) and subsequent gp41-mediated membrane fusion. By binding to CCR5, maraviroc blocks the interaction of CCR5-tropic gp120 with the co-receptor, preventing the conformational changes required for fusion and thereby blocking entry of CCR5-tropic HIV-1 into the host CD4 cell. It has no activity against CXCR4-tropic or dual/mixed-tropic virus.",
+  "contra": {
+    "absolute": [
+      "Previous hypersensitivity reaction to maraviroc or any product component"
+    ],
+    "relative": [
+      "Hepatic impairment or pre-existing liver disease (hepatotoxicity risk)",
+      "Severe renal impairment when combined with potent CYP3A inhibitors",
+      "Significant risk of cardiovascular events / postural hypotension",
+      "CXCR4- or dual/mixed-tropic HIV-1 (ineffective)"
+    ],
+    "monitor": [
+      "Liver enzymes and signs of hepatitis",
+      "Severe rash or systemic allergic features (may precede hepatotoxicity)",
+      "Blood pressure / postural symptoms in cardiovascular disease",
+      "CD4 count and plasma HIV-1 RNA"
+    ]
+  },
+  "preg": "There are limited data on maraviroc use in pregnant women; available data and animal studies have not shown evidence of major birth defects or adverse developmental outcomes at clinically relevant exposures. Use during pregnancy only if the potential benefit justifies the potential risk, as part of an appropriate antiretroviral regimen; clinicians are encouraged to report exposures to the Antiretroviral Pregnancy Registry.",
+  "lact": "The Centers for Disease Control and Prevention recommend that HIV-1-infected mothers in the United States not breastfeed because of the potential for HIV-1 transmission and the risk of adverse reactions in the infant. It is not known whether maraviroc is present in human milk; instruct mothers not to breastfeed.",
+  "renal": "Maraviroc is partly cleared renally. No dose adjustment is required for most patients on the standard 300 mg regimen, but in severe renal impairment or end-stage disease, caution is needed - particularly when combined with potent CYP3A inhibitors, where postural hypotension and increased exposure can occur. Follow the prescribing information's renal dosing guidance and monitor closely.",
+  "hepatic": "Maraviroc concentrations may be increased in patients with hepatic impairment, and hepatotoxicity is a boxed-warning risk. The label does not provide a fully validated adjustment; use with caution and monitor liver function. Evaluate any patient with signs or symptoms of hepatitis or an allergic reaction immediately, and discontinue if hepatotoxicity occurs.",
+  "interactions": {
+    "major": [
+      "Potent CYP3A inhibitors (most protease inhibitors except tipranavir, ketoconazole, itraconazole, clarithromycin) - increase maraviroc exposure; reduce dose to 150 mg twice daily",
+      "Potent CYP3A inducers without an inhibitor (efavirenz, rifampin, carbamazepine, phenobarbital, phenytoin) - decrease maraviroc exposure; increase dose to 600 mg twice daily"
+    ],
+    "moderate": [
+      "St. John's wort - reduces maraviroc levels and may cause loss of virologic response; avoid",
+      "Other antiretrovirals (NRTIs, tipranavir/ritonavir, nevirapine, raltegravir, enfuvirtide) - no dose change; use the 300 mg dose"
+    ],
+    "minor": ["No clinically significant minor interactions documented"],
+    "food": "May be taken with or without food; food does not require a dose change.",
+    "alcohol": "No specific interaction reported; avoid additional hepatotoxins given the hepatotoxicity warning.",
+    "diagnostics": "A CCR5 tropism assay is mandatory before therapy; monitor liver chemistries and HIV-1 RNA/CD4 to assess response."
+  },
+  "se": {
+    "common": ["Upper respiratory tract infection", "Cough", "Pyrexia", "Rash", "Dizziness", "Musculoskeletal symptoms", "Abdominal pain"],
+    "serious": ["Hepatotoxicity (boxed warning)", "Severe skin and hypersensitivity reactions (including DRESS, Stevens-Johnson syndrome, toxic epidermal necrolysis)", "Cardiovascular events including myocardial ischemia/infarction", "Postural (orthostatic) hypotension", "Immune reconstitution inflammatory syndrome"],
+    "rare": ["Increased risk of infections and possible malignancy from CCR5 antagonism", "Rhabdomyolysis/myositis", "Acute renal failure (with severe hypotension)"],
+    "emergency": ["Acute hepatic failure/hepatotoxicity", "Severe cutaneous or systemic allergic reaction (DRESS/SJS/TEN, anaphylaxis)", "Acute coronary event", "Severe symptomatic hypotension/syncope"]
+  },
+  "monitoring": ["Liver function tests at baseline and during therapy; evaluate immediately for hepatitis/allergic signs", "Skin and systemic allergic reactions (rash, fever, eosinophilia, elevated IgE) which may precede hepatotoxicity", "Blood pressure and postural symptoms, especially with renal impairment plus CYP3A inhibitors", "CD4 count and plasma HIV-1 RNA for virologic response", "Signs of immune reconstitution inflammatory syndrome"],
+  "counsel": [
+    "Take maraviroc exactly as prescribed, twice a day, together with your other HIV medicines; do not stop without advice",
+    "Seek care immediately for yellowing of skin/eyes, dark urine, severe tiredness, right-sided belly pain, or a rash with fever - these can signal a liver or allergic reaction",
+    "Stand up slowly; report dizziness or fainting, especially if you have heart problems",
+    "Tell your doctor about all medicines and supplements - many change the correct maraviroc dose; avoid St. John's wort",
+    "Maraviroc controls but does not cure HIV; continue prevention measures and keep all appointments and lab tests"
+  ],
+  "pk": [
+    ["Onset", "Antiviral effect develops over days as part of combination therapy"],
+    ["Peak", "Median time to peak concentration approximately 0.5-4 hours; absolute bioavailability ~23-33% (dose-dependent)"],
+    ["Half-life", "Terminal half-life approximately 14-18 hours"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted); keep oral solution per label"]
+  ],
+  "pearls": [
+    "BOXED WARNING: hepatotoxicity, which may be preceded by a severe rash or systemic allergic reaction (fever, eosinophilia, elevated IgE) - evaluate urgently",
+    "A CCR5 tropism assay is mandatory; maraviroc does NOT work against CXCR4 or dual/mixed-tropic virus",
+    "Dose is set by the rest of the regimen: 150 mg BID with potent CYP3A inhibitors, 300 mg BID standard, 600 mg BID with potent inducers alone",
+    "Watch for orthostatic hypotension and cardiovascular events, and for immune reconstitution syndrome",
+    "Always used in combination - never as monotherapy"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered. If it is almost time for the next scheduled dose, skip the missed dose and resume the regular twice-daily schedule. Do not take two doses at the same time to make up for a missed dose. Adherence is critical to prevent HIV resistance.",
+  "overdose": "The highest single dose studied was 1200 mg; the dose-limiting adverse effect was postural hypotension. There is no specific antidote. Manage overdose with supportive care, including keeping the patient supine and assessing blood pressure; hemodialysis contributes little to clearance because maraviroc is highly protein-bound. Monitor vital signs, cardiac status, and liver function.",
+  "refs": [
+    ["FDA Label - Maraviroc / SELZENTRY (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22maraviroc%22"],
+    ["DailyMed - Maraviroc (SELZENTRY)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=maraviroc"]
+  ]
+}

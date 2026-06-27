@@ -1,0 +1,122 @@
+{
+  "generic": "Bupropion",
+  "cls": "Antidepressant — aminoketone (NDRI)",
+  "pharm": "Aminoketone; norepinephrine-dopamine reuptake inhibitor",
+  "tags": ["Rx", "Habit forming: No", "Oral", "Antidepressant"],
+  "quick": [
+    ["Adult dose", "MDD: 150 mg daily, target 300 mg (XL)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Use only if benefit outweighs risk"],
+    ["Lactation", "Present in milk; weigh risk/benefit"],
+    ["Renal", "Reduce dose/frequency in impairment"],
+    ["Hepatic", "Reduce dose; max 150 mg QOD if severe"],
+    ["Alcohol", "Minimize/avoid; seizure & neuropsychiatric risk"],
+    ["Monitoring", "Mood/suicidality, BP, seizures"]
+  ],
+  "summary": "Bupropion is an aminoketone antidepressant that inhibits reuptake of norepinephrine and dopamine. The extended-release (XL) form is indicated for major depressive disorder and for prevention of seasonal affective disorder; other formulations and brands (Zyban) are used for smoking cessation. It carries a boxed warning for increased suicidal thoughts and behavior in children, adolescents and young adults. Dose-related seizure risk is the key safety limit, so dosing is gradual and capped.",
+  "indications": [
+    "Major depressive disorder (MDD)",
+    "Prevention of seasonal affective disorder (SAD)",
+    "Smoking cessation (sustained-release / Zyban brand)"
+  ],
+  "dosage": [
+    {"c": "MDD (extended-release XL)", "r": "Oral", "d": "150 mg once daily in the morning; after 4 days may increase to target 300 mg once daily", "t": "Once daily", "n": "Max 450 mg/day; swallow whole, do not crush"},
+    {"c": "Seasonal affective disorder (XL)", "r": "Oral", "d": "150 mg once daily, may increase after 1 week to 300 mg once daily", "t": "Once daily", "n": "Start in autumn; taper in spring"},
+    {"c": "MDD (sustained-release SR)", "r": "Oral", "d": "150 mg once daily, then 150 mg twice daily; target 300 mg/day", "t": "Twice daily (doses >=8 h apart)", "n": "Max 400 mg/day (200 mg twice daily)"},
+    {"c": "Smoking cessation (SR / Zyban)", "r": "Oral", "d": "150 mg once daily for 3 days, then 150 mg twice daily", "t": "7-12 weeks", "n": "Set quit date in second week; max 300 mg/day"},
+    {"c": "Hepatic/renal impairment", "r": "Oral", "d": "Reduce dose and/or frequency; severe hepatic impairment max 150 mg every other day", "t": "Reduced", "n": ""}
+  ],
+  "admin": [
+    "Swallow extended-release tablets whole; do not crush, divide or chew",
+    "Take doses in the morning to limit insomnia; separate SR doses by at least 8 hours",
+    "Do not exceed single-dose and daily maximums (seizure risk is dose-related)",
+    "Do not use within 14 days of an MAO inhibitor",
+    "Avoid abrupt large dose increases; titrate gradually"
+  ],
+  "moa": "Aminoketone antidepressant that selectively inhibits neuronal reuptake of dopamine and norepinephrine (NDRI); minimal effect on serotonin reuptake and no monoamine oxidase inhibition.",
+  "contra": {
+    "absolute": [
+      "Seizure disorder",
+      "Current or prior bulimia or anorexia nervosa (higher seizure risk)",
+      "Abrupt discontinuation of alcohol, benzodiazepines, barbiturates or antiepileptics",
+      "Concomitant use with or within 14 days of MAO inhibitors (including linezolid, IV methylene blue)",
+      "Known hypersensitivity to bupropion",
+      "Concomitant use of other bupropion-containing products"
+    ],
+    "relative": [
+      "Conditions or drugs that lower the seizure threshold",
+      "Uncontrolled hypertension",
+      "Hepatic or renal impairment",
+      "History of head trauma, CNS tumor, or arteriovenous malformation",
+      "Bipolar disorder (risk of mania)"
+    ],
+    "monitor": ["Suicidality/mood", "Blood pressure", "Seizure activity", "Neuropsychiatric symptoms"]
+  },
+  "preg": "Limited data; use only if potential benefit justifies potential fetal risk. A pregnancy exposure registry exists.",
+  "lact": "Bupropion and metabolites are present in human milk; weigh developmental/health benefits of breastfeeding against risk; monitor infant.",
+  "renal": "Reduce dose and/or frequency; metabolites accumulate in renal impairment, increasing toxicity/seizure risk.",
+  "hepatic": "Use with caution; reduce dose/frequency in mild-moderate impairment and limit to 150 mg every other day in severe hepatic impairment.",
+  "interactions": {
+    "major": [
+      "MAO inhibitors (including linezolid, methylene blue) — hypertensive reactions; contraindicated within 14 days",
+      "Drugs that lower the seizure threshold (antipsychotics, theophylline, systemic steroids, tramadol) — additive seizure risk",
+      "Other bupropion-containing products — overdose/seizure risk"
+    ],
+    "moderate": [
+      "CYP2D6 substrates (many antidepressants, antipsychotics, beta-blockers, antiarrhythmics, tamoxifen) — bupropion inhibits CYP2D6; may need dose reduction of substrate",
+      "CYP2B6 inducers (ritonavir, efavirenz, carbamazepine) — reduce bupropion levels",
+      "Dopaminergic drugs (levodopa, amantadine) — increased CNS toxicity",
+      "Digoxin — reduced digoxin levels"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "Minimize or avoid alcohol; rare neuropsychiatric events and altered alcohol tolerance reported; abrupt alcohol withdrawal raises seizure risk.",
+    "diagnostics": "May cause false-positive urine amphetamine screens."
+  },
+  "se": {
+    "common": ["Insomnia", "Dry mouth", "Headache", "Nausea", "Agitation/anxiety", "Constipation", "Dizziness", "Tremor", "Weight loss"],
+    "serious": [
+      "Suicidal thoughts and behavior (boxed warning, especially young people)",
+      "Seizures (dose-related)",
+      "Hypertension, including severe cases",
+      "Activation of mania/hypomania",
+      "Psychosis, hallucinations, paranoia",
+      "Severe hypersensitivity reactions (including serum-sickness-like, Stevens-Johnson syndrome)",
+      "Angle-closure glaucoma"
+    ],
+    "rare": ["Hepatotoxicity", "Arrhythmia", "Anaphylactoid reactions"],
+    "emergency": ["Seizure", "Suicidal ideation or attempt", "Severe allergic reaction/angioedema", "Hypertensive crisis"]
+  },
+  "monitoring": [
+    "Mood, behavior and emergence of suicidal ideation, especially early and after dose changes",
+    "Blood pressure (baseline and periodically)",
+    "Seizure activity and adherence to dose limits",
+    "Signs of mania in patients with bipolar risk",
+    "Neuropsychiatric symptoms (in smoking cessation)"
+  ],
+  "counsel": [
+    "Take in the morning and exactly as prescribed; do not take extra doses",
+    "Swallow tablets whole; do not crush or chew",
+    "Watch for and report worsening mood, agitation or thoughts of self-harm",
+    "Limit or avoid alcohol; do not stop alcohol or sedatives suddenly",
+    "Report any seizure immediately and stop the drug",
+    "Tell your doctor about all other medicines, including other bupropion products"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect over 1-4 weeks"],
+    ["Peak", "XL plasma peak ~5 hours; SR ~3 hours"],
+    ["Half-life", "Bupropion ~21 hours; active metabolites longer"],
+    ["Duration", "Supports once- or twice-daily dosing by formulation"],
+    ["Storage", "20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "Boxed warning for increased suicidality in children, adolescents and young adults",
+    "Seizure risk is dose-related — respect single-dose and daily maximums and titrate gradually",
+    "Contraindicated in seizure disorder, eating disorders, and within 14 days of an MAOI",
+    "Weight-neutral to weight-reducing and low sexual dysfunction compared with SSRIs",
+    "Inhibits CYP2D6 — reduces effectiveness of tamoxifen and may raise levels of many CYP2D6 substrates"
+  ],
+  "missed": "Take the missed dose when remembered unless it is near the next dose; never take two doses together or close in time, because of seizure risk.",
+  "overdose": "Overdose causes seizures, tachycardia, hallucinations, QRS/QT changes and, in large ingestions, cardiac arrest and death. There is no specific antidote: secure airway, give activated charcoal if early, monitor ECG and EEG, and control seizures with benzodiazepines.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

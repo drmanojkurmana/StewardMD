@@ -1,0 +1,105 @@
+{
+  "generic": "Panitumumab",
+  "cls": "Anti-EGFR recombinant human IgG2 monoclonal antibody (antineoplastic)",
+  "pharm": "Binds the epidermal growth factor receptor (EGFR), blocking ligand binding and downstream signaling, inhibiting tumor cell growth, survival, and angiogenesis.",
+  "tags": ["Rx only", "Monoclonal antibody", "Anti-EGFR", "Colorectal cancer", "RAS wild-type only", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "6 mg/kg IV infusion over 60-90 minutes every 14 days"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Can cause fetal harm; avoid - effective contraception required"],
+    ["Lactation", "Do not breastfeed during and for 2 months after the last dose"],
+    ["Renal", "No specific adjustment studied; not renally cleared"],
+    ["Hepatic", "No specific adjustment studied"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Skin/dermatologic toxicity, serum electrolytes (magnesium, calcium, potassium), infusion reactions, RAS status"]
+  ],
+  "summary": "Panitumumab is a fully human anti-EGFR IgG2 monoclonal antibody used to treat wild-type RAS (KRAS and NRAS) metastatic colorectal cancer, alone or with FOLFOX/FOLFIRI chemotherapy. It is NOT effective and should NOT be used in patients with RAS-mutant tumors. The dominant toxicities are dermatologic (acneiform rash, skin toxicity, paronychia, photosensitivity) and electrolyte disturbances, especially hypomagnesemia (also hypocalcemia and hypokalemia). It carries a boxed warning for dermatologic toxicity. Infusion reactions and, rarely, severe diarrhea (especially with chemotherapy) and pulmonary fibrosis can occur.",
+  "indications": [
+    "Wild-type RAS (KRAS and NRAS) metastatic colorectal cancer as first-line therapy in combination with FOLFOX",
+    "Wild-type RAS metastatic colorectal cancer as monotherapy after disease progression on fluoropyrimidine-, oxaliplatin-, and irinotecan-containing chemotherapy"
+  ],
+  "dosage": [
+    {"c": "Metastatic colorectal cancer", "r": "Adult IV", "d": "6 mg/kg administered as an intravenous infusion over 60 minutes every 14 days", "t": "Every 14 days", "n": "Infuse over 90 minutes if dose >1000 mg"},
+    {"c": "Infusion reaction - mild/moderate (grade 1-2)", "r": "Adult IV", "d": "Reduce infusion rate by 50% for the duration of that infusion", "t": "As needed during infusion", "n": "Monitor closely"},
+    {"c": "Infusion reaction - severe (grade 3-4)", "r": "Adult IV", "d": "Immediately and permanently discontinue", "t": "Discontinue", "n": "Do not rechallenge"},
+    {"c": "Dermatologic toxicity (grade 3+ or intolerable)", "r": "Adult IV", "d": "Withhold; if improves to <=grade 2 within 1 month, resume at 50% of original dose and escalate as tolerated", "t": "Per recovery", "n": "Discontinue if not recovering or recurrent severe toxicity"}
+  ],
+  "admin": [
+    "Administer only after confirming wild-type RAS (KRAS and NRAS) status; do not use in RAS-mutant tumors",
+    "Give as an intravenous infusion via infusion pump with a low-protein-binding 0.2 or 0.22 micron in-line filter",
+    "Do not administer as IV push or bolus; dilute in 0.9% sodium chloride",
+    "Infuse over 60 minutes (90 minutes if dose exceeds 1000 mg); reduce rate by 50% for mild/moderate infusion reactions",
+    "Do not mix with other medications or dextrose solutions; flush line with saline before and after"
+  ],
+  "moa": "Panitumumab is a recombinant fully human monoclonal IgG2 antibody that binds specifically to the extracellular domain of the human epidermal growth factor receptor (EGFR/HER1). By competitively preventing binding of natural ligands (EGF and TGF-alpha), it blocks receptor autophosphorylation and downstream RAS-RAF-MAPK and PI3K-AKT signaling. This inhibits cell proliferation, induces apoptosis, and decreases production of pro-angiogenic factors and matrix metalloproteinases. Activating mutations in RAS (KRAS/NRAS) constitutively activate downstream signaling independent of EGFR, rendering anti-EGFR therapy ineffective in RAS-mutant tumors.",
+  "contra": {
+    "absolute": [
+      "RAS-mutant (KRAS or NRAS) metastatic colorectal cancer or unknown RAS status (lack of efficacy/potential harm)"
+    ],
+    "relative": [
+      "History of severe infusion reaction to panitumumab",
+      "Pre-existing interstitial lung disease / pulmonary fibrosis",
+      "Significant electrolyte abnormalities until corrected"
+    ],
+    "monitor": [
+      "Dermatologic and soft tissue toxicity",
+      "Serum magnesium, calcium, and potassium during and for 8 weeks after therapy",
+      "Infusion reactions",
+      "Pulmonary symptoms",
+      "Diarrhea and dehydration (especially with chemotherapy)"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, panitumumab can cause fetal harm (including embryolethality and abortion). Advise females of reproductive potential to use effective contraception during treatment and for 2 months after the last dose, and inform of the risk to the fetus.",
+  "lact": "Because of the potential for serious adverse reactions in the breastfed infant, advise women not to breastfeed during treatment with panitumumab and for 2 months after the final dose.",
+  "renal": "No formal renal impairment studies have been conducted. As a monoclonal antibody it is not eliminated by the kidneys, so renal impairment is not expected to require dose adjustment.",
+  "hepatic": "No formal hepatic impairment studies have been conducted. Hepatic metabolism is not a major clearance route for monoclonal antibodies; no specific dose adjustment is recommended.",
+  "interactions": {
+    "major": [
+      "Oxaliplatin-based chemotherapy in RAS-mutant or unknown-RAS tumors - decreased survival; do not combine",
+      "Concurrent bevacizumab plus chemotherapy - increased toxicity and shorter survival; avoid"
+    ],
+    "moderate": [
+      "Irinotecan/fluoropyrimidine regimens - additive diarrhea and dermatologic toxicity"
+    ],
+    "minor": [
+      "No significant cytochrome P450-based interactions (it is a protein antibody)"
+    ],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "No specific interaction with alcohol.",
+    "diagnostics": "Requires RAS (KRAS/NRAS) mutation testing of the tumor before use; monitor serum electrolytes."
+  },
+  "se": {
+    "common": ["Acneiform/papulopustular skin rash", "Erythema, skin exfoliation, dry skin, pruritus", "Paronychia and nail changes", "Hypomagnesemia", "Hypocalcemia / hypokalemia", "Fatigue", "Diarrhea", "Nausea/vomiting", "Abdominal pain"],
+    "serious": ["Severe dermatologic toxicity (boxed warning) including skin infection, sepsis, abscess", "Severe hypomagnesemia and electrolyte depletion", "Infusion reactions / anaphylaxis", "Severe diarrhea and dehydration (with chemotherapy)", "Keratitis / ulcerative keratitis"],
+    "rare": ["Interstitial lung disease / pulmonary fibrosis", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Angioedema", "Photosensitivity"],
+    "emergency": ["Anaphylactic/severe infusion reaction", "Sepsis from skin breakdown", "Acute interstitial lung disease / respiratory failure", "Severe SJS/TEN"]
+  },
+  "monitoring": ["Skin and soft-tissue toxicity throughout therapy", "Serum magnesium, calcium, and potassium periodically during and for 8 weeks after treatment", "Infusion reactions during administration", "Pulmonary symptoms (dyspnea, cough)", "Diarrhea/hydration status; ophthalmologic symptoms"],
+  "counsel": [
+    "This medicine is only effective if your tumor does not have a RAS (KRAS/NRAS) mutation",
+    "Expect skin rash, dryness, and nail changes; limit sun exposure, use sunscreen and moisturizers, and report severe or infected rash",
+    "You will have blood tests to check magnesium and other minerals - report muscle cramps, weakness, or irregular heartbeat",
+    "Tell staff immediately during the infusion if you feel chills, fever, breathlessness, or chest tightness",
+    "Use effective contraception during and for 2 months after treatment, and do not breastfeed during this time"
+  ],
+  "pk": [
+    ["Onset", "Pharmacologic EGFR blockade begins with infusion; clinical response over weeks"],
+    ["Peak", "End of infusion (Cmax); steady state by the third dose"],
+    ["Half-life", "Approximately 7.5 days (range ~3.6-10.9 days)"],
+    ["Duration", "Supports dosing every 14 days"],
+    ["Storage", "Refrigerate vials at 2-8 C; protect from light; do not freeze or shake"]
+  ],
+  "pearls": [
+    "Use ONLY in wild-type RAS (KRAS and NRAS) tumors - RAS mutation predicts lack of benefit and possible harm",
+    "Boxed warning: dermatologic toxicity - acneiform rash severity often correlates with response",
+    "Hypomagnesemia is characteristic of anti-EGFR antibodies; monitor and replace magnesium aggressively",
+    "Fully human IgG2 (vs chimeric cetuximab) - lower rate of hypersensitivity/infusion reactions but reactions still occur",
+    "Avoid combining with bevacizumab-containing chemotherapy due to increased toxicity and worse outcomes"
+  ],
+  "missed": "Panitumumab is given by a healthcare professional on a set schedule (every 14 days). If you miss a scheduled appointment, contact your oncology team promptly to reschedule the infusion.",
+  "overdose": "Doses up to about twice the recommended dose (12 mg/kg) have been studied; expected effects are exaggerated dermatologic toxicity and electrolyte disturbances. There is no specific antidote; manage with supportive care, electrolyte replacement, and skin care.",
+  "refs": [
+    ["FDA Label - Panitumumab (Vectibix, openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22panitumumab%22"],
+    ["DailyMed - Panitumumab (Vectibix)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=panitumumab"]
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "generic": "Nalbuphine",
+  "cls": "Opioid agonist-antagonist analgesic",
+  "pharm": "Kappa-opioid agonist / mu-opioid antagonist (phenanthrene)",
+  "tags": ["opioid", "analgesic", "agonist-antagonist", "perioperative", "obstetric analgesia"],
+  "quick": [
+    ["Adult dose", "10 mg SC/IM/IV q3-6h (70 kg); max single 20 mg, max 160 mg/day"],
+    ["Meal", "Parenteral only; not affected by food"],
+    ["Pregnancy", "Use only if benefit justifies risk; neonatal withdrawal with prolonged use"],
+    ["Lactation", "Small amounts in milk; monitor infant for sedation"],
+    ["Renal", "Use caution; consider lower dose in impairment"],
+    ["Hepatic", "Reduce dose in hepatic impairment (likely hepatic metabolism)"],
+    ["Alcohol", "Avoid; additive CNS and respiratory depression (boxed warning)"],
+    ["Monitoring", "Respiratory rate, sedation, blood pressure, pain"]
+  ],
+  "summary": "Nalbuphine (Nubain) is a parenteral opioid agonist-antagonist analgesic that acts as a kappa-receptor agonist and mu-receptor antagonist. Its analgesic potency is roughly equivalent to morphine on a milligram basis, and it shows a ceiling effect for respiratory depression above ~30 mg. Because of its mu-antagonist activity, it can precipitate acute opioid withdrawal in patients who are physically dependent on full mu agonists. It carries a BOXED WARNING for life-threatening respiratory depression and for risks of concomitant use with benzodiazepines, alcohol, or other CNS depressants.",
+  "indications": [
+    "Management of pain severe enough to require an opioid analgesic and for which alternative treatments are inadequate",
+    "Supplement to balanced anesthesia",
+    "Preoperative and postoperative analgesia",
+    "Obstetrical analgesia during labor and delivery"
+  ],
+  "dosage": [
+    {"c": "Analgesia (adult, ~70 kg, non-tolerant)", "r": "Standard", "d": "10 mg SC, IM, or IV; may repeat every 3-6 hours as needed", "t": "q3-6h PRN", "n": "Use lowest effective dose; titrate to response"},
+    {"c": "Analgesia - maximum dosing (non-tolerant)", "r": "Ceiling", "d": "Single maximum 20 mg; maximum total 160 mg/day", "t": "Per response", "n": "Do not exceed in non-tolerant patients"},
+    {"c": "Supplement to balanced anesthesia - induction", "r": "Anesthetic", "d": "0.3-3 mg/kg IV over 10-15 minutes", "t": "Induction", "n": "Administer only by clinicians trained in IV anesthetics; have naloxone ready"},
+    {"c": "Supplement to balanced anesthesia - maintenance", "r": "Anesthetic", "d": "0.25-0.5 mg/kg IV as single doses as required", "t": "Maintenance", "n": "Larger doses than for analgesia"}
+  ],
+  "admin": [
+    "Administer subcutaneously, intramuscularly, or intravenously; inspect for particulate matter and discoloration before use",
+    "Use the lowest effective dosage for the shortest duration consistent with treatment goals",
+    "Individually titrate to adequate analgesia while minimizing adverse reactions",
+    "When used as anesthetic supplement, give only with naloxone, resuscitative/intubation equipment, and oxygen readily available",
+    "Avoid abrupt discontinuation after prolonged use; taper to prevent withdrawal"
+  ],
+  "moa": "Nalbuphine is an agonist at kappa opioid receptors and an antagonist at mu opioid receptors. Kappa agonism produces analgesia and sedation, while mu antagonism limits euphoria/respiratory depression at higher doses (producing a ceiling effect on respiratory depression above ~30 mg) and can reverse or block the effects of full mu agonists. Its analgesic potency is essentially equivalent to morphine on a milligram basis up to ~30 mg.",
+  "contra": {
+    "absolute": ["Significant respiratory depression", "Acute or severe bronchial asthma in an unmonitored setting or without resuscitative equipment", "Known or suspected GI obstruction, including paralytic ileus", "Hypersensitivity to nalbuphine or any component"],
+    "relative": ["Physical dependence on full mu-opioid agonists (risk of precipitated withdrawal)", "Head injury or raised intracranial pressure", "Circulatory shock or severe hypotension", "Hepatic or renal impairment", "Biliary tract disease"],
+    "monitor": ["Concomitant benzodiazepines or other CNS depressants/alcohol", "Elderly, cachectic, or debilitated patients", "Pre-existing respiratory compromise (COPD, cor pulmonale)"]
+  },
+  "preg": "May cause neonatal opioid withdrawal syndrome with prolonged use during pregnancy, which can be life-threatening if not recognized and treated. Use during labor may cause respiratory depression in the neonate; monitor closely. Use only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Small amounts of nalbuphine are excreted in human milk. Monitor breastfed infants for excess sedation and respiratory depression; weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "Use with caution and consider dose reduction in renal impairment, as clearance may be reduced and effects prolonged. Monitor for excess sedation and respiratory depression.",
+  "hepatic": "Metabolism is likely hepatic, so effects may be prolonged in hepatic impairment. Use a reduced initial dose and titrate cautiously with close monitoring for sedation and respiratory depression.",
+  "interactions": {
+    "major": ["Benzodiazepines and other CNS depressants - profound sedation, respiratory depression, coma, death (boxed warning); reserve for patients without adequate alternatives and use lowest doses", "Full mu-opioid agonists - nalbuphine's mu antagonism can precipitate acute withdrawal in opioid-dependent patients and may reduce analgesia", "Mixed agonist-antagonist or partial agonist opioids - may reduce analgesia and/or precipitate withdrawal"],
+    "moderate": ["Serotonergic drugs (SSRIs, SNRIs, MAOIs, triptans) - risk of serotonin syndrome", "Muscle relaxants - enhanced neuromuscular blockade and respiratory depression", "Diuretics / antihypertensives - opioids may reduce efficacy and worsen hypotension"],
+    "minor": ["Anticholinergics - increased risk of urinary retention and severe constipation/ileus"],
+    "food": "Not applicable; nalbuphine is given parenterally.",
+    "alcohol": "Avoid alcohol; concomitant use causes additive CNS and respiratory depression and may be fatal (boxed warning).",
+    "diagnostics": "May increase serum amylase/lipase; opioids can interfere with some immunoassay drug screens."
+  },
+  "se": {
+    "common": ["Sedation", "Sweating", "Nausea/vomiting", "Dizziness/vertigo", "Dry mouth", "Headache"],
+    "serious": ["Respiratory depression", "Hypotension", "Precipitated opioid withdrawal in dependent patients", "Severe hypersensitivity reactions"],
+    "rare": ["Pulmonary edema", "Bradycardia or tachycardia", "Seizures", "Speech difficulty / dysphoria / hallucinations"],
+    "emergency": ["Life-threatening respiratory depression or arrest", "Severe hypotension and circulatory collapse", "Anaphylaxis", "Acute precipitated withdrawal", "Neonatal respiratory depression after obstetric use"]
+  },
+  "monitoring": [
+    "Respiratory rate and depth, especially within the first 24-72 hours and after dose increases",
+    "Sedation level and overall CNS status",
+    "Blood pressure and heart rate (risk of hypotension)",
+    "Pain control and analgesic response",
+    "Signs of opioid withdrawal in patients with prior opioid exposure; neonate after obstetric use"
+  ],
+  "counsel": [
+    "This medicine can dangerously slow breathing; never combine with alcohol, benzodiazepines, or other sedatives unless directed",
+    "May cause drowsiness and dizziness - do not drive or operate machinery until you know how it affects you",
+    "Tell your provider about any current or recent opioid use, as nalbuphine can trigger sudden withdrawal",
+    "Report slow or shallow breathing, severe drowsiness, confusion, or fainting immediately",
+    "Do not stop abruptly after prolonged use; withdrawal symptoms may occur"
+  ],
+  "pk": [
+    ["Onset", "Within 2-3 min IV; less than 15 min SC or IM"],
+    ["Peak", "Rapid after IV; analgesic effect peaks within ~30 min of parenteral dosing"],
+    ["Half-life", "Plasma half-life approximately 5 hours"],
+    ["Duration", "Analgesia 3-6 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from excessive light and freezing"]
+  ],
+  "pearls": [
+    "Agonist-antagonist: kappa agonist + mu antagonist - can PRECIPITATE WITHDRAWAL in patients dependent on full mu agonists",
+    "Ceiling effect: respiratory depression does not increase beyond ~30 mg in the absence of other CNS depressants",
+    "Analgesic potency roughly equivalent to morphine on a milligram basis up to ~30 mg",
+    "Not a federally scheduled controlled substance in the US, but still subject to abuse and dependence",
+    "Naloxone reverses nalbuphine-induced respiratory depression"
+  ],
+  "missed": "Nalbuphine is given by a clinician on an as-needed or scheduled basis for acute pain rather than self-administered on a fixed home schedule, so there is no routine missed-dose instruction. If a scheduled perioperative dose is delayed, give the next dose per clinical need and the ordered interval without doubling up.",
+  "overdose": "Overdose causes respiratory depression, somnolence progressing to stupor or coma, miosis, hypotension, bradycardia, and circulatory collapse. Manage with airway support, assisted/controlled ventilation, oxygen, IV fluids/vasopressors for hypotension, and the opioid antagonist naloxone, which reverses nalbuphine-induced respiratory depression. Because of nalbuphine's duration, repeated naloxone doses or infusion may be required.",
+  "refs": [
+    ["FDA Nalbuphine Hydrochloride Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nalbuphine+hydrochloride%22"],
+    ["FDA DailyMed - Nalbuphine Hydrochloride", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

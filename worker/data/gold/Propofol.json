@@ -1,0 +1,218 @@
+{
+  "generic": "Propofol",
+  "cls": "Intravenous general anesthetic / sedative-hypnotic",
+  "pharm": "GABA-A receptor positive modulator (anesthetic)",
+  "tags": [
+    "general anesthesia",
+    "ICU sedation",
+    "procedural sedation",
+    "PRIS",
+    "egg/soy allergy"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "Induction ~2-2.5 mg/kg IV (titrate ~40 mg every 10 s); maintenance/sedation by infusion"
+    ],
+    [
+      "Meal",
+      "Not applicable - IV anesthetic"
+    ],
+    [
+      "Pregnancy",
+      "Decades of data show no clear teratogenic risk; neonatal depression possible at delivery"
+    ],
+    [
+      "Lactation",
+      "Small amounts in milk; generally compatible after recovery"
+    ],
+    [
+      "Renal",
+      "No adjustment needed"
+    ],
+    [
+      "Hepatic",
+      "No specific adjustment; titrate to effect"
+    ],
+    [
+      "Alcohol",
+      "Additive CNS/respiratory depression"
+    ],
+    [
+      "Monitoring",
+      "Continuous airway, oxygenation, BP, ECG; triglycerides/CK if prolonged"
+    ]
+  ],
+  "summary": "Propofol is a short-acting intravenous general anesthetic and sedative that enhances inhibitory GABA-A signaling. It is used for induction and maintenance of general anesthesia (>=3 years for induction, >=2 months for maintenance), monitored anesthesia care sedation, and ICU sedation of intubated, mechanically ventilated adults. It must be given only by clinicians trained in anesthesia/airway management with continuous cardiorespiratory monitoring, because it causes dose-dependent hypotension and apnea. It is contraindicated in patients with egg or soy anaphylaxis. Prolonged high-dose infusion risks propofol infusion syndrome (PRIS); strict aseptic technique is essential as the lipid emulsion supports microbial growth.",
+  "indications": [
+    "Induction of general anesthesia in patients >= 3 years of age",
+    "Maintenance of general anesthesia in patients >= 2 months of age",
+    "Initiation and maintenance of monitored anesthesia care (MAC) sedation in adults",
+    "Sedation for adults in combination with regional anesthesia",
+    "ICU sedation of intubated, mechanically ventilated adult patients"
+  ],
+  "dosage": [
+    {
+      "c": "Induction of anesthesia (healthy adults <55 y)",
+      "r": "Adult",
+      "d": "~2-2.5 mg/kg IV, titrated in ~40 mg boluses every 10 seconds to effect",
+      "t": "Bolus to effect",
+      "n": "Lower doses in elderly/debilitated/ASA III-IV"
+    },
+    {
+      "c": "Maintenance of anesthesia",
+      "r": "Adult",
+      "d": "Infusion ~100-200 mcg/kg/min (6-12 mg/kg/h), or intermittent boluses",
+      "t": "Continuous infusion",
+      "n": "Titrate to clinical signs"
+    },
+    {
+      "c": "MAC sedation (adults)",
+      "r": "Adult",
+      "d": "Infusion ~25-75 mcg/kg/min or slow boluses",
+      "t": "Continuous infusion",
+      "n": "Avoid rapid bolus, especially in elderly"
+    },
+    {
+      "c": "ICU sedation (intubated, ventilated adults)",
+      "r": "Adult",
+      "d": "Infusion ~5-50 mcg/kg/min, titrated to target sedation",
+      "t": "Continuous infusion",
+      "n": "Use lowest effective rate; watch for PRIS with high-dose/prolonged use"
+    },
+    {
+      "c": "Elderly / debilitated / ASA III-IV",
+      "r": "Reduced",
+      "d": "Lower induction dose and slower maintenance rate",
+      "t": "Titrated",
+      "n": "Avoid rapid bolus to limit cardiorespiratory depression"
+    }
+  ],
+  "admin": [
+    "Administer ONLY by persons trained in general anesthesia/airway management and not performing the procedure",
+    "Maintain continuous monitoring of oxygenation, ventilation, blood pressure and ECG with resuscitation equipment immediately available",
+    "Use strict aseptic technique; the emulsion supports microbial growth - begin promptly and complete administration within 12 hours of opening a vial; one vial per patient",
+    "Shake well; inspect for phase separation and discard if present; flush lines to avoid incompatibilities",
+    "Titrate slowly, especially in the elderly and hemodynamically fragile, to limit hypotension and apnea"
+  ],
+  "moa": "Like other general anesthetics, propofol's mechanism is incompletely understood, but it is believed to produce sedation and anesthesia mainly by positively modulating the inhibitory neurotransmitter GABA at ligand-gated GABA-A receptors, increasing chloride conductance and CNS inhibition. Onset is rapid (about one arm-brain circulation, ~40 seconds) and recovery is fast due to rapid redistribution and clearance.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to propofol or any component",
+      "History of anaphylaxis to eggs, egg products, soybeans or soy products"
+    ],
+    "relative": [
+      "Hemodynamic instability/hypovolemia (profound hypotension)",
+      "Compromised airway without ability to manage it",
+      "Disorders of lipid metabolism (lipid load)",
+      "Prolonged high-dose ICU infusion (PRIS risk), especially in children"
+    ],
+    "monitor": [
+      "Continuous oxygenation, ventilation, blood pressure, ECG",
+      "Triglycerides and acid-base/CK/potassium with prolonged infusion",
+      "Signs of propofol infusion syndrome"
+    ]
+  },
+  "preg": "Data over several decades have not identified a clear drug-associated risk of major birth defects or miscarriage; most exposures are at cesarean delivery, where neonatal depression can occur. Anesthetic/sedative use beyond 3 hours during peak fetal brain development is of theoretical concern (animal data). Use when needed with appropriate monitoring.",
+  "lact": "Small amounts of propofol appear in breast milk; given its rapid clearance, breastfeeding can generally resume once the mother has recovered from anesthesia.",
+  "renal": "No dosage adjustment is required in renal impairment.",
+  "hepatic": "No specific dosage adjustment; titrate to clinical effect.",
+  "interactions": {
+    "major": [
+      "Opioids and sedatives (benzodiazepines, barbiturates) - markedly potentiate anesthetic/sedative and cardiorespiratory depression; reduce propofol dose",
+      "In pediatric patients, concomitant fentanyl can cause serious bradycardia"
+    ],
+    "moderate": [
+      "Potent inhalational anesthetics (isoflurane, sevoflurane, desflurane) - additive anesthetic and cardiorespiratory depression",
+      "Valproate - increases propofol blood levels; reduce propofol dose and monitor",
+      "Other antihypertensives - additive hypotension"
+    ],
+    "minor": [
+      "No clinically significant change in onset/duration of common neuromuscular blockers"
+    ],
+    "food": "Not applicable - intravenous use.",
+    "alcohol": "Additive CNS and respiratory depression.",
+    "diagnostics": "Lipid emulsion can raise serum triglycerides with prolonged infusion; PRIS is associated with metabolic acidosis, hyperkalemia, rhabdomyolysis (raised CK) and renal failure."
+  },
+  "se": {
+    "common": [
+      "Hypotension",
+      "Apnea / respiratory depression",
+      "Injection-site pain/burning",
+      "Bradycardia",
+      "Transient apnea during induction"
+    ],
+    "serious": [
+      "Profound hypotension and bradycardia/asystole",
+      "Anaphylactic/anaphylactoid reactions",
+      "Propofol infusion syndrome (metabolic acidosis, rhabdomyolysis, hyperkalemia, cardiac/renal failure)",
+      "Airway obstruction / oxygen desaturation"
+    ],
+    "rare": [
+      "Pancreatitis",
+      "Seizure-like (myoclonic) movements",
+      "Green discoloration of urine"
+    ],
+    "emergency": [
+      "Cardiac arrest / asystole",
+      "Anaphylaxis",
+      "Propofol infusion syndrome",
+      "Loss of airway with hypoxia"
+    ]
+  },
+  "monitoring": [
+    "Continuous monitoring of oxygenation, ventilation, blood pressure and ECG throughout",
+    "Early signs of hypotension, apnea, airway obstruction or desaturation, especially after bolus dosing",
+    "Triglycerides, acid-base status, potassium and CK during prolonged/high-dose infusion",
+    "Sterility/handling time of opened vials",
+    "Recovery of mental alertness after the procedure"
+  ],
+  "counsel": [
+    "This is a hospital anesthetic given through a vein by anesthesia-trained staff",
+    "You may feel a brief stinging at the injection site as it goes in",
+    "You will be monitored closely; tell staff about any allergy to eggs or soy",
+    "Do not drive, operate machinery or sign legal documents for the rest of the day after sedation/anesthesia",
+    "Have a responsible adult take you home after outpatient procedures"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Anesthesia within ~40 seconds (one arm-brain circulation)"
+    ],
+    [
+      "Peak",
+      "Rapid CNS effect; blood-brain equilibration ~1-3 minutes"
+    ],
+    [
+      "Half-life",
+      "Initial distribution very rapid; terminal half-life prolonged after long infusions due to tissue stores"
+    ],
+    [
+      "Duration",
+      "Short - prompt awakening after brief use; prolonged after long high-dose infusions"
+    ],
+    [
+      "Storage",
+      "Store at 4-25 C; do not freeze; shake well before use"
+    ]
+  ],
+  "pearls": [
+    "For anesthesia/MAC, administer only by anesthesia-trained personnel with full monitoring and airway/resuscitation readiness",
+    "Contraindicated in patients with egg or soy anaphylaxis",
+    "Propofol infusion syndrome (PRIS) - high-dose/prolonged infusion can cause fatal acidosis, rhabdomyolysis, hyperkalemia and cardiac failure; use lowest effective rate",
+    "Lipid emulsion supports microbial growth - strict asepsis, one vial per patient, finish within 12 hours of opening",
+    "Causes dose-dependent hypotension and apnea, accentuated by rapid bolus and in the elderly"
+  ],
+  "missed": "Not applicable - propofol is administered as a titrated intravenous bolus and/or continuous infusion by clinicians in a monitored setting, not as a patient-administered scheduled dose.",
+  "overdose": "Overdose causes cardiorespiratory depression. Stop propofol immediately. Treat respiratory depression with assisted ventilation and oxygen; treat cardiovascular depression by raising the legs, increasing IV fluids, and giving vasopressors and/or anticholinergic agents as needed. Provide full supportive care until the drug redistributes and is cleared.",
+  "refs": [
+    [
+      "FDA Prescribing Information - Propofol injectable emulsion (openFDA)",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22propofol%22"
+    ],
+    [
+      "DailyMed - Propofol injectable emulsion",
+      "https://dailymed.nlm.nih.gov/dailymed/"
+    ]
+  ]
+}

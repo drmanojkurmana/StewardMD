@@ -1,0 +1,91 @@
+{
+  "generic": "Ramosetron",
+  "cls": "Selective 5-HT3 receptor antagonist",
+  "pharm": "Antiemetic (setron); also IBS-D agent",
+  "tags": ["5-HT3 antagonist", "antiemetic", "CINV", "IBS-D", "not FDA-approved"],
+  "quick": [
+    ["Adult dose", "CINV: 0.1 mg PO once daily (0.3 mg IV); IBS-D: 5 mcg (male)/2.5 mcg (female) PO once daily"],
+    ["Meal", "May be given irrespective of meals; OD tablet must be swallowed"],
+    ["Pregnancy", "Safety not established; use only if benefit outweighs risk"],
+    ["Lactation", "Excreted in milk (animal); generally avoid breastfeeding"],
+    ["Renal", "Use with caution; no fixed adjustment (mostly hepatic clearance)"],
+    ["Hepatic", "Caution; avoid in severe impairment"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "LFTs, constipation/hard stool, signs of ischemic colitis"]
+  ],
+  "summary": "Ramosetron is a potent, long-acting selective 5-HT3 receptor antagonist used to prevent chemotherapy-induced nausea and vomiting (CINV) and, in low dose, to treat diarrhea-predominant irritable bowel syndrome (IBS-D). It is NOT FDA-approved and is not available in the United States; it is approved in Japan, India and parts of Asia. CINV dosing is 0.1 mg orally (or 0.3 mg IV) once daily; IBS-D dosing is 5 micrograms once daily in males and 2.5 micrograms in females. Constipation is the main dose-related effect; serious risks include hypersensitivity/anaphylactoid reactions, hepatic dysfunction, and (as a 5-HT3-antagonist class effect in IBS) ischemic colitis.",
+  "indications": [
+    "Prevention of nausea and vomiting associated with cytotoxic chemotherapy (CINV)",
+    "Diarrhea-predominant irritable bowel syndrome (IBS-D) - low-dose formulation"
+  ],
+  "dosage": [
+    {"c": "CINV - oral (adult)", "r": "Standard", "d": "0.1 mg once daily, given ~1 hour before chemotherapy", "t": "Once daily", "n": "Limit to <=5 days per chemotherapy course; adjust by age/symptoms"},
+    {"c": "CINV - intravenous (adult)", "r": "Standard", "d": "0.3 mg once daily; an additional 0.3 mg may be given (max 0.6 mg/day)", "t": "Once daily", "n": "Maximum 0.6 mg/day"},
+    {"c": "IBS-D - males", "r": "Standard", "d": "5 mcg (0.005 mg) once daily, may increase to 10 mcg", "t": "Once daily", "n": "Titrate to response"},
+    {"c": "IBS-D - females", "r": "Standard", "d": "2.5 mcg (0.0025 mg) once daily, may increase to 5 mcg", "t": "Once daily", "n": "Titrate to response"},
+    {"c": "Elderly", "r": "Caution", "d": "Administer with careful observation", "t": "Per indication", "n": "Reduced physiological function"}
+  ],
+  "admin": [
+    "Orally disintegrating (OD) tablet must be swallowed with saliva or water - it is NOT absorbed through the oral mucosa",
+    "For CINV, give the oral dose approximately 1 hour before the anticancer agent",
+    "Push the OD tablet from the blister with the finger pad (do not use fingernails); do not swallow the blister",
+    "OD tablet contains aspartame (a source of phenylalanine) - relevant in phenylketonuria"
+  ],
+  "moa": "Cytotoxic chemotherapy causes enterochromaffin cells in the gastrointestinal tract to release serotonin (5-HT), which binds 5-HT3 receptors on vagal afferent nerve endings; this signal is relayed to the vomiting center and centrally via the chemoreceptor trigger zone to evoke emesis. Ramosetron selectively and potently blocks 5-HT3 receptors with high affinity and slow dissociation, giving prolonged receptor blockade and antiemetic effect. In IBS-D, 5-HT3 blockade is thought to reduce visceral hypersensitivity and slow colonic transit, improving abdominal pain/discomfort and stool consistency.",
+  "contra": {
+    "absolute": ["Hypersensitivity to ramosetron or any formulation component"],
+    "relative": ["Phenylketonuria (OD tablet contains aspartame/phenylalanine)", "Severe hepatic impairment", "Pre-existing constipation or risk of intestinal obstruction"],
+    "monitor": ["Concomitant apomorphine (risk of severe hypotension)", "QT-prolonging drugs", "Severe renal impairment"]
+  },
+  "preg": "Safety in pregnancy has not been established. Use only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Ramosetron is excreted in milk (reported in lactating animals). Breastfeeding should generally be avoided during treatment.",
+  "renal": "Use with caution in renal impairment; increased BUN has been reported. No specific dose-adjustment scheme is established, as only a small fraction (~8-13%) is excreted unchanged in urine.",
+  "hepatic": "Use with caution in hepatic impairment - hepatic function disorders and elevated transaminases/LDH have been reported. Avoid in severe hepatic dysfunction; ramosetron is cleared mainly by hepatic metabolism.",
+  "interactions": {
+    "major": ["Apomorphine - 5-HT3 antagonists with apomorphine may cause profound hypotension and loss of consciousness (class warning); avoid"],
+    "moderate": ["Strong CYP1A2 or CYP2D6 inhibitors - may increase ramosetron plasma levels", "QT-prolonging drugs - additive QT prolongation (class effect)", "Other constipating/serotonergic agents - additive GI/serotonergic effects"],
+    "minor": ["CYP1A2/CYP2D6 inducers - may reduce ramosetron levels"],
+    "food": "May be given irrespective of meals; OD tablet must be swallowed (not absorbed orally).",
+    "alcohol": "No specific alcohol interaction described in labeling.",
+    "diagnostics": "May cause elevated transaminases (GOT/GPT), LDH and BUN."
+  },
+  "se": {
+    "common": ["Constipation (notably dose-limiting in IBS-D)", "Hard stools", "Headache", "Somnolence", "Abdominal discomfort", "Elevated liver enzymes (GOT/GPT/LDH)", "Increased BUN", "Rash"],
+    "serious": ["Hypersensitivity / anaphylactoid reactions (chest distress, dyspnea, wheezing, hypotension, cyanosis)", "Hepatic function disorders", "Ischemic colitis (5-HT3-antagonist class effect in IBS - bloody diarrhea with abdominal pain)", "QT prolongation (class effect)", "Severe constipation / hard stool"],
+    "rare": ["Epileptiform attacks (reported class effect of 5-HT3 antagonists)"],
+    "emergency": ["Anaphylaxis / shock", "Ischemic colitis with bloody diarrhea", "Serious arrhythmia from QT prolongation"]
+  },
+  "monitoring": [
+    "Liver function tests (GOT/GPT/LDH)",
+    "Bowel function - constipation and hard stool, especially in IBS-D treatment",
+    "Signs of ischemic colitis - new or worsening abdominal pain with bloody diarrhea (discontinue and evaluate)",
+    "Signs of hypersensitivity/anaphylaxis during and after administration"
+  ],
+  "counsel": [
+    "Swallow the orally disintegrating tablet (with saliva or water) - it is not absorbed by the lining of the mouth",
+    "Report constipation, hard stools, or any bloody diarrhea with abdominal pain promptly",
+    "For chemotherapy nausea, take about 1 hour before treatment and do not exceed 5 days per cycle",
+    "Tell your clinician about all other medicines and any pregnancy/breastfeeding",
+    "The tablet contains aspartame (phenylalanine) - relevant if you have phenylketonuria"
+  ],
+  "pk": [
+    ["Onset", "Rapid; potent and sustained antiemetic effect with once-daily dosing"],
+    ["Peak", "Tmax approximately 1-2 hours (oral)"],
+    ["Half-life", "Approximately 5 hours (longer than ondansetron)"],
+    ["Duration", "Prolonged receptor blockade supports once-daily dosing"],
+    ["Storage", "Store below 25 C; protect from light and moisture (hygroscopic)"]
+  ],
+  "pearls": [
+    "NOT FDA-approved / not available in the US; approved in Japan (originator Astellas), India and parts of Asia - data from PMDA/SmPC and pharmacology literature",
+    "More potent and longer-acting than older setrons such as ondansetron",
+    "Low-dose formulation (Irribow) is used for diarrhea-predominant IBS - constipation is the key dose-limiting effect",
+    "Ischemic colitis is a recognized class effect of 5-HT3 antagonists used in IBS - watch for bloody diarrhea and abdominal pain"
+  ],
+  "missed": "Take the missed dose as soon as possible. Do not take a double dose to make up for a missed one. For CINV, dosing is timed to chemotherapy, so follow the prescriber's schedule.",
+  "overdose": "No specific antidote is described. Manage with symptomatic and supportive care. Given the class effects, monitor bowel function for severe constipation and obtain an ECG to monitor for QT prolongation and arrhythmia.",
+  "refs": [
+    ["LTL Pharma - Nasea OD Tablets 0.1 mg drug information sheet", "https://www.ltl-pharma.com/common/pdf/product/nasea/nasea_od_0.1_siori_en.pdf"],
+    ["PMDA Japan - Report on Deliberation Results (ramosetron for IBS-D)", "https://www.pmda.go.jp/files/000216189.pdf"],
+    ["Fukudo S et al., Neurogastroenterol Motil 2017 (ramosetron IBS-D dosing)", "https://onlinelibrary.wiley.com/doi/10.1111/nmo.13023"]
+  ]
+}

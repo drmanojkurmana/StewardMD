@@ -1,0 +1,99 @@
+{
+  "generic": "Amisulpride",
+  "cls": "Atypical (second-generation) antipsychotic (substituted benzamide)",
+  "pharm": "Selective antagonist at dopamine D2/D3 receptors; low-dose preferential block of presynaptic autoreceptors",
+  "tags": ["Rx only", "Not FDA-approved (oral); EMA/BNF-based - pending clinical review", "Strong prolactin elevation", "Dose-dependent QT prolongation", "Renally cleared - renal dosing matters", "Elderly dementia: increased mortality/stroke (class effect)"],
+  "quick": [
+    ["Adult dose", "Negative symptoms 50-300 mg/day; mixed/acute positive 400-800 mg/day (max 1200 mg/day)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Not recommended; 3rd-trimester EPS/withdrawal risk in neonate"],
+    ["Lactation", "Avoid - excreted in breast milk in relatively large amounts"],
+    ["Renal", "Reduce dose: half if CrCl 30-60, one-third if CrCl 10-30 mL/min"],
+    ["Hepatic", "No dose reduction usually needed (weakly metabolised)"],
+    ["Alcohol", "Avoid (additive sedation/CNS depression)"],
+    ["Monitoring", "ECG/QT, prolactin if symptomatic, electrolytes, metabolic parameters"]
+  ],
+  "summary": "Amisulpride is a substituted-benzamide atypical antipsychotic used for acute and chronic schizophrenia; low doses (50-300 mg/day) target predominantly negative symptoms while higher doses (400-800 mg/day, up to 1200 mg/day) treat predominantly positive/acute symptoms. It is largely eliminated unchanged by the kidneys, so dose reduction is required in renal impairment, whereas hepatic adjustment is rarely needed. It strongly raises prolactin and causes dose-dependent QT prolongation; it is approved in Europe (EMA/UK SPC, BNF) but the oral form is NOT FDA-approved in the US.",
+  "indications": [
+    "Acute and chronic schizophrenia with predominantly positive symptoms (higher doses)",
+    "Schizophrenia with predominantly negative symptoms (lower doses)",
+    "Mixed positive and negative symptom presentations"
+  ],
+  "dosage": [
+    {"c": "Predominantly negative symptoms (schizophrenia)", "r": "Oral", "d": "50-300 mg/day", "t": "May be given once daily at doses up to 300 mg/day", "n": "Lower end of range; dose-related EPS remains low in this band"},
+    {"c": "Mixed positive and negative symptoms", "r": "Oral", "d": "Adjust within range to control positive symptoms while maintaining negative-symptom benefit", "t": "Doses above 300 mg/day in two divided doses", "n": "Individualise to clinical response"},
+    {"c": "Acute psychotic / predominantly positive symptoms", "r": "Oral", "d": "400-800 mg/day; may be increased up to 1200 mg/day in individual cases", "t": "No specific titration required at initiation; divide doses above 300 mg/day", "n": "1200 mg/day is the maximum - no safety data above this dose"},
+    {"c": "Maintenance", "r": "Oral", "d": "Lowest effective dose within the established range", "t": "Reassess periodically", "n": "Re-evaluate dose if predominant symptom pattern changes"},
+    {"c": "Elderly", "r": "Oral", "d": "Use with particular caution; consider reduced dose", "t": "Titrate cautiously", "n": "Increased risk of hypotension, sedation, and reduced renal clearance"}
+  ],
+  "admin": [
+    "Doses up to 300 mg/day may be given as a single daily dose",
+    "Doses above 300 mg/day should be given in two divided doses",
+    "May be taken with or without food",
+    "Obtain baseline ECG and electrolytes (correct hypokalaemia/hypomagnesaemia) before/early in treatment",
+    "Assess renal function (CrCl) before dosing - dose depends on it"
+  ],
+  "moa": "Selectively binds dopamine D2 and D3 receptors with no appreciable affinity for serotonergic, histaminergic, cholinergic, or adrenergic receptors. At low doses it preferentially blocks presynaptic D2/D3 autoreceptors, enhancing dopaminergic transmission and improving negative symptoms; at higher doses it blocks postsynaptic limbic dopamine receptors, reducing positive (psychotic) symptoms. Limbic selectivity over striatum contributes to a relatively lower extrapyramidal burden, but D2 blockade in the tuberoinfundibular pathway markedly elevates prolactin.",
+  "contra": {
+    "absolute": ["Hypersensitivity to amisulpride or excipients", "Concomitant prolactin-dependent tumours (e.g., pituitary prolactinoma, breast cancer)", "Phaeochromocytoma", "Children before the onset of puberty", "Combination with levodopa"],
+    "relative": ["Elderly with dementia-related psychosis (increased mortality and stroke - antipsychotic class effect)", "Known QT prolongation, bradycardia, congenital long QT, or family history of QT prolongation", "Uncorrected hypokalaemia/hypomagnesaemia", "Cardiovascular disease", "Renal impairment (requires dose reduction)", "Parkinson's disease", "Epilepsy/history of seizures", "Risk factors for stroke or VTE"],
+    "monitor": ["ECG/QT interval (dose-dependent prolongation, torsades risk)", "Serum electrolytes (K+, Mg2+)", "Prolactin and prolactin-related symptoms", "Neuroleptic malignant syndrome", "Extrapyramidal symptoms and tardive dyskinesia", "Metabolic parameters (weight, glucose, lipids)"]
+  },
+  "preg": "Not recommended during pregnancy unless clearly necessary; amisulpride crosses the placenta. Neonates exposed during the third trimester are at risk of extrapyramidal and/or withdrawal symptoms (agitation, hypertonia or hypotonia, tremor, somnolence, respiratory distress, feeding disorder) varying in severity and duration. Monitor exposed neonates accordingly.",
+  "lact": "Amisulpride is excreted into breast milk in relatively large amounts. Breastfeeding is not recommended during treatment; a careful risk-benefit assessment is required.",
+  "renal": "Amisulpride is eliminated largely unchanged in the urine, so dose reduction is required in renal impairment: reduce to half the dose if creatinine clearance is 30-60 mL/min, and to one-third if CrCl is 10-30 mL/min. There is no experience below 10 mL/min - use with particular care. Consider intermittent treatment courses in severe impairment.",
+  "hepatic": "Amisulpride is only weakly metabolised by the liver, so a dosage reduction is generally not necessary in hepatic impairment.",
+  "interactions": {
+    "major": ["Levodopa (mutual antagonism - contraindicated)", "Class IA antiarrhythmics e.g. quinidine, disopyramide (additive QT - contraindicated/avoid)", "Class III antiarrhythmics e.g. amiodarone, sotalol (additive QT - contraindicated/avoid)", "Other QT-prolonging drugs (e.g. methadone, some antipsychotics, certain antimalarials, IV erythromycin)", "Bradycardia-inducing drugs (beta-blockers, diltiazem, verapamil, digoxin)"],
+    "moderate": ["Drugs causing hypokalaemia/hypomagnesaemia (diuretics, stimulant laxatives, amphotericin B) - correct before use", "Other CNS depressants and sedatives (additive sedation)", "Antihypertensives (additive hypotension)", "Dopamine agonists (antagonised)"],
+    "minor": ["Lithium (monitor)", "Drugs lowering seizure threshold"],
+    "food": "No clinically significant food effect; may be taken with or without food",
+    "alcohol": "Avoid; additive CNS depression and sedation",
+    "diagnostics": "Raises serum prolactin (can interfere with prolactin-based diagnostics and pregnancy/fertility tests); may prolong the ECG QT interval"
+  },
+  "se": {
+    "common": ["Extrapyramidal symptoms - tremor, rigidity, hypokinesia, hypersalivation, akathisia", "Insomnia", "Anxiety", "Agitation", "Somnolence", "Constipation", "Nausea", "Dry mouth", "Weight gain", "Hyperprolactinaemia (galactorrhoea, amenorrhoea, gynaecomastia, breast pain, erectile dysfunction)"],
+    "serious": ["Dose-dependent QT prolongation", "Neuroleptic malignant syndrome", "Tardive dyskinesia (prolonged use)", "Seizures", "Hyperglycaemia / new-onset diabetes", "Acute dystonia (torticollis, oculogyric crisis, trismus)"],
+    "rare": ["Torsades de pointes / ventricular arrhythmia", "Venous thromboembolism / pulmonary embolism", "Angioedema and urticaria", "Hyponatraemia / SIADH", "Hepatic enzyme elevation"],
+    "emergency": ["Neuroleptic malignant syndrome (hyperthermia, rigidity, autonomic instability, raised CPK)", "Torsades de pointes / serious ventricular arrhythmia", "Severe hypersensitivity / angioedema", "Stroke in elderly dementia patients"]
+  },
+  "monitoring": [
+    "Baseline and periodic ECG (QT interval), especially with dose increases or added QT-prolonging drugs",
+    "Serum electrolytes - potassium and magnesium (correct before and during treatment)",
+    "Renal function (creatinine clearance) to guide dosing",
+    "Prolactin level if symptoms of hyperprolactinaemia",
+    "Metabolic parameters: weight/BMI, fasting glucose/HbA1c, lipids",
+    "Extrapyramidal symptoms, akathisia, and tardive dyskinesia",
+    "Signs of neuroleptic malignant syndrome (fever, rigidity, altered consciousness)"
+  ],
+  "counsel": [
+    "May cause drowsiness - take care with driving or operating machinery",
+    "Avoid alcohol",
+    "Report palpitations, fainting, or irregular heartbeat (possible QT effect)",
+    "Report breast swelling/discharge, menstrual changes, or sexual dysfunction (raised prolactin)",
+    "Report fever with muscle stiffness or confusion urgently (neuroleptic malignant syndrome)",
+    "Do not stop abruptly; discuss any dose changes with your prescriber",
+    "Tell your clinician about pregnancy, breastfeeding, kidney problems, and all other medicines"
+  ],
+  "pk": [
+    ["Onset", "Antipsychotic effect over days to weeks; sedation earlier"],
+    ["Peak", "Two plasma peaks: ~1 hour and ~3-4 hours after an oral dose"],
+    ["Half-life", "Approximately 12 hours"],
+    ["Duration", "Supports once- or twice-daily dosing depending on total dose"],
+    ["Storage", "Store below 25-30 degrees C; protect from moisture; keep in original packaging"]
+  ],
+  "pearls": [
+    "Oral amisulpride is NOT FDA-approved (approved in Europe per EMA/UK SPC and used per BNF); pending clinical review. The IV antiemetic Barhemsys is a separate FDA-approved product for PONV, not the antipsychotic indication.",
+    "Dose-dependent dual mechanism: low doses (50-300 mg/day) for negative symptoms via presynaptic autoreceptor block; high doses (400-800 mg/day, up to 1200) for positive symptoms.",
+    "Largely renally cleared and weakly metabolised - renal function, not hepatic function, drives dosing decisions.",
+    "Among the antipsychotics most likely to raise prolactin; counsel on and watch for hyperprolactinaemia.",
+    "Causes dose-dependent QT prolongation - obtain ECG, correct K+/Mg2+, and avoid combining with other QT-prolonging drugs."
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose, in which case skip it and resume the usual schedule. Do not take a double dose to make up. Keep dosing times consistent.",
+  "overdose": "Experience is limited; effects exaggerate the pharmacology - sedation, hypotension, extrapyramidal symptoms, and potentially serious cardiac effects including dose-dependent QT prolongation and torsades de pointes. There is no specific antidote. Manage with supportive measures, continuous cardiac/ECG monitoring of vital functions, correction of electrolytes, and anticholinergic agents for severe extrapyramidal symptoms. Amisulpride is poorly dialysed.",
+  "refs": [
+    ["EMC SmPC - Amisulpride 200mg Tablets (medicines.org.uk)", "https://www.medicines.org.uk/emc/product/3965/smpc"],
+    ["BNF - Amisulpride (NICE)", "https://bnf.nice.org.uk/drugs/amisulpride/"],
+    ["FDA - Barhemsys (IV amisulpride for PONV; separate product, not oral antipsychotic)", "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&ApplNo=209510"]
+  ]
+}

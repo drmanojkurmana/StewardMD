@@ -1,0 +1,90 @@
+{
+  "generic": "Plerixafor",
+  "cls": "Hematopoietic stem cell mobilizer (CXCR4 antagonist)",
+  "pharm": "Reversible CXCR4 chemokine-receptor antagonist that blocks SDF-1alpha (CXCL12) binding, mobilizing CD34+ hematopoietic stem cells from the marrow into peripheral blood for apheresis.",
+  "tags": ["Stem cell mobilizer", "CXCR4 antagonist", "Subcutaneous", "Renally eliminated", "With G-CSF", "Transplant", "Not for leukemia"],
+  "quick": [
+    ["Adult dose", "0.24 mg/kg SC (actual body weight) ~11 h before apheresis; max 40 mg/day"],
+    ["Meal", "N/A (subcutaneous)"],
+    ["Pregnancy", "Can cause fetal harm; use effective contraception"],
+    ["Lactation", "Not recommended during and for 1 week after the final dose"],
+    ["Renal", "CrCl <=50: reduce to 0.16 mg/kg (max 27 mg/day)"],
+    ["Hepatic", "No specific adjustment (not hepatically metabolized)"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "CBC/platelets, white cell count, spleen size/pain"]
+  ],
+  "summary": "Plerixafor is a CXCR4 antagonist used in combination with G-CSF (filgrastim) to mobilize CD34+ hematopoietic stem cells into the peripheral blood for collection and autologous transplantation in non-Hodgkin lymphoma and multiple myeloma. It is given subcutaneously about 11 hours before apheresis after 4 days of G-CSF. Key warnings include hypersensitivity/anaphylactic reactions, splenic enlargement/rupture, thrombocytopenia, leukocytosis, and embryo-fetal toxicity. It is not indicated for leukemia (risk of mobilizing leukemic cells).",
+  "indications": [
+    "In combination with G-CSF (filgrastim) to mobilize hematopoietic stem cells to the peripheral blood for collection and autologous transplantation in patients with non-Hodgkin lymphoma",
+    "In combination with G-CSF to mobilize hematopoietic stem cells for autologous transplantation in patients with multiple myeloma"
+  ],
+  "dosage": [
+    {"c": "Stem cell mobilization (normal renal function)", "r": "Subcutaneous", "d": "0.24 mg/kg actual body weight (max 40 mg/day)", "t": "~11 hours before apheresis, after 4 days of once-daily G-CSF", "n": "May repeat for up to 4 consecutive days; dosing validated to 175% of ideal body weight"},
+    {"c": "Renal impairment (CrCl <=50 mL/min)", "r": "Subcutaneous", "d": "0.16 mg/kg (max 27 mg/day)", "t": "~11 hours before apheresis", "n": "Reduce dose by approximately one-third"}
+  ],
+  "admin": [
+    "Administer by subcutaneous injection from a single-dose, preservative-free vial",
+    "Give approximately 11 hours before initiation of each apheresis, following 4 days of once-daily G-CSF",
+    "Inspect for particulate matter and discoloration before use",
+    "Observe the patient for at least 30 minutes after the first dose for hypersensitivity reactions",
+    "Have measures for anaphylaxis available during administration"
+  ],
+  "moa": "Plerixafor reversibly antagonizes the CXCR4 chemokine receptor, blocking binding of its ligand SDF-1alpha (CXCL12). This disrupts the anchoring of CD34+ hematopoietic stem cells in the bone marrow, releasing them into the peripheral circulation where they can be collected by apheresis.",
+  "contra": {
+    "absolute": ["Hypersensitivity to plerixafor"],
+    "relative": ["Leukemia (not indicated; risk of mobilizing leukemic cells into the apheresis product)", "Renal impairment (dose reduction required)", "Pre-existing thrombocytopenia or hyperleukocytosis risk"],
+    "monitor": ["Platelet count", "White blood cell count", "Spleen size and left upper quadrant/shoulder pain", "Renal function (for dosing)"]
+  },
+  "preg": "Can cause fetal harm (embryo-fetal mortality and malformations in animals). Advise effective contraception during therapy and for 1 week after the final dose.",
+  "lact": "Breastfeeding is not recommended during treatment and for 1 week after the final dose.",
+  "renal": "For patients with CrCl 50 mL/min or less, reduce the dose by about one-third to 0.16 mg/kg (maximum 27 mg/day). Plerixafor is predominantly eliminated unchanged by the kidneys.",
+  "hepatic": "No specific dose adjustment; plerixafor is not metabolized and is eliminated predominantly by the renal route.",
+  "interactions": {
+    "major": ["No clinically significant CYP-mediated interactions (not metabolized by CYP450)"],
+    "moderate": ["Drugs that reduce renal function or compete for renal tubular secretion may increase plerixafor exposure"],
+    "minor": ["Not a substrate or inhibitor of P-glycoprotein"],
+    "food": "No interaction",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Expect predictable transient leukocytosis and mild thrombocytopenia on laboratory monitoring."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea and vomiting", "Injection-site reactions", "Fatigue", "Headache", "Arthralgia", "Dizziness"],
+    "serious": ["Hypersensitivity / anaphylactic reactions (hypotension, shock)", "Splenic enlargement and risk of rupture", "Thrombocytopenia", "Hyperleukocytosis (WBC >=100,000)"],
+    "rare": ["Potential mobilization of tumor cells into the apheresis product"],
+    "emergency": ["Anaphylactic shock", "Splenic rupture (left upper quadrant or shoulder-tip pain)"]
+  },
+  "monitoring": [
+    "Platelet count",
+    "White blood cell count / complete blood count",
+    "Spleen size and symptoms (left upper quadrant or scapular/shoulder pain)",
+    "Renal function (to determine dosing)",
+    "Signs of hypersensitivity during and for 30 minutes after dosing"
+  ],
+  "counsel": [
+    "Report any signs of allergic reaction such as hives, rash, shortness of breath, or faintness",
+    "Report pain in the left upper abdomen or at the tip of the shoulder (possible spleen problem)",
+    "You may feel lightheaded or faint after the injection - tell your care team",
+    "Common effects include diarrhea, nausea, tiredness, and injection-site reactions",
+    "Use effective contraception during treatment and for 1 week afterward; do not breastfeed during this time"
+  ],
+  "pk": [
+    ["Onset", "CD34+ cell mobilization within hours"],
+    ["Peak", "Peak plasma ~30-60 min; peak CD34+ cells with G-CSF at 10-14 h (basis for ~11 h timing)"],
+    ["Half-life", "~3-5 hours"],
+    ["Duration", "Mobilizing effect over ~10-14 hours after a dose"],
+    ["Storage", "Store at 25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Always used together with 4 days of G-CSF (filgrastim), not as monotherapy",
+    "Timing matters - give ~11 hours before apheresis so peak CD34+ mobilization aligns with collection",
+    "Reduce the dose to 0.16 mg/kg when CrCl is 50 mL/min or below",
+    "Not for leukemia - it can mobilize leukemic cells into the apheresis product",
+    "Expect predictable transient leukocytosis and mild thrombocytopenia"
+  ],
+  "missed": "Timing relative to apheresis is critical and is managed by the transplant team; there is no patient self-administered make-up dose. A missed or mistimed dose is addressed by the apheresis schedule.",
+  "overdose": "Doses above 0.24 mg/kg are associated with more gastrointestinal upset and vasovagal/orthostatic hypotension and syncope. There is no specific antidote; management is supportive with monitoring of blood pressure and cardiac status.",
+  "refs": [
+    ["FDA Mozobil (Plerixafor) Label (DailyMed)", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=0ed08d2b-5051-46b2-aa37-1d6275bf9003"],
+    ["openFDA - Plerixafor", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22PLERIXAFOR%22"]
+  ]
+}

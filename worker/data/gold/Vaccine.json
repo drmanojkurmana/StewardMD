@@ -1,0 +1,133 @@
+{
+  "generic": "Vaccine",
+  "cls": "Active immunizing agent (biological - drug class overview)",
+  "pharm": "Antigen-based biological that induces protective adaptive immunity",
+  "tags": [
+    "Vaccine",
+    "Immunization",
+    "Injectable / oral / intranasal",
+    "Group entry - select the specific product",
+    "Biological",
+    "Cold-chain storage",
+    "Schedule-dependent dosing"
+  ],
+  "quick": [
+    ["Adult dose", "Product-specific; follow the immunization schedule for that vaccine"],
+    ["Meal", "Generally not relevant (some oral vaccines have feeding rules)"],
+    ["Pregnancy", "Inactivated generally allowed; live vaccines usually avoided"],
+    ["Lactation", "Most vaccines compatible; follow product labeling"],
+    ["Renal", "No adjustment; immunocompromise may reduce response"],
+    ["Hepatic", "No adjustment; immunocompromise may reduce response"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Immediate hypersensitivity, injection-site/systemic reactions"]
+  ],
+  "summary": "This is a general overview entry: 'Vaccine' is a class of active immunizing biological agents rather than a single product. Vaccines contain antigens (live-attenuated organisms, inactivated organisms, subunits, toxoids, polysaccharides/conjugates, or nucleic acid/mRNA platforms) that stimulate the immune system to develop protective, often long-lasting, immunity against a specific infection. Dose, route, schedule, age range, contraindications, and storage are entirely product-specific. Always select the exact vaccine product and consult its prescribing information and the national/ACIP/WHO immunization schedule before administration.",
+  "indications": [
+    "Active immunization to prevent specific infectious diseases (product-dependent)",
+    "Primary immunization series and booster doses per the recommended schedule",
+    "Pre-exposure or post-exposure prophylaxis for certain vaccines (e.g., rabies, tetanus, hepatitis B)"
+  ],
+  "dosage": [
+    {"c": "General principle", "r": "Product-specific (IM, SC, oral, or intranasal)", "d": "Follow the exact dose, volume, and schedule in the specific vaccine's prescribing information", "t": "Per schedule", "n": "Do not generalize dosing across vaccines"},
+    {"c": "Primary series", "r": "Per product", "d": "One or more doses at defined intervals", "t": "Scheduled intervals", "n": "Complete the full series for protection"},
+    {"c": "Booster", "r": "Per product", "d": "Additional dose(s) at recommended intervals", "t": "Per schedule", "n": "Maintains or restores immunity"}
+  ],
+  "admin": [
+    "Confirm the exact vaccine product, formulation, dose, and route before administration",
+    "Verify storage/cold-chain integrity and expiry; reconstitute correctly if required",
+    "Screen for contraindications and precautions (allergy, immunocompromise, pregnancy for live vaccines)",
+    "Administer by the labeled route (commonly intramuscular or subcutaneous) and observe for immediate reactions",
+    "Document lot number, site, date, and provide the next-dose schedule"
+  ],
+  "moa": "Vaccines introduce antigen (whole organism, subunit, toxoid, polysaccharide/conjugate, or nucleic acid encoding an antigen) to the immune system, which mounts an adaptive response generating antigen-specific antibodies and memory B and T cells. On later exposure to the real pathogen, this immune memory enables a rapid, protective response that prevents or attenuates disease. Adjuvants in some vaccines enhance the immune response.",
+  "contra": {
+    "absolute": [
+      "Severe allergic reaction (anaphylaxis) to a previous dose or to a vaccine component",
+      "Live-attenuated vaccines in significant immunocompromise and (generally) in pregnancy"
+    ],
+    "relative": [
+      "Moderate to severe acute illness (defer until recovery)",
+      "Recent receipt of certain biologics/blood products (may affect live-vaccine response)",
+      "Specific product precautions per its label"
+    ],
+    "monitor": [
+      "Immediate hypersensitivity for at least 15 minutes after administration",
+      "Local and systemic reactions",
+      "Vaccine-specific precautions in the product label"
+    ]
+  },
+  "preg": "Inactivated, subunit, toxoid, and many recommended vaccines (e.g., influenza, Tdap, certain others) are generally considered safe and are recommended in pregnancy. Live-attenuated vaccines are generally avoided during pregnancy. Always follow the specific vaccine's labeling and current obstetric immunization guidance.",
+  "lact": "Most vaccines, including live vaccines for the mother, are generally compatible with breastfeeding. Follow the specific product's labeling for any exceptions.",
+  "renal": "No dosage adjustment is generally needed; however, response may be reduced in patients with significant immunocompromise (including some renal/dialysis patients), and additional or higher-dose schedules may apply per product guidance.",
+  "hepatic": "No dosage adjustment is generally needed; immune response may be reduced in significant immunocompromise per product guidance.",
+  "interactions": {
+    "major": [
+      "Immunosuppressive therapy (high-dose corticosteroids, chemotherapy, biologics) - reduced response and contraindication to live vaccines"
+    ],
+    "moderate": [
+      "Other vaccines - some require spacing of live vaccines (e.g., 4 weeks apart) per guidance",
+      "Antiviral drugs - may reduce response to certain live vaccines (e.g., varicella, influenza nasal)"
+    ],
+    "minor": [
+      "Antipyretics around vaccination - prophylactic use may slightly lower antibody response"
+    ],
+    "food": "Generally not relevant; some oral vaccines have specific feeding restrictions per label.",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "Some live vaccines can transiently affect tuberculin/IGRA testing - follow timing guidance."
+  },
+  "se": {
+    "common": [
+      "Injection-site pain, redness, or swelling",
+      "Low-grade fever",
+      "Fatigue and malaise",
+      "Headache, myalgia",
+      "Irritability (in children)"
+    ],
+    "serious": [
+      "Anaphylaxis (rare, occurs shortly after administration)",
+      "Vaccine-specific severe reactions per product labeling"
+    ],
+    "rare": [
+      "Febrile seizure (in young children, certain vaccines)",
+      "Other rare product-specific adverse events"
+    ],
+    "emergency": [
+      "Anaphylaxis (difficulty breathing, swelling, collapse) - treat with epinephrine",
+      "High fever with seizure"
+    ]
+  },
+  "monitoring": [
+    "Immediate observation for hypersensitivity after administration (typically 15-30 minutes)",
+    "Local and systemic reactions in the following days",
+    "Completion of the recommended dose series",
+    "Vaccine-specific monitoring per product labeling"
+  ],
+  "counsel": [
+    "This is a general entry - your clinician will give the specific vaccine appropriate for you",
+    "Mild soreness, low fever, and tiredness for a day or two are common and expected",
+    "Stay for the recommended observation period after the shot in case of an allergic reaction",
+    "Complete the full series and keep the next-dose schedule",
+    "Tell your provider about allergies, immune problems, pregnancy, or recent vaccines/medicines",
+    "Seek emergency care for difficulty breathing, swelling of the face/throat, or fainting after vaccination"
+  ],
+  "pk": [
+    ["Onset", "Protective immunity typically develops over about 1 to 2 weeks (product-dependent)"],
+    ["Peak", "Antibody response peaks weeks after the dose/series"],
+    ["Half-life", "Not applicable - durable immune memory rather than drug levels"],
+    ["Duration", "Months to years to lifelong; boosters may be needed (product-dependent)"],
+    ["Storage", "Strict cold-chain per product (commonly 2-8 C; some require freezing); do not use if temperature excursion or expiry"]
+  ],
+  "pearls": [
+    "Group/ambiguous entry: 'Vaccine' is a drug class, not one product - always select the specific vaccine and follow its prescribing information and the national/ACIP/WHO schedule",
+    "Platform matters: live-attenuated vaccines are generally avoided in pregnancy and immunocompromise; inactivated/subunit/mRNA are not live",
+    "Anaphylaxis is rare but possible - have epinephrine available and observe after administration",
+    "Cold-chain integrity is critical; check storage temperature and expiry before use",
+    "Document lot number, site, and route; complete the full series for protection"
+  ],
+  "missed": "If a scheduled dose in a vaccine series is missed or delayed, it generally does not require restarting the series - resume as soon as possible per the catch-up schedule for that vaccine. Follow the specific product and national immunization guidance.",
+  "overdose": "Inadvertent administration of an extra dose of most vaccines is generally not harmful but may increase local and systemic reactions. Management is supportive. Report the error per local pharmacovigilance/immunization safety procedures and follow product-specific guidance. Treat any anaphylaxis immediately with epinephrine.",
+  "refs": [
+    ["FDA - Vaccines (CBER)", "https://www.fda.gov/vaccines-blood-biologics/vaccines"],
+    ["CDC - Vaccine schedules and ACIP recommendations", "https://www.cdc.gov/vaccines/schedules/"]
+  ]
+}

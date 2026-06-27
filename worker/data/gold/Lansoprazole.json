@@ -1,0 +1,107 @@
+{
+  "generic": "Lansoprazole",
+  "cls": "Proton pump inhibitor (PPI)",
+  "pharm": "Substituted benzimidazole that irreversibly inhibits the gastric H+/K+ ATPase (proton pump) in parietal cells, suppressing basal and stimulated acid secretion.",
+  "tags": ["Rx and OTC", "PPI", "Acid suppression", "Delayed-release"],
+  "quick": [
+    ["Adult dose", "15-30 mg once daily depending on indication"],
+    ["Meal", "Take before eating, usually in the morning"],
+    ["Pregnancy", "Limited human data; use only if clearly needed"],
+    ["Lactation", "Limited data; weigh maternal benefit"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Severe impairment: consider dose reduction"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Magnesium and B12 on long-term use"]
+  ],
+  "summary": "Lansoprazole is a proton pump inhibitor used for duodenal and gastric ulcers, H. pylori eradication (in combination), GERD, erosive esophagitis, NSAID-associated ulcers, and pathological hypersecretory conditions including Zollinger-Ellison syndrome. It is taken before eating and works by irreversibly blocking gastric acid secretion.",
+  "indications": [
+    "Active duodenal ulcer and maintenance of healing in adults",
+    "Eradication of H. pylori to reduce duodenal ulcer recurrence (combination therapy)",
+    "Active benign gastric ulcer",
+    "Healing and risk reduction of NSAID-associated gastric ulcer",
+    "Symptomatic GERD (adults and children 1 year and older)",
+    "Erosive esophagitis: treatment and maintenance of healing",
+    "Pathological hypersecretory conditions including Zollinger-Ellison syndrome"
+  ],
+  "dosage": [
+    {"c": "Active duodenal ulcer", "r": "Adult oral", "d": "15 mg once daily for 4 weeks", "t": "Once daily", "n": "Maintenance of healed ulcer: 15 mg once daily"},
+    {"c": "H. pylori eradication (triple therapy)", "r": "Adult oral", "d": "Lansoprazole 30 mg + amoxicillin 1 g + clarithromycin 500 mg, all twice daily", "t": "BID for 10 or 14 days", "n": "Dual therapy: lansoprazole 30 mg + amoxicillin 1 g, all three times daily for 14 days"},
+    {"c": "Benign gastric ulcer", "r": "Adult oral", "d": "30 mg once daily for up to 8 weeks", "t": "Once daily", "n": "NSAID-associated ulcer healing: 30 mg once daily for 8 weeks"},
+    {"c": "GERD / erosive esophagitis", "r": "Adult oral", "d": "Symptomatic GERD 15 mg once daily up to 8 weeks; EE 30 mg once daily up to 8 weeks", "t": "Once daily", "n": "EE maintenance 15 mg once daily"},
+    {"c": "Severe hepatic impairment", "r": "Adult oral", "d": "Consider dose reduction", "t": "Once daily", "n": "Reduced clearance"}
+  ],
+  "admin": [
+    "Take before eating, usually in the morning",
+    "Swallow delayed-release capsules whole; do not chew or crush",
+    "Capsule contents may be sprinkled on soft food or given via select methods per label if swallowing is difficult",
+    "Complete the full course for ulcer healing and H. pylori eradication"
+  ],
+  "moa": "Lansoprazole is a substituted benzimidazole that accumulates in the acidic parietal cell canaliculus where it is converted to the active sulfenamide. This covalently binds and irreversibly inhibits the H+/K+ ATPase, the final step of gastric acid secretion, suppressing both basal and stimulated acid output regardless of stimulus.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to any component of the formulation",
+      "Concomitant rilpivirine-containing products"
+    ],
+    "relative": [
+      "Long-term high-dose therapy (fracture, hypomagnesemia, B12 deficiency risk)",
+      "Drugs requiring gastric acidity for absorption"
+    ],
+    "monitor": [
+      "Serum magnesium on prolonged therapy",
+      "Vitamin B12 on long-term use"
+    ]
+  },
+  "preg": "Limited human data; no clear major risk signal but adequate controlled studies are lacking. Use only if clearly needed.",
+  "lact": "Limited data on transfer into milk; weigh maternal need against potential infant exposure.",
+  "renal": "No dosage adjustment required in renal impairment.",
+  "hepatic": "Clearance is reduced and AUC increased in hepatic impairment; consider dose reduction in severe impairment.",
+  "interactions": {
+    "major": [
+      "Rilpivirine (contraindicated)",
+      "pH-dependent drugs: atazanavir, nelfinavir, ketoconazole, itraconazole, erlotinib (reduced absorption)"
+    ],
+    "moderate": [
+      "Warfarin (monitor INR)",
+      "Methotrexate (high-dose; delayed elimination)",
+      "Tacrolimus, digoxin (altered levels)",
+      "Theophylline (minor clearance change)"
+    ],
+    "minor": [],
+    "food": "Take before eating; food can reduce absorption if taken with meals.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Elevates serum chromogranin A; may cause false-positive secretin stimulation test."
+  },
+  "se": {
+    "common": ["Diarrhea", "Abdominal pain", "Nausea", "Headache", "Constipation", "Dizziness"],
+    "serious": ["Hypomagnesemia", "C. difficile-associated diarrhea", "Bone fractures (long-term)", "Acute interstitial nephritis", "Vitamin B12 deficiency (long-term)"],
+    "rare": ["Cutaneous and systemic lupus erythematosus", "Severe hypersensitivity reactions"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe skin reactions (SJS / TEN)", "Severe persistent diarrhea"]
+  },
+  "monitoring": ["Serum magnesium on prolonged therapy", "Vitamin B12 on long-term use", "Symptom response and need for continued therapy", "Renal function if interstitial nephritis suspected"],
+  "counsel": [
+    "Take before eating in the morning",
+    "Swallow capsules whole; do not chew or crush",
+    "May take days for full symptom relief; complete the prescribed course",
+    "Report persistent diarrhea, muscle cramps, or signs of low magnesium on long-term use",
+    "Tell your clinician about all other medicines, including HIV drugs"
+  ],
+  "pk": [
+    ["Onset", "Acid suppression within 1-3 hours; full effect over days"],
+    ["Peak", "~1.7 hours (plasma)"],
+    ["Half-life", "~1.5 hours (effect outlasts plasma level)"],
+    ["Duration", "Acid suppression for ~24 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "Effect outlasts plasma half-life due to irreversible pump binding",
+    "Best taken before the first meal of the day",
+    "Used as part of triple/dual therapy for H. pylori eradication",
+    "Reassess long-term use; limit duration to lowest effective level"
+  ],
+  "missed": "If a daily dose is missed, take it when remembered the same day; if near the next dose, skip it. Do not double up.",
+  "overdose": "Lansoprazole is extensively protein-bound and not effectively removed by dialysis. No specific antidote; manage symptomatically and supportively.",
+  "refs": [
+    ["FDA Label - Lansoprazole (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lansoprazole%22"],
+    ["DailyMed - Lansoprazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=lansoprazole"]
+  ]
+}

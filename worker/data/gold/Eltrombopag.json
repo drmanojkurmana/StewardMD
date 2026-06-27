@@ -1,0 +1,107 @@
+{
+  "generic": "Eltrombopag",
+  "cls": "Thrombopoietin (TPO) receptor agonist (oral platelet stimulant)",
+  "pharm": "Small-molecule agonist of the thrombopoietin receptor (c-Mpl) that stimulates megakaryocyte proliferation and differentiation, increasing platelet production.",
+  "tags": ["Rx only", "TPO receptor agonist", "Chronic ITP", "Severe aplastic anemia", "Boxed warning: hepatotoxicity", "Chelates polyvalent cations"],
+  "quick": [
+    ["Adult dose", "ITP: start 50 mg once daily (25 mg if East Asian/hepatic impairment), max 75 mg/day"],
+    ["Meal", "Take without food or with a low-calcium meal; separate from cations"],
+    ["Pregnancy", "Limited data; use only if benefit justifies risk"],
+    ["Lactation", "Do not breastfeed during treatment"],
+    ["Renal", "No specific adjustment defined; use with caution"],
+    ["Hepatic", "Reduce starting dose to 25 mg in hepatic impairment (ITP/refractory SAA)"],
+    ["Alcohol", "Avoid excess - adds to hepatotoxicity risk"],
+    ["Monitoring", "CBC/platelets, liver function tests, ocular exams"]
+  ],
+  "summary": "Eltrombopag is an orally active thrombopoietin receptor agonist used for chronic immune thrombocytopenia (ITP) refractory to other therapies, thrombocytopenia in chronic hepatitis C to permit interferon-based therapy, and severe aplastic anemia. It increases platelet counts by stimulating megakaryopoiesis. It carries a BOXED WARNING for hepatotoxicity (and for hepatic decompensation in hepatitis C patients on interferon/ribavirin), so liver tests must be monitored. The goal is to reach a platelet count that prevents bleeding (at least 50 x 10^9/L), not to normalize counts, because excessive elevation increases thrombotic risk. Eltrombopag chelates polyvalent cations (iron, calcium, aluminum, magnesium, zinc), so it must be separated from food, antacids, dairy, and mineral supplements. The starting dose is reduced in patients of East/Southeast Asian ancestry and in hepatic impairment.",
+  "indications": [
+    "Thrombocytopenia in adults and pediatric patients 1 year and older with persistent or chronic immune thrombocytopenia (ITP) who have had an insufficient response to corticosteroids, immunoglobulins, or splenectomy",
+    "Thrombocytopenia in patients with chronic hepatitis C to allow the initiation and maintenance of interferon-based therapy",
+    "Severe aplastic anemia (first-line in combination with standard immunosuppressive therapy, or refractory disease)"
+  ],
+  "dosage": [
+    {"c": "Persistent/chronic ITP - adult", "r": "Adult oral", "d": "Start 50 mg once daily (25 mg if East/Southeast Asian ancestry or hepatic impairment); titrate to platelets >=50 x 10^9/L; maximum 75 mg/day", "t": "Once daily", "n": "Use the lowest dose to achieve and maintain a safe platelet count"},
+    {"c": "Chronic hepatitis C thrombocytopenia", "r": "Adult oral", "d": "Start 25 mg once daily; titrate to the platelet level needed for antiviral therapy; maximum 100 mg/day", "t": "Once daily", "n": "Discontinue per antiviral therapy completion"},
+    {"c": "Severe aplastic anemia - first line (>=12 years)", "r": "Adult oral", "d": "150 mg once daily (75 mg if East/Southeast Asian ancestry or hepatic impairment) for 6 months with immunosuppressive therapy", "t": "Once daily", "n": "Reduced dose for East Asian ancestry or hepatic impairment"},
+    {"c": "Severe aplastic anemia - refractory", "r": "Adult oral", "d": "Start 50 mg once daily (25 mg if East/Southeast Asian ancestry or hepatic impairment); maximum 150 mg/day", "t": "Once daily", "n": "Titrate to platelet response"}
+  ],
+  "admin": [
+    "Take on an empty stomach (1 hour before or 2 hours after a meal) or with a meal low in calcium (<=50 mg)",
+    "Separate from polyvalent-cation products (antacids, dairy, calcium/iron/magnesium/zinc supplements) by at least 2 hours before or 4 hours after the dose",
+    "Check liver function before and during treatment per the schedule",
+    "Titrate the dose to the lowest level that maintains a platelet count that avoids bleeding, not to normalize counts",
+    "Obtain baseline and periodic eye examinations (cataract risk)"
+  ],
+  "moa": "Eltrombopag is a small-molecule, non-peptide agonist of the thrombopoietin (TPO) receptor (c-Mpl). It binds the transmembrane domain of the receptor at a site distinct from endogenous TPO and initiates JAK/STAT and MAPK signaling, stimulating proliferation and differentiation of megakaryocytes from bone marrow progenitor cells and thereby increasing platelet production. Because it does not compete with TPO for the same binding site, it can act additively with endogenous TPO. In aplastic anemia it also stimulates more primitive hematopoietic stem and progenitor cells, supporting trilineage hematopoietic recovery.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to eltrombopag or any component"
+    ],
+    "relative": [
+      "Chronic hepatitis C on interferon/ribavirin (risk of hepatic decompensation)",
+      "Pre-existing hepatic impairment (reduce dose; increased hepatotoxicity risk)",
+      "Risk factors for thromboembolism",
+      "Conditions predisposing to bone marrow reticulin fibrosis"
+    ],
+    "monitor": [
+      "Liver function tests (ALT, AST, bilirubin)",
+      "CBC with platelet count and peripheral smear",
+      "Signs of thromboembolism",
+      "Cataracts on eye examination"
+    ]
+  },
+  "preg": "There are insufficient human data; animal studies showed embryolethality and reduced fetal weights at exposures above the human ITP exposure. Use during pregnancy only if the potential benefit justifies the potential risk. Females of reproductive potential should use effective contraception during treatment and for 7 days after the last dose.",
+  "lact": "Advise women not to breastfeed during treatment with eltrombopag and for a period after, because of the potential for serious adverse reactions in the breastfed infant.",
+  "renal": "No specific renal dose adjustment is defined; use with caution and monitor closely in patients with renal impairment.",
+  "hepatic": "In ITP and refractory severe aplastic anemia, reduce the initial dose to 25 mg once daily in patients with any degree of hepatic impairment (Child-Pugh A, B, or C); for chronic hepatitis C thrombocytopenia no starting-dose adjustment is needed. Eltrombopag itself can cause hepatotoxicity, so monitor liver tests closely.",
+  "interactions": {
+    "major": [
+      "Polyvalent cation products (iron, calcium, aluminum, magnesium, selenium, zinc - in antacids, dairy, mineral supplements) - chelation markedly reduces absorption; separate by >=2 hours before or 4 hours after",
+      "Interferon/ribavirin in hepatitis C - increased risk of hepatic decompensation"
+    ],
+    "moderate": [
+      "Statins and other OATP1B1/BCRP substrates (e.g., rosuvastatin) - increased exposure; reduce rosuvastatin dose by ~50% and monitor",
+      "Drugs metabolized by or transported via OATP1B1/BCRP - monitor for increased exposure"
+    ],
+    "minor": ["No dosage adjustment needed with lopinavir/ritonavir, boceprevir, or telaprevir"],
+    "food": "High-calcium meals and dairy substantially reduce absorption; take without food or with a low-calcium (<=50 mg) meal.",
+    "alcohol": "Avoid excessive alcohol, which adds to the risk of hepatotoxicity.",
+    "diagnostics": "Causes elevations in liver enzymes and bilirubin; monitor with scheduled LFTs."
+  },
+  "se": {
+    "common": ["Anemia", "Nausea", "Pyrexia (fever)", "Elevated ALT/AST", "Cough", "Fatigue", "Headache", "Diarrhea"],
+    "serious": ["Hepatotoxicity (including elevated bilirubin)", "Thromboembolic and thrombotic events (including portal vein thrombosis)", "Cataracts", "Bone marrow reticulin formation/fibrosis", "Hematologic malignancy (theoretical, with TPO agonists)"],
+    "rare": ["Hepatic decompensation in hepatitis C", "Severe rebound thrombocytopenia and bleeding after discontinuation", "Severe hypersensitivity"],
+    "emergency": ["Acute thrombosis (e.g., MI, stroke, pulmonary embolism, portal vein thrombosis)", "Severe hepatotoxicity/hepatic decompensation", "Severe bleeding from rebound thrombocytopenia"]
+  },
+  "monitoring": ["CBC with platelet count and peripheral smears - weekly until stable platelet count, then monthly", "Liver function tests (ALT, AST, bilirubin) before treatment, every 2 weeks during dose adjustment, then monthly", "Signs and symptoms of thromboembolism", "Eye examination at baseline and periodically (cataracts)", "Platelet counts weekly for 4 weeks after discontinuation (rebound thrombocytopenia/bleeding)"],
+  "counsel": [
+    "Take this medicine on an empty stomach or with a low-dairy/low-calcium meal",
+    "Keep it at least 2 hours before or 4 hours after antacids, dairy, and iron/calcium/magnesium/zinc supplements",
+    "Attend all blood tests - your platelet count and liver tests must be checked regularly",
+    "Report yellowing of the skin or eyes, dark urine, or right-sided belly pain (liver problems)",
+    "Get urgent help for chest pain, breathlessness, leg swelling, or weakness/numbness (possible clots)",
+    "Do not stop suddenly without your doctor - your platelets can drop sharply and cause bleeding"
+  ],
+  "pk": [
+    ["Onset", "Platelet rise typically begins after about 1-2 weeks of dosing"],
+    ["Peak", "Plasma Tmax ~2-6 hours after an oral dose"],
+    ["Half-life", "Approximately 21-32 hours in healthy subjects (longer in ITP patients)"],
+    ["Duration", "Once-daily dosing; platelet effect reverses within ~2 weeks of stopping"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: hepatotoxicity, and hepatic decompensation in hepatitis C patients on interferon/ribavirin - monitor LFTs",
+    "Treat to a SAFE platelet count (>=50 x 10^9/L), not to normalize - over-correction increases thrombosis risk",
+    "Chelates polyvalent cations - separate from food, antacids, dairy, iron/calcium/magnesium/zinc by hours",
+    "Reduce the starting dose in patients of East/Southeast Asian ancestry and in hepatic impairment",
+    "Monitor for cataracts and bone marrow reticulin fibrosis on long-term use",
+    "Check platelets weekly for ~4 weeks after stopping - rebound thrombocytopenia and bleeding can occur"
+  ],
+  "missed": "If you miss a dose, take only one dose that day as soon as you remember; do not take two doses in one day. Resume your usual once-daily schedule the next day.",
+  "overdose": "Overdose may raise the platelet count excessively, increasing the risk of thrombotic/thromboembolic complications. There is no specific antidote and eltrombopag is not expected to be removed by dialysis (highly protein bound). Consider oral administration of a polyvalent-cation preparation (such as a calcium- or aluminum-containing antacid) to chelate and limit absorption; monitor platelet counts closely and treat thrombosis as it arises.",
+  "refs": [
+    ["FDA Label - Eltrombopag/PROMACTA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22eltrombopag%22"],
+    ["DailyMed - Eltrombopag", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=eltrombopag"]
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "generic": "Methylcobalamin",
+  "cls": "Vitamin B12 (active coenzyme form)",
+  "pharm": "Cobalamin coenzyme; cofactor for methionine synthase and methyl-group metabolism",
+  "tags": ["OTC / Rx", "Water-soluble vitamin", "Neurotropic", "Low toxicity"],
+  "quick": [
+    ["Adult dose", "Oral 500-1500 mcg/day; IM 500-1000 mcg as per deficiency protocol"],
+    ["Meal", "May take with or without food"],
+    ["Pregnancy", "Safe at recommended doses; required nutrient"],
+    ["Lactation", "Safe; required nutrient"],
+    ["Renal", "No adjustment for usual doses"],
+    ["Hepatic", "No adjustment for usual doses"],
+    ["Alcohol", "Chronic alcohol may impair B12 status"],
+    ["Monitoring", "B12 level, CBC, homocysteine, neurologic response"]
+  ],
+  "summary": "Methylcobalamin is the active, methylated form of vitamin B12 used to treat and prevent B12 deficiency and associated megaloblastic anemia and peripheral neuropathy. It is well tolerated with very low toxicity. It is essential for DNA synthesis, myelin formation, and homocysteine metabolism.",
+  "indications": [
+    "Vitamin B12 deficiency and megaloblastic (pernicious) anemia",
+    "Peripheral neuropathies (diabetic, drug-induced, nutritional)",
+    "Prevention/treatment of B12 deficiency in vegetarians, malabsorption, post-gastrectomy",
+    "Adjunct in homocysteine-related conditions"
+  ],
+  "dosage": [
+    {"c": "B12 deficiency / megaloblastic anemia", "r": "IM", "d": "500-1000 mcg on alternate days for 1-2 weeks, then 500-1000 mcg every 1-3 months for maintenance", "t": "Per protocol", "n": "Higher initial frequency for neurological involvement"},
+    {"c": "Maintenance / dietary supplementation", "r": "Oral", "d": "500-1500 mcg once daily", "t": "Once daily", "n": "High-dose oral can substitute for IM in many patients"},
+    {"c": "Peripheral neuropathy", "r": "Oral / IM", "d": "1500 mcg/day oral, or 500-1000 mcg IM 1-3 times weekly", "t": "Daily / weekly", "n": "Often combined with other neurotropic B vitamins"},
+    {"c": "Pediatric deficiency", "r": "IM / Oral", "d": "Dose per age and severity under specialist guidance", "t": "Per specialist", "n": "Correct underlying cause"}
+  ],
+  "admin": [
+    "Oral tablets/sublingual: take with or without food",
+    "IM injection: deep intramuscular; protect from light during handling",
+    "Identify and address the cause of deficiency (diet, malabsorption, drugs)",
+    "Check baseline B12, CBC, and folate before treatment of anemia",
+    "Avoid giving folic acid alone in B12 deficiency (masks anemia, neuropathy progresses)"
+  ],
+  "moa": "Serves as a coenzyme for methionine synthase, transferring a methyl group to convert homocysteine to methionine and regenerate tetrahydrofolate for DNA synthesis. This supports normal erythropoiesis and is essential for myelin synthesis and maintenance of neuronal function.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to cobalamin or cobalt", "Leber's hereditary optic neuropathy (cobalamin can worsen optic atrophy)"],
+    "relative": ["Concurrent unexplained anemia until cause established", "Polycythemia vera"],
+    "monitor": ["Hematologic response and potassium during correction of severe anemia", "Neurologic recovery", "Underlying cause of deficiency"]
+  },
+  "preg": "Considered safe and necessary during pregnancy at recommended dietary/therapeutic doses; B12 deficiency itself harms fetal development. No evidence of harm from supplementation.",
+  "lact": "Safe and recommended; vitamin B12 is a normal milk constituent and supplementation supports infant stores. Important in exclusively breastfed infants of B12-deficient mothers.",
+  "renal": "No dose adjustment for usual supplementation; water-soluble with renal excretion of excess. Safe in renal impairment.",
+  "hepatic": "No specific dose adjustment required; well tolerated in hepatic impairment.",
+  "interactions": {
+    "major": ["None clinically significant at recommended doses"],
+    "moderate": ["Metformin (long-term reduces B12 absorption - increases requirement)", "Proton pump inhibitors / H2 blockers (reduce B12 absorption)", "Colchicine, aminosalicylic acid (reduce absorption)"],
+    "minor": ["Chloramphenicol may blunt hematologic response", "Excess folic acid can mask hematologic B12 deficiency"],
+    "food": "Dietary B12 from animal sources; well absorbed; no significant adverse food interaction",
+    "alcohol": "Chronic heavy alcohol use impairs absorption and may worsen deficiency",
+    "diagnostics": "Supplementation normalizes serum B12 and may correct elevated methylmalonic acid and homocysteine; can mask underlying folate-deficient megaloblastosis"
+  },
+  "se": {
+    "common": ["Generally well tolerated", "Mild injection site pain (IM)", "Transient diarrhea"],
+    "serious": ["Hypokalemia during rapid correction of severe megaloblastic anemia", "Hypersensitivity reaction"],
+    "rare": ["Anaphylaxis (parenteral)", "Acneiform/rosacea-like eruption (high-dose)"],
+    "emergency": ["Anaphylaxis after injection (rare)", "Symptomatic hypokalemia (arrhythmia) during anemia correction"]
+  },
+  "monitoring": [
+    "Serum vitamin B12 level",
+    "Complete blood count / reticulocyte response",
+    "Serum potassium during early correction of severe anemia",
+    "Homocysteine and methylmalonic acid if assessing functional status",
+    "Neurologic symptom improvement"
+  ],
+  "counsel": [
+    "Take consistently; lifelong therapy may be needed in pernicious anemia or malabsorption",
+    "Vegetarians/vegans and long-term metformin or acid-suppressant users should supplement",
+    "Report palpitations or weakness during treatment of severe anemia",
+    "Do not rely on folic acid alone if B12 deficient",
+    "Identify and treat the cause of deficiency with your clinician"
+  ],
+  "pk": [
+    ["Onset", "Hematologic response (reticulocytosis) within 3-5 days"],
+    ["Peak", "Oral plasma peak within 1-2 hours; IM rapid"],
+    ["Half-life", "Body stores cycle over years; plasma clearance variable"],
+    ["Duration", "Long; hepatic stores last months to years"],
+    ["Storage", "Store below 25-30°C, protect from light; keep injection away from light"]
+  ],
+  "pearls": [
+    "Methylcobalamin is a coenzyme form that does not require conversion, often preferred for neuropathy",
+    "High-dose oral B12 (1000-2000 mcg/day) is effective even in pernicious anemia via passive absorption",
+    "Always check folate and treat both; never give folate alone in B12 deficiency",
+    "Watch for hypokalemia in the first days of treating severe megaloblastic anemia",
+    "Long-term metformin and PPIs are common iatrogenic causes of B12 deficiency"
+  ],
+  "missed": "Take a missed oral dose when remembered, unless it is near the next dose; do not double up. For maintenance injections, reschedule the missed dose with your clinician.",
+  "overdose": "Vitamin B12 has very low toxicity; excess is excreted renally. No specific toxic syndrome or antidote; supportive care only. Very high parenteral doses may rarely cause hypersensitivity.",
+  "refs": [
+    ["Hydroxocobalamin/Cobalamin - British National Formulary (vitamin B12)", "https://bnf.nice.org.uk/drugs/hydroxocobalamin/"],
+    ["NIH Office of Dietary Supplements - Vitamin B12", "https://ods.od.nih.gov/factsheets/VitaminB12-HealthProfessional/"]
+  ]
+}

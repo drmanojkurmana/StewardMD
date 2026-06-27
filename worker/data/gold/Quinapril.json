@@ -1,0 +1,111 @@
+{
+  "generic": "Quinapril",
+  "cls": "Angiotensin-converting enzyme (ACE) inhibitor",
+  "pharm": "Prodrug de-esterified to quinaprilat, which inhibits ACE, decreasing angiotensin II formation and aldosterone secretion and reducing peripheral vascular resistance.",
+  "tags": ["Rx only", "ACE inhibitor", "Fetal toxicity (boxed)", "Angioedema risk"],
+  "quick": [
+    ["Adult dose", "Hypertension: start 10-20 mg once daily; usual 20-80 mg/day, single or two divided doses"],
+    ["Meal", "May be taken with or without food; high-fat meals can reduce absorption"],
+    ["Pregnancy", "Contraindicated; can cause fetal injury and death - stop as soon as pregnancy detected"],
+    ["Lactation", "Limited data; small amounts in milk - use with caution"],
+    ["Renal", "Reduce initial dose; titrate by creatinine clearance"],
+    ["Hepatic", "Conversion to active quinaprilat may be impaired; use with caution"],
+    ["Alcohol", "May enhance hypotensive effect"],
+    ["Monitoring", "Blood pressure, renal function, serum potassium, signs of angioedema"]
+  ],
+  "summary": "Quinapril is an ACE inhibitor used to treat hypertension and, as an adjunct, heart failure. It is a prodrug converted to quinaprilat, which blocks conversion of angiotensin I to angiotensin II, lowering vascular resistance and blood pressure. Key safety concerns are angioedema and anaphylactoid reactions, hyperkalemia, renal dysfunction (especially with renal artery stenosis or volume depletion), and a boxed warning for fetal toxicity requiring discontinuation when pregnancy is detected. It must not be combined with neprilysin inhibitors or with aliskiren in diabetics.",
+  "indications": [
+    "Treatment of hypertension, alone or with other agents (e.g., thiazide diuretics)",
+    "Management of heart failure as adjunctive therapy when added to conventional therapy including diuretics and/or digitalis"
+  ],
+  "dosage": [
+    {"c": "Hypertension - monotherapy", "r": "Adult oral", "d": "Initial 10 or 20 mg once daily; usual 20, 40, or 80 mg/day as single or two divided doses", "t": "Once or twice daily", "n": "Adjust at intervals of at least 2 weeks based on peak/trough response"},
+    {"c": "Hypertension - with prior diuretic", "r": "Adult oral", "d": "Initial 5 mg once daily, then titrate", "t": "Once daily then titrate", "n": "Lower starting dose because of risk of symptomatic hypotension"},
+    {"c": "Heart failure", "r": "Adult oral", "d": "Initial 5 mg twice daily; titrate to usual effective 20-40 mg/day in two divided doses", "t": "Twice daily", "n": "Watch for hypotension; observe after the first dose"},
+    {"c": "Renal impairment", "r": "Adult oral", "d": "CrCl >60: 10 mg; CrCl 30-60: 5 mg; CrCl 10-30: 2.5 mg (initial)", "t": "Once daily, then titrate", "n": "No data for CrCl <10; titrate cautiously"}
+  ],
+  "admin": [
+    "Take at the same time each day, with or without food (avoid taking with high-fat meals which reduce absorption)",
+    "Correct volume/salt depletion before starting or start at a lower dose to limit first-dose hypotension",
+    "Do not start within 36 hours of switching to or from sacubitril/valsartan",
+    "Check renal function and potassium before and during therapy"
+  ],
+  "moa": "Quinapril is de-esterified to its active metabolite quinaprilat, which inhibits angiotensin-converting enzyme, a peptidyl dipeptidase that converts angiotensin I to the vasoconstrictor angiotensin II. Reduced angiotensin II decreases vasoconstriction and aldosterone secretion (lowering sodium and water retention) and increases plasma renin activity. ACE is identical to kininase II, so quinapril also reduces breakdown of bradykinin, which may contribute to vasodilation and to cough and angioedema. The net effect is reduced peripheral resistance and blood pressure.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to quinapril",
+      "History of angioedema related to previous ACE inhibitor therapy or hereditary/idiopathic angioedema",
+      "Concomitant use with a neprilysin inhibitor (e.g., sacubitril)",
+      "Co-administration with aliskiren in patients with diabetes",
+      "Pregnancy (drugs acting on the renin-angiotensin system can cause fetal injury/death)"
+    ],
+    "relative": [
+      "Bilateral renal artery stenosis",
+      "Volume or salt depletion / concurrent high-dose diuretics",
+      "Hyperkalemia or potassium-sparing agents/supplements",
+      "Severe heart failure with marginal renal function",
+      "Hepatic impairment (reduced activation)"
+    ],
+    "monitor": [
+      "Blood pressure (especially after first dose)",
+      "Serum creatinine/renal function and potassium",
+      "Signs of angioedema",
+      "White blood cell count in collagen vascular/renal disease"
+    ]
+  },
+  "preg": "Boxed warning: drugs acting on the renin-angiotensin system can cause injury and death to the developing fetus, particularly in the second and third trimesters (oligohydramnios, fetal renal failure, hypotension, skull hypoplasia, death). Discontinue quinapril as soon as pregnancy is detected and switch to an alternative.",
+  "lact": "Quinapril is excreted in human milk in small amounts; because of the potential for adverse effects in the breastfed infant, use with caution and consider alternatives, especially in neonates and preterm infants.",
+  "renal": "Quinaprilat is excreted renally and accumulates in renal impairment, so reduce the initial dose according to creatinine clearance and titrate carefully. ACE inhibition can reduce glomerular filtration in patients dependent on the renin-angiotensin system (bilateral renal artery stenosis, volume depletion); monitor creatinine and potassium and watch for acute kidney injury and hyperkalemia.",
+  "hepatic": "Hepatic impairment may reduce de-esterification of quinapril to active quinaprilat, lowering efficacy; use with caution and monitor blood pressure response. Rarely, ACE inhibitors are associated with cholestatic hepatic injury - discontinue if marked transaminase rise or jaundice occurs.",
+  "interactions": {
+    "major": [
+      "Neprilysin inhibitors / sacubitril (contraindicated; increased angioedema risk)",
+      "Aliskiren in diabetics (contraindicated; renal impairment, hyperkalemia, hypotension)",
+      "Potassium-sparing diuretics/supplements (severe hyperkalemia)"
+    ],
+    "moderate": [
+      "Diuretics (excessive first-dose hypotension)",
+      "Lithium (increased lithium levels and toxicity)",
+      "NSAIDs (reduced antihypertensive effect and acute kidney injury, especially in elderly/volume-depleted)",
+      "mTOR inhibitors and DPP-4 inhibitors (increased angioedema risk)"
+    ],
+    "minor": ["Tetracyclines (the magnesium in some quinapril tablets reduces tetracycline absorption)"],
+    "food": "High-fat meals can reduce absorption; otherwise may be taken with or without food.",
+    "alcohol": "May enhance the blood-pressure-lowering effect.",
+    "diagnostics": "May cause hyperkalemia and raised serum creatinine on laboratory testing."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness", "Persistent dry cough", "Fatigue", "Hypotension"],
+    "serious": ["Angioedema (face, lips, tongue, glottis, larynx)", "Hyperkalemia", "Acute kidney injury / renal failure", "Symptomatic hypotension", "Neutropenia/agranulocytosis"],
+    "rare": ["Hepatic dysfunction/cholestatic jaundice", "Anaphylactoid reactions (including during dialysis or LDL apheresis)", "Pancreatitis", "Stevens-Johnson syndrome"],
+    "emergency": ["Airway angioedema with respiratory compromise", "Severe hyperkalemia with cardiac effects", "Anaphylactoid reaction"]
+  },
+  "monitoring": ["Blood pressure (including after first dose)", "Serum creatinine and potassium within 1-2 weeks of initiation/changes", "Signs of angioedema", "Complete blood count in those with renal/collagen vascular disease"],
+  "counsel": [
+    "Stop the medicine and seek urgent care if you develop swelling of the face, lips, tongue or throat, or difficulty breathing",
+    "Tell your doctor immediately if you become or plan to become pregnant - this medicine can harm an unborn baby",
+    "A persistent dry cough can occur; report it as your doctor may switch you",
+    "Rise slowly from sitting/lying to reduce dizziness, especially when starting",
+    "Avoid potassium supplements or salt substitutes unless advised; get blood tests as scheduled"
+  ],
+  "pk": [
+    ["Onset", "Blood-pressure lowering within about 1 hour of an oral dose"],
+    ["Peak", "Quinaprilat peak plasma at about 2 hours; antihypertensive peak 2-6 hours"],
+    ["Half-life", "Effective accumulation half-life of quinaprilat about 3 hours (prolonged in renal impairment)"],
+    ["Duration", "Antihypertensive effect persists about 24 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture and light"]
+  ],
+  "pearls": [
+    "Prodrug - converted to active quinaprilat; hepatic impairment may blunt efficacy",
+    "Angioedema can be life-threatening and is more common in Black patients; bradykinin-mediated",
+    "Watch creatinine and potassium after starting, especially with diuretics, NSAIDs or renal artery stenosis",
+    "Boxed fetal toxicity warning - stop immediately if pregnancy occurs",
+    "Tablet magnesium carbonate can reduce tetracycline absorption - separate dosing"
+  ],
+  "missed": "Take the missed dose as soon as you remember; if it is nearly time for the next dose, skip it and resume the usual schedule. Do not double up.",
+  "overdose": "Overdose most likely manifests as severe hypotension. There is no specific antidote; treatment is supportive with intravenous normal saline to restore blood pressure and supine positioning. Monitor and correct electrolytes (hyperkalemia) and renal function. Hemodialysis removes quinaprilat to a limited extent and is not generally a primary treatment.",
+  "refs": [
+    ["FDA Label - Quinapril (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22quinapril%22"],
+    ["DailyMed - Quinapril", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=quinapril"]
+  ]
+}

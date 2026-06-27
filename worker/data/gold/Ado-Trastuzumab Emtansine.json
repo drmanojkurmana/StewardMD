@@ -1,0 +1,95 @@
+{
+  "generic": "Ado-Trastuzumab Emtansine",
+  "cls": "HER2-targeted antibody-drug conjugate",
+  "pharm": "Antineoplastic / monoclonal antibody-cytotoxic conjugate (T-DM1)",
+  "tags": ["antibody-drug conjugate", "HER2-positive breast cancer", "boxed warning", "trastuzumab emtansine", "Kadcyla", "antineoplastic"],
+  "quick": [
+    ["Adult dose", "3.6 mg/kg IV every 3 weeks (21-day cycle)"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Boxed warning - can cause embryo-fetal death and birth defects; avoid"],
+    ["Lactation", "Do not breastfeed during and for 7 months after last dose"],
+    ["Renal", "No adjustment for mild-moderate; not studied in severe"],
+    ["Hepatic", "Boxed hepatotoxicity; do not start if ALT/AST >2.5x or bili >1.5x ULN"],
+    ["Alcohol", "No direct interaction; avoid if hepatic risk"],
+    ["Monitoring", "LFTs, platelets, LVEF (echo/MUGA) before each dose"]
+  ],
+  "summary": "Ado-trastuzumab emtansine (T-DM1, Kadcyla) is a HER2-directed antibody-drug conjugate combining trastuzumab with the cytotoxic maytansinoid DM1. It is given at 3.6 mg/kg IV every 3 weeks for HER2-positive metastatic breast cancer after prior trastuzumab and a taxane, and for HER2-positive early breast cancer with residual disease after neoadjuvant therapy. It carries a boxed warning for hepatotoxicity, cardiac (left ventricular) dysfunction, and embryo-fetal toxicity. It is a distinct product from plain trastuzumab and the two must not be substituted.",
+  "indications": [
+    "HER2-positive, metastatic breast cancer previously treated with trastuzumab and a taxane, separately or in combination",
+    "Adjuvant treatment of HER2-positive early breast cancer with residual invasive disease after neoadjuvant taxane- and trastuzumab-based therapy"
+  ],
+  "dosage": [
+    {"c": "Metastatic breast cancer (adult)", "r": "Standard", "d": "3.6 mg/kg IV every 3 weeks (21-day cycle)", "t": "Every 3 weeks", "n": "Continue until disease progression or unacceptable toxicity; do not exceed 3.6 mg/kg"},
+    {"c": "Early breast cancer adjuvant (adult)", "r": "Adjuvant", "d": "3.6 mg/kg IV every 3 weeks for a total of 14 cycles", "t": "Every 3 weeks", "n": "Stop early for recurrence or unacceptable toxicity"},
+    {"c": "First infusion", "r": "Initial", "d": "3.6 mg/kg over 90 minutes", "t": "90 minutes", "n": "Observe for at least 90 minutes for infusion reactions"},
+    {"c": "Subsequent infusions", "r": "Maintenance", "d": "3.6 mg/kg over 30 minutes if prior infusions tolerated", "t": "30 minutes", "n": "Observe at least 30 minutes after"},
+    {"c": "Dose reduction (toxicity)", "r": "Reduced", "d": "First reduction 3.0 mg/kg, then 2.4 mg/kg; discontinue if further reduction needed", "t": "Every 3 weeks", "n": "Do not re-escalate after a reduction"}
+  ],
+  "admin": [
+    "Reconstitute the 100 mg vial with 5 mL and the 160 mg vial with 8 mL sterile water for injection to yield 20 mg/mL",
+    "Dilute the calculated dose in 250 mL 0.9% sodium chloride - do not use dextrose (5%) solution",
+    "Administer as an intravenous infusion only; do not give as an IV push or bolus",
+    "Use a 0.20 or 0.22 micron in-line polyethersulfone filter for infusion",
+    "Do not mix or co-administer with other medicinal products in the same line"
+  ],
+  "moa": "Ado-trastuzumab emtansine is a HER2-targeted antibody-drug conjugate. The antibody component is the humanized anti-HER2 IgG1 trastuzumab, covalently linked through the stable MCC linker to the cytotoxic maytansinoid DM1 (a microtubule inhibitor). It binds HER2 on tumor cells, mediating antibody-dependent functions and suppressing HER2 signaling; after receptor-mediated internalization the conjugate undergoes lysosomal degradation releasing DM1-containing catabolites that bind tubulin, causing mitotic arrest and apoptosis.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to ado-trastuzumab emtansine or its components"],
+    "relative": ["Pre-existing left ventricular dysfunction or low LVEF", "Significant hepatic impairment or elevated transaminases/bilirubin", "Thrombocytopenia", "Prior serious infusion or pulmonary reaction"],
+    "monitor": ["Liver function before each dose", "Platelet count before each dose", "LVEF at baseline and every 3 months"]
+  },
+  "preg": "Boxed warning: exposure during pregnancy can result in embryo-fetal death and birth defects. Verify pregnancy status before initiation; advise females of reproductive potential to use effective contraception during treatment and for 7 months after the last dose, and males with female partners likewise for 7 months.",
+  "lact": "There are no data on the presence of the drug in human milk or its effects on the breastfed infant. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 7 months after the final dose.",
+  "renal": "No dose adjustment is needed in patients with mild or moderate renal impairment. It has not been studied in severe renal impairment and should be used with caution.",
+  "hepatic": "Boxed warning for hepatotoxicity, including serious hepatobiliary disorders such as nodular regenerative hyperplasia and fatal liver failure. Do not initiate if AST/ALT greater than 2.5x ULN or total bilirubin greater than 1.5x ULN. Monitor LFTs before each dose and reduce or permanently discontinue per protocol.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (e.g., ketoconazole, itraconazole, clarithromycin) - may increase DM1 exposure and toxicity; avoid concomitant use", "Other cardiotoxic agents (anthracyclines) - additive risk of left ventricular dysfunction"],
+    "moderate": ["Concurrent myelosuppressive agents - additive thrombocytopenia and neutropenia"],
+    "minor": ["Live vaccines - reduced response during immunosuppression"],
+    "food": "Not applicable - intravenous administration.",
+    "alcohol": "No direct interaction; minimize if hepatic toxicity is a concern.",
+    "diagnostics": "May elevate transaminases, bilirubin, and reduce platelet counts; monitor before each cycle."
+  },
+  "se": {
+    "common": ["Fatigue", "Nausea", "Musculoskeletal pain", "Thrombocytopenia", "Increased transaminases", "Headache", "Constipation", "Peripheral neuropathy", "Epistaxis/hemorrhage"],
+    "serious": ["Hepatotoxicity (including liver failure and nodular regenerative hyperplasia)", "Left ventricular dysfunction / heart failure", "Interstitial lung disease / pneumonitis", "Severe thrombocytopenia and hemorrhage", "Severe peripheral neuropathy", "Infusion-related and hypersensitivity reactions"],
+    "rare": ["Hepatic encephalopathy", "Portal hypertension from nodular regenerative hyperplasia", "Tumor lysis syndrome", "Extravasation injury"],
+    "emergency": ["Fatal liver failure", "Acute pneumonitis / acute respiratory distress", "Severe hemorrhage (including CNS/GI)", "Anaphylaxis", "Acute decompensated heart failure"]
+  },
+  "monitoring": [
+    "Serum transaminases and bilirubin before each dose",
+    "Platelet count before each dose, more frequently if thrombocytopenic",
+    "Left ventricular ejection fraction at baseline and every 3 months",
+    "Signs and symptoms of pulmonary toxicity (dyspnea, cough)",
+    "Neurologic assessment for peripheral neuropathy",
+    "Pregnancy status before initiation in females of reproductive potential"
+  ],
+  "counsel": [
+    "This medicine is different from ordinary trastuzumab and is not interchangeable with it",
+    "Report yellowing of skin/eyes, dark urine, right upper abdominal pain, or unusual tiredness (liver injury)",
+    "Report shortness of breath, swelling, rapid weight gain, or palpitations (heart problems)",
+    "Report unusual bruising, bleeding, nosebleeds, or blood in stool/urine",
+    "Use effective contraception during and for 7 months after the last dose; do not breastfeed",
+    "Report numbness, tingling, or weakness in hands and feet"
+  ],
+  "pk": [
+    ["Onset", "Pharmacologic exposure immediate with IV infusion"],
+    ["Peak", "End of infusion (Cmax at completion)"],
+    ["Half-life", "Approximately 4 days for the conjugate"],
+    ["Duration", "Dosing interval 3 weeks; steady state by cycle 1"],
+    ["Storage", "Store vials refrigerated 2-8 C; protect from light; do not freeze or shake"]
+  ],
+  "pearls": [
+    "T-DM1 is NOT the same as trastuzumab - confirm the correct product to avoid serious medication errors",
+    "Boxed warnings: hepatotoxicity, cardiac (LVEF) toxicity, and embryo-fetal toxicity",
+    "Hold or reduce for thrombocytopenia (especially platelets <50,000) - never re-escalate after a reduction",
+    "Dilute only in 0.9% saline, never dextrose, and use an in-line PES filter",
+    "Stop permanently for ILD/pneumonitis, symptomatic heart failure, or liver failure"
+  ],
+  "missed": "Doses are administered by a healthcare professional on a fixed schedule. If an infusion is missed or delayed, administer as soon as possible without waiting for the next planned cycle, and adjust the schedule to maintain a 3-week interval.",
+  "overdose": "There is no known antidote. Overdose may worsen thrombocytopenia, hepatotoxicity, and neuropathy. Manage supportively with platelet support, hepatic monitoring, and treatment of complications; the maytansinoid component is not removed by dialysis.",
+  "refs": [
+    ["FDA Kadcyla (ado-trastuzumab emtansine) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ado-trastuzumab+emtansine%22"],
+    ["FDA DailyMed - Kadcyla", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

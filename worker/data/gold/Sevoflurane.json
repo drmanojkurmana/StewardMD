@@ -1,0 +1,203 @@
+{
+  "generic": "Sevoflurane",
+  "cls": "Inhalational (volatile) general anesthetic - halogenated methyl isopropyl ether",
+  "pharm": "Volatile general anesthetic",
+  "tags": [
+    "inhalational anesthetic",
+    "general anesthesia",
+    "volatile",
+    "induction",
+    "maintenance",
+    "malignant hyperthermia"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "Titrated by vaporizer; maintenance MAC ~2.6% in adults (with O2)"
+    ],
+    [
+      "Meal",
+      "Fasting per anesthesia/NPO guidelines before surgery"
+    ],
+    [
+      "Pregnancy",
+      "Use only if clearly needed; uterine relaxant, neonatal CNS data"
+    ],
+    [
+      "Lactation",
+      "Brief exposure; resume breastfeeding once recovered/alert"
+    ],
+    [
+      "Renal",
+      "Caution at low flows (Compound A); avoid prolonged low-flow"
+    ],
+    [
+      "Hepatic",
+      "Caution in hepatic impairment; rare hepatotoxicity"
+    ],
+    [
+      "Alcohol",
+      "Chronic use alters anesthetic requirement"
+    ],
+    [
+      "Monitoring",
+      "Continuous vital signs, ETCO2, temperature, end-tidal agent"
+    ]
+  ],
+  "summary": "Sevoflurane is a halogenated volatile general anesthetic used for inhalational induction and maintenance of general anesthesia in adults and children. Its low pungency and rapid onset/offset make it ideal for mask induction, especially in pediatrics. It must be delivered with a calibrated vaporizer by personnel trained in general anesthesia. Key risks are malignant hyperthermia in susceptible patients, and degradation to Compound A with desiccated CO2 absorbents and low fresh-gas flows (renal concern).",
+  "indications": [
+    "Induction of general anesthesia in adult and pediatric patients",
+    "Maintenance of general anesthesia in adult and pediatric patients for inpatient and outpatient surgery"
+  ],
+  "dosage": [
+    {
+      "c": "Induction (inhalational)",
+      "r": "Adult",
+      "d": "Inhaled concentrations up to 5% with O2 or O2/N2O, titrated to effect",
+      "t": "Continuous, vaporizer-controlled",
+      "n": "Surgical anesthesia usually within <2 minutes"
+    },
+    {
+      "c": "Maintenance",
+      "r": "Adult",
+      "d": "Typically 0.5-3% with or without nitrous oxide; MAC ~2.6% in O2 (decreases with age)",
+      "t": "Continuous",
+      "n": "MAC lowered by N2O, opioids, age, premedication"
+    },
+    {
+      "c": "Maintenance",
+      "r": "Pediatric",
+      "d": "Titrated; MAC higher in children (e.g., ~2.5-3.3%, age-dependent), up to ~2.5% in infants",
+      "t": "Continuous",
+      "n": "MAC reduced when combined with nitrous oxide"
+    }
+  ],
+  "admin": [
+    "Administer only via a vaporizer calibrated specifically for sevoflurane by trained anesthesia personnel",
+    "Maintain immediate availability of airway, ventilation, oxygen, and resuscitation equipment",
+    "Use adequate fresh gas flow and replace CO2 absorbent if desiccation is suspected (Compound A / exothermic reaction risk)",
+    "Titrate concentration individually to patient response; level of anesthesia can change rapidly"
+  ],
+  "moa": "Sevoflurane produces dose-dependent general anesthesia. Like other volatile anesthetics it acts predominantly by enhancing inhibitory GABA-A receptor activity and modulating other ion channels (including glycine and two-pore potassium channels) in the CNS, producing unconsciousness, amnesia, and immobility. Potency is expressed as minimum alveolar concentration (MAC).",
+  "contra": {
+    "absolute": [
+      "Known or suspected genetic susceptibility to malignant hyperthermia",
+      "Known sensitivity to sevoflurane or other halogenated inhalational anesthetics"
+    ],
+    "relative": [
+      "Renal impairment (risk from Compound A at low flows)",
+      "Hepatic impairment / history of anesthetic-associated hepatitis",
+      "Risk of QT prolongation",
+      "Hypovolemia or hemodynamic instability",
+      "Conditions where increased intracranial pressure is a concern"
+    ],
+    "monitor": [
+      "End-tidal sevoflurane and CO2",
+      "Continuous ECG, blood pressure, oxygen saturation",
+      "Core body temperature",
+      "Renal function with prolonged low-flow anesthesia"
+    ]
+  },
+  "preg": "No adequate, well-controlled studies in pregnant women. Animal data show reduced fetal weight and concern for neuronal apoptosis with anesthetics during peak brain development. Sevoflurane relaxes the uterus; use only if clearly needed and minimize duration where feasible.",
+  "lact": "Sevoflurane is eliminated rapidly. Breastfeeding may resume once the mother has recovered sufficiently from anesthesia and is alert; minimal drug is expected to reach milk.",
+  "renal": "Use cautiously in renal impairment. Sevoflurane interacts with CO2 absorbents to form Compound A, which is nephrotoxic in animals; risk rises with low fresh gas flows (<2 L/min), desiccated absorbent, and prolonged exposure (>2 MAC-hours). Maintain adequate flows.",
+  "hepatic": "Use with caution in hepatic impairment. Rare cases of postoperative hepatic dysfunction and hepatitis have been reported with halogenated anesthetics. Avoid in patients with prior anesthetic-related liver injury.",
+  "interactions": {
+    "major": [
+      "Other CNS depressants, opioids, benzodiazepines (deepen anesthesia, reduce MAC, additive respiratory/cardiac depression)",
+      "Nondepolarizing neuromuscular blockers (potentiated)",
+      "Succinylcholine + sevoflurane in MH-susceptible patients (trigger malignant hyperthermia)"
+    ],
+    "moderate": [
+      "Beta-blockers and calcium channel blockers (additive hypotension/myocardial depression)",
+      "Adrenaline / sympathomimetics (arrhythmia risk, though sevoflurane sensitizes the myocardium less than older agents)",
+      "Isoniazid (increased fluoride/defluorination)"
+    ],
+    "minor": [
+      "Nitrous oxide (reduces sevoflurane MAC requirement)"
+    ],
+    "food": "Patients fasted per perioperative (NPO) protocol",
+    "alcohol": "Chronic alcohol use can alter anesthetic requirements",
+    "diagnostics": "May transiently raise serum inorganic fluoride; can affect liver enzymes"
+  },
+  "se": {
+    "common": [
+      "Hypotension",
+      "Nausea and vomiting (postoperative)",
+      "Agitation / emergence delirium (especially children)",
+      "Cough, breath-holding, laryngospasm during induction",
+      "Shivering, somnolence"
+    ],
+    "serious": [
+      "Malignant hyperthermia",
+      "Respiratory depression / apnea",
+      "Cardiac arrhythmia and severe hypotension",
+      "QT prolongation / torsades de pointes",
+      "Seizures (especially in children/young adults)"
+    ],
+    "rare": [
+      "Hepatic injury / postoperative hepatitis",
+      "Compound A-related renal injury (low-flow, prolonged)",
+      "Severe hypersensitivity reaction"
+    ],
+    "emergency": [
+      "Malignant hyperthermia (hyperthermia, rigidity, hypercarbia, tachycardia) - give dantrolene",
+      "Laryngospasm / airway obstruction",
+      "Severe arrhythmia / cardiac arrest"
+    ]
+  },
+  "monitoring": [
+    "Continuous ECG, blood pressure, pulse oximetry, capnography (ETCO2)",
+    "End-tidal sevoflurane concentration",
+    "Core body temperature (early sign of malignant hyperthermia)",
+    "Depth of anesthesia and neuromuscular status",
+    "Renal function with prolonged low-flow anesthesia"
+  ],
+  "counsel": [
+    "Given by an anesthesiologist; you will breathe the gas through a mask or tube",
+    "You may feel drowsy, nauseated, or shivery afterward - this passes",
+    "Tell your anesthetist of any family history of malignant hyperthermia or anesthetic problems",
+    "Do not drive or make important decisions for 24 hours after anesthesia",
+    "Children may be briefly agitated or confused on waking"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Very rapid - surgical anesthesia typically within 2 minutes of induction"
+    ],
+    [
+      "Peak",
+      "Alveolar/anesthetic effect rises quickly due to low blood-gas solubility"
+    ],
+    [
+      "Half-life",
+      "Rapid washout; minimal metabolism (~3-5% via CYP2E1 to fluoride)"
+    ],
+    [
+      "Duration",
+      "Short - prompt recovery after discontinuation"
+    ],
+    [
+      "Storage",
+      "Store at room temperature 15-30 C; keep tightly closed, upright; protect from light"
+    ]
+  ],
+  "pearls": [
+    "Contraindicated in malignant hyperthermia susceptibility - have dantrolene immediately available",
+    "Reacts with desiccated CO2 absorbents to form Compound A (nephrotoxicity concern in pediatrics and low-flow anesthesia); use fresh absorbent and adequate fresh-gas flow",
+    "Low pungency and rapid kinetics make it the agent of choice for inhalational (mask) induction, especially in children",
+    "Emergence agitation/delirium is notably common in young children"
+  ],
+  "missed": "Not applicable - sevoflurane is administered continuously during anesthesia by an anesthesia provider and is not a self-dosed medication.",
+  "overdose": "Overdose causes excessive anesthetic depth with profound respiratory and cardiovascular depression. Management: discontinue sevoflurane, maintain a patent airway, give assisted/controlled ventilation with oxygen, and support cardiovascular function. The agent washes out rapidly once stopped.",
+  "refs": [
+    [
+      "FDA Prescribing Information - Sevoflurane (Ultane/Sevoflurane USP)",
+      "https://www.accessdata.fda.gov/drugsatfda_docs/label/2006/020478s015lbl.pdf"
+    ],
+    [
+      "openFDA Drug Label - Sevoflurane",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sevoflurane%22"
+    ]
+  ]
+}

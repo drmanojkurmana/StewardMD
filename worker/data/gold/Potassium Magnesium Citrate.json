@@ -1,0 +1,93 @@
+{
+  "generic": "Potassium Magnesium Citrate",
+  "cls": "Urinary alkalinizer / oral electrolyte replenisher",
+  "pharm": "Antilithic (kidney stone prophylaxis) / potassium and magnesium salt",
+  "tags": ["kidney stones", "urinary alkalinizer", "citrate", "calcium oxalate", "hypocitraturia", "electrolyte"],
+  "quick": [
+    ["Adult dose", "Trial regimen ~42 mEq potassium / 21 mEq magnesium / 63 mEq citrate per day, divided"],
+    ["Meal", "Take with meals and plenty of fluids"],
+    ["Pregnancy", "No reproduction studies; use only if clearly needed"],
+    ["Lactation", "Use only if clearly needed"],
+    ["Renal", "Contraindicated in significant renal insufficiency (hyperkalemia/hypermagnesemia)"],
+    ["Hepatic", "No specific adjustment; citrate metabolized to bicarbonate"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "Serum potassium, magnesium, renal function; urinary citrate/pH; ECG"]
+  ],
+  "summary": "Potassium magnesium citrate is an oral urinary alkalinizer and electrolyte replenisher used to prevent recurrent calcium oxalate (and uric acid) kidney stones. Metabolism of citrate produces an alkaline load that raises urinary pH and citrate, which complexes calcium and inhibits stone crystallization; magnesium also inhibits stone formation, and potassium plus magnesium correct depletion. In a randomized trial it markedly reduced recurrent calcium oxalate nephrolithiasis. The main hazard is hyperkalemia (and hypermagnesemia), so it is contraindicated in significant renal insufficiency and requires electrolyte monitoring. (Note: the FDA-labeled single citrate product is potassium citrate, Urocit-K; the combination regimen comes from clinical trials.)",
+  "indications": [
+    "Prevention of recurrent calcium oxalate nephrolithiasis (kidney stones)",
+    "Hypocitraturic calcium oxalate nephrolithiasis (raises urinary citrate and pH)",
+    "Uric acid lithiasis with or without calcium stones",
+    "Renal tubular acidosis with calcium stones (per the citrate-salt class)",
+    "Potassium and magnesium electrolyte supplementation"
+  ],
+  "dosage": [
+    {"c": "Stone prophylaxis (adult, trial regimen)", "r": "Standard", "d": "Potassium magnesium citrate providing ~42 mEq potassium, 21 mEq magnesium and 63 mEq citrate per day, in divided doses", "t": "Divided daily", "n": "Citrate dosing across studies 30-60 mEq/day"},
+    {"c": "Severe hypocitraturia (citrate-salt class)", "r": "Standard", "d": "Start 60 mEq citrate/day (e.g., 30 mEq twice daily or 20 mEq three times daily)", "t": "2-3 times daily", "n": "Urinary citrate <150 mg/day"},
+    {"c": "Mild-moderate hypocitraturia (citrate-salt class)", "r": "Reduced", "d": "Start 30 mEq citrate/day (e.g., 15 mEq twice daily or 10 mEq three times daily)", "t": "2-3 times daily", "n": "Urinary citrate >150 mg/day"},
+    {"c": "Significant renal insufficiency", "r": "Contraindicated", "d": "Do not use", "t": "-", "n": "Hyperkalemia/hypermagnesemia and soft-tissue calcification risk"}
+  ],
+  "admin": [
+    "Take orally with meals or within 30 minutes after meals",
+    "Maintain high fluid intake (aim for at least about 2 liters of urine daily)",
+    "Swallow extended-release tablets whole - do not crush or chew",
+    "Avoid concurrent potassium supplements or salt substitutes unless directed"
+  ],
+  "moa": "Metabolism of absorbed citrate produces an alkaline (bicarbonate) load that increases urinary pH and raises urinary citrate by augmenting citrate excretion. Urinary citrate complexes with calcium, lowering calcium-salt saturation and inhibiting nucleation and crystallization of calcium oxalate and calcium phosphate. Magnesium independently complexes oxalate and inhibits stone formation, while potassium and magnesium correct any depletion. The higher urine pH also increases uric acid solubility.",
+  "contra": {
+    "absolute": ["Hyperkalemia or conditions predisposing to it (chronic renal failure, uncontrolled diabetes, acute dehydration, untreated Addison's disease, extensive tissue breakdown)", "Significant renal insufficiency (GFR <0.7 mL/kg/min) - risk of soft-tissue calcification and hyperkalemia"],
+    "relative": ["Delayed gastric emptying, esophageal compression or GI obstruction (extended-release forms)", "Peptic ulcer disease", "Active urinary tract infection (with struvite stones)"],
+    "monitor": ["Concurrent potassium-sparing diuretics, ACE inhibitors, ARBs or NSAIDs", "Patients on digoxin"]
+  },
+  "preg": "Animal reproduction studies have not been conducted. Use during pregnancy only if clearly needed.",
+  "lact": "Use during breastfeeding only if clearly needed.",
+  "renal": "Contraindicated in significant renal insufficiency (GFR <0.7 mL/kg/min) and severe renal impairment because of the risk of hyperkalemia, hypermagnesemia and soft-tissue calcification. Monitor serum creatinine.",
+  "hepatic": "No specific hepatic dose adjustment is described; citrate is metabolized to bicarbonate. Use clinical judgment.",
+  "interactions": {
+    "major": ["Potassium-sparing diuretics (triamterene, spironolactone, amiloride) - avoid; risk of severe hyperkalemia", "ACE inhibitors and ARBs - potassium retention; monitor potassium closely"],
+    "moderate": ["NSAIDs - potassium retention; monitor potassium", "Digoxin - electrolyte shifts (K/Mg) affect glycoside toxicity; monitor", "Aluminum-containing antacids - citrate increases aluminum absorption (avoid in renal impairment)"],
+    "minor": ["Anticholinergics - may increase GI irritation from extended-release forms"],
+    "food": "Take with meals and plenty of fluids to reduce GI upset and maintain dilute urine.",
+    "alcohol": "No specific alcohol interaction described.",
+    "diagnostics": "May raise serum potassium and bicarbonate, and increase urinary citrate and pH."
+  },
+  "se": {
+    "common": ["Abdominal discomfort", "Nausea", "Vomiting", "Diarrhea / loose stools"],
+    "serious": ["Hyperkalemia - potentially fatal and may be asymptomatic, with risk of cardiac arrhythmia/arrest", "Hypermagnesemia (especially in renal impairment)", "GI mucosal lesions/bleeding with extended-release formulations"],
+    "rare": ["Esophageal or GI ulceration/obstruction"],
+    "emergency": ["Severe hyperkalemia with arrhythmia/cardiac arrest", "Symptomatic hypermagnesemia"]
+  },
+  "monitoring": [
+    "Serum electrolytes (sodium, potassium, chloride, bicarbonate/CO2) and serum magnesium",
+    "Serum creatinine / renal function and CBC periodically (e.g., every ~4 months; more often in cardiac, renal or acidotic patients)",
+    "Periodic ECG",
+    "24-hour urinary citrate and pH for therapeutic efficacy"
+  ],
+  "counsel": [
+    "Take with meals and plenty of fluids; do not crush or chew extended-release tablets",
+    "Report severe vomiting, abdominal pain or any GI bleeding (black stools)",
+    "Report muscle weakness, palpitations or irregular heartbeat (possible high potassium)",
+    "Avoid potassium supplements and salt substitutes and potassium-sparing diuretics unless your doctor directs",
+    "Keep fluid intake high to keep your urine dilute and help prevent stones"
+  ],
+  "pk": [
+    ["Onset", "Urinary citrate and pH rise after absorption"],
+    ["Peak", "Citrate absorbed and metabolized to bicarbonate"],
+    ["Half-life", "Not characterized (endogenous electrolyte/citrate handling)"],
+    ["Duration", "Sustained effect with divided daily dosing"],
+    ["Storage", "Store in a tight container at room temperature"]
+  ],
+  "pearls": [
+    "Citrate raises urinary citrate and pH, which inhibits calcium stone formation - benefit shown even without baseline hypocitraturia",
+    "Contraindicated in significant renal insufficiency due to hyperkalemia and hypermagnesemia risk",
+    "Avoid combining with potassium-sparing diuretics, ACE inhibitors/ARBs or NSAIDs without monitoring potassium",
+    "FDA-labeled single citrate product is potassium citrate (Urocit-K); the K/Mg citrate combination regimen derives from clinical trials"
+  ],
+  "missed": "Take the missed dose when remembered with food and fluids. If it is nearly time for the next dose, skip the missed dose and resume the regular schedule. Do not double the dose.",
+  "overdose": "Overdose causes hyperkalemia (and hypermagnesemia). Discontinue and eliminate potassium sources; monitor the ECG for arrhythmia. Treatment of hyperkalemia includes IV calcium gluconate for membrane stabilization, insulin with dextrose, sodium bicarbonate for acidosis, and hemodialysis if needed. Severe hypermagnesemia is managed with IV calcium and dialysis in renal failure.",
+  "refs": [
+    ["DailyMed - Urocit-K (potassium citrate ER tablets)", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=72cdea1b-2240-41db-987d-86d5c6aaa978"],
+    ["Ettinger B et al., J Urol - Potassium-magnesium citrate prophylaxis of calcium oxalate nephrolithiasis", "https://www.sciencedirect.com/science/article/abs/pii/S0022534701681552"],
+    ["AAFP - Citrate salts for preventing calcium-containing kidney stones", "https://www.aafp.org/pubs/afp/issues/2017/0501/p552.html"]
+  ]
+}

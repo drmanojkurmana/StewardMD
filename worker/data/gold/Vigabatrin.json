@@ -1,0 +1,95 @@
+{
+  "generic": "Vigabatrin",
+  "cls": "GABA transaminase inhibitor (antiseizure)",
+  "pharm": "Antiepileptic / GABA-T inhibitor",
+  "tags": ["antiepileptic", "GABA transaminase inhibitor", "boxed warning", "vision loss", "REMS", "infantile spasms", "refractory seizures"],
+  "quick": [
+    ["Adult dose", "Refractory CPS: titrate to 1500 mg twice daily (3000 mg/day)"],
+    ["Meal", "Take with or without food"],
+    ["Pregnancy", "Use only if benefit justifies risk; may cause fetal harm"],
+    ["Lactation", "Excreted in milk; avoid breastfeeding"],
+    ["Renal", "Reduce dose in renal impairment (renally cleared)"],
+    ["Hepatic", "No specific adjustment; not hepatically metabolized"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "Vision testing at baseline and every 3 months (REMS)"]
+  ],
+  "summary": "Vigabatrin is an antiseizure medicine that irreversibly inhibits GABA transaminase, raising brain GABA levels. It is used as adjunctive therapy for refractory complex partial seizures in patients 2 years and older and as monotherapy for infantile spasms in infants 1 month to 2 years. It carries a boxed warning for permanent, irreversible bilateral concentric visual field constriction (tunnel vision) and is available only through a restricted REMS program. Vision must be assessed at baseline and periodically; the drug is tapered, not stopped abruptly.",
+  "indications": [
+    "Adjunctive therapy for refractory complex partial seizures in patients aged 2 years and older who have inadequately responded to several alternative treatments",
+    "Monotherapy for infantile spasms in infants 1 month to 2 years of age for whom the potential benefit outweighs the risk of vision loss"
+  ],
+  "dosage": [
+    {"c": "Refractory complex partial seizures (adults, 17+ yr)", "r": "Standard", "d": "Initial 1000 mg/day (500 mg twice daily); maintenance 3000 mg/day (1500 mg twice daily)", "t": "Twice daily", "n": "Increase by 500 mg/day at weekly intervals per response"},
+    {"c": "Refractory CPS (children 10-16 yr, >60 kg)", "r": "Weight-based", "d": "Follow adult dosing", "t": "Twice daily", "n": "Patients over 60 kg use adult regimen"},
+    {"c": "Refractory CPS (children 2-16 yr)", "r": "Weight-based", "d": "Initial and maintenance dosed by body weight, twice daily", "t": "Twice daily", "n": "Titrate weekly per weight bands in labeling"},
+    {"c": "Infantile spasms (1 mo-2 yr)", "r": "Monotherapy", "d": "Initial 50 mg/kg/day (25 mg/kg twice daily); titrate to max 150 mg/kg/day", "t": "Twice daily", "n": "Increase by 25-50 mg/kg/day every 3 days as needed"},
+    {"c": "Discontinuation", "r": "Taper", "d": "Reduce gradually; do not stop abruptly", "t": "Gradual taper", "n": "Adults: reduce by ~1000 mg/day at weekly intervals; infants by 25-50 mg/kg every 3-4 days"}
+  ],
+  "admin": [
+    "Available as 500 mg film-coated tablets and as powder for oral solution; do not interchange formulations without dose review",
+    "Dissolve each packet of powder in cold or room-temperature water immediately before administration and discard unused solution",
+    "May be taken with or without food",
+    "Vision assessment is required at baseline (within 4 weeks of starting), at least every 3 months during therapy, and about 3-6 months after stopping",
+    "Discontinue gradually; abrupt withdrawal may precipitate seizures"
+  ],
+  "moa": "Vigabatrin is a structural analogue of GABA that acts as an irreversible inhibitor of gamma-aminobutyric acid transaminase (GABA-T), the enzyme responsible for GABA catabolism. This inhibition increases the concentration of the inhibitory neurotransmitter GABA in the central nervous system, which is believed to underlie its antiseizure activity. Its effect is not mediated by binding to a specific receptor.",
+  "contra": {
+    "absolute": ["None per labeling"],
+    "relative": ["Pre-existing or progressive visual field loss or retinal disease", "History of psychosis or depression/suicidality", "Significant renal impairment (requires dose reduction)", "Concurrent retinotoxic drugs"],
+    "monitor": ["Baseline and periodic visual field/acuity testing", "Mood and suicidality", "Neurologic status for sedation and MRI changes in infants"]
+  },
+  "preg": "Vigabatrin may cause fetal harm; it was associated with congenital anomalies and reduced fetal weight in animal studies. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. A pregnancy exposure registry is available.",
+  "lact": "Vigabatrin is excreted in human milk. Because of the potential for serious adverse reactions, including the risk of vision loss, breastfeeding is not recommended during treatment.",
+  "renal": "Vigabatrin is eliminated primarily unchanged by the kidneys, so exposure increases in renal impairment. Reduce the dose in patients with mild, moderate, or severe renal impairment and monitor closely for adverse effects.",
+  "hepatic": "Vigabatrin is not appreciably metabolized by the liver, and no specific hepatic dose adjustment is required.",
+  "interactions": {
+    "major": ["Other CNS depressants (opioids, benzodiazepines, alcohol) - additive sedation and respiratory depression"],
+    "moderate": ["Phenytoin - vigabatrin may reduce plasma phenytoin concentrations (~16-33%)", "Other antiepileptic drugs - additive CNS effects, monitor seizure control", "Retinotoxic agents - additive risk of visual field loss"],
+    "minor": ["Clonazepam - possible increased sedation/clearance changes"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid - increases CNS depression and dizziness.",
+    "diagnostics": "May cause a small decrease in ALT and AST; can produce abnormal MRI signal changes in infants and reduce amino acid (alanine) measurements."
+  },
+  "se": {
+    "common": ["Somnolence and fatigue", "Dizziness", "Blurred vision", "Tremor", "Weight gain", "Headache", "Nystagmus", "Peripheral edema", "Upper respiratory infection (infants)"],
+    "serious": ["Permanent bilateral concentric visual field constriction (vision loss)", "Suicidal ideation and behavior", "Anemia", "Abnormal MRI brain changes (intramyelinic edema) in infants", "Peripheral neuropathy", "Withdrawal seizures on abrupt discontinuation"],
+    "rare": ["Encephalopathic symptoms (marked sedation, confusion)", "Psychosis or mania", "Optic atrophy"],
+    "emergency": ["Acute severe vision loss", "Suicidal behavior", "Status epilepticus from abrupt withdrawal", "Severe encephalopathy"]
+  },
+  "monitoring": [
+    "Visual field and acuity testing at baseline and at least every 3 months (mandatory REMS requirement)",
+    "Continued vision testing 3-6 months after discontinuation",
+    "Mood, behavior, and emergence of suicidal ideation",
+    "Hemoglobin/hematocrit periodically (risk of anemia)",
+    "Neurologic status for somnolence and, in infants, MRI signal changes",
+    "Renal function to guide dosing"
+  ],
+  "counsel": [
+    "This drug can cause permanent loss of peripheral (side) vision that may not be noticed until severe - keep all eye appointments",
+    "It is available only through the REMS program; you must enroll to receive it",
+    "Do not stop the medicine suddenly - stopping abruptly can trigger seizures",
+    "Report new or worsening depression, mood changes, or thoughts of self-harm",
+    "May cause drowsiness and dizziness; use caution driving or operating machinery",
+    "Report new vision changes promptly even though vision loss may be irreversible"
+  ],
+  "pk": [
+    ["Onset", "Antiseizure effect develops over days of titration"],
+    ["Peak", "Plasma Tmax approximately 1-2 hours"],
+    ["Half-life", "Adults ~10.5 hours; children 3-9 yr ~6.8 h; infants ~5.7 h (effect outlasts levels)"],
+    ["Duration", "Pharmacodynamic effect prolonged due to irreversible GABA-T inhibition"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C; keep tightly closed and dry"]
+  ],
+  "pearls": [
+    "Boxed warning: permanent, irreversible bilateral visual field constriction (tunnel vision) - REMS-restricted",
+    "Clinical benefit must clearly outweigh vision risk before continuing, especially in infants",
+    "Effect outlasts plasma half-life because GABA-T inhibition is irreversible (new enzyme synthesis needed)",
+    "Always taper - abrupt withdrawal can precipitate seizures",
+    "Can cause reversible MRI signal changes in infants treated for infantile spasms"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the usual schedule. Do not take a double dose.",
+  "overdose": "No specific antidote exists. Overdose may cause coma or decreased consciousness, agitation, psychosis, dizziness, vertigo, headache, and bradycardia or hypotension. Provide supportive care; hemodialysis can remove vigabatrin and may be considered in severe overdose or renal failure.",
+  "refs": [
+    ["FDA Vigabatrin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vigabatrin%22"],
+    ["FDA DailyMed - Vigabatrin / Sabril", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

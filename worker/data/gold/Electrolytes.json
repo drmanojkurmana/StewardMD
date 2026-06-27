@@ -1,0 +1,111 @@
+{
+  "generic": "Electrolytes",
+  "cls": "Electrolyte replacement / maintenance solutions (sodium, potassium, chloride, calcium, magnesium, bicarbonate/phosphate)",
+  "pharm": "Provide essential ions (Na+, K+, Cl-, Ca2+, Mg2+, HCO3-/PO4) to correct or prevent fluid, electrolyte, and acid-base imbalance.",
+  "tags": ["Rx/OTC", "Electrolyte replacement", "IV and oral", "Fluid balance", "ORS"],
+  "quick": [
+    ["Adult dose", "Individualized to the specific deficit and serum levels; oral ORS or IV solutions as indicated"],
+    ["Meal", "Oral salts/ORS often taken with or after food to reduce GI upset"],
+    ["Pregnancy", "Generally safe when used to correct genuine deficits; individualize"],
+    ["Lactation", "Generally safe when used to correct genuine deficits"],
+    ["Renal", "Caution - reduced excretion risks hyperkalemia/hypermagnesemia/fluid overload"],
+    ["Hepatic", "Caution with sodium/fluid load in cirrhosis/ascites"],
+    ["Alcohol", "Chronic alcohol use predisposes to low Mg/K/PO4 - replace as needed"],
+    ["Monitoring", "Serum electrolytes, renal function, fluid balance, ECG (K+/Mg2+/Ca2+)"]
+  ],
+  "summary": "'Electrolytes' refers to the family of products supplying essential ions - sodium, potassium, chloride, calcium, magnesium, bicarbonate, and phosphate - given orally (e.g., oral rehydration salts, potassium/magnesium supplements) or intravenously to correct or prevent disturbances of fluid, electrolyte, and acid-base balance. There is no single standardized FDA generic label; dosing is entirely individualized to the measured deficit, serum levels, renal function, and clinical context. The principal hazards are over-rapid correction (e.g., rapid sodium correction causing osmotic demyelination), and accumulation in renal impairment (hyperkalemia, hypermagnesemia, fluid overload). IV potassium in particular must never be given undiluted as a rapid bolus.",
+  "indications": [
+    "Prevention and treatment of dehydration and electrolyte loss (e.g., oral rehydration in diarrhea/vomiting)",
+    "Correction of hyponatremia/hypernatremia, hypokalemia/hyperkalemia, hypocalcemia, hypomagnesemia, hypophosphatemia",
+    "Maintenance fluid and electrolyte therapy when oral intake is inadequate",
+    "Correction of metabolic acidosis (bicarbonate) where indicated"
+  ],
+  "dosage": [
+    {"c": "Oral rehydration (WHO/reduced-osmolarity ORS)", "r": "Adult/pediatric oral", "d": "Reconstitute one sachet in the stated volume of clean water; give frequent small amounts titrated to ongoing losses and hydration status", "t": "As needed with losses", "n": "Standard ORS ~75 mmol/L sodium, ~20 mmol/L potassium, glucose ~75 mmol/L"},
+    {"c": "Potassium replacement (mild deficit)", "r": "Adult oral", "d": "20-40 mmol/day oral potassium chloride in divided doses, guided by serum K+", "t": "Divided doses", "n": "Take with food; IV only if oral not feasible"},
+    {"c": "IV potassium chloride", "r": "Adult IV", "d": "Typically up to 10 mmol/hour peripherally (higher only with central access and cardiac monitoring); never as an undiluted bolus", "t": "Continuous infusion", "n": "Must be diluted; rapid bolus can be fatal"},
+    {"c": "Magnesium sulfate (hypomagnesemia)", "r": "Adult IV", "d": "1-2 g IV over 15-60 minutes (or per protocol), guided by serum Mg2+ and renal function", "t": "As indicated", "n": "Reduce in renal impairment"},
+    {"c": "Sodium correction (hyponatremia)", "r": "Adult IV", "d": "Individualized; limit correction to no more than ~8-10 mmol/L per 24 hours to avoid osmotic demyelination", "t": "Controlled infusion", "n": "Use hypertonic saline only for severe symptomatic cases per protocol"}
+  ],
+  "admin": [
+    "Always individualize to the measured deficit, serum levels, renal function, and ongoing losses",
+    "Dilute IV potassium and infuse slowly with cardiac monitoring; never give undiluted KCl as a rapid IV push",
+    "Correct sodium disturbances slowly to avoid osmotic demyelination (overly rapid hyponatremia correction) or cerebral edema",
+    "Reconstitute ORS in the exact stated volume of clean/boiled cooled water; do not add extra sugar or salt",
+    "Recheck serum electrolytes during correction and adjust the rate accordingly"
+  ],
+  "moa": "Electrolytes are the body's essential mineral ions. Sodium and chloride are the major extracellular ions governing extracellular fluid volume and osmolality; potassium is the major intracellular cation determining resting membrane potential and cardiac/neuromuscular excitability; calcium and magnesium are essential for neuromuscular conduction, enzyme function, and cardiac stability; bicarbonate and phosphate are key buffers in acid-base balance. Replacement products supply these ions to restore normal concentrations, correcting the cellular electrical, osmotic, and metabolic disturbances caused by their deficiency or excess.",
+  "contra": {
+    "absolute": [
+      "Hyperkalemia (for potassium-containing products)",
+      "Hypercalcemia (for calcium-containing products)",
+      "Hypermagnesemia / significant heart block (for magnesium products)",
+      "Severe renal failure with anuria (for fluid/potassium/magnesium loads)",
+      "Fluid overload states for high-sodium/volume products"
+    ],
+    "relative": [
+      "Renal impairment (risk of accumulation)",
+      "Heart failure / cirrhosis with edema (sodium and fluid load)",
+      "Concurrent potassium-sparing diuretics, ACE inhibitors/ARBs (hyperkalemia)",
+      "Digoxin therapy (calcium and potassium shifts affect toxicity)"
+    ],
+    "monitor": [
+      "Serum electrolytes and renal function during correction",
+      "ECG for potassium, magnesium, and calcium disturbances",
+      "Fluid balance and signs of overload"
+    ]
+  },
+  "preg": "Correcting genuine electrolyte and fluid deficits is appropriate and generally safe in pregnancy; the specific agent and amount should be individualized. Magnesium sulfate is used therapeutically in eclampsia/pre-eclampsia under specialist care.",
+  "lact": "Replacement of physiologic electrolyte deficits is compatible with breastfeeding; the ions are normal milk constituents. Individualize the product and dose.",
+  "renal": "Renal impairment markedly raises the risk of accumulation - especially hyperkalemia, hypermagnesemia, hyperphosphatemia, and fluid overload. Reduce doses, monitor serum levels and ECG closely, and avoid potassium/magnesium loads in oliguric or anuric patients.",
+  "hepatic": "In cirrhosis with ascites/edema, sodium and large fluid loads can worsen fluid retention. Hypokalemia and hypomagnesemia are common and may precipitate or worsen hepatic encephalopathy - correct carefully.",
+  "interactions": {
+    "major": [
+      "Potassium-sparing diuretics, ACE inhibitors, ARBs - with potassium products cause hyperkalemia",
+      "Digoxin - hypokalemia/hypomagnesemia potentiate toxicity; rapid IV calcium can precipitate fatal arrhythmia in digoxin toxicity"
+    ],
+    "moderate": [
+      "Loop/thiazide diuretics - increase losses of potassium and magnesium (may need replacement)",
+      "Corticosteroids - promote sodium retention and potassium loss",
+      "Quinolone/tetracycline antibiotics, bisphosphonates, levothyroxine - calcium/magnesium impair their absorption (separate dosing)"
+    ],
+    "minor": ["Sodium bicarbonate alters urinary pH and renal excretion of some drugs"],
+    "food": "Oral salts/ORS are often taken with or after food to reduce GI upset; do not add extra sugar/salt to ORS.",
+    "alcohol": "Chronic alcohol use predisposes to hypomagnesemia, hypokalemia, and hypophosphatemia - replacement is often needed.",
+    "diagnostics": "Therapy directly changes serum electrolyte assays; bicarbonate affects blood gas/pH measurements."
+  },
+  "se": {
+    "common": ["GI upset, nausea (oral salts)", "Injection-site irritation/phlebitis (IV)", "Mild fluid shifts"],
+    "serious": ["Hyperkalemia (cardiac arrhythmia)", "Hypermagnesemia (weakness, respiratory depression, heart block)", "Fluid overload / pulmonary edema", "Osmotic demyelination from over-rapid sodium correction"],
+    "rare": ["Tissue necrosis from extravasation of concentrated solutions (e.g., calcium, potassium)", "Metabolic alkalosis from excess bicarbonate"],
+    "emergency": ["Cardiac arrest from rapid/concentrated IV potassium", "Severe hyperkalemia or hypermagnesemia", "Acute pulmonary edema from volume overload"]
+  },
+  "monitoring": ["Serum electrolytes (Na, K, Cl, Ca, Mg, PO4) and renal function during correction", "ECG when correcting potassium, calcium, or magnesium", "Fluid balance, weight, and signs of overload", "Acid-base status with bicarbonate therapy"],
+  "counsel": [
+    "Take oral electrolyte salts or ORS exactly as directed; mix ORS sachets in the stated amount of clean water only",
+    "Drink rehydration solution in frequent small sips, especially if vomiting",
+    "Tell your doctor about kidney or heart problems and all your medicines (some raise potassium)",
+    "Do not take extra potassium or salt substitutes without advice",
+    "Attend blood tests so your doctor can check your salt levels"
+  ],
+  "pk": [
+    ["Onset", "Oral absorption within minutes to hours; IV is immediate"],
+    ["Peak", "Depends on the ion, route, and rate of administration"],
+    ["Half-life", "Not a classical drug - ions are handled by normal homeostatic mechanisms (renal/cellular)"],
+    ["Duration", "Maintained by renal regulation; ongoing losses require continued replacement"],
+    ["Storage", "Store solutions/sachets at controlled room temperature; keep reconstituted ORS no longer than 24 hours (refrigerated)"]
+  ],
+  "pearls": [
+    "No single FDA generic label - 'electrolytes' is a class of replacement products (ORS, KCl, CaCl2/gluconate, MgSO4, NaHCO3, phosphate); guidance from BNF/WHO/clinical references, not openFDA",
+    "NEVER give undiluted IV potassium as a rapid bolus - it can cause fatal cardiac arrest",
+    "Correct sodium SLOWLY (about 8-10 mmol/L/24h) - too-rapid correction of hyponatremia causes osmotic demyelination",
+    "In renal failure, potassium and magnesium accumulate - check levels and ECG before and during replacement",
+    "Reduced-osmolarity WHO ORS is the standard for diarrheal dehydration; mix in clean water without adding sugar/salt"
+  ],
+  "missed": "For oral replacement, take a missed dose when you remember unless it is nearly time for the next dose; do not double up. For ongoing rehydration, simply continue replacing losses. IV electrolytes are managed by clinical staff against blood results.",
+  "overdose": "Overdose depends on the ion: excess potassium causes hyperkalemia with peaked T waves, arrhythmia, and cardiac arrest; excess magnesium causes weakness, hyporeflexia, hypotension, respiratory depression, and heart block; excess sodium/fluid causes overload and pulmonary edema; excess calcium causes hypercalcemia. Management includes stopping the source, supportive care, and specific measures (e.g., IV calcium, insulin/glucose, and dialysis for hyperkalemia; IV calcium and supportive ventilation for hypermagnesemia; diuresis/dialysis for overload).",
+  "refs": [
+    ["BNF - Fluids and electrolytes", "https://bnf.nice.org.uk/treatment-summaries/fluids-and-electrolytes/"],
+    ["WHO - Oral rehydration salts (reduced osmolarity)", "https://www.who.int/publications/i/item/WHO-FCH-CAH-06.1"]
+  ]
+}

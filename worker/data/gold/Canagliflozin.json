@@ -1,0 +1,110 @@
+{
+  "generic": "Canagliflozin",
+  "cls": "Sodium-glucose co-transporter 2 (SGLT2) inhibitor (oral antidiabetic)",
+  "pharm": "Inhibits SGLT2 in the proximal renal tubule, lowering the renal threshold for glucose and increasing urinary glucose excretion, which lowers blood glucose insulin-independently.",
+  "tags": ["Rx only", "SGLT2 inhibitor", "Type 2 diabetes", "Cardiorenal protection", "DKA risk", "Take before first meal"],
+  "quick": [
+    ["Adult dose", "100 mg once daily before the first meal; may increase to 300 mg once daily"],
+    ["Meal", "Take before the first meal of the day"],
+    ["Pregnancy", "Not recommended in 2nd/3rd trimesters (fetal renal effects)"],
+    ["Lactation", "Not recommended while breastfeeding"],
+    ["Renal", "eGFR 30-<60: max 100 mg; eGFR <30: do not initiate (may continue 100 mg if albuminuria)"],
+    ["Hepatic", "No adjustment mild-moderate; not recommended in severe"],
+    ["Alcohol", "Excess alcohol increases DKA and hypoglycemia risk"],
+    ["Monitoring", "Renal function, volume status, ketones if symptoms, foot exams"]
+  ],
+  "summary": "Canagliflozin is an SGLT2 inhibitor that lowers blood glucose by promoting urinary glucose excretion independent of insulin, and also reduces major adverse cardiovascular events and slows progression of diabetic kidney disease in eligible patients. It carries important risks: diabetic ketoacidosis (which can occur with near-normal glucose), genital mycotic infections, volume depletion and acute kidney injury, increased risk of lower-limb amputation, and bone fracture. It is taken once daily before the first meal. Dosing is capped at 100 mg in moderate renal impairment, and initiation is not recommended once eGFR falls below 30. Hypoglycemia is uncommon alone but more likely with insulin or sulfonylureas.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus",
+    "Reduction of major adverse cardiovascular events in adults with type 2 diabetes and established cardiovascular disease",
+    "Reduction of risk of end-stage kidney disease, doubling of serum creatinine, cardiovascular death, and hospitalization for heart failure in adults with type 2 diabetes and diabetic nephropathy with albuminuria"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes - initiation", "r": "Adult oral", "d": "100 mg once daily before the first meal of the day", "t": "Once daily", "n": "Take before the first meal"},
+    {"c": "Type 2 diabetes - titration", "r": "Adult oral", "d": "May increase to 300 mg once daily if eGFR >=60 and additional control needed", "t": "Once daily", "n": "Maximum 300 mg/day"},
+    {"c": "Moderate renal impairment (eGFR 30-<60)", "r": "Adult oral", "d": "Maximum 100 mg once daily", "t": "Once daily", "n": "Do not exceed 100 mg"},
+    {"c": "Severe renal impairment (eGFR <30)", "r": "Adult oral", "d": "Initiation not recommended; patients with albuminuria >300 mg/day may continue 100 mg once daily for cardiorenal benefit", "t": "Once daily", "n": "Per label and clinical judgment"}
+  ],
+  "admin": [
+    "Take orally once daily before the first meal of the day",
+    "Assess volume status and correct hypovolemia before starting, especially in the elderly or those on diuretics",
+    "Check renal function before initiation and periodically thereafter",
+    "Consider temporarily withholding during acute illness, fasting, surgery, or reduced intake (ketoacidosis risk)",
+    "Examine feet regularly and treat foot infections/ulcers promptly given amputation risk"
+  ],
+  "moa": "Canagliflozin selectively and reversibly inhibits sodium-glucose co-transporter 2 (SGLT2) in the S1 segment of the renal proximal tubule, which is responsible for the majority of filtered glucose reabsorption. By blocking SGLT2, it lowers the renal threshold for glucose and increases urinary glucose excretion, reducing plasma glucose in an insulin-independent manner. The accompanying osmotic diuresis and natriuresis contribute to modest reductions in blood pressure and weight and underlie the cardiovascular and renal protective effects, while the loss of glucose calories and intratubular effects mediate metabolic and hemodynamic kidney benefits.",
+  "contra": {
+    "absolute": [
+      "History of serious hypersensitivity reaction (e.g., anaphylaxis, angioedema) to canagliflozin",
+      "Severe renal impairment, end-stage renal disease, or dialysis (for glycemic indication)"
+    ],
+    "relative": [
+      "Type 1 diabetes (increased ketoacidosis risk; not recommended)",
+      "Volume depletion, hypotension, or treatment with loop diuretics",
+      "History of lower-limb amputation, peripheral vascular disease, neuropathy, or diabetic foot ulcers",
+      "Conditions predisposing to ketoacidosis (low carbohydrate intake, alcohol abuse, pancreatic insufficiency)",
+      "Recurrent genital mycotic or urinary tract infections"
+    ],
+    "monitor": [
+      "Renal function (eGFR) before and during therapy",
+      "Volume status and blood pressure",
+      "Signs of ketoacidosis (even with near-normal glucose)",
+      "Lower-limb circulation, ulcers, and infections",
+      "Serum potassium in renal impairment"
+    ]
+  },
+  "preg": "Use is not recommended during the second and third trimesters of pregnancy; animal studies showed adverse renal effects (renal pelvic and tubular dilatation) during the period corresponding to the second and third trimesters of human pregnancy.",
+  "lact": "Canagliflozin is not recommended while breastfeeding because of the potential for adverse effects on the developing kidney; the maturing human kidney undergoes development through about 2 years of age.",
+  "renal": "Efficacy depends on renal function. For glycemic control, use 100-300 mg if eGFR >=60; limit to 100 mg if eGFR 30-<60; do not initiate if eGFR <30. Patients with diabetic nephropathy and albuminuria >300 mg/day may continue 100 mg once daily for cardiorenal benefit per label. Increases risk of volume depletion and acute kidney injury.",
+  "hepatic": "No dose adjustment is needed in mild or moderate hepatic impairment (Child-Pugh A or B). Use is not recommended in severe hepatic impairment (Child-Pugh C), as it has not been studied.",
+  "interactions": {
+    "major": [
+      "Insulin and insulin secretagogues (sulfonylureas) - increased hypoglycemia risk; consider lowering their dose"
+    ],
+    "moderate": [
+      "UGT enzyme inducers (rifampin, phenytoin, phenobarbital, ritonavir) - reduce canagliflozin exposure; consider increasing to 300 mg if eGFR >=60",
+      "Digoxin - canagliflozin increases digoxin exposure; monitor",
+      "Lithium - canagliflozin may decrease serum lithium; monitor levels"
+    ],
+    "minor": ["Diuretics - additive volume depletion"],
+    "food": "Take before the first meal of the day; food does not clinically affect exposure but pre-meal dosing improves postprandial control.",
+    "alcohol": "Excessive alcohol or binge drinking increases the risk of ketoacidosis and hypoglycemia; advise moderation.",
+    "diagnostics": "Causes positive urine glucose tests and makes the 1,5-anhydroglucitol (1,5-AG) assay unreliable for monitoring glycemia; use HbA1c or plasma glucose instead."
+  },
+  "se": {
+    "common": ["Female genital mycotic infections", "Urinary tract infection", "Increased urination", "Thirst", "Male genital mycotic infections (balanitis)", "Constipation", "Nausea"],
+    "serious": ["Diabetic ketoacidosis (may occur with near-normal glucose)", "Volume depletion and acute kidney injury", "Lower-limb amputation", "Bone fracture", "Hyperkalemia", "Urosepsis and pyelonephritis"],
+    "rare": ["Necrotizing fasciitis of the perineum (Fournier gangrene)", "Severe hypersensitivity/angioedema", "Severe hypoglycemia (in combination therapy)"],
+    "emergency": ["Diabetic ketoacidosis", "Fournier gangrene (perineal necrotizing fasciitis)", "Urosepsis", "Severe volume depletion/AKI"]
+  },
+  "monitoring": ["Renal function (eGFR) at baseline and periodically", "Volume status and blood pressure", "Signs/symptoms of ketoacidosis regardless of glucose level", "Lower-limb examination for ulcers, infection, and circulation", "Serum potassium in renal impairment", "HbA1c for glycemic response (not urine glucose)"],
+  "counsel": [
+    "Take one tablet each morning before your first meal",
+    "Seek urgent care for nausea, vomiting, abdominal pain, tiredness, or trouble breathing - this can be ketoacidosis even if your sugar is not very high",
+    "Drink adequate fluids; lightheadedness on standing may mean you are dehydrated",
+    "Genital yeast infections and urinary infections are common - report itching, discharge, or burning",
+    "Check your feet daily and tell your doctor about any sores, redness, or new pain",
+    "Tell your doctor before any surgery or if you become unwell and cannot eat or drink normally"
+  ],
+  "pk": [
+    ["Onset", "Glucose-lowering begins within the first day; effect maintained with daily dosing"],
+    ["Peak", "Plasma Tmax ~1-2 hours after oral dosing"],
+    ["Half-life", "~10.6 hours (100 mg) and ~13.1 hours (300 mg)"],
+    ["Duration", "Once-daily dosing; steady state in 4-5 days"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "DKA can occur with near-normal glucose (euglycemic DKA) - check ketones if symptomatic, not just glucose",
+    "Hold during acute illness, fasting, dehydration, or before major surgery (sick-day rules)",
+    "Increased risk of lower-limb amputation and bone fracture - examine feet, assess fracture risk",
+    "Genital mycotic infections (and rarely Fournier gangrene) are class effects - counsel on perineal symptoms",
+    "Provides cardiovascular and renal protection beyond glucose lowering in eligible patients",
+    "Reduce insulin/sulfonylurea dose to limit hypoglycemia; little hypoglycemia when used alone"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember on the same day. If it is almost time for the next day's dose, skip the missed dose and resume your usual schedule. Do not take two doses at once.",
+  "overdose": "There is limited experience with overdose. Management is supportive based on the patient's clinical status, including correcting volume depletion and electrolyte abnormalities and monitoring for ketoacidosis. Hemodialysis is not expected to remove canagliflozin effectively, and peritoneal dialysis is also not expected to be effective.",
+  "refs": [
+    ["FDA Label - Canagliflozin/INVOKANA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22canagliflozin%22"],
+    ["DailyMed - Canagliflozin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=canagliflozin"]
+  ]
+}

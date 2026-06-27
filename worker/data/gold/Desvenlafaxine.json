@@ -1,0 +1,93 @@
+{
+  "generic": "Desvenlafaxine",
+  "cls": "Serotonin-norepinephrine reuptake inhibitor (SNRI)",
+  "pharm": "Antidepressant",
+  "tags": ["SNRI", "antidepressant", "major depressive disorder", "depression", "boxed warning"],
+  "quick": [
+    ["Adult dose", "50 mg PO once daily"],
+    ["Meal", "With or without food; swallow whole"],
+    ["Pregnancy", "Third-trimester use risks neonatal/discontinuation syndrome"],
+    ["Lactation", "Low milk levels; weigh benefit vs risk"],
+    ["Renal", "Moderate max 50 mg/d; severe/ESRD max 25 mg/d or 50 mg QOD"],
+    ["Hepatic", "Moderate-severe: do not exceed 100 mg/d"],
+    ["Alcohol", "Avoid"],
+    ["Monitoring", "Suicidality, BP, mood/mania, hyponatremia, bleeding"]
+  ],
+  "summary": "Desvenlafaxine (Pristiq) is an extended-release SNRI and the major active metabolite of venlafaxine, indicated for major depressive disorder in adults at a target dose of 50 mg once daily. It carries a BOXED WARNING that antidepressants increase the risk of suicidal thoughts and behaviors in children, adolescents, and young adults (up to age 24); patients of all ages starting therapy must be monitored closely for clinical worsening and emergent suicidality. It is not approved for pediatric use. Key risks include serotonin syndrome, elevated blood pressure, bleeding, hyponatremia, and a discontinuation syndrome on abrupt withdrawal.",
+  "indications": [
+    "Treatment of major depressive disorder (MDD) in adults"
+  ],
+  "dosage": [
+    {"c": "Major depressive disorder (adult)", "r": "Standard", "d": "50 mg once daily", "t": "Once daily, same time each day", "n": "50 mg is both starting and therapeutic dose; no added benefit above 50 mg/day"},
+    {"c": "Discontinuation / tapering", "r": "Taper", "d": "25 mg per day", "t": "Gradual reduction", "n": "25 mg dose is intended for gradual dose reduction when stopping"},
+    {"c": "Moderate renal impairment (CrCl 30-50)", "r": "Renal limit", "d": "Maximum 50 mg per day", "t": "Once daily", "n": "Do not exceed 50 mg/day"},
+    {"c": "Severe renal impairment / ESRD (CrCl <30)", "r": "Renal limit", "d": "Maximum 25 mg/day or 50 mg every other day", "t": "Daily or every other day", "n": "No supplemental dose after dialysis"},
+    {"c": "Moderate-to-severe hepatic impairment", "r": "Hepatic limit", "d": "Recommended 50 mg/day; do not exceed 100 mg/day", "t": "Once daily", "n": "Dose escalation above 100 mg/day not recommended"}
+  ],
+  "admin": [
+    "Take orally once daily at approximately the same time each day",
+    "May be taken with or without food",
+    "Swallow tablets whole; do not divide, crush, chew, or dissolve",
+    "An inert matrix tablet shell may appear in the stool; the drug has already been absorbed",
+    "Taper gradually rather than stopping abruptly to minimize discontinuation symptoms",
+    "Allow >=14 days after stopping an MAOI before starting, and >=7 days after stopping desvenlafaxine before an MAOI"
+  ],
+  "moa": "The exact antidepressant mechanism is unknown but is thought to relate to potentiation of serotonin and norepinephrine in the central nervous system through inhibition of their reuptake. Desvenlafaxine is a potent and selective serotonin-norepinephrine reuptake inhibitor (SNRI) and is the major active metabolite of venlafaxine.",
+  "contra": {
+    "absolute": ["Hypersensitivity to desvenlafaxine, venlafaxine, or any excipient (angioedema reported)", "Use of MAOIs to treat psychiatric disorders concurrently, within 7 days of stopping desvenlafaxine, or within 14 days of stopping the MAOI", "Starting desvenlafaxine in a patient treated with linezolid or intravenous methylene blue"],
+    "relative": ["Pre-existing hypertension or cardiovascular/cerebrovascular disease", "Bipolar disorder / history of mania or hypomania", "Untreated anatomically narrow angles (angle-closure glaucoma)", "Seizure disorder", "Volume depletion, diuretic use, or elderly (hyponatremia risk)", "Concomitant antiplatelet/anticoagulant therapy"],
+    "monitor": ["BOXED WARNING: monitor closely for clinical worsening, suicidality, and unusual behavior changes - especially during initial months and dose changes; not approved in pediatrics", "Blood pressure (control hypertension before starting)", "Signs of serotonin syndrome", "Signs of activation of mania/hypomania", "Serum sodium for hyponatremia/SIADH", "Discontinuation symptoms on dose reduction"]
+  },
+  "preg": "There are no published studies in pregnant women; venlafaxine (parent compound) data have not shown a clear association with adverse developmental outcomes. SNRI exposure in the month before delivery is associated with a less than 2-fold increase in postpartum hemorrhage, and mid-to-late pregnancy exposure may increase preeclampsia risk. Third-trimester exposure may cause neonatal complications/discontinuation syndrome requiring monitoring. A pregnancy exposure registry exists (National Pregnancy Registry for Antidepressants, 1-866-961-2388).",
+  "lact": "Limited data show low levels of desvenlafaxine in human milk (mean relative infant dose ~6.8%) with no adverse reactions observed in breastfed infants; no data on effects on milk production. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the child.",
+  "renal": "Reduce maximum dose to 50 mg per day in moderate impairment (CrCl 30-50 mL/min) and to 25 mg per day or 50 mg every other day in severe impairment or end-stage renal disease (CrCl <30 mL/min). Do not give supplemental doses after dialysis.",
+  "hepatic": "Recommended dose in moderate-to-severe hepatic impairment (Child-Pugh 7-15) is 50 mg per day; do not escalate above 100 mg per day.",
+  "interactions": {
+    "major": ["MAOIs (selegiline, tranylcypromine, isocarboxazid, phenelzine, linezolid, IV methylene blue) - contraindicated; risk of serotonin syndrome", "Other serotonergic drugs (other SNRIs/SSRIs, triptans, TCAs, opioids/fentanyl, lithium, tramadol, buspirone, amphetamines, tryptophan, St. John's Wort) - serotonin syndrome risk"],
+    "moderate": ["Antiplatelet/anticoagulant drugs (NSAIDs, aspirin, warfarin) - increased bleeding; monitor coagulation with warfarin", "CYP2D6 substrates (desipramine, atomoxetine, dextromethorphan, metoprolol, nebivolol, perphenazine, tolterodine) - increased substrate levels, reduce their dose by up to half with desvenlafaxine 400 mg"],
+    "minor": ["Drugs metabolized by CYP3A4 (midazolam) or both CYP2D6/CYP3A4 (tamoxifen, aripiprazole) - no dosage adjustment needed", "Not a P-gp substrate or inhibitor"],
+    "food": "May be taken with or without food; a high-fat meal increases Cmax ~16% with no effect on AUC.",
+    "alcohol": "Avoid alcohol while taking desvenlafaxine, as with all CNS-active drugs.",
+    "diagnostics": "Can cause false-positive urine immunoassays for phencyclidine (PCP) and amphetamine; confirm with GC/MS."
+  },
+  "se": {
+    "common": ["Nausea", "Dizziness", "Insomnia", "Hyperhidrosis", "Constipation", "Somnolence", "Decreased appetite", "Anxiety", "Male sexual dysfunction (ejaculation/erectile disorders, decreased libido)"],
+    "serious": ["Serotonin syndrome", "Sustained elevated blood pressure", "Increased risk of bleeding", "Angle-closure glaucoma", "Hyponatremia / SIADH", "Activation of mania/hypomania", "Seizure"],
+    "rare": ["Interstitial lung disease and eosinophilic pneumonia", "Takotsubo cardiomyopathy", "Stevens-Johnson syndrome", "Acute pancreatitis", "Angioedema", "Syncope, convulsion, dystonia"],
+    "emergency": ["BOXED WARNING: emergent suicidal thoughts or behaviors, especially in patients <=24 years or early in therapy/dose changes", "Serotonin syndrome (agitation, hallucinations, fever, tachycardia, rigidity, myoclonus, seizures)", "Severe hyponatremia (seizure, coma, respiratory arrest)", "Hypertensive emergency", "Severe allergic reaction / angioedema", "Severe discontinuation symptoms including suicidal thoughts and aggression"]
+  },
+  "monitoring": [
+    "Clinical worsening, suicidality, and unusual behavior changes - especially during initial months and at dose changes (boxed warning)",
+    "Blood pressure regularly; control pre-existing hypertension before starting",
+    "Signs of serotonin syndrome and of activation of mania/hypomania",
+    "Serum sodium in at-risk patients; coagulation indices if on warfarin",
+    "Discontinuation symptoms when tapering or stopping"
+  ],
+  "counsel": [
+    "Watch for and immediately report worsening mood, agitation, or any thoughts of suicide, especially early in treatment",
+    "Swallow the tablet whole with fluid; do not divide, crush, chew, or dissolve, and a tablet shell may appear in the stool",
+    "Do not stop abruptly - discontinuation symptoms can occur; taper under provider guidance",
+    "Avoid alcohol and tell your provider about all medicines, including MAOIs, triptans, NSAIDs, aspirin, and blood thinners",
+    "Report changes in sexual function, easy bruising/bleeding, allergic reactions, or eye pain/vision changes"
+  ],
+  "pk": [
+    ["Onset", "Steady state within ~4-5 days of once-daily dosing"],
+    ["Peak", "Extended-release; high-fat meal raises Cmax ~16%"],
+    ["Half-life", "Not specified in label; ~45% excreted unchanged in urine by 72 h"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C"]
+  ],
+  "pearls": [
+    "BOXED WARNING: antidepressants increase suicidal thoughts/behaviors in children, adolescents, and young adults (<=24 y); not approved for pediatric use",
+    "Major active metabolite of venlafaxine; do not co-administer with venlafaxine-containing products",
+    "50 mg once daily is both starting and therapeutic dose - higher doses add adverse effects without added benefit",
+    "Renal dose limits: max 50 mg/day moderate, 25 mg/day severe/ESRD; hepatic max 100 mg/day",
+    "Taper to avoid a potentially protracted, severe discontinuation syndrome"
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose, in which case skip it. Do not take two doses at once. Because abrupt changes can cause discontinuation symptoms, do not skip doses routinely.",
+  "overdose": "No specific antidote. As the major active metabolite of venlafaxine, overdose signs (largely from venlafaxine data) include tachycardia, altered consciousness from somnolence to coma, mydriasis, seizures, vomiting, ECG changes (QT prolongation, QRS prolongation, bundle branch block), tachy/bradycardia, hypotension, rhabdomyolysis, serotonin syndrome, liver necrosis, and death. Manage supportively, consider multiple-drug involvement, and contact Poison Control (1-800-222-1222).",
+  "refs": [
+    ["FDA Desvenlafaxine Succinate Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22desvenlafaxine+succinate%22"],
+    ["FDA DailyMed - Desvenlafaxine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

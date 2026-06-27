@@ -1,0 +1,93 @@
+{
+  "generic": "Bemiparin",
+  "cls": "Low molecular weight heparin (second generation)",
+  "pharm": "Anticoagulant (antithrombotic)",
+  "tags": ["LMWH", "anticoagulant", "VTE prophylaxis", "DVT treatment", "antithrombotic"],
+  "quick": [
+    ["Adult dose", "Prophylaxis 2500-3500 IU SC once daily; treatment 115 IU/kg SC once daily"],
+    ["Meal", "Not applicable (subcutaneous injection)"],
+    ["Pregnancy", "Use if clearly needed; preferred LMWH option in some settings"],
+    ["Lactation", "Caution; minimal oral bioavailability in infant"],
+    ["Renal", "Caution in severe impairment; consider reduced dose/monitoring"],
+    ["Hepatic", "Caution in severe impairment (bleeding risk)"],
+    ["Alcohol", "Limit; avoid heavy use (bleeding/falls)"],
+    ["Monitoring", "Platelets (HIT), renal function, signs of bleeding; anti-Xa if needed"]
+  ],
+  "summary": "Bemiparin is a second-generation low molecular weight heparin given subcutaneously once daily for prophylaxis and treatment of venous thromboembolism and for prevention of clotting in extracorporeal circuits. It acts mainly via antithrombin-mediated inhibition of factor Xa. It is not FDA-approved; information is based on EMA/SmPC and BNF sources. Heparin-induced thrombocytopenia and bleeding are key risks.",
+  "indications": [
+    "Prevention of venous thromboembolism in surgical (orthopedic and general) and high-risk medical patients",
+    "Treatment of established deep vein thrombosis with or without pulmonary embolism",
+    "Prevention of clotting in the extracorporeal circuit during hemodialysis",
+    "Extended prophylaxis after major orthopedic surgery (per SmPC)"
+  ],
+  "dosage": [
+    {"c": "VTE prophylaxis - moderate risk surgery", "r": "Prophylaxis", "d": "2500 IU subcutaneously once daily", "t": "Once daily", "n": "First dose 2 h before or 6 h after surgery"},
+    {"c": "VTE prophylaxis - high risk (e.g., orthopedic)", "r": "Prophylaxis", "d": "3500 IU subcutaneously once daily", "t": "Once daily", "n": "Continue 7-10 days or until ambulant; extended to ~28-35 days for hip"},
+    {"c": "Treatment of DVT/PE", "r": "Treatment", "d": "115 IU/kg subcutaneously once daily", "t": "Once daily", "n": "Typically 5-9 days, overlap with oral anticoagulant"},
+    {"c": "Hemodialysis circuit (sessions <=4 h)", "r": "Procedural", "d": "Single bolus into arterial line: ~2500 IU (<60 kg) or 3500 IU (>=60 kg)", "t": "Per dialysis session", "n": "Adjust per patient and circuit"}
+  ],
+  "admin": [
+    "Administer by deep subcutaneous injection, usually into the anterolateral or posterolateral abdominal wall",
+    "Alternate injection sites; do not rub the site after injection",
+    "Do not expel the air bubble from prefilled syringes before injecting",
+    "Do not administer by intramuscular route",
+    "For hemodialysis, inject as a single bolus into the arterial line at the start of the session"
+  ],
+  "moa": "Bemiparin potentiates antithrombin III, producing strong inhibition of activated factor Xa with relatively little inhibition of thrombin (factor IIa), reflecting its low molecular weight and high anti-Xa/anti-IIa ratio. This blocks propagation of the coagulation cascade and thrombus formation while having a relatively predictable, weight-based anticoagulant effect.",
+  "contra": {
+    "absolute": ["Hypersensitivity to bemiparin, heparin or pork products", "Active major bleeding or high-risk bleeding lesion (e.g., active peptic ulcer)", "History of immune heparin-induced thrombocytopenia (HIT)", "Acute bacterial endocarditis", "Severe coagulation disorders"],
+    "relative": ["Recent CNS, ophthalmic or otic surgery", "Severe hepatic or renal impairment", "Uncontrolled severe hypertension", "Concurrent neuraxial anesthesia/spinal puncture (epidural hematoma risk)"],
+    "monitor": ["Concurrent antiplatelets/anticoagulants", "Low body weight or elderly", "Diabetic retinopathy"]
+  },
+  "preg": "Heparins do not cross the placenta; bemiparin may be used during pregnancy when anticoagulation is needed and benefit justifies use. Avoid neuraxial anesthesia within recommended intervals. Use product without benzyl alcohol where possible.",
+  "lact": "Limited data; any excreted drug is poorly absorbed orally by the infant. Use with caution if breastfeeding, weighing benefit and risk.",
+  "renal": "Use with caution in renal impairment; LMWH accumulates as renal function declines. Consider dose reduction and anti-Xa monitoring in severe impairment (e.g., CrCl <30 mL/min).",
+  "hepatic": "Use with caution in severe hepatic impairment because of increased bleeding risk and altered coagulation.",
+  "interactions": {
+    "major": ["Other anticoagulants (warfarin, DOACs, heparin) - additive bleeding (except planned overlap)", "Antiplatelet agents (aspirin, clopidogrel, NSAIDs at antiplatelet doses) - increased bleeding", "Thrombolytics - markedly increased bleeding risk"],
+    "moderate": ["Systemic corticosteroids - GI bleeding risk", "Drugs raising serum potassium (heparins can cause hyperkalemia) - additive hyperkalemia with ACE inhibitors/ARBs/potassium-sparing diuretics"],
+    "minor": ["Dextran - additive antithrombotic effect"],
+    "food": "Not applicable (parenteral).",
+    "alcohol": "Limit; heavy use increases bleeding and fall risk.",
+    "diagnostics": "Prolongs anti-Xa activity; APTT is relatively unaffected; may cause mild hyperkalemia and transaminase elevation."
+  },
+  "se": {
+    "common": ["Injection-site bruising/hematoma and pain", "Mild bleeding", "Asymptomatic transient rise in transaminases", "Mild thrombocytopenia"],
+    "serious": ["Major hemorrhage", "Heparin-induced thrombocytopenia (HIT) with thrombosis", "Hyperkalemia", "Spinal/epidural hematoma with neuraxial anesthesia"],
+    "rare": ["Skin necrosis at injection site", "Hypersensitivity reactions", "Osteoporosis with prolonged use", "Priapism"],
+    "emergency": ["Severe or intracranial hemorrhage", "Spinal/epidural hematoma (back pain, leg weakness, bladder/bowel dysfunction)", "Severe HIT with new thrombosis", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Platelet count at baseline and periodically to detect heparin-induced thrombocytopenia",
+    "Signs and symptoms of bleeding",
+    "Renal function, especially with prolonged use or impairment",
+    "Serum potassium in at-risk patients; anti-factor Xa levels when monitoring is indicated (renal impairment, obesity, pregnancy)"
+  ],
+  "counsel": [
+    "Inject under the skin of the abdomen as shown; rotate sites and do not rub afterward",
+    "Report unusual bruising, bleeding, black stools or blood in urine",
+    "Seek urgent care for back pain with leg numbness/weakness if you have had a spinal procedure",
+    "Tell all providers you are on a blood thinner before any surgery or dental work",
+    "Avoid aspirin/NSAIDs unless approved by your doctor"
+  ],
+  "pk": [
+    ["Onset", "Anti-Xa effect within 2-3 hours of subcutaneous injection"],
+    ["Peak", "Maximum anti-Xa activity approximately 2-4 hours after dosing"],
+    ["Half-life", "Approximately 5-6 hours (longest among marketed LMWHs)"],
+    ["Duration", "Anticoagulant effect supports once-daily dosing"],
+    ["Storage", "Store below 25-30 C; do not freeze"]
+  ],
+  "pearls": [
+    "NOTE: Not FDA-approved; information based on EMA/SmPC and BNF, not a US FDA label",
+    "Second-generation LMWH with the longest half-life and highest anti-Xa/anti-IIa ratio, enabling once-daily dosing",
+    "Protamine sulfate only partially reverses LMWH activity (roughly 60% of anti-Xa)",
+    "Check platelets to detect HIT; avoid in patients with prior immune HIT",
+    "Respect timing intervals around neuraxial (spinal/epidural) anesthesia to avoid hematoma"
+  ],
+  "missed": "If a once-daily dose is missed, give it as soon as remembered on the same day; if it is close to the next scheduled dose, skip the missed dose and resume the usual schedule. Do not give two doses together.",
+  "overdose": "Overdose may cause hemorrhage. Discontinue bemiparin and apply supportive measures; protamine sulfate partially neutralizes anti-Xa activity (approximately 1 mg protamine per 100 anti-Xa IU). Repeat protamine may be needed because of bemiparin's longer half-life.",
+  "refs": [
+    ["EMA / SmPC - Bemiparin sodium (Hibor/Zibor/Ivor)", "https://www.ema.europa.eu/"],
+    ["BNF - Bemiparin (low molecular weight heparin)", "https://bnf.nice.org.uk/"]
+  ]
+}

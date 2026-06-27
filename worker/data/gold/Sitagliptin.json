@@ -1,0 +1,88 @@
+{
+  "generic": "Sitagliptin",
+  "cls": "Dipeptidyl peptidase-4 (DPP-4) inhibitor",
+  "pharm": "Oral antihyperglycemic / incretin enhancer",
+  "tags": ["DPP-4 inhibitor", "gliptin", "type 2 diabetes", "incretin", "oral hypoglycemic"],
+  "quick": [
+    ["Adult dose", "100 mg PO once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Insufficient data; use only if needed"],
+    ["Lactation", "Caution; insufficient data"],
+    ["Renal", "Reduce: 50 mg if moderate, 25 mg if severe/ESRD"],
+    ["Hepatic", "No adjustment in mild-moderate"],
+    ["Alcohol", "Limit; hypoglycemia risk with other agents"],
+    ["Monitoring", "HbA1c, renal function, pancreatitis signs"]
+  ],
+  "summary": "Sitagliptin is a DPP-4 inhibitor that improves glycemic control in type 2 diabetes by enhancing incretin hormones. Standard dose is 100 mg once daily, reduced to 50 mg or 25 mg in renal impairment. Generally weight-neutral with low intrinsic hypoglycemia risk; watch for pancreatitis and hypersensitivity.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus",
+    "May be used as monotherapy or in combination with other antidiabetic agents (e.g., metformin, sulfonylurea, insulin)"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes (normal renal function)", "r": "Standard", "d": "100 mg once daily", "t": "Once daily", "n": "With or without food"},
+    {"c": "Moderate renal impairment (eGFR 30 to <45)", "r": "Renal", "d": "50 mg once daily", "t": "Once daily", "n": "Adjust per renal function"},
+    {"c": "Severe renal impairment / ESRD (eGFR <30)", "r": "Renal", "d": "25 mg once daily", "t": "Once daily", "n": "Regardless of dialysis timing"}
+  ],
+  "admin": [
+    "Take orally once daily, with or without food",
+    "Assess renal function before initiation and periodically",
+    "When combined with sulfonylurea or insulin, consider lowering those agents to reduce hypoglycemia",
+    "Swallow tablets whole"
+  ],
+  "moa": "Selectively inhibits dipeptidyl peptidase-4 (DPP-4), the enzyme that degrades the incretin hormones GLP-1 and GIP. By prolonging active incretin levels, it increases glucose-dependent insulin secretion and suppresses glucagon release, lowering fasting and postprandial glucose with low risk of hypoglycemia when used alone.",
+  "contra": {
+    "absolute": ["History of serious hypersensitivity to sitagliptin (anaphylaxis, angioedema, Stevens-Johnson syndrome)"],
+    "relative": ["History of pancreatitis", "Severe renal impairment (requires dose reduction)", "History of bullous pemphigoid"],
+    "monitor": ["Concomitant sulfonylureas or insulin (hypoglycemia)", "Symptoms of acute pancreatitis", "Heart failure history"]
+  },
+  "preg": "Available data are insufficient to inform a drug-associated risk for major birth defects or miscarriage. Use during pregnancy only if clearly needed; many guidelines prefer insulin for diabetes in pregnancy.",
+  "lact": "Insufficient data on presence in human milk; use with caution and weigh benefits against potential risk to the infant.",
+  "renal": "Dose adjustment required: 50 mg once daily for eGFR 30 to <45 mL/min/1.73 m2, and 25 mg once daily for eGFR <30 including ESRD on dialysis. Assess renal function periodically.",
+  "hepatic": "No dose adjustment in mild to moderate hepatic impairment. Not studied in severe hepatic impairment.",
+  "interactions": {
+    "major": ["Sulfonylureas - increased risk of hypoglycemia; consider lowering sulfonylurea dose", "Insulin - increased risk of hypoglycemia"],
+    "moderate": ["Digoxin - slight increase in digoxin levels; monitor", "ACE inhibitors - additive angioedema risk"],
+    "minor": ["None clinically significant"],
+    "food": "No clinically significant food interaction.",
+    "alcohol": "Limit alcohol; increased hypoglycemia risk when combined with insulin or sulfonylureas.",
+    "diagnostics": "May affect glucose and HbA1c readings (therapeutic intent)."
+  },
+  "se": {
+    "common": ["Nasopharyngitis", "Upper respiratory infection", "Headache", "Hypoglycemia (with sulfonylurea/insulin)"],
+    "serious": ["Acute pancreatitis", "Severe and disabling arthralgia", "Bullous pemphigoid", "Acute renal failure"],
+    "rare": ["Hypersensitivity reactions (anaphylaxis, angioedema, exfoliative skin conditions)", "Worsening heart failure"],
+    "emergency": ["Anaphylaxis / angioedema", "Acute hemorrhagic or necrotizing pancreatitis", "Stevens-Johnson syndrome"]
+  },
+  "monitoring": [
+    "HbA1c every 3 months until target, then periodically",
+    "Renal function at baseline and periodically for dose adjustment",
+    "Signs and symptoms of pancreatitis (severe persistent abdominal pain)",
+    "Blood glucose, especially when combined with sulfonylurea or insulin"
+  ],
+  "counsel": [
+    "Take once daily, with or without food",
+    "Stop the drug and seek care for severe, persistent abdominal pain (pancreatitis)",
+    "Report severe joint pain or blistering skin reactions",
+    "Recognize and treat hypoglycemia if also taking sulfonylurea or insulin",
+    "Continue diet, exercise and other diabetes care"
+  ],
+  "pk": [
+    ["Onset", "Glucose-lowering within hours; full effect over weeks"],
+    ["Peak", "1-4 hours"],
+    ["Half-life", "Approximately 12.4 hours"],
+    ["Duration", "24 hours (once-daily dosing)"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Weight-neutral with low intrinsic hypoglycemia risk as monotherapy",
+    "Primarily renally cleared - dose-reduce in renal impairment",
+    "Can be combined with metformin, sulfonylureas, or insulin",
+    "Consider lowering sulfonylurea/insulin when adding to reduce hypoglycemia"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip it and resume the regular once-daily schedule; do not take two doses at once.",
+  "overdose": "Generally well tolerated; supportive care is the mainstay. Remove unabsorbed drug from the GI tract and monitor with ECG and clinical observation. Sitagliptin is modestly dialyzable; hemodialysis may be considered for severe overdose in renal impairment.",
+  "refs": [
+    ["FDA Sitagliptin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sitagliptin%22"],
+    ["FDA DailyMed - Sitagliptin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

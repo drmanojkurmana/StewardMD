@@ -1,0 +1,99 @@
+{
+  "generic": "Benzathine Penicillin G",
+  "cls": "Natural penicillin (beta-lactam) antibiotic",
+  "pharm": "Long-acting depot penicillin G salt; slow IM release gives low but very prolonged serum levels for sustained activity against penicillin-G-sensitive organisms.",
+  "tags": ["Penicillin", "Beta-lactam", "Bactericidal", "Long-acting depot", "IM only", "Syphilis", "Never IV"],
+  "quick": [
+    ["Adult dose", "Syphilis (early): 2.4 million units IM single dose; strep pharyngitis: 1.2 million units IM once"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Used when clearly needed; drug of choice for syphilis in pregnancy"],
+    ["Lactation", "Compatible; penicillins generally considered safe"],
+    ["Renal", "Excretion delayed in impairment; prolonged levels - use caution"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Penicillin allergy history; observe for anaphylaxis; serologic response in syphilis"]
+  ],
+  "summary": "Benzathine penicillin G (Bicillin L-A) is a slowly absorbed depot formulation for DEEP INTRAMUSCULAR injection only, producing low but prolonged serum penicillin levels. It is a first-line agent for syphilis, streptococcal pharyngitis, and rheumatic fever prophylaxis. It carries a boxed warning: it must NEVER be given intravenously or admixed with IV solutions - inadvertent IV administration has caused cardiorespiratory arrest and death. Serious and occasionally fatal anaphylactic reactions can occur, especially in penicillin-allergic patients.",
+  "indications": [
+    "Syphilis, yaws, bejel, and pinta (venereal/treponemal infections)",
+    "Mild-to-moderate upper respiratory tract infections due to susceptible group A streptococci (e.g., pharyngitis)",
+    "Prophylaxis of rheumatic fever and/or chorea (prevention of recurrence)",
+    "Follow-up prophylactic therapy for rheumatic heart disease and acute glomerulonephritis"
+  ],
+  "dosage": [
+    {"c": "Syphilis - primary, secondary, or early latent", "r": "Deep IM", "d": "2,400,000 units", "t": "Single dose", "n": "One injection"},
+    {"c": "Syphilis - late latent / tertiary (not neurosyphilis)", "r": "Deep IM", "d": "2,400,000 units", "t": "At 7-day intervals for 3 doses", "n": "Total 7.2 million units; benzathine penicillin does not adequately treat neurosyphilis"},
+    {"c": "Congenital syphilis - under 2 years", "r": "Deep IM", "d": "50,000 units/kg body weight", "t": "Per regimen", "n": "Ages 2-12: adjust based on adult schedule"},
+    {"c": "Streptococcal (group A) upper respiratory infection - adults", "r": "Deep IM", "d": "1,200,000 units", "t": "Single injection", "n": "e.g., pharyngitis"},
+    {"c": "Strep pharyngitis - older pediatric patients", "r": "Deep IM", "d": "900,000 units", "t": "Single injection", "n": "Infants/children under 60 lbs: 300,000-600,000 units"},
+    {"c": "Rheumatic fever / glomerulonephritis prophylaxis", "r": "Deep IM", "d": "1,200,000 units monthly OR 600,000 units every 2 weeks", "t": "Recurring", "n": "Following an acute attack"},
+    {"c": "Yaws, bejel, pinta", "r": "Deep IM", "d": "1,200,000 units", "t": "Single injection", "n": ""}
+  ],
+  "admin": [
+    "INTRAMUSCULAR INJECTION ONLY - NEVER inject intravenously or admix with IV solutions (risk of cardiorespiratory arrest and death)",
+    "Do not inject into or near an artery or nerve",
+    "Give by deep IM injection in the upper outer quadrant of the buttock (dorsogluteal) or ventrogluteal site",
+    "In neonates, infants, and small children the midlateral thigh may be preferable; anterolateral thigh is not recommended",
+    "Inject at a slow, steady rate to avoid needle blockage from the high concentration of suspended material",
+    "Vary the injection site when doses are repeated; inspect for particulate matter and discoloration before use"
+  ],
+  "moa": "Penicillin G is bactericidal against susceptible organisms during active multiplication by inhibiting biosynthesis of cell-wall peptidoglycan, rendering the cell wall osmotically unstable. The benzathine salt is poorly soluble and hydrolyzed slowly to penicillin G, giving prolonged low serum levels.",
+  "contra": {
+    "absolute": ["History of a previous hypersensitivity (allergic) reaction to any penicillin", "NEVER administer intravenously or admix with IV solutions"],
+    "relative": ["History of cephalosporin hypersensitivity or sensitivity to multiple allergens", "History of allergy, asthma, hay fever, or urticaria", "Renal impairment (delayed excretion, prolonged levels)"],
+    "monitor": ["Penicillin/cephalosporin allergy history before dosing", "Signs of anaphylaxis after injection", "Serologic (titer) response in syphilis"]
+  },
+  "preg": "Reproduction studies in mice, rats, and rabbits showed no evidence of fetal harm; human experience has not shown positive evidence of adverse fetal effects. Use during pregnancy only if clearly needed - penicillin remains the treatment of choice for syphilis in pregnancy.",
+  "lact": "Penicillins are generally considered compatible with breastfeeding; monitor the infant for sensitization, diarrhea, or candidiasis.",
+  "renal": "With normal renal function the drug is excreted rapidly by tubular excretion. In neonates, young infants, and impaired renal function, excretion is considerably delayed - use with caution as levels are prolonged.",
+  "hepatic": "No specific dose adjustment described in labeling.",
+  "interactions": {
+    "major": ["Tetracyclines (bacteriostatic) may antagonize the bactericidal effect of penicillin - avoid concurrent use"],
+    "moderate": ["Probenecid increases and prolongs serum penicillin levels by inhibiting renal tubular secretion and reducing volume of distribution"],
+    "minor": [],
+    "food": "Not applicable (parenteral)",
+    "alcohol": "No significant interaction",
+    "diagnostics": "May affect serologic monitoring interpretation; follow syphilis titers per guidelines"
+  },
+  "se": {
+    "common": ["Injection site reactions/pain", "Hypersensitivity skin reactions (rash, urticaria)", "Jarisch-Herxheimer reaction (when treating syphilis)"],
+    "serious": ["Severe cutaneous adverse reactions (SJS, TEN, DRESS, AGEP)", "Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Hemolytic anemia, leukopenia, thrombocytopenia", "Neuropathy", "Nephropathy", "Kounis syndrome (acute myocardial ischemia as part of allergic reaction)"],
+    "rare": ["Serum sickness-like reactions (chills, fever, edema, arthralgia, prostration)", "Laryngeal edema", "Eosinophilia"],
+    "emergency": ["Anaphylaxis (including shock and death) requiring immediate epinephrine", "Cardiorespiratory arrest and death from inadvertent IV administration", "Penicillin overdose: neuromuscular hyperirritability or convulsive seizures"]
+  },
+  "monitoring": [
+    "Careful inquiry about prior penicillin, cephalosporin, or other allergen hypersensitivity before each dose",
+    "Observation for immediate hypersensitivity / anaphylaxis after injection",
+    "Confirm IM (not intravascular) placement before injecting",
+    "Serologic (nontreponemal titer) follow-up in syphilis to confirm response",
+    "Watch for persistent or severe diarrhea (possible CDAD)"
+  ],
+  "counsel": [
+    "This medicine is given as a deep injection into muscle - it is never given into a vein",
+    "Tell your clinician about any allergy to penicillin or cephalosporin antibiotics",
+    "Seek emergency care for difficulty breathing, swelling, rash, or fainting after the injection",
+    "When treated for syphilis you may get fever, chills, and headache within hours (Jarisch-Herxheimer reaction) - this usually settles",
+    "Keep all follow-up and repeat-dose appointments and complete any required blood-test follow-up"
+  ],
+  "pk": [
+    ["Onset", "Slow; depot release from IM site"],
+    ["Peak", "Low serum levels reached over hours; very prolonged plateau"],
+    ["Half-life", "Effectively prolonged by slow absorption (hydrolysis-limited release)"],
+    ["Duration", "300,000 units: levels 4-5 days; 600,000 units: ~10 days; 1,200,000 units: ~14 days (detectable up to 4 weeks)"],
+    ["Storage", "Refrigerate; do not freeze; inspect before use"]
+  ],
+  "pearls": [
+    "BOXED WARNING: never give IV or admix with IV solutions - inadvertent IV use has caused cardiorespiratory arrest and death",
+    "First-line for syphilis: 2.4 million units IM single dose for primary/secondary/early latent; weekly x3 for late latent",
+    "Benzathine penicillin does NOT achieve adequate CNS levels - it is not appropriate for neurosyphilis",
+    "Not active against penicillinase-producing organisms or beta-lactam-resistant bacteria",
+    "No resistance to penicillin G has been reported in Streptococcus pyogenes",
+    "Approximately 0.11 mEq sodium per 600,000 units; about 60% protein-bound"
+  ],
+  "missed": "For rheumatic fever / recurrent infection prophylaxis, give the missed injection as soon as possible and resume the regular schedule. Do not give extra doses to make up. Therapeutic (single-dose) syphilis and strep regimens are completed by appointment.",
+  "overdose": "Penicillin in overdose may cause neuromuscular hyperirritability or convulsive seizures. Discontinue and provide supportive care; manage seizures with anticonvulsants. Penicillin G is dialyzable.",
+  "refs": [
+    ["FDA Bicillin L-A (Penicillin G Benzathine) Label - openFDA", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22PENICILLIN%20G%20BENZATHINE%22"],
+    ["DailyMed - Penicillin G Benzathine (Bicillin L-A)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=penicillin+g+benzathine"]
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "generic": "Levofloxacin",
+  "cls": "Antibiotic — fluoroquinolone",
+  "pharm": "Fluoroquinolone; inhibits bacterial DNA gyrase & topoisomerase IV",
+  "tags": ["Rx", "Habit forming: No", "Oral", "IV", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "250-750 mg once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Category C — only if needed"],
+    ["Lactation", "Caution — likely excreted"],
+    ["Renal", "Reduce dose if CrCl <50"],
+    ["Hepatic", "No routine adjustment"],
+    ["Alcohol", "Avoid"],
+    ["Monitoring", "Tendons, glucose, QT, INR"]
+  ],
+  "summary": "Broad-spectrum fluoroquinolone antibiotic for respiratory, urinary, skin and other infections. Carries a boxed warning for disabling, potentially irreversible tendon, nerve and CNS reactions; reserve for uncomplicated infections only when no alternative exists.",
+  "indications": [
+    "Nosocomial pneumonia",
+    "Community-acquired pneumonia",
+    "Complicated and uncomplicated skin/skin-structure infections",
+    "Chronic bacterial prostatitis",
+    "Inhalational anthrax (post-exposure) and plague",
+    "Complicated UTI and acute pyelonephritis",
+    "Uncomplicated UTI (reserve use)",
+    "Acute bacterial exacerbation of chronic bronchitis (reserve use)",
+    "Acute bacterial sinusitis (reserve use)"
+  ],
+  "dosage": [
+    {"c": "Nosocomial pneumonia", "r": "Oral/IV", "d": "750 mg q24h", "t": "7-14 days", "n": "Combine with anti-pseudomonal beta-lactam if Pseudomonas"},
+    {"c": "Community-acquired pneumonia", "r": "Oral/IV", "d": "500 mg q24h", "t": "7-14 days", "n": "Or 750 mg q24h x 5 days"},
+    {"c": "Complicated SSSI", "r": "Oral/IV", "d": "750 mg q24h", "t": "7-14 days", "n": ""},
+    {"c": "Uncomplicated SSSI", "r": "Oral/IV", "d": "500 mg q24h", "t": "7-10 days", "n": ""},
+    {"c": "Chronic bacterial prostatitis", "r": "Oral/IV", "d": "500 mg q24h", "t": "28 days", "n": ""},
+    {"c": "Complicated UTI / acute pyelonephritis", "r": "Oral/IV", "d": "750 mg q24h", "t": "5 days", "n": "Or 250 mg q24h x 10 days"},
+    {"c": "Uncomplicated UTI", "r": "Oral/IV", "d": "250 mg q24h", "t": "3 days", "n": "Reserve use"},
+    {"c": "Acute bacterial exacerbation chronic bronchitis", "r": "Oral/IV", "d": "500 mg q24h", "t": "7 days", "n": "Reserve use"},
+    {"c": "Acute bacterial sinusitis", "r": "Oral/IV", "d": "750 mg q24h", "t": "5 days", "n": "Or 500 mg q24h x 10-14 days; reserve use"},
+    {"c": "Inhalational anthrax (post-exposure)", "r": "Oral/IV", "d": "500 mg q24h (adults/peds >=50 kg)", "t": "60 days", "n": "Peds 30-<50 kg: 250 mg q12h"},
+    {"c": "Plague", "r": "Oral/IV", "d": "500 mg q24h (adults/peds >=50 kg)", "t": "10-14 days", "n": "Peds 30-<50 kg: 250 mg q12h"},
+    {"c": "Renal impairment CrCl <50", "r": "Oral/IV", "d": "Dose adjustment required", "t": "Per infection", "n": "See label tables for CrCl-based dosing"}
+  ],
+  "admin": [
+    "Tablets to pediatric patients weighing >=30 kg only",
+    "Take at least 2 hours before or after antacids, iron, zinc, sucralfate, multivitamins or didanosine",
+    "May be taken with or without food",
+    "Maintain adequate hydration to avoid crystalluria",
+    "Complete full course; do not stop early"
+  ],
+  "moa": "Bactericidal fluoroquinolone that inhibits bacterial topoisomerase II (DNA gyrase) and topoisomerase IV, enzymes required for bacterial DNA replication, transcription, repair and recombination.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to levofloxacin or other quinolones"],
+    "relative": [
+      "History of myasthenia gravis (avoid — may worsen muscle weakness)",
+      "Known QT prolongation, uncorrected hypokalemia, or concomitant QT-prolonging drugs",
+      "History of tendon disorders or prior fluoroquinolone-associated serious reaction"
+    ],
+    "monitor": [
+      "Tendon pain/swelling — stop immediately if suspected",
+      "Blood glucose in diabetics on hypoglycemic agents",
+      "Prothrombin time/INR with warfarin",
+      "CNS effects and peripheral neuropathy symptoms"
+    ]
+  },
+  "preg": "Category C — use only if potential benefit justifies fetal risk; no adequate controlled human studies.",
+  "lact": "Presumed excreted in human milk; weigh discontinuing nursing vs drug due to risk to infant.",
+  "renal": "Adjust dose when CrCl <50 mL/min; not efficiently removed by hemo- or peritoneal dialysis.",
+  "hepatic": "No routine adjustment; discontinue immediately if signs of hepatitis (severe, sometimes fatal hepatotoxicity reported).",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs (class IA/III antiarrhythmics, TCAs, macrolides, antipsychotics) — additive torsades risk",
+      "Warfarin — enhanced anticoagulant effect; monitor INR/bleeding",
+      "Antidiabetic agents (insulin, sulfonylureas) — hypo/hyperglycemia, careful glucose monitoring",
+      "Corticosteroids — increased tendon rupture risk"
+    ],
+    "moderate": [
+      "Multivalent cations (antacids, iron, zinc, sucralfate, multivitamins, didanosine) — reduced absorption",
+      "NSAIDs — may increase CNS stimulation/seizure risk"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid; may add to CNS effects.",
+    "diagnostics": "May produce false-positive opiate urine screens (class effect)."
+  },
+  "se": {
+    "common": ["Nausea", "Headache", "Diarrhea", "Insomnia", "Constipation", "Dizziness"],
+    "serious": [
+      "Tendinitis and tendon rupture",
+      "Peripheral neuropathy (may be irreversible)",
+      "CNS effects (seizures, psychosis, confusion, hallucinations)",
+      "QT prolongation / torsades de pointes",
+      "Severe hepatotoxicity",
+      "C. difficile-associated diarrhea/colitis",
+      "Blood glucose disturbances (severe hypoglycemia, hyperglycemia)"
+    ],
+    "rare": ["Aortic aneurysm and dissection", "Photosensitivity/phototoxicity", "Hematologic toxicity (agranulocytosis, thrombocytopenia)", "Crystalluria"],
+    "emergency": [
+      "Anaphylaxis or serious skin reaction (occasionally fatal, may occur after first dose) — seek emergency care",
+      "Sudden severe chest, back or abdominal pain (possible aortic dissection)",
+      "Tendon pain/snap/swelling — stop drug, rest limb, seek care",
+      "New numbness/tingling/weakness, seizures, or severe mood/behavior changes",
+      "Severe hypoglycemia (coma) in diabetics"
+    ]
+  },
+  "monitoring": [
+    "Signs of tendinitis/tendon rupture (especially >60 yrs, on steroids, transplant patients)",
+    "Blood glucose in diabetics",
+    "INR/prothrombin time with warfarin",
+    "ECG/QT in at-risk patients",
+    "CNS and peripheral neuropathy symptoms",
+    "Renal function and hydration; LFTs if hepatic symptoms"
+  ],
+  "counsel": [
+    "Stop and call your doctor at first sign of tendon pain, swelling or a snap",
+    "Report numbness, tingling, weakness, mood changes or seizures immediately",
+    "Avoid antacids, iron, zinc, multivitamins or sucralfate within 2 hours of the dose",
+    "Diabetics: monitor blood sugar; recognize low-sugar symptoms",
+    "Limit sun exposure and use sunscreen",
+    "Stay well hydrated; avoid alcohol",
+    "Tell your doctor about sudden severe chest/back/abdominal pain"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; therapeutic levels within hours"],
+    ["Peak", "1-2 hours (Tmax ~1.3-1.6 h)"],
+    ["Half-life", "~6-8 hours (normal renal function)"],
+    ["Duration", "Once-daily dosing supported"],
+    ["Storage", "Store at controlled room temperature per labeling"]
+  ],
+  "pearls": [
+    "Boxed warning: disabling and potentially irreversible tendinitis/tendon rupture, peripheral neuropathy and CNS effects can occur together — discontinue at first sign and avoid all fluoroquinolones thereafter",
+    "Reserve for uncomplicated UTI, acute bronchitis exacerbation and sinusitis only when no other option exists",
+    "Avoid in patients with myasthenia gravis — may cause life-threatening respiratory weakness",
+    "Associated with aortic aneurysm/dissection, especially in elderly and those with vascular risk factors",
+    "Tendon rupture risk increases with age >60, corticosteroids and organ transplant",
+    "Can cause severe hypoglycemia (coma/death) in diabetics on insulin or sulfonylureas",
+    "Less divalent-cation chelation than other fluoroquinolones, but still separate from cations by 2 hours"
+  ],
+  "missed": "Take as soon as remembered; skip if near the next dose. Do not double up.",
+  "overdose": "Empty stomach, maintain hydration, supportive care; not efficiently removed by dialysis. Low acute toxicity but observe for CNS effects/seizures.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

@@ -1,0 +1,120 @@
+{
+  "generic": "Azithromycin",
+  "cls": "Antibiotic — macrolide",
+  "pharm": "Macrolide; bacterial protein-synthesis inhibitor (50S ribosomal subunit)",
+  "tags": ["Rx", "Habit forming: No", "Oral", "Antibacterial"],
+  "quick": [
+    ["Adult dose", "500 mg Day 1, then 250 mg"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "No identified risk"],
+    ["Lactation", "Present in milk; caution"],
+    ["Renal", "Caution if GFR <10 mL/min"],
+    ["Hepatic", "Contra if prior cholestatic injury"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "QT; liver; diarrhea"]
+  ],
+  "summary": "Azithromycin is an oral macrolide antibiotic used for mild-to-moderate respiratory, skin, ear and certain genital infections in adults and children 6 months and older. It inhibits bacterial protein synthesis and has a long half-life allowing short courses. A typical adult regimen is 500 mg on Day 1, then 250 mg once daily for 4 days.",
+  "indications": [
+    "Acute bacterial exacerbations of chronic bronchitis (adults)",
+    "Acute bacterial sinusitis (adults; children >=6 months)",
+    "Uncomplicated skin and skin-structure infections (adults)",
+    "Urethritis and cervicitis (adults)",
+    "Genital ulcer disease (chancroid) in men",
+    "Community-acquired pneumonia (adults; children >=6 months)",
+    "Pharyngitis/tonsillitis (adults; children >=2 years)",
+    "Acute otitis media (children >=6 months)"
+  ],
+  "dosage": [
+    {"c": "CAP, pharyngitis/tonsillitis (2nd-line), uncomplicated skin", "r": "Oral", "d": "500 mg single dose Day 1, then 250 mg once daily", "t": "Days 2-5", "n": "Standard 5-day regimen"},
+    {"c": "Acute exacerbation chronic bronchitis", "r": "Oral", "d": "500 mg Day 1 then 250 mg daily (Days 2-5) OR 500 mg once daily", "t": "5 days or 3 days", "n": "Two accepted regimens"},
+    {"c": "Acute bacterial sinusitis", "r": "Oral", "d": "500 mg once daily", "t": "3 days", "n": ""},
+    {"c": "Genital ulcer disease / non-gonococcal urethritis & cervicitis", "r": "Oral", "d": "1 gram single dose", "t": "Once", "n": ""},
+    {"c": "Gonococcal urethritis and cervicitis", "r": "Oral", "d": "2 gram single dose", "t": "Once", "n": ""},
+    {"c": "Pediatric acute otitis media (>=6 mo)", "r": "Oral", "d": "30 mg/kg single dose, OR 10 mg/kg daily x3, OR 10 mg/kg Day 1 then 5 mg/kg Days 2-5", "t": "1-5 days", "n": ""},
+    {"c": "Pediatric sinusitis (>=6 mo)", "r": "Oral", "d": "10 mg/kg once daily", "t": "3 days", "n": ""},
+    {"c": "Pediatric CAP (>=6 mo)", "r": "Oral", "d": "10 mg/kg Day 1 then 5 mg/kg once daily", "t": "Days 2-5", "n": ""},
+    {"c": "Pediatric pharyngitis/tonsillitis (>=2 yr)", "r": "Oral", "d": "12 mg/kg once daily", "t": "5 days", "n": ""}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Do not use in pneumonia patients unsuitable for oral therapy (moderate-severe illness)",
+    "Shake suspension well; confirm pediatric weight-based dose",
+    "Complete the full prescribed course",
+    "Review concurrent QT-prolonging drugs before starting"
+  ],
+  "moa": "Macrolide that binds the 50S bacterial ribosomal subunit, inhibiting protein synthesis; bacteriostatic against susceptible organisms.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to azithromycin, erythromycin, any macrolide or ketolide",
+      "History of cholestatic jaundice/hepatic dysfunction with prior azithromycin use"
+    ],
+    "relative": [
+      "Known QT prolongation or history of torsades de pointes",
+      "Proarrhythmic conditions / other QT-prolonging drugs",
+      "Myasthenia gravis (may worsen weakness)"
+    ],
+    "monitor": ["QT interval in at-risk patients", "Signs of hepatitis", "Diarrhea (C. difficile)"]
+  },
+  "preg": "No drug-associated risk identified in literature/postmarketing data; no malformations in animal studies.",
+  "lact": "Present in human milk; non-serious infant reactions reported — use with caution.",
+  "renal": "No adjustment in mild-moderate impairment; use caution in severe impairment (GFR <10 mL/min, ~35% AUC rise).",
+  "hepatic": "Pharmacokinetics not established in hepatic impairment; contraindicated after prior cholestatic injury.",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs / antiarrhythmics — additive QT prolongation, torsades risk",
+      "Warfarin/oral anticoagulants — may potentiate effect; monitor prothrombin time"
+    ],
+    "moderate": [
+      "Nelfinavir — raises azithromycin levels; monitor for liver enzyme and hearing effects",
+      "Digoxin, colchicine, phenytoin — caution by macrolide class effect"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food (food raises Cmax but not overall exposure).",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Diarrhea (5-14%)", "Nausea (3-18%)", "Abdominal pain (3-7%)", "Vomiting (2-7%)"],
+    "serious": [
+      "Severe, sometimes fatal hepatotoxicity",
+      "QT prolongation / torsades de pointes",
+      "Increased short-term cardiovascular death risk (observational)",
+      "C. difficile-associated diarrhea",
+      "Serious allergic/skin reactions (angioedema, AGEP, Stevens-Johnson)"
+    ],
+    "rare": ["Infantile hypertrophic pyloric stenosis (neonates)", "Exacerbation of myasthenia gravis", "Hearing impairment"],
+    "emergency": ["Anaphylaxis / angioedema", "Syncope or palpitations from arrhythmia", "Signs of hepatitis (jaundice, dark urine)"]
+  },
+  "monitoring": [
+    "ECG/QT in patients with cardiac risk or on QT-prolonging drugs",
+    "Liver function and signs of hepatitis",
+    "Prothrombin time with concomitant anticoagulants",
+    "Diarrhea during/after therapy (C. difficile)",
+    "Neonates for vomiting/irritability (pyloric stenosis)"
+  ],
+  "counsel": [
+    "Take exactly as prescribed and finish the full course",
+    "Report rash, swelling, or trouble breathing immediately",
+    "Report yellowing of skin/eyes, dark urine, or severe abdominal pain",
+    "Report palpitations or fainting",
+    "Report watery or bloody diarrhea, even weeks after stopping",
+    "Tell your doctor about heart-rhythm problems or other medicines"
+  ],
+  "pk": [
+    ["Onset", "Bacteriostatic after absorption"],
+    ["Peak", "Rapid absorption; bioavailability ~38%"],
+    ["Half-life", "Terminal elimination ~68 hours"],
+    ["Duration", "Long tissue retention; short-course dosing"],
+    ["Storage", "20-25 C (68-77 F), controlled room temperature"]
+  ],
+  "pearls": [
+    "Very long ~68 h terminal half-life enables short 3-5 day courses",
+    "Single 1 g dose treats non-gonococcal urethritis/cervicitis and chancroid",
+    "Should not be used in pneumonia patients too ill for oral therapy",
+    "Carries QT-prolongation and torsades warning — caution with at-risk patients",
+    "IHPS reported in neonates treated up to 42 days of life"
+  ],
+  "missed": "Take as soon as remembered; skip if near next dose. Do not double.",
+  "overdose": "Symptoms similar to normal doses (nausea, diarrhea, vomiting). Supportive and symptomatic care.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

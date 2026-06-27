@@ -1,0 +1,208 @@
+{
+  "generic": "Amodiaquine",
+  "cls": "4-Aminoquinoline antimalarial",
+  "pharm": "Blood schizonticide (antimalarial)",
+  "tags": [
+    "malaria",
+    "antimalarial",
+    "ACT",
+    "ASAQ",
+    "P. falciparum",
+    "WHO essential medicine"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "~10 mg base/kg/day x 3 days (with artesunate as ASAQ)"
+    ],
+    [
+      "Meal",
+      "May take with food to reduce GI upset"
+    ],
+    [
+      "Pregnancy",
+      "Avoid in first trimester; use only if benefit outweighs risk"
+    ],
+    [
+      "Lactation",
+      "Small amounts in milk; use with caution"
+    ],
+    [
+      "Renal",
+      "Caution; limited data, monitor"
+    ],
+    [
+      "Hepatic",
+      "Avoid in liver disease; hepatotoxicity risk"
+    ],
+    [
+      "Alcohol",
+      "Avoid; adds to hepatotoxicity risk"
+    ],
+    [
+      "Monitoring",
+      "CBC (neutrophils), liver enzymes, parasitemia"
+    ]
+  ],
+  "summary": "Amodiaquine is a 4-aminoquinoline blood schizonticide used almost exclusively in combination - with artesunate (ASAQ) as a WHO-recommended artemisinin-based combination therapy (ACT) for uncomplicated P. falciparum malaria, and with sulfadoxine-pyrimethamine for seasonal malaria chemoprevention (SMC) in the Sahel. The typical treatment dose is ~10 mg base/kg/day for 3 days (total ~30 mg base/kg). It is NOT FDA-approved; this record is based on WHO guidance. Agranulocytosis and hepatotoxicity led to its withdrawal from prophylactic and long-term use.",
+  "indications": [
+    "Treatment of uncomplicated Plasmodium falciparum malaria in fixed-dose combination with artesunate (artesunate + amodiaquine, ASAQ), a WHO-recommended ACT",
+    "Seasonal malaria chemoprevention (SMC) in children in the Sahel sub-region, given with sulfadoxine-pyrimethamine (SP+AQ)",
+    "Treatment of uncomplicated chloroquine-resistant P. falciparum malaria where used as part of combination therapy"
+  ],
+  "dosage": [
+    {
+      "c": "Uncomplicated P. falciparum malaria (ASAQ, all ages)",
+      "r": "Weight-based",
+      "d": "Amodiaquine ~10 mg base/kg once daily for 3 days (total ~30 mg base/kg), co-administered with artesunate 4 mg/kg/day",
+      "t": "Once daily x 3 days",
+      "n": "Use fixed-dose ASAQ tablets matched to weight band"
+    },
+    {
+      "c": "Seasonal malaria chemoprevention (SMC), children 3-59 months",
+      "r": "Age/weight-based",
+      "d": "Amodiaquine ~10 mg base/kg once daily for 3 days, with single-dose sulfadoxine-pyrimethamine on day 1; repeated monthly during transmission season",
+      "t": "Once daily x 3 days per monthly cycle",
+      "n": "Sahel sub-region only; up to 4 monthly cycles per season"
+    },
+    {
+      "c": "ASAQ fixed-dose pediatric weight bands",
+      "r": "Weight-band",
+      "d": "Tablet strengths (artesunate/amodiaquine) selected by band: 25/67.5 mg, 50/135 mg, or 100/270 mg, once daily for 3 days",
+      "t": "Once daily x 3 days",
+      "n": "Targets ~4 mg/kg artesunate + ~10 mg base/kg amodiaquine daily"
+    }
+  ],
+  "admin": [
+    "Give orally once daily for 3 days as part of a combination regimen, never as monotherapy for treatment",
+    "May be taken with food to reduce gastrointestinal upset",
+    "Observe the first dose where feasible and re-dose if vomiting occurs within 30 minutes",
+    "Use the fixed-dose combination tablet appropriate to the patient's weight band",
+    "Do not use for malaria prophylaxis or repeated long-term courses outside SMC due to agranulocytosis and hepatotoxicity risk"
+  ],
+  "moa": "Amodiaquine is a 4-aminoquinoline that, like chloroquine, concentrates in the parasite's acidic food vacuole and inhibits heme polymerization (the detoxification of ferriprotoporphyrin IX into inert hemozoin). Accumulation of toxic free heme damages the intraerythrocytic parasite. It acts as a blood schizonticide against asexual erythrocytic forms of Plasmodium and retains activity against many chloroquine-resistant strains.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to amodiaquine or other 4-aminoquinolines",
+      "History of amodiaquine-induced hepatotoxicity or blood dyscrasia (agranulocytosis)",
+      "Use for malaria prophylaxis (withdrawn for this indication)"
+    ],
+    "relative": [
+      "Pre-existing hepatic disease",
+      "Pre-existing blood/bone marrow disorders",
+      "Retinopathy or visual field disturbance",
+      "Concomitant hepatotoxic or myelosuppressive drugs"
+    ],
+    "monitor": [
+      "Neutrophil/white cell count for agranulocytosis",
+      "Liver enzymes for hepatotoxicity",
+      "Parasitemia and clinical response"
+    ]
+  },
+  "preg": "Avoid in the first trimester where alternatives exist; the artesunate-amodiaquine combination may be used in the second and third trimesters when WHO-recommended for uncomplicated P. falciparum malaria. Treat malaria promptly as the disease itself poses major maternal and fetal risk.",
+  "lact": "Small amounts are excreted into breast milk, considered insufficient to harm or protect the infant. Use with caution; the infant must be treated separately if infected.",
+  "renal": "Limited specific data; the desethylamodiaquine metabolite is partly renally eliminated. Use with caution in renal impairment and monitor for accumulation and toxicity.",
+  "hepatic": "Avoid in patients with liver disease. Amodiaquine has caused serious, sometimes fatal hepatotoxicity, which (with agranulocytosis) led to its removal from prophylactic use. Monitor liver enzymes and discontinue if hepatotoxicity develops.",
+  "interactions": {
+    "major": [
+      "Other hepatotoxic drugs (e.g. isoniazid, some antiretrovirals) - additive liver injury risk",
+      "Myelosuppressive agents - additive risk of agranulocytosis/neutropenia",
+      "Efavirenz - reports of increased hepatotoxicity and neutropenia when combined with ASAQ"
+    ],
+    "moderate": [
+      "Drugs prolonging the QT interval - use other antimalarial 4-aminoquinolines with caution",
+      "CYP2C8 inhibitors/substrates - amodiaquine is metabolized largely by CYP2C8; interaction possible",
+      "Other antimalarials - avoid overlapping 4-aminoquinoline exposure"
+    ],
+    "minor": [
+      "Antacids - may reduce absorption if taken together"
+    ],
+    "food": "May be given with food to improve tolerability; no specific food must be avoided.",
+    "alcohol": "Avoid alcohol; it adds to the risk of hepatotoxicity.",
+    "diagnostics": "May cause neutropenia/agranulocytosis on CBC and elevated liver enzymes."
+  },
+  "se": {
+    "common": [
+      "Nausea and vomiting",
+      "Abdominal pain",
+      "Diarrhea",
+      "Pruritus",
+      "Fatigue / weakness",
+      "Bradycardia"
+    ],
+    "serious": [
+      "Agranulocytosis / neutropenia",
+      "Hepatotoxicity (hepatitis, hepatic failure)",
+      "Severe hypersensitivity reaction",
+      "Extrapyramidal / dystonic reactions"
+    ],
+    "rare": [
+      "Aplastic anemia",
+      "Retinopathy / corneal changes with prolonged use",
+      "Peripheral neuropathy"
+    ],
+    "emergency": [
+      "Fulminant hepatic failure",
+      "Severe agranulocytosis with sepsis",
+      "Anaphylaxis / severe hypersensitivity"
+    ]
+  },
+  "monitoring": [
+    "Full blood count, especially neutrophil count, with repeated courses",
+    "Liver enzymes/function, particularly if used more than once",
+    "Parasitemia and clinical response to confirm cure",
+    "Visual symptoms with prolonged or repeated exposure"
+  ],
+  "counsel": [
+    "Complete all 3 days of the combination treatment even if you feel better",
+    "Take with food if it causes stomach upset; report if you vomit a dose",
+    "Stop and seek care urgently if you develop yellowing of the skin/eyes, dark urine, sore throat, fever or unusual bruising",
+    "Do not use this drug to try to prevent malaria",
+    "Avoid alcohol during treatment"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Rapid blood schizonticidal action within hours of absorption"
+    ],
+    [
+      "Peak",
+      "Parent drug ~0.5-1 h; active metabolite desethylamodiaquine peaks later"
+    ],
+    [
+      "Half-life",
+      "Amodiaquine short (hours); desethylamodiaquine long (~9-18 days)"
+    ],
+    [
+      "Duration",
+      "Prolonged due to long-lived active metabolite; supports 3-day course"
+    ],
+    [
+      "Storage",
+      "Store below 30 C, protected from light and moisture"
+    ]
+  ],
+  "pearls": [
+    "NOT FDA-approved; this record is based on WHO guidance (WHO Model List of Essential Medicines and WHO malaria treatment guidelines)",
+    "Use in combination only - artesunate + amodiaquine (ASAQ) is a first-line ACT for uncomplicated P. falciparum malaria",
+    "Withdrawn from prophylaxis because of agranulocytosis and hepatotoxicity with repeated dosing",
+    "Active against many chloroquine-resistant strains via the same heme-detoxification mechanism",
+    "Long half-life of the desethylamodiaquine metabolite gives sustained post-treatment protection, useful in SMC"
+  ],
+  "missed": "If a daily dose of the 3-day course is missed, take it as soon as remembered; if it is nearly time for the next day's dose, take the missed dose and continue, completing all 3 days. Do not double up to make up a dose.",
+  "overdose": "Overdose may cause hypotension, cardiac conduction disturbances, seizures and respiratory or cardiac arrest, as with other 4-aminoquinolines. There is no specific antidote; manage with urgent supportive and intensive care, airway/ventilatory support, cardiac monitoring and seizure control. Hemodialysis is of limited value.",
+  "refs": [
+    [
+      "WHO Guidelines for Malaria",
+      "https://www.who.int/publications/i/item/guidelines-for-malaria"
+    ],
+    [
+      "WHO Model List of Essential Medicines",
+      "https://www.who.int/publications/i/item/WHO-MHP-HPS-EML-2023.02"
+    ],
+    [
+      "WHO Seasonal Malaria Chemoprevention with SP + Amodiaquine",
+      "https://www.who.int/publications/i/item/9789241504737"
+    ]
+  ]
+}

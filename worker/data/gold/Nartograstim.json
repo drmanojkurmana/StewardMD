@@ -1,0 +1,98 @@
+{
+  "generic": "Nartograstim",
+  "cls": "Recombinant human granulocyte colony-stimulating factor analog (rhG-CSF mutein)",
+  "pharm": "A recombinant methionyl human granulocyte colony-stimulating factor (rhG-CSF) mutein with N-terminal amino-acid substitutions that confer enhanced stability and activity; it stimulates neutrophil production by acting on the G-CSF receptor. Marketed in Japan (Neu-up); not FDA-approved.",
+  "tags": ["Not FDA-approved", "G-CSF mutein", "Neutropenia", "Hematopoietic growth factor", "Japan-marketed", "Injectable biologic"],
+  "quick": [
+    ["Adult dose", "Class rhG-CSF range ~5-10 micrograms/kg/day SC or IV (Neu-up label figure not confirmed)"],
+    ["Meal", "Not applicable - injectable"],
+    ["Pregnancy", "Limited data; use only if benefit outweighs risk"],
+    ["Lactation", "Excretion in milk unknown; caution"],
+    ["Renal", "No specific adjustment; monitor in significant impairment"],
+    ["Hepatic", "No specific adjustment; monitor in significant impairment"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "CBC with differential / absolute neutrophil count; spleen size"]
+  ],
+  "summary": "Nartograstim is a recombinant human granulocyte colony-stimulating factor (rhG-CSF) mutein - a modified recombinant methionyl G-CSF (code KW-2228; brand Neu-up) developed and marketed in Japan. It carries N-terminal amino-acid substitutions (reported in the literature at positions 1, 3, 4, 5, and 17) that increase its stability and biological/receptor-binding activity relative to wild-type rhG-CSF. Like other G-CSF agents it binds the G-CSF receptor on neutrophil progenitors, stimulating their proliferation and differentiation, accelerating release of mature neutrophils, and enhancing neutrophil function, and is used for neutropenia (e.g., after cytotoxic chemotherapy or bone marrow transplantation). Class-typical dosing is about 5-10 micrograms/kg/day by SC or IV route; the exact Neu-up label figure was not confirmed. Common adverse effects are bone pain, leukocytosis, and injection-site reactions, with splenomegaly on prolonged use. It is NOT FDA-approved. NOTE: This record is compiled from primary literature and rhG-CSF class references because the Japanese label could not be retrieved; doses, half-life, and storage are class-based and should be verified against the product label.",
+  "indications": [
+    "Neutropenia following cytotoxic chemotherapy",
+    "Acceleration of neutrophil recovery after bone marrow / hematopoietic stem cell transplantation",
+    "Other neutropenic states (e.g., congenital/idiopathic neutropenia, myelodysplastic syndrome-associated neutropenia) and mobilization of peripheral blood progenitor cells (class uses; precise approved indications per the Japanese label not confirmed)"
+  ],
+  "dosage": [
+    {"c": "Neutropenia (class rhG-CSF dosing)", "r": "Adult SC or IV", "d": "Approximately 5-10 micrograms/kg/day", "t": "Once daily", "n": "Class/secondary-source figure; confirm the Neu-up label dose"},
+    {"c": "Peripheral blood progenitor cell mobilization", "r": "Adult SC", "d": "Per protocol (class rhG-CSF dosing)", "t": "Once daily", "n": "Used with or without chemotherapy mobilization"},
+    {"c": "Concurrent with cytotoxic chemotherapy", "r": "-", "d": "Avoid administration within ~24 hours of chemotherapy", "t": "-", "n": "Rapidly dividing myeloid cells are sensitive to cytotoxics"}
+  ],
+  "admin": [
+    "Administer by subcutaneous injection or intravenous infusion, once daily",
+    "Do not give within approximately 24 hours before or after cytotoxic chemotherapy",
+    "Monitor the complete blood count to titrate dose and detect excessive leukocytosis",
+    "Use aseptic technique; rotate subcutaneous injection sites",
+    "Store the protein product refrigerated and protect from freezing and light"
+  ],
+  "moa": "Nartograstim binds the granulocyte colony-stimulating factor receptor (G-CSFR/CD114) on neutrophil progenitor cells and mature neutrophils. Receptor-mediated signaling drives the proliferation and differentiation of neutrophil precursors in the bone marrow, accelerates the release of mature neutrophils into the circulation, and enhances mature neutrophil functions such as chemotaxis, phagocytosis, and oxidative burst. As a methionyl G-CSF mutein with N-terminal amino-acid substitutions, it has greater stability and receptor-binding/biological activity than wild-type rhG-CSF. Its clearance is dominated by a saturable, receptor-mediated uptake in bone marrow and spleen plus renal filtration.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to nartograstim, other G-CSF products, or E. coli-derived proteins"
+    ],
+    "relative": [
+      "Myeloid malignancies where G-CSF could stimulate the malignant clone (class caution)",
+      "Sickle cell disease (class caution - risk of sickle crisis with G-CSF)"
+    ],
+    "monitor": [
+      "Complete blood count with differential (absolute neutrophil count)",
+      "Spleen size on prolonged use",
+      "Platelet count"
+    ]
+  },
+  "preg": "There are no adequate human data; consistent with the rhG-CSF class, use only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "It is not known whether nartograstim is excreted in human milk; exercise caution if used during breastfeeding.",
+  "renal": "Clearance includes renal filtration of unbound drug in addition to a saturable receptor-mediated marrow/spleen uptake; the renal extraction ratio is low. No specific dose-adjustment scheme is established - monitor closely in significant renal impairment.",
+  "hepatic": "The hepatic extraction ratio is low. No specific dose-adjustment scheme is established - monitor closely in significant hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Cytotoxic chemotherapy - avoid administering G-CSF within ~24 hours of chemotherapy because rapidly dividing myeloid cells are sensitive to cytotoxic agents"
+    ],
+    "minor": ["Potential additive effects with other myeloid growth factors (class caution)"],
+    "food": "Not applicable - injectable biologic.",
+    "alcohol": "No specific interaction described.",
+    "diagnostics": "Increased circulating neutrophils/leukocytes; bone-imaging changes can occur with G-CSF-stimulated marrow activity."
+  },
+  "se": {
+    "common": ["Bone / musculoskeletal pain", "Headache", "Injection-site reactions", "Mild rash", "Leukocytosis"],
+    "serious": ["Splenomegaly / splenic enlargement (and rare splenic rupture - class effect)", "Severe hypersensitivity reactions", "Excessive leukocytosis"],
+    "rare": ["Capillary leak syndrome and acute respiratory distress syndrome (class effects)", "Sickle cell crisis in predisposed patients (class effect)"],
+    "emergency": ["Anaphylaxis / severe hypersensitivity", "Splenic rupture (acute left-upper-quadrant/shoulder-tip pain)", "Acute respiratory distress (class effect)"]
+  },
+  "monitoring": ["Complete blood count with differential / absolute neutrophil count, regularly", "Spleen size on prolonged use", "Platelet count", "Signs of hypersensitivity or capillary leak"],
+  "counsel": [
+    "You may get bone or muscle aches - these are usually manageable with simple pain relievers; tell your team if severe",
+    "Report left-upper-belly or left shoulder-tip pain (possible spleen enlargement)",
+    "Report any rash, swelling, trouble breathing, or signs of an allergic reaction",
+    "Persistent fever or signs of infection should be reported promptly",
+    "Keep your blood-test appointments so the dose can be adjusted"
+  ],
+  "pk": [
+    ["Onset", "Neutrophil count rises over the first days of dosing"],
+    ["Peak", "Dose-dependent (nonlinear) due to saturable receptor-mediated clearance"],
+    ["Half-life", "Class rhG-CSF half-life roughly 3-4 hours (subcutaneous); exact nartograstim value not confirmed"],
+    ["Duration", "Dosed once daily to maintain neutrophil support"],
+    ["Storage", "Refrigerate at 2-8 C; protect from freezing and light (class storage)"]
+  ],
+  "pearls": [
+    "A G-CSF MUTEIN (engineered methionyl rhG-CSF), not simply filgrastim - N-terminal substitutions enhance stability/activity",
+    "Marketed in Japan as Neu-up alongside filgrastim and lenograstim; NOT FDA-approved in the US",
+    "Clearance is dominated by a saturable marrow/spleen receptor pathway, giving nonlinear pharmacokinetics",
+    "Most common adverse effect is bone pain; watch for splenomegaly on prolonged use",
+    "Do not give within ~24 hours of cytotoxic chemotherapy (myeloid cells are chemo-sensitive)",
+    "NOTE: dose (5-10 mcg/kg/day), half-life (~3-4 h), and storage are class/literature-based - verify against the Neu-up label"
+  ],
+  "missed": "If a dose is missed, it should generally be given when remembered as advised by the treating team; do not double the dose. Because dosing is tied to chemotherapy and blood counts, contact the care team for guidance.",
+  "overdose": "Overdose may cause marked leukocytosis. Management is to withhold the drug and monitor the complete blood count until counts normalize, with supportive care as needed.",
+  "refs": [
+    ["PubMed - Nartograstim pharmacokinetics / saturable marrow-spleen uptake", "https://pubmed.ncbi.nlm.nih.gov/7540687/"],
+    ["NCATS Inxight Drugs - Nartograstim", "https://drugs.ncats.io/drug/nartograstim"]
+  ]
+}

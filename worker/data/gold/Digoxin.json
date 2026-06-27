@@ -1,0 +1,94 @@
+{
+  "generic": "Digoxin",
+  "cls": "Cardiac glycoside (positive inotrope / antiarrhythmic)",
+  "pharm": "Cardiac glycoside that inhibits the sodium-potassium ATPase pump, increasing myocardial contractility and vagal tone; has a narrow therapeutic index.",
+  "tags": ["Cardiac glycoside", "Positive inotrope", "Heart failure", "Atrial fibrillation", "Narrow therapeutic index", "Toxicity-prone", "Renal dosing"],
+  "quick": [
+    ["Adult dose", "Maintenance ~3.4-5.1 mcg/kg/day; individualize"],
+    ["Meal", "Consistent timing; high-fiber meals reduce absorption"],
+    ["Pregnancy", "Used when indicated; monitor levels (volume changes)"],
+    ["Lactation", "Compatible; small amounts in milk"],
+    ["Renal", "Reduce dose - renally eliminated; key toxicity factor"],
+    ["Hepatic", "No major adjustment"],
+    ["Alcohol", "No direct interaction"],
+    ["Monitoring", "Serum digoxin level, potassium, magnesium, renal function, ECG"]
+  ],
+  "summary": "Digoxin is a cardiac glycoside used for heart failure with reduced ejection fraction and for ventricular rate control in atrial fibrillation. It has a narrow therapeutic index - toxic levels are only slightly above therapeutic - so dosing is individualized by lean body weight, age, and renal function, with serum level and electrolyte monitoring. Hypokalemia, hypomagnesemia, hypercalcemia, and renal impairment increase toxicity risk. It is contraindicated in ventricular fibrillation.",
+  "indications": [
+    "Heart failure with reduced ejection fraction (to improve symptoms; usually added to standard therapy)",
+    "Control of ventricular response rate in chronic atrial fibrillation"
+  ],
+  "dosage": [
+    {"c": "Loading (rapid digitalization, adults/peds >10 y)", "r": "Oral", "d": "10-15 mcg/kg total loading dose", "t": "Give half initially, then 1/4 every 6-8 h x2 with reassessment", "n": "Optional; reassess clinical response and toxicity before each dose"},
+    {"c": "Maintenance (adults/peds >10 y, normal renal function)", "r": "Oral", "d": "3.4-5.1 mcg/kg/day once daily", "t": "Once daily", "n": "Adjust per lean body weight, renal function, age, levels; increase no more often than every 2 weeks"},
+    {"c": "Pediatric loading (5-10 y)", "r": "Oral", "d": "20-45 mcg/kg total loading dose", "t": "Half initially, then 1/4 q6-8h x2", "n": "Use oral solution for accurate dosing in small patients"},
+    {"c": "Renal impairment", "r": "Oral/IV", "d": "Reduce dose per creatinine clearance", "t": "Per renal function", "n": "Digoxin is largely renally eliminated; major toxicity factor"},
+    {"c": "Pre-cardioversion", "r": "Oral/IV", "d": "Consider interruption/reduction", "t": "Before electrical cardioversion", "n": "Reduce arrhythmia risk"}
+  ],
+  "admin": [
+    "Individualize dose by lean body weight, age, renal function, and concomitant drugs",
+    "Use oral solution for infants, young children, or very low body weight for accuracy",
+    "Maintain consistent timing relative to meals; high-fiber/bran meals reduce absorption",
+    "Reduce dose in renal impairment and reassess after starting interacting drugs",
+    "Consider interrupting/reducing dose before electrical cardioversion"
+  ],
+  "moa": "Inhibits the myocardial sodium-potassium ATPase, raising intracellular sodium and (via sodium-calcium exchange) intracellular calcium, increasing the force of contraction (positive inotropy). It also increases vagal (parasympathetic) tone, slowing AV-nodal conduction and ventricular rate in atrial fibrillation.",
+  "contra": {
+    "absolute": ["Ventricular fibrillation", "Known hypersensitivity to digoxin or other digitalis preparations"],
+    "relative": ["Hypokalemia, hypomagnesemia, hypercalcemia (predispose to toxicity)", "Sick sinus syndrome or AV block without pacemaker", "Wolff-Parkinson-White with atrial fibrillation", "Hypertrophic obstructive cardiomyopathy", "Acute myocardial infarction", "Renal impairment", "Elderly/low lean body weight"],
+    "monitor": ["Serum digoxin concentration", "Serum potassium, magnesium, calcium", "Renal function", "Heart rate and ECG"]
+  },
+  "preg": "Used when clinically indicated (e.g., maternal or fetal arrhythmia); pregnancy alters pharmacokinetics so monitor serum levels and adjust dose. Crosses the placenta.",
+  "lact": "Excreted in breast milk in small amounts; considered compatible with breastfeeding.",
+  "renal": "Digoxin is primarily eliminated renally; reduce dose and lengthen interval in renal impairment. Declining renal function is a leading cause of toxicity - reassess dose accordingly.",
+  "hepatic": "No major dosage adjustment required (predominantly renal elimination).",
+  "interactions": {
+    "major": ["P-glycoprotein inhibitors (amiodarone, quinidine, verapamil, dronedarone, clarithromycin, itraconazole, cyclosporine, ritonavir) - raise digoxin levels; reduce digoxin dose", "Drugs causing hypokalemia/hypomagnesemia (loop/thiazide diuretics, amphotericin B) - increase toxicity risk", "Calcium (especially rapid IV) - precipitates arrhythmia in digitalized patients"],
+    "moderate": ["Beta-blockers, non-dihydropyridine CCBs - additive AV-nodal slowing/bradycardia", "Spironolactone - may raise levels and interfere with some assays", "Antacids, kaolin-pectin, cholestyramine, high-fiber meals - reduce absorption"],
+    "minor": ["St. John's wort (P-gp induction) - may lower levels"],
+    "food": "High-fiber/bran meals reduce absorption; take consistently relative to food.",
+    "alcohol": "No direct pharmacologic interaction.",
+    "diagnostics": "Monitor serum digoxin level (target ~0.5-0.9 ng/mL in heart failure; sample >=6-8 h post-dose), potassium, magnesium, calcium, and renal function; certain drugs (spironolactone) can interfere with immunoassays."
+  },
+  "se": {
+    "common": ["Nausea, vomiting, anorexia", "Diarrhea", "Dizziness", "Headache", "Visual disturbances (blurred/yellow-green vision, halos)"],
+    "serious": ["Cardiac arrhythmias (PVCs, bigeminy, AV block, atrial tachycardia with block, ventricular tachycardia/fibrillation)", "Severe bradycardia", "Hyperkalemia (acute toxicity)"],
+    "rare": ["Gynecomastia", "Thrombocytopenia", "Confusion/delirium (elderly)"],
+    "emergency": ["Life-threatening ventricular arrhythmias", "Complete heart block/severe bradycardia", "Acute digoxin toxicity with hyperkalemia"]
+  },
+  "monitoring": [
+    "Serum digoxin concentration (sample at least 6-8 hours after a dose)",
+    "Serum potassium, magnesium, and calcium",
+    "Renal function (serum creatinine/CrCl)",
+    "Heart rate, rhythm, and ECG",
+    "Signs/symptoms of toxicity (GI upset, visual changes, arrhythmia, confusion)"
+  ],
+  "counsel": [
+    "Take at the same time each day exactly as prescribed; do not skip or double doses",
+    "Report nausea, vomiting, loss of appetite, blurred or yellow-tinged vision, palpitations, or feeling faint - these can be signs of toxicity",
+    "Have regular blood tests for digoxin level, potassium, and kidney function",
+    "Tell your clinician before starting any new medicine, including over-the-counter and herbal products",
+    "Maintain a consistent diet; avoid sudden large changes in potassium intake"
+  ],
+  "pk": [
+    ["Onset", "Oral ~0.5-2 h; IV ~5-30 min"],
+    ["Peak", "Oral ~2-6 h (peak effect later)"],
+    ["Half-life", "~36-48 hours (prolonged in renal impairment)"],
+    ["Duration", "3-4 days after stopping (full elimination ~6 days)"],
+    ["Storage", "Store at room temperature, protect from light"]
+  ],
+  "pearls": [
+    "Narrow therapeutic index - toxic levels are only slightly above therapeutic; individualize and monitor levels",
+    "Lower target level (~0.5-0.9 ng/mL) is associated with better outcomes in heart failure",
+    "Hypokalemia, hypomagnesemia, and hypercalcemia markedly increase toxicity risk",
+    "Renal impairment is a leading cause of accumulation and toxicity - reduce dose",
+    "Many drugs raise levels via P-glycoprotein inhibition (amiodarone, verapamil, quinidine) - reduce digoxin dose",
+    "Digoxin-specific antibody fragments (DigiFab) reverse life-threatening toxicity"
+  ],
+  "missed": "If a dose is missed and it is within about 12 hours, take it; if more than 12 hours have passed, skip it and take the next dose at the usual time. Never double the dose. If two or more days of doses are missed, contact the prescriber.",
+  "overdose": "Toxicity causes GI symptoms, visual disturbances, confusion, and dangerous arrhythmias; acute overdose typically causes hyperkalemia. Management: discontinue digoxin, correct electrolytes (treat hypokalemia/hypomagnesemia; in acute toxicity manage hyperkalemia cautiously - avoid IV calcium), monitor ECG, treat bradyarrhythmias with atropine/pacing, and give digoxin immune Fab (DigiFab) for life-threatening arrhythmias, hemodynamic instability, or marked hyperkalemia. Dialysis is ineffective (large volume of distribution).",
+  "refs": [
+    ["FDA Digoxin Tablets Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22digoxin%22"],
+    ["DailyMed - Digoxin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=digoxin"]
+  ]
+}

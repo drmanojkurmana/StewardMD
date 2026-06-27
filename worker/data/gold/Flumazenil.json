@@ -1,0 +1,136 @@
+{
+  "generic": "Flumazenil",
+  "cls": "Benzodiazepine receptor antagonist (GABA-A antagonist)",
+  "pharm": "Competitive antagonist at the benzodiazepine recognition site on the GABA-A receptor; used to reverse the sedative effects of benzodiazepines after anesthesia/procedures and in benzodiazepine overdose.",
+  "tags": [
+    "Rx only",
+    "Benzodiazepine antagonist",
+    "Seizure risk",
+    "Resedation risk"
+  ],
+  "quick": [
+    ["Adult dose", "Reversal of sedation: 0.2 mg IV over 15 s, then 0.2 mg every 60 s as needed to max 1 mg; overdose: 0.2 mg, then 0.3 mg, then 0.5 mg increments to max 3 mg"],
+    ["Meal", "Intravenous administration; not related to meals"],
+    ["Pregnancy", "Limited data; use only if clearly needed (emergency use)"],
+    ["Lactation", "Unknown if excreted in milk; caution; single emergency dose unlikely to harm"],
+    ["Renal", "No specific adjustment; primarily hepatic clearance"],
+    ["Hepatic", "Clearance reduced; titrate carefully and reduce repeat dosing in hepatic impairment"],
+    ["Alcohol", "Does not reverse alcohol; mixed overdoses raise seizure risk"],
+    ["Monitoring", "Resedation, respiratory depression, seizures, ECG; monitor at least 1-2 hours after dosing"]
+  ],
+  "summary": "Flumazenil is a benzodiazepine receptor antagonist used intravenously to reverse the sedative effects of benzodiazepines after anesthesia or procedural sedation and in the management of known or suspected benzodiazepine overdose. It is titrated in small incremental IV doses. Two key dangers are SEIZURES - especially in patients on benzodiazepines for seizure control, those physically dependent on benzodiazepines (precipitating acute WITHDRAWAL), and mixed overdoses with proconvulsant drugs (e.g., tricyclic antidepressants) - and RESEDATION, because flumazenil has a shorter duration of action than many benzodiazepines, so patients must be monitored for the return of sedation and respiratory depression.",
+  "indications": [
+    "Complete or partial reversal of the sedative effects of benzodiazepines after general anesthesia or conscious/procedural sedation",
+    "Management of known or suspected benzodiazepine overdose"
+  ],
+  "dosage": [
+    {"c": "Reversal of conscious sedation / anesthesia (adult)", "r": "IV titration", "d": "0.2 mg IV over 15 seconds; if needed, 0.2 mg every 60 seconds up to a total of 1 mg (usual response 0.6-1 mg). May repeat at 20-minute intervals, max 1 mg per attempt and 3 mg per hour", "t": "Titrate to effect", "n": "Most patients respond to 0.6-1 mg"},
+    {"c": "Suspected benzodiazepine overdose (adult)", "r": "IV titration", "d": "0.2 mg IV over 30 seconds; if needed, 0.3 mg over 30 s after 30 s; then 0.5 mg over 30 s at 1-minute intervals to a maximum total dose of 3 mg", "t": "Titrate to effect", "n": "Most respond by 1-3 mg; doses >3 mg do not reliably add benefit"},
+    {"c": "Pediatric reversal of sedation (>=1 year)", "r": "IV titration", "d": "0.01 mg/kg (up to 0.2 mg) IV over 15 seconds; repeat 0.01 mg/kg (up to 0.2 mg) every 60 s as needed to a maximum total of 0.05 mg/kg or 1 mg, whichever is lower", "t": "Titrate to effect", "n": "Pediatric overdose use not established"}
+  ],
+  "admin": [
+    "Administer intravenously, preferably through a freely running IV infusion into a large vein to minimize pain at the injection site",
+    "Titrate in small increments to the desired level of consciousness; do not rush administration",
+    "Ensure a secure airway and monitoring equipment are available; this is an emergency/anesthesia setting drug",
+    "Monitor patients for resedation for an adequate period (at least 1-2 hours) after the last dose",
+    "Have measures ready to manage seizures and benzodiazepine withdrawal"
+  ],
+  "moa": "Flumazenil is an imidazobenzodiazepine that acts as a competitive antagonist at the benzodiazepine recognition site on the GABA-A receptor complex. By competitively blocking this site, it inhibits the activity of agonist benzodiazepines (and certain non-benzodiazepine sedatives such as zolpidem that act at the same site), reversing their sedative, anxiolytic, and psychomotor effects. It does not reverse the effects of opioids, alcohol, barbiturates, or general anesthetics that act outside the benzodiazepine site, and it has minimal intrinsic activity of its own.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to flumazenil or benzodiazepines",
+      "Patients given a benzodiazepine for control of a potentially life-threatening condition (e.g., status epilepticus, raised intracranial pressure)",
+      "Patients showing signs of serious cyclic-antidepressant (tricyclic) overdose"
+    ],
+    "relative": [
+      "Long-term benzodiazepine use / physical dependence (risk of precipitating withdrawal and seizures)",
+      "Seizure disorder treated with benzodiazepines",
+      "Mixed-drug overdose with proconvulsant agents",
+      "History of panic disorder (may precipitate panic attacks)",
+      "Hepatic impairment (altered clearance)"
+    ],
+    "monitor": [
+      "Resedation and recurrent respiratory depression",
+      "Seizures and signs of benzodiazepine withdrawal",
+      "Cardiac rhythm and hemodynamics in overdose settings"
+    ]
+  },
+  "preg": "There are limited human data. Flumazenil is generally used in acute/emergency situations where the benefit is judged to outweigh risk. Use during pregnancy only if clearly needed and after weighing maternal benefit against potential fetal risk.",
+  "lact": "It is not known whether flumazenil is excreted in human milk. Given its single-use emergency context and short half-life, a single dose is unlikely to harm a breastfed infant; exercise caution and consider temporary interruption if multiple doses are used.",
+  "renal": "No specific dose adjustment is required for renal impairment; flumazenil is primarily cleared by hepatic metabolism, and renal disease does not significantly alter its pharmacokinetics.",
+  "hepatic": "Hepatic metabolism is the main route of elimination, so clearance is reduced and the half-life prolonged in hepatic impairment. Titrate carefully and reduce the frequency/size of repeat doses in patients with liver disease.",
+  "interactions": {
+    "major": [
+      "Tricyclic/cyclic antidepressant overdose - flumazenil can precipitate seizures and arrhythmias; avoid in suspected serious TCA poisoning",
+      "Proconvulsant drugs in mixed overdose - increased seizure risk"
+    ],
+    "moderate": [
+      "Benzodiazepine agonists - flumazenil reverses their effect and may unmask underlying conditions or withdrawal",
+      "Non-benzodiazepine agonists at the same site (e.g., zopiclone, zolpidem) - effects also reversed"
+    ],
+    "minor": [
+      "Does not interact with drugs acting outside the benzodiazepine-GABA site (opioids, alcohol, barbiturates) but does not reverse their toxicity"
+    ],
+    "food": "Not applicable (intravenous emergency use).",
+    "alcohol": "Flumazenil does not reverse the central effects of alcohol; in mixed alcohol/benzodiazepine ingestions, reversing benzodiazepine effect may increase seizure risk.",
+    "diagnostics": "No specific laboratory interference; monitor clinical sedation level and, in overdose, cardiac rhythm."
+  },
+  "se": {
+    "common": [
+      "Nausea and vomiting",
+      "Dizziness",
+      "Injection-site pain",
+      "Agitation, anxiety, headache",
+      "Sweating, flushing"
+    ],
+    "serious": [
+      "Seizures (especially in benzodiazepine-dependent patients, those on benzodiazepines for seizure control, and mixed overdoses)",
+      "Resedation with recurrent respiratory depression",
+      "Acute benzodiazepine withdrawal syndrome",
+      "Cardiac arrhythmias"
+    ],
+    "rare": [
+      "Hypersensitivity/anaphylaxis",
+      "Panic attacks (in predisposed patients)"
+    ],
+    "emergency": [
+      "Convulsions/status epilepticus",
+      "Recurrent respiratory depression from resedation",
+      "Severe withdrawal reaction",
+      "Anaphylaxis"
+    ]
+  },
+  "monitoring": [
+    "Level of consciousness and respiration during and after administration",
+    "Monitor for resedation for an adequate period (at least 1-2 hours after the last dose, longer with long-acting benzodiazepines)",
+    "Seizure activity and signs of benzodiazepine withdrawal",
+    "Cardiac rhythm and hemodynamics, especially in the overdose setting"
+  ],
+  "counsel": [
+    "This medicine wears off faster than the sedative it reverses - you may become drowsy again, so you must be observed and must not be discharged unsupervised",
+    "Do not drive, operate machinery, or make important decisions for 24 hours after the procedure",
+    "Avoid alcohol and non-prescribed sedatives for 24 hours",
+    "If you take benzodiazepines regularly, tell the team - this drug can cause withdrawal symptoms or seizures",
+    "Report any agitation, confusion, palpitations, or shaking to staff immediately"
+  ],
+  "pk": [
+    ["Onset", "Reversal of sedation begins within 1-2 minutes; peak effect about 6-10 minutes after IV dose"],
+    ["Peak", "Peak plasma concentration is reached within minutes of IV administration"],
+    ["Half-life", "Short - approximately 40-80 minutes (terminal)"],
+    ["Duration", "Effect lasts roughly 20-60 minutes depending on dose; often shorter than the benzodiazepine - watch for resedation"],
+    ["Storage", "Store at controlled room temperature (15-30 C); discard unused portion; use diluted solutions within 24 hours"]
+  ],
+  "pearls": [
+    "Two cardinal dangers: SEIZURES (benzodiazepine-dependent patients, those on benzodiazepines for seizures, and mixed/proconvulsant overdoses) and RESEDATION (short half-life vs longer-acting benzodiazepines)",
+    "Avoid in suspected serious tricyclic antidepressant overdose - can precipitate seizures and arrhythmias",
+    "Titrate slowly in small IV increments to the desired effect; do not give as a single large bolus",
+    "Always monitor for resedation for at least 1-2 hours after the last dose, longer with long-acting agents",
+    "Does not reverse opioids, alcohol, or barbiturates - it is benzodiazepine-specific"
+  ],
+  "missed": "Not applicable - flumazenil is administered as needed by a clinician in acute/emergency or peri-procedural settings rather than on a fixed self-administered schedule.",
+  "overdose": "Even at high doses, flumazenil overdose generally produces few additional adverse effects beyond anxiety, agitation, increased muscle tone, and possible seizures. There is no specific antidote; provide supportive care. Seizures should be managed with usual anticonvulsant measures, recognizing that further benzodiazepine effect may be antagonized. Monitor for arrhythmias and cardiovascular instability.",
+  "refs": [
+    ["FDA Flumazenil Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22flumazenil%22"],
+    ["FDA DailyMed - Flumazenil (Romazicon)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=flumazenil"]
+  ]
+}

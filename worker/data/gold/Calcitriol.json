@@ -1,0 +1,94 @@
+{
+  "generic": "Calcitriol",
+  "cls": "Active vitamin D3 analog (1,25-dihydroxycholecalciferol)",
+  "pharm": "Vitamin D receptor agonist / calcium-regulating agent",
+  "tags": ["vitamin D", "secondary hyperparathyroidism", "CKD", "hypocalcemia", "renal osteodystrophy"],
+  "quick": [
+    ["Adult dose", "0.25 mcg PO once daily, titrate to serum calcium"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Use only if benefit justifies fetal risk"],
+    ["Lactation", "Do not nurse while taking calcitriol"],
+    ["Renal", "Indicated in CKD/dialysis; titrate carefully"],
+    ["Hepatic", "No formal studies; caution"],
+    ["Alcohol", "No specific interaction; moderate intake"],
+    ["Monitoring", "Serum Ca (twice weekly when titrating), P, Ca x P, iPTH"]
+  ],
+  "summary": "Calcitriol is the active form of vitamin D3 (1,25-dihydroxycholecalciferol), used to manage secondary hyperparathyroidism and hypocalcemia in chronic kidney disease, dialysis patients, and hypoparathyroidism. The oral solution (1 mcg/mL) is started low (0.25 mcg/day) and titrated to serum calcium. The dominant risk is hypercalcemia; serum calcium must be monitored closely and the Ca x P product kept below 70 mg2/dL2.",
+  "indications": [
+    "Management of secondary hyperparathyroidism and resultant metabolic bone disease in moderate-to-severe chronic renal failure (CrCl 15-55 mL/min) not yet on dialysis (predialysis patients)",
+    "Management of hypocalcemia and resultant metabolic bone disease in patients undergoing chronic renal dialysis",
+    "Management of hypocalcemia and its clinical manifestations in postsurgical hypoparathyroidism, idiopathic hypoparathyroidism, and pseudohypoparathyroidism"
+  ],
+  "dosage": [
+    {"c": "Dialysis patients", "r": "Initial", "d": "0.25 mcg once daily; may increase by 0.25 mcg/day at 4-8 week intervals", "t": "Once daily", "n": "Most hemodialysis patients respond to 0.5-1 mcg/day; mild cases may use 0.25 mcg every other day"},
+    {"c": "Predialysis patients (adults and children >=3 yr)", "r": "Initial", "d": "0.25 mcg once daily; may increase to 0.5 mcg/day if needed", "t": "Once daily", "n": "Children <3 yr: 10-15 ng/kg/day"},
+    {"c": "Hypoparathyroidism (adults and children >=6 yr)", "r": "Initial", "d": "0.25 mcg once daily in the morning; titrate at 2-4 week intervals", "t": "Once daily", "n": "Usual range 0.5-2 mcg/day; children 1-5 yr: 0.25-0.75 mcg/day"},
+    {"c": "Hypercalcemia management (dose reduction)", "r": "Adjustment", "d": "Reduce by 0.25 mcg/day or hold until normocalcemic", "t": "As needed", "n": "Reinstitute at a dose 0.25 mcg/day lower than prior dose"}
+  ],
+  "admin": [
+    "Administer the oral solution (1 mcg/mL) using the supplied graduated oral dispenser",
+    "Always start at the lowest possible dose; do not increase without careful serum calcium monitoring",
+    "Ensure adequate but not excessive dietary calcium (at least 600 mg/day); prescribe a calcium supplement or dietary guidance",
+    "If hypercalcemia develops, discontinue immediately until normocalcemia returns, then resume at a lower dose",
+    "In dialysis patients, control phosphorus with a nonaluminum phosphate binder and low-phosphate diet before/while dosing",
+    "Take serum calcium samples without a tourniquet; protect product from light"
+  ],
+  "moa": "Calcitriol is 1,25-dihydroxyvitamin D3, the most active form of vitamin D3. It binds the vitamin D receptor in intestine, bone, kidney and parathyroid tissue to stimulate intestinal calcium and phosphate absorption, promote bone mineral mobilization, and suppress parathyroid hormone secretion. In renal failure the kidney cannot synthesize calcitriol, so exogenous calcitriol corrects the resulting hypocalcemia and secondary hyperparathyroidism.",
+  "contra": {
+    "absolute": ["Hypercalcemia", "Evidence of vitamin D toxicity", "Known hypersensitivity to calcitriol or any inactive ingredient"],
+    "relative": ["Patients on digitalis (hypercalcemia may precipitate arrhythmias)", "Immobilized patients (higher hypercalcemia risk)", "Hyperphosphatemia / elevated Ca x P product"],
+    "monitor": ["Concomitant calcium supplements or vitamin D derivatives", "Magnesium-containing antacids in dialysis patients", "Thiazide diuretics"]
+  },
+  "preg": "There are no adequate, well-controlled studies in pregnant women; teratogenic skeletal/external abnormalities occurred in rabbits at 2-6 times the maximum recommended dose. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Maternal calcitriol can cross to fetal circulation and high maternal doses have caused transient neonatal hypercalcemia.",
+  "lact": "Calcitriol may be excreted in human milk. Because of the potential for serious adverse reactions in nursing infants, a mother should not nurse while taking calcitriol.",
+  "renal": "Calcitriol is specifically indicated in chronic renal failure and dialysis patients, replacing the calcitriol the failing kidney cannot make. Elimination half-life is prolonged at least two-fold in chronic renal failure/hemodialysis. Titrate carefully against serum calcium, phosphorus and PTH; control phosphate to avoid ectopic calcification.",
+  "hepatic": "Controlled studies of hepatic impairment have not been conducted. Use cautiously; dose selection for patients with reduced hepatic function should generally start at the low end of the range.",
+  "interactions": {
+    "major": ["Magnesium-containing antacids (in dialysis patients) - risk of hypermagnesemia; avoid", "Pharmacologic doses of vitamin D and derivatives - additive hypercalcemia; withhold during therapy", "Thiazide diuretics - additive hypercalcemia"],
+    "moderate": ["Digitalis/digoxin - hypercalcemia may precipitate cardiac arrhythmias", "Corticosteroids - functional antagonism (inhibit calcium absorption)", "Ketoconazole - may inhibit calcitriol synthesis and catabolism, altering levels"],
+    "minor": ["Cholestyramine - reduced intestinal absorption of calcitriol", "Phenytoin/phenobarbital - may lower endogenous 25(OH)D3, possibly requiring higher calcitriol doses", "Phosphate-binding agents - adjust binder dose to serum phosphate"],
+    "food": "Maintain adequate dietary calcium (at least 600 mg/day); avoid uncontrolled intake of calcium-containing products or dairy that can trigger hypercalcemia.",
+    "alcohol": "No specific interaction documented; moderate intake.",
+    "diagnostics": "Raises serum calcium and phosphate; may increase serum creatinine, BUN, cholesterol and transaminases with toxicity."
+  },
+  "se": {
+    "common": ["Hypercalcemia", "Hypercalciuria", "Hyperphosphatemia (in renal patients)", "Nausea/vomiting", "Constipation", "Headache", "Weakness/somnolence"],
+    "serious": ["Severe progressive hypercalcemia", "Soft-tissue/vascular calcification, nephrocalcinosis", "Cardiac arrhythmias (especially with digitalis)", "Pancreatitis"],
+    "rare": ["Hypersensitivity reactions (pruritus, rash, urticaria)", "Erythema multiforme", "Overt psychosis", "Elevated serum creatinine in patients with normal renal function"],
+    "emergency": ["Severe hypercalcemic crisis (marked weakness, confusion, dehydration, arrhythmia)", "Cardiac arrhythmia in digitalized patients", "Severe allergic skin reaction"]
+  },
+  "monitoring": [
+    "Serum calcium at least twice weekly during dose titration; daily during hypercalcemia",
+    "Serum phosphorus, magnesium and alkaline phosphatase periodically in dialysis patients",
+    "Serum calcium, phosphorus, alkaline phosphatase, creatinine and intact PTH at baseline then monthly x6 months in predialysis patients, then periodically; iPTH every 3-4 months",
+    "Serum calcium, phosphorus and 24-hour urinary calcium periodically in hypoparathyroid patients",
+    "Keep serum Ca x P product below 70 mg2/dL2"
+  ],
+  "counsel": [
+    "Take exactly as prescribed; do not change the dose on your own",
+    "Maintain the recommended dietary calcium intake and follow advice on calcium supplements",
+    "Avoid nonprescription products containing vitamin D, calcium, or magnesium antacids unless approved by your provider",
+    "Report early signs of high calcium: weakness, headache, nausea, vomiting, dry mouth, constipation, bone or muscle pain, metallic taste",
+    "Keep all lab appointments for calcium and phosphorus testing; avoid dehydration"
+  ],
+  "pk": [
+    ["Onset", "Increases intestinal calcium absorption within hours"],
+    ["Peak", "Peak serum concentration 3-6 hours after oral dose"],
+    ["Half-life", "5-8 hours (normal); prolonged >=2-fold in renal failure"],
+    ["Duration", "Pharmacologic activity of a single dose ~3-5 days"],
+    ["Storage", "Store at 15-30 C (59-86 F); protect from light"]
+  ],
+  "pearls": [
+    "Most potent active vitamin D metabolite - does not require renal or hepatic activation",
+    "Short biologic half-life means hypercalcemia normalizes within a few days of stopping, faster than with ergocalciferol",
+    "Keep the Ca x P product <70 to avoid metastatic/vascular calcification",
+    "A fall in serum alkaline phosphatase in dialysis patients often heralds impending hypercalcemia",
+    "Avoid magnesium-containing antacids in dialysis patients (hypermagnesemia risk)"
+  ],
+  "missed": "If a dose is missed, take it when remembered unless it is nearly time for the next dose; do not double up. Because of the short half-life, an occasional missed dose has limited impact, but consistent dosing is needed for calcium control.",
+  "overdose": "Excess calcitriol causes hypercalcemia, hypercalciuria and hyperphosphatemia; signs mirror vitamin D intoxication. Treat by discontinuing calcitriol, starting a low-calcium diet and stopping calcium supplements, and monitoring serum calcium daily. Hypercalcemia usually resolves in 2-7 days. Persistent severe hypercalcemia may require IV fluids/forced diuresis, corticosteroids, phosphates, or dialysis against a calcium-free dialysate. Monitor closely in digitalized patients.",
+  "refs": [
+    ["FDA Calcitriol Oral Solution Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22calcitriol%22"],
+    ["FDA DailyMed - Calcitriol", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

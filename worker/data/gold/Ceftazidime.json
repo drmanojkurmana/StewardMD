@@ -1,0 +1,95 @@
+{
+  "generic": "Ceftazidime",
+  "cls": "Third-generation cephalosporin antibacterial",
+  "pharm": "Beta-lactam antibacterial (antipseudomonal cephalosporin)",
+  "tags": ["cephalosporin", "third-generation", "Pseudomonas", "Gram-negative", "beta-lactam", "parenteral"],
+  "quick": [
+    ["Adult dose", "1 g IV/IM every 8-12 hours (range 1-2 g q8-12h)"],
+    ["Meal", "Parenteral; not affected by food"],
+    ["Pregnancy", "Use only if clearly needed; generally low risk"],
+    ["Lactation", "Compatible; small amounts in milk"],
+    ["Renal", "Reduce dose per creatinine clearance"],
+    ["Hepatic", "No adjustment"],
+    ["Alcohol", "No disulfiram-like reaction"],
+    ["Monitoring", "Renal function, signs of allergy, superinfection"]
+  ],
+  "summary": "Ceftazidime is a parenteral third-generation cephalosporin with potent activity against Gram-negative bacteria, including Pseudomonas aeruginosa, and stability against many beta-lactamases. It is used for serious respiratory, urinary, intra-abdominal, skin, bone, gynecologic and CNS infections, septicemia and febrile neutropenia. The usual adult dose is 1 g IV/IM every 8-12 hours, adjusted for renal function.",
+  "indications": [
+    "Lower respiratory tract infections, including pneumonia caused by Pseudomonas and other susceptible Gram-negatives",
+    "Skin and skin-structure infections",
+    "Urinary tract infections (complicated and uncomplicated)",
+    "Bacterial septicemia",
+    "Bone and joint infections",
+    "Gynecologic, intra-abdominal infections and bacterial meningitis caused by susceptible organisms"
+  ],
+  "dosage": [
+    {"c": "Usual adult infection", "r": "Standard", "d": "1 g IV or IM every 8 to 12 hours", "t": "Every 8-12 h", "n": "By severity/organism"},
+    {"c": "Pneumonia / serious infection", "r": "Standard", "d": "500 mg-1 g every 8 hours", "t": "Every 8 h", "n": "Per pathogen susceptibility"},
+    {"c": "Life-threatening / Pseudomonas / neutropenia", "r": "High dose", "d": "2 g IV every 8 hours", "t": "Every 8 h", "n": "Max ~6 g/day"},
+    {"c": "Uncomplicated UTI", "r": "Lower dose", "d": "250 mg every 12 hours", "t": "Every 12 h", "n": "Complicated UTI 500 mg q8-12h"},
+    {"c": "Pediatric (1 month-12 yr)", "r": "Weight-based", "d": "30-50 mg/kg IV every 8 hours (max 6 g/day)", "t": "Every 8 h", "n": "Neonates 30 mg/kg q12h"},
+    {"c": "Renal impairment (adult)", "r": "Adjusted", "d": "After 1 g loading: 1 g q12h (CrCl 31-50), q24h (16-30), 500 mg q24h (6-15), 500 mg q48h (<5)", "t": "Extended interval", "n": "Supplement after hemodialysis"}
+  ],
+  "admin": [
+    "Reconstitute and administer by direct IV injection over 3-5 minutes, by intermittent IV infusion over 15-30 minutes, or by deep IM injection into a large muscle",
+    "Carbon dioxide is released on reconstitution; vent the vial as directed",
+    "For IM use, may reconstitute with lidocaine to reduce injection pain per label",
+    "Do not mix in the same syringe or infusion line with aminoglycosides; flush lines between drugs",
+    "Use prepared solutions promptly; observe storage and color-change guidance"
+  ],
+  "moa": "Ceftazidime is a bactericidal beta-lactam that binds penicillin-binding proteins and inhibits bacterial cell-wall (peptidoglycan) synthesis, leading to cell lysis. Its aminothiazolyl and carboxypropyl-oxyimino side chains confer enhanced stability against many Gram-negative beta-lactamases and broad activity including Pseudomonas aeruginosa.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to ceftazidime or other cephalosporins"],
+    "relative": ["History of immediate-type penicillin allergy (cross-reactivity risk)", "History of antibiotic-associated colitis", "Renal impairment (requires dose adjustment)"],
+    "monitor": ["Concomitant nephrotoxic drugs (aminoglycosides, potent diuretics)", "Prolonged therapy (superinfection/resistance)", "Patients with seizure risk in renal failure (neurotoxicity)"]
+  },
+  "preg": "Cephalosporins, including ceftazidime, are generally considered low risk; there are no adequate well-controlled studies. Use during pregnancy only if clearly needed.",
+  "lact": "Ceftazidime is excreted in human milk in low concentrations and is generally considered compatible with breastfeeding; observe the infant for diarrhea, thrush or rash.",
+  "renal": "Dosage must be reduced in renal impairment because ceftazidime is excreted almost entirely by the kidneys. After a 1 g loading dose, adjust by creatinine clearance (e.g. 1 g q12h for CrCl 31-50, q24h for 16-30, 500 mg q24h for 6-15, 500 mg q48h for <5 mL/min). Give a supplemental dose after each hemodialysis session.",
+  "hepatic": "No dosage adjustment is required in hepatic impairment; ceftazidime is eliminated renally as unchanged drug.",
+  "interactions": {
+    "major": ["No major contraindicated drug interactions established"],
+    "moderate": ["Aminoglycosides and potent diuretics (furosemide) - additive nephrotoxicity; monitor renal function", "Chloramphenicol - possible antagonism of bactericidal effect in vitro", "Probenecid - limited effect on ceftazidime (largely glomerular filtration)"],
+    "minor": ["Live typhoid/BCG vaccines - antibacterials may reduce efficacy", "Oral anticoagulants - cephalosporins may rarely prolong prothrombin time"],
+    "food": "Not applicable; administered parenterally.",
+    "alcohol": "No disulfiram-like reaction (ceftazidime lacks the N-methylthiotetrazole side chain).",
+    "diagnostics": "May cause a false-positive urine glucose test with copper-reduction methods and a positive direct Coombs test."
+  },
+  "se": {
+    "common": ["Injection-site phlebitis/inflammation", "Diarrhea", "Nausea", "Rash/pruritus", "Transient liver enzyme elevation", "Eosinophilia"],
+    "serious": ["Clostridioides difficile-associated diarrhea/pseudomembranous colitis", "Anaphylaxis", "Neurotoxicity (encephalopathy, myoclonus, seizures) in renal failure", "Hemolytic anemia"],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Agranulocytosis / thrombocytopenia", "Interstitial nephritis", "DRESS syndrome"],
+    "emergency": ["Anaphylaxis / severe angioedema", "Stevens-Johnson syndrome / TEN", "Severe pseudomembranous colitis", "Status epilepticus from neurotoxicity"]
+  },
+  "monitoring": [
+    "Renal function at baseline and during therapy, especially with concomitant nephrotoxins",
+    "Signs of hypersensitivity, particularly in penicillin-allergic patients",
+    "Complete blood count and liver enzymes on prolonged therapy",
+    "Neurologic status in renal impairment; evaluate persistent diarrhea for C. difficile"
+  ],
+  "counsel": [
+    "Report rash, hives, swelling or difficulty breathing immediately",
+    "Tell staff about any penicillin or cephalosporin allergy",
+    "Report severe or persistent diarrhea during or after treatment",
+    "Complete the full course of therapy"
+  ],
+  "pk": [
+    ["Onset", "Rapid bactericidal effect after IV dosing"],
+    ["Peak", "End of IV infusion; ~1 hour after IM"],
+    ["Half-life", "~1.8-2 hours (markedly prolonged in renal failure)"],
+    ["Duration", "Dosing every 8-12 hours maintains levels"],
+    ["Storage", "Store dry powder per label; refrigerate reconstituted solution and use within labeled time"]
+  ],
+  "pearls": [
+    "Reliable antipseudomonal coverage among cephalosporins; a workhorse for hospital Gram-negative infections",
+    "Dose strictly by renal function - accumulation can cause encephalopathy, myoclonus and seizures",
+    "No disulfiram-like reaction with alcohol (unlike cefoperazone/cefotetan)",
+    "Do not co-infuse with aminoglycosides; give in separate lines"
+  ],
+  "missed": "For scheduled inpatient dosing, give the missed dose as soon as possible and adjust the schedule so the interval to the next dose is appropriate; do not give two doses together. Maintain the prescribed dosing interval, especially in renal impairment.",
+  "overdose": "Overdose, particularly in renal impairment, can cause neurologic sequelae including encephalopathy, asterixis, myoclonus and seizures. Manage supportively; reduce or hold dosing and correct renal function. Ceftazidime is removed by hemodialysis and peritoneal dialysis, which can be used to lower serum levels.",
+  "refs": [
+    ["FDA Ceftazidime Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ceftazidime%22"],
+    ["FDA DailyMed - Ceftazidime", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

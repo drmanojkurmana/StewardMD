@@ -1,0 +1,105 @@
+{
+  "generic": "Interferon Alfa-2b",
+  "cls": "Recombinant type I interferon (immunomodulator)",
+  "pharm": "Antiviral / antineoplastic biologic response modifier",
+  "tags": ["interferon", "Intron A", "antiviral", "antineoplastic", "immunomodulator", "boxed warning"],
+  "quick": [
+    ["Adult dose", "Varies by indication (e.g., melanoma 20 MIU/m2 IV then 10 MIU/m2 SC; hepatitis 3 MIU SC 3x/wk)"],
+    ["Meal", "Hydrate well; bedtime dosing eases flu-like symptoms"],
+    ["Pregnancy", "Avoid; abortifacient in primates"],
+    ["Lactation", "Discontinue drug or nursing"],
+    ["Renal", "Caution if CrCl <50; monitor for toxicity"],
+    ["Hepatic", "Stop if hepatic decompensation occurs"],
+    ["Alcohol", "Avoid; worsens hepatic and depressive effects"],
+    ["Monitoring", "CBC, LFTs, TSH, mental status, ophthalmic, ECG"]
+  ],
+  "summary": "Interferon alfa-2b (Intron A) is a recombinant type I interferon used as an antiviral and antineoplastic immunomodulator for hairy cell leukemia, malignant melanoma (adjuvant), follicular lymphoma, AIDS-related Kaposi sarcoma, condylomata acuminata, chronic hepatitis B and C. It carries a BOXED WARNING for severe or fatal neuropsychiatric, autoimmune, ischemic, and infectious disorders. Dosing and route (SC, IM, IV, intralesional) are highly indication-specific, and treatment requires close clinical and laboratory monitoring.",
+  "indications": [
+    "Hairy cell leukemia",
+    "Malignant melanoma - adjuvant therapy after surgery in patients at high risk of recurrence",
+    "Follicular (non-Hodgkin) lymphoma - with anthracycline-containing chemotherapy",
+    "AIDS-related Kaposi sarcoma",
+    "Condylomata acuminata (intralesional)",
+    "Chronic hepatitis C (alone or with ribavirin)",
+    "Chronic hepatitis B"
+  ],
+  "dosage": [
+    {"c": "Hairy cell leukemia", "r": "Standard", "d": "2 million IU/m2 SC or IM three times weekly", "t": "3x/week", "n": "Up to 6 months; continue if responding"},
+    {"c": "Malignant melanoma (adjuvant)", "r": "Induction then maintenance", "d": "Induction 20 million IU/m2 IV on 5 consecutive days/week x4 weeks; maintenance 10 million IU/m2 SC three times weekly x48 weeks", "t": "Daily induction then 3x/week", "n": "High-dose regimen; dose-modify for toxicity"},
+    {"c": "Follicular lymphoma", "r": "With chemotherapy", "d": "5 million IU SC three times weekly for up to 18 months", "t": "3x/week", "n": "Combined with anthracycline-based chemo"},
+    {"c": "AIDS-related Kaposi sarcoma", "r": "Standard", "d": "30 million IU/m2 SC or IM three times weekly", "t": "3x/week", "n": "Continue until disease progression or maximal response"},
+    {"c": "Condylomata acuminata", "r": "Intralesional", "d": "1 million IU per lesion (up to 5 lesions per session)", "t": "Three times weekly on alternate days for 3 weeks", "n": "Inject into base of each wart"},
+    {"c": "Chronic hepatitis C", "r": "Standard", "d": "3 million IU SC or IM three times weekly (often with ribavirin)", "t": "3x/week", "n": "Largely superseded by direct-acting antivirals"},
+    {"c": "Chronic hepatitis B", "r": "Standard", "d": "30-35 million IU/week SC/IM (5 million IU daily or 10 million IU 3x/week)", "t": "Daily or 3x/week", "n": "Course 16 weeks"}
+  ],
+  "admin": [
+    "Reconstitute powder per labeling; check appropriate vial strength and route for the specific indication",
+    "Routes vary by indication: subcutaneous, intramuscular, intravenous infusion, or intralesional",
+    "Administer at bedtime and premedicate with acetaminophen to reduce flu-like symptoms",
+    "Ensure adequate hydration, especially during high-dose IV induction",
+    "Withhold/reduce dose or discontinue for severe neuropsychiatric, hematologic, hepatic or autoimmune toxicity per label",
+    "Use with caution; rotate SC injection sites"
+  ],
+  "moa": "Interferon alfa-2b binds type I interferon (IFNAR) receptors, activating the JAK-STAT pathway and inducing transcription of interferon-stimulated genes. This produces antiviral effects (inhibition of viral replication via enzymes such as 2'-5' oligoadenylate synthetase and protein kinase R), antiproliferative effects on tumor cells, and immunomodulation including enhanced macrophage phagocytosis, augmented NK-cell and T-cell cytotoxicity, and upregulation of MHC class I expression.",
+  "contra": {
+    "absolute": ["Hypersensitivity to interferon alfa-2b or any component", "Autoimmune hepatitis", "Decompensated (Child-Pugh B/C) hepatic disease", "History of severe psychiatric disorder when used with ribavirin (per combination labeling)"],
+    "relative": ["Pre-existing depression or psychiatric illness", "Autoimmune disorders (thyroid, lupus, psoriasis)", "Significant cardiac disease or arrhythmia", "Severe renal impairment", "Myelosuppression / cytopenias", "Pregnancy and partners of pregnant women (with ribavirin)"],
+    "monitor": ["Diabetes prone to ketoacidosis", "Coagulation disorders", "Seizure disorder / CNS dysfunction", "Pulmonary disease"]
+  },
+  "preg": "Avoid in pregnancy. Interferon alfa-2b has abortifacient (dose-related abortion) effects in pregnant rhesus monkeys. Use effective contraception. When combined with ribavirin, treatment is contraindicated in pregnancy and in male partners of pregnant women due to ribavirin's teratogenic/embryocidal risk.",
+  "lact": "It is not known whether interferon alfa-2b is excreted in human milk in clinically meaningful amounts. Because of the potential for serious adverse reactions in nursing infants, decide whether to discontinue nursing or the drug, considering importance to the mother.",
+  "renal": "Use with caution in renal impairment (CrCl <50 mL/min); reduced clearance can increase toxicity. Monitor closely and reduce dose or discontinue if severe adverse reactions occur. Interferon plus ribavirin requires special caution due to ribavirin accumulation.",
+  "hepatic": "Contraindicated in decompensated hepatic disease and autoimmune hepatitis. May cause hepatotoxicity and worsening of liver function; discontinue promptly if signs of hepatic decompensation (rising bilirubin, coagulopathy, encephalopathy) develop.",
+  "interactions": {
+    "major": ["Telbivudine - increased risk of peripheral neuropathy; avoid combination", "Myelosuppressive agents (e.g., zidovudine) - additive cytopenias", "Ribavirin - hemolytic anemia and teratogenicity (combination-specific risks)"],
+    "moderate": ["Theophylline - interferon inhibits CYP1A2, raising theophylline levels", "CNS depressants and narcotics - additive neuropsychiatric effects", "Hepatotoxic drugs - additive liver injury", "Live vaccines - reduced response / immunomodulation concern"],
+    "minor": ["May affect CYP-metabolized drugs by reducing hepatic CYP enzyme activity"],
+    "food": "No specific food interaction; maintain good hydration.",
+    "alcohol": "Avoid alcohol - worsens hepatotoxicity and depressive/neuropsychiatric symptoms.",
+    "diagnostics": "May cause neutropenia, thrombocytopenia, anemia, elevated transaminases/bilirubin, hypothyroidism or hyperthyroidism (abnormal TSH), and hypertriglyceridemia."
+  },
+  "se": {
+    "common": ["Flu-like syndrome (fever, chills, myalgia, fatigue, headache)", "Anorexia and weight loss", "Nausea, diarrhea", "Injection site reactions", "Alopecia", "Leukopenia and thrombocytopenia", "Depression and irritability"],
+    "serious": ["Severe depression and suicidal ideation", "Bone marrow suppression", "Hepatotoxicity / hepatic decompensation", "Thyroid dysfunction (hypo- or hyperthyroidism)", "Cardiomyopathy, arrhythmia, ischemia", "Autoimmune disorders (thyroiditis, lupus, vasculitis)"],
+    "rare": ["Retinopathy / vision loss", "Interstitial pneumonitis", "Colitis / GI bleeding", "Pancreatitis", "New-onset or worsening diabetes", "Peripheral neuropathy", "Seizures"],
+    "emergency": ["Suicidal behavior / acute psychosis", "Severe hypersensitivity / anaphylaxis", "Acute hepatic failure", "Myocardial infarction / serious arrhythmia", "Sepsis from severe neutropenia"]
+  },
+  "monitoring": [
+    "CBC with differential and platelets at baseline and periodically (weekly during high-dose induction)",
+    "Liver function tests and bilirubin",
+    "Thyroid function (TSH) at baseline and periodically",
+    "Neuropsychiatric status - screen for depression and suicidal ideation throughout therapy",
+    "Baseline and periodic ophthalmologic exam (especially with pre-existing eye disease)",
+    "ECG/cardiac assessment in patients with cardiac disease",
+    "Serum triglycerides and glucose periodically"
+  ],
+  "counsel": [
+    "Expect flu-like symptoms early on - take acetaminophen, dose at bedtime, and stay well hydrated",
+    "Report depressed mood, hopelessness or thoughts of self-harm immediately - this is a serious warning effect",
+    "Report shortness of breath, chest pain, vision changes, severe abdominal pain or signs of infection (fever, sore throat)",
+    "Use reliable contraception; avoid pregnancy during and after treatment (especially if combined with ribavirin)",
+    "Avoid alcohol; attend all blood test and follow-up appointments",
+    "Learn correct subcutaneous injection technique and rotate sites if self-administering"
+  ],
+  "pk": [
+    ["Onset", "Antiviral/biologic gene induction within hours"],
+    ["Peak", "SC/IM serum peak ~3-8 hours"],
+    ["Half-life", "Elimination ~2-3 hours (terminal ~6-7 h)"],
+    ["Duration", "Antiviral activity persists ~1-2 days; supports 3x/week dosing"],
+    ["Storage", "Refrigerate 2-8 C (36-46 F); do not freeze; protect from light"]
+  ],
+  "pearls": [
+    "BOXED WARNING: may cause or aggravate fatal or life-threatening neuropsychiatric, autoimmune, ischemic, and infectious disorders - monitor closely and discontinue for persistently severe signs/symptoms",
+    "Screen for and monitor depression/suicidality throughout therapy",
+    "Dosing, route and units (million IU) are strictly indication-specific - always verify the regimen",
+    "Premedicate with acetaminophen and dose at bedtime to blunt flu-like syndrome",
+    "Largely replaced by direct-acting antivirals for chronic hepatitis C and by pegylated interferons for many indications",
+    "Reversible thyroid dysfunction is common - check TSH at baseline and during therapy"
+  ],
+  "missed": "If a dose is missed, administer it as soon as remembered unless it is nearly time for the next scheduled dose; do not double the dose. For complex oncology regimens, contact the prescriber for guidance on rescheduling.",
+  "overdose": "No specific antidote. Overdose may intensify dose-related toxicities (severe flu-like symptoms, profound myelosuppression, hepatic and neuropsychiatric effects). Discontinue the drug and provide intensive supportive care with monitoring of blood counts, liver function and organ systems until recovery.",
+  "refs": [
+    ["FDA Intron A (interferon alfa-2b) Prescribing Information - DailyMed", "https://dailymed.nlm.nih.gov/dailymed/"],
+    ["FDA Drugs@FDA - Intron A (interferon alfa-2b, recombinant)", "https://www.accessdata.fda.gov/scripts/cder/daf/"]
+  ]
+}

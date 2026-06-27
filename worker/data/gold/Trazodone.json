@@ -1,0 +1,111 @@
+{
+  "generic": "Trazodone",
+  "cls": "Serotonin antagonist and reuptake inhibitor (SARI) antidepressant",
+  "pharm": "Triazolopyridine antidepressant that inhibits serotonin reuptake and antagonizes 5-HT2A/2C, alpha-1-adrenergic and H1 receptors; the combined serotonergic modulation underlies antidepressant effect, while H1/alpha-1 blockade explains its sedation and orthostatic hypotension.",
+  "tags": ["Antidepressant", "SARI", "Oral", "Boxed warning: suicidality"],
+  "quick": [
+    ["Adult dose", "Start 150 mg/day in divided doses; increase by 50 mg every 3-4 days; max 400 mg/day outpatient"],
+    ["Meal", "Take shortly after a meal or light snack"],
+    ["Pregnancy", "Use only if benefit outweighs risk; limited data"],
+    ["Lactation", "Small amounts in milk; monitor infant for sedation/feeding"],
+    ["Renal", "Use with caution; limited data"],
+    ["Hepatic", "Use with caution; extensively hepatically metabolized"],
+    ["Alcohol", "Avoid (additive CNS depression; overdose deaths reported)"],
+    ["Monitoring", "Suicidality/clinical worsening, mood, BP, QT in at-risk patients"]
+  ],
+  "summary": "Trazodone is a serotonin antagonist and reuptake inhibitor (SARI) approved for major depressive disorder in adults. It carries the antidepressant class boxed warning for increased suicidal thoughts and behaviors in pediatric and young adult patients. Sedation, orthostatic hypotension and rare priapism are characteristic; it is contraindicated with MAOIs and prolongs the QT interval.",
+  "indications": [
+    "Major depressive disorder (MDD) in adults",
+    "Not approved for use in pediatric patients"
+  ],
+  "dosage": [
+    {"c": "Major depressive disorder", "r": "Adults - initial", "d": "150 mg/day in divided doses", "t": "Daily; take after a meal", "n": "Give larger portion at bedtime if drowsy"},
+    {"c": "Major depressive disorder", "r": "Adults - titration", "d": "Increase by 50 mg/day every 3-4 days", "t": "As tolerated", "n": "Outpatient max 400 mg/day"},
+    {"c": "Major depressive disorder", "r": "Severely depressed inpatients", "d": "Up to but not exceeding 600 mg/day in divided doses", "t": "Daily", "n": "Inpatient only"},
+    {"c": "Discontinuation", "r": "Adults", "d": "Taper gradually", "t": "When stopping", "n": "Reduces discontinuation symptoms"}
+  ],
+  "admin": [
+    "Take shortly after a meal or light snack to reduce dizziness/lightheadedness and increase absorption",
+    "Swallow whole or break in half along the score line; do not chew or crush",
+    "Give a larger portion of the daily dose at bedtime if drowsiness is a problem",
+    "Screen for bipolar disorder before starting",
+    "Taper gradually rather than stopping abruptly",
+    "Do not start within 14 days of an MAOI"
+  ],
+  "moa": "The antidepressant mechanism is not fully understood but relates to enhancement of central serotonergic activity. Trazodone inhibits neuronal reuptake of serotonin and is a potent antagonist at 5-HT2A receptors, with additional antagonism at 5-HT2B/2C, alpha-1 and alpha-2C adrenergic receptors and partial agonism at 5-HT1A. Alpha-1-adrenergic blockade contributes to postural hypotension, and antihistaminic activity to sedation.",
+  "contra": {
+    "absolute": [
+      "Concomitant use of MAOIs, or within 14 days of stopping an MAOI (including linezolid or IV methylene blue) - serotonin syndrome risk"
+    ],
+    "relative": [
+      "Known QT prolongation or use of other QT-prolonging drugs",
+      "Recent myocardial infarction",
+      "History of priapism or predisposing conditions",
+      "Hepatic or renal impairment"
+    ],
+    "monitor": [
+      "Suicidal ideation and clinical worsening",
+      "Blood pressure (orthostatic)",
+      "ECG/QT in patients at risk"
+    ]
+  },
+  "preg": "Limited human data. Use during pregnancy only if the potential benefit justifies the potential risk; consider the risks of untreated maternal depression. Neonatal adaptation symptoms may occur with third-trimester exposure to serotonergic antidepressants.",
+  "lact": "Trazodone is excreted in breast milk in small amounts. Weigh the benefits of breastfeeding against maternal need and monitor the infant for sedation and poor feeding.",
+  "renal": "Limited data; use with caution in renal impairment and monitor for adverse effects.",
+  "hepatic": "Trazodone is extensively metabolized by the liver (CYP3A4 to active metabolite mCPP); less than 1% is excreted unchanged. Use with caution in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "MAOIs including linezolid and IV methylene blue (contraindicated; serotonin syndrome)",
+      "Other serotonergic drugs - SSRIs, SNRIs, triptans, tramadol (serotonin syndrome)",
+      "QT-prolonging drugs and class IA/III antiarrhythmics (additive QT prolongation)",
+      "Strong CYP3A4 inhibitors - ritonavir, ketoconazole (increase trazodone levels; reduce dose)"
+    ],
+    "moderate": [
+      "CNS depressants and alcohol (additive sedation/respiratory depression)",
+      "CYP3A4 inducers - carbamazepine (lower trazodone levels)",
+      "Antiplatelets/anticoagulants - aspirin, NSAIDs, warfarin (increased bleeding)",
+      "Digoxin and phenytoin (may increase their serum levels)",
+      "Antihypertensives (additive hypotension)"
+    ],
+    "minor": [],
+    "food": "Take shortly after food; food increases the amount absorbed and delays/reduces peak concentration.",
+    "alcohol": "Avoid; enhances CNS depression and overdose deaths have occurred with combined ingestion.",
+    "diagnostics": "Monitor PT/INR with warfarin; monitor ECG where QT risk exists."
+  },
+  "se": {
+    "common": ["Drowsiness/sedation", "Dizziness", "Dry mouth", "Headache", "Blurred vision", "Nausea/vomiting", "Fatigue", "Orthostatic hypotension"],
+    "serious": ["Serotonin syndrome", "QT prolongation and cardiac arrhythmias", "Orthostatic hypotension with syncope", "Priapism (painful, prolonged erection)", "Activation of mania/hypomania", "Increased bleeding risk", "Suicidal thoughts and behaviors (boxed)"],
+    "rare": ["Hyponatremia/SIADH", "Hepatotoxicity", "Severe hypersensitivity reactions"],
+    "emergency": ["Priapism lasting over a few hours (urologic emergency)", "Serotonin syndrome (hyperthermia, rigidity, agitation)", "Syncope", "Suicidal crisis"]
+  },
+  "monitoring": ["Suicidal ideation and clinical worsening, especially early and after dose changes", "Mood and screen for bipolar disorder", "Blood pressure for orthostatic hypotension", "ECG/QT in patients with cardiac risk", "Signs of bleeding with antiplatelets/anticoagulants"],
+  "counsel": [
+    "Take shortly after a meal; drowsiness is common - take a larger share at bedtime if needed",
+    "Rise slowly from sitting or lying to avoid dizziness/fainting",
+    "Seek immediate care for a painful or prolonged erection (priapism)",
+    "Watch for new or worsening depression, agitation, or suicidal thoughts and report them",
+    "Avoid alcohol and other sedatives",
+    "Do not stop abruptly; the dose should be tapered",
+    "Tell your doctor about all medicines, especially other antidepressants and MAOIs"
+  ],
+  "pk": [
+    ["Onset", "Sleep effect within hours; antidepressant effect over 1-2 weeks or more"],
+    ["Peak", "About 1 hour fasting; about 2 hours with food"],
+    ["Half-life", "Biphasic; terminal elimination approximately 5-9 hours (active metabolite mCPP longer)"],
+    ["Duration", "Divided daily dosing"],
+    ["Storage", "Store at controlled room temperature"]
+  ],
+  "pearls": [
+    "Boxed warning: increased suicidal thoughts/behaviors in pediatric and young adult patients - monitor closely",
+    "Marked sedation (H1 and alpha-1 blockade) makes it widely used off-label for insomnia at low doses",
+    "Priapism is a characteristic emergency - counsel every male patient",
+    "Contraindicated with MAOIs; prolongs QT; avoid with other QT-prolonging drugs",
+    "Take after food and rise slowly to limit orthostatic hypotension"
+  ],
+  "missed": "Take the missed dose as soon as remembered, but if it is almost time for the next dose, skip it and resume the regular schedule. Do not double up. Bedtime doses missed may simply be skipped.",
+  "overdose": "No specific antidote; consider multiple-drug involvement. Reported features include drowsiness, vomiting, priapism, respiratory arrest, seizures and QT prolongation; deaths have occurred with concurrent CNS depressants. Provide supportive care, cardiac monitoring, and contact a poison control center.",
+  "refs": [
+    ["FDA Prescribing Information - trazodone hydrochloride (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trazodone%22"],
+    ["DailyMed - Trazodone", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=trazodone"]
+  ]
+}

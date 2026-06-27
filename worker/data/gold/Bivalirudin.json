@@ -1,0 +1,195 @@
+{
+  "generic": "Bivalirudin",
+  "cls": "Anticoagulant - direct thrombin inhibitor (synthetic hirudin analogue)",
+  "pharm": "Parenteral direct thrombin inhibitor",
+  "tags": [
+    "anticoagulant",
+    "direct thrombin inhibitor",
+    "PCI",
+    "HIT",
+    "cardiology",
+    "bleeding risk"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "PCI: 0.75 mg/kg IV bolus, then 1.75 mg/kg/h infusion for the procedure"
+    ],
+    [
+      "Meal",
+      "Not applicable - IV use"
+    ],
+    [
+      "Pregnancy",
+      "No human data; use only if clearly needed"
+    ],
+    [
+      "Lactation",
+      "Unknown if excreted in milk; caution"
+    ],
+    [
+      "Renal",
+      "Reduce infusion to 1 mg/kg/h if CrCl <30 mL/min; monitor; no bolus change"
+    ],
+    [
+      "Hepatic",
+      "No dose adjustment expected (not hepatically metabolized)"
+    ],
+    [
+      "Alcohol",
+      "No direct interaction; relevant only to bleeding risk"
+    ],
+    [
+      "Monitoring",
+      "ACT (5 min after bolus); signs of bleeding; hemoglobin/hematocrit"
+    ]
+  ],
+  "summary": "Bivalirudin is a synthetic, reversible direct thrombin inhibitor used as an anticoagulant in patients undergoing percutaneous coronary intervention (PCI), including those with heparin-induced thrombocytopenia (HIT/HITTS). Given as an IV bolus plus infusion, it has a short half-life and a predictable, reversible effect. The principal risk is bleeding. It has been studied only with concomitant aspirin.",
+  "indications": [
+    "Anticoagulation in patients undergoing percutaneous coronary intervention (PCI)",
+    "PCI in patients with, or at risk of, heparin-induced thrombocytopenia (HIT) and HIT with thrombosis syndrome (HITTS)"
+  ],
+  "dosage": [
+    {
+      "c": "PCI",
+      "r": "Adult",
+      "d": "0.75 mg/kg IV bolus, then 1.75 mg/kg/h IV infusion",
+      "t": "Bolus then continuous infusion for duration of PCI",
+      "n": "Given with aspirin; consider extending infusion up to 4 h in STEMI"
+    },
+    {
+      "c": "PCI - supplemental bolus",
+      "r": "Adult",
+      "d": "Additional 0.3 mg/kg IV bolus if needed",
+      "t": "If ACT inadequate 5 min after first bolus",
+      "n": "Check ACT 5 min after bolus"
+    },
+    {
+      "c": "PCI - renal impairment (CrCl <30 mL/min)",
+      "r": "Adult",
+      "d": "Bolus unchanged 0.75 mg/kg; reduce infusion to 1 mg/kg/h",
+      "t": "Bolus then reduced infusion",
+      "n": "Monitor ACT; dialysis patients clear ~25% by HD"
+    }
+  ],
+  "admin": [
+    "Reconstitute and dilute per labeling (in 5% dextrose or 0.9% sodium chloride) to 0.5 or 5 mg/mL",
+    "Administer the bolus IV, then begin the weight-based infusion immediately",
+    "Always given with aspirin; with or without a P2Y12 inhibitor per protocol",
+    "Check an activated clotting time (ACT) 5 minutes after the bolus and give a supplemental bolus if needed",
+    "Discard unused reconstituted solution; do not mix with other drugs of incompatible pH"
+  ],
+  "moa": "Bivalirudin is a specific, reversible direct thrombin inhibitor. It binds both the catalytic active site and the anion-binding exosite of fluid-phase and clot-bound thrombin, inhibiting thrombin-mediated conversion of fibrinogen to fibrin, activation of factors V, VIII and XIII, and thrombin-induced platelet activation. Inhibition is transient because thrombin slowly cleaves the bivalirudin molecule, restoring thrombin activity.",
+  "contra": {
+    "absolute": [
+      "Active major bleeding",
+      "Known hypersensitivity (e.g., anaphylaxis) to bivalirudin or its components"
+    ],
+    "relative": [
+      "Severe renal impairment (reduce infusion, increased bleeding risk)",
+      "Recent surgery/trauma, bleeding diathesis, severe hypertension",
+      "Concomitant anticoagulants/antiplatelets beyond protocol"
+    ],
+    "monitor": [
+      "Activated clotting time (ACT)",
+      "Hemoglobin/hematocrit and signs of bleeding",
+      "Renal function"
+    ]
+  },
+  "preg": "There are no adequate human data. Animal reproduction studies at up to several times the human dose revealed no fetal harm, but risk cannot be excluded. Use during pregnancy only if clearly needed.",
+  "lact": "It is not known whether bivalirudin is excreted in human milk. Exercise caution; consider the short half-life and the importance of the drug to the mother.",
+  "renal": "Clearance is reduced in renal impairment. No change to the bolus, but reduce the infusion to 1 mg/kg/h when CrCl is below 30 mL/min and monitor ACT closely. Approximately 25% is removed by hemodialysis.",
+  "hepatic": "No dose adjustment is expected; bivalirudin is not metabolized by hepatic enzymes (cleared by proteolysis and renal mechanisms).",
+  "interactions": {
+    "major": [
+      "Other anticoagulants (heparin, warfarin, DOACs, thrombolytics) - additive bleeding risk; avoid overlap",
+      "GP IIb/IIIa inhibitors and combined antiplatelet therapy - increased bleeding"
+    ],
+    "moderate": [
+      "Antiplatelet agents (aspirin, P2Y12 inhibitors) - intended combination but additive bleeding risk",
+      "NSAIDs - increased bleeding/GI risk"
+    ],
+    "minor": [
+      "SSRIs/SNRIs (theoretical increased bleeding)"
+    ],
+    "food": "Not applicable",
+    "alcohol": "No direct interaction; heavy use adds bleeding/GI risk",
+    "diagnostics": "Prolongs ACT, aPTT, PT/INR and thrombin time; INR not reliable for monitoring"
+  },
+  "se": {
+    "common": [
+      "Bleeding (access-site, minor)",
+      "Back pain",
+      "Nausea",
+      "Hypotension",
+      "Headache"
+    ],
+    "serious": [
+      "Major hemorrhage (retroperitoneal, GI, intracranial)",
+      "Acute stent thrombosis (notably in primary PCI for STEMI)",
+      "Thrombocytopenia"
+    ],
+    "rare": [
+      "Hypersensitivity / anaphylaxis",
+      "Coronary artery thrombosis during diagnostic angiography without anticoagulant continuation"
+    ],
+    "emergency": [
+      "Life-threatening hemorrhage",
+      "Anaphylaxis",
+      "Acute stent thrombosis / abrupt vessel closure"
+    ]
+  },
+  "monitoring": [
+    "Activated clotting time (ACT) 5 min after bolus during PCI",
+    "Clinical signs of bleeding and access site assessment",
+    "Hemoglobin, hematocrit, platelet count",
+    "Renal function (to guide infusion rate)",
+    "Cardiac status for ischemia/stent thrombosis"
+  ],
+  "counsel": [
+    "This blood thinner is given during your cardiac (angioplasty) procedure to prevent clots",
+    "The main risk is bleeding - report any unusual bruising, bleeding, black stools, or blood in urine",
+    "Tell the team about any other blood thinners, recent surgery, or bleeding problems",
+    "Pressure may be applied at the catheter site afterward to prevent bleeding"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Immediate anticoagulant effect after IV bolus"
+    ],
+    [
+      "Peak",
+      "Steady-state plasma concentration within minutes of starting infusion"
+    ],
+    [
+      "Half-life",
+      "About 25 minutes in patients with normal renal function (longer in renal impairment)"
+    ],
+    [
+      "Duration",
+      "Short - coagulation parameters return toward baseline ~1 hour after stopping infusion"
+    ],
+    [
+      "Storage",
+      "Store lyophilized vials at 20-25 C (controlled room temperature); reconstituted/diluted solutions per label, refrigerate up to 24 h"
+    ]
+  ],
+  "pearls": [
+    "Preferred anticoagulant for PCI in patients with heparin-induced thrombocytopenia (HIT/HITTS)",
+    "Predictable, reversible effect with short half-life - no routine reversal agent needed; effect dissipates in ~1 hour",
+    "In primary PCI for STEMI there is a small increase in early (acute) stent thrombosis - a post-PCI infusion may mitigate this",
+    "Only studied with concomitant aspirin; INR is not a valid monitoring test"
+  ],
+  "missed": "Not applicable - administered as a single procedural bolus and infusion in a monitored setting, not as scheduled maintenance dosing.",
+  "overdose": "Overdose (often from failure to reduce the infusion in renal dysfunction) increases the risk of bleeding, including fatal hemorrhage. There is no specific antidote. Discontinue immediately, monitor closely for bleeding, and provide supportive care; approximately 25% is removed by hemodialysis. Use blood products/transfusion as needed for serious bleeding.",
+  "refs": [
+    [
+      "FDA Prescribing Information - Bivalirudin for Injection",
+      "https://www.accessdata.fda.gov/scripts/cder/daf/"
+    ],
+    [
+      "openFDA Drug Label - Bivalirudin",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bivalirudin%22"
+    ]
+  ]
+}

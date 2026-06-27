@@ -1,0 +1,99 @@
+{
+  "generic": "Olanzapine",
+  "cls": "Atypical (second-generation) antipsychotic",
+  "pharm": "Thienobenzodiazepine; antagonist at dopamine D2 and serotonin 5-HT2A receptors",
+  "tags": ["Rx only", "Metabolic monitoring required", "Boxed warning: elderly dementia psychosis", "Sedating", "Weight gain risk"],
+  "quick": [
+    ["Adult dose", "Schizophrenia: 5-10 mg once daily, target 10 mg/day; max 20 mg/day"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Use only if needed; 3rd-trimester EPS/withdrawal risk"],
+    ["Lactation", "Caution; monitor infant for sedation"],
+    ["Renal", "No initial adjustment needed"],
+    ["Hepatic", "Start 5 mg; caution, monitor LFTs"],
+    ["Alcohol", "Avoid (additive sedation, orthostasis)"],
+    ["Monitoring", "Weight, BMI, glucose/HbA1c, lipids, BP"]
+  ],
+  "summary": "Olanzapine is an atypical antipsychotic for schizophrenia and bipolar I disorder. It is effective but commonly causes weight gain, hyperglycemia, and dyslipidemia, requiring routine metabolic monitoring. It carries a boxed warning for increased mortality in elderly patients with dementia-related psychosis.",
+  "indications": [
+    "Schizophrenia (adults and adolescents 13-17 years)",
+    "Bipolar I disorder, acute manic or mixed episodes (monotherapy or with lithium/valproate)",
+    "Bipolar I maintenance",
+    "Treatment-resistant depression and depressive episodes in bipolar I (in combination with fluoxetine)",
+    "Agitation associated with schizophrenia or bipolar I mania (IM, short-acting)"
+  ],
+  "dosage": [
+    {"c": "Schizophrenia (adult)", "r": "Oral", "d": "Start 5-10 mg once daily; target 10 mg/day within several days; adjust in 5 mg increments at intervals ≥1 week", "t": "Once daily", "n": "Maximum 20 mg/day"},
+    {"c": "Schizophrenia (adolescent 13-17 yr)", "r": "Oral", "d": "Start 2.5-5 mg once daily; target 10 mg/day", "t": "Once daily", "n": "Greater weight gain than adults; max 20 mg/day"},
+    {"c": "Bipolar I mania (adult)", "r": "Oral", "d": "Monotherapy: start 10-15 mg once daily; with lithium/valproate: start 10 mg once daily", "t": "Once daily", "n": "Maximum 20 mg/day"},
+    {"c": "Agitation (adult)", "r": "IM (short-acting)", "d": "10 mg IM; consider 5-7.5 mg in elderly/sensitive patients; may repeat at 2 h and 4 h", "t": "PRN", "n": "Max 30 mg/day IM; do not give IV/SC; avoid combining IM with parenteral benzodiazepine"},
+    {"c": "Debilitated / hypotension-prone / hepatic / elderly", "r": "Oral", "d": "Start 5 mg once daily", "t": "Once daily", "n": "Titrate cautiously"}
+  ],
+  "admin": [
+    "May give without regard to meals, usually once daily",
+    "Orally disintegrating tablet (Zyprexa Zydis): place on tongue, dissolves with saliva, no water needed",
+    "Obtain baseline weight, glucose, lipids, and BP before starting",
+    "For IM short-acting: reconstitute, give deep IM, observe for sedation/hypotension; never combine IM olanzapine with IM benzodiazepine",
+    "Long-acting injection (pamoate) requires 3-hour post-injection observation for delirium/sedation syndrome"
+  ],
+  "moa": "Antagonizes dopamine D2 receptors in mesolimbic pathways (reducing positive psychotic symptoms) and serotonin 5-HT2A receptors (contributing to lower extrapyramidal risk and effect on negative symptoms). Also blocks histamine H1 (sedation, weight gain), muscarinic, and alpha-1 adrenergic (orthostasis) receptors.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to olanzapine"],
+    "relative": ["Elderly with dementia-related psychosis (boxed warning - increased mortality and stroke)", "Diabetes / hyperglycemia risk", "Cardiovascular or cerebrovascular disease, hypotension", "Seizure disorder", "Narrow-angle glaucoma, prostatic hypertrophy, paralytic ileus (anticholinergic)", "Hepatic impairment"],
+    "monitor": ["Metabolic parameters (weight, glucose, lipids)", "Neuroleptic malignant syndrome", "Tardive dyskinesia", "Orthostatic hypotension", "Suicidality in young adults"]
+  },
+  "preg": "Use only if clearly needed. Third-trimester exposure may cause neonatal extrapyramidal and withdrawal symptoms (agitation, hypertonia, feeding difficulty, respiratory distress). Enroll in the National Pregnancy Registry for Atypical Antipsychotics.",
+  "lact": "Excreted in breast milk (relative infant dose ~1-2%). Use with caution; monitor breastfed infant for somnolence, irritability, poor feeding, and developmental milestones.",
+  "renal": "No initial dosage adjustment required; not significantly removed by dialysis. Use standard titration with clinical monitoring.",
+  "hepatic": "Transient transaminase elevations common. Start at 5 mg in hepatic impairment, titrate cautiously, and monitor liver function; avoid in active or severe liver disease.",
+  "interactions": {
+    "major": ["CNS depressants / alcohol (additive sedation, respiratory depression)", "IM olanzapine + parenteral benzodiazepine (excessive sedation, cardiorespiratory depression)", "Antihypertensives (additive hypotension)", "Dopamine agonists / levodopa (antagonized)"],
+    "moderate": ["CYP1A2 inducers - smoking, carbamazepine (reduce levels, may need higher dose)", "CYP1A2 inhibitors - fluvoxamine, ciprofloxacin (increase levels, reduce dose)", "Anticholinergics (additive effects, ileus)", "QT-prolonging drugs"],
+    "minor": ["Activated charcoal reduces oral absorption", "Valproate (mild PK interaction)"],
+    "food": "No clinically significant food effect; smoking (not food) markedly lowers levels via CYP1A2 induction",
+    "alcohol": "Avoid; potentiates sedation and orthostatic hypotension",
+    "diagnostics": "May elevate prolactin, fasting glucose, HbA1c, lipids, and hepatic transaminases"
+  },
+  "se": {
+    "common": ["Weight gain", "Somnolence / sedation", "Increased appetite", "Dizziness", "Dry mouth", "Constipation", "Orthostatic hypotension", "Akathisia"],
+    "serious": ["Hyperglycemia / new-onset or worsening diabetes, ketoacidosis", "Dyslipidemia", "Neuroleptic malignant syndrome", "Tardive dyskinesia", "Seizures", "Severe neutropenia / agranulocytosis"],
+    "rare": ["DRESS (drug reaction with eosinophilia and systemic symptoms)", "Hepatotoxicity", "Pancreatitis", "Post-injection delirium/sedation syndrome (LAI form)", "Venous thromboembolism"],
+    "emergency": ["Neuroleptic malignant syndrome (hyperthermia, rigidity, autonomic instability)", "Diabetic ketoacidosis / hyperosmolar coma", "Severe hypersensitivity / DRESS", "Stroke in elderly dementia patients"]
+  },
+  "monitoring": [
+    "Weight and BMI at baseline, 4, 8, 12 weeks, then quarterly",
+    "Fasting glucose / HbA1c at baseline, 12 weeks, then annually",
+    "Fasting lipid panel at baseline, 12 weeks, then every 5 years (sooner if abnormal)",
+    "Blood pressure and orthostatic symptoms",
+    "Extrapyramidal symptoms, akathisia, and tardive dyskinesia (AIMS)",
+    "Liver function tests; CBC if neutropenia risk",
+    "Prolactin if symptomatic"
+  ],
+  "counsel": [
+    "Expect possible weight gain; follow diet, exercise, and metabolic monitoring",
+    "Report excessive thirst, urination, hunger, or weakness (high blood sugar)",
+    "Rise slowly to avoid dizziness; may cause drowsiness - caution with driving",
+    "Avoid alcohol",
+    "Do not stop abruptly; discuss changes with prescriber",
+    "Tell clinician about pregnancy, breastfeeding, smoking status, and all medications"
+  ],
+  "pk": [
+    ["Onset", "Antipsychotic effect over days to weeks; sedation within hours"],
+    ["Peak", "~6 hours oral; 15-45 min IM"],
+    ["Half-life", "~21-54 hours (mean ~30 h)"],
+    ["Duration", "Once-daily dosing supported"],
+    ["Storage", "20-25°C (68-77°F); protect from light and moisture; ODT keep in sealed blister"]
+  ],
+  "pearls": [
+    "Among the most weight-gain and metabolically adverse atypical antipsychotics - counsel and monitor proactively",
+    "Smoking induces CYP1A2 and lowers levels; smoking cessation can raise plasma concentrations and cause toxicity",
+    "Highly sedating - useful when sedation is desirable but limits daytime dosing",
+    "Olanzapine/fluoxetine combination indicated for treatment-resistant and bipolar depression",
+    "Avoid in elderly dementia psychosis due to increased mortality (boxed warning)"
+  ],
+  "missed": "Take the missed oral dose as soon as remembered; skip it if it is almost time for the next dose. Do not double up. Maintain consistent once-daily timing.",
+  "overdose": "Symptoms include marked sedation, slurred speech, tachycardia or bradycardia, hypotension, anticholinergic effects, extrapyramidal signs, and in severe cases coma, respiratory depression, and arrhythmia. Treat with airway support, IV fluids and sympathomimetics for hypotension (avoid epinephrine/dopamine due to beta-stimulation worsening hypotension), and supportive care; activated charcoal if early. No specific antidote.",
+  "refs": [
+    ["FDA Label - Olanzapine (DailyMed/openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olanzapine%22"],
+    ["DailyMed - Olanzapine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=olanzapine"]
+  ]
+}

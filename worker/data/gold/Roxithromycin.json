@@ -1,0 +1,92 @@
+{
+  "generic": "Roxithromycin",
+  "cls": "Macrolide antibacterial",
+  "pharm": "Antibacterial (semisynthetic 14-membered macrolide)",
+  "tags": ["macrolide", "respiratory infection", "atypical pathogens", "skin infection", "not FDA-approved"],
+  "quick": [
+    ["Adult dose", "150 mg PO twice daily or 300 mg once daily"],
+    ["Meal", "Take before food (empty stomach)"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Caution; small amounts excreted in milk"],
+    ["Renal", "No adjustment in mild-moderate impairment"],
+    ["Hepatic", "Reduce dose / caution in severe impairment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "LFTs on prolonged use; QT if at risk"]
+  ],
+  "summary": "Roxithromycin is a semisynthetic 14-membered macrolide antibacterial with improved acid stability and tissue penetration over erythromycin. It is active against Gram-positive cocci, atypical respiratory pathogens (Mycoplasma, Chlamydia, Legionella) and some Gram-negatives, and is used for respiratory, ENT, skin and genital infections. Usual adult dose is 150 mg twice daily or 300 mg once daily before food. Not FDA-approved.",
+  "indications": [
+    "Upper respiratory tract infections (pharyngitis, tonsillitis, sinusitis)",
+    "Lower respiratory tract infections (bronchitis, community-acquired pneumonia including atypical pathogens)",
+    "Skin and soft tissue infections",
+    "Genital infections (non-gonococcal urethritis, chlamydial infection)",
+    "Otitis media"
+  ],
+  "dosage": [
+    {"c": "Respiratory/ENT infection (adult)", "r": "Standard", "d": "150 mg twice daily or 300 mg once daily", "t": "BID or OD", "n": "Before food"},
+    {"c": "Skin/soft tissue infection (adult)", "r": "Standard", "d": "150 mg twice daily", "t": "Twice daily", "n": "Typical course 5-10 days"},
+    {"c": "Non-gonococcal urethritis", "r": "Standard", "d": "150 mg twice daily", "t": "Twice daily", "n": "Course per pathogen"},
+    {"c": "Children (>40 kg / per SmPC)", "r": "Weight-based", "d": "5-8 mg/kg/day in 2 divided doses", "t": "Twice daily", "n": "Use pediatric suspension per local label"},
+    {"c": "Severe hepatic impairment", "r": "Adjusted", "d": "Consider 150 mg once daily", "t": "Once daily", "n": "Monitor"}
+  ],
+  "admin": [
+    "Take before meals, ideally on an empty stomach (15-30 minutes before food)",
+    "Swallow tablets whole with water",
+    "Complete the full prescribed course even if symptoms improve",
+    "Space dosing evenly to maintain tissue concentrations"
+  ],
+  "moa": "Roxithromycin binds reversibly to the 50S ribosomal subunit of susceptible bacteria, blocking the peptidyl transferase / translocation step of protein synthesis and inhibiting bacterial growth. It is predominantly bacteriostatic and concentrates well within phagocytes and tissues, contributing to activity against intracellular and atypical pathogens.",
+  "contra": {
+    "absolute": ["Hypersensitivity to roxithromycin or other macrolides", "Co-administration with ergot alkaloids (ergotamine, dihydroergotamine)", "Concomitant drugs that prolong QT where macrolide adds risk (e.g. with terfenadine/astemizole historically)"],
+    "relative": ["Severe hepatic impairment", "Congenital or acquired QT prolongation", "Concomitant CYP3A4 substrates with narrow index"],
+    "monitor": ["Concomitant warfarin", "Concomitant statins (myopathy risk)", "Electrolyte disturbance (hypokalemia, hypomagnesemia)"]
+  },
+  "preg": "Not FDA-approved; manufacturer SmPC advises use during pregnancy only if clearly necessary as adequate controlled human data are limited. Avoid in the first trimester unless benefit outweighs risk.",
+  "lact": "Small amounts are excreted in breast milk. Use with caution; consider stopping breastfeeding or the drug depending on importance to the mother.",
+  "renal": "No dosage adjustment is generally required in mild to moderate renal impairment as elimination is predominantly biliary/fecal. Use with caution in severe impairment.",
+  "hepatic": "Use with caution in hepatic impairment as the drug is largely eliminated by the liver. In severe impairment a reduced dose (e.g. 150 mg once daily) and monitoring of liver function are advised.",
+  "interactions": {
+    "major": ["Ergot alkaloids - risk of ergotism; contraindicated", "Terfenadine/astemizole/cisapride - QT prolongation and arrhythmia", "Other QT-prolonging drugs - additive arrhythmia risk"],
+    "moderate": ["Warfarin - increased anticoagulant effect; monitor INR", "Statins (simvastatin, atorvastatin) - increased myopathy/rhabdomyolysis risk", "Ciclosporin - increased levels; monitor", "Theophylline - modest rise in levels", "Midazolam - increased sedative effect"],
+    "minor": ["Digoxin - possible increased absorption", "Disopyramide - increased plasma levels"],
+    "food": "Food reduces absorption; take before meals.",
+    "alcohol": "No clinically significant interaction reported.",
+    "diagnostics": "No characteristic laboratory test interference; may transiently raise liver enzymes."
+  },
+  "se": {
+    "common": ["Nausea", "Abdominal pain", "Diarrhea", "Vomiting", "Headache", "Dizziness"],
+    "serious": ["Hepatotoxicity (cholestatic hepatitis)", "QT prolongation / ventricular arrhythmia", "Clostridioides difficile-associated colitis", "Pancreatitis"],
+    "rare": ["Stevens-Johnson syndrome", "Angioedema", "Eosinophilia", "Taste/smell disturbance", "Reversible hearing loss"],
+    "emergency": ["Anaphylaxis", "Torsades de pointes", "Severe cutaneous reaction (SJS/TEN)", "Fulminant hepatic failure"]
+  },
+  "monitoring": [
+    "Clinical response and resolution of infection",
+    "Liver function tests with prolonged therapy or pre-existing liver disease",
+    "ECG/QT and electrolytes in patients with cardiac risk factors",
+    "Signs of superinfection or C. difficile colitis with persistent diarrhea"
+  ],
+  "counsel": [
+    "Take before food on an empty stomach",
+    "Complete the full course; do not stop early",
+    "Report palpitations, fainting, severe diarrhea or yellowing of skin/eyes",
+    "Tell your doctor about all other medicines, especially ergot drugs and statins"
+  ],
+  "pk": [
+    ["Onset", "Antibacterial effect within hours"],
+    ["Peak", "Plasma ~1.5-2 hours"],
+    ["Half-life", "~12 hours (allows once/twice daily dosing)"],
+    ["Duration", "Tissue levels persist; dosing 12-24 hourly"],
+    ["Storage", "Store below 25 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved; pending clinical review. Widely licensed via EMA/SmPC and used per BNF.",
+    "Longer half-life than erythromycin allows once- or twice-daily dosing with better GI tolerance",
+    "Good intracellular and tissue penetration favors atypical respiratory pathogens",
+    "Lower CYP3A4 inhibition than erythromycin/clarithromycin but interactions still occur"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and continue the regular schedule; do not double the dose.",
+  "overdose": "No specific antidote. Overdose may cause gastrointestinal upset and, with very high exposure, QT prolongation. Manage with supportive and symptomatic care, gastric decontamination if recent and large ingestion, and cardiac monitoring where indicated.",
+  "refs": [
+    ["EMA / national SmPC - Roxithromycin (representative)", "https://www.ema.europa.eu/"],
+    ["British National Formulary (BNF) - Macrolides", "https://bnf.nice.org.uk/"]
+  ]
+}

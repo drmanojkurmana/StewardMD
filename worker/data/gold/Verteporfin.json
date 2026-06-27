@@ -1,0 +1,92 @@
+{
+  "generic": "Verteporfin",
+  "cls": "Photosensitizing agent (benzoporphyrin derivative)",
+  "pharm": "Photodynamic therapy agent for ocular neovascularization",
+  "tags": ["photodynamic therapy", "verteporfin", "age-related macular degeneration", "choroidal neovascularization", "ophthalmic"],
+  "quick": [
+    ["Adult dose", "6 mg/m2 IV over 10 min, then laser light at 15 min"],
+    ["Meal", "Not applicable (IV infusion)"],
+    ["Pregnancy", "Avoid; use only if clearly needed (no adequate human data)"],
+    ["Lactation", "Avoid or interrupt breastfeeding; excreted in milk"],
+    ["Renal", "Not studied; elimination is mainly fecal"],
+    ["Hepatic", "Caution; half-life prolonged ~20% in mild-moderate impairment"],
+    ["Alcohol", "No specific interaction documented"],
+    ["Monitoring", "Visual acuity, infusion site for extravasation, photosensitivity"]
+  ],
+  "summary": "Verteporfin (Visudyne) is a light-activated photosensitizer used with photodynamic therapy for predominantly classic subfoveal choroidal neovascularization from age-related macular degeneration, pathologic myopia, or presumed ocular histoplasmosis. The dose is 6 mg/m2 infused IV over 10 minutes; nonthermal laser light (689 nm, 50 J/cm2) is applied 15 minutes after infusion start. Patients must avoid bright light and sunlight for 5 days because of marked skin photosensitivity, and infusion-site extravasation must be protected from light.",
+  "indications": [
+    "Predominantly classic subfoveal choroidal neovascularization due to age-related macular degeneration",
+    "Subfoveal choroidal neovascularization due to pathologic myopia",
+    "Subfoveal choroidal neovascularization due to presumed ocular histoplasmosis"
+  ],
+  "dosage": [
+    {"c": "Photodynamic therapy (adult)", "r": "Drug dose", "d": "6 mg/m2 body surface area, reconstituted to 2 mg/mL and diluted with 5% dextrose to 30 mL total", "t": "Single IV infusion", "n": "Infuse over 10 minutes at 3 mL/minute"},
+    {"c": "Light activation", "r": "Laser", "d": "50 J/cm2 at 600 mW/cm2, wavelength 689 +/- 3 nm, delivered over 83 seconds", "t": "15 min after infusion start", "n": "Nonthermal red laser to neovascular lesion"},
+    {"c": "Retreatment", "r": "Follow-up", "d": "Re-evaluate every 3 months; re-treat with same regimen if leakage on fluorescein angiography", "t": "Every 3 months", "n": "Do not retreat if severe vision loss (>=4 lines) until vision recovers"}
+  ],
+  "admin": [
+    "Reconstitute each 15 mg vial with 7 mL Sterile Water for Injection to give 7.5 mL of 2 mg/mL solution",
+    "Dilute the calculated dose with 5% Dextrose for Injection to a total volume of 30 mL; protect from light and use within 4 hours",
+    "Infuse intravenously over 10 minutes at a rate of 3 mL/minute using a syringe pump and in-line filter",
+    "Begin laser light delivery exactly 15 minutes after the start of the infusion",
+    "Avoid extravasation; if it occurs, stop the infusion and protect the area from light until swelling and discoloration resolve"
+  ],
+  "moa": "Verteporfin is a light-activated benzoporphyrin derivative. After IV administration it accumulates in the neovascular endothelium of choroidal vessels. Activation by nonthermal red light (689 nm) in the presence of oxygen generates highly reactive, short-lived singlet oxygen and reactive oxygen radicals that damage vascular endothelium, leading to local vessel occlusion and thrombosis of the abnormal choroidal neovascular membrane while relatively sparing the overlying retina.",
+  "contra": {
+    "absolute": ["Porphyria", "Known hypersensitivity to verteporfin or any component of the preparation"],
+    "relative": ["Severe hepatic impairment", "Pregnancy unless clearly needed", "Recent severe vision loss following prior treatment"],
+    "monitor": ["Visual acuity after treatment", "Infusion site for extravasation", "Signs of photosensitivity reaction"]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women. Verteporfin was teratogenic/embryotoxic in animals at high doses. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Verteporfin and its diacid metabolite have been detected in human milk. Avoid breastfeeding or interrupt nursing for at least 48 hours after administration to minimize infant exposure.",
+  "renal": "Pharmacokinetics in renal impairment have not been specifically studied; verteporfin is eliminated predominantly by the fecal route with less than 0.01% recovered in urine, so renal impairment is unlikely to alter clearance substantially.",
+  "hepatic": "Verteporfin is metabolized by liver and plasma esterases. In mild to moderate hepatic impairment the half-life is increased by approximately 20%; use with caution. It has not been studied in severe hepatic impairment.",
+  "interactions": {
+    "major": ["Other photosensitizing agents (tetracyclines, sulfonamides, phenothiazines, sulfonylureas, thiazides, griseofulvin) - additive photosensitivity reactions"],
+    "moderate": ["Calcium channel blockers, polymyxin B, radiation therapy - may enhance verteporfin uptake by endothelium", "Compounds that quench reactive oxygen (dimethyl sulfoxide, beta-carotene, ethanol, formate, mannitol) - may decrease photodynamic activity"],
+    "minor": ["Anticoagulants/vasoconstrictors - theoretical reduction of vascular occlusion efficacy"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "No specific clinical interaction documented; antioxidant compounds may theoretically reduce efficacy.",
+    "diagnostics": "No clinically significant laboratory test interference reported."
+  },
+  "se": {
+    "common": ["Injection site reactions (pain, edema, inflammation, extravasation)", "Visual disturbances (blurred vision, flashes, decreased acuity, visual field defects)", "Headache", "Photosensitivity reactions", "Back pain during infusion", "Nausea"],
+    "serious": ["Severe vision decrease (>=4 lines) within 7 days", "Subretinal/vitreous hemorrhage", "Retinal detachment", "Atrial fibrillation", "Severe infusion-related chest/back pain"],
+    "rare": ["Anaphylactic and other hypersensitivity reactions", "Injection site necrosis (with extravasation and light exposure)", "Syncope, vasovagal reactions"],
+    "emergency": ["Anaphylaxis", "Severe acute vision loss", "Severe vasovagal/hypersensitivity reaction during infusion"]
+  },
+  "monitoring": [
+    "Best-corrected visual acuity before and after treatment",
+    "Fluorescein angiography every 3 months to assess for recurrent leakage",
+    "Infusion site for extravasation during and after infusion",
+    "Signs of photosensitivity or hypersensitivity reactions",
+    "Cardiac and back/chest symptoms during infusion"
+  ],
+  "counsel": [
+    "Avoid exposure of skin and eyes to direct sunlight or bright indoor light for 5 days after treatment",
+    "If you must go outside in daylight during this period, wear protective clothing and dark sunglasses; ordinary sunscreen does not protect against photosensitivity",
+    "Exposure to ambient indoor light is helpful and quickens clearance of the drug from the skin",
+    "Report immediately any severe decrease in vision, eye pain, or injection-site swelling",
+    "Bring dark sunglasses and protective clothing to each appointment"
+  ],
+  "pk": [
+    ["Onset", "Endothelial uptake within minutes; light applied 15 min after infusion start"],
+    ["Peak", "Peak plasma at end of 10-minute infusion"],
+    ["Half-life", "Approximately 5-6 hours (elimination)"],
+    ["Duration", "Skin photosensitivity persists up to 5 days"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light"]
+  ],
+  "pearls": [
+    "Strict 5-day light precaution is the key safety counseling point - photosensitivity, not phototoxicity from sunscreen-protectable UV",
+    "Light must be delivered exactly 15 minutes after the start of infusion for proper activation",
+    "Protect any extravasation site from light to prevent skin necrosis",
+    "Eliminated mainly in feces (<0.01% renal); renal dosing rarely an issue",
+    "Contraindicated in porphyria - a porphyrin-related photosensitizer"
+  ],
+  "missed": "Not applicable. Verteporfin is administered as a single in-clinic photodynamic therapy session; there is no patient self-administered or scheduled home dose to miss. Retreatment is decided by the ophthalmologist based on angiographic findings.",
+  "overdose": "Overdose of drug or light may cause non-perfusion of normal retinal vessels with possible severe vision loss. Drug overdose prolongs the period of skin photosensitivity, so the patient must extend light-avoidance precautions proportionally. Treatment is supportive; there is no specific antidote.",
+  "refs": [
+    ["FDA Visudyne (Verteporfin) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22verteporfin%22"],
+    ["FDA DailyMed - Verteporfin (Visudyne)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

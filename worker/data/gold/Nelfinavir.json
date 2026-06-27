@@ -1,0 +1,127 @@
+{
+  "generic": "Nelfinavir",
+  "cls": "Antiretroviral - HIV-1 protease inhibitor (PI)",
+  "pharm": "Nelfinavir mesylate selectively binds the active site of the HIV-1 protease enzyme, preventing cleavage of the gag-pol polyprotein and producing immature, non-infectious virions. It is a substrate of CYP2C19 and CYP3A4 and a moderate inhibitor of CYP3A4, the basis for its extensive drug interactions. Oral absorption is markedly increased by food, so it must be taken with a meal.",
+  "tags": ["Rx only", "HIV-1 protease inhibitor", "CYP3A4 inhibitor", "CYP2C19/3A4 substrate", "Take with food", "Diarrhea common", "Major drug interactions"],
+  "quick": [
+    ["Adult dose", "1250 mg twice daily or 750 mg three times daily, with a meal"],
+    ["Meal", "Must take WITH food - food increases exposure 2-5 fold"],
+    ["Pregnancy", "Not preferred; hepatic events reported - consider alternative PIs"],
+    ["Lactation", "Do not breastfeed - HIV transmission risk (US)"],
+    ["Renal", "Not studied in renal impairment; use with caution"],
+    ["Hepatic", "Do NOT use in moderate-severe hepatic impairment"],
+    ["Alcohol", "No specific interaction; limit due to additive hepatic risk"],
+    ["Monitoring", "Diarrhea, LFTs, glucose/lipids, CYP3A4 interactions"]
+  ],
+  "summary": "Nelfinavir (Viracept) is an oral HIV-1 protease inhibitor used in combination with other antiretroviral agents to treat HIV-1 infection. It blocks the viral protease that matures new virions, halting production of infectious virus. Because it must be taken with food for adequate absorption and is a CYP3A4 inhibitor and CYP2C19/3A4 substrate, it has extensive and clinically important drug interactions, including absolute contraindications with potent CYP3A4-dependent drugs (certain statins, ergots, oral midazolam/triazolam, pimozide, amiodarone, quinidine, rifampin, St. John's wort). Diarrhea is the most common adverse effect. It should not be used in moderate-to-severe hepatic impairment.",
+  "indications": [
+    "Treatment of HIV-1 infection in adults, adolescents, and children, in combination with other antiretroviral agents"
+  ],
+  "dosage": [
+    {"c": "HIV-1 infection (adults and adolescents >=13 yr)", "r": "Adult/adolescent oral", "d": "1250 mg twice daily OR 750 mg three times daily", "t": "Twice or three times daily with a meal", "n": "Always administer with food to optimize absorption"},
+    {"c": "HIV-1 infection (children 2 to <13 yr) - twice-daily option", "r": "Pediatric oral", "d": "45 to 55 mg/kg twice daily", "t": "Twice daily with a meal", "n": "Weight-band tablet/powder tables provided in labeling"},
+    {"c": "HIV-1 infection (children 2 to <13 yr) - three-times-daily option", "r": "Pediatric oral", "d": "25 to 35 mg/kg three times daily", "t": "Three times daily with a meal", "n": "Total daily dose not to exceed adult dosing"},
+    {"c": "Coadministration with rifabutin", "r": "Adult oral", "d": "Use nelfinavir 1250 mg twice daily; reduce rifabutin to one-half its usual dose", "t": "Twice daily with a meal", "n": "Rifabutin (not rifampin) may be co-used with dose adjustment"}
+  ],
+  "admin": [
+    "Take with a meal every time - food increases nelfinavir exposure 2-5 fold and is required for efficacy",
+    "Use only in combination with other antiretroviral agents, never as monotherapy",
+    "Tablets may be dispersed in a small amount of water if needed; the oral powder may be mixed with water, milk, or formula (not acidic foods/juice and use within 6 hours)",
+    "Separate didanosine: give didanosine 1 hour before or 2 or more hours after nelfinavir",
+    "Avoid acid-suppressing proton pump inhibitors, which lower nelfinavir levels",
+    "Review the full medication list for CYP3A4 interactions before starting"
+  ],
+  "moa": "Nelfinavir is a selective, competitive inhibitor of the HIV-1 protease, an aspartyl protease essential for processing the viral gag and gag-pol polyprotein precursors. By binding the protease active site, nelfinavir prevents cleavage of these precursors into the mature structural and enzymatic proteins required for virion maturation, resulting in production of immature, non-infectious viral particles. It does not require intracellular phosphorylation and is active against HIV-1 in acutely and chronically infected cells. Pharmacologically it is metabolized by CYP2C19 and CYP3A4 and inhibits CYP3A4, accounting for its drug-interaction profile.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to nelfinavir or any component",
+      "Concomitant drugs highly dependent on CYP3A4 with narrow therapeutic windows: lovastatin, simvastatin (myopathy/rhabdomyolysis)",
+      "Ergot derivatives - dihydroergotamine, ergotamine, methylergonovine (ergot toxicity)",
+      "Oral midazolam and triazolam (prolonged/excessive sedation, respiratory depression)",
+      "Pimozide and lurasidone (serious arrhythmia/reactions)",
+      "Amiodarone, quinidine (serious arrhythmias)",
+      "Cisapride (cardiac arrhythmia)",
+      "Rifampin (markedly reduces nelfinavir concentrations - loss of efficacy/resistance)",
+      "St. John's wort (reduces nelfinavir levels - loss of efficacy/resistance)"
+    ],
+    "relative": [
+      "Moderate or severe hepatic impairment (avoid use)",
+      "Hemophilia (increased bleeding reported with PIs)",
+      "Diabetes/hyperglycemia (PIs may worsen glycemic control)",
+      "Phenylketonuria - oral powder contains phenylalanine"
+    ],
+    "monitor": [
+      "Severity of diarrhea and GI tolerability",
+      "Liver function tests",
+      "Fasting glucose and lipid profile",
+      "Drug interactions with CYP3A4 substrates"
+    ]
+  },
+  "preg": "Antiretroviral therapy is recommended in pregnancy, but nelfinavir is not a preferred agent. Reports of hepatic adverse events ranging from elevated liver enzymes to hepatic failure have occurred in pregnant patients exposed to nelfinavir. Antiretroviral Pregnancy Registry data show a first-trimester birth-defect rate of about 3.9% versus a 2.7% background rate. Consider alternative, preferred antiretroviral drugs during pregnancy.",
+  "lact": "In the United States, mothers with HIV-1 are instructed NOT to breastfeed because of the risk of postnatal HIV transmission. It is not known whether nelfinavir is excreted in human milk. The decision reflects HIV transmission risk rather than direct drug toxicity.",
+  "renal": "The pharmacokinetics, safety, and efficacy of nelfinavir have not been established in patients with renal impairment. Because nelfinavir is highly protein bound and primarily eliminated via feces with minimal urinary excretion, significant renal accumulation is not expected, but use with caution as data are lacking.",
+  "hepatic": "Nelfinavir should NOT be used in patients with moderate or severe hepatic impairment, in whom exposure is increased. No dose adjustment is required for mild hepatic impairment, but monitor liver function. Discontinue if signs of clinically significant hepatotoxicity occur.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inducers (rifampin, St. John's wort, carbamazepine, phenytoin, phenobarbital) - lower nelfinavir levels, risk of resistance",
+      "CYP3A4 substrates with narrow index (see contraindications) - life-threatening toxicity",
+      "Atorvastatin - limit to maximum 40 mg/day; consider pravastatin/fluvastatin instead",
+      "PDE5 inhibitors - max sildenafil 25 mg/48 h, vardenafil 2.5 mg/24 h, tadalafil 10 mg/72 h",
+      "Hormonal contraceptives - decreased ethinyl estradiol/norethindrone; use an additional or alternative non-hormonal method",
+      "Proton pump inhibitors - decrease nelfinavir exposure; avoid coadministration"
+    ],
+    "moderate": [
+      "Rifabutin - increases rifabutin exposure (halve rifabutin dose) and decreases nelfinavir (use 1250 mg BID)",
+      "Anticonvulsants metabolized by/affecting CYP - monitor levels and antiviral response",
+      "Methadone - nelfinavir may decrease methadone levels",
+      "Immunosuppressants (tacrolimus, cyclosporine, sirolimus) - monitor concentrations"
+    ],
+    "minor": ["Didanosine - administer 1 hour before or 2 or more hours after nelfinavir to avoid the food/acid effect"],
+    "food": "Nelfinavir MUST be taken with a meal; food increases absorption 2-5 fold and is required for therapeutic exposure.",
+    "alcohol": "No specific pharmacokinetic interaction with alcohol is described; limit alcohol given the potential for additive hepatic injury.",
+    "diagnostics": "May cause elevated liver enzymes, hyperglycemia, and dyslipidemia; oral powder contains phenylalanine (relevant in PKU)."
+  },
+  "se": {
+    "common": ["Diarrhea (most common)", "Nausea", "Flatulence", "Rash", "Abdominal pain"],
+    "serious": ["Hepatotoxicity / hepatic failure (notably in pregnancy)", "New-onset or worsened diabetes/hyperglycemia", "Hyperlipidemia", "Immune reconstitution inflammatory syndrome", "Fat redistribution/lipodystrophy", "Increased bleeding in hemophilia"],
+    "rare": ["QTc prolongation and torsades de pointes (postmarketing)", "Severe hypersensitivity reactions", "Pancreatitis", "Jaundice / cholestasis"],
+    "emergency": ["Severe hypersensitivity reaction / anaphylaxis", "Torsades de pointes or serious arrhythmia", "Acute hepatic failure", "Severe dehydration from intractable diarrhea"]
+  },
+  "monitoring": [
+    "Severity and persistence of diarrhea (most common adverse effect)",
+    "Liver function tests, especially in pregnancy and with hepatic risk factors",
+    "Fasting blood glucose and lipid profile",
+    "HIV-1 RNA viral load and CD4 count for antiviral response",
+    "Concomitant medications for CYP3A4 interactions"
+  ],
+  "counsel": [
+    "Always take this medicine WITH a meal - it will not work properly on an empty stomach",
+    "Take it exactly on schedule along with your other HIV medicines; do not skip doses",
+    "Diarrhea is the most common side effect - report severe or persistent diarrhea and stay hydrated",
+    "Tell every prescriber and pharmacist you take nelfinavir - it has many serious drug interactions",
+    "Do not start any new prescription, over-the-counter drug, or herbal product (especially St. John's wort) without checking",
+    "Use an additional or non-hormonal birth-control method, as this drug can reduce the effectiveness of hormonal contraceptives",
+    "This medicine controls HIV but does not cure it and does not prevent passing HIV to others"
+  ],
+  "pk": [
+    ["Onset", "Antiviral effect over days-weeks; steady state in ~2-3 days"],
+    ["Peak", "Plasma Tmax ~2-3 hours after a dose taken with food"],
+    ["Half-life", "~3.5-5 hours"],
+    ["Duration", "Dosed two or three times daily with meals"],
+    ["Storage", "Store at 15-30 C (59-86 F) in a tightly closed container"]
+  ],
+  "pearls": [
+    "Must be taken WITH food - food increases exposure 2-5 fold and is essential for efficacy",
+    "Diarrhea is the most common adverse effect and a frequent reason for discontinuation",
+    "Potent CYP3A4 interactions - absolutely avoid lovastatin/simvastatin, ergots, oral midazolam/triazolam, pimozide, amiodarone, quinidine, rifampin, and St. John's wort",
+    "Decreases hormonal contraceptive levels - advise an additional/alternative method",
+    "Do not use in moderate-to-severe hepatic impairment; watch for hepatotoxicity, especially in pregnancy",
+    "Separate didanosine and avoid proton pump inhibitors, which lower nelfinavir levels"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember with a snack or meal. If it is almost time for your next dose, skip the missed dose and continue your regular schedule with food. Do not take two doses at once to make up for a missed dose.",
+  "overdose": "There is no specific antidote for nelfinavir overdose. If indicated, eliminate unabsorbed drug by emesis or gastric lavage and consider activated charcoal. Because nelfinavir is highly protein bound (>98%), dialysis is unlikely to remove significant drug. Management is supportive, with monitoring of vital signs and clinical status.",
+  "refs": [
+    ["FDA Label - Nelfinavir Mesylate (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nelfinavir%20mesylate%22"],
+    ["DailyMed - VIRACEPT (nelfinavir mesylate)", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=e72c2bc6-9462-4a2e-8e1d-b97592376cbd"]
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "generic": "Adapalene",
+  "cls": "Topical retinoid (third-generation)",
+  "pharm": "Topical anti-acne agent",
+  "tags": ["acne vulgaris", "retinoid", "topical", "comedolytic", "dermatology"],
+  "quick": [
+    ["Adult dose", "Apply thin layer to affected area once daily (0.1% or 0.3% gel/cream/lotion)"],
+    ["Meal", "Not applicable (topical)"],
+    ["Pregnancy", "Category C; use only if benefit justifies risk"],
+    ["Lactation", "Excretion in milk unknown; use caution, avoid breast application"],
+    ["Renal", "Negligible systemic absorption; no adjustment"],
+    ["Hepatic", "Negligible systemic absorption; no adjustment"],
+    ["Alcohol", "No systemic interaction; avoid alcohol-based irritants on skin"],
+    ["Monitoring", "Local skin irritation, photosensitivity"]
+  ],
+  "summary": "Adapalene is a topical retinoid for acne vulgaris that normalizes follicular keratinization and has anti-inflammatory and comedolytic effects. Applied as a thin layer once daily (0.1% available OTC, 0.3% by prescription). Local irritation - erythema, dryness, scaling, burning - is common early; sun protection is advised. Systemic absorption is minimal.",
+  "indications": [
+    "Topical treatment of acne vulgaris in patients 12 years of age and older"
+  ],
+  "dosage": [
+    {"c": "Acne vulgaris (>=12 yr)", "r": "Standard", "d": "Thin layer of 0.1% gel/cream/lotion to affected area once daily at bedtime", "t": "Once daily", "n": "OTC strength; cleanse and pat dry first"},
+    {"c": "Acne vulgaris (Rx)", "r": "Higher strength", "d": "Thin layer of 0.3% gel once daily", "t": "Once daily", "n": "Prescription; for more resistant acne"},
+    {"c": "Children <12 yr", "r": "Not recommended", "d": "Use only on physician advice", "t": "-", "n": "Safety/efficacy not established under 12"}
+  ],
+  "admin": [
+    "Cleanse the area with a mild or soapless cleanser and pat dry before applying",
+    "Apply a thin layer over the entire affected area, not just individual lesions",
+    "Avoid eyes, lips, mucous membranes, and cuts/abrasions/eczematous skin",
+    "Do not apply more than once daily; more does not work faster and increases irritation",
+    "Use a moisturizer and sunscreen; expect therapeutic effect over 8-12 weeks"
+  ],
+  "moa": "Adapalene binds to specific retinoic acid nuclear receptors (RAR), modulating cellular differentiation, keratinization and inflammatory processes within the follicle. This normalizes desquamation of follicular epithelium, reduces microcomedone formation, and exerts anti-inflammatory activity, improving acne.",
+  "contra": {
+    "absolute": ["Hypersensitivity to adapalene or formulation components"],
+    "relative": ["Eczema or seborrheic dermatitis on treatment area", "Sunburned or abraded skin", "High sun/UV exposure"],
+    "monitor": ["Local skin irritation severity", "Photosensitivity"]
+  },
+  "preg": "Pregnancy Category C. No well-controlled trials in pregnant women; oral animal doses far above topical exposure were teratogenic. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Systemic absorption from topical use is very low.",
+  "lact": "It is not known whether adapalene is excreted in human milk. Exercise caution when used in a nursing woman and avoid application to the breast/chest area to prevent infant exposure.",
+  "renal": "Systemic absorption is negligible; no renal dose adjustment needed.",
+  "hepatic": "Systemic absorption is negligible; no hepatic dose adjustment needed.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Other topical retinoids, benzoyl peroxide, salicylic acid, sulfur, resorcinol - additive skin irritation/drying", "Topical products with high alcohol, astringents, spices or lime - increased irritation"],
+    "minor": ["Abrasive cleansers, medicated soaps, harsh scrubs - cumulative irritation"],
+    "food": "Not applicable (topical).",
+    "alcohol": "No systemic interaction; avoid alcohol-containing skin products that worsen dryness.",
+    "diagnostics": "None significant."
+  },
+  "se": {
+    "common": ["Dryness", "Erythema", "Scaling", "Stinging/burning at application site", "Skin irritation", "Pruritus"],
+    "serious": ["Severe irritant or allergic contact dermatitis"],
+    "rare": ["Acne flare early in treatment", "Skin hyperpigmentation or hypopigmentation", "Eyelid edema"],
+    "emergency": ["Severe allergic reaction (swelling, hives, difficulty breathing)"]
+  },
+  "monitoring": [
+    "Local tolerance: erythema, dryness, scaling, stinging - reduce frequency if excessive",
+    "Signs of allergic contact dermatitis",
+    "Sun exposure and photosensitivity"
+  ],
+  "counsel": [
+    "Apply a thin layer once daily, usually at night, to the whole affected area after cleansing",
+    "Some redness, dryness and peeling are expected early and usually lessen with continued use",
+    "Use a non-comedogenic moisturizer and daily sunscreen; limit sun and sunlamp exposure",
+    "Avoid eyes, lips and mucous membranes; do not wax treated skin",
+    "Be patient - visible improvement may take 8-12 weeks; do not over-apply"
+  ],
+  "pk": [
+    ["Onset", "Clinical improvement over several weeks"],
+    ["Peak", "Maximum benefit by ~8-12 weeks"],
+    ["Half-life", "Minimal systemic exposure; not clinically relevant"],
+    ["Duration", "Sustained with continued once-daily use"],
+    ["Storage", "Store at controlled room temperature; avoid freezing"]
+  ],
+  "pearls": [
+    "0.1% adapalene gel is available OTC; 0.3% gel is prescription for more resistant acne",
+    "Better photostability and tolerability than older retinoids (tretinoin)",
+    "Often combined with benzoyl peroxide for synergistic effect",
+    "Apply to the whole acne-prone area, not just spots - it is preventive (comedolytic)",
+    "Counsel on expected initial irritation to support adherence"
+  ],
+  "missed": "If a once-daily application is missed, apply it when remembered unless it is nearly time for the next dose; do not apply extra to make up. Resume the regular once-daily schedule.",
+  "overdose": "Topical overuse causes increased local irritation (erythema, peeling, discomfort) rather than systemic toxicity. Discontinue or reduce frequency and treat the skin with bland emollients. Ingestion should be managed with standard supportive care.",
+  "refs": [
+    ["FDA Adapalene Labeling (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22adapalene%22"],
+    ["FDA DailyMed - Adapalene (Differin)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

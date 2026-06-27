@@ -1,0 +1,93 @@
+{
+  "generic": "Ganciclovir",
+  "cls": "Antiviral (nucleoside analog, anti-CMV)",
+  "pharm": "Synthetic guanine nucleoside analog that, after phosphorylation, inhibits cytomegalovirus DNA polymerase; used for serious CMV infection.",
+  "tags": ["Antiviral", "Anti-CMV", "Nucleoside analog", "Intravenous", "Myelosuppressive", "Renal dosing", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "Induction 5 mg/kg IV q12h x14-21d; maintenance 5 mg/kg/day"],
+    ["Meal", "N/A (IV)"],
+    ["Pregnancy", "Avoid; teratogenic/fetal toxicity (boxed warning)"],
+    ["Lactation", "Do not breastfeed during therapy"],
+    ["Renal", "Reduce dose by CrCl; significant renal clearance"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "CBC/platelets, renal function, CMV status"]
+  ],
+  "summary": "Ganciclovir is an intravenous nucleoside analog antiviral for cytomegalovirus (CMV) retinitis in immunocompromised patients and prevention of CMV disease in transplant recipients. It carries a boxed warning for hematologic toxicity (granulocytopenia, anemia, thrombocytopenia), impairment of fertility, fetal toxicity, mutagenesis, and carcinogenesis. It is infused over 1 hour, requires renal dose adjustment, and demands close monitoring of blood counts.",
+  "indications": [
+    "Treatment of CMV retinitis in immunocompromised patients (including AIDS)",
+    "Prevention of CMV disease in transplant recipients at risk"
+  ],
+  "dosage": [
+    {"c": "CMV retinitis - induction", "r": "IV (over 1 h)", "d": "5 mg/kg", "t": "Every 12 hours for 14 to 21 days", "n": "Constant-rate infusion over 1 hour"},
+    {"c": "CMV retinitis - maintenance", "r": "IV (over 1 h)", "d": "5 mg/kg once daily 7 days/week OR 6 mg/kg once daily 5 days/week", "t": "Maintenance", "n": "After induction"},
+    {"c": "CMV prevention in transplant - induction", "r": "IV (over 1 h)", "d": "5 mg/kg", "t": "Every 12 hours for 7 to 14 days", "n": ""},
+    {"c": "CMV prevention in transplant - maintenance", "r": "IV (over 1 h)", "d": "5 mg/kg once daily 7 days/week OR 6 mg/kg once daily 5 days/week", "t": "Until 100-120 days post-transplant", "n": ""},
+    {"c": "Renal impairment", "r": "IV", "d": "Reduce dose and/or interval per creatinine clearance", "t": "Per CrCl table", "n": "Significant renal clearance; supplemental dose after hemodialysis"}
+  ],
+  "admin": [
+    "Administer only by IV infusion over 1 hour via a vein with adequate blood flow (preferably plastic cannula)",
+    "Do not give by rapid IV push, IM, or SC (causes severe tissue irritation; toxic)",
+    "Reconstitute and dilute per label; reconstituted/diluted solution is highly alkaline",
+    "Handle as a cytotoxic/hazardous drug; use gloves and avoid skin/eye contact",
+    "Maintain adequate hydration; adjust dose for renal impairment"
+  ],
+  "moa": "Ganciclovir is monophosphorylated intracellularly (initially by viral protein kinase, UL97, in CMV-infected cells) and then converted by cellular kinases to ganciclovir triphosphate, which competitively inhibits viral DNA polymerase and incorporates into viral DNA, terminating chain elongation and inhibiting CMV replication.",
+  "contra": {
+    "absolute": ["Clinically significant hypersensitivity (e.g., anaphylaxis) to ganciclovir or valganciclovir, or any component"],
+    "relative": ["Pre-existing cytopenias (absolute neutrophil count <500 or platelets <25,000)", "Renal impairment", "Concurrent myelosuppressive or nephrotoxic drugs", "Childbearing potential without contraception"],
+    "monitor": ["Complete blood count and platelets", "Renal function", "Serum drug levels not routinely needed"]
+  },
+  "preg": "Boxed warning: potential to cause birth defects based on animal data. Avoid in pregnancy; women of childbearing potential should use effective contraception and men should use barrier contraception during and after therapy.",
+  "lact": "Do not breastfeed during ganciclovir therapy due to potential serious adverse effects in the infant.",
+  "renal": "Significant renal clearance; reduce dose and/or lengthen interval based on creatinine clearance. Give after hemodialysis sessions; reduced dosing in dialysis patients.",
+  "hepatic": "No specific dosage adjustment provided.",
+  "interactions": {
+    "major": ["Other myelosuppressive agents (zidovudine, antineoplastics) - additive bone marrow suppression", "Nephrotoxic drugs (amphotericin B, cyclosporine) - reduced clearance and additive toxicity", "Imipenem-cilastatin - increased seizure risk", "Probenecid - increases ganciclovir levels"],
+    "moderate": ["Mycophenolate - increased levels of both drugs in renal impairment", "Didanosine - increased didanosine concentrations"],
+    "minor": [],
+    "food": "N/A (intravenous).",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "Frequent CBC with differential and platelet counts; serum creatinine for dose adjustment."
+  },
+  "se": {
+    "common": ["Granulocytopenia/neutropenia", "Anemia", "Thrombocytopenia", "Fever", "Diarrhea", "Nausea/vomiting", "Injection/infusion site reactions"],
+    "serious": ["Severe pancytopenia", "Sepsis from neutropenia", "Renal impairment", "Seizures", "Retinal detachment (in CMV retinitis patients)"],
+    "rare": ["Hepatotoxicity", "Mental status changes/psychosis", "Pancreatitis"],
+    "emergency": ["Severe febrile neutropenia/sepsis", "Anaphylaxis", "Life-threatening bleeding from thrombocytopenia"]
+  },
+  "monitoring": [
+    "Complete blood count with differential and platelets frequently (baseline, then regularly; consider every 2 days during induction in high-risk patients)",
+    "Serum creatinine/renal function for dose adjustment",
+    "Signs of bleeding or infection",
+    "Ophthalmologic follow-up in CMV retinitis",
+    "Pregnancy status and contraception"
+  ],
+  "counsel": [
+    "Use effective contraception during treatment - men should use condoms during and for 90 days after therapy",
+    "Report fever, sore throat, unusual bruising or bleeding, or signs of infection promptly",
+    "Regular blood tests are needed to monitor your blood counts and kidneys",
+    "Do not breastfeed while on this medicine",
+    "Keep eye appointments if treated for CMV retinitis"
+  ],
+  "pk": [
+    ["Onset", "Antiviral activity during infusion course"],
+    ["Peak", "End of 1-hour infusion"],
+    ["Half-life", "~3-4 hours (normal renal function); prolonged in renal impairment"],
+    ["Duration", "Dosing q12h (induction) to once daily (maintenance)"],
+    ["Storage", "Store powder at controlled room temperature; use reconstituted solution per stability guidance"]
+  ],
+  "pearls": [
+    "Boxed warning: hematologic toxicity, impaired fertility, fetal toxicity, mutagenesis, and carcinogenesis",
+    "Neutropenia is the dose-limiting toxicity; consider G-CSF support if severe",
+    "Valganciclovir is the oral prodrug for outpatient CMV therapy/prophylaxis",
+    "Handle and dispose of as a cytotoxic agent",
+    "Renal dosing is essential - ganciclovir is largely renally cleared"
+  ],
+  "missed": "Administered in a clinical setting; if a scheduled infusion is delayed, give as soon as possible and adjust subsequent timing. Do not double the dose.",
+  "overdose": "Overdose may cause severe neutropenia, pancytopenia, hepatitis, seizures, and renal toxicity. Manage with hydration, hematopoietic growth factors, and supportive care; hemodialysis reduces plasma concentrations.",
+  "refs": [
+    ["FDA Ganciclovir Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ganciclovir%22"],
+    ["DailyMed - Ganciclovir", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=ganciclovir"]
+  ]
+}

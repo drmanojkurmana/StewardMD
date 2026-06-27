@@ -1,0 +1,107 @@
+{
+  "generic": "Insulin Lispro",
+  "cls": "Rapid-acting human insulin analog (mealtime/bolus insulin)",
+  "pharm": "Rapid-acting insulin analog that lowers blood glucose by stimulating peripheral glucose uptake (skeletal muscle, fat) and inhibiting hepatic glucose production; rapid onset makes it suited to mealtime (prandial) coverage.",
+  "tags": ["Rx only", "Rapid-acting insulin analog", "Mealtime/bolus", "Subcutaneous", "Diabetes mellitus", "Hypoglycemia risk"],
+  "quick": [
+    ["Adult dose", "Individualized in units (no fixed mg dose); injected SC within 15 minutes before a meal or immediately after a meal"],
+    ["Meal", "Inject within 15 minutes before the meal or just after; rapid onset covers the postprandial glucose rise"],
+    ["Pregnancy", "Insulin is first-line for diabetes in pregnancy; studies have not shown increased birth-defect risk"],
+    ["Lactation", "Compatible; insulin is degraded in the GI tract and not expected to harm a breastfed infant"],
+    ["Renal", "Higher hypoglycemia risk; monitor glucose more closely and adjust dose"],
+    ["Hepatic", "Higher hypoglycemia risk; monitor glucose more closely and adjust dose"],
+    ["Alcohol", "May raise or lower glucose; can increase hypoglycemia risk - monitor"],
+    ["Monitoring", "Blood glucose, HbA1c, serum potassium, signs of hypoglycemia"]
+  ],
+  "summary": "Insulin lispro (Humalog, Admelog, Lyumjev) is a rapid-acting human insulin analog used to improve glycemic control in adults and pediatric patients with diabetes mellitus. Given subcutaneously within 15 minutes before a meal or immediately after a meal, by continuous subcutaneous infusion via insulin pump, or intravenously under medical supervision, it provides prandial (mealtime/bolus) coverage and is typically combined with a longer-acting basal insulin. Dosing is fully individualized in units based on metabolic needs, glucose monitoring, and glycemic goals; there is no fixed mg dose. Hypoglycemia is the most common and potentially life-threatening adverse effect; hypokalemia can also occur. Rotate injection sites and never share pens or syringes between patients.",
+  "indications": [
+    "To improve glycemic control in adults and pediatric patients with diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Mealtime (prandial) dosing", "r": "Adult/pediatric subcutaneous", "d": "Individualized dose in units, injected within 15 minutes before a meal or immediately after a meal", "t": "With each meal", "n": "No fixed mg dose; titrate to glucose targets. Typically used with a longer-acting (basal) insulin"},
+    {"c": "Continuous subcutaneous infusion (insulin pump)", "r": "Subcutaneous infusion", "d": "Individualized basal/bolus units per pump program", "t": "Continuous plus mealtime boluses", "n": "Use only pumps cleared for insulin lispro; do not mix with other insulins or diluents in the pump"},
+    {"c": "Intravenous infusion", "r": "Intravenous infusion", "d": "Administer only after dilution and under medical supervision", "t": "Per protocol, under supervision", "n": "IV use only with close glucose and potassium monitoring"},
+    {"c": "Dosage individualization", "r": "All routes", "d": "Individualize based on route, metabolic needs, blood glucose monitoring results, and glycemic goal", "t": "Ongoing", "n": "Adjust for changes in physical activity, meal pattern, renal/hepatic function, or acute illness"}
+  ],
+  "admin": [
+    "Inject subcutaneously within 15 minutes before a meal or immediately after a meal into the abdominal wall, thigh, upper arm, or buttock",
+    "Rotate injection sites to reduce risk of lipodystrophy and localized cutaneous amyloidosis; do not inject into affected areas",
+    "Inspect before use - solution should be clear and colorless; do not use if cloudy, colored, or containing particles",
+    "Always check the insulin label before each injection to avoid product mix-ups",
+    "For pump use, do not mix with other insulins or diluents; for IV use, dilute and give only under medical supervision",
+    "Never share a prefilled pen or syringe between patients even if the needle is changed (blood-borne pathogen risk)"
+  ],
+  "moa": "Insulin lispro is a recombinant rapid-acting human insulin analog (lysine and proline reversed at positions B28 and B29) that reduces self-association, allowing faster subcutaneous absorption than regular human insulin. Like endogenous insulin, it binds insulin receptors on muscle and fat to stimulate peripheral glucose uptake and inhibits hepatic glucose production, lowering blood glucose. It also inhibits lipolysis and proteolysis and enhances protein synthesis. Its rapid onset and short duration make it suitable for mealtime (prandial) glucose control.",
+  "contra": {
+    "absolute": [
+      "During episodes of hypoglycemia",
+      "Hypersensitivity to insulin lispro or any excipient"
+    ],
+    "relative": [
+      "Renal impairment (greater hypoglycemia risk - closer monitoring/dose adjustment)",
+      "Hepatic impairment (greater hypoglycemia risk - closer monitoring/dose adjustment)",
+      "Hypoglycemia unawareness",
+      "Conditions/changes (illness, altered meals or activity) that increase hypoglycemia risk"
+    ],
+    "monitor": [
+      "Blood glucose (more frequently with any regimen change)",
+      "Serum potassium in patients at risk of hypokalemia",
+      "Signs and symptoms of heart failure with concomitant thiazolidinediones"
+    ]
+  },
+  "preg": "Published studies with insulin lispro used during pregnancy have not reported an association with major birth defects, miscarriage, or adverse maternal or fetal outcomes. Poorly controlled diabetes in pregnancy carries substantial maternal and fetal risk, so good glycemic control is important; insulin is generally first-line therapy for diabetes in pregnancy.",
+  "lact": "Available published data suggest exogenous human insulin products, including insulin lispro, are transferred into human milk; no adverse reactions have been reported in breastfed infants, and insulin is a protein degraded in the infant's gastrointestinal tract. Breastfeeding is considered compatible; weigh the developmental and health benefits of breastfeeding alongside the mother's clinical need.",
+  "renal": "Patients with renal impairment may be at increased risk of hypoglycemia and may require more frequent dose adjustment and more frequent blood glucose monitoring. No fixed dose reduction is specified - individualize to glucose targets.",
+  "hepatic": "Patients with hepatic impairment may be at increased risk of hypoglycemia and may require more frequent dose adjustment and more frequent blood glucose monitoring. No fixed dose reduction is specified - individualize to glucose targets.",
+  "interactions": {
+    "major": [
+      "Other antidiabetic agents (including sulfonylureas, pramlintide) - additive hypoglycemia risk; adjust dose and monitor glucose"
+    ],
+    "moderate": [
+      "Drugs that increase hypoglycemia risk: ACE inhibitors, ARBs, disopyramide, fibrates, fluoxetine, MAO inhibitors, pentoxifylline, salicylates, somatostatin analogs (e.g., octreotide), sulfonamide antibiotics",
+      "Drugs that decrease glucose-lowering effect: atypical antipsychotics (olanzapine, clozapine), corticosteroids, danazol, diuretics, estrogens, glucagon, isoniazid, niacin, oral contraceptives, phenothiazines, progestogens, protease inhibitors, somatropin, sympathomimetics (albuterol, epinephrine, terbutaline), thyroid hormones",
+      "Thiazolidinediones - fluid retention and heart failure risk when combined with insulin"
+    ],
+    "minor": [
+      "Pentamidine - may cause hypoglycemia sometimes followed by hyperglycemia"
+    ],
+    "food": "Inject within 15 minutes before a meal or immediately after a meal; timing relative to food is essential to match the postprandial glucose rise and avoid hypoglycemia.",
+    "alcohol": "Alcohol may increase or decrease the blood-glucose-lowering effect; increased glucose monitoring may be needed.",
+    "diagnostics": "Beta-blockers, clonidine, guanethidine, and reserpine may blunt the warning signs/symptoms of hypoglycemia."
+  },
+  "se": {
+    "common": ["Hypoglycemia", "Injection-site reactions", "Allergic reactions", "Pruritus", "Rash"],
+    "serious": ["Severe hypoglycemia (may be life-threatening)", "Hypokalemia (may be life-threatening)", "Lipodystrophy / localized cutaneous amyloidosis at injection sites", "Fluid retention and heart failure with concomitant thiazolidinediones"],
+    "rare": ["Generalized allergic reactions", "Weight gain", "Peripheral edema"],
+    "emergency": ["Anaphylaxis / severe generalized hypersensitivity", "Severe hypoglycemia with coma, seizure, or neurologic impairment", "Severe hypokalemia (cardiac arrhythmia, respiratory paralysis)", "Diabetic ketoacidosis from insulin pump device malfunction"]
+  },
+  "monitoring": ["Blood glucose (self-monitoring and more frequent monitoring with any regimen change)", "HbA1c periodically (about every 3 months)", "Serum potassium in patients at risk of hypokalemia", "Injection sites for lipodystrophy/amyloidosis", "Signs of hypoglycemia and hypoglycemia unawareness"],
+  "counsel": [
+    "Inject within 15 minutes before your meal, or right after eating, so the insulin matches your food",
+    "Do not skip or delay the meal after dosing; this can cause low blood sugar",
+    "Know the signs of low blood sugar (shakiness, sweating, confusion) and keep fast-acting glucose handy",
+    "Rotate injection sites and do not inject into lumpy or thickened skin",
+    "Never share your pen or syringe with anyone, even with a new needle",
+    "Check the insulin label every time to avoid mixing up insulin products"
+  ],
+  "pk": [
+    ["Onset", "Rapid - faster onset than regular human insulin (suited to mealtime dosing)"],
+    ["Peak", "Peak glucose-lowering effect at approximately 2 hours after subcutaneous injection"],
+    ["Half-life", "Short; rapidly eliminated after subcutaneous absorption (insulin half-life on the order of about 1 hour)"],
+    ["Duration", "Short - generally about 2 to 5 hours"],
+    ["Storage", "Unopened: refrigerate at 2-8 C (do not freeze). In use: store below 30 C and use within the labeled in-use period; do not refrigerate the in-use container. Protect from heat and light"]
+  ],
+  "pearls": [
+    "Mealtime (bolus) insulin - inject within 15 minutes before eating or immediately after; pair with a basal insulin for full coverage",
+    "Hypoglycemia is the #1 adverse effect and can be life-threatening; renal/hepatic impairment and hypoglycemia unawareness raise the risk",
+    "Watch for hypokalemia, especially with IV use or in patients already prone to low potassium",
+    "Rapid onset and short duration mirror physiologic mealtime insulin",
+    "Rotate injection sites and never share pens or syringes between patients"
+  ],
+  "missed": "Because it is dosed with meals, take the dose with the meal if you remember at mealtime (it may also be given immediately after eating). If you forget, follow your clinician's guidance; do not give an extra (double) dose to make up for a missed one, as this increases the risk of low blood sugar. Resume the usual schedule at the next meal.",
+  "overdose": "Excess insulin can cause hypoglycemia and hypokalemia. Mild hypoglycemia can usually be treated with oral glucose and adjustments to dose, meals, or exercise. Severe episodes with coma, seizure, or neurologic impairment require a glucagon product or concentrated intravenous glucose. Sustained carbohydrate intake and observation may be needed because hypoglycemia can recur after apparent recovery; correct hypokalemia appropriately.",
+  "refs": [
+    ["FDA Label - Insulin Lispro (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22insulin+lispro%22"],
+    ["DailyMed - Insulin Lispro", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=insulin+lispro"]
+  ]
+}

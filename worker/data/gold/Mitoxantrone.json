@@ -1,0 +1,95 @@
+{
+  "generic": "Mitoxantrone",
+  "cls": "Anthracenedione antineoplastic / immunomodulator",
+  "pharm": "Synthetic anthracenedione that intercalates DNA and inhibits topoisomerase II, producing cytotoxic strand breaks; also immunomodulatory in multiple sclerosis.",
+  "tags": ["Antineoplastic", "Anthracenedione", "Topoisomerase II inhibitor", "Cardiotoxic", "Leukemogenic", "Boxed warning", "Vesicant", "Blue-green pigment"],
+  "quick": [
+    ["Adult dose", "~12 mg/m2 IV (AML 12 mg/m2 days 1-3; prostate 12-14 mg/m2 q21d; MS 12 mg/m2 q3 months)"],
+    ["Meal", "N/A (IV)"],
+    ["Pregnancy", "Contraindicated (Category D); can cause fetal harm"],
+    ["Lactation", "Discontinue breastfeeding (excreted in milk)"],
+    ["Renal", "Minor renal excretion; no specific scheme"],
+    ["Hepatic", "Caution; MS patients with hepatic impairment should not be treated"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "LVEF (echo/MUGA), CBC, LFTs, cumulative dose; pregnancy test (MS)"]
+  ],
+  "summary": "Mitoxantrone is an anthracenedione cytotoxic used for acute nonlymphocytic (myeloid) leukemia, advanced hormone-refractory prostate cancer (with corticosteroids), and worsening/progressive forms of multiple sclerosis. It carries boxed warnings for cardiotoxicity (potentially fatal heart failure, cumulative-dose related) and secondary acute myeloid leukemia. LVEF must be assessed before the initial dose and before each subsequent dose in MS, and a lifetime cumulative dose of 140 mg/m2 must not be exceeded in MS. It harmlessly turns urine and sometimes the sclera blue-green.",
+  "indications": [
+    "Initial therapy of acute nonlymphocytic (myeloid) leukemia in adults, in combination with other agents",
+    "Pain of advanced hormone-refractory prostate cancer, in combination with corticosteroids",
+    "Secondary (chronic) progressive, progressive-relapsing, or worsening relapsing-remitting multiple sclerosis (not primary progressive MS)"
+  ],
+  "dosage": [
+    {"c": "AML induction", "r": "IV infusion", "d": "12 mg/m2/day on days 1-3", "t": "With cytarabine 100 mg/m2/day continuous infusion days 1-7", "n": "Second induction (2 days mitoxantrone + 5 days cytarabine) if needed"},
+    {"c": "AML consolidation", "r": "IV infusion", "d": "12 mg/m2/day on days 1 and 2", "t": "With cytarabine 100 mg/m2/day continuous infusion days 1-5", "n": "Per protocol"},
+    {"c": "Advanced hormone-refractory prostate cancer", "r": "IV infusion", "d": "12-14 mg/m2", "t": "Every 21 days", "n": "Given with corticosteroids (e.g., prednisone 5 mg PO twice daily)"},
+    {"c": "Multiple sclerosis", "r": "IV infusion (~5-15 min)", "d": "12 mg/m2", "t": "Every 3 months", "n": "Lifetime cumulative dose must not exceed 140 mg/m2; assess LVEF before each dose"}
+  ],
+  "admin": [
+    "Dilute to at least 50 mL with 0.9% sodium chloride or 5% dextrose",
+    "Infuse slowly into a freely running IV over not less than 3 minutes (AML/prostate); MS over ~5-15 minutes",
+    "Never give subcutaneously, intramuscularly, intra-arterially, or intrathecally (severe permanent injury)",
+    "For extravasation: stop immediately, restart in another vein, apply intermittent ice, and elevate the limb",
+    "Do not mix with heparin in the same infusion (precipitate forms); handle as a hazardous cytotoxic drug"
+  ],
+  "moa": "Mitoxantrone intercalates into DNA causing cross-links and strand breaks and inhibits topoisomerase II; it is cytocidal to both proliferating and non-proliferating cells (not cell-cycle-phase specific). In MS it suppresses B-cell, T-cell, and macrophage activity and proliferation.",
+  "contra": {
+    "absolute": ["Prior hypersensitivity to mitoxantrone", "MS patients with baseline LVEF below the lower limit of normal", "MS cumulative dose already at or above 140 mg/m2"],
+    "relative": ["Pre-existing cardiac disease or prior anthracycline/anthracenedione exposure", "Prior mediastinal radiotherapy", "MS patients with hepatic impairment (should ordinarily not be treated)", "Pre-existing myelosuppression"],
+    "monitor": ["Left ventricular ejection fraction (echo or MUGA)", "Complete blood count with platelets", "Liver function tests", "Cumulative lifetime dose"]
+  },
+  "preg": "Pregnancy Category D - can cause fetal harm; avoid pregnancy during therapy. MS patients capable of becoming pregnant must have a negative pregnancy test confirmed before each dose.",
+  "lact": "Mitoxantrone is excreted in human milk (detected up to 28 days after a dose); discontinue breastfeeding before starting therapy.",
+  "renal": "Predominantly eliminated by biliary/fecal routes with only minor renal excretion; no specific renal dose adjustment is provided in the label.",
+  "hepatic": "Clearance is reduced and exposure increased in hepatic impairment; no laboratory-based dosing scheme is given, and MS patients with hepatic impairment should ordinarily not be treated.",
+  "interactions": {
+    "major": ["Other cardiotoxic agents (anthracyclines) - additive cumulative cardiotoxicity", "Other myelosuppressive agents or radiotherapy - additive marrow suppression"],
+    "moderate": ["Live vaccines - avoid during immunosuppression"],
+    "minor": ["No significant interactions revealed in post-marketing cancer experience"],
+    "food": "N/A (IV)",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Do not mix with heparin in the same line (precipitate); blue-green urine discoloration is expected after dosing."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Alopecia", "Amenorrhea/menstrual changes", "Fatigue", "Infections", "Myelosuppression (leukopenia, anemia)", "Harmless blue-green urine and bluish sclera"],
+    "serious": ["Cardiotoxicity / congestive heart failure and reduced LVEF (may be delayed months to years)", "Severe myelosuppression with febrile neutropenia", "Secondary acute myeloid leukemia / myelodysplasia"],
+    "rare": ["Hepatic dysfunction", "Tumor lysis syndrome (leukemia)", "Hypersensitivity reactions"],
+    "emergency": ["Acute congestive heart failure", "Febrile neutropenia / sepsis", "Anaphylaxis", "Extravasation tissue injury"]
+  },
+  "monitoring": [
+    "LVEF by echocardiogram or MUGA before the initial dose and before every subsequent dose (MS); at cumulative thresholds in cancer",
+    "Complete blood count with platelets before each course",
+    "Liver function tests before each course",
+    "Serum uric acid in leukemia (start hypouricemic therapy before antileukemic treatment)",
+    "Pregnancy test before each dose in MS patients capable of becoming pregnant",
+    "Cumulative lifetime dose (cap 140 mg/m2 in MS)"
+  ],
+  "counsel": [
+    "Your urine may turn blue-green and the whites of your eyes may look bluish for about 24-48 hours - this is harmless",
+    "Use effective contraception and avoid pregnancy; report any possible pregnancy at once",
+    "Report symptoms of heart failure such as breathlessness, ankle swelling, or rapid weight gain",
+    "Report fever, sore throat, unusual bleeding, or bruising promptly (low blood counts)",
+    "Hair loss is common and usually reversible after treatment ends"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect over days; clinical response over treatment cycles"],
+    ["Peak", "End of IV infusion"],
+    ["Half-life", "Terminal ~23-215 h (median ~75 h, i.e. days); distribution alpha 6-12 min, beta 1.1-3.1 h"],
+    ["Duration", "Prolonged tissue retention; dosed on multi-week/monthly cycles"],
+    ["Storage", "20-25 C; do not freeze; after vial entry use within 7 days at 15-25 C or 14 days refrigerated"]
+  ],
+  "pearls": [
+    "Boxed warnings: potentially fatal cardiotoxicity (cumulative dose related) and secondary acute myeloid leukemia",
+    "In MS, the lifetime cumulative dose must never exceed 140 mg/m2 - track it meticulously",
+    "Assess LVEF before the first dose and before every subsequent dose in MS patients",
+    "Both heart failure and secondary leukemia can be delayed months to years, so monitoring continues after therapy ends",
+    "Pre-warn patients about harmless blue-green urine and bluish sclera",
+    "An anthracenedione, not an anthracycline, but shares anthracycline-like cardiotoxicity"
+  ],
+  "missed": "Given on a fixed schedule under specialist supervision; there is no patient self-administered make-up dose. Missed or delayed cycles are rescheduled by the treating oncology/neurology team with re-assessment of counts and LVEF.",
+  "overdose": "There is no specific antidote. Manage supportively with hematologic support (transfusions, growth factors) and antimicrobials for severe myelosuppression. Monitor cardiac and hepatic function closely. Mitoxantrone is not appreciably removed by dialysis.",
+  "refs": [
+    ["FDA Mitoxantrone Hydrochloride Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22MITOXANTRONE%20HYDROCHLORIDE%22"],
+    ["DailyMed - Mitoxantrone Hydrochloride Injection", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=mitoxantrone"]
+  ]
+}

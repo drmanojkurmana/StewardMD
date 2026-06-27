@@ -1,0 +1,95 @@
+{
+  "generic": "Octreotide Acetate",
+  "cls": "Somatostatin analogue",
+  "pharm": "Antisecretory / antineoplastic adjunct (growth hormone & GI hormone suppressant)",
+  "tags": ["somatostatin analogue", "acromegaly", "carcinoid", "VIPoma", "variceal bleeding", "secretory diarrhea"],
+  "quick": [
+    ["Adult dose", "Acromegaly 50 mcg SC TID initially; carcinoid 100-600 mcg/day divided"],
+    ["Meal", "Give SC between meals and at bedtime to limit GI upset"],
+    ["Pregnancy", "Use only if clearly needed; limited human data"],
+    ["Lactation", "Avoid or do not breastfeed; excretion unknown"],
+    ["Renal", "Reduce dose / extend interval in renal failure (dialysis)"],
+    ["Hepatic", "Lower maintenance dose may be needed in cirrhosis"],
+    ["Alcohol", "No specific interaction; moderate use"],
+    ["Monitoring", "Glucose, thyroid, gallbladder USG, ECG/HR, B12"]
+  ],
+  "summary": "Octreotide is a long-acting somatostatin analogue given by SC or IV injection that suppresses growth hormone, IGF-1, and multiple GI hormones. It controls symptoms of acromegaly, metastatic carcinoid tumors (flushing, diarrhea) and VIPomas (watery diarrhea), and is used off-label for variceal bleeding. Key risks are gallstones, glucose dysregulation and bradyarrhythmias.",
+  "indications": [
+    "Acromegaly: to reduce GH and IGF-1 in patients with inadequate response to or unsuitable for surgery, irradiation and bromocriptine",
+    "Symptomatic treatment of metastatic carcinoid tumors (suppresses severe diarrhea and flushing)",
+    "Treatment of profuse watery diarrhea associated with VIP-secreting tumors (VIPomas)",
+    "Off-label: acute esophageal/gastric variceal hemorrhage; refractory diarrhea; pancreatic fistula"
+  ],
+  "dosage": [
+    {"c": "Acromegaly (adult)", "r": "Initial", "d": "50 mcg SC three times daily for first 2 weeks", "t": "TID", "n": "Titrate by GH/IGF-1 response"},
+    {"c": "Acromegaly (adult)", "r": "Maintenance", "d": "100-500 mcg SC three times daily", "t": "TID", "n": "Doses above 300 mcg TID rarely add benefit"},
+    {"c": "Carcinoid tumors (adult)", "r": "Standard", "d": "100-600 mcg/day SC in 2-4 divided doses for first 2 weeks", "t": "2-4 divided", "n": "Range 50-1500 mcg/day"},
+    {"c": "VIPomas (adult)", "r": "Standard", "d": "200-300 mcg/day SC in 2-4 divided doses for first 2 weeks", "t": "2-4 divided", "n": "Adjust to control diarrhea; range 150-750 mcg/day"},
+    {"c": "Variceal bleeding (off-label)", "r": "Standard", "d": "50 mcg IV bolus then 50 mcg/h IV infusion", "t": "Continuous", "n": "Continue 2-5 days; not FDA-approved indication"}
+  ],
+  "admin": [
+    "Administer subcutaneously or intravenously; rotate SC injection sites systematically",
+    "Use smallest volume that delivers the dose to reduce SC injection pain; allow to reach room temperature, do not warm artificially",
+    "For IV use dilute in 50-200 mL saline or D5W and infuse over 15-30 minutes",
+    "Do NOT add to total parenteral nutrition (forms inactive glycosyl conjugate)",
+    "Give SC doses between meals and at bedtime to reduce GI side effects; inspect for particulates/discoloration"
+  ],
+  "moa": "Octreotide mimics natural somatostatin but is a more potent, longer-acting inhibitor of growth hormone, glucagon and insulin. It suppresses LH response to GnRH, decreases splanchnic blood flow, and inhibits release of serotonin, gastrin, VIP, secretin, motilin and pancreatic polypeptide. These actions reduce GH/IGF-1 in acromegaly and control the flushing and secretory diarrhea of carcinoid tumors and VIPomas.",
+  "contra": {
+    "absolute": ["Hypersensitivity to octreotide or any component of the formulation"],
+    "relative": ["Pre-existing gallstones or biliary disease", "Diabetes mellitus / glucose intolerance", "Bradycardia or cardiac conduction disease", "Severe renal failure (dialysis)"],
+    "monitor": ["Concurrent insulin/oral hypoglycemics", "Concurrent bradycardic drugs (beta-blockers, digoxin)", "Cyclosporine (reduced levels)"]
+  },
+  "preg": "Use only if clearly needed. Human data are limited; somatostatin analogues cross the placenta. In acromegaly, fetal growth should be monitored.",
+  "lact": "It is not known whether octreotide is excreted in human milk. Exercise caution; consider not breastfeeding during therapy.",
+  "renal": "Clearance is reduced in renal impairment and elimination half-life is prolonged in dialysis patients; reduce maintenance dose or extend the dosing interval and titrate to response.",
+  "hepatic": "Clearance is decreased in hepatic cirrhosis; the maintenance dose may need to be reduced. Monitor response carefully.",
+  "interactions": {
+    "major": ["Bradycardic agents (beta-blockers, calcium-channel blockers, digoxin) - additive bradycardia/AV block; dose adjustment may be needed"],
+    "moderate": ["Insulin and oral hypoglycemics - altered glucose control; dose adjustment needed", "Cyclosporine - decreased blood levels (transplant rejection risk)", "Bromocriptine - increased bromocriptine availability", "Drugs largely cleared by CYP3A4 with narrow margin (e.g., quinidine) - octreotide may alter clearance"],
+    "minor": ["Drugs with low therapeutic index requiring dose adjustment"],
+    "food": "Decreases intestinal absorption of dietary fat; may reduce absorption of some oral nutrients.",
+    "alcohol": "No specific interaction described.",
+    "diagnostics": "May alter thyroid function tests; can cause hypo- or hyperglycemia and Schilling test abnormalities (reduced B12)."
+  },
+  "se": {
+    "common": ["Diarrhea", "Abdominal pain/cramps", "Nausea", "Flatulence", "Injection-site pain", "Headache", "Hyperglycemia or hypoglycemia"],
+    "serious": ["Cholelithiasis and biliary sludge with cholecystitis", "Bradycardia and cardiac conduction abnormalities (AV block)", "Hypothyroidism", "Pancreatitis", "Severe hyper-/hypoglycemia"],
+    "rare": ["Anaphylaxis/hypersensitivity", "Steatorrhea and fat malabsorption", "Vitamin B12 deficiency", "Acute hepatitis"],
+    "emergency": ["Complete AV block / symptomatic bradycardia", "Acute cholecystitis or biliary obstruction", "Severe hypoglycemia", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Baseline and periodic gallbladder ultrasound (gallstones/sludge)",
+    "Blood glucose (and HbA1c in diabetics); adjust antidiabetic therapy",
+    "Thyroid function (TSH, T4) periodically",
+    "Heart rate and ECG, especially with IV use or cardiac disease",
+    "Vitamin B12 with long-term use; GH and IGF-1 in acromegaly"
+  ],
+  "counsel": [
+    "Rotate injection sites and use proper aseptic SC technique",
+    "Report new abdominal pain, fatty/pale stools or yellowing of skin (gallbladder/liver)",
+    "Watch for symptoms of low or high blood sugar if diabetic",
+    "Report slow heartbeat, dizziness or fainting",
+    "Refrigerate vials; protect from light and discard unused portions"
+  ],
+  "pk": [
+    ["Onset", "GI hormone suppression within minutes (IV); rapid after SC"],
+    ["Peak", "~0.4 h after SC (peak ~5.2 ng/mL for 100 mcg)"],
+    ["Half-life", "~1.7 hours (vs 1-3 min for native somatostatin)"],
+    ["Duration", "Up to 12 hours of GH suppression per SC dose"],
+    ["Storage", "Refrigerate 2-8 C, protect from light; stable 14 days at room temp"]
+  ],
+  "pearls": [
+    "Give SC doses between meals and at bedtime to minimize nausea and cramping",
+    "Baseline gallbladder ultrasound recommended; gallstones are common with chronic use",
+    "Monitor blood glucose closely - can cause both hypo- and hyperglycemia",
+    "Do not add to TPN solutions (forms inactive conjugate)",
+    "Long-acting depot (LAR) IM formulation allows monthly dosing once SC dose is stabilized"
+  ],
+  "missed": "For scheduled SC dosing, give the missed dose as soon as remembered unless it is near the next dose, then skip it; do not double. For depot (LAR) injections, contact the prescriber to reschedule.",
+  "overdose": "Reported overdoses caused transient effects such as hypo/hyperglycemia, flushing, nausea, diarrhea, weakness and bradycardia/arrhythmia. Discontinue and provide supportive symptomatic care with cardiac and glucose monitoring; no specific antidote.",
+  "refs": [
+    ["FDA Octreotide Acetate Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22octreotide+acetate%22"],
+    ["FDA DailyMed - Octreotide Acetate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

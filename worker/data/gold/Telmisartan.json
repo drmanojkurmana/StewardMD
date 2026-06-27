@@ -1,0 +1,89 @@
+{
+  "generic": "Telmisartan",
+  "cls": "Angiotensin II receptor blocker (ARB)",
+  "pharm": "Antihypertensive",
+  "tags": ["ARB", "hypertension", "cardiovascular risk", "blood pressure", "RAAS"],
+  "quick": [
+    ["Adult dose", "40 mg OD (HTN); 80 mg OD (CV risk)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Contraindicated (2nd/3rd trimester)"],
+    ["Lactation", "Not recommended"],
+    ["Renal", "No initial adjustment; caution if severe"],
+    ["Hepatic", "Start low; max 40 mg in mild-moderate"],
+    ["Alcohol", "May enhance hypotension"],
+    ["Monitoring", "BP, potassium, renal function"]
+  ],
+  "summary": "Telmisartan is a long-acting angiotensin II receptor blocker used to treat hypertension and reduce cardiovascular risk in patients intolerant of ACE inhibitors. Dosed 40-80 mg once daily. Contraindicated in pregnancy; monitor potassium and renal function.",
+  "indications": [
+    "Treatment of hypertension to lower blood pressure",
+    "Cardiovascular risk reduction in patients >=55 years at high CV risk unable to take ACE inhibitors"
+  ],
+  "dosage": [
+    {"c": "Hypertension (adult)", "r": "Standard", "d": "40 mg once daily; range 20-80 mg/day", "t": "Once daily", "n": "Max effect at 4 weeks"},
+    {"c": "Cardiovascular risk reduction", "r": "Standard", "d": "80 mg once daily", "t": "Once daily", "n": "Monitor BP; adjust other antihypertensives"},
+    {"c": "Volume-depleted patients", "r": "Reduced start", "d": "Consider lower starting dose under supervision", "t": "Once daily", "n": "Correct volume depletion first"}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Do not remove tablet from blister until immediately before dosing",
+    "Correct volume/salt depletion before starting if present",
+    "Take at the same time each day",
+    "Monitor BP, electrolytes and renal function periodically"
+  ],
+  "moa": "Selectively and durably blocks the angiotensin II type-1 (AT1) receptor, preventing angiotensin II-mediated vasoconstriction and aldosterone secretion. This lowers peripheral vascular resistance and blood pressure without affecting bradykinin (hence less cough than ACE inhibitors).",
+  "contra": {
+    "absolute": ["Pregnancy", "Hypersensitivity to telmisartan", "Concomitant aliskiren in patients with diabetes"],
+    "relative": ["Bilateral renal artery stenosis", "Severe hepatic impairment / biliary obstruction", "Volume or salt depletion", "Hyperkalemia"],
+    "monitor": ["Combination with ACE inhibitor or aliskiren", "Concurrent potassium-sparing diuretics or supplements", "Pre-existing renal impairment"]
+  },
+  "preg": "Contraindicated. Drugs acting on the renin-angiotensin system can cause fetal injury and death, especially in the second and third trimesters. Discontinue as soon as pregnancy is detected.",
+  "lact": "Not recommended; no data on excretion in human milk. Consider alternative agent or discontinue nursing.",
+  "renal": "No initial dose adjustment needed, including dialysis patients. Use caution and monitor renal function in severe impairment or renal artery stenosis; not removed by hemodialysis.",
+  "hepatic": "Largely eliminated in bile; use with caution. In mild-to-moderate impairment do not exceed 40 mg once daily. Contraindicated in biliary obstructive disorders and severe hepatic impairment.",
+  "interactions": {
+    "major": ["Aliskiren in diabetics - contraindicated", "ACE inhibitors - avoid dual RAAS blockade (renal failure, hyperkalemia, hypotension)", "Potassium-sparing diuretics / potassium supplements - hyperkalemia"],
+    "moderate": ["NSAIDs - reduced antihypertensive effect and acute renal failure (especially elderly/volume-depleted)", "Lithium - increased lithium levels and toxicity", "Digoxin - increased digoxin peak/trough"],
+    "minor": ["Other antihypertensives - additive BP lowering", "Ramipril - increased exposure of both"],
+    "food": "No clinically significant food interaction.",
+    "alcohol": "May potentiate hypotensive effect; advise caution.",
+    "diagnostics": "May increase serum potassium and creatinine."
+  },
+  "se": {
+    "common": ["Upper respiratory infection", "Back pain", "Sinusitis", "Diarrhea", "Dizziness"],
+    "serious": ["Symptomatic hypotension (especially volume-depleted)", "Acute renal failure", "Hyperkalemia"],
+    "rare": ["Angioedema", "Rhabdomyolysis", "Hepatic dysfunction"],
+    "emergency": ["Angioedema with airway compromise", "Severe hypotension", "Severe hyperkalemia with cardiac effects"]
+  },
+  "monitoring": [
+    "Blood pressure at baseline and follow-up",
+    "Serum potassium, particularly with diuretics/renal disease",
+    "Renal function (creatinine, BUN) after initiation and dose changes",
+    "Volume status in patients on diuretics"
+  ],
+  "counsel": [
+    "Take once daily, with or without food, at the same time",
+    "Rise slowly to reduce dizziness; report fainting",
+    "Avoid potassium supplements/salt substitutes unless advised",
+    "Stop and contact provider immediately if pregnant",
+    "Report facial/lip/throat swelling (angioedema)"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within 3 hours; apparent by 2 weeks"],
+    ["Peak", "0.5-1 hour"],
+    ["Half-life", "~24 hours"],
+    ["Duration", ">24 hours (once-daily dosing)"],
+    ["Storage", "Store at 20-25 C; keep in blister until use"]
+  ],
+  "pearls": [
+    "Longest half-life among ARBs - strong 24-hour BP control",
+    "Less cough/angioedema than ACE inhibitors",
+    "Useful CV protection alternative when ACE inhibitor not tolerated",
+    "Avoid dual RAAS blockade - no benefit, more harm"
+  ],
+  "missed": "Take the missed dose when remembered. If it is nearly time for the next dose, skip it; do not take two doses at once.",
+  "overdose": "Most likely manifestation is hypotension and tachycardia (or bradycardia). Treat supportively with IV fluids and supine positioning. Telmisartan is not removed by hemodialysis.",
+  "refs": [
+    ["FDA Telmisartan Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22telmisartan%22"],
+    ["FDA DailyMed - Telmisartan", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "generic": "Pioglitazone",
+  "cls": "Thiazolidinedione (PPAR-gamma agonist) antidiabetic",
+  "pharm": "Activates peroxisome proliferator-activated receptor gamma (PPAR-gamma), increasing insulin sensitivity in muscle, fat, and liver to lower blood glucose in the presence of endogenous insulin.",
+  "tags": ["Rx only", "Boxed warning (heart failure)", "Insulin sensitizer", "Once daily"],
+  "quick": [
+    ["Adult dose", "Start 15-30 mg once daily; max 45 mg/day"],
+    ["Meal", "Take with or without food"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Avoid; do not breastfeed"],
+    ["Renal", "No dose adjustment; not for dialysis-initiation in some settings"],
+    ["Hepatic", "Do not start if active liver disease or ALT >2.5x ULN"],
+    ["Alcohol", "Limit; affects glycemic control"],
+    ["Monitoring", "Liver enzymes, signs of heart failure, edema, weight"]
+  ],
+  "summary": "Pioglitazone is a thiazolidinedione that improves insulin sensitivity to lower blood glucose in adults with type 2 diabetes, used as monotherapy or with other agents. It carries a boxed warning that thiazolidinediones can cause or worsen congestive heart failure; it is contraindicated in NYHA Class III/IV heart failure and not recommended in symptomatic heart failure. Other notable risks include fluid retention/edema, weight gain, fractures, bladder cancer concern with long-term/high-dose use, and macular edema. It works only when endogenous insulin is present.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus (monotherapy or combination therapy)"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes (no heart failure)", "r": "Adult oral", "d": "Initiate 15 mg or 30 mg once daily", "t": "Once daily", "n": "Take with or without food"},
+    {"c": "Type 2 diabetes (NYHA Class I-II heart failure)", "r": "Adult oral", "d": "Initiate 15 mg once daily", "t": "Once daily", "n": "Monitor closely for heart failure signs"},
+    {"c": "Dose titration", "r": "Adult oral", "d": "Increase in 15 mg increments up to 45 mg once daily if inadequate control", "t": "Once daily", "n": "Maximum 45 mg/day"},
+    {"c": "With strong CYP2C8 inhibitor (gemfibrozil)", "r": "Adult oral", "d": "Limit maximum dose to 15 mg once daily", "t": "Once daily", "n": "Gemfibrozil markedly increases pioglitazone exposure"}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Obtain liver tests before starting; do not initiate with active liver disease or ALT >2.5x ULN",
+    "Limit initial dose to 15 mg once daily in NYHA Class I-II heart failure",
+    "Limit maximum dose to 15 mg/day when used with gemfibrozil",
+    "Discontinue or reduce dose if heart failure develops or worsens"
+  ],
+  "moa": "Pioglitazone is a selective agonist of peroxisome proliferator-activated receptor gamma (PPAR-gamma), a nuclear receptor abundant in adipose tissue, skeletal muscle, and liver. Activation modulates the transcription of insulin-responsive genes involved in glucose and lipid metabolism, increasing insulin sensitivity, enhancing peripheral glucose uptake, and decreasing hepatic glucose output. It requires the presence of endogenous insulin and therefore does not work in type 1 diabetes.",
+  "contra": {
+    "absolute": [
+      "NYHA Class III or IV heart failure (initiation)",
+      "Hypersensitivity to pioglitazone or any component"
+    ],
+    "relative": [
+      "Symptomatic heart failure (not recommended)",
+      "Active bladder cancer or history of bladder cancer",
+      "Active liver disease or ALT greater than 2.5x the upper limit of normal",
+      "Premenopausal anovulatory women (may resume ovulation - pregnancy risk)",
+      "Risk of fractures (especially women)"
+    ],
+    "monitor": [
+      "Signs and symptoms of heart failure (edema, rapid weight gain, dyspnea)",
+      "Liver enzymes if hepatic dysfunction suspected",
+      "Hematuria/bladder cancer symptoms; vision (macular edema)"
+    ]
+  },
+  "preg": "There are limited data in pregnant women; use only if clearly needed. Poorly controlled diabetes in pregnancy carries risk, but ovulation may resume in anovulatory premenopausal women, increasing pregnancy risk and requiring contraception counseling.",
+  "lact": "It is not known whether pioglitazone is excreted in human milk; because of potential serious adverse reactions in the infant, do not use while breastfeeding (discontinue the drug or breastfeeding).",
+  "renal": "No dosage adjustment is required for renal impairment; pioglitazone is not significantly renally cleared. Use caution in patients with fluid-retention risk.",
+  "hepatic": "Do not initiate in patients with active liver disease or ALT greater than 2.5 times the upper limit of normal. Check liver tests at baseline and as clinically indicated; discontinue if ALT rises to more than 3x ULN with symptoms or jaundice, or if liver injury is confirmed.",
+  "interactions": {
+    "major": [
+      "Gemfibrozil (strong CYP2C8 inhibitor) - markedly increases pioglitazone exposure; limit dose to 15 mg/day",
+      "Insulin and insulin secretagogues (sulfonylureas) - additive hypoglycemia and fluid retention/heart failure risk"
+    ],
+    "moderate": [
+      "Rifampin (CYP2C8 inducer) - decreases pioglitazone exposure and efficacy",
+      "Hormonal contraceptives (may reduce contraceptive efficacy)",
+      "Other antidiabetic agents (additive glucose lowering)"
+    ],
+    "minor": ["Topiramate (additive metabolic effects)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Limit alcohol; it can disturb glycemic control.",
+    "diagnostics": "May lower hemoglobin/hematocrit (hemodilution); can raise CPK; monitor HbA1c for efficacy."
+  },
+  "se": {
+    "common": ["Edema/fluid retention", "Weight gain", "Upper respiratory tract infection", "Headache", "Myalgia"],
+    "serious": ["Congestive heart failure / worsening heart failure", "Bone fractures (especially in women)", "Bladder cancer (long-term, high cumulative dose)", "Hepatotoxicity", "Macular edema", "Hypoglycemia (with insulin/secretagogues)"],
+    "rare": ["Anaphylaxis/angioedema", "Severe hepatic injury"],
+    "emergency": ["Acute decompensated heart failure/pulmonary edema", "Severe hepatic reaction", "Anaphylaxis"]
+  },
+  "monitoring": ["Signs/symptoms of heart failure and weight/edema", "Glycemic control (HbA1c, fasting glucose)", "Liver enzymes as clinically indicated", "Hematuria and bladder cancer symptoms", "Eye examinations for macular edema; bone health"],
+  "counsel": [
+    "Report rapid weight gain, swelling, or shortness of breath - these can mean heart failure",
+    "Take once a day, with or without food",
+    "Tell your doctor about blood in the urine or new urinary symptoms",
+    "This medicine can cause low blood sugar when combined with insulin or sulfonylureas - know the symptoms",
+    "Premenopausal women: ovulation may resume, so use reliable contraception"
+  ],
+  "pk": [
+    ["Onset", "Glucose lowering over days to weeks; full effect in weeks"],
+    ["Peak", "Tmax ~2 hours fasting (delayed slightly with food)"],
+    ["Half-life", "Pioglitazone 3-7 h; active metabolites 16-24 h"],
+    ["Duration", "~24 hours (once-daily dosing)"],
+    ["Storage", "Store at 25 C (77 F); excursions permitted 15-30 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warning: can cause or worsen congestive heart failure - contraindicated in NYHA Class III/IV",
+    "Watch for edema and rapid weight gain, which may herald heart failure",
+    "Associated with fractures (notably distal limb fractures in women) and possible bladder cancer with long-term/high cumulative dose",
+    "Limit to 15 mg/day with gemfibrozil (CYP2C8 inhibition)",
+    "Works only with endogenous insulin - not for type 1 diabetes or DKA; weight-neutral hypoglycemia risk unless combined with insulin/sulfonylurea"
+  ],
+  "missed": "Take the missed dose as soon as you remember on the same day; if it is almost time for the next dose, skip it. Do not take two doses on the same day.",
+  "overdose": "Limited overdose data exist. Hypoglycemia is unlikely with monotherapy but may occur with insulin or sulfonylureas. Management is supportive, including symptomatic treatment and correction of hypoglycemia if present.",
+  "refs": [
+    ["FDA Label - Pioglitazone Hydrochloride (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pioglitazone%20hydrochloride%22"],
+    ["DailyMed - Pioglitazone", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=pioglitazone"]
+  ]
+}

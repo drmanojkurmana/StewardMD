@@ -1,0 +1,153 @@
+{
+  "generic": "Axitinib",
+  "cls": "Tyrosine kinase inhibitor (VEGFR-1/2/3 inhibitor)",
+  "pharm": "Antineoplastic - oral VEGF receptor tyrosine kinase inhibitor",
+  "tags": [
+    "tyrosine kinase inhibitor",
+    "VEGFR",
+    "renal cell carcinoma",
+    "RCC",
+    "antiangiogenic",
+    "oncology"
+  ],
+  "quick": [
+    ["Adult dose", "5 mg orally twice daily (about 12 hours apart), titrated by tolerability"],
+    ["Meal", "May be taken with or without food; swallow whole with water"],
+    ["Pregnancy", "Avoid - can cause fetal harm; use effective contraception"],
+    ["Lactation", "Avoid during and for 2 weeks after the final dose"],
+    ["Renal", "No adjustment for mild-moderate; limited data in severe/ESRD"],
+    ["Hepatic", "Moderate (Child-Pugh B): reduce starting dose by ~half; avoid in severe"],
+    ["Alcohol", "No specific interaction; moderation advised"],
+    ["Monitoring", "Blood pressure, thyroid function, proteinuria, LFTs, bleeding/wound healing"]
+  ],
+  "summary": "Axitinib is an oral tyrosine kinase inhibitor that potently blocks vascular endothelial growth factor receptors (VEGFR-1, -2, -3), used to treat advanced renal cell carcinoma, alone after failure of one prior systemic therapy or in the first line combined with avelumab or pembrolizumab. Dosing starts at 5 mg twice daily and is titrated to tolerability. Hypertension (including hypertensive crisis) and hemorrhage are characteristic risks, along with thromboembolism, GI perforation, thyroid dysfunction, and impaired wound healing.",
+  "indications": [
+    "First-line treatment of advanced renal cell carcinoma (RCC) in combination with avelumab",
+    "First-line treatment of advanced RCC in combination with pembrolizumab",
+    "Treatment of advanced RCC as a single agent after failure of one prior systemic therapy"
+  ],
+  "dosage": [
+    {"c": "Advanced RCC with avelumab", "r": "Adult", "d": "5 mg twice daily (avelumab 800 mg every 2 weeks)", "t": "Twice daily (~12 h apart)", "n": "Titrate axitinib per tolerability"},
+    {"c": "Advanced RCC with pembrolizumab", "r": "Adult", "d": "5 mg twice daily (pembrolizumab 200 mg q3w or 400 mg q6w)", "t": "Twice daily (~12 h apart)", "n": "Titrate axitinib per tolerability"},
+    {"c": "Advanced RCC - single agent (after prior therapy)", "r": "Adult", "d": "Start 5 mg twice daily; if tolerated >=2 weeks (no >40/90 BP, no antihypertensive need), increase to 7 mg then 10 mg twice daily", "t": "Twice daily (~12 h apart)", "n": "Reduce stepwise to 3 mg then 2 mg twice daily for toxicity"},
+    {"c": "With strong CYP3A4/5 inhibitor (if unavoidable)", "r": "Adult", "d": "Decrease dose by approximately half", "t": "Twice daily", "n": "Resume prior dose when the inhibitor is stopped"},
+    {"c": "Moderate hepatic impairment (Child-Pugh B)", "r": "Adult", "d": "Reduce the starting dose by approximately half", "t": "Twice daily", "n": "Not studied in severe (Child-Pugh C) - avoid"}
+  ],
+  "admin": [
+    "Take doses approximately 12 hours apart, with or without food",
+    "Swallow tablets whole with a glass of water; do not crush or split",
+    "Control blood pressure before starting and monitor during treatment",
+    "Stop at least 24 hours (some protocols 2-7 days) before elective surgery and resume after adequate wound healing",
+    "Avoid grapefruit and strong CYP3A4 inhibitors/inducers where possible"
+  ],
+  "moa": "Axitinib is a potent and selective small-molecule inhibitor of vascular endothelial growth factor receptors VEGFR-1, VEGFR-2, and VEGFR-3. By blocking these receptor tyrosine kinases, it inhibits VEGF-mediated endothelial cell proliferation and survival, thereby suppressing tumor angiogenesis and the vascular supply that solid tumors such as renal cell carcinoma depend on for growth.",
+  "contra": {
+    "absolute": [
+      "None listed in labeling (use governed by warnings/precautions)"
+    ],
+    "relative": [
+      "Uncontrolled hypertension",
+      "Recent or active bleeding / hemoptysis",
+      "Recent arterial or venous thromboembolic event",
+      "Pregnancy",
+      "Recent surgery or non-healing wound",
+      "Severe hepatic impairment (Child-Pugh C)"
+    ],
+    "monitor": [
+      "Blood pressure",
+      "Thyroid function",
+      "Urine protein",
+      "Liver function tests",
+      "Signs of bleeding, thrombosis, GI perforation/fistula, and wound healing"
+    ]
+  },
+  "preg": "Axitinib can cause fetal harm. Advise females of reproductive potential to use effective contraception during treatment and for 1 week after the last dose; avoid in pregnancy.",
+  "lact": "Because of the potential for serious adverse reactions in the breastfed child, advise women not to breastfeed during treatment and for 2 weeks after the final dose.",
+  "renal": "No starting-dose adjustment is needed for mild to moderate renal impairment. There are limited data in severe renal impairment and end-stage renal disease; use with caution.",
+  "hepatic": "For moderate hepatic impairment (Child-Pugh B), reduce the starting dose by approximately half. Axitinib has not been studied in severe hepatic impairment (Child-Pugh C) and should be avoided.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4/5 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir, grapefruit) - increase axitinib levels; avoid or reduce dose by ~half",
+      "Strong CYP3A4/5 inducers (rifampin, carbamazepine, phenytoin, phenobarbital, St. John's wort) - reduce axitinib levels; avoid"
+    ],
+    "moderate": [
+      "Antihypertensive agents (additive blood-pressure effects - monitor)",
+      "Anticoagulants / antiplatelets (increased bleeding risk)"
+    ],
+    "minor": [
+      "Other QT-affecting or thyroid-affecting drugs (monitor)"
+    ],
+    "food": "May be taken with or without food; avoid grapefruit and grapefruit juice (CYP3A4 inhibition)",
+    "alcohol": "No specific interaction; moderation advised",
+    "diagnostics": "Can raise blood pressure, alter thyroid function tests, cause proteinuria, and raise liver enzymes"
+  },
+  "se": {
+    "common": [
+      "Hypertension",
+      "Diarrhea",
+      "Fatigue",
+      "Decreased appetite",
+      "Nausea",
+      "Dysphonia (hoarseness)",
+      "Palmar-plantar erythrodysesthesia (hand-foot syndrome)",
+      "Hypothyroidism",
+      "Weight loss"
+    ],
+    "serious": [
+      "Hypertension including hypertensive crisis",
+      "Arterial and venous thromboembolic events (can be fatal)",
+      "Hemorrhage (including GI, cerebral, hemoptysis)",
+      "Gastrointestinal perforation and fistula formation",
+      "Cardiac failure",
+      "Proteinuria / nephrotic syndrome",
+      "Hepatotoxicity (especially with checkpoint inhibitors)",
+      "Posterior reversible encephalopathy syndrome (PRES)",
+      "Impaired wound healing"
+    ],
+    "rare": [
+      "Reversible posterior leukoencephalopathy",
+      "Thyrotoxicosis"
+    ],
+    "emergency": [
+      "Hypertensive crisis",
+      "Major hemorrhage or stroke",
+      "Arterial thromboembolic event (MI, TIA, stroke)",
+      "Gastrointestinal perforation",
+      "PRES (seizures, severe headache, visual loss)"
+    ]
+  },
+  "monitoring": [
+    "Blood pressure - control before starting and monitor regularly",
+    "Thyroid function before and periodically during treatment",
+    "Urine protein for proteinuria",
+    "Liver function tests, especially with avelumab/pembrolizumab",
+    "Signs of bleeding, thromboembolism, GI perforation/fistula, and cardiac failure",
+    "Wound healing around surgical procedures"
+  ],
+  "counsel": [
+    "Take it twice a day about 12 hours apart and keep all blood-pressure and blood-test appointments",
+    "Report severe headache, vision changes, chest pain, weakness/numbness, or any unusual bleeding right away",
+    "Tell your team before any surgery or dental procedure - the drug is usually stopped beforehand",
+    "Avoid grapefruit and let your doctor know about all other medicines and supplements",
+    "Use effective contraception during and after treatment and do not breastfeed"
+  ],
+  "pk": [
+    ["Onset", "Antiangiogenic effect over days to weeks; antitumor response assessed by imaging"],
+    ["Peak", "Peak plasma concentration about 2.5-4 hours after an oral dose"],
+    ["Half-life", "Approximately 2.5-6 hours"],
+    ["Duration", "Short half-life supports twice-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Hypertension (including hypertensive crisis) is a class effect - control BP before starting and monitor closely",
+    "Hemorrhage and arterial/venous thromboembolism can be fatal; discontinue for arterial thromboembolic events",
+    "Hold before elective surgery and resume only after adequate wound healing",
+    "CYP3A4 substrate - avoid grapefruit and strong inhibitors/inducers; halve the dose if a strong inhibitor is unavoidable"
+  ],
+  "missed": "If you miss a dose or vomit after a dose, do not take an extra dose - take the next dose at the usual scheduled time. Do not take two doses at once.",
+  "overdose": "There is no specific antidote for axitinib overdose. In a study, doses above the recommended level were associated with dizziness and hypertension. Management is supportive; for suspected overdose, withhold axitinib and provide supportive care with close blood-pressure monitoring.",
+  "refs": [
+    ["FDA Prescribing Information - Inlyta (axitinib)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/202324s011lbl.pdf"],
+    ["openFDA Drug Label - Axitinib (Inlyta)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22axitinib%22"]
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "generic": "Warfarin",
+  "cls": "Oral anticoagulant - vitamin K antagonist",
+  "pharm": "Vitamin K antagonist that inhibits VKORC1, reducing synthesis of vitamin K-dependent clotting factors II, VII, IX, X and proteins C and S; requires INR monitoring.",
+  "tags": [
+    "Rx only",
+    "Boxed warning - bleeding",
+    "Vitamin K antagonist",
+    "Requires INR monitoring"
+  ],
+  "quick": [
+    ["Adult dose", "Individualized to INR; typical maintenance 2-10 mg once daily, target INR usually 2-3"],
+    ["Meal", "Take at the same time daily; keep vitamin K (leafy greens) intake consistent"],
+    ["Pregnancy", "Contraindicated (except some mechanical heart valves) - causes embryopathy and fetal hemorrhage"],
+    ["Lactation", "Compatible; not expected in human milk in significant amounts"],
+    ["Renal", "No fixed adjustment; monitor INR closely (bleeding risk increased)"],
+    ["Hepatic", "Increased sensitivity; impaired synthesis - monitor INR closely"],
+    ["Alcohol", "Avoid acute/binge use; alcohol alters INR and bleeding risk"],
+    ["Monitoring", "INR regularly, signs of bleeding, diet/drug changes affecting INR"]
+  ],
+  "summary": "Warfarin is an oral vitamin K antagonist used for prophylaxis and treatment of venous thromboembolism and pulmonary embolism, prevention of thromboembolic complications of atrial fibrillation and/or cardiac valve replacement, and reduction of death, recurrent MI, and thromboembolic events after myocardial infarction. It carries a BOXED WARNING that it can cause major or fatal bleeding, requiring regular INR monitoring in all treated patients; diet, drugs, and many other factors affect the INR. Dosing is fully individualized to the INR (target usually 2-3, or 2.5-3.5 for some mechanical valves). It is contraindicated in pregnancy (except select mechanical valves), active bleeding, and bleeding tendencies, and has an enormous list of drug and dietary (vitamin K) interactions.",
+  "indications": [
+    "Prophylaxis and treatment of venous thrombosis and its extension, and pulmonary embolism",
+    "Prophylaxis and treatment of thromboembolic complications associated with atrial fibrillation and/or cardiac valve replacement",
+    "Reduction in the risk of death, recurrent myocardial infarction, and thromboembolic events (such as stroke or systemic embolization) after myocardial infarction"
+  ],
+  "dosage": [
+    {"c": "Venous thromboembolism (DVT/PE) and atrial fibrillation", "r": "Adult oral", "d": "Individualize to INR; target INR 2.5 (range 2-3); typical maintenance 2-10 mg once daily", "t": "Once daily", "n": "INR >4 gives no added benefit and increases bleeding"},
+    {"c": "Mechanical heart valve / high-risk valve replacement", "r": "Adult oral", "d": "Individualize to INR; target INR often 2.5-3.5 depending on valve and position", "t": "Once daily", "n": "Follow current evidence-based guidelines"},
+    {"c": "Initiation", "r": "Adult oral", "d": "Lower starting doses (e.g., <=5 mg/day) in elderly, debilitated, or those with bleeding/INR-sensitivity risk; genotype (CYP2C9/VKORC1) can inform initial dose", "t": "Once daily", "n": "No loading doses >10 mg recommended in most patients"}
+  ],
+  "admin": [
+    "Take once daily at the same time each day, with or without food",
+    "Dose is adjusted to the INR - obtain daily INR at initiation until stable, then every 1-4 weeks",
+    "Keep dietary vitamin K (green leafy vegetables) intake consistent rather than avoiding it entirely",
+    "Do not start, stop, or change other medicines or supplements without checking the effect on INR",
+    "Heparin overlap (bridging) is needed when rapid anticoagulation is required, as full warfarin effect takes days"
+  ],
+  "moa": "Warfarin inhibits the synthesis of vitamin K-dependent clotting factors II, VII, IX, and X and the anticoagulant proteins C and S. It blocks the C1 subunit of the vitamin K epoxide reductase (VKORC1) enzyme complex, reducing regeneration of vitamin K1 epoxide and thereby the gamma-carboxylation needed to make these factors biologically active. The anticoagulant effect is delayed until existing functional clotting factors are cleared, which is why full effect takes several days.",
+  "contra": {
+    "absolute": [
+      "Pregnancy (except in pregnant women with mechanical heart valves at high thromboembolic risk) - causes warfarin embryopathy, fetal hemorrhage, fetal death",
+      "Hemorrhagic tendencies or blood dyscrasias",
+      "Active bleeding or recent/contemplated CNS or eye surgery, or traumatic surgery with large open surfaces",
+      "Active GI/GU/respiratory tract ulceration or bleeding; CNS hemorrhage; cerebral aneurysm or dissecting aorta; pericarditis/pericardial effusion; bacterial endocarditis",
+      "Threatened abortion, eclampsia, preeclampsia",
+      "Unsupervised patients with potential for high noncompliance; spinal puncture/procedures with risk of uncontrollable bleeding",
+      "Malignant or uncontrolled severe hypertension; known hypersensitivity to warfarin"
+    ],
+    "relative": [
+      "High fall risk, recent surgery, history of GI bleeding",
+      "Hepatic or renal impairment",
+      "Heparin-induced thrombocytopenia / protein C or S deficiency (skin necrosis risk)",
+      "Frequent dietary, drug, or alcohol changes affecting INR"
+    ],
+    "monitor": [
+      "INR at every relevant change",
+      "Signs and symptoms of bleeding",
+      "Hemoglobin/hematocrit",
+      "Diet and concurrent medication changes"
+    ]
+  },
+  "preg": "Warfarin is contraindicated in pregnancy except in pregnant women with mechanical heart valves at high risk of thromboembolism. It can cause fetal harm, including a recognized pattern of major congenital malformations (warfarin embryopathy), fatal fetal hemorrhage, spontaneous abortion, and fetal death. Women of childbearing potential should use effective contraception.",
+  "lact": "Warfarin is not expected to be present in human milk based on its physicochemical properties; it is generally considered compatible with breastfeeding. Monitor the infant for bruising or bleeding if there is concern.",
+  "renal": "No fixed dosage adjustment, but renal impairment increases bleeding risk and may alter response; monitor INR more frequently. Acute kidney injury (anticoagulant-related nephropathy) can occur with excessive anticoagulation.",
+  "hepatic": "Hepatic impairment may exaggerate the warfarin response by impairing clotting factor synthesis and warfarin metabolism; monitor INR closely and adjust dose carefully.",
+  "interactions": {
+    "major": [
+      "CYP2C9 inhibitors and amiodarone, metronidazole, trimethoprim-sulfamethoxazole, fluconazole, miconazole - markedly raise INR/bleeding",
+      "Antiplatelets and other anticoagulants (aspirin, clopidogrel, NSAIDs, heparins) - additive bleeding",
+      "Antibiotics that reduce gut vitamin K flora (e.g., broad-spectrum antibiotics) - raise INR",
+      "CYP inducers (rifampin, carbamazepine, phenytoin, barbiturates) - lower INR and reduce efficacy",
+      "Vitamin K1 (phytonadione) and vitamin-K-rich supplements - lower INR/reverse effect"
+    ],
+    "moderate": [
+      "SSRIs/SNRIs - increased bleeding risk",
+      "Acetaminophen (especially sustained high doses) - can raise INR",
+      "Statins, fibrates, fenofibrate - may increase INR",
+      "Thyroid hormone changes - alter clotting factor turnover and INR"
+    ],
+    "minor": [
+      "Numerous additional drugs alter INR; review every new medication and supplement"
+    ],
+    "food": "Keep intake of vitamin K-rich foods (kale, spinach, broccoli, Brussels sprouts, green tea) consistent; large changes alter INR. Cranberry juice and grapefruit may increase effect.",
+    "alcohol": "Acute or binge alcohol can raise INR; chronic heavy use can lower it - avoid significant or variable intake.",
+    "diagnostics": "Therapy is monitored by the INR (prothrombin time standardized). Many herbal products (St. John's wort lowers, ginkgo/garlic/ginseng/dong quai may raise) affect INR."
+  },
+  "se": {
+    "common": [
+      "Bleeding/bruising (most common - epistaxis, gum bleeding, hematuria)",
+      "Minor GI upset"
+    ],
+    "serious": [
+      "Major or fatal hemorrhage (intracranial, GI, retroperitoneal)",
+      "Skin necrosis and gangrene (early, related to protein C/S deficiency)",
+      "Calciphylaxis",
+      "Systemic atheroemboli and cholesterol microemboli (purple toe syndrome)"
+    ],
+    "rare": [
+      "Hepatitis/elevated liver enzymes",
+      "Hypersensitivity/allergic reactions",
+      "Anticoagulant-related nephropathy"
+    ],
+    "emergency": [
+      "Major or intracranial hemorrhage (severe headache, weakness, confusion)",
+      "GI bleeding (black/bloody stools, vomiting blood)",
+      "Skin necrosis or purple/painful toes"
+    ]
+  },
+  "monitoring": [
+    "INR daily at initiation until stable, then every 1-4 weeks (or more often after any change)",
+    "Signs and symptoms of bleeding at every visit",
+    "Hemoglobin/hematocrit if bleeding suspected",
+    "Review of all new drugs, supplements, diet, and alcohol changes for INR impact",
+    "Renal and hepatic function as clinically indicated"
+  ],
+  "counsel": [
+    "Take exactly as prescribed at the same time each day and never change the dose on your own - this is a blood thinner",
+    "Get your INR blood test as scheduled; your dose is set by these results",
+    "Keep your diet of green leafy vegetables (vitamin K) steady - do not suddenly start or stop them; limit alcohol",
+    "Report any unusual bleeding or bruising, red/black stools, pink/red urine, coughing or vomiting blood, or severe headache right away",
+    "Tell every doctor, dentist, and pharmacist you take warfarin before any new medicine, supplement, or procedure; avoid pregnancy"
+  ],
+  "pk": [
+    ["Onset", "Anticoagulant effect begins within ~24 h but full effect takes ~5-7 days"],
+    ["Peak", "Plasma peak ~4 hours; peak INR effect delayed 1-3 days"],
+    ["Half-life", "Approximately 20-60 hours (mean ~40 hours)"],
+    ["Duration", "Anticoagulant effect persists 2-5 days after stopping"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C; protect from light"]
+  ],
+  "pearls": [
+    "BOXED WARNING: can cause major or fatal bleeding - perform regular INR monitoring in ALL patients; diet, drugs, and many factors change the INR",
+    "Reverse with vitamin K1 (phytonadione) for non-urgent over-anticoagulation; use 4-factor PCC (preferred) or fresh frozen plasma plus vitamin K for major bleeding",
+    "Early procoagulant state (protein C/S fall first) can cause skin necrosis - overlap with heparin when starting in hypercoagulable patients",
+    "Keep dietary vitamin K (leafy greens) CONSISTENT rather than avoiding it; counsel on the huge interaction list",
+    "Target INR usually 2-3 (2.5-3.5 for some mechanical valves); INR >4 gives no added benefit and raises bleeding risk"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on the same day. If it is not remembered until the next day, skip the missed dose and resume the normal schedule - do NOT double the dose. Tell your healthcare provider about missed doses, as they affect the INR.",
+  "overdose": "Overdose or excessive anticoagulation manifests as bleeding and an elevated INR. Management depends on INR and bleeding: for high INR without significant bleeding, withhold warfarin and consider oral vitamin K1; for serious or life-threatening bleeding, give vitamin K1 plus 4-factor prothrombin complex concentrate (preferred) or fresh frozen plasma, and provide supportive/resuscitative care. Recombinant factor VIIa may be considered. Re-establish the cause and recheck INR after reversal.",
+  "refs": [
+    ["FDA Label - Warfarin Sodium (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22warfarin%22"],
+    ["DailyMed - Warfarin Sodium (Coumadin)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=warfarin"]
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "generic": "Cefazolin",
+  "cls": "First-generation cephalosporin antibiotic",
+  "pharm": "Parenteral first-generation cephalosporin; time-dependent bactericidal beta-lactam with activity against gram-positive cocci (incl. MSSA) and some gram-negative bacilli.",
+  "tags": ["Cephalosporin", "First-generation", "Beta-lactam", "Bactericidal", "Parenteral", "Surgical prophylaxis"],
+  "quick": [
+    ["Adult dose", "500 mg-1 g IV/IM q6-8h (up to 1-1.5 g q6h severe)"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Generally considered acceptable; cephalosporins widely used"],
+    ["Lactation", "Compatible; low milk levels"],
+    ["Renal", "Reduce dose/extend interval per CrCl"],
+    ["Hepatic", "No adjustment"],
+    ["Alcohol", "No disulfiram-like reaction (no MTT side chain)"],
+    ["Monitoring", "Renal function, signs of hypersensitivity/superinfection"]
+  ],
+  "summary": "Cefazolin is a parenteral first-generation cephalosporin, the standard agent for surgical antibiotic prophylaxis and for serious infections caused by MSSA and susceptible streptococci. Given IV or IM, it requires renal dose adjustment. It does not cover MRSA, enterococci, or most resistant gram-negatives, and is contraindicated in patients with cephalosporin allergy.",
+  "indications": [
+    "Respiratory tract infections (S. pneumoniae, Klebsiella, H. influenzae, S. aureus, group A strep)",
+    "Urinary tract infections (E. coli, P. mirabilis, Klebsiella, some enterobacter/enterococci)",
+    "Skin and skin structure infections (S. aureus, streptococci)",
+    "Biliary tract infections",
+    "Bone and joint infections (S. aureus)",
+    "Genital infections (prostatitis, epididymitis)",
+    "Septicemia and endocarditis due to susceptible organisms",
+    "Perioperative surgical prophylaxis"
+  ],
+  "dosage": [
+    {"c": "Moderate to severe infections", "r": "IV or IM", "d": "500 mg to 1 g", "t": "Every 6 to 8 hours", "n": "Adjust per susceptibility and severity"},
+    {"c": "Mild infections (susceptible gram-positive cocci)", "r": "IV or IM", "d": "250 mg to 500 mg", "t": "Every 8 hours", "n": ""},
+    {"c": "Acute uncomplicated UTI", "r": "IV or IM", "d": "1 g", "t": "Every 12 hours", "n": ""},
+    {"c": "Pneumococcal pneumonia", "r": "IV or IM", "d": "500 mg", "t": "Every 12 hours", "n": ""},
+    {"c": "Severe life-threatening (endocarditis, septicemia)", "r": "IV or IM", "d": "1 g to 1.5 g", "t": "Every 6 hours", "n": "Rarely up to 12 g/day"},
+    {"c": "Surgical prophylaxis", "r": "IV or IM", "d": "1 g", "t": "0.5-1 h before incision; 500 mg-1 g intraop if >=2 h; 500 mg-1 g q6-8h for 24 h post-op", "n": "Re-dose intraoperatively for long procedures/major blood loss"}
+  ],
+  "admin": [
+    "Reconstitute and give by direct IV injection over 3-5 minutes, by IV infusion, or by deep IM injection into a large muscle",
+    "Do not give orally (not absorbed)",
+    "For surgical prophylaxis, administer 0.5-1 hour before incision",
+    "Adjust dose interval in renal impairment",
+    "Inspect reconstituted solution for particulate matter"
+  ],
+  "moa": "Binds penicillin-binding proteins and inhibits the final transpeptidation step of bacterial cell wall peptidoglycan synthesis, leading to cell lysis; time-dependent bactericidal activity.",
+  "contra": {
+    "absolute": ["Known allergy to the cephalosporin group of antibiotics"],
+    "relative": ["History of penicillin/beta-lactam hypersensitivity (cross-reactivity)", "Significant renal impairment (dose adjustment)", "History of colitis/GI disease"],
+    "monitor": ["Renal function", "Hypersensitivity reactions", "Signs of C. difficile colitis"]
+  },
+  "preg": "Cephalosporins are widely used and generally considered acceptable in pregnancy when indicated.",
+  "lact": "Excreted in breast milk in low concentrations; considered compatible with breastfeeding with monitoring of the infant.",
+  "renal": "Requires dose reduction and/or interval extension based on creatinine clearance; primarily renally eliminated.",
+  "hepatic": "No specific dosage adjustment required.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Probenecid - decreases renal tubular secretion, increases and prolongs cefazolin levels", "Concurrent nephrotoxic agents (aminoglycosides) - potential additive nephrotoxicity"],
+    "minor": ["Anticoagulants - possible enhanced effect"],
+    "food": "N/A (parenteral).",
+    "alcohol": "No disulfiram-like reaction (cefazolin lacks an N-methylthiotetrazole side chain).",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction (Clinitest) tests and positive direct Coombs test."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Rash", "Injection site reactions (pain, phlebitis)", "Elevated transaminases"],
+    "serious": ["Anaphylaxis/severe hypersensitivity", "Clostridioides difficile-associated colitis", "Seizures (high doses, renal impairment)", "Blood dyscrasias"],
+    "rare": ["Stevens-Johnson syndrome", "Interstitial nephritis", "Hemolytic anemia"],
+    "emergency": ["Anaphylaxis", "Severe cutaneous reactions (SJS/TEN)", "Fulminant C. difficile colitis"]
+  },
+  "monitoring": [
+    "Renal function in prolonged therapy or impairment",
+    "Signs and symptoms of hypersensitivity",
+    "Diarrhea/possible C. difficile during or after therapy",
+    "CBC with prolonged use",
+    "Prothrombin time in at-risk patients"
+  ],
+  "counsel": [
+    "Report rash, hives, swelling, or difficulty breathing immediately",
+    "Report severe or persistent diarrhea (may occur even weeks after treatment)",
+    "Tell your clinician about any penicillin or cephalosporin allergy",
+    "This medicine is given by injection in hospital/clinic",
+    "Complete the full prescribed course"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "IM ~1-2 h; IV at end of infusion"],
+    ["Half-life", "~1.8 h (normal renal function); prolonged in renal impairment"],
+    ["Duration", "Dosing interval q6-8h"],
+    ["Storage", "Store powder per label; reconstituted solution per stability instructions"]
+  ],
+  "pearls": [
+    "Drug of choice for MSSA infections and the standard surgical prophylaxis agent",
+    "Does NOT cover MRSA, enterococci, or most resistant gram-negative bacilli",
+    "Lacks N-methylthiotetrazole side chain - no disulfiram-like reaction or hypoprothrombinemia like some other cephalosporins",
+    "Poor CNS penetration - not for meningitis",
+    "Often preferred over cefuroxime for prophylaxis due to long history and cost"
+  ],
+  "missed": "Hospital/clinic-administered. If a dose is delayed, give as soon as possible and adjust subsequent timing; do not double up.",
+  "overdose": "May cause neurotoxicity (seizures), especially in renal impairment. Provide supportive care; hemodialysis can remove cefazolin.",
+  "refs": [
+    ["FDA Cefazolin for Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cefazolin%22"],
+    ["DailyMed - Cefazolin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cefazolin"]
+  ]
+}

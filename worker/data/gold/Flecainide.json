@@ -1,0 +1,125 @@
+{
+  "generic": "Flecainide",
+  "cls": "Antiarrhythmic - class IC (sodium-channel blocker)",
+  "pharm": "Potently blocks fast cardiac sodium channels, markedly slowing conduction velocity through atrial, His-Purkinje and ventricular tissue (widening QRS) with minimal effect on action-potential duration, producing a local-anesthetic-type membrane-stabilizing effect.",
+  "tags": ["Rx only", "Class IC antiarrhythmic", "BOXED WARNING - proarrhythmia (CAST)", "Avoid in structural heart disease", "Paroxysmal AF/SVT and life-threatening VT"],
+  "quick": [
+    ["Adult dose", "PSVT/PAF: 50 mg q12h, titrate; sustained VT: 100 mg q12h up to max 400 mg/day"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Limited data; use only if benefit justifies risk (has been used for fetal arrhythmia)"],
+    ["Lactation", "Excreted in breast milk; use with caution / generally considered compatible"],
+    ["Renal", "Reduce dose and monitor levels if CrCl <=35 mL/min"],
+    ["Hepatic", "Use with caution; reduce dose and monitor plasma levels in significant impairment"],
+    ["Alcohol", "No specific interaction; moderate intake"],
+    ["Monitoring", "ECG/QRS width, plasma level, electrolytes (K/Mg), renal/hepatic function"]
+  ],
+  "summary": "Flecainide is a class IC antiarrhythmic indicated for prevention of paroxysmal atrial fibrillation/flutter and paroxysmal supraventricular tachycardia in patients without structural heart disease, and for documented life-threatening ventricular arrhythmias such as sustained ventricular tachycardia. It carries a BOXED WARNING: in the Cardiac Arrhythmia Suppression Trial (CAST), flecainide increased mortality (death and non-fatal cardiac arrest) in patients with asymptomatic ventricular arrhythmias after recent myocardial infarction, so it must be AVOIDED in patients with structural heart disease (recent MI, heart failure, significant LV dysfunction). It is contraindicated in second/third-degree AV block or bundle-branch block without a pacemaker, cardiogenic shock, and (for atrial flutter/AF) with concomitant chronic atrial fibrillation. Therapy should be initiated in hospital for ventricular arrhythmias. Correct hypokalemia/hyperkalemia before use; flecainide can also slow conversion of atrial flutter to 1:1 conduction (use with an AV-nodal blocker).",
+  "indications": [
+    "Prevention of paroxysmal atrial fibrillation/flutter associated with disabling symptoms, in patients without structural heart disease",
+    "Prevention of paroxysmal supraventricular tachycardia (PSVT), including AV nodal reentrant tachycardia and arrhythmias of accessory pathways, in patients without structural heart disease",
+    "Prevention of documented life-threatening ventricular arrhythmias such as sustained ventricular tachycardia"
+  ],
+  "dosage": [
+    {"c": "PSVT and paroxysmal AF/flutter", "r": "Adult oral - no structural heart disease", "d": "Start 50 mg every 12 hours; may increase by 50 mg twice daily every 4 days; usual max 300 mg/day", "t": "Every 12 hours", "n": "Initiate at the lowest effective dose; titrate slowly"},
+    {"c": "Sustained ventricular tachycardia", "r": "Adult oral", "d": "Start 100 mg every 12 hours; may increase by 50 mg twice daily every 4 days; maximum 400 mg/day", "t": "Every 12 hours", "n": "Initiate in hospital with ECG monitoring"},
+    {"c": "Renal impairment (CrCl <=35 mL/min)", "r": "Adult oral", "d": "Reduce initial dose (e.g., 100 mg once daily or 50 mg twice daily) and titrate cautiously", "t": "Once or twice daily", "n": "Monitor plasma flecainide levels; slower elimination"},
+    {"c": "Atrial flutter/AF with AV-nodal agent", "r": "Adult oral", "d": "Co-administer an AV-nodal blocking agent (beta-blocker or non-dihydropyridine CCB)", "t": "As above", "n": "Prevents rapid 1:1 ventricular conduction if flutter accelerates"}
+  ],
+  "admin": [
+    "Initiate therapy for sustained ventricular tachycardia (and other high-risk patients) in hospital with continuous ECG monitoring",
+    "Correct hypokalemia or hyperkalemia before and during treatment (these alter flecainide effect)",
+    "Use the lowest effective dose and allow at least 4 days between dose increases (long half-life, steady state ~3-5 days)",
+    "For atrial flutter/atrial fibrillation, combine with an AV-nodal blocking drug to avoid 1:1 atrioventricular conduction",
+    "Monitor the ECG for widening of the QRS complex and PR interval; reduce dose if QRS widens excessively",
+    "May be taken with or without food, at consistent 12-hour intervals"
+  ],
+  "moa": "Flecainide is a class IC antiarrhythmic that produces a potent, use-dependent blockade of the fast inward sodium current in cardiac cells. This markedly slows the rate of rise of the action potential (phase 0) and depresses conduction velocity throughout the heart, most prominently in the His-Purkinje system and ventricular myocardium, widening the QRS complex. It has relatively little effect on action-potential duration or repolarization. By slowing conduction it interrupts and prevents re-entrant arrhythmias. This same conduction slowing, however, can be proarrhythmic, particularly in diseased or ischemic myocardium, which underlies the CAST mortality finding.",
+  "contra": {
+    "absolute": [
+      "Pre-existing second- or third-degree AV block, or right bundle-branch block with left hemiblock (bifascicular block), unless a functioning pacemaker is present",
+      "Cardiogenic shock",
+      "Recent myocardial infarction or structural heart disease (per CAST; increased mortality)",
+      "Concomitant chronic atrial fibrillation (efficacy not established; risk of proarrhythmia)",
+      "Known hypersensitivity to flecainide"
+    ],
+    "relative": [
+      "Sinus node dysfunction, sick sinus syndrome",
+      "Heart failure or significant left-ventricular dysfunction",
+      "Marked hepatic or renal impairment",
+      "Atrial flutter (risk of 1:1 conduction) - use with AV-nodal blocker",
+      "Electrolyte disturbances (hypo/hyperkalemia); permanent pacemaker or electrode (raises stimulation threshold)"
+    ],
+    "monitor": [
+      "ECG - PR and QRS duration, heart rate/rhythm; proarrhythmia",
+      "Serum potassium and magnesium",
+      "Plasma flecainide concentration (target trough ~0.2-1 microgram/mL) in renal/hepatic impairment or high dose",
+      "Pacemaker thresholds if applicable",
+      "Signs of heart failure"
+    ]
+  },
+  "preg": "There are limited data in human pregnancy; animal studies have shown some adverse effects at high doses. Flecainide crosses the placenta and has been used to treat fetal supraventricular tachycardia. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Flecainide is excreted in human breast milk, reaching concentrations somewhat higher than plasma, but estimated infant exposure is low. It is generally considered compatible with breastfeeding; use with caution and observe the infant.",
+  "renal": "Flecainide is partly eliminated unchanged by the kidneys. In significant renal impairment (creatinine clearance <=35 mL/min), reduce the initial dose and increase the interval, titrate slowly, and monitor plasma flecainide levels because elimination is prolonged.",
+  "hepatic": "Flecainide is extensively metabolized by the liver (CYP2D6). In significant hepatic impairment, clearance is reduced; use only if benefit clearly outweighs risk, reduce the dose, and monitor plasma flecainide concentrations.",
+  "interactions": {
+    "major": [
+      "Other class I antiarrhythmics and drugs that depress conduction (e.g., disopyramide, verapamil) - additive negative inotropic and conduction effects; generally avoid combining",
+      "Amiodarone - raises flecainide plasma levels; reduce flecainide dose by about 50%",
+      "Beta-blockers - additive negative inotropy and bradycardia",
+      "Drugs that prolong QT/cause arrhythmia - additive proarrhythmia"
+    ],
+    "moderate": [
+      "CYP2D6 inhibitors (e.g., quinidine, fluoxetine, paroxetine, ritonavir) - increase flecainide levels",
+      "Digoxin - flecainide increases plasma digoxin by ~15-25%",
+      "Verapamil/diltiazem - additive cardiac depression",
+      "Urinary alkalinizers/acidifiers - alter renal clearance of flecainide"
+    ],
+    "minor": ["Cimetidine - modest increase in flecainide levels", "Cigarette smoking - may increase clearance"],
+    "food": "May be taken with or without food; milk in infants can reduce absorption (relevant in pediatric use).",
+    "alcohol": "No specific interaction; moderate alcohol intake.",
+    "diagnostics": "Widens QRS and prolongs PR on ECG (expected); monitor plasma flecainide level, potassium and magnesium."
+  },
+  "se": {
+    "common": ["Dizziness", "Visual disturbances (blurred/double vision)", "Dyspnea", "Headache", "Nausea", "Fatigue", "Palpitations", "Tremor", "Asthenia"],
+    "serious": ["Proarrhythmia - new or worsened ventricular arrhythmia (including incessant VT, torsades), increased mortality in structural heart disease (CAST)", "New or worsened heart failure", "High-grade AV block, sinus arrest, marked bradycardia", "Conversion of atrial flutter to 1:1 conduction with rapid ventricular rate", "Increased pacing/defibrillation thresholds"],
+    "rare": ["Hepatic dysfunction", "Blood dyscrasias (leukopenia, thrombocytopenia)", "Corneal deposits", "Peripheral neuropathy", "Photosensitivity"],
+    "emergency": ["Ventricular tachycardia/fibrillation or incessant proarrhythmia", "Cardiac arrest", "Severe bradycardia or complete heart block", "Acute decompensated heart failure"]
+  },
+  "monitoring": [
+    "Baseline and periodic ECG - PR, QRS and QT intervals, rate and rhythm; widening QRS signals toxicity",
+    "Serum potassium and magnesium (correct before and during therapy)",
+    "Plasma flecainide concentration in renal/hepatic impairment, high doses, or suspected toxicity",
+    "Renal and hepatic function",
+    "Signs and symptoms of heart failure",
+    "Pacemaker thresholds in paced patients"
+  ],
+  "counsel": [
+    "This medicine controls an abnormal heart rhythm; take it exactly as prescribed, at the same times each day",
+    "Do not stop or change the dose on your own - report palpitations, fainting, breathlessness or swelling promptly",
+    "Visual blurring and dizziness can occur, especially early on; tell your doctor if these are troublesome",
+    "Keep all ECG and blood-test appointments so your dose can be checked",
+    "Tell every prescriber you take this drug - it interacts with several heart and other medicines",
+    "Maintain a normal diet and do not stop taking it if you start vomiting or have diarrhea without telling your doctor (low potassium changes its effect)"
+  ],
+  "pk": [
+    ["Onset", "Antiarrhythmic effect within hours of oral dosing"],
+    ["Peak", "Plasma Tmax approximately 3 hours (range 1-6 hours)"],
+    ["Half-life", "Approximately 12-27 hours (about 20 hours average; prolonged in renal/hepatic impairment)"],
+    ["Duration", "Steady state in 3-5 days with twice-daily dosing"],
+    ["Storage", "Store at 25 C (excursions 15-30 C); protect from light and moisture"]
+  ],
+  "pearls": [
+    "BOXED WARNING (CAST): flecainide increased mortality in patients with structural heart disease/recent MI - AVOID in structural heart disease, heart failure, or significant LV dysfunction",
+    "For atrial flutter/AF, always combine with an AV-nodal blocking agent to prevent dangerous 1:1 ventricular conduction",
+    "Initiate ventricular-arrhythmia therapy in hospital with ECG monitoring; widening QRS is a marker of excessive effect",
+    "Correct potassium and magnesium before and during therapy - both hypo- and hyperkalemia alter its effect",
+    "Long half-life - allow at least 4 days between dose changes; reduce dose with amiodarone or in renal/hepatic impairment",
+    "It increases digoxin levels and is itself raised by CYP2D6 inhibitors - check interacting drugs"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember unless it is almost time for the next dose; in that case skip the missed dose and continue your regular schedule. Do not take a double dose. Tell your doctor if you miss several doses, as your heart rhythm may need rechecking.",
+  "overdose": "Overdose can be life-threatening, causing QRS and QT widening, profound conduction block, bradycardia, hypotension, ventricular arrhythmias, seizures and cardiac arrest. There is no specific antidote and flecainide is not effectively dialyzable. Management is supportive with continuous ECG and hemodynamic monitoring: sodium bicarbonate (hypertonic sodium) to narrow the QRS, inotropes/vasopressors, temporary pacing for bradyarrhythmia, magnesium and overdrive pacing for torsades; consider lipid emulsion and mechanical circulatory support in refractory cardiotoxicity.",
+  "refs": [
+    ["Flecainide - FDA Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22flecainide%20acetate%22"],
+    ["DailyMed - Flecainide Acetate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=flecainide"]
+  ]
+}

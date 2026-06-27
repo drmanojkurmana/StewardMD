@@ -1,0 +1,102 @@
+{
+  "generic": "Cefdinir",
+  "cls": "Antibiotic — 3rd-gen cephalosporin",
+  "pharm": "Semisynthetic oral cephalosporin; cell-wall synthesis inhibitor (beta-lactam)",
+  "tags": ["Rx", "Oral", "Antibacterial", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "300 mg q12h or 600 mg once daily"],
+    ["Meal", "With or without food; separate from antacids/iron by 2 h"],
+    ["Pregnancy", "Animal studies reassuring; use only if clearly needed"],
+    ["Lactation", "Not detected in milk after single 600 mg dose"],
+    ["Renal", "Reduce dose if CrCl <30 mL/min"],
+    ["Hepatic", "No specific adjustment in the label"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Watch for diarrhea (C. difficile) and allergy"]
+  ],
+  "summary": "Cefdinir is an oral third-generation (extended-spectrum) cephalosporin for mild-to-moderate infections caused by susceptible bacteria, including community-acquired pneumonia, acute exacerbations of chronic bronchitis, sinusitis, pharyngitis/tonsillitis, otitis media, and skin/skin-structure infections. It blocks bacterial cell-wall synthesis. Once-daily dosing is as effective as twice-daily for most indications (skin infections require twice daily). It must be separated from antacids and iron by at least 2 hours.",
+  "indications": [
+    "Community-acquired pneumonia (adults/adolescents)",
+    "Acute exacerbations of chronic bronchitis",
+    "Acute maxillary sinusitis",
+    "Pharyngitis / tonsillitis (S. pyogenes)",
+    "Uncomplicated skin and skin-structure infections",
+    "Acute bacterial otitis media (pediatric)"
+  ],
+  "dosage": [
+    {"c": "Adults/adolescents — most infections", "r": "Oral", "d": "300 mg every 12 h or 600 mg once daily", "t": "5-10 days (per indication)", "n": "Pneumonia and skin infections: 300 mg q12h x 10 days"},
+    {"c": "Pharyngitis/tonsillitis, sinusitis (adults)", "r": "Oral", "d": "300 mg q12h x 5-10 days or 600 mg q24h x 10 days", "t": "Per indication", "n": "Complete full course"},
+    {"c": "Pediatric (6 months-12 years), most infections", "r": "Oral suspension", "d": "7 mg/kg q12h or 14 mg/kg q24h (max 600 mg/day)", "t": "5-10 days", "n": "Once-daily not studied for skin infections"},
+    {"c": "Pediatric skin/skin-structure infection", "r": "Oral suspension", "d": "7 mg/kg q12h", "t": "10 days", "n": "Give twice daily"},
+    {"c": "Renal impairment (CrCl <30 mL/min)", "r": "Oral", "d": "Adults: 300 mg once daily; Peds: 7 mg/kg (max 300 mg) once daily", "t": "Per indication", "n": "Hemodialysis removes cefdinir; dose 300 mg or 7 mg/kg every other day, resume after each session"}
+  ],
+  "admin": [
+    "May be taken with or without food",
+    "Shake oral suspension well before each dose; confirm concentration (125 or 250 mg/5 mL)",
+    "Take at least 2 hours before or after antacids (Mg/Al) or iron supplements",
+    "Complete the full prescribed course even if feeling better",
+    "Reconstituted suspension may be stored at room temperature for 10 days"
+  ],
+  "moa": "Cefdinir is a semisynthetic cephalosporin that binds penicillin-binding proteins and inhibits bacterial cell-wall (peptidoglycan) synthesis, producing a bactericidal effect against susceptible organisms. It is stable to many beta-lactamases.",
+  "contra": {
+    "absolute": ["Known allergy to the cephalosporin class of antibiotics"],
+    "relative": ["History of penicillin/beta-lactam allergy (cross-hypersensitivity may occur in up to ~10%)"],
+    "monitor": ["Diarrhea (consider C. difficile)", "Signs of hypersensitivity", "Renal function in impaired patients"]
+  },
+  "preg": "Pregnancy Category B (legacy label): not teratogenic in rats or rabbits; no adequate well-controlled human studies. Use during pregnancy only if clearly needed.",
+  "lact": "Following single 600 mg doses, cefdinir was not detected in human breast milk. Iron-fortified infant formula does not significantly interfere with absorption.",
+  "renal": "In CrCl <30 mL/min, reduce dose (adults 300 mg once daily; pediatric 7 mg/kg up to 300 mg once daily). Hemodialysis removes cefdinir — dose 300 mg or 7 mg/kg every other day and at the end of each dialysis session.",
+  "hepatic": "No specific dosage adjustment is provided in the label.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Antacids (aluminum/magnesium) — reduce cefdinir absorption by ~40%; separate by >=2 hours",
+      "Iron supplements / iron-fortified foods — reduce absorption by up to 80%; separate by >=2 hours",
+      "Probenecid — inhibits renal excretion, ~doubles AUC and prolongs half-life"
+    ],
+    "minor": [],
+    "food": "May be taken without regard to meals; food reduces Cmax/AUC modestly but not clinically significantly.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause false-positive urine glucose (Clinitest/Benedict's/Fehling's) and a positive direct Coombs test; ketones in urine may give false-positive results. Reddish stools may occur from non-absorbable iron-cefdinir complex."
+  },
+  "se": {
+    "common": ["Diarrhea (15%)", "Vaginal moniliasis", "Nausea", "Headache", "Abdominal pain"],
+    "serious": ["Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Serious acute hypersensitivity (anaphylaxis)"],
+    "rare": ["Rash", "Dyspepsia, flatulence, vomiting", "Stevens-Johnson syndrome, toxic epidermal necrolysis (class effect)"],
+    "emergency": ["Anaphylaxis / shock", "Severe or bloody diarrhea suggesting C. difficile colitis"]
+  },
+  "monitoring": [
+    "Watch for diarrhea during and after therapy (C. difficile)",
+    "Hypersensitivity / allergic reactions",
+    "Renal function in impaired patients",
+    "Resolution of infection"
+  ],
+  "counsel": [
+    "Antibiotics treat bacterial, not viral, infections — take exactly as directed and finish the course",
+    "Separate from antacids and iron supplements by at least 2 hours",
+    "Reddish stools may occur if also taking iron — this is harmless",
+    "Report any rash, swelling, or breathing difficulty immediately",
+    "Report watery or bloody diarrhea, even weeks after stopping",
+    "Shake liquid well and use the supplied measuring device"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal after absorption"],
+    ["Peak", "2 to 4 hours after oral dose"],
+    ["Half-life", "Approximately 1.7 hours (prolonged in renal impairment)"],
+    ["Duration", "Supports once- or twice-daily dosing"],
+    ["Storage", "Dry powder 20-25C (68-77F); reconstituted suspension stable 10 days at room temperature"]
+  ],
+  "pearls": [
+    "Once-daily dosing is as effective as twice-daily for 10-day courses (except skin infections — give BID)",
+    "Separate from antacids and iron by >=2 hours; iron can reduce absorption by up to 80%",
+    "Harmless reddish stools may occur from a non-absorbable iron-cefdinir complex",
+    "Oral bioavailability is only ~16-25%; suspension is ~120% relative to capsules",
+    "Hemodialysis removes cefdinir — redose after dialysis",
+    "Cross-reactivity in up to ~10% of penicillin-allergic patients"
+  ],
+  "missed": "Take as soon as remembered; skip if near the next dose. Do not double. Maintain spacing from antacids/iron.",
+  "overdose": "Human overdose data are limited; beta-lactam overdose may cause nausea, vomiting, epigastric distress, diarrhea, and convulsions. Treatment is supportive. Hemodialysis removes cefdinir and may help in serious toxicity, particularly with renal impairment.",
+  "refs": [
+    ["FDA Label — Cefdinir for Oral Suspension (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cefdinir%22"],
+    ["DailyMed — Cefdinir", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cefdinir"]
+  ]
+}

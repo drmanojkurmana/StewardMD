@@ -1,0 +1,242 @@
+{
+  "generic": "Posaconazole",
+  "cls": "Azole antifungal (triazole)",
+  "pharm": "Azole antifungal [EPC]",
+  "tags": [
+    "antifungal",
+    "azole",
+    "triazole",
+    "Aspergillus",
+    "Candida",
+    "prophylaxis",
+    "immunocompromised",
+    "QT prolongation",
+    "CYP3A4 inhibitor"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "Delayed-release tablets: 300 mg (three 100 mg tablets) twice daily on day 1, then 300 mg once daily"
+    ],
+    [
+      "Meal",
+      "Delayed-release tablets: with or without food; swallow whole (do not crush/chew). High-fat meal increases absorption"
+    ],
+    [
+      "Pregnancy",
+      "May cause fetal harm (animal data: skeletal malformations); use only if benefit justifies risk"
+    ],
+    [
+      "Lactation",
+      "No human data; excreted in rat milk - weigh benefit vs risk to infant"
+    ],
+    [
+      "Renal",
+      "No dose adjustment for tablets; monitor closely for breakthrough fungal infection in severe impairment"
+    ],
+    [
+      "Hepatic",
+      "Liver enzyme elevations can occur; monitor LFTs and consider stopping if abnormal"
+    ],
+    [
+      "Alcohol",
+      "No specific interaction documented; avoid if hepatotoxicity concern"
+    ],
+    [
+      "Monitoring",
+      "ECG/QTc, electrolytes (K, Mg, Ca), LFTs, BP/potassium (pseudoaldosteronism), and levels of CYP3A4-substrate co-meds"
+    ]
+  ],
+  "summary": "Posaconazole is a broad-spectrum triazole antifungal indicated for prophylaxis of invasive Aspergillus and Candida infections in severely immunocompromised patients (HSCT recipients with GVHD, prolonged chemotherapy-induced neutropenia). The delayed-release tablet (300 mg loading then 300 mg daily) gives higher, more reliable exposures than the oral suspension and is the preferred oral formulation. Key safety issues are QTc prolongation (with cases of torsades de pointes) and potent CYP3A4 inhibition, which contraindicate co-administration with sirolimus, certain CYP3A4-metabolized statins, ergot alkaloids, pimozide, quinidine, and venetoclax (during ramp-up in CLL/SLL).",
+  "indications": [
+    "Prophylaxis of invasive Aspergillus and Candida infections in severely immunocompromised patients at high risk (HSCT recipients with GVHD; hematologic malignancy with prolonged neutropenia from chemotherapy)",
+    "Indicated in adults and pediatric patients 2 years and older weighing greater than 40 kg (delayed-release tablets)"
+  ],
+  "dosage": [
+    {
+      "c": "Prophylaxis of invasive Aspergillus and Candida - loading",
+      "r": "Adult / Oral (delayed-release tablet)",
+      "d": "300 mg (three 100 mg tablets) twice daily on day 1",
+      "t": "Twice daily x 1 day",
+      "n": "Loading dose only on first day"
+    },
+    {
+      "c": "Prophylaxis of invasive Aspergillus and Candida - maintenance",
+      "r": "Adult / Oral (delayed-release tablet)",
+      "d": "300 mg (three 100 mg tablets) once daily, starting day 2",
+      "t": "Once daily",
+      "n": "Continue based on recovery from neutropenia or immunosuppression"
+    },
+    {
+      "c": "Prophylaxis of invasive Aspergillus and Candida",
+      "r": "Pediatric 2 to <18 y, >40 kg / Oral (delayed-release tablet)",
+      "d": "300 mg twice daily on day 1, then 300 mg once daily",
+      "t": "Once daily (after day 1)",
+      "n": "Same as adult dosing for patients >40 kg; tablet not for <=40 kg"
+    },
+    {
+      "c": "Prophylaxis",
+      "r": "Pediatric <2 y",
+      "d": "Not established",
+      "t": "-",
+      "n": "Safety and effectiveness in patients younger than 2 years not established"
+    },
+    {
+      "c": "Prophylaxis",
+      "r": "Geriatric / Renal impairment",
+      "d": "No dosage adjustment (any degree of renal impairment for tablets)",
+      "t": "Per indication",
+      "n": "Tablet PK not significantly affected by renal impairment; monitor severe impairment for breakthrough infection"
+    }
+  ],
+  "admin": [
+    "Swallow delayed-release tablets whole - do not divide, crush, or chew",
+    "Administer tablets with or without food (a high-fat meal increases absorption)",
+    "Delayed-release tablets and oral suspension are NOT substitutable - follow the specific regimen for each formulation",
+    "Delayed-release tablets are preferred over oral suspension for prophylaxis (higher, more consistent exposures)",
+    "Obtain a baseline ECG and correct electrolyte disturbances before and during therapy",
+    "Review all concomitant drugs for CYP3A4 and QT interactions before starting"
+  ],
+  "moa": "Posaconazole is a triazole antifungal that inhibits fungal lanosterol 14-alpha-demethylase (CYP51), an enzyme essential for ergosterol biosynthesis. This blocks conversion of lanosterol to ergosterol, disrupting fungal cell-membrane integrity and function, producing fungistatic to fungicidal activity against Aspergillus, Candida, and other moulds. It is also a strong inhibitor of human CYP3A4 and a P-glycoprotein substrate.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to posaconazole or other azole antifungals",
+      "Coadministration with sirolimus (sirolimus levels increase ~9-fold; toxicity)",
+      "Coadministration with CYP3A4 substrates that prolong QT - pimozide, quinidine (risk of QTc prolongation and torsades de pointes)",
+      "Coadministration with HMG-CoA reductase inhibitors primarily metabolized by CYP3A4 (atorvastatin, lovastatin, simvastatin) - rhabdomyolysis risk",
+      "Coadministration with ergot alkaloids (ergotamine, dihydroergotamine) - ergotism",
+      "Coadministration with venetoclax at initiation/ramp-up in CLL/SLL - tumor lysis syndrome risk"
+    ],
+    "relative": [
+      "Potentially proarrhythmic conditions or other QT-prolonging drugs",
+      "Pre-existing electrolyte disturbances (hypokalemia, hypomagnesemia, hypocalcemia)",
+      "Hepatic impairment or pre-existing liver disease",
+      "Concomitant CYP3A4 substrates (cyclosporine, tacrolimus, midazolam, vincristine) requiring dose reduction/monitoring",
+      "Severe diarrhea or vomiting (may reduce absorption and cause breakthrough infection)"
+    ],
+    "monitor": [
+      "ECG / QTc interval",
+      "Electrolytes - potassium, magnesium, calcium",
+      "Liver function tests",
+      "Blood pressure and potassium (pseudoaldosteronism)",
+      "Plasma concentrations of CYP3A4-substrate co-medications (e.g., tacrolimus, cyclosporine, digoxin)"
+    ]
+  },
+  "preg": "May cause fetal harm based on animal data (skeletal malformations - cranial malformations and missing ribs - and maternal toxicity in rats; increased resorptions in rabbits). Human data are insufficient to establish drug-associated risk. Advise pregnant women of the potential risk to the fetus; use only if the benefit justifies the potential risk.",
+  "lact": "There are no data on posaconazole in human milk, its effects on the breastfed infant, or on milk production. Posaconazole is excreted in the milk of lactating rats. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and potential infant risk.",
+  "renal": "The pharmacokinetics of the delayed-release tablets are not significantly affected by renal impairment, so no dosage adjustment is necessary for mild to severe renal impairment with oral dosing. Monitor patients with severe renal impairment closely for breakthrough fungal infections. Posaconazole is not removed by hemodialysis.",
+  "hepatic": "Elevations in liver function tests may occur during therapy. Monitor LFTs at baseline and during treatment; consider discontinuation in patients who develop abnormal liver tests attributable to posaconazole. Use with caution in pre-existing hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Sirolimus - posaconazole increases levels ~9-fold; CONTRAINDICATED",
+      "QT-prolonging CYP3A4 substrates - pimozide, quinidine: QTc prolongation/torsades de pointes; CONTRAINDICATED",
+      "Other QT-prolonging drugs metabolized by CYP3A4 - do not coadminister (additive QT risk)",
+      "HMG-CoA reductase inhibitors metabolized by CYP3A4 (atorvastatin, lovastatin, simvastatin) - rhabdomyolysis; CONTRAINDICATED",
+      "Ergot alkaloids (ergotamine, dihydroergotamine) - ergotism; CONTRAINDICATED",
+      "Venetoclax (CLL/SLL initiation/ramp-up) - tumor lysis syndrome; CONTRAINDICATED at ramp-up (reduce dose otherwise)",
+      "Calcineurin inhibitors - tacrolimus (reduce to ~1/3 dose) and cyclosporine (reduce to ~3/4 dose); nephrotoxicity/leukoencephalopathy if levels rise - monitor trough levels",
+      "Vincristine and other vinca alkaloids - severe neurotoxicity; reserve azole for patients with no alternative antifungal"
+    ],
+    "moderate": [
+      "Midazolam and other CYP3A4-metabolized benzodiazepines (alprazolam, triazolam) - prolonged/enhanced sedation (~5-fold midazolam increase); monitor, have reversal available",
+      "Digoxin - increased levels; monitor digoxin concentrations",
+      "Rifabutin, phenytoin, efavirenz, cimetidine - reduce posaconazole levels; avoid unless benefit outweighs risk",
+      "Other CYP3A4 substrates - consider dose adjustment and monitor for toxicity"
+    ],
+    "minor": [
+      "Fosamprenavir - may lower posaconazole levels; monitor for breakthrough fungal infections",
+      "Esomeprazole, metoclopramide - affect oral suspension only (NOT delayed-release tablets)"
+    ],
+    "food": "High-fat meal increases tablet absorption (Cmax +16%, AUC +51%); tablets may be given with or without food",
+    "alcohol": "No specific interaction documented; caution advised given potential for hepatotoxicity",
+    "diagnostics": "May cause hypokalemia, hypomagnesemia, and elevated liver enzymes; monitor ECG for QTc changes"
+  },
+  "se": {
+    "common": [
+      "Diarrhea",
+      "Nausea, vomiting",
+      "Pyrexia (fever)",
+      "Headache",
+      "Cough",
+      "Hypokalemia",
+      "Rash, peripheral edema"
+    ],
+    "serious": [
+      "QTc prolongation and torsades de pointes",
+      "Hepatic toxicity (LFT elevation, hepatitis)",
+      "Calcineurin-inhibitor toxicity (nephrotoxicity, leukoencephalopathy) via raised tacrolimus/cyclosporine levels",
+      "Pseudoaldosteronism (new or worsening hypertension, hypokalemia)",
+      "Breakthrough invasive fungal infection (with severe diarrhea/vomiting)",
+      "Severe electrolyte disturbances (hypokalemia, hypomagnesemia)"
+    ],
+    "rare": [
+      "Anemia, thrombocytopenia",
+      "Adrenal-like pseudoaldosteronism",
+      "Hypersensitivity reactions"
+    ],
+    "emergency": [
+      "Torsades de pointes / serious ventricular arrhythmia",
+      "Severe hypersensitivity / anaphylaxis",
+      "Acute hepatic failure"
+    ]
+  },
+  "monitoring": [
+    "ECG / QTc interval, especially with QT risk factors or interacting drugs",
+    "Electrolytes - potassium, magnesium, calcium - before and during therapy",
+    "Liver function tests at baseline and periodically",
+    "Blood pressure and serum potassium (pseudoaldosteronism)",
+    "Whole-blood trough levels of tacrolimus or cyclosporine when co-administered",
+    "Signs of breakthrough fungal infection, especially with severe GI symptoms or in severe renal impairment"
+  ],
+  "counsel": [
+    "Swallow the tablets whole - do not crush, chew, or split them",
+    "Tablets can be taken with or without food",
+    "Tell your doctor about all medicines you take - many serious interactions exist, especially heart-rhythm drugs, statins, transplant drugs, and migraine medicines",
+    "Report a fast or irregular heartbeat, fainting, or palpitations immediately",
+    "Report yellowing of skin/eyes, dark urine, severe tiredness, nausea, or vomiting (possible liver problems)",
+    "Report severe diarrhea or vomiting - this can lower drug levels and reduce protection against infection",
+    "Do not stop or change other prescribed medicines without telling your doctor"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Steady-state plasma concentrations attained by about day 6 at 300 mg (after day 1 loading)"
+    ],
+    [
+      "Peak",
+      "Median Tmax approximately 4-5 hours after an oral dose"
+    ],
+    [
+      "Half-life",
+      "Terminal half-life approximately 31 hours (healthy volunteers)"
+    ],
+    [
+      "Duration",
+      "Long half-life supports once-daily maintenance dosing after loading"
+    ],
+    [
+      "Storage",
+      "Store at 20-25 C (68-77 F); excursions permitted to 15-30 C (59-86 F). Child-resistant closure"
+    ]
+  ],
+  "pearls": [
+    "Posaconazole prolongs the QTc interval and is a STRONG CYP3A4 inhibitor - screen all co-medications and obtain a baseline ECG; correct electrolytes (K, Mg, Ca) before and during therapy",
+    "Delayed-release tablets give higher, more reliable exposures than the oral suspension and are the preferred oral formulation for prophylaxis; the two are NOT interchangeable",
+    "Contraindicated with sirolimus, CYP3A4-metabolized statins (simvastatin/lovastatin/atorvastatin), ergot alkaloids, pimozide, quinidine, and venetoclax ramp-up in CLL/SLL",
+    "Reduce tacrolimus to ~1/3 and cyclosporine to ~3/4 of original dose and monitor trough levels when starting posaconazole",
+    "Pseudoaldosteronism (hypertension + hypokalemia) is a recognized class effect - monitor BP and potassium",
+    "Tablet absorption is not meaningfully affected by gastric pH (PPIs/antacids) or renal impairment - unlike the oral suspension"
+  ],
+  "missed": "If a dose is missed, take it as soon as you remember. If it is within 12 hours of the next dose, skip the missed dose and resume the regular schedule. Do not double the next dose or take more than prescribed.",
+  "overdose": "There is no specific experience with delayed-release tablet overdose. In trials, oral suspension up to 1600 mg/day and accidental ingestion of 1200 mg twice daily for 3 days produced no adverse reactions different from lower doses. Management is supportive; posaconazole is highly protein bound and is NOT removed by hemodialysis. Monitor ECG/QTc and electrolytes.",
+  "refs": [
+    [
+      "FDA Prescribing Information - Posaconazole Delayed-Release Tablets",
+      "https://www.accessdata.fda.gov/scripts/cder/daf/index.cfm?event=overview.process&varApplNo=205053"
+    ],
+    [
+      "openFDA Drug Label - Posaconazole",
+      "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22posaconazole%22"
+    ]
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "generic": "Fosfomycin",
+  "cls": "Phosphonic acid antibacterial (cell wall synthesis inhibitor)",
+  "pharm": "Broad-spectrum bactericidal antibiotic",
+  "tags": ["antibiotic", "UTI", "cystitis", "single dose", "E. coli"],
+  "quick": [
+    ["Adult dose", "3 g single oral dose (tromethamine sachet)"],
+    ["Meal", "With or without food; dissolve in water"],
+    ["Pregnancy", "Can be used when indicated; data reassuring"],
+    ["Lactation", "Considered compatible; single dose"],
+    ["Renal", "Caution if CrCl very low; avoid if severe"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Symptom resolution; C. difficile if diarrhea"]
+  ],
+  "summary": "Fosfomycin tromethamine is a phosphonic acid antibiotic given as a single 3 g oral sachet for uncomplicated urinary tract infection (acute cystitis) in women caused by susceptible E. coli and Enterococcus faecalis. It is bactericidal, inhibiting an early step of cell wall synthesis. It is not for pyelonephritis. Diarrhea is the most common side effect; C. difficile colitis is a class warning.",
+  "indications": [
+    "Uncomplicated urinary tract infection (acute cystitis) in women due to susceptible Escherichia coli and Enterococcus faecalis",
+    "Not indicated for pyelonephritis or perinephric abscess"
+  ],
+  "dosage": [
+    {"c": "Uncomplicated cystitis, women >=18 yr", "r": "Standard", "d": "3 g (one sachet) tromethamine granules", "t": "Single dose", "n": "Dissolve in 90-120 mL cold water and drink immediately; do not take dry"},
+    {"c": "Multidose regimens (off-label, e.g. resistant/complicated)", "r": "Specialist", "d": "3 g every 48-72 hours", "t": "Per specialist regimen", "n": "Not FDA-approved dosing; guided by culture and ID advice"}
+  ],
+  "admin": [
+    "Pour the entire contents of one sachet into 90-120 mL (3-4 oz) of cold water and stir to dissolve",
+    "Drink the solution immediately; do not use hot water and do not take in dry form",
+    "May be taken with or without food",
+    "A single dose is the complete course for uncomplicated cystitis"
+  ],
+  "moa": "Fosfomycin is a bactericidal agent that inactivates the enzyme MurA (UDP-N-acetylglucosamine enolpyruvyl transferase), blocking the first committed step of bacterial cell wall peptidoglycan synthesis. It enters bacteria via glycerophosphate and hexose-6-phosphate transport systems. Its unique target gives a low rate of cross-resistance with other antibiotic classes.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to fosfomycin"],
+    "relative": ["Severe renal impairment (reduced urinary concentrations)", "Pyelonephritis or systemic/upper urinary tract infection (not effective)"],
+    "monitor": ["Recurrent or persistent bacteriuria after treatment", "Diarrhea suggestive of C. difficile"]
+  },
+  "preg": "Animal studies showed fetotoxicity only at maternally toxic doses; human data and clinical experience are reassuring. Single-dose fosfomycin is widely used for cystitis in pregnancy when indicated; use if the benefit justifies use.",
+  "lact": "It is not known whether fosfomycin is excreted in human milk per the label; a single 3 g dose is generally considered compatible with breastfeeding given low expected infant exposure. Weigh importance of the drug to the mother.",
+  "renal": "Urinary fosfomycin concentrations fall with declining renal function. Use with caution; it is generally avoided or less effective in severe renal impairment (e.g., CrCl < 10 mL/min).",
+  "hepatic": "No specific dose adjustment is recommended in hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Metoclopramide and other prokinetics that increase GI motility - lower serum and urinary fosfomycin concentrations; avoid coadministration"],
+    "minor": ["Cimetidine - no effect on fosfomycin pharmacokinetics"],
+    "food": "May be taken with or without food; food can slightly delay absorption.",
+    "alcohol": "No specific clinically significant interaction.",
+    "diagnostics": "No specific clinically significant laboratory interference."
+  },
+  "se": {
+    "common": ["Diarrhea", "Vaginitis", "Nausea", "Headache", "Dizziness", "Dyspepsia", "Asthenia"],
+    "serious": ["Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Hypersensitivity reactions including angioedema"],
+    "rare": ["Hepatic enzyme elevations", "Optic neuritis (rare reports)", "Aplastic anemia (rare class reports)"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe or fulminant C. difficile colitis"]
+  },
+  "monitoring": [
+    "Resolution of cystitis symptoms; reassess if persistence or recurrence of bacteriuria",
+    "Diarrhea suggestive of C. difficile during or after therapy",
+    "Signs of hypersensitivity"
+  ],
+  "counsel": [
+    "Mix one sachet in cold water, stir and drink right away; never take it dry",
+    "One dose is the full treatment - improvement may take 2-3 days",
+    "Contact a clinician if symptoms do not improve, worsen, or if fever or flank pain develops",
+    "Report severe or watery/bloody diarrhea, which may occur even weeks later",
+    "Avoid metoclopramide around the time of the dose"
+  ],
+  "pk": [
+    ["Onset", "Absorbed within hours; high urinary levels"],
+    ["Peak", "Serum Cmax ~2-2.5 hours after dose"],
+    ["Half-life", "Serum ~5.7 hours (longer in renal impairment)"],
+    ["Duration", "Therapeutic urinary concentrations sustained 2-3 days"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Single 3 g oral dose offers convenience and excellent adherence for uncomplicated cystitis",
+    "Active against many multidrug-resistant uropathogens including ESBL-producing E. coli",
+    "Not effective for pyelonephritis - reserve for lower UTI only",
+    "Prokinetics like metoclopramide reduce fosfomycin urinary levels - separate or avoid"
+  ],
+  "missed": "Fosfomycin for cystitis is a single-dose therapy, so there is no second dose to miss. If a prescribed dose was not taken, take it when remembered; do not take extra sachets unless directed by a clinician.",
+  "overdose": "Reported overdose effects include vestibular loss, impaired hearing, metallic taste and decline in taste perception. There is no specific antidote; treat symptomatically and supportively, with rehydration and clearance of fosfomycin from the urinary tract.",
+  "refs": [
+    ["FDA Fosfomycin Tromethamine Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fosfomycin%22"],
+    ["FDA DailyMed - Fosfomycin Tromethamine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

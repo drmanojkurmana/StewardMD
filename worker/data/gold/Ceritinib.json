@@ -1,0 +1,110 @@
+{
+  "generic": "Ceritinib",
+  "cls": "Kinase inhibitor (ALK tyrosine kinase inhibitor, antineoplastic)",
+  "pharm": "Potent inhibitor of anaplastic lymphoma kinase (ALK); blocks ALK autophosphorylation and downstream signaling, inhibiting proliferation of ALK-dependent tumor cells.",
+  "tags": ["Rx only", "ALK inhibitor", "NSCLC", "Oral antineoplastic", "Targeted therapy"],
+  "quick": [
+    ["Adult dose", "450 mg orally once daily with food (taken on an empty stomach in older labeling)"],
+    ["Meal", "Take with food once daily; take at the same time each day"],
+    ["Pregnancy", "Can cause fetal harm; avoid in pregnancy"],
+    ["Lactation", "Do not breastfeed during and for 2 weeks after the last dose"],
+    ["Renal", "No adjustment for mild-moderate; limited data in severe impairment"],
+    ["Hepatic", "Reduce dose in severe (Child-Pugh C) impairment; monitor LFTs"],
+    ["Alcohol", "Avoid excess; may add to hepatotoxicity risk"],
+    ["Monitoring", "LFTs, ECG (QT), glucose, lipase/amylase, pulmonary symptoms"]
+  ],
+  "summary": "Ceritinib is an oral ALK tyrosine kinase inhibitor used to treat ALK-positive metastatic non-small cell lung cancer (NSCLC), including disease that has progressed on or is intolerant to crizotinib. It is given as 450 mg once daily with food. Key toxicities include severe gastrointestinal effects (diarrhea, nausea, vomiting), hepatotoxicity, interstitial lung disease/pneumonitis, QT prolongation, hyperglycemia, bradycardia, and pancreatitis. It is a strong CYP3A substrate, so strong CYP3A inhibitors and inducers, and gastric acid-reducing agents, significantly affect exposure.",
+  "indications": [
+    "Treatment of adults with anaplastic lymphoma kinase (ALK)-positive metastatic non-small cell lung cancer (NSCLC)"
+  ],
+  "dosage": [
+    {"c": "ALK-positive metastatic NSCLC", "r": "Adult oral", "d": "450 mg once daily with food until disease progression or unacceptable toxicity", "t": "Once daily", "n": "Take at approximately the same time each day"},
+    {"c": "First dose reduction (toxicity)", "r": "Adult oral", "d": "Reduce to 300 mg once daily with food", "t": "Once daily", "n": "For management of adverse reactions"},
+    {"c": "Second dose reduction (toxicity)", "r": "Adult oral", "d": "Reduce to 150 mg once daily with food; discontinue if 150 mg not tolerated", "t": "Once daily", "n": "Lowest dose"},
+    {"c": "Severe hepatic impairment (Child-Pugh C)", "r": "Adult oral", "d": "Reduce starting dose by approximately one-third to nearest 150 mg multiple (e.g., 300 mg)", "t": "Once daily", "n": "Monitor LFTs closely"},
+    {"c": "Strong CYP3A inhibitor co-administration (if unavoidable)", "r": "Adult oral", "d": "Reduce ceritinib dose by approximately one-third, rounded to nearest 150 mg multiple", "t": "Once daily", "n": "Resume prior dose after inhibitor stopped (allow washout)"}
+  ],
+  "admin": [
+    "Take orally once daily with food at the same time each day",
+    "Swallow capsules/tablets whole; do not chew or crush",
+    "If a dose is missed by more than 12 hours or vomiting occurs after a dose, skip and take the next scheduled dose",
+    "Avoid grapefruit and grapefruit juice (CYP3A inhibition)",
+    "Manage gastrointestinal toxicity with antiemetics/antidiarrheals and dose modification per label"
+  ],
+  "moa": "Ceritinib is an oral, potent, ATP-competitive inhibitor of anaplastic lymphoma kinase (ALK). In ALK-positive NSCLC, chromosomal rearrangements (commonly EML4-ALK fusion) drive constitutive ALK activation and downstream pro-survival/proliferative signaling. By inhibiting ALK autophosphorylation and phosphorylation of downstream signaling proteins (such as STAT3), ceritinib inhibits proliferation of ALK-dependent tumor cells. It also has activity against IGF-1R, InsR, and ROS1 at higher concentrations and retains activity against several crizotinib-resistant ALK mutations.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity to ceritinib"
+    ],
+    "relative": [
+      "Pre-existing severe hepatic impairment",
+      "Congenital long QT syndrome or significant QT prolongation",
+      "Significant bradycardia or use of other bradycardic agents",
+      "Uncontrolled diabetes mellitus / poor glycemic control",
+      "History of pancreatitis",
+      "Concurrent strong CYP3A inhibitors or inducers, and gastric acid-reducing agents"
+    ],
+    "monitor": [
+      "Liver transaminases and bilirubin",
+      "ECG (QT interval) and electrolytes (potassium, magnesium)",
+      "Fasting glucose / HbA1c",
+      "Serum lipase and amylase",
+      "Heart rate (bradycardia) and pulmonary symptoms"
+    ]
+  },
+  "preg": "Based on animal data and its mechanism, ceritinib can cause fetal harm when given to a pregnant woman. Advise females of reproductive potential to use effective contraception during treatment and for some time after the last dose, and inform of the potential risk to a fetus.",
+  "lact": "There are no data on the presence of ceritinib in human milk or its effects on the breastfed infant. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 2 weeks after the final dose.",
+  "renal": "No dose adjustment is recommended for patients with mild or moderate renal impairment. There are limited data in severe renal impairment; use with caution as ceritinib is primarily eliminated via hepatic metabolism.",
+  "hepatic": "Hepatotoxicity can occur; monitor liver tests. No starting-dose adjustment is needed for mild to moderate hepatic impairment. In severe hepatic impairment (Child-Pugh C), reduce the starting dose by approximately one-third to the nearest 150 mg multiple. Withhold and dose-modify or discontinue for transaminase or bilirubin elevations per label.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (e.g., ketoconazole, clarithromycin, ritonavir) - markedly increase ceritinib exposure; avoid or reduce ceritinib dose by ~one-third",
+      "Strong CYP3A inducers (e.g., rifampin, phenytoin, carbamazepine, St John's wort) - markedly decrease ceritinib exposure; avoid",
+      "CYP3A substrates with narrow therapeutic index (e.g., midazolam, ergot alkaloids) - ceritinib increases their exposure; avoid",
+      "QT-prolonging drugs and Class IA/III antiarrhythmics - additive QT prolongation risk",
+      "Other bradycardia-inducing agents (beta-blockers, non-dihydropyridine calcium channel blockers, clonidine, digoxin) - additive bradycardia"
+    ],
+    "moderate": [
+      "Gastric acid-reducing agents (PPIs, H2 blockers, antacids) - may alter ceritinib solubility/exposure",
+      "CYP2C9 substrates with narrow therapeutic index (e.g., warfarin, phenytoin) - ceritinib may increase exposure"
+    ],
+    "minor": ["Drugs affecting glucose homeostasis may compound hyperglycemia"],
+    "food": "Take with food, which increases bioavailability (the 450 mg with-food regimen provides comparable exposure to higher fasting doses). Avoid grapefruit/grapefruit juice.",
+    "alcohol": "Avoid excessive alcohol, which may add to the risk of hepatotoxicity.",
+    "diagnostics": "Can elevate transaminases, bilirubin, lipase, amylase, and glucose; can prolong the QT interval on ECG."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Abdominal pain", "Fatigue", "Decreased appetite", "Weight loss", "Constipation", "Elevated liver enzymes"],
+    "serious": ["Severe/persistent gastrointestinal toxicity", "Hepatotoxicity (transaminase/bilirubin elevations)", "Interstitial lung disease / pneumonitis", "QT interval prolongation", "Hyperglycemia", "Bradycardia", "Pancreatitis (elevated lipase/amylase)"],
+    "rare": ["Severe hypersensitivity reactions", "Torsades de pointes (with marked QT prolongation)"],
+    "emergency": ["Severe interstitial lung disease/pneumonitis with respiratory failure", "Fulminant hepatotoxicity", "Life-threatening QT prolongation/torsades de pointes", "Severe acute pancreatitis", "Severe dehydration from GI toxicity"]
+  },
+  "monitoring": ["Liver transaminases and total bilirubin (baseline, then per label, e.g., monthly and as clinically indicated)", "ECG and electrolytes (potassium, magnesium) for QT prolongation", "Fasting plasma glucose / HbA1c", "Serum lipase and amylase", "Heart rate for bradycardia", "Pulmonary symptoms (cough, dyspnea) for ILD/pneumonitis"],
+  "counsel": [
+    "Take once daily with food at the same time every day; swallow whole",
+    "Report severe or persistent diarrhea, nausea, or vomiting promptly - dose may need adjusting",
+    "Report yellowing of skin/eyes, dark urine, severe abdominal pain, new cough or shortness of breath, fainting, or palpitations",
+    "Avoid grapefruit and tell your doctor about all other medicines, including stomach acid reducers",
+    "Use effective contraception during treatment; do not breastfeed during therapy and for 2 weeks afterward"
+  ],
+  "pk": [
+    ["Onset", "Steady-state reached in approximately 15 days of once-daily dosing"],
+    ["Peak", "Median time to peak concentration about 4-6 hours after dosing"],
+    ["Half-life", "Approximately 31-41 hours"],
+    ["Duration", "Once-daily dosing maintains exposure over 24 hours"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted); protect from moisture"]
+  ],
+  "pearls": [
+    "Severe GI toxicity (diarrhea, nausea, vomiting) is the most common reason for dose reduction - manage proactively",
+    "Monitor for hepatotoxicity, QT prolongation, hyperglycemia, bradycardia, and pancreatitis",
+    "Watch for interstitial lung disease/pneumonitis - withhold and evaluate any new or worsening respiratory symptoms",
+    "Strong CYP3A inhibitors/inducers and acid-reducing agents substantially change exposure - avoid or adjust",
+    "Taking 450 mg with food improves tolerability versus older higher fasting doses while maintaining exposure"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember unless your next dose is due within about 12 hours - in that case skip the missed dose. Do not take two doses at once. If you vomit after taking a dose, do not take an extra dose; resume with the next scheduled dose.",
+  "overdose": "There is limited experience with overdose. Manage with general supportive measures and close monitoring, including ECG (for QT prolongation and bradycardia), liver function, glucose, and pancreatic enzymes. There is no specific antidote.",
+  "refs": [
+    ["FDA Label - Ceritinib (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ceritinib%22"],
+    ["DailyMed - Ceritinib (Zykadia)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=ceritinib"]
+  ]
+}

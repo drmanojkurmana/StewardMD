@@ -1,0 +1,91 @@
+{
+  "generic": "Bambuterol",
+  "cls": "Long-acting beta-2 adrenergic agonist (bronchodilator)",
+  "pharm": "Prodrug of terbutaline; long-acting selective beta-2 agonist providing once-daily bronchodilation.",
+  "tags": ["LABA", "Beta-2 agonist", "Bronchodilator", "Asthma", "Oral", "Once-daily", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "10 mg once daily at night; may increase to 20 mg once daily"],
+    ["Meal", "May be taken with or without food, usually at bedtime"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Caution; terbutaline excreted in milk"],
+    ["Renal", "Start 5 mg if GFR <50; reduce in significant impairment"],
+    ["Hepatic", "Avoid/use with caution; cirrhosis impairs activation/metabolism"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Heart rate, potassium, tremor, asthma control"]
+  ],
+  "summary": "Bambuterol is an oral prodrug of terbutaline, a long-acting selective beta-2 agonist used once daily (usually at night) for asthma and reversible airway obstruction. It is slowly hydrolyzed to active terbutaline, giving a long duration suitable for once-daily dosing. It is NOT FDA-approved; it is marketed in Europe and Asia, and the data below derive from the SmPC/BNF. Like other beta-2 agonists it can cause tremor, tachycardia, and hypokalemia, and it inhibits plasma/pseudocholinesterase, which can prolong the action of suxamethonium (succinylcholine).",
+  "indications": [
+    "Bronchial asthma",
+    "Chronic bronchitis with reversible airway obstruction",
+    "Other conditions with reversible bronchospasm (e.g., COPD with reversible component)"
+  ],
+  "dosage": [
+    {"c": "Asthma/reversible obstruction (adults)", "r": "Oral", "d": "10 mg once daily", "t": "Once daily in the evening", "n": "May increase to 20 mg once daily after 1-2 weeks if needed"},
+    {"c": "Patients sensitive to beta-agonists or elderly", "r": "Oral", "d": "Start 5 mg once daily", "t": "Once daily at night", "n": "Titrate upward as tolerated"},
+    {"c": "Renal impairment (GFR <50 mL/min)", "r": "Oral", "d": "5 mg once daily initially", "t": "Once daily", "n": "Increase cautiously based on response"}
+  ],
+  "admin": [
+    "Take once daily, usually at bedtime, with or without food",
+    "Swallow tablets whole",
+    "Not for acute relief of bronchospasm - it is a maintenance bronchodilator",
+    "Start at 5 mg in renal impairment, elderly, or beta-agonist-sensitive patients"
+  ],
+  "moa": "Bambuterol is a bis-dimethylcarbamate prodrug of terbutaline. It is slowly hydrolyzed (partly via cholinesterase) and oxidized to active terbutaline, which stimulates beta-2 adrenoceptors on airway smooth muscle, increasing cyclic AMP and producing prolonged bronchodilation; the slow conversion gives a long duration of action allowing once-daily dosing.",
+  "contra": {
+    "absolute": ["Hypersensitivity to bambuterol or terbutaline", "Severe hepatic impairment/cirrhosis (impaired and variable activation)"],
+    "relative": ["Ischemic heart disease, arrhythmias, severe hypertension", "Hyperthyroidism", "Diabetes mellitus", "Hypokalemia", "Pheochromocytoma", "Concomitant suxamethonium (prolonged neuromuscular block)"],
+    "monitor": ["Heart rate and rhythm", "Serum potassium", "Tremor", "Asthma control and rescue-inhaler use"]
+  },
+  "preg": "Limited data; use only if clearly needed, particularly avoiding the first trimester. Beta-agonists may affect uterine activity near term.",
+  "lact": "Active metabolite terbutaline is excreted in breast milk; use with caution and weigh benefit against risk.",
+  "renal": "Reduce the starting dose to 5 mg once daily when GFR is below 50 mL/min, as clearance of bambuterol/terbutaline is reduced.",
+  "hepatic": "Avoid in cirrhosis/severe hepatic impairment - prodrug activation and metabolism are impaired and unpredictable, risking excessive or inadequate terbutaline exposure.",
+  "interactions": {
+    "major": ["Suxamethonium (succinylcholine) - bambuterol inhibits plasma cholinesterase, markedly prolonging neuromuscular blockade", "Non-selective beta-blockers - antagonize bronchodilation and may cause bronchospasm"],
+    "moderate": ["Other beta-2 agonists, theophylline, corticosteroids, diuretics - additive hypokalemia", "Digoxin - hypokalemia increases arrhythmia risk", "MAO inhibitors/tricyclics - enhanced cardiovascular effects"],
+    "minor": ["Halogenated anesthetics - increased arrhythmia susceptibility"],
+    "food": "May be taken with or without food",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Monitor serum potassium with concomitant hypokalemia-inducing drugs; relevant for patients undergoing surgery with suxamethonium."
+  },
+  "se": {
+    "common": ["Tremor (especially initially)", "Palpitations/tachycardia", "Headache", "Muscle cramps", "Restlessness/nervousness"],
+    "serious": ["Hypokalemia (potentially severe with concomitant drugs)", "Cardiac arrhythmias", "Paradoxical bronchospasm", "Prolonged neuromuscular block with suxamethonium"],
+    "rare": ["Hypersensitivity reactions", "Myocardial ischemia"],
+    "emergency": ["Severe arrhythmia", "Severe hypokalemia", "Anaphylaxis", "Acute paradoxical bronchospasm"]
+  },
+  "monitoring": [
+    "Heart rate and rhythm",
+    "Serum potassium (especially with diuretics, steroids, theophylline, or in severe asthma)",
+    "Degree of tremor and tolerability",
+    "Asthma control and frequency of rescue inhaler use",
+    "Plasma cholinesterase considerations before surgery with suxamethonium"
+  ],
+  "counsel": [
+    "Take once a day, usually at night - this is a preventer, not a reliever",
+    "Keep using your short-acting reliever inhaler for sudden symptoms",
+    "Mild shakiness or a faster heartbeat may occur and usually settles",
+    "Tell any anesthetist you take bambuterol before surgery",
+    "Report worsening breathlessness, palpitations, or muscle weakness/cramps"
+  ],
+  "pk": [
+    ["Onset", "Gradual (prodrug conversion); not for acute relief"],
+    ["Peak", "Active terbutaline levels rise over hours"],
+    ["Half-life", "Bambuterol ~13 hours; sustained terbutaline exposure supports once-daily dosing"],
+    ["Duration", "~24 hours (once-daily)"],
+    ["Storage", "Store at room temperature; protect from moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved; marketed in Europe/Asia - dosing here follows the SmPC/BNF rather than a US/openFDA label",
+    "Prodrug of terbutaline allowing once-daily oral dosing",
+    "Inhibits plasma cholinesterase - prolongs the action of suxamethonium; flag before anesthesia",
+    "Avoid in cirrhosis (unpredictable activation); reduce starting dose in renal impairment",
+    "A maintenance bronchodilator - not for acute attacks; watch for hypokalemia"
+  ],
+  "missed": "Take the missed dose when remembered the same evening; if it is nearly the next day's dose, skip it and resume the once-daily schedule. Do not take two doses together.",
+  "overdose": "Overdose produces exaggerated beta-agonist effects: marked tremor, tachycardia/arrhythmia, hypotension or hypertension, headache, hyperglycemia, and hypokalemia. Treat with supportive care, monitor potassium and ECG, and use a cardioselective beta-blocker cautiously for severe cardiac effects (with care in asthmatics).",
+  "refs": [
+    ["Bambuterol Summary of Product Characteristics (SmPC) / BNF", "https://bnf.nice.org.uk/drugs/bambuterol-hydrochloride/"],
+    ["Note: not FDA-approved; verify against current local product information", "https://pubmed.ncbi.nlm.nih.gov/?term=bambuterol"]
+  ]
+}

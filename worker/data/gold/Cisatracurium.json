@@ -1,0 +1,112 @@
+{
+  "generic": "Cisatracurium (Cisatracurium besylate)",
+  "cls": "Nondepolarizing neuromuscular blocking agent (benzylisoquinolinium)",
+  "pharm": "Skeletal muscle relaxant (paralytic)",
+  "tags": ["neuromuscular blocker", "paralytic", "anesthesia", "intubation", "ICU", "muscle relaxant", "ventilated"],
+  "quick": [
+    ["Adult dose", "Intubation: 0.15-0.2 mg/kg IV bolus; maintenance infusion ~1-3 mcg/kg/min (titrate to nerve stimulator)"],
+    ["Meal", "Not applicable - intravenous use only"],
+    ["Pregnancy", "Use only if clearly needed; monitor neonate for neuromuscular effects if used near delivery"],
+    ["Lactation", "Single peri-operative use unlikely to affect a breastfed infant; limited data"],
+    ["Renal", "Organ-independent (Hofmann) elimination - no major adjustment in renal failure"],
+    ["Hepatic", "Organ-independent elimination - no major adjustment in hepatic failure"],
+    ["Alcohol", "Not relevant (anesthetic/ICU use)"],
+    ["Monitoring", "Peripheral nerve stimulator (train-of-four), ventilation, depth of anesthesia"]
+  ],
+  "summary": "Cisatracurium besylate is an intermediate-acting nondepolarizing neuromuscular blocker used as an adjunct to general anesthesia to facilitate tracheal intubation and to provide skeletal muscle relaxation during surgery or mechanical ventilation in the ICU. It competitively blocks acetylcholine at the motor end-plate and is eliminated largely by organ-independent Hofmann degradation, making it useful in renal and hepatic failure. It produces no analgesia or sedation, so adequate anesthesia is essential, and it requires mechanical ventilation and nerve-stimulator monitoring.",
+  "indications": [
+    "Adjunct to general anesthesia to facilitate tracheal intubation (adults and pediatric patients 1 month to 12 years)",
+    "Skeletal muscle relaxation during surgery (adults and pediatric patients 2 to 12 years, bolus or infusion)",
+    "Skeletal muscle relaxation for mechanical ventilation in the ICU (adults)"
+  ],
+  "dosage": [
+    {"c": "Tracheal intubation", "r": "Adult", "d": "0.15 to 0.2 mg/kg IV bolus", "t": "Single bolus", "n": "Onset of good intubating conditions ~1.5-2 min at higher dose; not for rapid-sequence intubation"},
+    {"c": "Maintenance relaxation during surgery", "r": "Adult", "d": "Bolus 0.03 mg/kg as needed, or infusion approximately 1 to 3 mcg/kg/min", "t": "Infusion / intermittent bolus", "n": "Titrate to peripheral nerve stimulator response"},
+    {"c": "ICU mechanical ventilation", "r": "Adult", "d": "Infusion titrated to effect (commonly ~3 mcg/kg/min initial, adjust)", "t": "Continuous IV infusion", "n": "Monitor train-of-four; limit toxic metabolite exposure"},
+    {"c": "Intubation/relaxation", "r": "Pediatric 1 month-12 yr (intubation) / 2-12 yr (surgical relaxation)", "d": "Weight-based per labeling (e.g. 0.1-0.15 mg/kg bolus)", "t": "Bolus / infusion", "n": "Avoid benzyl-alcohol-preserved multidose vials in infants <1 month"}
+  ],
+  "admin": [
+    "Administer intravenously only, by or under the supervision of clinicians experienced with neuromuscular blockers and their complications",
+    "Use only where personnel and equipment for intubation, mechanical ventilation, oxygen, and resuscitation are immediately available - the patient must be ventilated",
+    "Use a peripheral nerve stimulator (train-of-four) to monitor blockade depth, guide dosing, and assess recovery",
+    "Ensure adequate sedation/general anesthesia first - cisatracurium provides no analgesia, sedation, or amnesia"
+  ],
+  "moa": "Cisatracurium is the R-cis,R-cis isomer of atracurium. It binds competitively to nicotinic cholinergic (acetylcholine) receptors on the motor end-plate, antagonizing the action of acetylcholine and blocking neuromuscular transmission to produce flaccid skeletal muscle paralysis. This nondepolarizing block is reversible by acetylcholinesterase inhibitors such as neostigmine. It is eliminated chiefly by Hofmann elimination (pH- and temperature-dependent spontaneous chemical degradation), independent of hepatic or renal function.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to cisatracurium (severe anaphylactic reactions reported)",
+      "Use of the 10 mL multiple-dose (benzyl-alcohol-containing) vials in neonates <1 month and low-birth-weight infants"
+    ],
+    "relative": [
+      "Neuromuscular diseases (myasthenia gravis, Eaton-Lambert) - exaggerated and prolonged block; reduce dose",
+      "Severe electrolyte disturbance or acid-base abnormality",
+      "Burns (altered response)"
+    ],
+    "monitor": [
+      "Depth of neuromuscular blockade (train-of-four)",
+      "Adequacy of ventilation and oxygenation",
+      "Adequacy of concurrent anesthesia/sedation"
+    ]
+  },
+  "preg": "There are limited data. Use cisatracurium during pregnancy only if clearly needed. When used near delivery, monitor the neonate for residual neuromuscular blockade.",
+  "lact": "It is not known whether cisatracurium is excreted in human milk. Given its short duration and single peri-operative use, clinically significant exposure to a breastfed infant is unlikely.",
+  "renal": "Because cisatracurium is eliminated predominantly by organ-independent Hofmann degradation, no major dose adjustment is needed in renal impairment, including end-stage renal disease. Onset may be slightly slower.",
+  "hepatic": "Hofmann elimination is independent of hepatic function, so no major dose adjustment is required in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Other neuromuscular blockers (additive/synergistic block; cross-reactive anaphylaxis risk)"
+    ],
+    "moderate": [
+      "Volatile anesthetics (isoflurane, sevoflurane, enflurane) - potentiate and prolong block",
+      "Aminoglycoside, polymyxin, clindamycin, and other antibiotics that impair neuromuscular transmission",
+      "Magnesium sulfate (enhances block)",
+      "Local anesthetics, procainamide, quinidine (enhance block)"
+    ],
+    "minor": [
+      "Chronic phenytoin or carbamazepine (may shorten duration / cause resistance)"
+    ],
+    "food": "Not applicable (intravenous)",
+    "alcohol": "Not relevant to clinical use",
+    "diagnostics": "Monitor with peripheral nerve stimulation rather than laboratory tests"
+  },
+  "se": {
+    "common": ["Bradycardia", "Hypotension", "Flushing", "Bronchospasm", "Rash"],
+    "serious": ["Prolonged/residual neuromuscular blockade", "Anaphylaxis / severe hypersensitivity (cross-reactive with other neuromuscular blockers)", "Inadequate paralysis reversal leading to respiratory failure", "Seizures (laudanosine metabolite accumulation with prolonged ICU infusion)"],
+    "rare": ["Myopathy/prolonged weakness after long-term ICU use (especially with corticosteroids)", "Severe bronchospasm"],
+    "emergency": ["Anaphylaxis", "Apnea/respiratory failure from residual paralysis or accidental administration", "Severe bronchospasm", "Cardiovascular collapse"]
+  },
+  "monitoring": [
+    "Peripheral nerve stimulator (train-of-four) to titrate dosing and assess recovery",
+    "Continuous ventilation, oxygenation, and end-tidal CO2",
+    "Adequacy of anesthesia/sedation and analgesia",
+    "Hemodynamics (heart rate, blood pressure)",
+    "For prolonged ICU infusion: signs of residual weakness/myopathy and metabolite-related effects"
+  ],
+  "counsel": [
+    "This is a paralytic given only in the operating room or ICU by anesthesia/critical-care teams",
+    "It does not cause sleep or relieve pain - it is always given with anesthesia or sedation",
+    "Breathing must be supported by a ventilator while it is in effect",
+    "Tell your anesthesiologist about any prior reaction to muscle relaxants or anesthesia",
+    "Recovery of muscle strength is monitored before the breathing tube is removed"
+  ],
+  "pk": [
+    ["Onset", "Maximum block in about 2-3 minutes (faster with higher bolus, ~1.5 min at 0.2 mg/kg)"],
+    ["Peak", "Peak neuromuscular block within a few minutes of an IV bolus"],
+    ["Half-life", "Elimination half-life approximately 22-29 minutes"],
+    ["Duration", "Clinically effective block about 30-60 minutes (intermediate-acting), dose dependent"],
+    ["Storage", "Refrigerate at 2-8 C; protect from light; do not freeze"]
+  ],
+  "pearls": [
+    "Eliminated by organ-independent Hofmann degradation - the relaxant of choice in combined hepatic and renal failure",
+    "Causes minimal histamine release compared with atracurium, so it is hemodynamically stable",
+    "NOT suitable for rapid-sequence intubation because of its onset time",
+    "No analgesia or sedation - inadequate anesthesia can leave a paralyzed but aware patient",
+    "Prolonged ICU infusion can accumulate the metabolite laudanosine (CNS excitation/seizure risk in animals); avoid the benzyl-alcohol multidose vial in neonates"
+  ],
+  "missed": "Cisatracurium is titrated by clinicians as a bolus or continuous infusion during anesthesia or ICU ventilation, so the concept of a patient-missed dose does not apply. Dosing is guided by neuromuscular monitoring.",
+  "overdose": "Overdose causes prolonged, profound neuromuscular blockade and apnea. Management: maintain a patent airway and controlled mechanical ventilation with adequate sedation until spontaneous recovery is adequate; an acetylcholinesterase inhibitor (e.g. neostigmine with an anticholinergic) can antagonize the block once recovery has begun, guided by a nerve stimulator. Support cardiovascular function as needed.",
+  "refs": [
+    ["FDA Prescribing Information - Cisatracurium besylate injection", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Cisatracurium besylate", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cisatracurium%20besylate%22"]
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generic": "Silodosin",
+  "cls": "Selective alpha-1A adrenergic receptor antagonist",
+  "pharm": "Benign prostatic hyperplasia agent (uroselective alpha-blocker)",
+  "tags": ["alpha-1 blocker", "alpha-1A selective", "BPH", "benign prostatic hyperplasia", "LUTS"],
+  "quick": [
+    ["Adult dose", "8 mg PO once daily with a meal"],
+    ["Meal", "Take WITH a meal (reduces adverse events)"],
+    ["Pregnancy", "Not indicated in females"],
+    ["Lactation", "Not indicated in females"],
+    ["Renal", "Moderate (CrCl 30-50): 4 mg/d; severe (<30): contraindicated"],
+    ["Hepatic", "Severe (Child-Pugh >=10): contraindicated"],
+    ["Alcohol", "Caution; may worsen orthostatic hypotension"],
+    ["Monitoring", "Orthostatic BP, dizziness; rule out prostate cancer first"]
+  ],
+  "summary": "Silodosin is a highly selective alpha-1A adrenergic receptor antagonist indicated for the signs and symptoms of benign prostatic hyperplasia (BPH); it is not an antihypertensive. The usual dose is 8 mg once daily with a meal, reduced to 4 mg daily in moderate renal impairment and contraindicated in severe renal (CrCl <30 mL/min) or severe hepatic (Child-Pugh >=10) impairment and with strong CYP3A4 inhibitors. Key safety concerns are orthostatic/postural hypotension with potential syncope, intraoperative floppy iris syndrome (IFIS) during cataract surgery, and the need to exclude prostate carcinoma before starting. Retrograde ejaculation is the most common adverse effect.",
+  "indications": [
+    "Treatment of the signs and symptoms of benign prostatic hyperplasia (BPH) in adult men",
+    "Not indicated for the treatment of hypertension"
+  ],
+  "dosage": [
+    {"c": "BPH (normal/mild renal function)", "r": "Standard", "d": "8 mg once daily", "t": "Once daily with a meal", "n": "Subdividing capsule contents not recommended"},
+    {"c": "Moderate renal impairment (CrCl 30-50)", "r": "Reduced", "d": "4 mg once daily", "t": "Once daily with a meal", "n": "Exposure ~3x higher; monitor for adverse events"},
+    {"c": "Severe renal impairment (CrCl <30)", "r": "Contraindicated", "d": "Do not use", "t": "Not applicable", "n": "Contraindicated"},
+    {"c": "Severe hepatic impairment (Child-Pugh >=10)", "r": "Contraindicated", "d": "Do not use", "t": "Not applicable", "n": "Not studied; contraindicated"},
+    {"c": "Difficulty swallowing", "r": "Alternative administration", "d": "8 mg capsule contents", "t": "Once daily with a meal", "n": "Sprinkle on a tablespoon of cool applesauce, swallow within 5 minutes without chewing, follow with 8 oz cool water"}
+  ],
+  "admin": [
+    "Take 8 mg orally once daily with a meal to reduce risk of adverse events",
+    "Reduce to 4 mg once daily with a meal in moderate renal impairment",
+    "Capsule may be opened and sprinkled on cool applesauce for patients who cannot swallow it whole; use immediately and follow with cool water",
+    "Do not subdivide the contents of the capsule",
+    "Exclude prostate carcinoma before initiating therapy",
+    "Advise patients planning cataract surgery to tell their ophthalmologist they take silodosin (IFIS risk)"
+  ],
+  "moa": "Silodosin is a selective antagonist of post-synaptic alpha-1 adrenoreceptors located in the prostate, bladder base, bladder neck, prostatic capsule, and prostatic urethra. Blockade of these receptors relaxes smooth muscle in these tissues, improving urine flow and reducing BPH symptoms. It binds with high affinity to the alpha-1A subtype, conferring uroselectivity.",
+  "contra": {
+    "absolute": ["Severe renal impairment (CrCl <30 mL/min)", "Severe hepatic impairment (Child-Pugh score >=10)", "Concomitant use of strong CYP3A4 inhibitors (ketoconazole, clarithromycin, itraconazole, ritonavir)", "History of hypersensitivity to silodosin or any ingredient"],
+    "relative": ["Moderate renal impairment (reduce dose to 4 mg)", "Concomitant antihypertensives or PDE5 inhibitors (additive hypotension)", "Concomitant strong P-gp inhibitors (e.g., cyclosporine - not recommended)", "Patients at risk for symptomatic orthostatic hypotension"],
+    "monitor": ["Postural/orthostatic hypotension and potential syncope, especially when starting therapy", "Intraoperative Floppy Iris Syndrome (IFIS) in patients undergoing or planning cataract surgery", "Need to rule out prostate carcinoma before and during therapy", "Adverse events in moderate renal impairment or with moderate CYP3A4 inhibitors"]
+  },
+  "preg": "Silodosin is not indicated for use in females.",
+  "lact": "Silodosin is not indicated for use in females.",
+  "renal": "Plasma concentrations (AUC and Cmax) are roughly 3 times higher and half-life roughly doubled in moderate renal impairment (CrCl 30-50 mL/min) - reduce dose to 4 mg once daily and monitor for adverse events. Contraindicated in severe renal impairment (CrCl <30 mL/min); not studied in that population. No adjustment needed in mild impairment (CrCl 50-80 mL/min).",
+  "hepatic": "No dosage adjustment needed in mild or moderate hepatic impairment (single-dose PK not significantly altered in Child-Pugh 7-9). Not studied in and contraindicated in severe hepatic impairment (Child-Pugh score >=10).",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir) - 3.2-3.8x increase in exposure; contraindicated", "Strong P-gp inhibitors (e.g., cyclosporine) - increased silodosin concentration; not recommended", "Other alpha-blockers - interactions expected; do not use in combination"],
+    "moderate": ["Moderate CYP3A4 inhibitors (diltiazem, erythromycin, verapamil) - may increase silodosin levels; use caution and monitor", "PDE5 inhibitors (sildenafil, tadalafil) - additive vasodilation; potential symptomatic hypotension", "Antihypertensive agents - higher incidence of dizziness and orthostatic hypotension; use caution", "UGT2B7 inhibitors (probenecid, valproic acid, fluconazole) - may increase exposure"],
+    "minor": ["Digoxin - no significant PK change; no dose adjustment required", "Silodosin does not inhibit or induce CYP enzyme systems"],
+    "food": "Take with a meal; a moderate-fat meal decreases Cmax ~18-43% and AUC ~4-49%, and food improves tolerability.",
+    "alcohol": "Use caution; alcohol may potentiate orthostatic hypotension and dizziness.",
+    "diagnostics": "No laboratory test interactions observed; up to 52 weeks of treatment had no significant effect on PSA."
+  },
+  "se": {
+    "common": ["Retrograde ejaculation (~28%)", "Dizziness", "Diarrhea", "Orthostatic hypotension", "Headache", "Nasopharyngitis", "Nasal congestion"],
+    "serious": ["Symptomatic orthostatic hypotension with syncope", "Intraoperative Floppy Iris Syndrome (IFIS)", "Severe allergic-type reactions including swollen tongue and pharyngeal edema", "Impaired hepatic function with increased transaminases / jaundice"],
+    "rare": ["Priapism", "Toxic skin eruption, purpura, rash, pruritus, urticaria", "Insomnia"],
+    "emergency": ["Syncope from severe orthostatic hypotension (especially on first doses)", "Severe allergic reaction / angioedema with swollen tongue or pharyngeal edema causing airway compromise", "Priapism (painful erection >4 hours - urological emergency)"]
+  },
+  "monitoring": [
+    "Standing and supine blood pressure and symptoms of orthostasis, particularly when initiating therapy",
+    "Examine to rule out prostate carcinoma before starting and as clinically indicated",
+    "Watch for adverse events in moderate renal impairment or with moderate CYP3A4 inhibitors",
+    "Inquire about planned cataract/eye surgery (IFIS risk)"
+  ],
+  "counsel": [
+    "Take one capsule daily with a meal at about the same time each day",
+    "Be careful with standing up, driving, or hazardous tasks when starting - dizziness or fainting can occur",
+    "Tell your eye surgeon you take silodosin before any cataract or eye surgery (floppy iris syndrome)",
+    "Retrograde ejaculation (reduced or absent semen) is common and reverses after stopping the drug",
+    "Report fainting, severe dizziness, painful prolonged erection, rash, or facial/tongue swelling"
+  ],
+  "pk": [
+    ["Onset", "Postural hypotension may occur on first dose"],
+    ["Peak", "Tmax ~2.6 hours (steady state, with food)"],
+    ["Half-life", "~13.3 hours (active metabolite KMD-3213G ~24 h)"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Store at controlled room temperature"]
+  ],
+  "pearls": [
+    "Highly alpha-1A selective - good uroselectivity but pronounced retrograde ejaculation (~28%)",
+    "Contraindicated with strong CYP3A4 inhibitors and in severe renal (CrCl <30) or severe hepatic (Child-Pugh >=10) impairment",
+    "Reduce to 4 mg daily in moderate renal impairment; exposure roughly triples",
+    "Counsel about Intraoperative Floppy Iris Syndrome before cataract surgery",
+    "Always exclude prostate carcinoma before starting; no significant PSA effect over 52 weeks"
+  ],
+  "missed": "Take the missed dose with a meal when remembered, unless it is nearly time for the next dose, then skip it and resume the usual once-daily schedule. Do not take two doses at once.",
+  "overdose": "Dose-limiting adverse event is postural hypotension. If overdose causes hypotension, support the cardiovascular system - keep the patient supine to restore blood pressure and normalize heart rate; give IV fluids if inadequate, and vasopressors if necessary. Monitor and support renal function. Dialysis is unlikely to help because silodosin is highly (97%) protein bound. Silodosin was tolerated up to 48 mg/day in healthy male subjects.",
+  "refs": [
+    ["FDA Silodosin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22silodosin%22"],
+    ["FDA DailyMed - Silodosin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

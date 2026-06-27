@@ -1,0 +1,111 @@
+{
+  "generic": "Cytarabine",
+  "cls": "Antineoplastic — antimetabolite (pyrimidine analog)",
+  "pharm": "Nucleoside metabolic inhibitor; S-phase-specific antimetabolite blocking DNA polymerase",
+  "tags": ["Rx", "Habit forming: No", "Injection", "Cytotoxic chemotherapy"],
+  "quick": [
+    ["Adult dose", "100 mg/m2/day continuous IV (induction)"],
+    ["Meal", "Not applicable (parenteral)"],
+    ["Pregnancy", "Can cause fetal harm; avoid"],
+    ["Lactation", "Discontinue nursing"],
+    ["Renal", "High-dose: dose-reduce / monitor neurotoxicity"],
+    ["Hepatic", "Caution; consider dose reduction"],
+    ["Alcohol", "Avoid (added hepatotoxicity)"],
+    ["Monitoring", "CBC, marrow, liver/renal function"]
+  ],
+  "summary": "Cytarabine (cytosine arabinoside, ara-C) is an S-phase-specific antimetabolite used, in combination with other agents, for remission induction in acute non-lymphocytic (myeloid) leukemia in adults and children, and also for acute lymphocytic leukemia and the blast phase of CML. Given IV, subcutaneously, or intrathecally (preservative-free only) for meningeal leukemia. Its principal toxicity is profound bone marrow suppression, so it must be used by clinicians experienced in cancer chemotherapy with full supportive care.",
+  "indications": [
+    "Remission induction of acute non-lymphocytic (myeloid) leukemia, in combination, in adults and children",
+    "Acute lymphocytic leukemia",
+    "Blast phase of chronic myelogenous leukemia",
+    "Prophylaxis and treatment of meningeal leukemia (intrathecal, preservative-free)"
+  ],
+  "dosage": [
+    {"c": "AML remission induction (combination)", "r": "IV continuous infusion", "d": "100 mg/m2/day by continuous infusion (days 1-7) OR 100 mg/m2 IV every 12 hours (days 1-7)", "t": "7-day cycle", "n": "Per institutional protocol with anthracycline"},
+    {"c": "High-dose regimen (refractory leukemia)", "r": "IV infusion", "d": "2-3 g/m2 over 1-3 hours every 12 hours", "t": "Per protocol", "n": "High neurotoxicity/ocular toxicity risk; give prophylactic steroid eye drops"},
+    {"c": "Meningeal leukemia (intrathecal)", "r": "Intrathecal", "d": "5-75 mg/m2; commonly 30 mg/m2 every 4 days", "t": "Per protocol until CSF clear", "n": "Preservative-free single-dose solution only"},
+    {"c": "Maintenance", "r": "SC or IV", "d": "1 mg/kg once or twice weekly", "t": "Weekly", "n": "Per regimen"}
+  ],
+  "admin": [
+    "Administer only under supervision of a clinician experienced in cytotoxic chemotherapy",
+    "Use single-dose preservative-free solutions for intrathecal use",
+    "Continuous IV infusion is generally better tolerated than rapid injection",
+    "Provide antiemetics; give prophylactic corticosteroid eye drops with high-dose therapy",
+    "Handle as a hazardous cytotoxic drug; ensure marrow and supportive resources are available"
+  ],
+  "moa": "Pyrimidine nucleoside analog; intracellularly phosphorylated to ara-CTP, which inhibits DNA polymerase and is incorporated into DNA, blocking DNA synthesis (S-phase-specific cytotoxicity).",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to cytarabine"
+    ],
+    "relative": [
+      "Pre-existing severe bone marrow suppression (use only with weighed benefit/risk)",
+      "Active infection",
+      "Hepatic or renal impairment (higher toxicity, especially high-dose)"
+    ],
+    "monitor": ["Bone marrow / blood counts", "Hepatic and renal function", "Neurologic status (high-dose)"]
+  },
+  "preg": "Can cause fetal harm; congenital malformations reported. Avoid in pregnancy; advise effective contraception.",
+  "lact": "Unknown whether excreted in milk; because of potential serious adverse effects, discontinue nursing.",
+  "renal": "Renal impairment increases risk of CNS toxicity with high-dose regimens; reduce dose and monitor closely.",
+  "hepatic": "Hepatic dysfunction may increase CNS toxicity; use cautiously, consider dose reduction, and monitor liver function.",
+  "interactions": {
+    "major": [
+      "Other myelosuppressive chemotherapy / radiation — additive marrow toxicity",
+      "Live vaccines — risk of disseminated infection; avoid"
+    ],
+    "moderate": [
+      "Digoxin (oral tablets) — cytarabine may reduce digoxin absorption; monitor levels",
+      "Gentamicin — antagonism against K. pneumoniae reported",
+      "Flucytosine — cytarabine may reduce its antifungal efficacy"
+    ],
+    "minor": [],
+    "food": "Not applicable (parenteral).",
+    "alcohol": "Avoid; potential additive hepatotoxicity.",
+    "diagnostics": "May elevate uric acid (tumor lysis); monitor."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Diarrhea", "Anorexia", "Fever", "Stomatitis/oral ulceration", "Rash", "Alopecia", "Hepatic enzyme elevation"],
+    "serious": [
+      "Severe bone marrow suppression (leukopenia, thrombocytopenia, anemia)",
+      "Cytarabine (ara-C) syndrome — fever, myalgia, bone pain, rash, conjunctivitis, malaise",
+      "High-dose cerebellar/cerebral neurotoxicity",
+      "Pulmonary edema / acute respiratory distress",
+      "Severe GI ulceration and pancreatitis",
+      "Tumor lysis syndrome / hyperuricemia"
+    ],
+    "rare": ["Conjunctivitis/keratitis (high-dose)", "Cardiomyopathy", "Anaphylaxis", "Peripheral neuropathy", "Skin desquamation (palmar-plantar)"],
+    "emergency": ["Neutropenic sepsis", "Severe bleeding from thrombocytopenia", "Acute respiratory distress / pulmonary edema", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Frequent complete blood counts and bone marrow during induction",
+    "Liver and renal function tests",
+    "Neurologic exam for cerebellar signs (high-dose)",
+    "Uric acid / tumor lysis parameters",
+    "Ocular symptoms with high-dose therapy"
+  ],
+  "counsel": [
+    "Report fever, sore throat, or any sign of infection immediately",
+    "Report unusual bruising or bleeding",
+    "Flu-like symptoms (ara-C syndrome) may occur 6-12 hours after a dose",
+    "Use effective contraception during and after therapy",
+    "Do not breastfeed during treatment"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic during S-phase after intracellular activation"],
+    ["Peak", "Immediate with IV; SC peak about 20-60 min"],
+    ["Half-life", "Initial about 10 min; terminal 1-3 hours"],
+    ["Duration", "Short plasma persistence; rapid deamination"],
+    ["Storage", "20-25 C (68-77 F); reconstituted solution per label"]
+  ],
+  "pearls": [
+    "Boxed warning: principal toxicity is bone marrow suppression; use only with adequate supportive care",
+    "High-dose ara-C causes cerebellar toxicity and conjunctivitis — give prophylactic steroid eye drops and assess neurology before each dose",
+    "Intrathecal use must be preservative-free single-dose solution",
+    "Ara-C (cytarabine) syndrome responds to corticosteroids",
+    "Watch for tumor lysis syndrome at start of leukemia treatment"
+  ],
+  "missed": "Administered on a scheduled chemotherapy protocol by clinicians; missed or delayed doses are managed by the oncology team, not self-administered.",
+  "overdose": "No antidote. Overdose causes severe, potentially irreversible CNS toxicity and profound myelosuppression. Discontinue, provide intensive supportive care, transfusions, and treat infection.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

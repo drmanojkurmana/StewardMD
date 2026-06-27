@@ -1,0 +1,103 @@
+{
+  "generic": "Dapagliflozin (FARXIGA)",
+  "cls": "SGLT2 inhibitor (antidiabetic / cardio-renal protective)",
+  "pharm": "Sodium-glucose cotransporter 2 (SGLT2) inhibitor; reduces renal glucose reabsorption and increases urinary glucose excretion",
+  "tags": ["SGLT2 inhibitor", "type 2 diabetes", "heart failure", "chronic kidney disease", "DKA risk", "euglycemic ketoacidosis", "Fournier gangrene", "genital mycotic infection"],
+  "quick": [
+    ["Adult dose", "10 mg PO once daily (5 mg starting for glycemic control, may increase to 10 mg)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Not recommended in 2nd/3rd trimesters (adverse fetal renal effects)"],
+    ["Lactation", "Not recommended while breastfeeding"],
+    ["Renal", "eGFR-based; not for glycemic control if eGFR <45; do not initiate if eGFR <25 (may continue)"],
+    ["Hepatic", "No dose adjustment; assess benefit/risk in severe impairment"],
+    ["Alcohol", "Avoid excess; alcohol abuse precipitates ketoacidosis"],
+    ["Monitoring", "Renal function, volume status, ketones if DKA risk, genital/perineal infection signs"]
+  ],
+  "summary": "Dapagliflozin (FARXIGA) is an oral SGLT2 inhibitor that lowers blood glucose by increasing urinary glucose excretion and provides cardio-renal benefit. It is indicated to slow chronic kidney disease progression, reduce cardiovascular death and heart failure hospitalization in heart failure, reduce heart failure hospitalization in type 2 diabetes with CV disease or risk factors, and as adjunct therapy for glycemic control in type 2 diabetes. The usual dose is 10 mg once daily (5 mg start for glycemic control). Dosing is guided by eGFR, and it is not used for glycemic control when eGFR is below 45. Key safety concerns are diabetic ketoacidosis (including euglycemic DKA with normal/near-normal glucose), volume depletion, genital mycotic infections, urosepsis/pyelonephritis, and the rare but life-threatening Fournier gangrene (necrotizing fasciitis of the perineum). Withhold for at least 3 days before major surgery or prolonged fasting.",
+  "indications": [
+    "Reduce risk of sustained eGFR decline, end-stage kidney disease, CV death, and heart failure hospitalization in adults with chronic kidney disease at risk of progression",
+    "Reduce risk of CV death, heart failure hospitalization, and urgent heart failure visit in adults with heart failure",
+    "Reduce risk of heart failure hospitalization in adults with type 2 diabetes and established CV disease or multiple CV risk factors",
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus",
+    "Limitations: not for glycemic control in type 1 diabetes; not for glycemic control in type 2 diabetes with eGFR <45; not for CKD in polycystic kidney disease or recent immunosuppressive therapy for kidney disease"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes - glycemic control (eGFR >=45)", "r": "Oral", "d": "5 mg once daily starting; may increase to 10 mg once daily for additional control", "t": "Once daily, any time of day", "n": "Not recommended for glycemic control if eGFR <45 (likely ineffective)"},
+    {"c": "Heart failure / CKD / CV risk reduction (eGFR >=45)", "r": "Oral", "d": "10 mg once daily", "t": "Once daily", "n": "Recommended starting dose for all non-glycemic indications"},
+    {"c": "eGFR 25 to <45", "r": "Oral", "d": "10 mg once daily", "t": "Once daily", "n": "For non-glycemic indications; not for glycemic control in T2DM"},
+    {"c": "eGFR <25", "r": "Oral", "d": "Do not initiate; patients already on 10 mg may continue", "t": "Once daily if continued", "n": "Continuation reduces risk of eGFR decline, ESKD, CV death, and HF hospitalization"}
+  ],
+  "admin": [
+    "Take orally once daily with or without food",
+    "Assess renal function and volume status before initiation; correct volume depletion first",
+    "Withhold for at least 3 days, if possible, before major surgery or procedures associated with prolonged fasting",
+    "Resume when the patient is clinically stable and has resumed oral intake",
+    "Available as 5 mg and 10 mg film-coated tablets"
+  ],
+  "moa": "Inhibits SGLT2 in the proximal renal tubule, the transporter responsible for most reabsorption of filtered glucose, thereby reducing glucose reabsorption and promoting urinary glucose excretion. It also reduces sodium reabsorption and increases distal sodium delivery, which lowers cardiac pre- and afterload, downregulates sympathetic activity, and decreases intraglomerular pressure via tubuloglomerular feedback, contributing to cardiovascular and renal benefit.",
+  "contra": {
+    "absolute": ["History of serious hypersensitivity reaction to dapagliflozin (anaphylaxis or angioedema)"],
+    "relative": ["Type 1 diabetes mellitus (markedly increased DKA risk; not indicated)", "History of pancreatitis or pancreatic surgery (ketoacidosis risk)", "Recurrent genital mycotic infections or prior Fournier gangrene", "Volume depletion / hypotension until corrected", "eGFR <25 for new initiation"],
+    "monitor": ["Patients at risk for ketoacidosis (insulin reduction, acute illness, low caloric intake, ketogenic diet, surgery, alcohol abuse)", "Elderly, renal impairment, or patients on loop diuretics (volume depletion)", "Signs/symptoms of genital or perineal infection (Fournier gangrene)", "Concomitant insulin or insulin secretagogue (hypoglycemia)", "Concomitant lithium (reduced lithium levels)"]
+  },
+  "preg": "Not recommended during the second and third trimesters due to animal data showing adverse, not fully reversible, fetal renal pelvic and tubular dilatations. Limited human data are insufficient to establish drug-associated risk. Poorly controlled diabetes and untreated heart failure also pose maternal and fetal risks.",
+  "lact": "Not recommended while breastfeeding. There are no data on presence in human milk, effects on the breastfed infant, or effects on milk production; risk to the developing kidney cannot be excluded.",
+  "renal": "Dosing is eGFR-based. For glycemic control, not recommended if eGFR <45 (likely ineffective). For other indications, use 10 mg once daily if eGFR >=25. Do not initiate if eGFR <25, though patients already taking 10 mg may continue for cardio-renal benefit. Assess renal function before starting and periodically; risk of volume depletion and acute kidney injury is higher with renal impairment.",
+  "hepatic": "No dose adjustment is recommended. Exposure increases in severe hepatic impairment; weigh benefit against risk before use in severe impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Insulin and insulin secretagogues (e.g., sulfonylureas) - increased hypoglycemia risk; consider lowering their dose", "Lithium - dapagliflozin may decrease serum lithium concentrations; monitor lithium more frequently at initiation and dose changes", "Loop diuretics - additive volume depletion and hypotension risk"],
+    "minor": ["Rifampin lowers dapagliflozin AUC ~22% (no dose adjustment needed)", "Mefenamic acid raises dapagliflozin AUC ~51% (no dose adjustment needed)"],
+    "food": "May be taken with or without food; a high-fat meal lowers Cmax up to 50% and delays Tmax ~1 hour but does not alter AUC (not clinically meaningful).",
+    "alcohol": "Avoid alcohol abuse; it is a precipitating factor for ketoacidosis.",
+    "diagnostics": "Causes positive urine glucose tests - do not use urine glucose to monitor control. Makes 1,5-anhydroglucitol (1,5-AG) assay unreliable - use alternative glycemic monitoring (HbA1c/blood glucose)."
+  },
+  "se": {
+    "common": ["Female genital mycotic infections (vulvovaginal candidiasis)", "Male genital mycotic infections (balanitis)", "Urinary tract infections", "Nasopharyngitis", "Increased urination (polyuria/pollakiuria)", "Back pain"],
+    "serious": ["Diabetic ketoacidosis, including euglycemic DKA (glucose may be <250 mg/dL)", "Volume depletion / symptomatic hypotension", "Acute kidney injury", "Urosepsis and pyelonephritis", "Hypoglycemia (with insulin or secretagogues)"],
+    "rare": ["Hypersensitivity reactions (anaphylaxis, angioedema)"],
+    "emergency": ["Necrotizing fasciitis of the perineum (Fournier gangrene) - rare, life-threatening; genital/perineal pain, erythema, swelling with fever/malaise", "Diabetic ketoacidosis with severe metabolic acidosis (nausea, vomiting, abdominal pain, dyspnea) - may present with near-normal glucose", "Urosepsis with systemic toxicity"]
+  },
+  "monitoring": [
+    "Renal function (eGFR) before initiation and periodically thereafter",
+    "Volume status and blood pressure, especially in elderly, renal impairment, or patients on diuretics",
+    "Ketones in type 1 diabetes and others at risk for ketoacidosis, assessing regardless of glucose level when symptoms suggest acidosis",
+    "Signs/symptoms of genital and perineal infection (assess promptly for Fournier gangrene)",
+    "Signs/symptoms of urinary tract infection, urosepsis, and pyelonephritis",
+    "Blood glucose / HbA1c (not urine glucose or 1,5-AG) for glycemic control",
+    "Serum lithium if co-administered"
+  ],
+  "counsel": [
+    "Stop the drug and seek immediate care for symptoms of ketoacidosis (nausea, vomiting, abdominal pain, tiredness, labored breathing) - blood sugar may be normal even with ketoacidosis (euglycemic DKA)",
+    "Seek urgent care for genital or perineal pain, tenderness, redness, or swelling with fever or feeling unwell (Fournier gangrene)",
+    "Genital yeast infections are common; report symptoms so they can be treated",
+    "Report burning urination, urgency, flank pain, or fever (possible serious urinary tract infection)",
+    "Maintain adequate fluid intake; dehydration increases risk of low blood pressure and fainting",
+    "If taking insulin or a sulfonylurea, watch for low blood sugar; the prescriber may lower those doses",
+    "The medication will hold for at least 3 days before major surgery or prolonged fasting",
+    "May be taken with or without food at the same time each day"
+  ],
+  "pk": [
+    ["Onset", "Glucosuric effect begins shortly after dosing; cardio-renal benefits accrue over weeks to months"],
+    ["Peak", "Cmax within ~2 hours under fasting conditions"],
+    ["Half-life", "Approximately 12.9 hours"],
+    ["Duration", "Once-daily dosing; urinary glucose excretion persists ~3 days after discontinuation"],
+    ["Storage", "Store at controlled room temperature (20-25 C / 68-77 F)"]
+  ],
+  "pearls": [
+    "Euglycemic DKA is a hallmark hazard - assess for ketoacidosis based on symptoms even when glucose is below 250 mg/dL",
+    "Withhold at least 3 days before major surgery or prolonged fasting to reduce ketoacidosis risk",
+    "Fournier gangrene (necrotizing perineal fasciitis) is rare but life-threatening in both sexes - act on perineal pain/swelling plus fever",
+    "Genital mycotic infections are the most common adverse effect, more frequent in females and uncircumcised males",
+    "Not effective for glycemic control when eGFR <45, but cardio-renal benefit continues down to eGFR <25 (continue if already started)",
+    "Correct volume depletion before initiating, especially in elderly or those on loop diuretics",
+    "Causes positive urine glucose and unreliable 1,5-AG - use HbA1c/blood glucose to monitor",
+    "Ketoacidosis and glucosuria may persist longer than expected (reports up to ~2 weeks) after stopping"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on the same day. If it is almost time for the next dose, skip the missed dose and resume the usual once-daily schedule. Do not take two doses at once.",
+  "overdose": "No overdose reports occurred during clinical development. In the event of overdose, contact a Poison Control Center and provide supportive care guided by the patient's clinical status. Monitor for volume depletion, hypotension, hypoglycemia (if on insulin/secretagogues), and ketoacidosis. Removal of dapagliflozin by hemodialysis has not been studied.",
+  "refs": [
+    ["FDA Label - FARXIGA (dapagliflozin), DailyMed/openFDA", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=FARXIGA"],
+    ["openFDA Drug Label API", "https://open.fda.gov/apis/drug/label/"]
+  ]
+}

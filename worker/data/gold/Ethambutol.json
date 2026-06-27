@@ -1,0 +1,90 @@
+{
+  "generic": "Ethambutol",
+  "cls": "Antimycobacterial / antitubercular agent",
+  "pharm": "First-line anti-tuberculosis drug (bacteriostatic)",
+  "tags": ["antitubercular", "tuberculosis", "antimycobacterial", "optic neuritis", "first-line TB"],
+  "quick": [
+    ["Adult dose", "15 mg/kg once daily (initial); 25 mg/kg retreatment"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Category C; use if benefit justifies risk"],
+    ["Lactation", "Excreted in milk; use with caution"],
+    ["Renal", "Reduce dose / extend interval; monitor levels"],
+    ["Hepatic", "Monitor LFTs (hepatotoxicity reported)"],
+    ["Alcohol", "Limit; added hepatic and neuropathy risk"],
+    ["Monitoring", "Visual acuity, color vision, renal/hepatic"]
+  ],
+  "summary": "Ethambutol is a first-line bacteriostatic anti-tuberculosis drug always used in combination, never alone. Initial treatment is 15 mg/kg once daily (25 mg/kg in retreatment). The hallmark toxicity is dose- and duration-related optic neuritis with decreased visual acuity and red-green color blindness, requiring vision monitoring.",
+  "indications": [
+    "Treatment of pulmonary tuberculosis, in combination with at least one other antitubercular drug",
+    "Treatment of other mycobacterial infections (e.g., Mycobacterium avium complex) as part of combination therapy"
+  ],
+  "dosage": [
+    {"c": "Initial treatment (no prior TB therapy)", "r": "Adult", "d": "15 mg/kg (7 mg/lb) once every 24 hours", "t": "Once daily", "n": "Always with at least one other anti-TB drug"},
+    {"c": "Retreatment", "r": "Adult", "d": "25 mg/kg once daily for 60 days, then reduce to 15 mg/kg once daily", "t": "Once daily", "n": "With other anti-TB drugs; monitor eyes monthly at 25 mg/kg"},
+    {"c": "Pediatric <13 years", "r": "Pediatric", "d": "Not recommended (safe use not established) per US label", "t": "-", "n": "WHO uses ~20 mg/kg in children where required"},
+    {"c": "Renal impairment", "r": "Renal", "d": "Reduce dose / extend dosing interval", "t": "Per renal function", "n": "Largely renally excreted; monitor"}
+  ],
+  "admin": [
+    "Never use ethambutol alone; always combine with at least one other anti-TB drug",
+    "Administer once every 24 hours; absorption not significantly affected by food",
+    "Continue until bacteriologic conversion is permanent and maximal clinical improvement occurs",
+    "Perform baseline and periodic visual acuity and color discrimination testing",
+    "Reduce dose and lengthen interval in renal impairment"
+  ],
+  "moa": "Inhibits arabinosyl transferases (encoded by the embAB genes) involved in synthesis of arabinogalactan, an essential component of the mycobacterial cell wall. Disruption of cell-wall biosynthesis is bacteriostatic against actively dividing Mycobacterium tuberculosis and other mycobacteria.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to ethambutol", "Optic neuritis (unless clinical judgment determines it may be used)", "Patients unable to report visual symptoms (young children, unconscious)"],
+    "relative": ["Pre-existing visual impairment", "Renal impairment", "Diabetic retinopathy", "Cataract or recurrent ocular inflammation"],
+    "monitor": ["Visual acuity and color vision", "Renal function", "Hepatic function"]
+  },
+  "preg": "Pregnancy Category C. Adequate well-controlled studies are lacking; ophthalmic abnormalities reported in some infants of women on anti-TB therapy including ethambutol. Use only if the potential benefit justifies the potential risk; generally considered acceptable in TB treatment during pregnancy.",
+  "lact": "Ethambutol is excreted in breast milk in concentrations similar to maternal plasma. Use with caution; generally considered compatible during TB treatment.",
+  "renal": "Excreted largely unchanged by the kidneys; reduce dose or extend the dosing interval in renal impairment and monitor serum levels and visual function closely.",
+  "hepatic": "Hepatotoxicity including fatalities has been reported. Perform baseline and periodic assessment of hepatic function, especially in combination regimens with other hepatotoxic anti-TB drugs.",
+  "interactions": {
+    "major": ["None of major significance established"],
+    "moderate": ["Aluminum hydroxide antacids - may delay and reduce absorption", "Concomitant hepatotoxic anti-TB drugs (isoniazid, rifampin, pyrazinamide) - additive hepatotoxicity"],
+    "minor": ["Neurotoxic drugs - possible additive peripheral neuropathy"],
+    "food": "Absorption is not significantly altered by food.",
+    "alcohol": "Limit; increases hepatotoxicity and neuropathy risk within TB regimens.",
+    "diagnostics": "May increase serum uric acid; can elevate liver enzymes."
+  },
+  "se": {
+    "common": ["Decreased visual acuity", "Red-green color blindness", "Headache", "Dizziness", "Nausea", "Abdominal pain", "Elevated serum uric acid (may precipitate gout)"],
+    "serious": ["Optic neuritis (retrobulbar) with vision loss", "Hepatotoxicity", "Peripheral neuritis", "Hypersensitivity reactions"],
+    "rare": ["Thrombocytopenia", "Pulmonary infiltrates with eosinophilia", "Anaphylaxis"],
+    "emergency": ["Irreversible blindness from untreated optic neuritis", "Acute liver failure", "Severe hypersensitivity reaction"]
+  },
+  "monitoring": [
+    "Baseline and periodic visual acuity and red-green color discrimination (monthly at high dose/long therapy)",
+    "Renal function for dose adjustment",
+    "Hepatic function tests",
+    "Serum uric acid in patients with gout risk"
+  ],
+  "counsel": [
+    "Report any change in vision, blurring or difficulty seeing red/green immediately",
+    "Take once daily; complete the full TB course with companion drugs",
+    "Never take ethambutol by itself",
+    "Report joint pain (gout) or signs of liver trouble (yellow skin, dark urine)",
+    "Attend scheduled eye examinations"
+  ],
+  "pk": [
+    ["Onset", "Bacteriostatic over the treatment course"],
+    ["Peak", "2-4 hours"],
+    ["Half-life", "3-4 hours (longer in renal impairment)"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "Store at controlled room temperature; protect from moisture"]
+  ],
+  "pearls": [
+    "Optic neuritis is dose- and duration-related; usually reversible if caught early - monitor vision and counsel patients.",
+    "Always used in combination, never as monotherapy.",
+    "Not recommended in children <13 years (US label) as they cannot reliably report visual changes.",
+    "Reduce dose in renal impairment - largely renally cleared."
+  ],
+  "missed": "Take the missed dose when remembered on the same day; if it is nearly time for the next dose, skip it and resume the once-daily schedule. Do not double up. Adherence to the full TB regimen is essential.",
+  "overdose": "Limited data; overdose may worsen optic and gastrointestinal toxicity. Treat supportively with gastric decontamination if early, and monitor visual and renal function. No specific antidote; hemodialysis can remove ethambutol.",
+  "refs": [
+    ["FDA Ethambutol Hydrochloride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ethambutol+hydrochloride%22"],
+    ["FDA DailyMed - Ethambutol Hydrochloride", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

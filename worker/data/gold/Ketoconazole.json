@@ -1,0 +1,124 @@
+{
+  "generic": "Ketoconazole (oral)",
+  "cls": "Antifungal (azole)",
+  "pharm": "Imidazole antifungal; inhibits fungal cytochrome P450 (14-alpha-demethylase), blocking ergosterol synthesis",
+  "tags": ["antifungal", "azole", "imidazole", "systemic mycoses", "hepatotoxic", "QT prolongation", "CYP3A4 inhibitor", "restricted use"],
+  "quick": [
+    ["Adult dose", "200 mg PO once daily (up to 400 mg)"],
+    ["Meal", "Take with food; acidic environment needed"],
+    ["Pregnancy", "Use only if benefit outweighs risk; teratogenic in animals"],
+    ["Lactation", "Do not breastfeed"],
+    ["Renal", "No specific adjustment; minimal renal excretion"],
+    ["Hepatic", "Contraindicated in acute/chronic liver disease"],
+    ["Alcohol", "Avoid; hepatotoxicity and disulfiram-like reaction"],
+    ["Monitoring", "LFTs (baseline + periodic), ECG/QT, adrenal function"]
+  ],
+  "summary": "Oral ketoconazole is an imidazole antifungal restricted to serious systemic fungal infections (blastomycosis, coccidioidomycosis, histoplasmosis, chromomycosis, paracoccidioidomycosis) in patients who fail or cannot tolerate other therapy. It carries boxed warnings for serious, sometimes fatal, hepatotoxicity and for QT prolongation/dangerous drug interactions. It is a potent CYP3A4 inhibitor with numerous contraindicated co-medications.",
+  "indications": [
+    "Systemic fungal infections (blastomycosis, coccidioidomycosis, histoplasmosis, chromomycosis, paracoccidioidomycosis) in patients who have failed or are intolerant to other therapies",
+    "NOT indicated for onychomycosis, cutaneous dermatophyte infections, or Candida infections",
+    "Should not be used for fungal meningitis (poor CSF penetration)"
+  ],
+  "dosage": [
+    {"c": "Systemic fungal infection (adults)", "r": "Oral", "d": "200 mg once daily; may increase to 400 mg once daily if response insufficient", "t": "Once daily with a meal", "n": "Do not exceed 400 mg/day (higher doses suppress adrenal cortisol). Usual duration ~6 months; continue until active infection subsides. Document infection by lab/culture before starting."},
+    {"c": "Children >2 years", "r": "Oral", "d": "3.3 to 6.6 mg/kg as a single daily dose", "t": "Once daily", "n": "Not studied in children under 2 years of age."}
+  ],
+  "admin": [
+    "Confirm systemic fungal infection by laboratory/culture before initiating",
+    "Confirm other antifungal therapy has failed or is not tolerated",
+    "Obtain baseline liver function tests and ECG/QT",
+    "Take with food to maximize absorption (requires gastric acidity)",
+    "Avoid antacids, H2-blockers, and PPIs (reduce absorption); if needed give with acidic beverage and separate dosing",
+    "Review concomitant medications for contraindicated CYP3A4 interactions",
+    "Counsel patient on hepatotoxicity warning signs and instruct to stop if they occur"
+  ],
+  "moa": "Imidazole antifungal that inhibits the fungal cytochrome P450 enzyme 14-alpha-demethylase (CYP51), blocking conversion of lanosterol to ergosterol. The resulting ergosterol depletion and accumulation of toxic sterol precursors disrupt fungal cell membrane integrity and permeability.",
+  "contra": {
+    "absolute": [
+      "Acute or chronic liver disease",
+      "Hypersensitivity to ketoconazole",
+      "Coadministration with dofetilide, quinidine, pimozide, cisapride, methadone, disopyramide, dronedarone, ranolazine (QT prolongation/torsades)",
+      "Coadministration with lurasidone",
+      "Coadministration with oral midazolam, oral triazolam, or alprazolam (enhanced sedation)",
+      "Coadministration with lovastatin or simvastatin (myopathy/rhabdomyolysis)",
+      "Coadministration with ergot alkaloids (dihydroergotamine, ergotamine, ergometrine, methylergometrine) - ergotism",
+      "Coadministration with irinotecan, felodipine, nisoldipine, ranolazine, tolvaptan, eplerenone, colchicine"
+    ],
+    "relative": [
+      "Reduced gastric acidity / achlorhydria (impaired absorption)",
+      "Risk factors for QT prolongation",
+      "Concomitant potentially hepatotoxic drugs",
+      "Pregnancy"
+    ],
+    "monitor": [
+      "Liver function tests (baseline and periodic)",
+      "ECG/QT interval",
+      "Adrenal function at doses 400 mg and higher",
+      "Signs of hepatotoxicity"
+    ]
+  },
+  "preg": "Teratogenic (syndactyly, oligodactyly) and embryotoxic in rats at ~2x the maximum human dose; dystocia noted with third-trimester dosing in rats. No adequate well-controlled human studies. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Ketoconazole is excreted in human milk. Mothers under treatment with oral ketoconazole should not breastfeed.",
+  "renal": "Approximately 13% of a dose is excreted in urine (2-4% unchanged); elimination is primarily hepatic/biliary. No specific renal dose adjustment is provided in the label.",
+  "hepatic": "Contraindicated in patients with acute or chronic liver disease. Serious hepatotoxicity, including fatal cases and cases requiring liver transplant, has occurred even without obvious risk factors. Obtain baseline and periodic LFTs and discontinue if hepatic injury develops.",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs (dofetilide, quinidine, pimozide, cisapride, methadone, disopyramide, dronedarone, ranolazine) - contraindicated, risk of torsades de pointes",
+      "CYP3A4 substrates with elevated levels (lurasidone, oral midazolam/triazolam, alprazolam) - contraindicated, enhanced/prolonged sedation",
+      "Lovastatin, simvastatin - contraindicated, myopathy/rhabdomyolysis",
+      "Ergot alkaloids - contraindicated, ergotism",
+      "Irinotecan, felodipine, nisoldipine, tolvaptan, eplerenone, colchicine - contraindicated"
+    ],
+    "moderate": [
+      "Other CYP3A4 substrates (e.g., calcium channel blockers, immunosuppressants, certain anticoagulants) - ketoconazole is a potent CYP3A4 inhibitor and raises their levels",
+      "Cyclosporine, tacrolimus - increased levels, monitor",
+      "Warfarin - enhanced anticoagulant effect"
+    ],
+    "minor": [],
+    "food": "Take with a meal to maximize absorption; ketoconazole requires gastric acidity for dissolution and absorption.",
+    "alcohol": "Avoid alcohol; risk of additive hepatotoxicity and a disulfiram-like (alcohol intolerance) reaction has been reported.",
+    "diagnostics": "May suppress adrenal cortisol secretion at doses 400 mg and higher; monitor adrenal function. Used clinically off-label for its effect on adrenal steroidogenesis."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Abdominal pain", "Diarrhea", "Headache", "Dizziness", "Pruritus", "Rash"],
+    "serious": ["Hepatotoxicity (hepatitis, jaundice, abnormal hepatic function, liver failure)", "QT prolongation / torsades de pointes", "Adrenal insufficiency at higher doses", "Anaphylactoid reaction"],
+    "rare": ["Gynecomastia", "Alopecia", "Erythema multiforme", "Menstrual disorder", "Photophobia", "Orthostatic hypotension"],
+    "emergency": ["Acute liver failure (jaundice, dark urine, RUQ pain, fatigue)", "Torsades de pointes / syncope", "Anaphylaxis / severe hypersensitivity"]
+  },
+  "monitoring": [
+    "Liver function tests at baseline and periodically during therapy",
+    "ECG/QT interval, especially with other QT-affecting drugs",
+    "Adrenal function (cortisol) at doses 400 mg/day and higher",
+    "Clinical and laboratory documentation of infection before and during treatment",
+    "Signs and symptoms of hepatotoxicity"
+  ],
+  "counsel": [
+    "Take with food; avoid antacids, acid-suppressing drugs, or take them well separated",
+    "Report immediately any signs of liver problems: unusual fatigue, loss of appetite, nausea, yellowing of skin/eyes, dark urine, or pale stools",
+    "Avoid alcohol during treatment",
+    "Tell your doctor about all other medications - many are dangerous to combine with this drug",
+    "Do not breastfeed while taking this drug",
+    "Complete the full prescribed course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Absorption within 1-2 h of dosing"],
+    ["Peak", "Peak plasma ~3.5 mcg/mL at 1-2 h (200 mg with meal)"],
+    ["Half-life", "Biphasic: ~2 h in first 10 h, then ~8 h"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Store at controlled room temperature; keep in original container"]
+  ],
+  "pearls": [
+    "Boxed warning: not for onychomycosis, dermatophyte, or Candida infections - reserve for serious systemic mycoses when other therapy fails",
+    "Potent CYP3A4 inhibitor with a long list of contraindicated co-medications - always screen the med list",
+    "Requires gastric acidity for absorption; PPIs, H2-blockers, and antacids markedly reduce levels",
+    "Largely replaced by safer azoles (fluconazole, itraconazole) for systemic fungal infections",
+    "Topical ketoconazole (cream, shampoo) is a separate, much safer formulation for cutaneous/scalp use",
+    "Doses 400 mg and higher suppress adrenal cortisol and testosterone synthesis"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double up to make up a missed dose.",
+  "overdose": "In acute accidental overdose, treatment is supportive and symptomatic. Within the first hour after ingestion, activated charcoal may be administered. Monitor liver function and cardiac (QT) status.",
+  "refs": [
+    ["FDA Label - Ketoconazole Tablets (DailyMed/openFDA)", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=369f31da-d3c3-49b8-956f-f70598760164"],
+    ["openFDA Drug Label API - Ketoconazole", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ketoconazole%22+AND+openfda.route:%22ORAL%22"]
+  ]
+}

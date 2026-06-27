@@ -1,0 +1,104 @@
+{
+  "generic": "Ornidazole",
+  "cls": "Antibiotic / antiprotozoal — nitroimidazole",
+  "pharm": "5-Nitroimidazole antimicrobial (anaerobic and protozoal)",
+  "tags": ["Rx", "Oral and IV", "NOT FDA-approved", "Anaerobic & protozoal infections", "Longer half-life than metronidazole", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "500 mg-1 g daily (per indication)"],
+    ["Meal", "Take with or after food to reduce GI upset"],
+    ["Pregnancy", "Avoid in first trimester; use only if essential"],
+    ["Lactation", "Avoid; excreted in breast milk"],
+    ["Renal", "No major adjustment; caution in severe impairment"],
+    ["Hepatic", "Increase dosing interval in severe hepatic impairment"],
+    ["Alcohol", "Generally avoid; disulfiram-like reaction less than metronidazole"],
+    ["Monitoring", "Neurological symptoms with prolonged/high-dose use"]
+  ],
+  "summary": "Ornidazole is a 5-nitroimidazole antimicrobial active against anaerobic bacteria and protozoa, used for amoebiasis, giardiasis, trichomoniasis, bacterial vaginosis, anaerobic infections, and surgical prophylaxis against anaerobes. Compared with metronidazole it has a longer half-life (~13 hours), allowing less frequent dosing, and is reported to have a milder alcohol (disulfiram-like) interaction. It is NOT FDA-approved; it is widely licensed in Europe, India, and other regions (SmPC/regional labelling).",
+  "indications": [
+    "Intestinal and hepatic amoebiasis (Entamoeba histolytica)",
+    "Giardiasis (Giardia lamblia)",
+    "Trichomoniasis (Trichomonas vaginalis)",
+    "Bacterial vaginosis",
+    "Anaerobic bacterial infections (treatment)",
+    "Prophylaxis of post-operative anaerobic infection (e.g., colorectal/gynaecological surgery)"
+  ],
+  "dosage": [
+    {"c": "Intestinal amoebiasis (adults)", "r": "Oral", "d": "500 mg twice daily (or 1.5 g once daily)", "t": "For 5-10 days", "n": "Children: 25 mg/kg/day per regional dosing"},
+    {"c": "Hepatic amoebiasis", "r": "Oral", "d": "500 mg twice daily up to 1 g twice daily", "t": "For 5-10 days", "n": "Per severity and regional SmPC"},
+    {"c": "Giardiasis", "r": "Oral", "d": "1.5 g once daily", "t": "For 1-2 days", "n": "Children: 30-40 mg/kg single daily dose"},
+    {"c": "Trichomoniasis / bacterial vaginosis", "r": "Oral", "d": "1.5 g as a single dose, or 500 mg twice daily for 5 days", "t": "Single dose or 5 days", "n": "Treat the sexual partner concurrently for trichomoniasis"},
+    {"c": "Anaerobic infections", "r": "Oral or IV", "d": "Initial 0.5-1 g, then 500 mg every 12 h", "t": "Usually 5-10 days", "n": "IV used when oral route not feasible"},
+    {"c": "Surgical prophylaxis", "r": "IV / Oral", "d": "1 g before surgery (single pre-operative dose)", "t": "Once pre-op", "n": "Per local protocol"}
+  ],
+  "admin": [
+    "Take oral doses with or after food to reduce gastrointestinal upset",
+    "Complete the full prescribed course",
+    "For sexually transmitted protozoal infection (trichomoniasis), treat partner(s) concurrently",
+    "Administer IV by slow infusion when the oral route is unsuitable",
+    "Avoid alcohol during and shortly after treatment as a precaution"
+  ],
+  "moa": "Ornidazole is a 5-nitroimidazole prodrug. After entering anaerobic bacteria and protozoa, its nitro group is reduced by intracellular electron-transport proteins to reactive nitro radicals that bind and damage DNA, causing strand breakage and inhibition of nucleic-acid synthesis, leading to cell death. The reduction occurs efficiently only under the low redox conditions found in anaerobes and protozoa, accounting for its selectivity.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to ornidazole or other nitroimidazoles", "Pre-existing neurological disorders (caution/avoid)", "Blood dyscrasias"],
+    "relative": ["First trimester of pregnancy", "Breastfeeding", "Severe hepatic impairment (extend dosing interval)"],
+    "monitor": ["Neurological status (peripheral neuropathy, seizures) with prolonged or high-dose therapy", "Signs of hypersensitivity"]
+  },
+  "preg": "Avoid during the first trimester. Use during pregnancy only if clearly essential and the benefit outweighs the potential risk, in line with regional labelling. Nitroimidazoles cross the placenta.",
+  "lact": "Ornidazole is excreted in breast milk. Avoid breastfeeding during treatment, or temporarily discontinue nursing.",
+  "renal": "No major dose adjustment is generally required; use with caution in severe renal impairment. Ornidazole and metabolites are partly removed by dialysis.",
+  "hepatic": "In severe hepatic impairment the elimination half-life is prolonged; double the dosing interval (reduce dosing frequency) and monitor.",
+  "interactions": {
+    "major": [
+      "Oral anticoagulants (warfarin/coumarins) — ornidazole may enhance anticoagulant effect; monitor INR and adjust dose"
+    ],
+    "moderate": [
+      "Vecuronium and other muscle relaxants — prolonged neuromuscular blockade",
+      "Drugs lowering seizure threshold / CNS-active agents — caution with neurotoxicity"
+    ],
+    "minor": [],
+    "food": "Take with food to reduce gastrointestinal upset.",
+    "alcohol": "Avoid alcohol as a precaution; ornidazole does not inhibit aldehyde dehydrogenase to the same degree as metronidazole, so the disulfiram-like reaction is reported to be milder/absent, but caution is advised.",
+    "diagnostics": "No specific laboratory test interference of note."
+  },
+  "se": {
+    "common": ["Nausea", "Metallic taste", "Headache", "Dizziness", "Abdominal discomfort", "Drowsiness"],
+    "serious": ["Peripheral neuropathy (with prolonged/high-dose use)", "Seizures / CNS disturbance", "Severe hypersensitivity reactions"],
+    "rare": ["Reversible leukopenia", "Hepatic dysfunction", "Ataxia, tremor, rigidity"],
+    "emergency": ["Seizure", "Anaphylaxis / angioedema", "Severe neurological deterioration"]
+  },
+  "monitoring": [
+    "Neurological symptoms (numbness, tingling, ataxia, seizures) with prolonged courses",
+    "INR if on oral anticoagulants",
+    "Symptom/clinical response and resolution of infection",
+    "Full blood count with prolonged therapy"
+  ],
+  "counsel": [
+    "Take with food; complete the full course even if you feel better",
+    "Avoid alcohol during treatment as a precaution",
+    "Tell your doctor if you develop numbness, tingling, weakness, or fits",
+    "For trichomoniasis, your sexual partner should also be treated",
+    "This medicine is not approved in all countries — follow your prescriber's directions",
+    "Tell your doctor if you take blood thinners (warfarin)"
+  ],
+  "pk": [
+    ["Onset", "Rapidly and almost completely absorbed orally"],
+    ["Peak", "Plasma peak ~3 hours after oral dose"],
+    ["Half-life", "Approximately 12-14 hours (longer than metronidazole)"],
+    ["Duration", "Long half-life allows once- or twice-daily dosing"],
+    ["Storage", "Store below 25C; protect from light (per regional labelling)"]
+  ],
+  "pearls": [
+    "NOT FDA-approved — licensed in EU (SmPC), India and many other regions; this record is based on SmPC/BNF-type sources, not an FDA label",
+    "Longer half-life (~13 h) than metronidazole allows less frequent dosing and convenient single-dose regimens",
+    "Milder/absent disulfiram-like alcohol reaction compared with metronidazole, but alcohol avoidance is still commonly advised",
+    "Avoid in first trimester and in pre-existing neurological disorders; watch for peripheral neuropathy with prolonged use",
+    "Double the dosing interval in severe hepatic impairment",
+    "Treat the partner in sexually transmitted trichomoniasis"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is nearly time for the next dose, skip the missed dose. Do not double the dose.",
+  "overdose": "Overdose may cause exaggerated adverse effects, particularly neurological (seizures, peripheral neuropathy) and gastrointestinal symptoms. There is no specific antidote; manage with supportive and symptomatic care (diazepam for seizures). Dialysis can remove ornidazole if needed.",
+  "refs": [
+    ["EMA / SmPC and BNF — Ornidazole (regional labelling; not FDA-approved)", "https://www.medicines.org.uk"],
+    ["WHO / regional drug information — Ornidazole (nitroimidazole)", "https://www.who.int"]
+  ]
+}

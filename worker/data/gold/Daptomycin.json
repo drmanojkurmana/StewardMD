@@ -1,0 +1,97 @@
+{
+  "generic": "Daptomycin",
+  "cls": "Cyclic lipopeptide antibacterial",
+  "pharm": "Calcium-dependent cyclic lipopeptide that is rapidly bactericidal against Gram-positive organisms, including MRSA and vancomycin-susceptible enterococci.",
+  "tags": ["Lipopeptide", "Gram-positive", "MRSA", "Bactericidal", "IV only", "Not for pneumonia", "Once daily"],
+  "quick": [
+    ["Adult dose", "cSSSI: 4 mg/kg IV q24h; S. aureus bacteremia/right-sided endocarditis: 6 mg/kg IV q24h"],
+    ["Meal", "N/A (intravenous)"],
+    ["Pregnancy", "Limited data; no adverse developmental effects in animals"],
+    ["Lactation", "Minimal in milk (~0.1% maternal dose); use with caution"],
+    ["Renal", "CrCl <30 mL/min: extend interval to q48h"],
+    ["Hepatic", "No adjustment in mild-moderate impairment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "CPK weekly, muscle symptoms, renal function; watch for eosinophilic pneumonia"]
+  ],
+  "summary": "Daptomycin is an intravenous cyclic lipopeptide antibiotic active against Gram-positive pathogens including MRSA, used for complicated skin and skin structure infections and Staphylococcus aureus bloodstream infections (including right-sided endocarditis). It is NOT indicated for pneumonia because it is inactivated by pulmonary surfactant, and it is not indicated for left-sided endocarditis. Key safety concerns are myopathy/rhabdomyolysis with CPK elevations (monitor CPK weekly), eosinophilic pneumonia, and peripheral neuropathy. Dosing is once daily and must be interval-extended in significant renal impairment.",
+  "indications": [
+    "Complicated skin and skin structure infections (cSSSI) in adults and pediatric patients 1-17 years caused by susceptible Gram-positive bacteria (S. aureus including MRSA, S. pyogenes, S. agalactiae, S. dysgalactiae subsp. equisimilis, vancomycin-susceptible E. faecalis)",
+    "Staphylococcus aureus bloodstream infections (bacteremia) in adults, including right-sided infective endocarditis, caused by methicillin-susceptible and methicillin-resistant isolates",
+    "S. aureus bloodstream infections (bacteremia) in pediatric patients 1-17 years",
+    "Limitations: NOT for pneumonia (inactivated by pulmonary surfactant), NOT for left-sided infective endocarditis, NOT recommended under 1 year of age"
+  ],
+  "dosage": [
+    {"c": "cSSSI (adults, CrCl >=30 mL/min)", "r": "IV", "d": "4 mg/kg", "t": "Once every 24 hours for 7-14 days", "n": "Give by 2-minute injection or 30-minute infusion in 0.9% NaCl"},
+    {"c": "S. aureus bacteremia / right-sided endocarditis (adults, CrCl >=30 mL/min)", "r": "IV", "d": "6 mg/kg", "t": "Once every 24 hours for 2-6 weeks", "n": "Give by 2-minute injection or 30-minute infusion in 0.9% NaCl"},
+    {"c": "Adults with CrCl <30 mL/min (incl. hemodialysis, CAPD)", "r": "IV", "d": "Same mg/kg (4 or 6 mg/kg by indication)", "t": "Once every 48 hours", "n": "On hemodialysis days, administer following dialysis"},
+    {"c": "Pediatric cSSSI 1-17 years (normal renal function)", "r": "IV infusion", "d": "12-17y: 5 mg/kg; 7-11y: 7 mg/kg; 2-6y: 9 mg/kg; 1-<2y: 10 mg/kg", "t": "Once every 24 hours, up to 14 days", "n": "Infuse over 30 min (7-17y) or 60 min (1-6y); do NOT use 2-minute injection in children"},
+    {"c": "Pediatric S. aureus bacteremia 1-17 years (normal renal function)", "r": "IV infusion", "d": "12-17y: 7 mg/kg; 7-11y: 9 mg/kg; 1-6y: 12 mg/kg", "t": "Once every 24 hours, up to 42 days", "n": "Infuse over 30 min (7-17y) or 60 min (1-6y); renal adjustment in children not established"}
+  ],
+  "admin": [
+    "Reconstitute to 50 mg/mL and administer IV in 0.9% sodium chloride only",
+    "Adults: give by IV injection over 2 minutes or IV infusion over 30 minutes",
+    "Pediatrics: never give by 2-minute injection; infuse over 30 minutes (7-17y) or 60 minutes (1-6y)",
+    "Do not dose more frequently than once daily (more frequent dosing increases CPK elevations)",
+    "Do not use with ReadyMED elastomeric infusion pumps; store reconstituted/diluted solution per labeling"
+  ],
+  "moa": "Daptomycin binds to bacterial cytoplasmic membranes in a calcium-dependent manner and inserts its lipophilic tail, causing rapid membrane depolarization and loss of membrane potential. This halts protein, DNA, and RNA synthesis and produces concentration-dependent bactericidal killing of Gram-positive bacteria, with activity correlating with the AUC/MIC ratio.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to daptomycin"],
+    "relative": ["Pneumonia (ineffective - inactivated by pulmonary surfactant)", "Left-sided infective endocarditis (poor outcomes)", "Children younger than 1 year (potential muscular/neuromuscular/nervous system effects)", "Concomitant or recent HMG-CoA reductase inhibitor (myopathy risk)", "Moderate renal impairment (decreased efficacy observed in adults)"],
+    "monitor": ["CPK weekly (more often with renal impairment or statin use)", "Muscle pain or weakness, especially distal extremities", "Renal function", "Signs of eosinophilic pneumonia and peripheral neuropathy"]
+  },
+  "preg": "Limited human data are insufficient to assess risk; animal reproduction studies in rats and rabbits at 2-4 times the 6 mg/kg human dose (body-surface-area basis) showed no adverse developmental outcomes. Use only if clearly needed.",
+  "lact": "Daptomycin is present in human milk at about 0.1% of the maternal dose; effects on the breastfed infant and milk production are unknown. Weigh developmental and health benefits of breastfeeding against the mother's clinical need and potential infant risk.",
+  "renal": "Eliminated primarily by the kidneys. For adults with CrCl <30 mL/min, including hemodialysis and CAPD, extend the dosing interval to once every 48 hours (give after dialysis on dialysis days). Monitor renal function and CPK more frequently than weekly. Decreased efficacy was seen in adults with moderate baseline renal impairment. Pediatric renal adjustment is not established.",
+  "hepatic": "No dosage adjustment needed for mild to moderate hepatic impairment (Child-Pugh Class B); use in severe impairment has not been evaluated.",
+  "interactions": {
+    "major": ["HMG-CoA reductase inhibitors (statins) - additive myopathy/rhabdomyolysis risk; consider temporarily suspending the statin during daptomycin therapy"],
+    "moderate": ["Drugs causing rhabdomyolysis - additive muscle toxicity", "Tobramycin - increased daptomycin exposure observed"],
+    "minor": ["May cause falsely elevated PT/INR with certain recombinant thromboplastin reagents (draw sample near trough)"],
+    "food": "N/A (intravenous administration).",
+    "alcohol": "No specific interaction documented.",
+    "diagnostics": "Can produce false prolongation of PT/INR; monitor CPK. Daptomycin may interfere with some coagulation assays - sample near the time of trough concentration."
+  },
+  "se": {
+    "common": ["Diarrhea", "Headache", "Dizziness", "Rash", "Abnormal liver function tests", "Elevated creatine phosphokinase (CPK)", "Urinary tract infection", "Hypotension", "Dyspnea", "Injection-site reactions"],
+    "serious": ["Myopathy and rhabdomyolysis (with or without acute renal failure)", "Eosinophilic pneumonia", "Peripheral neuropathy", "Drug Reaction with Eosinophilia and Systemic Symptoms (DRESS)", "Tubulointerstitial nephritis", "Clostridioides difficile-associated diarrhea", "Persisting or relapsing S. aureus bacteremia/endocarditis"],
+    "rare": ["Increased INR / prolonged prothrombin time", "Severe cutaneous reactions"],
+    "emergency": ["Anaphylaxis / life-threatening hypersensitivity", "Rhabdomyolysis with acute renal failure", "Acute eosinophilic pneumonia with respiratory failure", "DRESS"]
+  },
+  "monitoring": [
+    "CPK at baseline and weekly; more frequently with renal impairment, statin use, or any CPK rise",
+    "Muscle pain or weakness, particularly distal extremities",
+    "Renal function (and discontinue/withhold per myopathy thresholds)",
+    "Signs of eosinophilic pneumonia (new fever, dyspnea, infiltrates, peripheral eosinophilia)",
+    "Peripheral neuropathy symptoms",
+    "Blood cultures/clinical response in S. aureus bacteremia; evaluate for sequestered foci if persisting or relapsing"
+  ],
+  "counsel": [
+    "Report muscle pain, tenderness, or weakness right away - these can signal a serious muscle problem",
+    "Report new or worsening cough, fever, or trouble breathing (possible eosinophilic pneumonia)",
+    "Report numbness or tingling in the hands or feet",
+    "This antibiotic is given by vein and is not used to treat pneumonia",
+    "Report severe or persistent diarrhea, which can occur during or after treatment"
+  ],
+  "pk": [
+    ["Onset", "Rapid; bactericidal during infusion"],
+    ["Peak", "End of 30-minute infusion (Cmax ~58 mcg/mL at 4 mg/kg, ~98 mcg/mL at 6 mg/kg)"],
+    ["Half-life", "~8-9 hours in adults (terminal elimination); supports once-daily dosing"],
+    ["Duration", "Once-daily dosing interval (q48h in CrCl <30 mL/min)"],
+    ["Storage", "Refrigerate 2-8 C; avoid excessive heat; store reconstituted solution per labeling"]
+  ],
+  "pearls": [
+    "NEVER use for pneumonia - daptomycin is inactivated by pulmonary surfactant",
+    "Not for left-sided endocarditis; right-sided S. aureus endocarditis and bacteremia use 6 mg/kg q24h",
+    "Monitor CPK weekly; hold for myopathy with CPK >1000 U/L (~5x ULN) plus symptoms, or asymptomatic CPK >2000 U/L (>=10x ULN)",
+    "Dose once daily only - more frequent dosing raises CPK; in CrCl <30 extend interval to q48h",
+    "Consider temporarily stopping statins during therapy to reduce myopathy risk",
+    "Can falsely prolong PT/INR; draw coagulation samples near trough"
+  ],
+  "missed": "Hospital/clinician-administered IV; give the missed dose as soon as recognized and resume the once-daily (or q48h in renal impairment) schedule. Do not give two doses at once or dose more than once daily.",
+  "overdose": "Provide supportive care with maintenance of glomerular filtration. Daptomycin is cleared slowly by dialysis (~15% removed over 4 hours of hemodialysis, ~11% over 48 hours of peritoneal dialysis); high-flux membranes increase removal. Monitor CPK and renal function.",
+  "refs": [
+    ["FDA Daptomycin for Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22DAPTOMYCIN%22"],
+    ["DailyMed - Daptomycin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=daptomycin"]
+  ]
+}

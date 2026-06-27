@@ -1,0 +1,109 @@
+{
+  "generic": "Itraconazole",
+  "cls": "Triazole antifungal",
+  "pharm": "Inhibits fungal cytochrome P450-dependent 14-alpha-demethylase, blocking ergosterol synthesis in the fungal cell membrane.",
+  "tags": ["Antifungal", "Triazole", "CYP3A4 inhibitor", "Boxed warning: CHF", "Oral"],
+  "quick": [
+    ["Adult dose", "200 mg once daily (blastomycosis/histoplasmosis); up to 400 mg/day"],
+    ["Meal", "Take capsules with a full meal"],
+    ["Pregnancy", "Avoid; teratogenic in animals (not for onychomycosis)"],
+    ["Lactation", "Excreted in milk; weigh risk"],
+    ["Renal", "Use caution; do not use IV if CrCl <30 (cyclodextrin vehicle)"],
+    ["Hepatic", "Use with caution; monitor LFTs; boxed risk of hepatotoxicity"],
+    ["Alcohol", "Avoid (additive hepatic risk)"],
+    ["Monitoring", "LFTs, signs of CHF, cardiac/respiratory symptoms"]
+  ],
+  "summary": "Itraconazole is an oral triazole antifungal for systemic fungal infections including blastomycosis, histoplasmosis, and aspergillosis, plus onychomycosis. It is a potent CYP3A4 inhibitor with numerous contraindicated drug interactions and carries a boxed warning for congestive heart failure and drug interactions.",
+  "indications": [
+    "Pulmonary and extrapulmonary blastomycosis",
+    "Histoplasmosis (including chronic cavitary pulmonary and disseminated non-meningeal)",
+    "Pulmonary and extrapulmonary aspergillosis in patients intolerant of or refractory to amphotericin B",
+    "Onychomycosis of toenail (with or without fingernail involvement) due to dermatophytes",
+    "Onychomycosis of fingernail due to dermatophytes"
+  ],
+  "dosage": [
+    {"c": "Blastomycosis/Histoplasmosis", "r": "Adult", "d": "200 mg once daily; increase by 100 mg increments to max 400 mg/day (doses >200 mg/day in 2 divided doses)", "t": "Minimum 3 months", "n": "Take with a full meal; swallow capsules whole"},
+    {"c": "Aspergillosis", "r": "Adult", "d": "200 to 400 mg daily", "t": "Until infection resolved", "n": "Reserve for amphotericin B-intolerant/refractory patients"},
+    {"c": "Life-threatening infection", "r": "Adult", "d": "Loading dose 200 mg three times daily (600 mg/day) for first 3 days", "t": "First 3 days then maintenance", "n": "Based on pharmacokinetic data"},
+    {"c": "Onychomycosis (toenail)", "r": "Adult", "d": "200 mg once daily", "t": "12 consecutive weeks", "n": "Confirm diagnosis with KOH/culture first"}
+  ],
+  "admin": [
+    "Confirm diagnosis with appropriate cultures/specimens before therapy",
+    "Take capsules with a full meal to maximize absorption",
+    "Swallow capsules whole",
+    "Do NOT interchange capsules with oral solution (different bioavailability)",
+    "Review all concomitant medications for CYP3A4 interactions before starting"
+  ],
+  "moa": "Itraconazole inhibits fungal cytochrome P450 14-alpha-demethylase, the enzyme converting lanosterol to ergosterol. Depletion of ergosterol disrupts the fungal cell membrane, halting fungal growth.",
+  "contra": {
+    "absolute": [
+      "Coadministration with CYP3A4 substrates that prolong QT or cause serious toxicity (e.g., methadone, disopyramide, dofetilide, dronedarone, quinidine, isavuconazole, ergot alkaloids, lovastatin/simvastatin, oral midazolam, triazolam, cisapride, pimozide, certain others)",
+      "Treatment of onychomycosis in patients with ventricular dysfunction (CHF or history of CHF)",
+      "Pregnancy for treatment of onychomycosis"
+    ],
+    "relative": [
+      "Hepatic impairment or elevated liver enzymes",
+      "Risk factors for heart failure",
+      "Hypersensitivity to other azoles"
+    ],
+    "monitor": [
+      "Liver function tests",
+      "Signs/symptoms of congestive heart failure",
+      "Concomitant CYP3A4-interacting drugs"
+    ]
+  },
+  "preg": "Avoid in pregnancy; itraconazole caused dose-related maternal toxicity, embryotoxicity, and teratogenicity (skeletal defects in rats, encephalocele/macroglossia in mice). No adequate human studies. Contraindicated for onychomycosis in pregnancy and in women contemplating pregnancy.",
+  "lact": "Itraconazole is excreted in human milk; weigh expected maternal benefit against potential infant exposure. CDC advises HIV-infected women not to breastfeed.",
+  "renal": "Use with caution. Itraconazole pharmacokinetics not significantly altered in mild-moderate renal impairment; IV formulation (hydroxypropyl-beta-cyclodextrin vehicle) should not be used if CrCl <30 mL/min.",
+  "hepatic": "Use with caution; hepatotoxicity (including rare fatal liver failure) reported. Monitor LFTs, especially in pre-existing hepatic disease or with prolonged therapy.",
+  "interactions": {
+    "major": [
+      "CYP3A4 substrates with narrow therapeutic index: methadone, disopyramide, dofetilide, dronedarone, quinidine, ergot alkaloids, lovastatin, simvastatin, oral midazolam, triazolam, cisapride, pimozide (contraindicated)",
+      "Calcium channel blockers (additive negative inotropy; risk of CHF)",
+      "Drugs that reduce gastric acid or CYP3A4 inducers (rifampin, phenytoin, carbamazepine) reduce itraconazole levels"
+    ],
+    "moderate": [
+      "Warfarin (increased anticoagulant effect)",
+      "Digoxin (increased levels)",
+      "Cyclosporine, tacrolimus, sirolimus (increased levels)"
+    ],
+    "minor": [],
+    "food": "Capsules require a full meal for absorption; gastric acidity needed for capsule absorption.",
+    "alcohol": "Avoid due to additive hepatotoxicity risk.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Abdominal pain", "Headache", "Rash", "Elevated liver enzymes"],
+    "serious": ["Congestive heart failure", "Hepatotoxicity/hepatic failure", "QT prolongation", "Peripheral neuropathy"],
+    "rare": ["Stevens-Johnson syndrome", "Serious hypersensitivity reactions", "Hearing loss"],
+    "emergency": ["Signs of heart failure (dyspnea, edema, weight gain)", "Severe hepatic dysfunction (jaundice, dark urine)", "Severe skin reaction"]
+  },
+  "monitoring": ["Liver function tests at baseline and periodically", "Signs of CHF", "Cardiac/respiratory symptoms", "Drug interaction review"],
+  "counsel": [
+    "Take capsules with a full meal",
+    "Report shortness of breath, leg swelling, or unusual fatigue immediately",
+    "Report jaundice, dark urine, severe abdominal pain, or appetite loss",
+    "Do not start new medications without checking for interactions",
+    "Avoid alcohol",
+    "Complete the full course of therapy"
+  ],
+  "pk": [
+    ["Onset", "Antifungal effect over days to weeks"],
+    ["Peak", "2 to 5 hours after oral dose"],
+    ["Half-life", "16-28 hr single dose; 34-42 hr with repeated dosing"],
+    ["Duration", "Accumulates in tissues (nails, skin) for weeks"],
+    ["Storage", "Store at controlled room temperature 15-25 C (59-77 F)"]
+  ],
+  "pearls": [
+    "Capsules need gastric acid and food; PPIs/H2 blockers reduce absorption",
+    "Capsule and oral solution are NOT interchangeable",
+    "Potent CYP3A4 inhibitor; always screen interaction list",
+    "Boxed warning: do not use for onychomycosis in patients with CHF or history of CHF"
+  ],
+  "missed": "Take as soon as remembered with food; if near the next dose, skip the missed dose. Do not double up.",
+  "overdose": "No specific antidote. Itraconazole is not removed by dialysis. Provide supportive care; gastric lavage and activated charcoal may be considered if recent ingestion.",
+  "refs": [
+    ["FDA Prescribing Information - Itraconazole capsules (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22itraconazole%22"],
+    ["DailyMed - Itraconazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=itraconazole"]
+  ]
+}

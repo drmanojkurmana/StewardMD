@@ -1,0 +1,96 @@
+{
+  "generic": "Acetazolamide",
+  "cls": "Carbonic anhydrase inhibitor",
+  "pharm": "Diuretic / anticonvulsant / anti-glaucoma agent",
+  "tags": ["carbonic anhydrase inhibitor", "glaucoma", "altitude sickness", "diuretic", "epilepsy"],
+  "quick": [
+    ["Adult dose", "Glaucoma 250 mg-1 g/day divided; altitude 125-250 mg BID"],
+    ["Meal", "May take with food to reduce GI upset"],
+    ["Pregnancy", "Avoid in first trimester; use only if clearly needed"],
+    ["Lactation", "Caution; small amounts in milk"],
+    ["Renal", "Contraindicated in marked renal impairment"],
+    ["Hepatic", "Contraindicated in marked hepatic disease/cirrhosis"],
+    ["Alcohol", "Avoid; adds to dehydration/CNS effects"],
+    ["Monitoring", "Electrolytes (K, HCO3), renal function, CBC"]
+  ],
+  "summary": "Acetazolamide is a carbonic anhydrase inhibitor used for open-angle and acute glaucoma, certain epilepsies, edema and prevention of acute mountain sickness. Oral dosing ranges from 250 mg to 1 g daily. It causes a metabolic acidosis and bicarbonate diuresis; monitor electrolytes and avoid in sulfonamide allergy.",
+  "indications": [
+    "Chronic simple (open-angle) glaucoma and secondary glaucoma",
+    "Preoperative management of acute angle-closure glaucoma to lower intraocular pressure",
+    "Adjunctive treatment of edema due to congestive heart failure and drug-induced edema",
+    "Centrencephalic epilepsies (petit mal, unlocalized seizures) as adjunct",
+    "Prevention or amelioration of symptoms of acute mountain sickness"
+  ],
+  "dosage": [
+    {"c": "Open-angle glaucoma (adult)", "r": "Standard", "d": "250 mg to 1 g/day, divided for doses over 250 mg", "t": "Divided doses", "n": "No added benefit above 1 g/day"},
+    {"c": "Acute angle-closure glaucoma (preoperative)", "r": "Acute", "d": "250 mg every 4 h, or 250 mg BID; may give 500 mg then 125-250 mg q4h", "t": "Every 4 h", "n": "Short-term to lower IOP"},
+    {"c": "Edema (adult)", "r": "Diuretic", "d": "250-375 mg once daily in the morning", "t": "Once daily", "n": "Intermittent dosing (alternate days) preserves effect"},
+    {"c": "Epilepsy (adjunct)", "r": "Anticonvulsant", "d": "8-30 mg/kg/day in divided doses; usual 375-1000 mg/day", "t": "Divided doses", "n": "Titrate; tolerance to effect may develop"},
+    {"c": "Acute mountain sickness prophylaxis", "r": "Prophylaxis", "d": "125-250 mg twice daily (500 mg ER once daily)", "t": "Twice daily", "n": "Start 24-48 h before ascent, continue 48 h at altitude"}
+  ],
+  "admin": [
+    "Take orally; may be given with food to reduce GI irritation",
+    "Sustained-release capsules are for glaucoma and altitude prophylaxis, not for epilepsy or diuresis",
+    "Begin altitude prophylaxis 24-48 hours before ascent and continue while at altitude",
+    "Maintain adequate hydration and monitor serum potassium and bicarbonate",
+    "Intermittent or alternate-day dosing helps preserve diuretic response"
+  ],
+  "moa": "Acetazolamide reversibly inhibits the enzyme carbonic anhydrase, reducing formation of carbonic acid and decreasing availability of hydrogen and bicarbonate ions. In the eye this lowers aqueous humor formation and intraocular pressure; in the kidney it increases excretion of bicarbonate, sodium, potassium and water (alkaline diuresis); and CNS effects retard abnormal neuronal discharge. The induced metabolic acidosis aids acclimatization at altitude.",
+  "contra": {
+    "absolute": ["Hypersensitivity to acetazolamide or sulfonamides", "Marked hepatic disease or cirrhosis (risk of hepatic encephalopathy)", "Marked renal impairment", "Hyperchloremic acidosis", "Hypokalemia or hyponatremia", "Adrenal insufficiency / Addison's disease"],
+    "relative": ["Diabetes mellitus", "Respiratory acidosis / severe COPD", "Long-term use in chronic non-congestive angle-closure glaucoma", "Concurrent high-dose aspirin"],
+    "monitor": ["Electrolyte and acid-base status", "Renal calculi history", "Blood counts (rare blood dyscrasias)"]
+  },
+  "preg": "Acetazolamide is teratogenic in animals at high doses. Avoid in the first trimester and use during pregnancy only when the potential benefit clearly justifies the risk.",
+  "lact": "Acetazolamide is excreted in human milk in small amounts; use with caution while breastfeeding and monitor the infant.",
+  "renal": "Contraindicated in marked renal impairment because reduced excretion can cause toxicity and the diuretic effect is diminished. Use cautiously and monitor electrolytes in lesser degrees of impairment.",
+  "hepatic": "Contraindicated in marked hepatic disease and cirrhosis; the drug-induced alkalinization of urine can reduce ammonia excretion and precipitate hepatic encephalopathy.",
+  "interactions": {
+    "major": ["High-dose aspirin/salicylates - severe metabolic acidosis and salicylate toxicity (can be fatal)", "Other carbonic anhydrase inhibitors / topiramate - additive acidosis, metabolic and renal stone risk"],
+    "moderate": ["Lithium - increased renal lithium excretion (reduced levels)", "Amphetamines, quinidine, ephedrine - reduced renal clearance (urine alkalinization)", "Phenytoin/primidone - osteomalacia, altered levels", "Cardiac glycosides - hypokalemia potentiates toxicity", "Corticosteroids/other diuretics - additive hypokalemia"],
+    "minor": ["Sodium bicarbonate - increased risk of renal calculi"],
+    "food": "May be taken with food; ensure adequate fluid intake.",
+    "alcohol": "Avoid; may worsen dehydration and CNS depression.",
+    "diagnostics": "May produce false-positive urine protein tests; alters serum electrolytes and bicarbonate."
+  },
+  "se": {
+    "common": ["Paresthesias (tingling of extremities)", "Altered taste (dysgeusia)", "Polyuria", "Fatigue/malaise", "Nausea, anorexia", "Drowsiness"],
+    "serious": ["Metabolic acidosis", "Electrolyte imbalance (hypokalemia, hyponatremia)", "Severe sulfonamide-type reactions (SJS/TEN)", "Blood dyscrasias (agranulocytosis, aplastic anemia)"],
+    "rare": ["Nephrolithiasis", "Hepatic insufficiency", "Acute myopia/secondary angle-closure glaucoma", "Crystalluria"],
+    "emergency": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Aplastic anemia / agranulocytosis", "Severe metabolic acidosis", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Serum electrolytes (potassium, sodium, bicarbonate/chloride)",
+    "Renal function and urinalysis",
+    "Complete blood count periodically with long-term use",
+    "Intraocular pressure in glaucoma",
+    "Signs of acidosis, rash or sulfonamide hypersensitivity"
+  ],
+  "counsel": [
+    "Tingling of hands/feet and a metallic taste are common and usually harmless",
+    "Drink plenty of fluids; report flank pain (possible kidney stones)",
+    "Report rash, sore throat, fever, easy bruising or yellowing of skin",
+    "May cause drowsiness; use caution driving",
+    "For altitude sickness, start 1-2 days before ascending"
+  ],
+  "pk": [
+    ["Onset", "1-1.5 hours (tablets); ~2 hours (sustained release)"],
+    ["Peak", "1-4 hours (tablets); 3-6 hours (sustained release)"],
+    ["Half-life", "Approximately 4-8 hours"],
+    ["Duration", "8-12 hours (tablets); 18-24 hours (sustained release)"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Sulfonamide derivative - avoid in sulfonamide allergy",
+    "Causes a self-limited metabolic acidosis that drives altitude acclimatization",
+    "Tolerance to the diuretic effect develops; intermittent dosing preserves response",
+    "Avoid with high-dose aspirin - risk of severe, potentially fatal acidosis",
+    "Alkalinizes urine - can predispose to calcium phosphate stones; maintain hydration"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip it and resume the usual schedule. Do not double the dose.",
+  "overdose": "No specific antidote. Overdose may cause electrolyte imbalance, metabolic acidosis, drowsiness and CNS effects. Treat supportively, correct acidosis and electrolytes; acetazolamide is dialyzable, so hemodialysis may be useful in severe cases or renal failure.",
+  "refs": [
+    ["FDA Acetazolamide Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22acetazolamide%22"],
+    ["FDA DailyMed - Acetazolamide", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "generic": "Isoflurane",
+  "cls": "Halogenated inhalational general anesthetic",
+  "pharm": "Volatile halogenated ether that produces dose-dependent CNS depression to induce and maintain general anesthesia; mechanism involves modulation of GABA-A and other CNS ion channels.",
+  "tags": ["Rx only", "Volatile anesthetic", "Hospital/OR use", "Malignant hyperthermia trigger"],
+  "quick": [
+    ["Adult dose", "Maintenance MAC ~1.15% in oxygen; titrate; induction 1.5-3% with oxygen or O2/N2O"],
+    ["Meal", "Not applicable (inhalational anesthetic given under anesthesia)"],
+    ["Pregnancy", "Adequate data lacking for obstetric anesthesia; relaxes uterus; use only if clearly needed"],
+    ["Lactation", "Limited data; brief single exposure unlikely to be significant - discuss with anesthetist"],
+    ["Renal", "Minimally metabolized; little renal concern, but monitor in severe impairment"],
+    ["Hepatic", "Rare halogenated-anesthetic hepatitis; contraindicated if prior anesthetic-related hepatitis"],
+    ["Alcohol", "Chronic alcohol may alter anesthetic requirements"],
+    ["Monitoring", "End-tidal anesthetic, BP, ECG, oxygenation/ventilation, temperature (malignant hyperthermia)"]
+  ],
+  "summary": "Isoflurane is a halogenated volatile inhalational anesthetic used for induction and maintenance of general anesthesia, delivered only via an isoflurane-specific vaporizer by clinicians trained in general anesthesia. Induction and recovery are relatively rapid; it is a potent respiratory depressant and causes dose-dependent reductions in blood pressure (largely from vasodilation). Critical hazards are malignant hyperthermia in genetically susceptible patients (treat by stopping the agent and giving IV dantrolene), perioperative hyperkalemia (especially in neuromuscular disease), and rare halogenated-anesthetic hepatotoxicity.",
+  "indications": [
+    "Induction of general anesthesia",
+    "Maintenance of general anesthesia"
+  ],
+  "dosage": [
+    {"c": "Maintenance of anesthesia", "r": "Adult inhalation", "d": "Surgical anesthesia maintained at 1.0-2.5% isoflurane with oxygen or oxygen/nitrous oxide; about 0.5-1% added if given with N2O", "t": "Continuous, titrated", "n": "MAC in oxygen ~1.15% (age-dependent; higher in young, lower in elderly)"},
+    {"c": "Induction of anesthesia", "r": "Adult inhalation", "d": "Begin around 0.5% and increase to 1.5-3% in oxygen or oxygen/nitrous oxide", "t": "Titrated to effect", "n": "Mild pungency limits the speed of inhalational induction; often induced IV first"},
+    {"c": "MAC by age", "r": "All ages", "d": "MAC varies: e.g., ~1.6% in young children, ~1.15% in adults, ~1.05% at 70 years", "t": "Titrated", "n": "Anesthetic requirement falls with age and with nitrous oxide or opioids"},
+    {"c": "Administration constraint", "r": "All", "d": "Deliver only via an agent-specific calibrated vaporizer", "t": "Continuous", "n": "Individualize to age and clinical status; given only by trained anesthesia providers"}
+  ],
+  "admin": [
+    "Administer only by persons trained in general anesthesia, using a vaporizer specifically calibrated for isoflurane",
+    "Individualize and titrate to the patient's age and clinical status using end-tidal/inspired concentration monitoring",
+    "Maintain airway, ventilation and continuous cardiovascular monitoring",
+    "Have malignant hyperthermia resources, including IV dantrolene, immediately available",
+    "Ensure capability for assisted/controlled ventilation given profound respiratory depression"
+  ],
+  "moa": "Isoflurane is a halogenated methyl ethyl ether that produces general anesthesia through dose-dependent depression of the central nervous system. Although the precise molecular mechanism is not fully defined, it is thought to enhance inhibitory neurotransmission (notably at GABA-A receptors) and modulate other ligand- and voltage-gated ion channels, producing unconsciousness, amnesia, and immobility. It causes dose-dependent respiratory depression and peripheral vasodilation with reduced systemic vascular resistance and blood pressure, while heart rate is relatively preserved. It is minimally metabolized (about 0.2%), favoring rapid recovery.",
+  "contra": {
+    "absolute": [
+      "Patients in whom general anesthesia is contraindicated",
+      "Known sensitivity to isoflurane or other halogenated anesthetics",
+      "Known or suspected genetic susceptibility to malignant hyperthermia",
+      "History of confirmed hepatitis due to a halogenated inhalational anesthetic, or unexplained moderate-to-severe hepatic dysfunction after prior halogenated anesthesia"
+    ],
+    "relative": [
+      "Neuromuscular disease (e.g., Duchenne muscular dystrophy - hyperkalemia/rhabdomyolysis risk)",
+      "Significant hypovolemia or hemodynamic instability",
+      "Severe hepatic impairment",
+      "Conditions where uterine relaxation is undesirable (obstetrics)",
+      "Raised intracranial pressure (cerebral vasodilation at higher concentrations)"
+    ],
+    "monitor": [
+      "Core temperature and signs of malignant hyperthermia",
+      "Blood pressure, heart rate and ECG",
+      "Oxygenation, ventilation and end-tidal anesthetic concentration",
+      "Serum potassium in at-risk neuromuscular patients"
+    ]
+  },
+  "preg": "Adequate data have not been developed to establish the use of isoflurane in obstetrical anesthesia, and it relaxes uterine smooth muscle (which can increase blood loss at cesarean delivery). There may be a theoretical concern about anesthetic effects on the developing fetal brain with prolonged or repeated exposure. Use during pregnancy only if clearly needed and at the lowest effective concentration.",
+  "lact": "Limited data are available on isoflurane in breast milk; given its rapid elimination, a single brief exposure for a procedure is unlikely to pose significant risk to a breastfed infant. Coordinate timing of breastfeeding with the anesthesia team.",
+  "renal": "Isoflurane undergoes minimal metabolism and produces little inorganic fluoride, so clinically significant nephrotoxicity is not expected; monitor patients with severe renal impairment as part of general anesthetic care.",
+  "hepatic": "Isoflurane is minimally metabolized, but rare cases of postoperative hepatic dysfunction and hepatitis have occurred with halogenated anesthetics. It is contraindicated in patients with confirmed prior halogenated-anesthetic hepatitis or unexplained moderate-to-severe hepatic dysfunction after such anesthesia; use cautiously in significant hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Non-depolarizing neuromuscular blockers (markedly potentiated; reduce doses)",
+      "Catecholamines/sympathomimetics (volatile anesthetics can sensitize the myocardium, though isoflurane less than older agents)"
+    ],
+    "moderate": [
+      "Nitrous oxide, opioids, benzodiazepines and other CNS depressants (reduce MAC and add cardiorespiratory depression)",
+      "Antihypertensives and beta-blockers (additive hypotension)",
+      "Beta-sympathomimetics, isoniazid (theoretical effects on metabolism/sensitization)"
+    ],
+    "minor": ["MAO inhibitors (perioperative hemodynamic considerations)"],
+    "food": "Not applicable.",
+    "alcohol": "Chronic alcohol use can increase anesthetic requirements; acute intoxication may reduce them.",
+    "diagnostics": "May transiently elevate white blood cell count; minimal effect on serum fluoride compared with older agents."
+  },
+  "se": {
+    "common": ["Hypotension", "Respiratory depression", "Arrhythmias", "Shivering", "Nausea and vomiting (postoperative)"],
+    "serious": ["Malignant hyperthermia", "Perioperative hyperkalemia (especially neuromuscular disease)", "Hepatic injury/hepatitis", "Severe arrhythmias", "Respiratory arrest"],
+    "rare": ["QT prolongation/torsades", "Postoperative agitation/delirium", "Carbon monoxide formation with desiccated CO2 absorbents", "Seizure-like activity"],
+    "emergency": ["Malignant hyperthermia crisis", "Life-threatening hyperkalemia with cardiac arrest", "Severe hypotension/cardiovascular collapse", "Anaphylaxis"]
+  },
+  "monitoring": ["Continuous blood pressure, ECG and heart rate", "Oxygenation, ventilation and inspired/end-tidal anesthetic concentration", "Core temperature with vigilance for malignant hyperthermia", "Serum potassium in patients with neuromuscular disease"],
+  "counsel": [
+    "This anesthetic gas is given by an anesthetist to put you to sleep for surgery",
+    "Tell the anesthetist if you or any blood relative has ever had a severe high-fever reaction to anesthesia (malignant hyperthermia)",
+    "Report any past liver problems or jaundice after a previous anesthetic",
+    "You may feel drowsy, shivery, or sick for a short time after waking",
+    "Do not drive or make important decisions for 24 hours after anesthesia"
+  ],
+  "pk": [
+    ["Onset", "Rapid induction (limited slightly by mild pungency)"],
+    ["Peak", "Anesthetic depth changes rapidly with adjustments in delivered concentration"],
+    ["Half-life", "Eliminated almost entirely unchanged via the lungs; only ~0.2% metabolized"],
+    ["Duration", "Rapid recovery after discontinuation due to low solubility and minimal metabolism"],
+    ["Storage", "Store at room temperature 15-30 C (59-86 F); no added stabilizer; keep tightly closed, away from light"]
+  ],
+  "pearls": [
+    "Malignant hyperthermia is the key emergency - stop the trigger, give IV dantrolene, cool, and treat hyperkalemia/acidosis",
+    "Profound respiratory depressant and potent vasodilator - hypotension is mainly from reduced systemic vascular resistance",
+    "Contraindicated after prior halogenated-anesthetic hepatitis",
+    "Minimally metabolized (~0.2%), so little nephro/hepatotoxic metabolite and rapid recovery",
+    "Desiccated CO2 absorbents can react with volatile anesthetics to form carbon monoxide - keep absorbent fresh"
+  ],
+  "missed": "Not applicable; isoflurane is administered continuously by an anesthesia provider during a procedure, not on a patient-dosing schedule.",
+  "overdose": "Overdose presents as deepening anesthesia with cardiac and/or respiratory depression; in ventilated patients cardiac depression predominates and hypercapnia or hypoxia may appear late. Management: stop the drug, establish a clear airway, and start assisted or controlled ventilation with pure oxygen, supporting the circulation with fluids and vasopressors as needed and monitoring for arrhythmias.",
+  "refs": [
+    ["FDA Label - Isoflurane (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22isoflurane%22"],
+    ["DailyMed - Isoflurane", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=isoflurane"]
+  ]
+}

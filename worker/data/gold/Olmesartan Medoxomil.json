@@ -1,0 +1,94 @@
+{
+  "generic": "Olmesartan Medoxomil",
+  "cls": "Angiotensin II receptor blocker (ARB)",
+  "pharm": "Antihypertensive; selective angiotensin II type-1 (AT1) receptor antagonist",
+  "tags": ["ARB", "hypertension", "RAAS", "blood pressure", "Boxed warning: fetal toxicity", "sprue-like enteropathy"],
+  "quick": [
+    ["Adult dose", "20 mg OD; may increase to 40 mg after 2 weeks"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Discontinue when pregnancy detected (fetal toxicity)"],
+    ["Lactation", "Decide to stop drug or nursing; no human data"],
+    ["Renal", "No initial adjustment; monitor function"],
+    ["Hepatic", "No initial adjustment (moderate impairment)"],
+    ["Alcohol", "May enhance hypotension"],
+    ["Monitoring", "BP, potassium, renal function"]
+  ],
+  "summary": "Olmesartan medoxomil is a prodrug ARB rapidly bioactivated to olmesartan, used to lower blood pressure in adults and children 6 years and older. It is dosed once daily, starting at 20 mg in adults and titrated to 40 mg after 2 weeks if needed. It carries a boxed warning for fetal toxicity and has been associated with a sprue-like enteropathy causing severe chronic diarrhea and weight loss.",
+  "indications": [
+    "Treatment of hypertension in adults to lower blood pressure",
+    "Treatment of hypertension in pediatric patients 6 years of age and older",
+    "May be used alone or in combination with other antihypertensive agents"
+  ],
+  "dosage": [
+    {"c": "Hypertension (adult)", "r": "Oral", "d": "Start 20 mg once daily as monotherapy; may increase to 40 mg once daily", "t": "Titrate after 2 weeks if further BP reduction needed", "n": "Doses above 40 mg show no greater effect; twice-daily offers no advantage"},
+    {"c": "Hypertension (pediatric 6 yr+, 20 to <35 kg)", "r": "Oral", "d": "Start 10 mg once daily; maximum 20 mg once daily", "t": "Titrate after 2 weeks if needed", "n": "Weight-based; use extemporaneous 2 mg/mL suspension if unable to swallow tablets"},
+    {"c": "Hypertension (pediatric 6 yr+, >=35 kg)", "r": "Oral", "d": "Start 20 mg once daily; maximum 40 mg once daily", "t": "Titrate after 2 weeks if needed", "n": "Tablets and suspension are bioequivalent"},
+    {"c": "Volume- or salt-depleted patients", "r": "Oral", "d": "Consider a lower starting dose", "t": "Initiate under close medical supervision", "n": "Correct volume/salt depletion or monitor closely (e.g. diuretic-treated)"}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Dosage must be individualized; titrate after 2 weeks if BP target not reached",
+    "For children unable to swallow tablets, use an extemporaneous 2 mg/mL suspension (refrigerate 2-8 C, use within 4 weeks; shake well before each use)",
+    "Initiate under close supervision and consider a lower start in volume- or salt-depleted patients",
+    "Not recommended in children <1 year of age"
+  ],
+  "moa": "Selectively blocks the binding of angiotensin II to the AT1 receptor in vascular smooth muscle, antagonizing angiotensin II-mediated vasoconstriction and aldosterone release independent of its synthesis pathway. Olmesartan has more than 12,500-fold greater affinity for the AT1 than AT2 receptor. Unlike ACE inhibitors it does not inhibit ACE (kininase II) and so does not affect bradykinin, resulting in less cough.",
+  "contra": {
+    "absolute": ["Co-administration of aliskiren in patients with diabetes", "Known hypersensitivity to olmesartan"],
+    "relative": ["Pregnancy (boxed warning - discontinue when detected)", "Volume- or salt-depleted patients", "Bilateral or unilateral renal artery stenosis", "Severe renal impairment", "Children <1 year of age"],
+    "monitor": ["Dual RAS blockade with ACE inhibitors or aliskiren", "Concurrent potassium-sparing diuretics, supplements, or potassium-containing salt substitutes", "Pre-existing renal impairment or heart failure", "Lithium therapy"]
+  },
+  "preg": "Boxed warning: when pregnancy is detected, discontinue as soon as possible. Drugs acting on the renin-angiotensin system can cause fetal harm and death, especially in the second and third trimesters, reducing fetal renal function and causing oligohydramnios, lung hypoplasia, skull hypoplasia, anuria, hypotension, renal failure, and death. Consider alternative antihypertensive therapy; perform serial ultrasounds and monitor exposed neonates for hypotension, oliguria, and hyperkalemia.",
+  "lact": "There is no information on the presence of olmesartan in human milk or its effects on the infant; it is secreted at low concentration in milk of lactating rats. Because of the potential for adverse effects, decide whether to discontinue nursing or the drug, considering its importance to the mother.",
+  "renal": "Serum concentrations are elevated in renal insufficiency; AUC is approximately tripled in severe renal impairment (CrCl <20 mL/min). No initial dosage adjustment is recommended for moderate to marked renal impairment (CrCl <40 mL/min). Monitor renal function; pharmacokinetics in hemodialysis have not been studied.",
+  "hepatic": "AUC is increased about 60% in moderate hepatic impairment. No initial dosage adjustment is recommended for patients with moderate to marked hepatic dysfunction.",
+  "interactions": {
+    "major": ["Aliskiren in patients with diabetes - contraindicated", "ACE inhibitors or aliskiren (dual RAS blockade) - increased hypotension, hyperkalemia, and renal impairment; generally avoid", "Potassium-sparing diuretics, potassium supplements, or potassium-containing salt substitutes - hyperkalemia"],
+    "moderate": ["NSAIDs including COX-2 inhibitors - reduced antihypertensive effect and risk of renal deterioration (especially elderly, volume-depleted, or renally impaired)", "Lithium - increased serum lithium levels and toxicity; monitor levels", "Colesevelam - reduces olmesartan exposure; give olmesartan at least 4 hours before colesevelam"],
+    "minor": ["Other antihypertensives - additive blood-pressure lowering", "Digoxin and warfarin - no significant interaction reported", "Antacids - no significant effect on bioavailability"],
+    "food": "Food does not affect bioavailability; may be given with or without food.",
+    "alcohol": "May potentiate the hypotensive effect; advise caution.",
+    "diagnostics": "May increase serum potassium, creatinine, and BUN."
+  },
+  "se": {
+    "common": ["Dizziness (3%)"],
+    "serious": ["Symptomatic hypotension in volume- or salt-depleted patients", "Acute renal failure / worsening renal function", "Hyperkalemia", "Sprue-like enteropathy (severe chronic diarrhea with substantial weight loss, villous atrophy)"],
+    "rare": ["Angioedema", "Rhabdomyolysis", "Anaphylactic reactions", "Alopecia, pruritus, urticaria"],
+    "emergency": ["Angioedema with airway compromise", "Severe hypotension", "Severe hyperkalemia with cardiac effects", "Acute renal failure"]
+  },
+  "monitoring": [
+    "Blood pressure at baseline and follow-up",
+    "Serum potassium, particularly with diuretics, renal insufficiency, or diabetes",
+    "Renal function (creatinine, BUN) after initiation and dose changes",
+    "Volume/salt status in diuretic-treated patients",
+    "Watch for severe chronic diarrhea and weight loss (sprue-like enteropathy)"
+  ],
+  "counsel": [
+    "Take once daily, with or without food, at the same time each day",
+    "Stop the drug and contact your provider immediately if you become pregnant",
+    "Rise slowly to reduce dizziness; report fainting",
+    "Avoid potassium supplements and salt substitutes unless advised",
+    "Report severe, persistent diarrhea or unexplained weight loss (may require switching therapy)",
+    "Report swelling of the face, lips, or throat (angioedema)"
+  ],
+  "pk": [
+    ["Onset", "Peak antihypertensive effect within about 2 weeks; steady state in 3-5 days"],
+    ["Peak", "1 to 2 hours (Cmax)"],
+    ["Half-life", "Approximately 13 hours (terminal)"],
+    ["Duration", ">24 hours (once-daily dosing)"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Prodrug rapidly and completely bioactivated by ester hydrolysis to olmesartan during absorption",
+    "Not metabolized by CYP450; clinically significant drug-metabolism interactions are not expected",
+    "Sprue-like enteropathy may appear months to years after starting; exclude other causes and consider alternative therapy",
+    "High-dose olmesartan (40 mg/day) may raise CV risk in diabetics per the ROADMAP trial, though data are not conclusive",
+    "Less cough and angioedema than ACE inhibitors; avoid dual RAS blockade"
+  ],
+  "missed": "Take the missed dose when remembered. If it is nearly time for the next dose, skip it and resume the usual once-daily schedule; do not take two doses at once.",
+  "overdose": "Limited human data. The most likely manifestations are hypotension and tachycardia; bradycardia may occur if vagal stimulation occurs. Treat symptomatic hypotension with supportive care, supine positioning, and IV normal saline. The dialyzability of olmesartan is unknown.",
+  "refs": [
+    ["FDA Olmesartan Medoxomil Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olmesartan+medoxomil%22"],
+    ["FDA DailyMed - Olmesartan Medoxomil", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=olmesartan+medoxomil"]
+  ]
+}

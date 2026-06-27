@@ -1,0 +1,137 @@
+{
+  "generic": "Sodium Fusidate (Fusidic acid)",
+  "cls": "Antibacterial - fusidane class (protein synthesis inhibitor)",
+  "pharm": "Narrow-spectrum anti-staphylococcal antibiotic",
+  "tags": [
+    "antibiotic",
+    "staphylococcus",
+    "MRSA",
+    "skin infection",
+    "osteomyelitis",
+    "fusidane"
+  ],
+  "quick": [
+    ["Adult dose", "500 mg orally three times daily (sodium fusidate tablets)"],
+    ["Meal", "Take oral tablets with food to improve tolerability"],
+    ["Pregnancy", "Use only if clearly necessary; limited data"],
+    ["Lactation", "Caution - small amounts in milk; topical preferred"],
+    ["Renal", "No major adjustment; biliary excretion predominates"],
+    ["Hepatic", "Caution - hepatically eliminated; monitor LFTs, avoid in significant disease"],
+    ["Alcohol", "No specific interaction; moderation advised"],
+    ["Monitoring", "Liver function tests, especially on high-dose/prolonged or IV therapy"]
+  ],
+  "summary": "Sodium fusidate is the sodium salt of fusidic acid, a narrow-spectrum antibiotic of the fusidane class active mainly against staphylococci, including many methicillin-resistant strains. It is used for staphylococcal skin and soft-tissue infections, osteomyelitis, and other staphylococcal infections, and topically for skin and eye infections. Because resistance emerges readily on monotherapy, systemic use is often combined with another anti-staphylococcal agent; hepatotoxicity (jaundice) and a major interaction with statins are key concerns.",
+  "indications": [
+    "Staphylococcal skin and soft-tissue infections",
+    "Staphylococcal osteomyelitis and septic arthritis",
+    "Other staphylococcal infections including those due to penicillin-resistant strains",
+    "Topical treatment of bacterial skin infections (fusidic acid/sodium fusidate cream/ointment)",
+    "Bacterial conjunctivitis and staphylococcal eye infection (fusidic acid eye drops)"
+  ],
+  "dosage": [
+    {"c": "Staphylococcal infection (oral tablets)", "r": "Adult", "d": "500 mg three times daily", "t": "Three times daily", "n": "Combine with a second anti-staphylococcal agent to limit resistance"},
+    {"c": "Severe / deep infection (oral suspension as fusidic acid)", "r": "Adult", "d": "750 mg (fusidic acid) three times daily", "t": "Three times daily", "n": "Suspension is dosed as fusidic acid, not as sodium fusidate"},
+    {"c": "Osteomyelitis / severe infection (IV diethanolamine fusidate)", "r": "Adult", "d": "Per regional product, in combination therapy", "t": "Two to three times daily", "n": "Monitor LFTs; use combination to prevent resistance"},
+    {"c": "Skin / soft tissue infection (topical)", "r": "Adult & child", "d": "Apply cream/ointment to affected area", "t": "Two to three times daily", "n": "Usually up to 7-10 days to limit resistance"},
+    {"c": "Bacterial conjunctivitis (eye drops)", "r": "Adult & child", "d": "1 drop to affected eye(s)", "t": "Twice daily", "n": "Continue for 48 hours after resolution"}
+  ],
+  "admin": [
+    "Take oral tablets with or after food to reduce gastrointestinal upset",
+    "Oral suspension is dosed as fusidic acid and is not interchangeable milligram-for-milligram with sodium fusidate tablets",
+    "For systemic infection, combine with another anti-staphylococcal antibiotic to prevent resistance",
+    "Apply topical preparations as a thin layer; wash hands after use",
+    "Complete the prescribed course"
+  ],
+  "moa": "Sodium fusidate inhibits bacterial protein synthesis. It binds elongation factor G (EF-G) on the ribosome and prevents the translocation step of peptide chain elongation, blocking the cycling of EF-G. This is bacteriostatic (bactericidal at higher concentrations) and is mainly active against Gram-positive cocci, especially Staphylococcus aureus including many MRSA strains.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to fusidic acid / sodium fusidate",
+      "Concomitant use with HMG-CoA reductase inhibitors (statins) - risk of rhabdomyolysis"
+    ],
+    "relative": [
+      "Significant hepatic impairment or biliary disease",
+      "Pregnancy and breastfeeding (limited data)",
+      "Neonates / jaundiced or premature infants (IV, displacement of bilirubin)"
+    ],
+    "monitor": [
+      "Liver function tests on prolonged, high-dose, or IV therapy",
+      "Muscle symptoms if a statin cannot be avoided"
+    ]
+  },
+  "preg": "There are limited data on use in pregnancy; systemic sodium fusidate should be used only if clearly necessary and after weighing benefit against risk. Topical use carries minimal systemic exposure.",
+  "lact": "Small amounts may pass into breast milk; systemic use during breastfeeding should be undertaken with caution. Topical therapy, kept away from the nipple, results in negligible infant exposure.",
+  "renal": "No major dose adjustment is generally required, since elimination is predominantly biliary rather than renal.",
+  "hepatic": "Fusidic acid is eliminated mainly via the liver and bile and can cause reversible jaundice and hepatic dysfunction, particularly with high-dose or IV therapy. Use with caution and monitor liver function; avoid in significant hepatic or biliary disease.",
+  "interactions": {
+    "major": [
+      "HMG-CoA reductase inhibitors / statins (atorvastatin, simvastatin, etc.) - markedly increased risk of rhabdomyolysis; combination is contraindicated/avoided",
+      "Other potentially hepatotoxic drugs (additive liver toxicity)"
+    ],
+    "moderate": [
+      "Ritonavir and other CYP3A/protein-bound drugs (altered levels)",
+      "Anticoagulants - monitor due to protein-binding displacement / hepatic effects"
+    ],
+    "minor": [
+      "Bilirubin (displacement from albumin - relevant in neonates)"
+    ],
+    "food": "Take oral tablets with food to improve tolerance; no major efficacy effect",
+    "alcohol": "No specific interaction; avoid excess given hepatic metabolism",
+    "diagnostics": "May raise liver enzymes and bilirubin"
+  },
+  "se": {
+    "common": [
+      "Nausea",
+      "Vomiting",
+      "Abdominal discomfort",
+      "Diarrhea",
+      "Rash (including with topical use)"
+    ],
+    "serious": [
+      "Hepatotoxicity / jaundice (reversible, especially high-dose or IV)",
+      "Rhabdomyolysis when combined with statins",
+      "Blood dyscrasias (leukopenia, thrombocytopenia) - uncommon"
+    ],
+    "rare": [
+      "Stevens-Johnson syndrome / toxic epidermal necrolysis",
+      "Acute generalized exanthematous pustulosis",
+      "Angioedema / anaphylaxis"
+    ],
+    "emergency": [
+      "Severe hepatic failure with jaundice",
+      "Rhabdomyolysis with renal failure",
+      "Severe cutaneous adverse reaction or anaphylaxis"
+    ]
+  },
+  "monitoring": [
+    "Liver function tests, particularly with prolonged, high-dose, or intravenous therapy",
+    "Signs of muscle pain/weakness if a statin is unavoidable",
+    "Full blood count on long courses",
+    "Clinical response and local resistance patterns"
+  ],
+  "counsel": [
+    "Take oral tablets with food and finish the full course",
+    "Tell your doctor you are taking this before any cholesterol (statin) medicine is started",
+    "Report yellowing of the skin or eyes, dark urine, or severe muscle pain",
+    "Apply topical creams thinly and only for the recommended duration to limit resistance",
+    "For eye drops, do not touch the dropper tip to the eye and continue for 48 hours after the eye is better"
+  ],
+  "pk": [
+    ["Onset", "Antibacterial effect within hours; tissue penetration over the first days"],
+    ["Peak", "Peak plasma concentration about 2-4 hours after an oral dose"],
+    ["Half-life", "Approximately 5-15 hours; accumulates with repeated dosing"],
+    ["Duration", "Sustained tissue levels (notably bone); dosed two to three times daily"],
+    ["Storage", "Store below 25-30 C; protect from light and moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved in the United States; widely used in Europe and elsewhere (EMA/SmPC/BNF source)",
+    "Excellent anti-staphylococcal activity, including many MRSA strains, with good bone penetration",
+    "Resistance develops rapidly on monotherapy - combine with another anti-staphylococcal agent for systemic infection",
+    "Avoid concomitant statins (rhabdomyolysis) and monitor liver function on systemic therapy"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is nearly time for the next dose, skip the missed one and continue as normal - do not double up. Keep evenly spaced doses to maintain antibiotic levels.",
+  "overdose": "Overdose data are limited; expected effects are exaggerated gastrointestinal upset and hepatic disturbance. There is no specific antidote. Management is supportive with monitoring of liver function; because of high protein binding, dialysis is not expected to be helpful.",
+  "refs": [
+    ["British National Formulary - Sodium Fusidate / Fusidic Acid", "https://bnf.nice.org.uk/drugs/fusidic-acid/"],
+    ["EMA / SmPC - Fucidin (sodium fusidate / fusidic acid)", "https://www.medicines.org.uk/emc/search?q=fusidic+acid"]
+  ]
+}

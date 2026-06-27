@@ -1,0 +1,110 @@
+{
+  "generic": "Flucloxacillin Sodium",
+  "cls": "Antibacterial - penicillinase-resistant (isoxazolyl) penicillin",
+  "pharm": "Penicillinase-resistant beta-lactam that inhibits bacterial cell-wall synthesis, active against beta-lactamase-producing staphylococci.",
+  "tags": ["Rx only", "Penicillin", "Anti-staphylococcal", "Beta-lactamase resistant", "Hepatotoxicity warning"],
+  "quick": [
+    ["Adult dose", "250-500 mg orally four times daily; severe infections higher/IV per SmPC"],
+    ["Meal", "Take on an empty stomach - 1 hour before or 2 hours after food"],
+    ["Pregnancy", "Not known to be harmful; use if benefit justifies"],
+    ["Lactation", "Trace amounts in milk; generally considered compatible"],
+    ["Renal", "Reduce dose in severe renal impairment"],
+    ["Hepatic", "Caution - can cause cholestatic hepatitis (sometimes delayed)"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Liver function (especially prolonged/high-dose), renal function, signs of allergy"]
+  ],
+  "summary": "Flucloxacillin is a penicillinase-resistant (isoxazolyl) penicillin used mainly to treat infections caused by beta-lactamase-producing staphylococci - skin and soft-tissue infections, osteomyelitis, septic arthritis, endocarditis, and other staphylococcal infections. It is not FDA-approved (used in the UK, Europe, Australia, and Asia per the SmPC/BNF); the closely related US agents are dicloxacillin and oxacillin. It is well absorbed orally on an empty stomach and is acid-stable. Its most important safety concern is cholestatic hepatitis/jaundice, which can occur up to several weeks after stopping and is more likely with prolonged courses, in the elderly, and in those over 55. It is ineffective against MRSA.",
+  "indications": [
+    "Staphylococcal skin and soft-tissue infections (e.g., cellulitis, impetigo, infected wounds, abscesses)",
+    "Osteomyelitis and septic arthritis",
+    "Staphylococcal endocarditis (often combined with other agents)",
+    "Staphylococcal pneumonia",
+    "Other infections due to beta-lactamase-producing staphylococci sensitive to flucloxacillin",
+    "Surgical prophylaxis where staphylococcal infection is a risk"
+  ],
+  "dosage": [
+    {"c": "Skin/soft-tissue infection", "r": "Adult oral", "d": "250-500 mg four times daily", "t": "Four times daily", "n": "Take on an empty stomach; per SmPC"},
+    {"c": "Severe infection", "r": "Adult IV/IM", "d": "250 mg to 2 g four times daily (IV up to 8 g/day in divided doses for serious infections such as osteomyelitis/endocarditis)", "t": "Four times daily", "n": "Per SmPC/BNF; high-dose IV for deep infections"},
+    {"c": "Osteomyelitis / endocarditis", "r": "Adult IV", "d": "Up to 8 g daily in 3-4 divided doses (higher specialist regimens used)", "t": "3-4 times daily", "n": "Prolonged course; monitor liver function"},
+    {"c": "Children", "r": "Pediatric oral/IV", "d": "Weight-based per SmPC (e.g., 2-10 years often half the adult dose; under 2 years a quarter of the adult dose)", "t": "Four times daily", "n": "Adjust by age/weight"},
+    {"c": "Severe renal impairment", "r": "Adult", "d": "Reduce dose in severe renal impairment (e.g., reduce frequency at very low GFR)", "t": "Per renal function", "n": "Largely renally excreted"}
+  ],
+  "admin": [
+    "Take oral doses on an empty stomach - 1 hour before or 2 hours after meals - for best absorption",
+    "Complete the full prescribed course even if symptoms improve",
+    "For IV use, give by slow injection or infusion; reconstitute per the SmPC",
+    "Maintain adequate hydration during high-dose IV therapy",
+    "Stop and seek advice if jaundice, dark urine, pale stools, or rash occur"
+  ],
+  "moa": "Flucloxacillin is a beta-lactam antibiotic that binds penicillin-binding proteins in the bacterial cell wall, inhibiting the transpeptidation step of peptidoglycan synthesis. This weakens the cell wall and leads to bacterial lysis and death. Its bulky isoxazolyl side chain sterically protects the beta-lactam ring from staphylococcal penicillinase (beta-lactamase), so it remains active against penicillinase-producing Staphylococcus aureus that would inactivate ordinary penicillin. It is not active against methicillin-resistant S. aureus (MRSA), which alters the target PBP.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to flucloxacillin, other penicillins, or beta-lactams",
+      "Previous flucloxacillin-associated jaundice or hepatic dysfunction",
+      "History of penicillin-associated anaphylaxis"
+    ],
+    "relative": [
+      "Other beta-lactam allergy (cross-reactivity)",
+      "Hepatic impairment",
+      "Age over 55 and prolonged courses (higher hepatic risk)",
+      "Severe renal impairment (dose reduction)"
+    ],
+    "monitor": [
+      "Liver function with high-dose or prolonged therapy",
+      "Renal function in impairment",
+      "Signs of hypersensitivity"
+    ]
+  },
+  "preg": "Flucloxacillin is not known to be harmful in pregnancy and may be used when the benefit justifies use. As with all drugs in pregnancy, use only when clearly needed.",
+  "lact": "Trace amounts are excreted in breast milk. It is generally considered compatible with breastfeeding, though the infant should be observed for diarrhea, candidiasis, or rash.",
+  "renal": "Flucloxacillin is largely excreted unchanged by the kidneys. In severe renal impairment, reduce the dose or extend the dosing interval to avoid accumulation; standard doses are usually appropriate in mild-to-moderate impairment.",
+  "hepatic": "Flucloxacillin can cause cholestatic hepatitis and jaundice, which may appear up to several weeks after the drug is stopped and can be prolonged or, rarely, fatal. Risk increases with treatment longer than 2 weeks, in the elderly, and over age 55. Avoid in patients with previous flucloxacillin-associated hepatic dysfunction; monitor liver function in prolonged/high-dose therapy.",
+  "interactions": {
+    "major": [
+      "Previous flucloxacillin hepatotoxicity - do not re-expose"
+    ],
+    "moderate": [
+      "Probenecid - reduces renal excretion of flucloxacillin, raising and prolonging plasma levels",
+      "Methotrexate - penicillins may reduce its excretion, increasing toxicity",
+      "Paracetamol (acetaminophen) at high doses - co-administration may increase risk of high anion gap metabolic acidosis (pyroglutamic acidosis), especially in malnourished/renally impaired patients"
+    ],
+    "minor": ["May reduce the efficacy of oral typhoid vaccine; theoretically may reduce oral contraceptive efficacy via gut flora"],
+    "food": "Reduced absorption with food - take on an empty stomach.",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "May cause a false-positive urine glucose test (non-enzymatic methods); can transiently raise liver enzymes."
+  },
+  "se": {
+    "common": ["Nausea", "Diarrhea", "Vomiting", "Abdominal discomfort", "Rash"],
+    "serious": ["Cholestatic hepatitis / jaundice (may be delayed)", "Anaphylaxis / severe hypersensitivity", "Clostridioides difficile colitis", "Interstitial nephritis"],
+    "rare": ["Neutropenia, thrombocytopenia, eosinophilia", "Stevens-Johnson syndrome / toxic epidermal necrolysis / DRESS", "Neurotoxicity (high IV doses, especially with renal impairment)"],
+    "emergency": ["Anaphylaxis", "Severe cholestatic liver injury / acute liver failure", "Severe cutaneous reactions (SJS/TEN/DRESS)", "Pseudomembranous colitis"]
+  },
+  "monitoring": ["Liver function tests with high-dose or prolonged (>2 weeks) therapy", "Renal function in impairment and high IV doses", "Signs of hypersensitivity and rash", "Full blood count in prolonged therapy", "Resolution of infection"],
+  "counsel": [
+    "Take on an empty stomach, at least 1 hour before or 2 hours after food",
+    "Finish the entire course even if you feel better",
+    "Stop and seek medical advice if you develop yellowing of skin/eyes, dark urine, pale stools, or itching (liver warning)",
+    "Seek urgent help for rash, swelling of face/throat, or difficulty breathing (allergy)",
+    "Report severe or persistent diarrhea, which can occur during or after treatment"
+  ],
+  "pk": [
+    ["Onset", "Antibacterial effect begins soon after absorption; peak blood levels within ~1 hour orally"],
+    ["Peak", "Peak plasma concentration about 1 hour after an oral dose (on empty stomach)"],
+    ["Half-life", "Approximately 1 hour"],
+    ["Duration", "Short - requires four-times-daily dosing; ~95% protein bound"],
+    ["Storage", "Store capsules/oral liquid at controlled room temperature; reconstituted liquid refrigerated and used within the stated period"]
+  ],
+  "pearls": [
+    "NOT FDA-approved - used in the UK/Europe/Australia/Asia (SmPC/BNF data); US equivalents are dicloxacillin and oxacillin/nafcillin",
+    "First-line oral anti-staphylococcal penicillin for cellulitis and other MSSA infections; NOT active against MRSA",
+    "Key risk is cholestatic hepatitis - can appear up to 6 weeks AFTER stopping, more likely with courses >2 weeks and age >55; never re-expose a patient with prior flucloxacillin liver injury",
+    "Take on an empty stomach - food markedly reduces absorption",
+    "High-dose IV with renal impairment (and high-dose paracetamol/malnutrition) can precipitate metabolic acidosis - watch the combination"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember unless it is almost time for the next dose, in which case skip the missed dose. Do not take a double dose. Space remaining doses as evenly as possible.",
+  "overdose": "Overdose may cause nausea, vomiting, and diarrhea; with very high doses, especially in renal impairment, central nervous system excitation, confusion, or seizures (neurotoxicity) can occur, and electrolyte disturbance from the sodium load. Management is supportive; flucloxacillin can be removed to some extent by hemodialysis if needed.",
+  "refs": [
+    ["EMC / SmPC - Flucloxacillin (UK)", "https://www.medicines.org.uk/emc/search?q=flucloxacillin"],
+    ["BNF - Flucloxacillin", "https://bnf.nice.org.uk/drugs/flucloxacillin/"]
+  ]
+}

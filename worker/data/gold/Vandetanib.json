@@ -1,0 +1,139 @@
+{
+  "generic": "Vandetanib",
+  "cls": "Antineoplastic (Tyrosine kinase inhibitor)",
+  "pharm": "Multi-target kinase inhibitor (RET, VEGFR, EGFR)",
+  "tags": [
+    "Kinase inhibitor",
+    "Oncology",
+    "Oral",
+    "Boxed warning: QT prolongation, torsades de pointes, sudden death",
+    "REMS program (restricted distribution)",
+    "Long half-life (~19 days)",
+    "Medullary thyroid cancer"
+  ],
+  "quick": [
+    ["Adult dose", "300 mg orally once daily until progression or unacceptable toxicity"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Can cause fetal harm; use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 4 months after"],
+    ["Renal", "Moderate impairment: start 200 mg; avoid in severe"],
+    ["Hepatic", "Not recommended in moderate-to-severe impairment"],
+    ["Alcohol", "No specific interaction; limit due to nausea/QT risk context"],
+    ["Monitoring", "ECG/QTc, electrolytes (Ca, K, Mg), TSH, BP, skin"]
+  ],
+  "summary": "Vandetanib (CAPRELSA) is an oral multi-target kinase inhibitor of RET, VEGFR, and EGFR indicated for symptomatic or progressive medullary thyroid cancer in patients with unresectable locally advanced or metastatic disease. It carries a boxed warning for QT prolongation, torsades de pointes, and sudden death and is available only through a restricted REMS program. It must not be used in patients with hypocalcemia, hypokalemia, hypomagnesemia, or long QT syndrome, and electrolytes and ECG must be corrected and monitored. Its very long half-life means toxicities and drug interactions can be prolonged.",
+  "indications": [
+    "Symptomatic or progressive medullary thyroid cancer in patients with unresectable locally advanced or metastatic disease",
+    "In indolent, asymptomatic, or slowly progressing disease, use only after careful consideration of treatment-related risks"
+  ],
+  "dosage": [
+    {"c": "Medullary thyroid cancer (adults)", "r": "Oral", "d": "300 mg once daily until disease progression or unacceptable toxicity", "t": "Once daily", "n": "May be taken with or without food; do not crush; tablets may be dispersed in 2 oz water"},
+    {"c": "Dose reduction for toxicity", "r": "Oral", "d": "Reduce 300 mg to 200 mg, then to 100 mg for CTCAE Grade 3 or greater toxicities", "t": "Once daily", "n": "Interrupt for QTcF greater than 500 ms; resume reduced dose when QTcF below 450 ms"},
+    {"c": "Moderate renal impairment", "r": "Oral", "d": "Starting dose 200 mg once daily", "t": "Once daily", "n": "Avoid use in severe renal impairment - safety not established"},
+    {"c": "Missed dose", "r": "Oral", "d": "Do not take a missed dose within 12 hours of the next dose", "t": "Once daily", "n": "Resume the regular schedule"}
+  ],
+  "admin": [
+    "Prescribe and dispense only through the restricted REMS program",
+    "Correct hypocalcemia, hypokalemia, and hypomagnesemia before starting",
+    "Obtain baseline ECG, electrolytes, TSH, and creatinine, then monitor at 2-4 weeks, 8-12 weeks, and every 3 months",
+    "Do not crush tablets; if needed, disperse in 2 ounces of non-carbonated water (no other liquids) and swallow immediately",
+    "Avoid concomitant drugs that prolong the QT interval"
+  ],
+  "moa": "Vandetanib inhibits the tyrosine kinase activity of multiple receptors including the RET kinase, VEGFR family (KDR, Flt-1), and EGFR family, as well as BRK, TIE2, EPH receptor, and Src kinase families. These kinases are involved in oncogenesis, tumor angiogenesis, metastasis, and maintenance of the tumor microenvironment. Inhibition reduces tumor cell-induced angiogenesis and tumor growth.",
+  "contra": {
+    "absolute": [
+      "Congenital long QT syndrome"
+    ],
+    "relative": [
+      "Hypocalcemia, hypokalemia, or hypomagnesemia (correct before use)",
+      "Concomitant drugs that prolong the QT interval",
+      "Moderate to severe hepatic impairment (not recommended)",
+      "Severe renal impairment (avoid)"
+    ],
+    "monitor": [
+      "QTc interval and electrolytes",
+      "Blood pressure and signs of heart failure",
+      "Skin reactions and signs of severe dermatologic toxicity"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, vandetanib can cause fetal harm when administered to a pregnant woman. Advise females of reproductive potential of the potential risk to a fetus and to use effective contraception during treatment and for at least 4 months after the last dose.",
+  "lact": "Vandetanib is present in breast milk in animal studies. Advise women not to breastfeed during treatment and for at least 4 months after the final dose because of the potential for serious adverse reactions in the breastfed infant.",
+  "renal": "For patients with moderate renal impairment, reduce the starting dose to 200 mg once daily. Use in severe renal impairment is not recommended because of limited data.",
+  "hepatic": "Vandetanib is not recommended in patients with moderate to severe hepatic impairment because efficacy and safety have not been established.",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs (antiarrhythmics, certain antipsychotics, fluoroquinolones, ondansetron) - additive torsades risk; avoid",
+      "Strong CYP3A4 inducers (rifampin) - reduced vandetanib exposure; avoid",
+      "Drugs that cause electrolyte loss (diuretics) - hypokalemia/hypomagnesemia increasing QT risk"
+    ],
+    "moderate": [
+      "Metformin and other OCT2/renal cation transporter substrates - increased plasma concentrations",
+      "Digoxin (P-gp substrate) - increased digoxin levels"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "No specific labeled interaction; limit intake given nausea and the cardiac context.",
+    "diagnostics": "Monitor ECG (QTcF) and serum calcium, potassium, magnesium, and TSH throughout therapy."
+  },
+  "se": {
+    "common": [
+      "Diarrhea",
+      "Rash and acneiform dermatitis",
+      "Hypertension",
+      "Nausea, decreased appetite",
+      "Headache and fatigue"
+    ],
+    "serious": [
+      "QT prolongation and torsades de pointes",
+      "Severe skin reactions including Stevens-Johnson syndrome",
+      "Interstitial lung disease",
+      "Ischemic cerebrovascular events and hemorrhage",
+      "Heart failure, hypertensive crisis, reversible posterior leukoencephalopathy syndrome (RPLS)"
+    ],
+    "rare": [
+      "Sudden death",
+      "Pancreatitis"
+    ],
+    "emergency": [
+      "Syncope, palpitations, or arrhythmia (torsades)",
+      "Severe blistering skin reaction",
+      "New or worsening dyspnea (interstitial lung disease)",
+      "Stroke symptoms or severe headache with vision change (RPLS)"
+    ]
+  },
+  "monitoring": [
+    "ECG (QTcF) at baseline, 2-4 weeks, 8-12 weeks, then every 3 months and after dose changes/interrupting drugs",
+    "Serum calcium, potassium, magnesium, and TSH on the same schedule",
+    "Blood pressure regularly",
+    "Skin for severe reactions and photosensitivity",
+    "Respiratory symptoms for interstitial lung disease"
+  ],
+  "counsel": [
+    "Take exactly one 300 mg dose daily; do not take a missed dose within 12 hours of the next one",
+    "Do not crush tablets; if you cannot swallow, disperse in plain water as instructed",
+    "Report fainting, palpitations, or irregular heartbeat immediately",
+    "Use sun protection - serious sunburn-like skin reactions can occur",
+    "Use effective contraception during and for 4 months after treatment; do not breastfeed",
+    "Tell your team about all medicines, as many can affect your heart rhythm"
+  ],
+  "pk": [
+    ["Onset", "Slow accumulation due to long half-life"],
+    ["Peak", "Median time to peak about 6 hours after dosing"],
+    ["Half-life", "Approximately 19 days (mean)"],
+    ["Duration", "Prolonged effect; steady state reached in about 3 months"],
+    ["Storage", "Store at 20-25 C (68-77 F) with excursions permitted to 15-30 C"]
+  ],
+  "pearls": [
+    "Boxed warning: QT prolongation, torsades de pointes, and sudden death - correct and monitor electrolytes and ECG",
+    "Only available through a restricted REMS program",
+    "Very long half-life (~19 days) means toxicity and interactions persist long after stopping",
+    "Do not use in congenital long QT syndrome or with uncorrected electrolyte abnormalities",
+    "RET-driven medullary thyroid cancer is the target indication; assess RET status clinically"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered unless it is within 12 hours of the next scheduled dose, in which case skip the missed dose and resume the normal once-daily schedule. Do not take two doses to make up for a missed one.",
+  "overdose": "There is no specific antidote. Overdose increases the risk of QT prolongation, torsades de pointes, and other adverse reactions. Stop vandetanib, monitor ECG continuously, correct electrolytes (calcium, potassium, magnesium), and provide supportive and arrhythmia management. Because of the long half-life, monitoring should continue for an extended period. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Label - Vandetanib/CAPRELSA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vandetanib%22"],
+    ["DailyMed - CAPRELSA SPL", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=vandetanib"]
+  ]
+}

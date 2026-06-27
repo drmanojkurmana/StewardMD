@@ -1,0 +1,101 @@
+{
+  "generic": "Isosorbide Dinitrate",
+  "cls": "Organic nitrate vasodilator (antianginal)",
+  "pharm": "Releases nitric oxide to relax vascular smooth muscle, dilating veins and arteries and reducing cardiac preload and myocardial oxygen demand.",
+  "tags": ["Rx only", "Organic nitrate", "Antianginal", "Tolerance with continuous dosing"],
+  "quick": [
+    ["Adult dose", "Immediate-release: 5-20 mg 2-3 times daily; maintenance 10-40 mg 2-3 times daily"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Use only if benefit justifies risk (former Category C)"],
+    ["Lactation", "Caution; excretion in milk unknown"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "Use with caution"],
+    ["Alcohol", "Avoid; additive hypotension"],
+    ["Monitoring", "Blood pressure, headache, signs of tolerance"]
+  ],
+  "summary": "Isosorbide dinitrate is an oral organic nitrate indicated for the prevention of angina pectoris due to coronary artery disease. The immediate-release oral form is not rapid enough to abort an acute anginal attack. It works by releasing nitric oxide, which relaxes vascular smooth muscle, reducing preload and myocardial oxygen demand. Continuous dosing causes nitrate tolerance, so a daily nitrate-free interval of at least 14 hours is required. It is contraindicated with PDE5 inhibitors and riociguat because of the risk of severe hypotension.",
+  "indications": [
+    "Prevention of angina pectoris due to coronary artery disease"
+  ],
+  "dosage": [
+    {"c": "Angina prophylaxis (starting)", "r": "Adult oral (IR)", "d": "5 mg to 20 mg two or three times daily", "t": "2-3 times daily", "n": "Use the minimum effective dose"},
+    {"c": "Angina prophylaxis (maintenance)", "r": "Adult oral (IR)", "d": "10 mg to 40 mg two or three times daily", "t": "2-3 times daily", "n": "Some patients require higher doses"},
+    {"c": "Nitrate-free interval", "r": "Adult oral", "d": "Schedule doses to provide a daily nitrate-free interval of at least 14 hours", "t": "Asymmetric daily dosing", "n": "Minimizes tolerance; expect <=12 h of antianginal effect/day"}
+  ],
+  "admin": [
+    "Take to provide a daily nitrate-free interval of at least 14 hours to prevent tolerance",
+    "Not for aborting an acute angina attack (onset too slow for IR oral)",
+    "Use the minimum dose that produces the desired effect",
+    "Do not stop long-term therapy abruptly (risk of rebound angina)"
+  ],
+  "moa": "Isosorbide dinitrate is denitrated to release nitric oxide (NO) in vascular smooth muscle. NO activates guanylate cyclase, increasing cyclic GMP and causing smooth muscle relaxation. The predominant venodilation reduces venous return (preload) and, with arterial dilation, lowers systemic vascular resistance (afterload); both reduce myocardial wall tension and oxygen demand, relieving angina. Continuous exposure leads to tolerance, mitigated by a nitrate-free interval.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to isosorbide dinitrate or its ingredients",
+      "Concurrent use of PDE5 inhibitors (sildenafil, tadalafil, vardenafil) - severe hypotension, syncope, myocardial ischemia",
+      "Concurrent use of the soluble guanylate cyclase stimulator riociguat - hypotension"
+    ],
+    "relative": [
+      "Acute myocardial infarction or congestive heart failure (IR oral not recommended; effects hard to terminate)",
+      "Severe hypotension or hypovolemia",
+      "Hypertrophic obstructive cardiomyopathy / outflow obstruction",
+      "Increased intracranial pressure"
+    ],
+    "monitor": [
+      "Blood pressure and heart rate",
+      "Headache and dizziness",
+      "Loss of efficacy suggesting tolerance"
+    ]
+  },
+  "preg": "At oral doses 35 and 150 times the maximum human dose, isosorbide dinitrate caused dose-related embryotoxicity in rabbits; there are no adequate, well-controlled studies in pregnant women. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "It is not known whether isosorbide dinitrate is excreted in human milk; because many drugs are excreted in milk, exercise caution when administering to a nursing woman.",
+  "renal": "No specific renal dosage adjustment is established; use the minimum effective dose and monitor blood pressure.",
+  "hepatic": "Isosorbide dinitrate undergoes hepatic metabolism; use with caution in hepatic impairment and titrate to effect.",
+  "interactions": {
+    "major": [
+      "PDE5 inhibitors - sildenafil, tadalafil, vardenafil (contraindicated; severe, potentially fatal hypotension)",
+      "Riociguat (contraindicated; hypotension)"
+    ],
+    "moderate": [
+      "Other vasodilators and antihypertensives (additive hypotension)",
+      "Beta-blockers and calcium channel blockers (additive hemodynamic effects)"
+    ],
+    "minor": ["Dihydroergotamine (nitrate may alter ergot effect)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid; alcohol produces additive hypotensive (vasodilatory) effects.",
+    "diagnostics": "High doses can rarely cause methemoglobinemia, lowering measured oxygen saturation."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness", "Lightheadedness", "Hypotension", "Flushing", "Tachycardia"],
+    "serious": ["Severe hypotension and syncope", "Paradoxical bradycardia/angina aggravation", "Reflex tachycardia"],
+    "rare": ["Methemoglobinemia (high doses)", "Exfoliative dermatitis"],
+    "emergency": ["Profound hypotension with cardiovascular collapse (especially with PDE5 inhibitors)", "Severe methemoglobinemia"]
+  },
+  "monitoring": ["Blood pressure and heart rate", "Symptom control / headache", "Signs of tolerance with continuous therapy", "Methemoglobin if high-dose and cyanosis unexplained by cardiac/pulmonary disease"],
+  "counsel": [
+    "This medicine prevents angina; it does not stop an attack that has already started",
+    "Headache is common early on and usually lessens with continued use; do not stop suddenly",
+    "Never take erectile dysfunction drugs (sildenafil, tadalafil, vardenafil) with nitrates - this can cause a dangerous drop in blood pressure",
+    "Get up slowly to avoid dizziness; sit or lie down if you feel faint",
+    "Avoid alcohol, which can lower your blood pressure further"
+  ],
+  "pk": [
+    ["Onset", "Oral IR antianginal onset within ~1 hour (not rapid enough to abort an attack)"],
+    ["Peak", "Plasma peak about 1 hour after an oral dose"],
+    ["Half-life", "Isosorbide dinitrate ~1 hour; active metabolites longer"],
+    ["Duration", "Up to ~12 hours of continuous antianginal efficacy per day"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep tightly closed and protect from moisture"]
+  ],
+  "pearls": [
+    "Provide a daily nitrate-free interval of at least 14 hours to prevent tolerance",
+    "IR oral form is for prevention, not termination, of angina",
+    "Absolutely contraindicated with PDE5 inhibitors and riociguat",
+    "Do not discontinue abruptly after chronic use (rebound angina)"
+  ],
+  "missed": "Take the missed dose as soon as remembered if it is well before the next scheduled dose; otherwise skip it to preserve the nitrate-free interval. Do not double up.",
+  "overdose": "Overdose causes vasodilation, venous pooling, reduced cardiac output, and hypotension, with throbbing headache, confusion, fever, vertigo, palpitations, visual disturbance, nausea/vomiting, syncope, dyspnea, diaphoresis, and in severe cases methemoglobinemia, bradycardia/heart block, coma, seizures, and death. Treat with leg elevation and central volume expansion; severe methemoglobinemia is treated with intravenous methylene blue.",
+  "refs": [
+    ["FDA Label - Isosorbide dinitrate (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22isosorbide+dinitrate%22"],
+    ["DailyMed - Isosorbide dinitrate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=isosorbide+dinitrate"]
+  ]
+}

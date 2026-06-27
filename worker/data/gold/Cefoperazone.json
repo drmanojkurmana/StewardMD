@@ -1,0 +1,105 @@
+{
+  "generic": "Cefoperazone",
+  "cls": "Third-generation cephalosporin (beta-lactam antibacterial)",
+  "pharm": "Parenteral third-generation cephalosporin; inhibits bacterial cell-wall synthesis, predominantly biliary excretion",
+  "tags": ["Rx only", "Parenteral only (IV/IM)", "Third-generation cephalosporin", "Biliary excretion - no renal dose adjustment", "Hypoprothrombinemia/bleeding risk (NMTT side chain) - vitamin K", "Disulfiram-like reaction with alcohol", "Beta-lactam cross-allergy"],
+  "quick": [
+    ["Adult dose", "2-4 g/day IV/IM in equally divided doses every 12 hours; severe infection up to 6-12 g/day in 2-4 divided doses"],
+    ["Meal", "Parenteral - not affected by food"],
+    ["Pregnancy", "Crosses placenta; no adequate human studies - use only if clearly needed"],
+    ["Lactation", "Low concentrations in milk; use with caution"],
+    ["Renal", "Mainly biliary - no dosage adjustment for renal impairment alone"],
+    ["Hepatic", "Half-life rises 2-4x in hepatic/biliary disease; do not exceed 4 g/day without monitoring"],
+    ["Alcohol", "Avoid alcohol within 72 h - disulfiram-like reaction"],
+    ["Monitoring", "Prothrombin time/INR, signs of bleeding, hypersensitivity, C. difficile diarrhea"]
+  ],
+  "summary": "Cefoperazone is a parenteral third-generation cephalosporin used to treat susceptible respiratory, intra-abdominal, skin/skin-structure, female genital tract, and urinary tract infections and bacterial septicemia, with activity including many gram-negatives and Pseudomonas aeruginosa but no activity against Chlamydia trachomatis. Unlike most cephalosporins it is excreted predominantly in bile, so no dose adjustment is needed for renal impairment alone, while the half-life rises 2-4 fold in hepatic dysfunction or biliary obstruction. Two distinctive hazards relate to its N-methylthiotetrazole (NMTT) side chain: a disulfiram-like reaction (flushing, sweating, headache, tachycardia) if alcohol is taken within 72 hours, and hypoprothrombinemia with potential serious or fatal hemorrhage from suppression of vitamin-K-dependent clotting (monitor prothrombin time and give vitamin K to at-risk patients). It carries the cephalosporin-class risks of serious hypersensitivity/anaphylaxis, severe skin reactions, and Clostridioides difficile-associated diarrhea. In India it is commonly marketed combined with sulbactam (e.g., Magnex).",
+  "indications": [
+    "Respiratory tract infections caused by susceptible organisms (e.g., S. pneumoniae, H. influenzae, S. aureus, S. pyogenes, P. aeruginosa, Klebsiella, E. coli, Proteus mirabilis, Enterobacter)",
+    "Peritonitis and other intra-abdominal infections (E. coli, P. aeruginosa, anaerobic gram-negative bacilli including B. fragilis)",
+    "Bacterial septicemia caused by susceptible organisms",
+    "Skin and skin-structure infections (S. aureus, S. pyogenes, P. aeruginosa)",
+    "Pelvic inflammatory disease, endometritis, and other female genital tract infections (add anti-chlamydial cover if C. trachomatis suspected)",
+    "Urinary tract infections (E. coli, P. aeruginosa)"
+  ],
+  "dosage": [
+    {"c": "Usual adult infection", "r": "IV or IM", "d": "2 to 4 g/day in equally divided doses every 12 hours", "t": "Reconstitute before administration; continue per clinical response", "n": "Streptococcus pyogenes infections: treat at least 10 days"},
+    {"c": "Severe infection or less-susceptible organisms", "r": "IV or IM", "d": "6 to 12 g/day divided into 2, 3, or 4 administrations (1.5 to 4 g per dose); total daily doses up to 16 g have been given by constant infusion to immunocompromised patients", "t": "Increase total daily dose and/or frequency as needed", "n": "Give cefoperazone before any aminoglycoside; never directly mix with aminoglycosides (physical incompatibility)"},
+    {"c": "Hepatic dysfunction and/or biliary obstruction", "r": "IV or IM", "d": "Generally should not exceed 4 g/day; if higher doses used, monitor serum concentrations", "t": "Half-life increased 2-4 fold", "n": "Reduce dose if accumulation evident"},
+    {"c": "Combined hepatic dysfunction and significant renal disease", "r": "IV or IM", "d": "Should not exceed 1-2 g/day without close serum-concentration monitoring", "t": "Schedule dosing after hemodialysis (half-life slightly reduced during dialysis)", "n": "Renal impairment alone needs no adjustment"},
+    {"c": "Reconstitution (IV)", "r": "IV", "d": "Reconstitute with a compatible diluent; recommended IV concentrations 2-50 mg/mL; min 2.8 mL per g for initial reconstitution", "t": "Allow foaming to dissipate and confirm full solubilization before use", "n": "Sterile Water for Injection is not to be used as the IV infusion vehicle; max solubility ~475 mg/mL"},
+    {"c": "Reconstitution (IM)", "r": "IM", "d": "For concentrations >=250 mg/mL use a ~0.5% lidocaine hydrochloride solution (Sterile Water + 2% lidocaine, two-step dilution)", "t": "Reconstitute immediately before injection", "n": "Avoid benzyl-alcohol-containing diluents in neonates"}
+  ],
+  "admin": [
+    "For parenteral (IV or IM) use only after reconstitution with a compatible diluent",
+    "Inquire about prior hypersensitivity to cephalosporins, penicillins, carbapenems, or other beta-lactams before the first dose",
+    "Do not directly mix cefoperazone with aminoglycoside solutions (physical incompatibility); if combined, give sequentially via separate tubing, irrigating the line between doses, and administer cefoperazone first",
+    "Allow reconstituted solution to stand so foaming dissipates and confirm complete dissolution before administering",
+    "For IM concentrations >=250 mg/mL, reconstitute using a lidocaine-containing solution to reduce injection pain",
+    "Do not use benzyl-alcohol-containing diluents in neonates; store powder at or below 25 C protected from light prior to reconstitution",
+    "Monitor prothrombin time and give exogenous vitamin K to at-risk (poor nutrition, malabsorption, alcoholism, prolonged hyperalimentation) and anticoagulated patients"
+  ],
+  "moa": "Cefoperazone, a third-generation cephalosporin, is bactericidal: it interferes with bacterial cell-wall synthesis by binding to penicillin-binding proteins (PBPs), thereby preventing the cross-linking (transpeptidation) of nascent peptidoglycan. This weakens the cell wall and leads to bacterial lysis. The drug is stable against many but not all beta-lactamases.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to cefoperazone or any product component", "Severe hypersensitivity to other beta-lactams (penicillins, carbapenems, cephalosporins)"],
+    "relative": ["History of allergy, particularly to penicillin", "Hepatic dysfunction or biliary obstruction (limit dose)", "Combined hepatic and significant renal disease (limit dose)", "Poor nutritional state, malabsorption (e.g., cystic fibrosis), alcoholism, prolonged hyperalimentation (vitamin K deficiency/bleeding risk)", "History of gastrointestinal disease, especially colitis", "Concurrent anticoagulant therapy or nephrotoxic agents (aminoglycosides)"],
+    "monitor": ["Prothrombin time / INR and signs of bleeding", "Hypersensitivity and skin reactions (SJS/TEN, exfoliative dermatitis)", "Diarrhea / Clostridioides difficile colitis", "Renal function if combined with aminoglycosides or other cephalosporins", "Serum drug concentrations when high doses used in hepatic/renal disease", "Signs of superinfection with nonsusceptible organisms"]
+  },
+  "preg": "Reproduction studies in mice, rats, and monkeys at up to 10 times the human dose revealed no evidence of impaired fertility or fetal harm, but cefoperazone crosses the placental barrier and there are no adequate and well-controlled studies in pregnant women. Because animal studies are not always predictive, use during pregnancy only if clearly needed.",
+  "lact": "Only low concentrations of cefoperazone are excreted in human milk and it passes poorly into breast milk; nevertheless, caution should be exercised when administering it to a nursing woman.",
+  "renal": "Because renal excretion is not the main route of elimination (cefoperazone is excreted mainly in bile; urinary recovery only ~20-30% over 12 hours), patients with renal failure require no dosage adjustment at usual doses. With high doses, monitor serum concentrations and reduce the dose if accumulation occurs. The half-life is only slightly reduced by hemodialysis, so schedule dosing to follow a dialysis session. In combined hepatic dysfunction and significant renal disease, do not exceed 1-2 g/day without close serum-concentration monitoring.",
+  "hepatic": "Cefoperazone is extensively excreted in bile and its serum half-life increases 2-4 fold in patients with hepatic disease and/or biliary obstruction. In such patients the total daily dose generally should not exceed 4 g; if higher doses are used, monitor serum concentrations. Mild transient elevations of liver function enzymes occur in 5-10% of patients. In combined hepatic and significant renal disease, limit to 1-2 g/day with close monitoring.",
+  "interactions": {
+    "major": ["Alcohol (beer, wine) within 72 hours - disulfiram-like reaction (flushing, sweating, headache, tachycardia); caution patients to avoid alcohol", "Anticoagulants (e.g., warfarin/heparin) - additive hypoprothrombinemia and bleeding risk; monitor prothrombin time and supplement vitamin K", "Aminoglycosides - additive/synergistic nephrotoxicity and physical incompatibility (do not mix in solution); also other cephalosporins concurrently"],
+    "moderate": ["Other nephrotoxic agents - increased renal risk", "Drugs suppressing gut flora or reducing vitamin K - additive coagulopathy"],
+    "minor": ["Bacteriostatic antibacterials may antagonize bactericidal beta-lactam activity (in vitro)"],
+    "food": "Parenteral drug; food does not affect absorption.",
+    "alcohol": "Avoid alcoholic beverages during and for at least 72 hours after cefoperazone administration due to a disulfiram-like reaction (NMTT side chain inhibits aldehyde dehydrogenase).",
+    "diagnostics": "May cause a false-positive (Clinitest/copper-reduction) reaction for urine glucose; use enzymatic glucose tests. May cause a positive direct Coombs' test. May transiently raise BUN, serum creatinine, and liver enzymes, and prolong prothrombin time."
+  },
+  "se": {
+    "common": ["Diarrhea or loose stools", "Maculopapular/skin rash and hypersensitivity reactions", "Drug fever", "Eosinophilia", "Transient elevations of liver function enzymes", "Mild decreases in hemoglobin/hematocrit", "Pain or phlebitis at injection site"],
+    "serious": ["Serious and occasionally fatal anaphylactic/hypersensitivity reactions", "Hypoprothrombinemia with serious or fatal hemorrhage", "Clostridioides difficile-associated diarrhea / pseudomembranous colitis (may occur >2 months after therapy)", "Severe skin reactions - Stevens-Johnson syndrome, toxic epidermal necrolysis, exfoliative dermatitis", "Encephalopathy (decreased consciousness, delirium, seizures), mostly in renal impairment", "Thrombocytopenia and coagulopathy"],
+    "rare": ["Reversible neutropenia with prolonged use", "Nonspecific hepatitis (in a patient with prior liver disease)", "Coombs'-positive hemolysis", "Superinfection with nonsusceptible organisms (including fungi)"],
+    "emergency": ["Anaphylaxis", "Severe hemorrhage / bleeding", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Fulminant Clostridioides difficile colitis", "Seizures / encephalopathy"]
+  },
+  "monitoring": [
+    "Prothrombin time / INR and clinical signs of bleeding (baseline and during therapy in at-risk and anticoagulated patients)",
+    "Signs of hypersensitivity or anaphylaxis, especially early in therapy",
+    "Diarrhea evaluation for Clostridioides difficile",
+    "Complete blood count (neutropenia, hemoglobin) with prolonged therapy",
+    "Liver function tests, particularly in hepatic/biliary disease",
+    "Serum drug concentrations when high doses are used in hepatic and/or renal impairment",
+    "Renal function when combined with aminoglycosides or other nephrotoxic agents"
+  ],
+  "counsel": [
+    "This medicine is given by injection or infusion in a healthcare setting",
+    "Tell your team about any prior allergy to penicillins, cephalosporins, carbapenems, or other antibiotics",
+    "Do not drink alcohol (beer, wine, spirits) during treatment and for at least 3 days after the last dose - it can cause flushing, sweating, headache, and a fast heartbeat",
+    "Report any unusual bruising or bleeding, nosebleeds, or blood in stool/urine promptly",
+    "Report severe or watery/bloody diarrhea, which can occur even weeks after treatment finishes",
+    "Stop and seek urgent care for rash, blistering skin, facial/throat swelling, or difficulty breathing",
+    "Complete the full prescribed course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Rapid bactericidal action; high serum and bile levels after a single dose"],
+    ["Peak", "End-of-infusion serum peaks ~153 mcg/mL (1 g IV) to ~506 mcg/mL (4 g IV); IM peak ~65 mcg/mL (1 g) and ~97 mcg/mL (2 g) at ~1-2 h"],
+    ["Half-life", "Approximately 2.0 hours regardless of route; increased 2-4 fold in hepatic disease/biliary obstruction"],
+    ["Duration", "Dose every 12 hours; protein binding 82-93%; excreted mainly unchanged in bile (urinary recovery ~20-30% over 12 h)"],
+    ["Storage", "Store powder at or below 25 C (77 F) protected from light before reconstitution; after reconstitution use within stability limits (about 24 hours at room temperature) and discard unused solution"]
+  ],
+  "pearls": [
+    "Predominantly biliary excretion - no renal dose adjustment for renal impairment alone, but reduce dose (generally <=4 g/day) in hepatic dysfunction or biliary obstruction where half-life rises 2-4 fold",
+    "The N-methylthiotetrazole (NMTT) side chain causes a disulfiram-like reaction with alcohol within 72 hours - counsel patients to avoid alcohol",
+    "The same NMTT side chain causes hypoprothrombinemia and risk of serious/fatal bleeding (suppresses vitamin-K-dependent clotting factors and gut flora) - monitor prothrombin time and give vitamin K, especially in malnourished, malabsorption, alcoholic, or anticoagulated patients",
+    "No activity against Chlamydia trachomatis - add anti-chlamydial cover when treating suspected chlamydial PID",
+    "Never directly mix cefoperazone with aminoglycosides (physical incompatibility); give cefoperazone first via separate, irrigated tubing if combination needed",
+    "In India and much of Asia cefoperazone is most often used as the fixed-dose combination cefoperazone + sulbactam (e.g., Magnex), where sulbactam restores activity against many beta-lactamase-producing organisms; this record reflects the single-agent CEFOBID (cefoperazone) FDA label"
+  ],
+  "missed": "Cefoperazone is administered by a clinician on a fixed schedule (usually every 12 hours), so a delayed dose should be given as soon as recognized and the dosing interval adjusted by the care team; doses are not self-administered and should not be doubled.",
+  "overdose": "Specific overdose data are limited. Because cefoperazone is largely biliary-excreted and highly protein bound, expected effects extend from its adverse-reaction profile and include CNS excitability/encephalopathy and seizures (especially with renal impairment or excessive accumulation). Management is supportive; in renal impairment, hemodialysis or hemofiltration can help clear accumulated drug and has resolved cefoperazone-associated encephalopathy.",
+  "refs": [
+    ["FDA Label - CEFOBID (cefoperazone), openFDA", "https://api.fda.gov/drug/label.json?search=cefoperazone+AND+cephalosporin"],
+    ["DailyMed - Cefoperazone (Cefobid)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cefoperazone"]
+  ]
+}

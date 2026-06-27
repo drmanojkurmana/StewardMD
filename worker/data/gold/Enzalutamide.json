@@ -1,0 +1,102 @@
+{
+  "generic": "Enzalutamide",
+  "cls": "Androgen receptor inhibitor (antiandrogen)",
+  "pharm": "Competitively inhibits androgen binding, nuclear translocation, and DNA interaction of the androgen receptor in prostate cancer.",
+  "tags": ["Rx only", "Androgen receptor inhibitor", "Prostate cancer", "Seizure risk"],
+  "quick": [
+    ["Adult dose", "160 mg orally once daily"],
+    ["Meal", "Take with or without food (food-independent); swallow whole"],
+    ["Pregnancy", "Not for use in females; can cause fetal harm and pregnancy loss"],
+    ["Lactation", "Not indicated in females; not applicable to male patients"],
+    ["Renal", "No adjustment for mild-moderate; severe/ESRD not established"],
+    ["Hepatic", "No adjustment for mild-moderate-severe (Child-Pugh A-C)"],
+    ["Alcohol", "No specific interaction; general caution with CNS effects"],
+    ["Monitoring", "Seizures, falls/fractures, blood pressure, cardiovascular risk, PSA"]
+  ],
+  "summary": "Enzalutamide is an oral androgen receptor inhibitor used to treat castration-resistant prostate cancer, metastatic castration-sensitive prostate cancer, and non-metastatic castration-sensitive prostate cancer with high-risk biochemical recurrence. The dose is 160 mg once daily, taken with or without food. It acts on several steps of androgen receptor signaling. Key safety concerns include seizures, posterior reversible encephalopathy syndrome, falls and fractures, hypersensitivity, and ischemic heart disease; it can cause fetal harm and males should use effective contraception with female partners of reproductive potential.",
+  "indications": [
+    "Castration-resistant prostate cancer (CRPC)",
+    "Metastatic castration-sensitive prostate cancer (mCSPC)",
+    "Non-metastatic castration-sensitive prostate cancer with biochemical recurrence at high risk for metastasis (high-risk BCR)"
+  ],
+  "dosage": [
+    {"c": "Prostate cancer (standard)", "r": "Adult oral", "d": "160 mg once daily until disease progression or unacceptable toxicity", "t": "Once daily", "n": "With or without food; swallow whole"},
+    {"c": "With CRPC or mCSPC", "r": "Adult oral", "d": "160 mg once daily plus concurrent GnRH analog (or prior bilateral orchiectomy)", "t": "Once daily", "n": "Maintain medical or surgical castration"},
+    {"c": "With strong CYP2C8 inhibitor (if unavoidable)", "r": "Adult oral", "d": "Reduce enzalutamide to 80 mg once daily", "t": "Once daily", "n": "Resume prior dose when inhibitor stopped"},
+    {"c": "Toxicity management", "r": "Adult oral", "d": "Withhold dosing 1 week for Grade >=3 toxicity; resume at same or reduced dose (120 or 80 mg)", "t": "Adjusted", "n": "Per label toxicity instructions"}
+  ],
+  "admin": [
+    "Take 160 mg once daily, with or without food",
+    "Swallow capsules or tablets whole with sufficient water; do not chew, dissolve, open, cut, or crush",
+    "Patients with CRPC/mCSPC should continue a GnRH analog or have had orchiectomy",
+    "Permanently discontinue if a seizure or PRES occurs"
+  ],
+  "moa": "Enzalutamide is an androgen receptor inhibitor that acts at multiple steps of the androgen receptor signaling pathway. It competitively inhibits androgen binding to the androgen receptor and inhibits nuclear translocation of the receptor and its interaction with DNA. Its major metabolite, N-desmethyl enzalutamide, has similar in vitro activity. These effects decrease prostate cancer cell proliferation and induce cell death.",
+  "contra": {
+    "absolute": [
+      "No formal contraindications listed (use not established in females)"
+    ],
+    "relative": [
+      "History of seizure or predisposing factors (lowered seizure threshold)",
+      "History of falls or fractures",
+      "Significant ischemic heart disease / cardiovascular risk",
+      "Concurrent strong CYP2C8 inhibitors or strong CYP3A4 inducers"
+    ],
+    "monitor": [
+      "Seizure activity and CNS symptoms (PRES)",
+      "Blood pressure and cardiovascular status",
+      "Fall and fracture risk; bone health"
+    ]
+  },
+  "preg": "Enzalutamide is not indicated in females. Based on animal data and mechanism, it can cause fetal harm and loss of pregnancy. Males with female partners of reproductive potential should use effective contraception during treatment and for 3 months after the last dose.",
+  "lact": "Enzalutamide is not indicated for use in females, so lactation is not applicable; it is a treatment for male prostate cancer.",
+  "renal": "No dosage adjustment is needed for mild to moderate renal impairment. Severe renal impairment and end-stage renal disease have not been studied; use with caution.",
+  "hepatic": "No dosage adjustment is needed for mild, moderate, or severe hepatic impairment (Child-Pugh A, B, or C).",
+  "interactions": {
+    "major": [
+      "Strong CYP2C8 inhibitors such as gemfibrozil (increase enzalutamide exposure; avoid or reduce enzalutamide dose)",
+      "Strong CYP3A4 inducers such as rifampin (decrease enzalutamide exposure; avoid or increase dose)"
+    ],
+    "moderate": [
+      "Sensitive CYP3A4, CYP2C9, or CYP2C19 substrates (enzalutamide is a strong inducer; may reduce their efficacy)",
+      "Warfarin and other CYP2C9 substrates (monitor INR)"
+    ],
+    "minor": ["Digoxin (P-gp substrate; potential for altered exposure)"],
+    "food": "May be taken with or without food (food-independent).",
+    "alcohol": "No specific interaction documented; general caution given CNS adverse effects.",
+    "diagnostics": "Can interfere with certain digoxin immunoassays causing falsely elevated digoxin results."
+  },
+  "se": {
+    "common": ["Fatigue/asthenia", "Back pain", "Hot flush", "Hypertension", "Decreased appetite", "Arthralgia", "Dizziness", "Falls"],
+    "serious": ["Seizure", "Posterior reversible encephalopathy syndrome (PRES)", "Ischemic heart disease", "Fractures", "Severe hypersensitivity reactions"],
+    "rare": ["Severe dysphagia/choking related to product size"],
+    "emergency": ["Seizure", "PRES (headache, confusion, visual disturbance, seizure)", "Acute coronary event", "Anaphylaxis/angioedema"]
+  },
+  "monitoring": ["Seizure activity and neurologic symptoms", "Blood pressure and cardiovascular risk factors", "Fall and fracture risk / bone-targeted therapy", "PSA and disease response", "Liver function and INR if on warfarin"],
+  "counsel": [
+    "Take one dose at the same time each day, with or without food; swallow whole and do not crush or chew",
+    "Tell your doctor right away if you have a seizure, fainting, severe headache, confusion, or vision changes",
+    "It can cause dizziness and falls; take care to avoid falling",
+    "Use effective contraception with female partners during and for 3 months after treatment; this drug can harm an unborn baby",
+    "Report chest pain or shortness of breath; do not stop your hormone (GnRH) therapy unless told to"
+  ],
+  "pk": [
+    ["Onset", "Steady state reached by about day 28 of once-daily dosing"],
+    ["Peak", "Median Tmax ~1 hour after a dose"],
+    ["Half-life", "Approximately 5.8 days (parent)"],
+    ["Duration", "Long; supports once-daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "Food-independent: take with or without food",
+    "Seizure occurred in ~0.6% (up to 2.2% with predisposing factors); discontinue permanently if a seizure occurs",
+    "Strong CYP3A4 inducer and CYP2C8/3A4 substrate; review concomitant medications",
+    "Can falsely elevate certain digoxin immunoassay results"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on the same day; if the whole day is missed, resume the normal schedule the next day and do not take two doses to make up.",
+  "overdose": "There is no antidote. Stop treatment and give general supportive care, accounting for the long half-life (~5.8 days). The risk of seizure may be increased after overdose; monitor accordingly.",
+  "refs": [
+    ["FDA Label - Enzalutamide / XTANDI (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22enzalutamide%22"],
+    ["DailyMed - XTANDI (enzalutamide)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=enzalutamide"]
+  ]
+}

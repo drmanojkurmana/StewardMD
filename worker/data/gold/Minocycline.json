@@ -1,0 +1,111 @@
+{
+  "generic": "Minocycline",
+  "cls": "Tetracycline antibacterial",
+  "pharm": "Long-acting tetracycline that inhibits bacterial protein synthesis by binding the 30S ribosomal subunit; highly lipophilic with good tissue penetration.",
+  "tags": ["Rx only", "Tetracycline", "Acne", "Vestibular effects", "Photosensitizing"],
+  "quick": [
+    ["Adult dose", "200 mg initially, then 100 mg every 12 h"],
+    ["Meal", "May take with food; avoid dairy/antacids at the same time"],
+    ["Pregnancy", "Avoid - fetal tooth and bone effects"],
+    ["Lactation", "Avoid prolonged use; short courses limited data"],
+    ["Renal", "Reduce total dose in significant impairment"],
+    ["Hepatic", "Caution; risk of hepatotoxicity and DRESS"],
+    ["Alcohol", "Limit; avoid additional hepatotoxins"],
+    ["Monitoring", "Vestibular symptoms, skin pigmentation, LFTs, autoimmune signs"]
+  ],
+  "summary": "Minocycline is a long-acting, highly lipophilic tetracycline used for acne, respiratory and genitourinary infections, and various susceptible organisms including some atypicals and resistant staphylococci. It penetrates tissues well, including the CNS. It is more likely than other tetracyclines to cause vestibular side effects (dizziness, vertigo), skin/mucosal hyperpigmentation, and, with prolonged use, autoimmune reactions (drug-induced lupus, autoimmune hepatitis) and DRESS. Like all tetracyclines it is avoided in pregnancy and young children.",
+  "indications": [
+    "Moderate to severe acne (anti-inflammatory adjunct)",
+    "Respiratory tract infections from susceptible organisms",
+    "Sexually transmitted infections including chlamydia, nongonococcal urethritis, and lymphogranuloma venereum",
+    "Rickettsial infections, brucellosis, and other susceptible infections",
+    "Meningococcal carrier state eradication and infections caused by susceptible Staphylococcus, including some MRSA (per labeling/guidelines)"
+  ],
+  "dosage": [
+    {"c": "General infections (adult)", "r": "Oral / IV", "d": "200 mg initially, then 100 mg every 12 h (or 50 mg every 6 h)", "t": "q12h", "n": "Max about 400 mg/day; not to exceed labeled limits"},
+    {"c": "Children >8 yr", "r": "Oral / IV", "d": "4 mg/kg initially, then 2 mg/kg every 12 h", "t": "q12h", "n": "Avoid in children under 8 years"},
+    {"c": "Inflammatory acne (extended-release)", "r": "Oral", "d": "Weight-based about 1 mg/kg once daily (extended-release tablets)", "t": "Once daily", "n": "Lower weight-based dose reduces vestibular side effects"},
+    {"c": "Gonococcal urethritis / chlamydia (per label)", "r": "Oral", "d": "100 mg every 12 h for at least 5-7 days", "t": "q12h", "n": "Follow current STI guidance"}
+  ],
+  "admin": [
+    "May be taken with food to reduce GI and oesophageal irritation",
+    "Take with a full glass of water and remain upright for at least 30 minutes",
+    "Separate from antacids, iron, calcium, magnesium, zinc, and dairy by 2-3 hours (chelation)",
+    "Swallow extended-release tablets whole; do not split, crush, or chew",
+    "Use sun protection because of photosensitivity"
+  ],
+  "moa": "Minocycline reversibly binds the 30S bacterial ribosomal subunit, preventing aminoacyl-tRNA from attaching to the mRNA-ribosome complex and thereby inhibiting bacterial protein synthesis (bacteriostatic). Its high lipophilicity gives excellent tissue and intracellular penetration. It also has non-antibacterial anti-inflammatory and immunomodulatory properties, which contribute to its effect in acne and other inflammatory conditions.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to any tetracycline",
+      "Pregnancy (tooth/bone effects) and children under 8 years except specific serious infections"
+    ],
+    "relative": [
+      "Hepatic impairment",
+      "Renal impairment (limit total dose)",
+      "History of autoimmune disease (lupus risk)",
+      "Concurrent isotretinoin (intracranial hypertension)",
+      "Esophageal stricture/dysmotility"
+    ],
+    "monitor": [
+      "Vestibular symptoms (dizziness, vertigo)",
+      "Skin, mucosal, or scleral hyperpigmentation",
+      "Autoimmune phenomena (lupus-like syndrome, autoimmune hepatitis)",
+      "Signs of DRESS / intracranial hypertension"
+    ]
+  },
+  "preg": "Use during the second and third trimesters can cause permanent discoloration of the child's teeth and may impair fetal bone growth; minocycline is generally avoided in pregnancy unless no alternative exists for a serious infection.",
+  "lact": "Passes into breast milk; absorption by the infant is limited by chelation with milk calcium. Avoid prolonged use; short courses have limited data, so weigh benefit against risk of tooth/bone effects.",
+  "renal": "Reduce the total daily dose and/or extend intervals in significant renal impairment, since high tetracycline levels can cause azotaemia, hyperphosphataemia, and acidosis. Avoid excessive accumulation.",
+  "hepatic": "Use with caution in hepatic impairment and avoid concurrent hepatotoxins. Minocycline can cause hepatotoxicity, autoimmune hepatitis, and is implicated in DRESS; monitor liver function during prolonged therapy.",
+  "interactions": {
+    "major": [
+      "Isotretinoin / retinoids (additive intracranial hypertension risk)",
+      "Penicillins (bacteriostatic agent may antagonise bactericidal action)",
+      "Ergot alkaloids (increased ergotism risk)"
+    ],
+    "moderate": [
+      "Antacids, iron, calcium, magnesium, zinc, bismuth (chelation reduces absorption)",
+      "Warfarin (potentiated anticoagulation; monitor INR)",
+      "Oral contraceptives (rare reports of reduced efficacy)",
+      "Methotrexate (increased toxicity)"
+    ],
+    "minor": ["Penicillin G (theoretical antagonism), antacids alter absorption timing"],
+    "food": "May be taken with food; avoid taking simultaneously with dairy or mineral supplements due to chelation.",
+    "alcohol": "Limit alcohol; avoid additional hepatotoxic exposures given the risk of liver injury.",
+    "diagnostics": "May cause false elevations of urinary catecholamines and can interfere with some laboratory tests."
+  },
+  "se": {
+    "common": ["Dizziness / vertigo (vestibular)", "Nausea / vomiting", "Diarrhea", "Photosensitivity", "Skin/tooth/mucosal hyperpigmentation (with prolonged use)"],
+    "serious": ["DRESS / severe skin reactions (SJS, TEN)", "Autoimmune hepatitis and drug-induced lupus", "Intracranial hypertension (pseudotumor cerebri)", "C. difficile colitis"],
+    "rare": ["Serum sickness-like reaction", "Pancreatitis", "Blood dyscrasias", "Black thyroid / pigment deposition"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe blistering skin reaction or DRESS", "Acute hepatitis with jaundice", "Severe vision changes from intracranial hypertension"]
+  },
+  "monitoring": ["Vestibular symptoms and ability to drive", "Skin/mucosal/tooth pigmentation on long-term use", "Liver function and autoimmune markers with prolonged therapy", "Visual symptoms/headache (intracranial hypertension)", "INR if on warfarin"],
+  "counsel": [
+    "Take with water and stay upright for 30 minutes to protect the food pipe",
+    "Dizziness and spinning sensations are common - avoid driving until you know how it affects you",
+    "Use sunscreen; long-term use can darken skin, gums, or teeth",
+    "Report rash with fever, swollen glands, severe headache, vision changes, or yellowing of skin",
+    "Do not take with milk, antacids, or iron/calcium tablets at the same time"
+  ],
+  "pk": [
+    ["Onset", "Well absorbed orally; effective levels within hours"],
+    ["Peak", "1-4 hours (plasma)"],
+    ["Half-life", "About 15-23 hours"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "Store at 20-25 C; protect from light and moisture"]
+  ],
+  "pearls": [
+    "More vestibular side effects (dizziness/vertigo) than other tetracyclines - warn about driving",
+    "Long-term use causes blue-black pigmentation of skin, mucosa, teeth, and even bone/thyroid",
+    "Can trigger drug-induced lupus, autoimmune hepatitis, and DRESS - monitor on prolonged therapy",
+    "Avoid in pregnancy and in children under 8 years (tooth discoloration, bone effects)"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is nearly time for the next dose, skip it and continue your normal schedule - do not double up. Try to space doses evenly.",
+  "overdose": "Overdose mainly causes nausea, vomiting, and dizziness and is rarely life-threatening. There is no specific antidote; treatment is supportive. Antacids or calcium/magnesium salts can reduce further absorption. Minocycline is not effectively removed by dialysis.",
+  "refs": [
+    ["FDA Label - Minocycline (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22minocycline%22"],
+    ["DailyMed - Minocycline", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=minocycline"]
+  ]
+}

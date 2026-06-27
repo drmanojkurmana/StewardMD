@@ -1,0 +1,93 @@
+{
+  "generic": "Beclometasone (Beclomethasone Dipropionate)",
+  "cls": "Inhaled corticosteroid (ICS)",
+  "pharm": "Anti-inflammatory corticosteroid; asthma maintenance therapy",
+  "tags": ["Rx", "Inhaled (oral inhalation)", "Maintenance, NOT rescue", "Rinse mouth after use", "Asthma prophylaxis", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "40-320 mcg twice daily (oral inhalation)"],
+    ["Meal", "Not applicable; rinse mouth after inhaling"],
+    ["Pregnancy", "Human data do not show increased risk; use lowest effective dose"],
+    ["Lactation", "Likely compatible; monitor infant"],
+    ["Renal", "No specific adjustment"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No interaction"],
+    ["Monitoring", "Asthma control, oral candidiasis, growth in children"]
+  ],
+  "summary": "Beclometasone (beclomethasone dipropionate) is an inhaled corticosteroid for maintenance/prophylactic treatment of asthma in adults and children 4 years and older. It is a potent anti-inflammatory prodrug activated to beclomethasone-17-monopropionate (17-BMP). It is NOT a bronchodilator and is not for acute bronchospasm. Patients should rinse the mouth with water (without swallowing) after each use to reduce oral candidiasis. (Beclometasone is also marketed as nasal sprays and topical/oral formulations; this record reflects the FDA-approved inhalation product.)",
+  "indications": [
+    "Maintenance treatment of asthma as prophylactic therapy in adults and pediatric patients 4 years of age and older"
+  ],
+  "dosage": [
+    {"c": "Asthma — adults & children >=12 years", "r": "Oral inhalation", "d": "40, 80, 160, or 320 mcg twice daily (start per prior therapy/severity)", "t": "Twice daily", "n": "Max 320 mcg twice daily"},
+    {"c": "Asthma — children 4 to 11 years", "r": "Oral inhalation", "d": "40 mcg or 80 mcg twice daily", "t": "Twice daily", "n": "Use lowest effective dose"},
+    {"c": "Transfer from systemic corticosteroids", "r": "Oral inhalation", "d": "Add ICS, then taper systemic steroid slowly", "t": "Per protocol", "n": "Risk of impaired adrenal function during transfer"},
+    {"c": "Not for acute symptoms", "r": "Oral inhalation", "d": "Do not use for relief of acute bronchospasm", "t": "N/A", "n": "Use a short-acting beta-2 agonist for rescue"}
+  ],
+  "admin": [
+    "For oral inhalation only",
+    "Rinse mouth with water (do not swallow) after each inhalation to reduce oral thrush",
+    "Do not use with a spacer or volume-holding chamber (QVAR Redihaler is breath-actuated)",
+    "Shaking the breath-actuated inhaler is not necessary; do not shake with the cap open",
+    "Discard when the dose counter reads 0 or after the expiration date"
+  ],
+  "moa": "Beclomethasone dipropionate is a corticosteroid with potent anti-inflammatory activity. It is a prodrug rapidly hydrolyzed to the active monoester beclomethasone-17-monopropionate (17-BMP), which has high human glucocorticoid-receptor affinity. Corticosteroids inhibit multiple inflammatory cells (mast cells, eosinophils, lymphocytes, macrophages, neutrophils) and the release of mediators (histamine, eicosanoids, leukotrienes, cytokines), contributing to efficacy in asthma. The precise mechanism in asthma is not fully known.",
+  "contra": {
+    "absolute": ["Primary treatment of status asthmaticus or acute asthma episodes requiring intensive measures", "Known hypersensitivity to beclomethasone dipropionate or any ingredient"],
+    "relative": ["Active or quiescent tuberculosis; untreated fungal, bacterial, viral, or parasitic infection; ocular herpes simplex", "Patients susceptible to chickenpox or measles (potential severe course)"],
+    "monitor": ["Oral cavity for candidiasis", "Growth in children", "Bone mineral density with long-term use", "Intraocular pressure / cataract"]
+  },
+  "preg": "No adequate well-controlled studies, but no published data (including large birth registries) relate inhaled corticosteroids to increased congenital malformations or adverse perinatal outcomes. Poorly controlled asthma carries maternal and fetal risk. Use the lowest effective dose to maintain asthma control.",
+  "lact": "Inhaled corticosteroids, including beclomethasone, are generally considered compatible with breastfeeding; systemic exposure is low at therapeutic inhaled doses. Monitor the infant.",
+  "renal": "No specific dosage adjustment for inhaled beclometasone.",
+  "hepatic": "No specific dosage adjustment provided.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Strong CYP3A4 inhibitors (e.g., ritonavir, ketoconazole) may increase systemic corticosteroid exposure — use with caution"],
+    "minor": [],
+    "food": "Not applicable.",
+    "alcohol": "No interaction.",
+    "diagnostics": "Long-term high-dose use may suppress the HPA axis — consider cortisol assessment during stress/transfer from oral steroids."
+  },
+  "se": {
+    "common": ["Oral candidiasis (thrush)", "Upper respiratory tract infection", "Nasopharyngitis", "Allergic rhinitis", "Oropharyngeal pain", "Sinusitis"],
+    "serious": ["Hypercorticism and adrenal suppression (especially during transfer from oral steroids or at high doses)", "Immunosuppression and risk of serious infection (chickenpox, measles, TB reactivation)", "Paradoxical bronchospasm"],
+    "rare": ["Reduced bone mineral density", "Growth suppression in children", "Glaucoma and cataracts", "Hypersensitivity reactions"],
+    "emergency": ["Acute paradoxical bronchospasm after dosing", "Anaphylaxis / angioedema"]
+  },
+  "monitoring": [
+    "Asthma control and lung function",
+    "Oral cavity for candidiasis",
+    "Growth (height) in pediatric patients on long-term therapy",
+    "Signs of adrenal insufficiency, especially during oral-steroid transfer",
+    "Bone mineral density, IOP, and lens with prolonged high-dose use"
+  ],
+  "counsel": [
+    "This is a controller, not a rescue inhaler — it will not relieve a sudden attack; use your reliever (e.g., albuterol) for that",
+    "Rinse your mouth with water and spit out after every use to prevent thrush",
+    "Use it every day even when you feel well, for it to work",
+    "Tell your doctor if your asthma worsens or your reliever is needed more often",
+    "Avoid exposure to chickenpox or measles if not immune; tell your doctor if exposed",
+    "Carry a steroid-warning card if on long-term or high-dose therapy"
+  ],
+  "pk": [
+    ["Onset", "Anti-inflammatory effect builds over days; full benefit in 1-2 weeks"],
+    ["Peak", "Prodrug rapidly converted to active 17-BMP"],
+    ["Half-life", "17-BMP plasma half-life ~2.7 hours"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "Store per product labeling at room temperature; do not puncture or expose to heat/flame"]
+  ],
+  "pearls": [
+    "Prodrug activated to 17-BMP, which has high glucocorticoid-receptor affinity (~13x dexamethasone in vitro)",
+    "Maintenance/prophylactic only — never for acute bronchospasm or status asthmaticus",
+    "Always rinse mouth after inhaling to prevent oral candidiasis and dysphonia",
+    "QVAR Redihaler is breath-actuated and used WITHOUT a spacer",
+    "Taper systemic steroids slowly when transferring to ICS — adrenal-suppression risk",
+    "Use the lowest effective dose, especially in children (growth monitoring)"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered, then continue the regular schedule. Do not double the dose. If close to the next dose, skip the missed one.",
+  "overdose": "Acute overdose of inhaled beclometasone is unlikely to produce clinical problems. Chronic overdosing may cause signs of hypercorticism and HPA-axis suppression. Continue therapy at the recommended dose for asthma control and monitor adrenal function; abrupt cessation of high-dose steroid can precipitate adrenal insufficiency.",
+  "refs": [
+    ["FDA Label — Beclomethasone Dipropionate HFA (QVAR Redihaler, openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22beclomethasone%22"],
+    ["DailyMed — Beclomethasone Dipropionate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=beclomethasone"]
+  ]
+}

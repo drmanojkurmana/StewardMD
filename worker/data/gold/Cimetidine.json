@@ -1,0 +1,96 @@
+{
+  "generic": "Cimetidine",
+  "cls": "Histamine H2-receptor antagonist",
+  "pharm": "Competitive H2-receptor antagonist that reduces gastric acid secretion; notable inhibitor of multiple cytochrome P450 enzymes.",
+  "tags": ["H2 blocker", "Antisecretory", "Acid suppression", "Oral", "CYP inhibitor", "Antiandrogenic"],
+  "quick": [
+    ["Adult dose", "Duodenal ulcer: 800 mg at bedtime (or 300 mg QID); GERD 800 mg BID"],
+    ["Meal", "May take with or without food; avoid simultaneous antacids"],
+    ["Pregnancy", "Crosses placenta; use only if clearly needed"],
+    ["Lactation", "Excreted in breast milk; use with caution"],
+    ["Renal", "Reduce dose in renal impairment (e.g., 300 mg q12h if CrCl <30)"],
+    ["Hepatic", "Use with caution; metabolized hepatically"],
+    ["Alcohol", "May raise blood alcohol levels; avoid excess"],
+    ["Monitoring", "Renal function; mental status in elderly/ill; drug interactions"]
+  ],
+  "summary": "Cimetidine is a histamine H2-receptor antagonist that suppresses gastric acid secretion, used for duodenal and gastric ulcers, GERD, and pathological hypersecretory states. It is clinically distinctive as a potent inhibitor of several cytochrome P450 enzymes, causing many drug interactions, and has weak antiandrogenic effects (gynecomastia). Reversible confusional states can occur in elderly or severely ill patients; renal dose reduction is required.",
+  "indications": [
+    "Short-term treatment of active duodenal ulcer",
+    "Maintenance therapy for duodenal ulcer at reduced dose after healing",
+    "Short-term treatment of active benign gastric ulcer",
+    "Erosive gastroesophageal reflux disease (GERD)",
+    "Pathological hypersecretory conditions (Zollinger-Ellison syndrome, systemic mastocytosis, multiple endocrine adenomas)"
+  ],
+  "dosage": [
+    {"c": "Active duodenal ulcer", "r": "Oral", "d": "800 mg at bedtime", "t": "Once daily at bedtime", "n": "Alternatives 300 mg QID or 400 mg BID; usually 4-8 weeks"},
+    {"c": "Duodenal ulcer maintenance", "r": "Oral", "d": "400 mg at bedtime", "t": "Once daily at bedtime", "n": "Reduced-dose maintenance after healing"},
+    {"c": "Active benign gastric ulcer", "r": "Oral", "d": "800 mg at bedtime or 300 mg QID", "t": "Daily", "n": "Treatment usually up to 8 weeks"},
+    {"c": "Erosive GERD", "r": "Oral", "d": "800 mg BID or 400 mg QID", "t": "12 weeks", "n": "Use beyond 12 weeks not established"},
+    {"c": "Pathological hypersecretory states", "r": "Oral", "d": "300 mg QID with meals and at bedtime", "t": "Titrate to need", "n": "May increase up to 2,400 mg/day"},
+    {"c": "Renal impairment (CrCl <30)", "r": "Oral", "d": "300 mg q12h", "t": "Every 12 hours", "n": "Adjust further per response; reduce dose with severe impairment"}
+  ],
+  "admin": [
+    "Take orally with or without food",
+    "Do not give antacids simultaneously - they reduce cimetidine absorption; separate dosing",
+    "For ulcers a single bedtime dose suppresses nocturnal acid effectively",
+    "Reduce dose in renal impairment"
+  ],
+  "moa": "Competitively and reversibly inhibits histamine at the H2 receptors of gastric parietal cells, reducing basal and stimulated (food, histamine, pentagastrin, caffeine, insulin) gastric acid secretion; it is not an anticholinergic agent.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to cimetidine"],
+    "relative": ["Renal impairment (dose reduce)", "Elderly or severely ill (confusion risk)", "Concomitant narrow-therapeutic-index CYP substrates (warfarin, phenytoin, theophylline)"],
+    "monitor": ["Renal function", "Mental status in elderly/critically ill", "INR/levels of interacting drugs"]
+  },
+  "preg": "Crosses the placenta; no clear evidence of fetal harm but use only if clearly needed (historically pregnancy category B).",
+  "lact": "Excreted in human breast milk and concentrated there; use with caution or consider an alternative.",
+  "renal": "Primarily renally eliminated; reduce dose in renal impairment (e.g., 300 mg every 12 hours for CrCl <30 mL/min) to avoid accumulation and CNS effects.",
+  "hepatic": "Use with caution in hepatic impairment; combined hepatic and renal impairment further reduces clearance.",
+  "interactions": {
+    "major": ["Warfarin - inhibits metabolism, raises INR/bleeding risk", "Phenytoin - increased levels and toxicity", "Theophylline - increased levels and toxicity", "Lidocaine - increased levels"],
+    "moderate": ["Beta-blockers (propranolol), tricyclic antidepressants, benzodiazepines (chlordiazepoxide, diazepam), nifedipine, metronidazole - reduced clearance", "Drugs needing gastric acidity (ketoconazole, atazanavir) - reduced absorption", "Metformin - increased levels"],
+    "minor": ["Carmustine - additive bone marrow suppression"],
+    "food": "May take with or without food; separate from antacids which impair absorption",
+    "alcohol": "May increase blood alcohol concentrations; advise moderation",
+    "diagnostics": "Inhibits multiple CYP450 enzymes (CYP1A2, 2C9, 2D6, 3A4) - review all concomitant medications; may cause false-positive at some assays."
+  },
+  "se": {
+    "common": ["Diarrhea (mild)", "Headache", "Dizziness", "Somnolence", "Rash"],
+    "serious": ["Reversible confusional states (mental confusion, agitation, psychosis, hallucinations) - usually in elderly/severely ill", "Gynecomastia and impotence with prolonged high-dose use", "Bradycardia/arrhythmia (rare, rapid IV)"],
+    "rare": ["Blood dyscrasias (agranulocytosis, thrombocytopenia, neutropenia)", "Hepatitis/cholestasis", "Pancreatitis", "Interstitial nephritis", "Severe hypersensitivity reactions"],
+    "emergency": ["Anaphylaxis", "Severe arrhythmia with rapid IV administration", "Severe bone marrow suppression"]
+  },
+  "monitoring": [
+    "Renal function (for dose adjustment)",
+    "Mental status, especially in elderly and critically ill",
+    "INR when given with warfarin; levels of phenytoin/theophylline",
+    "Complete blood count with prolonged therapy",
+    "Signs of gynecomastia with long-term use"
+  ],
+  "counsel": [
+    "Take as directed; a bedtime dose is often used for ulcers",
+    "Do not take antacids at the same time - separate by a couple of hours",
+    "Tell your doctor about all other medicines - cimetidine can change how many drugs work",
+    "Report confusion, unusual bruising/bleeding, or breast tenderness",
+    "Limit alcohol; report black stools or persistent stomach pain"
+  ],
+  "pk": [
+    ["Onset", "Within 1 hour (acid suppression)"],
+    ["Peak", "Plasma ~1-1.5 hours"],
+    ["Half-life", "~2 hours (prolonged in renal impairment)"],
+    ["Duration", "Nocturnal acid suppression ~6-8 hours per dose"],
+    ["Storage", "Room temperature 20-25 C; protect from light"]
+  ],
+  "pearls": [
+    "Potent inhibitor of several CYP450 enzymes - a frequent cause of drug interactions (warfarin, phenytoin, theophylline)",
+    "Weak antiandrogen - can cause gynecomastia and impotence with long-term high doses",
+    "Reversible confusion typically in elderly or critically ill; resolves on stopping",
+    "Less potent and shorter-acting than later H2 blockers; largely superseded by famotidine and PPIs",
+    "Separate antacids by a couple of hours to preserve absorption"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip it and resume the regular schedule. Do not double up.",
+  "overdose": "Acute ingestions up to 20 g usually cause only transient effects; larger ingestions (20-40 g) can cause severe CNS effects including unresponsiveness, plus respiratory failure and tachycardia. Treat with gastric decontamination, supportive care, assisted respiration, and a beta-blocker for tachycardia as needed.",
+  "refs": [
+    ["FDA Cimetidine Tablets Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cimetidine%22"],
+    ["DailyMed - Cimetidine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cimetidine"]
+  ]
+}

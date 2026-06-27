@@ -1,0 +1,143 @@
+{
+  "generic": "Vincristine",
+  "cls": "Antineoplastic - vinca alkaloid (mitotic spindle inhibitor)",
+  "pharm": "Vinca alkaloid that binds tubulin and arrests dividing cells in metaphase; FATAL if given by any route other than intravenous - it is for IV use only.",
+  "tags": [
+    "Rx only",
+    "Boxed warning",
+    "FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY OTHER ROUTES",
+    "Vesicant / neurotoxic"
+  ],
+  "quick": [
+    ["Adult dose", "1.4 mg/m2 IV once weekly (institutional cap commonly applied)"],
+    ["Meal", "IV chemotherapy; not related to meals"],
+    ["Pregnancy", "Can cause fetal harm; avoid, especially first trimester"],
+    ["Lactation", "Discontinue nursing during therapy"],
+    ["Renal", "No specific adjustment established; monitor"],
+    ["Hepatic", "Reduce dose 50% if direct bilirubin >3 mg/dL"],
+    ["Alcohol", "No specific interaction; avoid hepatotoxic burden"],
+    ["Monitoring", "Neurologic exam, CBC, bilirubin, constipation/ileus; ALWAYS confirm IV route"]
+  ],
+  "summary": "Vincristine is a vinca alkaloid antineoplastic used in acute leukemia and, in combination regimens, for Hodgkin and non-Hodgkin lymphomas, rhabdomyosarcoma, neuroblastoma, and Wilms tumor. The usual adult dose is 1.4 mg/m2 IV once weekly. It carries a BOXED WARNING: it is FOR INTRAVENOUS USE ONLY and is FATAL if given by any other route - intrathecal administration almost always causes ascending paralysis and death. To reduce fatal route errors it must be diluted in a flexible plastic container (mini-bag) and labeled FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY OTHER ROUTES. Dose-related peripheral neurotoxicity is the major dose-limiting toxicity, and it is a potent vesicant.",
+  "indications": [
+    "Acute leukemia",
+    "Hodgkin disease (in combination with other oncolytic agents)",
+    "Non-Hodgkin malignant lymphomas (in combination)",
+    "Rhabdomyosarcoma (in combination)",
+    "Neuroblastoma (in combination)",
+    "Wilms tumor (in combination)"
+  ],
+  "dosage": [
+    {"c": "Adults", "r": "Adult IV", "d": "1.4 mg/m2 intravenously at weekly intervals", "t": "Once weekly", "n": "Extreme care in calculating dose; overdose can be fatal"},
+    {"c": "Pediatric (>10 kg)", "r": "Pediatric IV", "d": "1.5-2 mg/m2 intravenously once weekly", "t": "Once weekly", "n": "For intravenous use only"},
+    {"c": "Pediatric (<=10 kg)", "r": "Pediatric IV", "d": "Starting dose 0.05 mg/kg intravenously once weekly", "t": "Once weekly", "n": "Weight-based dosing for small children"},
+    {"c": "Hepatic impairment", "r": "Adult/pediatric IV", "d": "Reduce dose by 50% if direct serum bilirubin >3 mg/100 mL", "t": "Once weekly", "n": "Hepatic excretion is the major elimination route"}
+  ],
+  "admin": [
+    "FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY ANY OTHER ROUTE; NEVER administer intrathecally",
+    "Dilute in a flexible plastic container (mini-bag) and prominently label FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY OTHER ROUTES to prevent fatal route errors",
+    "Verify the IV needle/catheter is correctly placed before injecting; vincristine is a vesicant",
+    "If extravasation occurs, stop immediately, give remaining dose in another vein, inject hyaluronidase, and apply moderate heat",
+    "Administer by individuals experienced in cytotoxic administration; calculate the dose with extreme care"
+  ],
+  "moa": "Vincristine is a vinca alkaloid that binds to tubulin dimers and inhibits microtubule formation in the mitotic spindle apparatus. This causes metaphase arrest of dividing cells, blocking cell division and leading to cell death. Its action on microtubules in neurons also underlies its dose-limiting peripheral neurotoxicity.",
+  "contra": {
+    "absolute": [
+      "Patients with the demyelinating form of Charcot-Marie-Tooth syndrome",
+      "Intrathecal or any non-intravenous administration (fatal)"
+    ],
+    "relative": [
+      "Pre-existing neuromuscular disease or significant peripheral neuropathy",
+      "Hepatic impairment (dose reduction required for high direct bilirubin)",
+      "Concurrent neurotoxic drugs"
+    ],
+    "monitor": [
+      "Neurologic status (sensory/motor neuropathy, deep tendon reflexes)",
+      "Complete blood count",
+      "Serum bilirubin/hepatic function",
+      "Bowel function (constipation/ileus); ALWAYS confirm IV-only route"
+    ]
+  },
+  "preg": "Vincristine can cause fetal harm when administered to a pregnant woman, particularly during the first trimester; it should be avoided in pregnancy and women of childbearing potential should avoid becoming pregnant during therapy.",
+  "lact": "It is not known whether vincristine is excreted in human milk; because of the potential for serious adverse reactions in the breastfed infant, nursing should be discontinued during therapy.",
+  "renal": "No specific renal dose adjustment is established; vincristine is primarily eliminated hepatically. Monitor for toxicity in renal impairment.",
+  "hepatic": "A 50% dose reduction is recommended for patients with a direct serum bilirubin value above 3 mg/100 mL, since vincristine is excreted mainly via the liver and biliary system.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inhibitors (azole antifungals such as itraconazole, ketoconazole; ritonavir) - increase vincristine and severe neurotoxicity",
+      "Other neurotoxic drugs - additive peripheral neuropathy",
+      "Mitomycin C - acute pulmonary reactions/bronchospasm reported"
+    ],
+    "moderate": [
+      "CYP3A4 inducers (rifampin, phenytoin, carbamazepine) - may reduce vincristine efficacy",
+      "L-asparaginase - give vincristine 12-24 hours before asparaginase to limit toxicity",
+      "Digoxin - vincristine-containing regimens may reduce digoxin levels"
+    ],
+    "minor": [
+      "Phenytoin - vincristine may reduce phenytoin levels and increase seizure risk"
+    ],
+    "food": "Not applicable (intravenous administration).",
+    "alcohol": "No specific interaction; avoid additional hepatic burden.",
+    "diagnostics": "May cause SIADH with hyponatremia; monitor serum sodium and uric acid (tumor lysis)."
+  },
+  "se": {
+    "common": [
+      "Peripheral neuropathy (sensory loss, paresthesias, loss of deep tendon reflexes)",
+      "Constipation (autonomic neuropathy)",
+      "Alopecia",
+      "Jaw pain / myalgias"
+    ],
+    "serious": [
+      "Severe motor neuropathy, foot drop, ataxia",
+      "Paralytic ileus / severe constipation with abdominal pain",
+      "Syndrome of inappropriate ADH secretion (SIADH) with hyponatremia and seizures",
+      "Severe vesicant extravasation injury",
+      "Bronchospasm/acute dyspnea (especially with mitomycin C)"
+    ],
+    "rare": [
+      "Optic atrophy, cranial nerve palsies",
+      "Seizures",
+      "Cardiovascular effects (hypertension/hypotension)"
+    ],
+    "emergency": [
+      "Inadvertent intrathecal administration - ascending paralysis and death (medical emergency)",
+      "Paralytic ileus / bowel obstruction",
+      "Severe extravasation",
+      "Seizures or coma from SIADH"
+    ]
+  },
+  "monitoring": [
+    "Detailed neurologic examination before each dose (sensory and motor function, deep tendon reflexes)",
+    "Complete blood count",
+    "Serum bilirubin and hepatic function for dose adjustment",
+    "Bowel function - prophylactic bowel regimen for constipation/ileus",
+    "Serum sodium (SIADH); ALWAYS reconfirm the intravenous-only route before administration"
+  ],
+  "counsel": [
+    "This medicine is given only into a vein - it is given by your chemotherapy team and is never injected into the spine",
+    "Report numbness, tingling, weakness, difficulty walking, or trouble buttoning clothes - signs of nerve damage",
+    "Constipation is common and serious; use the prescribed laxative/bowel regimen and report belly pain or no bowel movements",
+    "Tell your team about burning or swelling at the IV site during the infusion (extravasation)",
+    "Avoid pregnancy during treatment and tell your team about all other medicines, especially antifungals"
+  ],
+  "pk": [
+    ["Onset", "Acts during cell division; antitumor effect over days to weeks"],
+    ["Peak", "Rapid tissue distribution after IV injection"],
+    ["Half-life", "Long terminal half-life, approximately 19-155 hours (triphasic)"],
+    ["Duration", "Dosed weekly; tissue binding prolongs exposure"],
+    ["Storage", "Refrigerate at 2-8 C (36-46 F); protect from light; do not freeze"]
+  ],
+  "pearls": [
+    "BOXED WARNING: FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY ANY OTHER ROUTE; intrathecal vincristine almost always causes ascending paralysis and death",
+    "Dispense diluted in a mini-bag (flexible plastic container) labeled FOR INTRAVENOUS USE ONLY - FATAL IF GIVEN BY OTHER ROUTES to prevent fatal syringe mix-ups with intrathecal drugs",
+    "Dose-limiting toxicity is peripheral neuropathy - examine reflexes and motor/sensory function before each dose",
+    "Reduce dose 50% if direct bilirubin >3 mg/dL (hepatic excretion); minimal myelosuppression compared with vinblastine",
+    "Potent vesicant - manage extravasation with hyaluronidase and warm compress; start a bowel regimen to prevent ileus"
+  ],
+  "missed": "Vincristine is administered by a chemotherapy team on a defined weekly schedule, not self-administered; a missed or delayed dose should be rescheduled by the oncology team rather than doubled.",
+  "overdose": "Overdose causes exaggerated, potentially fatal toxicity; supportive measures include preventing SIADH (fluid restriction, possibly diuretics), anticonvulsants for seizures, a bowel regimen for ileus, and cardiovascular and hematologic monitoring. Folinic acid (leucovorin) has been used. INADVERTENT INTRATHECAL administration is a medical emergency: immediately remove and drain CSF, perform CSF irrigation/exchange with Ringer lactate (with fresh frozen plasma), administer IV folinic acid and glutamic acid, and obtain neurosurgical consultation - despite this, the outcome is usually fatal.",
+  "refs": [
+    ["FDA Label - Vincristine Sulfate Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vincristine%22"],
+    ["DailyMed - Vincristine Sulfate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=vincristine"]
+  ]
+}

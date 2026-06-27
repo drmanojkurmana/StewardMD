@@ -1,0 +1,101 @@
+{
+  "generic": "Dalteparin",
+  "cls": "Low molecular weight heparin (LMWH)",
+  "pharm": "Anticoagulant / antithrombotic",
+  "tags": ["LMWH", "anticoagulant", "VTE", "DVT prophylaxis", "cancer-associated thrombosis", "anti-Xa"],
+  "quick": [
+    ["Adult dose", "2,500-5,000 units SC daily (prophylaxis); 120 units/kg or 200 units/kg SC for treatment indications"],
+    ["Meal", "Not relevant; subcutaneous injection"],
+    ["Pregnancy", "Use only if clearly needed; LMWHs preferred over warfarin"],
+    ["Lactation", "Minimal milk transfer; generally compatible (avoid multidose vials with benzyl alcohol)"],
+    ["Renal", "Severe impairment (CrCl <30): monitor anti-Xa, reduce dose for cancer VTE"],
+    ["Hepatic", "Caution; transient transaminase elevation possible"],
+    ["Alcohol", "No direct interaction; heavy use raises bleeding/fall risk"],
+    ["Monitoring", "Platelets, CBC, anti-Xa in select patients, signs of bleeding"]
+  ],
+  "summary": "Dalteparin (Fragmin) is a low molecular weight heparin that potentiates antithrombin-mediated inhibition of Factor Xa with relatively little effect on aPTT. It is used for DVT prophylaxis, prophylaxis of ischemic complications in unstable angina/non-Q-wave MI, and extended treatment of cancer-associated VTE. A boxed warning addresses spinal/epidural hematoma risk with neuraxial anesthesia or spinal puncture.",
+  "indications": [
+    "Prophylaxis of ischemic complications in unstable angina and non-Q-wave MI (with aspirin)",
+    "Prophylaxis of deep vein thrombosis (DVT) in abdominal surgery patients at risk",
+    "Prophylaxis of DVT in hip replacement surgery",
+    "Prophylaxis of DVT in medical patients with severely restricted mobility during acute illness",
+    "Extended treatment of symptomatic VTE to reduce recurrence in adult cancer patients (6 months)",
+    "Treatment of symptomatic VTE to reduce recurrence in pediatric patients from birth (gestational age >=35 weeks)"
+  ],
+  "dosage": [
+    {"c": "Unstable angina / non-Q-wave MI", "r": "Treatment (with aspirin)", "d": "120 units/kg SC every 12 hours (max 10,000 units/dose)", "t": "Every 12 h", "n": "Continue until clinically stable, usually 5-8 days"},
+    {"c": "DVT prophylaxis - abdominal surgery", "r": "Prophylaxis", "d": "2,500 units SC once daily (or 5,000 units daily in high-risk); start 1-2 h pre-op", "t": "Once daily", "n": "Continue 5-10 days post-op"},
+    {"c": "DVT prophylaxis - hip replacement", "r": "Prophylaxis", "d": "2,500 units SC 4-8 h post-op (or 2 h pre-op), then 5,000 units SC once daily", "t": "Once daily", "n": "Continue up to 5-10 days; up to 14 days studied"},
+    {"c": "DVT prophylaxis - acutely ill medical patient", "r": "Prophylaxis", "d": "5,000 units SC once daily", "t": "Once daily", "n": "Typically 12-14 days"},
+    {"c": "Cancer-associated VTE (adult)", "r": "Extended treatment", "d": "Month 1: 200 units/kg SC once daily (max 18,000 units); Months 2-6: ~150 units/kg SC once daily", "t": "Once daily", "n": "Reduce dose for thrombocytopenia or renal impairment per label tables"},
+    {"c": "VTE treatment (pediatric)", "r": "Weight/age based", "d": "Birth-<2 yr: 150 units/kg BID; 2-<8 yr: 125 units/kg BID; 8-<17 yr: 100 units/kg BID", "t": "Twice daily", "n": "Adjust to target anti-Xa 0.5-1.0 units/mL"}
+  ],
+  "admin": [
+    "Administer by deep subcutaneous injection; do NOT give intramuscularly",
+    "Inject into a U-shaped area around the navel, the outer thigh, or the lumbar region; rotate sites",
+    "Do not expel the air bubble from prefilled syringes before injection",
+    "Do not rub the injection site after administration",
+    "Weight-based dosing for treatment indications; round to available syringe strengths",
+    "Use single-dose preservative-free presentations in neonates and infants (multidose vials contain benzyl alcohol)"
+  ],
+  "moa": "Dalteparin is a low molecular weight heparin that binds antithrombin via a pentasaccharide sequence, accelerating the inactivation of coagulation Factor Xa and, to a lesser degree, thrombin (Factor IIa). Its predominant anti-Xa activity produces antithrombotic effect with minimal prolongation of aPTT, giving a more predictable dose response than unfractionated heparin.",
+  "contra": {
+    "absolute": ["Active major bleeding", "History of heparin-induced thrombocytopenia (HIT) or HIT with thrombosis", "Hypersensitivity to dalteparin sodium", "Hypersensitivity to heparin or pork products", "Use in patients undergoing epidural/neuraxial anesthesia when treating unstable angina/non-Q-wave MI or for prolonged VTE prophylaxis"],
+    "relative": ["Severe renal impairment (CrCl <30 mL/min)", "Recent neuraxial/spinal procedure or indwelling epidural catheter", "Conditions with increased bleeding risk (active ulcer, recent CNS surgery, uncontrolled hypertension, bacterial endocarditis)", "Thrombocytopenia"],
+    "monitor": ["Concomitant agents affecting hemostasis (NSAIDs, antiplatelets, anticoagulants, thrombolytics)", "Renal impairment", "Pregnancy (anti-Xa monitoring may be needed)", "Low or high body weight"]
+  },
+  "preg": "Available human data have not shown a clear association with adverse developmental outcomes. Use during pregnancy only if clearly needed; LMWHs do not cross the placenta and are generally preferred over warfarin. Avoid multidose vials containing benzyl alcohol near term. Anti-Xa monitoring may be required as dosing requirements change.",
+  "lact": "Small amounts of dalteparin are excreted in breast milk and oral bioavailability in the infant is negligible. Generally considered compatible with breastfeeding. Avoid multidose formulations containing benzyl alcohol when nursing neonates/infants.",
+  "renal": "Anti-Xa accumulates in severe renal impairment. In cancer patients with CrCl <30 mL/min, monitor anti-Xa and adjust to a target ~1 unit/mL. Use with caution and consider monitoring in any patient with significant renal impairment.",
+  "hepatic": "No specific dose adjustment defined. Transient, asymptomatic elevations of transaminases (AST/ALT) occur. Use caution in severe hepatic impairment with associated coagulopathy and increased bleeding risk.",
+  "interactions": {
+    "major": ["Other anticoagulants (warfarin, DOACs, unfractionated heparin) - additive bleeding risk", "Thrombolytic agents - markedly increased hemorrhage risk", "Neuraxial anesthesia/spinal puncture - risk of spinal/epidural hematoma (boxed warning)"],
+    "moderate": ["Antiplatelet agents (aspirin, clopidogrel, ticagrelor, GP IIb/IIIa inhibitors) - increased bleeding", "NSAIDs - increased bleeding and hematoma risk", "SSRIs/SNRIs - increased bleeding tendency"],
+    "minor": ["Drugs that raise serum potassium - additive hyperkalemia risk via heparin-induced aldosterone suppression"],
+    "food": "No significant food interactions (parenteral).",
+    "alcohol": "No direct interaction; heavy use increases fall and bleeding risk.",
+    "diagnostics": "Measured by anti-Xa assay, not aPTT/INR; may cause transient transaminase elevation and may suppress aldosterone (potassium)."
+  },
+  "se": {
+    "common": ["Bleeding/hemorrhage (varies by indication and dose)", "Hematoma at injection site", "Pain at injection site", "Transient elevation of transaminases", "Mild (Type I) thrombocytopenia"],
+    "serious": ["Major hemorrhage (GI, intracranial, retroperitoneal)", "Heparin-induced thrombocytopenia (Type II, immune-mediated) with thrombosis", "Spinal or epidural hematoma with neuraxial anesthesia"],
+    "rare": ["Skin necrosis", "Hypersensitivity / anaphylactoid reaction", "Hyperkalemia (aldosterone suppression)", "Osteoporosis with prolonged use", "Priapism"],
+    "emergency": ["Spinal/epidural hematoma (back pain, leg weakness, bowel/bladder dysfunction) - urgent evaluation", "Severe or life-threatening hemorrhage", "Anaphylaxis", "HIT with new thrombosis"]
+  },
+  "monitoring": [
+    "Platelet count before therapy, then periodically; investigate any drop >50% or new thrombosis (HIT)",
+    "CBC and stool occult blood periodically; watch for signs of bleeding",
+    "Anti-Xa activity in patients with severe renal impairment, obesity, low body weight, pregnancy, or pediatrics (peak 4-6 h post-dose)",
+    "Serum creatinine/renal function, especially with prolonged or treatment-dose therapy",
+    "Serum potassium in patients at risk for hyperkalemia",
+    "Neurologic status after neuraxial procedures (signs of spinal/epidural hematoma)"
+  ],
+  "counsel": [
+    "Inject deep under the skin exactly as taught; do not inject into muscle",
+    "Rotate injection sites and do not rub the area afterward",
+    "Report unusual bruising, bleeding that will not stop, black/tarry stools, pink/brown urine, or coughing up blood",
+    "Seek urgent care for back pain, numbness/weakness in the legs, or loss of bladder/bowel control after spinal/epidural procedures",
+    "Tell all providers and dentists you are on a blood thinner before procedures",
+    "Avoid NSAIDs and other blood thinners unless directed; limit alcohol"
+  ],
+  "pk": [
+    ["Onset", "Anticoagulant (anti-Xa) effect within 1-2 h of SC dose"],
+    ["Peak", "Peak anti-Xa activity ~4 hours after subcutaneous injection"],
+    ["Half-life", "Anti-Xa half-life ~3-5 hours (prolonged in renal impairment)"],
+    ["Duration", "Anti-Xa activity persists ~12-24 hours depending on dose"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C permitted; do not freeze"]
+  ],
+  "pearls": [
+    "Boxed warning: spinal/epidural hematoma risk with neuraxial anesthesia or spinal puncture; risk increases with indwelling epidural catheters, concomitant antithrombotics, and traumatic/repeated punctures - can cause permanent paralysis",
+    "Monitored by anti-Xa assay, NOT aPTT or INR; routine monitoring is unnecessary in most patients",
+    "Preferred LMWH for extended treatment of cancer-associated VTE (CLOT trial)",
+    "Protamine sulfate only partially reverses dalteparin (max ~60-75% neutralization of anti-Xa)",
+    "Multidose vials contain benzyl alcohol - avoid in neonates and premature infants"
+  ],
+  "missed": "If a once-daily dose is missed, give it as soon as remembered the same day; if it is nearly time for the next dose, skip the missed dose and resume the schedule. Do not double doses. For twice-daily regimens, contact the prescriber if unsure.",
+  "overdose": "Excessive dosing can cause hemorrhagic complications. Reverse with slow IV protamine sulfate 1 mg per 100 anti-Xa units of dalteparin; a second dose of 0.5 mg per 100 units may be given if aPTT remains prolonged 2-4 h later. Anti-Xa activity is never fully neutralized (max ~60-75%). Protamine can cause severe hypotension and anaphylactoid reactions - give only where resuscitation is available.",
+  "refs": [
+    ["FDA Fragmin (dalteparin sodium) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dalteparin+sodium%22"],
+    ["FDA DailyMed - Dalteparin Sodium", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

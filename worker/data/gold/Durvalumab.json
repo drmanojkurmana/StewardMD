@@ -1,0 +1,150 @@
+{
+  "generic": "Durvalumab",
+  "cls": "Antineoplastic - immune checkpoint inhibitor (PD-L1 blocking monoclonal antibody)",
+  "pharm": "Human IgG1 kappa monoclonal antibody that binds programmed death-ligand 1 (PD-L1), blocking its interaction with PD-1 and CD80, thereby releasing inhibition of the antitumor immune response.",
+  "tags": [
+    "Rx only",
+    "Immune checkpoint inhibitor",
+    "PD-L1 inhibitor",
+    "Immune-mediated adverse reactions",
+    "IV infusion"
+  ],
+  "quick": [
+    ["Adult dose", "1500 mg IV every 3 or 4 weeks for patients >=30 kg (20 mg/kg for <30 kg); schedule varies by indication"],
+    ["Meal", "Given as IV infusion over 60 minutes; not related to meals"],
+    ["Pregnancy", "Can cause fetal harm - avoid; use effective contraception during and 3 months after"],
+    ["Lactation", "Avoid breastfeeding during treatment and for 3 months after the last dose"],
+    ["Renal", "No dose adjustment for mild-moderate impairment; not studied in severe impairment"],
+    ["Hepatic", "No adjustment for mild impairment; not studied in moderate/severe; monitor for immune hepatitis"],
+    ["Alcohol", "No direct interaction; limit if hepatitis or liver dysfunction develops"],
+    ["Monitoring", "Immune-mediated reactions (pneumonitis, colitis, hepatitis, endocrinopathies), LFTs, TSH, glucose, infusion reactions"]
+  ],
+  "summary": "Durvalumab is a PD-L1-blocking human monoclonal antibody (immune checkpoint inhibitor) used across many cancers, including unresectable Stage III non-small cell lung cancer (NSCLC), resectable and metastatic NSCLC, limited- and extensive-stage small cell lung cancer (SCLC), biliary tract cancer, hepatocellular carcinoma, endometrial cancer, and urothelial (bladder) cancer, typically in combination regimens or as consolidation/adjuvant therapy. The usual dose for patients weighing at least 30 kg is 1500 mg IV every 3-4 weeks (20 mg/kg if under 30 kg), with the exact schedule depending on the indication and combination. By blocking PD-L1 it removes a key brake on T cells, restoring antitumor immunity - but this same mechanism causes IMMUNE-MEDIATED ADVERSE REACTIONS that can be severe or fatal and affect any organ (pneumonitis, colitis, hepatitis, endocrinopathies, nephritis, dermatologic and others). It also causes infusion-related reactions and embryo-fetal harm, and can cause severe complications with allogeneic stem cell transplant. Management of immune toxicities centers on withholding the drug and giving corticosteroids.",
+  "indications": [
+    "Unresectable Stage III non-small cell lung cancer (NSCLC) without progression after concurrent chemoradiation",
+    "Resectable NSCLC (neoadjuvant with chemotherapy and adjuvant as a single agent)",
+    "Metastatic NSCLC (in combination regimens)",
+    "Extensive-stage small cell lung cancer (with etoposide and carboplatin/cisplatin)",
+    "Limited-stage small cell lung cancer after concurrent platinum-based chemoradiation",
+    "Biliary tract cancer (with gemcitabine and cisplatin)",
+    "Unresectable or metastatic hepatocellular carcinoma (with tremelimumab)",
+    "Primary advanced or recurrent endometrial carcinoma (with carboplatin and paclitaxel, then maintenance)",
+    "Muscle-invasive and certain urothelial/bladder cancer regimens per labeling"
+  ],
+  "dosage": [
+    {"c": "Patients weighing 30 kg or more", "r": "Adult IV", "d": "1500 mg IV every 3 weeks or every 4 weeks depending on indication/regimen", "t": "Every 3-4 weeks", "n": "Infuse over 60 minutes"},
+    {"c": "Patients weighing less than 30 kg", "r": "Weight-based IV", "d": "20 mg/kg IV every 3 weeks or every 4 weeks (matching the regimen)", "t": "Every 3-4 weeks", "n": "Switch to flat 1500 mg dose once >=30 kg"},
+    {"c": "Combination/sequential regimens", "r": "Adult IV", "d": "Follow indication-specific schedule (e.g., with platinum chemotherapy, with tremelimumab for HCC, neoadjuvant then adjuvant for resectable NSCLC); doses and frequency per approved regimen", "t": "Per regimen", "n": "See full prescribing information for each indication"},
+    {"c": "Immune-mediated toxicity management", "r": "Dose modification", "d": "Withhold or permanently discontinue based on severity; treat with corticosteroids (e.g., 1-2 mg/kg/day prednisone equivalent) and taper", "t": "As needed", "n": "No dose reduction recommended; modify by withholding/discontinuing"}
+  ],
+  "admin": [
+    "Administer as an intravenous infusion over 60 minutes after dilution; do not give as IV push or bolus",
+    "Use a sterile, low-protein-binding 0.2 or 0.22 micron in-line filter",
+    "Do not co-administer other drugs through the same infusion line",
+    "Evaluate baseline and periodic thyroid, liver and renal function and glucose; assess for symptoms of immune-mediated reactions before each dose",
+    "Have measures for infusion-related reactions available; interrupt, slow, or discontinue based on severity"
+  ],
+  "moa": "Durvalumab is a human IgG1 kappa monoclonal antibody that binds to programmed death-ligand 1 (PD-L1) and blocks its interaction with the PD-1 and CD80 (B7.1) receptors. PD-L1 expressed on tumor cells and tumor-associated immune cells engages PD-1 on T cells to deliver an inhibitory signal that suppresses T-cell activation and cytotoxic function. By blocking PD-L1, durvalumab removes this inhibition, restoring antitumor T-cell immune responses without inducing antibody-dependent cell-mediated cytotoxicity. The same release of immune checkpoint control underlies its immune-mediated adverse reactions.",
+  "contra": {
+    "absolute": [
+      "None listed in the FDA labeling"
+    ],
+    "relative": [
+      "Active, serious immune-mediated reactions on prior checkpoint inhibitor therapy",
+      "Active or recent allogeneic hematopoietic stem cell transplant (risk of severe transplant-related complications)",
+      "Pregnancy (embryo-fetal toxicity)",
+      "Pre-existing autoimmune disease or organ dysfunction (pneumonitis, colitis, hepatitis, endocrinopathy) - use with caution"
+    ],
+    "monitor": [
+      "Immune-mediated pneumonitis, colitis, hepatitis, nephritis, dermatologic and other organ toxicity",
+      "Endocrinopathies: thyroid dysfunction, adrenal insufficiency, hypophysitis, type 1 diabetes",
+      "Infusion-related reactions",
+      "Liver, renal and thyroid function tests and blood glucose"
+    ]
+  },
+  "preg": "Based on its mechanism (PD-L1 blockade is important to maintaining maternal-fetal immune tolerance) and animal data, durvalumab can cause fetal harm, including increased premature delivery, fetal loss and premature neonatal death. Verify pregnancy status before starting; advise females of reproductive potential to use effective contraception during treatment and for 3 months after the last dose.",
+  "lact": "There are no data on the presence of durvalumab in human milk or its effects on the breastfed child. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 3 months after the last dose.",
+  "renal": "No dose adjustment is recommended for mild or moderate renal impairment. Durvalumab has not been studied in severe renal impairment.",
+  "hepatic": "No dose adjustment is recommended for mild hepatic impairment. It has not been adequately studied in moderate or severe hepatic impairment. Monitor liver function for immune-mediated hepatitis and manage with corticosteroids and dose interruption/discontinuation as needed.",
+  "interactions": {
+    "major": [
+      "Live vaccines - avoid during therapy due to immunosuppression/immune activation concerns"
+    ],
+    "moderate": [
+      "Systemic corticosteroids or other immunosuppressants at baseline - may blunt efficacy; however corticosteroids are used to treat immune toxicities",
+      "Other immune checkpoint inhibitors (e.g., tremelimumab) - additive immune-mediated toxicity (used intentionally in some regimens with closer monitoring)"
+    ],
+    "minor": [
+      "No clinically significant cytochrome P450-mediated small-molecule interactions established (monoclonal antibody)"
+    ],
+    "food": "Not applicable - intravenous infusion.",
+    "alcohol": "No direct interaction; advise moderation and avoid if immune-mediated hepatitis or liver dysfunction develops.",
+    "diagnostics": "Monitor liver enzymes/bilirubin, serum creatinine, TSH and free T4, ACTH/cortisol when indicated, and blood glucose; obtain imaging for suspected pneumonitis."
+  },
+  "se": {
+    "common": [
+      "Fatigue",
+      "Musculoskeletal pain",
+      "Cough",
+      "Decreased appetite, nausea",
+      "Rash and pruritus",
+      "Upper respiratory infection"
+    ],
+    "serious": [
+      "Immune-mediated pneumonitis (can be fatal)",
+      "Immune-mediated colitis/diarrhea",
+      "Immune-mediated hepatitis",
+      "Endocrinopathies: hypo-/hyperthyroidism, adrenal insufficiency, hypophysitis, type 1 diabetes mellitus (including DKA)",
+      "Immune-mediated nephritis with renal dysfunction",
+      "Severe infusion-related reactions"
+    ],
+    "rare": [
+      "Immune-mediated myocarditis, pancreatitis, dermatologic reactions (SJS/TEN, DRESS)",
+      "Immune-mediated neurologic toxicities (myasthenic syndrome, Guillain-Barre, encephalitis)",
+      "Solid organ transplant rejection",
+      "Severe complications of allogeneic hematopoietic stem cell transplant"
+    ],
+    "emergency": [
+      "Severe/grade 3-4 immune-mediated pneumonitis or hypoxia",
+      "Severe colitis with perforation risk",
+      "Acute hepatic failure",
+      "Adrenal crisis or diabetic ketoacidosis",
+      "Anaphylaxis / severe infusion reaction",
+      "Myocarditis"
+    ]
+  },
+  "monitoring": [
+    "Assess for immune-mediated reactions (pulmonary, GI, hepatic, renal, dermatologic, neurologic) before each dose and throughout therapy",
+    "Liver function tests and serum creatinine periodically",
+    "Thyroid function (TSH, free T4) and blood glucose periodically; assess adrenal/pituitary function if symptomatic",
+    "Infusion-related reactions during and after infusion",
+    "Pregnancy status before initiation in females of reproductive potential"
+  ],
+  "counsel": [
+    "This medicine activates your immune system to fight cancer and can cause your immune system to attack healthy organs - report new or worsening cough, shortness of breath, diarrhea, abdominal pain, yellowing of skin/eyes, severe tiredness, headache, rash, or palpitations promptly",
+    "Tell your team about any autoimmune disease, organ transplant, or breathing/liver problems before treatment",
+    "Use effective birth control during treatment and for 3 months after the last dose; do not breastfeed during this time",
+    "Keep all blood test and clinic appointments so your thyroid, liver, kidney and blood sugar can be checked",
+    "Seek urgent care for severe shortness of breath, chest pain, severe diarrhea, confusion, or signs of a severe infusion reaction"
+  ],
+  "pk": [
+    ["Onset", "Antitumor immune effects develop over weeks; steady state reached by ~16 weeks"],
+    ["Peak", "Maximum concentration at end of the 60-minute IV infusion"],
+    ["Half-life", "Terminal half-life approximately 18 days"],
+    ["Duration", "Every 3-4 week dosing maintains target exposure"],
+    ["Storage", "Refrigerate vials at 2-8 C (36-46 F); do not freeze or shake; protect from light; use diluted solution within labeled time (up to 28 days refrigerated)"]
+  ],
+  "pearls": [
+    "IMMUNE-MEDIATED ADVERSE REACTIONS can occur in any organ at any time (even after stopping) and may be severe or fatal - early recognition and corticosteroids are key",
+    "Most immune toxicities are managed by withholding durvalumab and giving systemic corticosteroids with a taper; there is no dose reduction - modify by withhold/discontinue",
+    "Monitor thyroid, adrenal/pituitary, glucose (type 1 diabetes/DKA), liver and kidney function routinely",
+    "Embryo-fetal toxicity: use effective contraception during and for 3 months after; avoid breastfeeding",
+    "Can cause severe or fatal complications in patients with prior or subsequent allogeneic hematopoietic stem cell transplant"
+  ],
+  "missed": "Durvalumab is administered on a fixed clinic schedule. If a planned dose is delayed or missed, the oncology team reschedules it as soon as feasible and resets the every 3- or 4-week cycle; patients should not attempt to self-administer or make up doses. Persistent delays for toxicity are managed per the dose-modification guidance.",
+  "overdose": "There is no information on overdose with durvalumab and no specific antidote. In the event of overdose, monitor the patient closely for signs and symptoms of adverse reactions, particularly immune-mediated and infusion-related events, and institute appropriate supportive treatment including corticosteroids for immune toxicities.",
+  "refs": [
+    ["FDA Label - Durvalumab (Imfinzi, openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22durvalumab%22"],
+    ["DailyMed - Imfinzi (durvalumab)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=durvalumab"]
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "generic": "Rosuvastatin",
+  "cls": "HMG-CoA reductase inhibitor (statin)",
+  "pharm": "Lipid-lowering agent / antihyperlipidemic",
+  "tags": ["statin", "hyperlipidemia", "LDL", "cardiovascular prevention", "atherosclerosis"],
+  "quick": [
+    ["Adult dose", "5-40 mg PO once daily"],
+    ["Meal", "With or without food, any time"],
+    ["Pregnancy", "Contraindicated"],
+    ["Lactation", "Contraindicated"],
+    ["Renal", "Severe (not on HD): start 5 mg, max 10 mg"],
+    ["Hepatic", "Contraindicated in active liver disease"],
+    ["Alcohol", "Limit; hepatotoxicity risk"],
+    ["Monitoring", "Lipids, LFTs, CK if myopathy"]
+  ],
+  "summary": "Rosuvastatin is a high-potency statin that markedly lowers LDL-C and reduces cardiovascular events. Dosed 5-40 mg once daily. Asian patients and severe renal impairment require lower starting doses. Contraindicated in pregnancy and active liver disease.",
+  "indications": [
+    "Reduce risk of major adverse CV events in adults at increased CV risk (age, hsCRP >=2 mg/L, plus one risk factor)",
+    "Primary hyperlipidemia in adults (adjunct to diet)",
+    "Slow progression of atherosclerosis",
+    "Hypertriglyceridemia",
+    "Heterozygous familial hypercholesterolemia (adults and children >=8 years)",
+    "Homozygous familial hypercholesterolemia (adults and children >=7 years)"
+  ],
+  "dosage": [
+    {"c": "Primary hyperlipidemia / CV risk (adult)", "r": "Standard", "d": "5-40 mg once daily", "t": "Once daily", "n": "Usual start 10-20 mg; 40 mg reserved for inadequate response"},
+    {"c": "Asian patients", "r": "Reduced", "d": "Initiate 5 mg once daily", "t": "Once daily", "n": "Higher plasma levels; weigh risk above 20 mg"},
+    {"c": "Severe renal impairment (not on HD)", "r": "Reduced", "d": "Start 5 mg, do not exceed 10 mg once daily", "t": "Once daily", "n": "CrCl <30 mL/min"},
+    {"c": "HeFH pediatric 8 to <10 yr", "r": "Standard", "d": "5-10 mg once daily", "t": "Once daily", "n": ""},
+    {"c": "HoFH (>=7 yr)", "r": "Standard", "d": "20 mg once daily", "t": "Once daily", "n": ""}
+  ],
+  "admin": [
+    "Take orally once daily at any time, with or without food",
+    "May take with or 2 hours before an aluminum/magnesium antacid",
+    "Maintain low-fat diet throughout",
+    "Assess LDL-C as early as 4 weeks after start and adjust",
+    "Use lower start dose in Asian patients and severe renal impairment"
+  ],
+  "moa": "Competitively inhibits HMG-CoA reductase, reducing hepatic cholesterol synthesis. This upregulates hepatic LDL receptors, increasing LDL uptake and catabolism, thereby lowering LDL-C, total cholesterol, ApoB and triglycerides while modestly raising HDL-C.",
+  "contra": {
+    "absolute": ["Acute liver failure or decompensated cirrhosis", "Hypersensitivity to rosuvastatin", "Pregnancy", "Breastfeeding"],
+    "relative": ["History of liver disease", "Heavy alcohol use", "Asian ethnicity (higher exposure)", "Predisposition to myopathy (renal impairment, hypothyroidism, age >65)"],
+    "monitor": ["Concomitant cyclosporine, gemfibrozil", "Concomitant fibrates/niacin", "Unexplained muscle symptoms"]
+  },
+  "preg": "Contraindicated. Discontinue when pregnancy is recognized; statin therapy during pregnancy provides no benefit and may harm the fetus.",
+  "lact": "Contraindicated during breastfeeding. Discontinue drug or nursing.",
+  "renal": "No adjustment in mild-moderate impairment. In severe impairment (CrCl <30 mL/min) not on dialysis, start 5 mg and do not exceed 10 mg once daily.",
+  "hepatic": "Contraindicated in active liver disease or unexplained persistent transaminase elevations. Monitor LFTs and use caution with alcohol or chronic liver disease.",
+  "interactions": {
+    "major": ["Cyclosporine - markedly increased exposure; limit rosuvastatin to 5 mg/day", "Gemfibrozil - increased exposure and myopathy risk; avoid or limit to 10 mg", "Certain HIV/HCV protease inhibitors - dose limits apply"],
+    "moderate": ["Warfarin - increased INR", "Other fibrates / niacin - myopathy risk", "Colchicine - myopathy/rhabdomyolysis risk"],
+    "minor": ["Aluminum/magnesium antacids - reduced exposure if taken together; separate by 2 h", "Oral contraceptives - increased estrogen/progestin levels"],
+    "food": "No clinically significant food effect.",
+    "alcohol": "Limit alcohol due to hepatotoxicity risk.",
+    "diagnostics": "May elevate transaminases, CK and cause dipstick proteinuria/hematuria (usually transient)."
+  },
+  "se": {
+    "common": ["Headache", "Myalgia", "Abdominal pain", "Nausea", "Asthenia"],
+    "serious": ["Myopathy", "Immune-mediated necrotizing myopathy", "Hepatotoxicity"],
+    "rare": ["Rhabdomyolysis with acute renal failure", "New-onset diabetes / hyperglycemia", "Proteinuria and hematuria (dose-related, esp. 40 mg)"],
+    "emergency": ["Rhabdomyolysis (severe muscle pain, dark urine)", "Acute liver failure", "Severe hypersensitivity"]
+  },
+  "monitoring": [
+    "Lipid panel at baseline and 4-12 weeks after start/change",
+    "Liver enzymes at baseline; repeat if indicated",
+    "Creatine kinase for unexplained muscle symptoms",
+    "Renal function/proteinuria especially at 40 mg",
+    "HbA1c / glucose periodically"
+  ],
+  "counsel": [
+    "Take once daily at any time, with or without food",
+    "Report unexplained muscle pain, tenderness or weakness",
+    "Separate antacids by at least 2 hours",
+    "Limit alcohol; continue diet and exercise",
+    "Do not use if pregnant or breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "LDL reduction within 1 week, near-maximal by 4 weeks"],
+    ["Peak", "3-5 hours"],
+    ["Half-life", "~19 hours"],
+    ["Duration", "Sustained with once-daily dosing"],
+    ["Storage", "Store at 20-25 C in original container, protect from moisture"]
+  ],
+  "pearls": [
+    "Most potent statin per mg; 5-10 mg lowers LDL-C ~45-50%",
+    "Largely hydrophilic - less CYP3A4 metabolism than atorvastatin",
+    "Lower starting dose in Asian patients (higher plasma levels)",
+    "40 mg reserved for patients not at goal on 20 mg"
+  ],
+  "missed": "Take the missed dose when remembered unless close to the next dose; do not double up.",
+  "overdose": "No specific treatment; manage symptomatically with supportive care. Hemodialysis does not significantly enhance clearance. Monitor for muscle and hepatic effects.",
+  "refs": [
+    ["FDA Rosuvastatin Calcium Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rosuvastatin+calcium%22"],
+    ["FDA DailyMed - Rosuvastatin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

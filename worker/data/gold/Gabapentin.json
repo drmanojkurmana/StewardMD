@@ -1,0 +1,143 @@
+{
+  "generic": "Gabapentin",
+  "cls": "Anticonvulsant; gabapentinoid (alpha-2-delta calcium channel ligand)",
+  "pharm": "Structural GABA analogue that binds the alpha-2-delta subunit of voltage-gated calcium channels; antiepileptic and analgesic for neuropathic pain; renally cleared unchanged",
+  "tags": ["Anticonvulsant", "Gabapentinoid", "Neuropathic pain", "Postherpetic neuralgia", "Partial seizures", "Renal dosing", "CNS depressant"],
+  "quick": [
+    ["Adult dose", "300 mg Day 1, titrate to 1800 mg/day (divided TID)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Limited human data; use only if benefit justifies risk"],
+    ["Lactation", "Excreted in milk; use with caution, monitor infant"],
+    ["Renal", "Dose-reduce by CrCl; supplemental dose after hemodialysis"],
+    ["Hepatic", "No adjustment (not hepatically metabolised)"],
+    ["Alcohol", "Avoid (additive CNS/respiratory depression)"],
+    ["Monitoring", "Sedation, respiratory depression, mood/suicidality, renal function"]
+  ],
+  "summary": "Gabapentin is a gabapentinoid anticonvulsant structurally related to GABA that binds the alpha-2-delta subunit of voltage-activated calcium channels. It is FDA-approved for postherpetic neuralgia in adults and as adjunctive therapy for partial-onset seizures in patients 3 years and older. In postherpetic neuralgia it is titrated from a single 300 mg dose on Day 1 to 1800 mg/day given three times daily; in epilepsy the adult maintenance dose is 300 to 600 mg three times daily. It is not appreciably metabolised and is cleared unchanged by the kidneys, so the dose must be reduced in renal impairment and supplemented after hemodialysis. Key safety concerns include serious or fatal respiratory depression when combined with opioids or other CNS depressants, somnolence and dizziness, suicidal ideation, DRESS, and anaphylaxis/angioedema. Antiepileptic therapy should not be stopped abruptly.",
+  "indications": [
+    "Postherpetic neuralgia in adults",
+    "Adjunctive therapy for partial-onset seizures (with or without secondary generalization) in adults and children 3 years and older",
+    "Neuropathic pain (off-label, widely used)",
+    "Restless legs syndrome (off-label; gabapentin enacarbil is the approved prodrug)"
+  ],
+  "dosage": [
+    {"c": "Postherpetic neuralgia", "r": "Oral", "d": "Day 1: 300 mg once; Day 2: 600 mg/day (300 mg BID); Day 3: 900 mg/day (300 mg TID)", "t": "Titrate over 3 days; up to 1800 mg/day for pain relief", "n": "No added benefit shown above 1800 mg/day"},
+    {"c": "Partial-onset seizures (>= 12 years)", "r": "Oral", "d": "Start 300 mg TID; maintenance 300-600 mg TID", "t": "Max interval between doses <= 12 h", "n": "Up to 2400 mg/day well tolerated long-term; 3600 mg/day short-term"},
+    {"c": "Partial-onset seizures (3-4 years)", "r": "Oral", "d": "Maintenance 40 mg/kg/day in 3 divided doses", "t": "Start 10-15 mg/kg/day, titrate over ~3 days", "n": "Pediatric adjunctive use"},
+    {"c": "Partial-onset seizures (5-11 years)", "r": "Oral", "d": "Maintenance 25-35 mg/kg/day in 3 divided doses", "t": "Start 10-15 mg/kg/day, titrate over ~3 days", "n": "Up to 50 mg/kg/day tolerated"},
+    {"c": "Renal impairment (>= 12 years)", "r": "Oral", "d": "CrCl >30-59: 400-1400 mg/day BID; CrCl >15-29: 200-700 mg/day QD; CrCl 15: 100-300 mg/day QD", "t": "Dose by creatinine clearance", "n": "CrCl <15: reduce in proportion to CrCl"},
+    {"c": "Hemodialysis", "r": "Oral", "d": "Maintenance dose by estimated CrCl plus supplemental 125-350 mg after each 4 h of dialysis", "t": "Supplemental post-dialysis dose", "n": "Gabapentin is removed by hemodialysis"}
+  ],
+  "admin": [
+    "Administer orally with or without food",
+    "Swallow capsules whole with water",
+    "Give three times daily; maximum interval between doses should not exceed 12 hours",
+    "Take at least 2 hours after antacids containing aluminum/magnesium hydroxide",
+    "When reducing, discontinuing or switching, taper gradually over a minimum of 1 week"
+  ],
+  "moa": "Gabapentin is structurally related to GABA but does not act on GABA receptors, uptake or degradation. It binds with high affinity to the alpha-2-delta subunit of voltage-activated calcium channels, reducing excitatory neurotransmitter release; this is presumed to underlie its antiepileptic and analgesic effects, although the precise mechanism is unknown.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to gabapentin or any ingredient"
+    ],
+    "relative": [
+      "Concomitant opioids or other CNS depressants (respiratory depression risk)",
+      "Underlying respiratory impairment",
+      "Renal impairment (requires dose reduction)",
+      "Elderly (reduced renal function)",
+      "History of substance misuse",
+      "Children 3-12 years (neuropsychiatric reactions)"
+    ],
+    "monitor": [
+      "Respiratory rate and sedation",
+      "Mood, depression and suicidal ideation",
+      "Renal function / creatinine clearance",
+      "Signs of DRESS or hypersensitivity",
+      "Seizure frequency if discontinuing"
+    ]
+  },
+  "preg": "There are no adequate human data; animal studies showed developmental toxicity at clinically relevant doses. Use only if the potential benefit justifies the risk; encourage enrollment in the North American Antiepileptic Drug (NAAED) Pregnancy Registry (1-888-233-2334).",
+  "lact": "Gabapentin is excreted in human milk; effects on the breastfed infant are unknown. Use with caution and monitor the infant for sedation and poor feeding.",
+  "renal": "Cleared unchanged by the kidneys; clearance is proportional to creatinine clearance. Reduce dose for CrCl <60 mL/min: CrCl >30-59 give BID, CrCl >15-29 give QD, CrCl 15 give lower QD doses, and for CrCl <15 reduce in proportion to CrCl. Give a supplemental dose after each 4 hours of hemodialysis.",
+  "hepatic": "No dosage adjustment required; gabapentin is not appreciably metabolised by the liver.",
+  "interactions": {
+    "major": [
+      "Opioids (morphine, hydrocodone, oxycodone, buprenorphine) - serious, sometimes fatal respiratory depression and sedation",
+      "CNS depressants / sedatives - additive somnolence and respiratory depression"
+    ],
+    "moderate": [
+      "Morphine - increases gabapentin concentrations; monitor for CNS depression",
+      "Aluminum/magnesium hydroxide antacids (Maalox) - reduce gabapentin bioavailability ~20%; separate by 2 hours"
+    ],
+    "minor": [
+      "Hydrocodone - gabapentin decreases hydrocodone exposure"
+    ],
+    "food": "Food has only a slight effect on absorption (~14% increase in AUC and Cmax); may be taken without regard to meals",
+    "alcohol": "Avoid; additive CNS and respiratory depression",
+    "diagnostics": "May cause false-positive urine protein readings with the Ames N-Multistix SG dipstick; use the sulfosalicylic acid precipitation method instead"
+  },
+  "se": {
+    "common": [
+      "Somnolence",
+      "Dizziness",
+      "Ataxia",
+      "Fatigue",
+      "Peripheral edema",
+      "Nystagmus",
+      "Tremor",
+      "Blurred or double vision"
+    ],
+    "serious": [
+      "Respiratory depression (with opioids/CNS depressants or respiratory impairment)",
+      "Suicidal thoughts and behavior",
+      "Increased seizure frequency or status epilepticus on abrupt withdrawal",
+      "Neuropsychiatric reactions in children 3-12 years (emotional lability, hostility, hyperkinesia)"
+    ],
+    "rare": [
+      "DRESS / multiorgan hypersensitivity",
+      "Anaphylaxis and angioedema",
+      "Dependence and withdrawal"
+    ],
+    "emergency": [
+      "Severe respiratory depression",
+      "Anaphylaxis or angioedema (airway swelling)",
+      "DRESS with systemic organ involvement",
+      "Acute suicidality"
+    ]
+  },
+  "monitoring": [
+    "Signs of CNS and respiratory depression, especially with opioids",
+    "Emergence or worsening of depression and suicidal ideation",
+    "Renal function / creatinine clearance for dosing",
+    "Seizure control when starting, changing or withdrawing therapy",
+    "Signs of hypersensitivity (rash, fever, lymphadenopathy)"
+  ],
+  "counsel": [
+    "Do not drive or operate machinery until you know how the drug affects you",
+    "Do not stop suddenly - this can trigger seizures; taper as directed",
+    "Avoid alcohol and tell your doctor about opioids or sedatives - breathing can slow dangerously",
+    "Report any thoughts of self-harm, depression or mood changes immediately",
+    "Seek urgent care for rash with fever, facial or throat swelling, or trouble breathing",
+    "Separate antacids by at least 2 hours"
+  ],
+  "pk": [
+    ["Onset", "Pain relief over days of titration"],
+    ["Peak", "2-3 hours (Tmax)"],
+    ["Half-life", "5-7 hours"],
+    ["Duration", "~8 hours (dosed three times daily)"],
+    ["Storage", "Store at 20-25 C (room temperature); protect from moisture"]
+  ],
+  "pearls": [
+    "Bioavailability is saturable and falls as dose rises (~60% at 900 mg/day down to ~27% at 4800 mg/day)",
+    "Not metabolised and not protein bound - few pharmacokinetic drug interactions but heavily renally dependent",
+    "FDA added a 2020 warning for serious respiratory depression with opioids or in respiratory impairment",
+    "Increasingly subject to misuse and diversion; some jurisdictions schedule it",
+    "Removed by hemodialysis - give a supplemental dose after each session"
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose; do not double up. Keep doses no more than 12 hours apart.",
+  "overdose": "Acute overdose has caused double vision, slurred speech, drowsiness, lethargy, ataxia, dizziness and diarrhea. Fatal respiratory depression has occurred, particularly with co-ingested CNS depressants. There is no specific antidote; management is supportive and gabapentin can be removed by hemodialysis. Contact poison control (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information - Gabapentin (DailyMed)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=gabapentin"],
+    ["FDA Drug Safety Communication - Gabapentinoids and Respiratory Depression (2019)", "https://www.fda.gov/drugs/drug-safety-and-availability/fda-warns-about-serious-breathing-problems-seizure-and-nerve-pain-medicines-gabapentin-neurontin"]
+  ]
+}

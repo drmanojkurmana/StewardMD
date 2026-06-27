@@ -1,0 +1,92 @@
+{
+  "generic": "Carboplatin",
+  "cls": "Antineoplastic agent (platinum coordination compound)",
+  "pharm": "Platinum-based alkylating agent that forms intra- and inter-strand DNA crosslinks, inhibiting DNA replication",
+  "tags": ["Ovarian carcinoma", "Platinum chemotherapy", "Cytotoxic", "Boxed warning: myelosuppression and anaphylaxis"],
+  "quick": [
+    ["Adult dose", "Single agent 360 mg/m2 IV on day 1 every 4 weeks, or AUC-based (Calvert formula)"],
+    ["Meal", "Not applicable; administered intravenously"],
+    ["Pregnancy", "Can cause fetal harm (embryotoxic and teratogenic); avoid in pregnancy"],
+    ["Lactation", "Discontinue breastfeeding during treatment"],
+    ["Renal", "Reduce initial dose in renal impairment; clearance correlates with CrCl"],
+    ["Hepatic", "No specific adjustment established; use with caution"],
+    ["Alcohol", "No specific interaction; general caution in ill patients"],
+    ["Monitoring", "CBC with differential and platelets, renal function, electrolytes, audiology, neuro exam"]
+  ],
+  "summary": "Carboplatin is a second-generation platinum coordination antineoplastic used primarily for advanced ovarian carcinoma, alone or in combination with other agents. It produces DNA crosslinks that inhibit replication. Compared with cisplatin it causes less nephrotoxicity, ototoxicity, and emesis but more myelosuppression. It carries a boxed warning for dose-related bone marrow suppression and anaphylactic-like reactions.",
+  "indications": [
+    "Initial treatment of advanced ovarian carcinoma in established combination with other approved chemotherapeutic agents (e.g., with cyclophosphamide)",
+    "Palliative (secondary) treatment of patients with advanced ovarian carcinoma recurrent after prior chemotherapy, including patients previously treated with cisplatin"
+  ],
+  "dosage": [
+    {"c": "Recurrent ovarian carcinoma (single agent)", "r": "IV", "d": "360 mg/m2 IV on day 1 every 4 weeks; do not repeat courses until neutrophils are at least 2,000 and platelets at least 100,000", "t": "Infuse intravenously; do not use aluminium-containing needles or sets", "n": "Alternatively dose by the Calvert (AUC) formula"},
+    {"c": "Advanced ovarian carcinoma (combination with cyclophosphamide)", "r": "IV", "d": "Carboplatin 300 mg/m2 IV on day 1 every 4 weeks for 6 cycles, with cyclophosphamide 600 mg/m2 IV day 1 every 4 weeks", "t": "Intravenous infusion on day 1 of each cycle", "n": "Do not repeat until neutrophils at least 2,000 and platelets at least 100,000"},
+    {"c": "AUC-based (Calvert formula) dosing", "r": "IV", "d": "Total dose (mg) = target AUC x (GFR + 25)", "t": "Intravenous", "n": "Used to individualize dose by renal function; total dose is in mg, not mg/m2"},
+    {"c": "Renal impairment", "r": "IV", "d": "Reduce initial dose: baseline CrCl 41-59 mL/min give 250 mg/m2; CrCl 16-40 mL/min give 200 mg/m2 on day 1 every 4 weeks", "t": "Intravenous", "n": "Adjust subsequent doses by blood count nadirs"}
+  ],
+  "admin": [
+    "Administer under supervision of a physician experienced in cytotoxic chemotherapy with facilities for managing complications",
+    "Do not use needles or intravenous administration sets containing aluminium parts, which react with carboplatin causing precipitate and loss of potency",
+    "Obtain peripheral blood counts before each course and verify recovery before repeating",
+    "Use appropriate antiemetic premedication; emesis is a frequent effect",
+    "Be prepared to manage anaphylactic-like reactions with epinephrine, corticosteroids, and antihistamines"
+  ],
+  "moa": "Carboplatin is a platinum coordination compound that acts as an alkylating agent. It produces predominantly intrastrand DNA crosslinks (and some interstrand crosslinks), interfering with DNA replication and transcription in a cell-cycle non-specific manner, leading to cytotoxicity. Its biochemical activity is similar to that of cisplatin.",
+  "contra": {
+    "absolute": ["History of severe allergic reactions to cisplatin or other platinum-containing compounds", "Severe bone marrow depression", "Significant active bleeding"],
+    "relative": ["Renal impairment (require dose reduction and close monitoring)", "Concomitant nephrotoxic or ototoxic drugs such as aminoglycosides", "Prior cytotoxic or radiation therapy (increased myelosuppression)"],
+    "monitor": ["Complete blood counts during and between courses", "Renal function (serum creatinine, creatinine clearance, BUN)", "Serum electrolytes including sodium, potassium, calcium, magnesium", "Audiologic and neurologic status"]
+  },
+  "preg": "Carboplatin can cause fetal harm. It is embryotoxic and teratogenic in rats given the drug during organogenesis (historically Pregnancy Category D). Avoid use in pregnancy; if used or if the patient becomes pregnant, advise of the potential hazard to the fetus. Advise females of reproductive potential to use effective contraception.",
+  "lact": "It is not known whether carboplatin is excreted in human milk. Because of the potential for serious adverse reactions in nursing infants, discontinue breastfeeding during treatment with carboplatin.",
+  "renal": "Carboplatin clearance correlates with the glomerular filtration rate, and renal impairment markedly increases drug exposure and myelosuppression. Reduce the initial dose in patients with reduced creatinine clearance (CrCl 41-59 mL/min: 250 mg/m2; CrCl 16-40 mL/min: 200 mg/m2) and adjust subsequent doses by the observed blood count nadirs. AUC-based (Calvert) dosing incorporates GFR.",
+  "hepatic": "No specific dose adjustment for hepatic impairment is established. Carboplatin undergoes minimal hepatic metabolism; use with general caution and monitor for cumulative toxicity.",
+  "interactions": {
+    "major": ["Aminoglycoside antibiotics (additive nephrotoxicity and ototoxicity)", "Other myelosuppressive chemotherapy or radiation (additive bone marrow suppression)", "Nephrotoxic drugs (potentiation of renal effects)"],
+    "moderate": ["Live vaccines (risk of disseminated infection during immunosuppression)", "Phenytoin (chemotherapy may reduce phenytoin absorption and levels)"],
+    "minor": ["Drugs causing additive nausea may worsen emesis"],
+    "food": "Not applicable; carboplatin is administered intravenously",
+    "alcohol": "No specific interaction described; general caution in debilitated patients",
+    "diagnostics": "May cause electrolyte disturbances (low sodium, potassium, calcium, magnesium) and abnormal liver and renal function tests"
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Thrombocytopenia", "Neutropenia and leukopenia", "Anemia", "Asthenia", "Abnormal liver function tests", "Electrolyte abnormalities (low Na, K, Ca, Mg)"],
+    "serious": ["Severe dose-related bone marrow suppression with infection or bleeding", "Anaphylactic-like hypersensitivity reactions", "Nephrotoxicity", "Peripheral neuropathy", "Ototoxicity"],
+    "rare": ["Secondary malignancies (with multi-drug therapy)", "Hemolytic uremic syndrome", "Visual disturbances and cortical blindness", "Cardiovascular events"],
+    "emergency": ["Anaphylactic-like reaction (rash, flushing, dyspnea, hypotension, bronchospasm within minutes) - stop infusion and treat with epinephrine, corticosteroids, and antihistamines", "Febrile neutropenia or severe bleeding - seek emergency care"]
+  },
+  "monitoring": [
+    "Complete blood count with differential and platelets before each course and weekly until recovery (nadir around day 21)",
+    "Serum creatinine, creatinine clearance, and BUN",
+    "Serum electrolytes including sodium, potassium, calcium, and magnesium",
+    "Audiometry and neurologic examination, especially with cumulative dosing or prior cisplatin",
+    "Signs of hypersensitivity during and after infusion"
+  ],
+  "counsel": [
+    "This medicine is given by a healthcare professional into a vein; keep all appointments for blood tests",
+    "Report fever, sore throat, unusual bleeding or bruising, which may signal low blood counts",
+    "Report any rash, itching, facial swelling, or trouble breathing during or after infusion immediately",
+    "Use effective contraception; the drug can harm an unborn baby, and breastfeeding should be stopped",
+    "Report numbness, tingling, hearing changes, or persistent nausea and vomiting"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect develops over the treatment cycle; nadir counts around day 21"],
+    ["Peak", "Peak plasma platinum at end of intravenous infusion"],
+    ["Half-life", "Initial plasma elimination half-life about 1.1-2 hours; total platinum is long"],
+    ["Duration", "Dosing repeated every 4 weeks; myelosuppression cumulative"],
+    ["Storage", "Store vials at 25 C (77 F) with excursions 15-30 C; protect from light; do not refrigerate"]
+  ],
+  "pearls": [
+    "Boxed warning: dose-related bone marrow suppression (can be severe, causing infection or bleeding) and anaphylactic-like reactions that may occur within minutes of administration",
+    "Causes more myelosuppression but less nephrotoxicity, ototoxicity, and emesis than cisplatin",
+    "AUC (Calvert) dosing individualizes the dose by renal function and reduces toxicity",
+    "Never use aluminium-containing needles or IV sets - aluminium inactivates carboplatin",
+    "Thrombocytopenia is often the dose-limiting toxicity; nadir around day 21"
+  ],
+  "missed": "Carboplatin is administered on a scheduled cycle by a healthcare professional. If an appointment is missed, contact the oncology team to reschedule; do not attempt to make up doses at home. Courses are not repeated until blood counts have adequately recovered.",
+  "overdose": "There is no established antidote for carboplatin overdose. Anticipated complications are severe myelosuppression, hepatic and renal toxicity, and ototoxicity. Management is supportive with blood product transfusions, antibiotics for febrile neutropenia, and growth factor support. Contact Poison Control (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Carboplatin Injection", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carboplatin%22"],
+    ["DailyMed - Carboplatin Injection", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=carboplatin"]
+  ]
+}

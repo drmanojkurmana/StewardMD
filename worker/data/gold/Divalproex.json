@@ -1,0 +1,94 @@
+{
+  "generic": "Divalproex",
+  "cls": "Antiepileptic / mood stabilizer (valproate)",
+  "pharm": "Anticonvulsant; antimanic; migraine prophylactic",
+  "tags": ["valproate", "epilepsy", "bipolar mania", "migraine prophylaxis", "boxed warning", "teratogen", "hepatotoxicity"],
+  "quick": [
+    ["Adult dose", "Seizure 10-15 mg/kg/day; mania 750 mg/day start; migraine 500 mg/day"],
+    ["Meal", "May take with food to reduce GI upset"],
+    ["Pregnancy", "Contraindicated for migraine; neural-tube/teratogen risk"],
+    ["Lactation", "Caution; excreted in milk (usually low)"],
+    ["Renal", "Caution; free fraction may rise"],
+    ["Hepatic", "Contraindicated in hepatic disease/dysfunction"],
+    ["Alcohol", "Avoid; additive CNS depression and hepatic stress"],
+    ["Monitoring", "LFTs, CBC/platelets, ammonia, valproate level"]
+  ],
+  "summary": "Divalproex sodium is a stable coordination compound of sodium valproate and valproic acid that dissociates to valproate ion. It is used for bipolar manic/mixed episodes, complex partial and absence seizures, and migraine prophylaxis. It carries boxed warnings for life-threatening hepatotoxicity (highest in children <2 years), teratogenicity including neural tube defects and reduced IQ, and pancreatitis. Therapy requires liver, platelet and drug-level monitoring.",
+  "indications": [
+    "Acute treatment of manic or mixed episodes of bipolar disorder, with or without psychotic features",
+    "Monotherapy and adjunctive therapy of complex partial seizures",
+    "Monotherapy and adjunctive therapy of simple and complex absence seizures",
+    "Adjunctive therapy in patients with multiple seizure types that include absence seizures",
+    "Prophylaxis of migraine headaches"
+  ],
+  "dosage": [
+    {"c": "Mania (adult, ER)", "r": "Standard", "d": "Initial 25 mg/kg/day once daily; titrate rapidly to effect/level (typically 1000-1500 mg/day)", "t": "Once daily (ER)", "n": "Max 60 mg/kg/day"},
+    {"c": "Complex partial seizures (>=10 yr)", "r": "Monotherapy/adjunct", "d": "Initial 10-15 mg/kg/day; increase by 5-10 mg/kg/week", "t": "Once daily (ER) or divided", "n": "Max 60 mg/kg/day"},
+    {"c": "Absence seizures", "r": "Standard", "d": "Initial 15 mg/kg/day; increase weekly by 5-10 mg/kg/day", "t": "Divided / ER once daily", "n": "Max 60 mg/kg/day"},
+    {"c": "Migraine prophylaxis (adult)", "r": "Standard", "d": "ER 500 mg once daily for 1 week, then 1000 mg/day", "t": "Once daily (ER)", "n": "Range 500-1000 mg/day"},
+    {"c": "Elderly", "r": "Reduced", "d": "Lower starting dose; slower titration", "t": "Individualized", "n": "Monitor fluid/nutrition, level"}
+  ],
+  "admin": [
+    "Extended-release tablets are for once-daily oral use and must be swallowed whole, not crushed or chewed",
+    "Delayed-release/sprinkle capsules may be opened and contents sprinkled on soft food and swallowed without chewing",
+    "Take with food if gastrointestinal upset occurs",
+    "Titrate gradually for seizures; convert between formulations carefully (ER and DR are not bioequivalent mg-for-mg)",
+    "Maintain adequate hydration and nutrition, especially in the elderly"
+  ],
+  "moa": "Divalproex dissociates to the valproate ion in the gastrointestinal tract. Although the precise mechanism is not established, its anticonvulsant and antimanic effects are thought to involve increased brain concentrations of gamma-aminobutyric acid (GABA), blockade of voltage-gated sodium channels, and modulation of T-type calcium currents, which together reduce neuronal excitability and the spread of seizure activity.",
+  "contra": {
+    "absolute": ["Hepatic disease or significant hepatic dysfunction", "Known urea cycle disorders", "Mitochondrial disorders caused by POLG mutations (and children <2 years suspected of such)", "Prophylaxis of migraine in pregnant women (and women of childbearing potential not using contraception)", "Known hypersensitivity to the drug"],
+    "relative": ["Pregnancy for other indications unless no alternative", "Thrombocytopenia or bleeding disorders", "History of pancreatitis", "Concurrent multiple antiepileptic drugs in young children"],
+    "monitor": ["Children younger than 2 years (highest hepatotoxicity risk)", "Concomitant topiramate (hyperammonemia/encephalopathy)", "Lamotrigine (serious rash; reduce lamotrigine dose)"]
+  },
+  "preg": "BOXED WARNING - teratogenicity. Valproate can cause major congenital malformations, particularly neural tube defects, and decreased IQ and neurodevelopmental disorders in children exposed in utero. It is contraindicated for migraine prophylaxis in pregnancy and should not be used in women of childbearing potential unless other treatments are ineffective; if used, ensure effective contraception and folate supplementation.",
+  "lact": "Valproate is excreted into human milk, generally at low concentrations. Consider the benefits of breastfeeding against potential infant risk; monitor the breastfed infant for jaundice, unusual bruising/bleeding and lethargy.",
+  "renal": "No specific dose adjustment is defined, but the unbound (free) fraction of valproate is increased in renal impairment, so interpret total levels cautiously and monitor clinically. Valproate is partially removed by hemodialysis.",
+  "hepatic": "BOXED WARNING - hepatotoxicity. Divalproex is contraindicated in patients with hepatic disease or significant dysfunction. Fatal hepatic failure can occur, usually within the first 6 months and with greatest risk in children under 2 years and in patients with metabolic/mitochondrial disorders. Discontinue immediately for suspected or apparent significant hepatic dysfunction.",
+  "interactions": {
+    "major": ["Carbapenems (meropenem, imipenem, ertapenem) - markedly lower valproate levels, loss of seizure control", "Lamotrigine - increased lamotrigine levels and serious rash; reduce lamotrigine dose", "Topiramate - hyperammonemia and encephalopathy", "Other hepatotoxic drugs - additive liver injury"],
+    "moderate": ["Phenytoin - altered (often decreased total, increased free) phenytoin", "Phenobarbital - increased barbiturate levels and sedation", "Aspirin - displaces valproate, raising free fraction", "Warfarin - increased free warfarin/bleeding risk", "Rufinamide, ethosuximide - levels altered"],
+    "minor": ["Carbamazepine - variable changes in valproate level", "Felbamate - increased valproate concentration", "Cholestyramine - reduced valproate absorption"],
+    "food": "May be taken with food to limit GI upset; food does not meaningfully reduce overall absorption.",
+    "alcohol": "Avoid alcohol; additive CNS depression and added hepatic burden.",
+    "diagnostics": "Can cause false-positive urine ketone tests; may alter thyroid function tests and elevate ammonia and liver enzymes."
+  },
+  "se": {
+    "common": ["Nausea/vomiting", "Somnolence", "Dizziness", "Tremor", "Weight gain", "Alopecia", "Thrombocytopenia (dose-related)", "Diarrhea"],
+    "serious": ["Hepatotoxicity / hepatic failure", "Pancreatitis (including hemorrhagic, fatal)", "Hyperammonemic encephalopathy", "Teratogenicity / neural tube defects", "Suicidal ideation and behavior"],
+    "rare": ["DRESS / multiorgan hypersensitivity", "Bone marrow suppression", "Polycystic ovary-like features", "Hypothermia", "Stevens-Johnson syndrome"],
+    "emergency": ["Acute hepatic failure", "Acute pancreatitis", "Hyperammonemic coma / encephalopathy", "Severe hypersensitivity (DRESS/SJS)"]
+  },
+  "monitoring": [
+    "Liver function tests at baseline and at frequent intervals, especially during the first 6 months",
+    "Platelet count and coagulation studies before therapy and periodically, particularly before surgery",
+    "Serum ammonia if lethargy, vomiting or mental status changes occur",
+    "Serum valproate level (therapeutic 50-100 mcg/mL for seizures; up to ~125 mcg/mL for mania) and signs of pancreatitis or suicidality"
+  ],
+  "counsel": [
+    "Seek urgent care for abdominal pain, vomiting, yellowing of skin/eyes, unusual bruising or marked lethargy",
+    "Women of childbearing age must use effective contraception and discuss pregnancy risks; take folic acid",
+    "Do not stop suddenly - abrupt withdrawal can precipitate seizures",
+    "Swallow extended-release tablets whole; do not crush or chew",
+    "Avoid alcohol and report new depression or thoughts of self-harm"
+  ],
+  "pk": [
+    ["Onset", "Anticonvulsant effect over days; ER smooths levels"],
+    ["Peak", "ER ~4-17 hours; DR ~3-5 hours"],
+    ["Half-life", "9-16 hours (shorter with enzyme inducers)"],
+    ["Duration", "Once-daily dosing feasible with ER"],
+    ["Storage", "Store at 20-25 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warnings: hepatotoxicity (highest in children <2 yr), teratogenicity (neural tube defects, lowered IQ), and pancreatitis",
+    "Carbapenems can rapidly drop valproate levels and trigger breakthrough seizures - avoid the combination",
+    "Check ammonia for unexplained encephalopathy even with normal liver enzymes",
+    "Total level can mislead in renal impairment or hypoalbuminemia; consider free valproate"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it. Never take a double dose. Do not stop the medicine abruptly without medical advice.",
+  "overdose": "Overdose may cause somnolence, heart block, deep coma, hypotension and respiratory depression; hyperammonemia and cerebral edema can occur. Provide supportive care with airway protection; naloxone has been used (may reverse CNS depression but can reverse anticonvulsant effect). Hemodialysis and L-carnitine may benefit severe poisoning; monitor levels, ammonia and cardiac status.",
+  "refs": [
+    ["FDA Divalproex Sodium Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22divalproex+sodium%22"],
+    ["FDA DailyMed - Divalproex Sodium", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

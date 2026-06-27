@@ -1,0 +1,119 @@
+{
+  "generic": "Clofarabine",
+  "cls": "Antineoplastic - purine nucleoside antimetabolite",
+  "pharm": "Second-generation purine nucleoside analogue that is intracellularly phosphorylated to its active triphosphate, which inhibits DNA polymerase and ribonucleotide reductase, terminating DNA chain elongation and repair; it also disrupts mitochondrial membrane integrity to trigger apoptosis in proliferating leukemic cells.",
+  "tags": ["Rx only", "IV antimetabolite", "Pediatric relapsed/refractory ALL", "Capillary leak/SIRS risk", "Severe myelosuppression", "Requires IV hydration"],
+  "quick": [
+    ["Adult dose", "52 mg/m2 IV over 2 hours once daily for 5 consecutive days, repeated every 2-6 weeks (studied in patients 1-21 years)"],
+    ["Meal", "Not applicable (IV infusion)"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for at least 2 weeks after the last dose"],
+    ["Renal", "Reduce starting dose by 50% in moderate impairment (CrCl 30-60 mL/min); avoid/not recommended in severe impairment or dialysis"],
+    ["Hepatic", "Not studied; use with caution and withhold for hepatotoxicity (hepatic enzymes/bilirubin)"],
+    ["Alcohol", "Not applicable to the agent; avoid hepatotoxins"],
+    ["Monitoring", "CBC with platelets, renal/hepatic function, volume status, vital signs, signs of capillary leak/SIRS and tumor lysis"]
+  ],
+  "summary": "Clofarabine (Clolar) is an intravenous purine nucleoside antimetabolite indicated for the treatment of pediatric patients 1 to 21 years of age with relapsed or refractory acute lymphoblastic leukemia (ALL) after at least two prior regimens. After cellular uptake it is phosphorylated to clofarabine triphosphate, which inhibits DNA polymerase alpha and ribonucleotide reductase and is incorporated into DNA, halting replication and repair and driving leukemic-cell apoptosis. The recommended dose is 52 mg/m2 given by IV infusion over 2 hours daily for 5 consecutive days, repeated every 2 to 6 weeks based on recovery and toxicity. The most serious risks include capillary leak syndrome and systemic inflammatory response syndrome (SIRS), severe bone marrow suppression (neutropenia, thrombocytopenia, anemia) with risk of serious infection and hemorrhage, hepatotoxicity (including veno-occlusive disease), tumor lysis syndrome, and renal and cardiac toxicity. Continuous IV hydration throughout the 5-day course is important to reduce tumor lysis and other toxic effects, and prophylactic corticosteroids and allopurinol are commonly used.",
+  "indications": [
+    "Treatment of pediatric patients 1 to 21 years old with relapsed or refractory acute lymphoblastic leukemia (ALL) after at least two prior regimens"
+  ],
+  "dosage": [
+    {"c": "Pediatric relapsed/refractory ALL (1-21 y)", "r": "Standard", "d": "52 mg/m2 IV over 2 hours", "t": "Once daily x5 consecutive days, repeat cycles every 2-6 weeks", "n": "Base body surface area on actual height/weight before each cycle; cycles repeated after recovery of organ function and baseline counts (ANC >=0.75 x10^9/L)"},
+    {"c": "Hematologic toxicity (delayed count recovery, no disease progression)", "r": "Dose delay", "d": "52 mg/m2 IV over 2 hours", "t": "Delay next cycle until ANC >=0.75 x10^9/L", "n": "If recovery takes >6 weeks or recurs, reduce subsequent dose by 25%"},
+    {"c": "Non-hematologic Grade 3 toxicity (clinically significant)", "r": "Dose reduction", "d": "Reduce by 25% (to ~39 mg/m2 IV over 2 hours)", "t": "Once daily x5 days, next cycle", "n": "Hold for clinically significant infection until controlled, then restart at full dose"},
+    {"c": "Moderate renal impairment (CrCl 30 to <60 mL/min)", "r": "Dose reduction", "d": "Reduce starting dose by 50% (to ~26 mg/m2 IV over 2 hours)", "t": "Once daily x5 days", "n": "Insufficient data for severe impairment/dialysis; not recommended"},
+    {"c": "Early signs of capillary leak syndrome or SIRS", "r": "Discontinue/hold", "d": "Discontinue clofarabine immediately", "t": "Stop infusion", "n": "Provide supportive care (fluids, vasopressors, corticosteroids, ventilatory support); resume only at a reduced dose once stabilized"}
+  ],
+  "admin": [
+    "Filter through a sterile 0.2 micron syringe filter and dilute in 0.9% sodium chloride or 5% dextrose injection before administration",
+    "Administer as an IV infusion over 2 hours; do not mix or administer simultaneously through the same IV line with other medications",
+    "Give continuous IV fluids throughout the 5-day treatment course to maintain hydration and reduce the risk of tumor lysis and other toxicities",
+    "Consider prophylactic allopurinol if hyperuricemia/tumor lysis is expected, and prophylactic corticosteroids (e.g., hydrocortisone) on days 1-3 to reduce the risk of SIRS/capillary leak syndrome",
+    "Monitor respiratory status and blood pressure during and after the infusion; if hypotension develops for any reason, stop the infusion",
+    "Discontinue immediately and treat supportively at early signs of capillary leak syndrome or SIRS; avoid drugs known to be hepatotoxic or nephrotoxic during the 5-day course"
+  ],
+  "moa": "Clofarabine is a deoxyadenosine nucleoside analogue. It is transported into cells and sequentially phosphorylated by intracellular kinases (deoxycytidine kinase and mono-/di-phosphokinases) to the active 5'-triphosphate metabolite. Clofarabine triphosphate inhibits DNA synthesis by competing with deoxyadenosine triphosphate for DNA polymerase alpha and epsilon, causing chain termination and inhibiting DNA repair, and by inhibiting ribonucleotide reductase, which depletes the cellular deoxynucleotide triphosphate pools needed for DNA replication. It is also incorporated into the DNA chain. In addition, clofarabine disrupts the integrity of the mitochondrial membrane, releasing pro-apoptotic mitochondrial proteins (cytochrome c and apoptosis-inducing factor) and triggering programmed cell death of both dividing and quiescent leukemic cells.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity to clofarabine or any component of the formulation"
+    ],
+    "relative": [
+      "Pregnancy and breastfeeding (fetal harm; avoid)",
+      "Pre-existing severe bone marrow suppression",
+      "Renal impairment, especially moderate-to-severe (reduce dose; avoid in severe)",
+      "Hepatic dysfunction or history of veno-occlusive disease",
+      "Cardiac disease or other condition predisposing to capillary leak/SIRS",
+      "Concomitant nephrotoxic or hepatotoxic drugs during the 5-day course"
+    ],
+    "monitor": [
+      "Complete blood count with platelets for myelosuppression",
+      "Renal function (serum creatinine, urine output) for nephrotoxicity",
+      "Hepatic enzymes and bilirubin for hepatotoxicity/veno-occlusive disease",
+      "Vital signs, weight, and respiratory status for capillary leak syndrome/SIRS",
+      "Electrolytes, uric acid, and renal function for tumor lysis syndrome",
+      "Cardiac function (signs of left ventricular dysfunction/pericardial effusion)"
+    ]
+  },
+  "preg": "Based on its mechanism and animal findings, clofarabine can cause fetal harm. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and after the last dose. Avoid use during pregnancy unless the potential benefit clearly outweighs the risk to the fetus.",
+  "lact": "It is not known whether clofarabine or its metabolites are present in human milk. Because of the potential for serious adverse reactions in a breastfed infant, advise women not to breastfeed during treatment with clofarabine and for at least 2 weeks after the final dose.",
+  "renal": "Clofarabine is substantially eliminated by the kidneys, and renal dysfunction increases exposure and toxicity. Reduce the starting dose by 50% in patients with moderate renal impairment (creatinine clearance 30 to less than 60 mL/min). There are insufficient data in severe renal impairment (CrCl below 30 mL/min) or dialysis, so use is not recommended in these patients. Monitor renal function closely and withhold for clinically significant renal toxicity.",
+  "hepatic": "The pharmacokinetics of clofarabine have not been formally studied in patients with hepatic impairment, and the liver is a potential target organ of toxicity. Use with caution in patients with a history of hepatic disease. Monitor hepatic enzymes and bilirubin frequently during the 5-day course; withhold or discontinue for Grade 3 or higher hepatotoxicity, and watch for hepatic veno-occlusive disease, particularly after hematopoietic stem cell transplantation.",
+  "interactions": {
+    "major": [
+      "Hepatotoxic drugs - avoid concomitant use during the 5-day course; additive risk of hepatotoxicity and veno-occlusive disease",
+      "Nephrotoxic drugs - avoid during the 5-day course; additive risk of renal injury that increases clofarabine exposure"
+    ],
+    "moderate": [
+      "Other myelosuppressive agents and radiation - additive bone marrow suppression",
+      "Drugs affecting blood pressure or known to cause cardiac toxicity - may worsen hypotension or cardiac effects during therapy",
+      "Live vaccines - avoid because of immunosuppression and risk of disseminated infection"
+    ],
+    "minor": ["Clofarabine is minimally metabolized by hepatic enzymes, so clinically significant cytochrome P450-mediated interactions are not expected"],
+    "food": "Not applicable; clofarabine is given intravenously.",
+    "alcohol": "Not applicable to the agent itself; patients should avoid additional hepatotoxins, including alcohol, during therapy.",
+    "diagnostics": "Tumor lysis can cause hyperuricemia, hyperkalemia, hyperphosphatemia, and hypocalcemia; transient elevations of hepatic transaminases and bilirubin and rises in serum creatinine are common and should be monitored."
+  },
+  "se": {
+    "common": ["Vomiting", "Nausea", "Diarrhea", "Febrile neutropenia", "Anemia", "Neutropenia", "Thrombocytopenia", "Headache", "Pruritus", "Rash", "Pyrexia", "Fatigue", "Tachycardia", "Hypotension", "Elevated transaminases/bilirubin"],
+    "serious": ["Capillary leak syndrome", "Systemic inflammatory response syndrome (SIRS)", "Severe bone marrow suppression (neutropenia, thrombocytopenia, anemia)", "Serious and opportunistic infections/sepsis", "Hemorrhage (including cerebral, pulmonary, and GI bleeding)", "Hepatotoxicity including veno-occlusive disease", "Tumor lysis syndrome", "Renal toxicity/acute kidney injury", "Cardiac toxicity (left ventricular dysfunction, pericardial effusion)", "Severe dermatologic reactions (Stevens-Johnson syndrome/toxic epidermal necrolysis)"],
+    "rare": ["Veno-occlusive disease of the liver (notably after stem cell transplant)", "Enterocolitis (including neutropenic colitis, typhlitis) with risk of bowel perforation/sepsis"],
+    "emergency": ["Rapid respiratory distress, hypotension, capillary leak, or organ dysfunction (capillary leak syndrome/SIRS)", "Fever with neutropenia or signs of sepsis", "Severe bleeding or bruising", "Decreased urine output, marked swelling, or rapid weight gain", "Signs of tumor lysis (severe weakness, cramps, palpitations, decreased urination)"]
+  },
+  "monitoring": [
+    "Complete blood count with platelets frequently during therapy (counts often nadir during/after the 5-day course)",
+    "Renal function (serum creatinine, urine output) and hepatic function (transaminases, bilirubin) at baseline and frequently during each cycle",
+    "Vital signs, body weight, fluid balance, and respiratory status during and after infusion for capillary leak syndrome/SIRS",
+    "Electrolytes, uric acid, phosphate, and calcium for tumor lysis syndrome, especially in the first cycle",
+    "Cardiac status for signs of left ventricular dysfunction or pericardial effusion",
+    "Signs and symptoms of infection, bleeding, and severe skin reactions; pregnancy status in females of reproductive potential before starting"
+  ],
+  "counsel": [
+    "This medicine is given as an IV infusion over 2 hours each day for 5 days in a row, and the cycle may be repeated; you will receive IV fluids throughout to protect your kidneys",
+    "Tell the team right away about trouble breathing, dizziness, swelling, or rapid weight gain - these can signal a serious reaction (capillary leak)",
+    "Report fever, chills, sore throat, unusual bleeding or bruising, or signs of infection promptly because blood counts drop",
+    "Report dark urine, yellowing of the skin or eyes, severe abdominal pain, or much less urine than usual",
+    "Drink fluids as advised and report severe nausea, vomiting, or diarrhea so dehydration can be treated",
+    "Use effective birth control during treatment and do not breastfeed; tell your team about all other medicines, especially those affecting the liver or kidneys"
+  ],
+  "pk": [
+    ["Onset", "Active triphosphate forms intracellularly soon after infusion; antileukemic effect over treatment cycles"],
+    ["Peak", "End of infusion"],
+    ["Half-life", "Terminal elimination half-life approximately 5.2 hours"],
+    ["Duration", "Largely renally eliminated (~49-60% unchanged in urine) within hours to a day; effect maintained over the 5-day course"],
+    ["Storage", "Store at 20-25 C (68-77 F); do not refrigerate or freeze; use diluted solution within 24 hours"]
+  ],
+  "pearls": [
+    "Capillary leak syndrome and SIRS (tachypnea, hypotension, pulmonary/multi-organ edema) can be life-threatening - stop the infusion at the first signs and give aggressive supportive care; prophylactic corticosteroids on days 1-3 may reduce risk",
+    "Severe and prolonged myelosuppression is expected - anticipate neutropenia, thrombocytopenia, and anemia with high risk of infection and bleeding; provide growth factor/transfusion support as needed",
+    "Continuous IV hydration throughout the 5-day course plus allopurinol reduces tumor lysis syndrome and renal toxicity, especially with high tumor burden",
+    "Hepatotoxicity (including veno-occlusive disease) and renal/cardiac toxicity require frequent monitoring; avoid concomitant hepatotoxic and nephrotoxic drugs",
+    "Reduce the starting dose by 50% in moderate renal impairment; clofarabine is largely cleared by the kidneys",
+    "Approved specifically for pediatric patients 1-21 years with relapsed/refractory ALL after at least 2 prior regimens; given by a clinician as a scheduled IV cycle"
+  ],
+  "missed": "Clofarabine is a clinician-administered, scheduled intravenous chemotherapy regimen (given over 5 consecutive days per cycle in a treatment center), not a self-administered medicine. There is no patient-managed missed dose; if a scheduled dose or appointment cannot be given, the treating oncology team decides on timing and any dose adjustment based on counts, organ function, and toxicity.",
+  "overdose": "There is no known specific antidote for clofarabine overdose. Management is supportive: discontinue the drug, monitor closely, and treat complications such as severe myelosuppression (with antimicrobials, growth factors, and blood product support), capillary leak syndrome/SIRS, and renal, hepatic, and cardiac toxicity. Maintain hydration and manage tumor lysis and fluid/electrolyte abnormalities as needed.",
+  "refs": [
+    ["FDA Label - Clofarabine / CLOLAR (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22clofarabine%22"],
+    ["DailyMed - Clofarabine (CLOLAR)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=clofarabine"]
+  ]
+}

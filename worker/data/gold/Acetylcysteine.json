@@ -1,0 +1,95 @@
+{
+  "generic": "Acetylcysteine",
+  "cls": "Antidote (acetaminophen/paracetamol overdose); mucolytic",
+  "pharm": "Glutathione precursor and reactive-metabolite scavenger that prevents/limits hepatic injury after acetaminophen overdose; also a mucolytic that cleaves mucus disulfide bonds.",
+  "tags": ["Antidote", "Acetaminophen overdose", "Glutathione precursor", "Mucolytic", "IV/oral", "N-acetylcysteine"],
+  "quick": [
+    ["Adult dose", "IV 3-bag: 150 mg/kg, then 50 mg/kg, then 100 mg/kg (300 mg/kg over 21 h)"],
+    ["Meal", "N/A (IV); oral solution often diluted in juice"],
+    ["Pregnancy", "Use - benefit of treating overdose outweighs risk; crosses placenta"],
+    ["Lactation", "Limited data; treatment of overdose should not be delayed"],
+    ["Renal", "No specific adjustment"],
+    ["Hepatic", "Used to treat hepatotoxicity; no dose reduction for the antidote"],
+    ["Alcohol", "Chronic alcohol use raises acetaminophen-toxicity risk; NAC still indicated"],
+    ["Monitoring", "Acetaminophen level, AST/ALT, bilirubin, INR, creatinine; watch for anaphylactoid reaction"]
+  ],
+  "summary": "Acetylcysteine (N-acetylcysteine, NAC) is the antidote for acetaminophen (paracetamol) overdose, preventing or lessening hepatic injury by restoring/maintaining hepatic glutathione and detoxifying the reactive metabolite NAPQI. The IV regimen is a weight-based 3-bag (300 mg/kg total) infusion over 21 hours; need and duration are guided by timing of ingestion, the Rumack-Matthew nomogram, and serial labs. Anaphylactoid (non-IgE) reactions are the main acute hazard, especially during the loading dose; caution in asthma. It is also used as a mucolytic by inhalation/oral route.",
+  "indications": [
+    "Prevention or limitation of hepatic injury after a potentially hepatotoxic acute acetaminophen ingestion",
+    "Hepatic protection after repeated supratherapeutic acetaminophen ingestion (RSI)",
+    "Mucolytic for viscid mucus in bronchopulmonary disease (inhalation/oral - separate formulations)"
+  ],
+  "dosage": [
+    {"c": "Acetaminophen overdose - IV (3-bag regimen)", "r": "IV", "d": "Loading 150 mg/kg, then 50 mg/kg, then 100 mg/kg (total 300 mg/kg)", "t": "Loading over ~60 min; second dose over 4 h; third dose over 16 h (total 21 h)", "n": "Must be diluted; reduce total volume in patients <40 kg or needing fluid restriction; extend beyond 21 h per labs"},
+    {"c": "Acetaminophen overdose - oral (traditional 72-h regimen)", "r": "Oral", "d": "Loading 140 mg/kg, then 70 mg/kg", "t": "70 mg/kg every 4 h for 17 doses", "n": "Dilute to 5% solution; repeat dose if vomited within 1 h"},
+    {"c": "Pre-treatment assessment", "r": "-", "d": "Obtain acetaminophen level >=4 h post-ingestion", "t": "Use Rumack-Matthew nomogram (acute, known time)", "n": "If timing unknown or level unavailable within 8 h, give loading dose immediately"},
+    {"c": "Mucolytic (inhalation)", "r": "Inhalation/nebulizer", "d": "3-5 mL of 20% or 6-10 mL of 10% solution", "t": "3-4 times daily", "n": "Separate mucolytic labeling; have suction available (increased secretions)"}
+  ],
+  "admin": [
+    "IV solution is hyperosmolar (2600 mOsmol/L) - dilute in sterile water, 0.45% NaCl, or D5W before infusion",
+    "Give the loading dose over ~60 minutes (slower 60-min infusion has fewer hypersensitivity reactions than 15-min)",
+    "Reduce total fluid volume for patients <40 kg or requiring fluid restriction to avoid overload",
+    "Observe closely during and after infusion for hypersensitivity (rash, hypotension, wheeze); stop infusion and treat if a serious reaction occurs, then carefully restart",
+    "Color may turn slightly pink/purple after the stopper is punctured - this does not affect quality",
+    "Do not delay treatment of significant overdose while awaiting confirmatory labs"
+  ],
+  "moa": "Acetylcysteine reduces hepatic injury after acetaminophen overdose by maintaining or restoring hepatic glutathione stores and by acting as an alternate sulfhydryl substrate that conjugates with and detoxifies the reactive metabolite (NAPQI). As a mucolytic, its free sulfhydryl group cleaves disulfide bonds in mucoprotein, lowering mucus viscosity.",
+  "contra": {
+    "absolute": ["Previous hypersensitivity reaction to acetylcysteine"],
+    "relative": ["Asthma or history of bronchospasm (anaphylactoid reactions and bronchospasm reported)", "Volume overload risk (low body weight, fluid restriction)"],
+    "monitor": ["Acetaminophen level and hepatic/renal labs", "Signs of hypersensitivity during infusion", "Fluid status"]
+  },
+  "preg": "Limited human data are insufficient to define risk; acetylcysteine and acetaminophen cross the placenta. Delaying treatment of acetaminophen overdose increases maternal and fetal risk, so do not withhold NAC when indicated.",
+  "lact": "Data on milk excretion are limited; treatment of a significant overdose should not be delayed for breastfeeding considerations.",
+  "renal": "No specific dose adjustment; about 30% of clearance is renal.",
+  "hepatic": "Used specifically to treat acetaminophen-induced hepatotoxicity; no dose reduction is made for the antidote indication. Continue/extend therapy if hepatic injury is evolving (per labs).",
+  "interactions": {
+    "major": ["None clinically significant for the antidote use"],
+    "moderate": ["Activated charcoal (theoretical adsorption of oral NAC - IV route avoids this concern)"],
+    "minor": ["May potentiate vasodilatory/antiplatelet effects of nitroglycerin (theoretical)"],
+    "food": "N/A for IV; oral solution often diluted in cola or juice to improve palatability.",
+    "alcohol": "Chronic alcohol use increases acetaminophen hepatotoxicity risk; NAC remains indicated.",
+    "diagnostics": "Serial acetaminophen levels, AST/ALT, bilirubin, INR, creatinine, BUN, electrolytes, and acid-base/fluid balance guide therapy; NAC may modestly prolong INR/PT independent of liver injury."
+  },
+  "se": {
+    "common": ["Rash, urticaria, facial flushing", "Pruritus", "Nausea, vomiting (oral)", "Disagreeable sulfur odor/taste (oral/inhaled)"],
+    "serious": ["Anaphylactoid reactions with hypotension, wheezing, dyspnea, bronchospasm", "Bronchospasm in asthmatic patients (a fatality has been reported)", "Fluid overload (with excessive IV volume)"],
+    "rare": ["Angioedema", "Seizures (with massive dosing errors)"],
+    "emergency": ["Anaphylactoid reaction with severe hypotension/bronchospasm", "Respiratory compromise in asthma"]
+  },
+  "monitoring": [
+    "Serum acetaminophen concentration (>=4 h post-ingestion; plot on Rumack-Matthew nomogram for acute, timed ingestion)",
+    "AST, ALT, bilirubin, INR/PT, creatinine, BUN, electrolytes, glucose",
+    "Clinical signs of anaphylactoid reaction during and after infusion",
+    "Fluid status, especially in low-weight or fluid-restricted patients",
+    "Continue and reassess therapy beyond 21 h if hepatotoxicity persists"
+  ],
+  "counsel": [
+    "This medicine protects your liver from acetaminophen (paracetamol) poisoning - completing the full course is important",
+    "Tell staff right away if you feel flushing, itching, rash, wheezing, or trouble breathing during the drip",
+    "If you have asthma, let the team know - you will be watched closely",
+    "Oral solution has a strong sulfur smell; mixing with juice or cola helps",
+    "Follow-up blood tests check that your liver is recovering"
+  ],
+  "pk": [
+    ["Onset", "Most effective when started within 8-10 h of acetaminophen ingestion"],
+    ["Peak", "End of IV infusion (Tmax variable for oral)"],
+    ["Half-life", "~5.6 h (IV, total acetylcysteine)"],
+    ["Duration", "Standard IV course 21 h; oral 72 h; extend per labs"],
+    ["Storage", "Unopened vials at 20-25 C; discard unused portion; preservative-free"]
+  ],
+  "pearls": [
+    "Antidote efficacy is highest when started within 8 hours of acetaminophen ingestion - do not delay for nomogram if timing/level is uncertain",
+    "Use the Rumack-Matthew nomogram only for a single acute ingestion with a known time; it does not apply to repeated supratherapeutic ingestion",
+    "Anaphylactoid (non-allergic, rate-related) reactions are the key hazard - slow the loading infusion and treat with antihistamines; usually can restart",
+    "IV avoids the charcoal-adsorption and emesis problems of oral NAC",
+    "Caution in asthmatics; have bronchodilators available",
+    "NAC can mildly elevate INR/PT independent of hepatic injury"
+  ],
+  "missed": "Administered under medical supervision during overdose treatment; the treating team adjusts the regimen if an infusion is interrupted. Do not stop early - therapy continues until labs indicate it is safe.",
+  "overdose": "Overdose of NAC itself (often a 10-fold calculation error) can cause severe anaphylactoid reactions, hypotension, and rarely seizures and death. Stop the infusion, treat anaphylaxis (antihistamines, fluids, bronchodilators, epinephrine if severe), and provide supportive care.",
+  "refs": [
+    ["FDA Acetylcysteine Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22acetylcysteine%22"],
+    ["DailyMed - Acetylcysteine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=acetylcysteine"]
+  ]
+}

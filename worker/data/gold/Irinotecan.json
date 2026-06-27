@@ -1,0 +1,111 @@
+{
+  "generic": "Irinotecan",
+  "cls": "Antineoplastic — topoisomerase I inhibitor",
+  "pharm": "Camptothecin topoisomerase I inhibitor; prodrug metabolized to active SN-38",
+  "tags": ["Rx", "Habit forming: No", "Injection", "Cytotoxic chemotherapy"],
+  "quick": [
+    ["Adult dose", "125 or 180 mg/m2 IV per regimen"],
+    ["Meal", "Not applicable (parenteral)"],
+    ["Pregnancy", "Can cause fetal harm; avoid"],
+    ["Lactation", "Discontinue nursing"],
+    ["Renal", "No formal adjustment; use caution"],
+    ["Hepatic", "Bilirubin elevation increases toxicity"],
+    ["Alcohol", "Avoid"],
+    ["Monitoring", "CBC, diarrhea, bilirubin, UGT1A1"]
+  ],
+  "summary": "Irinotecan is an intravenous camptothecin-derivative topoisomerase I inhibitor used for metastatic colorectal cancer, either first-line with 5-fluorouracil and leucovorin or for disease that has progressed after fluorouracil-based therapy. It is a prodrug converted to the potent active metabolite SN-38. It carries a boxed warning for severe diarrhea (early cholinergic and dangerous late diarrhea) and severe myelosuppression, which must be managed aggressively.",
+  "indications": [
+    "First-line therapy of metastatic colorectal cancer in combination with 5-fluorouracil and leucovorin",
+    "Metastatic colorectal cancer that has recurred or progressed after fluorouracil-based therapy"
+  ],
+  "dosage": [
+    {"c": "Colorectal — combination regimen 1 (weekly)", "r": "IV infusion over 90 min", "d": "125 mg/m2 on days 1, 8, 15, 22 with leucovorin and 5-FU", "t": "Every 6 weeks", "n": "Per protocol"},
+    {"c": "Colorectal — combination regimen 2 (every 2 weeks)", "r": "IV infusion over 90 min", "d": "180 mg/m2 on days 1, 15, 29 with leucovorin and 5-FU", "t": "Every 6-week cycle (q2-week schedule)", "n": "FOLFIRI-type regimen"},
+    {"c": "Single agent — weekly", "r": "IV infusion over 90 min", "d": "125 mg/m2 on days 1, 8, 15, 22", "t": "Every 6 weeks", "n": "After fluorouracil failure"},
+    {"c": "Single agent — every 3 weeks", "r": "IV infusion over 90 min", "d": "350 mg/m2", "t": "Once every 3 weeks", "n": "Reduce for UGT1A1*28 homozygotes / prior toxicity"}
+  ],
+  "admin": [
+    "Administer as a 90-minute IV infusion by clinicians experienced in chemotherapy",
+    "Premedicate with antiemetics; have atropine available for cholinergic symptoms",
+    "Treat early diarrhea and cholinergic symptoms with atropine; treat late diarrhea promptly with loperamide",
+    "Withhold/reduce dose for severe diarrhea or neutropenia",
+    "Consider reduced starting dose in patients homozygous for UGT1A1*28"
+  ],
+  "moa": "Irinotecan and its active metabolite SN-38 bind the topoisomerase I-DNA complex, preventing re-ligation of single-strand breaks; collision with the replication fork causes lethal double-strand DNA damage (S-phase cytotoxicity).",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to irinotecan"
+    ],
+    "relative": [
+      "Pre-existing severe bone marrow suppression",
+      "UGT1A1*28 homozygosity (increased neutropenia)",
+      "Hepatic impairment with elevated bilirubin",
+      "Bowel obstruction"
+    ],
+    "monitor": ["Blood counts", "Diarrhea/hydration", "Bilirubin"]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal data; avoid in pregnancy and advise effective contraception.",
+  "lact": "SN-38 found in animal milk; discontinue breastfeeding during therapy and for a period after.",
+  "renal": "No formal dose adjustment; not recommended in patients on dialysis. Use with caution.",
+  "hepatic": "Patients with elevated bilirubin have reduced SN-38 clearance and greater neutropenia risk; do not use with bilirubin above defined thresholds.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inducers (e.g., rifampin, phenytoin, St. John's wort) — reduce active metabolite, lower efficacy; avoid",
+      "Strong CYP3A4/UGT1A1 inhibitors (e.g., ketoconazole) — increase exposure and toxicity; avoid",
+      "Other myelosuppressive chemotherapy/radiation — additive toxicity"
+    ],
+    "moderate": [
+      "Antiemetic dexamethasone — may worsen hyperglycemia/lymphocytopenia",
+      "Prochlorperazine — increased akathisia when same day",
+      "Live vaccines — avoid"
+    ],
+    "minor": [],
+    "food": "Not applicable (parenteral); avoid St. John's wort.",
+    "alcohol": "Avoid.",
+    "diagnostics": "Monitor UGT1A1 genotype where dosing decisions depend on it."
+  },
+  "se": {
+    "common": ["Diarrhea (early and late)", "Nausea and vomiting", "Cholinergic symptoms (sweating, cramps, lacrimation, rhinorrhea)", "Alopecia", "Anorexia", "Asthenia", "Mucositis"],
+    "serious": [
+      "Severe, life-threatening late diarrhea with dehydration",
+      "Severe neutropenia / neutropenic fever and sepsis",
+      "Colitis / ileus, bowel obstruction and rare GI perforation",
+      "Interstitial lung disease",
+      "Severe hypersensitivity / anaphylaxis",
+      "Thromboembolic events"
+    ],
+    "rare": ["Renal impairment from dehydration", "Hepatotoxicity", "Microscopic colitis"],
+    "emergency": ["Profuse late diarrhea with hypovolemia", "Neutropenic sepsis", "Severe acute cholinergic reaction", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Complete blood count before each dose",
+    "Diarrhea severity, hydration and electrolytes",
+    "Serum bilirubin and liver function",
+    "UGT1A1*28 status when considering dose",
+    "Signs of infection during neutropenia"
+  ],
+  "counsel": [
+    "Start loperamide at the first loose stool after the early period and continue per instructions",
+    "Drink plenty of fluids; report diarrhea that does not stop or fever",
+    "Early cramping, sweating or watery eyes during infusion are treated with atropine",
+    "Report fever, chills or signs of infection immediately",
+    "Use effective contraception and do not breastfeed during treatment"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic over the cell cycle after conversion to SN-38"],
+    ["Peak", "End of 90-minute infusion"],
+    ["Half-life", "Irinotecan ~6-12 h; SN-38 ~10-20 h"],
+    ["Duration", "Effects extend across the dosing cycle"],
+    ["Storage", "Vials 15-30 C (59-86 F), protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: severe diarrhea and severe myelosuppression",
+    "Early diarrhea is cholinergic and responds to atropine; late diarrhea is dangerous and requires prompt high-dose loperamide",
+    "UGT1A1*28 homozygotes have higher SN-38 exposure and severe neutropenia risk — consider a reduced starting dose",
+    "Withhold for any patient with active diarrhea or neutropenia until resolved",
+    "Avoid strong CYP3A4 inducers (including St. John's wort) and inhibitors"
+  ],
+  "missed": "Doses are scheduled within a chemotherapy protocol and managed by the oncology team; missed or delayed infusions are not self-administered.",
+  "overdose": "No antidote. Overdose intensifies diarrhea and myelosuppression. Provide maximal supportive care: aggressive antidiarrheal/loperamide therapy, fluids and electrolytes, and management of neutropenia and infection.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

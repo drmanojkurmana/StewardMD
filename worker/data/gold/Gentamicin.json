@@ -1,0 +1,97 @@
+{
+  "generic": "Gentamicin",
+  "cls": "Aminoglycoside antibiotic",
+  "pharm": "Antibacterial agent (parenteral)",
+  "tags": ["aminoglycoside", "antibiotic", "gram-negative", "nephrotoxicity", "ototoxicity"],
+  "quick": [
+    ["Adult dose", "3 mg/kg/day IM/IV divided q8h (up to 5 mg/kg/day)"],
+    ["Meal", "Parenteral; not applicable"],
+    ["Pregnancy", "Category D; can cause fetal harm"],
+    ["Lactation", "Caution; crosses placental/peritoneal membranes"],
+    ["Renal", "Reduce dose/extend interval; adjust to levels"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Not specified"],
+    ["Monitoring", "Peak/trough levels, renal & 8th nerve function"]
+  ],
+  "summary": "Gentamicin is a parenteral aminoglycoside for serious gram-negative infections. BOXED WARNING: potential nephrotoxicity and neurotoxicity with ototoxicity (both vestibular and auditory, usually irreversible), greater with renal impairment, high doses or prolonged therapy. Dosed by body weight (3 mg/kg/day divided q8h, up to 5 mg/kg/day) with mandatory monitoring of renal function and serum peak/trough levels.",
+  "indications": [
+    "Serious infections caused by susceptible gram-negative bacteria (Pseudomonas aeruginosa, Proteus, E. coli, Klebsiella-Enterobacter-Serratia, Citrobacter) and Staphylococcus species",
+    "Bacterial neonatal sepsis and bacterial septicemia",
+    "Serious CNS infections (meningitis), respiratory, GI (including peritonitis), urinary tract, skin, bone and soft tissue (including burns) infections",
+    "Endocarditis caused by group D streptococci (combined with a penicillin-type drug)",
+    "Life-threatening Pseudomonas aeruginosa infections (combined with carbenicillin)"
+  ],
+  "dosage": [
+    {"c": "Serious infection, normal renal function (adult)", "r": "IM or IV", "d": "3 mg/kg/day in three equal doses", "t": "1 mg/kg every 8 hours", "n": "Base dose on pretreatment weight; lean body mass in obesity"},
+    {"c": "Life-threatening infection (adult)", "r": "IM or IV", "d": "Up to 5 mg/kg/day in 3-4 equal doses", "t": "Every 6-8 hours", "n": "Reduce to 3 mg/kg/day as soon as clinically indicated"},
+    {"c": "Children", "r": "IM or IV", "d": "6 to 7.5 mg/kg/day", "t": "2 to 2.5 mg/kg every 8 hours", "n": "Usual duration 7-10 days"},
+    {"c": "Infants and neonates", "r": "IM or IV", "d": "7.5 mg/kg/day", "t": "2.5 mg/kg every 8 hours", "n": "Premature/full-term neonates <=1 week: 5 mg/kg/day as 2.5 mg/kg every 12 hours"},
+    {"c": "Impaired renal function (adult)", "r": "IM or IV", "d": "Reduce dose and/or extend interval", "t": "Interval (h) ~ serum creatinine x 8; or divide usual dose by serum creatinine", "n": "Monitor serum levels; post-hemodialysis 1-1.7 mg/kg (children 2 mg/kg)"}
+  ],
+  "admin": [
+    "Give IM or by IV infusion over one-half to two hours (IM and IV doses are identical)",
+    "For IV, dilute a single adult dose in 50-200 mL isotonic saline or D5W; use less diluent in infants and children",
+    "Do NOT physically premix with other drugs (e.g., carbenicillin inactivates gentamicin in vitro); administer separately",
+    "Obtain pretreatment body weight; base dose on lean body mass in obese patients",
+    "Inspect for particulate matter and discoloration before use; keep patient well hydrated"
+  ],
+  "moa": "Gentamicin, an aminoglycoside, binds to the prokaryotic (bacterial) ribosome, inhibiting protein synthesis in susceptible bacteria. It is bactericidal in vitro against gram-positive and gram-negative bacteria. It is excreted principally unchanged by glomerular filtration.",
+  "contra": {
+    "absolute": ["Hypersensitivity to gentamicin", "History of hypersensitivity or serious toxic reactions to other aminoglycosides (cross-sensitivity)"],
+    "relative": ["Pre-existing renal impairment (heightened nephro- and ototoxicity)", "Neuromuscular disorders such as myasthenia gravis or parkinsonism", "Sulfite sensitivity (formulation contains sodium metabisulfite)", "Pregnancy (Category D)"],
+    "monitor": ["BOXED WARNING: nephrotoxicity and ototoxicity (vestibular and auditory, often irreversible) - monitor renal and 8th cranial nerve function", "Avoid concurrent other nephrotoxic/neurotoxic drugs and potent diuretics", "Serum peak and trough concentrations (avoid peak >12 mcg/mL, trough >2 mcg/mL)"]
+  },
+  "preg": "Pregnancy Category D. Aminoglycosides can cause fetal harm and cross the placenta; irreversible bilateral congenital deafness has been reported with streptomycin in pregnancy. If used in pregnancy or if the patient becomes pregnant, advise her of the potential hazard to the fetus.",
+  "lact": "Gentamicin crosses peritoneal and placental membranes. Caution is advised in nursing women; the label does not establish safety during lactation.",
+  "renal": "Dosage must be adjusted in renal impairment - gentamicin is cleared more slowly and accumulates. Extend the interval (approx hours = serum creatinine x 8) or reduce the dose (divide usual dose by serum creatinine). Monitor serum levels; after 8-hour hemodialysis levels fall ~50%, give 1-1.7 mg/kg post-dialysis (children 2 mg/kg). Toxicity risk is greatest with renal impairment.",
+  "hepatic": "No specific hepatic dose adjustment is described. Transient hepatomegaly and elevated transaminases/bilirubin have been reported.",
+  "interactions": {
+    "major": ["Other nephrotoxic/neurotoxic drugs (cisplatin, cephaloridine, kanamycin, amikacin, neomycin, polymyxin B, colistin, paromomycin, streptomycin, tobramycin, vancomycin, viomycin) - additive toxicity, avoid", "Potent diuretics (ethacrynic acid, furosemide) - increased ototoxicity; avoid", "Neuromuscular blocking agents/anesthetics (succinylcholine, tubocurarine, decamethonium) - neuromuscular blockade, respiratory paralysis"],
+    "moderate": ["Cephalosporins - increased nephrotoxicity", "Carbenicillin/penicillins - in vitro inactivation of gentamicin (do not premix); shortened half-life in severe renal impairment", "Massive citrate-anticoagulated blood transfusions - neuromuscular blockade"],
+    "minor": ["Probenecid - does not affect renal tubular transport of gentamicin"],
+    "food": "Parenteral drug; food interactions not applicable.",
+    "alcohol": "Not specified in the label.",
+    "diagnostics": "May increase serum transaminases, LDH and bilirubin; may decrease serum calcium, magnesium, sodium and potassium."
+  },
+  "se": {
+    "common": ["Pain at injection site", "Rash", "Nausea/vomiting", "Headache", "Fever"],
+    "serious": ["Nephrotoxicity (rising BUN/creatinine, casts, proteinuria, oliguria)", "Ototoxicity - vestibular and auditory (dizziness, vertigo, tinnitus, hearing loss, often irreversible)", "Peripheral neuropathy/encephalopathy", "Neuromuscular blockade and respiratory depression", "Electrolyte disturbances (hypomagnesemia, hypocalcemia, hypokalemia) with tetany"],
+    "rare": ["Anaphylactoid reaction, laryngeal edema", "Blood dyscrasias (anemia, leukopenia, granulocytopenia, agranulocytosis, thrombocytopenia)", "Pseudotumor cerebri, acute organic brain syndrome", "Pulmonary fibrosis, Fanconi-like syndrome", "Subcutaneous atrophy/fat necrosis at injection site"],
+    "emergency": ["Irreversible hearing loss or vestibular damage", "Acute renal failure", "Neuromuscular blockade with respiratory paralysis", "Anaphylaxis/laryngeal edema (sulfite-related possible)"]
+  },
+  "monitoring": [
+    "Serum peak (30-60 min after IM; target ~4-6 mcg/mL, keep <12 mcg/mL) and trough (<2 mcg/mL) concentrations",
+    "Renal function - BUN, serum creatinine or creatinine clearance, and urinalysis for protein/cells/casts and specific gravity, periodically",
+    "Eighth cranial nerve function - serial audiograms when feasible, especially high-risk patients; watch for dizziness, vertigo, tinnitus, hearing loss",
+    "Serum electrolytes (calcium, magnesium, sodium, potassium)",
+    "Hydration status; reassess renal/auditory/vestibular function if therapy exceeds 10 days"
+  ],
+  "counsel": [
+    "This antibiotic treats bacterial, not viral, infections; complete the full course",
+    "Report any dizziness, ringing in the ears, vertigo or hearing changes immediately",
+    "Report decreased urination or signs of kidney problems",
+    "Report numbness, tingling or muscle twitching",
+    "Inform your provider if pregnant or planning pregnancy"
+  ],
+  "pk": [
+    ["Onset", "Peak serum 30-60 min after IM dose"],
+    ["Peak", "Up to ~4x the mg/kg IM dose (e.g., 1 mg/kg -> ~4 mcg/mL)"],
+    ["Half-life", "~2-3 h normal renal function; prolonged in renal impairment"],
+    ["Duration", "Measurable serum levels for 6-8 hours after IM dose"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: nephrotoxicity plus neurotoxicity with ototoxicity (vestibular AND auditory) - usually irreversible; keep peaks <12 mcg/mL and troughs <2 mcg/mL",
+    "Avoid concurrent potent diuretics (furosemide, ethacrynic acid) and other nephro/ototoxic agents",
+    "Do not premix in the syringe with carbenicillin/penicillins - they inactivate gentamicin; give separately",
+    "Toxicity may not manifest until soon after completing therapy; monitor even post-treatment",
+    "Not first-line for uncomplicated UTI - reserve when less toxic drugs are unsuitable",
+    "Hemodialysis removes gentamicin (peritoneal dialysis far less); useful in overdose"
+  ],
+  "missed": "As an inpatient parenteral antibiotic, missed or delayed doses should be addressed by the care team with attention to the dosing interval and serum level monitoring; do not give two doses close together as this raises toxic peak/trough levels.",
+  "overdose": "In overdosage or toxic reactions, hemodialysis aids removal of gentamicin from the blood, especially if renal function is or becomes compromised; peritoneal dialysis removes it far more slowly. In the newborn, exchange transfusion may be considered. If neuromuscular blockade occurs, calcium salts may reverse it. Provide supportive care and monitor renal and 8th nerve function.",
+  "refs": [
+    ["FDA Gentamicin Sulfate Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22gentamicin+sulfate%22"],
+    ["FDA DailyMed - Gentamicin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

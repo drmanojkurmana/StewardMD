@@ -1,0 +1,135 @@
+{
+  "generic": "Pegfilgrastim",
+  "cls": "Leukocyte (granulocyte colony-stimulating) growth factor - long-acting G-CSF",
+  "pharm": "Pegylated, long-acting recombinant human granulocyte colony-stimulating factor (G-CSF) that stimulates neutrophil production to reduce chemotherapy-induced febrile neutropenia.",
+  "tags": [
+    "Rx only",
+    "Long-acting G-CSF",
+    "Subcutaneous",
+    "Once per chemo cycle"
+  ],
+  "quick": [
+    ["Adult dose", "6 mg subcutaneously once per chemotherapy cycle"],
+    ["Meal", "Subcutaneous injection; not affected by food"],
+    ["Pregnancy", "Limited data; use only if clearly needed"],
+    ["Lactation", "Compatible; minimal expected transfer (large protein, likely degraded in GI tract)"],
+    ["Renal", "No dose adjustment needed"],
+    ["Hepatic", "No dose adjustment needed"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "CBC/platelets, splenic enlargement, respiratory and allergic reactions"]
+  ],
+  "summary": "Pegfilgrastim is a long-acting, pegylated recombinant human G-CSF used to decrease the incidence of infection (febrile neutropenia) in patients with non-myeloid malignancies receiving myelosuppressive chemotherapy, and to increase survival in patients acutely exposed to myelosuppressive radiation (Hematopoietic Subsyndrome of Acute Radiation Syndrome). The usual adult dose is a single 6 mg subcutaneous injection once per chemotherapy cycle, and it must NOT be given between 14 days before and 24 hours after cytotoxic chemotherapy. Key risks include fatal splenic rupture, acute respiratory distress syndrome, serious allergic reactions, and sickle cell crises.",
+  "indications": [
+    "Decrease the incidence of infection, as manifested by febrile neutropenia, in patients with non-myeloid malignancies receiving myelosuppressive anti-cancer drugs associated with a clinically significant incidence of febrile neutropenia",
+    "Increase survival in patients acutely exposed to myelosuppressive doses of radiation (Hematopoietic Subsyndrome of Acute Radiation Syndrome)"
+  ],
+  "dosage": [
+    {"c": "Myelosuppressive chemotherapy (adults)", "r": "Adult subcutaneous", "d": "6 mg as a single subcutaneous injection once per chemotherapy cycle", "t": "Once per cycle", "n": "Do NOT administer between 14 days before and 24 hours after cytotoxic chemotherapy"},
+    {"c": "Hematopoietic Subsyndrome of Acute Radiation Syndrome", "r": "Adult subcutaneous", "d": "Two 6 mg doses one week apart; first dose as soon as possible after suspected/confirmed exposure", "t": "2 doses, 1 week apart", "n": "Estimate absorbed radiation dose; treat promptly"},
+    {"c": "Pediatric patients <45 kg", "r": "Pediatric subcutaneous", "d": "Weight-based dosing per product labeling (Table 1)", "t": "Per labeling", "n": "Do not use single fixed 6 mg dose in small children"}
+  ],
+  "admin": [
+    "Give as a single subcutaneous injection (abdomen, thigh, or upper arm); rotate sites",
+    "Do NOT administer between 14 days before and 24 hours after cytotoxic chemotherapy",
+    "Allow prefilled syringe/on-body injector to reach room temperature; do not shake; inspect for particulates",
+    "Use weight-based dosing for pediatric patients weighing less than 45 kg",
+    "For the on-body injector, instruct patients to report suspected device failure (risk of missed/incomplete dose)"
+  ],
+  "moa": "Pegfilgrastim is a colony-stimulating factor produced by covalent conjugation of recombinant human G-CSF (filgrastim) to polyethylene glycol, which prolongs its half-life. It binds to specific G-CSF receptors on hematopoietic cells, stimulating the proliferation, differentiation, commitment, and functional activation of neutrophil progenitor cells. This increases circulating neutrophil counts, reducing the duration of severe neutropenia and the incidence of febrile neutropenia after myelosuppressive chemotherapy.",
+  "contra": {
+    "absolute": [
+      "History of serious allergic reactions to pegfilgrastim products or filgrastim products (including anaphylaxis)"
+    ],
+    "relative": [
+      "Sickle cell disease/trait (risk of severe, sometimes fatal, sickle cell crisis)",
+      "Concurrent use with the 14-day-before / 24-hour-after chemotherapy window",
+      "Known sensitivity to acrylic adhesives (on-body injector)"
+    ],
+    "monitor": [
+      "Splenic size (left upper quadrant/shoulder pain)",
+      "Respiratory status (ARDS)",
+      "Complete blood count and platelets",
+      "Allergic reactions and sickle cell crisis"
+    ]
+  },
+  "preg": "Available data are limited; pegfilgrastim is a large pegylated protein with limited placental transfer expected. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "There are no data on presence in human milk; G-CSF is a large glycoprotein likely degraded in the infant GI tract, so systemic absorption is not expected. Breastfeeding is generally considered compatible.",
+  "renal": "No dosage adjustment is necessary in patients with renal impairment.",
+  "hepatic": "No dosage adjustment is necessary in patients with hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Cytotoxic chemotherapy - do not administer within the 14 days before to 24 hours after window due to sensitivity of rapidly dividing myeloid cells"
+    ],
+    "moderate": [
+      "Lithium - may potentiate the release of neutrophils; monitor neutrophil counts",
+      "Drugs that may increase MDS/AML risk in breast/lung cancer when combined with chemo/radiotherapy"
+    ],
+    "minor": [
+      "No significant pharmacokinetic drug interactions established"
+    ],
+    "food": "Not applicable (subcutaneous injection).",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Can cause transiently positive bone-imaging changes due to increased hematopoietic activity; transiently elevated alkaline phosphatase, LDH, and uric acid may occur."
+  },
+  "se": {
+    "common": [
+      "Bone pain",
+      "Pain in extremity / musculoskeletal pain",
+      "Injection-site reactions"
+    ],
+    "serious": [
+      "Fatal splenic rupture",
+      "Acute respiratory distress syndrome (ARDS)",
+      "Serious allergic reactions including anaphylaxis",
+      "Sickle cell crisis (can be fatal) in patients with sickle cell disease/trait",
+      "Glomerulonephritis",
+      "Capillary leak syndrome",
+      "Aortitis"
+    ],
+    "rare": [
+      "Thrombocytopenia",
+      "Myelodysplastic syndrome / acute myeloid leukemia (in breast/lung cancer with chemo/radiotherapy)",
+      "Leukocytosis"
+    ],
+    "emergency": [
+      "Splenic rupture (left upper abdominal or shoulder-tip pain)",
+      "ARDS (fever, lung infiltrates, respiratory distress)",
+      "Anaphylaxis",
+      "Sickle cell crisis"
+    ]
+  },
+  "monitoring": [
+    "Complete blood count and platelet counts periodically",
+    "Left upper quadrant or shoulder-tip pain (splenic enlargement/rupture)",
+    "Fever, dyspnea, or lung infiltrates (ARDS)",
+    "Signs of allergic reaction and, in sickle cell patients, sickle crisis",
+    "Renal function (glomerulonephritis), and MDS/AML signs in breast/lung cancer patients"
+  ],
+  "counsel": [
+    "This is given as one injection per chemotherapy cycle, not on the same day as your chemo drugs",
+    "Bone or muscle pain is common; ask your team about appropriate pain relief",
+    "Seek urgent care for upper-left belly or shoulder pain, trouble breathing, or signs of allergic reaction",
+    "If using an on-body injector, watch it deliver fully and call your provider if you suspect it failed",
+    "Tell your team if you have sickle cell disease or any allergy to G-CSF products or acrylic adhesives"
+  ],
+  "pk": [
+    ["Onset", "Neutrophil count rises within the first days after a dose"],
+    ["Peak", "Serum concentration peaks roughly 1-3 days after subcutaneous injection"],
+    ["Half-life", "Variable, approximately 15-80 hours (neutrophil-mediated clearance)"],
+    ["Duration", "Sustained effect allows once-per-cycle dosing"],
+    ["Storage", "Refrigerate at 2-8 C (36-46 F); do not freeze or shake; protect from light"]
+  ],
+  "pearls": [
+    "Long-acting pegylated G-CSF - one 6 mg dose per chemo cycle replaces daily filgrastim injections",
+    "NEVER give between 14 days before and 24 hours after cytotoxic chemotherapy",
+    "Watch for fatal splenic rupture (left upper quadrant/shoulder pain) and ARDS",
+    "Discontinue permanently for serious allergic reactions; discontinue if sickle cell crisis occurs",
+    "Not indicated for peripheral blood progenitor cell mobilization for stem cell transplant"
+  ],
+  "missed": "Pegfilgrastim is dosed once per chemotherapy cycle rather than daily; if a planned dose is missed or delayed, contact the oncology team to reschedule while respecting the requirement not to dose within 24 hours after chemotherapy.",
+  "overdose": "There is limited experience with overdose. Higher-than-recommended doses may produce leukocytosis and bone pain. Management is supportive; monitor complete blood counts. Discontinue and treat symptomatically if leukocytosis or adverse effects occur.",
+  "refs": [
+    ["FDA Label - Pegfilgrastim (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pegfilgrastim%22"],
+    ["DailyMed - Pegfilgrastim (Neulasta)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=pegfilgrastim"]
+  ]
+}

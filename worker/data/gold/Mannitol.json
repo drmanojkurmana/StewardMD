@@ -1,0 +1,108 @@
+{
+  "generic": "Mannitol",
+  "cls": "Osmotic diuretic",
+  "pharm": "Pharmacologically inert sugar alcohol that raises plasma and tubular fluid osmolarity, drawing water out of cells/tissues and inhibiting renal tubular reabsorption of water and electrolytes.",
+  "tags": ["Rx only", "IV osmotic diuretic", "Renally cleared", "Check serum osmolality"],
+  "quick": [
+    ["Adult dose", "Raised ICP/cerebral edema: 0.25-1 g/kg IV over 30 min, q6-8h; IOP: 1.5-2 g/kg as single dose"],
+    ["Meal", "Not applicable (intravenous infusion only)"],
+    ["Pregnancy", "Limited data; crosses placenta and may cause fetal fluid shifts. Use only if needed"],
+    ["Lactation", "Unknown if excreted in milk; use caution"],
+    ["Renal", "Contraindicated in anuria; assess renal function and stop if no diuretic response"],
+    ["Hepatic", "No specific adjustment; monitor fluid/electrolytes"],
+    ["Alcohol", "Not relevant for short-term IV use"],
+    ["Monitoring", "Serum osmolality, osmolar gap, electrolytes, renal function, urine output, fluid balance"]
+  ],
+  "summary": "Mannitol is an intravenous osmotic diuretic used to reduce intracranial pressure and treat cerebral edema, and to lower elevated intraocular pressure. By raising extracellular osmolarity it draws water from cells and tissues and promotes osmotic diuresis. It must be given by infusion (preferably central vein) with an in-line filter, and renal, cardiac and pulmonary status plus serum osmolality must be monitored closely. It is contraindicated in anuria and severe hypovolemia.",
+  "indications": [
+    "Reduction of intracranial pressure and treatment of cerebral edema",
+    "Reduction of elevated intraocular pressure",
+    "Promotion of osmotic diuresis (label/clinical use)"
+  ],
+  "dosage": [
+    {"c": "Reduction of intracranial pressure / cerebral edema", "r": "Adult IV", "d": "0.25 g/kg IV infusion over 30 minutes", "t": "Every 6 to 8 hours", "n": "Titrate to effect; monitor serum osmolality and osmolar gap"},
+    {"c": "Reduction of intraocular pressure", "r": "Adult IV", "d": "1.5 to 2 g/kg of a 15% or 20% solution as a single dose", "t": "Single dose over 30-60 minutes", "n": "When used preoperatively, give 60-90 minutes before surgery"},
+    {"c": "Pediatric", "r": "Pediatric IV", "d": "Dose based on weight and condition; individualize", "t": "Per protocol", "n": "Safety/effectiveness established by extrapolation in some uses"},
+    {"c": "Renal/cardiac caution", "r": "Adult", "d": "Give a test dose in marked oliguria; do not continue if no urine response", "t": "As needed", "n": "Discontinue if inadequate diuresis to avoid circulatory overload"}
+  ],
+  "admin": [
+    "For intravenous infusion only, preferably into a large central vein, using an administration set with a final in-line filter (mannitol may crystallize)",
+    "Inspect for crystals before use; if present, warm the solution and agitate to redissolve, then cool to body temperature before infusing",
+    "Before administration, evaluate renal, cardiac and pulmonary status and correct fluid and electrolyte imbalances",
+    "Do not administer with blood; if unavoidable, add at least 20 mEq sodium chloride per liter to avoid pseudoagglutination",
+    "Monitor serum osmolality, electrolytes, renal function and urine output during therapy"
+  ],
+  "moa": "Mannitol is a low-molecular-weight solute that is largely confined to the extracellular space. It raises the osmolarity of plasma, drawing intracellular and tissue water into the vascular and extracellular compartments, thereby reducing intracranial and intraocular pressure. Filtered freely by the glomeruli with minimal tubular reabsorption, it elevates the osmolarity of the glomerular filtrate, hindering tubular reabsorption of water and enhancing excretion of sodium and chloride, producing osmotic diuresis.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to mannitol",
+      "Anuria",
+      "Severe hypovolemia",
+      "Pre-existing severe pulmonary vascular congestion or pulmonary edema",
+      "Active intracranial bleeding except during craniotomy"
+    ],
+    "relative": [
+      "Significant cardiac or renal impairment",
+      "Pre-existing hyperosmolar state",
+      "Severe dehydration",
+      "Progressive heart failure or pulmonary congestion after initiation"
+    ],
+    "monitor": [
+      "Serum osmolality and osmolar gap",
+      "Renal function and urine output",
+      "Fluid and electrolyte status",
+      "Cardiopulmonary status"
+    ]
+  },
+  "preg": "Available case reports over decades have not identified a clear drug-associated risk of major birth defects or miscarriage, but mannitol crosses the placenta and may cause fetal fluid shifts. Use during pregnancy only if clearly needed.",
+  "lact": "It is not known whether mannitol is present in human milk; consider the benefits of breastfeeding alongside the mother's clinical need and any potential adverse effect on the infant.",
+  "renal": "Mannitol is eliminated almost entirely unchanged by the kidneys and is contraindicated in anuria. In renal impairment, accumulation can cause circulatory overload; assess renal function and urine response, give a test dose in oliguria, and discontinue if there is no adequate diuretic response. Mannitol is removed by dialysis.",
+  "hepatic": "No specific hepatic dose adjustment is described; monitor fluid and electrolyte balance.",
+  "interactions": {
+    "major": [
+      "Nephrotoxic drugs (e.g., aminoglycosides; additive risk of acute kidney injury)"
+    ],
+    "moderate": [
+      "Other diuretics (additive diuresis and electrolyte loss)",
+      "Renally excreted drugs such as lithium (altered clearance)",
+      "Neuromuscular blockers and digoxin (effects altered by electrolyte shifts, e.g., hypokalemia)"
+    ],
+    "minor": ["May enhance renal elimination of some co-administered drugs"],
+    "food": "Not applicable (intravenous use).",
+    "alcohol": "Not relevant for short-term intravenous use.",
+    "diagnostics": "Can interfere with inorganic phosphorus and ethylene glycol blood assays; increases measured serum osmolality and osmolar gap."
+  },
+  "se": {
+    "common": ["Fluid and electrolyte imbalance (hyponatremia, hypo-/hyperkalemia)", "Headache", "Nausea and vomiting", "Polyuria", "Thirst/dry mouth"],
+    "serious": ["Acute kidney injury / renal failure", "Circulatory overload and pulmonary edema", "Hyperosmolarity and hypovolemia", "CNS toxicity (confusion, seizures, coma)"],
+    "rare": ["Hypersensitivity reactions including anaphylaxis", "Compartment syndrome at extravasation site", "Rebound increase in intracranial pressure"],
+    "emergency": ["Anaphylaxis", "Acute pulmonary edema / circulatory overload", "Seizures or coma from hyperosmolarity"]
+  },
+  "monitoring": ["Serum osmolality and calculated osmolar gap", "Serum electrolytes (sodium, potassium)", "Renal function and urine output", "Fluid balance and cardiopulmonary status"],
+  "counsel": [
+    "This medicine is given as a drip into a vein in hospital to reduce pressure in the brain or eye",
+    "You may pass a lot of urine; staff will monitor your fluids and blood tests",
+    "Tell staff about any swelling, breathlessness, confusion or rash",
+    "Blood tests for salts and kidney function will be checked regularly"
+  ],
+  "pk": [
+    ["Onset", "Diuresis within 1-3 hours; ICP/IOP reduction within ~15 minutes"],
+    ["Peak", "Distributes into extracellular space within 20-40 minutes"],
+    ["Half-life", "0.5 to 2.5 hours (prolonged in renal failure)"],
+    ["Duration", "Diuresis ~2-3 hours; reduced ICP/IOP up to ~6-8 hours"],
+    ["Storage", "Store at room temperature; protect from freezing. May crystallize at low temperature - warm to redissolve before use"]
+  ],
+  "pearls": [
+    "Osmotic diuretic - always check serum osmolality and the osmolar gap; hold further doses if osmolar gap is high (often a threshold around 10-20 mOsm/kg is used)",
+    "Use an in-line filter; mannitol crystallizes and warming redissolves it",
+    "Contraindicated in anuria; give a test dose in marked oliguria and stop if no urine response",
+    "Watch for an initial intravascular volume expansion that can precipitate pulmonary edema in heart failure",
+    "Rebound rise in ICP can occur as mannitol equilibrates across a disrupted blood-brain barrier"
+  ],
+  "missed": "Not applicable; mannitol is administered by a clinician as an intravenous infusion on a scheduled or as-needed basis.",
+  "overdose": "Overdose causes renal failure/acute kidney injury, hypo- or hypervolemia, hyperosmolarity, electrolyte imbalances and CNS toxicity (coma, seizures), which can be fatal. Discontinue the infusion and give symptomatic and supportive care with attention to renal, cardiac and pulmonary systems; correct fluid and electrolyte imbalances. Mannitol is dialyzable, and hemodialysis can increase its elimination.",
+  "refs": [
+    ["FDA Label - Mannitol/Osmitrol (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mannitol%22"],
+    ["DailyMed - Mannitol", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=mannitol"]
+  ]
+}

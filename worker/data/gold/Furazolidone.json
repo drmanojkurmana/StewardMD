@@ -1,0 +1,121 @@
+{
+  "generic": "Furazolidone",
+  "cls": "Nitrofuran antimicrobial / antiprotozoal (oral)",
+  "pharm": "Synthetic nitrofuran that is reduced intracellularly to reactive intermediates which damage bacterial DNA and interfere with multiple bacterial enzyme systems; also possesses monoamine oxidase (MAO) inhibitory activity that accumulates with prolonged or high-dose use.",
+  "tags": ["Rx only", "Nitrofuran", "Antiprotozoal", "MAO inhibitor", "Disulfiram-like reaction", "US-discontinued"],
+  "quick": [
+    ["Adult dose", "100 mg by mouth four times daily (typically 5-7 days)"],
+    ["Meal", "May be taken with food to reduce nausea; avoid tyramine-rich foods"],
+    ["Pregnancy", "Safety not established; avoid, especially near term"],
+    ["Lactation", "Avoid; potential hemolysis risk in G6PD-deficient infant"],
+    ["Renal", "Metabolites are renally excreted; use cautiously in impairment"],
+    ["Hepatic", "No specific adjustment defined; use with caution"],
+    ["Alcohol", "Avoid - causes disulfiram-like (Antabuse-like) reaction"],
+    ["Monitoring", "Hemolysis signs (especially G6PD), blood pressure, GI response"]
+  ],
+  "summary": "Furazolidone is an oral nitrofuran with broad antibacterial and antiprotozoal activity, historically used for bacterial diarrhea/enteritis (including E. coli, Salmonella, Shigella), cholera, and giardiasis. The classic adult regimen is 100 mg four times daily for several days. It has clinically important monoamine oxidase inhibitor (MAO) activity, so tyramine-rich foods and indirect-acting sympathomimetics must be avoided, and it produces a disulfiram-like reaction with alcohol. It can precipitate hemolysis in G6PD deficiency and is contraindicated in infants under one month. The product has been discontinued/withdrawn in the United States, so dosing here is taken from BNF/WHO and historic labeling.",
+  "indications": [
+    "Bacterial or protozoal diarrhea and enteritis caused by susceptible organisms (e.g., E. coli, Salmonella, Shigella, Giardia lamblia)",
+    "Giardiasis",
+    "Cholera (as an adjunct in susceptible Vibrio cholerae infection)"
+  ],
+  "dosage": [
+    {"c": "Bacterial diarrhea / enteritis", "r": "Adult oral", "d": "100 mg four times daily, usually for 5 days (up to 7 days)", "t": "Four times daily", "n": "Reassess if no response within 7 days"},
+    {"c": "Giardiasis", "r": "Adult oral", "d": "100 mg four times daily for 7-10 days", "t": "Four times daily", "n": "Alternative to metronidazole/tinidazole"},
+    {"c": "Giardiasis / diarrhea", "r": "Pediatric oral", "d": "Approximately 6 mg/kg/day in 4 divided doses (max 100 mg/dose); give for 7-10 days", "t": "Four times daily", "n": "Do not exceed 8.8 mg/kg/day"},
+    {"c": "Maximum standard course", "r": "Adult oral", "d": "Do not exceed 400 mg/day or treatment beyond ~5 days at full dose unless benefit justifies risk", "t": "Limit", "n": "Higher dose/longer duration increases MAO-inhibition hazard (hypertensive reactions)"}
+  ],
+  "admin": [
+    "Give orally; may be taken with food to reduce nausea and vomiting",
+    "Avoid tyramine-rich foods throughout treatment and for several days after (MAO inhibition)",
+    "Avoid all alcohol during therapy and for at least 4 days afterward (disulfiram-like reaction)",
+    "Limit dose to 400 mg/day and duration to about 5 days unless clearly indicated to reduce hypertensive risk",
+    "Screen for or remain alert to G6PD deficiency before and during use",
+    "Counsel that a harmless brown discoloration of the urine may occur"
+  ],
+  "moa": "Furazolidone is a nitrofuran prodrug that is reduced by microbial nitroreductases to highly reactive intermediates. These intermediates damage microbial DNA and inactivate or interfere with several essential bacterial enzyme systems, producing a bactericidal effect against a range of enteric bacteria and antiprotozoal activity against organisms such as Giardia lamblia. Because the drug acts on multiple targets, resistance develops slowly. Furazolidone is also a monoamine oxidase (MAO) inhibitor; this activity is dose- and duration-dependent and underlies its tyramine, sympathomimetic, and serotonergic interaction risks.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to furazolidone or other nitrofurans",
+      "Infants younger than 1 month (risk of hemolytic anemia)",
+      "Concurrent use of monoamine oxidase inhibitors (MAOIs)",
+      "Concurrent indirect-acting sympathomimetic amines (e.g., amphetamines, ephedrine, pseudoephedrine, phenylephrine nasal decongestants)",
+      "Concurrent ingestion of alcohol or alcohol-containing products"
+    ],
+    "relative": [
+      "G6PD deficiency (risk of hemolysis)",
+      "Tyramine-rich diet during and shortly after therapy",
+      "Use with tricyclic antidepressants, SSRIs, or other serotonergic/pressor agents",
+      "Pregnancy and breastfeeding"
+    ],
+    "monitor": [
+      "Signs of hemolysis (pallor, dark urine, fatigue), particularly in G6PD deficiency",
+      "Blood pressure if higher doses or longer courses are unavoidable",
+      "Gastrointestinal symptom resolution"
+    ]
+  },
+  "preg": "Safety in pregnancy has not been established. Furazolidone is generally avoided in pregnancy, particularly at term and in the neonatal period, because of the theoretical risk of hemolysis in the fetus/neonate (immature enzyme systems and possible G6PD deficiency). Use only if the potential benefit clearly justifies the risk.",
+  "lact": "It is not established whether furazolidone is excreted in human milk in clinically significant amounts. Because of the potential for hemolysis in a G6PD-deficient or very young infant, breastfeeding is generally avoided during treatment.",
+  "renal": "Furazolidone is extensively metabolized and its metabolites are eliminated predominantly by the kidneys (little unchanged drug appears in urine). No specific dose adjustment is defined in the historic labeling; use with caution in renal impairment.",
+  "hepatic": "No specific hepatic dose adjustment is defined in the labeling. Use with caution in hepatic impairment given extensive hepatic metabolism.",
+  "interactions": {
+    "major": [
+      "Monoamine oxidase inhibitors - additive MAO inhibition; do not combine",
+      "Indirect-acting sympathomimetics (amphetamines, ephedrine, pseudoephedrine, phenylephrine, decongestants) - risk of hypertensive reaction",
+      "Alcohol - disulfiram-like (Antabuse-like) reaction with flushing, nausea, vomiting, tachycardia",
+      "Tyramine-rich foods - risk of hypertensive reaction (see food)"
+    ],
+    "moderate": [
+      "Tricyclic antidepressants and SSRIs/serotonergic agents - risk of excessive pressor/serotonergic response",
+      "Other antidepressants and CNS stimulants - potentiation via MAO inhibition",
+      "Antihistamines, narcotics, and other CNS depressants - effects may be potentiated"
+    ],
+    "minor": ["Caffeine-containing products in large amounts (theoretical pressor potentiation)"],
+    "food": "Avoid tyramine-rich foods (aged/strong cheeses, yeast/meat extracts, broad beans, fermented products, pickled herring, chicken livers, beer, wine) during therapy and for several days after, owing to MAO inhibition.",
+    "alcohol": "Avoid alcohol entirely during therapy and for at least 4 days afterward - a disulfiram-like reaction can occur.",
+    "diagnostics": "May cause a harmless brown discoloration of the urine; can cause hemolysis in G6PD-deficient patients."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Headache", "Malaise", "Abdominal discomfort", "Brown discoloration of urine"],
+    "serious": ["Hemolytic anemia (especially in G6PD deficiency and neonates)", "Disulfiram-like reaction with alcohol", "Hypotension with hypersensitivity reactions"],
+    "rare": ["Hypersensitivity reactions (urticaria, fever, arthralgia, vesicular morbilliform rash, angioedema)", "Hypertensive reaction (with tyramine/sympathomimetics or high dose/prolonged use)"],
+    "emergency": ["Severe hemolysis with anemia", "Hypertensive crisis (from tyramine or sympathomimetic interaction)", "Severe disulfiram-alcohol reaction", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Signs and symptoms of hemolysis, particularly in G6PD-deficient patients and infants",
+    "Blood pressure if doses above 400 mg/day or courses longer than ~5 days are used",
+    "Clinical response of diarrhea/infection (reassess if no improvement within 7 days)",
+    "Adherence to dietary and alcohol restrictions"
+  ],
+  "counsel": [
+    "Do not drink any alcohol while taking this medicine and for several days after - it can cause flushing, nausea, vomiting, and a fast heartbeat",
+    "Avoid aged cheeses, fermented foods, broad beans, yeast/meat extracts, beer, and wine while on treatment",
+    "Do not take cold/decongestant medicines, diet pills, or stimulants without checking - they can raise your blood pressure",
+    "Your urine may turn brown; this is harmless",
+    "Tell your doctor if you feel unusually tired, pale, short of breath, or notice dark urine (possible blood problem)",
+    "Complete the full prescribed course"
+  ],
+  "pk": [
+    ["Onset", "Acts locally in the gut; peak blood levels within ~30 minutes of a dose"],
+    ["Peak", "Plasma peak within about 30 minutes to 3 hours; extensively metabolized"],
+    ["Half-life", "Short - on the order of 1-3 hours for drug and metabolites"],
+    ["Duration", "Brief systemic presence; dosed four times daily to maintain effect"],
+    ["Storage", "Store at controlled room temperature; protect from light per labeling"]
+  ],
+  "pearls": [
+    "Discontinued/withdrawn in the US (not in current openFDA label index); dosing from BNF/WHO and historic labeling",
+    "Has MAO-inhibitor activity - avoid tyramine-rich foods and indirect-acting sympathomimetics to prevent hypertensive reactions",
+    "Produces a disulfiram-like reaction with alcohol - counsel strict avoidance during and after therapy",
+    "Can cause hemolysis in G6PD deficiency; contraindicated in infants under 1 month",
+    "Keep dose at or below 400 mg/day and course to about 5 days unless clearly needed, to limit MAO-related hypertensive risk",
+    "Harmless brown urine discoloration is expected"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember. If it is almost time for your next dose, skip the missed dose and continue your regular schedule. Do not take two doses at once.",
+  "overdose": "Overdose may cause nausea, vomiting, hypotension, and hypoglycemia, and with the MAO-inhibitor activity, a hypertensive reaction is possible (especially with concurrent tyramine or sympathomimetics). There is no specific antidote; manage supportively with gastric decontamination if appropriate, control of blood pressure, correction of hypoglycemia, and monitoring for hemolysis.",
+  "refs": [
+    ["BNF / NICE - Furazolidone (nitrofuran antiprotozoal)", "https://bnf.nice.org.uk/"],
+    ["RxList - Furoxone (furazolidone) prescribing information", "https://www.rxlist.com/furoxone-drug.htm"],
+    ["WHO - INCHEM/JECFA Furazolidone monograph (toxicology/pharmacokinetics)", "https://www.inchem.org/documents/jecfa/jecmono/v31je06.htm"],
+    ["Drugs.com - Furazolidone professional/consumer information", "https://www.drugs.com/cons/furazolidone.html"]
+  ]
+}

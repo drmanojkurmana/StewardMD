@@ -1,0 +1,90 @@
+{
+  "generic": "Benazepril",
+  "cls": "Angiotensin-converting enzyme (ACE) inhibitor",
+  "pharm": "Antihypertensive",
+  "tags": ["ACE inhibitor", "hypertension", "fetal toxicity", "RAAS", "antihypertensive"],
+  "quick": [
+    ["Adult dose", "10 mg PO once daily initially; usual 20-40 mg/day (max 80 mg)"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Contraindicated; fetal toxicity (boxed warning)"],
+    ["Lactation", "Use with caution; generally avoid in newborns/preterm"],
+    ["Renal", "Reduce starting dose if CrCl <30 (start 5 mg)"],
+    ["Hepatic", "No specific adjustment; monitor"],
+    ["Alcohol", "Limit; additive hypotension"],
+    ["Monitoring", "BP, potassium, renal function, angioedema"]
+  ],
+  "summary": "Benazepril is an ACE inhibitor used for hypertension, alone or with other agents. It carries a boxed warning for fetal toxicity: when pregnancy is detected, discontinue as soon as possible because drugs acting on the renin-angiotensin system can cause injury and death to the developing fetus. Key risks are hyperkalemia, renal function decline, cough and angioedema.",
+  "indications": [
+    "Treatment of hypertension in adults and children >=6 years, alone or in combination with other antihypertensives"
+  ],
+  "dosage": [
+    {"c": "Hypertension (adult, no diuretic)", "r": "Standard", "d": "Initial 10 mg once daily; maintenance 20-40 mg/day in 1-2 doses", "t": "Once or twice daily", "n": "Maximum 80 mg/day"},
+    {"c": "Hypertension (adult, on diuretic)", "r": "Reduced start", "d": "Initial 5 mg once daily", "t": "Once daily", "n": "Stop diuretic 2-3 days prior if possible to avoid hypotension"},
+    {"c": "Renal impairment (CrCl <30 mL/min)", "r": "Renal", "d": "Initial 5 mg once daily; titrate to max 40 mg/day", "t": "Once daily", "n": "Monitor potassium and creatinine"},
+    {"c": "Pediatric (>=6 yr)", "r": "Pediatric", "d": "0.2 mg/kg once daily (up to 10 mg); titrate up to 0.6 mg/kg or 40 mg/day", "t": "Once daily", "n": "Not for children with GFR <30 mL/min/1.73m2"}
+  ],
+  "admin": [
+    "Take orally once or twice daily, with or without food",
+    "If using a diuretic, consider reducing/stopping it before starting to limit first-dose hypotension",
+    "Check renal function and potassium within 1-2 weeks of initiation or dose change",
+    "An oral suspension may be prepared for patients unable to swallow tablets per label",
+    "Discontinue immediately if pregnancy is detected"
+  ],
+  "moa": "Benazepril is hydrolyzed to its active metabolite benazeprilat, which inhibits angiotensin-converting enzyme. This reduces conversion of angiotensin I to angiotensin II, lowering vasoconstriction and aldosterone secretion, and decreases degradation of bradykinin. The net effect is vasodilation, reduced peripheral resistance and lower blood pressure.",
+  "contra": {
+    "absolute": ["Pregnancy", "History of angioedema related to prior ACE inhibitor therapy or hereditary/idiopathic angioedema", "Hypersensitivity to benazepril", "Concomitant use of aliskiren in patients with diabetes", "Within 36 hours of a neprilysin inhibitor (sacubitril)"],
+    "relative": ["Bilateral renal artery stenosis", "Volume/salt depletion", "Severe aortic stenosis or hypertrophic cardiomyopathy", "Collagen vascular disease with renal involvement"],
+    "monitor": ["Concomitant potassium-sparing diuretics/supplements", "Diabetes (with ARB/aliskiren)", "Surgery/anesthesia (hypotension)"]
+  },
+  "preg": "BOXED WARNING: When pregnancy is detected, discontinue benazepril as soon as possible. Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus (oligohydramnios, renal failure, hypotension, skull hypoplasia, fetal/neonatal death).",
+  "lact": "Minimal amounts are excreted in breast milk in adults. Use with caution; avoid in mothers of newborns and premature infants because of theoretical effects on neonatal renal function and blood pressure.",
+  "renal": "Reduce the initial dose (start 5 mg) in significant renal impairment (CrCl <30 mL/min). Monitor potassium and serum creatinine; some patients with renal artery stenosis or volume depletion may develop acute renal failure.",
+  "hepatic": "No specific dose adjustment is recommended; the parent drug requires hepatic conversion to benazeprilat, so monitor response in severe hepatic dysfunction.",
+  "interactions": {
+    "major": ["Aliskiren in diabetes - contraindicated (renal impairment, hyperkalemia, hypotension)", "Sacubitril/neprilysin inhibitors - angioedema risk; do not co-administer (separate by 36 h)", "Potassium-sparing diuretics, potassium supplements, potassium-containing salt substitutes - hyperkalemia"],
+    "moderate": ["Other RAAS agents (ARBs) - dual blockade increases hyperkalemia/renal/hypotension risk", "NSAIDs - reduced antihypertensive effect and acute renal impairment, especially in elderly/volume-depleted", "Lithium - increased lithium levels/toxicity", "Diuretics - additive hypotension; mTOR inhibitors - angioedema risk"],
+    "minor": ["Antacids - reduced benazepril absorption", "Gold (sodium aurothiomalate) - nitritoid reactions"],
+    "food": "May be taken with or without food; high-potassium salt substitutes can cause hyperkalemia.",
+    "alcohol": "Limit; alcohol can increase the blood-pressure-lowering effect.",
+    "diagnostics": "May raise serum potassium, creatinine and BUN; can cause false-positive results in some tests of parathyroid function."
+  },
+  "se": {
+    "common": ["Cough (dry, persistent)", "Headache", "Dizziness", "Fatigue", "Symptomatic hypotension"],
+    "serious": ["Angioedema (face, lips, tongue, larynx)", "Hyperkalemia", "Acute kidney injury / renal failure", "Symptomatic hypotension (volume-depleted patients)"],
+    "rare": ["Neutropenia/agranulocytosis", "Cholestatic jaundice / hepatic failure", "Intestinal angioedema", "Stevens-Johnson syndrome"],
+    "emergency": ["Angioedema with airway compromise", "Severe symptomatic hypotension", "Hyperkalemia with cardiac effects", "Anaphylactoid reaction (especially with dialysis membranes or desensitization)"]
+  },
+  "monitoring": [
+    "Blood pressure and clinical response",
+    "Serum potassium at baseline and during therapy (especially with renal impairment, diabetes, K-sparing agents)",
+    "Serum creatinine / renal function after initiation and dose changes",
+    "Signs of angioedema and, if symptoms warrant, complete blood count"
+  ],
+  "counsel": [
+    "If you become pregnant or plan to, stop the medicine and contact your provider immediately",
+    "Seek emergency care for swelling of the face, lips, tongue or throat, or trouble breathing/swallowing",
+    "A dry cough is common; report it if bothersome",
+    "Avoid potassium supplements and salt substitutes unless your doctor approves",
+    "Rise slowly to avoid dizziness; report fainting, especially after the first dose or with dehydration"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within 1 hour; peak 2-4 hours"],
+    ["Peak", "Benazepril ~0.5-1 h; benazeprilat ~1-2 h"],
+    ["Half-life", "Effective accumulation half-life of benazeprilat approximately 10-11 hours"],
+    ["Duration", "Blood-pressure effect persists over 24 hours with daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C); protect from moisture"]
+  ],
+  "pearls": [
+    "BOXED WARNING: Fetal toxicity - discontinue as soon as pregnancy is detected",
+    "Prodrug converted to active benazeprilat in the liver",
+    "Dry cough is a class effect of ACE inhibitors; switch to an ARB if intolerable",
+    "Risk of angioedema is higher in Black patients; treat airway swelling as an emergency",
+    "Avoid dual RAAS blockade (with ARB or aliskiren) due to hyperkalemia and renal risk"
+  ],
+  "missed": "Take the missed dose as soon as you remember; if it is almost time for the next dose, skip the missed dose and resume your regular schedule. Do not double the dose.",
+  "overdose": "The most likely manifestation is marked hypotension. Treat with intravenous normal saline to restore blood pressure and supportive care; benazeprilat is poorly removed by hemodialysis. Monitor potassium and renal function.",
+  "refs": [
+    ["FDA Benazepril Hydrochloride (Lotensin) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22benazepril+hydrochloride%22"],
+    ["FDA DailyMed - Benazepril", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

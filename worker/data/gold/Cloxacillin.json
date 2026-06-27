@@ -1,0 +1,97 @@
+{
+  "generic": "Cloxacillin",
+  "cls": "Penicillinase-resistant penicillin (isoxazolyl beta-lactam antibiotic)",
+  "pharm": "Antibacterial",
+  "tags": ["antibiotic", "penicillin", "beta-lactam", "anti-staphylococcal", "penicillinase-resistant", "infection"],
+  "quick": [
+    ["Adult dose", "250-500 mg q6h oral; 250 mg-1 g (up to 2 g) q4-6h IM/IV"],
+    ["Meal", "Empty stomach: 1 h before or 2 h after food"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Excreted in milk; use with caution"],
+    ["Renal", "Reduce dose only in severe impairment"],
+    ["Hepatic", "Caution; rare cholestatic hepatitis"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Renal, hepatic, hematologic on prolonged use"]
+  ],
+  "summary": "Cloxacillin is a penicillinase-resistant (anti-staphylococcal) isoxazolyl penicillin used primarily for infections caused by penicillinase-producing, methicillin-susceptible Staphylococcus aureus. It is acid-stable and orally absorbed but should be taken on an empty stomach, and is also available for IM and IV use in more serious infections. Like other penicillins it is bactericidal through inhibition of bacterial cell-wall synthesis; the bulky isoxazolyl side chain protects the beta-lactam ring from staphylococcal penicillinase. It is inactive against methicillin-resistant S. aureus (MRSA) and has limited activity against most gram-negative organisms and enterococci. The principal risk is penicillin hypersensitivity including anaphylaxis, with rare reports of cholestatic hepatitis.",
+  "indications": [
+    "Infections due to penicillinase-producing (methicillin-susceptible) Staphylococcus aureus",
+    "Skin and soft-tissue infections (cellulitis, abscess, wound infections)",
+    "Staphylococcal respiratory tract and pneumonia",
+    "Bone and joint infections (osteomyelitis, septic arthritis)",
+    "Staphylococcal bacteraemia and endocarditis (often combination/parenteral)",
+    "Mixed infections with susceptible streptococci where staphylococcal cover is needed"
+  ],
+  "dosage": [
+    {"c": "Mild-moderate infection (adult)", "r": "Oral", "d": "250-500 mg every 6 hours", "t": "Every 6 h (qid)", "n": "Take on empty stomach"},
+    {"c": "Moderate-severe infection (adult)", "r": "IM/IV", "d": "250 mg-1 g (up to 2 g) every 4-6 hours", "t": "Every 4-6 h", "n": "IV by slow injection or infusion for severe/deep infections"},
+    {"c": "Severe staphylococcal infection (endocarditis, osteomyelitis)", "r": "IV", "d": "Up to 2 g every 4-6 hours", "t": "Every 4-6 h", "n": "High parenteral doses; consider combination therapy"},
+    {"c": "Child >2 years (oral)", "r": "Weight-based", "d": "50-100 mg/kg/day divided every 6 hours", "t": "Every 6 h", "n": "Do not exceed adult dose"},
+    {"c": "Child / infant (parenteral)", "r": "Weight-based IM/IV", "d": "25-50 mg/kg/day (up to 100 mg/kg/day in severe infection) divided every 6 hours", "t": "Every 6 h", "n": "Neonatal dosing per local protocol"}
+  ],
+  "admin": [
+    "Take oral doses on an empty stomach, at least 1 h before or 2 h after meals, with a full glass of water",
+    "Give in equally spaced doses to maintain consistent serum levels",
+    "Administer IV by slow injection over 3-4 minutes or by infusion; give IM by deep intramuscular injection",
+    "Continue therapy for at least 48-72 h after the patient becomes asymptomatic; treat deep infections for longer courses",
+    "Screen for penicillin/cephalosporin allergy before starting; confirm methicillin-susceptible (not MRSA) target organism"
+  ],
+  "moa": "Cloxacillin inhibits bacterial cell-wall biosynthesis by binding penicillin-binding proteins (PBPs), blocking transpeptidation and cross-linking of peptidoglycan in actively dividing organisms, producing a bactericidal effect. Its bulky isoxazolyl side chain sterically protects the beta-lactam ring from hydrolysis by staphylococcal penicillinase (beta-lactamase), giving it activity against penicillinase-producing, methicillin-susceptible Staphylococcus aureus that resist benzylpenicillin and aminopenicillins. It is inactive against MRSA, in which an altered PBP2a confers resistance, and has poor activity against most gram-negative bacteria and enterococci.",
+  "contra": {
+    "absolute": ["History of serious hypersensitivity (anaphylaxis, Stevens-Johnson syndrome) to cloxacillin or other beta-lactams", "Prior cloxacillin-associated cholestatic jaundice/hepatic dysfunction"],
+    "relative": ["History of cephalosporin or multiple-allergen sensitivity", "Infectious mononucleosis / EBV (high rash incidence with penicillins)", "Severe renal impairment without dose adjustment"],
+    "monitor": ["Prolonged or high-dose parenteral therapy", "Concurrent allopurinol (increased rash)", "Patients on anticoagulants", "Neonates and elderly on high doses"]
+  },
+  "preg": "There are no adequate well-controlled studies in pregnant women. Penicillins, including cloxacillin, are generally regarded as having a good safety record in pregnancy, but use only if clearly needed and benefit justifies any potential risk.",
+  "lact": "Cloxacillin is excreted in breast milk in small amounts and may sensitize the infant or cause diarrhoea, candidiasis or rash. It is generally considered compatible with breastfeeding but use with caution and monitor the infant.",
+  "renal": "Cloxacillin is eliminated by both renal and biliary routes and is highly protein-bound, so it accumulates less than aminopenicillins. No dose reduction is needed in mild-to-moderate impairment; reduce the dose or extend the interval only in severe renal impairment (e.g. CrCl <10 mL/min). It is not significantly removed by haemodialysis, so no supplemental post-dialysis dose is required.",
+  "hepatic": "Cholestatic hepatitis and hepatic dysfunction, sometimes delayed in onset, have rarely been reported, particularly with high parenteral doses and prolonged therapy. Use with caution and monitor liver function in patients with hepatic impairment or on extended courses. Contraindicated if there is a prior history of cloxacillin-associated cholestatic jaundice.",
+  "interactions": {
+    "major": ["Allopurinol - increased incidence of skin rash", "Methotrexate - penicillins may reduce renal clearance, raising methotrexate toxicity"],
+    "moderate": ["Probenecid - decreases renal tubular secretion of cloxacillin, raising and prolonging serum levels", "Oral anticoagulants (warfarin) - possible altered anticoagulant effect; monitor INR"],
+    "minor": ["Oral contraceptives - possible reduced efficacy; advise backup contraception", "Bacteriostatic antibiotics (tetracyclines, chloramphenicol, macrolides) - may antagonize bactericidal effect of penicillins in vitro"],
+    "food": "Food markedly reduces absorption; take on an empty stomach at least 1 h before or 2 h after meals.",
+    "alcohol": "No clinically significant interaction.",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction (Clinitest) tests; use enzymatic glucose-oxidase methods. Periodic renal, hepatic and haematological evaluation advised on prolonged high-dose therapy."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Epigastric/abdominal discomfort", "Skin rash (maculopapular, urticarial)"],
+    "serious": ["Anaphylaxis / severe hypersensitivity", "Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Severe cutaneous reactions (SJS, TEN, DRESS, exfoliative dermatitis)"],
+    "rare": ["Cholestatic hepatitis / hepatic dysfunction (may be delayed)", "Acute interstitial nephritis", "Neutropenia, eosinophilia, thrombocytopenia, agranulocytosis", "Fever, serum-sickness-like reaction"],
+    "emergency": ["Anaphylaxis (airway swelling, hypotension) - treat with epinephrine", "Severe blistering/peeling skin reaction", "Severe persistent or bloody diarrhea"]
+  },
+  "monitoring": [
+    "Renal, hepatic and haematopoietic function periodically on prolonged or high-dose therapy",
+    "Liver function in patients with hepatic impairment or on extended parenteral courses",
+    "Signs of superinfection (Candida, C. difficile)",
+    "Allergic reactions, especially early after the first dose",
+    "Local reactions (phlebitis, injection-site pain) with parenteral use"
+  ],
+  "counsel": [
+    "Take on an empty stomach (1 h before or 2 h after food) with a full glass of water; complete the entire course",
+    "Report rash, hives, swelling, mucosal lesions or breathing difficulty immediately",
+    "Report watery or bloody diarrhea, which may occur during or weeks after treatment",
+    "Maintain evenly spaced doses around the clock for best effect",
+    "Use additional contraception if on hormonal contraceptives"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal soon after absorption during active bacterial multiplication"],
+    ["Peak", "Oral peak ~1 hour; ~7-15 mcg/mL after a 500 mg oral dose"],
+    ["Half-life", "~0.5-1 hour (prolonged in severe renal impairment)"],
+    ["Duration", "Dose every 4-6 hours"],
+    ["Storage", "Store capsules at 20-25 C (68-77 F); refrigerate reconstituted syrup and discard after 14 days; use reconstituted parenteral solution promptly"]
+  ],
+  "pearls": [
+    "NOT FDA-approved or marketed in the US (the US anti-staphylococcal oral analogue is dicloxacillin); this record is authored from EMA/BNF/Martindale/Indian NF pharmacology rather than an openFDA label",
+    "Penicillinase-resistant: drug of choice for methicillin-susceptible S. aureus (MSSA) but inactive against MRSA",
+    "Highly protein-bound (~90-95%) and partly biliary-excreted, so accumulates less in renal failure than aminopenicillins",
+    "Food markedly reduces oral absorption - always dose on an empty stomach",
+    "Narrow gram-positive spectrum: poor activity against most gram-negative organisms and enterococci"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular schedule; do not double the dose.",
+  "overdose": "In overdose, discontinue the drug and treat symptomatically with supportive measures; gastrointestinal symptoms and fluid/electrolyte imbalance may occur, and very high doses (especially parenteral with renal impairment) may rarely cause neurotoxicity/seizures. Cloxacillin is highly protein-bound and is not appreciably removed by haemodialysis.",
+  "refs": [
+    ["BNF - Cloxacillin / penicillinase-resistant penicillins", "https://bnf.nice.org.uk/drugs/"],
+    ["DrugBank - Cloxacillin", "https://go.drugbank.com/drugs/DB01147"]
+  ]
+}

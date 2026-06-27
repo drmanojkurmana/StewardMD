@@ -1,0 +1,96 @@
+{
+  "generic": "Amoxycillin",
+  "cls": "Aminopenicillin (beta-lactam antibiotic)",
+  "pharm": "Antibacterial",
+  "tags": ["antibiotic", "penicillin", "beta-lactam", "infection", "broad-spectrum"],
+  "quick": [
+    ["Adult dose", "250-500 mg q8h or 500-875 mg q12h"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Generally considered safe"],
+    ["Lactation", "Compatible; monitor infant"],
+    ["Renal", "Adjust dose/interval if CrCl <30"],
+    ["Hepatic", "Use with caution"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Renal, hepatic, hematologic on prolonged use"]
+  ],
+  "summary": "Amoxycillin is a broad-spectrum aminopenicillin used for respiratory, ENT, urinary, skin and dental infections and as part of H. pylori eradication. Bactericidal via cell-wall synthesis inhibition. Main risk is hypersensitivity including anaphylaxis.",
+  "indications": [
+    "Lower respiratory tract infections",
+    "Acute otitis media and sinusitis",
+    "Pharyngitis / tonsillitis (group A streptococcus)",
+    "Urinary tract infections",
+    "Skin and skin-structure infections",
+    "Helicobacter pylori eradication (combination therapy)",
+    "Endocarditis prophylaxis for at-risk dental/surgical procedures"
+  ],
+  "dosage": [
+    {"c": "Mild-moderate infection (adult)", "r": "Standard", "d": "250 mg q8h or 500 mg q12h", "t": "Every 8-12 h", "n": "Based on amoxicillin component"},
+    {"c": "Severe / lower respiratory infection", "r": "High", "d": "500 mg q8h or 875 mg q12h", "t": "Every 8-12 h", "n": "Severe or LRTI"},
+    {"c": "Pediatric >3 months", "r": "Weight-based", "d": "25-45 mg/kg/day divided q12h or 20-40 mg/kg/day q8h", "t": "Divided q8-12h", "n": "Up to adult dose"},
+    {"c": "Neonate / infant <12 weeks", "r": "Weight-based", "d": "30 mg/kg/day divided q12h", "t": "Every 12 h", "n": "Use lower-strength suspension"},
+    {"c": "Endocarditis prophylaxis (adult)", "r": "Single dose", "d": "2 g 30-60 min before procedure", "t": "Single", "n": "Pediatric 50 mg/kg"}
+  ],
+  "admin": [
+    "Take with or without food; start of meal reduces GI upset",
+    "Complete the full prescribed course even if symptoms improve",
+    "Shake oral suspension well before each dose",
+    "Maintain regular dosing intervals for consistent levels",
+    "Screen for penicillin/cephalosporin allergy before starting"
+  ],
+  "moa": "Inhibits bacterial cell-wall synthesis by binding penicillin-binding proteins (PBPs), blocking transpeptidation/cross-linking of peptidoglycan. This produces a bactericidal effect against susceptible gram-positive and many gram-negative organisms.",
+  "contra": {
+    "absolute": ["Hypersensitivity to penicillins", "Prior serious reaction (anaphylaxis) to beta-lactams"],
+    "relative": ["History of cephalosporin allergy", "Infectious mononucleosis (rash risk)", "Severe renal impairment without dose adjustment"],
+    "monitor": ["Prolonged or repeated courses", "Concurrent allopurinol (rash)", "Patients on anticoagulants"]
+  },
+  "preg": "Generally considered safe in pregnancy; widely used. Use when clearly needed.",
+  "lact": "Excreted in breast milk in small amounts and considered compatible. Monitor infant for diarrhea, candidiasis or rash.",
+  "renal": "Reduce dose or extend interval in significant impairment: CrCl 10-30 mL/min give 250-500 mg q12h; CrCl <10 mL/min give 250-500 mg q24h. Supplement after hemodialysis.",
+  "hepatic": "Use with caution; rare cholestatic hepatitis reported (more with co-amoxiclav). Monitor liver function on prolonged therapy.",
+  "interactions": {
+    "major": ["Allopurinol - increased incidence of skin rash", "Methotrexate - reduced renal clearance, increased toxicity"],
+    "moderate": ["Oral anticoagulants (warfarin) - possible prolonged INR", "Probenecid - increased amoxicillin levels (reduced tubular secretion)"],
+    "minor": ["Oral contraceptives - possible reduced efficacy (advise backup)", "Bacteriostatic antibiotics (tetracyclines) - theoretical antagonism"],
+    "food": "May be taken with or without food; food does not significantly impair absorption.",
+    "alcohol": "No clinically significant interaction.",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction tests; can affect estriol assays in pregnancy."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Skin rash", "Vaginal candidiasis"],
+    "serious": ["Anaphylaxis / severe hypersensitivity", "Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Stevens-Johnson syndrome / toxic epidermal necrolysis"],
+    "rare": ["Acute interstitial nephritis", "Hepatic dysfunction / cholestatic jaundice", "Hemolytic anemia, thrombocytopenia"],
+    "emergency": ["Anaphylaxis (airway swelling, hypotension)", "Severe blistering skin reaction", "Severe persistent/bloody diarrhea"]
+  },
+  "monitoring": [
+    "Renal function on prolonged therapy or in impairment",
+    "Liver function and CBC during extended courses",
+    "Signs of superinfection (candidiasis, C. difficile)",
+    "Allergic reactions, especially early after first dose"
+  ],
+  "counsel": [
+    "Complete the entire course even if feeling better",
+    "Report rash, hives, swelling or difficulty breathing immediately",
+    "Report severe or bloody diarrhea (may occur weeks after)",
+    "Use additional contraception if on hormonal contraceptives",
+    "Shake suspension; refrigeration improves taste"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; bactericidal soon after dosing"],
+    ["Peak", "1-2 hours"],
+    ["Half-life", "~1-1.3 hours (prolonged in renal impairment)"],
+    ["Duration", "Dose every 8-12 h"],
+    ["Storage", "Tablets/caps at room temp; reconstituted suspension refrigerate, discard after 14 days"]
+  ],
+  "pearls": [
+    "First-line for acute otitis media and strep pharyngitis",
+    "Amoxicillin rash with mononucleosis does not equal true penicillin allergy",
+    "Better oral bioavailability and less frequent dosing than ampicillin",
+    "Key component of triple therapy for H. pylori"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip it and resume the regular schedule; do not double the dose.",
+  "overdose": "Overdose mainly causes GI symptoms and fluid/electrolyte imbalance. Crystalluria possible; maintain hydration. Treat supportively; amoxicillin is removed by hemodialysis.",
+  "refs": [
+    ["FDA Amoxicillin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amoxicillin%22"],
+    ["FDA DailyMed - Amoxicillin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "generic": "Olaparib",
+  "cls": "Antineoplastic - poly(ADP-ribose) polymerase (PARP) inhibitor",
+  "pharm": "Orally active inhibitor of PARP-1, PARP-2, and PARP-3 enzymes that prevents repair of single-strand DNA breaks, producing synthetic lethality in tumor cells deficient in homologous recombination repair (e.g., BRCA-mutated cancers).",
+  "tags": ["Rx only", "Oral PARP inhibitor", "BRCA/HRD-associated cancers", "MDS/AML risk", "Pneumonitis", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "300 mg (two 150 mg tablets) orally twice daily"],
+    ["Meal", "Take with or without food; swallow tablets whole"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 1 month after the last dose"],
+    ["Renal", "Reduce to 200 mg twice daily in moderate impairment (CrCl 31-50 mL/min)"],
+    ["Hepatic", "No adjustment in mild-moderate; not recommended in severe impairment"],
+    ["Alcohol", "No specific interaction; limit due to additive nausea/fatigue"],
+    ["Monitoring", "CBC monthly, pregnancy status; watch for MDS/AML and pneumonitis"]
+  ],
+  "summary": "Olaparib is an oral PARP inhibitor used to treat cancers associated with defective homologous recombination DNA repair, particularly those with germline or somatic BRCA1/2 mutations or other homologous recombination deficiency (HRD). Approved uses include maintenance and treatment of ovarian, fallopian tube, and primary peritoneal cancer; HER2-negative BRCA-mutated breast cancer (germline); BRCA-mutated metastatic pancreatic cancer maintenance; and HRR gene-mutated or BRCA-mutated metastatic castration-resistant prostate cancer (alone or with abiraterone). By trapping PARP at sites of DNA damage and blocking single-strand break repair, it produces synthetic lethality in HRD tumor cells. The standard dose is 300 mg twice daily using the tablet formulation (tablets and capsules are NOT interchangeable on a milligram basis). Key serious risks are myelodysplastic syndrome/acute myeloid leukemia (MDS/AML), pneumonitis, and embryo-fetal toxicity; myelosuppression and nausea/fatigue are common. It is a CYP3A substrate requiring dose reduction with strong/moderate CYP3A inhibitors.",
+  "indications": [
+    "Maintenance treatment of recurrent epithelial ovarian, fallopian tube, or primary peritoneal cancer in complete or partial response to platinum-based chemotherapy",
+    "First-line maintenance of BRCA-mutated advanced ovarian cancer responding to platinum chemotherapy (alone or, in HRD-positive disease, combined with bevacizumab)",
+    "Germline BRCA-mutated, HER2-negative metastatic breast cancer previously treated with chemotherapy; and adjuvant treatment of high-risk early HER2-negative gBRCA-mutated breast cancer",
+    "Germline BRCA-mutated metastatic pancreatic adenocarcinoma maintenance after >=16 weeks of platinum-based first-line chemotherapy",
+    "Metastatic castration-resistant prostate cancer with HRR gene mutations (deleterious germline or somatic), or BRCA-mutated mCRPC in combination with abiraterone and prednisone/prednisolone"
+  ],
+  "dosage": [
+    {"c": "Standard treatment (tablets)", "r": "Adult oral", "d": "300 mg (two 150 mg tablets) twice daily", "t": "Twice daily", "n": "Total 600 mg/day; continue until disease progression or unacceptable toxicity; tablets and capsules are not mg-for-mg interchangeable"},
+    {"c": "First dose reduction (toxicity)", "r": "Adult oral", "d": "250 mg (one 150 mg + one 100 mg tablet) twice daily", "t": "Twice daily", "n": "Reduce for adverse reactions per label"},
+    {"c": "Second dose reduction (toxicity)", "r": "Adult oral", "d": "200 mg (two 100 mg tablets) twice daily", "t": "Twice daily", "n": "Further reduction if needed"},
+    {"c": "Moderate renal impairment (CrCl 31-50 mL/min)", "r": "Adult oral", "d": "200 mg twice daily", "t": "Twice daily", "n": "No adjustment for mild impairment (CrCl 51-80)"},
+    {"c": "With concomitant strong CYP3A inhibitor (when unavoidable)", "r": "Adult oral", "d": "100 mg twice daily", "t": "Twice daily", "n": "With a moderate CYP3A inhibitor reduce to 150 mg twice daily; avoid grapefruit/Seville oranges"}
+  ],
+  "admin": [
+    "Take tablets orally twice daily, with or without food, approximately 12 hours apart",
+    "Swallow tablets whole; do not chew, crush, dissolve, or divide them",
+    "If a dose is missed, take the next dose at its scheduled time - do not take a double dose",
+    "Confirm BRCA/HRR/HRD status with an approved test before starting where required by the indication",
+    "Obtain baseline and monthly complete blood counts; interrupt for prolonged hematologic toxicity and investigate for MDS/AML"
+  ],
+  "moa": "Olaparib inhibits the nuclear enzymes poly(ADP-ribose) polymerase PARP-1, PARP-2, and PARP-3, which are recruited to sites of single-strand DNA breaks and are essential for base-excision repair. By inhibiting PARP catalytic activity and trapping PARP-DNA complexes on damaged DNA, olaparib prevents repair of single-strand breaks; these lesions are converted into more lethal double-strand breaks during DNA replication. In cells with intact homologous recombination, double-strand breaks are repaired, but in tumor cells deficient in homologous recombination (e.g., those with BRCA1/2 or other HRR gene mutations) these breaks cannot be accurately repaired, leading to genomic instability, cell-cycle arrest, and apoptosis. This selective lethality in HR-deficient cells is the basis of synthetic lethality.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity to olaparib or any excipient"
+    ],
+    "relative": [
+      "Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)",
+      "Pre-existing or prior myelodysplastic syndrome/acute myeloid leukemia",
+      "Active or prior pneumonitis/interstitial lung disease",
+      "Severe hepatic impairment (not studied; not recommended)",
+      "Concomitant strong or moderate CYP3A inhibitors or inducers"
+    ],
+    "monitor": [
+      "Complete blood count for cytopenias and emerging MDS/AML",
+      "New or worsening respiratory symptoms (pneumonitis)",
+      "Pregnancy status in females of reproductive potential",
+      "Venous thromboembolism (especially in prostate cancer with abiraterone)",
+      "Nausea, fatigue, and nutritional status"
+    ]
+  },
+  "preg": "Based on its mechanism (genotoxicity) and animal data, olaparib can cause embryo-fetal harm and is not recommended during pregnancy. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 6 months after the last dose. Males with female partners of reproductive potential (or who are pregnant) should use condoms during treatment and for 3 months after the final dose.",
+  "lact": "There are no data on the presence of olaparib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 1 month after the last dose.",
+  "renal": "No dose adjustment is needed for mild renal impairment (CrCl 51-80 mL/min). For moderate impairment (CrCl 31-50 mL/min), reduce the dose to 200 mg twice daily. There are limited data and no established dosing for severe renal impairment or end-stage renal disease; use with caution and monitor closely if used.",
+  "hepatic": "No dose adjustment is required for mild (Child-Pugh A) or moderate (Child-Pugh B) hepatic impairment. Olaparib has not been studied in severe hepatic impairment (Child-Pugh C) and is not recommended in that setting.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (e.g., itraconazole, clarithromycin, ritonavir) - markedly increase olaparib exposure; avoid or reduce dose to 100 mg twice daily",
+      "Strong CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin, St John's wort) - substantially reduce exposure and efficacy; avoid concomitant use",
+      "Other myelosuppressive anticancer agents - additive bone marrow suppression"
+    ],
+    "moderate": [
+      "Moderate CYP3A inhibitors (e.g., fluconazole, diltiazem) - reduce olaparib dose to 150 mg twice daily",
+      "Moderate CYP3A inducers (e.g., efavirenz, rifabutin) - decreased exposure; avoid if possible"
+    ],
+    "minor": ["No clinically significant effect of olaparib on common CYP substrates at therapeutic doses"],
+    "food": "May be taken with or without food; avoid grapefruit and Seville oranges (CYP3A inhibition).",
+    "alcohol": "No specific interaction is described; moderate intake because of additive nausea and fatigue.",
+    "diagnostics": "Monitor complete blood counts; emergent cytopenias may require evaluation for MDS/AML including bone marrow analysis."
+  },
+  "se": {
+    "common": ["Nausea", "Fatigue/asthenia", "Anemia", "Vomiting", "Diarrhea", "Decreased appetite", "Headache", "Dysgeusia", "Dyspepsia", "Neutropenia", "Thrombocytopenia"],
+    "serious": ["Myelodysplastic syndrome / acute myeloid leukemia", "Severe myelosuppression (anemia, neutropenia, thrombocytopenia)", "Pneumonitis / interstitial lung disease", "Venous thromboembolism (pulmonary embolism, DVT)"],
+    "rare": ["Fatal MDS/AML", "Severe/fatal pneumonitis", "Hypersensitivity reactions"],
+    "emergency": ["Persistent severe cytopenias or signs of bone marrow failure/leukemia (bruising, bleeding, infection)", "New or worsening cough, dyspnea, fever (pneumonitis)", "Sudden breathlessness or chest pain (pulmonary embolism)", "Severe allergic reaction"]
+  },
+  "monitoring": ["Complete blood count at baseline and monthly; interrupt treatment for prolonged hematologic toxicity and evaluate for MDS/AML if cytopenias persist", "Respiratory symptoms; interrupt and investigate for pneumonitis, discontinue if confirmed", "Pregnancy status before starting in females of reproductive potential", "Signs and symptoms of venous thromboembolism (particularly in prostate cancer treated with abiraterone)", "Nausea, fatigue, and nutritional status; renal and hepatic function as clinically indicated"],
+  "counsel": [
+    "Take both tablets twice a day about 12 hours apart, with or without food, and swallow them whole",
+    "If you miss a dose, just take your next dose at the normal time - do not double up",
+    "Nausea and tiredness are common, especially early; tell your team if they are severe or you cannot eat or drink",
+    "Report unusual bruising, bleeding, fever, or persistent tiredness, as your blood counts will be checked regularly",
+    "Tell your doctor about any new or worsening cough or shortness of breath",
+    "Avoid grapefruit; use effective contraception and do not breastfeed during and for 1 month after treatment"
+  ],
+  "pk": [
+    ["Onset", "Antitumor effect develops over weeks; PARP inhibition is rapid after absorption"],
+    ["Peak", "Plasma Tmax ~1.5 hours after oral dosing"],
+    ["Half-life", "Mean terminal half-life ~11.9 hours"],
+    ["Duration", "Steady state reached within 3-4 days with twice-daily dosing"],
+    ["Storage", "Store tablets at 20-25 C (excursions 15-30 C permitted); keep in original container"]
+  ],
+  "pearls": [
+    "Tablet and capsule formulations are NOT interchangeable on a milligram basis - standard tablet dose is 300 mg twice daily; do not substitute capsule strengths",
+    "MDS/AML is a serious, potentially fatal risk - investigate persistent cytopenias with bone marrow studies and stop the drug if MDS/AML is confirmed",
+    "Pneumonitis/ILD can be fatal - interrupt for new pulmonary symptoms and evaluate promptly",
+    "Embryo-fetal toxicity: confirm a negative pregnancy test, ensure contraception during and 6 months after, and advise condom use for male patients",
+    "CYP3A substrate - reduce dose with strong (100 mg BID) or moderate (150 mg BID) inhibitors and avoid grapefruit; avoid CYP3A inducers",
+    "Reduce dose to 200 mg twice daily for moderate renal impairment; manage anemia (transfusion if needed) and dose-interrupt/reduce per label"
+  ],
+  "missed": "If you miss a dose of olaparib, do not take a double dose to make up for it. Take your next scheduled dose at the usual time and continue your normal twice-daily schedule.",
+  "overdose": "There is no specific antidote for olaparib overdose, and symptoms of overdose are not well characterized. Management is supportive: monitor closely (including blood counts) and provide symptomatic treatment for adverse effects such as nausea, vomiting, and myelosuppression.",
+  "refs": [
+    ["FDA Label - Olaparib / LYNPARZA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22olaparib%22"],
+    ["DailyMed - Olaparib (LYNPARZA)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=olaparib"]
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "generic": "Moxifloxacin",
+  "cls": "Fluoroquinolone antibacterial",
+  "pharm": "Antibacterial (4th-generation fluoroquinolone)",
+  "tags": ["fluoroquinolone", "respiratory", "QT prolongation", "tendon rupture", "boxed warning", "Gram-positive"],
+  "quick": [
+    ["Adult dose", "400 mg IV/PO once daily"],
+    ["Meal", "With or without food; separate from cations"],
+    ["Pregnancy", "Use only if benefit outweighs risk"],
+    ["Lactation", "Caution; likely excreted in milk"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "No adjustment in mild-moderate; caution in severe"],
+    ["Alcohol", "No direct interaction; CNS caution"],
+    ["Monitoring", "QT/ECG if at risk; tendon, glucose, CNS effects"]
+  ],
+  "summary": "Moxifloxacin is a broad-spectrum fluoroquinolone antibacterial with enhanced Gram-positive and anaerobic activity, used once daily (400 mg) for respiratory, skin, intra-abdominal and other infections, and for plague. It carries class boxed warnings for disabling and potentially irreversible tendinitis/tendon rupture, peripheral neuropathy, CNS effects and exacerbation of myasthenia gravis, plus a notable risk of QT prolongation. Reserve for situations without alternative options where appropriate.",
+  "indications": [
+    "Community-acquired pneumonia",
+    "Acute bacterial sinusitis",
+    "Acute bacterial exacerbation of chronic bronchitis",
+    "Uncomplicated and complicated skin and skin-structure infections",
+    "Complicated intra-abdominal infections",
+    "Plague (treatment and prophylaxis) due to Yersinia pestis"
+  ],
+  "dosage": [
+    {"c": "Community-acquired pneumonia (adult)", "r": "Standard", "d": "400 mg IV or PO once every 24 hours", "t": "Once daily", "n": "7-14 days"},
+    {"c": "Acute bacterial sinusitis", "r": "Standard", "d": "400 mg once every 24 hours", "t": "Once daily", "n": "10 days"},
+    {"c": "Acute exacerbation chronic bronchitis", "r": "Standard", "d": "400 mg once every 24 hours", "t": "Once daily", "n": "5 days"},
+    {"c": "Uncomplicated SSSI", "r": "Standard", "d": "400 mg once every 24 hours", "t": "Once daily", "n": "7 days; complicated 7-21 days"},
+    {"c": "Complicated intra-abdominal infection", "r": "Standard", "d": "400 mg once every 24 hours", "t": "Once daily", "n": "5-14 days; start IV"},
+    {"c": "Plague", "r": "Standard", "d": "400 mg once every 24 hours", "t": "Once daily", "n": "10-14 days"}
+  ],
+  "admin": [
+    "Oral tablets may be taken with or without food, at the same time each day",
+    "Separate oral dosing by at least 4 hours before or 8 hours after antacids, sucralfate, multivitamins, and products containing magnesium, aluminum, iron, zinc or calcium",
+    "IV: infuse over 60 minutes; do not give as a rapid or bolus infusion",
+    "No dose adjustment is needed for renal or mild-moderate hepatic impairment",
+    "Maintain adequate hydration to prevent concentrated urine and crystalluria"
+  ],
+  "moa": "Moxifloxacin inhibits the bacterial type II topoisomerases DNA gyrase (topoisomerase II) and topoisomerase IV, enzymes essential for DNA replication, transcription, repair and recombination. Inhibition prevents supercoiling and separation of bacterial DNA, producing bactericidal activity. Its C8-methoxy structure broadens Gram-positive and anaerobic coverage and may reduce selection of resistant mutants.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to moxifloxacin or any fluoroquinolone"],
+    "relative": ["Known QT prolongation, uncorrected hypokalemia/hypomagnesemia, or concurrent class IA/III antiarrhythmics", "Myasthenia gravis (may worsen muscle weakness)", "History of tendon disorders or fluoroquinolone-associated tendinopathy", "Significant bradycardia or acute myocardial ischemia"],
+    "monitor": ["Elderly, transplant recipients, or concurrent corticosteroids (tendon rupture risk)", "Diabetes mellitus (dysglycemia)", "Seizure disorder or CNS conditions lowering seizure threshold"]
+  },
+  "preg": "There are no adequate well-controlled studies in pregnant women. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Fluoroquinolones are expected to be excreted in human milk. Because of the potential for serious adverse reactions in the infant, a decision should be made whether to discontinue nursing or the drug.",
+  "renal": "No dosage adjustment is required in renal impairment, including patients on hemodialysis or continuous ambulatory peritoneal dialysis, as nonrenal elimination predominates.",
+  "hepatic": "No dosage adjustment is needed in mild to moderate hepatic impairment. Pharmacokinetics in severe hepatic impairment have not been fully studied, and metabolic disturbances associated with hepatic insufficiency may increase QT-prolongation risk; use with caution.",
+  "interactions": {
+    "major": ["Class IA (quinidine, procainamide) and class III (amiodarone, sotalol) antiarrhythmics - additive QT prolongation/torsades", "Other QT-prolonging drugs (antipsychotics, macrolides, TCAs, ondansetron) - additive QT risk", "Corticosteroids - increased tendon rupture risk"],
+    "moderate": ["Antidiabetic agents - hyper- or hypoglycemia; monitor glucose", "Warfarin - enhanced anticoagulant effect; monitor INR", "NSAIDs - increased CNS stimulation/seizure risk"],
+    "minor": ["Multivalent cation products (antacids, iron, calcium, zinc, sucralfate, didanosine) - chelation reduces absorption; separate dosing"],
+    "food": "Food does not significantly impair absorption, but dairy and cation-containing products/supplements reduce absorption - separate dosing.",
+    "alcohol": "No direct interaction; avoid additive CNS effects.",
+    "diagnostics": "May affect blood glucose readings (dysglycemia); can prolong QT on ECG."
+  },
+  "se": {
+    "common": ["Nausea", "Diarrhea", "Dizziness", "Headache", "Abdominal pain", "Vomiting"],
+    "serious": ["Tendinitis and tendon rupture", "Peripheral neuropathy (potentially irreversible)", "CNS effects (seizures, psychosis, confusion)", "QT prolongation / torsades de pointes", "Exacerbation of myasthenia gravis", "Clostridioides difficile colitis", "Hypoglycemia/hyperglycemia including hypoglycemic coma", "Hepatotoxicity"],
+    "rare": ["Aortic aneurysm/dissection", "Stevens-Johnson syndrome / TEN", "Photosensitivity", "Crystalluria"],
+    "emergency": ["Anaphylaxis", "Torsades de pointes", "Tendon rupture", "Acute aortic dissection", "Severe hypoglycemia / hypoglycemic coma"]
+  },
+  "monitoring": [
+    "ECG/QT in patients with risk factors; correct hypokalemia and hypomagnesemia before therapy",
+    "Tendon pain or swelling - discontinue at first sign and avoid exercise of the affected area",
+    "Blood glucose in diabetics; signs of peripheral neuropathy and CNS effects",
+    "Liver enzymes and signs of C. difficile colitis with persistent diarrhea"
+  ],
+  "counsel": [
+    "Stop the drug and contact your doctor for tendon pain/swelling, numbness or tingling, palpitations or fainting",
+    "Separate doses from antacids, iron, calcium, zinc and multivitamins",
+    "Avoid excessive sun exposure (photosensitivity) and stay well hydrated",
+    "Diabetics should monitor blood sugar; report confusion, agitation or seizures",
+    "Tell your doctor about heart-rhythm problems, myasthenia gravis or prior tendon problems"
+  ],
+  "pk": [
+    ["Onset", "Rapid bactericidal effect after dosing"],
+    ["Peak", "Oral 1-3 hours"],
+    ["Half-life", "~12 hours (supports once-daily dosing)"],
+    ["Duration", "24-hour coverage with once-daily dosing"],
+    ["Storage", "Store at 20-25 C; do not refrigerate IV solution"]
+  ],
+  "pearls": [
+    "Boxed warning: disabling, potentially irreversible tendinitis/tendon rupture, peripheral neuropathy, CNS effects and myasthenia gravis exacerbation - reserve for when other options are unsuitable",
+    "QT prolongation: avoid with other QT drugs and correct electrolytes first",
+    "Not adjusted for renal function, but minimal urinary concentrations make it a poor choice for simple UTIs",
+    "Watch for dysglycemia, especially in elderly diabetics on sulfonylureas/insulin"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and continue once-daily dosing; do not double the dose.",
+  "overdose": "There is no specific antidote. In overdose, empty the stomach if appropriate, maintain hydration, and observe with ECG monitoring for QT prolongation. Treat symptomatically and supportively. Only modest amounts are removed by hemodialysis or peritoneal dialysis.",
+  "refs": [
+    ["FDA Moxifloxacin Hydrochloride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22moxifloxacin+hydrochloride%22"],
+    ["FDA DailyMed - Moxifloxacin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

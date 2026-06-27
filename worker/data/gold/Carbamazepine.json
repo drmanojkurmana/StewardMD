@@ -1,0 +1,116 @@
+{
+  "generic": "Carbamazepine",
+  "cls": "Anticonvulsant / mood stabilizer (iminostilbene)",
+  "pharm": "Stabilizes inactivated voltage-gated sodium channels, reducing repetitive neuronal firing and limiting the spread of seizure activity; also relieves neuropathic facial pain.",
+  "tags": ["Rx only", "Boxed warning", "HLA-B*1502/HLA-A*3101 testing", "Strong CYP3A4 inducer"],
+  "quick": [
+    ["Adult dose", "Epilepsy: start 200 mg twice daily; usual 800-1200 mg/day"],
+    ["Meal", "Take with food to improve tolerability"],
+    ["Pregnancy", "Teratogenic (neural tube defects); avoid if possible"],
+    ["Lactation", "Excreted in milk; monitor infant"],
+    ["Renal", "No major adjustment; caution"],
+    ["Hepatic", "Caution; contraindicated in severe disease"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "CBC, LFTs, sodium, drug levels, skin reactions"]
+  ],
+  "summary": "Carbamazepine is an iminostilbene anticonvulsant used for partial and generalized tonic-clonic seizures, mixed seizure patterns, trigeminal neuralgia, and (extended-release) acute mania/mixed episodes of bipolar disorder. It carries a boxed warning for serious, sometimes fatal dermatologic reactions (Stevens-Johnson syndrome and toxic epidermal necrolysis) strongly associated with the HLA-B*1502 allele (common in Asian ancestry), and for aplastic anemia and agranulocytosis. It is a potent CYP3A4 inducer with many drug interactions and can cause hyponatremia.",
+  "indications": [
+    "Partial seizures with complex symptomatology (psychomotor, temporal lobe)",
+    "Generalized tonic-clonic seizures (grand mal)",
+    "Mixed seizure patterns including the above or other partial/generalized seizures",
+    "Trigeminal neuralgia (and glossopharyngeal neuralgia) pain",
+    "Acute manic and mixed episodes of bipolar I disorder (extended-release formulation)"
+  ],
+  "dosage": [
+    {"c": "Epilepsy (adults, >12 yr)", "r": "Adult oral", "d": "Start 200 mg twice daily; increase by up to 200 mg/day weekly", "t": "Divided 2-4 times daily", "n": "Usual 800-1200 mg/day; max generally 1200 mg/day (up to 1600 mg in some adults)"},
+    {"c": "Epilepsy (children 6-12 yr)", "r": "Pediatric oral", "d": "Start 100 mg twice daily; increase by up to 100 mg/day weekly", "t": "Divided 2-4 times daily", "n": "Usual 400-800 mg/day; max 1000 mg/day"},
+    {"c": "Trigeminal neuralgia", "r": "Adult oral", "d": "Start 100 mg twice daily; increase by up to 200 mg/day as needed", "t": "Divided doses", "n": "Usual 400-800 mg/day; max 1200 mg/day; taper periodically to reassess"},
+    {"c": "Bipolar mania (ER capsules)", "r": "Adult oral", "d": "Start 200 mg twice daily; adjust by 200 mg/day", "t": "Twice daily", "n": "Up to 1600 mg/day per response/tolerability"},
+    {"c": "Severe hepatic impairment", "r": "Adult", "d": "Avoid use", "t": "-", "n": "Contraindicated in severe hepatic disease"}
+  ],
+  "admin": [
+    "Take with food to reduce gastrointestinal upset",
+    "Initiate at low dose and titrate gradually to minimize CNS effects",
+    "Do not crush or chew extended-release forms; swallow whole",
+    "Do not administer suspension simultaneously with other liquid medications (precipitate formation)",
+    "Do not discontinue abruptly in seizure patients (risk of status epilepticus)"
+  ],
+  "moa": "Carbamazepine acts mainly by binding to voltage-gated sodium channels in their inactivated state, prolonging inactivation and limiting sustained, high-frequency repetitive neuronal firing. This reduces the propagation of seizure discharges and, in trigeminal neuralgia, decreases ectopic firing in pain pathways. It also has modest effects on calcium and potassium channels and on neurotransmitter release. Its active 10,11-epoxide metabolite contributes to activity and toxicity.",
+  "contra": {
+    "absolute": [
+      "History of bone marrow depression",
+      "Hypersensitivity to carbamazepine or tricyclic compounds",
+      "Use with or within 14 days of a monoamine oxidase inhibitor",
+      "Coadministration with nefazodone or delavirdine (and certain other NNRTIs)"
+    ],
+    "relative": [
+      "HLA-B*1502 positive patients (high SJS/TEN risk - avoid unless benefit outweighs risk)",
+      "Hepatic impairment",
+      "Cardiac conduction disturbances (AV block)",
+      "Mixed/atypical absence seizures (may increase seizures)",
+      "Increased intraocular pressure / glaucoma"
+    ],
+    "monitor": [
+      "Complete blood count for hematologic toxicity",
+      "Liver function tests",
+      "Serum sodium (hyponatremia) and drug levels",
+      "Skin for rash/hypersensitivity"
+    ]
+  },
+  "preg": "Carbamazepine can cause fetal harm, including neural tube defects (spina bifida), craniofacial defects, cardiovascular malformations, and developmental delay. Use during pregnancy only if the benefit justifies the risk; supplement folic acid and consider the North American Antiepileptic Drug Pregnancy Registry.",
+  "lact": "Carbamazepine and its epoxide metabolite are excreted in human milk; breastfeeding may be considered with monitoring of the infant for sedation, poor feeding, jaundice, and hematologic effects.",
+  "renal": "No major dosage adjustment is required for renal impairment, but use caution; carbamazepine can cause hyponatremia/SIADH and should be used carefully in patients with fluid/electrolyte disorders.",
+  "hepatic": "Use with caution; carbamazepine is hepatically metabolized and can cause hepatotoxicity. It is contraindicated in severe hepatic disease. Monitor liver function.",
+  "interactions": {
+    "major": [
+      "MAO inhibitors - contraindicated (discontinue MAOI >=14 days before)",
+      "CYP3A4 substrates (oral contraceptives, warfarin, direct oral anticoagulants, many others) - carbamazepine induces metabolism, reducing their efficacy",
+      "CYP3A4 inhibitors (macrolides, azole antifungals, diltiazem/verapamil, grapefruit) - increase carbamazepine levels and toxicity",
+      "Other anticonvulsants and lithium - altered levels and additive neurotoxicity",
+      "Nefazodone/delavirdine - contraindicated"
+    ],
+    "moderate": [
+      "Acetaminophen (increased hepatotoxicity risk, reduced efficacy)",
+      "Other CNS depressants (additive sedation)",
+      "Drugs causing hyponatremia (e.g., diuretics, SSRIs)"
+    ],
+    "minor": ["Thyroid hormones (may reduce levels)"],
+    "food": "Take with food; grapefruit juice increases carbamazepine levels.",
+    "alcohol": "Avoid alcohol; additive CNS depression.",
+    "diagnostics": "May cause leukopenia, thrombocytopenia, hyponatremia, abnormal liver tests, and altered thyroid function tests."
+  },
+  "se": {
+    "common": ["Dizziness", "Drowsiness", "Unsteadiness/ataxia", "Nausea/vomiting", "Diplopia/blurred vision", "Hyponatremia"],
+    "serious": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "Aplastic anemia and agranulocytosis", "DRESS / multiorgan hypersensitivity", "Hepatotoxicity", "Severe hyponatremia/SIADH", "Suicidal ideation/behavior", "Cardiac conduction disturbances"],
+    "rare": ["Pancreatitis", "Aseptic meningitis", "Systemic lupus erythematosus", "Acute intermittent porphyria exacerbation"],
+    "emergency": ["SJS/TEN with blistering and mucosal involvement", "Agranulocytosis with sepsis", "DRESS with organ failure", "Severe symptomatic hyponatremia / seizures"]
+  },
+  "monitoring": ["Complete blood count (baseline and periodic)", "Liver function tests", "Serum sodium", "Carbamazepine serum levels (target ~4-12 mcg/mL)", "Skin reactions and signs of hypersensitivity", "HLA-B*1502 (Asian ancestry) and consider HLA-A*3101 before starting"],
+  "counsel": [
+    "Stop and seek care urgently for any rash, blistering, mouth sores, or fever - serious skin reactions can occur",
+    "Report easy bruising, bleeding, sore throat, fever, mouth ulcers, or extreme tiredness (blood problems)",
+    "Do not stop suddenly; this can trigger seizures",
+    "This drug can make hormonal birth control less effective - use an additional method",
+    "Avoid alcohol; tell your doctor about all other medicines, as interactions are common"
+  ],
+  "pk": [
+    ["Onset", "Anticonvulsant effect over days; autoinduction over weeks"],
+    ["Peak", "Tmax ~4-12 hours (formulation dependent)"],
+    ["Half-life", "Initially 25-65 h, falling to 12-17 h with autoinduction"],
+    ["Duration", "Dosed 2-4 times daily (less for ER)"],
+    ["Storage", "Store at 20-25 C; protect tablets from light and moisture (humidity can cause hardening)"]
+  ],
+  "pearls": [
+    "Boxed warning: SJS/TEN (strongly linked to HLA-B*1502, common in Asian ancestry) and aplastic anemia/agranulocytosis",
+    "Test HLA-B*1502 in at-risk Asian patients before starting; avoid if positive",
+    "Strong CYP3A4 inducer and autoinducer - levels fall over the first weeks and it lowers many drug levels (including contraceptives)",
+    "Watch for hyponatremia/SIADH, especially in the elderly",
+    "Avoid in absence/atypical absence and myoclonic seizures, which it can worsen"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it. Do not take a double dose. Do not stop the medicine on your own.",
+  "overdose": "Overdose causes neuromuscular disturbances (ataxia, nystagmus, mydriasis, twitching), CNS depression progressing to coma, seizures, cardiac conduction abnormalities and arrhythmias, hypotension, and respiratory depression. There is no specific antidote; treat with supportive care, airway protection, activated charcoal, cardiac and neurologic monitoring, and management of seizures and hypotension. Multiple-dose activated charcoal and hemoperfusion/hemodialysis may aid clearance in severe cases.",
+  "refs": [
+    ["FDA Label - Carbamazepine (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carbamazepine%22"],
+    ["DailyMed - Carbamazepine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=carbamazepine"]
+  ]
+}

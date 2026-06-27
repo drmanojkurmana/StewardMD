@@ -1,0 +1,93 @@
+{
+  "generic": "Zonisamide",
+  "cls": "Sulfonamide antiseizure drug / carbonic anhydrase inhibitor",
+  "pharm": "Antiepileptic (adjunctive antiseizure agent)",
+  "tags": ["antiepileptic", "partial seizures", "sulfonamide", "carbonic anhydrase inhibitor", "adjunctive therapy"],
+  "quick": [
+    ["Adult dose", "Start 100 mg/day; titrate to 100-400 mg/day"],
+    ["Meal", "With or without food; swallow capsule whole"],
+    ["Pregnancy", "Use only if benefit justifies risk; teratogenic in animals"],
+    ["Lactation", "Notify physician if breastfeeding; weigh risk"],
+    ["Renal", "Caution; slower titration, more monitoring"],
+    ["Hepatic", "Caution; slower titration, more monitoring"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "Serum bicarbonate, renal function, mood/suicidality"]
+  ],
+  "summary": "Zonisamide is a sulfonamide antiseizure drug used as adjunctive therapy for partial seizures in adults. It is started at 100 mg daily and titrated in 100 mg increments at 2-week intervals to 100-400 mg/day. Its long half-life (~63 hours) allows once- or twice-daily dosing. Key risks include sulfonamide hypersensitivity reactions, metabolic acidosis, kidney stones, oligohidrosis/hyperthermia (especially pediatric), and the antiepileptic-class suicidal ideation warning.",
+  "indications": [
+    "Adjunctive therapy in the treatment of partial seizures in adults with epilepsy"
+  ],
+  "dosage": [
+    {"c": "Partial seizures, adjunctive (adults >16 yr)", "r": "Initial", "d": "100 mg once daily", "t": "Once or twice daily", "n": "May prolong lower-dose duration to assess steady-state effects"},
+    {"c": "Partial seizures, adjunctive (adults >16 yr)", "r": "Titration", "d": "After 2 weeks increase to 200 mg/day for at least 2 weeks; then 300 mg/day and 400 mg/day, each stable at least 2 weeks", "t": "Once or twice daily", "n": "Up to 2 weeks needed to reach steady state at each level"},
+    {"c": "Partial seizures, adjunctive (adults >16 yr)", "r": "Maintenance", "d": "100 to 400 mg/day; doses of 100-600 mg/day effective but no added response above 400 mg/day", "t": "Once or twice daily", "n": "Little experience with doses >600 mg/day; side effects more frequent at >=300 mg/day"},
+    {"c": "Renal or hepatic disease", "r": "Adjusted", "d": "Treat with caution; slower titration and more frequent monitoring", "t": "Once or twice daily", "n": "Metabolized by liver, excreted by kidneys; not recommended if GFR <50 mL/min in some labeling"}
+  ],
+  "admin": [
+    "Capsules may be taken with or without food and should be swallowed whole",
+    "Administer once or twice daily using 25 mg, 50 mg, or 100 mg capsules",
+    "Allow up to 2 weeks to reach steady state after each dose change due to long half-life",
+    "Measure baseline and periodic serum bicarbonate during treatment",
+    "Do not discontinue abruptly; taper gradually to avoid increased seizures or status epilepticus"
+  ],
+  "moa": "The precise antiseizure mechanism is unknown. Zonisamide blocks sodium channels and reduces voltage-dependent transient inward (T-type) calcium currents, stabilizing neuronal membranes and suppressing neuronal hypersynchronization. It binds the GABA/benzodiazepine receptor complex allosterically without changing chloride flux, facilitates dopaminergic and serotonergic neurotransmission, and is a carbonic anhydrase inhibitor (which contributes to metabolic acidosis but not clearly to efficacy).",
+  "contra": {
+    "absolute": ["Demonstrated hypersensitivity to sulfonamides", "Hypersensitivity to zonisamide"],
+    "relative": ["Renal disease", "Hepatic disease", "Conditions/therapies predisposing to metabolic acidosis", "History of nephrolithiasis", "Concomitant carbonic anhydrase inhibitors"],
+    "monitor": ["Pediatric patients (oligohidrosis/hyperthermia; not approved for pediatric use)", "Patients with depression or suicidal ideation", "Concomitant CNS depressants or alcohol", "Patients on valproate or topiramate (hyperammonemia risk)"]
+  },
+  "preg": "Zonisamide was teratogenic in mice, rats, and dogs and embryolethal in monkeys, with cardiovascular defects and embryo-fetal deaths at maternal plasma levels at or below human therapeutic levels. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Women of childbearing potential should use effective contraception; encourage enrollment in the NAAED Pregnancy Registry (1-888-233-2334).",
+  "lact": "Patients should notify their physician if they intend to breastfeed or are breastfeeding. Weigh the benefits against the potential risks, given zonisamide's long half-life.",
+  "renal": "Zonisamide renal clearance decreases with declining renal function; marked impairment (CrCl <20 mL/min) increased AUC by 35%. Treat patients with renal disease cautiously, using slower titration and more frequent monitoring. Metabolic acidosis and kidney stone risk are heightened.",
+  "hepatic": "Pharmacokinetics in hepatic impairment have not been studied. Because zonisamide is metabolized in the liver, treat patients with hepatic disease cautiously with slower titration and more frequent monitoring.",
+  "interactions": {
+    "major": ["Other carbonic anhydrase inhibitors (topiramate, acetazolamide, dichlorphenamide) - increased severity of metabolic acidosis, kidney stones, and hyperammonemia", "Valproic acid or topiramate - increased risk of hyperammonemia with or without encephalopathy"],
+    "moderate": ["CYP3A4 inducers (phenytoin, carbamazepine, phenobarbital, rifampicin) - increase zonisamide clearance and shorten half-life; dose adjustment may be needed if added or withdrawn", "Alcohol and other CNS depressants - additive CNS depression and cognitive/neuropsychiatric effects", "Drugs that predispose to heat-related disorders (anticholinergics, carbonic anhydrase inhibitors) - increased oligohidrosis/hyperthermia risk"],
+    "minor": ["P-gp substrates (digoxin, quinidine) - zonisamide is a weak P-gp inhibitor; caution when starting/stopping or changing dose", "CYP3A4 inhibitors (ketoconazole, cimetidine) - no clinically relevant effect; no dose change needed", "Oral contraceptives, carbamazepine, lamotrigine, phenytoin, valproate - no clinically relevant effect of zonisamide on their levels"],
+    "food": "May be taken with or without food; food delays time to peak concentration to 4-6 hours but does not affect bioavailability.",
+    "alcohol": "Concomitant use with alcohol has not been studied; because of CNS depression potential, use with caution and avoid.",
+    "diagnostics": "Causes hyperchloremic non-anion-gap metabolic acidosis (decreased serum bicarbonate); may increase serum creatinine, BUN, and alkaline phosphatase, and decrease serum phosphorus."
+  },
+  "se": {
+    "common": ["Somnolence (17%)", "Anorexia (13%)", "Dizziness (13%)", "Headache (10%)", "Agitation/irritability (9%)", "Nausea (9%); ataxia (6%); difficulty concentrating/memory (6%)"],
+    "serious": ["Metabolic acidosis (hyperchloremic, non-anion gap)", "Nephrolithiasis (kidney stones, ~4% of adults)", "Suicidal thoughts and behavior", "Oligohidrosis and hyperthermia (especially pediatric)", "Acute myopia and secondary angle closure glaucoma"],
+    "rare": ["Hyperammonemia and encephalopathy", "Osteomalacia/osteoporosis from chronic acidosis", "Status epilepticus on abrupt withdrawal", "Schizophrenic/schizophreniform behavior (2%)"],
+    "emergency": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "DRESS / multi-organ hypersensitivity", "Serious hematologic events (aplastic anemia, agranulocytosis)", "Heat stroke from oligohidrosis", "Acute angle closure glaucoma with vision loss"]
+  },
+  "monitoring": [
+    "Serum bicarbonate at baseline and periodically during treatment",
+    "Renal function and signs/symptoms of kidney stones",
+    "Emergence or worsening of depression, suicidal thoughts, or behavior changes",
+    "Decreased sweating and elevated body temperature, especially in pediatric patients and warm weather",
+    "Serum ammonia if unexplained change in mental status, vomiting, or lethargy",
+    "Skin rash and signs of hypersensitivity"
+  ],
+  "counsel": [
+    "Contact your physician immediately if a skin rash develops",
+    "Seek immediate attention for blurred vision, visual disturbance, or eye pain",
+    "Report sudden back/abdominal pain or blood in urine (possible kidney stone); increase fluid intake",
+    "Report decreased sweating or fever, especially in children, and avoid overheating",
+    "Be alert for new or worsening depression, mood changes, or suicidal thoughts and report them immediately",
+    "May cause drowsiness; avoid driving until you know how it affects you and avoid alcohol; do not stop the drug suddenly"
+  ],
+  "pk": [
+    ["Onset", "Steady state within 14 days of stable dose"],
+    ["Peak", "Plasma Tmax 2-6 hours (4-6 h with food)"],
+    ["Half-life", "~63 hours in plasma (105 h in RBCs)"],
+    ["Duration", "Long; dosed once or twice daily"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep dry, protect from light"]
+  ],
+  "pearls": [
+    "Sulfonamide - contraindicated in sulfonamide hypersensitivity; can cause SJS/TEN and DRESS",
+    "Carbonic anhydrase inhibitor - causes metabolic acidosis and kidney stones; monitor serum bicarbonate",
+    "Oligohidrosis and hyperthermia risk, especially in pediatric patients",
+    "Long half-life (~63 h) - allow up to 2 weeks per dose step and once/twice daily dosing",
+    "Class antiepileptic suicidal ideation warning; taper to avoid withdrawal seizures"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered unless it is close to the next dose; do not double up. Because of the long half-life, occasional missed doses have less impact, but maintain consistent dosing for seizure control.",
+  "overdose": "No specific antidote exists. Following recent overdose, induce emesis or perform gastric lavage with airway protection. Provide general supportive care with frequent vital sign monitoring and close observation; CNS depression, coma, bradycardia, hypotension, and respiratory depression have occurred. Because zonisamide has low protein binding (~40%), renal dialysis may be effective, though not formally studied. Contact a poison control center.",
+  "refs": [
+    ["FDA Zonisamide Capsules Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zonisamide%22"],
+    ["FDA DailyMed - Zonisamide", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

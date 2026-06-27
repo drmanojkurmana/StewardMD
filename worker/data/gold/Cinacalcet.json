@@ -1,0 +1,102 @@
+{
+  "generic": "Cinacalcet",
+  "cls": "Calcimimetic (calcium-sensing receptor agonist)",
+  "pharm": "Allosterically increases the sensitivity of the parathyroid calcium-sensing receptor to extracellular calcium, directly lowering parathyroid hormone (PTH) and consequently serum calcium.",
+  "tags": ["Rx only", "Calcimimetic", "Secondary hyperparathyroidism", "Hypocalcemia risk", "Strong CYP2D6 inhibitor"],
+  "quick": [
+    ["Adult dose", "Secondary HPT: start 30 mg once daily; hypercalcemia (PC/primary HPT): start 30 mg twice daily; titrate to target"],
+    ["Meal", "Take with food or shortly after a meal; swallow whole"],
+    ["Pregnancy", "Limited data; use only if benefit outweighs risk (untreated hypercalcemia also harmful)"],
+    ["Lactation", "Unknown if excreted in human milk; weigh benefit vs risk"],
+    ["Renal", "No starting-dose adjustment; indicated in secondary HPT only when on dialysis"],
+    ["Hepatic", "Moderate/severe impairment increases exposure; monitor closely"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "Serum calcium, phosphorus, iPTH; calcium within 1 week of start/dose change"]
+  ],
+  "summary": "Cinacalcet is a calcimimetic that lowers parathyroid hormone by increasing the calcium-sensing receptor's sensitivity to extracellular calcium. It is used for secondary hyperparathyroidism in adults with chronic kidney disease on dialysis, and for hypercalcemia in parathyroid carcinoma and in primary hyperparathyroidism when parathyroidectomy is indicated but cannot be performed. Its main hazard is hypocalcemia, which can cause paresthesias, seizures, QT prolongation, and arrhythmia and has been fatal. It is taken whole, with food. Initiation is contraindicated if serum calcium is below the lower limit of normal. Cinacalcet is a strong CYP2D6 inhibitor and is partly metabolized by CYP3A4.",
+  "indications": [
+    "Secondary hyperparathyroidism in adults with chronic kidney disease on dialysis",
+    "Hypercalcemia in adults with parathyroid carcinoma",
+    "Hypercalcemia in adults with primary hyperparathyroidism for whom parathyroidectomy is indicated but who cannot undergo it"
+  ],
+  "dosage": [
+    {"c": "Secondary hyperparathyroidism (CKD on dialysis)", "r": "Adult oral", "d": "Start 30 mg once daily; titrate no more often than every 2-4 weeks through 30, 60, 90, 120, 180 mg once daily to target iPTH", "t": "Once daily", "n": "Measure calcium/phosphorus within 1 week and iPTH 1-4 weeks after start or change; iPTH no earlier than 12 h post-dose"},
+    {"c": "Parathyroid carcinoma / primary HPT hypercalcemia", "r": "Adult oral", "d": "Start 30 mg twice daily; titrate every 2-4 weeks through 30 mg bid, 60 mg bid, 90 mg bid, then 90 mg three or four times daily to normalize serum calcium", "t": "2-4 times daily", "n": "Maximum 90 mg four times daily"}
+  ],
+  "admin": [
+    "Take with food or shortly after a meal (food increases absorption)",
+    "Swallow tablets whole; do not chew, crush, or divide",
+    "Measure serum calcium and phosphorus within 1 week and iPTH 1-4 weeks after initiation or dose change",
+    "Do not start if serum calcium is below the lower limit of the normal range",
+    "Once a maintenance dose is set, monitor calcium ~monthly (secondary HPT) or every 2 months (PC/primary HPT)"
+  ],
+  "moa": "The calcium-sensing receptor on parathyroid chief cells is the principal regulator of PTH synthesis and secretion. Cinacalcet is a calcimimetic that directly lowers PTH by increasing the sensitivity of this receptor to activation by extracellular calcium. The resulting reduction in PTH is accompanied by a concomitant decrease in serum calcium levels (and, in CKD, reductions in bone turnover and fibrosis).",
+  "contra": {
+    "absolute": [
+      "Initiation when serum calcium is below the lower limit of the normal range"
+    ],
+    "relative": [
+      "Pre-existing or risk of hypocalcemia",
+      "Risk factors for upper GI bleeding",
+      "Impaired cardiac function / heart failure (risk of hypotension, worsening HF, arrhythmia)",
+      "History of seizures"
+    ],
+    "monitor": [
+      "Serum calcium (for hypocalcemia)",
+      "iPTH (avoid adynamic bone disease if iPTH falls below ~100 pg/mL)",
+      "Signs of GI bleeding",
+      "QT interval / arrhythmia in at-risk patients"
+    ]
+  },
+  "preg": "Limited human data are insufficient to inform drug-associated risk; however, poorly controlled hypercalcemia in pregnancy is harmful. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "It is not known whether cinacalcet is excreted in human milk. A decision should be made whether to discontinue nursing or the drug, considering its importance to the mother.",
+  "renal": "Pharmacokinetics are not significantly altered by the degree of renal impairment; no starting-dose adjustment for renal function. For secondary HPT, cinacalcet is indicated only in patients on dialysis (not in CKD not on dialysis, because of increased hypocalcemia risk).",
+  "hepatic": "Exposure is increased in moderate and severe hepatic impairment (AUC about 2-fold and 4-fold higher). Monitor iPTH and serum calcium closely throughout treatment in these patients.",
+  "interactions": {
+    "major": [
+      "Strong CYP2D6 substrates with narrow therapeutic index (e.g., flecainide, most tricyclic antidepressants, desipramine) - cinacalcet is a strong CYP2D6 inhibitor and may require their dose reduction"
+    ],
+    "moderate": [
+      "Strong CYP3A4 inhibitors (e.g., ketoconazole, itraconazole) - may increase cinacalcet levels; monitor iPTH and calcium and adjust dose",
+      "CYP2D6 substrates such as metoprolol and carvedilol - dose adjustment may be needed"
+    ],
+    "minor": [],
+    "food": "Take with food or shortly after a meal; food increases cinacalcet exposure.",
+    "alcohol": "No specific interaction described in the label.",
+    "diagnostics": "Lowers serum calcium and iPTH (the intended effect); monitor these laboratory values."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Myalgia", "Dizziness", "Hypocalcemia (often asymptomatic)"],
+    "serious": ["Symptomatic hypocalcemia (paresthesias, muscle spasms, tetany, seizures)", "QT interval prolongation and ventricular arrhythmia", "Upper gastrointestinal bleeding", "Hypotension and/or worsening heart failure", "Adynamic bone disease (if iPTH oversuppressed)"],
+    "rare": ["Hypersensitivity/rash", "Idiosyncratic cardiac decompensation in impaired cardiac function"],
+    "emergency": ["Life-threatening / fatal hypocalcemia with seizures or arrhythmia", "Significant upper GI hemorrhage", "Acute worsening of heart failure"]
+  },
+  "monitoring": ["Serum calcium and phosphorus (within 1 week of start/dose change, then monthly to every 2 months)", "Intact PTH (1-4 weeks after start/change)", "Signs/symptoms of hypocalcemia", "Signs of GI bleeding", "Cardiac status in patients with heart failure"],
+  "counsel": [
+    "Take this medicine with food or right after a meal, and swallow the tablet whole",
+    "Report tingling, numbness, muscle cramps or twitching, or seizures - these can be signs of low calcium",
+    "Tell your doctor about any black stools, vomiting blood, or stomach pain",
+    "If you have heart failure, this medicine may worsen it and you may need extra monitoring",
+    "Keep all blood-test appointments so calcium, phosphorus, and PTH can be checked"
+  ],
+  "pk": [
+    ["Onset", "PTH falls within hours of dosing"],
+    ["Peak", "Cmax at approximately 2 to 6 hours; iPTH nadir 2-6 h post-dose"],
+    ["Half-life", "Initial ~6 hours; terminal 30 to 40 hours"],
+    ["Duration", "Steady state in ~7 days; once- or twice-daily dosing"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C permitted"]
+  ],
+  "pearls": [
+    "Hypocalcemia is the key hazard - life-threatening and fatal events reported; check calcium within 1 week of any dose change",
+    "Do NOT initiate if serum calcium is below the lower limit of normal",
+    "Not for CKD patients NOT on dialysis (higher hypocalcemia risk) - secondary HPT indication is dialysis-only",
+    "Strong CYP2D6 inhibitor - watch narrow-index CYP2D6 drugs (TCAs, flecainide)",
+    "Hemodialysis does not remove cinacalcet in overdose (highly protein bound)"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember on the same day; if it is nearly time for the next dose, skip the missed dose. Do not take two doses at once.",
+  "overdose": "Overdose may cause hypocalcemia. Monitor for signs and symptoms of hypocalcemia and take appropriate measures to correct serum calcium. Because cinacalcet is highly protein bound, hemodialysis is not an effective treatment for overdose.",
+  "refs": [
+    ["FDA Label - Cinacalcet (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cinacalcet%22"],
+    ["DailyMed - Cinacalcet", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cinacalcet"]
+  ]
+}

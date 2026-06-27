@@ -1,0 +1,94 @@
+{
+  "generic": "Amoxapine",
+  "cls": "Tricyclic (dibenzoxazepine) antidepressant",
+  "pharm": "Antidepressant (TCA)",
+  "tags": ["antidepressant", "tricyclic", "TCA", "depression", "dibenzoxazepine", "psychiatry"],
+  "quick": [
+    ["Adult dose", "Start 50 mg 2-3 times daily; usual effective 200-300 mg/day (max 400 mg outpatient)"],
+    ["Meal", "May be taken with or without food; bedtime dosing for single daily dose"],
+    ["Pregnancy", "Use only if potential benefit justifies risk to the fetus"],
+    ["Lactation", "Excreted in breast milk; use caution"],
+    ["Renal", "Caution; main route of excretion is renal - lower doses in impairment"],
+    ["Hepatic", "Caution; extensively metabolized - reduce dose"],
+    ["Alcohol", "Avoid; additive CNS depression and enhanced response to alcohol"],
+    ["Monitoring", "Mood/suicidality, ECG, signs of EPS/tardive dyskinesia, anticholinergic effects"]
+  ],
+  "summary": "Amoxapine is a dibenzoxazepine tricyclic antidepressant (a metabolite of the antipsychotic loxapine) that inhibits norepinephrine and serotonin reuptake and also blocks dopamine receptors, giving it antidepressant plus mild antipsychotic activity. It is used for depression with anxiety, agitation or psychotic features and has a relatively rapid onset. It carries a boxed warning for suicidality in young patients and, uniquely among TCAs, can cause extrapyramidal symptoms, tardive dyskinesia and neuroleptic malignant syndrome; overdose tends to cause seizures and renal failure rather than the cardiotoxicity typical of other TCAs.",
+  "indications": [
+    "Relief of symptoms of depression in neurotic or reactive depressive disorders",
+    "Endogenous and psychotic depressions",
+    "Depression accompanied by anxiety or agitation"
+  ],
+  "dosage": [
+    {"c": "Depression (adult)", "r": "Initial", "d": "50 mg two or three times daily", "t": "BID-TID", "n": "May increase to 100 mg BID-TID by end of first week"},
+    {"c": "Depression (adult)", "r": "Usual effective", "d": "200-300 mg daily", "t": "Once daily at bedtime if <=300 mg, otherwise divided", "n": "Adequate trial = 300 mg/day for >=2 weeks"},
+    {"c": "Depression (adult, refractory outpatient)", "r": "Maximum", "d": "Up to 400 mg daily", "t": "Divided doses", "n": "Only if 300 mg/day ineffective over >=2 weeks"},
+    {"c": "Hospitalized refractory (no seizure history)", "r": "Maximum", "d": "Up to 600 mg daily in divided doses", "t": "Divided doses", "n": "Inpatient setting only"},
+    {"c": "Elderly", "r": "Reduced", "d": "Start 25 mg 2-3 times daily; usual 100-150 mg/day, up to 300 mg if needed", "t": "Divided or bedtime", "n": "Lower doses due to sensitivity"}
+  ],
+  "admin": [
+    "When total daily dose is 300 mg or less it may be given as a single bedtime dose",
+    "Divide doses if total exceeds 300 mg daily",
+    "Allow at least 2 weeks at 300 mg/day before judging response",
+    "When switching from an MAO inhibitor, allow at least 14 days then start cautiously and titrate",
+    "Taper gradually rather than stopping abruptly to avoid withdrawal symptoms"
+  ],
+  "moa": "Amoxapine is a tricyclic dibenzoxazepine antidepressant that reduces neuronal reuptake of norepinephrine and serotonin, increasing their synaptic availability. It is also a dopamine (D2) receptor antagonist (a property shared with its parent antipsychotic loxapine), which contributes to mild antipsychotic activity and to extrapyramidal side effects. It is not a monoamine oxidase inhibitor.",
+  "contra": {
+    "absolute": ["Hypersensitivity to dibenzoxazepine compounds", "Concomitant use with monoamine oxidase inhibitors (hyperpyretic crises, severe convulsions, death)", "Acute recovery phase following myocardial infarction"],
+    "relative": ["History of seizures or conditions lowering seizure threshold", "Cardiovascular disease / conduction abnormalities", "Urinary retention, narrow-angle glaucoma, prostatic hypertrophy", "Patients at risk of suicide; bipolar disorder (manic switch)"],
+    "monitor": ["Anticholinergic drugs (paralytic ileus risk)", "CNS depressants and alcohol", "CYP2D6 inhibitors (raise TCA levels)", "Elderly patients"]
+  },
+  "preg": "Animal studies showed embryotoxicity and fetotoxicity at multiples of the human dose; there are no adequate well-controlled studies in pregnant women. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Amoxapine is excreted in human milk. Because effects on the infant are unknown, exercise caution when administering to a nursing woman and consider the importance of the drug to the mother.",
+  "renal": "The kidney is the main route of excretion of amoxapine and its metabolites; use lower doses and cautious titration in renal impairment. Renal failure (acute tubular necrosis with rhabdomyolysis) can also complicate overdose.",
+  "hepatic": "Amoxapine is almost completely metabolized in the liver; impaired hepatic function may increase plasma levels. Use lower doses with caution and monitor for toxicity; rare hepatitis has been reported.",
+  "interactions": {
+    "major": ["Monoamine oxidase inhibitors - contraindicated; risk of hyperpyretic crisis, seizures and death (allow 14-day washout)", "Other serotonergic drugs - risk of serotonin syndrome", "Class I antiarrhythmics / QT-prolonging drugs - additive cardiac toxicity"],
+    "moderate": ["Anticholinergic drugs - additive effects including paralytic ileus and hyperthermia", "CNS depressants / alcohol / barbiturates - enhanced sedation and respiratory depression", "CYP2D6 inhibitors (e.g. fluoxetine, paroxetine, quinidine) - markedly increased TCA levels", "Cimetidine - may raise tricyclic levels", "Sympathomimetics - enhanced pressor/arrhythmic effects"],
+    "minor": ["Antihypertensives (e.g. guanethidine, clonidine) - amoxapine may blunt their effect", "Thyroid agents - possible enhanced antidepressant effect and arrhythmia"],
+    "food": "May be taken without regard to food.",
+    "alcohol": "Amoxapine enhances the response to alcohol; avoid alcohol due to additive CNS depression.",
+    "diagnostics": "May elevate serum prolactin and alter EEG patterns; tricyclics can affect ECG (QRS/QT)."
+  },
+  "se": {
+    "common": ["Drowsiness", "Dry mouth", "Constipation", "Blurred vision", "Dizziness, headache", "Anxiety, insomnia, nervousness", "Tremor", "Increased perspiration / increased appetite"],
+    "serious": ["Seizures (grand mal)", "Extrapyramidal symptoms and tardive dyskinesia", "Neuroleptic malignant syndrome", "Orthostatic hypotension / tachycardia / arrhythmia", "Urinary retention, paralytic ileus", "Worsening depression or suicidal ideation"],
+    "rare": ["Agranulocytosis / leukopenia", "Hepatitis, drug fever", "Vasculitis, photosensitization", "Hyperthermia, SIADH/hyponatremia", "Galactorrhea/gynecomastia from hyperprolactinemia"],
+    "emergency": ["Suicidal behavior", "Neuroleptic malignant syndrome (hyperthermia, rigidity, autonomic instability)", "Serotonin syndrome", "Status epilepticus in overdose", "Severe arrhythmia"]
+  },
+  "monitoring": [
+    "Mood, suicidal ideation and behavioral changes, especially early and after dose changes",
+    "Extrapyramidal signs and tardive dyskinesia on chronic use",
+    "Baseline and periodic ECG and blood pressure (orthostatic)",
+    "Signs of anticholinergic toxicity and urinary retention",
+    "Hepatic and renal function and CBC if symptoms suggest toxicity"
+  ],
+  "counsel": [
+    "Watch for and report worsening mood, agitation, or thoughts of self-harm, especially when starting or changing dose",
+    "Do not drink alcohol and avoid driving until you know how it affects you (drowsiness)",
+    "Report involuntary movements of face/tongue, muscle stiffness, high fever or difficulty urinating",
+    "Do not stop suddenly - taper under medical guidance to avoid withdrawal",
+    "Rise slowly from lying/sitting to limit dizziness; full effect may take a few weeks"
+  ],
+  "pk": [
+    ["Onset", "Initial clinical effect in 4-7 days; response within 2 weeks in over 80% of responders"],
+    ["Peak", "Peak blood levels about 90 minutes after ingestion"],
+    ["Half-life", "Parent ~8 hours; active metabolite 8-hydroxyamoxapine ~30 hours"],
+    ["Duration", "Antidepressant effect maintained with daily dosing"],
+    ["Storage", "Store at 20-25 C in a tight, child-resistant container"]
+  ],
+  "pearls": [
+    "Boxed warning: antidepressants increase risk of suicidal thinking/behavior in children, adolescents and young adults (<=24 years) - monitor closely early in treatment",
+    "Unlike other TCAs, amoxapine has dopamine-blocking (loxapine-derived) activity and can cause extrapyramidal symptoms, tardive dyskinesia and neuroleptic malignant syndrome",
+    "Amoxapine overdose characteristically causes seizures (status epilepticus) and delayed renal failure rather than the cardiotoxicity seen with other TCAs",
+    "Onset of antidepressant effect is faster than amitriptyline or imipramine, often within the first week",
+    "Never combine with an MAOI; allow a 14-day washout when switching"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and resume the usual schedule. Do not double up. If on a single bedtime dose and the morning has passed, contact your prescriber rather than taking it during the day.",
+  "overdose": "Amoxapine overdose differs from other tricyclics: serious cardiovascular effects are uncommon, but CNS toxicity predominates with frequent grand mal seizures that may progress to status epilepticus, coma and acidosis; acute renal failure (acute tubular necrosis with rhabdomyolysis/myoglobinuria) can develop 2-5 days later, mainly after multiple seizures, and fatal overdoses have occurred. Treatment is symptomatic and supportive with priority on preventing/controlling seizures (benzodiazepines), airway protection, gastric lavage and activated charcoal if early, and monitoring renal function; dialysis is not effective.",
+  "refs": [
+    ["FDA Amoxapine Tablets USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amoxapine%22"],
+    ["DailyMed - Amoxapine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -14,6 +14,16 @@ Usage:
 Limits: 240 req/min (we throttle), 1000/day no-key, 120k/day with key.
 """
 import json, os, re, sqlite3, sys, time, urllib.parse, urllib.request
+import threading, concurrent.futures
+
+# global rate limiter — space request starts so we stay under 240/min/key
+_rl_lock = threading.Lock(); _rl_next = [0.0]
+MIN_INTERVAL = 60.0 / 230.0
+def _throttle():
+    with _rl_lock:
+        t = max(time.time(), _rl_next[0]); _rl_next[0] = t + MIN_INTERVAL
+    d = t - time.time()
+    if d > 0: time.sleep(d)
 
 HERE = os.path.dirname(os.path.abspath(__file__)); WORKER = os.path.dirname(HERE)
 SRC = os.path.join(WORKER, "data", "stewardmd-drugs.sqlite")
@@ -67,7 +77,8 @@ def fetch(qname):
         if KEY: params["api_key"] = KEY
         url = base + "?" + urllib.parse.urlencode(params)
         try:
-            with urllib.request.urlopen(url, timeout=25) as r:
+            _throttle()
+            with urllib.request.urlopen(url, timeout=20) as r:
                 data = json.load(r)
             if data.get("results"):
                 return data["results"][0]
@@ -99,23 +110,25 @@ def main():
     m.execute("CREATE TABLE monographs (" + ",".join(c + (" TEXT PRIMARY KEY" if c == "composition" else " TEXT") for c in cols) + ")")
     hit = miss = 0; missed = []
     stamp = time.strftime("%Y-%m-%d")
-    for i, comp in enumerate(comps):
-        qn = query_name(comp)
-        r = fetch(qn)
-        if not r:
-            miss += 1; missed.append(comp);
-        else:
-            d = extract(r)
-            if not (d["indication"] or d["dosage"]):
+    def work(comp):
+        qn = query_name(comp); r = fetch(qn)
+        if not r: return (comp, qn, None)
+        d = extract(r)
+        return (comp, qn, d if (d["indication"] or d["dosage"]) else None)
+    done = 0
+    # parallel fetch (latency-bound); global throttle keeps us under 240/min
+    with concurrent.futures.ThreadPoolExecutor(max_workers=12) as ex:
+        for comp, qn, d in (f.result() for f in concurrent.futures.as_completed([ex.submit(work, c) for c in comps])):
+            if d is None:
                 miss += 1; missed.append(comp)
             else:
                 hit += 1
-                row = [comp, qn, d["indication"], d["dosage"], d["pregnancy"], d["specific_pop"],
-                       d["adverse"], d["interactions"], d["warnings"], d["forms"],
-                       "U.S. FDA label via openFDA", d["source_id"], stamp]
-                m.execute("INSERT OR REPLACE INTO monographs VALUES (" + ",".join("?"*len(cols)) + ")", row)
-        time.sleep(0.30)  # ~3/sec, well under 240/min
-        if (i + 1) % 10 == 0: print(f"  …{i+1}/{len(comps)}")
+                m.execute("INSERT OR REPLACE INTO monographs VALUES (" + ",".join("?"*len(cols)) + ")",
+                          [comp, qn, d["indication"], d["dosage"], d["pregnancy"], d["specific_pop"],
+                           d["adverse"], d["interactions"], d["warnings"], d["forms"],
+                           "U.S. FDA label via openFDA", d["source_id"], stamp])
+            done += 1
+            if done % 25 == 0: print(f"  …{done}/{len(comps)}")
     m.commit()
 
     # emit D1 SQL (schema + INSERT OR REPLACE, ≤40KB statements)

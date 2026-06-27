@@ -1,0 +1,92 @@
+{
+  "generic": "Fluphenazine",
+  "cls": "Typical (phenothiazine) antipsychotic",
+  "pharm": "High-potency phenothiazine antipsychotic; dopamine D2 receptor antagonist available as short-acting HCl and long-acting decanoate depot.",
+  "tags": ["Typical antipsychotic", "Phenothiazine", "D2 antagonist", "Depot available", "EPS risk", "Tardive dyskinesia"],
+  "quick": [
+    ["Adult dose", "Decanoate: 12.5-25 mg IM/SC initially, every 2-4 weeks; HCl 2.5-10 mg/day PO divided"],
+    ["Meal", "Oral may be taken with or without food"],
+    ["Pregnancy", "Use only if clearly needed; neonatal EPS/withdrawal in 3rd trimester"],
+    ["Lactation", "Excreted in milk; weigh risk/benefit, generally avoid"],
+    ["Renal", "Use with caution; no specific protocol"],
+    ["Hepatic", "Contraindicated with liver damage"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "EPS/tardive dyskinesia, CBC, LFTs, metabolic, ECG"]
+  ],
+  "summary": "Fluphenazine is a high-potency phenothiazine (typical) antipsychotic for schizophrenia. The decanoate is a long-acting depot injection for patients needing prolonged parenteral therapy. It carries a boxed warning for increased mortality in elderly patients with dementia-related psychosis (not an approved use). High-potency dopamine blockade gives a substantial risk of extrapyramidal symptoms and tardive dyskinesia, plus risk of neuroleptic malignant syndrome. It is contraindicated in liver damage, blood dyscrasias, comatose/severely depressed states, and subcortical brain damage.",
+  "indications": [
+    "Management of schizophrenia and psychotic disorders",
+    "Long-acting maintenance (decanoate) for patients requiring prolonged parenteral antipsychotic therapy, e.g., chronic schizophrenia"
+  ],
+  "dosage": [
+    {"c": "Schizophrenia - oral (HCl)", "r": "Oral", "d": "2.5-10 mg/day in divided doses (q6-8h)", "t": "Divided daily", "n": "Maintenance often 1-5 mg/day once daily; max ~40 mg/day"},
+    {"c": "Initiation - decanoate", "r": "IM or SC", "d": "12.5-25 mg (0.5-1 mL)", "t": "Single injection", "n": "Onset 24-72 h; effect on psychosis significant within 48-96 h"},
+    {"c": "Maintenance - decanoate", "r": "IM or SC", "d": "Adjusted to response", "t": "Every 2-4 weeks (sometimes longer)", "n": "A single injection may control symptoms up to 4 weeks or more"},
+    {"c": "Conversion from oral", "r": "IM/SC", "d": "Approx 12.5 mg decanoate per ~10 mg/day oral HCl", "t": "Per response", "n": "Establish response to short-acting form before using decanoate in phenothiazine-naive patients"}
+  ],
+  "admin": [
+    "Decanoate: deep IM or SC injection using a dry syringe and needle of at least 21 gauge (a wet needle clouds the solution)",
+    "Determine the patient's tolerance to fluphenazine with a short-acting form before starting the long-acting decanoate",
+    "Adjust subsequent decanoate dose and interval according to response",
+    "Oral forms may be given with or without food"
+  ],
+  "moa": "Postsynaptic dopamine D2 receptor antagonism in mesolimbic pathways reduces positive psychotic symptoms; the phenothiazine also blocks other receptors (alpha-adrenergic, muscarinic, histaminergic), accounting for adverse effects. The decanoate ester provides slow release from the injection depot.",
+  "contra": {
+    "absolute": ["Suspected or established subcortical brain damage", "Comatose or severely depressed states", "Blood dyscrasia", "Liver damage", "Hypersensitivity to fluphenazine or phenothiazines (cross-sensitivity)", "Concurrent large doses of hypnotics", "Children under 12 years (decanoate)"],
+    "relative": ["Parkinson disease", "Cardiovascular disease/QT prolongation", "Seizure disorder", "Elderly with dementia (boxed warning)", "Glaucoma, urinary retention, prostatic hypertrophy"],
+    "monitor": ["Extrapyramidal symptoms and tardive dyskinesia", "Complete blood count", "Liver function tests", "ECG/QT and metabolic parameters"]
+  },
+  "preg": "Use only if clearly needed; neonates exposed in the third trimester are at risk of extrapyramidal and/or withdrawal symptoms after delivery. Monitor newborns.",
+  "lact": "Phenothiazines are excreted in breast milk; potential for adverse effects in the infant. Generally avoid or weigh risk against benefit.",
+  "renal": "Use with caution; no specific dosing protocol established. Monitor for accumulation of effects.",
+  "hepatic": "Contraindicated in the presence of liver damage; phenothiazines are hepatically metabolized and can cause cholestatic injury.",
+  "interactions": {
+    "major": ["CNS depressants (alcohol, opioids, benzodiazepines, anesthetics) - additive sedation/respiratory depression", "QT-prolonging drugs - additive arrhythmia risk", "Other dopamine antagonists/metoclopramide - increased EPS"],
+    "moderate": ["Antihypertensives - enhanced hypotension", "Anticholinergics - additive antimuscarinic effects, may worsen tardive dyskinesia", "Levodopa/dopamine agonists - mutual antagonism", "Lithium - rare neurotoxicity reports"],
+    "minor": ["Antacids - may reduce oral absorption", "Drugs lowering seizure threshold"],
+    "food": "Oral may be taken with or without food",
+    "alcohol": "Avoid - additive CNS depression and orthostasis",
+    "diagnostics": "May cause false-positive pregnancy/PKU tests; can alter ECG (QT)."
+  },
+  "se": {
+    "common": ["Extrapyramidal symptoms (parkinsonism, dystonia, akathisia)", "Sedation/drowsiness", "Orthostatic hypotension", "Anticholinergic effects (dry mouth, blurred vision, constipation, urinary retention)", "Weight changes", "Hyperprolactinemia (galactorrhea, amenorrhea, gynecomastia)"],
+    "serious": ["Tardive dyskinesia (may be irreversible)", "Neuroleptic malignant syndrome", "QT prolongation/arrhythmia", "Agranulocytosis/leukopenia", "Cholestatic jaundice/hepatotoxicity", "Seizures"],
+    "rare": ["Pigmentary retinopathy", "Photosensitivity and skin pigmentation", "SIADH", "Priapism"],
+    "emergency": ["Neuroleptic malignant syndrome (hyperthermia, rigidity, autonomic instability)", "Severe arrhythmia/torsades", "Agranulocytosis with sepsis", "Acute severe dystonia (laryngospasm)"]
+  },
+  "monitoring": [
+    "Extrapyramidal symptoms and abnormal involuntary movements (AIMS for tardive dyskinesia)",
+    "Complete blood count (for dyscrasias)",
+    "Liver function tests",
+    "ECG/QT interval and electrolytes",
+    "Weight, glucose, and lipids (metabolic)",
+    "Prolactin if symptomatic; blood pressure (orthostasis)"
+  ],
+  "counsel": [
+    "Take/receive exactly as prescribed; the depot injection works over weeks",
+    "Report muscle stiffness, tremor, restlessness, or uncontrolled movements",
+    "Seek urgent care for high fever with muscle rigidity and confusion",
+    "Rise slowly to avoid dizziness; avoid alcohol",
+    "Use sun protection (photosensitivity); report sore throat, fever, or yellowing of skin"
+  ],
+  "pk": [
+    ["Onset", "Decanoate 24-72 hours; significant effect 48-96 hours"],
+    ["Peak", "Decanoate ~8-10 hours (release); oral ~2 hours"],
+    ["Half-life", "Decanoate ~7-10 days; oral HCl ~15 hours"],
+    ["Duration", "Decanoate ~2-4 weeks (up to 6 weeks in some)"],
+    ["Storage", "Protect from light; store at controlled room temperature; do not freeze injection"]
+  ],
+  "pearls": [
+    "Boxed warning: increased mortality in elderly patients with dementia-related psychosis - not approved for that use",
+    "High-potency phenothiazine - prominent extrapyramidal symptoms and tardive dyskinesia risk; relatively less sedation/hypotension than low-potency agents",
+    "Watch for neuroleptic malignant syndrome",
+    "Establish tolerance with short-acting fluphenazine before committing to the long-acting decanoate",
+    "Contraindicated with liver damage, blood dyscrasia, and comatose/severely depressed states"
+  ],
+  "missed": "For depot injections, give the missed dose as soon as feasible and adjust the schedule per clinician. For oral therapy, take the missed dose when remembered unless near the next dose; do not double up. Abrupt discontinuation may cause withdrawal/dyskinesia.",
+  "overdose": "Overdose causes CNS depression, hypotension, severe extrapyramidal reactions, agitation, seizures, hyperthermia, and arrhythmias. No specific antidote. Provide supportive care, airway/respiratory and cardiovascular support, and ECG monitoring; treat dystonia with anticholinergics (e.g., benztropine, diphenhydramine), hypotension with IV fluids and pressors (avoid epinephrine), and arrhythmias appropriately. Dialysis is not helpful.",
+  "refs": [
+    ["FDA Fluphenazine Decanoate Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fluphenazine%20decanoate%22"],
+    ["DailyMed - Fluphenazine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=fluphenazine"]
+  ]
+}

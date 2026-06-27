@@ -1,0 +1,101 @@
+{
+  "generic": "Oxaliplatin",
+  "cls": "Platinum-based alkylating-like antineoplastic (DACH platinum)",
+  "pharm": "Third-generation platinum agent forming Pt-DNA inter- and intrastrand crosslinks that block DNA replication and transcription; cell-cycle nonspecific",
+  "tags": ["Rx only", "Cytotoxic/hazardous drug", "Boxed warning: serious and fatal hypersensitivity/anaphylaxis", "Contraindicated with platinum-drug hypersensitivity", "Cumulative peripheral sensory neuropathy (acute cold-triggered and chronic)", "Embryo-fetal toxicity", "Administer only by clinician experienced in cytotoxic chemotherapy"],
+  "quick": [
+    ["Adult dose", "85 mg/m2 IV over 120 min on day 1, every 14 days, combined with leucovorin and fluorouracil (FOLFOX); adjuvant up to 12 cycles, advanced disease until progression/toxicity"],
+    ["Meal", "Not applicable (IV only); avoid cold foods/drinks around dosing to limit acute neuropathy"],
+    ["Pregnancy", "Can cause fetal harm (genotoxic); advise effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for 3 months after final dose"],
+    ["Renal", "Severe impairment (CrCl <30 mL/min): start 65 mg/m2; unbound platinum AUC markedly increased"],
+    ["Hepatic", "Monitor LFTs at baseline and before each cycle; hepatotoxicity (incl. veno-occlusive disease) reported"],
+    ["Alcohol", "Avoid alcohol (hepatic burden, nausea)"],
+    ["Monitoring", "Hypersensitivity at each infusion, neuropathy, CBC, LFTs, ECG/electrolytes, INR if on anticoagulants"]
+  ],
+  "summary": "Oxaliplatin is a platinum-based cytotoxic agent used in combination with infusional fluorouracil and leucovorin (FOLFOX) for adjuvant treatment of stage III colon cancer after complete resection and for advanced colorectal cancer. It forms platinum-DNA crosslinks that inhibit DNA replication and transcription in a cell-cycle-nonspecific manner. Its boxed warning is for serious and fatal hypersensitivity reactions, including anaphylaxis, which can occur within minutes of administration and during any cycle; it is contraindicated in patients with hypersensitivity to oxaliplatin or other platinum-based drugs. The other hallmark toxicity is cumulative peripheral sensory neuropathy, with an acute cold-triggered form (paresthesias, pharyngolaryngeal dysesthesia, jaw spasm) and a persistent chronic sensory neuropathy. It also causes myelosuppression and is associated with PRES, pulmonary toxicity, hepatotoxicity, QT prolongation, and rhabdomyolysis.",
+  "indications": [
+    "Adjuvant treatment of stage III colon cancer after complete resection of the primary tumor (in combination with infusional fluorouracil and leucovorin)",
+    "Treatment of advanced colorectal cancer (in combination with infusional fluorouracil and leucovorin)"
+  ],
+  "dosage": [
+    {"c": "Stage III colon cancer (adjuvant, FOLFOX) - Day 1", "r": "IV infusion", "d": "Oxaliplatin 85 mg/m2 over 120 min and leucovorin 200 mg/m2 over 120 min (separate bags, same time), then fluorouracil 400 mg/m2 IV bolus over 2-4 min, then fluorouracil 600 mg/m2 as a 22-hour continuous infusion", "t": "Every 14-day cycle; continue up to 12 cycles or unacceptable toxicity", "n": "Day 2: leucovorin 200 mg/m2 over 120 min, then fluorouracil 400 mg/m2 bolus, then fluorouracil 600 mg/m2 over 22 hours"},
+    {"c": "Advanced colorectal cancer (FOLFOX)", "r": "IV infusion", "d": "Oxaliplatin 85 mg/m2 over 120 min day 1 with the same leucovorin/fluorouracil schedule, every 2 weeks", "t": "Continue until disease progression or unacceptable toxicity", "n": "Refer to fluorouracil and leucovorin labels for their details"},
+    {"c": "Acute infusion-related/neuropathic toxicity", "r": "IV infusion", "d": "Prolong oxaliplatin infusion from 2 hours to 6 hours", "t": "May mitigate acute toxicities such as non-life-threatening infusion reactions and acute neuropathy", "n": "Does not apply to anaphylaxis - that requires permanent discontinuation"},
+    {"c": "Peripheral sensory neuropathy (dose modification)", "r": "IV infusion", "d": "Persistent grade 2: consider reducing to 75 mg/m2; persistent grade 3: consider discontinuing; grade 4: discontinue", "t": "Adjust before the next cycle", "n": "Acute cold-triggered symptoms within hours-2 days usually resolve within 14 days"},
+    {"c": "Severe renal impairment (CrCl <30 mL/min)", "r": "IV infusion", "d": "Reduce starting dose to 65 mg/m2", "t": "First cycle dose reduction", "n": "Unbound platinum exposure rises with declining renal function"}
+  ],
+  "admin": [
+    "Hazardous cytotoxic drug - prepare, handle, and dispose per applicable procedures; gloves recommended; administer only under a clinician experienced in cytotoxic chemotherapy",
+    "Give oxaliplatin and leucovorin over 120 minutes in separate bags at the same time, followed by fluorouracil, on day 1 of each 14-day cycle",
+    "Do NOT use chloride-containing diluents (e.g., 0.9% sodium chloride) - reconstitute/dilute only in 5% Dextrose; do not mix with alkaline solutions or fluorouracil in the same line",
+    "Have treatment for anaphylaxis (e.g., epinephrine, corticosteroids, antihistamines) immediately available; observe during infusion as serious hypersensitivity can occur within minutes and during any cycle",
+    "Counsel and instruct patients to avoid cold drinks, ice, and exposure of skin to cold during and for several days after infusion (acute neuropathy precipitant)",
+    "Avoid topical application of ice (e.g., for mucositis prophylaxis) because cold exacerbates acute neurological symptoms",
+    "Protect prepared solution from light per product instructions; if drug contacts skin wash thoroughly with soap and water, and flush mucous membranes with water",
+    "Correct electrolyte abnormalities before initiating and monitor ECG in patients with QT risk factors"
+  ],
+  "moa": "Oxaliplatin undergoes nonenzymatic conversion in physiologic solutions, displacing its labile oxalate ligand to form reactive monoaquo and diaquo diaminocyclohexane (DACH) platinum species. These covalently bind DNA, forming both inter- and intrastrand platinum crosslinks - chiefly between the N7 positions of adjacent guanines, adjacent adenine-guanine, and guanines separated by an intervening nucleotide. These crosslinks inhibit DNA replication and transcription, and cytotoxicity is cell-cycle nonspecific. In combination with fluorouracil, oxaliplatin shows greater antiproliferative activity than either agent alone.",
+  "contra": {
+    "absolute": ["History of hypersensitivity reaction to oxaliplatin or other platinum-based drugs (reactions have included anaphylaxis)"],
+    "relative": ["Congenital long QT syndrome (avoid)", "Severe renal impairment (reduce starting dose to 65 mg/m2)", "Pre-existing peripheral neuropathy", "Congestive heart failure, bradyarrhythmias, electrolyte abnormalities, or concomitant QT-prolonging drugs (ECG monitoring)", "Concurrent oral anticoagulants (bleeding risk)"],
+    "monitor": ["Hypersensitivity/anaphylaxis signs at each infusion", "Peripheral sensory neuropathy (acute and chronic) before each cycle", "Complete blood count (neutrophils >=1.5 x10^9/L and platelets >=75 x10^9/L before dosing)", "Liver function tests at baseline and before each cycle", "ECG and electrolytes (correct before and during treatment) in QT-risk patients", "INR/prothrombin time if on oral anticoagulants", "Neurologic and visual changes (PRES); respiratory symptoms (interstitial lung disease)"]
+  },
+  "preg": "Based on its direct interaction with DNA, oxaliplatin can cause fetal harm when administered to a pregnant woman. Available human data do not establish the presence or absence of major birth defects or miscarriage. In rats, oxaliplatin caused developmental mortality (increased early resorptions) and adversely affected fetal growth (decreased fetal weight, delayed ossification) at maternal doses below the recommended human dose on a body-surface-area basis. Verify pregnancy status before initiation; advise females of reproductive potential to use effective contraception during treatment and for 9 months after the final dose, and males with female partners to use effective contraception during and for 6 months after. Background US risk of major birth defects is 2-4% and of miscarriage 15-20%.",
+  "lact": "There are no data on the presence of oxaliplatin or its metabolites in human or animal milk or on effects on the breastfed infant or milk production. Because of the potential for serious adverse reactions in breastfed infants, advise women not to breastfeed during treatment with oxaliplatin and for 3 months after the final dose.",
+  "renal": "Platinum-containing species are eliminated primarily by the kidney, and unbound platinum exposure increases with worsening renal function (mean dose-adjusted AUC about 40%, 95%, and 342% higher in mild, moderate, and severe impairment, respectively). Patients with normal, mild, or moderate impairment received 85 mg/m2; patients with severe renal impairment (CrCl <30 mL/min) should start at a reduced dose of 65 mg/m2. Avoid concomitant nephrotoxic drugs, which can further decrease clearance.",
+  "hepatic": "Hepatotoxicity, including transaminase/alkaline phosphatase elevations and hepatic vascular disorders (sinusoidal obstruction/veno-occlusive disease, peliosis hepatis, nodular regenerative hyperplasia), has been reported. Monitor liver function tests at baseline, before each subsequent cycle, and as clinically indicated; investigate elevations not explained by metastases.",
+  "interactions": {
+    "major": ["QT-prolonging drugs - additive QT interval prolongation and ventricular arrhythmias; avoid coadministration", "Nephrotoxic drugs - decrease clearance of platinum species; avoid coadministration", "Oral anticoagulants (with fluorouracil/leucovorin) - prolonged PT/INR and hemorrhage; increase monitoring frequency"],
+    "moderate": ["Other myelosuppressive chemotherapy/radiation - additive bone marrow suppression", "Fluorouracil/leucovorin (intended combination) - overlapping mucositis, diarrhea, and myelosuppression"],
+    "minor": ["Live vaccines - reduced efficacy/risk in immunosuppressed patients (avoid)"],
+    "food": "Not applicable - intravenous administration only. Avoid cold foods and drinks around dosing to reduce acute cold-induced neuropathy.",
+    "alcohol": "Avoid alcohol given additive hepatic burden and nausea.",
+    "diagnostics": "May increase transaminases and alkaline phosphatase. Monitor electrolytes (correct before/during therapy) and ECG for QT prolongation in at-risk patients."
+  },
+  "se": {
+    "common": ["Peripheral sensory neuropathy (acute cold-triggered and chronic)", "Neutropenia, thrombocytopenia, anemia", "Nausea and vomiting", "Diarrhea", "Stomatitis", "Fatigue", "Increased transaminases and alkaline phosphatase"],
+    "serious": ["Serious and fatal hypersensitivity reactions including anaphylaxis", "Severe myelosuppression with neutropenic sepsis", "Grade 3-4 persistent peripheral sensory neuropathy (functional impairment)", "Posterior reversible encephalopathy syndrome (PRES)", "Pulmonary toxicity (interstitial lung disease, pulmonary fibrosis)", "Hepatotoxicity including hepatic veno-occlusive disease", "QT prolongation and ventricular arrhythmias", "Rhabdomyolysis", "Hemorrhage (with anticoagulants)", "Thromboembolic events"],
+    "rare": ["Pharyngolaryngeal dysesthesia (subjective dyspnea/dysphagia without laryngospasm)", "Eosinophilic pneumonia", "Intracerebral hemorrhage", "Immune-mediated hemolytic anemia/thrombocytopenia"],
+    "emergency": ["Anaphylaxis/severe hypersensitivity - chest tightness, dyspnea, wheezing, hypotension, faintness, facial/lip/eyelid swelling - within minutes and during any cycle; stop immediately and permanently discontinue", "Acute pharyngolaryngeal dysesthesia with sense of choking (manage supportively; reassure no actual airway obstruction)", "Neutropenic sepsis/septic shock", "PRES (seizures, visual loss, altered mental status) - permanently discontinue", "Acute respiratory failure from interstitial lung disease"]
+  },
+  "monitoring": [
+    "Observe for hypersensitivity/anaphylaxis during every infusion with anaphylaxis treatment immediately available",
+    "Peripheral sensory neuropathy (acute and chronic) assessed before each cycle for dose modification",
+    "Complete blood count - confirm neutrophils >=1.5 x10^9/L and platelets >=75 x10^9/L before each dose",
+    "Liver function tests at baseline, before each subsequent cycle, and as clinically indicated",
+    "ECG and electrolytes (Mg, K, Ca) in patients with CHF, bradyarrhythmias, electrolyte abnormalities, or QT-prolonging drugs - correct before and during therapy",
+    "Prothrombin time/INR in patients on oral anticoagulants",
+    "Neurologic and visual symptoms (PRES) and respiratory symptoms (pulmonary toxicity)"
+  ],
+  "counsel": [
+    "Seek immediate medical attention for any signs of a severe allergic reaction - chest tightness, shortness of breath, wheezing, dizziness or faintness, or swelling of the face, eyelids, or lips - which can happen within minutes and on any cycle",
+    "Avoid cold drinks, ice, and exposure of your skin (and breathing cold air) to cold temperatures during and for several days after each infusion to limit nerve symptoms",
+    "Report numbness, tingling, or trouble with fine movements (buttoning, writing) in hands/feet, throat tightness or trouble swallowing, or jaw spasm",
+    "This drug lowers blood counts - report fever, chills, signs of infection, persistent diarrhea, or unusual bruising/bleeding promptly",
+    "Report severe headache, confusion, seizures, or vision changes (possible PRES) and new or worsening cough or breathlessness",
+    "Avoid pregnancy: use effective contraception during treatment and for 9 months (females) or 6 months (males) after the last dose; do not breastfeed during therapy and for 3 months after",
+    "If you take blood thinners, your clotting tests will be checked more often; tell all providers you are receiving this chemotherapy and avoid live vaccines"
+  ],
+  "pk": [
+    ["Onset", "Immediate cytotoxic platinum exposure on IV infusion; rapid nonenzymatic biotransformation to active species"],
+    ["Peak", "End of 2-hour infusion; ultrafiltrable platinum Cmax ~0.814 mcg/mL at 85 mg/m2"],
+    ["Half-life", "Ultrafiltrable platinum triphasic: t1/2 alpha ~0.43 h, beta ~16.8 h, long terminal t1/2 gamma ~391 h"],
+    ["Duration", "Dosed every 2 weeks; platinum >90% irreversibly protein-bound; eliminated mainly renally (~54% in urine over 5 days), ~2% fecal; no CYP450 metabolism"],
+    ["Storage", "Store at 25 C (77 F), excursions 15-30 C; do not freeze; protect from light; retain in carton until use; single-dose vial, discard unused portion"]
+  ],
+  "pearls": [
+    "Boxed warning is for serious and fatal hypersensitivity/anaphylaxis - it can strike within minutes and on ANY cycle, so keep anaphylaxis treatment at the bedside and observe each infusion; prior hypersensitivity to any platinum drug is an absolute contraindication",
+    "Acute neuropathy is classically cold-triggered (perioral/throat/hand paresthesias, jaw spasm, pharyngolaryngeal dysesthesia) within hours to 2 days and usually resolves within 14 days - counsel patients to avoid cold and never apply ice for mucositis",
+    "Chronic peripheral sensory neuropathy is cumulative and dose-limiting: reduce to 75 mg/m2 for persistent grade 2, consider stopping at grade 3, and discontinue at grade 4",
+    "Pharyngolaryngeal dysesthesia feels like choking/can't breathe but occurs without true laryngospasm or bronchospasm - reassure and treat supportively, distinguishing it from anaphylaxis",
+    "Dilute and infuse only in 5% Dextrose - chloride-containing solutions (normal saline) degrade oxaliplatin",
+    "Permanently discontinue for hypersensitivity, PRES, confirmed interstitial lung disease/pulmonary fibrosis, or rhabdomyolysis; reduce the starting dose to 65 mg/m2 in severe renal impairment"
+  ],
+  "missed": "Oxaliplatin is administered on a scheduled basis by an oncology team rather than self-administered, so there is no patient-managed missed dose. Held or delayed cycles are rescheduled by the treating clinician based on recovery of blood counts, neuropathy, and organ function; contact the cancer center if an appointment is missed so the cycle can be re-timed.",
+  "overdose": "The largest single infusion reported is 825 mg. Overdose intensifies known toxicities: grade 4 thrombocytopenia (without bleeding), anemia, sensory neuropathy (paresthesia, dysesthesia, laryngospasm, facial muscle spasms), gastrointestinal effects (nausea, vomiting, stomatitis, grade 4 intestinal obstruction), grade 4 dehydration, dyspnea, wheezing, chest pain, respiratory failure, severe bradycardia, and death. There is no specific antidote; monitor closely and give appropriate supportive treatment.",
+  "refs": [
+    ["FDA Label - Oxaliplatin Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22oxaliplatin%22"],
+    ["DailyMed - Oxaliplatin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=oxaliplatin"]
+  ]
+}

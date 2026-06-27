@@ -1,0 +1,104 @@
+{
+  "generic": "Docetaxel",
+  "cls": "Antineoplastic - taxane microtubule inhibitor",
+  "pharm": "Semisynthetic taxane that promotes assembly and stabilization of microtubules, blocking mitosis; CYP3A4-metabolized cytotoxic given by IV infusion every 3 weeks.",
+  "tags": ["Chemotherapy", "Taxane", "Microtubule inhibitor", "IV infusion", "Cytotoxic", "Boxed warning", "CYP3A4 substrate", "Hazardous drug"],
+  "quick": [
+    ["Adult dose", "60-100 mg/m2 IV over 1 h every 3 weeks (indication-specific)"],
+    ["Meal", "N/A (IV); premedicate with oral corticosteroid"],
+    ["Pregnancy", "Contraindicated; fetal harm - use contraception"],
+    ["Lactation", "Do not breastfeed"],
+    ["Renal", "No specific renal adjustment"],
+    ["Hepatic", "Avoid if bilirubin >ULN or transaminases/ALP elevated (boxed warning)"],
+    ["Alcohol", "Vehicle contains alcohol - may impair CNS post-infusion"],
+    ["Monitoring", "CBC, LFTs (bilirubin/AST/ALT/ALP) before each cycle; fluid status"]
+  ],
+  "summary": "Docetaxel is a taxane microtubule inhibitor for breast, non-small cell lung, castration-resistant prostate, gastric, and head & neck cancers, given IV over 1 hour every 3 weeks. It carries a BOXED WARNING for treatment-related TOXIC DEATHS (higher with abnormal liver function and at higher doses), HEPATOTOXICITY, severe NEUTROPENIA, HYPERSENSITIVITY REACTIONS (polysorbate 80), and severe FLUID RETENTION. Oral corticosteroid premedication (e.g., dexamethasone) reduces hypersensitivity and fluid retention. It is a CYP3A4 substrate, so strong CYP3A4 inhibitors must be avoided. Liver function and neutrophil counts must be checked before each cycle.",
+  "indications": [
+    "Breast cancer - single agent for locally advanced or metastatic disease after prior chemotherapy failure",
+    "Breast cancer - with doxorubicin and cyclophosphamide for adjuvant treatment of operable node-positive disease",
+    "Non-small cell lung cancer - single agent after platinum-based chemotherapy failure",
+    "Non-small cell lung cancer - with cisplatin for unresectable, locally advanced/metastatic chemotherapy-naive disease",
+    "Metastatic castration-resistant prostate cancer - with prednisone",
+    "Advanced gastric adenocarcinoma (including gastroesophageal junction) - with cisplatin and fluorouracil, untreated",
+    "Locally advanced squamous cell carcinoma of the head and neck - induction therapy with cisplatin and fluorouracil"
+  ],
+  "dosage": [
+    {"c": "Breast cancer - locally advanced/metastatic (single agent)", "r": "IV over 1 h", "d": "60-100 mg/m2", "t": "Every 3 weeks", "n": "After failure of prior chemotherapy"},
+    {"c": "Breast cancer - adjuvant (TAC)", "r": "IV over 1 h", "d": "75 mg/m2", "t": "Every 3 weeks for 6 cycles", "n": "Given 1 h after doxorubicin 50 mg/m2 and cyclophosphamide 500 mg/m2; prophylactic G-CSF may be used"},
+    {"c": "NSCLC - after platinum failure (single agent)", "r": "IV over 1 h", "d": "75 mg/m2", "t": "Every 3 weeks", "n": "100 mg/m2 in pretreated patients caused excess toxicity/death (boxed warning)"},
+    {"c": "NSCLC - chemotherapy-naive (with cisplatin)", "r": "IV over 1 h", "d": "75 mg/m2", "t": "Every 3 weeks", "n": "Immediately followed by cisplatin 75 mg/m2 over 30-60 min"},
+    {"c": "Castration-resistant prostate cancer", "r": "IV over 1 h", "d": "75 mg/m2", "t": "Every 3 weeks", "n": "With prednisone 5 mg PO twice daily continuously"},
+    {"c": "Gastric adenocarcinoma", "r": "IV over 1 h", "d": "75 mg/m2 (day 1)", "t": "Every 3 weeks", "n": "Followed by cisplatin 75 mg/m2 day 1, then fluorouracil 750 mg/m2/day as 24-h IV days 1-5"},
+    {"c": "Head & neck SCC (induction)", "r": "IV over 1 h", "d": "75 mg/m2 (day 1)", "t": "Every 3 weeks for 3-4 cycles", "n": "With cisplatin and fluorouracil per regimen (TPF)"}
+  ],
+  "admin": [
+    "Administer IV over 1 hour every 3 weeks in a facility able to manage anaphylaxis",
+    "Premedicate with an oral corticosteroid (e.g., dexamethasone 16 mg/day for 3 days starting the day before) to reduce hypersensitivity and fluid retention",
+    "Do NOT administer if neutrophil count <1500 cells/mm3",
+    "Withdraw from vial using a 21-gauge needle; PVC equipment is not recommended",
+    "Handle as a hazardous (cytotoxic) drug; protect prepared solution from light",
+    "Measure bilirubin, AST/ALT, and alkaline phosphatase before each cycle"
+  ],
+  "moa": "Antineoplastic that disrupts the microtubular network essential for mitotic and interphase function. Docetaxel binds free tubulin and promotes assembly of tubulin into stable microtubules while inhibiting their disassembly, producing nonfunctional microtubule bundles and arresting mitosis. It does not alter the number of protofilaments, distinguishing it from many other spindle poisons.",
+  "contra": {
+    "absolute": ["History of severe hypersensitivity to docetaxel or to drugs formulated with polysorbate 80 (anaphylaxis has occurred)", "Neutrophil counts <1500 cells/mm3"],
+    "relative": ["Bilirubin >ULN, or AST/ALT >1.5x ULN with alkaline phosphatase >2.5x ULN (avoid - high risk of toxic death)", "Pre-existing hepatic impairment", "Severe fluid retention", "Pregnancy and breastfeeding"],
+    "monitor": ["Neutrophil count before each cycle", "Bilirubin, AST/ALT, alkaline phosphatase before each cycle", "Signs of hypersensitivity, fluid retention, and neuropathy"]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal studies (embryo-fetal toxicity, intrauterine mortality); the alcohol vehicle may also harm the fetus. Verify pregnancy status before initiation; advise effective contraception and avoid in pregnancy.",
+  "lact": "Advise women not to breastfeed during treatment because of the potential for serious adverse reactions in the infant.",
+  "renal": "No specific renal dose adjustment is provided in the label.",
+  "hepatic": "BOXED WARNING: avoid docetaxel in patients with bilirubin >ULN, or with AST/ALT >1.5x ULN concurrent with alkaline phosphatase >2.5x ULN. These patients are at increased risk of severe neutropenia, febrile neutropenia, infection, severe thrombocytopenia, severe stomatitis, severe skin toxicity, and toxic death. Measure bilirubin, AST/ALT, and ALP before each cycle.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole - increases docetaxel exposure ~2.2-fold; ritonavir and other protease inhibitors) - avoid; reduce dose if unavoidable", "Other myelosuppressive chemotherapy and radiation (additive marrow toxicity)"],
+    "moderate": ["CYP3A4 inducers (rifampin, phenytoin, carbamazepine) - may reduce docetaxel exposure", "Live vaccines (avoid during immunosuppression)"],
+    "minor": ["Drugs metabolized by CYP3A4 (potential mutual effects)"],
+    "food": "N/A (parenteral).",
+    "alcohol": "The injection contains alcohol, which may impair the CNS (including driving ability) immediately after infusion.",
+    "diagnostics": "Monitor CBC with differential and hepatic panel (bilirubin, AST/ALT, ALP) before each cycle."
+  },
+  "se": {
+    "common": ["Neutropenia", "Anemia", "Alopecia", "Nausea, vomiting, diarrhea", "Stomatitis/mucositis", "Asthenia and fatigue", "Peripheral neuropathy (paresthesia/dysesthesia)", "Nail disorders", "Myalgia", "Fluid retention/edema"],
+    "serious": ["Severe/febrile neutropenia and infection", "Hypersensitivity/anaphylaxis (polysorbate 80)", "Severe fluid retention (pleural effusion, ascites, cardiac tamponade)", "Hepatotoxicity", "Enterocolitis/neutropenic colitis", "Severe cutaneous reactions (including SJS/TEN)", "Cystoid macular edema", "Tumor lysis syndrome"],
+    "rare": ["Second primary malignancies (AML, MDS, NHL, renal cancer)", "Severe neurosensory symptoms", "Radiation recall"],
+    "emergency": ["Anaphylaxis with hypotension/bronchospasm", "Febrile neutropenia with sepsis", "Cardiac tamponade from fluid retention", "Toxic death (treatment-related mortality)"]
+  },
+  "monitoring": [
+    "CBC with differential (neutrophils) frequently and before each cycle; do not treat if ANC <1500/mm3",
+    "Bilirubin, AST/ALT, and alkaline phosphatase before each cycle",
+    "Signs of hypersensitivity during/after infusion",
+    "Body weight and signs of fluid retention (edema, effusions)",
+    "Peripheral neuropathy assessment each cycle",
+    "Cutaneous reactions and ophthalmic symptoms (cystoid macular edema)"
+  ],
+  "counsel": [
+    "This chemotherapy is given by vein every 3 weeks; you will take a steroid (e.g., dexamethasone) beforehand to reduce reactions and swelling",
+    "Report fever, chills, or any sign of infection immediately - your white cells can drop dangerously",
+    "Hair loss, fatigue, mouth sores, numbness/tingling, and nail changes are common",
+    "Report rapid weight gain or swelling, breathlessness, allergic symptoms, or vision changes",
+    "Do not drive immediately after infusion (the solution contains alcohol)",
+    "Use effective contraception; do not become pregnant or breastfeed during treatment"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect over the cell cycle; infusion over 1 h"],
+    ["Peak", "End of 1-hour IV infusion"],
+    ["Half-life", "Terminal ~116 h (range of means 92-135 h)"],
+    ["Duration", "Dosed every 3 weeks"],
+    ["Storage", "20-25 C, protect from light in original package; freezing does not harm; multidose vial stable 28 days at 2-8 C after first use"]
+  ],
+  "pearls": [
+    "BOXED WARNING: toxic deaths, hepatotoxicity, neutropenia, hypersensitivity (polysorbate 80), and fluid retention",
+    "Avoid if bilirubin >ULN or transaminase/ALP abnormalities - sharply higher risk of fatal toxicity",
+    "Corticosteroid premedication is mandatory to reduce hypersensitivity and severe fluid retention",
+    "CYP3A4 substrate - strong inhibitors like ketoconazole roughly double exposure; avoid or reduce dose",
+    "100 mg/m2 in previously treated NSCLC patients caused excess mortality - use 75 mg/m2",
+    "Cumulative fluid retention may require pleural/pericardial drainage; cumulative neuropathy is dose-limiting"
+  ],
+  "missed": "Administered in a supervised oncology setting on a 3-weekly schedule; delayed or held doses are managed by the treating oncologist based on counts, liver function, and toxicity. Dose reductions or delays follow protocol; patients do not self-administer.",
+  "overdose": "No known antidote. Anticipated effects of overdose are bone marrow suppression, peripheral neurotoxicity, and mucositis. Give therapeutic G-CSF as soon as possible and provide supportive care in a monitored setting; manage symptoms as they arise.",
+  "refs": [
+    ["FDA Docetaxel Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22docetaxel%22"],
+    ["DailyMed - Docetaxel", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=docetaxel"]
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generic": "Anidulafungin",
+  "cls": "Echinocandin antifungal",
+  "pharm": "Echinocandin that inhibits fungal cell wall 1,3-beta-D-glucan synthesis; fungicidal against Candida species, given IV.",
+  "tags": ["Echinocandin", "Antifungal", "Candida", "Parenteral", "Fungicidal", "Hepatic monitoring"],
+  "quick": [
+    ["Adult dose", "Candidemia: 200 mg IV load, then 100 mg once daily"],
+    ["Meal", "N/A (intravenous)"],
+    ["Pregnancy", "Limited data; use only if benefit outweighs risk"],
+    ["Lactation", "Limited data; consider benefit/risk; poor oral bioavailability"],
+    ["Renal", "No adjustment; not dialyzable"],
+    ["Hepatic", "No adjustment needed; monitor liver tests"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Liver function tests; infusion reactions"]
+  ],
+  "summary": "Anidulafungin (ERAXIS) is an IV echinocandin antifungal for candidemia and other Candida infections (intra-abdominal abscess, peritonitis) in adults and children 1 month and older, and for esophageal candidiasis in adults. It is given once daily after a loading dose, needs no renal adjustment, and is unique among echinocandins in undergoing slow non-enzymatic chemical degradation rather than hepatic metabolism, giving it minimal drug interactions.",
+  "indications": [
+    "Candidemia in adults and pediatric patients 1 month of age and older",
+    "Other Candida infections - intra-abdominal abscess and peritonitis (adults and children 1 month and older)",
+    "Esophageal candidiasis in adults"
+  ],
+  "dosage": [
+    {"c": "Candidemia/Candida infections (adults)", "r": "IV", "d": "200 mg load Day 1, then 100 mg once daily", "t": "Once daily", "n": "Continue at least 14 days after last positive culture"},
+    {"c": "Candidemia/Candida infections (children >=1 month)", "r": "IV", "d": "3 mg/kg load (max 200 mg), then 1.5 mg/kg (max 100 mg) daily", "t": "Once daily", "n": "At least 14 days after last positive culture"},
+    {"c": "Esophageal candidiasis (adults)", "r": "IV", "d": "100 mg load Day 1, then 50 mg once daily", "t": "Once daily", "n": "Minimum 14 days and at least 7 days after symptom resolution; high relapse rate"},
+    {"c": "Infusion rate (all)", "r": "IV", "d": "Do not exceed 1.1 mg/minute", "t": "Per dose", "n": "Reduces infusion-related histamine reactions"}
+  ],
+  "admin": [
+    "For IV infusion only after reconstitution and dilution per label",
+    "Do not exceed an infusion rate of 1.1 mg/minute (about 84 mL/hour)",
+    "Reconstitute with sterile water; dilute in 5% dextrose or 0.9% sodium chloride",
+    "Do not co-infuse with other medications or electrolytes in the same line unless compatibility is established",
+    "No loading-dose adjustment needed for renal or hepatic impairment"
+  ],
+  "moa": "Inhibits glucan synthase, the enzyme complex that forms 1,3-beta-D-glucan, an essential component of the fungal cell wall; the resulting cell wall damage is fungicidal against Candida species.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to anidulafungin or other echinocandins", "Known or suspected Hereditary Fructose Intolerance (the IV product contains fructose/excipients)"],
+    "relative": ["Pre-existing hepatic dysfunction (monitor)", "Neonates <1 month (polysorbate 80 toxicity risk; not approved)"],
+    "monitor": ["Liver function tests", "Signs of infusion reaction"]
+  },
+  "preg": "Limited human data; animal studies showed skeletal/developmental effects at high doses. Use only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Limited data; anidulafungin is present in animal milk. Oral bioavailability is negligible; consider maternal need and infant exposure.",
+  "renal": "No dose adjustment required in any degree of renal impairment, including dialysis; anidulafungin is not dialyzable.",
+  "hepatic": "No dose adjustment required for mild, moderate, or severe hepatic impairment; monitor liver tests as hepatic adverse effects can occur.",
+  "interactions": {
+    "major": [],
+    "moderate": [],
+    "minor": ["No clinically significant interaction with cyclosporine, voriconazole, tacrolimus, amphotericin B, or rifampin"],
+    "food": "N/A (parenteral)",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Anidulafungin is not a substrate, inducer, or inhibitor of CYP enzymes; minimal drug-drug interaction potential."
+  },
+  "se": {
+    "common": ["Hypokalemia", "Nausea", "Diarrhea", "Vomiting", "Pyrexia", "Insomnia", "Hypotension", "Headache", "Elevated liver enzymes"],
+    "serious": ["Hepatic dysfunction, hepatitis, hepatic failure", "Anaphylaxis including shock", "Infusion-related reactions (rash, urticaria, flushing, bronchospasm, hypotension)"],
+    "rare": ["Significant hepatic decompensation", "Coagulopathy"],
+    "emergency": ["Anaphylaxis/anaphylactic shock", "Severe infusion reaction with bronchospasm and hypotension", "Acute hepatic failure"]
+  },
+  "monitoring": [
+    "Liver function tests during therapy",
+    "Serum potassium",
+    "Signs/symptoms of infusion-related and hypersensitivity reactions",
+    "Clinical response and follow-up cultures",
+    "Infusion rate (<=1.1 mg/min)"
+  ],
+  "counsel": [
+    "This antifungal is given through a vein, once daily",
+    "Tell your team if you feel flushing, itching, rash, or trouble breathing during the infusion",
+    "Report yellowing of skin/eyes, dark urine, or unusual tiredness",
+    "Inform your clinician if you have hereditary fructose intolerance",
+    "Complete the full course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Steady state reached on first day after loading dose"],
+    ["Peak", "End of infusion"],
+    ["Half-life", "Terminal ~40-50 hours"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Refrigerate 2-8 C; reconstituted/diluted solution per label timing"]
+  ],
+  "pearls": [
+    "Unique elimination by slow non-enzymatic chemical degradation, not hepatic metabolism - minimal drug interactions",
+    "No dose adjustment for renal or hepatic impairment; not dialyzable",
+    "High relapse rate in esophageal candidiasis - reserve and consider alternatives for maintenance",
+    "Slow the infusion to under 1.1 mg/min to limit histamine-mediated infusion reactions",
+    "Contraindicated in hereditary fructose intolerance"
+  ],
+  "missed": "Hospital-administered once daily; if a dose is delayed, give as soon as possible and resume the daily schedule. Do not double doses. Managed by the clinical team.",
+  "overdose": "No specific antidote; anidulafungin is not dialyzable. Doses up to 400 mg as a single load have been given without serious events. Provide supportive care and monitor liver tests.",
+  "refs": [
+    ["FDA ERAXIS (anidulafungin) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22anidulafungin%22"],
+    ["DailyMed - Anidulafungin (ERAXIS)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=anidulafungin"]
+  ]
+}

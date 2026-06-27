@@ -1,0 +1,95 @@
+{
+  "generic": "Rifampicin (Rifampin)",
+  "cls": "Rifamycin antimycobacterial antibiotic",
+  "pharm": "Antitubercular / antibacterial",
+  "tags": ["antibiotic", "rifamycin", "tuberculosis", "leprosy", "meningococcal prophylaxis", "CYP inducer"],
+  "quick": [
+    ["Adult dose", "TB 10 mg/kg once daily, max 600 mg/day (oral or IV)"],
+    ["Meal", "Take 1 hour before or 2 hours after food on empty stomach"],
+    ["Pregnancy", "Use if benefit outweighs risk; give vitamin K near term"],
+    ["Lactation", "Compatible; small amounts in milk, monitor infant"],
+    ["Renal", "No major adjustment (hepatic clearance)"],
+    ["Hepatic", "Caution; reduce dose / monitor LFTs in liver disease"],
+    ["Alcohol", "Avoid; additive hepatotoxicity"],
+    ["Monitoring", "LFTs, CBC, signs of hepatitis; orange body fluids expected"]
+  ],
+  "summary": "Rifampicin (rifampin) is a rifamycin antibiotic central to tuberculosis and leprosy therapy and used for meningococcal carrier eradication. It inhibits bacterial DNA-dependent RNA polymerase. It is a potent inducer of CYP enzymes causing extensive drug interactions, harmlessly turns body fluids orange-red, and can cause hepatotoxicity and flu-like reactions with intermittent dosing.",
+  "indications": [
+    "Treatment of all forms of tuberculosis (in combination regimens)",
+    "Elimination of meningococci from the nasopharynx in asymptomatic Neisseria meningitidis carriers",
+    "Leprosy (multidrug therapy, in combination)",
+    "Off-label: prosthetic-device and staphylococcal infections as adjunct; Haemophilus influenzae type b prophylaxis"
+  ],
+  "dosage": [
+    {"c": "Tuberculosis (adult)", "r": "Standard", "d": "10 mg/kg once daily, not to exceed 600 mg/day (oral or IV)", "t": "Once daily", "n": "Part of multidrug regimen (e.g., with INH, pyrazinamide)"},
+    {"c": "Tuberculosis (pediatric)", "r": "Standard", "d": "10-20 mg/kg once daily, not to exceed 600 mg/day", "t": "Once daily", "n": "Weight-based; combination therapy"},
+    {"c": "Meningococcal carrier (adult)", "r": "Prophylaxis", "d": "600 mg twice daily for 2 days", "t": "BID x2 days", "n": "Not for active meningococcal disease"},
+    {"c": "Meningococcal carrier (pediatric >1 mo)", "r": "Prophylaxis", "d": "10 mg/kg every 12 hours for 2 days", "t": "BID x2 days", "n": "Infants <1 month 5 mg/kg q12h"},
+    {"c": "Leprosy (adult)", "r": "Combination", "d": "600 mg once monthly (WHO MDT) with dapsone +/- clofazimine", "t": "Monthly", "n": "Per leprosy regimen"}
+  ],
+  "admin": [
+    "Take oral rifampicin once daily on an empty stomach, 1 hour before or 2 hours after a meal, with a full glass of water",
+    "For IV use, reconstitute and infuse per label; IV dose equals the oral dose",
+    "Give as part of an appropriate combination regimen for TB and leprosy to prevent resistance",
+    "Warn that urine, sweat, tears and other secretions turn orange-red and may stain soft contact lenses",
+    "Obtain cultures/susceptibility before therapy and monitor during treatment"
+  ],
+  "moa": "Rifampicin binds to and inhibits the beta subunit of bacterial DNA-dependent RNA polymerase, blocking RNA synthesis. It is bactericidal against Mycobacterium tuberculosis and many gram-positive and gram-negative organisms but does not inhibit the mammalian enzyme. Resistance arises rapidly through rpoB mutations, so it is used in combination.",
+  "contra": {
+    "absolute": ["Hypersensitivity to rifampicin or any rifamycin", "Concurrent use with ritonavir-boosted saquinavir (severe hepatotoxicity)", "Concurrent use with certain antivirals whose levels it markedly lowers (atazanavir, darunavir, fosamprenavir, saquinavir, tipranavir, cabotegravir, fostemsavir, lenacapavir)", "Concurrent praziquantel (subtherapeutic levels)"],
+    "relative": ["Pre-existing hepatic impairment or alcoholism", "Porphyria", "Concurrent hepatotoxic drugs"],
+    "monitor": ["Numerous CYP3A4/2C9/2C19 substrates (warfarin, oral contraceptives, many others)", "Concurrent isoniazid/pyrazinamide (additive hepatotoxicity)", "Methadone (withdrawal risk)"]
+  },
+  "preg": "Crosses the placenta. Used in tuberculosis when the benefit outweighs the risk; isolated reports of fetal abnormalities. Administer vitamin K to mother and neonate when given in the last weeks of pregnancy to reduce postnatal hemorrhage risk.",
+  "lact": "Small amounts are excreted in breast milk; generally considered compatible with breastfeeding. Monitor the infant for jaundice and orange discoloration.",
+  "renal": "Primarily eliminated by the liver/biliary route, so no major dose adjustment is needed in renal impairment, though caution is advised with doses above 600 mg/day.",
+  "hepatic": "Can cause dose-related hepatotoxicity. Use cautiously and monitor LFTs in patients with liver disease, alcoholism, or on other hepatotoxic drugs; reduce dose or discontinue if significant hepatic injury occurs.",
+  "interactions": {
+    "major": ["Many antiretrovirals and protease inhibitors - markedly reduced levels (several contraindicated)", "Warfarin - reduced anticoagulant effect; INR monitoring and dose increase needed", "Oral contraceptives - reduced efficacy; advise additional non-hormonal contraception", "Other strong CYP3A4 substrates (e.g., many calcium-channel blockers, certain immunosuppressants like cyclosporine/tacrolimus) - reduced exposure"],
+    "moderate": ["Isoniazid and pyrazinamide - additive hepatotoxicity", "Methadone - precipitated opioid withdrawal", "Sulfonylureas, corticosteroids, statins, azoles, phenytoin, digoxin - reduced exposure", "Halothane - increased hepatotoxicity"],
+    "minor": ["Antacids - reduced rifampicin absorption if taken together"],
+    "food": "Food reduces and delays absorption; take on an empty stomach (1 h before or 2 h after meals).",
+    "alcohol": "Avoid; increases risk of hepatotoxicity.",
+    "diagnostics": "May cause false-positive serum folate/B12 and abnormal LFTs; interferes with some bilirubin and BSP excretion tests; colors fluids orange-red."
+  },
+  "se": {
+    "common": ["Orange-red discoloration of urine, sweat, tears, saliva (harmless)", "GI upset - nausea, vomiting, anorexia, abdominal pain", "Diarrhea", "Transient elevation of liver enzymes"],
+    "serious": ["Hepatotoxicity / hepatitis", "Flu-like syndrome (fever, chills, myalgia) with intermittent or high-dose therapy", "Thrombocytopenia and hemolytic anemia (immune)", "Acute renal failure (interstitial nephritis)", "Clostridioides difficile colitis"],
+    "rare": ["Severe cutaneous reactions (DRESS, Stevens-Johnson syndrome)", "Anaphylaxis", "Adrenal crisis (by inducing cortisol metabolism)", "Disseminated intravascular coagulation"],
+    "emergency": ["Acute fulminant hepatitis", "Severe immune-mediated reaction with hemolysis, thrombocytopenia or acute renal failure (stop drug, do not rechallenge)", "Anaphylaxis", "Severe cutaneous adverse reaction"]
+  },
+  "monitoring": [
+    "Baseline and periodic liver function tests, especially with risk factors",
+    "Complete blood count (platelets) during therapy",
+    "Renal function if immune reactions suspected",
+    "Bacteriologic cultures before and during therapy to confirm susceptibility/response",
+    "Review concomitant medications for CYP induction interactions"
+  ],
+  "counsel": [
+    "Take on an empty stomach, 1 hour before or 2 hours after meals",
+    "Expect harmless orange-red color of urine, sweat and tears; it may permanently stain soft contact lenses",
+    "Use an additional non-hormonal contraceptive method while on rifampicin",
+    "Report yellowing of eyes/skin, dark urine, loss of appetite, fever or unusual bleeding",
+    "Do not skip doses and complete the full TB/leprosy course; tell all providers you take rifampicin"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal within hours; clinical TB response over weeks"],
+    ["Peak", "~2-4 hours after oral dose (empty stomach)"],
+    ["Half-life", "~3-4 hours; shortens with repeated dosing (auto-induction)"],
+    ["Duration", "Once-daily dosing adequate"],
+    ["Storage", "Store at 25 C; protect from light; avoid excessive heat"]
+  ],
+  "pearls": [
+    "Potent inducer of CYP3A4 and other enzymes - the most interaction-prone TB drug; always review co-medications (warfarin, OCPs, antivirals, immunosuppressants)",
+    "Harmless orange-red discoloration of body fluids; warn about permanent staining of soft contact lenses",
+    "Flu-like syndrome, hemolysis, thrombocytopenia and acute renal failure are immune reactions seen with intermittent/high-dose use - stop and do not rechallenge",
+    "Always use in combination to prevent rapid emergence of resistance (rpoB mutations)",
+    "US spelling 'rifampin' equals international 'rifampicin' - same drug"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose; then skip it and resume the regular schedule. Do not double up. Consistent daily dosing is important to prevent TB resistance.",
+  "overdose": "Acute overdose causes nausea, vomiting, abdominal pain, pruritus, lethargy, and orange-red 'red man' discoloration of skin and fluids; hepatic enzyme rise and unconsciousness can occur with severe liver disease. Treat with gastric decontamination, supportive care and forced diuresis; bile-clearing measures and hemodialysis may help in severe cases.",
+  "refs": [
+    ["FDA Rifampin (Rifadin) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rifampin%22"],
+    ["FDA DailyMed - Rifampin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

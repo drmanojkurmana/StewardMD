@@ -1,0 +1,97 @@
+{
+  "generic": "Buserelin",
+  "cls": "GnRH (LHRH) agonist / analog",
+  "pharm": "Synthetic decapeptide gonadotropin-releasing hormone agonist that, after an initial stimulatory phase, produces pituitary desensitization and reversible medical castration (suppression of LH, FSH, testosterone and estradiol).",
+  "tags": ["GnRH agonist", "LHRH analog", "Prostate cancer", "Endometriosis", "Assisted reproduction", "EMA/SmPC", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "Prostate Ca: 500 mcg SC q8h x7d then 200 mcg SC daily, or 1.2 mg/day intranasal"],
+    ["Meal", "N/A (SC); intranasal independent of meals"],
+    ["Pregnancy", "Contraindicated"],
+    ["Lactation", "Contraindicated"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "No specific adjustment established"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Testosterone/estradiol, PSA, bone density, symptoms of flare"]
+  ],
+  "summary": "Buserelin is a GnRH (LHRH) agonist used for advanced hormone-dependent prostate cancer, endometriosis, and as part of controlled ovarian stimulation in assisted reproduction. Continuous administration first transiently stimulates then down-regulates pituitary GnRH receptors, suppressing sex-hormone production to castrate/postmenopausal levels. It is marketed in Europe and elsewhere (e.g., Suprefact, Suprecur) but is not FDA-approved in the United States. An initial testosterone/estrogen surge can cause a transient tumor flare in prostate cancer, so anti-androgen cover is recommended at initiation.",
+  "indications": [
+    "Advanced hormone-dependent prostate carcinoma (palliative endocrine treatment)",
+    "Endometriosis (where surgery is not immediately indicated)",
+    "Pituitary down-regulation prior to and during controlled ovarian stimulation in assisted reproduction (IVF)",
+    "Other hormone-responsive conditions per local SmPC (e.g., uterine fibroids in some regions)"
+  ],
+  "dosage": [
+    {"c": "Advanced prostate cancer - initiation", "r": "Subcutaneous", "d": "500 mcg", "t": "Every 8 hours (1.5 mg/day) for the first 7 days", "n": "Per Suprefact SmPC; give with an anti-androgen to cover the testosterone flare"},
+    {"c": "Advanced prostate cancer - maintenance", "r": "Subcutaneous", "d": "200 mcg", "t": "Once daily", "n": "Continue after the initial 7-day SC induction"},
+    {"c": "Advanced prostate cancer - intranasal maintenance", "r": "Intranasal", "d": "400 mcg (1 spray of 100 mcg into each nostril, 2 sprays per dose)", "t": "Three times daily (total 1.2 mg/day)", "n": "Begun after the initial 7-day SC course; long-term maintenance"},
+    {"c": "Endometriosis", "r": "Intranasal", "d": "150 mcg (1 spray of 150 mcg) in each nostril", "t": "Three times daily (total 900 mcg/day)", "n": "Start on days 1-2 of the menstrual cycle; usual duration up to 6 months, do not repeat course"},
+    {"c": "Pituitary down-regulation for assisted reproduction (IVF)", "r": "Subcutaneous or intranasal", "d": "SC 200-500 mcg/day; or intranasal 150 mcg per nostril up to ~4 times daily", "t": "Daily until down-regulation, then continued with gonadotropin stimulation", "n": "Follow the specific assisted-reproduction protocol and SmPC; dose/route vary by regimen"}
+  ],
+  "admin": [
+    "Subcutaneous injection: rotate sites (abdomen); the first SC induction phase typically lasts 7 days",
+    "Intranasal: clear the nose before use; one metered spray per nostril per the indication-specific dose; avoid nasal decongestants around dosing as they may reduce absorption",
+    "For prostate cancer, start an anti-androgen a few days before and continue for about 2-3 weeks to prevent disease flare from the initial testosterone surge",
+    "For endometriosis and IVF, timing relative to the menstrual cycle is important - follow the protocol",
+    "Do not interrupt therapy without medical advice; in prostate cancer interruption allows testosterone recovery"
+  ],
+  "moa": "Buserelin is a potent GnRH receptor agonist. Initial dosing stimulates pituitary release of LH and FSH (causing a transient rise in testosterone or estradiol - the flare). With continuous administration, GnRH receptors are down-regulated and the pituitary becomes desensitized, suppressing gonadotropin and consequently gonadal sex-hormone secretion to castrate (men) or postmenopausal (women) levels, depriving hormone-dependent tissues of their stimulus.",
+  "contra": {
+    "absolute": ["Hypersensitivity to buserelin, other GnRH analogs, or excipients", "Pregnancy", "Breastfeeding", "Hormone-independent prostate cancer or prior orchidectomy (no benefit)", "Undiagnosed abnormal vaginal bleeding"],
+    "relative": ["Risk of tumor flare in prostate cancer (cover with anti-androgen)", "Pre-existing metabolic bone disease / osteoporosis risk (long-term use)", "History of depression", "Diabetes (glycemic effects)", "Ureteric obstruction or spinal cord metastases in prostate cancer (flare may worsen)"],
+    "monitor": ["Testosterone / estradiol levels", "PSA (prostate cancer)", "Bone mineral density with prolonged use", "Symptoms of disease flare in the first weeks"]
+  },
+  "preg": "Contraindicated in pregnancy; exclude pregnancy before starting in women. Use non-hormonal contraception during treatment for benign gynecological indications.",
+  "lact": "Contraindicated during breastfeeding.",
+  "renal": "No specific dose adjustment is established in the SmPC; the peptide is metabolized rather than dependent on renal excretion of unchanged drug.",
+  "hepatic": "No specific dose adjustment is established; use with general caution.",
+  "interactions": {
+    "major": ["Drugs that prolong the QT interval - additive risk as androgen-deprivation therapy can prolong QT (consider in prostate cancer)"],
+    "moderate": ["Antidiabetic agents (insulin, oral hypoglycemics) - androgen/estrogen deprivation may alter glucose tolerance and dosing needs", "Other hormonal therapies - may counteract or alter effect"],
+    "minor": ["Nasal decongestants - may reduce absorption of the intranasal formulation if used close to dosing"],
+    "food": "No clinically significant food interaction.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Suppresses gonadotropin (LH/FSH) and sex-steroid levels; interferes with pituitary-gonadal function tests during therapy."
+  },
+  "se": {
+    "common": ["Hot flushes / flushing", "Decreased libido and erectile dysfunction (men)", "Loss of libido, vaginal dryness, amenorrhea (women)", "Headache", "Sweating", "Mood changes / depression", "Injection-site reactions; nasal irritation with the spray"],
+    "serious": ["Tumor flare in prostate cancer (worsening bone pain, urinary obstruction, spinal cord compression)", "Reduced bone mineral density / osteoporosis with prolonged use", "Worsening of depression", "Hyperglycemia / impaired glucose tolerance", "Cardiovascular events / QT prolongation (with androgen deprivation)"],
+    "rare": ["Pituitary apoplexy (in patients with pituitary adenoma)", "Hypersensitivity / anaphylactoid reactions", "Thromboembolism", "Ovarian hyperstimulation when used in assisted reproduction"],
+    "emergency": ["Anaphylaxis", "Spinal cord compression from prostate cancer flare", "Pituitary apoplexy", "Severe ovarian hyperstimulation syndrome"]
+  },
+  "monitoring": [
+    "Serum testosterone (prostate cancer) or estradiol (gynecological use)",
+    "PSA and clinical response in prostate cancer",
+    "Symptoms of tumor flare during the first 1-2 weeks",
+    "Bone mineral density with long-term therapy",
+    "Blood glucose, especially in diabetics",
+    "Mood and signs of depression"
+  ],
+  "counsel": [
+    "Symptoms (and prostate cancer signs) may briefly worsen in the first week or two before improving - an anti-androgen is given to cover this",
+    "Hot flushes, reduced libido, and sexual dysfunction are expected effects of lowering hormone levels",
+    "Use the nasal spray correctly and consistently; do not use decongestant sprays around the same time",
+    "Long-term use can weaken bones - your clinician may monitor bone density and advise calcium/vitamin D or exercise",
+    "Women: use non-hormonal contraception and report any pregnancy; periods usually stop during treatment and return afterwards"
+  ],
+  "pk": [
+    ["Onset", "Initial gonadotropin/testosterone rise within hours to days; suppression over ~1-3 weeks"],
+    ["Peak", "SC plasma peak ~1-2 h; intranasal lower bioavailability (~1-3%)"],
+    ["Half-life", "Plasma elimination half-life roughly 1-2 hours"],
+    ["Duration", "Castrate hormone levels maintained with continued daily dosing"],
+    ["Storage", "Store per SmPC (typically below 25 C; do not freeze); protect injection from light"]
+  ],
+  "pearls": [
+    "Not FDA-approved in the United States; marketed in Europe and other regions as Suprefact / Suprecur (source: EMA-region SmPC / product information)",
+    "Continuous agonist exposure paradoxically suppresses the pituitary - the basis of GnRH-agonist 'medical castration'",
+    "Always anticipate the initial testosterone/estrogen flare; in prostate cancer give anti-androgen cover (start before and continue ~2-3 weeks) to prevent disease flare",
+    "Long-term androgen/estrogen deprivation reduces bone density - monitor and consider bone-protective measures",
+    "Intranasal route is convenient but has low, variable bioavailability and depends on correct technique and intact nasal mucosa"
+  ],
+  "missed": "Maintain regular dosing for reliable suppression. SC: give the missed dose as soon as remembered. Intranasal: take the missed spray when remembered unless it is nearly time for the next dose; do not double up. Prolonged gaps allow hormone levels to recover - contact the clinician if doses are missed repeatedly.",
+  "overdose": "No specific antidote; experience is limited. Effects are extensions of pharmacology (profound hormone suppression). Discontinue and provide supportive, symptomatic care with monitoring of hormone levels until recovery.",
+  "refs": [
+    ["EMC (UK SmPC) - Suprefact (buserelin)", "https://www.medicines.org.uk/emc/search?q=buserelin"],
+    ["DrugBank - Buserelin (DB06719)", "https://go.drugbank.com/drugs/DB06719"],
+    ["BNF (NICE) - Buserelin", "https://bnf.nice.org.uk/drugs/buserelin/"]
+  ]
+}

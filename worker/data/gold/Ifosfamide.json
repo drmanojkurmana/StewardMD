@@ -1,0 +1,91 @@
+{
+  "generic": "Ifosfamide",
+  "cls": "Nitrogen-mustard alkylating agent (oxazaphosphorine)",
+  "pharm": "Antineoplastic (cytotoxic alkylating agent)",
+  "tags": ["antineoplastic", "alkylating agent", "oxazaphosphorine", "testicular cancer", "chemotherapy", "boxed warning", "hemorrhagic cystitis", "mesna", "encephalopathy"],
+  "quick": [
+    ["Adult dose", "1.2 g/m2/day IV (>=30 min) for 5 consecutive days; repeat every 3 weeks (with mesna + hydration)"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Can cause fetal harm; effective contraception required; avoid in pregnancy"],
+    ["Lactation", "Do not breastfeed during treatment"],
+    ["Renal", "Increased risk of CNS/renal toxicity; use caution and monitor; avoid in urinary obstruction"],
+    ["Hepatic", "Metabolized by hepatic CYP enzymes; veno-occlusive disease can occur; monitor"],
+    ["Alcohol", "Avoid - adds to CNS toxicity and nausea"],
+    ["Monitoring", "CBC, renal and urine chemistries, mental status (encephalopathy), urinalysis for hematuria; give mesna and >=2 L fluid/day"]
+  ],
+  "summary": "Ifosfamide is an oxazaphosphorine nitrogen-mustard alkylating prodrug indicated, in combination with other antineoplastic agents, for third-line chemotherapy of germ-cell testicular cancer in adults. It requires hepatic CYP450 activation to its cytotoxic isophosphoramide mustard, which forms DNA cross-links causing cell death; a byproduct, acrolein, is responsible for its characteristic urotoxicity. It carries a boxed warning for severe myelosuppression (which can lead to fatal infection), encephalopathy (which may be fatal), and nephrotoxicity and urotoxicity, the latter mitigated by the prophylactic uroprotectant mesna and extensive hydration. Additional serious risks include cardiotoxicity, pulmonary toxicity, secondary malignancies, hepatic veno-occlusive disease, infertility and embryo-fetal toxicity. It is contraindicated in urinary outflow obstruction.",
+  "indications": [
+    "Use in adults, in combination with certain other approved antineoplastic agents, for third-line chemotherapy of germ-cell testicular cancer"
+  ],
+  "dosage": [
+    {"c": "Germ-cell testicular cancer", "r": "Adult", "d": "1.2 grams/m2 per day by slow IV infusion over at least 30 minutes", "t": "Daily for 5 consecutive days; repeat every 3 weeks or after recovery from hematologic toxicity", "n": "Individualize dose/schedule by risk factors and adverse reactions"},
+    {"c": "Uroprotection", "r": "Adult", "d": "Administer mesna with ifosfamide to reduce hemorrhagic cystitis", "t": "Per mesna protocol", "n": "Required adjunct to reduce urotoxicity"},
+    {"c": "Hydration", "r": "Adult", "d": "Extensive hydration with at least 2 liters of oral or IV fluid per day", "t": "During each cycle", "n": "Reduces incidence/severity of bladder toxicity"}
+  ],
+  "admin": [
+    "Administer as a slow intravenous infusion over at least 30 minutes",
+    "Always give with the uroprotectant mesna to reduce hemorrhagic cystitis",
+    "Provide extensive hydration (at least 2 L of fluid per day) to reduce bladder toxicity",
+    "Obtain blood counts before treatment and at intervals after each cycle; monitor for CNS toxicity",
+    "Handle and prepare as a hazardous cytotoxic drug with appropriate precautions"
+  ],
+  "moa": "Ifosfamide is a prodrug requiring metabolic activation by hepatic cytochrome P450 isoenzymes. Hydroxylation forms unstable intermediates that decompose to the cytotoxic and urotoxic compound acrolein and the alkylating isophosphoramide mustard. The isophosphoramide mustard alkylates guanine N-7 positions in DNA, forming inter- and intra-strand cross-links that result in cell death. Acrolein, excreted in urine, is responsible for the characteristic bladder toxicity (hemorrhagic cystitis).",
+  "contra": {
+    "absolute": ["Known hypersensitivity to ifosfamide", "Urinary outflow obstruction"],
+    "relative": ["Pre-existing severe myelosuppression / compromised bone marrow", "Significant renal impairment (increased CNS/renal toxicity)", "Pre-existing CNS dysfunction or low serum albumin/bicarbonate (encephalopathy risk)", "Pre-existing cardiac disease (cardiotoxicity risk)", "Active infection", "Pregnancy"],
+    "monitor": ["Patients on CYP3A4 inducers or inhibitors", "Patients with low albumin, low bicarbonate or renal impairment (encephalopathy risk)", "Patients of reproductive potential"]
+  },
+  "preg": "Based on its mechanism of action and human and animal data, ifosfamide can cause fetal harm when given to a pregnant woman; fetal growth retardation and neonatal anemia have been reported with ifosfamide-containing regimens, and animal studies show gene mutations, chromosomal damage, embryolethality and anomalies. Advise of the risk to a fetus; females of reproductive potential should use effective contraception during and after treatment, and males with female partners should also use contraception.",
+  "lact": "Because of the potential for serious adverse reactions in a breastfed child, women should not breastfeed during treatment with ifosfamide.",
+  "renal": "Ifosfamide can cause severe nephrotoxicity, including renal failure and renal tubular damage. Monitor serum and urine chemistries; the risk of CNS and renal toxicity is increased with renal impairment. It is contraindicated in urinary outflow obstruction. Ifosfamide and its metabolites are dialyzable.",
+  "hepatic": "Ifosfamide is activated by hepatic CYP450 enzymes. Hepatic veno-occlusive disease can occur. Use with monitoring; impaired hepatic metabolism may alter formation of active and neurotoxic metabolites.",
+  "interactions": {
+    "major": ["CYP3A4 inducers (e.g. rifampin, phenytoin, carbamazepine, St John's wort) - increase formation of active and of the neurotoxic/nephrotoxic metabolite chloroacetaldehyde; monitor for increased toxicity", "Other myelosuppressive or nephrotoxic chemotherapy / radiation - additive marrow and renal toxicity", "Other CNS-toxic agents (e.g. aprepitant, sedatives) - may worsen encephalopathy"],
+    "moderate": ["CYP3A4 inhibitors (e.g. ketoconazole) - may decrease activation and reduce efficacy", "Anticoagulants - increased bleeding risk with thrombocytopenia", "Cisplatin - additive nephrotoxicity, ototoxicity and neurotoxicity"],
+    "minor": ["Live vaccines - risk of disseminated infection in immunosuppressed patients"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "Avoid alcohol because of additive CNS depression and nausea.",
+    "diagnostics": "Expect myelosuppression on blood counts; monitor urinalysis for hematuria and serum/urine chemistries for tubular dysfunction."
+  },
+  "se": {
+    "common": ["Alopecia", "Nausea and vomiting", "Hematuria", "Leukopenia", "Anemia", "CNS toxicity (somnolence, confusion)", "Infection"],
+    "serious": ["Severe myelosuppression leading to fatal infections", "Encephalopathy (may be fatal)", "Nephrotoxicity / renal failure and hemorrhagic cystitis", "Cardiotoxicity (arrhythmias, cardiomyopathy, ECG changes)", "Pulmonary toxicity (interstitial pneumonitis, pulmonary fibrosis, fatal outcomes)", "Hepatic veno-occlusive disease", "Secondary malignancies", "Anaphylaxis"],
+    "rare": ["Syndrome of inappropriate antidiuretic hormone secretion (SIADH)", "Fanconi-type renal tubular acidosis"],
+    "emergency": ["Encephalopathy / coma", "Febrile neutropenia / sepsis", "Severe hemorrhagic cystitis", "Acute cardiac or pulmonary failure", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Complete blood count before treatment, during treatment and at intervals after each cycle",
+    "Mental status for signs of CNS toxicity/encephalopathy during and after treatment",
+    "Serum and urine chemistries and urinalysis (hematuria) for nephrotoxicity and urotoxicity",
+    "Cardiac function (ECG/clinical) in patients at risk for cardiotoxicity",
+    "Respiratory symptoms suggestive of pulmonary toxicity",
+    "Adequacy of hydration and mesna administration each cycle"
+  ],
+  "counsel": [
+    "This chemotherapy lowers blood counts; report fever, chills or signs of infection right away",
+    "Report confusion, drowsiness, hallucinations or unusual behavior promptly - these can signal brain toxicity",
+    "Drink plenty of fluids and take the protective medicine (mesna) as directed to protect the bladder; report blood in the urine",
+    "Avoid pregnancy and fathering a child - use effective contraception during and after treatment",
+    "Do not breastfeed during treatment; hair loss is common and usually reversible"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect after hepatic CYP activation to alkylating metabolites"],
+    ["Peak", "Achieved during/after the IV infusion"],
+    ["Half-life", "About 7 hours at 1.6-2.4 g/m2/day; about 15 hours at higher single doses (3.8-5.0 g/m2)"],
+    ["Duration", "Cyclical dosing (5-day courses every 3 weeks) maintains antitumor effect"],
+    ["Storage", "Store dry product at 20-25 C (68-77 F); protect from temperatures above 30 C"]
+  ],
+  "pearls": [
+    "Boxed warning: myelosuppression, encephalopathy, and nephrotoxicity/urotoxicity - all potentially fatal",
+    "Always co-administer mesna plus extensive hydration to prevent hemorrhagic cystitis (acrolein toxicity)",
+    "Encephalopathy risk rises with low albumin, low bicarbonate, renal impairment and prior cisplatin; methylene blue is used for ifosfamide encephalopathy",
+    "Contraindicated in urinary outflow obstruction",
+    "CYP3A4 inducers increase neurotoxic/nephrotoxic chloroacetaldehyde formation - monitor closely"
+  ],
+  "missed": "Ifosfamide is administered by a healthcare professional on a fixed cycle. There is no patient-managed missed dose; if a treatment appointment is missed, contact the oncology team, who will reschedule based on blood counts and cycle timing.",
+  "overdose": "There is no specific antidote. Serious consequences reflect dose-dependent toxicities: severe CNS toxicity, nephrotoxicity, myelosuppression and mucositis. Management is supportive - sustain the patient through the toxicity period with treatment of infection, blood-product support and other organ support. Ifosfamide and its metabolites are dialyzable, and mesna cystitis prophylaxis may help limit urotoxic effects with overdose.",
+  "refs": [
+    ["FDA Ifosfamide for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ifosfamide%22"],
+    ["DailyMed - Ifosfamide", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

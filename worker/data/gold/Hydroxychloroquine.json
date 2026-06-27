@@ -1,0 +1,105 @@
+{
+  "generic": "Hydroxychloroquine",
+  "cls": "4-aminoquinoline antimalarial / antirheumatic (DMARD)",
+  "pharm": "4-aminoquinoline antimalarial and immunomodulatory antirheumatic agent used for malaria, rheumatoid arthritis, and lupus",
+  "tags": ["Rx only", "Antimalarial", "DMARD", "Retinal toxicity (dose- and duration-related, irreversible)", "QT prolongation / cardiomyopathy risk", "Hypoglycemia risk", "Long half-life (~40-50 days)"],
+  "quick": [
+    ["Adult dose", "Malaria prophylaxis 400 mg once weekly; RA 400-600 mg/day initial then 200-400 mg/day; SLE/discoid lupus 200-400 mg/day"],
+    ["Meal", "Take with food or milk"],
+    ["Pregnancy", "May be used when needed; decades of data show no drug-associated risk of major birth defects"],
+    ["Lactation", "Present in milk at low levels; considered compatible, no adverse infant effects reported"],
+    ["Renal", "Caution - increases retinal toxicity risk; consider dose reduction in impairment"],
+    ["Hepatic", "Use with caution in hepatic disease or with hepatotoxic drugs"],
+    ["Alcohol", "Limit alcohol (additive hepatic risk)"],
+    ["Monitoring", "Baseline + periodic (annual) ophthalmologic exam (BCVA, visual field, SD-OCT); ECG/QT; blood glucose; CBC"]
+  ],
+  "summary": "Hydroxychloroquine sulfate is a 4-aminoquinoline antimalarial and antirheumatic agent indicated for treatment of uncomplicated malaria (P. falciparum, P. malariae, P. ovale, P. vivax), prophylaxis of malaria in chloroquine-sensitive areas, and treatment of rheumatoid arthritis, systemic lupus erythematosus, and chronic discoid lupus erythematosus in adults. It is given orally with food or milk, with chronic maintenance doses generally not exceeding 200-400 mg daily. Its most characteristic toxicity is irreversible retinal damage related to cumulative dose and treatment duration, mandating a baseline ophthalmologic examination and periodic (annual) monitoring. Other serious risks include fatal cardiomyopathy and QT prolongation/ventricular arrhythmias, severe hypoglycemia, hematologic toxicity, and hemolysis in G6PD deficiency. It has a very long terminal half-life (about 40-50 days), so onset of effect and resolution of toxicity are slow.",
+  "indications": [
+    "Treatment of uncomplicated malaria due to P. falciparum, P. malariae, P. ovale, and P. vivax in adults and pediatric patients",
+    "Prophylaxis of malaria in geographic areas where chloroquine resistance is not reported, in adults and pediatric patients",
+    "Treatment of rheumatoid arthritis in adults",
+    "Treatment of systemic lupus erythematosus in adults",
+    "Treatment of chronic discoid lupus erythematosus in adults"
+  ],
+  "dosage": [
+    {"c": "Malaria prophylaxis (adult)", "r": "Oral", "d": "400 mg once a week", "t": "Begin 2 weeks before entering endemic area, continue weekly on the same day while there, and for 4 weeks after leaving", "n": "Only for areas where chloroquine resistance is not reported"},
+    {"c": "Malaria prophylaxis (pediatric >=31 kg)", "r": "Oral", "d": "6.5 mg/kg actual body weight (up to 400 mg) once a week", "t": "Same schedule as adults (2 weeks before, during, and 4 weeks after)", "n": "Not recommended below 31 kg - 200 mg tablet exceeds the dose and cannot be divided"},
+    {"c": "Uncomplicated malaria treatment (adult)", "r": "Oral", "d": "800 mg initially, then 400 mg at 6, 24, and 48 hours after the first dose (total 2000 mg)", "t": "Over 48 hours", "n": "For P. vivax/P. ovale radical cure, add an 8-aminoquinoline drug"},
+    {"c": "Uncomplicated malaria treatment (pediatric >=31 kg)", "r": "Oral", "d": "13 mg/kg (up to 800 mg) initially, then 6.5 mg/kg (up to 400 mg) at 6, 24, and 48 hours (total 31 mg/kg, up to 2000 mg)", "t": "Over 48 hours", "n": "Not recommended below 31 kg"},
+    {"c": "Rheumatoid arthritis (adult)", "r": "Oral", "d": "Initial 400-600 mg/day as single or two divided doses; chronic 200 mg or 400 mg once daily (or in two divided doses)", "t": "Action is cumulative - may take weeks to months; titrate to lowest effective maintenance dose", "n": "Keep dose <=5 mg/kg/day to limit retinal toxicity risk"},
+    {"c": "Systemic lupus erythematosus (adult)", "r": "Oral", "d": "200 mg or 400 mg once daily (or in two divided doses)", "t": "Use lowest effective dose", "n": "Limit to <=5 mg/kg/day actual body weight to reduce retinopathy risk"},
+    {"c": "Chronic discoid lupus erythematosus (adult)", "r": "Oral", "d": "200 mg or 400 mg once daily (or in two divided doses)", "t": "Use lowest effective dose", "n": "Limit to <=5 mg/kg/day actual body weight to reduce retinopathy risk"}
+  ],
+  "admin": [
+    "Administer orally with food or milk",
+    "Do not crush or divide the tablets",
+    "For malaria prophylaxis, take on the same day each week, starting 2 weeks before travel and continuing 4 weeks after leaving the endemic area",
+    "Use the lowest effective maintenance dose for rheumatologic indications and keep daily dose <=5 mg/kg actual body weight to limit retinal toxicity",
+    "Obtain a baseline ophthalmologic examination within the first year of starting therapy"
+  ],
+  "moa": "Hydroxychloroquine is a 4-aminoquinoline. As an antimalarial, it concentrates in the acidic food vacuole of intra-erythrocytic Plasmodium parasites, raising intravesicular pH and interfering with the parasite's ability to detoxify heme (inhibiting heme polymerization to hemozoin), which is toxic to the parasite. The mechanisms underlying its anti-inflammatory and immunomodulatory effects in rheumatoid arthritis, systemic lupus erythematosus, and chronic discoid lupus erythematosus are not fully known but are thought to involve accumulation in lysosomes with increased pH, interference with antigen processing and presentation, and inhibition of toll-like receptor signaling, dampening autoimmune inflammatory responses.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to 4-aminoquinoline compounds"],
+    "relative": ["Pre-existing retinopathy or maculopathy", "Psoriasis (may precipitate severe attack) - avoid", "Porphyria (may worsen; hepatotoxicity reported in porphyria cutanea tarda) - avoid", "Congenital or acquired QT prolongation or risk factors for QT prolongation", "Concomitant arrhythmogenic / QT-prolonging drugs", "G6PD deficiency (hemolysis risk)", "Hepatic disease or use with hepatotoxic drugs"],
+    "monitor": ["Ophthalmologic examination - baseline and periodic (BCVA, visual field, SD-OCT)", "ECG / QT interval", "Blood glucose", "CBC (hematologic toxicity)", "Renal function", "Muscle strength and deep tendon reflexes (myopathy/neuropathy)"]
+  },
+  "preg": "Prolonged clinical experience over decades and available published epidemiologic and clinical data have not identified a drug-associated risk of major birth defects, miscarriage, or adverse maternal or fetal outcomes with hydroxychloroquine use in pregnancy. There are risks to mother and fetus from untreated or active malaria, rheumatoid arthritis, and systemic lupus erythematosus during pregnancy. Animal reproduction studies were not conducted. A pregnancy exposure registry monitors outcomes (1-877-311-8972). Use when needed for the maternal condition.",
+  "lact": "Published lactation data report that hydroxychloroquine is present in human milk at low levels. No adverse reactions, and no retinal, otologic, cardiac, or growth/developmental abnormalities, have been reported in breastfed infants exposed through breast milk. There is no information on effects on milk production. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "Renal clearance of unchanged hydroxychloroquine accounts for approximately 16% to 30% of the dose. Renal impairment is a risk factor for retinal toxicity, and reduced clearance may increase exposure; use with caution and consider dose reduction in renal impairment. Monitor for proteinuria and renal toxicity (phospholipidosis can contribute to renal injury, particularly in connective tissue disorders); discontinue if renal toxicity is suspected or demonstrated.",
+  "hepatic": "Use with caution in patients with hepatic disease or alcoholism, or in those taking known hepatotoxic drugs. Hepatotoxicity has been reported, including in patients with porphyria cutanea tarda (in whom the drug should be avoided). Monitor liver function in patients with hepatic impairment.",
+  "interactions": {
+    "major": ["QT-prolonging / arrhythmogenic drugs - increased risk of ventricular arrhythmias; hydroxychloroquine is not recommended with these agents", "Insulin and other antidiabetic drugs - hydroxychloroquine may enhance their effect and increase hypoglycemia risk; a dose decrease of the antidiabetic agent may be needed", "Drugs that lower the seizure threshold (e.g., mefloquine and other antimalarials) - increased seizure risk"],
+    "moderate": ["Cyclosporine - increased plasma cyclosporine levels; monitor levels closely", "Digoxin - may increase serum digoxin levels; monitor levels closely", "Cimetidine - 2-fold increase in chloroquine exposure (interaction with hydroxychloroquine cannot be ruled out); avoid concomitant use", "Methotrexate - may increase the incidence of adverse reactions", "Antiepileptic drugs - their activity may be impaired"],
+    "minor": ["Rifampicin - lack of hydroxychloroquine efficacy reported; avoid concomitant use", "Praziquantel - chloroquine reported to reduce praziquantel bioavailability"],
+    "food": "Administer with food or milk to improve tolerability; food does not meaningfully reduce efficacy.",
+    "alcohol": "Limit alcohol because of additive risk of hepatotoxicity.",
+    "diagnostics": "May cause hypoglycemia (measure blood glucose if symptoms occur); monitor CBC for cytopenias; obtain baseline and periodic ophthalmologic testing and ECG for QT."
+  },
+  "se": {
+    "common": ["Nausea", "Diarrhea", "Abdominal pain / GI upset", "Headache", "Dizziness", "Skin rash / pruritus", "Anorexia"],
+    "serious": ["Irreversible retinal toxicity / maculopathy (dose- and duration-related)", "Cardiomyopathy and conduction disorders", "QT prolongation and ventricular arrhythmias (including torsades de pointes)", "Severe hypoglycemia", "Hematologic toxicity (bone marrow depression, agranulocytosis, aplastic anemia, leukopenia, thrombocytopenia)", "Hemolytic anemia in G6PD deficiency", "Skeletal muscle myopathy or neuropathy", "Neuropsychiatric reactions including suicidality"],
+    "rare": ["Serious skin reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis, DRESS, acute generalized exanthematous pustulosis)", "Hepatotoxicity (notably in porphyria cutanea tarda)", "Worsening of psoriasis", "Proteinuria / renal toxicity from phospholipidosis"],
+    "emergency": ["Torsades de pointes / ventricular fibrillation / cardiac arrest", "Severe symptomatic hypoglycemia", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Acute cardiomyopathy with cardiac failure"]
+  },
+  "monitoring": [
+    "Baseline ophthalmologic examination within the first year of therapy - best corrected distance visual acuity, automated threshold visual field of the central 10 degrees (central 24 degrees in patients of Asian descent), and spectral domain OCT (SD-OCT)",
+    "Periodic ophthalmologic exams - annual screening for higher-risk patients; for those without risk factors, annual exams can usually be deferred until 5 years of treatment",
+    "ECG / QT interval, especially with cardiac disease or concomitant QT-prolonging drugs",
+    "Blood glucose, particularly if symptoms of hypoglycemia",
+    "Complete blood count periodically for hematologic toxicity",
+    "Renal and hepatic function",
+    "Muscle strength, deep tendon reflexes, and signs of neuropathy/myopathy with prolonged use",
+    "Mood and behavior for neuropsychiatric reactions"
+  ],
+  "counsel": [
+    "Take with food or milk; do not crush or divide tablets",
+    "Get a baseline eye exam and regular follow-up eye exams - retinal damage can be permanent and is related to how much and how long you take the drug; report any change in vision, difficulty reading, light sensitivity, or distorted/missing areas of vision",
+    "Report symptoms of low blood sugar (shakiness, sweating, confusion, palpitations); diabetic patients should monitor blood sugar, as doses of insulin or diabetes medicines may need lowering",
+    "Report fainting, palpitations, or irregular heartbeat (heart rhythm risk)",
+    "Report fever, sore throat, unusual bleeding/bruising, severe rash with blistering or peeling, or muscle weakness",
+    "For malaria prevention, take exactly on schedule - 2 weeks before travel, weekly during, and 4 weeks after; use additional mosquito-avoidance measures",
+    "Keep out of reach of children - overdose can be rapidly fatal, especially in children",
+    "Tell your doctor about all medicines, especially other QT-prolonging drugs, diabetes medicines, digoxin, cyclosporine, or methotrexate"
+  ],
+  "pk": [
+    ["Onset", "Antimalarial action prompt; antirheumatic effect is cumulative and may take several weeks to months"],
+    ["Peak", "Whole-blood Tmax about 3.3 hours (plasma Tmax about 3.7 hours); oral bioavailability about 74-79%"],
+    ["Half-life", "Terminal half-life approximately 40-50 days in whole blood"],
+    ["Duration", "Once-weekly (malaria prophylaxis) to daily dosing; extensive tissue distribution; renal clearance accounts for ~16-30% of dose"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions permitted 15-30 C (59-86 F) (USP controlled room temperature)"]
+  ],
+  "pearls": [
+    "Retinal toxicity is the signature risk - it is irreversible and related to cumulative dose and duration; keep daily dose <=5 mg/kg actual body weight and obtain baseline plus periodic ophthalmologic monitoring (BCVA, visual field, SD-OCT)",
+    "In patients of Asian descent, retinopathy may first appear outside the macula - test the central 24 degrees of the visual field rather than the central 10 degrees",
+    "Can cause fatal cardiomyopathy and QT prolongation/torsades - avoid in QT prolongation or with other arrhythmogenic drugs and do not exceed the recommended dose",
+    "Can cause severe hypoglycemia even without antidiabetic drugs; check glucose if symptoms occur and reduce antidiabetic doses as needed",
+    "Very long half-life (~40-50 days) means slow onset of antirheumatic benefit and slow resolution of toxicity after discontinuation",
+    "Screen for G6PD deficiency risk (hemolysis) and avoid in psoriasis and porphyria; overdose is rapidly life-threatening, particularly in children"
+  ],
+  "missed": "For weekly malaria prophylaxis, take the missed dose as soon as remembered, then resume the regular weekly schedule. For daily rheumatologic dosing, take the missed dose when remembered unless it is near the next dose, in which case skip it and resume the usual schedule. Do not take a double dose to make up for a missed one.",
+  "overdose": "Overdose is dangerous and can be rapidly fatal, especially in children, with symptom onset within 1-3 hours of ingestion. Reported effects include cardiovascular toxicity (QRS/QTc prolongation, ventricular tachycardia, ventricular fibrillation, torsades de pointes, AV block, cardiac arrest, death), life-threatening hypotension, severe hypokalemia from intracellular shift, and CNS depression, seizures, visual disturbances, transient blindness, and coma. Manage with supportive and intensive care; consider gastrointestinal decontamination within the first hour (secure the airway first if consciousness is deteriorating), monitor and manage plasma potassium, and treat arrhythmias. Hemofiltration, hemodialysis, and hemoperfusion are not of benefit. Contact a poison center (1-800-222-1222) or medical toxicologist.",
+  "refs": [
+    ["FDA Label - Hydroxychloroquine Sulfate (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydroxychloroquine%22"],
+    ["DailyMed - Hydroxychloroquine Sulfate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=hydroxychloroquine"]
+  ]
+}

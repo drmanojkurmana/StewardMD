@@ -1,0 +1,93 @@
+{
+  "generic": "Cefixime",
+  "cls": "Antibiotic — 3rd-gen cephalosporin",
+  "pharm": "Semisynthetic cephalosporin; cell-wall synthesis inhibitor (beta-lactam)",
+  "tags": ["Rx", "Habit forming: No", "Oral", "Antibacterial"],
+  "quick": [
+    ["Adult dose", "400 mg daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "No established risk"],
+    ["Lactation", "Caution; data lacking"],
+    ["Renal", "Adjust if CrCl <60 mL/min"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Watch for diarrhea/allergy"]
+  ],
+  "summary": "Cefixime is an oral third-generation cephalosporin antibiotic for adults and children 6 months and older. It treats susceptible urinary, ear, throat, bronchial and gonococcal infections by blocking bacterial cell-wall synthesis. Usual adult dose is 400 mg once daily.",
+  "indications": [
+    "Uncomplicated urinary tract infections (E. coli, P. mirabilis)",
+    "Otitis media (H. influenzae, M. catarrhalis, S. pyogenes)",
+    "Pharyngitis and tonsillitis (S. pyogenes)",
+    "Acute exacerbations of chronic bronchitis",
+    "Uncomplicated gonorrhea (cervical/urethral)"
+  ],
+  "dosage": [
+    {"c": "Adults — general", "r": "Oral", "d": "400 mg daily (or 200 mg every 12 h)", "t": "Per infection", "n": "May give with or without food"},
+    {"c": "Uncomplicated gonorrhea (cervical/urethral)", "r": "Oral", "d": "400 mg single dose", "t": "Once", "n": "Single oral dose"},
+    {"c": "S. pyogenes infections", "r": "Oral", "d": "400 mg daily", "t": "At least 10 days", "n": "Complete full course"},
+    {"c": "Pediatric (>=6 months)", "r": "Oral suspension", "d": "8 mg/kg/day (or 4 mg/kg q12h)", "t": "Per infection", "n": "Tablets not bioequivalent to suspension for otitis media"},
+    {"c": "Renal impairment CrCl <60 mL/min", "r": "Oral", "d": "Adjust per renal table", "t": "Per infection", "n": "Monitor patients on dialysis"}
+  ],
+  "admin": [
+    "Take once daily, with or without food",
+    "Shake suspension well before measuring",
+    "For suspension, always confirm concentration (100, 200 or 500 mg/5 mL)",
+    "Complete the full prescribed course",
+    "Separate dose by route per renal status"
+  ],
+  "moa": "Semisynthetic cephalosporin that binds penicillin-binding proteins, inhibiting bacterial cell-wall synthesis and producing a bactericidal effect against susceptible organisms.",
+  "contra": {
+    "absolute": ["Known allergy to cefixime or other cephalosporins"],
+    "relative": ["History of penicillin/beta-lactam allergy (cross-reactivity up to ~10%)"],
+    "monitor": ["Diarrhea (consider C. difficile)", "Signs of hypersensitivity", "Prothrombin time if on anticoagulants"]
+  },
+  "preg": "Observational data show no established drug-associated risk; no fetal harm in animal studies.",
+  "lact": "No human-milk data; present in animal milk — use with caution.",
+  "renal": "Normal dose if CrCl >=60 mL/min; reduce dose if <60 mL/min; not significantly dialyzable.",
+  "hepatic": "No specific dosage adjustment in the label.",
+  "interactions": {
+    "major": ["Warfarin/anticoagulants — increased prothrombin time, with or without bleeding"],
+    "moderate": ["Carbamazepine — elevated carbamazepine levels (monitor)"],
+    "minor": [],
+    "food": "May be taken with or without food (food slightly delays absorption).",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "False-positive urine glucose (Clinitest/Benedict's/Fehling's), urine ketones (nitroprusside), and direct Coombs test possible."
+  },
+  "se": {
+    "common": ["Diarrhea (16%)", "Nausea (7%)", "Loose/frequent stools (6%)", "Abdominal pain (3%)", "Dyspepsia (3%)", "Flatulence (4%)", "Vomiting"],
+    "serious": ["Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Anaphylactic/anaphylactoid reactions"],
+    "rare": ["Skin rashes", "Urticaria", "Drug fever"],
+    "emergency": ["Anaphylaxis / shock", "Severe or bloody diarrhea suggesting C. difficile colitis"]
+  },
+  "monitoring": [
+    "Watch for diarrhea during and after therapy (C. difficile)",
+    "Hypersensitivity/allergic reactions",
+    "Prothrombin time when co-administered with anticoagulants",
+    "Carbamazepine levels if used concomitantly",
+    "Renal function in impaired patients"
+  ],
+  "counsel": [
+    "Take exactly as prescribed and finish the full course",
+    "Report any rash, swelling or breathing difficulty immediately",
+    "Report watery or bloody diarrhea, even weeks after stopping",
+    "Tell your doctor about any penicillin or cephalosporin allergy",
+    "Shake liquid well and use the supplied measuring device"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal after absorption"],
+    ["Peak", "2 to 6 hours after oral dose"],
+    ["Half-life", "3 to 4 hours (up to 9 h); prolonged in renal impairment"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Per product labeling (room temperature)"]
+  ],
+  "pearls": [
+    "Single 400 mg oral dose is the labeled regimen for uncomplicated cervical/urethral gonorrhea",
+    "About 40-50% oral absorption regardless of food",
+    "Tablets and suspension are NOT bioequivalent — do not substitute for otitis media",
+    "Cross-reactivity may occur in up to ~10% of penicillin-allergic patients",
+    "Not significantly removed by hemodialysis or peritoneal dialysis"
+  ],
+  "missed": "Take as soon as remembered; skip if near next dose. Do not double.",
+  "overdose": "No specific antidote; gastric lavage may help. Not significantly removed by dialysis. Supportive care.",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

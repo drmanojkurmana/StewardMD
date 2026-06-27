@@ -1,0 +1,98 @@
+{
+  "generic": "Tocilizumab",
+  "cls": "Immunosuppressant / antirheumatic (interleukin-6 receptor antagonist)",
+  "pharm": "Recombinant humanized monoclonal antibody that binds soluble and membrane-bound IL-6 receptors, inhibiting IL-6-mediated signaling",
+  "tags": ["IL-6 receptor antagonist", "Rheumatoid arthritis", "Giant cell arteritis", "Cytokine release syndrome", "Boxed warning: serious infections", "Test for latent TB before starting"],
+  "quick": [
+    ["Adult dose", "RA IV: 4 mg/kg q4wk, may increase to 8 mg/kg (max 800 mg). RA SC: 162 mg every other week or weekly. GCA: 162 mg SC weekly with tapering glucocorticoids"],
+    ["Meal", "Not applicable (parenteral)"],
+    ["Pregnancy", "May cause fetal harm based on animal data; monoclonal antibody crosses placenta in 3rd trimester"],
+    ["Lactation", "No human milk data; weigh benefit of drug vs breastfeeding"],
+    ["Renal", "No adjustment in mild-moderate impairment; severe not studied"],
+    ["Hepatic", "Not recommended in active hepatic disease or hepatic impairment"],
+    ["Alcohol", "Avoid; additive hepatotoxicity risk"],
+    ["Monitoring", "Latent TB before start, CBC, liver enzymes, lipids; watch for serious infection"]
+  ],
+  "summary": "Tocilizumab is a recombinant humanized monoclonal antibody that antagonizes the interleukin-6 (IL-6) receptor, blocking IL-6-mediated proinflammatory signaling. It is used for moderately to severely active rheumatoid arthritis after inadequate response to DMARDs, giant cell arteritis, polyarticular and systemic juvenile idiopathic arthritis, cytokine release syndrome from CAR T-cell therapy, and hospitalized COVID-19 patients receiving systemic corticosteroids with respiratory support. It is given by intravenous infusion or subcutaneous injection. It carries a boxed warning for serious, sometimes fatal infections including tuberculosis, invasive fungal, bacterial, viral, and other opportunistic infections; latent TB testing is required before initiation in most indications.",
+  "indications": [
+    "Moderately to severely active rheumatoid arthritis in adults with inadequate response to one or more DMARDs",
+    "Giant cell arteritis in adults",
+    "Active polyarticular juvenile idiopathic arthritis in patients 2 years and older",
+    "Active systemic juvenile idiopathic arthritis in patients 2 years and older",
+    "Cytokine release syndrome induced by chimeric antigen receptor (CAR) T-cell therapy",
+    "Hospitalized adults with COVID-19 receiving systemic corticosteroids and requiring supplemental oxygen, mechanical ventilation, or ECMO"
+  ],
+  "dosage": [
+    {"c": "Rheumatoid arthritis - intravenous", "r": "IV infusion", "d": "Start 4 mg/kg every 4 weeks; may increase to 8 mg/kg every 4 weeks based on clinical response; maximum 800 mg per infusion", "t": "Infuse over 60 minutes; do not give as bolus or push", "n": "May be used as monotherapy or with methotrexate or other non-biologic DMARDs"},
+    {"c": "Rheumatoid arthritis - subcutaneous", "r": "Subcutaneous", "d": "Under 100 kg: 162 mg every other week, increasing to every week based on response. At or above 100 kg: 162 mg every week", "t": "Single prefilled syringe; rotate injection sites", "n": "Do not combine with biologic DMARDs"},
+    {"c": "Giant cell arteritis", "r": "Subcutaneous", "d": "162 mg once weekly (or 162 mg every other week per clinical considerations) with a tapering course of glucocorticoids; IV 6 mg/kg every 4 weeks may be used, maximum 600 mg per infusion", "t": "SC injection or 60-minute IV infusion", "n": "Given in combination with tapering glucocorticoids"},
+    {"c": "Cytokine release syndrome (CRS)", "r": "IV infusion", "d": "Under 30 kg: 12 mg/kg; at or above 30 kg: 8 mg/kg; maximum 800 mg per infusion. May repeat up to 3 additional doses at least 8 hours apart if no clinical improvement", "t": "Infuse over 60 minutes", "n": "IV route only for CRS; may be given alone or with corticosteroids"},
+    {"c": "COVID-19 (hospitalized)", "r": "IV infusion", "d": "8 mg/kg as a single dose; maximum 800 mg per infusion; one additional dose may be given at least 8 hours later if signs/symptoms worsen", "t": "Infuse over 60 minutes", "n": "Use with systemic corticosteroids; latent TB testing not required for COVID-19 use"},
+    {"c": "Polyarticular / systemic JIA - intravenous", "r": "IV infusion", "d": "pJIA: under 30 kg 10 mg/kg, at/above 30 kg 8 mg/kg every 4 weeks. sJIA: under 30 kg 12 mg/kg, at/above 30 kg 8 mg/kg every 2 weeks", "t": "Infuse over 60 minutes", "n": "SC dosing also available (162 mg at weight-based intervals)"}
+  ],
+  "admin": [
+    "Test for latent tuberculosis before starting therapy (except COVID-19 patients); treat latent TB before initiation if positive",
+    "Obtain baseline CBC and liver function tests before treatment; do not initiate with neutropenia, thrombocytopenia, or elevated transaminases beyond thresholds",
+    "IV: dilute to 100 mL in 0.9% sodium chloride (50 mL for patients under 30 kg) and infuse over 60 minutes; never give as an IV bolus or push",
+    "Subcutaneous: allow prefilled syringe to reach room temperature; rotate injection sites in abdomen, thigh, or upper arm",
+    "Avoid administration of live vaccines concurrently with tocilizumab"
+  ],
+  "moa": "Tocilizumab is a recombinant humanized IgG1 monoclonal antibody that binds specifically to both soluble and membrane-bound interleukin-6 receptors (sIL-6R and mIL-6R), inhibiting IL-6-mediated signaling through these receptors. IL-6 is a pleiotropic proinflammatory cytokine involved in T-cell activation, immunoglobulin secretion, hepatic acute-phase protein synthesis, and stimulation of hematopoiesis. By blocking IL-6 receptor engagement, tocilizumab reduces the inflammatory cascade driving conditions such as rheumatoid arthritis, giant cell arteritis, and cytokine release syndrome.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to tocilizumab or any product component"],
+    "relative": ["Active infection, including localized infection", "Active hepatic disease or hepatic impairment", "Absolute neutrophil count below 2000/mm3 (RA/GCA) or platelets below 100,000/mm3 (do not initiate)", "History or risk of gastrointestinal perforation (e.g., diverticulitis)"],
+    "monitor": ["Active tuberculosis during therapy even if baseline latent TB test was negative", "Neutrophil and platelet counts", "Liver enzymes (ALT/AST) and bilirubin", "Signs of serious infection or GI perforation"]
+  },
+  "preg": "Based on animal data, tocilizumab may cause fetal harm; animal studies showed increased abortion and embryo-fetal death at exposures 1.25 times and higher than the maximum recommended human dose. As a monoclonal antibody, tocilizumab is actively transported across the placenta during the third trimester and may affect immune responses in the in-utero exposed infant. The background risk of major birth defects in the general population is 2 to 4% and of miscarriage 15 to 20%. Use during pregnancy only if clearly needed.",
+  "lact": "There are no data on the presence of tocilizumab in human milk, its effects on the breastfed infant, or its effects on milk production. Maternal immunoglobulin G is present in human milk. The decision to discontinue the drug or breastfeeding should consider the importance of the drug to the mother and the potential adverse effects on the infant.",
+  "renal": "No dose adjustment is required in patients with mild or moderate renal impairment. Tocilizumab has not been studied in patients with severe renal impairment.",
+  "hepatic": "Tocilizumab is not recommended in patients with active hepatic disease or hepatic impairment. Do not initiate in RA or GCA patients with ALT or AST above 1.5 times the upper limit of normal. Monitor liver enzymes and modify or discontinue dosing for elevations as specified in labeling; discontinue for ALT or AST greater than 5 times the upper limit of normal.",
+  "interactions": {
+    "major": ["Biologic DMARDs such as TNF antagonists (increased immunosuppression; avoid concurrent use)", "Live vaccines (avoid concurrent administration)"],
+    "moderate": ["CYP450 substrates with narrow therapeutic index - warfarin, cyclosporine, theophylline (IL-6 normalization may restore CYP activity and reduce drug levels; monitor and adjust)", "Oral contraceptives and statins such as simvastatin and atorvastatin (exposure may decrease; simvastatin exposure fell up to 57%, omeprazole up to 28%)"],
+    "minor": ["Methotrexate and non-biologic DMARDs may be co-administered without clinically significant pharmacokinetic effect"],
+    "food": "Not applicable (parenteral administration)",
+    "alcohol": "Avoid excessive alcohol because of additive risk of hepatotoxicity and transaminase elevations",
+    "diagnostics": "May normalize C-reactive protein and other acute-phase reactants, potentially masking signs of infection; effect on CYP enzymes can persist for several weeks after discontinuation"
+  },
+  "se": {
+    "common": ["Upper respiratory tract infections", "Nasopharyngitis", "Headache", "Hypertension", "Increased ALT", "Injection site reactions (subcutaneous)"],
+    "serious": ["Serious infections (tuberculosis, bacterial, invasive fungal, viral, opportunistic)", "Gastrointestinal perforation", "Hepatotoxicity (including hepatic failure)", "Neutropenia and thrombocytopenia", "Elevations in lipids (LDL, total cholesterol, triglycerides)"],
+    "rare": ["Demyelinating disorders", "Malignancy", "Hepatitis B reactivation"],
+    "emergency": ["Anaphylaxis and serious hypersensitivity reactions - discontinue and treat promptly", "Gastrointestinal perforation presenting as new-onset abdominal pain with fever - seek urgent surgical evaluation", "Sepsis or disseminated infection"]
+  },
+  "monitoring": [
+    "Latent tuberculosis testing before initiation and monitoring for active TB during therapy",
+    "Complete blood count (neutrophils and platelets) at baseline, then every 4 to 8 weeks for RA/GCA",
+    "Liver enzymes (ALT/AST) at baseline, every 4 to 8 weeks for the first 6 months, then every 3 months (RA/GCA)",
+    "Lipid panel approximately 4 to 8 weeks after initiation, then per clinical guidelines",
+    "Signs and symptoms of infection and gastrointestinal perforation"
+  ],
+  "counsel": [
+    "Report any signs of infection such as fever, cough, night sweats, or weight loss promptly, as serious infections can occur",
+    "Inform your clinician of any history of tuberculosis, hepatitis, or recurrent infections before starting treatment",
+    "Seek urgent care for severe or persistent abdominal pain, which may signal a perforation in the gut",
+    "Do not receive live vaccines while on tocilizumab; complete recommended vaccinations beforehand",
+    "Keep appointments for blood tests to check white cells, platelets, liver enzymes, and cholesterol"
+  ],
+  "pk": [
+    ["Onset", "C-reactive protein normalizes within days; clinical response over weeks"],
+    ["Peak", "Subcutaneous peak concentration reached in days; IV peak at end of infusion"],
+    ["Half-life", "Concentration-dependent; up to approximately 11 to 13 days at steady state at higher doses"],
+    ["Duration", "Dosing intervals of every 1 to 4 weeks depending on route and indication"],
+    ["Storage", "Vials and prefilled syringes refrigerated 2-8 C (36-46 F); protect from light; do not freeze or shake. Diluted IV solution stable 24 hours refrigerated or up to 12 hours at room temperature"]
+  ],
+  "pearls": [
+    "Latent TB screening before starting is mandatory in most indications because of the boxed warning for serious infections",
+    "IL-6 blockade can blunt fever and CRP, masking infection severity; maintain a high index of suspicion",
+    "By normalizing IL-6, tocilizumab may restore CYP450 activity and lower levels of CYP substrates such as warfarin",
+    "Do not initiate with ANC below 2000/mm3, platelets below 100,000/mm3, or ALT/AST above 1.5x ULN in RA/GCA",
+    "Used IV for cytokine release syndrome and COVID-19; latent TB testing is not required for the COVID-19 indication"
+  ],
+  "missed": "For subcutaneous dosing, administer the missed dose as soon as remembered and then resume the regular weekly or every-other-week schedule; do not give two doses at once. For intravenous dosing, reschedule the missed infusion as soon as possible per the clinic schedule. Contact the prescriber for guidance on timing.",
+  "overdose": "There is limited experience with overdose. No specific antidote exists. In the event of overdose, monitor the patient for signs and symptoms of adverse reactions, particularly infection, neutropenia, and hepatic abnormalities, and provide appropriate symptomatic and supportive treatment.",
+  "refs": [
+    ["FDA Prescribing Information: Tocilizumab (Actemra)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tocilizumab%22"],
+    ["DailyMed - Tocilizumab", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tocilizumab"]
+  ]
+}

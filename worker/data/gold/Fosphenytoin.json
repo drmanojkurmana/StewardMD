@@ -1,0 +1,131 @@
+{
+  "generic": "Fosphenytoin Sodium",
+  "cls": "Hydantoin anticonvulsant (phenytoin prodrug, parenteral)",
+  "pharm": "Water-soluble prodrug rapidly converted by phosphatases to phenytoin; phenytoin produces voltage-dependent blockade of neuronal sodium channels, reducing sustained high-frequency repetitive firing. All doses are expressed in phenytoin sodium equivalents (PE).",
+  "tags": ["Rx only", "BOXED WARNING", "Anticonvulsant", "Hydantoin", "Phenytoin prodrug", "Status epilepticus", "Dosed in PE"],
+  "quick": [
+    ["Adult dose", "Status epilepticus loading 15-20 mg PE/kg IV at no more than 150 mg PE/min"],
+    ["Meal", "Not applicable - given IV or IM"],
+    ["Pregnancy", "Phenytoin exposure raises malformation risk (fetal hydantoin syndrome); enroll in NAAED registry"],
+    ["Lactation", "Phenytoin is secreted in milk; weigh benefits against infant exposure"],
+    ["Renal", "Increased unbound phenytoin; monitor unbound (free) phenytoin levels"],
+    ["Hepatic", "Increased unbound phenytoin; early toxicity possible - monitor free levels; contraindicated if prior acute hepatotoxicity"],
+    ["Alcohol", "Acute intake raises and chronic abuse lowers phenytoin levels; consider in overdose"],
+    ["Monitoring", "ECG, blood pressure, respiratory status during/after IV; phenytoin (free) levels ~2 hr after dose"]
+  ],
+  "summary": "Fosphenytoin sodium is a water-soluble prodrug of phenytoin given IV or IM for generalized tonic-clonic status epilepticus, prevention/treatment of seizures during neurosurgery, and short-term substitution when oral phenytoin is not possible. ALL doses, concentrations, and infusion rates MUST be expressed and prescribed in phenytoin sodium equivalents (PE) - 1 mg PE equals 1 mg phenytoin sodium - and the vial concentration (50 mg PE/mL) must not be confused with the total vial content, an error that has caused fatal overdoses. It carries a BOXED WARNING for cardiovascular risk with rapid IV infusion: the rate must not exceed 150 mg PE/min in adults (2 mg PE/kg/min or 150 mg PE/min, whichever is slower, in pediatrics) because of severe hypotension and cardiac arrhythmias, which can occur even at or below recommended rates. Continuous cardiac, blood-pressure, and respiratory monitoring is essential. The adult status-epilepticus loading dose is 15-20 mg PE/kg IV. Other key risks are purple glove syndrome, hypersensitivity/DRESS/SJS-TEN, and paresthesia/pruritus.",
+  "indications": [
+    "Treatment of generalized tonic-clonic status epilepticus",
+    "Prevention and treatment of seizures occurring during neurosurgery",
+    "Short-term substitution for oral phenytoin when oral administration is not possible"
+  ],
+  "dosage": [
+    {"c": "Status epilepticus - loading (adult)", "r": "Adult IV", "d": "15 to 20 mg PE/kg", "t": "Infuse at 100-150 mg PE/min; do NOT exceed 150 mg PE/min", "n": "Dose in PE. Continuous ECG, BP, respiratory monitoring; usually give with an IV benzodiazepine"},
+    {"c": "Status epilepticus - loading (pediatric, birth to <17 yr)", "r": "Pediatric IV", "d": "15 to 20 mg PE/kg", "t": "2 mg PE/kg/min, or 150 mg PE/min, whichever is slower", "n": "Dose in PE; IM not recommended for status epilepticus"},
+    {"c": "Non-emergent loading (adult)", "r": "Adult IV or IM", "d": "10 to 20 mg PE/kg", "t": "IV no greater than 150 mg PE/min", "n": "Use only when oral phenytoin is not possible"},
+    {"c": "Maintenance (adult)", "r": "Adult IV or IM", "d": "4 to 6 mg PE/kg/day in divided doses", "t": "Divided daily; IV no greater than 150 mg PE/min", "n": "Initial maintenance; titrate to free phenytoin levels"},
+    {"c": "Non-emergent loading (pediatric)", "r": "Pediatric IV", "d": "10 to 15 mg PE/kg", "t": "1 to 2 mg PE/kg/min, or 150 mg PE/min, whichever is slower", "n": "Dose in PE"},
+    {"c": "Maintenance (pediatric)", "r": "Pediatric IV", "d": "2 to 4 mg PE/kg every 12 hours", "t": "1 to 2 mg PE/kg/min, or 100 mg PE/min, whichever is slower", "n": "Dose in PE"}
+  ],
+  "admin": [
+    "Always prescribe, dispense, and administer in phenytoin sodium equivalents (PE); 1 mg PE = 1 mg phenytoin sodium - no molecular-weight conversion needed",
+    "Do NOT confuse the vial concentration (50 mg PE/mL) with total vial content (100 mg PE/2 mL or 500 mg PE/10 mL) - misreading has caused fatal overdoses; withdraw the correct volume",
+    "For IV infusion, dilute in 5% Dextrose or 0.9% Sodium Chloride to 1.5-25 mg PE/mL (max 25 mg PE/mL)",
+    "Do NOT exceed 150 mg PE/min IV in adults (2 mg PE/kg/min or 150 mg PE/min, whichever is slower, in pediatrics)",
+    "Continuously monitor ECG, blood pressure, and respiratory function during and after infusion; observe ~10-20 min after end of infusion for peak phenytoin",
+    "IM administration should ordinarily not be used for status epilepticus (slower to therapeutic levels) and should ordinarily not be used in pediatric patients",
+    "Use oral phenytoin whenever possible because of cardiac and local toxicity risks with IV use"
+  ],
+  "moa": "Fosphenytoin is a prodrug of phenytoin; its anticonvulsant effect is attributable to phenytoin. Phenytoin's precise mechanism is not fully established but is thought to involve voltage-dependent blockade of membrane sodium channels, reducing sustained high-frequency repetitive neuronal discharges. For every mmol of fosphenytoin administered, one mmol of phenytoin is produced (conversion half-life about 15 minutes via phosphatases).",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to fosphenytoin sodium or its inactive ingredients, or to phenytoin or other hydantoins (reactions have included angioedema)",
+      "Sinus bradycardia, sino-atrial block, second- and third-degree A-V block, or Adams-Stokes syndrome",
+      "History of prior acute hepatotoxicity attributable to fosphenytoin sodium or phenytoin",
+      "Coadministration with delavirdine (loss of virologic response / NNRTI resistance)"
+    ],
+    "relative": [
+      "Critically ill, elderly, or hypotensive patients and those with severe myocardial insufficiency (higher cardiovascular risk)",
+      "Renal or hepatic impairment or hypoalbuminemia (increased unbound phenytoin)",
+      "History of serious dermatologic reaction to hydantoins",
+      "Acute intermittent porphyria (may be exacerbated)"
+    ],
+    "monitor": [
+      "ECG, blood pressure, and respiratory function during and after IV administration",
+      "Plasma phenytoin concentrations (total and unbound/free)",
+      "Skin for rash (SJS/TEN, DRESS, AGEP)",
+      "Signs of multiorgan hypersensitivity",
+      "Infusion site and limb for purple glove syndrome"
+    ]
+  },
+  "preg": "Prenatal exposure to phenytoin (the active metabolite) may increase the risk of major congenital malformations (orofacial clefts, cardiac defects), the fetal hydantoin syndrome, growth and cognitive deficits, and there have been reports of childhood malignancies including neuroblastoma. A life-threatening neonatal bleeding disorder from reduced vitamin K-dependent clotting factors can occur and can be prevented with vitamin K to the mother before delivery and the neonate after birth. Seizure frequency may increase in pregnancy due to altered pharmacokinetics; monitor serum phenytoin. Advise patients to enroll in the North American Antiepileptic Drug (NAAED) Pregnancy Registry (1-888-233-2334).",
+  "lact": "It is not known whether fosphenytoin is secreted in human milk, but phenytoin (its active metabolite) is secreted in human milk. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and potential adverse effects on the breastfed infant.",
+  "renal": "The unbound (free) fraction of phenytoin is increased in renal impairment and hypoalbuminemia. Monitor phenytoin serum levels based on the unbound fraction in these patients. Patients who are gravely ill may show early toxicity.",
+  "hepatic": "The liver is the site of biotransformation; patients with impaired liver function, the elderly, or gravely ill patients may show early toxicity. The unbound fraction of phenytoin is increased - monitor unbound phenytoin levels. Contraindicated in patients with a history of prior acute hepatotoxicity attributable to fosphenytoin or phenytoin.",
+  "interactions": {
+    "major": [
+      "Delavirdine - CONTRAINDICATED; phenytoin substantially reduces delavirdine, risking loss of virologic response and NNRTI-class resistance",
+      "CYP2C9/2C19 inhibitors that raise phenytoin (azoles, fluoxetine/fluvoxamine, amiodarone, isoniazid, cimetidine, sulfonamides, ticlopidine) - risk of phenytoin toxicity due to saturable metabolism",
+      "Warfarin - increased and decreased PT/INR responses reported; monitor closely",
+      "Drugs whose levels are lowered by phenytoin enzyme induction (DOACs apixaban/rivaroxaban/dabigatran/edoxaban, many antiepileptics, statins, calcium channel blockers, many antivirals, quetiapine, cyclosporine, methadone)"
+    ],
+    "moderate": [
+      "Valproate / valproic acid - unpredictable effect on phenytoin and increased risk of valproate-associated hyperammonemia",
+      "Non-depolarizing neuromuscular blockers (cisatracurium, rocuronium, vecuronium, pancuronium) - resistance / faster recovery from blockade",
+      "Drugs that lower phenytoin (carbamazepine, vigabatrin, rifampin, ritonavir/nelfinavir, St. John's wort, folic acid)",
+      "Highly albumin-bound drugs - may increase unbound fosphenytoin/phenytoin fraction",
+      "Oral contraceptives, corticosteroids, estrogens, doxycycline, quinidine, theophylline, vitamin D - efficacy reduced by phenytoin"
+    ],
+    "minor": [
+      "Antineoplastics in combination (bleomycin, cisplatin, carboplatin, methotrexate, doxorubicin) - may lower phenytoin levels"
+    ],
+    "food": "Not applicable - parenteral administration.",
+    "alcohol": "Acute alcohol intake may increase phenytoin serum levels; chronic alcohol abuse may decrease them. Consider concurrent CNS depressants, including alcohol, in acute overdose.",
+    "diagnostics": "Monitor unbound (free) phenytoin levels in renal/hepatic impairment or hypoalbuminemia. May cause hyperglycemia; concomitant valproate raises hyperammonemia risk."
+  },
+  "se": {
+    "common": ["Pruritus (notably groin; transient, rate-related)", "Nystagmus", "Dizziness", "Somnolence", "Ataxia", "Paresthesia/burning/tingling", "Headache", "Nausea and vomiting (pediatric vomiting)", "Tinnitus", "Vasodilatation"],
+    "serious": ["Hypotension and cardiac arrhythmias (bradycardia, heart block, QT prolongation, ventricular tachycardia/fibrillation)", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "DRESS / multiorgan hypersensitivity", "Angioedema", "Purple glove syndrome (local limb toxicity)", "Hepatic injury", "Hematopoietic complications"],
+    "rare": ["Acute generalized exanthematous pustulosis (AGEP)", "Exacerbation of porphyria", "Irreversible cerebellar dysfunction/atrophy after overdose", "Withdrawal-precipitated status epilepticus", "Extrapyramidal symptoms", "Stupor"],
+    "emergency": ["BOXED WARNING - severe hypotension and cardiac arrhythmias with rapid IV infusion (asystole, cardiac arrest, death); keep rate at or below 150 mg PE/min in adults", "Cardiovascular collapse / cardiac arrest", "SJS/TEN or DRESS with multiorgan involvement", "Angioedema with airway compromise", "Status epilepticus from abrupt withdrawal"]
+  },
+  "monitoring": [
+    "Continuous ECG, blood pressure, and respiratory function during and after IV administration",
+    "Observe through the period of maximal phenytoin (about 10-20 minutes after end of IV infusion)",
+    "Plasma phenytoin levels - total and unbound (free), especially in renal/hepatic impairment, hypoalbuminemia, pregnancy",
+    "Skin examination for rash; discontinue at first sign unless clearly not drug-related",
+    "Signs of hypersensitivity / DRESS (fever, lymphadenopathy, eosinophilia, organ involvement)",
+    "Infusion site and affected limb for purple glove syndrome",
+    "CBC for hematopoietic complications"
+  ],
+  "counsel": [
+    "This medicine is dosed in phenytoin equivalents (PE) and given by vein or muscle in a monitored setting",
+    "Your heart rhythm, blood pressure, and breathing will be watched closely during and after the infusion",
+    "Itching, burning, or tingling (often in the groin) can occur during infusion and usually passes within minutes",
+    "Tell your team immediately about any skin rash, blistering, facial/mouth swelling, or fever - these can be serious reactions",
+    "Report any blue/purple discoloration, swelling, or pain in the arm where the medicine is given",
+    "Do not stop antiseizure medicine suddenly - this can trigger prolonged seizures",
+    "If pregnant or planning pregnancy, discuss risks and enroll in the antiepileptic drug pregnancy registry"
+  ],
+  "pk": [
+    ["Onset", "Converts to phenytoin with a conversion half-life of about 15 minutes; full antiepileptic effect not immediate"],
+    ["Peak", "Maximal serum phenytoin about 10-20 min after end of IV infusion; IM total phenytoin peaks at about 3 hours"],
+    ["Half-life", "Conversion half-life ~15 min; phenytoin elimination half-life ~12-29 hours (saturable, increases at higher levels)"],
+    ["Duration", "Maintenance dosing 4-6 mg PE/kg/day (adult); duration extends with higher phenytoin concentrations"],
+    ["Storage", "Store refrigerated at 2 to 8 C (36 to 46 F); do not keep at room temperature more than 48 hours; single-dose vials"]
+  ],
+  "pearls": [
+    "BOXED WARNING: cardiovascular risk with rapid IV infusion - do NOT exceed 150 mg PE/min in adults (2 mg PE/kg/min or 150 mg PE/min, whichever is slower, in pediatrics); severe hypotension and arrhythmias can occur even at or below this rate, so continuous cardiac monitoring is essential",
+    "ALWAYS express dose, concentration, and rate in phenytoin sodium equivalents (PE); 1 mg PE = 1 mg phenytoin sodium, so no conversion is needed when switching to/from phenytoin",
+    "Do NOT confuse the 50 mg PE/mL concentration with total vial content (100 or 500 mg PE) - this error has caused fatal 2-fold and 10-fold overdoses",
+    "Watch for purple glove syndrome (limb edema, discoloration, pain) and stop infusion if it develops",
+    "Discontinue at the first sign of rash; SJS/TEN and DRESS can be fatal and the drug should not be resumed if SJS/TEN is suspected",
+    "Monitor unbound (free) phenytoin in renal/hepatic impairment, hypoalbuminemia, and pregnancy; do not withdraw antiepileptics abruptly"
+  ],
+  "missed": "Not self-administered; fosphenytoin is given by clinicians in a monitored setting. For maintenance therapy, a delayed dose should be managed by the care team guided by phenytoin levels. Antiepileptic therapy should never be stopped abruptly because of the risk of withdrawal seizures or status epilepticus.",
+  "overdose": "Reported features include nausea, vomiting, lethargy, tachycardia or bradycardia, asystole, cardiac arrest, hypotension, syncope, hypocalcemia, metabolic acidosis, and death. Early phenytoin toxicity shows nystagmus, ataxia, and dysarthria, progressing to tremor, hyperreflexia, slurred speech, coma, hypotension, and respiratory/circulatory depression. Formate (methanol-like, anion-gap acidosis) and phosphate (hypocalcemia with paresthesia, spasms, seizures) metabolites may contribute. The lethal adult phenytoin dose is estimated at 2-5 grams. There is no specific antidote; provide supportive care, monitor calcium, and consider hemodialysis (phenytoin is not completely protein-bound) or exchange transfusion in children.",
+  "refs": [
+    ["FDA Label - Fosphenytoin Sodium Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fosphenytoin+sodium%22"],
+    ["DailyMed - Fosphenytoin Sodium", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=fosphenytoin+sodium"]
+  ]
+}

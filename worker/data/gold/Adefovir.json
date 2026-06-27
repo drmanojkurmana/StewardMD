@@ -1,0 +1,106 @@
+{
+  "generic": "Adefovir",
+  "cls": "Nucleotide reverse transcriptase inhibitor / antiviral (anti-hepatitis B)",
+  "pharm": "Orally administered prodrug (adefovir dipivoxil) of adefovir, an acyclic nucleotide analog of adenosine monophosphate; after intracellular phosphorylation to adefovir diphosphate it inhibits hepatitis B virus DNA polymerase (reverse transcriptase) and acts as a chain terminator, suppressing HBV replication.",
+  "tags": ["Rx only", "Chronic hepatitis B", "Nucleotide analog", "BOXED: nephrotoxicity/HBV flare/HIV resistance/lactic acidosis", "Renally cleared"],
+  "quick": [
+    ["Adult dose", "10 mg once daily orally"],
+    ["Meal", "Take with or without food"],
+    ["Pregnancy", "Use only if clearly needed; limited human data"],
+    ["Lactation", "Breastfeeding not recommended"],
+    ["Renal", "Extend dosing interval per CrCl; major dose adjustment needed"],
+    ["Hepatic", "No dose change; watch for severe flares on stopping"],
+    ["Alcohol", "Avoid - additive hepatic and lactic-acidosis risk"],
+    ["Monitoring", "Renal function/phosphate, LFTs, HBV DNA; HIV status before use"]
+  ],
+  "summary": "Adefovir dipivoxil is an oral nucleotide analog prodrug used to treat chronic hepatitis B in patients 12 years and older with evidence of active viral replication and either persistently elevated transaminases or histologically active disease, including lamivudine-resistant HBV. The standard dose is 10 mg once daily, with interval extension in renal impairment. It carries a boxed warning covering severe acute exacerbations of hepatitis on discontinuation, nephrotoxicity (especially with pre-existing renal impairment or concomitant nephrotoxins), the risk of HIV resistance if used in unrecognized/untreated HIV co-infection, and lactic acidosis with severe hepatomegaly and steatosis (sometimes fatal). Renal function must be monitored throughout, and patients should be tested for HIV before starting.",
+  "indications": [
+    "Treatment of chronic hepatitis B in patients 12 years of age and older with evidence of active viral replication and either persistently elevated serum aminotransferases (ALT/AST) or histologically active disease, including lamivudine-resistant HBV"
+  ],
+  "dosage": [
+    {"c": "Chronic hepatitis B (CrCl >=50 mL/min)", "r": "Adult/adolescent (>=12 yr) oral", "d": "10 mg once daily", "t": "Once daily", "n": "Optimal treatment duration not established"},
+    {"c": "Renal impairment CrCl 30-49 mL/min", "r": "Adult oral", "d": "10 mg every 48 hours", "t": "Every 48 hours", "n": "CrCl by Cockcroft-Gault using lean/ideal body weight"},
+    {"c": "Renal impairment CrCl 10-29 mL/min", "r": "Adult oral", "d": "10 mg every 72 hours", "t": "Every 72 hours", "n": "Monitor renal function closely"},
+    {"c": "Hemodialysis patients", "r": "Adult oral", "d": "10 mg every 7 days following dialysis", "t": "Weekly (post-dialysis)", "n": "Give after the dialysis session"}
+  ],
+  "admin": [
+    "Take one 10 mg tablet once daily, with or without food",
+    "Test for HIV antibody before starting - do not use unrecognized HIV infection as monotherapy (risk of HIV resistance)",
+    "Assess renal function (serum creatinine, calculated CrCl) before and during treatment and extend the dosing interval per renal function",
+    "Do not discontinue without close clinical and laboratory monitoring of hepatic function for several months because of the risk of severe hepatitis flare",
+    "Avoid co-administration with nephrotoxic drugs where possible"
+  ],
+  "moa": "Adefovir dipivoxil is a diester prodrug that is rapidly converted to adefovir, an acyclic phosphonate (nucleotide) analog of adenosine monophosphate. Cellular kinases phosphorylate adefovir to its active diphosphate, which competes with the natural substrate deoxyadenosine triphosphate for incorporation by hepatitis B virus DNA polymerase (reverse transcriptase). Once incorporated into the viral DNA chain, the absence of a 3'-hydroxyl group causes chain termination, inhibiting HBV replication. Because it already carries a phosphonate group, the rate-limiting first phosphorylation step required of nucleoside analogs is bypassed, contributing to activity against lamivudine-resistant HBV.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to adefovir dipivoxil or any component"
+    ],
+    "relative": [
+      "Pre-existing or risk of renal impairment (nephrotoxicity)",
+      "Unrecognized or untreated HIV infection (risk of HIV resistance with monotherapy)",
+      "Concomitant nephrotoxic agents",
+      "Decompensated liver disease (higher risk of lactic acidosis/renal events)"
+    ],
+    "monitor": [
+      "Serum creatinine and calculated creatinine clearance",
+      "Serum phosphate (proximal tubulopathy/Fanconi)",
+      "Hepatic function, especially on discontinuation",
+      "HBV DNA and ALT for response",
+      "HIV antibody status before initiating therapy"
+    ]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women. Adefovir should be used during pregnancy only if clearly needed and the potential benefit justifies the potential risk to the fetus. An antiretroviral pregnancy registry should be considered for exposed pregnancies.",
+  "lact": "It is not known whether adefovir is excreted in human milk. Because of the potential for serious adverse reactions and the boxed-warning risks, breastfeeding is not recommended during adefovir therapy.",
+  "renal": "Adefovir is eliminated renally and is nephrotoxic, particularly in patients with pre-existing renal impairment or those taking nephrotoxic drugs. Adjust the dosing interval based on creatinine clearance: 10 mg every 24 hours for CrCl >=50, every 48 hours for CrCl 30-49, every 72 hours for CrCl 10-29, and every 7 days post-dialysis for hemodialysis patients. Monitor serum creatinine and phosphate during treatment.",
+  "hepatic": "No dosage adjustment is required for hepatic impairment. However, severe acute exacerbations of hepatitis B can occur on discontinuation, so hepatic function must be monitored closely (clinical and laboratory) for at least several months after stopping; lactic acidosis with hepatomegaly and steatosis may also occur.",
+  "interactions": {
+    "major": [
+      "Nephrotoxic drugs (e.g., aminoglycosides, amphotericin B, cyclosporine, tacrolimus, vancomycin, NSAIDs) - additive renal toxicity",
+      "Drugs that reduce renal function or compete for active tubular secretion (e.g., tenofovir-containing regimens) - increased adefovir or co-drug concentrations"
+    ],
+    "moderate": [
+      "Ibuprofen - increases adefovir bioavailability",
+      "Other antiretrovirals - if HIV co-infection, use a fully suppressive regimen to avoid HIV resistance"
+    ],
+    "minor": ["No clinically significant CYP450-mediated interactions (adefovir is not a CYP substrate/inhibitor)"],
+    "food": "Food does not meaningfully affect absorption; may be taken with or without food.",
+    "alcohol": "Avoid alcohol - it adds to the risk of hepatic injury and lactic acidosis in patients with chronic liver disease.",
+    "diagnostics": "Monitor HBV DNA and ALT for treatment response; watch serum creatinine and phosphate for renal tubular toxicity."
+  },
+  "se": {
+    "common": ["Asthenia", "Headache", "Abdominal pain", "Nausea", "Flatulence", "Diarrhea", "Dyspepsia", "Increased serum creatinine"],
+    "serious": ["Nephrotoxicity (rising creatinine, hypophosphatemia, Fanconi syndrome)", "Severe acute exacerbation of hepatitis on discontinuation", "Lactic acidosis with severe hepatomegaly and steatosis", "HIV resistance if used in unrecognized HIV infection"],
+    "rare": ["Proximal renal tubulopathy", "Hypophosphatemic osteomalacia (with prolonged use)", "Pancreatitis"],
+    "emergency": ["Severe hepatitis flare with jaundice/coagulopathy after stopping", "Lactic acidosis (rapid breathing, severe weakness, abdominal pain)", "Acute kidney injury"]
+  },
+  "monitoring": ["Renal function (serum creatinine, calculated CrCl) before and during treatment, more frequently in at-risk patients", "Serum phosphate for proximal tubular dysfunction", "Hepatic function (ALT/AST, bilirubin), especially for at least several months after discontinuation", "HBV DNA and ALT to assess virologic/biochemical response", "HIV antibody status before initiating therapy"],
+  "counsel": [
+    "Take one tablet once a day, with or without food, at the same time each day",
+    "Do not stop this medicine on your own - stopping suddenly can cause a serious worsening (flare) of your hepatitis",
+    "You will need regular blood tests to check your kidneys and liver",
+    "Get tested for HIV before starting - using this drug alone with hidden HIV can make HIV harder to treat",
+    "Seek urgent care for severe tiredness, fast breathing, muscle pain, or stomach pain (possible lactic acidosis)",
+    "Avoid alcohol and tell your doctor about all other medicines, especially those affecting the kidneys"
+  ],
+  "pk": [
+    ["Onset", "HBV DNA suppression over days to weeks"],
+    ["Peak", "Plasma Tmax ~0.6-4 hours after oral dosing"],
+    ["Half-life", "Terminal elimination half-life ~7.5 hours"],
+    ["Duration", "Once-daily dosing maintains suppression"],
+    ["Storage", "Store at 25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: severe acute hepatitis flares on stopping, nephrotoxicity, HIV resistance if HIV unrecognized, and lactic acidosis/hepatomegaly with steatosis",
+    "Always test for HIV before use - monotherapy in unrecognized HIV co-infection selects HIV resistance",
+    "Renally cleared and nephrotoxic - extend the dosing interval by creatinine clearance and monitor creatinine and phosphate",
+    "Do not discontinue abruptly without monitoring hepatic function for several months",
+    "Largely superseded by tenofovir and entecavir (higher potency, higher genetic barrier) in current HBV guidelines",
+    "Active against lamivudine-resistant HBV but has a relatively low resistance barrier of its own"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember on the same day. If it is nearly time for the next scheduled dose, skip the missed dose - do not take two doses at once. Never stop the medicine without speaking to your doctor because of the risk of a hepatitis flare.",
+  "overdose": "Doses well above the therapeutic 10 mg have been associated with gastrointestinal adverse effects. There is no specific antidote; manage with supportive care and monitor for toxicity. Adefovir can be removed by hemodialysis (median extraction ~35% over 4 hours), which may assist in significant overdose.",
+  "refs": [
+    ["FDA Label - Adefovir Dipivoxil (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22adefovir%20dipivoxil%22"],
+    ["DailyMed - Adefovir Dipivoxil", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=adefovir"]
+  ]
+}

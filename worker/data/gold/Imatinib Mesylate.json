@@ -1,0 +1,128 @@
+{
+  "generic": "Imatinib Mesylate",
+  "cls": "Tyrosine kinase inhibitor (BCR-ABL)",
+  "pharm": "Protein-tyrosine kinase inhibitor that blocks the constitutively active BCR-ABL kinase of the Philadelphia chromosome, as well as c-Kit, PDGFR, and SCF receptor kinases, inhibiting proliferation and inducing apoptosis in malignant cells.",
+  "tags": ["TKI", "BCR-ABL inhibitor", "CML", "GIST", "Ph+ ALL", "CYP3A4", "Oral"],
+  "quick": [
+    ["Adult dose", "400 mg/day (chronic CML/GIST); 600 mg/day (advanced CML, Ph+ ALL); 800 mg/day (DFSP)"],
+    ["Meal", "Take with a meal and a large glass of water"],
+    ["Pregnancy", "Can cause fetal harm; avoid pregnancy; use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 1 month after last dose"],
+    ["Renal", "Mild/moderate impairment increases exposure 1.5-2x; use caution"],
+    ["Hepatic", "Severe impairment: 300 mg/day; mild/moderate 400 mg/day"],
+    ["Alcohol", "Caution - hepatotoxicity risk; avoid grapefruit juice"],
+    ["Monitoring", "CBC, LFTs, weight/edema, LVEF if cardiac risk, TSH, renal function"]
+  ],
+  "summary": "Imatinib mesylate is an oral BCR-ABL tyrosine kinase inhibitor indicated for Philadelphia chromosome-positive CML and ALL, GIST (treatment and adjuvant), and several rarer PDGFR/c-Kit-driven malignancies. It has no formal boxed warning but a rich set of warnings: fluid retention/edema, cytopenias, severe hepatotoxicity, hemorrhage and GI perforation, congestive heart failure/LV dysfunction, hypereosinophilic cardiac toxicity, tumor lysis syndrome, growth retardation in children, and embryo-fetal toxicity. It is a CYP3A4 substrate and inhibitor, requiring attention to drug interactions and dose modification in hepatic impairment.",
+  "indications": [
+    "Newly diagnosed adult and pediatric patients with Ph+ chronic myeloid leukemia (CML) in chronic phase",
+    "Ph+ CML in blast crisis, accelerated phase, or chronic phase after failure of interferon-alpha therapy",
+    "Adult patients with relapsed or refractory Ph+ acute lymphoblastic leukemia (ALL)",
+    "Pediatric patients with newly diagnosed Ph+ ALL in combination with chemotherapy",
+    "Adult patients with MDS/MPD associated with PDGFR gene re-arrangements",
+    "Adult patients with aggressive systemic mastocytosis (ASM) without the D816V c-Kit mutation or with unknown mutation status",
+    "Adult patients with hypereosinophilic syndrome (HES) and/or chronic eosinophilic leukemia (CEL)",
+    "Adult patients with unresectable, recurrent, and/or metastatic dermatofibrosarcoma protuberans (DFSP)",
+    "Patients with Kit (CD117)-positive unresectable and/or metastatic malignant GIST",
+    "Adjuvant treatment of adult patients following resection of Kit (CD117)-positive GIST"
+  ],
+  "dosage": [
+    {"c": "Ph+ CML chronic phase (adult)", "r": "Adult", "d": "400 mg once daily", "t": "With a meal and a large glass of water", "n": "May increase to 600 mg/day for inadequate response or progression"},
+    {"c": "Ph+ CML accelerated phase or blast crisis (adult)", "r": "Adult", "d": "600 mg once daily", "t": "With a meal", "n": "May increase to 800 mg/day (400 mg twice daily) absent severe toxicity"},
+    {"c": "Ph+ CML chronic phase (pediatric)", "r": "Pediatric", "d": "340 mg/m2/day (max 600 mg)", "t": "Once daily or split AM/PM", "n": "No experience under 1 year of age"},
+    {"c": "Relapsed/refractory Ph+ ALL (adult)", "r": "Adult", "d": "600 mg once daily", "t": "With a meal", "n": ""},
+    {"c": "Newly diagnosed Ph+ ALL (pediatric)", "r": "Pediatric", "d": "340 mg/m2/day (max 600 mg)", "t": "Once daily, with chemotherapy", "n": ""},
+    {"c": "MDS/MPD (adult)", "r": "Adult", "d": "400 mg once daily", "t": "With a meal", "n": "Confirm PDGFR gene rearrangement first"},
+    {"c": "ASM / HES / CEL (adult)", "r": "Adult", "d": "400 mg/day; 100 mg/day if FIP1L1-PDGFRalpha positive", "t": "With a meal", "n": "Avoid if D816V c-Kit mutation present; titrate to 400 mg as needed"},
+    {"c": "DFSP (adult)", "r": "Adult", "d": "800 mg/day (400 mg twice daily)", "t": "With a meal", "n": "Use 400 mg tablets to reduce iron exposure"},
+    {"c": "Metastatic/unresectable GIST (adult)", "r": "Adult", "d": "400 mg/day; may increase to 800 mg/day", "t": "With a meal", "n": "Increase only if clear progression and no severe toxicity"},
+    {"c": "Adjuvant GIST (adult)", "r": "Adult", "d": "400 mg/day", "t": "With a meal", "n": "Three years of treatment recommended in defined population"},
+    {"c": "Severe hepatic impairment", "r": "Adult", "d": "300 mg/day", "t": "With a meal", "n": "Mild/moderate impairment: 400 mg/day"}
+  ],
+  "admin": [
+    "Take orally with a meal and a large glass of water to minimize GI irritation",
+    "Doses of 400 mg or 600 mg once daily; 800 mg/day given as 400 mg twice daily",
+    "For 800 mg/day and above, use 400 mg tablets to reduce iron exposure",
+    "For patients unable to swallow, disperse tablets in water or apple juice (~50 mL per 100 mg tablet, ~200 mL per 400 mg tablet) and take immediately after disintegration",
+    "Do not crush; avoid skin/mucous membrane contact with crushed tablets and wash thoroughly if contact occurs",
+    "Continue treatment as long as there is no disease progression or unacceptable toxicity"
+  ],
+  "moa": "Imatinib mesylate is a protein-tyrosine kinase inhibitor that potently inhibits the BCR-ABL tyrosine kinase, the constitutively active abnormal kinase created by the Philadelphia chromosome in CML. By blocking BCR-ABL it inhibits proliferation and induces apoptosis in Ph+ leukemic cells. Imatinib also inhibits the receptor tyrosine kinases for platelet-derived growth factor (PDGFR) and stem cell factor (c-Kit/SCF), inhibiting PDGF- and SCF-mediated cellular events; in GIST it induces apoptosis in cells expressing an activating c-Kit mutation.",
+  "contra": {
+    "absolute": [
+      "None per labeling (no formal contraindications)"
+    ],
+    "relative": [
+      "Known significant hypersensitivity to imatinib",
+      "Pre-existing cardiac disease or risk factors for cardiac failure",
+      "Significant hepatic impairment (reduce dose)",
+      "Conditions with high eosinophil levels (HES/MDS-MPD/ASM) - risk of cardiogenic shock at initiation",
+      "Pregnancy (embryo-fetal toxicity)"
+    ],
+    "monitor": [
+      "Complete blood counts (weekly x1 month, biweekly x2nd month, then periodically)",
+      "Liver function before initiation and monthly or as clinically indicated",
+      "Body weight and signs of fluid retention/edema",
+      "LVEF in patients with cardiac disease or risk factors; echocardiogram and troponin in HES/MDS-MPD/ASM at initiation",
+      "TSH in thyroidectomy patients on levothyroxine; renal function; growth in children"
+    ]
+  },
+  "preg": "Imatinib can cause fetal harm based on human and animal data, with postmarketing reports of spontaneous abortion and congenital anomalies. Rat studies showed teratogenicity and increased congenital abnormalities at doses near the highest human dose (800 mg/day) on a BSA basis. Advise women to avoid pregnancy while taking imatinib and to use effective contraception; if used in pregnancy or pregnancy occurs, apprise the patient of the potential hazard to the fetus.",
+  "lact": "Imatinib and its active metabolite are excreted into human milk (milk:plasma ratio ~0.5 for imatinib, ~0.9 for the active metabolite; a breastfed infant could receive up to ~10% of the maternal therapeutic dose). Because of the potential for serious adverse reactions in a breastfed infant, advise women not to breastfeed during treatment and for 1 month after the last dose.",
+  "renal": "Mild and moderate renal impairment increase dose-normalized imatinib exposure approximately 1.5- to 2-fold; use caution and monitor. A decline in renal function may occur during therapy; evaluate renal function at baseline and during treatment, with attention to risk factors for renal dysfunction.",
+  "hepatic": "Mild and moderate hepatic impairment do not meaningfully change exposure to imatinib or its metabolite. Severe hepatic impairment increases imatinib Cmax and AUC; reduce the dose to 300 mg/day. Severe hepatotoxicity, including fatalities, can occur; assess liver function before initiation and monthly or as clinically indicated, and monitor closely when combined with hepatotoxic chemotherapy (e.g., high-dose acetaminophen).",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inducers (rifampin, phenytoin, carbamazepine, St. John's wort) - reduce imatinib exposure; consider alternatives",
+      "Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir) - significantly increase imatinib exposure",
+      "Warfarin - use low-molecular-weight or standard heparin instead (CYP2C9/3A4 metabolism affected)",
+      "High-dose methotrexate (>500 mg/m2) - imatinib delays methotrexate clearance"
+    ],
+    "moderate": [
+      "CYP3A4 substrates with narrow therapeutic windows (triazolobenzodiazepines, dihydropyridine CCBs, certain statins) - increased levels",
+      "CYP2D6 substrates with narrow therapeutic windows - increased levels",
+      "Acetaminophen/other hepatotoxins - additive liver injury risk"
+    ],
+    "minor": [],
+    "food": "Take with a meal and a large glass of water; avoid grapefruit juice (increases plasma imatinib).",
+    "alcohol": "Use caution due to additive hepatotoxicity risk.",
+    "diagnostics": "Monitor TSH (hypothyroidism in thyroidectomy patients on levothyroxine); monitor CBC, LFTs, and renal function."
+  },
+  "se": {
+    "common": ["Edema/fluid retention", "Nausea", "Vomiting", "Muscle cramps", "Musculoskeletal pain", "Diarrhea", "Rash", "Fatigue", "Abdominal pain"],
+    "serious": ["Severe fluid retention (pleural effusion, ascites, pulmonary/cerebral edema)", "Cytopenias (neutropenia, thrombocytopenia, anemia)", "Severe hepatotoxicity (including fatalities)", "Congestive heart failure / left ventricular dysfunction", "Grade 3/4 hemorrhage (including GI bleed)", "GI perforation", "Tumor lysis syndrome", "Bullous skin reactions (Stevens-Johnson, erythema multiforme)"],
+    "rare": ["Cardiogenic shock/LV dysfunction at initiation in hypereosinophilic conditions", "Hypothyroidism (thyroidectomy patients)", "Growth retardation in children/adolescents", "Renal function decline"],
+    "emergency": ["Severe hemorrhage / GI bleed", "GI perforation", "Acute heart failure / cardiogenic shock", "Severe hepatotoxicity", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Tumor lysis syndrome"]
+  },
+  "monitoring": ["Complete blood counts weekly for the first month, biweekly for the second month, then periodically", "Liver function tests before initiation and monthly or as clinically indicated", "Body weight regularly; investigate unexpected rapid weight gain (fluid retention)", "LVEF in patients with cardiac disease or risk factors; cardiac assessment (echo, troponin) at initiation in HES/MDS-MPD/ASM", "TSH in thyroidectomy patients on levothyroxine", "Renal function at baseline and during therapy", "Growth in children and pre-adolescents"],
+  "counsel": [
+    "Always take with food and a large glass of water",
+    "Report sudden weight gain, swelling, or shortness of breath (fluid retention/heart failure)",
+    "Report fever, bruising, bleeding, black or bloody stools, or severe abdominal pain promptly",
+    "Report yellowing of skin/eyes, dark urine, or severe blistering rash",
+    "Avoid grapefruit juice; tell your clinician about all medicines, including warfarin and acetaminophen",
+    "Use effective contraception and do not breastfeed; this drug can harm an unborn or breastfed child",
+    "Caution with driving or operating machinery; report any growth concerns in children"
+  ],
+  "pk": [
+    ["Onset", "Cmax within 2-4 hours; oral bioavailability ~98%"],
+    ["Peak", "2-4 hours post-dose"],
+    ["Half-life", "~18 hours (imatinib); ~40 hours (active metabolite CGP74588)"],
+    ["Duration", "Supports once-daily dosing; 1.5-2.5x accumulation at steady state"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture; dispense in a tight container"]
+  ],
+  "pearls": [
+    "No formal boxed warning, but rich warnings: edema/fluid retention, cytopenias, hepatotoxicity, hemorrhage/GI perforation, CHF/LV dysfunction, and embryo-fetal toxicity",
+    "Always administer with food and a large glass of water to reduce GI irritation",
+    "Use heparin, not warfarin, for anticoagulation due to CYP interaction",
+    "Avoid grapefruit juice and strong CYP3A4 inhibitors/inducers",
+    "Confirm relevant molecular markers (PDGFR rearrangement, D816V c-Kit, FIP1L1-PDGFRalpha) before treating rarer indications",
+    "Cardiogenic shock/LV dysfunction can occur at initiation in hypereosinophilic conditions - obtain baseline cardiac assessment"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered with food, unless it is near the time of the next dose, in which case skip the missed dose. Do not take two doses to make up for a missed one.",
+  "overdose": "Experience with doses above 800 mg is limited and there is no specific antidote. Reported effects scale with dose: 1,200-1,600 mg - nausea, vomiting, diarrhea, rash, edema, fatigue, muscle spasms, cytopenias, abdominal pain, headache; 1,800-3,200 mg - weakness, myalgia, increased CPK and bilirubin, GI pain; very high single doses (6,400 mg to 8-10 g) - vomiting, GI pain, neutropenia, transaminase elevation, facial swelling. Observe the patient and provide supportive care.",
+  "refs": [
+    ["FDA Prescribing Information - Imatinib Mesylate (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22imatinib+mesylate%22"],
+    ["DailyMed - Imatinib Mesylate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=imatinib+mesylate"]
+  ]
+}

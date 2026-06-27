@@ -1,0 +1,101 @@
+{
+  "generic": "Albendazole",
+  "cls": "Benzimidazole anthelmintic",
+  "pharm": "Active metabolite albendazole sulfoxide binds parasite beta-tubulin, inhibiting microtubule polymerization and impairing glucose uptake, depleting parasite glycogen.",
+  "tags": ["Anthelmintic", "Benzimidazole", "Oral", "Take with food"],
+  "quick": [
+    ["Adult dose", ">=60 kg: 400 mg twice daily; <60 kg: 15 mg/kg/day divided BID (max 800 mg/day)"],
+    ["Meal", "Take with food (fatty meal increases absorption)"],
+    ["Pregnancy", "Avoid; embryotoxic/teratogenic in animals; pregnancy test first"],
+    ["Lactation", "Limited data; weigh benefit"],
+    ["Renal", "No specific adjustment (limited data)"],
+    ["Hepatic", "Use caution; monitor LFTs"],
+    ["Alcohol", "Avoid (hepatic risk)"],
+    ["Monitoring", "CBC and LFTs every 2 weeks during therapy"]
+  ],
+  "summary": "Albendazole is a benzimidazole anthelmintic indicated for parenchymal neurocysticercosis (Taenia solium larvae) and cystic hydatid disease (Echinococcus granulosus). Treatment requires monitoring of blood counts and liver enzymes, and a pregnancy test before use in women of reproductive potential.",
+  "indications": [
+    "Parenchymal neurocysticercosis due to active lesions caused by larval Taenia solium (pork tapeworm)",
+    "Cystic hydatid disease of the liver, lung, and peritoneum caused by larval Echinococcus granulosus (dog tapeworm)"
+  ],
+  "dosage": [
+    {"c": "Hydatid disease", "r": ">=60 kg", "d": "400 mg twice daily with meals", "t": "28-day cycle, then 14-day drug-free interval, total 3 cycles", "n": "Take with food"},
+    {"c": "Hydatid disease", "r": "<60 kg", "d": "15 mg/kg/day in divided doses twice daily with meals (max 800 mg/day)", "t": "28-day cycle, then 14-day interval, total 3 cycles", "n": "Take with food"},
+    {"c": "Neurocysticercosis", "r": ">=60 kg", "d": "400 mg twice daily with meals", "t": "8 to 30 days", "n": "Give steroids and anticonvulsants as needed"},
+    {"c": "Neurocysticercosis", "r": "<60 kg", "d": "15 mg/kg/day in divided doses twice daily with meals (max 800 mg/day)", "t": "8 to 30 days", "n": "Give steroids and anticonvulsants as needed"}
+  ],
+  "admin": [
+    "Take with food (a fatty meal markedly increases absorption)",
+    "Tablets may be crushed or chewed and swallowed with water",
+    "Obtain a pregnancy test before prescribing to women of reproductive potential",
+    "For neurocysticercosis, give appropriate corticosteroid and anticonvulsant therapy",
+    "Consider oral/intra-cranial steroids to reduce inflammatory response in the first week"
+  ],
+  "moa": "Albendazole is converted to its active metabolite albendazole sulfoxide, which binds to parasite beta-tubulin and inhibits microtubule polymerization. This impairs the parasite's glucose uptake, depletes glycogen stores, and decreases ATP, leading to immobilization and death of susceptible helminths and larvae.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to benzimidazole compounds or any component of albendazole"
+    ],
+    "relative": [
+      "Pregnancy",
+      "Pre-existing hepatic impairment",
+      "Pre-existing bone marrow suppression"
+    ],
+    "monitor": [
+      "Complete blood count",
+      "Liver function tests",
+      "Ophthalmic exam before retinal lesion treatment"
+    ]
+  },
+  "preg": "Avoid in pregnancy. Albendazole caused embryotoxicity and skeletal malformations in pregnant rats and rabbits at fractions of the human dose. Obtain a pregnancy test before therapy and advise effective contraception during and for 1 month after therapy.",
+  "lact": "Limited human data; albendazole sulfoxide is excreted in low concentrations in animal milk. Weigh developmental/health benefits of breastfeeding against maternal need.",
+  "renal": "No specific dosage adjustment provided; experience in renal impairment is limited. Use with caution.",
+  "hepatic": "Use with caution; hepatotoxicity and elevated liver enzymes can occur. Monitor LFTs before and during each cycle; discontinue if enzymes rise significantly.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Dexamethasone (increases albendazole sulfoxide plasma levels ~56%)",
+      "Praziquantel (increases albendazole sulfoxide levels)",
+      "Cimetidine (increases albendazole sulfoxide levels)",
+      "CYP enzyme inducers may lower active metabolite levels"
+    ],
+    "minor": [],
+    "food": "Take with food; a fatty meal increases oral bioavailability up to ~5-fold.",
+    "alcohol": "Avoid due to additive hepatotoxicity risk.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Abnormal liver function tests", "Abdominal pain", "Nausea/vomiting", "Headache", "Dizziness", "Reversible alopecia"],
+    "serious": ["Bone marrow suppression (pancytopenia, agranulocytosis, aplastic anemia)", "Hepatotoxicity", "Raised intracranial pressure / seizures (neurocysticercosis)"],
+    "rare": ["Stevens-Johnson syndrome", "Acute renal failure", "Hypersensitivity reactions"],
+    "emergency": ["Severe bone marrow suppression (fever, bleeding)", "Signs of raised intracranial pressure", "Severe skin reaction"]
+  },
+  "monitoring": ["CBC at start and every 2 weeks during each 28-day cycle", "Liver enzymes before each cycle and every 2 weeks", "Signs of raised intracranial pressure in neurocysticercosis", "Pregnancy test before treatment"],
+  "counsel": [
+    "Take with food, especially a fatty meal",
+    "Tablets may be crushed or chewed",
+    "Use effective contraception during and 1 month after therapy",
+    "Report fever, sore throat, unusual bleeding/bruising, or jaundice",
+    "Attend scheduled blood and liver tests",
+    "Report severe headache, vomiting, or seizures"
+  ],
+  "pk": [
+    ["Onset", "Anthelmintic effect over days"],
+    ["Peak", "Albendazole sulfoxide ~2-5 hours (with food)"],
+    ["Half-life", "Albendazole sulfoxide ~8-12 hours"],
+    ["Duration", "Cyclical dosing for hydatid disease"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Poorly absorbed alone; a fatty meal increases absorption up to ~5-fold",
+    "Active moiety is albendazole sulfoxide, not parent drug",
+    "Monitor CBC and LFTs every 2 weeks; risk of marrow suppression and hepatotoxicity",
+    "For neurocysticercosis, co-administer steroids/anticonvulsants to control inflammation and seizures"
+  ],
+  "missed": "Take the missed dose with food as soon as remembered; if near the next dose, skip it. Do not double up.",
+  "overdose": "No specific antidote. Provide symptomatic and supportive care; consider gastric decontamination if recent. Monitor blood counts and liver function.",
+  "refs": [
+    ["FDA Prescribing Information - Albendazole tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22albendazole%22"],
+    ["DailyMed - Albendazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=albendazole"]
+  ]
+}

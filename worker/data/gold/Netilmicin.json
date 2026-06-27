@@ -1,0 +1,92 @@
+{
+  "generic": "Netilmicin sulfate",
+  "cls": "Aminoglycoside antibiotic",
+  "pharm": "Semisynthetic aminoglycoside; binds the 30S ribosomal subunit to inhibit bacterial protein synthesis (bactericidal)",
+  "tags": ["Gram-negative infection", "Aminoglycoside", "Parenteral antibiotic", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "4-6.5 mg/kg/day IV/IM, in 1-3 divided doses, by indication and severity"],
+    ["Meal", "Not applicable; parenteral only"],
+    ["Pregnancy", "Avoid; aminoglycosides risk fetal ototoxicity"],
+    ["Lactation", "Small amounts in milk; poorly absorbed orally by infant; use with caution"],
+    ["Renal", "Reduce dose/extend interval; nephrotoxic, adjust to renal function and levels"],
+    ["Hepatic", "No specific adjustment; minimal hepatic handling"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Serum levels (peak/trough), renal function, audiometry, vestibular function"]
+  ],
+  "summary": "Netilmicin is a semisynthetic aminoglycoside antibiotic active against many aerobic Gram-negative bacilli, including some gentamicin-resistant strains, and used parenterally for serious infections. Like other aminoglycosides it is bactericidal and carries dose-related risks of nephrotoxicity and ototoxicity, requiring therapeutic drug monitoring. It is not FDA-approved; dosing reflects EMA/SmPC and BNF sources.",
+  "indications": [
+    "Treatment of serious infections caused by susceptible Gram-negative bacteria (e.g., septicemia, complicated urinary tract infections, lower respiratory tract, intra-abdominal, skin and soft tissue, and bone infections)",
+    "Often used in combination with a beta-lactam for serious or polymicrobial infection and for suspected Gram-negative sepsis"
+  ],
+  "dosage": [
+    {"c": "Serious systemic infection (adult, normal renal function)", "r": "IV or IM", "d": "4 to 6 mg/kg/day; commonly given as a single daily dose or divided every 8-12 hours", "t": "IV infusion over 30-120 minutes or by IM injection", "n": "Once-daily (extended-interval) dosing is widely used; individualize by levels"},
+    {"c": "Life-threatening infection (adult)", "r": "IV or IM", "d": "Up to 7.5 mg/kg/day in divided doses, reduced as soon as clinically indicated", "t": "IV infusion", "n": "Guide by serum concentration monitoring"},
+    {"c": "Urinary tract infection (adult)", "r": "IV or IM", "d": "Lower end of the range, e.g., 4 mg/kg/day", "t": "IV/IM", "n": "Adjust to renal function"},
+    {"c": "Renal impairment", "r": "IV or IM", "d": "Reduce the dose and/or extend the dosing interval according to creatinine clearance and serum levels", "t": "IV/IM", "n": "Therapeutic drug monitoring is essential"}
+  ],
+  "admin": [
+    "Administer by slow intravenous infusion (over 30 minutes to 2 hours) or by deep intramuscular injection",
+    "Do not mix in the same syringe or infusion with beta-lactam antibiotics (inactivation)",
+    "Ensure adequate hydration to reduce nephrotoxicity",
+    "Measure serum peak and trough concentrations to guide dosing, especially with renal impairment, the elderly, or prolonged therapy",
+    "Assess baseline and periodic renal function, hearing, and vestibular function"
+  ],
+  "moa": "Netilmicin is a bactericidal aminoglycoside that diffuses across the bacterial outer membrane and is actively transported into the cell, where it binds irreversibly to the 30S ribosomal subunit. This causes misreading of messenger RNA and inhibits bacterial protein synthesis, leading to cell death. Its activity is concentration-dependent with a post-antibiotic effect, supporting extended-interval dosing.",
+  "contra": {
+    "absolute": ["Hypersensitivity to netilmicin or other aminoglycosides", "Myasthenia gravis (risk of neuromuscular blockade)"],
+    "relative": ["Pre-existing renal impairment", "Pre-existing auditory or vestibular damage", "Concomitant nephrotoxic or ototoxic drugs", "Dehydration", "Advanced age", "Pregnancy"],
+    "monitor": ["Serum netilmicin concentrations (peak and trough)", "Serum creatinine and creatinine clearance", "Audiometry and vestibular function", "Fluid and electrolyte status"]
+  },
+  "preg": "Aminoglycosides cross the placenta and can cause irreversible bilateral congenital deafness in the fetus. Netilmicin should be avoided in pregnancy unless the benefit clearly outweighs the risk in a serious or life-threatening infection.",
+  "lact": "Netilmicin is excreted in breast milk in small amounts and is poorly absorbed from the infant gastrointestinal tract. Use with caution; monitor the breastfed infant for gastrointestinal disturbance.",
+  "renal": "Netilmicin is eliminated almost entirely by the kidneys and is nephrotoxic. Reduce the dose and/or lengthen the dosing interval in renal impairment based on creatinine clearance, and adjust using serum peak and trough concentrations. Maintain hydration and avoid other nephrotoxins.",
+  "hepatic": "No specific dose adjustment is required for hepatic impairment because netilmicin is not significantly metabolized by the liver.",
+  "interactions": {
+    "major": ["Other nephrotoxic or ototoxic drugs (loop diuretics such as furosemide, amphotericin B, vancomycin, cisplatin, ciclosporin) - additive toxicity", "Neuromuscular blocking agents (potentiation of neuromuscular blockade and respiratory depression)"],
+    "moderate": ["Other aminoglycosides (additive toxicity; avoid)", "Beta-lactams (physical inactivation if mixed; give separately)"],
+    "minor": ["May potentiate the effect of anticoagulants in some patients"],
+    "food": "Not applicable; parenteral administration",
+    "alcohol": "No specific interaction described",
+    "diagnostics": "May increase serum creatinine, BUN, and urinary casts; can cause electrolyte disturbances (low potassium, calcium, magnesium)"
+  },
+  "se": {
+    "common": ["Transient rise in serum creatinine", "Nausea", "Injection site pain", "Rash"],
+    "serious": ["Nephrotoxicity (usually reversible)", "Ototoxicity - cochlear (hearing loss, tinnitus) and vestibular (vertigo, ataxia), which may be irreversible", "Neuromuscular blockade and respiratory paralysis"],
+    "rare": ["Hypersensitivity reactions including anaphylaxis", "Electrolyte disturbances", "Peripheral neuropathy"],
+    "emergency": ["Acute hearing loss, severe vertigo, or balance disturbance - stop and seek urgent evaluation", "Neuromuscular weakness or respiratory difficulty - emergency care", "Anaphylaxis - emergency care"]
+  },
+  "monitoring": [
+    "Serum peak and trough concentrations to keep within the therapeutic range and avoid toxicity",
+    "Serum creatinine and creatinine clearance before and during therapy",
+    "Audiometry and vestibular assessment, especially with prolonged therapy or risk factors",
+    "Fluid balance, electrolytes (potassium, calcium, magnesium), and urine output",
+    "Signs of neuromuscular weakness, particularly in at-risk patients"
+  ],
+  "counsel": [
+    "This antibiotic is given by injection or drip in hospital and your blood levels and kidney function will be checked",
+    "Report any hearing loss, ringing in the ears, dizziness, or balance problems straight away",
+    "Tell staff if you notice reduced urination or swelling",
+    "Report rash, itching, or difficulty breathing",
+    "Drink adequate fluids unless told otherwise"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal effect during the infusion; concentration-dependent killing"],
+    ["Peak", "Peak serum concentration at the end of an IV infusion or about 30-60 minutes after IM"],
+    ["Half-life", "Approximately 2 to 2.5 hours (markedly prolonged in renal impairment)"],
+    ["Duration", "Post-antibiotic effect supports extended-interval (once-daily) dosing"],
+    ["Storage", "Store at controlled room temperature; protect from light per product labeling"]
+  ],
+  "pearls": [
+    "Not FDA-approved; dosing and indications are based on EMA/SmPC and BNF sources",
+    "Semisynthetic aminoglycoside that may retain activity against some gentamicin-resistant Gram-negative bacteria",
+    "Dose-related nephrotoxicity and ototoxicity (cochlear and vestibular) require therapeutic drug monitoring",
+    "Extended-interval (once-daily) dosing exploits concentration-dependent killing and the post-antibiotic effect",
+    "Avoid in myasthenia gravis and do not mix in the same line as beta-lactams"
+  ],
+  "missed": "Doses are administered by a healthcare professional on a fixed schedule with level monitoring. If a dose is delayed, the clinical team will adjust timing; do not attempt to self-administer or make up doses.",
+  "overdose": "Overdose increases the risk of nephrotoxicity, ototoxicity, and neuromuscular blockade. Management is supportive; hemodialysis (and to a lesser extent peritoneal dialysis) can remove netilmicin from the blood, and calcium salts or anticholinesterases may reverse neuromuscular blockade. Contact Poison Control or local toxicology services.",
+  "refs": [
+    ["EMA / Summary of Product Characteristics: Netilmicin (Netillin)", "https://www.medicines.org.uk"],
+    ["British National Formulary - Netilmicin", "https://bnf.nice.org.uk/drugs/netilmicin/"]
+  ]
+}
