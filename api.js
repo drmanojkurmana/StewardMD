@@ -31,7 +31,8 @@
     composition: function (name, sort, tier, limit, offset) {
       return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0));
     },
-    drug: function (id) { return api("/drug/" + encodeURIComponent(id)); }
+    drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
+    monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); }
   };
 
   /* ============================================================
@@ -85,6 +86,7 @@
   var root = null, q2 = "", t2 = null;
   var st = { name: null, sort: "relevance", tier: "all", info: null, brands: [], total: 0, offset: 0, loading: false };
   var TIER_LABEL = { all: "", branded: "top-branded", generic: "top-generic" };
+  var monoCache = {};
 
   function ensureRoot() {
     if (root) return root;
@@ -187,10 +189,8 @@
       : '<div class="db-empty">No ' + (TIER_LABEL[st.tier] ? TIER_LABEL[st.tier] + " " : "") + 'brands listed for this generic.</div>';
     b.innerHTML =
       '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div></div>' +
-      (d.uses ? '<div class="db-sec"><div class="db-sec-h">Uses</div><div class="db-sec-b">' + esc(d.uses) + '</div></div>' : '') +
-      (d.side_effects ? '<div class="db-sec"><div class="db-sec-h">Side effects <span class="db-sec-note">(apply to the molecule — all brands below)</span></div><div class="db-sec-b">' + esc(d.side_effects) + '</div></div>' : '') +
-      (!d.uses && !d.side_effects ? '<div class="db-sec"><div class="db-sec-h">Clinical details</div><div class="db-sec-b db-soon">Indication, dosage, pregnancy, renal/hepatic adjustment, interactions &amp; monitoring — being added from open regulatory sources (openFDA / DailyMed).</div></div>' : '') +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
+      '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>' +
       '<div class="db-filters"><span class="db-filt-l">Show</span>' + tierBtn("all", "All") + tierBtn("branded", "Top branded") + tierBtn("generic", "Top generic") + '</div>' +
       '<div class="db-brands-h"><span>' + (st.total ? st.total.toLocaleString() : st.brands.length) + ' brands</span>' +
         '<span class="db-sorts">' + sortBtn("relevance", "Relevance") + sortBtn("price_asc", "Price ↑") + sortBtn("price_desc", "Price ↓") + '</span></div>' +
@@ -202,7 +202,40 @@
     b.querySelectorAll(".db-tier").forEach(function (x) {
       x.addEventListener("click", function () { var tt = x.getAttribute("data-tier"); if (tt !== st.tier) openComposition(st.name, st.sort, tt); });
     });
+    loadMonograph(d.composition);
     renderMore();
+  }
+
+  var MONO_SECS = [["Indications", "indication"], ["Dosage & administration", "dosage"],
+    ["Renal / hepatic & special populations", "specific_pop"], ["Pregnancy & lactation", "pregnancy"],
+    ["Adverse effects", "adverse"], ["Interactions (incl. alcohol)", "interactions"],
+    ["Warnings & monitoring", "warnings"], ["Forms & strengths", "forms"]];
+  function loadMonograph(name) {
+    var c = root.querySelector("#dbMono"); if (!c) return;
+    if (monoCache[name] !== undefined) { renderMono(c, monoCache[name]); return; }
+    MEDAPI.monograph(name).then(function (resp) {
+      var mono = (resp && resp.found) ? resp.monograph : null;
+      monoCache[name] = mono;
+      if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderMono(cc, mono); }
+    });
+  }
+  function renderMono(c, mono) {
+    if (!mono) { c.innerHTML = '<div class="db-mono-none">No U.S. FDA monograph for this molecule (India-only drug or combination product). Brand &amp; price data below.</div>'; return; }
+    var openDefault = { indication: 1, dosage: 1 };
+    var html = '<div class="db-msrc">℞ Prescribing reference · <b>' + esc(mono.source || "openFDA") + '</b><span>U.S. FDA label — not India-specific; verify against local guidance. Decision support only.</span></div>';
+    MONO_SECS.forEach(function (s) {
+      var v = mono[s[1]]; if (!v) return; var op = openDefault[s[1]];
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(s[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button>' +
+        '<div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+    });
+    c.innerHTML = html;
+    c.querySelectorAll(".db-msec-h").forEach(function (h) {
+      h.addEventListener("click", function () {
+        var b = h.nextElementSibling, hidden = b.style.display === "none";
+        b.style.display = hidden ? "" : "none"; h.classList.toggle("open", hidden);
+        h.querySelector(".db-msec-x").textContent = hidden ? "−" : "+";
+      });
+    });
   }
   function appendBrands(arr) {
     var c = root.querySelector("#dbBrands"); if (!c) return;
@@ -257,6 +290,15 @@
       ".db-sec-note{text-transform:none;letter-spacing:0;font-weight:500;color:var(--slate-soft,#888)}",
       ".db-sec-b{font:500 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.6}",
       ".db-soon{color:var(--slate-soft,#888);font-style:italic}",
+      ".db-mono{margin:10px 0 4px}",
+      ".db-msrc{font:600 11px var(--sans,system-ui);color:var(--slate,#555);background:var(--teal-soft,#e0f2f1);border:1px solid var(--teal,#0a9396);border-radius:9px;padding:8px 11px;margin-bottom:8px;line-height:1.5}",
+      ".db-msrc span{display:block;font-weight:500;color:var(--slate-soft,#888);margin-top:2px}",
+      ".db-msec{border:1px solid var(--line,#e5e5e0);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--panel,#fff)}",
+      ".db-msec-h{width:100%;text-align:left;background:transparent;border:none;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;font:700 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);cursor:pointer}",
+      ".db-msec-h.open{border-bottom:1px solid var(--line,#e5e5e0)}",
+      ".db-msec-x{color:var(--teal,#0a9396);font-weight:800;font-size:15px;flex:0 0 auto}",
+      ".db-msec-b{padding:10px 12px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.6;white-space:pre-line}",
+      ".db-mono-none{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--paper,#f7f7f5);border:1px dashed var(--line,#e5e5e0);border-radius:9px;padding:10px 12px}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
       ".db-brands-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 2px 9px;font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-sorts{display:flex;gap:6px}",

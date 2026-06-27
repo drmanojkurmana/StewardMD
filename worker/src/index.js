@@ -173,6 +173,20 @@ async function handleComposition(url, env) {
   }
 }
 
+// /monograph -> open-data clinical monograph (openFDA/DailyMed) for a generic
+async function handleMonograph(url, env) {
+  const name = (url.searchParams.get("name") || "").trim();
+  if (!name) return json({ error: "missing name" }, { status: 400 });
+  try {
+    const m = await env.DB.prepare(`SELECT * FROM monographs WHERE composition = ?1`).bind(name).first();
+    if (!m) return json({ composition: name, found: false }, { ttl: TTL.comp });
+    return json({ composition: name, found: true, monograph: m }, { ttl: 86400 });
+  } catch (err) {
+    if (tableMissing(err)) return json({ composition: name, found: false, note: "monographs not loaded" }, { extra: { "x-db-status": "empty" } });
+    return json({ error: "monograph_failed" }, { status: 500 });
+  }
+}
+
 async function handleDrug(id, env) {
   const n = parseInt(id, 10);
   if (!Number.isFinite(n)) return json({ error: "bad_id" }, { status: 400 });
@@ -214,7 +228,7 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, "") || "/";
-    const cacheable = path === "/search" || path === "/suggest" || path === "/composition" || path.startsWith("/drug/");
+    const cacheable = path === "/search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path.startsWith("/drug/");
 
     const cache = caches.default;
     let cacheKey = request;
@@ -229,6 +243,7 @@ export default {
     else if (path === "/search") res = await handleSearch(url, env);
     else if (path === "/suggest") res = await handleSuggest(url, env);
     else if (path === "/composition") res = await handleComposition(url, env);
+    else if (path === "/monograph") res = await handleMonograph(url, env);
     else if (path.startsWith("/drug/")) res = await handleDrug(decodeURIComponent(path.slice("/drug/".length)), env);
     else res = json({ error: "not_found" }, { status: 404 });
 
