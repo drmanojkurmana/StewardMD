@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>StewardMD — Display & Accessibility (preview)</title>
+<style>
+:root{
+  --ink:#14202b;--slate:#2d4356;--slate-soft:#5a7184;--line:#d7dee3;--paper:#f6f7f5;--panel:#fff;
+  --teal:#0e6e63;--teal-soft:#e3f1ee;--amber:#92620a;--red:#ab1c2c;--red-bg:#fbe7e9;--red-line:#efa9b1;--green:#1c7a4a;
+  --sans:'IBM Plex Sans',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;
+  /* density multiplier (independent of font) */
+  --ds:1;
+}
+body.dark{--ink:#e8edf2;--slate:#9bb0c2;--slate-soft:#6b8499;--line:#2a3d4f;--paper:#0d1b26;--panel:#132030;--teal:#3fc7b3;--teal-soft:#0d2e2a;--red:#e85070;--red-bg:#200510;--red-line:#3a0a1a}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);-webkit-text-size-adjust:100%}
+img{max-width:100%}
+/* ===== top bar (never scaled, stable) ===== */
+.bar{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:10px;padding:calc(11px + env(safe-area-inset-top)) 14px 11px;background:var(--panel);border-bottom:1px solid var(--line)}
+.logo{font:800 17px var(--sans);color:var(--teal)}
+.bar .sp{flex:1}
+.dispbtn{display:inline-flex;align-items:center;gap:7px;background:var(--teal);color:#fff;border:none;border-radius:11px;height:38px;padding:0 14px;font:700 13px var(--sans);cursor:pointer;animation:glow 1.9s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(14,110,99,.5)}50%{box-shadow:0 0 0 7px rgba(14,110,99,0)}}
+@media(prefers-reduced-motion:reduce){.dispbtn{animation:none;box-shadow:0 0 0 3px rgba(14,110,99,.3)}}
+/* ===== app content — gets zoom (font scale). spacing uses var(--ds) for density ===== */
+.app{max-width:880px;margin:0 auto;padding:calc(14px*var(--ds));transition:padding .18s ease}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:calc(13px*var(--ds)) calc(15px*var(--ds));margin-bottom:calc(11px*var(--ds));transition:padding .18s ease,margin .18s ease}
+.badge{display:inline-block;background:var(--red-bg);color:var(--red);border:1px solid var(--red-line);border-radius:8px;padding:3px 9px;font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.dtitle{font:800 22px var(--sans);line-height:1.2}
+.dgen{font:600 13px var(--sans);color:var(--slate-soft);margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.chip{font:700 10.5px var(--sans);background:var(--teal-soft);color:var(--teal);border-radius:7px;padding:3px 9px;text-transform:capitalize}
+.lbl{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin:calc(11px*var(--ds)) 0 5px}
+.dose{font:500 14px var(--sans);line-height:1.6;color:var(--ink)}
+.qf{display:grid;grid-template-columns:repeat(2,1fr);gap:calc(7px*var(--ds));margin-top:9px}
+@media(min-width:520px){.qf{grid-template-columns:repeat(4,1fr)}}
+.qf>div{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:calc(7px*var(--ds)) calc(9px*var(--ds))}
+.qk{font:700 9px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft)}
+.qv{font:800 12.5px var(--sans);margin-top:2px;line-height:1.3}
+.btnrow{display:flex;flex-wrap:wrap;gap:calc(8px*var(--ds));margin-top:calc(11px*var(--ds))}
+.btn{flex:1;min-width:140px;border:none;border-radius:11px;height:calc(42px*var(--ds));font:700 13.5px var(--sans);cursor:pointer}
+.btn.primary{background:var(--teal);color:#fff}
+.btn.ghost{background:var(--panel);border:1.5px solid var(--teal);color:var(--teal)}
+.list .li{display:flex;align-items:center;gap:10px;padding:calc(9px*var(--ds)) 2px;border-top:1px solid var(--line);font:500 13px var(--sans)}
+.list .li:first-child{border-top:none}
+.li .pill{margin-left:auto;font:800 12px var(--sans);color:var(--teal)}
+/* ===== settings panel (fixed, never zoomed) ===== */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.4);opacity:0;pointer-events:none;transition:opacity .22s;z-index:90}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;right:0;top:0;height:100%;width:420px;max-width:92vw;background:var(--panel);border-left:1px solid var(--line);box-shadow:-8px 0 30px rgba(0,0,0,.18);transform:translateX(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);z-index:91;display:flex;flex-direction:column}
+.sheet.on{transform:none}
+.sh{display:flex;align-items:center;gap:10px;padding:calc(14px + env(safe-area-inset-top)) 18px 13px;border-bottom:1px solid var(--line)}
+.sh .t{font:800 16px var(--sans)}.sh .x{margin-left:auto;background:transparent;border:1px solid var(--line);border-radius:9px;height:34px;width:34px;font-size:16px;cursor:pointer;color:var(--slate)}
+.sb{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 18px calc(34px + env(safe-area-inset-bottom))}
+.sec{margin-bottom:18px}
+.sec h3{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft);margin:0 0 9px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
+.val{font:800 14px var(--sans);color:var(--teal)}
+input[type=range]{width:100%;accent-color:var(--teal);height:30px}
+.seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.seg button,.presets button{background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:9px 6px;font:700 12px var(--sans);color:var(--slate);cursor:pointer;transition:.12s}
+.seg button.on{background:var(--teal);border-color:var(--teal);color:#fff}
+.presets{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.presets button{padding:12px 8px}
+.presets button:active{transform:scale(.98)}
+.switch{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+.switch .lab{font:700 13px var(--sans)}.switch .sub{font:500 11px var(--sans);color:var(--slate-soft);margin-top:2px}
+.tg{position:relative;width:48px;height:28px;flex:0 0 auto;border-radius:999px;background:var(--line);border:none;cursor:pointer;transition:.18s}
+.tg.on{background:var(--teal)}
+.tg:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.18s}
+.tg.on:after{left:23px}
+.detect{font:500 11px var(--sans);color:var(--slate-soft);line-height:1.5;margin-top:8px}
+.preview{border:1px dashed var(--line);border-radius:13px;padding:12px;background:var(--paper)}
+.preview .pvinner{transform-origin:top left}
+.reset{width:100%;background:var(--red-bg);color:var(--red);border:1px solid var(--red-line);border-radius:11px;padding:12px;font:700 13px var(--sans);cursor:pointer}
+.note{font:500 11px var(--sans);color:var(--slate-soft);line-height:1.55;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.foot{max-width:880px;margin:6px auto 0;padding:14px;border-top:1px solid var(--line);color:var(--slate-soft);font:500 11px var(--sans);line-height:1.55}
+.themebtn{background:transparent;border:1px solid var(--line);border-radius:9px;height:38px;width:40px;font-size:16px;cursor:pointer;color:var(--slate)}
+</style>
+</head>
+<body>
+<div class="bar">
+  <span class="logo">StewardMD</span><span class="sp"></span>
+  <button class="themebtn" id="themeBtn" title="Toggle dark mode">🌙</button>
+  <button class="dispbtn" id="openBtn">⚙️ Display</button>
+</div>
+
+<!-- scaled app content -->
+<div class="app" id="app">
+  <div class="card">
+    <span class="badge">⚠ High-alert · anticoagulant</span>
+    <div class="dtitle">Warfarin</div>
+    <div class="dgen">Warfarin sodium · Vitamin-K antagonist</div>
+    <div class="chips"><span class="chip">anticoagulant</span><span class="chip">narrow therapeutic index</span><span class="chip">INR monitored</span></div>
+    <div class="lbl">Adult dose</div>
+    <div class="dose">Individualised to INR; typical maintenance <b>2–10 mg once daily</b>, target INR usually 2–3. Start 5 mg/day (2.5 mg if elderly, low body weight, or high bleeding risk); never load without INR follow-up.</div>
+    <div class="qf">
+      <div><div class="qk">Meal</div><div class="qv">Same time daily</div></div>
+      <div><div class="qk">Renal</div><div class="qv">No change</div></div>
+      <div><div class="qk">Pregnancy</div><div class="qv">Contraindicated</div></div>
+      <div><div class="qk">Monitoring</div><div class="qv">INR / bleeding</div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn primary">💊 Available brands (17)</button>
+      <button class="btn ghost">View interactions</button>
+    </div>
+  </div>
+  <div class="card list">
+    <div class="lbl">Brands (preview)</div>
+    <div class="li">Cofarin 5mg Tablet · East West Pharma<span class="pill">₹23.1</span></div>
+    <div class="li">Warf 5 Tablet · Cipla<span class="pill">₹28.0</span></div>
+    <div class="li">Uniwarfin 5mg Tablet · Unicure<span class="pill">₹31.5</span></div>
+    <div class="li">Mywarf Tablet · Parnasa Mediworld<span class="pill">₹33.5</span></div>
+  </div>
+</div>
+<footer class="foot" id="foot">⚠️ <b>AI-summarized</b> from official labels (FDA / EMA / SmPC / BNF / WHO) — pending clinician review. Verify doses against the primary source before prescribing. · Terms · Disclaimer</footer>
+
+<!-- settings -->
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" aria-label="Display and accessibility settings">
+  <div class="sh"><span class="t">Display &amp; Accessibility</span><button class="x" id="closeBtn" aria-label="Close">✕</button></div>
+  <div class="sb">
+    <div class="sec">
+      <div class="row"><h3 style="margin:0">Font size</h3><span class="val" id="fsVal">100%</span></div>
+      <input type="range" id="fs" min="80" max="150" step="5" value="100" aria-label="Font size">
+    </div>
+    <div class="sec">
+      <h3>Display density (screen fit)</h3>
+      <div class="seg" id="dens">
+        <button data-d="compact">Compact</button>
+        <button data-d="default" class="on">Default</button>
+        <button data-d="comfortable">Comfort</button>
+        <button data-d="large">Large</button>
+      </div>
+    </div>
+    <div class="sec">
+      <h3>Quick presets</h3>
+      <div class="presets" id="presets">
+        <button data-p="default">Default</button>
+        <button data-p="small">Small screen</button>
+        <button data-p="large">Large screen</button>
+        <button data-p="senior">Senior friendly</button>
+      </div>
+    </div>
+    <div class="sec">
+      <h3>Auto fit</h3>
+      <div class="switch">
+        <div><div class="lab">Optimise layout for this device</div><div class="sub">Uses screen size, DPI &amp; orientation</div></div>
+        <button class="tg" id="auto" role="switch" aria-checked="false"></button>
+      </div>
+      <div class="detect" id="detect"></div>
+    </div>
+    <div class="sec">
+      <h3>Live preview</h3>
+      <div class="preview"><div class="pvinner" id="pv">
+        <span class="badge">⚠ High-alert</span>
+        <div class="dtitle" style="font-size:18px">Warfarin</div>
+        <div class="dgen">Warfarin sodium</div>
+        <div class="dose" style="margin-top:6px">Maintenance <b>2–10 mg once daily</b>, target INR 2–3.</div>
+        <div class="btnrow"><button class="btn primary" style="min-width:0">Brands</button><button class="btn ghost" style="min-width:0">Interactions</button></div>
+      </div></div>
+    </div>
+    <button class="reset" id="reset">Reset to defaults</button>
+    <div class="note">Display settings change readability and spacing only — they never alter doses or medical content. Preferences are saved on this device.</div>
+  </div>
+</aside>
+
+<script>
+(function(){
+  var KEY="smd_display_v1";
+  var DENS={compact:0.86,default:1,comfortable:1.18,large:1.4};
+  var DEF={fontScale:1,density:"default",autoFit:false};
+  var s=load();
+  var app=document.getElementById("app"), pv=document.getElementById("pv");
+  function load(){try{var o=JSON.parse(localStorage.getItem(KEY));if(o&&o.density in DENS)return{fontScale:Math.min(1.5,Math.max(.8,+o.fontScale||1)),density:o.density,autoFit:!!o.autoFit};}catch(e){}return Object.assign({},DEF);}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(s));}catch(e){}}
+  function apply(){
+    var ds=DENS[s.density]||1;
+    // font scale -> zoom on content (proportional). density -> spacing var.
+    app.style.zoom=s.fontScale;
+    app.style.setProperty("--ds",ds);
+    document.getElementById("foot").style.zoom=s.fontScale;
+    // live preview reflects both, scaled down to fit the panel
+    pv.parentNode.style.setProperty("--ds",ds);
+    pv.style.zoom=s.fontScale;
+    // sync controls
+    document.getElementById("fs").value=Math.round(s.fontScale*100);
+    document.getElementById("fsVal").textContent=Math.round(s.fontScale*100)+"%";
+    [].forEach.call(document.querySelectorAll("#dens button"),function(b){b.classList.toggle("on",b.getAttribute("data-d")===s.density);});
+    var a=document.getElementById("auto");a.classList.toggle("on",s.autoFit);a.setAttribute("aria-checked",s.autoFit?"true":"false");
+    save();
+  }
+  function detectInfo(){
+    var w=window.innerWidth,h=window.innerHeight,dpr=window.devicePixelRatio||1,ori=(w>h?"landscape":"portrait");
+    document.getElementById("detect").textContent="Detected: "+w+"×"+h+" px · DPR "+dpr.toFixed(2)+" · "+ori+(s.autoFit?" · auto-fit ON":"");
+    return {w:w,h:h,dpr:dpr,ori:ori};
+  }
+  function autoFit(){
+    var d=detectInfo();
+    var fs,dens;
+    if(d.w<340){fs=.9;dens="compact";}
+    else if(d.w<400){fs=.95;dens="compact";}
+    else if(d.w<600){fs=1.0;dens="default";}
+    else if(d.w<900){fs=1.08;dens="comfortable";}
+    else {fs=1.15;dens="comfortable";}
+    if(d.ori==="landscape"&&d.h<500){dens="compact";}      // short landscape phones
+    if(d.dpr>=3&&d.w>=400){fs=Math.min(1.2,fs+0.05);}        // dense displays a touch larger
+    s.fontScale=fs;s.density=dens;apply();
+  }
+  // presets
+  var PRE={default:{fontScale:1,density:"default"},small:{fontScale:.9,density:"compact"},large:{fontScale:1.15,density:"comfortable"},senior:{fontScale:1.4,density:"large"}};
+  // wire
+  document.getElementById("openBtn").onclick=function(){detectInfo();document.getElementById("scrim").classList.add("on");document.getElementById("sheet").classList.add("on");};
+  function closeSheet(){document.getElementById("scrim").classList.remove("on");document.getElementById("sheet").classList.remove("on");}
+  document.getElementById("closeBtn").onclick=closeSheet;
+  document.getElementById("scrim").onclick=closeSheet;
+  document.getElementById("fs").addEventListener("input",function(){s.autoFit=false;s.fontScale=(+this.value)/100;apply();});
+  document.querySelectorAll("#dens button").forEach(function(b){b.onclick=function(){s.autoFit=false;s.density=b.getAttribute("data-d");apply();};});
+  document.querySelectorAll("#presets button").forEach(function(b){b.onclick=function(){var p=PRE[b.getAttribute("data-p")];s.autoFit=false;s.fontScale=p.fontScale;s.density=p.density;apply();};});
+  document.getElementById("auto").onclick=function(){s.autoFit=!s.autoFit;if(s.autoFit)autoFit();else apply();};
+  document.getElementById("reset").onclick=function(){s=Object.assign({},DEF);apply();detectInfo();};
+  document.getElementById("themeBtn").onclick=function(){document.body.classList.toggle("dark");this.textContent=document.body.classList.contains("dark")?"☀️":"🌙";};
+  window.addEventListener("resize",function(){detectInfo();if(s.autoFit)autoFit();});
+  window.addEventListener("orientationchange",function(){setTimeout(function(){detectInfo();if(s.autoFit)autoFit();},200);});
+  // startup
+  if(s.autoFit)autoFit(); else apply();
+  detectInfo();
+})();
+</script>
+</body>
+</html>
