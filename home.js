@@ -1,0 +1,278 @@
+/* StewardMD — premium home (v2), flag-gated.
+   Activates only at ?home=v2 (or localStorage smd_home_v2="1") so the live
+   default homepage is untouched. Presentation layer only: every control
+   delegates to the existing global functions. Nothing is removed. */
+(function () {
+  "use strict";
+  function flagged() {
+    try {
+      if (/[?&]home=v2\b/.test(location.search)) { localStorage.setItem("smd_home_v2", "1"); return true; }
+      if (/[?&]home=classic\b/.test(location.search)) { localStorage.removeItem("smd_home_v2"); return false; }
+      return localStorage.getItem("smd_home_v2") === "1";
+    } catch (e) { return /[?&]home=v2\b/.test(location.search); }
+  }
+  if (!flagged()) return;
+
+  var ICON = {
+    menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
+    shieldPlus: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/>',
+    moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+    bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+    user: '<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>',
+    search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+    framework: '<path d="M4 6h16M4 12h16M4 18h10"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
+    reasoning: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+    sliders: '<line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="8" r="2.4" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="2.4" fill="currentColor" stroke="none"/>',
+    folder: '<path d="M4 7a2 2 0 0 1 2-2h3l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/>',
+    book: '<path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>',
+    calc: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
+    home: '<path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/>',
+    more: '<circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/>',
+    arrow: '<path d="M5 12h14"/><path d="m13 5 7 7-7 7"/>',
+    chev: '<path d="m9 6 6 6-6 6"/>',
+    info: '<circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
+    spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
+    settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 9 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1Z"/>',
+    x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>'
+  };
+  function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
+  function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
+  function has(path) { try { return !!path(); } catch (e) { return false; } }
+
+  // --- action delegates (to existing app functions) ---
+  var ACT = {
+    reasoning: function () { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
+    advanced: function () { if (window.SB && SB.newDecision) SB.newDecision(); else toast("Opening clinical decision…"); },
+    search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
+    cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
+    calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
+    guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
+    drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); },
+    framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
+    theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
+    menu: function () { if (window.SB && SB.open) SB.open(); },
+    about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
+    account: function () { if (typeof openModal === "function") openModal("privacyModal"); var b = document.getElementById("sessionSignOut"); }, // sign-in/session lives in header; open menu
+    recent: function () { if (typeof openMyCases === "function") openMyCases(); }
+  };
+
+  var root;
+  function injectCSS() {
+    if (document.getElementById("smd-home-css")) return;
+    var st = document.createElement("style"); st.id = "smd-home-css";
+    st.textContent = [
+      "#homeV2{--hp:#0F766E;--hp2:#115E59;--hps:#CCFBF1;--hbg:#F8FAFC;--hpanel:#fff;--hbd:#E2E8F0;--hink:#0F172A;--hmut:#64748B;--hsh:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06);--hslg:0 8px 30px rgba(15,118,110,.22);--hfont:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:120;background:var(--hbg);color:var(--hink);font-family:var(--hfont);overflow:hidden;display:none;flex-direction:column}",
+      "#homeV2.on{display:flex}",
+      "body.dark #homeV2{--hbg:#0B1220;--hpanel:#111B2E;--hbd:#1E2B43;--hink:#E7EDF5;--hmut:#8597AD;--hps:#0c2e2a;--hsh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}",
+      "#homeV2 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
+      "#homeV2 button{font-family:inherit;-webkit-tap-highlight-color:transparent}",
+      ".hv-hdr{height:72px;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--hpanel);border-bottom:1px solid var(--hbd);padding-top:env(safe-area-inset-top);flex:0 0 auto}",
+      ".hv-ib{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:var(--hink);border-radius:12px;cursor:pointer;transition:background .18s}.hv-ib:active{transform:scale(.94)}.hv-ib:hover{background:var(--hbg)}",
+      ".hv-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--hp),var(--hp2));display:flex;align-items:center;justify-content:center;flex:0 0 auto}.hv-mark svg{width:19px;height:19px;stroke:#fff}",
+      ".hv-bz{display:flex;align-items:center;gap:10px;min-width:0}.hv-tt{font:800 16px/1.1 var(--hfont);letter-spacing:-.01em}.hv-ts{font:500 11.5px/1.2 var(--hfont);color:var(--hmut);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".hv-sp{flex:1}",
+      ".hv-av{width:34px;height:34px;border-radius:50%;background:var(--hps);color:var(--hp);display:flex;align-items:center;justify-content:center;font:700 13px var(--hfont);border:1px solid var(--hbd);cursor:pointer}",
+      ".hv-dot{position:relative}.hv-dot:after{content:'';position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#ef4444;border:2px solid var(--hpanel)}",
+      ".hv-main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px 16px 96px}.hv-stack{max-width:480px;margin:0 auto;display:flex;flex-direction:column;gap:16px}",
+      ".hv-hero{background:var(--hpanel);border:1px solid var(--hbd);border-radius:16px;box-shadow:var(--hsh);padding:20px;display:flex;align-items:center;gap:14px}",
+      ".hv-hero h1{font:800 28px/1.05 var(--hfont);letter-spacing:-.02em;margin:0}.hv-tag{display:inline-block;margin-top:10px;font:700 11px var(--hfont);text-transform:uppercase;letter-spacing:.06em;color:var(--hp);background:var(--hps);padding:4px 10px;border-radius:999px}.hv-hero p{font:500 14px/1.45 var(--hfont);color:var(--hmut);margin:10px 0 0}",
+      ".hv-shield{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--hp),var(--hp2));display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:var(--hslg)}.hv-shield svg{width:38px;height:38px;stroke:#fff}",
+      ".hv-qrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}",
+      ".hv-qc{height:62px;background:var(--hpanel);border:1px solid var(--hbd);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;color:var(--hink);transition:transform .15s,box-shadow .18s}.hv-qc:active{transform:scale(.96)}.hv-qc:hover{box-shadow:var(--hsh)}.hv-qc svg{width:19px;height:19px;color:var(--hp)}.hv-qc span{font:600 11px var(--hfont);color:var(--hmut)}",
+      ".hv-primary{display:flex;align-items:center;gap:15px;padding:20px;border:none;border-radius:18px;background:linear-gradient(135deg,#14B8A6,var(--hp) 55%,var(--hp2));color:#fff;box-shadow:var(--hslg);cursor:pointer;width:100%;text-align:left;transition:transform .15s,filter .18s}.hv-primary:active{transform:scale(.985)}.hv-primary:hover{filter:brightness(1.04)}",
+      ".hv-pic{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.hv-pic svg{width:27px;height:27px;stroke:#fff}",
+      ".hv-pb{flex:1;min-width:0}.hv-ptit{font:800 19px/1.1 var(--hfont);letter-spacing:-.01em}.hv-psub{font:500 13px/1.35 var(--hfont);color:rgba(255,255,255,.88);margin-top:3px}.hv-parr svg{stroke:#fff;opacity:.9}",
+      ".hv-sec{display:flex;align-items:center;gap:15px;padding:18px 20px;border:1px solid var(--hbd);border-radius:18px;background:var(--hpanel);color:var(--hink);box-shadow:var(--hsh);cursor:pointer;width:100%;text-align:left;transition:transform .15s,box-shadow .18s}.hv-sec:active{transform:scale(.985)}",
+      ".hv-sic{width:52px;height:52px;border-radius:15px;background:var(--hps);display:flex;align-items:center;justify-content:center;flex:0 0 auto}.hv-sic svg{stroke:var(--hp);width:26px;height:26px}.hv-stit{font:700 17px/1.1 var(--hfont)}.hv-ssub{font:500 13px/1.35 var(--hfont);color:var(--hmut);margin-top:3px}.hv-sarr svg{stroke:var(--hmut)}",
+      ".hv-lbl{font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut);margin:2px 2px -4px}",
+      ".hv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}",
+      ".hv-tile{background:var(--hpanel);border:1px solid var(--hbd);border-radius:16px;box-shadow:var(--hsh);padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;color:var(--hink);transition:transform .15s,box-shadow .18s}.hv-tile:active{transform:scale(.97)}",
+      ".hv-tic{width:42px;height:42px;border-radius:12px;background:var(--hbg);display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1px solid var(--hbd)}.hv-tic svg{width:21px;height:21px;color:var(--hp)}.hv-tl{font:600 14px var(--hfont)}.hv-tc{font:500 11.5px var(--hfont);color:var(--hmut);margin-top:1px}",
+      ".hv-info{font:500 12px/1.6 var(--hfont);color:var(--hmut);text-align:center;padding:4px 8px}.hv-info b{color:var(--hink)}",
+      ".hv-tab{position:absolute;left:0;right:0;bottom:0;background:var(--hpanel);border-top:1px solid var(--hbd);display:flex;justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom));flex:0 0 auto}.hv-t{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;border:none;background:transparent;color:var(--hmut);cursor:pointer;border-radius:12px}.hv-t svg{width:22px;height:22px}.hv-t span{font:600 10.5px var(--hfont)}.hv-t.active{color:var(--hp)}.hv-t:active{transform:scale(.93)}",
+      // sheet (More / Display)
+      ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
+      ".hv-sheet{position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      ".hv-grab{width:38px;height:4px;border-radius:2px;background:var(--hbd);margin:8px auto 12px}",
+      ".hv-sh-t{font:800 17px var(--hfont);margin:2px 0 12px}",
+      ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
+      ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
+      // display engine controls
+      ".hv-d-sec{margin:6px 0 16px}.hv-d-sec h4{font:800 11px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin:0 0 9px}",
+      ".hv-d-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}.hv-d-val{font:800 14px var(--hfont);color:var(--hp)}",
+      "#homeV2 input[type=range],.hv-sheet input[type=range]{width:100%;accent-color:var(--hp);height:30px}",
+      ".hv-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.hv-seg button,.hv-pre button{background:var(--hbg);border:1.5px solid var(--hbd);border-radius:10px;padding:9px 6px;font:700 12px var(--hfont);color:var(--hmut);cursor:pointer}.hv-seg button.on{background:var(--hp);border-color:var(--hp);color:#fff}",
+      ".hv-pre{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.hv-pre button{padding:12px 8px}",
+      ".hv-sw{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--hbg);border:1px solid var(--hbd);border-radius:12px;padding:11px 13px;margin-top:6px}.hv-sw .lab{font:700 13px var(--hfont)}.hv-sw .sub{font:500 11px var(--hfont);color:var(--hmut);margin-top:2px}.hv-tg{position:relative;width:48px;height:28px;flex:0 0 auto;border-radius:999px;background:var(--hbd);border:none;cursor:pointer;transition:.18s}.hv-tg.on{background:var(--hp)}.hv-tg:after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.18s}.hv-tg.on:after{left:23px}",
+      ".hv-reset{width:100%;background:#fbe7e9;color:#ab1c2c;border:1px solid #efa9b1;border-radius:11px;padding:12px;font:700 13px var(--hfont);cursor:pointer;margin-top:6px}",
+      ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
+      ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
+      // density (spacing) — independent of font zoom
+      "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
+      "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
+      "body.smd-dens-compact #homeV2 .hv-tile,body.smd-dens-compact #homeV2 .hv-primary,body.smd-dens-compact #homeV2 .hv-sec{padding:13px}body.smd-dens-large #homeV2 .hv-tile{padding:20px}",
+      "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
+    ].join("\n");
+    document.head.appendChild(st);
+  }
+
+  function build() {
+    if (root) return;
+    injectCSS();
+    root = document.createElement("div"); root.id = "homeV2";
+    root.innerHTML =
+      '<header class="hv-hdr">' +
+        '<button class="hv-ib" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
+        '<div class="hv-bz"><div class="hv-mark">' + svg("shield") + '</div><div><div class="hv-tt">StewardMD</div><div class="hv-ts">Antibiotic Stewardship</div></div></div>' +
+        '<div class="hv-sp"></div>' +
+        '<button class="hv-ib" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
+        '<button class="hv-ib hv-dot" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
+        '<button class="hv-av" data-act="more" aria-label="Account">G</button>' +
+      '</header>' +
+      '<div class="hv-main"><div class="hv-stack">' +
+        '<section class="hv-hero"><div style="flex:1;min-width:0"><h1>StewardMD</h1><span class="hv-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="hv-shield">' + svg("shieldPlus") + '</div></section>' +
+        '<div class="hv-qrow">' +
+          '<button class="hv-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
+          '<button class="hv-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
+          '<button class="hv-qc" data-act="framework">' + svg("framework") + '<span>Framework</span></button>' +
+          '<button class="hv-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
+        '</div>' +
+        '<button class="hv-primary" data-act="reasoning"><div class="hv-pic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-ptit">Clinical Reasoning</div><div class="hv-psub">Step-by-step antibiotic decision support</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
+        '<button class="hv-sec" data-act="advanced"><div class="hv-sic">' + svg("sliders") + '</div><div class="hv-pb"><div class="hv-stit">Advanced Mode</div><div class="hv-ssub">Full clinical form — findings, vitals, labs &amp; risk</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
+        '<div class="hv-lbl">Quick access</div>' +
+        '<div class="hv-grid">' +
+          '<button class="hv-tile" data-act="cases"><div class="hv-tic">' + svg("folder") + '</div><div><div class="hv-tl">My Cases</div><div class="hv-tc">Saved assessments</div></div></button>' +
+          '<button class="hv-tile" data-act="guidelines"><div class="hv-tic">' + svg("book") + '</div><div><div class="hv-tl">Guidelines</div><div class="hv-tc">IDSA · WHO · ICMR</div></div></button>' +
+          '<button class="hv-tile" data-act="calculators"><div class="hv-tic">' + svg("calc") + '</div><div><div class="hv-tl">Calculators</div><div class="hv-tc">50+ clinical tools</div></div></button>' +
+          '<button class="hv-tile" data-act="drugs"><div class="hv-tic">' + svg("pills") + '</div><div><div class="hv-tl">Drugs DB</div><div class="hv-tc">Brands · doses · prices</div></div></button>' +
+        '</div>' +
+        '<div class="hv-info">For qualified clinicians · <b>AI-summarised, verify doses</b> · v4</div>' +
+      '</div></div>' +
+      '<nav class="hv-tab">' +
+        '<button class="hv-t active" data-act="home">' + svg("home") + '<span>Home</span></button>' +
+        '<button class="hv-t" data-act="search">' + svg("search") + '<span>Search</span></button>' +
+        '<button class="hv-t" data-act="cases">' + svg("folder") + '<span>Cases</span></button>' +
+        '<button class="hv-t" data-act="guidelines">' + svg("book") + '<span>Guides</span></button>' +
+        '<button class="hv-t" data-act="more">' + svg("more") + '<span>More</span></button>' +
+      '</nav>';
+    document.body.appendChild(root);
+
+    var scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim);
+    var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet);
+    scrim.addEventListener("click", closeSheet);
+
+    root.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-act]"); if (!b) return;
+      var a = b.getAttribute("data-act");
+      if (a === "more") return openMore();
+      if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".hv-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
+      if (ACT[a]) ACT[a]();
+    });
+  }
+
+  // ---- More sheet ----
+  function sheetEl() { return document.getElementById("hvSheet"); }
+  function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); }
+  function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); }
+  function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
+  function openMore() {
+    openSheet(
+      '<div class="hv-sh-t">More</div>' +
+      mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "menu") +
+      mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
+      mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
+      mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
+      mi("calc", "Calculators", "50+ clinical tools", "calculators") +
+      '<button class="hv-back" data-mi="classic">↺ Switch back to classic home</button>'
+    );
+    sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var a = b.getAttribute("data-mi");
+        if (a === "display") return openDisplay();
+        if (a === "subscription") return openSubscription();
+        if (a === "classic") { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; return; }
+        closeSheet();
+        if (ACT[a]) ACT[a]();
+      });
+    });
+  }
+  function openSubscription() {
+    openSheet('<div class="hv-sh-t">Subscription</div>' +
+      '<p style="font:500 14px/1.6 var(--hfont);color:var(--hmut)">StewardMD is currently <b style="color:var(--hink)">free</b> for qualified clinicians. Premium plans (team workspaces, offline mode, institutional antibiograms) are coming soon.</p>' +
+      '<button class="hv-reset" style="background:var(--hps);color:var(--hp);border-color:var(--hp)" data-close="1">Got it</button>');
+    sheetEl().querySelector("[data-close]").addEventListener("click", closeSheet);
+  }
+
+  // ---- Display & Accessibility engine ----
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: false };
+  var ds = loadD();
+  function loadD() { try { var o = JSON.parse(localStorage.getItem(DKEY)); if (o && o.density in DENS) return { fontScale: Math.min(1.5, Math.max(.8, +o.fontScale || 1)), density: o.density, autoFit: !!o.autoFit }; } catch (e) {} return Object.assign({}, DDEF); }
+  function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
+  function applyD() {
+    try { document.documentElement.style.zoom = ds.fontScale; } catch (e) {}
+    document.body.classList.remove("smd-dens-compact", "smd-dens-comfortable", "smd-dens-large");
+    if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
+    saveD();
+  }
+  function autoFitD() {
+    var w = window.innerWidth, h = window.innerHeight, dpr = window.devicePixelRatio || 1, fs, d;
+    if (w < 340) { fs = .9; d = "compact"; } else if (w < 400) { fs = .95; d = "compact"; } else if (w < 600) { fs = 1.0; d = "default"; } else if (w < 900) { fs = 1.08; d = "comfortable"; } else { fs = 1.15; d = "comfortable"; }
+    if (w > h && h < 500) d = "compact";
+    if (dpr >= 3 && w >= 400) fs = Math.min(1.2, fs + .05);
+    ds.fontScale = fs; ds.density = d; applyD(); refreshD();
+  }
+  var DPRE = { default: { fontScale: 1, density: "default" }, small: { fontScale: .9, density: "compact" }, large: { fontScale: 1.15, density: "comfortable" }, senior: { fontScale: 1.4, density: "large" } };
+  function openDisplay() {
+    openSheet('<div class="hv-sh-t">Display &amp; Accessibility</div>' +
+      '<div class="hv-d-sec"><div class="hv-d-row"><h4 style="margin:0">Font size</h4><span class="hv-d-val" id="hvFsv">100%</span></div><input type="range" id="hvFs" min="80" max="150" step="5" value="100"></div>' +
+      '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
+      '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button></div></div>' +
+      '<div class="hv-d-sec"><h4>Auto fit</h4><div class="hv-sw"><div><div class="lab">Optimise for this device</div><div class="sub" id="hvDet"></div></div><button class="hv-tg" id="hvAuto"></button></div></div>' +
+      '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
+      '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
+    var s = sheetEl();
+    s.querySelector("#hvFs").addEventListener("input", function () { ds.autoFit = false; ds.fontScale = (+this.value) / 100; applyD(); refreshD(); });
+    s.querySelectorAll("#hvDens button").forEach(function (b) { b.addEventListener("click", function () { ds.autoFit = false; ds.density = b.getAttribute("data-d"); applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });
+    s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
+    s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
+    refreshD();
+  }
+  function refreshD() {
+    var s = sheetEl(); if (!s) return;
+    var fs = s.querySelector("#hvFs"); if (fs) fs.value = Math.round(ds.fontScale * 100);
+    var v = s.querySelector("#hvFsv"); if (v) v.textContent = Math.round(ds.fontScale * 100) + "%";
+    s.querySelectorAll("#hvDens button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-d") === ds.density); });
+    var a = s.querySelector("#hvAuto"); if (a) a.classList.toggle("on", ds.autoFit);
+    var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
+  }
+
+  // ---- toast ----
+  var tEl, tTimer;
+  function toast(msg) { if (!tEl) { tEl = document.createElement("div"); tEl.className = "hv-toast"; document.body.appendChild(tEl); } tEl.textContent = msg; tEl.classList.add("on"); clearTimeout(tTimer); tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 1800); }
+
+  // ---- show after entry (when the shell becomes visible) ----
+  function shellVisible() { var sh = document.querySelector(".shell"); return sh && sh.offsetParent !== null; }
+  function tryShow() {
+    build();
+    // show v2 once the user is past splash/login (shell present in DOM); otherwise show anyway after a short grace
+    root.classList.add("on");
+  }
+  function start() {
+    applyD();                 // restore saved display prefs app-wide
+    if (ds.autoFit) autoFitD();
+    build();
+    // Reveal v2 home after the entry flow. We poll briefly for the shell; fall back to showing it.
+    var tries = 0;
+    var iv = setInterval(function () {
+      tries++;
+      if (shellVisible() || tries > 40) { clearInterval(iv); root.classList.add("on"); }
+    }, 150);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();
