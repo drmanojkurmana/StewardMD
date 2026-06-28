@@ -394,8 +394,7 @@
         '<div class="v3-sec-label">Quick access</div>' +
         '<div class="v3-grid">' +
           '<button class="v3-tile" data-act="cases"><div class="ic">' + svg("folder") + '</div><div style="min-width:0"><div class="tt">My Cases</div><div class="sub">Saved assessments</div></div></button>' +
-          '<button class="v3-tile" data-act="guidelines"><div class="ic">' + svg("book") + '</div><div style="min-width:0"><div class="tt">Guidelines</div><div class="sub">IDSA · WHO · ICMR</div></div></button>' +
-          '<button class="v3-tile" data-act="calculators"><div class="ic">' + svg("calc") + '</div><div style="min-width:0"><div class="tt">Calculators</div><div class="sub">50+ clinical tools</div></div></button>' +
+          '<button class="v3-tile" data-act="calculators"><div class="ic">' + svg("calc") + '</div><div style="min-width:0"><div class="tt">Calculators</div><div class="sub">70+ clinical tools</div></div></button>' +
           '<button class="v3-tile" data-act="drugs"><div class="ic">' + svg("pills") + '</div><div style="min-width:0"><div class="tt">Drugs DB</div><div class="sub">Brands · doses · price</div></div></button>' +
           '<button class="v3-tile" data-act="electrolytes"><div class="ic">' + svg("flask") + '</div><div style="min-width:0"><div class="tt">Electrolyte Engine</div><div class="sub">ICU correction · doses · rates</div></div></button>' +
         '</div>' +
