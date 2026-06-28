@@ -44,6 +44,8 @@
     user: '<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>',
     search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     framework: '<path d="M4 6h16M4 12h16M4 18h10"/>',
+    icu: '<rect x="2" y="4" width="20" height="14" rx="2"/><path d="M6 11h2.5l1.5-3 2.5 6 1.5-3H18"/><path d="M9 22h6"/>',
+    ai: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
     reasoning: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
     sliders: '<line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="8" r="2.4" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="2.4" fill="currentColor" stroke="none"/>',
@@ -66,7 +68,7 @@
   function has(path) { try { return !!path(); } catch (e) { return false; } }
 
   var root, fab;
-  function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); }
+  function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
   function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; }
   // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
   function openCaseChooser() {
@@ -106,6 +108,8 @@
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
+    icu: function () { if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU tools loading…"); },
+    askai: function () { openAskAi(); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
@@ -147,7 +151,7 @@
       ".hv-tab{position:absolute;left:0;right:0;bottom:0;background:var(--hpanel);border-top:1px solid var(--hbd);display:flex;justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom));flex:0 0 auto}.hv-t{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;border:none;background:transparent;color:var(--hmut);cursor:pointer;border-radius:12px}.hv-t svg{width:22px;height:22px}.hv-t span{font:600 10.5px var(--hfont)}.hv-t.active{color:var(--hp)}.hv-t:active{transform:scale(.93)}",
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
-      ".hv-sheet{position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
       ".hv-grab{width:38px;height:4px;border-radius:2px;background:var(--hbd);margin:8px auto 12px}",
       ".hv-sh-t{font:800 17px var(--hfont);margin:2px 0 12px}",
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
@@ -197,6 +201,7 @@
       "body.ui-v2 .system-picker-btn{border:1px solid var(--line)!important;border-radius:12px!important;min-height:48px}",
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
+      "body.ui-v2 .sbref-overlay{z-index:140!important}",
       "#homeV2 .hv-casepanel{position:absolute;inset:0;z-index:6;background:var(--hbg);display:none;flex-direction:column}#homeV2 .hv-casepanel.on{display:flex;animation:cfade .2s ease}@keyframes cfade{from{opacity:0}to{opacity:1}}",
       "#homeV2 .v3-screen{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;background:var(--v3-bg,#F8FAFC)}#homeV2 .v3-screen.on{display:flex;animation:cfade .2s ease}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
@@ -211,18 +216,18 @@
     root.innerHTML =
       '<header class="v3-header">' +
         '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="v3-brand"><div class="v3-mark">' + svg("shield") + '</div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
+        '<div class="v3-brand"><div class="v3-mark"><img src="/android-chrome-192x192.png" alt="StewardMD" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"></div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield">' + svg("shieldPlus") + '</div></section>' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield"><img src="/android-chrome-192x192.png" alt="StewardMD" style="width:56px;height:56px;object-fit:cover;border-radius:16px"></div></section>' +
         '<div class="v3-qrow">' +
           '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
           '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
-          '<button class="v3-qc" data-act="framework">' + svg("framework") + '<span>Framework</span></button>' +
+          '<button class="v3-qc" data-act="icu">' + svg("icu") + '<span>ICU</span></button>' +
           '<button class="v3-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
         '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision — choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
@@ -237,10 +242,10 @@
         '<div class="v3-foot">For qualified clinicians · <b>AI-summarised, verify doses</b></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
-        '<button class="v3-tab active" data-act="home">' + svg("home") + '<span>Home</span></button>' +
         '<button class="v3-tab" data-act="search">' + svg("search") + '<span>Search</span></button>' +
         '<button class="v3-tab" data-act="cases">' + svg("folder") + '<span>Cases</span></button>' +
         '<button class="v3-tab" data-act="guidelines">' + svg("book") + '<span>Guides</span></button>' +
+        '<button class="v3-tab" data-act="askai">' + svg("ai") + '<span>Ask AI</span></button>' +
         '<button class="v3-tab" data-act="more">' + svg("more") + '<span>More</span></button>' +
       '</nav>';
     document.body.appendChild(root);
@@ -298,6 +303,17 @@
       '<p style="font:500 14px/1.6 var(--hfont);color:var(--hmut)">StewardMD is currently <b style="color:var(--hink)">free</b> for qualified clinicians. Premium plans (team workspaces, offline mode, institutional antibiograms) are coming soon.</p>' +
       '<button class="hv-reset" style="background:var(--hps);color:var(--hp);border-color:var(--hp)" data-close="1">Got it</button>');
     sheetEl().querySelector("[data-close]").addEventListener("click", closeSheet);
+  }
+  function openAskAi() {
+    openSheet('<div class="hv-sh-t">🤖 Ask AI</div>' +
+      '<div style="text-align:center;padding:8px 4px 4px"><div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:18px;background:var(--hps);color:var(--hp);margin-bottom:12px">' + svg("ai") + '</div></div>' +
+      '<p style="font:700 16px/1.4 var(--hfont);color:var(--hink);text-align:center;margin:0 0 6px">Coming soon</p>' +
+      '<p style="font:500 13.5px/1.6 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 14px">Conversational AI assistance for antibiotic decisions will be available with <b style="color:var(--hink)">StewardMD Premium</b>. We\'ll notify you when it launches.</p>' +
+      '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp)" data-sub="1">See subscription</button>' +
+      '<button class="hv-back" data-close="1">Maybe later</button>');
+    var s = sheetEl();
+    s.querySelector("[data-sub]").addEventListener("click", openSubscription);
+    s.querySelector("[data-close]").addEventListener("click", closeSheet);
   }
 
   // ---- Display & Accessibility engine ----
