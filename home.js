@@ -67,7 +67,7 @@
 
   var root, fab;
   function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); }
-  function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".hv-main"); if (m) m.scrollTop = 0; }
+  function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; }
   // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
   function openCaseChooser() {
     if (!root) build();
@@ -204,42 +204,42 @@
 
   function build() {
     if (root) return;
-    injectCSS();
-    root = document.createElement("div"); root.id = "homeV2";
+    injectCSS(); injectV3CSS();
+    root = document.createElement("div"); root.id = "homeV2"; root.className = "v3";
     root.innerHTML =
-      '<header class="hv-hdr">' +
-        '<button class="hv-ib" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="hv-bz"><div class="hv-mark">' + svg("shield") + '</div><div><div class="hv-tt">StewardMD</div><div class="hv-ts">Antibiotic Stewardship</div></div></div>' +
-        '<div class="hv-sp"></div>' +
-        '<button class="hv-ib" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
-        '<button class="hv-ib hv-dot" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
-        '<button class="hv-av" data-act="more" aria-label="Account">G</button>' +
+      '<header class="v3-header">' +
+        '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
+        '<div class="v3-brand"><div class="v3-mark">' + svg("shield") + '</div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
+        '<div class="v3-spacer"></div>' +
+        '<button class="v3-ic" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
+        '<button class="v3-ic v3-dotbadge" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
+        '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
-      '<div class="hv-main"><div class="hv-stack">' +
-        '<section class="hv-hero"><div style="flex:1;min-width:0"><h1>StewardMD</h1><span class="hv-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="hv-shield">' + svg("shieldPlus") + '</div></section>' +
-        '<div class="hv-qrow">' +
-          '<button class="hv-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
-          '<button class="hv-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
-          '<button class="hv-qc" data-act="framework">' + svg("framework") + '<span>Framework</span></button>' +
-          '<button class="hv-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
+      '<main class="v3-main"><div class="v3-stack">' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield">' + svg("shieldPlus") + '</div></section>' +
+        '<div class="v3-qrow">' +
+          '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
+          '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
+          '<button class="v3-qc" data-act="framework">' + svg("framework") + '<span>Framework</span></button>' +
+          '<button class="v3-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
-        '<button class="hv-primary" data-act="startcase"><div class="hv-pic">' + svg("stcase") + '</div><div class="hv-pb"><div class="hv-ptit">Start a Case</div><div class="hv-psub">New clinical decision — then choose Simple or Advanced</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
-        '<button class="hv-sec" data-act="reasoning"><div class="hv-sic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-stit">Clinical Reasoning <span style="font-weight:700;color:var(--hp);font-size:12px">(Beta)</span></div><div class="hv-ssub">Experimental step-by-step reasoning workspace</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
-        '<div class="hv-lbl">Quick access</div>' +
-        '<div class="hv-grid">' +
-          '<button class="hv-tile" data-act="cases"><div class="hv-tic">' + svg("folder") + '</div><div><div class="hv-tl">My Cases</div><div class="hv-tc">Saved assessments</div></div></button>' +
-          '<button class="hv-tile" data-act="guidelines"><div class="hv-tic">' + svg("book") + '</div><div><div class="hv-tl">Guidelines</div><div class="hv-tc">IDSA · WHO · ICMR</div></div></button>' +
-          '<button class="hv-tile" data-act="calculators"><div class="hv-tic">' + svg("calc") + '</div><div><div class="hv-tl">Calculators</div><div class="hv-tc">50+ clinical tools</div></div></button>' +
-          '<button class="hv-tile" data-act="drugs"><div class="hv-tic">' + svg("pills") + '</div><div><div class="hv-tl">Drugs DB</div><div class="hv-tc">Brands · doses · prices</div></div></button>' +
+        '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision — choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
+        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Clinical Reasoning <span style="color:var(--v3-primary);font-size:12px;font-weight:700">(Beta)</span></div><div class="sub">Experimental step-by-step reasoning workspace</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+        '<div class="v3-sec-label">Quick access</div>' +
+        '<div class="v3-grid">' +
+          '<button class="v3-tile" data-act="cases"><div class="ic">' + svg("folder") + '</div><div style="min-width:0"><div class="tt">My Cases</div><div class="sub">Saved assessments</div></div></button>' +
+          '<button class="v3-tile" data-act="guidelines"><div class="ic">' + svg("book") + '</div><div style="min-width:0"><div class="tt">Guidelines</div><div class="sub">IDSA · WHO · ICMR</div></div></button>' +
+          '<button class="v3-tile" data-act="calculators"><div class="ic">' + svg("calc") + '</div><div style="min-width:0"><div class="tt">Calculators</div><div class="sub">50+ clinical tools</div></div></button>' +
+          '<button class="v3-tile" data-act="drugs"><div class="ic">' + svg("pills") + '</div><div style="min-width:0"><div class="tt">Drugs DB</div><div class="sub">Brands · doses · price</div></div></button>' +
         '</div>' +
-        '<div class="hv-info">For qualified clinicians · <b>AI-summarised, verify doses</b> · v4</div>' +
-      '</div></div>' +
-      '<nav class="hv-tab">' +
-        '<button class="hv-t active" data-act="home">' + svg("home") + '<span>Home</span></button>' +
-        '<button class="hv-t" data-act="search">' + svg("search") + '<span>Search</span></button>' +
-        '<button class="hv-t" data-act="cases">' + svg("folder") + '<span>Cases</span></button>' +
-        '<button class="hv-t" data-act="guidelines">' + svg("book") + '<span>Guides</span></button>' +
-        '<button class="hv-t" data-act="more">' + svg("more") + '<span>More</span></button>' +
+        '<div class="v3-foot">For qualified clinicians · <b>AI-summarised, verify doses</b></div>' +
+      '</div></main>' +
+      '<nav class="v3-tabbar">' +
+        '<button class="v3-tab active" data-act="home">' + svg("home") + '<span>Home</span></button>' +
+        '<button class="v3-tab" data-act="search">' + svg("search") + '<span>Search</span></button>' +
+        '<button class="v3-tab" data-act="cases">' + svg("folder") + '<span>Cases</span></button>' +
+        '<button class="v3-tab" data-act="guidelines">' + svg("book") + '<span>Guides</span></button>' +
+        '<button class="v3-tab" data-act="more">' + svg("more") + '<span>More</span></button>' +
       '</nav>';
     document.body.appendChild(root);
 
@@ -253,7 +253,7 @@
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
       if (a === "more") return openMore();
-      if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".hv-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
+      if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".v3-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (ACT[a]) ACT[a]();
     });
   }
@@ -352,6 +352,11 @@
     if (document.getElementById("smd-inter")) return;
     var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
     l.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap";
+    document.head.appendChild(l);
+  }
+  function injectV3CSS() {
+    if (document.getElementById("smd-uiv3")) return;
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s2";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
