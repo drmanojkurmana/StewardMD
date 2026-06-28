@@ -304,23 +304,49 @@
       </div>
     </div><!-- /demo-wrap -->
 
-    <div class="splash-disclaimer-gate">
-      <div class="splash-disclaimer-title">Before you continue</div>
-      <div class="splash-disclaimer-body">
-        StewardMD is an <b>educational clinical reasoning aid</b>, built from guideline references for self-study and teaching discussion. It is <b>not a validated clinical decision support tool</b> and has not been clinically tested or peer-reviewed for direct patient care.
-        <br><br>
-        Drug &amp; medicine information is <b>AI-summarised from official labels</b> (FDA / EMA / SmPC / BNF / WHO) and is <b>pending clinician review</b> — always <b>verify doses against the primary source</b> before prescribing. It does <b>not replace clinical judgment</b>, local antibiograms, institutional protocols, or specialist input. The creator and contributors accept no liability for clinical decisions made using this tool.
+    <div class="smd-consent-overlay" id="consentOverlay" aria-hidden="true">
+      <div class="splash-disclaimer-gate" role="dialog" aria-modal="true" aria-labelledby="consentTitle">
+        <button type="button" class="consent-x" id="consentClose" aria-label="Close">✕</button>
+        <div class="splash-disclaimer-title" id="consentTitle">Before you continue</div>
+        <div class="splash-disclaimer-body">
+          StewardMD is an <b>educational clinical reasoning aid</b>, built from guideline references for self-study and teaching discussion. It is <b>not a validated clinical decision support tool</b> and has not been clinically tested or peer-reviewed for direct patient care.
+          <br><br>
+          Drug &amp; medicine information is <b>AI-summarised from official labels</b> (FDA / EMA / SmPC / BNF / WHO) and is <b>pending clinician review</b> — always <b>verify doses against the primary source</b> before prescribing. It does <b>not replace clinical judgment</b>, local antibiograms, institutional protocols, or specialist input. The creator and contributors accept no liability for clinical decisions made using this tool.
+        </div>
+        <label class="splash-ack-row">
+          <input type="checkbox" id="splashAckCheckbox">
+          <span>I have read and agree to the <b>Disclaimer</b> and <b>Terms &amp; Conditions</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use.</span>
+        </label>
+        <div class="splash-ack-links">
+          <button type="button" class="splash-foot-link" onclick="openModal('disclaimerModal')">Read Disclaimer</button> ·
+          <button type="button" class="splash-foot-link" onclick="openModal('termsModal')">Read Terms &amp; Conditions</button>
+        </div>
+        <button class="splash-continue-btn" id="splashContinueBtn" disabled>I Accept &amp; Continue</button>
       </div>
-      <label class="splash-ack-row">
-        <input type="checkbox" id="splashAckCheckbox">
-        <span>I have read and agree to the <b>Disclaimer</b> and <b>Terms &amp; Conditions</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use.</span>
-      </label>
-      <div class="splash-ack-links">
-        <button type="button" class="splash-foot-link" onclick="openModal('disclaimerModal')">Read Disclaimer</button> ·
-        <button type="button" class="splash-foot-link" onclick="openModal('termsModal')">Read Terms &amp; Conditions</button>
-      </div>
-      <button class="splash-continue-btn" id="splashContinueBtn" disabled>I Accept &amp; Continue</button>
     </div>
+    <style>
+    .smd-consent-overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(8,18,26,.66);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);z-index:var(--z-gate,300);padding:18px;box-sizing:border-box}
+    .smd-consent-overlay.show{display:flex;animation:cfade .2s ease}
+    @keyframes cfade{from{opacity:0}to{opacity:1}}
+    .smd-consent-overlay .splash-disclaimer-gate{position:relative;max-width:480px;width:100%;max-height:88vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:18px;padding:24px 22px;box-shadow:0 24px 60px rgba(0,0,0,.34);margin:0;text-align:left;animation:crise .24s cubic-bezier(.2,.7,.2,1)}
+    @keyframes crise{from{transform:translateY(14px);opacity:0}to{transform:none;opacity:1}}
+    .smd-consent-overlay .consent-x{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:9px;border:1px solid var(--line,#d7dee3);background:transparent;color:var(--slate,#2d4356);font-size:15px;cursor:pointer;line-height:1}
+    .smd-consent-overlay .splash-ack-links{margin:11px 0 4px;font-size:12px}
+    </style>
+    <script>
+    (function(){
+      function show(){var o=document.getElementById("consentOverlay");if(o){o.classList.add("show");o.setAttribute("aria-hidden","false");}}
+      function hide(){var o=document.getElementById("consentOverlay");if(o){o.classList.remove("show");o.setAttribute("aria-hidden","true");}}
+      function wire(){
+        var cta=document.getElementById("demoCTABtn");if(cta)cta.addEventListener("click",show);
+        var x=document.getElementById("consentClose");if(x)x.addEventListener("click",hide);
+        var o=document.getElementById("consentOverlay");if(o)o.addEventListener("click",function(e){if(e.target===o)hide();});
+        var cont=document.getElementById("splashContinueBtn");if(cont)cont.addEventListener("click",hide);
+        document.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
+      }
+      if(document.readyState!=="loading")wire();else document.addEventListener("DOMContentLoaded",wire);
+    })();
+    </script>
 
     <div class="splash-foot">
       © <span id="splashYear"></span> StewardMD · <strong>MaiKnowledge</strong> · Dr. Manoj Kumar Kurmana, MD<br>
@@ -1006,12 +1032,12 @@
   </div>
 </div>
 
-<script src="/app.js?v=gold3" defer></script>
-<script src="/policy.js?v=gold3" defer></script>
-<script src="/features.js?v=gold3" defer></script>
-<script src="/calculators.js?v=gold3" defer></script>
-<script src="/drugs.js?v=gold3" defer></script>
-<script src="/api.js?v=gold3" defer></script>
-<script src="/reasoning.js?v=gold3" defer></script>
+<script src="/app.js?v=gold4" defer></script>
+<script src="/policy.js?v=gold4" defer></script>
+<script src="/features.js?v=gold4" defer></script>
+<script src="/calculators.js?v=gold4" defer></script>
+<script src="/drugs.js?v=gold4" defer></script>
+<script src="/api.js?v=gold4" defer></script>
+<script src="/reasoning.js?v=gold4" defer></script>
 </body>
 </html>
