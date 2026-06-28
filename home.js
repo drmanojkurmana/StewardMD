@@ -74,16 +74,17 @@
     root.classList.add("on"); if (fab) fab.classList.remove("on");
     var p = root.querySelector("#hvCase");
     if (!p) {
-      p = document.createElement("div"); p.id = "hvCase"; p.className = "hv-casepanel";
+      p = document.createElement("div"); p.id = "v3case"; p.className = "v3-screen";
       p.innerHTML =
-        '<header class="hv-hdr"><button class="hv-ib" data-cx="back" aria-label="Back">' + svg("chev") + '</button><div class="hv-bz"><div><div class="hv-tt">Start a Case</div><div class="hv-ts">Choose how to enter findings</div></div></div></header>' +
-        '<div class="hv-main"><div class="hv-stack">' +
-          '<button class="hv-primary" data-m="simple"><div class="hv-pic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-ptit">Simple</div><div class="hv-psub">Guided, step-by-step — pick the problem, answer a few questions</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
-          '<button class="hv-sec" data-m="advanced"><div class="hv-sic">' + svg("sliders") + '</div><div class="hv-pb"><div class="hv-stit">Advanced</div><div class="hv-ssub">Full clinical form — all findings, vitals, labs &amp; risk at once</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
-          '<div class="hv-info">You can switch modes anytime from the header.</div>' +
-        '</div></div>';
+        '<header class="v3-header"><button class="v3-ic" data-cx="back" aria-label="Back">' + svg("chev") + '</button><div class="v3-brand"><div style="min-width:0"><div class="v3-brand-tt">Start a Case</div><div class="v3-brand-sub">Choose how to enter findings</div></div></div></header>' +
+        '<main class="v3-main"><div class="v3-stack">' +
+          '<button class="v3-primary" data-m="simple"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Simple</div><div class="sub">Guided, step-by-step — pick the problem, answer a few questions</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
+          '<button class="v3-secondary" data-m="advanced"><div class="ic">' + svg("sliders") + '</div><div style="flex:1;min-width:0"><div class="tt">Advanced</div><div class="sub">Full clinical form — all findings, vitals, labs &amp; risk at once</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+          '<div class="v3-foot">You can switch modes anytime from the header.</div>' +
+        '</div></main>';
       root.appendChild(p);
       p.addEventListener("click", function (e) {
+        e.stopPropagation();
         if (e.target.closest('[data-cx="back"]')) { p.classList.remove("on"); return; }
         var b = e.target.closest("[data-m]"); if (!b) return;
         var m = b.getAttribute("data-m");
@@ -97,7 +98,7 @@
   // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
   //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
-    startcase: function () { hideV2(); var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell"); if (ms) ms.classList.remove("hidden"); if (sh) sh.classList.remove("visible"); try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {} },
+    startcase: openCaseChooser,
     reasoning: function () { hideV2(); if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
     search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
     cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
@@ -197,6 +198,7 @@
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
       "#homeV2 .hv-casepanel{position:absolute;inset:0;z-index:6;background:var(--hbg);display:none;flex-direction:column}#homeV2 .hv-casepanel.on{display:flex;animation:cfade .2s ease}@keyframes cfade{from{opacity:0}to{opacity:1}}",
+      "#homeV2 .v3-screen{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;background:var(--v3-bg,#F8FAFC)}#homeV2 .v3-screen.on{display:flex;animation:cfade .2s ease}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
