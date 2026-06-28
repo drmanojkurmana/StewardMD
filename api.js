@@ -203,8 +203,7 @@
     b.innerHTML =
       '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div></div>' +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
-      '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>' +
-      '<div class="db-disc-foot">⚠️ <b>AI-summarized</b> from official labels (FDA / EMA / SmPC / BNF / WHO) — pending clinician review. Always <b>verify doses against the primary source</b> before prescribing. Clinical decision-support aid only, not a substitute for professional judgement.</div>';
+      '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>';
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =
