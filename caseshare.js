@@ -19,17 +19,20 @@
   // Ensure Firebase/Firestore is loaded (it is lazy-loaded), then run cb(db) or cb(null) on failure.
   // Load Firebase (lazy) AND wait for auth state to settle, then cb(db, user).
   // (Fixes the race where currentUser is briefly null right after lazy Firebase load.)
+  // Resolve Firestore/Auth directly from firebase (recovers if SMD_DB/SMD_AUTH weren't cached by boot).
+  function getDb(){ try { if (window.SMD_DB) return window.SMD_DB; if (window.firebase && firebase.firestore) return firebase.firestore(); } catch (e) { try { console.error("[CASESHARE] firestore() error:", e && e.message); } catch (x) {} } return null; }
+  function getAuth(){ try { if (window.SMD_AUTH) return window.SMD_AUTH; if (window.firebase && firebase.auth) return firebase.auth(); } catch (e) {} return null; }
   function ensureReady(cb){
     function withAuth(){
-      var auth = window.SMD_AUTH, db = window.SMD_DB || null;
-      if (!auth) return cb(db, null);
-      if (auth.currentUser) return cb(db, auth.currentUser);
+      var auth = getAuth();
+      if (!auth) return cb(getDb(), null);
+      if (auth.currentUser) return cb(getDb(), auth.currentUser);
       var done = false, unsub;
-      function fin(u){ if (done) return; done = true; try { unsub && unsub(); } catch (e) {} cb(window.SMD_DB || null, u || null); }
-      try { unsub = auth.onAuthStateChanged(function (u) { fin(u); }); } catch (e) { return cb(db, null); }
+      function fin(u){ if (done) return; done = true; try { unsub && unsub(); } catch (e) {} cb(getDb(), u || null); }
+      try { unsub = auth.onAuthStateChanged(function (u) { fin(u); }); } catch (e) { return cb(getDb(), auth.currentUser || null); }
       setTimeout(function () { fin(auth.currentUser); }, 4000);
     }
-    if (window.SMD_DB && window.SMD_AUTH) return withAuth();
+    if (window.firebase) return withAuth();              // firebase already loaded → resolve directly
     if (window.SMD_loadFirebase) window.SMD_loadFirebase(withAuth);
     else withAuth();
   }
@@ -53,7 +56,7 @@
     if (!snap) { toast("Generate a clinical decision first."); return; }
     toast("Preparing share…");
     ensureReady(function(db, user){
-      if (!db) { toast("Cloud unavailable — check your connection & try again."); return; }
+      if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
       if (!user) { toast("Please sign in with Google first (More ▸ Account & sign-in) to share."); return; }
       doShare(snap, db, user);
     });
