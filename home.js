@@ -26,15 +26,13 @@
         '<button id="smdUiV2" style="' + bs + (isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Advanced UI — by MaiK' + (isV2 ? '  &#10003;' : '') + '</button>' +
         '<button id="smdUiCl" style="' + bs + (!isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Classic UI — previous' + (!isV2 ? '  &#10003;' : '') + '</button>';
       menu.appendChild(w);
-      w.querySelector("#smdUiV2").onclick = function () { try { localStorage.setItem("smd_home_v2", "1"); } catch (e) {} location.search = "?home=v2"; };
-      w.querySelector("#smdUiCl").onclick = function () { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; };
+      w.querySelector("#smdUiV2").onclick = function () { if (window.SMD_setUI) SMD_setUI(true); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
+      w.querySelector("#smdUiCl").onclick = function () { if (window.SMD_setUI) SMD_setUI(false); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
     }
     try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(inject, 40); return r; }; } } catch (e) {}
     setTimeout(inject, 1500);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
-
-  if (!IS_V2) return;
 
   var ICON = {
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
@@ -149,6 +147,20 @@
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
       "body.smd-dens-compact #homeV2 .hv-tile,body.smd-dens-compact #homeV2 .hv-primary,body.smd-dens-compact #homeV2 .hv-sec{padding:13px}body.smd-dens-large #homeV2 .hv-tile{padding:20px}",
+      // ===== Advanced UI theme — restyles the WHOLE app by overriding its design tokens (active only with body.ui-v2) =====
+      "body.ui-v2{--teal:#0F766E;--teal-soft:#CCFBF1;--paper:#F8FAFC;--panel:#FFFFFF;--line:#E2E8F0;--ink:#0F172A;--slate:#334155;--slate-soft:#64748B;--sans:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif}",
+      "body.ui-v2.dark{--paper:#0B1220;--panel:#111B2E;--line:#1E2B43;--ink:#E7EDF5;--slate:#9FB2C6;--slate-soft:#7E92A8;--teal:#2DD4BF;--teal-soft:#0C2E2A}",
+      "body.ui-v2{font-family:var(--sans)}",
+      "body.ui-v2 .card,body.ui-v2 .score-card,body.ui-v2 .quick-answer-card,body.ui-v2 .simple-candidates-card,body.ui-v2 .drug-card,body.ui-v2 .sp-card,body.ui-v2 .scm-card,body.ui-v2 .demo-card,body.ui-v2 .mcp-case-card,body.ui-v2 .aware-card,body.ui-v2 .no-match-card{border-radius:16px!important;border:1px solid var(--line)!important;box-shadow:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06)!important}",
+      "body.ui-v2 .mode-select-inner{max-width:480px;margin:0 auto}body.ui-v2 .mode-card{border-radius:16px!important;padding:18px!important;border:1px solid var(--line)!important;box-shadow:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06)!important;transition:transform .15s,box-shadow .18s}body.ui-v2 .mode-card:active{transform:scale(.985)}",
+      "body.ui-v2 .group-tab,body.ui-v2 .asp-tab,body.ui-v2 .inf-tab,body.ui-v2 .sbref-tab{border-radius:999px!important;padding:8px 15px!important;font-weight:600}",
+      "body.ui-v2 .radio-opt,body.ui-v2 .scm-opt,body.ui-v2 .finding-item,body.ui-v2 .asp-opt,body.ui-v2 .simple-chip{border-radius:12px!important;min-height:44px}",
+      "body.ui-v2 .numeric-field input,body.ui-v2 .numeric-field select,body.ui-v2 .sp-input,body.ui-v2 .inf-input,body.ui-v2 .calc-input,body.ui-v2 .scp-input,body.ui-v2 .tester-input{border-radius:12px!important;min-height:46px}",
+      "body.ui-v2 .run-btn,body.ui-v2 .asp-launch-btn,body.ui-v2 .calc-btn,body.ui-v2 .scp-save-btn,body.ui-v2 .unlock-btn,body.ui-v2 .none-above-btn{border-radius:14px!important;min-height:52px!important;font-weight:700!important;letter-spacing:.01em}",
+      "body.ui-v2 .step-nav-btn{border-radius:12px!important;min-height:48px!important;font-weight:600}body.ui-v2 .step-progress-fill{background:var(--teal)!important}",
+      "body.ui-v2 .my-cases-btn,body.ui-v2 .smd-search-btn,body.ui-v2 .system-picker-btn,body.ui-v2 .asp-mini-btn,body.ui-v2 .inf-minibtn{border-radius:12px!important}",
+      "body.ui-v2 .app-head{border-bottom:1px solid var(--line)}body.ui-v2 .brand{letter-spacing:-.01em}",
+      "body.ui-v2 .score-chip,body.ui-v2 .sp-chip,body.ui-v2 .dash-chip,body.ui-v2 .factor-chip,body.ui-v2 .ref-chip,body.ui-v2 .evidence-pill,body.ui-v2 .simple-chip{border-radius:999px!important}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -231,9 +243,7 @@
     );
     var s = sheetEl();
     s.querySelectorAll("[data-ui]").forEach(function (b) {
-      b.addEventListener("click", function () {
-        if (b.getAttribute("data-ui") === "classic") { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; }
-      });
+      b.addEventListener("click", function () { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); });
     });
     s.querySelectorAll("[data-mi]").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -302,21 +312,27 @@
 
   // ---- show after entry (when the shell becomes visible) ----
   function shellVisible() { var sh = document.querySelector(".shell"); return sh && sh.offsetParent !== null; }
-  function tryShow() {
-    build();
-    // show v2 once the user is past splash/login (shell present in DOM); otherwise show anyway after a short grace
-    root.classList.add("on");
+  function injectFont() {
+    if (document.getElementById("smd-inter")) return;
+    var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap";
+    document.head.appendChild(l);
   }
+  // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
+  function setUI(on) {
+    try { if (on) localStorage.setItem("smd_home_v2", "1"); else localStorage.removeItem("smd_home_v2"); } catch (e) {}
+    document.body.classList.toggle("ui-v2", on);
+    if (on) { build(); showV2(); } else { if (root) root.classList.remove("on"); if (fab) fab.classList.remove("on"); }
+    try { closeSheet(); } catch (e) {}
+  }
+  window.SMD_setUI = setUI;
   function start() {
-    applyD();                 // restore saved display prefs app-wide
-    if (ds.autoFit) autoFitD();
-    build();
-    // Reveal v2 home after the entry flow. We poll briefly for the shell; fall back to showing it.
-    var tries = 0;
-    var iv = setInterval(function () {
-      tries++;
-      if (shellVisible() || tries > 40) { clearInterval(iv); root.classList.add("on"); }
-    }, 150);
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD();
+    if (IS_V2) {
+      document.body.classList.add("ui-v2");   // theme the entire app immediately
+      var tries = 0;
+      var iv = setInterval(function () { tries++; if (shellVisible() || tries > 40) { clearInterval(iv); showV2(); } }, 150);
+    }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
