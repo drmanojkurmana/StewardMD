@@ -120,7 +120,7 @@
     if (document.getElementById("smd-home-css")) return;
     var st = document.createElement("style"); st.id = "smd-home-css";
     st.textContent = [
-      "#homeV2{--hp:#0F766E;--hp2:#115E59;--hps:#CCFBF1;--hbg:#F8FAFC;--hpanel:#fff;--hbd:#E2E8F0;--hink:#0F172A;--hmut:#64748B;--hsh:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06);--hslg:0 8px 30px rgba(15,118,110,.22);--hfont:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:120;background:var(--hbg);color:var(--hink);font-family:var(--hfont);overflow:hidden;display:none;flex-direction:column}",
+      "#homeV2{--hp:#0F766E;--hp2:#115E59;--hps:#CCFBF1;--hbg:#F8FAFC;--hpanel:#fff;--hbd:#E2E8F0;--hink:#0F172A;--hmut:#64748B;--hsh:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06);--hslg:0 8px 30px rgba(15,118,110,.22);--hfont:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:90;background:var(--hbg);color:var(--hink);font-family:var(--hfont);overflow:hidden;display:none;flex-direction:column}",
       "#homeV2.on{display:flex}",
       "body.dark #homeV2{--hbg:#0B1220;--hpanel:#111B2E;--hbd:#1E2B43;--hink:#E7EDF5;--hmut:#8597AD;--hps:#0c2e2a;--hsh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}",
       "#homeV2 svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}",
@@ -166,7 +166,7 @@
       ".hv-reset{width:100%;background:#fbe7e9;color:#ab1c2c;border:1px solid #efa9b1;border-radius:11px;padding:12px;font:700 13px var(--hfont);cursor:pointer;margin-top:6px}",
       ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
       ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
-      ".hv-fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:125;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:none}.hv-fab.on{display:flex}.hv-fab svg{stroke:#fff;width:24px;height:24px}.hv-fab:active{transform:scale(.92)}",
+      ".hv-fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:85;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:none}.hv-fab.on{display:flex}.hv-fab svg{stroke:#fff;width:24px;height:24px}.hv-fab:active{transform:scale(.92)}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -202,6 +202,7 @@
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
+      "body.ui-v2 .app-head-actions{justify-content:center!important;flex-wrap:wrap;gap:8px}body.ui-v2 .brandrow{justify-content:center}",
       "#homeV2 .hv-casepanel{position:absolute;inset:0;z-index:6;background:var(--hbg);display:none;flex-direction:column}#homeV2 .hv-casepanel.on{display:flex;animation:cfade .2s ease}@keyframes cfade{from{opacity:0}to{opacity:1}}",
       "#homeV2 .v3-screen{position:absolute;inset:0;z-index:6;display:none;flex-direction:column;background:var(--v3-bg,#F8FAFC)}#homeV2 .v3-screen.on{display:flex;animation:cfade .2s ease}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
@@ -216,14 +217,14 @@
     root.innerHTML =
       '<header class="v3-header">' +
         '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="v3-brand"><div class="v3-mark"><img src="/android-chrome-192x192.png" alt="StewardMD" style="width:100%;height:100%;object-fit:cover;border-radius:inherit"></div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
+        '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield"><img src="/android-chrome-192x192.png" alt="StewardMD" style="width:56px;height:56px;object-fit:cover;border-radius:16px"></div></section>' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:62px;height:62px;object-fit:contain"></div></section>' +
         '<div class="v3-qrow">' +
           '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
           '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
@@ -300,8 +301,15 @@
   }
   function openSubscription() {
     openSheet('<div class="hv-sh-t">Subscription</div>' +
-      '<p style="font:500 14px/1.6 var(--hfont);color:var(--hmut)">StewardMD is currently <b style="color:var(--hink)">free</b> for qualified clinicians. Premium plans (team workspaces, offline mode, institutional antibiograms) are coming soon.</p>' +
-      '<button class="hv-reset" style="background:var(--hps);color:var(--hp);border-color:var(--hp)" data-close="1">Got it</button>');
+      '<div style="text-align:center;padding:6px 4px 2px">' +
+        '<div style="font:800 30px/1 var(--hfont);color:var(--hp)"><span style="text-decoration:line-through;color:var(--hmut);font-size:19px;font-weight:700">₹999 / year</span>&nbsp;&nbsp;Free</div>' +
+        '<div style="font:600 13px var(--hfont);color:var(--hmut);margin-top:7px">Free for all doctors for now — full access while we test.</div>' +
+      '</div>' +
+      '<div style="margin-top:14px;border:1px solid var(--hbd);border-radius:14px;padding:14px;background:var(--hbg)">' +
+        '<div style="font:700 12px var(--hfont);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut);margin-bottom:8px">Included</div>' +
+        '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning (beta)</div>' +
+      '</div>' +
+      '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue — it\'s free</button>');
     sheetEl().querySelector("[data-close]").addEventListener("click", closeSheet);
   }
   function openAskAi() {
@@ -395,7 +403,7 @@
         tries++;
         var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
         var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
-        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); showV2(); }
+        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); if (ms) ms.classList.add("hidden"); showV2(); }
       }, 120);
     }
   }
