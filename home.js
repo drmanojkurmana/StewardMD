@@ -1,15 +1,18 @@
-/* StewardMD — premium home (v2), flag-gated.
-   Activates only at ?home=v2 (or localStorage smd_home_v2="1") so the live
-   default homepage is untouched. Presentation layer only: every control
-   delegates to the existing global functions. Nothing is removed. */
+/* StewardMD — premium home (v2). DEFAULT UI as of gold23.
+   Advanced UI by MaiK is on for everyone by default. Users can switch to
+   Classic from Settings / the sidebar (persists as smd_home_v2="0"), or via
+   ?home=classic. ?home=v2 forces it back on. Presentation layer only: every
+   control delegates to the existing global functions. Nothing is removed.
+   To roll back to Classic-default, revert this commit (restore the "==='1'"
+   gate); the classic-ui-stable backup is independent and untouched. */
 (function () {
   "use strict";
   function flagged() {
     try {
       if (/[?&]home=v2\b/.test(location.search)) { localStorage.setItem("smd_home_v2", "1"); return true; }
-      if (/[?&]home=classic\b/.test(location.search)) { localStorage.removeItem("smd_home_v2"); return false; }
-      return localStorage.getItem("smd_home_v2") === "1";
-    } catch (e) { return /[?&]home=v2\b/.test(location.search); }
+      if (/[?&]home=classic\b/.test(location.search)) { localStorage.setItem("smd_home_v2", "0"); return false; }
+      return localStorage.getItem("smd_home_v2") !== "0"; // default ON; only an explicit Classic choice ("0") disables
+    } catch (e) { return !/[?&]home=classic\b/.test(location.search); }
   }
   var IS_V2 = flagged();
 
@@ -593,7 +596,7 @@
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
   function setUI(on) {
-    try { if (on) localStorage.setItem("smd_home_v2", "1"); else localStorage.removeItem("smd_home_v2"); } catch (e) {}
+    try { localStorage.setItem("smd_home_v2", on ? "1" : "0"); } catch (e) {}
     document.body.classList.toggle("ui-v2", on);
     if (on) { build(); suppressModeSelect(); showV2(); try { injectReasonBtn(); } catch (e) {} } else { if (root) root.classList.remove("on"); if (fab) fab.classList.remove("on"); var rw = document.getElementById("smdReasonWrap"); if (rw && rw.parentNode) rw.parentNode.removeChild(rw); }
     try { closeSheet(); } catch (e) {}
