@@ -1,0 +1,113 @@
+{
+  "generic": "Imipramine",
+  "cls": "Tricyclic antidepressant (TCA)",
+  "pharm": "Tricyclic dibenzazepine antidepressant that potentiates adrenergic synapses by blocking reuptake of norepinephrine (and serotonin) at nerve endings; also has anticholinergic, antihistaminic, and alpha-adrenergic blocking activity.",
+  "tags": ["TCA", "Boxed warning: suicidality", "MAOI contraindicated", "Anticholinergic", "Cardiotoxic in overdose"],
+  "quick": [
+    ["Adult dose", "Outpatient: start 75 mg/day, up to 150 mg/day (max 200 mg/day)"],
+    ["Meal", "May take with or without food"],
+    ["Pregnancy", "Use only if clinical need clearly justifies risk; congenital malformations reported"],
+    ["Lactation", "Likely excreted in breast milk; generally avoid nursing"],
+    ["Renal", "Use with caution in significant renal impairment"],
+    ["Hepatic", "Use with caution; levels rise with enzyme inhibitors"],
+    ["Alcohol", "Avoid - enhances CNS depression and overdose danger"],
+    ["Monitoring", "Suicidality/behavior; ECG (esp. cardiac disease, high doses)"]
+  ],
+  "summary": "Imipramine is the original tricyclic antidepressant, used for depression and as temporary adjunctive therapy for childhood enuresis (age >=6). It carries a BOXED WARNING for increased risk of suicidal thinking and behavior in children, adolescents, and young adults (<=24 years). It is contraindicated with MAO inhibitors and during the acute recovery period after myocardial infarction. Anticholinergic effects, orthostatic hypotension, hyponatremia (SIADH), seizure-threshold lowering, and angle-closure glaucoma are notable risks, and overdose is frequently fatal due to cardiac dysrhythmias. Metabolism via CYP2D6 makes it prone to interactions.",
+  "indications": [
+    "Depression - relief of symptoms (endogenous depression more responsive); 1-3 weeks may be needed for optimal effect",
+    "Childhood enuresis - temporary adjunctive therapy to reduce bedwetting in children aged 6 years and older, after organic causes are excluded"
+  ],
+  "dosage": [
+    {"c": "Depression (hospitalized)", "r": "Adult", "d": "Initially 100 mg/day in divided doses, increased to 200 mg/day; if no response in 2 weeks, increase to 250-300 mg/day", "t": "Divided doses; gradual titration", "n": "Close supervision setting"},
+    {"c": "Depression (outpatient)", "r": "Adult", "d": "Initially 75 mg/day, increased to 150 mg/day; maintenance 50-150 mg/day", "t": "Doses over 200 mg/day not recommended", "n": "Lowest effective maintenance dose"},
+    {"c": "Depression", "r": "Adolescent / Geriatric", "d": "Initially 30-40 mg/day; generally not necessary to exceed 100 mg/day", "t": "Start low, titrate cautiously", "n": "Greater sensitivity; cardiac risk"},
+    {"c": "Childhood enuresis", "r": "Pediatric (>=6 years)", "d": "Start 25 mg/day 1 hour before bedtime; if no response in 1 week, increase to 50 mg/night (<12 yr) or up to 75 mg/night (>12 yr)", "t": "Bedtime; early bedwetters may split 25 mg midafternoon + bedtime", "n": "Do not exceed 2.5 mg/kg/day; taper rather than stop abruptly"}
+  ],
+  "admin": [
+    "Initiate at a low dose and increase gradually, watching clinical response and tolerance",
+    "Obtain an ECG before larger-than-usual doses and at intervals until steady state, especially with cardiovascular disease",
+    "Allow at least 14 days between an MAO inhibitor and imipramine in either direction",
+    "Prescribe the smallest quantity feasible to reduce overdose risk",
+    "Taper gradually rather than stopping abruptly to limit withdrawal symptoms; discontinue before elective surgery as clinically allowable"
+  ],
+  "moa": "The exact mechanism is not fully established. Imipramine's antidepressant effect is attributed to potentiation of adrenergic synapses through blockade of norepinephrine (and serotonin) reuptake at nerve endings. It also blocks muscarinic cholinergic, histamine H1, and alpha-1 adrenergic receptors, accounting for many of its side effects. Its action in childhood enuresis is thought to be independent of its antidepressant effect.",
+  "contra": {
+    "absolute": [
+      "Concomitant use of monoamine oxidase inhibitors (hyperpyretic crises, severe seizures, fatal reactions); allow >=14 days between agents",
+      "Acute recovery period after myocardial infarction",
+      "Known hypersensitivity to imipramine (consider cross-sensitivity to other dibenzazepines)"
+    ],
+    "relative": [
+      "Cardiovascular disease (conduction defects, arrhythmias, CHF, MI, stroke, tachycardia) - requires cardiac surveillance",
+      "History of seizure disorder (lowers seizure threshold)",
+      "Urinary retention or narrow-angle glaucoma (anticholinergic effects)",
+      "Hyperthyroidism or thyroid medication use (cardiovascular toxicity)",
+      "Risk for bipolar disorder (may precipitate mixed/manic episode)"
+    ],
+    "monitor": [
+      "BOXED WARNING: monitor all patients, especially children/adolescents/young adults (<=24 yr), for worsening depression, suicidal thinking/behavior, and unusual changes in behavior, particularly early in therapy and at dose changes",
+      "ECG and cardiac status, especially in cardiac disease and at higher doses",
+      "Serum sodium (hyponatremia/SIADH, especially elderly or on diuretics)",
+      "Leukocyte/differential counts if fever and sore throat develop"
+    ]
+  },
+  "preg": "Animal reproduction studies are inconclusive and there are no well-controlled studies in pregnant women, but there have been clinical reports of congenital malformations (causal relationship not established). Use in women who are or might become pregnant only if the clinical condition clearly justifies the potential risk to the fetus.",
+  "lact": "Limited data suggest imipramine is likely excreted in human breast milk. As a general rule, a woman taking the drug should not nurse because of the possibility the drug may be excreted in milk and be harmful to the infant.",
+  "renal": "Use with caution in patients with significantly impaired renal function. Cautious, low-end dosing is advised in the elderly given the higher likelihood of reduced renal function.",
+  "hepatic": "Use with caution in significantly impaired hepatic function. Plasma concentrations rise with hepatic enzyme inhibitors (e.g., cimetidine, fluoxetine) and fall with inducers (e.g., barbiturates, phenytoin); altered liver function and jaundice have been reported.",
+  "interactions": {
+    "major": [
+      "MAO inhibitors (contraindicated - hyperpyretic crises, seizures, death; includes linezolid)",
+      "CYP2D6 inhibitors (quinidine, cimetidine, SSRIs such as fluoxetine/paroxetine/sertraline - markedly raise TCA levels and toxicity; allow >=5 weeks after stopping fluoxetine)",
+      "Other CNS depressants and alcohol (additive CNS/respiratory depression)",
+      "Sympathomimetic amines (epinephrine, norepinephrine) in decongestants/local anesthetics - potentiated catecholamine effects"
+    ],
+    "moderate": [
+      "Hepatic enzyme inducers (barbiturates, phenytoin) lower imipramine levels",
+      "Anticholinergic drugs (additive atropine-like effects, paralytic ileus)",
+      "Guanethidine, clonidine (imipramine may block their antihypertensive effects)",
+      "Methylphenidate (inhibits imipramine metabolism - may need lower imipramine dose)",
+      "Antihypertensive agents (caution - blood pressure effects)"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid. Imipramine enhances the CNS depressant effects of alcohol, and concurrent use increases the danger of accidental or intentional overdose.",
+    "diagnostics": "Both elevation and lowering of blood sugar levels have been reported."
+  },
+  "se": {
+    "common": ["Dry mouth", "Constipation", "Blurred vision", "Drowsiness/dizziness", "Orthostatic hypotension", "Sweating", "Weight gain", "Tachycardia/palpitations"],
+    "serious": ["Cardiac arrhythmias / conduction (heart) block / ECG changes", "Seizures", "Hyponatremia / SIADH", "Angle-closure glaucoma", "Bone marrow depression including agranulocytosis", "Hypomania/mania; activation of psychosis", "Paralytic ileus / urinary retention"],
+    "rare": ["Jaundice / altered liver function", "Peripheral neuropathy", "Gynecomastia, galactorrhea, testicular swelling", "Extrapyramidal symptoms", "Alopecia"],
+    "emergency": ["Suicidal thinking or behavior", "Serious cardiac dysrhythmia", "Seizures", "Severe hyponatremia (seizure, coma, respiratory arrest)", "Agranulocytosis with fever/sore throat"]
+  },
+  "monitoring": ["Worsening depression, suicidality, and behavior changes (boxed warning), especially in patients <=24 years and at treatment initiation/dose changes", "ECG before higher doses and periodically; cardiac status in cardiac disease", "Serum sodium, especially in elderly or diuretic users", "CBC with differential if fever/sore throat occurs", "Screen for bipolar disorder before starting"],
+  "counsel": [
+    "Watch for and immediately report new or worsening depression, anxiety, agitation, or thoughts of suicide - this risk is highest early in treatment and after dose changes; families/caregivers should observe daily",
+    "Do not stop abruptly; the dose should be tapered under medical guidance",
+    "Avoid alcohol and use caution with driving or operating machinery until you know how the drug affects you",
+    "Report eye pain, vision changes, or eye redness/swelling (possible angle-closure glaucoma)",
+    "Report headache, weakness, confusion, or unsteadiness (possible low sodium)",
+    "Avoid excessive sun exposure (photosensitivity); tell your provider about all medicines, especially MAOIs"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect typically over 1-3 weeks"],
+    ["Peak", "Plasma peak generally within ~1-2 hours of oral dosing"],
+    ["Half-life", "Variable; reduced in CYP2D6 poor metabolizers and with enzyme inhibitors"],
+    ["Duration", "Once-daily dosing feasible at steady state"],
+    ["Storage", "Store at 20-25 C (68-77 F); dispense in tight, child-resistant container"]
+  ],
+  "pearls": [
+    "BOXED WARNING: antidepressants increase suicidal thinking/behavior in children, adolescents, and young adults (<=24 yr); not approved for pediatric use except nocturnal enuresis",
+    "Contraindicated with MAOIs and in acute post-MI recovery; separate from MAOIs by >=14 days",
+    "CYP2D6 substrate - poor metabolizers and CYP2D6 inhibitors (e.g., SSRIs, quinidine) can cause large rises in levels and toxicity",
+    "Overdose is frequently fatal; QRS widening >=0.10 s signals serious cardiac toxicity",
+    "Do not exceed 2.5 mg/kg/day in children; screen for bipolar disorder before starting"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip it and resume the regular schedule; do not double up. For once-daily bedtime dosing, do not take the missed dose in the morning if it causes daytime drowsiness - ask your prescriber.",
+  "overdose": "Overdose is often fatal and multiple drug ingestion (including alcohol) is common. Critical manifestations include cardiac dysrhythmias, severe hypotension, convulsions, and CNS depression/coma; QRS widening (>=0.10 s) indicates severity. Obtain an ECG and begin continuous cardiac monitoring immediately, secure the airway, and perform gastric decontamination (lavage then activated charcoal; emesis contraindicated). Use IV sodium bicarbonate to keep serum pH 7.45-7.55 for cardiotoxicity. Monitor at least 6 hours. Type 1A/1C antiarrhythmics are contraindicated; physostigmine is not routinely recommended. Contact a poison control center.",
+  "refs": [
+    ["FDA Prescribing Information - Imipramine Hydrochloride tablets, USP (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22imipramine+hydrochloride%22"],
+    ["DailyMed - Imipramine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=imipramine"]
+  ]
+}

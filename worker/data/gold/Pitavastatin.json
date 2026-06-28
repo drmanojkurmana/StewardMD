@@ -1,0 +1,91 @@
+{
+  "generic": "Pitavastatin",
+  "cls": "HMG-CoA reductase inhibitor (statin)",
+  "pharm": "Lipid-lowering agent / antihyperlipidemic",
+  "tags": ["statin", "hyperlipidemia", "LDL", "HeFH", "dyslipidemia"],
+  "quick": [
+    ["Adult dose", "2-4 mg PO once daily (max 4 mg)"],
+    ["Meal", "With or without food, same time each day"],
+    ["Pregnancy", "Discontinue when pregnancy recognized"],
+    ["Lactation", "Not recommended"],
+    ["Renal", "Start 1 mg; max 2 mg in moderate/severe CKD or HD"],
+    ["Hepatic", "Contraindicated in acute liver failure / decompensated cirrhosis"],
+    ["Alcohol", "Limit; raises hepatic injury risk"],
+    ["Monitoring", "Lipids, LFTs, CK if muscle symptoms, HbA1c/glucose"]
+  ],
+  "summary": "Pitavastatin is an HMG-CoA reductase inhibitor used as an adjunct to diet to lower LDL-C in adults with primary hyperlipidemia and heterozygous familial hypercholesterolemia. Dosed 2-4 mg once daily (max 4 mg), with reduced dosing in renal impairment. Contraindicated with cyclosporine and in active liver failure. Key risks are myopathy and rhabdomyolysis.",
+  "indications": [
+    "Adjunct to diet to reduce LDL-C in adults with primary hyperlipidemia",
+    "Adjunct to diet to reduce LDL-C in adults with heterozygous familial hypercholesterolemia (HeFH)"
+  ],
+  "dosage": [
+    {"c": "Primary hyperlipidemia / HeFH (adult)", "r": "Standard", "d": "2-4 mg once daily; maximum 4 mg once daily", "t": "Once daily, same time each day", "n": "If LDL-C goal not met or high-intensity statin needed at 4 mg, prescribe alternative LDL-lowering therapy"},
+    {"c": "Moderate/severe renal impairment (eGFR 15-59) or ESRD on hemodialysis", "r": "Renal-adjusted", "d": "Start 1 mg once daily; maximum 2 mg once daily", "t": "Once daily", "n": "No adjustment needed for mild renal impairment"},
+    {"c": "Concomitant erythromycin", "r": "Interaction cap", "d": "Do not exceed 1 mg once daily", "t": "Once daily", "n": "Erythromycin markedly increases pitavastatin exposure"},
+    {"c": "Concomitant rifampin", "r": "Interaction cap", "d": "Do not exceed 2 mg once daily", "t": "Once daily", "n": "Rifampin markedly increases peak pitavastatin exposure"}
+  ],
+  "admin": [
+    "Take orally once daily with or without food at the same time each day",
+    "Maintain a standard cholesterol-lowering diet throughout treatment",
+    "Assess LDL-C when clinically appropriate, as early as 4 weeks after initiation, and adjust dosage if needed",
+    "Do not exceed dosing caps when taken with erythromycin (1 mg) or rifampin (2 mg)",
+    "Reduce starting dose to 1 mg (max 2 mg) in moderate/severe renal impairment or hemodialysis"
+  ],
+  "moa": "Competitively inhibits HMG-CoA reductase, the enzyme catalyzing conversion of HMG-CoA to mevalonate, the rate-limiting step in hepatic cholesterol synthesis. Reduced intracellular cholesterol upregulates hepatic LDL receptors, accelerating LDL uptake from blood and lowering plasma total cholesterol; sustained inhibition also decreases very-low-density lipoprotein levels.",
+  "contra": {
+    "absolute": ["Concomitant use of cyclosporine", "Acute liver failure or decompensated cirrhosis", "Hypersensitivity to pitavastatin or any excipient (angioedema, rash, pruritus, urticaria reported)"],
+    "relative": ["Concomitant gemfibrozil (not recommended)", "Heavy alcohol use or history of liver disease", "Predisposition to myopathy (age >=65, uncontrolled hypothyroidism, renal impairment)"],
+    "monitor": ["Concomitant erythromycin, rifampin, fibrates, niacin >=1 g/day, or colchicine", "Unexplained muscle pain, tenderness or weakness", "Acute conditions predisposing to renal failure secondary to rhabdomyolysis"]
+  },
+  "preg": "Discontinue pitavastatin when pregnancy is recognized, or consider the ongoing therapeutic needs of the patient. Statins decrease cholesterol synthesis and may cause fetal harm based on mechanism of action; treatment of hyperlipidemia is generally not necessary during pregnancy. Observational data over decades have not identified a drug-associated risk of major congenital malformations.",
+  "lact": "Breastfeeding is not recommended during treatment. There is no information on the presence of pitavastatin in human milk, but another statin passes into human milk; because statins may cause serious adverse reactions in a breastfed infant, advise against breastfeeding.",
+  "renal": "Renal impairment is a risk factor for myopathy and rhabdomyolysis. For moderate and severe renal impairment (eGFR 30-59 and 15-29 mL/min/1.73 m2) and ESRD on hemodialysis, start 1 mg once daily with a maximum of 2 mg once daily. No adjustment for mild impairment. Monitor all renally impaired patients for myopathy.",
+  "hepatic": "Contraindicated in patients with acute liver failure or decompensated cirrhosis. Increases in serum transaminases (some persistent) and rare fatal/non-fatal hepatic failure have occurred. Consider liver enzyme testing before initiation and as clinically indicated; discontinue if serious hepatic injury, hyperbilirubinemia or jaundice occurs.",
+  "interactions": {
+    "major": ["Cyclosporine - increases pitavastatin exposure ~4.6-fold; concomitant use is contraindicated", "Gemfibrozil - increased myopathy/rhabdomyolysis risk; avoid concomitant use", "Erythromycin - increases exposure ~2.8-fold; do not exceed pitavastatin 1 mg/day", "Rifampin - increases peak exposure; do not exceed pitavastatin 2 mg/day"],
+    "moderate": ["Fibrates (e.g., fenofibrate) - increased myopathy/rhabdomyolysis risk; weigh benefit vs risk", "Niacin lipid-modifying doses (>=1 g/day) - increased myopathy risk", "Colchicine - reports of myopathy and rhabdomyolysis with statins"],
+    "minor": ["Atazanavir - modest increase in pitavastatin exposure (~31% AUC)", "Digoxin, diltiazem, enalapril, ezetimibe - no clinically significant interaction"],
+    "food": "High-fat meal decreases Cmax by 43% but does not significantly reduce AUC; grapefruit juice has minimal effect.",
+    "alcohol": "Limit alcohol; substantial intake increases the risk of hepatic injury.",
+    "diagnostics": "May elevate creatine phosphokinase, transaminases, alkaline phosphatase, bilirubin, and glucose/HbA1c."
+  },
+  "se": {
+    "common": ["Myalgia", "Constipation", "Back pain", "Diarrhea", "Pain in extremity", "Arthralgia", "Headache", "Nasopharyngitis"],
+    "serious": ["Myopathy", "Immune-mediated necrotizing myopathy (IMNM)", "Hepatic dysfunction / hepatitis", "Increases in HbA1c and fasting serum glucose"],
+    "rare": ["Rhabdomyolysis with acute kidney injury", "Cognitive impairment (memory loss, confusion; generally reversible)", "Peripheral neuropathy", "Interstitial lung disease", "Angioedema"],
+    "emergency": ["Rhabdomyolysis (severe muscle pain, weakness, dark urine)", "Fatal or non-fatal hepatic failure", "Severe hypersensitivity reaction including angioedema"]
+  },
+  "monitoring": [
+    "Lipid panel at baseline and as early as 4 weeks after initiation or dose change",
+    "Liver enzymes before initiation and when clinically indicated thereafter",
+    "Creatine kinase if unexplained muscle pain, tenderness or weakness occurs",
+    "HbA1c and fasting glucose periodically",
+    "Renal function in patients at risk; monitor renally impaired patients for myopathy"
+  ],
+  "counsel": [
+    "Take once daily at the same time each day, with or without food",
+    "Promptly report any unexplained muscle pain, tenderness or weakness, especially with malaise or fever",
+    "Report fatigue, anorexia, right upper abdominal discomfort, dark urine or jaundice",
+    "Maintain a heart-healthy diet, regular exercise and healthy weight; glucose/HbA1c may rise",
+    "Inform provider of all medications, including OTC and herbal, and of known or suspected pregnancy"
+  ],
+  "pk": [
+    ["Onset", "LDL-C reduction within weeks of dosing"],
+    ["Peak", "~1 hour (plasma Cmax)"],
+    ["Half-life", "~12 hours (mean plasma elimination)"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "Store at 25 C (77 F), excursions 15-30 C; protect from light"]
+  ],
+  "pearls": [
+    "Contraindicated with cyclosporine and not recommended with gemfibrozil due to myopathy risk",
+    "Metabolized mainly by glucuronidation (UGT) with only minimal CYP450 involvement",
+    ">99% protein bound; hemodialysis unlikely to be of benefit in overdose",
+    "Renal dose caps: start 1 mg, max 2 mg in moderate/severe CKD and hemodialysis"
+  ],
+  "missed": "Take the missed dose when remembered unless it is close to the next scheduled dose; do not double up. Resume the regular once-daily schedule.",
+  "overdose": "No specific treatment for pitavastatin overdose is known. Provide supportive care and contact Poison Control (1-800-222-1222). Hemodialysis is unlikely to be of benefit due to the high protein-binding ratio of pitavastatin.",
+  "refs": [
+    ["FDA Pitavastatin (LIVALO) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pitavastatin%22"],
+    ["FDA DailyMed - Pitavastatin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

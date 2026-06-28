@@ -1,0 +1,97 @@
+{
+  "generic": "Baricitinib",
+  "cls": "Janus kinase (JAK) inhibitor (oral DMARD/immunomodulator)",
+  "pharm": "Selective, reversible inhibitor of JAK1/JAK2 that blocks cytokine signaling through the JAK-STAT pathway, dampening inflammatory and immune responses.",
+  "tags": ["JAK inhibitor", "Oral", "Immunosuppressant", "Boxed warning", "DMARD", "Once daily", "Renally cleared"],
+  "quick": [
+    ["Adult dose", "RA: 2 mg PO once daily; COVID-19: 4 mg once daily; alopecia areata: 2-4 mg once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "May cause fetal harm (animal data); weigh risk/benefit"],
+    ["Lactation", "Not recommended; advise not to breastfeed"],
+    ["Renal", "Reduce or avoid by eGFR and indication (see renal)"],
+    ["Hepatic", "Avoid in severe hepatic impairment (RA/AA)"],
+    ["Alcohol", "No specific interaction; consider hepatic risk"],
+    ["Monitoring", "TB/hepatitis screen, CBC, LFTs, lipids, signs of infection/thrombosis/MACE"]
+  ],
+  "summary": "Baricitinib is an oral once-daily JAK inhibitor used for refractory rheumatoid arthritis, hospitalized COVID-19 requiring oxygen support, and severe alopecia areata. It carries a BOXED WARNING for serious (sometimes fatal) infections including tuberculosis, increased all-cause mortality, malignancy (lymphoma, lung cancer), major adverse cardiovascular events (MACE), and thrombosis (DVT, PE, arterial). Screen for active/latent TB and viral hepatitis and check baseline blood counts before starting, and monitor closely throughout. Dose must be reduced for renal impairment and avoided in severe hepatic impairment.",
+  "indications": [
+    "Moderately to severely active rheumatoid arthritis in adults with inadequate response to one or more TNF blockers",
+    "COVID-19 in hospitalized adults requiring supplemental oxygen, non-invasive or invasive mechanical ventilation, or ECMO",
+    "Severe alopecia areata in adults",
+    "Limitation of use: not recommended with other JAK inhibitors, biologic DMARDs/immunomodulators, or potent immunosuppressants (e.g., azathioprine, cyclosporine)"
+  ],
+  "dosage": [
+    {"c": "Rheumatoid arthritis (adults)", "r": "Oral", "d": "2 mg", "t": "Once daily", "n": "Monotherapy or with methotrexate/other non-biologic DMARDs"},
+    {"c": "COVID-19 (hospitalized adults)", "r": "Oral", "d": "4 mg", "t": "Once daily for up to 14 days", "n": "Continue for 14 days or until hospital discharge, whichever is first"},
+    {"c": "Severe alopecia areata (adults)", "r": "Oral", "d": "2 mg; increase to 4 mg if inadequate response", "t": "Once daily", "n": "Consider 4 mg for near-complete/complete scalp loss; reduce to 2 mg once adequate response achieved"},
+    {"c": "Strong OAT3 inhibitor coadministration (e.g., probenecid)", "r": "Oral", "d": "Halve the dose (4->2 mg; 2->1 mg)", "t": "Once daily", "n": "If recommended dose is 1 mg, consider discontinuing probenecid"},
+    {"c": "Unable to swallow tablets", "r": "Oral dispersion / G-tube / NG-OG tube", "d": "Same mg dose dispersed in room-temperature water", "t": "Per indication", "n": "Dispersed tablets stable in water up to 4 hours; use water volume/rinse per route"}
+  ],
+  "admin": [
+    "Before starting: evaluate for active and latent TB; do not give with active TB; treat latent TB first (except COVID-19)",
+    "Screen for viral hepatitis and obtain baseline CBC, hepatic and renal function; update immunizations (RA/AA)",
+    "Take once daily with or without food",
+    "For patients unable to swallow, disperse tablet(s) in room-temperature water for oral, G-tube, or NG/OG-tube administration",
+    "Do not initiate if ALC <500, ANC <1000, or hemoglobin <8 g/dL (RA/AA); for COVID-19 if ALC <200 or ANC <500"
+  ],
+  "moa": "Inhibits Janus kinases (JAK1 and JAK2), intracellular enzymes that transmit cytokine and growth-factor receptor signals. By preventing JAK-mediated phosphorylation and activation of STAT transcription factors, baricitinib reduces the signaling of multiple proinflammatory cytokines, modulating immune and hematopoietic cell function.",
+  "contra": {
+    "absolute": ["None listed in the label"],
+    "relative": ["Active serious or opportunistic infection, including localized infection", "Active tuberculosis", "Severe hepatic impairment (RA/AA)", "Severe renal impairment (eGFR <30 mL/min/1.73m2 in RA/AA)", "Patients at high risk of thrombosis (DVT/PE/arterial)", "History of MACE, current/past smokers (higher malignancy and MACE risk)", "Significant cytopenia or anemia", "Concurrent live vaccines or other JAK inhibitors/biologic DMARDs"],
+    "monitor": ["Active/latent TB before and during therapy", "CBC (lymphocytes, neutrophils, hemoglobin)", "Liver enzymes and lipids", "Signs/symptoms of infection, thrombosis, and cardiovascular events"]
+  },
+  "preg": "Based on animal reproduction studies, baricitinib may cause fetal harm (skeletal malformations, reduced fetal weight, embryolethality in rabbits at multiples of the human dose); human data are insufficient. Weigh risks and benefits of chronic use during pregnancy; report exposures to the manufacturer pregnancy registry.",
+  "lact": "Presence in human milk and effects on the breastfed infant are unknown; advise patients not to breastfeed during treatment and for an appropriate period afterward.",
+  "renal": "RA and alopecia areata: 2 mg once daily for mild impairment (eGFR 60-<90), 1 mg once daily for moderate (eGFR 30-<60), not recommended if eGFR <30. COVID-19: 4 mg for eGFR 60-<90, 2 mg for 30-<60, 1 mg for 15-<30, not recommended if eGFR <15 (ESRD, dialysis, or acute kidney injury). Substantially renally excreted.",
+  "hepatic": "Not recommended in patients with severe hepatic impairment (RA and alopecia areata); not studied in COVID-19 with severe hepatic impairment. Interrupt if ALT/AST rise and drug-induced liver injury is suspected, until DILI is excluded.",
+  "interactions": {
+    "major": ["Other JAK inhibitors and biologic DMARDs/immunomodulators (not studied; avoid combination)", "Potent immunosuppressants such as azathioprine and cyclosporine (avoid)", "Live vaccines (avoid during treatment)"],
+    "moderate": ["Strong OAT3 inhibitors (e.g., probenecid) increase baricitinib exposure - halve the dose"],
+    "minor": ["Substrate of P-gp, BCRP, OAT3, and MATE2-K transporters"],
+    "food": "May be taken with or without food; a high-fat meal slightly lowers AUC/Cmax without clinical relevance.",
+    "alcohol": "No specific drug interaction documented; consider additive hepatic risk.",
+    "diagnostics": "Obtain baseline and periodic CBC, hepatic enzymes, lipids; latent TB and viral hepatitis screening before initiation."
+  },
+  "se": {
+    "common": ["Upper respiratory tract infections", "Nausea", "Herpes simplex and herpes zoster", "Headache (alopecia areata)", "Acne (alopecia areata)", "Elevated creatine phosphokinase", "Hyperlipidemia / liver enzyme elevations", "Urinary tract infection"],
+    "serious": ["Serious bacterial, fungal, viral and opportunistic infections including tuberculosis (boxed warning)", "Malignancy including lymphoma and lung cancer (boxed warning)", "Major adverse cardiovascular events - cardiovascular death, MI, stroke (boxed warning)", "Thrombosis - DVT, pulmonary embolism, arterial thrombosis (boxed warning)", "Increased all-cause and sudden cardiovascular mortality (boxed warning)", "Gastrointestinal perforation", "Serious hypersensitivity reactions", "Cytopenias (lymphopenia, neutropenia, anemia)"],
+    "rare": ["Drug-induced liver injury", "Reactivation of latent viral infections (CMV, BK virus, histoplasmosis, cryptococcosis)"],
+    "emergency": ["Anaphylaxis / serious hypersensitivity reaction", "Acute myocardial infarction or stroke (discontinue)", "Pulmonary embolism or symptomatic thrombosis (discontinue and evaluate promptly)", "Sepsis / disseminated opportunistic infection", "Gastrointestinal perforation"]
+  },
+  "monitoring": [
+    "Active and latent tuberculosis before and during therapy (except COVID-19 before initiation)",
+    "Viral hepatitis screening before initiation",
+    "CBC: absolute lymphocyte count, absolute neutrophil count, hemoglobin at baseline and during treatment",
+    "Liver enzymes (ALT/AST) and lipid panel",
+    "Renal function (eGFR) and dose adjust accordingly",
+    "Ongoing signs/symptoms of infection, thrombosis (DVT/PE), and cardiovascular events; new abdominal symptoms for GI perforation"
+  ],
+  "counsel": [
+    "This medicine carries serious risks of infection, blood clots, heart events, and cancer; report fever, cough, leg swelling, chest pain, shortness of breath, or sudden weakness immediately",
+    "Tell your clinician about any current or recent infection, prior TB, hepatitis, smoking history, or clotting problems",
+    "Do not receive live vaccines while on treatment",
+    "Take once daily with or without food; do not combine with other JAK inhibitors or strong immunosuppressants",
+    "Do not breastfeed; discuss pregnancy plans with your clinician"
+  ],
+  "pk": [
+    ["Onset", "Peak plasma at ~1 hour; steady state in 2-3 days"],
+    ["Peak", "~1 hour after oral dose"],
+    ["Half-life", "~12-16 h (RA/alopecia areata); ~10.8 h in intubated COVID-19 patients"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "20-25 C (excursions 15-30 C); keep out of reach of children"]
+  ],
+  "pearls": [
+    "Boxed warning class effect for JAK inhibitors: serious infection, mortality, malignancy, MACE, and thrombosis - extrapolated largely from another JAK inhibitor vs TNF blockers in RA patients >=50 with a cardiovascular risk factor",
+    "Always screen and treat latent TB and check viral hepatitis before starting (except COVID-19 before initiation)",
+    "Halve the dose with strong OAT3 inhibitors such as probenecid",
+    "Avoid live vaccines; not for use with other JAK inhibitors, biologic DMARDs, or potent immunosuppressants",
+    "Discontinue permanently after an MI or stroke; stop and evaluate promptly for suspected thrombosis",
+    "~80% oral bioavailability; substantially renally cleared, so dose by eGFR"
+  ],
+  "missed": "Take the missed dose as soon as remembered on the same day; if it is nearly time for the next dose, skip it and resume the regular once-daily schedule. Do not take two doses at once.",
+  "overdose": "Single doses up to 40 mg and multiple doses of 20 mg/day for 10 days were given in trials without dose-limiting toxicity; over 90% of a dose is eliminated within 24 hours. No specific antidote - monitor for adverse reactions and provide supportive, symptom-directed treatment.",
+  "refs": [
+    ["FDA Olumiant (baricitinib) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22BARICITINIB%22"],
+    ["DailyMed - Olumiant (baricitinib)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=baricitinib"]
+  ]
+}

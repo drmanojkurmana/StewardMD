@@ -1,0 +1,95 @@
+{
+  "generic": "Sulpiride",
+  "cls": "Antipsychotic (substituted benzamide; selective D2/D3 dopamine antagonist)",
+  "pharm": "Selective dopamine D2/D3 receptor antagonist with bimodal dose-dependent activity (alerting/antidepressant at low dose, antipsychotic at high dose)",
+  "tags": ["Schizophrenia", "Substituted benzamide antipsychotic", "Hyperprolactinaemia risk", "QT prolongation", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "Positive symptoms: start 400 mg PO twice daily, up to 1200 mg twice daily; negative symptoms: 200-400 mg twice daily"],
+    ["Meal", "May be taken with or without food; avoid late-evening dosing due to alerting effect"],
+    ["Pregnancy", "Not recommended unless clearly necessary; monitor neonate for extrapyramidal/withdrawal signs"],
+    ["Lactation", "Excreted in breast milk in relatively large amounts; breastfeeding not recommended"],
+    ["Renal", "Reduce dose or extend interval; sulpiride is largely renally excreted"],
+    ["Hepatic", "No specific adjustment needed (minimal hepatic metabolism)"],
+    ["Alcohol", "Avoid; enhances sedation"],
+    ["Monitoring", "ECG/QT, electrolytes, prolactin, EPS, weight, blood counts"]
+  ],
+  "summary": "Sulpiride is a substituted benzamide antipsychotic that selectively antagonises dopamine D2/D3 receptors. It is used for acute and chronic schizophrenia and shows bimodal, dose-dependent activity: lower doses have an alerting and antidepressant effect on negative/depressive symptoms, while higher doses control positive psychotic symptoms. It is largely excreted unchanged by the kidneys, so doses must be reduced in renal impairment. Key risks include hyperprolactinaemia, extrapyramidal symptoms, dose-dependent QT prolongation, tardive dyskinesia, and neuroleptic malignant syndrome.",
+  "indications": [
+    "Treatment of acute and chronic schizophrenia (positive and negative symptoms)",
+    "Low-dose use for predominantly negative symptoms and associated depressive/withdrawn presentations (per benzamide bimodal activity)"
+  ],
+  "dosage": [
+    {"c": "Schizophrenia - predominantly positive symptoms (adult)", "r": "Oral", "d": "Start at least 400 mg twice daily; increase if necessary up to a suggested maximum of 1200 mg twice daily", "t": "Two divided doses (morning and early evening)", "n": "Increasing above 1200 mg twice daily has not been shown to give further improvement"},
+    {"c": "Schizophrenia - predominantly negative symptoms (adult)", "r": "Oral", "d": "Start 400 mg twice daily; reducing towards 200 mg twice daily increases the alerting effect", "t": "Two divided doses", "n": "Negative symptoms generally respond to doses below 800 mg daily"},
+    {"c": "Schizophrenia - mixed symptoms (adult)", "r": "Oral", "d": "400-600 mg twice daily", "t": "Two divided doses", "n": "Titrate to balance positive and negative symptom control"},
+    {"c": "Elderly", "r": "Oral", "d": "Same dose ranges apply; reduce dose if there is evidence of renal impairment", "t": "Two divided doses", "n": "Increased susceptibility to EPS, sedation, and postural hypotension"},
+    {"c": "Renal impairment", "r": "Oral", "d": "Reduce dose and/or lengthen the dosing interval according to severity of impairment", "t": "Two divided doses", "n": "Sulpiride is excreted largely unchanged in urine"}
+  ],
+  "admin": [
+    "Swallow tablets/solution as prescribed in two divided daily doses",
+    "Avoid administering the second dose late in the evening because of the alerting effect",
+    "Obtain a baseline ECG and electrolytes before treatment in patients with cardiac risk factors",
+    "Titrate gradually and use the lowest effective dose, particularly in the elderly and renal impairment",
+    "Do not co-administer with levodopa or other dopaminergic antiparkinsonian agents"
+  ],
+  "moa": "Sulpiride is a substituted benzamide that selectively blocks dopamine D2 and D3 receptors with relatively little affinity for other receptor types. It shows bimodal, dose-related activity: at low doses presynaptic dopamine autoreceptor blockade predominates, producing an alerting and antidepressant effect on negative and depressive symptoms, whereas at higher doses postsynaptic blockade in mesolimbic pathways controls positive psychotic symptoms. Tuberoinfundibular D2 blockade increases prolactin secretion.",
+  "contra": {
+    "absolute": ["Hypersensitivity to sulpiride", "Phaeochromocytoma", "Prolactin-dependent tumours (pituitary prolactinoma, breast cancer)", "Acute porphyria", "Concurrent levodopa or other dopaminergic antiparkinsonian drugs"],
+    "relative": ["Renal impairment (dose reduction required)", "Cardiovascular disease, bradycardia, congenital or acquired QT prolongation, electrolyte disturbance", "Epilepsy or history of seizures", "Parkinson's disease", "Elderly with dementia (increased mortality with antipsychotics)", "Risk factors for venous thromboembolism or stroke"],
+    "monitor": ["ECG and QT interval", "Serum prolactin", "Electrolytes (potassium, magnesium)", "Extrapyramidal symptoms and tardive dyskinesia", "Full blood count for signs of dyscrasia"]
+  },
+  "preg": "There are inadequate data on the use of sulpiride in pregnant women. Sulpiride crosses the placenta. Neonates exposed in the third trimester are at risk of extrapyramidal and/or withdrawal symptoms (agitation, hypertonia, hypotonia, tremor, somnolence, feeding/respiratory difficulty). Use during pregnancy only if clearly necessary, and monitor the neonate accordingly.",
+  "lact": "Sulpiride is excreted into breast milk in relatively large amounts. Because of insufficient data on infant safety, breastfeeding is not recommended during treatment.",
+  "renal": "Sulpiride is excreted largely unchanged by the kidneys (around 95% of the compound is eliminated unchanged in urine and faeces). In renal impairment the dose should be reduced and/or the dosing interval lengthened in proportion to the degree of impairment. Reduce the dose in the elderly where renal function may be decreased.",
+  "hepatic": "Sulpiride undergoes minimal hepatic metabolism, so no specific dose adjustment is generally required for hepatic impairment. Use clinical judgement and the lowest effective dose.",
+  "interactions": {
+    "major": ["Levodopa and dopaminergic antiparkinsonian agents (mutual antagonism - contraindicated)", "Other QT-prolonging drugs such as class IA/III antiarrhythmics (amiodarone, sotalol), methadone, certain antipsychotics and antimicrobials (additive torsades risk)", "Drugs causing bradycardia or hypokalaemia/hypomagnesaemia (increase torsades de pointes risk)"],
+    "moderate": ["CNS depressants, opioids, benzodiazepines, antihistamines, anaesthetics (additive sedation)", "Antihypertensives (enhanced hypotension)", "Lithium (increased risk of neurotoxicity and EPS)", "Antacids and sucralfate (reduce sulpiride absorption - separate dosing by at least 2 hours)"],
+    "minor": ["Other dopamine antagonists (additive prolactin elevation and EPS)"],
+    "food": "May be taken with or without food; separate from antacids/sucralfate by at least 2 hours to avoid reduced absorption",
+    "alcohol": "Avoid alcohol; it enhances the sedative effect of sulpiride",
+    "diagnostics": "Raises serum prolactin and may produce false-positive pregnancy tests; can interfere with interpretation of prolactin-related investigations"
+  },
+  "se": {
+    "common": ["Hyperprolactinaemia (galactorrhoea, amenorrhoea, gynaecomastia, sexual dysfunction)", "Sedation or drowsiness", "Insomnia", "Extrapyramidal symptoms (parkinsonism, tremor, akathisia)", "Constipation", "Weight gain", "Dry mouth"],
+    "serious": ["Neuroleptic malignant syndrome", "QT prolongation and torsades de pointes", "Tardive dyskinesia", "Seizures", "Venous thromboembolism including pulmonary embolism", "Agranulocytosis and leukopenia"],
+    "rare": ["Hyponatraemia / syndrome of inappropriate antidiuretic hormone secretion", "Hepatic enzyme elevation", "Allergic/hypersensitivity reactions"],
+    "emergency": ["Neuroleptic malignant syndrome (hyperthermia, muscle rigidity, autonomic instability, altered consciousness, raised creatine kinase) - discontinue immediately and provide emergency supportive care", "Syncope, palpitations, or arrhythmia suggesting torsades de pointes - urgent ECG and correction of electrolytes"]
+  },
+  "monitoring": [
+    "ECG / QT interval at baseline and with dose changes in at-risk patients",
+    "Serum electrolytes (potassium, magnesium), correcting deficits before/during therapy",
+    "Serum prolactin, especially with symptoms of hyperprolactinaemia",
+    "Extrapyramidal symptoms and signs of tardive dyskinesia",
+    "Body weight, fasting glucose and lipids",
+    "Full blood count if signs of infection or unexplained fever"
+  ],
+  "counsel": [
+    "Take exactly as prescribed; do not stop abruptly without medical advice",
+    "Avoid the evening dose late at night as the medicine can be alerting",
+    "Report fever with muscle stiffness, palpitations, fainting, or unusual movements promptly",
+    "Be aware of possible breast changes, milk production, or menstrual/sexual changes from raised prolactin",
+    "Avoid alcohol and activities needing alertness until you know how the drug affects you",
+    "Tell your doctor about kidney problems and any heart-rhythm conditions"
+  ],
+  "pk": [
+    ["Onset", "Mood elevation may appear within a few days; antipsychotic effect develops over days to weeks"],
+    ["Peak", "Peak plasma concentration about 3-6 hours after an oral dose"],
+    ["Half-life", "Plasma half-life approximately 8 hours"],
+    ["Duration", "Consistent with twice-daily dosing; effect sustained over the dosing interval"],
+    ["Storage", "Store in original packaging below 25 C; protect from moisture (follow product label)"]
+  ],
+  "pearls": [
+    "Not FDA-approved; this information is derived from EMA/UK SmPC and BNF/manufacturer prescribing sources (e.g., Dolmatil, Sulpor)",
+    "Bimodal dosing: lower doses target negative/depressive symptoms, higher doses target positive symptoms",
+    "Largely renally cleared - reduce dose in renal impairment and the elderly",
+    "Strong association with hyperprolactinaemia compared with many other antipsychotics",
+    "Contraindicated with levodopa and in prolactin-dependent tumours and phaeochromocytoma"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and resume the usual schedule. Do not take a double dose, and avoid taking a dose so late that it disturbs sleep.",
+  "overdose": "Experience is limited; doses up to about 16 g have been reported without fatality. Features may include drowsiness, extrapyramidal reactions (dystonia, torticollis), agitation, and dose-dependent QT prolongation with risk of arrhythmia. There is no specific antidote; management is supportive with cardiac/ECG monitoring, correction of electrolytes, and anticholinergic agents for severe dystonic reactions. Sulpiride is only poorly removed by dialysis. Contact a poison control centre.",
+  "refs": [
+    ["Sulpiride 200mg Tablets - Summary of Product Characteristics (emc)", "https://www.medicines.org.uk/emc/product/2430/smpc"],
+    ["Sulpiride 200mg/5ml Oral Solution - Summary of Product Characteristics (emc)", "https://www.medicines.org.uk/emc/product/13116/smpc"]
+  ]
+}

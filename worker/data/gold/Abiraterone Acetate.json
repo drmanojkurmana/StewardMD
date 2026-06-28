@@ -1,0 +1,90 @@
+{
+  "generic": "Abiraterone Acetate",
+  "cls": "Androgen biosynthesis inhibitor (CYP17 inhibitor)",
+  "pharm": "Antineoplastic / antiandrogen (hormonal therapy)",
+  "tags": ["prostate cancer", "CYP17 inhibitor", "androgen synthesis", "CRPC", "antineoplastic"],
+  "quick": [
+    ["Adult dose", "1000 mg PO once daily with prednisone"],
+    ["Meal", "Empty stomach; no food 2 h before to 1 h after"],
+    ["Pregnancy", "Contraindicated in females; can cause fetal harm"],
+    ["Lactation", "Not for use in females; no human milk data"],
+    ["Renal", "No adjustment in mild-moderate; caution if ESRD"],
+    ["Hepatic", "Avoid in severe (Child-Pugh C); reduce in moderate"],
+    ["Alcohol", "Limit; additive hepatotoxicity risk"],
+    ["Monitoring", "BP, potassium, fluid retention, LFTs monthly"]
+  ],
+  "summary": "Abiraterone acetate is a CYP17 inhibitor used with prednisone to treat metastatic castration-resistant and metastatic high-risk castration-sensitive prostate cancer. The dose is 1000 mg once daily on an empty stomach plus low-dose prednisone, alongside ongoing androgen deprivation (GnRH analog or orchiectomy). Key risks are mineralocorticoid excess (hypertension, hypokalemia, fluid retention), adrenocortical insufficiency, and hepatotoxicity that can be severe and fatal.",
+  "indications": [
+    "Metastatic castration-resistant prostate cancer (CRPC), in combination with prednisone",
+    "Metastatic high-risk castration-sensitive prostate cancer (CSPC), in combination with prednisone"
+  ],
+  "dosage": [
+    {"c": "Metastatic CRPC (adult male)", "r": "Standard", "d": "1000 mg once daily with prednisone 5 mg twice daily", "t": "Once daily", "n": "Take on empty stomach; continue GnRH analog or maintain orchiectomy"},
+    {"c": "Metastatic high-risk CSPC (adult male)", "r": "Standard", "d": "1000 mg once daily with prednisone 5 mg once daily", "t": "Once daily", "n": "Take on empty stomach; continue androgen deprivation"},
+    {"c": "Moderate hepatic impairment (Child-Pugh B)", "r": "Reduced", "d": "250 mg once daily", "t": "Once daily", "n": "Monitor ALT/AST/bilirubin; discontinue if hepatotoxicity"},
+    {"c": "With strong CYP3A4 inducer (if unavoidable)", "r": "Adjusted", "d": "Increase dosing frequency to twice daily", "t": "Per label", "n": "Avoid strong CYP3A4 inducers when possible"}
+  ],
+  "admin": [
+    "Take 1000 mg once daily as a single dose on an empty stomach",
+    "Do not eat food for at least 2 hours before and 1 hour after dosing (food markedly increases exposure)",
+    "Swallow tablets whole with water; do not crush or chew",
+    "Always take with prescribed prednisone and continue androgen deprivation therapy",
+    "Use gloves/handling precautions where required; pregnant women should not handle without protection"
+  ],
+  "moa": "Abiraterone acetate is converted in vivo to abiraterone, which inhibits 17 alpha-hydroxylase/C17,20-lyase (CYP17). CYP17 is required for androgen biosynthesis in testicular, adrenal and prostatic tumor tissue. Inhibition reduces production of testosterone precursors (DHEA, androstenedione) and serum testosterone. CYP17 inhibition also raises ACTH-driven mineralocorticoid (corticosterone) production, explaining mineralocorticoid excess, which prednisone helps suppress.",
+  "contra": {
+    "absolute": ["Pregnancy / use in females who are or may become pregnant (can cause fetal harm and loss of pregnancy)"],
+    "relative": ["Severe hepatic impairment (Child-Pugh C) - do not use", "Pre-existing cardiovascular disease, uncontrolled hypertension or hypokalemia", "History of cardiovascular disease (NYHA III/IV heart failure, recent MI, ventricular arrhythmia)"],
+    "monitor": ["Concomitant strong CYP3A4 inducers", "Concomitant CYP2D6 substrates with narrow therapeutic index", "Patients with hepatic risk factors"]
+  },
+  "preg": "Abiraterone acetate can cause fetal harm and loss of pregnancy based on mechanism and animal data; it is not for use in females and is contraindicated in pregnancy. Males with female partners of reproductive potential should use effective contraception during and for 3 weeks after the last dose.",
+  "lact": "Not indicated for use in females. There is no information on its presence in human milk or effects on a breastfed child.",
+  "renal": "No dose adjustment is needed for mild to moderate renal impairment; use with caution in severe impairment or end-stage renal disease as data are limited.",
+  "hepatic": "Do not use in baseline severe hepatic impairment (Child-Pugh C). For moderate impairment (Child-Pugh B), reduce to 250 mg once daily and monitor liver tests. Hepatotoxicity can be severe and fatal - measure ALT, AST and bilirubin at baseline, every 2 weeks for the first 3 months, then monthly; interrupt/modify or discontinue per elevations.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inducers (rifampin, phenytoin, carbamazepine, St. John's wort) - reduce abiraterone exposure; avoid, or increase dosing frequency if unavoidable", "CYP2D6 substrates with narrow therapeutic index (e.g., thioridazine) - abiraterone increases their levels; avoid or reduce dose"],
+    "moderate": ["Strong CYP3A4 inhibitors - may increase abiraterone exposure; use caution", "Drugs known to prolong QT or cause hypokalemia - additive arrhythmia risk", "Other CYP2D6 substrates (dextromethorphan, certain antidepressants/beta-blockers) - monitor"],
+    "minor": ["Spironolactone - may bind androgen receptor and could affect PSA; avoid concurrent use"],
+    "food": "Food substantially increases abiraterone exposure - must be taken on an empty stomach to avoid excessive systemic levels.",
+    "alcohol": "Limit alcohol; additive risk of hepatotoxicity.",
+    "diagnostics": "May cause hypokalemia, elevated LFTs, hyperglycemia and altered lipids."
+  },
+  "se": {
+    "common": ["Fatigue", "Arthralgia", "Hypertension", "Nausea", "Edema / fluid retention", "Hypokalemia", "Hot flush", "Diarrhea", "Vomiting", "Upper respiratory infection", "Cough", "Headache"],
+    "serious": ["Hepatotoxicity (can be severe and fatal)", "Mineralocorticoid excess (severe hypertension, hypokalemia, fluid retention)", "Adrenocortical insufficiency", "Cardiac failure / arrhythmia"],
+    "rare": ["Increased fractures and mortality when combined with radium Ra 223 dichloride", "Severe hypersensitivity", "Rhabdomyolysis / myopathy"],
+    "emergency": ["Acute hepatic failure", "Adrenal crisis (especially during stress/infection)", "Severe hypokalemia with arrhythmia", "Acute decompensated heart failure"]
+  },
+  "monitoring": [
+    "Blood pressure, serum potassium and symptoms of fluid retention at least monthly",
+    "Liver function tests (ALT, AST, bilirubin) at baseline, every 2 weeks for 3 months, then monthly",
+    "Signs/symptoms of adrenocortical insufficiency, especially during stress",
+    "PSA and disease response; testosterone if relevant"
+  ],
+  "counsel": [
+    "Take once daily on an empty stomach - no food 2 hours before and 1 hour after",
+    "Always take the prednisone exactly as prescribed and continue your hormone (ADT) injections",
+    "Report swelling, rapid weight gain, severe fatigue, muscle weakness, or fast/irregular heartbeat",
+    "Report yellowing of skin/eyes, dark urine or right upper abdominal pain (liver injury)",
+    "Use effective contraception; women who are or may be pregnant must not handle the tablets unprotected"
+  ],
+  "pk": [
+    ["Onset", "Testosterone suppression within days"],
+    ["Peak", "Median Tmax ~2 hours"],
+    ["Half-life", "Approximately 12 hours"],
+    ["Duration", "Once-daily dosing; steady state ~2-fold accumulation"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Must be taken on an empty stomach - a high-fat meal increases exposure up to ~10-fold and can raise toxicity",
+    "Prednisone is given to blunt the compensatory mineralocorticoid excess from CYP17 blockade",
+    "Hepatotoxicity is a major monitorable risk - scheduled LFTs are mandatory",
+    "Do not combine with radium Ra 223 dichloride owing to increased fractures and mortality"
+  ],
+  "missed": "If a daily dose is missed, skip it and take the next dose at the usual time the following day; do not take a double dose. If more than one daily dose or prednisone dose is missed, contact the oncology team.",
+  "overdose": "Human overdose experience is limited and there is no specific antidote. Stop abiraterone and give general supportive care, including monitoring for cardiac arrhythmias and heart failure and assessment of liver function.",
+  "refs": [
+    ["FDA Abiraterone Acetate Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22abiraterone+acetate%22"],
+    ["FDA DailyMed - Abiraterone Acetate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "generic": "Magnesium Sulphate",
+  "cls": "Electrolyte / anticonvulsant (divalent cation)",
+  "pharm": "Parenteral magnesium salt acting as a physiologic calcium antagonist; CNS depressant and smooth-muscle relaxant that blocks neuromuscular transmission to prevent and treat eclamptic seizures.",
+  "tags": ["Electrolyte", "Anticonvulsant", "Eclampsia", "Antiarrhythmic", "CNS depressant", "Narrow therapeutic index", "Parenteral"],
+  "quick": [
+    ["Adult dose", "Eclampsia: IV load 4-6 g over 15-20 min, then 1-2 g/hr infusion"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Used for eclampsia/pre-eclampsia; avoid prolonged use >5-7 days (fetal hypocalcemia/bone effects)"],
+    ["Lactation", "Compatible; excreted in milk in small amounts"],
+    ["Renal", "Reduce dose; toxic accumulation risk (4 g load, 1 g/hr, max 20 g/48h)"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Additive CNS depression"],
+    ["Monitoring", "Patellar reflex, respiratory rate, urine output, serum Mg, renal function"]
+  ],
+  "summary": "Parenteral magnesium sulphate is the agent of choice for preventing and treating seizures in pre-eclampsia/eclampsia, and is also used for torsades de pointes and hypomagnesemia. It acts as a physiologic calcium antagonist and CNS depressant. The principal hazard is dose-related toxicity (loss of deep tendon reflexes, respiratory depression, cardiac arrest); the antidote is IV calcium (calcium gluconate). Requires bedside monitoring of patellar reflexes, respiratory rate, and urine output before each repeated dose.",
+  "indications": [
+    "Prevention of seizures (convulsions) in pre-eclampsia",
+    "Treatment of seizures and prevention of recurrent seizures in eclampsia",
+    "Torsades de pointes ventricular tachycardia",
+    "Treatment of acute and chronic hypomagnesemia",
+    "Magnesium supplementation in total parenteral nutrition",
+    "Severe acute asthma exacerbation (adjunctive, off-label)"
+  ],
+  "dosage": [
+    {"c": "Eclampsia/pre-eclampsia (IV regimen)", "r": "IV", "d": "Loading 4-6 g over 15-20 min, then 1-2 g/hr", "t": "Continuous maintenance infusion", "n": "Max 30-40 g/24h; do not continue beyond 5-7 days (fetal toxicity)"},
+    {"c": "Eclampsia (IM regimen)", "r": "IM", "d": "4-5 g (8-10 mL of 50% solution)", "t": "Into alternate buttocks every 4 h as needed", "n": "Often combined with an IV loading dose"},
+    {"c": "Torsades de pointes / refractory VF", "r": "IV", "d": "1-2 g over several minutes", "t": "May repeat; followed by infusion if needed", "n": "Not specified in FDA label; standard clinical reference dosing"},
+    {"c": "Hypomagnesemia, mild", "r": "IM", "d": "1 g (8.12 mEq; 2 mL of 50%)", "t": "Every 6 h for 4 doses", "n": "Adjust to serum magnesium"},
+    {"c": "Hypomagnesemia, severe", "r": "IV", "d": "5 g (~40 mEq) in 1 L of D5W or 0.9% NaCl", "t": "Slow IV infusion over 3 h", "n": "Or up to 250 mg/kg IM within a 4 h period"},
+    {"c": "Renal impairment (eclampsia)", "r": "IV", "d": "Loading 4 g, then 1 g/hr", "t": "Continuous infusion", "n": "Max 20 g/48h; monitor serum Mg closely"}
+  ],
+  "admin": [
+    "Dilute IV solutions to a concentration of 20% or less before administration",
+    "Give the loading dose slowly (4-6 g over 15-20 minutes); rapid IV bolus can cause hypotension and asystole",
+    "Deep IM injection of undiluted 50% solution is acceptable in adults; dilute for children",
+    "Keep an injectable calcium salt (calcium gluconate) immediately available as the antidote",
+    "Ensure facilities for assisted ventilation are available during high-dose therapy"
+  ],
+  "moa": "Magnesium blocks neuromuscular transmission by decreasing acetylcholine release at the motor end plate and reducing motor end-plate sensitivity; it acts as a physiologic calcium antagonist, depressing the CNS and relaxing smooth and cardiac muscle, which raises the seizure threshold in eclampsia.",
+  "contra": {
+    "absolute": ["Heart block", "Myocardial damage", "Hypersensitivity to magnesium sulphate"],
+    "relative": ["Renal impairment (accumulation)", "Myasthenia gravis", "Digitalized patients (risk of serious conduction changes)", "Concurrent CNS depressants or neuromuscular blockers"],
+    "monitor": ["Serum magnesium", "Patellar (knee-jerk) reflex", "Respiratory rate", "Urine output", "Renal function"]
+  },
+  "preg": "Used to prevent and treat eclamptic seizures and as fetal neuroprotection; prolonged use beyond 5-7 days can cause fetal hypocalcemia and skeletal demineralization. Not approved for preterm labor (tocolysis).",
+  "lact": "Excreted in breast milk in small amounts; considered compatible with breastfeeding.",
+  "renal": "Reduce dose in renal impairment (e.g., 4 g loading dose then 1 g/hr, max 20 g over 48 h); magnesium is renally excreted and accumulates, raising toxicity risk - monitor serum levels.",
+  "hepatic": "No specific dose adjustment required.",
+  "interactions": {
+    "major": ["CNS depressants (opioids, barbiturates, propofol) - potentiated CNS/respiratory depression", "Neuromuscular blocking agents - excessive and prolonged neuromuscular blockade", "Cardiac glycosides (digoxin) - serious conduction changes/heart block (use with extreme caution)"],
+    "moderate": ["Dihydropyridine calcium-channel blockers - exaggerated hypotension"],
+    "minor": ["Aminoglycosides - additive neuromuscular effects"],
+    "food": "N/A (parenteral)",
+    "alcohol": "Additive CNS depression",
+    "diagnostics": "Calcium antagonizes magnesium's effects (basis for the calcium antidote); monitor serum magnesium during infusion."
+  },
+  "se": {
+    "common": ["Flushing", "Sweating", "Hypotension", "Diminished deep tendon reflexes", "Hypothermia", "Nausea"],
+    "serious": ["Respiratory depression or paralysis", "Flaccid paralysis", "Circulatory collapse", "Cardiac and CNS depression", "Complete heart block"],
+    "rare": ["Pulmonary edema", "Hypocalcemia"],
+    "emergency": ["Loss of patellar reflexes (earliest toxicity sign)", "Respiratory rate below 16/min", "Respiratory paralysis", "Cardiac arrest/asystole"]
+  },
+  "monitoring": [
+    "Patellar (knee-jerk) reflex must be present before each repeated parenteral dose",
+    "Respiratory rate should be at least 16/min before each dose",
+    "Urine output at least 100 mL in the 4 hours preceding each dose",
+    "Serum magnesium (therapeutic ~2.5-5 mEq/L; reflexes lost ~10 mEq/L; respiratory paralysis hazard)",
+    "Renal function (serum creatinine)",
+    "Continuous fetal heart rate monitoring when used in obstetrics"
+  ],
+  "counsel": [
+    "This medicine is given by injection or drip in hospital under close monitoring",
+    "You may feel warm or flushed during the infusion - this is expected",
+    "Tell staff immediately if you feel short of breath, very drowsy, or weak",
+    "Monitoring of your reflexes, breathing, and urine is done for your safety"
+  ],
+  "pk": [
+    ["Onset", "Immediate (IV); ~1 hour (IM)"],
+    ["Peak", "End of IV infusion; ~1 hour after IM"],
+    ["Half-life", "~4-5 hours (prolonged in renal impairment)"],
+    ["Duration", "~30 min (IV); ~3-4 hours (IM)"],
+    ["Storage", "20-25 C; do not use if precipitated or discolored"]
+  ],
+  "pearls": [
+    "Loss of the patellar (knee-jerk) reflex is the earliest clinical sign of toxicity and precedes respiratory depression",
+    "IV calcium (calcium gluconate, 10-20 mL of a 10% solution) is the antidote for magnesium toxicity - keep it at the bedside",
+    "Magnesium sulphate is superior to phenytoin and diazepam for eclampsia (MAGPIE trial)",
+    "Therapeutic serum range for seizure control is roughly 2.5-5 mEq/L (~4.8-8.4 mg/dL)",
+    "Reduce the dose and monitor levels closely in renal impairment - the kidney is the sole route of elimination"
+  ],
+  "missed": "Administered as a titrated infusion under monitoring - not a self-administered scheduled dose. Hold repeated IM/IV doses if the knee-jerk reflex is absent, respiratory rate is below 16/min, or urine output is inadequate.",
+  "overdose": "Stop the infusion immediately. Support ventilation. Give IV calcium gluconate (10-20 mL of a 10% solution) as the antidote, repeated as needed. In severe cases or renal failure, magnesium is removed by hemodialysis. Monitor cardiac rhythm, respiration, and serum magnesium.",
+  "refs": [
+    ["FDA Magnesium Sulfate in Dextrose Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22MAGNESIUM%20SULFATE%22"],
+    ["DailyMed - Magnesium Sulfate Injection", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=magnesium+sulfate"]
+  ]
+}

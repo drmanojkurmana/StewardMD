@@ -1,0 +1,101 @@
+{
+  "generic": "Acamprosate",
+  "cls": "Alcohol-deterrent / anti-craving agent (synthetic taurine analog, glutamate-GABA modulator)",
+  "pharm": "Structural analog of the neurotransmitter taurine that is thought to restore the balance between excitatory (glutamatergic/NMDA) and inhibitory (GABAergic) neurotransmission disrupted by chronic alcohol use, reducing the negative-reinforcement craving associated with abstinence.",
+  "tags": ["Rx only", "Alcohol use disorder", "Abstinence maintenance", "Anti-craving", "Renally cleared"],
+  "quick": [
+    ["Adult dose", "666 mg (two 333 mg tablets) three times daily"],
+    ["Meal", "May be taken with or without food; with meals may aid adherence"],
+    ["Pregnancy", "Limited data; use only if benefit justifies risk"],
+    ["Lactation", "Avoid; excreted in milk in animals, unknown in humans"],
+    ["Renal", "Reduce to 333 mg TID if CrCl 30-50; contraindicated if CrCl <=30"],
+    ["Hepatic", "No adjustment in mild-moderate (Child-Pugh A/B); cleared renally"],
+    ["Alcohol", "Does not cause a disulfiram-type reaction; continue if a lapse occurs"],
+    ["Monitoring", "Renal function, mood/suicidality, abstinence and adherence"]
+  ],
+  "summary": "Acamprosate calcium is used for the maintenance of abstinence from alcohol in patients with alcohol dependence who are already abstinent at the start of treatment. It should be used as part of a comprehensive program that includes psychosocial support. Its precise mechanism is unknown but it is thought to normalize the glutamate (NMDA) and GABA neurotransmitter imbalance produced by chronic alcohol exposure, reducing craving. It is renally eliminated, so the dose is reduced in moderate renal impairment and it is contraindicated in severe renal impairment. It does not produce a disulfiram-like reaction, does not treat withdrawal, and should be continued even if a relapse occurs.",
+  "indications": [
+    "Maintenance of abstinence from alcohol in patients with alcohol dependence who are abstinent at treatment initiation, as part of a comprehensive management program including psychosocial support"
+  ],
+  "dosage": [
+    {"c": "Alcohol abstinence maintenance", "r": "Adult oral", "d": "666 mg (two 333 mg delayed-release tablets) three times daily", "t": "Three times daily", "n": "Start as soon as possible after the period of alcohol withdrawal, once abstinent"},
+    {"c": "Moderate renal impairment (CrCl 30-50 mL/min)", "r": "Adult oral", "d": "333 mg (one tablet) three times daily", "t": "Three times daily", "n": "Reduced dose to limit accumulation"},
+    {"c": "Severe renal impairment (CrCl <=30 mL/min)", "r": "Adult oral", "d": "Contraindicated", "t": "-", "n": "Do not use"},
+    {"c": "Continuation after a lapse", "r": "Adult oral", "d": "Continue the usual dose even if a relapse to drinking occurs", "t": "Three times daily", "n": "Do not stop solely because of a drinking lapse"}
+  ],
+  "admin": [
+    "Begin only after the patient has stopped drinking and completed withdrawal (it does not treat withdrawal)",
+    "Take the delayed-release tablets whole - do not crush or chew",
+    "May be taken with or without food; taking with meals can improve adherence",
+    "Continue the full three-times-daily schedule even if a lapse to drinking occurs",
+    "Use together with psychosocial/behavioral support; assess renal function before starting"
+  ],
+  "moa": "Acamprosate (calcium acetylhomotaurinate) is a synthetic compound structurally similar to the endogenous amino acid neurotransmitters taurine and gamma-aminobutyric acid (GABA). Chronic alcohol use produces a hyperglutamatergic, NMDA-receptor-upregulated state and reduced GABAergic tone; on abstinence this imbalance contributes to craving and protracted withdrawal. Acamprosate is thought to restore the balance between excitatory (glutamate/NMDA) and inhibitory (GABA) neurotransmission, dampening the conditioned, negative-reinforcement craving that drives relapse. It has no anxiolytic, anticonvulsant, hypnotic, or dependence-producing properties and does not interact with alcohol to cause an aversive reaction.",
+  "contra": {
+    "absolute": [
+      "Severe renal impairment (creatinine clearance <=30 mL/min)",
+      "Known hypersensitivity to acamprosate calcium or any component"
+    ],
+    "relative": [
+      "Moderate renal impairment (reduce dose)",
+      "History of depression or suicidal ideation/behavior",
+      "Ongoing active drinking / failure to achieve abstinence (limited benefit)"
+    ],
+    "monitor": [
+      "Renal function before and during treatment",
+      "Mood, depression, and emergence of suicidal thoughts/behavior",
+      "Adherence and ongoing abstinence",
+      "Engagement with psychosocial support"
+    ]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women; animal studies have shown developmental toxicity at high doses. Acamprosate should be used during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Acamprosate is excreted in the milk of lactating animals; it is not known whether it is excreted in human milk. Because of the potential for adverse effects, a decision should be made whether to discontinue nursing or the drug. Avoid use during breastfeeding.",
+  "renal": "Acamprosate is eliminated essentially unchanged by the kidneys. For moderate renal impairment (creatinine clearance 30-50 mL/min), reduce the dose to 333 mg three times daily. It is contraindicated in severe renal impairment (CrCl <=30 mL/min) because of marked accumulation.",
+  "hepatic": "Pharmacokinetics are not altered in mild to moderate hepatic impairment (Child-Pugh class A and B) because the drug is not hepatically metabolized; no dose adjustment is required for hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Naltrexone - increases acamprosate plasma exposure (no dose adjustment required, but combination is sometimes used clinically)"
+    ],
+    "minor": ["No clinically significant interactions with diazepam, disulfiram, imipramine, or alcohol metabolism"],
+    "food": "Food reduces bioavailability somewhat but is not clinically significant; may be taken with or without food.",
+    "alcohol": "Acamprosate does NOT cause a disulfiram-like reaction and does not alter alcohol pharmacokinetics; if the patient drinks, continue acamprosate rather than stopping it.",
+    "diagnostics": "No characteristic laboratory interference; monitor renal function."
+  },
+  "se": {
+    "common": ["Diarrhea", "Flatulence", "Nausea", "Abdominal pain", "Pruritus", "Insomnia", "Anxiety"],
+    "serious": ["Depression and suicidal ideation/behavior", "Acute kidney injury (rare)", "Severe persistent diarrhea leading to dehydration"],
+    "rare": ["Hypersensitivity reactions including angioedema and anaphylaxis", "Bullous skin reactions", "Acute renal failure"],
+    "emergency": ["Suicidal ideation or attempt", "Severe hypersensitivity / angioedema / anaphylaxis", "Severe dehydration from persistent diarrhea"]
+  },
+  "monitoring": ["Renal function (creatinine clearance) before and periodically during treatment", "Mood and emergence of depression or suicidal ideation", "Maintenance of abstinence and treatment adherence", "Gastrointestinal tolerability (diarrhea)", "Continued engagement with psychosocial support"],
+  "counsel": [
+    "Take two tablets three times a day, even on days you do not feel cravings",
+    "Swallow the tablets whole; do not crush or chew them",
+    "Keep taking the medicine even if you slip and have a drink - do not stop on your own",
+    "This medicine does not stop withdrawal symptoms and does not make you sick if you drink",
+    "Tell your doctor right away if you feel depressed or have thoughts of harming yourself",
+    "Continue your counseling or support program - the medicine works best alongside it"
+  ],
+  "pk": [
+    ["Onset", "Steady state reached in ~5 days; clinical benefit over weeks"],
+    ["Peak", "Plasma Tmax ~3-8 hours after oral dosing"],
+    ["Half-life", "~20-33 hours"],
+    ["Duration", "Dosed three times daily to maintain steady levels"],
+    ["Storage", "Store at 25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Start only AFTER abstinence is achieved - acamprosate maintains abstinence, it does not treat withdrawal",
+    "No disulfiram-type reaction; continue therapy even if the patient relapses to drinking",
+    "Renally cleared - reduce dose at CrCl 30-50, contraindicated at CrCl <=30",
+    "Diarrhea is the most common adverse effect and a frequent reason for discontinuation",
+    "Best used as part of a comprehensive program with psychosocial support",
+    "Can be combined with naltrexone; monitor mood for depression/suicidality"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember. If it is almost time for your next dose, skip the missed dose and continue with your regular schedule. Do not take a double dose to make up for a missed one.",
+  "overdose": "Reported acute overdose has generally been mild, with diarrhea the main symptom. There is no specific antidote. Treatment is symptomatic and supportive (e.g., fluid and electrolyte replacement for diarrhea), with attention to maintaining hydration and renal function.",
+  "refs": [
+    ["FDA Label - Acamprosate Calcium (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22acamprosate%20calcium%22"],
+    ["DailyMed - Acamprosate Calcium", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=acamprosate"]
+  ]
+}

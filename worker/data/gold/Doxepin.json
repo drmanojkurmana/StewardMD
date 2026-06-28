@@ -1,0 +1,93 @@
+{
+  "generic": "Doxepin",
+  "cls": "Tricyclic antidepressant (dibenzoxepine)",
+  "pharm": "Antidepressant / anxiolytic (also antipruritic and hypnotic)",
+  "tags": ["tricyclic antidepressant", "depression", "anxiety", "TCA", "antipruritic"],
+  "quick": [
+    ["Adult dose", "75 mg/day initial; usual 75-150 mg/day (depression)"],
+    ["Meal", "With or without food; bedtime if sedating"],
+    ["Pregnancy", "Use only if clearly needed; weigh risk"],
+    ["Lactation", "Not recommended; sedation/apnea in infant"],
+    ["Renal", "Caution; start low, titrate slowly"],
+    ["Hepatic", "Caution; reduce dose, slow titration"],
+    ["Alcohol", "Avoid; additive CNS/respiratory depression"],
+    ["Monitoring", "Mood/suicidality, ECG, anticholinergic effects"]
+  ],
+  "summary": "Doxepin is a tricyclic antidepressant used for depression and/or anxiety, including those associated with organic disease or alcoholism. Usual adult dose is 75-150 mg/day, up to 300 mg/day in severe illness. It carries a boxed warning for increased suicidality in children, adolescents and young adults. Anticholinergic effects, sedation and cardiac conduction effects are characteristic; overdose can be fatal. Low-dose formulations (3-6 mg) are used separately for insomnia.",
+  "indications": [
+    "Psychoneurotic patients with depression and/or anxiety",
+    "Depression and/or anxiety associated with alcoholism (not taken with alcohol)",
+    "Depression and/or anxiety associated with organic disease",
+    "Psychotic depressive disorders with associated anxiety, including involutional depression and manic-depressive disorders",
+    "Low-dose (3-6 mg) formulation: insomnia characterized by difficulty with sleep maintenance"
+  ],
+  "dosage": [
+    {"c": "Mild to moderate depression/anxiety (adult)", "r": "Standard", "d": "Start 75 mg/day; usual range 75-150 mg/day", "t": "Once daily at bedtime or divided", "n": "Doses up to 150 mg may be given as a single bedtime dose"},
+    {"c": "Severe illness (adult)", "r": "High", "d": "Increase gradually up to 300 mg/day", "t": "Divided doses", "n": "Little added benefit beyond 300 mg/day"},
+    {"c": "Mild symptoms / organic disease (adult)", "r": "Low", "d": "As low as 25-50 mg/day", "t": "Once daily or divided", "n": "Use lowest effective dose"},
+    {"c": "Elderly / debilitated", "r": "Reduced", "d": "Start low (e.g., 25-50 mg/day) and titrate slowly", "t": "Once daily or divided", "n": "Greater sensitivity to anticholinergic and cardiac effects"}
+  ],
+  "admin": [
+    "Take orally; the capsule liquid concentrate should be diluted in water/juice before use (not grape juice or carbonated beverages)",
+    "A sedating dose may be given at bedtime to aid sleep and adherence",
+    "Titrate gradually based on response and tolerability",
+    "Allow at least 2-3 weeks for antidepressant effect",
+    "Do not stop abruptly; taper to avoid discontinuation symptoms"
+  ],
+  "moa": "Doxepin is a tricyclic antidepressant that inhibits reuptake of norepinephrine and serotonin at the presynaptic neuron, increasing their synaptic availability. It is also a potent antagonist at histamine H1 (sedation, antipruritic effect), muscarinic acetylcholine (anticholinergic effects) and alpha-1 adrenergic receptors (orthostatic hypotension). Membrane-stabilizing (quinidine-like) effects underlie its cardiac conduction toxicity in overdose.",
+  "contra": {
+    "absolute": ["Hypersensitivity to doxepin or other dibenzoxepines", "Glaucoma (untreated narrow-angle)", "Tendency to urinary retention", "Concurrent use with or within 14 days of an MAO inhibitor"],
+    "relative": ["Cardiovascular disease, conduction abnormalities or recent myocardial infarction", "Seizure disorder", "Benign prostatic hyperplasia / bladder outlet obstruction", "Hepatic or renal impairment, elderly"],
+    "monitor": ["History of suicidality or young adults (boxed warning)", "Bipolar disorder (risk of manic switch)", "Concomitant CNS depressants, anticholinergics or QT-prolonging drugs"]
+  },
+  "preg": "Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Neonates exposed to TCAs in the third trimester may have withdrawal/adaptation symptoms; weigh maternal benefit against risk.",
+  "lact": "Doxepin and its active metabolite are excreted in breast milk; cases of infant sedation and respiratory depression have been reported. Breastfeeding is not recommended during doxepin therapy.",
+  "renal": "Use with caution; start at a low dose and titrate slowly because reduced clearance can increase levels and anticholinergic/cardiac effects.",
+  "hepatic": "Doxepin undergoes extensive hepatic metabolism (CYP2D6/2C19); use with caution in hepatic impairment with lower starting doses and slow titration.",
+  "interactions": {
+    "major": ["MAO inhibitors - risk of hyperpyretic crisis, severe convulsions and serotonin syndrome; do not use within 14 days", "Strong CYP2D6 inhibitors (fluoxetine, paroxetine, quinidine) - markedly increase doxepin levels and toxicity", "Other CNS depressants/alcohol - additive sedation and respiratory depression", "Drugs prolonging QT (Class I/III antiarrhythmics) - additive arrhythmia risk"],
+    "moderate": ["Anticholinergic drugs - additive anticholinergic toxicity (ileus, urinary retention, delirium)", "Sympathomimetics - enhanced pressor response", "Cimetidine - increases TCA plasma levels", "Antihypertensives (clonidine, guanethidine) - reduced antihypertensive effect"],
+    "minor": ["Oral contraceptives / estrogens - may alter TCA levels and effect", "Tolazamide - hypoglycemia reported with TCAs"],
+    "food": "May be taken with or without food; dilute oral concentrate in water/juice, not carbonated drinks.",
+    "alcohol": "Avoid alcohol - additive CNS and respiratory depression and increased overdose lethality.",
+    "diagnostics": "Can prolong QRS/QT on ECG; may interfere with some urine catecholamine assays."
+  },
+  "se": {
+    "common": ["Drowsiness/sedation", "Dry mouth", "Blurred vision", "Constipation", "Urinary hesitancy", "Dizziness", "Weight gain", "Orthostatic hypotension"],
+    "serious": ["Cardiac arrhythmias and conduction disturbances", "Seizures", "Worsening depression / suicidal ideation", "Manic switch in bipolar disorder", "Paralytic ileus"],
+    "rare": ["Agranulocytosis / blood dyscrasias", "Hepatic dysfunction / jaundice", "Neuroleptic-like reactions, tardive dyskinesia", "Serotonin syndrome (with serotonergic combinations)"],
+    "emergency": ["Suicidal behavior", "Cardiac dysrhythmia / severe hypotension in overdose", "Seizures and coma", "Serotonin syndrome or hyperpyretic crisis with MAOIs"]
+  },
+  "monitoring": [
+    "Mood, behavior and emergence of suicidality, especially early and at dose changes (boxed warning)",
+    "Baseline and periodic ECG in patients with cardiac risk or higher doses",
+    "Anticholinergic effects (bowel/bladder function, confusion, especially elderly)",
+    "Blood pressure for orthostasis; weight"
+  ],
+  "counsel": [
+    "Effect on mood may take 2-3 weeks; keep taking as prescribed and do not stop suddenly",
+    "Watch for and report worsening mood, agitation or thoughts of self-harm, especially early in treatment",
+    "Avoid alcohol and other sedating drugs; it may cause drowsiness - use caution driving",
+    "Rise slowly to avoid dizziness; report fast/irregular heartbeat, fainting or trouble urinating",
+    "Dilute the oral concentrate in water or juice (not carbonated beverages) just before taking"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect over 2-3 weeks; sedation rapid"],
+    ["Peak", "2-4 hours after oral dosing"],
+    ["Half-life", "Approximately 15 hours (doxepin); active metabolite longer"],
+    ["Duration", "Supports once-daily bedtime dosing for many patients"],
+    ["Storage", "Store at controlled room temperature, protected from light"]
+  ],
+  "pearls": [
+    "Boxed warning: increased risk of suicidal thinking and behavior in children, adolescents and young adults - monitor closely",
+    "TCA overdose is highly lethal (cardiac dysrhythmia, seizures, coma) - manage in hospital and consult poison control",
+    "Strongly antihistaminic - useful for antipruritic and hypnotic effects; low-dose (3-6 mg) is approved for insomnia",
+    "Do not combine with MAOIs; allow a 14-day washout"
+  ],
+  "missed": "Take the missed dose when remembered. If it is near the time of the next dose, skip it and resume the regular schedule; do not double up. For once-daily bedtime dosing, skip a daytime-remembered missed dose if it would cause excess sedation.",
+  "overdose": "TCA overdose can be fatal. Critical manifestations include cardiac dysrhythmias, severe hypotension, seizures and CNS depression/coma; ECG (QRS/QT) changes guide severity. Provide hospital monitoring, airway/cardiorespiratory support, activated charcoal if early, sodium bicarbonate for cardiotoxicity/QRS widening, and seizure control. Contact a poison control center.",
+  "refs": [
+    ["FDA Doxepin Hydrochloride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22doxepin+hydrochloride%22"],
+    ["FDA DailyMed - Doxepin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

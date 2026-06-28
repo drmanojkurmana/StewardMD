@@ -1,0 +1,127 @@
+{
+  "generic": "Carvedilol",
+  "cls": "Non-selective beta-adrenergic blocker with alpha-1 blocking activity (vasodilating beta-blocker)",
+  "pharm": "Blocks beta-1, beta-2, and alpha-1 adrenergic receptors, reducing heart rate, contractility, and peripheral vascular resistance.",
+  "tags": ["Rx only", "Non-selective beta-blocker", "Alpha-1 blockade", "Heart failure agent", "Hepatically metabolized (CYP2D6/2C9)"],
+  "quick": [
+    ["Adult dose", "Heart failure: start 3.125 mg twice daily, titrate q>=2 wk to max 25 mg BID (<=85 kg) or 50 mg BID (>85 kg)"],
+    ["Meal", "Take with food to slow absorption and reduce orthostatic hypotension"],
+    ["Pregnancy", "Data insufficient; 3rd-trimester beta-blockers risk neonatal bradycardia/hypoglycemia"],
+    ["Lactation", "No human data; present in rat milk; weigh benefit vs risk"],
+    ["Renal", "No specific adjustment; monitor BP and worsening renal function"],
+    ["Hepatic", "Contraindicated in severe hepatic impairment"],
+    ["Alcohol", "Avoid; CR formulation interacts with alcohol and may enhance hypotension"],
+    ["Monitoring", "Heart rate, blood pressure, fluid status/weight, signs of worsening heart failure"]
+  ],
+  "summary": "Carvedilol is a non-selective beta-blocker with additional alpha-1 blocking (vasodilating) activity, indicated for chronic heart failure, left ventricular dysfunction following myocardial infarction, and hypertension. It is taken with food to slow absorption and limit orthostatic effects, is available as immediate-release (twice daily) and controlled-release (once daily) forms, and must be uptitrated slowly. It is extensively hepatically metabolized, contraindicated in severe hepatic impairment, and should never be stopped abruptly.",
+  "indications": [
+    "Mild-to-severe chronic heart failure of ischemic or cardiomyopathic origin, usually added to diuretics, ACE inhibitors, and digitalis, to increase survival and reduce hospitalization",
+    "Left ventricular dysfunction following myocardial infarction in clinically stable patients with LVEF <=40% (with or without symptomatic heart failure)",
+    "Management of essential hypertension, alone or with other antihypertensives (especially thiazide diuretics)"
+  ],
+  "dosage": [
+    {"c": "Heart failure", "r": "Adult oral (IR)", "d": "Start 3.125 mg twice daily for 2 weeks; if tolerated increase to 6.25, 12.5, then 25 mg twice daily over intervals of at least 2 weeks", "t": "Twice daily with food", "n": "Max 25 mg BID if <=85 kg; max 50 mg BID if >85 kg. Reduce dose if heart rate <55 bpm"},
+    {"c": "LV dysfunction post-MI", "r": "Adult oral (IR)", "d": "Start 6.25 mg twice daily; increase after 3-10 days to 12.5 mg then target 25 mg twice daily", "t": "Twice daily with food", "n": "May start 3.125 mg BID and/or titrate slower if low BP/HR or fluid retention"},
+    {"c": "Hypertension", "r": "Adult oral (IR)", "d": "Start 6.25 mg twice daily; increase to 12.5 mg then 25 mg twice daily over intervals of 1-2 weeks for BP control", "t": "Twice daily with food", "n": "Titrate per blood pressure response"},
+    {"c": "Controlled-release (CR)", "r": "Adult oral", "d": "Once-daily formulation; convert from IR per product-specific equivalence", "t": "Once daily with food (morning)", "n": "Swallow whole; do not crush or chew"}
+  ],
+  "admin": [
+    "Always take with food to slow the rate of absorption and reduce the incidence of orthostatic hypotension",
+    "Individualize and closely monitor during up-titration; do not increase dose until worsening heart failure or vasodilatory symptoms have stabilized",
+    "Reduce the dose if heart rate falls below 55 beats per minute",
+    "Do not discontinue abruptly; taper over 1-2 weeks to avoid rebound angina, MI, or arrhythmia",
+    "CR capsules should be swallowed whole and not crushed or chewed"
+  ],
+  "moa": "Carvedilol is a racemic mixture that produces non-selective competitive blockade of beta-1 and beta-2 adrenergic receptors (S(-) enantiomer) together with alpha-1 adrenergic blockade (both enantiomers, equal potency). Beta-blockade reduces heart rate, AV conduction, contractility, cardiac output, and renin release, while alpha-1 blockade causes vasodilation and lowers peripheral vascular resistance. It has no intrinsic sympathomimetic activity. In heart failure these actions reduce sympathetic overdrive, lower blood pressure and myocardial oxygen demand, and improve left ventricular ejection fraction.",
+  "contra": {
+    "absolute": [
+      "Bronchial asthma or related bronchospastic conditions (deaths from status asthmaticus reported)",
+      "Second- or third-degree AV block",
+      "Sick sinus syndrome",
+      "Severe bradycardia (unless permanent pacemaker in place)",
+      "Cardiogenic shock or decompensated heart failure requiring IV inotropic therapy",
+      "Severe hepatic impairment",
+      "History of serious hypersensitivity reaction (e.g., Stevens-Johnson syndrome, anaphylaxis, angioedema) to carvedilol"
+    ],
+    "relative": [
+      "Non-allergic bronchospasm (chronic bronchitis, emphysema)",
+      "Diabetes (may mask hypoglycemia and alter glucose control)",
+      "Peripheral vascular disease",
+      "Pheochromocytoma without prior alpha-blockade",
+      "Thyrotoxicosis (may mask signs)"
+    ],
+    "monitor": [
+      "Heart rate and blood pressure (including postural)",
+      "Fluid status, body weight, and signs of worsening heart failure",
+      "Glycemic awareness in diabetics"
+    ]
+  },
+  "preg": "Available human data are insufficient to establish drug-associated risk. Use of beta-blockers in the third trimester may increase the risk of neonatal hypotension, bradycardia, hypoglycemia, and respiratory depression; observe newborns accordingly. Animal studies showed post-implantation loss and fetal toxicity only at maternally toxic doses many times the maximum recommended human dose. Poorly controlled hypertension itself poses maternal and fetal risk.",
+  "lact": "There are no data on the presence of carvedilol in human milk or its effects on the breastfed infant or milk production; it is present in the milk of lactating rats. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "No specific dosage adjustment is provided for renal impairment; carvedilol is minimally renally excreted (<2% unchanged). Monitor blood pressure and renal function, as worsening renal function can occur in heart failure patients with low blood pressure or volume depletion.",
+  "hepatic": "Extensively metabolized by the liver; carvedilol is contraindicated in severe hepatic impairment. Use caution and monitor in milder hepatic dysfunction, as plasma levels may be substantially increased.",
+  "interactions": {
+    "major": [
+      "Diltiazem/verapamil (additive effects on ECG and blood pressure; risk of bradycardia, AV block, hypotension)",
+      "Clonidine (risk of hypotension and bradycardia; when stopping, discontinue the beta-blocker first, then clonidine several days later)",
+      "Amiodarone (increases carvedilol levels; further slowing of heart rate and conduction)"
+    ],
+    "moderate": [
+      "Potent CYP2D6 inhibitors (quinidine, fluoxetine, paroxetine, propafenone) increase carvedilol levels and dizziness",
+      "Digoxin (digoxin concentrations increase ~15%; additive AV slowing; monitor digoxin)",
+      "Cyclosporine (carvedilol may raise cyclosporine trough levels; monitor and adjust)",
+      "Insulin/sulfonylureas and oral hypoglycemics (enhanced effect; may mask hypoglycemia)",
+      "Catecholamine-depleting agents (reserpine, MAO inhibitors; hypotension/bradycardia)"
+    ],
+    "minor": [
+      "Rifampin (reduces carvedilol plasma levels by ~70%)",
+      "Cimetidine (increases carvedilol AUC by ~30% with no change in Cmax)"
+    ],
+    "food": "Take with food to slow absorption and reduce orthostatic hypotension; food does not significantly change overall bioavailability.",
+    "alcohol": "Avoid alcohol; it may enhance hypotension and can disrupt the controlled-release of the CR formulation.",
+    "diagnostics": "May mask the tachycardia of hypoglycemia or hyperthyroidism; may blunt heart-rate response during stress testing."
+  },
+  "se": {
+    "common": ["Dizziness", "Fatigue", "Hypotension / postural hypotension", "Bradycardia", "Diarrhea", "Hyperglycemia", "Asthenia", "Weight increase"],
+    "serious": ["Worsening heart failure / fluid retention", "Severe bradycardia or heart block", "Bronchospasm", "Syncope", "Masking of hypoglycemia"],
+    "rare": ["Hypersensitivity reactions (Stevens-Johnson syndrome, angioedema, anaphylaxis)", "Worsening renal function", "Hepatic dysfunction", "Aggravation of peripheral vascular disease"],
+    "emergency": ["Profound bradycardia / asystole", "Acute decompensated heart failure / cardiogenic shock", "Severe bronchospasm / status asthmaticus", "Anaphylaxis / angioedema"]
+  },
+  "monitoring": [
+    "Heart rate and blood pressure (including postural), especially during up-titration",
+    "Body weight and signs/symptoms of worsening heart failure or fluid retention",
+    "Blood glucose awareness in diabetics",
+    "Renal function in heart failure patients with low BP or volume depletion",
+    "Digoxin and cyclosporine levels when co-administered"
+  ],
+  "counsel": [
+    "Always take with food to lower the chance of dizziness or fainting",
+    "Do not stop suddenly; abrupt withdrawal can worsen chest pain or trigger a heart attack",
+    "Initiation and dose increases may cause dizziness or lightheadedness within the first hour; avoid driving or hazardous tasks until you know how it affects you",
+    "Rise slowly from sitting or lying to reduce lightheadedness",
+    "Diabetics: be aware it can mask a fast heartbeat from low blood sugar and may alter glucose levels",
+    "Report shortness of breath, swelling, rapid weight gain, or a very slow pulse",
+    "Swallow CR capsules whole; do not crush or chew, and avoid alcohol with them"
+  ],
+  "pk": [
+    ["Onset", "Beta-blockade within 1 hour; alpha-blockade/vasodilation within 30 minutes"],
+    ["Peak", "Plasma 1-2 hours (delayed by food)"],
+    ["Half-life", "7-10 hours"],
+    ["Duration", "IR ~12 hours (twice daily); CR ~24 hours (once daily)"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture; tight, light-resistant container"]
+  ],
+  "pearls": [
+    "Vasodilating beta-blocker: combines non-selective beta-blockade with alpha-1 blockade",
+    "One of the beta-blockers proven to improve survival in chronic heart failure",
+    "Always take with food to reduce orthostatic hypotension",
+    "Extensively hepatically metabolized (CYP2D6/2C9); contraindicated in severe hepatic impairment, minimal renal clearance",
+    "Uptitrate slowly (intervals of at least 2 weeks in heart failure) and never stop abruptly",
+    "Higher weight-based ceiling: max 50 mg BID for heart failure patients >85 kg"
+  ],
+  "missed": "Take the missed dose with food as soon as remembered; if it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double up.",
+  "overdose": "Overdose may cause severe hypotension, bradycardia, cardiac insufficiency, cardiogenic shock, cardiac arrest, bronchospasm, vomiting, decreased consciousness, and generalized seizures. Place the patient supine and manage in intensive care. Give atropine 2 mg IV for excessive bradycardia; glucagon 5-10 mg IV over 30 seconds followed by 5 mg/hour infusion plus sympathomimetics (dobutamine, isoprenaline, adrenaline) for cardiovascular support; adrenaline or noradrenaline if vasodilation dominates; pacing for resistant bradycardia; beta-agonists or IV aminophylline for bronchospasm; and IV diazepam or clonazepam for seizures. Continue antidotal therapy for a period consistent with the 7-10 hour half-life.",
+  "refs": [
+    ["FDA Label - Carvedilol (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22carvedilol%22"],
+    ["DailyMed - Carvedilol", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=carvedilol"]
+  ]
+}

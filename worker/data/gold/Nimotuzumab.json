@@ -1,0 +1,105 @@
+{
+  "generic": "Nimotuzumab",
+  "cls": "Antineoplastic / humanized anti-EGFR (epidermal growth factor receptor) monoclonal antibody (IgG1)",
+  "pharm": "A humanized recombinant monoclonal antibody that binds the extracellular domain of the epidermal growth factor receptor (EGFR) with intermediate affinity, blocking ligand-induced receptor activation and downstream proliferative/anti-apoptotic and angiogenic signaling in EGFR-overexpressing tumors, while sparing low-EGFR normal tissues.",
+  "tags": ["Biologic", "Anti-EGFR monoclonal antibody", "Head & neck cancer", "Not FDA-approved (India/Cuba/other)", "Radiosensitizer", "IV infusion"],
+  "quick": [
+    ["Adult dose", "200 mg IV once weekly during radiotherapy, then 200 mg every 2 weeks maintenance"],
+    ["Meal", "Not applicable (intravenous/subcutaneous)"],
+    ["Pregnancy", "Contraindicated - may cross placenta and cause fetal harm"],
+    ["Lactation", "Contraindicated - antibody excreted in human milk"],
+    ["Renal", "No specific adjustment described; antibody not renally cleared"],
+    ["Hepatic", "No specific adjustment described; antibody not hepatically metabolized"],
+    ["Alcohol", "No direct interaction with the antibody"],
+    ["Monitoring", "Infusion reactions, skin/mucosa, LFTs, blood counts, tumor response"]
+  ],
+  "summary": "Nimotuzumab (h-R3, BIOMAb-EGFR) is a humanized anti-EGFR IgG1 monoclonal antibody used, mainly in combination with radiotherapy or chemoradiotherapy, for EGFR-expressing epithelial tumors - most established in locally advanced squamous cell carcinoma of the head and neck. It is NOT approved by the US FDA; it is approved/marketed in India, Cuba, and several other countries based on manufacturer and published Phase II/III data. Its intermediate binding affinity for EGFR is thought to give selective tumor accumulation and a notably milder toxicity profile than other EGFR antibodies (cetuximab), with markedly less severe acneiform rash, hypomagnesemia, and diarrhea. The usual regimen is 200 mg IV weekly during the radiotherapy course followed by maintenance dosing. Main risks are infusion/hypersensitivity reactions; premedication with an antihistamine is used.",
+  "indications": [
+    "Locally advanced squamous cell carcinoma of the head and neck (in combination with radiotherapy or chemoradiotherapy), where EGFR is expressed",
+    "Other EGFR-expressing epithelial tumors per regional approvals/literature: high-grade glioma, nasopharyngeal carcinoma, esophageal, pancreatic, and select gastrointestinal cancers, generally with radiotherapy/chemotherapy",
+    "Note: not FDA-approved; indications reflect approvals in India, Cuba, and other countries and published clinical data"
+  ],
+  "dosage": [
+    {"c": "Locally advanced head & neck squamous cell carcinoma (induction with radiotherapy/chemoradiotherapy)", "r": "Adult IV", "d": "200 mg IV infusion once weekly", "t": "Weekly for ~6-7 weeks (concurrent with radiotherapy)", "n": "200 mg is the defined optimal biologic dose (saturates clearance); give before/with each radiotherapy week"},
+    {"c": "Maintenance after concurrent phase (head & neck)", "r": "Adult IV", "d": "200 mg IV infusion", "t": "Every 2 weeks", "n": "Continue per protocol/response; some regimens dose every 15 days"},
+    {"c": "Pediatric (e.g., glioma, per regional protocols)", "r": "Pediatric IV", "d": "150 mg/m2 IV weekly", "t": "Weekly for ~6 weeks (induction), then 150 mg/m2 every 3 weeks", "n": "Continue maintenance until progression; dosing varies by protocol"}
+  ],
+  "admin": [
+    "Administer as a slow intravenous infusion over approximately 30-60 minutes (do not give as IV push/bolus)",
+    "Dilute the dose in normal saline per the product insert before infusion",
+    "Premedicate with an antihistamine (e.g., diphenhydramine) to reduce infusion reactions",
+    "Observe the patient during and after the infusion for hypersensitivity/infusion reactions; have resuscitation measures available",
+    "Coordinate timing with the radiotherapy schedule when used as a radiosensitizer"
+  ],
+  "moa": "Nimotuzumab is a humanized IgG1 monoclonal antibody directed against the extracellular domain of the epidermal growth factor receptor (EGFR/HER1). By binding EGFR it competitively blocks binding of EGF and TGF-alpha, preventing receptor dimerization, tyrosine-kinase autophosphorylation, and downstream RAS/MAPK and PI3K/AKT signaling that drives tumor-cell proliferation, survival, and angiogenesis. Inhibition of DNA-PKcs activity contributes to radiosensitization, enhancing the effect of concurrent radiotherapy. Being an IgG1, it can also recruit antibody-dependent cell-mediated cytotoxicity (ADCC), NK-cell activation, and dendritic-cell/cytotoxic T-cell responses. Its intermediate (bivalent-dependent) binding affinity means stable attachment occurs preferentially on cells with high EGFR density (tumor) rather than low-EGFR normal tissue (skin, gut), which is thought to explain its comparatively mild dermatologic and electrolyte toxicity relative to other anti-EGFR antibodies.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to nimotuzumab or any excipient",
+      "Pregnancy",
+      "Breastfeeding"
+    ],
+    "relative": [
+      "Prior severe infusion/hypersensitivity reaction to monoclonal antibodies",
+      "Active uncontrolled intercurrent illness"
+    ],
+    "monitor": [
+      "Infusion/hypersensitivity reactions during and after administration",
+      "Skin and mucosal reactions",
+      "Liver enzymes (transaminases)",
+      "Complete blood count (for leukopenia)",
+      "Tumor response and overall clinical status"
+    ]
+  },
+  "preg": "Contraindicated in pregnancy. As a humanized IgG1, nimotuzumab may cross the placenta (particularly in the second and third trimesters) and EGFR signaling is important in fetal development, so fetal harm is possible. Women of childbearing potential should use effective contraception during treatment.",
+  "lact": "Contraindicated during breastfeeding. Immunoglobulins are excreted in human milk and could be absorbed/affect the infant; nursing should be discontinued during treatment.",
+  "renal": "No specific dose adjustment is described in the product insert. As a large monoclonal antibody, nimotuzumab is catabolized to peptides/amino acids and is not eliminated by the kidneys, so renal impairment is not expected to alter clearance.",
+  "hepatic": "No specific dose adjustment is described. The antibody is not metabolized by hepatic cytochrome enzymes; monitor liver enzymes as elevations have been reported.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Other anti-EGFR agents (e.g., cetuximab, EGFR tyrosine-kinase inhibitors) - overlapping target/toxicity, not intended for combined use",
+      "Concurrent radiotherapy - intended synergy (radiosensitization), but additive mucosal/skin effects possible"
+    ],
+    "minor": ["No clinically significant pharmacokinetic interaction reported with gemcitabine"],
+    "food": "Not applicable (intravenous biologic).",
+    "alcohol": "No direct interaction with the antibody.",
+    "diagnostics": "No characteristic assay interference reported; monitor LFTs and blood counts."
+  },
+  "se": {
+    "common": ["Infusion reactions (fever, chills)", "Nausea/vomiting", "Headache", "Fatigue", "Anorexia/appetite loss", "Mild skin rash/pruritus", "Mucositis (mainly from concurrent radiotherapy)"],
+    "serious": ["Hypersensitivity/infusion reactions", "Leukopenia", "Elevated liver transaminases"],
+    "rare": ["Severe anaphylactic reaction with rapid severe hypotension and urticaria", "Severe cutaneous reactions including Stevens-Johnson syndrome (rare; far less common than with other anti-EGFR antibodies)"],
+    "emergency": ["Anaphylaxis / severe infusion reaction with hypotension and respiratory distress", "Severe hypersensitivity / angioedema"]
+  },
+  "monitoring": ["Vital signs and symptoms of infusion/hypersensitivity reaction during and after each infusion", "Skin and mucosal toxicity (notably milder than other EGFR antibodies)", "Liver function tests (transaminases)", "Complete blood count (leukopenia)", "Tumor response and performance status"],
+  "counsel": [
+    "This medicine is given as a drip into a vein, usually once a week during your radiation treatment",
+    "You may receive an antihistamine before the infusion to reduce reactions",
+    "Tell the nurse right away if you feel flushing, fever, chills, itching, breathlessness, or dizziness during the infusion",
+    "Skin rash is usually mild with this medicine compared with similar drugs, but report any worsening rash or blistering",
+    "Do not use this medicine if you are pregnant or breastfeeding; use reliable contraception during treatment",
+    "Keep all appointments so the weekly schedule with radiotherapy is maintained"
+  ],
+  "pk": [
+    ["Onset", "Receptor blockade begins with first infusion; clinical effect over the radiotherapy course"],
+    ["Peak", "End of intravenous infusion (Cmax at completion)"],
+    ["Half-life", "Terminal half-life dose-dependent, ~62 h at 50 mg up to ~300 h at 400 mg (saturable clearance; ~200 mg saturates systemic clearance)"],
+    ["Duration", "Dosed weekly during radiotherapy, then every 1-2 weeks for maintenance"],
+    ["Storage", "Store refrigerated at 2-8 C; do not freeze; protect from light (per insert)"]
+  ],
+  "pearls": [
+    "Biologic record - data sourced from the manufacturer product insert (Biocon BIOMAb-EGFR) and published Phase II/III literature; an EMA-style centralized FDA label is not available",
+    "NOT FDA-approved - approved/marketed in India, Cuba, and other countries; used mainly with radiotherapy in head & neck cancer",
+    "Intermediate EGFR affinity gives selective tumor binding and a much milder skin/mucosa and electrolyte toxicity profile than cetuximab",
+    "Distinctly does NOT typically cause hypomagnesemia, severe diarrhea, severe acneiform rash, or thromboembolism seen with other anti-EGFR agents",
+    "200 mg is the defined optimal biologic dose (saturates systemic clearance)",
+    "Main safety concern is infusion/hypersensitivity reaction - premedicate with an antihistamine and monitor"
+  ],
+  "missed": "Doses are administered by a healthcare professional on a scheduled basis. If a scheduled infusion is missed, contact the treatment center to reschedule as soon as possible to maintain the weekly schedule alongside radiotherapy; do not double a subsequent dose.",
+  "overdose": "There is limited experience with overdose. Doses up to 400 mg were tolerated in early studies. No specific antidote exists; management is supportive, with monitoring and treatment of any infusion/hypersensitivity reaction and other symptoms.",
+  "refs": [
+    ["Nimotuzumab for Patients With Inoperable Cancer of the Head and Neck (Frontiers/PMC)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC7266975/"],
+    ["Nimotuzumab Induces NK Cell Activation and EGFR-Specific T Cells in Head and Neck Cancer (PMC)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC5474456/"],
+    ["Phase I pharmacokinetic and pharmacodynamic study of nimotuzumab (Cancer Chemother Pharmacol)", "https://link.springer.com/article/10.1007/s00280-013-2277-8"]
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "generic": "Dactinomycin",
+  "cls": "Antineoplastic - actinomycin (cytotoxic antibiotic)",
+  "pharm": "Cytotoxic actinomycin that intercalates DNA and inhibits DNA-dependent RNA synthesis, blocking transcription and proliferation of rapidly dividing cells.",
+  "tags": ["Rx only", "Chemotherapy", "Vesicant", "Myelosuppressive", "Hospital/specialist use"],
+  "quick": [
+    ["Adult dose", "IV, regimen-specific (e.g., Wilms tumor 45 mcg/kg every 3-6 weeks; Ewing 1,250 mcg/m2 every 3 weeks) as part of combination chemotherapy"],
+    ["Meal", "Not applicable - given intravenously"],
+    ["Pregnancy", "Can cause fetal harm; avoid and use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 1 week after the last dose"],
+    ["Renal", "Monitor renal function; renal toxicity reported"],
+    ["Hepatic", "Risk of veno-occlusive disease and hepatotoxicity; monitor LFTs"],
+    ["Alcohol", "Avoid - added hepatic stress"],
+    ["Monitoring", "CBC, LFTs, renal function, infusion site for extravasation"]
+  ],
+  "summary": "Dactinomycin (actinomycin D) is a cytotoxic actinomycin antibiotic used as part of multi-agent chemotherapy regimens for Wilms tumor, rhabdomyosarcoma, Ewing sarcoma, metastatic nonseminomatous testicular cancer, and gestational trophoblastic neoplasia. It binds DNA and inhibits RNA synthesis. Key hazards include severe myelosuppression, hepatic veno-occlusive disease, and severe tissue necrosis if extravasated (it is a potent vesicant). It also potentiates radiation toxicity and can cause radiation recall, so it must not be given with excessive radiation. It is administered only by clinicians experienced in cytotoxic therapy.",
+  "indications": [
+    "Wilms tumor (as part of combination chemotherapy)",
+    "Rhabdomyosarcoma (as part of combination chemotherapy)",
+    "Ewing sarcoma (as part of combination chemotherapy)",
+    "Metastatic, nonseminomatous testicular cancer (as part of cisplatin-based combination chemotherapy)",
+    "Gestational trophoblastic neoplasia (single agent or part of combination chemotherapy)"
+  ],
+  "dosage": [
+    {"c": "Wilms tumor", "r": "Adult/pediatric IV", "d": "45 mcg/kg IV once every 3 to 6 weeks for up to 26 weeks", "t": "Every 3-6 weeks", "n": "Part of multi-agent combination regimen"},
+    {"c": "Rhabdomyosarcoma", "r": "Adult/pediatric IV", "d": "15 mcg/kg IV once daily for 5 days, every 3 to 9 weeks for up to 112 weeks", "t": "5-day course per cycle", "n": "Part of multi-agent combination regimen"},
+    {"c": "Ewing sarcoma", "r": "Adult/pediatric IV", "d": "1,250 mcg/m2 IV once every 3 weeks for 51 weeks", "t": "Every 3 weeks", "n": "Part of multi-agent combination regimen"},
+    {"c": "Metastatic nonseminomatous testicular cancer", "r": "Adult/pediatric IV", "d": "1,000 mcg/m2 IV every 3 weeks", "t": "Every 3 weeks", "n": "Part of cisplatin-based regimen"},
+    {"c": "Gestational trophoblastic neoplasia", "r": "Post-menarchal IV", "d": "12 mcg/kg IV once daily for 5 days, as a single agent or part of combination therapy", "t": "5-day course", "n": "Per FDA label"}
+  ],
+  "admin": [
+    "Administer intravenously only; do not give intramuscularly or subcutaneously",
+    "Potent vesicant - if extravasation occurs, immediately stop the injection/infusion and apply ice; restart in another vein",
+    "Calculate body-surface-area-based doses using actual measurements; cap dosing per institutional guidance for obese patients per protocol",
+    "Use a cytotoxic-handling protocol; prepared and given by personnel trained in chemotherapy",
+    "Do not administer live vaccines before or during treatment"
+  ],
+  "moa": "Dactinomycin is a cytotoxic actinomycin that binds tightly to double-stranded DNA by intercalating between guanine-cytosine base pairs. This complex inhibits DNA-dependent RNA polymerase, suppressing messenger RNA transcription and consequently protein synthesis. The result is cytotoxicity against rapidly proliferating cells, including malignant cells. Its cytotoxic activity has been demonstrated in animal models of multiple human cancers.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to dactinomycin (the FDA label lists no formal contraindications, but hypersensitivity precludes use)"
+    ],
+    "relative": [
+      "Concurrent or recent excessive radiation therapy (potentiates radiation toxicity and radiation recall)",
+      "Active varicella or herpes zoster infection (risk of severe generalized disease)",
+      "Pre-existing severe myelosuppression",
+      "Significant hepatic impairment or prior veno-occlusive disease"
+    ],
+    "monitor": [
+      "Complete blood counts before each cycle",
+      "Liver function tests (AST, ALT, bilirubin) for veno-occlusive disease",
+      "Renal function",
+      "Infusion site for extravasation"
+    ]
+  },
+  "preg": "Based on its mechanism and animal findings, dactinomycin can cause fetal harm. Advise females of reproductive potential to use effective contraception during treatment and for a period after the last dose, and avoid use in pregnancy.",
+  "lact": "Because of the potential for serious adverse reactions in a breastfed child, advise patients not to breastfeed during treatment and for at least 1 week after the last dose.",
+  "renal": "Renal toxicity has been reported. Monitor renal function; use with caution in patients with impaired renal function, as the kidneys contribute to elimination.",
+  "hepatic": "Dactinomycin can cause severe or fatal hepatic veno-occlusive disease and hepatotoxicity. Monitor for elevations in AST, ALT, and total bilirubin, hepatomegaly, weight gain, or ascites; consider delaying the next dose if these occur.",
+  "interactions": {
+    "major": [
+      "Radiation therapy - potentiates radiation toxicity and can precipitate radiation recall; avoid excessive concurrent radiation",
+      "Live attenuated vaccines - risk of severe or fatal disseminated infection; do not administer before or during treatment"
+    ],
+    "moderate": [
+      "Other myelosuppressive chemotherapy - additive bone marrow suppression",
+      "Other hepatotoxic agents - additive risk of veno-occlusive disease/hepatotoxicity"
+    ],
+    "minor": ["Drugs affecting hepatic clearance may alter exposure"],
+    "food": "Not applicable - administered intravenously.",
+    "alcohol": "Avoid alcohol due to additive hepatic stress.",
+    "diagnostics": "May raise liver enzymes (AST/ALT) and bilirubin and lower blood counts; can affect bioassays for antibacterial agents."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Myelosuppression (anemia, leukopenia, thrombocytopenia)", "Alopecia", "Fatigue/malaise", "Mucositis/stomatitis", "Diarrhea"],
+    "serious": ["Severe myelosuppression", "Hepatic veno-occlusive disease", "Renal toxicity", "Severe mucocutaneous reactions", "Extravasation tissue necrosis"],
+    "rare": ["Secondary malignancy or leukemia", "Hepatotoxicity / liver failure", "Radiation recall dermatitis"],
+    "emergency": ["Severe/fatal veno-occlusive disease", "Life-threatening neutropenic sepsis", "Severe extravasation injury", "Anaphylaxis / severe mucocutaneous reaction (e.g., Stevens-Johnson syndrome)"]
+  },
+  "monitoring": ["Complete blood count before each cycle and during nadir", "Liver function tests for veno-occlusive disease/hepatotoxicity", "Renal function", "Signs of extravasation at the injection site", "Signs/symptoms of infection during neutropenia"],
+  "counsel": [
+    "This is a strong chemotherapy drug given by vein in a specialist setting",
+    "Report immediately any pain, swelling, or burning at the IV site (risk of severe tissue damage)",
+    "Watch for fever, unusual bruising/bleeding, yellowing of skin/eyes, or rapid weight gain/swelling",
+    "Avoid live vaccines and tell all providers you are receiving this drug",
+    "Use effective contraception and do not breastfeed during and shortly after treatment"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect develops over days as dividing cells are affected"],
+    ["Peak", "Plasma levels peak immediately after IV administration"],
+    ["Half-life", "Approximately 36 hours (terminal)"],
+    ["Duration", "Concentrates in nucleated cells; does not cross the blood-brain barrier"],
+    ["Storage", "Store lyophilized powder per label; protect from light; reconstitute aseptically before use"]
+  ],
+  "pearls": [
+    "Potent VESICANT - extravasation causes severe tissue necrosis; stop infusion and apply ice immediately",
+    "Causes significant MYELOSUPPRESSION - check counts before each cycle",
+    "NEVER give with excessive radiation - potentiates radiation toxicity and causes radiation recall",
+    "Watch for hepatic veno-occlusive disease (weight gain, ascites, rising bilirubin/transaminases)",
+    "Risk of secondary malignancy/leukemia and severe mucocutaneous reactions"
+  ],
+  "missed": "Not self-administered; dosing is scheduled and managed by the oncology team. If a clinic dose is delayed, the team will reschedule the cycle - patients should not attempt to make up doses themselves.",
+  "overdose": "Overdose can cause severe myelosuppression, mucositis, gastrointestinal toxicity, renal and hepatic injury. There is no specific antidote; management is supportive, including intensive monitoring, blood product support, antimicrobial therapy for infection, and supportive care for organ toxicities.",
+  "refs": [
+    ["FDA Label - Dactinomycin for Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dactinomycin%22"],
+    ["DailyMed - Dactinomycin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=dactinomycin"]
+  ]
+}

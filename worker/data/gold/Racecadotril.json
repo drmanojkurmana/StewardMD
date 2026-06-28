@@ -1,0 +1,92 @@
+{
+  "generic": "Racecadotril",
+  "cls": "Intestinal antisecretory antidiarrheal (enkephalinase inhibitor)",
+  "pharm": "Prodrug of thiorphan, an inhibitor of intestinal enkephalinase (neutral endopeptidase); reduces intestinal hypersecretion of water and electrolytes without affecting gut transit",
+  "tags": ["Rx only", "Antisecretory antidiarrheal", "Adjunct to oral rehydration", "Not FDA-approved (EU/India; SmPC/BNF)"],
+  "quick": [
+    ["Adult dose", "100 mg three times daily before main meals"],
+    ["Meal", "Take before meals (adults); children with food"],
+    ["Pregnancy", "Avoid; not recommended (insufficient data)"],
+    ["Lactation", "Avoid; not recommended (insufficient data)"],
+    ["Renal", "Caution; limited data, no specific adjustment established"],
+    ["Hepatic", "Caution; limited data, use with care"],
+    ["Alcohol", "No specific interaction; avoid during acute illness"],
+    ["Monitoring", "Hydration/electrolytes, stool frequency, response within 48 h"]
+  ],
+  "summary": "Racecadotril is an orally active prodrug of thiorphan that inhibits intestinal enkephalinase (neutral endopeptidase), protecting endogenous enkephalins and thereby reducing the hypersecretion of water and electrolytes into the intestinal lumen. It is used as an adjunct to oral (or intravenous) rehydration in the symptomatic treatment of acute diarrhoea in adults and children when rehydration alone is insufficient. Unlike loperamide it has a purely antisecretory action and does not slow intestinal transit, so it does not cause constipation or rebound and does not promote bacterial stasis. It is given three times daily before the main meals in adults and as weight-based sachets in children, alongside oral rehydration solution. It is not approved by the FDA and is used mainly in the EU and India.",
+  "indications": [
+    "Symptomatic treatment of acute diarrhoea in adults, as an adjunct to oral rehydration and general supportive measures, when these are insufficient to control symptoms",
+    "Symptomatic treatment of acute diarrhoea in infants (older than 3 months) and children, in addition to oral rehydration and supportive measures, when rehydration alone is insufficient"
+  ],
+  "dosage": [
+    {"c": "Acute diarrhoea (adult)", "r": "Oral", "d": "100 mg three times daily", "t": "Take before the three main meals; first dose can be taken at any time of day", "n": "Continue until two normal stools, max ~7 days; if no improvement in 48 h reassess and consider alternative"},
+    {"c": "Acute diarrhoea (infant >3 months / children, by weight)", "r": "Oral (granules/sachets)", "d": "1.5 mg/kg per dose three times daily (e.g. <9 kg: 10 mg TID; 9-13 kg: 20 mg TID; 13-27 kg: 30 mg TID; >27 kg: 60 mg TID)", "t": "Three times daily, with food, alongside oral rehydration solution", "n": "Maximum 7 days; if diarrhoea persists or worsens, reassess for dehydration and other causes"}
+  ],
+  "admin": [
+    "Always give with adequate oral (or, if needed, intravenous) rehydration and dietary measures - racecadotril is an adjunct, not a replacement for rehydration",
+    "Adults: take 100 mg capsules before the main meals; the first dose may be taken at any time of day",
+    "Children: disperse the appropriate weight-based sachet of granules in food, water or infant feed and give immediately, with meals",
+    "Treat only acute diarrhoea; do not use for chronic diarrhoea or beyond the recommended short course (about 7 days)",
+    "Seek medical advice if there is high fever, blood or pus in the stools, or signs of significant dehydration"
+  ],
+  "moa": "Racecadotril is a prodrug that is rapidly hydrolysed to its active metabolite thiorphan, a selective and reversible inhibitor of enkephalinase (neutral endopeptidase, a cell-membrane peptidase). By inhibiting the breakdown of endogenous enkephalins at the intestinal mucosa, it prolongs their antisecretory action on enterocyte delta-opioid receptors. This reduces cyclic-AMP-mediated hypersecretion of water and electrolytes into the intestinal lumen, without altering basal secretory activity. Racecadotril acts only on intestinal secretion and does not affect intestinal transit time, so it relieves diarrhoea without causing constipation. It does not have central effects at therapeutic doses.",
+  "contra": {
+    "absolute": ["Hypersensitivity to racecadotril or any excipient", "Children under 3 months of age (insufficient data)", "Conditions where it cannot be combined with adequate rehydration"],
+    "relative": ["Renal or hepatic impairment (limited data)", "Diabetes or galactose intolerance/glucose-galactose malabsorption (sucrose/lactose-containing sachets)", "Pregnancy and breastfeeding (avoid)", "Prolonged or chronic diarrhoea (not indicated)", "Diarrhoea with high fever, blood or mucus suggesting invasive bacterial infection"],
+    "monitor": ["Hydration status and electrolytes", "Stool frequency and response within 48 hours", "Signs of hypersensitivity / angioedema", "Persistence beyond the recommended treatment duration"]
+  },
+  "preg": "There are insufficient data on the use of racecadotril in pregnant women. As a precaution, it is not recommended during pregnancy and should be avoided unless the potential benefit clearly outweighs the risk.",
+  "lact": "Because of a lack of information on excretion in human milk, racecadotril should not be used in women who are breastfeeding.",
+  "renal": "Data in patients with renal impairment are limited; use with caution. No specific dose adjustment has been established, and the short duration of treatment for acute diarrhoea limits exposure.",
+  "hepatic": "Data in patients with hepatic impairment are limited; use with caution. No specific dose adjustment has been established for short-term treatment of acute diarrhoea.",
+  "interactions": {
+    "major": ["ACE inhibitors (e.g. captopril, enalapril, lisinopril) - concomitant enkephalinase/neprilysin-type inhibition has been associated with an increased risk of angioedema; use with caution"],
+    "moderate": ["Other neprilysin inhibitors (e.g. sacubitril) - theoretical additive risk of angioedema", "Drugs that themselves cause angioedema - additive risk"],
+    "minor": ["No clinically significant pharmacokinetic interactions established at therapeutic doses"],
+    "food": "Adults take doses before main meals; children take with food. Food does not markedly impair efficacy. Always combine with oral rehydration solution.",
+    "alcohol": "No specific interaction reported; alcohol is best avoided during an episode of acute diarrhoea.",
+    "diagnostics": "No clinically significant interference with laboratory tests established."
+  },
+  "se": {
+    "common": ["Headache"],
+    "serious": ["Angioedema (face, lips, tongue, larynx) - rare but potentially serious, sometimes after the first dose"],
+    "rare": ["Skin rash, urticaria, erythema, pruritus", "Erythema nodosum", "Maculopapular eruption", "Hypersensitivity reactions"],
+    "emergency": ["Angioedema with airway compromise / anaphylaxis"]
+  },
+  "monitoring": [
+    "Hydration status and need for continued oral/IV rehydration",
+    "Stool frequency and clinical response within 48 hours",
+    "Signs of hypersensitivity or angioedema, especially after the first dose",
+    "Re-evaluation if diarrhoea persists, recurs, or is accompanied by fever, blood, or vomiting",
+    "Limiting treatment to the recommended short course (about 7 days)"
+  ],
+  "counsel": [
+    "This medicine controls the watery secretion of diarrhoea but is not a substitute for drinking plenty of rehydration fluids",
+    "Keep taking oral rehydration solution and fluids to replace what is lost",
+    "Adults: take the capsule before your main meals; for children, mix the sachet in food or drink and give immediately",
+    "Stop and seek medical advice if you develop swelling of the face, lips or tongue, difficulty breathing, or a rash",
+    "Seek medical advice if diarrhoea lasts more than 2 days, or if there is high fever, blood in the stool, or signs of dehydration (very dry mouth, little urine, drowsiness)",
+    "Unlike some antidiarrheals it does not slow the gut or cause constipation"
+  ],
+  "pk": [
+    ["Onset", "Antidiarrheal effect within about 1 hour of an oral dose"],
+    ["Peak", "Active metabolite (thiorphan) plasma peak at approximately 1 hour; antisecretory effect peaks around 2 hours"],
+    ["Half-life", "Plasma elimination half-life of the active metabolite approximately 3 hours"],
+    ["Duration", "Effect lasts about 8 hours, supporting three-times-daily dosing"],
+    ["Storage", "Store below 30°C; keep capsules/sachets in original packaging, protected from moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved in the US; it is used in the EU and India for acute diarrhoea and the doses here are sourced from the SmPC/BNF, not an FDA label",
+    "Acts only as an intestinal antisecretory agent - it does not slow gut transit, so it does not cause constipation or rebound and does not favour bacterial overgrowth (a key contrast with loperamide)",
+    "Always an adjunct to oral rehydration, not a replacement - rehydration remains the cornerstone of acute diarrhoea management, especially in children",
+    "Concomitant ACE inhibitors increase the risk of angioedema - counsel patients to stop and seek care if facial/tongue swelling occurs",
+    "If diarrhoea does not improve within 48 hours, reassess for invasive infection or another cause rather than continuing",
+    "Paediatric sachets are dosed by body weight (about 1.5 mg/kg three times daily) and given with feeds"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered before continuing the usual three-times-daily schedule; if it is almost time for the next dose, skip the missed one and do not double up. Treatment is short term, so simply resume normal dosing and keep up rehydration fluids.",
+  "overdose": "Experience with overdose is limited. Doses well above the therapeutic range have generally been well tolerated. Management is symptomatic and supportive, with attention to fluid and electrolyte balance; there is no specific antidote. Monitor for hypersensitivity reactions.",
+  "refs": [
+    ["BNF - Racecadotril", "https://bnf.nice.org.uk/drugs/racecadotril/"],
+    ["EMA/SmPC - Racecadotril (Hidrasec/Tiorfan)", "https://www.medicines.org.uk/emc/search?q=racecadotril"]
+  ]
+}

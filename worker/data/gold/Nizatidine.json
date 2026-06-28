@@ -1,0 +1,104 @@
+{
+  "generic": "Nizatidine",
+  "cls": "Histamine H2-receptor antagonist (acid suppressant)",
+  "pharm": "Competitively and reversibly inhibits histamine at H2 receptors on gastric parietal cells, reducing basal and stimulated gastric acid secretion.",
+  "tags": ["Rx and OTC", "H2 antagonist", "Acid suppression", "GERD", "Peptic ulcer"],
+  "quick": [
+    ["Adult dose", "Active duodenal/gastric ulcer 300 mg at bedtime or 150 mg twice daily; GERD 150 mg twice daily"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Use only if clearly needed; limited human data"],
+    ["Lactation", "Excreted in breast milk (~0.1% of dose); use with caution"],
+    ["Renal", "Reduce dose in moderate-to-severe renal impairment"],
+    ["Hepatic", "No specific adjustment; use usual caution"],
+    ["Alcohol", "Avoid excess; alcohol irritates gastric mucosa"],
+    ["Monitoring", "Symptom response; renal function in impairment"]
+  ],
+  "summary": "Nizatidine is a histamine H2-receptor antagonist that decreases gastric acid secretion. It is used to treat and prevent duodenal and gastric ulcers, gastroesophageal reflux disease (GERD), and erosive esophagitis. It is well tolerated, with headache being the most common adverse effect. Unlike cimetidine, it has little effect on cytochrome P450 and minimal antiandrogenic activity. Dose reduction is required in patients with renal impairment because the drug is primarily eliminated renally.",
+  "indications": [
+    "Active duodenal ulcer",
+    "Maintenance therapy for duodenal ulcer (reduced dose)",
+    "Active benign gastric ulcer",
+    "Gastroesophageal reflux disease (GERD), including erosive and ulcerative esophagitis and associated heartburn"
+  ],
+  "dosage": [
+    {"c": "Active duodenal ulcer", "r": "Adult oral", "d": "300 mg once daily at bedtime, or 150 mg twice daily", "t": "Once daily (bedtime) or twice daily", "n": "Treat up to 8 weeks"},
+    {"c": "Maintenance of healed duodenal ulcer", "r": "Adult oral", "d": "150 mg once daily at bedtime", "t": "Once daily at bedtime", "n": "For prevention of recurrence"},
+    {"c": "Active benign gastric ulcer", "r": "Adult oral", "d": "300 mg once daily at bedtime, or 150 mg twice daily", "t": "Once daily (bedtime) or twice daily", "n": "Rule out malignancy; treat up to 8 weeks"},
+    {"c": "GERD / erosive esophagitis", "r": "Adult oral", "d": "150 mg twice daily", "t": "Twice daily", "n": "Up to 12 weeks"},
+    {"c": "Renal impairment - CrCl 20-50 mL/min", "r": "Adult oral", "d": "Ulcer treatment 150 mg/day; maintenance 150 mg every other day; GERD 150 mg/day", "t": "Once daily / every other day", "n": "Reduce dose"},
+    {"c": "Renal impairment - CrCl <20 mL/min", "r": "Adult oral", "d": "Ulcer treatment 150 mg every other day; maintenance 150 mg every 3 days; GERD 150 mg every other day", "t": "Every other / third day", "n": "Marked dose reduction"}
+  ],
+  "admin": [
+    "May be taken with or without food",
+    "Bedtime dosing is convenient for ulcer healing regimens",
+    "Reduce dose and lengthen interval in renal impairment based on creatinine clearance",
+    "Rule out gastric malignancy before treating gastric ulcer",
+    "Oral solution available for patients who cannot swallow capsules"
+  ],
+  "moa": "Nizatidine competitively and reversibly binds to histamine H2 receptors located on the basolateral membrane of gastric parietal cells. By blocking histamine-mediated stimulation, it reduces both basal (including nocturnal) and food-, caffeine-, betazole-, and pentagastrin-stimulated gastric acid secretion, lowering acid output and concentration. This promotes healing of acid-related mucosal injury and relieves symptoms of acid reflux and ulcer disease.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to nizatidine or other H2-receptor antagonists"
+    ],
+    "relative": [
+      "Renal impairment (dose reduction required)",
+      "Symptomatic response does not exclude gastric malignancy"
+    ],
+    "monitor": [
+      "Renal function in impaired patients",
+      "Symptom resolution",
+      "Liver enzymes if hepatic dysfunction suspected"
+    ]
+  },
+  "preg": "Limited human data. Animal studies at high doses did not show clear teratogenicity. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Nizatidine is secreted into human breast milk in proportion to plasma concentration (approximately 0.1% of an oral dose). Because of potential for adverse effects in the nursing infant, use with caution or consider not breastfeeding.",
+  "renal": "Nizatidine is eliminated primarily by the kidney; clearance falls and half-life rises with declining renal function. Reduce dose and/or lengthen the dosing interval in patients with moderate to severe renal impairment based on creatinine clearance.",
+  "hepatic": "No specific dose adjustment is recommended for hepatic impairment. Rare reversible hepatic enzyme elevations and, very rarely, hepatocellular or cholestatic injury have been reported; discontinue if hepatitis develops.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "High-dose aspirin (e.g., 3900 mg/day) - nizatidine may raise serum salicylate levels",
+      "Drugs whose absorption is pH-dependent (e.g., ketoconazole, itraconazole, atazanavir) - reduced absorption due to higher gastric pH"
+    ],
+    "minor": [
+      "Minimal effect on cytochrome P450; clinically significant CYP interactions are uncommon"
+    ],
+    "food": "May be taken with or without food; tomato-based foods/juices may interact with some product matrices but are not clinically significant.",
+    "alcohol": "Alcohol can raise gastric acid and irritate the mucosa; limit intake. Some reports suggest H2 blockers may modestly increase blood alcohol.",
+    "diagnostics": "May cause false-positive urobilinogen tests with Multistix; can affect gastric acid secretion studies."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness", "Somnolence", "Diarrhea or constipation", "Rhinitis", "Pharyngitis"],
+    "serious": ["Reversible elevation of hepatic enzymes", "Hepatocellular or cholestatic hepatitis (rare)", "Thrombocytopenia (rare)"],
+    "rare": ["Exfoliative dermatitis", "Anaphylaxis / angioedema", "Bronchospasm", "Gynecomastia", "Confusion (especially elderly or renal impairment)", "Asymptomatic ventricular tachycardia (rare reports)"],
+    "emergency": ["Anaphylaxis", "Severe hepatotoxicity", "Severe thrombocytopenic bleeding"]
+  },
+  "monitoring": ["Symptomatic and endoscopic ulcer/esophagitis healing", "Renal function in impaired patients", "Liver enzymes if hepatic symptoms occur", "CBC if hematologic effects suspected"],
+  "counsel": [
+    "Take as directed; you may take it with or without food",
+    "For nighttime symptoms, the bedtime dose helps reduce overnight acid",
+    "Report yellowing of skin/eyes, unusual bruising, rash, or persistent abdominal pain",
+    "Tell your doctor if you have kidney problems, as the dose may need lowering",
+    "Avoid excessive alcohol and continue lifestyle measures for reflux"
+  ],
+  "pk": [
+    ["Onset", "Reduces acid secretion within ~30-60 minutes"],
+    ["Peak", "Plasma peak in ~0.5-3 hours after oral dose"],
+    ["Half-life", "Approximately 1-2 hours (longer in renal impairment)"],
+    ["Duration", "Acid suppression up to ~10-12 hours"],
+    ["Storage", "Store at controlled room temperature 20-25 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Bioavailability is high (>70%); not significantly affected by food or antacids",
+    "Minimal CYP450 inhibition and negligible antiandrogenic effect, unlike cimetidine",
+    "Primarily renally cleared - always check renal function and adjust dose",
+    "Symptomatic relief does not rule out gastric cancer; investigate gastric ulcers",
+    "Tachyphylaxis to acid suppression can develop with continuous H2-blocker use"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember. If it is almost time for the next dose, skip the missed dose. Do not take two doses at once.",
+  "overdose": "Overdose experience is limited; expected effects relate to exaggerated pharmacology (e.g., cholinergic-type signs in animals). If overdose occurs, remove unabsorbed drug, observe, and provide supportive and symptomatic care. Hemodialysis removes little drug. Contact a poison control center.",
+  "refs": [
+    ["FDA Label - Nizatidine (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nizatidine%22"],
+    ["DailyMed - Nizatidine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=nizatidine"]
+  ]
+}

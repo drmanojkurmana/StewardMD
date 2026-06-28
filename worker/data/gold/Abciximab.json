@@ -1,0 +1,110 @@
+{
+  "generic": "Abciximab",
+  "cls": "Platelet glycoprotein IIb/IIIa receptor inhibitor (monoclonal antibody Fab fragment)",
+  "pharm": "The Fab fragment of the chimeric human-murine monoclonal antibody 7E3, given intravenously as an antiplatelet/antithrombotic adjunct during percutaneous coronary intervention; it binds the platelet glycoprotein (GP) IIb/IIIa receptor, blocking the final common pathway of platelet aggregation (fibrinogen and von Willebrand factor binding).",
+  "tags": ["Rx only", "IV biologic", "GP IIb/IIIa inhibitor", "PCI adjunct", "Bleeding/thrombocytopenia risk"],
+  "quick": [
+    ["Adult dose", "IV bolus 0.25 mg/kg, then infusion 0.125 mcg/kg/min (max 10 mcg/min) for 12 h"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Caution; not known if excreted in milk"],
+    ["Renal", "Increased bleeding risk in renal impairment - use caution"],
+    ["Hepatic", "No specific adjustment; assess bleeding risk"],
+    ["Alcohol", "Not relevant in acute PCI setting"],
+    ["Monitoring", "Platelet count, hemoglobin/hematocrit, bleeding, access site"]
+  ],
+  "summary": "Abciximab is the Fab fragment of a chimeric monoclonal antibody directed against the platelet glycoprotein IIb/IIIa receptor. Given intravenously as an adjunct to percutaneous coronary intervention (PCI) and, historically, in unstable angina when PCI is planned, it blocks the final common pathway of platelet aggregation by preventing fibrinogen and von Willebrand factor from binding the GP IIb/IIIa receptor, thereby reducing acute ischemic cardiac complications. It is used with aspirin and heparin. The principal risks are bleeding (including major and intracranial hemorrhage) and acute, sometimes profound, thrombocytopenia, which requires platelet monitoring before, during, and after dosing. Readministration carries an added risk of hypersensitivity and thrombocytopenia due to human anti-chimeric antibodies.",
+  "indications": [
+    "Adjunct to percutaneous coronary intervention (PCI) to prevent acute cardiac ischemic complications in patients undergoing PCI",
+    "Patients with unstable angina not responding to conventional therapy when PCI is planned within 24 hours (historical labeled use)"
+  ],
+  "dosage": [
+    {"c": "Adjunct to PCI", "r": "Intravenous", "d": "0.25 mg/kg IV bolus given 10-60 minutes before the procedure, followed by a continuous infusion of 0.125 mcg/kg/min (maximum 10 mcg/min)", "t": "Bolus then 12-hour infusion", "n": "Use with aspirin and weight-adjusted heparin; maximum infusion rate 10 mcg/min"},
+    {"c": "Unstable angina with planned PCI within 24 h", "r": "Intravenous", "d": "0.25 mg/kg IV bolus, then 10 mcg/min infusion for 18-24 hours, concluding ~1 hour after the PCI", "t": "Bolus then up to 18-24 hour infusion", "n": "Historical regimen; concurrent aspirin and heparin"}
+  ],
+  "admin": [
+    "Administer intravenously; filter the bolus and the infusion through a sterile, non-pyrogenic, low-protein-binding 0.2/0.22 micron filter",
+    "Give through a dedicated/separate IV line where possible; do not add other medications to the infusion",
+    "Establish vascular access carefully and minimize arterial/venous punctures, IM injections, urinary catheters, and nasotracheal procedures to reduce bleeding",
+    "Use with aspirin and weight-adjusted heparin; titrate/avoid heparin per ACT to limit bleeding",
+    "Obtain baseline platelet count, hemoglobin/hematocrit, and coagulation studies, and recheck platelets 2-4 hours after the bolus and at 24 hours"
+  ],
+  "moa": "Abciximab is the Fab fragment of the chimeric human-murine monoclonal antibody 7E3. It binds to the glycoprotein (GP) IIb/IIIa (alpha-IIb/beta-3 integrin) receptor on the surface of activated platelets, which is the final common pathway for platelet aggregation. By occupying this receptor, abciximab prevents the binding of fibrinogen, von Willebrand factor, and other adhesive ligands that cross-link platelets, thereby inhibiting platelet aggregation regardless of the activating stimulus. It also binds the vitronectin (alpha-v/beta-3) receptor on platelets and vessel-wall cells. Receptor blockade is dose-dependent; platelet function recovers gradually over 24-48 hours after stopping the infusion as the drug redistributes, even though free plasma levels fall quickly.",
+  "contra": {
+    "absolute": [
+      "Active internal bleeding",
+      "Recent (within 6 weeks) clinically significant GI or GU bleeding",
+      "History of cerebrovascular accident within 2 years or with significant residual deficit",
+      "Bleeding diathesis or known thrombocytopenia",
+      "Recent major surgery or trauma (within ~6 weeks), intracranial neoplasm, arteriovenous malformation, or aneurysm",
+      "Severe uncontrolled hypertension",
+      "Use of oral anticoagulants within 7 days unless INR is acceptable",
+      "Known hypersensitivity to abciximab or to murine proteins"
+    ],
+    "relative": [
+      "Renal impairment / dialysis (higher bleeding risk)",
+      "Advanced age and low body weight",
+      "Prior exposure to abciximab (risk of hypersensitivity and thrombocytopenia)",
+      "Concomitant thrombolytics or other antithrombotics"
+    ],
+    "monitor": [
+      "Platelet count (baseline, 2-4 hours after bolus, and at 24 hours)",
+      "Hemoglobin/hematocrit and clinical signs of bleeding",
+      "Vascular access site for hematoma/bleeding",
+      "Activated clotting time (ACT)/aPTT to guide heparin",
+      "Signs of hypersensitivity, especially on readministration"
+    ]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women. Abciximab should be used during pregnancy only if the potential benefit clearly justifies the potential risk to the fetus.",
+  "lact": "It is not known whether abciximab is excreted in human milk. Because many proteins are excreted in milk and given the potential for adverse effects, caution should be used; consider not breastfeeding during and shortly after therapy.",
+  "renal": "No formal renal dosing adjustment is provided, but patients with renal impairment (including those on dialysis) have an increased risk of bleeding. Use with caution, weigh the bleeding risk carefully, and monitor closely.",
+  "hepatic": "No specific hepatic dose adjustment is described. Assess overall bleeding risk; abciximab is a protein cleared by proteolysis rather than hepatic metabolism.",
+  "interactions": {
+    "major": [
+      "Other antithrombotic/antiplatelet agents and thrombolytics (heparin, warfarin, NSAIDs, dipyridamole, ticlopidine, fibrinolytics) - markedly increased bleeding risk (heparin and aspirin are used together with it per protocol with monitoring)"
+    ],
+    "moderate": [
+      "Dextran and other agents affecting platelets/coagulation - additive bleeding risk"
+    ],
+    "minor": ["No CYP450-mediated pharmacokinetic interactions (biologic agent)"],
+    "food": "Not applicable (intravenous).",
+    "alcohol": "Not relevant in the acute procedural setting.",
+    "diagnostics": "Causes prolongation of bleeding time and inhibition of ex vivo platelet aggregation; monitor platelet count, hemoglobin/hematocrit, and ACT/aPTT for heparin dosing."
+  },
+  "se": {
+    "common": ["Bleeding (including minor and access-site bleeding)", "Hypotension", "Nausea", "Vomiting", "Chest pain", "Back pain", "Bradycardia", "Headache"],
+    "serious": ["Major hemorrhage including gastrointestinal and retroperitoneal bleeding", "Intracranial hemorrhage / hemorrhagic stroke", "Acute profound thrombocytopenia", "Severe hypersensitivity/anaphylaxis", "Pulmonary hemorrhage (rare)"],
+    "rare": ["Human anti-chimeric antibody formation with reactions on readministration", "Embolism/thrombosis", "Tamponade with arterial perforation"],
+    "emergency": ["Major or intracranial hemorrhage", "Severe acute thrombocytopenia with bleeding", "Anaphylaxis or severe allergic reaction"]
+  },
+  "monitoring": ["Platelet count at baseline, 2-4 hours after the bolus, and at 24 hours (watch for acute thrombocytopenia)", "Hemoglobin/hematocrit and clinical signs of bleeding", "Vascular access/sheath site for hematoma or bleeding", "Activated clotting time and aPTT to guide heparin", "Vital signs and signs of hypersensitivity, particularly with repeat exposure"],
+  "counsel": [
+    "This medicine is given through a vein during your heart procedure to help keep blood from clotting on the stent",
+    "It can cause bleeding - tell the team about any bleeding, bruising, blood in urine or stool, severe headache, or weakness",
+    "You will have blood tests to check your platelets and blood counts before, during, and after treatment",
+    "Stay still and follow instructions about the catheter site to prevent bleeding",
+    "Tell staff right away about any rash, swelling, itching, or trouble breathing",
+    "Let your team know if you have ever received this drug before, as reactions can occur on repeat use"
+  ],
+  "pk": [
+    ["Onset", "Rapid platelet inhibition within minutes of the IV bolus"],
+    ["Peak", "Maximal GP IIb/IIIa receptor blockade shortly after bolus"],
+    ["Half-life", "Initial ~10 minutes (free drug); platelet-bound function recovers over 24-48 hours"],
+    ["Duration", "Platelet aggregation gradually returns toward normal over 24-48 hours after stopping"],
+    ["Storage", "Refrigerate at 2-8 C; do not freeze or shake; do not use if particulates are present"]
+  ],
+  "pearls": [
+    "Fab fragment of monoclonal antibody 7E3 - blocks the final common pathway (GP IIb/IIIa) of platelet aggregation during PCI",
+    "Two key risks are bleeding and acute, sometimes severe, thrombocytopenia - check platelets 2-4 hours after the bolus and at 24 hours",
+    "If life-threatening bleeding or severe thrombocytopenia occurs, stop the infusion; platelet transfusion can be used to reverse the antiplatelet effect",
+    "Used together with aspirin and weight-adjusted heparin; minimize vascular punctures and invasive procedures to limit bleeding",
+    "Readministration risks hypersensitivity and thrombocytopenia from human anti-chimeric antibodies",
+    "Biologic - often absent from openFDA structured data; dosing and warnings follow the FDA package insert (ReoPro) / EMA SmPC"
+  ],
+  "missed": "Abciximab is administered as a one-time bolus and short infusion by clinicians during a hospital procedure; there is no patient self-administered or missed-dose scenario. Dosing/timing is managed entirely by the treating team.",
+  "overdose": "There has been no experience of acute overdose in humans; the main concerns are bleeding and thrombocytopenia. If overdose or serious bleeding occurs, stop the infusion immediately. Because abciximab binds platelets, platelet transfusion may restore platelet function and is used to manage major bleeding or profound thrombocytopenia, along with general supportive measures.",
+  "refs": [
+    ["FDA Package Insert - Abciximab (ReoPro)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=abciximab"],
+    ["EMA - Abciximab (ReoPro) product information", "https://www.ema.europa.eu/en/medicines"]
+  ]
+}

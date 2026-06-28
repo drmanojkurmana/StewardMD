@@ -1,0 +1,91 @@
+{
+  "generic": "Metformin hydrochloride",
+  "cls": "Antidiabetic agent (biguanide)",
+  "pharm": "Biguanide; reduces hepatic glucose production and improves peripheral insulin sensitivity",
+  "tags": ["Type 2 diabetes", "First-line oral antidiabetic", "Biguanide", "Boxed warning: lactic acidosis"],
+  "quick": [
+    ["Adult dose", "500 mg PO BID or 850 mg PO once daily, titrate to max 2550 mg/day"],
+    ["Meal", "Take with meals"],
+    ["Pregnancy", "Use only if clearly needed; insufficient data on malformation risk"],
+    ["Lactation", "Excreted in milk; consider benefit vs risk"],
+    ["Renal", "Contraindicated if eGFR <30; do not initiate if eGFR 30-45"],
+    ["Hepatic", "Avoid in hepatic impairment (lactic acidosis risk)"],
+    ["Alcohol", "Avoid excessive intake (lactic acidosis risk)"],
+    ["Monitoring", "eGFR, HbA1c, glucose, B12"]
+  ],
+  "summary": "Metformin is a biguanide and the first-line oral agent for type 2 diabetes mellitus. It lowers blood glucose by decreasing hepatic glucose output, reducing intestinal glucose absorption, and improving insulin sensitivity, without causing hypoglycemia or weight gain when used alone. Carries a boxed warning for rare but potentially fatal lactic acidosis.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus",
+    "Adjunct to diet and exercise to improve glycemic control in pediatric patients 10 years of age and older with type 2 diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes (adult)", "r": "Oral", "d": "Start 500 mg twice daily or 850 mg once daily; titrate by 500 mg weekly or 850 mg every 2 weeks; max 2550 mg/day", "t": "With meals; doses above 2000 mg may be better tolerated three times daily", "n": "Adjust based on glycemic control and tolerability"},
+    {"c": "Type 2 diabetes (pediatric ≥10 yr)", "r": "Oral", "d": "Start 500 mg twice daily; titrate by 500 mg weekly; max 2000 mg/day", "t": "With meals, in divided doses twice daily", "n": "Not studied in children under 10 years"},
+    {"c": "Renal impairment (eGFR 30-45)", "r": "Oral", "d": "Initiation not recommended; if already on therapy, assess risk/benefit of continuing", "t": "With meals", "n": "Discontinue if eGFR falls below 30"}
+  ],
+  "admin": [
+    "Assess renal function (eGFR) before initiation and at least annually",
+    "Take with meals to reduce gastrointestinal upset",
+    "Swallow tablets whole; titrate dose gradually to improve tolerability",
+    "Temporarily withhold before iodinated contrast imaging in at-risk patients",
+    "Hold for surgery, acute illness, dehydration, or hypoxic states"
+  ],
+  "moa": "Metformin is an antihyperglycemic biguanide that lowers both basal and postprandial plasma glucose. It decreases hepatic glucose production, decreases intestinal absorption of glucose, and improves insulin sensitivity by increasing peripheral glucose uptake and utilization. Insulin secretion remains unchanged, so it does not cause hypoglycemia as monotherapy.",
+  "contra": {
+    "absolute": ["Severe renal impairment (eGFR below 30 mL/min/1.73 m2)", "Acute or chronic metabolic acidosis, including diabetic ketoacidosis", "Hypersensitivity to metformin"],
+    "relative": ["eGFR 30-45 mL/min/1.73 m2 (do not initiate)", "Hepatic impairment", "Excessive alcohol intake", "Conditions predisposing to hypoxia or dehydration", "Age ≥65 years (increased lactic acidosis risk)"],
+    "monitor": ["Renal function (eGFR)", "Vitamin B12 levels with long-term use", "Acid-base status in acute illness"]
+  },
+  "preg": "There are limited data on metformin use in pregnant women to inform a drug-associated risk of major birth defects or miscarriage. Poorly controlled diabetes in pregnancy carries maternal and fetal risk. Use during pregnancy only if clearly needed.",
+  "lact": "Metformin is present in human milk. Consider the developmental and health benefits of breastfeeding along with the mother's clinical need and any potential adverse effects on the breastfed infant.",
+  "renal": "Assess eGFR before initiation. Contraindicated when eGFR is below 30 mL/min/1.73 m2. Initiation is not recommended when eGFR is 30 to 45 mL/min/1.73 m2. Assess risk/benefit of continuing if eGFR falls below 45, and discontinue if eGFR falls below 30. Renal impairment increases the risk of lactic acidosis.",
+  "hepatic": "Avoid in patients with hepatic impairment, as impaired hepatic clearance of lactate is associated with an increased risk of metformin-associated lactic acidosis.",
+  "interactions": {
+    "major": ["Iodinated contrast media (risk of acute kidney injury and lactic acidosis; withhold metformin)", "Carbonic anhydrase inhibitors such as topiramate and acetazolamide (increase metabolic acidosis risk)"],
+    "moderate": ["Drugs that reduce renal clearance (e.g., ranolazine, cimetidine, dolutegravir, vandetanib) may increase metformin levels", "Insulin and insulin secretagogues (increased hypoglycemia risk)"],
+    "minor": ["Cationic drugs eliminated by renal tubular secretion may compete for clearance"],
+    "food": "Take with meals; food slightly reduces and delays absorption but improves gastrointestinal tolerability",
+    "alcohol": "Avoid excessive alcohol intake; alcohol potentiates the effect of metformin on lactate metabolism and increases lactic acidosis risk",
+    "diagnostics": "May decrease serum vitamin B12; withhold around iodinated contrast procedures in patients with renal impairment"
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea and vomiting", "Flatulence", "Abdominal discomfort", "Asthenia", "Headache", "Indigestion"],
+    "serious": ["Lactic acidosis", "Vitamin B12 deficiency", "Hypoglycemia (when combined with insulin or secretagogues)"],
+    "rare": ["Megaloblastic anemia secondary to B12 deficiency", "Hypersensitivity reactions"],
+    "emergency": ["Lactic acidosis (malaise, myalgias, respiratory distress, somnolence, abdominal pain, hypothermia, hypotension, bradyarrhythmias) - discontinue and seek emergency care"]
+  },
+  "monitoring": [
+    "Estimated glomerular filtration rate (eGFR) before starting and at least annually",
+    "HbA1c every 3 to 6 months",
+    "Fasting and postprandial blood glucose",
+    "Hematologic parameters and vitamin B12 (annually or with anemia/neuropathy)",
+    "Signs and symptoms of lactic acidosis, especially in high-risk patients"
+  ],
+  "counsel": [
+    "Take with meals to reduce stomach upset; do not skip meals",
+    "Report symptoms of lactic acidosis such as unusual muscle pain, trouble breathing, unusual sleepiness, or severe abdominal pain immediately",
+    "Limit alcohol intake",
+    "Inform clinicians before any imaging study using contrast dye or before surgery",
+    "Continue diet and exercise; metformin alone does not usually cause low blood sugar but may when combined with other diabetes drugs"
+  ],
+  "pk": [
+    ["Onset", "Glucose-lowering effect within days; full effect over 1-2 weeks"],
+    ["Peak", "Plasma concentration peaks at about 2-3 hours after a dose"],
+    ["Half-life", "Approximately 6.2 hours (plasma); longer in blood compartment"],
+    ["Duration", "Approximately 12-24 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions permitted 15-30 C"]
+  ],
+  "pearls": [
+    "First-line pharmacotherapy for type 2 diabetes per major guidelines",
+    "Does not cause hypoglycemia or weight gain as monotherapy",
+    "Gastrointestinal side effects are minimized by starting low, titrating slowly, taking with food, or using extended-release form",
+    "Check vitamin B12 periodically with long-term use",
+    "Hold around iodinated contrast and acute illness to reduce lactic acidosis risk"
+  ],
+  "missed": "Take the missed dose with food as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double the dose.",
+  "overdose": "Overdose, including ingestions greater than 50 grams, has occurred. Lactic acidosis is reported in about 32% of overdose cases and hypoglycemia in about 10%. Treatment is supportive; metformin is dialyzable (clearance up to 170 mL/min), so hemodialysis may help remove accumulated drug and correct acidosis. Contact Poison Control (1-800-222-1222).",
+  "refs": [
+    ["FDA Prescribing Information: Metformin Hydrochloride Tablets, USP", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metformin+hydrochloride%22"],
+    ["DailyMed - Metformin Hydrochloride", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metformin"]
+  ]
+}

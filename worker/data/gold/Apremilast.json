@@ -1,0 +1,94 @@
+{
+  "generic": "Apremilast",
+  "cls": "Phosphodiesterase-4 (PDE4) inhibitor",
+  "pharm": "Oral immunomodulator / disease-modifying agent",
+  "tags": ["PDE4 inhibitor", "psoriatic arthritis", "plaque psoriasis", "Behcet disease", "immunomodulator", "oral biologic-alternative"],
+  "quick": [
+    ["Adult dose", "Titrate over 5 days to maintenance 30 mg twice daily (or XR 75 mg once daily)"],
+    ["Meal", "May be taken with or without food; swallow whole, do not crush/chew"],
+    ["Pregnancy", "Animal data show fetal-loss risk; advise of potential risk, weigh benefit"],
+    ["Lactation", "No human data; weigh benefit against risk to infant"],
+    ["Renal", "Severe impairment (CrCl <30): reduce to 30 mg once daily, titrate AM doses only"],
+    ["Hepatic", "No dose adjustment needed"],
+    ["Alcohol", "No specific interaction; alcohol may worsen GI/depressive symptoms"],
+    ["Monitoring", "Weight, mood/depression, GI tolerance"]
+  ],
+  "summary": "Apremilast is an oral small-molecule phosphodiesterase-4 (PDE4) inhibitor that raises intracellular cAMP and modulates inflammatory cytokine production. It treats active psoriatic arthritis, plaque psoriasis (candidates for phototherapy/systemic therapy) and oral ulcers of Behcet disease. It requires an initial dose titration to limit gastrointestinal side effects, needs no routine laboratory monitoring, and carries warnings for diarrhea/nausea/vomiting, depression and weight loss.",
+  "indications": [
+    "Active psoriatic arthritis in adults and children >=6 years weighing >=20 kg",
+    "Plaque psoriasis in adults who are candidates for phototherapy or systemic therapy; moderate-to-severe plaque psoriasis in children >=6 years (>=20 kg)",
+    "Oral ulcers associated with Behcet's disease in adults"
+  ],
+  "dosage": [
+    {"c": "Adults (PsA, psoriasis, Behcet)", "r": "Titration days 1-5", "d": "Day1 10 mg AM; Day2 10 mg AM + 10 mg PM; Day3 10 mg AM + 20 mg PM; Day4 20 mg AM + 20 mg PM; Day5 20 mg AM + 30 mg PM", "t": "Per titration schedule", "n": "Reduces GI symptoms"},
+    {"c": "Adults - maintenance", "r": "Maintenance", "d": "30 mg twice daily (or OTEZLA XR 75 mg once daily)", "t": "Twice daily (XR once daily)", "n": "From day 6 onward"},
+    {"c": "Pediatric >=20 to <50 kg", "r": "Maintenance", "d": "20 mg twice daily after weight-based titration", "t": "Twice daily", "n": "Children >=6 years"},
+    {"c": "Pediatric >=50 kg", "r": "Maintenance", "d": "30 mg twice daily after titration", "t": "Twice daily", "n": "Children >=6 years"},
+    {"c": "Severe renal impairment (CrCl <30)", "r": "Reduced", "d": "30 mg once daily; during titration use only the AM schedule and skip PM doses", "t": "Once daily", "n": "Avoid accumulation"}
+  ],
+  "admin": [
+    "Follow the 5-day titration schedule to minimize diarrhea, nausea and vomiting",
+    "Swallow tablets whole; do not crush, split or chew (especially XR)",
+    "May be taken with or without food (XR also without regard to meals)",
+    "In severe renal impairment use only the morning titration doses and a 30 mg once-daily maintenance dose",
+    "Re-titrate if therapy is interrupted for a prolonged period"
+  ],
+  "moa": "Apremilast is a small-molecule inhibitor of phosphodiesterase-4 (PDE4) specific for cyclic AMP. PDE4 inhibition raises intracellular cAMP, which down-regulates the inflammatory response by decreasing production of pro-inflammatory cytokines (such as TNF-alpha, IL-23, IL-17) and increasing anti-inflammatory mediators. The precise mechanism by which this produces clinical benefit is not fully defined.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to apremilast or any excipient in the formulation"],
+    "relative": ["History of depression or suicidal thoughts/behavior", "Significant unexplained or ongoing weight loss", "Severe renal impairment (use reduced dose)", "Underweight patients"],
+    "monitor": ["Concomitant strong CYP450 inducers (reduced efficacy)", "Patients with persistent severe GI symptoms", "Elderly or dehydrated patients (volume depletion from diarrhea/vomiting)"]
+  },
+  "preg": "Available human data have not identified a clear drug-associated risk of major birth defects, but animal studies showed dose-related abortion/embryo-fetal loss; apremilast may increase the risk of fetal loss. Advise pregnant women of the potential risk and use only if clearly needed. A pregnancy exposure registry exists.",
+  "lact": "There are no data on the presence of apremilast in human milk or its effects on the breastfed infant. Consider the developmental and health benefits of breastfeeding alongside the mother's clinical need and any potential adverse effect on the infant.",
+  "renal": "In severe renal impairment (CrCl below 30 mL/min) apremilast exposure is increased; reduce the maintenance dose to 30 mg once daily and during titration use only the morning schedule, skipping afternoon doses. No adjustment is needed for mild-to-moderate impairment.",
+  "hepatic": "Pharmacokinetics are not significantly altered in hepatic impairment; no dosage adjustment is required for mild, moderate or severe hepatic impairment.",
+  "interactions": {
+    "major": ["Strong CYP450 inducers (rifampin, phenobarbital, carbamazepine, phenytoin) - decrease apremilast exposure and may cause loss of efficacy; concomitant use not recommended"],
+    "moderate": [],
+    "minor": [],
+    "food": "No clinically meaningful effect of food on absorption; may be taken with or without food.",
+    "alcohol": "No specific pharmacokinetic interaction; alcohol may aggravate gastrointestinal upset or depressive symptoms.",
+    "diagnostics": "No characteristic laboratory test interference; routine lab monitoring is not required."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Headache (including tension headache)", "Upper respiratory tract infection", "Vomiting", "Abdominal pain", "Decreased appetite / weight loss"],
+    "serious": ["Severe diarrhea, nausea or vomiting with dehydration", "Depression, suicidal thoughts or mood changes", "Clinically significant weight loss", "Hypersensitivity reactions"],
+    "rare": ["Angioedema", "Anaphylaxis"],
+    "emergency": ["Anaphylaxis or angioedema", "Acute suicidal ideation or behavior", "Severe dehydration from refractory GI symptoms"]
+  },
+  "monitoring": [
+    "Body weight at baseline and regularly; evaluate and consider discontinuation for significant unexplained weight loss",
+    "Mood and behavior - watch for new or worsening depression or suicidal thoughts",
+    "Gastrointestinal tolerance; consider dose reduction or suspension for severe diarrhea, nausea or vomiting",
+    "Hydration status, particularly in elderly patients",
+    "No routine blood-test monitoring required"
+  ],
+  "counsel": [
+    "Follow the starter-pack titration schedule exactly to reduce stomach upset",
+    "Tell your doctor about new or worsening depression, mood changes or thoughts of self-harm",
+    "Report severe or persistent diarrhea, nausea or vomiting and any significant weight loss",
+    "Swallow tablets whole; do not crush or chew",
+    "Do not start without telling your doctor about other medicines, especially seizure drugs or rifampin"
+  ],
+  "pk": [
+    ["Onset", "Clinical improvement typically over several weeks of therapy"],
+    ["Peak", "Tmax ~2.5 hours (immediate-release); ~6 hours for XR"],
+    ["Half-life", "Approximately 6-9 hours"],
+    ["Duration", "Twice-daily (or once-daily XR) dosing maintains effect"],
+    ["Storage", "OTEZLA below 30 C; OTEZLA XR 20-25 C (excursions 15-30 C)"]
+  ],
+  "pearls": [
+    "The 5-day dose titration is essential to limit diarrhea, nausea and vomiting, which are most common in the first weeks",
+    "Apremilast needs no routine laboratory monitoring, unlike methotrexate or biologics, making it convenient for patients who cannot have frequent blood tests",
+    "Counsel about depression and weight loss - monitor mood and weight at every visit",
+    "Strong CYP450 inducers (rifampin, carbamazepine, phenytoin, phenobarbital) markedly reduce efficacy and should be avoided",
+    "In severe renal impairment, halve the dosing frequency to 30 mg once daily and use AM-only titration"
+  ],
+  "missed": "Take the missed dose as soon as you remember; if it is almost time for the next dose, skip the missed one and resume the usual schedule. Do not take two doses at once. If you have stopped for several days, ask your prescriber whether you need to re-titrate.",
+  "overdose": "There is no specific information on overdose treatment or a specific antidote. In the event of overdose, discontinue apremilast and provide general supportive care with monitoring for exaggerated effects such as gastrointestinal symptoms. Manage symptomatically.",
+  "refs": [
+    ["FDA OTEZLA (apremilast) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22apremilast%22"],
+    ["DailyMed - OTEZLA (apremilast)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

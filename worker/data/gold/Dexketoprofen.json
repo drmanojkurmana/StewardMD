@@ -1,0 +1,97 @@
+{
+  "generic": "Dexketoprofen",
+  "cls": "Nonsteroidal anti-inflammatory drug (NSAID), arylpropionic acid (profen)",
+  "pharm": "Analgesic / anti-inflammatory / antipyretic",
+  "tags": ["NSAID", "analgesic", "acute pain", "S-enantiomer", "ketoprofen", "non-FDA-approved"],
+  "quick": [
+    ["Adult dose", "12.5 mg every 4-6 h or 25 mg every 8 h PO; max 75 mg/day"],
+    ["Meal", "Take with or after food to reduce GI upset (faster onset on empty stomach)"],
+    ["Pregnancy", "Avoid, especially 3rd trimester; contraindicated from 20-28 weeks onward"],
+    ["Lactation", "Not recommended; avoid during breastfeeding"],
+    ["Renal", "Contraindicated in moderate-severe impairment; start 50 mg/day in mild"],
+    ["Hepatic", "Reduce to max 50 mg/day in mild-moderate; contraindicated if severe"],
+    ["Alcohol", "Avoid; increases GI bleeding risk"],
+    ["Monitoring", "BP, renal function, signs of GI bleeding; FBC with prolonged use"]
+  ],
+  "summary": "Dexketoprofen is the pharmacologically active S(+)-enantiomer of ketoprofen, a propionic-acid NSAID used for short-term symptomatic relief of mild to moderate acute pain (e.g., musculoskeletal pain, dysmenorrhea, dental and postoperative pain). It has a rapid onset and short half-life, allowing lower total NSAID exposure than racemic ketoprofen. It is approved in Europe and many other regions but is NOT FDA-approved in the United States.",
+  "indications": [
+    "Short-term symptomatic treatment of mild to moderate acute pain",
+    "Musculoskeletal pain",
+    "Dysmenorrhoea (period pain)",
+    "Dental pain",
+    "Postoperative pain (including parenteral form where available)"
+  ],
+  "dosage": [
+    {"c": "Mild-moderate acute pain (adult)", "r": "Oral standard", "d": "12.5 mg every 4-6 hours OR 25 mg every 8 hours", "t": "As needed for pain", "n": "Maximum 75 mg per day"},
+    {"c": "Elderly", "r": "Oral, cautious", "d": "Start at maximum 50 mg/day", "t": "Divided doses", "n": "May increase to standard dose only if well tolerated"},
+    {"c": "Mild hepatic impairment", "r": "Reduced", "d": "Total daily dose limited to 50 mg/day", "t": "Divided doses", "n": "Monitor closely"},
+    {"c": "Mild renal impairment", "r": "Reduced", "d": "Total daily dose limited to 50 mg/day", "t": "Divided doses", "n": "Contraindicated in moderate-severe renal impairment"},
+    {"c": "Acute pain (parenteral, where available)", "r": "IM/IV dexketoprofen trometamol", "d": "50 mg every 8-12 hours (max 150 mg/day)", "t": "Every 8-12 h", "n": "Short-term only; switch to oral as soon as possible"}
+  ],
+  "admin": [
+    "Use the lowest effective dose for the shortest duration to control symptoms",
+    "Take oral doses with or after food to reduce gastrointestinal irritation",
+    "Taking on an empty stomach gives faster onset but may increase GI upset",
+    "Intended for short-term use only; reassess if pain persists",
+    "Parenteral forms (where licensed) for short-term acute pain, transition to oral as soon as feasible"
+  ],
+  "moa": "Dexketoprofen is the active S(+)-enantiomer of ketoprofen. It non-selectively inhibits cyclooxygenase (COX-1 and COX-2), reducing the conversion of arachidonic acid to prostaglandins. Decreased prostaglandin synthesis at peripheral and central sites produces analgesic, anti-inflammatory, and antipyretic effects.",
+  "contra": {
+    "absolute": ["Hypersensitivity to dexketoprofen, ketoprofen, or other NSAIDs/salicylates", "History of asthma, bronchospasm, urticaria or angioedema precipitated by NSAIDs/aspirin", "Active or history of recurrent peptic ulcer / GI bleeding", "Active GI bleeding or other active bleeding", "Severe heart failure", "Moderate to severe renal impairment", "Severe hepatic impairment (Child-Pugh C)", "Third trimester of pregnancy", "Hemorrhagic diathesis or coagulation disorders"],
+    "relative": ["History of GI disease, Crohn's disease or ulcerative colitis", "Hypertension and/or cardiac impairment", "Mild-moderate hepatic or mild renal impairment", "Elderly patients", "Concomitant medicines increasing bleeding or GI risk"],
+    "monitor": ["Concomitant anticoagulants/antiplatelets", "Diuretics, ACE inhibitors or ARBs (renal risk)", "Patients with fluid retention, hypertension or cardiovascular risk factors"]
+  },
+  "preg": "Avoid in the first and second trimesters unless clearly necessary. Contraindicated from around 20-28 weeks gestation onward and in the third trimester due to risks of premature closure of the ductus arteriosus, fetal renal impairment/oligohydramnios, and inhibition of labour. May impair female fertility and is not recommended in women attempting to conceive.",
+  "lact": "There are no data on excretion of dexketoprofen in human milk. Use during breastfeeding is not recommended; avoid.",
+  "renal": "Contraindicated in moderate to severe renal impairment. In mild renal impairment, limit total dose to 50 mg/day. NSAIDs can reduce renal perfusion and precipitate acute kidney injury, especially with dehydration, diuretics, ACE inhibitors or ARBs.",
+  "hepatic": "Limit total dose to 50 mg/day in mild to moderate hepatic impairment with close monitoring. Contraindicated in severe hepatic impairment (Child-Pugh C). Discontinue if liver function tests are persistently abnormal or signs of liver disease develop.",
+  "interactions": {
+    "major": ["Other NSAIDs including high-dose aspirin and COX-2 inhibitors - increased GI bleeding/ulceration risk", "Anticoagulants (warfarin, heparin, DOACs) - increased bleeding risk", "Lithium - reduced lithium clearance, risk of toxicity", "Methotrexate (high dose) - reduced clearance, increased toxicity"],
+    "moderate": ["Diuretics, ACE inhibitors, ARBs - reduced efficacy and increased risk of renal impairment ('triple whammy')", "Corticosteroids - increased GI ulceration/bleeding", "Antiplatelets and SSRIs - increased GI bleeding", "Ciclosporin and tacrolimus - nephrotoxicity", "Sulfonylureas - possible enhanced hypoglycemic effect"],
+    "minor": ["Cardiac glycosides (digoxin) - may raise plasma levels", "Antihypertensives - reduced antihypertensive effect", "Quinolone antibiotics - theoretical seizure risk"],
+    "food": "Food delays absorption and onset; take with food to reduce GI upset.",
+    "alcohol": "Avoid alcohol - increases risk of gastrointestinal bleeding.",
+    "diagnostics": "May affect renal function tests and reduce platelet aggregation; can mask fever/inflammation."
+  },
+  "se": {
+    "common": ["Nausea and/or vomiting", "Abdominal pain", "Dyspepsia", "Diarrhea", "Dizziness", "Headache"],
+    "serious": ["Gastrointestinal ulceration, bleeding or perforation", "Acute kidney injury / fluid retention", "Hepatotoxicity", "Bronchospasm in NSAID-sensitive patients", "Cardiovascular thrombotic events (MI, stroke) with prolonged/high-dose use"],
+    "rare": ["Severe cutaneous reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis)", "Photosensitivity (class effect of ketoprofen)", "Blood dyscrasias (neutropenia, thrombocytopenia)", "Aseptic meningitis", "Anaphylaxis / angioedema"],
+    "emergency": ["GI hemorrhage (hematemesis, melena)", "Anaphylaxis or severe bronchospasm", "Severe skin reaction (SJS/TEN)", "Acute kidney injury"]
+  },
+  "monitoring": [
+    "Blood pressure at baseline and during treatment",
+    "Renal function, particularly in elderly or those on diuretics/ACE inhibitors/ARBs",
+    "Signs and symptoms of GI bleeding (especially elderly, ulcer history)",
+    "Liver function with prolonged use or if symptoms suggest hepatotoxicity",
+    "Full blood count with prolonged therapy"
+  ],
+  "counsel": [
+    "Use for the shortest time needed to control pain",
+    "Take with or after food to reduce stomach upset",
+    "Stop and seek help for black/tarry stools, vomiting blood, severe stomach pain, or signs of allergic reaction",
+    "Avoid combining with other NSAIDs or aspirin and limit alcohol",
+    "Tell your doctor if you have heart, kidney, liver disease, or are pregnant/breastfeeding",
+    "Report any rash or skin reaction promptly (risk of photosensitivity)"
+  ],
+  "pk": [
+    ["Onset", "Analgesia within ~30 minutes of an oral dose"],
+    ["Peak", "Peak plasma concentration ~0.25-0.75 hours (delayed by food)"],
+    ["Half-life", "Elimination half-life ~1.65 hours (short-acting)"],
+    ["Duration", "Analgesic effect approximately 4-8 hours"],
+    ["Storage", "Store below 30 C (per SmPC); protect from light and moisture"]
+  ],
+  "pearls": [
+    "NOT FDA-approved in the United States; licensed in Europe (EMA/national SmPC), UK (BNF) and many other countries - dosing here is based on SmPC/BNF, not FDA labeling",
+    "Dexketoprofen is the active S(+)-enantiomer of ketoprofen, so the effective dose is roughly half that of racemic ketoprofen",
+    "Rapid onset and short half-life make it suited to short-term acute pain rather than chronic inflammatory conditions",
+    "Available as dexketoprofen trometamol salt, which improves solubility and speeds absorption",
+    "Carries the usual NSAID cardiovascular, GI and renal warnings; use lowest effective dose for shortest duration"
+  ],
+  "missed": "As dexketoprofen is taken as needed for pain, take a dose only when required and do not exceed the maximum of 75 mg in 24 hours. If on a scheduled regimen, take a missed dose when remembered unless it is nearly time for the next dose; never double up.",
+  "overdose": "Symptoms may include nausea, vomiting, abdominal pain, drowsiness, headache, and in severe cases GI bleeding, hypotension, renal failure, metabolic acidosis, seizures and CNS depression. Management is supportive: consider activated charcoal if presenting within 1 hour, protect the airway, monitor cardiovascular and renal function, correct electrolytes, and give symptomatic GI protection. Dexketoprofen may be removed by dialysis. There is no specific antidote.",
+  "refs": [
+    ["EMA / SmPC Dexketoprofen (Keral/Enantyum) Summary of Product Characteristics", "https://www.medicines.org.uk/emc"],
+    ["BNF - Dexketoprofen (NICE/British National Formulary)", "https://bnf.nice.org.uk/drugs/dexketoprofen/"]
+  ]
+}

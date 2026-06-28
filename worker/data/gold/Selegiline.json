@@ -1,0 +1,113 @@
+{
+  "generic": "Selegiline",
+  "cls": "Monoamine oxidase type B inhibitor (MAOI; antiparkinsonian / antidepressant)",
+  "pharm": "Irreversibly inhibits monoamine oxidase, selectively MAO-B at low oral doses (increasing dopamine), and loses selectivity at higher transdermal/oral doses, inhibiting MAO-A and MAO-B.",
+  "tags": ["Rx only", "MAOI", "Oral (Parkinson) vs transdermal (depression)", "Tyramine/serotonin interactions"],
+  "quick": [
+    ["Adult dose", "Oral (Parkinson): 10 mg/day as 5 mg at breakfast and 5 mg at lunch. Transdermal (MDD): start 6 mg/24h, max 12 mg/24h"],
+    ["Meal", "Oral with breakfast/lunch; transdermal dietary tyramine restriction needed at 9 and 12 mg/24h doses"],
+    ["Pregnancy", "Limited data; use only if potential benefit justifies potential fetal risk"],
+    ["Lactation", "Unknown if excreted in milk; caution advised"],
+    ["Renal", "Use with caution; limited data in significant renal impairment"],
+    ["Hepatic", "Use with caution; limited data; transdermal not studied in hepatic impairment"],
+    ["Alcohol", "Avoid; MAOIs interact with tyramine-containing beverages and CNS effects"],
+    ["Monitoring", "Blood pressure (hypertensive crisis), mood/suicidality (transdermal), serotonin syndrome signs"]
+  ],
+  "summary": "Selegiline is a selective, irreversible MAO-B inhibitor at low oral doses, used as an adjunct to levodopa/carbidopa in Parkinson's disease when the response deteriorates. As a transdermal system it is delivered at higher systemic doses that inhibit both MAO-A and MAO-B and is approved for major depressive disorder, carrying an antidepressant boxed warning for suicidality and (at higher patch strengths) dietary tyramine restrictions to prevent hypertensive crisis. It is contraindicated with meperidine and other serotonergic/sympathomimetic drugs because of the risk of serotonin syndrome and hypertensive reactions.",
+  "indications": [
+    "Adjunct to levodopa/carbidopa in Parkinson's disease patients with a deteriorating response (oral)",
+    "Treatment of major depressive disorder in adults (transdermal system)"
+  ],
+  "dosage": [
+    {"c": "Parkinson's disease (adjunct)", "r": "Adult oral", "d": "10 mg/day, given as 5 mg at breakfast and 5 mg at lunch", "t": "Twice daily", "n": "No added benefit above 10 mg/day; after 2-3 days a reduction of levodopa/carbidopa may be possible"},
+    {"c": "Major depressive disorder", "r": "Adult transdermal", "d": "Start and target 6 mg per 24 hours; increase in 3 mg/24h steps as needed", "t": "Apply one patch every 24 hours", "n": "Maximum 12 mg/24h; dietary tyramine restriction required at 9 and 12 mg/24h"},
+    {"c": "Orally disintegrating tablet (Zelapar)", "r": "Adult oral", "d": "Start 1.25 mg once daily in the morning before breakfast; may increase to 2.5 mg/day after 6 weeks", "t": "Once daily", "n": "Different product/dosing from conventional tablets; do not exceed 2.5 mg/day"},
+    {"c": "Elderly / sensitive patients", "r": "Adult", "d": "Use lowest effective dose", "t": "As above", "n": "Greater risk of orthostatic hypotension and confusion"}
+  ],
+  "admin": [
+    "Oral tablets: take with breakfast and lunch to avoid insomnia from evening dosing",
+    "Transdermal: apply to dry, intact skin on the upper torso, upper thigh, or outer upper arm; rotate sites and use a new patch every 24 hours",
+    "Do not cut transdermal patches; remove before MRI or external defibrillation (foil backing)",
+    "Observe required washout periods when switching to/from other antidepressants or MAOIs",
+    "Counsel on tyramine-rich food avoidance at higher transdermal doses"
+  ],
+  "moa": "Selegiline is an irreversible inhibitor of monoamine oxidase, acting as a suicide substrate for the enzyme. At low oral doses it selectively inhibits MAO-B, the predominant form in the basal ganglia, reducing the metabolism of dopamine and prolonging dopaminergic activity - the basis of its antiparkinsonian adjunctive effect. At the higher systemic exposures achieved by the transdermal system, selectivity is lost and both MAO-A and MAO-B are inhibited, increasing brain serotonin, norepinephrine and dopamine, which underlies its antidepressant action. Some metabolites are amphetamine-like.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to selegiline",
+      "Concomitant use with meperidine (and generally other opioids such as tramadol, methadone, propoxyphene)",
+      "Concomitant serotonergic agents (SSRIs, SNRIs, TCAs, triptans, St John's wort, dextromethorphan, etc.) - serotonin syndrome risk",
+      "Other MAO inhibitors or within prescribed washout periods",
+      "Sympathomimetics, decongestants, and (for transdermal) carbamazepine/oxcarbazepine"
+    ],
+    "relative": [
+      "Cerebrovascular disease or uncontrolled hypertension",
+      "History of severe headaches suggesting blood-pressure swings",
+      "Pheochromocytoma",
+      "Significant hepatic or renal impairment",
+      "Elective surgery requiring general anesthesia"
+    ],
+    "monitor": [
+      "Blood pressure (hypertensive crisis)",
+      "Mood and suicidal ideation (transdermal/MDD)",
+      "Signs of serotonin syndrome",
+      "Orthostatic symptoms and dyskinesias (with levodopa)"
+    ]
+  },
+  "preg": "There are limited data on selegiline use in pregnancy; animal data raise concern at high doses. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "It is not known whether selegiline is excreted in human milk; because of potential effects on the nursing infant, a decision should be made whether to discontinue nursing or the drug.",
+  "renal": "There is limited information in patients with significant renal impairment; use with caution and monitor for increased adverse effects, particularly with the transdermal system.",
+  "hepatic": "Use with caution in hepatic impairment; the transdermal system has not been studied in this population. Monitor for accumulation and increased adverse effects.",
+  "interactions": {
+    "major": [
+      "Meperidine and other opioids (serotonin syndrome, hyperpyrexia - contraindicated)",
+      "Serotonergic antidepressants - SSRIs/SNRIs/TCAs (serotonin syndrome; observe washout, e.g., 5 weeks after fluoxetine)",
+      "Sympathomimetics, decongestants, amphetamines (hypertensive crisis)",
+      "Other MAO inhibitors (severe hypertensive/serotonergic reactions)"
+    ],
+    "moderate": [
+      "Dextromethorphan (psychosis, bizarre behavior)",
+      "Triptans, buspirone, tramadol (serotonergic effects)",
+      "Levodopa (additive dyskinesias, nausea, orthostatic hypotension)"
+    ],
+    "minor": ["Carbamazepine/oxcarbazepine (raise selegiline levels - avoid with transdermal)"],
+    "food": "At transdermal doses of 9 and 12 mg/24h, avoid tyramine-rich foods (aged cheeses, cured/fermented meats, fermented soy, tap/draft beer, some wines) to prevent hypertensive crisis; the 6 mg/24h patch and low-dose oral therapy do not require restriction.",
+    "alcohol": "Avoid; alcoholic beverages may contain tyramine and add CNS effects.",
+    "diagnostics": "May interfere with urine drug screens (amphetamine-like metabolites can give false-positive amphetamine results)."
+  },
+  "se": {
+    "common": ["Nausea", "Dizziness/lightheadedness", "Insomnia/headache", "Dry mouth", "Application-site reactions (transdermal)"],
+    "serious": ["Hypertensive crisis (tyramine reaction)", "Serotonin syndrome", "Worsening orthostatic hypotension", "Exacerbation of dyskinesias/hallucinations with levodopa", "Suicidal thoughts/behavior (antidepressant use)"],
+    "rare": ["Impulse-control disorders", "Sudden sleep onset", "Psychosis/confusion"],
+    "emergency": ["Hypertensive crisis with severe headache", "Serotonin syndrome (hyperthermia, rigidity, autonomic instability)", "Acute suicidality"]
+  },
+  "monitoring": ["Blood pressure, watching for hypertensive reactions", "Mood, anxiety, and suicidal ideation (transdermal/MDD, especially early)", "Signs of serotonin syndrome", "Dyskinesias and orthostatic symptoms in Parkinson's patients"],
+  "counsel": [
+    "Take oral doses with breakfast and lunch; taking it later can cause insomnia",
+    "If using the patch, avoid aged cheeses, cured meats, fermented foods, and draft beer at higher patch strengths",
+    "Tell every prescriber you take an MAOI - many cold remedies, pain medicines (like tramadol/meperidine) and antidepressants are dangerous with it",
+    "Seek urgent care for a sudden severe headache, racing heart, agitation, fever or muscle stiffness",
+    "Report any new or worsening depression or thoughts of self-harm if using the patch"
+  ],
+  "pk": [
+    ["Onset", "Antiparkinson adjunctive effect over days; antidepressant effect over weeks"],
+    ["Peak", "Oral plasma peak ~0.5-2 hours; transdermal steady delivery over 24 hours"],
+    ["Half-life", "Parent drug ~2-10 hours; active metabolites longer (enzyme inhibition is irreversible/long-lasting)"],
+    ["Duration", "Functional MAO inhibition persists for days until new enzyme is synthesized"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep transdermal patches in sealed pouch until use, protect from light/heat"]
+  ],
+  "pearls": [
+    "Selectivity is dose-dependent: low-dose oral = MAO-B selective (Parkinson's); higher transdermal = nonselective MAO-A/B (depression)",
+    "6 mg/24h patch needs no dietary tyramine restriction; 9 and 12 mg/24h patches do",
+    "Irreversible 'suicide substrate' inhibition - effects outlast the drug and a washout is needed when switching agents",
+    "Contraindicated with meperidine and serotonergic drugs - serotonin syndrome risk",
+    "Metabolized to amphetamine-like compounds that can cause insomnia and false-positive amphetamine urine screens"
+  ],
+  "missed": "Oral: take the missed dose when remembered unless it is near the next dose or late in the day (skip to avoid insomnia). Transdermal: apply a new patch as soon as remembered, then resume the usual schedule; do not apply two patches at once.",
+  "overdose": "At overdose, MAO-B selectivity is lost and signs reflect combined MAO-A/B inhibition: severe hypotension or hypertension, psychomotor agitation, headache, hyperpyrexia, sweating, and in severe cases seizures and cardiovascular collapse, which may be delayed up to 12 hours and peak at 24-48 hours. Management is supportive with close cardiovascular and temperature monitoring; treat hypertension with a short-acting agent, control agitation/seizures, and provide intensive supportive care. Avoid sympathomimetic pressors.",
+  "refs": [
+    ["FDA Label - Selegiline (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22selegiline%22"],
+    ["FDA Label - EMSAM (selegiline transdermal)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22emsam%22"],
+    ["DailyMed - Selegiline", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=selegiline"]
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "generic": "Methyldopa",
+  "cls": "Centrally acting antihypertensive (central alpha-2 agonist prodrug)",
+  "pharm": "Metabolized to alpha-methylnorepinephrine, which stimulates central inhibitory alpha-2 adrenergic receptors, producing false neurotransmission and reduced sympathetic outflow, lowering arterial pressure.",
+  "tags": ["Rx only", "Central antihypertensive", "Preferred in pregnancy", "Hepatotoxicity/hemolytic anemia risk"],
+  "quick": [
+    ["Adult dose", "Start 250 mg 2-3 times daily; usual maintenance 500 mg-2 g/day in 2-4 divided doses (max 3 g/day)"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Long-standing first-line antihypertensive in pregnancy; widely used and considered safe"],
+    ["Lactation", "Appears in breast milk; use with caution but generally considered compatible"],
+    ["Renal", "Excreted partly unchanged renally; smaller/less frequent doses may suffice in renal impairment"],
+    ["Hepatic", "Contraindicated in active hepatic disease; can cause hepatotoxicity"],
+    ["Alcohol", "May enhance sedation and hypotension"],
+    ["Monitoring", "Blood pressure, LFTs (especially first 6-12 weeks), CBC/direct Coombs test"]
+  ],
+  "summary": "Methyldopa is a centrally acting antihypertensive whose active metabolite stimulates central alpha-2 adrenergic receptors to reduce sympathetic outflow and blood pressure. It is a long-established first-line agent for hypertension in pregnancy. Two characteristic adverse effects require vigilance: a positive direct Coombs test that can rarely progress to immune hemolytic anemia, and hepatotoxicity ranging from reversible transaminase rises to fatal hepatitis. It is contraindicated in active liver disease and with MAO inhibitors.",
+  "indications": [
+    "Hypertension",
+    "Management of hypertension in pregnancy (long-standing clinical use)"
+  ],
+  "dosage": [
+    {"c": "Hypertension - initiation", "r": "Adult oral", "d": "250 mg two to three times daily for the first 48 hours", "t": "2-3 times daily", "n": "Increase dose increments in the evening to minimize sedation"},
+    {"c": "Hypertension - maintenance", "r": "Adult oral", "d": "Usual maintenance 500 mg to 2 g/day in 2 to 4 divided doses", "t": "2-4 divided doses", "n": "Maximum recommended 3 g/day; adjust at intervals of >= 2 days"},
+    {"c": "Hypertension", "r": "Pediatric oral", "d": "Initial 10 mg/kg/day in 2-4 divided doses; titrate to response", "t": "2-4 divided doses", "n": "Maximum 65 mg/kg/day or 3 g/day, whichever is less"},
+    {"c": "Renal impairment / elderly", "r": "Adult oral", "d": "Smaller or less frequent doses may be adequate", "t": "Adjusted", "n": "Increased sensitivity to sedation and hypotension; partly dialyzable"}
+  ],
+  "admin": [
+    "Take at regular intervals; concentrate dose increases in the evening to limit daytime sedation",
+    "Do not stop abruptly; rebound hypertension can occur",
+    "When transitioning from other antihypertensives, adjust their doses for a smooth changeover",
+    "Obtain baseline and periodic liver function tests and blood counts"
+  ],
+  "moa": "Methyldopa is an aromatic-amino-acid decarboxylase inhibitor that is metabolized in the brain to alpha-methylnorepinephrine. This false neurotransmitter stimulates central inhibitory alpha-2 adrenergic receptors, reducing sympathetic outflow to the heart and peripheral vessels and lowering plasma renin activity, which decreases arterial pressure. Only the L-isomer is pharmacologically active. The effect is largely independent of cardiac output or heart rate.",
+  "contra": {
+    "absolute": [
+      "Active hepatic disease (acute hepatitis, active cirrhosis)",
+      "Liver disorders previously associated with methyldopa therapy",
+      "Hypersensitivity to any component of the product",
+      "Concurrent therapy with monoamine oxidase (MAO) inhibitors"
+    ],
+    "relative": [
+      "History of liver disease",
+      "Prior hemolytic anemia or positive Coombs test",
+      "Pheochromocytoma",
+      "Concurrent CNS depressants"
+    ],
+    "monitor": [
+      "Liver function tests (especially first 6-12 weeks or with unexplained fever)",
+      "Complete blood count and direct Coombs test",
+      "Blood pressure and mental status"
+    ]
+  },
+  "preg": "Methyldopa is one of the longest-established and most widely used antihypertensives in pregnancy, including for chronic and gestational hypertension, with extensive clinical experience supporting its use. It is frequently considered a first-line option when blood-pressure lowering is required in pregnancy.",
+  "lact": "Methyldopa appears in breast milk in small amounts; caution is advised, although it is generally regarded as compatible with breastfeeding.",
+  "renal": "Methyldopa and its metabolites are excreted partly unchanged by the kidneys. In renal impairment, smaller or less frequent doses may achieve control, and patients may be more sensitive to its effects. Methyldopa is partially removed by dialysis, and hypertension may recur after dialysis.",
+  "hepatic": "Contraindicated in active hepatic disease. Methyldopa can cause hepatic injury ranging from reversible transaminase elevations and cholestasis to fatal hepatitis or hepatic necrosis; check liver function periodically, particularly during the first 6 to 12 weeks or if unexplained fever occurs, and discontinue promptly if hepatic dysfunction develops.",
+  "interactions": {
+    "major": [
+      "MAO inhibitors (contraindicated; risk of severe hypertensive reactions)",
+      "Other antihypertensives (potentiated, sometimes synergistic, blood-pressure lowering)"
+    ],
+    "moderate": [
+      "Sympathomimetics and other pressor agents (altered/exaggerated response)",
+      "Lithium (increased risk of lithium toxicity)",
+      "Levodopa (additive CNS effects; reduced antiparkinson effect or added hypotension)",
+      "Iron salts (ferrous sulfate/gluconate reduce methyldopa bioavailability)"
+    ],
+    "minor": ["Other CNS depressants (additive sedation)"],
+    "food": "May be taken with or without food; separate from iron supplements.",
+    "alcohol": "May enhance sedation and the blood-pressure-lowering effect.",
+    "diagnostics": "Causes a positive direct Coombs test, may interfere with cross-matching; can cause false elevations of urinary catecholamines and interfere with creatinine, AST and uric acid assays."
+  },
+  "se": {
+    "common": ["Sedation/drowsiness (especially on initiation)", "Headache", "Dizziness/orthostatic hypotension", "Dry mouth", "Edema and weight gain"],
+    "serious": ["Hepatotoxicity (hepatitis, hepatic necrosis - can be fatal)", "Coombs-positive hemolytic anemia", "Bone marrow suppression (leukopenia, thrombocytopenia)", "Myocarditis/pericarditis", "Drug-induced fever/lupus-like reaction"],
+    "rare": ["Bell's palsy", "Pancreatitis", "Hyperprolactinemia/galactorrhea", "Parkinsonism", "Positive antinuclear antibodies"],
+    "emergency": ["Fulminant hepatic failure", "Severe acute hemolytic anemia", "Anaphylaxis/severe hypersensitivity"]
+  },
+  "monitoring": ["Blood pressure (supine and standing)", "Liver function tests, especially first 6-12 weeks", "Complete blood count and direct Coombs test periodically", "Signs of fever, jaundice or hemolysis"],
+  "counsel": [
+    "May make you feel drowsy or dizzy, especially when you start - avoid driving until you know how it affects you",
+    "Do not stop suddenly; your blood pressure could rise sharply",
+    "Report yellowing of skin/eyes, dark urine, unusual tiredness, fever or unexplained bruising",
+    "Your doctor will do regular blood tests of your liver and blood counts",
+    "Keep iron tablets at least 2 hours apart from this medicine"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within 4-6 hours (oral); maximal after 2-3 days of dosing"],
+    ["Peak", "Plasma peak about 2-4 hours after an oral dose"],
+    ["Half-life", "Approximately 1.5-2 hours (prolonged in renal impairment)"],
+    ["Duration", "Blood-pressure effect persists 24-48 hours after stopping"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture in a tight container"]
+  ],
+  "pearls": [
+    "Classic first-line antihypertensive in pregnancy due to extensive safety experience",
+    "Up to 10-20% develop a positive direct Coombs test (usually 6-12 months in); only rarely does true hemolytic anemia occur",
+    "Hepatotoxicity is the other signature risk - check LFTs, especially early and with any unexplained fever",
+    "Sedation is common at start and usually transient; dose increases in the evening",
+    "Absolutely contraindicated with MAO inhibitors and in active liver disease"
+  ],
+  "missed": "Take the missed dose as soon as you remember; if it is almost time for the next dose, skip the missed dose. Do not take two doses together.",
+  "overdose": "Acute overdose produces hypotension with sedation, weakness, bradycardia, dizziness, and gastrointestinal symptoms (constipation, distention, flatus, diarrhea, nausea, vomiting) and may cause paralytic ileus. Treatment is symptomatic and supportive: gastric decontamination if recent ingestion, intravenous fluids to support blood pressure and promote urinary excretion, and monitoring of cardiac rate/output, blood volume, electrolytes and urinary function. Methyldopa is dialyzable.",
+  "refs": [
+    ["FDA Label - Methyldopa (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22methyldopa%22"],
+    ["DailyMed - Methyldopa", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=methyldopa"]
+  ]
+}

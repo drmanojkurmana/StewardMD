@@ -1,0 +1,95 @@
+{
+  "generic": "Aspirin",
+  "cls": "NSAID / antiplatelet (salicylate)",
+  "pharm": "Analgesic, antipyretic, anti-inflammatory, antiplatelet agent",
+  "tags": ["antiplatelet", "NSAID", "salicylate", "cardiovascular prevention", "analgesic", "antipyretic", "Reye syndrome"],
+  "quick": [
+    ["Adult dose", "Analgesia 325-650 mg q4h; antiplatelet 75-100 mg once daily"],
+    ["Meal", "Take with food or full glass of water to reduce GI upset"],
+    ["Pregnancy", "Avoid in third trimester; low-dose use only as directed"],
+    ["Lactation", "Use caution; avoid high/regular doses"],
+    ["Renal", "Caution; avoid in significant renal impairment"],
+    ["Hepatic", "Caution in cirrhosis; bleeding risk"],
+    ["Alcohol", "Avoid; increases GI bleeding risk"],
+    ["Monitoring", "GI bleeding signs, renal function, tinnitus (high dose)"]
+  ],
+  "summary": "Aspirin is a salicylate NSAID that irreversibly inhibits cyclooxygenase. Low doses (75-100 mg daily) provide antiplatelet cardiovascular protection; higher doses (325-650 mg) treat pain, fever and inflammation. Major risks are GI bleeding and bleeding generally; it must not be used in children/teens with viral illness due to Reye syndrome and should be avoided in the third trimester of pregnancy.",
+  "indications": [
+    "Temporary relief of minor aches, pains and fever",
+    "Anti-inflammatory treatment of arthritis and rheumatic conditions (higher doses)",
+    "Secondary prevention of cardiovascular events (MI, ischemic stroke, TIA)",
+    "Acute coronary syndrome / suspected acute MI (loading dose)",
+    "Antiplatelet therapy after stenting/revascularization (with or without other agents)"
+  ],
+  "dosage": [
+    {"c": "Analgesia/antipyretic (adult)", "r": "Standard", "d": "325-650 mg every 4 hours as needed", "t": "Every 4-6 hours", "n": "Max ~4 g/day; with food/water"},
+    {"c": "Antiplatelet (maintenance)", "r": "Low dose", "d": "75-100 mg (commonly 81 mg) once daily", "t": "Once daily", "n": "Cardiovascular protection"},
+    {"c": "Acute MI / ACS", "r": "Loading", "d": "162-325 mg chewed once at onset", "t": "Single loading dose", "n": "Then continue daily low dose"},
+    {"c": "Anti-inflammatory (rheumatic)", "r": "High dose", "d": "Up to 3-6 g/day in divided doses", "t": "Divided doses", "n": "Monitor for salicylism; target levels if used"}
+  ],
+  "admin": [
+    "Take with a full glass of water and with or after food to reduce gastric irritation",
+    "Swallow enteric-coated/delayed-release tablets whole; do not crush (except chewable in acute MI)",
+    "For suspected acute MI, chew a non-enteric tablet for rapid effect",
+    "Do not give to children or teenagers with chickenpox or flu-like illness (Reye syndrome)",
+    "Discontinue 7-10 days before elective surgery if bleeding risk outweighs benefit (per clinician)"
+  ],
+  "moa": "Aspirin irreversibly acetylates cyclooxygenase (COX-1 and COX-2), blocking conversion of arachidonic acid to prostaglandins and thromboxane A2. Inhibition of platelet thromboxane A2 (which platelets cannot resynthesize) produces lasting antiplatelet effect; reduced prostaglandins account for analgesic, antipyretic and anti-inflammatory actions.",
+  "contra": {
+    "absolute": ["Hypersensitivity to aspirin or other NSAIDs (including aspirin-exacerbated respiratory disease)", "Active peptic ulcer or GI bleeding", "Bleeding disorders (e.g., hemophilia)", "Children/teens with viral illness (Reye syndrome risk)"],
+    "relative": ["Third trimester of pregnancy", "Uncontrolled hypertension", "Severe renal or hepatic impairment", "Concurrent anticoagulants or other antiplatelets", "History of GI ulcer/bleeding", "Asthma with nasal polyps"],
+    "monitor": ["GI symptoms/bleeding", "Renal function", "Tinnitus or hearing change (salicylism)"]
+  },
+  "preg": "Avoid analgesic doses, especially in the third trimester, due to risk of premature ductus arteriosus closure, oligohydramnios, and bleeding/labor complications. Low-dose aspirin may be used in pregnancy only under medical direction (e.g., preeclampsia prophylaxis).",
+  "lact": "Salicylate is excreted in breast milk. Occasional low doses are generally considered compatible, but avoid regular or high doses; monitor the infant for drowsiness, rash or bleeding.",
+  "renal": "Use with caution; NSAIDs can reduce renal perfusion and precipitate acute kidney injury, especially with volume depletion, diuretics, or pre-existing renal disease. Avoid in significant impairment.",
+  "hepatic": "Use caution in hepatic impairment and cirrhosis due to increased bleeding risk and potential for hepatotoxicity at high salicylate levels.",
+  "interactions": {
+    "major": ["Anticoagulants (warfarin, DOACs, heparin) - markedly increased bleeding risk", "Other antiplatelets (clopidogrel, ticagrelor) - additive bleeding", "Other NSAIDs (ibuprofen) - increased GI/bleeding risk and ibuprofen can blunt aspirin's antiplatelet effect", "Methotrexate (high dose) - increased toxicity"],
+    "moderate": ["ACE inhibitors/ARBs and diuretics - reduced antihypertensive effect and renal risk ('triple whammy')", "Corticosteroids - increased GI ulceration", "SSRIs/SNRIs - increased GI bleeding", "Sulfonylureas - enhanced hypoglycemia", "Probenecid - reduced uricosuric effect"],
+    "minor": ["Antacids - increased salicylate excretion (alkaline urine)", "Carbonic anhydrase inhibitors - salicylate toxicity risk"],
+    "food": "Take with food or water to reduce gastric irritation; alcohol increases bleeding.",
+    "alcohol": "Avoid; concurrent alcohol substantially increases risk of GI bleeding.",
+    "diagnostics": "May affect uric acid, glucose, and platelet function tests; high doses alter thyroid function tests."
+  },
+  "se": {
+    "common": ["Dyspepsia / heartburn", "Nausea", "GI irritation", "Easy bruising", "Mild epigastric pain"],
+    "serious": ["GI bleeding / peptic ulcer", "Major hemorrhage (including intracranial)", "Bronchospasm in aspirin-sensitive asthma", "Anaphylaxis / angioedema"],
+    "rare": ["Reye syndrome (children/teens with viral illness)", "Salicylism (tinnitus, hyperventilation, confusion)", "Acute kidney injury", "Hepatotoxicity"],
+    "emergency": ["Severe stomach bleeding (faintness, hematemesis, black/bloody stool)", "Anaphylaxis / severe allergic reaction", "Intracranial hemorrhage", "Severe overdose with metabolic acidosis"]
+  },
+  "monitoring": [
+    "Signs/symptoms of GI bleeding (melena, hematemesis, faintness)",
+    "Renal function, especially in elderly or on diuretics/ACE inhibitors",
+    "Tinnitus or hearing changes (early salicylism) at high/anti-inflammatory doses",
+    "Bleeding when combined with anticoagulants or other antiplatelets",
+    "Salicylate levels in chronic high-dose anti-inflammatory therapy"
+  ],
+  "counsel": [
+    "Take with a full glass of water and food to limit stomach upset",
+    "Report black/bloody stools, vomiting blood, severe stomach pain, ringing in the ears or unusual bleeding",
+    "Do not give aspirin to children or teenagers with fever, flu or chickenpox",
+    "Avoid alcohol and other NSAIDs; tell your doctor you take aspirin before any surgery or dental work",
+    "If for heart protection, take it daily as prescribed and do not stop abruptly without advice"
+  ],
+  "pk": [
+    ["Onset", "Analgesia 30 min; antiplatelet effect within ~1 hour"],
+    ["Peak", "Plasma peak ~1-2 hours (delayed with enteric coating)"],
+    ["Half-life", "Aspirin ~15-20 min; salicylate 2-3 h (dose-dependent, up to 30 h at high doses)"],
+    ["Duration", "Antiplatelet effect lasts the platelet lifespan (~7-10 days)"],
+    ["Storage", "Store at controlled room temperature; keep dry"]
+  ],
+  "pearls": [
+    "Antiplatelet effect is irreversible and lasts ~7-10 days (platelet lifespan) despite short plasma half-life",
+    "Chew non-enteric aspirin in suspected acute MI for fastest effect",
+    "Never use in children/teens with viral illness (Reye syndrome)",
+    "Ibuprofen taken before aspirin can block its cardioprotective antiplatelet effect - separate dosing",
+    "High-dose salicylism presents with tinnitus, hyperventilation and mixed acid-base disturbance"
+  ],
+  "missed": "For scheduled (e.g., daily cardioprotective) dosing, take the missed dose when remembered unless it is almost time for the next dose; do not double up. For as-needed pain dosing, take only when needed within dose limits.",
+  "overdose": "Salicylate overdose causes tinnitus, hyperventilation, respiratory alkalosis then metabolic acidosis, hyperthermia, seizures and coma. Treat with activated charcoal, IV fluids, urinary alkalinization with sodium bicarbonate to enhance excretion, glucose, and hemodialysis for severe toxicity (high levels, acidosis, CNS or renal involvement). Monitor salicylate levels and electrolytes.",
+  "refs": [
+    ["FDA Aspirin OTC Labeling (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22aspirin%22"],
+    ["FDA DailyMed - Aspirin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

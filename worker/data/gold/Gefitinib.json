@@ -1,0 +1,90 @@
+{
+  "generic": "Gefitinib",
+  "cls": "EGFR tyrosine kinase inhibitor (TKI)",
+  "pharm": "Antineoplastic / targeted therapy",
+  "tags": ["EGFR inhibitor", "tyrosine kinase inhibitor", "NSCLC", "lung cancer", "targeted therapy", "ILD"],
+  "quick": [
+    ["Adult dose", "250 mg orally once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Can cause fetal harm; use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 2 weeks after therapy"],
+    ["Renal", "No specific adjustment (limited data in severe impairment)"],
+    ["Hepatic", "Use caution; discontinue for severe hepatic impairment"],
+    ["Alcohol", "Limit; potential additive hepatotoxicity"],
+    ["Monitoring", "LFTs, pulmonary symptoms (ILD), skin, diarrhea, eyes"]
+  ],
+  "summary": "Gefitinib is an oral EGFR tyrosine kinase inhibitor for first-line treatment of metastatic non-small cell lung cancer harboring EGFR exon 19 deletions or exon 21 (L858R) mutations. Dosed 250 mg once daily, it commonly causes diarrhea and acneiform rash. Serious risks include interstitial lung disease, hepatotoxicity, GI perforation, and ocular and severe skin reactions.",
+  "indications": [
+    "First-line treatment of metastatic non-small cell lung cancer (NSCLC) whose tumors have EGFR exon 19 deletions or exon 21 (L858R) substitution mutations as detected by an FDA-approved test"
+  ],
+  "dosage": [
+    {"c": "Metastatic EGFR-mutated NSCLC (adult)", "r": "Standard", "d": "250 mg orally once daily with or without food", "t": "Once daily", "n": "Continue until disease progression or unacceptable toxicity"},
+    {"c": "Dose interruption for toxicity", "r": "Withhold", "d": "Withhold up to 14 days for Grade 3+ diarrhea, skin reactions, ALT/AST elevations or worsening respiratory symptoms, then resume", "t": "As needed", "n": "Discontinue for confirmed ILD, GI perforation, persistent ulcerative keratitis, severe hepatic impairment"},
+    {"c": "With strong CYP3A4 inducers", "r": "Increased", "d": "Consider increasing to 500 mg once daily", "t": "Once daily", "n": "Resume 250 mg 7 days after stopping the inducer"}
+  ],
+  "admin": [
+    "Confirm EGFR exon 19 deletion or exon 21 L858R mutation by an FDA-approved test before starting",
+    "Take 250 mg orally once daily with or without food at about the same time each day",
+    "Do not take a missed dose within 12 hours of the next dose",
+    "For patients with swallowing difficulty, disperse the tablet in 4-8 ounces of water (stir ~15 minutes) and drink immediately or give by NG tube, then rinse",
+    "Monitor for and promptly evaluate new respiratory, hepatic, GI, ocular and skin symptoms"
+  ],
+  "moa": "The epidermal growth factor receptor (EGFR) drives growth and survival of NSCLC cells, particularly those with activating mutations (exon 19 deletion, exon 21 L858R). Gefitinib reversibly inhibits the tyrosine kinase activity of wild-type and certain mutant EGFR, blocking autophosphorylation and downstream signaling and thereby inhibiting EGFR-dependent tumor proliferation. It binds mutant EGFR with higher affinity than wild-type.",
+  "contra": {
+    "absolute": ["None listed in the label"],
+    "relative": ["Pre-existing interstitial lung disease or pulmonary fibrosis", "Significant hepatic impairment", "History of GI perforation risk (diverticulitis, concurrent steroids/NSAIDs/anti-angiogenics)", "Pre-existing keratitis or severe dry eye"],
+    "monitor": ["Concurrent strong CYP3A4 inducers or inhibitors", "Drugs that raise gastric pH (PPIs, H2 blockers) - reduced absorption", "Warfarin (raised INR/bleeding)"]
+  },
+  "preg": "Based on mechanism and animal data, gefitinib can cause fetal harm. Advise females of reproductive potential to use effective contraception during treatment and for at least 2 weeks after the final dose.",
+  "lact": "Advise women not to breastfeed during treatment and for 2 weeks after the final dose because of potential serious adverse reactions in the breastfed infant.",
+  "renal": "No specific dose adjustment is provided; there is limited data in severe renal impairment, so use with caution.",
+  "hepatic": "Hepatotoxicity can occur; obtain periodic liver function tests, withhold for Grade 2 or higher ALT/AST elevations, and discontinue for severe hepatic impairment. Exposure is higher in moderate-to-severe hepatic impairment due to tumor involvement or cirrhosis.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inducers (rifampin, phenytoin) - markedly reduce gefitinib levels; consider increasing dose to 500 mg/day", "Drugs that sustainedly raise gastric pH (PPIs, H2 antagonists) - reduce gefitinib absorption and efficacy", "Warfarin - elevated INR and bleeding events; monitor INR"],
+    "moderate": ["Strong CYP3A4 inhibitors (ketoconazole, itraconazole) - increase gefitinib exposure and toxicity", "Drugs causing GI perforation risk (corticosteroids, NSAIDs, anti-angiogenic agents) - additive perforation risk", "CYP2D6 substrates - gefitinib may increase their levels"],
+    "minor": ["Antacids - separate dosing to limit absorption interference"],
+    "food": "May be taken with or without food; avoid grapefruit (CYP3A4 effect) in large amounts.",
+    "alcohol": "Limit due to potential additive hepatotoxicity.",
+    "diagnostics": "May elevate transaminases and bilirubin; monitor LFTs."
+  },
+  "se": {
+    "common": ["Diarrhea", "Acneiform/papulopustular skin rash", "Dry skin and pruritus", "Nausea, vomiting, decreased appetite", "Stomatitis", "Elevated liver enzymes"],
+    "serious": ["Interstitial lung disease (ILD), sometimes fatal", "Hepatotoxicity", "Gastrointestinal perforation", "Severe diarrhea with dehydration", "Ocular disorders including ulcerative keratitis", "Bullous and exfoliative skin disorders (Stevens-Johnson, TEN)"],
+    "rare": ["Pancreatitis", "Hemorrhage / raised INR with warfarin", "Renal impairment from dehydration"],
+    "emergency": ["Acute interstitial lung disease (new/worsening dyspnea, cough, fever)", "Gastrointestinal perforation", "Severe exfoliative skin reaction (SJS/TEN)", "Severe hepatotoxicity"]
+  },
+  "monitoring": [
+    "Periodic liver function tests (withhold for Grade 2+ ALT/AST elevations)",
+    "Respiratory symptoms - investigate promptly for ILD and discontinue if confirmed",
+    "Skin and mucosal reactions; diarrhea severity and hydration",
+    "Ocular symptoms (eye pain, redness, vision change) - withhold for severe/worsening, discontinue for persistent ulcerative keratitis",
+    "INR in patients on warfarin"
+  ],
+  "counsel": [
+    "Take one 250 mg tablet once daily, with or without food, at about the same time each day",
+    "Report new or worsening shortness of breath, cough or fever immediately (lung inflammation)",
+    "Report severe diarrhea, severe skin rash/blistering, eye pain or vision changes",
+    "Use effective contraception during and for 2 weeks after treatment; do not breastfeed",
+    "Tell your doctor about all medicines, especially acid-reducing drugs and warfarin"
+  ],
+  "pk": [
+    ["Onset", "Tumor response over weeks of therapy"],
+    ["Peak", "Plasma peak ~3-7 hours after oral dose"],
+    ["Half-life", "~41 hours"],
+    ["Duration", "Steady state in ~10 days; once-daily dosing"],
+    ["Storage", "Store at controlled room temperature 20-25 C"]
+  ],
+  "pearls": [
+    "Interstitial lung disease is a potentially fatal warning - withhold for worsening respiratory symptoms and discontinue if ILD is confirmed",
+    "Only for tumors with EGFR exon 19 deletion or exon 21 L858R mutation by an approved test; not for other EGFR mutations",
+    "Acid-suppressing drugs (PPIs/H2 blockers) reduce absorption and efficacy",
+    "With strong CYP3A4 inducers, increase the dose to 500 mg/day; revert to 250 mg 7 days after stopping the inducer",
+    "Monitor LFTs, skin, diarrhea, eyes and INR (warfarin) during therapy"
+  ],
+  "missed": "Take the missed dose as soon as you remember, but do not take it within 12 hours of the next scheduled dose - skip it then and resume the usual schedule. Do not take two doses to make up.",
+  "overdose": "There is no specific treatment for overdose; adverse reactions (such as diarrhea and rash) may be more frequent and severe. Manage symptomatically with supportive care and monitoring of hepatic, pulmonary, GI and skin toxicity.",
+  "refs": [
+    ["FDA Gefitinib Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22gefitinib%22"],
+    ["FDA DailyMed - Gefitinib", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

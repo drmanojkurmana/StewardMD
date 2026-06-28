@@ -1,0 +1,109 @@
+{
+  "generic": "Pemetrexed",
+  "cls": "Folate analog antimetabolite (antineoplastic)",
+  "pharm": "Multitargeted antifolate that, after intracellular polyglutamation, inhibits thymidylate synthase, dihydrofolate reductase and glycinamide ribonucleotide formyltransferase, disrupting de novo thymidine and purine synthesis required for cell replication.",
+  "tags": ["Antineoplastic", "Antifolate", "IV infusion", "Folate/B12 supplementation"],
+  "quick": [
+    ["Adult dose", "500 mg/m2 IV over 10 minutes on Day 1 of each 21-day cycle"],
+    ["Meal", "IV drug; not affected by meals; requires folic acid + B12 supplementation"],
+    ["Pregnancy", "Can cause fetal harm; effective contraception required"],
+    ["Lactation", "Do not breastfeed during and for 1 week after the last dose"],
+    ["Renal", "Do not give if CrCl <45 mL/min; risk of severe/fatal renal failure"],
+    ["Hepatic", "Monitor; dose modify for severe hepatic toxicity"],
+    ["Alcohol", "Avoid (added hepatic and GI burden)"],
+    ["Monitoring", "CBC, renal function, and LFTs before each cycle"]
+  ],
+  "summary": "Pemetrexed is a folate-analog metabolic inhibitor used in non-squamous non-small cell lung cancer (with pembrolizumab and platinum, with cisplatin, as maintenance, or after prior chemotherapy) and in malignant pleural mesothelioma with cisplatin. It is not used for squamous NSCLC. Mandatory folic acid and vitamin B12 supplementation reduce hematologic and GI toxicity, and it must not be given when creatinine clearance is below 45 mL/min.",
+  "indications": [
+    "Initial treatment of metastatic non-squamous NSCLC (no EGFR/ALK aberrations) in combination with pembrolizumab and platinum chemotherapy",
+    "Initial treatment of locally advanced or metastatic non-squamous NSCLC in combination with cisplatin",
+    "Maintenance treatment of locally advanced or metastatic non-squamous NSCLC not progressed after four cycles of platinum-based first-line therapy (single agent)",
+    "Treatment of recurrent metastatic non-squamous NSCLC after prior chemotherapy (single agent)",
+    "Initial treatment of unresectable malignant pleural mesothelioma in combination with cisplatin",
+    "Not indicated for squamous cell NSCLC"
+  ],
+  "dosage": [
+    {"c": "NSCLC / mesothelioma (CrCl >=45 mL/min)", "r": "Adults", "d": "500 mg/m2 IV over 10 minutes on Day 1", "t": "Every 21 days", "n": "Give after pembrolizumab and before platinum when used in combination"},
+    {"c": "Premedication - folic acid", "r": "Adults", "d": "400-1000 mcg orally once daily", "t": "Start 7 days before first dose, continue until 21 days after last dose", "n": "Reduces hematologic/GI toxicity"},
+    {"c": "Premedication - vitamin B12", "r": "Adults", "d": "1 mg intramuscularly", "t": "1 week before first dose, then every 3 cycles", "n": "Reduces toxicity"},
+    {"c": "Premedication - dexamethasone", "r": "Adults", "d": "4 mg orally twice daily", "t": "Day before, day of, and day after each dose", "n": "Reduces skin reactions"}
+  ],
+  "admin": [
+    "Administer as an IV infusion over 10 minutes; do not give by other routes",
+    "Confirm CrCl >=45 mL/min before each dose; do not give if below",
+    "Ensure folic acid and vitamin B12 supplementation have been started before first dose",
+    "Give dexamethasone prophylaxis to reduce skin reactions",
+    "Hold for ANC <1500 cells/mm3 or platelets <100,000 cells/mm3",
+    "Handle as a hazardous drug per institutional cytotoxic procedures"
+  ],
+  "moa": "Pemetrexed is a folate analog metabolic inhibitor. It enters cells via reduced folate carrier and folate-binding protein transport systems and is converted by folylpolyglutamate synthetase to polyglutamate forms that are retained intracellularly. These forms inhibit thymidylate synthase, dihydrofolate reductase and glycinamide ribonucleotide formyltransferase, disrupting folate-dependent de novo biosynthesis of thymidine and purine nucleotides and thereby halting DNA synthesis and cell replication.",
+  "contra": {
+    "absolute": [
+      "History of severe hypersensitivity reaction to pemetrexed"
+    ],
+    "relative": [
+      "Creatinine clearance below 45 mL/min (do not administer)",
+      "Pre-existing severe myelosuppression",
+      "Concurrent NSAIDs in patients with renal impairment",
+      "Pregnancy"
+    ],
+    "monitor": [
+      "Complete blood count",
+      "Serum creatinine / creatinine clearance",
+      "Liver function tests"
+    ]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal data (fetal malformations and embryotoxicity). Advise females of reproductive potential to use effective contraception during treatment and for a period after the last dose, and advise males with female partners to use contraception. Avoid in pregnancy unless benefit outweighs risk.",
+  "lact": "Do not breastfeed during treatment and for 1 week after the last dose because of the potential for serious adverse reactions in a breastfed child.",
+  "renal": "Pemetrexed is primarily eliminated renally; clearance falls and exposure rises as renal function declines. Do not administer when creatinine clearance is below 45 mL/min, as severe and sometimes fatal renal failure can occur. Avoid concurrent NSAIDs around dosing in patients with renal impairment.",
+  "hepatic": "Reversible transaminase elevations can occur. Monitor liver function and apply dose modifications for severe hepatic toxicity per the prescribing information.",
+  "interactions": {
+    "major": [
+      "Nephrotoxic drugs (increase risk of severe/fatal renal failure)"
+    ],
+    "moderate": [
+      "NSAIDs - ibuprofen and other NSAIDs (reduce pemetrexed clearance, especially in renal impairment; hold around dosing)",
+      "Probenecid and other drugs cleared by tubular secretion"
+    ],
+    "minor": [],
+    "food": "Not applicable (intravenous administration); folic acid supplementation is required.",
+    "alcohol": "Avoid due to additive hepatic and gastrointestinal burden.",
+    "diagnostics": "Monitor CBC and renal function around each cycle."
+  },
+  "se": {
+    "common": ["Fatigue", "Nausea and vomiting", "Anorexia", "Anemia", "Neutropenia and thrombocytopenia", "Stomatitis/mucositis", "Rash", "Constipation or diarrhea"],
+    "serious": ["Severe myelosuppression with increased infection risk", "Severe and sometimes fatal renal failure", "Interstitial pneumonitis", "Bullous and exfoliative skin toxicity", "Radiation recall"],
+    "rare": ["Severe hypersensitivity reactions", "Hepatic failure", "Sepsis"],
+    "emergency": ["Febrile neutropenia / sepsis", "Acute renal failure", "Severe blistering or exfoliating skin reaction", "Acute pneumonitis with hypoxia"]
+  },
+  "monitoring": ["CBC with differential before each cycle and as clinically indicated", "Serum creatinine and creatinine clearance before each cycle", "Liver function tests periodically", "Monitor for pulmonary symptoms and skin toxicity", "Confirm folic acid/B12 supplementation"],
+  "counsel": [
+    "Take daily folic acid and receive vitamin B12 injections as scheduled to reduce side effects",
+    "Take dexamethasone as directed to reduce skin reactions",
+    "Report fever, chills, or signs of infection promptly",
+    "Report new or worsening cough or shortness of breath",
+    "Report any blistering or peeling skin rash",
+    "Use effective contraception; do not breastfeed during and for 1 week after the last dose",
+    "Avoid NSAIDs around treatment unless approved by your oncologist"
+  ],
+  "pk": [
+    ["Onset", "Cytotoxic effect over the chemotherapy cycle"],
+    ["Peak", "End of the 10-minute infusion (dose-proportional Cmax)"],
+    ["Half-life", "Approximately 3.5 hours with normal renal function (prolonged in renal impairment)"],
+    ["Duration", "Dosed once every 21 days"],
+    ["Storage", "Store ready-to-use vials at 20-25 C (excursions 15-30 C); handle as a hazardous drug"]
+  ],
+  "pearls": [
+    "Mandatory folic acid (start 7 days before) and vitamin B12 (1 week before, then every 3 cycles) supplementation markedly reduces toxicity",
+    "Do not administer if creatinine clearance is below 45 mL/min - risk of severe/fatal renal failure",
+    "Dexamethasone prophylaxis reduces the characteristic skin rash",
+    "Not effective and not indicated for squamous-cell NSCLC; reserve for non-squamous histology",
+    "Hold NSAIDs around dosing in patients with renal impairment"
+  ],
+  "missed": "Pemetrexed is administered by a clinician on a fixed 21-day cycle. A missed or delayed dose is rescheduled by the oncology team; patients should not self-administer.",
+  "overdose": "No approved antidote. Based on animal data, leucovorin may mitigate toxicity. It is not known whether pemetrexed is dialyzable. Provide supportive care and monitor blood counts and organ function.",
+  "refs": [
+    ["FDA Prescribing Information - pemetrexed injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22pemetrexed%22"],
+    ["DailyMed - Pemetrexed", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=pemetrexed"]
+  ]
+}

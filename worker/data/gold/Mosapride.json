@@ -1,0 +1,87 @@
+{
+  "generic": "Mosapride",
+  "cls": "Selective 5-HT4 receptor agonist (prokinetic)",
+  "pharm": "Gastrointestinal prokinetic / gastroprokinetic agent",
+  "tags": ["prokinetic", "5-HT4 agonist", "GERD", "functional dyspepsia", "gastroparesis"],
+  "quick": [
+    ["Adult dose", "5 mg PO three times daily before meals"],
+    ["Meal", "Take before meals"],
+    ["Pregnancy", "Avoid; safety not established"],
+    ["Lactation", "Avoid; safety not established"],
+    ["Renal", "Use with caution; limited data"],
+    ["Hepatic", "Use with caution in hepatic impairment"],
+    ["Alcohol", "No specific interaction; moderate intake"],
+    ["Monitoring", "LFTs if prolonged use; symptom response"]
+  ],
+  "summary": "Mosapride is a selective 5-HT4 receptor agonist prokinetic used to relieve gastrointestinal symptoms associated with chronic gastritis and functional dyspepsia, such as heartburn, nausea and early satiety. Usual adult dose is 5 mg three times daily before meals. Unlike cisapride, it has minimal effect on cardiac QT interval. Not FDA-approved.",
+  "indications": [
+    "Gastrointestinal symptoms (heartburn, nausea, vomiting) associated with chronic gastritis",
+    "Functional dyspepsia / non-ulcer dyspepsia",
+    "Symptomatic relief of gastroesophageal reflux (adjunct)",
+    "Improvement of upper GI motility / delayed gastric emptying"
+  ],
+  "dosage": [
+    {"c": "Chronic gastritis / functional dyspepsia (adult)", "r": "Standard", "d": "5 mg per dose", "t": "Three times daily before meals", "n": "Citrate salt; reassess if no benefit after 2 weeks"},
+    {"c": "Hepatic or renal impairment (adult)", "r": "Caution", "d": "Consider lowest effective dose", "t": "Per response", "n": "Limited data; monitor"}
+  ],
+  "admin": [
+    "Take orally three times daily, typically before meals",
+    "Swallow tablets with water",
+    "Reassess therapy if symptoms do not improve within 2 weeks",
+    "Discontinue if no clinical benefit is obtained"
+  ],
+  "moa": "Mosapride is a selective agonist at serotonin 5-HT4 receptors on enteric cholinergic neurons. Activation enhances acetylcholine release in the myenteric plexus, increasing upper gastrointestinal motility and accelerating gastric emptying. It has little or no affinity for dopamine D2 or cardiac hERG/5-HT3 receptors, so extrapyramidal and significant QT effects are uncommon.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to mosapride", "Conditions where increased GI motility could be harmful (GI hemorrhage, mechanical obstruction or perforation)"],
+    "relative": ["Hepatic impairment", "Renal impairment", "Elderly patients"],
+    "monitor": ["Prolonged or high-dose therapy (hepatic function)", "Concomitant CYP3A4 inhibitors"]
+  },
+  "preg": "Safety in pregnancy has not been established. Avoid unless the potential benefit clearly outweighs the risk; use the lowest effective dose if treatment is essential.",
+  "lact": "Excretion into human milk is not adequately characterized. Avoid use during breastfeeding or discontinue nursing; animal data suggest excretion into milk.",
+  "renal": "Limited pharmacokinetic data in renal impairment; use with caution and consider the lowest effective dose, monitoring for accumulation and effect.",
+  "hepatic": "Mosapride is metabolized mainly by hepatic CYP3A4; use with caution in hepatic impairment and monitor liver function with prolonged use.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Strong CYP3A4 inhibitors (erythromycin, clarithromycin, azole antifungals) - may increase mosapride exposure", "Anticholinergic agents - may antagonize prokinetic effect"],
+    "minor": ["Drugs whose absorption depends on gastric transit - altered absorption due to faster emptying"],
+    "food": "Usually taken before meals; food may modestly affect onset.",
+    "alcohol": "No specific clinically significant interaction reported; moderate intake.",
+    "diagnostics": "Rare transient elevations in liver enzymes reported."
+  },
+  "se": {
+    "common": ["Diarrhea", "Loose stools", "Abdominal pain", "Dry mouth", "Headache", "Dizziness"],
+    "serious": ["Hepatic dysfunction / jaundice (rare)", "Hypersensitivity reactions"],
+    "rare": ["Eosinophilia", "Elevated triglycerides", "Malaise"],
+    "emergency": ["Severe hepatotoxicity with jaundice", "Anaphylactoid reaction"]
+  },
+  "monitoring": [
+    "Symptom response within 2 weeks; discontinue if ineffective",
+    "Liver function tests with prolonged therapy",
+    "Signs of hypersensitivity"
+  ],
+  "counsel": [
+    "Take before meals three times a day as prescribed",
+    "Report persistent diarrhea or abdominal pain",
+    "Stop and seek care if yellowing of skin/eyes or dark urine occurs",
+    "Inform the doctor if symptoms do not improve within about 2 weeks"
+  ],
+  "pk": [
+    ["Onset", "Prokinetic effect within ~1 hour"],
+    ["Peak", "0.5-1 hour after oral dosing"],
+    ["Half-life", "Approximately 2 hours"],
+    ["Duration", "Short; supports three-times-daily dosing"],
+    ["Storage", "Store at room temperature, protected from moisture and light"]
+  ],
+  "pearls": [
+    "Not FDA-approved; widely used in Asia (SmPC/regional labeling) - this record is based on EMA-region SmPC and standard references rather than an FDA label",
+    "Preferred over cisapride because it lacks clinically significant QT prolongation",
+    "Lacks dopamine D2 antagonism, so extrapyramidal effects and hyperprolactinemia are uncommon (unlike metoclopramide/domperidone)",
+    "Active metabolite des-mosapride also has 5-HT4 activity"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is nearly time for the next dose, skip it and resume the usual schedule; do not double up.",
+  "overdose": "Experience with overdose is limited. Manage symptomatically and supportively; treat excessive GI effects (diarrhea, cramping) with fluid and electrolyte support. There is no specific antidote.",
+  "refs": [
+    ["EMA-region Summary of Product Characteristics (Mosapride citrate)", "https://www.ema.europa.eu/"],
+    ["British National Formulary / standard prokinetic references", "https://bnf.nice.org.uk/"]
+  ]
+}

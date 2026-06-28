@@ -1,0 +1,165 @@
+{
+  "generic": "Indomethacin",
+  "cls": "NSAID (non-selective COX inhibitor, indole acetic acid derivative)",
+  "pharm": "Potent anti-inflammatory, analgesic, antipyretic; strong prostaglandin synthesis inhibitor",
+  "tags": ["NSAID", "Anti-inflammatory", "Analgesic", "Antipyretic", "Boxed warning: CV/GI", "Gout", "PDA"],
+  "quick": [
+    ["Adult dose", "25 mg BID-TID (gout 50 mg TID); max ~200 mg/day"],
+    ["Meal", "With food/milk or antacid"],
+    ["Pregnancy", "Avoid >=20 wks; contraindicated ~30 wks+"],
+    ["Lactation", "Caution; small amounts in milk"],
+    ["Renal", "Avoid in advanced disease; can cause AKI"],
+    ["Hepatic", "Monitor LFTs; hepatotoxicity risk"],
+    ["Alcohol", "Avoid - GI bleed risk"],
+    ["Monitoring", "BP, renal, LFTs, CBC, GI symptoms"]
+  ],
+  "summary": "Indomethacin is a potent non-selective NSAID used for rheumatoid arthritis, ankylosing spondylitis, osteoarthritis, acute painful shoulder (bursitis/tendinitis), and acute gouty arthritis. It is among the more potent and CNS/GI-toxic NSAIDs and carries an NSAID boxed warning for serious cardiovascular thrombotic and gastrointestinal events. Use the lowest effective dose for the shortest duration, with food, and monitor blood pressure, renal function, and LFTs.",
+  "indications": [
+    "Moderate to severe rheumatoid arthritis (including acute flares)",
+    "Moderate to severe ankylosing spondylitis",
+    "Moderate to severe osteoarthritis",
+    "Acute painful shoulder (bursitis and/or tendinitis)",
+    "Acute gouty arthritis"
+  ],
+  "dosage": [
+    {"c": "Rheumatoid arthritis / ankylosing spondylitis / osteoarthritis", "r": "Oral", "d": "25 mg two or three times daily", "t": "BID-TID", "n": "May increase by 25-50 mg/day at weekly intervals; lowest effective dose"},
+    {"c": "Acute painful shoulder (bursitis/tendinitis)", "r": "Oral", "d": "75-150 mg/day in 3-4 divided doses", "t": "TID-QID", "n": "Usually 7-14 days"},
+    {"c": "Acute gouty arthritis", "r": "Oral", "d": "50 mg three times daily", "t": "TID", "n": "Reduce dose as pain subsides; discontinue when resolved"},
+    {"c": "Extended-release", "r": "Oral", "d": "75 mg once or twice daily", "t": "Once-twice daily", "n": "ER capsule; do not crush"},
+    {"c": "Maximum", "r": "Oral", "d": "Generally up to 150-200 mg/day", "t": "Divided", "n": "Avoid exceeding 200 mg/day"}
+  ],
+  "admin": [
+    "Take immediately after meals, with food, milk, or antacid to reduce GI upset",
+    "Use lowest effective dose for shortest duration",
+    "Swallow extended-release capsules whole; do not crush or chew",
+    "Maintain upright posture and adequate fluid intake"
+  ],
+  "moa": "Inhibits cyclooxygenase (COX-1 and COX-2), a potent inhibitor of prostaglandin synthesis, reducing prostaglandin-mediated inflammation, pain, and fever in peripheral tissues.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to indomethacin (including anaphylaxis or serious skin reactions)",
+      "History of asthma, urticaria, or allergic-type reactions after aspirin or other NSAIDs",
+      "Setting of coronary artery bypass graft (CABG) surgery",
+      "Third-trimester pregnancy (about 30 weeks gestation and later)"
+    ],
+    "relative": [
+      "Active GI bleeding or peptic ulcer disease",
+      "Cardiovascular disease or heart failure",
+      "Hypertension",
+      "Renal impairment / dehydration / hypovolemia",
+      "Hepatic impairment",
+      "Elderly",
+      "Epilepsy, parkinsonism, psychiatric disorders (CNS effects)",
+      "Bleeding disorders or concomitant anticoagulants"
+    ],
+    "monitor": [
+      "Blood pressure",
+      "Renal function",
+      "LFTs",
+      "CBC/hemoglobin",
+      "GI symptoms"
+    ]
+  },
+  "preg": "Avoid use from about 20 weeks gestation (risk of fetal renal dysfunction/oligohydramnios) and avoid at about 30 weeks and later (premature closure of fetal ductus arteriosus). NSAIDs are associated with reversible infertility.",
+  "lact": "Excreted in breast milk in small amounts; use with caution and weigh importance of drug to the mother.",
+  "renal": "Monitor renal function; avoid in advanced renal disease unless benefit outweighs risk. Can cause acute kidney injury, fluid retention, and hyperkalemia, especially with dehydration, heart failure, or hepatic impairment.",
+  "hepatic": "Risk of hepatotoxicity; discontinue if abnormal liver tests persist/worsen or signs of liver disease develop. Use caution in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Anticoagulants (warfarin) and antiplatelets - synergistic bleeding risk",
+      "Other NSAIDs/aspirin - additive GI and renal toxicity",
+      "SSRIs/SNRIs - increased GI bleeding risk",
+      "Pemetrexed - increased toxicity"
+    ],
+    "moderate": [
+      "ACE inhibitors/ARBs/diuretics - reduced antihypertensive effect and renal injury (triple whammy)",
+      "Lithium - increased lithium levels",
+      "Methotrexate - increased levels/toxicity",
+      "Cyclosporine - nephrotoxicity",
+      "Digoxin - increased levels",
+      "Triamterene - avoid (renal failure reported)",
+      "Corticosteroids - GI bleeding"
+    ],
+    "minor": [
+      "Antihypertensives - reduced effect",
+      "Probenecid - increased indomethacin levels"
+    ],
+    "food": "Take with food/milk to reduce GI upset",
+    "alcohol": "Avoid - increases GI bleeding risk",
+    "diagnostics": "May elevate LFTs and affect renal function tests; can mask fever/inflammation"
+  },
+  "se": {
+    "common": [
+      "Headache",
+      "Dizziness",
+      "Dyspepsia",
+      "Nausea",
+      "Abdominal pain",
+      "Diarrhea/constipation",
+      "Drowsiness",
+      "Edema"
+    ],
+    "serious": [
+      "GI ulcer/bleeding/perforation",
+      "CV thrombotic events (MI/stroke)",
+      "Hepatotoxicity",
+      "Acute kidney injury",
+      "Hypertension",
+      "Heart failure exacerbation",
+      "Hyperkalemia",
+      "GI bleeding without warning symptoms"
+    ],
+    "rare": [
+      "SJS/TEN/DRESS",
+      "Aseptic meningitis",
+      "Agranulocytosis/aplastic anemia/thrombocytopenia",
+      "Anaphylaxis",
+      "Confusion, depression, psychosis (CNS effects)",
+      "Corneal deposits/retinal disturbances (long-term)"
+    ],
+    "emergency": [
+      "GI hemorrhage/perforation",
+      "MI/stroke",
+      "Severe skin reaction (SJS/TEN)",
+      "Anaphylaxis",
+      "Acute hepatic failure"
+    ]
+  },
+  "monitoring": [
+    "Blood pressure",
+    "Renal function (creatinine, electrolytes)",
+    "LFTs",
+    "CBC/hemoglobin (with long-term use)",
+    "GI symptoms / signs of bleeding",
+    "Ophthalmologic exam with prolonged therapy"
+  ],
+  "counsel": [
+    "Take with food, milk, or antacid",
+    "Use lowest dose for shortest time",
+    "Report black/tarry stools or severe abdominal pain",
+    "Report chest pain, weakness, or slurred speech",
+    "May cause headache/dizziness - caution driving",
+    "Avoid alcohol and other NSAIDs",
+    "Report yellowing of skin, dark urine, or swelling",
+    "Do not use in late pregnancy"
+  ],
+  "pk": [
+    ["Onset", "~30 min (analgesia); anti-inflammatory days-weeks"],
+    ["Peak", "IR ~1-2 h; ER ~2-4 h"],
+    ["Half-life", "~4.5 h (range ~2.6-11.2 h)"],
+    ["Duration", "~4-6 h (IR)"],
+    ["Storage", "20-25 C, protect from light"]
+  ],
+  "pearls": [
+    "First-line NSAID for acute gout and for closure of patent ductus arteriosus (IV formulation, neonates)",
+    "More CNS side effects (headache, dizziness, confusion) than many NSAIDs",
+    "Potent prostaglandin inhibitor with relatively high GI toxicity - reserve and limit duration",
+    "Often combined with food/antacid and PPI in higher-risk patients"
+  ],
+  "missed": "Take when remembered unless near next dose, then skip; do not double up. For scheduled anti-inflammatory regimens, resume usual schedule.",
+  "overdose": "Nausea, vomiting, headache, dizziness, drowsiness, disorientation, lethargy; severe cases: GI bleeding, hypertension, AKI, hepatic dysfunction, respiratory depression, seizures, coma. Management: supportive care, activated charcoal if within 1 h of substantial ingestion, monitor renal/hepatic function and GI bleeding; no specific antidote; not effectively removed by dialysis (highly protein bound).",
+  "refs": [
+    ["FDA Indomethacin Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22INDOMETHACIN%22"],
+    ["DailyMed - Indomethacin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=indomethacin"]
+  ]
+}

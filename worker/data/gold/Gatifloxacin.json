@@ -1,0 +1,130 @@
+{
+  "generic": "Gatifloxacin",
+  "cls": "Antibiotic — fluoroquinolone (8-methoxyfluoroquinolone)",
+  "pharm": "Fluoroquinolone; inhibits bacterial DNA gyrase & topoisomerase IV",
+  "tags": ["Rx", "Habit forming: No", "Ophthalmic", "Oral (withdrawn in US)", "Oral not FDA-approved — pending review", "Dysglycemia risk"],
+  "quick": [
+    ["Adult dose", "Ophthalmic 0.5%: 1 drop q2h day 1 (up to 8x), then 2-4x/day days 2-7"],
+    ["Meal", "Ophthalmic: not applicable; oral (non-US): with or without food"],
+    ["Pregnancy", "Ophthalmic: no human data, low systemic exposure; oral: avoid"],
+    ["Lactation", "Ophthalmic: low systemic levels, likely compatible; oral: caution"],
+    ["Renal", "Ophthalmic: no adjustment; oral (non-US): reduce if CrCl <40"],
+    ["Hepatic", "No specific ophthalmic adjustment"],
+    ["Alcohol", "Ophthalmic: not relevant; oral: avoid"],
+    ["Monitoring", "Ophthalmic: allergy/superinfection; oral: blood glucose, QT, tendons"]
+  ],
+  "summary": "Gatifloxacin is an 8-methoxyfluoroquinolone. The ophthalmic solution 0.5% (Zymaxid) is FDA-approved for bacterial conjunctivitis and is the only current FDA-approved form. The oral/systemic form (Tequin) was voluntarily withdrawn from the US market in 2006 by Bristol-Myers Squibb due to serious dysglycemia (both hypo- and hyperglycemia) and is not FDA-approved, though it remains marketed in some countries (e.g., India); systemic data here are flagged as pending clinical review.",
+  "indications": [
+    "Bacterial conjunctivitis caused by susceptible organisms (ophthalmic 0.5% — FDA-approved)",
+    "Oral/systemic respiratory and urinary infections (historical Tequin use; NOT FDA-approved — withdrawn 2006; pending review)"
+  ],
+  "dosage": [
+    {"c": "Bacterial conjunctivitis", "r": "Ophthalmic (0.5% solution)", "d": "Day 1: 1 drop in affected eye(s) every 2 hours while awake, up to 8 times", "t": "Day 1 loading regimen", "n": "FDA-approved (Zymaxid). For topical ophthalmic use only; do not inject."},
+    {"c": "Bacterial conjunctivitis", "r": "Ophthalmic (0.5% solution)", "d": "Days 2-7: 1 drop in affected eye(s) 2 to 4 times daily while awake", "t": "Maintenance, 7-day course total", "n": "Effective and safe in patients >=1 year; not established below 1 year."},
+    {"c": "Systemic bacterial infections (historical)", "r": "Oral", "d": "400 mg once daily (historical Tequin regimen)", "t": "Per infection (historical)", "n": "WITHDRAWN in US (2006) for serious dysglycemia; NOT FDA-approved; pending clinical review. Carries fluoroquinolone class risks. Still marketed in some countries."}
+  ],
+  "admin": [
+    "Ophthalmic: wash hands; tilt head back and instill drop into conjunctival sac of affected eye(s)",
+    "Ophthalmic: do not let dropper tip touch the eye, fingers or any surface to avoid contamination",
+    "Ophthalmic: if using other eye drops, separate by at least 5 minutes",
+    "Ophthalmic: for topical ocular use only — never inject into the eye or use intracamerally (risk of corneal endothelial injury)",
+    "Oral (non-US, historical): take with or without food; separate from antacids/iron/zinc/multivitamins by >=2 hours; maintain hydration"
+  ],
+  "moa": "Bactericidal fluoroquinolone that inhibits bacterial DNA gyrase (topoisomerase II) and topoisomerase IV, enzymes essential for bacterial DNA replication, transcription, repair and recombination. The 8-methoxy structure broadens gram-positive and anaerobic activity. No cross-resistance with aminoglycosides, macrolides or tetracyclines.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to gatifloxacin, to other quinolones, or to any component of the formulation"],
+    "relative": [
+      "Diabetes mellitus or glucose dysregulation — systemic gatifloxacin caused severe dysglycemia (basis for US withdrawal)",
+      "History of myasthenia gravis (systemic fluoroquinolones may worsen muscle weakness)",
+      "Known QT prolongation, uncorrected hypokalemia, or concomitant QT-prolonging drugs (systemic use)",
+      "History of tendon disorders or prior fluoroquinolone-associated serious reaction (systemic use)"
+    ],
+    "monitor": [
+      "Ophthalmic: signs of hypersensitivity (rash, swelling) and superinfection with prolonged use",
+      "Systemic: blood glucose (both hypo- and hyperglycemia)",
+      "Systemic: tendon pain/swelling, QT, CNS effects and peripheral neuropathy"
+    ]
+  },
+  "preg": "Ophthalmic: no adequate human data; systemic exposure after topical ocular use is very low (serum below 5 ng/mL limit of quantification). Oral animal data show teratogenicity at doses far above the human ophthalmic dose. Systemic use is not FDA-approved — avoid.",
+  "lact": "Ophthalmic: no human milk data, but systemic levels after ocular use are very low; likely compatible with care. Gatifloxacin appears in rat milk after oral dosing; for systemic use, weigh benefit vs infant risk.",
+  "renal": "Ophthalmic: no adjustment needed (negligible systemic absorption). Oral/systemic (non-US, historical): dose reduction recommended in significant renal impairment (e.g., CrCl <40 mL/min) — not FDA-approved.",
+  "hepatic": "No specific ophthalmic dosage adjustment. Systemic use not FDA-approved; data pending review.",
+  "interactions": {
+    "major": [
+      "Systemic only — Antidiabetic agents (insulin, sulfonylureas): severe hypo- and hyperglycemia; primary reason oral form was withdrawn",
+      "Systemic only — QT-prolonging drugs (class IA/III antiarrhythmics, macrolides, antipsychotics, TCAs): additive torsades risk",
+      "Systemic only — Corticosteroids: increased tendon rupture risk"
+    ],
+    "moderate": [
+      "Systemic only — Multivalent cations (antacids, iron, zinc, sucralfate, multivitamins): reduced oral absorption",
+      "Systemic only — NSAIDs: may increase CNS stimulation/seizure risk",
+      "Ophthalmic: minimal systemic interaction potential due to low absorption"
+    ],
+    "minor": [],
+    "food": "Ophthalmic: not applicable. Oral (non-US): may be taken with or without food.",
+    "alcohol": "Ophthalmic: not relevant. Systemic: avoid; may add to CNS effects.",
+    "diagnostics": "Class fluoroquinolones may cause false-positive opiate urine screens with systemic use; topical ophthalmic use unlikely to interfere."
+  },
+  "se": {
+    "common": ["Worsening of conjunctivitis (ophthalmic)", "Eye irritation (ophthalmic)", "Dysgeusia (taste disturbance, ophthalmic)", "Eye pain (ophthalmic)", "Headache"],
+    "serious": [
+      "Hypersensitivity/anaphylactic reactions and angioedema (may occur after a single dose)",
+      "Growth of resistant organisms/superinfection (including fungi) with prolonged use",
+      "Corneal endothelial cell injury if introduced into the anterior chamber",
+      "Systemic: severe dysglycemia (life-threatening hypoglycemia and hyperglycemia)",
+      "Systemic: tendinitis and tendon rupture",
+      "Systemic: peripheral neuropathy (may be irreversible)",
+      "Systemic: CNS effects (seizures, psychosis, confusion)",
+      "Systemic: QT prolongation / torsades de pointes",
+      "Systemic: C. difficile-associated diarrhea/colitis"
+    ],
+    "rare": ["Stevens-Johnson Syndrome (reported with topical ophthalmic use)", "Keratitis, conjunctival hemorrhage, eyelid edema (ophthalmic)", "Systemic: aortic aneurysm and dissection", "Systemic: photosensitivity"],
+    "emergency": [
+      "Anaphylaxis or serious skin reaction (may occur after first dose) — seek emergency care",
+      "Systemic: severe hypoglycemia (confusion, loss of consciousness) or marked hyperglycemia in diabetics",
+      "Systemic: sudden severe chest, back or abdominal pain (possible aortic dissection)",
+      "Systemic: tendon pain/snap/swelling — stop drug and seek care",
+      "Systemic: new numbness/tingling/weakness, seizures or severe mood changes"
+    ]
+  },
+  "monitoring": [
+    "Ophthalmic: signs of allergic reaction (rash, itching, swelling, dyspnea) — discontinue if they occur",
+    "Ophthalmic: superinfection with prolonged use; examine with slit lamp/fluorescein when indicated",
+    "Systemic: blood glucose closely (both hypo- and hyperglycemia)",
+    "Systemic: tendon symptoms (especially >60 yrs, on steroids, transplant patients)",
+    "Systemic: ECG/QT in at-risk patients; CNS and peripheral neuropathy symptoms"
+  ],
+  "counsel": [
+    "Ophthalmic: do not touch the dropper tip to your eye or any surface — keep it sterile",
+    "Ophthalmic: complete the full 7-day course even if the eye looks better",
+    "Ophthalmic: stop and contact your doctor at the first sign of rash, swelling or hypersensitivity",
+    "Ophthalmic: remove contact lenses while you have conjunctivitis and during treatment",
+    "Oral form is not FDA-approved and was withdrawn in the US in 2006 for serious blood-sugar effects",
+    "If a systemic gatifloxacin product is used abroad: diabetics must monitor blood sugar and watch for low- and high-sugar symptoms",
+    "Systemic use: report tendon pain, numbness/tingling, or mood/seizure changes immediately"
+  ],
+  "pk": [
+    ["Onset", "Ophthalmic: local action at site; systemic absorption negligible"],
+    ["Peak", "Ophthalmic: serum levels below limit of quantification (<5 ng/mL); oral Tmax ~1-2 h"],
+    ["Half-life", "Systemic ~7-14 hours (oral); minimal systemic exposure after ocular use"],
+    ["Duration", "Ophthalmic: dosed up to 8x on day 1, then 2-4x/day; oral once-daily"],
+    ["Storage", "Store at 15-25 C (59-77 F); protect from freezing"]
+  ],
+  "pearls": [
+    "ORAL/SYSTEMIC GATIFLOXACIN (Tequin) IS NOT FDA-APPROVED — voluntarily withdrawn from the US market in 2006 (Bristol-Myers Squibb) for serious dysglycemia; systemic content here is pending clinical review",
+    "Only the ophthalmic 0.5% solution (Zymaxid) is FDA-approved (bacterial conjunctivitis) and is the current recommended use",
+    "Systemic gatifloxacin caused both severe hypoglycemia and hyperglycemia, with disproportionate risk in elderly and diabetic patients — avoid systemically in diabetes",
+    "As a fluoroquinolone, systemic use carries class risks: tendinitis/tendon rupture, peripheral neuropathy, CNS effects, QT prolongation, aortic aneurysm/dissection, and worsening of myasthenia gravis",
+    "Zymaxid is for topical ocular use only — introduction into the anterior chamber can cause corneal endothelial cell injury",
+    "Rare Stevens-Johnson Syndrome and anaphylaxis (even after a single dose) have been reported with topical ophthalmic gatifloxacin",
+    "Oral gatifloxacin remains marketed in some countries (e.g., India) despite US withdrawal"
+  ],
+  "missed": "Ophthalmic: instill the missed drop as soon as remembered; if near the next dose, skip it and resume the schedule. Do not double up. (Oral form not FDA-approved.)",
+  "overdose": "Ophthalmic overdose is unlikely to cause systemic toxicity given negligible absorption; flush the eye with warm water if excess instilled. Systemic overdose (non-US): supportive care, hydration, ECG/glucose monitoring; not efficiently removed by dialysis.",
+  "refs": [
+    ["FDA Zymaxid (gatifloxacin ophthalmic solution) label via openFDA", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22ZYMAXID%22"],
+    ["DailyMed — gatifloxacin label search", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=gatifloxacin"],
+    ["FDA — Gatifloxacin (marketed as Tequin) postmarket safety information", "https://www.fda.gov/drugs/postmarket-drug-safety-information-patients-and-providers/gatifloxacin-marketed-tequin-information"],
+    ["Federal Register — Determination that TEQUIN (gatifloxacin) was withdrawn for safety reasons", "https://www.federalregister.gov/documents/2008/09/09/E8-20938/determination-that-tequin-gatifloxacin-was-withdrawn-from-sale-for-reasons-of-safety-or"]
+  ]
+}

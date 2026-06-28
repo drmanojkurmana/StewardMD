@@ -1,0 +1,107 @@
+{
+  "generic": "Dulaglutide",
+  "cls": "Glucagon-like peptide-1 (GLP-1) receptor agonist (long-acting; once-weekly injectable antidiabetic)",
+  "pharm": "GLP-1 receptor agonist that enhances glucose-dependent insulin secretion, suppresses glucagon, and slows gastric emptying, lowering fasting and postprandial glucose.",
+  "tags": ["Rx only", "GLP-1 receptor agonist", "Type 2 diabetes", "Once weekly subcutaneous", "Boxed warning: thyroid C-cell tumors", "Cardiovascular benefit"],
+  "quick": [
+    ["Adult dose", "0.75 mg SC once weekly; may increase to 1.5 mg, then up to 4.5 mg weekly"],
+    ["Meal", "Any time of day, with or without food"],
+    ["Pregnancy", "Use only if benefit justifies fetal risk"],
+    ["Lactation", "No human data; weigh benefit vs risk"],
+    ["Renal", "No dose adjustment; monitor if severe GI/dehydration"],
+    ["Hepatic", "Use with caution; limited data"],
+    ["Alcohol", "Limit; can worsen glycemic control and pancreatitis risk"],
+    ["Monitoring", "HbA1c, thyroid symptoms, pancreatitis, GI tolerance, hypoglycemia"]
+  ],
+  "summary": "Dulaglutide is a once-weekly subcutaneous GLP-1 receptor agonist used as an adjunct to diet and exercise to improve glycemic control in type 2 diabetes (adults and children 10 years and older), and to reduce cardiovascular events in adults with established cardiovascular disease or risk factors. It works in a glucose-dependent manner, so it rarely causes hypoglycemia alone but increases hypoglycemia risk with sulfonylureas or insulin. It carries a BOXED WARNING for thyroid C-cell tumors (medullary thyroid carcinoma seen in rodents) and is contraindicated in personal/family history of medullary thyroid carcinoma or MEN 2. The most common adverse effects are gastrointestinal (nausea, diarrhea, vomiting), and pancreatitis is a recognized risk.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years and older with type 2 diabetes mellitus",
+    "Reduction of major adverse cardiovascular events in adults with type 2 diabetes mellitus who have established cardiovascular disease or multiple cardiovascular risk factors"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes - initiation", "r": "Adult subcutaneous", "d": "0.75 mg once weekly", "t": "Once weekly", "n": "Any time of day, with or without food"},
+    {"c": "Type 2 diabetes - titration", "r": "Adult subcutaneous", "d": "Increase to 1.5 mg once weekly for additional glycemic control; may increase further in 1.5 mg steps after at least 4 weeks", "t": "Once weekly", "n": "Maximum 4.5 mg once weekly"},
+    {"c": "Pediatric (>=10 years) type 2 diabetes", "r": "Pediatric subcutaneous", "d": "Start 0.75 mg once weekly; may increase to 1.5 mg weekly if needed after >=4 weeks", "t": "Once weekly", "n": "Maximum 1.5 mg once weekly in pediatrics"}
+  ],
+  "admin": [
+    "Inject subcutaneously into the abdomen, thigh, or upper arm; rotate injection sites",
+    "Administer once weekly on the same day each week, any time of day, with or without food",
+    "The day of weekly administration may be changed if at least 3 days (72 hours) separate doses",
+    "Do not co-administer with insulin in the same injection",
+    "If a dose is missed, give it within 3 days; otherwise skip and resume the regular schedule"
+  ],
+  "moa": "Dulaglutide is a recombinant fusion protein consisting of two GLP-1 analog molecules linked to a modified human IgG4 Fc fragment, which prolongs its half-life and allows once-weekly dosing. As a GLP-1 receptor agonist, it potentiates glucose-dependent insulin secretion from pancreatic beta cells, suppresses inappropriately elevated glucagon secretion, and slows gastric emptying. Because insulin release is glucose-dependent, it lowers glucose with low intrinsic risk of hypoglycemia. The slowing of gastric emptying and central effects also reduce appetite and promote modest weight loss, and the class confers cardiovascular benefit.",
+  "contra": {
+    "absolute": [
+      "Personal or family history of medullary thyroid carcinoma (MTC)",
+      "Multiple Endocrine Neoplasia syndrome type 2 (MEN 2)",
+      "Known serious hypersensitivity to dulaglutide or any component"
+    ],
+    "relative": [
+      "History of pancreatitis (not studied; use caution)",
+      "Severe gastrointestinal disease, including severe gastroparesis",
+      "Concurrent insulin or sulfonylurea (hypoglycemia risk)",
+      "Pre-existing diabetic retinopathy (monitor for progression)"
+    ],
+    "monitor": [
+      "Symptoms of thyroid tumors (neck mass, dysphagia, dyspnea, hoarseness)",
+      "Signs of pancreatitis (persistent severe abdominal pain)",
+      "Hypoglycemia when combined with insulin/sulfonylurea",
+      "Renal function with severe GI adverse reactions/dehydration",
+      "Gallbladder disease and diabetic retinopathy"
+    ]
+  },
+  "preg": "There are limited human data. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus; animal studies showed developmental abnormalities at exposures above the human dose. Discontinuation may be considered as pregnancy approaches given the long half-life.",
+  "lact": "There are no data on the presence of dulaglutide in human milk or its effects on the breastfed infant or milk production; the developmental and health benefits of breastfeeding should be considered along with the mother's clinical need and any potential adverse effects.",
+  "renal": "No dose adjustment is required for renal impairment, but monitor renal function in patients who experience severe gastrointestinal adverse reactions (which can cause dehydration and acute kidney injury).",
+  "hepatic": "There is limited clinical experience in hepatic impairment; use with caution.",
+  "interactions": {
+    "major": [
+      "Insulin and insulin secretagogues (sulfonylureas) - increased hypoglycemia risk; consider lowering their dose"
+    ],
+    "moderate": [
+      "Oral medications - delayed gastric emptying can alter the rate of absorption; monitor narrow-therapeutic-index oral drugs (e.g., warfarin) and those dependent on threshold concentrations",
+      "Oral medications requiring rapid GI absorption may have reduced effect"
+    ],
+    "minor": ["At the 1.5 mg dose, absorption of tested oral drugs was not affected to a clinically relevant degree"],
+    "food": "May be given with or without food at any time of day.",
+    "alcohol": "Limit alcohol; it can impair glycemic control and may contribute to pancreatitis risk.",
+    "diagnostics": "May elevate serum lipase and amylase; interpret in clinical context for pancreatitis."
+  },
+  "se": {
+    "common": ["Nausea", "Diarrhea", "Vomiting", "Abdominal pain", "Decreased appetite", "Dyspepsia", "Fatigue"],
+    "serious": ["Acute pancreatitis", "Hypoglycemia (with insulin/sulfonylurea)", "Acute kidney injury from severe GI losses/dehydration", "Gallbladder disease (cholelithiasis, cholecystitis)", "Hypersensitivity reactions", "Diabetic retinopathy progression"],
+    "rare": ["Medullary thyroid carcinoma (rodent finding; human risk unknown)", "Anaphylaxis and angioedema", "Severe gastrointestinal disease"],
+    "emergency": ["Acute pancreatitis", "Anaphylaxis/angioedema", "Severe hypoglycemia", "Symptoms suggestive of a thyroid tumor"]
+  },
+  "monitoring": ["HbA1c and fasting glucose for response", "Symptoms of thyroid C-cell tumors (neck mass, dysphagia, dyspnea, persistent hoarseness)", "Signs of pancreatitis (persistent severe abdominal pain)", "Hypoglycemia when used with insulin/sulfonylurea", "Renal function if severe GI adverse reactions", "Gallbladder symptoms and diabetic retinopathy"],
+  "counsel": [
+    "Inject under the skin once a week on the same day; you can change the day as long as doses are at least 3 days apart",
+    "Nausea, vomiting, and diarrhea are common at first and usually improve - eat smaller meals and stay hydrated",
+    "Seek urgent care for severe, persistent stomach pain that may spread to your back (possible pancreas inflammation)",
+    "Tell your doctor about any lump in your neck, trouble swallowing, or persistent hoarseness",
+    "If you also use insulin or a sulfonylurea, watch for low blood sugar and carry fast-acting sugar",
+    "Rotate injection sites and never share your pen"
+  ],
+  "pk": [
+    ["Onset", "Glucose-lowering observed after the first dose; full effect builds over weeks"],
+    ["Peak", "Median Tmax ~24-72 hours (about 48 hours) at steady state"],
+    ["Half-life", "Approximately 5 days"],
+    ["Duration", "Once-weekly dosing; steady state in 2-4 weeks"],
+    ["Storage", "Refrigerate at 2-8 C; may keep at room temperature up to 30 C for up to 14 days; do not freeze; protect from light"]
+  ],
+  "pearls": [
+    "BOXED WARNING: thyroid C-cell tumors - contraindicated with personal/family history of medullary thyroid carcinoma or MEN 2",
+    "Once-weekly dosing thanks to Fc fusion and ~5-day half-life; can switch the dosing day if doses are >=3 days apart",
+    "Glucose-dependent action means low hypoglycemia risk alone - reduce insulin/sulfonylurea to avoid lows",
+    "GI effects (nausea, vomiting, diarrhea) are the most common reason for discontinuation; titrate and hydrate",
+    "Recognized risks of pancreatitis and gallbladder disease - educate on warning symptoms",
+    "Provides cardiovascular benefit in patients with established CVD or multiple risk factors"
+  ],
+  "missed": "If you miss a weekly dose, take it as soon as possible if at least 3 days (72 hours) remain until the next scheduled dose. If fewer than 3 days remain, skip the missed dose and take the next dose on the regular day. Do not take two doses within 3 days of each other.",
+  "overdose": "Overdoses in clinical trials produced primarily mild to moderate gastrointestinal events and non-severe hypoglycemia. There is no specific antidote; treatment is supportive with appropriate clinical monitoring, including frequent blood glucose measurement, given the long half-life.",
+  "refs": [
+    ["FDA Label - Dulaglutide/TRULICITY (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dulaglutide%22"],
+    ["DailyMed - Dulaglutide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=dulaglutide"]
+  ]
+}

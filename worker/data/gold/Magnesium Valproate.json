@@ -1,0 +1,108 @@
+{
+  "generic": "Magnesium Valproate",
+  "cls": "Antiepileptic / antimanic (valproate salt)",
+  "pharm": "A magnesium salt of valproic acid that raises brain GABA and modulates sodium/calcium channels to suppress seizures and stabilize mood.",
+  "tags": ["Rx only", "Valproate salt", "Teratogen", "Hepatotoxicity risk"],
+  "quick": [
+    ["Adult dose", "Expressed as valproic acid equivalent; typically 600-2000 mg/day in divided doses, titrated"],
+    ["Meal", "Take with or after food to reduce gastric upset"],
+    ["Pregnancy", "Contraindicated/avoid - highly teratogenic (neural tube defects, neurodevelopmental harm)"],
+    ["Lactation", "Excreted in milk in low amounts; generally considered compatible with monitoring"],
+    ["Renal", "Dose adjustment may be needed; free fraction increases in uremia"],
+    ["Hepatic", "Contraindicated in significant hepatic dysfunction"],
+    ["Alcohol", "Avoid; additive CNS depression and hepatic risk"],
+    ["Monitoring", "Liver function, CBC/platelets, valproate levels, ammonia if symptomatic"]
+  ],
+  "summary": "Magnesium valproate is a magnesium salt of valproic acid used as an antiepileptic and mood-stabilizing agent, available in some markets (e.g., India, Latin America) but not approved by the US FDA; doses are expressed in valproic acid equivalents. Like other valproates it raises GABA levels and modulates ion channels to control generalized and focal seizures and to treat bipolar mania. It carries the valproate class boxed risks of severe hepatotoxicity (especially in young children and mitochondrial disease), life-threatening pancreatitis, and major teratogenicity, including neural tube defects and impaired neurodevelopment.",
+  "indications": [
+    "Generalized epilepsies (absence, myoclonic, tonic-clonic) and focal seizures",
+    "Mixed seizure types",
+    "Bipolar disorder - treatment of manic episodes (where approved)",
+    "Migraine prophylaxis (where approved)"
+  ],
+  "dosage": [
+    {"c": "Epilepsy (initial)", "r": "Adult oral", "d": "Valproate ~10-15 mg/kg/day (often ~600 mg/day) in divided doses", "t": "2-3 times daily", "n": "Doses expressed as valproic acid equivalent"},
+    {"c": "Epilepsy (maintenance)", "r": "Adult oral", "d": "Titrate to 1000-2000 mg/day (up to ~30-60 mg/kg/day) by clinical response and levels", "t": "Divided doses", "n": "Increase gradually"},
+    {"c": "Bipolar mania", "r": "Adult oral", "d": "Titrate per valproate guidance to therapeutic level and response", "t": "Divided doses", "n": "Where approved"},
+    {"c": "Pediatric epilepsy", "r": "Child oral", "d": "Weight-based ~15-30 mg/kg/day (valproate equivalent), titrated", "t": "Divided doses", "n": "Avoid in children <2 years where possible (hepatotoxicity risk)"}
+  ],
+  "admin": [
+    "Take with or after food to reduce gastrointestinal upset",
+    "Swallow whole if a modified-release form; do not crush unless the product allows",
+    "Titrate the dose gradually and adjust to response and plasma valproate levels",
+    "Do not stop abruptly in epilepsy (risk of status epilepticus); taper"
+  ],
+  "moa": "Valproate increases concentrations of the inhibitory neurotransmitter GABA in the brain (by stimulating its synthesis and inhibiting its degradation), and it blunts repetitive neuronal firing through effects on voltage-gated sodium channels and possibly T-type calcium channels. These combined actions raise the seizure threshold and reduce seizure spread, and contribute to its mood-stabilizing effect.",
+  "contra": {
+    "absolute": [
+      "Hepatic disease or significant hepatic dysfunction; family history of severe valproate hepatotoxicity",
+      "Known mitochondrial disorders caused by POLG mutations (and suspected POLG disorders in children <2)",
+      "Urea cycle disorders",
+      "Known hypersensitivity to valproate",
+      "Pregnancy and women of childbearing potential not on a pregnancy-prevention program (per regulatory restrictions)"
+    ],
+    "relative": [
+      "Pancreatitis history",
+      "Thrombocytopenia or bleeding disorders",
+      "Carnitine deficiency"
+    ],
+    "monitor": [
+      "Liver function tests, especially in the first 6 months",
+      "Complete blood count and platelets",
+      "Signs of pancreatitis or encephalopathy"
+    ]
+  },
+  "preg": "Valproate is a major human teratogen: it markedly increases the risk of neural tube defects, other congenital malformations, and impaired neurodevelopment (lower IQ, autism spectrum disorder). It is contraindicated in pregnancy unless no alternative exists, and women of childbearing potential must use effective contraception under a pregnancy-prevention program.",
+  "lact": "Valproate is excreted into breast milk in low concentrations (about 1-10% of maternal plasma). Breastfeeding is generally considered compatible, but the infant should be monitored for sedation, poor feeding, and signs of hepatic or hematologic effects.",
+  "renal": "In renal impairment the free (unbound) fraction of valproate rises because of reduced protein binding; total levels may mislead, so interpret free levels and adjust dose with caution.",
+  "hepatic": "Valproate is hepatically metabolized and can cause severe hepatotoxicity; it is contraindicated in active hepatic disease or significant impairment.",
+  "interactions": {
+    "major": [
+      "Carbapenems (meropenem, etc.) - sharply lower valproate levels and seizure control; avoid",
+      "Lamotrigine - valproate raises lamotrigine levels and risk of serious rash; reduce lamotrigine dose",
+      "Other hepatotoxic drugs - additive liver injury"
+    ],
+    "moderate": [
+      "Enzyme-inducing antiepileptics (phenytoin, carbamazepine, phenobarbital) - reduce valproate levels",
+      "Aspirin/salicylates - displace valproate and increase free levels",
+      "CNS depressants - additive sedation"
+    ],
+    "minor": ["Topiramate - increased risk of hyperammonemia/encephalopathy"],
+    "food": "Take with food to reduce gastric irritation.",
+    "alcohol": "Avoid; additive CNS depression and hepatic toxicity.",
+    "diagnostics": "May raise ammonia, cause thrombocytopenia, prolong bleeding time, and elevate transaminases."
+  },
+  "se": {
+    "common": ["Nausea/vomiting", "Tremor", "Weight gain", "Drowsiness", "Hair thinning/alopecia", "Thrombocytopenia"],
+    "serious": ["Severe hepatotoxicity (can be fatal)", "Acute pancreatitis", "Hyperammonemic encephalopathy", "Bone marrow suppression", "Teratogenicity"],
+    "rare": ["Stevens-Johnson syndrome/DRESS", "Coagulopathy", "Parkinsonism with long-term use"],
+    "emergency": ["Fulminant hepatic failure", "Hemorrhagic pancreatitis", "Severe encephalopathy/coma", "Serious hypersensitivity reaction"]
+  },
+  "monitoring": ["Liver function tests (baseline and periodic, especially first 6 months)", "Complete blood count and platelets", "Plasma valproate levels for efficacy/toxicity", "Serum ammonia if lethargy/confusion", "Pregnancy status in women of childbearing potential"],
+  "counsel": [
+    "Do not stop this medicine suddenly; stopping abruptly can cause seizures",
+    "Women: this drug can cause serious birth defects and developmental problems - use reliable contraception and tell your doctor before planning pregnancy",
+    "Report yellowing of skin/eyes, severe abdominal pain, persistent vomiting, unusual bruising/bleeding, or marked drowsiness/confusion",
+    "Take with food; expect possible weight gain, tremor, or hair thinning",
+    "Avoid alcohol and keep all blood-test appointments"
+  ],
+  "pk": [
+    ["Onset", "Anticonvulsant effect develops over days as levels stabilize"],
+    ["Peak", "Plasma peak ~1-4 hours (formulation dependent)"],
+    ["Half-life", "Valproate ~9-16 hours (shorter with enzyme inducers)"],
+    ["Duration", "Supports 2-3 times daily dosing (less for modified release)"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from heat and moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved; marketed in some countries (e.g., India). This record is compiled from valproate/valproic acid class data and SmPC/BNF references; doses are valproic acid equivalents",
+    "Carries valproate class boxed risks: hepatotoxicity, pancreatitis, and teratogenicity",
+    "Carbapenems can abolish valproate levels - avoid the combination",
+    "Consider checking ammonia in any valproate patient with new confusion or lethargy"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip it. Do not double up. Do not stop without medical advice.",
+  "overdose": "Overdose causes CNS depression ranging from drowsiness to coma, with miosis, respiratory depression, hypotension, metabolic disturbances, and sometimes hyperammonemia or cerebral edema. Treatment is supportive with airway/respiratory support; naloxone has been used (may reverse CNS depression but can also reverse anticonvulsant effect), and L-carnitine plus hemodialysis may help in severe poisoning.",
+  "refs": [
+    ["SmPC / EMA - Valproate (sodium valproate / valproic acid) safety information", "https://www.ema.europa.eu/en/medicines"],
+    ["British National Formulary - Valproate", "https://bnf.nice.org.uk/drugs/valproic-acid/"]
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "generic": "Kanamycin",
+  "cls": "Aminoglycoside antibiotic (second-line injectable)",
+  "pharm": "Bactericidal aminoglycoside used parenterally for serious gram-negative infections and as a second-line injectable agent in MDR-tuberculosis; concentration-dependent killing with nephrotoxic and ototoxic potential.",
+  "tags": ["Rx only", "Aminoglycoside", "Second-line injectable MDR-TB", "Nephrotoxicity", "Ototoxicity (cochlear + vestibular)", "Therapeutic drug monitoring", "Not FDA-listed (sourced EMA/SmPC/BNF/WHO)"],
+  "quick": [
+    ["Adult dose", "15 mg/kg/day IM or IV (max about 1.5 g/day), with therapeutic drug monitoring"],
+    ["Meal", "Parenteral (IM/IV) - not affected by food"],
+    ["Pregnancy", "Avoid; aminoglycosides risk fetal ototoxicity (8th cranial nerve damage)"],
+    ["Lactation", "Minimal oral absorption from milk; use with caution"],
+    ["Renal", "Renally cleared - dose reduction / interval extension essential; monitor levels and function"],
+    ["Hepatic", "No specific hepatic adjustment; minimal hepatic metabolism"],
+    ["Alcohol", "No direct interaction; avoid in TB regimens generally"],
+    ["Monitoring", "Serum peak/trough levels, renal function, audiometry/vestibular function"]
+  ],
+  "summary": "Kanamycin is an aminoglycoside antibiotic given by intramuscular or intravenous injection for serious gram-negative infections and, in TB programs, as a second-line injectable agent for multidrug-resistant tuberculosis (MDR-TB). Its key hazards are dose- and exposure-related nephrotoxicity and ototoxicity - the latter affecting both cochlear (hearing loss) and vestibular (balance) function and potentially irreversible. It can also cause neuromuscular blockade, especially with anesthetics or other neuromuscular blocking agents. Because it is cleared almost entirely by the kidneys, dose reduction and interval adjustment are essential in renal impairment, and therapeutic drug monitoring of peak and trough serum concentrations is required to balance efficacy against toxicity. WHO has largely deprioritized injectable aminoglycosides (including kanamycin) in favor of all-oral MDR-TB regimens. Kanamycin is not FDA-approved/listed in the US (older agent, US labels discontinued); this record is sourced from EMA/SmPC, BNF, and WHO TB guidance.",
+  "indications": [
+    "Serious infections caused by susceptible gram-negative bacteria (e.g., E. coli, Proteus, Klebsiella-Enterobacter-Serratia, Acinetobacter) when other agents are unsuitable",
+    "Second-line injectable agent for multidrug-resistant tuberculosis (MDR-TB) as part of a combination regimen (now deprioritized by WHO in favor of all-oral regimens)"
+  ],
+  "dosage": [
+    {"c": "Serious gram-negative infection", "r": "Adult IM or IV infusion", "d": "15 mg/kg/day (about 7.5 mg/kg every 12 hours), not exceeding approximately 1.5 g/day", "t": "Divided every 8-12 hours, or per once-daily protocol", "n": "Adjust to serum levels; limit total course duration to reduce toxicity"},
+    {"c": "MDR-tuberculosis (second-line)", "r": "Adult IM or IV", "d": "15 mg/kg once daily (typically 5-7 days/week), commonly capped near 1 g/day", "t": "Once daily as part of combination regimen", "n": "WHO now deprioritizes injectables; reduce frequency in older or lower-weight patients"},
+    {"c": "Renal impairment", "r": "Adult IM/IV", "d": "Reduce dose and/or extend dosing interval based on creatinine clearance and serum levels", "t": "Interval extended per renal function", "n": "Monitor peaks/troughs; avoid accumulation"},
+    {"c": "Pediatric", "r": "Child IM/IV", "d": "15-30 mg/kg/day in divided doses (per BNF for Children / local protocols)", "t": "Divided every 8-12 hours", "n": "Use weight-based dosing with TDM; specialist guidance"}
+  ],
+  "admin": [
+    "Give by deep intramuscular injection or by intravenous infusion (dilute and infuse over 30-60 minutes); do not give IV push",
+    "Use ideal/adjusted body weight for dosing in obesity",
+    "Obtain therapeutic drug monitoring: target peak and trough concentrations per local protocol (troughs kept low to limit toxicity)",
+    "Ensure adequate hydration to reduce nephrotoxicity",
+    "Avoid concurrent nephrotoxic or ototoxic agents where possible",
+    "Always use as part of a combination regimen for tuberculosis, never as monotherapy",
+    "Have neuromuscular function precautions in place when used with anesthesia or neuromuscular blockers"
+  ],
+  "moa": "Kanamycin is a bactericidal aminoglycoside that binds irreversibly to the 30S ribosomal subunit (interacting with the 16S rRNA of the aminoacyl-tRNA site), causing misreading of the genetic code and inhibition of bacterial protein synthesis. This leads to production of defective proteins and disruption of the bacterial cell membrane, producing concentration-dependent killing. Its activity is primarily against aerobic gram-negative bacilli and Mycobacterium tuberculosis; it has poor activity under anaerobic conditions because uptake is oxygen-dependent. Toxicity reflects drug accumulation in renal tubular cells and in cochlear/vestibular hair cells.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to kanamycin or other aminoglycosides",
+      "Myasthenia gravis (risk of severe neuromuscular blockade)",
+      "Pre-existing serious aminoglycoside-associated ototoxicity"
+    ],
+    "relative": [
+      "Significant renal impairment (requires dose adjustment and close monitoring)",
+      "Pre-existing hearing loss or vestibular dysfunction",
+      "Concurrent nephrotoxic or ototoxic drugs (e.g., loop diuretics, vancomycin, amphotericin B, other aminoglycosides, cisplatin)",
+      "Pregnancy (fetal ototoxicity risk)",
+      "Elderly patients (reduced renal reserve)",
+      "Conditions or drugs causing neuromuscular blockade"
+    ],
+    "monitor": [
+      "Serum kanamycin peak and trough concentrations",
+      "Renal function (serum creatinine, urine output, creatinine clearance)",
+      "Auditory function (audiometry) and vestibular function",
+      "Serum electrolytes (magnesium, calcium, potassium)"
+    ]
+  },
+  "preg": "Aminoglycosides cross the placenta and can cause irreversible bilateral congenital deafness (8th cranial nerve / ototoxic) and potential nephrotoxicity in the fetus. Avoid in pregnancy unless the benefit clearly outweighs the risk; if used, monitor serum levels carefully.",
+  "lact": "Kanamycin is excreted into breast milk in small amounts, but oral absorption from milk by the infant is poor; systemic effects in the breastfed infant are considered unlikely. Use with caution and monitor the infant.",
+  "renal": "Kanamycin is excreted almost entirely unchanged by glomerular filtration, and accumulation in renal impairment markedly increases the risk of nephrotoxicity and ototoxicity. Dose reduction and/or extension of the dosing interval are essential, guided by creatinine clearance and serum drug levels. Monitor renal function and serum concentrations closely throughout therapy.",
+  "hepatic": "Kanamycin undergoes minimal hepatic metabolism, so no specific hepatic dose adjustment is generally required; dosing is driven by renal function and serum levels.",
+  "interactions": {
+    "major": [
+      "Other nephrotoxic/ototoxic agents (vancomycin, amphotericin B, ciclosporin, cisplatin, other aminoglycosides) - additive kidney and ear toxicity",
+      "Loop diuretics (furosemide, ethacrynic acid) - increased ototoxicity and nephrotoxicity",
+      "Neuromuscular blocking agents and general anesthetics - potentiated neuromuscular blockade with risk of respiratory paralysis"
+    ],
+    "moderate": [
+      "Botulinum toxin - enhanced neuromuscular blocking effect",
+      "Other potentially ototoxic drugs - additive risk",
+      "Bisphosphonates - additive hypocalcemia risk"
+    ],
+    "minor": [
+      "Beta-lactam antibiotics - in vitro inactivation if mixed in the same infusion (administer separately); may be synergistic clinically"
+    ],
+    "food": "Parenteral administration; not affected by food.",
+    "alcohol": "No direct interaction; alcohol is generally discouraged in TB therapy.",
+    "diagnostics": "May raise serum creatinine/urea; can cause electrolyte disturbances (low magnesium, calcium, potassium)."
+  },
+  "se": {
+    "common": ["Pain or irritation at injection site", "Nausea", "Rises in serum creatinine/urea (renal impairment)", "Tinnitus or early high-frequency hearing changes"],
+    "serious": ["Nephrotoxicity (acute kidney injury, usually reversible)", "Ototoxicity - cochlear (hearing loss) and vestibular (vertigo, ataxia), often irreversible", "Neuromuscular blockade with respiratory depression", "Electrolyte disturbances (hypomagnesemia, hypocalcemia, hypokalemia)"],
+    "rare": ["Hypersensitivity reactions / rash", "Eosinophilia", "Peripheral neuropathy / paresthesia", "Blood dyscrasias", "Optic neuritis (reported)"],
+    "emergency": ["Irreversible deafness", "Respiratory paralysis from neuromuscular blockade", "Severe acute kidney injury", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Serum kanamycin peak and trough concentrations (therapeutic drug monitoring) - especially with prolonged therapy or renal impairment",
+    "Renal function: serum creatinine, urea, urine output (baseline and regularly)",
+    "Auditory function (audiometry, including high-frequency) and vestibular function at baseline and during therapy",
+    "Serum electrolytes (magnesium, calcium, potassium)",
+    "Signs of neuromuscular weakness, especially around anesthesia/surgery"
+  ],
+  "counsel": [
+    "This medicine is given by injection or drip, usually in hospital or clinic",
+    "Report any new ringing in the ears, hearing loss, dizziness, or balance problems immediately - these may not fully reverse",
+    "Report reduced urination, swelling, or other signs of kidney trouble",
+    "You will need regular blood tests to check drug levels and kidney function, and hearing tests",
+    "Tell your clinician about all other medicines, especially other antibiotics, diuretics ('water pills'), or kidney-affecting drugs",
+    "For TB, take this as part of your full combination regimen and complete the course as directed"
+  ],
+  "pk": [
+    ["Onset", "Rapid; bactericidal soon after IM/IV administration"],
+    ["Peak", "IM peak about 1 hour; end of a 30-60 min IV infusion"],
+    ["Half-life", "About 2-3 hours with normal renal function (markedly prolonged in renal impairment)"],
+    ["Duration", "Dosed once daily or every 8-12 hours; post-antibiotic effect supports extended-interval dosing"],
+    ["Storage", "Store below 25 C; protect from light. Reconstituted/diluted solution per product information"]
+  ],
+  "pearls": [
+    "Not FDA-approved/listed in the US (older aminoglycoside, US labels discontinued); this record is sourced from EMA/SmPC, BNF, and WHO TB guidance",
+    "WHO has largely deprioritized injectable aminoglycosides (including kanamycin and amikacin) for MDR-TB in favor of all-oral, shorter regimens (e.g., bedaquiline-based)",
+    "Key toxicities are nephrotoxicity and ototoxicity (cochlear + vestibular); ototoxicity can be permanent - perform baseline and serial audiometry",
+    "Renally cleared - dose adjustment and therapeutic drug monitoring (peaks/troughs) are essential, particularly in renal impairment and the elderly",
+    "Can potentiate neuromuscular blockade - dangerous with anesthetics/blockers and in myasthenia gravis",
+    "Avoid concurrent loop diuretics and other nephro-/ototoxic drugs; keep the patient well hydrated"
+  ],
+  "missed": "Doses are given by a healthcare professional on a set schedule. If a scheduled dose is delayed or missed, contact the treating team for timing; do not double doses, as higher exposure increases the risk of kidney and hearing damage.",
+  "overdose": "Overdose or accumulation causes exaggerated nephrotoxicity, ototoxicity, and neuromuscular blockade (which may progress to respiratory paralysis). Management is supportive: stop the drug, maintain airway/ventilation, and ensure hydration and renal support. Neuromuscular blockade may be reversed with anticholinesterase agents or calcium salts. Hemodialysis (or peritoneal dialysis) effectively removes kanamycin from the blood and is used for significant toxicity or in severe renal failure.",
+  "refs": [
+    ["BNF - Kanamycin / Aminoglycosides", "https://bnf.nice.org.uk/drugs/"],
+    ["WHO Consolidated Guidelines on Tuberculosis (Drug-Resistant TB Treatment)", "https://www.who.int/publications/i/item/9789240063129"],
+    ["European Medicines Agency (EMA) - medicines", "https://www.ema.europa.eu/en/medicines"]
+  ]
+}

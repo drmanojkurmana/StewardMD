@@ -1,0 +1,105 @@
+{
+  "generic": "Charcoal (Activated Charcoal / Activated Carbon)",
+  "cls": "GI adsorbent / antidote (used in poisoning); also used for flatulence",
+  "pharm": "Highly porous adsorbent that binds many drugs and toxins within the gastrointestinal lumen, reducing their absorption and (with multiple doses) enhancing elimination of some agents.",
+  "tags": ["OTC / emergency antidote", "GI adsorbent", "Poisoning", "Antiflatulent", "Oral"],
+  "quick": [
+    ["Adult dose", "Acute poisoning: 25-100 g (commonly 50 g) orally/NG once; flatulence: lower OTC doses"],
+    ["Meal", "For poisoning, give as soon as possible regardless of meals; for flatulence, take after meals"],
+    ["Pregnancy", "Not absorbed systemically; may be used when indicated for poisoning"],
+    ["Lactation", "Not absorbed systemically; considered compatible"],
+    ["Renal", "No adjustment (not absorbed)"],
+    ["Hepatic", "No adjustment (not absorbed)"],
+    ["Alcohol", "Poorly adsorbs alcohol; limited value for ethanol poisoning"],
+    ["Monitoring", "Airway protection, bowel sounds, electrolytes if repeated doses with cathartic"]
+  ],
+  "summary": "Activated charcoal is a highly porous form of carbon used mainly as an emergency adsorbent in acute oral poisoning and drug overdose, where it binds the toxin in the gut and reduces its absorption. It is most effective when given within 1 hour of ingestion. Multiple-dose activated charcoal can enhance elimination of certain drugs (e.g., theophylline, carbamazepine, phenobarbital, dapsone, quinine). It is also sold over the counter for flatulence. The chief hazard is pulmonary aspiration, so it must not be given to patients with an unprotected airway or impaired consciousness without airway protection. It does not bind alcohols, metals/iron, lithium, or corrosives well.",
+  "indications": [
+    "Adjunctive treatment of acute oral poisoning or drug overdose to reduce gastrointestinal absorption of the ingested substance",
+    "Enhancement of elimination of certain drugs using multiple-dose activated charcoal",
+    "Symptomatic relief of intestinal gas/flatulence (OTC)"
+  ],
+  "dosage": [
+    {"c": "Acute poisoning - single dose (adult)", "r": "Adult oral / nasogastric", "d": "25-100 g (commonly 50 g) as a slurry, ideally within 1 hour of ingestion", "t": "Single dose", "n": "Aim for roughly 10:1 charcoal-to-toxin ratio where feasible"},
+    {"c": "Acute poisoning - single dose (child)", "r": "Pediatric oral / nasogastric", "d": "1-2 g/kg (or 25-50 g for older children) as a slurry", "t": "Single dose", "n": "Weight-based"},
+    {"c": "Multiple-dose activated charcoal (adult)", "r": "Adult oral / nasogastric", "d": "Initial 50-100 g, then 25-50 g every 2-4 hours (or equivalent hourly rate)", "t": "Repeated doses", "n": "For selected toxins (e.g., theophylline, carbamazepine, phenobarbital, dapsone, quinine)"},
+    {"c": "Flatulence (OTC)", "r": "Adult oral", "d": "Lower OTC doses per product label (e.g., taken after meals)", "t": "As directed", "n": "Symptomatic use"}
+  ],
+  "admin": [
+    "Give as an aqueous slurry orally or via nasogastric tube; shake/stir well before use",
+    "Protect the airway first - do not give to patients with depressed consciousness or absent gag reflex unless the airway is secured",
+    "Administer as early as possible after ingestion (most effective within 1 hour)",
+    "Separate from other oral medicines, as charcoal will adsorb them and reduce their effect",
+    "When repeated dosing is used, monitor bowel sounds; a single dose of cathartic is sometimes added but is not given with every dose"
+  ],
+  "moa": "Activated charcoal is carbon treated to create an extremely large internal surface area with numerous pores. Within the gastrointestinal tract it adsorbs many drugs and toxins onto its surface through nonspecific binding, preventing or reducing their systemic absorption. Because the charcoal-toxin complex is not absorbed, the bound substance is excreted in the feces. Multiple-dose activated charcoal can also create a concentration gradient that draws certain drugs from the systemic circulation back into the gut lumen ('gut dialysis'), and can interrupt enterohepatic and enteroenteric recirculation, thereby enhancing total body clearance of those agents.",
+  "contra": {
+    "absolute": [
+      "Unprotected airway (depressed consciousness or absent gag reflex) without endotracheal intubation",
+      "Gastrointestinal tract not anatomically intact (perforation/obstruction) or ileus",
+      "Ingestion of corrosives/caustics (acids, alkalis) - charcoal does not bind them and obscures endoscopy",
+      "Ingestion of hydrocarbons with high aspiration potential"
+    ],
+    "relative": [
+      "High risk of aspiration",
+      "Reduced gastrointestinal motility/ileus (especially for multiple-dose regimens)",
+      "Recent gastrointestinal surgery",
+      "Ingestions poorly adsorbed by charcoal (alcohols, lithium, iron and other metals, electrolytes/potassium, cyanide)"
+    ],
+    "monitor": [
+      "Airway and level of consciousness",
+      "Bowel sounds and abdominal distension",
+      "Electrolytes and fluid status (with multiple-dose regimens, especially if cathartics used)"
+    ]
+  },
+  "preg": "Activated charcoal is not absorbed from the gastrointestinal tract and is not expected to harm the fetus; it may be used during pregnancy when treatment of poisoning is indicated.",
+  "lact": "Activated charcoal is not absorbed systemically and is not excreted in breast milk; it is considered compatible with breastfeeding.",
+  "renal": "No dose adjustment is needed; activated charcoal is not absorbed and is not eliminated by the kidneys. (Multiple-dose charcoal can aid elimination of some drugs that are otherwise renally cleared.)",
+  "hepatic": "No dose adjustment is needed; activated charcoal is not absorbed or hepatically metabolized.",
+  "interactions": {
+    "major": [
+      "Oral medications generally - activated charcoal adsorbs and reduces the absorption/effect of most concurrently administered oral drugs (including oral antidotes such as N-acetylcysteine if given together)"
+    ],
+    "moderate": [
+      "Oral contraceptives and other essential oral medicines - may be rendered ineffective if taken close together"
+    ],
+    "minor": ["Concurrent cathartics may add to fluid/electrolyte effects"],
+    "food": "Food/gut contents can reduce adsorptive capacity; for poisoning, do not delay charcoal for meals. Milk and ice cream reduce its effectiveness.",
+    "alcohol": "Activated charcoal poorly adsorbs ethanol and other alcohols, so it is of limited value in alcohol poisoning.",
+    "diagnostics": "Charcoal interferes with endoscopic visualization and is not useful for substances it does not bind (metals, alcohols, lithium, corrosives)."
+  },
+  "se": {
+    "common": ["Black stools", "Constipation", "Nausea/vomiting", "Vomiting (especially with rapid or large doses)"],
+    "serious": ["Pulmonary aspiration leading to aspiration pneumonitis or pneumonia", "Intestinal obstruction or bezoar (especially with repeated doses)", "Charcoal-induced bowel pseudo-obstruction"],
+    "rare": ["Corneal abrasion (if charcoal contacts the eye)", "Hypernatremia/dehydration when combined with cathartics", "Empyema after aspiration"],
+    "emergency": ["Aspiration causing acute respiratory distress/ARDS", "Bowel obstruction or perforation", "Severe vomiting with airway compromise"]
+  },
+  "monitoring": ["Airway patency and level of consciousness before and during administration", "Respiratory status for signs of aspiration", "Bowel sounds and abdominal distension, especially with multiple-dose regimens", "Fluid and electrolyte balance if cathartics are co-administered"],
+  "counsel": [
+    "Your stools will turn black while taking charcoal - this is harmless and expected",
+    "Take activated charcoal at least 2 hours apart from your other oral medicines, since it can stop them from working",
+    "Drink the charcoal slurry as directed and follow with fluids unless told otherwise",
+    "For poisoning, this is given in a medical setting as quickly as possible after the substance is swallowed",
+    "Seek medical advice before using charcoal at home for a suspected poisoning"
+  ],
+  "pk": [
+    ["Onset", "Begins adsorbing toxins immediately in the gut; most effective within 1 hour of ingestion"],
+    ["Peak", "Not applicable (acts locally in the gut; not absorbed)"],
+    ["Half-life", "Not applicable (not systemically absorbed)"],
+    ["Duration", "Acts until excreted in feces; repeated dosing extends effect for selected toxins"],
+    ["Storage", "Store the dry powder/granules in a tightly closed container in a cool, dry place"]
+  ],
+  "pearls": [
+    "Most effective when given within 1 hour of poison ingestion; benefit declines thereafter",
+    "Never give to a patient with an unprotected airway - aspiration is the main serious hazard",
+    "Does NOT effectively bind alcohols, iron/metals, lithium, electrolytes/potassium, cyanide, or corrosives",
+    "Multiple-dose activated charcoal enhances elimination of theophylline, carbamazepine, phenobarbital, dapsone, and quinine",
+    "Separate from other oral drugs (including oral antidotes) by ~2 hours, as charcoal adsorbs them"
+  ],
+  "missed": "Activated charcoal does not have a chronic dosing schedule for poisoning. For multiple-dose regimens, give the next dose as scheduled if one is delayed; for OTC use for flatulence, simply resume as directed - do not double the dose.",
+  "overdose": "Charcoal itself is not systemically toxic. Excessive amounts mainly increase the risk of constipation, intestinal obstruction/bezoar, and (if vomited) aspiration. Manage supportively, ensure airway protection, maintain hydration, and treat obstruction if it occurs.",
+  "refs": [
+    ["DailyMed - Activated charcoal", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=activated+charcoal"],
+    ["BNF - Charcoal, activated (treatment of poisoning)", "https://bnf.nice.org.uk/drugs/charcoal-activated/"]
+  ]
+}

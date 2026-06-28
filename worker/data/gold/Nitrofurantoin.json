@@ -1,0 +1,95 @@
+{
+  "generic": "Nitrofurantoin",
+  "cls": "Nitrofuran antibacterial",
+  "pharm": "Urinary tract antibacterial",
+  "tags": ["nitrofuran", "antibiotic", "urinary tract infection", "cystitis", "G6PD"],
+  "quick": [
+    ["Adult dose", "50-100 mg PO four times daily"],
+    ["Meal", "Take with food to improve absorption"],
+    ["Pregnancy", "Contraindicated at term (38-42 wk)/labor"],
+    ["Lactation", "Avoid if infant <1 month or G6PD-deficient"],
+    ["Renal", "Contraindicated if CrCl <60 mL/min"],
+    ["Hepatic", "Contraindicated if prior nitrofurantoin hepatotoxicity"],
+    ["Alcohol", "Not specified"],
+    ["Monitoring", "Pulmonary, hepatic, renal, neuro signs"]
+  ],
+  "summary": "Nitrofurantoin is a nitrofuran urinary antibacterial for treatment of uncomplicated UTIs in adults and children >=1 month due to susceptible E. coli, Enterococcus, S. aureus, Klebsiella and Enterobacter. It is NOT for pyelonephritis or perinephric abscess. Key risks are acute/chronic pulmonary reactions, hepatotoxicity, peripheral neuropathy, and hemolytic anemia (G6PD deficiency). Contraindicated when CrCl <60 mL/min, at term in pregnancy (38-42 weeks) and in infants <1 month.",
+  "indications": [
+    "Treatment of urinary tract infections in adults and pediatric patients >=1 month of age due to susceptible E. coli, Enterococcus species, Staphylococcus aureus, Klebsiella species and Enterobacter species",
+    "Long-term suppressive therapy of UTI in selected patients (balanced against systemic toxicity and resistance risk)"
+  ],
+  "dosage": [
+    {"c": "Uncomplicated UTI (adult)", "r": "Oral suspension 25 mg/5 mL", "d": "50-100 mg", "t": "Four times daily", "n": "Lower 50 mg dose recommended for uncomplicated UTI; take with food"},
+    {"c": "Long-term suppression (adult)", "r": "Oral", "d": "50-100 mg at bedtime", "t": "Once at bedtime", "n": "Weigh benefit against systemic toxicity and resistance"},
+    {"c": "UTI (pediatric >=1 month)", "r": "Oral suspension 25 mg/5 mL", "d": "5-7 mg/kg/24 h", "t": "Four divided doses", "n": "Contraindicated <1 month of age; continue >=1 week or >=3 days after urine sterile"},
+    {"c": "Long-term suppression (pediatric)", "r": "Oral", "d": "As low as 1 mg/kg/24 h", "t": "Single dose or two divided doses", "n": "For selected patients on long-term therapy"}
+  ],
+  "admin": [
+    "Take with food to improve absorption and tolerance",
+    "Shake the oral suspension vigorously before each use",
+    "Measure pediatric doses with an appropriately sized oral dosing syringe",
+    "Complete the full prescribed course; do not skip doses",
+    "Do not use antacids containing magnesium trisilicate during therapy"
+  ],
+  "moa": "Nitrofurantoin is reduced by a wide range of bacterial enzymes including flavoproteins to reactive intermediates that damage macromolecules such as DNA and proteins. It is highly concentrated in urine and lacks the broad tissue distribution of other UTI agents.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to nitrofurantoin", "Prior cholestatic jaundice/hepatic dysfunction associated with nitrofurantoin", "Anuria, oliguria, or significant renal impairment (CrCl <60 mL/min or clinically significant elevated serum creatinine)", "Pregnancy at term (38-42 weeks), labor and delivery, or imminent onset of labor", "Pediatric patients younger than 1 month of age"],
+    "relative": ["Conditions predisposing to peripheral neuropathy (renal impairment, anemia, diabetes, electrolyte imbalance, vitamin B deficiency, debilitating disease)", "G6PD deficiency (hemolytic anemia risk)", "Long-term therapy (pulmonary, hepatic and resistance risks)"],
+    "monitor": ["Pulmonary signs/symptoms, especially with therapy >=6 months", "Liver function periodically", "Renal function on long-term therapy", "Signs of hemolysis", "New or worsening diarrhea (C. difficile)"]
+  },
+  "preg": "Contraindicated at term (38-42 weeks gestation), during labor and delivery, or when onset of labor is imminent, due to the possibility of neonatal hemolytic anemia from immature erythrocyte enzyme systems (glutathione instability). Epidemiologic data on first-trimester use are inconsistent and do not establish risk; animal studies showed no fetotoxicity up to 6x the human dose.",
+  "lact": "Present in human breast milk. Breastfeeding is not recommended for infants younger than 1 month or with G6PD deficiency due to hemolytic anemia risk. For older infants with normal G6PD, weigh benefits against maternal need; monitor infant for vomiting, diarrhea and rash.",
+  "renal": "Contraindicated in anuria, oliguria or significant renal impairment - creatinine clearance under 60 mL/min or clinically significant elevated serum creatinine - because impaired excretion increases toxicity and reduces urinary drug levels and efficacy. Monitor renal function periodically on long-term therapy.",
+  "hepatic": "Contraindicated in patients with a previous history of cholestatic jaundice or hepatic dysfunction associated with nitrofurantoin. Hepatic reactions including hepatitis, cholestatic jaundice, chronic active hepatitis and hepatic necrosis (with fatalities) have occurred; monitor liver function periodically and discontinue if hepatitis occurs.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Uricosuric drugs (probenecid, sulfinpyrazone) - inhibit renal tubular secretion, increasing serum levels/toxicity and decreasing urinary efficacy", "Antacids containing magnesium trisilicate - reduce rate and extent of nitrofurantoin absorption"],
+    "minor": ["Quinolones - in vitro antagonism with nitrofurantoin"],
+    "food": "Take with food; food increases bioavailability and improves tolerance.",
+    "alcohol": "Not specified in the label.",
+    "diagnostics": "Can cause false-positive urine glucose with Benedict's or Fehling's copper reduction tests; use enzymatic glucose oxidase tests. May impart a brown color to urine."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Anorexia", "Headache", "Dizziness/vertigo", "Brown discoloration of urine"],
+    "serious": ["Acute, subacute or chronic pulmonary reactions (interstitial pneumonitis/pulmonary fibrosis)", "Hepatotoxicity (hepatitis, cholestatic jaundice, hepatic necrosis)", "Peripheral neuropathy (may be severe or irreversible)", "Hemolytic anemia (G6PD/primaquine-sensitivity type)", "Clostridioides difficile-associated diarrhea"],
+    "rare": ["Stevens-Johnson syndrome / erythema multiforme / exfoliative dermatitis", "Lupus-like syndrome", "Optic neuritis, benign intracranial hypertension (pseudotumor cerebri)", "Blood dyscrasias (agranulocytosis, aplastic anemia, megaloblastic anemia, thrombocytopenia)", "Methemoglobinemia with cyanosis", "Pancreatitis, sialadenitis"],
+    "emergency": ["Anaphylaxis/serious hypersensitivity reaction", "Acute pulmonary reaction (fever, chills, cough, dyspnea, chest pain)", "Severe or bloody diarrhea (C. difficile colitis)", "Acute hemolytic crisis"]
+  },
+  "monitoring": [
+    "Pulmonary status, especially in long-term therapy (>=6 months) - cough, dyspnea, fever",
+    "Liver function tests periodically; discontinue at signs of hepatitis",
+    "Renal function periodically during long-term therapy",
+    "Signs of hemolysis, particularly in G6PD-deficient patients",
+    "Signs/symptoms of peripheral neuropathy",
+    "Diarrhea suggesting C. difficile (may occur up to 2 months after therapy)"
+  ],
+  "counsel": [
+    "Take with food and complete the full course of therapy",
+    "Shake the suspension well and measure with an oral dosing syringe",
+    "Stop the drug and seek care at the first sign of an allergic reaction",
+    "Nitrofurantoin may turn urine brown - this is harmless",
+    "Report cough, shortness of breath, numbness/tingling, yellowing of skin/eyes, or persistent diarrhea",
+    "Do not use magnesium trisilicate antacids while taking this medication"
+  ],
+  "pk": [
+    ["Onset", "Rapidly absorbed; concentrates in urine"],
+    ["Peak", "Low blood concentrations at therapeutic doses"],
+    ["Half-life", "Short; rapidly excreted in urine"],
+    ["Duration", "Four-times-daily dosing maintains urinary levels"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from strong light and freezing"]
+  ],
+  "pearls": [
+    "Urinary antibacterial only - NOT for pyelonephritis or perinephric abscess (lacks tissue distribution)",
+    "Contraindicated when CrCl <60 mL/min - inadequate urinary levels plus higher systemic toxicity",
+    "Contraindicated at term (38-42 wk) and in infants <1 month - neonatal hemolytic anemia risk",
+    "Screen/consider G6PD deficiency - hemolytic anemia of primaquine-sensitivity type",
+    "Chronic pulmonary fibrosis develops insidiously with therapy >=6 months",
+    "Can cause false-positive urine glucose with copper-reduction tests; use enzymatic methods"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is nearly time for the next dose, in which case skip it. Do not double the dose. Continue the four-times-daily schedule with food.",
+  "overdose": "Acute overdose has produced vomiting. Induction of emesis is recommended; there is no specific antidote. Maintain a high fluid intake to promote urinary excretion. Nitrofurantoin is dialyzable.",
+  "refs": [
+    ["FDA Nitrofurantoin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nitrofurantoin%22"],
+    ["FDA DailyMed - Nitrofurantoin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "generic": "Entecavir",
+  "cls": "Hepatitis B virus nucleoside analogue reverse transcriptase inhibitor",
+  "pharm": "Antiviral (anti-HBV)",
+  "tags": ["hepatitis B", "HBV", "antiviral", "nucleoside analogue", "chronic hepatitis"],
+  "quick": [
+    ["Adult dose", "0.5 mg PO once daily (1 mg if lamivudine-refractory/decompensated)"],
+    ["Meal", "Empty stomach - 2 h after and 2 h before a meal"],
+    ["Pregnancy", "Use only if benefit outweighs risk; limited data"],
+    ["Lactation", "Breastfeeding not recommended"],
+    ["Renal", "Adjust dose/interval if CrCl <50 mL/min"],
+    ["Hepatic", "No adjustment; decompensated disease use 1 mg daily"],
+    ["Alcohol", "Avoid; adds to liver injury"],
+    ["Monitoring", "LFTs (esp. after stopping), HBV DNA, HIV status, renal function"]
+  ],
+  "summary": "Entecavir is a potent guanosine nucleoside analogue that suppresses hepatitis B virus replication. Standard dose is 0.5 mg once daily on an empty stomach (1 mg in lamivudine-refractory or decompensated disease). It carries a boxed warning for severe acute hepatitis flares on discontinuation, HIV resistance in untreated HIV/HBV co-infection, and lactic acidosis/hepatomegaly.",
+  "indications": [
+    "Chronic hepatitis B virus infection in adults and pediatric patients >=2 years with active viral replication",
+    "Evidence of persistent elevated serum aminotransferases (ALT/AST) or histologically active disease",
+    "Treatment of HBV with compensated or decompensated liver disease",
+    "Lamivudine-refractory chronic HBV (1 mg dose)"
+  ],
+  "dosage": [
+    {"c": "Nucleoside-naive, compensated (>=16 yr)", "r": "Standard", "d": "0.5 mg once daily", "t": "Once daily on empty stomach", "n": "Empty stomach: 2 h after/before meal"},
+    {"c": "Lamivudine-refractory or known resistance (>=16 yr)", "r": "Resistant", "d": "1 mg once daily", "t": "Once daily on empty stomach", "n": "For lamivudine/telbivudine resistance"},
+    {"c": "Decompensated liver disease (adult)", "r": "Decompensated", "d": "1 mg once daily", "t": "Once daily on empty stomach", "n": "Higher dose recommended"},
+    {"c": "Pediatric >=2 yr, >=10 kg", "r": "Weight-based", "d": "Weight-based oral solution; up to 0.5 mg in those >30 kg", "t": "Once daily", "n": "Use oral solution per weight bands"},
+    {"c": "Renal impairment CrCl <50 mL/min", "r": "Adjusted", "d": "Reduce dose or extend interval per CrCl", "t": "Adjusted interval", "n": "Dose after hemodialysis"}
+  ],
+  "admin": [
+    "Take orally once daily on an empty stomach (at least 2 hours after a meal and 2 hours before the next meal)",
+    "Use the oral solution undiluted with the supplied dosing spoon for pediatric/weight-based dosing",
+    "Do not discontinue abruptly without close hepatic monitoring",
+    "Adjust dose in renal impairment (CrCl <50 mL/min); give post-dialysis dose on hemodialysis days",
+    "Test for HIV before initiation in at-risk patients"
+  ],
+  "moa": "Entecavir is a guanosine nucleoside analogue that, after phosphorylation to its active triphosphate, competes with the natural substrate deoxyguanosine triphosphate to inhibit HBV polymerase (reverse transcriptase). It blocks base priming, reverse transcription of the negative strand, and synthesis of the positive strand of HBV DNA, suppressing viral replication.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to entecavir or any component"],
+    "relative": ["Untreated HIV/HBV co-infection (HIV resistance risk)", "Decompensated liver disease (higher lactic acidosis risk)", "Renal impairment without dose adjustment", "Liver/kidney transplant recipients on cyclosporine/tacrolimus"],
+    "monitor": ["Discontinuation of therapy (hepatitis flare)", "Lactic acidosis and hepatomegaly", "Renal function decline"]
+  },
+  "preg": "Limited human data; use during pregnancy only if the potential benefit justifies the potential risk to the fetus. An antiretroviral pregnancy registry exists. Avoid in untreated HIV co-infection.",
+  "lact": "Entecavir is excreted in the milk of animals; it is unknown if excreted in human milk. Breastfeeding is not recommended during entecavir therapy due to potential serious adverse reactions in the infant.",
+  "renal": "Dosage adjustment is recommended when creatinine clearance is less than 50 mL/min, including patients on hemodialysis or CAPD. On hemodialysis days, administer entecavir after the dialysis session. Reduce dose or extend the dosing interval per CrCl band.",
+  "hepatic": "No dosage adjustment for hepatic impairment. Patients with decompensated liver disease should receive 1 mg once daily and be monitored for lactic acidosis and worsening hepatic function.",
+  "interactions": {
+    "major": ["Drugs reducing renal function or competing for active tubular secretion may increase entecavir or co-administered drug concentrations - monitor closely"],
+    "moderate": ["Cyclosporine, tacrolimus - monitor renal function in transplant recipients", "Nephrotoxic agents - increased renal toxicity risk"],
+    "minor": ["Lamivudine - no clinically relevant pharmacokinetic interaction"],
+    "food": "Food reduces entecavir absorption; take on an empty stomach (2 h before/after meals).",
+    "alcohol": "Avoid alcohol; it accelerates hepatic injury in chronic HBV.",
+    "diagnostics": "May transiently elevate ALT during treatment or after discontinuation; monitor HBV DNA and serology."
+  },
+  "se": {
+    "common": ["Headache", "Fatigue", "Dizziness", "Nausea", "Upper abdominal pain", "Elevated ALT"],
+    "serious": ["Severe acute exacerbation of hepatitis B after discontinuation", "Lactic acidosis", "Hepatomegaly with steatosis"],
+    "rare": ["Anaphylactoid reaction", "Alopecia", "Rash"],
+    "emergency": ["Severe hepatitis flare with hepatic decompensation", "Lactic acidosis (unexplained malaise, tachypnea, abdominal pain)", "Hepatic failure"]
+  },
+  "monitoring": [
+    "Liver function tests (ALT/AST) during and for at least several months after discontinuation",
+    "HBV DNA and HBeAg/anti-HBe serology periodically",
+    "HIV status before starting therapy",
+    "Renal function (serum creatinine, CrCl), especially in at-risk patients",
+    "Signs of lactic acidosis and hepatomegaly"
+  ],
+  "counsel": [
+    "Take on an empty stomach, 2 hours after and 2 hours before food, at the same time daily",
+    "Do not stop the medication without consulting your doctor - stopping can cause severe liver flare",
+    "Report unusual muscle pain, trouble breathing, cold/blue limbs, fast heartbeat or stomach pain",
+    "Entecavir controls but does not cure HBV and does not prevent transmission - practice safe precautions",
+    "Get tested for HIV before starting if at risk"
+  ],
+  "pk": [
+    ["Onset", "Viral suppression over weeks of therapy"],
+    ["Peak", "0.5-1.5 hours (plasma)"],
+    ["Half-life", "Plasma ~128-149 hours; intracellular ~15 hours"],
+    ["Duration", "Once-daily dosing maintains suppression"],
+    ["Storage", "Store at 25 C (excursions 15-30 C); oral solution refrigeration not required"]
+  ],
+  "pearls": [
+    "BOXED WARNING: severe acute HBV exacerbation on discontinuation; monitor LFTs for months after stopping",
+    "BOXED WARNING: HIV resistance may develop if used in untreated HIV/HBV co-infection - test for HIV first",
+    "BOXED WARNING: lactic acidosis and severe hepatomegaly with steatosis (including fatal cases) reported with nucleoside analogues",
+    "High genetic barrier to resistance in nucleoside-naive patients; use 1 mg dose in lamivudine resistance",
+    "Must be taken on an empty stomach - food markedly reduces absorption"
+  ],
+  "missed": "Take the missed dose as soon as remembered, then take the next dose at the regularly scheduled time. Do not take two doses at once. Maintain empty-stomach timing.",
+  "overdose": "Limited experience; single doses up to 20 mg and up to 40 mg/day for 14 days were well tolerated. Treat with general supportive measures and monitor. Hemodialysis removes approximately 13% of an entecavir dose over 4 hours.",
+  "refs": [
+    ["FDA Entecavir Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22entecavir%22"],
+    ["FDA DailyMed - Entecavir", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

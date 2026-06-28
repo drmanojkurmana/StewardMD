@@ -1,0 +1,87 @@
+{
+  "generic": "Bacterial Lysate",
+  "cls": "Bacterial immunostimulant (immunomodulator)",
+  "pharm": "Immunostimulant for respiratory infection prophylaxis",
+  "tags": ["immunostimulant", "OM-85", "respiratory infections", "immunomodulator", "bacterial extract"],
+  "quick": [
+    ["Adult dose", "One capsule (e.g., OM-85 7 mg) once daily, typically 10 days/month for 3 months"],
+    ["Meal", "Take on an empty stomach before breakfast"],
+    ["Pregnancy", "Not recommended; safety not established"],
+    ["Lactation", "Not recommended; safety not established"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "No specific adjustment established"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Frequency of respiratory infections; tolerability"]
+  ],
+  "summary": "Bacterial lysates (e.g., OM-85, polyvalent mechanical/chemical lysates) are immunostimulants prepared from inactivated respiratory-pathogen bacteria, used to reduce the frequency of recurrent respiratory tract infections. They are not FDA-approved; information derives from EMA/national SmPC and clinical literature. Taken in monthly cycles, usually on an empty stomach.",
+  "indications": [
+    "Prevention of recurrent respiratory tract infections (adjuvant to standard treatment)",
+    "Reduction in frequency of recurrent acute bronchitis and upper respiratory infections",
+    "Adjunctive immunoprophylaxis in patients prone to recurrent ear, nose and throat or bronchial infections"
+  ],
+  "dosage": [
+    {"c": "Recurrent respiratory infection prophylaxis (adult)", "r": "Standard", "d": "One 7 mg capsule once daily on an empty stomach", "t": "Once daily", "n": "10 consecutive days per month for 3 consecutive months (typical OM-85 course)"},
+    {"c": "Acute/curative phase (adult)", "r": "Treatment", "d": "One 7 mg capsule once daily", "t": "Once daily", "n": "Until symptoms resolve (minimum ~10 days), alongside standard therapy"},
+    {"c": "Pediatric (>=6 months, where licensed)", "r": "Pediatric", "d": "One 3.5 mg pediatric capsule/sachet once daily", "t": "Once daily", "n": "10 days/month for 3 months; follow local label"}
+  ],
+  "admin": [
+    "Swallow the capsule whole on an empty stomach, before breakfast",
+    "For young children, the capsule contents may be dispersed in a drink per the product instructions",
+    "Follow the monthly cyclic schedule (commonly 10 days on per month for 3 months)",
+    "Continue any prescribed antibiotic or standard therapy during acute infections"
+  ],
+  "moa": "Standardized lysate of inactivated respiratory bacteria acts as an immunomodulator: it stimulates gut-associated and systemic immune responses, enhancing macrophage and dendritic-cell activity, increasing secretory IgA, and modulating T-cell responses. This is thought to prime mucosal defenses and reduce the frequency and severity of respiratory infections.",
+  "contra": {
+    "absolute": ["Hypersensitivity to the bacterial lysate or any excipient"],
+    "relative": ["Autoimmune disease (theoretical immune activation)", "Pregnancy and lactation (data lacking)"],
+    "monitor": ["Active acute autoimmune flare", "Concurrent immunosuppressive therapy (possible reduced effect)"]
+  },
+  "preg": "Safety during pregnancy has not been established; use is generally not recommended unless clearly necessary.",
+  "lact": "It is not known whether components pass into breast milk; use during breastfeeding is not recommended.",
+  "renal": "No specific dose adjustment has been established for renal impairment.",
+  "hepatic": "No specific dose adjustment has been established for hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Immunosuppressant drugs - may reduce the immunostimulant effect"],
+    "minor": [],
+    "food": "Take on an empty stomach; food may reduce absorption/effect.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "No characteristic laboratory interference reported."
+  },
+  "se": {
+    "common": ["Gastrointestinal upset (nausea, abdominal pain, diarrhea)", "Headache", "Cough"],
+    "serious": ["Hypersensitivity / allergic reaction", "Skin reactions (rash, urticaria)"],
+    "rare": ["Dyspnea / asthma-like reaction", "Fever", "Angioedema"],
+    "emergency": ["Severe allergic reaction / anaphylaxis (swelling, breathing difficulty)"]
+  },
+  "monitoring": [
+    "Frequency and severity of respiratory tract infections over the course",
+    "Gastrointestinal and dermatologic tolerability",
+    "Signs of allergic reaction"
+  ],
+  "counsel": [
+    "Take on an empty stomach, following the monthly cycle your doctor prescribes",
+    "This medicine helps prevent infections but does not replace antibiotics for an active infection",
+    "Stop and seek care if you develop a rash, swelling or breathing difficulty",
+    "Benefit is seen as fewer infections over months, not immediate symptom relief"
+  ],
+  "pk": [
+    ["Onset", "Immunomodulatory effect develops over weeks of cyclic dosing"],
+    ["Peak", "Not characterized (acts via mucosal/systemic immune priming)"],
+    ["Half-life", "Not applicable (not a conventional small molecule)"],
+    ["Duration", "Effect may persist for months after a treatment course"],
+    ["Storage", "Store below 25 C, protected from moisture"]
+  ],
+  "pearls": [
+    "NOTE: Not FDA-approved; data based on EMA/national SmPC (e.g., OM-85 Broncho-Vaxom/Bronchomunal) and clinical trials, not a US FDA label",
+    "Typical schedule is 10 days per month for 3 consecutive months",
+    "Best used as adjunctive prophylaxis in recurrent respiratory infections, not to treat acute bacterial infection alone",
+    "Marketed products differ (mechanical vs chemical lysates); follow the specific product label"
+  ],
+  "missed": "Take the missed dose when remembered on a treatment day; if it is nearly time for the next day's dose, skip it and continue the schedule. Do not take two doses at once.",
+  "overdose": "No specific antidote; overdose is unlikely to cause serious toxicity. Manage any gastrointestinal or allergic symptoms supportively.",
+  "refs": [
+    ["EMA / national SmPC - Bacterial lysate (OM-85, Broncho-Vaxom/Bronchomunal)", "https://www.ema.europa.eu/"],
+    ["Clinical literature - Bacterial lysates for recurrent respiratory infections", "https://bnf.nice.org.uk/"]
+  ]
+}

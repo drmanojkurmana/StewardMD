@@ -1,0 +1,104 @@
+{
+  "generic": "Zinc (Zinc salts - sulfate, gluconate, acetate)",
+  "cls": "Essential trace element / mineral supplement",
+  "pharm": "An essential trace element and cofactor for hundreds of metalloenzymes and transcription factors; supplemented to treat or prevent zinc deficiency, used in Wilson's disease (zinc acetate) and as an adjunct in acute childhood diarrhea.",
+  "tags": ["Supplement/mineral", "Essential trace element", "Deficiency correction", "Wilson's disease (acetate)", "Diarrhea adjunct"],
+  "quick": [
+    ["Adult dose", "Supplement ~8-11 mg elemental/day (RDA); deficiency: 15-30 mg elemental/day; Wilson's: zinc acetate 50 mg elemental three times daily"],
+    ["Meal", "Take 1 hour before or 2 hours after meals; with food if GI upset (reduces absorption)"],
+    ["Pregnancy", "RDA ~11-12 mg/day; safe in recommended amounts"],
+    ["Lactation", "RDA ~12-13 mg/day; safe in recommended amounts"],
+    ["Renal", "No specific adjustment in usual amounts"],
+    ["Hepatic", "Used in Wilson's hepatic disease; monitor copper status"],
+    ["Alcohol", "No specific interaction; alcohol use can deplete zinc"],
+    ["Monitoring", "Symptoms of deficiency; with high/chronic doses monitor copper status (anemia/neutropenia)"]
+  ],
+  "summary": "Zinc is an essential trace element and a cofactor for over 300 enzymes and many transcription factors, with roles in immune function, wound healing, protein synthesis, growth, and taste/smell. Zinc salts (sulfate, gluconate, acetate) are used to prevent and treat zinc deficiency, as a WHO-recommended adjunct (with oral rehydration) in acute childhood diarrhea, and - as zinc acetate - as maintenance therapy in Wilson's disease, where zinc induces intestinal metallothionein to block copper absorption. Common adverse effects are nausea and a metallic taste; chronic high-dose zinc induces copper deficiency causing anemia and neutropenia. Doses are expressed as elemental zinc. This is a mineral/supplement entry based on reference information.",
+  "indications": [
+    "Prevention and treatment of zinc deficiency",
+    "Adjunctive treatment of acute diarrhea in children (with oral rehydration solution)",
+    "Maintenance treatment of Wilson's disease (zinc acetate)",
+    "Dietary supplementation, including in malabsorption, parenteral nutrition, and increased requirements"
+  ],
+  "dosage": [
+    {"c": "Nutritional requirement (RDA - elemental)", "r": "Adult oral", "d": "11 mg/day (men) and 8 mg/day (women)", "t": "Daily", "n": "Higher in pregnancy (~11-12 mg) and lactation (~12-13 mg)"},
+    {"c": "Zinc deficiency - treatment", "r": "Adult oral", "d": "Approximately 15-30 mg elemental zinc per day", "t": "Daily", "n": "Adjust to response and severity"},
+    {"c": "Acute diarrhea adjunct - children", "r": "Pediatric oral", "d": "20 mg elemental zinc/day for 10-14 days (10 mg/day if <6 months)", "t": "Daily x10-14 days", "n": "WHO/UNICEF recommendation with ORS"},
+    {"c": "Wilson's disease maintenance (zinc acetate)", "r": "Adult oral", "d": "50 mg elemental zinc three times daily", "t": "Three times daily", "n": "On an empty stomach; pediatric/lower doses per weight"}
+  ],
+  "admin": [
+    "Doses are expressed as elemental zinc; check the salt content (e.g., zinc sulfate 220 mg ~ 50 mg elemental)",
+    "Take 1 hour before or 2 hours after meals for best absorption; take with food if it causes nausea (this reduces absorption)",
+    "Separate zinc from iron, calcium, and other mineral supplements and from quinolone/tetracycline antibiotics by 2 hours",
+    "For Wilson's disease, take zinc acetate on an empty stomach and away from food/other medicines",
+    "Introduce gradually if it causes gastric upset"
+  ],
+  "moa": "Zinc is an essential trace element that acts as a structural and catalytic cofactor for numerous metalloenzymes (e.g., carbonic anhydrase, alkaline phosphatase, DNA/RNA polymerases) and as a component of zinc-finger transcription factors, supporting cell division, protein and nucleic acid synthesis, immune function, wound healing, and normal taste and smell. Correcting deficiency restores these functions. In Wilson's disease, pharmacologic zinc (as the acetate) induces intestinal metallothionein, a protein with high affinity for copper; copper bound to metallothionein in enterocytes is not absorbed and is lost when the cells slough into the gut, producing a negative copper balance. In acute diarrhea, zinc supports enterocyte regeneration and immune/epithelial function, shortening duration and reducing severity.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to a zinc salt"
+    ],
+    "relative": [
+      "Existing copper deficiency",
+      "Chronic high-dose use without monitoring (induces copper deficiency)",
+      "Active peptic ulcer disease (gastric irritation from zinc sulfate)"
+    ],
+    "monitor": [
+      "Copper status (serum copper, ceruloplasmin) with high/chronic doses",
+      "Complete blood count (copper-deficiency anemia/neutropenia)",
+      "Gastrointestinal tolerance"
+    ]
+  },
+  "preg": "Zinc at recommended dietary amounts (RDA about 11-12 mg/day) is required and safe in pregnancy. Avoid sustained high supratherapeutic doses, which could impair copper balance.",
+  "lact": "Zinc requirements (RDA about 12-13 mg/day) are met safely during lactation, and zinc is a normal constituent of breast milk. Avoid excessive high-dose supplementation.",
+  "renal": "No specific dose adjustment is needed in renal impairment for usual supplemental amounts.",
+  "hepatic": "Zinc acetate is used in Wilson's disease, which is a hepatic copper-overload disorder; monitor copper status and clinical/hepatic response. No specific adjustment is needed for ordinary supplementation.",
+  "interactions": {
+    "major": [
+      "Copper - chronic high-dose zinc induces copper deficiency (anemia, neutropenia, myeloneuropathy)"
+    ],
+    "moderate": [
+      "Quinolone and tetracycline antibiotics - zinc chelates them, reducing absorption; separate by at least 2 hours",
+      "Penicillamine - reduced efficacy of both; separate dosing",
+      "Iron and calcium supplements - mutually reduce absorption; separate dosing"
+    ],
+    "minor": ["Thiazide diuretics - increase urinary zinc loss with long-term use"],
+    "food": "Food, especially phytate-rich (whole grains, legumes), reduces zinc absorption; dairy/calcium also reduces it.",
+    "alcohol": "No direct interaction; chronic alcohol use lowers zinc status.",
+    "diagnostics": "High-dose zinc can lower serum copper and ceruloplasmin; monitor these in chronic therapy."
+  },
+  "se": {
+    "common": ["Nausea", "Metallic taste", "Abdominal pain / gastric irritation", "Vomiting (especially zinc sulfate on empty stomach)"],
+    "serious": ["Copper-deficiency anemia and neutropenia (chronic high-dose use)", "Sideroblastic anemia / myeloneuropathy (severe copper deficiency)"],
+    "rare": ["Headache", "Gastric ulceration/hemorrhage (high doses)", "Reduced immune function with excessive intake"],
+    "emergency": ["Severe corrosive gastrointestinal injury from massive acute zinc salt ingestion"]
+  },
+  "monitoring": ["Resolution of deficiency signs (skin, hair, taste, wound healing)", "Serum copper and ceruloplasmin with high-dose or long-term use", "Complete blood count for copper-deficiency anemia/neutropenia", "Gastrointestinal tolerance", "Copper status and 24-hour urinary copper in Wilson's disease"],
+  "counsel": [
+    "Take zinc on an empty stomach if you can; if it upsets your stomach, take it with food",
+    "Keep zinc separate from iron, calcium, and certain antibiotics (quinolones, tetracyclines) by a couple of hours",
+    "Do not take high doses for long periods without medical advice - too much zinc can cause copper deficiency",
+    "A metallic taste or mild nausea is common when starting",
+    "For a child with diarrhea, give zinc together with oral rehydration solution for the full 10-14 days even after the diarrhea stops"
+  ],
+  "pk": [
+    ["Onset", "Repletion and clinical response develop over days to weeks"],
+    ["Peak", "Absorbed from the small intestine; absorption reduced by food/phytates"],
+    ["Half-life", "Homeostatically regulated; body stores turn over slowly"],
+    ["Duration", "Maintained with regular intake; excess excreted mainly in feces"],
+    ["Storage", "Store at room temperature in a dry place, container tightly closed"]
+  ],
+  "pearls": [
+    "Mineral/supplement entry: doses are given as ELEMENTAL zinc - check the salt (e.g., zinc sulfate 220 mg ~ 50 mg elemental)",
+    "Chronic high-dose zinc causes copper deficiency (anemia, neutropenia, myeloneuropathy) - monitor copper",
+    "WHO/UNICEF recommend zinc 20 mg/day for 10-14 days with ORS in childhood acute diarrhea",
+    "Zinc acetate treats Wilson's disease by inducing intestinal metallothionein that blocks copper absorption",
+    "Separate from iron/calcium and from quinolone/tetracycline antibiotics to avoid chelation"
+  ],
+  "missed": "If you miss a dose, take it when you remember; if it is almost time for the next dose, skip the missed one and continue - do not double up. For Wilson's disease zinc acetate, keep doses on an empty stomach and resume the regular schedule.",
+  "overdose": "Acute ingestion of large amounts of zinc salts causes nausea, vomiting, abdominal pain, and corrosive gastrointestinal injury; chronic excess produces copper deficiency with anemia and neutropenia. Management is supportive: stop zinc, treat GI symptoms, maintain hydration, and correct copper deficiency; chelation is rarely needed except for very large acute ingestions.",
+  "refs": [
+    ["NIH Office of Dietary Supplements - Zinc Fact Sheet", "https://ods.od.nih.gov/factsheets/Zinc-HealthProfessional/"],
+    ["WHO/UNICEF - Zinc in management of childhood diarrhoea", "https://www.who.int/publications/i/item/WHO-FCH-CAH-04.7"]
+  ]
+}

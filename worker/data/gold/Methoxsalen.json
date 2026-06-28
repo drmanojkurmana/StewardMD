@@ -1,0 +1,92 @@
+{
+  "generic": "Methoxsalen",
+  "cls": "Psoralen photosensitizing agent",
+  "pharm": "Photochemotherapy agent (PUVA) / antineoplastic photopheresis adjunct",
+  "tags": ["psoralen", "PUVA", "psoriasis", "vitiligo", "cutaneous T-cell lymphoma", "photosensitizer", "photopheresis"],
+  "quick": [
+    ["Adult dose", "Oral PUVA: 10-70 mg by weight, 1.5-2 h before UVA; UVADEX: treatment volume x 0.017 mL extracorporeal"],
+    ["Meal", "Oral: take with low-fat food or milk to reduce GI upset"],
+    ["Pregnancy", "May cause fetal harm; avoid, advise against pregnancy"],
+    ["Lactation", "Excretion in milk unknown; use caution"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "Use caution; metabolized hepatically"],
+    ["Alcohol", "Avoid hepatotoxic agents; alcohol may add risk"],
+    ["Monitoring", "Eye exams, skin/photosensitivity, CBC and LFTs, BP during photopheresis"]
+  ],
+  "summary": "Methoxsalen is a psoralen that, after photoactivation by long-wave UVA light, forms DNA adducts inhibiting DNA synthesis and cell proliferation. Oral methoxsalen plus UVA (PUVA) treats severe recalcitrant psoriasis and vitiligo; the UVADEX sterile solution is used extracorporeally with the THERAKOS photopheresis system for palliation of cutaneous T-cell lymphoma. Strict photoprotection of skin and eyes is mandatory.",
+  "indications": [
+    "Symptomatic control of severe, recalcitrant, disabling psoriasis unresponsive to other therapy (oral PUVA, biopsy-confirmed)",
+    "Repigmentation of idiopathic vitiligo (oral methoxsalen with UVA)",
+    "Palliative treatment of skin manifestations of cutaneous T-cell lymphoma unresponsive to other treatment (UVADEX extracorporeal photopheresis)"
+  ],
+  "dosage": [
+    {"c": "Psoriasis (oral PUVA)", "r": "Weight-based", "d": "<30 kg: 10 mg; 30-50 kg: 20 mg; 51-65 kg: 30 mg; 66-80 kg: 40 mg; 81-90 kg: 50 mg; >90 kg: 60-70 mg", "t": "1.5-2 h before each UVA exposure", "n": "Take with low-fat food/milk; not more than every other day"},
+    {"c": "Vitiligo (oral)", "r": "Standard", "d": "20 mg daily, 2-4 h before measured UVA or sunlight exposure", "t": "Per treatment schedule", "n": "Determine minimal phototoxic/erythema dose"},
+    {"c": "CTCL (UVADEX photopheresis)", "r": "Extracorporeal", "d": "Treatment volume x 0.017 = mL UVADEX injected into recirculation bag", "t": "Per photopheresis schedule", "n": "Do not inject directly into patient; single-use vial (20 mcg/mL)"}
+  ],
+  "admin": [
+    "Oral capsules taken 1.5-2 hours before UVA exposure with low-fat food or milk",
+    "Establish minimum phototoxic dose and peak phototoxic time before photochemotherapy",
+    "UVADEX is for extracorporeal use only via the THERAKOS CELLEX system - never inject directly into patient",
+    "Do not dilute UVADEX; discard any drawn into a plastic syringe for more than 1 hour",
+    "Wear UVA-absorbing wrap-around sunglasses and protect skin for 24 hours after each treatment"
+  ],
+  "moa": "The exact mechanism is unknown. Methoxsalen, upon photoactivation by UVA, forms covalent monofunctional and bifunctional (cross-link) adducts with DNA, inhibiting DNA synthesis, cell division and epidermal turnover. In photopheresis, the photoactivated leukocyte mixture is reinfused and may trigger an immune-mediated response against malignant T-cells.",
+  "contra": {
+    "absolute": ["Hypersensitivity to methoxsalen or other psoralens", "Light-sensitive diseases (lupus erythematosus, porphyrias, xeroderma pigmentosum, albinism)", "Aphakia (markedly increased retinal damage risk)", "Melanoma or history of melanoma; invasive squamous cell carcinoma"],
+    "relative": ["Prior skin cancer or arsenic/ionizing radiation exposure", "Cataract", "Concurrent photosensitizing drugs", "Pregnancy"],
+    "monitor": ["Cumulative UVA exposure", "Ophthalmologic status", "Skin for premalignant/malignant changes"]
+  },
+  "preg": "Methoxsalen may cause fetal harm; animal studies showed fetal mortality, resorptions and skeletal malformations. There are no adequate well-controlled studies in pregnant women. Women of childbearing potential should avoid pregnancy; apprise of fetal hazard if used.",
+  "lact": "It is not known whether methoxsalen is excreted in human milk. Because many drugs are excreted in milk, exercise caution when administered to a nursing woman.",
+  "renal": "No specific renal dose adjustment is established in the labeling.",
+  "hepatic": "Methoxsalen is metabolized by the liver; use with caution in hepatic impairment and avoid additional hepatotoxic agents.",
+  "interactions": {
+    "major": ["Concomitant photosensitizing agents (anthralin, coal tar, griseofulvin, phenothiazines, nalidixic acid, sulfonamides, tetracyclines, thiazides, halogenated salicylanilides) - markedly increased photosensitivity/burn risk"],
+    "moderate": ["Staining dyes (methylene blue, toluidine blue, rose bengal, methyl orange) - photosensitivity", "Prior or concurrent ionizing radiation, arsenic, tar/UVB - increased skin cancer risk"],
+    "minor": ["Foods high in furocoumarins (limes, figs, parsley, celery, mustard) may add to photosensitivity"],
+    "food": "Take oral doses with low-fat food or milk to reduce nausea; bioavailability and onset vary by formulation.",
+    "alcohol": "Avoid alcohol and other hepatotoxins during therapy.",
+    "diagnostics": "Monitor CBC, LFTs and antinuclear antibody where indicated during long-term PUVA."
+  },
+  "se": {
+    "common": ["Nausea (oral)", "Erythema / phototoxic burn", "Pruritus", "Photosensitivity reaction", "Dysgeusia", "Hypotension (photopheresis, related to extracorporeal volume shifts)"],
+    "serious": ["Cutaneous squamous cell carcinoma with PUVA (incidence ~17.6x expected)", "Cataract formation", "Severe phototoxic burns"],
+    "rare": ["Hypersensitivity reactions including anaphylaxis", "Pyrexia", "Arrhythmia during photopheresis in patients with cardiac disease"],
+    "emergency": ["Anaphylaxis", "Severe blistering phototoxic burn", "Symptomatic hypotension during photopheresis"]
+  },
+  "monitoring": [
+    "Ophthalmologic examination at baseline and periodically (cataract/retinal risk)",
+    "Skin examination for actinic damage and skin cancers during and after PUVA",
+    "CBC, liver and renal function periodically with long-term therapy",
+    "Blood pressure and cardiovascular status during photopheresis sessions"
+  ],
+  "counsel": [
+    "Wear UVA-blocking wrap-around sunglasses for 24 hours after each dose, indoors and out",
+    "Cover skin or use SPF 15+ sunblock and avoid additional sun/UV exposure after treatment",
+    "Take oral capsules at the exact interval before UVA prescribed, with low-fat food or milk",
+    "Report eye problems, severe skin reactions or new skin lesions promptly",
+    "Avoid other photosensitizing drugs and furocoumarin-rich foods",
+    "Use effective contraception and avoid pregnancy during therapy"
+  ],
+  "pk": [
+    ["Onset", "Photosensitization onset ~1-2 h after oral capsule"],
+    ["Peak", "Peak photosensitivity ~1.5-2.1 h (formulation dependent)"],
+    ["Half-life", "Approximately 2 hours (oral)"],
+    ["Duration", "Photosensitivity persists ~8-12 h; protect 24 h"],
+    ["Storage", "Store at 15-30 C (59-86 F); UVADEX in amber glass vials"]
+  ],
+  "pearls": [
+    "PUVA (oral methoxsalen + UVA) is carcinogenic - cumulative squamous cell carcinoma risk is dose-related",
+    "UVADEX dose for each photopheresis treatment = treatment volume x 0.017 mL; never inject into patient",
+    "Strict 24-hour eye and skin photoprotection after every dose is essential",
+    "Aphakia is an absolute contraindication due to retinal damage risk",
+    "Concomitant photosensitizing drugs sharply raise burn risk"
+  ],
+  "missed": "For oral PUVA, doses are tied to scheduled UVA treatments - do not take an extra dose to make up a missed one; reschedule the supervised treatment with the prescriber. Never take methoxsalen without the planned, controlled UVA exposure.",
+  "overdose": "In the event of overdose, keep the patient in a darkened room for at least 24 hours and provide supportive care. Avoid all UV/sunlight exposure until photosensitivity resolves.",
+  "refs": [
+    ["FDA Methoxsalen (UVADEX) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22methoxsalen%22"],
+    ["FDA DailyMed - Methoxsalen (Oxsoralen/8-MOP/UVADEX)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

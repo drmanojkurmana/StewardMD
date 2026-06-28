@@ -1,0 +1,94 @@
+{
+  "generic": "Valproic Acid",
+  "cls": "Broad-spectrum antiepileptic (fatty acid derivative)",
+  "pharm": "Anticonvulsant / mood stabilizer / migraine prophylaxis",
+  "tags": ["epilepsy", "absence seizures", "complex partial seizures", "bipolar", "migraine prophylaxis", "boxed warning", "teratogen"],
+  "quick": [
+    ["Adult dose", "Start 10-15 mg/kg/day PO; titrate; max 60 mg/kg/day"],
+    ["Meal", "May take with food to reduce GI upset"],
+    ["Pregnancy", "Contraindicated for migraine; teratogenic - avoid, neural tube defects/low IQ"],
+    ["Lactation", "Excreted in milk; generally considered compatible with monitoring"],
+    ["Renal", "Use caution; protein binding altered, monitor free levels"],
+    ["Hepatic", "Contraindicated in hepatic disease/dysfunction"],
+    ["Alcohol", "Avoid; additive CNS depression and hepatic risk"],
+    ["Monitoring", "LFTs, ammonia, CBC/platelets, valproate level, signs of pancreatitis"]
+  ],
+  "summary": "Valproic acid is a broad-spectrum antiepileptic used for absence and complex partial seizures, bipolar disorder and migraine prophylaxis. It carries boxed warnings for hepatotoxicity (highest risk in children under 2), teratogenicity (neural tube defects, decreased IQ, neurodevelopmental disorders) and life-threatening pancreatitis. Dosing starts at 10-15 mg/kg/day and is titrated to effect or 60 mg/kg/day. Requires monitoring of LFTs, platelets, ammonia and drug levels.",
+  "indications": [
+    "Monotherapy and adjunctive therapy of complex partial seizures",
+    "Sole and adjunctive therapy of simple and complex absence seizures",
+    "Adjunctive therapy in patients with multiple seizure types that include absence seizures",
+    "(Divalproex forms also indicated for acute mania in bipolar disorder and migraine prophylaxis)"
+  ],
+  "dosage": [
+    {"c": "Complex partial seizures (>=10 yr)", "r": "Standard", "d": "Initial 10-15 mg/kg/day; titrate by 5-10 mg/kg/week", "t": "Divided doses (or BID)", "n": "Target 1000-2500 mg/day; max 60 mg/kg/day"},
+    {"c": "Absence seizures", "r": "Standard", "d": "Initial 15 mg/kg/day; increase by 5-10 mg/kg/week", "t": "Divided doses", "n": "Max 60 mg/kg/day; safety above not established"},
+    {"c": "Elderly", "r": "Reduced", "d": "Lower starting dose, slower titration", "t": "Divided doses", "n": "Reduced clearance and protein binding; monitor intake"},
+    {"c": "Maximum", "r": "Ceiling", "d": "60 mg/kg/day", "t": "-", "n": "If total >250 mg/day, give in divided doses"}
+  ],
+  "admin": [
+    "Administer orally with food if GI upset occurs; swallow capsules/tablets whole (do not chew delayed-release)",
+    "Initiate at low mg/kg dose and titrate at weekly intervals to response or tolerability",
+    "Obtain baseline liver function tests and monitor frequently, especially in the first 6 months",
+    "Use as sole agent and with extreme caution in children under 2 years (highest hepatotoxicity risk)",
+    "Measure ammonia level if unexplained lethargy, vomiting or mental status change occurs"
+  ],
+  "moa": "Valproic acid dissociates to the valproate ion in the GI tract. Its precise antiepileptic mechanism is not established but is thought to involve increased brain concentrations of gamma-aminobutyric acid (GABA) and modulation of voltage-gated sodium and calcium (T-type) channels, reducing neuronal excitability.",
+  "contra": {
+    "absolute": ["Hepatic disease or significant hepatic dysfunction", "Known mitochondrial disorders from POLG mutations (e.g., Alpers-Huttenlocher syndrome)", "Suspected POLG-related disorder in children under 2 years", "Urea cycle disorders", "Known hypersensitivity", "Pregnancy / non-contracepting women of childbearing potential (migraine prophylaxis)"],
+    "relative": ["Women of childbearing potential for epilepsy/bipolar unless other therapies inadequate", "Thrombocytopenia or coagulopathy", "History of pancreatitis", "Concomitant topiramate (hyperammonemia/hypothermia)"],
+    "monitor": ["Liver function", "Platelet count and coagulation", "Serum ammonia", "Valproate plasma level"]
+  },
+  "preg": "Teratogenic. Causes neural tube defects, decreased IQ, neurodevelopmental disorders and other major congenital malformations, occurring very early in pregnancy. Contraindicated for migraine prophylaxis in pregnancy. For epilepsy/bipolar, do not use in pregnant women or women of childbearing potential unless other treatments have failed; use effective contraception. Folic acid supplementation is advised.",
+  "lact": "Valproate is excreted in breast milk at low concentrations; it is generally considered compatible with breastfeeding. Monitor the infant for jaundice, unusual drowsiness, poor feeding and bleeding.",
+  "renal": "No formal dose adjustment, but reduced renal function alters protein binding and increases free valproate; monitor free (unbound) levels and clinical response. Valproate is dialyzable.",
+  "hepatic": "Contraindicated in hepatic disease or significant hepatic dysfunction. Fatal hepatotoxicity can occur, usually within the first 6 months; monitor liver tests closely and discontinue for suspected/diagnosed significant hepatic dysfunction.",
+  "interactions": {
+    "major": ["Carbapenems (meropenem, imipenem, ertapenem) - markedly reduce valproate levels and seizure control; avoid", "Lamotrigine - valproate doubles lamotrigine levels (serious rash/SJS risk); reduce lamotrigine dose", "Topiramate - hyperammonemia, encephalopathy and hypothermia", "Cholestyramine - reduces valproate absorption"],
+    "moderate": ["Enzyme-inducing antiepileptics (phenytoin, phenobarbital, carbamazepine) - altered levels of both drugs", "Aspirin - displaces valproate, raising free level", "Rufinamide, ethosuximide, clonazepam, diazepam - altered levels", "Warfarin - displacement; monitor coagulation"],
+    "minor": ["Felbamate - increases valproate concentration", "Antibiotics altering gut flora"],
+    "food": "May be taken with food to reduce GI irritation; food can delay but not reduce absorption.",
+    "alcohol": "Avoid; additive CNS depression and increased hepatotoxicity risk.",
+    "diagnostics": "May cause false-positive urine ketone tests; alters thyroid function tests; can elevate ammonia and liver enzymes."
+  },
+  "se": {
+    "common": ["Nausea, vomiting, dyspepsia", "Somnolence, dizziness", "Tremor", "Weight gain", "Alopecia", "Thrombocytopenia (dose-related)", "Asthenia"],
+    "serious": ["Hepatotoxicity / fatal hepatic failure", "Pancreatitis (including hemorrhagic/fatal)", "Hyperammonemic encephalopathy", "Teratogenicity / fetal harm"],
+    "rare": ["DRESS / multi-organ hypersensitivity", "Bone marrow suppression, bleeding disorders", "Hypothermia", "Polycystic ovary-like syndrome"],
+    "emergency": ["Acute hepatic failure (malaise, vomiting, facial edema, loss of seizure control)", "Acute pancreatitis (severe abdominal pain)", "Hyperammonemic encephalopathy (altered mental status)", "DRESS / severe hypersensitivity", "Suicidal ideation or behavior"]
+  },
+  "monitoring": [
+    "Liver function tests at baseline and frequently, especially in first 6 months",
+    "CBC with platelets and coagulation tests before therapy and periodically",
+    "Serum ammonia if lethargy, vomiting or mental status changes",
+    "Valproate plasma levels (typical therapeutic 50-100 mcg/mL) and free level in renal/hepatic impairment",
+    "Signs/symptoms of pancreatitis; pregnancy status in women of childbearing potential"
+  ],
+  "counsel": [
+    "Take every day as prescribed; report jaundice, severe abdominal pain, unusual bruising/bleeding or confusion immediately",
+    "Women of childbearing potential: use effective contraception and discuss serious fetal risks before/during use",
+    "Do not stop abruptly (risk of seizures); avoid alcohol",
+    "Report new or worsening depression, agitation or thoughts of self-harm",
+    "Take folic acid if of childbearing potential; carry seizure/medication information"
+  ],
+  "pk": [
+    ["Onset", "Anticonvulsant effect over days as levels build"],
+    ["Peak", "1-4 hours (formulation dependent)"],
+    ["Half-life", "9-16 hours (shorter with enzyme inducers)"],
+    ["Duration", "Steady state in 1-4 days; BID dosing common"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "BOXED WARNINGS: hepatotoxicity (highest in children <2), teratogenicity (neural tube defects, low IQ), and life-threatening pancreatitis",
+    "Carbapenems can drastically lower valproate levels - avoid combination",
+    "Valproate doubles lamotrigine levels - halve lamotrigine dosing and titrate slowly",
+    "Check ammonia for unexplained encephalopathy even with normal LFTs; topiramate increases this risk",
+    "Highly protein bound - measure free level when albumin is low or in renal failure"
+  ],
+  "missed": "If a dose is missed, take it as soon as possible unless it is almost time for the next dose; in that case skip the missed dose. Do not double the next dose. Maintaining steady levels is important for seizure control.",
+  "overdose": "Overdose may cause somnolence, heart block, deep coma and hypernatremia; fatalities have occurred. Provide supportive care with attention to urine output. Hemodialysis (or hemodialysis plus hemoperfusion) can significantly remove drug given high free fraction. Naloxone has reversed CNS depression but may also reverse antiepileptic effect - use cautiously in epilepsy. L-carnitine may help hyperammonemia.",
+  "refs": [
+    ["FDA Valproic Acid Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22valproic+acid%22"],
+    ["FDA DailyMed - Valproic Acid", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

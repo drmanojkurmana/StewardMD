@@ -1,0 +1,112 @@
+{
+  "generic": "Osimertinib",
+  "cls": "Antineoplastic - third-generation EGFR tyrosine kinase inhibitor",
+  "pharm": "Irreversible inhibitor of mutant epidermal growth factor receptor (EGFR), including sensitizing mutations (exon 19 deletions, L858R) and the T790M resistance mutation, with relative sparing of wild-type EGFR; used in EGFR-mutated non-small cell lung cancer.",
+  "tags": ["Rx only", "Oral EGFR-TKI (3rd generation)", "EGFR-mutant NSCLC", "Cardiomyopathy/QT prolongation", "ILD/pneumonitis", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "80 mg orally once daily"],
+    ["Meal", "Take with or without food at the same time each day"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 2 weeks after the last dose"],
+    ["Renal", "No adjustment in mild-moderate; limited data in severe/ESRD"],
+    ["Hepatic", "No adjustment in mild-moderate; not studied in severe"],
+    ["Alcohol", "No specific interaction; limit due to additive effects"],
+    ["Monitoring", "LVEF/ECG (QTc), pulmonary symptoms (ILD), CBC, pregnancy status"]
+  ],
+  "summary": "Osimertinib is a third-generation, irreversible oral EGFR tyrosine kinase inhibitor used to treat EGFR mutation-positive non-small cell lung cancer (NSCLC). It is active against common sensitizing EGFR mutations (exon 19 deletions and exon 21 L858R) and against the T790M resistance mutation, while relatively sparing wild-type EGFR, which lessens skin and GI toxicity compared with earlier EGFR-TKIs. Approved uses include first-line treatment of metastatic EGFR-mutated NSCLC, treatment of T790M-positive NSCLC after progression on prior EGFR-TKI therapy, adjuvant therapy after tumor resection in EGFR-mutated NSCLC, and (combined with chemotherapy) first-line metastatic disease, plus unresectable stage III disease after chemoradiation. The standard dose is 80 mg once daily. Important serious risks include interstitial lung disease/pneumonitis, QTc prolongation, cardiomyopathy with decreased left ventricular ejection fraction, keratitis, erythema multiforme/Stevens-Johnson syndrome, aplastic anemia, and embryo-fetal toxicity. It is a CYP3A substrate; strong CYP3A inducers reduce exposure.",
+  "indications": [
+    "First-line treatment of metastatic NSCLC with EGFR exon 19 deletions or exon 21 L858R substitution mutations",
+    "Treatment of metastatic EGFR T790M mutation-positive NSCLC with progression on or after EGFR-TKI therapy",
+    "Adjuvant treatment after tumor resection of EGFR exon 19 deletion or L858R mutation-positive NSCLC",
+    "First-line treatment of locally advanced/metastatic EGFR-mutated NSCLC in combination with platinum-based chemotherapy",
+    "Treatment of locally advanced, unresectable (stage III) EGFR-mutated NSCLC without progression during or after chemoradiation"
+  ],
+  "dosage": [
+    {"c": "Standard treatment (all indications)", "r": "Adult oral", "d": "80 mg once daily", "t": "Once daily", "n": "Continue until disease progression or unacceptable toxicity; for adjuvant use treat for up to 3 years"},
+    {"c": "Dose reduction (toxicity)", "r": "Adult oral", "d": "40 mg once daily", "t": "Once daily", "n": "Reduce after interruption for adverse reactions; discontinue if not tolerated at 40 mg"},
+    {"c": "Difficulty swallowing", "r": "Adult oral", "d": "Disperse tablet in ~60 mL (4 tablespoons) of non-carbonated water", "t": "Per dosing schedule", "n": "Stir, drink immediately, rinse container with water and drink; do not crush, heat, or use other liquids"},
+    {"c": "With unavoidable strong CYP3A inducer", "r": "Adult oral", "d": "160 mg once daily (if strong inducer cannot be avoided)", "t": "Once daily", "n": "Resume 80 mg 3 weeks after discontinuing the inducer; avoid strong inducers where possible"}
+  ],
+  "admin": [
+    "Take one tablet by mouth once daily, with or without food, at approximately the same time each day",
+    "Swallow tablets whole with water; do not crush, split, or chew",
+    "For patients unable to swallow, disperse the tablet in about 60 mL of non-carbonated water only, stir until dispersed, and drink immediately, then rinse and drink residue",
+    "If a dose is missed by more than ~12 hours, skip it and take the next dose at the scheduled time",
+    "Obtain baseline and periodic ECG and assess LVEF; monitor for pulmonary, cardiac, and dermatologic toxicity"
+  ],
+  "moa": "Osimertinib is a third-generation tyrosine kinase inhibitor that binds irreversibly (covalently) to a cysteine residue (C797) in the ATP-binding site of certain mutant forms of the epidermal growth factor receptor (EGFR). It potently and selectively inhibits EGFR bearing sensitizing mutations (exon 19 deletions and exon 21 L858R) and the T790M resistance mutation, while having substantially lower activity against wild-type EGFR. By blocking EGFR autophosphorylation and downstream signaling (RAS/RAF/MEK/ERK and PI3K/AKT pathways), it inhibits tumor cell proliferation and survival in EGFR-mutant NSCLC. Two active circulating metabolites (AZ5104 and AZ7550) contribute to activity. Its relative sparing of wild-type EGFR underlies a comparatively lower incidence of rash and diarrhea than earlier EGFR-TKIs.",
+  "contra": {
+    "absolute": [
+      "Known serious hypersensitivity to osimertinib or any excipient"
+    ],
+    "relative": [
+      "Pregnancy and breastfeeding (embryo-fetal toxicity; avoid)",
+      "History or risk of QT prolongation (congenital long QT, electrolyte abnormalities, other QT-prolonging drugs)",
+      "Cardiac dysfunction or risk factors for reduced LVEF/heart failure",
+      "Prior or active interstitial lung disease/pneumonitis",
+      "Concomitant strong CYP3A inducers"
+    ],
+    "monitor": [
+      "Pulmonary symptoms for interstitial lung disease/pneumonitis",
+      "ECG for QTc prolongation and electrolytes (potassium, magnesium)",
+      "Left ventricular ejection fraction (echocardiography/MUGA)",
+      "Skin and mucosa for erythema multiforme/Stevens-Johnson syndrome and ophthalmic symptoms (keratitis)",
+      "Complete blood count for aplastic anemia/cytopenias"
+    ]
+  },
+  "preg": "Based on its mechanism and animal findings, osimertinib can cause fetal harm including embryolethality and malformations. Verify pregnancy status before starting in females of reproductive potential and advise effective contraception during treatment and for 6 weeks after the last dose. Males with female partners of reproductive potential should use effective contraception during treatment and for 4 months after the final dose.",
+  "lact": "There are no data on the presence of osimertinib in human milk or its effects on the breastfed child or milk production. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 2 weeks after the final dose.",
+  "renal": "No dose adjustment is recommended for mild to moderate renal impairment. There are limited data in severe renal impairment and no data in end-stage renal disease; use with caution and monitor closely.",
+  "hepatic": "No dose adjustment is recommended for mild (Child-Pugh A) or moderate (Child-Pugh B) hepatic impairment. Osimertinib has not been studied in severe hepatic impairment (Child-Pugh C); use with caution if at all.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inducers (e.g., rifampin, phenytoin, carbamazepine, St John's wort) - significantly reduce osimertinib exposure; avoid, or if unavoidable increase dose to 160 mg daily",
+      "QT-prolonging drugs (e.g., antiarrhythmics, certain antipsychotics, methadone, some antibiotics) - additive risk of QT prolongation and torsades; avoid or monitor ECG closely",
+      "Sensitive BCRP or P-gp substrates with narrow therapeutic index (e.g., rosuvastatin) - osimertinib may increase their exposure; monitor"
+    ],
+    "moderate": [
+      "Drugs that lower potassium/magnesium (diuretics) - worsen QT risk; correct electrolytes",
+      "Other agents associated with pneumonitis or cardiotoxicity - additive organ toxicity"
+    ],
+    "minor": ["Strong CYP3A inhibitors had no clinically meaningful effect on exposure - no dose change needed"],
+    "food": "May be taken with or without food; no clinically significant food effect.",
+    "alcohol": "No specific interaction is described; limit alcohol due to additive constitutional effects.",
+    "diagnostics": "Monitor ECG (QTc) and serum electrolytes; assess LVEF by echocardiography or MUGA at baseline and periodically; monitor blood counts."
+  },
+  "se": {
+    "common": ["Diarrhea", "Rash/acneiform dermatitis", "Dry skin", "Paronychia (nail changes)", "Stomatitis", "Fatigue", "Decreased appetite", "Nausea", "Cough", "Leukopenia, lymphopenia, thrombocytopenia, anemia"],
+    "serious": ["Interstitial lung disease/pneumonitis", "QTc prolongation and torsades de pointes", "Cardiomyopathy with decreased left ventricular ejection fraction / heart failure", "Erythema multiforme and Stevens-Johnson syndrome", "Keratitis", "Aplastic anemia"],
+    "rare": ["Cutaneous vasculitis", "Severe/fatal interstitial lung disease", "Severe/fatal aplastic anemia"],
+    "emergency": ["New or worsening cough, dyspnea, or fever (pneumonitis)", "Syncope, palpitations, or irregular heartbeat (QT prolongation/arrhythmia)", "Symptoms of heart failure (breathlessness, edema, fatigue)", "Severe blistering/peeling skin rash or mucosal involvement (SJS/erythema multiforme)", "Severe bleeding, bruising, or infection (aplastic anemia)"]
+  },
+  "monitoring": ["Pulmonary symptoms; withhold and evaluate for ILD/pneumonitis, and permanently discontinue if confirmed", "ECG and electrolytes (potassium, magnesium) for QTc prolongation, especially with risk factors or QT-prolonging drugs", "Assessment of left ventricular ejection fraction at baseline and periodically in patients with cardiac risk factors", "Skin and mucous membranes for severe cutaneous reactions; ophthalmologic evaluation for new or worsening eye symptoms", "Complete blood count; pregnancy status before starting in females of reproductive potential"],
+  "counsel": [
+    "Take one tablet once a day, with or without food, at about the same time; swallow whole or disperse only in plain water if you cannot swallow it",
+    "If you miss a dose and it has been less than 12 hours, take it; otherwise skip it and take the next dose on time - do not double up",
+    "Report any new or worsening cough, shortness of breath, or fever right away (possible lung inflammation)",
+    "Tell your team about fainting, palpitations, swelling of the legs, or worsening breathlessness (heart rhythm or heart muscle effects)",
+    "Report severe rash, blistering, mouth sores, or new eye pain/vision changes promptly",
+    "Use effective contraception and do not breastfeed; tell your doctor about all other medicines, especially those affecting heart rhythm"
+  ],
+  "pk": [
+    ["Onset", "Antitumor responses develop over weeks; target inhibition is sustained with daily dosing"],
+    ["Peak", "Median plasma Tmax ~6 hours after oral dosing"],
+    ["Half-life", "Mean elimination half-life ~48 hours"],
+    ["Duration", "Steady state reached in approximately 15 days with once-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Third-generation EGFR-TKI active against both sensitizing mutations AND the T790M resistance mutation, with relative wild-type EGFR sparing (less rash/diarrhea than earlier TKIs)",
+    "Cardiac toxicity: monitor QTc/electrolytes and assess LVEF - withhold or discontinue for symptomatic heart failure or marked LVEF decline",
+    "ILD/pneumonitis can be fatal - withhold for any new respiratory symptoms and permanently discontinue if pneumonitis is confirmed",
+    "Watch for severe cutaneous reactions (erythema multiforme, SJS), keratitis (urgent ophthalmology referral), and rare aplastic anemia",
+    "CYP3A substrate - avoid strong inducers; if unavoidable, increase dose to 160 mg daily and revert to 80 mg three weeks after stopping the inducer",
+    "Embryo-fetal toxicity - confirm contraception during and for 6 weeks (females) / 4 months (males) after treatment; do not breastfeed"
+  ],
+  "missed": "If you miss a dose of osimertinib and it has been less than about 12 hours, take the missed dose as soon as you remember. If more than 12 hours have passed, skip the missed dose and take your next dose at the regular time. Do not take two doses at once.",
+  "overdose": "There is no specific treatment for osimertinib overdose. Symptoms are not well defined but may reflect exaggerated adverse effects. Manage with supportive care, including cardiac monitoring (ECG for QT prolongation) and correction of electrolyte abnormalities, and monitor for pulmonary, cardiac, and hematologic toxicity.",
+  "refs": [
+    ["FDA Label - Osimertinib / TAGRISSO (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22osimertinib%22"],
+    ["DailyMed - Osimertinib (TAGRISSO)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=osimertinib"]
+  ]
+}

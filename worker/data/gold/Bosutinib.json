@@ -1,0 +1,112 @@
+{
+  "generic": "Bosutinib",
+  "cls": "BCR-ABL tyrosine kinase inhibitor (TKI)",
+  "pharm": "Antineoplastic - targeted kinase inhibitor",
+  "tags": ["TKI", "CML", "BCR-ABL", "Philadelphia chromosome", "leukemia", "Src kinase", "oncology"],
+  "quick": [
+    ["Adult dose", "500 mg orally once daily with food (resistant/intolerant CML); may escalate by 100 mg increments to max 600 mg/day"],
+    ["Meal", "Take with food; swallow whole, do not crush or chew"],
+    ["Pregnancy", "Can cause fetal harm (embryo-fetal toxicity); use effective contraception"],
+    ["Lactation", "Avoid breastfeeding during and for a period after treatment"],
+    ["Renal", "Reduce dose in moderate-severe impairment (CrCl <50); monitor renal function"],
+    ["Hepatic", "Baseline hepatic impairment: reduce starting dose to 200 mg once daily"],
+    ["Alcohol", "Avoid heavy use - potential additive hepatic stress"],
+    ["Monitoring", "CBC, liver enzymes (monthly x3 months), renal function, fluid status, ECG/CV"]
+  ],
+  "summary": "Bosutinib is an oral tyrosine kinase inhibitor of BCR-ABL and Src-family kinases used to treat Philadelphia chromosome-positive chronic myelogenous leukemia (chronic, accelerated, or blast phase) that is resistant or intolerant to prior therapy. Hallmark toxicities are gastrointestinal (especially diarrhea) and hepatotoxicity, along with myelosuppression, fluid retention, cardiovascular and renal effects. It must be taken with food, and liver enzymes and blood counts require close monitoring.",
+  "indications": [
+    "Chronic phase Ph+ chronic myelogenous leukemia (CML) resistant or intolerant to prior therapy (adults)",
+    "Accelerated or blast phase Ph+ CML with resistance or intolerance to prior therapy (adults)"
+  ],
+  "dosage": [
+    {"c": "Resistant/intolerant CP, AP, or BP Ph+ CML", "r": "Adult", "d": "500 mg orally once daily with food", "t": "Once daily", "n": "Continue until disease progression or intolerance"},
+    {"c": "Dose escalation (inadequate response, no Grade >=3 toxicity)", "r": "Adult", "d": "Increase by 100 mg increments to a maximum of 600 mg once daily", "t": "Once daily", "n": "If no complete hematologic/cytogenetic/molecular response"},
+    {"c": "Baseline hepatic impairment", "r": "Adult", "d": "Reduce starting dose to 200 mg once daily", "t": "Once daily", "n": "Per labeling for pre-existing hepatic impairment"},
+    {"c": "Renal impairment (CrCl 30-50)", "r": "Adult", "d": "Reduce dose (e.g. to 400 mg once daily)", "t": "Once daily", "n": "Further reduction (300 mg) for CrCl <30"}
+  ],
+  "admin": [
+    "Take once daily with food",
+    "Swallow tablets whole - do not cut, crush, break, or chew",
+    "If a dose is missed beyond 12 hours, skip it and take the next usual dose the following day",
+    "Avoid concomitant strong/moderate CYP3A inhibitors and inducers and proton pump inhibitors"
+  ],
+  "moa": "Bosutinib is a tyrosine kinase inhibitor that inhibits the BCR-ABL kinase driving chronic myelogenous leukemia, including many imatinib-resistant BCR-ABL forms (but not the T315I or V299L mutants). It is also an inhibitor of Src-family kinases including Src, Lyn, and Hck. By blocking BCR-ABL signaling it suppresses proliferation of the malignant clone.",
+  "contra": {
+    "absolute": [
+      "History of hypersensitivity to bosutinib (reactions have included anaphylaxis)"
+    ],
+    "relative": [
+      "Pre-existing hepatic impairment (reduce dose; hepatotoxicity risk)",
+      "Renal impairment",
+      "Active gastrointestinal disease or fluid overload/heart failure",
+      "Pregnancy / women of reproductive potential without contraception",
+      "Concurrent strong CYP3A modulators or PPIs"
+    ],
+    "monitor": [
+      "Liver function tests",
+      "Complete blood counts",
+      "Renal function and fluid status"
+    ]
+  },
+  "preg": "Based on findings in animals and its mechanism, bosutinib can cause fetal harm. Advise females of reproductive potential of the risk and to use effective contraception during treatment and for at least 1 week after the final dose; avoid use in pregnancy.",
+  "lact": "Because of the potential for serious adverse reactions in a breastfed child, advise women not to breastfeed during treatment and for a period after the last dose (per product labeling).",
+  "renal": "Reduce the dose in patients with moderate to severe renal impairment. For baseline CrCl 30-50 mL/min reduce to about 400 mg once daily, and for CrCl <30 mL/min to about 300 mg once daily. Monitor renal function during therapy.",
+  "hepatic": "For patients with pre-existing hepatic impairment, reduce the starting dose to 200 mg once daily. Monitor liver enzymes at least monthly for the first 3 months and as clinically needed; withhold, dose-reduce, or discontinue for hepatotoxicity.",
+  "interactions": {
+    "major": [
+      "Strong/moderate CYP3A inhibitors (ketoconazole, clarithromycin, etc.) - markedly increase bosutinib exposure; avoid",
+      "Strong/moderate CYP3A inducers (rifampin, carbamazepine) - markedly decrease exposure; avoid",
+      "Proton pump inhibitors (reduce bosutinib absorption via increased gastric pH); avoid"
+    ],
+    "moderate": [
+      "H2-receptor antagonists / antacids (reduce absorption - separate dosing)",
+      "P-glycoprotein substrates (bosutinib may increase their levels)",
+      "QT-prolonging drugs (additive cardiac risk)"
+    ],
+    "minor": [],
+    "food": "Take with food (increases bioavailability); avoid grapefruit (CYP3A inhibition)",
+    "alcohol": "Avoid heavy alcohol use given hepatotoxicity potential",
+    "diagnostics": "Monitor liver transaminases and bilirubin, complete blood counts, serum creatinine, and lipase"
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Abdominal pain", "Rash", "Fatigue", "Thrombocytopenia", "Elevated liver enzymes"],
+    "serious": ["Hepatotoxicity (transaminase/bilirubin elevation)", "Severe diarrhea/GI toxicity with dehydration", "Myelosuppression (thrombocytopenia, neutropenia, anemia)", "Fluid retention (pericardial/pleural effusion, edema)", "Cardiovascular toxicity (arrhythmia, QT prolongation)", "Renal toxicity"],
+    "rare": ["Anaphylaxis", "Pancreatitis", "Severe skin reactions", "Tumor lysis syndrome"],
+    "emergency": ["Anaphylaxis", "Severe dehydration from diarrhea", "Acute hepatic failure", "Symptomatic effusion / heart failure", "Severe bleeding from thrombocytopenia"]
+  },
+  "monitoring": [
+    "Liver function tests at least monthly for the first 3 months and as needed",
+    "Complete blood counts (weekly for first month, then monthly or as indicated)",
+    "Renal function at baseline and during therapy",
+    "Signs of fluid retention (weight, edema, effusions)",
+    "Cardiovascular status / ECG where indicated"
+  ],
+  "counsel": [
+    "Take with food and swallow tablets whole at the same time each day",
+    "Diarrhea is common - stay hydrated and report severe or persistent diarrhea promptly",
+    "Report yellowing of skin/eyes, dark urine, unusual bruising or bleeding, fever, or swelling/shortness of breath",
+    "Do not use antacids/heartburn medicines near your dose without advice; avoid grapefruit",
+    "Use effective contraception during and after treatment; do not breastfeed",
+    "Keep appointments for blood and liver tests"
+  ],
+  "pk": [
+    ["Onset", "Hematologic responses develop over weeks of continued therapy"],
+    ["Peak", "Peak plasma concentration about 4-6 hours after an oral dose with food"],
+    ["Half-life", "Terminal half-life approximately 22-34 hours"],
+    ["Duration", "Once-daily dosing maintains exposure; treatment is continuous"],
+    ["Storage", "Store at controlled room temperature 20-25 C; keep in original container"]
+  ],
+  "pearls": [
+    "Inactive against the T315I and V299L BCR-ABL mutations - genotype before relying on it for resistant disease",
+    "Diarrhea is the most common adverse effect, usually early and manageable",
+    "Hepatotoxicity warrants monthly liver enzyme checks for the first 3 months",
+    "Food increases absorption; proton pump inhibitors substantially reduce it",
+    "Highly CYP3A-metabolized - avoid strong CYP3A inhibitors and inducers"
+  ],
+  "missed": "If a dose is missed and more than 12 hours have passed, skip the missed dose and take the next usual prescribed dose the following day. Do not take a double dose to make up for a missed one.",
+  "overdose": "There is limited overdose experience. Patients who take more than the prescribed dose should be observed and given supportive care; monitor for exaggerated adverse effects (GI toxicity, myelosuppression, hepatotoxicity, fluid retention). There is no specific antidote.",
+  "refs": [
+    ["FDA Prescribing Information - Bosutinib (BOSULIF)", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Bosutinib", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22bosutinib%22"]
+  ]
+}

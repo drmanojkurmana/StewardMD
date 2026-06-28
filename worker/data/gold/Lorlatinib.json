@@ -1,0 +1,107 @@
+{
+  "generic": "Lorlatinib",
+  "cls": "Antineoplastic - third-generation ALK tyrosine kinase inhibitor (also inhibits ROS1)",
+  "pharm": "A macrocyclic, CNS-penetrant tyrosine kinase inhibitor that potently inhibits ALK and ROS1, including resistance mutations that arise on earlier ALK inhibitors, used for ALK-positive metastatic non-small cell lung cancer.",
+  "tags": ["ALK inhibitor", "Metastatic NSCLC", "Tyrosine kinase inhibitor", "CNS-penetrant", "Strong CYP3A inducer contraindicated"],
+  "quick": [
+    ["Adult dose", "100 mg orally once daily until progression or unacceptable toxicity"],
+    ["Meal", "Take with or without food, at the same time each day; swallow whole"],
+    ["Pregnancy", "Can cause embryo-fetal harm; use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 7 days after the final dose"],
+    ["Renal", "Reduce to 75 mg daily if CLcr 15 to <30; no change if mild/moderate"],
+    ["Hepatic", "Reduce to 50 mg daily in severe (Child-Pugh C); no change if mild/moderate"],
+    ["Alcohol", "Not addressed in labeling"],
+    ["Monitoring", "Lipids, LFTs (esp. with CYP3A inducers), ECG/PR interval, BP, glucose, CNS effects"]
+  ],
+  "summary": "Lorlatinib (Lorbrena) is a third-generation, CNS-penetrant ALK tyrosine kinase inhibitor indicated for adults with ALK-positive metastatic non-small cell lung cancer detected by an FDA-approved test. It is given as 100 mg orally once daily until disease progression or unacceptable toxicity. It inhibits ALK and ROS1, including resistance mutations such as G1202R and I1171T, and crosses the blood-brain barrier to treat intracranial disease. Its defining safety concern is that concomitant use with strong CYP3A inducers is contraindicated owing to the risk of serious hepatotoxicity. Other notable adverse effects include CNS effects (cognitive, mood, speech, and psychotic effects and seizures), hyperlipidemia (hypercholesterolemia and hypertriglyceridemia), edema, peripheral neuropathy, weight gain, AV block, interstitial lung disease/pneumonitis, hypertension, and hyperglycemia. Lorlatinib is metabolized by CYP3A4 and UGT1A4 and induces CYP3A, so hormonal contraceptives may fail and non-hormonal contraception is required.",
+  "indications": [
+    "ALK-positive metastatic non-small cell lung cancer in adults, as detected by an FDA-approved test"
+  ],
+  "dosage": [
+    {"c": "Standard dose", "r": "Adult oral", "d": "100 mg once daily", "t": "Once daily at the same time", "n": "With or without food; continue until progression or unacceptable toxicity"},
+    {"c": "First dose reduction (adverse reactions)", "r": "Adult oral", "d": "75 mg once daily", "t": "Once daily", "n": "For management of adverse reactions"},
+    {"c": "Second dose reduction (adverse reactions)", "r": "Adult oral", "d": "50 mg once daily", "t": "Once daily", "n": "For management of adverse reactions"},
+    {"c": "Severe hepatic impairment (Child-Pugh C)", "r": "Adult oral", "d": "50 mg once daily", "t": "Once daily", "n": "No change for mild/moderate"},
+    {"c": "Severe renal impairment (CLcr 15 to <30 mL/min)", "r": "Adult oral", "d": "75 mg once daily", "t": "Once daily", "n": "No change for mild/moderate"},
+    {"c": "With a strong CYP3A inhibitor (if unavoidable)", "r": "Adult oral", "d": "75 mg once daily", "t": "Once daily", "n": "Avoid concomitant strong CYP3A inhibitors if possible"}
+  ],
+  "admin": [
+    "Swallow tablets whole; do not chew, crush, or split, and do not ingest a tablet that is broken or cracked",
+    "Take at the same time each day, with or without food",
+    "If vomiting occurs after a dose, do not take an additional dose; take the next dose at the scheduled time",
+    "Discontinue any strong CYP3A inducer for at least 3 plasma half-lives before starting lorlatinib",
+    "Monitor lipids and liver tests at baseline and during treatment"
+  ],
+  "moa": "Lorlatinib is a kinase inhibitor with in vitro activity against ALK and ROS1 (and also TYK1, FER, FPS, and TRKA/B/C). It is active against multiple mutant forms of ALK, including resistance mutations that emerge on progression with other ALK inhibitors (for example G1202R and I1171T). In mouse models it showed antitumor activity and prolonged survival in intracranial EML4-ALK tumors, consistent with CNS-penetrant activity against brain-metastatic disease.",
+  "contra": {
+    "absolute": [
+      "Concomitant use of strong CYP3A inducers, due to the potential for serious hepatotoxicity"
+    ],
+    "relative": [
+      "Concomitant strong CYP3A inhibitors (avoid; reduce dose if unavoidable)",
+      "Pre-existing CNS or psychiatric conditions (CNS effects)",
+      "AV block or significant conduction disease",
+      "Pre-existing ILD/pneumonitis"
+    ],
+    "monitor": [
+      "Serum cholesterol and triglycerides (baseline and during treatment)",
+      "Liver function tests, especially with any CYP3A inducer co-exposure",
+      "ECG / PR interval for AV block",
+      "Blood pressure and blood glucose",
+      "CNS / neuropsychiatric symptoms and respiratory symptoms (ILD)"
+    ]
+  },
+  "preg": "Lorlatinib can cause embryo-fetal harm. Animal studies showed malformations, increased post-implantation loss, and abortion at exposures at or below the human exposure at 100 mg/day. Females of reproductive potential should use effective non-hormonal contraception during treatment and for at least 6 months after the final dose (lorlatinib induces CYP3A and may cause hormonal contraceptives to fail). Males with female partners of reproductive potential should use effective contraception during treatment and for at least 3 months after the final dose.",
+  "lact": "Do not breastfeed during treatment and for 7 days after the final dose.",
+  "renal": "No dose adjustment is needed for mild or moderate renal impairment. For severe renal impairment (CLcr 15 to less than 30 mL/min), reduce the dose to 75 mg once daily.",
+  "hepatic": "No dose adjustment is needed for mild or moderate hepatic impairment. For severe hepatic impairment (Child-Pugh C), reduce the dose to 50 mg once daily.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inducers (e.g., rifampin, St. John's wort) - CONTRAINDICATED; risk of serious hepatotoxicity, and lorlatinib exposure is markedly reduced. Discontinue the inducer for 3 plasma half-lives before starting",
+      "Strong CYP3A inhibitors - avoid; if unavoidable, reduce lorlatinib to 75 mg once daily",
+      "CYP3A substrates - lorlatinib induces CYP3A; avoid substrates with a narrow therapeutic index (including hormonal contraceptives, which may fail)"
+    ],
+    "moderate": [
+      "P-glycoprotein substrates with a narrow therapeutic index - avoid concomitant use"
+    ],
+    "minor": ["No additional minor interactions specified in labeling"],
+    "food": "May be taken with or without food; a high-fat, high-calorie meal causes no clinically significant pharmacokinetic change.",
+    "alcohol": "Not addressed in labeling.",
+    "diagnostics": "Not addressed in labeling."
+  },
+  "se": {
+    "common": ["Edema", "Peripheral neuropathy", "Weight gain", "Cognitive effects", "Fatigue", "Dyspnea", "Arthralgia", "Diarrhea", "Mood effects", "Cough", "Hypercholesterolemia and hypertriglyceridemia"],
+    "serious": ["Severe hepatotoxicity (especially with strong CYP3A inducers)", "Severe CNS effects (cognitive, mood, speech, psychotic effects, seizures)", "Severe hyperlipidemia", "Atrioventricular block", "Interstitial lung disease / pneumonitis", "Hypertension", "Hyperglycemia"],
+    "rare": ["Seizures", "Grade 3 AV block"],
+    "emergency": ["Acute neuropsychiatric crisis or suicidal ideation", "Syncope or symptomatic bradycardia from AV block", "Acute respiratory symptoms (pneumonitis)", "Hypertensive emergency"]
+  },
+  "monitoring": ["Serum cholesterol and triglycerides at baseline and periodically", "Liver function tests (especially with CYP3A inducer exposure)", "ECG and PR interval for AV block", "Blood pressure", "Blood glucose", "CNS and neuropsychiatric symptoms", "Respiratory symptoms suggestive of ILD/pneumonitis", "Peripheral neuropathy"],
+  "counsel": [
+    "Tell your doctor about all medicines and herbal products you take, especially St. John's wort, which can be dangerous with this drug",
+    "Report any changes in mood, thinking, speech, or behavior, or any seizures",
+    "Your cholesterol, triglycerides, liver tests, heart rhythm, blood pressure, and blood sugar will be monitored",
+    "Women should use effective non-hormonal birth control during treatment and for 6 months after; men should use contraception during treatment and for 3 months after",
+    "Do not breastfeed during treatment and for 7 days after your last dose",
+    "Swallow tablets whole; if you miss a dose take it unless your next dose is due within 4 hours, and never take two doses at once"
+  ],
+  "pk": [
+    ["Onset", "Median Tmax about 1.2 hours after dosing"],
+    ["Peak", "Tmax 0.5-4 hours; absolute bioavailability ~81%"],
+    ["Half-life", "Approximately 24 hours"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions permitted 15-30 C)"]
+  ],
+  "pearls": [
+    "Strong CYP3A inducers are CONTRAINDICATED because of severe acute hepatotoxicity - wash them out for 3 half-lives before starting",
+    "Lorlatinib induces CYP3A, so hormonal contraceptives may fail - non-hormonal contraception is required",
+    "CNS effects (cognitive, mood, speech, psychotic) are common (about 52%) and are managed with dose modification",
+    "Hyperlipidemia is very common and most patients require lipid-lowering therapy",
+    "CNS-penetrant and active against brain metastases and against resistance mutations seen with earlier ALK inhibitors"
+  ],
+  "missed": "If a dose is missed, take the missed dose unless the next dose is due within 4 hours. Do not take 2 doses at the same time to make up for a missed dose.",
+  "overdose": "The prescribing information does not include a specific overdosage section or antidote. Management would be supportive with monitoring for the drug's known toxicities (CNS, hepatic, cardiac conduction, metabolic).",
+  "refs": [
+    ["DailyMed - LORBRENA (lorlatinib) full prescribing information", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2b34d62d-e02a-4af3-bc0d-1571dd4ee76d"],
+    ["FDA - LORBRENA label (NDA 210868, 2018)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2018/210868s000lbl.pdf"]
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "generic": "Daclatasvir",
+  "cls": "Direct-acting antiviral - hepatitis C virus NS5A inhibitor",
+  "pharm": "Inhibits the HCV nonstructural protein 5A (NS5A), blocking viral RNA replication and virion assembly; used in combination with sofosbuvir.",
+  "tags": [
+    "Rx only",
+    "DAA / NS5A inhibitor",
+    "Used with sofosbuvir",
+    "HBV reactivation warning"
+  ],
+  "quick": [
+    ["Adult dose", "60 mg orally once daily, with sofosbuvir, for 12 weeks"],
+    ["Meal", "Take with or without food"],
+    ["Pregnancy", "No adequate human data; when combined with ribavirin, ribavirin contraindication for fetal harm applies"],
+    ["Lactation", "Unknown if present in human milk; weigh benefit against risk"],
+    ["Renal", "No dose adjustment for any degree of renal impairment"],
+    ["Hepatic", "No dose adjustment for mild/moderate/severe impairment"],
+    ["Alcohol", "Avoid excess; alcohol worsens underlying liver disease"],
+    ["Monitoring", "HCV RNA, HBV status before therapy, signs of bradycardia if on amiodarone"]
+  ],
+  "summary": "Daclatasvir is an oral hepatitis C virus NS5A inhibitor used in combination with sofosbuvir for the treatment of chronic HCV genotype 1 or 3 infection. It is given as 60 mg once daily, generally for 12 weeks, with dose adjustments when co-administered with strong CYP3A inhibitors or moderate inducers. Serious symptomatic bradycardia can occur when amiodarone is used together with daclatasvir plus sofosbuvir, and co-administration is not recommended. Test all patients for current or prior hepatitis B before starting, as HBV reactivation has occurred with direct-acting antivirals.",
+  "indications": [
+    "Treatment of chronic hepatitis C virus (HCV) genotype 1 or genotype 3 infection in combination with sofosbuvir, with or without ribavirin"
+  ],
+  "dosage": [
+    {"c": "Chronic HCV genotype 1 or 3", "r": "Adult oral", "d": "60 mg once daily in combination with sofosbuvir 400 mg once daily", "t": "Once daily", "n": "Typical duration 12 weeks; ribavirin added in some cirrhotic/genotype 3 patients"},
+    {"c": "With strong CYP3A inhibitors", "r": "Adult oral", "d": "Reduce daclatasvir to 30 mg once daily", "t": "Once daily", "n": "e.g., ketoconazole, clarithromycin, ritonavir-boosted regimens"},
+    {"c": "With moderate CYP3A inducers", "r": "Adult oral", "d": "Increase daclatasvir to 90 mg once daily", "t": "Once daily", "n": "e.g., efavirenz, nafcillin"}
+  ],
+  "admin": [
+    "Take 60 mg orally once daily, with or without food, always with sofosbuvir",
+    "Take at approximately the same time each day to maintain adherence",
+    "Swallow tablets whole; do not start without confirming hepatitis B status",
+    "Adjust the dose when co-administered with strong CYP3A inhibitors (reduce) or moderate inducers (increase)"
+  ],
+  "moa": "Daclatasvir is a direct-acting antiviral that binds to the N-terminus of the HCV nonstructural protein 5A (NS5A) and inhibits both viral RNA replication and virion assembly. By blocking the multifunctional NS5A protein, daclatasvir disrupts the membranous replication complex of HCV. Combined with sofosbuvir (an NS5B polymerase inhibitor), it provides potent suppression of HCV replication and high rates of sustained virologic response.",
+  "contra": {
+    "absolute": [
+      "Concomitant drugs that strongly induce CYP3A4 (e.g., rifampin, phenytoin, carbamazepine, St. John's wort), which significantly decrease daclatasvir levels and may reduce efficacy",
+      "When used with ribavirin, all ribavirin contraindications apply (including pregnancy)"
+    ],
+    "relative": [
+      "Co-administration with amiodarone (risk of serious symptomatic bradycardia - not recommended)",
+      "Current or prior hepatitis B infection without monitoring (HBV reactivation risk)"
+    ],
+    "monitor": [
+      "Cardiac monitoring if amiodarone cannot be avoided",
+      "HBV reactivation in patients with current/prior HBV",
+      "HCV RNA for virologic response"
+    ]
+  },
+  "preg": "There are no adequate and well-controlled studies of daclatasvir in pregnant women. When used in combination with ribavirin, the ribavirin contraindication in pregnancy applies because ribavirin causes fetal harm; female patients and female partners of male patients must avoid pregnancy.",
+  "lact": "It is not known whether daclatasvir is present in human milk. The development and health benefits of breastfeeding should be considered along with the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "No dose adjustment of daclatasvir is required for patients with any degree of renal impairment, including those on hemodialysis. Sofosbuvir labeling should be consulted for renal limitations of the combination.",
+  "hepatic": "No dose adjustment of daclatasvir is required for patients with mild, moderate, or severe hepatic impairment (Child-Pugh A, B, or C). It is not expected to alter exposure clinically.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inducers (rifampin, carbamazepine, phenytoin, St. John's wort) - contraindicated; markedly decrease daclatasvir, risking loss of efficacy",
+      "Amiodarone with daclatasvir + sofosbuvir - serious symptomatic bradycardia; co-administration not recommended",
+      "Strong CYP3A4 inhibitors (ketoconazole, clarithromycin, ritonavir) - increase daclatasvir; reduce dose to 30 mg"
+    ],
+    "moderate": [
+      "Moderate CYP3A4 inducers (efavirenz, nafcillin, etravirine) - decrease daclatasvir; increase dose to 90 mg",
+      "Daclatasvir inhibits P-gp, OATP 1B1, BCRP - may increase substrate exposure (e.g., dabigatran, certain statins)"
+    ],
+    "minor": [
+      "Digoxin (P-gp substrate) - monitor digoxin levels"
+    ],
+    "food": "May be taken with or without food.",
+    "alcohol": "No specific interaction, but alcohol accelerates progression of underlying liver disease and should be limited.",
+    "diagnostics": "No specific assay interference; monitor HCV RNA for treatment response."
+  },
+  "se": {
+    "common": [
+      "Headache",
+      "Fatigue",
+      "Nausea",
+      "Diarrhea"
+    ],
+    "serious": [
+      "Serious symptomatic bradycardia (when combined with sofosbuvir and amiodarone)",
+      "Reactivation of hepatitis B virus, which can cause fulminant hepatitis or death"
+    ],
+    "rare": [
+      "Insomnia",
+      "When given with ribavirin: anemia and ribavirin-associated effects"
+    ],
+    "emergency": [
+      "Symptomatic bradycardia (near-fainting, dizziness, malaise, severe fatigue, shortness of breath)",
+      "Hepatitis B reactivation with hepatic decompensation"
+    ]
+  },
+  "monitoring": [
+    "Test all patients for current/prior hepatitis B (HBsAg, anti-HBc) before initiating, and monitor for HBV reactivation during and after therapy",
+    "HCV RNA to assess virologic response and sustained virologic response",
+    "Cardiac monitoring if amiodarone must be co-administered (inpatient telemetry for 48 hours then outpatient)",
+    "Adherence to the once-daily daclatasvir plus sofosbuvir regimen"
+  ],
+  "counsel": [
+    "Take one tablet once daily, with or without food, together with sofosbuvir, every day for the full course",
+    "Do not stop or miss doses - missing doses can cause the virus to become resistant",
+    "Tell your doctor about all medicines and supplements, especially amiodarone, seizure medicines, rifampin, and St. John's wort",
+    "Seek urgent care for near-fainting, slow heartbeat, severe tiredness, or shortness of breath",
+    "Report any history of hepatitis B; your liver will be monitored during and after treatment"
+  ],
+  "pk": [
+    ["Onset", "Antiviral effect develops over the first days of therapy"],
+    ["Peak", "Plasma peak (Tmax) approximately 1-2 hours after dosing"],
+    ["Half-life", "Approximately 12-15 hours"],
+    ["Duration", "Once-daily dosing maintains steady-state exposure"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions permitted 15-30 C"]
+  ],
+  "pearls": [
+    "Always used in combination with sofosbuvir - never as monotherapy",
+    "Do NOT co-administer with amiodarone (daclatasvir + sofosbuvir + amiodarone causes serious symptomatic bradycardia)",
+    "Screen every patient for hepatitis B before treatment - DAAs can reactivate HBV with fatal hepatitis",
+    "Dose adjustment: 30 mg with strong CYP3A inhibitors, 90 mg with moderate CYP3A inducers; contraindicated with strong inducers",
+    "No renal or hepatic dose adjustment needed for daclatasvir itself"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on the same day, then resume the normal once-daily schedule. Do not take two doses at the same time to make up for a missed dose.",
+  "overdose": "There is limited experience with daclatasvir overdose. There is no specific antidote; treatment consists of general supportive measures including monitoring of vital signs and observation of clinical status. Daclatasvir is highly protein-bound and is unlikely to be significantly removed by hemodialysis.",
+  "refs": [
+    ["FDA Label - Daklinza (daclatasvir) Prescribing Information", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/206843Orig1s007lbl.pdf"],
+    ["DailyMed - Daclatasvir", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=daclatasvir"]
+  ]
+}

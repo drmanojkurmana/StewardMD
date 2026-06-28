@@ -1,0 +1,104 @@
+{
+  "generic": "Meropenem",
+  "cls": "Carbapenem (penem) beta-lactam antibacterial",
+  "pharm": "Penetrates bacterial cell walls and binds penicillin-binding proteins (PBPs), inhibiting cell wall synthesis; stable to most beta-lactamases.",
+  "tags": ["Antibiotic", "Carbapenem", "Beta-lactam", "IV only", "Broad spectrum"],
+  "quick": [
+    ["Adult dose", "500 mg-1 g IV every 8 hours (by indication)"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Insufficient human data; use if needed"],
+    ["Lactation", "Present in milk in small amounts; likely compatible"],
+    ["Renal", "Adjust dose/interval if CrCl <=50 mL/min"],
+    ["Hepatic", "No adjustment; monitor in hepatic disease"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal/hepatic function, CBC, signs of seizure/colitis"]
+  ],
+  "summary": "Meropenem is a broad-spectrum carbapenem antibacterial given IV for complicated skin and skin structure infections, complicated intra-abdominal infections, and bacterial meningitis (pediatrics). It requires renal dose adjustment and carries a risk of seizures and serious hypersensitivity.",
+  "indications": [
+    "Complicated skin and skin structure infections (adults and pediatrics >=3 months)",
+    "Complicated intra-abdominal infections (adults and pediatrics)",
+    "Bacterial meningitis (pediatrics >=3 months only)"
+  ],
+  "dosage": [
+    {"c": "Complicated skin/skin structure infection", "r": "Adult", "d": "500 mg IV every 8 hours (1 g q8h if Pseudomonas aeruginosa)", "t": "Per infection", "n": "IV infusion over 15-30 min or bolus over 3-5 min"},
+    {"c": "Complicated intra-abdominal infection", "r": "Adult", "d": "1 g IV every 8 hours", "t": "Per infection", "n": "IV infusion over 15-30 min or bolus over 3-5 min"},
+    {"c": "By weight (pediatrics >=3 months)", "r": "Pediatric", "d": "cSSSI 10 mg/kg q8h (max 500 mg); intra-abdominal 20 mg/kg q8h (max 1 g); meningitis 40 mg/kg q8h (max 2 g)", "t": "Per infection", "n": "IV infusion over 15-30 min"},
+    {"c": "Renal impairment CrCl 26-50", "r": "Adult", "d": "Recommended dose every 12 hours", "t": "Per infection", "n": "Reduce frequency"},
+    {"c": "Renal impairment CrCl 10-25", "r": "Adult", "d": "One-half recommended dose every 12 hours", "t": "Per infection", "n": ""},
+    {"c": "Renal impairment CrCl <10", "r": "Adult", "d": "One-half recommended dose every 24 hours", "t": "Per infection", "n": ""}
+  ],
+  "admin": [
+    "Administer IV only - by infusion over 15-30 minutes or IV bolus (5-20 mL) over 3-5 minutes",
+    "Reconstitute and dilute per labeling; use promptly",
+    "Reduce dose/frequency for CrCl <=50 mL/min",
+    "Obtain cultures before starting; de-escalate per susceptibility",
+    "Assess for prior beta-lactam/carbapenem hypersensitivity before first dose"
+  ],
+  "moa": "Meropenem is a carbapenem beta-lactam that readily penetrates the cell wall of most gram-positive and gram-negative bacteria and binds penicillin-binding proteins (PBPs), inhibiting bacterial cell wall synthesis and causing cell lysis. It is stable to hydrolysis by most beta-lactamases including many ESBLs and AmpC enzymes.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to any component of the product",
+      "Anaphylactic reactions to beta-lactams"
+    ],
+    "relative": [
+      "History of seizure disorder or CNS lesions",
+      "Concomitant valproic acid/divalproex (reduces valproate levels)",
+      "Renal impairment (requires dose adjustment)"
+    ],
+    "monitor": [
+      "Renal function",
+      "Signs of seizure or CNS effects",
+      "Signs of C. difficile-associated diarrhea"
+    ]
+  },
+  "preg": "Insufficient human data to establish drug-associated risk. Animal studies (rats, monkeys) showed no fetal toxicity or malformations at 2.3-2.4 times the MRHD. Use during pregnancy only if clearly needed.",
+  "lact": "Meropenem is present in human milk in small amounts; considered likely compatible. Consider developmental/health benefits of breastfeeding alongside maternal clinical need.",
+  "renal": "Dose adjustment required for CrCl <=50 mL/min: CrCl 26-50 give recommended dose every 12 h; CrCl 10-25 give half dose every 12 h; CrCl <10 give half dose every 24 h. Meropenem is removed by hemodialysis - dose after dialysis.",
+  "hepatic": "No dosage adjustment needed for hepatic impairment; monitor liver function (transient transaminase elevations may occur) in patients with pre-existing liver disease.",
+  "interactions": {
+    "major": [
+      "Valproic acid / divalproex sodium (markedly reduces valproate levels - risk of breakthrough seizures; avoid combination)"
+    ],
+    "moderate": [
+      "Probenecid (inhibits renal excretion, increases meropenem levels - not recommended)"
+    ],
+    "minor": [],
+    "food": "Not applicable (IV).",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause a positive direct or indirect Coombs test."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea/vomiting", "Headache", "Rash", "Injection site inflammation/phlebitis", "Anemia"],
+    "serious": ["Serious hypersensitivity/anaphylaxis", "Seizures and other CNS effects", "C. difficile-associated diarrhea/pseudomembranous colitis", "Thrombocytopenia/neutropenia"],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "DRESS syndrome", "Hepatic failure"],
+    "emergency": ["Anaphylaxis", "Seizure", "Severe skin reaction (SJS/TEN/DRESS)", "Severe persistent diarrhea"]
+  },
+  "monitoring": ["Renal function and adjust dose accordingly", "CBC during prolonged therapy", "Liver enzymes", "Signs of seizure / neurotoxicity", "Signs of C. difficile colitis"],
+  "counsel": [
+    "Given as an IV medication in a healthcare setting",
+    "Report rash, itching, swelling, or difficulty breathing immediately",
+    "Report severe or persistent diarrhea (even weeks after therapy)",
+    "Report any seizure or confusion",
+    "Tell your clinician if you take valproate or have a seizure disorder",
+    "Complete the full course of antibiotics"
+  ],
+  "pk": [
+    ["Onset", "Immediate (IV); bactericidal time-dependent"],
+    ["Peak", "End of 30-min infusion: ~23 mcg/mL (500 mg), ~49 mcg/mL (1 g)"],
+    ["Half-life", "~1 hour (prolonged in renal impairment)"],
+    ["Duration", "Dosed every 8 hours"],
+    ["Storage", "Store dry powder at 20-25 C; reconstituted solution use promptly per labeling"]
+  ],
+  "pearls": [
+    "Time above MIC drives efficacy - maintain the q8h interval",
+    "Avoid with valproic acid; meropenem sharply lowers valproate levels",
+    "Adjust dose for renal impairment; dose after hemodialysis",
+    "Lower seizure potential than imipenem but still requires CNS caution"
+  ],
+  "missed": "Administered on a fixed schedule in a healthcare setting; if a dose is delayed, give as soon as possible and resume the q8h schedule. Not a self-administered drug.",
+  "overdose": "No specific antidote. Discontinue and provide symptomatic/supportive care; meropenem and its metabolite are removed by hemodialysis.",
+  "refs": [
+    ["FDA Prescribing Information - Meropenem for Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22meropenem%22"],
+    ["DailyMed - Meropenem", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=meropenem"]
+  ]
+}

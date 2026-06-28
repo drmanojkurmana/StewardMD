@@ -1,0 +1,109 @@
+{
+  "generic": "Citalopram",
+  "cls": "Selective serotonin reuptake inhibitor (SSRI)",
+  "pharm": "Selectively inhibits presynaptic serotonin reuptake, increasing serotonergic neurotransmission in the central nervous system.",
+  "tags": ["Rx only", "SSRI", "Antidepressant", "QT prolongation (dose-related)", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "20 mg once daily; max 40 mg/day"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Use if benefit outweighs risk; weigh untreated depression"],
+    ["Lactation", "Present in milk; monitor infant, generally acceptable"],
+    ["Renal", "No adjustment in mild-moderate; caution if severe"],
+    ["Hepatic", "Max 20 mg/day in hepatic impairment"],
+    ["Alcohol", "Avoid; not recommended with citalopram"],
+    ["Monitoring", "Mood/suicidality, ECG/electrolytes (QT), serotonin syndrome"]
+  ],
+  "summary": "Citalopram is an SSRI indicated for major depressive disorder in adults. It carries a boxed warning about increased suicidal thoughts and behaviors in pediatric and young-adult patients. Doses above 40 mg/day are not recommended because of dose-dependent QT prolongation, and the maximum is 20 mg/day in patients over 60, with hepatic impairment, or who are CYP2C19 poor metabolizers. It should be tapered on discontinuation.",
+  "indications": [
+    "Treatment of major depressive disorder (MDD) in adults"
+  ],
+  "dosage": [
+    {"c": "Major depressive disorder", "r": "Adult oral", "d": "Initial 20 mg once daily; may increase to 40 mg once daily after at least 1 week", "t": "Once daily", "n": "Doses >40 mg/day not recommended (QT risk)"},
+    {"c": "Age >60, hepatic impairment, or CYP2C19 poor metabolizer", "r": "Adult oral", "d": "Maximum 20 mg once daily", "t": "Once daily", "n": "Reduced clearance/QT risk"},
+    {"c": "With CYP2C19 inhibitors (e.g., omeprazole, cimetidine)", "r": "Adult oral", "d": "Maximum 20 mg once daily", "t": "Once daily", "n": "Increased citalopram levels"},
+    {"c": "Discontinuation", "r": "Adult oral", "d": "Taper gradually rather than stopping abruptly", "t": "Tapered", "n": "Reduces withdrawal symptoms"}
+  ],
+  "admin": [
+    "Administer once daily with or without food",
+    "Screen for personal/family history of bipolar disorder before starting",
+    "Do not exceed 40 mg/day (or 20 mg/day in at-risk groups) due to QT prolongation",
+    "Allow at least 14 days between MAOIs and citalopram in either direction",
+    "Taper gradually when discontinuing to minimize withdrawal symptoms"
+  ],
+  "moa": "Citalopram is a racemic SSRI that potently and selectively blocks the presynaptic serotonin transporter, inhibiting reuptake of serotonin (5-HT) into the neuron. The resulting increase in synaptic serotonin enhances serotonergic neurotransmission, which underlies its antidepressant effect. It has minimal effect on norepinephrine and dopamine reuptake and low affinity for histaminic, muscarinic, and adrenergic receptors.",
+  "contra": {
+    "absolute": [
+      "Concomitant use with MAOIs, or within 14 days of stopping an MAOI (including linezolid and IV methylene blue) - serotonin syndrome risk",
+      "Concomitant use with pimozide (QT prolongation)",
+      "Known hypersensitivity to citalopram or excipients (angioedema/anaphylaxis reported)"
+    ],
+    "relative": [
+      "Congenital long QT syndrome / known QT prolongation / uncorrected hypokalemia or hypomagnesemia",
+      "Recent myocardial infarction or uncompensated heart failure",
+      "History of bipolar disorder/mania (screen first)",
+      "Hepatic impairment, age >60, CYP2C19 poor metabolism (dose cap)",
+      "History of seizures or bleeding risk"
+    ],
+    "monitor": [
+      "Suicidality and clinical worsening",
+      "ECG/QT and electrolytes in at-risk patients",
+      "Signs of serotonin syndrome"
+    ]
+  },
+  "preg": "SSRIs in late pregnancy may be associated with neonatal complications (respiratory distress, feeding difficulty, persistent pulmonary hypertension). Weigh the risks of treatment against the risks of untreated depression; use if the benefit justifies the risk and monitor the neonate.",
+  "lact": "Citalopram is excreted in breast milk; reported infant adverse effects are uncommon. Breastfeeding is generally considered acceptable with monitoring of the infant for irritability, poor feeding, or somnolence.",
+  "renal": "No dosage adjustment is needed for mild-to-moderate renal impairment; use with caution in severe renal impairment (limited data).",
+  "hepatic": "Clearance is reduced in hepatic impairment; the maximum recommended dose is 20 mg once daily.",
+  "interactions": {
+    "major": [
+      "MAOIs / linezolid / IV methylene blue - serotonin syndrome (contraindicated)",
+      "Pimozide - additive QT prolongation (contraindicated)",
+      "Other QT-prolonging drugs (Class IA/III antiarrhythmics, certain antipsychotics/antibiotics) - additive QT risk",
+      "Serotonergic drugs (triptans, tramadol, other antidepressants, St. John's wort) - serotonin syndrome"
+    ],
+    "moderate": [
+      "CYP2C19 inhibitors (omeprazole, cimetidine, fluconazole) - increase citalopram levels (cap at 20 mg/day)",
+      "NSAIDs, aspirin, anticoagulants, antiplatelets - increased bleeding risk",
+      "Drugs causing hyponatremia / diuretics (SIADH risk)",
+      "CNS depressants (additive sedation)"
+    ],
+    "minor": ["Metoprolol (citalopram may increase its levels)", "Lithium (monitor)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Concomitant alcohol is not recommended.",
+    "diagnostics": "Causes dose-dependent QT prolongation on ECG; may cause hyponatremia on serum sodium testing."
+  },
+  "se": {
+    "common": ["Nausea", "Dry mouth", "Somnolence", "Insomnia", "Increased sweating", "Tremor", "Diarrhea", "Sexual dysfunction"],
+    "serious": ["Suicidal thoughts/behavior (boxed warning)", "QT prolongation / torsades de pointes", "Serotonin syndrome", "Hyponatremia / SIADH", "Increased bleeding risk", "Activation of mania/hypomania"],
+    "rare": ["Seizures", "Angle-closure glaucoma", "Severe allergic reaction / angioedema", "Neuroleptic-like reaction"],
+    "emergency": ["Serotonin syndrome", "Torsades de pointes", "Severe hyponatremia with seizures", "Anaphylaxis/angioedema"]
+  },
+  "monitoring": ["Mood, suicidality, and clinical worsening (especially early and at dose changes)", "ECG/QT and electrolytes (potassium, magnesium) in at-risk patients", "Signs of serotonin syndrome", "Serum sodium in elderly/at-risk patients", "Signs of bleeding"],
+  "counsel": [
+    "It may take 1-4 weeks to feel the full benefit; do not stop suddenly",
+    "Watch for new or worsening depression, anxiety, agitation, or thoughts of self-harm and report them promptly",
+    "Avoid alcohol and tell your doctor about all other medicines, including herbal products",
+    "Report palpitations, fainting, severe agitation/confusion with fever, or unusual bleeding",
+    "Sexual side effects, dry mouth, and nausea may occur; nausea often improves with time"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect over 1-4 weeks"],
+    ["Peak", "Plasma Tmax ~4 hours"],
+    ["Half-life", "~35 hours"],
+    ["Duration", "Once-daily dosing; steady state ~1 week"],
+    ["Storage", "Store at 25 C (excursions 15-30 C); protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warning: increased suicidality in pediatric and young-adult patients - monitor closely early in treatment",
+    "Dose-dependent QT prolongation - do not exceed 40 mg/day (20 mg/day if >60, hepatic impairment, CYP2C19 poor metabolizer, or with CYP2C19 inhibitors)",
+    "14-day washout required between citalopram and MAOIs in either direction",
+    "Taper to discontinue - abrupt stop causes discontinuation syndrome",
+    "Screen for bipolar disorder before starting to avoid precipitating mania"
+  ],
+  "missed": "Take the missed dose as soon as you remember; if it is almost time for the next dose, skip it and resume your schedule. Do not take two doses at once.",
+  "overdose": "Overdose may cause dizziness, sweating, nausea/vomiting, tremor, somnolence, sinus tachycardia, and dose-related QT prolongation/arrhythmia; seizures, serotonin syndrome, and (rarely) death have occurred. Provide ECG/cardiac monitoring and supportive care; there is no specific antidote, and dialysis is unlikely to help given high protein binding.",
+  "refs": [
+    ["FDA Label - Citalopram (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22citalopram%22"],
+    ["DailyMed - Citalopram", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=citalopram"]
+  ]
+}

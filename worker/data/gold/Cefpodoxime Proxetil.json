@@ -1,0 +1,97 @@
+{
+  "generic": "Cefpodoxime Proxetil",
+  "cls": "Antibiotic (cephalosporin)",
+  "pharm": "Third-generation cephalosporin; inhibits bacterial cell-wall synthesis",
+  "tags": ["Rx", "Habit forming: No", "Oral", "Prodrug"],
+  "quick": [
+    ["Adult dose", "100-400 mg every 12 h"],
+    ["Meal", "Take with food"],
+    ["Pregnancy", "Category B; use if needed"],
+    ["Lactation", "Excreted in milk; caution"],
+    ["Renal", "Reduce frequency if CrCl <30"],
+    ["Hepatic", "No adjustment (cirrhosis)"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal function if nephrotoxic co-drugs"]
+  ],
+  "summary": "Cefpodoxime proxetil is an oral third-generation cephalosporin prodrug used for mild-to-moderate respiratory, urinary, skin, ear, and gonococcal infections. It is taken twice daily with food to improve absorption. Main cautions are beta-lactam hypersensitivity and antibiotic-associated C. difficile diarrhea.",
+  "indications": [
+    "Acute otitis media",
+    "Pharyngitis / tonsillitis (S. pyogenes)",
+    "Community-acquired pneumonia",
+    "Acute bacterial exacerbation of chronic bronchitis",
+    "Acute maxillary sinusitis",
+    "Uncomplicated gonorrhea (urethral, cervical, ano-rectal in women)",
+    "Uncomplicated skin and skin-structure infections",
+    "Uncomplicated urinary tract infection"
+  ],
+  "dosage": [
+    {"c": "Pharyngitis / tonsillitis", "r": "Oral", "d": "100 mg every 12 h", "t": "5-10 days", "n": "Adults & adolescents ≥12 yr"},
+    {"c": "Community-acquired pneumonia", "r": "Oral", "d": "200 mg every 12 h", "t": "14 days", "n": ""},
+    {"c": "Acute exacerbation chronic bronchitis", "r": "Oral", "d": "200 mg every 12 h", "t": "10 days", "n": ""},
+    {"c": "Acute maxillary sinusitis", "r": "Oral", "d": "200 mg every 12 h", "t": "10 days", "n": ""},
+    {"c": "Uncomplicated gonorrhea / rectal (women)", "r": "Oral", "d": "200 mg single dose", "t": "1 dose", "n": "Men and women"},
+    {"c": "Skin and skin-structure infections", "r": "Oral", "d": "400 mg every 12 h", "t": "7-14 days", "n": "Higher dose; drain abscesses"},
+    {"c": "Uncomplicated UTI", "r": "Oral", "d": "100 mg every 12 h", "t": "7 days", "n": ""},
+    {"c": "Severe renal impairment (CrCl <30)", "r": "Oral", "d": "Usual unit dose every 24 h", "t": "Per indication", "n": "Hemodialysis: dose 3x/week after dialysis"}
+  ],
+  "admin": [
+    "Take film-coated tablets orally with food to enhance absorption",
+    "Separate from high-dose antacids and H2 blockers (reduce absorption)",
+    "Complete the full prescribed course even if feeling better",
+    "Reserve for proven/strongly suspected bacterial infection"
+  ],
+  "moa": "Prodrug de-esterified to active cefpodoxime, which binds penicillin-binding proteins and inhibits bacterial cell-wall synthesis, producing bactericidal activity against many gram-positive and gram-negative organisms.",
+  "contra": {
+    "absolute": ["Known allergy to cefpodoxime or other cephalosporins"],
+    "relative": ["History of penicillin/beta-lactam allergy (cross-reactivity up to ~10%)", "Concurrent potent diuretics", "Concurrent nephrotoxic drugs"],
+    "monitor": ["Watch for diarrhea (possible C. difficile) up to 2 months after therapy", "Renal function with nephrotoxic co-medications", "Signs of superinfection on prolonged use"]
+  },
+  "preg": "Category B; use only if clearly needed",
+  "lact": "Excreted in milk (0-16% of serum); decide to stop nursing or drug",
+  "renal": "CrCl <30 mL/min: extend interval to every 24 h; hemodialysis 3x/week after dialysis",
+  "hepatic": "Cirrhosis PK similar to healthy; no dose adjustment needed",
+  "interactions": {
+    "major": [],
+    "moderate": ["High-dose antacids (Na bicarbonate, aluminum hydroxide) reduce peak/absorption", "H2 blockers reduce absorption", "Probenecid increases cefpodoxime AUC ~31%", "Nephrotoxic drugs (monitor renal function)"],
+    "minor": ["Oral anticholinergics (e.g. propantheline) delay time to peak"],
+    "food": "Take with food to increase absorption (AUC up 21-33%)",
+    "alcohol": "No specific interaction documented",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction tests (cephalosporin class effect)"
+  },
+  "se": {
+    "common": ["Diarrhea / loose stools (~7%, dose-related)", "Nausea (~3%)", "Vulvovaginal / vaginal fungal infections (~1-1.3%)", "Abdominal pain (~1.2%)", "Headache (~1%)"],
+    "serious": ["Clostridioides difficile-associated diarrhea / colitis", "Hypersensitivity reactions"],
+    "rare": ["Vomiting, dyspepsia, anorexia", "Dizziness", "Anemia"],
+    "emergency": ["Anaphylaxis / severe acute hypersensitivity (needs epinephrine, airway support)", "Pseudomembranous (C. difficile) colitis with watery/bloody stools"]
+  },
+  "monitoring": [
+    "Diarrhea / signs of C. difficile colitis during and after therapy",
+    "Renal function when given with nephrotoxic agents or diuretics",
+    "Signs of superinfection on prolonged use",
+    "Hypersensitivity / allergic reactions"
+  ],
+  "counsel": [
+    "Take with food at evenly spaced 12-hour intervals",
+    "Finish the entire course; do not skip doses",
+    "Antibiotics do not treat viral illness like the common cold",
+    "Report watery or bloody diarrhea, even weeks after stopping",
+    "Separate antacids and acid-reducers from this medicine"
+  ],
+  "pk": [
+    ["Onset", "Absorbed; ~50% bioavailability (fasting)"],
+    ["Peak", "Tmax ~2-3 h"],
+    ["Half-life", "~2.1-2.8 h (longer in renal impairment)"],
+    ["Duration", "Every-12-hour dosing"],
+    ["Storage", "Store per product labeling (room temperature)"]
+  ],
+  "pearls": [
+    "Prodrug: cefpodoxime proxetil is de-esterified to active cefpodoxime after absorption",
+    "Absorption is improved with food (tablets) and reduced by antacids/H2 blockers",
+    "Beta-lactam cross-hypersensitivity may occur in up to 10% of penicillin-allergic patients",
+    "Skin/skin-structure infections require the higher 400 mg twice-daily dose",
+    "Single 200 mg dose treats uncomplicated gonorrhea; not for pharyngeal gonococcal infection"
+  ],
+  "missed": "Take when remembered; skip if near next dose, do not double",
+  "overdose": "Nausea, vomiting, epigastric distress, diarrhea; supportive care; dialysis may aid removal",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

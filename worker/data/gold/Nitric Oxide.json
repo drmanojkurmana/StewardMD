@@ -1,0 +1,97 @@
+{
+  "generic": "Nitric Oxide",
+  "cls": "Inhaled selective pulmonary vasodilator (endogenous gas / guanylate cyclase activator)",
+  "pharm": "An inhaled gas that selectively dilates the pulmonary vasculature by activating soluble guanylate cyclase and raising cyclic GMP in vascular smooth muscle. Used in term/near-term neonates with hypoxic respiratory failure and pulmonary hypertension; abrupt withdrawal can cause rebound pulmonary hypertension and it can cause methemoglobinemia and NO2 toxicity.",
+  "tags": ["Rx only", "Inhaled gas", "Neonatal pulmonary hypertension", "Selective pulmonary vasodilator", "Rebound on abrupt stop", "Methemoglobinemia risk"],
+  "quick": [
+    ["Adult dose", "Neonatal use: 20 ppm inhaled for up to 14 days or until desaturation resolves (doses >20 ppm not recommended)"],
+    ["Meal", "Not applicable - inhaled gas"],
+    ["Pregnancy", "Used in neonates; not a maternal therapy in this indication"],
+    ["Lactation", "Not applicable - neonatal inhaled therapy"],
+    ["Renal", "No specific adjustment - inhaled, locally acting"],
+    ["Hepatic", "No specific adjustment - inhaled, locally acting"],
+    ["Alcohol", "Not applicable"],
+    ["Monitoring", "Methemoglobin, inspired NO2, PaO2/oxygenation; wean - do not stop abruptly"]
+  ],
+  "summary": "Inhaled nitric oxide (INOmax) is a selective pulmonary vasodilator indicated, with ventilatory support and other agents, to improve oxygenation and reduce the need for ECMO in term and near-term (>34 weeks gestation) neonates with hypoxic respiratory failure associated with clinical or echocardiographic evidence of pulmonary hypertension. The recommended dose is 20 ppm for up to 14 days or until the underlying oxygen desaturation resolves; doses above 20 ppm are not recommended. It is contraindicated in neonates dependent on right-to-left shunting of blood. Key safety concerns are REBOUND PULMONARY HYPERTENSION on abrupt discontinuation (wean gradually), METHEMOGLOBINEMIA (monitor methemoglobin), and formation of nitrogen dioxide (NO2), which can injure the airway. Hypotension is the most common adverse reaction.",
+  "indications": [
+    "Term and near-term neonates (>34 weeks gestation) with hypoxic respiratory failure associated with clinical or echocardiographic evidence of pulmonary hypertension, in conjunction with ventilatory support and other agents, to improve oxygenation and reduce the need for extracorporeal membrane oxygenation (ECMO)"
+  ],
+  "dosage": [
+    {"c": "Hypoxic respiratory failure with pulmonary hypertension", "r": "Neonatal inhaled", "d": "20 ppm inhaled nitric oxide", "t": "Continuous, for up to 14 days or until the underlying oxygen desaturation has resolved", "n": "Doses greater than 20 ppm are not recommended (increased methemoglobinemia and NO2)"},
+    {"c": "Weaning / discontinuation", "r": "Neonatal inhaled", "d": "Down-titrate in several steps", "t": "Pause several hours at each step", "n": "Avoid abrupt discontinuation to prevent rebound pulmonary hypertension and hypoxemia"}
+  ],
+  "admin": [
+    "Deliver via a calibrated INOmax delivery system with continuous monitoring of inspired NO and NO2 concentrations",
+    "Use in conjunction with ventilatory support and other appropriate agents",
+    "Do not exceed 20 ppm",
+    "Monitor methemoglobin within 4-8 hours of initiation and periodically thereafter",
+    "Wean gradually in steps - never discontinue abruptly because of rebound pulmonary hypertension risk",
+    "Have backup delivery and manual ventilation available in case of system failure"
+  ],
+  "moa": "Nitric oxide diffuses into pulmonary vascular smooth muscle and binds the heme of soluble (cytosolic) guanylate cyclase, activating it and increasing intracellular cyclic GMP, which produces vascular smooth-muscle relaxation. Because it is delivered to ventilated alveoli and is rapidly inactivated by hemoglobin, it selectively dilates the pulmonary vasculature of well-ventilated lung regions, improving ventilation-perfusion matching and oxygenation without significant systemic vasodilation. It is inactivated by combination with oxyhemoglobin to form methemoglobin and nitrate.",
+  "contra": {
+    "absolute": [
+      "Neonates dependent on right-to-left shunting of blood"
+    ],
+    "relative": [
+      "Pre-existing methemoglobinemia or methemoglobin reductase deficiency",
+      "Left ventricular dysfunction (may worsen with increased pulmonary venous return - risk of pulmonary edema/heart failure)"
+    ],
+    "monitor": [
+      "Methemoglobin level (within 4-8 hours of starting, then periodically)",
+      "Inspired nitrogen dioxide (NO2) concentration",
+      "PaO2 / oxygenation and clinical status",
+      "Signs of rebound pulmonary hypertension during weaning"
+    ]
+  },
+  "preg": "Inhaled nitric oxide in this indication is administered to the neonate, not to a pregnant patient; it is not a maternal therapy in this setting.",
+  "lact": "Not applicable - this is a neonatal inhaled therapy and is not administered to a breastfeeding mother in this indication.",
+  "renal": "No specific dose adjustment is needed; nitric oxide acts locally in the lung and is rapidly inactivated, not renally dose-dependent.",
+  "hepatic": "No specific dose adjustment is needed; the drug acts locally and is rapidly inactivated.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Drugs that cause methemoglobinemia (e.g., prilocaine, nitroprusside, nitroglycerin) - additive risk of methemoglobinemia"
+    ],
+    "minor": ["No clinically significant systemic pharmacokinetic interactions described"],
+    "food": "Not applicable - inhaled gas.",
+    "alcohol": "Not applicable.",
+    "diagnostics": "Monitor methemoglobin and inspired NO2; methemoglobin >7% or NO2 >3 ppm requires dose reduction or discontinuation."
+  },
+  "se": {
+    "common": ["Hypotension", "Withdrawal-related worsening oxygenation", "Atelectasis"],
+    "serious": ["Rebound pulmonary hypertension on abrupt discontinuation", "Methemoglobinemia with hypoxemia", "Nitrogen dioxide-induced airway inflammation/lung injury", "Worsening heart failure in patients with left ventricular dysfunction"],
+    "rare": ["Severe methemoglobinemia requiring treatment"],
+    "emergency": ["Rebound pulmonary hypertension with acute hypoxemia after stopping", "Severe methemoglobinemia", "Acute pulmonary edema in left ventricular dysfunction"]
+  },
+  "monitoring": ["Methemoglobin within 4-8 hours of initiation and periodically", "Inspired nitrogen dioxide (NO2) concentration continuously", "PaO2 and oxygenation status", "Clinical signs during weaning for rebound pulmonary hypertension", "Cardiac/hemodynamic status, especially with left ventricular dysfunction"],
+  "counsel": [
+    "Used in the NICU/ICU for newborns with low oxygen and high lung-artery pressure",
+    "It is delivered through the ventilator and the gas levels are continuously monitored",
+    "The medicine is reduced slowly in steps and never stopped suddenly, to prevent a rebound rise in lung pressures",
+    "The team checks blood methemoglobin levels during treatment",
+    "Care is provided alongside breathing support and other treatments"
+  ],
+  "pk": [
+    ["Onset", "Rapid - improves oxygenation within minutes of starting"],
+    ["Peak", "Selective pulmonary vasodilation at the alveolar level"],
+    ["Half-life", "Very short - rapidly inactivated by hemoglobin (seconds)"],
+    ["Duration", "Effect dissipates quickly after stopping (hence rebound risk on abrupt withdrawal)"],
+    ["Storage", "Store cylinders at 25 C (excursions 15-30 C); protect from shock, heat, oxidizers, and moisture"]
+  ],
+  "pearls": [
+    "Selective pulmonary vasodilator - improves oxygenation/V-Q matching with little systemic effect",
+    "Recommended dose is 20 ppm for up to 14 days; doses >20 ppm are not recommended",
+    "REBOUND PULMONARY HYPERTENSION on abrupt discontinuation - always wean in steps, never stop suddenly",
+    "Methemoglobinemia: check methemoglobin within 4-8 hours and periodically; treat with vitamin C, methylene blue, or transfusion if refractory",
+    "Nitrogen dioxide (NO2) forms from NO and oxygen - keep inspired NO2 <3 ppm to avoid airway injury",
+    "Contraindicated in neonates dependent on right-to-left shunting; caution in left ventricular dysfunction (risk of pulmonary edema)"
+  ],
+  "missed": "Not applicable - inhaled nitric oxide is administered continuously by trained staff using a dedicated delivery system; it is not a self-administered or scheduled-dose medication.",
+  "overdose": "Overdose is manifested by elevated methemoglobin (>7%) and elevated inspired NO2 (>3 ppm). Reduce or discontinue INOmax. Treat refractory methemoglobinemia with intravenous vitamin C, methylene blue, or blood transfusion as needed, and provide supportive respiratory care.",
+  "refs": [
+    ["FDA Label - Nitric Oxide (INOmax) via openFDA", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22INOmax%22"],
+    ["DailyMed - INOmax (nitric oxide)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=INOmax"]
+  ]
+}

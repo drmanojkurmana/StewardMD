@@ -1,0 +1,90 @@
+{
+  "generic": "Tirofiban",
+  "cls": "Glycoprotein IIb/IIIa receptor antagonist",
+  "pharm": "Antiplatelet agent (parenteral platelet aggregation inhibitor)",
+  "tags": ["GP IIb/IIIa inhibitor", "antiplatelet", "NSTE-ACS", "acute coronary syndrome", "IV"],
+  "quick": [
+    ["Adult dose", "25 mcg/kg IV over 5 min, then 0.15 mcg/kg/min"],
+    ["Meal", "N/A (IV)"],
+    ["Pregnancy", "Limited data; treat MI as emergency"],
+    ["Lactation", "No human milk data; weigh risk/benefit"],
+    ["Renal", "CrCl <=60 mL/min: reduce infusion to 0.075 mcg/kg/min"],
+    ["Hepatic", "No adjustment; clearance unaffected"],
+    ["Alcohol", "Not relevant during acute IV therapy"],
+    ["Monitoring", "Platelets (6 h then daily), Hgb/Hct, bleeding"]
+  ],
+  "summary": "Tirofiban is an IV reversible GP IIb/IIIa receptor antagonist used in non-ST elevation acute coronary syndrome (NSTE-ACS) to reduce thrombotic cardiovascular events. Given as 25 mcg/kg over 5 minutes then 0.15 mcg/kg/min for up to 18 hours, with the maintenance infusion halved to 0.075 mcg/kg/min when CrCl <=60 mL/min. Bleeding and thrombocytopenia are the key risks.",
+  "indications": [
+    "Reduce the rate of thrombotic cardiovascular events (combined endpoint of death, myocardial infarction, or refractory ischemia/repeat cardiac procedure) in patients with non-ST elevation acute coronary syndrome (NSTE-ACS)"
+  ],
+  "dosage": [
+    {"c": "NSTE-ACS, normal renal function (CrCl >60 mL/min)", "r": "Standard IV", "d": "25 mcg/kg IV within 5 minutes, then 0.15 mcg/kg/min infusion", "t": "Bolus then continuous infusion for up to 18 hours", "n": "Administered with aspirin and an anticoagulant (heparin or bivalirudin)"},
+    {"c": "NSTE-ACS, renal impairment (CrCl <=60 mL/min)", "r": "Renal-adjusted", "d": "25 mcg/kg IV within 5 minutes, then 0.075 mcg/kg/min infusion", "t": "Bolus then continuous infusion for up to 18 hours", "n": "CrCl by Cockcroft-Gault using actual body weight; halved maintenance rate"}
+  ],
+  "admin": [
+    "For intravenous use only; do not give by any other route",
+    "May be administered from the 250 mL premixed bag (50 mcg/mL); do NOT dilute",
+    "Give the bolus dose within 5 minutes via IV pump, then immediately start the maintenance infusion via IV pump",
+    "Inspect visually for particulate matter/discoloration; do not use unless clear and seal intact; discard unused portion in bag",
+    "Compatible in the same line with heparin, atropine, dobutamine, dopamine, epinephrine, famotidine, furosemide, lidocaine, midazolam, morphine, nitroglycerin, potassium chloride, propranolol; do NOT give in the same line as diazepam",
+    "Minimize arterial/venous punctures, IM injections, nasotracheal intubation and other traumatic procedures to reduce bleeding"
+  ],
+  "moa": "Tirofiban is a reversible non-peptide antagonist of fibrinogen binding to the platelet glycoprotein (GP) IIb/IIIa receptor, the major surface receptor mediating platelet aggregation. By blocking this final common pathway it inhibits platelet aggregation in a dose- and concentration-dependent manner, achieving >90% inhibition within about 10 minutes of the recommended bolus; the effect reverses 4 to 8 hours after the infusion stops.",
+  "contra": {
+    "absolute": ["Severe hypersensitivity (e.g., anaphylaxis) to tirofiban", "Known hypersensitivity to any component", "History of thrombocytopenia following prior tirofiban exposure", "Active internal bleeding", "History of bleeding diathesis, major surgical procedure or severe physical trauma within the previous month"],
+    "relative": ["Concomitant fibrinolytics, anticoagulants or other antiplatelet agents (additive bleeding)", "Prior exposure to a GP IIb/IIIa receptor antagonist (thrombocytopenia risk)", "Elderly with higher baseline bleeding risk"],
+    "monitor": ["Severe renal insufficiency (reduce dose; not studied in hemodialysis)", "Recent arterial access for catheterization", "Falling platelet count or hemoglobin"]
+  },
+  "preg": "Available case reports have not established an association with major birth defects, miscarriage or adverse maternal/fetal outcomes, though data cannot definitively establish absence of risk. Animal studies up to 5 mg/kg/day showed no fetal harm. Untreated myocardial infarction is a medical emergency that can be fatal to mother and fetus.",
+  "lact": "No data on presence in human milk, effects on the breastfed infant, or on milk production; tirofiban is present in rat milk. Weigh the developmental/health benefits of breastfeeding against the mother's clinical need and potential infant risk.",
+  "renal": "Patients with moderate-to-severe renal insufficiency have decreased plasma clearance. For CrCl <=60 mL/min reduce the maintenance infusion to 0.075 mcg/kg/min (bolus unchanged). Plasma clearance falls ~40% with CrCl <60 mL/min and >50% with CrCl <30 mL/min. Tirofiban is removed by hemodialysis; safety/efficacy in dialysis patients not established.",
+  "hepatic": "No effect of hepatic impairment on tirofiban clearance; no dosage adjustment is recommended for hepatic impairment.",
+  "interactions": {
+    "major": ["Fibrinolytics (e.g., alteplase) - markedly increased bleeding risk", "Anticoagulants (heparin, warfarin, DOACs) - increased bleeding risk", "Other antiplatelet agents (aspirin, clopidogrel) - increased bleeding risk (used together intentionally with monitoring)"],
+    "moderate": ["Drugs affecting hemostasis (e.g., NSAIDs) - additive bleeding risk"],
+    "minor": ["None of clinical significance identified in labeling"],
+    "food": "Not applicable; administered intravenously in an acute care setting.",
+    "alcohol": "Not relevant during acute parenteral therapy.",
+    "diagnostics": "Prolongs bleeding time; may lower platelet count and hemoglobin/hematocrit."
+  },
+  "se": {
+    "common": ["Bleeding (most common; often at the arterial access site)", "Minor mucocutaneous bleeding", "Pelvic pain", "Bradycardia", "Coronary artery dissection (procedure-related)", "Dizziness", "Leg pain", "Sweating", "Edema/swelling"],
+    "serious": ["Major bleeding (intracranial, retroperitoneal, GI)", "Thrombocytopenia (platelets <90,000/mm3)", "Profound thrombocytopenia (<10,000/mm3)"],
+    "rare": ["Anaphylactic/severe allergic reactions", "Severe thrombocytopenia associated with hypersensitivity"],
+    "emergency": ["Uncontrollable or major hemorrhage", "Intracranial hemorrhage", "Anaphylaxis", "Acute profound thrombocytopenia"]
+  },
+  "monitoring": [
+    "Platelet count at baseline, about 6 hours after initiation, and daily thereafter",
+    "Hemoglobin and hematocrit; signs and symptoms of bleeding",
+    "Arterial access site and puncture sites for hematoma/bleeding",
+    "Renal function (CrCl) to confirm correct infusion rate",
+    "If platelets fall <90,000/mm3, exclude pseudothrombocytopenia; if confirmed, discontinue tirofiban and heparin"
+  ],
+  "counsel": [
+    "This medicine is given through a vein in the hospital to help prevent blood clots in your heart vessels",
+    "Report any unusual bleeding, bruising, blood in urine or stool, or black tarry stools immediately",
+    "Tell staff about any recent surgery, trauma, ulcers, or bleeding problems",
+    "Bed rest and gentle handling of access sites may be required to limit bleeding",
+    "Report any rash, swelling, difficulty breathing, or signs of allergic reaction"
+  ],
+  "pk": [
+    ["Onset", ">90% platelet inhibition within ~10 minutes of bolus"],
+    ["Peak", "Effect reaches maximum during/just after bolus"],
+    ["Half-life", "Approximately 2 hours"],
+    ["Duration", "Platelet function returns toward baseline in 4-8 hours after stopping"],
+    ["Storage", "Store premixed bag at 20-25 C (68-77 F); protect from light/freezing per label"]
+  ],
+  "pearls": [
+    "Reversible GP IIb/IIIa inhibitor: platelet function recovers within hours of stopping the infusion",
+    "Halve the maintenance infusion (to 0.075 mcg/kg/min) when CrCl <=60 mL/min - the bolus is unchanged",
+    "Cleared largely by the kidney and removed by hemodialysis, unlike most highly protein-bound drugs",
+    "Check platelets ~6 hours in to catch acute profound thrombocytopenia early",
+    "Most bleeding occurs at the femoral arterial access site after catheterization"
+  ],
+  "missed": "Administered by a clinician as a continuous IV infusion; not self-dosed. Infusion rate is managed and adjusted by the care team, and the drug is stopped if uncontrolled bleeding occurs.",
+  "overdose": "The most frequent manifestation of overdose is bleeding, primarily minor mucocutaneous and access-site bleeding. Treat by assessing clinical status and stopping or reducing the infusion as appropriate. Tirofiban can be removed by hemodialysis.",
+  "refs": [
+    ["FDA Tirofiban Hydrochloride Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tirofiban+hydrochloride%22"],
+    ["FDA DailyMed - Tirofiban", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

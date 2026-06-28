@@ -1,0 +1,116 @@
+{
+  "generic": "Pefloxacin",
+  "cls": "Fluoroquinolone antibacterial",
+  "pharm": "Fluoroquinolone that inhibits bacterial DNA gyrase (topoisomerase II) and topoisomerase IV, blocking DNA replication; broad gram-negative and some gram-positive activity.",
+  "tags": ["Not FDA-approved (EMA/national)", "Fluoroquinolone", "Class warnings: tendon/QT/CNS", "Avoid in children/pregnancy", "Photosensitivity"],
+  "quick": [
+    ["Adult dose", "400 mg orally or IV twice daily (severe infections); 800 mg single dose for uncomplicated gonorrhea/UTI (per indication)"],
+    ["Meal", "May take with food to reduce GI upset; separate from antacids/cations by 2 hours"],
+    ["Pregnancy", "Contraindicated - fluoroquinolones avoided in pregnancy (cartilage toxicity)"],
+    ["Lactation", "Contraindicated - excreted in breast milk; avoid"],
+    ["Renal", "No major adjustment (hepatic metabolism), but reduce frequency in severe impairment"],
+    ["Hepatic", "Reduce dose/frequency in hepatic impairment (extensive hepatic metabolism)"],
+    ["Alcohol", "Avoid excess; may worsen CNS effects"],
+    ["Monitoring", "Tendon pain, CNS effects, QT/ECG in at-risk patients, blood glucose"]
+  ],
+  "summary": "Pefloxacin is a fluoroquinolone antibacterial active mainly against gram-negative organisms and some gram-positive bacteria, used for susceptible serious infections (urinary, respiratory, skin/soft-tissue, bone/joint, gonorrhea, and some systemic infections) where other agents are unsuitable. It inhibits bacterial DNA gyrase and topoisomerase IV. As a fluoroquinolone it shares the class's serious safety profile: tendinitis and tendon rupture, QT prolongation, CNS effects (including seizures), peripheral neuropathy, photosensitivity (notably with pefloxacin), and aortic aneurysm risk - so it is reserved for situations where other antibacterials cannot be used. It is contraindicated in pregnancy, breastfeeding, children/adolescents, and in those with quinolone hypersensitivity or tendon disorders. Pefloxacin is NOT approved by the US FDA; this record is based on EMA/national fluoroquinolone product information and class labeling.",
+  "indications": [
+    "Susceptible serious gram-negative infections where other antibacterials are unsuitable",
+    "Complicated urinary tract infections",
+    "Respiratory tract infections due to susceptible organisms",
+    "Skin and soft-tissue infections",
+    "Bone and joint infections",
+    "Uncomplicated gonorrhea (single-dose regimen, where still effective)"
+  ],
+  "dosage": [
+    {"c": "Serious systemic / complicated infections", "r": "Adult oral or IV", "d": "400 mg twice daily", "t": "Twice daily", "n": "IV infusion over ~1 hour; per EMA/national product information"},
+    {"c": "Uncomplicated urinary tract infection", "r": "Adult oral", "d": "400 mg twice daily or 800 mg as a single dose (per local guidance)", "t": "Twice daily / single dose", "n": "Resistance is common; confirm susceptibility"},
+    {"c": "Uncomplicated gonorrhea", "r": "Adult oral", "d": "800 mg as a single dose", "t": "Single dose", "n": "Only where local quinolone susceptibility remains - widespread resistance limits use"}
+  ],
+  "admin": [
+    "May be taken with food to reduce gastrointestinal upset",
+    "Separate from antacids, sucralfate, and iron/zinc/magnesium/calcium products by at least 2 hours (chelation reduces absorption)",
+    "Give IV doses by slow infusion (about 1 hour)",
+    "Advise avoidance of sun/UV exposure - pefloxacin is notably phototoxic",
+    "Reserve for infections where other antibacterials are unsuitable; not FDA-approved (follow EMA/national information)"
+  ],
+  "moa": "Pefloxacin is a fluoroquinolone that inhibits the bacterial type II topoisomerases - DNA gyrase and topoisomerase IV - which are essential for DNA replication, transcription, repair, and recombination. Inhibiting these enzymes prevents supercoiling and relaxation of bacterial DNA, leading to bactericidal disruption of DNA synthesis. It is largely metabolized in the liver, with norfloxacin as an active metabolite.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to pefloxacin or other quinolones",
+      "Pregnancy",
+      "Breastfeeding",
+      "Children and growing adolescents (risk of arthropathy/cartilage damage)",
+      "History of tendon disorders related to quinolone use",
+      "Glucose-6-phosphate dehydrogenase (G6PD) deficiency (risk of hemolysis)"
+    ],
+    "relative": [
+      "Known QT prolongation, uncorrected electrolyte disturbance, or drugs that prolong QT",
+      "Epilepsy or conditions predisposing to seizures",
+      "Myasthenia gravis (may exacerbate muscle weakness)",
+      "Aortic aneurysm or risk factors for aortic dissection",
+      "Concurrent corticosteroids (added tendon risk)"
+    ],
+    "monitor": [
+      "Tendon pain or swelling",
+      "CNS effects (seizures, confusion, neuropathy)",
+      "ECG/QT in at-risk patients",
+      "Blood glucose (dysglycemia)"
+    ]
+  },
+  "preg": "Contraindicated in pregnancy. Fluoroquinolones are avoided because of the risk of cartilage damage in the developing fetus.",
+  "lact": "Contraindicated during breastfeeding; pefloxacin is excreted in breast milk and may harm the infant's developing joints.",
+  "renal": "Pefloxacin is eliminated mainly by hepatic metabolism, so renal impairment has limited effect; dose-frequency reduction may still be considered in severe renal impairment per product information.",
+  "hepatic": "Because pefloxacin is extensively metabolized by the liver, reduce the dose or dosing frequency in hepatic impairment and monitor for accumulation.",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs (class IA/III antiarrhythmics, macrolides, antipsychotics, tricyclics) - additive QT prolongation and arrhythmia risk",
+      "Theophylline - pefloxacin raises theophylline levels and seizure risk; monitor levels"
+    ],
+    "moderate": [
+      "Antacids, sucralfate, and di/trivalent cations (iron, zinc, calcium, magnesium, aluminium) - chelation markedly reduces absorption; separate by >=2 hours",
+      "Warfarin / vitamin K antagonists - enhanced anticoagulant effect; monitor INR",
+      "NSAIDs - increased CNS stimulation/seizure risk",
+      "Corticosteroids - increased risk of tendon rupture",
+      "Antidiabetic agents - dysglycemia (both hypo- and hyperglycemia)"
+    ],
+    "minor": [],
+    "food": "May be taken with food; avoid taking with dairy or cation-containing products at the same time.",
+    "alcohol": "Avoid excessive alcohol, which may add to CNS effects.",
+    "diagnostics": "May cause false-positive opiate screening; can alter glucose readings via dysglycemia."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Abdominal pain", "Headache", "Dizziness", "Photosensitivity / phototoxicity (prominent with pefloxacin)"],
+    "serious": ["Tendinitis and tendon rupture (especially Achilles)", "QT prolongation / torsades de pointes", "Seizures and other CNS reactions", "Peripheral neuropathy (may be irreversible)", "Clostridioides difficile colitis", "Aortic aneurysm/dissection"],
+    "rare": ["Severe cutaneous reactions (SJS/TEN)", "Hepatotoxicity", "Hemolysis in G6PD deficiency", "Dysglycemia", "Psychiatric reactions (psychosis, suicidal ideation)"],
+    "emergency": ["Anaphylaxis", "Tendon rupture", "Torsades de pointes / serious arrhythmia", "Aortic dissection/rupture"]
+  },
+  "monitoring": ["Tendon pain or swelling (stop the drug and rest the limb if suspected)", "CNS symptoms (seizures, confusion, neuropathy, mood change)", "ECG/QT in patients at risk", "Blood glucose, especially in diabetics", "Signs of severe diarrhea (C. difficile)"],
+  "counsel": [
+    "Stop the medicine and call your doctor at once if you get tendon pain or swelling, especially at the back of the ankle",
+    "Avoid sun and sunlamps and use sun protection - this medicine can cause severe sunburn-like reactions",
+    "Do not take it within 2 hours of antacids, iron, calcium, or dairy products",
+    "Report any unusual nerve symptoms (numbness, tingling, burning), palpitations, mood changes, or seizures",
+    "Tell your doctor if you are pregnant, breastfeeding, or have a history of tendon problems or heart-rhythm issues"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal activity begins soon after absorption"],
+    ["Peak", "Plasma peak about 1.5-2 hours after an oral dose; near-complete oral bioavailability"],
+    ["Half-life", "Long, approximately 8-13 hours (allows twice-daily dosing)"],
+    ["Duration", "Twice-daily dosing; extensive tissue penetration"],
+    ["Storage", "Store below 25-30 C; protect from light per product information"]
+  ],
+  "pearls": [
+    "NOT FDA-approved - this record reflects EMA/national fluoroquinolone product information and class labeling",
+    "Class warnings apply: tendinitis/tendon rupture, QT prolongation, CNS/peripheral-neuropathy effects, and aortic aneurysm/dissection - reserve for when other agents cannot be used",
+    "Pefloxacin causes notably more photosensitivity than other quinolones - counsel strict sun protection",
+    "Contraindicated in pregnancy, breastfeeding, and children/growing adolescents (cartilage toxicity)",
+    "Separate from antacids, iron, calcium, and other di/trivalent cations by at least 2 hours to preserve absorption"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember. If it is almost time for the next dose, skip the missed dose - do not double up. Complete the full prescribed course.",
+  "overdose": "Overdose may cause CNS effects (including seizures) and QT prolongation. There is no specific antidote; manage with supportive and symptomatic care, ECG monitoring, seizure control, and adequate hydration. Hemodialysis removes little pefloxacin because of high tissue distribution.",
+  "refs": [
+    ["EMA / national medicines agencies - Pefloxacin", "https://www.ema.europa.eu/en/medicines"],
+    ["WHO / fluoroquinolone class safety information", "https://www.who.int/teams/regulation-prequalification"]
+  ]
+}

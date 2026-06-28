@@ -1,0 +1,103 @@
+{
+  "generic": "Methylene Blue (Methylthioninium chloride)",
+  "cls": "Antidote / methemoglobinemia reversal agent (thiazine dye; potent reversible MAO inhibitor)",
+  "pharm": "A water-soluble thiazine dye that promotes non-enzymatic redox conversion of methemoglobin to hemoglobin: it is reduced to leucomethylene blue via NADPH reductase, which then reduces the ferric iron of methemoglobin back to the ferrous state.",
+  "tags": ["Antidote", "Methemoglobinemia", "Serotonin syndrome risk (MAOI)", "G6PD / hemolysis risk", "IV thiazine dye"],
+  "quick": [
+    ["Adult dose", "1 mg/kg IV over 5-30 minutes; may repeat once at 1 hour (max two doses)"],
+    ["Meal", "Not applicable - intravenous use"],
+    ["Pregnancy", "May cause fetal harm - avoid; advise of fetal risk"],
+    ["Lactation", "Discontinue breastfeeding during and for up to 8 days after treatment"],
+    ["Renal", "Mild - no change; moderate/severe - single 1 mg/kg dose only"],
+    ["Hepatic", "Extensively hepatically metabolized; monitor for an extended period"],
+    ["Alcohol", "Not specified in labeling"],
+    ["Monitoring", "Methemoglobin levels; serotonin syndrome signs; CBC/hemolysis"]
+  ],
+  "summary": "ProvayBlue (methylene blue, methylthioninium chloride) is a water-soluble thiazine dye and antidote indicated for the treatment of pediatric and adult patients with acquired methemoglobinemia. It works by promoting non-enzymatic redox conversion of methemoglobin to hemoglobin: methylene blue is first reduced to leucomethylene blue via NADPH reductase, which then reduces the ferric iron of methemoglobin back to the ferrous state of normal hemoglobin. The dose is 1 mg/kg IV over 5-30 minutes, repeatable once at 1 hour (maximum two doses). It carries a boxed warning for serious or fatal serotonin syndrome because it is a potent reversible MAO inhibitor - concomitant serotonergic drugs (SSRIs, SNRIs, MAOIs, opioids, dextromethorphan, and others) must be avoided. It is contraindicated in G6PD deficiency (risk of severe hemolytic anemia) and in severe hypersensitivity. At high cumulative doses it can paradoxically cause methemoglobinemia and severe hemolysis. It causes a blue-green discoloration of urine, skin, and mucous membranes and interferes with pulse oximetry readings.",
+  "indications": [
+    "Treatment of acquired methemoglobinemia in pediatric and adult patients"
+  ],
+  "dosage": [
+    {"c": "Acquired methemoglobinemia - initial", "r": "IV (adult and pediatric)", "d": "1 mg/kg over 5-30 minutes", "t": "Single dose", "n": "May dilute in 50 mL of 5% Dextrose; avoid sodium chloride solutions"},
+    {"c": "Repeat dose", "r": "IV", "d": "Up to 1 mg/kg", "t": "1 hour after the first dose", "n": "If methemoglobin >30% or symptoms persist; maximum two doses"},
+    {"c": "Moderate to severe renal impairment", "r": "IV", "d": "Single 1 mg/kg dose only", "t": "Single dose", "n": "Do not repeat"},
+    {"c": "Non-response after two doses", "r": "-", "d": "Consider alternative interventions", "t": "-", "n": "Reassess the diagnosis"}
+  ],
+  "admin": [
+    "Intravenous use only - do NOT give subcutaneously (risk of necrotic abscess) or intrathecally",
+    "May be diluted in 50 mL of 5% Dextrose Injection; avoid sodium chloride solutions, which reduce solubility",
+    "Use the diluted solution immediately after preparation",
+    "Administer over 5-30 minutes",
+    "A maximum of two doses is recommended"
+  ],
+  "moa": "Methylene blue is a water-soluble thiazine dye that promotes a non-enzymatic redox conversion of methemoglobin to hemoglobin. It is first converted to leucomethylene blue via NADPH reductase. Leucomethylene blue then reduces the ferric iron (Fe3+) of methemoglobin to the ferrous state (Fe2+) of normal hemoglobin, restoring oxygen-carrying capacity. Low concentrations of methylene blue speed up the in vivo conversion of methemoglobin to hemoglobin. At high doses, however, methylene blue can paradoxically oxidize hemoglobin and cause methemoglobinemia, and it is ineffective in NADPH-dependent methemoglobin reductase deficiency and in G6PD deficiency, where it can instead precipitate severe hemolysis.",
+  "contra": {
+    "absolute": [
+      "Severe hypersensitivity to methylene blue",
+      "Glucose-6-phosphate dehydrogenase (G6PD) deficiency (risk of hemolytic anemia)",
+      "Concomitant serotonergic drugs (boxed-warning-level avoidance; methylene blue is a potent MAO inhibitor)"
+    ],
+    "relative": [
+      "Moderate to severe renal impairment (single dose only)",
+      "Hepatic impairment (extended monitoring)",
+      "NADPH-dependent methemoglobin reductase deficiency (ineffective)"
+    ],
+    "monitor": [
+      "Methemoglobin levels (decide on a repeat dose if >30% or symptoms persist)",
+      "Signs of serotonin syndrome (CNS effects for up to 4 hours if a serotonergic drug is unavoidable)",
+      "CBC / hemoglobin for delayed hemolysis (onset 1 day or more)",
+      "Arterial blood gas for true oxygen saturation (pulse oximetry is unreliable during/after infusion)"
+    ]
+  },
+  "preg": "Methylene blue may cause fetal harm. Intra-amniotic injection in the second trimester has been associated with neonatal intestinal atresia and fetal death; injection in the hours to days before birth can cause hyperbilirubinemia, hemolytic anemia, skin staining, methemoglobinemia, respiratory distress, and photosensitivity in the newborn. Animal studies showed adverse developmental outcomes. Advise pregnant women of the risk to the fetus.",
+  "lact": "Discontinue breastfeeding during and for up to 8 days after treatment, because of the potential for serious adverse reactions including genotoxicity.",
+  "renal": "No dose adjustment is needed for mild renal impairment (eGFR 60-89). For moderate to severe impairment (eGFR 15-59), give only a single 1 mg/kg dose and do not repeat. Exposure (AUC) increases by about 52%, 116%, and 192% in mild, moderate, and severe renal impairment respectively.",
+  "hepatic": "Methylene blue is extensively metabolized in the liver. Monitor patients with any hepatic impairment for toxicities and potential drug interactions for an extended period following treatment.",
+  "interactions": {
+    "major": [
+      "Serotonergic drugs (SSRIs, SNRIs, MAOIs, bupropion, buspirone, clomipramine, mirtazapine, linezolid, opioids, dextromethorphan) - serious or fatal serotonin syndrome, because methylene blue is a potent reversible MAO inhibitor; avoid, and if unavoidable use the lowest dose, observe CNS effects for up to 4 hours, and avoid serotonergic drugs for 72 hours after the last dose"
+    ],
+    "moderate": [
+      "Methylene blue inhibits multiple CYP enzymes (CYP1A2, 2B6, 2C8, 2C9, 2C19, 2D6, 3A4/5) in vitro, though a 2 mg/kg study did not affect the exposure of probe substrates"
+    ],
+    "minor": ["May cause falls in the Bispectral Index (BIS) reading"],
+    "food": "Not specified in labeling.",
+    "alcohol": "Not specified in labeling.",
+    "diagnostics": "Causes a falsely low SpO2 on pulse oximetry; interferes with urine tests that rely on a blue indicator (e.g., leukocyte esterase dipstick)."
+  },
+  "se": {
+    "common": ["Headache", "Hypokalemia", "Diarrhea", "Hypomagnesemia", "Myoclonus", "Nausea", "Seizure-like phenomena", "Blue-green discoloration of urine, skin, and mucous membranes"],
+    "serious": ["Serotonin syndrome (may be fatal)", "Hemolytic anemia (delayed; severe in G6PD deficiency)", "Methemoglobinemia at high doses", "Anaphylaxis / severe hypersensitivity"],
+    "rare": ["Palpitations and tachycardia", "Blurred vision, eye pruritus / ocular hyperemia", "Infusion-site reactions (extravasation, induration, urticaria, necrotic ulcer)", "Phototoxicity", "Hyperbilirubinemia"],
+    "emergency": ["Serotonin syndrome (mental status changes, autonomic instability, neuromuscular symptoms)", "Anaphylaxis"]
+  },
+  "monitoring": ["Methemoglobin level (decide on a repeat dose if >30% or symptoms persist)", "Signs of serotonin syndrome (up to 4 hours post-dose if a serotonergic drug is unavoidable)", "CBC / hemoglobin for delayed hemolysis (onset 1 day or more)", "Arterial blood gas for true oxygen saturation (pulse oximetry interference)", "Cardiopulmonary, hematologic, and neurologic status in overdose"],
+  "counsel": [
+    "Seek immediate medical attention for symptoms of serotonin syndrome (mental status changes, restlessness, sweating, tremor, fast heartbeat)",
+    "This medicine will turn your urine, skin, and body fluids blue or green - this is expected and temporary",
+    "Avoid driving and operating machinery during treatment because of possible confusion, dizziness, or visual disturbance",
+    "Take precautions against light exposure, as photosensitivity can occur",
+    "Avoid serotonergic medicines for 72 hours after your last dose",
+    "Tell your care team if you are pregnant or breastfeeding (stop breastfeeding for up to 8 days after treatment)"
+  ],
+  "pk": [
+    ["Onset", "Rapid (intravenous); low concentrations speed methemoglobin-to-hemoglobin conversion"],
+    ["Peak", "Cmax about 2,917 ng/mL after a 2 mg/kg dose"],
+    ["Half-life", "Approximately 24 hours"],
+    ["Duration", "Acute antidotal use; may repeat once at 1 hour"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C); do not refrigerate or freeze; keep in original package to protect from light"]
+  ],
+  "pearls": [
+    "A potent reversible MAO inhibitor - the basis for the serotonin-syndrome boxed warning; screen all serotonergic medications before use",
+    "Paradoxically causes methemoglobinemia at high cumulative doses and is ineffective and dangerous in G6PD deficiency and NADPH-methemoglobin reductase deficiency",
+    "Causes a falsely LOW pulse oximetry reading - obtain an arterial blood gas for the true oxygen saturation",
+    "Use 5% Dextrose, not normal saline, as the diluent",
+    "Never give subcutaneously (necrosis) or intrathecally"
+  ],
+  "missed": "Not applicable - methylene blue is given acutely by a clinician for methemoglobinemia and is not a self-administered scheduled medicine.",
+  "overdose": "Overdose effects are dose-related. At 3 mg/kg or more: hypotension, wheezing, reduced oxygenation. At cumulative doses of 7 mg/kg or more: nausea, vomiting, chest pain, dyspnea, tachycardia, tremor, mydriasis, abdominal pain, confusion, blue staining of urine and skin, and mild methemoglobinemia (effects last 2-12 hours). A single dose of 20 mg/kg or more can cause severe intravascular hemolysis, hyperbilirubinemia, and death. Management is supportive with monitoring of cardiopulmonary, hematologic, and neurologic status.",
+  "refs": [
+    ["DailyMed - PROVAYBLUE (methylene blue) injection, full prescribing information", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=4f6848e5-35ed-4046-b13c-3032b5ba3232"],
+    ["DailyMed - Methylene blue label (full display, rev. Feb 2024)", "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=4f6848e5-35ed-4046-b13c-3032b5ba3232&type=display"]
+  ]
+}

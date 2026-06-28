@@ -1,0 +1,114 @@
+{
+  "generic": "Fondaparinux",
+  "cls": "Selective Factor Xa inhibitor (synthetic pentasaccharide anticoagulant)",
+  "pharm": "Binds antithrombin III and potentiates (~300-fold) its neutralization of Factor Xa, interrupting the coagulation cascade and inhibiting thrombin generation and thrombus development; no effect on thrombin or platelet function.",
+  "tags": ["Rx only", "BOXED WARNING: spinal/epidural hematoma", "Factor Xa inhibitor", "Subcutaneous only", "No routine antidote"],
+  "quick": [
+    ["Adult dose", "VTE prophylaxis 2.5 mg SC once daily; DVT/PE treatment 5 mg (<50 kg) / 7.5 mg (50-100 kg) / 10 mg (>100 kg) SC once daily"],
+    ["Meal", "Not applicable - given by subcutaneous injection"],
+    ["Pregnancy", "Low placental transfer; use if benefit justifies risk (untreated VTE is hazardous)"],
+    ["Lactation", "Excreted in rat milk; caution - human data limited"],
+    ["Renal", "Contraindicated if CrCl <30 mL/min; use caution 30-50 mL/min"],
+    ["Hepatic", "Use with caution in severe hepatic impairment (coagulation factor depletion)"],
+    ["Alcohol", "No specific interaction; avoid excess (bleeding/fall risk)"],
+    ["Monitoring", "CBC/platelets, serum creatinine, stool occult blood; signs of bleeding"]
+  ],
+  "summary": "Fondaparinux is a synthetic pentasaccharide that selectively inhibits Factor Xa through antithrombin III. It is used for prophylaxis of deep vein thrombosis after hip fracture, hip replacement, knee replacement, or abdominal surgery, and for treatment of acute DVT and pulmonary embolism in conjunction with warfarin. It carries a BOXED WARNING for spinal or epidural hematoma, which may cause long-term or permanent paralysis, in patients undergoing neuraxial anesthesia or spinal puncture - the risk is higher with indwelling epidural catheters and concomitant drugs affecting hemostasis. It is given subcutaneously once daily, is contraindicated in severe renal impairment and in body weight under 50 kg for VTE prophylaxis, and has no specific antidote.",
+  "indications": [
+    "Prophylaxis of DVT in patients undergoing hip fracture surgery (including extended prophylaxis)",
+    "Prophylaxis of DVT in patients undergoing hip replacement surgery",
+    "Prophylaxis of DVT in patients undergoing knee replacement surgery",
+    "Prophylaxis of DVT in patients undergoing abdominal surgery at risk for thromboembolic complications",
+    "Treatment of acute DVT in conjunction with warfarin",
+    "Treatment of acute pulmonary embolism in conjunction with warfarin (initial therapy in hospital)"
+  ],
+  "dosage": [
+    {"c": "DVT prophylaxis - hip fracture, hip or knee replacement", "r": "Adult subcutaneous", "d": "2.5 mg once daily; initial dose no earlier than 6-8 hours after surgery (after hemostasis established); usual duration 5-9 days", "t": "Once daily", "n": "Hip fracture: extended prophylaxis up to 24 additional days recommended"},
+    {"c": "DVT prophylaxis - abdominal surgery", "r": "Adult subcutaneous", "d": "2.5 mg once daily; initial dose 6-8 hours after surgery; usual duration 5-9 days", "t": "Once daily", "n": "Up to 10 days in trials"},
+    {"c": "Treatment of acute DVT or PE", "r": "Adult subcutaneous", "d": "5 mg (<50 kg), 7.5 mg (50-100 kg), or 10 mg (>100 kg) once daily, with warfarin", "t": "Once daily", "n": "Continue >=5 days until INR 2-3 achieved with warfarin"}
+  ],
+  "admin": [
+    "Administer by subcutaneous injection only; do not give IM",
+    "Do not mix with other injections or infusions; discard any unused portion",
+    "For prophylaxis, give the first dose no earlier than 6-8 hours after surgery to reduce major bleeding",
+    "Rotate subcutaneous injection sites (alternate left/right anterolateral and posterolateral abdominal wall)",
+    "Discontinue other agents that increase bleeding risk before initiation unless essential"
+  ],
+  "moa": "Fondaparinux's antithrombotic activity results from antithrombin III (ATIII)-mediated selective inhibition of Factor Xa. By selectively binding ATIII, fondaparinux potentiates (about 300 times) the innate neutralization of Factor Xa by ATIII. Neutralization of Factor Xa interrupts the blood coagulation cascade, inhibiting thrombin formation and thrombus development. Fondaparinux does not inactivate thrombin (activated Factor II) and has no known effect on platelet function; at recommended doses it does not affect fibrinolytic activity or bleeding time.",
+  "contra": {
+    "absolute": [
+      "Severe renal impairment (creatinine clearance <30 mL/min)",
+      "Active major bleeding",
+      "Bacterial endocarditis",
+      "Thrombocytopenia with a positive in vitro anti-platelet antibody test in the presence of fondaparinux",
+      "Body weight <50 kg (VTE prophylaxis only)",
+      "History of serious hypersensitivity reaction (e.g., angioedema, anaphylactoid/anaphylactic reactions) to fondaparinux"
+    ],
+    "relative": [
+      "Renal impairment (CrCl 30-50 mL/min) - increased bleeding risk",
+      "Low body weight",
+      "Concurrent neuraxial anesthesia or indwelling epidural catheter",
+      "Concomitant drugs affecting hemostasis (NSAIDs, platelet inhibitors, anticoagulants)",
+      "Recent or planned spinal puncture / surgery"
+    ],
+    "monitor": [
+      "Complete blood count including platelets",
+      "Serum creatinine",
+      "Stool occult blood",
+      "Neurologic signs after neuraxial procedures"
+    ]
+  },
+  "preg": "Available data have not shown a clear association with adverse developmental outcomes, and placental transfer is low. Untreated VTE in pregnancy carries risk, while anticoagulants carry maternal/fetal hemorrhage risk. Use during pregnancy if the benefit justifies the risk.",
+  "lact": "Fondaparinux is excreted in the milk of lactating rats; it is not known whether it is excreted in human milk. Exercise caution when administered to a nursing woman.",
+  "renal": "Fondaparinux is eliminated renally; it is contraindicated in severe renal impairment (CrCl <30 mL/min). In moderate impairment (CrCl 30-50 mL/min) use with caution because of increased bleeding risk; assess renal function periodically and discontinue if severe impairment develops.",
+  "hepatic": "No dosage adjustment is established; use with caution in severe hepatic impairment because of the risk of coagulation factor deficiency and bleeding.",
+  "interactions": {
+    "major": [
+      "Other anticoagulants, platelet inhibitors, thrombolytics - additive bleeding risk; discontinue before initiation unless essential"
+    ],
+    "moderate": [
+      "NSAIDs - increased risk of hemorrhage",
+      "Aspirin - increased bleeding risk"
+    ],
+    "minor": [
+      "Warfarin, digoxin, piroxicam - no significant PK/PD interaction shown"
+    ],
+    "food": "Not applicable (parenteral).",
+    "alcohol": "No specific interaction; excessive intake may add to bleeding/fall risk.",
+    "diagnostics": "Does not prolong routine aPTT/PT meaningfully; if monitoring is needed, use an anti-Factor Xa assay calibrated for fondaparinux. May interfere with some HIT antibody assays."
+  },
+  "se": {
+    "common": ["Bleeding/hemorrhage", "Anemia", "Injection-site bleeding/hematoma", "Nausea", "Fever (post-operative)", "Edema"],
+    "serious": ["Major hemorrhage", "Spinal or epidural hematoma (may cause permanent paralysis)", "Thrombocytopenia", "Hypersensitivity/anaphylaxis"],
+    "rare": ["Elevated liver enzymes", "Increased wound complications/oozing"],
+    "emergency": ["Life-threatening major bleeding (intracranial, GI, retroperitoneal)", "Spinal/epidural hematoma with neurologic compromise", "Anaphylaxis"]
+  },
+  "monitoring": ["Periodic CBC including platelet count", "Serum creatinine / renal function", "Stool occult blood", "Signs and symptoms of bleeding", "Neurologic monitoring (midline back pain, lower-limb numbness/weakness, bowel/bladder dysfunction) after neuraxial procedures"],
+  "counsel": [
+    "This medicine is given as an injection under the skin; if self-injecting, learn the proper technique",
+    "Bleeding is the main risk - report any unusual bleeding, bruising, or dark red spots under the skin",
+    "If you have had spinal anesthesia or a spinal tap, get urgent help for back pain, tingling, leg numbness or weakness, or loss of bladder/bowel control",
+    "Avoid aspirin and NSAIDs unless your doctor approves",
+    "Keep appointments for blood tests"
+  ],
+  "pk": [
+    ["Onset", "Rapid and complete subcutaneous absorption (bioavailability 100%)"],
+    ["Peak", "Cmax at approximately 2 hours (steady-state peak ~3 hours)"],
+    ["Half-life", "17 to 21 hours (longer in renal impairment and the elderly)"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); do not freeze; discard unused portion"]
+  ],
+  "pearls": [
+    "BOXED WARNING: spinal/epidural hematoma with neuraxial anesthesia or spinal puncture - can cause permanent paralysis; monitor neurologic status",
+    "No specific antidote - protamine does NOT reverse it; manage bleeding by stopping the drug and supportive care",
+    "Contraindicated in CrCl <30 mL/min and in body weight <50 kg for VTE prophylaxis",
+    "Can be used in heparin-induced thrombocytopenia (HIT) as it does not cross-react with most HIT antibodies, though not FDA-approved for this",
+    "Give the first prophylactic dose no earlier than 6-8 hours after surgery to limit major bleeding"
+  ],
+  "missed": "If a dose is missed, give it as soon as possible the same day, then resume the once-daily schedule; do not give a double dose to make up for a missed one. Contact the prescriber if unsure.",
+  "overdose": "There is no known antidote. Overdose may cause hemorrhagic complications; discontinue treatment and give appropriate supportive therapy. Data in chronic intermittent hemodialysis suggest clearance can increase by about 20% during hemodialysis.",
+  "refs": [
+    ["FDA Label - Fondaparinux sodium (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fondaparinux%22"],
+    ["DailyMed - Fondaparinux sodium", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=fondaparinux"]
+  ]
+}

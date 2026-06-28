@@ -1,0 +1,104 @@
+{
+  "generic": "Recombinant Human Erythropoietin Alfa (Epoetin Alfa)",
+  "cls": "Erythropoiesis-stimulating agent (recombinant human erythropoietin)",
+  "pharm": "Recombinant glycoprotein that mimics endogenous erythropoietin, stimulating red blood cell production by promoting division and differentiation of erythroid progenitors in the bone marrow.",
+  "tags": ["Rx only", "ESA", "Boxed warning", "Iron repletion required"],
+  "quick": [
+    ["Adult dose", "CKD: 50-100 units/kg three times weekly"],
+    ["Meal", "Parenteral (IV/SC); not food-related"],
+    ["Pregnancy", "Use only if clearly needed; use single-dose vials"],
+    ["Lactation", "Use single-dose vials; large molecule, limited transfer"],
+    ["Renal", "Used in CKD anemia; titrate to lowest effective Hb"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Hemoglobin, iron status, blood pressure"]
+  ],
+  "summary": "Epoetin alfa is a recombinant human erythropoiesis-stimulating agent (ESA) used to treat anemia due to chronic kidney disease, zidovudine in HIV, and myelosuppressive chemotherapy, and to reduce allogeneic transfusion in elective non-cardiac, non-vascular surgery. It carries a boxed warning: ESAs increase the risk of death, myocardial infarction, stroke, venous thromboembolism, vascular-access thrombosis, and tumor progression or recurrence. Use the lowest dose needed to avoid RBC transfusions and do not target hemoglobin above the recommended range.",
+  "indications": [
+    "Anemia due to chronic kidney disease in patients on dialysis and not on dialysis",
+    "Anemia due to zidovudine in patients with HIV infection",
+    "Anemia due to concomitant myelosuppressive chemotherapy with at least two additional months of planned chemotherapy",
+    "Reduction of allogeneic RBC transfusions in patients undergoing elective, noncardiac, nonvascular surgery"
+  ],
+  "dosage": [
+    {"c": "Anemia of CKD", "r": "Adult IV/SC", "d": "Initial 50-100 units/kg three times weekly; individualize maintenance", "t": "Three times weekly", "n": "IV route recommended for hemodialysis patients; pediatric 50 units/kg three times weekly"},
+    {"c": "HIV on zidovudine", "r": "Adult IV/SC", "d": "100 units/kg three times weekly", "t": "Three times weekly", "n": "Titrate based on response; effective when serum EPO <=500 mU/mL"},
+    {"c": "Chemotherapy-induced anemia", "r": "Adult SC", "d": "40,000 units weekly or 150 units/kg three times weekly", "t": "Weekly or three times weekly", "n": "Pediatric >=5 years: 600 units/kg IV weekly; only when >=2 months chemo planned"},
+    {"c": "Surgery (transfusion reduction)", "r": "Adult SC", "d": "300 units/kg/day for 15 days (10 days before, day of, 4 days after) OR 600 units/kg weekly on days 21, 14, 7 before and day of surgery", "t": "Per protocol", "n": "Provide DVT prophylaxis; ensure iron repletion"}
+  ],
+  "admin": [
+    "Evaluate and maintain adequate iron stores before and during therapy",
+    "Correct or exclude other causes of anemia before initiating",
+    "Administer IV or subcutaneously; IV route preferred for hemodialysis patients",
+    "Use single-dose vials only in pregnant women, lactating women, neonates, and infants (benzyl alcohol)",
+    "Do not shake; do not dilute or mix with other solutions"
+  ],
+  "moa": "Epoetin alfa is a recombinant form of human erythropoietin produced in mammalian cells. It binds the erythropoietin receptor on erythroid progenitor cells in the bone marrow, stimulating their proliferation, differentiation, and maturation into red blood cells and the release of reticulocytes into the circulation. This raises the hematocrit and hemoglobin, reducing the need for transfusions when adequate iron is available.",
+  "contra": {
+    "absolute": [
+      "Uncontrolled hypertension",
+      "Pure red cell aplasia (PRCA) that begins after treatment with epoetin alfa or other erythropoietin protein drugs",
+      "Serious allergic reactions to epoetin alfa",
+      "Multidose formulation with benzyl alcohol in neonates, infants, pregnant women, and lactating women"
+    ],
+    "relative": [
+      "Cardiovascular disease / history of thromboembolism",
+      "Active malignancy where cure is the anticipated outcome (chemotherapy use)",
+      "History of seizures",
+      "Iron deficiency"
+    ],
+    "monitor": [
+      "Hemoglobin (avoid exceeding recommended targets)",
+      "Blood pressure",
+      "Iron status (transferrin saturation, ferritin)"
+    ]
+  },
+  "preg": "There are limited data in pregnant women; use only if clearly needed, and use single-dose, benzyl-alcohol-free vials. Anemia management benefits should outweigh potential risks.",
+  "lact": "It is not known whether epoetin alfa is excreted in human milk; as a large glycoprotein, systemic absorption by the infant is unlikely. Use single-dose preservative-free vials when breastfeeding.",
+  "renal": "Epoetin alfa is a primary therapy for anemia of chronic kidney disease. Use the lowest dose sufficient to reduce the need for RBC transfusions; for CKD on dialysis, initiate ESA when hemoglobin is less than 10 g/dL and reduce or interrupt the dose if hemoglobin approaches or exceeds 11 g/dL.",
+  "hepatic": "No specific dosage adjustment is established for hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Concomitant ESAs or other agents that raise hemoglobin rapidly (additive thrombotic risk)"
+    ],
+    "minor": ["No clinically significant pharmacokinetic drug interactions established"],
+    "food": "Not applicable (parenteral administration).",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "Raises hemoglobin/hematocrit and reticulocyte count; may increase platelet count early in therapy."
+  },
+  "se": {
+    "common": ["Hypertension", "Headache", "Arthralgia/myalgia", "Injection-site reactions", "Nausea/vomiting", "Pyrexia"],
+    "serious": ["Thromboembolic events (MI, stroke, DVT/PE, vascular-access thrombosis)", "Severe hypertension/hypertensive encephalopathy", "Seizures", "Tumor progression/recurrence (cancer patients)", "Pure red cell aplasia"],
+    "rare": ["Serious allergic/anaphylactic reactions", "Severe cutaneous reactions (SJS/TEN)", "Porphyria exacerbation"],
+    "emergency": ["Acute thrombotic event (MI/stroke/PE)", "Hypertensive crisis with seizures", "Anaphylaxis"]
+  },
+  "monitoring": ["Hemoglobin at least weekly until stable, then regularly", "Blood pressure (control before and during therapy)", "Iron status (ferritin, transferrin saturation)", "Signs of thrombosis", "For PRCA if response is lost with low reticulocytes"],
+  "counsel": [
+    "This medicine treats anemia and reduces the need for blood transfusions",
+    "Your blood counts and blood pressure will be checked regularly",
+    "Report chest pain, shortness of breath, leg pain/swelling, weakness, or trouble speaking right away",
+    "Take iron and other supplements as directed to keep the medicine working",
+    "Tell your doctor about high blood pressure, seizures, or any allergic reactions"
+  ],
+  "pk": [
+    ["Onset", "Reticulocyte rise in days; hemoglobin response over 2-6 weeks"],
+    ["Peak", "Serum Tmax ~5-24 hours after SC dosing"],
+    ["Half-life", "~4-13 hours (IV/SC); longer apparent half-life subcutaneously"],
+    ["Duration", "Dosed weekly to three times weekly per indication"],
+    ["Storage", "Refrigerate at 2-8 C; do not freeze or shake; protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: ESAs raise risk of death, MI, stroke, thromboembolism, vascular-access thrombosis, and tumor progression",
+    "Use the lowest dose to avoid transfusions; do not target hemoglobin above the recommended range",
+    "Always assess and replete iron - ESA resistance is most often iron deficiency",
+    "New or worsening hypertension and seizures can occur with rapid hemoglobin rise",
+    "Investigate sudden loss of efficacy with low reticulocytes for antibody-mediated pure red cell aplasia"
+  ],
+  "missed": "Doses are scheduled by the care team; a missed dose should be given as soon as possible and the schedule resumed. Do not double doses to make up for a missed one.",
+  "overdose": "Overdose can cause excessive erythropoiesis (polycythemia) and severe hypertension. Manage with phlebotomy if clinically indicated, hold therapy until hemoglobin falls into the target range, and provide blood-pressure control and supportive care.",
+  "refs": [
+    ["FDA Label - Epoetin Alfa (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22epoetin%20alfa%22"],
+    ["DailyMed - Epoetin Alfa", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=epoetin+alfa"]
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "generic": "Acalabrutinib",
+  "cls": "Bruton tyrosine kinase (BTK) inhibitor (antineoplastic)",
+  "pharm": "A second-generation covalent BTK inhibitor that blocks B-cell receptor signaling, inhibiting malignant B-cell proliferation, trafficking, and survival; used in mantle cell lymphoma and CLL/SLL.",
+  "tags": ["Rx only", "BTK inhibitor", "B-cell malignancy", "Bleeding/AF risk", "Twice-daily oral"],
+  "quick": [
+    ["Adult dose", "100 mg orally approximately every 12 hours until disease progression or unacceptable toxicity"],
+    ["Meal", "Take with or without food; swallow tablet whole with water, do not chew/crush/cut"],
+    ["Pregnancy", "May cause fetal harm and dystocia; advise of risk and avoid in pregnancy"],
+    ["Lactation", "Avoid breastfeeding during and for 2 weeks after the last dose"],
+    ["Renal", "No adjustment for mild-moderate impairment; limited data in severe/dialysis"],
+    ["Hepatic", "Avoid in severe hepatic impairment; no adjustment for mild-moderate"],
+    ["Alcohol", "No specific restriction; limit if bleeding/hepatic risk"],
+    ["Monitoring", "CBC, signs of infection and bleeding, cardiac rhythm, liver function, skin exams"]
+  ],
+  "summary": "Acalabrutinib (CALQUENCE) is a selective, covalent Bruton tyrosine kinase (BTK) inhibitor used to treat mantle cell lymphoma (MCL) and chronic lymphocytic leukemia/small lymphocytic lymphoma (CLL/SLL). By irreversibly inhibiting BTK it disrupts B-cell receptor signaling that drives malignant B-cell growth and survival. The standard dose is 100 mg every 12 hours. Key risks include serious and opportunistic infections, hemorrhage, cytopenias, second primary malignancies (notably skin cancers), cardiac arrhythmias such as atrial fibrillation, and hepatotoxicity. Exposure is strongly affected by CYP3A inhibitors and inducers.",
+  "indications": [
+    "Previously untreated mantle cell lymphoma (MCL) in adults ineligible for autologous HSCT, in combination with bendamustine and rituximab",
+    "Adults with MCL who have received at least one prior therapy",
+    "Adults with chronic lymphocytic leukemia (CLL) or small lymphocytic lymphoma (SLL)"
+  ],
+  "dosage": [
+    {"c": "MCL, CLL or SLL - monotherapy", "r": "Adult oral", "d": "100 mg approximately every 12 hours until disease progression or unacceptable toxicity", "t": "Every 12 hours", "n": "Swallow tablet whole"},
+    {"c": "Previously untreated MCL - combination", "r": "Adult oral", "d": "100 mg every 12 hours with bendamustine and rituximab per protocol", "t": "Every 12 hours", "n": "Continue acalabrutinib until progression/toxicity"},
+    {"c": "With moderate CYP3A inhibitor", "r": "Adult oral", "d": "Reduce to 100 mg once daily", "t": "Once daily", "n": "Avoid strong CYP3A inhibitors"},
+    {"c": "With strong CYP3A inducer (if unavoidable)", "r": "Adult oral", "d": "Increase to 200 mg approximately every 12 hours", "t": "Every 12 hours", "n": "Avoid strong CYP3A inducers when possible"}
+  ],
+  "admin": [
+    "Take approximately every 12 hours with or without food",
+    "Swallow tablets whole with water; do not chew, crush, dissolve, or cut",
+    "If a dose is missed by more than 3 hours, skip it and take the next dose at the scheduled time",
+    "Do not take extra tablets to make up a missed dose",
+    "Avoid concomitant strong CYP3A inhibitors/inducers; adjust dose for moderate inhibitors"
+  ],
+  "moa": "Acalabrutinib is a small-molecule inhibitor of Bruton tyrosine kinase (BTK). Acalabrutinib and its active metabolite ACP-5862 form a covalent bond with a cysteine residue in the BTK active site, leading to sustained inhibition of BTK enzymatic activity. BTK is a signaling molecule of the B-cell antigen receptor (BCR) and cytokine receptor pathways; in B cells, BTK signaling activates pathways necessary for B-cell proliferation, trafficking, chemotaxis, and adhesion. By inhibiting BTK, acalabrutinib blocks malignant B-cell activation and survival, reducing tumor growth.",
+  "contra": {
+    "absolute": [
+      "No contraindications listed in the product label (None)"
+    ],
+    "relative": [
+      "Active serious infection",
+      "Significant bleeding risk or recent surgery/antithrombotic therapy",
+      "History of atrial fibrillation or significant cardiac arrhythmia",
+      "Severe hepatic impairment (avoid use)",
+      "Pregnancy and breastfeeding"
+    ],
+    "monitor": [
+      "Complete blood counts",
+      "Signs of infection and bleeding",
+      "Cardiac rhythm/symptoms",
+      "Liver function tests and skin examinations"
+    ]
+  },
+  "preg": "Based on animal findings, acalabrutinib may cause fetal harm and dystocia when given to a pregnant woman; animal studies showed dystocia and reduced fetal growth at clinically relevant exposures. Advise pregnant women of the potential risk to the fetus and use effective contraception during treatment and for a period after the last dose.",
+  "lact": "There are no data on the presence of acalabrutinib in human milk or its effects on the breastfed child. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 2 weeks after the last dose.",
+  "renal": "No dosage adjustment is recommended for mild to moderate renal impairment. There are limited data in severe renal impairment (creatinine clearance <30 mL/min) or dialysis; monitor such patients closely.",
+  "hepatic": "No dosage adjustment is needed for mild or moderate hepatic impairment. Avoid acalabrutinib in patients with severe hepatic impairment because exposure is increased. Monitor liver function throughout treatment; hepatotoxicity including drug-induced liver injury has occurred.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A inhibitors (e.g., ketoconazole, clarithromycin) - increase acalabrutinib levels/toxicity; avoid or interrupt",
+      "Strong CYP3A inducers (e.g., rifampin, carbamazepine, phenytoin) - decrease acalabrutinib efficacy; avoid or increase dose to 200 mg q12h if unavoidable"
+    ],
+    "moderate": [
+      "Moderate CYP3A inhibitors - reduce acalabrutinib dose to 100 mg once daily",
+      "Antiplatelet/anticoagulant agents - additive bleeding risk; weigh benefit and monitor",
+      "Gastric acid-reducing agents (PPIs, H2 blockers, antacids) - reduce absorption of the maleate capsule formulation (the tablet formulation is less pH-dependent); separate H2 blockers/antacids and avoid PPIs with the capsule"
+    ],
+    "minor": ["No clinically significant minor interactions documented"],
+    "food": "May be taken with or without food; a high-fat meal does not meaningfully alter overall exposure.",
+    "alcohol": "No specific interaction; limit alcohol if bleeding or hepatic risk is present.",
+    "diagnostics": "Monitor CBC for cytopenias and liver chemistries for hepatotoxicity."
+  },
+  "se": {
+    "common": ["Upper respiratory tract infection", "Diarrhea", "Headache", "Musculoskeletal pain", "Fatigue", "Bruising"],
+    "serious": ["Serious and opportunistic infections (including fatal)", "Hemorrhage (including major bleeding)", "Cytopenias (neutropenia, anemia, thrombocytopenia)", "Atrial fibrillation/flutter and other cardiac arrhythmias", "Hepatotoxicity including drug-induced liver injury"],
+    "rare": ["Tumor lysis syndrome", "Progressive multifocal leukoencephalopathy (with BTK inhibitor class)", "Ventricular arrhythmias"],
+    "emergency": ["Major hemorrhage (intracranial or GI)", "Sepsis / serious opportunistic infection", "Severe cardiac arrhythmia", "Acute hepatic failure"]
+  },
+  "monitoring": ["Complete blood counts regularly", "Signs and symptoms of infection (treat promptly)", "Bleeding signs and antithrombotic interactions", "ECG/cardiac symptoms for atrial fibrillation/arrhythmia", "Liver function tests; periodic skin examinations for second malignancies"],
+  "counsel": [
+    "Take one tablet every 12 hours, swallowed whole with water, with or without food",
+    "Report fever or signs of infection, unusual bruising or bleeding, or a fast/irregular heartbeat right away",
+    "Use sun protection and have your skin checked - other cancers including skin cancers can occur",
+    "Tell your doctor about all medicines, including antifungals and acid-reducing drugs, which can change drug levels",
+    "Avoid pregnancy and breastfeeding; use effective contraception during and after treatment"
+  ],
+  "pk": [
+    ["Onset", "Rapidly absorbed; near-complete BTK occupancy achieved early in dosing"],
+    ["Peak", "Median time to peak about 0.5-0.75 hours; absolute bioavailability ~25%"],
+    ["Half-life", "Approximately 1 hour (acalabrutinib); ~3.5 hours for active metabolite ACP-5862"],
+    ["Duration", "Covalent BTK inhibition outlasts plasma levels; dosed every 12 hours"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "Selective covalent BTK inhibitor designed for fewer off-target effects than ibrutinib",
+    "Watch for serious/opportunistic infections, hemorrhage, cytopenias, atrial fibrillation, and second primary malignancies",
+    "Strong CYP3A inhibitors are to be avoided; reduce to once daily with moderate inhibitors; increase to 200 mg q12h only if a strong inducer is unavoidable",
+    "Hold around surgery to reduce bleeding risk; counsel on sun protection for skin cancers",
+    "If a dose is more than 3 hours late, skip it - do not double up"
+  ],
+  "missed": "If a dose is missed by more than 3 hours, skip that dose and take the next dose at its regularly scheduled time. Do not take extra tablets to make up for a missed dose.",
+  "overdose": "There is no specific antidote for acalabrutinib overdose, and the maximum tolerated dose has not been established. Patients who take more than the prescribed dose should be monitored closely for adverse reactions (including bleeding, cardiac, and hematologic toxicity) and given appropriate supportive care.",
+  "refs": [
+    ["FDA Label - Acalabrutinib / CALQUENCE (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22acalabrutinib%22"],
+    ["DailyMed - Acalabrutinib (CALQUENCE)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=acalabrutinib"]
+  ]
+}

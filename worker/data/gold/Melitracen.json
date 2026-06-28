@@ -1,0 +1,93 @@
+{
+  "generic": "Melitracen",
+  "cls": "Tricyclic antidepressant (TCA)",
+  "pharm": "Tricyclic antidepressant that inhibits noradrenaline and serotonin reuptake; activating/antidepressant at low doses and more sedative at higher doses.",
+  "tags": ["TCA", "Antidepressant", "Noradrenaline/serotonin reuptake inhibitor", "Anticholinergic", "Cardiotoxic in overdose", "Not FDA-approved", "Often combined (Deanxit)"],
+  "quick": [
+    ["Adult dose", "Commonly the Deanxit combination (10 mg melitracen/tablet): 2 tablets/day, max 4/day"],
+    ["Meal", "Take with or without food; dose morning/noon"],
+    ["Pregnancy", "Not recommended; risk of neonatal withdrawal"],
+    ["Lactation", "Caution; excreted in milk in small amounts"],
+    ["Renal", "No specific scheme; general TCA caution"],
+    ["Hepatic", "Caution in advanced hepatic disease; reduce dose"],
+    ["Alcohol", "Avoid - additive CNS depression"],
+    ["Monitoring", "ECG (cardiac disease/elderly), mood/suicidality, anticholinergic effects"]
+  ],
+  "summary": "Melitracen is a tricyclic antidepressant used for depression and anxiety, most commonly marketed as the fixed combination with flupentixol (Deanxit). It inhibits noradrenaline and serotonin reuptake and has a bimodal profile - activating at low doses and sedative at higher doses. It is not FDA-approved or marketed in the US; the data here are drawn from regional SmPC/regulatory sources, predominantly for the combination product. Like other TCAs it has anticholinergic effects and is dangerous in overdose (cardiotoxicity).",
+  "indications": [
+    "Mild to moderate depression with associated anxiety",
+    "Anxiety with somatic (physical) complaints",
+    "Depression (as monotherapy in some regional products)"
+  ],
+  "dosage": [
+    {"c": "Depression/anxiety (Deanxit combination)", "r": "Oral", "d": "20 mg melitracen (2 tablets)", "t": "One in the morning and one at noon", "n": "Severe cases up to 40 mg (4 tablets)/day; well-documented combination dosing"},
+    {"c": "Maintenance (Deanxit combination)", "r": "Oral", "d": "10 mg (1 tablet)", "t": "In the morning", "n": "Lowest effective dose"},
+    {"c": "Elderly (Deanxit combination)", "r": "Oral", "d": "10 mg", "t": "In the morning (add a noon dose if severe)", "n": "Use the lowest effective dose"},
+    {"c": "Monotherapy (regional, less documented)", "r": "Oral", "d": "25 mg 2-3 times daily", "t": "Through the day", "n": "Up to ~150-225 mg/day in severe cases per manufacturer summaries; sources conflict"}
+  ],
+  "admin": [
+    "Take with or without food",
+    "Dose in the morning and at noon to exploit the activating profile and avoid insomnia",
+    "Avoid late-evening dosing",
+    "Titrate the dose gradually and do not stop abruptly"
+  ],
+  "moa": "Melitracen inhibits the presynaptic reuptake of noradrenaline and serotonin (an imipramine analogue) and has histamine H1 affinity contributing to sedation. Its effect is dose-dependent: lower doses are activating and antidepressant, whereas higher doses are more sedative and anxiolytic.",
+  "contra": {
+    "absolute": ["Concurrent or recent (within 14 days) MAOI therapy", "Recent myocardial infarction", "Any degree of heart block, arrhythmia, or coronary insufficiency", "Circulatory collapse", "Coma or CNS depression (alcohol, barbiturates, opioids)", "Mania", "Hypersensitivity"],
+    "relative": ["History of seizures", "Urinary retention or prostatic hypertrophy", "Narrow-angle glaucoma", "Hyperthyroidism", "Advanced hepatic or cardiovascular disease", "Suicide risk (especially under 25 years)"],
+    "monitor": ["ECG in cardiac disease, the elderly, or high doses", "Mood and suicidality", "Anticholinergic burden", "Signs of mania/activation"]
+  },
+  "preg": "Not recommended; discontinue about 14 days before expected delivery because of the risk of neonatal withdrawal and extrapyramidal symptoms. Use only if the benefit clearly outweighs the risk.",
+  "lact": "Excreted in breast milk in small amounts (comparable to amitriptyline); breastfeeding may be acceptable with observation of the infant.",
+  "renal": "No specific dose adjustment is defined; observe general tricyclic precautions.",
+  "hepatic": "Advanced hepatic disease is a precaution - reduce the dose; no quantitative scheme is provided.",
+  "interactions": {
+    "major": ["MAOIs - risk of serotonin syndrome (allow a washout of at least 14 days for irreversible MAOIs)", "Sympathomimetics (adrenaline, noradrenaline, ephedrine, phenylephrine) - potentiated pressor effects"],
+    "moderate": ["Other anticholinergics - paralytic ileus, hyperpyrexia", "Lithium - neurotoxicity", "QT-prolonging drugs and antiarrhythmics - arrhythmia risk"],
+    "minor": ["Hepatic enzyme inducers/inhibitors - altered TCA levels"],
+    "food": "No clinically significant interaction",
+    "alcohol": "Avoid - additive CNS depression",
+    "diagnostics": "May cause ECG changes; class effect of interfering with catecholamine assays."
+  },
+  "se": {
+    "common": ["Dry mouth", "Constipation", "Blurred vision", "Urinary hesitancy", "Dizziness", "Drowsiness or, conversely, restlessness/insomnia", "Sweating", "Weight gain", "Orthostatic hypotension", "Tremor"],
+    "serious": ["Cardiac arrhythmias and conduction disturbances", "Orthostatic hypotension with falls", "Seizures", "Paralytic ileus", "Hyperthermia"],
+    "rare": ["Blood dyscrasias", "Hepatic dysfunction", "Hyperprolactinaemia / sexual dysfunction (mainly the flupentixol component)", "Mania"],
+    "emergency": ["Serotonin syndrome", "TCA cardiotoxicity (wide QRS, ventricular arrhythmia)", "Seizures", "Suicidal behaviour"]
+  },
+  "monitoring": [
+    "ECG in patients with cardiac disease, the elderly, or on high doses",
+    "Blood pressure and heart rate",
+    "Mood and suicidality (especially under 25 years)",
+    "Signs of mania or over-activation",
+    "Anticholinergic effects (bowel, bladder, eyes)",
+    "Liver function and blood counts on prolonged therapy"
+  ],
+  "counsel": [
+    "This medicine can either calm or activate you - take it in the morning and at noon, not late at night",
+    "Avoid alcohol and take care when driving until you know how it affects you",
+    "Report chest pain, palpitations, fainting, severe constipation, urinary retention, or fever with tremor",
+    "Never combine with MAOI antidepressants",
+    "Do not stop suddenly; tell your doctor if your mood worsens or you have thoughts of self-harm"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect over 1-2 weeks"],
+    ["Peak", "Tmax ~4-12 hours (sources vary)"],
+    ["Half-life", "~19 to ~62 hours (sources vary; the longer value supports once-daily dosing)"],
+    ["Duration", "Long; allows once- to twice-daily dosing"],
+    ["Storage", "Store below 25-30 C, protected from moisture and light"]
+  ],
+  "pearls": [
+    "Not FDA-approved or marketed in the US - data here are from regional SmPC/regulatory sources",
+    "Marketed almost exclusively as the Deanxit combination (with flupentixol) for short-term mild depression/anxiety with somatic complaints",
+    "Not a first-line monotherapy antidepressant",
+    "Dangerous in overdose (TCA cardiotoxicity) - limit the quantity dispensed in at-risk patients",
+    "Long half-life means slow washout when discontinuing or before starting an MAOI"
+  ],
+  "missed": "Take the missed dose the same day if remembered; if it is evening or near the next dose, skip it - do not take a double dose.",
+  "overdose": "Causes anticholinergic toxicity and TCA cardiotoxicity (QRS widening, ventricular arrhythmias, hypotension, seizures, coma). There is no specific antidote. Provide supportive care with continuous ECG monitoring; give IV sodium bicarbonate for QRS widening, arrhythmia, or hypotension; benzodiazepines for seizures; activated charcoal if early and the airway is protected. Avoid Class IA/IC antiarrhythmics.",
+  "refs": [
+    ["Deanxit (Flupentixol/Melitracen) SmPC - Lundbeck", "https://www.e-lactancia.org/media/papers/Flupentixol-MelitracenoDeanxit-DS-Lundbeck2020.pdf"],
+    ["NCATS Inxight Drugs - Melitracen", "https://drugs.ncats.io/drug/J3448GKP5W"]
+  ]
+}

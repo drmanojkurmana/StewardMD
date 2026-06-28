@@ -1,0 +1,101 @@
+{
+  "generic": "Piperacillin",
+  "cls": "Extended-spectrum (ureido)penicillin antibiotic",
+  "pharm": "Antipseudomonal ureidopenicillin; bactericidal beta-lactam that inhibits bacterial cell-wall synthesis with broad Gram-negative coverage including Pseudomonas aeruginosa.",
+  "tags": ["Penicillin", "Ureidopenicillin", "Antipseudomonal", "Bactericidal", "Parenteral", "Time-dependent", "High sodium load"],
+  "quick": [
+    ["Adult dose", "3-4 g IV/IM q4-6h (12-18 g/day); max ~24 g/day"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Category B; considered acceptable when indicated"],
+    ["Lactation", "Excreted in low concentrations; use with caution"],
+    ["Renal", "Reduce dose/extend interval per CrCl"],
+    ["Hepatic", "No specific scheme; monitor LFTs on prolonged therapy"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Coagulation, electrolytes (sodium/potassium), renal and hepatic function"]
+  ],
+  "summary": "Piperacillin is an extended-spectrum antipseudomonal ureidopenicillin given IV or IM for serious infections, including those caused by Pseudomonas aeruginosa. Note this is plain piperacillin, not the piperacillin-tazobactam combination, so it lacks beta-lactamase inhibitor coverage and is dosed in piperacillin units (3-4 g). It requires renal dose adjustment, carries a risk of hypersensitivity/anaphylaxis, delivers a substantial sodium load, and can cause bleeding/platelet dysfunction at high doses. It must not be mixed in the same line as aminoglycosides.",
+  "indications": [
+    "Intra-abdominal infections",
+    "Complicated and uncomplicated urinary tract infections",
+    "Gynecologic infections",
+    "Septicemia and bacteremia",
+    "Lower respiratory tract infections",
+    "Skin and skin-structure infections",
+    "Bone and joint infections",
+    "Uncomplicated gonorrhea",
+    "Infections caused by Pseudomonas aeruginosa and other susceptible Gram-negative bacilli"
+  ],
+  "dosage": [
+    {"c": "Serious systemic infection", "r": "IV", "d": "12-18 g/day (200-300 mg/kg/day)", "t": "Divided every 4-6 h (~3-4 g/dose)", "n": "Most common regimen; max usual ~24 g/day"},
+    {"c": "Complicated UTI", "r": "IV", "d": "8-16 g/day (125-200 mg/kg/day)", "t": "Divided every 6-8 h", "n": "Per severity"},
+    {"c": "Uncomplicated UTI / community pneumonia", "r": "IM or IV", "d": "6-8 g/day (100-125 mg/kg/day)", "t": "Divided every 6-12 h", "n": "Less severe infections"},
+    {"c": "Uncomplicated gonorrhea", "r": "IM", "d": "2 g as a single dose", "t": "Once, with probenecid 1 g PO ~30 min before", "n": "Single-dose regimen"},
+    {"c": "Renal impairment (serious infection)", "r": "IV", "d": "CrCl 20-40: 12 g/day (4 g q8h); CrCl <20: 8 g/day (4 g q12h)", "t": "Per CrCl", "n": "Hemodialysis: max 6 g/day plus 1 g after each dialysis"}
+  ],
+  "admin": [
+    "IV: give as a slow push over 3-5 minutes or by infusion over 20-30 minutes",
+    "IM: reconstitute and inject no more than 2 g per site into the upper-outer gluteal quadrant",
+    "Do not mix piperacillin and aminoglycosides in the same syringe or infusion line (mutual inactivation)",
+    "Usual course is 7-10 days; continue at least 48-72 hours after the patient is asymptomatic; at least 10 days for streptococcal infections",
+    "Discard reconstituted solution after 24 hours at room temperature or 48 hours refrigerated"
+  ],
+  "moa": "Piperacillin is bactericidal; it binds penicillin-binding proteins (transpeptidases) and inhibits the final cross-linking step of bacterial cell-wall peptidoglycan synthesis, leading to cell lysis. Its acylureido side chain confers extended activity against Gram-negative organisms including Pseudomonas.",
+  "contra": {
+    "absolute": ["History of allergic reaction to any beta-lactam (penicillins or cephalosporins)"],
+    "relative": ["Renal impairment (bleeding risk and dose reduction)", "Sodium-restricted patients (significant sodium load)", "History of atopy/allergy", "Concurrent anticoagulation", "Low potassium reserves"],
+    "monitor": ["Coagulation parameters", "Serum electrolytes", "Renal function", "Hepatic function", "Signs of hypersensitivity or superinfection"]
+  },
+  "preg": "Pregnancy Category B - no evidence of harm in animal studies; no adequate controlled human studies. Use when clearly indicated.",
+  "lact": "Excreted in low concentrations in human milk; use with caution (monitor the infant for diarrhea, candidiasis, or rash).",
+  "renal": "Requires dose reduction or extended dosing interval based on creatinine clearance; piperacillin is predominantly excreted unchanged in urine. Hemodialysis removes the drug (give a supplemental dose after dialysis); peritoneal dialysis does not.",
+  "hepatic": "No specific dose adjustment scheme; reversible elevations in transaminases and bilirubin and rare cholestatic hepatitis can occur, so monitor liver function on prolonged therapy.",
+  "interactions": {
+    "major": ["Aminoglycosides - mutual inactivation if mixed in the same line (give separately)", "Anticoagulants/heparin - increased bleeding risk", "Methotrexate - reduced excretion and increased toxicity"],
+    "moderate": ["Probenecid - increases and prolongs piperacillin levels (sometimes used intentionally)", "Vecuronium and other neuromuscular blockers - prolonged blockade"],
+    "minor": ["Oral contraceptives - theoretical reduced efficacy"],
+    "food": "N/A (parenteral)",
+    "alcohol": "No significant interaction",
+    "diagnostics": "May cause false-positive urine glucose (copper-reduction methods), positive direct Coombs test, and false-positive Aspergillus galactomannan assays."
+  },
+  "se": {
+    "common": ["Thrombophlebitis", "Injection-site pain (IM)", "Diarrhea", "Rash", "Nausea"],
+    "serious": ["Anaphylaxis and severe hypersensitivity reactions", "Clostridioides difficile-associated/pseudomembranous colitis", "Bleeding and abnormal platelet aggregation (high dose, renal failure)", "Seizures (high dose, renal impairment)", "Stevens-Johnson syndrome / TEN"],
+    "rare": ["Interstitial nephritis", "Hemolytic anemia", "Hypokalemia", "Hepatic dysfunction"],
+    "emergency": ["Anaphylaxis", "Severe bleeding", "Acute renal failure", "Seizures"]
+  },
+  "monitoring": [
+    "Coagulation parameters (PT, bleeding/clotting time, platelet function) - especially in renal impairment",
+    "Serum electrolytes including sodium and potassium",
+    "Renal function (serum creatinine)",
+    "Hepatic and hematopoietic function on prolonged therapy",
+    "Signs of hypersensitivity and superinfection",
+    "Syphilis serology at 3 months when treating gonorrhea"
+  ],
+  "counsel": [
+    "Tell your clinician about any penicillin or cephalosporin allergy before treatment",
+    "Report rash, swelling, or difficulty breathing immediately",
+    "Report persistent or bloody diarrhea, which can occur even weeks after treatment",
+    "Report unusual bleeding or bruising",
+    "Complete the full prescribed course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "End of IV infusion; IM ~30-50 min"],
+    ["Half-life", "~1 hour (54-63 min); prolonged in renal impairment"],
+    ["Duration", "Based on dosing interval (time-dependent killing)"],
+    ["Storage", "20-25 C; reconstituted solution per label (24 h RT / 48 h refrigerated)"]
+  ],
+  "pearls": [
+    "This is plain piperacillin, not piperacillin-tazobactam (Zosyn) - verify the product and that doses are in piperacillin units",
+    "Its defining role is antipseudomonal coverage among the penicillins",
+    "Synergistic with aminoglycosides against Pseudomonas, but never mix them in the same line",
+    "Delivers ~1.85 mEq of sodium per gram - a meaningful sodium load at high doses",
+    "High doses in renal failure can cause bleeding (platelet dysfunction) and seizures (neurotoxicity)"
+  ],
+  "missed": "Hospital-administered parenteral antibiotic; if a dose is delayed, give it as soon as recognized and resume the schedule. Do not double the dose. Notify the treating team if the timing is significantly altered.",
+  "overdose": "No specific antidote. High concentrations, especially in renal impairment, may cause neuromuscular hyperirritability and seizures. Discontinue the drug and provide supportive care; piperacillin is removed by hemodialysis (not peritoneal dialysis).",
+  "refs": [
+    ["FDA Piperacillin Sodium (Pipracil) Label", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=piperacillin+sodium"],
+    ["openFDA - Piperacillin", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22PIPERACILLIN%22"]
+  ]
+}

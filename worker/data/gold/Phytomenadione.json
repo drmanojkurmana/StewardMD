@@ -1,0 +1,103 @@
+{
+  "generic": "Phytomenadione (Phytonadione, Vitamin K1)",
+  "cls": "Fat-soluble vitamin / anticoagulant antidote (vitamin K)",
+  "pharm": "Provides vitamin K1 needed for hepatic synthesis of clotting factors II, VII, IX, and X; reverses vitamin K deficiency and the effect of vitamin K antagonist anticoagulants.",
+  "tags": ["Rx only", "BOXED WARNING: severe reactions with IV/IM use", "Vitamin K1", "Warfarin reversal", "Subcutaneous route preferred"],
+  "quick": [
+    ["Adult dose", "Anticoagulant-induced hypoprothrombinemia: 2.5-10 mg (up to 25 mg); newborn HDN prophylaxis: 0.5-1 mg IM once"],
+    ["Meal", "Parenteral; oral forms absorbed better with fat-containing food"],
+    ["Pregnancy", "Former category C; use only if clearly needed (also used at delivery for the newborn)"],
+    ["Lactation", "Unknown if excreted in human milk; use with caution"],
+    ["Renal", "No specific dose adjustment defined"],
+    ["Hepatic", "Repeated large doses not warranted in liver disease if initial response is poor"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "Prothrombin time / INR; coagulation response"]
+  ],
+  "summary": "Phytomenadione (phytonadione, vitamin K1) is used for coagulation disorders due to faulty formation of factors II, VII, IX, and X caused by vitamin K deficiency or interference with vitamin K activity - including warfarin/coumarin-induced hypoprothrombinemia, hemorrhagic disease of the newborn, and hypoprothrombinemia from antibacterials, malabsorption (e.g., obstructive jaundice, biliary fistula, sprue, cystic fibrosis), or salicylates. The injectable emulsion carries a BOXED WARNING: severe reactions, including fatal anaphylactoid reactions, shock, and cardiac/respiratory arrest, have occurred during and immediately after intravenous and intramuscular injection, even with dilution and slow infusion - so the IV/IM routes should be reserved for when subcutaneous administration is not feasible. The subcutaneous route is preferred; when IV is unavoidable, inject very slowly (not exceeding 1 mg/min). It does not act immediately - measurable improvement in prothrombin time takes 1-2 hours.",
+  "indications": [
+    "Anticoagulant-induced prothrombin deficiency caused by coumarin or indanedione derivatives",
+    "Prophylaxis and therapy of hemorrhagic disease of the newborn",
+    "Hypoprothrombinemia due to antibacterial therapy",
+    "Hypoprothrombinemia secondary to factors limiting absorption or synthesis of vitamin K (e.g., obstructive jaundice, biliary fistula, sprue, ulcerative colitis, celiac disease, intestinal resection, cystic fibrosis, regional enteritis)",
+    "Other drug-induced hypoprothrombinemia clearly due to interference with vitamin K metabolism (e.g., salicylates)"
+  ],
+  "dosage": [
+    {"c": "Anticoagulant-induced hypoprothrombinemia", "r": "Adult SC/IM/IV", "d": "2.5 to 10 mg initially (up to 25 mg, rarely 50 mg); repeat based on prothrombin time response", "t": "As needed by PT", "n": "Prefer SC route; if IV is unavoidable, give very slowly, <=1 mg/min"},
+    {"c": "Prophylaxis of hemorrhagic disease of the newborn", "r": "Neonatal IM", "d": "0.5 to 1 mg as a single intramuscular dose within one hour of birth", "t": "Single dose", "n": "Recommended by the American Academy of Pediatrics"},
+    {"c": "Treatment of hemorrhagic disease of the newborn", "r": "Neonatal SC/IM", "d": "1 mg subcutaneously or intramuscularly (higher doses if the mother received an oral anticoagulant)", "t": "As needed", "n": "Confirm with coagulation testing; blood/component therapy if bleeding is severe"}
+  ],
+  "admin": [
+    "Whenever possible, give by the subcutaneous route (see boxed warning)",
+    "When IV is unavoidable, inject very slowly, not exceeding 1 mg per minute",
+    "Protect from light at all times; inspect for particulate matter and discoloration before use",
+    "Dilute only with preservative-free 0.9% sodium chloride, 5% dextrose, or 5% dextrose/sodium chloride; start administration immediately and discard unused diluted drug",
+    "Do not expect an immediate effect - allow 1-2 hours for measurable PT improvement; use blood/component therapy if bleeding is severe"
+  ],
+  "moa": "Phytomenadione is vitamin K1, required as a cofactor for the hepatic gamma-carboxylation that produces functional clotting factors II (prothrombin), VII, IX, and X. By supplying vitamin K, it corrects deficiency states and overcomes the inhibition of vitamin K-dependent factor synthesis produced by coumarin/indanedione anticoagulants. It does not act immediately (synthesis of new factors takes time) and does not counteract heparin.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to phytonadione or any component of the formulation"
+    ],
+    "relative": [
+      "Intravenous or intramuscular route when subcutaneous is feasible (risk of severe reactions)",
+      "Use in patients who still require anticoagulation (over-correction restores thromboembolic risk)",
+      "Liver disease unresponsive to initial vitamin K (avoid repeated large doses)"
+    ],
+    "monitor": [
+      "Prothrombin time / INR",
+      "Signs of anaphylactoid reaction during/after IV or IM injection",
+      "Bilirubin in newborns (avoid excessive doses)"
+    ]
+  },
+  "preg": "Animal reproduction studies have not been conducted and it is not known whether phytonadione can cause fetal harm; it was formerly Pregnancy Category C. Give to a pregnant woman only if clearly needed. (It is also administered to the newborn at delivery.)",
+  "lact": "It is not known whether phytonadione is excreted in human milk. Because many drugs are excreted in milk, exercise caution when administering to a nursing woman.",
+  "renal": "No specific renal dose adjustment is defined in the labeling.",
+  "hepatic": "Repeated large doses of vitamin K are not warranted in liver disease if the response to initial use is unsatisfactory - failure to respond may indicate the condition is inherently unresponsive to vitamin K.",
+  "interactions": {
+    "major": [
+      "Coumarin/indanedione anticoagulants (warfarin) - phytonadione antagonizes their effect; over-correction can produce temporary anticoagulant resistance and restore thrombotic risk"
+    ],
+    "moderate": [
+      "Heparin - phytonadione does NOT counteract the anticoagulant action of heparin",
+      "Broad-spectrum antibacterials and salicylates - may induce the hypoprothrombinemia that vitamin K treats"
+    ],
+    "minor": [],
+    "food": "Oral absorption of vitamin K depends on bile and dietary fat (impaired in malabsorption/cholestasis).",
+    "alcohol": "No specific interaction described in the label.",
+    "diagnostics": "Corrects prothrombin time/INR (the intended therapeutic monitoring parameter)."
+  },
+  "se": {
+    "common": ["Transient flushing sensations", "Peculiar taste sensations", "Injection-site pain, swelling, and tenderness"],
+    "serious": ["Anaphylactoid / hypersensitivity reaction (shock, cardiac/respiratory arrest) with IV or IM use", "Hyperbilirubinemia in the newborn (mainly with doses above recommended)"],
+    "rare": ["Dizziness", "Rapid and weak pulse", "Profuse sweating", "Brief hypotension", "Dyspnea and cyanosis", "Erythematous, indurated, pruritic plaques (sometimes scleroderma-like, persisting long-term) after repeated injection"],
+    "emergency": ["Anaphylaxis / cardiovascular collapse during or immediately after IV/IM injection", "Severe bronchospasm or cardiac/respiratory arrest"]
+  },
+  "monitoring": ["Prothrombin time / INR and coagulation response", "Close observation during and after IV/IM administration for hypersensitivity", "Serum bilirubin in neonates", "Local injection-site reactions"],
+  "counsel": [
+    "This vitamin K medicine reverses the effect of warfarin-type blood thinners and treats clotting problems from vitamin K deficiency",
+    "It does not work instantly - it can take 1-2 hours for blood tests to improve",
+    "An injection (especially into a vein or muscle) can rarely cause a serious allergic reaction, so it is usually given under the skin and with monitoring",
+    "Keep your prothrombin time/INR blood tests as scheduled",
+    "Tell your doctor about all blood thinners and other medicines you take"
+  ],
+  "pk": [
+    ["Onset", "Measurable PT improvement in 1-2 hours (no immediate coagulant effect)"],
+    ["Peak", "Bleeding/PT control generally within 3-8 hours (parenteral)"],
+    ["Half-life", "Short; rapidly metabolized in the liver"],
+    ["Duration", "Effect persists while newly synthesized clotting factors circulate"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light; keep ampules in carton until use"]
+  ],
+  "pearls": [
+    "BOXED WARNING: severe, sometimes fatal anaphylactoid reactions with IV and IM use - prefer the subcutaneous route; if IV is unavoidable, give <=1 mg/min",
+    "Does NOT reverse heparin - only vitamin K antagonists (warfarin/coumarins)",
+    "Standard neonatal prophylaxis: 0.5-1 mg IM once within one hour of birth to prevent hemorrhagic disease of the newborn (vitamin K deficiency bleeding)",
+    "Effect is delayed (1-2 hours for PT) - use fresh frozen plasma/factor concentrate for serious active bleeding",
+    "Over-correction in a patient who still needs anticoagulation can cause temporary warfarin resistance and re-expose them to clotting risk"
+  ],
+  "missed": "This medicine is usually given as needed by a healthcare professional based on coagulation tests rather than on a fixed schedule. If an oral dose for deficiency is missed, take it when remembered unless it is almost time for the next dose; do not double up.",
+  "overdose": "Excessive doses can cause over-correction of anticoagulation, producing temporary resistance to warfarin-type drugs and restoring thromboembolic risk; in newborns, doses above those recommended can cause hyperbilirubinemia. Manage supportively and adjust subsequent anticoagulation; for re-anticoagulation, larger doses of the vitamin K antagonist or a heparin (which acts by a different mechanism) may be needed.",
+  "refs": [
+    ["FDA Label - Phytonadione injectable emulsion (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22phytonadione%22"],
+    ["DailyMed - Phytonadione (Vitamin K1)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=phytonadione"]
+  ]
+}

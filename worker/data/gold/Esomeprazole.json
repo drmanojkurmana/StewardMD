@@ -1,0 +1,96 @@
+{
+  "generic": "Esomeprazole",
+  "cls": "Proton pump inhibitor (PPI)",
+  "pharm": "Gastric acid secretion inhibitor / antisecretory agent",
+  "tags": ["PPI", "GERD", "peptic ulcer", "H. pylori", "Zollinger-Ellison", "acid suppression"],
+  "quick": [
+    ["Adult dose", "20-40 mg PO once daily; IV 20-40 mg/day"],
+    ["Meal", "Take >=1 hour before a meal (morning)"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Caution; small amounts in milk"],
+    ["Renal", "No adjustment; caution in severe impairment"],
+    ["Hepatic", "Severe impairment: max 20 mg/day"],
+    ["Alcohol", "No direct interaction; may worsen symptoms"],
+    ["Monitoring", "Mg, B12 on long-term use; symptom response"]
+  ],
+  "summary": "Esomeprazole is the S-isomer of omeprazole, a proton pump inhibitor that produces durable suppression of gastric acid by irreversibly inhibiting the H+/K+ ATPase. Used for GERD, erosive esophagitis healing, peptic ulcer, H. pylori eradication and pathological hypersecretory states. Typical adult dose 20-40 mg once daily before a meal. Long-term use is associated with hypomagnesemia, B12 deficiency and increased fracture risk.",
+  "indications": [
+    "Gastroesophageal reflux disease (GERD) symptom relief",
+    "Healing and maintenance of erosive esophagitis",
+    "Risk reduction of NSAID-associated gastric ulcer",
+    "Helicobacter pylori eradication (in combination with antibiotics)",
+    "Pathological hypersecretory conditions including Zollinger-Ellison syndrome",
+    "Prevention of rebleeding of gastric/duodenal ulcers after endoscopic therapy (IV)"
+  ],
+  "dosage": [
+    {"c": "GERD (adult)", "r": "Standard", "d": "20 mg once daily for 4 weeks; may extend to 8 weeks", "t": "Once daily", "n": "Take before a meal"},
+    {"c": "Erosive esophagitis healing", "r": "Standard", "d": "20-40 mg once daily for 4-8 weeks", "t": "Once daily", "n": "Maintenance 20 mg/day"},
+    {"c": "H. pylori eradication", "r": "Triple therapy", "d": "40 mg once daily with amoxicillin 1 g BID and clarithromycin 500 mg BID x 10 days", "t": "Once daily", "n": "Per regimen"},
+    {"c": "NSAID ulcer risk reduction", "r": "Standard", "d": "20-40 mg once daily up to 6 months", "t": "Once daily", "n": "While on NSAID"},
+    {"c": "Zollinger-Ellison syndrome", "r": "High dose", "d": "40 mg twice daily; titrate to acid output", "t": "Twice daily", "n": "Higher doses individualized"},
+    {"c": "Severe hepatic impairment", "r": "Adjusted", "d": "Do not exceed 20 mg/day", "t": "Once daily", "n": "Child-Pugh C"}
+  ],
+  "admin": [
+    "Swallow capsule whole at least 1 hour before a meal, preferably in the morning",
+    "If unable to swallow, open capsule and mix granules in soft food (applesauce) without chewing",
+    "For NG/oral suspension, mix granules in water and administer without crushing the enteric coating",
+    "IV: administer over 3 minutes (push) or 10-30 minutes (infusion); flush line before and after",
+    "Do not crush or chew the enteric-coated granules"
+  ],
+  "moa": "Esomeprazole is a substituted benzimidazole that accumulates in the acidic secretory canaliculus of the gastric parietal cell, where it is converted to the active sulfenamide. This irreversibly binds the H+/K+ ATPase (proton pump), the terminal step of acid secretion, producing dose-dependent and prolonged inhibition of both basal and stimulated gastric acid output. As the S-enantiomer of omeprazole it undergoes less first-pass metabolism, giving higher systemic exposure.",
+  "contra": {
+    "absolute": ["Hypersensitivity to esomeprazole, other benzimidazole PPIs, or formulation components", "Concomitant use with rilpivirine-containing products", "Concomitant nelfinavir"],
+    "relative": ["Severe hepatic impairment (limit dose)", "Risk of osteoporotic fracture with long-term high-dose use", "Hypomagnesemia or use of other Mg-lowering drugs"],
+    "monitor": ["Long-term therapy (>1 year)", "Concomitant clopidogrel", "Concomitant methotrexate (high dose)"]
+  },
+  "preg": "Available data do not show a clear drug-associated risk of major birth defects. Use only if the potential benefit justifies the potential risk; epidemiologic data on omeprazole are largely reassuring.",
+  "lact": "Esomeprazole/omeprazole is present in human milk in small amounts. Consider the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "No dosage adjustment is necessary in renal impairment; esomeprazole is metabolized hepatically and renal clearance of unchanged drug is minimal. Use caution in severe renal impairment as experience is limited.",
+  "hepatic": "No adjustment in mild to moderate impairment. In severe hepatic impairment (Child-Pugh C) systemic exposure is increased; do not exceed 20 mg daily.",
+  "interactions": {
+    "major": ["Rilpivirine - contraindicated; reduced antiviral exposure", "Nelfinavir - contraindicated; reduced exposure", "Clopidogrel - may reduce active metabolite and antiplatelet effect", "High-dose methotrexate - elevated methotrexate/metabolite levels"],
+    "moderate": ["Atazanavir/saquinavir - reduced or altered exposure", "Digoxin - increased absorption with raised gastric pH", "Tacrolimus - increased tacrolimus levels", "Drugs needing gastric acidity (ketoconazole, itraconazole, iron salts) - reduced absorption"],
+    "minor": ["Diazepam - reduced clearance (CYP2C19)", "Warfarin - monitor INR", "Cilostazol - increased exposure"],
+    "food": "Food reduces and delays absorption; take at least 1 hour before eating.",
+    "alcohol": "No direct pharmacokinetic interaction; alcohol may aggravate reflux symptoms.",
+    "diagnostics": "May cause false-positive chromogranin A elevation; can interfere with secretin stimulation testing for gastrinoma."
+  },
+  "se": {
+    "common": ["Headache", "Diarrhea", "Nausea", "Flatulence", "Abdominal pain", "Constipation", "Dry mouth"],
+    "serious": ["Hypomagnesemia", "Clostridioides difficile-associated diarrhea", "Acute interstitial nephritis", "Vitamin B12 deficiency (long-term)", "Bone fracture (long-term high dose)"],
+    "rare": ["Cutaneous and systemic lupus erythematosus", "Subacute cutaneous lupus erythematosus", "Fundic gland polyps (long-term)", "Severe hepatic injury"],
+    "emergency": ["Severe hypersensitivity / anaphylaxis", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Severe symptomatic hypomagnesemia (tetany, arrhythmia, seizures)"]
+  },
+  "monitoring": [
+    "Symptom response; reassess need for continued therapy periodically",
+    "Serum magnesium before and during prolonged therapy, especially with digoxin or diuretics",
+    "Vitamin B12 with long-term use (>=2-3 years)",
+    "Renal function if signs of interstitial nephritis (rash, fever, eosinophilia)"
+  ],
+  "counsel": [
+    "Take at least 1 hour before a meal, preferably in the morning",
+    "Swallow capsules whole; do not crush or chew",
+    "Report persistent diarrhea, muscle cramps, tremor, palpitations or seizures",
+    "Use the lowest effective dose for the shortest duration needed",
+    "Tell your doctor about long-term use if you have osteoporosis risk"
+  ],
+  "pk": [
+    ["Onset", "Acid suppression within 1 hour; full effect over days"],
+    ["Peak", "Plasma 1.5 hours"],
+    ["Half-life", "1-1.5 hours (effect outlasts plasma level)"],
+    ["Duration", "Acid inhibition persists ~24 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "S-isomer of omeprazole with higher and more consistent exposure than racemic omeprazole",
+    "Effect is cumulative over 3-5 days due to irreversible pump inhibition",
+    "Reassess at 8 weeks; avoid indefinite use without indication",
+    "Stopping abruptly after prolonged use can cause rebound acid hypersecretion"
+  ],
+  "missed": "Take the missed dose as soon as you remember on the same day. If it is almost time for the next dose, skip the missed dose; do not take two doses at once.",
+  "overdose": "Reported overdoses are largely without serious sequelae; symptoms may include drowsiness, blurred vision, confusion, tachycardia and GI upset. There is no specific antidote; esomeprazole is highly protein bound and not effectively dialyzed. Treat symptomatically and supportively.",
+  "refs": [
+    ["FDA Esomeprazole Magnesium Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22esomeprazole+magnesium%22"],
+    ["FDA DailyMed - Esomeprazole", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

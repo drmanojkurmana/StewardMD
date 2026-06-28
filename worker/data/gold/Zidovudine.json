@@ -1,0 +1,95 @@
+{
+  "generic": "Zidovudine",
+  "cls": "Nucleoside reverse transcriptase inhibitor (thymidine analogue)",
+  "pharm": "Antiretroviral (NRTI)",
+  "tags": ["antiretroviral", "NRTI", "HIV", "AZT", "thymidine analogue", "PMTCT", "boxed warning"],
+  "quick": [
+    ["Adult dose", "300 mg twice daily (or 200 mg three times daily) with other antiretrovirals"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Used to prevent maternal-fetal HIV transmission; antepartum/intrapartum/neonatal"],
+    ["Lactation", "Avoid breastfeeding - HIV transmission and drug exposure"],
+    ["Renal", "Reduce dose (e.g. 100 mg q6-8h) in severe impairment/dialysis (CrCl <15)"],
+    ["Hepatic", "Caution; dose reduction may be needed in impairment"],
+    ["Alcohol", "Limit; additive hepatotoxicity / lactic acidosis risk"],
+    ["Monitoring", "CBC (anemia, neutropenia), liver function, lactate if symptomatic, CPK if myopathy"]
+  ],
+  "summary": "Zidovudine (AZT) is the first approved nucleoside reverse transcriptase inhibitor, a thymidine analogue used in combination with other antiretrovirals to treat HIV-1 infection and, importantly, to prevent mother-to-child transmission. It is phosphorylated intracellularly to a triphosphate that terminates viral DNA chain elongation. It carries a boxed warning for hematologic toxicity (severe anemia and neutropenia), symptomatic myopathy with prolonged use, and lactic acidosis/severe hepatomegaly with steatosis common to the NRTI class.",
+  "indications": [
+    "Treatment of HIV-1 infection in combination with other antiretroviral agents",
+    "Prevention of maternal-fetal (perinatal) HIV-1 transmission - antepartum, intrapartum, and neonatal dosing",
+    "Post-exposure prophylaxis regimens (off-label/guideline-based) in combination"
+  ],
+  "dosage": [
+    {"c": "HIV treatment (adult)", "r": "Usual", "d": "300 mg twice daily, or 200 mg three times daily", "t": "BID or TID", "n": "Always with other antiretrovirals"},
+    {"c": "HIV treatment (pediatric)", "r": "Weight/BSA-based", "d": "Approximately 240 mg/m2 twice daily (per weight bands); max 300 mg/dose", "t": "BID", "n": "Refer to weight-band tables"},
+    {"c": "Prevention of perinatal transmission - maternal antepartum", "r": "Antepartum", "d": "Oral zidovudine as part of combination ART during pregnancy", "t": "Per regimen", "n": "Begin per guidelines"},
+    {"c": "Prevention of perinatal transmission - intrapartum", "r": "Intrapartum", "d": "IV 2 mg/kg over 1 hour then 1 mg/kg/hour until cord clamping", "t": "IV infusion", "n": "During labor and delivery"},
+    {"c": "Neonatal prophylaxis", "r": "Newborn", "d": "Oral 2 mg/kg every 6 hours (or per current weight-based guideline) starting within 6-12 h of birth for 6 weeks", "t": "Every 6 hours", "n": "IV 1.5 mg/kg q6h if oral not tolerated"},
+    {"c": "Severe renal impairment / hemodialysis (CrCl <15)", "r": "Reduced", "d": "100 mg every 6-8 hours (about 300-400 mg/day)", "t": "Every 6-8 hours", "n": "Adjust for accumulation of glucuronide metabolite"}
+  ],
+  "admin": [
+    "May be taken with or without food",
+    "Always use in combination with other antiretroviral drugs (never monotherapy for treatment)",
+    "Use the IV formulation for intrapartum prophylaxis and when oral therapy is not feasible",
+    "Reduce dose in severe renal impairment and in significant hepatic impairment",
+    "Monitor blood counts and consider erythropoietin or dose interruption for marrow toxicity"
+  ],
+  "moa": "Zidovudine is a thymidine nucleoside analogue that is phosphorylated by cellular kinases to zidovudine triphosphate. This active metabolite competitively inhibits HIV-1 reverse transcriptase and is incorporated into the growing viral DNA chain, causing chain termination because it lacks a 3'-hydroxyl group. The result is inhibition of HIV replication.",
+  "contra": {
+    "absolute": ["Previous potentially life-threatening hypersensitivity reaction to zidovudine (e.g. anaphylaxis, Stevens-Johnson syndrome)", "Abnormally low neutrophil counts or hemoglobin (relative to severity - avoid until corrected)"],
+    "relative": ["Pre-existing bone marrow compromise (baseline anemia or neutropenia)", "Hepatic impairment or risk factors for hepatic steatosis/lactic acidosis", "Significant renal impairment (dose adjust)", "Concomitant myelosuppressive or hepatotoxic drugs"],
+    "monitor": ["Concomitant ribavirin or stavudine (avoid - antagonism/toxicity)", "Concomitant ganciclovir, interferon, or other marrow-suppressive agents", "Patients with obesity or prolonged NRTI exposure (steatosis/lactic acidosis)"]
+  },
+  "preg": "Zidovudine is a cornerstone of preventing mother-to-child HIV transmission and is used antepartum, intrapartum (IV) and in the newborn. The Antiretroviral Pregnancy Registry has not shown an increased overall risk of birth defects. Benefits in reducing perinatal transmission generally outweigh risks; manage as part of guideline-based combination therapy.",
+  "lact": "Mothers with HIV should not breastfeed because of the risk of postnatal HIV transmission; zidovudine is also excreted in human milk. In settings where breastfeeding is unavoidable, follow national HIV guidelines.",
+  "renal": "Zidovudine and its inactive glucuronide metabolite are renally eliminated; reduce the dose in severe renal impairment (CrCl below 15 mL/min) or on hemodialysis (e.g. 100 mg every 6-8 hours). Hemodialysis has negligible effect on zidovudine but enhances removal of the GZDV metabolite.",
+  "hepatic": "Use with caution in hepatic impairment; reduced metabolism may increase exposure and a dose reduction may be needed. Zidovudine carries class risk of lactic acidosis and severe hepatomegaly with steatosis - discontinue if these develop.",
+  "interactions": {
+    "major": ["Stavudine - pharmacologic antagonism; do not co-administer", "Ribavirin - antagonism and exacerbation of anemia; avoid combination", "Doxorubicin - in vitro antagonism; avoid", "Ganciclovir / valganciclovir, interferon alfa and other myelosuppressive agents - additive hematologic toxicity"],
+    "moderate": ["Other bone-marrow-suppressive or cytotoxic drugs (e.g. co-trimoxazole, pyrimethamine, dapsone) - increased hematologic toxicity", "Probenecid, fluconazole, valproic acid, methadone - increase zidovudine levels by reducing glucuronidation", "Rifampin - reduces zidovudine concentrations"],
+    "minor": ["Phenytoin - variable changes in phenytoin levels; monitor", "Atovaquone - may increase zidovudine exposure"],
+    "food": "May be taken with or without food; high-fat meals can modestly reduce absorption but no dose change needed.",
+    "alcohol": "Limit alcohol due to additive hepatotoxicity and lactic acidosis risk.",
+    "diagnostics": "Causes macrocytosis (elevated MCV), anemia and neutropenia; monitor CBC. May raise lactate and liver enzymes."
+  },
+  "se": {
+    "common": ["Headache", "Nausea and vomiting", "Malaise and fatigue", "Anorexia", "Anemia and neutropenia", "Myalgia", "Insomnia"],
+    "serious": ["Severe anemia requiring transfusion and neutropenia (boxed warning)", "Symptomatic myopathy with prolonged use (boxed warning)", "Lactic acidosis and severe hepatomegaly with steatosis (boxed warning)", "Pancreatitis", "Hepatotoxicity / hepatic decompensation (especially HIV/HCV co-infection)", "Immune reconstitution inflammatory syndrome"],
+    "rare": ["Lipoatrophy / fat redistribution", "Severe hypersensitivity / anaphylaxis", "Stevens-Johnson syndrome", "Seizures (overdose), confusion", "Nail/skin hyperpigmentation"],
+    "emergency": ["Lactic acidosis (deep breathing, abdominal pain, weakness)", "Severe symptomatic anemia or febrile neutropenia/sepsis", "Acute hepatic decompensation", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Complete blood count (hemoglobin and neutrophils) frequently, especially in advanced HIV disease",
+    "Liver function tests; serum lactate if signs of lactic acidosis",
+    "Creatine phosphokinase and muscle symptoms (myopathy) with prolonged use",
+    "Renal function for dose adjustment",
+    "HIV viral load and CD4 count to assess response; signs of immune reconstitution syndrome"
+  ],
+  "counsel": [
+    "Take exactly as prescribed and always with your other HIV medicines - never alone",
+    "Report unusual tiredness, pallor, shortness of breath, fever or sore throat (low blood counts)",
+    "Seek urgent care for rapid deep breathing, severe stomach pain, muscle weakness or yellowing of skin/eyes",
+    "Do not breastfeed; tell your doctor if you are or may become pregnant",
+    "Zidovudine controls HIV but does not cure it and does not prevent passing HIV to others"
+  ],
+  "pk": [
+    ["Onset", "Rapid oral absorption; antiviral effect within hours intracellularly"],
+    ["Peak", "Plasma Tmax 0.5-1.5 hours"],
+    ["Half-life", "Plasma ~0.5-3 hours; intracellular triphosphate ~3-4 hours"],
+    ["Duration", "Supports twice- or thrice-daily dosing"],
+    ["Storage", "Store at controlled room temperature; protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: hematologic toxicity (severe anemia and neutropenia), symptomatic myopathy with prolonged use, and lactic acidosis/severe hepatomegaly with steatosis",
+    "Historic and ongoing role in preventing mother-to-child HIV transmission (antepartum oral, intrapartum IV, neonatal prophylaxis)",
+    "Do NOT combine with stavudine or ribavirin (antagonism/toxicity); avoid other marrow-suppressive drugs where possible",
+    "Macrocytosis (raised MCV) is an expected effect and can serve as a rough adherence marker",
+    "Reduce dose in severe renal impairment; the glucuronide metabolite accumulates and is cleared by dialysis"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and continue your regular schedule. Do not double the dose. Consistent timing is important to maintain viral suppression.",
+  "overdose": "Acute overdose (exposures up to ~50 g reported) has caused fatigue, headache, vomiting and occasional hematologic disturbances, with recovery and no permanent sequelae; seizures and CNS effects can occur. There is no specific antidote. Treatment is supportive with monitoring; hemodialysis and peritoneal dialysis remove zidovudine negligibly but enhance elimination of the GZDV metabolite.",
+  "refs": [
+    ["FDA Zidovudine labeling (openFDA - includes lamivudine/zidovudine combination)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22zidovudine%22"],
+    ["DailyMed - Zidovudine (Retrovir)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

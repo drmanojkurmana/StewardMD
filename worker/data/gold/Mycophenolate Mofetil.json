@@ -1,0 +1,111 @@
+{
+  "generic": "Mycophenolate Mofetil",
+  "cls": "Immunosuppressant (antiproliferative, IMPDH inhibitor)",
+  "pharm": "Prodrug of mycophenolic acid that selectively inhibits inosine monophosphate dehydrogenase, blocking de novo purine synthesis in T and B lymphocytes.",
+  "tags": ["Rx only", "Immunosuppressant", "Transplant", "Teratogen (boxed)", "Malignancy/infection risk (boxed)"],
+  "quick": [
+    ["Adult dose", "1 g twice daily (renal transplant); 1.5 g twice daily (cardiac/hepatic)"],
+    ["Meal", "Take on an empty stomach; be consistent"],
+    ["Pregnancy", "Contraindicated unless no alternative; pregnancy loss/malformations"],
+    ["Lactation", "Avoid - excretion in milk uncertain"],
+    ["Renal", "Avoid exceeding 1 g BID in severe chronic impairment; monitor"],
+    ["Hepatic", "No routine adjustment in renal-transplant hepatic disease"],
+    ["Alcohol", "No specific interaction; general caution"],
+    ["Monitoring", "CBC weekly initially, infection signs, skin checks, pregnancy testing"]
+  ],
+  "summary": "Mycophenolate mofetil (MMF) is a prodrug of mycophenolic acid used for prophylaxis of organ rejection in renal, cardiac, and hepatic transplant recipients (with ciclosporin/tacrolimus and corticosteroids) and off-label for autoimmune disease. It selectively suppresses lymphocyte proliferation by inhibiting de novo purine synthesis. It carries a boxed warning for first-trimester pregnancy loss and congenital malformations, for increased risk of lymphoma and skin and other malignancies, and for increased susceptibility to serious and opportunistic infections including viral reactivation. It should be prescribed by clinicians experienced in immunosuppressive therapy.",
+  "indications": [
+    "Prophylaxis of organ rejection in renal transplant recipients",
+    "Prophylaxis of organ rejection in cardiac transplant recipients",
+    "Prophylaxis of organ rejection in hepatic transplant recipients",
+    "Used in combination with ciclosporin or tacrolimus and corticosteroids",
+    "Off-label: lupus nephritis and other autoimmune/inflammatory conditions (specialist use)"
+  ],
+  "dosage": [
+    {"c": "Renal transplant (adult)", "r": "Oral / IV", "d": "1 g twice daily (2 g/day)", "t": "BID", "n": "Start within 72 h of transplant; IV for patients unable to take oral"},
+    {"c": "Cardiac transplant (adult)", "r": "Oral / IV", "d": "1.5 g twice daily (3 g/day)", "t": "BID", "n": "With ciclosporin and corticosteroids"},
+    {"c": "Hepatic transplant (adult)", "r": "Oral / IV", "d": "Oral 1.5 g twice daily; IV 1 g twice daily", "t": "BID", "n": "IV over no less than 2 hours"},
+    {"c": "Paediatric renal transplant", "r": "Oral suspension", "d": "600 mg/m2 twice daily (max 2 g/day); BSA-banded capsule/tablet dosing available", "t": "BID", "n": "Dose by body surface area"}
+  ],
+  "admin": [
+    "Take orally on an empty stomach (1 hour before or 2 hours after food) and be consistent with respect to meals",
+    "Swallow capsules and tablets whole; do not open, crush, or chew (teratogenic/irritant powder) - avoid inhalation/skin contact",
+    "Give IV by infusion over at least 2 hours; never give as a rapid IV bolus",
+    "Separate from antacids and oral iron, and from cholestyramine/bile-acid sequestrants, which reduce absorption",
+    "Use effective contraception and verify negative pregnancy tests before starting (women of reproductive potential)"
+  ],
+  "moa": "After oral or IV administration, mycophenolate mofetil is rapidly hydrolysed to the active mycophenolic acid (MPA). MPA is a potent, selective, reversible, non-competitive inhibitor of inosine monophosphate dehydrogenase (IMPDH), the rate-limiting enzyme in the de novo synthesis of guanosine nucleotides. T and B lymphocytes are critically dependent on this de novo pathway (lacking an effective salvage pathway), so MPA preferentially suppresses lymphocyte proliferation and antibody formation, blunting the immune response to the transplanted organ.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to mycophenolate mofetil, mycophenolic acid, or (for IV) polysorbate 80"
+    ],
+    "relative": [
+      "Pregnancy unless no suitable alternative immunosuppressant exists",
+      "Active serious infection",
+      "Severe chronic renal impairment (limit dose, monitor)",
+      "Active serious digestive disease (risk of GI bleeding/perforation)",
+      "Hereditary deficiency of HGPRT (Lesch-Nyhan/Kelley-Seegmiller)"
+    ],
+    "monitor": [
+      "Complete blood count (neutropenia, anaemia, PRCA)",
+      "Signs of infection including CMV, BK virus, and progressive multifocal leukoencephalopathy",
+      "Skin and other malignancy surveillance",
+      "Pregnancy status and contraception"
+    ]
+  },
+  "preg": "Boxed warning. Use during pregnancy is associated with increased first-trimester pregnancy loss and an increased risk of congenital malformations (notably external ear and facial anomalies, cleft lip/palate, and anomalies of the heart, kidneys, and limbs). Avoid if safer treatment options exist. Women of reproductive potential must have a negative pregnancy test before starting and use two reliable forms of contraception during therapy and for 6 weeks after stopping.",
+  "lact": "It is not known whether mycophenolic acid is excreted in human milk; because of the potential for serious adverse effects in the infant, avoid breastfeeding during treatment.",
+  "renal": "In renal-transplant patients with severe chronic renal impairment (GFR <25 mL/min/1.73 m2) outside the immediate post-transplant period, avoid doses higher than 1 g twice daily and monitor closely. No data exist for severe renal impairment in cardiac/hepatic recipients.",
+  "hepatic": "No dose adjustment is recommended for renal-transplant patients with hepatic parenchymal disease; the pharmacokinetics in severe hepatic disease in cardiac transplant patients are not characterised.",
+  "interactions": {
+    "major": [
+      "Live attenuated vaccines (avoid - reduced response and infection risk)",
+      "Azathioprine (avoid concomitant use - both affect bone marrow)",
+      "Cholestyramine / bile-acid sequestrants (markedly reduce MPA absorption)"
+    ],
+    "moderate": [
+      "Aciclovir/ganciclovir (competition for tubular secretion - higher levels of both)",
+      "Antacids with magnesium/aluminium and oral iron (reduce MPA absorption)",
+      "Ciclosporin (lowers MPA exposure; switching to tacrolimus raises it)",
+      "Proton pump inhibitors (may reduce absorption of the capsule/tablet form)",
+      "Rifampin (reduces MPA exposure)"
+    ],
+    "minor": ["Oral contraceptives (MMF may reduce hormonal contraceptive levels - use an additional barrier method)"],
+    "food": "Food reduces peak MPA levels; take on an empty stomach and consistently.",
+    "alcohol": "No specific interaction; general caution in immunosuppressed transplant patients.",
+    "diagnostics": "Routine monitoring is by CBC; therapeutic drug monitoring of MPA may be used in specialist settings."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea / vomiting", "Leukopenia", "Infections (urinary, respiratory)", "Abdominal pain"],
+    "serious": ["Serious and opportunistic infections (CMV, sepsis, BK nephropathy)", "Bone marrow suppression (neutropenia, pure red cell aplasia)", "Lymphoma and other malignancies (skin)", "GI bleeding/ulceration/perforation"],
+    "rare": ["Progressive multifocal leukoencephalopathy (JC virus)", "Hepatitis B/C reactivation", "Pulmonary fibrosis / interstitial lung disease", "Hypogammaglobulinaemia / bronchiectasis"],
+    "emergency": ["Sepsis or severe opportunistic infection", "Signs of PML (progressive weakness, confusion, vision changes)", "Severe GI bleeding or perforation", "Severe neutropenia with fever"]
+  },
+  "monitoring": ["Complete blood count weekly for the first month, then per protocol (neutropenia)", "Signs of infection (including CMV, BK virus) and PML", "Periodic skin examination for malignancy", "Pregnancy testing and contraception adherence in women of reproductive potential", "Renal/graft function"],
+  "counsel": [
+    "If you can become pregnant, use two reliable contraceptives during treatment and for 6 weeks after stopping - this drug causes miscarriage and birth defects",
+    "Do not open or crush capsules/tablets; avoid skin or eye contact and inhaling the powder",
+    "Take on an empty stomach at the same times each day; do not take antacids or iron at the same time",
+    "Tell your team promptly about fever, sore throat, unusual bruising/bleeding, persistent diarrhoea, or any infection",
+    "Protect your skin from the sun and attend skin checks; avoid live vaccines"
+  ],
+  "pk": [
+    ["Onset", "Immunosuppressive effect develops over days"],
+    ["Peak", "MPA peak about 1-2 hours after oral dosing"],
+    ["Half-life", "Mycophenolic acid about 16-18 hours"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "Store at 20-25 C; keep suspension per label and discard after the stated period"]
+  ],
+  "pearls": [
+    "Boxed warning: first-trimester pregnancy loss and congenital malformations - mandatory pregnancy testing and dual contraception",
+    "Boxed warning: increased risk of lymphoma/skin and other malignancies, and of serious/opportunistic infections including viral reactivation (HBV, HCV, BK, JC virus/PML)",
+    "GI side effects (diarrhoea) and dose-related leukopenia are the common limiting toxicities - reduce dose or interrupt rather than stop abruptly",
+    "Do not crush or open the formulation; the powder is teratogenic and irritant - handle with care"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, then skip it - never double up. Do not stop the medicine on your own, as this risks transplant rejection; contact your transplant team if you miss several doses.",
+  "overdose": "Overdose may cause excessive immunosuppression with bone marrow suppression (especially neutropenia) and increased infection risk, plus GI symptoms. There is no specific antidote; treatment is supportive with blood-count monitoring and infection precautions. Mycophenolic acid is not removed by haemodialysis, but cholestyramine and bile-acid sequestrants can enhance elimination by interrupting enterohepatic recirculation.",
+  "refs": [
+    ["FDA Label - Mycophenolate Mofetil (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22mycophenolate%20mofetil%22"],
+    ["DailyMed - Mycophenolate Mofetil", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=mycophenolate+mofetil"]
+  ]
+}

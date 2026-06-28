@@ -32,7 +32,8 @@
       return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0));
     },
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
-    monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); }
+    monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
+    structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); }
   };
 
   /* ============================================================
@@ -202,7 +203,7 @@
     b.querySelectorAll(".db-tier").forEach(function (x) {
       x.addEventListener("click", function () { var tt = x.getAttribute("data-tier"); if (tt !== st.tier) openComposition(st.name, st.sort, tt); });
     });
-    loadMonograph(d.composition);
+    loadStructured(d.composition);
     renderMore();
   }
 
@@ -273,6 +274,75 @@
   function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("db-lock"); } }
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && root && root.classList.contains("on")) close(); });
 
+  /* ---- structured clinical cards (new default) ---- */
+  var ST_SECS = [["Indications","summary"],["Dosage","adult_dose"],["Paediatric dose","ped_dose"],
+    ["Geriatric","geriatric"],["Mechanism of action","moa"],["Administration","administration"],
+    ["Renal adjustment","renal_adjust"],["Hepatic adjustment","hepatic_adjust"],["Pregnancy","pregnancy"],
+    ["Lactation","lactation"],["Contraindications","contraindications"],["Boxed warning","boxed_warning"],
+    ["Precautions / warnings","precautions"],["Common side effects","common_se"],["Serious effects","serious_se"],
+    ["Interactions","interactions"],["Monitoring","monitoring"],["Overdose","overdose"],["Counselling","counseling"]];
+  var ST_OPEN = { summary: 1, adult_dose: 1 };
+  function firstSent(t) { t = (t || "").trim(); if (!t) return ""; var i = t.indexOf(". "); return (i > 0 && i < 130) ? t.slice(0, i + 1) : t.slice(0, 96); }
+  function qfGrid(s) {
+    var items = [["Adult dose", firstSent(s.adult_dose)], ["Meal", s.food_timing], ["Pregnancy", firstSent(s.pregnancy)],
+      ["Renal", s.renal_adjust], ["Hepatic", s.hepatic_adjust], ["Half-life", s.half_life], ["Alcohol", s.alcohol], ["Monitoring", s.monitoring]];
+    return '<div class="db-qf">' + items.map(function (p) { return '<div><div class="db-qf-k">' + esc(p[0]) + '</div><div class="db-qf-v">' + esc((p[1] || "—").slice(0, 90)) + '</div></div>'; }).join("") + '</div>';
+  }
+  function stSections(s, openKeys) {
+    var html = '<div class="db-msrc">℞ <b>Structured from official FDA label (openFDA / DailyMed)</b><span>Faithful summary — pending clinician review; US labelling, verify against local guidance.</span></div>';
+    ST_SECS.forEach(function (sec) {
+      var v = s[sec[1]]; if (!v) return; var op = openKeys[sec[1]];
+      html += '<div class="db-msec"><button class="db-msec-h' + (op ? " open" : "") + '">' + esc(sec[0]) + '<span class="db-msec-x">' + (op ? "−" : "+") + '</span></button><div class="db-msec-b"' + (op ? "" : ' style="display:none"') + '>' + esc(v) + '</div></div>';
+    });
+    return html;
+  }
+  function renderStructured(c, resp) {
+    if (!resp || !resp.found) { c.innerHTML = '<div class="db-mono-none">No structured clinical record for this molecule yet (India-only or not matched). Brand &amp; price data below.</div>'; return; }
+    if (resp.combo) {
+      var html = '<div class="db-msrc">Combination product — clinical details per component. Verify locally.</div>';
+      (resp.components || []).forEach(function (cp) {
+        html += '<div class="db-cmono"><div class="db-cmono-h">💊 ' + esc(cp.name) + '</div>' +
+          (cp.data ? ((cp.data.gold && parseGold(cp.data.gold)) ? goldHTML(parseGold(cp.data.gold)) : (qfGrid(cp.data) + stSections(cp.data, { summary: 1 }))) : '<div class="db-mono-none">No structured record for this component yet.</div>') + '</div>';
+      });
+      c.innerHTML = html; wireToggles(c); return;
+    }
+    var g = resp.data && resp.data.gold && parseGold(resp.data.gold);
+    if (g) { c.innerHTML = goldHTML(g); return; }
+    c.innerHTML = qfGrid(resp.data) + stSections(resp.data, ST_OPEN); wireToggles(c);
+  }
+  function loadStructured(name) {
+    var c = root.querySelector("#dbMono"); if (!c) return;
+    if (monoCache["S:" + name] !== undefined) { renderStructured(c, monoCache["S:" + name]); return; }
+    MEDAPI.structured(name).then(function (resp) {
+      monoCache["S:" + name] = resp || null;
+      if (st.name === name) { var cc = root.querySelector("#dbMono"); if (cc) renderStructured(cc, resp || null); }
+    });
+  }
+
+  /* ---- GOLD-STANDARD template renderer (from curated gold JSON) ---- */
+  function goldHTML(g) {
+    function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
+    function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + ic + ' ' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
+    var H = "";
+    H += '<div style="background:#fff4e5;border:1px solid #f0c98a;color:#7a4d00;border-radius:9px;padding:8px 11px;margin:0 0 11px;font:600 11.5px var(--sans,system-ui);line-height:1.4">⚠️ AI-summarized from official labels (FDA / EMA / SmPC). Verify doses against the primary source before prescribing — pending clinician review.</div>';
+    if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
+    if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
+    if (g.indications) H += S('🎯', 'Indications', 'When?', bl(g.indications));
+    if (g.dosage) H += S('💊', 'Dosage', 'How much?', '<div class="gd-tw"><table class="gd-t"><tr><th>Condition</th><th>Route</th><th>Dose</th><th>Duration</th><th>Notes</th></tr>' + g.dosage.map(function (r) { return '<tr><td><b>' + esc(r.c) + '</b></td><td>' + esc(r.r) + '</td><td><b>' + esc(r.d) + '</b></td><td>' + esc(r.t) + '</td><td>' + esc(r.n) + '</td></tr>'; }).join("") + '</table></div>');
+    if (g.admin) H += S('✓', 'Administration', 'How to give?', '<ul class="gd-chk">' + g.admin.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
+    if (g.moa) H += S('🧭', 'Mechanism', 'How it works', '<div>' + esc(g.moa) + '</div>');
+    if (g.contra) H += S('⛔', 'Contraindications & Cautions', 'Avoid when?', '<div class="gd-sev red"><h4>Absolute</h4>' + bl(g.contra.absolute) + '</div><div class="gd-sev amber"><h4>Relative / precautions</h4>' + bl(g.contra.relative) + '</div><div class="gd-sev blue"><h4>Monitor</h4>' + bl(g.contra.monitor) + '</div>');
+    H += '<div class="gd-2">' + S('🤰', 'Pregnancy & Lactation', 'Can I use it?', '<div class="gd-kv"><b>Preg</b><span>' + esc(g.preg || '—') + '</span></div><div class="gd-kv"><b>Lact</b><span>' + esc(g.lact || '—') + '</span></div>') + S('🫘', 'Renal / Hepatic', 'Adjust?', '<div class="gd-kv"><b>Renal</b><span>' + esc(g.renal || '—') + '</span></div><div class="gd-kv"><b>Hepatic</b><span>' + esc(g.hepatic || '—') + '</span></div>') + '</div>';
+    if (g.interactions) { var ix = g.interactions; H += S('🔗', 'Interactions', 'Worry about?', '<div class="gd-sev red"><h4>Major</h4>' + bl(ix.major) + '</div><div class="gd-sev amber"><h4>Moderate</h4>' + bl(ix.moderate) + '</div><div class="gd-sev grey"><h4>Minor</h4>' + bl(ix.minor) + '</div><div class="gd-kv"><b>Food</b><span>' + esc(ix.food || '—') + '</span></div><div class="gd-kv"><b>Alcohol</b><span>' + esc(ix.alcohol || '—') + '</span></div>' + (ix.diagnostics ? '<div class="gd-kv"><b>Dx</b><span>' + esc(ix.diagnostics) + '</span></div>' : '')); }
+    if (g.se) { var s = g.se; H += S('⚠️', 'Side Effects', 'What happens?', '<div class="gd-2"><div class="gd-sev green"><h4>Common</h4>' + bl(s.common) + '</div><div class="gd-sev red"><h4>Serious</h4>' + bl(s.serious) + '</div><div class="gd-sev amber"><h4>Rare (long-term)</h4>' + bl(s.rare) + '</div><div class="gd-sev red"><h4>🚨 Emergency</h4>' + bl(s.emergency) + '</div></div>'); }
+    if (g.monitoring) H += S('📈', 'Monitoring', 'Follow what?', '<ul class="gd-mon">' + g.monitoring.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>');
+    H += '<div class="gd-2">' + (g.counsel ? S('🗣', 'Counselling', 'Tell patient', bl(g.counsel)) : '') + S('⏱', 'Pharmacokinetics', 'Onset / duration', '<div class="gd-pk">' + (g.pk || []).map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>' + (g.missed ? '<div class="gd-kv"><b>Missed</b><span>' + esc(g.missed) + '</span></div>' : '') + (g.overdose ? '<div class="gd-kv"><b>Overdose</b><span>' + esc(g.overdose) + '</span></div>' : '')) + '</div>';
+    if (g.pearls) H += '<div class="gd-sec gd-pearls"><div class="gd-h">💡 Clinical Pearls <span class="gd-q">Expert tips</span></div>' + bl(g.pearls) + '</div>';
+    H += S('📚', 'References', 'Source', '<div class="gd-src">' + (g.refs || []).map(function (r) { return '<a href="' + r[1] + '" target="_blank">' + esc(r[0]) + '</a>'; }).join(" · ") + '</div><div class="gd-foot">Faithful summary — pending clinician sign-off; verify locally. Full official label preserved internally.</div>');
+    return H;
+  }
+  function parseGold(s) { try { return JSON.parse(s); } catch (e) { return null; } }
+
   /* ---- styles ---- */
   function injectCSS() {
     if (el("smd-db-styles")) return;
@@ -314,6 +384,42 @@
       ".db-mono-none{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--paper,#f7f7f5);border:1px dashed var(--line,#e5e5e0);border-radius:9px;padding:10px 12px}",
       ".db-cmono{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px;margin-bottom:9px;background:var(--paper,#f7f7f5)}",
       ".db-cmono-h{font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-bottom:7px}",
+      ".db-qf{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:4px 0 11px}",
+      "@media(min-width:560px){.db-qf{grid-template-columns:repeat(4,1fr)}}",
+      ".db-qf>div{background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:7px 9px}",
+      ".db-qf-k{font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888)}",
+      ".db-qf-v{font:700 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);margin-top:2px;line-height:1.35}",
+      // gold-standard template
+      ".gd-sec{background:var(--panel,#fff);border:1px solid var(--line,#e4eaed);border-radius:11px;padding:11px 13px;margin-bottom:9px}",
+      ".gd-h{font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--teal,#0a9396);display:flex;align-items:center;gap:6px;margin-bottom:8px}",
+      ".gd-h .gd-q{margin-left:auto;font-weight:600;letter-spacing:0;text-transform:none;color:var(--slate-soft,#8aa0ab);font-size:10px}",
+      ".gd-2{display:grid;grid-template-columns:1fr;gap:9px}@media(min-width:620px){.gd-2{grid-template-columns:1fr 1fr}}",
+      ".gd-b{margin:0;padding-left:16px}.gd-b li{margin:2px 0;font-size:13px}",
+      ".gd-qf{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}@media(min-width:620px){.gd-qf{grid-template-columns:repeat(4,1fr)}}",
+      ".gd-qf>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:7px 9px}",
+      ".gd-qk{font:700 9px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#8aa0ab)}",
+      ".gd-qv{font:800 12.5px var(--sans,system-ui);color:var(--ink,#15242b);margin-top:2px;line-height:1.3}",
+      ".gd-tw{overflow-x:auto}.gd-t{width:100%;border-collapse:collapse;font-size:12.5px}",
+      ".gd-t th{text-align:left;font:700 9px var(--sans,system-ui);text-transform:uppercase;color:var(--slate-soft,#8aa0ab);padding:6px 8px;border-bottom:1px solid var(--line,#e4eaed)}",
+      ".gd-t td{padding:6px 8px;border-bottom:1px solid var(--line,#e4eaed);vertical-align:top}",
+      ".gd-chk{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:4px}@media(min-width:560px){.gd-chk{grid-template-columns:1fr 1fr}}",
+      ".gd-chk li{padding-left:20px;position:relative;font-size:13px}.gd-chk li:before{content:'✓';position:absolute;left:0;color:var(--green,#1f8a4c);font-weight:800}",
+      ".gd-mon{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:4px}",
+      ".gd-mon li{padding-left:20px;position:relative;font-size:13px}.gd-mon li:before{content:'☐';position:absolute;left:0;color:#1f6feb;font-weight:700}",
+      ".gd-sev{border-radius:8px;padding:8px 10px;margin-bottom:7px}.gd-sev h4{margin:0 0 4px;font:800 10px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em}.gd-sev .gd-b li{font-size:12.5px}",
+      ".gd-sev.red{background:#fdecea;border:1px solid #f3c2bb}.gd-sev.red h4{color:#c0392b}",
+      ".gd-sev.amber{background:#fff6e0;border:1px solid #f0d9a0}.gd-sev.amber h4{color:#9a6700}",
+      ".gd-sev.blue{background:#e9f1fe;border:1px solid #bcd4fb}.gd-sev.blue h4{color:#1f6feb}",
+      ".gd-sev.green{background:#e8f6ee;border:1px solid #bfe3cd}.gd-sev.green h4{color:#1f8a4c}",
+      ".gd-sev.grey{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed)}.gd-sev.grey h4{color:var(--slate,#4b5b66)}",
+      ".gd-kv{display:grid;grid-template-columns:74px 1fr;gap:8px;padding:4px 0;border-top:1px dashed var(--line,#e4eaed);font-size:12.5px}.gd-kv:first-child{border-top:none}.gd-kv b{color:var(--slate-soft,#8aa0ab);font:700 9.5px var(--sans,system-ui);text-transform:uppercase;padding-top:2px}",
+      ".gd-pk{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}@media(min-width:560px){.gd-pk{grid-template-columns:repeat(5,1fr)}}",
+      ".gd-pk>div{background:var(--paper,#f4f7f8);border:1px solid var(--line,#e4eaed);border-radius:8px;padding:6px;text-align:center}",
+      ".gd-pearls{background:linear-gradient(135deg,#e7f3f3,#eef7ee);border:1px solid #bfe3e3}",
+      ".gd-src a{color:var(--teal,#0a9396)}.gd-foot{font:500 10px var(--sans,system-ui);color:var(--slate-soft,#8aa0ab);margin-top:5px}",
+      // severity/pearls blocks have fixed light pastel backgrounds — force dark text so they stay readable in dark mode
+      ".gd-sev{color:#1f2d34}.gd-sev .gd-b li{color:#1f2d34}.gd-pearls,.gd-pearls .gd-b li{color:#173a36}",
+      ".db-sev{color:#1f2d34}.db-sev .db-b li,.db-sev li{color:#1f2d34}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
       ".db-brands-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 2px 9px;font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-sorts{display:flex;gap:6px}",

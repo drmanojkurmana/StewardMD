@@ -1,0 +1,112 @@
+{
+  "generic": "Timolol",
+  "cls": "Non-selective beta-adrenergic blocker",
+  "pharm": "Non-selective beta-blocker that lowers intraocular pressure (ophthalmic) and blood pressure/heart rate (oral) by blocking beta-1 and beta-2 receptors.",
+  "tags": ["Rx only", "Beta-blocker", "Glaucoma", "Systemic absorption from eye drops"],
+  "quick": [
+    ["Adult dose", "Ophthalmic: 1 drop 0.25-0.5% in eye(s) once or twice daily"],
+    ["Meal", "Eye drops not meal-related; oral tablets with or without food"],
+    ["Pregnancy", "Use only if clearly needed; monitor neonate"],
+    ["Lactation", "Excreted in milk; monitor infant for beta-blockade"],
+    ["Renal", "No specific adjustment for ophthalmic use"],
+    ["Hepatic", "Caution; metabolised hepatically"],
+    ["Alcohol", "Limit; may add to hypotensive effect (oral)"],
+    ["Monitoring", "IOP; heart rate/BP and respiratory symptoms"]
+  ],
+  "summary": "Timolol is a non-selective beta-adrenergic blocker. As an ophthalmic solution it is a mainstay topical therapy for open-angle glaucoma and ocular hypertension, lowering intraocular pressure by reducing aqueous humour production. As oral tablets it is used for hypertension, angina, post-myocardial-infarction protection, and migraine prophylaxis. Even ophthalmic timolol can be absorbed systemically and cause beta-blocker effects such as bradycardia, bronchospasm, and hypotension, so the same cardiopulmonary contraindications apply.",
+  "indications": [
+    "Reduction of elevated intraocular pressure in open-angle glaucoma and ocular hypertension (ophthalmic)",
+    "Hypertension (oral)",
+    "Chronic stable angina pectoris (oral)",
+    "Reduction of mortality after acute myocardial infarction in stable patients (oral)",
+    "Migraine prophylaxis (oral)"
+  ],
+  "dosage": [
+    {"c": "Glaucoma / ocular hypertension", "r": "Ophthalmic", "d": "1 drop of 0.25% in affected eye(s) twice daily; if inadequate, 0.5% twice daily; gel-forming 0.25-0.5% once daily", "t": "Once-twice daily", "n": "Reduce to once daily if IOP controlled; use punctal occlusion to limit systemic absorption"},
+    {"c": "Hypertension (oral)", "r": "Oral", "d": "Initial 10 mg twice daily; usual 20-40 mg/day; max 60 mg/day in divided doses", "t": "BID", "n": "Titrate to BP; do not stop abruptly"},
+    {"c": "Post-myocardial infarction (oral)", "r": "Oral", "d": "10 mg twice daily", "t": "BID", "n": "For stable patients after the acute phase"},
+    {"c": "Migraine prophylaxis (oral)", "r": "Oral", "d": "10 mg twice daily; range 10-30 mg/day", "t": "Once-twice daily", "n": "Adjust to response and tolerability"}
+  ],
+  "admin": [
+    "For eye drops, wash hands, tilt head back, instil one drop into the conjunctival sac, and avoid touching the eye/dropper",
+    "Apply gentle pressure to the inner corner (punctal occlusion) for 1-2 minutes after instillation to reduce systemic absorption",
+    "Separate different eye drops by at least 5 minutes; instil suspensions/gels last",
+    "Take oral tablets consistently and do not stop suddenly (taper to avoid rebound)",
+    "Remove contact lenses before drops containing benzalkonium chloride and reinsert after 15 minutes"
+  ],
+  "moa": "Timolol competitively blocks beta-1 and beta-2 adrenergic receptors without intrinsic sympathomimetic or significant membrane-stabilising activity. In the eye it reduces aqueous humour formation by the ciliary epithelium, lowering intraocular pressure. Systemically (oral) it slows heart rate, reduces myocardial contractility and cardiac output, decreases renin release, and thereby lowers blood pressure and myocardial oxygen demand.",
+  "contra": {
+    "absolute": [
+      "Bronchial asthma or history of bronchospasm / severe COPD",
+      "Sinus bradycardia, second- or third-degree AV block, sick sinus syndrome (without pacemaker)",
+      "Overt cardiac failure / cardiogenic shock",
+      "Hypersensitivity to timolol"
+    ],
+    "relative": [
+      "Diabetes (may mask hypoglycaemia)",
+      "Peripheral vascular disease",
+      "Myasthenia gravis",
+      "Hepatic impairment",
+      "Pheochromocytoma without alpha blockade"
+    ],
+    "monitor": [
+      "Heart rate and signs of heart block",
+      "Respiratory symptoms / bronchospasm",
+      "Blood pressure (oral)",
+      "Masked hypoglycaemia in diabetics"
+    ]
+  },
+  "preg": "Use only if clearly needed. Beta-blockers used near term may cause neonatal bradycardia, hypotension, and hypoglycaemia; monitor the newborn. For ophthalmic use, systemic absorption is reduced by punctal occlusion.",
+  "lact": "Timolol is excreted in breast milk, including after ophthalmic use. Monitor the breastfed infant for signs of beta-blockade (bradycardia, poor feeding); use punctal occlusion to limit maternal systemic levels.",
+  "renal": "No specific dose adjustment is defined for ophthalmic use. For oral therapy, use with general caution in renal impairment; timolol is primarily hepatically metabolised.",
+  "hepatic": "Timolol is extensively metabolised by the liver (CYP2D6); use with caution and consider lower doses in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Verapamil / diltiazem (additive bradycardia, AV block, and hypotension)",
+      "Other beta-blockers including additional topical beta-blockers (additive systemic effects)"
+    ],
+    "moderate": [
+      "CYP2D6 inhibitors (quinidine, fluoxetine, paroxetine - raise timolol levels, even from eye drops)",
+      "Digoxin (additive effect on AV conduction)",
+      "Clonidine (rebound hypertension if clonidine withdrawn)",
+      "Insulin / oral hypoglycaemics (masking of hypoglycaemia)"
+    ],
+    "minor": ["NSAIDs (may reduce antihypertensive effect of oral timolol)"],
+    "food": "Oral timolol may be taken with or without food; eye drops are unaffected by meals.",
+    "alcohol": "Alcohol may add to the blood-pressure-lowering and dizziness effects of oral therapy; limit intake.",
+    "diagnostics": "No characteristic laboratory interference; may blunt the tachycardic response used in stress testing."
+  },
+  "se": {
+    "common": ["Ocular: burning/stinging, blurred vision, dry eyes", "Bradycardia", "Fatigue", "Headache", "Dizziness"],
+    "serious": ["Bronchospasm / respiratory failure in susceptible patients", "Heart block / severe bradycardia", "Worsening heart failure", "Severe hypotension"],
+    "rare": ["Depression / confusion", "Masked hypoglycaemia", "Cerebral ischaemia", "Severe allergic reactions"],
+    "emergency": ["Acute bronchospasm", "Symptomatic bradycardia or heart block", "Acute heart failure or severe hypotension"]
+  },
+  "monitoring": ["Intraocular pressure (ophthalmic)", "Heart rate and blood pressure", "Respiratory status in patients with airway disease", "Blood glucose in diabetics", "Signs of heart failure"],
+  "counsel": [
+    "Press gently on the inner corner of the eye for 1-2 minutes after drops to limit body-wide effects",
+    "Eye drops can still affect the heart and breathing - report wheezing, slow pulse, or faintness",
+    "Do not stop oral timolol suddenly; it can trigger chest pain or rapid heartbeat",
+    "Tell your doctor if you have asthma, slow heart rate, or diabetes",
+    "Temporary stinging or blurred vision after drops is common"
+  ],
+  "pk": [
+    ["Onset", "Ophthalmic IOP fall within ~30 min; oral effect within 1-2 h"],
+    ["Peak", "Ophthalmic IOP effect ~1-2 h; oral plasma peak ~1-2 h"],
+    ["Half-life", "About 4 hours"],
+    ["Duration", "Ophthalmic up to 24 h; oral about 12-24 h"],
+    ["Storage", "Store at room temperature; protect drops from light; keep cap closed"]
+  ],
+  "pearls": [
+    "Topical eye drops are systemically absorbed - the same cardiac/respiratory contraindications as oral beta-blockers apply",
+    "Teach punctal occlusion (nasolacrimal pressure) to cut systemic absorption from eye drops",
+    "Non-selective: avoid in asthma/COPD because of bronchospasm risk",
+    "Do not stop oral therapy abruptly to avoid rebound hypertension, angina, or arrhythmia"
+  ],
+  "missed": "For eye drops, instil the missed dose as soon as you remember unless it is nearly time for the next dose, then skip it. For oral tablets, take the missed dose unless the next dose is near, in which case skip it - do not double up.",
+  "overdose": "Overdose (or excessive systemic absorption) causes bradycardia, hypotension, bronchospasm, and acute heart failure. Treat with atropine for bradycardia, beta-agonists/aminophylline for bronchospasm, and IV fluids, glucagon, and vasopressors for refractory cardiovascular depression; consider pacing. Timolol is dialysable to some extent.",
+  "refs": [
+    ["FDA Label - Timolol (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22timolol%22"],
+    ["DailyMed - Timolol", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=timolol"]
+  ]
+}

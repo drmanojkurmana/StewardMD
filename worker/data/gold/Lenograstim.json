@@ -1,0 +1,104 @@
+{
+  "generic": "Lenograstim (rHuG-CSF)",
+  "cls": "Granulocyte colony-stimulating factor (G-CSF), glycosylated",
+  "pharm": "Recombinant human granulocyte colony-stimulating factor (rHuG-CSF) that stimulates neutrophil precursor proliferation, differentiation, and release from bone marrow.",
+  "tags": ["Rx only", "G-CSF", "Neutropenia", "Subcutaneous or IV", "EMA/EU (not US FDA-approved)"],
+  "quick": [
+    ["Adult dose", "Neutropenia: 150 micrograms/m2/day (5 micrograms/kg/day) SC or short IV infusion"],
+    ["Meal", "Not relevant; given by injection, not orally"],
+    ["Pregnancy", "Not recommended unless clearly necessary; animal reproductive toxicity"],
+    ["Lactation", "Discontinue breastfeeding during treatment"],
+    ["Renal", "No specific dose adjustment defined; monitor"],
+    ["Hepatic", "No specific dose adjustment defined; monitor"],
+    ["Alcohol", "No specific interaction described"],
+    ["Monitoring", "Full blood count/neutrophils, platelets, spleen size, pulmonary status"]
+  ],
+  "summary": "Lenograstim is a glycosylated recombinant human granulocyte colony-stimulating factor (rHuG-CSF) that reduces the duration of neutropenia and the incidence of febrile neutropenia. It is used after cytotoxic chemotherapy for non-myeloid malignancy, after myeloablative therapy followed by bone marrow transplantation, and to mobilize peripheral blood progenitor cells (PBSC) for collection in patients and healthy donors. It is given subcutaneously or by short intravenous infusion at 150 micrograms/m2 (5 micrograms/kg) daily for marrow recovery, or 10 micrograms/kg/day for mobilization. Key safety concerns include rare splenic rupture, capillary leak syndrome, pulmonary reactions including ARDS, and the need to avoid administration concurrently with cytotoxic chemotherapy.",
+  "indications": [
+    "Reduction in the duration of neutropenia in patients undergoing myeloablative therapy followed by bone marrow transplantation",
+    "Reduction in the duration of neutropenia and associated febrile neutropenia in patients with non-myeloid malignancy treated with established cytotoxic chemotherapy",
+    "Mobilization of peripheral blood progenitor cells (PBSC), alone or after myelosuppressive chemotherapy, in patients and in healthy donors"
+  ],
+  "dosage": [
+    {"c": "Chemotherapy-induced neutropenia", "r": "Adult/adolescent/child >2 yr SC or IV", "d": "150 micrograms/m2/day (19.2 MIU/m2/day), equivalent to 5 micrograms/kg/day", "t": "Once daily", "n": "Start about 24 h after chemotherapy; continue until neutrophils stabilize, max 28 consecutive days"},
+    {"c": "Bone marrow transplantation", "r": "Adult/child SC or 30-min IV infusion", "d": "150 micrograms/m2/day (19.2 MIU/m2/day)", "t": "Once daily", "n": "Begin no sooner than 24 h after marrow infusion; continue until neutrophil recovery, max 28 days"},
+    {"c": "PBSC mobilization after chemotherapy", "r": "Adult SC", "d": "150 micrograms/m2/day (19.2 MIU/m2/day)", "t": "Once daily", "n": "Continue through apheresis; timing of leukapheresis guided by CD34+/neutrophil counts"},
+    {"c": "PBSC mobilization with G-CSF alone", "r": "Adult/healthy donor SC", "d": "10 micrograms/kg/day (1.28 MIU/kg/day)", "t": "Once daily for 4-6 days", "n": "Apheresis typically days 5-7; for healthy donors use only after careful risk evaluation"}
+  ],
+  "admin": [
+    "Reconstitute the powder with the supplied solvent and do not shake vigorously",
+    "Give by subcutaneous injection or by short (about 30-minute) intravenous infusion per indication",
+    "Do not administer concomitantly with cytotoxic chemotherapy; observe the 24-hour gap after chemotherapy or marrow infusion",
+    "Use reconstituted solution immediately or store at 2-8 C for up to 24 hours; do not freeze",
+    "Rotate subcutaneous injection sites"
+  ],
+  "moa": "Lenograstim is a glycosylated rHuG-CSF produced in mammalian (CHO) cells. It binds to G-CSF receptors on neutrophilic progenitor and mature cells, stimulating proliferation and differentiation of committed neutrophil precursors, accelerating their maturation and release from the bone marrow, and enhancing the functional activity of mature neutrophils. This shortens the duration of chemotherapy- or transplant-induced neutropenia and mobilizes CD34+ hematopoietic progenitor cells into the peripheral blood for collection.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to lenograstim or any excipient",
+      "Concomitant use with cytotoxic chemotherapy",
+      "Myeloid malignancy other than de novo acute myeloid leukemia in patients aged 55 years and over"
+    ],
+    "relative": [
+      "Pre-malignant or malignant myeloid conditions (G-CSF can stimulate cell growth)",
+      "Sickle cell disease (risk of sickle cell crisis)",
+      "Risk factors for thromboembolism or capillary leak syndrome"
+    ],
+    "monitor": [
+      "Neutrophil and platelet counts during therapy",
+      "Spleen size (splenomegaly, rare splenic rupture)",
+      "Respiratory symptoms (pulmonary infiltrates, ARDS)"
+    ]
+  },
+  "preg": "There are no adequate data on the use of lenograstim in pregnant women, and animal studies have shown reproductive toxicity. Lenograstim (GRANOCYTE) should not be used during pregnancy unless clearly necessary.",
+  "lact": "It is not known whether lenograstim is excreted in human milk; breastfeeding should be discontinued during treatment with lenograstim.",
+  "renal": "No specific dose adjustment for renal impairment is defined in the labeling; clinical monitoring is advised. Healthy stem-cell donors with significant renal dysfunction generally should not undergo mobilization.",
+  "hepatic": "No specific dose adjustment for hepatic impairment is defined in the labeling; transient elevations in liver enzymes (ALP, LDH, AST/ALT, GGT) may occur and clinical monitoring is advised.",
+  "interactions": {
+    "major": [
+      "Cytotoxic chemotherapy given concurrently (contraindicated; rapidly dividing myeloid cells are sensitive to cytotoxics, so do not give G-CSF during chemotherapy)"
+    ],
+    "moderate": [
+      "Other drugs that promote release of neutrophils (e.g., lithium) may potentiate the effect"
+    ],
+    "minor": [],
+    "food": "Not applicable; administered parenterally.",
+    "alcohol": "No specific interaction with alcohol has been described.",
+    "diagnostics": "May transiently increase neutrophil and CD34+ counts, alkaline phosphatase, LDH, and uric acid; bone imaging may show altered marrow uptake. Possible interference with some imaging studies."
+  },
+  "se": {
+    "common": ["Bone and musculoskeletal pain", "Headache", "Asthenia", "Fever", "Nausea", "Injection-site reactions", "Transient rise in liver enzymes (ALP, LDH, AST/ALT, GGT)", "Splenomegaly (often asymptomatic)"],
+    "serious": ["Splenic rupture", "Capillary leak syndrome (hypotension, hypoalbuminemia, edema, hemoconcentration)", "Pulmonary reactions including interstitial pneumonia and ARDS", "Severe hypersensitivity/anaphylactoid reaction", "Sickle cell crisis (in patients with sickle cell disease)", "Thrombocytopenia / leukocytosis"],
+    "rare": ["Cutaneous vasculitis", "Sweet syndrome (acute febrile neutrophilic dermatosis)", "Aortitis", "Glomerulonephritis"],
+    "emergency": ["Splenic rupture (acute left upper quadrant or shoulder-tip pain, hypotension)", "Capillary leak syndrome with shock", "Acute respiratory distress syndrome", "Anaphylaxis"]
+  },
+  "monitoring": ["Full blood count with neutrophil count (regularly during therapy)", "Platelet count and hematocrit", "Spleen size by examination or imaging", "Respiratory signs and symptoms (dyspnea, hypoxia, cough)", "Liver enzymes and uric acid", "Signs of capillary leak syndrome (edema, hypotension)"],
+  "counsel": [
+    "Report left upper abdominal or shoulder-tip pain promptly, as it can signal a swollen or ruptured spleen",
+    "Report any breathing difficulty, cough, or fever to your care team",
+    "Bone pain is common and is usually managed with simple analgesics",
+    "Injections are usually given once daily; keep all blood-count appointments",
+    "Do not receive this drug at the same time as your chemotherapy infusion"
+  ],
+  "pk": [
+    ["Onset", "Neutrophil count rises within hours to about 1-2 days of starting therapy"],
+    ["Peak", "Serum concentration peaks several hours after subcutaneous dosing"],
+    ["Half-life", "Approximately 3 hours (longer, ~2.3-3.3 h, after SC than IV dosing)"],
+    ["Duration", "Daily dosing required; neutrophil count falls toward baseline within days of stopping"],
+    ["Storage", "Store below 30 C; do not freeze. Use reconstituted solution immediately or within 24 h at 2-8 C"]
+  ],
+  "pearls": [
+    "Not US FDA-approved; lenograstim (GRANOCYTE) is licensed in the EU/EMA. Use the EMA/SmPC and BNF rather than an FDA prescribing information",
+    "Glycosylated rHuG-CSF (essentially a glycosylated counterpart of filgrastim); 150 micrograms/m2 is roughly equivalent to 5 micrograms/kg per day",
+    "Never give concurrently with cytotoxic chemotherapy; observe the 24-hour gap after chemotherapy or marrow infusion",
+    "Splenic rupture, capillary leak syndrome, and pulmonary toxicity (including ARDS) are rare but can be life-threatening",
+    "Use 10 micrograms/kg/day when mobilizing PBSC with G-CSF alone, including in carefully selected healthy donors"
+  ],
+  "missed": "This is a once-daily injection usually administered in a clinical setting. If a dose is missed, contact the care team for advice; do not double the next dose. Maintaining the daily schedule is important for neutrophil recovery or stem-cell mobilization.",
+  "overdose": "The consequences of overdose are not well established. Excessive dosing may cause marked leukocytosis and exacerbate adverse effects such as bone pain or splenomegaly. Management is supportive with discontinuation and monitoring of blood counts (which fall after stopping) and spleen size; there is no specific antidote.",
+  "refs": [
+    ["EMC SmPC - GRANOCYTE 13 million IU/mL (lenograstim)", "https://www.medicines.org.uk/emc/product/1577/smpc"],
+    ["EMC SmPC - GRANOCYTE 34 million IU/mL (lenograstim)", "https://www.medicines.org.uk/emc/product/7807/smpc"],
+    ["Drugs - Lenograstim review (Adis)", "https://pubmed.ncbi.nlm.nih.gov/21504247/"]
+  ]
+}

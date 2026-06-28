@@ -1,0 +1,99 @@
+{
+  "generic": "Dextrose",
+  "cls": "Carbohydrate / monosaccharide (D-glucose)",
+  "pharm": "Caloric agent / fluid and electrolyte replenisher / antihypoglycemic",
+  "tags": ["dextrose", "glucose", "D5W", "D50", "hypoglycemia", "IV fluid", "parenteral nutrition"],
+  "quick": [
+    ["Adult dose", "Hypoglycemia: 25 g (50 mL D50W) IV; maintenance fluid: D5W titrated to needs"],
+    ["Meal", "Not applicable; intravenous"],
+    ["Pregnancy", "Acceptable when indicated; avoid maternal hyperglycemia near delivery"],
+    ["Lactation", "Compatible"],
+    ["Renal", "No specific adjustment; monitor fluid/electrolyte and glucose balance"],
+    ["Hepatic", "Caution; monitor glucose, give carefully in hepatic failure"],
+    ["Alcohol", "Give thiamine before/with dextrose in alcohol use to prevent Wernicke encephalopathy"],
+    ["Monitoring", "Blood glucose, serum electrolytes (Na, K, phosphate), fluid status"]
+  ],
+  "summary": "Dextrose (D-glucose) injection is a carbohydrate source used to supply calories and free water, treat hypoglycemia, and serve as a vehicle/diluent. Concentrations range from D5W (5%) for fluid and calories, through D10/D25, to D50W (50%) for acute hypoglycemia. Concentrated solutions (>5% or osmolarity >=900 mOsm/L) require central venous administration. Dextrose is oxidized to carbon dioxide and water, yielding ~3.4 kcal per gram.",
+  "indications": [
+    "Source of calories and fluid replenishment (parenteral nutrition admixtures, maintenance fluids)",
+    "Treatment of acute symptomatic hypoglycemia",
+    "Source of water and calories when oral intake is restricted",
+    "Vehicle/diluent for compatible IV medications",
+    "Adjunct in management of hyperkalemia (with insulin)"
+  ],
+  "dosage": [
+    {"c": "Acute hypoglycemia (adult)", "r": "Rescue", "d": "10-25 g IV (e.g., 20-50 mL of D50W) bolus", "t": "Once; repeat as needed", "n": "Recheck glucose in 10-15 min; follow with continuous infusion or oral intake"},
+    {"c": "Hypoglycemia (pediatric)", "r": "Weight-based rescue", "d": "0.5-1 g/kg IV (2-4 mL/kg D25W in children; 5-10 mL/kg D10W in neonates)", "t": "Once; repeat as needed", "n": "Avoid D50W in young children due to osmolarity/vein injury"},
+    {"c": "Maintenance fluid / calories (adult)", "r": "Continuous infusion", "d": "D5W or D5/saline titrated to fluid and caloric needs", "t": "Continuous", "n": "Typical glucose oxidation limit ~4-5 mg/kg/min; avoid overfeeding"},
+    {"c": "Parenteral nutrition", "r": "Admixture", "d": "Concentrated dextrose (e.g., 50-70%) diluted in PN with amino acids/lipids", "t": "Continuous central infusion", "n": "Individualize to clinical condition, weight and nutritional needs"},
+    {"c": "Hyperkalemia (adjunct)", "r": "With insulin", "d": "25 g dextrose IV with 10 units regular insulin", "t": "Once; monitor", "n": "Drives potassium intracellularly; monitor glucose to avoid hypoglycemia"}
+  ],
+  "admin": [
+    "Solutions >5% dextrose or osmolarity >=~900 mOsm/L (e.g., D10 and above) must be given through a central vein; <=5% may go peripherally",
+    "Pharmacy bulk packages (e.g., 70%) are for admixture only - NOT for direct IV infusion",
+    "Inspect for particulate matter and clarity; do not use if precipitate present (pulmonary embolism risk)",
+    "Discontinue concentrated dextrose infusions gradually to avoid rebound hypoglycemia",
+    "Use a dedicated line or verify compatibility; do not administer through the same set as blood",
+    "In patients at risk (alcohol use, malnutrition) give thiamine before/with dextrose to prevent Wernicke encephalopathy"
+  ],
+  "moa": "Dextrose provides glucose, the body's primary metabolic fuel. Infused glucose is taken up by cells and oxidized via glycolysis and the citric acid cycle to carbon dioxide and water, yielding approximately 3.4 kcal per gram (hydrous). It raises blood glucose to correct hypoglycemia, supplies caloric substrate, and provides free water (when metabolized) for hydration.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to dextrose/corn-derived products", "Severe dehydration (hypertonic dextrose worsens hyperosmolar state)", "Clinically significant hyperglycemia not yet controlled"],
+    "relative": ["Diabetes mellitus / glucose intolerance", "Hypokalemia (insulin/glucose shifts potassium intracellularly)", "Risk of refeeding syndrome (severe malnutrition, prolonged fasting)", "Anuria or significant fluid overload", "Hepatic failure with impaired glucose handling"],
+    "monitor": ["Patients on insulin or oral hypoglycemics", "Patients at risk of thiamine deficiency (alcoholism, malnutrition)", "Neonates and preterm infants (aluminum toxicity, glucose lability)", "Patients with cardiac or renal impairment (fluid status)"]
+  },
+  "preg": "Appropriate administration during pregnancy is not expected to cause adverse developmental outcomes. However, maternal hyperglycemia from glucose-containing fluids near delivery has been associated with neonatal hypoglycemia. Monitor maternal glucose, particularly intrapartum.",
+  "lact": "Dextrose injection is compatible with breastfeeding; glucose is a normal physiologic substrate and is not expected to harm a breastfed infant.",
+  "renal": "No specific dose adjustment for dextrose itself, but monitor fluid balance, electrolytes and glucose carefully. Patients with impaired renal function are at higher risk of aluminum accumulation from parenteral solutions and of fluid overload.",
+  "hepatic": "Use with caution in hepatic failure where glucose metabolism may be impaired, increasing the risk of hyperglycemia and lactic acidosis. Monitor blood glucose, liver function and ammonia, particularly with prolonged parenteral nutrition.",
+  "interactions": {
+    "major": ["Insulin and oral hypoglycemics - opposing/modifying effect on blood glucose; dosing must be coordinated"],
+    "moderate": ["Corticosteroids - may worsen hyperglycemia", "Diuretics and other fluids - additive effects on fluid/electrolyte balance"],
+    "minor": ["Drugs incompatible with dextrose solutions (e.g., certain antibiotics, blood products) - check compatibility before co-administration"],
+    "food": "Not applicable (parenteral).",
+    "alcohol": "In chronic alcohol use, administer thiamine before or with dextrose to prevent precipitating Wernicke encephalopathy.",
+    "diagnostics": "Raises measured blood glucose; can transiently affect electrolyte (potassium, phosphate, sodium) and acid-base measurements."
+  },
+  "se": {
+    "common": ["Hyperglycemia", "Injection/infusion site reactions (phlebitis, irritation)", "Fluid retention/edema with excessive volume", "Electrolyte disturbances (hypokalemia, hypophosphatemia)"],
+    "serious": ["Hyperosmolar hyperglycemic state", "Hyponatremia / hyponatremic encephalopathy (with hypotonic dextrose)", "Refeeding syndrome", "Vein damage and thrombosis (concentrated solutions peripherally)"],
+    "rare": ["Pulmonary embolism from particulate precipitates", "Hypersensitivity reactions", "Parenteral nutrition-associated liver disease", "Aluminum toxicity (renal impairment, preterm infants)", "Hepatobiliary disorders with prolonged PN"],
+    "emergency": ["Severe hyperglycemia / hyperosmolar coma", "Severe dilutional hyponatremia with cerebral edema", "Pulmonary embolism (sudden dyspnea, chest pain)", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Blood glucose, especially in diabetics, neonates, and with concentrated infusions",
+    "Serum electrolytes including sodium, potassium and phosphate",
+    "Fluid status and signs of fluid overload (edema, pulmonary congestion)",
+    "Acid-base status with high-rate or prolonged infusion",
+    "Liver function and ammonia with long-term parenteral nutrition",
+    "Infusion site for phlebitis or extravasation"
+  ],
+  "counsel": [
+    "This is given by infusion in a healthcare setting; report pain, swelling or redness at the IV site",
+    "Tell staff if you have diabetes, kidney, heart or liver problems",
+    "Expect periodic blood glucose and electrolyte checks during treatment",
+    "Report symptoms such as excessive thirst, confusion, swelling, or shortness of breath",
+    "If you have a history of heavy alcohol use, ensure thiamine has been given"
+  ],
+  "pk": [
+    ["Onset", "Immediate rise in blood glucose with IV bolus"],
+    ["Peak", "Peak glucose within minutes of bolus administration"],
+    ["Half-life", "Rapidly metabolized; glucose cleared per metabolic demand (no fixed half-life)"],
+    ["Duration", "Transient after bolus (minutes); sustained with continuous infusion"],
+    ["Storage", "Store at room temperature ~20-25 C (68-77 F); do not freeze; avoid excessive heat"]
+  ],
+  "pearls": [
+    "Each gram of hydrous dextrose provides ~3.4 kcal",
+    "D50W (50%) is the standard adult ampoule for acute hypoglycemia (25 g per 50 mL); use lower concentrations (D10/D25) in children to avoid vein injury",
+    "Solutions >5% or >=~900 mOsm/L must be infused centrally to avoid phlebitis and thrombosis",
+    "Give thiamine before glucose in malnourished or alcohol-dependent patients to avoid precipitating Wernicke encephalopathy",
+    "Pharmacy bulk packages (50-70%) are for admixture only and are NOT for direct infusion",
+    "D5W is effectively free water once glucose is metabolized - watch for dilutional hyponatremia"
+  ],
+  "missed": "Not applicable - dextrose is administered by infusion or bolus under medical supervision rather than on a fixed self-administered schedule.",
+  "overdose": "Excessive infusion rate or concentration causes hyperglycemia, hyperosmolality, glycosuria, dehydration and electrolyte disturbance; severe dilutional hyponatremia and severe hyperglycemia can be fatal. Discontinue the infusion and institute corrective measures, including exogenous insulin for hyperglycemia and management of fluid/electrolyte and acid-base imbalance, with attention to CNS, respiratory and cardiovascular status.",
+  "refs": [
+    ["FDA Dextrose Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dextrose+monohydrate%22"],
+    ["FDA DailyMed - Dextrose Injection", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

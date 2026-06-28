@@ -1,0 +1,111 @@
+{
+  "generic": "Rabeprazole",
+  "cls": "Proton pump inhibitor (PPI)",
+  "pharm": "Irreversibly inhibits the gastric H+/K+ ATPase (proton pump) at the parietal cell secretory surface, blocking the final step of gastric acid secretion.",
+  "tags": ["PPI", "Acid suppression", "Delayed-release", "GERD"],
+  "quick": [
+    ["Adult dose", "20 mg once daily"],
+    ["Meal", "Duodenal ulcer: after morning meal; otherwise with or without food"],
+    ["Pregnancy", "No human data; use if needed"],
+    ["Lactation", "No data; present in rat milk; weigh benefit"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Severe impairment: use caution"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Magnesium, B12 on long-term use; bone health"]
+  ],
+  "summary": "Rabeprazole is a substituted-benzimidazole proton pump inhibitor for healing and maintenance of erosive GERD, symptomatic GERD, duodenal ulcers, H. pylori eradication, and pathological hypersecretory conditions. It is contraindicated with rilpivirine and carries class risks of long-term acid suppression.",
+  "indications": [
+    "Healing of erosive or ulcerative GERD (adults)",
+    "Maintenance of healing of erosive or ulcerative GERD (adults)",
+    "Treatment of symptomatic GERD (adults and adolescents >=12 years)",
+    "Healing of duodenal ulcers (adults)",
+    "H. pylori eradication to reduce risk of duodenal ulcer recurrence (adults)",
+    "Pathological hypersecretory conditions including Zollinger-Ellison syndrome (adults)"
+  ],
+  "dosage": [
+    {"c": "Healing erosive/ulcerative GERD", "r": "Adult", "d": "20 mg once daily", "t": "4 to 8 weeks (may extend additional 8 weeks if unhealed)", "n": "Swallow whole"},
+    {"c": "Maintenance of GERD healing", "r": "Adult", "d": "20 mg once daily", "t": "Studied up to 12 months", "n": ""},
+    {"c": "Symptomatic GERD", "r": "Adult", "d": "20 mg once daily", "t": "4 weeks (repeat course if needed)", "n": "Adolescents >=12 yrs: 20 mg once daily up to 8 weeks"},
+    {"c": "Duodenal ulcer", "r": "Adult", "d": "20 mg once daily after morning meal", "t": "Up to 4 weeks", "n": "Take after a meal"},
+    {"c": "H. pylori eradication", "r": "Adult", "d": "Rabeprazole 20 mg + amoxicillin 1000 mg + clarithromycin 500 mg, all twice daily", "t": "7 days", "n": "Take with morning and evening meals"},
+    {"c": "Zollinger-Ellison / hypersecretory", "r": "Adult", "d": "Start 60 mg once daily, then titrate to need", "t": "As needed", "n": "Doses up to 100 mg/day or 60 mg twice daily used"}
+  ],
+  "admin": [
+    "Swallow delayed-release tablets whole; do not chew, crush, or split",
+    "Duodenal ulcer: take after the morning meal",
+    "H. pylori regimen: take with food",
+    "Other indications: may take with or without food",
+    "Maintain full course even if symptoms improve"
+  ],
+  "moa": "Rabeprazole is a substituted-benzimidazole PPI. In the acidic environment of the parietal cell, it is protonated and converted to an active sulfenamide that covalently and irreversibly inhibits the gastric H+/K+ ATPase, the terminal step in acid secretion. New enzyme synthesis is required to restore acid output.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to rabeprazole, substituted benzimidazoles, or formulation components",
+      "Concomitant rilpivirine-containing products",
+      "Contraindications of clarithromycin/amoxicillin apply when used in combination"
+    ],
+    "relative": [
+      "Long-term high-dose therapy (fracture, hypomagnesemia, B12 deficiency risks)",
+      "Concomitant drugs requiring gastric acidity for absorption"
+    ],
+    "monitor": [
+      "Serum magnesium on prolonged therapy",
+      "Vitamin B12 on long-term therapy",
+      "Signs of C. difficile-associated diarrhea"
+    ]
+  },
+  "preg": "No adequate human data. Animal reproduction studies showed no adverse developmental effects at 8-13 times human AUC. Use only if clearly needed.",
+  "lact": "No human lactation data; rabeprazole is present in rat milk. Weigh developmental/health benefits of breastfeeding against maternal need and potential infant effects.",
+  "renal": "No dosage adjustment required in renal impairment.",
+  "hepatic": "Use caution in severe hepatic impairment; clearance is reduced and exposure increased. No dose adjustment in mild-moderate impairment.",
+  "interactions": {
+    "major": [
+      "Rilpivirine (contraindicated; reduced antiviral exposure)",
+      "Drugs dependent on gastric pH for absorption (atazanavir, nelfinavir, erlotinib, ketoconazole, itraconazole - reduced absorption)",
+      "Methotrexate (high-dose; delayed clearance)"
+    ],
+    "moderate": [
+      "Warfarin (monitor INR)",
+      "Digoxin (increased absorption)",
+      "Clopidogrel (less effect than omeprazole, but monitor)",
+      "Tacrolimus (increased levels)"
+    ],
+    "minor": [],
+    "food": "Take duodenal ulcer dose after morning meal; H. pylori regimen with food; other indications independent of food.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause false-positive secretin test for gastrinoma; may interfere with CgA levels and urine screening for THC."
+  },
+  "se": {
+    "common": ["Headache", "Diarrhea", "Nausea", "Abdominal pain", "Flatulence", "Pharyngitis"],
+    "serious": ["Hypomagnesemia", "C. difficile-associated diarrhea", "Bone fractures (long-term)", "Acute interstitial nephritis", "Vitamin B12 deficiency (long-term)"],
+    "rare": ["Cutaneous/systemic lupus erythematosus", "Severe hypersensitivity reactions", "Fundic gland polyps"],
+    "emergency": ["Anaphylaxis/angioedema", "Severe skin reactions (SJS/TEN)", "Severe persistent diarrhea"]
+  },
+  "monitoring": ["Serum magnesium before and periodically on prolonged therapy", "Vitamin B12 on long-term use", "Renal function if interstitial nephritis suspected", "Reassess need for continued therapy"],
+  "counsel": [
+    "Swallow tablets whole; do not crush or chew",
+    "Report persistent watery diarrhea (possible C. difficile)",
+    "Long-term use may affect magnesium, B12, and bone health",
+    "Report rash, joint pain, or new symptoms",
+    "Use the lowest effective dose for the shortest duration"
+  ],
+  "pk": [
+    ["Onset", "Acid suppression within hours; maximal over days"],
+    ["Peak", "~2-5 hours (plasma)"],
+    ["Half-life", "~1-2 hours (effect outlasts plasma level due to irreversible binding)"],
+    ["Duration", "24+ hours of acid suppression"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Effect outlasts plasma half-life because pump inhibition is irreversible",
+    "Contraindicated with rilpivirine",
+    "Take duodenal ulcer dose after the morning meal",
+    "Long-term PPI risks: hypomagnesemia, B12 deficiency, fractures, C. difficile"
+  ],
+  "missed": "Take the missed dose when remembered; if near the next dose, skip it. Do not double up.",
+  "overdose": "No specific antidote; rabeprazole is extensively protein-bound and not readily dialyzable. Manage symptomatically and supportively.",
+  "refs": [
+    ["FDA Prescribing Information - Rabeprazole sodium DR tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rabeprazole%22"],
+    ["DailyMed - Rabeprazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=rabeprazole"]
+  ]
+}

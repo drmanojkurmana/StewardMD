@@ -1,0 +1,113 @@
+{
+  "generic": "Eptacog Alfa (activated) - recombinant coagulation factor VIIa",
+  "cls": "Recombinant activated coagulation factor VIIa (bypassing agent)",
+  "pharm": "Hemostatic / antihemorrhagic agent",
+  "tags": ["factor VIIa", "rFVIIa", "hemophilia with inhibitors", "bypassing agent", "hemostatic", "Glanzmann thrombasthenia", "factor VII deficiency"],
+  "quick": [
+    ["Adult dose", "Hemophilia A/B with inhibitors: 90 mcg/kg IV bolus every 2 hours until hemostasis (regimen varies by indication)"],
+    ["Meal", "Intravenous - not applicable"],
+    ["Pregnancy", "Limited data; use only if clearly needed"],
+    ["Lactation", "Unknown if excreted in milk; use with caution"],
+    ["Renal", "No specific dose adjustment established"],
+    ["Hepatic", "Use with caution in hepatic impairment / liver disease"],
+    ["Alcohol", "Not applicable"],
+    ["Monitoring", "Clinical hemostasis (not routine coagulation assays); signs of thrombosis"]
+  ],
+  "summary": "Eptacog alfa (activated) is recombinant human coagulation factor VIIa (rFVIIa) used as a bypassing agent to treat and prevent bleeding. It is indicated for bleeding episodes and surgery in hemophilia A or B patients with inhibitors, acquired hemophilia, congenital factor VII deficiency, and Glanzmann thrombasthenia refractory to platelets. It promotes hemostasis by activating the coagulation cascade at the site of tissue injury, largely independent of factors VIII and IX. The principal serious risk is thrombosis (arterial and venous thromboembolic events), so it must be used cautiously in patients with thrombotic risk.",
+  "indications": [
+    "Treatment of bleeding episodes and perioperative management in adults and children with hemophilia A or B with inhibitors to factor VIII or IX",
+    "Treatment of bleeding episodes and perioperative management in patients with acquired hemophilia",
+    "Treatment of bleeding episodes and perioperative management in patients with congenital factor VII deficiency",
+    "Treatment of bleeding and perioperative management in Glanzmann thrombasthenia refractory to platelet transfusions (with or without antibodies to platelets)"
+  ],
+  "dosage": [
+    {"c": "Hemophilia A/B with inhibitors - bleeding", "r": "Adult and pediatric", "d": "90 mcg/kg IV bolus", "t": "Every 2 hours until hemostasis achieved, then interval may be extended (3-6 hourly)", "n": "Alternative single dose of 270 mcg/kg has been used; individualize"},
+    {"c": "Hemophilia A/B with inhibitors - surgery", "r": "Adult and pediatric", "d": "90 mcg/kg IV immediately before surgery", "t": "Repeat every 2 hours during surgery, then every 2-6 hours postoperatively per procedure severity", "n": "Continue based on bleeding and procedure type"},
+    {"c": "Congenital factor VII deficiency", "r": "Adult and pediatric", "d": "15-30 mcg/kg IV", "t": "Every 4-6 hours until hemostasis", "n": "Lower doses than hemophilia inhibitor indication"},
+    {"c": "Glanzmann thrombasthenia", "r": "Adult and pediatric", "d": "90 mcg/kg (range 80-120 mcg/kg) IV", "t": "Every 2 hours (at least 3 doses) to maintain hemostasis", "n": "Use when platelets refractory/contraindicated"},
+    {"c": "Acquired hemophilia", "r": "Adult", "d": "70-90 mcg/kg IV", "t": "Every 2-3 hours until hemostasis", "n": "Individualize"}
+  ],
+  "admin": [
+    "Reconstitute the powder with the supplied diluent following the package instructions; do not shake violently",
+    "Administer by slow intravenous bolus injection over 2 to 5 minutes",
+    "Do not mix with infusion solutions or give as a continuous infusion unless specified",
+    "Use reconstituted solution promptly; discard per labeling",
+    "Dose and frequency are individualized to the type of bleed, indication, and clinical response"
+  ],
+  "moa": "Eptacog alfa is recombinant activated factor VII (FVIIa). At pharmacologic doses it binds to exposed tissue factor at the site of vascular injury and directly activates factor X to Xa on the surface of activated platelets, generating a thrombin burst that converts fibrinogen to fibrin and produces a stable hemostatic plug. This action largely bypasses the need for factors VIII and IX, allowing hemostasis in patients with inhibitors against those factors.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to eptacog alfa, mouse, hamster, or bovine proteins (depending on product)"
+    ],
+    "relative": [
+      "Conditions predisposing to thromboembolism (atherosclerotic disease, crush injury, septicemia, DIC, advanced age)",
+      "Concomitant use of activated/non-activated prothrombin complex concentrates (increased thrombotic risk)",
+      "Hepatic disease",
+      "Postoperative immobilization"
+    ],
+    "monitor": [
+      "Clinical signs and symptoms of thrombosis (arterial and venous)",
+      "Hemostatic response clinically",
+      "Disseminated intravascular coagulation in at-risk patients"
+    ]
+  },
+  "preg": "There are limited data on use in pregnant women. Eptacog alfa should be used during pregnancy only if clearly needed and the benefit justifies any potential risk.",
+  "lact": "It is not known whether eptacog alfa is excreted in human milk. Because many proteins are excreted in milk, caution should be exercised when administering to a nursing woman.",
+  "renal": "No specific dosage adjustment for renal impairment has been established; pharmacokinetics are not substantially dependent on renal clearance. Individualize therapy.",
+  "hepatic": "Use with caution in patients with liver disease, who may have a higher risk of coagulation disturbances; clinical monitoring of hemostasis is advised.",
+  "interactions": {
+    "major": [
+      "Activated prothrombin complex concentrates (aPCC) or prothrombin complex concentrates - avoid concomitant use; increased risk of thrombotic complications",
+      "Recombinant factor XIII (potential interaction; avoid concomitant administration unless specified)"
+    ],
+    "moderate": [
+      "Antifibrinolytics and other procoagulants (additive thrombotic risk)"
+    ],
+    "minor": [
+      "No significant minor interactions established"
+    ],
+    "food": "Not applicable (intravenous use)",
+    "alcohol": "Not applicable",
+    "diagnostics": "Affects coagulation assays (e.g., shortens prothrombin time); routine coagulation parameters do not reliably correlate with clinical hemostasis"
+  },
+  "se": {
+    "common": ["Pyrexia/fever", "Pain at injection site", "Rash/pruritus", "Hypertension", "Headache", "Decreased plasma fibrinogen / changes in coagulation tests"],
+    "serious": ["Arterial thrombotic events (myocardial infarction, cerebral infarction/stroke)", "Venous thromboembolism (DVT, pulmonary embolism)", "Disseminated intravascular coagulation", "Serious hypersensitivity / anaphylaxis", "Thrombosis at catheter sites"],
+    "rare": ["Development of inhibitory antibodies to factor VII (especially in factor VII deficiency)", "Angioedema", "Acute myocardial infarction in patients without prior coronary disease"],
+    "emergency": ["Signs of stroke or myocardial infarction", "Signs of pulmonary embolism (sudden dyspnea, chest pain)", "Anaphylaxis (hypotension, bronchospasm, urticaria)", "Disseminated intravascular coagulation"]
+  },
+  "monitoring": [
+    "Clinical assessment of hemostatic response (laboratory coagulation tests do not reliably predict efficacy)",
+    "Continuous vigilance for thromboembolic events",
+    "Signs of disseminated intravascular coagulation in patients with predisposing conditions",
+    "Hypersensitivity reactions during and after administration",
+    "Factor VII inhibitor antibodies in factor VII deficiency"
+  ],
+  "counsel": [
+    "This medicine is given by injection into a vein to control or prevent bleeding",
+    "Seek emergency care for chest pain, sudden shortness of breath, weakness on one side, slurred speech, or leg pain/swelling - these can signal a clot",
+    "Tell your team about any allergy to mouse, hamster, or cow proteins",
+    "Report rash, itching, wheeze, or swelling during or after the injection",
+    "Keep follow-up appointments to assess bleeding control"
+  ],
+  "pk": [
+    ["Onset", "Hemostatic effect begins rapidly after intravenous bolus"],
+    ["Peak", "Peak FVIIa activity immediately after the bolus injection"],
+    ["Half-life", "Approximately 2-3 hours (shorter, around 1.3 hours, in children)"],
+    ["Duration", "Short - repeat dosing every 2-6 hours is usually required"],
+    ["Storage", "Store refrigerated (2-8 C) or per label; protect from light; use reconstituted solution promptly"]
+  ],
+  "pearls": [
+    "A bypassing agent - it works largely independent of factors VIII and IX, making it useful in hemophilia patients with inhibitors",
+    "Thrombosis (arterial and venous) is the principal serious risk; weigh carefully in patients with cardiovascular disease, DIC, or other prothrombotic states",
+    "Avoid concomitant prothrombin complex concentrates (activated or not) because of additive thrombotic risk",
+    "Routine coagulation tests do not reliably predict efficacy - dose to clinical hemostasis",
+    "Short half-life mandates frequent (every 2 hours) dosing during active bleeding until control is achieved"
+  ],
+  "missed": "Eptacog alfa is given as needed to treat or prevent bleeding under medical supervision, not on a fixed self-administered schedule. If a planned dose during ongoing bleeding management is delayed, give it as soon as possible and continue the prescribed interval; contact the treatment center for guidance if bleeding recurs.",
+  "overdose": "Dose-limiting toxicity has not been clearly defined, but overdose increases the risk of thromboembolic complications. There is no specific antidote. Management is supportive: discontinue, monitor closely for arterial and venous thrombosis, and treat thrombotic or coagulopathic complications (including disseminated intravascular coagulation) as they arise.",
+  "refs": [
+    ["FDA Prescribing Information - NovoSeven RT (coagulation factor VIIa, recombinant)", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Coagulation Factor VIIa Recombinant", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22coagulation%20factor%20viia%20recombinant%22"]
+  ]
+}

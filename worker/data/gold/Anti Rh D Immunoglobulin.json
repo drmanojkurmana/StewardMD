@@ -1,0 +1,97 @@
+{
+  "generic": "Rho(D) Immune Globulin (Anti-D Immunoglobulin)",
+  "cls": "Human anti-D (Rho) immunoglobulin (passive immunization / Rh isoimmunization prophylaxis)",
+  "pharm": "Immune globulin / isoimmunization prophylaxis (also used in immune thrombocytopenia)",
+  "tags": ["immune globulin", "anti-D", "Rh isoimmunization", "RhoGAM", "rhesus prophylaxis", "antenatal", "postpartum", "ITP", "obstetrics"],
+  "quick": [
+    ["Adult dose", "Postpartum: 300 mcg (1,500 IU) IM within 72 h of delivery of Rh-positive infant; antenatal: 300 mcg at ~28 weeks"],
+    ["Meal", "Not applicable - administered by IM (or IV for some products) injection"],
+    ["Pregnancy", "Specifically used in pregnancy for Rh prophylaxis; no harm to fetus expected"],
+    ["Lactation", "Considered compatible with breastfeeding"],
+    ["Renal", "No specific adjustment; caution with IV products (rare intravascular hemolysis)"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Not relevant for single-setting prophylactic injection"],
+    ["Monitoring", "Maternal Rh status, fetomaternal hemorrhage (Kleihauer-Betke/flow) for larger bleeds; in ITP use monitor for hemolysis, Hb, renal function"]
+  ],
+  "summary": "Rho(D) immune globulin is a sterile preparation of human IgG containing antibodies to the Rho(D) antigen of red blood cells. Its principal use is the prevention of Rh isoimmunization (hemolytic disease of the fetus and newborn) in Rh(D)-negative individuals exposed to Rh(D)-positive red cells - most commonly an Rh-negative mother carrying or delivering an Rh-positive infant, and after sensitizing events such as abortion, amniocentesis, ectopic pregnancy, abdominal trauma or transfusion of Rh-positive blood. It is given antenatally (around 28 weeks) and postpartum (within 72 hours of delivery of an Rh-positive infant). Certain products are also indicated for immune thrombocytopenic purpura (ITP) in Rh-positive, non-splenectomized patients. It works by passive immunization: the administered anti-D antibody binds and clears Rh-positive fetal red cells before the maternal immune system can mount an active antibody response. The dose must be adequate to cover the volume of fetomaternal hemorrhage.",
+  "indications": [
+    "Prevention of Rh isoimmunization in Rh(D)-negative individuals after delivery of an Rh(D)-positive infant",
+    "Antenatal prophylaxis in Rh(D)-negative pregnant individuals (routinely around 28 weeks of gestation)",
+    "Prophylaxis after sensitizing events: abortion, miscarriage, ectopic pregnancy, threatened abortion, amniocentesis, chorionic villus sampling, abdominal trauma, external cephalic version or other obstetric manipulation",
+    "Suppression of Rh isoimmunization after transfusion of Rh(D)-positive red blood cells or blood components to an Rh(D)-negative recipient",
+    "Treatment of immune thrombocytopenic purpura (ITP) in Rh(D)-positive, non-splenectomized patients (specific IV products)"
+  ],
+  "dosage": [
+    {"c": "Postpartum Rh prophylaxis", "r": "Rh-negative mother, Rh-positive infant", "d": "300 mcg (1,500 IU) IM", "t": "Within 72 hours of delivery", "n": "Standard full dose; assess for large fetomaternal hemorrhage and give additional doses if indicated"},
+    {"c": "Antenatal Rh prophylaxis", "r": "Rh-negative pregnant individual", "d": "300 mcg (1,500 IU) IM", "t": "At approximately 28 weeks of gestation", "n": "Postpartum dose still required after delivery of an Rh-positive infant"},
+    {"c": "Early pregnancy event (<13 weeks)", "r": "Rh-negative individual", "d": "Smaller dose (e.g. 50-120 mcg) per product labeling", "t": "Within 72 hours of the event", "n": "For threatened/spontaneous abortion or procedures in the first trimester"},
+    {"c": "Large fetomaternal hemorrhage", "r": "Rh-negative individual", "d": "Additional 300 mcg (1,500 IU) per ~15 mL of fetal RBCs (~30 mL whole blood) above standard", "t": "Per quantitation (Kleihauer-Betke/flow)", "n": "Quantitate the bleed to determine extra dosing"},
+    {"c": "Incompatible transfusion", "r": "Rh-negative recipient of Rh-positive blood", "d": "Dose based on volume of Rh-positive red cells transfused per product labeling", "t": "As soon as possible (within 72 hours)", "n": "May require multiple vials"},
+    {"c": "Immune thrombocytopenic purpura (ITP)", "r": "Rh-positive, non-splenectomized", "d": "Weight-based IV dosing per specific product (e.g. 50 mcg/kg, adjust for hemoglobin)", "t": "Per product schedule", "n": "Only IV-licensed products; monitor for intravascular hemolysis"}
+  ],
+  "admin": [
+    "Administer by intramuscular injection for Rh prophylaxis (some products may be given IM or IV; follow product labeling)",
+    "Give postpartum prophylaxis within 72 hours of delivery and within 72 hours of a sensitizing event",
+    "Confirm the mother is Rh(D)-negative and not already actively immunized (anti-D from prior alloimmunization) where applicable",
+    "Quantitate large fetomaternal hemorrhage (e.g. Kleihauer-Betke or flow cytometry) and give additional doses accordingly",
+    "For ITP, use only an IV-licensed product and observe for signs of intravascular hemolysis after administration"
+  ],
+  "moa": "Rho(D) immune globulin provides passive immunization. The administered anti-Rho(D) IgG binds to any Rh(D)-positive fetal red cells in the Rh(D)-negative individual's circulation, promoting their clearance before the maternal immune system can recognize the D antigen and produce its own anti-D antibodies. This prevents active maternal Rh isoimmunization and thereby protects future Rh-positive pregnancies from hemolytic disease of the fetus and newborn. In ITP, anti-D-coated Rh-positive red cells saturate splenic Fc receptors, sparing antibody-coated platelets from destruction and raising the platelet count.",
+  "contra": {
+    "absolute": ["Rho(D)-positive individuals (for Rh-prophylaxis indication)", "Individuals already actively immunized to the Rho(D) factor (existing anti-D alloantibody)", "Known anaphylactic or severe systemic reaction to human immune globulin", "IgA deficiency with antibodies to IgA and history of hypersensitivity (product-dependent)"],
+    "relative": ["For IV use in ITP: pre-existing anemia or risk factors for intravascular hemolysis/renal impairment", "Concurrent live vaccines (may blunt response - see interactions)"],
+    "monitor": ["ITP patients receiving IV product (intravascular hemolysis, hemoglobin, renal function)", "Patients with large fetomaternal hemorrhage (adequacy of dosing)"]
+  },
+  "preg": "Rho(D) immune globulin is specifically intended for use in pregnancy to prevent Rh isoimmunization and is administered antenatally and postpartum. No harm to the fetus is expected from maternal anti-D immune globulin; it is a cornerstone of routine antenatal care in Rh(D)-negative pregnancies.",
+  "lact": "Rho(D) immune globulin is considered compatible with breastfeeding. Immunoglobulins administered to the mother are not expected to harm the breastfed infant.",
+  "renal": "No specific dosage adjustment is required for Rh prophylaxis. With IV products used for ITP, monitor renal function because acute intravascular hemolysis can rarely lead to hemoglobinuria, hemoglobinemia, acute renal insufficiency or disseminated intravascular coagulation.",
+  "hepatic": "No specific dosage adjustment is required for hepatic impairment.",
+  "interactions": {
+    "major": ["Live attenuated virus vaccines (e.g. MMR, varicella) - passively acquired antibody can interfere with the immune response; defer such vaccination for about 3 months after immune globulin (do not, however, withhold needed Rh prophylaxis)"],
+    "moderate": ["Other immune globulin preparations - overlapping passive antibody effects"],
+    "minor": ["No clinically significant minor interactions specifically characterized"],
+    "food": "Not applicable; administered by injection.",
+    "alcohol": "Not relevant to single-setting prophylactic use.",
+    "diagnostics": "Passively acquired anti-D can produce a weakly positive direct antiglobulin (Coombs) test in the infant and a transiently positive antibody screen in the mother; do not misinterpret this as active alloimmunization."
+  },
+  "se": {
+    "common": ["Injection-site pain, tenderness, swelling or redness", "Mild fever", "Headache", "Malaise", "Chills"],
+    "serious": ["Hypersensitivity / anaphylactic reactions", "Intravascular hemolysis (with IV products used for ITP), which can cause anemia and acute renal failure", "Disseminated intravascular coagulation (rare, ITP/IV use)"],
+    "rare": ["Theoretical transmission risk of blood-borne pathogens (minimized by donor screening and viral inactivation)", "Acute renal insufficiency (IV use in ITP)"],
+    "emergency": ["Anaphylaxis", "Severe intravascular hemolysis with hemoglobinuria and acute renal failure (IV/ITP use)"]
+  },
+  "monitoring": [
+    "Maternal Rh(D) status and, where applicable, antibody screen before administration",
+    "Quantitation of fetomaternal hemorrhage (Kleihauer-Betke or flow cytometry) when a large bleed is suspected",
+    "Injection-site and systemic reactions after administration",
+    "For IV use in ITP: signs of intravascular hemolysis, hemoglobin, haptoglobin, urinalysis and renal function for several hours after dosing",
+    "Defer live virus vaccination for about 3 months after administration"
+  ],
+  "counsel": [
+    "This injection protects future pregnancies by preventing your immune system from reacting to Rh-positive blood",
+    "It is given during pregnancy (about 28 weeks), after delivery of an Rh-positive baby, and after events such as bleeding, miscarriage, amniocentesis or trauma",
+    "Mild soreness at the injection site, low-grade fever or headache may occur",
+    "Tell your provider about recent or planned live vaccines (such as MMR), which may need to be delayed",
+    "Seek urgent care for signs of an allergic reaction; if treated for ITP with the IV form, report dark urine or reduced urination"
+  ],
+  "pk": [
+    ["Onset", "Immediate passive antibody availability after injection"],
+    ["Peak", "IM peak antibody levels within a few days; IV gives immediate peak"],
+    ["Half-life", "Approximately 3-4 weeks (typical of IgG)"],
+    ["Duration", "Protective passive antibody persists for several weeks, covering the at-risk period"],
+    ["Storage", "Refrigerate at 2-8 C; do not freeze; protect from light per product labeling"]
+  ],
+  "pearls": [
+    "Note: Rho(D) immune globulin is a CBER-regulated biologic and is not indexed in the openFDA drug-label endpoint; this record is based on established FDA biologic prescribing information (e.g. RhoGAM, Rhophylac, WinRho SDF) and standard obstetric practice",
+    "Give postpartum prophylaxis within 72 hours of delivery of an Rh-positive infant - timing is critical",
+    "A standard 300 mcg (1,500 IU) dose covers about 15 mL of fetal red cells (~30 mL whole blood); quantitate larger fetomaternal hemorrhage and add doses",
+    "Antenatal dosing at ~28 weeks does not replace the required postpartum dose",
+    "Only IV-licensed products are used for ITP in Rh-positive, non-splenectomized patients, where intravascular hemolysis is a key risk; defer live vaccines for ~3 months"
+  ],
+  "missed": "If postpartum or post-event prophylaxis is delayed beyond the ideal 72-hour window, it should still be given as soon as possible because some protection may still be achieved. Antenatal and postpartum doses are scheduled by the obstetric team; contact them promptly if a planned dose is missed.",
+  "overdose": "Excess Rho(D) immune globulin in an Rh-negative recipient may, if the product also contains anti-A/anti-B isoagglutinins, cause mild hemolysis; with the IV products used in ITP, larger-than-needed exposure increases the risk of intravascular hemolysis. There is no specific antidote; management is supportive, including monitoring of hemoglobin and renal function and transfusion support if significant hemolysis occurs.",
+  "refs": [
+    ["FDA Rho(D) Immune Globulin (RhoGAM) Prescribing Information", "https://www.fda.gov/vaccines-blood-biologics"],
+    ["DailyMed - Rho(D) Immune Globulin (RhoGAM / Rhophylac / WinRho SDF)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

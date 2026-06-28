@@ -1,0 +1,111 @@
+{
+  "generic": "Hydroxocobalamin",
+  "cls": "Cyanide antidote (cobalamin/vitamin B12 precursor); also vitamin B12 replacement",
+  "pharm": "A natural form of vitamin B12 in which a hydroxo group occupies the cobalt-binding site. In cyanide poisoning the trivalent cobalt avidly binds free cyanide ion to form cyanocobalamin, a non-toxic complex that is renally excreted, restoring cellular aerobic respiration. In its vitamin role it serves as a cofactor for methylmalonyl-CoA mutase and methionine synthase, correcting megaloblastic anemia and neurologic deficits of B12 deficiency.",
+  "tags": ["Rx only", "Cyanide antidote", "Emergency/critical care", "Vitamin B12", "Causes red discoloration", "Lab-test interference"],
+  "quick": [
+    ["Adult dose", "Cyanide (Cyanokit): 5 g IV over 15 min, may repeat 5 g (max 10 g); B12 deficiency: 1000 mcg IM"],
+    ["Meal", "Not applicable - given IV (cyanide) or IM (B12)"],
+    ["Pregnancy", "Cyanide poisoning is life-threatening - do not withhold lifesaving therapy"],
+    ["Lactation", "Discontinue breastfeeding during/after Cyanokit treatment"],
+    ["Renal", "Eliminated unchanged renally; monitor renal function for 7 days; not formally studied"],
+    ["Hepatic", "Not formally studied; no specific adjustment"],
+    ["Alcohol", "No specific interaction; irrelevant in acute antidotal use"],
+    ["Monitoring", "Blood pressure, renal function, oxygenation/lactate, and infusion-site reactions"]
+  ],
+  "summary": "Hydroxocobalamin is a form of vitamin B12 with two distinct FDA-approved roles. As Cyanokit it is a first-line intravenous antidote for known or suspected cyanide poisoning (e.g., smoke inhalation, sodium nitroprusside toxicity, industrial exposure): each molecule binds one cyanide ion to form cyanocobalamin, which is renally excreted. The standard adult dose is 5 g IV over 15 minutes, repeated up to a maximum total of 10 g. As an intramuscular injection it treats vitamin B12 deficiency and pernicious anemia. It predictably turns the skin, urine, and serum a deep red, which interferes with many colorimetric laboratory and dialysis machine readings for 24-48 hours. Key safety concerns are transient blood pressure elevation, acute kidney injury, and hypersensitivity/anaphylaxis. It must not share an IV line with sodium thiosulfate, sodium nitrite, ascorbic acid, or blood products.",
+  "indications": [
+    "Treatment of known or suspected cyanide poisoning (Cyanokit, IV) - including smoke-inhalation injury, nitroprusside-induced cyanide toxicity, and industrial/intentional cyanide exposure",
+    "Vitamin B12 (cobalamin) deficiency from any cause (IM) - pernicious anemia/lack of intrinsic factor, dietary deficiency, malabsorption, structural GI lesions, or parasitic competition",
+    "Schilling test - administration of the flushing dose (IM)"
+  ],
+  "dosage": [
+    {"c": "Cyanide poisoning - initial", "r": "Adult IV", "d": "5 g (one 250 mL vial reconstituted in 200 mL diluent) infused over 15 minutes", "t": "Single starting dose", "n": "Use with supportive care and decontamination; start empirically when poisoning is suspected"},
+    {"c": "Cyanide poisoning - repeat", "r": "Adult IV", "d": "A second 5 g dose over 15 min to 2 hours depending on severity; maximum total 10 g", "t": "Once if needed", "n": "Rate of the second infusion titrated to clinical condition"},
+    {"c": "Cyanide poisoning - pediatric (off-label, not FDA-established)", "r": "Pediatric IV", "d": "70 mg/kg (commonly cited), up to the adult 5 g dose", "t": "Single dose, may repeat", "n": "Safety/efficacy not established by FDA in children; weight-based dosing per poison-center guidance"},
+    {"c": "B12 deficiency / pernicious anemia", "r": "Adult IM", "d": "30 mcg daily for 5-10 days, then 100-200 mcg IM monthly; many protocols use 1000 mcg IM at induction", "t": "Daily then monthly", "n": "Lifelong maintenance for pernicious anemia / irreversible malabsorption"},
+    {"c": "B12 deficiency - pediatric", "r": "Pediatric IM", "d": "Total of 1-5 mg over 2 or more weeks in 100 mcg doses, then 30-50 mcg every 4 weeks for maintenance", "t": "Divided then monthly", "n": "Adjust to hematologic and neurologic response"},
+    {"c": "Schilling test", "r": "Adult IM", "d": "1000 mcg flushing dose", "t": "Single dose", "n": "Given to saturate B12-binding proteins"}
+  ],
+  "admin": [
+    "Cyanokit: reconstitute the 5 g vial with 200 mL of 0.9% sodium chloride (lactated Ringer's or D5W acceptable), rock/invert - do NOT shake - for at least 60 seconds, then infuse IV over 15 minutes",
+    "Use a dedicated IV line; do NOT administer Cyanokit through the same line as sodium thiosulfate, sodium nitrite, ascorbic acid, or blood products (incompatibility/inactivation)",
+    "Do NOT give the intramuscular B12 formulations by the intravenous route",
+    "The reconstituted Cyanokit solution is stable for up to 6 hours at temperatures up to 40 C; do not freeze",
+    "Warn the team in advance that the patient, urine, and serum will turn deep red and that colorimetric labs and dialysis sensors may be unreliable for 24-48 hours",
+    "Monitor blood pressure during and after infusion; monitor renal function for 7 days afterward"
+  ],
+  "moa": "Cyanide halts cellular respiration by binding ferric iron in cytochrome c oxidase (cytochrome a3) within the mitochondrial electron-transport chain, blocking aerobic ATP production and forcing anaerobic metabolism with lactic acidosis. Hydroxocobalamin contains a trivalent cobalt ion that binds free cyanide ion with high affinity, displacing it from cytochrome oxidase to form cyanocobalamin (vitamin B12), a stable, essentially non-toxic complex that is eliminated in the urine. This restores mitochondrial oxygen utilization. Separately, as a vitamin, hydroxocobalamin is converted to the active coenzymes methylcobalamin and adenosylcobalamin, which are cofactors for methionine synthase and methylmalonyl-CoA mutase - enzymes required for DNA synthesis, erythropoiesis, and myelin maintenance.",
+  "contra": {
+    "absolute": [
+      "Cyanokit (cyanide indication): None - there are no contraindications when treating life-threatening cyanide poisoning",
+      "B12/IM formulations: known hypersensitivity to hydroxocobalamin, cobalamins, cobalt, or any excipient (e.g., benzyl alcohol)",
+      "Leber's hereditary optic neuropathy (for chronic B12 use - cobalamin can accelerate optic atrophy)"
+    ],
+    "relative": [
+      "Prior hypersensitivity/anaphylactoid reaction to hydroxocobalamin",
+      "Known significant renal impairment (drug is renally eliminated; AKI reported)"
+    ],
+    "monitor": [
+      "Blood pressure (transient elevation common at 5-10 g)",
+      "Renal function/urinalysis for 7 days after Cyanokit (oxalate crystalluria, acute tubular necrosis)",
+      "Signs of hypersensitivity/anaphylaxis during infusion",
+      "Awareness of red-color interference with concurrent laboratory and dialysis monitoring"
+    ]
+  },
+  "preg": "Animal reproduction studies showed skeletal and soft-tissue abnormalities at therapeutic-range doses; there are no adequate human data. However, cyanide poisoning is immediately life-threatening to both mother and fetus, so Cyanokit should NOT be withheld during pregnancy when cyanide toxicity is known or suspected - the potential benefit clearly outweighs the risk. Vitamin B12 in physiologic replacement doses is considered safe in pregnancy.",
+  "lact": "It is not known whether hydroxocobalamin passes into human milk after Cyanokit; because of the high acute dose and red discoloration, breastfeeding is not recommended during and after treatment, and there are insufficient data to define a safe interval to resume nursing. Physiologic B12 replacement doses are compatible with breastfeeding and B12 is a normal milk constituent.",
+  "renal": "Hydroxocobalamin and the cyanocobalamin formed are eliminated largely unchanged by the kidneys. Cyanokit has not been formally studied in renal impairment, and acute kidney injury with acute tubular necrosis and oxalate crystalluria has been reported; monitor renal function for 7 days after administration. No dose adjustment is defined for the lifesaving cyanide indication. Physiologic B12 replacement requires no renal adjustment.",
+  "hepatic": "The pharmacokinetics of hydroxocobalamin in hepatic impairment have not been formally studied. No specific dose adjustment is recommended; in the acute cyanide setting the lifesaving dose is given regardless of hepatic status.",
+  "interactions": {
+    "major": [
+      "Sodium thiosulfate, sodium nitrite, ascorbic acid - chemical incompatibility; do NOT co-administer through the same IV line as Cyanokit (use a separate line)",
+      "Blood products (whole blood, packed cells, platelets, fresh frozen plasma) - administer through a separate IV line"
+    ],
+    "moderate": [
+      "Other concurrent resuscitation drugs - several show physical/chemical incompatibility; infuse separately"
+    ],
+    "minor": [
+      "No formal clinical drug-interaction studies have been conducted with hydroxocobalamin"
+    ],
+    "food": "Not applicable for the IV antidote; for oral/IM B12, alcohol and certain drugs (metformin, proton-pump inhibitors, H2 blockers) can reduce B12 absorption over time.",
+    "alcohol": "No clinically significant acute interaction; chronic heavy alcohol use can contribute to B12 deficiency.",
+    "diagnostics": "Major interference: the deep-red color causes spurious results in many colorimetric clinical chemistry (e.g., AST, bilirubin, creatinine, magnesium, iron), hematology, and coagulation assays, and in co-oximetry, for up to 24-48 hours; it can also trigger false readings/alarms on hemodialysis machines. Cyanide blood levels should be drawn before dosing when feasible."
+  },
+  "se": {
+    "common": ["Chromaturia - deep red urine (essentially 100%)", "Erythema / red skin discoloration", "Acneiform rash and other rash", "Transient blood pressure elevation", "Nausea", "Headache", "Infusion-site reactions", "Oxalate crystals in urine"],
+    "serious": ["Acute kidney injury with acute tubular necrosis", "Marked hypertension", "Anaphylaxis / anaphylactic shock", "Hypokalemia (with intensive treatment of megaloblastic anemia)"],
+    "rare": ["Angioedema, urticaria, and other hypersensitivity reactions", "Dyspnea/chest tightness", "Pulmonary edema (rare)"],
+    "emergency": ["Anaphylaxis / angioedema with airway compromise", "Severe/symptomatic hypertension", "Acute renal failure / anuria"]
+  },
+  "monitoring": ["Blood pressure during and after infusion", "Renal function and urinalysis for 7 days post-treatment (crystalluria, AKI)", "Oxygenation, serum lactate, and acid-base status to gauge antidotal response", "Signs of hypersensitivity/anaphylaxis", "For B12 replacement: hemoglobin/MCV, reticulocytes, serum B12, and potassium during early correction"],
+  "counsel": [
+    "Your urine and skin will turn bright red for a few days - this is expected and harmless",
+    "The red color can make some blood and dialysis tests read incorrectly for a day or two, so your team will allow for that",
+    "Tell staff immediately about itching, swelling, rash, or trouble breathing during the infusion",
+    "Sun-sensitivity and a temporary acne-like rash can occur on the skin afterward",
+    "For B12 deficiency: pernicious anemia usually needs lifelong B12 injections - do not stop on your own",
+    "Report decreased urination or swelling, which may signal a kidney problem"
+  ],
+  "pk": [
+    ["Onset", "Cyanide binding within minutes of IV infusion"],
+    ["Peak", "End of the 15-minute infusion (cyanocobalamin forms rapidly)"],
+    ["Half-life", "Approximately 26-31 hours for the cyano-cobalamin complex"],
+    ["Duration", "Red discoloration of skin/urine persists ~24-48 hours (urine up to several weeks)"],
+    ["Storage", "Store lyophilized vial at 25 C (excursions 15-30 C); protect from light and freezing; reconstituted solution use within 6 hours at <=40 C"]
+  ],
+  "pearls": [
+    "First-line empiric antidote for suspected cyanide toxicity in smoke-inhalation victims - give before confirmatory levels return",
+    "Standard adult dose is 5 g IV over 15 minutes, repeatable once to a maximum of 10 g",
+    "Predictably turns urine, skin, and serum deep red - warn the lab, as colorimetric assays and dialysis sensors may be unreliable for 24-48 hours",
+    "Never run sodium thiosulfate, sodium nitrite, ascorbic acid, or blood products through the same IV line",
+    "Watch for transient hypertension and monitor renal function for 7 days (AKI/oxalate crystalluria reported)",
+    "Distinct from cyanocobalamin: hydroxocobalamin retains B12 longer and is the preferred IM B12 form in many regions"
+  ],
+  "missed": "Not applicable to the emergency cyanide antidote, which is given as a one-time acute regimen. For intramuscular vitamin B12 maintenance, give a missed monthly dose as soon as it is remembered and then resume the regular schedule; do not double doses.",
+  "overdose": "There are no reports of true overdose with the cyanide indication. Excessive dosing would intensify the expected effects (red discoloration, hypertension). There is no specific antidote; management is symptomatic and supportive with blood-pressure control and renal monitoring. Hemodialysis may remove hydroxocobalamin but the red color interferes with dialysis-machine operation and detection.",
+  "refs": [
+    ["FDA Label - Hydroxocobalamin / Cyanokit (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydroxocobalamin%22"],
+    ["DailyMed - Hydroxocobalamin (Cyanokit)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=hydroxocobalamin"]
+  ]
+}

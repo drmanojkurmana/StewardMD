@@ -1,0 +1,97 @@
+{
+  "generic": "Isavuconazole (as isavuconazonium sulfate)",
+  "cls": "Triazole antifungal (administered as the water-soluble prodrug isavuconazonium sulfate)",
+  "pharm": "Azole antifungal",
+  "tags": ["antifungal", "triazole", "invasive aspergillosis", "invasive mucormycosis", "Cresemba", "QT shortening", "CYP3A4"],
+  "quick": [
+    ["Adult dose", "Loading 372 mg (=200 mg isavuconazole) q8h x6 doses, then 372 mg once daily"],
+    ["Meal", "May be taken with or without food; swallow capsules whole"],
+    ["Pregnancy", "May cause fetal harm; avoid unless benefit outweighs risk"],
+    ["Lactation", "Not recommended; advise against breastfeeding"],
+    ["Renal", "No dose adjustment, including severe impairment and dialysis"],
+    ["Hepatic", "No adjustment for mild-moderate; not studied in severe (Child-Pugh C)"],
+    ["Alcohol", "Avoid - additive hepatotoxicity risk"],
+    ["Monitoring", "Liver tests, ECG/QT, signs of infusion reaction"]
+  ],
+  "summary": "Isavuconazole (Cresemba) is a broad-spectrum triazole antifungal administered as the prodrug isavuconazonium sulfate, which is hydrolyzed in plasma to active isavuconazole. It is indicated for invasive aspergillosis and invasive mucormycosis in adults and in pediatric patients. Treatment begins with a loading regimen every 8 hours for 6 doses (48 hours), then once-daily maintenance. Notable features include hepatotoxicity and a dose-related SHORTENING of the QT interval, making it CONTRAINDICATED in familial short QT syndrome; it is a CYP3A4 substrate and a moderate CYP3A4 inhibitor, so significant drug interactions are expected.",
+  "indications": [
+    "Invasive aspergillosis in patients 1 year of age and older",
+    "Invasive mucormycosis in patients 1 year of age and older"
+  ],
+  "dosage": [
+    {"c": "Invasive aspergillosis or mucormycosis - loading", "r": "Adult (oral or IV)", "d": "372 mg isavuconazonium sulfate (equivalent to 200 mg isavuconazole) every 8 hours", "t": "Every 8 hours for 6 doses (48 hours)", "n": "Oral = 2 capsules of 186 mg; IV = 1 reconstituted vial; do not divide, crush, or chew capsules"},
+    {"c": "Invasive aspergillosis or mucormycosis - maintenance", "r": "Adult (oral or IV)", "d": "372 mg (=200 mg isavuconazole) once daily", "t": "Once daily", "n": "Start maintenance 12 to 24 hours after the last loading dose"},
+    {"c": "Switching between formulations", "r": "Adult", "d": "Oral and IV are interchangeable at the same isavuconazonium dose", "t": "Same schedule", "n": "High oral bioavailability (~98%) allows switching without dose change"},
+    {"c": "Pediatric (1 year and older)", "r": "Weight-based", "d": "Loading dose every 8 hours for 6 doses then once-daily maintenance, dose per weight band", "t": "q8h loading then once daily", "n": "Follow current pediatric weight-based dosing in the prescribing information"}
+  ],
+  "admin": [
+    "Swallow capsules whole; do not chew, crush, dissolve, or open",
+    "May be administered with or without food",
+    "For IV: reconstitute the vial and dilute in 250 mL of a compatible diluent (0.9% sodium chloride or 5% dextrose)",
+    "Administer IV over a minimum of 1 hour through an infusion set with an in-line filter (pore size 0.2 to 1.2 micron)",
+    "Do not administer as an IV bolus; flush the line with the same diluent before and after infusion",
+    "Start once-daily maintenance 12 to 24 hours after the last loading dose"
+  ],
+  "moa": "Isavuconazole, the active moiety released from the prodrug isavuconazonium sulfate, inhibits the fungal cytochrome P-450 enzyme lanosterol 14-alpha-demethylase (CYP51), which is required for the conversion of lanosterol to ergosterol. Depletion of ergosterol and accumulation of methylated sterol precursors disrupts the fungal cell membrane structure and function, inhibiting fungal growth.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to isavuconazole", "Familial short QT syndrome (isavuconazole shortens the QT interval)", "Coadministration with strong CYP3A4 inhibitors (e.g., ketoconazole, high-dose ritonavir)", "Coadministration with strong CYP3A4 inducers (e.g., rifampin, carbamazepine, St. John's wort, long-acting barbiturates)"],
+    "relative": ["Severe hepatic impairment (Child-Pugh C) - not studied", "Pre-existing or risk of hepatic injury", "Concomitant CYP3A4 substrates with narrow therapeutic index"],
+    "monitor": ["Liver function tests during therapy", "ECG/QT interval (drug shortens QT)", "Infusion-related reactions during IV administration"]
+  },
+  "preg": "Based on animal data, isavuconazole may cause fetal harm (skeletal and other malformations). Avoid use in pregnancy unless the potential benefit justifies the potential risk to the fetus; advise females of reproductive potential to use effective contraception during treatment.",
+  "lact": "It is not known whether isavuconazole is present in human milk; it is excreted in the milk of lactating animals. Because of the potential for serious adverse reactions in the breastfed infant, breastfeeding is not recommended during treatment.",
+  "renal": "No dose adjustment is required for any degree of renal impairment, including severe impairment and end-stage renal disease. The intravenous formulation contains a cyclodextrin excipient (SBECD); however, the prescribing information does not require dose adjustment in renal impairment.",
+  "hepatic": "No dose adjustment is needed in mild to moderate hepatic impairment (Child-Pugh A or B); use only if benefit outweighs risk in these patients. It has not been studied in severe hepatic impairment (Child-Pugh C) and is not recommended in this group. Hepatic adverse reactions, including elevated transaminases, have occurred; monitor liver tests and discontinue if signs of significant liver injury develop.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole, high-dose ritonavir) - contraindicated; increase isavuconazole exposure", "Strong CYP3A4 inducers (rifampin, carbamazepine, St. John's wort, long-acting barbiturates) - contraindicated; decrease isavuconazole exposure", "Sensitive CYP3A4 substrates (e.g., sirolimus, tacrolimus, cyclosporine) - isavuconazole increases their levels; monitor and adjust"],
+    "moderate": ["Digoxin (P-gp substrate) - increased digoxin levels; monitor", "Mycophenolate mofetil - increased exposure to active metabolite", "Other QT-shortening agents - additive QT shortening", "Atorvastatin and other CYP3A4-metabolized statins - increased exposure"],
+    "minor": ["Bupropion (CYP2B6 substrate) - decreased exposure", "Mild CYP3A4 inhibitors or inducers - modest exposure changes"],
+    "food": "May be taken with or without food; food has no clinically meaningful effect on absorption.",
+    "alcohol": "Avoid alcohol due to additive potential for hepatotoxicity.",
+    "diagnostics": "May elevate hepatic transaminases and bilirubin; shortens the QTc interval on ECG (unlike most azoles, which prolong it)."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Headache", "Elevated liver enzymes", "Hypokalemia", "Constipation", "Dyspnea", "Peripheral edema", "Cough", "Fatigue", "Injection-site reactions"],
+    "serious": ["Hepatotoxicity (elevated transaminases, hepatitis, hepatic failure)", "Infusion-related reactions (hypotension, dyspnea, chills, dizziness, paresthesia)", "Hypersensitivity and severe skin reactions (e.g., SJS)", "QT interval shortening"],
+    "rare": ["Anaphylaxis", "Stevens-Johnson syndrome / severe cutaneous reactions"],
+    "emergency": ["Acute hepatic failure", "Anaphylaxis / severe infusion reaction", "Severe cutaneous adverse reaction"]
+  },
+  "monitoring": [
+    "Liver function tests at baseline and periodically during therapy",
+    "ECG/QT interval, particularly in patients at risk of arrhythmia or on other QT-affecting drugs",
+    "Signs of infusion-related reactions during IV administration",
+    "Serum potassium and other electrolytes",
+    "Concomitant medications for CYP3A4 interactions",
+    "Signs of hypersensitivity or severe skin reactions"
+  ],
+  "counsel": [
+    "Swallow capsules whole; do not chew, crush, or open them",
+    "Take maintenance doses at the same time each day; may be taken with or without food",
+    "Report yellowing of skin/eyes, dark urine, nausea/vomiting, or abdominal pain (possible liver injury)",
+    "Tell your doctor about all medicines and supplements, especially St. John's wort and HIV/TB drugs",
+    "Avoid alcohol during treatment",
+    "Report any history of short QT syndrome or family history of sudden cardiac death"
+  ],
+  "pk": [
+    ["Onset", "Therapeutic levels achieved during the 48-hour loading regimen"],
+    ["Peak", "Oral peak (Tmax) approximately 2-3 hours; bioavailability ~98%"],
+    ["Half-life", "Long terminal half-life, approximately 130 hours"],
+    ["Duration", "Once-daily maintenance dosing after loading"],
+    ["Storage", "Capsules: store at 20-25 C; IV vials: refrigerate 2-8 C"]
+  ],
+  "pearls": [
+    "Given as the prodrug isavuconazonium sulfate; 372 mg of the salt equals 200 mg of active isavuconazole",
+    "Unlike most azoles, isavuconazole SHORTENS the QT interval - it is CONTRAINDICATED in familial short QT syndrome",
+    "Loading dose: q8h for 6 doses (48 h), then once daily starting 12-24 h after the last loading dose",
+    "CYP3A4 substrate AND moderate CYP3A4 inhibitor - contraindicated with strong CYP3A4 inhibitors and inducers",
+    "High oral bioavailability allows seamless oral/IV switching at the same dose without titration",
+    "Monitor liver tests; IV formulation does not require dose change in renal impairment"
+  ],
+  "missed": "If a maintenance dose is missed, take it as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular once-daily schedule; do not take a double dose.",
+  "overdose": "Symptoms reported at higher exposures include headache, dizziness, nausea, vomiting, paresthesia, palpitations, and QT shortening. There is no specific antidote; manage supportively with cardiac (ECG) and clinical monitoring. Isavuconazole is not significantly removed by hemodialysis.",
+  "refs": [
+    ["FDA Cresemba (isavuconazonium sulfate) Prescribing Information", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2025/207500s016,207501s016lbl.pdf"],
+    ["Cresemba Dosing and Administration (Astellas)", "https://www.cresemba.com/dosing-and-administration/dosing-and-administration"],
+    ["openFDA Drug Label - Isavuconazonium Sulfate", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22isavuconazonium+sulfate%22"]
+  ]
+}

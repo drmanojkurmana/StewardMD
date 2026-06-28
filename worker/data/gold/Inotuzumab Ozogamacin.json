@@ -1,0 +1,98 @@
+{
+  "generic": "Inotuzumab Ozogamicin (Inotuzumab Ozogamacin)",
+  "cls": "CD22-directed antibody-drug conjugate (calicheamicin conjugate)",
+  "pharm": "Antineoplastic / monoclonal antibody-cytotoxic conjugate",
+  "tags": ["antibody-drug conjugate", "CD22", "B-cell precursor ALL", "boxed warning", "veno-occlusive disease", "Besponsa", "antineoplastic"],
+  "quick": [
+    ["Adult dose", "Cycle 1: 1.8 mg/m2 total IV given Day 1 (0.8), Day 8 (0.5), Day 15 (0.5)"],
+    ["Meal", "Not applicable - intravenous infusion"],
+    ["Pregnancy", "Can cause embryo-fetal harm; avoid, use effective contraception"],
+    ["Lactation", "Do not breastfeed during and for 2 months after last dose"],
+    ["Renal", "No adjustment for mild-moderate; not studied in severe/ESRD"],
+    ["Hepatic", "Boxed hepatotoxicity/VOD; monitor LFTs, interrupt/reduce/stop per bilirubin"],
+    ["Alcohol", "No direct interaction; avoid given hepatotoxicity risk"],
+    ["Monitoring", "LFTs (bilirubin, transaminases), CBC, signs of VOD; QT"]
+  ],
+  "summary": "Inotuzumab ozogamicin (Besponsa) is a CD22-directed antibody-drug conjugate that delivers the cytotoxic calicheamicin derivative N-acetyl-gamma-calicheamicin into CD22-positive B-lymphoblasts. It is indicated for adults and pediatric patients (1 year and older) with relapsed or refractory CD22-positive B-cell precursor acute lymphoblastic leukemia (ALL). It carries a BOXED WARNING for hepatotoxicity, including fatal and life-threatening hepatic veno-occlusive disease (VOD), also called sinusoidal obstruction syndrome (SOS), and for an increased risk of post-hematopoietic stem cell transplant (HSCT) non-relapse mortality. Dosing is given over a 21- to 28-day cycle with response-based adjustments.",
+  "indications": [
+    "Relapsed or refractory CD22-positive B-cell precursor acute lymphoblastic leukemia (ALL) in adults",
+    "Relapsed or refractory CD22-positive B-cell precursor ALL in pediatric patients 1 year of age and older"
+  ],
+  "dosage": [
+    {"c": "Cycle 1 (all patients)", "r": "Adult/pediatric", "d": "Total 1.8 mg/m2: Day 1 = 0.8 mg/m2, Day 8 = 0.5 mg/m2, Day 15 = 0.5 mg/m2", "t": "Days 1, 8, 15", "n": "Cycle 1 is 21 days; may extend to 28 days if CR/CRi achieved or for toxicity recovery"},
+    {"c": "Subsequent cycles - patient achieved CR or CRi", "r": "Maintenance", "d": "Total 1.5 mg/m2: 0.5 mg/m2 on Days 1, 8 and 15", "t": "Days 1, 8, 15 (28-day cycle)", "n": "Reduced total dose once complete remission (CR) or CR with incomplete count recovery (CRi) achieved"},
+    {"c": "Subsequent cycles - patient has NOT achieved CR/CRi", "r": "Maintenance", "d": "Total 1.8 mg/m2: Day 1 = 0.8, Day 8 = 0.5, Day 15 = 0.5 mg/m2", "t": "Days 1, 8, 15 (28-day cycle)", "n": "Discontinue if CR/CRi is not achieved within 3 cycles"},
+    {"c": "Patients proceeding to HSCT", "r": "Pre-transplant", "d": "Recommended duration is 2 cycles (a third may be considered if CR/CRi and MRD-negativity not achieved after 2)", "t": "Limit pre-HSCT exposure", "n": "Limiting to 2 cycles reduces VOD/SOS risk; avoid HSCT conditioning with 2 alkylating agents"},
+    {"c": "Infusion administration", "r": "Each dose", "d": "Each dose infused IV over 1 hour", "t": "Minimum 6 days between doses", "n": "Premedicate with a corticosteroid, antipyretic, and antihistamine before each dose"}
+  ],
+  "admin": [
+    "Premedicate with a corticosteroid, an antipyretic, and an antihistamine before each dose",
+    "Reconstitute each 0.9 mg vial with 4 mL Sterile Water for Injection to give 0.25 mg/mL; swirl gently, do not shake",
+    "Dilute the reconstituted solution in 0.9% sodium chloride to a final concentration of 0.01 to 0.1 mg/mL",
+    "Administer as an intravenous infusion over 1 hour at a rate of 50 mL/hour; do not give as IV push or bolus",
+    "Protect from light during reconstitution, dilution, and administration; complete administration within 8 hours of reconstitution",
+    "Monitor during and for at least 1 hour after infusion for infusion-related reactions"
+  ],
+  "moa": "Inotuzumab ozogamicin is a CD22-directed antibody-drug conjugate consisting of a humanized anti-CD22 monoclonal antibody covalently linked to N-acetyl-gamma-calicheamicin dimethylhydrazide, a cytotoxic calicheamicin derivative. After binding CD22 on the surface of B-lymphoblasts, the conjugate is internalized; the released calicheamicin derivative binds the minor groove of DNA and induces double-strand DNA breaks, leading to cell-cycle arrest and apoptotic cell death.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to inotuzumab ozogamicin or any excipient"],
+    "relative": ["Ongoing or prior hepatic disease (increased VOD risk)", "Prior HSCT", "Planned HSCT with conditioning containing 2 alkylating agents", "Active or uncontrolled infection", "QT prolongation risk factors / concomitant QT-prolonging drugs"],
+    "monitor": ["BOXED WARNING: hepatotoxicity including fatal/life-threatening veno-occlusive disease (VOD/SOS) - monitor liver tests and signs of VOD", "BOXED WARNING: increased risk of post-HSCT non-relapse mortality", "Total bilirubin and transaminases before each dose", "CBC with differential", "ECG/QTc and electrolytes"]
+  },
+  "preg": "Based on its mechanism and animal findings, inotuzumab ozogamicin can cause embryo-fetal harm. Verify pregnancy status before initiation; advise females of reproductive potential to use effective contraception during treatment and for at least 8 months after the last dose, and males with female partners to use contraception for at least 5 months after the last dose.",
+  "lact": "There are no data on the presence of the drug in human milk or its effects on the breastfed child. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for at least 2 months after the final dose.",
+  "renal": "No dose adjustment is necessary in patients with mild to moderate renal impairment (CrCl 30-89 mL/min). It has not been studied in patients with severe renal impairment or end-stage renal disease.",
+  "hepatic": "BOXED WARNING for hepatotoxicity, including fatal and life-threatening hepatic veno-occlusive disease (VOD/sinusoidal obstruction syndrome). Monitor liver tests (total bilirubin, AST, ALT, alkaline phosphatase) before each dose and for signs of VOD. Interrupt dosing, reduce the dose, or permanently discontinue based on bilirubin and transaminase elevations; permanently discontinue if VOD/SOS occurs. Risk is higher with subsequent HSCT, conditioning regimens with 2 alkylating agents, and elevated pre-HSCT bilirubin.",
+  "interactions": {
+    "major": ["QT-prolonging drugs (e.g., antiarrhythmics, certain antipsychotics, fluoroquinolones, azoles) - additive risk of QTc prolongation and arrhythmia"],
+    "moderate": ["Other hepatotoxic agents - additive hepatic injury and VOD risk", "Myelosuppressive chemotherapy - additive cytopenias"],
+    "minor": ["Live vaccines - reduced response and infection risk during immunosuppression"],
+    "food": "Not applicable - intravenous administration.",
+    "alcohol": "No direct interaction; avoid alcohol given the risk of hepatotoxicity.",
+    "diagnostics": "May elevate bilirubin, transaminases, and alkaline phosphatase, and reduce neutrophil, platelet, and hemoglobin levels; can prolong the QTc interval."
+  },
+  "se": {
+    "common": ["Thrombocytopenia", "Neutropenia", "Anemia", "Leukopenia", "Infection", "Febrile neutropenia", "Nausea", "Headache", "Pyrexia", "Hemorrhage", "Abdominal pain", "Fatigue", "Increased transaminases"],
+    "serious": ["Hepatotoxicity including veno-occlusive disease (VOD)/sinusoidal obstruction syndrome (SOS)", "Increased post-HSCT non-relapse mortality", "Severe myelosuppression (neutropenia, thrombocytopenia) with bleeding/infection", "Infusion-related reactions", "QT interval prolongation", "Tumor lysis syndrome"],
+    "rare": ["Hepatic failure", "Disseminated intravascular coagulation", "Sepsis"],
+    "emergency": ["Fatal veno-occlusive disease / acute liver failure", "Severe hemorrhage (including CNS/GI)", "Septic shock from febrile neutropenia", "Anaphylaxis / severe infusion reaction", "Torsades de pointes from QT prolongation"]
+  },
+  "monitoring": [
+    "Liver tests (total bilirubin, AST, ALT, alkaline phosphatase) before each dose and for signs/symptoms of VOD",
+    "Complete blood count with differential before each dose",
+    "Signs of infusion-related reactions during and for at least 1 hour after each infusion",
+    "ECG/QTc and electrolytes (potassium, magnesium) at baseline and periodically",
+    "Signs of tumor lysis syndrome at start of treatment in high-burden disease",
+    "Signs of infection, bleeding, fever; pregnancy status before initiation"
+  ],
+  "counsel": [
+    "Seek immediate medical advice for symptoms of liver injury or VOD: rapid weight gain, abdominal swelling/pain, or yellowing of the skin or eyes",
+    "Report fever, chills, or signs of infection promptly, and any unusual bruising or bleeding",
+    "Report symptoms during infusion such as fever, chills, rash, or breathing difficulty",
+    "Use effective contraception during and after treatment (females 8 months, males 5 months); do not breastfeed",
+    "Tell your team about all medicines, especially those that affect heart rhythm or the liver",
+    "Limiting cycles before a stem cell transplant lowers the risk of serious liver complications"
+  ],
+  "pk": [
+    ["Onset", "Pharmacologic exposure immediate with IV infusion"],
+    ["Peak", "End of infusion; steady state reached by approximately cycle 4"],
+    ["Half-life", "Terminal half-life approximately 12.3 days at steady state"],
+    ["Duration", "Cycle length 21-28 days; response-based dosing"],
+    ["Storage", "Store vials refrigerated 2-8 C; protect from light; do not freeze"]
+  ],
+  "pearls": [
+    "BOXED WARNING: hepatotoxicity including fatal/life-threatening VOD/SOS, and increased post-HSCT non-relapse mortality",
+    "Limit treatment to 2 cycles before HSCT and avoid conditioning regimens with 2 alkylating agents to reduce VOD risk",
+    "Premedicate with corticosteroid, antipyretic, and antihistamine before each dose to reduce infusion reactions",
+    "Discontinue if CR/CRi is not achieved within 3 cycles",
+    "Once CR/CRi achieved, reduce the per-cycle total dose (1.8 to 1.5 mg/m2) and use a 28-day cycle",
+    "Monitor liver tests and QTc closely; permanently discontinue if VOD/SOS occurs"
+  ],
+  "missed": "Doses are administered by a healthcare professional on a fixed schedule (Days 1, 8, 15). If a dose is missed or delayed, it is rescheduled by the treating team, maintaining a minimum interval of 6 days between doses within a cycle; do not double doses.",
+  "overdose": "There is no known antidote. Overdose may worsen myelosuppression, hepatotoxicity (including VOD), and infusion-related reactions. Manage supportively with blood product support, treatment of infection and bleeding, intensive hepatic monitoring, and management of VOD; the conjugate is not removed by dialysis.",
+  "refs": [
+    ["FDA Besponsa (inotuzumab ozogamicin) Prescribing Information", "https://labeling.pfizer.com/showlabeling.aspx?id=9503"],
+    ["DailyMed - Besponsa (inotuzumab ozogamicin)", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=cc7014b1-c775-411d-b374-8113248b4077"],
+    ["openFDA Drug Label - Inotuzumab Ozogamicin", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22inotuzumab+ozogamicin%22"]
+  ]
+}

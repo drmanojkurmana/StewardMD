@@ -1,0 +1,108 @@
+{
+  "generic": "Lamotrigine",
+  "cls": "Anticonvulsant / mood stabilizer (phenyltriazine)",
+  "pharm": "Inhibits voltage-gated sodium channels and stabilizes neuronal membranes, suppressing release of excitatory neurotransmitters (e.g., glutamate) to control seizures and stabilize mood.",
+  "tags": ["Rx only", "Boxed warning (serious rash)", "Slow titration required", "Mood stabilizer"],
+  "quick": [
+    ["Adult dose", "Maintenance ~100-400 mg/day after slow titration"],
+    ["Meal", "Take with or without food"],
+    ["Pregnancy", "Use if benefit outweighs risk; levels fall in pregnancy"],
+    ["Lactation", "Excreted in milk; monitor infant"],
+    ["Renal", "Reduce maintenance dose in significant impairment"],
+    ["Hepatic", "Reduce dose in moderate-severe impairment"],
+    ["Alcohol", "Avoid; additive CNS effects"],
+    ["Monitoring", "Skin for rash, mood/suicidality, drug interactions"]
+  ],
+  "summary": "Lamotrigine is a phenyltriazine antiepileptic used as adjunctive and (>=16 years) monotherapy for partial-onset and primary generalized tonic-clonic seizures and generalized seizures of Lennox-Gastaut syndrome, and for maintenance treatment of bipolar I disorder. It carries a boxed warning for serious, potentially life-threatening rashes including Stevens-Johnson syndrome, which is reduced by strict slow titration. Dosing depends heavily on concomitant drugs (valproate doubles levels; enzyme inducers and estrogen-containing contraceptives lower them).",
+  "indications": [
+    "Adjunctive therapy for partial-onset seizures in patients aged 2 years and older",
+    "Adjunctive therapy for primary generalized tonic-clonic seizures (aged 2 and older)",
+    "Adjunctive therapy for generalized seizures of Lennox-Gastaut syndrome (aged 2 and older)",
+    "Conversion to monotherapy in patients aged 16 and older with partial-onset seizures receiving carbamazepine, phenytoin, phenobarbital, primidone, or valproate",
+    "Maintenance treatment of bipolar I disorder to delay mood episodes in adults"
+  ],
+  "dosage": [
+    {"c": "Adjunctive (with valproate), >12 yr", "r": "Adult oral", "d": "25 mg every other day x2 wk, then 25 mg daily x2 wk, then increase by 25-50 mg/day every 1-2 wk", "t": "Once or twice daily", "n": "Maintenance 100-200 mg/day (100 mg/day if also on inducers)"},
+    {"c": "Adjunctive (with inducers, no valproate), >12 yr", "r": "Adult oral", "d": "50 mg daily x2 wk, then 100 mg/day x2 wk, then increase by 100 mg/day every 1-2 wk", "t": "Divided twice daily", "n": "Maintenance 300-500 mg/day"},
+    {"c": "Adjunctive (no inducers/valproate), >12 yr", "r": "Adult oral", "d": "25 mg daily x2 wk, then 50 mg/day x2 wk, then increase by 50 mg/day every 1-2 wk", "t": "Once or twice daily", "n": "Maintenance 225-375 mg/day"},
+    {"c": "Bipolar I maintenance (no inducers/valproate)", "r": "Adult oral", "d": "25 mg daily x2 wk, 50 mg/day x2 wk, 100 mg/day x1 wk, then 200 mg/day target", "t": "Once daily", "n": "Target 200 mg/day; adjust with interacting drugs"},
+    {"c": "Discontinuation", "r": "Adult oral", "d": "Taper over at least 2 weeks (~50% dose reduction per week)", "t": "Tapered", "n": "Avoid abrupt withdrawal; do not restart after rash unless benefit clearly outweighs risk"}
+  ],
+  "admin": [
+    "Follow the recommended initial dose and titration exactly to reduce rash risk",
+    "Take with or without food; chewable/dispersible and orally disintegrating forms have specific instructions",
+    "Use titration kits for the first 5 weeks where provided",
+    "Adjust dose when starting/stopping valproate, enzyme inducers, or estrogen-containing contraceptives",
+    "Taper over at least 2 weeks when discontinuing"
+  ],
+  "moa": "Lamotrigine is thought to act primarily by blocking voltage-sensitive sodium channels, stabilizing presynaptic neuronal membranes and inhibiting the release of excitatory neurotransmitters, particularly glutamate. This reduces sustained repetitive firing and pathologic neuronal excitability underlying seizures and may contribute to its mood-stabilizing effects in bipolar disorder.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to lamotrigine or any formulation component"
+    ],
+    "relative": [
+      "History of lamotrigine-related rash",
+      "Concomitant valproate (markedly raises levels - use lower titration)",
+      "Cardiac disease/conduction abnormalities (Brugada-type ECG changes)",
+      "Hepatic or renal impairment"
+    ],
+    "monitor": [
+      "Skin for rash/hypersensitivity",
+      "Mood changes and suicidal ideation",
+      "Signs of HLH/multiorgan hypersensitivity"
+    ]
+  },
+  "preg": "Use only if the potential benefit justifies the risk. Lamotrigine plasma concentrations can fall substantially during pregnancy (increased clearance), requiring dose adjustment and close monitoring; enroll patients in the pregnancy registry where available.",
+  "lact": "Lamotrigine is excreted in human milk in clinically relevant amounts; if used during breastfeeding, monitor the infant for rash, apnea, drowsiness, and poor feeding.",
+  "renal": "Lamotrigine and its glucuronide metabolite are renally eliminated; reduced maintenance doses may be needed in significant renal impairment, and accumulation of the metabolite can occur. Use with caution and monitor.",
+  "hepatic": "Reduce initial, escalation, and maintenance doses by approximately 25% in moderate to severe hepatic impairment without ascites, and by about 50% with ascites; titrate per clinical response.",
+  "interactions": {
+    "major": [
+      "Valproate - inhibits lamotrigine glucuronidation, roughly doubling levels and greatly increasing rash risk (use reduced doses)",
+      "Enzyme-inducing antiepileptics (carbamazepine, phenytoin, phenobarbital, primidone) and rifampin - lower lamotrigine levels (higher doses needed)",
+      "Estrogen-containing oral contraceptives - lower lamotrigine levels; levels rise during the pill-free week"
+    ],
+    "moderate": [
+      "Atazanavir/ritonavir and lopinavir/ritonavir (decrease lamotrigine levels)",
+      "Other CNS depressants (additive sedation/dizziness)"
+    ],
+    "minor": ["Lamotrigine has weak effects on other drugs' metabolism"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid; additive central nervous system effects.",
+    "diagnostics": "May cause a false-positive urine drug screen for phencyclidine (PCP) on some immunoassays."
+  },
+  "se": {
+    "common": ["Dizziness", "Headache", "Diplopia/blurred vision", "Ataxia", "Nausea", "Somnolence", "Rash"],
+    "serious": ["Serious rash (Stevens-Johnson syndrome, toxic epidermal necrolysis)", "DRESS / multiorgan hypersensitivity", "Hemophagocytic lymphohistiocytosis (HLH)", "Aseptic meningitis", "Blood dyscrasias", "Suicidal ideation/behavior", "Cardiac rhythm/conduction abnormalities (Brugada-type)"],
+    "rare": ["Hepatic failure", "Disseminated intravascular coagulation", "Severe immune reactions"],
+    "emergency": ["SJS/TEN with skin blistering and mucosal involvement", "DRESS or HLH with fever and organ dysfunction", "Anaphylaxis/angioedema"]
+  },
+  "monitoring": ["Skin and mucous membranes for rash, especially in first 8 weeks", "Mood changes and emergence of suicidal thoughts", "Signs of multiorgan hypersensitivity/HLH (fever, lymphadenopathy)", "Drug levels when interacting drugs change", "Cardiac evaluation in patients with structural/ischemic heart disease"],
+  "counsel": [
+    "Report any rash, fever, swollen glands, mouth sores, or flu-like symptoms immediately - skin reactions can be life-threatening",
+    "Follow the slow dose increases exactly; do not increase faster than instructed",
+    "Do not stop suddenly; tapering is needed to avoid seizures",
+    "Tell your doctor before starting/stopping birth control pills or valproate, as your dose may need changing",
+    "Watch for new or worsening depression, anxiety, or thoughts of self-harm"
+  ],
+  "pk": [
+    ["Onset", "Therapeutic effect over weeks of titration"],
+    ["Peak", "Tmax ~1.4-4.8 hours (oral)"],
+    ["Half-life", "~25-33 h alone; ~70 h with valproate; ~12-14 h with inducers"],
+    ["Duration", "Dosed once or twice daily"],
+    ["Storage", "Store at 25 C (77 F); excursions permitted 15-30 C; protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: serious, potentially fatal rashes (including SJS) - higher with rapid titration, high starting dose, or concomitant valproate",
+    "Valproate doubles lamotrigine levels (halve doses); enzyme inducers and estrogen-containing contraceptives lower them",
+    "Lamotrigine levels drop during pregnancy and rise postpartum - adjust accordingly",
+    "Generally weight-neutral and non-sedating; favored bipolar maintenance for depressive episodes",
+    "Do not restart after a lamotrigine-related rash unless benefit clearly outweighs risk"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose; do not double up. If several days are missed, do not resume the previous dose - contact your prescriber, as re-titration may be needed.",
+  "overdose": "Overdose can cause ataxia, nystagmus, drowsiness, seizures, decreased level of consciousness or coma, QRS widening and cardiac conduction abnormalities, and death. There is no specific antidote; treat with supportive care, airway protection, activated charcoal if appropriate, and cardiac and neurologic monitoring; hemodialysis may remove some drug.",
+  "refs": [
+    ["FDA Label - Lamotrigine (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lamotrigine%22"],
+    ["DailyMed - Lamotrigine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=lamotrigine"]
+  ]
+}

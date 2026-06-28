@@ -1,0 +1,96 @@
+{
+  "generic": "Prulifloxacin",
+  "cls": "Fluoroquinolone antibacterial (prodrug of ulifloxacin)",
+  "pharm": "Broad-spectrum systemic antibacterial",
+  "tags": ["fluoroquinolone", "UTI", "chronic bronchitis", "prodrug", "ulifloxacin", "not FDA-approved"],
+  "quick": [
+    ["Adult dose", "600 mg PO once daily"],
+    ["Meal", "Preferably on empty stomach, away from antacids/cations"],
+    ["Pregnancy", "Contraindicated"],
+    ["Lactation", "Contraindicated"],
+    ["Renal", "Caution; avoid in severe impairment (CrCl <30)"],
+    ["Hepatic", "Caution in severe impairment"],
+    ["Alcohol", "Avoid; may worsen CNS effects"],
+    ["Monitoring", "Tendon/CNS symptoms, glucose, QT in at-risk"]
+  ],
+  "summary": "Prulifloxacin is an oral broad-spectrum fluoroquinolone prodrug rapidly hydrolyzed to the active metabolite ulifloxacin. It is dosed 600 mg once daily for acute uncomplicated and complicated lower UTI and acute exacerbations of chronic bronchitis. It carries the fluoroquinolone class risks of tendinopathy, QT prolongation, CNS effects, peripheral neuropathy and aortic aneurysm/dissection. Not FDA-approved; marketed in Europe (Unidrox), India and Japan.",
+  "indications": [
+    "Acute uncomplicated lower urinary tract infection (cystitis) in adults",
+    "Complicated lower urinary tract infection in adults",
+    "Acute exacerbation of chronic bronchitis in adults"
+  ],
+  "dosage": [
+    {"c": "Acute uncomplicated lower UTI (adult)", "r": "Standard", "d": "600 mg once daily", "t": "Once daily", "n": "Typically 3 days of treatment"},
+    {"c": "Complicated lower UTI (adult)", "r": "Standard", "d": "600 mg once daily", "t": "Once daily", "n": "Up to 10 days depending on severity"},
+    {"c": "Acute exacerbation of chronic bronchitis (adult)", "r": "Standard", "d": "600 mg once daily", "t": "Once daily", "n": "Usually up to 10 days"},
+    {"c": "Severe renal impairment", "r": "CrCl <30 mL/min", "d": "Use not recommended", "t": "N/A", "n": "Insufficient data; avoid"}
+  ],
+  "admin": [
+    "Take one 600 mg tablet orally once daily",
+    "Preferably on an empty stomach, at least 2 hours before or after meals",
+    "Separate from antacids, sucralfate, iron, calcium, magnesium, zinc and dairy by at least 2-4 hours to avoid chelation",
+    "Maintain adequate hydration during treatment",
+    "Complete the full prescribed course even if symptoms improve"
+  ],
+  "moa": "Prulifloxacin is a prodrug rapidly metabolized by esterases to the active moiety ulifloxacin, a fluoroquinolone that inhibits bacterial DNA gyrase (topoisomerase II) and topoisomerase IV. Inhibition of these enzymes blocks DNA replication, transcription, repair and recombination, leading to bactericidal activity against gram-negative and many gram-positive uropathogens and respiratory pathogens.",
+  "contra": {
+    "absolute": ["Hypersensitivity to prulifloxacin, ulifloxacin or other quinolones/fluoroquinolones", "Pregnancy", "Breastfeeding", "Children and growing adolescents (immature skeletal system)", "History of tendon disorders related to quinolone administration"],
+    "relative": ["Known QT prolongation or congenital long QT syndrome", "Uncorrected hypokalemia/hypomagnesemia", "Glucose-6-phosphate dehydrogenase (G6PD) deficiency", "Concurrent class IA/III antiarrhythmics or other QT-prolonging drugs", "Severe renal or hepatic impairment", "History of CNS disorders / seizure predisposition"],
+    "monitor": ["Concomitant corticosteroids (tendon rupture risk)", "Diabetic patients on hypoglycemic agents", "Aortic aneurysm/dissection risk factors (elderly, hypertension, Marfan/Ehlers-Danlos)", "Photosensitivity precautions"]
+  },
+  "preg": "Contraindicated in pregnancy. Fluoroquinolones may cause cartilage and joint damage in immature animals; adequate human data are lacking and use is not recommended.",
+  "lact": "Contraindicated during breastfeeding. Quinolones are excreted in breast milk and pose a theoretical risk of cartilage toxicity to the infant; discontinue nursing or avoid the drug.",
+  "renal": "Use with caution in renal impairment. No formal dose adjustment is established for mild-to-moderate impairment, but use is not recommended in severe renal impairment (creatinine clearance <30 mL/min) due to insufficient data. Ensure adequate hydration.",
+  "hepatic": "Use with caution in hepatic impairment. Activation of the prodrug to ulifloxacin may be affected; avoid in severe hepatic impairment owing to limited data.",
+  "interactions": {
+    "major": ["QT-prolonging drugs (class IA/III antiarrhythmics, antipsychotics, macrolides, tricyclics) - additive risk of torsades de pointes", "Theophylline - quinolones may raise theophylline levels; monitor for toxicity", "Tizanidine - increased levels with quinolones, hypotension and sedation"],
+    "moderate": ["Multivalent cation products (antacids, iron, calcium, magnesium, zinc, sucralfate) - reduced absorption; separate dosing", "Corticosteroids - increased tendon rupture risk", "Warfarin / vitamin K antagonists - enhanced anticoagulant effect; monitor INR", "NSAIDs - may increase CNS stimulation and seizure risk", "Oral hypoglycemic agents and insulin - dysglycemia (hypo- or hyperglycemia)"],
+    "minor": ["Caffeine - reduced clearance possible", "Probenecid - reduced renal elimination of ulifloxacin"],
+    "food": "Dairy products and calcium/magnesium-rich foods reduce absorption; take apart from meals and cation-containing products.",
+    "alcohol": "Avoid alcohol; may potentiate CNS adverse effects such as dizziness and impaired alertness.",
+    "diagnostics": "May affect glucose measurements; rarely elevates hepatic transaminases."
+  },
+  "se": {
+    "common": ["Nausea", "Diarrhea", "Headache", "Dizziness", "Abdominal pain", "Rash", "Vomiting"],
+    "serious": ["Tendinitis and tendon rupture (especially Achilles)", "QT prolongation", "Peripheral neuropathy", "Clostridioides difficile-associated diarrhea/colitis", "Hepatotoxicity", "CNS effects (seizures, confusion, hallucinations)"],
+    "rare": ["Aortic aneurysm and dissection", "Photosensitivity reactions", "Dysglycemia (hypoglycemia/hyperglycemia)", "Severe cutaneous reactions (Stevens-Johnson syndrome, TEN)", "Crystalluria"],
+    "emergency": ["Anaphylaxis", "Acute tendon rupture", "Torsades de pointes / serious arrhythmia", "Aortic aneurysm rupture or dissection (sudden severe chest/back/abdominal pain)", "Severe C. difficile colitis", "Stevens-Johnson syndrome / toxic epidermal necrolysis"]
+  },
+  "monitoring": [
+    "Tendon pain, swelling or inflammation - discontinue immediately if suspected",
+    "Symptoms of peripheral neuropathy (numbness, tingling, weakness)",
+    "Blood glucose in diabetic patients",
+    "ECG/QT in patients with QT risk factors or electrolyte disturbance",
+    "Signs of CNS effects, including seizures or mood changes",
+    "Persistent or severe diarrhea (C. difficile)"
+  ],
+  "counsel": [
+    "Take one tablet once daily, preferably on an empty stomach, away from antacids, dairy, iron and calcium",
+    "Stop the drug and contact a clinician at once if tendon pain, swelling or rupture occurs",
+    "Report numbness, tingling, burning or weakness suggesting nerve damage",
+    "Avoid excessive sun and UV exposure; use sun protection (photosensitivity)",
+    "Seek urgent care for sudden severe chest, back or abdominal pain (aortic risk)",
+    "Avoid alcohol and use caution driving until effects are known",
+    "Complete the full course; report severe or bloody diarrhea"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; active ulifloxacin formed within ~1 hour"],
+    ["Peak", "Ulifloxacin Tmax approximately 1 hour"],
+    ["Half-life", "Ulifloxacin terminal half-life approximately 10-12 hours"],
+    ["Duration", "Supports once-daily dosing"],
+    ["Storage", "Store below 30 C in original packaging, protect from moisture"]
+  ],
+  "pearls": [
+    "Record sourced from EMA/SmPC and manufacturer prescribing information (e.g. Unidrox), not US FDA, as prulifloxacin is not FDA-approved",
+    "Prodrug rapidly converted by esterases to the active metabolite ulifloxacin",
+    "Once-daily 600 mg dosing simplifies short-course UTI therapy",
+    "Carries full fluoroquinolone class warnings: tendon rupture, neuropathy, CNS effects, QT prolongation and aortic aneurysm/dissection",
+    "Separate from multivalent cations (antacids, iron, calcium, dairy) to preserve absorption"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the once-daily schedule; do not double the dose.",
+  "overdose": "No specific antidote. Manage with supportive and symptomatic care, gastric emptying or activated charcoal if recent ingestion, adequate hydration and ECG monitoring for QT effects. Hemodialysis removes only a limited amount of ulifloxacin.",
+  "refs": [
+    ["EMA / SmPC and manufacturer prescribing information (Unidrox, prulifloxacin)", "https://www.ema.europa.eu/"],
+    ["British National Formulary (BNF) - Fluoroquinolone class safety warnings", "https://bnf.nice.org.uk/"]
+  ]
+}

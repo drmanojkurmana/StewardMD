@@ -1,0 +1,94 @@
+{
+  "generic": "Deferasirox",
+  "cls": "Oral iron chelator (tridentate, Fe3+ selective)",
+  "pharm": "Iron-chelating agent",
+  "tags": ["iron chelator", "iron overload", "transfusional hemosiderosis", "thalassemia", "NTDT", "chelation", "boxed warning"],
+  "quick": [
+    ["Adult dose", "Transfusional overload: 14 mg/kg once daily (eGFR >60); NTDT: 7 mg/kg once daily (tablet)"],
+    ["Meal", "Take once daily on an empty stomach or with a light meal, at the same time each day"],
+    ["Pregnancy", "No human data; animal renal anomalies/reduced viability; use only if benefit justifies risk"],
+    ["Lactation", "Avoid breastfeeding during treatment (excreted in animal milk)"],
+    ["Renal", "Contraindicated if eGFR <40 mL/min/1.73m2; reduce starting dose in pre-existing renal disease"],
+    ["Hepatic", "Can cause hepatic failure; reduce dose/interrupt for toxicity; monitor LFTs"],
+    ["Alcohol", "Avoid - adds to GI ulceration/bleeding and hepatic risk"],
+    ["Monitoring", "Serum creatinine/eGFR (in duplicate at baseline, then monthly), LFTs, serum ferritin, CBC, audiometry/ophthalmology"]
+  ],
+  "summary": "Deferasirox is an orally active, tridentate iron chelator selective for ferric iron (Fe3+), indicated for chronic iron overload due to blood transfusions in patients 2 years and older, and for chronic iron overload in non-transfusion-dependent thalassemia (NTDT) syndromes in patients 10 years and older meeting liver iron concentration and ferritin thresholds. Two molecules bind one iron atom (2:1) and the complex is excreted predominantly in the feces. It carries a boxed warning for renal failure, hepatic failure and gastrointestinal hemorrhage, all of which can be fatal, so baseline and ongoing monitoring of renal function, liver function, blood counts, ferritin, hearing and vision is essential. It is contraindicated when eGFR is below 40 mL/min/1.73m2, in poor performance status, high-risk MDS, advanced malignancy and platelet counts below 50 x 10^9/L.",
+  "indications": [
+    "Treatment of chronic iron overload due to blood transfusions (transfusional hemosiderosis) in patients 2 years of age and older",
+    "Treatment of chronic iron overload in patients 10 years of age and older with non-transfusion-dependent thalassemia (NTDT) syndromes, with liver iron concentration of at least 5 mg Fe/g dry weight and serum ferritin greater than 300 mcg/L"
+  ],
+  "dosage": [
+    {"c": "Transfusional iron overload (film-coated tablet)", "r": "eGFR >60 mL/min/1.73m2", "d": "Initial 14 mg/kg once daily, calculated to nearest whole tablet", "t": "Once daily", "n": "Start only with evidence of overload (>=100 mL/kg pRBC transfused and ferritin consistently >1,000 mcg/L)"},
+    {"c": "NTDT syndromes (film-coated tablet)", "r": "eGFR >60 mL/min/1.73m2", "d": "Initial 7 mg/kg once daily, calculated to nearest whole tablet", "t": "Once daily", "n": "Requires LIC >=5 mg Fe/g dw and ferritin >300 mcg/L"},
+    {"c": "Dose titration", "r": "Adult/pediatric", "d": "Adjust in steps based on serum ferritin trend and liver iron concentration", "t": "Reassess periodically", "n": "Reduce/interrupt for renal, hepatic, GI, hematologic or other toxicity per label"},
+    {"c": "Pre-existing renal disease", "r": "Reduced renal function (eGFR 40-60)", "d": "Reduce the starting dose and increase monitoring frequency", "t": "Once daily", "n": "Contraindicated if eGFR <40 mL/min/1.73m2"}
+  ],
+  "admin": [
+    "Take once daily, preferably at the same time each day, on an empty stomach or with a light meal",
+    "Do not take with aluminum-containing antacids",
+    "Evaluate baseline renal function (serum creatinine in duplicate, eGFR), liver function, CBC, ferritin, hearing and vision before starting",
+    "Calculate the dose to the nearest whole tablet and adjust per ferritin and liver iron trends",
+    "Interrupt or reduce dose for renal, hepatic, hematologic or gastrointestinal toxicity as specified in the label"
+  ],
+  "moa": "Deferasirox is an orally active chelator selective for iron in the ferric (Fe3+) state. It is a tridentate ligand that binds iron with high affinity in a 2:1 (ligand:iron) ratio, forming a stable complex that is excreted predominantly in the feces, thereby reducing tissue iron burden. It has very low affinity for zinc and copper, although variable decreases in these trace metals can occur.",
+  "contra": {
+    "absolute": ["Estimated GFR less than 40 mL/min/1.73m2", "Poor performance status", "High-risk myelodysplastic syndrome", "Advanced malignancies", "Platelet count less than 50 x 10^9/L", "Known hypersensitivity to deferasirox or any component"],
+    "relative": ["Pre-existing renal impairment (reduce starting dose, monitor closely)", "Pre-existing hepatic impairment", "Concomitant nephrotoxic or ulcerogenic/hemorrhagic drugs", "Elderly and pediatric patients (age-related toxicity risk)"],
+    "monitor": ["Renal function (serum creatinine/eGFR, proteinuria)", "Liver function and bilirubin", "Blood counts", "Auditory and ophthalmologic function"]
+  },
+  "preg": "There are no adequate human data. In animals, deferasirox caused decreased offspring viability and increased renal anomalies in male offspring at or below the recommended human dose on a mg/m2 basis. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Deferasirox may reduce the effectiveness of hormonal contraceptives; advise an additional or alternative non-hormonal method.",
+  "lact": "Deferasirox is excreted in the milk of lactating animals; effects on the breastfed infant and milk production are unknown. Because of the potential for serious adverse reactions, breastfeeding is not recommended during treatment.",
+  "renal": "Deferasirox can cause acute kidney injury, including acute renal failure requiring dialysis, and renal tubular toxicity including Fanconi syndrome. It is contraindicated when eGFR is below 40 mL/min/1.73m2. Measure serum creatinine in duplicate before starting, monitor renal function at least monthly (weekly for the first month in high-risk patients), reduce the starting dose in pre-existing renal disease, and reduce dose or interrupt therapy for renal toxicity.",
+  "hepatic": "Deferasirox can cause hepatic injury including hepatic failure and death. Measure serum transaminases and bilirubin in all patients before treatment, every 2 weeks during the first month, and at least monthly thereafter. Reduce the dose or interrupt therapy for severe or persistent elevations in liver tests or other evidence of significant hepatic injury.",
+  "interactions": {
+    "major": ["Aluminum-containing antacids - do not take concomitantly", "Strong UGT inducers (rifampin, phenytoin, phenobarbital, ritonavir) - may decrease deferasirox exposure and efficacy", "Other nephrotoxic or ulcerogenic/hemorrhagic drugs (e.g. NSAIDs, corticosteroids, oral bisphosphonates, anticoagulants) - increased risk of GI bleeding/renal injury"],
+    "moderate": ["CYP3A4 substrates - deferasirox induces CYP3A4 and may reduce their concentrations (e.g. cyclosporine, simvastatin, hormonal contraceptives) - monitor effectiveness", "Repaglinide (CYP2C8 substrate) - increased exposure; consider repaglinide dose reduction and monitor blood glucose", "Theophylline (CYP1A2 substrate) - increased levels; avoid concomitant use", "Busulfan - increased exposure; monitor levels for dose adjustment"],
+    "minor": ["Bile acid sequestrants (e.g. cholestyramine) - may reduce deferasirox exposure"],
+    "food": "Take on an empty stomach or with a light meal; a high-fat meal increases absorption of some formulations - keep the regimen consistent.",
+    "alcohol": "Avoid alcohol, which adds to the risk of gastric irritation, GI ulceration/bleeding and hepatic injury.",
+    "diagnostics": "Expect rises in serum creatinine and urinary protein; monitor ferritin and liver iron concentration to guide dosing."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Abdominal pain", "Skin rash", "Increases in serum creatinine"],
+    "serious": ["Acute kidney injury / acute renal failure and renal tubular toxicity (Fanconi syndrome)", "Hepatic injury and hepatic failure", "Gastrointestinal hemorrhage, ulceration and irritation (fatal cases reported)", "Bone marrow suppression - neutropenia, agranulocytosis, worsening anemia, thrombocytopenia", "Severe skin reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis, DRESS)", "Hypersensitivity reactions including anaphylaxis and angioedema"],
+    "rare": ["Auditory disturbances (high-frequency hearing loss)", "Ocular disturbances (lens opacities, retinal changes)"],
+    "emergency": ["Acute renal failure", "Hepatic failure", "Severe gastrointestinal hemorrhage", "Anaphylaxis / angioedema", "Severe skin reaction (SJS/TEN/DRESS)"]
+  },
+  "monitoring": [
+    "Serum creatinine in duplicate at baseline, then at least monthly (weekly for the first month in high-risk patients); calculate eGFR",
+    "Serum transaminases and bilirubin before treatment, every 2 weeks for the first month, then monthly",
+    "Complete blood count, particularly in patients with pre-existing cytopenias",
+    "Serum ferritin monthly and periodic liver iron concentration to guide dosing",
+    "Auditory (audiometry) and ophthalmologic testing before and periodically during treatment",
+    "Signs of GI bleeding, rash and hypersensitivity"
+  ],
+  "counsel": [
+    "Take once a day at the same time, on an empty stomach or with a light meal",
+    "Do not take aluminum-containing antacids with this medicine",
+    "Report decreased urination, swelling, severe abdominal pain, vomiting blood or black stools, yellowing of the skin or eyes",
+    "Report any rash, hearing changes or vision changes promptly",
+    "Keep all appointments for blood, urine, hearing and eye tests",
+    "Use a non-hormonal back-up contraceptive method as this drug can reduce hormonal contraceptive efficacy"
+  ],
+  "pk": [
+    ["Onset", "Net iron excretion begins with regular daily dosing; ferritin trends guide response over weeks"],
+    ["Peak", "Plasma concentrations peak within a few hours of oral dosing"],
+    ["Half-life", "Approximately 8-16 hours, supporting once-daily dosing"],
+    ["Duration", "Once-daily dosing maintains iron-chelating effect; iron excretion is predominantly fecal"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C permitted; protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warning: renal failure, hepatic failure and GI hemorrhage - all potentially fatal",
+    "Contraindicated when eGFR is below 40 mL/min/1.73m2 and when platelets are below 50 x 10^9/L",
+    "Measure serum creatinine in duplicate at baseline and monitor renal function at least monthly",
+    "Induces CYP3A4 - can lower levels of cyclosporine, statins and hormonal contraceptives; advise non-hormonal contraception",
+    "Avoid concomitant aluminum-containing antacids and limit drugs with ulcerogenic/hemorrhagic potential"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember on the same day. If it is nearly time for the next day's dose, skip the missed dose and take the next dose at the usual time. Do not take two doses in one day to make up for a missed dose.",
+  "overdose": "Reported overdoses (2-3 times the prescribed dose for several weeks) have caused hepatitis and, in a pediatric case, acute renal failure requiring hemofiltration and acute liver injury, both reversible with intensive support. A single erroneous 90 mg/kg dose led to reversible Fanconi syndrome. Early signs include abdominal pain, diarrhea, nausea and vomiting. There is no specific antidote; manage with induction of vomiting or gastric lavage and symptomatic supportive care, including renal and hepatic support.",
+  "refs": [
+    ["FDA Deferasirox Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22deferasirox%22"],
+    ["DailyMed - Deferasirox", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

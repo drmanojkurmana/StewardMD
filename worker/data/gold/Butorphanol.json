@@ -1,0 +1,95 @@
+{
+  "generic": "Butorphanol",
+  "cls": "Opioid agonist-antagonist (mixed kappa agonist / mu antagonist)",
+  "pharm": "Opioid analgesic (Schedule IV controlled substance)",
+  "tags": ["opioid", "agonist-antagonist", "analgesic", "migraine", "Schedule IV"],
+  "quick": [
+    ["Adult dose", "IM 1-4 mg q3-4h; IV 0.5-2 mg q3-4h; intranasal 1 mg (1 spray), may repeat in 60-90 min"],
+    ["Meal", "Not applicable (parenteral/intranasal)"],
+    ["Pregnancy", "Avoid near term; neonatal respiratory depression/withdrawal"],
+    ["Lactation", "Small amounts in milk; use caution"],
+    ["Renal", "Reduce dose/extend interval in impairment"],
+    ["Hepatic", "Reduce dose/extend interval in impairment"],
+    ["Alcohol", "Avoid; additive CNS/respiratory depression"],
+    ["Monitoring", "Respiration, sedation, BP; Habit forming: Yes (Schedule IV)"]
+  ],
+  "summary": "Butorphanol is a mixed opioid agonist-antagonist (kappa agonist, partial mu antagonist) used for moderate to severe pain, including migraine, given parenterally or as a nasal spray. It is a Schedule IV controlled substance and is habit forming. Because of its mu-antagonist activity it can precipitate withdrawal in opioid-dependent patients and has a ceiling effect for respiratory depression.",
+  "indications": [
+    "Management of pain severe enough to require an opioid analgesic and for which alternatives are inadequate",
+    "Preoperative or preanesthetic medication",
+    "Supplement to balanced anesthesia",
+    "Relief of pain during labor (selected term patients)",
+    "Acute migraine pain (intranasal formulation)"
+  ],
+  "dosage": [
+    {"c": "Acute pain (IM)", "r": "Standard", "d": "1-4 mg IM every 3-4 hours as needed", "t": "Every 3-4 hours PRN", "n": "Usual single dose 2 mg; individualize"},
+    {"c": "Acute pain (IV)", "r": "Standard", "d": "0.5-2 mg IV every 3-4 hours as needed", "t": "Every 3-4 hours PRN", "n": "Usual single dose 1 mg"},
+    {"c": "Pain / migraine (intranasal)", "r": "Standard", "d": "1 mg (1 spray in one nostril); may repeat 1 mg in 60-90 min", "t": "Sequence may repeat in 3-4 h", "n": "Initial 2 mg (1 spray each nostril) only if able to remain recumbent"},
+    {"c": "Elderly / hepatic or renal impairment", "r": "Reduced", "d": "Lower initial dose and longer dosing intervals (e.g., intranasal 1 mg, repeat after 90-120 min)", "t": "Extended interval", "n": "Titrate cautiously"},
+    {"c": "Preoperative medication (IM)", "r": "Preop", "d": "2 mg IM about 60-90 minutes before surgery", "t": "Single dose", "n": "Adjust to patient and procedure"}
+  ],
+  "admin": [
+    "Give by intramuscular or slow intravenous injection, or as a metered nasal spray; do not administer by uncontrolled rapid IV push in unstable patients",
+    "For the nasal spray, prime the unit before first use and follow the dosing sequence instructions",
+    "Use the lowest effective dose for the shortest duration; reassess pain and sedation regularly",
+    "Have opioid reversal (naloxone) and resuscitation equipment available",
+    "Do not abruptly discontinue after prolonged use without considering withdrawal"
+  ],
+  "moa": "Butorphanol is an agonist at kappa opioid receptors and a partial agonist/antagonist at mu opioid receptors. Kappa agonism produces analgesia and sedation, while mu activity is mixed, giving a ceiling effect on respiratory depression and the potential to precipitate withdrawal in patients physically dependent on full mu agonists.",
+  "contra": {
+    "absolute": ["Hypersensitivity to butorphanol or to the preservative (benzethonium chloride in nasal spray)", "Significant respiratory depression in unmonitored settings", "Acute or severe bronchial asthma without resuscitation facilities", "Known or suspected gastrointestinal obstruction including paralytic ileus"],
+    "relative": ["Opioid dependence (may precipitate withdrawal)", "Head injury or raised intracranial pressure", "Hepatic or renal impairment", "Cardiovascular disease (raises pulmonary artery pressure/cardiac work)", "Elderly or debilitated patients"],
+    "monitor": ["Concurrent CNS depressants/benzodiazepines", "History of substance use disorder", "Pregnancy near term"]
+  },
+  "preg": "Avoid use near term and during labor in compromised pregnancies; opioids can cause neonatal respiratory depression and, with prolonged use, neonatal opioid withdrawal syndrome. Use during pregnancy only if the benefit justifies the potential risk to the fetus.",
+  "lact": "Small amounts are excreted in breast milk; the amount an infant receives is likely clinically insignificant at usual doses, but use with caution and monitor the infant for sedation and feeding difficulties.",
+  "renal": "Reduce the dose and/or extend the dosing interval in renal impairment, as clearance is decreased and effects may be prolonged.",
+  "hepatic": "Reduce the dose and/or extend the dosing interval in hepatic impairment; systemic exposure and elimination half-life are increased.",
+  "interactions": {
+    "major": ["Benzodiazepines and other CNS depressants - profound sedation, respiratory depression, coma and death; avoid or reduce doses", "Other opioids - in opioid-dependent patients butorphanol may precipitate acute withdrawal; in others additive depression", "Alcohol - additive CNS and respiratory depression"],
+    "moderate": ["Serotonergic drugs (SSRIs, SNRIs, MAOIs, triptans) - serotonin syndrome risk", "MAO inhibitors - potentiation; caution", "Nasal vasoconstrictors/decongestants - may reduce absorption of intranasal butorphanol", "CYP3A4 inhibitors - increased butorphanol exposure"],
+    "minor": ["Anticholinergics - increased risk of constipation/urinary retention"],
+    "food": "Not applicable (parenteral/intranasal).",
+    "alcohol": "Avoid alcohol; additive central nervous system and respiratory depression.",
+    "diagnostics": "May cause false-positive opioid results on some urine drug screens; can raise CSF/pulmonary artery pressures."
+  },
+  "se": {
+    "common": ["Drowsiness/somnolence", "Dizziness", "Nausea and vomiting", "Nasal congestion or unpleasant taste (intranasal)", "Sweating"],
+    "serious": ["Respiratory depression", "Hypotension", "Dependence and withdrawal", "Increased cardiac workload / raised pulmonary artery pressure"],
+    "rare": ["Hallucinations / dysphoria / confusion (kappa effects)", "Seizures", "Serotonin syndrome", "Severe hypersensitivity"],
+    "emergency": ["Severe respiratory depression / respiratory arrest", "Anaphylaxis", "Acute opioid withdrawal in dependent patients", "Profound hypotension"]
+  },
+  "monitoring": [
+    "Respiratory rate, oxygenation and level of sedation, especially with first doses and dose increases",
+    "Blood pressure and heart rate",
+    "Signs of misuse, abuse, dependence or diversion (Schedule IV controlled substance)",
+    "Withdrawal symptoms in opioid-dependent patients and on discontinuation after prolonged use"
+  ],
+  "counsel": [
+    "Habit forming: Yes - this is a controlled medicine (Schedule IV); take only as prescribed and do not share it",
+    "Do not drink alcohol or take sedatives/benzodiazepines with this medicine - the combination can stop your breathing",
+    "It may cause drowsiness and dizziness; do not drive or operate machinery until you know how it affects you",
+    "If you regularly use other opioids, tell your doctor - this drug can trigger sudden withdrawal",
+    "Seek emergency care for very slow or shallow breathing, extreme drowsiness or trouble waking"
+  ],
+  "pk": [
+    ["Onset", "IV within minutes; IM 10-30 min; intranasal ~15 minutes"],
+    ["Peak", "IM ~30-60 min; intranasal ~1-2 hours"],
+    ["Half-life", "Approximately 4-5 hours (longer in elderly and impairment)"],
+    ["Duration", "Analgesia approximately 3-4 hours"],
+    ["Storage", "Store at 20-25 C; protect from light; keep nasal spray upright"]
+  ],
+  "pearls": [
+    "Schedule IV controlled substance and HABIT FORMING - set 'Habit forming: Yes' and counsel on dependence/diversion",
+    "Mixed agonist-antagonist: can precipitate withdrawal in patients dependent on full mu agonists",
+    "Has a ceiling effect for respiratory depression but combination with benzodiazepines/alcohol is still dangerous",
+    "Naloxone reverses respiratory depression; higher or repeated doses may be needed",
+    "Intranasal form is useful for acute migraine but carries the same dependence and sedation risks"
+  ],
+  "missed": "Butorphanol is used as needed for pain, not on a strict fixed schedule, so take the next dose only when pain returns and the minimum interval has passed. Do not take extra doses to make up for a missed one.",
+  "overdose": "Overdose causes respiratory depression, marked sedation progressing to stupor or coma, miosis, hypotension and cardiovascular collapse. Manage the airway, support ventilation and give naloxone (repeat or infuse as needed because butorphanol's effect may outlast a single naloxone dose) with supportive care.",
+  "refs": [
+    ["FDA Butorphanol Tartrate Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22butorphanol+tartrate%22"],
+    ["FDA DailyMed - Butorphanol Tartrate (injection and nasal spray)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

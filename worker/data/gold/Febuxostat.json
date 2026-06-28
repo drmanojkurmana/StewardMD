@@ -1,0 +1,88 @@
+{
+  "generic": "Febuxostat",
+  "cls": "Xanthine oxidase inhibitor",
+  "pharm": "Antihyperuricemic (urate-lowering therapy)",
+  "tags": ["gout", "hyperuricemia", "urate-lowering", "xanthine oxidase", "uric acid"],
+  "quick": [
+    ["Adult dose", "40 mg OD; up to 80 mg OD"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Insufficient data; avoid"],
+    ["Lactation", "Not recommended"],
+    ["Renal", "Severe: limit to 40 mg OD"],
+    ["Hepatic", "Caution in severe impairment"],
+    ["Alcohol", "Limit; may worsen gout"],
+    ["Monitoring", "Serum uric acid, LFTs, CV status"]
+  ],
+  "summary": "Febuxostat is a xanthine oxidase inhibitor for chronic hyperuricemia in gout, used when allopurinol is inadequate, not tolerated or inadvisable. Started at 40 mg once daily, increased to 80 mg if target uric acid not reached. Carries a boxed warning for cardiovascular death.",
+  "indications": [
+    "Chronic management of hyperuricemia in adults with gout inadequately controlled by, intolerant of, or unsuitable for allopurinol"
+  ],
+  "dosage": [
+    {"c": "Hyperuricemia in gout (adult)", "r": "Standard", "d": "Start 40 mg once daily; increase to 80 mg if sUA >=6 mg/dL after 2 weeks", "t": "Once daily", "n": "Target sUA <6 mg/dL"},
+    {"c": "Severe renal impairment (CrCl 15-29)", "r": "Reduced", "d": "Limit to 40 mg once daily", "t": "Once daily", "n": "Limited data"},
+    {"c": "Flare prophylaxis at initiation", "r": "Adjunct", "d": "Concurrent NSAID or colchicine", "t": "With start of therapy", "n": "Continue up to 6 months"}
+  ],
+  "admin": [
+    "Take once daily, with or without food or antacids",
+    "Start concurrent NSAID or colchicine to prevent gout flares",
+    "Do not stop for a flare; treat the flare and continue febuxostat",
+    "Recheck serum uric acid 2 weeks after starting/dose change",
+    "Limit dose to 40 mg in severe renal impairment"
+  ],
+  "moa": "Selectively and potently inhibits both oxidized and reduced forms of xanthine oxidase, blocking conversion of hypoxanthine to xanthine and xanthine to uric acid. This lowers serum uric acid. Unlike allopurinol it does not inhibit other purine/pyrimidine enzymes at therapeutic doses.",
+  "contra": {
+    "absolute": ["Concomitant azathioprine or mercaptopurine", "Hypersensitivity to febuxostat"],
+    "relative": ["Established cardiovascular disease (CV death risk - boxed warning)", "Severe hepatic or renal impairment", "Organ transplant recipients (limited data)"],
+    "monitor": ["History of MI or stroke", "Hepatic dysfunction", "Patients beginning therapy (flare risk)"]
+  },
+  "preg": "Insufficient human data; avoid unless clearly needed. Animal studies showed no major effects but human safety is not established.",
+  "lact": "Not recommended; presence in human milk unknown. Decide to discontinue nursing or drug considering importance to mother.",
+  "renal": "No adjustment for mild-moderate impairment. In severe impairment (CrCl 15-29 mL/min) limit to 40 mg once daily. Not studied in CrCl <15 mL/min.",
+  "hepatic": "No adjustment for mild-moderate impairment. Use with caution in severe hepatic impairment (not studied). Monitor LFTs.",
+  "interactions": {
+    "major": ["Azathioprine / mercaptopurine / pegloticase analogues - contraindicated/avoid (xanthine oxidase metabolizes these, causing toxic accumulation)", "Theophylline - potential accumulation; caution"],
+    "moderate": ["Other XO-metabolized drugs - increased levels", "Concurrent urate-lowering agents - generally avoid duplication"],
+    "minor": ["Antacids - no significant effect on absorption"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Limit; alcohol raises uric acid and may precipitate flares.",
+    "diagnostics": "Lowers serum uric acid; may transiently elevate liver enzymes."
+  },
+  "se": {
+    "common": ["Gout flares (early in therapy)", "Liver enzyme elevations", "Nausea", "Arthralgia", "Rash"],
+    "serious": ["Cardiovascular death (boxed warning)", "Hepatotoxicity / hepatic failure", "Serious hypersensitivity (DRESS, SJS/TEN)"],
+    "rare": ["Thromboembolic events (MI, stroke)", "Severe skin reactions", "Rhabdomyolysis"],
+    "emergency": ["Acute MI or stroke", "Severe hepatic failure", "Severe skin reaction / DRESS / anaphylaxis"]
+  },
+  "monitoring": [
+    "Serum uric acid 2 weeks after start and dose changes (target <6 mg/dL)",
+    "Liver function tests at baseline and periodically / if symptoms",
+    "Cardiovascular signs and symptoms",
+    "Skin and hypersensitivity reactions"
+  ],
+  "counsel": [
+    "Expect possible gout flares early; do not stop the drug",
+    "Take prophylactic NSAID/colchicine as prescribed",
+    "Seek care for chest pain, shortness of breath, weakness, slurred speech",
+    "Report dark urine, jaundice, severe rash or fatigue",
+    "Take once daily regardless of food"
+  ],
+  "pk": [
+    ["Onset", "Urate lowering within days; assess at 2 weeks"],
+    ["Peak", "1-1.5 hours"],
+    ["Half-life", "~5-8 hours"],
+    ["Duration", "Once-daily dosing maintains effect"],
+    ["Storage", "Store at 20-25 C, protect from light"]
+  ],
+  "pearls": [
+    "Useful when allopurinol fails, is not tolerated, or is contraindicated",
+    "Boxed warning: higher CV death risk vs allopurinol (CARES trial)",
+    "Always co-prescribe flare prophylaxis at initiation",
+    "Do not combine with azathioprine/mercaptopurine"
+  ],
+  "missed": "Take the missed dose when remembered. If it is almost time for the next dose, skip it; do not double up.",
+  "overdose": "No specific antidote; manage with supportive care and symptom-directed treatment. Hemodialysis is not an effective means of removal.",
+  "refs": [
+    ["FDA Febuxostat Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22febuxostat%22"],
+    ["FDA DailyMed - Febuxostat", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

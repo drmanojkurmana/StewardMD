@@ -1,0 +1,91 @@
+{
+  "generic": "Gemfibrozil",
+  "cls": "Fibrate (lipid-regulating agent)",
+  "pharm": "Fibric acid derivative that lowers serum triglycerides and VLDL and raises HDL cholesterol; PPAR-alpha activator.",
+  "tags": ["Fibrate", "Lipid-lowering", "Triglyceride-lowering", "Oral", "Pancreatitis prevention", "Myopathy risk"],
+  "quick": [
+    ["Adult dose", "600 mg twice daily, 30 minutes before morning and evening meals"],
+    ["Meal", "Take 30 minutes before morning and evening meals"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Avoid; decision to discontinue drug or nursing"],
+    ["Renal", "Contraindicated in severe renal dysfunction"],
+    ["Hepatic", "Contraindicated in hepatic dysfunction/primary biliary cirrhosis"],
+    ["Alcohol", "Limit; can raise triglycerides and liver risk"],
+    ["Monitoring", "Lipids, LFTs, CBC, blood glucose; muscle symptoms"]
+  ],
+  "summary": "Gemfibrozil is a fibrate used as adjunct to diet for very high triglycerides (Types IV/V) with pancreatitis risk, and to reduce coronary heart disease risk in select Type IIb patients who have not responded to other measures. It lowers triglycerides/VLDL and raises HDL. Key cautions: increased risk of gallstones and of myopathy/rhabdomyolysis (markedly so with statins - combination with simvastatin is contraindicated), and it is contraindicated in hepatic or severe renal dysfunction. It strongly inhibits drug clearance via OATP1B1/CYP2C8/glucuronidation, contraindicating combination with repaglinide, dasabuvir, and selexipag.",
+  "indications": [
+    "Adjunct to diet for very high serum triglycerides (Types IV and V hyperlipidemia) at risk of pancreatitis, not responding to diet",
+    "Reducing coronary heart disease risk in Type IIb patients without history/symptoms of CHD who have not responded to diet, weight loss, exercise, and other lipid drugs"
+  ],
+  "dosage": [
+    {"c": "Hyperlipidemia (adults)", "r": "Oral", "d": "600 mg twice daily", "t": "30 minutes before morning and evening meals", "n": "Total 1,200 mg/day"},
+    {"c": "Inadequate response", "r": "Oral", "d": "Reassess at 3 months", "t": "-", "n": "Discontinue if lipid response is inadequate after 3 months"}
+  ],
+  "admin": [
+    "Take 30 minutes before the morning and evening meals",
+    "Continue dietary therapy (low saturated fat/cholesterol) alongside",
+    "Do not combine with simvastatin, repaglinide, dasabuvir, or selexipag",
+    "If combined with another statin, use the lowest effective statin dose and monitor for myopathy",
+    "Discontinue if no adequate lipid response after 3 months"
+  ],
+  "moa": "Fibric acid derivative (PPAR-alpha agonist) that decreases hepatic VLDL triglyceride production and increases lipoprotein lipase activity, lowering serum triglycerides and VLDL cholesterol; it also raises HDL cholesterol (HDL2, HDL3, apo AI/AII). Effects on LDL are variable.",
+  "contra": {
+    "absolute": ["Hepatic dysfunction including primary biliary cirrhosis", "Severe renal dysfunction", "Pre-existing gallbladder disease", "Hypersensitivity to gemfibrozil", "Concomitant simvastatin", "Concomitant repaglinide", "Concomitant dasabuvir", "Concomitant selexipag"],
+    "relative": ["Combination with other statins (myopathy risk)", "Combination with other fibrates", "Mild-moderate renal impairment", "Anticoagulant therapy (enhanced effect)"],
+    "monitor": ["Liver function tests", "Lipid panel", "Complete blood count", "Muscle symptoms/CK if symptomatic"]
+  },
+  "preg": "Limited human data; use only if clearly needed and potential benefit justifies risk (historically pregnancy category C).",
+  "lact": "Unknown whether excreted in human milk; because of potential for tumorigenicity seen in animals, decide whether to discontinue nursing or the drug.",
+  "renal": "Contraindicated in severe renal dysfunction; use caution with mild-to-moderate impairment (increased myopathy risk; consider dose reduction or avoid).",
+  "hepatic": "Contraindicated in hepatic dysfunction and primary biliary cirrhosis; monitor liver function and discontinue if abnormalities persist.",
+  "interactions": {
+    "major": ["Simvastatin (contraindicated) and other statins - markedly increased rhabdomyolysis/myopathy risk", "Repaglinide (contraindicated) - severe hypoglycemia from CYP2C8/OATP1B1 inhibition", "Dasabuvir and selexipag (contraindicated) - increased exposure", "Warfarin/anticoagulants - potentiated anticoagulation, bleeding"],
+    "moderate": ["Other CYP2C8/OATP1B1 substrates (e.g., loperamide, paclitaxel, montelukast) - increased levels", "Sulfonylureas - enhanced hypoglycemia", "Colestipol/bile acid sequestrants - reduce gemfibrozil absorption (separate dosing)"],
+    "minor": ["Ezetimibe - possible increased cholelithiasis risk"],
+    "food": "Take 30 minutes before meals; food reduces absorption if taken with meals",
+    "alcohol": "Limit alcohol - raises triglycerides and hepatic risk",
+    "diagnostics": "Monitor LFTs and CBC; check CK if muscle symptoms; reduce/hold interacting drug doses."
+  },
+  "se": {
+    "common": ["Dyspepsia", "Abdominal pain", "Diarrhea", "Nausea/vomiting", "Fatigue", "Headache", "Eczema/rash", "Vertigo"],
+    "serious": ["Myopathy and rhabdomyolysis (especially with statins)", "Cholelithiasis/cholecystitis requiring surgery", "Hepatotoxicity (elevated transaminases, cholestasis)", "Severe hypoglycemia with repaglinide", "Hematologic effects (anemia, leukopenia, thrombocytopenia)"],
+    "rare": ["Pancreatitis", "Atrial fibrillation", "Hypersensitivity reactions including angioedema", "Photosensitivity"],
+    "emergency": ["Rhabdomyolysis with acute kidney injury", "Severe hypoglycemia (with repaglinide)", "Acute pancreatitis", "Severe hypersensitivity/angioedema"]
+  },
+  "monitoring": [
+    "Fasting lipid panel (triglycerides, LDL, HDL) at baseline and during therapy",
+    "Liver function tests at baseline and periodically; discontinue if persistently abnormal",
+    "Complete blood count periodically during the first year",
+    "Muscle symptoms; creatine kinase if myopathy suspected",
+    "Blood glucose (when combined with antidiabetic agents)",
+    "INR when on warfarin"
+  ],
+  "counsel": [
+    "Take 30 minutes before your morning and evening meals",
+    "Keep following your low-fat diet and lifestyle changes",
+    "Report unexplained muscle pain, tenderness, or weakness, especially with dark urine",
+    "Report severe upper-abdominal pain (gallstones/pancreatitis) or yellowing of skin/eyes",
+    "Tell your doctor about all medicines - some (like certain statins and diabetes pills) must not be combined"
+  ],
+  "pk": [
+    ["Onset", "Lipid effects over days to weeks"],
+    ["Peak", "Plasma ~1-2 hours"],
+    ["Half-life", "~1.5 hours"],
+    ["Duration", "Twice-daily dosing; maximal lipid effect in weeks"],
+    ["Storage", "Room temperature; protect from light and moisture"]
+  ],
+  "pearls": [
+    "Combination with simvastatin, repaglinide, dasabuvir, and selexipag is contraindicated",
+    "Markedly increases myopathy/rhabdomyolysis risk with any statin - avoid or minimize",
+    "Increases gallstone formation - like clofibrate (lithogenic bile)",
+    "Best for very high triglycerides and pancreatitis prevention; effect on LDL is variable",
+    "Inhibits OATP1B1, CYP2C8, and glucuronidation - many drug interactions"
+  ],
+  "missed": "Take the missed dose as soon as remembered before a meal; if it is nearly time for the next dose, skip it. Do not double the dose.",
+  "overdose": "Reported overdoses caused abdominal cramps, abnormal LFTs, diarrhea, increased CK, joint/muscle pain, nausea, and vomiting. There is no specific antidote; provide symptomatic and supportive care.",
+  "refs": [
+    ["FDA Gemfibrozil Tablets Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22gemfibrozil%22"],
+    ["DailyMed - Gemfibrozil", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=gemfibrozil"]
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "generic": "Tetracycline",
+  "cls": "Tetracycline-class antibacterial (broad-spectrum bacteriostatic)",
+  "pharm": "Bacteriostatic antibiotic that inhibits bacterial protein synthesis by binding the 30S ribosomal subunit; broad activity against Gram-positive, Gram-negative, atypical and some protozoal organisms",
+  "tags": ["Antibiotic", "Tetracycline", "Bacteriostatic", "Broad-spectrum", "Acne", "Rickettsia"],
+  "quick": [
+    ["Adult dose", "250 mg QID or 500 mg BID (up to 500 mg QID severe)"],
+    ["Meal", "Empty stomach, 1 h before or 2 h after food/dairy"],
+    ["Pregnancy", "Contraindicated (teeth/bone, maternal liver)"],
+    ["Lactation", "Avoid (dental staining, theoretical)"],
+    ["Renal", "Avoid / reduce; anti-anabolic, accumulates"],
+    ["Hepatic", "Caution; avoid high doses (hepatotoxicity)"],
+    ["Alcohol", "Avoid (additive hepatic risk)"],
+    ["Monitoring", "Renal and hepatic function on prolonged use"]
+  ],
+  "summary": "Tetracycline is a broad-spectrum bacteriostatic antibiotic that inhibits bacterial protein synthesis at the 30S ribosome. It is used for susceptible respiratory, genitourinary, rickettsial, chlamydial, mycoplasmal and skin infections, acne, and as part of Helicobacter pylori regimens. Absorption is impaired by food, dairy and di/trivalent cations (calcium, magnesium, aluminum, iron, zinc), so it is taken on an empty stomach. It is contraindicated in pregnancy, lactation and children under 8 years owing to permanent tooth discoloration and effects on bone growth. Photosensitivity, esophageal irritation and superinfection are notable adverse effects.",
+  "indications": [
+    "Upper and lower respiratory tract infections caused by susceptible organisms",
+    "Rickettsial infections (Rocky Mountain spotted fever, typhus, Q fever)",
+    "Chlamydial and mycoplasmal infections (including atypical pneumonia, urethritis)",
+    "Acne vulgaris",
+    "Brucellosis, cholera, plague, tularemia (with streptomycin where indicated)",
+    "Helicobacter pylori eradication (combination regimens)",
+    "Syphilis and other infections in penicillin-allergic patients"
+  ],
+  "dosage": [
+    {"c": "General adult infection", "r": "Oral", "d": "250 mg four times daily or 500 mg twice daily", "t": "QID or BID", "n": "Usual 1 g/day"},
+    {"c": "Severe infection", "r": "Oral", "d": "Up to 500 mg four times daily", "t": "QID", "n": ""},
+    {"c": "Children >8 years", "r": "Oral", "d": "25-50 mg/kg/day in 4 divided doses", "t": "QID", "n": "Contraindicated <=8 years"},
+    {"c": "Acne", "r": "Oral", "d": "500 mg twice daily initially, then taper to 125-500 mg/day", "t": "BID then OD/BID", "n": "Prolonged course"},
+    {"c": "Streptococcal infection", "r": "Oral", "d": "Continue therapy for at least 10 days", "t": "Per regimen", "n": ""},
+    {"c": "Uncomplicated gonococcal / chlamydial urethritis", "r": "Oral", "d": "500 mg four times daily for 7 days", "t": "QID", "n": ""}
+  ],
+  "admin": [
+    "Take on an empty stomach, at least 1 hour before or 2 hours after meals",
+    "Avoid dairy products, antacids and iron/zinc/calcium/magnesium supplements within 2-3 hours",
+    "Take with a full glass of water and remain upright to reduce esophageal irritation",
+    "Do not use expired tetracycline (risk of Fanconi-type syndrome from degradation products)",
+    "Complete the full prescribed course"
+  ],
+  "moa": "Binds reversibly to the 30S ribosomal subunit of susceptible bacteria, blocking attachment of aminoacyl-tRNA to the mRNA-ribosome complex and thereby inhibiting bacterial protein synthesis; the effect is primarily bacteriostatic.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to any tetracycline",
+      "Pregnancy",
+      "Breastfeeding",
+      "Children 8 years and younger"
+    ],
+    "relative": [
+      "Renal impairment",
+      "Hepatic impairment",
+      "Systemic lupus erythematosus",
+      "Myasthenia gravis",
+      "Esophageal obstruction or dysphagia"
+    ],
+    "monitor": ["Renal function", "Liver function tests", "Signs of superinfection", "Photosensitivity reactions"]
+  },
+  "preg": "Contraindicated. Use during the second half of pregnancy can cause permanent yellow-grey-brown tooth discoloration and enamel hypoplasia and may inhibit fetal bone growth; high doses have been associated with maternal hepatotoxicity.",
+  "lact": "Contraindicated/avoid. Tetracyclines are excreted in breast milk; risk of dental staining and inhibition of bone growth in the infant (although milk calcium may limit absorption).",
+  "renal": "Avoid or reduce dose; tetracycline (unlike doxycycline) is renally eliminated and accumulates in renal impairment. It has an anti-anabolic effect that can raise BUN; excessive accumulation may cause azotemia, hyperphosphatemia and acidosis.",
+  "hepatic": "Use with caution; avoid high or prolonged dosing. Hepatotoxicity, including fatal fatty liver, has occurred, particularly in pregnancy, renal impairment and with high intravenous doses.",
+  "interactions": {
+    "major": [
+      "Oral retinoids (isotretinoin/acitretin) - increased intracranial hypertension risk",
+      "Penicillins - bacteriostatic tetracycline may antagonize bactericidal activity",
+      "Warfarin - enhanced anticoagulant effect"
+    ],
+    "moderate": [
+      "Antacids / iron / calcium / magnesium / zinc / dairy - markedly reduced absorption (chelation)",
+      "Oral contraceptives - possible reduced efficacy",
+      "Methoxyflurane - increased nephrotoxicity",
+      "Digoxin - increased levels in some patients"
+    ],
+    "minor": ["Atovaquone - reduced atovaquone levels"],
+    "food": "Food and dairy impair absorption; take on an empty stomach",
+    "alcohol": "Avoid; additive hepatotoxicity risk",
+    "diagnostics": "May cause false elevations in urinary catecholamines and interfere with some glucose tests; can raise BUN"
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Diarrhea", "Epigastric discomfort", "Photosensitivity", "Glossitis", "Anogenital pruritus"],
+    "serious": [
+      "Esophageal ulceration",
+      "Hepatotoxicity (fatty liver)",
+      "Clostridioides difficile colitis",
+      "Benign intracranial hypertension (pseudotumor cerebri)",
+      "Azotemia / worsening renal function",
+      "Photo-onycholysis and severe sunburn"
+    ],
+    "rare": ["Anaphylaxis", "Stevens-Johnson syndrome", "Hemolytic anemia / thrombocytopenia", "Permanent tooth discoloration in children", "Fanconi syndrome from outdated product"],
+    "emergency": ["Anaphylaxis", "Severe C. difficile colitis", "Acute hepatic failure", "Raised intracranial pressure with vision loss"]
+  },
+  "monitoring": ["Renal function (BUN, creatinine) on prolonged therapy", "Liver function tests", "Signs of superinfection or C. difficile", "Photosensitivity and skin reactions"],
+  "counsel": [
+    "Take on an empty stomach with a full glass of water and stay upright",
+    "Separate from milk, antacids, iron and calcium/magnesium supplements by 2-3 hours",
+    "Use sunscreen and avoid excess sun exposure",
+    "Do not use during pregnancy, breastfeeding or in young children",
+    "Discard any leftover/expired tablets",
+    "Complete the full course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Antibacterial effect within hours; steady state in ~24-48 h"],
+    ["Peak", "~2-4 h"],
+    ["Half-life", "~6-11 h (prolonged in renal impairment)"],
+    ["Duration", "Dosed every 6-12 h"],
+    ["Storage", "20-25 C, protect from light and moisture; do not use after expiry"]
+  ],
+  "pearls": [
+    "Chelates di/trivalent cations - separate from dairy, antacids, iron and calcium",
+    "Avoid in pregnancy, lactation and children <=8 years (tooth/bone effects)",
+    "Outdated tetracycline can cause a reversible Fanconi-type renal tubular syndrome",
+    "Photosensitivity is common - counsel on sun protection",
+    "Renally excreted, so doxycycline is preferred in renal impairment"
+  ],
+  "missed": "Take the missed dose as soon as remembered, then space remaining doses; if it is almost time for the next dose, skip it. Do not double up.",
+  "overdose": "Acute overdose mainly causes gastrointestinal upset (nausea, vomiting). The principal serious risk with very high or intravenous dosing is hepatotoxicity, especially in pregnancy and renal impairment. Management is supportive; there is no specific antidote, and dialysis is not effective.",
+  "refs": [
+    ["FDA Prescribing Information - Tetracycline Hydrochloride (DailyMed)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tetracycline+hydrochloride"],
+    ["CDC Rickettsial Disease / Tetracycline Treatment Guidance", "https://www.cdc.gov/rmsf/hcp/clinical-guidance/"]
+  ]
+}

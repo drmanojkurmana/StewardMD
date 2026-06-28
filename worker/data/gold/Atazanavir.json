@@ -1,0 +1,92 @@
+{
+  "generic": "Atazanavir",
+  "cls": "HIV-1 protease inhibitor (azapeptide)",
+  "pharm": "Antiretroviral agent",
+  "tags": ["HIV", "protease inhibitor", "antiretroviral", "ART", "hyperbilirubinemia"],
+  "quick": [
+    ["Adult dose", "300 mg + ritonavir 100 mg PO once daily with food (or 400 mg unboosted in select cases)"],
+    ["Meal", "Take with food to enhance absorption"],
+    ["Pregnancy", "Boosted regimen used in pregnancy when benefit justifies"],
+    ["Lactation", "Avoid breastfeeding (HIV transmission and exposure)"],
+    ["Renal", "No adjustment; avoid TDF co-use on dialysis (treatment-naive)"],
+    ["Hepatic", "Caution; contraindicated/avoid in severe impairment"],
+    ["Alcohol", "Limit; adds hepatic stress"],
+    ["Monitoring", "Bilirubin, LFTs, ECG (PR), lipids, viral load/CD4"]
+  ],
+  "summary": "Atazanavir is an azapeptide HIV-1 protease inhibitor, usually boosted with ritonavir (or cobicistat) and taken with food once daily. It commonly causes benign indirect hyperbilirubinemia (jaundice/scleral icterus) and prolongs the PR interval (first-degree AV block). Acid-suppressing drugs markedly reduce its absorption and require careful spacing/dose limits.",
+  "indications": [
+    "Treatment of HIV-1 infection in adults and pediatric patients (weight-based) in combination with other antiretrovirals",
+    "Antiretroviral-naive and treatment-experienced adults (boosted regimen preferred)"
+  ],
+  "dosage": [
+    {"c": "Treatment-naive adult (boosted)", "r": "Standard", "d": "Atazanavir 300 mg + ritonavir 100 mg once daily with food", "t": "Once daily", "n": "Preferred boosted regimen"},
+    {"c": "Treatment-naive adult (unboosted)", "r": "Alternative", "d": "Atazanavir 400 mg once daily with food", "t": "Once daily", "n": "Only if unable to tolerate ritonavir; not with tenofovir DF or PPI"},
+    {"c": "Treatment-experienced adult", "r": "Boosted", "d": "Atazanavir 300 mg + ritonavir 100 mg once daily with food", "t": "Once daily", "n": "Boosting required"},
+    {"c": "Pregnancy (2nd/3rd trimester with H2 blocker or TDF)", "r": "Boosted", "d": "Atazanavir 400 mg + ritonavir 100 mg once daily with food", "t": "Once daily", "n": "Per label; consult HIV/pregnancy guidance"},
+    {"c": "Pediatric (weight-based, boosted)", "r": "Standard", "d": "Weight-based atazanavir 150-300 mg + ritonavir once daily", "t": "Once daily", "n": "See label weight bands; not for infants <3 months"}
+  ],
+  "admin": [
+    "Take with food to optimize absorption and reduce variability",
+    "Separate from antacids/buffered medicines by at least 2 hours",
+    "If a PPI is unavoidable, restrict to PPI dose <=omeprazole 20 mg equivalent, given >=12 hours before atazanavir, and only in treatment-naive boosted patients",
+    "Give H2-receptor antagonists simultaneously with or >=10 hours after atazanavir with dose adjustments per label",
+    "Swallow capsules whole; oral powder must be taken with food and boosted"
+  ],
+  "moa": "Selectively inhibits the HIV-1 protease enzyme, preventing cleavage of Gag and Gag-Pol polyprotein precursors. This yields immature, non-infectious viral particles and suppresses HIV-1 replication. Co-administered ritonavir or cobicistat inhibits CYP3A4 to boost atazanavir plasma concentrations.",
+  "contra": {
+    "absolute": ["Hypersensitivity to atazanavir", "Co-administration with drugs highly dependent on CYP3A clearance with narrow margins (e.g., lovastatin, simvastatin, midazolam oral, triazolam, ergot alkaloids, sildenafil for PAH, lurasidone, pimozide, rifampin, St John's wort, alfuzosin, irinotecan with boosting)"],
+    "relative": ["Severe hepatic impairment", "Pre-existing conduction system disease (PR prolongation)", "History of nephrolithiasis/cholelithiasis"],
+    "monitor": ["Diabetes / hyperglycemia", "Hemophilia (bleeding)", "Concurrent acid-reducing therapy"]
+  },
+  "preg": "Boosted atazanavir is used in pregnancy when the benefit justifies the risk; do not use unboosted. Avoid co-administration with tenofovir DF or an H2-blocker in pregnancy unless dosing is adjusted per label; monitor maternal bilirubin and neonatal hyperbilirubinemia.",
+  "lact": "Breastfeeding is not recommended for women living with HIV in settings where safe alternatives exist, because of the risk of HIV transmission and infant drug exposure.",
+  "renal": "No dose adjustment for renal impairment. In treatment-naive patients on hemodialysis, avoid the combination with tenofovir DF; atazanavir is not significantly removed by dialysis.",
+  "hepatic": "Use with caution in mild-moderate hepatic impairment; not recommended (or contraindicated for boosted use) in severe hepatic impairment (Child-Pugh C). Monitor liver enzymes, especially in hepatitis B/C co-infection.",
+  "interactions": {
+    "major": ["Proton pump inhibitors - markedly reduce atazanavir absorption and may cause virologic failure; restrict and space dosing", "Strong CYP3A inducers (rifampin, St John's wort, carbamazepine) - reduce atazanavir levels", "CYP3A substrates with narrow index (simvastatin, lovastatin, oral midazolam, ergots, pimozide) - serious toxicity", "Other PR-prolonging drugs (beta-blockers, calcium channel blockers, digoxin) - additive heart block"],
+    "moderate": ["H2-receptor antagonists - reduce atazanavir exposure; require spacing/dose changes", "Tenofovir DF - lowers atazanavir levels (requires boosting)", "Tadalafil/sildenafil for ED - increased PDE5 inhibitor levels (reduce dose)", "Antidiabetic and statin agents - dose adjustment"],
+    "minor": ["Antacids - transient reduced absorption if not spaced", "Oral contraceptives - altered hormone levels"],
+    "food": "Take with food; food increases bioavailability and reduces variability. Avoid acidic/buffered antacid timing conflicts.",
+    "alcohol": "Limit alcohol; may add to hepatic stress.",
+    "diagnostics": "Commonly raises indirect (unconjugated) bilirubin; prolongs PR interval on ECG."
+  },
+  "se": {
+    "common": ["Indirect hyperbilirubinemia / jaundice / scleral icterus", "Nausea", "Diarrhea", "Headache", "Rash", "Fatigue"],
+    "serious": ["PR-interval prolongation / first-degree AV block", "Severe skin reactions (Stevens-Johnson syndrome, DRESS)", "Nephrolithiasis and cholelithiasis", "Hepatotoxicity", "Hyperglycemia / new-onset diabetes"],
+    "rare": ["Second/third-degree AV block", "Lactic acidosis (regimen-related)", "Immune reconstitution inflammatory syndrome", "Lipodystrophy / fat redistribution"],
+    "emergency": ["Severe hypersensitivity / Stevens-Johnson syndrome / DRESS", "Symptomatic high-degree AV block", "Acute hepatic failure"]
+  },
+  "monitoring": [
+    "Total and direct bilirubin and liver enzymes at baseline and periodically",
+    "ECG/PR interval in patients with conduction risk or on PR-prolonging drugs",
+    "HIV-1 RNA viral load and CD4 count to assess response",
+    "Fasting glucose/lipids; renal imaging if stone symptoms"
+  ],
+  "counsel": [
+    "Always take with food and exactly as prescribed; missing doses can lead to resistance",
+    "Yellowing of the eyes or skin is common, usually harmless and reversible - but report it",
+    "Tell your provider before taking antacids or heartburn medicines (especially PPIs) - timing matters",
+    "Report rash, especially with fever or blisters, immediately",
+    "Report fainting, palpitations or severe abdominal/flank pain"
+  ],
+  "pk": [
+    ["Onset", "Plasma suppression of HIV replication within days; viral load falls over weeks"],
+    ["Peak", "Approximately 2.5 hours after a dose with food"],
+    ["Half-life", "Approximately 7 hours (boosted, with ritonavir)"],
+    ["Duration", "Once-daily dosing when boosted"],
+    ["Storage", "Store at 25 C (excursions 15-30 C); keep in original container"]
+  ],
+  "pearls": [
+    "Indirect hyperbilirubinemia (UGT1A1 inhibition) is expected and benign - do not stop for isolated bilirubin rise",
+    "Prolongs the PR interval; use caution with other AV-nodal blocking drugs and in conduction disease",
+    "Boost with ritonavir (or cobicistat) for reliable levels; unboosted use is limited",
+    "Acid suppression (PPIs especially) is the classic cause of atazanavir failure - manage gastric pH carefully",
+    "Take with food; atazanavir absorption is pH- and food-dependent"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember with food, unless it is almost time for the next dose - then skip the missed dose. Do not double up. Maintaining adherence is critical to prevent resistance.",
+  "overdose": "Experience is limited; expected effects are PR prolongation and asymptomatic indirect hyperbilirubinemia/jaundice. Manage supportively with ECG monitoring; atazanavir is highly protein-bound and not appreciably removed by dialysis.",
+  "refs": [
+    ["FDA Atazanavir (Reyataz) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22atazanavir%22"],
+    ["FDA DailyMed - Atazanavir Sulfate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

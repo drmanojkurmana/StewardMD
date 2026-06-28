@@ -1,0 +1,94 @@
+{
+  "generic": "Ferric Carboxymaltose",
+  "cls": "Parenteral (IV) iron replacement product",
+  "pharm": "Iron-carbohydrate complex / hematinic",
+  "tags": ["IV iron", "iron deficiency anemia", "hematinic", "Injectafer", "CKD anemia", "heart failure"],
+  "quick": [
+    ["Adult dose", "750 mg IV x2 doses >=7 days apart (>=50 kg)"],
+    ["Meal", "Not applicable (IV)"],
+    ["Pregnancy", "Avoid 1st trimester; use 2nd/3rd if needed"],
+    ["Lactation", "Compatible; minimal milk transfer"],
+    ["Renal", "Indicated in non-dialysis CKD; no dose change"],
+    ["Hepatic", "No specific adjustment; avoid iron overload"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Serum phosphate, Hb, iron indices, BP, hypersensitivity"]
+  ],
+  "summary": "Ferric carboxymaltose (Injectafer) is an IV iron-carbohydrate complex for iron deficiency anemia in patients intolerant of or unresponsive to oral iron, in non-dialysis CKD, and for iron deficiency in NYHA II/III heart failure. Given as two 750 mg doses at least 7 days apart (>=50 kg) or 15 mg/kg (<50 kg). Key risks are hypersensitivity (including anaphylaxis), symptomatic hypophosphatemia, and transient hypertension.",
+  "indications": [
+    "Iron deficiency anemia in adults and pediatric patients >=1 year with intolerance or unsatisfactory response to oral iron",
+    "Iron deficiency anemia in adults with non-dialysis-dependent chronic kidney disease",
+    "Iron deficiency in adults with NYHA class II/III heart failure to improve exercise capacity"
+  ],
+  "dosage": [
+    {"c": "IDA adult >=50 kg", "r": "Two-dose course", "d": "750 mg IV per dose; cumulative 1,500 mg of iron per course", "t": "Two doses separated by >=7 days", "n": "May repeat course if IDA recurs"},
+    {"c": "IDA adult >=50 kg (alternative)", "r": "Single dose", "d": "15 mg/kg up to maximum 1,000 mg IV", "t": "Single dose per course", "n": "Adult option only"},
+    {"c": "IDA patient <50 kg (incl. pediatric >=1 yr)", "r": "Weight-based", "d": "15 mg/kg IV per dose", "t": "Two doses separated by >=7 days", "n": "Per course"},
+    {"c": "Iron deficiency in heart failure", "r": "Weight/Hb-based", "d": "Per Table 1 of label (by body weight <70 vs >=70 kg and Hb)", "t": "Initial course then maintenance", "n": "NYHA II/III to improve exercise capacity"}
+  ],
+  "admin": [
+    "Administer IV as slow push at ~100 mg (2 mL)/min or as infusion diluted in up to 250 mL 0.9% NaCl (concentration not below 2 mg iron/mL)",
+    "Infuse over at least 15 minutes when given as infusion",
+    "Avoid extravasation - causes persistent brown skin staining; stop infusion immediately if it occurs",
+    "Observe for hypersensitivity during and for at least 30 minutes after each administration until clinically stable",
+    "Only give where personnel and resuscitation/anaphylaxis therapies are immediately available",
+    "Single-dose vials; discard unused portion"
+  ],
+  "moa": "Ferric carboxymaltose is a colloidal iron (III) hydroxide complexed with carboxymaltose, a carbohydrate polymer. The complex is taken up by the reticuloendothelial system where it dissociates to release iron, which is then incorporated into ferritin/transferrin and delivered to the bone marrow for incorporation into hemoglobin, replenishing depleted iron stores.",
+  "contra": {
+    "absolute": ["Hypersensitivity to ferric carboxymaltose or any component"],
+    "relative": ["Iron overload states (hemochromatosis, hemosiderosis)", "Anemia not due to iron deficiency", "Active serious infection (iron may worsen)"],
+    "monitor": ["Patients at risk for hypophosphatemia (repeat courses, malnutrition, vitamin D deficiency, hyperparathyroidism)", "Pre-existing hypertension", "Prior hypersensitivity to other parenteral iron"]
+  },
+  "preg": "Parenteral iron may cause hypersensitivity reactions with serious fetal consequences such as fetal bradycardia. Avoid in the first trimester; if needed, use in the 2nd/3rd trimester when benefit justifies risk. Untreated maternal iron deficiency anemia also carries risk. Monitor the fetus during administration after the first trimester.",
+  "lact": "Iron is present in human milk in small amounts; passage of ferric carboxymaltose into breast milk is minimal and considered compatible with breastfeeding. Consider monitoring breastfed infants for GI effects (constipation, diarrhea).",
+  "renal": "Indicated for IDA in adults with non-dialysis-dependent chronic kidney disease; no specific dose adjustment required. Renal elimination of iron is negligible.",
+  "hepatic": "No specific dosage adjustment provided. Use with caution and avoid in iron overload; assess iron status to prevent accumulation in hepatic dysfunction.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Oral iron preparations - reduced oral iron absorption; withhold oral iron during parenteral therapy", "Other parenteral iron products - additive risk of iron overload"],
+    "minor": [],
+    "food": "Not applicable; given intravenously.",
+    "alcohol": "No clinically significant interaction with alcohol.",
+    "diagnostics": "May transiently elevate serum ferritin and cause large transient elevations of serum iron; serum iron testing within 24 hours may overestimate iron. May cause asymptomatic transaminase elevations and reduce serum phosphate."
+  },
+  "se": {
+    "common": ["Nausea", "Hypertension", "Flushing", "Injection site reactions", "Erythema", "Hypophosphatemia", "Dizziness", "Headache (pediatric)", "Vomiting (pediatric)", "Rash (pediatric)"],
+    "serious": ["Symptomatic hypophosphatemia with osteomalacia and fractures (repeat courses)", "Serious hypertension", "Hypersensitivity reactions"],
+    "rare": ["Anaphylactic/anaphylactoid reactions (~0.1%)", "Hypotension, shock, loss of consciousness", "Persistent brown skin staining from extravasation"],
+    "emergency": ["Anaphylaxis (hypotension, wheezing, collapse, loss of consciousness)", "Severe symptomatic hypophosphatemia"]
+  },
+  "monitoring": [
+    "Hemoglobin and iron indices (ferritin, transferrin saturation) for response before re-dosing",
+    "Serum phosphate in patients at risk who require a repeat course",
+    "Blood pressure during and after each administration",
+    "Signs/symptoms of hypersensitivity for at least 30 minutes post-dose",
+    "Infusion site for extravasation"
+  ],
+  "counsel": [
+    "This is an IV iron given as a short course; stop oral iron during treatment unless told otherwise",
+    "Report any rash, itching, wheeze, dizziness or swelling during or after the infusion immediately",
+    "Report bone or muscle pain, weakness or fatigue which may signal low phosphate",
+    "Temporary flushing, mild headache or dizziness can occur",
+    "A brownish skin mark can occur if the medicine leaks at the injection site"
+  ],
+  "pk": [
+    ["Onset", "Reticulocyte rise within days; Hb rise over 1-2 weeks"],
+    ["Peak", "Serum iron 15 min to ~1.2 h after dose"],
+    ["Half-life", "Terminal ~7-12 h (adults); ~9.7 h (pediatric)"],
+    ["Duration", "Iron stores replenished over weeks; effect lasts months"],
+    ["Storage", "Store 20-25 C (68-77 F); do not freeze"]
+  ],
+  "pearls": [
+    "High-dose IV iron: up to 1,000-1,500 mg of iron per course, far more than older agents",
+    "Symptomatic hypophosphatemia is a characteristic class effect, more common than with most other IV irons - check phosphate before repeat courses",
+    "Test-dose not required, but observe >=30 min for hypersensitivity",
+    "Useful in non-dialysis CKD and NYHA II/III heart failure to improve exercise capacity",
+    "Extravasation leaves long-lasting brown skin staining - secure the line and stop at first sign of leakage"
+  ],
+  "missed": "Not patient-administered; each dose is given by a healthcare provider. If a scheduled second dose is delayed, complete the course as directed once at least 7 days have elapsed from the prior dose; reassess iron status and hemoglobin before re-dosing.",
+  "overdose": "Excessive dosing can cause iron accumulation/overload (hemosiderosis). Do not administer to patients with iron overload. Treat overload symptomatically; consider iron chelation (e.g., deferoxamine) for clinically significant accumulation. Monitor ferritin and transferrin saturation.",
+  "refs": [
+    ["FDA Injectafer (ferric carboxymaltose) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22injectafer%22"],
+    ["FDA DailyMed - Injectafer", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

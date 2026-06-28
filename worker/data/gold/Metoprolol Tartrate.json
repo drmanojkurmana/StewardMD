@@ -1,0 +1,104 @@
+{
+  "generic": "Metoprolol Tartrate (Immediate-Release)",
+  "cls": "Beta-1 selective (cardioselective) adrenergic receptor blocker",
+  "pharm": "Beta-blocker / antihypertensive, antianginal, post-MI agent",
+  "tags": ["Rx", "Oral", "Beta-1 selective blocker", "Do NOT stop abruptly", "Hypertension", "Angina pectoris", "Myocardial infarction", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "100 mg/day (HTN/angina), single or divided"],
+    ["Meal", "Take with or immediately after food"],
+    ["Pregnancy", "No demonstrated risk in studies; monitor neonate"],
+    ["Lactation", "Present in milk; monitor infant for bradycardia"],
+    ["Renal", "No dose adjustment needed"],
+    ["Hepatic", "Start low, titrate gradually"],
+    ["Alcohol", "Avoid; may worsen hypotension/dizziness"],
+    ["Monitoring", "Heart rate and blood pressure"]
+  ],
+  "summary": "Metoprolol tartrate is an immediate-release beta-1 selective (cardioselective) adrenergic blocker for hypertension, angina pectoris, and to reduce cardiovascular mortality after acute myocardial infarction in hemodynamically stable patients. It slows heart rate, reduces AV conduction, and lowers blood pressure. It is taken with or after meals and must never be stopped abruptly; taper over 1-2 weeks to avoid rebound ischemia.",
+  "indications": [
+    "Hypertension (to lower blood pressure and reduce cardiovascular risk)",
+    "Angina pectoris",
+    "Acute myocardial infarction — to reduce cardiovascular mortality in hemodynamically stable patients (with IV metoprolol therapy)"
+  ],
+  "dosage": [
+    {"c": "Hypertension (adults)", "r": "Oral", "d": "Start 100 mg/day; effective range 100-450 mg/day", "t": "Once daily or divided", "n": "Titrate at weekly (or longer) intervals; max effect of a dose ~1 week"},
+    {"c": "Angina pectoris", "r": "Oral", "d": "Start 100 mg/day; range 100-400 mg/day", "t": "Two divided doses", "n": "Increase at weekly intervals to response or pronounced HR slowing"},
+    {"c": "Myocardial infarction (early, after IV)", "r": "Oral", "d": "50 mg every 6 h for 48 h, then 100 mg twice daily", "t": "Per protocol", "n": "Start after tolerated IV metoprolol; for intolerant patients start 25-50 mg q6h"},
+    {"c": "Myocardial infarction (late/maintenance)", "r": "Oral", "d": "100 mg twice daily", "t": "Twice daily", "n": "Continue for at least 3 months"},
+    {"c": "Hepatic impairment", "r": "Oral", "d": "Initiate at low doses and titrate gradually", "t": "Per indication", "n": "Monitor closely for adverse events"}
+  ],
+  "admin": [
+    "Take regularly and continuously, preferably with or immediately following meals",
+    "Take at approximately the same time each day",
+    "Do not interrupt or discontinue without physician advice",
+    "When discontinuing, taper gradually over 1-2 weeks",
+    "Measure blood pressure near the end of the dosing interval to confirm 24-hour control"
+  ],
+  "moa": "Metoprolol is a beta-1 selective (cardioselective) adrenergic receptor blocker; this preference is not absolute and at higher plasma concentrations it also inhibits beta-2 receptors in bronchial and vascular muscle. It has no intrinsic sympathomimetic activity. It slows the sinus rate and decreases AV nodal conduction. Antihypertensive effects are attributed to reduced cardiac output, decreased central sympathetic outflow, and suppression of renin; antianginal effect is from reduced myocardial oxygen demand.",
+  "contra": {
+    "absolute": ["Severe bradycardia", "Second- or third-degree heart block", "Cardiogenic shock", "Systolic blood pressure <100 mmHg (in MI setting)", "Decompensated heart failure", "Sick sinus syndrome without a pacemaker", "Hypersensitivity to any component"],
+    "relative": ["Bronchospastic disease (avoid beta-blockers)", "Peripheral vascular disease (may aggravate arterial insufficiency)", "Diabetes (may mask hypoglycemia signs)", "Pheochromocytoma (start an alpha-blocker first)", "Thyrotoxicosis (abrupt withdrawal may precipitate thyroid storm)"],
+    "monitor": ["Heart rate and blood pressure during titration", "Worsening heart failure", "Hypoglycemia signs in fasting or vomiting patients", "Anaphylaxis (may be unresponsive to usual epinephrine doses)"]
+  },
+  "preg": "Published observational studies have not demonstrated an association of adverse developmental outcomes with maternal metoprolol use. Metoprolol crosses the placenta; neonates may be at risk of hypotension, hypoglycemia, bradycardia and respiratory depression and should be observed. Untreated hypertension and MI in pregnancy carry maternal and fetal risk.",
+  "lact": "Metoprolol is present in human milk. Monitor the breastfed infant for bradycardia and other signs of beta-blockade.",
+  "renal": "Systemic availability and half-life in renal failure do not differ to a clinically significant degree from normal subjects; no dosage reduction needed. Hemodialysis is unlikely to remove it appreciably.",
+  "hepatic": "Eliminated mainly by hepatic biotransformation (primarily CYP2D6). In hepatic impairment, initiate at low doses and titrate gradually while monitoring closely.",
+  "interactions": {
+    "major": [
+      "Strong CYP2D6 inhibitors (quinidine, fluoxetine, paroxetine, propafenone) — double metoprolol concentrations and reduce cardioselectivity",
+      "Catecholamine-depleting drugs (reserpine, MAO inhibitors) — additive hypotension/bradycardia",
+      "Clonidine — beta-blockers may exacerbate rebound hypertension on clonidine withdrawal"
+    ],
+    "moderate": [
+      "Digitalis glycosides, diltiazem, verapamil — slow AV conduction; increased bradycardia risk",
+      "Other antihypertensives — additive blood pressure lowering"
+    ],
+    "minor": ["Other (moderate/weak) CYP2D6 inhibitors likely to increase metoprolol concentration"],
+    "food": "Take with or immediately after meals for consistency.",
+    "alcohol": "Avoid; alcohol may potentiate hypotension and dizziness.",
+    "diagnostics": "May mask tachycardia from hypoglycemia or hyperthyroidism."
+  },
+  "se": {
+    "common": ["Tiredness / fatigue", "Dizziness", "Depression", "Shortness of breath", "Bradycardia", "Hypotension", "Diarrhea", "Pruritus", "Rash"],
+    "serious": ["Worsening heart failure", "Severe bradycardia or worsening AV block", "Bronchospasm in susceptible patients", "Masked hypoglycemia"],
+    "rare": ["Worsening angina or MI on abrupt withdrawal", "Aggravation of peripheral arterial insufficiency (Raynaud-type)", "Mental confusion, short-term memory loss"],
+    "emergency": ["Severe symptomatic bradycardia or syncope", "Acute decompensated heart failure", "Severe bronchospasm", "Anaphylaxis unresponsive to usual epinephrine doses"]
+  },
+  "monitoring": [
+    "Heart rate (assess for bradycardia)",
+    "Blood pressure (near end of dosing interval)",
+    "Signs of worsening heart failure",
+    "Blood glucose in diabetic, fasting, or vomiting patients",
+    "Clinical status during titration and on discontinuation"
+  ],
+  "counsel": [
+    "Take regularly and continuously, preferably with or immediately after meals",
+    "Do not interrupt or stop therapy without consulting your physician",
+    "If a dose is missed, take only the next scheduled dose; do not double up",
+    "Avoid driving or operating machinery until your response is known",
+    "Contact your physician if you have difficulty breathing",
+    "Inform any physician or dentist that you take this medication before surgery",
+    "Be aware of hypoglycemia risk if fasting or vomiting"
+  ],
+  "pk": [
+    ["Onset", "Within ~1 hour after oral dose"],
+    ["Peak", "Plasma peak ~1.5-2 hours"],
+    ["Half-life", "3 to 4 hours (7-9 hours in CYP2D6 poor metabolizers)"],
+    ["Duration", "Lower doses (100 mg) may not maintain full 24-hour effect"],
+    ["Storage", "20-25C (68-77F); excursions 15-30C; protect from moisture and heat, light-resistant container"]
+  ],
+  "pearls": [
+    "Never discontinue abruptly; taper over 1-2 weeks to avoid rebound angina/MI, especially in ischemic heart disease",
+    "Immediate-release tartrate: lower doses may need divided/more frequent dosing for 24-hour control",
+    "Cardioselectivity is dose-dependent and lost at higher doses",
+    "Primarily metabolized by CYP2D6; ~8% of Caucasians are poor metabolizers with higher levels",
+    "In pheochromocytoma, start an alpha-blocker before the beta-blocker",
+    "No dose adjustment in renal impairment; not appreciably dialyzable"
+  ],
+  "missed": "If a dose is missed, take only the next scheduled dose at the usual time. Do not double the dose to make up for a missed one.",
+  "overdose": "Overdose may cause severe bradycardia, hypotension, cardiogenic shock, AV block, heart failure, bronchospasm, hypoxia, impaired consciousness/coma, nausea and vomiting. Manage with intensive care: atropine/adrenergic drugs/pacemaker for bradycardia, IV vasopressors (dopamine/norepinephrine) for hypotension, glucagon and adrenergic drugs for heart failure/shock, bronchodilators for bronchospasm. Hemodialysis is unlikely to help.",
+  "refs": [
+    ["FDA Label — Metoprolol Tartrate Tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metoprolol+tartrate%22"],
+    ["DailyMed — Metoprolol Tartrate", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=metoprolol+tartrate"]
+  ]
+}

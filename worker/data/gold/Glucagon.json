@@ -1,0 +1,115 @@
+{
+  "generic": "Glucagon",
+  "cls": "Antihypoglycemic hormone / glucose-elevating agent (and GI smooth-muscle relaxant for imaging)",
+  "pharm": "A pancreatic peptide hormone that activates hepatic glucagon receptors to stimulate glycogenolysis and gluconeogenesis, rapidly raising blood glucose; it also relaxes gastrointestinal smooth muscle and has positive inotropic/chronotropic cardiac effects independent of beta-receptors.",
+  "tags": ["Severe hypoglycemia rescue", "Beta-blocker/CCB overdose", "Emergency use", "Diagnostic GI smooth-muscle relaxant", "SC/IM/IV/intranasal"],
+  "quick": [
+    ["Adult dose", "Severe hypoglycemia: 1 mg SC/IM/IV (intranasal 3 mg one spray); beta-blocker OD: ~3-10 mg IV bolus then infusion"],
+    ["Meal", "Give oral carbohydrate as soon as the patient can swallow after recovery"],
+    ["Pregnancy", "May be used for severe maternal hypoglycemia; does not cross placenta appreciably"],
+    ["Lactation", "Compatible; minimal/no excretion in milk, broken down in infant gut"],
+    ["Renal", "No specific dose adjustment for emergency use"],
+    ["Hepatic", "Ineffective if hepatic glycogen is depleted (starvation, alcoholism, adrenal insufficiency)"],
+    ["Alcohol", "Less effective in alcohol-related hypoglycemia (depleted glycogen)"],
+    ["Monitoring", "Blood glucose, level of consciousness, blood pressure/heart rate (overdose use)"]
+  ],
+  "summary": "Glucagon is a polypeptide hormone used chiefly as emergency treatment for SEVERE HYPOGLYCEMIA in people with diabetes who cannot take oral carbohydrate, and as a diagnostic aid to relax gastrointestinal smooth muscle during radiologic or endoscopic procedures. The hypoglycemia rescue dose is 1 mg given subcutaneously, intramuscularly or intravenously (or 3 mg as a single intranasal spray; weight-based dosing in young children), with response in about 5-15 minutes; oral carbohydrate must be given once the patient regains consciousness because the effect is transient. Glucagon raises glucose only if adequate liver glycogen is present, so it is ineffective in starvation, chronic hypoglycemia, alcohol-induced hypoglycemia, or adrenal insufficiency. Off-label but well established, high-dose glucagon (a bolus of several milligrams followed by an infusion) is used as an inotrope/chronotrope to reverse refractory bradycardia and hypotension from BETA-BLOCKER (and calcium-channel-blocker) OVERDOSE because it bypasses the beta-receptor. Common effects are nausea and vomiting; it is contraindicated in pheochromocytoma and insulinoma.",
+  "indications": [
+    "Treatment of severe hypoglycemia in patients with diabetes mellitus",
+    "Diagnostic aid to inhibit gastrointestinal motility during radiologic, CT, MRI or endoscopic examination of the GI tract",
+    "Reversal of beta-adrenergic blocker (and calcium-channel-blocker) toxicity/overdose with bradycardia and hypotension (recognised off-label use)"
+  ],
+  "dosage": [
+    {"c": "Severe hypoglycemia - adults and children >=25 kg (or >=6 y)", "r": "SC/IM/IV", "d": "1 mg as a single dose", "t": "Once; may repeat after 15 min if no response while awaiting emergency help", "n": "Give oral carbohydrate once the patient can swallow"},
+    {"c": "Severe hypoglycemia - children <25 kg or <6 years", "r": "SC/IM/IV", "d": "0.5 mg (or 0.02-0.03 mg/kg)", "t": "Once; may repeat after 15 min if needed", "n": "Use weight-appropriate dosing per product"},
+    {"c": "Severe hypoglycemia - intranasal", "r": "Intranasal (>=4 y)", "d": "3 mg as one actuation into one nostril", "t": "Single dose; do not re-prime; call emergency services", "n": "No need to inhale; works even with nasal congestion/colds"},
+    {"c": "Diagnostic GI relaxation", "r": "IV or IM", "d": "0.25-2 mg IV (or 1-2 mg IM) depending on procedure and desired duration", "t": "Single dose before/during procedure", "n": "Onset ~1 min IV; IM onset slower, longer duration"},
+    {"c": "Beta-blocker / calcium-channel-blocker overdose (off-label)", "r": "IV", "d": "Bolus ~3-10 mg (e.g., 50-150 micrograms/kg) IV over 1-2 min, repeat to effect, then infusion ~2-5 mg/hour titrated", "t": "Bolus then continuous infusion", "n": "Have antiemetics ready (vomiting is common); supplement glucose and treat refractory shock with additional measures"}
+  ],
+  "admin": [
+    "For hypoglycemia, reconstitute the lyophilised powder with the supplied diluent immediately before use and inject the full dose SC, IM or IV; for the intranasal product, insert the device fully into one nostril and press the plunger (do not test/prime beforehand)",
+    "Turn the patient on their side after giving glucagon, because vomiting is common, to reduce aspiration risk",
+    "Expect a response in about 5-15 minutes; if no response, summon emergency medical help and give IV glucose when available",
+    "Give oral fast-acting carbohydrate (and then a longer-acting snack) as soon as the patient is awake and able to swallow, to replenish liver glycogen and prevent recurrence",
+    "For diagnostic use, give IV when rapid, short relaxation is needed and IM for slightly longer effect",
+    "In beta-blocker/CCB overdose, give an IV bolus titrated to heart rate and blood pressure followed by an infusion, and pre-treat or have antiemetics available because high doses cause vomiting"
+  ],
+  "moa": "Glucagon is a single-chain polypeptide hormone produced by pancreatic alpha cells. It binds hepatic glucagon (G-protein-coupled) receptors, activating adenylate cyclase and raising cyclic AMP, which stimulates glycogen phosphorylase to break down hepatic glycogen (glycogenolysis) and promotes gluconeogenesis, releasing glucose into the blood. Its glucose-raising action therefore depends on adequate hepatic glycogen stores. Glucagon also relaxes the smooth muscle of the stomach, duodenum, small bowel and colon, which is exploited diagnostically to reduce GI motility. At higher doses it has direct positive inotropic and chronotropic effects on the heart via cardiac glucagon receptors and cyclic AMP, bypassing beta-adrenergic receptors - the basis for its use in beta-blocker and calcium-channel-blocker poisoning.",
+  "contra": {
+    "absolute": [
+      "Pheochromocytoma (glucagon can provoke catecholamine release and severe hypertension)",
+      "Insulinoma (may cause rebound hypoglycemia after an initial glucose rise)",
+      "Known hypersensitivity to glucagon or its components"
+    ],
+    "relative": [
+      "Glucagonoma",
+      "Conditions with depleted hepatic glycogen (starvation, adrenal insufficiency, chronic hypoglycemia, alcohol-induced hypoglycemia) - glucagon will be ineffective"
+    ],
+    "monitor": [
+      "Blood glucose and clinical recovery from hypoglycemia",
+      "Level of consciousness and ability to take oral carbohydrate",
+      "Blood pressure and heart rate (especially in overdose/diagnostic high-dose use and in pheochromocytoma risk)",
+      "Nausea/vomiting and aspiration risk"
+    ]
+  },
+  "preg": "Glucagon is a large peptide that does not cross the placenta in appreciable amounts and is broken down by digestion. It may be used to treat severe hypoglycemia in pregnant women with diabetes when the benefit outweighs the risk; untreated severe maternal hypoglycemia is itself hazardous.",
+  "lact": "Glucagon is a peptide that is not appreciably excreted into breast milk and would be degraded in the infant's gastrointestinal tract; it is considered compatible with breastfeeding. Breastfeeding may be resumed after recovery from severe hypoglycemia.",
+  "renal": "No specific dose adjustment is required for the short-term emergency or diagnostic use of glucagon in renal impairment.",
+  "hepatic": "Glucagon raises blood glucose by mobilising hepatic glycogen; in severe hepatic disease or states of glycogen depletion its glucose-raising effect may be reduced or absent, and IV glucose should be used instead.",
+  "interactions": {
+    "major": [
+      "Warfarin/oral anticoagulants - large or repeated glucagon doses may increase anticoagulant effect; monitor INR",
+      "Beta-blockers - patients on beta-blockers may have a greater rise in pulse and blood pressure after glucagon (transient)"
+    ],
+    "moderate": [
+      "Indomethacin - may blunt glucagon's hyperglycaemic effect or even cause hypoglycaemia",
+      "Insulin - physiologically antagonistic (glucagon used to counter insulin-induced hypoglycemia)"
+    ],
+    "minor": ["No clinically significant interactions for single emergency doses in most patients"],
+    "food": "Give oral carbohydrate after recovery; not otherwise food-dependent.",
+    "alcohol": "Glucagon is less effective in alcohol-induced hypoglycemia because chronic alcohol use depletes hepatic glycogen.",
+    "diagnostics": "Transiently raises blood glucose; may affect glucose-based laboratory results during use."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Headache", "Injection-site discomfort", "Transient increase in heart rate and blood pressure", "Nasal/upper-airway symptoms, watery eyes and nasal congestion (intranasal product)"],
+    "serious": ["Hypersensitivity reactions including anaphylaxis (rare)", "Severe hypertension in patients with pheochromocytoma (catecholamine release)", "Rebound or persistent hypoglycemia in insulinoma", "Hypokalemia (with high or repeated dosing)"],
+    "rare": ["Generalized allergic reactions, urticaria, angioedema", "Necrolytic migratory erythema with prolonged use"],
+    "emergency": ["Anaphylaxis", "Hypertensive crisis in undiagnosed pheochromocytoma", "Failure to respond to glucagon in severe hypoglycemia (give IV glucose and seek emergency care)"]
+  },
+  "monitoring": [
+    "Blood glucose and clinical recovery (consciousness) after a hypoglycemia dose",
+    "Blood pressure and heart rate, particularly in diagnostic high-dose or overdose-reversal use",
+    "Nausea/vomiting and aspiration precautions",
+    "Serum potassium with high or repeated dosing",
+    "Hemodynamic response (heart rate, blood pressure) when used for beta-blocker/CCB toxicity"
+  ],
+  "counsel": [
+    "This is an emergency rescue treatment for very low blood sugar when the person cannot eat, drink or is unconscious",
+    "Caregivers/family should be trained in advance on how and when to give it and to place the person on their side (vomiting is common)",
+    "After giving glucagon, call for emergency help and, once the person is awake, give them fast-acting sugar followed by a snack",
+    "It can take 5-15 minutes to work; if there is no response, get emergency medical help and IV glucose",
+    "Keep the kit/device within easy reach, check the expiry date, and store as directed",
+    "Tell your doctor afterwards about the severe low so your diabetes treatment can be reviewed"
+  ],
+  "pk": [
+    ["Onset", "Glucose rises within ~5-15 min (injection); GI relaxation within ~1 min IV; cardiac effect within minutes IV"],
+    ["Peak", "Plasma peak within ~20 min; glucose peak around 30 min"],
+    ["Half-life", "Short - approximately 8-18 minutes"],
+    ["Duration", "Glucose-raising and GI-relaxant effects are transient (about 60-90 minutes); supplement with carbohydrate/glucose"],
+    ["Storage", "Store kit per label (often controlled room temperature); do not freeze; use reconstituted solution immediately"]
+  ],
+  "pearls": [
+    "First-line rescue for severe hypoglycemia when oral carbohydrate is impossible - works only if hepatic glycogen is present (ineffective in starvation, alcoholism, adrenal insufficiency)",
+    "Always follow recovery with oral carbohydrate to replenish glycogen and prevent recurrence; effect is short-lived",
+    "Beta-blocker / calcium-channel-blocker overdose: high-dose glucagon (several-mg bolus then infusion) restores inotropy/chronotropy by bypassing beta-receptors - expect vomiting, have antiemetics ready",
+    "Contraindicated in pheochromocytoma (hypertensive crisis) and insulinoma (rebound hypoglycemia)",
+    "Intranasal glucagon needs no inhalation and works even with a cold/nasal congestion - do not prime the device beforehand",
+    "Large/repeated doses can potentiate warfarin and cause hypokalemia - monitor INR and potassium"
+  ],
+  "missed": "Glucagon is an emergency/as-needed medicine, not a scheduled dose, so there is no missed-dose schedule. Use it whenever severe hypoglycemia occurs and the person cannot safely swallow, and seek emergency help afterward.",
+  "overdose": "Overdose can cause persistent nausea and vomiting, hypokalemia, and a transient rise in blood pressure and heart rate. Management is supportive: monitor and correct serum potassium, manage nausea, and observe blood pressure and pulse (treat marked hypertension if it occurs, with particular caution in possible pheochromocytoma). Glucagon has a short half-life, so effects resolve quickly.",
+  "refs": [
+    ["Glucagon - FDA Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22glucagon%22"],
+    ["DailyMed - Glucagon (for injection / nasal)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=glucagon"]
+  ]
+}

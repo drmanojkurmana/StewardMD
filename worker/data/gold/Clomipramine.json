@@ -1,0 +1,101 @@
+{
+  "generic": "Clomipramine",
+  "cls": "Tricyclic antidepressant (serotonergic)",
+  "pharm": "Tricyclic antidepressant that potently inhibits serotonin (5-HT) reuptake; used for obsessive-compulsive disorder",
+  "tags": ["Rx only", "Boxed warning: suicidal thoughts and behavior in children, adolescents, and young adults", "Seizure risk", "MAOI contraindicated (serotonin syndrome)", "Anticholinergic", "CYP2D6 substrate", "Cardiotoxic in overdose"],
+  "quick": [
+    ["Adult dose", "Start 25 mg/day, titrate to ~100 mg/day over 2 weeks, max 250 mg/day"],
+    ["Meal", "Take with meals during titration to reduce GI side effects; food does not affect bioavailability"],
+    ["Pregnancy", "Use only if benefit justifies risk; neonatal withdrawal (jitteriness, tremor, seizures) reported"],
+    ["Lactation", "Found in breast milk; decide to stop nursing or drug based on importance to mother"],
+    ["Renal", "No specific adjustment given; use caution, titrate slowly"],
+    ["Hepatic", "Use caution; CYP-metabolized, levels may rise; titrate slowly"],
+    ["Alcohol", "Avoid - additive CNS depression and lowered seizure threshold"],
+    ["Monitoring", "Suicidality/mood, seizures, ECG/cardiac, anticholinergic effects, weight"]
+  ],
+  "summary": "Clomipramine is a tricyclic antidepressant whose potent inhibition of serotonin reuptake underlies its FDA-approved use for obsessions and compulsions in obsessive-compulsive disorder (OCD). It carries a boxed warning that antidepressants increase the risk of suicidal thinking and behavior in children, adolescents, and young adults (up to age 24), requiring close monitoring for clinical worsening and unusual behavior changes, especially early in treatment or after dose changes. Seizure was identified as its most significant risk in premarketing trials (cumulative incidence ~1.45% at one year at doses up to 300 mg/day), and dose should be kept as low as effective. It is contraindicated with MAOIs (and linezolid or IV methylene blue) because of serotonin-syndrome risk, and during the acute recovery period after myocardial infarction. Like other tricyclics it has prominent anticholinergic and sedative effects and is dangerous in overdose, where cardiac dysrhythmias, hypotension, seizures, and CNS depression can be fatal.",
+  "indications": [
+    "Treatment of obsessions and compulsions in patients with obsessive-compulsive disorder (OCD), where the symptoms cause marked distress, are time-consuming, or significantly interfere with social or occupational functioning"
+  ],
+  "dosage": [
+    {"c": "OCD - initial titration (adults)", "r": "Oral", "d": "Start 25 mg daily; increase gradually as tolerated to about 100 mg/day during the first 2 weeks", "t": "Give in divided doses with meals during titration to reduce GI side effects", "n": "Steady state not reached until 2-3 weeks after a dose change; space further adjustments accordingly"},
+    {"c": "OCD - maintenance dose (adults)", "r": "Oral", "d": "Increase gradually over following weeks up to a maximum of 250 mg/day", "t": "After titration, the total daily dose may be given once daily at bedtime to minimize daytime sedation", "n": "Keep at lowest effective dose; higher doses raise seizure risk"},
+    {"c": "OCD - initial titration (children/adolescents >=10 yr)", "r": "Oral", "d": "Start 25 mg daily; increase gradually as tolerated to a maximum of 3 mg/kg or 100 mg/day, whichever is smaller, over the first 2 weeks", "t": "Divided doses with meals during titration", "n": "Only pediatric use approved is OCD"},
+    {"c": "OCD - maintenance dose (children/adolescents)", "r": "Oral", "d": "Increase gradually over following weeks up to a maximum of 3 mg/kg or 200 mg/day, whichever is smaller", "t": "After titration may be given once daily at bedtime", "n": "Maximum dose was 3 mg/kg/day (up to 200 mg) in pediatric trials"},
+    {"c": "Continuation/long-term treatment", "r": "Oral", "d": "Continue at the established effective dose", "t": "Periodically reassess long-term usefulness; efficacy beyond 10 weeks not documented in controlled trials", "n": "OCD is chronic; continuation is reasonable in responders"}
+  ],
+  "admin": [
+    "Give in divided doses with meals during the initial titration phase to reduce gastrointestinal side effects",
+    "Titrate gradually because steady-state plasma levels of clomipramine and its active metabolite (desmethylclomipramine) are not reached until 2-3 weeks after a dose change",
+    "After titration, the total daily dose may be consolidated to a single bedtime dose to minimize daytime sedation",
+    "Allow at least 2-3 weeks between dose adjustments after initial titration",
+    "Do not start within 14 days of stopping an MAOI, and do not start an MAOI within 14 days of stopping clomipramine",
+    "Discontinue gradually when stopping to limit withdrawal symptoms",
+    "Keep total daily dose as low as effective, as seizure risk rises with dose and plasma concentration"
+  ],
+  "moa": "Clomipramine is presumed to influence obsessive and compulsive behaviors through its effects on serotonergic neurotransmission. The exact neurochemical mechanism is unknown, but its potent capacity to inhibit the presynaptic reuptake of serotonin (5-HT), increasing serotonin availability in the synaptic cleft, is thought to be central; its active metabolite desmethylclomipramine additionally inhibits norepinephrine reuptake. As a tricyclic, it also blocks muscarinic cholinergic, histaminergic, and alpha-1 adrenergic receptors, which accounts for its anticholinergic, sedative, and orthostatic side effects, and it has membrane-stabilizing (quinidine-like) cardiac effects that drive its toxicity in overdose.",
+  "contra": {
+    "absolute": ["Hypersensitivity to clomipramine or other tricyclic antidepressants", "Concomitant use of MAOIs intended to treat psychiatric disorders, or within 14 days of stopping/before starting an MAOI (serotonin syndrome risk)", "Initiation in a patient being treated with linezolid or intravenous methylene blue (serotonin syndrome risk)", "Acute recovery period after myocardial infarction"],
+    "relative": ["History of seizures or conditions/medications that lower the seizure threshold", "Cardiovascular disease, conduction abnormalities, or QT prolongation", "Narrow-angle glaucoma, urinary retention, or significant prostatic hypertrophy (anticholinergic effects)", "Hepatic impairment or CYP2D6 poor metabolizers (higher plasma levels)", "Hyperthyroidism or concurrent thyroid medication", "Pregnancy and lactation"],
+    "monitor": ["Suicidal ideation/behavior, clinical worsening, and unusual behavior changes (especially early treatment and dose changes)", "Seizure activity", "Cardiac status / ECG (conduction, QRS, QT)", "Anticholinergic effects (urinary retention, constipation, blurred vision)", "Orthostatic blood pressure", "Weight"]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women. Animal studies showed no teratogenicity at doses up to 24 times the maximum recommended human dose on a mg/kg basis, with only slight nonspecific embryo/fetotoxic effects at high doses. Neonatal withdrawal symptoms, including jitteriness, tremor, and seizures, have been reported in newborns whose mothers took clomipramine until delivery. Clomipramine should be used during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Clomipramine is excreted into human milk. Because of the potential for serious adverse reactions in the breastfed infant, a decision should be made whether to discontinue nursing or to discontinue the drug, taking into account the importance of the drug to the mother. If used during breastfeeding, observe the infant for sedation, poor feeding, or irritability.",
+  "renal": "The label does not provide a specific renal dosage adjustment. Because clomipramine and its active metabolite are extensively metabolized and highly protein bound with minimal urinary excretion of unchanged drug, use caution in renal impairment, titrate slowly, and monitor for accumulation of dose- and concentration-dependent adverse effects (including seizures and cardiac effects).",
+  "hepatic": "Clomipramine is metabolized by hepatic cytochrome P450 enzymes (including CYP2D6 and CYP1A2/3A4), so hepatic impairment can reduce clearance and raise plasma concentrations of clomipramine and its active metabolite. Use with caution, titrate slowly, and monitor for dose- or concentration-related toxicity such as seizures and cardiac effects; consider lower doses in poor CYP2D6 metabolizers and with enzyme inhibitors.",
+  "interactions": {
+    "major": ["MAOIs, linezolid, IV methylene blue - contraindicated (serotonin syndrome)", "Other serotonergic drugs (SSRIs, SNRIs, triptans, tramadol, St. John's wort) - serotonin syndrome risk", "CYP2D6 inhibitors (e.g., fluoxetine, paroxetine, quinidine) - markedly raise clomipramine levels (up to ~8-fold AUC) and toxicity, including seizures", "Drugs that lower the seizure threshold and other CNS depressants/alcohol - additive seizure and sedation risk", "QT-prolonging and antiarrhythmic drugs - additive cardiotoxicity/arrhythmia risk"],
+    "moderate": ["Anticholinergic drugs - additive anticholinergic effects (ileus, urinary retention, hyperthermia)", "Sympathomimetic agents - require close supervision and dose adjustment", "Guanethidine, clonidine, or similar antihypertensives - tricyclics may block their effect", "Haloperidol, methylphenidate, cimetidine - increase clomipramine plasma levels", "Hepatic enzyme inducers (barbiturates, phenytoin) - decrease clomipramine levels; clomipramine may raise phenobarbital levels"],
+    "minor": ["Highly protein-bound drugs - potential displacement interactions (clomipramine ~97% protein bound)", "Thyroid medication - may enhance effects/arrhythmia potential"],
+    "food": "Bioavailability is not significantly affected by food; taking doses with meals during titration helps reduce gastrointestinal side effects.",
+    "alcohol": "Avoid alcohol - it produces additive CNS depression/sedation and can further lower the seizure threshold; alcohol is also commonly co-ingested in fatal tricyclic overdoses.",
+    "diagnostics": "May cause ECG changes (QRS widening, QT/conduction changes); concurrent use can confound interpretation of serotonergic and cardiac status."
+  },
+  "se": {
+    "common": ["Dry mouth", "Constipation", "Nausea / dyspepsia / anorexia", "Somnolence", "Tremor", "Dizziness", "Nervousness", "Myoclonus", "Sexual dysfunction (changed libido, ejaculatory failure, impotence)", "Sweating", "Increased appetite / weight gain", "Fatigue", "Visual changes / blurred vision", "Micturition disorder"],
+    "serious": ["Suicidal thinking and behavior in children, adolescents, and young adults", "Seizures (most significant premarketing risk)", "Serotonin syndrome (especially with MAOIs/other serotonergics)", "Cardiac dysrhythmias and conduction disturbances", "Orthostatic hypotension", "Neuroleptic-malignant-syndrome-like reactions"],
+    "rare": ["Hepatotoxicity", "Blood dyscrasias (leukopenia, agranulocytosis)", "SIADH / hyponatremia", "Narrow-angle glaucoma exacerbation / urinary retention", "Withdrawal symptoms on abrupt discontinuation"],
+    "emergency": ["Serotonin syndrome", "Seizures / status epilepticus", "Cardiac dysrhythmia, severe hypotension, or cardiac arrest (notably in overdose)", "Acute suicidality", "Severe overdose with coma and respiratory depression"]
+  },
+  "monitoring": [
+    "Suicidal ideation/behavior, clinical worsening, and unusual changes in behavior, especially in patients <25, early in treatment, and after dose changes; advise families/caregivers to observe closely",
+    "Seizure activity (risk rises with dose and plasma concentration)",
+    "Cardiac status and ECG (QRS, QT, conduction), particularly with cardiovascular disease or at higher doses",
+    "Orthostatic blood pressure and heart rate",
+    "Anticholinergic effects (urinary retention, constipation/ileus, blurred vision, intraocular pressure)",
+    "Weight and appetite",
+    "Signs of serotonin syndrome when combined with serotonergic agents",
+    "Hepatic function and CBC if clinically indicated"
+  ],
+  "counsel": [
+    "Watch for and immediately report worsening mood, anxiety, agitation, or any thoughts of self-harm or suicide, especially in the first weeks and after dose changes; this applies particularly to children, teens, and young adults",
+    "Do not take with or within 14 days of an MAOI; tell your doctor about all serotonergic medicines, including triptans, tramadol, and St. John's wort (serotonin syndrome risk)",
+    "Report any seizure, fainting, palpitations, or fast/irregular heartbeat",
+    "Expect dry mouth, constipation, drowsiness, and possible weight gain; rise slowly to avoid dizziness from low blood pressure",
+    "Avoid alcohol and use caution driving or operating machinery until you know how the drug affects you",
+    "Do not stop suddenly - taper under medical guidance to avoid withdrawal symptoms",
+    "This medicine is very dangerous in overdose; keep it away from children and store securely",
+    "Tell your doctor if you are pregnant, planning pregnancy, or breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "Antiobsessional effect develops gradually over weeks; steady state not reached until 2-3 weeks after a dose change"],
+    ["Peak", "Maximum plasma concentration about 2-6 hours (mean ~4.7 h) after an oral dose"],
+    ["Half-life", "Clomipramine ~19-37 h (mean ~32 h); active metabolite desmethylclomipramine ~54-77 h (mean ~69 h); may lengthen at higher doses (nonlinear)"],
+    ["Duration", "Long; once-daily bedtime dosing feasible after titration; steady state ~7-14 days for parent drug"],
+    ["Storage", "Store at 20-25 C (68-77 F); dispense in well-closed, light-resistant, child-resistant containers; protect from moisture"]
+  ],
+  "pearls": [
+    "Mandatory boxed warning: antidepressants increase suicidal thinking and behavior in children, adolescents, and young adults (up to age 24); monitor closely early and after dose changes and involve families/caregivers",
+    "Seizure was the most significant risk in premarketing trials (cumulative ~1.45% at 1 year at doses up to 300 mg/day) - keep the dose as low as effective and avoid in patients with seizure-threshold-lowering conditions or drugs",
+    "Absolutely contraindicated with MAOIs (and within 14 days), linezolid, or IV methylene blue because of serotonin syndrome; also contraindicated during acute post-MI recovery",
+    "Clomipramine and desmethylclomipramine show nonlinear kinetics above ~150 mg/day, so plasma levels can rise disproportionately at 200-250 mg/day, increasing dose-dependent toxicity (especially seizures)",
+    "CYP2D6 poor metabolizers and CYP2D6 inhibitors (e.g., fluoxetine, paroxetine, quinidine) can produce up to ~8-fold higher tricyclic levels, abruptly precipitating toxicity",
+    "Highly lethal in overdose - cardiac dysrhythmias (QRS widening), hypotension, seizures, and CNS depression; obtain an ECG and begin cardiac monitoring early"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and resume your regular schedule - do not take a double dose, since clomipramine can lower the seizure threshold and is dangerous in excess. If you take it once daily at bedtime and remember the next morning, contact your prescriber rather than taking it during the day. Do not stop the medication on your own; discuss any repeated missed doses with your doctor.",
+  "overdose": "Tricyclic overdose can be fatal and signs develop rapidly, so hospital cardiac monitoring is required as soon as possible; multiple-drug ingestion (including alcohol) is common. Critical manifestations include cardiac dysrhythmias, severe hypotension, convulsions, and CNS depression including coma; ECG changes in QRS axis or width are key indicators of toxicity. Other features include drowsiness, stupor, ataxia, agitation, delirium, hyperreflexia, muscle rigidity, mydriasis, urinary retention, hyperpyrexia, respiratory depression, and shock. Management: secure the airway, establish IV access, obtain an ECG and begin continuous cardiac monitoring, perform gastric decontamination, and observe for at least 6 hours (longer if toxicity appears); contact a poison control center for current treatment, which may include sodium bicarbonate for QRS widening/arrhythmias and supportive care.",
+  "refs": [
+    ["FDA Label - Clomipramine Hydrochloride Capsules (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22clomipramine%22"],
+    ["DailyMed - Clomipramine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=clomipramine"]
+  ]
+}

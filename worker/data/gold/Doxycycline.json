@@ -1,0 +1,109 @@
+{
+  "generic": "Doxycycline",
+  "cls": "Tetracycline antibacterial",
+  "pharm": "Bacteriostatic tetracycline that inhibits bacterial protein synthesis by binding the 30S ribosomal subunit.",
+  "tags": ["Rx only", "Tetracycline", "Broad-spectrum", "Photosensitizing"],
+  "quick": [
+    ["Adult dose", "200 mg on day 1 (100 mg q12h), then 100 mg/day"],
+    ["Meal", "May take with food/milk to reduce GI upset; avoid lying down after"],
+    ["Pregnancy", "Avoid; risk of fetal tooth discoloration and bone effects"],
+    ["Lactation", "Short courses generally acceptable; avoid prolonged use"],
+    ["Renal", "No adjustment needed (preferred tetracycline in renal impairment)"],
+    ["Hepatic", "Use with caution; avoid other hepatotoxins"],
+    ["Alcohol", "Avoid excess; chronic use may reduce levels"],
+    ["Monitoring", "Photosensitivity, GI effects, signs of superinfection"]
+  ],
+  "summary": "Doxycycline is a broad-spectrum tetracycline antibiotic effective against many gram-positive and gram-negative bacteria, atypicals (Mycoplasma, Chlamydia), rickettsiae, spirochetes, and protozoa (malaria prophylaxis). It is well absorbed orally, not significantly affected by renal impairment, and commonly causes photosensitivity and GI upset. It should be avoided in pregnancy and in young children due to tooth and bone effects.",
+  "indications": [
+    "Rickettsial infections (Rocky Mountain spotted fever, typhus, Q fever)",
+    "Respiratory tract infections (Mycoplasma pneumoniae and others)",
+    "Sexually transmitted infections: chlamydia, lymphogranuloma venereum, nongonococcal urethritis",
+    "Acne and rosacea (anti-inflammatory dosing)",
+    "Lyme disease, anthrax, cholera, brucellosis, and other susceptible infections",
+    "Prophylaxis and treatment of malaria (as labeled)"
+  ],
+  "dosage": [
+    {"c": "Usual infections (adult)", "r": "Oral", "d": "200 mg on day 1 (100 mg every 12 h), then 100 mg once daily", "t": "Daily / BID", "n": "Severe infections: 100 mg every 12 h throughout"},
+    {"c": "Children >8 yr, <45 kg (severe infection)", "r": "Oral", "d": "2.2 mg/kg every 12 h on day 1, then 2.2 mg/kg once or twice daily", "t": "Daily / BID", "n": "Children >=45 kg use adult dose; avoid in <8 yr except RMSF/anthrax"},
+    {"c": "Uncomplicated genital chlamydia", "r": "Oral", "d": "100 mg twice daily for 7 days", "t": "BID", "n": "Per current STI guidance"},
+    {"c": "Malaria prophylaxis", "r": "Oral", "d": "100 mg once daily", "t": "Once daily", "n": "Start 1-2 days before travel, continue during and 4 weeks after"}
+  ],
+  "admin": [
+    "Take with a full glass of water; remain upright for at least 30 minutes to avoid esophageal irritation",
+    "May take with food or milk to reduce GI upset",
+    "Separate from antacids, iron, calcium, magnesium, and zinc by 2-3 hours",
+    "Complete the full prescribed course",
+    "Use sun protection due to photosensitivity"
+  ],
+  "moa": "Doxycycline reversibly binds the 30S bacterial ribosomal subunit, blocking attachment of aminoacyl-tRNA to the mRNA-ribosome complex and thereby inhibiting protein synthesis. The effect is primarily bacteriostatic. At sub-antimicrobial doses it also inhibits matrix metalloproteinases, contributing to anti-inflammatory effects in acne and rosacea.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to any tetracycline",
+      "Pregnancy (second/third trimester) and children under 8 years except for specific serious infections (e.g., RMSF, anthrax)"
+    ],
+    "relative": [
+      "Hepatic impairment",
+      "Concurrent isotretinoin (intracranial hypertension risk)",
+      "Myasthenia gravis (rare exacerbation)",
+      "Esophageal stricture/dysmotility"
+    ],
+    "monitor": [
+      "Photosensitivity reactions",
+      "Signs of superinfection (C. difficile, candidiasis)",
+      "Intracranial hypertension symptoms (headache, visual change)"
+    ]
+  },
+  "preg": "Use during tooth development (second/third trimester) may cause permanent discoloration of the child's teeth and may affect fetal bone growth; generally avoided in pregnancy unless no alternative for a serious infection.",
+  "lact": "Small amounts pass into breast milk; short courses are generally considered acceptable because absorption by the infant is limited by chelation with milk calcium. Avoid prolonged use.",
+  "renal": "No dosage adjustment required; doxycycline is largely eliminated non-renally, making it the preferred tetracycline in renal impairment.",
+  "hepatic": "Use with caution in hepatic impairment and avoid concurrent hepatotoxic drugs; rare hepatotoxicity has been reported.",
+  "interactions": {
+    "major": [
+      "Isotretinoin / other retinoids (additive intracranial hypertension risk)",
+      "Penicillins (bacteriostatic agent may antagonize bactericidal action)"
+    ],
+    "moderate": [
+      "Antacids, iron, calcium, magnesium, zinc, bismuth (chelation reduces absorption)",
+      "Warfarin (may potentiate anticoagulant effect; monitor INR)",
+      "Enzyme inducers (barbiturates, phenytoin, carbamazepine, rifampin: reduce doxycycline levels)",
+      "Oral contraceptives (rare reports of reduced efficacy)"
+    ],
+    "minor": ["Methoxyflurane (rare nephrotoxicity)"],
+    "food": "May be taken with food/milk; avoid taking with dairy or mineral supplements at the same time due to chelation.",
+    "alcohol": "Avoid excess; chronic alcohol use may lower doxycycline levels via enzyme induction.",
+    "diagnostics": "May cause false elevations of urinary catecholamines; can interfere with some tests."
+  },
+  "se": {
+    "common": ["Nausea / vomiting", "Diarrhea", "Photosensitivity (exaggerated sunburn)", "Epigastric discomfort", "Esophageal irritation"],
+    "serious": ["C. difficile-associated colitis", "Intracranial hypertension (pseudotumor cerebri)", "Severe skin reactions (DRESS, SJS)", "Hepatotoxicity"],
+    "rare": ["Esophageal ulceration", "Tooth discoloration (in young children)", "Hemolytic anemia / blood dyscrasias"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe skin reactions (SJS / TEN / DRESS)", "Severe persistent or bloody diarrhea"]
+  },
+  "monitoring": ["Symptom resolution and signs of superinfection", "Photosensitivity reactions", "Visual symptoms/headache (intracranial hypertension)", "INR if on warfarin", "Liver function if prolonged or high-dose use"],
+  "counsel": [
+    "Take with a full glass of water and stay sitting or standing for 30 minutes",
+    "Use sunscreen and protective clothing; avoid prolonged sun exposure",
+    "Do not take within 2-3 hours of antacids, iron, calcium, or dairy supplements",
+    "Finish the full course even if you feel better",
+    "Report severe headache, vision changes, or severe diarrhea"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; therapeutic levels within hours"],
+    ["Peak", "2-4 hours (plasma)"],
+    ["Half-life", "~16-22 hours"],
+    ["Duration", "Supports once or twice daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "Preferred tetracycline in renal impairment (non-renal elimination)",
+    "Strong photosensitizer - counsel on sun protection",
+    "Take upright with water to prevent esophageal ulceration",
+    "Avoid in pregnancy and in children under 8 years except for serious indications like RMSF"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is near the next dose, skip it and do not double up. Try to space doses evenly.",
+  "overdose": "Overdose typically causes gastrointestinal upset and is rarely life-threatening. There is no specific antidote; provide supportive care. Antacids or oral calcium/magnesium salts can reduce further absorption. Doxycycline is not removed effectively by dialysis.",
+  "refs": [
+    ["FDA Label - Doxycycline (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22doxycycline%22"],
+    ["DailyMed - Doxycycline", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=doxycycline"]
+  ]
+}

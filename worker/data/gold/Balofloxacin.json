@@ -1,0 +1,94 @@
+{
+  "generic": "Balofloxacin",
+  "cls": "Fluoroquinolone antibacterial",
+  "pharm": "Antibacterial (fluoroquinolone)",
+  "tags": ["antibiotic", "fluoroquinolone", "urinary tract infection", "respiratory infection", "antibacterial", "not FDA approved"],
+  "quick": [
+    ["Adult dose", "100 mg once daily (commonly 100-200 mg/day) for UTI/respiratory infection"],
+    ["Meal", "May be taken with or without food; separate from antacids/minerals by 2 h"],
+    ["Pregnancy", "Avoid - fluoroquinolones may affect developing cartilage"],
+    ["Lactation", "Avoid; fluoroquinolones distribute into milk"],
+    ["Renal", "Reduce dose in renal impairment (renally eliminated)"],
+    ["Hepatic", "Caution in significant impairment"],
+    ["Alcohol", "Avoid excess; CNS effects"],
+    ["Monitoring", "Tendon/joint symptoms, QT in at-risk patients, blood glucose, CNS effects"]
+  ],
+  "summary": "Balofloxacin is a broad-spectrum fluoroquinolone antibacterial that inhibits bacterial DNA gyrase and topoisomerase IV, used (mainly in Japan, Korea and India) for urinary tract infections and other susceptible bacterial infections. It is bactericidal against many Gram-positive and Gram-negative organisms. As a fluoroquinolone it shares the class risks of tendinopathy/tendon rupture, QT prolongation, CNS effects, peripheral neuropathy and dysglycemia. It is not FDA-approved; this record is based on regional approvals, manufacturer SmPC and the fluoroquinolone class.",
+  "indications": [
+    "Acute uncomplicated and complicated urinary tract infections caused by susceptible organisms",
+    "Respiratory tract infections (e.g. chronic bronchitis exacerbation, pneumonia) caused by susceptible organisms (per regional labeling)",
+    "Other susceptible bacterial infections per local approved indications"
+  ],
+  "dosage": [
+    {"c": "Urinary tract infection (adult)", "r": "Usual", "d": "100 mg once daily", "t": "Once daily", "n": "Per regional labeling; duration by infection"},
+    {"c": "Respiratory / other infection (adult)", "r": "Usual", "d": "100-200 mg once daily", "t": "Once daily", "n": "Higher dose for more severe/less susceptible infection"},
+    {"c": "Renal impairment", "r": "Reduced", "d": "Reduce dose or extend interval per creatinine clearance", "t": "Once daily/extended", "n": "Renally eliminated - follow regional guidance"},
+    {"c": "Elderly", "r": "Caution", "d": "Use lowest effective dose; assess renal function", "t": "Once daily", "n": "Higher risk of tendon/QT/CNS effects"},
+    {"c": "Children / adolescents", "r": "Not recommended", "d": "Avoid in growing patients", "t": "-", "n": "Fluoroquinolone cartilage concern"}
+  ],
+  "admin": [
+    "May be taken with or without food",
+    "Separate dosing from antacids and products containing magnesium, aluminium, calcium, iron or zinc by at least 2 hours",
+    "Maintain adequate hydration to reduce crystalluria risk",
+    "Complete the full prescribed course even if symptoms improve",
+    "Avoid excessive sun/UV exposure (photosensitivity)"
+  ],
+  "moa": "Balofloxacin inhibits the bacterial enzymes DNA gyrase (topoisomerase II) and topoisomerase IV, which are essential for DNA replication, transcription, repair and recombination. Inhibition disrupts bacterial DNA supercoiling and chromosome segregation, producing a bactericidal effect against susceptible Gram-positive and Gram-negative organisms.",
+  "contra": {
+    "absolute": ["Hypersensitivity to balofloxacin or other quinolones", "History of tendon disorders related to fluoroquinolone use", "Children and growing adolescents (cartilage toxicity concern)", "Pregnancy and breastfeeding"],
+    "relative": ["History of QT prolongation or significant cardiac disease", "Epilepsy or conditions predisposing to seizures", "Myasthenia gravis (may be exacerbated)", "Glucose-6-phosphate dehydrogenase deficiency; diabetes (dysglycemia)"],
+    "monitor": ["Concomitant QT-prolonging drugs", "Concomitant corticosteroids (tendon rupture risk)", "Concomitant antidiabetic drugs (glucose disturbance)", "Concomitant NSAIDs (CNS stimulation/seizure risk)"]
+  },
+  "preg": "Fluoroquinolones, including balofloxacin, are generally avoided in pregnancy because of concern about effects on developing cartilage and joints. Use only if there is no safer alternative and the benefit clearly outweighs the risk.",
+  "lact": "Fluoroquinolones distribute into breast milk and may affect infant cartilage; breastfeeding is generally not recommended during balofloxacin therapy. If treatment is essential, consider temporarily withholding breastfeeding.",
+  "renal": "Balofloxacin is largely eliminated by the kidneys, so dose reduction or interval extension is required in moderate-to-severe renal impairment. Follow regional/manufacturer dosing guidance and maintain hydration.",
+  "hepatic": "Use with caution in significant hepatic impairment. Rare hepatotoxicity is a class effect of fluoroquinolones; monitor for signs of liver injury.",
+  "interactions": {
+    "major": ["QT-prolonging drugs (class IA/III antiarrhythmics, certain antipsychotics, macrolides) - additive risk of torsades de pointes", "Corticosteroids - increased risk of tendon rupture, especially in the elderly", "Theophylline - quinolones may raise theophylline levels and seizure risk"],
+    "moderate": ["Multivalent cations (antacids, sucralfate, iron, calcium, zinc, dairy) - chelation reduces absorption; separate by >=2 hours", "Antidiabetic agents - risk of hypo- or hyperglycemia", "NSAIDs - may enhance CNS stimulation/seizure risk", "Warfarin - possible enhanced anticoagulant effect"],
+    "minor": ["Probenecid - may reduce renal elimination", "Caffeine - reduced clearance possible"],
+    "food": "Food may delay absorption modestly; avoid taking with dairy or mineral supplements.",
+    "alcohol": "Avoid excessive alcohol due to additive CNS effects.",
+    "diagnostics": "May cause transient elevations in liver enzymes and disturbances of blood glucose; monitor as indicated."
+  },
+  "se": {
+    "common": ["Nausea, diarrhea, abdominal discomfort", "Headache, dizziness", "Insomnia", "Rash", "Altered taste"],
+    "serious": ["Tendinitis and tendon rupture (especially Achilles)", "QT prolongation / arrhythmia", "Peripheral neuropathy (may be irreversible)", "CNS effects - seizures, confusion, psychosis", "Severe dysglycemia (hypo- or hyperglycemia)", "Clostridioides difficile-associated diarrhea"],
+    "rare": ["Severe hypersensitivity / anaphylaxis", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Hepatotoxicity", "Aortic aneurysm/dissection (fluoroquinolone class signal)", "Exacerbation of myasthenia gravis", "Photosensitivity"],
+    "emergency": ["Anaphylaxis", "Tendon rupture", "Severe arrhythmia (torsades)", "Severe hypoglycemia", "Suspected aortic dissection (sudden severe chest/back/abdominal pain)"]
+  },
+  "monitoring": [
+    "Tendon and joint symptoms - stop the drug if tendon pain or swelling occurs",
+    "ECG/QT in patients with cardiac risk factors or on other QT-prolonging drugs",
+    "Blood glucose, especially in diabetics",
+    "Neurologic symptoms (peripheral neuropathy, CNS effects)",
+    "Renal and hepatic function as clinically indicated"
+  ],
+  "counsel": [
+    "Stop and seek advice if you develop tendon pain/swelling, numbness/tingling, or new mood/CNS symptoms",
+    "Take at least 2 hours apart from antacids, dairy, iron, calcium or zinc products",
+    "Avoid prolonged sun exposure and use sun protection",
+    "Diabetics should monitor blood sugar more closely",
+    "Complete the full course and report severe or bloody diarrhea"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal soon after absorption"],
+    ["Peak", "Peak plasma concentration about 1-2 hours after oral dosing"],
+    ["Half-life", "Approximately 7-8 hours, supporting once-daily dosing"],
+    ["Duration", "Once-daily administration"],
+    ["Storage", "Store at controlled room temperature; protect from light and moisture"]
+  ],
+  "pearls": [
+    "Not FDA-approved; balofloxacin is marketed in countries such as Japan, Korea and India - dosing and indications here follow regional SmPC/BNF and the fluoroquinolone class rather than an FDA label",
+    "Shares fluoroquinolone class warnings: disabling/potentially irreversible tendinitis and tendon rupture, peripheral neuropathy, CNS effects and QT prolongation - reserve for when alternatives are unsuitable",
+    "Chelated by multivalent cations - separate from antacids, iron, calcium, zinc and dairy by at least 2 hours",
+    "Avoid in pregnancy, breastfeeding and growing children due to cartilage concerns",
+    "Monitor blood glucose in diabetics; both hypo- and hyperglycemia have been reported with fluoroquinolones"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and resume the once-daily schedule. Do not double the dose. Complete the full course to avoid resistance.",
+  "overdose": "There is limited specific information on balofloxacin overdose. As with other fluoroquinolones, expect exaggerated effects such as nausea, CNS stimulation (including seizures) and possible QT prolongation. There is no specific antidote; treat supportively with cardiac and neurologic monitoring, adequate hydration, and seizure management as needed. Hemodialysis removes only a limited amount.",
+  "refs": [
+    ["Balofloxacin manufacturer SmPC / regional prescribing information", "https://www.medicines.org.uk/"],
+    ["WHO / regional fluoroquinolone class safety references", "https://www.who.int/"]
+  ]
+}

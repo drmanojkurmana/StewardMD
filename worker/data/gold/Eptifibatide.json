@@ -1,0 +1,92 @@
+{
+  "generic": "Eptifibatide",
+  "cls": "Glycoprotein IIb/IIIa receptor inhibitor (antiplatelet)",
+  "pharm": "Cyclic heptapeptide platelet aggregation inhibitor that reversibly blocks the platelet GP IIb/IIIa receptor, preventing fibrinogen binding and platelet aggregation.",
+  "tags": ["Antiplatelet", "GP IIb/IIIa inhibitor", "ACS", "PCI", "Parenteral", "Bleeding risk", "Renal dosing"],
+  "quick": [
+    ["Adult dose", "180 mcg/kg IV bolus, then 2 mcg/kg/min infusion"],
+    ["Meal", "N/A (IV)"],
+    ["Pregnancy", "Limited data; use only if clearly needed"],
+    ["Lactation", "Unknown excretion; caution"],
+    ["Renal", "CrCl <50 mL/min: reduce infusion to 1 mcg/kg/min; dialysis-dependent contraindicated"],
+    ["Hepatic", "No specific data"],
+    ["Alcohol", "N/A (acute hospital use)"],
+    ["Monitoring", "Platelets, hemoglobin/hematocrit, creatinine, aPTT/ACT, bleeding"]
+  ],
+  "summary": "Eptifibatide is an intravenous glycoprotein IIb/IIIa receptor inhibitor used in acute coronary syndrome and during percutaneous coronary intervention (PCI) to reduce death and ischemic events. It is given as a weight-based bolus followed by a continuous infusion, with infusion-rate reduction for CrCl <50 mL/min. The principal risk is bleeding; it is contraindicated in active bleeding, recent major surgery/stroke, severe uncontrolled hypertension, and dialysis dependence.",
+  "indications": [
+    "Acute coronary syndrome (unstable angina/NSTEMI) managed medically or with PCI - to decrease combined endpoint of death or new MI",
+    "Patients undergoing PCI including intracoronary stenting - to decrease death, new MI, or need for urgent intervention"
+  ],
+  "dosage": [
+    {"c": "Acute coronary syndrome (normal renal function)", "r": "IV", "d": "180 mcg/kg bolus, then 2 mcg/kg/min infusion", "t": "Bolus ASAP after diagnosis; infuse until discharge/CABG, up to 72 h", "n": "If PCI performed, continue up to 18-24 h after, max 96 h total"},
+    {"c": "PCI", "r": "IV", "d": "180 mcg/kg bolus, then 2 mcg/kg/min, plus a second 180 mcg/kg bolus 10 min after the first", "t": "Continue infusion until discharge or up to 18-24 h", "n": "Minimum 12 h infusion recommended"},
+    {"c": "Renal impairment (CrCl <50 mL/min)", "r": "IV", "d": "180 mcg/kg bolus (unchanged), then 1 mcg/kg/min infusion", "t": "As above", "n": "Reduce infusion rate; same bolus"},
+    {"c": "Dialysis-dependent patients", "r": "IV", "d": "Contraindicated", "t": "N/A", "n": "Do not use"}
+  ],
+  "admin": [
+    "Give bolus by IV push, followed by continuous IV infusion",
+    "Obtain baseline hematocrit/hemoglobin, platelet count, serum creatinine, PT/aPTT before infusion; ACT if PCI",
+    "Maintain aPTT 50-70 seconds (unless PCI); for PCI maintain ACT 200-300 seconds with heparin",
+    "Reduce infusion to 1 mcg/kg/min if CrCl <50 mL/min",
+    "May be co-administered with heparin and aspirin; monitor closely to minimize bleeding"
+  ],
+  "moa": "Reversibly binds the platelet glycoprotein (GP) IIb/IIIa receptor, blocking binding of fibrinogen, von Willebrand factor, and other adhesive ligands, thereby inhibiting the final common pathway of platelet aggregation. Effect reverses within hours of stopping infusion as platelet function recovers.",
+  "contra": {
+    "absolute": ["History of bleeding diathesis or active abnormal bleeding within previous 30 days", "Severe uncontrolled hypertension (SBP >200 or DBP >110 mmHg) not controlled on therapy", "Major surgery within preceding 6 weeks", "Stroke within 30 days or any history of hemorrhagic stroke", "Current/planned use of another parenteral GP IIb/IIIa inhibitor", "Dependency on renal dialysis", "Hypersensitivity to eptifibatide or any component"],
+    "relative": ["Recent trauma or invasive procedures", "Platelet count <100,000/mm3", "Concomitant thrombolytics, anticoagulants", "Advanced age, low body weight"],
+    "monitor": ["Platelet count", "Hemoglobin/hematocrit", "Serum creatinine", "Signs of bleeding"]
+  },
+  "preg": "Limited human data; use only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Not known whether excreted in human milk; exercise caution.",
+  "renal": "Reduce infusion rate to 1 mcg/kg/min when CrCl <50 mL/min (bolus unchanged). Contraindicated in dialysis-dependent patients. Eptifibatide is substantially renally cleared.",
+  "hepatic": "No specific dosing data; not metabolized substantially by the liver.",
+  "interactions": {
+    "major": ["Other antiplatelets/anticoagulants (heparin, warfarin, thrombolytics, other GP IIb/IIIa inhibitors) - additive bleeding risk", "Concurrent parenteral GP IIb/IIIa inhibitor - contraindicated"],
+    "moderate": ["NSAIDs - increased bleeding risk", "Thrombolytic agents - increased bleeding"],
+    "minor": [],
+    "food": "N/A (intravenous).",
+    "alcohol": "N/A (acute hospital use).",
+    "diagnostics": "Monitor aPTT/ACT when used with heparin; obtain baseline platelet count and recheck for thrombocytopenia."
+  },
+  "se": {
+    "common": ["Bleeding (access site, GI, GU)", "Hypotension", "Injection site reactions"],
+    "serious": ["Major bleeding including intracranial hemorrhage", "Acute profound thrombocytopenia", "Retroperitoneal bleeding"],
+    "rare": ["Hypersensitivity/anaphylaxis", "Urticaria"],
+    "emergency": ["Major/intracranial hemorrhage", "Anaphylaxis", "Severe acute thrombocytopenia"]
+  },
+  "monitoring": [
+    "Platelet count (baseline and within ~6 h of starting; watch for acute thrombocytopenia)",
+    "Hemoglobin and hematocrit",
+    "Serum creatinine/renal function (for dose adjustment)",
+    "aPTT (50-70 s) or ACT (200-300 s during PCI)",
+    "Signs and symptoms of bleeding at all sites including access site"
+  ],
+  "counsel": [
+    "This medicine prevents blood clots and is given by vein in hospital",
+    "Report any unusual bleeding, bruising, blood in urine/stool, or severe headache immediately",
+    "The team will monitor your blood counts and kidney function",
+    "Tell staff about all blood thinners and recent surgery or stroke",
+    "Bleeding risk is higher at vascular access sites - keep the area still as instructed"
+  ],
+  "pk": [
+    ["Onset", "Immediate platelet inhibition after IV bolus"],
+    ["Peak", "Rapid (within minutes of bolus)"],
+    ["Half-life", "~2.5 hours"],
+    ["Duration", "Platelet function recovers ~4-8 h after stopping infusion"],
+    ["Storage", "Refrigerate 2-8 C; protect from light; may store at room temperature for limited time per label"]
+  ],
+  "pearls": [
+    "Bleeding is the principal hazard - watch vascular access sites and check platelets early",
+    "Reversible, short-acting GP IIb/IIIa inhibitor; effect wears off within hours of stopping",
+    "Bolus is unchanged but infusion is halved (1 mcg/kg/min) when CrCl <50 mL/min",
+    "Contraindicated in dialysis-dependent patients (renal clearance)",
+    "Acute profound thrombocytopenia can occur - check platelet count within ~6 hours of starting"
+  ],
+  "missed": "Continuous IV infusion in acute care; not patient-administered. If infusion is interrupted, restart per protocol with clinical reassessment - do not give an extra bolus unless directed.",
+  "overdose": "Excessive dosing increases bleeding risk. There is no specific antidote; eptifibatide can be removed by hemodialysis. Stop the infusion, provide supportive care, transfuse platelets/blood products as needed for serious bleeding.",
+  "refs": [
+    ["FDA Eptifibatide Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22eptifibatide%22"],
+    ["DailyMed - Eptifibatide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=eptifibatide"]
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "generic": "Tamsulosin",
+  "cls": "Alpha-1 adrenergic receptor antagonist (uroselective alpha-blocker)",
+  "pharm": "Selectively blocks alpha-1A/alpha-1D adrenoceptors in the prostate, bladder neck, and prostatic urethra, relaxing smooth muscle and improving urine flow in BPH.",
+  "tags": ["Rx only", "Uroselective alpha-blocker", "CYP3A4/CYP2D6 substrate", "Once daily after meal"],
+  "quick": [
+    ["Adult dose", "0.4 mg once daily; may increase to 0.8 mg"],
+    ["Meal", "Take 30 minutes after the same meal each day"],
+    ["Pregnancy", "Not indicated in women; limited data"],
+    ["Lactation", "Not indicated in women"],
+    ["Renal", "No initial adjustment in mild-moderate impairment"],
+    ["Hepatic", "Caution; not studied in severe impairment"],
+    ["Alcohol", "May worsen dizziness/orthostatic hypotension"],
+    ["Monitoring", "Blood pressure, orthostatic symptoms, IFIS at cataract surgery"]
+  ],
+  "summary": "Tamsulosin is a uroselective alpha-1 adrenergic blocker used to relieve the signs and symptoms of benign prostatic hyperplasia (BPH). It relaxes smooth muscle in the prostate and bladder neck to improve urinary flow. It is taken once daily about half an hour after the same meal. Key cautions include orthostatic hypotension, first-dose syncope, priapism, and intraoperative floppy iris syndrome during cataract surgery. It is not indicated for hypertension.",
+  "indications": [
+    "Treatment of the signs and symptoms of benign prostatic hyperplasia (BPH)"
+  ],
+  "dosage": [
+    {"c": "Benign prostatic hyperplasia", "r": "Adult oral", "d": "0.4 mg once daily", "t": "Once daily, ~30 min after the same meal", "n": "Recommended starting and usual dose"},
+    {"c": "BPH inadequate response", "r": "Adult oral", "d": "Increase to 0.8 mg once daily after 2-4 weeks", "t": "Once daily", "n": "For those who fail to respond to 0.4 mg"},
+    {"c": "After interrupted therapy", "r": "Adult oral", "d": "Restart at 0.4 mg once daily", "t": "Once daily", "n": "If discontinued/interrupted for several days, re-initiate at 0.4 mg"},
+    {"c": "With strong CYP3A4 inhibitors", "r": "Adult oral", "d": "Avoid 0.4 mg with strong CYP3A4 inhibitors (e.g., ketoconazole)", "t": "Once daily", "n": "Use caution with CYP2D6/3A4 inhibitor combinations"}
+  ],
+  "admin": [
+    "Swallow capsule whole; do not crush, chew, or open",
+    "Take approximately 30 minutes after the same meal each day",
+    "Take the first dose at bedtime to reduce first-dose orthostatic hypotension",
+    "Re-initiate at 0.4 mg if therapy is interrupted for several days"
+  ],
+  "moa": "Tamsulosin selectively antagonizes alpha-1A (and alpha-1D) adrenergic receptors that predominate in the prostate, prostatic capsule, prostatic urethra, and bladder neck. This relaxes the smooth muscle in these tissues, decreasing urethral resistance and improving urinary flow and BPH symptoms. Its relative uroselectivity produces less effect on vascular smooth muscle and blood pressure than non-selective alpha-blockers.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to tamsulosin or any formulation component (including angioedema)"
+    ],
+    "relative": [
+      "History of orthostatic hypotension/syncope",
+      "Planned cataract or glaucoma surgery (intraoperative floppy iris syndrome)",
+      "Concomitant strong CYP3A4 inhibitors",
+      "Severe hepatic impairment (not studied)"
+    ],
+    "monitor": [
+      "Blood pressure and orthostatic symptoms",
+      "Inform ophthalmologist before eye surgery",
+      "Signs of priapism"
+    ]
+  },
+  "preg": "Tamsulosin is not indicated for use in women; human pregnancy data are lacking.",
+  "lact": "Tamsulosin is not indicated for use in women; use during lactation is not applicable.",
+  "renal": "No initial dosage adjustment is needed in patients with mild to moderate renal impairment; tamsulosin has not been adequately studied in severe renal impairment (CrCl <10 mL/min) and should be used with caution.",
+  "hepatic": "No dosage adjustment is needed in mild to moderate hepatic impairment; tamsulosin has not been studied in severe hepatic impairment and should be used with caution.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inhibitors (e.g., ketoconazole, ritonavir) - increase tamsulosin exposure; avoid 0.4 mg dose",
+      "PDE5 inhibitors (sildenafil, tadalafil, vardenafil) - additive hypotension",
+      "Other alpha-blockers - not recommended in combination (additive hypotension)"
+    ],
+    "moderate": [
+      "Strong CYP2D6 inhibitors (e.g., paroxetine) - increase exposure",
+      "Cimetidine - increases tamsulosin levels",
+      "Antihypertensives - additive blood-pressure lowering"
+    ],
+    "minor": ["Warfarin - inconclusive data; monitor"],
+    "food": "Take about 30 minutes after the same meal each day; fasting increases absorption and exposure.",
+    "alcohol": "Alcohol may potentiate dizziness and orthostatic hypotension.",
+    "diagnostics": "No clinically significant laboratory interference established."
+  },
+  "se": {
+    "common": ["Dizziness", "Abnormal/retrograde ejaculation", "Rhinitis", "Headache", "Asthenia"],
+    "serious": ["Orthostatic hypotension/syncope", "Priapism", "Intraoperative floppy iris syndrome", "Angioedema"],
+    "rare": ["Stevens-Johnson syndrome", "Exfoliative dermatitis", "Palpitations"],
+    "emergency": ["Syncope with injury", "Priapism (prolonged painful erection)", "Severe angioedema/airway swelling"]
+  },
+  "monitoring": ["Blood pressure and orthostatic symptoms (especially first dose)", "Symptom and urinary flow response", "Ophthalmic surgical history before cataract surgery", "Signs of priapism"],
+  "counsel": [
+    "Take the same time each day, about half an hour after the same meal",
+    "Swallow whole; do not crush, chew, or open the capsule",
+    "Rise slowly from sitting or lying; first dose may cause dizziness or fainting",
+    "Tell your eye surgeon you take this drug before any cataract surgery",
+    "Seek urgent care for a painful erection lasting more than 4 hours (priapism)"
+  ],
+  "pk": [
+    ["Onset", "Symptom improvement over 1-2 weeks"],
+    ["Peak", "4-5 hours fed; 6-7 hours after repeated dosing"],
+    ["Half-life", "9-13 hours (healthy); up to ~15 hours in target population"],
+    ["Duration", "~24 hours (once-daily dosing)"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "Uroselective: less effect on blood pressure than non-selective alpha-blockers but orthostasis still occurs",
+    "Strongly associated with intraoperative floppy iris syndrome - always disclose before cataract surgery",
+    "Retrograde/abnormal ejaculation is a common, benign but bothersome effect",
+    "Re-titrate from 0.4 mg if therapy is interrupted for several days",
+    "Not an antihypertensive; do not use to treat high blood pressure"
+  ],
+  "missed": "Take the missed dose with the next meal; if it is close to the next scheduled dose, skip it and resume the regular schedule. Do not double up.",
+  "overdose": "Overdose may cause severe hypotension. Treat by placing the patient supine to restore blood pressure and normalize heart rate; use intravenous fluids and, if needed, vasopressors. Dialysis is unlikely to help given high protein binding. Monitor renal function and support as needed.",
+  "refs": [
+    ["FDA Label - Tamsulosin Hydrochloride (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tamsulosin%20hydrochloride%22"],
+    ["DailyMed - Tamsulosin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=tamsulosin"]
+  ]
+}

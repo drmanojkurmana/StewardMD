@@ -1,0 +1,91 @@
+{
+  "generic": "Cardioplegia",
+  "cls": "Cardioplegic solution (myocardial protection, cardiac surgery)",
+  "pharm": "A class of high-potassium (and additive-containing) solutions delivered into the coronary circulation during cardiac surgery to induce rapid diastolic cardiac arrest and protect the myocardium during aortic cross-clamping.",
+  "tags": ["Cardioplegia", "Cardiac surgery", "Myocardial protection", "High-potassium", "Intraoperative", "Perfusionist-administered", "Solution group"],
+  "quick": [
+    ["Adult dose", "Variable; e.g., del Nido ~20 mL/kg single dose into coronary circulation"],
+    ["Meal", "N/A (intraoperative)"],
+    ["Pregnancy", "Used as needed for maternal cardiac surgery"],
+    ["Lactation", "N/A (single intraoperative use)"],
+    ["Renal", "Account for electrolyte load (K+) in renal impairment"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "N/A"],
+    ["Monitoring", "Cardiac arrest/recovery, serum K+, ECG, acid-base"]
+  ],
+  "summary": "Cardioplegia refers to a group of solutions, not a single FDA-approved drug, used during cardiac surgery to stop the heart in diastole and protect the myocardium during ischemic arrest on cardiopulmonary bypass. Formulations include crystalloid and blood-based, warm or cold, and antegrade or retrograde delivery; common protocols are del Nido and St. Thomas (cold high-potassium) solutions. The core arresting agent is potassium chloride; additives (magnesium, lidocaine, mannitol, bicarbonate) prolong arrest and protect cells.",
+  "indications": [
+    "Induction and maintenance of diastolic cardiac arrest during open-heart/cardiac surgery on cardiopulmonary bypass",
+    "Myocardial protection during aortic cross-clamping (CABG, valve, congenital, aortic surgery)",
+    "Preservation of donor hearts and protection during other procedures requiring a still, protected myocardium"
+  ],
+  "dosage": [
+    {"c": "del Nido cardioplegia (single-dose technique)", "r": "Intracoronary (antegrade/retrograde)", "d": "~20 mL/kg (commonly up to ~1000 mL)", "t": "Single dose; redose typically after ~60-90 min of cross-clamp", "n": "4:1 crystalloid-to-blood ratio; K+ ~24-26 mEq/L delivered, with lidocaine, magnesium, mannitol, bicarbonate"},
+    {"c": "St. Thomas (cold crystalloid/blood) cardioplegia", "r": "Intracoronary (antegrade/retrograde)", "d": "Induction then intermittent maintenance doses", "t": "Repeat every ~20-30 minutes during cross-clamp", "n": "Extracellular high-K+ solution (sodium, potassium, chloride, magnesium, bicarbonate)"},
+    {"c": "Pediatric/neonatal", "r": "Intracoronary", "d": "Weight-based per institutional protocol", "t": "Single or intermittent dosing", "n": "Volumes and composition adjusted to age/weight by the surgical team"}
+  ],
+  "admin": [
+    "Administered by the surgical/perfusion team into the coronary circulation (antegrade via aortic root/coronary ostia or retrograde via the coronary sinus)",
+    "Delivered cold or warm and as crystalloid or blood-mixed per the chosen protocol (e.g., del Nido 4:1 crystalloid:blood)",
+    "Induce arrest, then redose intermittently or use single-dose technique depending on solution and cross-clamp time",
+    "Monitor for complete diastolic arrest and electrical silence on ECG",
+    "Wash out/flush before reperfusion; manage potassium and acid-base on reperfusion"
+  ],
+  "moa": "Potassium chloride raises extracellular potassium, depolarizing the myocyte membrane and arresting the heart in diastole, which markedly lowers myocardial oxygen demand and preserves intracellular ATP during ischemia. Additives extend protection: lidocaine blocks sodium channels (limiting sodium/calcium loading), magnesium stabilizes membranes and antagonizes calcium, mannitol provides osmotic/free-radical protection, and bicarbonate buffers ischemic acidosis. Cooling further reduces metabolic demand.",
+  "contra": {
+    "absolute": ["Use outside the intraoperative cardiac-surgery setting", "Direct intravenous (systemic) administration as a routine drug (concentrated potassium is cardiotoxic systemically)"],
+    "relative": ["Hyperkalemia (account for potassium load)", "Severe renal impairment (impaired potassium handling)", "Conditions limiting safe rewarming/reperfusion"],
+    "monitor": ["Completeness of cardiac arrest", "Serum/effluent potassium", "ECG and myocardial recovery on reperfusion", "Acid-base status"]
+  },
+  "preg": "Used as clinically required for maternal cardiac surgery; managed by the surgical and obstetric team with attention to maternal-fetal perfusion.",
+  "lact": "Not applicable - single intraoperative use; resume breastfeeding per perioperative guidance.",
+  "renal": "Account for the potassium load; in renal impairment monitor serum potassium closely during and after bypass and manage hyperkalemia on reperfusion.",
+  "hepatic": "No specific adjustment.",
+  "interactions": {
+    "major": ["Systemic effects of delivered potassium (hyperkalemia) on reperfusion - monitor and treat", "Additive cardiac effects with antiarrhythmics in the perioperative period"],
+    "moderate": ["Calcium administration may antagonize the arresting effect / precipitate reperfusion injury if mistimed", "Other electrolyte-containing perfusates"],
+    "minor": ["Component-specific considerations (e.g., lidocaine, magnesium)"],
+    "food": "N/A (intraoperative)",
+    "alcohol": "N/A",
+    "diagnostics": "Monitor intraoperative electrolytes (potassium), arterial blood gases, and ECG."
+  },
+  "se": {
+    "common": ["Transient hyperkalemia", "Transient conduction/rhythm disturbance on reperfusion", "Myocardial edema"],
+    "serious": ["Difficulty weaning from bypass / post-cardiotomy ventricular dysfunction", "Reperfusion arrhythmias (e.g., ventricular fibrillation requiring defibrillation)", "Inadequate myocardial protection leading to ischemic injury"],
+    "rare": ["Systemic hyperkalemia if maldelivered", "Coronary/graft injury from delivery"],
+    "emergency": ["Refractory post-arrest ventricular arrhythmia", "Failure of the heart to resume effective contraction (myocardial stunning/failure)", "Severe systemic hyperkalemia"]
+  },
+  "monitoring": [
+    "Completeness and maintenance of diastolic arrest (ECG silence)",
+    "Serum and cardioplegia-effluent potassium",
+    "Arterial blood gases and acid-base balance",
+    "Myocardial temperature (cold techniques)",
+    "Cardiac rhythm and contractility on reperfusion/weaning from bypass"
+  ],
+  "counsel": [
+    "This is an intraoperative solution given by your surgical and perfusion team to stop and protect your heart during surgery - not a take-home medicine",
+    "Your heart is intentionally stopped during part of the operation and restarted afterward",
+    "Temporary heart-rhythm changes and electrolyte shifts can occur as the heart restarts and are managed by the team",
+    "Ask your surgeon about the specific myocardial-protection strategy used in your operation"
+  ],
+  "pk": [
+    ["Onset", "Diastolic arrest within seconds to a minute of coronary delivery"],
+    ["Peak", "Immediate myocardial effect during infusion"],
+    ["Half-life", "Not applicable (local intraoperative solution)"],
+    ["Duration", "Single-dose (e.g., del Nido) up to ~60-90 min; St. Thomas redosed every ~20-30 min"],
+    ["Storage", "Refrigerate cold solutions per protocol; mix with blood and cool at point of use"]
+  ],
+  "pearls": [
+    "NOTE: Cardioplegia is a class/group of solutions, not a single FDA-approved drug; composition and delivery vary by institution and protocol",
+    "Potassium chloride is the core arresting agent (depolarized diastolic arrest); additives prolong and refine protection",
+    "del Nido (single-dose, 4:1 crystalloid:blood, with lidocaine + magnesium) vs. St. Thomas (intermittent, repeated every 20-30 min) are the two most common adult protocols",
+    "del Nido uses lower potassium but lasts longer because of magnesium and lidocaine",
+    "Must never be given as a routine systemic IV drug - concentrated potassium is cardiotoxic"
+  ],
+  "missed": "Not applicable - administered intraoperatively by the perfusion team; redosing is dictated by cross-clamp time and the chosen solution protocol, not patient self-administration.",
+  "overdose": "Excess delivery raises systemic potassium and can cause hyperkalemia, refractory arrest, and reperfusion arrhythmias. Management: stop delivery, wash out cardioplegia, correct hyperkalemia (calcium, insulin-glucose, bicarbonate, diuresis/dialysis as needed), support the myocardium, and treat arrhythmias.",
+  "refs": [
+    ["del Nido versus St. Thomas Cardioplegia Solutions (J Extra Corpor Technol)", "https://ject.edpsciences.org/articles/ject/pdf/2016/02/ject-48-67.pdf"],
+    ["Comparison of del Nido and St. Thomas cardioplegia in adult cardiac surgery (PMC)", "https://pmc.ncbi.nlm.nih.gov/articles/PMC5233756/"]
+  ]
+}

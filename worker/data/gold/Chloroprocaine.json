@@ -1,0 +1,109 @@
+{
+  "generic": "Chloroprocaine (Chloroprocaine hydrochloride)",
+  "cls": "Ester-type local anesthetic (amino-ester)",
+  "pharm": "Short-acting ester local anesthetic that reversibly blocks neuronal voltage-gated sodium channels, preventing nerve impulse initiation and conduction to produce local/regional anesthesia.",
+  "tags": ["Rx only", "Local anesthetic", "Ester type", "Short-acting", "Injection"],
+  "quick": [
+    ["Adult dose", "Infiltration/peripheral nerve block: total dose individualized, typically up to 800 mg (11 mg/kg) without epinephrine"],
+    ["Meal", "Not applicable (injected by a clinician)"],
+    ["Pregnancy", "Used in obstetric regional anesthesia; use as clinically indicated"],
+    ["Lactation", "Short-acting; brief interruption generally unnecessary, use clinical judgment"],
+    ["Renal", "Use with caution; little change as it is rapidly metabolized in plasma"],
+    ["Hepatic", "Metabolized by plasma esterases, not the liver; little hepatic impact"],
+    ["Alcohol", "Not directly relevant; avoid additive CNS depression with sedatives"],
+    ["Monitoring", "Cardiovascular and respiratory status, signs of systemic toxicity (LAST)"]
+  ],
+  "summary": "Chloroprocaine is a rapid-onset, short-acting ester-type local anesthetic used for infiltration anesthesia, peripheral nerve block, and epidural (including caudal) anesthesia, including in obstetrics. It is rapidly hydrolyzed by plasma pseudocholinesterase, giving a very short systemic half-life and a wide safety margin for systemic toxicity. The principal serious hazards are local anesthetic systemic toxicity (LAST) - CNS excitation/seizures progressing to depression, and cardiovascular collapse - and, with neuraxial use, hypotension and high/total spinal block. As an ester, it carries a risk of hypersensitivity reactions (related to PABA metabolites).",
+  "indications": [
+    "Production of local anesthesia by infiltration and peripheral nerve block",
+    "Epidural and caudal anesthesia, including for surgical and obstetric procedures"
+  ],
+  "dosage": [
+    {"c": "Local infiltration (adult)", "r": "Adult subcutaneous/infiltration", "d": "1-2% solution; individualize to the smallest effective dose", "t": "As needed for procedure", "n": "Total per label limits"},
+    {"c": "Peripheral nerve block (adult)", "r": "Adult perineural", "d": "2-3% solution; total dose individualized", "t": "Single procedure", "n": "Maximum ~800 mg without epinephrine"},
+    {"c": "Maximum single dose without epinephrine (adult)", "r": "Adult injection", "d": "Up to 800 mg (approximately 11 mg/kg)", "t": "Per procedure", "n": "Do not exceed"},
+    {"c": "Maximum single dose with epinephrine (adult)", "r": "Adult injection", "d": "Up to 1000 mg (approximately 14 mg/kg)", "t": "Per procedure", "n": "Epinephrine prolongs effect and reduces peak levels"},
+    {"c": "Pediatric (>=3 years)", "r": "Pediatric injection", "d": "Maximum 11 mg/kg; use lower concentrations and individualized dosing", "t": "Per procedure", "n": "Use smallest effective dose"}
+  ],
+  "admin": [
+    "Administer only by clinicians experienced in regional anesthesia, with resuscitation equipment and drugs immediately available",
+    "Aspirate before and during injection to avoid intravascular or intrathecal injection; use incremental dosing",
+    "Use a test dose where appropriate for epidural/caudal techniques",
+    "Use the lowest dose and concentration that produces the desired effect",
+    "Do not use solutions containing preservatives (e.g., methylparaben) for spinal or epidural anesthesia"
+  ],
+  "moa": "Chloroprocaine is an amino-ester local anesthetic. It diffuses across the nerve cell membrane in its uncharged base form and, in its ionized form, binds the intracellular portion of voltage-gated sodium channels. By blocking sodium influx, it inhibits the depolarization needed to initiate and propagate action potentials, thereby reversibly blocking nerve conduction. Smaller, myelinated, and more rapidly firing fibers (pain and autonomic) are blocked before larger motor fibers. Its very rapid onset reflects its physicochemical properties, and its short duration reflects extremely rapid hydrolysis by plasma pseudocholinesterase.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to chloroprocaine or other ester-type local anesthetics (or to PABA/para-aminobenzoic acid derivatives)",
+      "Hypersensitivity to any component of the formulation"
+    ],
+    "relative": [
+      "Contraindications to the specific regional technique (e.g., infection at injection site, coagulopathy for neuraxial block, increased intracranial pressure)",
+      "Severe hemorrhage, hypotension, or shock (for neuraxial techniques)",
+      "Plasma cholinesterase deficiency (prolonged effect/toxicity)",
+      "Pre-existing CNS or cardiac conduction disease",
+      "Severe hepatic or renal impairment (general caution)"
+    ],
+    "monitor": [
+      "Cardiovascular status (blood pressure, heart rate, ECG)",
+      "Respiratory status and oxygenation",
+      "Level/spread of anesthetic block and consciousness",
+      "Early signs of systemic toxicity (perioral numbness, tinnitus, restlessness)"
+    ]
+  },
+  "preg": "Chloroprocaine is used in obstetric anesthesia (epidural/caudal); its very rapid maternal metabolism limits fetal exposure. Use as clinically indicated, observing techniques to avoid maternal hypotension and fetal compromise; avoid paracervical block in situations of fetal distress.",
+  "lact": "Chloroprocaine is very short-acting and rapidly metabolized; the amount appearing in breast milk after appropriate use is expected to be minimal, and breastfeeding can generally continue. Use clinical judgment.",
+  "renal": "Chloroprocaine is metabolized in plasma rather than excreted unchanged by the kidneys, so renal impairment has little direct effect on its clearance; nevertheless, use general caution in significant renal impairment.",
+  "hepatic": "Chloroprocaine is metabolized by plasma pseudocholinesterase rather than hepatic enzymes, so hepatic impairment has little effect on its metabolism. General caution is advised in severely debilitated patients.",
+  "interactions": {
+    "major": [
+      "Other local anesthetics or antiarrhythmics (e.g., lidocaine, mexiletine) - additive systemic and cardiac toxicity",
+      "Drugs that depress cardiac conduction/contractility - additive cardiovascular depression with regional block"
+    ],
+    "moderate": [
+      "MAO inhibitors and tricyclic antidepressants - increased risk of hypertension when local anesthetic solutions contain epinephrine",
+      "Ergot-type oxytocics - severe persistent hypertension with epinephrine-containing solutions",
+      "Sulfonamides - the PABA metabolite of chloroprocaine can antagonize sulfonamide activity",
+      "Cholinesterase inhibitors / drugs reducing plasma cholinesterase - prolonged chloroprocaine effect"
+    ],
+    "minor": ["CNS depressants - additive sedation if systemic absorption occurs"],
+    "food": "Not relevant (parenteral administration).",
+    "alcohol": "No direct interaction; avoid additive CNS/respiratory depression with sedatives.",
+    "diagnostics": "Its metabolite (para-aminobenzoic acid, PABA) can interfere with the action of sulfonamide antibacterials."
+  },
+  "se": {
+    "common": ["Local injection-site pain or stinging", "Transient hypotension (with neuraxial block)", "Bradycardia", "Backache (after epidural)", "Headache"],
+    "serious": ["Local anesthetic systemic toxicity (LAST) - CNS excitation/seizures then depression", "Cardiovascular toxicity (hypotension, arrhythmia, cardiac arrest)", "High or total spinal block with respiratory paralysis", "Severe hypersensitivity/anaphylaxis (ester class)"],
+    "rare": ["Neurological injury / persistent sensory or motor deficit after neuraxial use", "Methemoglobinemia", "Cauda equina syndrome (with inadvertent high-concentration intrathecal exposure historically)"],
+    "emergency": ["Seizures progressing to coma and respiratory arrest", "Cardiovascular collapse / cardiac arrest", "Total spinal anesthesia with apnea", "Anaphylaxis"]
+  },
+  "monitoring": ["Continuous cardiovascular monitoring (blood pressure, heart rate, ECG) during and after administration", "Respiratory rate and oxygenation", "Level and spread of the anesthetic block and patient consciousness", "Watch for early symptoms of systemic toxicity (circumoral numbness, tinnitus, lightheadedness, agitation)"],
+  "counsel": [
+    "This anesthetic is given by your clinician for a procedure; it numbs a specific area and wears off quickly",
+    "Tell your anesthetist about any previous reaction to a local anesthetic or 'caine' drugs",
+    "Numbness, tingling, or weakness in the treated area is expected and should resolve as the medicine wears off",
+    "Report immediately any ringing in the ears, metallic taste, dizziness, restlessness, or twitching during injection",
+    "After a nerve block, protect the numb area from injury until sensation fully returns"
+  ],
+  "pk": [
+    ["Onset", "Very rapid - typically within 6-12 minutes for regional anesthesia"],
+    ["Peak", "Plasma levels and block establish within minutes of injection"],
+    ["Half-life", "Extremely short - approximately 21-25 seconds (adult plasma); rapidly hydrolyzed by plasma esterases"],
+    ["Duration", "Short - about 30-60 minutes (longer with epinephrine)"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted); protect from light; do not use discolored solutions"]
+  ],
+  "pearls": [
+    "Ester-type local anesthetic - rapidly hydrolyzed by plasma pseudocholinesterase, giving very short duration and a wide systemic safety margin",
+    "Local anesthetic systemic toxicity (LAST) is the key danger - have lipid emulsion (Intralipid) and resuscitation ready; treat seizures and cardiovascular collapse promptly",
+    "Aspirate and use incremental dosing to avoid intravascular or intrathecal injection",
+    "Its PABA metabolite can cause ester-class allergy and can antagonize sulfonamide antibiotics",
+    "Preservative-containing formulations must not be used for spinal/epidural anesthesia"
+  ],
+  "missed": "Not applicable - chloroprocaine is administered as a single procedure by a clinician and has no chronic dosing schedule.",
+  "overdose": "Overdose or inadvertent intravascular injection causes local anesthetic systemic toxicity: CNS excitation (restlessness, tinnitus, perioral numbness, seizures) followed by CNS depression, and cardiovascular toxicity (hypotension, arrhythmias, cardiac arrest). Management: stop injection, secure airway and give oxygen/ventilation, control seizures (benzodiazepines), support circulation, and administer intravenous lipid emulsion (lipid rescue) for severe cardiovascular toxicity; provide advanced cardiac life support as needed.",
+  "refs": [
+    ["FDA Label - Chloroprocaine hydrochloride (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22chloroprocaine%20hydrochloride%22"],
+    ["DailyMed - Chloroprocaine hydrochloride", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=chloroprocaine"]
+  ]
+}

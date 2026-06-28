@@ -1,0 +1,89 @@
+{
+  "generic": "Glimepiride",
+  "cls": "Second-generation sulfonylurea",
+  "pharm": "Oral antidiabetic (insulin secretagogue)",
+  "tags": ["sulfonylurea", "type 2 diabetes", "hypoglycemia", "antidiabetic", "glycemic control"],
+  "quick": [
+    ["Adult dose", "1-2 mg OD; max 8 mg OD"],
+    ["Meal", "With breakfast/first main meal"],
+    ["Pregnancy", "Not recommended"],
+    ["Lactation", "Not recommended"],
+    ["Renal", "Start 1 mg; titrate cautiously"],
+    ["Hepatic", "Use caution; start low"],
+    ["Alcohol", "Avoid; hypoglycemia risk"],
+    ["Monitoring", "Glucose, HbA1c, hypoglycemia signs"]
+  ],
+  "summary": "Glimepiride is a once-daily sulfonylurea that improves glycemic control in type 2 diabetes by stimulating insulin secretion. Started at 1-2 mg with the first meal, titrated to a maximum of 8 mg daily. Main risk is hypoglycemia, greatest in the elderly and renally impaired.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes (adult)", "r": "Standard", "d": "Start 1-2 mg once daily; usual maintenance 1-4 mg; max 8 mg/day", "t": "Once daily", "n": "Titrate by 1-2 mg every 1-2 weeks"},
+    {"c": "Increased hypoglycemia risk (elderly, renal)", "r": "Reduced", "d": "Start 1 mg once daily, titrate slowly", "t": "Once daily", "n": "Conservative titration"},
+    {"c": "Combination with insulin/metformin", "r": "Standard", "d": "1-2 mg once daily with the other agent", "t": "Once daily", "n": "Adjust to glycemic response"}
+  ],
+  "admin": [
+    "Take once daily with breakfast or the first main meal",
+    "Do not skip meals after dosing - risk of hypoglycemia",
+    "Titrate dose no more often than every 1-2 weeks",
+    "Use 1 mg start in elderly or renal impairment",
+    "Educate on recognizing and treating hypoglycemia"
+  ],
+  "moa": "Stimulates insulin release from functioning pancreatic beta cells by binding the sulfonylurea receptor (SUR1) on the ATP-sensitive potassium channel, causing channel closure, membrane depolarization, calcium influx and insulin exocytosis. Requires residual beta-cell function.",
+  "contra": {
+    "absolute": ["Hypersensitivity to glimepiride or sulfonylureas", "Type 1 diabetes mellitus", "Diabetic ketoacidosis"],
+    "relative": ["G6PD deficiency (hemolytic anemia risk)", "Severe renal or hepatic impairment", "Elderly / debilitated / malnourished patients", "Sulfonamide allergy (cross-sensitivity possible)"],
+    "monitor": ["Concurrent insulin or other hypoglycemics", "Cardiovascular disease", "Adrenal/pituitary insufficiency"]
+  },
+  "preg": "Not recommended. Insulin is preferred for glycemic control in pregnancy. Sulfonylureas near term may cause prolonged neonatal hypoglycemia.",
+  "lact": "Not recommended due to potential neonatal hypoglycemia; discontinue nursing or the drug.",
+  "renal": "Increased hypoglycemia risk; start at 1 mg once daily and titrate carefully based on glucose. Avoid in severe impairment.",
+  "hepatic": "Use with caution; start low and titrate slowly. Impaired metabolism increases hypoglycemia risk.",
+  "interactions": {
+    "major": ["Other glucose-lowering agents (insulin, sulfonylureas) - additive hypoglycemia", "Concurrent strong CYP2C9 inhibitors (e.g., fluconazole) - increased glimepiride levels and hypoglycemia"],
+    "moderate": ["Beta-blockers - mask hypoglycemia symptoms and impair recovery", "NSAIDs, sulfonamides, salicylates, warfarin - potentiate hypoglycemia (protein displacement)", "Thiazides, corticosteroids, sympathomimetics - hyperglycemia / reduced effect", "Colesevelam - reduced glimepiride exposure (take glimepiride >=4 h before)"],
+    "minor": ["Cimetidine, ranitidine - possible altered glucose response", "ACE inhibitors - may enhance glucose lowering"],
+    "food": "Take with first meal; high-fat meals slightly delay absorption.",
+    "alcohol": "Avoid; potentiates hypoglycemia and rarely causes disulfiram-like reaction.",
+    "diagnostics": "Lowers blood glucose; may affect glucose-tolerance testing."
+  },
+  "se": {
+    "common": ["Hypoglycemia", "Dizziness", "Headache", "Nausea", "Weight gain"],
+    "serious": ["Severe / prolonged hypoglycemia", "Hemolytic anemia (especially G6PD deficiency)"],
+    "rare": ["Cholestatic jaundice / hepatitis", "Hyponatremia (SIADH-like)", "Photosensitivity, severe skin reactions", "Thrombocytopenia, leukopenia, agranulocytosis"],
+    "emergency": ["Severe hypoglycemia with seizure / coma", "Severe hypersensitivity / anaphylaxis", "Severe blood dyscrasia"]
+  },
+  "monitoring": [
+    "Fasting blood glucose and HbA1c periodically",
+    "Signs and symptoms of hypoglycemia",
+    "CBC if signs of blood dyscrasia",
+    "Liver function if hepatic symptoms",
+    "Renal function in at-risk patients"
+  ],
+  "counsel": [
+    "Take with breakfast/first meal; never skip meals after dosing",
+    "Recognize and treat hypoglycemia (carry fast-acting glucose)",
+    "Avoid alcohol",
+    "Use sun protection (photosensitivity)",
+    "Continue diet, exercise and glucose self-monitoring"
+  ],
+  "pk": [
+    ["Onset", "2-3 hours (glucose lowering)"],
+    ["Peak", "2-3 hours"],
+    ["Half-life", "~5-9 hours"],
+    ["Duration", "~24 hours (once-daily)"],
+    ["Storage", "Store at 20-25 C, protect from light and moisture"]
+  ],
+  "pearls": [
+    "Once-daily dosing with lower hypoglycemia risk than glyburide",
+    "Has extrapancreatic (insulin-sensitizing) effects",
+    "Start 1 mg in elderly/renal impairment to limit hypoglycemia",
+    "Weight gain common; pair with lifestyle measures"
+  ],
+  "missed": "If a meal is missed, skip that dose. If remembered with the meal, take it; do not double the dose to make up.",
+  "overdose": "Can cause severe, prolonged hypoglycemia. Treat conscious patients with oral glucose; severe cases need IV dextrose and close monitoring (recurrence over 24-48 h). Glucagon if needed. Octreotide may help refractory sulfonylurea hypoglycemia. Hospitalize.",
+  "refs": [
+    ["FDA Glimepiride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22glimepiride%22"],
+    ["FDA DailyMed - Glimepiride", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

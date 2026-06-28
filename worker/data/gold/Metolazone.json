@@ -1,0 +1,95 @@
+{
+  "generic": "Metolazone",
+  "cls": "Quinazoline (thiazide-like) diuretic",
+  "pharm": "Diuretic / antihypertensive",
+  "tags": ["diuretic", "thiazide-like", "heart failure", "edema", "hypertension", "antihypertensive"],
+  "quick": [
+    ["Adult dose", "Edema 5-20 mg once daily; hypertension 2.5-5 mg once daily"],
+    ["Meal", "May be taken with or without food; take in the morning to avoid nocturia"],
+    ["Pregnancy", "Use only if clearly needed; risk of fetal/neonatal jaundice and thrombocytopenia"],
+    ["Lactation", "Appears in breast milk; weigh benefit vs risk, generally avoid"],
+    ["Renal", "Useful even in low GFR; contraindicated in anuria; monitor electrolytes"],
+    ["Hepatic", "Contraindicated in hepatic coma/precoma; caution in liver disease"],
+    ["Alcohol", "Avoid excess; may worsen orthostatic hypotension"],
+    ["Monitoring", "Serum electrolytes (K, Na), renal function, uric acid, glucose, BP"]
+  ],
+  "summary": "Metolazone is a quinazoline thiazide-like diuretic that inhibits sodium reabsorption at the cortical diluting segment (and proximal tubule), producing diuresis and natriuresis used for edema of heart failure and renal disease and for hypertension. Unlike thiazides it retains efficacy at low glomerular filtration rates and is often added to a loop diuretic for synergistic (sequential nephron blockade) diuresis. Key hazards are hypokalemia and other electrolyte/volume disturbances.",
+  "indications": [
+    "Edema accompanying congestive heart failure",
+    "Edema of renal disease including nephrotic syndrome and states of diminished renal function",
+    "Hypertension, alone or combined with other antihypertensive classes",
+    "Off-label: adjunct to loop diuretics for diuretic-resistant edema (sequential nephron blockade)"
+  ],
+  "dosage": [
+    {"c": "Edema of cardiac failure (adult)", "r": "Usual", "d": "5-20 mg once daily", "t": "Once daily", "n": "Titrate to minimal effective dose"},
+    {"c": "Edema of renal disease (adult)", "r": "Usual", "d": "5-20 mg once daily", "t": "Once daily", "n": "Effective even with reduced GFR"},
+    {"c": "Mild-to-moderate hypertension (adult)", "r": "Usual", "d": "2.5-5 mg once daily", "t": "Once daily", "n": "Begin at lowest dose; allow 3-4 weeks for full effect"},
+    {"c": "Diuretic-resistant edema (adjunct, off-label)", "r": "Add-on", "d": "2.5-10 mg given 30 min before a loop diuretic", "t": "Once daily or intermittent", "n": "Risk of profound diuresis and hypokalemia; monitor closely"},
+    {"c": "Anuria / hepatic coma", "r": "Contraindicated", "d": "Do not use", "t": "-", "n": "Risk of precipitating hepatic coma or worsening renal failure"}
+  ],
+  "admin": [
+    "Give a single daily dose, preferably in the morning to limit night-time urination",
+    "May be taken with or without food",
+    "When combined with a loop diuretic, give metolazone about 30 minutes before the loop agent",
+    "Titrate to the minimal dose that maintains the desired response and reduce when the goal is reached",
+    "Correct any pre-existing hypokalemia before use in digitalized patients"
+  ],
+  "moa": "Metolazone inhibits sodium and chloride reabsorption primarily at the cortical diluting segment of the distal convoluted tubule and to a lesser extent at the proximal tubule, increasing distal sodium delivery and thereby potassium excretion. It does not inhibit carbonic anhydrase. By acting at a different nephron site than loop diuretics it produces synergistic (sequential nephron blockade) natriuresis, and unlike most thiazides it remains effective at low glomerular filtration rates.",
+  "contra": {
+    "absolute": ["Anuria", "Hepatic coma or precoma", "Known hypersensitivity to metolazone or sulfonamide-derived diuretics"],
+    "relative": ["Pre-existing hypokalemia or severe electrolyte imbalance", "Symptomatic hyperuricemia/gout", "Diabetes mellitus (may worsen glycemic control)", "Severe hyponatremia"],
+    "monitor": ["Concomitant lithium", "Concomitant digitalis glycosides", "Concomitant other antihypertensives or loop diuretics", "Patients with hepatic cirrhosis"]
+  },
+  "preg": "There are no adequate well-controlled studies in pregnant women; metolazone crosses the placenta. Routine diuretic use in otherwise healthy pregnant women is inappropriate. Use only if clearly needed for pathologic edema, weighing benefit against fetal/neonatal hazards including jaundice and thrombocytopenia.",
+  "lact": "Metolazone appears in breast milk. Because of the potential for serious adverse reactions in nursing infants, decide whether to discontinue nursing or the drug, considering its importance to the mother.",
+  "renal": "Retains diuretic efficacy in moderate-to-severe renal impairment, unlike most thiazides, and is useful when GFR is low. Contraindicated in anuria. Monitor electrolytes and renal function closely as azotemia and volume depletion may worsen function.",
+  "hepatic": "Contraindicated in hepatic coma or precoma. In cirrhosis, electrolyte shifts (hypokalemia, hyponatremia, alkalosis) can precipitate hepatic encephalopathy; use cautiously with close monitoring.",
+  "interactions": {
+    "major": ["Lithium - reduces renal clearance of lithium and adds high risk of lithium toxicity; generally avoid combination", "Digitalis glycosides - diuretic-induced hypokalemia/hypomagnesemia increases risk of dangerous arrhythmias", "Other loop diuretics (e.g. furosemide) - profound additive diuresis with severe fluid/electrolyte loss"],
+    "moderate": ["ACE inhibitors / ARBs - additive hypotension and first-dose hypotension; risk of azotemia", "Corticosteroids / ACTH - intensified electrolyte depletion, especially hypokalemia", "Antidiabetic agents - may reduce glucose control and require dose adjustment", "Other antihypertensives - additive blood-pressure lowering"],
+    "minor": ["NSAIDs - may blunt the diuretic and antihypertensive response", "Curare-type muscle relaxants - effect may be enhanced by hypokalemia"],
+    "food": "May be taken with or without food; no significant food interaction.",
+    "alcohol": "Alcohol may potentiate orthostatic hypotension; avoid excess.",
+    "diagnostics": "May raise serum uric acid, glucose, calcium and cholesterol and lower serum potassium and sodium; can interfere with parathyroid function tests."
+  },
+  "se": {
+    "common": ["Dizziness / lightheadedness", "Headache", "Fatigue and weakness", "Hypokalemia", "Orthostatic hypotension", "Muscle cramps"],
+    "serious": ["Severe hypokalemia with arrhythmia", "Rapid-onset severe hyponatremia", "Excessive volume depletion and prerenal azotemia", "Hepatitis / intrahepatic cholestatic jaundice", "Pancreatitis", "Hyperuricemia precipitating gout"],
+    "rare": ["Aplastic/hypoplastic anemia, agranulocytosis, leukopenia, thrombocytopenia", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Necrotizing (cutaneous) vasculitis", "Photosensitivity", "Venous thrombosis from hemoconcentration"],
+    "emergency": ["Symptomatic severe hyponatremia/hypokalemia (confusion, seizures, dysrhythmia)", "Cardiovascular collapse from volume depletion", "Severe hypersensitivity skin reaction (SJS/TEN)", "Hepatic coma in cirrhotic patients"]
+  },
+  "monitoring": [
+    "Serum potassium, sodium and other electrolytes at baseline and regularly",
+    "Renal function (BUN, creatinine) and fluid/volume status",
+    "Serum uric acid and blood glucose periodically",
+    "Blood pressure and signs of orthostatic hypotension",
+    "Signs of hepatic decompensation in cirrhotic patients"
+  ],
+  "counsel": [
+    "Take in the morning to avoid waking at night to urinate",
+    "Report muscle weakness, cramps, palpitations, severe dizziness or confusion (low potassium/sodium)",
+    "Rise slowly from sitting or lying to reduce dizziness",
+    "Keep follow-up appointments for blood tests of electrolytes and kidney function",
+    "Tell your doctor about lithium, digoxin, blood-pressure or diabetes medicines"
+  ],
+  "pk": [
+    ["Onset", "Diuresis begins within ~1 hour"],
+    ["Peak", "Peak diuretic effect within about 2 hours"],
+    ["Half-life", "Approximately 14 hours (varies with formulation)"],
+    ["Duration", "Diuresis persists 24 hours or longer"],
+    ["Storage", "Store at 20-25 C; protect from light in a tight, light-resistant container"]
+  ],
+  "pearls": [
+    "Unlike standard thiazides, metolazone keeps working at low GFR, making it valuable in renal impairment and refractory edema",
+    "Classic use is add-on to a loop diuretic for sequential nephron blockade in diuretic-resistant heart failure - watch for brisk diuresis and hypokalemia",
+    "Different oral formulations differ in bioavailability (e.g. Zaroxolyn vs Mykrox); they are not mg-for-mg interchangeable and require dose titration",
+    "Hypokalemia is dose-related and especially dangerous in digitalized patients - monitor and supplement potassium",
+    "Sulfonamide-derived; use caution in patients with known sulfonamide hypersensitivity"
+  ],
+  "missed": "Take the missed dose as soon as you remember the same day; if it is nearly time for the next dose, skip the missed dose and resume your usual once-daily schedule. Do not double the dose. Avoid taking late in the day to prevent night-time urination.",
+  "overdose": "Overdose causes excessive diuresis with dehydration, hypotension, electrolyte depletion (hypokalemia, hyponatremia), lethargy and possibly cardiac arrhythmias or coma. There is no specific antidote. Treat with fluid and electrolyte replacement, supportive care and monitoring of vital signs, electrolytes and renal function; manage symptomatic hypotension and arrhythmias.",
+  "refs": [
+    ["FDA Metolazone Tablets USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metolazone%22"],
+    ["DailyMed - Metolazone", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

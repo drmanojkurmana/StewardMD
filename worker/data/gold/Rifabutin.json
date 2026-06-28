@@ -1,0 +1,139 @@
+{
+  "generic": "Rifabutin",
+  "cls": "Rifamycin (ansamycin) antimycobacterial antibiotic",
+  "pharm": "Antimycobacterial agent",
+  "tags": [
+    "Rx only",
+    "rifamycin",
+    "antimycobacterial",
+    "uveitis risk",
+    "potent CYP3A inducer"
+  ],
+  "quick": [
+    ["Adult dose", "300 mg orally once daily (may split as 150 mg twice daily with food if GI upset)"],
+    ["Meal", "May take with food; mixing with food (e.g., applesauce) is acceptable, especially if GI upset"],
+    ["Pregnancy", "Use only if benefit justifies risk; no human data, some animal fetal effects"],
+    ["Lactation", "Excretion in milk unknown; weigh continuing the drug vs nursing"],
+    ["Renal", "Consider 50% dose reduction if CrCl <30 mL/min and toxicity suspected"],
+    ["Hepatic", "No change in mild impairment; moderate-severe not studied"],
+    ["Alcohol", "No specific interaction described in labeling"],
+    ["Monitoring", "CBC (neutropenia), eye exam for uveitis, LFTs, drug interactions (CYP3A)"]
+  ],
+  "summary": "Rifabutin is a rifamycin (ansamycin) antimycobacterial used to prevent disseminated Mycobacterium avium complex (MAC) disease in patients with advanced HIV infection. The usual dose is 300 mg orally once daily (or 150 mg twice daily with food if GI upset). It must NOT be used as MAC prophylaxis in patients with active tuberculosis, because single-agent rifabutin can drive rifabutin- and rifampin-resistant TB. Distinctive adverse effects include UVEITIS (especially at higher doses or with strong CYP3A inhibitors such as clarithromycin or fluconazole), neutropenia/leukopenia, and a benign red-orange discoloration of body fluids. Rifabutin is both a CYP3A inducer (lowering levels of drugs like itraconazole, clarithromycin, and certain antiretrovirals) and a CYP3A substrate (CYP3A inhibitors raise its levels). It is contraindicated with cabotegravir/rilpivirine long-acting injectable.",
+  "indications": [
+    "Prevention of disseminated Mycobacterium avium complex (MAC) disease in patients with advanced HIV infection"
+  ],
+  "dosage": [
+    {"c": "MAC prophylaxis (advanced HIV)", "r": "Adult", "d": "300 mg orally once daily", "t": "Once daily", "n": "May give 150 mg twice daily with food if nausea/vomiting/GI upset"},
+    {"c": "Severe renal impairment (CrCl <30 mL/min)", "r": "Adult", "d": "Consider reducing the dose by 50% if toxicity is suspected", "t": "Once daily", "n": "No adjustment for mild-moderate renal impairment"},
+    {"c": "Dose adjustment with interacting drugs", "r": "Adult", "d": "Reduce rifabutin dose when given with strong CYP3A inhibitors (e.g., clarithromycin); increase when given with inducers per interaction guidance", "t": "Per regimen", "n": "Follow protease inhibitor / antifungal interaction tables"}
+  ],
+  "admin": [
+    "Take orally once daily; may be taken with food",
+    "For GI upset, may divide as 150 mg twice daily with food",
+    "May be mixed with foods such as applesauce to aid administration",
+    "Exclude active tuberculosis before using for MAC prophylaxis",
+    "Review concomitant medications for CYP3A interactions and adjust doses accordingly"
+  ],
+  "moa": "Rifabutin inhibits DNA-dependent RNA polymerase in susceptible bacteria (e.g., E. coli, B. subtilis), thereby blocking bacterial RNA synthesis, but does not inhibit the mammalian enzyme. Its precise action against Mycobacterium avium complex is not fully established, but it is consistent with the rifamycin class mechanism of RNA polymerase inhibition.",
+  "contra": {
+    "absolute": [
+      "Clinically significant hypersensitivity to rifabutin or any other rifamycin",
+      "Patients being treated with cabotegravir/rilpivirine prolonged-release injectable suspension",
+      "Active tuberculosis (must not be used as single-agent MAC prophylaxis in active TB)"
+    ],
+    "relative": [
+      "Concomitant strong CYP3A inhibitors (uveitis/neutropenia risk - dose-reduce rifabutin)",
+      "Severe renal impairment (consider dose reduction)",
+      "Pre-existing neutropenia or thrombocytopenia",
+      "Moderate to severe hepatic impairment (PK not characterized)"
+    ],
+    "monitor": [
+      "Complete blood count for neutropenia/leukopenia",
+      "Symptoms of uveitis (eye pain, redness, blurred or decreased vision)",
+      "Signs of active tuberculosis during prophylaxis",
+      "Liver function and drug-interaction effects"
+    ]
+  },
+  "preg": "There are no adequate and well-controlled studies in pregnant women. Animal reproduction studies showed no teratogenicity, but at higher doses there was decreased fetal viability (rats) and fetal skeletal variants/anomalies (rats and rabbits) and maternotoxicity (rabbits). Rifabutin should be used during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "It is not known whether rifabutin is excreted in human milk. Because many drugs are excreted in milk and because of the potential for serious adverse reactions in nursing infants, a decision should be made whether to discontinue nursing or the drug, accounting for its importance to the mother. (Rifabutin can impart an orange discoloration.)",
+  "renal": "No dosage adjustment is required for mild to moderate renal impairment. For severe renal impairment (creatinine clearance less than 30 mL/min), consider reducing the rifabutin dose by 50% if toxicity is suspected.",
+  "hepatic": "Mild hepatic impairment does not require dose modification. The pharmacokinetics of rifabutin in patients with moderate and severe hepatic impairment are not known; use with caution.",
+  "interactions": {
+    "major": [
+      "Cabotegravir/rilpivirine long-acting injectable - contraindicated",
+      "Strong CYP3A inhibitors (clarithromycin, fluconazole, ritonavir-boosted regimens) - increase rifabutin levels and risk of uveitis/neutropenia; reduce rifabutin dose",
+      "CYP3A substrates including certain antiretrovirals, itraconazole, clarithromycin, saquinavir - rifabutin induces CYP3A and lowers their levels (reduced efficacy)"
+    ],
+    "moderate": [
+      "Oral contraceptives - reduced efficacy due to enzyme induction; use additional contraception",
+      "Anticoagulants and other CYP3A-metabolized drugs - altered exposure"
+    ],
+    "minor": [
+      "Antacids (may affect absorption - separate administration)"
+    ],
+    "food": "May be taken with food; high-fat meals slow the rate but not the extent of absorption.",
+    "alcohol": "No specific alcohol interaction is described in the labeling.",
+    "diagnostics": "Can cause benign red-orange discoloration of urine, sweat, tears, and other body fluids; may permanently stain contact lenses. Monitor CBC and LFTs."
+  },
+  "se": {
+    "common": [
+      "Reddish-orange discoloration of urine and other body fluids",
+      "Leukopenia/neutropenia",
+      "Rash",
+      "Nausea, abdominal pain, dyspepsia",
+      "Headache, myalgia"
+    ],
+    "serious": [
+      "Uveitis (especially at higher doses or with CYP3A inhibitors)",
+      "Severe neutropenia/leukopenia",
+      "Thrombocytopenia",
+      "Hepatitis / elevated liver enzymes",
+      "Selection of rifamycin-resistant tuberculosis if used in undiagnosed active TB"
+    ],
+    "rare": [
+      "Hemolysis",
+      "Arthralgia/arthritis-like syndrome",
+      "Severe hypersensitivity reactions"
+    ],
+    "emergency": [
+      "Acute uveitis with eye pain and visual changes",
+      "Severe hypersensitivity/anaphylaxis",
+      "Severe neutropenia with febrile infection"
+    ]
+  },
+  "monitoring": [
+    "Complete blood count for neutropenia, leukopenia, and thrombocytopenia",
+    "Ophthalmologic evaluation for uveitis, especially with higher doses or CYP3A inhibitors",
+    "Surveillance for active tuberculosis during prophylaxis",
+    "Liver function tests",
+    "Review of concomitant CYP3A-metabolized medications and dose adjustments"
+  ],
+  "counsel": [
+    "Your urine, sweat, tears, and other body fluids may turn red-orange - this is harmless, but it can permanently stain soft contact lenses",
+    "Report eye pain, redness, or blurred/decreased vision promptly (possible uveitis)",
+    "Report fever, sore throat, unusual bruising/bleeding, or signs of infection (blood-count effects)",
+    "Tell all prescribers you take rifabutin - it interacts with many drugs (HIV medicines, antifungals, contraceptives); use additional contraception",
+    "Do not stop or change the dose without advice; report yellowing of skin/eyes"
+  ],
+  "pk": [
+    ["Onset", "Readily absorbed from the GI tract after oral dosing"],
+    ["Peak", "Mean Cmax ~375 ng/mL at approximately 3.3 hours (Tmax 2-4 hours) after a single 300 mg dose"],
+    ["Half-life", "Long terminal elimination half-life (~45 hours)"],
+    ["Duration", "Once-daily dosing; extensively distributed into tissues (Vss ~8-9 L/kg)"],
+    ["Storage", "Store at controlled room temperature in a tightly closed container per labeling"]
+  ],
+  "pearls": [
+    "Uveitis is a characteristic adverse effect - risk rises with higher doses or coadministered CYP3A inhibitors (e.g., clarithromycin, fluconazole); refer for urgent eye evaluation",
+    "Potent CYP3A inducer AND a CYP3A substrate - lowers levels of many drugs while inhibitors raise rifabutin levels; dose-adjust accordingly",
+    "Contraindicated with cabotegravir/rilpivirine long-acting injectable",
+    "Never use as single-agent MAC prophylaxis in active TB - risk of rifabutin/rifampin resistance",
+    "Causes harmless red-orange discoloration of body fluids and can permanently stain soft contact lenses; monitor CBC for neutropenia"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double up. Maintain consistent adherence for effective MAC prophylaxis.",
+  "overdose": "No information is available on accidental human overdose. Based on rifamycin experience, gastric lavage soon after ingestion followed by activated charcoal may help absorb remaining drug. Because rifabutin is ~85% protein bound, extensively tissue-distributed (Vss 8-9 L/kg), and renally excreted to a minor extent (<10% unchanged), neither hemodialysis nor forced diuresis is expected to enhance elimination. Management is supportive.",
+  "refs": [
+    ["FDA Label - Rifabutin, openFDA", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rifabutin%22"],
+    ["DailyMed - Rifabutin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=rifabutin"]
+  ]
+}

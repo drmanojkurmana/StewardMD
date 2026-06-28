@@ -1,0 +1,94 @@
+{
+  "generic": "Azathioprine",
+  "cls": "Purine antimetabolite immunosuppressant",
+  "pharm": "Immunosuppressant / disease-modifying agent",
+  "tags": ["immunosuppressant", "transplant", "rheumatoid arthritis", "IBD", "autoimmune", "thiopurine"],
+  "quick": [
+    ["Adult dose", "Transplant 3-5 mg/kg/day then 1-3 mg/kg/day; RA 1 mg/kg/day up to 2.5 mg/kg/day"],
+    ["Meal", "Take with or after food to reduce GI upset"],
+    ["Pregnancy", "Contraindicated for rheumatoid arthritis; transplant only if benefit outweighs risk"],
+    ["Lactation", "Avoid; thiopurine metabolites pass into milk"],
+    ["Renal", "Reduce dose in renal impairment; consider lower dose if CrCl low"],
+    ["Hepatic", "Caution; monitor LFTs, reduce dose if hepatotoxicity"],
+    ["Alcohol", "Limit; additive hepatotoxicity risk"],
+    ["Monitoring", "CBC weekly initially, LFTs, TPMT/NUDT15, infection signs"]
+  ],
+  "summary": "Azathioprine is a thiopurine immunosuppressant (prodrug of 6-mercaptopurine) used to prevent renal transplant rejection and to treat rheumatoid arthritis and other autoimmune disease. It carries a boxed warning for increased risk of malignancy (lymphoma, including hepatosplenic T-cell lymphoma) and causes dose-dependent myelosuppression; TPMT/NUDT15 status and CBC monitoring guide dosing.",
+  "indications": [
+    "Adjunct for prevention of rejection in renal homotransplantation",
+    "Management of active rheumatoid arthritis to reduce signs and symptoms",
+    "Off-label: inflammatory bowel disease (Crohn disease, ulcerative colitis), autoimmune hepatitis, systemic lupus, vasculitis, pemphigus and other autoimmune conditions"
+  ],
+  "dosage": [
+    {"c": "Renal transplant (adult)", "r": "Initial", "d": "3-5 mg/kg once daily starting at time of transplant", "t": "Once daily", "n": "Begin on or 1-3 days before transplant"},
+    {"c": "Renal transplant (adult)", "r": "Maintenance", "d": "1-3 mg/kg once daily", "t": "Once daily", "n": "Do not raise to toxic levels for threatened rejection"},
+    {"c": "Rheumatoid arthritis (adult)", "r": "Initial", "d": "~1.0 mg/kg/day (50-100 mg) once daily or split BID", "t": "Once daily or BID", "n": "Trial at least 12 weeks"},
+    {"c": "Rheumatoid arthritis (adult)", "r": "Titration", "d": "Increase by 0.5 mg/kg/day at 4-week intervals to max 2.5 mg/kg/day", "t": "Once daily or BID", "n": "Begin step-up at 6-8 weeks"},
+    {"c": "TPMT/NUDT15 deficiency", "r": "Reduced", "d": "Substantially reduce dose or avoid; homozygous deficient should not receive standard doses", "t": "Per genotype", "n": "Severe myelosuppression risk"}
+  ],
+  "admin": [
+    "Take orally with or after food to reduce nausea",
+    "Handle as a hazardous/cytotoxic drug; avoid crushing tablets",
+    "Determine TPMT and NUDT15 status before or early in therapy where available",
+    "Therapeutic response in RA may take 6-12 weeks; do not discontinue prematurely",
+    "Reduce concomitant doses markedly when given with allopurinol/febuxostat"
+  ],
+  "moa": "Azathioprine is a prodrug that is non-enzymatically converted to 6-mercaptopurine, then to 6-thioguanine nucleotides which are incorporated into DNA and inhibit purine synthesis. This suppresses proliferation of lymphocytes (especially T cells), reducing cell-mediated and humoral immune responses. Activity depends on tissue thiopurine nucleotide levels rather than plasma drug concentration.",
+  "contra": {
+    "absolute": ["Hypersensitivity to azathioprine", "Use in rheumatoid arthritis during pregnancy", "RA patients previously treated with alkylating agents (cyclophosphamide, chlorambucil, melphalan) due to prohibitive malignancy risk"],
+    "relative": ["Homozygous TPMT or NUDT15 deficiency", "Active or chronic infection", "Pre-existing significant hepatic or renal impairment", "Prior or concurrent malignancy"],
+    "monitor": ["Concurrent allopurinol or febuxostat (xanthine oxidase inhibitors)", "Concurrent ACE inhibitors or co-trimethoprim (additive myelosuppression)", "Live vaccines"]
+  },
+  "preg": "Contraindicated in rheumatoid arthritis. In transplantation use only if the benefit outweighs the risk; it crosses the placenta and has been associated with low birth weight, prematurity and neonatal cytopenias. Advise effective contraception for both sexes during treatment.",
+  "lact": "6-mercaptopurine metabolites are detectable in breast milk. Breastfeeding is generally not recommended; if continued, monitor the infant for myelosuppression.",
+  "renal": "Excretion is partly renal; reduce dose in renal impairment as accumulation of metabolites increases toxicity. Azathioprine and 6-MP are partially dialyzable.",
+  "hepatic": "May cause hepatotoxicity including cholestasis and rare veno-occlusive disease. Use with caution and monitor LFTs; reduce dose or discontinue if liver injury develops.",
+  "interactions": {
+    "major": ["Allopurinol / febuxostat - block xanthine oxidase causing markedly increased 6-MP and severe myelosuppression; reduce azathioprine dose to ~25-33% (avoid febuxostat)", "Live attenuated vaccines - risk of disseminated infection in immunosuppressed patients", "Other myelosuppressive/immunosuppressive agents - additive marrow toxicity and infection risk"],
+    "moderate": ["ACE inhibitors - increased risk of anemia and leukopenia", "Co-trimethoprim (trimethoprim-sulfamethoxazole) - enhanced myelosuppression", "Warfarin - azathioprine may reduce anticoagulant effect", "Ribavirin - inhibits metabolite formation and worsens cytopenias"],
+    "minor": ["Aminosalicylates (mesalamine, sulfasalazine) - may inhibit TPMT and increase thiopurine levels"],
+    "food": "May be taken with food to reduce GI upset; no major food interaction.",
+    "alcohol": "Limit alcohol due to additive hepatotoxicity.",
+    "diagnostics": "Causes macrocytosis, leukopenia, thrombocytopenia and elevated transaminases; monitor blood counts and LFTs."
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Leukopenia", "Diarrhea", "Malaise", "Elevated liver enzymes", "Increased susceptibility to infection"],
+    "serious": ["Dose-related myelosuppression (leukopenia, thrombocytopenia, anemia, pancytopenia)", "Serious and opportunistic infections", "Hepatotoxicity / hepatic veno-occlusive disease", "Pancreatitis", "Hypersensitivity syndrome (fever, rash, hypotension)"],
+    "rare": ["Malignancy - post-transplant lymphoma, skin cancers, hepatosplenic T-cell lymphoma", "Progressive multifocal leukoencephalopathy", "Macrocytic anemia", "Interstitial pneumonitis"],
+    "emergency": ["Severe pancytopenia / bone marrow failure", "Overwhelming sepsis", "Anaphylaxis or severe hypersensitivity reaction", "Acute hepatic veno-occlusive disease"]
+  },
+  "monitoring": [
+    "Complete blood count weekly during the first month, then 1-2 weekly to month 3, then monthly (more often after dose changes)",
+    "Liver function tests periodically",
+    "TPMT and NUDT15 genotype/phenotype before or early in therapy where available",
+    "Monitor for signs of infection and unusual lumps/skin lesions (malignancy surveillance)",
+    "Renal function periodically"
+  ],
+  "counsel": [
+    "Report fever, sore throat, unusual bruising or bleeding promptly (low blood counts)",
+    "Use sun protection and report new skin lesions (skin cancer risk)",
+    "Use effective contraception; do not breastfeed during therapy",
+    "Avoid live vaccines and inform all providers you are immunosuppressed",
+    "Tell your doctor before starting allopurinol or febuxostat"
+  ],
+  "pk": [
+    ["Onset", "Clinical immunosuppressive effect over weeks (RA 6-12 weeks)"],
+    ["Peak", "Serum 6-MP/metabolite peak 1-2 hours after oral dose"],
+    ["Half-life", "Parent ~5 hours (35-S metabolites); effect outlasts plasma levels"],
+    ["Duration", "Prolonged (tissue thiopurine nucleotides drive effect)"],
+    ["Storage", "Store 20-25 C in a dry place; protect from light"]
+  ],
+  "pearls": [
+    "Boxed warning: chronic immunosuppression increases risk of malignancy including lymphoma (post-transplant lymphoma and hepatosplenic T-cell lymphoma in IBD)",
+    "Check TPMT/NUDT15 before dosing - deficient patients risk life-threatening myelosuppression",
+    "With allopurinol/febuxostat, reduce azathioprine to about a quarter to a third of the usual dose (avoid febuxostat)",
+    "Therapeutic effect in autoimmune disease may take 6-12 weeks - do not stop early for lack of response",
+    "Counsel sun protection and regular skin checks due to non-melanoma skin cancer risk"
+  ],
+  "missed": "Take the missed dose as soon as you remember on the same day; if it is almost time for the next dose, skip the missed dose and resume the usual schedule. Do not take a double dose.",
+  "overdose": "Acute overdose causes nausea, vomiting and diarrhea acutely, with delayed myelosuppression as the main risk. There is no specific antidote; azathioprine and 6-MP are partially dialyzable. Provide supportive care with frequent blood count monitoring; consider gastric decontamination if recent and treat infection/cytopenias.",
+  "refs": [
+    ["FDA Azathioprine Tablets USP Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22azathioprine%22"],
+    ["FDA DailyMed - Azathioprine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

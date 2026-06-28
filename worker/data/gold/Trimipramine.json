@@ -1,0 +1,92 @@
+{
+  "generic": "Trimipramine",
+  "cls": "Tricyclic antidepressant (TCA)",
+  "pharm": "Antidepressant",
+  "tags": ["tricyclic antidepressant", "TCA", "depression", "boxed warning", "suicidality", "Surmontil"],
+  "quick": [
+    ["Adult dose", "Outpatient: 75 mg/day initially, up to 150 mg/day (max 200 mg)"],
+    ["Meal", "May take with or without food; bedtime dosing common"],
+    ["Pregnancy", "Use only if clearly needed; limited data"],
+    ["Lactation", "Caution; excreted in breast milk"],
+    ["Renal", "Use with caution; start low"],
+    ["Hepatic", "Use with caution; reduce dose"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "Mood/suicidality, ECG in cardiac disease, anticholinergic effects"]
+  ],
+  "summary": "Trimipramine is a tricyclic antidepressant with sedative and anxiolytic properties used for the treatment of depression, particularly endogenous depression. Outpatient adults usually start at 75 mg/day in divided doses, increasing to 150 mg/day (maximum 200 mg/day); hospitalized patients may go higher. It carries the antidepressant class boxed warning for increased suicidal thinking and behavior in children, adolescents, and young adults. It is contraindicated with MAO inhibitors and during the acute recovery phase after myocardial infarction, and shows typical TCA anticholinergic and cardiac effects.",
+  "indications": [
+    "Treatment of depression, including endogenous depression and depression accompanied by anxiety or sleep disturbance"
+  ],
+  "dosage": [
+    {"c": "Depression - outpatient adult", "r": "Standard", "d": "Initial 75 mg/day in divided doses, increased to 150 mg/day; doses over 200 mg/day not recommended", "t": "Divided or single bedtime dose", "n": "Titrate to response"},
+    {"c": "Depression - hospitalized adult", "r": "Inpatient", "d": "Initial 100 mg/day in divided doses, gradually to 200 mg/day; max 250-300 mg/day", "t": "Divided doses", "n": "If no improvement after 2-3 weeks at 250-300 mg, benefit unlikely"},
+    {"c": "Depression - adolescent/elderly", "r": "Lower-dose", "d": "Initial 50 mg/day, gradual increase up to 100 mg/day", "t": "Divided or bedtime", "n": "Use lowest effective dose"},
+    {"c": "Maintenance", "r": "Maintenance", "d": "50-150 mg/day, often as a single bedtime dose", "t": "Once daily (bedtime)", "n": "Continue about 3 months after response"}
+  ],
+  "admin": [
+    "May be given in divided doses or as a single dose at bedtime to take advantage of sedative effect",
+    "Initiate at a low dose and titrate gradually, especially in elderly and adolescents",
+    "Allow adequate trial (2-3 weeks at adequate dose) before judging efficacy",
+    "Do not discontinue abruptly after prolonged therapy; taper to avoid withdrawal symptoms",
+    "Allow at least 14 days between stopping an MAO inhibitor and starting trimipramine"
+  ],
+  "moa": "Trimipramine is a tricyclic antidepressant. Although the precise mechanism is not fully established, it is thought to potentiate the action of norepinephrine and serotonin by blocking their reuptake at the neuronal membrane. It also has marked anticholinergic, antihistaminic, and alpha-adrenergic blocking activity, which account for its sedative effects and adverse-effect profile. Unlike amphetamine-type compounds, it does not act primarily by CNS stimulation.",
+  "contra": {
+    "absolute": ["Concurrent use of monoamine oxidase inhibitors or within 14 days of stopping an MAOI", "Acute recovery phase following myocardial infarction", "Known hypersensitivity to trimipramine or other tricyclic antidepressants"],
+    "relative": ["Cardiovascular disease, conduction disturbances, arrhythmias", "Seizure disorder", "Urinary retention, benign prostatic hyperplasia, narrow-angle glaucoma", "Hyperthyroidism or thyroid medication use", "Elderly patients (anticholinergic sensitivity)"],
+    "monitor": ["Suicidality and clinical worsening, especially early in treatment", "ECG and cardiac status in at-risk patients", "Signs of anticholinergic toxicity and orthostatic hypotension"]
+  },
+  "preg": "There are limited human data; safe use in pregnancy has not been established. Use trimipramine during pregnancy only if the potential benefit clearly justifies the potential risk to the fetus.",
+  "lact": "Tricyclic antidepressants, including trimipramine, are excreted in breast milk in small amounts. Use with caution while breastfeeding and monitor the infant for sedation and feeding difficulty.",
+  "renal": "Use with caution in renal impairment; start at a low dose and titrate carefully because of reduced clearance and increased sensitivity to adverse effects.",
+  "hepatic": "Trimipramine is extensively metabolized by the liver. Use with caution and consider lower doses in hepatic impairment, monitoring for accumulation and toxicity.",
+  "interactions": {
+    "major": ["MAO inhibitors - risk of hyperpyretic crisis, severe seizures, serotonin syndrome and death; contraindicated", "Other serotonergic drugs (SSRIs, SNRIs, triptans, tramadol, linezolid) - serotonin syndrome", "Class I antiarrhythmics / QT-prolonging drugs - additive cardiac toxicity and arrhythmia"],
+    "moderate": ["CNS depressants and alcohol - additive sedation and respiratory depression", "Other anticholinergics - additive anticholinergic effects (ileus, urinary retention, delirium)", "Sympathomimetics - enhanced pressor response", "CYP2D6 inhibitors (e.g., fluoxetine, quinidine) - increased trimipramine levels"],
+    "minor": ["Cimetidine - may increase tricyclic levels", "Guanethidine - antihypertensive effect may be blunted"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid - additive CNS depression and increased sedation.",
+    "diagnostics": "May cause ECG changes (QRS/QT prolongation, flattened T waves) and can affect glucose levels and blood counts."
+  },
+  "se": {
+    "common": ["Dry mouth", "Drowsiness/sedation", "Constipation", "Blurred vision", "Dizziness", "Orthostatic hypotension", "Weight gain", "Urinary hesitancy"],
+    "serious": ["Cardiac arrhythmias and conduction disturbances", "Seizures", "Orthostatic hypotension with falls", "Suicidal ideation/behavior", "Mania/hypomania in bipolar patients", "Paralytic ileus", "Agranulocytosis"],
+    "rare": ["Serotonin syndrome", "Neuroleptic-malignant-like reactions", "Angle-closure glaucoma", "Hepatitis/cholestatic jaundice", "SIADH/hyponatremia"],
+    "emergency": ["Cardiac arrhythmia/cardiac arrest in overdose", "Seizures/status epilepticus", "Serotonin syndrome", "Severe suicidal behavior"]
+  },
+  "monitoring": [
+    "Mood, behavior, and suicidality, especially in the first weeks and after dose changes",
+    "Baseline and periodic ECG and cardiac status in patients with cardiovascular disease",
+    "Anticholinergic effects (urinary retention, constipation, confusion) particularly in elderly",
+    "Blood pressure for orthostatic hypotension",
+    "Periodic blood counts and liver function with long-term use"
+  ],
+  "counsel": [
+    "May take 2-4 weeks for full mood benefit; do not stop suddenly",
+    "Report worsening depression, agitation, or thoughts of self-harm immediately (especially young patients)",
+    "May cause drowsiness, dry mouth, blurred vision, and constipation; use caution driving",
+    "Rise slowly from sitting or lying to avoid dizziness",
+    "Avoid alcohol; tell your doctor about all other medicines, including MAO inhibitors",
+    "Bedtime dosing can use the sedative effect to aid sleep"
+  ],
+  "pk": [
+    ["Onset", "Mood effect over 2-4 weeks; sedation within hours"],
+    ["Peak", "Plasma Tmax approximately 2 hours"],
+    ["Half-life", "Approximately 16-40 hours (about 24 hours typical)"],
+    ["Duration", "Supports once-daily (bedtime) maintenance dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warning: increased risk of suicidal thinking/behavior in children, adolescents, and young adults",
+    "Among TCAs it is notably sedating - useful when depression is accompanied by anxiety or insomnia",
+    "Contraindicated with MAOIs and during acute post-MI recovery",
+    "Highly anticholinergic - use cautiously in elderly, BPH, glaucoma, and constipation",
+    "Overdose is dangerous (cardiac and CNS toxicity); prescribe limited quantities to at-risk patients"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the usual schedule. Do not double the dose. For once-daily bedtime dosing, skip a forgotten dose rather than take it in the morning if it causes daytime drowsiness.",
+  "overdose": "Tricyclic overdose is potentially fatal and presents with cardiac arrhythmias, hypotension, QRS widening, seizures, coma, anticholinergic signs, and respiratory depression. Manage with airway/cardiac support, ECG monitoring, and intravenous sodium bicarbonate for QRS widening and ventricular arrhythmias; treat seizures with benzodiazepines. Dialysis is not effective because of high protein binding.",
+  "refs": [
+    ["FDA Trimipramine (Surmontil) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trimipramine%22"],
+    ["FDA DailyMed - Trimipramine Maleate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

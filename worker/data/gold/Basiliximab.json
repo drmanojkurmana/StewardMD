@@ -1,0 +1,89 @@
+{
+  "generic": "Basiliximab",
+  "cls": "Interleukin-2 receptor antagonist (immunosuppressant monoclonal antibody)",
+  "pharm": "Chimeric (murine/human) monoclonal antibody that binds the alpha (CD25) chain of the IL-2 receptor, providing induction immunosuppression to prevent acute rejection in renal transplantation.",
+  "tags": ["Monoclonal antibody", "IL-2 receptor antagonist", "Immunosuppressant", "Transplant induction", "IV", "Specialist-only", "Hypersensitivity risk"],
+  "quick": [
+    ["Adult dose", "20 mg IV pre-transplant + 20 mg IV on day 4 (two doses)"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Use only if benefit justifies fetal risk; effective contraception required"],
+    ["Lactation", "Caution; excretion in milk unknown"],
+    ["Renal", "No dose adjustment"],
+    ["Hepatic", "No dose adjustment"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Hypersensitivity/anaphylaxis, infection, lymphoproliferative disease"]
+  ],
+  "summary": "Basiliximab (Simulect) is a chimeric IL-2 receptor antagonist used for prophylaxis of acute organ rejection in renal transplant patients, given with cyclosporine and corticosteroids. It is administered as two fixed IV doses (pre-operatively and on day 4). Severe acute hypersensitivity reactions including anaphylaxis can occur. It should be used only under the supervision of physicians experienced in immunosuppression and organ transplantation.",
+  "indications": [
+    "Prophylaxis of acute organ rejection in patients receiving renal transplantation, as part of an immunosuppressive regimen including cyclosporine and corticosteroids"
+  ],
+  "dosage": [
+    {"c": "Adults and pediatrics >=35 kg", "r": "IV", "d": "20 mg per dose (two doses total)", "t": "First dose within 2 hours before transplant surgery; second dose 4 days after transplantation", "n": "Withhold second dose if severe hypersensitivity or graft loss occurs"},
+    {"c": "Pediatrics <35 kg", "r": "IV", "d": "10 mg per dose (two doses total)", "t": "First dose within 2 hours pre-transplant; second dose 4 days post-transplant", "n": "Same timing as adults"}
+  ],
+  "admin": [
+    "Reconstitute 10 mg vial with 2.5 mL and 20 mg vial with 5 mL Sterile Water for Injection",
+    "Give as an IV bolus or as an IV infusion over 20-30 minutes",
+    "First dose should not be given unless the patient is certain to receive the graft and concomitant immunosuppression",
+    "Have agents for treating severe hypersensitivity reactions immediately available",
+    "Administer under supervision of a transplant specialist"
+  ],
+  "moa": "Functions as an IL-2 receptor antagonist by binding with high affinity to the alpha (CD25) chain of the IL-2 receptor complex on activated T-lymphocytes, competitively inhibiting IL-2-mediated activation and clonal proliferation of lymphocytes - a critical step in the cellular immune response to allograft rejection.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to basiliximab or any component of the formulation"],
+    "relative": ["Reexposure (prior basiliximab use increases hypersensitivity risk)", "Active infection", "Use only by transplant specialists"],
+    "monitor": ["Hypersensitivity/anaphylaxis", "Opportunistic infection (especially CMV)", "Lymphoproliferative disorders/malignancy"]
+  },
+  "preg": "Use only when the potential benefit justifies the potential risk to the fetus. Women of childbearing potential should use effective contraception before, during, and for 4 months after therapy.",
+  "lact": "It is not known whether basiliximab is excreted in human milk; because of potential for serious adverse reactions, weigh benefits against risks.",
+  "renal": "No specific dose adjustment for renal impairment; used in the renal transplant population.",
+  "hepatic": "No specific dose adjustment for hepatic impairment.",
+  "interactions": {
+    "major": ["Other potent immunosuppressants increase overall immunosuppression and infection/malignancy risk"],
+    "moderate": ["No dose adjustment required when combined with cyclosporine, corticosteroids, azathioprine, or mycophenolate mofetil"],
+    "minor": ["Compatible with ATG/ALG and muromonab-CD3 regimens"],
+    "food": "N/A (parenteral)",
+    "alcohol": "Not significant",
+    "diagnostics": "No specific diagnostic interference established."
+  },
+  "se": {
+    "common": ["Constipation", "Nausea", "Abdominal pain", "Vomiting", "Diarrhea", "Peripheral edema", "Fever", "Hyperkalemia", "Urinary tract infection", "Hypertension", "Headache", "Tremor", "Insomnia", "Anemia"],
+    "serious": ["Cytomegalovirus and other opportunistic infections", "Lymphoproliferative disorders", "Malignancy"],
+    "rare": ["Capillary leak syndrome"],
+    "emergency": ["Severe acute hypersensitivity reactions including anaphylaxis (hypotension, tachycardia, dyspnea, bronchospasm, pulmonary edema, respiratory failure)"]
+  },
+  "monitoring": [
+    "Signs of acute hypersensitivity/anaphylaxis during and after infusion",
+    "Signs of infection, particularly cytomegalovirus",
+    "Signs of lymphoproliferative disease or malignancy",
+    "Renal allograft function",
+    "Serum potassium"
+  ],
+  "counsel": [
+    "This medication is given by a transplant specialist to help prevent rejection of your new kidney",
+    "Report immediately any difficulty breathing, swelling, rash, or feeling faint during or after the infusion",
+    "Use effective contraception during and for 4 months after therapy",
+    "You are at increased risk of infection and certain cancers; report fever or new symptoms",
+    "Keep all transplant follow-up appointments and blood tests"
+  ],
+  "pk": [
+    ["Onset", "IL-2 receptor blockade immediate after infusion"],
+    ["Peak", "Cmax ~7.1 mg/L after 20 mg IV infusion"],
+    ["Half-life", "~7.2 days (adults); ~9.5 days (children 1-11 y)"],
+    ["Duration", "IL-2 receptor saturation ~36 days (dual therapy)"],
+    ["Storage", "Refrigerate 2-8 C (36-46 F)"]
+  ],
+  "pearls": [
+    "Fixed dosing - no titration, two doses only (pre-op and day 4 post-op)",
+    "Provides induction immunosuppression without the cytokine-release syndrome seen with depleting antibodies",
+    "Risk of severe hypersensitivity is higher on re-exposure - withhold the second dose if a severe reaction occurs",
+    "Restricted to use by physicians experienced in transplantation and immunosuppression",
+    "No premedication routinely required, but anaphylaxis treatment must be available"
+  ],
+  "missed": "Doses are scheduled around surgery and on day 4; if the second dose schedule is disrupted, the transplant team determines timing. Withhold the second dose if severe hypersensitivity or graft loss occurs.",
+  "overdose": "Maximum tolerated dose not determined; doses up to 120 mg divided over 3-5 days have been given without serious adverse events. Manage supportively and monitor for hypersensitivity and infection.",
+  "refs": [
+    ["FDA Basiliximab (Simulect) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22BASILIXIMAB%22"],
+    ["DailyMed - Simulect (basiliximab)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=basiliximab"]
+  ]
+}

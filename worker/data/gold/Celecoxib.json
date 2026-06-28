@@ -1,0 +1,128 @@
+{
+  "generic": "Celecoxib",
+  "cls": "NSAID (selective COX-2 inhibitor; diaryl-substituted pyrazole)",
+  "pharm": "Selective cyclooxygenase-2 inhibitor with anti-inflammatory, analgesic and antipyretic effects; relatively GI-sparing versus non-selective NSAIDs but shares cardiovascular and renal class risks",
+  "tags": ["NSAID", "COX-2 inhibitor", "Analgesic", "Anti-inflammatory", "Osteoarthritis", "Rheumatoid arthritis", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "OA 200 mg/day; RA 100-200 mg BID; acute pain 400 mg then 200 mg"],
+    ["Meal", "With or without food (large doses better with food)"],
+    ["Pregnancy", "Avoid; contraindicated from 30 weeks (ductus closure)"],
+    ["Lactation", "Generally compatible; small amounts in milk"],
+    ["Renal", "Avoid in advanced renal disease; not for CrCl <30 in some guides"],
+    ["Hepatic", "Reduce dose 50% in Child-Pugh B; avoid in severe (C)"],
+    ["Alcohol", "Limit (GI bleed risk)"],
+    ["Monitoring", "BP, renal function, LFTs, CBC, CV/GI symptoms"]
+  ],
+  "summary": "Celecoxib is a selective COX-2 inhibitor NSAID used for osteoarthritis, rheumatoid arthritis, juvenile RA, ankylosing spondylitis, acute pain and primary dysmenorrhea. It offers lower gastrointestinal ulcer risk than non-selective NSAIDs but carries the NSAID-class boxed warning for serious cardiovascular thrombotic events and gastrointestinal bleeding, ulceration and perforation. It is contraindicated in the setting of coronary artery bypass graft surgery and in patients with sulfonamide or aspirin/NSAID hypersensitivity. Dose is reduced by half in moderate hepatic impairment and in CYP2C9 poor metabolizers. Use the lowest effective dose for the shortest duration.",
+  "indications": [
+    "Osteoarthritis",
+    "Rheumatoid arthritis",
+    "Juvenile rheumatoid arthritis (>=2 years)",
+    "Ankylosing spondylitis",
+    "Acute pain in adults",
+    "Primary dysmenorrhea"
+  ],
+  "dosage": [
+    {"c": "Osteoarthritis", "r": "Oral", "d": "200 mg once daily or 100 mg twice daily", "t": "OD or BID", "n": "Lowest effective dose"},
+    {"c": "Rheumatoid arthritis", "r": "Oral", "d": "100 mg to 200 mg twice daily", "t": "BID", "n": ""},
+    {"c": "Ankylosing spondylitis", "r": "Oral", "d": "200 mg once daily or 100 mg twice daily", "t": "OD or BID", "n": "May trial 400 mg/day after 6 weeks if no response"},
+    {"c": "Acute pain / primary dysmenorrhea", "r": "Oral", "d": "400 mg initially, then 200 mg if needed on day 1; then 200 mg twice daily as needed", "t": "PRN", "n": ""},
+    {"c": "Juvenile RA (10-25 kg)", "r": "Oral", "d": "50 mg twice daily", "t": "BID", "n": "Patients >=2 years"},
+    {"c": "Juvenile RA (>25 kg)", "r": "Oral", "d": "100 mg twice daily", "t": "BID", "n": ""},
+    {"c": "Moderate hepatic impairment (Child-Pugh B)", "r": "Oral", "d": "Reduce daily dose by 50%", "t": "Per indication", "n": "Avoid in severe (Child-Pugh C)"},
+    {"c": "CYP2C9 poor metabolizers", "r": "Oral", "d": "Reduce dose by 50% or use alternative", "t": "Per indication", "n": "Higher plasma exposure"}
+  ],
+  "admin": [
+    "May be taken with or without food; larger doses (e.g. 400 mg) better tolerated with food",
+    "Capsule contents may be sprinkled on applesauce for those unable to swallow",
+    "Use the lowest effective dose for the shortest duration",
+    "Swallow with adequate water"
+  ],
+  "moa": "Selectively inhibits cyclooxygenase-2 (COX-2), reducing synthesis of inflammatory prostaglandins (notably prostaglandin E2) while largely sparing COX-1-mediated gastric mucosal and platelet prostaglandins, producing anti-inflammatory, analgesic and antipyretic effects.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to celecoxib (anaphylaxis, serious skin reactions)",
+      "Demonstrated allergic-type reactions to sulfonamides",
+      "Aspirin- or NSAID-induced asthma, urticaria or allergic reactions",
+      "In the setting of coronary artery bypass graft (CABG) surgery"
+    ],
+    "relative": [
+      "Established cardiovascular disease or significant CV risk factors",
+      "Heart failure",
+      "Hypertension",
+      "Active or prior GI ulcer/bleeding",
+      "Advanced renal disease",
+      "Severe hepatic impairment",
+      "Third trimester of pregnancy",
+      "Elderly"
+    ],
+    "monitor": ["Blood pressure", "Renal function", "Liver function tests", "Hemoglobin / CBC", "CV and GI symptoms"]
+  },
+  "preg": "Avoid; NSAIDs may cause fetal renal dysfunction and oligohydramnios from about 20 weeks, and premature closure of the ductus arteriosus from 30 weeks (third trimester), where use is contraindicated. May also impair fertility/ovulation and delay parturition.",
+  "lact": "Excreted in breast milk in small amounts; generally considered compatible with breastfeeding, but use the lowest effective dose and monitor the infant.",
+  "renal": "Not recommended in advanced renal disease; if used, monitor renal function closely. Risk of fluid retention, edema and acute kidney injury, especially with volume depletion, heart failure, or concomitant ACE inhibitors/ARBs/diuretics.",
+  "hepatic": "Reduce the daily dose by 50% in moderate hepatic impairment (Child-Pugh B). Not recommended in severe hepatic impairment (Child-Pugh C). Discontinue if liver enzymes worsen or signs of liver disease develop.",
+  "interactions": {
+    "major": [
+      "Anticoagulants (warfarin) - increased bleeding and INR",
+      "Aspirin / other NSAIDs - increased GI toxicity (and loss of COX-2 GI benefit)",
+      "Lithium - raised lithium levels",
+      "Drugs metabolized by CYP2D6 - celecoxib inhibits CYP2D6"
+    ],
+    "moderate": [
+      "ACE inhibitors / ARBs / diuretics - reduced antihypertensive and renal effects",
+      "CYP2C9 inhibitors (e.g. fluconazole) - increased celecoxib levels",
+      "Corticosteroids - increased GI bleeding risk",
+      "SSRIs / antiplatelets - increased bleeding risk",
+      "Methotrexate - reduced clearance",
+      "Cyclosporine - increased nephrotoxicity"
+    ],
+    "minor": ["Antacids (aluminum/magnesium) - slight reduction in celecoxib absorption"],
+    "food": "May be taken with or without food; large doses better with food",
+    "alcohol": "Limit alcohol due to additive GI bleeding risk",
+    "diagnostics": "May elevate liver enzymes, BUN and creatinine; may mask fever/inflammatory markers"
+  },
+  "se": {
+    "common": ["Dyspepsia", "Abdominal pain", "Diarrhea", "Nausea", "Headache", "Peripheral edema", "Upper respiratory tract infection", "Hypertension"],
+    "serious": [
+      "Cardiovascular thrombotic events (MI, stroke)",
+      "GI bleeding, ulceration or perforation",
+      "Hepatotoxicity",
+      "Acute kidney injury",
+      "Heart failure / fluid retention",
+      "Hyperkalemia",
+      "Hypertensive crisis"
+    ],
+    "rare": ["Stevens-Johnson syndrome / toxic epidermal necrolysis", "DRESS", "Anaphylaxis", "Aseptic meningitis", "Blood dyscrasias"],
+    "emergency": ["Myocardial infarction or stroke", "GI hemorrhage or perforation", "Anaphylaxis", "Severe skin reactions (SJS/TEN/DRESS)"]
+  },
+  "monitoring": ["Blood pressure", "Renal function (BUN, creatinine)", "Liver function tests", "Hemoglobin and CBC", "Cardiovascular and gastrointestinal symptoms"],
+  "counsel": [
+    "Use the lowest dose for the shortest time needed",
+    "Report chest pain, weakness, slurred speech, black/bloody stools or vomiting blood immediately",
+    "Watch for signs of liver injury (nausea, fatigue, jaundice, dark urine) and severe skin rash",
+    "Tell your doctor if you have heart disease, high blood pressure, kidney problems or are taking blood thinners",
+    "Avoid other NSAIDs and limit alcohol",
+    "Do not use in late pregnancy"
+  ],
+  "pk": [
+    ["Onset", "Analgesia within ~1 h; anti-inflammatory effect over days"],
+    ["Peak", "~3 h"],
+    ["Half-life", "~11 h"],
+    ["Duration", "~12-24 h"],
+    ["Storage", "20-25 C (excursions 15-30 C); dispense in tight container"]
+  ],
+  "pearls": [
+    "Boxed warning: serious CV thrombotic events and GI bleeding/ulceration/perforation (NSAID class)",
+    "Contraindicated peri-CABG and in sulfonamide hypersensitivity",
+    "Lower GI ulcer risk than non-selective NSAIDs, but concomitant aspirin negates this benefit",
+    "CYP2C9 poor metabolizers and moderate hepatic impairment need a 50% dose reduction",
+    "Does not inhibit platelet aggregation, so no cardioprotective effect"
+  ],
+  "missed": "Take when remembered unless it is near the next scheduled dose, then skip the missed dose; do not double up.",
+  "overdose": "May cause lethargy, drowsiness, nausea, vomiting and epigastric pain, with GI bleeding, hypertension, acute renal failure, respiratory depression and coma in severe cases. Management is supportive with airway/cardiovascular monitoring; activated charcoal may help if given within 1-2 hours. There is no specific antidote and hemodialysis is unlikely to be useful due to high protein binding.",
+  "refs": [
+    ["FDA Prescribing Information - Celecoxib (DailyMed)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=celecoxib"],
+    ["FDA NSAID Cardiovascular Risk Communication", "https://www.fda.gov/drugs/drug-safety-and-availability/fda-drug-safety-communication-fda-strengthens-warning-non-aspirin-nonsteroidal-anti-inflammatory"]
+  ]
+}

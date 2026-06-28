@@ -1,0 +1,94 @@
+{
+  "generic": "Linezolid",
+  "cls": "Oxazolidinone antibacterial",
+  "pharm": "Antibacterial (synthetic oxazolidinone)",
+  "tags": ["oxazolidinone", "MRSA", "VRE", "Gram-positive", "MAOI", "myelosuppression", "serotonin syndrome"],
+  "quick": [
+    ["Adult dose", "600 mg IV/PO every 12 hours"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Caution; present in milk"],
+    ["Renal", "No adjustment; metabolites accumulate in failure"],
+    ["Hepatic", "No adjustment in mild-moderate impairment"],
+    ["Alcohol", "Avoid tyramine-rich/fermented drinks (MAOI effect)"],
+    ["Monitoring", "Weekly CBC; vision/peripheral nerves if >2 weeks"]
+  ],
+  "summary": "Linezolid is a synthetic oxazolidinone antibacterial active against resistant Gram-positive organisms including MRSA and vancomycin-resistant Enterococcus faecium. It has excellent oral bioavailability and is dosed 600 mg every 12 hours. It is a reversible nonselective MAO inhibitor, carrying risk of serotonin syndrome and tyramine reactions, and prolonged use (>2 weeks) risks myelosuppression and optic/peripheral neuropathy.",
+  "indications": [
+    "Nosocomial pneumonia caused by susceptible Staphylococcus aureus (MSSA/MRSA) or S. pneumoniae",
+    "Community-acquired pneumonia, including concurrent bacteremia",
+    "Complicated skin and skin structure infections including diabetic foot without osteomyelitis",
+    "Uncomplicated skin and skin structure infections",
+    "Vancomycin-resistant Enterococcus faecium infections, including concurrent bacteremia"
+  ],
+  "dosage": [
+    {"c": "Nosocomial/community pneumonia (adult)", "r": "Standard", "d": "600 mg IV or PO every 12 hours", "t": "Every 12 h", "n": "10-14 days"},
+    {"c": "Complicated SSSI / VRE faecium", "r": "Standard", "d": "600 mg IV or PO every 12 hours", "t": "Every 12 h", "n": "14-28 days"},
+    {"c": "Uncomplicated SSSI (adult)", "r": "Standard", "d": "600 mg PO every 12 hours (or 400 mg q12h per label)", "t": "Every 12 h", "n": "10-14 days"},
+    {"c": "Pediatric (birth-11 yr)", "r": "Weight-based", "d": "10 mg/kg IV or PO every 8 hours", "t": "Every 8 h", "n": "Duration by indication"},
+    {"c": "Adolescents (>=12 yr)", "r": "Standard", "d": "600 mg IV or PO every 12 hours", "t": "Every 12 h", "n": "As adults"}
+  ],
+  "admin": [
+    "Oral tablets and suspension may be taken with or without food",
+    "IV: infuse over 30 to 120 minutes; do not mix with other drugs in the line; flush before and after if co-administered",
+    "The IV solution may appear yellow which does not affect potency",
+    "Oral and IV doses are interchangeable due to ~100% oral bioavailability",
+    "Avoid large quantities of tyramine-rich foods (aged cheese, cured meats, tap beer, soy products)"
+  ],
+  "moa": "Linezolid inhibits bacterial protein synthesis by binding to the 23S ribosomal RNA of the 50S subunit, preventing formation of the functional 70S initiation complex. This unique binding site (different from other protein-synthesis inhibitors) limits cross-resistance. It is generally bacteriostatic against enterococci and staphylococci and bactericidal against most streptococci.",
+  "contra": {
+    "absolute": ["Hypersensitivity to linezolid or formulation components", "Concomitant use with or within 2 weeks of MAO inhibitors", "Uncontrolled hypertension, pheochromocytoma, thyrotoxicosis (unless monitored, due to pressor potentiation)"],
+    "relative": ["Concomitant serotonergic agents (SSRIs, SNRIs, TCAs, triptans) - serotonin syndrome risk", "Concomitant sympathomimetic, vasopressor or dopaminergic agents", "Carcinoid syndrome"],
+    "monitor": ["Therapy expected to exceed 14 days (myelosuppression, neuropathy)", "Pre-existing myelosuppression", "Uncontrolled diabetes (hypoglycemia risk)"]
+  },
+  "preg": "Limited human data. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus; animal studies showed reproductive toxicity at high doses.",
+  "lact": "Linezolid is present in human milk. Because of the potential for adverse effects, weigh the benefits of breastfeeding against the mother's need for the drug; monitor the infant.",
+  "renal": "No dosage adjustment of linezolid itself is needed in renal impairment, but its two primary metabolites accumulate in patients with significant renal insufficiency; the clinical significance is unknown, so use with monitoring. Both linezolid and metabolites are partly removed by hemodialysis - dose after dialysis.",
+  "hepatic": "No dosage adjustment is recommended in mild to moderate hepatic impairment (Child-Pugh A or B). Pharmacokinetics in severe impairment have not been adequately studied; use with caution.",
+  "interactions": {
+    "major": ["MAO inhibitors - contraindicated; hypertensive and serotonergic crisis", "Serotonergic drugs (SSRIs, SNRIs, TCAs, triptans, meperidine, buspirone) - serotonin syndrome", "Adrenergic agents (pseudoephedrine, phenylephrine, dopamine, epinephrine) - exaggerated pressor response"],
+    "moderate": ["Tyramine-containing foods/beverages - hypertensive reaction", "Insulin/oral hypoglycemics - increased hypoglycemia risk", "Rasagiline/selegiline - serotonergic and pressor risk"],
+    "minor": ["Antiplatelet agents - possible additive thrombocytopenia/bleeding"],
+    "food": "Limit high-tyramine foods (aged cheeses, cured/smoked meats, fermented soy, tap beer); excessive tyramine can raise blood pressure.",
+    "alcohol": "Avoid tap/unpasteurized beer and red wine (tyramine content) and excess alcohol.",
+    "diagnostics": "Can cause thrombocytopenia, anemia and leukopenia detectable on CBC; may cause reversible hypoglycemia."
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Headache", "Vomiting", "Insomnia", "Taste alteration", "Rash"],
+    "serious": ["Myelosuppression (thrombocytopenia, anemia, leukopenia, pancytopenia)", "Serotonin syndrome", "Peripheral and optic neuropathy with prolonged use", "Lactic acidosis", "Clostridioides difficile colitis"],
+    "rare": ["Symptomatic hypoglycemia", "Convulsions", "Tooth and tongue discoloration", "Sideroblastic anemia"],
+    "emergency": ["Serotonin syndrome (hyperthermia, rigidity, autonomic instability)", "Severe lactic acidosis", "Anaphylaxis / angioedema", "Profound pancytopenia"]
+  },
+  "monitoring": [
+    "Complete blood count weekly, especially with therapy beyond 2 weeks, pre-existing myelosuppression, or other myelosuppressive drugs",
+    "Visual function (acuity, color vision, fundoscopy) if treatment exceeds 28 days or new visual symptoms occur",
+    "Symptoms of peripheral neuropathy on extended courses",
+    "Blood glucose in diabetics; signs of serotonin syndrome and lactic acidosis (recurrent nausea, low bicarbonate)"
+  ],
+  "counsel": [
+    "Avoid aged cheeses, cured meats, soy sauce, draft beer and red wine while on treatment",
+    "Tell your doctor about all antidepressants and cold/decongestant medicines",
+    "Report blurred vision, numbness/tingling, unusual bruising or persistent nausea",
+    "Diabetics should monitor blood sugar more closely",
+    "Complete the full course as prescribed"
+  ],
+  "pk": [
+    ["Onset", "Rapid; therapeutic levels within hours"],
+    ["Peak", "Oral 1-2 hours"],
+    ["Half-life", "~5 hours (adults)"],
+    ["Duration", "Dosing every 12 hours maintains levels"],
+    ["Storage", "Store 20-25 C; protect tablets/suspension from light and moisture"]
+  ],
+  "pearls": [
+    "Reversible nonselective MAO inhibitor - the basis for serotonin-syndrome and tyramine warnings",
+    "Limit duration to <=14 days where possible to reduce myelosuppression and neuropathy risk; peripheral/optic neuropathy after prolonged use may be irreversible",
+    "~100% oral bioavailability allows seamless IV-to-oral switch",
+    "Active against MRSA and VRE but not reliably against Gram-negatives"
+  ],
+  "missed": "Take or administer the missed dose as soon as possible. If it is nearly time for the next dose, skip the missed dose and resume the every-12-hour schedule; do not double the dose.",
+  "overdose": "No specific antidote. Supportive care is recommended with maintenance of glomerular filtration. Hemodialysis removes approximately 30% of a dose and may modestly enhance elimination. Monitor for myelosuppression, acidosis and neurologic effects.",
+  "refs": [
+    ["FDA Linezolid Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22linezolid%22"],
+    ["FDA DailyMed - Linezolid", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

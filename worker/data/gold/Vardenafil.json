@@ -1,0 +1,118 @@
+{
+  "generic": "Vardenafil (Vardenafil hydrochloride)",
+  "cls": "Phosphodiesterase type 5 (PDE5) inhibitor",
+  "pharm": "Agent for erectile dysfunction",
+  "tags": ["PDE5 inhibitor", "erectile dysfunction", "ED", "impotence", "men's health", "vasodilator"],
+  "quick": [
+    ["Adult dose", "10 mg orally about 60 minutes before sexual activity, as needed; range 5-20 mg, max once daily"],
+    ["Meal", "May be taken with or without food; high-fat meals may slow onset"],
+    ["Pregnancy", "Not indicated in women; pregnancy category not applicable (male use)"],
+    ["Lactation", "Not applicable (intended for men)"],
+    ["Renal", "No adjustment for mild-moderate impairment; not studied in severe (dialysis); use with caution"],
+    ["Hepatic", "Moderate impairment (Child-Pugh B): start 5 mg, max 10 mg; avoid in severe (Child-Pugh C)"],
+    ["Alcohol", "Both are vasodilators - combined use may increase orthostatic hypotension"],
+    ["Monitoring", "Blood pressure, cardiovascular fitness for sexual activity, vision/hearing changes"]
+  ],
+  "summary": "Vardenafil is a potent, selective PDE5 inhibitor used as-needed for erectile dysfunction. By blocking PDE5 it raises cyclic GMP in penile smooth muscle, enhancing nitric-oxide-mediated erection during sexual stimulation. It is contraindicated with nitrates and with guanylate cyclase stimulators such as riociguat because of dangerous hypotension, and it can prolong the QT interval. Dose reduction is needed with CYP3A4 inhibitors, alpha-blockers, and moderate hepatic impairment.",
+  "indications": [
+    "Treatment of erectile dysfunction in adult men"
+  ],
+  "dosage": [
+    {"c": "Erectile dysfunction", "r": "Adult", "d": "10 mg approximately 60 minutes before sexual activity; adjust to 20 mg or 5 mg by response/tolerability", "t": "As needed, max once daily", "n": "Requires sexual stimulation; max one tablet per day"},
+    {"c": "Erectile dysfunction", "r": "Elderly >=65 years", "d": "Consider starting at 5 mg", "t": "As needed", "n": "Higher plasma levels in elderly"},
+    {"c": "With moderate hepatic impairment (Child-Pugh B)", "r": "Adult", "d": "Start 5 mg; do not exceed 10 mg", "t": "As needed", "n": "Avoid in severe hepatic impairment"},
+    {"c": "On stable alpha-blocker therapy", "r": "Adult", "d": "Start 5 mg", "t": "As needed", "n": "Risk of symptomatic hypotension"},
+    {"c": "With strong CYP3A4 inhibitors", "r": "Adult", "d": "Ritonavir/cobicistat: max 2.5 mg/72 h; indinavir, saquinavir, atazanavir, ketoconazole/itraconazole 400 mg, clarithromycin: max 2.5 mg/24 h; ketoconazole/itraconazole 200 mg, erythromycin: max 5 mg/24 h", "t": "As needed", "n": "Reduce dose with CYP3A4 inhibitors"}
+  ],
+  "admin": [
+    "Take approximately 60 minutes before anticipated sexual activity",
+    "Effective only with sexual stimulation",
+    "Do not take more than once per day",
+    "Avoid grapefruit/grapefruit juice (raises drug levels)"
+  ],
+  "moa": "During sexual stimulation, nitric oxide is released in the corpus cavernosum and activates guanylate cyclase, increasing cyclic GMP, which relaxes smooth muscle and increases penile blood flow to produce an erection. Vardenafil selectively inhibits PDE5, the enzyme that degrades cGMP, thereby prolonging and enhancing cGMP-mediated smooth-muscle relaxation. Without sexual stimulation there is no effect because nitric oxide release is required.",
+  "contra": {
+    "absolute": [
+      "Concurrent use of nitrates or nitric oxide donors (in any form, regular or intermittent)",
+      "Concurrent use of guanylate cyclase stimulators such as riociguat",
+      "Known hypersensitivity to vardenafil"
+    ],
+    "relative": [
+      "Cardiovascular disease where sexual activity is inadvisable",
+      "Congenital QT prolongation or use of Class IA/III antiarrhythmics",
+      "Anatomic penile deformity or conditions predisposing to priapism (sickle cell, multiple myeloma, leukemia)",
+      "Severe hepatic impairment",
+      "History of NAION; bleeding disorders / active peptic ulcer"
+    ],
+    "monitor": [
+      "Blood pressure (with alpha-blockers/antihypertensives)",
+      "Cardiovascular status before initiating sexual activity",
+      "Vision and hearing changes"
+    ]
+  },
+  "preg": "Vardenafil is intended for use in men and is not indicated in women; pregnancy considerations are not applicable.",
+  "lact": "Not applicable - vardenafil is intended for use in men.",
+  "renal": "No dose adjustment is needed for mild to moderate renal impairment. It has not been studied in patients on renal dialysis or with severe renal impairment; use with caution.",
+  "hepatic": "In moderate hepatic impairment (Child-Pugh B), start at 5 mg and do not exceed 10 mg. Vardenafil has not been evaluated in severe hepatic impairment (Child-Pugh C) and is not recommended.",
+  "interactions": {
+    "major": [
+      "Nitrates / nitric oxide donors (life-threatening hypotension - contraindicated)",
+      "Riociguat and other guanylate cyclase stimulators (severe hypotension - contraindicated)",
+      "Strong CYP3A4 inhibitors (ritonavir, cobicistat, ketoconazole, itraconazole, clarithromycin) - raise vardenafil levels; dose-limit",
+      "Class IA (quinidine, procainamide) or Class III (amiodarone, sotalol) antiarrhythmics - additive QT prolongation"
+    ],
+    "moderate": [
+      "Alpha-blockers (symptomatic hypotension - start 5 mg, stabilize alpha-blocker first)",
+      "Other antihypertensives (additive BP lowering)",
+      "Erythromycin, moderate CYP3A4 inhibitors (raise levels)"
+    ],
+    "minor": [
+      "Other PDE5 inhibitors (avoid combined use)",
+      "Antacids (may slightly affect absorption)"
+    ],
+    "food": "Grapefruit juice may increase plasma levels; high-fat meals reduce Cmax and slow onset",
+    "alcohol": "Both vardenafil and alcohol are mild vasodilators; combined use may augment blood-pressure-lowering effects",
+    "diagnostics": "Can prolong the QTc interval on ECG"
+  },
+  "se": {
+    "common": ["Headache", "Flushing", "Nasal congestion", "Dyspepsia", "Dizziness"],
+    "serious": ["Priapism (erection lasting >4 hours)", "Nonarteritic anterior ischemic optic neuropathy (sudden vision loss)", "Sudden hearing loss", "Symptomatic hypotension", "QT prolongation"],
+    "rare": ["Myocardial infarction / arrhythmia", "Stroke", "Seizure", "Hypersensitivity reactions"],
+    "emergency": ["Prolonged painful erection (priapism)", "Sudden vision loss in one or both eyes", "Sudden hearing loss", "Chest pain during sexual activity"]
+  },
+  "monitoring": [
+    "Cardiovascular suitability for sexual activity before starting",
+    "Blood pressure, especially with alpha-blockers or antihypertensives",
+    "Visual disturbances (NAION)",
+    "Auditory changes",
+    "Duration of erection (priapism)"
+  ],
+  "counsel": [
+    "Take about 1 hour before sexual activity; it works only with sexual stimulation",
+    "Never use with nitrates (e.g., nitroglycerin) or riociguat - this can cause a dangerous drop in blood pressure",
+    "Seek emergency care for an erection lasting more than 4 hours",
+    "Stop the drug and seek care for sudden vision or hearing loss",
+    "Do not exceed one dose per day",
+    "Tell your doctor about heart disease and all other medicines, including chest-pain drugs"
+  ],
+  "pk": [
+    ["Onset", "Erectile effect typically within 25-60 minutes"],
+    ["Peak", "Median peak plasma concentration about 60 minutes (range 30 minutes to 2 hours) when fasting"],
+    ["Half-life", "Terminal half-life approximately 4-5 hours"],
+    ["Duration", "Clinical effect generally up to about 4-5 hours"],
+    ["Storage", "Store at controlled room temperature 25 C; protect from excessive heat and moisture"]
+  ],
+  "pearls": [
+    "Contraindicated with nitrates and with guanylate cyclase stimulators (riociguat) due to severe hypotension",
+    "Can prolong the QT interval - avoid in congenital long QT and with Class IA/III antiarrhythmics",
+    "Highly CYP3A4-metabolized; strong inhibitors require strict dose limits",
+    "Sudden vision loss (NAION) and sudden hearing loss are rare but warrant immediate discontinuation",
+    "Absolute bioavailability is only about 15% due to extensive first-pass metabolism"
+  ],
+  "missed": "Vardenafil is used on an as-needed basis before sexual activity, so there is no fixed dosing schedule and no missed dose to make up. Do not take more than one dose in any 24-hour period.",
+  "overdose": "Single doses up to 80 mg or repeated doses caused back pain, abnormal vision, or muscle aches in studies. Manage supportively; standard measures to support cardiovascular status. Because vardenafil is highly protein-bound, dialysis is unlikely to accelerate clearance.",
+  "refs": [
+    ["FDA Prescribing Information - Vardenafil hydrochloride", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Vardenafil", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22vardenafil%22"]
+  ]
+}

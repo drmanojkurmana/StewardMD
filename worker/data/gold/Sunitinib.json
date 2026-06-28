@@ -1,0 +1,109 @@
+{
+  "generic": "Sunitinib",
+  "cls": "Multitargeted receptor tyrosine kinase inhibitor (antineoplastic)",
+  "pharm": "Oral small-molecule inhibitor of multiple receptor tyrosine kinases (VEGFR1-3, PDGFR alpha/beta, KIT, FLT3, CSF-1R, RET) that drives antiangiogenic and antitumor activity; the primary metabolite is similarly active.",
+  "tags": ["Antineoplastic", "Tyrosine kinase inhibitor", "Oral", "Boxed warning: hepatotoxicity"],
+  "quick": [
+    ["Adult dose", "GIST/RCC: 50 mg once daily, 4 weeks on / 2 weeks off; pNET: 37.5 mg once daily"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Can cause fetal harm; effective contraception required"],
+    ["Lactation", "Do not breastfeed during and for 4 weeks after the last dose"],
+    ["Renal", "No starting-dose change for mild-moderate; limited data on dialysis"],
+    ["Hepatic", "Boxed warning - hepatotoxicity can be fatal; monitor LFTs, interrupt/reduce/stop"],
+    ["Alcohol", "Avoid (additive hepatic burden)"],
+    ["Monitoring", "LFTs each cycle, blood pressure, CBC, thyroid, LVEF/ECG"]
+  ],
+  "summary": "Sunitinib is an oral multitargeted tyrosine kinase inhibitor used in imatinib-refractory or intolerant GIST, advanced and adjuvant renal cell carcinoma, and progressive well-differentiated pancreatic neuroendocrine tumors. It carries a boxed warning for severe and sometimes fatal hepatotoxicity, and requires monitoring of liver function, blood pressure, blood counts, thyroid function and cardiac function.",
+  "indications": [
+    "Gastrointestinal stromal tumor (GIST) after disease progression on or intolerance to imatinib mesylate",
+    "Advanced renal cell carcinoma (RCC)",
+    "Adjuvant treatment of adults at high risk of recurrent RCC following nephrectomy",
+    "Progressive, well-differentiated, unresectable locally advanced or metastatic pancreatic neuroendocrine tumors (pNET)"
+  ],
+  "dosage": [
+    {"c": "GIST and advanced RCC", "r": "Adults", "d": "50 mg orally once daily (Schedule 4/2: 4 weeks on, 2 weeks off)", "t": "Until disease progression or unacceptable toxicity", "n": "Adjust in 12.5 mg steps based on tolerability"},
+    {"c": "Adjuvant RCC", "r": "Adults", "d": "50 mg orally once daily (Schedule 4/2)", "t": "Nine 6-week cycles", "n": "Following nephrectomy"},
+    {"c": "Pancreatic NET", "r": "Adults", "d": "37.5 mg orally once daily continuously", "t": "Until progression or unacceptable toxicity", "n": "No off-treatment period"},
+    {"c": "With strong CYP3A4 inhibitor", "r": "Adults", "d": "Consider reducing GIST/RCC dose to 37.5 mg/day (pNET to 25 mg/day)", "t": "While co-administered", "n": "Prefer avoiding the interacting drug"},
+    {"c": "With strong CYP3A4 inducer", "r": "Adults", "d": "Consider increasing GIST/RCC dose up to 87.5 mg/day (pNET up to 62.5 mg/day)", "t": "While co-administered", "n": "Monitor for toxicity"}
+  ],
+  "admin": [
+    "Take orally once daily, with or without food",
+    "Maintain the assigned 4-weeks-on / 2-weeks-off schedule for GIST/RCC; pNET is continuous",
+    "Obtain baseline liver function tests, blood pressure, CBC and thyroid function",
+    "Interrupt, dose reduce, or discontinue for hepatotoxicity, heart failure, severe hypertension, or other significant toxicity per the prescribing information",
+    "Adjust dose in 12.5 mg increments based on individual safety and tolerability"
+  ],
+  "moa": "Sunitinib is a small molecule that inhibits multiple receptor tyrosine kinases implicated in tumor growth, pathologic angiogenesis and metastatic progression, including PDGFR alpha and beta, VEGFR1, VEGFR2 and VEGFR3, KIT, FLT3, CSF-1R and RET. By inhibiting phosphorylation of these receptors it blocks downstream signaling, producing antiangiogenic and direct antitumor effects. Its primary metabolite has similar potency.",
+  "contra": {
+    "absolute": [],
+    "relative": [
+      "Severe pre-existing hepatic impairment or active liver disease",
+      "Recent cardiovascular event or significant heart failure",
+      "Uncontrolled hypertension",
+      "QT prolongation or congenital long QT syndrome",
+      "Pregnancy"
+    ],
+    "monitor": [
+      "Liver function tests (boxed warning)",
+      "Blood pressure",
+      "Left ventricular ejection fraction / ECG",
+      "Thyroid function and complete blood count"
+    ]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal findings (embryolethality and teratogenicity). Advise females of reproductive potential to use effective contraception during treatment and for 4 weeks after the last dose; avoid in pregnancy unless benefit outweighs risk.",
+  "lact": "Sunitinib and its metabolite are excreted in milk in animals. Do not breastfeed during treatment and for 4 weeks after the last dose due to the potential for serious adverse reactions in a breastfed child.",
+  "renal": "No starting-dose adjustment is recommended for mild to severe renal impairment; pharmacokinetics are not markedly affected because elimination is largely hepatic/fecal. Data in patients on dialysis are limited; monitor and adjust based on tolerability.",
+  "hepatic": "BOXED WARNING: hepatotoxicity can be severe and, in some cases, fatal, including liver failure. Monitor liver function at baseline, during each cycle, and as clinically indicated. Interrupt for Grade 3 hepatotoxicity until recovery to <=Grade 1 or baseline and resume at a reduced dose; discontinue permanently for Grade 4 hepatotoxicity, recurrence, or signs of liver failure.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inhibitors - ketoconazole, itraconazole, clarithromycin, ritonavir, grapefruit (increase sunitinib levels; reduce dose or avoid)",
+      "Strong CYP3A4 inducers - rifampin, phenytoin, carbamazepine, St. John's wort (decrease sunitinib levels; increase dose or avoid)",
+      "QT-prolonging drugs and antiarrhythmics (additive torsade risk)"
+    ],
+    "moderate": [
+      "Anticoagulants/antiplatelets (bleeding risk)",
+      "Antihypertensives (additive blood-pressure effects)"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food; avoid grapefruit and grapefruit juice (CYP3A4 inhibition).",
+    "alcohol": "Avoid due to additive hepatic burden.",
+    "diagnostics": "Monitor ECG/QTc and electrolytes in patients at higher risk; monitor TSH for thyroid dysfunction."
+  },
+  "se": {
+    "common": ["Fatigue", "Diarrhea", "Nausea and vomiting", "Mucositis/stomatitis", "Hypertension", "Hand-foot syndrome and skin discoloration (yellow)", "Altered taste", "Bleeding (epistaxis)", "Hypothyroidism"],
+    "serious": ["Severe/fatal hepatotoxicity (boxed)", "Heart failure / decreased LVEF, myocardial ischemia/infarction", "QT prolongation and torsade de pointes", "Severe hypertension", "Hemorrhage including tumor hemorrhage", "Thrombotic microangiopathy", "Tumor lysis syndrome", "Osteonecrosis of the jaw", "Wound-healing impairment / fistula"],
+    "rare": ["Posterior reversible encephalopathy syndrome (PRES)", "Necrotizing fasciitis", "Pancreatitis", "Severe cutaneous reactions (SJS/TEN, erythema multiforme)", "Proteinuria / nephrotic syndrome"],
+    "emergency": ["Acute liver failure", "Acute heart failure or myocardial infarction", "Severe hemorrhage", "Hypertensive crisis or PRES", "Severe skin reaction"]
+  },
+  "monitoring": ["Liver function tests at baseline, each cycle, and as indicated", "Blood pressure regularly", "CBC with platelets each cycle", "Thyroid function (TSH) periodically", "LVEF and ECG/QTc in at-risk patients", "Urine protein for proteinuria"],
+  "counsel": [
+    "Take once daily with or without food, and follow the on/off treatment schedule exactly",
+    "Skin and hair may turn yellow; this is expected and reversible",
+    "Report yellowing of eyes/skin, dark urine, severe fatigue, or right upper abdominal pain (liver injury)",
+    "Report chest pain, breathlessness, leg swelling, or palpitations",
+    "Monitor and report high blood pressure and any significant bleeding",
+    "Avoid grapefruit; tell your team about all other medicines",
+    "Use effective contraception; do not breastfeed during and for 4 weeks after the last dose"
+  ],
+  "pk": [
+    ["Onset", "Steady state reached in 10-14 days with daily dosing"],
+    ["Peak", "Tmax 6-12 hours after an oral dose"],
+    ["Half-life", "Sunitinib ~40-60 hours; active metabolite ~80-110 hours"],
+    ["Duration", "Long half-life supports once-daily dosing"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C); dispense in tight containers"]
+  ],
+  "pearls": [
+    "Boxed warning: hepatotoxicity can be fatal - monitor LFTs at baseline and each cycle",
+    "GIST/RCC use the 4-weeks-on/2-weeks-off (Schedule 4/2) regimen; pNET is dosed continuously at 37.5 mg",
+    "Strong CYP3A4 inhibitors and inducers require dose adjustment; avoid grapefruit",
+    "Watch for hypertension, hypothyroidism, decreased LVEF and hand-foot syndrome",
+    "Hold before major surgery due to impaired wound healing"
+  ],
+  "missed": "If a dose is missed, do not take an extra dose; take the next dose at the usual time the following day. Contact the oncology team if more than one dose is missed.",
+  "overdose": "No specific antidote. Provide general supportive care; if recent, consider emesis or gastric lavage to remove unabsorbed drug. Manage adverse effects consistent with the known safety profile.",
+  "refs": [
+    ["FDA Prescribing Information - sunitinib malate capsules (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sunitinib%22"],
+    ["DailyMed - Sunitinib", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=sunitinib"]
+  ]
+}

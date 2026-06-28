@@ -1,0 +1,153 @@
+{
+  "generic": "Sirolimus (Rapamycin)",
+  "cls": "mTOR inhibitor immunosuppressant (macrolide)",
+  "pharm": "Immunosuppressant (mTOR inhibitor)",
+  "tags": [
+    "immunosuppressant",
+    "mTOR inhibitor",
+    "renal transplant",
+    "organ rejection",
+    "rapamycin",
+    "boxed warning"
+  ],
+  "quick": [
+    ["Adult dose", "Renal transplant: 6 mg loading dose, then 2 mg once daily, adjusted to trough levels"],
+    ["Meal", "Take consistently with or without food, the same way each time"],
+    ["Pregnancy", "Avoid - can cause fetal harm; use effective contraception"],
+    ["Lactation", "Avoid breastfeeding - excretion in milk likely, risk to infant"],
+    ["Renal", "May decline renal function (esp. with cyclosporine); monitor closely"],
+    ["Hepatic", "Reduce maintenance dose; monitor trough levels"],
+    ["Alcohol", "No direct interaction; limit (hepatic/metabolic burden)"],
+    ["Monitoring", "Whole-blood trough levels, renal function, lipids, CBC"]
+  ],
+  "summary": "Sirolimus is an mTOR-inhibitor immunosuppressant used to prevent organ rejection in renal transplant recipients aged 13 years and older. It carries a boxed warning for increased susceptibility to infection and development of lymphoma and other malignancies, and its use is NOT recommended in liver or lung transplant patients because of serious risks. Dosing is guided by whole-blood trough levels, and key adverse effects include hyperlipidemia, impaired wound healing, proteinuria, and interstitial lung disease.",
+  "indications": [
+    "Prophylaxis of organ rejection in patients aged 13 years or older receiving renal (kidney) transplants",
+    "Treatment of lymphangioleiomyomatosis (LAM) [Rapamune labeling]"
+  ],
+  "dosage": [
+    {"c": "Renal transplant - low to moderate immunologic risk", "r": "Adult", "d": "Loading 6 mg, then 2 mg once daily; adjust to trough 16-24 ng/mL (with cyclosporine, first year)", "t": "Once daily", "n": "Used with cyclosporine and corticosteroids; withdraw cyclosporine over 4-8 weeks at 2-4 months"},
+    {"c": "Renal transplant - high immunologic risk", "r": "Adult", "d": "Loading up to 15 mg, then 5 mg once daily; target trough 16-24 ng/mL", "t": "Once daily", "n": "Continue with cyclosporine and corticosteroids for the first year"},
+    {"c": "Renal transplant", "r": "Pediatric >=13 yr, <40 kg", "d": "1 mg/m^2/day maintenance, loading 3 mg/m^2", "t": "Once daily", "n": "Adjust to trough levels"},
+    {"c": "Lymphangioleiomyomatosis (LAM)", "r": "Adult", "d": "2 mg once daily; adjust to trough 5-15 ng/mL", "t": "Once daily", "n": "Reassess after 1-2 weeks of dose changes"},
+    {"c": "Hepatic impairment", "r": "Adult", "d": "Reduce maintenance dose (mild-moderate ~ -33%, severe ~ -50%)", "t": "Once daily", "n": "Loading dose not changed; guide by trough levels"}
+  ],
+  "admin": [
+    "Take once daily, consistently with or without food (the same way each day)",
+    "Take 4 hours after cyclosporine when the two are used together",
+    "Tablets must not be crushed, chewed, or split",
+    "For oral solution, dilute in water or orange juice (not grapefruit juice) and drink immediately",
+    "Avoid grapefruit juice, which inhibits sirolimus metabolism"
+  ],
+  "moa": "Sirolimus binds the intracellular protein FKBP-12 to form a complex that inhibits the mechanistic target of rapamycin (mTOR), a key regulatory kinase. This blocks the response of T and B lymphocytes to interleukin-2 and other cytokines, arresting the cell cycle at the G1-to-S transition and suppressing antigen- and cytokine-driven lymphocyte proliferation, thereby preventing graft rejection.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to sirolimus",
+      "Use in liver transplant patients (increased mortality, graft loss, hepatic artery thrombosis) - not recommended",
+      "Use in lung transplant patients (bronchial anastomotic dehiscence, some fatal) - not recommended"
+    ],
+    "relative": [
+      "Pregnancy / women planning conception",
+      "Active or latent infection",
+      "Hyperlipidemia",
+      "Significant proteinuria or declining renal function",
+      "Recent major surgery / open wounds (impaired healing)"
+    ],
+    "monitor": [
+      "Whole-blood sirolimus trough concentration",
+      "Renal function and proteinuria",
+      "Fasting lipid profile",
+      "Complete blood count",
+      "Signs of infection, lung symptoms, and wound healing"
+    ]
+  },
+  "preg": "Sirolimus can cause fetal harm. Effective contraception is recommended before, during, and for 12 weeks after the final dose in females of reproductive potential. Avoid in pregnancy unless the benefit clearly outweighs the risk.",
+  "lact": "Sirolimus is present in animal milk and excretion in human milk is likely; because of the potential for serious adverse reactions in the infant, breastfeeding is not recommended during treatment and for 12 weeks after the final dose.",
+  "renal": "No initial dose adjustment for renal impairment, but sirolimus (especially with cyclosporine) can cause a decline in renal function and proteinuria. Monitor renal function and urinary protein closely and consider adjustment of the regimen.",
+  "hepatic": "Reduce the maintenance dose in hepatic impairment (approximately one-third for mild-moderate and about one-half for severe impairment); the loading dose need not be modified. Guide adjustments by whole-blood trough concentrations.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4/P-gp inhibitors (ketoconazole, itraconazole, voriconazole, clarithromycin, erythromycin, ritonavir) - markedly increase sirolimus levels; avoid",
+      "Strong CYP3A4/P-gp inducers (rifampin, rifabutin, carbamazepine, phenytoin, phenobarbital) - decrease levels and efficacy; avoid",
+      "Cyclosporine (increases sirolimus exposure; separate dosing by 4 hours and monitor renal function)",
+      "Live vaccines (avoid during immunosuppression)"
+    ],
+    "moderate": [
+      "Diltiazem, verapamil (increase sirolimus levels)",
+      "ACE inhibitors (risk of angioedema)",
+      "Other nephrotoxic drugs (additive renal injury)"
+    ],
+    "minor": [
+      "Drugs that prolong wound healing or affect lipids"
+    ],
+    "food": "Grapefruit juice inhibits CYP3A4 and raises sirolimus levels - avoid; take consistently relative to food",
+    "alcohol": "No direct interaction; limit alcohol given hepatic/metabolic considerations",
+    "diagnostics": "Can raise serum cholesterol and triglycerides, alter LFTs, and lower blood counts"
+  },
+  "se": {
+    "common": [
+      "Hyperlipidemia (raised cholesterol/triglycerides)",
+      "Hypertension",
+      "Peripheral edema",
+      "Headache",
+      "Anemia, thrombocytopenia, leukopenia",
+      "Arthralgia",
+      "Acne / rash",
+      "Diarrhea"
+    ],
+    "serious": [
+      "Increased risk of serious infections (including opportunistic and reactivation of latent virus)",
+      "Lymphoma and other malignancies",
+      "Interstitial lung disease / non-infectious pneumonitis",
+      "Impaired or delayed wound healing and fluid accumulation",
+      "Proteinuria and decline in renal function",
+      "Angioedema (especially with ACE inhibitors)",
+      "Hemolytic uremic syndrome / thrombotic thrombocytopenic purpura / thrombotic microangiopathy"
+    ],
+    "rare": [
+      "Hepatotoxicity",
+      "Hepatic artery thrombosis (liver transplant)",
+      "Bronchial anastomotic dehiscence (lung transplant)"
+    ],
+    "emergency": [
+      "Severe infection / sepsis",
+      "Anaphylaxis or angioedema",
+      "Acute interstitial pneumonitis with respiratory failure"
+    ]
+  },
+  "monitoring": [
+    "Whole-blood sirolimus trough concentrations (especially after dose or interacting-drug changes)",
+    "Renal function and urine protein",
+    "Fasting lipid panel",
+    "Complete blood count (anemia, thrombocytopenia, leukopenia)",
+    "Signs of infection and pulmonary symptoms",
+    "Wound healing after surgery"
+  ],
+  "counsel": [
+    "Take it exactly as prescribed, always the same way with respect to food, and 4 hours after cyclosporine if you take both",
+    "Avoid grapefruit and grapefruit juice",
+    "It weakens the immune system - report fevers, cough, breathlessness, or other signs of infection promptly",
+    "Use effective contraception and avoid pregnancy and breastfeeding during and for 12 weeks after treatment",
+    "Protect your skin from the sun and report any new skin lesions",
+    "Do not stop or change the dose, and keep all blood-test appointments"
+  ],
+  "pk": [
+    ["Onset", "Immunosuppressive effect develops over days as steady state is reached"],
+    ["Peak", "Peak whole-blood concentration about 1-3 hours after oral dosing"],
+    ["Half-life", "Long terminal half-life, approximately 62 hours (range ~46-78 h)"],
+    ["Duration", "Long-acting; once-daily dosing maintains levels"],
+    ["Storage", "Tablets and solution: store at 20-25 C, protect from light; refrigerate solution (2-8 C) per labeling"]
+  ],
+  "pearls": [
+    "BOXED WARNING: increased susceptibility to infection and to lymphoma/other malignancies from immunosuppression",
+    "NOT recommended in liver transplant (hepatic artery thrombosis, graft loss, death) or lung transplant (bronchial dehiscence) patients",
+    "Dose by whole-blood trough levels; long half-life means changes take days to reach steady state",
+    "Watch for hyperlipidemia, proteinuria, poor wound healing, and pneumonitis; separate from cyclosporine by 4 hours"
+  ],
+  "missed": "If you miss a dose, take it as soon as you remember unless it is close to the next dose. Do not take a double dose. Tell your transplant team about missed doses, as consistent levels are important.",
+  "overdose": "Reports of acute overdose are limited; expected effects relate to exaggerated immunosuppression and adverse reactions. There is no specific antidote. Management is supportive; sirolimus is highly bound and not appreciably dialyzable, so general supportive measures and monitoring of blood levels and organ function are used.",
+  "refs": [
+    ["FDA Prescribing Information - Rapamune (sirolimus)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2017/021083s059,021110s076lbl.pdf"],
+    ["openFDA Drug Label - Sirolimus", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sirolimus%22"]
+  ]
+}

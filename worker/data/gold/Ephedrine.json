@@ -1,0 +1,118 @@
+{
+  "generic": "Ephedrine (Ephedrine sulfate / hydrochloride)",
+  "cls": "Mixed-acting sympathomimetic amine (alpha- and beta-adrenergic agonist)",
+  "pharm": "Vasopressor / bronchodilator / decongestant",
+  "tags": ["vasopressor", "sympathomimetic", "hypotension", "anesthesia", "bronchodilator", "alpha agonist", "beta agonist"],
+  "quick": [
+    ["Adult dose", "Clinically important hypotension during anesthesia: 5-10 mg IV bolus, repeat as needed; max about 50 mg"],
+    ["Meal", "Parenteral use - not applicable; oral forms may be taken with or without food"],
+    ["Pregnancy", "Used to treat hypotension during obstetric anesthesia; use only if clearly needed"],
+    ["Lactation", "Excreted in breast milk; may cause irritability in infants - caution"],
+    ["Renal", "Excreted largely unchanged in urine; caution and reduced effect duration considerations"],
+    ["Hepatic", "Use with caution"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Blood pressure, heart rate/ECG, perfusion; for repeated dosing watch for tachyphylaxis"]
+  ],
+  "summary": "Ephedrine is a mixed-acting sympathomimetic that both directly stimulates alpha- and beta-adrenergic receptors and indirectly releases norepinephrine. Its principal modern use is as an injectable vasopressor for clinically important hypotension occurring during anesthesia (including obstetric spinal/epidural anesthesia), where it raises blood pressure and heart rate. It has historically been used as a bronchodilator and decongestant. Repeated dosing causes tachyphylaxis. It is contraindicated/cautioned in significant cardiovascular disease, and interacts dangerously with MAO inhibitors.",
+  "indications": [
+    "Treatment of clinically important hypotension occurring in the setting of anesthesia",
+    "Historically: bronchospasm/asthma and nasal congestion (oral/nasal formulations, region specific)"
+  ],
+  "dosage": [
+    {"c": "Hypotension during anesthesia", "r": "Adult", "d": "5 to 10 mg by slow IV bolus", "t": "As needed; repeat every 5-10 minutes based on response", "n": "Titrate to blood pressure; total dose generally should not exceed about 50 mg"},
+    {"c": "Hypotension during anesthesia", "r": "Pediatric", "d": "0.1 to 0.2 mg/kg IV", "t": "As needed, repeat per response", "n": "Titrate to effect; weight-based"},
+    {"c": "Hypotension during anesthesia", "r": "Adult (IM/SC)", "d": "10 to 25 mg IM or SC", "t": "Repeat per response", "n": "Onset slower than IV"},
+    {"c": "Bronchodilation / decongestion (oral, historical)", "r": "Adult", "d": "Typically 12.5-25 mg orally", "t": "Every 4 hours as needed", "n": "Region/product specific; largely superseded"}
+  ],
+  "admin": [
+    "For hypotension during anesthesia, dilute and give as a slow intravenous bolus, titrating to blood pressure response",
+    "Inspect parenteral solution for particulate matter and discoloration before use",
+    "Use with caution and reduced doses in elderly patients",
+    "Anticipate diminishing response (tachyphylaxis) with repeated doses; consider an alternative vasopressor if ineffective"
+  ],
+  "moa": "Ephedrine acts both directly and indirectly on adrenergic receptors. It directly stimulates alpha-1 receptors (vasoconstriction), beta-1 receptors (increased heart rate and contractility) and beta-2 receptors (bronchodilation, vasodilation in skeletal muscle), and indirectly releases norepinephrine from sympathetic nerve terminals. The net effect is increased blood pressure, cardiac output, and heart rate, plus bronchodilation. Depletion of releasable norepinephrine with repeated dosing causes tachyphylaxis.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to ephedrine or other sympathomimetics",
+      "Concurrent or recent (within 14 days) use of monoamine oxidase inhibitors (risk of hypertensive crisis)"
+    ],
+    "relative": [
+      "Significant cardiovascular disease, coronary artery disease, arrhythmias, tachycardia",
+      "Uncontrolled hypertension",
+      "Hyperthyroidism",
+      "Closed-angle (narrow-angle) glaucoma",
+      "Pheochromocytoma",
+      "Diabetes mellitus",
+      "Prostatic hypertrophy / urinary retention",
+      "Concurrent halogenated/volatile anesthetics that sensitize the myocardium",
+      "Elderly patients"
+    ],
+    "monitor": [
+      "Blood pressure and heart rate continuously during parenteral use",
+      "ECG in patients at cardiac risk",
+      "Tissue perfusion"
+    ]
+  },
+  "preg": "Ephedrine is commonly used to treat maternal hypotension during spinal or epidural anesthesia for cesarean delivery. There is no evidence of teratogenicity at therapeutic doses; use during pregnancy only when clearly needed and monitor maternal blood pressure and fetal heart rate.",
+  "lact": "Ephedrine is excreted in human breast milk and may cause irritability, disturbed sleep, or feeding difficulty in the nursing infant. Use with caution; brief perioperative parenteral exposure is generally considered low risk.",
+  "renal": "Ephedrine is excreted largely unchanged in the urine, and elimination is faster in acidic urine. Use with caution in renal impairment; effects may be altered by changes in urinary pH and clearance.",
+  "hepatic": "Use with caution in hepatic impairment. Dose adjustment is generally guided by clinical response and monitoring rather than fixed reductions.",
+  "interactions": {
+    "major": [
+      "Monoamine oxidase inhibitors (including within 14 days) - severe hypertensive crisis",
+      "Other sympathomimetics / vasopressors - additive pressor effects, hypertension, arrhythmias",
+      "Oxytocin and ergot oxytocics - potentiated pressor/hypertensive effect"
+    ],
+    "moderate": [
+      "Halogenated volatile anesthetics, digitalis - increased risk of arrhythmias",
+      "Tricyclic antidepressants (variable effects on pressor response)",
+      "Beta-blockers (unopposed alpha effects, hypertension/bradycardia)",
+      "Alpha-blockers, vasodilators (reduced pressor effect)",
+      "Theophylline (additive stimulation)"
+    ],
+    "minor": [
+      "Urinary alkalinizers/acidifiers (alter ephedrine elimination)"
+    ],
+    "food": "Not applicable for parenteral use; no significant food interaction for oral forms",
+    "alcohol": "No specific pharmacologic interaction reported",
+    "diagnostics": "May cause false-positive results on amphetamine immunoassay urine drug screens"
+  },
+  "se": {
+    "common": ["Hypertension", "Tachycardia", "Palpitations", "Nausea/vomiting", "Anxiety/restlessness", "Tremor", "Headache", "Dizziness"],
+    "serious": ["Hypertensive crisis", "Cardiac arrhythmias (including ventricular)", "Myocardial ischemia/infarction", "Cerebral hemorrhage (with excessive pressor response)", "Pulmonary edema"],
+    "rare": ["Acute urinary retention", "Closed-angle glaucoma precipitation", "Hypersensitivity reactions", "Psychotic reactions with high doses"],
+    "emergency": ["Severe hypertension with chest pain or neurological signs", "Serious ventricular arrhythmia", "Signs of stroke or myocardial infarction"]
+  },
+  "monitoring": [
+    "Continuous blood pressure and heart rate during and after parenteral administration",
+    "ECG in patients with cardiac risk",
+    "Tissue perfusion and urine output",
+    "Diminishing response indicating tachyphylaxis"
+  ],
+  "counsel": [
+    "This medicine is usually given by a clinician to support blood pressure during anesthesia",
+    "Report palpitations, chest pain, severe headache, or anxiety",
+    "Tell your doctor about heart disease, high blood pressure, thyroid problems, and all medicines, especially antidepressants (MAO inhibitors)",
+    "For oral products, do not exceed the recommended dose; it can cause restlessness, insomnia, and a fast heartbeat"
+  ],
+  "pk": [
+    ["Onset", "IV: almost immediate pressor effect; oral: within 15-60 minutes"],
+    ["Peak", "IV effect peaks within minutes; oral peak about 1-2 hours"],
+    ["Half-life", "Approximately 3-6 hours (faster in acidic urine)"],
+    ["Duration", "IV pressor effect about 10-60 minutes; oral effect about 3-5 hours"],
+    ["Storage", "Store at controlled room temperature; protect from light; do not use discolored solution"]
+  ],
+  "pearls": [
+    "Mixed direct/indirect action means repeated doses cause tachyphylaxis - switch agents rather than escalating indefinitely",
+    "Preferred vasopressor in some obstetric anesthesia settings because it preserves uteroplacental flow while raising maternal BP, though phenylephrine is now often favored",
+    "MAO inhibitor co-use (within 14 days) can precipitate a hypertensive crisis - a key contraindication",
+    "Can cause false-positive amphetamine urine screens",
+    "Has central stimulant properties and abuse/precursor potential, leading to sales restrictions in many regions"
+  ],
+  "missed": "Ephedrine is given as needed (most often intravenously by a clinician) rather than on a fixed schedule, so there is no missed dose in the usual sense. For any oral product taken intermittently, skip a missed dose if it is near the next one and do not double up.",
+  "overdose": "Overdose causes exaggerated sympathomimetic effects: severe hypertension, tachyarrhythmias, hyperthermia, agitation, seizures, and potentially myocardial infarction or intracranial hemorrhage. Management is supportive: control blood pressure (e.g., with vasodilators or alpha-blockade), treat arrhythmias, manage agitation/seizures with benzodiazepines, and provide cardiovascular monitoring. There is no specific antidote.",
+  "refs": [
+    ["FDA Prescribing Information - Ephedrine sulfate injection", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Ephedrine", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ephedrine%20sulfate%22"]
+  ]
+}

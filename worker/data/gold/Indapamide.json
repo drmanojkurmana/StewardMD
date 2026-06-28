@@ -1,0 +1,109 @@
+{
+  "generic": "Indapamide",
+  "cls": "Thiazide-like diuretic (indoline antihypertensive/diuretic)",
+  "pharm": "Indoline-class diuretic that promotes natriuresis and lowers peripheral vascular resistance to reduce blood pressure.",
+  "tags": ["Rx only", "Thiazide-like diuretic", "Sulfonamide-derived", "Once-daily"],
+  "quick": [
+    ["Adult dose", "Hypertension: 1.25 mg once daily in the morning; max 5 mg/day"],
+    ["Meal", "Take once daily in the morning, with or without food"],
+    ["Pregnancy", "Use only if clearly needed; routine diuretic use in pregnancy is inappropriate"],
+    ["Lactation", "Excretion in milk unknown; stop nursing if drug is essential"],
+    ["Renal", "Use with caution in severe renal disease; may worsen azotemia"],
+    ["Hepatic", "Use with caution; fluid/electrolyte shifts may precipitate hepatic coma"],
+    ["Alcohol", "Avoid excess; may worsen orthostatic hypotension"],
+    ["Monitoring", "Serum electrolytes (K, Na), uric acid, glucose, renal function, BP"]
+  ],
+  "summary": "Indapamide is an indoline thiazide-like diuretic used to treat hypertension (alone or with other agents) and salt and fluid retention associated with congestive heart failure. It lowers blood pressure with little effect on cardiac output and carries the dose-related electrolyte risks typical of thiazides, most notably hypokalemia and hyponatremia. Patients should be started at the lowest 1.25 mg dose and maintained at the lowest effective dose.",
+  "indications": [
+    "Hypertension, alone or in combination with other antihypertensive drugs",
+    "Salt and fluid retention associated with congestive heart failure"
+  ],
+  "dosage": [
+    {"c": "Hypertension (adults)", "r": "Oral", "d": "Start 1.25 mg once daily; if inadequate after 4 weeks increase to 2.5 mg, then to 5 mg after another 4 weeks", "t": "Once daily in the morning", "n": "Doses >=5 mg do not add BP benefit but increase hypokalemia; consider adding another antihypertensive instead"},
+    {"c": "Edema of congestive heart failure (adults)", "r": "Oral", "d": "Start 2.5 mg once daily; if inadequate after 1 week increase to 5 mg", "t": "Once daily in the morning", "n": "Doses >=5 mg generally provide no added benefit but greater hypokalemia"},
+    {"c": "Combination therapy", "r": "Oral", "d": "Per indication above", "t": "Once daily in the morning", "n": "Reduce usual dose of the other agent by 50% when initiating combination; adjust as BP responds"},
+    {"c": "Elderly", "r": "Oral", "d": "Start at the low end (1.25 mg)", "t": "Once daily in the morning", "n": "Higher risk of severe hyponatremia with hypokalemia, particularly elderly females"}
+  ],
+  "admin": [
+    "Give as a single daily dose in the morning",
+    "Start at 1.25 mg and maintain the lowest effective dose to limit electrolyte disturbance",
+    "Allow about 4 weeks at a dose before titrating upward for hypertension",
+    "Do not give concomitantly with lithium (raises lithium toxicity risk)"
+  ],
+  "moa": "Indapamide is a thiazide-like (indoline) diuretic. It increases urinary excretion of sodium, chloride, and water by acting on the distal renal tubule, and at antihypertensive doses also decreases peripheral vascular resistance with little or no effect on cardiac output, rate, or rhythm. It has minimal effect on glomerular filtration rate or renal plasma flow during chronic use.",
+  "contra": {
+    "absolute": [
+      "Anuria",
+      "Known hypersensitivity to indapamide or other sulfonamide-derived drugs"
+    ],
+    "relative": [
+      "Severe renal disease (may precipitate or worsen azotemia)",
+      "Impaired hepatic function or progressive liver disease (risk of hepatic coma)",
+      "Diabetes or impaired glucose tolerance",
+      "Gout or hyperuricemia",
+      "Systemic lupus erythematosus (may be exacerbated)",
+      "History of sulfonamide or penicillin allergy (acute angle-closure glaucoma risk)"
+    ],
+    "monitor": [
+      "Serum electrolytes (potassium, sodium, chloride)",
+      "Serum uric acid",
+      "Blood glucose",
+      "Renal function (BUN, creatinine)",
+      "Signs of fluid/electrolyte imbalance"
+    ]
+  },
+  "preg": "Routine use of diuretics in an otherwise healthy pregnant woman is inappropriate and exposes mother and fetus to unnecessary hazard; diuretics do not prevent or treat toxemia. Animal reproduction studies showed no fetal harm, but there are no adequate well-controlled studies in pregnant women. Use during pregnancy only if clearly needed; potential hazards include fetal or neonatal jaundice and thrombocytopenia. Indapamide may be appropriate when edema is due to pathologic causes.",
+  "lact": "It is not known whether indapamide is excreted in human milk. Because most drugs are excreted in human milk, if use of indapamide is deemed essential the patient should stop nursing.",
+  "renal": "Use with caution in patients with severe renal disease, as reduced plasma volume may exacerbate or precipitate azotemia. Perform renal function tests periodically; if progressive renal impairment occurs, consider withholding or discontinuing therapy.",
+  "hepatic": "Use with caution in patients with impaired hepatic function or progressive liver disease, since minor alterations of fluid and electrolyte balance may precipitate hepatic coma.",
+  "interactions": {
+    "major": [
+      "Lithium: diuretics reduce renal lithium clearance and add a high risk of lithium toxicity; generally avoid concomitant use",
+      "Cardiac glycosides (digitalis): diuretic-induced hypokalemia can sensitize the heart to glycoside toxicity"
+    ],
+    "moderate": [
+      "Other antihypertensives: additive blood-pressure lowering (may potentiate)",
+      "Corticosteroids or ACTH: increase risk of hypokalemia",
+      "Norepinephrine: arterial responsiveness may be slightly decreased"
+    ],
+    "minor": [
+      "Post-sympathectomy patients: antihypertensive effect may be enhanced"
+    ],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid excess; may potentiate orthostatic hypotension.",
+    "diagnostics": "May alter serum electrolytes, uric acid, glucose, and calcium; can lower serum PBI without thyroid disturbance; discontinue before parathyroid function testing."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness/lightheadedness", "Fatigue/weakness", "Hypokalemia", "Muscle cramps", "Peripheral edema"],
+    "serious": ["Severe hyponatremia (especially elderly females)", "Symptomatic hypokalemia with arrhythmia risk", "Orthostatic hypotension", "Hyperuricemia / gout flare", "Hyperglycemia", "Acute angle-closure glaucoma / acute myopia / choroidal effusion"],
+    "rare": ["Stevens-Johnson syndrome", "Erythema multiforme", "Agranulocytosis, leukopenia, thrombocytopenia, aplastic anemia", "Intrahepatic cholestatic jaundice / hepatitis", "Pancreatitis", "Necrotizing angiitis"],
+    "emergency": ["Anaphylactic reaction", "Stevens-Johnson syndrome / bullous eruptions", "Severe symptomatic hyponatremia or hypokalemia", "Acute angle-closure glaucoma"]
+  },
+  "monitoring": ["Serum potassium and sodium periodically, especially early and in the elderly", "Serum uric acid", "Blood glucose", "Renal function (BUN, creatinine)", "Blood pressure and signs of volume/electrolyte depletion"],
+  "counsel": [
+    "Take once daily in the morning to avoid nighttime urination",
+    "Report muscle cramps, weakness, severe fatigue, confusion, or irregular heartbeat (possible low potassium/sodium)",
+    "Rise slowly to avoid dizziness; report fainting",
+    "Seek care urgently for sudden eye pain or vision change",
+    "Keep appointments for blood electrolyte and kidney monitoring"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect develops over days to weeks"],
+    ["Peak", "Peak blood concentration about 2 hours after a dose"],
+    ["Half-life", "Approximately 14 hours in whole blood"],
+    ["Duration", "Long; supports once-daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); avoid excessive heat; keep in a tight, light-resistant container"]
+  ],
+  "pearls": [
+    "Start at 1.25 mg and stay at the lowest effective dose; doses above 5 mg add hypokalemia without more BP effect",
+    "Severe hyponatremia with hypokalemia occurs mainly in elderly females and is dose-related",
+    "Sulfonamide-derived: can trigger idiosyncratic acute angle-closure glaucoma within hours to weeks",
+    "Avoid combining with lithium due to risk of lithium toxicity"
+  ],
+  "missed": "Take the missed dose as soon as remembered the same day; if it is nearly time for the next dose, skip it and resume the regular morning schedule. Do not double up.",
+  "overdose": "Features include nausea, vomiting, weakness, gastrointestinal disturbance, and electrolyte imbalance; severe cases may show hypotension and depressed respiration. There is no specific antidote. Provide supportive care with airway and circulatory support, gastric evacuation (emesis/lavage), and careful evaluation and correction of fluid and electrolyte balance.",
+  "refs": [
+    ["FDA Label - Indapamide (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22indapamide%22"],
+    ["DailyMed - Indapamide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=indapamide"]
+  ]
+}

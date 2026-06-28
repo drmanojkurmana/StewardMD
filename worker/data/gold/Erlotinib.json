@@ -1,0 +1,93 @@
+{
+  "generic": "Erlotinib",
+  "cls": "EGFR tyrosine kinase inhibitor (TKI)",
+  "pharm": "Antineoplastic / targeted small-molecule kinase inhibitor",
+  "tags": ["NSCLC", "EGFR mutation", "pancreatic cancer", "kinase inhibitor", "oncology", "ILD risk"],
+  "quick": [
+    ["Adult dose", "NSCLC 150 mg PO once daily; pancreatic 100 mg PO once daily"],
+    ["Meal", "Empty stomach: >=1 h before or 2 h after food"],
+    ["Pregnancy", "Can cause fetal harm; avoid, use contraception"],
+    ["Lactation", "Do not breastfeed"],
+    ["Renal", "Monitor function; PK in impairment unknown"],
+    ["Hepatic", "Monitor LFTs; withhold/discontinue if severe"],
+    ["Alcohol", "Avoid; use alcohol-free emollients for skin"],
+    ["Monitoring", "LFTs, renal function/electrolytes, INR if on warfarin, pulmonary symptoms"]
+  ],
+  "summary": "Erlotinib is an oral reversible EGFR tyrosine kinase inhibitor for EGFR exon 19 deletion / exon 21 (L858R) mutated metastatic NSCLC and (with gemcitabine) advanced pancreatic cancer. Dosed once daily on an empty stomach. Major safety concerns are interstitial lung disease and hepatotoxicity, plus characteristic rash and diarrhea.",
+  "indications": [
+    "Metastatic NSCLC with EGFR exon 19 deletions or exon 21 (L858R) substitution mutations (first-line, maintenance, or after >=1 prior chemotherapy)",
+    "First-line locally advanced, unresectable or metastatic pancreatic cancer, in combination with gemcitabine"
+  ],
+  "dosage": [
+    {"c": "NSCLC (EGFR-mutated)", "r": "Standard", "d": "150 mg once daily", "t": "Once daily on empty stomach", "n": "Continue until progression or unacceptable toxicity"},
+    {"c": "Pancreatic cancer", "r": "Standard", "d": "100 mg once daily with gemcitabine", "t": "Once daily on empty stomach", "n": "Continue until progression or unacceptable toxicity"},
+    {"c": "ILD suspected", "r": "Dose modification", "d": "Withhold during evaluation; discontinue if ILD confirmed", "t": "-", "n": "Median ILD onset ~39 days (range 5 days to >9 months)"},
+    {"c": "Severe hepatic toxicity", "r": "Dose modification", "d": "Withhold; discontinue if not resolved within 3 weeks", "t": "-", "n": "Bilirubin >3x ULN or transaminases >5x ULN: withhold and consider discontinuation"}
+  ],
+  "admin": [
+    "Take orally once daily on an empty stomach, at least 1 hour before or 2 hours after food",
+    "Select NSCLC patients based on documented EGFR exon 19 deletion or exon 21 (L858R) mutation",
+    "Avoid concomitant proton pump inhibitors; stagger antacids and H2 blockers",
+    "Advise patients not to smoke (smoking lowers erlotinib exposure)",
+    "Continue treatment until disease progression or unacceptable toxicity"
+  ],
+  "moa": "Reversibly inhibits the kinase activity of the epidermal growth factor receptor (EGFR), preventing autophosphorylation of tyrosine residues and blocking downstream signaling that drives tumor cell survival and proliferation. Binding affinity is higher for EGFR exon 19 deletion and exon 21 (L858R) mutant receptors than for wild-type EGFR.",
+  "contra": {
+    "absolute": ["Hypersensitivity to erlotinib"],
+    "relative": ["Pregnancy / females of reproductive potential not using contraception", "Pre-existing hepatic impairment or biliary obstruction", "Risk of dehydration", "Concomitant warfarin"],
+    "monitor": ["Pulmonary symptoms (dyspnea, cough, fever)", "Liver tests", "Renal function and electrolytes", "INR if on coumarin anticoagulant"]
+  },
+  "preg": "Based on animal data and mechanism of action, erlotinib can cause fetal harm; animal studies showed embryo-fetal lethality and abortion. Advise pregnant women of risk and females of reproductive potential to use effective contraception during and after treatment.",
+  "lact": "There are no data on erlotinib in human milk; because of potential for serious adverse reactions in breastfed infants, advise women not to breastfeed during treatment.",
+  "renal": "Pharmacokinetics in patients with compromised renal function is unknown. Monitor renal function and electrolytes, particularly in patients at risk of dehydration; withhold for severe (grade 3-4) renal toxicity.",
+  "hepatic": "Hepatotoxicity, including hepatic failure and hepatorenal syndrome, can occur with or without pre-existing impairment. Erlotinib is cleared primarily by the liver; exposure was similar in moderate impairment (Child-Pugh B). Monitor LFTs periodically; withhold or discontinue for severe or worsening liver tests.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir, voriconazole, grapefruit) - increase erlotinib exposure/toxicity; avoid or reduce dose", "Combined CYP3A4/CYP1A2 inhibitor ciprofloxacin - increased exposure", "Proton pump inhibitors (omeprazole) - decrease erlotinib exposure; avoid", "Warfarin / coumarin anticoagulants - increased INR and bleeding; monitor INR"],
+    "moderate": ["CYP3A4 inducers (rifampin, carbamazepine, phenytoin, phenobarbital, St. John's wort) - decrease exposure; increase dose if unavoidable", "H2-receptor antagonists / antacids (ranitidine) - decrease exposure; modify dosing schedule", "Moderate CYP1A2 inducers (teriflunomide) - decrease exposure"],
+    "minor": ["Drugs altering gastric pH generally reduce erlotinib absorption"],
+    "food": "Food increases bioavailability to ~100% - take on empty stomach. Avoid grapefruit and grapefruit juice (CYP3A4 inhibition).",
+    "alcohol": "No specific systemic interaction documented; use alcohol-free emollient creams for treatment-related skin reactions.",
+    "diagnostics": "May elevate transaminases and bilirubin; can prolong INR in patients on warfarin."
+  },
+  "se": {
+    "common": ["Rash (acneiform, ~70%)", "Diarrhea (~42%)", "Anorexia", "Fatigue", "Dyspnea", "Cough", "Nausea", "Vomiting"],
+    "serious": ["Interstitial lung disease (ILD), including fatal cases (~1.1%)", "Hepatotoxicity / hepatic failure", "Renal failure / hepatorenal syndrome", "Gastrointestinal perforation"],
+    "rare": ["Bullous and exfoliative skin disorders", "Cerebrovascular accident (increased in pancreatic cancer)", "Microangiopathic hemolytic anemia with thrombocytopenia (pancreatic cancer)", "Corneal perforation/ulceration, severe keratitis"],
+    "emergency": ["Acute or progressive unexplained dyspnea/cough/fever (possible ILD)", "Severe abdominal pain (GI perforation)", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Signs of hepatic failure"]
+  },
+  "monitoring": [
+    "Periodic liver function tests (transaminases, bilirubin)",
+    "Renal function and electrolytes, especially with dehydration risk",
+    "Pulmonary symptoms for early ILD detection",
+    "INR regularly in patients on warfarin or coumarin anticoagulants",
+    "Skin and ocular symptoms"
+  ],
+  "counsel": [
+    "Take on an empty stomach, at least 1 hour before or 2 hours after eating",
+    "Report immediately any new or worsening shortness of breath, cough or fever",
+    "Report severe diarrhea (manage with loperamide), severe abdominal pain, or yellowing of skin/eyes",
+    "Use sunscreen and alcohol-free emollients; seek care for severe or blistering skin reactions",
+    "Do not smoke; smoking reduces drug effectiveness",
+    "Use effective contraception and do not breastfeed"
+  ],
+  "pk": [
+    ["Onset", "EGFR inhibition rapid; tumor response over weeks"],
+    ["Peak", "4 hours after dosing"],
+    ["Half-life", "Median 36.2 hours"],
+    ["Duration", "Steady state in 7-8 days"],
+    ["Storage", "Store at 25 C (77 F); excursions 15-30 C"]
+  ],
+  "pearls": [
+    "ILD is a defining serious toxicity: median onset ~39 days; discontinue permanently if confirmed",
+    "Hepatotoxicity (including fatal hepatic failure/hepatorenal syndrome) mandates routine LFT monitoring",
+    "Rash severity often correlates with response but manage proactively",
+    "Smoking and PPIs both lower erlotinib exposure and can reduce efficacy",
+    "Reserve for tumors with confirmed sensitizing EGFR mutations in NSCLC"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered on an empty stomach unless it is almost time for the next dose; do not take two doses on the same day. Resume the regular once-daily schedule.",
+  "overdose": "Withhold erlotinib in patients with overdose or suspected overdose and institute symptomatic and supportive treatment. There is no specific antidote.",
+  "refs": [
+    ["FDA Erlotinib Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22erlotinib+hydrochloride%22"],
+    ["FDA DailyMed - Erlotinib", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

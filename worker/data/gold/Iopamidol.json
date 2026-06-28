@@ -1,0 +1,132 @@
+{
+  "generic": "Iopamidol",
+  "cls": "Nonionic, low-osmolar iodinated radiographic contrast agent (radiopaque diagnostic medium)",
+  "pharm": "Water-soluble nonionic tri-iodinated benzene derivative whose covalently (organically) bound iodine atoms attenuate X-rays in proportion to concentration, opacifying blood vessels, organs, the urinary tract, and (as Isovue-M) the subarachnoid space; dosed by iodine concentration (mgI/mL) and procedure and excreted essentially unchanged by the kidneys.",
+  "tags": ["Rx only", "Iodinated contrast", "Nonionic / low-osmolar", "CIN risk", "Anaphylactoid risk", "Intravascular & intrathecal (Isovue-M)", "NOT intrathecal for Isovue"],
+  "quick": [
+    ["Adult dose", "By concentration (mgI/mL) and procedure, e.g. coronary 370 mgI/mL 2-10 mL/injection, CT body 300 mgI/mL 100-200 mL; intrathecal Isovue-M 200/300 mgI/mL 10-15 mL"],
+    ["Meal", "Not applicable - single procedural diagnostic agent (intravascular or intrathecal)"],
+    ["Pregnancy", "Decades of data show no clear drug-associated risk; use only if clearly needed"],
+    ["Lactation", "Minimal milk excretion; may optionally pump and discard for ~10 hours"],
+    ["Renal", "Major concern - contrast-induced AKI; use lowest dose, hydrate, monitor creatinine/eGFR; removed by dialysis"],
+    ["Hepatic", "No specific dose adjustment; hepatobiliary excretion increases when renal clearance is impaired"],
+    ["Alcohol", "Not applicable to the agent; chronic alcoholism is a factor in withholding metformin"],
+    ["Monitoring", "Renal function/eGFR before and after, hydration, hypersensitivity observation, vital signs"]
+  ],
+  "summary": "Iopamidol (Isovue for intravascular use, Isovue-M for intrathecal use) is a nonionic, low-osmolar iodinated radiographic contrast agent whose iodine attenuates X-rays to produce diagnostic opacification. It is available in concentrations named by iodine content in mgI/mL (Isovue-200, -250, -300, -370; Isovue-M 200 and 300), and dose is selected by procedure - higher concentrations for arterial/cardiac work, lower for venography and intrathecal myelography. Key safety issues are contrast-induced acute kidney injury (use the lowest dose and hydrate before and after), life-threatening anaphylactoid/hypersensitivity reactions (have resuscitation equipment ready), cardiovascular reactions (mostly within 10 minutes), thyroid effects (transient hypothyroidism in young infants; interference with radioiodine studies), and extravasation. The intravascular Isovue formulation must NEVER be given intrathecally - inadvertent intrathecal administration can cause death, seizures, and severe neurologic injury. Metformin should be managed around the procedure to avoid lactic acidosis if AKI occurs.",
+  "indications": [
+    "Isovue (intra-arterial): cerebral arteriography, peripheral arteriography, selective visceral arteriography and aortography, coronary arteriography and cardiac ventriculography, and pediatric angiocardiography",
+    "Isovue (intravenous): excretory urography, contrast-enhanced computed tomography (CT) of the head and body, and peripheral venography",
+    "Isovue (oral): opacification of the GI tract during CT of the abdomen and pelvis (diluted)",
+    "Isovue-M (intrathecal): lumbar and thoracic myelography and CT myelography in adults and children >=2 years; cervical and total columnar myelography in adults; CT cisternography in adults"
+  ],
+  "dosage": [
+    {"c": "Cerebral arteriography", "r": "Adult intra-arterial", "d": "300 mgI/mL: 8-12 mL per injection", "t": "Per procedure", "n": "Maximum cumulative ~90 mL"},
+    {"c": "Coronary arteriography / cardiac ventriculography", "r": "Adult intra-arterial", "d": "370 mgI/mL: 2-10 mL per selective coronary injection; 25-50 mL for ventriculography", "t": "Per procedure", "n": "Maximum cumulative ~200 mL"},
+    {"c": "Selective visceral arteriography / aortography", "r": "Adult intra-arterial", "d": "370 mgI/mL: up to 10 mL renal arteries, up to 50 mL larger vessels", "t": "Per procedure", "n": "Maximum cumulative ~225 mL"},
+    {"c": "Peripheral arteriography", "r": "Adult intra-arterial", "d": "300 mgI/mL: 5-40 mL (femoral/subclavian); 25-50 mL into aorta", "t": "Per procedure", "n": "Maximum cumulative ~250 mL"},
+    {"c": "Excretory urography", "r": "Adult IV", "d": "250 mgI/mL: 50-100 mL; 300 mgI/mL: 50 mL; 370 mgI/mL: 40 mL (rapid injection)", "t": "Per procedure", "n": "Adjust for body weight and renal status"},
+    {"c": "CT of head or body", "r": "Adult IV", "d": "250 mgI/mL: 130-240 mL; 300 mgI/mL: 100-200 mL; 370 mgI/mL: 80-160 mL", "t": "Per procedure", "n": "Bolus or rapid infusion"},
+    {"c": "Peripheral venography", "r": "Adult IV", "d": "200 mgI/mL: 25-150 mL per lower extremity (max 350 mL); 300 mgI/mL: 15-100 mL per extremity (max 230 mL)", "t": "Per procedure", "n": "-"},
+    {"c": "Pediatric angiocardiography", "r": "Pediatric intra-arterial", "d": "370 mgI/mL: 0.5-2 mL/kg per injection; max cumulative neonates 5 mL/kg, >=4 weeks 8 mL/kg", "t": "Per procedure", "n": "Age caps: <2y 40 mL, 2-4y 50 mL, 5-9y 100 mL, 10-18y 125 mL"},
+    {"c": "Myelography (lumbar/thoracic/cervical)", "r": "Adult intrathecal (Isovue-M)", "d": "200 mgI/mL: 10-15 mL; total columnar 300 mgI/mL: 10 mL lumbar", "t": "Single, over 1-2 min", "n": "Delay CT imaging >=4 h; >=48 h (preferably 5-7 days) before repeat"},
+    {"c": "CT cisternography", "r": "Adult intrathecal (Isovue-M)", "d": "200 mgI/mL: 4-6 mL lumbar", "t": "Single, over 1-2 min", "n": "-"},
+    {"c": "Pediatric myelography (>=2 years)", "r": "Pediatric intrathecal (Isovue-M)", "d": "200 mgI/mL: 2-7y 7-9 mL; 8-12y 8-11 mL; 13y+ 10-12 mL (lumbar)", "t": "Single", "n": "Total iodine >2400 mg may increase adverse reactions including seizures"}
+  ],
+  "admin": [
+    "Use aseptic technique; inspect for particulates and discoloration; warming to body temperature may improve patient comfort and reduce viscosity",
+    "Choose concentration and volume by procedure, vessel size, blood flow, patient age, weight, and renal status - use the lowest dose that achieves adequate imaging",
+    "Hydrate the patient before and after administration",
+    "Always have emergency resuscitation equipment and trained personnel immediately available",
+    "NEVER give the intravascular Isovue formulation intrathecally - only Isovue-M is for intrathecal use",
+    "For Isovue-M myelography: inject over 1-2 minutes, keep the head and thorax elevated to limit intracranial migration, and delay CT imaging at least 4 hours"
+  ],
+  "moa": "Iopamidol is a nonionic, water-soluble, tri-iodinated benzene derivative. Its three covalently (organically) bound iodine atoms attenuate (absorb) X-rays in direct proportion to the local concentration of the agent, increasing the radiographic density of the blood, vessels, organs, urinary tract, or subarachnoid space in which it distributes relative to surrounding soft tissue, thereby producing diagnostic contrast. Because it is nonionic, it does not dissociate into ions in solution and has a lower osmolality than older ionic high-osmolar agents at an equivalent iodine content, which reduces osmotic adverse effects. It is pharmacologically inert, undergoes negligible metabolism and protein binding, and is excreted essentially unchanged by glomerular filtration.",
+  "contra": {
+    "absolute": [
+      "Intrathecal administration of the intravascular Isovue formulation (risk of death, convulsions, cerebral hemorrhage, coma, paralysis, arachnoiditis, acute renal failure, cardiac arrest)",
+      "Known hypersensitivity to iopamidol (current FDA labeling lists Contraindications as None, but prior severe reaction is a practical hard stop)"
+    ],
+    "relative": [
+      "Prior reaction to contrast media, allergy, or asthma (higher anaphylactoid risk)",
+      "Pre-existing renal impairment, dehydration, diabetes, or advanced age (contrast-induced AKI risk)",
+      "Manifest or subclinical hyperthyroidism / thyroid autonomy",
+      "Congestive heart failure, severe coronary disease, or pulmonary hypertension",
+      "Drugs lowering the seizure threshold with intrathecal Isovue-M"
+    ],
+    "monitor": [
+      "Renal function (serum creatinine / eGFR) before and after the procedure",
+      "Hydration status",
+      "Hypersensitivity / anaphylactoid reactions for at least the first hour",
+      "Vital signs and cardiac status during and after angiography",
+      "Thyroid function in neonates and infants 0-3 years per risk factors",
+      "Neurologic status after intrathecal Isovue-M"
+    ]
+  },
+  "preg": "Available data from published literature and decades of postmarketing use of iopamidol during pregnancy have not identified a drug-associated risk of major birth defects, miscarriage, or adverse maternal or fetal outcomes. Use during pregnancy only if clearly needed. Iodinated contrast can cross the placenta; because iodine may transiently affect the fetal/neonatal thyroid, consider checking neonatal thyroid function after in-utero exposure.",
+  "lact": "Iopamidol is excreted into human milk only in minimal amounts and is poorly absorbed orally by an infant. Breastfeeding can generally be continued; as an optional precaution, a lactating woman may pump and discard breast milk for about 10 hours after administration to minimize infant exposure.",
+  "renal": "Renal impairment is the dominant risk factor for contrast-induced acute kidney injury, the principal safety concern with iopamidol. The drug is excreted almost entirely unchanged by the kidneys, so excretion is markedly delayed and accumulation occurs in significant impairment. Use the lowest effective dose, ensure adequate hydration before and after, avoid additional nephrotoxins, and monitor serum creatinine/eGFR (recheck at ~48 hours when withholding metformin). Iopamidol is removed by hemodialysis.",
+  "hepatic": "No specific hepatic dose adjustment is required; iopamidol undergoes negligible hepatic metabolism. When renal clearance is impaired, vicarious (hepatobiliary) excretion increases. Hepatic disease is relevant mainly as a factor favoring temporary withholding of metformin around the procedure.",
+  "interactions": {
+    "major": [
+      "Metformin and other biguanides - risk of lactic acidosis if contrast precipitates AKI; withhold at/before the procedure in patients with eGFR 30-60 mL/min/1.73m2, hepatic disease/alcoholism/heart failure, or receiving intra-arterial contrast, and re-evaluate eGFR at 48 hours before resuming",
+      "Drugs lowering the seizure threshold (phenothiazines, tricyclic antidepressants, MAO inhibitors, CNS stimulants) with intrathecal Isovue-M - discontinue at least 48 hours before and 24 hours after"
+    ],
+    "moderate": [
+      "Beta-blockers - may blunt the response to epinephrine used to treat a hypersensitivity reaction and intensify bronchospasm",
+      "Interleukin-2 - prior treatment increases the risk of delayed contrast reactions (flu-like and cutaneous)",
+      "Other nephrotoxic drugs (aminoglycosides, NSAIDs, cisplatin) - additive renal injury"
+    ],
+    "minor": [
+      "Concurrent antihypertensives or diuretics - may worsen dehydration and CIN risk if hydration is inadequate"
+    ],
+    "food": "Not applicable - parenteral procedural agent; for oral GI opacification the diluted product is given before CT.",
+    "alcohol": "Not directly applicable to the agent; a history of alcoholism is one factor favoring temporary withholding of metformin around the procedure.",
+    "diagnostics": "Reduces thyroid uptake of radioactive iodine - avoid thyroid radioiodine therapy or testing for up to 6 weeks; transiently raises protein-bound iodine - defer PBI testing for at least 16 days."
+  },
+  "se": {
+    "common": ["Sensation of warmth / flushing", "Transient metallic taste", "Nausea", "Injection-site pain", "Burning sensation", "Headache (intrathecal: common, ~16%)", "Vomiting (intrathecal)", "Back, neck, or leg pain (intrathecal)"],
+    "serious": ["Anaphylactoid / anaphylactic reactions", "Contrast-induced acute kidney injury / renal failure", "Cardiovascular reactions (arrhythmia, shock - mostly within 10 minutes)", "Severe cutaneous reactions (SJS/TEN, AGEP, DRESS)", "Transient hypothyroidism in young infants"],
+    "rare": ["Cardiac arrest", "Seizures (especially intrathecal or high total iodine dose)", "Arachnoiditis (intrathecal)", "Pulmonary edema", "Thyroid storm in patients with thyroid autonomy"],
+    "emergency": ["Anaphylaxis / severe hypersensitivity with airway compromise or shock", "Cardiac arrest or life-threatening arrhythmia", "Seizures after intrathecal administration", "Acute pulmonary edema", "Anuric acute renal failure"]
+  },
+  "monitoring": [
+    "Renal function (serum creatinine / eGFR) before the procedure and after (recheck at ~48 hours, especially when withholding metformin)",
+    "Hydration status before and after administration",
+    "Observation for hypersensitivity/anaphylactoid reactions - most occur within the first hour; keep resuscitation equipment and trained staff available",
+    "Vital signs and cardiac monitoring during and after angiographic procedures",
+    "Thyroid function in neonates and infants 0-3 years based on risk factors (prematurity, low birth weight, thyroid or cardiac disease)",
+    "Neurologic status and head positioning after intrathecal Isovue-M",
+    "Injection site for signs of extravasation"
+  ],
+  "counsel": [
+    "Tell the team about any prior reaction to contrast media, iodine, or any allergies or asthma before the procedure",
+    "Drink fluids and stay well hydrated before and after the exam to protect your kidneys",
+    "A brief feeling of warmth, flushing, or a metallic taste during the injection is normal and passes quickly",
+    "If you take metformin, tell the team - it may be stopped around the procedure and restarted after a kidney blood test in about 48 hours",
+    "Report any rash, itching, hives, swelling, trouble breathing, or other unusual symptoms during or after the procedure, including delayed reactions over the next several days",
+    "After a myelogram (Isovue-M): keep your head elevated, rest, avoid bending forward and strenuous activity; headache and nausea are common; report any seizure or twitching",
+    "Recent contrast can affect thyroid tests and radioactive iodine scans for several weeks - tell any provider ordering thyroid studies"
+  ],
+  "pk": [
+    ["Onset", "Essentially immediate opacification; renal parenchyma visualizes within 30-60 seconds of rapid IV injection"],
+    ["Peak", "Immediate intravascular peak after bolus; renal excretion ~35-40% at 60 minutes"],
+    ["Half-life", "Plasma half-life approximately 2 hours (intravascular, normal renal function)"],
+    ["Duration", "Single procedural dose; ~80-90% renally excreted by 8 hours, >=90% by 72-96 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light"]
+  ],
+  "pearls": [
+    "NEVER administer intravascular Isovue intrathecally - inadvertent intrathecal use can cause death, seizures, and severe neurologic injury; only Isovue-M is intended for intrathecal use",
+    "Contrast-induced AKI is the dominant risk - use the lowest dose, hydrate before and after, and avoid concurrent nephrotoxins",
+    "Keep emergency resuscitation equipment and epinephrine ready; most anaphylactoid reactions occur within the first hour",
+    "Concentration is chosen by procedure: higher iodine (370) for arterial/cardiac, lower (200) for venography and intrathecal myelography",
+    "Withhold metformin around the procedure in at-risk patients and recheck renal function at 48 hours before restarting",
+    "Iodinated contrast interferes with thyroid radioiodine uptake for weeks - defer thyroid scans/therapy after the study"
+  ],
+  "missed": "Not applicable. Iopamidol is a single-use diagnostic contrast agent administered once at the time of imaging; there is no maintenance dosing schedule and therefore no missed-dose concept.",
+  "overdose": "Adverse effects of overdosage are life-threatening and affect mainly the pulmonary and cardiovascular systems. There is no specific antidote; treatment is supportive, directed at maintaining all vital functions with prompt symptomatic therapy. Iopamidol can be removed by hemodialysis. For inadvertent intrathecal overdose, watch closely for seizures (total iodine above ~3000 mg in adults or ~2400 mg in children >=2 years increases risk).",
+  "refs": [
+    ["DailyMed - Isovue (iopamidol) intravascular full prescribing information", "https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=ae8c18c9-3e7d-4515-b980-120025a88fc1&type=display"],
+    ["DailyMed - Isovue-M (iopamidol) intrathecal full prescribing information", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=11e893d2-0183-4581-b908-c8b7302c7edb"]
+  ]
+}

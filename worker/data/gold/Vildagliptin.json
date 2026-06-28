@@ -1,0 +1,97 @@
+{
+  "generic": "Vildagliptin",
+  "cls": "Antidiabetic agent (DPP-4 inhibitor / gliptin)",
+  "pharm": "Dipeptidyl peptidase-4 (DPP-4) inhibitor; enhances incretin (GLP-1, GIP) activity to improve glucose-dependent insulin secretion and lower glucagon",
+  "tags": ["Type 2 diabetes", "DPP-4 inhibitor", "Incretin enhancer", "Hepatotoxicity risk", "Pending review: not FDA-approved"],
+  "quick": [
+    ["Adult dose", "50 mg once or twice daily PO; max 100 mg/day"],
+    ["Meal", "Take with or without food, same times daily"],
+    ["Pregnancy", "Avoid - safety not established (Pending review: not FDA-approved)"],
+    ["Lactation", "Avoid; not known if excreted in human milk"],
+    ["Renal", "Reduce to 50 mg once daily in moderate/severe impairment"],
+    ["Hepatic", "Contraindicated; avoid if ALT/AST >3x ULN"],
+    ["Alcohol", "Limit; excess may impair glucose control and liver"],
+    ["Monitoring", "LFTs at baseline then periodically, HbA1c, glucose"]
+  ],
+  "summary": "Vildagliptin (brand Galvus) is an EMA-approved oral DPP-4 inhibitor for type 2 diabetes mellitus, used as monotherapy or combined with metformin, a sulfonylurea, a thiazolidinedione, or insulin. It blocks degradation of incretin hormones, increasing glucose-dependent insulin release and suppressing glucagon, with low intrinsic hypoglycemia risk. Liver enzyme monitoring is required because of rare hepatic dysfunction. It is not FDA-approved; this record is pending clinical review.",
+  "indications": [
+    "Type 2 diabetes mellitus as monotherapy when diet and exercise alone are inadequate and metformin is inappropriate due to intolerance/contraindication",
+    "Type 2 diabetes as dual oral therapy with metformin, a sulfonylurea, or a thiazolidinedione when glycaemic control is inadequate",
+    "Type 2 diabetes as triple oral therapy with a sulfonylurea and metformin",
+    "Type 2 diabetes in combination with insulin (with or without metformin) when diet, exercise and stable insulin do not provide adequate control"
+  ],
+  "dosage": [
+    {"c": "Type 2 diabetes - monotherapy or with metformin or thiazolidinedione", "r": "Oral", "d": "50 mg twice daily (100 mg/day total), one dose in the morning and one in the evening", "t": "Morning and evening, with or without food", "n": "Maximum recommended daily dose is 100 mg"},
+    {"c": "Type 2 diabetes - combination with a sulfonylurea", "r": "Oral", "d": "50 mg once daily in the morning", "t": "Once daily in the morning", "n": "Doses above 50 mg once daily with a sulfonylurea give no added benefit and increase hypoglycaemia risk; consider lower sulfonylurea dose"},
+    {"c": "Type 2 diabetes - combination with insulin (with/without metformin)", "r": "Oral", "d": "50 mg twice daily (100 mg/day)", "t": "Morning and evening", "n": "Monitor for hypoglycaemia; insulin dose may need reduction"},
+    {"c": "Moderate or severe renal impairment / end-stage renal disease", "r": "Oral", "d": "50 mg once daily", "t": "Once daily", "n": "Dose reduction required when eGFR <50 mL/min; no adjustment needed in mild impairment"}
+  ],
+  "admin": [
+    "Swallow tablets whole; may be taken with or without food",
+    "When dosed twice daily, give one dose in the morning and one in the evening",
+    "When combined with a sulfonylurea, give the single 50 mg dose in the morning",
+    "Obtain liver function tests before starting and at intervals thereafter",
+    "Do not initiate if ALT or AST exceeds 3 times the upper limit of normal"
+  ],
+  "moa": "Vildagliptin is a potent, selective, reversible inhibitor of dipeptidyl peptidase-4 (DPP-4), the enzyme that rapidly inactivates the incretin hormones glucagon-like peptide-1 (GLP-1) and glucose-dependent insulinotropic polypeptide (GIP). By inhibiting DPP-4 it increases endogenous incretin levels, which enhances glucose-dependent insulin secretion from pancreatic beta cells and suppresses inappropriate glucagon secretion from alpha cells. The net effect is improved fasting and postprandial glycaemic control with a low intrinsic risk of hypoglycaemia because the insulinotropic action is glucose-dependent.",
+  "contra": {
+    "absolute": ["Hypersensitivity to vildagliptin or any excipient", "Hepatic impairment, including pre-treatment ALT or AST greater than 3 times the upper limit of normal", "Diabetic ketoacidosis"],
+    "relative": ["History of acute pancreatitis", "Severe congestive heart failure (NYHA class IV - limited experience)", "Concomitant sulfonylurea or insulin (increased hypoglycaemia risk)", "Severe renal impairment / ESRD (dose reduction and caution)"],
+    "monitor": ["Liver function tests (ALT, AST)", "Signs of pancreatitis", "Blood glucose and HbA1c", "Skin lesions and angioedema"]
+  },
+  "preg": "Pending clinical review - not FDA-approved. There are no adequate data in pregnant women; avoid use during pregnancy. Insulin is the preferred treatment for diabetes during pregnancy. EMA SmPC advises that vildagliptin should not be used in pregnancy.",
+  "lact": "It is not known whether vildagliptin is excreted in human milk; animal studies show excretion into milk. Use during breastfeeding is not recommended.",
+  "renal": "No dose adjustment is needed in mild renal impairment (eGFR >=50 mL/min). In moderate or severe renal impairment and in end-stage renal disease (including dialysis), reduce the dose to 50 mg once daily.",
+  "hepatic": "Contraindicated in hepatic impairment. Do not start if baseline ALT or AST is greater than 3 times the upper limit of normal. Rare cases of hepatic dysfunction (including hepatitis) have been reported; monitor liver enzymes and discontinue if persistent transaminase elevation, jaundice, or other signs of liver injury occur.",
+  "interactions": {
+    "major": ["Sulfonylureas (e.g., glimepiride, gliclazide) - increased risk of hypoglycaemia; consider reducing sulfonylurea dose", "Insulin - increased risk of hypoglycaemia"],
+    "moderate": ["ACE inhibitors - possible increased risk of angioedema", "Drugs that may impair glucose tolerance (corticosteroids, thiazides, sympathomimetics) may reduce glycaemic control"],
+    "minor": ["Low potential for cytochrome P450-mediated interactions; vildagliptin is not a significant CYP substrate, inhibitor, or inducer"],
+    "food": "May be taken with or without food; food does not clinically affect absorption",
+    "alcohol": "Excessive alcohol can impair glycaemic control and may add to hepatic risk; advise moderation",
+    "diagnostics": "Monitor liver enzymes as transaminase elevations can occur; no specific assay interference established"
+  },
+  "se": {
+    "common": ["Dizziness", "Headache", "Nausea", "Tremor (with sulfonylurea)", "Hypoglycaemia (when combined with sulfonylurea or insulin)", "Peripheral oedema (with thiazolidinedione)", "Nasopharyngitis"],
+    "serious": ["Hepatic dysfunction and hepatitis", "Acute pancreatitis", "Angioedema", "Severe hypoglycaemia in combination therapy"],
+    "rare": ["Hypersensitivity reactions", "Bullous and exfoliative skin lesions", "Arthralgia", "Constipation"],
+    "emergency": ["Severe hypoglycaemia - treat with oral or IV glucose", "Angioedema with airway compromise - stop drug and give emergency airway/anaphylaxis management", "Acute pancreatitis with severe persistent abdominal pain - discontinue and evaluate urgently"]
+  },
+  "monitoring": [
+    "Liver function tests (ALT, AST) before initiation, every 3 months during the first year, and periodically thereafter",
+    "HbA1c and fasting/postprandial blood glucose",
+    "Signs and symptoms of pancreatitis (persistent severe abdominal pain)",
+    "Signs of hypoglycaemia when used with a sulfonylurea or insulin",
+    "Renal function to guide dosing",
+    "Skin lesions and signs of angioedema"
+  ],
+  "counsel": [
+    "Take exactly as prescribed, at the same times each day, with or without food",
+    "Report yellowing of skin or eyes, dark urine, persistent nausea, fatigue, or right upper abdominal pain (possible liver problem)",
+    "Seek urgent care for severe, persistent abdominal pain that may radiate to the back (possible pancreatitis)",
+    "Stop the drug and seek help for swelling of face, lips, tongue, or throat or difficulty breathing",
+    "Learn to recognise and treat low blood sugar, especially if also taking a sulfonylurea or insulin",
+    "Continue diet, exercise, and regular blood glucose and liver monitoring as advised"
+  ],
+  "pk": [
+    ["Onset", "Rapid DPP-4 inhibition; >90% enzyme inhibition within ~45 minutes of dosing"],
+    ["Peak", "Plasma peak (Tmax) about 1.7 hours when fasting; bioavailability ~85%"],
+    ["Half-life", "Approximately 3 hours"],
+    ["Duration", "DPP-4 inhibition sustained over the dosing interval supporting once- or twice-daily dosing"],
+    ["Storage", "Store below 30 degrees C in the original blister, protected from moisture"]
+  ],
+  "pearls": [
+    "Pending clinical review - not FDA-approved; EMA-approved (Galvus) and widely used in Europe and Asia",
+    "Liver enzymes must be checked at baseline and periodically; contraindicated if ALT/AST >3x ULN or in hepatic impairment",
+    "Low intrinsic hypoglycaemia risk as monotherapy; hypoglycaemia mainly arises when combined with sulfonylurea or insulin",
+    "Use 50 mg once daily with a sulfonylurea and in moderate/severe renal impairment",
+    "Weight-neutral and does not require routine cardiac monitoring, but use caution in severe heart failure",
+    "Consider pancreatitis and angioedema (especially with ACE inhibitors) as class effects of gliptins"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered unless it is almost time for the next dose, in which case skip the missed dose and resume the normal schedule. Do not take two doses at the same time to make up for a missed one.",
+  "overdose": "Vildagliptin is generally well tolerated; reported high doses have caused muscle pain, mild and transient paraesthesia, fever, oedema, and a transient rise in lipase. There is no specific antidote. Vildagliptin is not removed by haemodialysis, although the major hydrolysis metabolite can be. Management is supportive with removal of unabsorbed drug, clinical monitoring (including liver enzymes), and correction of any hypoglycaemia with glucose.",
+  "refs": [
+    ["EMA - Galvus (vildagliptin) Summary of Product Characteristics / EPAR", "https://www.ema.europa.eu/en/medicines/human/EPAR/galvus"],
+    ["BNF - Vildagliptin", "https://bnf.nice.org.uk/drugs/vildagliptin/"]
+  ]
+}

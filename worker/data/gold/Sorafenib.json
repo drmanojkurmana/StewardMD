@@ -1,0 +1,108 @@
+{
+  "generic": "Sorafenib",
+  "cls": "Oral multikinase inhibitor (antineoplastic)",
+  "pharm": "Inhibits multiple intracellular (CRAF, BRAF, c-KIT, FLT-3, RET) and cell-surface (VEGFR-1/2/3, PDGFR-beta) kinases, blocking tumor proliferation and angiogenesis.",
+  "tags": ["Rx only", "Multikinase inhibitor", "Hand-foot skin reaction", "Hepatotoxicity/QT/hemorrhage risk"],
+  "quick": [
+    ["Adult dose", "400 mg orally twice daily on an empty stomach (1 h before or 2 h after food)"],
+    ["Meal", "Take without food - at least 1 hour before or 2 hours after eating"],
+    ["Pregnancy", "Can cause fetal harm; avoid - use effective contraception during and after treatment"],
+    ["Lactation", "Do not breastfeed during and for 2 weeks after the last dose"],
+    ["Renal", "No adjustment for mild-moderate; not studied in dialysis/severe impairment"],
+    ["Hepatic", "Hepatotoxicity can occur; no specific dose in severe (Child-Pugh C) impairment - use caution"],
+    ["Alcohol", "No specific interaction, but avoid in hepatic impairment"],
+    ["Monitoring", "Blood pressure (weekly x6 weeks), LFTs, skin, ECG/QT and electrolytes, bleeding, TSH"]
+  ],
+  "summary": "Sorafenib is an oral multikinase inhibitor used for unresectable hepatocellular carcinoma, advanced renal cell carcinoma, and radioactive-iodine-refractory differentiated thyroid carcinoma. It targets both tumor-cell signaling kinases and angiogenic receptor kinases. Characteristic and clinically important toxicities include hand-foot skin reaction and other dermatologic toxicity, hepatotoxicity (including drug-induced hepatitis), hypertension, hemorrhage, QT prolongation, cardiac ischemia/infarction, and GI perforation. It is taken on an empty stomach at 400 mg twice daily and requires careful monitoring with dose interruption/reduction for toxicity.",
+  "indications": [
+    "Unresectable hepatocellular carcinoma (HCC)",
+    "Advanced renal cell carcinoma (RCC)",
+    "Locally recurrent or metastatic, progressive, differentiated thyroid carcinoma (DTC) refractory to radioactive iodine"
+  ],
+  "dosage": [
+    {"c": "Hepatocellular carcinoma / Renal cell carcinoma", "r": "Adult oral", "d": "400 mg twice daily without food until no longer benefiting or unacceptable toxicity", "t": "Twice daily", "n": "Take at least 1 hour before or 2 hours after a meal"},
+    {"c": "Differentiated thyroid carcinoma", "r": "Adult oral", "d": "400 mg twice daily without food", "t": "Twice daily", "n": "Manage TSH suppression; monitor calcium"},
+    {"c": "Dose reduction (HCC/RCC)", "r": "Adult oral", "d": "First reduction 400 mg once daily; then 400 mg every other day", "t": "Per toxicity", "n": "For adverse reactions per label tables"},
+    {"c": "Dose reduction (DTC)", "r": "Adult oral", "d": "Reduce to 600 mg/day (400 mg + 200 mg 12 h apart), then 400 mg/day, then 200 mg/day", "t": "Per toxicity", "n": "Stepwise reductions for adverse reactions"}
+  ],
+  "admin": [
+    "Take on an empty stomach, at least 1 hour before or 2 hours after eating",
+    "Swallow tablets whole with water",
+    "Interrupt, reduce, or discontinue for adverse reactions per labeled dose-modification tables",
+    "Withhold for at least 10 days before and after major surgery (wound-healing/hemorrhage risk)"
+  ],
+  "moa": "Sorafenib inhibits multiple kinases involved in tumor cell proliferation and angiogenesis. It blocks intracellular serine/threonine kinases (CRAF, wild-type and mutant BRAF) in the RAF/MEK/ERK pathway and receptor tyrosine kinases including VEGFR-1, VEGFR-2, VEGFR-3, PDGFR-beta, c-KIT, FLT-3 and RET. Inhibition of the VEGF and PDGF receptors suppresses tumor angiogenesis while RAF kinase inhibition impairs tumor cell signaling and proliferation.",
+  "contra": {
+    "absolute": [
+      "Known severe hypersensitivity to sorafenib or any component",
+      "Use in combination with carboplatin and paclitaxel in patients with squamous cell lung cancer"
+    ],
+    "relative": [
+      "Uncontrolled hypertension",
+      "Recent or active bleeding / anticoagulation",
+      "Congenital long QT syndrome or uncorrected electrolyte abnormalities",
+      "Significant cardiac ischemia or recent myocardial infarction",
+      "Severe hepatic impairment (Child-Pugh C)"
+    ],
+    "monitor": [
+      "Blood pressure (weekly during first 6 weeks)",
+      "Liver function tests",
+      "ECG/QT interval and serum electrolytes (potassium, magnesium, calcium)",
+      "Skin, bleeding, and signs of GI perforation"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, sorafenib can cause fetal harm (teratogenicity, embryo-fetal toxicity). Advise patients of the risk; women of reproductive potential should use effective contraception during treatment and for at least 6 months after the last dose, and males with female partners should also use contraception.",
+  "lact": "Because of the potential for serious adverse reactions in the breastfed infant, advise women not to breastfeed during treatment and for 2 weeks after the final dose.",
+  "renal": "No dose adjustment is required for mild to moderate renal impairment. Sorafenib has not been studied in patients on dialysis or with severe renal impairment; use with caution and monitor.",
+  "hepatic": "Sorafenib can cause drug-induced hepatitis with hepatic failure and death; monitor liver function and discontinue if significant hepatotoxicity occurs (transaminase rise without an alternative cause). No specific dosing recommendation is available for severe (Child-Pugh C) hepatic impairment; use with caution. Note it is itself used in hepatocellular carcinoma where baseline liver function is often impaired.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inducers (e.g., rifampin, phenytoin, carbamazepine, St John's wort) - reduce sorafenib exposure; avoid",
+      "Warfarin/anticoagulants - bleeding risk; monitor INR closely",
+      "QT-prolonging drugs - additive QT prolongation/arrhythmia"
+    ],
+    "moderate": [
+      "Neomycin (reduces sorafenib absorption/exposure)",
+      "Docetaxel, doxorubicin, irinotecan, fluorouracil (altered exposure of co-administered drug)",
+      "UGT1A1/UGT1A9 substrates (sorafenib may increase their exposure)"
+    ],
+    "minor": ["Other antineoplastics (additive toxicity)"],
+    "food": "Take on an empty stomach; a high-fat meal reduces bioavailability by about 30%.",
+    "alcohol": "No specific interaction; minimize in hepatic impairment.",
+    "diagnostics": "May raise lipase/amylase, transaminases and bilirubin, lower phosphate, and prolong the QT interval on ECG."
+  },
+  "se": {
+    "common": ["Hand-foot skin reaction (palmar-plantar erythrodysesthesia)", "Rash/desquamation and alopecia", "Diarrhea", "Fatigue", "Hypertension and anorexia"],
+    "serious": ["Hepatotoxicity / drug-induced hepatitis", "Hemorrhage", "Cardiac ischemia/infarction and QT prolongation", "Gastrointestinal perforation", "Severe dermatologic reactions (Stevens-Johnson syndrome, TEN)"],
+    "rare": ["Reversible posterior leukoencephalopathy syndrome (RPLS)", "Thyroid dysfunction", "Drug-induced interstitial lung disease", "Tumor lysis syndrome", "Impaired wound healing"],
+    "emergency": ["Major hemorrhage", "Gastrointestinal perforation", "Severe SJS/TEN", "Acute cardiac event / arrhythmia from QT prolongation"]
+  },
+  "monitoring": ["Blood pressure weekly for the first 6 weeks then periodically", "Liver function tests at baseline and during therapy", "ECG/QT and electrolytes (potassium, magnesium, calcium)", "Skin examination, bleeding signs, and TSH (especially in DTC)"],
+  "counsel": [
+    "Take on an empty stomach, an hour before or two hours after food",
+    "Report redness, pain, blistering or peeling of palms and soles early - this hand-foot reaction is common and manageable",
+    "Tell your team about unusual bleeding or bruising, severe belly pain, chest pain, or a severe rash",
+    "Use effective contraception during and after treatment; do not breastfeed",
+    "Keep all blood-pressure and blood-test appointments; tell your dentist/surgeon before any procedure"
+  ],
+  "pk": [
+    ["Onset", "Steady-state plasma concentrations reached within about 7 days"],
+    ["Peak", "Median time to peak plasma concentration about 3 hours"],
+    ["Half-life", "Elimination half-life approximately 25 to 48 hours"],
+    ["Duration", "Twice-daily dosing maintains exposure; effect continues with ongoing dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); keep in original container, protect from moisture"]
+  ],
+  "pearls": [
+    "Signature toxicity quartet to remember: hand-foot skin reaction, hepatotoxicity, QT prolongation, and hemorrhage",
+    "Must be taken on an empty stomach - food cuts absorption substantially",
+    "Monitor blood pressure weekly for the first 6 weeks; hypertension is early and common",
+    "Strong CYP3A4 inducers reduce efficacy - avoid combinations like rifampin and St John's wort",
+    "Hold around major surgery (about 10 days before and after) because of impaired wound healing and bleeding"
+  ],
+  "missed": "If a dose is missed, skip it and take the next dose at the usual time; do not take a double dose. Contact the oncology team for guidance.",
+  "overdose": "There is no specific antidote. The adverse reactions seen at 800 mg twice daily (twice the recommended dose) were mainly diarrhea and dermatologic effects. In suspected overdose, withhold sorafenib and provide supportive care, monitoring liver function, blood pressure, ECG/QT and for bleeding or dermatologic toxicity.",
+  "refs": [
+    ["FDA Label - Sorafenib (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sorafenib%22"],
+    ["DailyMed - Sorafenib", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=sorafenib"]
+  ]
+}

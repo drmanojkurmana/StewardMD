@@ -1,0 +1,100 @@
+{
+  "generic": "Tetanus Toxoid",
+  "cls": "Active immunizing agent (toxoid vaccine)",
+  "pharm": "Inactivated tetanus toxin that induces protective antitoxin antibodies against Clostridium tetani neurotoxin.",
+  "tags": ["Biological", "Active immunization", "Intramuscular", "Booster every 10 years"],
+  "quick": [
+    ["Adult dose", "0.5 mL IM per dose; primary series plus boosters (combined as Td/Tdap where available)"],
+    ["Meal", "Not applicable (injection)"],
+    ["Pregnancy", "Recommended; Td/Tdap given to protect mother and newborn"],
+    ["Lactation", "Compatible; may be given to breastfeeding women"],
+    ["Renal", "No adjustment"],
+    ["Hepatic", "No adjustment"],
+    ["Alcohol", "No interaction"],
+    ["Monitoring", "Injection-site and systemic reactions; immediate allergic reaction post-dose"]
+  ],
+  "summary": "Tetanus toxoid is an inactivated form of the tetanus neurotoxin used for active immunization to prevent tetanus (lockjaw). It stimulates production of protective antitoxin antibodies. It is given intramuscularly as a 0.5 mL dose, usually as part of combination vaccines (DTaP in children; Td or Tdap in adolescents and adults) rather than as a single antigen. A primary series is followed by boosters approximately every 10 years and after certain wounds. It provides active, long-lasting protection but does not treat established tetanus, which requires tetanus immune globulin.",
+  "indications": [
+    "Active immunization against tetanus (primary series)",
+    "Booster immunization to maintain protection (routinely every 10 years)",
+    "Tetanus-prone wound management (with consideration of tetanus immune globulin in unimmunized/under-immunized patients)",
+    "Maternal immunization to prevent maternal and neonatal tetanus"
+  ],
+  "dosage": [
+    {"c": "Primary immunization (with combination vaccine)", "r": "Child IM", "d": "Series of 0.5 mL doses per national schedule (e.g., DTaP at 2, 4, 6 months with later doses)", "t": "Per schedule", "n": "Tetanus toxoid given in combination products"},
+    {"c": "Booster", "r": "Adult/adolescent IM", "d": "0.5 mL (as Td or Tdap) every 10 years", "t": "Every 10 years", "n": "Tdap once for pertussis coverage, then Td/Tdap"},
+    {"c": "Wound prophylaxis", "r": "Adult IM", "d": "0.5 mL booster if >5 years (dirty wound) or >10 years (clean wound) since last dose", "t": "Per wound assessment", "n": "Add tetanus immune globulin if immunization status is uncertain/incomplete and wound is tetanus-prone"},
+    {"c": "Maternal immunization", "r": "Pregnant IM", "d": "0.5 mL (Tdap) typically in each pregnancy, per local guidance", "t": "Per pregnancy", "n": "Protects mother and newborn"}
+  ],
+  "admin": [
+    "Administer 0.5 mL by intramuscular injection (deltoid in adults/older children; anterolateral thigh in infants)",
+    "Do not give intravenously or intradermally",
+    "Shake the vial to ensure a uniform suspension before withdrawing the dose",
+    "Have epinephrine and resuscitation equipment available for rare anaphylaxis"
+  ],
+  "moa": "Tetanus toxoid is tetanus toxin that has been chemically inactivated (detoxified, typically with formaldehyde) so it can no longer cause disease but retains immunogenicity. On injection it stimulates the immune system to produce anti-tetanus (antitoxin) antibodies. These antibodies neutralize the tetanospasmin neurotoxin produced by Clostridium tetani, preventing it from blocking inhibitory neurotransmitter release at the neuromuscular junction and thereby preventing tetanus.",
+  "contra": {
+    "absolute": [
+      "Severe allergic reaction (anaphylaxis) to a previous dose or to a vaccine component",
+      "Severe hypersensitivity to any constituent of the vaccine"
+    ],
+    "relative": [
+      "Moderate or severe acute illness (defer until recovered)",
+      "History of Arthus-type hypersensitivity after a prior tetanus dose (defer boosters to >=10-year intervals)",
+      "History of Guillain-Barre syndrome within 6 weeks of a prior tetanus-containing vaccine"
+    ],
+    "monitor": [
+      "Immediate hypersensitivity in the 15-30 minutes after injection",
+      "Injection-site and systemic reactions",
+      "Neurologic symptoms in those with prior GBS"
+    ]
+  },
+  "preg": "Tetanus-containing vaccines (Td/Tdap) are recommended in pregnancy to protect the mother and provide passive protection to the newborn against neonatal tetanus; they are considered safe in pregnancy.",
+  "lact": "Tetanus toxoid is compatible with breastfeeding and may be administered to nursing women; it does not pose a risk to the breastfed infant.",
+  "renal": "No dose adjustment is required in renal impairment; immune response may be reduced in significant immunosuppression.",
+  "hepatic": "No dose adjustment is required in hepatic impairment.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Immunosuppressive therapy (corticosteroids, chemotherapy, biologics) may blunt the antibody response",
+      "Recent tetanus immune globulin can be co-administered at a separate site for wound management"
+    ],
+    "minor": ["May be given with other routine vaccines at separate sites"],
+    "food": "Not applicable (injectable vaccine).",
+    "alcohol": "No interaction.",
+    "diagnostics": "No characteristic laboratory interference."
+  },
+  "se": {
+    "common": ["Injection-site pain, redness, and swelling", "Low-grade fever", "Malaise", "Headache", "Myalgia"],
+    "serious": ["Arthus-type local hypersensitivity reaction", "Severe local swelling of the limb", "Brachial neuritis (rare)"],
+    "rare": ["Guillain-Barre syndrome", "Anaphylaxis", "Peripheral neuropathy"],
+    "emergency": ["Anaphylaxis", "Severe systemic allergic reaction"]
+  },
+  "monitoring": ["Immediate hypersensitivity (observe 15-30 minutes after injection)", "Injection-site and systemic reactions", "Documentation of vaccination dates for booster timing", "Neurologic symptoms in patients with prior GBS"],
+  "counsel": [
+    "Soreness, redness, or mild swelling at the injection site and a mild fever are common and settle in a day or two",
+    "Boosters are usually needed about every 10 years, and sooner for some wounds",
+    "This vaccine prevents tetanus; it is not a treatment if you already have tetanus",
+    "Tell the clinic if you have ever had a severe reaction to a tetanus shot",
+    "Keep a record of your vaccination dates"
+  ],
+  "pk": [
+    ["Onset", "Protective antibody develops over 2-4 weeks after the priming series"],
+    ["Peak", "Antibody titers peak a few weeks after a dose"],
+    ["Half-life", "Antitoxin antibodies wane over years (immunologic, not pharmacokinetic)"],
+    ["Duration", "Protection ~10 years after a complete series; boosters extend it"],
+    ["Storage", "Store at 2-8 C; do not freeze; protect from light"]
+  ],
+  "pearls": [
+    "Reference-sourced (CDC/WHO/SmPC) rather than from a single openFDA small-molecule label, as it is a biological vaccine usually given in combination (DTaP/Td/Tdap)",
+    "Toxoid provides active immunity; tetanus immune globulin provides immediate passive protection for tetanus-prone wounds in under-immunized patients",
+    "Do not give more often than every 10 years routinely to limit Arthus-type reactions",
+    "Does not treat clinical tetanus - that requires antitoxin/immune globulin plus supportive care"
+  ],
+  "missed": "If a scheduled booster or series dose is missed, give it at the next opportunity; the series does not need to be restarted - simply continue from where it left off.",
+  "overdose": "Overdose is not clinically meaningful for a vaccine; inadvertent extra doses chiefly increase the risk of local (including Arthus-type) reactions. Manage symptomatically.",
+  "refs": [
+    ["CDC - Tetanus vaccination (DTaP/Td/Tdap)", "https://www.cdc.gov/vaccines/vpd/tetanus/"],
+    ["WHO - Tetanus vaccine position paper", "https://www.who.int/teams/immunization-vaccines-and-biologicals/diseases/tetanus"]
+  ]
+}

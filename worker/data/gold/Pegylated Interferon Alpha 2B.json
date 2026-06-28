@@ -1,0 +1,99 @@
+{
+  "generic": "Peginterferon Alfa-2b",
+  "cls": "Pegylated type I interferon (immunomodulator)",
+  "pharm": "Antiviral / antineoplastic biologic immunomodulator",
+  "tags": ["interferon", "hepatitis C", "melanoma", "immunomodulator", "boxed warning", "ribavirin combination"],
+  "quick": [
+    ["Adult dose", "HCV ~1.5 mcg/kg/week SC; Sylatron 6 then 3 mcg/kg/week SC"],
+    ["Meal", "N/A (SC injection)"],
+    ["Pregnancy", "Contraindicated with ribavirin (teratogen); avoid alone"],
+    ["Lactation", "Discontinue nursing or drug"],
+    ["Renal", "Reduce/avoid in significant impairment; contra with ribavirin if CrCl <50"],
+    ["Hepatic", "Contraindicated in decompensated liver disease/autoimmune hepatitis"],
+    ["Alcohol", "Avoid; worsens liver disease and depression"],
+    ["Monitoring", "Mood/suicidality, CBC, LFTs, TSH, eyes, autoimmune signs"]
+  ],
+  "summary": "Peginterferon alfa-2b is a pegylated recombinant interferon used subcutaneously for chronic hepatitis C (with ribavirin) and as adjuvant therapy of high-risk melanoma (Sylatron). It carries a BOXED WARNING for fatal or life-threatening neuropsychiatric, autoimmune, ischemic and infectious disorders; patients must be monitored closely and therapy discontinued for persistently severe events. US products are currently discontinued and it is not in openFDA, though historically FDA-approved.",
+  "indications": [
+    "Chronic hepatitis C (CHC) in combination with ribavirin in patients with compensated liver disease (historically including pegylated regimens)",
+    "Adjuvant treatment of melanoma with microscopic or gross nodal involvement within 84 days of definitive surgical resection including complete lymphadenectomy (Sylatron)"
+  ],
+  "dosage": [
+    {"c": "Chronic hepatitis C with ribavirin (adult)", "r": "Weight-based", "d": "1.5 mcg/kg SC once weekly", "t": "Once weekly", "n": "Given with daily oral ribavirin; duration 24-48 weeks by genotype"},
+    {"c": "Chronic hepatitis C monotherapy (adult)", "r": "Standard", "d": "1.0 mcg/kg SC once weekly", "t": "Once weekly", "n": "Only when ribavirin contraindicated"},
+    {"c": "Adjuvant melanoma - Sylatron induction", "r": "Induction", "d": "6 mcg/kg/week SC for 8 doses", "t": "Once weekly x 8 weeks", "n": "Premedicate to mitigate flu-like symptoms"},
+    {"c": "Adjuvant melanoma - Sylatron maintenance", "r": "Maintenance", "d": "3 mcg/kg/week SC", "t": "Once weekly", "n": "Continue for up to 5 years total (including induction)"},
+    {"c": "Dose modification (any indication)", "r": "Toxicity", "d": "Reduce dose 25-50% or interrupt", "t": "Per protocol", "n": "Permanently discontinue for persistently severe toxicity"}
+  ],
+  "admin": [
+    "Administer by subcutaneous injection only; rotate sites (abdomen, thigh, upper arm)",
+    "Reconstitute/prepare per product instructions and use immediately",
+    "For HCV, give once weekly together with daily oral ribavirin",
+    "For Sylatron, premedicate with acetaminophen before each dose to reduce flu-like symptoms",
+    "Bedtime dosing and adequate hydration may reduce flu-like symptom burden",
+    "Do not mix with other medications in the same syringe"
+  ],
+  "moa": "Interferon alfa-2b binds type I interferon receptors and activates the JAK-STAT pathway, inducing expression of interferon-stimulated genes that produce antiviral, antiproliferative and immunomodulatory effects. These actions inhibit viral replication (hepatitis C) and modulate host immune responses against tumor cells (melanoma). Pegylation prolongs systemic exposure, allowing once-weekly dosing.",
+  "contra": {
+    "absolute": ["Hypersensitivity to interferon alfa or any product component", "Autoimmune hepatitis", "Decompensated (Child-Pugh B/C) hepatic disease", "When combined with ribavirin: pregnancy and male partners of pregnant women (ribavirin teratogen/embryocidal)", "When combined with ribavirin: hemoglobinopathies (thalassemia major, sickle cell anemia)", "When combined with ribavirin: creatinine clearance <50 mL/min"],
+    "relative": ["Pre-existing psychiatric disease, depression or suicidal ideation", "Pre-existing autoimmune disease", "Cardiovascular disease (ischemic, arrhythmia, uncontrolled hypertension)", "Significant cytopenias (neutropenia, thrombocytopenia, anemia)", "Thyroid dysfunction", "Diabetes mellitus prone to ketoacidosis", "Pulmonary disease", "Organ transplant recipients on immunosuppression"],
+    "monitor": ["Baseline and ongoing psychiatric assessment for depression/suicidality (BOXED WARNING)", "Signs of autoimmune disorders (BOXED WARNING)", "Cardiac/ischemic symptoms (BOXED WARNING)", "Signs of serious infection (BOXED WARNING)", "Ophthalmologic symptoms (retinopathy)"]
+  },
+  "preg": "Avoid in pregnancy; interferon has abortifacient potential in animals. When used with ribavirin it is absolutely contraindicated because ribavirin is a potent teratogen and embryocide - two forms of effective contraception are required in female patients and female partners of male patients during and for 6 months after therapy.",
+  "lact": "It is unknown whether peginterferon is excreted in human milk. Because of the potential for serious adverse reactions in the infant, a decision should be made to discontinue nursing or discontinue the drug; ribavirin co-therapy further argues against breastfeeding.",
+  "renal": "Reduce dose or avoid in significant renal impairment as clearance is decreased. In combination with ribavirin, the regimen is contraindicated when creatinine clearance is below 50 mL/min. Monitor renal function during therapy.",
+  "hepatic": "Contraindicated in decompensated hepatic disease and autoimmune hepatitis. Discontinue if hepatic decompensation (Child-Pugh >=6, except indirect hyperbilirubinemia from ribavirin) develops. Monitor LFTs closely.",
+  "interactions": {
+    "major": ["Ribavirin - additive hematologic toxicity and absolute teratogenic risk; mandatory contraception", "Telbivudine - increased risk of peripheral neuropathy; avoid combination", "Theophylline - interferon reduces clearance, raising theophylline levels", "Drugs metabolized by CYP1A2/2C9 - interferon inhibits hepatic CYP enzymes (e.g. methadone, warfarin)"],
+    "moderate": ["Myelosuppressive agents / chemotherapy - additive cytopenias", "Nucleoside reverse transcriptase inhibitors (e.g. zidovudine, didanosine) - increased hematologic and lactic acidosis/hepatic risk", "CNS depressants - additive sedation/neuropsychiatric effects", "Antihypertensives - interferon may cause hypotension"],
+    "minor": ["Vaccines - reduced immune response possible during therapy"],
+    "food": "No specific food interaction (subcutaneous biologic); maintain good hydration and nutrition.",
+    "alcohol": "Avoid alcohol; it accelerates hepatitis C progression and may worsen depression.",
+    "diagnostics": "May alter thyroid function tests, cause neutropenia/thrombocytopenia/anemia, elevate triglycerides and transaminases, and increase glucose."
+  },
+  "se": {
+    "common": ["Flu-like symptoms (fever, chills, myalgia, fatigue)", "Headache", "Injection-site reactions", "Anorexia and weight loss", "Nausea", "Alopecia", "Depression and irritability"],
+    "serious": ["Severe depression and suicidal/homicidal ideation (BOXED WARNING)", "Autoimmune disorders - thyroiditis, lupus, rheumatoid arthritis, ITP (BOXED WARNING)", "Ischemic disorders - cardiovascular events, cerebrovascular ischemia (BOXED WARNING)", "Serious/fatal infections including sepsis (BOXED WARNING)", "Bone marrow suppression (neutropenia, thrombocytopenia, anemia)", "Hepatic decompensation", "Pulmonary disorders (pneumonitis, interstitial lung disease)", "Retinopathy and vision loss"],
+    "rare": ["Pancreatitis", "Diabetes mellitus / diabetic ketoacidosis", "Colitis and ischemic/hemorrhagic colitis", "Sarcoidosis (new onset or exacerbation)", "Severe cutaneous reactions"],
+    "emergency": ["Suicidal ideation or attempt / acute severe depression (BOXED WARNING)", "Acute myocardial infarction or stroke (ischemic - BOXED WARNING)", "Sepsis or other severe infection (BOXED WARNING)", "Acute hepatic decompensation/failure", "Anaphylaxis / angioedema", "Severe pulmonary failure"]
+  },
+  "monitoring": [
+    "Psychiatric status at baseline and periodically - screen for depression and suicidality; discontinue for persistently severe neuropsychiatric disorder (BOXED WARNING)",
+    "Signs and symptoms of autoimmune, ischemic and infectious disorders; discontinue if persistently severe (BOXED WARNING)",
+    "CBC with differential and platelets at baseline, weeks 2 and 4, then periodically",
+    "Liver function tests and, in HCV, hepatic decompensation (Child-Pugh) periodically",
+    "TSH/thyroid function at baseline and every 12 weeks",
+    "Blood glucose for new-onset/worsening diabetes",
+    "Ophthalmologic exam at baseline and during therapy (especially with pre-existing retinopathy)",
+    "Pregnancy testing monthly when used with ribavirin"
+  ],
+  "counsel": [
+    "This drug carries a boxed warning for severe neuropsychiatric, autoimmune, ischemic and infectious reactions - seek help immediately for depression, thoughts of self-harm, chest pain, signs of infection or new severe symptoms",
+    "Report mood changes, depression or suicidal thoughts to your care team at once",
+    "Expect flu-like symptoms; premedicate with acetaminophen and stay hydrated",
+    "If combined with ribavirin, use two effective methods of contraception during and for 6 months after treatment - ribavirin causes severe birth defects",
+    "Attend all blood test and follow-up appointments",
+    "Report visual changes, breathing problems or signs of infection promptly",
+    "Avoid alcohol and do not skip lab monitoring"
+  ],
+  "pk": [
+    ["Onset", "Antiviral/immune effects within days; sustained over the week"],
+    ["Peak", "Serum Tmax approximately 15-44 hours after SC dose"],
+    ["Half-life", "Approximately 40 hours (range ~22-60 h)"],
+    ["Duration", "Detectable up to ~7 days, supporting once-weekly dosing"],
+    ["Storage", "Refrigerate at 2-8 C; do not freeze; protect from light"]
+  ],
+  "pearls": [
+    "Record sourced from EMA/SmPC and the historical FDA/manufacturer prescribing information (PegIntron/Sylatron), not openFDA, because the US products are discontinued and absent from openFDA",
+    "BOXED WARNING: may cause or aggravate fatal or life-threatening neuropsychiatric, autoimmune, ischemic and infectious disorders - monitor closely and discontinue therapy for persistently severe events",
+    "HCV regimen is weight-based ~1.5 mcg/kg/week SC given with daily ribavirin",
+    "Sylatron melanoma regimen: 6 mcg/kg/week SC for 8 doses (induction) then 3 mcg/kg/week SC for up to 5 years",
+    "When combined with ribavirin, ribavirin's contraindications apply - notably pregnancy (teratogen), hemoglobinopathies and CrCl <50 mL/min"
+  ],
+  "missed": "For weekly subcutaneous dosing, administer the missed dose as soon as remembered. If it is several days late or near the next scheduled dose, contact the prescriber for guidance; do not give two doses close together.",
+  "overdose": "No specific antidote. Overdose may intensify flu-like, hematologic, hepatic and neuropsychiatric toxicity. Manage with supportive care, close monitoring of blood counts, liver function and mental status; interferon is not effectively removed by hemodialysis.",
+  "refs": [
+    ["EMA / SmPC PegIntron (peginterferon alfa-2b)", "https://www.ema.europa.eu/en/medicines/human/EPAR/pegintron"],
+    ["FDA DailyMed - Sylatron (peginterferon alfa-2b) Prescribing Information including Boxed Warning", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

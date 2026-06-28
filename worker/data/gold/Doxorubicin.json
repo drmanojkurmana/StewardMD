@@ -1,0 +1,114 @@
+{
+  "generic": "Doxorubicin",
+  "cls": "Anthracycline topoisomerase II inhibitor (cytotoxic antineoplastic)",
+  "pharm": "Anthracycline antibiotic that intercalates DNA and poisons topoisomerase II, generating DNA strand breaks and cytotoxic free radicals",
+  "tags": ["Rx only", "Cytotoxic/hazardous drug", "Boxed warning: cardiomyopathy (cumulative dose-related CHF)", "Boxed warning: secondary malignancies (AML/MDS)", "Boxed warning: extravasation/severe tissue necrosis", "Boxed warning: severe myelosuppression", "Lifetime cumulative limit ~550 mg/m2", "Vesicant", "Administer only by physician experienced in cytotoxic chemotherapy", "Embryo-fetal toxicity"],
+  "quick": [
+    ["Adult dose", "Single agent 60-75 mg/m2 IV every 21 days; in combination 40-75 mg/m2 IV every 21-28 days; adjuvant breast 60 mg/m2 day 1 of each 21-day cycle x4 (with cyclophosphamide)"],
+    ["Meal", "Not applicable (IV only); supportive antiemetics for nausea/vomiting"],
+    ["Pregnancy", "Can cause fetal harm; avoid in 1st trimester; advise effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for 10 days after final dose"],
+    ["Renal", "Excreted mainly via bile (~40%); urine 5-12%; no specific renal adjustment in label"],
+    ["Hepatic", "Reduce dose: bilirubin 1.2-3 mg/dL give 50%, 3.1-5 mg/dL give 25%; contraindicated if >5 mg/dL or Child-Pugh C"],
+    ["Alcohol", "Avoid alcohol (hepatic strain; nausea); minimize hepatotoxic exposures"],
+    ["Monitoring", "LVEF (MUGA/echo), cumulative dose, CBC, bilirubin/LFTs, infusion site for extravasation"]
+  ],
+  "summary": "Doxorubicin hydrochloride is an anthracycline topoisomerase II inhibitor given intravenously as a component of multi-agent chemotherapy for a broad range of malignancies, including adjuvant node-positive breast cancer, acute leukemias, Hodgkin and non-Hodgkin lymphoma, and many metastatic solid tumors. It carries a boxed warning for dose-related cardiomyopathy (acute left ventricular failure and congestive heart failure, with risk rising sharply above a lifetime cumulative dose of about 550 mg/m2), secondary acute myeloid leukemia and myelodysplastic syndrome, severe local tissue necrosis on extravasation, and severe myelosuppression that can cause serious infection, septic shock, and death. It is a hazardous vesicant that must be prepared and administered only by clinicians experienced in cytotoxic chemotherapy. LVEF must be assessed before, during, and after therapy, and dosing reduced in hepatic impairment.",
+  "indications": [
+    "Component of multi-agent adjuvant chemotherapy for women with axillary lymph node involvement following resection of primary breast cancer",
+    "Acute lymphoblastic leukemia",
+    "Acute myeloblastic leukemia",
+    "Hodgkin lymphoma",
+    "Non-Hodgkin lymphoma",
+    "Metastatic breast cancer",
+    "Metastatic Wilms' tumor",
+    "Metastatic neuroblastoma",
+    "Metastatic soft tissue sarcoma and bone sarcoma",
+    "Metastatic ovarian carcinoma",
+    "Metastatic transitional cell bladder carcinoma",
+    "Metastatic thyroid carcinoma",
+    "Metastatic gastric carcinoma",
+    "Metastatic bronchogenic carcinoma"
+  ],
+  "dosage": [
+    {"c": "Adjuvant breast cancer (with cyclophosphamide)", "r": "IV bolus", "d": "60 mg/m2 on day 1 of each 21-day cycle", "t": "Total of four cycles", "n": "Given in combination with cyclophosphamide (AC regimen)"},
+    {"c": "Other cancers - single agent", "r": "IV", "d": "60-75 mg/m2 every 21 days", "t": "Administer IV over 3-10 minutes (injection) or by continuous infusion via central line", "n": "Use lower end of range/longer intervals for heavily pretreated, elderly, or obese patients"},
+    {"c": "Other cancers - combination chemotherapy", "r": "IV", "d": "40-75 mg/m2 every 21-28 days", "t": "Titrate cycle interval to recovery of counts and tolerance", "n": "Cumulative doses above 550 mg/m2 markedly increase cardiomyopathy risk"},
+    {"c": "Hepatic impairment (elevated bilirubin)", "r": "IV", "d": "Bilirubin 1.2-3 mg/dL: 50% of dose; 3.1-5 mg/dL: 25% of dose", "t": "Do not initiate and discontinue if bilirubin >5 mg/dL", "n": "Contraindicated in severe hepatic impairment (Child-Pugh C or bilirubin >5 mg/dL)"},
+    {"c": "Cardiomyopathy during treatment", "r": "IV", "d": "Discontinue", "t": "Stop in patients who develop signs or symptoms of cardiomyopathy", "n": "Consider dexrazoxane cardioprotection once cumulative dose reaches 300 mg/m2 and therapy continues (not at initiation)"}
+  ],
+  "admin": [
+    "Hazardous cytotoxic drug and vesicant - prepare, handle, and dispose per applicable safety procedures; administer only under a physician experienced in cytotoxic chemotherapy",
+    "Dilute in 0.9% Sodium Chloride or 5% Dextrose, protect from light after preparation, and use within 1 hour (discard if not used)",
+    "Visually inspect for particulates/discoloration; discard if discolored, cloudy, or contains particulate matter",
+    "IV injection: give over 3-10 minutes through a central line or a secure free-flowing peripheral line; decrease rate if erythematous streaking along the vein or facial flushing occurs",
+    "Continuous infusion: administer only through a central venous line, protected from light until completion",
+    "Extravasation management: immediately discontinue, do not remove needle until extravasated fluid aspirated, do not flush the line, apply ice intermittently 15 minutes 4 times/day for 3 days, elevate the limb, and consider dexrazoxane in adults",
+    "Do not admix with other drugs; precipitate forms with heparin or fluorouracil; avoid alkaline solutions (hydrolysis)",
+    "Treat accidental skin/eye contact with copious water, soap and water, or sodium bicarbonate solution and seek medical attention"
+  ],
+  "moa": "Doxorubicin is an anthracycline whose cytotoxic and organ-toxic effects are attributed to intercalation between DNA base pairs and binding to cell membrane lipids. Intercalation inhibits nucleotide replication and the action of DNA and RNA polymerases. A key mechanism is interaction with topoisomerase II to stabilize cleavable DNA-enzyme complexes, producing DNA strand breaks. Enzymatic reduction also generates reactive free radicals, whose local production is thought to contribute to its cardiotoxicity.",
+  "contra": {
+    "absolute": ["Severe myocardial insufficiency", "Recent (within past 4-6 weeks) myocardial infarction", "Severe persistent drug-induced myelosuppression", "Severe hepatic impairment (Child-Pugh Class C or serum bilirubin >5 mg/dL)", "Severe hypersensitivity reaction to doxorubicin, including anaphylaxis"],
+    "relative": ["Cumulative anthracycline exposure approaching ~550 mg/m2 (cardiomyopathy risk)", "Prior mediastinal radiotherapy or concomitant cardiotoxic agents (cyclophosphamide, trastuzumab)", "Hepatic impairment with elevated bilirubin (dose reduce)", "Heavily pretreated, elderly, or obese patients (reduced clearance)"],
+    "monitor": ["LVEF by MUGA or echocardiogram before, during, and after treatment (more frequently above 300 mg/m2)", "Cumulative lifetime doxorubicin dose (include prior anthracyclines/anthracenediones)", "Complete blood count (myelosuppression)", "Serum total bilirubin and liver function tests", "Infusion site for extravasation/burning/stinging", "ECG for arrhythmias", "Signs of tumor lysis syndrome in high-burden disease"]
+  },
+  "preg": "Based on findings in animals and its mechanism of action, doxorubicin can cause fetal harm; avoid use during the first trimester. Available human data do not establish the presence or absence of major birth defects and miscarriage with use in the second and third trimesters. In animals it was teratogenic and embryotoxic in rats (esophageal/intestinal atresia, tracheo-esophageal fistula, urinary bladder hypoplasia, cardiovascular anomalies) and embryotoxic/abortifacient in rabbits at doses about 0.07 times the human dose. Verify pregnancy status before initiation; advise females of reproductive potential to use highly effective contraception during treatment and for 6 months after, and males with female partners to use effective contraception (and condoms if partner is pregnant) due to genotoxicity. Background US risk of major birth defects is 2-4% and of miscarriage 15-20%.",
+  "lact": "Doxorubicin is present in human milk; in one lactating patient given 70 mg/m2 the peak milk concentration at 24 hours was 4.4-fold higher than plasma, and the drug was detectable in milk up to 72 hours. There are no data on effects on the breastfed child or milk production. Because of the potential for serious adverse reactions in the breastfed child, advise women not to breastfeed during treatment and for 10 days after the final dose.",
+  "renal": "The label does not specify renal dose adjustment; doxorubicin is eliminated predominantly by hepatic metabolism and biliary excretion (about 40% of dose in bile over 5 days), with only 5-12% of drug and metabolites appearing in urine. Plasma clearance is mainly by metabolism and biliary excretion rather than renal elimination.",
+  "hepatic": "Clearance of doxorubicin and its metabolite doxorubicinol is reduced with elevated serum bilirubin, increasing toxicity. Reduce the dose for elevated total bilirubin: give 50% of dose at bilirubin 1.2-3 mg/dL and 25% at 3.1-5 mg/dL. Doxorubicin is contraindicated in severe hepatic impairment, defined as Child-Pugh Class C or serum bilirubin greater than 5 mg/dL; do not initiate and discontinue if bilirubin exceeds 5 mg/dL.",
+  "interactions": {
+    "major": ["Trastuzumab - increased risk of cardiac dysfunction; do not co-administer and avoid anthracyclines for up to 7 months after stopping trastuzumab", "CYP3A4/CYP2D6/P-gp inhibitors - increase doxorubicin concentrations and toxicity; avoid concomitant use", "CYP3A4/CYP2D6/P-gp inducers - decrease doxorubicin concentrations; avoid concomitant use", "Other cardiotoxic agents (e.g., cyclophosphamide) and prior mediastinal radiotherapy - additive/synergistic cardiomyopathy risk", "6-mercaptopurine - potentiates 6-MP hepatotoxicity"],
+    "moderate": ["Paclitaxel - given before doxorubicin raises doxorubicin and metabolite levels; administer doxorubicin first if used concomitantly", "Dexrazoxane - do not give as cardioprotectant at initiation of doxorubicin-based therapy (lower tumor response/shorter time to progression); reserve until cumulative dose 300 mg/m2"],
+    "minor": ["Live vaccines - reduced efficacy/risk in immunosuppressed patients (avoid)"],
+    "food": "Not applicable - intravenous administration only.",
+    "alcohol": "Avoid alcohol given additive hepatic burden and nausea; minimize other hepatotoxic exposures.",
+    "diagnostics": "Can cause radiation recall in previously irradiated fields and increase radiation-induced toxicity. May increase ALT/AST. Tumor lysis can raise uric acid, potassium, and phosphate."
+  },
+  "se": {
+    "common": ["Alopecia", "Nausea and vomiting", "Mucositis/stomatitis", "Myelosuppression (leukopenia, neutropenia)", "Red discoloration of urine (harmless)", "Fatigue/malaise", "Diarrhea", "Anorexia"],
+    "serious": ["Cardiomyopathy / acute left ventricular failure / congestive heart failure (cumulative dose-related)", "Arrhythmias including life-threatening ventricular tachycardia", "Secondary acute myeloid leukemia (AML) and myelodysplastic syndrome (MDS)", "Severe myelosuppression with serious infection, septic shock, and death", "Extravasation with severe local tissue injury and necrosis requiring excision/skin grafting", "Tumor lysis syndrome", "Hepatotoxicity (with 6-mercaptopurine)", "Cardiogenic shock"],
+    "rare": ["Anaphylaxis/hypersensitivity", "Pericarditis and myocarditis", "Peripheral sensory and motor neuropathy, seizures, coma", "Necrotizing colitis/typhlitis, GI bleeding", "Photosensitivity, palmar-plantar erythrodysesthesia, skin and nail hyperpigmentation", "Thromboembolism, phlebitis/thrombophlebitis", "Conjunctivitis, keratitis"],
+    "emergency": ["Extravasation (burning/stinging at site) - stop infusion immediately and manage as vesicant emergency", "Acute decompensated heart failure / life-threatening arrhythmia", "Septic shock from severe neutropenia (febrile neutropenia)", "Anaphylaxis during infusion", "Tumor lysis syndrome with acute renal failure/hyperkalemia"]
+  },
+  "monitoring": [
+    "Left ventricular ejection fraction (MUGA or echocardiogram) before, during, and after treatment - increase frequency once cumulative dose exceeds 300 mg/m2; use the same method at all time points",
+    "Running total cumulative doxorubicin (and other anthracycline) dose - watch the ~550 mg/m2 lifetime limit",
+    "Complete blood count with differential before each cycle for myelosuppression",
+    "Serum total bilirubin and liver function tests (for dose modification and contraindication thresholds)",
+    "Infusion site for evidence of extravasation, burning, or stinging",
+    "ECG for arrhythmias and conduction changes",
+    "Signs of infection/sepsis during neutropenia; long-term surveillance for secondary leukemia/MDS"
+  ],
+  "counsel": [
+    "This is a strong chemotherapy given by vein only and must be administered by a trained cancer-care team",
+    "Your urine may turn reddish for 1-2 days after a dose - this is expected and harmless",
+    "Report immediately any burning or stinging at the IV site during infusion (possible tissue injury)",
+    "Tell your team about chest pain, shortness of breath, swelling of legs, palpitations, or fainting - your heart function will be checked over time",
+    "Expect hair loss, mouth sores, and nausea; low blood counts raise infection and bleeding risk - report fever, chills, sore throat, or unusual bruising/bleeding",
+    "There is a long-term risk of a second blood cancer (leukemia/MDS); attend all follow-up visits",
+    "Avoid pregnancy: use effective contraception during treatment and for 6 months (females) afterward; males should use contraception and discuss fertility preservation; do not breastfeed during therapy and for 10 days after",
+    "Avoid live vaccines and tell all providers you are receiving this drug"
+  ],
+  "pk": [
+    ["Onset", "Immediate cytotoxic exposure on IV administration; multiphasic disposition with distribution half-life ~5 minutes"],
+    ["Peak", "End of IV injection/infusion; does not cross the blood-brain barrier"],
+    ["Half-life", "Terminal half-life ~20-48 hours; doxorubicinol metabolite similar"],
+    ["Duration", "Dosed every 21-28 days; ~75% protein bound; CYP3A4/CYP2D6/P-gp substrate; ~40% biliary, 5-12% urinary excretion"],
+    ["Storage", "Store vials at 2-8 C (36-46 F), protect from light; refrigeration may cause gelling - warm to room temperature (15-30 C) for 2-4 hours to restore solution"]
+  ],
+  "pearls": [
+    "Cardiomyopathy is cumulative-dose dependent: estimated CHF risk ~1-2% at 300 mg/m2, 3-5% at 400, 5-8% at 450, and 6-20% at 500 mg/m2 every 3 weeks - keep a running lifetime total and respect the ~550 mg/m2 limit",
+    "Always include prior anthracyclines/anthracenediones when tallying cumulative dose, and use the same LVEF method each time",
+    "Boxed warning includes a long-term risk of secondary AML and MDS in addition to acute cardiotoxicity",
+    "Doxorubicin is a vesicant - extravasation can require wide excision and skin grafting; treat as an emergency with ice and consider dexrazoxane in adults",
+    "Do NOT start dexrazoxane as cardioprotection at the beginning of therapy (reduces tumor response); reserve until cumulative dose reaches 300 mg/m2 with continued treatment",
+    "Avoid concurrent trastuzumab and give anthracyclines no sooner than ~7 months after stopping trastuzumab; administer doxorubicin before paclitaxel to avoid raised levels"
+  ],
+  "missed": "Doxorubicin is given on a scheduled basis by an oncology team rather than self-administered, so there is no patient-managed missed dose. A delayed or held cycle is rescheduled by the treating clinician based on recovery of blood counts and organ function; contact the cancer center if an appointment is missed so the cycle can be re-timed.",
+  "overdose": "Acute overdose intensifies known toxicities, chiefly severe myelosuppression (grade 4 neutropenia and thrombocytopenia), severe mucositis, and sepsis, and may cause sinus tachycardia. Reported cases (e.g., a 10-fold overdose and a 3-fold daily overdose) recovered with supportive care over 2-4 weeks. Management is supportive: hematopoietic growth factor (e.g., G-CSF), transfusions, antimicrobial prophylaxis/treatment of infection, proton pump inhibitor and mucositis care, and cardiac monitoring.",
+  "refs": [
+    ["FDA Label - Doxorubicin Hydrochloride Injection (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22doxorubicin%22"],
+    ["DailyMed - Doxorubicin Hydrochloride", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=doxorubicin"]
+  ]
+}

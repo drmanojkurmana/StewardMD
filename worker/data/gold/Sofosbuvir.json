@@ -1,0 +1,96 @@
+{
+  "generic": "Sofosbuvir",
+  "cls": "HCV NS5B nucleotide polymerase inhibitor (direct-acting antiviral)",
+  "pharm": "Antiviral / anti-hepatitis C agent",
+  "tags": ["hepatitis C", "HCV", "DAA", "NS5B inhibitor", "antiviral"],
+  "quick": [
+    ["Adult dose", "400 mg PO once daily with a ribavirin-based regimen"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Combination with ribavirin/peginterferon contraindicated in pregnancy"],
+    ["Lactation", "Presence in human milk unknown; weigh risk/benefit"],
+    ["Renal", "No adjustment if mild/moderate; no recommendation if severe/ESRD"],
+    ["Hepatic", "No adjustment Child-Pugh A/B/C; not studied in decompensated cirrhosis"],
+    ["Alcohol", "Avoid in advanced liver disease"],
+    ["Monitoring", "HBV status before treatment; heart rate if on amiodarone; HCV RNA"]
+  ],
+  "summary": "Sofosbuvir (Sovaldi) is a hepatitis C virus NS5B nucleotide polymerase inhibitor used as a component of combination antiviral therapy for chronic HCV genotypes 1-4 in adults and genotypes 2-3 in children >=3 years. The recommended dose is one 400 mg tablet once daily combined with ribavirin, with or without peginterferon alfa; genotype determines the partner regimen and duration. It carries a boxed warning for HBV reactivation and a warning for serious bradycardia when given with amiodarone.",
+  "indications": [
+    "Adults with genotype 1 or 4 chronic HCV (no cirrhosis or compensated cirrhosis) in combination with peginterferon alfa and ribavirin",
+    "Adults with genotype 2 or 3 chronic HCV (no cirrhosis or compensated cirrhosis) in combination with ribavirin",
+    "Pediatric patients >=3 years with genotype 2 or 3 chronic HCV (no cirrhosis or compensated cirrhosis) in combination with ribavirin",
+    "As a component of a combination antiviral treatment regimen (not for monotherapy)"
+  ],
+  "dosage": [
+    {"c": "Adult genotype 1 or 4, treatment-naive (no/compensated cirrhosis)", "r": "Triple therapy", "d": "Sofosbuvir 400 mg once daily + peginterferon alfa + ribavirin", "t": "Once daily x 12 weeks", "n": "Ribavirin weight-based (<75 kg = 1000 mg, >=75 kg = 1200 mg) in two divided doses with food"},
+    {"c": "Adult genotype 2, treatment-naive or -experienced (no/compensated cirrhosis)", "r": "Dual therapy", "d": "Sofosbuvir 400 mg once daily + ribavirin", "t": "Once daily x 12 weeks", "n": "No peginterferon required"},
+    {"c": "Adult genotype 3, treatment-naive or -experienced (no/compensated cirrhosis)", "r": "Dual therapy", "d": "Sofosbuvir 400 mg once daily + ribavirin", "t": "Once daily x 24 weeks", "n": "Longer duration than genotype 2"},
+    {"c": "Adult genotype 1, interferon-ineligible", "r": "Dual therapy", "d": "Sofosbuvir 400 mg once daily + ribavirin", "t": "Once daily x 24 weeks", "n": "May be considered when interferon-based regimen is not an option"},
+    {"c": "Hepatocellular carcinoma awaiting liver transplant", "r": "Dual therapy", "d": "Sofosbuvir 400 mg once daily + ribavirin", "t": "Up to 48 weeks or until transplant, whichever is first", "n": "To prevent post-transplant HCV reinfection"},
+    {"c": "Pediatric >=3 years, genotype 2", "r": "Dual therapy", "d": "Weight-based sofosbuvir (tablets or oral pellets) + ribavirin", "t": "x 12 weeks", "n": "See label Table 3 for weight-based dosing"},
+    {"c": "Pediatric >=3 years, genotype 3", "r": "Dual therapy", "d": "Weight-based sofosbuvir (tablets or oral pellets) + ribavirin", "t": "x 24 weeks", "n": "Follow Instructions for Use for oral pellets"}
+  ],
+  "admin": [
+    "Test all patients for current or prior HBV infection (HBsAg and anti-HBc) before initiating therapy",
+    "Take one 400 mg tablet orally once daily with or without food",
+    "Always administer as part of a combination regimen with ribavirin, with or without peginterferon alfa",
+    "Do not miss or skip doses; take for the full prescribed duration based on genotype",
+    "Do not coadminister with amiodarone unless no alternative; if required, perform cardiac monitoring"
+  ],
+  "moa": "Sofosbuvir is a nucleotide prodrug inhibitor of the HCV NS5B RNA-dependent RNA polymerase, which is essential for viral replication. It undergoes intracellular metabolism to the pharmacologically active uridine analog triphosphate GS-461203, which is incorporated into HCV RNA by NS5B and acts as a chain terminator, halting viral replication. GS-461203 does not inhibit human DNA/RNA or mitochondrial RNA polymerases.",
+  "contra": {
+    "absolute": ["When used with ribavirin or peginterferon alfa/ribavirin, all contraindications to those agents apply (e.g., pregnancy in the patient or in a male's pregnant partner with ribavirin)"],
+    "relative": ["Coadministration with amiodarone (not recommended; risk of serious bradycardia)", "Coadministration with intestinal P-gp inducers such as rifampin or St. John's wort (not recommended)", "Severe renal impairment (eGFR <30) or ESRD on hemodialysis (no dosing recommendation)"],
+    "monitor": ["HCV/HBV coinfection (risk of HBV reactivation)", "Concomitant amiodarone, especially with beta-blockers or advanced liver disease", "Diabetic patients (risk of symptomatic hypoglycemia as hepatic function improves)"]
+  },
+  "preg": "When sofosbuvir is given with ribavirin or peginterferon alfa/ribavirin, the combination regimen is contraindicated in pregnant women and in men whose female partners are pregnant; refer to the ribavirin and peginterferon labeling for their pregnancy risks. No adequate human data exist for sofosbuvir alone; animal studies showed no adverse developmental effects at exposures above the human dose.",
+  "lact": "It is not known whether sofosbuvir or its metabolites are present in human milk, affect milk production, or affect the breastfed infant. The metabolite GS-331007 was the primary component in milk of lactating rats without effect on pups. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential infant risk.",
+  "renal": "No dosage adjustment is required for mild or moderate renal impairment. Safety and efficacy have not been established and no dosing recommendation can be given for severe renal impairment (eGFR <30 mL/min/1.73 m2) or ESRD requiring hemodialysis. Refer to ribavirin/peginterferon labeling for patients with CrCl <50 mL/min.",
+  "hepatic": "No dosage adjustment is required for mild, moderate, or severe hepatic impairment (Child-Pugh A, B, or C). Safety and efficacy have not been established in patients with decompensated cirrhosis; note peginterferon alfa is contraindicated in hepatic decompensation.",
+  "interactions": {
+    "major": ["Amiodarone - serious symptomatic bradycardia (incl. fatal cardiac arrest) with sofosbuvir-containing regimens; coadministration not recommended", "Rifampin (intestinal P-gp inducer) - decreases sofosbuvir levels and efficacy; not recommended", "St. John's wort (P-gp inducer) - decreases sofosbuvir levels and efficacy; not recommended", "Other potent P-gp inducers (e.g., carbamazepine, phenytoin) - reduce sofosbuvir exposure; not recommended"],
+    "moderate": ["Warfarin - HCV clearance may change hepatic function and alter INR; monitor closely", "Antidiabetic agents - improved hepatic function may cause serious hypoglycemia; monitor glucose", "Narrow-therapeutic-index CYP450 substrates such as certain immunosuppressants - monitor drug concentrations"],
+    "minor": ["Beta-blockers - additive bradycardia risk in patients also taking amiodarone"],
+    "food": "May be taken with or without food; a high-fat meal does not substantially affect exposure.",
+    "alcohol": "Avoid alcohol, particularly in patients with advanced liver disease.",
+    "diagnostics": "Monitor INR in patients on warfarin and blood glucose in diabetic patients, as HCV clearance may alter hepatic function."
+  },
+  "se": {
+    "common": ["Fatigue", "Headache", "Nausea", "Insomnia", "Anemia (with peginterferon/ribavirin)", "Decreased appetite (pediatric)"],
+    "serious": ["Hepatitis B virus reactivation (boxed warning)", "Serious symptomatic bradycardia when coadministered with amiodarone", "Ribavirin/peginterferon-associated toxicities (per their labeling)"],
+    "rare": ["Symptomatic hypoglycemia in diabetic patients (due to improved hepatic function)", "Bradycardia requiring pacemaker intervention"],
+    "emergency": ["HBV reactivation with fulminant hepatitis, hepatic failure and death", "Serious symptomatic bradycardia or fatal cardiac arrest with amiodarone (near-syncope, syncope, chest pain, marked dizziness)"]
+  },
+  "monitoring": [
+    "Test all patients for HBV (HBsAg and anti-HBc) before initiating treatment",
+    "Monitor HCV/HBV coinfected patients for hepatitis flare or HBV reactivation during and after treatment",
+    "Cardiac monitoring (inpatient first 48 h, then daily for at least the first 2 weeks) if amiodarone coadministration is unavoidable",
+    "HCV RNA to assess virologic response; CBC for anemia when used with ribavirin/peginterferon",
+    "INR in patients on warfarin and blood glucose in diabetic patients"
+  ],
+  "counsel": [
+    "Take one 400 mg tablet once daily with the prescribed ribavirin-based regimen; do not miss or skip doses",
+    "Tell your provider about any history of hepatitis B infection",
+    "Seek immediate care for symptoms of bradycardia (fainting, dizziness, weakness, shortness of breath, chest pain) if taking amiodarone",
+    "Follow ribavirin pregnancy-prevention requirements for patients and male partners",
+    "Report all prescription, OTC and herbal products, including St. John's wort"
+  ],
+  "pk": [
+    ["Onset", "Rapid antiviral effect; chain termination of HCV RNA"],
+    ["Peak", "Sofosbuvir Tmax ~0.5-2 h; metabolite GS-331007 ~2-4 h"],
+    ["Half-life", "Sofosbuvir ~0.4 h; metabolite GS-331007 ~27 h (median terminal)"],
+    ["Duration", "Once-daily dosing for 12-24 weeks (genotype-dependent)"],
+    ["Storage", "Store below 30 C (86 F); dispense only in original container"]
+  ],
+  "pearls": [
+    "BOXED WARNING: test all patients for HBV before treatment; HBV reactivation can be fatal, monitor coinfected patients during and after therapy",
+    "Always part of a combination regimen - never used as monotherapy; partner agent and duration are genotype-specific (G2 + RBV 12 wk, G3 + RBV 24 wk, G1/4 + PegIFN/RBV 12 wk)",
+    "Avoid amiodarone - serious symptomatic bradycardia and fatal cardiac arrest reported with sofosbuvir-containing regimens",
+    "No dosing recommendation for severe renal impairment or ESRD; renal clearance is the major route for the active metabolite GS-331007"
+  ],
+  "missed": "Take the missed dose as soon as remembered on the same day, then resume the regular once-daily schedule; do not double up. It is important not to miss or skip doses. Contact the prescriber if doses are missed.",
+  "overdose": "The highest documented dose was a single 1200 mg dose (3x recommended) in 59 healthy subjects with no untoward effects. No specific antidote is available. Monitor for evidence of toxicity and provide general supportive care including vital signs and clinical observation. A 4-hour hemodialysis session removed about 18% of the administered dose.",
+  "refs": [
+    ["FDA Sofosbuvir (SOVALDI) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22Sovaldi%22"],
+    ["FDA DailyMed - Sovaldi (sofosbuvir)", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

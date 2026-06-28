@@ -1,0 +1,104 @@
+{
+  "generic": "Teicoplanin",
+  "cls": "Glycopeptide antibiotic",
+  "pharm": "Glycopeptide antibiotic active against Gram-positive organisms including MRSA and enterococci; long half-life allowing once-daily dosing after a loading phase; IM or IV (and oral for C. difficile).",
+  "tags": ["Glycopeptide", "Gram-positive", "MRSA", "Bactericidal", "Parenteral (IV/IM)", "Long half-life", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "Loading 400 mg (or 6 mg/kg) q12h x3-5 doses, then 6 mg/kg once daily"],
+    ["Meal", "N/A (parenteral); oral solution for C. diff"],
+    ["Pregnancy", "Avoid unless clearly necessary; limited data"],
+    ["Lactation", "Caution; excretion in milk unknown"],
+    ["Renal", "Reduce maintenance dose/interval from day 4 by CrCl"],
+    ["Hepatic", "No adjustment needed"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Trough levels, renal function, FBC, hearing"]
+  ],
+  "summary": "Teicoplanin is a glycopeptide antibiotic for serious Gram-positive infections, including MRSA, used much like vancomycin but with a long half-life permitting once-daily dosing (after a loading regimen) and giving by IM as well as IV. It is given orally only for Clostridioides difficile colitis (not systemically absorbed). It causes less of the histamine 'red-man' infusion reaction than vancomycin. It requires renal dose adjustment from day 4 and may cause nephrotoxicity, ototoxicity, thrombocytopenia, and hypersensitivity. It is approved in Europe and many countries but is NOT FDA-approved.",
+  "indications": [
+    "Serious Gram-positive infections, including those due to methicillin-resistant staphylococci (MRSA), where other antibiotics cannot be used",
+    "Complicated skin and soft-tissue infections",
+    "Bone and joint infections",
+    "Hospital-acquired and community-acquired pneumonia",
+    "Complicated urinary tract infections",
+    "Infective endocarditis",
+    "Bacteremia associated with the above infections",
+    "Peritonitis associated with continuous ambulatory peritoneal dialysis (CAPD)",
+    "Oral: Clostridioides difficile-associated diarrhea/colitis (not systemically absorbed)"
+  ],
+  "dosage": [
+    {"c": "Moderate infections (skin/soft tissue, UTI, lower respiratory) - adults", "r": "IV or IM", "d": "Loading 400 mg (~6 mg/kg) every 12 h for 3 doses, then maintenance 400 mg (6 mg/kg) once daily", "t": "Once daily after loading", "n": "EMA/SmPC; weight-based 6 mg/kg used for accuracy"},
+    {"c": "Severe infections (bone/joint, endocarditis, severe MRSA) - adults", "r": "IV", "d": "Loading 12 mg/kg every 12 h for 3-5 doses, then 12 mg/kg once daily", "t": "Once daily after loading", "n": "Higher target troughs for deep-seated infection"},
+    {"c": "Children (>2 months)", "r": "IV", "d": "Loading 10 mg/kg every 12 h for 3 doses, then 6-10 mg/kg once daily", "t": "Once daily after loading", "n": "Neonates: 16 mg/kg loading then 8 mg/kg once daily"},
+    {"c": "CAPD peritonitis", "r": "Intraperitoneal", "d": "20 mg/L in each dialysis bag (after an IV loading dose)", "t": "Per dialysis exchanges", "n": "Per local protocol"},
+    {"c": "Clostridioides difficile colitis", "r": "Oral", "d": "100-200 mg twice daily", "t": "For 7-14 days", "n": "Oral solution; not systemically absorbed"},
+    {"c": "Renal impairment (from day 4)", "r": "IV/IM", "d": "Reduce maintenance dose or extend interval by CrCl", "t": "From the 4th day", "n": "Mild-moderate: halve dose or give alternate days; severe/dialysis: further reduction, guided by levels"}
+  ],
+  "admin": [
+    "Loading doses are essential because of the long half-life - do not give once-daily dosing from the outset",
+    "May be given by IV bolus (3-5 min) or IV infusion (30 min), or by intramuscular injection",
+    "Oral solution is reserved for C. difficile infection (not absorbed systemically)",
+    "Reconstitute carefully, avoiding foaming; inspect for particulate matter",
+    "Reduce maintenance dose in renal impairment starting from the fourth day of therapy",
+    "Monitor renal function and, in prolonged or high-dose therapy, serum trough levels and hearing"
+  ],
+  "moa": "Inhibits bacterial cell-wall synthesis by binding to the D-alanyl-D-alanine terminus of peptidoglycan precursors, blocking cross-linking (transglycosylation/transpeptidation). This is bactericidal against susceptible aerobic and anaerobic Gram-positive bacteria, including methicillin-resistant staphylococci.",
+  "contra": {
+    "absolute": ["Hypersensitivity to teicoplanin"],
+    "relative": ["Known hypersensitivity to vancomycin (cross-reactivity possible, not absolute)", "Pre-existing renal impairment (dose adjustment needed)", "Pre-existing hearing impairment", "Concurrent nephrotoxic/ototoxic drugs"],
+    "monitor": ["Renal function", "Serum trough levels (deep-seated infection)", "Full blood count", "Hearing in prolonged therapy"]
+  },
+  "preg": "Limited human data; animal studies have shown some toxicity at high doses. Avoid during pregnancy unless clearly necessary (potential risk of inner-ear/renal effects).",
+  "lact": "It is not known whether teicoplanin is excreted in human milk; a decision to discontinue breastfeeding or the drug should weigh benefit to mother and infant.",
+  "renal": "Renal excretion is the main route. Reduce the maintenance dose (or extend the interval) starting from the fourth day of therapy based on creatinine clearance - in moderate impairment halve the daily dose or give it on alternate days; in severe impairment/dialysis reduce further, guided by trough levels. Teicoplanin is not significantly removed by hemodialysis.",
+  "hepatic": "No dose adjustment is needed for hepatic impairment.",
+  "interactions": {
+    "major": ["Other nephrotoxic/ototoxic agents (aminoglycosides, amphotericin B, ciclosporin, cisplatin, loop diuretics) - additive toxicity"],
+    "moderate": ["Concurrent vancomycin (cross-hypersensitivity; do not substitute if a patient had red-man syndrome alone - that is not a true allergy)"],
+    "minor": ["No significant CYP-mediated interactions"],
+    "food": "N/A (parenteral).",
+    "alcohol": "No significant interaction.",
+    "diagnostics": "Monitor serum trough concentrations (target >=10 mg/L for most infections; >=15-30 mg/L for endocarditis/deep infection), renal function, and full blood count."
+  },
+  "se": {
+    "common": ["Injection-site pain/erythema", "Rash, pruritus", "Fever", "Mild transaminase elevations", "Pain at IM site"],
+    "serious": ["Nephrotoxicity (renal impairment)", "Ototoxicity (hearing loss, tinnitus, vestibular disturbance)", "Thrombocytopenia and other blood dyscrasias (neutropenia, eosinophilia)", "Severe hypersensitivity reactions including anaphylaxis", "Severe cutaneous reactions (SJS/TEN, DRESS, AGEP)"],
+    "rare": ["Bronchospasm", "Superinfection (including C. difficile)", "Infusion-related reaction (less than vancomycin)"],
+    "emergency": ["Anaphylaxis", "Stevens-Johnson syndrome / toxic epidermal necrolysis / DRESS", "Severe thrombocytopenia with bleeding"]
+  },
+  "monitoring": [
+    "Serum trough levels (target >=10 mg/L; >=15-30 mg/L for endocarditis and deep-seated infection)",
+    "Renal function (creatinine) before and during therapy, especially with nephrotoxic co-medication",
+    "Full blood count (platelets, neutrophils) periodically",
+    "Hearing/vestibular function in prolonged or high-dose therapy or with other ototoxic drugs",
+    "Liver enzymes",
+    "Signs of hypersensitivity and superinfection"
+  ],
+  "counsel": [
+    "This antibiotic is given by injection (vein or muscle); the first few 'loading' doses are given closer together",
+    "Report rash, itching, fever, swelling, or breathing difficulty promptly",
+    "Tell the team about any kidney problems, hearing changes, or ringing in the ears",
+    "Report unusual bruising or bleeding",
+    "Complete the full course even if you feel better"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "End of IV infusion; IM absorption ~90% bioavailable"],
+    ["Half-life", "Long - ~70-100 h (terminal); allows once-daily dosing"],
+    ["Duration", "Once-daily maintenance after loading"],
+    ["Storage", "Store below 25 C; reconstituted solution per labeling (refrigerate, use promptly)"]
+  ],
+  "pearls": [
+    "Long half-life enables once-daily dosing, but loading doses are mandatory to reach therapeutic levels quickly",
+    "Causes far less of the histamine 'red-man' infusion reaction than vancomycin and can be given IM",
+    "Renal dose adjustment is delayed until the 4th day because of the long half-life",
+    "Not removed by hemodialysis - no supplemental post-dialysis dose needed",
+    "Oral teicoplanin treats C. difficile colitis and is not absorbed systemically",
+    "Not FDA-approved; pending clinical review."
+  ],
+  "missed": "Hospital-administered; if a maintenance dose is delayed, give it as soon as noted and resume once-daily dosing. Do not double the dose. The long half-life makes a single delayed dose unlikely to cause sub-therapeutic levels, but recheck troughs if timing changed significantly.",
+  "overdose": "Manage symptomatically and supportively; there is no specific antidote. Teicoplanin is not effectively removed by hemodialysis (hemoperfusion may modestly increase clearance). Monitor renal function, blood counts, and hearing.",
+  "refs": [
+    ["EMA / SmPC - Teicoplanin (e.g., Targocid)", "https://www.medicines.org.uk/emc/search?q=teicoplanin"],
+    ["British National Formulary (BNF) - Teicoplanin", "https://bnf.nice.org.uk/drugs/teicoplanin/"]
+  ]
+}

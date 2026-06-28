@@ -1,0 +1,101 @@
+{
+  "generic": "Omeprazole",
+  "cls": "Proton pump inhibitor (PPI)",
+  "pharm": "Irreversibly inhibits the gastric H+/K+ ATPase (proton pump) in parietal cells, suppressing basal and stimulated gastric acid secretion.",
+  "tags": ["PPI", "Acid suppression", "OTC frequent heartburn", "Delayed-release"],
+  "quick": [
+    ["Adult dose", "20 mg once daily (OTC frequent heartburn)"],
+    ["Meal", "Take before eating in the morning"],
+    ["Pregnancy", "Generally considered low risk; use if needed"],
+    ["Lactation", "Present in milk; limited data; likely compatible"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Reduced clearance; consider lower dose"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Magnesium, B12 on long-term use"]
+  ],
+  "summary": "Omeprazole is a proton pump inhibitor. The OTC product is indicated for frequent heartburn (occurring 2 or more days a week) as a 14-day course. It is not intended for immediate relief and may take 1 to 4 days for full effect.",
+  "indications": [
+    "Treatment of frequent heartburn (occurring 2 or more days a week)",
+    "Note: OTC product is not intended for immediate heartburn relief"
+  ],
+  "dosage": [
+    {"c": "Frequent heartburn (OTC)", "r": "Adult >=18 yrs", "d": "1 tablet (20 mg) once daily before eating in the morning", "t": "14 days; may repeat a 14-day course every 4 months", "n": "Do not take more than 1 tablet a day; swallow whole"},
+    {"c": "Children", "r": "<18 yrs", "d": "Ask a doctor", "t": "Not specified", "n": "Heartburn in children may indicate a serious condition"}
+  ],
+  "admin": [
+    "Swallow one tablet whole with a glass of water before eating in the morning",
+    "Do not chew or crush tablets",
+    "Take every day for 14 days",
+    "Do not take more than 1 tablet a day",
+    "Do not use for more than 14 days or more often than every 4 months unless directed by a doctor"
+  ],
+  "moa": "Omeprazole is a substituted-benzimidazole PPI activated in the acidic parietal cell canaliculus, where it covalently and irreversibly inhibits the H+/K+ ATPase, the terminal step of gastric acid secretion. Restoration of acid output requires synthesis of new enzyme.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to omeprazole, substituted benzimidazoles, or formulation components",
+      "Concomitant rilpivirine-containing products"
+    ],
+    "relative": [
+      "Long-term high-dose therapy (fracture, hypomagnesemia, B12 deficiency risks)",
+      "Drugs requiring gastric acidity for absorption"
+    ],
+    "monitor": [
+      "Serum magnesium on prolonged therapy",
+      "Vitamin B12 on long-term therapy"
+    ]
+  },
+  "preg": "No evidence of major risk from available human data; generally considered acceptable when indicated. Use if clearly needed.",
+  "lact": "Omeprazole is present in human milk; limited data suggest low infant exposure. Considered likely compatible; weigh maternal need.",
+  "renal": "No dosage adjustment required in renal impairment.",
+  "hepatic": "Bioavailability and AUC increase in hepatic impairment due to reduced clearance; consider dose reduction.",
+  "interactions": {
+    "major": [
+      "Rilpivirine (contraindicated)",
+      "Clopidogrel (omeprazole inhibits CYP2C19, reducing active metabolite; avoid combination)",
+      "pH-dependent drugs (atazanavir, nelfinavir, ketoconazole, itraconazole, erlotinib - reduced absorption)"
+    ],
+    "moderate": [
+      "Warfarin (monitor INR)",
+      "Methotrexate (high-dose; delayed elimination)",
+      "Diazepam, phenytoin, cilostazol (increased levels via CYP2C19)",
+      "Digoxin (increased absorption)"
+    ],
+    "minor": [],
+    "food": "Take before eating in the morning.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "May cause false-positive secretin stimulation test; affects CgA levels."
+  },
+  "se": {
+    "common": ["Headache", "Abdominal pain", "Nausea", "Diarrhea", "Flatulence", "Vomiting"],
+    "serious": ["Hypomagnesemia", "C. difficile-associated diarrhea", "Bone fractures (long-term)", "Acute interstitial nephritis", "Vitamin B12 deficiency (long-term)"],
+    "rare": ["Cutaneous/systemic lupus erythematosus", "Severe hypersensitivity reactions"],
+    "emergency": ["Anaphylaxis/angioedema", "Severe skin reactions (SJS/TEN)", "Severe persistent diarrhea"]
+  },
+  "monitoring": ["Serum magnesium on prolonged therapy", "Vitamin B12 on long-term use", "Reassess continued need; seek care if heartburn persists after 14-day course"],
+  "counsel": [
+    "May take 1 to 4 days for full effect; not for immediate relief",
+    "Swallow tablet whole before breakfast",
+    "Do not exceed 1 tablet daily or use beyond 14 days without a doctor",
+    "See a doctor if heartburn continues, or if you have trouble swallowing, chest/shoulder pain, or vomiting blood",
+    "Tell your clinician if you take clopidogrel"
+  ],
+  "pk": [
+    ["Onset", "Acid suppression within hours; full effect 1-4 days"],
+    ["Peak", "~0.5-3.5 hours (plasma)"],
+    ["Half-life", "~0.5-1 hour (effect outlasts plasma level)"],
+    ["Duration", "Up to 72 hours of acid suppression"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "OTC dose is for frequent heartburn 2+ days/week, not immediate relief",
+    "Strong CYP2C19 inhibitor - avoid with clopidogrel",
+    "Effect outlasts plasma half-life due to irreversible pump binding",
+    "Limit to 14-day courses every 4 months unless directed by a clinician"
+  ],
+  "missed": "If a daily dose is missed, take it when remembered the same day; if near the next day's dose, skip it. Do not take more than one tablet per day.",
+  "overdose": "No specific antidote; omeprazole is extensively protein-bound and not readily dialyzable. Manage symptomatically and supportively.",
+  "refs": [
+    ["FDA OTC Drug Label - Omeprazole (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22omeprazole%22"],
+    ["DailyMed - Omeprazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=omeprazole"]
+  ]
+}

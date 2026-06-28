@@ -1,0 +1,108 @@
+{
+  "generic": "Sisomicin",
+  "cls": "Aminoglycoside antibiotic (parenteral)",
+  "pharm": "Concentration-dependent bactericidal aminoglycoside that binds irreversibly to the 30S bacterial ribosomal subunit, causing misreading of mRNA and inhibition of protein synthesis, with broad activity against aerobic gram-negative bacilli including Pseudomonas aeruginosa.",
+  "tags": ["Rx only", "Aminoglycoside", "Gram-negative cover", "Nephro/ototoxic", "Parenteral"],
+  "quick": [
+    ["Adult dose", "3 mg/kg/day IM/IV in 2-3 divided doses (up to 4-5 mg/kg/day in severe infection)"],
+    ["Meal", "Parenteral - not relevant to meals"],
+    ["Pregnancy", "Avoid - aminoglycosides risk fetal ototoxicity; use only if essential"],
+    ["Lactation", "Minimal oral absorption by infant; use with caution"],
+    ["Renal", "Reduce dose / extend interval; guided by levels and CrCl"],
+    ["Hepatic", "No specific adjustment (renally cleared)"],
+    ["Alcohol", "No direct interaction; avoid in acute illness"],
+    ["Monitoring", "Serum levels (peak/trough), renal function, audiometry/vestibular"]
+  ],
+  "summary": "Sisomicin is a parenteral aminoglycoside antibiotic, closely related to gentamicin, with potent concentration-dependent bactericidal activity against aerobic gram-negative bacilli, including Pseudomonas aeruginosa, Enterobacteriaceae, and (in synergy with a beta-lactam) some gram-positive organisms. It is used for serious systemic gram-negative infections. Like all aminoglycosides, it carries significant risks of dose- and duration-related nephrotoxicity and irreversible ototoxicity (cochlear and vestibular), and it can cause neuromuscular blockade. Dosing requires weight-based calculation, renal-function adjustment, and therapeutic drug monitoring. It is used in some countries (notably parts of Europe and Asia) and is not currently FDA-approved in the United States.",
+  "indications": [
+    "Serious gram-negative bacterial infections, including septicemia, complicated urinary tract infections, lower respiratory tract infections, intra-abdominal infections, and skin/soft-tissue and bone infections caused by susceptible organisms (often in combination with a beta-lactam)"
+  ],
+  "dosage": [
+    {"c": "Serious gram-negative infection - standard", "r": "Adult IM or slow IV", "d": "3 mg/kg/day in 2-3 equally divided doses", "t": "Every 8-12 hours", "n": "Base on ideal/adjusted body weight; verify with drug levels"},
+    {"c": "Severe/life-threatening infection", "r": "Adult IM or IV", "d": "Up to 4-5 mg/kg/day in divided doses, reduced once clinically improved", "t": "Every 8 hours", "n": "Higher dose only short-term with close monitoring"},
+    {"c": "Pediatric", "r": "Children IM/IV", "d": "Approximately 3-5 mg/kg/day in divided doses", "t": "Every 8-12 hours", "n": "Dose by weight and adjust to levels"},
+    {"c": "Renal impairment", "r": "Adult IM/IV", "d": "Reduce dose and/or extend dosing interval according to creatinine clearance", "t": "Interval extended per CrCl", "n": "Adjust using measured peak and trough concentrations"}
+  ],
+  "admin": [
+    "Give by deep intramuscular injection or by slow intravenous infusion (over 30-60 minutes)",
+    "Calculate dose on ideal or adjusted body weight and patient renal function",
+    "Ensure adequate hydration before and during therapy to reduce nephrotoxicity",
+    "Do not physically mix in the same syringe/infusion with beta-lactam antibiotics (inactivation)",
+    "Monitor serum peak and trough concentrations, renal function, and hearing/balance during treatment"
+  ],
+  "moa": "Sisomicin is an aminoglycoside that exerts concentration-dependent bactericidal activity. It is actively transported across the bacterial cell envelope (an oxygen-dependent process, hence limited activity against anaerobes) and binds irreversibly to the 30S subunit of the bacterial ribosome. This binding causes misreading of the genetic code, premature termination, and incorporation of incorrect amino acids into proteins, producing nonfunctional or aberrant proteins and disrupting the cytoplasmic membrane. The resulting membrane damage allows further drug uptake and leads to rapid bacterial death. Its activity is enhanced when combined with cell-wall-active agents such as beta-lactams (synergy).",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to sisomicin or other aminoglycosides",
+      "Myasthenia gravis (risk of neuromuscular blockade)"
+    ],
+    "relative": [
+      "Pre-existing renal impairment",
+      "Pre-existing auditory or vestibular damage",
+      "Dehydration",
+      "Concurrent other nephrotoxic, ototoxic, or neuromuscular-blocking agents",
+      "Pregnancy"
+    ],
+    "monitor": [
+      "Serum peak and trough drug concentrations",
+      "Renal function (serum creatinine, urine output)",
+      "Auditory and vestibular function (audiometry)",
+      "Signs of neuromuscular weakness, especially with anesthetics/muscle relaxants"
+    ]
+  },
+  "preg": "Aminoglycosides cross the placenta and can cause irreversible bilateral congenital deafness in the fetus. Sisomicin should be avoided in pregnancy and used only when there is no safer alternative and the benefit clearly outweighs the fetal risk.",
+  "lact": "Aminoglycosides are excreted in breast milk in small amounts and are poorly absorbed orally by the infant; however, use with caution and monitor the infant for possible effects on gut flora (diarrhea, thrush).",
+  "renal": "Sisomicin is eliminated almost entirely by the kidneys and accumulates in renal impairment, increasing nephro- and ototoxicity. Reduce the dose and/or lengthen the dosing interval according to creatinine clearance and adjust using measured serum peak and trough levels. Maintain adequate hydration and monitor renal function throughout therapy.",
+  "hepatic": "No specific dose adjustment is required for hepatic impairment, as the drug is cleared renally rather than hepatically.",
+  "interactions": {
+    "major": [
+      "Other nephrotoxic agents (amphotericin B, vancomycin, cisplatin, ciclosporin, foscarnet) - additive nephrotoxicity",
+      "Other ototoxic agents and potent loop diuretics (furosemide, ethacrynic acid) - additive ototoxicity",
+      "Neuromuscular blocking agents and anesthetics - potentiated neuromuscular blockade / respiratory paralysis"
+    ],
+    "moderate": [
+      "Beta-lactam antibiotics - synergistic antibacterial effect, but mutual inactivation if mixed in the same solution; administer separately",
+      "NSAIDs (e.g., indomethacin in neonates) - may increase aminoglycoside levels"
+    ],
+    "minor": ["Bisphosphonates - additive hypocalcemia/hypomagnesemia reported with aminoglycosides"],
+    "food": "Not applicable for parenteral administration.",
+    "alcohol": "No direct interaction; avoid alcohol during acute serious infection.",
+    "diagnostics": "May cause electrolyte disturbances (hypokalemia, hypomagnesemia, hypocalcemia) and elevations in serum creatinine and urea."
+  },
+  "se": {
+    "common": ["Reversible elevations in serum creatinine/urea", "Proteinuria", "Nausea", "Injection-site reactions", "Hypomagnesemia / electrolyte disturbance"],
+    "serious": ["Nephrotoxicity (acute tubular necrosis, acute kidney injury)", "Ototoxicity - irreversible cochlear (hearing loss) and vestibular (vertigo, ataxia) damage", "Neuromuscular blockade with respiratory depression"],
+    "rare": ["Hypersensitivity reactions including rash and fever", "Blood dyscrasias (anemia, eosinophilia)", "Encephalopathy"],
+    "emergency": ["Acute neuromuscular paralysis / respiratory arrest", "Anaphylaxis", "Acute severe renal failure", "Sudden irreversible deafness"]
+  },
+  "monitoring": ["Serum peak and trough concentrations (efficacy and toxicity)", "Renal function (creatinine, urea, urine output) at baseline and during therapy", "Audiometry and vestibular assessment, especially with prolonged therapy", "Serum electrolytes (magnesium, calcium, potassium)", "Signs of neuromuscular weakness, particularly perioperatively"],
+  "counsel": [
+    "This antibiotic is given by injection or drip in a healthcare setting",
+    "Report any ringing in the ears, hearing loss, dizziness, or unsteadiness immediately",
+    "Tell staff about reduced urine output or swelling - your kidneys will be checked",
+    "Inform your doctor of all other medicines, especially diuretics or other antibiotics",
+    "Hearing and kidney tests may be done during a longer course of treatment",
+    "Let staff know if you have muscle weakness or have had myasthenia gravis"
+  ],
+  "pk": [
+    ["Onset", "Rapid bactericidal effect; peak serum levels ~30-60 min after IM dose"],
+    ["Peak", "Therapeutic peak typically ~4-10 mcg/mL (target per regimen)"],
+    ["Half-life", "~2-3 hours (markedly prolonged in renal impairment)"],
+    ["Duration", "Concentration-dependent killing with post-antibiotic effect; dosed every 8-12 h"],
+    ["Storage", "Store at controlled room temperature; protect from light per product"]
+  ],
+  "pearls": [
+    "Closely related to gentamicin; concentration-dependent bactericidal aminoglycoside with anti-Pseudomonas activity",
+    "Nephrotoxicity and irreversible ototoxicity are the key dose/duration-related risks - monitor levels, renal and auditory function",
+    "Poor activity against anaerobes (uptake is oxygen-dependent) and limited activity at acidic/abscess sites",
+    "Synergistic with beta-lactams but must NOT be mixed in the same infusion (mutual inactivation)",
+    "Avoid in myasthenia gravis and with neuromuscular blockers - risk of paralysis",
+    "Regulatory status: used in some European/Asian countries; not FDA-approved in the US - guidance from SmPC/BNF and aminoglycoside class data"
+  ],
+  "missed": "As this is a clinician-administered parenteral antibiotic, a missed dose should be given as soon as recognized and the dosing schedule adjusted by the prescriber; do not double up. Trough timing relative to the next dose should be reconsidered if the schedule is altered.",
+  "overdose": "Overdose or accumulation causes nephrotoxicity, ototoxicity, and neuromuscular blockade. Management is supportive: discontinue the drug, ensure hydration, and treat neuromuscular blockade with calcium salts and ventilatory support as needed. Hemodialysis (or hemofiltration) effectively removes sisomicin and can be used in serious overdose or renal failure.",
+  "refs": [
+    ["SmPC / national formulary - Sisomicin (aminoglycoside)", "https://www.medicines.org.uk/emc"],
+    ["BNF - Aminoglycosides (class monograph)", "https://bnf.nice.org.uk/treatment-summaries/aminoglycosides/"]
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "generic": "Tofacitinib",
+  "cls": "Janus kinase (JAK) inhibitor",
+  "pharm": "Immunomodulator / disease-modifying antirheumatic drug (DMARD)",
+  "tags": ["JAK inhibitor", "rheumatoid arthritis", "psoriatic arthritis", "ulcerative colitis", "DMARD"],
+  "quick": [
+    ["Adult dose", "RA/PsA: 5 mg PO BID or 11 mg XR once daily"],
+    ["Meal", "With or without food; XR tablet swallowed whole"],
+    ["Pregnancy", "Avoid; weigh risk, registry available"],
+    ["Lactation", "Avoid breastfeeding during and 18 h (IR)/36 h (XR) after"],
+    ["Renal", "Reduce dose in moderate-severe impairment"],
+    ["Hepatic", "Reduce dose in moderate; avoid in severe"],
+    ["Alcohol", "Limit; potential additive liver effects"],
+    ["Monitoring", "Lymphocytes, neutrophils, Hb, LFTs, lipids, TB, infection signs"]
+  ],
+  "summary": "Tofacitinib is an oral JAK inhibitor for rheumatoid arthritis, psoriatic arthritis, ankylosing spondylitis, ulcerative colitis and polyarticular JIA. Typical dose is 5 mg twice daily (immediate-release) or 11 mg once daily (extended-release). It carries a boxed warning for serious infections, mortality, malignancy, major adverse cardiovascular events and thrombosis.",
+  "indications": [
+    "Moderately to severely active rheumatoid arthritis with inadequate response/intolerance to one or more TNF blockers",
+    "Active psoriatic arthritis with inadequate response/intolerance to one or more TNF blockers",
+    "Active ankylosing spondylitis with inadequate response/intolerance to one or more TNF blockers",
+    "Moderately to severely active ulcerative colitis with inadequate response/intolerance to TNF blockers",
+    "Active polyarticular course juvenile idiopathic arthritis (oral solution/tablets) in patients >=2 years"
+  ],
+  "dosage": [
+    {"c": "RA / PsA / AS (adult)", "r": "Standard", "d": "5 mg IR twice daily or 11 mg XR once daily", "t": "BID (IR) or once daily (XR)", "n": "Lowest effective dose; not with biologic DMARDs/potent immunosuppressants"},
+    {"c": "Ulcerative colitis - induction", "r": "Induction", "d": "10 mg twice daily for at least 8 weeks", "t": "Twice daily", "n": "Up to 16 weeks; discontinue if no benefit"},
+    {"c": "Ulcerative colitis - maintenance", "r": "Maintenance", "d": "5 mg twice daily (10 mg BID only if needed, limited duration)", "t": "Twice daily", "n": "Use lowest effective dose"},
+    {"c": "Polyarticular JIA (>=2 yr)", "r": "Pediatric", "d": "Weight-based: 3.2 mg BID solution (10-20 kg) up to 5 mg BID (>=40 kg)", "t": "Twice daily", "n": "Use oral solution for small children"},
+    {"c": "Renal/hepatic impairment or strong CYP inhibitors", "r": "Adjusted", "d": "Reduce to half the total daily dose", "t": "Adjusted", "n": "Avoid in severe hepatic impairment"}
+  ],
+  "admin": [
+    "Before starting, evaluate for active and latent TB, screen for viral hepatitis, obtain CBC, and update immunizations",
+    "Do not initiate if absolute lymphocyte count <500, ANC <1000, or hemoglobin <9 g/dL",
+    "Swallow extended-release tablets whole; do not crush, split or chew",
+    "May be taken with or without food",
+    "Extended-release (11 mg XR) and immediate-release (5 mg) are not interchangeable on a per-tablet basis"
+  ],
+  "moa": "Tofacitinib inhibits Janus kinases (predominantly JAK1 and JAK3, with lesser JAK2 activity), interrupting the JAK-STAT signaling pathway. This blocks signaling of multiple cytokines and growth factors involved in inflammation and immune cell function, reducing inflammatory and immune responses.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to tofacitinib"],
+    "relative": ["Active serious infection including localized infection or TB", "Severe hepatic impairment", "Lymphocyte count <500, ANC <1000 or Hb <9 g/dL", "History of thrombosis or malignancy", "Concurrent biologic DMARDs or potent immunosuppressants"],
+    "monitor": ["Cardiovascular risk factors / current or past smokers (MACE, malignancy risk)", "Risk factors for venous thromboembolism", "Concomitant strong CYP3A4 inhibitors/inducers", "Latent or chronic infections (hepatitis, herpes zoster)"]
+  },
+  "preg": "Avoid during pregnancy; based on animal data it may cause fetal harm. Advise effective contraception during treatment. A pregnancy exposure registry exists.",
+  "lact": "Avoid breastfeeding during treatment and for 18 hours after the last immediate-release dose or 36 hours after the last extended-release dose due to potential serious adverse effects in the infant.",
+  "renal": "No adjustment in mild renal impairment. In moderate to severe renal impairment (including those on hemodialysis), reduce the total daily dose by half (e.g., 5 mg once daily for RA).",
+  "hepatic": "No adjustment in mild hepatic impairment. In moderate hepatic impairment, reduce the total daily dose by half. Use is not recommended in severe hepatic impairment.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole) - reduce tofacitinib dose", "Live vaccines - avoid during treatment", "Biologic DMARDs / potent immunosuppressants (azathioprine, cyclosporine) - increased immunosuppression, not recommended"],
+    "moderate": ["Moderate CYP3A4 plus potent CYP2C19 inhibitors (e.g., fluconazole) - reduce dose", "Strong CYP3A4 inducers (rifampin) - reduced efficacy, avoid"],
+    "minor": ["Methotrexate - no clinically significant PK interaction but increased immunosuppression"],
+    "food": "May be taken with or without food; high-fat meal does not meaningfully alter exposure.",
+    "alcohol": "Limit alcohol; potential additive hepatic effects and infection risk.",
+    "diagnostics": "Can lower lymphocytes/neutrophils/hemoglobin, raise LDL/HDL cholesterol and elevate liver enzymes and creatine kinase."
+  },
+  "se": {
+    "common": ["Upper respiratory tract infections", "Nasopharyngitis", "Diarrhea", "Headache", "Hypertension", "Increased blood cholesterol"],
+    "serious": ["Serious and opportunistic infections (including TB, herpes zoster)", "Major adverse cardiovascular events", "Malignancy including lymphoma", "Venous and arterial thrombosis", "GI perforation"],
+    "rare": ["Reactivation of viral hepatitis", "Interstitial lung disease", "Severe hypersensitivity/angioedema"],
+    "emergency": ["Sepsis or disseminated opportunistic infection", "Myocardial infarction / stroke", "Pulmonary embolism / deep vein thrombosis", "GI perforation"]
+  },
+  "monitoring": [
+    "Lymphocyte count, neutrophil count and hemoglobin at baseline, after 4-8 weeks and periodically",
+    "Liver enzymes periodically",
+    "Lipid panel 4-8 weeks after initiation",
+    "Latent/active TB before and during therapy; viral hepatitis screening",
+    "Signs of infection, thrombosis, cardiovascular events and malignancy"
+  ],
+  "counsel": [
+    "Report fever, cough, burning urination, painful skin rash (shingles) or other signs of infection promptly",
+    "Seek emergency care for chest pain, shortness of breath, leg swelling/pain or sudden weakness",
+    "Avoid live vaccines; keep immunizations up to date before starting",
+    "Tell your doctor if you smoke or have had cancer, clots or heart disease",
+    "Do not crush or split the extended-release tablet"
+  ],
+  "pk": [
+    ["Onset", "Clinical response over weeks"],
+    ["Peak", "0.5-1 hour (IR); ~4 hours (XR)"],
+    ["Half-life", "Approximately 3 hours (IR)"],
+    ["Duration", "Twice-daily (IR) or once-daily (XR) dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: serious infections, mortality, malignancy, major adverse cardiovascular events and thrombosis",
+    "Higher risk of MACE, malignancy and death seen versus TNF blockers in RA patients >=50 yr with a CV risk factor - reserve for inadequate TNF response",
+    "Screen and treat latent TB and viral hepatitis before initiating",
+    "Do not combine with biologic DMARDs or potent immunosuppressants",
+    "Halve the dose with strong CYP3A4 inhibitors and in moderate-severe renal or moderate hepatic impairment"
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose; in that case skip it and resume the schedule. Do not take two doses at once.",
+  "overdose": "There is no specific antidote. Pharmacokinetic data suggest more than 95% of a dose is eliminated within 24 hours. Treat overdose with supportive care and monitor for adverse reactions.",
+  "refs": [
+    ["FDA Tofacitinib (XELJANZ) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tofacitinib%22"],
+    ["FDA DailyMed - Tofacitinib", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

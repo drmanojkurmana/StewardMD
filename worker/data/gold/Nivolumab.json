@@ -1,0 +1,121 @@
+{
+  "generic": "Nivolumab",
+  "cls": "Antineoplastic / immune checkpoint inhibitor - programmed death receptor-1 (PD-1) blocking monoclonal antibody (IgG4)",
+  "pharm": "A fully human IgG4 monoclonal antibody that binds the PD-1 receptor on T cells and blocks its interaction with ligands PD-L1 and PD-L2, releasing PD-1 pathway-mediated inhibition of the immune response (including anti-tumor T-cell responses); this same de-repression drives immune-mediated adverse reactions in normal tissues.",
+  "tags": ["Biologic", "Rx only", "PD-1 checkpoint inhibitor", "Immune-mediated toxicity", "IV infusion", "Oncology"],
+  "quick": [
+    ["Adult dose", "240 mg IV every 2 weeks or 480 mg IV every 4 weeks (monotherapy, >=40 kg); regimen varies by indication/combination"],
+    ["Meal", "Not applicable (intravenous/subcutaneous)"],
+    ["Pregnancy", "Can cause fetal harm; avoid - effective contraception during and 5 months after last dose"],
+    ["Lactation", "Do not breastfeed during and for 5 months after the last dose"],
+    ["Renal", "No dose adjustment for mild-moderate impairment; limited data in severe"],
+    ["Hepatic", "No adjustment for mild impairment; limited data in moderate-severe; watch immune hepatitis"],
+    ["Alcohol", "No direct interaction; relevant mainly in hepatic monitoring"],
+    ["Monitoring", "Immune-mediated reactions, LFTs, thyroid/endocrine, creatinine, infusion reactions"]
+  ],
+  "summary": "Nivolumab (Opdivo) is a human IgG4 anti-PD-1 monoclonal antibody (immune checkpoint inhibitor) used across many cancers - including melanoma, non-small cell lung cancer, renal cell carcinoma, head and neck, urothelial, hepatocellular, colorectal (MSI-H/dMMR), esophageal/gastric cancers - as monotherapy or combined with ipilimumab and/or chemotherapy. It blocks PD-1, removing a brake on T-cell activity to enhance anti-tumor immunity. The hallmark and most important toxicities are IMMUNE-MEDIATED ADVERSE REACTIONS, which can affect any organ, may be severe or fatal, and can occur at any time (even after stopping): pneumonitis, colitis, hepatitis, endocrinopathies (hypothyroidism/hyperthyroidism, adrenal insufficiency, hypophysitis, type 1 diabetes), nephritis, and dermatologic reactions (including SJS/TEN/DRESS), plus less common myocarditis, neurologic, and ocular events. Infusion-related reactions also occur. No dose reductions are recommended - manage by withholding or permanently discontinuing and giving corticosteroids. The standard IV monotherapy schedules are 240 mg every 2 weeks or 480 mg every 4 weeks, infused over 30 minutes.",
+  "indications": [
+    "Melanoma - unresectable or metastatic (adults and pediatric >=12 years and >=30 kg), and adjuvant treatment of resected Stage IIB-IV melanoma",
+    "Non-small cell lung cancer - neoadjuvant (resectable) with chemotherapy and metastatic disease after progression on platinum-based chemotherapy",
+    "Renal cell carcinoma - first-line (with ipilimumab or with cabozantinib) and previously treated advanced disease",
+    "Squamous cell carcinoma of the head and neck - recurrent or metastatic after platinum-based therapy",
+    "Urothelial carcinoma - adjuvant high-risk, first-line with chemotherapy, and after platinum-based therapy",
+    "Microsatellite instability-high (MSI-H)/mismatch-repair-deficient (dMMR) metastatic colorectal cancer",
+    "Hepatocellular carcinoma",
+    "Esophageal and gastric/gastroesophageal junction cancers (various combinations, often PD-L1-based)",
+    "Classical Hodgkin lymphoma and other approved indications per current labeling"
+  ],
+  "dosage": [
+    {"c": "Monotherapy (most solid tumors), patient >=40 kg", "r": "Adult IV", "d": "240 mg every 2 weeks OR 480 mg every 4 weeks", "t": "Every 2 or 4 weeks", "n": "Infuse over 30 minutes; the two schedules give similar exposure"},
+    {"c": "Pediatric (>=12 yr) or adult <40 kg, monotherapy", "r": "Pediatric/low-weight IV", "d": "3 mg/kg every 2 weeks (max per labeling)", "t": "Every 2 weeks", "n": "Weight-based dosing where indicated"},
+    {"c": "Combination with ipilimumab (e.g., melanoma, RCC)", "r": "Adult IV", "d": "Nivolumab 1 mg/kg or 3 mg/kg with ipilimumab per indication, then nivolumab monotherapy 240 mg q2w / 480 mg q4w", "t": "Per cycle then maintenance", "n": "Exact mg/kg, sequence, and number of combination doses are indication-specific"},
+    {"c": "Combination with chemotherapy (e.g., NSCLC neoadjuvant, gastric, esophageal)", "r": "Adult IV", "d": "360 mg every 3 weeks with chemotherapy (or 240 mg q2w / 480 mg q4w per regimen)", "t": "Every 2-4 weeks per regimen", "n": "Follow the specific indication's combination schedule"},
+    {"c": "Severe (Grade 3) immune-mediated reaction", "r": "Dose modification", "d": "Withhold nivolumab; give systemic corticosteroids 1-2 mg/kg/day prednisone equivalent until <=Grade 1, then taper over >=1 month", "t": "-", "n": "No dose reductions are used"},
+    {"c": "Life-threatening (Grade 4) or recurrent severe reaction", "r": "Dose modification", "d": "Permanently discontinue", "t": "-", "n": "Also discontinue if corticosteroid cannot be reduced to <=10 mg/day prednisone within 12 weeks"}
+  ],
+  "admin": [
+    "Administer as an intravenous infusion over 30 minutes through a sterile, non-pyrogenic, low-protein-binding in-line filter (0.2-1.2 micron)",
+    "Do not administer as an IV push or bolus; do not co-infuse other drugs in the same line",
+    "Dilute per labeling (may be given undiluted or diluted in 0.9% sodium chloride or 5% dextrose); after preparation use within 8 hours at room temperature or 24 hours refrigerated",
+    "When given with ipilimumab, infuse nivolumab first, then ipilimumab on the same day, using separate infusion bags and filters",
+    "No dose reductions - manage toxicity by withholding/discontinuing and giving corticosteroids; monitor for infusion reactions and slow/interrupt/stop for reactions"
+  ],
+  "moa": "Nivolumab is a human IgG4 monoclonal antibody that binds to the programmed death receptor-1 (PD-1) on T cells and blocks its interaction with its ligands PD-L1 and PD-L2. PD-1 is an inhibitory checkpoint receptor; engagement by PD-L1/PD-L2 (which tumors often upregulate) suppresses T-cell proliferation, cytokine production, and cytotoxic activity, allowing immune escape. By blocking PD-1, nivolumab releases this inhibition and restores/enhances anti-tumor T-cell responses, including reduced tumor growth in preclinical models. Because this de-repression is systemic, activated T cells can also attack normal tissues, producing the characteristic immune-mediated adverse reactions. The IgG4 backbone minimizes complement and antibody-dependent cytotoxicity against the bound T cells.",
+  "contra": {
+    "absolute": [
+      "None listed in the US labeling (no formal contraindications)"
+    ],
+    "relative": [
+      "Active, severe immune-mediated adverse reaction (withhold/discontinue)",
+      "Allogeneic hematopoietic stem cell transplant before or after therapy (risk of severe/fatal GVHD and veno-occlusive disease)",
+      "History of organ transplant (risk of allograft rejection)",
+      "Active autoimmune disease (increased risk of flare)",
+      "Avoid in combination with a thalidomide analogue plus dexamethasone in multiple myeloma (increased mortality)"
+    ],
+    "monitor": [
+      "Immune-mediated pneumonitis - new/worsening cough, dyspnea, chest pain (chest imaging as needed)",
+      "Immune-mediated colitis/diarrhea",
+      "Immune-mediated hepatitis - liver enzymes and bilirubin",
+      "Endocrinopathies - thyroid function, morning cortisol/ACTH, glucose (type 1 diabetes), pituitary function",
+      "Immune-mediated nephritis - serum creatinine",
+      "Dermatologic reactions including SJS/TEN/DRESS",
+      "Myocarditis, neurologic (Guillain-Barre, myasthenia, encephalitis) and ocular (uveitis) reactions",
+      "Infusion-related reactions during and after administration"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, nivolumab can cause fetal harm; PD-1 blockade can disrupt maternal-fetal immune tolerance and increase abortion or stillbirth. Verify pregnancy status before initiation. Advise females of reproductive potential to use effective contraception during treatment and for 5 months after the last dose. Avoid in pregnancy unless the benefit clearly justifies the risk.",
+  "lact": "There are no data on the presence of nivolumab in human milk or its effects on the breastfed infant. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 5 months after the last dose.",
+  "renal": "No clinically important difference in clearance was observed across mild to moderate renal impairment, and no starting-dose adjustment is recommended. Data in severe renal impairment are limited. Monitor serum creatinine for immune-mediated nephritis.",
+  "hepatic": "No dose adjustment is needed for mild hepatic impairment. There are limited data in moderate to severe hepatic impairment. Monitor liver enzymes and bilirubin closely because immune-mediated hepatitis can occur and requires withholding/discontinuation and corticosteroids.",
+  "interactions": {
+    "major": [
+      "Allogeneic HSCT (before or after nivolumab) - fatal/serious GVHD, hyperacute GVHD, hepatic veno-occlusive disease",
+      "Multiple myeloma: PD-1 inhibitor plus thalidomide analogue + dexamethasone - increased mortality (not recommended outside trials)"
+    ],
+    "moderate": [
+      "Systemic corticosteroids/immunosuppressants before starting - may blunt efficacy (but are required to treat immune-mediated reactions)",
+      "Other immune checkpoint inhibitors (e.g., ipilimumab) - additive immune-mediated toxicity (intended combinations have higher toxicity rates)"
+    ],
+    "minor": ["No formal cytochrome P450 drug-drug interaction studies (monoclonal antibody)"],
+    "food": "Not applicable (intravenous biologic).",
+    "alcohol": "No direct interaction; minimize hepatotoxic exposures given risk of immune-mediated hepatitis.",
+    "diagnostics": "May cause thyroid function and glucose abnormalities (endocrinopathies) and transaminase/creatinine elevations reflecting immune-mediated organ injury."
+  },
+  "se": {
+    "common": ["Fatigue", "Musculoskeletal pain", "Rash and pruritus", "Diarrhea", "Nausea/decreased appetite", "Cough", "Hypothyroidism", "Constipation", "Edema", "Abdominal pain"],
+    "serious": ["Immune-mediated pneumonitis", "Immune-mediated colitis", "Immune-mediated hepatitis", "Endocrinopathies (adrenal insufficiency, hypophysitis, thyroid disorders, type 1 diabetes/ketoacidosis)", "Immune-mediated nephritis and renal dysfunction", "Severe dermatologic reactions (SJS, TEN, DRESS)", "Infusion-related reactions"],
+    "rare": ["Immune-mediated myocarditis/pericarditis", "Neurologic: Guillain-Barre syndrome, myasthenia gravis, encephalitis, demyelination", "Uveitis and other ocular inflammation", "Pancreatitis", "Myositis/rhabdomyolysis", "Solid organ transplant rejection", "Severe GVHD after allogeneic HSCT"],
+    "emergency": ["Severe/Grade 4 immune-mediated reaction (e.g., fulminant myocarditis, severe colitis with perforation, pneumonitis with respiratory failure)", "Diabetic ketoacidosis or adrenal crisis", "Anaphylaxis/severe infusion reaction", "Stevens-Johnson syndrome / toxic epidermal necrolysis"]
+  },
+  "monitoring": ["Liver enzymes (ALT, AST) and bilirubin at baseline and periodically (immune-mediated hepatitis)", "Thyroid function (TSH, free T4) and other endocrine tests (morning cortisol/ACTH, glucose) at baseline and periodically", "Serum creatinine (immune-mediated nephritis)", "Pulmonary symptoms and imaging for pneumonitis", "Gastrointestinal symptoms (diarrhea/colitis)", "Skin examination for severe cutaneous reactions", "Cardiac, neurologic, and ocular symptoms (myocarditis, GBS/myasthenia, uveitis)", "Vital signs/symptoms of infusion reaction during and after each infusion"],
+  "counsel": [
+    "This medicine boosts your immune system to fight cancer, but it can also make the immune system attack normal organs",
+    "Call your care team right away for new or worsening cough or shortness of breath, diarrhea or blood/mucus in stool, severe belly pain, yellowing of the skin/eyes, severe tiredness, dizziness, or rapid weight changes",
+    "Report severe rash, blistering, or skin peeling immediately",
+    "Tell your team about new headaches, vision changes, palpitations or chest pain, muscle weakness, or excessive thirst/urination - these can signal serious immune reactions",
+    "Reactions can happen during the infusion or weeks to months later, even after treatment ends",
+    "Do not become pregnant during treatment or for 5 months after; do not breastfeed during this time"
+  ],
+  "pk": [
+    ["Onset", "Receptor occupancy from first dose; tumor responses over weeks to months"],
+    ["Peak", "End of the 30-minute intravenous infusion (Cmax at completion)"],
+    ["Half-life", "Geometric mean elimination half-life approximately 25-27 days"],
+    ["Duration", "Steady state by ~12 weeks; dosed every 2-4 weeks"],
+    ["Storage", "Store refrigerated 2-8 C, protect from light in original carton; do not freeze or shake"]
+  ],
+  "pearls": [
+    "Biologic record - data sourced from the FDA prescribing information (Opdivo) and openFDA labeling",
+    "IMMUNE-MEDIATED ADVERSE REACTIONS are the defining risk: can hit any organ, may be severe/fatal, and can occur during or long after treatment - have a low threshold to investigate",
+    "Cornerstone of management is to withhold or permanently discontinue and give systemic corticosteroids (1-2 mg/kg/day prednisone equivalent), then taper over >=1 month; NO dose reductions",
+    "Endocrinopathies (thyroid, adrenal, hypophysitis, type 1 diabetes) may need lifelong hormone replacement - drug can sometimes be continued with replacement",
+    "Avoid before/around allogeneic HSCT (fatal GVHD/VOD) and in transplant recipients (rejection); avoid the myeloma triplet combination (increased mortality)",
+    "240 mg q2w and 480 mg q4w monotherapy give similar exposure; infuse over 30 minutes"
+  ],
+  "missed": "Infusions are scheduled and given by the healthcare team. If an appointment is missed, contact the oncology team to reschedule as soon as possible; the team will adjust the schedule. Do not attempt to make up doses on your own.",
+  "overdose": "There is no specific antidote for nivolumab overdose. In case of overdose, monitor closely for signs and symptoms of adverse reactions, particularly immune-mediated reactions, and institute appropriate symptomatic and supportive treatment including corticosteroids for immune-mediated toxicity as indicated.",
+  "refs": [
+    ["FDA Prescribing Information / openFDA - Opdivo (nivolumab)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22OPDIVO%22"],
+    ["DailyMed - Opdivo (nivolumab) injection", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f570b9c4-6846-4de2-abfa-4d0a4ae4e394"],
+    ["FDA Label - Opdivo (nivolumab) accessdata", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2024/125554s128lbl.pdf"]
+  ]
+}

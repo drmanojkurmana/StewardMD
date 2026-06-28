@@ -1,0 +1,91 @@
+{
+  "generic": "Nortriptyline",
+  "cls": "Tricyclic antidepressant (secondary amine)",
+  "pharm": "Antidepressant / neuropathic pain adjunct",
+  "tags": ["TCA", "depression", "neuropathic pain", "suicidality warning", "anticholinergic", "QT/cardiac risk"],
+  "quick": [
+    ["Adult dose", "25 mg PO 3-4 times daily, or total once daily; max 150 mg/day"],
+    ["Meal", "With or without food; take at bedtime to limit daytime sedation"],
+    ["Pregnancy", "Use only if benefit outweighs risk; limited data"],
+    ["Lactation", "Excreted in milk; use caution"],
+    ["Renal", "No specific adjustment; use caution"],
+    ["Hepatic", "Use lower doses; metabolized hepatically"],
+    ["Alcohol", "Avoid; additive CNS depression and overdose risk"],
+    ["Monitoring", "Mood/suicidality, ECG, plasma level 50-150 ng/mL if >100 mg/day"]
+  ],
+  "summary": "Nortriptyline is a secondary-amine tricyclic antidepressant used for depression and (off-label) neuropathic pain. It carries a boxed warning for increased suicidality in children, adolescents and young adults. Usual adult dose is 25 mg three to four times daily, up to 150 mg/day, with plasma monitoring (therapeutic window 50-150 ng/mL) above 100 mg/day. Anticholinergic effects and cardiotoxicity in overdose are key concerns.",
+  "indications": [
+    "Relief of symptoms of depression (endogenous depression more likely to respond)"
+  ],
+  "dosage": [
+    {"c": "Depression (adult)", "r": "Standard", "d": "25 mg three or four times daily; or total daily dose once daily", "t": "TID-QID or once daily", "n": "Start low and titrate; monitor plasma level if >100 mg/day"},
+    {"c": "Depression (elderly/adolescent)", "r": "Reduced", "d": "30-50 mg/day in divided doses or once daily", "t": "Divided or once daily", "n": "Lower doses; close monitoring"},
+    {"c": "Maintenance", "r": "Standard", "d": "Lowest dose maintaining remission", "t": "Once daily or divided", "n": "Continue for adequate period after remission"},
+    {"c": "Maximum", "r": "Ceiling", "d": "150 mg/day", "t": "-", "n": "Doses above 150 mg/day not recommended; keep plasma 50-150 ng/mL"}
+  ],
+  "admin": [
+    "Administer orally as capsules; not recommended for children",
+    "Initiate at a low dose and increase gradually per clinical response and tolerance",
+    "Monitor plasma levels (optimum 50-150 ng/mL) when daily dose exceeds 100 mg",
+    "Allow at least 14 days between an MAOI and nortriptyline in either direction",
+    "Reduce dose for minor adverse effects; discontinue promptly for serious or allergic reactions"
+  ],
+  "moa": "The antidepressant mechanism is not fully established. Nortriptyline inhibits reuptake of norepinephrine (and to a lesser extent serotonin) at presynaptic neurons, increasing synaptic monoamine availability. It also antagonizes histamine, serotonin and acetylcholine receptors, accounting for sedative and anticholinergic effects, and interferes with catecholamine transport, release and storage.",
+  "contra": {
+    "absolute": ["Concomitant MAOIs or within 14 days (serotonin syndrome risk)", "Concomitant linezolid or IV methylene blue", "Hypersensitivity to nortriptyline or other tricyclics", "Acute recovery period after myocardial infarction"],
+    "relative": ["Cardiovascular disease, conduction abnormalities", "Seizure disorder", "Narrow-angle glaucoma", "Urinary retention / BPH", "Hyperthyroidism", "Severe hepatic impairment"],
+    "monitor": ["Suicidality, especially early treatment and dose changes", "ECG and cardiac status", "Anticholinergic burden"]
+  },
+  "preg": "Limited human data. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus. Neonatal withdrawal/anticholinergic effects possible with third-trimester exposure.",
+  "lact": "Nortriptyline is excreted in breast milk in small amounts. Exercise caution and weigh benefits against risks; monitor the infant for sedation and anticholinergic effects.",
+  "renal": "No specific dose adjustment is provided; use with caution and monitor in renal impairment.",
+  "hepatic": "Nortriptyline is extensively metabolized by the liver; use lower doses and monitor closely in hepatic impairment.",
+  "interactions": {
+    "major": ["MAOIs (including linezolid, IV methylene blue) - hypertensive crisis / serotonin syndrome; contraindicated", "Other serotonergic drugs (SSRIs, SNRIs, tramadol, triptans) - serotonin syndrome", "Class IA/III antiarrhythmics and QT-prolonging drugs - additive cardiac conduction risk", "CYP2D6 inhibitors (fluoxetine, paroxetine, quinidine, bupropion) - increased nortriptyline levels"],
+    "moderate": ["CNS depressants and alcohol - additive sedation", "Anticholinergic agents - additive anticholinergic toxicity", "Sympathomimetics - enhanced pressor effects", "Cimetidine - increased TCA levels", "Enzyme inducers (rifampin, carbamazepine, phenytoin) - decreased levels"],
+    "minor": ["Clonidine and guanethidine - reduced antihypertensive effect", "Thyroid hormone - enhanced antidepressant and arrhythmic effects"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid alcohol; it potentiates CNS and respiratory depression and increases overdose lethality.",
+    "diagnostics": "Can alter ECG (QRS widening, QT prolongation); may cause false test results in some assays."
+  },
+  "se": {
+    "common": ["Dry mouth", "Constipation", "Blurred vision", "Drowsiness/sedation", "Orthostatic hypotension", "Weight gain", "Urinary hesitancy", "Tachycardia"],
+    "serious": ["Cardiac arrhythmias, heart block, QT prolongation", "Seizures", "Serotonin syndrome", "Bone marrow depression including agranulocytosis"],
+    "rare": ["Paralytic ileus", "Mania/hypomania switch", "Gynecomastia, galactorrhea", "Photosensitization", "SIADH/hyponatremia"],
+    "emergency": ["Suicidal ideation or behavior", "Severe arrhythmia or cardiac arrest (especially overdose)", "Seizures", "Serotonin syndrome"]
+  },
+  "monitoring": [
+    "Mood, suicidality and behavioral changes, especially in first weeks and at dose changes",
+    "Baseline and periodic ECG, particularly in older patients or cardiac disease",
+    "Plasma nortriptyline level (50-150 ng/mL) when dose exceeds 100 mg/day",
+    "Blood pressure (orthostatic), CBC if signs of dyscrasia",
+    "Anticholinergic effects (constipation, urinary retention)"
+  ],
+  "counsel": [
+    "Watch for and report worsening mood, agitation or thoughts of self-harm, especially early in treatment",
+    "May take 2-4 weeks for full antidepressant effect; do not stop abruptly",
+    "Rise slowly to avoid dizziness; expect dry mouth and constipation",
+    "Avoid alcohol and other sedatives; use caution driving until effects known",
+    "Use sunscreen due to photosensitivity; tell prescriber of all medicines (MAOIs contraindicated)"
+  ],
+  "pk": [
+    ["Onset", "Antidepressant effect over 2-4 weeks"],
+    ["Peak", "Plasma peak ~7-8.5 hours"],
+    ["Half-life", "Approximately 18-44 hours"],
+    ["Duration", "Allows once-daily maintenance dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: increased suicidality in children, adolescents and young adults (<=24 years) - monitor closely; not approved in pediatrics",
+    "Therapeutic plasma window 50-150 ng/mL; both low and high levels reduce efficacy",
+    "Secondary amine - fewer anticholinergic/sedative effects than amitriptyline",
+    "Highly cardiotoxic in overdose (QRS widening predicts toxicity) - prescribe limited quantities to at-risk patients",
+    "Contraindicated within 14 days of an MAOI"
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose; then skip it. Do not double the dose. For once-daily bedtime dosing, skip a missed dose if it is morning to avoid daytime drowsiness.",
+  "overdose": "TCA overdose can be fatal. Critical features include cardiac dysrhythmias, QRS widening, severe hypotension, seizures and CNS depression/coma. Obtain ECG and begin continuous cardiac monitoring immediately, secure the airway, IV access and gastric decontamination; sodium bicarbonate for QRS widening/arrhythmia. Contact a poison control center; observe at least 6 hours with cardiac monitoring.",
+  "refs": [
+    ["FDA Nortriptyline Hydrochloride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22nortriptyline+hydrochloride%22"],
+    ["FDA DailyMed - Nortriptyline", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

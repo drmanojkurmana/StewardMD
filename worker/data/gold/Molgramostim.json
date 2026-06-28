@@ -1,0 +1,121 @@
+{
+  "generic": "Molgramostim (recombinant human GM-CSF, rhuGM-CSF)",
+  "cls": "Recombinant human granulocyte-macrophage colony-stimulating factor (GM-CSF) - hematopoietic growth factor / myeloid stimulant (biologic)",
+  "pharm": "A non-glycosylated recombinant human granulocyte-macrophage colony-stimulating factor produced in E. coli that binds GM-CSF receptors on myeloid progenitors, stimulating proliferation, differentiation, and functional activation of neutrophils, monocytes/macrophages, and other myeloid cells to raise white-cell counts and enhance host defense.",
+  "tags": ["Biologic", "Not FDA-approved (EU/insert-based)", "GM-CSF", "Hematopoietic growth factor", "Neutropenia", "Injectable (SC/IV)"],
+  "quick": [
+    ["Adult dose", "About 5-10 micrograms/kg/day SC (or IV infusion); max ~10 mcg/kg/day"],
+    ["Meal", "Not applicable - given by subcutaneous injection or IV infusion"],
+    ["Pregnancy", "Avoid unless clearly necessary; human safety data lacking"],
+    ["Lactation", "Avoid; excretion in milk unknown"],
+    ["Renal", "Monitor; cautious use in renal impairment"],
+    ["Hepatic", "Monitor liver function; caution in hepatic impairment"],
+    ["Alcohol", "No specific interaction documented"],
+    ["Monitoring", "CBC/WBC and differential, platelets, fluid status, liver/renal function"]
+  ],
+  "summary": "Molgramostim is a non-glycosylated recombinant human GM-CSF (E. coli-derived) marketed in Europe (e.g., Leucomax) chiefly to shorten neutropenia and reduce infection risk after myelosuppressive chemotherapy or bone-marrow transplantation, and to manage drug-induced (e.g., ganciclovir-related) neutropenia; it is not FDA-approved. As a biologic, authoritative dosing/safety information must be drawn from the EMA/SmPC and product insert (the data here reflect those sources and product literature). It is given by subcutaneous injection or intravenous infusion, typically about 5-10 micrograms/kg/day, and stimulates production and activation of neutrophils and monocytes/macrophages. Characteristic effects include bone pain, fever/chills, and injection-site reactions; a first-dose reaction (dyspnea/hypotension) and, at higher doses, capillary-leak syndrome with edema and effusions can occur. It is contraindicated with hypersensitivity to GM-CSF or yeast/E. coli-derived product components and should not be given concurrently with (or within ~24 hours of) cytotoxic chemotherapy or radiotherapy. A newer inhaled molgramostim product is under development/approval for autoimmune pulmonary alveolar proteinosis; the dosing here refers to the systemic neutropenia setting.",
+  "indications": [
+    "Reduction of the duration of neutropenia and associated infection risk following myelosuppressive cytotoxic chemotherapy",
+    "Acceleration of myeloid (neutrophil) recovery after autologous or allogeneic bone-marrow transplantation",
+    "Management of drug-induced neutropenia (e.g., ganciclovir-induced neutropenia)"
+  ],
+  "dosage": [
+    {"c": "Chemotherapy-induced neutropenia", "r": "Adult subcutaneous", "d": "About 5-10 micrograms/kg/day (max ~10 mcg/kg/day)", "t": "Once daily for ~7-10 days", "n": "Begin after, not concurrent with, the chemotherapy cycle; continue per neutrophil recovery"},
+    {"c": "Bone-marrow transplantation", "r": "Adult IV infusion", "d": "About 10 micrograms/kg/day", "t": "IV infusion over 4-6 hours daily, starting the day of transplant; continued ~1 month", "n": "Titrate to neutrophil recovery per protocol/insert"},
+    {"c": "Ganciclovir-induced neutropenia", "r": "Adult subcutaneous", "d": "About 5 micrograms/kg/day (max ~10 mcg/kg/day)", "t": "Once daily", "n": "Adjust to neutrophil response"},
+    {"c": "Timing relative to cytotoxic therapy", "r": "All routes", "d": "Do not give within ~24 hours before or after chemotherapy/radiotherapy", "t": "-", "n": "Concurrent administration with cytotoxic therapy is contraindicated"}
+  ],
+  "admin": [
+    "Administer by subcutaneous injection or intravenous infusion as specified by the indication/insert",
+    "Reconstitute and prepare per the product insert; inspect the solution before use",
+    "Do not administer concurrently with, or within about 24 hours of, cytotoxic chemotherapy or radiotherapy",
+    "Rotate subcutaneous injection sites to reduce local reactions",
+    "Have monitoring/supportive measures available for a possible first-dose reaction (dyspnea, hypotension)",
+    "Store refrigerated and protect per insert; do not shake vigorously (protein product)"
+  ],
+  "moa": "Molgramostim is recombinant human granulocyte-macrophage colony-stimulating factor (GM-CSF), a hematopoietic growth factor. It binds to GM-CSF receptors on the surface of myeloid progenitor cells and mature effector cells, activating intracellular signaling (JAK/STAT and related pathways) that drives proliferation and differentiation of granulocyte (neutrophil), monocyte/macrophage, and other myeloid lineages. It also enhances the function of mature cells - phagocytosis, oxidative burst, antibody-dependent cytotoxicity, and antigen presentation - thereby increasing circulating neutrophil and monocyte counts and bolstering host defense against infection. This shortens the depth and duration of chemotherapy- or transplant-related neutropenia.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to GM-CSF, molgramostim, or to yeast/E. coli-derived product components or excipients",
+      "Concomitant administration with cytotoxic chemotherapy or radiotherapy (and within ~24 hours before/after)",
+      "Excessive (>=10%) myeloid blasts in bone marrow or peripheral blood (myeloid malignancy stimulation risk)"
+    ],
+    "relative": [
+      "Pre-existing fluid overload, pleural/pericardial effusion, or capillary-leak risk",
+      "Significant cardiac, renal, or hepatic impairment",
+      "Autoimmune or inflammatory disease (potential aggravation)",
+      "Pregnancy and breastfeeding (insufficient safety data)"
+    ],
+    "monitor": [
+      "Complete blood count with differential and platelets (avoid excessive leukocytosis)",
+      "Fluid status / weight, blood pressure, and signs of capillary-leak syndrome or effusions",
+      "First-dose reaction (dyspnea, hypotension, hypoxia)",
+      "Liver and renal function",
+      "Injection-site and systemic (fever, bone pain) reactions"
+    ]
+  },
+  "preg": "There are no adequate human safety data; use during pregnancy should be avoided unless the potential benefit clearly outweighs the risk to the fetus. As a recombinant protein, formal reproductive risk data are limited - reflecting EMA/insert-based information.",
+  "lact": "It is not known whether molgramostim is excreted in human milk. Because of the lack of data and the potential for adverse effects in the infant, breastfeeding is not recommended during treatment.",
+  "renal": "Specific renal dose adjustments are not well defined; monitor renal function and use with caution in patients with renal impairment, particularly given the potential for fluid shifts and capillary-leak syndrome.",
+  "hepatic": "Transient elevations of liver enzymes have been reported with GM-CSF therapy. Monitor liver function and use with caution in hepatic impairment; specific dose adjustments are not well established.",
+  "interactions": {
+    "major": [
+      "Cytotoxic chemotherapy / radiotherapy - must not be given concurrently or within ~24 hours, as rapidly dividing myeloid cells are more sensitive to cytotoxic damage and efficacy is compromised"
+    ],
+    "moderate": [
+      "Corticosteroids - may potentiate myeloproliferative/inflammatory effects and leukocytosis",
+      "Lithium - may potentiate the leukocyte-stimulating effect",
+      "Other myeloid growth factors - additive effects on white-cell counts"
+    ],
+    "minor": ["No significant cytochrome P450 metabolic interactions (a protein, cleared by catabolism/receptor-mediated uptake)"],
+    "food": "Not applicable - administered parenterally.",
+    "alcohol": "No specific interaction documented.",
+    "diagnostics": "Causes leukocytosis and may transiently elevate alkaline phosphatase, LDH, and liver enzymes; can affect bone-scan and other lab interpretations - interpret counts in clinical context."
+  },
+  "se": {
+    "common": ["Bone/musculoskeletal pain", "Fever and chills", "Injection-site reactions", "Rash/flushing", "Nausea and vomiting", "Diarrhea", "Fatigue/malaise", "Myalgia", "Headache"],
+    "serious": ["Capillary-leak syndrome (edema, hypotension, pleural/pericardial effusion)", "First-dose reaction (dyspnea and hypotension within hours of the first dose)", "Severe hypersensitivity/anaphylactoid reactions", "Excessive leukocytosis", "Arrhythmia/hypotension"],
+    "rare": ["Pericarditis / pericardial effusion", "Pleural effusion", "Thrombosis", "Worsening of underlying inflammatory or autoimmune disease", "Stimulation of underlying myeloid malignancy"],
+    "emergency": ["Severe first-dose reaction with respiratory distress and hypotension", "Anaphylaxis / severe hypersensitivity", "Capillary-leak syndrome with hemodynamic compromise", "Significant pleural/pericardial effusion (tamponade physiology)"]
+  },
+  "monitoring": [
+    "Complete blood count with differential and platelet count, frequently, to guide dosing and avoid excessive leukocytosis",
+    "Body weight, fluid balance, blood pressure, and signs of capillary-leak syndrome or effusions",
+    "Close observation around the first dose for dyspnea/hypotension",
+    "Liver and renal function tests",
+    "Temperature and infection status; injection-site reactions",
+    "Pulmonary/cardiac status if dyspnea, edema, or chest symptoms develop"
+  ],
+  "counsel": [
+    "This medicine is a protein given by injection under the skin or into a vein, usually in hospital or clinic",
+    "Bone pain, muscle aches, fever, and chills are common and can often be eased with simple analgesics - tell your team if severe",
+    "Report shortness of breath, swelling, rapid weight gain, or dizziness, especially after the first dose",
+    "Tell your team about any allergy to this drug, to GM-CSF, or to yeast/E. coli-based products",
+    "It is not given on the same day as your chemotherapy or radiotherapy",
+    "Keep all blood-test appointments so your white-cell count can be checked",
+    "Store as instructed (usually refrigerated) and do not shake the vial"
+  ],
+  "pk": [
+    ["Onset", "Neutrophil/monocyte counts begin to rise within days of starting therapy"],
+    ["Peak", "Plasma peaks within a few hours of subcutaneous dosing"],
+    ["Half-life", "Short - on the order of 1-2 hours (somewhat longer than glycosylated GM-CSF)"],
+    ["Duration", "White-cell counts fall toward baseline within days of stopping; dosed daily"],
+    ["Storage", "Store refrigerated (2-8 C) per insert; protect from light and do not shake or freeze"]
+  ],
+  "pearls": [
+    "BIOLOGIC and NOT FDA-approved - authoritative dosing/safety must come from the EMA/SmPC and product insert (e.g., Leucomax); data here are insert/literature-based",
+    "Non-glycosylated E. coli-derived rhuGM-CSF; stimulates neutrophils AND monocytes/macrophages (broader than G-CSF)",
+    "Do NOT give within ~24 hours of cytotoxic chemotherapy or radiotherapy",
+    "Watch for the first-dose reaction (dyspnea/hypotension) and, at higher doses, capillary-leak syndrome",
+    "More inflammatory toxicity (fever, bone pain) than G-CSF - it was withdrawn from some markets in favor of G-CSF",
+    "Contraindicated with hypersensitivity to GM-CSF or yeast/E. coli-derived components",
+    "A separate inhaled molgramostim product is being developed/approved for autoimmune pulmonary alveolar proteinosis (different dosing)"
+  ],
+  "missed": "Doses are given by a healthcare professional on a set schedule. If a scheduled dose is missed, contact the treating team for advice on timing of the next dose - do not give two doses close together to make up for a missed one.",
+  "overdose": "There is no specific antidote. Overdose may produce marked leukocytosis and amplified adverse effects (fever, bone pain, dyspnea/hypotension, capillary-leak syndrome). Stop the drug and provide supportive care with hemodynamic and respiratory support, fluid management for capillary leak, and monitoring of blood counts until they normalize.",
+  "refs": [
+    ["Molgramostim - ScienceDirect Topics overview", "https://www.sciencedirect.com/topics/medicine-and-dentistry/molgramostim"],
+    ["Molgramostim drug information (indications/dosage) - Medindia", "https://www.medindia.net/doctors/drug_information/molgramostim.htm"],
+    ["Efficacy and Safety of Inhaled Molgramostim (rhGM-CSF) in Autoimmune Pulmonary Alveolar Proteinosis - ClinicalTrials.gov protocol", "https://cdn.clinicaltrials.gov/large-docs/80/NCT02702180/Prot_000.pdf"]
+  ]
+}

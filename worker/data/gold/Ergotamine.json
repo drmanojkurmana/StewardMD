@@ -1,0 +1,116 @@
+{
+  "generic": "Ergotamine (Ergotamine tartrate, often with caffeine)",
+  "cls": "Ergot alkaloid (partial agonist/antagonist at tryptaminergic, dopaminergic, and alpha-adrenergic receptors)",
+  "pharm": "Antimigraine vasoconstrictor",
+  "tags": ["ergot alkaloid", "migraine", "vasoconstrictor", "cluster headache", "antimigraine", "abortive", "CYP3A4"],
+  "quick": [
+    ["Adult dose", "Sublingual: 2 mg at onset, then 2 mg every 30 min as needed; max 6 mg/attack and 10 mg/week"],
+    ["Meal", "May be taken without regard to food; nausea is common"],
+    ["Pregnancy", "Contraindicated - oxytocic and may cause fetal harm"],
+    ["Lactation", "Contraindicated - excreted in milk; ergotism, vomiting, diarrhea in infant; may inhibit lactation"],
+    ["Renal", "Contraindicated in renal impairment"],
+    ["Hepatic", "Contraindicated in hepatic impairment"],
+    ["Alcohol", "Alcohol may worsen migraine; no specific pharmacologic interaction"],
+    ["Monitoring", "Peripheral circulation/ischemia, signs of ergotism, frequency of use (rebound)"]
+  ],
+  "summary": "Ergotamine is an ergot alkaloid used to abort or prevent vascular (migraine and cluster) headaches, usually combined with caffeine to enhance absorption. It acts as a partial agonist/antagonist at serotonergic, dopaminergic, and alpha-adrenergic receptors, producing cranial vasoconstriction and reduced extracranial blood flow. It carries a BOXED WARNING: concomitant use with potent CYP3A4 inhibitors is contraindicated because it can cause serious or life-threatening peripheral ischemia (vasospasm and reduced perfusion of extremities) and cerebral/cardiac ischemia. It is contraindicated in pregnancy, vascular disease, sepsis, and renal/hepatic impairment.",
+  "indications": [
+    "Abortive or preventive treatment of vascular headache, such as migraine, migraine variants, or so-called histaminic (cluster) headache"
+  ],
+  "dosage": [
+    {"c": "Acute migraine/cluster (sublingual)", "r": "Adult", "d": "2 mg sublingually at first sign of attack, then 2 mg every 30 minutes as needed", "t": "At onset, repeat q30 min", "n": "Max 6 mg per attack; max 10 mg per week"},
+    {"c": "Acute migraine/cluster (oral with caffeine)", "r": "Adult", "d": "Ergotamine 1 mg + caffeine 100 mg: 2 tablets at onset, then 1 tablet every 30 minutes as needed", "t": "At onset, repeat q30 min", "n": "Max 6 tablets per attack; max 10 tablets per week"},
+    {"c": "Acute migraine/cluster (rectal with caffeine)", "r": "Adult", "d": "Ergotamine 2 mg + caffeine 100 mg suppository: insert 1 at onset, may repeat after 1 hour", "t": "At onset, repeat once after 1 h", "n": "Max 2 suppositories per attack; max 5 per week"}
+  ],
+  "admin": [
+    "Take at the first sign of an attack for best effect",
+    "For sublingual tablets, allow the tablet to dissolve under the tongue; do not crush or swallow",
+    "Do not exceed the per-attack and weekly maximum doses",
+    "Avoid use on more than about 10 days per month to prevent ergotism and rebound headache"
+  ],
+  "moa": "Ergotamine is a partial agonist and/or antagonist at tryptaminergic (serotonin 5-HT), dopaminergic, and alpha-adrenergic receptors depending on their site. In migraine it constricts dilated cranial and extracranial arteries through agonism at 5-HT1B/1D and alpha-adrenergic receptors and depresses central vasomotor centers, reducing the pulsatile vasodilation thought to cause vascular headache. At higher doses or with reduced clearance its strong vasoconstrictor action can produce ischemia.",
+  "contra": {
+    "absolute": [
+      "Concomitant use of potent CYP3A4 inhibitors (e.g., protease inhibitors like ritonavir/nelfinavir, macrolide antibiotics like clarithromycin/erythromycin, and azole antifungals like ketoconazole/itraconazole) - BOXED WARNING: risk of serious and/or life-threatening peripheral ischemia",
+      "Pregnancy (oxytocic; may harm the fetus)",
+      "Peripheral vascular disease, coronary artery disease, hypertension (uncontrolled)",
+      "Sepsis",
+      "Hepatic or renal impairment",
+      "Use within 24 hours of triptans (5-HT1 agonists) or other ergot-type/ergot-containing drugs",
+      "Known hypersensitivity to ergot alkaloids"
+    ],
+    "relative": [
+      "Coronary artery disease risk factors",
+      "Lactation",
+      "Concomitant vasoconstrictors or sympathomimetics",
+      "Elderly patients"
+    ],
+    "monitor": [
+      "Peripheral circulation and signs of ergotism (cold/numb extremities, pain, claudication)",
+      "Cardiac and cerebral ischemia",
+      "Frequency of use (rebound and medication-overuse headache)"
+    ]
+  },
+  "preg": "Ergotamine is contraindicated in pregnancy. It has oxytocic effects and may cause fetal harm, including reduced uteroplacental blood flow; it must not be used by pregnant women.",
+  "lact": "Ergotamine is contraindicated during breastfeeding. It is excreted in breast milk and may cause symptoms of ergotism (vomiting, diarrhea, weak pulse, unstable blood pressure) in the infant; ergot alkaloids may also inhibit lactation.",
+  "renal": "Ergotamine is contraindicated in renal impairment. Reduced clearance increases the risk of accumulation, vasospasm, and ergotism.",
+  "hepatic": "Ergotamine is contraindicated in hepatic impairment. The liver is the main route of clearance, and impairment markedly increases the risk of toxicity and serious vasospasm.",
+  "interactions": {
+    "major": [
+      "Potent CYP3A4 inhibitors (ritonavir, nelfinavir, indinavir, clarithromycin, erythromycin, troleandomycin, ketoconazole, itraconazole) - CONTRAINDICATED; risk of acute ergot toxicity (severe vasospasm, ischemia)",
+      "Triptans (5-HT1 agonists) and other ergot/ergot-derivative drugs (e.g., dihydroergotamine, methysergide) - additive vasospasm; separate by at least 24 hours",
+      "Beta-blockers (potentiate vasoconstriction, risk of peripheral ischemia)"
+    ],
+    "moderate": [
+      "Moderate CYP3A4 inhibitors (e.g., saquinavir, fluconazole, grapefruit juice, fluoxetine, clotrimazole) - increased ergotamine exposure",
+      "Sympathomimetics / vasoconstrictors (additive hypertension/vasospasm)",
+      "Nicotine (additive vasoconstriction in heavy smokers)"
+    ],
+    "minor": [
+      "Caffeine (often co-formulated; enhances ergotamine absorption)"
+    ],
+    "food": "May be taken without regard to food; avoid grapefruit juice (CYP3A4 inhibition)",
+    "alcohol": "No specific pharmacologic interaction; alcohol can independently trigger migraine",
+    "diagnostics": "No characteristic laboratory test interference"
+  },
+  "se": {
+    "common": ["Nausea and vomiting", "Numbness or tingling of fingers and toes", "Muscle pain in extremities", "Weakness in the legs", "Dizziness"],
+    "serious": ["Ergotism (severe peripheral vasoconstriction with cold, pale, painful, or gangrenous extremities)", "Myocardial ischemia/infarction", "Cerebral ischemia / stroke", "Mesenteric/renal ischemia", "Retroperitoneal or pleuropulmonary fibrosis with chronic use", "Cardiac valvular fibrosis"],
+    "rare": ["Hypertension", "Localized edema and pruritus", "Rectal/anal ulcer (with suppositories)"],
+    "emergency": ["Signs of severe peripheral ischemia (cold, blue, numb, painful limbs)", "Chest pain (cardiac ischemia)", "Signs of stroke", "Severe abdominal pain (mesenteric ischemia)"]
+  },
+  "monitoring": [
+    "Peripheral pulses and signs of ergotism (cold, numb, painful extremities)",
+    "Cardiac and neurologic status for ischemia",
+    "Cumulative dose and frequency of use to avoid overdose and rebound headache",
+    "Long-term users: fibrotic complications (cardiac valves, retroperitoneum, lungs)"
+  ],
+  "counsel": [
+    "Take at the very first sign of a migraine; it works less well once the headache is established",
+    "Never exceed the per-attack and weekly dose limits, and do not use it daily",
+    "Stop and seek urgent care for numb, cold, or painful hands or feet, chest pain, or signs of stroke",
+    "Do not use within 24 hours of a triptan or another ergot medicine",
+    "Tell your doctor about all medicines - certain antibiotics, antifungals, and HIV/hepatitis C drugs can cause dangerous reactions",
+    "Do not use if you are or might be pregnant or are breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "Variable; absorption is erratic, faster sublingually and when combined with caffeine"],
+    ["Peak", "Peak plasma concentration about 0.5-3 hours after dosing"],
+    ["Half-life", "Plasma half-life approximately 2 hours, but tissue effects (vasoconstriction) are prolonged"],
+    ["Duration", "Vasoconstrictor action outlasts plasma levels and may persist for many hours"],
+    ["Storage", "Store at controlled room temperature; protect from light and heat; suppositories may need cool storage"]
+  ],
+  "pearls": [
+    "BOXED WARNING: co-administration with potent CYP3A4 inhibitors can precipitate life-threatening peripheral, cerebral, or cardiac ischemia - always screen interacting drugs",
+    "Caffeine is co-formulated to improve ergotamine's erratic oral absorption and add a mild analgesic effect",
+    "Largely superseded by triptans, which have a cleaner safety profile; reserve for selected patients",
+    "Vasoconstriction outlasts plasma drug levels, so cumulative/weekly dose limits are critical to prevent ergotism",
+    "Chronic overuse causes ergotism, medication-overuse headache, and rare fibrotic complications (valvular, retroperitoneal, pulmonary)"
+  ],
+  "missed": "Ergotamine is taken only as needed for an acute attack, not on a regular schedule, so there is no missed dose. Take it at the onset of a headache, respecting the per-attack and weekly maximum limits; never take extra doses to make up for ones not used.",
+  "overdose": "Overdose (acute or chronic) causes ergotism: numbness, tingling, severe vasospasm with cold and painful extremities that can progress to gangrene, plus nausea, vomiting, hypertension or hypotension, confusion, seizures, and cardiac/cerebral/mesenteric ischemia. Management is supportive with discontinuation, warmth to ischemic limbs, and vasodilators (e.g., intravenous sodium nitroprusside, nitroglycerin, or prazosin) and anticoagulation for severe peripheral ischemia; maintain adequate circulation and treat seizures with benzodiazepines.",
+  "refs": [
+    ["FDA Prescribing Information - Ergotamine tartrate (with caffeine) - includes Boxed Warning", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Ergotamine tartrate", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ergotamine%20tartrate%22"]
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "generic": "Lixisenatide",
+  "cls": "GLP-1 receptor agonist (incretin mimetic) - antidiabetic",
+  "pharm": "Once-daily subcutaneous GLP-1 receptor agonist that augments glucose-dependent insulin secretion, suppresses inappropriate glucagon release, and slows gastric emptying, producing a predominantly postprandial glucose-lowering effect in type 2 diabetes.",
+  "tags": ["GLP-1 receptor agonist", "Type 2 diabetes", "Once-daily SC injection (prandial)", "Glucose-dependent insulin secretagogue", "Prefilled pen device"],
+  "quick": [
+    ["Adult dose", "10 mcg SC once daily x14 days, then 20 mcg SC once daily"],
+    ["Meal", "Inject within 1 hour before the first meal of the day"],
+    ["Pregnancy", "Use only if benefit justifies risk; human data limited"],
+    ["Lactation", "No human milk data; weigh benefit against need and risk"],
+    ["Renal", "No adjustment if eGFR >=30; not recommended in ESRD/eGFR <15"],
+    ["Hepatic", "No dose adjustment needed (renally eliminated peptide)"],
+    ["Alcohol", "No labeled pharmacologic interaction; additive hypoglycemia risk"],
+    ["Monitoring", "Glucose/HbA1c, pancreatitis signs, renal function, hypoglycemia"]
+  ],
+  "summary": "Lixisenatide (Adlyxin in the US, Lyxumia in the EU) is a once-daily subcutaneous GLP-1 receptor agonist approved as an adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes. It increases glucose-dependent insulin release, decreases glucagon secretion, and slows gastric emptying, giving a predominantly postprandial glucose-lowering effect that underlies its pre-meal dosing. It is initiated at 10 mcg SC daily for 14 days, then increased to 20 mcg SC daily. It carries no boxed warning and, unlike some GLP-1 agonists, no thyroid C-cell tumor warning, but it does warn of pancreatitis, serious hypersensitivity/anaphylaxis, hypoglycemia (chiefly with a sulfonylurea or basal insulin), acute kidney injury (often related to volume depletion from GI losses), and immunogenicity. Its delayed gastric emptying requires timing precautions for oral contraceptives and certain oral drugs. The ELIXA cardiovascular outcomes trial established cardiovascular safety but not cardiovascular benefit.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Initiation", "r": "Adult SC", "d": "10 mcg once daily", "t": "Within 1 hour before the first meal", "n": "Days 1-14 (green pen, 50 mcg/mL)"},
+    {"c": "Maintenance", "r": "Adult SC", "d": "20 mcg once daily", "t": "Within 1 hour before the first meal", "n": "Begin on day 15 (burgundy pen, 100 mcg/mL)"},
+    {"c": "Missed dose", "r": "Adult SC", "d": "Usual dose", "t": "Within 1 hour before the next meal", "n": "Do not double the dose"}
+  ],
+  "admin": [
+    "Inject subcutaneously into the abdomen, thigh, or upper arm and rotate sites with each dose",
+    "Inject within 1 hour before the first meal of the day, preferably the same meal each day",
+    "Use the single-patient-use prefilled pen only - never share pens",
+    "Use only if the solution is clear and colorless",
+    "Do not mix with insulin; give as separate injections even if in the same body region"
+  ],
+  "moa": "Lixisenatide is a GLP-1 receptor agonist. Per labeling it increases glucose-dependent insulin release, decreases glucagon secretion, and slows gastric emptying. By binding and activating the GLP-1 receptor it enhances glucose-dependent insulin secretion from pancreatic beta cells - insulin rises when blood glucose is elevated and tapers as glucose normalizes, limiting hypoglycemia when used alone. It suppresses inappropriately elevated glucagon from alpha cells during hyperglycemia, reducing hepatic glucose output, and it slows gastric emptying, blunting the postprandial rise in glucose - the basis of its prandial effect and once-daily pre-meal dosing.",
+  "contra": {
+    "absolute": [
+      "Known severe hypersensitivity to lixisenatide or any component (e.g., prior anaphylaxis or angioedema)"
+    ],
+    "relative": [
+      "Type 1 diabetes or diabetic ketoacidosis (not indicated)",
+      "History of pancreatitis (use with caution)",
+      "Severe gastroparesis or severe GI disease",
+      "Concurrent prandial (short-acting) insulin (not studied/recommended)",
+      "Severe renal impairment (eGFR 15-29; monitor closely) and ESRD/eGFR <15 (not recommended)"
+    ],
+    "monitor": [
+      "Blood glucose and HbA1c",
+      "Signs of pancreatitis (severe abdominal pain)",
+      "Renal function, especially with persistent nausea/vomiting/diarrhea",
+      "Hypoglycemia (especially with sulfonylurea or basal insulin)",
+      "Hypersensitivity reactions"
+    ]
+  },
+  "preg": "There are no adequate human data; animal studies showed visceral and skeletal abnormalities at exposures above the human dose. Use during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "There are no human milk data; animal studies showed about 9.4% milk transfer. The decision to breastfeed should weigh the benefits of breastfeeding against the mother's clinical need for lixisenatide and any potential effect on the infant.",
+  "renal": "No dose adjustment is needed for mild (eGFR 60-89) or moderate (eGFR 30-59) renal impairment, though renal function should be monitored in moderate impairment. There is limited experience in severe impairment (eGFR 15-29) - monitor closely. It is not recommended in end-stage renal disease or eGFR below 15.",
+  "hepatic": "No dose adjustment is required; lixisenatide is a peptide eliminated by the kidneys, and hepatic impairment is not expected to affect its pharmacokinetics.",
+  "interactions": {
+    "major": [
+      "Oral drugs requiring threshold levels or rapid absorption (e.g., certain antibiotics, gastro-resistant formulations) and acetaminophen - give at least 1 hour before lixisenatide (or 4 or more hours after)",
+      "Oral contraceptives - take at least 1 hour before or 11 hours after lixisenatide"
+    ],
+    "moderate": [
+      "Sulfonylureas - increased risk of hypoglycemia; consider reducing the sulfonylurea dose",
+      "Basal insulin - increased risk of hypoglycemia; consider reducing the insulin dose (do not use with prandial/short-acting insulin)"
+    ],
+    "minor": ["Delayed gastric emptying may reduce the rate and extent of absorption of other oral drugs"],
+    "food": "An intrinsic timing requirement: inject within 1 hour before the first meal of the day.",
+    "alcohol": "No labeled pharmacologic interaction; alcohol can add to the risk of hypoglycemia.",
+    "diagnostics": "Anti-lixisenatide antibodies may attenuate the glycemic response in a small subset of patients."
+  },
+  "se": {
+    "common": ["Nausea", "Vomiting", "Headache", "Diarrhea", "Dizziness", "Injection-site reactions", "Hypoglycemia (with sulfonylurea or basal insulin)"],
+    "serious": ["Acute pancreatitis", "Serious hypersensitivity (anaphylaxis, angioedema)", "Acute kidney injury / worsening of chronic renal failure", "Severe hypoglycemia (with secretagogue or insulin)"],
+    "rare": ["Immunogenicity-related loss of glycemic efficacy"],
+    "emergency": ["Severe, persistent abdominal pain that may radiate to the back, with or without vomiting (pancreatitis)", "Swelling of face, lips, tongue, or throat with trouble breathing or swallowing (anaphylaxis/angioedema)", "Severe hypoglycemia"]
+  },
+  "monitoring": ["Blood glucose and HbA1c", "Signs and symptoms of pancreatitis", "Renal function, especially with persistent GI losses or renal impairment", "Hypoglycemia, especially with sulfonylurea or basal insulin", "Hypersensitivity reactions", "Possible antibody-mediated loss of efficacy"],
+  "counsel": [
+    "Inject once daily within 1 hour before your first meal, preferably the same meal each day",
+    "Rotate injection sites (abdomen, thigh, upper arm) and never share your pen",
+    "If you miss a dose, inject it within 1 hour before your next meal; do not take two doses at once",
+    "Separate birth control pills (1 hour before or 11 hours after) and certain oral drugs, antibiotics, and acetaminophen (1 hour before) from your injection",
+    "Report severe ongoing stomach pain or any allergic reaction immediately",
+    "Know how to recognize and treat low blood sugar, especially if also on a sulfonylurea or insulin, and carry fast-acting glucose; store the pen refrigerated before first use and discard 14 days after first use"
+  ],
+  "pk": [
+    ["Onset", "Prandial effect (injected within 1 hour before first meal)"],
+    ["Peak", "Median Tmax about 1-3.5 hours after subcutaneous dosing"],
+    ["Half-life", "Approximately 3 hours (terminal)"],
+    ["Duration", "Once-daily dosing; predominantly postprandial effect"],
+    ["Storage", "Refrigerate 2-8 C before first use; after first use keep below 30 C and discard 14 days after first use"]
+  ],
+  "pearls": [
+    "A short-acting (prandial) GLP-1 agonist - it lowers mainly postprandial glucose via delayed gastric emptying, unlike liraglutide/semaglutide which act more on fasting glucose",
+    "Delayed gastric emptying is also its main drug-interaction mechanism, hence the timing rules for oral contraceptives and certain oral drugs",
+    "Cardiovascular-safe but not cardiovascular-superior (ELIXA hazard ratio 1.02)",
+    "No thyroid C-cell tumor boxed warning, distinguishing it from exenatide and liraglutide",
+    "Adlyxin was withdrawn from the US market in 2018 for commercial reasons; lixisenatide persists in the fixed-ratio combination Soliqua (insulin glargine/lixisenatide)"
+  ],
+  "missed": "Inject the missed dose within 1 hour before the next meal. Do not take two doses at the same time to make up for a missed one.",
+  "overdose": "Overdose effects are predominantly gastrointestinal (severe nausea and vomiting) and may include hypoglycemia. There is no specific antidote. Treatment is supportive and symptomatic with close monitoring, including blood glucose.",
+  "refs": [
+    ["DailyMed - ADLYXIN (lixisenatide) full prescribing information", "https://www.dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=1727cc16-4f86-4f13-b8b5-804d4984fa8c"],
+    ["FDA - ADLYXIN label (208471orig1s000lbl)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2016/208471orig1s000lbl.pdf"],
+    ["EMA - Lyxumia (lixisenatide) EPAR / SmPC", "https://www.ema.europa.eu/en/medicines/human/EPAR/lyxumia"]
+  ]
+}

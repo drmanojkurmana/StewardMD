@@ -1,0 +1,95 @@
+{
+  "generic": "Sevelamer",
+  "cls": "Non-absorbed phosphate binder (anion-exchange polymer)",
+  "pharm": "Metal- and calcium-free phosphate-binding polymer for hyperphosphatemia in CKD",
+  "tags": ["Rx only", "phosphate binder", "CKD on dialysis", "take with meals", "not systemically absorbed"],
+  "quick": [
+    ["Adult dose", "0.8-1.6 g three times daily with meals; titrate to serum phosphorus (avg ~7.2 g/day)"],
+    ["Meal", "Take with meals; binds dietary phosphate"],
+    ["Pregnancy", "Not absorbed systemically; consider fat-soluble vitamin/folate supplementation"],
+    ["Lactation", "Not absorbed; not expected to expose the breastfed infant"],
+    ["Renal", "Indicated for CKD on dialysis; no systemic absorption"],
+    ["Hepatic", "Not absorbed; no hepatic adjustment specified in the label"],
+    ["Alcohol", "No specific interaction stated in the label"],
+    ["Monitoring", "Serum phosphorus; fat-soluble vitamins/folate; GI symptoms"]
+  ],
+  "summary": "Sevelamer carbonate is a non-absorbed, metal- and calcium-free anion-exchange polymer that binds dietary phosphate in the gastrointestinal tract to control serum phosphorus in adults and children 6 years and older with chronic kidney disease on dialysis. It is taken three times daily with meals and titrated to serum phosphorus targets. Because it is not systemically absorbed, systemic toxicity is low, but it commonly causes gastrointestinal effects (vomiting, nausea, diarrhea, dyspepsia) and serious GI events (bowel obstruction, ileus, ulcers, perforation) have been reported. It can reduce absorption of fat-soluble vitamins (A, D, E, K), folic acid, and certain co-administered drugs, which should be dose-separated.",
+  "indications": [
+    "Control of serum phosphorus in adults with chronic kidney disease (CKD) on dialysis",
+    "Control of serum phosphorus in children 6 years of age and older with CKD on dialysis"
+  ],
+  "dosage": [
+    {"c": "Adult, serum phosphorus >5.5 and <7.5 mg/dL, not on a phosphate binder", "r": "Oral", "d": "0.8 g three times daily with meals", "t": "Titrate by 0.8 g per meal at 2-week intervals to target phosphorus", "n": "Average prescribed adult dose ~7.2 g/day"},
+    {"c": "Adult, serum phosphorus >=7.5 mg/dL, not on a phosphate binder", "r": "Oral", "d": "1.6 g three times daily with meals", "t": "Titrate by 0.8 g per meal at 2-week intervals", "n": "Highest adult dose studied was 14 g/day"},
+    {"c": "Adult switching from calcium acetate 667 mg", "r": "Oral", "d": "0.8 g per 1 tablet, 1.6 g per 2 tablets, 2.4 g per 3 tablets (per meal)", "t": "Match to current calcium acetate dose, then titrate", "n": "Per Table 3 in label"},
+    {"c": "Pediatric >=6 yr, BSA >=0.75 to <1.2 m2", "r": "Oral", "d": "0.8 g per meal/snack", "t": "Titrate by 0.4 g per dose at 2-week intervals (every 4 weeks after 6 weeks)", "n": "Based on body surface area"},
+    {"c": "Pediatric >=6 yr, BSA >=1.2 m2", "r": "Oral", "d": "1.6 g per meal/snack", "t": "Titrate by 0.8 g per dose at 2-week intervals (every 4 weeks after 6 weeks)", "n": "Less effective in children with low baseline phosphorus"},
+    {"c": "Switching sevelamer HCl to carbonate, or tablets to powder", "r": "Oral", "d": "Use the same dose in grams", "t": "Gram-for-gram", "n": "Same active moiety"}
+  ],
+  "admin": [
+    "Take with meals",
+    "Titrate by serum phosphorus in adults and by body surface area category in children",
+    "Adhere to the prescribed diet",
+    "Consider sevelamer suspension in patients with swallowing disorders (esophageal tablet retention reported)",
+    "For interacting oral drugs, take them at least 1 hour before or 3 hours after sevelamer",
+    "Report new or worsening constipation or bloody stools promptly"
+  ],
+  "moa": "Sevelamer carbonate is a non-absorbed, cross-linked polymeric amine free of metal and calcium. Its multiple amines become protonated in the intestine and bind phosphate molecules through ionic and hydrogen bonding. By binding phosphate in the gastrointestinal tract and decreasing its absorption, sevelamer lowers serum phosphorus. It also binds bile acids, which may reduce absorption of fat-soluble vitamins (A, D, E, K).",
+  "contra": {
+    "absolute": ["Bowel obstruction", "Known hypersensitivity to sevelamer carbonate, sevelamer hydrochloride, or any excipient"],
+    "relative": ["Dysphagia or swallowing disorders", "Severe GI motility disorders including severe constipation", "Major GI tract surgery"],
+    "monitor": ["Co-administered narrow-therapeutic-range drugs (cyclosporine, tacrolimus, levothyroxine)", "Fat-soluble vitamin and folate status", "Patients who develop severe GI symptoms"]
+  },
+  "preg": "Sevelamer carbonate is not absorbed systemically after oral administration and maternal use is not expected to result in fetal drug exposure. However, it may decrease serum levels of fat-soluble vitamins and folic acid in pregnant women, so supplementation should be considered.",
+  "lact": "Sevelamer carbonate is not absorbed systemically by the mother, and breastfeeding is not expected to result in exposure of the child. As with pregnancy, it may decrease maternal fat-soluble vitamin and folic acid levels; consider supplementation.",
+  "renal": "Sevelamer is indicated specifically for control of serum phosphorus in CKD patients on dialysis. It is not systemically absorbed, so no systemic dose adjustment for renal function is described; dosing is titrated to serum phosphorus (adults) or body surface area (children).",
+  "hepatic": "The label does not specify a hepatic dose adjustment. Sevelamer is not systemically absorbed, so hepatic metabolism is not a factor.",
+  "interactions": {
+    "major": ["Ciprofloxacin - sevelamer decreased its bioavailability ~50%; take ciprofloxacin at least 2 hours before or 6 hours after sevelamer", "Mycophenolate mofetil - decreased MPA Cmax/AUC; take at least 2 hours before sevelamer"],
+    "moderate": ["Cyclosporine and tacrolimus - reduced concentrations reported in transplant patients; monitor levels and consider dose separation", "Levothyroxine - increased TSH reported with concomitant use; monitor and separate dosing"],
+    "minor": ["No interaction observed with digoxin, enalapril, iron, metoprolol, or warfarin when coadministered"],
+    "food": "Take with meals; the drug works by binding dietary phosphate.",
+    "alcohol": "No specific alcohol interaction is described in the label.",
+    "diagnostics": "May lower serum fat-soluble vitamin (A, D, E, K) and folic acid levels; in trials sevelamer hydrochloride lowered total and LDL cholesterol by 15-31%."
+  },
+  "se": {
+    "common": ["Vomiting (22%)", "Nausea (20%)", "Diarrhea (19%)", "Dyspepsia (16%)", "Abdominal pain (9%)", "Flatulence (8%)", "Constipation (8%)"],
+    "serious": ["Bowel obstruction", "Bleeding gastrointestinal ulcers", "Colitis", "GI ulceration, necrosis, perforation", "Dysphagia / esophageal tablet retention"],
+    "rare": ["Ileus", "Fecal impaction", "Hypersensitivity, pruritus, rash", "Reduced fat-soluble vitamin / folate levels"],
+    "emergency": ["Intestinal obstruction or perforation", "Severe gastrointestinal bleeding", "Hypersensitivity reaction"]
+  },
+  "monitoring": [
+    "Serum phosphorus to guide titration (every 2 weeks during adjustment)",
+    "Fat-soluble vitamin (A, D, E, K) and folic acid status; consider supplementation",
+    "Gastrointestinal symptoms, especially constipation or bloody stools",
+    "Blood levels/clinical response of narrow-therapeutic-index co-medications when relevant"
+  ],
+  "counsel": [
+    "Take with meals exactly as prescribed and follow your renal diet",
+    "Swallow tablets whole; tell your provider if you have trouble swallowing",
+    "Report new or worsening constipation, abdominal pain, or bloody/black stools right away",
+    "Separate interacting medicines - take them at least 1 hour before or 3 hours after sevelamer",
+    "You may need vitamin and folic acid supplements while taking this medicine"
+  ],
+  "pk": [
+    ["Onset", "Lowers serum phosphorus over treatment; cholesterol effect seen by ~2 weeks"],
+    ["Peak", "Not applicable - not systemically absorbed"],
+    ["Half-life", "Not applicable - not systemically absorbed"],
+    ["Duration", "Acts locally in the GI tract with each meal; dosed three times daily"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from moisture"]
+  ],
+  "pearls": [
+    "Must be taken with meals to bind dietary phosphate effectively",
+    "Calcium- and metal-free - useful when avoiding calcium load or aluminum exposure",
+    "Binds bile acids and can lower LDL cholesterol as well as fat-soluble vitamin absorption",
+    "Separate cyclosporine, tacrolimus, levothyroxine, ciprofloxacin, and mycophenolate from sevelamer dosing",
+    "Not effective in young children (<13 yr) or non-dialysis patients with low baseline phosphorus",
+    "Switch gram-for-gram between sevelamer hydrochloride and carbonate, and between tablets and powder"
+  ],
+  "missed": "Take the missed dose with your next meal; do not take a double dose. Because sevelamer works only when taken with food, skip the dose entirely if you skip the associated meal.",
+  "overdose": "There are no reports of overdosage in patients; the maximum doses studied were 14 g/day of sevelamer carbonate and 13 g/day of sevelamer hydrochloride. Because sevelamer is not absorbed, the risk of systemic toxicity is low; gastrointestinal effects would be the main concern.",
+  "refs": [
+    ["FDA Sevelamer Carbonate Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22sevelamer+carbonate%22"],
+    ["FDA DailyMed - Sevelamer Carbonate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

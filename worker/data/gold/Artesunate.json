@@ -1,0 +1,90 @@
+{
+  "generic": "Artesunate",
+  "cls": "Artemisinin-derivative antimalarial",
+  "pharm": "Antimalarial (sesquiterpene lactone endoperoxide)",
+  "tags": ["antimalarial", "severe malaria", "artemisinin", "Plasmodium falciparum", "IV", "delayed hemolysis"],
+  "quick": [
+    ["Adult dose", "2.4 mg/kg IV at 0, 12, 24 h, then once daily"],
+    ["Meal", "Parenteral; not affected by food"],
+    ["Pregnancy", "Use for severe malaria when benefit outweighs risk"],
+    ["Lactation", "Use if needed; benefit generally outweighs risk"],
+    ["Renal", "No dose adjustment established"],
+    ["Hepatic", "No dose adjustment established"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Parasitemia, hemoglobin (delayed hemolysis x4 weeks)"]
+  ],
+  "summary": "Artesunate is a water-soluble artemisinin derivative and the first-line treatment for severe malaria, given intravenously. It rapidly reduces parasite burden across all asexual stages of Plasmodium. After completing IV therapy and clinical improvement, patients must receive a full course of a follow-on oral antimalarial. A characteristic adverse effect is post-artemisinin delayed hemolysis, requiring hemoglobin monitoring for about 4 weeks after treatment.",
+  "indications": [
+    "Initial treatment of severe malaria in adults and pediatric patients",
+    "Severe Plasmodium falciparum malaria (and severe disease from other Plasmodium species)",
+    "Bridge to a complete course of an appropriate oral antimalarial after parenteral therapy"
+  ],
+  "dosage": [
+    {"c": "Severe malaria (adult and child >=20 kg)", "r": "Standard", "d": "2.4 mg/kg IV at 0, 12 and 24 hours, then once daily", "t": "0, 12, 24 h then daily", "n": "Continue until oral therapy tolerated (min 3 doses)"},
+    {"c": "Severe malaria (child <20 kg)", "r": "Weight-based", "d": "3 mg/kg IV at 0, 12 and 24 hours, then once daily (WHO)", "t": "0, 12, 24 h then daily", "n": "Higher mg/kg in small children per WHO"},
+    {"c": "Follow-on therapy", "r": "Oral course", "d": "Full course of an effective oral antimalarial (e.g. ACT) after >=24 h IV and ability to tolerate oral", "t": "Per oral regimen", "n": "Required to prevent recrudescence"},
+    {"c": "Minimum parenteral course", "r": "Standard", "d": "At least 3 IV doses before switching to oral", "t": "As above", "n": "WHO guidance"}
+  ],
+  "admin": [
+    "Reconstitute per label with the supplied diluent, then dilute, and administer by slow IV injection over 1-2 minutes",
+    "Prepare immediately before use and discard unused reconstituted solution; do not give by IM route in the US-approved product unless IV access is unavailable per protocol",
+    "Give the first three doses at 0, 12 and 24 hours, then once daily until the patient can take oral therapy",
+    "Always follow IV artesunate with a complete course of an oral antimalarial",
+    "Do not co-administer in the same line with incompatible solutions; flush appropriately"
+  ],
+  "moa": "Artesunate is a sesquiterpene lactone bearing an endoperoxide bridge. Within parasitized erythrocytes, iron (notably from heme) cleaves the endoperoxide to generate carbon-centered free radicals and reactive intermediates that alkylate and damage parasite proteins and membranes. This produces rapid, broad activity against the asexual blood stages of Plasmodium, giving the fastest parasite clearance of available antimalarials.",
+  "contra": {
+    "absolute": ["Known serious hypersensitivity (e.g. anaphylaxis) to artesunate"],
+    "relative": ["Glucose-6-phosphate dehydrogenase deficiency (heightened hemolysis concern)", "Pre-existing severe anemia (monitor closely for delayed hemolysis)"],
+    "monitor": ["Pregnancy (especially first trimester - use when benefit outweighs risk)", "Patients requiring repeated courses", "Concurrent hemolysis-inducing conditions"]
+  },
+  "preg": "Severe malaria in pregnancy is life-threatening to mother and fetus. WHO recommends parenteral artesunate for severe malaria in all trimesters because the benefit of prompt effective treatment outweighs potential risks; do not withhold treatment for severe disease.",
+  "lact": "Breastfeeding may generally continue during treatment for severe malaria; the benefit of treating the mother and of breastfeeding is considered to outweigh potential risks given limited transfer.",
+  "renal": "No specific dosage adjustment is established for renal impairment; artesunate and its active metabolite dihydroartemisinin have short half-lives. Severe malaria itself may cause acute kidney injury - provide supportive care and monitor.",
+  "hepatic": "No specific dosage adjustment is established for hepatic impairment. Monitor liver function as severe malaria can cause hepatic dysfunction.",
+  "interactions": {
+    "major": ["No major contraindicated drug interactions established for short-course parenteral artesunate"],
+    "moderate": ["Strong CYP3A4/CYP2A6 inducers or inhibitors - may alter dihydroartemisinin exposure", "Other QT-prolonging follow-on antimalarials (e.g. some ACT partner drugs) - monitor when sequenced"],
+    "minor": ["Drugs causing hemolysis or myelosuppression - may compound anemia"],
+    "food": "Not applicable; administered parenterally.",
+    "alcohol": "No specific interaction documented.",
+    "diagnostics": "Causes a fall in hemoglobin/reticulocyte changes from delayed hemolysis; monitor blood counts."
+  },
+  "se": {
+    "common": ["Headache", "Nausea/vomiting", "Dizziness", "Anorexia", "Pyrexia", "Reticulocytopenia/anemia"],
+    "serious": ["Post-artemisinin delayed hemolysis (1-4 weeks after treatment)", "Acute hemolytic anemia", "Hypersensitivity reactions", "Hepatic enzyme elevation", "Neutropenia"],
+    "rare": ["Acute renal failure secondary to hemolysis", "Bradycardia / first-degree AV block", "Severe cutaneous reactions"],
+    "emergency": ["Anaphylaxis", "Severe symptomatic delayed hemolysis requiring transfusion", "Acute kidney injury from hemoglobinuria"]
+  },
+  "monitoring": [
+    "Parasite density (blood smears) until clearance",
+    "Hemoglobin and reticulocyte count during treatment and weekly for about 4 weeks after therapy to detect post-artemisinin delayed hemolysis",
+    "Renal and hepatic function and overall clinical status of severe malaria",
+    "Signs of hypersensitivity during and after infusion"
+  ],
+  "counsel": [
+    "You will receive injections in hospital followed by a full course of oral antimalarial tablets - complete the oral course",
+    "Return for blood tests for about 4 weeks; delayed anemia can occur after treatment",
+    "Report unusual tiredness, dark urine, paleness or breathlessness after discharge",
+    "Tell your clinician if you are pregnant or breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "Rapid parasite clearance within hours"],
+    ["Peak", "Immediate (IV); active metabolite DHA peaks within ~25 min"],
+    ["Half-life", "Artesunate minutes; dihydroartemisinin ~0.5-1.5 hours"],
+    ["Duration", "Short; requires repeated dosing then oral follow-on"],
+    ["Storage", "Store as labeled; reconstitute immediately before use and discard unused solution"]
+  ],
+  "pearls": [
+    "First-line for severe malaria - superior survival versus quinine (WHO).",
+    "Always complete a full oral antimalarial course after IV therapy to prevent recrudescence",
+    "Post-artemisinin delayed hemolysis: check hemoglobin weekly for ~4 weeks after treatment",
+    "Rapidly cleared, so requires a partner/follow-on drug for durable cure"
+  ],
+  "missed": "Parenteral artesunate is administered on a fixed inpatient schedule (0, 12, 24 hours then daily); a delayed dose should be given as soon as recognized and the schedule resumed. Do not omit the required follow-on oral antimalarial course.",
+  "overdose": "There is limited overdose experience. Excessive dosing may increase the risk of hemolysis, neutropenia and neurologic effects. Manage supportively with monitoring of blood counts, renal function and cardiac rhythm; transfuse for severe anemia as needed.",
+  "refs": [
+    ["WHO Guidelines for Malaria - severe malaria treatment", "https://www.who.int/teams/global-malaria-programme"],
+    ["FDA Artesunate for Injection Prescribing Information", "https://www.accessdata.fda.gov/scripts/cder/daf/"]
+  ]
+}

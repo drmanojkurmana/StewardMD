@@ -1,0 +1,114 @@
+{
+  "generic": "Terbinafine (oral)",
+  "cls": "Antifungal (allylamine)",
+  "pharm": "Allylamine antifungal; inhibits fungal squalene epoxidase, blocking ergosterol synthesis",
+  "tags": ["antifungal", "allylamine", "onychomycosis", "tinea unguium", "dermatophyte", "hepatotoxic", "CYP2D6 inhibitor", "fungicidal"],
+  "quick": [
+    ["Adult dose", "250 mg PO once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Limited human data; animal studies show no harm"],
+    ["Lactation", "Excreted in milk; generally avoid"],
+    ["Renal", "Avoid if CrCl <50 mL/min (use not recommended)"],
+    ["Hepatic", "Contraindicated in chronic/active liver disease"],
+    ["Alcohol", "Avoid; additive hepatotoxicity risk"],
+    ["Monitoring", "LFTs (baseline + periodic), CBC if prolonged"]
+  ],
+  "summary": "Oral terbinafine is an allylamine antifungal indicated for onychomycosis of the toenail or fingernail due to dermatophytes (tinea unguium), confirmed by KOH, culture, or biopsy. It is fungicidal via squalene epoxidase inhibition. Key safety concerns include rare but serious hepatotoxicity (including liver failure), persistent taste/smell disturbance, severe skin reactions, neutropenia, and depressive symptoms.",
+  "indications": [
+    "Onychomycosis of the toenail or fingernail due to dermatophytes (tinea unguium), with diagnosis confirmed by KOH preparation, fungal culture, or nail biopsy"
+  ],
+  "dosage": [
+    {"c": "Fingernail onychomycosis", "r": "Oral", "d": "250 mg (one tablet) once daily", "t": "Once daily for 6 weeks", "n": "Optimal clinical effect seen months after mycological cure, as healthy nail regrows."},
+    {"c": "Toenail onychomycosis", "r": "Oral", "d": "250 mg (one tablet) once daily", "t": "Once daily for 12 weeks", "n": "Evaluate for chronic/active liver disease before initiating. Optimal effect seen months after treatment ends."}
+  ],
+  "admin": [
+    "Obtain nail specimen (KOH, culture, or biopsy) to confirm dermatophyte onychomycosis before treating",
+    "Evaluate for evidence of chronic or active liver disease before initiating",
+    "Obtain baseline (pretreatment) serum transaminases",
+    "May be taken with or without food",
+    "Reassess liver function periodically during therapy",
+    "Discontinue if liver injury, taste/smell disturbance, severe skin reaction, or neutropenia develops"
+  ],
+  "moa": "Allylamine antifungal that inhibits fungal squalene epoxidase, an enzyme in the ergosterol biosynthesis pathway (independent of cytochrome P450). This blocks conversion of squalene to lanosterol, causing ergosterol deficiency and toxic intracellular squalene accumulation, which is fungicidal against dermatophytes.",
+  "contra": {
+    "absolute": [
+      "Chronic or active liver disease",
+      "History of allergic reaction to oral terbinafine (risk of anaphylaxis)"
+    ],
+    "relative": [
+      "Renal impairment (CrCl <=50 mL/min) - use not recommended",
+      "Concurrent CYP2D6-metabolized drugs (narrow therapeutic index)",
+      "History of depression",
+      "Preexisting hematologic disorders"
+    ],
+    "monitor": [
+      "Liver function tests (baseline and periodic)",
+      "Complete blood count if signs of infection or prolonged therapy",
+      "Taste and smell function",
+      "Mood/depressive symptoms",
+      "Skin reactions"
+    ]
+  },
+  "preg": "Available postmarketing human data are insufficient to assess drug-associated risk of major birth defects or miscarriage. Animal reproduction studies (rats and rabbits) showed no malformations or fetal harm at up to 23x and 12x the maximum recommended human dose. Treatment of onychomycosis can generally be postponed until after pregnancy.",
+  "lact": "Terbinafine is present in human milk after oral administration. There are no data on effects on the breastfed infant or on milk production; because of limited benefit of treating a non-urgent condition, breastfeeding is generally not recommended during therapy.",
+  "renal": "In patients with renal impairment (CrCl <=50 mL/min), terbinafine clearance is reduced by approximately 50%. Use of oral terbinafine in this population has not been adequately studied and is not recommended.",
+  "hepatic": "Contraindicated in patients with chronic or active liver disease. Liver failure, sometimes leading to liver transplant or death, has occurred, including in patients with no preexisting liver disease. Obtain baseline transaminases, monitor periodically, and discontinue if liver injury develops. Clearance is reduced ~50% in hepatic cirrhosis.",
+  "interactions": {
+    "major": [
+      "CYP2D6 substrates (tricyclic antidepressants, SSRIs, beta-blockers, class 1C antiarrhythmics such as flecainide/propafenone, MAO-B inhibitors) - terbinafine is a CYP2D6 inhibitor; monitor and consider dose reduction. Effect on desipramine persisted up to 4 weeks after stopping.",
+      "Rifampin - increases terbinafine clearance (~100%), reducing efficacy"
+    ],
+    "moderate": [
+      "Cimetidine - decreases terbinafine clearance (~33%)",
+      "Fluconazole - increases terbinafine exposure",
+      "Cyclosporine - terbinafine increases cyclosporine clearance",
+      "Caffeine - terbinafine decreases caffeine clearance"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food; food increases the AUC by less than 20%.",
+    "alcohol": "Avoid excessive alcohol; potential additive hepatotoxicity given the risk of drug-induced liver injury.",
+    "diagnostics": "Liver enzyme abnormalities are common; obtain pretreatment and periodic transaminases. Severe neutropenia (ANC <=1000 cells/mm3) warrants discontinuation."
+  },
+  "se": {
+    "common": ["Headache", "Diarrhea", "Dyspepsia", "Abdominal pain", "Nausea", "Flatulence", "Rash", "Pruritus", "Taste disturbance", "Liver enzyme abnormalities"],
+    "serious": ["Hepatotoxicity / liver failure", "Severe neutropenia", "Severe taste loss or smell loss (may be prolonged or permanent)", "Depressive symptoms", "Drug reaction with eosinophilia and systemic symptoms (DRESS)"],
+    "rare": ["Stevens-Johnson syndrome", "Toxic epidermal necrolysis", "Erythema multiforme", "Exfoliative/bullous dermatitis", "Lupus-like syndrome", "Ocular lens/retina changes"],
+    "emergency": ["Acute liver failure (jaundice, dark urine, RUQ pain)", "Anaphylaxis", "Severe cutaneous reaction (SJS/TEN/DRESS)"]
+  },
+  "monitoring": [
+    "Serum transaminases at baseline (pretreatment) and periodically during therapy",
+    "Complete blood count if prolonged therapy or signs of infection",
+    "Taste and smell function",
+    "Signs of depression",
+    "Signs of severe skin reaction"
+  ],
+  "counsel": [
+    "Take once daily, with or without food, for the full prescribed course (6 weeks fingernail, 12 weeks toenail)",
+    "Nail appearance improves slowly over months as a healthy nail grows out, even after treatment ends",
+    "Report immediately signs of liver injury: persistent nausea, loss of appetite, fatigue, yellowing of skin/eyes, dark urine, or abdominal pain",
+    "Report any change or loss of taste or smell - stop the drug and contact your doctor",
+    "Report rash, blistering, or skin peeling, and any mood changes/depression",
+    "Avoid excessive alcohol during treatment"
+  ],
+  "pk": [
+    ["Onset", "Absorbed >70%; clinical/mycologic effect over weeks-months"],
+    ["Peak", "Peak plasma ~1 mcg/mL at 2 h after 250 mg dose"],
+    ["Half-life", "Effective ~36 h; terminal 200-400 h (tissue release)"],
+    ["Duration", "Persists in skin/nail/sebum for weeks after stopping"],
+    ["Storage", "Store at controlled room temperature; protect from light"]
+  ],
+  "pearls": [
+    "Allylamine acts on squalene epoxidase (not CYP-dependent like azoles); fungicidal against dermatophytes",
+    "Confirm dermatophyte onychomycosis by KOH/culture/biopsy before committing to long treatment",
+    "Bioavailability ~40% due to first-pass metabolism; food effect is negligible",
+    "Potent CYP2D6 inhibitor - watch TCAs, SSRIs, beta-blockers, and class 1C antiarrhythmics; effect can persist weeks after stopping",
+    "Taste and smell disturbances can be severe and occasionally permanent",
+    "Avoid in renal impairment (CrCl <=50 mL/min) - clearance halved and use not studied"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and continue the regular once-daily schedule. Do not take two doses at once.",
+  "overdose": "Clinical overdose experience is limited; doses up to 5 grams (20x the daily dose) have been taken without serious adverse reactions. Symptoms may include nausea, vomiting, abdominal pain, dizziness, rash, frequent urination, and headache. Treatment is supportive (consider activated charcoal and symptomatic care).",
+  "refs": [
+    ["FDA Label - Terbinafine Tablets (DailyMed/openFDA)", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=17e976c6-ee44-42c5-987f-5360ee6d7c1e"],
+    ["openFDA Drug Label API - Terbinafine", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22terbinafine+hydrochloride%22+AND+openfda.route:%22ORAL%22"]
+  ]
+}

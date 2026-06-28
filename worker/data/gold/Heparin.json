@@ -1,0 +1,116 @@
+{
+  "generic": "Heparin sodium",
+  "cls": "Anticoagulant (unfractionated heparin)",
+  "pharm": "Potentiates antithrombin III, accelerating inactivation of thrombin (factor IIa) and factor Xa to prevent clot formation and extension.",
+  "tags": ["Rx only", "Unfractionated anticoagulant", "IV/SC", "aPTT-monitored", "HIT risk"],
+  "quick": [
+    ["Adult dose", "Full treatment: 5,000 units IV bolus then continuous infusion, titrated to aPTT"],
+    ["Meal", "Parenteral; not related to food"],
+    ["Pregnancy", "Preferred parenteral anticoagulant; does not cross placenta"],
+    ["Lactation", "Not excreted in milk; compatible"],
+    ["Renal", "No specific adjustment; monitor"],
+    ["Hepatic", "Use with caution; bleeding risk"],
+    ["Alcohol", "Heavy use increases bleeding risk"],
+    ["Monitoring", "aPTT/anti-Xa, platelet count, hematocrit, potassium"]
+  ],
+  "summary": "Unfractionated heparin sodium is a parenteral anticoagulant used for prophylaxis and treatment of venous thromboembolism, in acute coronary syndromes, during cardiac/vascular surgery and dialysis, and as a circuit anticoagulant. It acts rapidly by potentiating antithrombin III. Therapy requires monitoring (aPTT or anti-Xa for full-dose use) and platelet counts because of heparin-induced thrombocytopenia (HIT). Its effect is rapidly reversible with protamine sulfate.",
+  "indications": [
+    "Prophylaxis and treatment of venous thrombosis and pulmonary embolism",
+    "Prevention of postoperative deep vein thrombosis and pulmonary embolism after major surgery or in at-risk patients",
+    "Atrial fibrillation with embolization",
+    "Treatment of acute and chronic consumptive coagulopathies (disseminated intravascular coagulation)",
+    "Prevention of clotting in arterial and cardiac surgery",
+    "Prophylaxis and treatment of peripheral arterial embolism",
+    "Anticoagulation in blood transfusion, extracorporeal circulation, and dialysis procedures"
+  ],
+  "dosage": [
+    {"c": "Therapeutic anticoagulation (IV intermittent)", "r": "Adult IV", "d": "Initial 10,000 units, then 5,000-10,000 units every 4-6 hours", "t": "Every 4-6 hours", "n": "Adjust to aPTT"},
+    {"c": "Therapeutic anticoagulation (IV infusion)", "r": "Adult IV", "d": "5,000 units IV bolus, then continuous 20,000-40,000 units/24 h in 1000 mL 0.9% NaCl", "t": "Continuous", "n": "Titrate to aPTT (often weight-based protocols)"},
+    {"c": "Therapeutic anticoagulation (deep SC)", "r": "Adult SC", "d": "5,000 units IV then 10,000-20,000 units SC, followed by 8,000-10,000 units q8h or 15,000-20,000 units q12h", "t": "Every 8-12 hours", "n": "Concentrated solution; rotate sites"},
+    {"c": "Low-dose VTE prophylaxis", "r": "Adult SC", "d": "5,000 units every 8-12 hours", "t": "Every 8-12 hours", "n": "Routine monitoring usually not required"},
+    {"c": "Extracorporeal / dialysis circuits", "r": "Adult", "d": "Per circuit protocol", "t": "Per procedure", "n": "Anticoagulate the circuit"}
+  ],
+  "admin": [
+    "Confirm the correct vial strength before administration; concentrated 1 mL vials have been fatally confused with catheter-lock flush vials",
+    "Do NOT use heparin sodium injection as a catheter-lock flush product",
+    "For continuous IV infusion, invert the container repeatedly to ensure mixing",
+    "Give therapeutic doses by IV bolus/infusion or deep subcutaneous injection; avoid intramuscular injection (hematoma)",
+    "Do not use benzyl-alcohol-preserved heparin in neonates and infants"
+  ],
+  "moa": "Heparin binds to antithrombin III and induces a conformational change that greatly accelerates antithrombin's inactivation of thrombin (factor IIa) and activated factor X (Xa), and to a lesser extent factors IXa, XIa, and XIIa. By inhibiting thrombin-mediated conversion of fibrinogen to fibrin and blocking the coagulation cascade, heparin prevents the formation and extension of clots. It does not lyse existing thrombi but allows endogenous fibrinolysis to proceed.",
+  "contra": {
+    "absolute": [
+      "History of heparin-induced thrombocytopenia (HIT) or HIT with thrombosis (HITTS)",
+      "Known hypersensitivity to heparin or pork products (anaphylactoid reactions)",
+      "Uncontrolled active bleeding (except when due to DIC)",
+      "Severe thrombocytopenia",
+      "Inability to perform appropriate coagulation monitoring for full-dose therapy"
+    ],
+    "relative": [
+      "Recent surgery (especially CNS, eye), spinal/epidural procedures",
+      "Severe hypertension",
+      "GI ulceration or active bleeding lesions",
+      "Hepatic or renal impairment",
+      "Indwelling catheters / lumbar puncture"
+    ],
+    "monitor": [
+      "aPTT or anti-Xa (full-dose therapy)",
+      "Platelet count for HIT",
+      "Hematocrit and signs of bleeding"
+    ]
+  },
+  "preg": "Heparin does not cross the placenta and is a preferred anticoagulant in pregnancy when one is required. Use the benzyl-alcohol-free formulation; preserved products are not recommended near term/in neonates.",
+  "lact": "Heparin is not excreted in human milk because of its high molecular weight; it is considered compatible with breastfeeding.",
+  "renal": "No specific dose adjustment is established; titrate to aPTT/anti-Xa and monitor for bleeding, as bleeding risk may be increased in renal impairment.",
+  "hepatic": "Use with caution; hepatic impairment may increase bleeding risk. Monitor coagulation tests and clinical signs of bleeding.",
+  "interactions": {
+    "major": [
+      "Other anticoagulants (warfarin, DOACs) and thrombolytics - additive bleeding risk",
+      "Antiplatelet agents (aspirin, clopidogrel, GPIIb/IIIa inhibitors) - increased bleeding"
+    ],
+    "moderate": [
+      "NSAIDs (increased bleeding risk)",
+      "Nitroglycerin IV (may reduce heparin effect)",
+      "SSRIs/SNRIs (bleeding risk)",
+      "Drugs causing hyperkalemia (additive with heparin-induced aldosterone suppression)"
+    ],
+    "minor": ["Antihistamines, digitalis, tetracyclines (may partially counteract anticoagulation)"],
+    "food": "Parenteral; no food interaction.",
+    "alcohol": "Heavy alcohol use increases bleeding risk.",
+    "diagnostics": "Prolongs aPTT, thrombin time, and ACT; can cause transient elevations of AST/ALT and free fatty acids; may suppress aldosterone and raise potassium."
+  },
+  "se": {
+    "common": ["Bleeding/bruising", "Injection-site reactions", "Mild transient thrombocytopenia (non-immune)", "Elevated liver transaminases"],
+    "serious": ["Hemorrhage (including fatal and intracranial)", "Heparin-induced thrombocytopenia (HIT) and HITTS", "Hyperkalemia (aldosterone suppression)", "Adrenal/ovarian/retroperitoneal hemorrhage", "Hypersensitivity/anaphylactoid reactions"],
+    "rare": ["Osteoporosis with long-term use", "Skin necrosis", "Priapism", "Alopecia"],
+    "emergency": ["Major or intracranial hemorrhage", "Acute HIT with thrombosis", "Anaphylaxis"]
+  },
+  "monitoring": ["aPTT or anti-Xa for full-dose therapy", "Platelet count at baseline and periodically (HIT surveillance)", "Hematocrit/hemoglobin and signs of bleeding", "Serum potassium in patients at risk of hyperkalemia", "Vial strength verification before each dose"],
+  "counsel": [
+    "Report any unusual bleeding or bruising, blood in urine/stool, black stools, or severe headache immediately",
+    "Tell all clinicians and dentists that you are receiving a blood thinner",
+    "Avoid activities with a high risk of injury and use a soft toothbrush/electric razor",
+    "Do not take aspirin or NSAIDs unless your doctor approves",
+    "Inform staff of any prior reaction to heparin or low platelet count (HIT)"
+  ],
+  "pk": [
+    ["Onset", "Immediate (IV); 20-60 minutes (subcutaneous)"],
+    ["Peak", "Immediate after IV bolus"],
+    ["Half-life", "~1-2 hours (dose-dependent; prolonged at higher doses)"],
+    ["Duration", "Effect dissipates within hours of stopping"],
+    ["Storage", "Store at 20-25 C; do not freeze"]
+  ],
+  "pearls": [
+    "Fatal medication errors from vial-strength confusion - always verify the concentration and never use as a catheter-lock flush",
+    "Monitor platelets for HIT; a >50% drop or thrombosis ~5-10 days in mandates stopping heparin and using a non-heparin anticoagulant",
+    "Protamine sulfate reverses heparin (about 1 mg per 100 units of recent heparin)",
+    "Heparin does not cross the placenta - anticoagulant of choice in pregnancy",
+    "Can cause hyperkalemia via aldosterone suppression - check potassium in at-risk patients"
+  ],
+  "missed": "Heparin is given by clinicians; a missed or delayed dose/infusion adjustment is managed by the treating team based on aPTT/anti-Xa. Doses are not doubled.",
+  "overdose": "Overdose causes bleeding. Mild bleeding may resolve on stopping heparin given its short half-life. For significant bleeding, reverse with slow IV protamine sulfate (approximately 1 mg per 100 units of heparin received in the prior few hours), not exceeding 50 mg per dose; monitor aPTT and watch for protamine hypotension/anaphylaxis.",
+  "refs": [
+    ["FDA Label - Heparin sodium (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22heparin%22"],
+    ["DailyMed - Heparin sodium", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=heparin"]
+  ]
+}

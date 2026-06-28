@@ -1,0 +1,109 @@
+{
+  "generic": "Ofloxacin",
+  "cls": "Antibiotic (fluoroquinolone)",
+  "pharm": "Fluoroquinolone; inhibits bacterial DNA gyrase and topoisomerase IV",
+  "tags": ["Rx", "Habit forming: No", "Oral", "Boxed warning"],
+  "quick": [
+    ["Adult dose", "200-400 mg every 12 h"],
+    ["Meal", "With or without food; avoid cations"],
+    ["Pregnancy", "Category C; only if benefit > risk"],
+    ["Lactation", "Excreted in milk; caution"],
+    ["Renal", "Adjust if CrCl ≤50 mL/min"],
+    ["Hepatic", "Severe disease: max 400 mg/day"],
+    ["Alcohol", "Avoid; CNS effects"],
+    ["Monitoring", "Tendon, neuro, CNS, glucose, QT"]
+  ],
+  "summary": "Ofloxacin is an oral fluoroquinolone antibiotic for respiratory, urinary, skin, prostate, and genital infections. It carries a boxed warning for disabling, potentially irreversible reactions (tendinitis/rupture, peripheral neuropathy, CNS effects) and can worsen myasthenia gravis. Reserve for chronic bronchitis exacerbation and uncomplicated cystitis only when no alternatives exist.",
+  "indications": [
+    "Acute bacterial exacerbation of chronic bronchitis (when no alternative)",
+    "Community-acquired pneumonia",
+    "Uncomplicated skin and skin-structure infections",
+    "Acute uncomplicated urethral/cervical gonorrhea",
+    "Nongonococcal urethritis/cervicitis (C. trachomatis)",
+    "Mixed urethral/cervical infections",
+    "Acute pelvic inflammatory disease",
+    "Uncomplicated cystitis (when no alternative)",
+    "Complicated urinary tract infections",
+    "Prostatitis (E. coli)"
+  ],
+  "dosage": [
+    {"c": "Acute exacerbation chronic bronchitis", "r": "Oral", "d": "400 mg every 12 h", "t": "10 days", "n": "Reserve: only if no alternative"},
+    {"c": "Community-acquired pneumonia", "r": "Oral", "d": "400 mg every 12 h", "t": "10 days", "n": ""},
+    {"c": "Uncomplicated skin/skin-structure", "r": "Oral", "d": "400 mg every 12 h", "t": "10 days", "n": ""},
+    {"c": "Acute uncomplicated gonorrhea", "r": "Oral", "d": "400 mg single dose", "t": "1 day", "n": ""},
+    {"c": "Nongonococcal cervicitis/urethritis", "r": "Oral", "d": "300 mg every 12 h", "t": "7 days", "n": "C. trachomatis"},
+    {"c": "Mixed urethra/cervix infection", "r": "Oral", "d": "300 mg every 12 h", "t": "7 days", "n": "C. trachomatis + N. gonorrhoeae"},
+    {"c": "Acute pelvic inflammatory disease", "r": "Oral", "d": "400 mg every 12 h", "t": "10-14 days", "n": "Add anaerobic cover if needed"},
+    {"c": "Uncomplicated cystitis (E. coli/K. pneumoniae)", "r": "Oral", "d": "200 mg every 12 h", "t": "3 days", "n": "Reserve: only if no alternative"},
+    {"c": "Uncomplicated cystitis (other pathogens)", "r": "Oral", "d": "200 mg every 12 h", "t": "7 days", "n": ""},
+    {"c": "Complicated UTI", "r": "Oral", "d": "200 mg every 12 h", "t": "10 days", "n": ""},
+    {"c": "Prostatitis (E. coli)", "r": "Oral", "d": "300 mg every 12 h", "t": "6 weeks", "n": ""},
+    {"c": "Renal impairment CrCl 20-50", "r": "Oral", "d": "Usual unit dose every 24 h", "t": "Per indication", "n": "After normal initial dose"},
+    {"c": "Renal impairment CrCl <20", "r": "Oral", "d": "Half usual unit dose every 24 h", "t": "Per indication", "n": ""}
+  ],
+  "admin": [
+    "Do not take antacids (Ca/Mg/Al), sucralfate, iron, zinc multivitamins, or didanosine within 2 hours before or after a dose",
+    "Maintain adequate hydration",
+    "Discontinue immediately at first sign of tendon pain, neuropathy, or serious CNS reaction",
+    "Reserve for infections without alternative treatment options where indicated"
+  ],
+  "moa": "Inhibits bacterial topoisomerase II (DNA gyrase) and topoisomerase IV, blocking DNA replication, transcription, repair, and recombination, producing bactericidal activity.",
+  "contra": {
+    "absolute": ["Hypersensitivity to ofloxacin or any quinolone", "Known history of myasthenia gravis (may exacerbate weakness)"],
+    "relative": ["History of tendon disorders/rupture with fluoroquinolones", "Age >60, corticosteroid use, or organ transplant (tendon-rupture risk)", "QT prolongation risk / uncorrected hypokalemia", "Seizure disorder or CNS conditions", "Concurrent NSAIDs (CNS/seizure risk)"],
+    "monitor": ["Tendon pain or inflammation (especially Achilles)", "Signs of peripheral neuropathy", "CNS effects (seizures, psychosis, confusion)", "Blood glucose (dys-glycemia)", "QT interval with arrhythmic co-drugs"]
+  },
+  "preg": "Category C; use only if benefit justifies fetal risk",
+  "lact": "Excreted in milk at plasma-like levels; decide to stop nursing or drug",
+  "renal": "CrCl 20-50: usual dose every 24 h; CrCl <20: half dose every 24 h",
+  "hepatic": "Severe liver disease (cirrhosis): do not exceed 400 mg/day",
+  "interactions": {
+    "major": ["Antacids/sucralfate/iron/zinc/didanosine (chelation lowers absorption - separate by 2 h)", "Theophylline (raised levels, toxicity risk)", "Warfarin (potentiated anticoagulation)", "Class IA/III antiarrhythmics and QT-prolonging drugs (torsade risk)"],
+    "moderate": ["NSAIDs (increased CNS stimulation/seizure risk)", "Corticosteroids (increased tendon-rupture risk)", "Cyclosporine (possible elevated levels)", "Cimetidine (possible reduced clearance)", "Antidiabetic agents (dysglycemia)"],
+    "minor": ["Probenecid (possible altered renal clearance)"],
+    "food": "May be taken with or without food; avoid dairy/cation-containing products near dosing",
+    "alcohol": "Avoid; may worsen CNS adverse effects",
+    "diagnostics": "Use caution interpreting glucose tests; monitor for dysglycemia"
+  },
+  "se": {
+    "common": ["Nausea (~3-10%)", "Insomnia (~3-7%)", "Headache (~1-9%)", "Dizziness (~1-5%)", "Diarrhea (~1-4%)", "Vaginitis / genital pruritus in women (~1-6%)", "Vomiting, rash, pruritus, dysgeusia (~1%)"],
+    "serious": ["Tendinitis and tendon rupture", "Peripheral neuropathy (may be irreversible)", "CNS effects (seizures, psychosis, hallucinations, confusion)", "QT prolongation / torsade de pointes", "C. difficile-associated colitis", "Photosensitivity", "Dysglycemia (hypo/hyperglycemia)"],
+    "rare": ["Hepatotoxicity", "Blood dyscrasias", "Crystalluria", "Aortic aneurysm/dissection (class risk)"],
+    "emergency": ["Anaphylaxis / severe hypersensitivity (can follow first dose; airway support, epinephrine)", "Tendon rupture - stop drug, rest affected limb", "Disabling peripheral neuropathy or CNS reaction - discontinue immediately", "Myasthenia gravis exacerbation with breathing difficulty", "Severe/bloody diarrhea (C. difficile colitis)", "Aortic aneurysm or dissection - sudden chest/back/abdominal pain"]
+  },
+  "monitoring": [
+    "Tendon pain/inflammation during and for months after therapy",
+    "Peripheral neuropathy symptoms (pain, numbness, weakness)",
+    "CNS effects (seizures, mood, confusion, insomnia)",
+    "Blood glucose, especially in diabetics",
+    "QT interval / electrolytes with risk factors",
+    "Theophylline levels and INR (warfarin) when co-administered",
+    "Renal and hepatic function in impairment"
+  ],
+  "counsel": [
+    "Stop the drug and call your provider at the first sign of tendon pain, swelling, or rupture; rest the limb",
+    "Report numbness, tingling, or weakness (possible nerve damage)",
+    "Report new anxiety, confusion, hallucinations, or seizures",
+    "Avoid antacids, iron, zinc, and dairy within 2 hours of your dose",
+    "Avoid excessive sun; use sun protection (photosensitivity)",
+    "Avoid alcohol; stay well hydrated"
+  ],
+  "pk": [
+    ["Onset", "Oral bioavailability ~98%"],
+    ["Peak", "Cmax at 1-2 h"],
+    ["Half-life", "~4-5 h (terminal ~20-25 h; effective ~9 h)"],
+    ["Duration", "Every-12-hour dosing"],
+    ["Storage", "Store per product labeling (room temperature)"]
+  ],
+  "pearls": [
+    "BOXED WARNING: disabling, potentially irreversible reactions (tendinitis/tendon rupture, peripheral neuropathy, CNS effects) can occur together; discontinue immediately if any appear",
+    "Avoid in known myasthenia gravis - fluoroquinolones can worsen muscle weakness",
+    "Class fluoroquinolone risk also includes aortic aneurysm/dissection - report sudden chest/back/abdominal pain",
+    "Reserve for chronic bronchitis exacerbation and uncomplicated cystitis only when no alternative exists",
+    "Chelates with di/trivalent cations - separate antacids, iron, zinc, and didanosine by 2 hours",
+    "Inhibits CYP and raises theophylline/warfarin levels; QT-prolonging risk with antiarrhythmics"
+  ],
+  "missed": "Take when remembered; skip if near next dose, do not double",
+  "overdose": "CNS effects (drowsiness, dizziness, disorientation, slurred speech), nausea; empty stomach, hydrate, supportive care; not well removed by dialysis",
+  "refs": [["U.S. FDA label via openFDA / DailyMed", "https://dailymed.nlm.nih.gov"]]
+}

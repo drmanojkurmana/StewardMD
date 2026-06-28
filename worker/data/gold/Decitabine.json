@@ -1,0 +1,91 @@
+{
+  "generic": "Decitabine",
+  "cls": "Nucleoside metabolic inhibitor / DNA methyltransferase inhibitor (hypomethylating agent)",
+  "pharm": "Antineoplastic (cytotoxic)",
+  "tags": ["antineoplastic", "hypomethylating agent", "DNA methyltransferase inhibitor", "myelodysplastic syndrome", "MDS", "chemotherapy", "myelosuppression", "cytotoxic"],
+  "quick": [
+    ["Adult dose", "15 mg/m2 IV over 3 h q8h x3 days every 6 wk; OR 20 mg/m2 IV over 1 h daily x5 days every 4 wk"],
+    ["Meal", "Not applicable - given as intravenous infusion"],
+    ["Pregnancy", "Can cause fetal harm; effective contraception required; avoid in pregnancy"],
+    ["Lactation", "Do not breastfeed during and for at least 1 week after the final dose"],
+    ["Renal", "No specific labeled adjustment; use caution in significant impairment (limited data)"],
+    ["Hepatic", "No specific labeled adjustment; use caution in significant impairment (limited data)"],
+    ["Alcohol", "No specific interaction; advise caution given marrow toxicity"],
+    ["Monitoring", "CBC with platelets baseline and before each cycle; hepatic panel and serum creatinine at baseline"]
+  ],
+  "summary": "Decitabine is a cytidine nucleoside metabolic inhibitor and hypomethylating agent indicated for adults with myelodysplastic syndromes (MDS) of all French-American-British subtypes and intermediate-1, intermediate-2 and high-risk IPSS groups. After phosphorylation it is incorporated into DNA and inhibits DNA methyltransferase, causing hypomethylation that can restore normal function to genes controlling cellular differentiation and proliferation, while in rapidly dividing cells it is also directly cytotoxic. It is administered intravenously in either a 3-day (every 6 weeks) or 5-day (every 4 weeks) cycle. Myelosuppression - neutropenia, thrombocytopenia and anemia - is its most frequent and serious toxicity and the main reason for dose delay, reduction or discontinuation.",
+  "indications": [
+    "Treatment of adult patients with myelodysplastic syndromes (MDS), previously treated and untreated, de novo and secondary, of all FAB subtypes (refractory anemia, refractory anemia with ringed sideroblasts, refractory anemia with excess blasts, refractory anemia with excess blasts in transformation, and chronic myelomonocytic leukemia)",
+    "Treatment of intermediate-1, intermediate-2 and high-risk International Prognostic Scoring System (IPSS) MDS groups"
+  ],
+  "dosage": [
+    {"c": "MDS - Three-day regimen", "r": "Adult", "d": "15 mg/m2 by continuous IV infusion over 3 hours, repeated every 8 hours for 3 days", "t": "Repeat cycle every 6 weeks", "n": "Minimum 4 cycles upon hematologic recovery (ANC >=1,000/mcL, platelets >=50,000/mcL); response may take longer than 4 cycles"},
+    {"c": "MDS - Five-day regimen", "r": "Adult", "d": "20 mg/m2 by continuous IV infusion over 1 hour daily for 5 days", "t": "Repeat cycle every 4 weeks", "n": "Delay and reduce dose for hematologic toxicity"},
+    {"c": "Premedication / baseline", "r": "Adult", "d": "Consider antiemetic premedication; obtain baseline CBC with platelets, hepatic panel and serum creatinine", "t": "Before each cycle", "n": "Adjust dose/timing for hematologic and other toxicity per label"}
+  ],
+  "admin": [
+    "Reconstitute and dilute per label; administer only by intravenous infusion at the specified rate and frequency",
+    "Premedicate for nausea with antiemetics as needed",
+    "Obtain CBC with platelets at baseline, before each cycle and as needed to monitor response and toxicity",
+    "Manage toxicity with dose-delay, dose-reduction, hematopoietic growth factors and anti-infectives as needed",
+    "Handle as a hazardous cytotoxic drug using appropriate precautions"
+  ],
+  "moa": "Decitabine exerts its antineoplastic effect after phosphorylation and direct incorporation into DNA, where it inhibits DNA methyltransferase, causing hypomethylation of DNA and promoting cellular differentiation or apoptosis. Hypomethylation may restore normal function to genes critical for control of cellular differentiation and proliferation. In rapidly dividing cells, cytotoxicity may also arise from covalent adducts between DNA methyltransferase and decitabine incorporated into DNA; non-proliferating cells are relatively insensitive.",
+  "contra": {
+    "absolute": ["None listed in the prescribing information"],
+    "relative": ["Pre-existing severe myelosuppression", "Active uncontrolled infection", "Pregnancy (embryo-fetal toxicity)", "Significant hepatic or renal impairment (limited data)"],
+    "monitor": ["Patients with baseline cytopenias", "Patients with active or recurrent infections", "Patients of reproductive potential"]
+  },
+  "preg": "Based on human data, animal studies and its mechanism of action, decitabine can cause fetal harm. A published case report describes multiple structural abnormalities after first-trimester exposure, and animal studies show malformations and embryo-fetal lethality at about 7% of the human dose on a mg/m2 basis. Advise of the risk to a fetus; females of reproductive potential should use effective contraception during and for the recommended period after treatment, and males with female partners of reproductive potential should also use contraception.",
+  "lact": "Because of the potential for serious adverse reactions in a breastfed child, advise women not to breastfeed during treatment with decitabine and for at least 1 week after the final dose.",
+  "renal": "No specific dosage adjustment is provided in the labeling. Decitabine has negligible plasma protein binding and is not a CYP substrate; use caution and monitor in patients with significant renal impairment, for whom data are limited.",
+  "hepatic": "No specific dosage adjustment is provided in the labeling. Obtain a baseline serum hepatic panel; use caution and monitor in patients with significant hepatic impairment, for whom data are limited.",
+  "interactions": {
+    "major": ["No major drug interactions established; formal interaction studies have not been conducted"],
+    "moderate": ["Other myelosuppressive chemotherapy or radiation - additive marrow suppression", "Live vaccines - increased risk of infection in immunosuppressed patients"],
+    "minor": ["In vitro, decitabine is unlikely to inhibit or induce CYP450 enzymes and is not a CYP substrate; protein-binding displacement interactions are not expected"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "No specific interaction; advise caution given underlying disease and marrow toxicity.",
+    "diagnostics": "Expect chemotherapy-related laboratory changes including falls in neutrophils, platelets and hemoglobin and possible hyperglycemia."
+  },
+  "se": {
+    "common": ["Neutropenia", "Thrombocytopenia", "Anemia", "Pyrexia", "Fatigue", "Nausea", "Cough", "Petechiae", "Constipation", "Diarrhea", "Hyperglycemia"],
+    "serious": ["Fatal and serious myelosuppression (febrile neutropenia, severe thrombocytopenia, severe anemia)", "Serious and fatal infections", "Bleeding due to thrombocytopenia", "Embryo-fetal toxicity"],
+    "rare": ["Differentiation-related complications", "Hypersensitivity reactions"],
+    "emergency": ["Febrile neutropenia / sepsis", "Severe hemorrhage from thrombocytopenia", "Life-threatening infection"]
+  },
+  "monitoring": [
+    "Complete blood count with platelets at baseline, before each cycle and as needed to monitor response and toxicity",
+    "Serum hepatic panel and serum creatinine at baseline",
+    "Signs and symptoms of infection (myelosuppression)",
+    "Signs of bleeding",
+    "Hematologic recovery (ANC and platelet count) before restarting cycles"
+  ],
+  "counsel": [
+    "This chemotherapy lowers blood counts; report fever, chills or other signs of infection immediately",
+    "Report unusual bruising, bleeding or pinpoint red spots on the skin",
+    "Avoid pregnancy - use effective contraception during and after treatment as advised",
+    "Do not breastfeed during treatment and for at least one week after the last dose",
+    "Keep all appointments for blood tests so doses can be adjusted safely"
+  ],
+  "pk": [
+    ["Onset", "Hematologic and clinical responses develop over multiple cycles, sometimes beyond 4 cycles"],
+    ["Peak", "Achieved during the IV infusion"],
+    ["Half-life", "Short terminal half-life (on the order of tens of minutes)"],
+    ["Duration", "Cyclical dosing every 4-6 weeks maintains hypomethylating effect"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C permitted; discard unused portion"]
+  ],
+  "pearls": [
+    "Myelosuppression is the dominant toxicity and the main reason for dose delay, reduction or discontinuation",
+    "Worsening neutropenia in cycle 1 or 2 does not necessarily indicate MDS progression",
+    "Give a minimum of 4 cycles before judging response - benefit can take longer to appear",
+    "Resume cycles only after hematologic recovery (ANC >=1,000/mcL and platelets >=50,000/mcL)",
+    "Handle and administer as a hazardous cytotoxic agent with appropriate precautions"
+  ],
+  "missed": "Decitabine is administered by a healthcare professional on a fixed cycle schedule. If an appointment for a dose is missed, contact the oncology team promptly; do not attempt to self-administer or make up doses. The team will reschedule based on blood counts and cycle timing.",
+  "overdose": "There is no known antidote. Higher doses are associated with increased myelosuppression, including prolonged neutropenia and thrombocytopenia. Manage with standard supportive measures, including blood-product support, growth factors and treatment of infection as indicated.",
+  "refs": [
+    ["FDA Decitabine for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22decitabine%22"],
+    ["DailyMed - Decitabine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

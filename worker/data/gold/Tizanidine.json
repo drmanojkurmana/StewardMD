@@ -1,0 +1,93 @@
+{
+  "generic": "Tizanidine",
+  "cls": "Central alpha-2-adrenergic agonist",
+  "pharm": "Skeletal muscle relaxant (antispasticity agent)",
+  "tags": ["muscle relaxant", "spasticity", "alpha-2 agonist", "multiple sclerosis", "spinal cord injury"],
+  "quick": [
+    ["Adult dose", "Start 2 mg q6-8h PRN; max 36 mg/day"],
+    ["Meal", "With or without food, but be consistent"],
+    ["Pregnancy", "Avoid; animal data show fetal harm"],
+    ["Lactation", "Weigh benefit vs risk; limited data"],
+    ["Renal", "Reduce dose if CrCl <25 mL/min"],
+    ["Hepatic", "Use lower doses; monitor LFTs"],
+    ["Alcohol", "Avoid; additive sedation, raises levels"],
+    ["Monitoring", "ALT/AST baseline & 1 mo after max dose; BP"]
+  ],
+  "summary": "Tizanidine is a centrally acting alpha-2-adrenergic agonist for the treatment of spasticity in adults. Started at 2 mg every 6-8 hours and titrated to a maximum of 36 mg/day, its short duration favors timed dosing. Key risks are hepatotoxicity, hypotension/orthostasis, and sedation; it is contraindicated with strong CYP1A2 inhibitors such as fluvoxamine and ciprofloxacin.",
+  "indications": [
+    "Treatment of spasticity in adults (e.g., due to multiple sclerosis or spinal cord injury)"
+  ],
+  "dosage": [
+    {"c": "Spasticity (adult)", "r": "Initial", "d": "2 mg by mouth every 6 to 8 hours as needed, max 3 doses in 24 hours", "t": "Every 6-8 h PRN", "n": "Reserve dosing for activities/times when relief is most important"},
+    {"c": "Spasticity (adult)", "r": "Titration", "d": "Increase by 2 mg to 4 mg per dose every 1 to 4 days", "t": "Every 6-8 h", "n": "Base increases on clinical response and tolerability"},
+    {"c": "Spasticity (adult)", "r": "Maximum", "d": "Maximum total daily dosage 36 mg/day; single doses >16 mg not studied", "t": "In 3 divided doses", "n": "Median effective dose in trials 20-28 mg/day"},
+    {"c": "Renal impairment (CrCl <25 mL/min)", "r": "Adjusted", "d": "Use lower individual doses during titration; increase individual dose rather than frequency if higher dose needed", "t": "Every 6-8 h", "n": "Clearance reduced >50%; monitor closely"},
+    {"c": "Hepatic impairment", "r": "Adjusted", "d": "Use lower individual doses during titration; increase dose rather than frequency if needed", "t": "Every 6-8 h", "n": "Extensively metabolized in liver"}
+  ],
+  "admin": [
+    "Take consistently either with or without food to limit variability in plasma exposure",
+    "Do not switch between tablets and capsules without considering pharmacokinetic differences",
+    "Because of short duration of effect, time doses to activities when relief of spasticity is most important",
+    "Monitor aminotransferases at baseline and 1 month after maximum dose is achieved",
+    "When discontinuing, decrease dose by 2 mg to 4 mg per day to minimize withdrawal reactions"
+  ],
+  "moa": "Tizanidine is a central alpha-2-adrenergic receptor agonist that reduces spasticity by increasing presynaptic inhibition of motor neurons. Its effects are greatest on polysynaptic pathways, reducing facilitation of spinal motor neurons. It does not directly affect skeletal muscle fibers or the neuromuscular junction.",
+  "contra": {
+    "absolute": ["Concomitant use with strong CYP1A2 inhibitors (e.g., fluvoxamine, ciprofloxacin)", "History of hypersensitivity to tizanidine or product ingredients (anaphylaxis, angioedema)"],
+    "relative": ["Concurrent antihypertensive therapy (additive hypotension)", "Hepatic impairment", "Renal impairment (CrCl <25 mL/min)", "Elderly (clearance markedly reduced)"],
+    "monitor": ["Concomitant CNS depressants (alcohol, benzodiazepines, opioids)", "Concomitant moderate/weak CYP1A2 inhibitors", "Oral contraceptive use", "Patients moving from supine to upright position"]
+  },
+  "preg": "There are no adequate human data. In animal studies, tizanidine during pregnancy caused embryofetal and postnatal offspring mortality and growth deficits at doses less than those used clinically. Avoid unless potential benefit justifies potential fetal risk.",
+  "lact": "There are no data on the presence of tizanidine in human milk; animal studies report tizanidine in milk of lactating animals. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and potential adverse effects on the infant.",
+  "renal": "Clearance is reduced (>50% in elderly with CrCl <25 mL/min). Use lower individual doses during titration; if higher doses are required, increase the individual dose rather than the dosing frequency. Substantially renally excreted; monitor closely for adverse reactions.",
+  "hepatic": "Use with caution; tizanidine is extensively metabolized in the liver and impairment is expected to significantly affect pharmacokinetics. Use lower individual doses during titration and monitor aminotransferases. May cause hepatocellular liver injury.",
+  "interactions": {
+    "major": ["Strong CYP1A2 inhibitors (fluvoxamine, ciprofloxacin) - CONTRAINDICATED; fluvoxamine increases tizanidine AUC 33-fold causing severe hypotension, sedation, psychomotor impairment", "Antihypertensive medications - additive hypotensive effects; monitor", "Other alpha-2-adrenergic agonists (e.g., clonidine) - not recommended; cumulative hypotension"],
+    "moderate": ["Moderate/weak CYP1A2 inhibitors (zileuton, amiodarone, mexiletine, propafenone, verapamil, cimetidine, famotidine, acyclovir, ticlopidine) - avoid; may cause hypotension, bradycardia, drowsiness", "Oral contraceptives - 50% lower tizanidine clearance; concomitant use not recommended", "CNS depressants (benzodiazepines, opioids, tricyclic antidepressants) - additive sedation"],
+    "minor": ["Acetaminophen - tizanidine delays acetaminophen Tmax by 16 minutes"],
+    "food": "May be taken with or without food, but consistent administration with respect to food is recommended; food alters Cmax and extent of absorption and differs between tablets and capsules.",
+    "alcohol": "Alcohol increases tizanidine AUC ~20% and Cmax ~15% and adds to CNS depression; avoid.",
+    "diagnostics": "May cause elevations in aminotransferases (ALT/AST)."
+  },
+  "se": {
+    "common": ["Dry mouth (49%)", "Somnolence/sedation (48%)", "Asthenia/weakness/fatigue (41%)", "Dizziness (16%)", "Urinary tract infection", "Constipation"],
+    "serious": ["Hepatocellular liver injury / liver test abnormality", "Hypotension and syncope", "Hallucinosis / psychotic-like symptoms (3%)"],
+    "rare": ["Withdrawal reactions (rebound hypertension, tachycardia, hypertonia)", "Bradycardia", "Hepatitis / hepatotoxicity", "Ventricular tachycardia"],
+    "emergency": ["Anaphylaxis / angioedema of throat and tongue", "Stevens-Johnson syndrome", "Severe symptomatic hypotension or syncope", "Acute liver injury"]
+  },
+  "monitoring": [
+    "Aminotransferase (ALT/AST) levels at baseline and 1 month after maximum dose, or if hepatic injury suspected",
+    "Blood pressure, especially before dose increases and with concurrent antihypertensives",
+    "Signs of excess sedation when used with other CNS depressants",
+    "Renal function in elderly and those with renal impairment",
+    "Emergence of hallucinations or psychotic-like symptoms"
+  ],
+  "counsel": [
+    "Do not take with fluvoxamine or ciprofloxacin due to risk of severe low blood pressure and sedation",
+    "Take consistently with or without food and do not switch between tablets and capsules",
+    "Rise slowly from lying or sitting to standing to avoid dizziness/fainting",
+    "May cause drowsiness; use caution driving or operating machinery, and avoid alcohol",
+    "Do not stop suddenly; rebound high blood pressure and fast heart rate can occur",
+    "Report signs of allergic reaction or liver problems promptly"
+  ],
+  "pk": [
+    ["Onset", "Reduction in muscle tone within 1 hour"],
+    ["Peak", "Tmax ~1 hour fasting (delayed with food)"],
+    ["Half-life", "~2.5 hours (metabolites 20-40 h)"],
+    ["Duration", "Short; greatest effect 1-2 h, gone by ~6 h"],
+    ["Storage", "Store at 20-25 C (68-77 F), light-resistant"]
+  ],
+  "pearls": [
+    "Contraindicated with strong CYP1A2 inhibitors (fluvoxamine, ciprofloxacin) - severe hypotension and sedation",
+    "Short duration of action allows dosing timed to activities requiring relief",
+    "Orthostatic hypotension common; warn patients about position changes",
+    "Closely related to clonidine - abrupt withdrawal causes rebound hypertension and tachycardia",
+    "Tablets and capsules are bioequivalent fasting but NOT fed"
+  ],
+  "missed": "If a dose is missed, take it when remembered unless it is close to the next scheduled dose; do not double up. Because tizanidine is dosed as needed for spasticity relief, resume the regular schedule.",
+  "overdose": "Overdose causes decreased sensorium (lethargy, somnolence, confusion, coma), bradycardia, hypotension, and respiratory depression; fatalities have occurred, often with co-ingested CNS depressants. Ensure airway, monitor cardiovascular and respiratory function, and treat supportively. Dialysis is unlikely to remove tizanidine. Management resembles clonidine overdose; symptoms usually resolve within 1 to 3 days.",
+  "refs": [
+    ["FDA Tizanidine Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22tizanidine%22"],
+    ["FDA DailyMed - Tizanidine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

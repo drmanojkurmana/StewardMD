@@ -1,0 +1,104 @@
+{
+  "generic": "Budesonide (oral, delayed-release)",
+  "cls": "Glucocorticoid corticosteroid (locally acting)",
+  "pharm": "Potent glucocorticoid-receptor agonist with high first-pass hepatic metabolism, giving high local gut anti-inflammatory effect and low systemic exposure.",
+  "tags": ["Rx only", "Corticosteroid", "Crohn's disease", "High first-pass metabolism", "CYP3A4 substrate"],
+  "quick": [
+    ["Adult dose", "Active Crohn's: 9 mg once daily in the morning for up to 8 weeks"],
+    ["Meal", "Swallow whole; avoid grapefruit juice"],
+    ["Pregnancy", "Use only if clearly needed; benefit vs risk"],
+    ["Lactation", "Compatible; corticosteroids pass into milk in small amounts"],
+    ["Renal", "No specific adjustment"],
+    ["Hepatic", "Moderate impairment (Child-Pugh B): consider 3 mg once daily"],
+    ["Alcohol", "No direct interaction; limit in IBD"],
+    ["Monitoring", "Signs of hypercorticism, adrenal suppression, infection"]
+  ],
+  "summary": "Oral delayed-release budesonide is a locally acting glucocorticoid used to treat mild-to-moderate active Crohn's disease involving the ileum and/or ascending colon and to maintain remission for up to 3 months. Its high first-pass hepatic metabolism delivers topical anti-inflammatory effect in the gut with fewer systemic corticosteroid effects than prednisolone, though hypercorticism and adrenal suppression can still occur.",
+  "indications": [
+    "Treatment of mild-to-moderate active Crohn's disease involving the ileum and/or ascending colon (patients >=8 years)",
+    "Maintenance of clinical remission of mild-to-moderate Crohn's disease involving the ileum and/or ascending colon for up to 3 months (adults)"
+  ],
+  "dosage": [
+    {"c": "Active Crohn's disease (adults)", "r": "Adult oral", "d": "9 mg once daily in the morning for up to 8 weeks; repeat 8-week courses for recurrences", "t": "Once daily", "n": "Swallow whole"},
+    {"c": "Active Crohn's disease (pediatric >25 kg, 8-17 yr)", "r": "Pediatric oral", "d": "9 mg once daily for up to 8 weeks, then 6 mg once daily for 2 weeks", "t": "Once daily", "n": "Then taper"},
+    {"c": "Maintenance of remission (adults)", "r": "Adult oral", "d": "6 mg once daily for up to 3 months; then taper to cessation", "t": "Once daily", "n": "No proven benefit beyond 3 months"},
+    {"c": "Moderate hepatic impairment (Child-Pugh B)", "r": "Adult oral", "d": "Consider reducing to 3 mg once daily", "t": "Once daily", "n": "Increased systemic exposure"}
+  ],
+  "admin": [
+    "Take once daily in the morning; swallow capsules whole - do not chew or crush",
+    "If unable to swallow whole, open the capsule and sprinkle granules onto one tablespoon of applesauce, consume within 30 minutes without chewing, then drink 8 oz of water",
+    "Avoid grapefruit juice for the duration of therapy",
+    "When switching from oral prednisolone, taper the prednisolone as budesonide is started",
+    "Taper budesonide rather than stopping abruptly after prolonged use"
+  ],
+  "moa": "Budesonide is a high-potency glucocorticoid that binds the glucocorticoid receptor and broadly suppresses inflammatory mediators (cytokines, prostaglandins, leukotrienes) and inflammatory cell activity in the intestinal mucosa. The delayed/controlled-release formulation releases drug in the distal ileum and ascending colon, and extensive first-pass hepatic metabolism (CYP3A4) limits systemic glucocorticoid exposure, providing targeted anti-inflammatory action with a relatively favorable systemic profile.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to budesonide or any ingredient (anaphylaxis reported)"
+    ],
+    "relative": [
+      "Active or latent infection (TB, varicella, measles, fungal, Strongyloides)",
+      "Ocular herpes simplex",
+      "Hepatic impairment (increased systemic exposure)",
+      "Diabetes mellitus, hypertension, osteoporosis, glaucoma/cataract"
+    ],
+    "monitor": [
+      "Signs of hypercorticism and adrenal axis suppression",
+      "Signs of infection",
+      "Blood pressure, glucose, ocular pressure with prolonged use"
+    ]
+  },
+  "preg": "Corticosteroids may have some risk; use oral budesonide in pregnancy only if the potential benefit justifies the potential risk to the fetus. Monitor neonates of mothers on corticosteroids for hypoadrenalism.",
+  "lact": "Budesonide is present in breast milk in small amounts; inhaled/oral local budesonide is generally considered compatible with breastfeeding. Consider the mother's clinical need and the infant.",
+  "renal": "No specific dosage adjustment is provided for renal impairment.",
+  "hepatic": "Reduced hepatic clearance increases systemic exposure; consider reducing the dose to 3 mg once daily in moderate hepatic impairment (Child-Pugh B) and monitor for systemic corticosteroid effects. Avoid/limit in severe impairment.",
+  "interactions": {
+    "major": [
+      "Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir, cobicistat) - markedly increase budesonide exposure and systemic corticosteroid effects; avoid"
+    ],
+    "moderate": [
+      "Grapefruit juice (increases exposure - avoid)",
+      "CYP3A4 inducers (rifampin, carbamazepine, phenytoin) - reduce efficacy",
+      "Other corticosteroids (additive immunosuppression and adrenal effects)",
+      "Live vaccines (reduced response / infection risk)"
+    ],
+    "minor": ["Estrogens/oral contraceptives (may increase corticosteroid levels)"],
+    "food": "Avoid grapefruit juice; otherwise take with or without food, swallowing the capsule whole.",
+    "alcohol": "No direct interaction.",
+    "diagnostics": "May suppress hypothalamic-pituitary-adrenal axis testing and reduce cortisol levels."
+  },
+  "se": {
+    "common": ["Headache", "Respiratory infection", "Nausea", "Back pain", "Dyspepsia", "Acne", "Moon face / cushingoid features", "Fatigue"],
+    "serious": ["Hypercorticism and adrenal axis suppression", "Increased risk of serious infections (varicella, measles, fungal, Strongyloides)", "Symptoms of steroid withdrawal when transferred from systemic steroids", "Glaucoma / cataract / increased intraocular pressure", "Osteoporosis / growth suppression in children"],
+    "rare": ["Kaposi's sarcoma", "Anaphylaxis", "Psychiatric disturbances (mood/behavior)", "Pancreatitis"],
+    "emergency": ["Adrenal crisis on abrupt withdrawal", "Severe systemic infection", "Anaphylaxis"]
+  },
+  "monitoring": ["Signs/symptoms of hypercorticism and adrenal suppression", "Signs of new or worsening infection", "Blood pressure, blood glucose, bone density and ocular exams with prolonged use", "Growth in pediatric patients", "Withdrawal symptoms when transferring from systemic corticosteroids"],
+  "counsel": [
+    "Swallow capsules whole in the morning; do not crush or chew",
+    "Avoid grapefruit and grapefruit juice while taking this medicine",
+    "Avoid people with chickenpox or measles if you have not had them; report any infection",
+    "Do not stop suddenly after long use - the dose must be tapered",
+    "Tell your doctor you take this steroid before surgery or during severe illness"
+  ],
+  "pk": [
+    ["Onset", "Clinical improvement over days to weeks"],
+    ["Peak", "Plasma Tmax ~ 30-600 minutes depending on transit (delayed release)"],
+    ["Half-life", "~2-3.6 hours"],
+    ["Duration", "Once-daily dosing"],
+    ["Storage", "Store at 20-25 C; protect from moisture"]
+  ],
+  "pearls": [
+    "High first-pass metabolism gives gut-targeted action with fewer systemic effects than prednisolone, but is NOT free of corticosteroid risks",
+    "Works best for ileal/right-colonic Crohn's disease - the release site matches the disease location",
+    "Avoid strong CYP3A4 inhibitors and grapefruit juice - they raise systemic exposure",
+    "Still requires tapering and adrenal-suppression awareness with prolonged use",
+    "Maintenance benefit not demonstrated beyond 3 months"
+  ],
+  "missed": "Take the missed dose as soon as you remember on the same day; if it is nearly time for the next day's dose, skip it and resume your regular morning schedule. Do not double up.",
+  "overdose": "Acute overdose is unlikely to cause clinical problems; chronic excessive dosing produces systemic hypercorticism. Manage by reducing the dose gradually (do not stop abruptly) and supportive care.",
+  "refs": [
+    ["FDA Label - Budesonide delayed-release (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22budesonide%22+AND+openfda.route:%22ORAL%22"],
+    ["DailyMed - Budesonide (oral)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=budesonide"]
+  ]
+}

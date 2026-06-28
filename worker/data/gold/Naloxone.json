@@ -1,0 +1,95 @@
+{
+  "generic": "Naloxone",
+  "cls": "Opioid antagonist",
+  "pharm": "Pure competitive opioid receptor antagonist that rapidly reverses opioid-induced respiratory depression, sedation, and hypotension with no agonist activity at therapeutic doses.",
+  "tags": ["Opioid antagonist", "Overdose reversal", "Emergency", "Short half-life", "IM/IV/SC", "Intranasal", "Antidote"],
+  "quick": [
+    ["Adult dose", "Injection: 0.4-2 mg IV/IM/SC, repeat q2-3 min. Nasal: 1 spray (4 mg) q2-3 min"],
+    ["Meal", "N/A (parenteral/intranasal)"],
+    ["Pregnancy", "Use if needed; may precipitate withdrawal in mother and fetus"],
+    ["Lactation", "Caution; excretion in milk unknown"],
+    ["Renal", "No established adjustment; use with caution"],
+    ["Hepatic", "No established adjustment; use with caution"],
+    ["Alcohol", "No direct interaction; treats opioid (not alcohol) toxicity"],
+    ["Monitoring", "Respiration, level of consciousness; watch for re-narcotization"]
+  ],
+  "summary": "Naloxone is a pure opioid antagonist used as the antidote for known or suspected opioid overdose, rapidly reversing respiratory and CNS depression. It is given IV (fastest), IM, SC, or intranasally (Narcan). Because its duration of action is shorter than that of many opioids, re-sedation (re-narcotization) can occur, so repeat dosing and continued monitoring are essential. It may precipitate acute withdrawal in opioid-dependent patients.",
+  "indications": [
+    "Emergency treatment of known or suspected opioid overdose with respiratory and/or CNS depression",
+    "Reversal of postoperative opioid-induced respiratory depression",
+    "Diagnosis of suspected acute opioid overdosage",
+    "Reversal of opioid depression in the neonate after maternal opioid use (injection)"
+  ],
+  "dosage": [
+    {"c": "Opioid overdose (injection)", "r": "IV/IM/SC", "d": "0.4-2 mg", "t": "Repeat every 2-3 min as needed", "n": "IV preferred for fastest onset; if no response after 10 mg total, reconsider opioid diagnosis"},
+    {"c": "Opioid overdose (intranasal)", "r": "Intranasal", "d": "1 spray (4 mg marketed product) into one nostril", "t": "Repeat every 2-3 min, alternating nostrils, until EMS arrives", "n": "Use a new device for each dose; do not prime/test"},
+    {"c": "Postoperative opioid depression", "r": "IV", "d": "0.1-0.2 mg increments", "t": "Every 2-3 min, titrated to ventilation", "n": "Titrate to restore breathing without fully reversing analgesia"},
+    {"c": "Pediatric opioid overdose", "r": "IV/IM/SC", "d": "Initial 0.01 mg/kg; subsequent 0.1 mg/kg if needed", "t": "Repeat as required", "n": "Continued surveillance essential"},
+    {"c": "Neonatal opioid depression", "r": "IV/IM/SC", "d": "0.01 mg/kg", "t": "May repeat", "n": "Watch for precipitated withdrawal"}
+  ],
+  "admin": [
+    "IV gives the most rapid onset; IM and SC have a more prolonged effect",
+    "Narcan nasal spray: do not prime or test before use; give one spray per device into one nostril and alternate nostrils on repeat doses",
+    "Always call emergency medical services after the first dose",
+    "Keep the patient under continued surveillance and repeat doses as needed because opioid effects may outlast naloxone",
+    "Place a responsive patient in the recovery position after administration"
+  ],
+  "moa": "Naloxone is a pure competitive antagonist at opioid (predominantly mu) receptors; it displaces opioid agonists from the receptor and blocks their effects, reversing respiratory depression and sedation. It has essentially no pharmacologic activity in the absence of opioids.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to naloxone or any excipient"],
+    "relative": ["Known opioid dependence (precipitates acute withdrawal)", "Patients maintained on partial/mixed agonists such as buprenorphine (reversal may be incomplete)", "Cardiovascular disease (risk with abrupt reversal)"],
+    "monitor": ["Respiratory rate and depth", "Level of consciousness", "Recurrence of opioid effect (re-narcotization)"]
+  },
+  "preg": "Crosses the placenta; may precipitate withdrawal in an opioid-dependent mother and fetus. Use in pregnancy when needed to treat life-threatening opioid overdose.",
+  "lact": "It is not known whether naloxone is excreted in human milk; use with caution. A single emergency dose is unlikely to harm a breastfed infant.",
+  "renal": "Safety and efficacy in renal insufficiency or failure have not been established; use with caution.",
+  "hepatic": "Safety and efficacy in liver disease have not been established; use with caution (extensive hepatic metabolism).",
+  "interactions": {
+    "major": ["Buprenorphine - slow receptor dissociation may require larger/repeated naloxone doses for reversal", "Partial/mixed opioid agonist-antagonists (pentazocine) - reversal may be incomplete"],
+    "moderate": ["Opioid agonists - naloxone reverses their effects and precipitates withdrawal in dependence"],
+    "minor": ["None of clinical significance"],
+    "food": "N/A",
+    "alcohol": "No direct interaction; does not reverse alcohol or non-opioid sedative effects",
+    "diagnostics": "None of clinical significance."
+  },
+  "se": {
+    "common": ["Precipitated opioid withdrawal (body aches, sweating, tachycardia, runny nose, sneezing, yawning, piloerection, nausea/vomiting, abdominal cramps)", "Nervousness, restlessness, irritability"],
+    "serious": ["Hypotension or hypertension", "Ventricular tachycardia or fibrillation", "Pulmonary edema", "Seizures"],
+    "rare": ["Cardiac arrest", "Coma", "Encephalopathy"],
+    "emergency": ["Acute severe opioid withdrawal", "Cardiac arrhythmias/arrest with abrupt reversal", "Pulmonary edema"]
+  },
+  "monitoring": [
+    "Respiratory rate, depth, and oxygen saturation",
+    "Level of consciousness",
+    "Heart rate and blood pressure",
+    "Recurrence of respiratory depression (re-narcotization) - keep under surveillance",
+    "Signs of acute opioid withdrawal in dependent patients"
+  ],
+  "counsel": [
+    "Call emergency services immediately - even after giving naloxone the person needs medical care",
+    "Reversal can wear off before the opioid does, so symptoms may return and repeat doses may be needed",
+    "Give another dose every 2-3 minutes if there is no or inadequate response",
+    "Place the person on their side (recovery position) and stay with them until help arrives",
+    "Carry naloxone if you or someone close to you is at risk of opioid overdose"
+  ],
+  "pk": [
+    ["Onset", "Within ~2 minutes (IV); slightly slower IM/SC/intranasal"],
+    ["Peak", "Intranasal Tmax ~0.33-0.5 h; IV at injection"],
+    ["Half-life", "Injection ~30-81 min (adults); intranasal ~1.85-2.19 h; neonatal ~3 h"],
+    ["Duration", "Dose- and route-dependent; often shorter than the opioid being reversed"],
+    ["Storage", "Injection 20-25 C; Narcan nasal 2-25 C, do not freeze, avoid >40 C"]
+  ],
+  "pearls": [
+    "Re-narcotization is the key danger - naloxone's short half-life is shorter than methadone, sustained-release, and long-acting opioids, so depression can recur",
+    "If there is no response after a total of 10 mg, reconsider whether opioids are the cause",
+    "Larger or repeated doses are needed to reverse buprenorphine",
+    "In opioid-dependent patients, titrate carefully to avoid precipitating severe withdrawal",
+    "Effective by IM and intranasal routes, allowing community/bystander administration"
+  ],
+  "missed": "Not a scheduled medication - naloxone is given as needed for acute opioid overdose. Repeat every 2-3 minutes if the person does not respond or if opioid effects recur.",
+  "overdose": "Naloxone itself has very low toxicity. Excess doses in opioid-dependent patients precipitate acute withdrawal, which is managed supportively (fluids, antiemetics, symptom control). If no response is seen after 10 mg total, the cause is likely non-opioid.",
+  "refs": [
+    ["FDA Naloxone Hydrochloride Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22NALOXONE%20HYDROCHLORIDE%22"],
+    ["DailyMed - Narcan Nasal Spray", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=narcan+naloxone"]
+  ]
+}

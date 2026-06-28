@@ -1,0 +1,105 @@
+{
+  "generic": "Buspirone",
+  "cls": "Azapirone anxiolytic (non-benzodiazepine)",
+  "pharm": "5-HT1A partial agonist that relieves anxiety without benzodiazepine-like sedation, dependence, or muscle relaxation.",
+  "tags": ["Rx only", "Non-benzodiazepine anxiolytic", "5-HT1A partial agonist", "CYP3A4 substrate"],
+  "quick": [
+    ["Adult dose", "Start 7.5 mg twice daily; titrate by 5 mg every 2-3 days; max 60 mg/day"],
+    ["Meal", "Take consistently always with or always without food (food increases bioavailability)"],
+    ["Pregnancy", "Use only if clearly needed (former Category B)"],
+    ["Lactation", "Avoid if clinically possible; excreted in rat milk, human data lacking"],
+    ["Renal", "Use caution / avoid in severe impairment; reduce dose"],
+    ["Hepatic", "Use caution / avoid in severe impairment; reduce dose"],
+    ["Alcohol", "Avoid; possible additive effects"],
+    ["Monitoring", "Anxiety response, signs of serotonin syndrome, dizziness"]
+  ],
+  "summary": "Buspirone is a non-benzodiazepine azapirone anxiolytic used for management of anxiety disorders and short-term relief of anxiety symptoms (corresponding to generalized anxiety disorder). Acting as a partial agonist at serotonin 5-HT1A receptors, it lacks the sedative, hypnotic, anticonvulsant, muscle-relaxant, and dependence-producing properties of benzodiazepines. Its anxiolytic effect is delayed, typically taking 2-4 weeks, so it is unsuitable for acute or as-needed use. Dosing must be consistent with respect to food, and it should be avoided within 14 days of an MAOI.",
+  "indications": [
+    "Management of anxiety disorders",
+    "Short-term relief of the symptoms of anxiety",
+    "Anxiety roughly corresponding to Generalized Anxiety Disorder (GAD), including with coexisting depressive symptoms"
+  ],
+  "dosage": [
+    {"c": "Anxiety (initial)", "r": "Adult oral", "d": "15 mg/day given as 7.5 mg twice daily", "t": "Twice daily", "n": "Take consistently with or without food"},
+    {"c": "Anxiety (titration)", "r": "Adult oral", "d": "Increase by 5 mg/day at intervals of 2-3 days as needed", "t": "Divided doses", "n": "Divided doses of 20-30 mg/day commonly used"},
+    {"c": "Anxiety (maximum)", "r": "Adult oral", "d": "Maximum 60 mg/day", "t": "Divided doses", "n": "Do not exceed 60 mg/day"},
+    {"c": "With strong CYP3A4 inhibitor", "r": "Adult oral", "d": "Reduce to 2.5 mg twice daily and adjust based on response", "t": "Twice daily", "n": "e.g., with itraconazole, erythromycin, diltiazem"}
+  ],
+  "admin": [
+    "Take consistently either always with food or always without food",
+    "Anxiolytic effect is delayed; not for acute or as-needed relief",
+    "Avoid grapefruit juice (raises buspirone levels)",
+    "Allow at least 14 days between an MAOI and buspirone in either direction"
+  ],
+  "moa": "Buspirone's precise mechanism is not fully established but differs from benzodiazepines; it has no significant affinity for benzodiazepine receptors and does not affect GABA binding. It acts as a partial agonist at presynaptic and postsynaptic serotonin 5-HT1A receptors and has moderate affinity for brain D2 dopamine receptors. Modulation of serotonergic (and dopaminergic) neurotransmission is thought to underlie its anxiolytic activity, which develops gradually over weeks.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to buspirone",
+      "Concurrent use of an MAOI intended to treat depression, or within 14 days of stopping such an MAOI",
+      "Concurrent use with reversible MAOIs such as linezolid or intravenous methylene blue"
+    ],
+    "relative": [
+      "Severe renal impairment",
+      "Severe hepatic impairment",
+      "Concurrent strong CYP3A4 inhibitors or inducers (dose adjustment needed)"
+    ],
+    "monitor": [
+      "Signs of serotonin syndrome when combined with serotonergic drugs",
+      "Anxiety symptom response over weeks",
+      "Dizziness and lightheadedness"
+    ]
+  },
+  "preg": "Animal reproduction studies (rats and rabbits) at about 30 times the maximum human dose showed no fertility impairment or fetal damage, but adequate well-controlled human studies are lacking; use during pregnancy only if clearly needed.",
+  "lact": "It is not known how much buspirone or its metabolites are excreted in human milk; buspirone and metabolites are excreted in rat milk. Administration to nursing women should be avoided if clinically possible.",
+  "renal": "Buspirone and its metabolites are renally cleared; impaired renal function increases exposure. Use with caution and consider dose reduction; avoid in severe renal impairment.",
+  "hepatic": "Buspirone undergoes extensive hepatic first-pass metabolism; hepatic impairment increases plasma levels. Use with caution and consider dose reduction; avoid in severe hepatic impairment.",
+  "interactions": {
+    "major": [
+      "MAOIs including linezolid and IV methylene blue (serotonin syndrome, hypertension; contraindicated)",
+      "Strong CYP3A4 inhibitors such as itraconazole, ketoconazole, erythromycin, clarithromycin (markedly increase buspirone levels; reduce dose)"
+    ],
+    "moderate": [
+      "Strong CYP3A4 inducers such as rifampin (markedly decrease buspirone levels; may need higher dose)",
+      "Diltiazem and verapamil (increase buspirone levels)",
+      "Other serotonergic agents including SSRIs/SNRIs (serotonin syndrome risk)",
+      "Other CNS depressants (additive sedation)"
+    ],
+    "minor": ["Trazodone (possible LFT elevations)", "Haloperidol (raised haloperidol levels reported)"],
+    "food": "Food increases buspirone bioavailability; take consistently with or without food. Avoid grapefruit juice.",
+    "alcohol": "Avoid alcohol; potential for additive effects.",
+    "diagnostics": "May cause minor elevations in hepatic transaminases in some patients."
+  },
+  "se": {
+    "common": ["Dizziness", "Headache", "Nausea", "Nervousness/excitement", "Lightheadedness", "Drowsiness"],
+    "serious": ["Serotonin syndrome (with serotonergic drugs)", "Restlessness/akathisia-like movement disorders", "Severe allergic reaction"],
+    "rare": ["Extrapyramidal symptoms", "Dystonia", "Tardive dyskinesia (rare)", "Urinary retention"],
+    "emergency": ["Serotonin syndrome (hyperthermia, rigidity, autonomic instability)", "Anaphylaxis/angioedema"]
+  },
+  "monitoring": ["Anxiety symptom response over 2-4 weeks", "Signs of serotonin syndrome with serotonergic combinations", "Dizziness/lightheadedness", "Hepatic and renal function in impairment"],
+  "counsel": [
+    "It can take 2-4 weeks to feel the full benefit; keep taking it regularly and do not use it only when anxious",
+    "Take it the same way each day, always with or always without food",
+    "Avoid grapefruit and grapefruit juice",
+    "Tell your doctor about all other medicines, especially antidepressants",
+    "It may cause dizziness or drowsiness; use caution when driving until you know how it affects you"
+  ],
+  "pk": [
+    ["Onset", "Anxiolytic effect delayed; often 2-4 weeks for full benefit"],
+    ["Peak", "Plasma 40-90 minutes after a dose"],
+    ["Half-life", "Approximately 2-3 hours"],
+    ["Duration", "Short; requires divided daily dosing"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light and moisture"]
+  ],
+  "pearls": [
+    "No dependence, tolerance, or withdrawal and minimal sedation, unlike benzodiazepines",
+    "Delayed onset makes it unsuitable for acute anxiety or PRN use",
+    "Does not relieve benzodiazepine withdrawal",
+    "Avoid grapefruit juice and strong CYP3A4 inhibitors; reduce dose if combined"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip it. Do not double up.",
+  "overdose": "Overdose may cause nausea, vomiting, dizziness, drowsiness, miosis, and gastric distress; fatalities with buspirone alone have not been reported. Treatment is general symptomatic and supportive care, with gastric lavage if appropriate and monitoring of respiration, pulse, and blood pressure. No specific antidote exists and dialyzability is undetermined.",
+  "refs": [
+    ["FDA Label - Buspirone hydrochloride (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22buspirone%22"],
+    ["DailyMed - Buspirone", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=buspirone"]
+  ]
+}

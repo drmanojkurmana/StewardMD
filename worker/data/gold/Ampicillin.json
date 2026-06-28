@@ -1,0 +1,96 @@
+{
+  "generic": "Ampicillin",
+  "cls": "Aminopenicillin (beta-lactam antibiotic)",
+  "pharm": "Antibacterial",
+  "tags": ["antibiotic", "penicillin", "beta-lactam", "aminopenicillin", "infection"],
+  "quick": [
+    ["Adult dose", "250-500 mg qid (oral)"],
+    ["Meal", "Empty stomach: 1 h before or 2 h after food"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Excreted in milk; use with caution"],
+    ["Renal", "Reduce dose/extend interval in impairment"],
+    ["Hepatic", "Caution; contraindicated if prior cholestasis"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Renal, hepatic, hematologic on prolonged use"]
+  ],
+  "summary": "Ampicillin is a broad-spectrum aminopenicillin effective against many gram-positive and gram-negative organisms, used for genitourinary, GI, respiratory tract infections, gonorrhea and meningococcal disease. It is acid-stable and orally absorbed but should be taken on an empty stomach. Bactericidal via cell-wall synthesis inhibition; the chief risk is hypersensitivity including anaphylaxis.",
+  "indications": [
+    "Genitourinary tract infections including gonorrhea (susceptible organisms)",
+    "Gastrointestinal tract infections (Shigella, Salmonella, E. coli, P. mirabilis, enterococci)",
+    "Respiratory tract infections (non-penicillinase H. influenzae, staphylococci, streptococci incl. S. pneumoniae)",
+    "Meningitis due to N. meningitidis",
+    "Gonorrhea (single high-dose regimen with probenecid)"
+  ],
+  "dosage": [
+    {"c": "GU/GI infection, adult & child >20 kg", "r": "Standard", "d": "500 mg qid in equally spaced doses", "t": "Four times daily", "n": "Severe/chronic may need larger doses"},
+    {"c": "Respiratory tract infection, adult & child >20 kg", "r": "Standard", "d": "250 mg qid in equally spaced doses", "t": "Four times daily", "n": "Equally spaced intervals"},
+    {"c": "Gonorrhea (men and women)", "r": "Single dose", "d": "3.5 g orally once with 1 g probenecid", "t": "Single dose", "n": "Use no less than this dose; obtain follow-up cultures 7-14 days"},
+    {"c": "GU/GI infection, pediatric <=20 kg", "r": "Weight-based", "d": "100 mg/kg/day, divided qid in equally spaced doses", "t": "Four times daily", "n": "Do not exceed adult dose"},
+    {"c": "Respiratory infection, pediatric <=20 kg", "r": "Weight-based", "d": "50 mg/kg/day, divided 3-4 times daily", "t": "Three to four times daily", "n": "Do not exceed adult dose"}
+  ],
+  "admin": [
+    "Take on an empty stomach, at least 30 min before or 2 h after meals for maximal absorption",
+    "Take with a full 8 oz glass of water",
+    "Continue therapy at least 48-72 h after becoming asymptomatic (except single-dose gonorrhea regimen)",
+    "For hemolytic streptococcal infections treat a minimum of 10 days to prevent rheumatic fever/glomerulonephritis",
+    "Screen for penicillin/cephalosporin allergy before starting; do not use smaller-than-recommended doses"
+  ],
+  "moa": "Ampicillin inhibits bacterial cell-wall biosynthesis by binding penicillin-binding proteins, blocking transpeptidation/cross-linking of peptidoglycan during active multiplication. The resulting defective cell wall produces a bactericidal effect against susceptible gram-positive and many gram-negative organisms. Resistance is mediated chiefly by beta-lactamases that cleave the beta-lactam ring.",
+  "contra": {
+    "absolute": ["History of serious hypersensitivity (anaphylaxis, Stevens-Johnson syndrome) to ampicillin or other beta-lactams", "Infections caused by penicillinase-producing organisms", "Prior cholestatic jaundice/hepatic dysfunction associated with ampicillin"],
+    "relative": ["History of cephalosporin or multiple-allergen sensitivity", "Infectious mononucleosis / EBV (high rash incidence)", "Severe renal impairment without dose adjustment"],
+    "monitor": ["Prolonged or high-dose therapy", "Concurrent allopurinol (increased rash)", "Patients on anticoagulants", "Diabetics on hormonal/glucose monitoring"]
+  },
+  "preg": "Animal reproduction studies show no evidence of impaired fertility or fetal harm, but there are no adequate well-controlled studies in pregnant women. Use during pregnancy only if clearly needed.",
+  "lact": "Ampicillin-class antibiotics are excreted in breast milk and may sensitize the infant. Exercise caution when administering to a nursing woman; monitor infant for diarrhea, rash or candidiasis.",
+  "renal": "Ampicillin is excreted largely unchanged in urine, so accumulation occurs in renal impairment. Reduce dose or extend the dosing interval according to degree of impairment. Ampicillin-class antibiotics are removed by hemodialysis (but not peritoneal dialysis); supplement after dialysis.",
+  "hepatic": "Hepatic dysfunction including hepatitis and cholestatic jaundice has been reported and is usually reversible, though deaths have occurred. Monitor hepatic function at regular intervals in patients with hepatic impairment. Contraindicated if there is a prior history of ampicillin-associated cholestatic jaundice/hepatic dysfunction.",
+  "interactions": {
+    "major": ["Allopurinol - substantially increased incidence of skin rash", "Probenecid - decreases renal tubular secretion of ampicillin, raising blood levels and toxicity risk"],
+    "moderate": ["Oral anticoagulants (warfarin) - possible enhanced anticoagulant effect; monitor INR", "Bacteriostatic antibiotics (chloramphenicol, erythromycins, sulfonamides, tetracyclines) - may antagonize the bactericidal effect of penicillins (in vitro)"],
+    "minor": ["Oral contraceptives - may be less effective with increased breakthrough bleeding; advise backup contraception"],
+    "food": "Food impairs absorption; take at least 30 min before or 2 h after meals despite acid stability.",
+    "alcohol": "No clinically significant interaction.",
+    "diagnostics": "May cause false-positive urine glucose with copper-reduction (Clinitest) tests; use enzymatic glucose oxidase methods. Periodic renal, hepatic and hematopoietic evaluation advised on prolonged high-dose therapy."
+  },
+  "se": {
+    "common": ["Erythematous maculopapular skin rash", "Diarrhea", "Nausea", "Vomiting", "Glossitis / stomatitis"],
+    "serious": ["Anaphylaxis / severe hypersensitivity", "Clostridioides difficile-associated diarrhea / pseudomembranous colitis", "Severe cutaneous reactions (SJS, TEN, DRESS, AGEP, exfoliative dermatitis)"],
+    "rare": ["Hepatic dysfunction / cholestatic jaundice, SGOT elevation", "Anemia, thrombocytopenia, thrombocytopenic purpura, leukopenia, agranulocytosis, eosinophilia", "Linear IgA bullous dermatosis, laryngeal stridor, high fever"],
+    "emergency": ["Anaphylaxis (airway swelling, hypotension) - treat with epinephrine", "Severe blistering/peeling skin reaction", "Severe persistent or bloody diarrhea"]
+  },
+  "monitoring": [
+    "Renal, hepatic and hematopoietic function periodically on prolonged or high-dose therapy",
+    "Hepatic function at regular intervals in patients with hepatic impairment",
+    "Signs of superinfection (Candida, Pseudomonas, C. difficile)",
+    "Allergic reactions, especially early after the first dose",
+    "Follow-up cultures (gonorrhea at 7-14 days; streptococci after completing treatment)"
+  ],
+  "counsel": [
+    "Take on an empty stomach with a full glass of water; complete the entire course",
+    "Report rash, hives, swelling, mucosal lesions or breathing difficulty immediately",
+    "Report watery or bloody diarrhea, which may occur up to 2 months after treatment",
+    "Avoid if you have mononucleosis (glandular fever) due to high rash risk",
+    "Use additional contraception if on hormonal contraceptives"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal soon after absorption during active bacterial multiplication"],
+    ["Peak", "~3.0 mcg/mL serum after a 500 mg oral capsule"],
+    ["Half-life", "~1-1.5 hours (prolonged in renal impairment)"],
+    ["Duration", "Dose four times daily (qid)"],
+    ["Storage", "Store at 20-25 C (68-77 F); dispense in a tight container"]
+  ],
+  "pearls": [
+    "High rate of maculopapular rash in mononucleosis/EBV - avoid ampicillin in these patients",
+    "Acid-stable but food reduces absorption, so dose on an empty stomach (unlike amoxicillin)",
+    "Penetrates CSF only when meninges are inflamed - useful in meningitis",
+    "Least protein-bound penicillin (~20%); excreted largely unchanged in urine",
+    "Allopurinol co-administration markedly increases rash incidence"
+  ],
+  "missed": "Take the missed dose as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular schedule; do not double the dose.",
+  "overdose": "In overdose, discontinue medication and treat symptomatically with supportive measures. GI symptoms and fluid/electrolyte imbalance may occur. In patients with renal impairment, ampicillin-class antibiotics can be removed by hemodialysis but not by peritoneal dialysis.",
+  "refs": [
+    ["FDA Ampicillin Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ampicillin%22"],
+    ["FDA DailyMed - Ampicillin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=ampicillin"]
+  ]
+}

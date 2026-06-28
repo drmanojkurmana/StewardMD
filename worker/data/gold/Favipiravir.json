@@ -1,0 +1,103 @@
+{
+  "generic": "Favipiravir",
+  "cls": "Antiviral (RNA-dependent RNA polymerase inhibitor)",
+  "pharm": "Prodrug converted intracellularly to an active nucleoside that selectively inhibits the RNA-dependent RNA polymerase of RNA viruses.",
+  "tags": ["Rx only", "Antiviral", "Teratogenic", "Not FDA-approved"],
+  "quick": [
+    ["Adult dose", "1800 mg twice daily on day 1, then 800 mg twice daily"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Contraindicated - teratogenic/embryotoxic"],
+    ["Lactation", "Avoid - excreted in milk"],
+    ["Renal", "Caution; limited data in severe impairment"],
+    ["Hepatic", "Caution; avoid in severe impairment, monitor LFTs"],
+    ["Alcohol", "Avoid; added hepatic and uric-acid effects"],
+    ["Monitoring", "Uric acid, LFTs, QT in at-risk patients"]
+  ],
+  "summary": "Favipiravir is an oral antiviral prodrug that, after conversion to its active ribofuranosyl triphosphate form, inhibits the RNA-dependent RNA polymerase of RNA viruses including influenza. It was approved in Japan for novel/re-emerging influenza unresponsive to other agents and was used investigationally for COVID-19. It is teratogenic and embryotoxic and is strictly contraindicated in pregnancy. It commonly raises serum uric acid. It is not approved by the US FDA.",
+  "indications": [
+    "Novel or re-emerging influenza A/B virus infections unresponsive to other antivirals (per Japanese approval, restricted use)",
+    "Investigational use in other RNA viral infections (e.g. COVID-19) under national/clinical-trial protocols"
+  ],
+  "dosage": [
+    {"c": "Influenza (adult, per approved regimen)", "r": "Oral", "d": "1800 mg twice daily on day 1, then 800 mg twice daily on days 2-5", "t": "BID", "n": "Total 5-day course; restricted to specified indications"},
+    {"c": "COVID-19 (investigational regimens)", "r": "Oral", "d": "Commonly 1600-1800 mg twice daily day 1, then 600-800 mg twice daily for up to 7-14 days", "t": "BID", "n": "Regimen varies by protocol; investigational/not FDA-approved"}
+  ],
+  "admin": [
+    "Take orally with or without food, at evenly spaced 12-hourly intervals",
+    "Complete the full prescribed course",
+    "Ensure effective contraception is in place before, during, and after therapy (both sexes)",
+    "Maintain adequate hydration given the rise in serum uric acid",
+    "Swallow tablets with water"
+  ],
+  "moa": "Favipiravir is a purine nucleoside prodrug. Host enzymes phosphorylate it to the active favipiravir ribofuranosyl-5'-triphosphate, which is recognised as a purine analogue by viral RNA-dependent RNA polymerase. It is incorporated into nascent viral RNA or binds conserved polymerase domains, causing chain termination and lethal mutagenesis of the viral genome, thereby inhibiting viral replication while sparing human RNA/DNA polymerases.",
+  "contra": {
+    "absolute": [
+      "Pregnancy and women who may become pregnant without reliable contraception (teratogenic/embryotoxic)",
+      "Known hypersensitivity to favipiravir"
+    ],
+    "relative": [
+      "Gout or hyperuricaemia",
+      "Severe hepatic impairment",
+      "Severe renal impairment",
+      "QT prolongation risk factors"
+    ],
+    "monitor": [
+      "Serum uric acid",
+      "Liver function tests",
+      "QT interval in predisposed patients",
+      "Pregnancy status in women of childbearing potential"
+    ]
+  },
+  "preg": "Contraindicated. Favipiravir is teratogenic and embryotoxic in animal studies and distributes into semen. Women of childbearing potential and male patients must use effective contraception during and for a period after treatment (per national guidance, e.g. at least 7 days post-treatment for men).",
+  "lact": "Avoid breastfeeding during treatment; favipiravir and its metabolites are excreted into breast milk and may harm the infant.",
+  "renal": "Use with caution; data in moderate-to-severe renal impairment are limited and dosing is not well established. Monitor for accumulation and adverse effects.",
+  "hepatic": "Metabolised in the liver (largely by aldehyde oxidase). Use with caution; avoid in severe hepatic impairment and monitor liver function, as transaminase elevations occur.",
+  "interactions": {
+    "major": [
+      "Pyrazinamide (additive increase in serum uric acid)",
+      "Repaglinide (favipiravir inhibits CYP2C8, raising repaglinide levels and hypoglycaemia risk)"
+    ],
+    "moderate": [
+      "Theophylline (raises favipiravir plasma levels)",
+      "Acetaminophen/paracetamol (altered metabolism; limit total paracetamol dose)",
+      "Famciclovir / sulindac (reduced efficacy via aldehyde oxidase interaction)"
+    ],
+    "minor": ["Other QT-prolonging agents (theoretical additive risk)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid alcohol due to additional hepatic strain and uric-acid effects.",
+    "diagnostics": "May elevate serum uric acid measurements; monitor accordingly."
+  },
+  "se": {
+    "common": ["Hyperuricaemia / raised blood uric acid", "Diarrhea", "Nausea", "Elevated liver transaminases", "Decreased neutrophil count"],
+    "serious": ["Hepatotoxicity", "QT prolongation", "Acute gout flare", "Severe hypersensitivity reactions"],
+    "rare": ["Psychiatric/neurological symptoms", "Severe skin reactions (SJS/TEN)", "Pneumonia/bronchitis reported in trials"],
+    "emergency": ["Anaphylaxis / angioedema", "Severe blistering skin reaction", "Symptomatic QT prolongation / arrhythmia"]
+  },
+  "monitoring": ["Serum uric acid", "Liver function tests", "Complete blood count", "ECG/QT in patients with cardiac risk factors", "Pregnancy status and contraception adherence"],
+  "counsel": [
+    "Do not take if you are or might be pregnant; use reliable contraception during and after treatment",
+    "This medicine can raise uric acid - tell your doctor if you have gout or joint pain",
+    "Avoid alcohol and report yellowing of skin/eyes or dark urine",
+    "Finish the entire course as prescribed",
+    "Report rash, palpitations, or fainting promptly"
+  ],
+  "pk": [
+    ["Onset", "Rapidly absorbed; antiviral effect over the course"],
+    ["Peak", "About 2 hours"],
+    ["Half-life", "About 2-5.5 hours (increases with repeated dosing)"],
+    ["Duration", "Twice-daily dosing maintains levels"],
+    ["Storage", "Store at room temperature; protect from moisture and light"]
+  ],
+  "pearls": [
+    "Not FDA-approved; pending clinical review.",
+    "Strictly contraindicated in pregnancy - teratogenic and present in semen; enforce contraception in both sexes",
+    "Hyperuricaemia is the most consistent adverse effect - monitor uric acid, especially with pyrazinamide",
+    "Restricted in its country of approval to influenza unresponsive to other antivirals; wider use is investigational"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and continue your schedule - do not double up. Try to keep doses 12 hours apart.",
+  "overdose": "There is limited experience with overdose. Effects are expected to be extensions of adverse effects (GI upset, marked hyperuricaemia, transaminase elevation). No specific antidote exists; manage supportively with hydration and monitoring of uric acid, liver function, and ECG.",
+  "refs": [
+    ["WHO / Japanese PMDA Avigan (favipiravir) information", "https://www.pmda.go.jp/"],
+    ["EMA / published prescribing information - favipiravir", "https://www.ema.europa.eu/en/medicines"]
+  ]
+}

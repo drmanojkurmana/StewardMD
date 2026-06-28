@@ -1,0 +1,105 @@
+{
+  "generic": "Cefepime",
+  "cls": "Fourth-generation cephalosporin antibacterial",
+  "pharm": "Bactericidal beta-lactam that binds penicillin-binding proteins to inhibit bacterial cell-wall synthesis; broad gram-negative (including Pseudomonas) and gram-positive coverage with stability against many beta-lactamases.",
+  "tags": ["Rx only", "Antibacterial", "Antipseudomonal", "Renally eliminated"],
+  "quick": [
+    ["Adult dose", "1-2 g IV every 8-12 h depending on infection"],
+    ["Meal", "Parenteral; not affected by food"],
+    ["Pregnancy", "Use if clearly needed; limited human data"],
+    ["Lactation", "Excreted in milk in low amounts; generally compatible"],
+    ["Renal", "Reduce dose/frequency by CrCl; major adjustment needed"],
+    ["Hepatic", "No adjustment needed"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Renal function, neurologic status, signs of superinfection"]
+  ],
+  "summary": "Cefepime is a fourth-generation cephalosporin given intravenously (or intramuscularly for selected UTIs) for pneumonia, febrile neutropenia, complicated urinary and intra-abdominal infections, and skin/skin-structure infections caused by susceptible organisms. It has broad gram-negative coverage including Pseudomonas aeruginosa. It is renally eliminated and must be dose-adjusted in renal impairment, where accumulation can cause neurotoxicity (encephalopathy, myoclonus, seizures, nonconvulsive status epilepticus).",
+  "indications": [
+    "Pneumonia caused by susceptible organisms",
+    "Empiric therapy for febrile neutropenic patients",
+    "Uncomplicated and complicated urinary tract infections, including pyelonephritis",
+    "Uncomplicated skin and skin-structure infections",
+    "Complicated intra-abdominal infections (in combination with metronidazole)"
+  ],
+  "dosage": [
+    {"c": "Moderate to severe pneumonia", "r": "Adult IV (CrCl >60)", "d": "1-2 g IV every 8-12 hours", "t": "Every 8-12 hours x10 days", "n": "Use 2 g IV every 8 h if Pseudomonas aeruginosa"},
+    {"c": "Febrile neutropenia (empiric)", "r": "Adult IV (CrCl >60)", "d": "2 g IV every 8 hours", "t": "Every 8 hours x7 days", "n": "Continue until resolution of neutropenia"},
+    {"c": "Mild-moderate UTI", "r": "Adult IV/IM (CrCl >60)", "d": "0.5-1 g IV/IM every 12 hours", "t": "Every 12 hours x7-10 days", "n": "IM route only for mild/moderate UTI due to E. coli"},
+    {"c": "Severe UTI / skin-structure / complicated intra-abdominal", "r": "Adult IV (CrCl >60)", "d": "2 g IV every 12 hours (intra-abdominal: every 8-12 h with metronidazole)", "t": "Every 8-12 hours x7-10 days", "n": "Pair with metronidazole for intra-abdominal infection"},
+    {"c": "Renal impairment", "r": "Adult IV", "d": "Reduce dose/interval per CrCl (e.g., usual dose every 24 h at CrCl 11-29; further reduce <11)", "t": "Adjusted", "n": "Supplement after hemodialysis; pediatric dosing 50 mg/kg per dose"}
+  ],
+  "admin": [
+    "Administer by IV infusion over approximately 30 minutes (preferred route)",
+    "Reconstitute and dilute per labeling; inspect for particulates and discoloration",
+    "Reserve IM route for mild/moderate UTI due to E. coli",
+    "Adjust dose by creatinine clearance to avoid neurotoxic accumulation"
+  ],
+  "moa": "Cefepime is a bactericidal cephalosporin that binds to penicillin-binding proteins (PBPs) and inhibits the final transpeptidation step of peptidoglycan cell-wall synthesis, leading to cell lysis. It rapidly penetrates gram-negative bacteria and is highly stable to hydrolysis by many chromosomal and plasmid-mediated beta-lactamases, giving it broad-spectrum activity including against Pseudomonas aeruginosa.",
+  "contra": {
+    "absolute": [
+      "Immediate hypersensitivity (anaphylaxis) to cefepime or other cephalosporins, penicillins, or other beta-lactams"
+    ],
+    "relative": [
+      "History of penicillin allergy (cross-reactivity risk)",
+      "Renal impairment without dose adjustment",
+      "History of seizures"
+    ],
+    "monitor": [
+      "Renal function and dose appropriateness for CrCl",
+      "Neurologic status (encephalopathy, myoclonus, seizures)",
+      "Signs of C. difficile-associated diarrhea"
+    ]
+  },
+  "preg": "Available human data are limited; animal studies have not shown harm. Use during pregnancy only if clearly needed.",
+  "lact": "Cefepime is excreted into human milk in low concentrations; it is generally considered compatible with breastfeeding, though the infant may be monitored for diarrhea or thrush.",
+  "renal": "Cefepime is primarily eliminated by the kidneys; dosage and/or interval must be reduced in renal impairment. Accumulation in unadjusted renal failure causes neurotoxicity (encephalopathy, aphasia, myoclonus, seizures, and nonconvulsive status epilepticus). Supplemental dosing is needed after hemodialysis.",
+  "hepatic": "No dosage adjustment is required in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Aminoglycosides (additive nephrotoxicity/ototoxicity; monitor renal function)",
+      "Potent diuretics (e.g., furosemide) - potential additive nephrotoxicity"
+    ],
+    "moderate": [
+      "Other nephrotoxic agents (monitor renal function)",
+      "Probenecid (may reduce renal clearance of cephalosporins)"
+    ],
+    "minor": ["Live typhoid vaccine (antibacterials may reduce response)"],
+    "food": "Not applicable (parenteral administration).",
+    "alcohol": "No specific clinically significant interaction.",
+    "diagnostics": "May cause a false-positive urine glucose test with copper-reduction methods; positive direct Coombs test has been reported."
+  },
+  "se": {
+    "common": ["Injection-site reactions/phlebitis", "Rash", "Diarrhea", "Nausea", "Headache", "Positive Coombs test without hemolysis"],
+    "serious": ["Neurotoxicity (encephalopathy, myoclonus, seizures, nonconvulsive status epilepticus)", "C. difficile-associated diarrhea/colitis", "Hypersensitivity/anaphylaxis", "Severe cutaneous reactions"],
+    "rare": ["Hemolytic anemia", "Aplastic anemia", "Thrombocytopenia", "Stevens-Johnson syndrome / TEN"],
+    "emergency": ["Anaphylaxis", "Status epilepticus / nonconvulsive seizures", "Severe C. difficile colitis"]
+  },
+  "monitoring": ["Renal function and CrCl-based dosing", "Neurologic status, especially in renal impairment", "Signs of allergic reaction and superinfection", "Stool changes (C. difficile)"],
+  "counsel": [
+    "This antibiotic is given by injection or infusion, usually in hospital",
+    "Report any rash, itching, swelling, or difficulty breathing immediately",
+    "Tell staff if you become confused, twitchy, or have a seizure",
+    "Report severe or watery/bloody diarrhea, which can occur even after stopping the drug",
+    "Complete the full prescribed course"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "End of IV infusion (~0.5 h); ~1.4-1.6 h after IM"],
+    ["Half-life", "~2 hours (markedly prolonged in renal impairment)"],
+    ["Duration", "Dosed every 8-12 hours"],
+    ["Storage", "Store dry powder at 20-25 C; reconstituted solution per labeling (refrigerate, use within stated time)"]
+  ],
+  "pearls": [
+    "Antipseudomonal fourth-generation cephalosporin; good gram-negative and gram-positive coverage",
+    "Cefepime-induced neurotoxicity is underrecognized - suspect in renal impairment with altered mental status, myoclonus, or seizures",
+    "Always dose-adjust by creatinine clearance",
+    "Pair with metronidazole for intra-abdominal infections (limited anaerobic coverage)",
+    "EEG may show nonconvulsive status epilepticus in unexplained encephalopathy"
+  ],
+  "missed": "Doses are scheduled by clinical staff; a delayed dose should be given as soon as possible while maintaining the prescribed interval. Do not double up.",
+  "overdose": "Overdose, especially with renal impairment, causes neurotoxicity (encephalopathy, myoclonus, seizures, nonconvulsive status epilepticus). Discontinue the drug, provide supportive care and anticonvulsants as needed; hemodialysis can remove cefepime and may be used to manage accumulation.",
+  "refs": [
+    ["FDA Label - Cefepime (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cefepime%22"],
+    ["DailyMed - Cefepime", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=cefepime"]
+  ]
+}

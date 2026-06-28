@@ -1,0 +1,97 @@
+{
+  "generic": "Levetiracetam",
+  "cls": "Antiepileptic / anticonvulsant",
+  "pharm": "SV2A synaptic vesicle protein ligand (pyrrolidone derivative)",
+  "tags": ["Antiepileptic", "Seizure", "Epilepsy", "Renal dose adjustment", "AED suicidality warning"],
+  "quick": [
+    ["Adult dose", "500 mg PO twice daily, titrate to 1500 mg twice daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "No proven major malformation risk; enroll in AED registry"],
+    ["Lactation", "Excreted in milk; benefit-risk decision"],
+    ["Renal", "Adjust dose by CrCl; supplement after dialysis"],
+    ["Hepatic", "No adjustment (not hepatically cleared)"],
+    ["Alcohol", "Avoid; additive CNS sedation"],
+    ["Monitoring", "Mood/behavior, suicidality, renal function"]
+  ],
+  "summary": "Levetiracetam is a broad-spectrum antiepileptic that binds the synaptic vesicle protein SV2A, used for partial-onset, myoclonic, and primary generalized tonic-clonic seizures. It is renally cleared with no significant hepatic metabolism or CYP interactions, so dose is adjusted by creatinine clearance. Key risks are behavioral/psychiatric effects, somnolence, and the AED-class suicidality warning.",
+  "indications": [
+    "Treatment of partial-onset seizures in patients 1 month of age and older (monotherapy or adjunctive)",
+    "Adjunctive therapy for myoclonic seizures in patients 12 years and older with juvenile myoclonic epilepsy",
+    "Adjunctive therapy for primary generalized tonic-clonic seizures in patients 6 years and older with idiopathic generalized epilepsy"
+  ],
+  "dosage": [
+    {"c": "Partial-onset seizures, adults 16 years and older", "r": "Oral", "d": "Start 500 mg twice daily (1000 mg/day); increase by 1000 mg/day every 2 weeks", "t": "Twice daily", "n": "Recommended dose 1500 mg twice daily; max 3000 mg/day; no added benefit above 3000 mg/day"},
+    {"c": "Myoclonic seizures (juvenile myoclonic epilepsy), 12 years and older", "r": "Oral", "d": "Start 500 mg twice daily; increase by 500 mg twice daily every 2 weeks", "t": "Twice daily", "n": "Recommended dose 1500 mg twice daily (3000 mg/day); adjunctive use"},
+    {"c": "Primary generalized tonic-clonic seizures, adults 16 years and older", "r": "Oral", "d": "Start 500 mg twice daily; increase by 500 mg twice daily every 2 weeks", "t": "Twice daily", "n": "Recommended dose 1500 mg twice daily; adjunctive use"},
+    {"c": "Pediatric partial-onset, 4 to <16 years (weight-based)", "r": "Oral", "d": "Start 10 mg/kg twice daily; increase by 10 mg/kg twice daily every 2 weeks", "t": "Twice daily", "n": "Recommended dose 30 mg/kg twice daily; use oral solution if weight 20 kg or less"},
+    {"c": "Renal impairment, adults (by CrCl mL/min/1.73 m2)", "r": "Oral", "d": "CrCl >80: 500-1500 mg q12h; 50-80: 500-1000 mg q12h; 30-50: 250-750 mg q12h; <30: 250-500 mg q12h", "t": "Every 12 hours", "n": "ESRD on dialysis: 500-1000 mg every 24 h, plus 250-500 mg supplemental dose after dialysis"}
+  ],
+  "admin": [
+    "Tablets are taken orally with or without food",
+    "Swallow tablets whole; do not chew or crush",
+    "Use the oral solution (weight-based dosing) for pediatric patients weighing 20 kg or less, measured with a calibrated device, not a household spoon",
+    "Calculate creatinine clearance before dosing in renal impairment and individualize the dose",
+    "Do not discontinue abruptly; taper to reduce risk of withdrawal seizures"
+  ],
+  "moa": "The precise antiepileptic mechanism is unknown. Levetiracetam binds stereoselectively to the synaptic vesicle protein SV2A, which is involved in regulating vesicle exocytosis and neurotransmitter release. The rank order of SV2A binding affinity correlates with antiseizure potency, suggesting this interaction contributes to its anticonvulsant effect. It does not act through classic GABAergic or sodium-channel pathways.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to levetiracetam (reactions have included anaphylaxis and angioedema)"],
+    "relative": ["History of psychiatric or behavioral disorders (risk of behavioral abnormalities/psychotic symptoms)", "Significant renal impairment (requires dose adjustment)"],
+    "monitor": ["Emergence or worsening of depression, suicidal thoughts, or behavioral changes", "Somnolence/coordination impairing activities", "Renal function in at-risk patients"]
+  },
+  "preg": "Prolonged human experience over two decades, including pregnancy registries, has not identified a drug-associated risk of major birth defects or miscarriage. Animal studies showed developmental toxicity at clinically relevant doses. Physiological changes in pregnancy can lower levetiracetam levels and worsen seizure control, so monitor and adjust dose as needed. Encourage enrollment in the North American AED Pregnancy Registry (1-888-233-2334).",
+  "lact": "Levetiracetam is excreted in human breast milk. There are no data on effects on the breastfed infant or on milk production. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "Dose adjustment is required and individualized by creatinine clearance (mL/min/1.73 m2): normal (>80) 500-1500 mg q12h; mild (50-80) 500-1000 mg q12h; moderate (30-50) 250-750 mg q12h; severe (<30) 250-500 mg q12h. ESRD patients on dialysis: 500-1000 mg q24h with a 250-500 mg supplemental dose after each dialysis session, as a substantial fraction is removed by hemodialysis.",
+  "hepatic": "No dosage adjustment is needed for hepatic impairment. Levetiracetam is not extensively metabolized by the liver and undergoes non-CYP hydrolysis; renal excretion of unchanged drug is the primary elimination route.",
+  "interactions": {
+    "major": [],
+    "moderate": ["Other CNS depressants (benzodiazepines, opioids, sedatives) may increase somnolence and impairment"],
+    "minor": ["Low protein binding (<10%) and lack of CYP involvement make clinically significant drug interactions unlikely"],
+    "food": "May be taken with or without food; food does not affect extent of absorption but lowers Cmax by 20% and delays Tmax by ~1.5 hours.",
+    "alcohol": "Avoid alcohol; additive central nervous system sedation and impaired coordination.",
+    "diagnostics": "Levetiracetam can cause hematologic abnormalities (decreased white cell counts, neutrophils, and red cell indices); consider periodic complete blood counts in symptomatic patients."
+  },
+  "se": {
+    "common": ["Somnolence", "Asthenia/fatigue", "Dizziness", "Infection", "Irritability", "Aggression (especially pediatric)", "Nasal congestion", "Decreased appetite"],
+    "serious": ["Behavioral abnormalities and psychotic symptoms", "Suicidal behavior and ideation", "Coordination difficulties (ataxia, abnormal gait)", "Increase in blood pressure (pediatric)", "Hematologic abnormalities"],
+    "rare": ["Stevens-Johnson syndrome", "Toxic epidermal necrolysis", "Withdrawal seizures on abrupt discontinuation"],
+    "emergency": ["Anaphylaxis", "Angioedema", "DRESS / multiorgan hypersensitivity", "Serious dermatological reactions (SJS/TEN) with skin blistering or mucosal involvement"]
+  },
+  "monitoring": [
+    "Mood, behavior, and emergence of depression, irritability, aggression, or psychotic symptoms",
+    "Suicidal thoughts or behavior (AED class effect)",
+    "Renal function (creatinine clearance) to guide dosing",
+    "Signs of serious skin reactions, angioedema, or anaphylaxis",
+    "Complete blood count if signs of infection, bleeding, or fatigue",
+    "Seizure frequency, especially during pregnancy when levels may fall"
+  ],
+  "counsel": [
+    "Take exactly as prescribed, at the same times each day; do not stop suddenly as this can trigger seizures",
+    "Report any new or worsening depression, mood changes, irritability, aggression, or thoughts of self-harm immediately",
+    "May cause drowsiness or dizziness; do not drive or operate machinery until you know how it affects you",
+    "Seek emergency care for rash, blistering, facial/throat swelling, or difficulty breathing",
+    "Avoid alcohol while taking this medication",
+    "Tell your clinician if you are pregnant, planning pregnancy, or breastfeeding, and enroll in the AED pregnancy registry",
+    "Swallow tablets whole; do not chew or crush them"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; therapeutic effect over titration period"],
+    ["Peak", "~1 hour (Tmax) in fasted subjects"],
+    ["Half-life", "7 +/- 1 hour in adults"],
+    ["Duration", "Steady state reached after ~2 days of twice-daily dosing"],
+    ["Storage", "Store at controlled room temperature 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Broad-spectrum AED effective for both focal and generalized seizures with a favorable interaction profile (no CYP induction/inhibition, minimal protein binding)",
+    "100% oral bioavailability; tablets and oral solution are bioequivalent",
+    "Behavioral and psychiatric adverse effects (irritability, aggression, mood changes) are the most common reasons for discontinuation; pyridoxine supplementation is sometimes tried clinically",
+    "Renally cleared, so the dose tracks creatinine clearance and a supplemental dose is needed after hemodialysis",
+    "Often preferred in pregnancy and in patients on multiple medications due to its low interaction potential, though levels may fall as pregnancy progresses"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double up to make up for a missed dose.",
+  "overdose": "There is no specific antidote. The highest reported clinical dose was 6000 mg/day, mainly causing drowsiness. Overdose can cause somnolence, agitation, aggression, depressed consciousness, respiratory depression, and coma. Management is supportive with airway protection and vital sign monitoring; consider gastric emptying if recently ingested. Hemodialysis can remove levetiracetam (about 50% over 4 hours) and may be considered in severe cases. Contact a Poison Control Center.",
+  "refs": [
+    ["FDA Prescribing Information: Levetiracetam Tablets (DailyMed/openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22levetiracetam%22"],
+    ["DailyMed - Levetiracetam Label", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=levetiracetam"]
+  ]
+}

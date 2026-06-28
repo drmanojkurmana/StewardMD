@@ -1,0 +1,157 @@
+{
+  "generic": "Hydrochloride (HCl salt form - not a specific drug)",
+  "cls": "Pharmaceutical salt descriptor - the hydrochloride salt of a basic drug (ambiguous/incomplete entry)",
+  "pharm": "'Hydrochloride' denotes a salt of hydrochloric acid with a basic drug molecule, formed to improve solubility/stability; it is not itself an active medicine",
+  "tags": [
+    "Salt-form descriptor",
+    "Ambiguous/data artifact",
+    "Not a specific drug",
+    "Confirm the parent drug"
+  ],
+  "quick": [
+    [
+      "Adult dose",
+      "Not applicable - 'hydrochloride' is only a salt form; the dose depends on the actual active drug"
+    ],
+    [
+      "Meal",
+      "Not applicable without the parent drug"
+    ],
+    [
+      "Pregnancy",
+      "Not applicable - depends entirely on the specific active ingredient"
+    ],
+    [
+      "Lactation",
+      "Not applicable - depends on the specific active ingredient"
+    ],
+    [
+      "Renal",
+      "Not applicable - depends on the specific active ingredient"
+    ],
+    [
+      "Hepatic",
+      "Not applicable - depends on the specific active ingredient"
+    ],
+    [
+      "Alcohol",
+      "Not applicable - depends on the specific active ingredient"
+    ],
+    [
+      "Monitoring",
+      "Determined by the actual drug, once identified"
+    ]
+  ],
+  "summary": "'Hydrochloride' is not a medicine in itself; it is a pharmaceutical salt-form descriptor meaning the hydrochloride (HCl) salt of a basic (amine-containing) drug. Drugs that are weak bases are very commonly formulated as their hydrochloride salts (for example, metformin hydrochloride, ranitidine hydrochloride, ondansetron hydrochloride, lidocaine hydrochloride) to improve water solubility, stability, crystallinity and dissolution. The salt itself has no independent therapeutic action - the pharmacology, indication, dose and safety profile all derive from the parent active moiety. As an exact dataset entry, 'Hydrochloride' is therefore ambiguous and almost certainly a data artifact: the actual active ingredient (the base whose hydrochloride salt is meant) must be identified before any clinical use, dosing or safety guidance can be given.",
+  "indications": [
+    "Not applicable - 'hydrochloride' is a salt form, not an indication-bearing active ingredient",
+    "Indications are determined by the specific parent drug once identified"
+  ],
+  "dosage": [
+    {
+      "c": "Not applicable",
+      "r": "Any",
+      "d": "No dose can be assigned to a bare salt-form label",
+      "t": "Determined by the specific active drug",
+      "n": "Identify the actual hydrochloride-salt drug (e.g. 'X hydrochloride') and use its monograph"
+    }
+  ],
+  "admin": [
+    "Do not administer based on a bare 'hydrochloride' label - identify the complete drug name first",
+    "Confirm the active moiety, strength and salt factor (the labelled amount may refer to the salt or the base)",
+    "Use the specific product's monograph for route, preparation and administration"
+  ],
+  "moa": "There is no mechanism of action for 'hydrochloride' as such. The hydrochloride salt simply provides a protonated, water-soluble form of a basic drug; once dissolved, the active cation exerts the pharmacological action specific to that drug. The mechanism must be taken from the parent compound's monograph.",
+  "contra": {
+    "absolute": [
+      "Determined entirely by the specific active drug"
+    ],
+    "relative": [
+      "Determined entirely by the specific active drug"
+    ],
+    "monitor": [
+      "As specified for the identified active drug"
+    ]
+  },
+  "preg": "Not assessable for a bare salt-form label; pregnancy safety is determined by the specific active ingredient.",
+  "lact": "Not assessable for a bare salt-form label; lactation safety is determined by the specific active ingredient.",
+  "renal": "Not assessable for a bare salt-form label; renal dosing is determined by the specific active ingredient.",
+  "hepatic": "Not assessable for a bare salt-form label; hepatic dosing is determined by the specific active ingredient.",
+  "interactions": {
+    "major": [
+      "Determined entirely by the specific active drug"
+    ],
+    "moderate": [
+      "Determined entirely by the specific active drug"
+    ],
+    "minor": [
+      "The chloride counter-ion is generally inert; clinically relevant interactions belong to the parent drug"
+    ],
+    "food": "Determined by the specific active drug",
+    "alcohol": "Determined by the specific active drug",
+    "diagnostics": "Determined by the specific active drug"
+  },
+  "se": {
+    "common": [
+      "Determined by the specific active drug"
+    ],
+    "serious": [
+      "Determined by the specific active drug"
+    ],
+    "rare": [
+      "Determined by the specific active drug"
+    ],
+    "emergency": [
+      "Determined by the specific active drug"
+    ]
+  },
+  "monitoring": [
+    "Determined by the specific active drug once identified"
+  ],
+  "counsel": [
+    "This entry only says 'hydrochloride', which is a salt form, not a complete medicine name",
+    "Ask your clinician or pharmacist for the full name of the actual drug (for example, 'something hydrochloride') before taking anything",
+    "All dosing and safety advice depends on the real active ingredient"
+  ],
+  "pk": [
+    [
+      "Onset",
+      "Not applicable - depends on the specific active drug"
+    ],
+    [
+      "Peak",
+      "Not applicable - depends on the specific active drug"
+    ],
+    [
+      "Half-life",
+      "Not applicable - depends on the specific active drug"
+    ],
+    [
+      "Duration",
+      "Not applicable - depends on the specific active drug"
+    ],
+    [
+      "Storage",
+      "Per the specific product's label once the actual drug is identified"
+    ]
+  ],
+  "pearls": [
+    "AMBIGUOUS ENTRY / LIKELY DATA ARTIFACT: 'Hydrochloride' is only a salt-form descriptor (the HCl salt of a basic drug), not a specific medicine",
+    "The hydrochloride salt is chosen to improve solubility/stability; the therapeutic effect belongs entirely to the parent active moiety (e.g. metformin HCl, lidocaine HCl)",
+    "Beware salt vs base: labelled strengths may refer to the salt or the free base, which affects the actual active dose",
+    "No dosing or safety guidance can be given until the real active ingredient is identified",
+    "Flagged per project guidance as an ambiguous/likely malformed dataset label"
+  ],
+  "missed": "Not applicable - this is a salt-form label, not a dosed medicine. Missed-dose advice depends on the specific drug once identified.",
+  "overdose": "Not assessable for a bare salt-form label. Overdose management depends entirely on the specific active drug; identify the actual medicine and consult its monograph or poisons information.",
+  "refs": [
+    [
+      "FDA / USP - pharmaceutical salts nomenclature (salt forms)",
+      "https://www.fda.gov/drugs"
+    ],
+    [
+      "WHO INN - use of salt forms in drug nomenclature",
+      "https://www.who.int/teams/health-product-and-policy-standards/inn"
+    ]
+  ]
+}

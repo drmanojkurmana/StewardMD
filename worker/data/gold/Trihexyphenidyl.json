@@ -1,0 +1,90 @@
+{
+  "generic": "Trihexyphenidyl",
+  "cls": "Antimuscarinic (anticholinergic) antiparkinson agent",
+  "pharm": "Centrally acting anticholinergic",
+  "tags": ["anticholinergic", "parkinsonism", "extrapyramidal", "drug-induced EPS", "tremor"],
+  "quick": [
+    ["Adult dose", "1 mg start, titrate to 6-10 mg/day in divided doses"],
+    ["Meal", "Before meals if dry mouth; after meals if nausea"],
+    ["Pregnancy", "Category C; use only if needed"],
+    ["Lactation", "Avoid; may suppress lactation"],
+    ["Renal", "Use with caution"],
+    ["Hepatic", "Use with caution"],
+    ["Alcohol", "Avoid; additive CNS depression"],
+    ["Monitoring", "Intraocular pressure, anticholinergic effects"]
+  ],
+  "summary": "Trihexyphenidyl is a centrally acting anticholinergic used as adjunct in parkinsonism and to control drug-induced extrapyramidal symptoms. Started low (1 mg) and titrated gradually to 6-10 mg/day. Key cautions are narrow-angle glaucoma, anticholinergic toxicity and use in the elderly.",
+  "indications": [
+    "Adjunct in the treatment of all forms of parkinsonism (postencephalitic, arteriosclerotic, idiopathic)",
+    "Adjuvant therapy with levodopa in parkinsonism",
+    "Control of extrapyramidal disorders caused by CNS drugs (dibenzoxazepines, phenothiazines, thioxanthenes, butyrophenones)"
+  ],
+  "dosage": [
+    {"c": "Parkinsonism", "r": "Adult", "d": "Start 1 mg day 1; increase by 2 mg every 3-5 days to 6-10 mg/day", "t": "In 3-4 divided doses", "n": "Postencephalitic may need 12-15 mg/day"},
+    {"c": "Drug-induced extrapyramidal symptoms", "r": "Adult", "d": "1 mg initially; usual 5-15 mg/day", "t": "Divided doses", "n": "Adjust to control symptoms"},
+    {"c": "Elderly (>60 yr)", "r": "Geriatric", "d": "Lower initial dose, titrate slowly", "t": "Divided doses", "n": "Increased sensitivity to anticholinergic effects"}
+  ],
+  "admin": [
+    "Individualize dose; start low and increase gradually",
+    "Take before meals if drug causes excessive dry mouth, unless it causes nausea",
+    "Take after meals if it causes nausea (postencephalitic patients with excess salivation)",
+    "Do not withdraw abruptly to avoid acute exacerbation of parkinsonism",
+    "Sustained-release capsules are for maintenance only, not initiation"
+  ],
+  "moa": "Blocks muscarinic acetylcholine receptors in the central nervous system, restoring the balance between dopaminergic and cholinergic activity in the basal ganglia. This central antimuscarinic action relieves rigidity and tremor in parkinsonism and counteracts drug-induced extrapyramidal symptoms; it also has direct antispasmodic effect on smooth muscle.",
+  "contra": {
+    "absolute": ["Narrow-angle glaucoma", "Hypersensitivity to trihexyphenidyl"],
+    "relative": ["Prostatic hypertrophy / bladder outlet obstruction", "Obstructive GI disease", "Tachyarrhythmias", "Elderly with cognitive impairment"],
+    "monitor": ["Intraocular pressure", "Concomitant anticholinergics", "Hot environments (heat stroke risk)"]
+  },
+  "preg": "Pregnancy Category C. Animal reproduction studies have not been conducted; it is not known whether it can cause fetal harm. Use during pregnancy only if clearly needed.",
+  "lact": "Use with caution; anticholinergics may suppress lactation. Generally avoided during breastfeeding.",
+  "renal": "Use with caution; no specific dose adjustment defined, but reduced clearance may increase anticholinergic effects.",
+  "hepatic": "Use with caution; no specific dose adjustment defined.",
+  "interactions": {
+    "major": ["Other anticholinergics (antihistamines, TCAs, antipsychotics) - additive anticholinergic toxicity", "Potassium chloride solid oral - increased GI lesion risk from delayed transit"],
+    "moderate": ["Phenothiazines - reduced antipsychotic levels and increased anticholinergic effects", "Levodopa - may reduce gastric emptying and absorption", "Metoclopramide - antagonized prokinetic effect"],
+    "minor": ["Antacids/adsorbents - reduced absorption"],
+    "food": "No significant food interaction; timing relative to meals adjusted for tolerability.",
+    "alcohol": "Avoid; additive CNS depression and sedation.",
+    "diagnostics": "May reduce gastric motility and mask GI obstruction."
+  },
+  "se": {
+    "common": ["Dry mouth", "Blurred vision", "Dizziness", "Nausea", "Nervousness", "Constipation"],
+    "serious": ["Paralytic ileus", "Acute angle-closure glaucoma", "Urinary retention", "Confusion / hallucinations (especially elderly)"],
+    "rare": ["Tachycardia", "Suppurative parotitis", "Anhidrosis with hyperthermia"],
+    "emergency": ["Anticholinergic toxidrome (hyperthermia, delirium, coma)", "Acute glaucoma crisis", "Paralytic ileus with obstruction"]
+  },
+  "monitoring": [
+    "Gonioscopy and intraocular pressure before and during therapy",
+    "Anticholinergic effects (urinary retention, constipation, confusion)",
+    "Mental status in elderly patients",
+    "Symptom control for parkinsonism/EPS"
+  ],
+  "counsel": [
+    "Report eye pain or visual changes promptly (glaucoma risk)",
+    "Use caution in hot weather; risk of overheating",
+    "Avoid alcohol and other sedatives",
+    "Do not stop the drug suddenly",
+    "Use sugar-free gum or sips of water for dry mouth"
+  ],
+  "pk": [
+    ["Onset", "Within ~1 hour"],
+    ["Peak", "Effects within 2-3 hours"],
+    ["Half-life", "Approximately 3-4 hours"],
+    ["Duration", "6-12 hours"],
+    ["Storage", "Store at controlled room temperature; protect from moisture"]
+  ],
+  "pearls": [
+    "More effective against rigidity and tremor than bradykinesia",
+    "Useful for drug-induced parkinsonism but not for tardive dyskinesia",
+    "Avoid abrupt withdrawal; taper to prevent rebound",
+    "High anticholinergic burden - use cautiously in the elderly"
+  ],
+  "missed": "Take the missed dose when remembered unless it is almost time for the next dose; do not double up. Resume the regular schedule.",
+  "overdose": "Produces an anticholinergic toxidrome (dry flushed skin, hyperthermia, dilated pupils, delirium, tachycardia, urinary retention). Treat with supportive care, cooling, and physostigmine for severe central toxicity; control seizures and agitation.",
+  "refs": [
+    ["FDA Trihexyphenidyl Hydrochloride Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22trihexyphenidyl+hydrochloride%22"],
+    ["FDA DailyMed - Trihexyphenidyl", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generic": "Nabumetone",
+  "cls": "Nonsteroidal anti-inflammatory drug (naphthylalkanone, prodrug)",
+  "pharm": "Non-acidic NSAID prodrug converted in the liver to the active metabolite 6-methoxy-2-naphthylacetic acid (6-MNA), which inhibits cyclooxygenase and prostaglandin synthesis.",
+  "tags": ["NSAID", "Prodrug", "6-MNA", "COX inhibitor", "Osteoarthritis", "Rheumatoid arthritis", "Once-daily", "Boxed warning (CV/GI)"],
+  "quick": [
+    ["Adult dose", "1000 mg once daily; may increase to 1500-2000 mg/day (max 2000 mg/day)"],
+    ["Meal", "Take with or without food; food increases absorption"],
+    ["Pregnancy", "Avoid from 30 weeks (premature ductus closure); caution from 20 weeks"],
+    ["Lactation", "Caution; human milk excretion unknown"],
+    ["Renal", "Reduce dose in CrCl <50; CrCl 30-49 max 1500 mg/day; <30 max 1000 mg/day"],
+    ["Hepatic", "Caution; monitor LFTs, discontinue if liver disease develops"],
+    ["Alcohol", "Avoid/limit - increases GI bleeding risk"],
+    ["Monitoring", "Blood pressure, renal function, CBC, LFTs, GI bleeding signs"]
+  ],
+  "summary": "Nabumetone is a once-daily nonselective NSAID prodrug used to relieve the signs and symptoms of osteoarthritis and rheumatoid arthritis. It is converted in the liver to the active metabolite 6-MNA. Like all NSAIDs it carries boxed warnings for cardiovascular thrombotic events and serious gastrointestinal bleeding/ulceration, is contraindicated in the perioperative CABG setting, and should be avoided in late pregnancy. Use the lowest effective dose for the shortest duration.",
+  "indications": [
+    "Relief of signs and symptoms of osteoarthritis",
+    "Relief of signs and symptoms of rheumatoid arthritis"
+  ],
+  "dosage": [
+    {"c": "Osteoarthritis / rheumatoid arthritis (starting)", "r": "Oral", "d": "1000 mg", "t": "Once daily", "n": "With or without food"},
+    {"c": "Osteoarthritis / rheumatoid arthritis (additional relief)", "r": "Oral", "d": "1500-2000 mg/day", "t": "As a single dose or in two divided doses", "n": "Max 2000 mg/day; doses above 2000 mg not studied"},
+    {"c": "Low body weight (<50 kg)", "r": "Oral", "d": "Up to 1000 mg/day", "t": "Once daily", "n": "Often sufficient; titrate cautiously"},
+    {"c": "Renal impairment (CrCl 30-49)", "r": "Oral", "d": "Start 750 mg/day", "t": "Once daily", "n": "Maximum 1500 mg/day"},
+    {"c": "Renal impairment (CrCl <30)", "r": "Oral", "d": "Start 500 mg/day", "t": "Once daily", "n": "Maximum 1000 mg/day"}
+  ],
+  "admin": [
+    "May be taken with or without food; food increases the rate of absorption and raises peak 6-MNA by about one-third",
+    "Swallow tablets whole",
+    "Use the lowest effective dose for the shortest duration consistent with treatment goals",
+    "Avoid concomitant use of other NSAIDs or aspirin for analgesia"
+  ],
+  "moa": "Nabumetone is an inactive prodrug; after hepatic conversion its active metabolite 6-methoxy-2-naphthylacetic acid (6-MNA) inhibits cyclooxygenase (COX-1 and COX-2), reducing prostaglandin synthesis and producing anti-inflammatory, analgesic, and antipyretic effects.",
+  "contra": {
+    "absolute": ["Hypersensitivity to nabumetone", "History of asthma, urticaria, or allergic-type reaction to aspirin or other NSAIDs (aspirin triad)", "Perioperative use in the setting of coronary artery bypass graft (CABG) surgery"],
+    "relative": ["Active GI bleeding or peptic ulcer disease", "Advanced renal disease", "Severe heart failure or uncontrolled hypertension", "Hepatic impairment", "Concurrent anticoagulant therapy"],
+    "monitor": ["Blood pressure", "Renal function", "Liver function tests", "Hemoglobin/hematocrit", "GI bleeding signs"]
+  },
+  "preg": "Avoid from 30 weeks of gestation onward due to risk of premature closure of the fetal ductus arteriosus; use at 20 weeks or later may cause fetal renal dysfunction and oligohydramnios. Before 30 weeks, use only if clearly needed.",
+  "lact": "It is not known whether nabumetone/6-MNA is excreted in human milk (present in rat milk); weigh the benefit of breastfeeding against potential risk.",
+  "renal": "No adjustment if CrCl 50 mL/min or above. For CrCl 30-49 mL/min, start at 750 mg/day (max 1500 mg/day); for CrCl below 30 mL/min, start at 500 mg/day (max 1000 mg/day). Avoid in advanced renal disease.",
+  "hepatic": "Conversion to and clearance of 6-MNA may be reduced in severe hepatic impairment; monitor liver function and discontinue if clinical signs of liver disease develop.",
+  "interactions": {
+    "major": ["Anticoagulants (warfarin) - increased bleeding risk", "Aspirin / other NSAIDs - additive GI toxicity", "Lithium - increased lithium levels", "Methotrexate - increased methotrexate toxicity"],
+    "moderate": ["ACE inhibitors, ARBs, beta-blockers - reduced antihypertensive effect and renal risk", "Diuretics - reduced effect, renal risk", "Cyclosporine - nephrotoxicity", "Digoxin - increased levels", "SSRIs/SNRIs - increased GI bleeding", "Corticosteroids - additive GI risk"],
+    "minor": ["Antacids - minimal effect on absorption"],
+    "food": "Food increases absorption and peak 6-MNA levels",
+    "alcohol": "Increases the risk of gastrointestinal bleeding",
+    "diagnostics": "May affect renal function tests and prolong bleeding time."
+  },
+  "se": {
+    "common": ["Diarrhea", "Dyspepsia", "Abdominal pain", "Headache", "Dizziness", "Edema", "Rash"],
+    "serious": ["GI bleeding, ulceration, or perforation (may be silent and fatal)", "Cardiovascular thrombotic events (MI, stroke)", "Heart failure and hypertension", "Hepatic or renal failure", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Anaphylactoid reactions"],
+    "rare": ["Aseptic meningitis", "Blood dyscrasias", "Bronchospasm"],
+    "emergency": ["Chest pain or stroke symptoms", "Hematemesis or melena", "Blistering rash", "Anaphylaxis", "Jaundice with severe liver injury"]
+  },
+  "monitoring": [
+    "Blood pressure",
+    "Renal function (serum creatinine)",
+    "Complete blood count (hemoglobin/hematocrit)",
+    "Liver function tests",
+    "Signs and symptoms of GI bleeding",
+    "Edema and body weight in patients with heart failure"
+  ],
+  "counsel": [
+    "Report stomach pain, black or bloody stools, or vomiting blood - GI bleeding can occur without warning",
+    "Seek urgent care for chest pain, weakness, slurred speech, or shortness of breath",
+    "Do not use around the time of heart bypass surgery or with other NSAIDs/aspirin for pain",
+    "Avoid NSAIDs after about 30 weeks of pregnancy",
+    "Limit alcohol; take the lowest effective dose for the shortest time"
+  ],
+  "pk": [
+    ["Onset", "Symptomatic relief over days; analgesic effect within hours"],
+    ["Peak", "Active metabolite 6-MNA peaks ~3 hours after a dose"],
+    ["Half-life", "6-MNA ~22.5-24 hours (~30 hours in the elderly)"],
+    ["Duration", "~24 hours, supporting once-daily dosing"],
+    ["Storage", "20-25 C"]
+  ],
+  "pearls": [
+    "A prodrug - it is inactive until the liver converts it to 6-MNA",
+    "Boxed warnings for cardiovascular thrombotic events and serious GI bleeding apply as with all NSAIDs",
+    "Long half-life of the active metabolite allows convenient once-daily dosing and aids adherence",
+    "Relatively favorable upper-GI tolerability, but serious GI risk still exists",
+    "Highly protein-bound (>99%) so hemodialysis is not useful in overdose"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose - do not take a double dose.",
+  "overdose": "Symptoms include lethargy, drowsiness, nausea, vomiting, and epigastric pain. Manage supportively; activated charcoal may be given if presentation is early. Because nabumetone is highly protein bound, dialysis is not useful. Monitor for GI bleeding, renal function, and acid-base status.",
+  "refs": [
+    ["FDA Nabumetone Tablets Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22NABUMETONE%22"],
+    ["DailyMed - Nabumetone", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=nabumetone"]
+  ]
+}

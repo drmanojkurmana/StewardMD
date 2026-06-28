@@ -1,0 +1,147 @@
+{
+  "generic": "Famotidine",
+  "cls": "Antisecretory / Acid suppressant (H2-receptor antagonist)",
+  "pharm": "Histamine-2 (H2) receptor antagonist; competitive inhibitor of gastric acid secretion",
+  "tags": [
+    "H2 antagonist",
+    "Acid suppressant",
+    "Oral",
+    "Controlled substance: No",
+    "Habit forming: No",
+    "Renal dose adjustment required (CrCl <60 mL/min)",
+    "Boxed warning: None"
+  ],
+  "quick": [
+    ["Adult dose", "20 mg BID or 40 mg once daily"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Use only if clearly needed; data insufficient"],
+    ["Lactation", "Limited data; weigh benefit vs risk"],
+    ["Renal", "Reduce dose if CrCl <60 mL/min"],
+    ["Hepatic", "Not specified"],
+    ["Alcohol", "No specific interaction noted"],
+    ["Monitoring", "Renal function, CNS effects (elderly/renal)"]
+  ],
+  "summary": "Famotidine is a histamine-2 (H2) receptor antagonist that competitively inhibits gastric acid secretion. It is indicated for duodenal and gastric ulcers, GERD, erosive esophagitis, and pathological hypersecretory conditions, and for reducing the risk of duodenal ulcer recurrence. There is no boxed warning. The dose must be reduced in moderate to severe renal impairment (creatinine clearance less than 60 mL/min) because elevated blood levels increase the risk of CNS adverse reactions, particularly in elderly patients.",
+  "indications": [
+    "Active duodenal ulcer (adults and pediatric patients 40 kg and greater)",
+    "Active gastric ulcer (adults and pediatric patients 40 kg and greater)",
+    "Symptomatic nonerosive gastroesophageal reflux disease (GERD)",
+    "Erosive esophagitis due to GERD, diagnosed by endoscopy/biopsy",
+    "Pathological hypersecretory conditions (e.g., Zollinger-Ellison syndrome, multiple endocrine neoplasias) in adults",
+    "Reduction of the risk of duodenal ulcer recurrence in adults"
+  ],
+  "dosage": [
+    {"c": "Active duodenal ulcer", "r": "Oral", "d": "40 mg once daily; or 20 mg twice daily", "t": "Once daily or twice daily", "n": "Up to 8 weeks; most patients heal within 4 weeks"},
+    {"c": "Active gastric ulcer", "r": "Oral", "d": "40 mg once daily", "t": "Once daily", "n": "Up to 8 weeks"},
+    {"c": "Symptomatic nonerosive GERD", "r": "Oral", "d": "20 mg twice daily", "t": "Twice daily", "n": "Up to 6 weeks"},
+    {"c": "Erosive esophagitis (endoscopically diagnosed)", "r": "Oral", "d": "20 mg twice daily; or 40 mg twice daily", "t": "Twice daily", "n": "Up to 12 weeks"},
+    {"c": "Pathological hypersecretory conditions (adults)", "r": "Oral", "d": "Starting 20 mg every 6 hours; maximum 160 mg every 6 hours", "t": "Every 6 hours", "n": "Adjust dose to individual patient needs; as clinically indicated"},
+    {"c": "Reduction of risk of DU recurrence (adults)", "r": "Oral", "d": "20 mg once daily", "t": "Once daily", "n": "1 year or as clinically indicated"},
+    {"c": "Renal impairment CrCl 30-60 mL/min", "r": "Oral", "d": "Reduced maximum (e.g., 20 mg once daily, or 40 mg every other day depending on indication)", "t": "Once daily / every other day", "n": "Use lowest effective dose; see full labeling Table 2"},
+    {"c": "Renal impairment CrCl <30 mL/min", "r": "Oral", "d": "Reduced maximum (e.g., 20 mg every other day, or 20 mg once daily for erosive esophagitis)", "t": "Every other day / once daily", "n": "Use lowest effective dose; may require switch to oral suspension or lower-strength tablet"}
+  ],
+  "admin": [
+    "Take once daily before bedtime or twice daily in the morning and before bedtime",
+    "May be taken with or without food",
+    "Use the lowest effective dose, especially in elderly and renally impaired patients",
+    "Reduce the dosage in patients with creatinine clearance less than 60 mL/min",
+    "Tablets (20 mg, 40 mg) are not recommended in pediatric patients under 40 kg; use another formulation"
+  ],
+  "moa": "Famotidine is a competitive inhibitor of histamine-2 (H2) receptors. Its primary clinically important pharmacologic activity is inhibition of gastric secretion; both the acid concentration and the volume of gastric secretion are suppressed, while changes in pepsin secretion are proportional to volume output.",
+  "contra": {
+    "absolute": [
+      "History of serious hypersensitivity reactions (e.g., anaphylaxis) to famotidine or to other H2 receptor antagonists"
+    ],
+    "relative": [
+      "Moderate to severe renal impairment (requires dose reduction and CNS monitoring)",
+      "Elderly patients (increased risk of CNS adverse reactions)",
+      "Suspected gastric malignancy not yet evaluated"
+    ],
+    "monitor": [
+      "CNS adverse reactions in elderly and renally impaired patients",
+      "Renal function",
+      "Symptomatic response that may mask underlying gastric malignancy"
+    ]
+  },
+  "preg": "Available data with H2-receptor antagonists, including famotidine, in pregnant women are insufficient to establish a drug-associated risk of major birth defects, miscarriage, or adverse maternal or fetal outcomes. Animal reproduction studies in rats and rabbits revealed no significant evidence of impaired fertility or fetal harm at doses many times the human dose. Because animal studies are not always predictive, use during pregnancy only if clearly needed.",
+  "lact": "There are limited data on the presence of famotidine in human breast milk; no effects on the breastfed infant were reported and there are no data on effects on milk production. Famotidine is present in the milk of lactating rats. Consider the developmental and health benefits of breastfeeding along with the mother's clinical need and any potential adverse effects on the breastfed child.",
+  "renal": "Famotidine is eliminated predominantly by the renal route (65 to 70%) and blood levels are higher in renal impairment. In severe renal impairment (CrCl <30 mL/min) systemic exposure (AUC) increases at least 5-fold, and in moderate impairment (CrCl 30-60 mL/min) at least 2-fold. Dosage adjustment is recommended for CrCl less than 60 mL/min to reduce the risk of CNS adverse reactions and QT prolongation; use the lowest effective dose.",
+  "hepatic": "Not specified",
+  "interactions": {
+    "major": [
+      "Tizanidine (CYP1A2 substrate) - famotidine is a weak CYP1A2 inhibitor and may substantially increase tizanidine levels causing hypotension, bradycardia, or excessive drowsiness; avoid concomitant use if possible",
+      "Dasatinib, delavirdine, cefditoren, fosamprenavir - concomitant use not recommended due to reduced absorption from raised gastric pH"
+    ],
+    "moderate": [
+      "Atazanavir, erlotinib, ketoconazole, itraconazole, ledipasvir/sofosbuvir, nilotinib, rilpivirine - reduced absorption; follow product-specific administration instructions",
+      "Probenecid (OAT1/OAT3 inhibitor) - increases famotidine exposure; clinical relevance unknown"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food; food slightly increases and antacids slightly decrease bioavailability, but these effects are not clinically significant.",
+    "alcohol": "No specific interaction noted in labeling.",
+    "diagnostics": "May cause false-negative results in gastric acid secretion tests; in vitro famotidine inhibits MATE-1, though no clinically significant interaction with metformin was seen."
+  },
+  "se": {
+    "common": [
+      "Headache",
+      "Dizziness",
+      "Constipation",
+      "Diarrhea"
+    ],
+    "serious": [
+      "CNS adverse reactions (confusion, delirium, hallucinations, disorientation, agitation, seizures, lethargy) in elderly and renally impaired patients",
+      "QT interval prolongation (especially with renal impairment)",
+      "Cholestatic jaundice, hepatitis",
+      "Agranulocytosis, pancytopenia, leukopenia, thrombocytopenia",
+      "Arrhythmia, AV block"
+    ],
+    "rare": [
+      "Rhabdomyolysis, muscle cramps",
+      "Bronchospasm",
+      "Impotence, decreased libido",
+      "Tinnitus, taste disorder"
+    ],
+    "emergency": [
+      "Anaphylaxis or angioedema (facial edema, urticaria)",
+      "Severe CNS reactions including seizures",
+      "Serious cardiac arrhythmia or prolonged QT"
+    ]
+  },
+  "monitoring": [
+    "Renal function, particularly in the elderly",
+    "CNS adverse reactions in elderly and renally impaired patients",
+    "Signs of gastric malignancy in adults with suboptimal response or early symptomatic relapse",
+    "QT interval in patients with renal impairment and other risk factors",
+    "Continued need for therapy and use of lowest effective dose"
+  ],
+  "counsel": [
+    "Take exactly as directed, once daily at bedtime or twice daily in the morning and at bedtime",
+    "May be taken with or without food",
+    "Tell your clinician about kidney problems - your dose may need to be lowered",
+    "Report new confusion, agitation, or unusual behavior, especially if elderly or with kidney disease",
+    "Persistent or worsening stomach symptoms should be evaluated and do not rule out a more serious condition",
+    "Tell your clinician about all other medicines, as famotidine can reduce absorption of some drugs",
+    "Tell your clinician if pregnant, planning pregnancy, or breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "Antisecretory effect within 1 hour of oral dosing"],
+    ["Peak", "Peak plasma levels in 1 to 3 hours; maximum effect in 1 to 3 hours"],
+    ["Half-life", "2.5 to 3.5 hours (prolonged in renal impairment)"],
+    ["Duration", "Inhibition of secretion 10 to 12 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C; tight, light-resistant container"]
+  ],
+  "pearls": [
+    "Eliminated mainly renally (65-70%); reduce dose for CrCl <60 mL/min to avoid CNS toxicity",
+    "Elderly and renally impaired patients are at increased risk of confusion, delirium, hallucinations, and seizures",
+    "By raising gastric pH it can reduce absorption of pH-dependent drugs (e.g., dasatinib, atazanavir, ketoconazole)",
+    "Weak CYP1A2 inhibitor - avoid with tizanidine due to risk of hypotension and bradycardia",
+    "Symptomatic relief does not exclude gastric malignancy; evaluate adults with poor response or early relapse",
+    "Low plasma protein binding means famotidine is removed by hemodialysis"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered. If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not take two doses at once to make up for a missed dose.",
+  "overdose": "Adverse reactions in overdose are similar to those seen at recommended doses. Treatment is symptomatic and supportive: remove unabsorbed material from the GI tract, monitor the patient, and employ supportive therapy. Because of low plasma protein binding, famotidine is eliminated by hemodialysis, though experience with dialysis for overdose is limited. Contact Poison Help (1-800-222-1222).",
+  "refs": [
+    ["FDA Label - Famotidine (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22famotidine%22"],
+    ["DailyMed - Famotidine SPL", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=002875d2-8c30-2d2e-e063-6294a90ae01e"]
+  ]
+}

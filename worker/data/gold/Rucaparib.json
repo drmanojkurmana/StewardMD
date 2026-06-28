@@ -1,0 +1,110 @@
+{
+  "generic": "Rucaparib",
+  "cls": "Poly(ADP-ribose) polymerase (PARP) inhibitor - oral antineoplastic",
+  "pharm": "Inhibits PARP-1, PARP-2, and PARP-3 enzymes involved in DNA single-strand break repair, causing PARP-DNA complexes ('trapping'), stalled replication forks, double-strand breaks, and synthetic-lethal cell death in tumors deficient in homologous recombination repair (e.g., BRCA-mutant cancers).",
+  "tags": ["Rx only", "PARP inhibitor", "Ovarian cancer", "Prostate cancer (BRCA)", "Myelosuppression", "Embryo-fetal toxicity", "MDS/AML risk"],
+  "quick": [
+    ["Adult dose", "600 mg orally twice daily (two 300 mg tablets BID)"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Can cause fetal harm; contraindicated - use effective contraception"],
+    ["Lactation", "Do not breastfeed during treatment and for 2 weeks after the final dose"],
+    ["Renal", "No adjustment for mild-moderate (CrCl >=30); not studied in severe/ESRD"],
+    ["Hepatic", "No adjustment for mild; not studied in moderate-severe impairment"],
+    ["Alcohol", "No specific interaction; minimize during illness/cytopenias"],
+    ["Monitoring", "CBC monthly (myelosuppression, MDS/AML), liver enzymes, pregnancy test"]
+  ],
+  "summary": "Rucaparib is an oral inhibitor of PARP-1, -2, and -3 used to treat certain BRCA-mutated or homologous-recombination-deficient cancers, including maintenance treatment of recurrent ovarian/fallopian/primary peritoneal cancer in patients responding to platinum chemotherapy and BRCA-mutated metastatic castration-resistant prostate cancer. By inhibiting and trapping PARP on DNA, it exploits synthetic lethality in tumors that cannot repair DNA by homologous recombination. The most clinically important risks are myelosuppression (anemia, neutropenia, thrombocytopenia) and the rare but serious development of myelodysplastic syndrome/acute myeloid leukemia (MDS/AML), which mandates regular blood-count monitoring and discontinuation if MDS/AML is confirmed. It is genotoxic and embryo-fetal toxic, requiring contraception, and is dosed 600 mg twice daily with or without food.",
+  "indications": [
+    "Maintenance treatment of recurrent epithelial ovarian, fallopian tube, or primary peritoneal cancer in adults in complete or partial response to platinum-based chemotherapy",
+    "Treatment of deleterious BRCA-mutated (germline and/or somatic) advanced ovarian cancer in patients treated with two or more prior chemotherapies (per approved labeling)",
+    "Treatment of BRCA-mutated (germline and/or somatic) metastatic castration-resistant prostate cancer (mCRPC) in patients who have progressed on androgen-receptor-directed therapy and a taxane"
+  ],
+  "dosage": [
+    {"c": "Ovarian cancer maintenance / treatment", "r": "Oral", "d": "600 mg (two 300 mg tablets) twice daily", "t": "Twice daily", "n": "Continue until disease progression or unacceptable toxicity"},
+    {"c": "BRCA-mutated mCRPC", "r": "Oral", "d": "600 mg twice daily, with a GnRH analog or after bilateral orchiectomy", "t": "Twice daily", "n": "Continue until progression or unacceptable toxicity"},
+    {"c": "First dose reduction (toxicity)", "r": "Oral", "d": "500 mg twice daily", "t": "Twice daily", "n": "For adverse reactions per labeling"},
+    {"c": "Second dose reduction", "r": "Oral", "d": "400 mg twice daily", "t": "Twice daily", "n": "Further reduction"},
+    {"c": "Third dose reduction", "r": "Oral", "d": "300 mg twice daily", "t": "Twice daily", "n": "Lowest recommended dose; discontinue if not tolerated"}
+  ],
+  "admin": [
+    "Take two 300 mg tablets twice daily, about 12 hours apart, with or without food",
+    "Swallow tablets whole; take doses at approximately the same times each day",
+    "Confirm a negative pregnancy test before starting in females of reproductive potential",
+    "Obtain baseline and monthly complete blood counts; interrupt or reduce dose for hematologic toxicity",
+    "Manage adverse reactions with treatment interruption, dose reduction, or discontinuation per labeling; discontinue permanently if MDS/AML is confirmed"
+  ],
+  "moa": "Rucaparib inhibits poly(ADP-ribose) polymerase enzymes PARP-1, PARP-2, and PARP-3, which are critical for recognizing and repairing DNA single-strand breaks via the base-excision repair pathway. Inhibition prevents repair and traps PARP-DNA complexes at sites of damage, blocking replication forks and converting single-strand breaks into cytotoxic double-strand breaks during replication. In cells with deficient homologous recombination repair (such as BRCA1/2-mutant tumors), these double-strand breaks cannot be accurately repaired, producing synthetic lethality and selective tumor-cell death. This DNA-damaging mechanism also underlies its genotoxicity, myelosuppression, and risk of secondary myeloid malignancy.",
+  "contra": {
+    "absolute": [
+      "Pregnancy (embryo-fetal toxicity)",
+      "Known severe hypersensitivity to rucaparib or excipients"
+    ],
+    "relative": [
+      "Pre-existing significant cytopenias or bone marrow reserve compromise",
+      "Prior MDS/AML or features suggestive of it",
+      "Severe renal or moderate-to-severe hepatic impairment (limited data)"
+    ],
+    "monitor": [
+      "Complete blood counts monthly and as clinically indicated",
+      "Signs of MDS/AML (prolonged or worsening cytopenias)",
+      "Liver function tests (transaminase elevations)",
+      "Pregnancy status in females of reproductive potential"
+    ]
+  },
+  "preg": "Based on its mechanism and animal data, rucaparib can cause fetal harm. It is contraindicated in pregnancy. Females of reproductive potential must use effective contraception during treatment and for 6 months after the last dose. Verify pregnancy status before initiating.",
+  "lact": "There are no data on the presence of rucaparib in human milk or its effects on the breastfed infant. Because of the potential for serious adverse reactions, advise women not to breastfeed during treatment and for 2 weeks after the final dose.",
+  "renal": "No dose adjustment is recommended for patients with mild to moderate renal impairment (creatinine clearance >=30 mL/min). Rucaparib has not been studied in patients with severe renal impairment or end-stage renal disease; use with caution if at all.",
+  "hepatic": "No dose adjustment is recommended for patients with mild hepatic impairment (total bilirubin <=ULN and AST > ULN, or bilirubin 1-1.5x ULN). Rucaparib has not been studied in patients with moderate to severe hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Other myelosuppressive agents - additive bone marrow suppression",
+      "Warfarin (CYP-dependent narrow-therapeutic-index substrate) - rucaparib inhibits CYP1A2/CYP2C9/CYP2C19/CYP3A; monitor INR closely"
+    ],
+    "moderate": [
+      "CYP1A2 substrates (e.g., caffeine, tizanidine, duloxetine) - rucaparib may increase exposure",
+      "CYP2C9 substrates (e.g., phenytoin) and CYP2C19 substrates - increased exposure possible",
+      "P-glycoprotein substrates (e.g., digoxin) - rucaparib inhibits P-gp; monitor",
+      "MATE1/MATE2-K substrates (e.g., metformin) - increased exposure possible"
+    ],
+    "minor": ["Effect of CYP inducers/inhibitors on rucaparib itself is limited"],
+    "food": "May be taken with or without food; a high-fat meal modestly affects pharmacokinetics without clinical significance.",
+    "alcohol": "No specific interaction; advise moderation during cytopenias or intercurrent illness.",
+    "diagnostics": "Can elevate serum creatinine (via transporter inhibition, not necessarily reflecting reduced GFR), ALT/AST, and cholesterol."
+  },
+  "se": {
+    "common": ["Nausea", "Fatigue/asthenia", "Anemia", "Vomiting", "Dysgeusia (altered taste)", "Decreased appetite", "Diarrhea or constipation", "Increased creatinine", "Thrombocytopenia"],
+    "serious": ["Myelodysplastic syndrome / acute myeloid leukemia (MDS/AML)", "Severe myelosuppression (anemia, neutropenia, thrombocytopenia)", "Hepatotoxicity with transaminase elevation"],
+    "rare": ["Severe cutaneous reactions / photosensitivity", "Pneumonitis"],
+    "emergency": ["Febrile neutropenia / serious infection", "Severe bleeding from thrombocytopenia", "Confirmed MDS/AML (discontinue permanently)"]
+  },
+  "monitoring": ["Complete blood count at baseline and monthly thereafter", "Watch for prolonged cytopenias suggesting MDS/AML", "Liver function tests periodically", "Serum creatinine (interpret transporter-mediated rises cautiously)", "Pregnancy testing in females of reproductive potential before and during treatment"],
+  "counsel": [
+    "Take two tablets twice a day, about 12 hours apart, with or without food",
+    "This medicine can lower your blood counts - keep all appointments for blood tests and report fever, unusual bruising, bleeding, or extreme tiredness",
+    "It can harm an unborn baby - use effective birth control during treatment and for 6 months after the last dose; men should also use condoms per advice",
+    "Do not breastfeed during treatment and for 2 weeks after your last dose",
+    "Tell your doctor about all other medicines, including warfarin, as doses may need adjusting",
+    "Use sun protection, as your skin may be more sensitive to sunlight"
+  ],
+  "pk": [
+    ["Onset", "Antitumor effect over weeks; steady state in ~1 week"],
+    ["Peak", "Plasma Tmax ~1.9 hours"],
+    ["Half-life", "Mean terminal half-life ~17-19 hours"],
+    ["Duration", "Twice-daily dosing maintains PARP inhibition"],
+    ["Storage", "Store at 20-25 C (excursions 15-30 C permitted)"]
+  ],
+  "pearls": [
+    "PARP inhibitor exploiting synthetic lethality in BRCA-mutated / HR-deficient tumors",
+    "Most serious risk is treatment-related MDS/AML - monitor CBC monthly and discontinue permanently if confirmed",
+    "Myelosuppression is dose-limiting; manage with interruption, dose reduction (600->500->400->300 mg BID), or stopping",
+    "Strongly embryo-fetal toxic and genotoxic - contraception during and 6 months after; no breastfeeding",
+    "Raises serum creatinine by inhibiting renal transporters (MATE1/OCT2) without truly lowering GFR - interpret cautiously",
+    "Inhibits multiple CYP enzymes - monitor warfarin INR and other narrow-index substrates"
+  ],
+  "missed": "If you miss a dose or vomit after a dose, do not take an extra dose. Take the next dose at the regularly scheduled time. Do not make up missed doses.",
+  "overdose": "There is no specific antidote and no established treatment for rucaparib overdose. In the event of overdose, discontinue the drug, institute general supportive measures, monitor blood counts and organ function, and manage symptomatically.",
+  "refs": [
+    ["FDA Label - Rucaparib (Rubraca) (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rucaparib%22"],
+    ["DailyMed - Rubraca (rucaparib)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=rucaparib"]
+  ]
+}

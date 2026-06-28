@@ -1,0 +1,97 @@
+{
+  "generic": "Brivaracetam",
+  "cls": "Antiepileptic drug (SV2A ligand)",
+  "pharm": "Antiseizure agent with high, selective affinity for synaptic vesicle protein 2A (SV2A); rapidly and completely absorbed, CYP-minor metabolism; Schedule V controlled substance.",
+  "tags": ["Antiepileptic", "Partial-onset seizures", "SV2A ligand", "Oral/IV", "Schedule V", "Levetiracetam analog"],
+  "quick": [
+    ["Adult dose", "50 mg PO/IV twice daily (range 25-100 mg BID)"],
+    ["Meal", "With or without food (high-fat meal slows but does not reduce absorption)"],
+    ["Pregnancy", "May cause fetal harm (animal data); enroll in AED registry"],
+    ["Lactation", "Weigh benefits; data limited"],
+    ["Renal", "No adjustment (not recommended in end-stage renal disease)"],
+    ["Hepatic", "Reduce dose for all stages of hepatic impairment"],
+    ["Alcohol", "Avoid; additive CNS effects"],
+    ["Monitoring", "Mood/suicidality, somnolence, seizure control"]
+  ],
+  "summary": "Brivaracetam is an antiepileptic for partial-onset (focal) seizures in patients 1 month and older, available as tablets, oral solution, and IV (interchangeable). It binds synaptic vesicle protein 2A (SV2A) with high selectivity. The usual starting dose is 50 mg twice daily, titratable to 25-100 mg twice daily; no gradual escalation is required. Key cautions are suicidal ideation/behavior (AED class effect), somnolence/dizziness, psychiatric/behavioral reactions, and rare hypersensitivity (bronchospasm, angioedema). It is a Schedule V controlled substance and requires dose reduction in hepatic impairment.",
+  "indications": [
+    "Treatment of partial-onset (focal) seizures in patients 1 month of age and older (monotherapy or adjunctive)"
+  ],
+  "dosage": [
+    {"c": "Adults & adolescents >=16 years", "r": "Oral or IV", "d": "50 mg twice daily (100 mg/day)", "t": "Twice daily", "n": "Adjust between 25 and 100 mg twice daily (50-200 mg/day) per response/tolerability; no gradual escalation required"},
+    {"c": "Pediatric >=50 kg", "r": "Oral or IV", "d": "25-50 mg twice daily", "t": "Twice daily", "n": "Maintenance 25-100 mg twice daily"},
+    {"c": "Pediatric 20 to <50 kg", "r": "Oral or IV", "d": "0.5-1 mg/kg twice daily", "t": "Twice daily", "n": "Maintenance 0.5-2 mg/kg twice daily"},
+    {"c": "Pediatric 11 to <20 kg", "r": "Oral or IV", "d": "0.5-1.25 mg/kg twice daily", "t": "Twice daily", "n": "Maintenance 0.5-2.5 mg/kg twice daily"},
+    {"c": "Pediatric <11 kg", "r": "Oral or IV", "d": "0.75-1.5 mg/kg twice daily", "t": "Twice daily", "n": "Weight-based dosing per label table"},
+    {"c": "Hepatic impairment (all stages)", "r": "Oral or IV", "d": "Start 25 mg twice daily; max 75 mg twice daily", "t": "Twice daily", "n": "Dose reduction recommended for any degree of hepatic impairment"},
+    {"c": "On concomitant rifampin", "r": "Oral or IV", "d": "Increase dose up to 100% (double)", "t": "Twice daily", "n": "Rifampin induces CYP2C19, lowering brivaracetam levels"}
+  ],
+  "admin": [
+    "Tablets, oral solution, and IV injection are interchangeable at the same dose",
+    "IV may be given as a bolus or infusion when oral administration is temporarily not feasible",
+    "May be taken with or without food",
+    "No gradual dose escalation is required when starting",
+    "Withdraw gradually (do not stop abruptly) to reduce the risk of increased seizures/status epilepticus",
+    "Swallow tablets whole with liquid"
+  ],
+  "moa": "The precise anticonvulsant mechanism is not fully known; brivaracetam displays high and selective affinity for synaptic vesicle protein 2A (SV2A) in the brain, which is thought to modulate neurotransmitter release and contribute to its antiseizure effect.",
+  "contra": {
+    "absolute": ["Hypersensitivity to brivaracetam or any inactive ingredient (bronchospasm and angioedema have occurred)"],
+    "relative": ["History of psychiatric disorders or suicidal ideation", "Hepatic impairment (requires dose reduction)", "End-stage renal disease (not recommended)"],
+    "monitor": ["Mood, behavior, and suicidal ideation", "Somnolence/sedation", "Seizure frequency"]
+  },
+  "preg": "Based on animal data, brivaracetam may cause fetal harm (increased embryofetal mortality and decreased fetal body weights). Human data are insufficient. Encourage enrollment in the North American Antiepileptic Drug (NAAED) Pregnancy Registry (1-888-233-2334).",
+  "lact": "Data on human milk excretion are limited; a decision to breastfeed should weigh developmental/health benefits against the mother's clinical need and potential infant effects.",
+  "renal": "No dose adjustment is needed for renal impairment; brivaracetam is not recommended in patients with end-stage renal disease undergoing dialysis (not studied). Less than 10% is excreted unchanged in urine.",
+  "hepatic": "Dose reduction is recommended for ALL stages of hepatic impairment - start at 25 mg twice daily with a maximum of 75 mg twice daily.",
+  "interactions": {
+    "major": ["Rifampin (CYP2C19 inducer) - decreases brivaracetam levels; increase dose up to 100%"],
+    "moderate": ["Carbamazepine (brivaracetam may raise carbamazepine-epoxide; reduce carbamazepine if tolerability issues)", "Phenytoin (brivaracetam can raise phenytoin levels - monitor)", "Other CNS depressants and alcohol (additive sedation)"],
+    "minor": ["Levetiracetam (no added therapeutic benefit when combined)"],
+    "food": "May be taken with or without food; a high-fat meal slows absorption but does not change the extent absorbed.",
+    "alcohol": "Avoid - additive CNS/psychomotor impairment.",
+    "diagnostics": "Monitor phenytoin levels when co-administered; no routine brivaracetam level monitoring required."
+  },
+  "se": {
+    "common": ["Somnolence and sedation", "Dizziness", "Fatigue", "Nausea and vomiting"],
+    "serious": ["Suicidal behavior and ideation (AED class effect)", "Psychiatric reactions (irritability, depression, aggression, anxiety, psychotic symptoms)", "Hypersensitivity with bronchospasm and angioedema", "Serious dermatologic reactions"],
+    "rare": ["Withdrawal seizures/status epilepticus on abrupt discontinuation", "Coordination difficulties/nystagmus"],
+    "emergency": ["Angioedema/bronchospasm (anaphylactic-type)", "Acute suicidal behavior", "Status epilepticus on abrupt withdrawal"]
+  },
+  "monitoring": [
+    "Emergence or worsening of depression, suicidal thoughts, or behavior changes",
+    "Somnolence, fatigue, and ability to drive/operate machinery",
+    "Psychiatric/behavioral symptoms",
+    "Seizure frequency and response",
+    "Signs of hypersensitivity (rash, swelling, breathing difficulty)"
+  ],
+  "counsel": [
+    "Take twice daily, with or without food; you can start at the target dose without slow titration",
+    "Do not stop suddenly - this can trigger more seizures; your doctor will taper it",
+    "Watch for and report any new or worsening depression, mood changes, or thoughts of self-harm",
+    "It may cause drowsiness or dizziness - avoid driving until you know how it affects you, and avoid alcohol",
+    "Seek emergency care for swelling of the face/throat, wheezing, or trouble breathing",
+    "This is a controlled medicine - keep it secure and do not share it"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; antiseizure effect over titration period"],
+    ["Peak", "Tmax ~1 h fasting (range 0.25-3 h)"],
+    ["Half-life", "~9 hours"],
+    ["Duration", "Twice-daily dosing"],
+    ["Storage", "Store at controlled room temperature per labeling"]
+  ],
+  "pearls": [
+    "Binds SV2A with ~15-30x higher affinity than levetiracetam and crosses into the brain rapidly",
+    "No therapeutic benefit from combining with levetiracetam (same target)",
+    "No gradual titration needed - can start at an effective dose",
+    "Dose reduction is required for any hepatic impairment; no renal adjustment but avoid in ESRD",
+    "Schedule V controlled substance; class-wide suicidality warning applies",
+    "Tablets, oral solution, and IV are interchangeable at equal doses"
+  ],
+  "missed": "Take the missed dose as soon as you remember unless it is almost time for the next dose, in which case skip it and resume the regular twice-daily schedule. Do not take a double dose.",
+  "overdose": "Limited experience; reported effects include somnolence, dizziness, vertigo, balance disorder, fatigue, nausea, diplopia, anxiety, and bradycardia. No specific antidote. Provide standard supportive care, secure airway/oxygenation/ventilation, and monitor cardiac rhythm and vital signs. Hemodialysis is not expected to enhance clearance (<10% renal excretion).",
+  "refs": [
+    ["FDA Brivaracetam Tablets Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22brivaracetam%22"],
+    ["DailyMed - Brivaracetam", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=brivaracetam"]
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "generic": "Dexmedetomidine",
+  "cls": "Alpha-2 adrenergic receptor agonist",
+  "pharm": "Sedative / anxiolytic (centrally acting alpha-2 agonist)",
+  "tags": ["alpha-2 agonist", "ICU sedation", "procedural sedation", "IV", "analgosedation"],
+  "quick": [
+    ["Adult dose", "1 mcg/kg IV over 10 min, then 0.2-0.7 mcg/kg/h"],
+    ["Meal", "N/A (IV)"],
+    ["Pregnancy", "No clear drug-associated defect risk; data limited"],
+    ["Lactation", "Present in milk; brief exposure, monitor infant"],
+    ["Renal", "No specific dose adjustment in labeling"],
+    ["Hepatic", "Consider dose reduction; clearance decreases"],
+    ["Alcohol", "Additive CNS/respiratory depression"],
+    ["Monitoring", "Continuous BP, heart rate, oxygenation"]
+  ],
+  "summary": "Dexmedetomidine is an IV alpha-2 adrenergic agonist used for sedation of initially intubated, mechanically ventilated adults in the ICU and for procedural sedation of non-intubated adults. Typical dosing is a 1 mcg/kg loading infusion over 10 minutes followed by 0.2-0.7 mcg/kg/h (ICU) titrated to effect; administration should not exceed 24 hours. Bradycardia, hypotension and sinus arrest are the principal hazards, with withdrawal and tolerance after prolonged use.",
+  "indications": [
+    "Sedation of initially intubated and mechanically ventilated adult patients during treatment in an intensive care setting (continuous infusion not to exceed 24 hours)",
+    "Sedation of non-intubated adult patients prior to and/or during surgical and other procedures (procedural sedation)"
+  ],
+  "dosage": [
+    {"c": "Adult ICU sedation", "r": "Loading", "d": "1 mcg/kg IV over 10 minutes (loading dose may not be needed when converting from another sedative)", "t": "Single loading infusion", "n": "Consider dose reduction in patients >65 years or hepatic impairment"},
+    {"c": "Adult ICU sedation", "r": "Maintenance", "d": "0.2-0.7 mcg/kg/h, titrated to desired level of sedation", "t": "Continuous infusion, not to exceed 24 hours", "n": "Reduce for age >65 or hepatic impairment"},
+    {"c": "Adult procedural sedation", "r": "Loading", "d": "1 mcg/kg IV over 10 minutes (0.5 mcg/kg over 10 min for less invasive procedures e.g. ophthalmic, and for patients >65 years)", "t": "Single loading infusion", "n": "Awake fiberoptic intubation: 1 mcg/kg over 10 minutes"},
+    {"c": "Adult procedural sedation", "r": "Maintenance", "d": "Initiate at 0.6 mcg/kg/h, titrate 0.2-1 mcg/kg/h to effect", "t": "Continuous infusion", "n": "Awake fiberoptic intubation: 0.7 mcg/kg/h until endotracheal tube secured"}
+  ],
+  "admin": [
+    "Administer only by personnel skilled in managing patients in the ICU or operating room setting, using a controlled infusion device",
+    "Dexmedetomidine Injection (100 mcg/mL) MUST be diluted to 4 mcg/mL with 0.9% sodium chloride before use; the 5% dextrose ready-to-use bags (4 mcg/mL) need no further dilution",
+    "Continuously monitor blood pressure, heart rate and oxygenation during and after administration",
+    "Administration duration should not exceed 24 hours",
+    "Avoid rapid IV or bolus administration (associated with bradycardia and sinus arrest); titrate to clinical effect",
+    "It is not necessary to discontinue before extubation; use synthetic or coated natural-rubber administration components (drug absorbs into some natural rubber); do not co-administer with blood/plasma or with amphotericin B or diazepam"
+  ],
+  "moa": "Dexmedetomidine is a selective alpha-2 adrenergic receptor agonist. Stimulation of central (locus coeruleus) alpha-2 receptors reduces sympathetic outflow and norepinephrine release, producing sedation, anxiolysis and analgesia without significant respiratory depression. The reduced sympathetic tone also accounts for the characteristic dose-related hypotension and bradycardia.",
+  "contra": {
+    "absolute": ["None listed in labeling"],
+    "relative": ["Advanced heart block (2nd/3rd degree) without pacemaker", "Severe ventricular dysfunction", "Hypovolemia", "Pre-existing significant bradycardia or hypotension"],
+    "monitor": ["Concomitant vasodilators or negative chronotropic agents", "Diabetes mellitus or chronic hypertension (more pronounced hemodynamic effects)", "Elderly patients", "Hepatic impairment"]
+  },
+  "preg": "Published data over decades of IV use have not identified a drug-associated risk of major birth defects or miscarriage, though most exposures occurred after the first trimester (often at cesarean delivery, without adverse effect on maternal outcomes or infant Apgar scores). Dexmedetomidine crosses the placenta; animal studies showed fetal/developmental toxicity at doses near or above the human dose.",
+  "lact": "Dexmedetomidine is present in human milk. Because of its short half-life, advising the patient to discard milk and not breastfeed during treatment and for the period after the last dose minimizes infant exposure. Monitor breastfed infants for irritability or sedation.",
+  "renal": "No specific renal dose adjustment is provided in the labeling. Use with general caution and monitor hemodynamics.",
+  "hepatic": "Clearance decreases with increasing severity of hepatic impairment; consider a dose reduction in patients with impaired hepatic function.",
+  "interactions": {
+    "major": ["Anesthetics, sedatives, hypnotics, opioids (sevoflurane, isoflurane, propofol, alfentanil, midazolam) - enhanced sedative/respiratory depressant effect; reduce dose of dexmedetomidine or the co-administered agent"],
+    "moderate": ["Vasodilators and negative chronotropic agents - additive hypotension/bradycardia", "Other antihypertensives - additive blood-pressure lowering"],
+    "minor": ["Neuromuscular blockers (e.g., rocuronium) - no clinically meaningful change in blockade observed"],
+    "food": "Not applicable; administered intravenously.",
+    "alcohol": "Additive CNS and respiratory depression; relevant if alcohol present.",
+    "diagnostics": "May cause transient hypertension during loading, then hypotension/bradycardia; monitor ECG and blood pressure."
+  },
+  "se": {
+    "common": ["Hypotension", "Bradycardia", "Dry mouth", "Nausea", "Transient hypertension (during loading dose)"],
+    "serious": ["Sinus arrest", "Severe/symptomatic bradycardia", "Severe hypotension", "Withdrawal (nausea, vomiting, agitation, tachycardia, hypertension) after >24 h use", "ARDS / respiratory failure with infusions >24 hours"],
+    "rare": ["Diabetes insipidus (polyuria, dilute urine, hypernatremia)", "Hyperthermia/pyrexia resistant to cooling", "First- or second-degree AV/heart block", "Cardiac arrest (with inadvertent bolus/overdose)"],
+    "emergency": ["Sinus arrest or severe bradycardia with hemodynamic compromise", "Profound hypotension", "Cardiac arrest"]
+  },
+  "monitoring": [
+    "Continuous blood pressure, heart rate and oxygen saturation during infusion and after discontinuation",
+    "ECG for bradyarrhythmias, AV block or sinus arrest",
+    "Level of sedation (titrate to target)",
+    "Urine output and serum sodium/osmolality if diabetes insipidus is suspected, especially with prolonged use",
+    "Body temperature; signs of withdrawal/tachyphylaxis with use beyond 24 hours"
+  ],
+  "counsel": [
+    "This medicine is given as an IV drip in a monitored setting to keep you calm and sedated",
+    "Your blood pressure, heart rate and breathing will be watched continuously",
+    "You may feel drowsy but can still be roused when spoken to or stimulated, which is normal",
+    "Tell the care team about heart rhythm problems, low blood pressure, or all other medicines you take",
+    "After the infusion you may feel temporarily restless or have a fast heartbeat, which staff will manage"
+  ],
+  "pk": [
+    ["Onset", "Sedation within minutes of loading infusion"],
+    ["Peak", "Effect at end of 10-minute loading infusion"],
+    ["Half-life", "Terminal ~2 hours (distribution ~6 minutes)"],
+    ["Duration", "Effect dissipates within ~1-2 hours after stopping"],
+    ["Storage", "Store at 20-25 C (68-77 F); diluted solution up to 4 h room temp or 24 h at 2-8 C"]
+  ],
+  "pearls": [
+    "Provides cooperative sedation with minimal respiratory depression - patients remain arousable",
+    "Avoid rapid IV/bolus dosing: it triggers bradycardia and sinus arrest",
+    "Labeled not to exceed 24 hours; beyond this expect tolerance, tachyphylaxis and more adverse events",
+    "Atropine or glycopyrrolate treats most dexmedetomidine-induced bradycardia",
+    "Transient hypertension during the loading dose reflects peripheral vasoconstriction; consider slowing the load"
+  ],
+  "missed": "Administered by a clinician as a titrated IV infusion; not self-dosed. The care team adjusts or stops the infusion to clinical effect; avoid abrupt discontinuation after prolonged (>24 h) use because of withdrawal.",
+  "overdose": "Overdose may cause first-degree AV block, second-degree heart block, bradycardia and hypotension; an inadvertent undiluted loading bolus has caused cardiac arrest (successfully resuscitated). Management is supportive: stop the infusion, support hemodynamics with IV fluids, leg elevation, anticholinergics (atropine/glycopyrrolate) and pressors as needed; the heart block observed in volunteers resolved spontaneously.",
+  "refs": [
+    ["FDA Dexmedetomidine Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22dexmedetomidine%22"],
+    ["FDA DailyMed - Dexmedetomidine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

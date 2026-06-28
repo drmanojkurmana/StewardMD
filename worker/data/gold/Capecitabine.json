@@ -1,0 +1,155 @@
+{
+  "generic": "Capecitabine",
+  "cls": "Antineoplastic - fluoropyrimidine (nucleoside metabolic inhibitor, oral 5-FU prodrug)",
+  "pharm": "Oral prodrug converted to 5-fluorouracil preferentially in tumor tissue; inhibits DNA/RNA synthesis",
+  "tags": ["Chemotherapy", "Fluoropyrimidine", "Boxed warning: DPD deficiency", "Boxed warning: warfarin interaction", "Hand-foot syndrome", "DPYD testing"],
+  "quick": [
+    ["Adult dose", "1250 mg/m2 BID days 1-14 of 21-day cycle (varies by regimen)"],
+    ["Meal", "Within 30 min after a meal"],
+    ["Pregnancy", "Can cause fetal harm - avoid; use contraception"],
+    ["Lactation", "Do not breastfeed during and 2 wks after"],
+    ["Renal", "Contraindicated if CrCl <30; reduce dose if 30-50"],
+    ["Hepatic", "Monitor closely; caution in hepatic dysfunction"],
+    ["Alcohol", "Avoid - GI irritation"],
+    ["Monitoring", "CBC, DPYD status, INR (if on warfarin), hydration, hand-foot"]
+  ],
+  "summary": "Capecitabine is an oral fluoropyrimidine prodrug of 5-fluorouracil used in colorectal and breast cancer. It carries a boxed warning for serious adverse reactions or death in patients with complete dihydropyrimidine dehydrogenase (DPD) deficiency (test for DPYD variants before starting) and for increased bleeding with concomitant vitamin K antagonists such as warfarin (markedly altered INR/bleeding, including death). Common toxicities include hand-foot syndrome, diarrhea, nausea, and myelosuppression. Take within 30 minutes after a meal and adjust dose for toxicity and renal impairment.",
+  "indications": [
+    "Adjuvant treatment of Stage III colon cancer",
+    "Perioperative treatment of locally advanced rectal cancer (with chemoradiotherapy)",
+    "Unresectable or metastatic colorectal cancer",
+    "Advanced or metastatic breast cancer (single agent if anthracycline/taxane not indicated)",
+    "Metastatic breast cancer in combination with docetaxel after anthracycline failure"
+  ],
+  "dosage": [
+    {"c": "Adjuvant colon cancer (single agent)", "r": "Oral", "d": "1250 mg/m2 twice daily, days 1-14 of each 21-day cycle", "t": "BID x14 days, then 7 days off", "n": "Up to 8 cycles"},
+    {"c": "Colon cancer with oxaliplatin", "r": "Oral", "d": "1000 mg/m2 twice daily, days 1-14 of 21-day cycle", "t": "BID x14 days", "n": "With oxaliplatin 130 mg/m2 IV day 1; up to 8 cycles"},
+    {"c": "Rectal cancer with radiation", "r": "Oral", "d": "825 mg/m2 twice daily", "t": "BID with radiotherapy", "n": "Concomitant chemoradiation"},
+    {"c": "Metastatic colorectal cancer (single agent)", "r": "Oral", "d": "1250 mg/m2 twice daily, days 1-14 of 21-day cycle", "t": "BID x14 days", "n": "Until progression or unacceptable toxicity"},
+    {"c": "Metastatic breast cancer", "r": "Oral", "d": "1250 mg/m2 twice daily, days 1-14 of 21-day cycle", "t": "BID x14 days", "n": "Single agent or with docetaxel"},
+    {"c": "Severe renal impairment (CrCl 30-50)", "r": "Oral", "d": "Reduce starting dose to 75% (e.g., 950 mg/m2 BID)", "t": "BID x14 days", "n": "Contraindicated if CrCl <30 mL/min"}
+  ],
+  "admin": [
+    "Swallow whole with water within 30 minutes after a meal (morning and evening, ~12 h apart)",
+    "Do not crush or cut tablets; it is a hazardous drug - follow handling precautions",
+    "Test for DPYD variants/DPD deficiency before initiation unless immediate treatment needed",
+    "Hold/reduce dose for toxicity (diarrhea, hand-foot, mucositis, cytopenias) per labeling"
+  ],
+  "moa": "Prodrug enzymatically converted (via carboxylesterase, cytidine deaminase, and thymidine phosphorylase - higher in tumor tissue) to 5-fluorouracil, which forms FdUMP (inhibiting thymidylate synthase and DNA synthesis) and FUTP (misincorporated into RNA), causing cytotoxicity in proliferating cells.",
+  "contra": {
+    "absolute": [
+      "History of severe hypersensitivity to fluorouracil or capecitabine",
+      "Known complete dihydropyrimidine dehydrogenase (DPD) deficiency",
+      "Severe renal impairment (CrCl <30 mL/min)"
+    ],
+    "relative": [
+      "Partial DPD deficiency",
+      "Concomitant vitamin K antagonists (warfarin) - intensify INR monitoring",
+      "Coronary artery disease (cardiotoxicity risk)",
+      "Hepatic impairment",
+      "Moderate renal impairment (CrCl 30-50) - dose reduce",
+      "Elderly (increased toxicity)"
+    ],
+    "monitor": [
+      "CBC with differential",
+      "DPYD genotype / DPD status",
+      "INR (if on warfarin)",
+      "Renal function and hydration",
+      "Hand-foot syndrome, diarrhea, mucositis"
+    ]
+  },
+  "preg": "Can cause fetal harm based on mechanism and animal data (embryolethality/teratogenicity). Verify pregnancy status before starting; advise effective contraception during treatment and for 6 months (females) / 3 months (males) after the last dose.",
+  "lact": "Do not breastfeed during treatment and for 2 weeks after the final dose due to potential for serious adverse reactions in the breastfed child.",
+  "renal": "Contraindicated if CrCl <30 mL/min. For CrCl 30-50 mL/min, reduce starting dose to 75%. Monitor renal function; optimize hydration.",
+  "hepatic": "Monitor patients with hepatic impairment more frequently for adverse reactions; hyperbilirubinemia may occur. Use caution.",
+  "interactions": {
+    "major": [
+      "Vitamin K antagonists (warfarin) - markedly altered coagulation/bleeding, including death (boxed warning); monitor INR frequently",
+      "Allopurinol - may decrease capecitabine efficacy; avoid concomitant use",
+      "Brivudine/sorivudine analogues - life-threatening fluoropyrimidine toxicity"
+    ],
+    "moderate": [
+      "Phenytoin (CYP2C9 substrate) - increased phenytoin levels/toxicity",
+      "Other CYP2C9 substrates - monitor",
+      "Leucovorin - enhanced 5-FU toxicity",
+      "Nephrotoxic drugs - increased renal toxicity"
+    ],
+    "minor": [
+      "Antacids (aluminum/magnesium hydroxide) - small increase in exposure"
+    ],
+    "food": "Take within 30 minutes after a meal (label dosing was studied with food)",
+    "alcohol": "Avoid - may worsen GI irritation",
+    "diagnostics": "May cause hyperbilirubinemia and abnormal LFTs; monitor INR closely if anticoagulated"
+  },
+  "se": {
+    "common": [
+      "Hand-foot syndrome (palmar-plantar erythrodysesthesia)",
+      "Diarrhea",
+      "Nausea/vomiting",
+      "Stomatitis/mucositis",
+      "Abdominal pain",
+      "Fatigue",
+      "Hyperbilirubinemia",
+      "Dermatitis"
+    ],
+    "serious": [
+      "Severe diarrhea/dehydration",
+      "Myelosuppression (neutropenia, anemia, thrombocytopenia)",
+      "Cardiotoxicity (angina, MI, arrhythmia, cardiomyopathy)",
+      "Severe hand-foot syndrome",
+      "Renal toxicity/acute kidney injury",
+      "Severe mucositis"
+    ],
+    "rare": [
+      "Severe cutaneous reactions (SJS/TEN)",
+      "Severe hyperbilirubinemia/hepatic injury",
+      "Encephalopathy (5-FU related)",
+      "Coronary vasospasm in DPD deficiency"
+    ],
+    "emergency": [
+      "Severe/life-threatening toxicity in DPD deficiency",
+      "Severe bleeding (with warfarin)",
+      "Acute cardiac event (MI, arrhythmia)",
+      "Severe dehydration from diarrhea",
+      "SJS/TEN"
+    ]
+  },
+  "monitoring": [
+    "DPYD genotype / DPD deficiency status before starting",
+    "CBC with differential each cycle",
+    "INR frequently if on a vitamin K antagonist",
+    "Renal function and hydration status",
+    "Signs of hand-foot syndrome, diarrhea, mucositis",
+    "Cardiac symptoms (especially with CAD)",
+    "Bilirubin/LFTs"
+  ],
+  "counsel": [
+    "Take within 30 minutes after a meal, morning and evening with water",
+    "Report diarrhea (>4 stools/day or nighttime), vomiting, mouth sores, or fever promptly - dose may need to be held",
+    "Report painful redness/blistering of hands and feet (hand-foot syndrome)",
+    "If taking a blood thinner, frequent blood tests are required",
+    "Use effective contraception; do not breastfeed",
+    "Avoid grapefruit and alcohol",
+    "Report chest pain immediately",
+    "Handle tablets carefully (hazardous drug)"
+  ],
+  "pk": [
+    ["Onset", "Rapid GI absorption; activation to 5-FU within hours"],
+    ["Peak", "Capecitabine ~1.5 h; 5-FU ~2 h"],
+    ["Half-life", "~0.75 h (capecitabine and 5-FU short)"],
+    ["Duration", "Per dosing schedule (BID x14 days)"],
+    ["Storage", "20-25 C, keep tightly closed; hazardous drug"]
+  ],
+  "pearls": [
+    "DPYD testing recommended before starting - complete DPD deficiency can be fatal (boxed warning)",
+    "Marked, potentially fatal interaction with warfarin - monitor INR closely (boxed warning)",
+    "Hand-foot syndrome is the dose-limiting toxicity; pyridoxine and dose modification used",
+    "Oral 'self-administered 5-FU' - tumor-selective activation via thymidine phosphorylase"
+  ],
+  "missed": "If a dose is missed, do NOT take a make-up dose or double the next dose; skip the missed dose and continue the regular schedule. Contact the oncology team for guidance.",
+  "overdose": "Acute manifestations include nausea, vomiting, diarrhea, GI irritation/bleeding, bone marrow depression; consistent with severe 5-FU toxicity. Management: supportive care, monitor and treat cytopenias, fluids; uridine triacetate is an antidote for fluoropyrimidine overdose/early-onset severe toxicity. Hospitalize and consult toxicology/oncology.",
+  "refs": [
+    ["FDA Capecitabine Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22CAPECITABINE%22"],
+    ["DailyMed - Capecitabine", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=capecitabine"]
+  ]
+}

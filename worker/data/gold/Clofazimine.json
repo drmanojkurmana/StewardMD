@@ -1,0 +1,94 @@
+{
+  "generic": "Clofazimine",
+  "cls": "Antimycobacterial (riminophenazine dye)",
+  "pharm": "Lipophilic riminophenazine dye with antimycobacterial and anti-inflammatory activity; binds mycobacterial DNA.",
+  "tags": ["Antileprotic", "Antimycobacterial", "Riminophenazine", "Oral", "Skin discoloration", "MDR-TB"],
+  "quick": [
+    ["Adult dose", "Leprosy: 50-100 mg daily; plus 300 mg monthly (MDT) for multibacillary"],
+    ["Meal", "Take with food/milk to improve absorption and reduce GI upset"],
+    ["Pregnancy", "Use only if benefit outweighs risk; crosses placenta, stains infant skin"],
+    ["Lactation", "Excreted in milk; infant skin pigmentation may occur"],
+    ["Renal", "No specific adjustment"],
+    ["Hepatic", "Use with caution; monitor liver"],
+    ["Alcohol", "No specific interaction; avoid if hepatic concern"],
+    ["Monitoring", "Skin/eye pigmentation, GI symptoms, LFTs, ECG (QT)"]
+  ],
+  "summary": "Clofazimine (Lamprene) is a riminophenazine antimycobacterial used primarily for leprosy, including erythema nodosum leprosum reactions, and as a component of drug-resistant tuberculosis and nontuberculous mycobacterial regimens. It causes a characteristic reddish-brown to black skin and conjunctival discoloration and accumulates extensively in tissues with a very long half-life. The most important risks are dose- and duration-dependent GI effects (including rare crystal deposition enteropathy/bowel obstruction) and QT prolongation. In the US it is supplied through a restricted/IND or orphan program rather than routine commercial distribution.",
+  "indications": [
+    "Lepromatous leprosy (multibacillary), as part of multidrug therapy",
+    "Erythema nodosum leprosum (ENL) reactions, especially when corticosteroids/thalidomide are unsuitable",
+    "Dapsone-resistant leprosy",
+    "Component of multidrug-resistant tuberculosis regimens (WHO/off-label)",
+    "Treatment of nontuberculous mycobacterial infections, e.g., Mycobacterium avium complex (off-label)"
+  ],
+  "dosage": [
+    {"c": "Multibacillary leprosy (WHO MDT)", "r": "Oral", "d": "50 mg daily plus 300 mg once monthly (supervised)", "t": "Daily + monthly", "n": "With rifampicin and dapsone; usually 12 months"},
+    {"c": "Dapsone-resistant leprosy (label)", "r": "Oral", "d": "100 mg daily for up to 3 years with other agents", "t": "Daily", "n": "Then 100 mg/day clofazimine monotherapy as indicated"},
+    {"c": "Erythema nodosum leprosum reactions", "r": "Oral", "d": "100-200 mg daily (up to 300 mg/day)", "t": "Daily", "n": "Limit high doses to <=3 months due to GI toxicity, then taper"},
+    {"c": "MDR-TB / NTM (off-label)", "r": "Oral", "d": "50-100 mg daily", "t": "Daily", "n": "As part of combination regimen per guidelines"}
+  ],
+  "admin": [
+    "Take with food or milk to maximize absorption and minimize GI upset",
+    "Limit doses above 100 mg/day to as short a period as possible (GI toxicity risk)",
+    "Counsel patients about the expected reddish-brown skin discoloration before starting",
+    "Use only in combination for mycobacterial infections to prevent resistance"
+  ],
+  "moa": "Binds preferentially to mycobacterial DNA (guanine-rich sequences), inhibiting growth; also generates reactive oxygen species and has membrane-destabilizing and anti-inflammatory actions, the latter underlying its benefit in erythema nodosum leprosum.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to clofazimine"],
+    "relative": ["Pre-existing GI disease (abdominal pain, diarrhea)", "QT prolongation or use with other QT-prolonging drugs", "Hepatic impairment", "Pregnancy/lactation (relative)"],
+    "monitor": ["GI symptoms (abdominal pain, obstruction)", "ECG/QT interval", "Liver function", "Skin and eye pigmentation"]
+  },
+  "preg": "Crosses the placenta and may discolor the neonate's skin; use only if the benefit justifies the potential risk. Reserve for clear indications.",
+  "lact": "Excreted in breast milk and may cause skin pigmentation in the breastfed infant; weigh benefit against risk.",
+  "renal": "No specific dose adjustment; eliminated slowly, mainly via feces with extensive tissue storage.",
+  "hepatic": "Use with caution and monitor liver function; rare hepatotoxicity reported.",
+  "interactions": {
+    "major": ["QT-prolonging drugs (e.g., bedaquiline, fluoroquinolones, antiarrhythmics) - additive QT prolongation"],
+    "moderate": ["Rifampicin - may modestly reduce clofazimine absorption rate", "Other GI-toxic agents - additive GI effects"],
+    "minor": ["Dapsone - possible reduced anti-inflammatory effect of clofazimine (variable reports)"],
+    "food": "Take with food/milk to enhance absorption",
+    "alcohol": "No specific interaction",
+    "diagnostics": "Monitor ECG (QT) when combined with other QT-prolonging agents (notably bedaquiline)."
+  },
+  "se": {
+    "common": ["Reddish-brown to brownish-black skin discoloration", "Dry skin, ichthyosis, pruritus", "Reddish discoloration of conjunctiva, tears, sweat, urine, feces", "Gastrointestinal upset (abdominal pain, nausea, diarrhea)", "Photosensitivity"],
+    "serious": ["Severe dose-related GI effects with clofazimine crystal deposition (enteropathy, bowel obstruction, splenic infarction)", "QT prolongation", "Depression (linked to skin discoloration), with rare suicide reports", "Hepatitis"],
+    "rare": ["Eosinophilic enteritis", "Retinopathy/maculopathy with prolonged use", "Hypokalemia"],
+    "emergency": ["Bowel obstruction/severe abdominal crisis", "Serious arrhythmia from QT prolongation"]
+  },
+  "monitoring": [
+    "Gastrointestinal symptoms, especially with high or prolonged doses",
+    "ECG/QT interval, particularly with co-administered QT-prolonging drugs",
+    "Liver function tests",
+    "Skin and ocular pigmentation; mood (depression)",
+    "Adherence and clinical/microbiologic response"
+  ],
+  "counsel": [
+    "Your skin, eyes, sweat, tears, and urine may turn reddish-brown to dark - this is expected and usually reverses slowly after stopping",
+    "Take with food or milk to reduce stomach upset",
+    "Report severe or persistent abdominal pain, vomiting, or constipation",
+    "Use sun protection (photosensitivity); moisturize dry skin",
+    "Tell your clinician if you feel persistently low in mood; take the full course as combination therapy"
+  ],
+  "pk": [
+    ["Onset", "Antimycobacterial effect over weeks; anti-inflammatory effect in ENL slow (weeks)"],
+    ["Peak", "~1-6 hours (variable absorption)"],
+    ["Half-life", "Very long; terminal ~70 days due to tissue accumulation"],
+    ["Duration", "Prolonged tissue retention; pigmentation persists months after stopping"],
+    ["Storage", "Protect from moisture; store at controlled room temperature"]
+  ],
+  "pearls": [
+    "Source: US Lamprene prescribing information, WHO leprosy/TB guidance, and BNF; this label was not retrievable via openFDA at time of authoring (orphan/restricted distribution)",
+    "Characteristic reddish-brown skin and conjunctival discoloration - counsel before starting; reversible over months to years",
+    "Extremely long half-life (~70 days) from massive tissue/fat accumulation",
+    "High-dose or prolonged use can cause clofazimine crystal enteropathy and bowel obstruction - keep high doses short",
+    "Both antimycobacterial and anti-inflammatory - useful for erythema nodosum leprosum; watch QT with bedaquiline"
+  ],
+  "missed": "Take the missed daily dose with food when remembered; if near the next dose, skip it. For supervised monthly doses, take as directed by the program. Do not double doses.",
+  "overdose": "Limited data; expected effects are severe GI symptoms and accentuated pigmentation. There is no specific antidote. Provide supportive and symptomatic care, including management of GI complications; the very long half-life means effects resolve slowly.",
+  "refs": [
+    ["Lamprene (clofazimine) US Prescribing Information - DailyMed", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=clofazimine"],
+    ["WHO Guidelines for the Diagnosis, Treatment and Prevention of Leprosy", "https://www.who.int/publications/i/item/9789290226383"]
+  ]
+}

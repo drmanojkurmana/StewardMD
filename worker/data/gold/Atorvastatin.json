@@ -1,0 +1,94 @@
+{
+  "generic": "Atorvastatin",
+  "cls": "HMG-CoA reductase inhibitor (statin)",
+  "pharm": "Lipid-lowering agent / antihyperlipidemic",
+  "tags": ["statin", "hyperlipidemia", "LDL", "cardiovascular prevention", "CHD"],
+  "quick": [
+    ["Adult dose", "10-80 mg PO once daily"],
+    ["Meal", "With or without food, any time"],
+    ["Pregnancy", "Avoid; discontinue if pregnancy detected"],
+    ["Lactation", "Not recommended"],
+    ["Renal", "No dose adjustment"],
+    ["Hepatic", "Contraindicated in active liver disease"],
+    ["Alcohol", "Limit; raises liver injury risk"],
+    ["Monitoring", "Lipids, LFTs, CK if myopathy"]
+  ],
+  "summary": "Atorvastatin is a potent HMG-CoA reductase inhibitor that lowers LDL-C and reduces cardiovascular events in primary and secondary prevention. Dosed 10-80 mg once daily with or without food. Key risks are myopathy and rare rhabdomyolysis.",
+  "indications": [
+    "Primary hyperlipidemia and mixed dyslipidemia (adjunct to diet)",
+    "Reduce risk of MI, stroke, revascularization and angina in adults with multiple CHD risk factors without clinically evident CHD",
+    "Reduce risk of MI and stroke in adults with type 2 diabetes plus CHD risk factors",
+    "Secondary prevention in patients with clinically evident CHD",
+    "Heterozygous familial hypercholesterolemia (HeFH) in adults and children >=10 years",
+    "Homozygous familial hypercholesterolemia (HoFH) as adjunct to other lipid-lowering treatments"
+  ],
+  "dosage": [
+    {"c": "Primary hyperlipidemia (adult)", "r": "Standard", "d": "10-20 mg once daily; range 10-80 mg/day", "t": "Once daily", "n": "Start 40 mg if LDL-C reduction >45% required"},
+    {"c": "CHD risk reduction (adult)", "r": "High intensity", "d": "Up to 80 mg once daily", "t": "Once daily", "n": "Titrate to LDL-C goal"},
+    {"c": "HeFH pediatric (>=10 yr)", "r": "Standard", "d": "10 mg once daily; range 10-20 mg/day", "t": "Once daily", "n": "Assess LDL-C in 4 weeks"},
+    {"c": "HoFH (>=10 yr)", "r": "Standard", "d": "10-20 mg once daily; up to 80 mg/day", "t": "Once daily", "n": "Adjunct therapy"}
+  ],
+  "admin": [
+    "Take orally once daily at any time of day",
+    "May be taken with or without food",
+    "Maintain low-saturated-fat diet throughout treatment",
+    "Assess LDL-C as early as 4 weeks after start and adjust dose",
+    "Reduce dose with strong CYP3A4 inhibitors per label limits"
+  ],
+  "moa": "Competitively inhibits HMG-CoA reductase, the rate-limiting enzyme converting HMG-CoA to mevalonate in hepatic cholesterol synthesis. Reduced intracellular cholesterol upregulates LDL receptors, increasing clearance of LDL-C and lowering plasma LDL, total cholesterol and triglycerides.",
+  "contra": {
+    "absolute": ["Acute liver failure or decompensated cirrhosis", "Hypersensitivity to atorvastatin", "Pregnancy", "Breastfeeding"],
+    "relative": ["History of liver disease", "Heavy alcohol use", "Predisposition to myopathy (hypothyroidism, renal impairment, age >65, low body weight)"],
+    "monitor": ["Concomitant strong CYP3A4 inhibitors", "Concomitant fibrates or niacin", "Unexplained muscle pain"]
+  },
+  "preg": "Discontinue when pregnancy is recognized. Cholesterol and statin-derived products are important for fetal development; benefit of continuing in pregnancy is unlikely to outweigh risk.",
+  "lact": "Not recommended during breastfeeding due to potential to disrupt infant lipid metabolism. Discontinue drug or nursing.",
+  "renal": "No dose adjustment required; renal disease does not affect plasma concentrations or LDL-C response. Plasma levels are not lowered by hemodialysis.",
+  "hepatic": "Contraindicated in active liver disease or unexplained persistent transaminase elevations. Use caution and monitor LFTs in chronic liver disease or heavy alcohol use.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (clarithromycin, itraconazole, HIV protease inhibitors) - increase atorvastatin levels and myopathy risk; limit dose", "Cyclosporine - avoid concurrent use", "Gemfibrozil - increased rhabdomyolysis risk"],
+    "moderate": ["Other fibrates and niacin - increased myopathy risk", "Digoxin - increased digoxin levels", "Oral contraceptives - increased norethindrone/ethinyl estradiol levels", "Colchicine - myopathy risk"],
+    "minor": ["Antacids - modest decrease in atorvastatin concentration", "Rifampin - reduced atorvastatin exposure if staggered"],
+    "food": "Grapefruit juice (large amounts) increases exposure; avoid excessive intake.",
+    "alcohol": "Limit alcohol; heavy use increases hepatotoxicity risk.",
+    "diagnostics": "May elevate transaminases and creatine kinase."
+  },
+  "se": {
+    "common": ["Nasopharyngitis", "Arthralgia", "Diarrhea", "Myalgia", "Urinary tract infection", "Dyspepsia"],
+    "serious": ["Myopathy", "Immune-mediated necrotizing myopathy", "Hepatotoxicity"],
+    "rare": ["Rhabdomyolysis with acute renal failure", "Hyperglycemia / new-onset diabetes", "Memory impairment / confusion (reversible)"],
+    "emergency": ["Rhabdomyolysis (severe muscle pain, weakness, dark urine)", "Acute liver failure", "Severe hypersensitivity reaction"]
+  },
+  "monitoring": [
+    "Lipid panel at baseline and 4-12 weeks after initiation/dose change",
+    "Liver enzymes at baseline; repeat if clinically indicated",
+    "Creatine kinase if unexplained muscle pain, tenderness or weakness",
+    "HbA1c / glucose periodically"
+  ],
+  "counsel": [
+    "Take once daily at any time, consistent with or without food",
+    "Report unexplained muscle pain, tenderness or weakness promptly",
+    "Avoid large amounts of grapefruit juice",
+    "Continue heart-healthy diet and exercise",
+    "Inform provider if pregnant or planning pregnancy"
+  ],
+  "pk": [
+    ["Onset", "LDL reduction within 2 weeks"],
+    ["Peak", "1-2 hours (plasma)"],
+    ["Half-life", "14 hours (active metabolites 20-30 h)"],
+    ["Duration", "Effect persists; long effective half-life"],
+    ["Storage", "Store at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "High-intensity statin: 40-80 mg lowers LDL-C >=50%",
+    "Can be taken at any time of day unlike short-acting statins",
+    "Not significantly removed by hemodialysis",
+    "Preferred statin in moderate renal impairment"
+  ],
+  "missed": "Take the missed dose when remembered unless it is close to the next dose; do not double up. If more than 12 hours have passed, skip and resume the regular schedule.",
+  "overdose": "No specific antidote; treat symptomatically and supportively. Due to extensive protein binding, hemodialysis is not expected to enhance clearance. Monitor for muscle and liver effects.",
+  "refs": [
+    ["FDA Atorvastatin Calcium Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22atorvastatin+calcium%22"],
+    ["FDA DailyMed - Atorvastatin", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

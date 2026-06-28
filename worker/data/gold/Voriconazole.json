@@ -1,0 +1,119 @@
+{
+  "generic": "Voriconazole",
+  "cls": "Triazole (second-generation) antifungal",
+  "pharm": "Inhibits fungal cytochrome P450-dependent 14-alpha-lanosterol demethylation, blocking ergosterol synthesis in the fungal cell membrane.",
+  "tags": ["Rx only", "Broad-spectrum azole", "CYP2C19/2C9/3A4 metabolized", "Therapeutic drug monitoring", "Hepatotoxic"],
+  "quick": [
+    ["Adult dose", "IV load 6 mg/kg q12h x2, then 4 mg/kg q12h; oral 200 mg q12h"],
+    ["Meal", "Take oral 1 hour before or after food"],
+    ["Pregnancy", "Can cause fetal harm; use effective contraception"],
+    ["Lactation", "Avoid; excretion in milk unknown"],
+    ["Renal", "Avoid IV if CrCl <50 (cyclodextrin accumulates); oral preferred"],
+    ["Hepatic", "Mild-moderate (Child-Pugh A/B): halve maintenance dose"],
+    ["Alcohol", "Avoid; adds hepatotoxicity risk"],
+    ["Monitoring", "LFTs, visual function, ECG/electrolytes, trough levels"]
+  ],
+  "summary": "Voriconazole is a broad-spectrum triazole antifungal that is first-line therapy for invasive aspergillosis and is also used for candidemia, esophageal candidiasis, and serious Scedosporium and Fusarium infections. It has non-linear pharmacokinetics with wide interpatient variability driven by CYP2C19 polymorphism, so therapeutic drug monitoring is recommended. Key safety concerns include hepatotoxicity, QT prolongation, dose-related visual disturbances, photosensitivity with skin malignancy risk, and extensive CYP-mediated drug interactions.",
+  "indications": [
+    "Invasive aspergillosis (adults and children >=2 years)",
+    "Candidemia in non-neutropenic patients and other deep-tissue Candida infections",
+    "Esophageal candidiasis",
+    "Serious infections caused by Scedosporium apiospermum and Fusarium species, including Fusarium solani, in patients intolerant of or refractory to other therapy"
+  ],
+  "dosage": [
+    {"c": "Invasive aspergillosis / Scedosporiosis / Fusariosis", "r": "Adult IV", "d": "Loading 6 mg/kg q12h for first 24 h, then maintenance 4 mg/kg q12h", "t": "Every 12 hours", "n": "Switch to oral when able"},
+    {"c": "Candidemia / deep-tissue Candida", "r": "Adult IV", "d": "Loading 6 mg/kg q12h for first 24 h, then 3-4 mg/kg q12h", "t": "Every 12 hours", "n": "IV loading required"},
+    {"c": "Maintenance / step-down", "r": "Adult oral", "d": "200 mg q12h (>=40 kg); 100-150 mg q12h if <40 kg", "t": "Every 12 hours", "n": "Take 1 h before or after a meal"},
+    {"c": "Esophageal candidiasis", "r": "Adult oral", "d": "200 mg q12h (>=40 kg); 100 mg q12h if <40 kg", "t": "Every 12 hours", "n": "Treat at least 14 days and 7 days after symptoms resolve"},
+    {"c": "Hepatic impairment (Child-Pugh A/B)", "r": "Adult", "d": "Standard loading dose, then halve the maintenance dose", "t": "Adjusted", "n": "Not studied in Child-Pugh C"},
+    {"c": "Renal impairment (CrCl <50)", "r": "Adult", "d": "Use oral route; avoid IV due to cyclodextrin (SBECD) accumulation", "t": "Adjusted", "n": "Monitor serum creatinine if IV used"}
+  ],
+  "admin": [
+    "IV infuse over 1-2 hours at a maximum rate of 3 mg/kg/hr; do not bolus",
+    "Give oral tablets/suspension at least 1 hour before or 1 hour after a meal",
+    "Correct hypokalemia, hypomagnesemia, and hypocalcemia before and during therapy",
+    "Obtain trough levels for therapeutic drug monitoring (typically 1-5.5 mg/L)",
+    "Review all concomitant medications for CYP interactions before starting"
+  ],
+  "moa": "Voriconazole inhibits fungal cytochrome P450-mediated 14-alpha-sterol demethylase (CYP51), the enzyme that converts lanosterol to ergosterol. Depletion of ergosterol and accumulation of toxic methylated sterol precursors disrupt the integrity and function of the fungal cell membrane, producing a fungistatic effect against yeasts and fungicidal activity against many molds including Aspergillus.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to voriconazole or excipients",
+      "Coadministration with CYP3A4 substrates that can cause life-threatening QT prolongation (pimozide, quinidine, ivabradine, lurasidone)",
+      "Coadministration with ergot alkaloids (ergotamine, dihydroergotamine)",
+      "Coadministration with sirolimus, rifabutin, eplerenone, naloxegol, tolvaptan, venetoclax (ramp-up in CLL/SLL), voclosporin",
+      "Coadministration with strong CYP enzyme inducers: rifampin, carbamazepine, long-acting barbiturates, St. John's wort, ritonavir 400 mg q12h, efavirenz >=400 mg/day"
+    ],
+    "relative": [
+      "Pre-existing hepatic impairment",
+      "Proarrhythmic conditions / congenital long QT / electrolyte disturbances",
+      "Galactose intolerance (oral suspension contains sucrose; tablets lactose)",
+      "Pregnancy"
+    ],
+    "monitor": [
+      "Liver function tests",
+      "Visual function if therapy exceeds 28 days",
+      "ECG and serum electrolytes (K, Mg, Ca)",
+      "Plasma trough concentrations"
+    ]
+  },
+  "preg": "Voriconazole can cause fetal harm based on animal data (teratogenicity and embryotoxicity). Avoid in pregnancy unless the benefit clearly justifies the risk; advise females of reproductive potential to use effective contraception during therapy.",
+  "lact": "It is not known whether voriconazole is excreted in human milk; because of the potential for serious adverse reactions in the breastfed infant, avoid breastfeeding or discontinue the drug.",
+  "renal": "In moderate-to-severe renal impairment (CrCl <50 mL/min) the IV vehicle sulfobutyl ether beta-cyclodextrin (SBECD) accumulates; use the oral formulation and monitor serum creatinine if IV is unavoidable. No oral dose adjustment is needed for renal impairment.",
+  "hepatic": "Use the standard loading dose but halve the maintenance dose in mild-to-moderate hepatic impairment (Child-Pugh A and B). Voriconazole has not been studied in severe (Child-Pugh C) impairment; monitor LFTs closely.",
+  "interactions": {
+    "major": [
+      "Strong CYP inducers (rifampin, carbamazepine, barbiturates, St. John's wort) - markedly reduce voriconazole levels (contraindicated)",
+      "Sirolimus, pimozide, quinidine, ergot alkaloids - increased toxic levels (contraindicated)",
+      "Tacrolimus / cyclosporine - voriconazole raises levels; reduce dose and monitor",
+      "Warfarin and other coumarins - increased prothrombin time; monitor INR",
+      "Rifabutin, efavirenz, ritonavir - bidirectional interaction"
+    ],
+    "moderate": [
+      "Statins (CYP3A4-metabolized) - increased levels and myopathy risk",
+      "Benzodiazepines (midazolam, alprazolam) - prolonged sedation",
+      "Phenytoin - bidirectional; increase voriconazole dose and monitor phenytoin",
+      "Omeprazole / other CYP2C19 substrates - increased levels",
+      "Oral contraceptives - mutual exposure increases",
+      "Methadone - increased levels and QT risk"
+    ],
+    "minor": ["Calcium channel blockers (increased exposure)", "Sulfonylureas (monitor glucose)"],
+    "food": "Take oral voriconazole at least 1 hour before or after a meal; high-fat meals reduce absorption.",
+    "alcohol": "Avoid; alcohol increases hepatotoxicity risk.",
+    "diagnostics": "Can elevate liver enzymes and prolong the QT interval on ECG."
+  },
+  "se": {
+    "common": ["Visual disturbances (altered color/brightness, blurring)", "Fever", "Rash", "Nausea/vomiting", "Headache", "Peripheral edema", "Elevated liver enzymes"],
+    "serious": ["Hepatotoxicity (hepatitis, cholestasis, hepatic failure)", "QT prolongation / torsades de pointes", "Severe cutaneous adverse reactions (SJS/TEN)", "Visual loss / optic neuritis", "Infusion-related reactions including anaphylaxis"],
+    "rare": ["Skeletal fluorosis and periostitis with long-term use", "Adrenal insufficiency / Cushing's (with corticosteroids)", "Phototoxicity-related squamous cell carcinoma / melanoma", "Pancreatitis"],
+    "emergency": ["Anaphylaxis during infusion", "Fulminant hepatic failure", "Torsades de pointes / cardiac arrest", "Stevens-Johnson syndrome / toxic epidermal necrolysis"]
+  },
+  "monitoring": ["Liver function tests at baseline and during therapy", "Plasma trough concentration (TDM)", "Serum electrolytes (potassium, magnesium, calcium) and ECG", "Visual function if treatment exceeds 28 days", "Renal function (serum creatinine) when IV used", "Signs of skin malignancy with prolonged therapy"],
+  "counsel": [
+    "Visual changes such as blurred vision or altered color perception are common and usually reversible; do not drive at night during treatment",
+    "Avoid direct sunlight and use sun protection due to a risk of severe sunburn and long-term skin cancer",
+    "Take oral doses on an empty stomach, one hour before or after eating",
+    "Avoid alcohol and tell your doctor about all other medicines and herbal products",
+    "Report yellowing of the skin/eyes, dark urine, severe rash, or palpitations promptly"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV); steady state in ~5-6 days without loading"],
+    ["Peak", "Oral Tmax 1-2 hours (fasting)"],
+    ["Half-life", "Variable, dose-dependent (non-linear kinetics); ~6 hours at usual doses"],
+    ["Duration", "Dosed every 12 hours"],
+    ["Storage", "Tablets/powder store at 15-30 C; reconstituted suspension up to 14 days at 15-30 C"]
+  ],
+  "pearls": [
+    "Boxed-warning-level safety: hepatotoxicity, QT prolongation, and visual disturbance dominate monitoring",
+    "First-line for invasive aspergillosis",
+    "Non-linear pharmacokinetics and CYP2C19 polymorphism cause wide level variability; use therapeutic drug monitoring (trough ~1-5.5 mg/L)",
+    "Avoid IV form if CrCl <50 due to cyclodextrin vehicle accumulation - switch to oral",
+    "Massive CYP2C19/2C9/3A4 interaction profile - always review concomitant drugs"
+  ],
+  "missed": "Take a missed oral dose as soon as remembered; if it is almost time for the next dose, skip the missed one. Do not double up. For IV therapy, missed doses are managed by the treating team.",
+  "overdose": "No specific antidote. Overdose may worsen photophobia and other dose-related effects; manage supportively with monitoring of vital signs and ECG. Voriconazole is hemodialyzable (clearance ~121 mL/min), and the cyclodextrin IV vehicle is also removed by hemodialysis.",
+  "refs": [
+    ["FDA Label - Voriconazole (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22voriconazole%22"],
+    ["DailyMed - Voriconazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=voriconazole"]
+  ]
+}

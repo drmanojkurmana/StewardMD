@@ -1,0 +1,90 @@
+{
+  "generic": "Fexofenadine",
+  "cls": "Second-generation H1 antihistamine",
+  "pharm": "Antihistamine (antiallergic)",
+  "tags": ["antihistamine", "allergic rhinitis", "urticaria", "non-sedating", "H1 blocker"],
+  "quick": [
+    ["Adult dose", "180 mg OD or 60 mg BID"],
+    ["Meal", "Empty stomach; avoid fruit juice"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Generally considered low risk"],
+    ["Renal", "Reduce to 60 mg OD if impaired"],
+    ["Hepatic", "No adjustment needed"],
+    ["Alcohol", "Minimal sedation risk"],
+    ["Monitoring", "Symptom response; renal in impairment"]
+  ],
+  "summary": "Fexofenadine is a non-sedating second-generation H1 antihistamine for allergic rhinitis and chronic urticaria. Dosed 60 mg twice daily or 180 mg once daily, on an empty stomach. Avoid fruit juices which reduce absorption. Reduce dose in renal impairment.",
+  "indications": [
+    "Seasonal allergic rhinitis (relief of sneezing, rhinorrhea, itchy/watery eyes, nasal/throat itching)",
+    "Chronic idiopathic urticaria (relief of itching and hives)",
+    "Relief of nasal/sinus congestion symptoms (combination products with pseudoephedrine)"
+  ],
+  "dosage": [
+    {"c": "Allergic rhinitis (adult / >=12 yr)", "r": "Standard", "d": "60 mg twice daily or 180 mg once daily", "t": "OD or BID", "n": "On empty stomach"},
+    {"c": "Chronic urticaria (adult / >=12 yr)", "r": "Standard", "d": "180 mg once daily or 60 mg twice daily", "t": "OD or BID", "n": ""},
+    {"c": "Children 6-11 years", "r": "Pediatric", "d": "30 mg twice daily", "t": "Twice daily", "n": "Suspension/tablet"},
+    {"c": "Renal impairment", "r": "Reduced", "d": "60 mg once daily (adult)", "t": "Once daily", "n": "Lower frequency in children"}
+  ],
+  "admin": [
+    "Take with water on an empty stomach",
+    "Do not take with fruit juices (apple, orange, grapefruit) - reduce absorption",
+    "Swallow tablet whole; do not crush or chew",
+    "Separate from aluminum/magnesium antacids by ~2 hours",
+    "Take regularly during allergy season for best control"
+  ],
+  "moa": "Selectively antagonizes peripheral histamine H1 receptors, blocking histamine-mediated allergic responses (vasodilation, increased vascular permeability, pruritus, sneezing). As a non-sedating agent it minimally crosses the blood-brain barrier and lacks significant anticholinergic activity. It is the active metabolite of terfenadine.",
+  "contra": {
+    "absolute": ["Hypersensitivity to fexofenadine"],
+    "relative": ["Severe renal impairment (dose reduction needed)", "Phenylketonuria (some orally disintegrating formulations contain phenylalanine)"],
+    "monitor": ["Concurrent fruit juice intake (efficacy)", "Concurrent antacids", "Elderly with renal decline"]
+  },
+  "preg": "Use only if clearly needed; human data limited. Loratadine/cetirizine often preferred when antihistamine required in pregnancy.",
+  "lact": "Considered low risk; small amounts in breast milk. Generally compatible with breastfeeding at usual doses.",
+  "renal": "Reduce dose in renal impairment: adults 60 mg once daily; reduce frequency in children. Lower clearance increases exposure.",
+  "hepatic": "No dose adjustment needed; fexofenadine undergoes minimal hepatic metabolism and is largely excreted unchanged.",
+  "interactions": {
+    "major": ["No clinically significant major interactions (does not prolong QT, unlike its parent terfenadine)"],
+    "moderate": ["Erythromycin / ketoconazole - increased fexofenadine plasma levels (not clinically significant)", "P-glycoprotein inhibitors - increased exposure"],
+    "minor": ["Aluminum/magnesium antacids - reduced absorption; separate dosing", "Rifampin - decreased fexofenadine exposure"],
+    "food": "Fruit juices (apple, orange, grapefruit) and high-fat meals reduce absorption; take on an empty stomach.",
+    "alcohol": "Minimal interaction; little additive sedation.",
+    "diagnostics": "Discontinue 3-4 days before allergy skin testing to avoid false-negative results."
+  },
+  "se": {
+    "common": ["Headache", "Drowsiness (uncommon, low incidence)", "Nausea", "Dizziness", "Back pain"],
+    "serious": ["Hypersensitivity reactions (angioedema, anaphylaxis) - rare"],
+    "rare": ["Urticaria / rash", "Tachycardia / palpitations", "Insomnia"],
+    "emergency": ["Anaphylaxis / angioedema with airway compromise"]
+  },
+  "monitoring": [
+    "Symptom control (allergic rhinitis / urticaria)",
+    "Renal function in impairment",
+    "Hypersensitivity reactions"
+  ],
+  "counsel": [
+    "Take with water on an empty stomach for best effect",
+    "Avoid taking with fruit juices",
+    "Generally non-drowsy but assess your own response before driving",
+    "Separate from antacids by about 2 hours",
+    "Report rash, swelling or difficulty breathing"
+  ],
+  "pk": [
+    ["Onset", "Within 1 hour (symptom relief in 1-3 hours)"],
+    ["Peak", "~2.6 hours"],
+    ["Half-life", "~14.4 hours"],
+    ["Duration", "12-24 hours"],
+    ["Storage", "Store at 20-25 C, protect from moisture"]
+  ],
+  "pearls": [
+    "Truly non-sedating; preferred when alertness needed",
+    "Fruit juices markedly reduce absorption - take with water",
+    "Active metabolite of terfenadine without the QT/cardiac risk",
+    "Discontinue 3-4 days before allergy skin tests"
+  ],
+  "missed": "Take the missed dose when remembered. If it is almost time for the next dose, skip it; do not double up.",
+  "overdose": "Overdose may cause dizziness, drowsiness and dry mouth. No specific antidote; treat supportively with standard measures. Hemodialysis does not effectively remove fexofenadine.",
+  "refs": [
+    ["FDA Fexofenadine Hydrochloride Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fexofenadine+hydrochloride%22"],
+    ["FDA DailyMed - Fexofenadine", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "generic": "Psoralen (Methoxsalen)",
+  "cls": "Psoralen (furocoumarin) photosensitizing agent",
+  "pharm": "Photochemotherapy agent (used with UVA - PUVA)",
+  "tags": ["psoralen", "methoxsalen", "PUVA", "psoriasis", "vitiligo", "photosensitizer"],
+  "quick": [
+    ["Adult dose", "Weight-based 10-70 mg PO 1.5-2 h before UVA (psoriasis); 20 mg for vitiligo"],
+    ["Meal", "Take with low-fat food or milk to reduce nausea"],
+    ["Pregnancy", "Use only if clearly needed; no reproduction studies"],
+    ["Lactation", "Caution; presence in milk unknown - generally avoid"],
+    ["Renal", "No specific adjustment in labeling"],
+    ["Hepatic", "Caution; hepatically metabolized, monitor LFTs"],
+    ["Alcohol", "Limit; potential additive hepatic risk"],
+    ["Monitoring", "Eye exams yearly, skin cancer surveillance, LFTs, CBC"]
+  ],
+  "summary": "Psoralen, as the drug methoxsalen (8-methoxypsoralen, 8-MOP; Oxsoralen, Oxsoralen-Ultra, Uvadex), is a furocoumarin photosensitizing agent used in combination with long-wave ultraviolet A light (PUVA photochemotherapy). It is FDA-approved for severe recalcitrant psoriasis, repigmentation of idiopathic vitiligo, and (via extracorporeal photopheresis) palliation of cutaneous T-cell lymphoma. On UVA activation it cross-links DNA, inhibiting cell proliferation. Major risks are severe phototoxic burns, increased skin cancer (squamous cell carcinoma, melanoma), cataracts/ocular damage and premature skin aging - so UVA-absorbing wraparound sunglasses for 24 hours and strict sun avoidance after dosing are essential.",
+  "indications": [
+    "Symptomatic control of severe, recalcitrant, disabling psoriasis not responsive to other therapy, in conjunction with UVA (PUVA)",
+    "Repigmentation of idiopathic vitiligo, in conjunction with UVA",
+    "Palliative treatment of skin manifestations of cutaneous T-cell lymphoma (CTCL) via extracorporeal photopheresis (Uvadex) unresponsive to other treatment"
+  ],
+  "dosage": [
+    {"c": "Psoriasis - Oxsoralen-Ultra (soft gel), adult", "r": "Weight-based", "d": "<30 kg: 10 mg; 30-50 kg: 20 mg; 51-65 kg: 30 mg; 66-80 kg: 40 mg; 81-90 kg: 50 mg; 91-115 kg: 60 mg; >115 kg: 70 mg, 1.5-2 h before UVA", "t": "Per treatment session", "n": "Therapy on alternate days, never two consecutive days"},
+    {"c": "Psoriasis - hard capsule (Oxsoralen/8-MOP)", "r": "Weight-based", "d": "Dose taken ~2 hours before UVA exposure", "t": "Per session", "n": "NOT interchangeable with soft-gel Oxsoralen-Ultra (different bioavailability)"},
+    {"c": "Vitiligo (adult)", "r": "Standard", "d": "20 mg taken 2-4 hours before measured UVA or sunlight exposure", "t": "Alternate days", "n": "Take with food or milk; never on two consecutive days"},
+    {"c": "CTCL - Uvadex (photopheresis)", "r": "Extracorporeal", "d": "Added directly into the photopheresis recirculation/buffy-coat bag per treatment volume", "t": "Per photopheresis schedule", "n": "Not taken orally"}
+  ],
+  "admin": [
+    "Take capsules with some low-fat food or milk to reduce nausea",
+    "Strictly observe timing relative to UVA (1.5-2 h soft gel; 2 h hard capsule; 2-4 h for vitiligo)",
+    "Do NOT increase the dose on your own",
+    "Therapy is given on alternate days, never on two consecutive days",
+    "Use only under a physician trained in photochemotherapy"
+  ],
+  "moa": "Methoxsalen, upon photoactivation by UVA, conjugates and forms covalent bonds with DNA, producing both monofunctional adducts with a single strand and bifunctional adducts/interstrand cross-links with pyrimidine bases. This inhibits DNA synthesis and cell proliferation, the basis of benefit in hyperproliferative psoriatic skin. In vitiligo the proposed mechanism includes stimulation of melanocytes to migrate and repopulate the epidermis with melanin (repigmentation).",
+  "contra": {
+    "absolute": ["Hypersensitivity to methoxsalen, other psoralens, or any excipient", "Photosensitivity diseases - lupus erythematosus, porphyria cutanea tarda, erythropoietic protoporphyria, variegate porphyria, xeroderma pigmentosum, albinism", "Melanoma or a history of melanoma", "Invasive squamous cell carcinoma", "Aphakia (absence of the lens) - greatly increased risk of retinal damage"],
+    "relative": ["Prior arsenic or ionizing radiation exposure / extensive prior skin cancer", "Hepatic impairment", "Cardiac disease unable to tolerate heat of UVA cabinet"],
+    "monitor": ["Concomitant photosensitizing drugs", "Children", "Sun-exposure behavior"]
+  },
+  "preg": "Animal reproduction studies have not been conducted. Methoxsalen should be given to a woman of reproductive capacity only if clearly needed.",
+  "lact": "It is not known whether methoxsalen is excreted in human milk; use during nursing is generally not recommended given the potential for serious adverse reactions.",
+  "renal": "No specific renal dose adjustment is provided in the labeling.",
+  "hepatic": "No specific hepatic dose adjustment is provided, but hepatotoxicity is a recognized concern and the drug is hepatically metabolized - use caution and monitor liver function in hepatic impairment.",
+  "interactions": {
+    "major": ["Other photosensitizing agents (anthralin, coal tar, griseofulvin, phenothiazines, nalidixic acid, fluoroquinolones, halogenated salicylanilides, sulfonamides, tetracyclines, thiazides, certain staining dyes) - additive phototoxicity; use special care or avoid"],
+    "moderate": ["Furocoumarin-containing foods (limes, figs, parsley, celery, carrots, mustard, citrus, cloves) - may add to photosensitivity; limit"],
+    "minor": ["Drugs that may affect hepatic metabolism of methoxsalen"],
+    "food": "Take with low-fat food or milk to reduce nausea; limit furocoumarin-containing foods that increase photosensitivity.",
+    "alcohol": "Limit alcohol; potential additive hepatic risk.",
+    "diagnostics": "May elevate liver function tests."
+  },
+  "se": {
+    "common": ["Nausea (most common, ~10%)", "Pruritus (~10%)", "Erythema at 24-48 hours after therapy"],
+    "serious": ["Severe burns from overexposure to UVA or sunlight", "Increased risk of skin cancer - squamous cell carcinoma and melanoma", "Cataracts / ocular damage", "Premature skin aging (actinic degeneration)", "Hepatotoxicity"],
+    "rare": ["Hypersensitivity reactions", "Vesiculation/bullae"],
+    "emergency": ["Severe phototoxic burn / blistering", "Acute ocular injury"]
+  },
+  "monitoring": [
+    "Ophthalmologic examination before starting therapy and yearly thereafter",
+    "Regular skin examinations for skin cancer",
+    "Liver function tests (hepatotoxicity) and CBC before and during extended treatment"
+  ],
+  "counsel": [
+    "Wear UVA-absorbing wraparound sunglasses during daylight for 24 hours after each dose to protect against cataracts",
+    "Avoid sun exposure - even through window glass - for at least 8 hours (commonly 24 hours) after the dose",
+    "Do not sunbathe for 48 hours after therapy; wear protective clothing and use sunscreen on exposed untreated areas",
+    "Do not increase the dose on your own",
+    "Take with food or milk; report any severe burning, blistering or eye problems"
+  ],
+  "pk": [
+    ["Onset", "Photosensitivity develops after dosing once UVA is applied"],
+    ["Peak", "Peak blood level 0.5-4 h (mean ~1.8 h); peak photosensitivity ~1.5-2.1 h"],
+    ["Half-life", "Approximately 2 hours"],
+    ["Duration", "Skin remains photosensitive ~8 hours (eye protection advised 24 h)"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions 15-30 C permitted"]
+  ],
+  "pearls": [
+    "Psoralen as a drug = methoxsalen (8-MOP), which IS FDA-approved; used only with UVA light as PUVA photochemotherapy",
+    "Soft-gel Oxsoralen-Ultra is NOT interchangeable with hard-capsule Oxsoralen/8-MOP - greater bioavailability and earlier photosensitization",
+    "Long-term PUVA markedly increases risk of squamous cell carcinoma and melanoma - lifelong skin surveillance",
+    "Eye protection (UVA sunglasses) for 24 hours and sun avoidance after each dose are mandatory to prevent cataracts and burns"
+  ],
+  "missed": "If a treatment session is missed, the UVA exposure time of the next treatment should not be increased. If more than one treatment is missed, reduce UVA exposure by 0.5 J/cm2 for each treatment missed.",
+  "overdose": "In overdose, induce emesis (most beneficial within the first 2-3 hours) and keep the patient in a darkened room for at least 24 hours to prevent severe phototoxic burns.",
+  "refs": [
+    ["DailyMed - Methoxsalen capsules (Oxsoralen-Ultra/8-MOP)", "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=a6ec8292-9189-4ebd-862a-e1725eb29eef"],
+    ["DailyMed - UVADEX (methoxsalen) solution", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5ad333bd-845f-43f8-9ecf-43491f26c7c7"],
+    ["FDA Label - 8-MOP/methoxsalen capsules (accessdata)", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2003/09048slr037_methoxsalen_lbl.pdf"]
+  ]
+}

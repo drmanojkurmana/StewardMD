@@ -1,0 +1,92 @@
+{
+  "generic": "Lisinopril",
+  "cls": "Angiotensin-converting enzyme (ACE) inhibitor",
+  "pharm": "Antihypertensive / cardiovascular and renal protective agent",
+  "tags": ["ACE inhibitor", "hypertension", "heart failure", "post-MI", "fetal toxicity"],
+  "quick": [
+    ["Adult dose", "10 mg PO once daily; range 10-80 mg/day"],
+    ["Meal", "With or without food"],
+    ["Pregnancy", "Contraindicated; fetal toxicity (boxed warning)"],
+    ["Lactation", "Avoid; not recommended"],
+    ["Renal", "Reduce starting dose; monitor K+/creatinine"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Limit; may worsen hypotension"],
+    ["Monitoring", "BP, potassium, renal function"]
+  ],
+  "summary": "Lisinopril is a long-acting ACE inhibitor for hypertension, heart failure and post-MI management. Usual dosing is 10-40 mg once daily (up to 80 mg). Carries a boxed warning for fetal toxicity - discontinue as soon as pregnancy is detected. Watch for hyperkalemia, renal impairment and angioedema.",
+  "indications": [
+    "Treatment of hypertension to lower blood pressure",
+    "Adjunctive treatment of heart failure (with diuretics and digitalis)",
+    "Treatment of acute myocardial infarction within 24 hours in hemodynamically stable patients to improve survival",
+    "Reduction of cardiovascular risk and progression of diabetic/proteinuric nephropathy (per guidelines)"
+  ],
+  "dosage": [
+    {"c": "Hypertension", "r": "Standard", "d": "Initial 10 mg once daily; usual 20-40 mg/day; max 80 mg/day", "t": "Once daily", "n": "Lower start if on diuretic"},
+    {"c": "Heart failure", "r": "Adjunct", "d": "Initial 5 mg once daily; usual 5-20 mg/day; max 40 mg/day", "t": "Once daily", "n": "Titrate slowly"},
+    {"c": "Acute MI", "r": "Standard", "d": "5 mg within 24 h, 5 mg at 24 h, 10 mg at 48 h, then 10 mg daily x6 weeks", "t": "Once daily", "n": "Use lower start (2.5 mg) if low systolic BP"},
+    {"c": "Renal impairment / hyponatremia", "r": "Renal", "d": "Initial 2.5-5 mg once daily", "t": "Once daily", "n": "Titrate per response and potassium"}
+  ],
+  "admin": [
+    "Take orally once daily, with or without food",
+    "Discontinue immediately if pregnancy is detected",
+    "In volume/salt-depleted patients (e.g., on diuretics), start at a lower dose to avoid first-dose hypotension",
+    "Monitor potassium and renal function after initiation and dose changes",
+    "Have correction measures available for excessive hypotension (supine position, IV saline)"
+  ],
+  "moa": "Inhibits angiotensin-converting enzyme, blocking conversion of angiotensin I to the potent vasoconstrictor angiotensin II. This reduces vasoconstriction and aldosterone secretion, lowering blood pressure and reducing sodium/water retention. Decreased angiotensin II also reduces cardiac afterload and slows progression of nephropathy; reduced bradykinin breakdown contributes to vasodilation (and cough).",
+  "contra": {
+    "absolute": ["History of angioedema (hereditary, idiopathic, or prior ACE-inhibitor-related)", "Concomitant use with aliskiren in patients with diabetes", "Co-administration with sacubitril/valsartan or within 36 hours of switching", "Pregnancy", "Hypersensitivity to lisinopril"],
+    "relative": ["Bilateral renal artery stenosis", "Hyperkalemia", "Severe renal impairment", "Volume depletion", "Aortic/outflow obstruction"],
+    "monitor": ["Serum potassium", "Renal function", "Blood pressure (first-dose hypotension)"]
+  },
+  "preg": "BOXED WARNING - FETAL TOXICITY: Drugs acting on the renin-angiotensin system can cause injury and death to the developing fetus. Discontinue lisinopril as soon as pregnancy is detected. Use in second and third trimesters is associated with fetal renal failure, oligohydramnios and death.",
+  "lact": "Not recommended during breastfeeding, particularly in the newborn period, due to limited data on infant exposure and risk.",
+  "renal": "Reduce the initial dose and titrate carefully in renal impairment; monitor serum creatinine and potassium. Lisinopril is removed by hemodialysis. Risk of acute renal failure in bilateral renal artery stenosis or volume depletion.",
+  "hepatic": "No specific dosage adjustment; lisinopril is not metabolized by the liver and is excreted unchanged renally.",
+  "interactions": {
+    "major": ["Aliskiren (in diabetics) - contraindicated; renal impairment, hyperkalemia, hypotension", "Sacubitril/valsartan - contraindicated; angioedema risk", "Potassium-sparing diuretics / potassium supplements - severe hyperkalemia", "Other RAS blockers (ARBs) - dual blockade harms"],
+    "moderate": ["NSAIDs - reduced antihypertensive effect and worsened renal function (especially elderly/volume-depleted)", "Diuretics - first-dose hypotension", "Lithium - increased lithium levels and toxicity", "mTOR inhibitors / DPP-4 inhibitors - increased angioedema risk"],
+    "minor": ["Antacids - may reduce absorption slightly"],
+    "food": "No clinically significant food interaction; salt substitutes containing potassium can cause hyperkalemia.",
+    "alcohol": "Limit; may potentiate hypotension.",
+    "diagnostics": "May raise serum potassium and creatinine; can cause false-positive in some assays."
+  },
+  "se": {
+    "common": ["Dizziness", "Headache", "Persistent dry cough", "Hypotension", "Fatigue", "Hyperkalemia"],
+    "serious": ["Angioedema (including intestinal angioedema)", "Acute renal failure", "Severe hyperkalemia", "Symptomatic hypotension", "Neutropenia/agranulocytosis"],
+    "rare": ["Hepatic failure with cholestatic jaundice", "Anaphylactoid reactions (during dialysis or LDL apheresis)", "Pancreatitis"],
+    "emergency": ["Airway-compromising angioedema", "Severe hyperkalemia with arrhythmia", "Acute renal failure"]
+  },
+  "monitoring": [
+    "Blood pressure at baseline and after initiation/dose changes",
+    "Serum potassium and creatinine within 1-2 weeks of starting or dose change",
+    "Renal function in patients with renal artery stenosis or on diuretics",
+    "Signs of angioedema, especially early in therapy"
+  ],
+  "counsel": [
+    "Stop the drug and tell your doctor immediately if you become pregnant",
+    "Seek emergency care for swelling of the face, lips, tongue or throat (angioedema)",
+    "A dry cough may occur; report if bothersome",
+    "Avoid potassium supplements or salt substitutes unless advised",
+    "Rise slowly to reduce dizziness; stay hydrated but avoid excess potassium"
+  ],
+  "pk": [
+    ["Onset", "Blood-pressure lowering within ~1 hour"],
+    ["Peak", "About 6-7 hours"],
+    ["Half-life", "Effective accumulation half-life ~12 hours"],
+    ["Duration", "24 hours (once-daily dosing)"],
+    ["Storage", "Store at controlled room temperature; protect from moisture"]
+  ],
+  "pearls": [
+    "Boxed warning: discontinue immediately if pregnancy detected (fetal toxicity).",
+    "Not hepatically metabolized; excreted unchanged renally and removed by dialysis",
+    "Dry cough and angioedema are class effects mediated by bradykinin",
+    "Avoid combining with ARBs or aliskiren (dual RAS blockade harms)"
+  ],
+  "missed": "Take the missed dose when remembered. If it is almost time for the next dose, skip it and resume the once-daily schedule; do not double up.",
+  "overdose": "Most likely manifestation is marked hypotension. Treat with IV normal saline and supine positioning; lisinopril can be removed by hemodialysis. Monitor blood pressure, renal function and potassium; treat hyperkalemia as needed.",
+  "refs": [
+    ["FDA Lisinopril Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lisinopril%22"],
+    ["FDA DailyMed - Lisinopril", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

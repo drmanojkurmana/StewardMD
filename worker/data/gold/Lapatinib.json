@@ -1,0 +1,94 @@
+{
+  "generic": "Lapatinib",
+  "cls": "Tyrosine kinase inhibitor (HER2/EGFR, ErbB)",
+  "pharm": "Antineoplastic / 4-anilinoquinazoline kinase inhibitor",
+  "tags": ["HER2-positive breast cancer", "kinase inhibitor", "oral chemotherapy", "hepatotoxicity", "QT prolongation"],
+  "quick": [
+    ["Adult dose", "1,250 mg PO once daily (with capecitabine) or 1,500 mg once daily (with letrozole)"],
+    ["Meal", "Empty stomach: at least 1 hr before or 1 hr after a meal"],
+    ["Pregnancy", "Can cause fetal harm; avoid and use effective contraception"],
+    ["Lactation", "Do not breastfeed"],
+    ["Renal", "No adjustment in mild-moderate; not studied in severe/dialysis"],
+    ["Hepatic", "Reduce dose in severe (Child-Pugh C) impairment; boxed hepatotoxicity"],
+    ["Alcohol", "Avoid; adds to hepatotoxicity risk"],
+    ["Monitoring", "LFTs, LVEF (echo/MUGA), ECG and electrolytes"]
+  ],
+  "summary": "Lapatinib (Tykerb) is an oral dual tyrosine kinase inhibitor of HER2 (ErbB2) and EGFR (ErbB1) used in combination with capecitabine or letrozole for HER2-positive advanced/metastatic breast cancer. It carries a BOXED WARNING for hepatotoxicity, which may be severe and fatal, and can prolong the QT interval and decrease LVEF. It must be taken once daily on an empty stomach, at least 1 hour before or 1 hour after food, and the daily dose must not be divided.",
+  "indications": [
+    "In combination with capecitabine for advanced or metastatic HER2-overexpressing breast cancer in patients who have received prior anthracycline, taxane, and trastuzumab (with disease progression on trastuzumab)",
+    "In combination with letrozole for postmenopausal women with hormone receptor-positive, HER2-overexpressing metastatic breast cancer for whom hormonal therapy is indicated"
+  ],
+  "dosage": [
+    {"c": "HER2+ metastatic breast cancer (with capecitabine)", "r": "Standard", "d": "1,250 mg (5 tablets) once daily on Days 1-21, continuously; with capecitabine 2,000 mg/m2/day in 2 divided doses on Days 1-14 of each 21-day cycle", "t": "Once daily, all 5 tablets together", "n": "Take lapatinib at least 1 hr before or 1 hr after food; capecitabine with food. Do not divide the dose"},
+    {"c": "HR+/HER2+ metastatic breast cancer (with letrozole)", "r": "Standard", "d": "1,500 mg (6 tablets) once daily continuously; letrozole 2.5 mg once daily", "t": "Once daily, continuous", "n": "Empty stomach (1 hr before or after food)"},
+    {"c": "Severe hepatic impairment (Child-Pugh C)", "r": "Dose reduction", "d": "Reduce from 1,250 mg to 750 mg/day or from 1,500 mg to 1,000 mg/day", "t": "Once daily", "n": "Predicted to normalize AUC; no clinical adjustment data"},
+    {"c": "Concomitant strong CYP3A4 inhibitor (if unavoidable)", "r": "Dose reduction", "d": "Reduce lapatinib to 500 mg/day", "t": "Once daily", "n": "Resume prior dose after washout (~1 week) when inhibitor stopped"},
+    {"c": "Concomitant strong CYP3A4 inducer (if unavoidable)", "r": "Gradual dose increase", "d": "Titrate from 1,250 mg up to 4,500 mg/day (or 1,500 to 5,500 mg/day) as tolerated", "t": "Once daily", "n": "Return to indicated dose when inducer discontinued"},
+    {"c": "Decreased LVEF (Grade 2+ / below LLN)", "r": "Interrupt", "d": "Stop lapatinib; may restart at reduced dose (1,000 mg/day with capecitabine, 1,250 mg/day with letrozole) after >=2 weeks if LVEF recovers and asymptomatic", "t": "After recovery", "n": "Confirm normal LVEF at baseline"}
+  ],
+  "admin": [
+    "Take orally once daily on an empty stomach: at least 1 hour before or 1 hour after a meal",
+    "Swallow the full daily dose (5 or 6 tablets) all at once; do not divide the daily dose",
+    "Do not take with grapefruit or grapefruit juice (CYP3A4 inhibition)",
+    "If a dose is missed, do not double up; resume with the next scheduled daily dose",
+    "Confirm normal LVEF before starting and monitor during treatment"
+  ],
+  "moa": "Lapatinib is a 4-anilinoquinazoline reversible inhibitor of the intracellular tyrosine kinase domains of both EGFR (ErbB1) and HER2 (ErbB2), with a slow off-rate (dissociation half-life >=300 minutes). By blocking ErbB receptor autophosphorylation, it interrupts downstream signaling and inhibits ErbB-driven tumor cell growth. It retains activity in trastuzumab-resistant cell lines, suggesting non-cross-resistance, and combines additively with the capecitabine metabolite 5-FU.",
+  "contra": {
+    "absolute": ["Known severe hypersensitivity (e.g., anaphylaxis) to lapatinib or any component"],
+    "relative": ["Pre-existing reduced LVEF or significant cardiac dysfunction", "Severe hepatic impairment (requires dose reduction)", "Conditions predisposing to QT prolongation (congenital long QT, uncorrected hypokalemia/hypomagnesemia)"],
+    "monitor": ["Concomitant strong CYP3A4 inhibitors or inducers", "Concomitant QT-prolonging drugs", "Concomitant narrow-therapeutic-index CYP3A4, CYP2C8, or P-gp substrates"]
+  },
+  "preg": "Can cause fetal harm based on animal studies and mechanism of action; animal exposures caused fetal anomalies, abortions, and offspring death. There are no adequate human data. Verify pregnancy status before initiation; advise females of reproductive potential to use effective contraception during and after treatment, and counsel on the potential risk to the fetus.",
+  "lact": "Advise women not to breastfeed during treatment with lapatinib. It is unknown whether lapatinib is excreted in human milk; because of the potential for serious adverse reactions in the breastfed infant, breastfeeding is not recommended.",
+  "renal": "No specific dose adjustment is recommended for mild to moderate renal impairment, as renal elimination of lapatinib is negligible (<2% excreted in urine). Lapatinib has not been studied in patients with severe renal impairment or on dialysis; use caution.",
+  "hepatic": "BOXED WARNING: severe and potentially fatal hepatotoxicity. Lapatinib exposure is increased in hepatic impairment; consider dose reduction in severe (Child-Pugh C) impairment. Monitor LFTs before initiation, every 4-6 weeks during treatment, and as clinically indicated. Discontinue and do not restart if severe LFT changes (e.g., Grade 3-4 transaminase or bilirubin elevation) occur.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ketoconazole, itraconazole, clarithromycin, ritonavir) - increase lapatinib exposure; avoid or reduce lapatinib to 500 mg/day", "Strong CYP3A4 inducers (rifampin, carbamazepine, phenytoin, St. John's wort) - markedly reduce lapatinib exposure; avoid or titrate dose upward", "QT-prolonging drugs (Class IA/III antiarrhythmics, many antipsychotics) - additive QT prolongation"],
+    "moderate": ["CYP3A4 substrates with narrow therapeutic index (e.g., midazolam - AUC increased ~45%) - lapatinib inhibits CYP3A4", "CYP2C8 / P-gp substrates (e.g., paclitaxel - exposure increased ~23%) - increased toxicity", "Digoxin (P-gp substrate) - increased digoxin levels; monitor", "Drugs that raise gastric pH may reduce lapatinib solubility/absorption"],
+    "minor": ["OATP1B1 substrates - lapatinib inhibits hepatic uptake transporter in vitro", "BCRP substrates - potential increased exposure"],
+    "food": "Avoid grapefruit and grapefruit juice. Take on an empty stomach: food (especially high-fat meals) increases lapatinib AUC up to ~4-fold, raising toxicity risk.",
+    "alcohol": "Avoid alcohol, which may compound the boxed-warning risk of hepatotoxicity.",
+    "diagnostics": "May elevate ALT, AST, and bilirubin; may decrease LVEF on echo/MUGA and prolong the QT interval on ECG."
+  },
+  "se": {
+    "common": ["Diarrhea", "Palmar-plantar erythrodysesthesia (hand-foot syndrome)", "Nausea", "Rash", "Vomiting", "Fatigue", "Mucosal inflammation/stomatitis"],
+    "serious": ["Hepatotoxicity (may be severe/fatal - boxed warning)", "Decreased left ventricular ejection fraction", "Severe diarrhea with dehydration", "Interstitial lung disease / pneumonitis", "QT interval prolongation"],
+    "rare": ["Severe cutaneous reactions (Stevens-Johnson syndrome, erythema multiforme)", "Torsades de pointes (with marked QT prolongation)"],
+    "emergency": ["Acute liver failure (jaundice, RUQ pain, coagulopathy)", "Symptomatic heart failure from LVEF decline (dyspnea, palpitations)", "Severe/life-threatening diarrhea", "Acute respiratory distress from ILD/pneumonitis", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Liver function tests (ALT, AST, bilirubin) at baseline, every 4-6 weeks during treatment, and as clinically indicated",
+    "LVEF by echocardiogram or MUGA scan at baseline and during treatment",
+    "ECG and serum electrolytes (potassium, magnesium) - correct before and monitor during therapy for QT risk",
+    "Assess for diarrhea, dehydration, pulmonary symptoms, and skin reactions",
+    "Pregnancy status before initiation in females of reproductive potential"
+  ],
+  "counsel": [
+    "Take once daily on an empty stomach - at least 1 hour before or 1 hour after food; do not split the daily dose",
+    "Report yellowing of skin/eyes, dark urine, severe abdominal pain, or unusual fatigue (signs of liver injury) immediately",
+    "Report shortness of breath, palpitations, swelling, or new cough (cardiac/pulmonary effects)",
+    "Manage and report severe or persistent diarrhea; maintain hydration",
+    "Avoid grapefruit, grapefruit juice, and alcohol; use effective contraception and do not breastfeed"
+  ],
+  "pk": [
+    ["Onset", "Serum levels appear after median lag of 0.25 hr; steady state in 6-7 days"],
+    ["Peak", "Cmax approximately 4 hours after dose"],
+    ["Half-life", "Terminal ~24 hr (effective half-life on daily dosing ~24 hr)"],
+    ["Duration", "Continuous daily dosing maintains steady-state inhibition"],
+    ["Storage", "Store at 20-25 C (68-77 F); excursions permitted 15-30 C"]
+  ],
+  "pearls": [
+    "Boxed warning is HEPATOTOXICITY - severe, sometimes fatal; LFT monitoring is mandatory",
+    "Must be taken on an empty stomach; food can increase exposure up to 4-fold",
+    "Dual HER2 + EGFR inhibitor that retains activity against trastuzumab-resistant cells",
+    "Dose is taken as all 5 (or 6) tablets at once - dividing the dose raises exposure and toxicity",
+    "Confirm normal LVEF before starting and correct electrolytes given QT-prolongation risk"
+  ],
+  "missed": "If a dose is missed, do not take an extra or double dose. Skip the missed dose and resume with the next regularly scheduled daily dose.",
+  "overdose": "There is no known antidote. Reported overdoses (2,500-9,000 mg/day) caused exaggerated lapatinib adverse effects plus sore scalp, sinus tachycardia, and mucosal inflammation. Because lapatinib is highly protein-bound and minimally renally excreted, hemodialysis is not expected to enhance elimination. Treat with general supportive measures and monitor liver function, cardiac function (LVEF/ECG), and hydration.",
+  "refs": [
+    ["FDA Lapatinib (Tykerb) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lapatinib%22"],
+    ["FDA DailyMed - Lapatinib", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

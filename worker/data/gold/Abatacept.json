@@ -1,0 +1,107 @@
+{
+  "generic": "Abatacept",
+  "cls": "Selective T-cell costimulation modulator (biologic DMARD)",
+  "pharm": "A fusion protein (CTLA-4 Ig) that binds CD80/CD86 on antigen-presenting cells, blocking the CD28 costimulatory signal required for full T-cell activation, thereby dampening the inflammatory immune response.",
+  "tags": ["Rx only", "Biologic DMARD", "T-cell costimulation modulator", "Serious infection risk", "IV or SC"],
+  "quick": [
+    ["Adult dose", "IV: weight-based 500-1,000 mg at weeks 0, 2, 4 then every 4 weeks; SC: 125 mg once weekly"],
+    ["Meal", "Not applicable - given by IV infusion or subcutaneous injection"],
+    ["Pregnancy", "Data insufficient; avoid live vaccines in infants exposed in utero"],
+    ["Lactation", "Limited data; weigh benefit - small amounts may be present in milk"],
+    ["Renal", "No specific dose adjustment provided"],
+    ["Hepatic", "No specific dose adjustment provided"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Screen for latent TB and viral hepatitis; signs of infection; CMV/EBV in aGVHD prophylaxis"]
+  ],
+  "summary": "Abatacept (ORENCIA) is a selective T-cell costimulation modulator, a soluble CTLA-4 Ig fusion protein, used to treat moderate-to-severe rheumatoid arthritis, polyarticular juvenile idiopathic arthritis, and psoriatic arthritis, and for prophylaxis of acute graft-versus-host disease after stem cell transplantation. By binding CD80/CD86 it blocks the CD28 costimulatory signal needed to fully activate T cells. The principal hazard is increased risk of serious infection, so latent tuberculosis and viral hepatitis must be screened for, and vaccinations updated, before treatment. It should not be combined with TNF antagonists, other biologics, or JAK inhibitors, and live vaccines must be avoided.",
+  "indications": [
+    "Moderately to severely active rheumatoid arthritis in adults",
+    "Moderately to severely active polyarticular juvenile idiopathic arthritis in patients >= 2 years",
+    "Active psoriatic arthritis in patients >= 2 years",
+    "Prophylaxis of acute graft-versus-host disease (with a calcineurin inhibitor and methotrexate) in adults and pediatric patients >= 2 years undergoing HSCT from a matched or 1 allele-mismatched unrelated donor"
+  ],
+  "dosage": [
+    {"c": "Adult RA / PsA - intravenous", "r": "Adult IV", "d": "<60 kg: 500 mg; 60-100 kg: 750 mg; >100 kg: 1,000 mg by 30-minute infusion at weeks 0, 2, and 4, then every 4 weeks", "t": "Weeks 0, 2, 4 then q4 weeks", "n": "Weight-based vials"},
+    {"c": "Adult RA / PsA - subcutaneous", "r": "Adult SC", "d": "125 mg subcutaneously once weekly; an optional single IV loading dose (by weight) may precede the first SC dose", "t": "Once weekly", "n": "If loading given, start SC within a day of the infusion"},
+    {"c": "pJIA - intravenous (>=6 years)", "r": "Pediatric IV", "d": "<75 kg: 10 mg/kg; >=75 kg: adult IV regimen (max 1,000 mg) at weeks 0, 2, 4 then every 4 weeks", "t": "Weeks 0, 2, 4 then q4 weeks", "n": "Weight-based"},
+    {"c": "aGVHD prophylaxis", "r": "IV", "d": "Weight-based IV abatacept on a fixed schedule combined with a calcineurin inhibitor and methotrexate per protocol", "t": "Per transplant protocol", "n": "Given with standard immunosuppression"}
+  ],
+  "admin": [
+    "IV doses are given as a 30-minute infusion using a non-pyrogenic, low-protein-binding filter",
+    "Reconstitute and dilute per label; do not shake vigorously",
+    "Subcutaneous 125 mg is given once weekly; rotate injection sites",
+    "Complete TB and hepatitis screening and update vaccinations before the first dose",
+    "Do not co-administer with TNF antagonists, other biologics, or JAK inhibitors"
+  ],
+  "moa": "Abatacept is a selective costimulation modulator that inhibits T-cell (T-lymphocyte) activation by binding to CD80 and CD86 on antigen-presenting cells, thereby blocking their interaction with CD28 on the T cell. This CD28-mediated interaction provides a costimulatory signal necessary for full activation of T lymphocytes, which are implicated in the pathogenesis of rheumatoid arthritis, polyarticular JIA, and psoriatic arthritis and are found in the synovium of affected patients. In vitro, abatacept decreases T-cell proliferation and inhibits production of TNF-alpha, interferon-gamma, and interleukin-2, reducing the downstream inflammatory cascade.",
+  "contra": {
+    "absolute": [
+      "No contraindications listed in the product label (None)"
+    ],
+    "relative": [
+      "Active or chronic serious infection (including untreated latent TB)",
+      "Concurrent TNF antagonist, other biologic DMARD, or JAK inhibitor",
+      "COPD (increased risk of respiratory adverse reactions)",
+      "Recent live vaccination (or planned within the window)",
+      "Untreated viral hepatitis"
+    ],
+    "monitor": [
+      "Latent tuberculosis (before initiation) and viral hepatitis screening",
+      "Signs and symptoms of infection",
+      "CMV and EBV reactivation (in aGVHD prophylaxis)",
+      "Hypersensitivity/infusion reactions"
+    ]
+  },
+  "preg": "Data with abatacept use in pregnant women are insufficient to inform a drug-associated risk. Animal studies showed no malformations at high exposures but altered immune function in offspring. If used in pregnancy, there are clinical considerations regarding administering live vaccines to infants exposed in utero - such live vaccines should generally be avoided.",
+  "lact": "It is unknown whether abatacept is present in human milk; low levels have been detected in animal milk. Consider the developmental and health benefits of breastfeeding alongside the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "No specific dosage adjustment is recommended for renal impairment; pharmacokinetics were not formally studied across renal function categories.",
+  "hepatic": "No specific dosage adjustment is recommended for hepatic impairment. Screen for viral hepatitis before initiation, as immunosuppression may allow reactivation.",
+  "interactions": {
+    "major": [
+      "TNF antagonists - increased risk of serious infection with no added efficacy; concurrent use not recommended",
+      "Other biologic RA/PsA therapies (e.g., anakinra) and JAK inhibitors - inadequate safety data; not recommended",
+      "Live vaccines - avoid during and within 3 months of discontinuation (risk of vaccine-related infection)"
+    ],
+    "moderate": [
+      "Other immunosuppressants - additive immunosuppression and infection risk"
+    ],
+    "minor": ["May blunt the immune response to (non-live) vaccines, reducing their effectiveness"],
+    "food": "Not applicable (parenteral agent).",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "IV formulations containing maltose can falsely elevate readings on GDH-PQQ glucose monitors; use a glucose-specific monitoring method on infusion days."
+  },
+  "se": {
+    "common": ["Headache", "Upper respiratory tract infection", "Nasopharyngitis", "Nausea", "Injection-site reactions (SC)"],
+    "serious": ["Serious infections (including bacterial sepsis, pneumonia, tuberculosis)", "Hypersensitivity and anaphylaxis", "Opportunistic infections", "CMV/EBV reactivation (in aGVHD prophylaxis)", "Worsening of COPD-related respiratory disease"],
+    "rare": ["Malignancy (theoretical with immunomodulation)", "Hepatitis B reactivation", "Progressive multifocal leukoencephalopathy"],
+    "emergency": ["Anaphylaxis / severe infusion reaction", "Sepsis or other serious/opportunistic infection", "Disseminated tuberculosis"]
+  },
+  "monitoring": ["Latent TB screening before treatment and treat if positive", "Viral hepatitis screening before treatment", "Signs and symptoms of infection throughout therapy", "CMV and EBV monitoring during aGVHD prophylaxis", "Infusion/injection reactions"],
+  "counsel": [
+    "This medicine lowers your immune defenses - tell your doctor promptly about fever, cough, or other signs of infection",
+    "You will be tested for tuberculosis and hepatitis before starting, and your vaccines updated",
+    "Do not receive live vaccines during treatment and for 3 months after stopping",
+    "Tell providers you take abatacept, especially before surgery or other immune-related treatments",
+    "If you use a home glucose meter on infusion days, use one that is not affected by maltose"
+  ],
+  "pk": [
+    ["Onset", "Clinical response in RA typically develops over weeks of therapy"],
+    ["Peak", "IV: mean Cmax about 290-295 mcg/mL after 10 mg/kg"],
+    ["Half-life", "Terminal half-life approximately 13-17 days"],
+    ["Duration", "Sustained effect supports every-4-week IV or weekly SC dosing"],
+    ["Storage", "Refrigerate at 2-8 C; protect from light; do not freeze"]
+  ],
+  "pearls": [
+    "Serious infection is the key risk - screen for latent TB and hepatitis and update vaccines before starting",
+    "Do NOT combine with TNF antagonists, other biologics, or JAK inhibitors (more infections, no added benefit)",
+    "Avoid live vaccines during therapy and for 3 months after the last dose",
+    "IV dosing is weight-banded (500/750/1,000 mg); SC is a flat 125 mg weekly",
+    "Maltose in the IV product can falsely raise GDH-PQQ glucometer readings - use glucose-specific testing"
+  ],
+  "missed": "For the once-weekly subcutaneous injection, if a dose is missed, give it as soon as remembered and then resume the regular weekly schedule; do not give two doses on the same day. For IV infusions, contact the clinic to reschedule the missed infusion as soon as possible.",
+  "overdose": "Doses up to 50 mg/kg have been administered intravenously without apparent toxic effect. In case of overdose, monitor the patient for any signs or symptoms of adverse reactions and institute appropriate symptomatic and supportive treatment.",
+  "refs": [
+    ["FDA Label - Abatacept / ORENCIA (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22abatacept%22"],
+    ["DailyMed - Abatacept (ORENCIA)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=abatacept"]
+  ]
+}

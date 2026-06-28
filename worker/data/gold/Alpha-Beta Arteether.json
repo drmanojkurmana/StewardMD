@@ -1,0 +1,95 @@
+{
+  "generic": "Alpha-Beta Arteether",
+  "cls": "Artemisinin derivative (antimalarial)",
+  "pharm": "Antimalarial (endoperoxide / artemisinin sesquiterpene lactone)",
+  "tags": ["antimalarial", "artemisinin", "arteether", "artemotil", "beta-arteether", "severe malaria", "cerebral malaria", "Plasmodium falciparum"],
+  "quick": [
+    ["Adult dose", "150 mg deep IM once daily x 3 days"],
+    ["Meal", "Not applicable (intramuscular injection)"],
+    ["Pregnancy", "Avoid in 1st trimester; use only if no alternative (severe malaria)"],
+    ["Lactation", "Avoid; limited data - use only if essential"],
+    ["Renal", "No specific adjustment established"],
+    ["Hepatic", "Caution; hepatically metabolized"],
+    ["Alcohol", "Avoid; potential additive CNS effects"],
+    ["Monitoring", "Parasitemia, neurological status, vital signs, recrudescence"]
+  ],
+  "summary": "Alpha-Beta Arteether (arteether / artemotil, also called beta-arteether) is a lipophilic artemisinin derivative given by deep intramuscular injection for severe and complicated, including cerebral, Plasmodium falciparum malaria. The usual adult regimen is 150 mg IM once daily for 3 days; pediatric dosing is approximately 3 mg/kg/day. WHO prefers parenteral artesunate as first-line for severe malaria; arteether should be paired with a partner drug to prevent recrudescence. It is marketed in India (e.g., as E-Mal) and is not FDA-approved.",
+  "indications": [
+    "Severe and complicated Plasmodium falciparum malaria",
+    "Cerebral malaria",
+    "Chloroquine-resistant or multidrug-resistant falciparum malaria where parenteral therapy is required"
+  ],
+  "dosage": [
+    {"c": "Severe/cerebral falciparum malaria (adult)", "r": "Deep IM", "d": "150 mg once daily for 3 days", "t": "Once daily x 3 days", "n": "Follow with oral ACT/partner drug to prevent recrudescence"},
+    {"c": "Severe falciparum malaria (pediatric)", "r": "Deep IM", "d": "Approximately 3 mg/kg once daily for 3 days", "t": "Once daily x 3 days", "n": "Per body weight; deep IM only"},
+    {"c": "Follow-on therapy", "r": "Oral", "d": "Add a long-acting partner antimalarial (e.g., per ACT regimen)", "t": "After parenteral course", "n": "Prevents recrudescence; arteether is short-acting"}
+  ],
+  "admin": [
+    "For deep intramuscular injection only - never give intravenously",
+    "Inject into a large muscle (e.g., anterolateral thigh or gluteal); oil-based solution",
+    "Use a single daily dose for three consecutive days",
+    "Always complete with an effective partner antimalarial to prevent recrudescence",
+    "Transition to oral therapy once the patient can tolerate it"
+  ],
+  "moa": "Arteether is a lipophilic ethyl ether derivative of dihydroartemisinin. Its endoperoxide bridge is cleaved by intraparasitic heme/iron, generating carbon-centered free radicals and reactive oxygen species that alkylate parasite proteins (including PfATP6/SERCA) and membranes. This produces rapid death of asexual blood-stage Plasmodium parasites, giving fast parasite clearance.",
+  "contra": {
+    "absolute": ["Hypersensitivity to artemisinin derivatives", "Intravenous administration (IM only)"],
+    "relative": ["First trimester of pregnancy (use only if no safer alternative)", "Severe hepatic impairment", "History of artemisinin-related neurotoxicity"],
+    "monitor": ["High or repeated dosing (animal neurotoxicity signal)", "Concurrent QT-prolonging or neurotoxic drugs", "Pregnancy and lactation", "Patients with cardiac conduction abnormalities"]
+  },
+  "preg": "Avoid in the first trimester unless there is no effective alternative, because artemisinins show embryotoxicity in animals. In severe/life-threatening falciparum malaria the benefit may outweigh the risk; parenteral artesunate is generally preferred. Use only under specialist supervision.",
+  "lact": "Limited data; small amounts may be excreted in milk. Avoid unless clearly necessary; if used for severe malaria, treatment of the mother should not be withheld.",
+  "renal": "No specific dose adjustment is established. Arteether is highly lipophilic and hepatically metabolized; use with general caution and monitor clinically in renal impairment.",
+  "hepatic": "Metabolized in the liver (partly via CYP enzymes to dihydroartemisinin). Use with caution in significant hepatic impairment as clearance may be altered; monitor liver function clinically.",
+  "interactions": {
+    "major": ["Other QT-prolonging antimalarials (e.g., halofantrine, high-dose mefloquine) - additive arrhythmia risk", "Other potentially neurotoxic agents - caution given animal neurotoxicity signal"],
+    "moderate": ["CYP3A4/2B6 inducers (rifampicin, efavirenz, anticonvulsants) - may reduce levels", "CYP inhibitors - may increase exposure", "Mefloquine - commonly used as partner but monitor"],
+    "minor": ["Other antimalarials used as partner drugs - generally intended combination"],
+    "food": "Not applicable; administered by intramuscular injection.",
+    "alcohol": "Avoid; possible additive central nervous system effects.",
+    "diagnostics": "Monitor parasite density (blood smear); no characteristic assay interference."
+  },
+  "se": {
+    "common": ["Injection-site pain or induration", "Headache", "Dizziness", "Nausea", "Transient fever"],
+    "serious": ["Neurotoxicity (gait/coordination, brainstem signs - mainly high-dose animal data)", "Cardiac conduction changes (QT/PR prolongation)", "Hypersensitivity reactions", "Recrudescence if used as monotherapy"],
+    "rare": ["Hemolysis / post-artemisinin delayed hemolysis", "Hepatic enzyme elevation", "Bradycardia"],
+    "emergency": ["Anaphylaxis", "Serious cardiac arrhythmia", "Acute neurological deterioration"]
+  },
+  "monitoring": [
+    "Parasitemia (repeat blood smears) and clinical response",
+    "Neurological status, especially balance, hearing, and brainstem function",
+    "Vital signs and cardiac rhythm (QT/PR)",
+    "Hemoglobin for delayed hemolysis after artemisinin therapy",
+    "Watch for recrudescence; ensure partner drug given"
+  ],
+  "counsel": [
+    "Given as a deep injection into muscle once daily for three days",
+    "Complete the full course and the follow-on oral antimalarial to prevent relapse/recrudescence",
+    "Report dizziness, unsteadiness, hearing changes, or palpitations promptly",
+    "Return immediately if fever recurs after treatment",
+    "Inform the clinician if pregnant or breastfeeding"
+  ],
+  "pk": [
+    ["Onset", "Rapid antiparasitic action; parasite clearance over hours to days"],
+    ["Peak", "Delayed and variable IM absorption - plasma peak over several hours"],
+    ["Half-life", "Parent arteether long/variable (depot IM); active dihydroartemisinin short (~1 hour)"],
+    ["Duration", "Short effective antimalarial action - 3-day course needed plus partner drug"],
+    ["Storage", "Store below 30 C, protected from light; oily injection - do not freeze"]
+  ],
+  "pearls": [
+    "Not FDA-approved; record pending clinical review.",
+    "WHO recommends parenteral artesunate as first-line for severe malaria; arteether is an alternative where artesunate is unavailable",
+    "Short-acting - must be combined with a partner antimalarial to prevent recrudescence",
+    "Neurotoxicity concern is mainly from high-dose animal studies; deep IM only at recommended doses",
+    "Highly lipophilic oil-based depot injection - erratic IM absorption can affect efficacy in severe disease",
+    "Marketed in India (e.g., as E-Mal); dosing from manufacturer/WHO sources"
+  ],
+  "missed": "Doses are given by a healthcare provider; if a scheduled daily dose is delayed, give it as soon as possible and continue the once-daily schedule to complete the 3-day course. Do not give two doses together.",
+  "overdose": "Overdose may cause neurological toxicity (ataxia, brainstem signs), cardiac conduction disturbance, and gastrointestinal effects. There is no specific antidote; management is supportive with cardiac and neurological monitoring, airway/seizure control as needed, and supportive care. Discontinue further dosing and seek expert advice.",
+  "refs": [
+    ["WHO Guidelines for the Treatment of Malaria (severe malaria; artemisinin derivatives)", "https://www.who.int/publications/i/item/guidelines-for-malaria"],
+    ["Arteether (artemotil) - manufacturer prescribing information / E-Mal (Themis/India)", "https://cdsco.gov.in/"],
+    ["WHO Model Formulary - antimalarial medicines (artemisinin derivatives)", "https://www.who.int/teams/health-product-policy-and-standards/inn"],
+    ["Brewer TG et al. Neurotoxicity in animals due to arteether and artemether. Trans R Soc Trop Med Hyg. 1994", "https://pubmed.ncbi.nlm.nih.gov/8053015/"]
+  ]
+}

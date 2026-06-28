@@ -1,0 +1,115 @@
+{
+  "generic": "Eletriptan (Eletriptan hydrobromide)",
+  "cls": "Selective serotonin 5-HT1B/1D receptor agonist (triptan)",
+  "pharm": "Antimigraine agent",
+  "tags": ["triptan", "migraine", "5-HT1B/1D agonist", "acute migraine", "headache", "abortive"],
+  "quick": [
+    ["Adult dose", "20 mg or 40 mg orally at onset; may repeat after >=2 hours if needed; max single dose 40 mg, max 80 mg/day"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Limited data; use only if clearly needed"],
+    ["Lactation", "Excreted in milk; consider avoiding breastfeeding for 24 hours after a dose"],
+    ["Renal", "No dose adjustment in mild-moderate impairment; not recommended in severe impairment"],
+    ["Hepatic", "Mild-moderate: no adjustment; severe impairment: not recommended"],
+    ["Alcohol", "No direct interaction; alcohol may trigger migraine"],
+    ["Monitoring", "Cardiovascular status, blood pressure, response/medication-overuse headache"]
+  ],
+  "summary": "Eletriptan is an oral triptan for acute treatment of migraine (with or without aura) in adults. As a selective 5-HT1B/1D agonist it constricts cranial vessels and inhibits release of vasoactive neuropeptides in the trigeminal system. It is contraindicated in ischemic or vasospastic cardiovascular, cerebrovascular, and peripheral vascular disease, uncontrolled hypertension, and within 24 hours of ergots or another triptan. Eletriptan is a CYP3A4 substrate: it must not be used within 72 hours of potent CYP3A4 inhibitors, which markedly increase its exposure.",
+  "indications": [
+    "Acute treatment of migraine attacks, with or without aura, in adults"
+  ],
+  "dosage": [
+    {"c": "Acute migraine", "r": "Adult", "d": "20 mg or 40 mg as a single dose at onset (40 mg more effective); if headache improves then recurs, a second dose may be taken after at least 2 hours", "t": "At onset; repeat once after >=2 h if needed", "n": "Max single dose 40 mg; max 80 mg in 24 hours; do not repeat if no response to first dose"},
+    {"c": "Acute migraine", "r": "Severe renal or severe hepatic impairment", "d": "Not recommended", "t": "-", "n": "Avoid due to lack of data / increased exposure"},
+    {"c": "Acute migraine", "r": "Within 72 h of potent CYP3A4 inhibitor", "d": "Do not use", "t": "-", "n": "Markedly increased eletriptan levels"}
+  ],
+  "admin": [
+    "Take as soon as possible after onset of migraine headache",
+    "Swallow tablet whole; may be taken with or without food",
+    "A second dose may be taken after at least 2 hours if the headache returns, but not if there was no response to the first dose",
+    "Do not exceed 80 mg in 24 hours"
+  ],
+  "moa": "Eletriptan binds with high affinity to 5-HT1B and 5-HT1D receptors (and 5-HT1F). Agonism at vascular 5-HT1B receptors constricts dilated intracranial arteries, while 5-HT1D agonism on trigeminal sensory nerves inhibits release of pro-inflammatory vasoactive neuropeptides (such as CGRP) and reduces nociceptive transmission, relieving the vasodilation and neurogenic inflammation underlying migraine.",
+  "contra": {
+    "absolute": [
+      "Ischemic coronary artery disease, coronary artery vasospasm (including Prinzmetal angina), or other significant heart disease",
+      "History of stroke or transient ischemic attack",
+      "Peripheral vascular disease including ischemic bowel disease",
+      "Uncontrolled hypertension",
+      "Hemiplegic or basilar migraine",
+      "Use within 24 hours of an ergotamine/ergot-type drug or another 5-HT1 agonist (triptan)",
+      "Use within 72 hours of a potent CYP3A4 inhibitor (ketoconazole, itraconazole, nefazodone, clarithromycin, ritonavir, nelfinavir)",
+      "Known hypersensitivity to eletriptan"
+    ],
+    "relative": [
+      "Cardiovascular risk factors (evaluate before use; consider first-dose supervision)",
+      "Severe renal or hepatic impairment (not recommended)",
+      "Concurrent serotonergic drugs (SSRIs/SNRIs - serotonin syndrome risk)"
+    ],
+    "monitor": [
+      "Cardiovascular evaluation in patients with risk factors",
+      "Blood pressure",
+      "Signs of serotonin syndrome"
+    ]
+  },
+  "preg": "There are limited data on use in pregnant women. Eletriptan should be used during pregnancy only if the potential benefit justifies the potential risk to the fetus.",
+  "lact": "Eletriptan is excreted in human milk. Caution should be exercised; consider avoiding breastfeeding for about 24 hours after a dose to minimize infant exposure.",
+  "renal": "No dosage adjustment is needed in mild to moderate renal impairment (blood pressure may rise). Eletriptan has not been studied in and is not recommended for patients with severe renal impairment.",
+  "hepatic": "No dosage adjustment is needed in mild to moderate hepatic impairment. Eletriptan has not been evaluated in severe hepatic impairment and is not recommended in these patients.",
+  "interactions": {
+    "major": [
+      "Potent CYP3A4 inhibitors (ketoconazole, itraconazole, nefazodone, clarithromycin, ritonavir, nelfinavir) - do not use eletriptan within 72 hours",
+      "Ergot-containing/ergot-type medications - do not use within 24 hours (additive vasospasm)",
+      "Other 5-HT1 agonists/triptans - do not use within 24 hours (additive vasospasm)"
+    ],
+    "moderate": [
+      "SSRIs/SNRIs (risk of serotonin syndrome)",
+      "MAO inhibitors (theoretical)"
+    ],
+    "minor": [
+      "Beta-blockers (minor pharmacokinetic effects)"
+    ],
+    "food": "No clinically significant food interaction",
+    "alcohol": "No direct pharmacologic interaction; alcohol can independently trigger migraine",
+    "diagnostics": "No characteristic laboratory test interference"
+  },
+  "se": {
+    "common": ["Asthenia/weakness", "Dizziness", "Somnolence", "Nausea", "Chest tightness/pressure", "Paresthesia", "Dry mouth"],
+    "serious": ["Myocardial ischemia/infarction and serious arrhythmias", "Coronary artery vasospasm", "Cerebrovascular events", "Serotonin syndrome", "Hypertensive crisis", "Medication-overuse headache"],
+    "rare": ["Peripheral vascular ischemia / Raynaud phenomenon", "Gastrointestinal ischemic events (ischemic colitis)", "Hypersensitivity reactions including angioedema"],
+    "emergency": ["Chest pain/pressure with cardiac features", "Signs of stroke", "Severe abdominal pain (bowel ischemia)", "Serotonin syndrome (agitation, hyperthermia, clonus)"]
+  },
+  "monitoring": [
+    "Cardiovascular evaluation before treatment in patients with risk factors",
+    "Blood pressure (transient increases can occur)",
+    "Frequency of use (medication-overuse headache if used on >=10 days/month)",
+    "Serotonergic symptoms when combined with SSRIs/SNRIs"
+  ],
+  "counsel": [
+    "Take at the first sign of a migraine headache",
+    "Do not take more than 80 mg in one day, and do not repeat a dose that did not work",
+    "Do not use within 24 hours of another triptan or ergot medicine",
+    "Avoid for 3 days after taking strong antifungal or certain antibiotic/antiviral medicines",
+    "Stop and seek care for chest pain, pressure, or tightness, or signs of stroke",
+    "Frequent use can cause rebound (medication-overuse) headaches"
+  ],
+  "pk": [
+    ["Onset", "Headache relief often begins within 1-2 hours"],
+    ["Peak", "Peak plasma concentration about 1.5-2 hours after dosing"],
+    ["Half-life", "Approximately 4 hours"],
+    ["Duration", "Sufficient for a single attack; repeat allowed after >=2 hours"],
+    ["Storage", "Store at controlled room temperature 20-25 C"]
+  ],
+  "pearls": [
+    "Higher 5-HT1B/1D affinity and good efficacy; 40 mg is more effective than 20 mg with modestly more side effects",
+    "Strong CYP3A4 substrate - the 72-hour rule with potent inhibitors is a key safety point that distinguishes eletriptan from some other triptans",
+    "Do not repeat a dose that produced no response to the first dose",
+    "Use only after a clear migraine diagnosis; not for prophylaxis, hemiplegic/basilar migraine, or cluster headache",
+    "Limit treatment days to reduce medication-overuse headache"
+  ],
+  "missed": "Eletriptan is taken only as needed for an acute migraine, so there is no fixed schedule and no missed dose. Take it when a migraine starts, allowing at least 2 hours before any repeat dose and not exceeding 80 mg in 24 hours.",
+  "overdose": "Overdose may produce hypertension and cardiovascular symptoms. There is no specific antidote; provide supportive care, monitor for at least 20 hours or while symptoms persist (the elimination half-life is about 4 hours but effects can be prolonged), and treat hypertension and vasospastic complications as needed. The effect of dialysis on eletriptan clearance is unknown.",
+  "refs": [
+    ["FDA Prescribing Information - Relpax (eletriptan hydrobromide)", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Eletriptan", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22eletriptan%20hydrobromide%22"]
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "generic": "Verapamil",
+  "cls": "Non-dihydropyridine calcium channel blocker",
+  "pharm": "Antianginal / antiarrhythmic / antihypertensive agent",
+  "tags": ["calcium channel blocker", "angina", "arrhythmia", "atrial fibrillation", "hypertension", "SVT"],
+  "quick": [
+    ["Adult dose", "IR 80-120 mg PO three times daily (max 480 mg/day)"],
+    ["Meal", "With or without food; avoid grapefruit juice"],
+    ["Pregnancy", "Use only if clearly needed (former Category C)"],
+    ["Lactation", "Discontinue nursing during use"],
+    ["Renal", "Use cautiously; not removed by hemodialysis"],
+    ["Hepatic", "Reduce to ~30% of normal dose"],
+    ["Alcohol", "Avoid; verapamil raises and prolongs alcohol levels"],
+    ["Monitoring", "BP, HR, ECG (PR interval), LFTs"]
+  ],
+  "summary": "Verapamil is a non-dihydropyridine calcium channel blocker used for angina, supraventricular arrhythmias (PSVT, atrial fibrillation/flutter rate control), and hypertension. Immediate-release dosing is typically 80-120 mg three times daily, not to exceed 480 mg/day. Its negative inotropic and dromotropic effects limit use in heart failure and AV block, and it raises levels of digoxin and CYP3A4-substrate statins.",
+  "indications": [
+    "Angina at rest including vasospastic (Prinzmetal's variant) and unstable (crescendo, pre-infarction) angina",
+    "Chronic stable angina (classic effort-associated angina)",
+    "Control of ventricular rate (with digitalis) in chronic atrial flutter and/or atrial fibrillation",
+    "Prophylaxis of repetitive paroxysmal supraventricular tachycardia (PSVT)",
+    "Essential hypertension"
+  ],
+  "dosage": [
+    {"c": "Angina (adult)", "r": "Standard IR", "d": "80 mg to 120 mg three times a day; 40 mg three times a day if increased response expected (hepatic dysfunction, elderly)", "t": "Three times daily", "n": "Titrate based on efficacy/safety assessed ~8 h after dosing"},
+    {"c": "Atrial fibrillation/flutter rate control (digitalized)", "r": "Standard IR", "d": "240 to 320 mg/day in divided doses", "t": "3-4 times daily", "n": "Maximum effects apparent within first 48 hours"},
+    {"c": "PSVT prophylaxis (non-digitalized)", "r": "Standard IR", "d": "240 to 480 mg/day in divided doses", "t": "3-4 times daily", "n": "Maximum effects apparent within first 48 hours"},
+    {"c": "Essential hypertension (adult)", "r": "Standard IR", "d": "Usual initial monotherapy 80 mg three times a day (240 mg/day); doses of 360 and 480 mg/day used", "t": "Three times daily", "n": "No added effect beyond 360 mg/day; start 40 mg TID in elderly/small stature"},
+    {"c": "Maximum (all indications)", "r": "Ceiling", "d": "Do not exceed 480 mg/day", "t": "Divided", "n": "Half-life increases with chronic dosing; maximum response may be delayed"},
+    {"c": "Hepatic impairment", "r": "Adjusted", "d": "Approximately 30% of the normal daily dose", "t": "Divided", "n": "Half-life prolonged to ~14-16 h; monitor PR interval"}
+  ],
+  "admin": [
+    "Individualize dose by titration; do not exceed 480 mg/day",
+    "May be taken with or without food",
+    "For immediate-release tablets, give in divided doses (three to four times daily)",
+    "Avoid grapefruit juice, which increases verapamil plasma levels",
+    "Reduce digoxin maintenance and digitalization doses when starting verapamil"
+  ],
+  "moa": "Verapamil is a calcium ion influx inhibitor (slow-channel blocker) that modulates the influx of ionic calcium across the cell membrane of arterial smooth muscle and of cardiac conductile and contractile cells. It dilates coronary and peripheral arteries (reducing afterload and relieving spasm) and, by decreasing calcium influx through the AV node, prolongs the AV nodal effective refractory period and slows AV conduction, slowing ventricular rate in atrial fibrillation/flutter and terminating PSVT.",
+  "contra": {
+    "absolute": ["Severe left ventricular dysfunction", "Hypotension (systolic <90 mm Hg) or cardiogenic shock", "Sick sinus syndrome (unless functioning pacemaker)", "Second- or third-degree AV block (unless functioning pacemaker)", "Atrial flutter/fibrillation with an accessory bypass tract (WPW, Lown-Ganong-Levine)", "Known hypersensitivity to verapamil"],
+    "relative": ["Mild to moderate heart failure or any ventricular dysfunction with concurrent beta-blocker", "Hepatic impairment", "Hypertrophic cardiomyopathy (IHSS)", "Attenuated neuromuscular transmission (Duchenne's, myasthenia gravis)"],
+    "monitor": ["Concomitant beta-adrenergic blockers", "Concomitant digoxin", "Renal impairment", "Concomitant CYP3A4-substrate statins"]
+  },
+  "preg": "Former Pregnancy Category C. Animal reproduction studies revealed no teratogenicity, but high multiples were embryocidal and retarded fetal growth (likely from maternal effects). There are no adequate well-controlled studies in pregnant women; use during pregnancy only if clearly needed. Verapamil crosses the placenta and is detectable in umbilical vein blood at delivery.",
+  "lact": "Verapamil is excreted in human milk. Because of the potential for adverse reactions in nursing infants, nursing should be discontinued while verapamil is administered.",
+  "renal": "About 70% of a dose is excreted as metabolites in urine. Verapamil is not removed by hemodialysis. Administer cautiously to patients with impaired renal function and monitor for abnormal PR-interval prolongation or other signs of overdose.",
+  "hepatic": "Verapamil is highly metabolized by the liver; severe liver dysfunction prolongs the elimination half-life to about 14 to 16 hours. Give approximately 30% of the normal daily dose and monitor closely for PR-interval prolongation and other excessive pharmacologic effects.",
+  "interactions": {
+    "major": ["Beta-blockers - additive negative effects on heart rate, AV conduction, and contractility; avoid in AV conduction abnormalities or depressed LV function", "Digoxin - chronic verapamil raises serum digoxin 50-75% in first week; reduce digoxin dose to avoid toxicity", "Simvastatin/lovastatin (CYP3A4-substrate statins) - myopathy/rhabdomyolysis risk; limit simvastatin to 10 mg/day and lovastatin to 40 mg/day", "Disopyramide - avoid within 48 h before or 24 h after verapamil; flecainide - additive negative inotropy and AV conduction prolongation"],
+    "moderate": ["CYP3A4 inhibitors (erythromycin, ritonavir) - raise verapamil levels; CYP3A4 inducers (rifampin, phenobarbital) - lower verapamil levels", "Other CYP3A4 substrates (atorvastatin) - may require lower starting/maintenance doses", "Carbamazepine - verapamil raises levels (diplopia, ataxia, dizziness)", "Cyclosporine, theophylline - increased serum levels", "Lithium - altered levels and possible neurotoxicity", "Clonidine - sinus bradycardia; monitor heart rate", "Antihypertensives and alpha-blockers (prazosin) - additive BP lowering", "Neuromuscular blockers and inhalation anesthetics - potentiated effects/cardiovascular depression", "Telithromycin - hypotension and bradyarrhythmias"],
+    "minor": ["Aspirin - increased bleeding times beyond aspirin alone", "Cimetidine - variable effect on verapamil clearance", "Nitrates - beneficial interaction, no undesirable effects", "Quinidine - hypotension in IHSS; increased quinidine levels"],
+    "food": "Grapefruit juice may increase verapamil plasma levels; otherwise may be taken with or without food.",
+    "alcohol": "Verapamil may increase blood alcohol concentrations and prolong its effects.",
+    "diagnostics": "May prolong the PR interval on ECG and elevate liver transaminases, alkaline phosphatase, and bilirubin."
+  },
+  "se": {
+    "common": ["Constipation (7.3%)", "Dizziness (3.3%)", "Nausea (2.7%)", "Hypotension (2.5%)", "Headache (2.2%)", "Peripheral edema (1.9%)"],
+    "serious": ["Congestive heart failure / pulmonary edema (1.8%)", "AV block (1.2%; 2nd/3rd degree 0.8%)", "Symptomatic bradycardia (HR <50/min, 1.4%)", "Elevated liver enzymes / hepatocellular injury"],
+    "rare": ["Non-obstructive paralytic ileus (reversible)", "Gingival hyperplasia", "Gynecomastia, galactorrhea/hyperprolactinemia", "Rapid ventricular response/fibrillation in accessory bypass tract"],
+    "emergency": ["Complete (third-degree) AV block or asystole", "Severe hypotension / cardiogenic shock", "Acute pulmonary edema in severe LV dysfunction", "Stevens-Johnson syndrome / erythema multiforme"]
+  },
+  "monitoring": [
+    "Blood pressure and heart rate",
+    "ECG for PR-interval prolongation and AV block, especially during early titration",
+    "Periodic liver function tests",
+    "Serum digoxin levels when used concomitantly",
+    "Signs of worsening heart failure in patients with ventricular dysfunction"
+  ],
+  "counsel": [
+    "Take exactly as prescribed; do not stop abruptly without medical advice",
+    "Constipation is common - increase fiber and fluids as advised",
+    "Avoid grapefruit juice and limit alcohol",
+    "Report swelling, shortness of breath, slow heartbeat, fainting, or dizziness",
+    "Inform all providers you take verapamil, especially before starting a statin or if taking digoxin"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within first week"],
+    ["Peak", "Plasma 1-2 hours after oral dose"],
+    ["Half-life", "Single-dose 2.8-7.4 h; chronic 4.5-12 h"],
+    ["Duration", "Dosed three to four times daily (IR)"],
+    ["Storage", "Store at controlled room temperature"]
+  ],
+  "pearls": [
+    "Negative inotrope - avoid in HFrEF (EF <30%) and with beta-blockers in LV dysfunction",
+    "Raises serum digoxin 50-75%; reduce digoxin dose",
+    "Limit simvastatin to 10 mg/day and lovastatin to 40 mg/day when combined",
+    "Constipation is the most common adverse effect",
+    "Contraindicated in atrial fibrillation with WPW - can accelerate ventricular response"
+  ],
+  "missed": "Take the missed dose as soon as remembered; if it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not take a double dose to make up for a missed one.",
+  "overdose": "Treat all verapamil overdoses as serious and observe at least 48 hours, preferably under continuous hospital care (delayed effects with extended-release). Overdose causes hypotension and bradycardia. Treatment is supportive: parenteral calcium solutions (e.g., calcium chloride), beta-adrenergic stimulation, vasopressors, atropine, and cardiac pacing for high-degree AV block; treat asystole with CPR. Verapamil cannot be removed by hemodialysis.",
+  "refs": [
+    ["FDA Verapamil Hydrochloride Tablets Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22verapamil+hydrochloride%22"],
+    ["FDA DailyMed - Verapamil", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

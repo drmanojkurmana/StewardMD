@@ -1,0 +1,102 @@
+{
+  "generic": "Artemether",
+  "cls": "Artemisinin-derivative antimalarial",
+  "pharm": "Lipophilic artemisinin derivative whose endoperoxide bridge is activated by parasite heme iron to generate free radicals that alkylate parasite proteins and damage membranes, producing rapid killing of asexual Plasmodium stages and reduction of parasite biomass and gametocytes.",
+  "tags": ["Antimalarial", "Artemisinin derivative", "Intramuscular", "WHO essential medicine"],
+  "quick": [
+    ["Adult dose", "Severe malaria (WHO): 3.2 mg/kg IM on day 1, then 1.6 mg/kg IM once daily"],
+    ["Meal", "Parenteral use; oral combination forms taken with fatty food"],
+    ["Pregnancy", "Avoid in first trimester unless no alternative; use later trimesters if needed for severe malaria"],
+    ["Lactation", "Limited data; generally considered compatible when treatment is needed"],
+    ["Renal", "No specific adjustment (largely hepatic clearance)"],
+    ["Hepatic", "Use caution in severe impairment; hepatically metabolized"],
+    ["Alcohol", "Avoid during illness"],
+    ["Monitoring", "Parasitemia and clinical response; switch to oral ACT once tolerated"]
+  ],
+  "summary": "Artemether is a fast-acting artemisinin derivative used as antimalarial therapy. WHO recommends parenteral (intramuscular) artemether as an alternative to artesunate for severe Plasmodium falciparum malaria when artesunate is unavailable, always completing treatment with a full course of an oral artemisinin-based combination therapy (ACT) to prevent recrudescence. Artemether monotherapy is NOT FDA-approved; in the United States it is marketed only as the fixed-dose combination artemether/lumefantrine (Coartem), and WHO discourages oral artemisinin monotherapy to limit resistance.",
+  "indications": [
+    "Treatment of severe Plasmodium falciparum malaria (parenteral, as a WHO alternative to artesunate when artesunate is not available)",
+    "Treatment of uncomplicated malaria only as part of an artemisinin-based combination therapy (e.g., artemether/lumefantrine), not as monotherapy"
+  ],
+  "dosage": [
+    {"c": "Severe malaria (WHO, IM)", "r": "Adults and children", "d": "3.2 mg/kg IM as a loading dose on day 1, then 1.6 mg/kg IM once daily", "t": "Until able to take oral therapy (minimum 24 h), then complete a full oral ACT course", "n": "Given into the anterior thigh; absorption may be erratic in severe disease"},
+    {"c": "Uncomplicated malaria", "r": "Adults and children", "d": "Use the fixed-dose artemether/lumefantrine combination per body-weight bands", "t": "6 doses over 3 days", "n": "Do not use artemether alone (monotherapy promotes resistance)"},
+    {"c": "Step-down after parenteral therapy", "r": "Adults and children", "d": "Complete a full 3-day course of an oral ACT", "t": "Once oral intake tolerated", "n": "Essential to prevent recrudescence"}
+  ],
+  "admin": [
+    "Administer by deep intramuscular injection into the anterior thigh for severe malaria",
+    "Always follow parenteral artemether with a full course of an oral artemisinin-based combination therapy once the patient can swallow",
+    "Do not use artemether as oral monotherapy; use only within an approved combination to limit resistance",
+    "Take oral artemether/lumefantrine with food or a fatty drink (e.g., milk) to improve absorption",
+    "Monitor parasite density and clinical response during treatment"
+  ],
+  "moa": "Artemether contains an endoperoxide bridge that is cleaved by intraparasitic heme/ferrous iron, generating carbon-centered free radicals and reactive intermediates. These alkylate and damage essential parasite proteins (including PfATP6 and other targets) and membranes, causing rapid death of the asexual blood stages of Plasmodium and a sharp fall in parasite biomass. It is converted to the active metabolite dihydroartemisinin. Because of its short half-life, it must be paired with a longer-acting partner drug for cure.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity to artemether or other artemisinin derivatives"
+    ],
+    "relative": [
+      "First trimester of pregnancy (unless no suitable alternative for severe malaria)",
+      "Known QT prolongation or use of QT-prolonging drugs (especially with the lumefantrine combination)",
+      "Severe hepatic impairment"
+    ],
+    "monitor": [
+      "Parasitemia and clinical response",
+      "ECG/QT when used with lumefantrine in at-risk patients",
+      "Full blood count (post-artemisinin delayed hemolysis)"
+    ]
+  },
+  "preg": "Avoid in the first trimester unless there is no suitable alternative, because of limited safety data and animal embryotoxicity. In the second and third trimesters, parenteral artemether (or artesunate) is used for severe malaria because the benefit clearly outweighs the risk; untreated severe malaria is life-threatening to mother and fetus.",
+  "lact": "Limited data on artemether in human milk; amounts are expected to be small. It is generally considered compatible with breastfeeding when treatment is indicated; weigh benefit against the lack of complete data.",
+  "renal": "No specific dose adjustment is recommended; artemether is cleared largely by hepatic metabolism rather than renal excretion.",
+  "hepatic": "Artemether is extensively metabolized in the liver to dihydroartemisinin. Use with caution in severe hepatic impairment and monitor accordingly.",
+  "interactions": {
+    "major": [
+      "QT-prolonging drugs and CYP3A4 inhibitors (especially when combined with lumefantrine - additive QT risk and raised levels)",
+      "Halofantrine and other antimalarials that prolong QT (avoid concurrent use)"
+    ],
+    "moderate": [
+      "Strong CYP3A4 inducers - rifampicin, efavirenz, carbamazepine (reduce artemether/dihydroartemisinin levels)",
+      "CYP2D6 substrates with narrow index (when used with lumefantrine)",
+      "Other drugs metabolized by CYP3A4"
+    ],
+    "minor": [],
+    "food": "Oral artemether/lumefantrine should be taken with food or a fatty drink to enhance absorption.",
+    "alcohol": "Avoid during acute illness.",
+    "diagnostics": "Monitor ECG/QT where lumefantrine and other QT factors coexist."
+  },
+  "se": {
+    "common": ["Headache", "Dizziness", "Anorexia", "Nausea/vomiting", "Abdominal pain", "Injection-site discomfort (IM)", "Sleep disturbance"],
+    "serious": ["Post-artemisinin delayed hemolytic anemia", "QT prolongation (mainly with lumefantrine)", "Hypersensitivity reactions", "Neutropenia"],
+    "rare": ["Hepatotoxicity", "Severe hypersensitivity / anaphylaxis", "Reticulocytopenia"],
+    "emergency": ["Anaphylaxis", "Severe delayed hemolysis", "Serious arrhythmia from QT prolongation"]
+  },
+  "monitoring": ["Parasite count and clinical response during and after treatment", "Full blood count after treatment of severe/high-parasitemia malaria (delayed hemolysis can occur weeks later)", "ECG/QT when combined with lumefantrine in at-risk patients", "Completion of a full oral ACT course to prevent recrudescence"],
+  "counsel": [
+    "Always complete the full prescribed antimalarial course, including the follow-on oral combination, even after you feel better",
+    "Take oral artemether/lumefantrine with food or a fatty drink such as milk",
+    "Return promptly if fever returns or you feel unwell weeks after treatment (delayed anemia can occur)",
+    "Tell your doctor about heart-rhythm problems or other medicines that affect the heart",
+    "Do not take artemether on its own to treat malaria"
+  ],
+  "pk": [
+    ["Onset", "Rapid reduction in parasitemia within hours"],
+    ["Peak", "IM peak delayed and variable (several hours); oral peak ~2 hours"],
+    ["Half-life", "Short, approximately 2-3 hours (active metabolite dihydroartemisinin ~1-2 hours)"],
+    ["Duration", "Short-acting; requires a longer-acting partner drug for cure"],
+    ["Storage", "Store below 30 C, protected from light; per manufacturer/WHO product labeling"]
+  ],
+  "pearls": [
+    "NOT FDA-approved as monotherapy; in the US available only as the fixed combination artemether/lumefantrine (Coartem). WHO discourages oral artemisinin monotherapy to prevent resistance - this record is based on WHO guidelines and the SmPC/EMA",
+    "WHO recommends parenteral artemether as an alternative to artesunate for severe falciparum malaria when artesunate is unavailable",
+    "Always follow parenteral artemisinin therapy with a complete oral ACT course to prevent recrudescence",
+    "Post-artemisinin delayed hemolytic anemia can appear 1-4 weeks after treatment - check a follow-up blood count",
+    "Short half-life means it must be partnered with a longer-acting drug; take the oral combination with fatty food"
+  ],
+  "missed": "For severe malaria, dosing is supervised in hospital and timing is managed by clinicians. For the oral combination, take the missed dose as soon as remembered and complete the full course; seek advice if multiple doses are missed.",
+  "overdose": "Experience is limited. Overdose may cause exaggerated adverse effects including neurological symptoms and, with lumefantrine, QT prolongation. There is no specific antidote; provide symptomatic and supportive care with cardiac and hematologic monitoring.",
+  "refs": [
+    ["WHO Guidelines for malaria (severe malaria, artemisinin-based therapy)", "https://www.who.int/teams/global-malaria-programme/guidelines-for-malaria"],
+    ["EMA / SmPC and WHO Model List of Essential Medicines - artemether", "https://list.essentialmeds.org/"]
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "generic": "Polymyxin B sulfate",
+  "cls": "Polymyxin (cyclic polypeptide) antibiotic",
+  "pharm": "Antibacterial (gram-negative)",
+  "tags": ["antibiotic", "polymyxin", "gram-negative", "MDR", "Pseudomonas"],
+  "quick": [
+    ["Adult dose", "15,000-25,000 units/kg/day IV in divided doses (max 25,000 units/kg/day)"],
+    ["Meal", "Parenteral - not applicable"],
+    ["Pregnancy", "Use only if clearly needed; safety not established"],
+    ["Lactation", "Caution; data limited"],
+    ["Renal", "Reduce dose; major dose-limiting nephrotoxicity"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Not applicable (parenteral)"],
+    ["Monitoring", "Renal function, neuro status, urine output, BUN"]
+  ],
+  "summary": "Polymyxin B is a last-resort cyclic polypeptide antibiotic active against multidrug-resistant gram-negative bacilli including Pseudomonas aeruginosa. Dosed by body weight IV/IM with a maximum of 25,000 units/kg/day. It carries a boxed warning for nephrotoxicity and neurotoxicity; parenteral use should be limited to hospitalized patients under supervision.",
+  "indications": [
+    "Acute infections caused by susceptible strains of Pseudomonas aeruginosa (UTI, meningeal, bloodstream)",
+    "Serious infections caused by susceptible H. influenzae (meningeal), E. coli (urinary), Klebsiella, Enterobacter and other gram-negative organisms when less toxic drugs are ineffective or contraindicated",
+    "Ophthalmic and subconjunctival infections caused by susceptible Pseudomonas",
+    "Topical/local use in combination products for skin and eye infections"
+  ],
+  "dosage": [
+    {"c": "IV adults and children, normal renal function", "r": "Standard", "d": "15,000-25,000 units/kg/day; max 25,000 units/kg/day", "t": "Continuous infusion or divided q12h", "n": "Dissolve 500,000 units in 300-500 mL D5W"},
+    {"c": "IM adults and children", "r": "Alternative", "d": "25,000-30,000 units/kg/day divided q4-6h", "t": "Every 4-6 h", "n": "Not routine - severe injection-site pain"},
+    {"c": "Intrathecal (meningitis, >2 yr)", "r": "CNS", "d": "50,000 units once daily x3-4 days, then alternate days", "t": "Once daily then alternate days", "n": "Continue 2 weeks after CSF normal/cultures negative"},
+    {"c": "Infants (normal renal function)", "r": "Pediatric", "d": "Up to 40,000 units/kg/day", "t": "Divided doses", "n": "Higher weight-based dose tolerated"},
+    {"c": "Renal impairment", "r": "Adjusted", "d": "Reduce dose below 15,000 units/kg/day per degree of impairment", "t": "Adjusted", "n": "Dose-limiting nephrotoxicity"}
+  ],
+  "admin": [
+    "Reserve parenteral therapy for hospitalized patients under constant physician supervision",
+    "For IV, dissolve 500,000 units in 300-500 mL of 5% dextrose injection and infuse over ~60-90 minutes (continuous drip)",
+    "For intrathecal use, dissolve in preservative-free sodium chloride 0.9%",
+    "Avoid concurrent or sequential nephrotoxic and neurotoxic agents and neuromuscular blockers",
+    "Reconstituted solutions should be refrigerated and discarded after 72 hours"
+  ],
+  "moa": "Polymyxin B is a cationic cyclic polypeptide that binds to the lipid A portion of lipopolysaccharide in the outer membrane of gram-negative bacteria. This disrupts membrane integrity, increasing permeability, causing leakage of intracellular components and bactericidal cell death. It also binds and neutralizes circulating endotoxin.",
+  "contra": {
+    "absolute": ["Known hypersensitivity to polymyxin B"],
+    "relative": ["Significant renal impairment (without dose adjustment)", "Concurrent neuromuscular blocking agents", "Myasthenia gravis", "Concurrent nephrotoxic/neurotoxic drugs"],
+    "monitor": ["Renal function and urine output", "Neuromuscular and neurotoxic signs", "Patients receiving curariform muscle relaxants"]
+  },
+  "preg": "Safety in pregnancy has not been established; use only if the potential benefit justifies the potential risk to the fetus. Animal reproduction studies are inadequate.",
+  "lact": "Limited data on excretion in human milk; use with caution during breastfeeding and weigh benefit against potential infant risk.",
+  "renal": "Nephrotoxicity is the major dose-limiting toxicity. Reduce the dose in renal impairment and in patients with nitrogen retention. Albuminuria, cellular casts and rising BUN with diminishing urine output indicate the need to discontinue therapy.",
+  "hepatic": "No specific hepatic dose adjustment; polymyxin B is eliminated largely by non-renal mechanisms but renal clearance still governs accumulation.",
+  "interactions": {
+    "major": ["Other nephrotoxic agents (aminoglycosides, amphotericin B, vancomycin, cisplatin) - additive nephrotoxicity", "Neuromuscular blocking agents and curariform drugs - prolonged respiratory paralysis/apnea"],
+    "moderate": ["Anesthetics - enhanced neuromuscular blockade", "Other neurotoxic drugs - additive neurotoxicity"],
+    "minor": ["Sodium-containing solutions - no significant interaction"],
+    "food": "Not applicable (parenteral administration).",
+    "alcohol": "Not applicable (parenteral administration).",
+    "diagnostics": "Monitor renal function tests; may cause albuminuria and casts in urine."
+  },
+  "se": {
+    "common": ["Nephrotoxicity (albuminuria, cylindruria, azotemia)", "Neurotoxicity (dizziness, facial flushing, paresthesias)", "Pain and irritation at injection site", "Fever", "Drug fever"],
+    "serious": ["Acute renal failure", "Respiratory paralysis (neuromuscular blockade)", "Meningeal irritation with intrathecal use"],
+    "rare": ["Anaphylactoid reactions", "Thrombophlebitis", "Clostridioides difficile colitis"],
+    "emergency": ["Respiratory arrest/apnea from neuromuscular blockade", "Acute renal failure", "Anaphylaxis"]
+  },
+  "monitoring": [
+    "Renal function (serum creatinine, BUN), urine output and urinalysis frequently",
+    "Neurologic and neuromuscular status",
+    "Serum electrolytes",
+    "Signs of superinfection or C. difficile-associated diarrhea",
+    "Therapeutic drug monitoring where available in critically ill patients"
+  ],
+  "counsel": [
+    "This is a hospital-administered injectable reserved for serious resistant infections",
+    "Report numbness, tingling, dizziness, blurred vision, muscle weakness or difficulty breathing immediately",
+    "Report decreased urination or swelling",
+    "Complete the full prescribed course",
+    "Inform staff of any prior reaction to polymyxins or colistin"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal within hours of infusion"],
+    ["Peak", "End of infusion (concentration-dependent)"],
+    ["Half-life", "Approximately 6 hours (prolonged in renal impairment)"],
+    ["Duration", "Dosed in divided doses across 24 hours"],
+    ["Storage", "Store dry powder at controlled room temperature; refrigerate reconstituted solution, discard after 72 h"]
+  ],
+  "pearls": [
+    "BOXED WARNING: nephrotoxicity and neurotoxicity; give parenterally only to hospitalized patients under physician supervision",
+    "BOXED WARNING: neuromuscular blockade can cause respiratory paralysis, especially with muscle relaxants/anesthetics - avoid concurrent curariform drugs",
+    "Dosed in units, not milligrams - calculate carefully by body weight",
+    "Last-line agent for MDR/XDR gram-negative infections (Pseudomonas, Acinetobacter, Klebsiella)",
+    "Not significantly removed by hemodialysis"
+  ],
+  "missed": "As a continuous or scheduled hospital infusion, missed doses are managed by the clinical team; resume the schedule as ordered and do not double the rate or dose without medical direction.",
+  "overdose": "Overdose can cause acute renal failure, neuromuscular blockade with respiratory paralysis and apnea. Treat supportively with airway/ventilatory support; calcium salts may transiently reverse neuromuscular blockade. Discontinue the drug and maintain renal perfusion.",
+  "refs": [
+    ["FDA Polymyxin B for Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22polymyxin+b+sulfate%22"],
+    ["FDA DailyMed - Polymyxin B", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "generic": "Mycophenolate Sodium",
+  "cls": "Antimetabolite immunosuppressant (IMPDH inhibitor; enteric-coated mycophenolic acid)",
+  "pharm": "Selectively inhibits lymphocyte purine synthesis to suppress T- and B-cell proliferation",
+  "tags": ["Immunosuppressant", "Transplant", "Boxed warning: embryo-fetal/malignancy/infection", "REMS", "Enteric-coated"],
+  "quick": [
+    ["Adult dose", "720 mg twice daily (1440 mg/day) on empty stomach"],
+    ["Meal", "Empty stomach (1 h before or 2 h after food)"],
+    ["Pregnancy", "Contraindicated unless no alternative; high malformation/loss risk"],
+    ["Lactation", "Avoid - do not breastfeed"],
+    ["Renal", "Monitor; no routine dose change for graft function"],
+    ["Hepatic", "Use caution; monitor"],
+    ["Alcohol", "Limit; no specific interaction but avoid GI/hepatic stress"],
+    ["Monitoring", "CBC weekly initially, infection, GI symptoms, pregnancy test"]
+  ],
+  "summary": "Mycophenolate sodium (Myfortic) is an enteric-coated delayed-release formulation of mycophenolic acid used with cyclosporine and corticosteroids for prophylaxis of organ rejection in kidney transplant recipients. It carries a boxed warning for embryo-fetal toxicity (pregnancy loss and congenital malformations), increased risk of lymphoma and other malignancies, and serious infections, and is subject to a Mycophenolate REMS. Myfortic and mycophenolate mofetil are not interchangeable on a mg-for-mg basis. Take on an empty stomach and do not crush, chew, or cut tablets.",
+  "indications": [
+    "Prophylaxis of organ rejection in adult kidney transplant recipients (with cyclosporine and corticosteroids)",
+    "Prophylaxis of organ rejection in pediatric patients >=5 years who are >=6 months post kidney transplant"
+  ],
+  "dosage": [
+    {"c": "Adult kidney transplant", "r": "Oral", "d": "720 mg twice daily (1440 mg total daily dose)", "t": "BID", "n": "On empty stomach, 1 h before or 2 h after food"},
+    {"c": "Pediatric >=5 yr (>=6 months post-transplant)", "r": "Oral", "d": "400 mg/m2 twice daily", "t": "BID", "n": "Maximum 720 mg twice daily"},
+    {"c": "Neutropenia (ANC <1.3 x 10^3/uL)", "r": "Oral", "d": "Interrupt or reduce dose", "t": "Per labeling", "n": "Evaluate cause; resume per recovery"},
+    {"c": "Conversion note", "r": "Oral", "d": "720 mg mycophenolate sodium approx = 1000 mg mycophenolate mofetil", "t": "BID", "n": "Not interchangeable mg-for-mg"}
+  ],
+  "admin": [
+    "Take on an empty stomach, 1 hour before or 2 hours after food",
+    "Swallow tablets whole - do not crush, chew, or cut (enteric coating)",
+    "Avoid inhaling/contacting powder if a tablet is broken (teratogen)",
+    "Do not interchange with mycophenolate mofetil on a mg-for-mg basis"
+  ],
+  "moa": "Mycophenolic acid is an uncompetitive, reversible inhibitor of inosine monophosphate dehydrogenase (IMPDH), blocking de novo guanosine nucleotide synthesis. Lymphocytes depend critically on this pathway, so MPA has potent cytostatic effects on T- and B-cells and reduces antibody production.",
+  "contra": {
+    "absolute": [
+      "History of hypersensitivity (including anaphylaxis) to mycophenolate sodium, mycophenolic acid, mycophenolate mofetil, or excipients"
+    ],
+    "relative": [
+      "Pregnancy (contraindicated unless no suitable alternative; boxed warning)",
+      "Active serious infection",
+      "Active digestive system disease (GI bleeding/ulceration risk)",
+      "Neutropenia or anemia",
+      "Hereditary deficiency of HGPRT (Lesch-Nyhan/Kelley-Seegmiller - avoid)",
+      "Concurrent live vaccines"
+    ],
+    "monitor": [
+      "CBC (weekly first month, then per schedule)",
+      "Signs of infection",
+      "GI bleeding/symptoms",
+      "Pregnancy testing in females of reproductive potential"
+    ]
+  },
+  "preg": "Boxed warning: use during pregnancy is associated with increased pregnancy loss and congenital malformations. Contraindicated unless there is no suitable alternative. Verify negative pregnancy test before starting; use effective contraception (two forms recommended) during and for 6 weeks after stopping. Enrolled in the Mycophenolate REMS / pregnancy registry.",
+  "lact": "Do not breastfeed during treatment - potential for serious adverse reactions in the breastfed child; mycophenolate is excreted in animal milk.",
+  "renal": "Used to prevent rejection in renal transplant; no routine dose adjustment specified for graft renal function, but monitor closely. Increased MPA exposure can occur in severe renal impairment.",
+  "hepatic": "Use with caution in hepatic impairment; monitor. Active digestive/hepatic disease warrants caution.",
+  "interactions": {
+    "major": [
+      "Live attenuated vaccines - avoid (impaired response, infection risk)",
+      "Azathioprine - both affect bone marrow; concomitant use not recommended"
+    ],
+    "moderate": [
+      "Antacids with magnesium/aluminum hydroxide - decrease MPA levels; avoid concomitant use",
+      "Cholestyramine/bile acid sequestrants/activated charcoal - decrease MPA (interrupt enterohepatic recirculation)",
+      "Sevelamer - decreases MPA concentrations",
+      "Cyclosporine - lowers MPA levels; caution when switching immunosuppressants",
+      "Norfloxacin + metronidazole together - decrease MPA",
+      "Rifampin - decreases MPA",
+      "Oral antibiotics altering gut flora - may reduce MPA",
+      "Oral contraceptives - reliability may be reduced; use additional contraception"
+    ],
+    "minor": [
+      "Acyclovir/ganciclovir - competition for renal tubular secretion (increased levels of both, esp. in renal impairment)"
+    ],
+    "food": "Food reduces MPA peak concentration - take on an empty stomach",
+    "alcohol": "No specific interaction; limit to reduce GI/hepatic stress",
+    "diagnostics": "Monitor CBC for cytopenias; may affect immunization response"
+  },
+  "se": {
+    "common": [
+      "Anemia",
+      "Leukopenia",
+      "Constipation/diarrhea",
+      "Nausea/vomiting",
+      "Dyspepsia",
+      "Abdominal pain",
+      "Hypertension",
+      "Peripheral edema",
+      "Urinary tract infection"
+    ],
+    "serious": [
+      "Serious/opportunistic infections (including CMV, BK virus nephropathy)",
+      "Progressive multifocal leukoencephalopathy (PML)",
+      "Lymphoma and other malignancies (esp. skin)",
+      "Pure red cell aplasia / severe neutropenia",
+      "Serious GI bleeding, ulceration, or perforation",
+      "Embryo-fetal toxicity"
+    ],
+    "rare": [
+      "Acute inflammatory syndrome associated with mycophenolate",
+      "Hypogammaglobulinemia / bronchiectasis",
+      "Severe hypersensitivity/anaphylaxis"
+    ],
+    "emergency": [
+      "Sepsis / overwhelming infection",
+      "Severe GI hemorrhage or perforation",
+      "Anaphylaxis",
+      "Signs of PML (progressive neurologic deficits)"
+    ]
+  },
+  "monitoring": [
+    "CBC with differential (weekly for first month, twice monthly months 2-3, then monthly through first year)",
+    "Signs and symptoms of infection",
+    "GI bleeding/ulceration",
+    "Pregnancy testing before and during therapy",
+    "Skin exam / malignancy surveillance",
+    "Graft function and immunosuppressant levels"
+  ],
+  "counsel": [
+    "Do not become pregnant; use two effective contraceptive methods (boxed warning) and do not breastfeed",
+    "Take on an empty stomach; swallow whole - do not crush or cut",
+    "Report fever, sore throat, unusual bruising/bleeding, or signs of infection",
+    "Report black/bloody stools or severe abdominal pain",
+    "Avoid live vaccines and limit sun exposure (skin cancer risk)",
+    "Do not switch between Myfortic and CellCept without prescriber direction",
+    "Enroll in and follow the Mycophenolate REMS requirements"
+  ],
+  "pk": [
+    ["Onset", "Immunosuppressive effect over days-weeks"],
+    ["Peak", "MPA tmax ~1.5-2 h (delayed/enteric-coated release)"],
+    ["Half-life", "MPA ~8-16 h"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "20-25 C, protect from moisture; dispense in tight container"]
+  ],
+  "pearls": [
+    "Enteric-coated mycophenolate sodium and mycophenolate mofetil are NOT mg-for-mg interchangeable (720 mg approx 1000 mg MMF)",
+    "Boxed warning: embryo-fetal toxicity, malignancy, and serious infection; subject to Mycophenolate REMS",
+    "GI tolerability profile differs from MMF; release shifted to small intestine",
+    "Avoid Mg/Al antacids, sequestrants, and sevelamer with dosing - they lower MPA exposure"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered unless it is near the next dose, then skip the missed dose; do not double up. Maintain the empty-stomach timing where possible and contact the transplant team if unsure.",
+  "overdose": "Higher-than-recommended doses may cause excessive immunosuppression with infection risk, GI effects, and hematologic suppression (neutropenia). Management: supportive care, monitor CBC; bile acid sequestrants (e.g., cholestyramine) can reduce MPA by interrupting enterohepatic recirculation. MPA is not removed by hemodialysis at clinical concentrations.",
+  "refs": [
+    ["FDA Myfortic (mycophenolic acid / mycophenolate sodium) Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name.exact:%22Myfortic%22"],
+    ["DailyMed - Myfortic", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=mycophenolate+sodium"],
+    ["Mycophenolate REMS", "https://www.mycophenolaterems.com"]
+  ]
+}

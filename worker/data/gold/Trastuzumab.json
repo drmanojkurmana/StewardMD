@@ -1,0 +1,100 @@
+{
+  "generic": "Trastuzumab",
+  "cls": "HER2-targeted monoclonal antibody / antineoplastic",
+  "pharm": "Antineoplastic (anti-HER2 IgG1 monoclonal antibody)",
+  "tags": ["HER2-positive breast cancer", "metastatic gastric cancer", "monoclonal antibody", "antineoplastic", "Herceptin", "cardiotoxicity"],
+  "quick": [
+    ["Adult dose", "Weekly: 4 mg/kg load then 2 mg/kg; q3w: 8 mg/kg load then 6 mg/kg"],
+    ["Meal", "Not applicable; IV infusion only"],
+    ["Pregnancy", "Can cause fetal harm (oligohydramnios, neonatal death); avoid"],
+    ["Lactation", "No human milk data; weigh against 7-month washout"],
+    ["Renal", "No adjustment in mild-moderate; severe/ESRD unknown"],
+    ["Hepatic", "No specific dose adjustment; hepatic impairment data unknown"],
+    ["Alcohol", "No direct interaction; not relevant to therapy"],
+    ["Monitoring", "LVEF (echo/MUGA) at baseline and q3 months; infusion reactions"]
+  ],
+  "summary": "Trastuzumab (Herceptin) is a recombinant humanized IgG1 monoclonal antibody against the HER2/neu receptor, used for HER2-overexpressing breast cancer (adjuvant and metastatic) and HER2-overexpressing metastatic gastric or gastroesophageal junction adenocarcinoma. It is given by intravenous infusion only - never as IV push or bolus - and must not be substituted with ado-trastuzumab emtansine or fam-trastuzumab deruxtecan. It carries a boxed warning for cardiomyopathy (especially with anthracyclines), serious/fatal infusion reactions, serious/fatal pulmonary toxicity, and embryo-fetal toxicity, so LVEF must be assessed before and during treatment and pregnancy status verified beforehand.",
+  "indications": [
+    "Adjuvant treatment of HER2-overexpressing node-positive or high-risk node-negative breast cancer, as part of a regimen with doxorubicin, cyclophosphamide and a taxane, or with docetaxel and carboplatin, or as a single agent after multimodality anthracycline-based therapy",
+    "First-line treatment of HER2-overexpressing metastatic breast cancer in combination with paclitaxel",
+    "Single-agent treatment of HER2-overexpressing breast cancer in patients who have received one or more chemotherapy regimens for metastatic disease",
+    "HER2-overexpressing metastatic gastric or gastroesophageal junction adenocarcinoma, in combination with cisplatin and capecitabine or 5-fluorouracil, in patients not previously treated for metastatic disease"
+  ],
+  "dosage": [
+    {"c": "Adjuvant breast cancer (during/after paclitaxel or docetaxel)", "r": "IV - weekly then q3w", "d": "4 mg/kg initial dose, then 2 mg/kg weekly for 12 weeks; one week after last weekly dose, 6 mg/kg every 3 weeks", "t": "Total 52 weeks of therapy", "n": "Initial dose over 90 min, 2 mg/kg over 30 min, 6 mg/kg over 30-90 min; 18 weeks weekly if used with docetaxel/carboplatin"},
+    {"c": "Adjuvant breast cancer (single agent after anthracycline-based chemo)", "r": "IV - q3w", "d": "8 mg/kg initial dose, then 6 mg/kg every 3 weeks", "t": "Total 52 weeks of therapy", "n": "Initial over 90 min, subsequent over 30-90 min; start within 3 weeks of completing chemotherapy; do not extend beyond 1 year"},
+    {"c": "Metastatic breast cancer (alone or with paclitaxel)", "r": "IV - weekly", "d": "4 mg/kg initial dose, then 2 mg/kg once weekly", "t": "Until disease progression", "n": "Initial over 90 min, maintenance over 30 min"},
+    {"c": "Metastatic gastric / GEJ adenocarcinoma", "r": "IV - q3w", "d": "8 mg/kg initial dose, then 6 mg/kg every 3 weeks", "t": "Until disease progression", "n": "Initial over 90 min, subsequent over 30-90 min; combined with cisplatin plus capecitabine or 5-FU"},
+    {"c": "Cardiomyopathy (significant LVEF decline)", "r": "Dose modification", "d": "Withhold for >=16% absolute LVEF drop, or LVEF below normal with >=10% absolute drop", "t": "Withhold at least 4 weeks; reassess in 4-8 weeks", "n": "Resume if LVEF normalizes and absolute drop <=15%; permanently discontinue for persistent (>8 wk) decline or >3 suspensions"}
+  ],
+  "admin": [
+    "For intravenous infusion only - do NOT administer as IV push or bolus",
+    "Do not substitute Herceptin (trastuzumab) for ado-trastuzumab emtansine or fam-trastuzumab deruxtecan; verify vial labels to prevent medication errors",
+    "Reconstitute each 150 mg vial with 7.4 mL Sterile Water for Injection to yield 21 mg/mL; swirl gently, do NOT shake, let stand ~5 minutes",
+    "Dilute the calculated dose into 250 mL of 0.9% Sodium Chloride; DO NOT use 5% dextrose; do not mix with other drugs",
+    "Inspect for particulates/discoloration; solution should be clear to slightly opalescent and colorless to pale yellow",
+    "Assess LVEF and verify pregnancy status before initiating; monitor patients during infusion for reactions",
+    "Decrease infusion rate for mild/moderate infusion reactions; interrupt for dyspnea or significant hypotension"
+  ],
+  "moa": "Trastuzumab is a recombinant humanized IgG1 monoclonal antibody that binds the extracellular domain of the HER2 (c-erbB2) proto-oncogene product, a 185 kDa transmembrane receptor related to the epidermal growth factor receptor. It inhibits proliferation of human tumor cells that overexpress HER2 and mediates antibody-dependent cellular cytotoxicity (ADCC), which is preferentially exerted on HER2-overexpressing cancer cells.",
+  "contra": {
+    "absolute": ["None per the FDA label (no formal contraindications listed)"],
+    "relative": ["Pregnancy - can cause embryo-fetal harm (oligohydramnios, pulmonary hypoplasia, skeletal abnormalities, neonatal death)", "Symptomatic intrinsic lung disease or extensive pulmonary tumor involvement (higher risk of severe pulmonary toxicity)", "Pre-existing cardiac dysfunction or low baseline LVEF", "Concurrent or recent anthracycline use (greatly increases cardiotoxicity)"],
+    "monitor": ["Baseline and serial LVEF by echocardiogram or MUGA (boxed warning: cardiomyopathy)", "Infusion reactions, anaphylaxis and angioedema during and within 24 h of infusion (boxed warning)", "Pulmonary status - dyspnea, interstitial pneumonitis, ARDS (boxed warning)", "Pregnancy status before initiation and effective contraception (boxed warning: embryo-fetal toxicity)", "Exacerbation of chemotherapy-induced neutropenia and febrile neutropenia"]
+  },
+  "preg": "Trastuzumab can cause fetal harm. Post-marketing reports describe oligohydramnios and oligohydramnios sequence (pulmonary hypoplasia, skeletal abnormalities, neonatal death) with use during pregnancy or within 7 months prior to conception. Verify pregnancy status before initiation, advise effective contraception during treatment and for 7 months after the last dose, and monitor for oligohydramnios if exposure occurs.",
+  "lact": "There is no information on the presence of trastuzumab in human milk or its effects on the breastfed infant or milk production. Human IgG is present in milk but is not thought to enter the infant circulation substantially. Decisions should weigh the developmental/health benefits of breastfeeding against maternal need and the ~7-month washout period.",
+  "renal": "Population PK analysis showed no clinically significant differences with mild (CLcr 60-90 mL/min) or moderate (CLcr 30-60 mL/min) renal impairment, so no specific dose adjustment is described. Pharmacokinetics in severe renal impairment or end-stage renal disease (with or without hemodialysis) are unknown.",
+  "hepatic": "The label provides no specific dose adjustment for hepatic impairment, and the pharmacokinetics of trastuzumab in hepatic impairment are unknown.",
+  "interactions": {
+    "major": ["Anthracyclines (doxorubicin, epirubicin) - markedly increased risk of cardiomyopathy/CHF; highest cardiac risk when given concurrently"],
+    "moderate": ["Myelosuppressive chemotherapy - exacerbation of neutropenia and febrile neutropenia", "Anthracycline given after stopping trastuzumab - increased cardiac dysfunction risk; if possible avoid anthracyclines for up to 7 months after stopping (long washout)"],
+    "minor": ["No clinically significant PK interaction observed with paclitaxel, doxorubicin, docetaxel, carboplatin, cisplatin or capecitabine in combination studies"],
+    "food": "Not applicable - administered as an intravenous infusion.",
+    "alcohol": "No known interaction with alcohol.",
+    "diagnostics": "Requires FDA-authorized HER2 companion diagnostic (protein overexpression or gene amplification) for patient selection; can cause decreased LVEF on echo/MUGA, neutropenia, anemia and thrombocytopenia on labs."
+  },
+  "se": {
+    "common": ["Fever and chills", "Headache", "Diarrhea", "Nausea and vomiting", "Infusion reactions", "Fatigue / asthenia", "Cough and dyspnea", "Rash", "Anemia", "Neutropenia", "Arthralgia / myalgia", "Infection (upper respiratory, urinary)"],
+    "serious": ["Cardiomyopathy - decreased LVEF, congestive heart failure, arrhythmias, cardiac death (boxed warning)", "Serious infusion reactions including bronchospasm, anaphylaxis, angioedema, severe hypotension (boxed warning)", "Pulmonary toxicity - interstitial pneumonitis, pulmonary infiltrates, non-cardiogenic pulmonary edema, ARDS (boxed warning)", "Embryo-fetal toxicity - oligohydramnios, pulmonary hypoplasia, neonatal death (boxed warning)", "Exacerbation of chemotherapy-induced neutropenia and febrile neutropenia", "Thrombosis/embolism", "Glomerulopathy / nephrotic syndrome", "Tumor lysis syndrome", "Immune thrombocytopenia"],
+    "rare": ["Nephrotic syndrome with glomerulopathy (post-marketing)", "Autoimmune thyroiditis", "Pulmonary hypertension", "Sudden death"],
+    "emergency": ["Anaphylaxis / angioedema during or after infusion", "Acute respiratory distress syndrome or acute pulmonary insufficiency", "Acute decompensated heart failure / cardiac death", "Severe hypotension or bronchospasm with infusion"]
+  },
+  "monitoring": [
+    "Baseline LVEF by echocardiogram or MUGA before initiation, then every 3 months during and on completion of therapy",
+    "LVEF every 4 weeks if drug is withheld for significant LV dysfunction; every 6 months for at least 2 years after adjuvant therapy",
+    "Observe closely during and for 24 hours after infusion for infusion reactions and pulmonary symptoms",
+    "Pregnancy status before initiation; counsel on contraception through 7 months after last dose",
+    "Complete blood counts for neutropenia/febrile neutropenia when combined with chemotherapy",
+    "Renal function (especially in gastric cancer regimens) and signs of tumor lysis in high-burden disease"
+  ],
+  "counsel": [
+    "This medicine is given by vein only and is not the same as ado-trastuzumab emtansine or fam-trastuzumab deruxtecan",
+    "Report chest tightness, breathlessness, wheeze, swelling of face/throat, dizziness or rash during or after the infusion immediately",
+    "Tell your team about new shortness of breath, ankle swelling, rapid weight gain, fatigue or palpitations (possible heart effects)",
+    "If you are or could become pregnant, inform your doctor; use effective contraception during and for 7 months after the last dose",
+    "Cardiac scans (echo or MUGA) will be done regularly to check your heart function"
+  ],
+  "pk": [
+    ["Onset", "Antibody-mediated; HER2 binding immediate, clinical response over cycles"],
+    ["Peak", "End of IV infusion; q3w breast cancer steady-state Cmax ~179 mcg/mL"],
+    ["Half-life", "Concentration-dependent (parallel linear and non-linear clearance); washout ~7 months"],
+    ["Duration", "Steady state reached ~12 weeks (breast) / ~9 weeks (gastric); ~97% washout by 7 months"],
+    ["Storage", "Store vials refrigerated at 2-8 C (36-46 F); reconstituted/diluted solution stable up to 24 h at 2-8 C, do not freeze"]
+  ],
+  "pearls": [
+    "BOXED WARNING - Cardiomyopathy: can cause subclinical and clinical heart failure and reduced LVEF; risk highest with concurrent anthracyclines; assess LVEF before and during treatment and discontinue for clinically significant decline",
+    "BOXED WARNING - Infusion reactions and pulmonary toxicity: serious and fatal reactions can occur, usually during or within 24 h; discontinue for anaphylaxis, angioedema, interstitial pneumonitis or ARDS",
+    "BOXED WARNING - Embryo-fetal toxicity: exposure in pregnancy can cause oligohydramnios, pulmonary hypoplasia and neonatal death; verify pregnancy status and ensure effective contraception",
+    "Never give as IV push or bolus, and never confuse with ado-trastuzumab emtansine or fam-trastuzumab deruxtecan - they are distinct products",
+    "Dilute only in 0.9% sodium chloride, NOT dextrose 5%; do not mix with other drugs",
+    "If anthracyclines are needed after stopping trastuzumab, avoid them for up to 7 months if possible due to the long washout and cardiac risk",
+    "Extending adjuvant treatment beyond one year is not recommended (more cardiac dysfunction without added benefit)"
+  ],
+  "missed": "If a dose is missed by one week or less, give the usual maintenance dose (2 mg/kg weekly or 6 mg/kg q3w) as soon as possible without waiting for the next planned cycle, then resume the 7-day or 21-day schedule. If missed by more than one week, give a re-loading dose over ~90 minutes (4 mg/kg weekly or 8 mg/kg q3w) as soon as possible, then resume maintenance dosing 7 or 21 days later.",
+  "overdose": "No specific overdose information or antidote is described in the label; single doses higher than the recommended dose have not been tested. Management is supportive, with close monitoring of cardiac function (LVEF), respiratory status, and for infusion-type reactions.",
+  "refs": [
+    ["FDA Trastuzumab (Herceptin) Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22Herceptin%22"],
+    ["FDA DailyMed - Herceptin (trastuzumab)", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=trastuzumab"]
+  ]
+}

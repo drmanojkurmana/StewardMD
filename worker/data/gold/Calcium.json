@@ -1,0 +1,101 @@
+{
+  "generic": "Calcium (calcium carbonate / gluconate / chloride)",
+  "cls": "Mineral / electrolyte supplement",
+  "pharm": "Calcium salt; electrolyte replenisher and antacid",
+  "tags": ["calcium", "electrolyte", "hypocalcemia", "hyperkalemia", "supplement", "antacid"],
+  "quick": [
+    ["Adult dose", "Oral 1000-1200 mg elemental Ca/day; IV per hypocalcemia"],
+    ["Meal", "Carbonate with food; citrate any time"],
+    ["Pregnancy", "Compatible; needed for maternal/fetal health"],
+    ["Lactation", "Compatible; normal dietary/supplement use"],
+    ["Renal", "Caution; risk of hypercalcemia and stones"],
+    ["Hepatic", "No specific adjustment"],
+    ["Alcohol", "Heavy use reduces absorption/bone health"],
+    ["Monitoring", "Serum calcium, renal function; ECG for IV"]
+  ],
+  "summary": "Calcium salts are used orally for dietary supplementation, hypocalcemia and as antacids, and intravenously (gluconate or chloride) for acute symptomatic hypocalcemia, hyperkalemia-induced cardiotoxicity, calcium-channel-blocker/magnesium toxicity. IV calcium chloride contains ~3x the elemental calcium of gluconate per volume and is more irritating. Key risks are hypercalcemia, arrhythmias (especially with digoxin), and tissue necrosis from extravasation.",
+  "indications": [
+    "Acute symptomatic hypocalcemia (IV calcium gluconate or chloride)",
+    "Dietary calcium supplementation / prevention and treatment of calcium deficiency (oral)",
+    "Adjunct in osteoporosis and osteopenia (with vitamin D)",
+    "Cardioprotection in hyperkalemia (stabilize myocardium)",
+    "Calcium-channel-blocker overdose and magnesium sulfate toxicity",
+    "Antacid for dyspepsia/heartburn (calcium carbonate)",
+    "Hyperphosphatemia phosphate binder in chronic kidney disease (calcium carbonate/acetate)"
+  ],
+  "dosage": [
+    {"c": "Acute symptomatic hypocalcemia (adult)", "r": "IV calcium gluconate 10%", "d": "1000-2000 mg (1-2 g) calcium gluconate IV; individualized", "t": "Slow IV bolus over ~5-10 min then infusion", "n": "Measure serum calcium every 4-6 h (intermittent) or 1-4 h (continuous)"},
+    {"c": "Acute symptomatic hypocalcemia (adult, calcium chloride)", "r": "IV calcium chloride 10%", "d": "500-1000 mg IV", "t": "Slow IV via central/secure line", "n": "Chloride salt ~3x elemental calcium of gluconate; very irritating to veins"},
+    {"c": "Hyperkalemia with ECG changes", "r": "Cardiac membrane stabilization", "d": "Calcium gluconate 1-2 g (or calcium chloride 0.5-1 g) IV", "t": "Over 2-5 min, repeat if ECG changes persist", "n": "Does not lower potassium; bridge to potassium-lowering therapy"},
+    {"c": "Oral supplementation (adult)", "r": "Calcium carbonate or citrate", "d": "1000-1200 mg elemental calcium/day in divided doses", "t": "Carbonate with meals; citrate any time", "n": "Limit single doses to <=500-600 mg elemental for best absorption"},
+    {"c": "Antacid (adult)", "r": "Calcium carbonate", "d": "500-1500 mg PO as needed", "t": "Between meals / at symptom onset", "n": "Max per labeling; avoid chronic high-dose use"},
+    {"c": "Pediatric hypocalcemia", "r": "IV calcium gluconate", "d": "Weight/BSA-based per protocol", "t": "Slow IV with ECG monitoring", "n": "Contraindicated in neonates <=28 days receiving ceftriaxone"}
+  ],
+  "admin": [
+    "IV calcium gluconate may be given as bolus or continuous infusion via a secure IV line; infuse slowly",
+    "Calcium chloride is highly irritant - prefer a central or large secure vein; avoid extravasation",
+    "Use careful ECG monitoring during IV administration to detect arrhythmias",
+    "Do NOT mix calcium with phosphate- or bicarbonate-containing fluids (precipitation)",
+    "Do NOT give simultaneously with IV ceftriaxone via Y-site in any age group",
+    "Oral: take calcium carbonate with food to improve absorption; separate from interacting drugs"
+  ],
+  "moa": "Calcium is essential for nerve conduction, muscle contraction, cardiac function, bone mineralization, and coagulation. IV calcium raises serum ionized calcium, correcting hypocalcemic symptoms and stabilizing the cardiac membrane resting potential in hyperkalemia. Oral calcium carbonate also neutralizes gastric acid and binds dietary phosphate.",
+  "contra": {
+    "absolute": ["Hypercalcemia", "Neonates <=28 days of age receiving ceftriaxone (IV calcium)", "Known calcium-containing renal stones (relative-to-absolute depending on salt)"],
+    "relative": ["Severe renal impairment / risk of hypercalcemia and nephrolithiasis", "Sarcoidosis or other granulomatous disease", "Concomitant cardiac glycoside (digoxin) therapy", "Hyperphosphatemia not yet controlled"],
+    "monitor": ["Patients on digoxin", "Patients receiving rapid IV calcium", "Renal impairment", "Concurrent vitamin D / thiazides"]
+  },
+  "preg": "Calcium is required for maternal and fetal health and is considered compatible in pregnancy at recommended intakes. IV calcium is used for acute hypocalcemia in pregnancy when indicated.",
+  "lact": "Calcium is a normal milk constituent; supplementation at recommended intakes is compatible with breastfeeding.",
+  "renal": "Use with caution in renal impairment due to risk of hypercalcemia, metastatic calcification and stones. Calcium-based phosphate binders are used in CKD but require monitoring of calcium-phosphate balance.",
+  "hepatic": "No specific dose adjustment for hepatic impairment.",
+  "interactions": {
+    "major": ["Cardiac glycosides (digoxin) - hypercalcemia increases digoxin toxicity; synergistic arrhythmias - avoid IV calcium or give slowly with ECG monitoring", "IV ceftriaxone - life-threatening calcium-ceftriaxone precipitates; do not coadminister in neonates and avoid Y-site coadministration in all ages"],
+    "moderate": ["Calcium channel blockers - calcium may reduce their effect", "Thiazide diuretics, vitamin D, vitamin A, estrogen, calcipotriene, teriparatide - additive hypercalcemia risk", "Tetracyclines, fluoroquinolones, levothyroxine, bisphosphonates, iron - oral calcium reduces their absorption (separate dosing)"],
+    "minor": ["Antacid effect may raise gastric pH and alter absorption of pH-dependent drugs"],
+    "food": "Oral calcium carbonate is best absorbed with food; high-oxalate/phytate foods and excess fiber can reduce absorption.",
+    "alcohol": "Chronic heavy alcohol use impairs calcium absorption and bone health.",
+    "diagnostics": "Can cause hypercalcemia; monitor serum/ionized calcium. May affect calcium-dependent lab assays."
+  },
+  "se": {
+    "common": ["Constipation (oral)", "Bloating / flatulence", "Hypercalcemia (with overdose or impaired excretion)", "Local injection-site reaction (IV)"],
+    "serious": ["Hypotension, bradycardia and cardiac arrhythmias with rapid IV", "Tissue necrosis, calcinosis cutis and ulceration from extravasation", "Cardiac arrest", "End-organ damage from ceftriaxone-calcium precipitates"],
+    "rare": ["Milk-alkali syndrome (high-dose carbonate with alkali)", "Nephrolithiasis / nephrocalcinosis", "Aluminum toxicity (from some IV products)"],
+    "emergency": ["Symptomatic hypercalcemia (confusion, seizures, coma, arrhythmia)", "Cardiac arrest with rapid IV push", "Severe extravasation with tissue necrosis"]
+  },
+  "monitoring": [
+    "Serum (total and ionized) calcium - frequently during IV therapy (every 1-6 h)",
+    "ECG during IV administration, especially in cardiac/digoxin patients",
+    "Renal function and serum phosphate",
+    "IV site for extravasation and tissue injury",
+    "Signs/symptoms of hypercalcemia with chronic oral use"
+  ],
+  "counsel": [
+    "Take oral calcium carbonate with food; space large doses (no more than ~500-600 mg elemental at once)",
+    "Separate calcium from thyroid medicine, antibiotics (tetracyclines/quinolones), iron and bisphosphonates by 2+ hours",
+    "Report constipation, nausea, confusion, or excessive thirst/urination (possible hypercalcemia)",
+    "Maintain adequate fluid intake to reduce kidney-stone risk",
+    "Tell your provider if you take digoxin or have kidney disease"
+  ],
+  "pk": [
+    ["Onset", "IV: immediate rise in serum calcium; oral: gradual"],
+    ["Peak", "IV: at end of infusion; oral carbonate within a few hours"],
+    ["Half-life", "Regulated by homeostasis (PTH, vitamin D); not a fixed value"],
+    ["Duration", "IV effect transient (~30 min to hours); replace as needed"],
+    ["Storage", "Store at 20-25 C (68-77 F); do not freeze IV solution"]
+  ],
+  "pearls": [
+    "Calcium chloride contains ~3x the elemental calcium of calcium gluconate per equal volume of 10% solution (CaCl2 ~27% vs gluconate ~9% elemental)",
+    "In hyperkalemia, IV calcium stabilizes the myocardium but does NOT lower serum potassium - follow with insulin/glucose, etc.",
+    "Never mix calcium with bicarbonate or phosphate (precipitation); never coadminister IV with ceftriaxone",
+    "Calcium gluconate is preferred peripherally; calcium chloride is more irritating and best given centrally",
+    "Hypercalcemia potentiates digoxin toxicity - avoid or use cautiously with ECG monitoring",
+    "Elemental content: carbonate ~40%, citrate ~21%, gluconate ~9% by weight"
+  ],
+  "missed": "For oral supplementation, take the missed dose when remembered; if it is near the next dose, skip it and do not double up. IV calcium is given for acute indications and is not self-dosed.",
+  "overdose": "Overdose causes hypercalcemia (symptoms typically at serum calcium >=12 mg/dL): weakness, fatigue, confusion, then hallucinations, seizures and coma; impaired urine concentration and arrhythmias. Stop calcium administration, restore intravascular volume with IV saline, promote urinary calcium excretion, and give additional therapy (e.g., calcitonin, bisphosphonates) for severe hypercalcemia.",
+  "refs": [
+    ["FDA Calcium Gluconate in Sodium Chloride Injection Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22calcium+gluconate%22"],
+    ["FDA DailyMed - Calcium salts", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

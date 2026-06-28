@@ -1,0 +1,102 @@
+{
+  "generic": "Repaglinide",
+  "cls": "Meglitinide (glinide) — short-acting insulin secretagogue",
+  "pharm": "Oral antidiabetic; prandial glucose regulator",
+  "tags": ["Rx", "Oral", "Take before meals", "Type 2 diabetes", "Hypoglycemia risk", "Habit forming: No", "Controlled substance: No"],
+  "quick": [
+    ["Adult dose", "0.5-4 mg before each meal (max 16 mg/day)"],
+    ["Meal", "Within 30 min before each meal; skip dose if meal skipped"],
+    ["Pregnancy", "Limited data; no clear risk, use only if needed"],
+    ["Lactation", "Not recommended while breastfeeding"],
+    ["Renal", "Severe impairment (CrCl 20-40): start 0.5 mg"],
+    ["Hepatic", "Use with caution; longer intervals between titration"],
+    ["Alcohol", "May increase hypoglycemia risk"],
+    ["Monitoring", "Blood glucose and HbA1c; signs of hypoglycemia"]
+  ],
+  "summary": "Repaglinide is a short-acting meglitinide (glinide) insulin secretagogue used with diet and exercise to improve glycemic control in adults with type 2 diabetes. It stimulates rapid, glucose-dependent insulin release for control of post-meal glucose. It is taken within 30 minutes before each meal, and the dose is skipped when a meal is skipped to reduce hypoglycemia. It is not for type 1 diabetes or diabetic ketoacidosis and is contraindicated with gemfibrozil.",
+  "indications": [
+    "Adjunct to diet and exercise to improve glycemic control in adults with type 2 diabetes mellitus"
+  ],
+  "dosage": [
+    {"c": "Starting dose, HbA1c <8%", "r": "Oral", "d": "0.5 mg before each meal", "t": "Before each meal (2-4 times daily)", "n": "Take within 30 minutes before meals"},
+    {"c": "Starting dose, HbA1c >=8%", "r": "Oral", "d": "1 or 2 mg before each meal", "t": "Before each meal", "n": "Skip the dose if a meal is skipped"},
+    {"c": "Titration", "r": "Oral", "d": "Double dose up to 4 mg per meal; max 16 mg/day", "t": "Per meal", "n": "Allow at least 1 week between dose adjustments to assess response"},
+    {"c": "Severe renal impairment (CrCl 20-40 mL/min)", "r": "Oral", "d": "Start 0.5 mg before each meal", "t": "Per meal", "n": "Titrate carefully"},
+    {"c": "With cyclosporine", "r": "Oral", "d": "Limit total daily dose to 6 mg", "t": "Per meal", "n": "Increase glucose monitoring frequency"},
+    {"c": "With clopidogrel (if unavoidable)", "r": "Oral", "d": "Start 0.5 mg/meal; do not exceed 4 mg/day total", "t": "Per meal", "n": "Co-use best avoided; raises exposure 3.9-5.1 fold"}
+  ],
+  "admin": [
+    "Take within 30 minutes before each meal",
+    "Skip the scheduled dose if a meal is skipped (and add a dose for an extra meal)",
+    "Reduce dose if hypoglycemia occurs",
+    "Allow at least 1 week to assess response after each dose change",
+    "Not for use in combination with NPH-insulin"
+  ],
+  "moa": "Repaglinide lowers blood glucose by stimulating insulin release from functioning pancreatic beta cells. It closes ATP-dependent potassium channels in the beta-cell membrane, depolarizing the cell and opening calcium channels; the resulting calcium influx induces insulin secretion. Insulin release is glucose-dependent and diminishes at low glucose concentrations. The ion-channel action is highly tissue selective with low affinity for heart and skeletal muscle.",
+  "contra": {
+    "absolute": ["Concomitant use of gemfibrozil", "Known hypersensitivity to repaglinide or any inactive ingredient", "Type 1 diabetes mellitus / diabetic ketoacidosis (not indicated)"],
+    "relative": ["Concomitant use with NPH-insulin (not indicated; serious cardiovascular events reported)", "Hepatic impairment", "Severe renal impairment"],
+    "monitor": ["Blood glucose for hypoglycemia", "Impaired hypoglycemia awareness (long-standing diabetes, autonomic neuropathy, beta-blocker use)"]
+  },
+  "preg": "Limited data from case reports and series have not identified a drug-associated risk of major birth defects or miscarriage. Teratogenicity was not seen in rats/rabbits at ~60 and ~1 times the maximum clinical dose. Poorly controlled diabetes in pregnancy carries substantial maternal and fetal risk; use only if clearly needed.",
+  "lact": "Repaglinide is not recommended when breastfeeding (FDA label). There are no human data on its presence in milk.",
+  "renal": "In severe renal impairment (CrCl 20-40 mL/min), start at 0.5 mg before each meal and titrate carefully. Repaglinide is not dialyzable.",
+  "hepatic": "Use with caution in hepatic impairment; reduced metabolism may raise exposure. Use longer intervals between dose adjustments and monitor closely.",
+  "interactions": {
+    "major": [
+      "Gemfibrozil — increases repaglinide exposure ~8.1-fold; CONTRAINDICATED",
+      "Clopidogrel — increases exposure 3.9-5.1-fold; avoid (if unavoidable, 0.5 mg/meal, max 4 mg/day)",
+      "Cyclosporine — increases exposure ~2.5-fold; limit to 6 mg/day"
+    ],
+    "moderate": [
+      "Strong CYP2C8/CYP3A4 inhibitors (e.g., clarithromycin, itraconazole) — increase levels; dose reduction may be needed",
+      "CYP3A4 inducers (e.g., rifampin, carbamazepine) — reduce levels/efficacy",
+      "Beta-blockers — may blunt hypoglycemia awareness"
+    ],
+    "minor": ["Drugs that may potentiate glucose lowering (NSAIDs, some antimicrobials, MAOIs); drugs that raise glucose (thiazides, corticosteroids, sympathomimetics)"],
+    "food": "Take within 30 minutes before meals; omit the dose when the meal is omitted.",
+    "alcohol": "Alcohol may increase the risk and severity of hypoglycemia.",
+    "diagnostics": "Monitor HbA1c and self-monitored blood glucose to guide titration."
+  },
+  "se": {
+    "common": ["Hypoglycemia", "Upper respiratory infection", "Headache", "Sinusitis", "Arthralgia", "Nausea", "Diarrhea", "Back pain"],
+    "serious": ["Severe hypoglycemia (may cause seizures, be life-threatening or fatal)", "Serious cardiovascular events with concomitant NPH-insulin"],
+    "rare": ["Hypersensitivity reactions", "Elevated liver enzymes"],
+    "emergency": ["Hypoglycemic coma, seizure, or other neurologic impairment"]
+  },
+  "monitoring": [
+    "Blood glucose (self-monitoring), especially with dose changes",
+    "HbA1c periodically",
+    "Signs and symptoms of hypoglycemia",
+    "Increased glucose monitoring in patients at higher hypoglycemia risk or on interacting drugs"
+  ],
+  "counsel": [
+    "Take within 30 minutes before each meal",
+    "Skip your dose if you skip a meal; do not take extra doses",
+    "Learn to recognize and treat low blood sugar (sweating, shakiness, confusion)",
+    "Carry a fast-acting sugar source",
+    "Hypoglycemia may impair concentration and reaction time (driving/machinery)",
+    "Tell your doctor about all medicines, especially gemfibrozil and clopidogrel"
+  ],
+  "pk": [
+    ["Onset", "Insulin rises within ~30 minutes; rapid prandial effect"],
+    ["Peak", "Plasma peak ~1 hour (Tmax ~1.0-1.4 h)"],
+    ["Half-life", "Approximately 1 hour"],
+    ["Duration", "Short-acting; plasma levels fall within ~4 hours"],
+    ["Storage", "20-25C (68-77F); protect from moisture, keep bottle tightly closed"]
+  ],
+  "pearls": [
+    "Prandial dosing: 'one meal, one dose; no meal, no dose'",
+    "Gemfibrozil is an absolute contraindication (8-fold exposure increase)",
+    "Faster onset and shorter duration than sulfonylureas — flexible meal-timed control",
+    "Useful in patients with irregular meal patterns or postprandial hyperglycemia",
+    "Not for type 1 diabetes or DKA; not removed by hemodialysis",
+    "Hypoglycemia is the main risk — reduce dose if it occurs"
+  ],
+  "missed": "If a meal is missed, skip the dose for that meal. Do not take a dose without eating. Do not double doses.",
+  "overdose": "Overdose may cause severe hypoglycemia with coma, seizure, or neurologic impairment — a medical emergency requiring hospitalization. Treat conscious patients with oral glucose; severe cases with IV dextrose. Monitor for at least 24-48 hours as hypoglycemia may recur. Repaglinide is not dialyzable.",
+  "refs": [
+    ["FDA Label — Repaglinide Tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22repaglinide%22"],
+    ["DailyMed — Repaglinide", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=repaglinide"]
+  ]
+}

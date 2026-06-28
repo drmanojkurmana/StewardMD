@@ -1,0 +1,140 @@
+{
+  "generic": "Lincomycin",
+  "cls": "Lincosamide antibacterial",
+  "pharm": "Bacteriostatic (bactericidal at high concentrations) against gram-positive cocci; inhibits bacterial protein synthesis",
+  "tags": ["Antibiotic", "Lincosamide", "Gram-positive", "Boxed warning: C. difficile colitis", "Penicillin-allergy alternative"],
+  "quick": [
+    ["Adult dose", "IM 600 mg q12-24h; IV 600 mg-1 g q8-12h"],
+    ["Meal", "Parenteral; oral forms taken on empty stomach"],
+    ["Pregnancy", "Crosses placenta; use only if clearly needed"],
+    ["Lactation", "Appears in milk; weigh risk/benefit"],
+    ["Renal", "Reduce dose in severe impairment (~25-30%)"],
+    ["Hepatic", "Reduce dose in severe impairment; monitor"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Diarrhea/colitis, CBC, LFTs, renal function"]
+  ],
+  "summary": "Lincomycin is a lincosamide antibiotic for serious infections caused by susceptible streptococci, pneumococci, and staphylococci, reserved for penicillin-allergic patients or where a penicillin is inappropriate. It carries a boxed warning for Clostridioides difficile-associated diarrhea/colitis, which can be severe and fatal. Discontinue if significant diarrhea occurs and avoid use for minor or viral infections. Dose by infection severity and route, with reductions in severe renal or hepatic impairment.",
+  "indications": [
+    "Serious infections due to susceptible streptococci, pneumococci, and staphylococci",
+    "Reserved for penicillin-allergic patients or where a penicillin is inappropriate",
+    "Adjunct to indicated surgical procedures for serious gram-positive infection"
+  ],
+  "dosage": [
+    {"c": "Serious infection (adult, IM)", "r": "IM", "d": "600 mg every 24 hours", "t": "Once daily", "n": "More severe: every 12 hours or more often"},
+    {"c": "Serious infection (adult, IV)", "r": "IV infusion", "d": "600 mg to 1 g every 8-12 hours", "t": "Every 8-12 h", "n": "Up to 8 g/day IV in life-threatening situations"},
+    {"c": "Pediatric >1 month (IM)", "r": "IM", "d": "10 mg/kg every 24 hours", "t": "Once daily", "n": "More severe: every 12 hours or more often"},
+    {"c": "Pediatric >1 month (IV)", "r": "IV infusion", "d": "10-20 mg/kg/day in divided doses", "t": "Divided", "n": "According to severity"},
+    {"c": "Severe renal impairment", "r": "IM/IV", "d": "Reduce to ~25-30% of normal dose", "t": "Per renal function", "n": "Serum half-life prolonged"},
+    {"c": "IV infusion rate", "r": "IV", "d": "Dilute; infuse each 1 g over at least 1 hour", "t": "Slow infusion", "n": "Never give as undiluted IV bolus (cardiopulmonary risk)"}
+  ],
+  "admin": [
+    "Never administer intravenously as an undiluted bolus - dilute and infuse slowly (>=1 h per gram)",
+    "Discontinue immediately if significant diarrhea develops",
+    "Reserve for serious infections where less toxic agents are inappropriate",
+    "Reduce dose in severe renal or hepatic impairment"
+  ],
+  "moa": "Binds the 50S ribosomal subunit of susceptible bacteria, inhibiting peptidyl transferase and bacterial protein synthesis; primarily bacteriostatic but bactericidal at higher concentrations against susceptible gram-positive organisms.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to lincomycin or clindamycin",
+      "Minor bacterial infections or viral infections (not indicated)"
+    ],
+    "relative": [
+      "History of gastrointestinal disease, especially colitis",
+      "Severe renal impairment (dose reduction)",
+      "Severe hepatic impairment (dose reduction)",
+      "Atopic/allergic patients",
+      "Neonates (benzyl alcohol preservative - gasping syndrome risk)",
+      "Concurrent neuromuscular blocking agents"
+    ],
+    "monitor": [
+      "Diarrhea / signs of C. difficile colitis",
+      "CBC with periodic counts in prolonged therapy",
+      "LFTs",
+      "Renal function"
+    ]
+  },
+  "preg": "No adequate well-controlled studies; crosses the placenta (cord serum ~25% of maternal). Contains benzyl alcohol preservative. Use during pregnancy only if clearly needed.",
+  "lact": "Reported in human milk (0.5-2.4 mcg/mL). Because of potential serious reactions in the infant, decide whether to discontinue nursing or the drug, weighing importance to the mother.",
+  "renal": "Reduce dosage in severe renal impairment; serum half-life is prolonged. Use approximately 25-30% of the normal dose in severe renal impairment.",
+  "hepatic": "Reduce dosage in severe hepatic impairment; monitor LFTs as hepatic accumulation may occur.",
+  "interactions": {
+    "major": [
+      "Neuromuscular blocking agents - lincomycin has neuromuscular blocking properties that may enhance their effect",
+      "Erythromycin/macrolides - antagonism (do not co-administer)"
+    ],
+    "moderate": [
+      "Antiperistaltic antidiarrheals (e.g., loperamide) - may prolong/worsen C. difficile colitis",
+      "Kaolin-pectin (oral) - reduces lincomycin absorption (separate dosing)"
+    ],
+    "minor": [
+      "Other antibacterials - generally compatible; avoid bacteriostatic-bactericidal antagonism where relevant"
+    ],
+    "food": "Oral absorption reduced by food; parenteral forms unaffected",
+    "alcohol": "No specific interaction reported",
+    "diagnostics": "May elevate LFTs; can cause leukopenia/neutropenia/thrombocytopenia on monitoring labs"
+  },
+  "se": {
+    "common": [
+      "Diarrhea",
+      "Nausea/vomiting",
+      "Abdominal pain/discomfort",
+      "Glossitis/stomatitis",
+      "Rash/urticaria/pruritus",
+      "Injection-site pain (IM)"
+    ],
+    "serious": [
+      "Clostridioides difficile-associated diarrhea / pseudomembranous colitis (can be fatal)",
+      "Anaphylactic reaction",
+      "Severe cutaneous reactions (SJS/TEN, AGEP, exfoliative dermatitis)",
+      "Blood dyscrasias (neutropenia, agranulocytosis, aplastic anemia, thrombocytopenic purpura, pancytopenia)",
+      "Cardiopulmonary arrest with rapid IV undiluted administration"
+    ],
+    "rare": [
+      "Angioedema, serum sickness",
+      "Jaundice / abnormal LFTs",
+      "Vaginal infection (superinfection)"
+    ],
+    "emergency": [
+      "Severe/fatal pseudomembranous colitis",
+      "Anaphylaxis",
+      "SJS/TEN",
+      "Cardiopulmonary arrest (rapid IV bolus)",
+      "Severe blood dyscrasia"
+    ]
+  },
+  "monitoring": [
+    "Diarrhea and signs of C. difficile colitis (even weeks after therapy)",
+    "CBC in prolonged therapy",
+    "Liver function tests",
+    "Renal function",
+    "Signs of hypersensitivity/skin reactions"
+  ],
+  "counsel": [
+    "Report diarrhea promptly, especially if severe, bloody, or with cramping - even after finishing therapy",
+    "Do not take anti-diarrheal medicines without advice",
+    "Report rash, itching, difficulty breathing, or swelling immediately",
+    "Complete the full prescribed course",
+    "This drug is reserved for serious infections when penicillins are not suitable",
+    "Inform clinicians of any prior reaction to clindamycin"
+  ],
+  "pk": [
+    ["Onset", "Therapeutic IM levels within ~60 min"],
+    ["Peak", "IM ~11.6 mcg/mL at 60 min; IV (2 h infusion) ~15.9 mcg/mL"],
+    ["Half-life", "~5.4 h (prolonged in severe renal impairment)"],
+    ["Duration", "Therapeutic levels ~14-20 h after IM dose"],
+    ["Storage", "Controlled room temperature 20-25 C"]
+  ],
+  "pearls": [
+    "Lincosamide - shares cross-resistance and C. difficile risk with clindamycin",
+    "Never give undiluted IV bolus: risk of severe cardiopulmonary reactions/arrest",
+    "Reserve for penicillin-allergic patients or where penicillin is inappropriate (stewardship)",
+    "Discontinue at once if significant diarrhea occurs - do not use antiperistaltic agents"
+  ],
+  "missed": "For a missed scheduled dose, administer as soon as possible; if near the next dose, skip and resume the regular schedule. Do not double doses. Parenteral dosing is managed by the care team.",
+  "overdose": "Hemodialysis and peritoneal dialysis are not effective in removing lincomycin. Management is supportive; monitor for and manage colitis, blood dyscrasias, and hypersensitivity.",
+  "refs": [
+    ["FDA Lincomycin Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22LINCOMYCIN%22"],
+    ["DailyMed - Lincomycin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=lincomycin"]
+  ]
+}

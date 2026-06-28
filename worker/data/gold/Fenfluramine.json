@@ -1,0 +1,115 @@
+{
+  "generic": "Fenfluramine (Fenfluramine hydrochloride)",
+  "cls": "Serotonin-releasing agent / 5-HT2 receptor agonist (antiseizure)",
+  "pharm": "Antiseizure medication (Dravet syndrome, Lennox-Gastaut syndrome)",
+  "tags": ["antiseizure", "Dravet syndrome", "Lennox-Gastaut syndrome", "serotonergic", "REMS", "valvulopathy", "pulmonary hypertension"],
+  "quick": [
+    ["Adult dose", "Maintenance 0.2-0.35 mg/kg twice daily (max 26 mg/day; max 17 mg/day with stiripentol/clobazam regimen); titrated from 0.1 mg/kg BID"],
+    ["Meal", "May be taken with or without food"],
+    ["Pregnancy", "Limited data; use only if clearly needed; pregnancy exposure registry available"],
+    ["Lactation", "Unknown excretion in human milk; weigh benefits and risks"],
+    ["Renal", "No adjustment in mild-moderate; not recommended in severe renal impairment"],
+    ["Hepatic", "Reduce dose / slower titration; lower maximum in hepatic impairment"],
+    ["Alcohol", "Avoid - additive CNS depression"],
+    ["Monitoring", "Echocardiogram for valvular disease/PAH (before, every 6 months, and 3-6 months after stopping); weight/growth; REMS enrollment"]
+  ],
+  "summary": "Fenfluramine is a serotonergic agent now used as an antiseizure medication for seizures associated with Dravet syndrome and Lennox-Gastaut syndrome in patients 2 years and older. It increases serotonin release and acts at multiple 5-HT receptor subtypes (and the sigma-1 receptor). Because the historical use of fenfluramine as an appetite suppressant caused cardiac valvulopathy and pulmonary arterial hypertension, it carries a BOXED WARNING for these risks and is available only through a restricted REMS program requiring baseline and periodic echocardiographic monitoring. It also causes decreased appetite and weight loss.",
+  "indications": [
+    "Treatment of seizures associated with Dravet syndrome in patients 2 years of age and older",
+    "Treatment of seizures associated with Lennox-Gastaut syndrome in patients 2 years of age and older"
+  ],
+  "dosage": [
+    {"c": "Dravet/LGS (without stiripentol)", "r": "Patients >=2 years", "d": "Start 0.1 mg/kg twice daily (0.2 mg/kg/day); after 7 days increase to 0.2 mg/kg twice daily; after 7 more days may increase to maintenance 0.35 mg/kg twice daily", "t": "Twice daily", "n": "Maximum 26 mg/day (0.7 mg/kg/day)"},
+    {"c": "Dravet/LGS (with stiripentol + clobazam)", "r": "Patients >=2 years", "d": "Start 0.1 mg/kg twice daily; after 7 days increase to 0.2 mg/kg twice daily (0.4 mg/kg/day)", "t": "Twice daily", "n": "Maximum 17 mg/day; stiripentol regimen lowers required dose"},
+    {"c": "Hepatic impairment", "r": "Any", "d": "Lower starting dose and slower titration; reduced maximum (e.g., max ~13 mg/day depending on regimen)", "t": "Twice daily", "n": "Per product hepatic adjustment table"},
+    {"c": "Severe renal impairment", "r": "Any", "d": "Not recommended", "t": "-", "n": "Insufficient data"}
+  ],
+  "admin": [
+    "Available only through the restricted Fintepla REMS program - prescriber, pharmacy, and patient must be enrolled",
+    "Obtain a baseline echocardiogram before starting therapy",
+    "May be taken with or without food; the oral solution is measured with the provided oral syringe",
+    "Titrate per the schedule; do not stop abruptly (taper to reduce risk of increased seizure frequency and status epilepticus)"
+  ],
+  "moa": "The exact antiseizure mechanism is unknown, but fenfluramine and its active metabolite norfenfluramine increase synaptic serotonin by promoting release and inhibiting reuptake, and act as agonists at multiple serotonin receptor subtypes (including 5-HT1D, 5-HT2A, and 5-HT2C). Activity at the sigma-1 receptor may also contribute. Agonism at 5-HT2B receptors on heart valves and pulmonary vasculature underlies the valvulopathy and pulmonary hypertension risk seen historically.",
+  "contra": {
+    "absolute": [
+      "Concomitant use with, or within 14 days of, monoamine oxidase inhibitors (risk of serotonin syndrome)",
+      "Known hypersensitivity to fenfluramine or any excipient"
+    ],
+    "relative": [
+      "Pre-existing valvular heart disease or pulmonary arterial hypertension",
+      "Concomitant serotonergic drugs (serotonin syndrome risk)",
+      "Glaucoma / conditions with increased risk of angle closure",
+      "History of substance/CNS-stimulant misuse (controlled substance)",
+      "Hepatic impairment (reduce dose)"
+    ],
+    "monitor": [
+      "Echocardiography for valvular heart disease and pulmonary arterial hypertension",
+      "Appetite, weight, and growth (especially in children)",
+      "Serotonin syndrome and behavioral/suicidality changes"
+    ]
+  },
+  "preg": "There are limited data on fenfluramine use in pregnant women. It should be used during pregnancy only if the potential benefit justifies the potential risk to the fetus; untreated seizures also pose risk. A pregnancy exposure registry exists for antiseizure medications.",
+  "lact": "It is not known whether fenfluramine is excreted in human milk. The developmental and health benefits of breastfeeding should be weighed against the mother's clinical need for fenfluramine and any potential adverse effects on the breastfed infant.",
+  "renal": "No dosage adjustment is needed in mild to moderate renal impairment. Fenfluramine has not been adequately studied in severe renal impairment and is not recommended in those patients.",
+  "hepatic": "Hepatic impairment increases exposure; use a lower starting dose, slower titration, and a reduced maximum daily dose according to the product labeling. Use with caution.",
+  "interactions": {
+    "major": [
+      "Monoamine oxidase inhibitors (contraindicated; serotonin syndrome) - do not use within 14 days",
+      "Other serotonergic drugs (SSRIs, SNRIs, triptans, tramadol, lithium, St. John's wort) - serotonin syndrome risk",
+      "Drugs known to cause valvular heart disease or pulmonary hypertension (additive risk)"
+    ],
+    "moderate": [
+      "Strong CYP1A2 or CYP2B6 inducers (may decrease fenfluramine exposure)",
+      "Stiripentol with clobazam and valproate (increases fenfluramine exposure - requires lower dosing)",
+      "CNS depressants/alcohol (additive sedation)"
+    ],
+    "minor": [
+      "Drugs that raise gastric pH (minor effect on solution)"
+    ],
+    "food": "May be taken with or without food; no clinically significant food interaction",
+    "alcohol": "Avoid - additive central nervous system depression",
+    "diagnostics": "May cause false-positive amphetamine results on urine drug immunoassays"
+  },
+  "se": {
+    "common": ["Decreased appetite", "Somnolence/sedation", "Diarrhea", "Constipation", "Fatigue/lethargy", "Pyrexia", "Weight loss", "Ataxia/balance problems", "Drooling"],
+    "serious": ["Cardiac valvulopathy (BOXED WARNING)", "Pulmonary arterial hypertension (BOXED WARNING)", "Decreased growth/weight in children", "Serotonin syndrome", "Suicidal ideation and behavior", "Status epilepticus on abrupt withdrawal", "Increased seizure frequency on withdrawal"],
+    "rare": ["Glaucoma / increased intraocular pressure", "Hypersensitivity reactions"],
+    "emergency": ["Signs of pulmonary hypertension (worsening dyspnea, fatigue, syncope, chest pain)", "New cardiac murmur or heart failure symptoms", "Serotonin syndrome (agitation, hyperthermia, clonus)", "Status epilepticus"]
+  },
+  "monitoring": [
+    "Echocardiogram before treatment, every 6 months during treatment, and once 3 to 6 months after the final dose (valvulopathy and PAH)",
+    "Body weight and growth in pediatric patients",
+    "Suicidal thoughts/behavior and mood changes",
+    "Signs of serotonin syndrome, especially with other serotonergic drugs",
+    "REMS program requirements and continued enrollment"
+  ],
+  "counsel": [
+    "This medicine is only available through a special safety (REMS) program that requires regular heart ultrasound scans",
+    "Keep all echocardiogram appointments - they check for heart valve and lung blood-pressure problems",
+    "Do not stop the medicine suddenly; stopping abruptly can cause more or prolonged seizures",
+    "Tell your doctor about all other medicines, especially antidepressants - do not use MAO inhibitors",
+    "Report shortness of breath, tiredness, fainting, swelling, or chest pain",
+    "Decreased appetite and weight loss are common - report significant changes, especially in children"
+  ],
+  "pk": [
+    ["Onset", "Seizure reduction develops over the titration period"],
+    ["Peak", "Peak plasma concentration about 3-5 hours after an oral dose"],
+    ["Half-life", "Approximately 20 hours (active metabolite norfenfluramine longer)"],
+    ["Duration", "Twice-daily dosing maintains effect"],
+    ["Storage", "Store the oral solution at room temperature; do not freeze; use within the specified period after opening"]
+  ],
+  "pearls": [
+    "BOXED WARNING for cardiac valvulopathy and pulmonary arterial hypertension - the legacy of fenfluramine's appetite-suppressant 'fen-phen' era; mandatory echocardiographic surveillance and REMS enrollment",
+    "Now a recognized antiseizure medication with substantial efficacy in Dravet and Lennox-Gastaut syndromes",
+    "Concomitant stiripentol with clobazam markedly raises fenfluramine levels, so the maximum dose is lower in that regimen",
+    "Controlled substance (Schedule IV in the US) - has appetite-suppressant and CNS effects; can cause false-positive amphetamine screens",
+    "Taper rather than stop abruptly to avoid rebound seizures or status epilepticus"
+  ],
+  "missed": "If a dose is missed, take it as soon as remembered unless it is close to the next scheduled dose, in which case skip the missed dose and resume the regular twice-daily schedule. Do not take two doses at once to make up for a missed dose.",
+  "overdose": "Overdose may cause exaggerated serotonergic and CNS effects including agitation, drowsiness, tremor, hyperthermia, flushing, abdominal pain, hyperventilation, dilated pupils, and serotonin syndrome; severe cases can involve seizures and cardiovascular instability. Management is supportive with cardiovascular and neurologic monitoring; treat serotonin syndrome and hyperthermia, control seizures with benzodiazepines, and consider cyproheptadine for serotonin toxicity. There is no specific antidote.",
+  "refs": [
+    ["FDA Prescribing Information - Fintepla (fenfluramine) - includes Boxed Warning and REMS", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Fenfluramine", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fenfluramine%22"]
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "generic": "Labetalol",
+  "cls": "Combined alpha- and beta-adrenergic blocker (antihypertensive)",
+  "pharm": "Blocks both alpha-1 and non-selective beta adrenergic receptors, lowering blood pressure by reducing peripheral vascular resistance without major reflex tachycardia.",
+  "tags": ["Rx only", "Alpha/beta blocker", "Hypertensive emergency", "Pregnancy-friendly"],
+  "quick": [
+    ["Adult dose", "100 mg PO twice daily (titrate); IV bolus 20 mg for emergencies"],
+    ["Meal", "Take with or just after food to improve absorption"],
+    ["Pregnancy", "Preferred agent; widely used (incl. pre-eclampsia)"],
+    ["Lactation", "Compatible; small amounts in milk"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Caution; reduce dose, risk of hepatotoxicity"],
+    ["Alcohol", "May worsen postural hypotension; limit intake"],
+    ["Monitoring", "BP, heart rate, postural symptoms, LFTs if indicated"]
+  ],
+  "summary": "Labetalol is a combined alpha-1 and non-selective beta-adrenergic blocker used to treat hypertension, including severe hypertension and hypertensive emergencies (IV), and is a preferred agent in pregnancy-associated hypertension. It lowers blood pressure by reducing systemic vascular resistance while limiting reflex tachycardia. It is well tolerated but can cause postural hypotension, fatigue, and, rarely, hepatotoxicity.",
+  "indications": [
+    "Hypertension (oral, alone or with other agents)",
+    "Severe hypertension and hypertensive emergencies (intravenous)",
+    "Hypertension in pregnancy, including pre-eclampsia",
+    "Controlled blood-pressure reduction in clonidine withdrawal or pheochromocytoma (specialist use)"
+  ],
+  "dosage": [
+    {"c": "Hypertension (oral, adult)", "r": "Oral", "d": "Start 100 mg twice daily; titrate by 100 mg BID every 2-3 days. Usual 200-400 mg twice daily (max 2.4 g/day)", "t": "BID", "n": "Take with food; titrate to BP and tolerance"},
+    {"c": "Hypertensive emergency (IV bolus)", "r": "IV", "d": "20 mg slow IV over 2 min; then 40-80 mg every 10 min as needed (max total 300 mg)", "t": "Repeat q10min", "n": "Patient supine; continuous BP monitoring"},
+    {"c": "Hypertensive emergency (IV infusion)", "r": "IV", "d": "2 mg/min infusion titrated to response (usual effective dose 50-200 mg)", "t": "Continuous", "n": "Stop infusion once target BP achieved"},
+    {"c": "Hypertension in pregnancy", "r": "Oral", "d": "100-200 mg twice daily, titrated; max about 2.4 g/day", "t": "BID-TID", "n": "Widely used first-line in pregnancy"}
+  ],
+  "admin": [
+    "Take oral tablets consistently with or just after food",
+    "For IV use keep the patient supine during and shortly after dosing; do not let the patient stand for several hours",
+    "Use continuous or frequent BP and heart-rate monitoring during IV therapy",
+    "Do not stop oral therapy abruptly - taper to avoid rebound hypertension/angina",
+    "Stand up slowly to limit dizziness"
+  ],
+  "moa": "Labetalol competitively blocks both alpha-1 (postsynaptic) and beta-1 and beta-2 adrenergic receptors. The alpha-1 blockade causes vasodilation and reduces peripheral vascular resistance, while concurrent beta blockade prevents the reflex tachycardia that would otherwise accompany vasodilation. The net effect is a fall in blood pressure with relatively little change in cardiac output, making it useful for rapid yet controlled BP reduction.",
+  "contra": {
+    "absolute": [
+      "Bronchial asthma / severe reactive airway disease",
+      "Overt cardiac failure",
+      "Second- or third-degree heart block (without pacemaker)",
+      "Severe bradycardia, cardiogenic shock, sick sinus syndrome",
+      "Hypersensitivity to labetalol"
+    ],
+    "relative": [
+      "Diabetes (may mask hypoglycaemia)",
+      "Peripheral vascular disease",
+      "Hepatic impairment",
+      "Pheochromocytoma without adequate alpha blockade",
+      "Prinzmetal (vasospastic) angina"
+    ],
+    "monitor": [
+      "Bradycardia and heart block",
+      "Postural hypotension",
+      "Signs of heart failure",
+      "Hepatic function if symptoms suggest liver injury"
+    ]
+  },
+  "preg": "One of the preferred antihypertensives in pregnancy, including chronic hypertension and pre-eclampsia, based on extensive clinical use. Monitor the neonate for bradycardia, hypotension, and hypoglycaemia after delivery when used near term.",
+  "lact": "Small amounts are excreted in breast milk; considered compatible with breastfeeding. Observe the breastfed infant for bradycardia and signs of beta-blockade.",
+  "renal": "No dose adjustment required in renal impairment; labetalol is extensively metabolised by the liver and not significantly removed by dialysis.",
+  "hepatic": "Use with caution and consider lower doses in hepatic impairment. Rare but serious hepatocellular injury (including fatal cases) has been reported; discontinue if liver injury is suspected and do not rechallenge.",
+  "interactions": {
+    "major": [
+      "Verapamil / diltiazem and other negative chronotropes (additive bradycardia and AV block)",
+      "Clonidine (risk of rebound hypertension if clonidine stopped; stop labetalol first)"
+    ],
+    "moderate": [
+      "Other antihypertensives / nitrates (additive hypotension)",
+      "Tricyclic antidepressants (increased tremor)",
+      "Halothane anaesthesia (synergistic hypotension)",
+      "Insulin / oral hypoglycaemics (may mask hypoglycaemia)"
+    ],
+    "minor": ["NSAIDs (may blunt antihypertensive effect)"],
+    "food": "Food increases oral bioavailability; take consistently with respect to meals.",
+    "alcohol": "Alcohol may potentiate postural hypotension and dizziness; limit intake.",
+    "diagnostics": "May cause false-positive increases in urinary catecholamines/metanephrines (interferes with assays for pheochromocytoma)."
+  },
+  "se": {
+    "common": ["Dizziness / postural hypotension", "Fatigue", "Nasal congestion", "Headache", "Scalp tingling (early in therapy)"],
+    "serious": ["Bradycardia / heart block", "Bronchospasm", "Worsening heart failure", "Severe hypotension"],
+    "rare": ["Hepatotoxicity (hepatocellular necrosis)", "Severe skin reactions", "Lupus-like syndrome"],
+    "emergency": ["Severe bradycardia / hypotension with collapse", "Acute bronchospasm", "Signs of hepatic injury (jaundice, dark urine)"]
+  },
+  "monitoring": ["Blood pressure (sitting and standing) and heart rate", "Symptoms of heart failure or bronchospasm", "Liver function tests if hepatic symptoms occur", "Blood glucose in diabetics", "Fetal/neonatal heart rate when used in late pregnancy"],
+  "counsel": [
+    "Take with or just after food and at the same times each day",
+    "Do not stop suddenly - this can cause chest pain or a rise in blood pressure",
+    "Stand up slowly; report fainting, severe dizziness, or shortness of breath",
+    "Report yellowing of skin/eyes, dark urine, or unusual tiredness (possible liver effect)",
+    "Inform your doctor if you have asthma, diabetes, or heart problems"
+  ],
+  "pk": [
+    ["Onset", "Oral 20 min-2 h; IV within 2-5 minutes"],
+    ["Peak", "Oral 1-2 h; IV effect peaks 5-15 min"],
+    ["Half-life", "About 5-8 hours"],
+    ["Duration", "Oral about 8-12 hours; IV effect lasts hours"],
+    ["Storage", "Store at 20-25 C; protect from light; do not freeze injection"]
+  ],
+  "pearls": [
+    "Combined alpha/beta blockade lowers BP without major reflex tachycardia - useful in hypertensive emergencies",
+    "Preferred oral and IV antihypertensive in pregnancy and pre-eclampsia",
+    "Keep patient supine during IV dosing; orthostatic hypotension is common after IV use",
+    "Watch for rare hepatotoxicity - investigate and stop if liver symptoms develop"
+  ],
+  "missed": "Take the missed oral dose as soon as you remember. If it is almost time for the next dose, skip it and continue your usual schedule - do not take a double dose.",
+  "overdose": "Overdose causes severe hypotension and bradycardia. Place the patient supine with legs raised. Treat bradycardia with atropine, bronchospasm with beta-agonists, and refractory hypotension/bradycardia with IV fluids, glucagon, and vasopressors; consider transvenous pacing. Labetalol is not effectively removed by dialysis.",
+  "refs": [
+    ["FDA Label - Labetalol (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22labetalol%22"],
+    ["DailyMed - Labetalol", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=labetalol"]
+  ]
+}

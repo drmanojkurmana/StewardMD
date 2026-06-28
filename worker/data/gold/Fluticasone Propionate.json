@@ -1,0 +1,89 @@
+{
+  "generic": "Fluticasone Propionate",
+  "cls": "Intranasal/inhaled corticosteroid (glucocorticoid)",
+  "pharm": "Synthetic trifluorinated corticosteroid",
+  "tags": ["corticosteroid", "allergic rhinitis", "intranasal", "anti-inflammatory", "hay fever"],
+  "quick": [
+    ["Adult dose", "2 sprays/nostril once daily, then 1-2 sprays/nostril as needed"],
+    ["Meal", "Not affected by food (intranasal)"],
+    ["Pregnancy", "Use only if clearly needed"],
+    ["Lactation", "Caution; likely low systemic exposure"],
+    ["Renal", "No adjustment"],
+    ["Hepatic", "Caution; reduced clearance"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "Growth in children, nasal mucosa, eyes"]
+  ],
+  "summary": "Fluticasone propionate is a potent topical corticosteroid used intranasally for allergic rhinitis. Adults and children >=12 use 2 sprays per nostril once daily for week 1, then 1-2 sprays per nostril as needed. Minimal systemic absorption; key cautions are nasal septal effects and growth in children.",
+  "indications": [
+    "Temporary relief of nasal symptoms of hay fever and upper respiratory allergies (nasal congestion, runny nose, sneezing, itchy nose)",
+    "Itchy, watery eyes associated with allergic rhinitis"
+  ],
+  "dosage": [
+    {"c": "Allergic rhinitis - adults & children >=12 yr", "r": "Week 1", "d": "2 sprays in each nostril once daily", "t": "Once daily", "n": "Total 200 mcg/day"},
+    {"c": "Allergic rhinitis - adults & children >=12 yr", "r": "Maintenance", "d": "1-2 sprays in each nostril once daily as needed", "t": "Once daily", "n": "Use lowest effective dose"},
+    {"c": "Children 4-11 yr", "r": "Pediatric", "d": "1 spray in each nostril once daily", "t": "Once daily", "n": "Shortest duration needed; monitor growth"}
+  ],
+  "admin": [
+    "Prime the bottle before first use and shake gently before each use",
+    "Use only once daily; do not exceed directed dose",
+    "Direct spray away from the nasal septum",
+    "Clean the spray nozzle regularly",
+    "Full benefit may take several days of regular use"
+  ],
+  "moa": "A synthetic corticosteroid with high affinity for the glucocorticoid receptor. Binding suppresses transcription of pro-inflammatory cytokines and mediators, reducing infiltration of inflammatory cells (eosinophils, mast cells) and decreasing nasal mucosal inflammation, secretion and hyperresponsiveness in allergic rhinitis.",
+  "contra": {
+    "absolute": ["Hypersensitivity to fluticasone propionate"],
+    "relative": ["Recent nasal surgery, trauma or septal ulcers", "Untreated nasal infection", "Ocular herpes simplex"],
+    "monitor": ["Concomitant strong CYP3A4 inhibitors (e.g., ritonavir, ketoconazole)", "Children for growth velocity", "Signs of nasal candidiasis"]
+  },
+  "preg": "Use during pregnancy only if clearly needed. Intranasal corticosteroids have low systemic exposure; lowest effective dose is recommended.",
+  "lact": "Caution advised; systemic exposure from intranasal use is low and infant exposure is expected to be minimal. Weigh benefit against potential risk.",
+  "renal": "No dose adjustment required given low systemic absorption.",
+  "hepatic": "Use with caution in severe hepatic impairment, as reduced clearance may increase systemic corticosteroid exposure.",
+  "interactions": {
+    "major": ["Strong CYP3A4 inhibitors (ritonavir, ketoconazole) - markedly increased systemic fluticasone, risk of Cushing syndrome / adrenal suppression"],
+    "moderate": ["Other corticosteroids (any route) - additive systemic corticosteroid effects"],
+    "minor": ["None significant for intranasal route"],
+    "food": "No clinically significant food interaction.",
+    "alcohol": "No specific interaction.",
+    "diagnostics": "High-dose chronic use may suppress HPA axis (cortisol)."
+  },
+  "se": {
+    "common": ["Headache", "Nasal irritation / burning", "Epistaxis (nosebleed)", "Pharyngitis", "Sneezing on application"],
+    "serious": ["Nasal septal perforation", "Nasal/oral candidiasis", "Glaucoma or cataract with prolonged use", "Hypersensitivity reactions"],
+    "rare": ["Adrenal suppression / Cushingoid features (high-dose, prolonged)", "Growth suppression in children", "Impaired wound healing in nasal mucosa"],
+    "emergency": ["Severe allergic reaction / angioedema or anaphylaxis", "Bronchospasm"]
+  },
+  "monitoring": [
+    "Periodic examination of nasal mucosa for irritation, ulceration or septal changes",
+    "Growth velocity in children with prolonged use",
+    "Eye exams for cataract/glaucoma with long-term use",
+    "Signs of systemic corticosteroid effect with high doses or CYP3A4 inhibitors"
+  ],
+  "counsel": [
+    "Use exactly as directed, once daily; relief builds over several days",
+    "Aim the spray away from the center wall of the nose",
+    "Report persistent nosebleeds, nasal pain or whistling sound",
+    "Tell your doctor about persistent symptoms beyond 6 months of daily use",
+    "Children should use for the shortest time needed"
+  ],
+  "pk": [
+    ["Onset", "Symptom improvement within 12 hours to a few days"],
+    ["Peak", "Maximal benefit over several days of regular use"],
+    ["Half-life", "Approximately 7-8 hours (systemic)"],
+    ["Duration", "24 hours (once-daily dosing)"],
+    ["Storage", "Store at controlled room temperature; do not freeze"]
+  ],
+  "pearls": [
+    "Intranasal route gives high local potency with low systemic bioavailability",
+    "Most effective when used regularly rather than only as needed",
+    "Direct away from the septum to reduce epistaxis and perforation risk",
+    "Strong CYP3A4 inhibitors can raise systemic levels - use caution"
+  ],
+  "missed": "If a dose is missed, take it when remembered, then resume once-daily dosing. Do not use a double dose to make up for a missed one.",
+  "overdose": "Acute overdose via the intranasal route is unlikely to produce clinically significant effects. Chronic excessive use may cause systemic corticosteroid effects (HPA-axis suppression); manage by reducing dose.",
+  "refs": [
+    ["FDA Fluticasone Propionate Nasal Spray Drug Facts (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fluticasone+propionate+nasal%22"],
+    ["FDA DailyMed - Fluticasone Propionate", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

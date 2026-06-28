@@ -1,0 +1,103 @@
+{
+  "generic": "Amikacin",
+  "cls": "Aminoglycoside antibiotic",
+  "pharm": "Concentration-dependent bactericidal aminoglycoside; semisynthetic kanamycin derivative with Gram-negative coverage including Pseudomonas.",
+  "tags": ["Aminoglycoside", "Gram-negative", "Bactericidal", "Parenteral", "Nephrotoxic", "Ototoxic", "Narrow therapeutic index"],
+  "quick": [
+    ["Adult dose", "15 mg/kg/day IM/IV divided q8-12h (max 1.5 g/day)"],
+    ["Meal", "N/A (parenteral)"],
+    ["Pregnancy", "Avoid; fetal ototoxicity/deafness risk"],
+    ["Lactation", "Caution; minimal infant oral absorption"],
+    ["Renal", "Adjust dose/interval by CrCl & levels"],
+    ["Hepatic", "No adjustment"],
+    ["Alcohol", "No significant interaction"],
+    ["Monitoring", "Peak/trough levels, renal function, audiometry"]
+  ],
+  "summary": "Semisynthetic aminoglycoside for short-term treatment of serious Gram-negative infections, including Pseudomonas. Given IM or IV (not orally absorbed). Carries boxed warnings for ototoxicity and nephrotoxicity; requires renal dosing, serum level monitoring, and audiometry. Therapy usually limited to 7-14 days.",
+  "indications": [
+    "Short-term treatment of serious Gram-negative infections (Pseudomonas, E. coli, Proteus, Klebsiella-Enterobacter-Serratia, Acinetobacter)",
+    "Septicemia/bacteremia",
+    "Respiratory tract infections",
+    "Bone and joint infections",
+    "CNS infections including meningitis",
+    "Skin and soft tissue infections",
+    "Intra-abdominal infections",
+    "Burns and post-operative infections",
+    "Complicated and recurrent urinary tract infections",
+    "Multidrug-resistant tuberculosis with anti-mycobacterials (off-label/secondary)"
+  ],
+  "dosage": [
+    {"c": "Serious Gram-negative infection (adult/child)", "r": "IM or IV", "d": "15 mg/kg/day", "t": "In 2-3 divided doses (e.g., 7.5 mg/kg q12h)", "n": "Max 15 mg/kg/day; total adult dose not to exceed 1.5 g/day"},
+    {"c": "Extended-interval (once-daily) dosing", "r": "IV", "d": "15 mg/kg", "t": "Once daily", "n": "Common clinical practice; maximizes concentration-dependent killing"},
+    {"c": "Neonates", "r": "IM or IV", "d": "Loading 10 mg/kg, then 7.5 mg/kg", "t": "Maintenance every 12 h", "n": "Adjust per renal function and serum levels"},
+    {"c": "Uncomplicated UTI", "r": "IM or IV", "d": "250 mg", "t": "Twice daily", "n": "Usual duration 7-10 days"},
+    {"c": "Obesity", "r": "IM or IV", "d": "Use ideal/adjusted body weight", "t": "Per regimen", "n": "Avoid dosing on total body weight"}
+  ],
+  "admin": [
+    "Administer IM or by IV infusion; not absorbed orally",
+    "IV: dilute and infuse over 30-60 minutes (adults); 1-2 hours in infants",
+    "Do not mix with beta-lactam antibiotics in the same syringe or line (mutual inactivation)",
+    "Ensure adequate hydration during therapy",
+    "Usual duration 7-10 days; safety beyond 14 days not established"
+  ],
+  "moa": "Binds irreversibly to the 30S ribosomal subunit, causing misreading of mRNA and inhibition of bacterial protein synthesis; concentration-dependent bactericidal activity against aerobic Gram-negative bacilli.",
+  "contra": {
+    "absolute": ["Hypersensitivity to amikacin or other aminoglycosides", "Cross-sensitivity among aminoglycosides"],
+    "relative": ["Pre-existing renal impairment", "Hearing or vestibular impairment", "Myasthenia gravis or neuromuscular disorders", "Dehydration", "Elderly patients", "Neonates and premature infants"],
+    "monitor": ["Renal function", "Serum drug levels", "Audiometry"]
+  },
+  "preg": "Aminoglycosides cross the placenta and may cause congenital deafness/ototoxicity; avoid unless life-threatening infection (former category D).",
+  "lact": "Small amounts excreted in breast milk; minimal oral absorption by the infant; use with caution.",
+  "renal": "Requires dose adjustment - reduce dose or extend interval based on CrCl and serum levels; renal excretion is the major route of elimination.",
+  "hepatic": "No specific dose adjustment needed.",
+  "interactions": {
+    "major": ["Other nephrotoxic/ototoxic drugs (other aminoglycosides, vancomycin, amphotericin B, cisplatin, cyclosporine)", "Potent diuretics (furosemide, ethacrynic acid) - enhance ototoxicity", "Neuromuscular blockers and anesthetics - potentiate neuromuscular blockade with risk of respiratory paralysis"],
+    "moderate": ["NSAIDs - reduce clearance, especially in neonates", "Cephalosporins - additive nephrotoxicity"],
+    "minor": ["Indomethacin (neonates)"],
+    "food": "N/A (parenteral)",
+    "alcohol": "Not significant",
+    "diagnostics": "Monitor serum peak and trough levels; do not mix with beta-lactams in the same syringe (inactivation)."
+  },
+  "se": {
+    "common": ["Nephrotoxicity (rising serum creatinine)", "Injection site reactions", "Rash", "Fever"],
+    "serious": ["Ototoxicity (hearing loss, often irreversible; tinnitus; vertigo)", "Nephrotoxicity (usually reversible)", "Neuromuscular blockade with respiratory depression"],
+    "rare": ["Hypersensitivity reactions", "Hypomagnesemia", "Peripheral neuropathy", "Optic neuritis"],
+    "emergency": ["Anaphylaxis", "Acute respiratory paralysis (neuromuscular blockade)", "Acute renal failure", "Sudden hearing loss"]
+  },
+  "monitoring": [
+    "Serum peak (target ~20-35 mcg/mL conventional dosing)",
+    "Serum trough (<10 mcg/mL, ideally <5-8 mcg/mL)",
+    "Renal function (serum creatinine, BUN, urine output) before and during therapy",
+    "Baseline and serial audiometry",
+    "Serum calcium, magnesium, sodium, and potassium",
+    "Hydration status"
+  ],
+  "counsel": [
+    "Report any hearing changes, ringing in the ears, or dizziness immediately",
+    "Stay well hydrated during treatment",
+    "This is a short-course hospital antibiotic given by injection",
+    "Complete the full prescribed course",
+    "Inform your clinician of any kidney problems or other ear/kidney-affecting medications"
+  ],
+  "pk": [
+    ["Onset", "Rapid (IV)"],
+    ["Peak", "IM ~0.5-2 h (~30-90 min post-dose); IV at end of infusion"],
+    ["Half-life", "~2-3 h; greatly prolonged in renal impairment (up to 30-86 h in anuria)"],
+    ["Duration", "Based on dosing interval"],
+    ["Storage", "20-25 C; do not use if discolored"]
+  ],
+  "pearls": [
+    "Extended-interval (once-daily) dosing maximizes concentration-dependent killing and post-antibiotic effect while reducing toxicity",
+    "Trough level is the key safety marker for toxicity",
+    "Not absorbed orally - must be given parenterally",
+    "Synergistic with beta-lactams but never mix in the same line",
+    "Not effective against anaerobes",
+    "Penetrates CSF poorly"
+  ],
+  "missed": "Hospital-administered; give as soon as noted and adjust the schedule. Do not double the dose. Recheck serum levels if timing is altered.",
+  "overdose": "Remove drug with hemodialysis (effective) or peritoneal dialysis; provide supportive care. For neuromuscular blockade, give calcium salts or anticholinesterase agents, or use mechanical ventilation. Monitor renal and auditory function.",
+  "refs": [
+    ["FDA Amikacin Sulfate Injection Label (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22AMIKACIN%20SULFATE%22"],
+    ["DailyMed - Amikacin", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=amikacin"]
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "generic": "Cefuroxime Axetil",
+  "cls": "Second-generation cephalosporin antibacterial (oral prodrug of cefuroxime)",
+  "pharm": "Beta-lactam antibiotic",
+  "tags": ["antibiotic", "cephalosporin", "beta-lactam", "second-generation", "respiratory infection", "UTI", "Lyme disease"],
+  "quick": [
+    ["Adult dose", "250 mg or 500 mg orally every 12 hours depending on infection (e.g. 250 mg q12h pharyngitis; 500 mg q12h skin infection)"],
+    ["Meal", "May be taken with or without food (food can improve absorption)"],
+    ["Pregnancy", "Generally considered acceptable when indicated; weigh benefit vs risk"],
+    ["Lactation", "Excreted in milk in low amounts; generally compatible"],
+    ["Renal", "Reduce dose/extend interval in significant renal impairment"],
+    ["Hepatic", "No specific adjustment generally required"],
+    ["Alcohol", "No specific disulfiram-like reaction; moderation advised"],
+    ["Monitoring", "Renal function, signs of superinfection/CDAD, clinical response"]
+  ],
+  "summary": "Cefuroxime axetil is the oral acetoxyethyl ester prodrug of cefuroxime, a second-generation cephalosporin. After absorption it is hydrolyzed to active cefuroxime, which kills susceptible bacteria by inhibiting cell-wall synthesis. It treats pharyngitis/tonsillitis, otitis media, sinusitis, bronchitis exacerbations, uncomplicated skin and urinary infections, gonorrhea, and early Lyme disease. Key cautions are beta-lactam hypersensitivity (cross-reactivity with penicillins) and Clostridioides difficile-associated diarrhea.",
+  "indications": [
+    "Pharyngitis/tonsillitis (adults and pediatric patients)",
+    "Acute bacterial otitis media (pediatric patients)",
+    "Acute bacterial maxillary sinusitis (adults and pediatric patients)",
+    "Acute bacterial exacerbations of chronic bronchitis (adults and patients >=13 years)",
+    "Uncomplicated skin and skin-structure infections (adults and patients >=13 years)",
+    "Uncomplicated urinary tract infections (adults and patients >=13 years)",
+    "Uncomplicated gonorrhea (adults and patients >=13 years)",
+    "Early Lyme disease (adults and patients >=13 years)"
+  ],
+  "dosage": [
+    {"c": "Pharyngitis/tonsillitis (mild-moderate)", "r": "Adult / adolescent >=13 yr", "d": "250 mg every 12 hours", "t": "Every 12 hours", "n": "For 10 days"},
+    {"c": "Acute maxillary sinusitis (mild-moderate)", "r": "Adult / adolescent >=13 yr", "d": "250 mg every 12 hours", "t": "Every 12 hours", "n": "For 10 days"},
+    {"c": "Acute exacerbation of chronic bronchitis", "r": "Adult / adolescent >=13 yr", "d": "250 mg or 500 mg every 12 hours", "t": "Every 12 hours", "n": "For 10 days"},
+    {"c": "Uncomplicated skin/skin-structure infection", "r": "Adult / adolescent >=13 yr", "d": "250 mg or 500 mg every 12 hours", "t": "Every 12 hours", "n": "For 10 days"},
+    {"c": "Uncomplicated urinary tract infection", "r": "Adult / adolescent >=13 yr", "d": "250 mg every 12 hours", "t": "Every 12 hours", "n": "For 7 to 10 days"},
+    {"c": "Uncomplicated gonorrhea", "r": "Adult / adolescent >=13 yr", "d": "1,000 mg as a single dose", "t": "Single dose", "n": "One-time"},
+    {"c": "Early Lyme disease", "r": "Adult / adolescent >=13 yr", "d": "500 mg every 12 hours", "t": "Every 12 hours", "n": "For 20 days"},
+    {"c": "Pediatric infections (can swallow tablets)", "r": "Pediatric", "d": "Per weight/indication (e.g. otitis media, pharyngitis); tablets and suspension are NOT bioequivalent", "t": "Every 12 hours", "n": "Do not substitute tablet for suspension mg-for-mg"}
+  ],
+  "admin": [
+    "Tablets may be taken with or without food (absorption is enhanced with food)",
+    "Swallow tablets whole; the crushed tablet has a strong, persistent bitter taste",
+    "Tablets and oral suspension are not bioequivalent and are not interchangeable on a milligram-per-milligram basis",
+    "Complete the full prescribed course"
+  ],
+  "moa": "Cefuroxime axetil is an inactive prodrug rapidly hydrolyzed by esterases in the intestinal mucosa and blood to active cefuroxime. Cefuroxime is a bactericidal beta-lactam that binds penicillin-binding proteins, inhibiting the final transpeptidation step of bacterial cell-wall peptidoglycan synthesis. This weakens the cell wall and leads to bacterial lysis and death. It is relatively stable to many bacterial beta-lactamases.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity (e.g. anaphylaxis) to cefuroxime axetil or to other beta-lactam antibacterials (penicillins, cephalosporins)"
+    ],
+    "relative": [
+      "History of penicillin hypersensitivity (cross-reactivity)",
+      "History of colitis or gastrointestinal disease",
+      "Significant renal impairment (dose adjustment)"
+    ],
+    "monitor": [
+      "Signs of hypersensitivity",
+      "Renal function",
+      "Diarrhea (C. difficile)"
+    ]
+  },
+  "preg": "Cephalosporins, including cefuroxime, are generally considered acceptable in pregnancy when an antibiotic is indicated; available data have not shown an increased risk of major malformations. Use if clearly needed.",
+  "lact": "Cefuroxime is excreted in human milk in low concentrations and is generally considered compatible with breastfeeding; monitor the infant for diarrhea or candidiasis.",
+  "renal": "Cefuroxime is renally cleared; reduce the dose or extend the dosing interval in significant renal impairment, particularly with creatinine clearance below about 20-30 mL/min. Supplemental dosing may be needed after hemodialysis.",
+  "hepatic": "No specific hepatic dose adjustment is generally required.",
+  "interactions": {
+    "major": [],
+    "moderate": [
+      "Probenecid (raises and prolongs cefuroxime serum levels)",
+      "Agents that reduce gastric acidity (antacids, H2 blockers, PPIs) - may decrease absorption of cefuroxime axetil",
+      "Aminoglycosides / loop diuretics (potential additive nephrotoxicity)"
+    ],
+    "minor": [
+      "Oral anticoagulants (cephalosporins may rarely potentiate effect)"
+    ],
+    "food": "Food enhances absorption; antacids reduce it",
+    "alcohol": "No characteristic disulfiram-like reaction; moderation advised",
+    "diagnostics": "May cause a false-positive Coombs test and false-positive urine glucose with copper-reduction methods"
+  },
+  "se": {
+    "common": ["Diarrhea", "Nausea", "Vomiting", "Headache", "Dizziness", "Vaginal candidiasis"],
+    "serious": ["Clostridioides difficile-associated diarrhea/pseudomembranous colitis", "Serious hypersensitivity (anaphylaxis)", "Severe cutaneous reactions (Stevens-Johnson syndrome, toxic epidermal necrolysis)"],
+    "rare": ["Seizures (especially with renal impairment)", "Hepatic dysfunction", "Hemolytic anemia", "Eosinophilia/blood dyscrasias"],
+    "emergency": ["Anaphylaxis", "Severe/bloody diarrhea (C. difficile)", "Severe skin reaction (SJS/TEN)", "Angioedema"]
+  },
+  "monitoring": [
+    "Clinical response to therapy",
+    "Renal function in at-risk patients",
+    "Signs and symptoms of hypersensitivity reactions",
+    "Diarrhea (evaluate for C. difficile if it occurs)",
+    "Signs of superinfection (e.g. candidiasis) with prolonged use"
+  ],
+  "counsel": [
+    "Take exactly as prescribed and complete the full course even if you feel better",
+    "Swallow tablets whole - they are very bitter if crushed",
+    "Report severe or watery/bloody diarrhea, which may occur during or weeks after treatment",
+    "Tell your doctor about any penicillin or cephalosporin allergy",
+    "Report rash, itching, swelling, or trouble breathing immediately",
+    "May be taken with food to improve absorption and reduce stomach upset"
+  ],
+  "pk": [
+    ["Onset", "Bactericidal activity once absorbed and hydrolyzed to cefuroxime"],
+    ["Peak", "Peak serum cefuroxime about 2-3 hours after an oral dose with food"],
+    ["Half-life", "Approximately 1-2 hours (prolonged in renal impairment)"],
+    ["Duration", "Supports twice-daily dosing"],
+    ["Storage", "Store tablets at controlled room temperature 15-30 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Oral prodrug - cefuroxime axetil is hydrolyzed to active cefuroxime; tablet and suspension are NOT bioequivalent",
+    "Second-generation cephalosporin with useful activity against respiratory pathogens including beta-lactamase-producing H. influenzae and M. catarrhalis",
+    "An option for early Lyme disease in penicillin/doxycycline-intolerant patients (500 mg twice daily x 20 days)",
+    "Food improves absorption; crushed tablet is intensely bitter",
+    "Cross-reactivity with penicillins - take an allergy history before prescribing"
+  ],
+  "missed": "Take the missed dose as soon as you remember. If it is almost time for the next dose, skip the missed dose and continue the regular twice-daily schedule. Do not double up to catch up.",
+  "overdose": "Overdose of cephalosporins can cause cerebral irritation leading to convulsions, especially in renal impairment. Management is supportive; serum cefuroxime levels can be reduced by hemodialysis or peritoneal dialysis. Protect the airway and treat seizures as needed.",
+  "refs": [
+    ["FDA Prescribing Information - Cefuroxime axetil tablets", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Cefuroxime axetil", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22cefuroxime%20axetil%22"]
+  ]
+}

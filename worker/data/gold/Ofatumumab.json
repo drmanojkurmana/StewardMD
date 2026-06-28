@@ -1,0 +1,111 @@
+{
+  "generic": "Ofatumumab",
+  "cls": "Anti-CD20 cytolytic monoclonal antibody (fully human IgG1) - antineoplastic (Arzerra, IV) and B-cell-depleting immunomodulator for MS (Kesimpta, SC)",
+  "pharm": "A fully human IgG1 monoclonal antibody that binds a distinct epitope on the CD20 molecule of B lymphocytes, causing potent B-cell depletion via complement-dependent cytotoxicity and antibody-dependent cell-mediated cytotoxicity; used intravenously for chronic lymphocytic leukemia (Arzerra) and subcutaneously for relapsing multiple sclerosis (Kesimpta).",
+  "tags": ["Biologic", "Rx only", "Anti-CD20 monoclonal antibody", "CLL (Arzerra IV)", "Relapsing MS (Kesimpta SC)", "HBV reactivation risk"],
+  "quick": [
+    ["Adult dose", "Kesimpta (MS): 20 mg SC at weeks 0,1,2 then 20 mg monthly from week 4. Arzerra (CLL): IV 300 mg then 1000-2000 mg per regimen"],
+    ["Meal", "Not applicable (intravenous/subcutaneous)"],
+    ["Pregnancy", "May cause fetal B-cell depletion; use effective contraception during and 6 months after last dose"],
+    ["Lactation", "Unknown if in human milk; monitor breastfed infant for B-cell depletion"],
+    ["Renal", "No specific dose adjustment described (monoclonal antibody)"],
+    ["Hepatic", "No specific dose adjustment described (monoclonal antibody)"],
+    ["Alcohol", "No direct interaction with the antibody"],
+    ["Monitoring", "HBV screening, infections/PML, infusion or injection reactions, CBC (CLL), immunoglobulins"]
+  ],
+  "summary": "Ofatumumab is a fully human anti-CD20 IgG1 monoclonal antibody that depletes B lymphocytes through complement-dependent and antibody-dependent cytotoxicity. It exists as two distinct products: Arzerra (intravenous), approved for chronic lymphocytic leukemia (CLL) - previously untreated (with chlorambucil), and relapsed/refractory disease; and Kesimpta (subcutaneous), approved for relapsing forms of multiple sclerosis (clinically isolated syndrome, relapsing-remitting, and active secondary progressive disease). Arzerra is given as weight-independent IV infusions with mandatory premedication (acetaminophen, antihistamine, corticosteroid) because of infusion reactions; Kesimpta is a self-administered 20 mg monthly subcutaneous injection after a loading schedule. Across both, the key safety issues are infusion/injection-related reactions, increased risk of serious infections, hepatitis B virus (HBV) reactivation (screen all patients; active HBV is a contraindication for Kesimpta), and rare progressive multifocal leukoencephalopathy (PML). Cytopenias are notable with the CLL product.",
+  "indications": [
+    "Arzerra (IV): previously untreated CLL in combination with chlorambucil in patients for whom fludarabine-based therapy is considered inappropriate",
+    "Arzerra (IV): extended treatment of CLL in patients in complete or partial response after at least two lines of therapy",
+    "Arzerra (IV): relapsed CLL in combination with fludarabine and cyclophosphamide",
+    "Arzerra (IV): CLL refractory to fludarabine and alemtuzumab",
+    "Kesimpta (SC): relapsing forms of multiple sclerosis in adults - clinically isolated syndrome, relapsing-remitting disease, and active secondary progressive disease"
+  ],
+  "dosage": [
+    {"c": "Relapsing multiple sclerosis (Kesimpta)", "r": "Adult SC", "d": "Loading: 20 mg subcutaneously at weeks 0, 1, and 2. Maintenance: 20 mg subcutaneously once monthly starting week 4", "t": "Weekly x3 loading, then monthly", "n": "No injection at week 3; self-administered after training; screen HBV and check immunoglobulins/LFTs before starting"},
+    {"c": "Previously untreated CLL with chlorambucil (Arzerra)", "r": "Adult IV", "d": "300 mg on Day 1, then 1000 mg on Day 8 (Cycle 1); then 1000 mg on Day 1 of each subsequent 28-day cycle", "t": "Cycles of 28 days, minimum 3 up to 12 cycles", "n": "Continue until best response or maximum 12 cycles; premedicate before each infusion"},
+    {"c": "Relapsed CLL with fludarabine and cyclophosphamide (Arzerra)", "r": "Adult IV", "d": "300 mg on Day 1, then 1000 mg on Day 8 (Cycle 1); then 1000 mg on Day 1 of each subsequent 28-day cycle", "t": "28-day cycles, maximum 6 cycles", "n": "Premedicate before each infusion"},
+    {"c": "Refractory CLL (Arzerra monotherapy)", "r": "Adult IV", "d": "300 mg on Day 1, then 2000 mg weekly for 7 doses (infusions 2-8), then 4 weeks later 2000 mg every 4 weeks for 4 doses (infusions 9-12)", "t": "12 doses over ~24 weeks", "n": "Premedicate before each infusion"}
+  ],
+  "admin": [
+    "Kesimpta (SC): given as a subcutaneous injection (prefilled pen/syringe) into the abdomen, thigh, or upper outer arm; first injection under guidance of a healthcare professional, then self-administered; let it reach room temperature before use and rotate sites",
+    "Arzerra (IV): administer as a diluted intravenous infusion only - never IV push or bolus and never subcutaneously",
+    "Arzerra: premedicate 30 minutes to 2 hours before each infusion with oral acetaminophen 1000 mg, an antihistamine (e.g., diphenhydramine 50 mg or cetirizine 10 mg), and an IV corticosteroid (e.g., prednisolone 50 mg)",
+    "Arzerra: use gradual rate escalation per the infusion schedule; slow or interrupt for infusion reactions; corticosteroid premedication may be reduced/omitted for later infusions if no severe reaction occurred",
+    "Screen for hepatitis B (HBsAg and anti-HBc) before starting either product; complete needed immunizations (especially live/live-attenuated vaccines) before therapy"
+  ],
+  "moa": "Ofatumumab is a fully human IgG1 monoclonal antibody that binds specifically to a distinct epitope encompassing both the small and large extracellular loops of the CD20 molecule, expressed on pre-B and mature B lymphocytes (and on CLL cells). CD20 regulates early steps of B-cell activation and the cell cycle but is not shed and does not internalize. Binding of ofatumumab causes B-cell lysis primarily through complement-dependent cytotoxicity (CDC) and antibody-dependent cell-mediated cytotoxicity (ADCC), producing rapid and profound depletion of CD20-positive B cells. In CLL this depletes malignant B cells; in multiple sclerosis, depletion of B cells reduces antigen presentation and pro-inflammatory cytokine production thought to drive demyelinating relapses. B-cell counts recover over time after discontinuation.",
+  "contra": {
+    "absolute": [
+      "Active hepatitis B virus infection (Kesimpta)",
+      "Known hypersensitivity / history of life-threatening injection or infusion reaction to ofatumumab"
+    ],
+    "relative": [
+      "Active or chronic infection (delay until resolved)",
+      "Prior or chronic HBV (risk of reactivation - requires monitoring/prophylaxis)",
+      "Severe immunocompromise or low immunoglobulin levels",
+      "Recent live/live-attenuated vaccination"
+    ],
+    "monitor": [
+      "Infusion-related (Arzerra) or injection-related/site (Kesimpta) reactions",
+      "Signs of serious infection and progressive multifocal leukoencephalopathy (new neurologic/cognitive deficits)",
+      "Hepatitis B reactivation (HBsAg, anti-HBc; clinical and lab during and after therapy)",
+      "Complete blood count (cytopenias - neutropenia, thrombocytopenia, anemia) especially with CLL therapy",
+      "Serum immunoglobulins (IgG, IgM)"
+    ]
+  },
+  "preg": "Ofatumumab is a human IgG1 that can cross the placenta and may cause transient peripheral B-cell depletion and lymphocytopenia in the infant. There are no adequate human data to establish risk; based on mechanism it may cause fetal harm. Advise females of reproductive potential to use effective contraception during treatment and for 6 months after the last dose. Avoid live/live-attenuated vaccines in infants exposed in utero until B-cell recovery is confirmed.",
+  "lact": "It is not known whether ofatumumab is present in human milk; human IgG is excreted in milk. Monitor a breastfed infant for signs of B-cell depletion. Weigh the developmental and health benefits of breastfeeding against the mother's clinical need and any potential adverse effects on the infant.",
+  "renal": "No specific dose adjustment is described in the labeling. As a monoclonal antibody, ofatumumab is eliminated by catabolism (and, in CLL, target-mediated clearance) rather than renal excretion; renal impairment is not expected to require adjustment.",
+  "hepatic": "No specific dose adjustment is described. The antibody is not hepatically metabolized by cytochrome enzymes. The key hepatic concern is hepatitis B reactivation, which can cause fulminant hepatitis/hepatic failure - screen and monitor accordingly.",
+  "interactions": {
+    "major": [
+      "Live or live-attenuated vaccines - avoid during treatment and until B-cell recovery (impaired response and infection risk); give needed live vaccines >=4 weeks before starting"
+    ],
+    "moderate": [
+      "Other immunosuppressants / B-cell or immune-depleting therapies - additive immunosuppression and infection risk",
+      "HBV-reactivating context - concurrent immunosuppression heightens reactivation risk"
+    ],
+    "minor": ["Non-live vaccines - response may be reduced; give >=2 weeks before starting where possible"],
+    "food": "Not applicable (intravenous/subcutaneous biologic).",
+    "alcohol": "No direct interaction with the antibody.",
+    "diagnostics": "Causes profound depletion of circulating CD20+ B cells (affects flow cytometry/B-cell counts) and may lower serum immunoglobulins; monitor CBC and immunoglobulins."
+  },
+  "se": {
+    "common": ["Kesimpta: upper respiratory tract infections", "Kesimpta: injection-related reactions (systemic, especially first dose) and injection-site reactions", "Headache", "Arzerra: infusion reactions", "Arzerra: neutropenia", "Arzerra: pneumonia/upper respiratory infection", "Arzerra: anemia and thrombocytopenia", "Fatigue", "Rash"],
+    "serious": ["Serious/opportunistic infections", "Hepatitis B virus reactivation (can be fulminant/fatal)", "Severe infusion reactions (Arzerra)", "Severe injection-related reactions (Kesimpta)", "Prolonged/severe cytopenias (neutropenia, thrombocytopenia)", "Decreased serum immunoglobulins"],
+    "rare": ["Progressive multifocal leukoencephalopathy (PML)", "Tumor lysis syndrome (CLL)", "Intestinal obstruction (CLL)", "Severe mucocutaneous reactions"],
+    "emergency": ["Anaphylaxis / severe infusion or injection reaction with airway/cardiovascular compromise", "HBV reactivation with acute liver failure", "PML (new neurologic/cognitive/visual deficits)", "Severe sepsis from prolonged neutropenia"]
+  },
+  "monitoring": ["Hepatitis B screening (HBsAg, anti-HBc) before starting and HBV monitoring during/after treatment", "Infusion reactions (Arzerra) or injection-related/site reactions (Kesimpta) during and after dosing", "Complete blood count - especially neutrophils and platelets during CLL therapy", "Signs of serious infection and new neurologic symptoms suggesting PML", "Serum immunoglobulins (IgG, IgM) periodically", "Vaccination status before initiating therapy"],
+  "counsel": [
+    "Kesimpta: you can give this injection yourself once a month after your loading doses; let the pen warm to room temperature, rotate sites, and follow the training you were given",
+    "The first injection or infusion may cause reactions such as fever, chills, flushing, rash, or feeling unwell - tell your team if these occur",
+    "This medicine lowers your immune defenses; report fevers, persistent cough, or other signs of infection promptly",
+    "Tell your doctor if you have ever had hepatitis B - you will be tested before starting and monitored, because the virus can reactivate",
+    "Report any new weakness, confusion, vision changes, or trouble speaking right away (possible serious brain infection, PML)",
+    "Tell your doctor about all vaccines; live vaccines must be given before starting and avoided during treatment; use reliable contraception during and for 6 months after the last dose"
+  ],
+  "pk": [
+    ["Onset", "Rapid B-cell depletion within days of the first dose"],
+    ["Peak", "End of IV infusion (Arzerra) or ~Day 5 after subcutaneous injection (Kesimpta)"],
+    ["Half-life", "Arzerra (CLL): geometric mean ~16-17.6 days; Kesimpta (SC): approximately 16 days at steady state"],
+    ["Duration", "B-cell depletion sustained with dosing; recovery over months after stopping"],
+    ["Storage", "Refrigerate 2-8 C in original carton, protect from light; Kesimpta may be kept at room temperature up to 30 C for a maximum of 7 days; do not freeze"]
+  ],
+  "pearls": [
+    "Biologic record - data sourced from the FDA prescribing information (Kesimpta and Arzerra) and openFDA/DailyMed labeling",
+    "Two distinct products: Arzerra = INTRAVENOUS, for CLL (weight-independent flat doses, mandatory acetaminophen + antihistamine + corticosteroid premedication); Kesimpta = SUBCUTANEOUS 20 mg monthly self-injection, for relapsing MS",
+    "Screen ALL patients for hepatitis B before starting - HBV reactivation can be fatal; active HBV is a contraindication for Kesimpta",
+    "Watch for serious infections and rare PML; check immunoglobulins, and complete live vaccines before therapy",
+    "Arzerra carries notable cytopenia risk (neutropenia, thrombocytopenia) - monitor CBC; tumor lysis syndrome can occur in CLL",
+    "First-dose injection/infusion reactions are common; Arzerra requires premedication and rate escalation, Kesimpta reactions are usually mild-moderate and decline with later doses"
+  ],
+  "missed": "Kesimpta: if a dose is missed, administer it as soon as possible without waiting for the next scheduled month, then resume monthly dosing from the new injection date. Arzerra infusions are scheduled and given by the healthcare team - if an appointment is missed, contact the treatment center to reschedule as soon as possible.",
+  "overdose": "There is no specific antidote. No experience with overdose is described beyond the studied dose ranges. In the event of overdose, monitor the patient closely (including for infusion/injection reactions, cytopenias, and infection) and provide symptomatic and supportive care.",
+  "refs": [
+    ["FDA Prescribing Information - Kesimpta (ofatumumab) accessdata", "https://www.accessdata.fda.gov/drugsatfda_docs/label/2020/125326s070lbl.pdf"],
+    ["openFDA Label - Kesimpta (ofatumumab)", "https://api.fda.gov/drug/label.json?search=openfda.brand_name:%22KESIMPTA%22"],
+    ["DailyMed - Arzerra (ofatumumab) injection", "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=77785ce3-e8df-4ca1-8f8e-6c418c6a17de"]
+  ]
+}

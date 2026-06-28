@@ -1,0 +1,113 @@
+{
+  "generic": "Fluconazole",
+  "cls": "Triazole antifungal",
+  "pharm": "Inhibits fungal cytochrome P450 14-alpha-demethylase, blocking conversion of lanosterol to ergosterol and disrupting the fungal cell membrane.",
+  "tags": ["Antifungal", "Triazole", "CYP inhibitor", "QT prolongation", "Oral/IV"],
+  "quick": [
+    ["Adult dose", "150 mg single dose (vaginal candidiasis); 200-400 mg/day for systemic"],
+    ["Meal", "May take with or without food"],
+    ["Pregnancy", "Avoid high-dose; single 150 mg low risk; teratogenic at high dose"],
+    ["Lactation", "Present in milk at low levels; usually compatible"],
+    ["Renal", "Reduce maintenance dose by ~50% if CrCl <=50 (multiple-dose)"],
+    ["Hepatic", "Use caution; monitor LFTs; rare fatal hepatotoxicity"],
+    ["Alcohol", "Avoid (additive hepatic risk)"],
+    ["Monitoring", "LFTs, QT/electrolytes, renal function"]
+  ],
+  "summary": "Fluconazole is a triazole antifungal for vaginal, oropharyngeal, esophageal, urinary, and systemic candidiasis, cryptococcal meningitis, and candidiasis prophylaxis in bone marrow transplant patients. Oral absorption is rapid and nearly complete, so oral and IV doses are the same.",
+  "indications": [
+    "Vaginal candidiasis",
+    "Oropharyngeal and esophageal candidiasis",
+    "Candida urinary tract infections, peritonitis, and systemic Candida infections (candidemia, disseminated candidiasis, pneumonia)",
+    "Cryptococcal meningitis",
+    "Prophylaxis of candidiasis in bone marrow transplant patients receiving cytotoxic chemotherapy and/or radiation"
+  ],
+  "dosage": [
+    {"c": "Vaginal candidiasis", "r": "Adult", "d": "150 mg as a single oral dose", "t": "Single dose", "n": "Oral"},
+    {"c": "Oropharyngeal candidiasis", "r": "Adult", "d": "200 mg day 1, then 100 mg once daily", "t": "At least 2 weeks", "n": "Continue to reduce relapse"},
+    {"c": "Esophageal candidiasis", "r": "Adult", "d": "200 mg day 1, then 100 mg once daily (up to 400 mg/day)", "t": "At least 3 weeks and >=2 weeks after symptom resolution", "n": ""},
+    {"c": "Systemic candidiasis", "r": "Adult", "d": "Up to 400 mg/day (loading dose twice the daily dose on day 1)", "t": "Per response", "n": "Dose by organism and response"},
+    {"c": "Cryptococcal meningitis", "r": "Adult", "d": "400 mg day 1, then 200-400 mg once daily; maintenance/suppression 200 mg once daily", "t": "10-12 weeks after CSF culture negative", "n": "AIDS patients require maintenance to prevent relapse"},
+    {"c": "Candidiasis prophylaxis (BMT)", "r": "Adult", "d": "400 mg once daily", "t": "Per neutropenia period", "n": "Start before anticipated neutropenia"}
+  ],
+  "admin": [
+    "Obtain fungal cultures/specimens before starting therapy",
+    "May be given orally or IV with the same dose (oral bioavailability >90%)",
+    "Give a loading dose of twice the daily dose on day 1 for multiple-dose regimens",
+    "May take with or without food",
+    "Reduce maintenance dose in renal impairment for multiple-dose regimens"
+  ],
+  "moa": "Fluconazole selectively inhibits fungal cytochrome P450 sterol 14-alpha-demethylase, blocking conversion of lanosterol to ergosterol. The resulting ergosterol depletion and accumulation of toxic sterol precursors damages the fungal cell membrane, inhibiting fungal growth.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to fluconazole or its excipients",
+      "Coadministration with QT-prolonging CYP3A4 substrates: erythromycin, pimozide, quinidine (contraindicated)"
+    ],
+    "relative": [
+      "Hypersensitivity to other azoles",
+      "Hepatic impairment",
+      "Proarrhythmic conditions / QT prolongation risk"
+    ],
+    "monitor": [
+      "Liver function tests",
+      "ECG/electrolytes in QT risk",
+      "Renal function for multiple-dose regimens"
+    ]
+  },
+  "preg": "Avoid in pregnancy except for severe/life-threatening fungal infection where benefit outweighs risk. High-dose maternal use (400-800 mg/day) in the first trimester is associated with a pattern of congenital anomalies. A single 150 mg dose is considered low risk. Use effective contraception with high-dose therapy.",
+  "lact": "Fluconazole is present in breast milk at low levels (estimated infant dose ~0.39 mg/kg/day after a single 150 mg dose, ~13% of pediatric oropharyngeal dose). Generally considered compatible with breastfeeding.",
+  "renal": "For multiple-dose therapy, give the usual loading dose, then reduce the maintenance dose by ~50% if CrCl <=50 mL/min. Hemodialysis patients: give the usual dose after each dialysis session. Single-dose vaginal candidiasis needs no adjustment.",
+  "hepatic": "Use with caution; rare cases of serious (including fatal) hepatotoxicity have occurred. Monitor LFTs and discontinue if clinical signs/symptoms of liver disease develop.",
+  "interactions": {
+    "major": [
+      "QT-prolonging CYP3A4 substrates (erythromycin, pimozide, quinidine - contraindicated)",
+      "Warfarin (markedly increased INR/bleeding)",
+      "Sulfonylureas (hypoglycemia)",
+      "Phenytoin, cyclosporine, tacrolimus (increased levels)",
+      "Rifampin (decreases fluconazole levels)"
+    ],
+    "moderate": [
+      "Midazolam/triazolam (increased sedation)",
+      "Statins (myopathy risk)",
+      "Theophylline (increased levels)",
+      "Oral contraceptives (variable effect)"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid due to additive hepatotoxicity risk.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Headache", "Nausea", "Abdominal pain", "Diarrhea", "Rash", "Elevated liver enzymes"],
+    "serious": ["Hepatotoxicity (including fatal)", "QT prolongation / torsades de pointes", "Stevens-Johnson syndrome / toxic epidermal necrolysis", "Anaphylaxis"],
+    "rare": ["Adrenal insufficiency", "Alopecia (high dose)", "Agranulocytosis/thrombocytopenia"],
+    "emergency": ["Severe skin reaction (SJS/TEN)", "Anaphylaxis", "Signs of liver failure (jaundice)", "Syncope/arrhythmia"]
+  },
+  "monitoring": ["Liver function tests at baseline and periodically", "ECG and electrolytes in QT risk patients", "Renal function for multiple-dose regimens", "INR with warfarin", "Blood glucose with sulfonylureas"],
+  "counsel": [
+    "May take with or without food",
+    "Report rash, jaundice, dark urine, or severe abdominal pain",
+    "Report palpitations or fainting",
+    "Avoid alcohol",
+    "Inform clinician of all medications (many interactions)",
+    "Use effective contraception with high-dose therapy"
+  ],
+  "pk": [
+    ["Onset", "Rapid absorption; clinical response over days"],
+    ["Peak", "1 to 2 hours (oral)"],
+    ["Half-life", "~30 hours (range 20-50 hours)"],
+    ["Duration", "Allows once-daily dosing"],
+    ["Storage", "Store tablets at 20-25 C (68-77 F)"]
+  ],
+  "pearls": [
+    "Oral bioavailability >90%; oral and IV doses are identical",
+    "Long half-life (~30 hr) supports once-daily dosing and a day-1 loading dose",
+    "Single 150 mg dose acceptable in pregnancy; high-dose chronic use is teratogenic",
+    "Potent CYP2C9/CYP3A4 inhibitor - strong warfarin and sulfonylurea interactions"
+  ],
+  "missed": "Take as soon as remembered; if near the next dose, skip the missed dose. Do not double up. (Single-dose regimens: not applicable.)",
+  "overdose": "Reported with supportive care; hallucinations and paranoid behavior reported at very high doses. A 3-hour hemodialysis session reduces plasma levels by ~50%. Manage symptomatically.",
+  "refs": [
+    ["FDA Prescribing Information - Fluconazole tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22fluconazole%22"],
+    ["DailyMed - Fluconazole", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=fluconazole"]
+  ]
+}

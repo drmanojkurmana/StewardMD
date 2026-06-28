@@ -1,0 +1,99 @@
+{
+  "generic": "Amitriptyline",
+  "cls": "Tricyclic antidepressant (TCA)",
+  "pharm": "Tertiary amine tricyclic; inhibits presynaptic reuptake of norepinephrine and serotonin",
+  "tags": ["Rx only", "Boxed warning: suicidality in children/young adults", "Anticholinergic", "Cardiotoxic in overdose", "Contraindicated with MAOIs", "Not for use post-acute MI"],
+  "quick": [
+    ["Adult dose", "Outpatient: 75 mg/day in divided doses, up to 150 mg/day; hospitalized up to 200-300 mg/day"],
+    ["Meal", "With or without food; bedtime dosing reduces daytime sedation"],
+    ["Pregnancy", "Category C; use only if benefit justifies fetal risk"],
+    ["Lactation", "Excreted in milk; weigh risk vs benefit"],
+    ["Renal", "No specific label adjustment; use caution"],
+    ["Hepatic", "Use caution; lower doses, monitor"],
+    ["Alcohol", "Avoid (additive CNS depression; increases overdose danger)"],
+    ["Monitoring", "Mood/suicidality, ECG/cardiac status, anticholinergic effects"]
+  ],
+  "summary": "Amitriptyline is a tertiary-amine tricyclic antidepressant FDA-indicated for the relief of symptoms of depression, with endogenous depression most responsive. It is strongly anticholinergic and sedating, and is highly cardiotoxic in overdose (QRS widening, dysrhythmias). It carries a boxed warning for increased suicidality in children, adolescents, and young adults, is not approved for pediatric use, and is contraindicated with MAOIs and during acute recovery after myocardial infarction.",
+  "indications": [
+    "Relief of symptoms of depression (endogenous depression more likely to respond than other depressive states)"
+  ],
+  "dosage": [
+    {"c": "Depression (outpatient adult)", "r": "Oral", "d": "75 mg/day in divided doses; may increase to a total of 150 mg/day", "t": "Increase preferably in late afternoon and/or bedtime doses; therapeutic effect may take up to 30 days", "n": "Alternative: start 50-100 mg at bedtime, increase by 25-50 mg as needed to a total of 150 mg/day"},
+    {"c": "Depression (hospitalized adult)", "r": "Oral", "d": "100 mg/day initially; increase gradually to 200 mg/day if needed", "t": "Gradual titration to clinical response", "n": "A small number of hospitalized patients may need up to 300 mg/day"},
+    {"c": "Depression (adolescent or elderly)", "r": "Oral", "d": "10 mg 3 times daily plus 20 mg at bedtime", "t": "Lower doses recommended for those not tolerating higher amounts", "n": "Elderly have higher plasma levels for a given dose; monitor closely"},
+    {"c": "Maintenance therapy", "r": "Oral", "d": "Usual 50-100 mg/day; 40 mg/day may suffice in some patients", "t": "Total daily dose may be given once at bedtime; continue 3 months or longer to lessen relapse", "n": "Reduce to lowest effective dose once stable"},
+    {"c": "Neuropathic pain / migraine prophylaxis", "r": "Oral", "d": "Off-label; commonly lower nightly doses than for depression", "t": "Per specialist guidance", "n": "OFF-LABEL / adjunctive; not an FDA-approved indication - use only per authoritative guidance"}
+  ],
+  "admin": [
+    "Initiate at a low dose and increase gradually, watching clinical response and intolerance",
+    "Give increases preferably in the late afternoon and/or at bedtime to limit daytime sedation",
+    "Sedative effect may appear before antidepressant effect; allow up to 30 days for adequate therapeutic effect",
+    "For maintenance, the total daily dose may be consolidated into a single bedtime dose",
+    "Prescribe the smallest quantity consistent with good management to reduce overdose risk"
+  ],
+  "moa": "Amitriptyline inhibits the membrane pump (reuptake transporter) responsible for neuronal reuptake of norepinephrine and serotonin in adrenergic and serotonergic neurons, potentiating and prolonging their activity; this is believed to underlie its antidepressant effect. It is not a monoamine oxidase inhibitor and does not act primarily by CNS stimulation. It also has marked anticholinergic, antihistaminic, and alpha-adrenergic blocking properties accounting for many side effects.",
+  "contra": {
+    "absolute": ["Prior hypersensitivity to amitriptyline", "Concomitant monoamine oxidase inhibitors (hyperpyretic crises, severe convulsions, deaths); allow 14 days after stopping an MAOI", "Concomitant cisapride (QT prolongation, arrhythmia risk)"],
+    "relative": ["Not recommended during the acute recovery phase following myocardial infarction", "History of seizures", "History of urinary retention or angle-closure glaucoma (atropine-like action)", "Cardiovascular disorders (arrhythmias, conduction delay, tachycardia)", "Hyperthyroid patients or those on thyroid medication", "Not approved for pediatric patients; not recommended under 12 years of age", "Not approved for bipolar depression - screen for bipolar disorder before use"],
+    "monitor": ["Suicidality and clinical worsening, especially early and at dose changes", "Cardiac conduction (ECG, especially in cardiovascular disease and the elderly)", "Anticholinergic effects (urinary retention, ileus, intraocular pressure)", "Emergence of mania/hypomania in at-risk patients"]
+  },
+  "preg": "Pregnancy Category C. Teratogenicity was not seen in standard animal reproduction studies at oral doses up to 13 times the maximum human dose, but literature reports describe malformations and skeletal effects in some species at higher doses; amitriptyline crosses the placenta and rare reports of neonatal CNS effects, limb deformities, or developmental delay exist. There are no adequate and well-controlled studies in pregnant women; use during pregnancy only if the potential benefit to the mother justifies the potential risk to the fetus.",
+  "lact": "Amitriptyline is excreted into breast milk; in one report a mother taking 100 mg/day had milk levels of 135-151 ng/mL though no drug was detected in the infant's serum. Because of the potential for serious adverse reactions in nursing infants, decide whether to discontinue nursing or the drug, taking into account the importance of the drug to the mother.",
+  "renal": "The label provides no specific renal dosage adjustment. Use caution and titrate to clinical response; plasma level determinations may help identify toxicity or noncompliance but should not drive dosing.",
+  "hepatic": "No specific hepatic dosing scheme is given in the label, but hepatic metabolism is reduced in elderly and impaired patients, producing higher plasma levels for a given dose. Use lower doses, titrate cautiously, and monitor; rare hepatitis, altered liver function, jaundice, and hepatic failure have been reported.",
+  "interactions": {
+    "major": ["Monoamine oxidase inhibitors (CONTRAINDICATED - hyperpyretic crises, severe convulsions, deaths; allow 14 days between agents; up to 5 weeks after fluoxetine)", "Cisapride (CONTRAINDICATED - QT prolongation/arrhythmia)", "Strong CYP2D6 inhibitors - quinidine, cimetidine, SSRIs (fluoxetine, paroxetine, sertraline), propafenone, flecainide (raise TCA levels, may cause abrupt toxicity)", "Guanethidine or similar agents (amitriptyline may block their antihypertensive action)"],
+    "moderate": ["Anticholinergic agents (paralytic ileus, hyperpyrexia, additive effects)", "Neuroleptics (hyperpyrexia, especially in hot weather)", "Sympathomimetics including epinephrine with local anesthetics (close supervision, dose adjustment)", "Thyroid medication (close supervision)", "Topiramate (may markedly increase amitriptyline concentration)", "Disulfiram (delirium reported)"],
+    "minor": ["Ethchlorvynol in large doses (transient delirium reported)"],
+    "food": "May be taken with or without food.",
+    "alcohol": "Avoid; amitriptyline may enhance the response to alcohol and other CNS depressants and increases the danger of any overdose or suicide attempt.",
+    "diagnostics": "May alter EEG and ECG patterns (AV conduction changes, QRS/QT changes) and may raise or lower blood sugar levels; plasma levels should not be used to guide routine dosing."
+  },
+  "se": {
+    "common": ["Drowsiness / sedation", "Dry mouth", "Constipation", "Blurred vision / disturbance of accommodation", "Orthostatic hypotension", "Dizziness", "Weight gain", "Urinary hesitancy", "Increased perspiration"],
+    "serious": ["Cardiac arrhythmias, AV/conduction block, tachycardia", "Myocardial infarction; stroke", "Seizures", "Paralytic ileus and urinary retention", "Bone marrow depression (agranulocytosis, leukopenia, thrombocytopenia)", "Acute angle-closure glaucoma", "Syndrome of inappropriate ADH secretion (hyponatremia)"],
+    "rare": ["Hepatitis, altered liver function, jaundice, hepatic failure", "Tardive dyskinesia and extrapyramidal symptoms", "Lupus-like syndrome", "Gynecomastia / galactorrhea"],
+    "emergency": ["Suicidal ideation or behavior (boxed warning)", "Neuroleptic malignant syndrome-like reaction (rigidity, fever, altered mental status, autonomic instability)", "Serotonin syndrome (with serotonergic drugs)", "Cardiac dysrhythmias / overdose toxicity (widened QRS, ventricular arrhythmia)", "Severe hypersensitivity / angioedema (edema of face and tongue)"]
+  },
+  "monitoring": [
+    "Mood, clinical worsening, and suicidality, especially in the first months and at dose changes",
+    "Cardiac status / ECG, particularly in patients with cardiovascular disease, the elderly, or at high doses",
+    "Anticholinergic effects: urinary retention, bowel function, intraocular pressure",
+    "CBC if signs of infection or bone marrow suppression",
+    "Liver function if symptoms suggest hepatic injury",
+    "Serum sodium if symptoms suggest SIADH; blood glucose in susceptible patients",
+    "Plasma levels only to assess suspected toxicity or noncompliance, not for routine dose titration"
+  ],
+  "counsel": [
+    "Antidepressant effect may take up to 30 days; sedation may appear sooner - do not stop early",
+    "Watch for and immediately report worsening mood, agitation, or suicidal thoughts (families/caregivers too)",
+    "Avoid alcohol and other sedatives; may impair driving or operating machinery",
+    "Rise slowly to limit dizziness from low blood pressure",
+    "Report eye pain, vision changes, difficulty urinating, severe constipation, or palpitations",
+    "Do not stop abruptly - taper to avoid nausea, headache, malaise, and sleep disturbance",
+    "Tell your clinician about all medicines, pregnancy, or breastfeeding; never combine with an MAOI",
+    "Keep out of reach - overdose is dangerous; keep only the smallest needed quantity"
+  ],
+  "pk": [
+    ["Onset", "Sedation within hours; antidepressant effect may take up to 30 days"],
+    ["Peak", "Variable; oral absorption and distribution vary widely between patients"],
+    ["Half-life", "Prolonged; once-daily bedtime dosing for maintenance is feasible"],
+    ["Duration", "Supports once-daily maintenance dosing (often at bedtime)"],
+    ["Storage", "Store at controlled room temperature; protect tablets from moisture"]
+  ],
+  "pearls": [
+    "Highly cardiotoxic in overdose - a maximal limb-lead QRS duration of 0.10 seconds or more is a key marker of severity; treat with IV sodium bicarbonate targeting pH 7.45-7.55",
+    "Contraindicated with MAOIs and cisapride; allow at least 14 days off an MAOI (and up to 5 weeks after fluoxetine) before starting",
+    "Not recommended during the acute recovery phase after myocardial infarction",
+    "CYP2D6 poor metabolizers and CYP2D6 inhibitors (SSRIs, quinidine, cimetidine) can sharply raise TCA levels and precipitate toxicity",
+    "OFF-LABEL: widely used adjunctively for neuropathic pain and migraine prophylaxis - these are NOT FDA-approved indications (FDA indication is depression); use only per authoritative guidance",
+    "Not FDA-approved in pediatric patients and not recommended under 12 years; not approved for bipolar depression - screen for bipolar disorder first",
+    "Strongly anticholinergic and sedating - use caution in the elderly, glaucoma, urinary retention, and ileus risk"
+  ],
+  "missed": "Take the missed dose as soon as remembered unless it is almost time for the next dose, in which case skip it and resume the usual schedule; do not double up. For once-daily bedtime dosing, a dose remembered in the morning may be better skipped to avoid daytime sedation - confirm with the prescriber.",
+  "overdose": "Tricyclic overdose is life-threatening and deaths occur. Critical manifestations include cardiac dysrhythmias, severe hypotension, convulsions, and CNS depression including coma; QRS widening (≥0.10 s), terminal rightward axis shift, prolonged QT, and sinus tachycardia indicate toxicity. Obtain an ECG and start cardiac monitoring immediately, secure the airway, establish IV access, and give gastrointestinal decontamination (gastric lavage then activated charcoal; emesis is contraindicated). Use IV sodium bicarbonate to maintain serum pH 7.45-7.55 (hyperventilation as adjunct with caution); treat refractory dysrhythmias with lidocaine, bretylium, or phenytoin (Type 1A/1C antiarrhythmics are contraindicated) and seizures with benzodiazepines. Monitor at least 6 hours; dialysis and forced diuresis are ineffective. Contact a poison control center.",
+  "refs": [
+    ["FDA Label - Amitriptyline (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amitriptyline%22"],
+    ["DailyMed - Amitriptyline", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=amitriptyline"]
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "generic": "Rivaroxaban",
+  "cls": "Direct factor Xa inhibitor (oral anticoagulant / DOAC)",
+  "pharm": "Anticoagulant",
+  "tags": ["anticoagulant", "DOAC", "factor Xa inhibitor", "atrial fibrillation", "VTE", "DVT", "PE"],
+  "quick": [
+    ["Adult dose", "AF 20 mg daily; DVT/PE 15 mg BID x21d then 20 mg daily"],
+    ["Meal", "15/20 mg WITH food; 2.5/10 mg with or without"],
+    ["Pregnancy", "Caution; risk of pregnancy-related hemorrhage"],
+    ["Lactation", "Detected in milk; weigh benefit vs risk"],
+    ["Renal", "AF: 15 mg if CrCl <=50; avoid if CrCl <15"],
+    ["Hepatic", "Avoid in Child-Pugh B/C"],
+    ["Alcohol", "Avoid excess; adds bleeding risk"],
+    ["Monitoring", "Bleeding, Hgb/Hct, renal function; routine coag NOT recommended"]
+  ],
+  "summary": "Rivaroxaban is an oral direct factor Xa inhibitor used for stroke prevention in nonvalvular atrial fibrillation, treatment and recurrence-reduction of DVT/PE, post-orthopedic and medical VTE prophylaxis, and (with aspirin) cardiovascular risk reduction in CAD/PAD. It carries TWO boxed warnings: (A) premature discontinuation increases the risk of thrombotic events such as stroke - bridge with another anticoagulant if stopped early; and (B) spinal/epidural hematoma in patients undergoing neuraxial anesthesia or spinal puncture, which can cause long-term or permanent paralysis. There is no routine coagulation monitoring and no widely stocked reversal agent.",
+  "indications": [
+    "Reduce risk of stroke and systemic embolism in nonvalvular atrial fibrillation",
+    "Treatment of deep vein thrombosis (DVT)",
+    "Treatment of pulmonary embolism (PE)",
+    "Reduction in risk of recurrence of DVT and/or PE after >=6 months of treatment",
+    "Prophylaxis of DVT following hip or knee replacement surgery",
+    "Prophylaxis of VTE in acutely ill medical patients not at high risk of bleeding",
+    "Reduce risk of major cardiovascular events in CAD (with aspirin)",
+    "Reduce risk of major thrombotic vascular events in PAD, including after lower extremity revascularization (with aspirin)",
+    "Treatment and recurrence reduction of VTE in pediatric patients birth to <18 years",
+    "Thromboprophylaxis in pediatric patients >=2 years with congenital heart disease after Fontan procedure"
+  ],
+  "dosage": [
+    {"c": "Nonvalvular atrial fibrillation (CrCl >50)", "r": "Standard", "d": "20 mg once daily", "t": "Once daily with evening meal", "n": "Reduce to 15 mg once daily if CrCl <=50 mL/min"},
+    {"c": "Treatment of DVT/PE (CrCl >=15)", "r": "Loading then maintenance", "d": "15 mg twice daily x 21 days, then 20 mg once daily", "t": "BID then once daily, with food", "n": "Avoid if CrCl <15 mL/min"},
+    {"c": "Reduce recurrence of DVT/PE", "r": "Maintenance", "d": "10 mg once daily", "t": "Once daily, with or without food", "n": "After at least 6 months of standard anticoagulant treatment"},
+    {"c": "Prophylaxis after hip replacement", "r": "Prophylaxis", "d": "10 mg once daily for 35 days", "t": "Once daily, 6-10 h post-op after hemostasis", "n": "Avoid if CrCl <15 mL/min"},
+    {"c": "Prophylaxis after knee replacement", "r": "Prophylaxis", "d": "10 mg once daily for 12 days", "t": "Once daily, 6-10 h post-op after hemostasis", "n": "With or without food"},
+    {"c": "VTE prophylaxis in acutely ill medical patients", "r": "Prophylaxis", "d": "10 mg once daily", "t": "Once daily for total 31-39 days", "n": "Not for patients at high risk of bleeding"},
+    {"c": "CAD or PAD risk reduction", "r": "Low dose dual pathway", "d": "2.5 mg twice daily plus aspirin 75-100 mg once daily", "t": "Twice daily, with or without food", "n": "No CrCl-based dose adjustment"}
+  ],
+  "admin": [
+    "Take 15 mg and 20 mg tablets WITH food to ensure adequate absorption",
+    "2.5 mg and 10 mg tablets may be taken with or without food",
+    "For atrial fibrillation, take 20 mg (or 15 mg) once daily with the evening meal",
+    "May crush tablet and mix in applesauce or give via NG tube if needed; give immediately",
+    "Do NOT discontinue prematurely without alternative anticoagulant coverage (boxed warning A)",
+    "Avoid neuraxial procedures unless anticoagulant effect is low; remove indwelling catheter only after >=2 half-lives (boxed warning B)"
+  ],
+  "moa": "Rivaroxaban is a selective direct inhibitor of factor Xa that does not require antithrombin III as a cofactor. It inhibits both free factor Xa and prothrombinase activity, thereby decreasing thrombin generation. It has no direct effect on platelet aggregation but indirectly inhibits thrombin-induced platelet aggregation, producing dose-dependent anticoagulation.",
+  "contra": {
+    "absolute": ["Active pathological bleeding", "Severe hypersensitivity reaction to rivaroxaban (e.g., anaphylaxis)"],
+    "relative": ["Moderate to severe hepatic impairment (Child-Pugh B/C) or hepatic disease with coagulopathy", "CrCl <15 mL/min / dialysis (avoid)", "Prosthetic heart valves / post-TAVR (not recommended)", "Triple-positive antiphospholipid syndrome (not recommended)", "Pregnancy (use only if benefit justifies risk)"],
+    "monitor": ["BOXED WARNING A: premature discontinuation increases thrombotic event (stroke) risk - cover with another anticoagulant if stopped early", "BOXED WARNING B: neuraxial anesthesia / spinal puncture / indwelling epidural catheter - risk of spinal-epidural hematoma and permanent paralysis; monitor frequently for neurological impairment", "Concomitant combined P-gp and strong CYP3A inhibitors/inducers", "Concomitant antiplatelets, NSAIDs, or other anticoagulants", "Declining renal function"]
+  },
+  "preg": "Limited data are insufficient to characterize drug-associated risk. Use with caution because of potential for pregnancy-related hemorrhage and/or emergent delivery; the anticoagulant effect cannot be reliably monitored with standard laboratory testing. Factor Xa inhibitors may cross the placenta and bleeding may occur in the fetus/neonate. Weigh maternal benefit against fetal risk.",
+  "lact": "Rivaroxaban has been detected in human milk; data are insufficient to determine effects on the breastfed child or milk production. Consider developmental/health benefits of breastfeeding against the mother's clinical need and potential adverse effects on the infant.",
+  "renal": "Exposure increases ~44-64% with renal impairment. Atrial fibrillation: 15 mg once daily if CrCl <=50 mL/min. DVT/PE treatment, recurrence reduction, orthopedic and medical prophylaxis: avoid if CrCl <15 mL/min and observe closely if CrCl 15 to <30 mL/min. Reassess renal function periodically; consider dose adjustment or discontinuation if acute renal failure develops.",
+  "hepatic": "AUC increases ~127% in moderate (Child-Pugh B) impairment. Avoid use in patients with moderate or severe (Child-Pugh B/C) hepatic impairment or any hepatic disease associated with coagulopathy due to increased exposure and bleeding risk. Not evaluated in severe hepatic impairment.",
+  "interactions": {
+    "major": ["Combined P-gp and strong CYP3A inhibitors (ketoconazole, ritonavir) - increase rivaroxaban exposure and bleeding risk; avoid", "Combined P-gp and strong CYP3A inducers (carbamazepine, phenytoin, rifampin, St. John's wort) - decrease exposure and increase thrombotic risk; avoid", "Other anticoagulants (warfarin, enoxaparin, heparins) - avoid concurrent use due to bleeding risk"],
+    "moderate": ["Antiplatelets (aspirin, clopidogrel, P2Y12 inhibitors, dual antiplatelet therapy) - increased bleeding", "Chronic NSAID use - increased bleeding", "Combined P-gp and moderate CYP3A inhibitors (erythromycin) in CrCl 15 to <80 mL/min - avoid unless benefit justifies risk", "SSRIs and SNRIs - increased bleeding risk"],
+    "minor": ["Clarithromycin - combined P-gp/strong CYP3A inhibitor but no precautions needed", "Drugs altering gastric pH (ranitidine, antacids, omeprazole) - no effect on exposure"],
+    "food": "15 mg and 20 mg doses must be taken with food (food increases 20 mg bioavailability, AUC +39%, Cmax +76%); 2.5 mg and 10 mg unaffected by food.",
+    "alcohol": "Avoid excessive alcohol; may add to bleeding risk and impair hepatic function.",
+    "diagnostics": "Prolongs PT, aPTT and anti-factor Xa activity dose-dependently; routine coagulation monitoring is not recommended."
+  },
+  "se": {
+    "common": ["Bleeding (most common, >5% in adults)", "Bruising / ecchymosis", "Epistaxis", "Gastrointestinal bleeding", "Cough, vomiting and gastroenteritis (most common in pediatrics, >10%)"],
+    "serious": ["Major bleeding including intracranial and gastrointestinal hemorrhage", "Spinal/epidural hematoma with neuraxial procedures", "Thrombotic events (including stroke) after premature discontinuation", "Reduced effect / recurrent thrombosis in triple-positive antiphospholipid syndrome"],
+    "rare": ["Severe hypersensitivity / anaphylactic reactions", "Pregnancy-related hemorrhage", "Hepatic injury"],
+    "emergency": ["BOXED WARNING B: spinal/epidural hematoma - midline back pain, lower-limb numbness/tingling/weakness, bowel or bladder dysfunction; can progress to permanent paralysis - seek urgent care", "Major or fatal hemorrhage (intracranial, GI; severe headache, hematemesis, melena, hypotension)", "BOXED WARNING A: stroke or thrombosis after stopping drug abruptly", "Anaphylaxis / severe allergic reaction"]
+  },
+  "monitoring": [
+    "Signs and symptoms of bleeding; hemoglobin/hematocrit and blood pressure",
+    "Renal function periodically (more often when decline expected) and adjust therapy",
+    "Frequent neurological assessment for signs of spinal/epidural hematoma in patients with neuraxial anesthesia or indwelling catheter",
+    "Routine coagulation testing (PT, INR, aPTT, anti-FXa) is NOT recommended"
+  ],
+  "counsel": [
+    "Do not stop taking rivaroxaban without talking to your provider - stopping early raises the risk of stroke or clots",
+    "Take 15 mg and 20 mg doses with food at the same time each day",
+    "Report any unusual bleeding or bruising, red/black stools, coughing or vomiting blood promptly",
+    "Tell your provider immediately about back pain, leg numbness/weakness, or loss of bladder/bowel control, especially after spinal anesthesia or a spinal tap",
+    "Inform all providers and dentists that you take an anticoagulant before any procedure or surgery"
+  ],
+  "pk": [
+    ["Onset", "Anticoagulant effect within 2-4 h of intake"],
+    ["Peak", "Cmax at 2-4 hours after tablet"],
+    ["Half-life", "5-9 hours (healthy adults 20-45 y)"],
+    ["Duration", "Once or twice daily dosing per indication"],
+    ["Storage", "Store at 20-25 C (68-77 F); do not freeze granules/suspension"]
+  ],
+  "pearls": [
+    "TWO boxed warnings: (A) premature discontinuation increases thrombotic/stroke risk - bridge with another anticoagulant; (B) spinal/epidural hematoma with neuraxial procedures can cause permanent paralysis",
+    "15 mg and 20 mg tablets MUST be taken with food; low 2.5/10 mg doses are not food-dependent",
+    "No routine coagulation monitoring required; no reliable lab assay for effect",
+    "Not dialyzable due to high (92-95%) protein binding; no widely stocked specific reversal agent",
+    "Avoid in CrCl <15 mL/min, moderate/severe hepatic impairment, prosthetic valves, and triple-positive APS"
+  ],
+  "missed": "For once-daily regimens, take the missed dose immediately the same day and resume the normal schedule the next day; do not double up. For the 15 mg twice-daily phase, take immediately to ensure 30 mg per day (two 15 mg tablets may be taken together) then resume normal twice-daily dosing. For 2.5 mg twice daily, skip the missed dose and resume the normal schedule.",
+  "overdose": "Overdose may cause hemorrhage. Discontinue rivaroxaban and provide supportive care. Absorption is limited above single doses of 50 mg; activated charcoal may reduce absorption. Not dialyzable due to high protein binding. Partial reversal of lab parameters may be achieved with plasma products (PCC, aPCC, recombinant factor VIIa may be considered); no specific anti-factor Xa reversal agent is included in this label.",
+  "refs": [
+    ["FDA Rivaroxaban Prescribing Information (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22rivaroxaban%22"],
+    ["FDA DailyMed - Rivaroxaban", "https://dailymed.nlm.nih.gov/dailymed/"]
+  ]
+}

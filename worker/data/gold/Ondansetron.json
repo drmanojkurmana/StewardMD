@@ -1,0 +1,104 @@
+{
+  "generic": "Ondansetron",
+  "cls": "5-HT3 receptor antagonist (antiemetic)",
+  "pharm": "Selectively blocks serotonin 5-HT3 receptors peripherally on vagal nerve terminals and centrally in the chemoreceptor trigger zone, preventing the emetic reflex.",
+  "tags": ["Antiemetic", "5-HT3 antagonist", "QT prolongation", "Oral/IV"],
+  "quick": [
+    ["Adult dose", "8 mg PO; 24 mg single dose for highly emetogenic chemo"],
+    ["Meal", "May take with or without food"],
+    ["Pregnancy", "Inconsistent data; use only if clearly needed"],
+    ["Lactation", "Limited data; likely compatible, monitor infant"],
+    ["Renal", "No adjustment needed"],
+    ["Hepatic", "Severe impairment: max 8 mg/day total"],
+    ["Alcohol", "No specific interaction"],
+    ["Monitoring", "ECG/electrolytes if QT risk factors"]
+  ],
+  "summary": "Ondansetron is a selective 5-HT3 receptor antagonist used to prevent nausea and vomiting from chemotherapy, radiotherapy, and surgery. It is dose-limited in severe hepatic impairment and carries a risk of dose-dependent QT prolongation.",
+  "indications": [
+    "Prevention of nausea/vomiting with highly emetogenic chemotherapy (cisplatin >=50 mg/m2)",
+    "Prevention of nausea/vomiting with initial and repeat courses of moderately emetogenic chemotherapy",
+    "Prevention of nausea/vomiting from radiotherapy (total body irradiation, single high-dose or daily abdominal fractions)",
+    "Prevention of postoperative nausea and/or vomiting"
+  ],
+  "dosage": [
+    {"c": "Highly emetogenic chemotherapy", "r": "Adult", "d": "Single 24 mg dose", "t": "30 minutes before chemotherapy", "n": "For single-day highly emetogenic chemo including cisplatin >=50 mg/m2"},
+    {"c": "Moderately emetogenic chemotherapy", "r": "Adult", "d": "8 mg, then 8 mg 8 hours later; then 8 mg twice daily (q12h)", "t": "30 min before chemo; continue 1-2 days after completion", "n": "Oral"},
+    {"c": "Radiotherapy", "r": "Adult", "d": "8 mg three times daily (q8h)", "t": "1-2 hours before radiotherapy", "n": "Timing varies by radiotherapy type"},
+    {"c": "Severe hepatic impairment", "r": "Adult", "d": "Do not exceed 8 mg total daily dose", "t": "Per indication", "n": "Reduced clearance"}
+  ],
+  "admin": [
+    "Administer first dose 30 minutes before chemotherapy (1-2 hours before radiotherapy)",
+    "May be given with or without food",
+    "Orally disintegrating tablets: place on tongue and allow to dissolve, do not push through foil",
+    "Do not exceed 8 mg/day in severe hepatic impairment",
+    "Assess QT risk factors before use"
+  ],
+  "moa": "Ondansetron is a selective 5-HT3 receptor antagonist. Chemotherapy and radiotherapy release serotonin from enterochromaffin cells of the small intestine; serotonin activates 5-HT3 receptors on vagal afferents and in the chemoreceptor trigger zone, triggering the vomiting reflex. Ondansetron blocks these receptors to prevent emesis.",
+  "contra": {
+    "absolute": [
+      "Known hypersensitivity (e.g., anaphylaxis) to ondansetron or formulation components",
+      "Concomitant use of apomorphine (risk of profound hypotension and loss of consciousness)"
+    ],
+    "relative": [
+      "Congenital long QT syndrome",
+      "Hypokalemia or hypomagnesemia",
+      "Concomitant QT-prolonging drugs"
+    ],
+    "monitor": [
+      "ECG in patients with QT risk factors",
+      "Serum electrolytes (potassium, magnesium)"
+    ]
+  },
+  "preg": "Epidemiological studies report inconsistent findings on major birth defects, with methodological limitations precluding conclusions. Postmarketing data have not identified a risk of miscarriage or adverse maternal outcomes. Use only if clearly needed.",
+  "lact": "Limited human data. Ondansetron is present in animal milk. Consider development/health benefits of breastfeeding alongside maternal clinical need; monitor infant.",
+  "renal": "No dosage adjustment required in renal impairment.",
+  "hepatic": "In severe hepatic impairment (Child-Pugh >=10), clearance is markedly reduced; do not exceed a total daily dose of 8 mg.",
+  "interactions": {
+    "major": [
+      "Apomorphine (contraindicated; profound hypotension/loss of consciousness)",
+      "QT-prolonging drugs (additive risk of arrhythmia/torsades)",
+      "Serotonergic agents (SSRIs/SNRIs - serotonin syndrome)"
+    ],
+    "moderate": [
+      "Strong CYP3A4 inducers (rifampin) may reduce ondansetron levels",
+      "Tramadol (reduced analgesic effect)"
+    ],
+    "minor": [],
+    "food": "May be taken with or without food.",
+    "alcohol": "No specific interaction reported.",
+    "diagnostics": "Not specified"
+  },
+  "se": {
+    "common": ["Headache", "Constipation", "Diarrhea", "Fatigue/malaise", "Fever"],
+    "serious": ["QT prolongation / torsades de pointes", "Serotonin syndrome", "Hypersensitivity reactions"],
+    "rare": ["Transient blindness", "Dystonic reactions", "Bradycardia"],
+    "emergency": ["Anaphylaxis", "Syncope/arrhythmia", "Signs of serotonin syndrome (agitation, hyperthermia, rigidity)"]
+  },
+  "monitoring": ["ECG in patients with congenital long QT, electrolyte abnormalities, CHF, or on QT-prolonging drugs", "Serum potassium and magnesium", "Signs of serotonin syndrome"],
+  "counsel": [
+    "Report fast/irregular heartbeat, fainting, or dizziness",
+    "Report agitation, confusion, sweating, tremor (possible serotonin syndrome)",
+    "Constipation and headache are common",
+    "Do not push orally disintegrating tablets through the foil",
+    "Inform clinician of all medications, especially heart and antidepressant drugs"
+  ],
+  "pk": [
+    ["Onset", "Within ~30 minutes (oral)"],
+    ["Peak", "~1.5-2 hours after oral dose"],
+    ["Half-life", "~3-5.5 hours (longer in hepatic impairment)"],
+    ["Duration", "Up to 8-12 hours"],
+    ["Storage", "Store at 20-25 C (68-77 F); protect from light"]
+  ],
+  "pearls": [
+    "Single 24 mg oral dose is the standard for highly emetogenic chemotherapy",
+    "QT prolongation is dose-dependent; avoid 32 mg single IV dose",
+    "Contraindicated with apomorphine",
+    "Cap at 8 mg/day in severe hepatic impairment"
+  ],
+  "missed": "If used as scheduled prophylaxis and a dose is missed, take when remembered unless near the next dose. Do not double up.",
+  "overdose": "No specific antidote. Reported effects include hypotension, vasovagal episodes, transient blindness, severe constipation, and QT prolongation. Manage with supportive care and ECG monitoring.",
+  "refs": [
+    ["FDA Prescribing Information - Ondansetron tablets (openFDA)", "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22ondansetron%22"],
+    ["DailyMed - Ondansetron", "https://dailymed.nlm.nih.gov/dailymed/search.cfm?query=ondansetron"]
+  ]
+}

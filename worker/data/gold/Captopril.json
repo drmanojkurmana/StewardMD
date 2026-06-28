@@ -1,0 +1,121 @@
+{
+  "generic": "Captopril",
+  "cls": "Angiotensin-converting enzyme (ACE) inhibitor",
+  "pharm": "Antihypertensive / RAAS inhibitor",
+  "tags": ["ACE inhibitor", "antihypertensive", "heart failure", "hypertension", "post-MI", "diabetic nephropathy", "RAAS"],
+  "quick": [
+    ["Adult dose", "Hypertension: 25 mg orally 2-3 times daily, one hour before meals; titrate (usual max 50 mg three times daily)"],
+    ["Meal", "Take 1 hour before meals - food reduces absorption by 30-40%"],
+    ["Pregnancy", "Contraindicated - boxed warning for fetal toxicity; discontinue when pregnancy detected"],
+    ["Lactation", "Excreted in breast milk in small amounts; generally considered compatible with caution"],
+    ["Renal", "Reduce dose / extend interval in renal impairment; monitor potassium and creatinine"],
+    ["Hepatic", "Use with caution; rare cholestatic jaundice/hepatic necrosis reported"],
+    ["Alcohol", "May enhance hypotensive effect; limit intake"],
+    ["Monitoring", "Blood pressure, renal function, serum potassium, CBC (neutropenia risk)"]
+  ],
+  "summary": "Captopril is the prototype sulfhydryl-containing ACE inhibitor used for hypertension, heart failure, left ventricular dysfunction after myocardial infarction, and diabetic nephropathy. It suppresses the renin-angiotensin-aldosterone system, lowering blood pressure and afterload. It carries a boxed warning for fetal toxicity and must be taken one hour before meals because food reduces its absorption. Key risks are angioedema, hyperkalemia, cough, and neutropenia.",
+  "indications": [
+    "Hypertension",
+    "Congestive heart failure (usually with diuretics and digitalis)",
+    "Left ventricular dysfunction after myocardial infarction (to improve survival)",
+    "Diabetic nephropathy (type 1 diabetes with proteinuria)"
+  ],
+  "dosage": [
+    {"c": "Hypertension", "r": "Adult", "d": "Initial 25 mg twice or three times daily; may increase to 50 mg 2-3 times daily after 1-2 weeks", "t": "2-3 times/day", "n": "Take 1 hour before meals; usual max 50 mg three times daily"},
+    {"c": "Heart failure", "r": "Adult", "d": "Initial 25 mg three times daily (6.25-12.5 mg if on diuretic/low BP); target 50 mg three times daily", "t": "3 times/day", "n": "Max 450 mg/day; titrate under supervision"},
+    {"c": "LV dysfunction post-MI", "r": "Adult", "d": "Start 6.25 mg single dose, then 12.5 mg three times daily; increase over several days to 25 mg three times daily, then target 50 mg three times daily", "t": "3 times/day", "n": "Begin as early as 3 days post-MI"},
+    {"c": "Diabetic nephropathy", "r": "Adult", "d": "25 mg three times daily", "t": "3 times/day", "n": "For type 1 diabetic nephropathy with proteinuria"}
+  ],
+  "admin": [
+    "Take one hour before meals (food reduces absorption by 30-40%)",
+    "Maintain a regular dosing schedule",
+    "First dose may cause excessive hypotension - especially if volume/salt depleted or on a diuretic",
+    "Avoid potassium supplements and potassium-sparing diuretics unless directed"
+  ],
+  "moa": "Captopril competitively inhibits angiotensin-converting enzyme (ACE, peptidyl-dipeptidase), preventing conversion of angiotensin I to the potent vasoconstrictor angiotensin II. This reduces vasoconstriction and aldosterone secretion (lowering sodium/water retention) and decreases degradation of bradykinin. The net effect is reduced peripheral resistance and blood pressure, and reduced cardiac afterload, with suppression of the renin-angiotensin-aldosterone system.",
+  "contra": {
+    "absolute": [
+      "Hypersensitivity to captopril or any ACE inhibitor (including prior ACE-inhibitor angioedema)",
+      "Concomitant aliskiren in patients with diabetes",
+      "Use within 36 hours of sacubitril/valsartan (neprilysin inhibitor)",
+      "Pregnancy (fetal toxicity - discontinue when pregnancy detected)"
+    ],
+    "relative": [
+      "Bilateral renal artery stenosis",
+      "Volume/salt depletion",
+      "Significant renal impairment",
+      "Hyperkalemia",
+      "Collagen vascular disease with renal impairment (neutropenia risk)"
+    ],
+    "monitor": [
+      "Renal function and serum potassium",
+      "White blood cell count (neutropenia)",
+      "Blood pressure (first-dose hypotension)"
+    ]
+  },
+  "preg": "Boxed warning: drugs acting on the renin-angiotensin system can cause fetal injury and death (oligohydramnios, renal failure, skull hypoplasia, hypotension). Discontinue captopril as soon as pregnancy is detected.",
+  "lact": "Captopril is excreted in breast milk in small concentrations; generally considered compatible with breastfeeding when use is necessary, with monitoring of the infant.",
+  "renal": "Captopril is retained in renal impairment. Reduce initial dose and extend dosing interval; titrate slowly. Monitor serum creatinine and potassium closely, particularly in renal artery stenosis or volume depletion.",
+  "hepatic": "Rare cholestatic jaundice progressing to fulminant hepatic necrosis has occurred; discontinue if marked elevation of hepatic enzymes or jaundice develops. Use with caution in hepatic impairment.",
+  "interactions": {
+    "major": [
+      "Aliskiren (contraindicated in diabetes; dual RAAS blockade risks hyperkalemia, hypotension, renal failure)",
+      "Sacubitril/valsartan (neprilysin inhibitor - angioedema risk; separate by 36 hours)",
+      "Potassium-sparing diuretics / potassium supplements (hyperkalemia)"
+    ],
+    "moderate": [
+      "Diuretics (excessive first-dose hypotension)",
+      "Lithium (increased lithium toxicity)",
+      "NSAIDs (reduced antihypertensive effect, renal deterioration, hyperkalemia)",
+      "mTOR inhibitors (sirolimus, everolimus) - increased angioedema risk"
+    ],
+    "minor": [
+      "Antacids (may reduce captopril absorption)",
+      "Allopurinol (rare hypersensitivity reactions)"
+    ],
+    "food": "Food reduces absorption by 30-40%; take one hour before meals. Limit high-potassium foods and salt substitutes.",
+    "alcohol": "May potentiate the blood-pressure-lowering effect; limit intake",
+    "diagnostics": "May cause false-positive urine acetone test; can elevate serum potassium, creatinine, and BUN"
+  },
+  "se": {
+    "common": ["Cough (dry, persistent)", "Rash", "Taste disturbance (dysgeusia)", "Hypotension/dizziness", "Hyperkalemia", "Proteinuria"],
+    "serious": ["Angioedema (face, lips, tongue, larynx)", "Acute renal failure", "Neutropenia / agranulocytosis", "Severe hyperkalemia", "Hepatic injury"],
+    "rare": ["Cholestatic jaundice / hepatic necrosis", "Stevens-Johnson syndrome", "Pancreatitis", "Bone marrow suppression"],
+    "emergency": ["Laryngeal/airway angioedema", "Anaphylactoid reaction", "Symptomatic severe hypotension", "Hyperkalemic cardiac arrhythmia"]
+  },
+  "monitoring": [
+    "Blood pressure (especially after first dose and dose changes)",
+    "Serum potassium",
+    "Renal function (creatinine, BUN)",
+    "White blood cell and differential count (baseline and periodically, especially in renal/collagen vascular disease)",
+    "Signs of angioedema"
+  ],
+  "counsel": [
+    "Take one hour before meals at the same times each day",
+    "Stop the drug and seek urgent care for swelling of the face, lips, tongue, or difficulty breathing",
+    "Report persistent dry cough, sore throat with fever, fainting, or reduced urination",
+    "Do not use potassium supplements or salt substitutes unless told to",
+    "Tell your doctor immediately if you become or plan to become pregnant",
+    "Rise slowly to avoid dizziness, especially when starting therapy"
+  ],
+  "pk": [
+    ["Onset", "Antihypertensive effect within 15-60 minutes of an oral dose"],
+    ["Peak", "Peak blood levels at about 1 hour; peak BP effect 60-90 minutes"],
+    ["Half-life", "Less than 2-3 hours (prolonged in renal impairment)"],
+    ["Duration", "Dose-related, generally 6-12 hours; requires multiple daily dosing"],
+    ["Storage", "Store at controlled room temperature 20-25 C; protect from moisture"]
+  ],
+  "pearls": [
+    "Prototype ACE inhibitor with a sulfhydryl group, linked historically to taste disturbance and rash",
+    "Short half-life requires 2-3 times daily dosing, unlike longer-acting ACE inhibitors",
+    "Must be taken one hour before meals because food cuts absorption by 30-40%",
+    "Dry cough is a class effect from reduced bradykinin breakdown; switch to an ARB if intolerable",
+    "Black patients and those with low-renin hypertension may respond less to monotherapy"
+  ],
+  "missed": "Take the missed dose as soon as you remember (one hour before a meal if possible). If it is almost time for the next dose, skip the missed dose and resume the regular schedule. Do not double up.",
+  "overdose": "Overdose causes marked hypotension. Management is supportive: place patient supine, give intravenous normal saline for volume expansion to restore blood pressure; consider angiotensin II or catecholamines if needed. Captopril is removed by hemodialysis. Monitor potassium and renal function.",
+  "refs": [
+    ["FDA Prescribing Information - Captopril", "https://www.accessdata.fda.gov/scripts/cder/daf/"],
+    ["openFDA Drug Label - Captopril", "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22CAPTOPRIL%22"]
+  ]
+}
