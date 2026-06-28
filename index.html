@@ -50,9 +50,28 @@
 
 <!-- Firebase SDK (compat version — works as plain script tags, no bundler needed) -->
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
-<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script defer src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<link rel="dns-prefetch" href="https://www.gstatic.com">
+<script>
+/* Lazy-load Firebase (auth + firestore) AFTER the page is interactive, so its ~120KB
+   doesn't compete with the critical app code at startup. Sign-in still works: if a user
+   signs in before it has loaded, SMD_firebaseSignIn loads it on demand (see app.js). */
+(function(){
+  var FB="https://www.gstatic.com/firebasejs/10.12.0/",loaded=false,loading=false,cbs=[];
+  function chain(srcs,done){var i=0;(function next(){if(i>=srcs.length){done();return;}var s=document.createElement("script");s.src=srcs[i++];s.onload=next;s.onerror=next;document.head.appendChild(s);})();}
+  window.SMD_loadFirebase=function(cb){
+    if(loaded){cb&&cb();return;}
+    if(cb)cbs.push(cb);
+    if(loading)return;loading=true;
+    chain([FB+"firebase-app-compat.js",FB+"firebase-firestore-compat.js",FB+"firebase-auth-compat.js"],function(){
+      loaded=true;try{window.SMD_bootFirebase&&window.SMD_bootFirebase();}catch(e){}
+      var f;while(f=cbs.shift()){try{f();}catch(e){}}
+    });
+  };
+  function kick(){try{window.SMD_loadFirebase();}catch(e){}}
+  if("requestIdleCallback"in window){requestIdleCallback(kick,{timeout:2500});}
+  else{window.addEventListener("load",function(){setTimeout(kick,300);});}
+})();
+</script>
 
 
 
@@ -1043,13 +1062,13 @@
   </div>
 </div>
 
-<script src="/app.js?v=gold25" defer></script>
-<script src="/policy.js?v=gold25" defer></script>
-<script src="/features.js?v=gold25" defer></script>
-<script src="/calculators.js?v=gold25" defer></script>
-<script src="/drugs.js?v=gold25" defer></script>
-<script src="/api.js?v=gold25" defer></script>
-<script src="/reasoning.js?v=gold25" defer></script>
-<script src="/home.js?v=gold25" defer></script>
+<script src="/app.js?v=gold26" defer></script>
+<script src="/policy.js?v=gold26" defer></script>
+<script src="/features.js?v=gold26" defer></script>
+<script src="/calculators.js?v=gold26" defer></script>
+<script src="/drugs.js?v=gold26" defer></script>
+<script src="/api.js?v=gold26" defer></script>
+<script src="/reasoning.js?v=gold26" defer></script>
+<script src="/home.js?v=gold26" defer></script>
 </body>
 </html>
