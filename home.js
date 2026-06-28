@@ -320,9 +320,9 @@
       else if (_fl) _fl.src = "/logo.png";
     } catch (e) {}
 
-    var scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim);
-    var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet);
-    scrim.addEventListener("click", closeSheet);
+    var scrim = document.getElementById("hvScrim");
+    if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
+    if (!document.getElementById("hvSheet")) { var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet); }
     fab = document.createElement("button"); fab.className = "hv-fab"; fab.id = "hvFab"; fab.setAttribute("aria-label", "StewardMD home"); fab.innerHTML = svg("home"); document.body.appendChild(fab);
     fab.addEventListener("click", showV2);
 
@@ -409,7 +409,8 @@
         '<div style="font:500 13px/1.9 var(--hfont);color:var(--hink)">✓ Full antibiotic decision engine<br>✓ 1,465-drug database — doses &amp; brands<br>✓ 50+ calculators · guidelines · ICU tools<br>✓ Clinical Reasoning (beta)</div>' +
       '</div>' +
       '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp);margin-top:14px" data-close="1">Continue — it\'s free</button>');
-    sheetEl().querySelector("[data-close]").addEventListener("click", closeSheet);
+    var subClose = sheetEl().querySelector("[data-close]");
+    if (subClose) subClose.addEventListener("click", closeSheet);
   }
   function openAskAi() {
     openSheet('<div class="hv-sh-t">Ask AI</div>' +
@@ -427,7 +428,8 @@
       var fl = s.querySelector("#v3AiLogo");
       if (fl) fl.src = (dl && dl.src) ? dl.src : "/logo.png";
     } catch (e) {}
-    s.querySelector("[data-close]").addEventListener("click", closeSheet);
+    var aiClose = s.querySelector("[data-close]");
+    if (aiClose) aiClose.addEventListener("click", closeSheet);
   }
 
   // ---- Display & Accessibility engine ----
