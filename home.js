@@ -165,6 +165,7 @@
     return "StewardMD — Clinical decision\n\n" + t + "\n\nDecision support only — verify against clinical judgment & local protocol.";
   }
   function shareCase(out) {
+    if (window.CASESHARE && CASESHARE.shareCurrent) { try { CASESHARE.shareCurrent(); return; } catch (e) {} }
     var txt = caseText();
     try { if (navigator.share) { navigator.share({ title: "StewardMD — Clinical decision", text: txt }).catch(function () {}); return; } } catch (e) {}
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); toast("Case copied to clipboard"); return; } } catch (e) {}
@@ -511,6 +512,7 @@
         '<button data-ui="classic">Classic UI<br><span style="font-weight:600;opacity:.85;font-size:10px">previous</span></button>' +
       '</div></div>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "menu") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
@@ -528,6 +530,7 @@
         if (a === "display") return openDisplay();
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
+        if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
