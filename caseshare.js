@@ -61,13 +61,29 @@
       doShare(snap, db, user);
     });
   }
+  // Monthly share cap (100/mo) — client-side counter per month; subscription tiers planned later.
+  var MONTHLY_LIMIT = 100;
+  function monthKey(){ var d = new Date(); return "smd_shares_" + d.getFullYear() + "_" + (d.getMonth() + 1); }
+  function sharesThisMonth(){ try { return parseInt(localStorage.getItem(monthKey()) || "0", 10) || 0; } catch (e) { return 0; } }
+  function bumpShares(){ try { localStorage.setItem(monthKey(), String(sharesThisMonth() + 1)); } catch (e) {} }
+  // Also store the shared case in the sharer's My Cases (Firestore users/{uid}/cases).
+  function saveToMyCases(db, user, code, snap, name){
+    try {
+      var c = { id: code, name: snap.title || "Shared case", syndrome: snap.title || "",
+                notes: "Shared · code " + code, savedAt: Date.now(), savedAtStr: new Date().toLocaleString(),
+                shared: true, sharedCode: code, sharedByName: name || "", sharedByEmail: (user && user.email) || "" };
+      db.collection("users").doc(user.uid).collection("cases").doc(code).set(c);
+    } catch (e) {}
+  }
   function doShare(snap, db, user){
+    if (sharesThisMonth() >= MONTHLY_LIMIT) { toast("Monthly share limit reached (" + MONTHLY_LIMIT + "/mo). Higher limits are coming with subscription plans."); return; }
     var code = genCode();
     var now = Date.now();
+    var name = (user.displayName) || ((user.email || "").split("@")[0]) || "Clinician";
     var rec = { v:1, code:code, title:snap.title, html:snap.html, text:snap.text,
-                ownerUid:user.uid, ownerEmail:user.email||"", createdAt:now, expiresAt: now + TTL_MS };
+                ownerUid:user.uid, ownerEmail:user.email||"", ownerName:name, createdAt:now, expiresAt: now + TTL_MS };
     db.collection(COLL).doc(code).set(rec)
-      .then(function(){ showResult(code); })
+      .then(function(){ bumpShares(); saveToMyCases(db, user, code, snap, name); showResult(code); })
       .catch(function(e){ try { console.error("[CASESHARE] share failed:", e); } catch (x) {} toast("Share failed: " + ((e && e.code) || (e && e.message) || "error")); });
   }
   function friendly(e){ var m=(e&&e.message)||""; if(/permission|insufficient/i.test(m)) return "Firestore rules not set yet (see setup)."; return m.slice(0,80) || "error"; }
@@ -146,8 +162,11 @@
   function showViewer(rec, code){
     var when = "";
     try { when = rec.createdAt ? new Date(rec.createdAt).toLocaleString() : ""; } catch(e){}
+    var by = "";
+    if (rec.ownerName || rec.ownerEmail) by = "Shared by " + esc(rec.ownerName || "") + (rec.ownerEmail ? " (" + esc(rec.ownerEmail) + ")" : "");
     show('<div class="cs-head"><h3>'+esc(rec.title||"Shared case")+'</h3><button class="cs-x" data-cs-x>×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">'+esc(code)+(when?" · shared "+esc(when):"")+'</div>'
+       + (by?'<div class="cs-by" style="text-align:center;font:600 12.5px var(--f);color:var(--ink);margin:-8px 0 14px">'+by+'</div>':'')
        + '<div class="cs-viewer">'+(rec.html || ("<pre style=\"white-space:pre-wrap\">"+esc(rec.text||"")+"</pre>"))+'</div>'
        + '<div class="cs-note">Read-only shared case. Decision support only — verify against clinical judgment &amp; local protocol.</div></div>');
   }
