@@ -24,10 +24,13 @@
       w.style.cssText = "padding:12px 14px;border-top:1px solid var(--line,#d7dee3);margin-top:8px";
       w.innerHTML = '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin-bottom:6px">Interface</div>' +
         '<button id="smdUiV2" style="' + bs + (isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Advanced UI — by MaiK' + (isV2 ? '  &#10003;' : '') + '</button>' +
-        '<button id="smdUiCl" style="' + bs + (!isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Classic UI — previous' + (!isV2 ? '  &#10003;' : '') + '</button>';
+        '<button id="smdUiCl" style="' + bs + (!isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Classic UI — previous' + (!isV2 ? '  &#10003;' : '') + '</button>' +
+        '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin:14px 0 6px">Credits</div>' +
+        '<button id="smdAck" style="' + bs + '">★ Acknowledgements &amp; Contributors</button>';
       menu.appendChild(w);
       w.querySelector("#smdUiV2").onclick = function () { if (window.SMD_setUI) SMD_setUI(true); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
       w.querySelector("#smdUiCl").onclick = function () { if (window.SMD_setUI) SMD_setUI(false); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
+      w.querySelector("#smdAck").onclick = function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { openAck(); } catch (e) {} }, 60); };
     }
     try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(inject, 40); return r; }; } } catch (e) {}
     setTimeout(inject, 1500);
@@ -217,11 +220,14 @@
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
-      "body.ui-v2 .app-head-actions{justify-content:flex-end!important;flex-wrap:wrap;gap:8px}body.ui-v2 .brandrow{justify-content:space-between!important}",
+      "body.ui-v2 .brandrow{flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;gap:10px}",
+      "body.ui-v2 .brandrow>div:first-child{flex:0 1 auto;min-width:0}",
+      "body.ui-v2 .brandrow .tagline{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46vw}",
+      "body.ui-v2 .app-head-actions{flex:1 1 auto;min-width:0;justify-content:flex-end!important;flex-wrap:wrap;gap:8px}",
       "#homeV2 .v3-devfoot{max-width:var(--v3-maxw);margin:20px auto 4px;padding:18px 16px 8px;border-top:1px solid var(--v3-border,#E2E8F0);text-align:center}",
       "#homeV2 .v3-devlabel{font:700 10px/1 var(--v3-font);letter-spacing:.14em;color:var(--v3-muted,#64748B);margin-bottom:10px}",
       "#homeV2 .v3-devlogo{height:38px;width:auto;max-width:200px;display:block;margin:0 auto 8px;object-fit:contain}",
-      "body.v3-dark #homeV2 .v3-devlogo,body.dark #homeV2 .v3-devlogo{filter:brightness(0) invert(1) opacity(.88)}",
+      "body.v3-dark #homeV2 .v3-devlogo,body.dark #homeV2 .v3-devlogo,body.v3-dark .hv-sheet #v3AiLogo,body.dark .hv-sheet #v3AiLogo{filter:brightness(0) invert(1) opacity(.88)}",
       "#homeV2 .v3-devname{font:700 14px/1.2 var(--v3-font);color:var(--v3-ink,#0F172A);margin-bottom:8px}",
       "#homeV2 .v3-devmeta{font:500 11px/1.55 var(--v3-font);color:var(--v3-muted,#64748B);max-width:340px;margin:2px auto 0}",
       ".hv-sheet .hv-ack{font-family:var(--hfont);color:var(--hink);font-size:13px;line-height:1.6;padding:2px 0}",
@@ -330,7 +336,16 @@
   }
 
   // ---- More sheet ----
-  function sheetEl() { return document.getElementById("hvSheet"); }
+  function sheetEl() {
+    var s = document.getElementById("hvSheet");
+    if (!s) {
+      var scrim = document.getElementById("hvScrim");
+      if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
+      s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet"; document.body.appendChild(s);
+      try { injectCSS(); } catch (e) {}
+    }
+    return s;
+  }
   function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); }
   function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
@@ -370,6 +385,7 @@
     if (src) {
       var c = src.cloneNode(true);
       c.removeAttribute("id");
+      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
       inner = '<div class="hv-ack">' + c.innerHTML + '</div>';
     } else {
       inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
@@ -396,14 +412,21 @@
     sheetEl().querySelector("[data-close]").addEventListener("click", closeSheet);
   }
   function openAskAi() {
-    openSheet('<div class="hv-sh-t">🤖 Ask AI</div>' +
-      '<div style="text-align:center;padding:8px 4px 4px"><div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:18px;background:var(--hps);color:var(--hp);margin-bottom:12px">' + svg("ai") + '</div></div>' +
-      '<p style="font:700 16px/1.4 var(--hfont);color:var(--hink);text-align:center;margin:0 0 6px">Coming soon</p>' +
-      '<p style="font:500 13.5px/1.6 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 14px">Conversational AI assistance for antibiotic decisions will be available with <b style="color:var(--hink)">StewardMD Premium</b>. We\'ll notify you when it launches.</p>' +
-      '<button class="hv-reset" style="background:var(--hp);color:#fff;border-color:var(--hp)" data-sub="1">See subscription</button>' +
-      '<button class="hv-back" data-close="1">Maybe later</button>');
+    openSheet('<div class="hv-sh-t">Ask AI</div>' +
+      '<div style="text-align:center;padding:8px 4px 4px">' +
+        '<img id="v3AiLogo" alt="MaiK" style="height:62px;width:auto;max-width:200px;object-fit:contain;display:block;margin:0 auto 12px" />' +
+        '<div style="font:800 10px/1 var(--hfont);letter-spacing:.14em;color:var(--hmut);margin-bottom:6px">OUR AI AGENT</div>' +
+      '</div>' +
+      '<p style="font:800 18px/1.35 var(--hfont);color:var(--hink);text-align:center;margin:0 0 4px">Medical AI Knowledge <span style="color:var(--hp)">(MaiK)</span></p>' +
+      '<p style="font:600 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 14px">Powered by Gemini</p>' +
+      '<div style="text-align:center;background:var(--hps);color:var(--hp);border-radius:12px;padding:12px 14px;font:700 14px/1.45 var(--hfont);margin-bottom:14px">🚧 Under construction — coming soon</div>' +
+      '<button class="hv-back" data-close="1">Close</button>');
     var s = sheetEl();
-    s.querySelector("[data-sub]").addEventListener("click", openSubscription);
+    try {
+      var dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
+      var fl = s.querySelector("#v3AiLogo");
+      if (fl) fl.src = (dl && dl.src) ? dl.src : "/logo.png";
+    } catch (e) {}
     s.querySelector("[data-close]").addEventListener("click", closeSheet);
   }
 
