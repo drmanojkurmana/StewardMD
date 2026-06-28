@@ -9,6 +9,12 @@
   function N(x){var v=parseFloat(x);return(typeof v==="number"&&!isNaN(v)&&isFinite(v))?v:null;}
   function r1(x){return Math.round(x*10)/10;}
   function r0(x){return Math.round(x);}
+  // Unit conversion: engine works in CONVENTIONAL units; SI inputs are converted to conventional.
+  // canonical(conventional) = si_value * f.   si_value = canonical / f.
+  var CONV={ ca:{si:"mmol/L",f:4.0}, mg:{si:"mmol/L",f:2.43}, po4:{si:"mmol/L",f:3.1}, glu:{si:"mmol/L",f:18}, creat:{si:"µmol/L",f:1/88.4}, alb:{si:"g/L",f:0.1} };
+  function toCanonical(k,val,units){ if(val==null)return null; return (units==="si"&&CONV[k])? val*CONV[k].f : val; }
+  function toDisplay(k,canon,units){ if(canon==null)return null; return (units==="si"&&CONV[k])? canon/CONV[k].f : canon; }
+  var NAME2KEY={ Calcium:"ca", Magnesium:"mg", Phosphate:"po4" }; // result analytes that convert
   function tbwFactor(pt){var f=(pt.sex==="f")?0.5:0.6; if(N(pt.age)!=null&&pt.age>=65) f-=0.1; return f;}
   function highOdsRisk(pt,L){return !!(pt.liver||pt.dialysis||pt.malnutrition||pt.alcohol||(N(L&&L.k)!=null&&L.k<3.0));}
   function renalImp(pt,L){return !!(pt.renal||pt.dialysis)||(N(L&&L.egfr)!=null&&L.egfr<30);}
@@ -204,7 +210,7 @@
   var EVIDENCE = ["European Hyponatraemia Guideline 2014 (ESICM/ESE/ERA-EDTA)","KDIGO","Surviving Sepsis Campaign","UpToDate","Harrison's Principles of Internal Medicine","ASPEN (refeeding)","ICMR / ISCCM (where applicable)"];
 
   /* ---------------- state ---------------- */
-  var S = { pt:{}, labs:{}, analyzed:false, results:null };
+  var S = { pt:{}, labs:{}, analyzed:false, results:null, units:"conv" };
   var root=null;
 
   /* ---------------- UI ---------------- */
@@ -244,8 +250,11 @@
     if(f.t==="text") return '<label class="ece-f"><span>'+esc(f.l)+'</span><input type="text" data-pt="'+f.k+'" value="'+esc(val)+'"></label>';
     return '<label class="ece-f"><span>'+esc(f.l)+(f.u?' <i>'+esc(f.u)+'</i>':'')+'</span><input type="number" step="any" inputmode="decimal" data-pt="'+f.k+'" value="'+esc(val)+'"></label>';
   }
-  function labCard(f,val){
-    return '<label class="ece-f ece-lab"><span>'+esc(f.l)+(f.u?' <i>'+esc(f.u)+'</i>':'')+'</span><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(val)+'"></label>';
+  function labCard(f){
+    var unit = (S.units==="si"&&CONV[f.k])? CONV[f.k].si : f.u;
+    var disp = toDisplay(f.k, S.labs[f.k], S.units);
+    if(disp!=null) disp = Math.round(disp*100)/100;
+    return '<label class="ece-f ece-lab"><span>'+esc(f.l)+(unit?' <i>'+esc(unit)+'</i>':'')+'</span><input type="number" step="any" inputmode="decimal" data-lab="'+f.k+'" value="'+esc(disp==null?"":disp)+'"></label>';
   }
 
   function view(){
@@ -258,17 +267,23 @@
     +   '<header class="ece-hero"><div class="ece-h1">🧪 Electrolyte Correction Engine</div><div class="ece-sub">Evidence-based ICU electrolyte management</div></header>'
     +   '<section class="ece-sec"><h3>Patient information</h3><div class="ece-grid">'+PT_FIELDS.map(function(f){return fieldCard(f,S.pt[f.k]);}).join("")+'</div>'
     +     '<div class="ece-toggles">'+PT_TOGGLES.map(function(t){return '<button class="ece-tog'+(S.pt[t.k]?" on":"")+'" data-tog="'+t.k+'">'+esc(t.l)+'</button>';}).join("")+'</div></section>'
-    +   '<section class="ece-sec"><h3>Electrolytes & labs</h3><div class="ece-grid">'+LAB_FIELDS.map(function(f){return labCard(f,S.labs[f.k]);}).join("")+'</div></section>'
+    +   '<section class="ece-sec"><div class="ece-sec-h"><h3>Electrolytes & labs</h3><div class="ece-units"><button data-units="conv" class="'+(S.units!=="si"?"on":"")+'">Conventional</button><button data-units="si" class="'+(S.units==="si"?"on":"")+'">SI</button></div></div><div class="ece-grid">'+LAB_FIELDS.map(function(f){return labCard(f);}).join("")+'</div></section>'
     +   '<div id="eceResults">'+(S.analyzed?results():'')+'</div>'
     +   '<div class="ece-disc">Decision support only — conservative, guideline-referenced values. Verify every dose & rate against local protocol and the clinical context. Pending clinician review.</div>'
     + '</div>'
     + '<div class="ece-cta"><button class="ece-go" data-act="analyze">🧮 Analyze & Generate ICU Recommendations</button></div>';
   }
 
-  function chip(r){ return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(r.value)+'</span><span class="sv">'+dot(r.level)+' '+esc(r.severity)+'</span></div>'; }
+  function disp(r){ // headline value + unit converted to the chosen unit system
+    var key=NAME2KEY[r.name];
+    if(S.units==="si"&&key&&typeof r.value==="number"){ return { v:Math.round(toDisplay(key,r.value,"si")*100)/100, u:CONV[key].si }; }
+    return { v:r.value, u:r.unit };
+  }
+  function chip(r){ var d=disp(r); return '<div class="ece-chip '+r.level+'"><span class="nm">'+esc(r.name)+'</span><span class="vl">'+esc(d.v)+'</span><span class="sv">'+dot(r.level)+' '+esc(r.severity)+'</span></div>'; }
   function dot(l){ return l==="crit"||l==="red"?"🔴":l==="amber"?"🟠":"🟢"; }
   function card(r){
-    return '<div class="ece-card '+r.level+'"><div class="ece-card-h"><span>'+esc(r.name)+'</span><b>'+esc(r.value)+' '+esc(r.unit)+'</b><em class="pill '+r.level+'">'+dot(r.level)+' '+esc(r.severity)+'</em></div>'
+    var d=disp(r);
+    return '<div class="ece-card '+r.level+'"><div class="ece-card-h"><span>'+esc(r.name)+'</span><b>'+esc(d.v)+' '+esc(d.u)+'</b><em class="pill '+r.level+'">'+dot(r.level)+' '+esc(r.severity)+'</em></div>'
       + r.lines.map(function(ln){return '<div class="ece-row"><span class="k">'+esc(ln[0])+'</span><span class="v">'+ln[1]+'</span></div>';}).join("")
       + (r.ev&&r.ev.length?'<div class="ece-ev">'+r.ev.map(function(e){return '<span>'+esc(e)+'</span>';}).join("")+'</div>':'')
       + '</div>';
@@ -300,12 +315,13 @@
   function readInputs(){
     if(!root) return;
     root.querySelectorAll("[data-pt]").forEach(function(el){ var k=el.getAttribute("data-pt"); var v=el.value; S.pt[k]=(el.type==="number")?(v===""?null:parseFloat(v)):v; });
-    root.querySelectorAll("[data-lab]").forEach(function(el){ var k=el.getAttribute("data-lab"); S.labs[k]=(el.value===""?null:parseFloat(el.value)); });
+    root.querySelectorAll("[data-lab]").forEach(function(el){ var k=el.getAttribute("data-lab"); var val=(el.value===""?null:parseFloat(el.value)); S.labs[k]=toCanonical(k, val, S.units); });
   }
 
   function bind(){
     root.addEventListener("click",function(e){
-      var b=e.target.closest("[data-act],[data-tog]"); if(!b) return;
+      var b=e.target.closest("[data-act],[data-tog],[data-units]"); if(!b) return;
+      if(b.hasAttribute("data-units")){ var u=b.getAttribute("data-units"); if(u!==S.units){ readInputs(); S.units=u; root.innerHTML=view(); } return; }
       if(b.hasAttribute("data-tog")){ var k=b.getAttribute("data-tog"); S.pt[k]=!S.pt[k]; b.classList.toggle("on"); return; }
       var a=b.getAttribute("data-act");
       if(a==="close") return close();
@@ -330,6 +346,10 @@
       ".ece-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 14px calc(96px + env(safe-area-inset-bottom))}",
       ".ece-hero{padding:22px 4px 8px}.ece-h1{font:800 24px/1.15 var(--f);letter-spacing:-.02em}.ece-sub{font:500 14px var(--f);color:var(--mut);margin-top:4px}",
       ".ece-sec{margin-top:18px}.ece-sec>h3{font:700 12px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:0 0 10px 2px}",
+      ".ece-sec-h{display:flex;align-items:center;justify-content:space-between;gap:10px}.ece-sec-h>h3{margin:0 0 10px 2px}",
+      ".ece-units{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px}",
+      ".ece-units button{border:none;background:none;color:var(--mut);font:700 11.5px var(--f);padding:6px 12px;border-radius:999px;cursor:pointer}",
+      ".ece-units button.on{background:var(--tl);color:#fff}",
       ".ece-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}",
       "@media(min-width:560px){.ece-grid{grid-template-columns:repeat(3,1fr)}}",
       ".ece-f{display:flex;flex-direction:column;gap:5px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;box-shadow:0 1px 2px rgba(15,23,42,.04)}",
