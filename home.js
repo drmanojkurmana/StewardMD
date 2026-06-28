@@ -697,8 +697,27 @@
     try { closeSheet(); } catch (e) {}
   }
   window.SMD_setUI = setUI;
+  // Inject a "Find shared case by code" button into My Cases → opens the retrieve-by-code prompt.
+  function injectMyCasesSearch() {
+    var body = document.getElementById("mcpBody"); if (!body) return;
+    if (body.querySelector("#smdFindCaseBtn")) return;
+    var b = document.createElement("button");
+    b.id = "smdFindCaseBtn"; b.type = "button";
+    b.textContent = "🔎 Find shared case by code";
+    b.style.cssText = "display:block;width:100%;margin:0 0 12px;padding:12px 14px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 13px var(--sans,'Inter',system-ui,sans-serif);cursor:pointer";
+    b.addEventListener("click", function () { if (window.CASESHARE && CASESHARE.openPrompt) CASESHARE.openPrompt(); });
+    var bar = body.querySelector(".mcp-storage-bar");
+    if (bar && bar.nextSibling) body.insertBefore(b, bar.nextSibling); else body.insertBefore(b, body.firstChild);
+  }
+  function wrapMyCases() {
+    if (typeof window.openMyCases === "function" && !window.openMyCases._smdWrapped) {
+      var orig = window.openMyCases;
+      window.openMyCases = function () { var r = orig.apply(this, arguments); try { injectMyCasesSearch(); } catch (e) {} return r; };
+      window.openMyCases._smdWrapped = true;
+    }
+  }
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn();
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases();
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
