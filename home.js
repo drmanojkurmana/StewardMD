@@ -148,10 +148,21 @@
     bar.innerHTML = '<button type="button" data-cs="share">📤 Share case</button>'
                   + '<button type="button" data-cs="pdf">🖨 Save as PDF</button>';
     out.insertBefore(bar, out.firstChild);
-    bar.querySelector('[data-cs="share"]').addEventListener("click", function () { shareCase(out); });
-    bar.querySelector('[data-cs="pdf"]').addEventListener("click", function () { printCase(); });
+    // listeners handled by ONE delegated document listener (watchCaseShare) — survives re-renders.
   }
+  var _csDelegated = false;
   function watchCaseShare() {
+    if (!_csDelegated) {
+      _csDelegated = true;
+      document.addEventListener("click", function (e) {
+        var b = e.target && e.target.closest ? e.target.closest("[data-cs]") : null;
+        if (!b) return;
+        var a = b.getAttribute("data-cs");
+        try { console.log("[smd] case-share click:", a); } catch (x) {}
+        if (a === "share") { try { shareCase(); } catch (er) { try { console.error("[smd] shareCase err", er); } catch (z) {} toast("Share error — try again"); } }
+        else if (a === "pdf") { try { printCase(); } catch (er) {} }
+      }, true);
+    }
     var out = document.getElementById("outputArea");
     if (out && !_osObs) {
       try { _osObs = new MutationObserver(function () { injectCaseShare(); }); _osObs.observe(out, { childList: true }); } catch (e) {}

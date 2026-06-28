@@ -11,7 +11,7 @@
   var root = null;
 
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
-  function toast(m){ try { if (window.SMD_toast) return SMD_toast(m); } catch(e){} var t=document.getElementById("cs-toast"); if(!t){t=document.createElement("div");t.id="cs-toast";t.className="cs-toast";document.body.appendChild(t);} t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove("on");},2400); }
+  function toast(m){ try { injectCSS(); } catch(e){} var t=document.getElementById("cs-toast"); if(!t){t=document.createElement("div");t.id="cs-toast";t.className="cs-toast";document.body.appendChild(t);} t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove("on");},2600); }
 
   function genCode(){ var s=""; for (var i=0;i<5;i++){ s += ALPHABET.charAt(Math.floor(Math.random()*ALPHABET.length)); } return "SMD-"+s; }
   function normCode(c){ c=String(c||"").trim().toUpperCase().replace(/\s+/g,""); if(c && c.indexOf("SMD-")!==0 && /^[A-Z0-9]{5}$/.test(c)) c="SMD-"+c; return c; }
@@ -48,6 +48,7 @@
 
   // ---- create a share ----
   function shareCurrent(){
+    try { console.log("[CASESHARE] shareCurrent: DB=", !!window.SMD_DB, "AUTH=", !!window.SMD_AUTH, "user=", !!(window.SMD_AUTH && window.SMD_AUTH.currentUser)); } catch (e) {}
     var snap = currentSnapshot();
     if (!snap) { toast("Generate a clinical decision first."); return; }
     toast("Preparing share…");
