@@ -365,9 +365,15 @@
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD();
     if (IS_V2) {
-      // apply the theme + show the new home only AFTER entry (don't touch splash/consent)
+      // show the new home as soon as the user is past splash/login, COVERING the app's own
+      // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
       var tries = 0;
-      var iv = setInterval(function () { tries++; if (shellVisible() || tries > 40) { clearInterval(iv); document.body.classList.add("ui-v2"); showV2(); } }, 150);
+      var iv = setInterval(function () {
+        tries++;
+        var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
+        var entered = (ms && !ms.classList.contains("hidden")) || (sh && sh.offsetParent !== null);
+        if (entered || tries > 60) { clearInterval(iv); document.body.classList.add("ui-v2"); showV2(); }
+      }, 120);
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
