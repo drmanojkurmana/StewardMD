@@ -981,6 +981,65 @@
       if(v.shift>=75)s++;
       var band = s<=4?"<b>Unlikely</b> (≤4) — appendicitis improbable.":s<=6?"<b>Possible</b> (5–6) — observe / imaging.":"<b>Probable</b> (7–10) — surgical consult.";
       return { v:s, u:"/10", i:band+" Ref: Alvarado, Ann Emerg Med 1986." };
+    } },
+
+  { id:"pitt", cat:"Infectious disease", icon:"🦠", title:"Pitt bacteraemia score",
+    desc:"Mortality risk severity in bloodstream infection.",
+    kw:["bacteremia","bacteraemia","sepsis","bsi","mortality"],
+    inputs:[
+      { id:"temp", label:"Temperature band", type:"select", opts:[{v:"0",t:"36.1–38.9 °C (0)"},{v:"1",t:"35.1–36 or 39–39.9 °C (1)"},{v:"2",t:"≤35 or ≥40 °C (2)"}] },
+      { id:"hypo", label:"Acute hypotension / pressors (+2)", type:"check" },
+      { id:"vent", label:"Mechanical ventilation (+2)", type:"check" },
+      { id:"arrest", label:"Cardiac arrest (+4)", type:"check" },
+      { id:"mental", label:"Mental status", type:"select", opts:[{v:"0",t:"Alert (0)"},{v:"1",t:"Disoriented (1)"},{v:"2",t:"Stuporous (2)"},{v:"4",t:"Comatose (4)"}] }
+    ],
+    compute:function(v){
+      if(!v.temp||!v.mental) return ERR;
+      var s=(+v.temp)+(+v.mental);
+      if(v.hypo)s+=2; if(v.vent)s+=2; if(v.arrest)s+=4;
+      return { v:s, u:"points", i:(s>=4?"<b>High acuity</b> (≥4) — markedly increased mortality.":"<b>Lower acuity</b> (&lt;4).")+" Useful for risk-adjustment in bacteraemia. Ref: Paterson, Ann Intern Med 2004 (Pitt bacteraemia score)." };
+    } },
+
+  { id:"rockall", cat:"Critical care", icon:"🚨", title:"Rockall score (UGIB)",
+    desc:"Rebleeding & mortality risk after upper-GI bleed (post-endoscopy).",
+    kw:["gi bleed","ugib","rebleed","endoscopy","rockall"],
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"shock", label:"Shock", type:"select", opts:[{v:"0",t:"None — SBP ≥100, HR <100 (0)"},{v:"1",t:"Tachycardia — SBP ≥100, HR ≥100 (1)"},{v:"2",t:"Hypotension — SBP <100 (2)"}] },
+      { id:"comorb", label:"Comorbidity", type:"select", opts:[{v:"0",t:"None (0)"},{v:"2",t:"CHF / IHD / major (2)"},{v:"3",t:"Renal/liver failure or metastatic Ca (3)"}] },
+      { id:"dx", label:"Diagnosis", type:"select", opts:[{v:"0",t:"Mallory-Weiss / no lesion (0)"},{v:"1",t:"All other diagnoses (1)"},{v:"2",t:"Upper-GI malignancy (2)"}] },
+      { id:"srh", label:"Stigmata of recent haemorrhage", type:"select", opts:[{v:"0",t:"None / dark spot (0)"},{v:"2",t:"Blood, clot, visible/spurting vessel (2)"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!v.shock||!v.comorb||!v.dx||!v.srh) return ERR;
+      var ap=v.age>=80?2:v.age>=60?1:0;
+      var s=ap+(+v.shock)+(+v.comorb)+(+v.dx)+(+v.srh);
+      var band=s<=2?"<b>Low risk</b> (0–2) — good prognosis, consider early discharge.":s<=4?"<b>Intermediate</b> (3–4).":"<b>High risk</b> (≥5) — high rebleed/mortality.";
+      return { v:s, u:"/11", i:band+" (Pre-endoscopy 'clinical' Rockall = age + shock + comorbidity.) Ref: Rockall et al, Gut 1996." };
+    } },
+
+  { id:"ciwa", cat:"Neurology", icon:"🧠", title:"CIWA-Ar (alcohol withdrawal)",
+    desc:"Severity of alcohol withdrawal; guides symptom-triggered benzodiazepines.",
+    kw:["alcohol","withdrawal","ciwa","detox","dts"],
+    inputs:[
+      { id:"nau", label:"Nausea / vomiting (0–7)", type:"number" },
+      { id:"tre", label:"Tremor (0–7)", type:"number" },
+      { id:"swe", label:"Paroxysmal sweats (0–7)", type:"number" },
+      { id:"anx", label:"Anxiety (0–7)", type:"number" },
+      { id:"agi", label:"Agitation (0–7)", type:"number" },
+      { id:"tac", label:"Tactile disturbances (0–7)", type:"number" },
+      { id:"aud", label:"Auditory disturbances (0–7)", type:"number" },
+      { id:"vis", label:"Visual disturbances (0–7)", type:"number" },
+      { id:"hea", label:"Headache / fullness (0–7)", type:"number" },
+      { id:"ori", label:"Orientation / clouding (0–4)", type:"number" }
+    ],
+    compute:function(v){
+      var ks=["nau","tre","swe","anx","agi","tac","aud","vis","hea","ori"];
+      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
+      function cl(x,mx){return Math.max(0,Math.min(mx,Math.round(x)));}
+      var s=0; for(var j=0;j<9;j++){ s+=cl(v[ks[j]],7); } s+=cl(v.ori,4);
+      var band=s<=8?"<b>Minimal / absent</b> (≤8) — usually no medication.":s<=15?"<b>Mild–moderate</b> (9–15).":s<=20?"<b>Moderate–severe</b> (16–20) — treat.":"<b>Severe</b> (&gt;20) — high risk of seizures / DTs; treat promptly.";
+      return { v:s, u:"/67", i:band+" Use symptom-triggered benzodiazepine dosing per protocol; reassess hourly. Ref: Sullivan et al, Br J Addict 1989." };
     } }
 
   ];
