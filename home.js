@@ -97,7 +97,7 @@
   // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
   //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
-    startcase: openCaseChooser,
+    startcase: function () { hideV2(); var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell"); if (ms) ms.classList.remove("hidden"); if (sh) sh.classList.remove("visible"); try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {} },
     reasoning: function () { hideV2(); if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
     search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
     cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
@@ -365,9 +365,9 @@
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD();
     if (IS_V2) {
-      document.body.classList.add("ui-v2");   // theme the entire app immediately
+      // apply the theme + show the new home only AFTER entry (don't touch splash/consent)
       var tries = 0;
-      var iv = setInterval(function () { tries++; if (shellVisible() || tries > 40) { clearInterval(iv); showV2(); } }, 150);
+      var iv = setInterval(function () { tries++; if (shellVisible() || tries > 40) { clearInterval(iv); document.body.classList.add("ui-v2"); showV2(); } }, 150);
     }
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
