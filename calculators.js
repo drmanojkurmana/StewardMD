@@ -1159,6 +1159,124 @@
       var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":s<=19?"Moderately severe (15–19).":"Severe (20–27).";
       var flag=(ok(v.q9)&&v.q9>=1)?" ⚠ Item 9 positive — assess suicide risk.":"";
       return { v:s, u:"/27", i:"<b>"+band+"</b>"+flag+" ≥10 has good sensitivity/specificity for major depression. Ref: Kroenke, J Gen Intern Med 2001." };
+    } },
+
+  { id:"gad7", cat:"General", icon:"⚖️", title:"GAD-7 (anxiety)",
+    desc:"Generalised anxiety severity screen. Each item 0–3 over the last 2 weeks.",
+    kw:["gad","anxiety","screen","mental health"],
+    inputs:[
+      { id:"q1", label:"Feeling nervous / anxious / on edge (0–3)", type:"number" },
+      { id:"q2", label:"Not able to stop / control worrying (0–3)", type:"number" },
+      { id:"q3", label:"Worrying too much about things (0–3)", type:"number" },
+      { id:"q4", label:"Trouble relaxing (0–3)", type:"number" },
+      { id:"q5", label:"Restless, hard to sit still (0–3)", type:"number" },
+      { id:"q6", label:"Easily annoyed / irritable (0–3)", type:"number" },
+      { id:"q7", label:"Feeling afraid something awful might happen (0–3)", type:"number" }
+    ],
+    compute:function(v){
+      var ks=["q1","q2","q3","q4","q5","q6","q7"];
+      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
+      var s=0; for(var j=0;j<ks.length;j++){ s+=Math.max(0,Math.min(3,Math.round(v[ks[j]]))); }
+      var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":"Severe (15–21).";
+      return { v:s, u:"/21", i:"<b>"+band+"</b> ≥10 warrants further assessment / treatment. Ref: Spitzer, Arch Intern Med 2006." };
+    } },
+
+  { id:"auditc", cat:"General", icon:"⚖️", title:"AUDIT-C (alcohol)",
+    desc:"Brief alcohol-use screen (3 items).",
+    kw:["audit","alcohol","screen","drinking"],
+    inputs:[
+      { id:"freq", label:"How often do you drink?", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"≤Monthly (1)"},{v:"2",t:"2–4 / month (2)"},{v:"3",t:"2–3 / week (3)"},{v:"4",t:"≥4 / week (4)"}] },
+      { id:"qty", label:"Drinks on a typical drinking day", type:"select", opts:[{v:"0",t:"1–2 (0)"},{v:"1",t:"3–4 (1)"},{v:"2",t:"5–6 (2)"},{v:"3",t:"7–9 (3)"},{v:"4",t:"≥10 (4)"}] },
+      { id:"binge", label:"How often ≥6 drinks on one occasion?", type:"select", opts:[{v:"0",t:"Never (0)"},{v:"1",t:"<Monthly (1)"},{v:"2",t:"Monthly (2)"},{v:"3",t:"Weekly (3)"},{v:"4",t:"Daily / almost (4)"}] },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+    ],
+    compute:function(v){
+      if(!v.freq||!v.qty||!v.binge||!v.sex) return ERR;
+      var s=(+v.freq)+(+v.qty)+(+v.binge);
+      var thr=v.sex==="f"?3:4;
+      return { v:s, u:"/12", i:(s>=thr?"<b>Positive</b> (≥"+thr+" for "+(v.sex==="f"?"women":"men")+") — likely hazardous use; assess further.":"<b>Negative</b> (&lt;"+thr+").")+" Ref: Bush, Arch Intern Med 1998." };
+    } },
+
+  { id:"rox", cat:"Critical care", icon:"🚨", title:"ROX index (HFNC)",
+    desc:"Predicts high-flow nasal cannula success. ROX = (SpO₂/FiO₂)/RR.",
+    kw:["rox","hfnc","high flow","oxygen","niv","respiratory"],
+    inputs:[
+      { id:"spo2", label:"SpO₂", type:"number", unit:"%" },
+      { id:"fio2", label:"FiO₂", type:"number", unit:"%" },
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" }
+    ],
+    compute:function(v){
+      if(!ok(v.spo2)||!ok(v.fio2)||!ok(v.rr)||v.fio2<=0||v.rr<=0) return ERR;
+      var rox=(v.spo2/v.fio2*100)/v.rr; // FiO2 entered as %
+      rox=r1(rox);
+      var band=rox>=4.88?"<b>≥4.88</b> — lower risk of HFNC failure (esp. at 2–12 h).":"<b>&lt;4.88</b> — higher risk of HFNC failure; reassess, consider escalation.";
+      return { v:rox, u:"", i:band+" Validate at 2, 6 and 12 h. Ref: Roca et al, Am J Respir Crit Care Med 2019." };
+    } },
+
+  { id:"uag", cat:"Renal", icon:"🫘", title:"Urine anion gap",
+    desc:"Assesses urinary NH₄⁺ excretion in normal-anion-gap metabolic acidosis.",
+    kw:["urine anion gap","rta","nagma","ammonium","acidosis"],
+    inputs:[
+      { id:"una", label:"Urine Na", type:"number", unit:"mmol/L" },
+      { id:"uk", label:"Urine K", type:"number", unit:"mmol/L" },
+      { id:"ucl", label:"Urine Cl", type:"number", unit:"mmol/L" }
+    ],
+    compute:function(v){
+      if(!ok(v.una)||!ok(v.uk)||!ok(v.ucl)) return ERR;
+      var uag=r1(v.una+v.uk-v.ucl);
+      var i = uag<0 ? "<b>Negative</b> — appropriate ↑NH₄⁺ excretion; suggests GI bicarbonate loss (e.g. diarrhoea)." : "<b>Positive / zero</b> — impaired NH₄⁺ excretion; suggests renal tubular acidosis (distal RTA).";
+      return { v:uag, u:"mmol/L", i:i+" Interpret only in hyperchloraemic (normal-AG) metabolic acidosis. Ref: Goldstein, Am J Nephrol 1986." };
+    } },
+
+  { id:"timistemi", cat:"Cardiovascular", icon:"🫀", title:"TIMI risk (STEMI)",
+    desc:"30-day mortality risk in ST-elevation MI.",
+    kw:["timi","stemi","mi","mortality","acs"],
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"risk", label:"DM or HTN or angina history (+1)", type:"check" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"killip", label:"Killip II–IV (+2)", type:"check" },
+      { id:"wt", label:"Weight <67 kg (+1)", type:"check" },
+      { id:"ant", label:"Anterior STEMI or LBBB (+1)", type:"check" },
+      { id:"time", label:"Time to treatment >4 h (+1)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.sbp)||!ok(v.hr)) return ERR;
+      var s=0;
+      s += v.age>=75?3:(v.age>=65?2:0);
+      if(v.risk)s++;
+      if(v.sbp<100)s+=3;
+      if(v.hr>100)s+=2;
+      if(v.killip)s+=2;
+      if(v.wt)s++;
+      if(v.ant)s++;
+      if(v.time)s++;
+      var band=s<=3?"Lower risk":s<=6?"Intermediate":"High risk";
+      return { v:s, u:"/14", i:"<b>"+band+"</b> — 30-day mortality rises steeply with score (≈0.8% at 0 to >35% at ≥8). Ref: Morrow, Circulation 2000." };
+    } },
+
+  { id:"geneva", cat:"Cardiovascular", icon:"🫀", title:"Geneva score (revised, PE)",
+    desc:"Clinical pre-test probability of pulmonary embolism.",
+    kw:["geneva","pe","pulmonary embolism","pretest","probability"],
+    inputs:[
+      { id:"age", label:"Age >65 (+1)", type:"check" },
+      { id:"prev", label:"Previous DVT / PE (+3)", type:"check" },
+      { id:"surg", label:"Surgery or fracture ≤1 month (+2)", type:"check" },
+      { id:"malig", label:"Active malignancy (+2)", type:"check" },
+      { id:"pain", label:"Unilateral lower-limb pain (+3)", type:"check" },
+      { id:"hemo", label:"Haemoptysis (+2)", type:"check" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"palp", label:"Pain on leg palpation + unilateral oedema (+4)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.hr)) return ERR;
+      var s=0;
+      if(v.age)s++; if(v.prev)s+=3; if(v.surg)s+=2; if(v.malig)s+=2;
+      if(v.pain)s+=3; if(v.hemo)s+=2; if(v.palp)s+=4;
+      s += v.hr>=95?5:(v.hr>=75?3:0);
+      var band=s<=3?"<b>Low</b> probability (0–3)":s<=10?"<b>Intermediate</b> (4–10)":"<b>High</b> probability (≥11)";
+      return { v:s, u:"points", i:band+". Combine with D-dimer / imaging per pathway. Ref: Le Gal, Ann Intern Med 2006 (revised Geneva)." };
     } }
 
   ];
