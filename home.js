@@ -68,29 +68,48 @@
   var root, fab;
   function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); }
   function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".hv-main"); if (m) m.scrollTop = 0; }
-  // Start a Case -> reveal the real Simple/Advanced chooser (#modeSelect), hide the shell + v2.
-  function startCase() {
-    hideV2();
-    var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
-    if (ms) ms.classList.remove("hidden");
-    if (sh) sh.classList.remove("visible");
-    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {}
+  // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
+  function openCaseChooser() {
+    if (!root) build();
+    root.classList.add("on"); if (fab) fab.classList.remove("on");
+    var p = root.querySelector("#hvCase");
+    if (!p) {
+      p = document.createElement("div"); p.id = "hvCase"; p.className = "hv-casepanel";
+      p.innerHTML =
+        '<header class="hv-hdr"><button class="hv-ib" data-cx="back" aria-label="Back">' + svg("chev") + '</button><div class="hv-bz"><div><div class="hv-tt">Start a Case</div><div class="hv-ts">Choose how to enter findings</div></div></div></header>' +
+        '<div class="hv-main"><div class="hv-stack">' +
+          '<button class="hv-primary" data-m="simple"><div class="hv-pic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-ptit">Simple</div><div class="hv-psub">Guided, step-by-step — pick the problem, answer a few questions</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
+          '<button class="hv-sec" data-m="advanced"><div class="hv-sic">' + svg("sliders") + '</div><div class="hv-pb"><div class="hv-stit">Advanced</div><div class="hv-ssub">Full clinical form — all findings, vitals, labs &amp; risk at once</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
+          '<div class="hv-info">You can switch modes anytime from the header.</div>' +
+        '</div></div>';
+      root.appendChild(p);
+      p.addEventListener("click", function (e) {
+        if (e.target.closest('[data-cx="back"]')) { p.classList.remove("on"); return; }
+        var b = e.target.closest("[data-m]"); if (!b) return;
+        var m = b.getAttribute("data-m");
+        p.classList.remove("on"); hideV2();
+        var card = document.getElementById(m === "advanced" ? "modeAdvancedCard" : "modeSimpleCard");
+        if (card) card.click(); else { var ms = document.getElementById("modeSelect"); if (ms) ms.classList.remove("hidden"); }
+      });
+    }
+    p.classList.add("on");
   }
-  // --- action delegates. Most hide the v2 home so the real screen/overlay is visible; the Home FAB brings it back. ---
+  // --- action delegates. Overlay screens (drawer/search/calculators/drugs/guidelines/about) layer OVER the v2 home
+  //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
-    startcase: startCase,
+    startcase: openCaseChooser,
     reasoning: function () { hideV2(); if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
-    search: function () { hideV2(); if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
-    cases: function () { hideV2(); if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
-    calculators: function () { hideV2(); if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
-    guidelines: function () { hideV2(); if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
-    drugs: function () { hideV2(); if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
-    framework: function () { hideV2(); if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
+    search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
+    cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
+    calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
+    guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
+    drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
+    framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
-    menu: function () { hideV2(); if (window.SB && SB.open) SB.open(); },
-    about: function () { hideV2(); if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
-    account: function () { hideV2(); if (window.SB && SB.open) SB.open(); },
-    recent: function () { hideV2(); if (typeof openMyCases === "function") openMyCases(); }
+    menu: function () { if (window.SB && SB.open) SB.open(); },
+    about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
+    account: function () { if (window.SB && SB.open) SB.open(); },
+    recent: function () { if (typeof openMyCases === "function") openMyCases(); }
   };
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
@@ -161,6 +180,8 @@
       "body.ui-v2 .my-cases-btn,body.ui-v2 .smd-search-btn,body.ui-v2 .system-picker-btn,body.ui-v2 .asp-mini-btn,body.ui-v2 .inf-minibtn{border-radius:12px!important}",
       "body.ui-v2 .app-head{border-bottom:1px solid var(--line)}body.ui-v2 .brand{letter-spacing:-.01em}",
       "body.ui-v2 .score-chip,body.ui-v2 .sp-chip,body.ui-v2 .dash-chip,body.ui-v2 .factor-chip,body.ui-v2 .ref-chip,body.ui-v2 .evidence-pill,body.ui-v2 .simple-chip{border-radius:999px!important}",
+      "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
+      "#homeV2 .hv-casepanel{position:absolute;inset:0;z-index:6;background:var(--hbg);display:none;flex-direction:column}#homeV2 .hv-casepanel.on{display:flex;animation:cfade .2s ease}@keyframes cfade{from{opacity:0}to{opacity:1}}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
