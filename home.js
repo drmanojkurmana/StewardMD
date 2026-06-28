@@ -11,12 +11,36 @@
       return localStorage.getItem("smd_home_v2") === "1";
     } catch (e) { return /[?&]home=v2\b/.test(location.search); }
   }
-  if (!flagged()) return;
+  var IS_V2 = flagged();
+
+  // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
+  // sidebar settings — in BOTH modes — so users can switch either way from Settings.
+  function setupSidebarToggle(isV2) {
+    function inject() {
+      var menu = document.getElementById("sbMenu");
+      if (!menu || menu.querySelector("[data-smd-ui]")) return;
+      var bs = "display:block;width:100%;text-align:left;margin:6px 0 0;padding:11px 12px;border:1px solid var(--line,#d7dee3);border-radius:10px;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui);cursor:pointer";
+      var w = document.createElement("div"); w.setAttribute("data-smd-ui", "1");
+      w.style.cssText = "padding:12px 14px;border-top:1px solid var(--line,#d7dee3);margin-top:8px";
+      w.innerHTML = '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin-bottom:6px">Interface</div>' +
+        '<button id="smdUiV2" style="' + bs + (isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Advanced UI — by MaiK' + (isV2 ? '  &#10003;' : '') + '</button>' +
+        '<button id="smdUiCl" style="' + bs + (!isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Classic UI — previous' + (!isV2 ? '  &#10003;' : '') + '</button>';
+      menu.appendChild(w);
+      w.querySelector("#smdUiV2").onclick = function () { try { localStorage.setItem("smd_home_v2", "1"); } catch (e) {} location.search = "?home=v2"; };
+      w.querySelector("#smdUiCl").onclick = function () { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; };
+    }
+    try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(inject, 40); return r; }; } } catch (e) {}
+    setTimeout(inject, 1500);
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
+
+  if (!IS_V2) return;
 
   var ICON = {
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
     shieldPlus: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/>',
+    stcase: '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/>',
     moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
     bell: '<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
     user: '<circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>',
@@ -43,24 +67,33 @@
   function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
   function has(path) { try { return !!path(); } catch (e) { return false; } }
 
-  // --- action delegates (to existing app functions) ---
+  var root, fab;
+  function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); }
+  function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".hv-main"); if (m) m.scrollTop = 0; }
+  // Start a Case -> reveal the real Simple/Advanced chooser (#modeSelect), hide the shell + v2.
+  function startCase() {
+    hideV2();
+    var ms = document.getElementById("modeSelect"), sh = document.querySelector(".shell");
+    if (ms) ms.classList.remove("hidden");
+    if (sh) sh.classList.remove("visible");
+    try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) {}
+  }
+  // --- action delegates. Most hide the v2 home so the real screen/overlay is visible; the Home FAB brings it back. ---
   var ACT = {
-    reasoning: function () { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
-    advanced: function () { if (window.SB && SB.newDecision) SB.newDecision(); else toast("Opening clinical decision…"); },
-    search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
-    cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
-    calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
-    guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
-    drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); },
-    framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
+    startcase: startCase,
+    reasoning: function () { hideV2(); if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
+    search: function () { hideV2(); if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
+    cases: function () { hideV2(); if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
+    calculators: function () { hideV2(); if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
+    guidelines: function () { hideV2(); if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
+    drugs: function () { hideV2(); if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
+    framework: function () { hideV2(); if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
-    menu: function () { if (window.SB && SB.open) SB.open(); },
-    about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
-    account: function () { if (typeof openModal === "function") openModal("privacyModal"); var b = document.getElementById("sessionSignOut"); }, // sign-in/session lives in header; open menu
-    recent: function () { if (typeof openMyCases === "function") openMyCases(); }
+    menu: function () { hideV2(); if (window.SB && SB.open) SB.open(); },
+    about: function () { hideV2(); if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
+    account: function () { hideV2(); if (window.SB && SB.open) SB.open(); },
+    recent: function () { hideV2(); if (typeof openMyCases === "function") openMyCases(); }
   };
-
-  var root;
   function injectCSS() {
     if (document.getElementById("smd-home-css")) return;
     var st = document.createElement("style"); st.id = "smd-home-css";
@@ -111,6 +144,7 @@
       ".hv-reset{width:100%;background:#fbe7e9;color:#ab1c2c;border:1px solid #efa9b1;border-radius:11px;padding:12px;font:700 13px var(--hfont);cursor:pointer;margin-top:6px}",
       ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
       ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
+      ".hv-fab{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:125;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:none}.hv-fab.on{display:flex}.hv-fab svg{stroke:#fff;width:24px;height:24px}.hv-fab:active{transform:scale(.92)}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -141,8 +175,8 @@
           '<button class="hv-qc" data-act="framework">' + svg("framework") + '<span>Framework</span></button>' +
           '<button class="hv-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
-        '<button class="hv-primary" data-act="reasoning"><div class="hv-pic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-ptit">Clinical Reasoning</div><div class="hv-psub">Step-by-step antibiotic decision support</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
-        '<button class="hv-sec" data-act="advanced"><div class="hv-sic">' + svg("sliders") + '</div><div class="hv-pb"><div class="hv-stit">Advanced Mode</div><div class="hv-ssub">Full clinical form — findings, vitals, labs &amp; risk</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
+        '<button class="hv-primary" data-act="startcase"><div class="hv-pic">' + svg("stcase") + '</div><div class="hv-pb"><div class="hv-ptit">Start a Case</div><div class="hv-psub">New clinical decision — then choose Simple or Advanced</div></div><div class="hv-parr">' + svg("arrow") + '</div></button>' +
+        '<button class="hv-sec" data-act="reasoning"><div class="hv-sic">' + svg("reasoning") + '</div><div class="hv-pb"><div class="hv-stit">Clinical Reasoning <span style="font-weight:700;color:var(--hp);font-size:12px">(Beta)</span></div><div class="hv-ssub">Experimental step-by-step reasoning workspace</div></div><div class="hv-sarr">' + svg("chev") + '</div></button>' +
         '<div class="hv-lbl">Quick access</div>' +
         '<div class="hv-grid">' +
           '<button class="hv-tile" data-act="cases"><div class="hv-tic">' + svg("folder") + '</div><div><div class="hv-tl">My Cases</div><div class="hv-tc">Saved assessments</div></div></button>' +
@@ -164,6 +198,8 @@
     var scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet);
     scrim.addEventListener("click", closeSheet);
+    fab = document.createElement("button"); fab.className = "hv-fab"; fab.id = "hvFab"; fab.setAttribute("aria-label", "StewardMD home"); fab.innerHTML = svg("home"); document.body.appendChild(fab);
+    fab.addEventListener("click", showV2);
 
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
@@ -182,20 +218,28 @@
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
+      '<div class="hv-d-sec"><h4>Interface</h4><div class="hv-seg" id="hvUi" style="grid-template-columns:1fr 1fr">' +
+        '<button data-ui="v2" class="on">Advanced UI<br><span style="font-weight:600;opacity:.85;font-size:10px">by MaiK</span></button>' +
+        '<button data-ui="classic">Classic UI<br><span style="font-weight:600;opacity:.85;font-size:10px">previous</span></button>' +
+      '</div></div>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "menu") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
-      mi("calc", "Calculators", "50+ clinical tools", "calculators") +
-      '<button class="hv-back" data-mi="classic">↺ Switch back to classic home</button>'
+      mi("calc", "Calculators", "50+ clinical tools", "calculators")
     );
-    sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+    var s = sheetEl();
+    s.querySelectorAll("[data-ui]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (b.getAttribute("data-ui") === "classic") { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; }
+      });
+    });
+    s.querySelectorAll("[data-mi]").forEach(function (b) {
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
         if (a === "subscription") return openSubscription();
-        if (a === "classic") { try { localStorage.removeItem("smd_home_v2"); } catch (e) {} location.search = "?home=classic"; return; }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
