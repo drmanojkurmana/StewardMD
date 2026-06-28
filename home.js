@@ -61,7 +61,8 @@
     info: '<circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12.01" y2="8"/>',
     spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
     settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 9 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1Z"/>',
-    x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>'
+    x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
+    award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
@@ -216,7 +217,18 @@
       "body.ui-v2 .pathogen-tier,body.ui-v2 .tier-very-likely,body.ui-v2 .tier-likely,body.ui-v2 .tier-possible{border-radius:12px!important}",
       "body.ui-v2 .sb-drawer{border-right:1px solid var(--line)}body.ui-v2 .sb-head{border-bottom:1px solid var(--line)}body.ui-v2 #sbMenu>div,body.ui-v2 #sbMenu>button{border-radius:12px}",
       "body.ui-v2 .sbref-overlay{z-index:140!important}",
-      "body.ui-v2 .app-head-actions{justify-content:center!important;flex-wrap:wrap;gap:8px}body.ui-v2 .brandrow{justify-content:center}",
+      "body.ui-v2 .app-head-actions{justify-content:flex-end!important;flex-wrap:wrap;gap:8px}body.ui-v2 .brandrow{justify-content:space-between!important}",
+      "#homeV2 .v3-devfoot{max-width:var(--v3-maxw);margin:20px auto 4px;padding:18px 16px 8px;border-top:1px solid var(--v3-border,#E2E8F0);text-align:center}",
+      "#homeV2 .v3-devlabel{font:700 10px/1 var(--v3-font);letter-spacing:.14em;color:var(--v3-muted,#64748B);margin-bottom:10px}",
+      "#homeV2 .v3-devlogo{height:38px;width:auto;max-width:200px;display:block;margin:0 auto 8px;object-fit:contain}",
+      "body.v3-dark #homeV2 .v3-devlogo,body.dark #homeV2 .v3-devlogo{filter:brightness(0) invert(1) opacity(.88)}",
+      "#homeV2 .v3-devname{font:700 14px/1.2 var(--v3-font);color:var(--v3-ink,#0F172A);margin-bottom:8px}",
+      "#homeV2 .v3-devmeta{font:500 11px/1.55 var(--v3-font);color:var(--v3-muted,#64748B);max-width:340px;margin:2px auto 0}",
+      ".hv-sheet .hv-ack{font-family:var(--hfont);color:var(--hink);font-size:13px;line-height:1.6;padding:2px 0}",
+      ".hv-sheet .hv-ack h2,.hv-sheet .hv-ack h3,.hv-sheet .hv-ack .ack-title,.hv-sheet .hv-ack .ack-role,.hv-sheet .hv-ack b,.hv-sheet .hv-ack strong{color:var(--hink)}",
+      ".hv-sheet .hv-ack .ack-group{border-top:1px solid var(--hbd);padding:12px 0;margin:0}",
+      ".hv-sheet .hv-ack .ack-role{font-weight:700;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--hmut);margin-bottom:4px}",
+      ".hv-sheet .hv-ack .num{color:var(--hp)}",
       // ===== Step 3: in-case screens (system / symptoms / framework / results) to v3 =====
       "body.ui-v2 .app-head{padding:12px 16px!important}",
       "body.ui-v2 .card{padding:18px!important;margin-bottom:14px}",
@@ -278,6 +290,13 @@
           '<button class="v3-tile" data-act="drugs"><div class="ic">' + svg("pills") + '</div><div style="min-width:0"><div class="tt">Drugs DB</div><div class="sub">Brands · doses · price</div></div></button>' +
         '</div>' +
         '<div class="v3-foot">For qualified clinicians · <b>AI-summarised, verify doses</b></div>' +
+        '<div class="v3-devfoot">' +
+          '<div class="v3-devlabel">DEVELOPED BY</div>' +
+          '<img id="v3DevLogo" class="v3-devlogo" alt="MaiKnowledge" />' +
+          '<div class="v3-devname">MaiKnowledge</div>' +
+          '<div class="v3-devmeta">© 2026 StewardMD · Developed by MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div>' +
+          '<div class="v3-devmeta">An educational clinical reasoning aid · Not a substitute for clinical judgment</div>' +
+        '</div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
         '<button class="v3-tab" data-act="search">' + svg("search") + '<span>Search</span></button>' +
@@ -287,6 +306,13 @@
         '<button class="v3-tab" data-act="more">' + svg("more") + '<span>More</span></button>' +
       '</nav>';
     document.body.appendChild(root);
+
+    try {
+      var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
+      var _fl = root.querySelector("#v3DevLogo");
+      if (_dl && _fl && _dl.src) _fl.src = _dl.src;
+      else if (_fl) _fl.src = "/logo.png";
+    } catch (e) {}
 
     var scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet);
@@ -316,6 +342,7 @@
         '<button data-ui="classic">Classic UI<br><span style="font-weight:600;opacity:.85;font-size:10px">previous</span></button>' +
       '</div></div>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
       mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "menu") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
@@ -331,10 +358,29 @@
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
         if (a === "subscription") return openSubscription();
+        if (a === "ack") { closeSheet(); return openAck(); }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
     });
+  }
+  function openAck() {
+    var src = document.getElementById("ackCard");
+    var inner = "";
+    if (src) {
+      var c = src.cloneNode(true);
+      c.removeAttribute("id");
+      inner = '<div class="hv-ack">' + c.innerHTML + '</div>';
+    } else {
+      inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
+        '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
+        '<p>Developed by MaiKnowledge.</p></div>';
+    }
+    openSheet('<div class="hv-sh-t">Acknowledgements</div>' + inner +
+      '<button class="hv-reset" style="margin-top:14px" data-close="1">Close</button>');
+    var s = sheetEl();
+    var cl = s.querySelector("[data-close]");
+    if (cl) cl.addEventListener("click", closeSheet);
   }
   function openSubscription() {
     openSheet('<div class="hv-sh-t">Subscription</div>' +
