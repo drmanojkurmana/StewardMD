@@ -1040,6 +1040,125 @@
       var s=0; for(var j=0;j<9;j++){ s+=cl(v[ks[j]],7); } s+=cl(v.ori,4);
       var band=s<=8?"<b>Minimal / absent</b> (≤8) — usually no medication.":s<=15?"<b>Mild–moderate</b> (9–15).":s<=20?"<b>Moderate–severe</b> (16–20) — treat.":"<b>Severe</b> (&gt;20) — high risk of seizures / DTs; treat promptly.";
       return { v:s, u:"/67", i:band+" Use symptom-triggered benzodiazepine dosing per protocol; reassess hourly. Ref: Sullivan et al, Br J Addict 1989." };
+    } },
+
+  { id:"crb65", cat:"Infectious disease", icon:"🦠", title:"CRB-65 (CAP, no labs)",
+    desc:"Community-acquired pneumonia severity without urea — primary-care friendly.",
+    kw:["pneumonia","cap","severity","outpatient","crb"],
+    inputs:[
+      { id:"conf", label:"New confusion", type:"check" },
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"dbp", label:"Diastolic BP", type:"number", unit:"mmHg" },
+      { id:"age", label:"Age", type:"number", unit:"yrs" }
+    ],
+    compute:function(v){
+      if(!ok(v.rr)||!ok(v.sbp)||!ok(v.dbp)||!ok(v.age)) return ERR;
+      var s=0;
+      if(v.conf)s++;
+      if(v.rr>=30)s++;
+      if(v.sbp<90||v.dbp<=60)s++;
+      if(v.age>=65)s++;
+      var band=s===0?"<b>Low</b> (0) — consider home treatment.":s<=2?"<b>Intermediate</b> (1–2) — consider hospital assessment.":"<b>High</b> (3–4) — urgent admission, assess for ICU.";
+      return { v:s, u:"/4", i:band+" Ref: Lim et al, Thorax 2003 (BTS)." };
+    } },
+
+  { id:"bisap", cat:"Critical care", icon:"🚨", title:"BISAP (pancreatitis severity)",
+    desc:"Early mortality risk in acute pancreatitis (first 24 h).",
+    kw:["pancreatitis","bisap","severity","mortality"],
+    inputs:[
+      { id:"bun", label:"BUN", type:"number", unit:"mg/dL" },
+      { id:"ams", label:"Impaired mental status (GCS <15)", type:"check" },
+      { id:"sirs", label:"SIRS (≥2 criteria)", type:"check" },
+      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"eff", label:"Pleural effusion on imaging", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.bun)||!ok(v.age)) return ERR;
+      var s=0;
+      if(v.bun>25)s++; if(v.ams)s++; if(v.sirs)s++; if(v.age>60)s++; if(v.eff)s++;
+      var band=s<=2?"<b>Lower risk</b> (0–2): mortality &lt;2%.":"<b>Higher risk</b> (≥3): mortality ~5–22% — consider HDU/ICU.";
+      return { v:s, u:"/5", i:band+" Ref: Wu et al, Gut 2008 (BISAP)." };
+    } },
+
+  { id:"spesi", cat:"Cardiovascular", icon:"🫀", title:"sPESI (PE severity)",
+    desc:"Simplified Pulmonary Embolism Severity Index — 30-day risk.",
+    kw:["pe","pulmonary embolism","spesi","outpatient","risk"],
+    inputs:[
+      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"cancer", label:"History of cancer", type:"check" },
+      { id:"cardiopulm", label:"Chronic cardiopulmonary disease", type:"check" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"sao2", label:"SaO₂", type:"number", unit:"%" }
+    ],
+    compute:function(v){
+      if(!ok(v.age)||!ok(v.hr)||!ok(v.sbp)||!ok(v.sao2)) return ERR;
+      var s=0;
+      if(v.age>80)s++; if(v.cancer)s++; if(v.cardiopulm)s++;
+      if(v.hr>=110)s++; if(v.sbp<100)s++; if(v.sao2<90)s++;
+      var band=s===0?"<b>Low risk</b> (0): ~1% 30-day mortality — consider outpatient management.":"<b>High risk</b> (≥1): ~10.9% 30-day mortality.";
+      return { v:s, u:"points", i:band+" Ref: Jiménez et al, Arch Intern Med 2010." };
+    } },
+
+  { id:"killip", cat:"Cardiovascular", icon:"🫀", title:"Killip classification",
+    desc:"Heart-failure severity in acute coronary syndrome.",
+    kw:["killip","acs","mi","heart failure","class"],
+    inputs:[
+      { id:"cls", label:"Clinical findings", type:"select", opts:[
+        {v:"1",t:"I — no clinical heart failure"},
+        {v:"2",t:"II — rales / S₃ / raised JVP"},
+        {v:"3",t:"III — frank pulmonary oedema"},
+        {v:"4",t:"IV — cardiogenic shock"} ] }
+    ],
+    compute:function(v){
+      if(!v.cls) return ERR;
+      var mort={1:"~6%",2:"~17%",3:"~38%",4:"~67%"}[v.cls];
+      return { v:"Class "+({1:"I",2:"II",3:"III",4:"IV"}[v.cls]), u:"", i:"Approx. historical in-hospital mortality "+mort+" (lower with modern reperfusion). Higher class → worse prognosis. Ref: Killip & Kimball, Am J Cardiol 1967." };
+    } },
+
+  { id:"decaf", cat:"General", icon:"⚖️", title:"DECAF (COPD exacerbation)",
+    desc:"In-hospital mortality in acute COPD exacerbation.",
+    kw:["copd","aecopd","decaf","exacerbation","mortality"],
+    inputs:[
+      { id:"dys", label:"Dyspnoea (eMRCD)", type:"select", opts:[
+        {v:"0",t:"Not too breathless to leave house (0)"},
+        {v:"1",t:"5a — too breathless, independent washing/dressing (1)"},
+        {v:"2",t:"5b — too breathless, needs help (2)"} ] },
+      { id:"eos", label:"Eosinopenia (<0.05 ×10⁹/L)", type:"check" },
+      { id:"cons", label:"Consolidation on CXR", type:"check" },
+      { id:"acid", label:"Acidaemia (pH <7.30)", type:"check" },
+      { id:"af", label:"Atrial fibrillation", type:"check" }
+    ],
+    compute:function(v){
+      if(!v.dys) return ERR;
+      var s=(+v.dys);
+      if(v.eos)s++; if(v.cons)s++; if(v.acid)s++; if(v.af)s++;
+      var band=s<=1?"<b>Low risk</b> (0–1): mortality ~1–4%.":s===2?"<b>Intermediate</b> (2): ~8–14%.":"<b>High risk</b> (3–6): ~24–70% — consider escalation / ceiling-of-care discussion.";
+      return { v:s, u:"/6", i:band+" Ref: Steer et al, Thorax 2012 (DECAF)." };
+    } },
+
+  { id:"phq9", cat:"General", icon:"⚖️", title:"PHQ-9 (depression)",
+    desc:"Depression severity screen. Each item 0–3 over the last 2 weeks.",
+    kw:["phq","depression","mood","screen","mental health"],
+    inputs:[
+      { id:"q1", label:"Little interest / pleasure", type:"number" },
+      { id:"q2", label:"Feeling down / depressed / hopeless", type:"number" },
+      { id:"q3", label:"Sleep problems", type:"number" },
+      { id:"q4", label:"Tired / little energy", type:"number" },
+      { id:"q5", label:"Appetite change", type:"number" },
+      { id:"q6", label:"Feeling bad about yourself", type:"number" },
+      { id:"q7", label:"Trouble concentrating", type:"number" },
+      { id:"q8", label:"Slow / restless (psychomotor)", type:"number" },
+      { id:"q9", label:"Thoughts of self-harm", type:"number" }
+    ],
+    compute:function(v){
+      var ks=["q1","q2","q3","q4","q5","q6","q7","q8","q9"];
+      for(var i=0;i<ks.length;i++){ if(!ok(v[ks[i]])) return ERR; }
+      var s=0; for(var j=0;j<ks.length;j++){ s+=Math.max(0,Math.min(3,Math.round(v[ks[j]]))); }
+      var band=s<=4?"Minimal (0–4).":s<=9?"Mild (5–9).":s<=14?"Moderate (10–14).":s<=19?"Moderately severe (15–19).":"Severe (20–27).";
+      var flag=(ok(v.q9)&&v.q9>=1)?" ⚠ Item 9 positive — assess suicide risk.":"";
+      return { v:s, u:"/27", i:"<b>"+band+"</b>"+flag+" ≥10 has good sensitivity/specificity for major depression. Ref: Kroenke, J Gen Intern Med 2001." };
     } }
 
   ];
