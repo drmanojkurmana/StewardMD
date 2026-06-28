@@ -88,6 +88,47 @@
       _msObs.observe(ms, { attributes: true, attributeFilter: ["class"] });
     } catch (e) {}
   }
+
+  // Add a second CTA below "Generate Clinical Decision": "Generate Clinical Reasoning",
+  // which opens the differential workspace (DX). Findings already ticked carry over via
+  // the DX bridge (SMD_getFindings). Two-colour language so first-time users get it:
+  //   RED  = Clinical Decision  -> quick antibiotic yes/no & which
+  //   BLUE = Clinical Reasoning -> full differential incl. non-infective causes
+  var _rbObs;
+  function injectReasonBtn() {
+    if (!document.body.classList.contains("ui-v2")) return; // v3 feature; Classic untouched
+    var runBtn = document.getElementById("runBtn");
+    if (!runBtn || document.getElementById("smdReasonBtn")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "smd-reason-wrap"; wrap.id = "smdReasonWrap";
+    wrap.innerHTML =
+      '<div class="smd-or">or</div>' +
+      '<button type="button" class="reason-btn" id="smdReasonBtn">' +
+        '<span class="rb-title">Generate Clinical Reasoning</span>' +
+        '<span class="rb-sub">Work through the full differential — including non-infective causes</span>' +
+      '</button>' +
+      '<div class="decision-legend">' +
+        '<div class="dl-row"><span class="dl-dot dl-red"></span><span><b>Clinical Decision</b> — quick antibiotic answer: yes / no &amp; which agent</span></div>' +
+        '<div class="dl-row"><span class="dl-dot dl-blue"></span><span><b>Clinical Reasoning</b> — explore all likely diagnoses, not just infection</span></div>' +
+      '</div>';
+    runBtn.parentNode.insertBefore(wrap, runBtn.nextSibling);
+    document.getElementById("smdReasonBtn").addEventListener("click", function () {
+      try { if (document.body.classList.contains("ui-v2")) hideV2(); } catch (e) {}
+      try {
+        if (window.DX && DX.openWorkspace) DX.openWorkspace();
+        else if (window.DX && DX.open) DX.open({ workspace: true });
+        else toast("Clinical Reasoning is loading…");
+      } catch (e) {}
+    });
+  }
+  function watchReasonBtn() {
+    var card = document.getElementById("inputCard");
+    if (card && !_rbObs) {
+      try { _rbObs = new MutationObserver(function () { injectReasonBtn(); }); _rbObs.observe(card, { childList: true, subtree: true }); } catch (e) {}
+    }
+    injectReasonBtn();
+  }
+
   // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
   function openCaseChooser() {
     if (!root) build();
@@ -305,6 +346,18 @@
       "body.ui-v2 .dx-card,body.ui-v2 .dx-policy,body.ui-v2 .dx-gate-card,body.ui-v2 .dx-cmp-col{border-radius:14px!important}",
       "body.ui-v2 .dx-card{box-shadow:0 1px 2px rgba(15,23,42,.04)!important}body.ui-v2 .dx-card.open{box-shadow:0 4px 18px rgba(15,23,42,.08)!important}",
       "body.ui-v2 .dx-back,body.ui-v2 .dx-reset{border-radius:10px!important;font-family:var(--sans)!important}",
+      /* ---- Dual CTA: Clinical Decision (red) + Clinical Reasoning (blue) ---- */
+      "body.ui-v2 .run-btn{background:#DC2626!important;box-shadow:0 8px 22px rgba(220,38,38,.26)!important}",
+      "body.ui-v2 .smd-reason-wrap{margin-top:14px;font-family:var(--sans)}",
+      "body.ui-v2 .smd-or{text-align:center;font:700 11px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--slate-soft);margin:4px 0 10px;position:relative}",
+      "body.ui-v2 .smd-or::before,body.ui-v2 .smd-or::after{content:'';position:absolute;top:50%;width:38%;height:1px;background:var(--line)}body.ui-v2 .smd-or::before{left:0}body.ui-v2 .smd-or::after{right:0}",
+      "body.ui-v2 .reason-btn{width:100%;display:flex;flex-direction:column;align-items:center;gap:3px;border:none;border-radius:14px;background:#1E40AF;color:#fff;padding:13px 16px;cursor:pointer;font-family:var(--sans);box-shadow:0 8px 22px rgba(30,64,175,.26);transition:transform .12s,box-shadow .16s}",
+      "body.ui-v2 .reason-btn:hover{box-shadow:0 10px 28px rgba(30,64,175,.34)}body.ui-v2 .reason-btn:active{transform:scale(.99)}",
+      "body.ui-v2 .reason-btn .rb-title{font-weight:800;font-size:15px;letter-spacing:.01em}body.ui-v2 .reason-btn .rb-sub{font-weight:500;font-size:11.5px;line-height:1.35;opacity:.9;text-align:center}",
+      "body.ui-v2 .decision-legend{margin-top:12px;display:flex;flex-direction:column;gap:7px;padding:12px 14px;border-radius:12px;background:var(--paper);border:1px solid var(--line)}",
+      "body.ui-v2 .decision-legend .dl-row{display:flex;align-items:flex-start;gap:9px;font:500 12px/1.45 var(--sans);color:var(--slate)}",
+      "body.ui-v2 .decision-legend b{color:var(--ink);font-weight:700}",
+      "body.ui-v2 .dl-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;margin-top:3px}body.ui-v2 .dl-red{background:#DC2626}body.ui-v2 .dl-blue{background:#1E40AF}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
@@ -542,12 +595,12 @@
   function setUI(on) {
     try { if (on) localStorage.setItem("smd_home_v2", "1"); else localStorage.removeItem("smd_home_v2"); } catch (e) {}
     document.body.classList.toggle("ui-v2", on);
-    if (on) { build(); suppressModeSelect(); showV2(); } else { if (root) root.classList.remove("on"); if (fab) fab.classList.remove("on"); }
+    if (on) { build(); suppressModeSelect(); showV2(); try { injectReasonBtn(); } catch (e) {} } else { if (root) root.classList.remove("on"); if (fab) fab.classList.remove("on"); var rw = document.getElementById("smdReasonWrap"); if (rw && rw.parentNode) rw.parentNode.removeChild(rw); }
     try { closeSheet(); } catch (e) {}
   }
   window.SMD_setUI = setUI;
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD();
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn();
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
