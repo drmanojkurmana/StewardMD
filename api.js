@@ -98,13 +98,22 @@
       '<div class="db-top">' +
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
+        '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">💊 Brands</button>' +
         '<button class="db-close" id="dbClose" aria-label="Close">✕</button>' +
       '</div>' +
-      '<div class="db-body" id="dbBody"></div>';
+      '<div class="db-body" id="dbBody"></div>' +
+      '<div class="db-scrim" id="dbScrim"></div>' +
+      '<aside class="db-drawer" id="dbDrawer" aria-label="Available brands">' +
+        '<div class="db-dwh"><span class="db-dwt">💊 Available brands</span><button class="db-dwx" id="dbDwx" aria-label="Close brands">✕</button></div>' +
+        '<div class="db-dwbody" id="dbDwBody"></div>' +
+      '</aside>';
     document.body.appendChild(root);
     root.querySelector("#dbClose").addEventListener("click", close);
+    root.querySelector("#dbBrandBtn").addEventListener("click", openDrawer);
+    root.querySelector("#dbDwx").addEventListener("click", closeDrawer);
+    root.querySelector("#dbScrim").addEventListener("click", closeDrawer);
     root.querySelector("#dbBack").addEventListener("click", function () {
-      if (st.name) { st.name = null; renderList(); } else close();
+      closeDrawer(); if (st.name) { st.name = null; renderList(); } else close();
     });
     return root;
   }
@@ -116,6 +125,7 @@
   /* ---- list/search view ---- */
   function renderList() {
     st.name = null; setTitle("Drugs Database", false);
+    var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; closeDrawer();
     var b = root.querySelector("#dbBody");
     b.innerHTML =
       '<input id="dbSearch" class="db-search" type="text" placeholder="🔍 Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '">' +
@@ -188,21 +198,31 @@
     var chips = [d["class"], d.action_class].filter(Boolean).map(function (c) { return '<span class="db-chip">' + esc(c) + '</span>'; }).join("");
     var brandsBody = st.brands.length ? st.brands.map(brandHTML).join("")
       : '<div class="db-empty">No ' + (TIER_LABEL[st.tier] ? TIER_LABEL[st.tier] + " " : "") + 'brands listed for this generic.</div>';
+    var cnt = st.total ? st.total.toLocaleString() : st.brands.length;
+    // monograph + footer disclaimer in the main body (no top banner)
     b.innerHTML =
       '<div class="db-head"><div class="db-gen">' + esc(d.composition) + '</div><div class="db-chips">' + chips + '</div></div>' +
       (d.habit_forming ? '<div class="db-hf">Habit forming: <b>' + esc(d.habit_forming) + '</b></div>' : '') +
       '<div id="dbMono" class="db-mono"><div class="db-soon">Loading prescribing details…</div></div>' +
+      '<div class="db-disc-foot">⚠️ <b>AI-summarized</b> from official labels (FDA / EMA / SmPC / BNF / WHO) — pending clinician review. Always <b>verify doses against the primary source</b> before prescribing. Clinical decision-support aid only, not a substitute for professional judgement.</div>';
+    // brands (all filters + sorts preserved) -> right-side slide-in drawer
+    var dw = root.querySelector("#dbDwBody");
+    dw.innerHTML =
       '<div class="db-filters"><span class="db-filt-l">Show</span>' + tierBtn("all", "All") + tierBtn("branded", "Top branded") + tierBtn("generic", "Top generic") + '</div>' +
-      '<div class="db-brands-h"><span>' + (st.total ? st.total.toLocaleString() : st.brands.length) + ' brands</span>' +
-        '<span class="db-sorts">' + sortBtn("relevance", "Relevance") + sortBtn("price_asc", "Price ↑") + sortBtn("price_desc", "Price ↓") + '</span></div>' +
+      '<div class="db-brands-h"><span>' + cnt + ' brands</span>' +
+        '<span class="db-sorts">' + sortBtn("relevance", "Relevance") + sortBtn("price_asc", "Price: Low→High") + sortBtn("price_desc", "Price: High→Low") + '</span></div>' +
       '<div id="dbBrands" class="db-brand-list">' + brandsBody + '</div>' +
       '<div id="dbMore"></div>';
-    b.querySelectorAll(".db-sort").forEach(function (x) {
-      x.addEventListener("click", function () { var s = x.getAttribute("data-sort"); if (s !== st.sort) openComposition(st.name, s, st.tier); });
+    dw.querySelectorAll(".db-sort").forEach(function (x) {
+      x.addEventListener("click", function () { var s = x.getAttribute("data-sort"); if (s !== st.sort) { dwOpen = true; openComposition(st.name, s, st.tier); } });
     });
-    b.querySelectorAll(".db-tier").forEach(function (x) {
-      x.addEventListener("click", function () { var tt = x.getAttribute("data-tier"); if (tt !== st.tier) openComposition(st.name, st.sort, tt); });
+    dw.querySelectorAll(".db-tier").forEach(function (x) {
+      x.addEventListener("click", function () { var tt = x.getAttribute("data-tier"); if (tt !== st.tier) { dwOpen = true; openComposition(st.name, st.sort, tt); } });
     });
+    // glowing "Available brands (N)" button in the header
+    var bb = root.querySelector("#dbBrandBtn");
+    if (bb) { bb.style.display = ""; bb.innerHTML = '💊 Available brands <span class="db-bb-ct">' + cnt + '</span>'; }
+    if (dwOpen) openDrawer();
     loadStructured(d.composition);
     renderMore();
   }
@@ -271,7 +291,10 @@
     root.classList.add("on"); document.body.classList.add("db-lock");
     renderList();
   }
-  function close() { if (root) { root.classList.remove("on"); document.body.classList.remove("db-lock"); } }
+  function close() { if (root) { closeDrawer(); var bb = root.querySelector("#dbBrandBtn"); if (bb) bb.style.display = "none"; root.classList.remove("on"); document.body.classList.remove("db-lock"); } }
+  var dwOpen = false;
+  function openDrawer() { dwOpen = true; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.add("on"); if (d) d.classList.add("on"); }
+  function closeDrawer() { dwOpen = false; if (!root) return; var s = root.querySelector("#dbScrim"), d = root.querySelector("#dbDrawer"); if (s) s.classList.remove("on"); if (d) d.classList.remove("on"); }
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && root && root.classList.contains("on")) close(); });
 
   /* ---- structured clinical cards (new default) ---- */
@@ -324,7 +347,6 @@
     function bl(a) { return '<ul class="gd-b">' + (a || []).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; }
     function S(ic, t, q, body) { return '<div class="gd-sec"><div class="gd-h">' + ic + ' ' + esc(t) + (q ? '<span class="gd-q">' + esc(q) + '</span>' : '') + '</div>' + body + '</div>'; }
     var H = "";
-    H += '<div style="background:#fff4e5;border:1px solid #f0c98a;color:#7a4d00;border-radius:9px;padding:8px 11px;margin:0 0 11px;font:600 11.5px var(--sans,system-ui);line-height:1.4">⚠️ AI-summarized from official labels (FDA / EMA / SmPC). Verify doses against the primary source before prescribing — pending clinician review.</div>';
     if (g.quick) H += S('⚡', 'Quick Facts', '10 seconds', '<div class="gd-qf">' + g.quick.map(function (p) { return '<div><div class="gd-qk">' + esc(p[0]) + '</div><div class="gd-qv">' + esc(p[1]) + '</div></div>'; }).join("") + '</div>');
     if (g.summary) H += S('📋', 'Summary', 'What is it?', '<div>' + esc(g.summary) + '</div>');
     if (g.indications) H += S('🎯', 'Indications', 'When?', bl(g.indications));
@@ -421,6 +443,16 @@
       ".gd-sev{color:#1f2d34}.gd-sev .gd-b li{color:#1f2d34}.gd-pearls,.gd-pearls .gd-b li{color:#173a36}",
       ".db-sev{color:#1f2d34}.db-sev .db-b li,.db-sev li{color:#1f2d34}",
       ".db-hf{font:600 12px var(--sans,system-ui);color:var(--slate,#555);margin:0 2px 10px}",
+      ".db-brandbtn{display:inline-flex;align-items:center;gap:6px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:10px;height:34px;padding:0 13px;font:700 12.5px var(--sans,system-ui);cursor:pointer;animation:dbGlow 1.8s ease-in-out infinite}",
+      ".db-brandbtn:hover{filter:brightness(1.06)}",
+      ".db-bb-ct{background:rgba(255,255,255,.24);border-radius:6px;padding:1px 7px;font-size:11.5px}",
+      "@keyframes dbGlow{0%,100%{box-shadow:0 0 0 0 rgba(10,147,150,.55)}50%{box-shadow:0 0 0 7px rgba(10,147,150,0)}}",
+      "@media(prefers-reduced-motion:reduce){.db-brandbtn{animation:none;box-shadow:0 0 0 3px rgba(10,147,150,.35)}}",
+      ".db-scrim{position:fixed;inset:0;background:rgba(0,0,0,.34);opacity:0;pointer-events:none;transition:opacity .2s;z-index:889}.db-scrim.on{opacity:1;pointer-events:auto}",
+      ".db-drawer{position:fixed;top:0;right:0;height:100%;width:390px;max-width:90vw;background:var(--panel,#fff);border-left:1px solid var(--line,#e5e5e0);box-shadow:-6px 0 24px rgba(0,0,0,.13);transform:translateX(100%);transition:transform .24s ease;z-index:890;display:flex;flex-direction:column}.db-drawer.on{transform:none}",
+      ".db-dwh{display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 16px 12px;border-bottom:1px solid var(--line,#e5e5e0)}.db-dwt{font:800 15px var(--sans,system-ui);color:var(--ink,#1a1a1a)}.db-dwx{margin-left:auto;background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:8px;height:32px;width:32px;font-size:15px;cursor:pointer;color:var(--slate,#555)}",
+      ".db-dwbody{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px calc(30px + env(safe-area-inset-bottom))}",
+      ".db-disc-foot{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.55;margin:14px 2px 4px;padding-top:11px;border-top:1px solid var(--line,#e5e5e0)}.db-disc-foot b{color:var(--slate,#555)}",
       ".db-brands-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:14px 2px 9px;font:800 13px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-sorts{display:flex;gap:6px}",
       ".db-sort{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:8px;padding:5px 10px;font:600 11.5px var(--sans,system-ui);color:var(--slate,#555);cursor:pointer}",
