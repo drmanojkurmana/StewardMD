@@ -309,13 +309,17 @@
       <div class="splash-disclaimer-body">
         StewardMD is an <b>educational clinical reasoning aid</b>, built from guideline references for self-study and teaching discussion. It is <b>not a validated clinical decision support tool</b> and has not been clinically tested or peer-reviewed for direct patient care.
         <br><br>
-        It does <b>not replace clinical judgment</b>, local antibiograms, institutional protocols, or specialist input. Always verify recommendations independently before applying them to any patient. The creator and any contributors accept no liability for clinical decisions made using this tool.
+        Drug &amp; medicine information is <b>AI-summarised from official labels</b> (FDA / EMA / SmPC / BNF / WHO) and is <b>pending clinician review</b> — always <b>verify doses against the primary source</b> before prescribing. It does <b>not replace clinical judgment</b>, local antibiograms, institutional protocols, or specialist input. The creator and contributors accept no liability for clinical decisions made using this tool.
       </div>
       <label class="splash-ack-row">
         <input type="checkbox" id="splashAckCheckbox">
-        <span>I understand this is an educational aid only, and I will independently verify any recommendation before clinical use.</span>
+        <span>I have read and agree to the <b>Disclaimer</b> and <b>Terms &amp; Conditions</b>, and understand this is an educational aid with AI-summarised drug data — I will independently verify every recommendation and dose before clinical use.</span>
       </label>
-      <button class="splash-continue-btn" id="splashContinueBtn" disabled>Continue</button>
+      <div class="splash-ack-links">
+        <button type="button" class="splash-foot-link" onclick="openModal('disclaimerModal')">Read Disclaimer</button> ·
+        <button type="button" class="splash-foot-link" onclick="openModal('termsModal')">Read Terms &amp; Conditions</button>
+      </div>
+      <button class="splash-continue-btn" id="splashContinueBtn" disabled>I Accept &amp; Continue</button>
     </div>
 
     <div class="splash-foot">
@@ -802,6 +806,9 @@
     <div class="smd-modal-body">
       <div class="smd-modal-warn">⚠️ For qualified medical professionals only</div>
 
+      <div class="smd-modal-section">AI-summarised drug &amp; medicine information</div>
+      <p>The drug, dosage, interaction, and monograph content in StewardMD's drug database is <strong>AI-summarised and structured from official sources</strong> (openFDA / FDA, EMA, SmPC, BNF, WHO) and is <strong>pending clinician review</strong>. Doses are reproduced from the source labels but may contain transcription or summarisation errors. <strong>Always verify every dose, indication, contraindication, and interaction against the primary source</strong> before prescribing. Do not rely on it as the sole basis for any prescribing decision.</p>
+
       <div class="smd-modal-section">Educational purpose only</div>
       <p>StewardMD is an <strong>educational clinical reasoning aid</strong> built from published guideline references for self-study and teaching discussion. It has <strong>not been clinically validated</strong> or peer-reviewed as a direct patient care tool.</p>
 
@@ -862,7 +869,10 @@
       <p class="smd-modal-effective">Effective date: June 2026 · MaiKnowledge / StewardMD</p>
 
       <div class="smd-modal-section">Acceptance of terms</div>
-      <p>By accessing or using StewardMD (stewardmd.in), you agree to these Terms of Use. If you do not agree, do not use this service.</p>
+      <p>By accessing or using StewardMD (stewardmd.in), you agree to these Terms of Use and to the Medical Disclaimer. If you do not agree, do not use this service.</p>
+
+      <div class="smd-modal-section">AI-summarised content &amp; data sources</div>
+      <p>StewardMD's drug information is <strong>AI-summarised and reorganised from official drug labels and references</strong> (openFDA / FDA, EMA, SmPC, BNF, WHO) for educational reference. It is provided "as is", is <strong>pending clinician review</strong>, and must not be used for direct prescribing without independent verification of all doses against the primary source. StewardMD is not affiliated with, or endorsed by, these organisations; trademarks and brand names belong to their respective owners.</p>
 
       <div class="smd-modal-section">Permitted use</div>
       <p>StewardMD is provided free of charge for <strong>educational and clinical reference use by qualified medical professionals</strong>. You may not use StewardMD to provide direct clinical decision support without independent verification of all recommendations.</p>
@@ -996,12 +1006,12 @@
   </div>
 </div>
 
-<script src="/app.js?v=gold2" defer></script>
-<script src="/policy.js?v=gold2" defer></script>
-<script src="/features.js?v=gold2" defer></script>
-<script src="/calculators.js?v=gold2" defer></script>
-<script src="/drugs.js?v=gold2" defer></script>
-<script src="/api.js?v=gold2" defer></script>
-<script src="/reasoning.js?v=gold2" defer></script>
+<script src="/app.js?v=gold3" defer></script>
+<script src="/policy.js?v=gold3" defer></script>
+<script src="/features.js?v=gold3" defer></script>
+<script src="/calculators.js?v=gold3" defer></script>
+<script src="/drugs.js?v=gold3" defer></script>
+<script src="/api.js?v=gold3" defer></script>
+<script src="/reasoning.js?v=gold3" defer></script>
 </body>
 </html>
