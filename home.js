@@ -171,6 +171,20 @@
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); toast("Case copied to clipboard"); return; } } catch (e) {}
     toast("Sharing not supported here");
   }
+  // Build the full differential (all DDs) from the reasoning engine for the current findings.
+  // Guarded: if the engine isn't available, returns "" and the PDF simply omits it.
+  function caseDifferentialHTML() {
+    try {
+      if (!window.DX || !DX._differential) return "";
+      var f = (window.SMD_getFindings ? SMD_getFindings() : null) || (DX._state && DX._state.f) || {};
+      if (DX._state) DX._state.f = f;
+      var d = DX._differential();
+      if (!d) return "";
+      function e(x) { return String(x == null ? "" : x).replace(/[&<>]/g, function (c) { return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;"; }); }
+      function rows(a) { return (a || []).slice(0, 15).map(function (r, i) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 12.5px/1.7 sans-serif;padding:1px 0"><span>' + (i + 1) + ". " + e(r.name) + '</span><span style="color:#64748B">' + (r.score != null ? r.score + "/100" : "") + "</span></div>"; }).join("") || '<div style="font-size:12px;color:#888">—</div>'; }
+      return '<div style="margin-top:18px;padding-top:12px;border-top:1px solid #E2E8F0"><div style="font:800 13px sans-serif;margin-bottom:6px">Full differential — infectious</div>' + rows(d.inf) + '<div style="font:800 13px sans-serif;margin:12px 0 6px">Non-infectious</div>' + rows(d.ni) + '<div style="font:500 10px sans-serif;color:#888;margin-top:8px">Reasoning differential (decision support) — not a confirmed diagnosis.</div></div>';
+    } catch (err) { return ""; }
+  }
   function printCase() {
     try {
       var out = document.getElementById("outputArea");
@@ -186,6 +200,7 @@
       var clone = out.cloneNode(true);
       var bar = clone.querySelector("#smdCaseShare"); if (bar) bar.remove();
       area.appendChild(clone);
+      try { var dh = caseDifferentialHTML(); if (dh) { var dd = document.createElement("div"); dd.innerHTML = dh; area.appendChild(dd); } } catch (e) {}
       document.body.appendChild(area);
       var cleaned = false;
       function cleanup() { if (cleaned) return; cleaned = true; try { area.remove(); } catch (e) {} window.removeEventListener("afterprint", cleanup); }
