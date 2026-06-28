@@ -7,7 +7,7 @@
    - Cross-origin (Firebase/gstatic, api.stewardmd.in, fonts) = NOT intercepted → normal
      network, so auth + API are never affected.
    IMPORTANT: bump CACHE on every deploy (keep in step with ?v=goldN) so old caches purge. */
-var CACHE = "stewardmd-gold47";
+var CACHE = "stewardmd-gold48";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -43,8 +43,8 @@ self.addEventListener("fetch", function (e) {
       try {
         var net = await fetch(req);
         if (net && net.status === 200) {
-          var c = await caches.open(CACHE);
-          c.put(req, net.clone());
+          var copy = net.clone();  // clone immediately, before the body is consumed
+          caches.open(CACHE).then(function (c) { c.put(req, copy); });
         }
         return net;
       } catch (err) {
@@ -60,7 +60,8 @@ self.addEventListener("fetch", function (e) {
     var cached = await caches.match(req);
     var fetchP = fetch(req).then(function (net) {
       if (net && net.status === 200 && (net.type === "basic" || net.type === "default")) {
-        caches.open(CACHE).then(function (c) { c.put(req, net.clone()); });
+        var copy = net.clone();  // clone NOW (sync), before net is returned/consumed
+        caches.open(CACHE).then(function (c) { c.put(req, copy); });
       }
       return net;
     }).catch(function () { return cached; });
