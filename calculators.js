@@ -784,6 +784,203 @@
       if(!ok(v.mcv)||!ok(v.rbc)||v.rbc<=0) return ERR;
       var idx=v.mcv/v.rbc;
       return { v:r1(idx), u:"", i:(idx<13?"<13 — favours β-thalassaemia trait.":">13 — favours iron-deficiency anaemia.")+" Confirm with ferritin / Hb electrophoresis." };
+    } },
+
+  /* ----------------------------- INFECTIOUS DISEASE ----------------------------- */
+  { id:"sirs", cat:"Infectious disease", icon:"🦠", title:"SIRS criteria",
+    desc:"Systemic inflammatory response syndrome — ≥2 of 4 criteria.",
+    kw:["sepsis","infection","systemic","inflammatory"],
+    inputs:[
+      { id:"temp", label:"Temperature", type:"number", unit:"°C" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
+      { id:"paco2", label:"PaCO₂ (optional)", type:"number", unit:"mmHg" },
+      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L" },
+      { id:"bands", label:">10% immature neutrophils (bands)", type:"check" }
+    ],
+    compute:function(v){
+      if(!ok(v.temp)||!ok(v.hr)||!ok(v.rr)||!ok(v.wbc)) return ERR;
+      var s=0;
+      if(v.temp>38||v.temp<36)s++;
+      if(v.hr>90)s++;
+      if(v.rr>20||(ok(v.paco2)&&v.paco2<32))s++;
+      if(v.wbc>12||v.wbc<4||v.bands)s++;
+      return { v:s, u:"/4", i:(s>=2?"<b>SIRS positive</b> (≥2 criteria). ":"<b>SIRS not met.</b> ")+"Sensitive but non-specific — for sepsis use organ-dysfunction scores (qSOFA / SOFA). Ref: ACCP/SCCM 1992; Sepsis-3, JAMA 2016." };
+    } },
+
+  { id:"mascc", cat:"Infectious disease", icon:"🦠", title:"MASCC febrile neutropenia",
+    desc:"Identifies low-risk febrile neutropenia (candidate for oral/outpatient therapy).",
+    kw:["febrile","neutropenia","cancer","chemo","risk"],
+    inputs:[
+      { id:"burden", label:"Burden of illness", type:"select", opts:[{v:"none",t:"None / mild symptoms (+5)"},{v:"mod",t:"Moderate symptoms (+3)"},{v:"sev",t:"Severe symptoms (0)"}] },
+      { id:"hypo", label:"Hypotension (SBP <90 mmHg)", type:"check" },
+      { id:"copd", label:"Active COPD", type:"check" },
+      { id:"tumor", label:"Solid tumour, or no previous fungal infection", type:"check" },
+      { id:"dehyd", label:"Dehydration requiring parenteral fluids", type:"check" },
+      { id:"inpt", label:"Inpatient at onset of fever", type:"check" },
+      { id:"age", label:"Age", type:"number", unit:"yrs" }
+    ],
+    compute:function(v){
+      if(!v.burden||!ok(v.age)) return ERR;
+      var s=0;
+      s += (v.burden==="none"?5:(v.burden==="mod"?3:0));
+      if(!v.hypo)s+=5;
+      if(!v.copd)s+=4;
+      if(v.tumor)s+=4;
+      if(!v.dehyd)s+=3;
+      if(!v.inpt)s+=3;
+      if(v.age<60)s+=2;
+      return { v:s, u:"/26", i:(s>=21?"<b>Low risk</b> (≥21) — consider oral / outpatient antibiotics per protocol.":"<b>High risk</b> (&lt;21) — IV antibiotics & admission.")+" Ref: Klastersky, MASCC, J Clin Oncol 2000; IDSA FN 2010." };
+    } },
+
+  { id:"drip", cat:"Infectious disease", icon:"🦠", title:"DRIP score (drug-resistant pneumonia)",
+    desc:"Predicts pneumonia due to drug-resistant pathogens. High risk ≥4.",
+    kw:["pneumonia","resistant","mrsa","pseudomonas","hcap"],
+    inputs:[
+      { id:"abx", label:"Antibiotic use within 60 days (+2)", type:"check" },
+      { id:"ltc", label:"Long-term care resident (+2)", type:"check" },
+      { id:"tube", label:"Tube feeding (+2)", type:"check" },
+      { id:"priordr", label:"Prior drug-resistant infection ≤1 yr (+2)", type:"check" },
+      { id:"hosp", label:"Hospitalisation within 60 days (+1)", type:"check" },
+      { id:"pulm", label:"Chronic pulmonary disease (+1)", type:"check" },
+      { id:"func", label:"Poor functional status (+1)", type:"check" },
+      { id:"ppi", label:"H₂-blocker / PPI within 2 weeks (+1)", type:"check" },
+      { id:"wound", label:"Wound care (+1)", type:"check" },
+      { id:"mrsa", label:"MRSA colonisation ≤1 yr (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;
+      if(v.abx)s+=2; if(v.ltc)s+=2; if(v.tube)s+=2; if(v.priordr)s+=2;
+      if(v.hosp)s++; if(v.pulm)s++; if(v.func)s++; if(v.ppi)s++; if(v.wound)s++; if(v.mrsa)s++;
+      return { v:s, u:"points", i:(s>=4?"<b>High risk</b> (≥4) of drug-resistant pathogen — consider broader empiric cover.":"<b>Low risk</b> (&lt;4) — standard CAP cover usually adequate.")+" Ref: Webb et al, Antimicrob Agents Chemother 2016." };
+    } },
+
+  /* ----------------------------- CRITICAL CARE (additions) ----------------------------- */
+  { id:"news2", cat:"Critical care", icon:"🚨", title:"NEWS2 (early warning)",
+    desc:"National Early Warning Score 2 — deterioration / sepsis screening (Scale 1).",
+    kw:["news","deterioration","sepsis","early warning","track trigger"],
+    inputs:[
+      { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
+      { id:"spo2", label:"SpO₂ (Scale 1)", type:"number", unit:"%" },
+      { id:"o2", label:"On supplemental oxygen", type:"check" },
+      { id:"temp", label:"Temperature", type:"number", unit:"°C" },
+      { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
+      { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
+      { id:"acvpu", label:"Consciousness", type:"select", opts:[{v:"a",t:"Alert"},{v:"x",t:"New confusion / V / P / U"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.rr)||!ok(v.spo2)||!ok(v.temp)||!ok(v.sbp)||!ok(v.hr)||!v.acvpu) return ERR;
+      var s=0, mx=0;
+      function add(p){ s+=p; if(p>mx)mx=p; }
+      add(v.rr<=8?3:v.rr<=11?1:v.rr<=20?0:v.rr<=24?2:3);
+      add(v.spo2<=91?3:v.spo2<=93?2:v.spo2<=95?1:0);
+      add(v.o2?2:0);
+      add(v.temp<=35?3:v.temp<=36?1:v.temp<=38?0:v.temp<=39?1:2);
+      add(v.sbp<=90?3:v.sbp<=100?2:v.sbp<=110?1:v.sbp<=219?0:3);
+      add(v.hr<=40?3:v.hr<=50?1:v.hr<=90?0:v.hr<=110?1:v.hr<=130?2:3);
+      add(v.acvpu==="a"?0:3);
+      var band = s>=7?"<b>High</b> — emergency assessment, consider critical care.":(s>=5||mx===3)?"<b>Medium</b> — urgent review (or any single parameter scoring 3).":"<b>Low</b> — routine monitoring.";
+      return { v:s, u:"points", i:band+" Ref: Royal College of Physicians, NEWS2, 2017." };
+    } },
+
+  { id:"padua", cat:"Critical care", icon:"🚨", title:"Padua VTE prediction",
+    desc:"VTE risk in hospitalised medical patients. High risk ≥4 (consider prophylaxis).",
+    kw:["vte","dvt","thromboprophylaxis","clot","padua"],
+    inputs:[
+      { id:"cancer", label:"Active cancer (+3)", type:"check" },
+      { id:"prior", label:"Previous VTE (+3)", type:"check" },
+      { id:"mob", label:"Reduced mobility ≥3 days (+3)", type:"check" },
+      { id:"thromb", label:"Known thrombophilia (+3)", type:"check" },
+      { id:"trauma", label:"Recent (≤1 mo) trauma/surgery (+2)", type:"check" },
+      { id:"age70", label:"Age ≥70 (+1)", type:"check" },
+      { id:"cardresp", label:"Heart and/or respiratory failure (+1)", type:"check" },
+      { id:"mistroke", label:"Acute MI or ischaemic stroke (+1)", type:"check" },
+      { id:"infl", label:"Acute infection / rheumatologic disorder (+1)", type:"check" },
+      { id:"obese", label:"Obesity (BMI ≥30) (+1)", type:"check" },
+      { id:"horm", label:"Ongoing hormonal treatment (+1)", type:"check" }
+    ],
+    compute:function(v){
+      var s=0;
+      if(v.cancer)s+=3; if(v.prior)s+=3; if(v.mob)s+=3; if(v.thromb)s+=3;
+      if(v.trauma)s+=2;
+      if(v.age70)s++; if(v.cardresp)s++; if(v.mistroke)s++; if(v.infl)s++; if(v.obese)s++; if(v.horm)s++;
+      return { v:s, u:"points", i:(s>=4?"<b>High risk</b> (≥4) — pharmacologic thromboprophylaxis if no contraindication.":"<b>Low risk</b> (&lt;4).")+" Ref: Barbar et al, J Thromb Haemost 2010." };
+    } },
+
+  /* ----------------------------- CARDIOVASCULAR (addition) ----------------------------- */
+  { id:"heart", cat:"Cardiovascular", icon:"🫀", title:"HEART score (chest pain)",
+    desc:"Risk of major adverse cardiac event (MACE) at 6 weeks in undifferentiated chest pain.",
+    kw:["chest pain","mace","acs","troponin","heart"],
+    inputs:[
+      { id:"hist", label:"History", type:"select", opts:[{v:"0",t:"Slightly suspicious (0)"},{v:"1",t:"Moderately suspicious (1)"},{v:"2",t:"Highly suspicious (2)"}] },
+      { id:"ecg", label:"ECG", type:"select", opts:[{v:"0",t:"Normal (0)"},{v:"1",t:"Non-specific repolarisation (1)"},{v:"2",t:"Significant ST deviation (2)"}] },
+      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"rf", label:"Risk factors", type:"select", opts:[{v:"0",t:"None (0)"},{v:"1",t:"1–2 factors (1)"},{v:"2",t:"≥3 factors or known atherosclerosis (2)"}] },
+      { id:"trop", label:"Troponin", type:"select", opts:[{v:"0",t:"≤ normal limit (0)"},{v:"1",t:"1–3× normal (1)"},{v:"2",t:"> 3× normal (2)"}] }
+    ],
+    compute:function(v){
+      if(!v.hist||!v.ecg||!v.rf||!v.trop||!ok(v.age)) return ERR;
+      var s=(+v.hist)+(+v.ecg)+(+v.rf)+(+v.trop)+(v.age>=65?2:v.age>=45?1:0);
+      var band = s<=3?"<b>Low</b> (0–3): ~1.7% 6-week MACE — consider early discharge.":s<=6?"<b>Moderate</b> (4–6): ~16.6% — admit / observe.":"<b>High</b> (7–10): ~50% — early invasive strategy.";
+      return { v:s, u:"/10", i:band+" Ref: Six/Backus, Neth Heart J 2008; Crit Pathw Cardiol 2013." };
+    } },
+
+  /* ----------------------------- GENERAL (additions) ----------------------------- */
+  { id:"fourts", cat:"General", icon:"⚖️", title:"4Ts score (HIT)",
+    desc:"Pre-test probability of heparin-induced thrombocytopenia.",
+    kw:["hit","heparin","thrombocytopenia","platelet","4t"],
+    inputs:[
+      { id:"thrombo", label:"Thrombocytopenia", type:"select", opts:[{v:"2",t:"Fall >50% & nadir ≥20 (2)"},{v:"1",t:"Fall 30–50% or nadir 10–19 (1)"},{v:"0",t:"Fall <30% or nadir <10 (0)"}] },
+      { id:"timing", label:"Timing of platelet fall", type:"select", opts:[{v:"2",t:"Clear onset day 5–10, or ≤1 day if heparin ≤30 d (2)"},{v:"1",t:"Consistent but unclear / onset after day 10 (1)"},{v:"0",t:"Fall <4 days, no recent heparin (0)"}] },
+      { id:"thrombosis", label:"Thrombosis / sequelae", type:"select", opts:[{v:"2",t:"New thrombosis, skin necrosis, anaphylaxis (2)"},{v:"1",t:"Progressive/recurrent or erythematous skin (1)"},{v:"0",t:"None (0)"}] },
+      { id:"other", label:"Other cause of thrombocytopenia", type:"select", opts:[{v:"2",t:"None apparent (2)"},{v:"1",t:"Possible (1)"},{v:"0",t:"Definite (0)"}] }
+    ],
+    compute:function(v){
+      if(!v.thrombo||!v.timing||!v.thrombosis||!v.other) return ERR;
+      var s=(+v.thrombo)+(+v.timing)+(+v.thrombosis)+(+v.other);
+      var band = s<=3?"<b>Low</b> (0–3): HIT very unlikely (~&lt;5%).":s<=5?"<b>Intermediate</b> (4–5): ~14% — send HIT antibody, consider stopping heparin.":"<b>High</b> (6–8): ~64% — stop heparin, start non-heparin anticoagulant, test.";
+      return { v:s, u:"/8", i:band+" Ref: Lo, Warkentin, J Thromb Haemost 2006." };
+    } },
+
+  { id:"lights", cat:"General", icon:"⚖️", title:"Light's criteria (pleural fluid)",
+    desc:"Distinguishes pleural exudate from transudate.",
+    kw:["pleural","effusion","exudate","transudate","light"],
+    inputs:[
+      { id:"pprot", label:"Pleural fluid protein", type:"number", unit:"g/dL" },
+      { id:"sprot", label:"Serum protein", type:"number", unit:"g/dL" },
+      { id:"pldh", label:"Pleural fluid LDH", type:"number", unit:"U/L" },
+      { id:"sldh", label:"Serum LDH", type:"number", unit:"U/L" },
+      { id:"uln", label:"Upper limit normal serum LDH", type:"number", unit:"U/L" }
+    ],
+    compute:function(v){
+      if(!ok(v.pprot)||!ok(v.sprot)||!ok(v.pldh)||!ok(v.sldh)||!ok(v.uln)||v.sprot<=0||v.sldh<=0||v.uln<=0) return ERR;
+      var pr=v.pprot/v.sprot, lr=v.pldh/v.sldh, c3=v.pldh>(2/3)*v.uln;
+      var ex=(pr>0.5)||(lr>0.6)||c3;
+      return { v:ex?"Exudate":"Transudate", u:"", i:"Protein ratio "+r1(pr)+" (>0.5), LDH ratio "+r1(lr)+" (>0.6), pleural LDH "+(c3?"&gt;":"≤")+" ⅔ ULN. <b>"+(ex?"Exudate":"Transudate")+"</b> — exudate if ANY criterion met. Ref: Light et al, Ann Intern Med 1972." };
+    } },
+
+  { id:"alvarado", cat:"General", icon:"⚖️", title:"Alvarado score (appendicitis)",
+    desc:"Likelihood of acute appendicitis (MANTRELS).",
+    kw:["appendicitis","abdominal","rlq","mantrels","alvarado"],
+    inputs:[
+      { id:"mig", label:"Migration of pain to RLQ (+1)", type:"check" },
+      { id:"ano", label:"Anorexia (+1)", type:"check" },
+      { id:"nau", label:"Nausea / vomiting (+1)", type:"check" },
+      { id:"tend", label:"Tenderness in RLQ (+2)", type:"check" },
+      { id:"reb", label:"Rebound tenderness (+1)", type:"check" },
+      { id:"temp", label:"Temperature", type:"number", unit:"°C" },
+      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L" },
+      { id:"shift", label:"Neutrophils (left shift)", type:"number", unit:"%" }
+    ],
+    compute:function(v){
+      if(!ok(v.temp)||!ok(v.wbc)||!ok(v.shift)) return ERR;
+      var s=0;
+      if(v.mig)s++; if(v.ano)s++; if(v.nau)s++; if(v.tend)s+=2; if(v.reb)s++;
+      if(v.temp>=37.3)s++;
+      if(v.wbc>=10)s+=2;
+      if(v.shift>=75)s++;
+      var band = s<=4?"<b>Unlikely</b> (≤4) — appendicitis improbable.":s<=6?"<b>Possible</b> (5–6) — observe / imaging.":"<b>Probable</b> (7–10) — surgical consult.";
+      return { v:s, u:"/10", i:band+" Ref: Alvarado, Ann Emerg Med 1986." };
     } }
 
   ];
@@ -902,8 +1099,8 @@
   /* ====================================================================== *
    * RENDERING — full-screen browser overlay + per-calculator panel
    * ====================================================================== */
-  var CAT_ORDER = ["Cardiovascular","Critical care","Renal","Hepatology","Neurology","General"];
-  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️" };
+  var CAT_ORDER = ["Cardiovascular","Critical care","Infectious disease","Renal","Hepatology","Neurology","General"];
+  var CAT_ICON = { "Cardiovascular":"🫀","Critical care":"🚨","Infectious disease":"🦠","Renal":"🫘","Hepatology":"🫁","Neurology":"🧠","General":"⚖️" };
   var root = null, q = "", activeCat = "", openId = null;
 
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
