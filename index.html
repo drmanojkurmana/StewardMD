@@ -345,14 +345,17 @@
     (function(){
       function show(){var o=document.getElementById("consentOverlay");if(o){o.classList.add("show");o.setAttribute("aria-hidden","false");}}
       function hide(){var o=document.getElementById("consentOverlay");if(o){o.classList.remove("show");o.setAttribute("aria-hidden","true");}}
+      var wired=false;
       function wire(){
+        if(wired)return;wired=true;
         var cta=document.getElementById("demoCTABtn");if(cta)cta.addEventListener("click",show);
         var x=document.getElementById("consentClose");if(x)x.addEventListener("click",hide);
         var o=document.getElementById("consentOverlay");if(o)o.addEventListener("click",function(e){if(e.target===o)hide();});
         var cont=document.getElementById("splashContinueBtn");if(cont)cont.addEventListener("click",hide);
         document.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
       }
-      if(document.readyState!=="loading")wire();else document.addEventListener("DOMContentLoaded",wire);
+      wire(); // wire splash/consent NOW during parse — elements are above this script. Do NOT wait for DOMContentLoaded: deferred scripts (~1.3MB JS) delay it ~5-6s and froze the splash.
+      if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",wire); // safety net (idempotent via 'wired')
     })();
     </script>
 
@@ -1040,13 +1043,13 @@
   </div>
 </div>
 
-<script src="/app.js?v=gold22" defer></script>
-<script src="/policy.js?v=gold22" defer></script>
-<script src="/features.js?v=gold22" defer></script>
-<script src="/calculators.js?v=gold22" defer></script>
-<script src="/drugs.js?v=gold22" defer></script>
-<script src="/api.js?v=gold22" defer></script>
-<script src="/reasoning.js?v=gold22" defer></script>
-<script src="/home.js?v=gold22" defer></script>
+<script src="/app.js?v=gold24" defer></script>
+<script src="/policy.js?v=gold24" defer></script>
+<script src="/features.js?v=gold24" defer></script>
+<script src="/calculators.js?v=gold24" defer></script>
+<script src="/drugs.js?v=gold24" defer></script>
+<script src="/api.js?v=gold24" defer></script>
+<script src="/reasoning.js?v=gold24" defer></script>
+<script src="/home.js?v=gold24" defer></script>
 </body>
 </html>
