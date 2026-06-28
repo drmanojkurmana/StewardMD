@@ -131,6 +131,54 @@
       try { _rbObs = new MutationObserver(function () { injectReasonBtn(); }); _rbObs.observe(card, { childList: true, subtree: true }); } catch (e) {}
     }
     injectReasonBtn();
+    watchCaseShare();
+  }
+
+  // Inject a Share / Save-as-PDF bar into the main clinical-decision output (#outputArea)
+  // whenever a decision is rendered. v3 layer only; reuses the in-page print-stylesheet
+  // approach so mobile shows the native sheet (Cancel returns — no stuck tab).
+  var _osObs;
+  function injectCaseShare() {
+    if (!document.body.classList.contains("ui-v2")) return;
+    var out = document.getElementById("outputArea");
+    if (!out || !out.children.length) return;          // only when a decision is present
+    if (out.querySelector("#smdCaseShare")) return;
+    var bar = document.createElement("div");
+    bar.id = "smdCaseShare"; bar.className = "smd-caseshare";
+    bar.innerHTML = '<button type="button" data-cs="share">📤 Share case</button>'
+                  + '<button type="button" data-cs="pdf">🖨 Save as PDF</button>';
+    out.insertBefore(bar, out.firstChild);
+    bar.querySelector('[data-cs="share"]').addEventListener("click", function () { shareCase(out); });
+    bar.querySelector('[data-cs="pdf"]').addEventListener("click", function () { printCase(); });
+  }
+  function watchCaseShare() {
+    var out = document.getElementById("outputArea");
+    if (out && !_osObs) {
+      try { _osObs = new MutationObserver(function () { injectCaseShare(); }); _osObs.observe(out, { childList: true }); } catch (e) {}
+    }
+    injectCaseShare();
+  }
+  function caseText() {
+    var out = document.getElementById("outputArea");
+    var t = out ? (out.innerText || out.textContent || "") : "";
+    t = t.replace(/\n{3,}/g, "\n\n").trim();
+    return "StewardMD — Clinical decision\n\n" + t + "\n\nDecision support only — verify against clinical judgment & local protocol.";
+  }
+  function shareCase(out) {
+    var txt = caseText();
+    try { if (navigator.share) { navigator.share({ title: "StewardMD — Clinical decision", text: txt }).catch(function () {}); return; } } catch (e) {}
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); toast("Case copied to clipboard"); return; } } catch (e) {}
+    toast("Sharing not supported here");
+  }
+  function printCase() {
+    try {
+      if (!document.getElementById("smd-caseprint-style")) {
+        var st = document.createElement("style"); st.id = "smd-caseprint-style";
+        st.textContent = "@media print{body *{visibility:hidden!important}#outputArea,#outputArea *{visibility:visible!important}#outputArea{position:absolute;left:0;top:0;width:100%}#smdCaseShare{display:none!important}@page{margin:12mm}}";
+        document.head.appendChild(st);
+      }
+      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable"); } }, 60);
+    } catch (e) { toast("Print unavailable"); }
   }
 
   // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
@@ -363,6 +411,9 @@
       "body.ui-v2 .decision-legend .dl-row{display:flex;align-items:flex-start;gap:9px;font:500 12px/1.45 var(--sans);color:var(--slate)}",
       "body.ui-v2 .decision-legend b{color:var(--ink);font-weight:700}",
       "body.ui-v2 .dl-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;margin-top:3px}body.ui-v2 .dl-red{background:#DC2626}body.ui-v2 .dl-blue{background:#1E40AF}",
+      "body.ui-v2 .smd-caseshare{display:flex;gap:8px;margin:0 0 14px;flex-wrap:wrap}",
+      "body.ui-v2 .smd-caseshare button{flex:1;min-width:130px;border:1px solid var(--line)!important;background:var(--panel);color:var(--teal);font:700 13px var(--sans);padding:11px 14px;border-radius:12px;cursor:pointer}",
+      "body.ui-v2 .smd-caseshare button:active{transform:scale(.99)}",
       "@media(prefers-reduced-motion:reduce){#homeV2 *{transition:none!important;animation:none!important}}"
     ].join("\n");
     document.head.appendChild(st);
