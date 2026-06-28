@@ -17,12 +17,22 @@
   function normCode(c){ c=String(c||"").trim().toUpperCase().replace(/\s+/g,""); if(c && c.indexOf("SMD-")!==0 && /^[A-Z0-9]{5}$/.test(c)) c="SMD-"+c; return c; }
 
   // Ensure Firebase/Firestore is loaded (it is lazy-loaded), then run cb(db) or cb(null) on failure.
-  function ensureDb(cb){
-    if (window.SMD_DB) return cb(window.SMD_DB);
-    if (window.SMD_loadFirebase) { window.SMD_loadFirebase(function(){ cb(window.SMD_DB || null); }); }
-    else cb(null);
+  // Load Firebase (lazy) AND wait for auth state to settle, then cb(db, user).
+  // (Fixes the race where currentUser is briefly null right after lazy Firebase load.)
+  function ensureReady(cb){
+    function withAuth(){
+      var auth = window.SMD_AUTH, db = window.SMD_DB || null;
+      if (!auth) return cb(db, null);
+      if (auth.currentUser) return cb(db, auth.currentUser);
+      var done = false, unsub;
+      function fin(u){ if (done) return; done = true; try { unsub && unsub(); } catch (e) {} cb(window.SMD_DB || null, u || null); }
+      try { unsub = auth.onAuthStateChanged(function (u) { fin(u); }); } catch (e) { return cb(db, null); }
+      setTimeout(function () { fin(auth.currentUser); }, 4000);
+    }
+    if (window.SMD_DB && window.SMD_AUTH) return withAuth();
+    if (window.SMD_loadFirebase) window.SMD_loadFirebase(withAuth);
+    else withAuth();
   }
-  function signedIn(){ try { return !!(window.SMD_AUTH && window.SMD_AUTH.currentUser); } catch(e){ return false; } }
 
   // ---- capture the current on-screen clinical decision ----
   function currentSnapshot(){
@@ -40,32 +50,21 @@
   function shareCurrent(){
     var snap = currentSnapshot();
     if (!snap) { toast("Generate a clinical decision first."); return; }
-    if (!signedIn()) {
-      ensureDb(function(){
-        if (signedIn()) return doShare(snap);
-        toast("Sign in with Google to share & save the case to your account.");
-      });
-      return;
-    }
-    doShare(snap);
-  }
-  function doShare(snap){
-    ensureDb(function(db){
-      if (!db) { toast("Cloud unavailable — check your connection."); return; }
-      var code = genCode();
-      var uid = (window.SMD_AUTH && window.SMD_AUTH.currentUser) ? window.SMD_AUTH.currentUser.uid : null;
-      var email = (window.SMD_AUTH && window.SMD_AUTH.currentUser) ? (window.SMD_AUTH.currentUser.email||"") : "";
-      var now = Date.now();
-      var rec = { v:1, code:code, title:snap.title, html:snap.html, text:snap.text,
-                  ownerUid:uid, ownerEmail:email, createdAt:now, expiresAt: now + TTL_MS };
-      var ref = db.collection(COLL).doc(code);
-      // avoid the (astronomically unlikely) collision: only write if it doesn't exist
-      ref.get().then(function(d){
-        if (d && d.exists) { return doShare(snap); }   // regenerate
-        ref.set(rec).then(function(){ showResult(code); })
-           .catch(function(e){ toast("Could not create share — " + friendly(e)); });
-      }).catch(function(e){ toast("Could not create share — " + friendly(e)); });
+    toast("Preparing share…");
+    ensureReady(function(db, user){
+      if (!db) { toast("Cloud unavailable — check your connection & try again."); return; }
+      if (!user) { toast("Please sign in with Google first (More ▸ Account & sign-in) to share."); return; }
+      doShare(snap, db, user);
     });
+  }
+  function doShare(snap, db, user){
+    var code = genCode();
+    var now = Date.now();
+    var rec = { v:1, code:code, title:snap.title, html:snap.html, text:snap.text,
+                ownerUid:user.uid, ownerEmail:user.email||"", createdAt:now, expiresAt: now + TTL_MS };
+    db.collection(COLL).doc(code).set(rec)
+      .then(function(){ showResult(code); })
+      .catch(function(e){ try { console.error("[CASESHARE] share failed:", e); } catch (x) {} toast("Share failed: " + ((e && e.code) || (e && e.message) || "error")); });
   }
   function friendly(e){ var m=(e&&e.message)||""; if(/permission|insufficient/i.test(m)) return "Firestore rules not set yet (see setup)."; return m.slice(0,80) || "error"; }
 
@@ -73,7 +72,7 @@
   function open(code){
     code = normCode(code);
     if (!/^SMD-[A-Z0-9]{5}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
-    ensureDb(function(db){
+    ensureReady(function(db){
       if (!db) { toast("Cloud unavailable — check your connection."); return; }
       db.collection(COLL).doc(code).get().then(function(d){
         if (!d || !d.exists) { toast("Case " + code + " not found."); return; }
