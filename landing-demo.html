@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>StewardMD — Home (redesign preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#0F766E;--primary-2:#115E59;--primary-soft:#CCFBF1;
+  --bg:#F8FAFC;--panel:#FFFFFF;--border:#E2E8F0;--ink:#0F172A;--muted:#64748B;
+  --shadow:0 1px 2px rgba(15,23,42,.04),0 4px 16px rgba(15,23,42,.06);
+  --shadow-lg:0 8px 30px rgba(15,118,110,.22);
+  --r:16px;--sans:'Inter',-apple-system,'SF Pro Display','Segoe UI',Roboto,system-ui,sans-serif;
+}
+body.dark{--bg:#0B1220;--panel:#111B2E;--border:#1E2B43;--ink:#E7EDF5;--muted:#8597AD;--primary-soft:#0c2e2a;--shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-text-size-adjust:100%;-webkit-font-smoothing:antialiased}
+.shell{max-width:480px;margin:0 auto;min-height:100vh;position:relative}
+svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
+button{font-family:inherit}
+/* ===== HEADER (72px, balanced) ===== */
+.hdr{height:72px;display:flex;align-items:center;gap:12px;padding:0 16px;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:30;padding-top:env(safe-area-inset-top)}
+.icon-btn{width:42px;height:42px;display:flex;align-items:center;justify-content:center;border:none;background:transparent;color:var(--ink);border-radius:12px;cursor:pointer;transition:background .18s}
+.icon-btn:hover{background:var(--bg)}
+.icon-btn:active{transform:scale(.94)}
+.brandmark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto}
+.brandmark svg{width:19px;height:19px;stroke:#fff}
+.hbrand{display:flex;align-items:center;gap:10px;min-width:0}
+.htext{min-width:0}
+.htitle{font:800 16px/1.1 var(--sans);letter-spacing:-.01em}
+.hsub{font:500 11.5px/1.2 var(--sans);color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hsp{flex:1}
+.avatar{width:34px;height:34px;border-radius:50%;background:var(--primary-soft);color:var(--primary);display:flex;align-items:center;justify-content:center;font:700 13px var(--sans);border:1px solid var(--border)}
+.dot{position:relative}
+.dot:after{content:"";position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#ef4444;border:2px solid var(--panel)}
+/* ===== MAIN ===== */
+main{padding:16px 16px 96px}
+.stack{display:flex;flex-direction:column;gap:16px}
+/* hero */
+.hero{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);padding:20px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.hero .htxt{flex:1;min-width:0}
+.hero h1{font:800 28px/1.05 var(--sans);letter-spacing:-.02em;margin:0}
+.hero .tag{display:inline-block;margin-top:10px;font:700 11px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--primary);background:var(--primary-soft);padding:4px 10px;border-radius:999px}
+.hero p{font:500 14px/1.45 var(--sans);color:var(--muted);margin:10px 0 0}
+.shield{width:74px;height:74px;border-radius:20px;background:linear-gradient(135deg,var(--primary),var(--primary-2));display:flex;align-items:center;justify-content:center;flex:0 0 auto;box-shadow:var(--shadow-lg)}
+.shield svg{width:38px;height:38px;stroke:#fff}
+/* quick status row */
+.qrow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.qcell{height:62px;background:var(--panel);border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;cursor:pointer;transition:transform .15s,box-shadow .18s;color:var(--ink)}
+.qcell:hover{box-shadow:var(--shadow)}
+.qcell:active{transform:scale(.96)}
+.qcell svg{width:19px;height:19px;color:var(--primary)}
+.qcell span{font:600 11px var(--sans);color:var(--muted)}
+/* primary reasoning card */
+.primary{display:flex;align-items:center;gap:15px;padding:20px;border:none;border-radius:18px;background:linear-gradient(135deg,#14B8A6,var(--primary) 55%,var(--primary-2));color:#fff;box-shadow:var(--shadow-lg);cursor:pointer;width:100%;text-align:left;transition:transform .15s,filter .18s}
+.primary:hover{filter:brightness(1.04)}
+.primary:active{transform:scale(.985)}
+.pic{width:52px;height:52px;border-radius:15px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.pic svg{width:27px;height:27px;stroke:#fff}
+.pbody{flex:1;min-width:0}
+.ptitle{font:800 19px/1.1 var(--sans);letter-spacing:-.01em}
+.psub{font:500 13px/1.35 var(--sans);color:rgba(255,255,255,.86);margin-top:3px}
+.parrow{opacity:.9}
+.parrow svg{stroke:#fff}
+/* secondary card */
+.secondary{display:flex;align-items:center;gap:15px;padding:18px 20px;border:1px solid var(--border);border-radius:18px;background:var(--panel);color:var(--ink);box-shadow:var(--shadow);cursor:pointer;width:100%;text-align:left;transition:transform .15s,box-shadow .18s}
+.secondary:hover{box-shadow:0 6px 22px rgba(15,23,42,.09)}
+.secondary:active{transform:scale(.985)}
+.sic{width:52px;height:52px;border-radius:15px;background:var(--primary-soft);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.sic svg{stroke:var(--primary);width:26px;height:26px}
+.stitle{font:700 17px/1.1 var(--sans)}
+.ssub{font:500 13px/1.35 var(--sans);color:var(--muted);margin-top:3px}
+.sarrow svg{stroke:var(--muted)}
+/* section label */
+.seclabel{font:700 12px var(--sans);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:2px 2px -4px}
+/* quick access grid */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:transform .15s,box-shadow .18s;color:var(--ink)}
+.tile:hover{box-shadow:0 6px 22px rgba(15,23,42,.09)}
+.tile:active{transform:scale(.97)}
+.tic{width:42px;height:42px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center;flex:0 0 auto;border:1px solid var(--border)}
+.tic svg{width:21px;height:21px;color:var(--primary)}
+.tlabel{font:600 14px var(--sans)}
+.tcap{font:500 11.5px var(--sans);color:var(--muted);margin-top:1px}
+/* info note */
+.info{font:500 12px/1.6 var(--sans);color:var(--muted);text-align:center;padding:4px 8px}
+.info b{color:var(--ink)}
+/* ===== BOTTOM NAV ===== */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 6px calc(6px + env(safe-area-inset-bottom));max-width:480px;margin:0 auto}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 0;border:none;background:transparent;color:var(--muted);cursor:pointer;border-radius:12px;transition:color .15s}
+.tab svg{width:22px;height:22px}
+.tab span{font:600 10.5px var(--sans)}
+.tab.active{color:var(--primary)}
+.tab:active{transform:scale(.93)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+  <!-- HEADER -->
+  <header class="hdr">
+    <button class="icon-btn" aria-label="Menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <div class="hbrand">
+      <div class="brandmark"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div class="htext"><div class="htitle">StewardMD</div><div class="hsub">Antibiotic Stewardship</div></div>
+    </div>
+    <div class="hsp"></div>
+    <button class="icon-btn" id="themeBtn" aria-label="Theme"><svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></button>
+    <button class="icon-btn dot" aria-label="Notifications"><svg viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></button>
+    <div class="avatar" title="Guest">G</div>
+  </header>
+
+  <main>
+    <div class="stack">
+      <!-- HERO -->
+      <section class="hero">
+        <div class="htxt">
+          <h1>StewardMD</h1>
+          <span class="tag">Antibiotic Decision Engine</span>
+          <p>Evidence-based antimicrobial recommendations at the point of care.</p>
+        </div>
+        <div class="shield"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><line x1="12" y1="8" x2="12" y2="14"/><line x1="9" y1="11" x2="15" y2="11"/></svg></div>
+      </section>
+
+      <!-- QUICK STATUS ROW -->
+      <div class="qrow">
+        <button class="qcell"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg><span>Guest</span></button>
+        <button class="qcell"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Search</span></button>
+        <button class="qcell"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Framework</span></button>
+        <button class="qcell"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/></svg><span>Theme</span></button>
+      </div>
+
+      <!-- PRIMARY: REASONING -->
+      <button class="primary">
+        <div class="pic"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="pbody"><div class="ptitle">Clinical Reasoning</div><div class="psub">Step-by-step antibiotic decision support</div></div>
+        <div class="parrow"><svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m13 5 7 7-7 7"/></svg></div>
+      </button>
+
+      <!-- SECONDARY: ADVANCED MODE -->
+      <button class="secondary">
+        <div class="sic"><svg viewBox="0 0 24 24"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/><circle cx="9" cy="8" r="2.4" fill="currentColor" stroke="none"/><circle cx="15" cy="16" r="2.4" fill="currentColor" stroke="none"/></svg></div>
+        <div class="pbody"><div class="stitle">Advanced Mode</div><div class="ssub">Full control — syndrome, host & local factors</div></div>
+        <div class="sarrow"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></div>
+      </button>
+
+      <!-- QUICK ACCESS -->
+      <div class="seclabel">Quick access</div>
+      <div class="grid2">
+        <button class="tile"><div class="tic"><svg viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg></div><div><div class="tlabel">My Cases</div><div class="tcap">Saved assessments</div></div></button>
+        <button class="tile"><div class="tic"><svg viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg></div><div><div class="tlabel">Guidelines</div><div class="tcap">IDSA · WHO · ICMR</div></div></button>
+        <button class="tile"><div class="tic"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11"/><line x1="12" y1="11" x2="12" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="12" y1="16" x2="12" y2="16"/></svg></div><div><div class="tlabel">Calculators</div><div class="tcap">50+ clinical tools</div></div></button>
+        <button class="tile"><div class="tic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><div><div class="tlabel">Recent</div><div class="tcap">Pick up where you left</div></div></button>
+      </div>
+
+      <div class="info">For qualified clinicians · <b>AI-summarised, verify doses</b> · v3.0</div>
+    </div>
+  </main>
+
+  <!-- BOTTOM NAV -->
+  <nav class="tabbar">
+    <button class="tab active"><svg viewBox="0 0 24 24"><path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg><span>Home</span></button>
+    <button class="tab"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><span>Search</span></button>
+    <button class="tab"><svg viewBox="0 0 24 24"><path d="M4 7a2 2 0 0 1 2-2h3l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/></svg><span>Cases</span></button>
+    <button class="tab"><svg viewBox="0 0 24 24"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg><span>Guides</span></button>
+    <button class="tab"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none"/></svg><span>More</span></button>
+  </nav>
+</div>
+<script>
+  document.getElementById("themeBtn").addEventListener("click",function(){document.body.classList.toggle("dark");});
+  // tab active state demo
+  document.querySelectorAll(".tab").forEach(function(t){t.addEventListener("click",function(){document.querySelectorAll(".tab").forEach(function(x){x.classList.remove("active")});t.classList.add("active");});});
+</script>
+</body>
+</html>
