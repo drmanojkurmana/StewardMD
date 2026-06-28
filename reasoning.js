@@ -1011,7 +1011,17 @@
     if (GATEINFO[g.cls].ab && g.lead && window.HOSPITAL) {
       var pol = window.HOSPITAL.getPolicy(g.lead.id);
       L.push(""); L.push("Leading infectious diagnosis: " + g.lead.name);
-      if (pol.entry) L.push("Empiric (" + pol.hospital.short + " policy): " + (pol.entry.preferred || []).join("; "));
+      if (pol && pol.entry) {
+        var e = pol.entry;
+        L.push("Empiric antibiotic therapy (" + (pol.hospital ? pol.hospital.short : "policy") + "):");
+        if (e.preferred && e.preferred.length) L.push("  Preferred: " + e.preferred.join("; "));
+        if (e.alternatives && e.alternatives.length) L.push("  Alternatives: " + e.alternatives.join("; "));
+        if (e.duration) L.push("  Duration: " + e.duration);
+        if (e.comments) L.push("  Notes: " + e.comments);
+        if (e.deescalation) L.push("  De-escalation: " + e.deescalation);
+      } else {
+        L.push("Empiric therapy: refer to local antibiogram / policy.");
+      }
     }
     L.push(""); L.push("Decision support only — not a confirmed diagnosis. StewardMD supports, not replaces, clinical judgment.");
     return L.join("\n");
@@ -1029,7 +1039,32 @@
     } catch (e) { fallback(); }
   }
   function printSummary() {
-    try { var w = window.open("", "_blank"); w.document.write("<title>StewardMD reasoning</title><pre style='font:13px monospace;white-space:pre-wrap;padding:18px'>" + esc(buildSummary()) + "</pre>"); w.document.close(); w.focus(); w.print(); } catch (e) {}
+    // Print the summary IN-PAGE via a print stylesheet so the OS shows its native print/share
+    // sheet (iOS) or popup (desktop) OVER the app — Cancel returns here. No new tab to get stuck on.
+    try {
+      var old = document.getElementById("dxPrintArea"); if (old) old.remove();
+      if (!document.getElementById("dx-print-style")) {
+        var st = document.createElement("style"); st.id = "dx-print-style";
+        st.textContent = "@media print{body>*{display:none!important}#dxPrintArea{display:block!important;position:static}@page{margin:14mm}}#dxPrintArea{display:none}";
+        document.head.appendChild(st);
+      }
+      var area = document.createElement("div"); area.id = "dxPrintArea";
+      area.innerHTML = "<pre style=\"white-space:pre-wrap;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#000;margin:0\">" + esc(buildSummary()) + "</pre>";
+      document.body.appendChild(area);
+      var cleaned = false;
+      function cleanup(){ if (cleaned) return; cleaned = true; try { area.remove(); } catch (e) {} window.removeEventListener("afterprint", cleanup); }
+      window.addEventListener("afterprint", cleanup);
+      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable — use Export."); cleanup(); } }, 80);
+      setTimeout(cleanup, 60000);
+    } catch (e) { toast("Print unavailable — use Export."); }
+  }
+  function shareSummary() {
+    var txt = buildSummary();
+    try {
+      if (navigator.share) { navigator.share({ title: "StewardMD — Clinical Reasoning", text: txt }).catch(function () {}); return; }
+    } catch (e) {}
+    exportSummary(); // fallback: copy to clipboard
+    toast("Sharing not supported here — copied instead.");
   }
   function toast(msg) {
     var t = document.createElement("div"); t.className = "dx-toast"; t.textContent = msg; document.body.appendChild(t);
@@ -1049,6 +1084,7 @@
         '<button class="dx-adv-btn" id="dxSaveSess">💾 Save session</button>' +
         '<button class="dx-adv-btn" id="dxExport">📋 Export</button>' +
         '<button class="dx-adv-btn" id="dxPrint">🖨 Print</button>' +
+        '<button class="dx-adv-btn" id="dxShare">📤 Share</button>' +
       '</div>' +
       (sessions.length ? '<div class="dx-sess-h">Saved sessions</div><div class="dx-sess">' + sessions.map(function (s, i) { return '<button class="dx-sess-item" data-i="' + i + '">' + esc(s.label) + ' <span>' + esc(s.when) + '</span></button>'; }).join("") + '</div>' : '') +
       (S.timeline.length ? '<div class="dx-tl-h">Reasoning timeline — leading diagnosis & confidence</div><div class="dx-tl">' + S.timeline.map(function (t, i) {
@@ -1061,6 +1097,7 @@
     el.querySelector("#dxSaveSess").addEventListener("click", saveSession);
     el.querySelector("#dxExport").addEventListener("click", exportSummary);
     el.querySelector("#dxPrint").addEventListener("click", printSummary);
+    el.querySelector("#dxShare").addEventListener("click", shareSummary);
     el.querySelectorAll(".dx-sess-item").forEach(function (b) { b.addEventListener("click", function () { loadSession(+b.getAttribute("data-i")); }); });
   }
 
