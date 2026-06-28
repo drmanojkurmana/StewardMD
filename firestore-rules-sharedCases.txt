@@ -1,0 +1,31 @@
+// StewardMD — Firestore security rules for shareable case codes.
+// WHERE: Firebase Console → Firestore Database → Rules.
+// HOW: keep ALL your existing rules; just add the `match /sharedCases/{code}` block
+//      inside the existing  match /databases/{database}/documents { ... }  block.
+//
+// What it allows:
+//   • Any signed-in user can CREATE a share (must stamp their own ownerUid + an expiresAt).
+//   • ANYONE can READ a shared case by its code (that's the whole point of sharing).
+//   • Only the owner can update/delete their own share.
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- keep your existing rules here (e.g. users/{uid}/cases) ----
+
+    match /sharedCases/{code} {
+      allow read: if true;
+      allow create: if request.auth != null
+                    && request.resource.data.ownerUid == request.auth.uid
+                    && request.resource.data.expiresAt is int;
+      allow update, delete: if request.auth != null
+                    && resource.data.ownerUid == request.auth.uid;
+    }
+  }
+}
+
+// OPTIONAL — true auto-deletion at 30 days (storage cleanup):
+// Firebase Console → Firestore Database → TTL → "Create policy"
+//   Collection: sharedCases   Timestamp field: expiresAt
+// (The app already HIDES expired cases on read, so this is only for tidying storage.)
