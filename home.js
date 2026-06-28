@@ -173,12 +173,25 @@
   }
   function printCase() {
     try {
+      var out = document.getElementById("outputArea");
+      if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
+      var old = document.getElementById("smdPrintArea"); if (old) old.remove();
       if (!document.getElementById("smd-caseprint-style")) {
         var st = document.createElement("style"); st.id = "smd-caseprint-style";
-        st.textContent = "@media print{body *{visibility:hidden!important}#outputArea,#outputArea *{visibility:visible!important}#outputArea{position:absolute;left:0;top:0;width:100%}#smdCaseShare{display:none!important}@page{margin:12mm}}";
+        // clone the decision into a TOP-LEVEL node so ancestor display:none / overflow (v3 overlays) can't blank it
+        st.textContent = "@media print{body>*{display:none!important}#smdPrintArea{display:block!important;position:static}#smdPrintArea #smdCaseShare{display:none!important}@page{margin:12mm}}#smdPrintArea{display:none}";
         document.head.appendChild(st);
       }
-      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable"); } }, 60);
+      var area = document.createElement("div"); area.id = "smdPrintArea";
+      var clone = out.cloneNode(true);
+      var bar = clone.querySelector("#smdCaseShare"); if (bar) bar.remove();
+      area.appendChild(clone);
+      document.body.appendChild(area);
+      var cleaned = false;
+      function cleanup() { if (cleaned) return; cleaned = true; try { area.remove(); } catch (e) {} window.removeEventListener("afterprint", cleanup); }
+      window.addEventListener("afterprint", cleanup);
+      setTimeout(function () { try { window.print(); } catch (e) { toast("Print unavailable"); cleanup(); } }, 80);
+      setTimeout(cleanup, 60000);
     } catch (e) { toast("Print unavailable"); }
   }
 
