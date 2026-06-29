@@ -951,10 +951,19 @@
         if (hit) { seen[fl.key] = true; matches.push(fl); }
       }
       ONT.forEach(function (g) { g.fields.forEach(consider); });
-      el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results' + (matches.length ? ' <span class="dx-sr-count">' + matches.length + '</span>' : '') + '</div><div class="dx-search-list">' +
-        (matches.length ? matches.map(function (fl) { return '<button class="dx-search-row" data-f="' + fl.key + '"><span class="dx-sr-plus">+</span><span class="dx-sr-lbl">' + esc(fl.label) + '</span></button>'; }).join("") : '<div class="dx-sel-empty" style="padding:14px">No matching findings. Try the free-text “Extract findings” in the Advanced workspace.</div>') +
-        '</div></div>';
+      // also search the full disease directory (all 140) by name or system, so any
+      // syndrome / diagnosis is findable — each row opens its reference + Harrison.
+      var dzMatches = diseaseDirectory().filter(function (z) {
+        return z.name.toLowerCase().indexOf(filter) >= 0 || (z.system || "").toLowerCase().indexOf(filter) >= 0;
+      });
+      el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Findings' + (matches.length ? ' <span class="dx-sr-count">' + matches.length + '</span>' : '') + '</div><div class="dx-search-list">' +
+        (matches.length ? matches.map(function (fl) { return '<button class="dx-search-row" data-f="' + fl.key + '"><span class="dx-sr-plus">+</span><span class="dx-sr-lbl">' + esc(fl.label) + '</span></button>'; }).join("") : '<div class="dx-sel-empty" style="padding:14px">No matching findings.</div>') +
+        '</div></div>' +
+        (dzMatches.length ? '<div class="dx-cat"><div class="dx-cat-h">Diseases <span class="dx-sr-count">' + dzMatches.length + '</span></div><div class="dx-search-list">' +
+          dzMatches.slice(0, 50).map(function (z) { return '<button class="dx-search-row" data-dz="' + z.id + '"><span class="dx-sr-plus">📖</span><span class="dx-sr-lbl">' + esc(z.name) + (z.system ? '<span class="dx-sr-sys">' + esc(z.system) + (z.inf ? " · infective" : "") + '</span>' : '') + '</span></button>'; }).join("") +
+          '</div></div>' : '');
       el.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
+      el.querySelectorAll(".dx-search-row[data-dz]").forEach(function (b) { b.addEventListener("click", function () { openDiseaseRef(b.getAttribute("data-dz")); }); });
       return;
       /* legacy chip render (replaced by vertical list above):
       el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results</div><div class="dx-chips">' +
@@ -1183,6 +1192,30 @@
     el.querySelectorAll(".dx-sess-item").forEach(function (b) { b.addEventListener("click", function () { loadSession(+b.getAttribute("data-i")); }); });
   }
 
+  // 📖 Harrison reference block for a disease card — paraphrased, page-cited
+  // KNOWLEDGE from window.KB_ENRICHMENT (built from kb/diseases enrichment.harrison).
+  // Display-only; returns "" if no enrichment is loaded for this id.
+  function harrisonRef(id) {
+    var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || null;
+    var e = H && H[id]; if (!e) return "";
+    function ul(arr, n) { return arr && arr.length ? '<ul>' + arr.slice(0, n || 6).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : ""; }
+    var parts = "";
+    if (e.clinicalPearls && e.clinicalPearls.length) parts += '<div class="dx-h-sub">Clinical pearls</div>' + ul(e.clinicalPearls, 8);
+    if (e.pathophysiology) parts += '<div class="dx-h-sub">Pathophysiology</div><p>' + esc(e.pathophysiology) + '</p>';
+    if (e.severityClassification) parts += '<div class="dx-h-sub">Severity</div><p>' + esc(e.severityClassification) + '</p>';
+    if (e.redFlags && e.redFlags.length) parts += '<div class="dx-h-sub red">Red flags</div>' + ul(e.redFlags, 6);
+    if (e.pitfalls && e.pitfalls.length) parts += '<div class="dx-h-sub">Pitfalls</div>' + ul(e.pitfalls, 6);
+    var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
+    if (mim.length) parts += '<div class="dx-h-sub">Mimics</div>' + ul(mim, 8);
+    if (e.additionalDifferentials && e.additionalDifferentials.length) parts += '<div class="dx-h-sub">Other differentials</div>' + ul(e.additionalDifferentials, 8);
+    if (e.additionalInvestigations && e.additionalInvestigations.length) parts += '<div class="dx-h-sub">Further investigations</div>' + ul(e.additionalInvestigations, 6);
+    if (e.prognosis) parts += '<div class="dx-h-sub">Prognosis</div><p>' + esc(e.prognosis) + '</p>';
+    if (!parts) return "";
+    return '<details class="dx-harrison"><summary>📖 Harrison reference (22e)' +
+      (e.pages ? ' <span class="dx-h-pg">' + esc(String(e.pages).slice(0, 60)) + '</span>' : '') + '</summary>' +
+      '<div class="dx-h-body">' + parts + '<div class="dx-h-cite">Source: ' + esc(e.source || "Harrison 22e") + ' — reference knowledge, paraphrased. Not a treatment regimen.</div></div></details>';
+  }
+
   function card(r, rank) {
     var open = S.expanded[r.id];
     var cls = r.inf ? "inf" : "ni";
@@ -1226,6 +1259,7 @@
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
+      harrisonRef(r.id) +
       '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
       '</div>';
     return '<div class="dx-card ' + cls + ' open">' + head + det + '</div>';
@@ -1460,6 +1494,15 @@
         if (typeof window.SMD_restoreCase === "function") {
           close();
           window.SMD_restoreCase(S.f, id, vitals);
+          // bring the freshly-rendered stewardship page into view — without this the
+          // overlay closes but the output stays off-screen (the "click does nothing"
+          // bug). Mirrors the My-Cases restore path, which scrolls #outputArea.
+          try {
+            setTimeout(function () {
+              var oa = document.getElementById("outputArea");
+              if (oa && oa.innerHTML.trim()) oa.scrollIntoView({ behavior: "smooth", block: "start" });
+            }, 150);
+          } catch (e) {}
           return;
         }
       } catch (e) {}
@@ -1505,6 +1548,52 @@
     if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
   }
   function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); }
+
+  // Full searchable disease directory (all 140) — merges the enrichment manifest
+  // (every disease) with the live SYNDROMES / DDX_NI so a name lookup always works.
+  function diseaseDirectory() {
+    var out = [], seen = {};
+    var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || null;
+    if (H) for (var id in H) { out.push({ id: id, name: H[id].name || id, system: H[id].system || "", inf: H[id].class === "infective" }); seen[id] = true; }
+    var syn = window.SYNDROMES || {};
+    for (var sid in syn) if (!seen[sid]) { out.push({ id: sid, name: syn[sid].name || sid, system: syn[sid].system || "", inf: true }); seen[sid] = true; }
+    (DDX_NI || []).forEach(function (d) { if (!seen[d.id]) { out.push({ id: d.id, name: d.name || d.id, system: d.system || "", inf: false }); seen[d.id] = true; } });
+    out.sort(function (a, b) { return a.name.localeCompare(b.name); });
+    return out;
+  }
+
+  // Self-contained reference panel for ANY disease (whether or not it is in the
+  // current differential) — reuses the #dxMgmt panel. Shows the Harrison reference
+  // and an action to open the full stewardship/management page.
+  function openDiseaseRef(id) {
+    var syn = (window.SYNDROMES || {})[id];
+    var ni = null; (DDX_NI || []).forEach(function (d) { if (d.id === id) ni = d; });
+    var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId && window.KB_ENRICHMENT.byId[id]) || null;
+    var name = (syn && syn.name) || (ni && ni.name) || (H && H.name) || id;
+    var system = (syn && syn.system) || (ni && ni.system) || (H && H.system) || "";
+    var inf = !!syn || !!(H && H.class === "infective");
+    var reason = (ni && ni.reason) || "";
+    var el = root.querySelector("#dxMgmt");
+    if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
+    el.innerHTML = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back</button></div>' +
+      '<div class="dx-mgmt-body">' +
+        '<div class="dx-mgmt-badge">Disease reference · ' + (inf ? "infective" : "non-infective") + '</div>' +
+        '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
+        (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
+        (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
+        (harrisonRef(id) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
+        '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>' +
+        '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
+      '</div>';
+    el.classList.add("on"); el.scrollTop = 0;
+    var bk = el.querySelector("#dxMgmtBack"); if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
+    var sel = el.querySelector(".dx-select[data-sel]");
+    if (sel) sel.addEventListener("click", function () {
+      el.classList.remove("on");
+      if (inf) selectDx(id);
+      else openMgmt({ id: id, name: name, system: system, inf: false, reason: reason, red: (H && H.redFlags) || [], inv: (H && H.additionalInvestigations) || [] });
+    });
+  }
 
   function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
@@ -1701,6 +1790,19 @@
       ".dx-conf{font:700 12px var(--sans);color:var(--ink);background:var(--paper);border-radius:8px;padding:7px 10px;margin:10px 0 2px}",
       ".dx-conf .up{color:var(--green);font-weight:700}.dx-conf .down{color:var(--red);font-weight:700}",
       ".dx-mimic{font-size:9.5px}",
+      ".dx-harrison{margin:10px 0;border:1px solid var(--line,#e2e8f0);border-radius:10px;background:var(--paper,#f8fafc);overflow:hidden}",
+      ".dx-harrison>summary{cursor:pointer;font:700 12px var(--sans);color:var(--ink,#0f172a);padding:9px 12px;list-style:none;user-select:none}",
+      ".dx-harrison>summary::-webkit-details-marker{display:none}",
+      ".dx-harrison>summary::before{content:'▸ ';color:var(--teal,#0d9488)}",
+      ".dx-harrison[open]>summary::before{content:'▾ '}",
+      ".dx-h-pg{font-weight:500;color:var(--muted,#64748b);font-size:10px}",
+      ".dx-h-body{padding:2px 14px 12px;font-size:12px;color:var(--ink,#0f172a)}",
+      ".dx-h-body p{margin:3px 0 8px;line-height:1.5}",
+      ".dx-h-body ul{margin:3px 0 8px;padding-left:18px}.dx-h-body li{margin:2px 0;line-height:1.45}",
+      ".dx-h-sub{font-weight:700;font-size:11px;margin:8px 0 2px;color:var(--teal,#0d9488)}",
+      ".dx-h-sub.red{color:var(--red,#dc2626)}",
+      ".dx-h-cite{font-size:9.5px;color:var(--muted,#64748b);margin-top:8px;font-style:italic}",
+      ".dx-sr-sys{display:block;font-weight:500;font-size:11px;color:var(--muted,#64748b);margin-top:1px}",
       ".sb-beta{font-size:9px;font-weight:800;background:var(--teal);color:#fff;border-radius:5px;padding:1px 5px;margin-left:6px;vertical-align:middle;letter-spacing:.02em}",
       ".sb-main-link .chev{display:none}"
     ].join("");
