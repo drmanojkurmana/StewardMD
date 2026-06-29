@@ -108,5 +108,92 @@
   "reason": [
     "lit",
     "Suspected infection with persistent hypotension requiring vasopressors despite adequate fluid resuscitation, and elevated lactate (>2 mmol/L), meets criteria for septic shock — the most severe and time-critical sepsis presentation. Empiric broad-spectrum antibiotics must be given within 1 hour, alongside aggressive fluid resuscitation, vasopressor support, and urgent source identification/control."
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e: Ch.315 Sepsis and Septic Shock p.2316-2321; Ch.314 Approach to the Patient with Shock p.2353-2358",
+      "clinicalPearls": [
+        "Septic shock under Sepsis-3 is a subset of sepsis with profound circulatory, cellular, and metabolic derangements that carry a higher mortality than sepsis alone; sepsis itself is life-threatening organ dysfunction from a dysregulated host response to infection (p.2316).",
+        "Sepsis-3 abandoned the older SIRS criteria (used by Sepsis-1/2) because of poor specificity for distinguishing infection from other inflammatory states, and eliminated the term 'severe sepsis' (p.2316).",
+        "Sepsis is operationalized as an acute rise of at least 2 points in the SOFA score from baseline in a patient with suspected or confirmed infection (p.2320).",
+        "qSOFA (respiratory rate >=22/min, altered mentation with GCS <15, systolic BP <=100 mmHg) is a rapid bedside screen; a score >=2 is more specific but less sensitive than SIRS and flags patients at higher risk of death, ICU admission, and longer stay (p.2313, p.2320).",
+        "Sepsis presentation can be nonspecific (fever, tachycardia, lethargy, myalgias) with or without localizing findings; there is no single gold-standard diagnostic test, so the diagnosis integrates clinical, laboratory, microbiologic, and imaging data (p.2320).",
+        "Approximately 88% of sepsis cases are community onset (detected within 48 h of admission); hospital-onset sepsis (after 48 h) tends to involve more comorbidities, intraabdominal infection, and Enterococcus/Candida/Pseudomonas, with higher ICU admission and mortality (p.2316-2317).",
+        "Among culture-positive community-onset sepsis, the most common primary sites are urinary tract (~49%), respiratory tract (~33%), intraabdominal (~14%), and skin/soft tissue (~10%) (p.2316).",
+        "About 53% of US sepsis cases are bacterial culture positive with a roughly even gram-positive / gram-negative split; common gram-positives are S. aureus, Streptococcus, and Enterococcus, and common gram-negatives are E. coli, Klebsiella, and P. aeruginosa (p.2316)."
+      ],
+      "pathophysiology": "Septic shock is the most common form of distributive shock, in which the primary hemodynamic derangement is a fall in systemic vascular resistance (vasoplegia) rather than a primary loss of preload or pump function. The vasodilatory profile is distinctive: SVR is reduced, cardiac output is typically increased as a compensatory response, and both central venous pressure (CVP) and pulmonary capillary wedge pressure (PCWP) tend to be low (p.2353-2354). Arterial and venous vasodilation is mediated in part by excess nitric oxide; vasopressin deficiency may also contribute to refractory hypotension. The dysregulated host response begins when pathogen-associated molecular patterns (PAMPs, e.g. LPS, microbial nucleic acids) and damage-associated molecular patterns (DAMPs, e.g. histones, HMGB1, mitochondrial DNA, ATP) are sensed by pattern-recognition receptors (TLRs, CLRs, RAGE, RIG-I, NOD receptors) on neutrophils, monocytes/macrophages, and parenchymal cells, triggering proinflammatory cytokine/chemokine release and upregulation of endothelial adhesion molecules. Activated neutrophils release reactive oxygen species and neutrophil extracellular traps (NETs); endothelial activation/injury, glycocalyx degradation, and loss of VE-cadherin tight junctions cause capillary leak, interstitial edema, and increased oxygen-diffusion distance. A prothrombotic state arises from tissue-factor-driven coagulation, platelet/vWF microthrombi, complement activation (C3a, C5a, C5b-9 membrane attack complex), reduced anticoagulants (antithrombin, tissue factor pathway inhibitor, activated protein C), and impaired fibrinolysis (elevated PAI-1); consumption of clotting factors and platelets can then produce hemorrhage. The net effect is hypotension (from vasodilation, myocardial depression, and hypovolemia), microcirculatory dysfunction, and mitochondrial/metabolic failure, so that oxygen delivery, uptake, and utilization are all impaired and cellular injury occurs even when bulk oxygen delivery appears adequate (p.2317-2320). Sepsis-induced cardiomyopathy can add a cardiogenic component, producing mixed shock (p.2355).",
+      "additionalDifferentials": [
+        "Other causes of distributive shock: pancreatitis, severe burns, liver failure, anaphylaxis, neurogenic shock from brain/spinal cord injury, and adrenal insufficiency/adrenal crisis (p.2353-2354)",
+        "Cardiogenic shock (myocardial infarction, myocarditis, arrhythmia, acute valvular failure) (p.2353-2354)",
+        "Hypovolemic shock (hemorrhagic from trauma or GI bleeding; nonhemorrhagic from vomiting, diarrhea, osmotic diuresis in DKA or diabetes insipidus, or skin loss) (p.2353-2354)",
+        "Obstructive shock (tension pneumothorax, cardiac tamponade, constrictive pericarditis, pulmonary embolism, air or fat embolism, aortic dissection) (p.2353-2354)",
+        "Mixed shock, where more than one mechanism coexists (e.g. distributive sepsis plus sepsis-induced cardiomyopathy) (p.2355)"
+      ],
+      "infectionMimics": [
+        "Noninfectious pneumonitis or lung injury that mimics pneumonia/respiratory sepsis (p.2320)",
+        "Noninfectious abdominal syndromes such as mesenteric ischemia and inflammatory bowel disease, which can mimic an intraabdominal source (p.2320)"
+      ],
+      "nonInfectiousMimics": [
+        "Noninfectious inflammatory febrile syndromes including connective tissue diseases and vasculitides (p.2320)",
+        "Heart failure and cardiac arrest (the most common cardiovascular mimics in ICU series, where ~25% of presumed septic patients were later judged to have a mimic) (p.2320)",
+        "Noninfectious chronic obstructive pulmonary disease exacerbation (common respiratory mimic) (p.2320)",
+        "Hypotension from noninfectious causes: hypovolemia, autonomic dysfunction, and adrenal insufficiency (p.2320)"
+      ],
+      "additionalInvestigations": [
+        "Complete blood count with differential, basic metabolic panel, and liver function tests to assess end-organ dysfunction (p.2320)",
+        "Coagulation panel (PT/PTT/INR, platelets) to detect sepsis-induced coagulopathy/DIC (p.2320, p.2356)",
+        "Cultures of blood and other potentially infected sites (urine, sputum, wound) ideally before antimicrobials, plus point-of-care pathogen testing when available (p.2320)",
+        "Urinalysis and urine sediment to evaluate for pyuria/urinary source (p.2356, p.2320)",
+        "Cardiac enzymes/troponin to detect a primary or contributory cardiac process (p.2356)",
+        "Venous or arterial blood gas (arterial if hypoxemia present) to quantify acidosis (p.2356)",
+        "Focused imaging (chest x-ray, CT, or ultrasound) of suspected sites; point-of-care ultrasound (POCUS, e.g. RUSH/ACES protocols) helps classify undifferentiated and mixed shock (p.2356)",
+        "SOFA score components for severity (GCS, MAP/vasopressor use, PaO2/FiO2, bilirubin, creatinine, platelets) (p.2317)"
+      ],
+      "redFlags": [
+        "Persistent hypotension requiring vasopressors to keep MAP >65 mmHg plus lactate >2 mmol/L despite adequate fluid resuscitation defines septic shock and marks the highest-mortality end of the spectrum (p.2320, p.2354)",
+        "Acute rise of >=2 SOFA points from baseline with suspected infection indicates new organ dysfunction (p.2320)",
+        "qSOFA >=2 (RR>=22, GCS<15, SBP<=100) signals high risk of death and ICU need (p.2313, p.2320)",
+        "Elevated and rising serial lactate, which correlates with worse outcome and reflects tissue hypoperfusion (p.2356)",
+        "Sepsis-associated encephalopathy (altered consciousness, cognition, or behavior) signaling CNS organ dysfunction (p.2319)",
+        "New oliguria / acute kidney injury, occurring in up to two-thirds of septic patients (p.2319)",
+        "Signs of coagulopathy/DIC with consumption of platelets and clotting factors and bleeding risk (p.2319)"
+      ],
+      "prognosis": "Septic shock carries up to ~40% mortality, far higher than the ~15% overall mortality among US hospitalized adults with sepsis (p.2316). In emergency-department shock cohorts, septic and cardiogenic shock have the highest 90-day mortality (reported ~56% and ~52% respectively), and septic shock predominates among ICU shock (~62% of ICU shock patients in one multicenter series), whereas hypovolemic shock has lower mortality (p.2355). Mortality rises with age and is higher in men; comorbidities such as diabetes, obesity, neurologic/respiratory/cardiac disease, renal or hepatic insufficiency, cancer, and immunosuppression worsen outcomes (p.2317). SOFA scores predict mortality at the population level but not for individual patients; proposed clinical 'phenotypes' (alpha/beta/gamma/delta) carried roughly 2%, 5%, 15%, and 32% mortality (p.2317). Survivors face substantial long-term sequelae: physical (fatigue, muscle loss, weakness), cognitive and psychological (cognitive decline, dementia, depression), and increased risk of cardiovascular events, recurrent infection, and readmission. Roughly half of survivors are rehospitalized within 1 year and about one in six die within the first year, with most post-sepsis deaths in the first 6 months and elevated risk persisting up to 2 years (p.2321).",
+      "pitfalls": [
+        "Relying on SIRS criteria to define or exclude sepsis: SIRS lacks specificity, which is why Sepsis-3 replaced it (p.2316).",
+        "Treating shock as a single entity: distributive (septic) shock has low SVR with high cardiac output and low filling pressures, the opposite hemodynamic profile of cardiogenic and hypovolemic shock, so misclassification leads to wrong resuscitation (p.2353-2354).",
+        "Assuming a single shock type: sepsis frequently coexists with a cardiogenic component (sepsis-induced cardiomyopathy) or hypovolemia, producing mixed shock that POCUS can help dissect (p.2355).",
+        "A normal hemoglobin/hematocrit early in concurrent hemorrhage, or a normal WBC, does not exclude the relevant process; leukocytosis is suggestive but not diagnostic of infection (p.2356).",
+        "Anchoring on sepsis when infection is not confirmed: about 25% of presumed septic ICU patients had a mimic, so alternative diagnoses must be continually reconsidered (p.2320).",
+        "Failure to identify and control the source (e.g. infected catheter, abscess, endocarditis) undermines management even with appropriate antibiotics (p.2321)."
+      ],
+      "severityClassification": "Sepsis-3 spectrum: (1) Sepsis = life-threatening organ dysfunction from a dysregulated host response to infection, operationalized as an acute increase of >=2 points in the SOFA score in a patient with suspected/confirmed infection. (2) Septic shock = a subset of sepsis with profound circulatory, cellular, and metabolic abnormalities and higher mortality, operationally defined as a septic patient who, despite adequate fluid resuscitation, requires vasopressors to maintain MAP >65 mmHg AND has serum lactate >2 mmol/L. qSOFA (RR>=22, GCS<15, SBP<=100; score >=2) is a rapid risk-stratification screen, not a diagnosis. The historical Sepsis-1/2 terms 'severe sepsis' and SIRS-based septic shock (SBP<90 or drop >=40 mmHg) have been superseded (p.2316, p.2320).",
+      "references": [
+        "Harrison 22e p.2316",
+        "Harrison 22e p.2317",
+        "Harrison 22e p.2318",
+        "Harrison 22e p.2319",
+        "Harrison 22e p.2320",
+        "Harrison 22e p.2321",
+        "Harrison 22e p.2353",
+        "Harrison 22e p.2354",
+        "Harrison 22e p.2355",
+        "Harrison 22e p.2356"
+      ],
+      "crossLinks": [
+        "SEPSIS",
+        "cardiogenic_shock",
+        "hypovolemic_shock",
+        "anaphylaxis",
+        "dic",
+        "pancreatitis"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T13:56:25Z",
+      "contentHash": "haa7f116e"
+    }
+  }
 }

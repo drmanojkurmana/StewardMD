@@ -112,5 +112,106 @@
   "reason": [
     "lit",
     "A suspected infection source with evidence of organ dysfunction (SOFA score increase ≥2) meets Sepsis-3 criteria for sepsis. This requires immediate empiric broad-spectrum antibiotics within 1 hour of recognition, source identification, and source control efforts in parallel with antibiotics, per Surviving Sepsis Campaign timelines."
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "2310-2324 (Harrison 22e; principal sepsis chapter 315, p.2316-2324; shock chapter 314, p.2310-2316; ICU scoring chapter 311, p.2291-2292)",
+      "clinicalPearls": [
+        "Sepsis-3 (2016) reframes sepsis as life-threatening organ dysfunction caused by a dysregulated host response to infection, not merely a systemic inflammatory state; the older SIRS-based criteria and the term 'severe sepsis' were discarded for poor specificity (p.2316).",
+        "Operationally, sepsis is identified by an acute rise of >=2 points in the SOFA score over baseline in a patient with suspected or confirmed infection (p.2320).",
+        "Septic shock is the subset of sepsis with persistent hypotension needing vasopressors to keep MAP >65 mmHg PLUS lactate >2 mmol/L despite adequate fluid resuscitation, reflecting circulatory, cellular, and metabolic derangement that markedly raises mortality (p.2310, 2320).",
+        "qSOFA (>=2 of: respiratory rate >=22/min, altered mentation/GCS <15, systolic BP <=100 mmHg) flags infected patients at high risk of poor outcome; it is more specific but less sensitive than SIRS and was NOT designed or endorsed as a standalone diagnostic/screening test for sepsis (p.2292, 2320).",
+        "There is NO gold-standard diagnostic test for sepsis; the diagnosis is a synthesis of epidemiologic, clinical, laboratory, imaging, and microbiologic data (p.2320).",
+        "Presentation is frequently nonspecific (fever, tachycardia, lethargy, myalgias) and may lack localizing features; the CNS, kidneys, and skin act as accessible 'windows' onto early organ hypoperfusion (altered mentation, oliguria, mottling/delayed capillary refill) (p.2320, 2312).",
+        "Hypotension or an isolated low BP reading does not by itself define sepsis/shock; interpret BP against the patient's baseline and look for evidence of organ hypoperfusion, since hypertensive patients can decompensate at 'normal' pressures (p.2312).",
+        "Absence of tachycardia does not exclude sepsis: nodal-blocking drugs or conduction disease can blunt the compensatory heart-rate response (p.2312).",
+        "Sepsis is the commonest cause of distributive (high-cardiac-output, low-SVR) shock and of high-output hypotension overall; warm extremities with a wide pulse pressure suggest this physiology (p.2310, 2293).",
+        "Lactate is central to risk-stratifying sepsis: elevation reflects tissue hypoperfusion/anaerobic metabolism, correlates with worse outcome, and serial measurements help track response to resuscitation (p.2313).",
+        "Most sepsis is community-onset (~88%); the urinary tract is the single most common primary site, followed by respiratory, intra-abdominal, and skin/soft-tissue sources (p.2316).",
+        "Hospital-onset sepsis tends to involve sicker, more comorbid patients with more intra-abdominal infection and bacteremia from Enterococcus, Candida, and Pseudomonas, and carries higher ICU admission and mortality (p.2317).",
+        "Sepsis-induced cardiomyopathy (reduced LVEF, dilated LV, RV impairment) affects up to half of septic-shock patients and can convert initial distributive shock into a mixed distributive-cardiogenic picture (p.2311, 2322)."
+      ],
+      "pathophysiology": "Sepsis arises when an infection provokes a dysregulated, self-amplifying host response rather than a contained local one. Pathogen-associated molecular patterns (PAMPs, e.g., LPS, bacterial cell-wall components, microbial nucleic acids) and damage-associated molecular patterns (DAMPs, e.g., histones, HMGB1, S100 proteins, mitochondrial/double-stranded DNA, ATP released from injured cells) are sensed by pattern-recognition receptors (TLRs, CLRs, RAGE, RIG-I, NOD-like receptors) on innate immune and parenchymal cells. This triggers exuberant release of cytokines and chemokines and upregulation of vascular adhesion molecules. Myeloid cells (neutrophils, monocytes, M1 macrophages, dendritic cells) drive injury through phagocytosis, degranulation, reactive oxygen/nitrogen species, and neutrophil extracellular traps (NETs), while emergency granulopoiesis releases immature neutrophils (a poor-prognosis marker). Lymphoid responses are dysregulated, with lymphocyte apoptosis, exhaustion, and myeloid-derived suppressor cells producing a state of immunosuppression that predisposes survivors to secondary infection. The endothelium is activated and injured: glycocalyx breakdown, loss of VE-cadherin/tight junctions, and apoptosis cause capillary leak, interstitial edema, and a widened oxygen-diffusion distance. A prothrombotic shift (increased tissue factor, vWF, PAI-1; depleted antithrombin, tissue factor pathway inhibitor, and protein C; complement activation with C3a/C5a and the C5b-9 membrane attack complex) generates microvascular thrombi and, once clotting factors and platelets are consumed, bleeding. Excess nitric oxide drives systemic vasodilation. The net result is impaired oxygen delivery, uptake, and utilization; even when oxygen delivery is adequate, mitochondrial and metabolic dysfunction impairs ATP generation and ion homeostasis, producing multiorgan cellular injury and dysfunction (p.2317-2319).",
+      "additionalDifferentials": [
+        "Sepsis mimics, retrospectively found in ~25% of ICU 'sepsis' admissions; continuous reevaluation for an alternative diagnosis is imperative when infection is not confirmed (p.2320)",
+        "Distributive shock from non-septic causes (e.g., neurogenic shock from brain/spinal-cord injury disrupting vascular autonomic tone) (p.2311)"
+      ],
+      "infectionMimics": [],
+      "nonInfectiousMimics": [
+        "Noninfectious inflammatory febrile syndromes - connective tissue diseases and vasculitides (p.2320)",
+        "Heart failure and other noninfectious causes of pneumonitis or lung injury (the commonest mimic category in one ICU series was cardiovascular, e.g., heart failure, cardiac arrest) (p.2320)",
+        "Noninfectious abdominal syndromes - mesenteric ischemia and inflammatory bowel disease (p.2320)",
+        "Acute pancreatitis (a recognized noninfectious cause of distributive/high-output shock) (p.2293, 2311)",
+        "Adrenal insufficiency / adrenal crisis (distributive shock from cortisol/aldosterone deficiency, unmasked by stress of infection or surgery) (p.2293, 2311)",
+        "Severe burns (distributive shock with cellular hypoxia from reduced SVR) (p.2311)",
+        "Acute liver failure (high-output hypotension) (p.2293, 2311)",
+        "Anaphylaxis (IgE-mediated distributive shock with rapid plasma extravasation) (p.2311)",
+        "Thyrotoxicosis and large peripheral arteriovenous shunts (other causes of high-output hypotension) (p.2293)",
+        "Hypovolemia and autonomic dysfunction as noninfectious causes of hypotension (p.2320)",
+        "Pulmonary embolism / obstructive shock (acute chest pain, dyspnea, hypoxia in the immobile or malignancy patient) (p.2313)"
+      ],
+      "additionalInvestigations": [
+        "Serum procalcitonin / point-of-care pathogen testing where available to support diagnosis (p.2320)",
+        "Repeat/serial lactate to gauge response to resuscitation, not just a single value (p.2313)",
+        "Arterial (or venous) blood gas for acid-base assessment; arterial sampling if hypoxemia present (p.2313)",
+        "Central venous oxygen saturation (ScvO2) as a surrogate of oxygen-delivery adequacy in refractory shock (p.2313)",
+        "Echocardiography / point-of-care ultrasound for sepsis-induced cardiomyopathy, volume responsiveness, and to exclude mimics (tamponade, PE, pulmonary edema, pneumothorax) (p.2293-2294, 2322)",
+        "EEG, brain imaging, or lumbar puncture if seizure, stroke, or meningoencephalitis is suspected in a septic patient with neurologic findings (p.2321-2322)",
+        "Coagulation profile / DIC and sepsis-induced-coagulopathy (SIC) markers - platelets, PT/INR, fibrinogen, fibrin split products (p.2323)",
+        "Abdominal ultrasound in the septic patient with elevated bilirubin to look for biliary obstruction, cholecystitis, or cholangitis (p.2323)"
+      ],
+      "redFlags": [
+        "qSOFA >=2 (RR >=22, altered mentation, SBP <=100) in suspected infection - identifies the most acutely ill subset with higher mortality and ICU need (p.2292, 2320)",
+        "Persistent hypotension requiring vasopressors plus lactate >2 mmol/L after adequate fluids = septic shock, with mortality up to ~40% (p.2310, 2316)",
+        "New altered mental status / encephalopathy or new oliguria as early signs that compensatory mechanisms are exhausted (p.2312)",
+        "Skin mottling, prolonged capillary refill, cool clammy skin - hypoperfusion (p.2312, 2322)",
+        "Every hour of delay in appropriate antibiotics in bacterial septic shock raises mortality (estimated 7-8% per hour after shock recognition) - empiric antibiotics within 1 h of shock recognition (p.2320-2321)",
+        "An infection source needing urgent control (intra-abdominal abscess, bowel perforation, cholangitis, obstructed/infected urinary tract, necrotizing soft-tissue infection, infected indwelling catheter/endovascular infection) - source control as fast as possible (p.2321)",
+        "Failure to confirm infection should prompt active search for a mimic rather than indefinite empiric antibiotics (antibiotic stewardship: stop antibiotics when sepsis is excluded) (p.2315, 2320)"
+      ],
+      "prognosis": "Overall in-hospital mortality is roughly 15% among hospitalized adults with sepsis, rising to up to ~40% with septic shock; globally an estimated ~11 million sepsis-related deaths occur yearly (about one in five deaths worldwide). Mortality climbs with age and is higher in men. Elevated SOFA scores and machine-learning-defined phenotypes track population-level outcome (e.g., alpha/beta/gamma/delta phenotypes with ~2%/5%/15%/32% mortality) but cannot reliably predict an individual patient's outcome. Survivorship carries a heavy long-term burden: physical (prolonged fatigue, muscle loss, weakness, reduced functional capacity), cognitive (cognitive decline, dementia), and psychological (depression, reduced quality of life) sequelae, plus increased risk of cardiovascular events, recurrent infection, and readmission. About half of survivors are rehospitalized within a year and roughly one in six die within the first year, with most post-sepsis deaths in the first 6 months and elevated death risk persisting up to ~2 years (p.2316-2317, 2324). No FDA-approved host-targeted/immunomodulatory therapy exists for sepsis (p.2324).",
+      "pitfalls": [
+        "Treating sepsis as a single pathogen rather than a syndrome - empiric therapy and workup must be driven by the most likely source (p.2316).",
+        "Relying on SIRS criteria or a single abnormal vital sign to rule sepsis in or out - poor specificity led to their abandonment in Sepsis-3 (p.2316).",
+        "Using qSOFA as a diagnostic test - it is a risk-stratification/screening prompt, not a diagnostic criterion (p.2292, 2320).",
+        "Being falsely reassured by a normal heart rate (beta-blockade/conduction disease) or by a low BP reading in a chronically hypotensive patient (p.2312).",
+        "Anchoring on 'sepsis' when infection is unconfirmed - up to a quarter of presumed-sepsis ICU cases are mimics; failure to reevaluate delays the correct diagnosis (p.2320).",
+        "Continuing broad-spectrum antibiotics once infection is excluded, undermining stewardship and risking C. difficile, allergy, and AKI (p.2315, 2321).",
+        "Over-resuscitation with fluid - excess volume is likely harmful; targeted, dynamically reassessed resuscitation is the goal (p.2294).",
+        "Attributing all altered mentation to sepsis-associated encephalopathy without excluding seizure, stroke, or CNS infection (p.2321-2322).",
+        "Missing sepsis-induced cardiomyopathy, which can turn distributive shock into mixed shock and change management (p.2311, 2322)."
+      ],
+      "severityClassification": "Sepsis-3 (Singer et al., JAMA 2016) is the current framework: (1) Infection (suspected or confirmed) without organ dysfunction is not sepsis. (2) Sepsis = suspected/confirmed infection with an acute increase of >=2 points in the SOFA score from baseline (life-threatening organ dysfunction from a dysregulated host response). The SOFA score grades six systems 0-4: respiratory (PaO2/FiO2), coagulation (platelets), liver (bilirubin), cardiovascular (MAP / vasopressor requirement), CNS (Glasgow Coma Scale), and renal (creatinine / urine output). (3) Septic shock = sepsis with vasopressor requirement to maintain MAP >65 mmHg AND serum lactate >2 mmol/L despite adequate fluid resuscitation. qSOFA (>=2 of RR >=22/min, altered mentation, SBP <=100 mmHg) is a rapid bedside risk-stratification prompt for poor outcome in suspected infection, not a diagnostic criterion. The prior 1991/1992 SIRS-based definitions and the term 'severe sepsis' are obsolete under Sepsis-3 (p.2292, 2316, 2320).",
+      "references": [
+        "Harrison 22e p.2292",
+        "Harrison 22e p.2293",
+        "Harrison 22e p.2310",
+        "Harrison 22e p.2311",
+        "Harrison 22e p.2312",
+        "Harrison 22e p.2313",
+        "Harrison 22e p.2316",
+        "Harrison 22e p.2317",
+        "Harrison 22e p.2318",
+        "Harrison 22e p.2319",
+        "Harrison 22e p.2320",
+        "Harrison 22e p.2321",
+        "Harrison 22e p.2322",
+        "Harrison 22e p.2323",
+        "Harrison 22e p.2324"
+      ],
+      "crossLinks": [
+        "SEPTIC_SHOCK",
+        "FEBRILE_NEUTROPENIA",
+        "adrenal_crisis",
+        "dic",
+        "anaphylaxis",
+        "cardiogenic_shock"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T13:56:25Z",
+      "contentHash": "hae331674"
+    }
+  }
 }
