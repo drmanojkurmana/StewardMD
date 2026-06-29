@@ -1,0 +1,86 @@
+{
+  "id": "PUO",
+  "name": "Pyrexia of Unknown Origin",
+  "class": "infective",
+  "system": "Systemic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": "prolongedFeverUnexplained",
+    "score": {
+      "base": 25,
+      "modifiers": [
+        {
+          "when": "toxicAppearing",
+          "add": 20
+        },
+        {
+          "when": "hypotension",
+          "add": 25
+        }
+      ]
+    },
+    "associatedFindings": [
+      "hypotension",
+      "prolongedFeverUnexplained",
+      "toxicAppearing"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Diagnosis-dependent — broad differential includes infective (TB, enteric fever, infective endocarditis, abscess), neoplastic (lymphoma), and autoimmune/rheumatologic causes"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "PUO is explicitly a syndrome of unknown etiology by definition — pathogen prediction is not applicable until a specific diagnostic lead (localizing symptom, imaging finding, or lab abnormality) narrows the differential. Treating empirically before this risks masking the true diagnosis."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Repeat detailed history and serial examinations",
+      "why": "New localizing signs often emerge over time and are the single most valuable step in PUO workup."
+    },
+    {
+      "test": "CBC, ESR, CRP, LFTs, RFTs, urinalysis",
+      "why": "First-tier screening tests that can reveal a localizing clue (e.g., abnormal LFTs pointing to liver abscess or biliary source)."
+    },
+    {
+      "test": "Blood cultures (multiple sets, including for fastidious organisms if endocarditis suspected)",
+      "why": "Identifies bacteremic causes including culture-negative endocarditis pathogens with extended incubation."
+    },
+    {
+      "test": "Chest X-ray and abdominal ultrasound",
+      "why": "First-line imaging to screen for occult infection (TB, abscess) or malignancy."
+    },
+    {
+      "test": "CT chest/abdomen/pelvis (second-tier)",
+      "why": "More sensitive for occult abscess, lymphadenopathy, or malignancy if first-tier workup is unrevealing."
+    },
+    {
+      "test": "Echocardiography (if any murmur, risk factors, or persistent bacteremia)",
+      "why": "Screens for infective endocarditis as a cause of prolonged fever."
+    }
+  ],
+  "treatmentRef": "PUO",
+  "policyRef": "PUO",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

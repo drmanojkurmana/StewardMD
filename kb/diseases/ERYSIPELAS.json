@@ -1,0 +1,86 @@
+{
+  "id": "ERYSIPELAS",
+  "name": "Erysipelas",
+  "class": "infective",
+  "system": "Skin & Soft Tissue",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "skinErythema",
+        "sharplyDemarcatedBorder",
+        {
+          "not": "diabeticFootUlcer"
+        }
+      ]
+    },
+    "score": {
+      "base": 60,
+      "modifiers": [
+        {
+          "when": "sharplyDemarcatedBorder",
+          "add": 20
+        },
+        {
+          "when": "fever",
+          "add": 10
+        },
+        {
+          "when": "rapidlySpreadingErythema",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "diabeticFootUlcer",
+      "fever",
+      "rapidlySpreadingErythema",
+      "sharplyDemarcatedBorder",
+      "skinErythema"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pyogenes (Group A Streptococcus)"
+    ],
+    "likely": [
+      "Other beta-hemolytic streptococci (groups B, C, G)"
+    ],
+    "possible": [],
+    "why": "Erysipelas is distinguished from cellulitis precisely because its sharply demarcated, raised border reflects involvement limited to the superficial dermis and lymphatics, a pattern essentially always caused by beta-hemolytic streptococci rather than the broader organism range seen in deeper cellulitis."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None routinely required",
+      "why": "Diagnosis is clinical based on the characteristic appearance; cultures of intact skin have low yield."
+    },
+    {
+      "test": "Blood cultures (if systemically unwell)",
+      "why": "May identify bacteremic spread in more severe presentations."
+    }
+  ],
+  "treatmentRef": "ERYSIPELAS",
+  "policyRef": "ERYSIPELAS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

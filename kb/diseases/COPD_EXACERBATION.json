@@ -1,0 +1,101 @@
+{
+  "id": "COPD_EXACERBATION",
+  "name": "Acute COPD Exacerbation",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "knownCOPD",
+        {
+          "anyOf": [
+            "increasedDyspnea",
+            "increasedSputumVolume",
+            "purulentSputum"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 40,
+      "modifiers": [
+        {
+          "when": "severeCriteria",
+          "add": 10
+        },
+        {
+          "when": "increasedDyspnea",
+          "add": 15
+        },
+        {
+          "when": "increasedSputumVolume",
+          "add": 15
+        },
+        {
+          "when": "purulentSputum",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "increasedDyspnea",
+      "increasedSputumVolume",
+      "knownCOPD",
+      "purulentSputum",
+      "severeCriteria"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Haemophilus influenzae",
+      "Streptococcus pneumoniae",
+      "Moraxella catarrhalis"
+    ],
+    "likely": [
+      "Respiratory viruses (a substantial proportion of exacerbations are viral, not bacterial)"
+    ],
+    "possible": [
+      "Pseudomonas aeruginosa (in severe COPD with frequent exacerbations, prior isolation, or recent hospitalization)"
+    ],
+    "why": "When a bacterial component is present, the same three organisms responsible for most bacterial bronchitis/sinusitis are implicated. A substantial fraction of COPD exacerbations are triggered by viral infection alone, which is why purulent sputum (rather than dyspnea or sputum volume alone) is the best clinical indicator of likely bacterial involvement justifying antibiotics."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Pulse oximetry / ABG",
+      "why": "Assesses for hypoxia or hypercapnic respiratory failure, which determines need for ventilatory support and site of care."
+    },
+    {
+      "test": "Chest X-ray",
+      "why": "Excludes pneumonia, pneumothorax, or other alternative/complicating diagnoses presenting similarly."
+    },
+    {
+      "test": "Sputum culture (if frequent exacerbator or treatment failure)",
+      "why": "Identifies resistant or atypical organisms (e.g., Pseudomonas) in patients with recurrent exacerbations."
+    }
+  ],
+  "treatmentRef": "COPD_EXACERBATION",
+  "policyRef": "COPD_EXACERBATION",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

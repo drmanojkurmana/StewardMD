@@ -1,0 +1,105 @@
+{
+  "id": "CA_UTI",
+  "name": "Catheter-Associated Urinary Tract Infection",
+  "class": "infective",
+  "system": "Genitourinary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "indwellingCatheter",
+        {
+          "anyOf": [
+            "feverGU",
+            "flankPain"
+          ]
+        },
+        {
+          "not": "dysuria"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "feverGU",
+          "add": 15
+        },
+        {
+          "when": "flankPain",
+          "add": 10
+        },
+        {
+          "when": "indwellingCatheter",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "dysuria",
+      "feverGU",
+      "flankPain",
+      "hypotension",
+      "indwellingCatheter"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli",
+      "Klebsiella pneumoniae",
+      "Proteus mirabilis"
+    ],
+    "likely": [
+      "Pseudomonas aeruginosa",
+      "Enterococcus species",
+      "Candida species (colonization common, true infection less so)"
+    ],
+    "possible": [
+      "Polymicrobial flora, especially with long-term catheterization"
+    ],
+    "why": "Catheter-associated UTI involves a broader and more resistant organism spectrum than uncomplicated cystitis due to biofilm formation on the catheter surface and selection pressure from prior antibiotic exposure, with polymicrobial infection common in long-term catheterization."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Urine culture (from newly placed catheter if replacing, or freshly collected sample)",
+      "why": "Essential given the high resistance burden and biofilm-related polymicrobial colonization in this population — guides definitive therapy."
+    },
+    {
+      "test": "Blood cultures (if systemically unwell)",
+      "why": "CA-UTI can be a source of bacteremia/urosepsis; positive cultures confirm systemic involvement."
+    },
+    {
+      "test": "Renal function tests",
+      "why": "Baseline assessment, particularly relevant if upper tract involvement (pyelonephritis) is suspected."
+    }
+  ],
+  "treatmentRef": "CA_UTI",
+  "policyRef": "CA_UTI",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

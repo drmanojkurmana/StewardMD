@@ -1,0 +1,58 @@
+{
+  "id": "aki",
+  "name": "Acute kidney injury",
+  "class": "non_infective",
+  "system": "Nephrology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "oliguria": 30,
+      "nauseaVomiting": 10,
+      "legSwellingBilateral": 12,
+      "alteredSensorium": 8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "legSwellingBilateral",
+      "nauseaVomiting",
+      "oliguria"
+    ],
+    "reasoningTemplate": "Falling urine output with rising creatinine indicates AKI — define pre-renal / renal / post-renal and act on hyperkalaemia."
+  },
+  "redFlags": [
+    "Hyperkalaemia / pulmonary oedema / acidosis may need dialysis"
+  ],
+  "investigations": [
+    {
+      "test": "Renal function, electrolytes (K⁺)"
+    },
+    {
+      "test": "Urinalysis, urine output"
+    },
+    {
+      "test": "Renal ultrasound (obstruction)"
+    }
+  ],
+  "treatmentRef": "aki",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

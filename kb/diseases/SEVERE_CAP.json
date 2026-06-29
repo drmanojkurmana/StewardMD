@@ -1,0 +1,123 @@
+{
+  "id": "SEVERE_CAP",
+  "name": "Severe Community Acquired Pneumonia",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "cough",
+        {
+          "anyOf": [
+            "fever",
+            "crepitations"
+          ]
+        },
+        "severeCriteria"
+      ]
+    },
+    "score": {
+      "base": 60,
+      "modifiers": [
+        {
+          "when": "severeCriteria",
+          "add": 25
+        },
+        {
+          "when": "hypoxia",
+          "add": 15
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        },
+        {
+          "when": "alteredSensorium",
+          "add": 10
+        },
+        {
+          "when": "multilobar",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "cough",
+      "crepitations",
+      "fever",
+      "hypotension",
+      "hypoxia",
+      "multilobar",
+      "severeCriteria"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pneumoniae",
+      "Legionella pneumophila"
+    ],
+    "likely": [
+      "Staphylococcus aureus (including post-influenza)",
+      "Gram-negative enteric bacilli",
+      "Haemophilus influenzae"
+    ],
+    "possible": [
+      "Pseudomonas aeruginosa (if structural lung disease)"
+    ],
+    "why": "Severe CAP carries a broader and more virulent pathogen spectrum than non-severe CAP. Legionella and S. aureus are disproportionately represented in ICU-level disease. Gram-negatives become relevant with comorbidity, aspiration risk, or recent hospitalization."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Blood cultures (x2)",
+      "why": "Bacteremia rate is higher in severe CAP; identifies organism and susceptibility for de-escalation."
+    },
+    {
+      "test": "Sputum culture and Gram stain",
+      "why": "Helps target and de-escalate empiric therapy."
+    },
+    {
+      "test": "Urinary antigen (pneumococcal and Legionella)",
+      "why": "Rapid, useful for severe presentations to guide targeted therapy."
+    },
+    {
+      "test": "ABG",
+      "why": "Quantifies hypoxia/hypercapnia and guides ventilatory support decisions."
+    },
+    {
+      "test": "Chest X-ray / CT chest",
+      "why": "Defines extent (multilobar disease, effusion, cavitation) which affects prognosis and management."
+    },
+    {
+      "test": "Lactate",
+      "why": "Screens for tissue hypoperfusion and helps gauge severity/sepsis overlap."
+    }
+  ],
+  "treatmentRef": "SEVERE_CAP",
+  "policyRef": "SEVERE_CAP",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

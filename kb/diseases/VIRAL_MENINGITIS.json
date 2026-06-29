@@ -1,0 +1,105 @@
+{
+  "id": "VIRAL_MENINGITIS",
+  "name": "Viral (Aseptic) Meningitis",
+  "class": "infective",
+  "system": "Central Nervous System",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "neckStiffness",
+        {
+          "not": "alteredSensorium"
+        },
+        {
+          "not": "petechialRash"
+        },
+        {
+          "not": "seizure"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "photophobia",
+          "add": 10
+        },
+        {
+          "when": "headacheSevere",
+          "add": 10
+        },
+        {
+          "when": {
+            "not": "toxicAppearing"
+          },
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "headacheSevere",
+      "neckStiffness",
+      "petechialRash",
+      "photophobia",
+      "seizure",
+      "toxicAppearing"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Enteroviruses (most common cause overall)"
+    ],
+    "likely": [
+      "Herpes simplex virus type 2",
+      "Varicella zoster virus"
+    ],
+    "possible": [
+      "HIV (acute seroconversion)",
+      "Mumps (in unvaccinated populations)"
+    ],
+    "why": "Enteroviruses cause the large majority of viral meningitis, typically with a more benign, self-limited course than bacterial meningitis. However, clinical differentiation from early bacterial meningitis is unreliable, which is why CSF analysis (lymphocytic pleocytosis, normal glucose, negative Gram stain/culture in viral meningitis) is essential rather than optional."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Lumbar puncture with CSF cell count, protein, glucose, Gram stain, culture",
+      "why": "The decisive test distinguishing viral from bacterial meningitis and guiding the decision to continue or stop empiric antibacterial therapy."
+    },
+    {
+      "test": "CSF viral PCR (enterovirus, HSV)",
+      "why": "Identifies the specific viral cause; HSV PCR specifically changes management since HSV meningitis/encephalitis is treated with acyclovir."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "Performed alongside LP workup to support the broader diagnostic picture, particularly if bacterial meningitis cannot yet be excluded."
+    }
+  ],
+  "treatmentRef": "VIRAL_MENINGITIS",
+  "policyRef": "VIRAL_MENINGITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

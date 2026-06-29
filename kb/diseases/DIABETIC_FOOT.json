@@ -1,0 +1,109 @@
+{
+  "id": "DIABETIC_FOOT",
+  "name": "Diabetic Foot Infection",
+  "class": "infective",
+  "system": "Skin & Soft Tissue",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": "diabeticFootUlcer",
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "purulentDrainage",
+          "add": 10
+        },
+        {
+          "when": "deepTissueInvolvement",
+          "add": 15
+        },
+        {
+          "when": "boneInvolvement",
+          "add": 15
+        },
+        {
+          "when": {
+            "anyOf": [
+              "feverGU",
+              "fever"
+            ]
+          },
+          "add": 10
+        },
+        {
+          "when": "peripheralVascularDisease",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "boneInvolvement",
+      "deepTissueInvolvement",
+      "diabeticFootUlcer",
+      "fever",
+      "feverGU",
+      "peripheralVascularDisease",
+      "purulentDrainage"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Staphylococcus aureus",
+      "Streptococcus species"
+    ],
+    "likely": [
+      "Enterobacteriaceae (E. coli, Klebsiella, Proteus) — especially in chronic or previously treated wounds"
+    ],
+    "possible": [
+      "Pseudomonas aeruginosa (if wound exposed to water/soaking)",
+      "Anaerobes (if deep, necrotic, or malodorous wound)"
+    ],
+    "why": "Mild superficial diabetic foot infections are usually monomicrobial with gram-positive cocci, while deeper, chronic, or previously treated wounds become polymicrobial, incorporating gram-negatives and anaerobes — empiric spectrum should match wound chronicity and depth."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Deep tissue/bone culture (avoid superficial swab alone)",
+      "why": "Superficial swabs poorly correlate with the true infecting organism; deep culture better guides targeted therapy."
+    },
+    {
+      "test": "Plain X-ray of the foot",
+      "why": "Screens for osteomyelitis and gas in soft tissue."
+    },
+    {
+      "test": "MRI (if osteomyelitis suspected and X-ray inconclusive)",
+      "why": "More sensitive for early osteomyelitis than plain films."
+    },
+    {
+      "test": "HbA1c and glycemic control assessment",
+      "why": "Poor glycemic control impairs healing and infection clearance; relevant to overall management."
+    },
+    {
+      "test": "Vascular assessment (ABI/Doppler)",
+      "why": "Peripheral arterial disease impairs healing and antibiotic delivery to tissue — relevant to overall treatment plan and need for revascularization."
+    }
+  ],
+  "treatmentRef": "DIABETIC_FOOT",
+  "policyRef": "DIABETIC_FOOT",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

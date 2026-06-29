@@ -1,0 +1,60 @@
+{
+  "id": "asthma_exac",
+  "name": "Asthma exacerbation",
+  "class": "non_infective",
+  "system": "Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 34,
+      "cough": 14,
+      "hypoxia": 12,
+      "fever": -8,
+      "purulentSputum": -8
+    },
+    "associatedFindings": [
+      "cough",
+      "dyspnea",
+      "fever",
+      "hypoxia",
+      "purulentSputum"
+    ],
+    "reasoningTemplate": "Episodic breathlessness and wheeze without fever or consolidation suggests bronchospasm."
+  },
+  "redFlags": [
+    "Silent chest / exhaustion → life-threatening"
+  ],
+  "investigations": [
+    {
+      "test": "Peak flow / spirometry"
+    },
+    {
+      "test": "ABG if severe"
+    },
+    {
+      "test": "CXR if atypical"
+    }
+  ],
+  "treatmentRef": "asthma_exac",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

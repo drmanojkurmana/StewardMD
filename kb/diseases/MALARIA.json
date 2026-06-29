@@ -1,0 +1,125 @@
+{
+  "id": "MALARIA",
+  "name": "Malaria",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        {
+          "anyOf": [
+            "paroxysmalFever",
+            "travelEndemicArea",
+            "thrombocytopenia",
+            "splenomegaly",
+            "hepatosplenomegaly"
+          ]
+        },
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "paroxysmalFever",
+          "add": 20
+        },
+        {
+          "when": "travelEndemicArea",
+          "add": 10
+        },
+        {
+          "when": "thrombocytopenia",
+          "add": 15
+        },
+        {
+          "when": "splenomegaly",
+          "add": 10
+        },
+        {
+          "when": "hepatosplenomegaly",
+          "add": 10
+        },
+        {
+          "when": "rigors",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "fever",
+      "hepatosplenomegaly",
+      "neckStiffness",
+      "paroxysmalFever",
+      "rigors",
+      "splenomegaly",
+      "thrombocytopenia",
+      "travelEndemicArea"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Plasmodium falciparum",
+      "Plasmodium vivax"
+    ],
+    "likely": [
+      "Plasmodium malariae",
+      "Plasmodium ovale (less common in South Asia)"
+    ],
+    "possible": [
+      "Mixed infections (P. falciparum + P. vivax)"
+    ],
+    "why": "P. falciparum and P. vivax account for the large majority of malaria in India; species identification on smear/RDT is essential since management, monitoring for severity, and radical cure (primaquine for P. vivax) differ significantly by species."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Peripheral blood smear (thick and thin film)",
+      "why": "Gold standard for diagnosis, species identification, and parasitemia quantification — directly determines treatment choice and monitoring."
+    },
+    {
+      "test": "Rapid diagnostic test (malaria antigen)",
+      "why": "Fast bedside screening tool, useful when smear is not immediately available, though species specificity is more limited than smear."
+    },
+    {
+      "test": "CBC",
+      "why": "Thrombocytopenia is a common supportive finding; hemoglobin helps assess severity (severe anemia is a marker of complicated malaria)."
+    },
+    {
+      "test": "Renal function tests, blood glucose, LFTs",
+      "why": "Screens for organ dysfunction that would classify this as severe/complicated malaria requiring IV therapy and higher level of care."
+    },
+    {
+      "test": "Lactate / blood gas (if unwell)",
+      "why": "Acidosis is a severity marker in falciparum malaria with prognostic significance."
+    }
+  ],
+  "treatmentRef": "MALARIA",
+  "policyRef": "MALARIA",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,55 @@
+{
+  "id": "pmr",
+  "name": "Polymyalgia rheumatica",
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "polyarthralgia": 28,
+      "ageOver50": 24,
+      "weightLoss": 10,
+      "fever": 4
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "fever",
+      "polyarthralgia",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Proximal shoulder/hip girdle pain and stiffness in an older patient with high ESR suggests PMR."
+  },
+  "redFlags": [
+    "Watch for GCA — visual symptoms need urgent steroids"
+  ],
+  "investigations": [
+    {
+      "test": "ESR/CRP (markedly raised)"
+    },
+    {
+      "test": "Assess for giant cell arteritis"
+    }
+  ],
+  "treatmentRef": "pmr",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

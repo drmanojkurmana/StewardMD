@@ -1,0 +1,55 @@
+{
+  "id": "angioedema_acei",
+  "name": "ACE-inhibitor / hereditary angioedema",
+  "class": "non_infective",
+  "system": "Allergy / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "facialSwelling": 34,
+      "dyspnea": 18,
+      "rash": -12,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "facialSwelling",
+      "fever",
+      "rash"
+    ],
+    "reasoningTemplate": "Facial/tongue swelling WITHOUT urticaria (often on an ACE inhibitor) suggests bradykinin-mediated angioedema."
+  },
+  "redFlags": [
+    "Airway swelling — secure airway; not always histamine-mediated"
+  ],
+  "investigations": [
+    {
+      "test": "Airway assessment"
+    },
+    {
+      "test": "C1-esterase inhibitor / C4 if recurrent"
+    }
+  ],
+  "treatmentRef": "angioedema_acei",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

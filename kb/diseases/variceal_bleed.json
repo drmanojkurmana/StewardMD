@@ -1,0 +1,60 @@
+{
+  "id": "variceal_bleed",
+  "name": "Variceal bleeding",
+  "class": "non_infective",
+  "system": "Hepatology / GI",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hematemesis": 34,
+      "melena": 22,
+      "jaundice": 14,
+      "ascites": 10,
+      "hypotension": 10
+    },
+    "associatedFindings": [
+      "ascites",
+      "hematemesis",
+      "hypotension",
+      "jaundice",
+      "melena"
+    ],
+    "reasoningTemplate": "Haematemesis/melaena in a patient with chronic liver disease suggests variceal bleeding."
+  },
+  "redFlags": [
+    "Major haemorrhage — resuscitate; antibiotics reduce mortality in cirrhotic GI bleed"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent upper GI endoscopy"
+    },
+    {
+      "test": "Crossmatch, coagulation"
+    },
+    {
+      "test": "Vasoactive (terlipressin) + antibiotic prophylaxis"
+    }
+  ],
+  "treatmentRef": "variceal_bleed",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,59 @@
+{
+  "id": "aaa",
+  "name": "Ruptured abdominal aortic aneurysm",
+  "class": "non_infective",
+  "system": "Vascular emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "abdominalPain": 24,
+      "backPain": 30,
+      "hypotension": 26,
+      "syncope": 16,
+      "ageOver50": 14,
+      "pulsatileMass": 30
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "ageOver50",
+      "backPain",
+      "hypotension",
+      "pulsatileMass",
+      "syncope"
+    ],
+    "reasoningTemplate": "Back/abdominal pain with hypotension in an older patient is a ruptured AAA until proven otherwise."
+  },
+  "redFlags": [
+    "Hypotension + back pain + pulsatile mass = surgical emergency"
+  ],
+  "investigations": [
+    {
+      "test": "Bedside aortic ultrasound / CT"
+    },
+    {
+      "test": "Crossmatch; vascular surgery NOW"
+    }
+  ],
+  "treatmentRef": "aaa",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

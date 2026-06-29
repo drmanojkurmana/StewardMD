@@ -1,0 +1,54 @@
+{
+  "id": "tension_ha",
+  "name": "Tension-type headache",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 38,
+      "fever": -16,
+      "neckStiffness": -10,
+      "visualDisturbance": -6,
+      "focalNeuroDeficit": -8
+    },
+    "associatedFindings": [
+      "fever",
+      "focalNeuroDeficit",
+      "headache",
+      "neckStiffness",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Bilateral pressure-type headache without systemic or neurological red flags."
+  },
+  "redFlags": [
+    "Atypical features warrant imaging"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical diagnosis"
+    }
+  ],
+  "treatmentRef": "tension_ha",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,119 @@
+{
+  "id": "LEPTOSPIROSIS",
+  "name": "Leptospirosis",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        {
+          "anyOf": [
+            "waterExposure",
+            "conjunctivalSuffusion",
+            "myalgiaArthralgia"
+          ]
+        },
+        {
+          "anyOf": [
+            "jaundice",
+            "renalImpairment",
+            "conjunctivalSuffusion"
+          ]
+        },
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 45,
+      "modifiers": [
+        {
+          "when": "conjunctivalSuffusion",
+          "add": 20
+        },
+        {
+          "when": "waterExposure",
+          "add": 15
+        },
+        {
+          "when": "jaundice",
+          "add": 10
+        },
+        {
+          "when": "renalImpairment",
+          "add": 10
+        },
+        {
+          "when": "myalgiaArthralgia",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "conjunctivalSuffusion",
+      "fever",
+      "jaundice",
+      "myalgiaArthralgia",
+      "neckStiffness",
+      "renalImpairment",
+      "waterExposure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Leptospira interrogans (and other pathogenic Leptospira species)"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "Leptospira species transmitted via contact with water or soil contaminated by infected animal urine (notably rodents) is the sole cause; the clinical picture of fever with conjunctival suffusion, myalgia, and exposure history in flood-prone or monsoon settings is sufficiently characteristic to justify early empiric treatment."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Leptospira IgM ELISA / MAT (microscopic agglutination test)",
+      "why": "Confirms diagnosis serologically; MAT is the reference standard but often only available at referral labs, so treatment should not be delayed pending results."
+    },
+    {
+      "test": "Renal function tests",
+      "why": "Assesses for acute kidney injury, a hallmark of severe leptospirosis (Weil's disease) with major prognostic significance."
+    },
+    {
+      "test": "Liver function tests",
+      "why": "Jaundice with relatively modest transaminase elevation (compared to viral hepatitis) is a classic pattern in leptospirosis."
+    },
+    {
+      "test": "CBC, coagulation profile",
+      "why": "Screens for thrombocytopenia and bleeding risk, relevant to hemorrhagic complications."
+    },
+    {
+      "test": "CPK (creatine phosphokinase)",
+      "why": "Often elevated due to myositis, supporting the diagnosis and explaining myalgia."
+    }
+  ],
+  "treatmentRef": "LEPTOSPIROSIS",
+  "policyRef": "LEPTOSPIROSIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

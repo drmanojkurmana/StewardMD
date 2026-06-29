@@ -1,0 +1,69 @@
+{
+  "id": "dka",
+  "name": "Diabetic ketoacidosis",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "ketonemia": 40,
+      "polyuriaPolydipsia": 28,
+      "diabetesHx": 24,
+      "dyspnea": 10,
+      "abdominalPain": 10,
+      "alteredSensorium": 10,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "alteredSensorium",
+      "diabetesHx",
+      "dyspnea",
+      "fever",
+      "ketonemia",
+      "polyuriaPolydipsia"
+    ],
+    "reasoningTemplate": "High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA — search for a precipitant."
+  },
+  "redFlags": [
+    "DKA protocol; look for precipitating infection"
+  ],
+  "investigations": [
+    {
+      "test": "Venous gas"
+    },
+    {
+      "test": "Blood & urine ketones"
+    },
+    {
+      "test": "Glucose, electrolytes"
+    },
+    {
+      "test": "Search for precipitant (infection)"
+    }
+  ],
+  "treatmentRef": "dka",
+  "policyRef": null,
+  "calculatorRefs": [
+    "dka"
+  ],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

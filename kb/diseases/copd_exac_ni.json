@@ -1,0 +1,53 @@
+{
+  "id": "copd_exac_ni",
+  "name": "COPD exacerbation (non-infective)",
+  "class": "non_infective",
+  "system": "Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 30,
+      "knownHeartFailure": -6,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "fever",
+      "knownHeartFailure"
+    ],
+    "reasoningTemplate": "Increased breathlessness in known COPD without consolidation or fever may be a non-infective exacerbation."
+  },
+  "redFlags": [
+    "Distinguish infective trigger — may need antibiotics"
+  ],
+  "investigations": [
+    {
+      "test": "ABG"
+    },
+    {
+      "test": "CXR to exclude pneumonia/pneumothorax"
+    }
+  ],
+  "treatmentRef": "copd_exac_ni",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

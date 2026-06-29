@@ -1,0 +1,82 @@
+{
+  "id": "PHARYNGITIS",
+  "name": "Acute Pharyngitis",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": "soreThroat",
+    "score": {
+      "base": 30,
+      "modifiers": [
+        {
+          "when": "fever",
+          "add": 15
+        },
+        {
+          "when": "tonsillarExudate",
+          "add": 15
+        },
+        {
+          "when": "tenderCervicalNodes",
+          "add": 15
+        },
+        {
+          "when": {
+            "not": "cough"
+          },
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "cough",
+      "fever",
+      "soreThroat",
+      "tenderCervicalNodes",
+      "tonsillarExudate"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Respiratory viruses (most common overall)"
+    ],
+    "likely": [
+      "Group A Streptococcus (Streptococcus pyogenes) — when Centor score is high"
+    ],
+    "possible": [
+      "Fusobacterium necrophorum (consider in older adolescents/young adults with severe symptoms)"
+    ],
+    "why": "Most pharyngitis is viral. Group A Streptococcus becomes a relevant consideration only with sufficient Centor criteria, and testing (rapid antigen detection or culture) should confirm before treating to avoid unnecessary antibiotic exposure."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Rapid antigen detection test (RADT) or throat culture",
+      "why": "Confirms or excludes Group A Streptococcus before committing to antibiotics, directly preventing unnecessary use in viral pharyngitis."
+    }
+  ],
+  "treatmentRef": "PHARYNGITIS",
+  "policyRef": "PHARYNGITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

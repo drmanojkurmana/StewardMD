@@ -1,36 +1,115 @@
 {
   "id": "MENINGITIS",
-  "name": "Acute bacterial meningitis",
-  "aliases": ["meningitis", "pyogenic meningitis"],
+  "name": "Acute Bacterial Meningitis",
   "class": "infective",
   "system": "Central Nervous System",
-  "coding": { "icd10": "G00", "icd11": null, "snomed": null },
-  "matching": {
-    "rule": { "allOf": ["fever", { "anyOf": ["neckStiffness", "headacheSevere"] }, { "anyOf": ["alteredSensorium", "photophobia", "neckStiffness"] }] },
-    "score": { "base": 70, "modifiers": [
-      { "when": "neckStiffness", "add": 15 },
-      { "when": "alteredSensorium", "add": 10 },
-      { "when": "photophobia", "add": 5 },
-      { "when": "petechialRash", "add": 10 },
-      { "when": "seizure", "add": 5 }
-    ] },
-    "associatedFindings": ["fever", "neckStiffness", "headacheSevere", "alteredSensorium", "photophobia", "petechialRash", "seizure"],
-    "reasoningTemplate": "Fever with meningism (neck stiffness / photophobia) ± altered sensorium indicates bacterial meningitis — a time-critical infection."
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
   },
-  "pathogens": { "veryLikely": ["Streptococcus pneumoniae", "Neisseria meningitidis"], "likely": ["Listeria monocytogenes (age >50 / immunocompromised)"], "possible": ["Haemophilus influenzae"], "why": "Community-acquired bacterial meningitis in adults." },
-  "differentials": ["SAH", "ENCEPHALITIS"],
-  "redFlags": ["Time-critical — do not delay antibiotics for imaging/LP", "Petechial/purpuric rash → meningococcaemia"],
-  "investigations": [{ "test": "LP + CSF analysis", "why": "Confirm + organism" }, { "test": "Blood cultures before antibiotics", "why": "Bacteraemia" }],
-  "narrative": [
-    { "section": "overview", "text": "Acute bacterial meningitis is a neurological emergency; empiric antibiotics (± dexamethasone) must not be delayed.", "source": { "ref": "Harrison 22e", "locator": { "page": null, "section": "Acute Bacterial Meningitis" } }, "embedding": null }
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        {
+          "anyOf": [
+            "neckStiffness",
+            "headacheSevere"
+          ]
+        },
+        {
+          "anyOf": [
+            "alteredSensorium",
+            "photophobia",
+            "neckStiffness"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 70,
+      "modifiers": [
+        {
+          "when": "neckStiffness",
+          "add": 15
+        },
+        {
+          "when": "alteredSensorium",
+          "add": 10
+        },
+        {
+          "when": "photophobia",
+          "add": 5
+        },
+        {
+          "when": "petechialRash",
+          "add": 10
+        },
+        {
+          "when": "seizure",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "headacheSevere",
+      "neckStiffness",
+      "petechialRash",
+      "photophobia",
+      "seizure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pneumoniae",
+      "Neisseria meningitidis"
+    ],
+    "likely": [
+      "Listeria monocytogenes (neonates, elderly, immunocompromised, pregnant)"
+    ],
+    "possible": [
+      "Haemophilus influenzae (unvaccinated populations)",
+      "Gram-negative bacilli (post-neurosurgery, immunocompromised)"
+    ],
+    "why": "S. pneumoniae and N. meningitidis are the leading causes of community-acquired bacterial meningitis across most age groups. Listeria is specifically added in neonates, those over 50, pregnant patients, and the immunocompromised, since standard empiric regimens do not cover it."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Lumbar puncture with CSF analysis (cell count, protein, glucose, Gram stain, culture)",
+      "why": "Confirms the diagnosis, identifies the organism, and guides definitive duration and choice of therapy — but should follow, not precede, empiric antibiotics if there is any delay."
+    },
+    {
+      "test": "Blood cultures (before antibiotics if no delay incurred)",
+      "why": "Frequently positive in bacterial meningitis and may identify the organism if LP is delayed or contraindicated."
+    },
+    {
+      "test": "CT head (before LP only if specific indications: papilledema, focal neurological deficit, severely altered consciousness, seizures)",
+      "why": "Screens for mass effect/herniation risk before LP in specific high-risk presentations — not required routinely and should not delay antibiotics."
+    }
   ],
   "treatmentRef": "MENINGITIS",
   "policyRef": "MENINGITIS",
   "calculatorRefs": [],
   "icuModuleRefs": [],
-  "drugRefs": ["ceftriaxone", "vancomycin", "ampicillin", "dexamethasone"],
-  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
-  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
   "version": 1,
   "contentHash": null
 }

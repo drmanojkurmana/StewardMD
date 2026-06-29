@@ -1,0 +1,64 @@
+{
+  "id": "ischemic_stroke",
+  "name": "Acute ischemic stroke",
+  "class": "non_infective",
+  "system": "Neurology / Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "focalNeuroDeficit": 46,
+      "alteredSensorium": 16,
+      "ageOver50": 10,
+      "hypertensionHx": 8,
+      "headache": 4,
+      "fever": -20,
+      "neckStiffness": -14
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "alteredSensorium",
+      "fever",
+      "focalNeuroDeficit",
+      "headache",
+      "hypertensionHx",
+      "neckStiffness"
+    ],
+    "reasoningTemplate": "Acute focal neurological deficit favours a vascular event; image urgently and check the stroke pathway."
+  },
+  "redFlags": [
+    "Time-critical — thrombolysis/thrombectomy window"
+  ],
+  "investigations": [
+    {
+      "test": "Non-contrast CT head (urgent)"
+    },
+    {
+      "test": "CT/MR angiography"
+    },
+    {
+      "test": "Glucose (stroke mimic)"
+    }
+  ],
+  "treatmentRef": "ischemic_stroke",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

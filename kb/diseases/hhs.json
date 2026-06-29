@@ -1,0 +1,60 @@
+{
+  "id": "hhs",
+  "name": "Hyperosmolar hyperglycaemic state",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "polyuriaPolydipsia": 30,
+      "alteredSensorium": 26,
+      "diabetesHx": 22,
+      "ketonemia": -10,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "diabetesHx",
+      "fever",
+      "ketonemia",
+      "polyuriaPolydipsia"
+    ],
+    "reasoningTemplate": "Marked hyperglycaemia with hyperosmolar altered sensorium and minimal ketosis suggests HHS rather than DKA."
+  },
+  "redFlags": [
+    "Profound dehydration — careful fluid/insulin; precipitant often infection"
+  ],
+  "investigations": [
+    {
+      "test": "Glucose, osmolality, electrolytes"
+    },
+    {
+      "test": "Venous gas (minimal ketosis)"
+    },
+    {
+      "test": "Search for precipitant"
+    }
+  ],
+  "treatmentRef": "hhs",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

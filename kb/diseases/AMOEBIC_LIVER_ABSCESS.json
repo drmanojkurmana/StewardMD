@@ -1,0 +1,104 @@
+{
+  "id": "AMOEBIC_LIVER_ABSCESS",
+  "name": "Amoebic Liver Abscess",
+  "class": "infective",
+  "system": "Hepatobiliary / Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "rightUpperQuadrantPain",
+        "feverGU",
+        {
+          "not": "jaundice"
+        },
+        "travelEndemicArea",
+        {
+          "not": "murphySign"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "travelEndemicArea",
+          "add": 15
+        },
+        {
+          "when": "feverGU",
+          "add": 10
+        },
+        {
+          "when": "diarrhea",
+          "add": 10
+        },
+        {
+          "when": "singleLesion",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "diarrhea",
+      "feverGU",
+      "jaundice",
+      "murphySign",
+      "rightUpperQuadrantPain",
+      "singleLesion",
+      "travelEndemicArea"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Entamoeba histolytica"
+    ],
+    "likely": [],
+    "possible": [
+      "Concurrent or preceding intestinal amoebiasis (only a minority have concurrent diarrhea at presentation)"
+    ],
+    "why": "Entamoeba histolytica is the specific cause of amoebic liver abscess, reaching the liver via the portal circulation after invading the colonic mucosa; the classic presentation is a single right-lobe abscess, which helps but does not definitively distinguish it from pyogenic abscess without aspirate/serology."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Abdominal ultrasound or CT",
+      "why": "Characterizes the abscess (typically single, right lobe, in amoebic disease) and guides the decision on aspiration."
+    },
+    {
+      "test": "Amoebic serology (IgG)",
+      "why": "Highly sensitive for invasive amoebiasis and useful when aspiration is not performed or is inconclusive."
+    },
+    {
+      "test": "Stool microscopy for E. histolytica (trophozoites/cysts)",
+      "why": "Supportive if positive, but a substantial proportion of liver abscess patients have negative stool studies at the time of presentation."
+    },
+    {
+      "test": "Diagnostic aspiration (if no improvement in 5-7 days, large/left-lobe abscess, or diagnostic uncertainty)",
+      "why": "Classic 'anchovy paste' aspirate supports amoebic etiology; also allows bacterial culture to exclude/identify a pyogenic or mixed process."
+    }
+  ],
+  "treatmentRef": "AMOEBIC_LIVER_ABSCESS",
+  "policyRef": "AMOEBIC_LIVER_ABSCESS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

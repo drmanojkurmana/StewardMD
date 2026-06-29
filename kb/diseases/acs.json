@@ -1,0 +1,66 @@
+{
+  "id": "acs",
+  "name": "Acute coronary syndrome",
+  "class": "non_infective",
+  "system": "Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "exertionalChestPain": 44,
+      "chestPain": 24,
+      "ecgIschemia": 30,
+      "knownCAD": 18,
+      "diabetesHx": 8,
+      "dyspnea": 10,
+      "ageOver50": 8,
+      "pleuriticChestPain": -12
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "chestPain",
+      "diabetesHx",
+      "dyspnea",
+      "ecgIschemia",
+      "exertionalChestPain",
+      "knownCAD",
+      "pleuriticChestPain"
+    ],
+    "reasoningTemplate": "Pressure-type / exertional chest pain with ischaemic ECG or risk factors favours an acute coronary syndrome."
+  },
+  "redFlags": [
+    "STEMI → immediate reperfusion pathway"
+  ],
+  "investigations": [
+    {
+      "test": "12-lead ECG (serial)"
+    },
+    {
+      "test": "Troponin"
+    },
+    {
+      "test": "Aspirin + cardiology referral"
+    }
+  ],
+  "treatmentRef": "acs",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

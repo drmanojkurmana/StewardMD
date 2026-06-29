@@ -25,10 +25,15 @@ const PORT = 9352;
 const N = 3000; // random finding-sets per syndrome
 const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/kbparity-chrome";
 
-// converted infective diseases (the closure-parity proof targets)
-const INFECTIVE_IDS = ["MENINGITIS", "CAP", "PYELONEPHRITIS", "SBP"];
+// auto-discover ALL converted infective diseases (the closure-parity proof targets)
 const kb = {};
-for (const id of INFECTIVE_IDS) kb[id] = JSON.parse(readFileSync(join(ROOT, "kb", "diseases", `${id}.json`), "utf8"));
+const INFECTIVE_IDS = [];
+for (const f of readdirSync(join(ROOT, "kb", "diseases"))) {
+  if (!f.endsWith(".json")) continue;
+  const d = JSON.parse(readFileSync(join(ROOT, "kb", "diseases", f), "utf8"));
+  if (d.class === "infective") { kb[d.id] = d; INFECTIVE_IDS.push(d.id); }
+}
+INFECTIVE_IDS.sort();
 
 // evaluator source -> injectable (strip ES export keywords; keep window attach)
 let evalSrc = readFileSync(join(ROOT, "kb", "engine", "evaluator.mjs"), "utf8")

@@ -1,0 +1,64 @@
+{
+  "id": "cardiogenic_shock",
+  "name": "Cardiogenic shock",
+  "class": "non_infective",
+  "system": "Cardiology / Critical care",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hypotension": 40,
+      "raisedJVP": 24,
+      "bilateralCrackles": 20,
+      "ecgIschemia": 30,
+      "dyspnea": 12,
+      "fever": -16
+    },
+    "associatedFindings": [
+      "bilateralCrackles",
+      "dyspnea",
+      "ecgIschemia",
+      "fever",
+      "hypotension",
+      "raisedJVP"
+    ],
+    "reasoningTemplate": "Hypotension with pulmonary congestion and ischaemic ECG favours a primary cardiac cause of shock."
+  },
+  "redFlags": [
+    "Revascularisation/inotropes — not antibiotics"
+  ],
+  "investigations": [
+    {
+      "test": "ECG, troponin"
+    },
+    {
+      "test": "Echocardiogram"
+    },
+    {
+      "test": "Lactate"
+    }
+  ],
+  "treatmentRef": "cardiogenic_shock",
+  "policyRef": null,
+  "calculatorRefs": [
+    "shock"
+  ],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

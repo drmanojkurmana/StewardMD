@@ -1,0 +1,55 @@
+{
+  "id": "svc_obstruction",
+  "name": "Superior vena cava obstruction",
+  "class": "non_infective",
+  "system": "Oncology / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "facialSwelling": 34,
+      "dyspnea": 18,
+      "malignancy": 16,
+      "cough": 8
+    },
+    "associatedFindings": [
+      "cough",
+      "dyspnea",
+      "facialSwelling",
+      "malignancy"
+    ],
+    "reasoningTemplate": "Facial/upper-body swelling with distended neck veins and dyspnoea suggests SVC obstruction, often malignant."
+  },
+  "redFlags": [
+    "Airway/cerebral oedema — urgent oncology/radiotherapy"
+  ],
+  "investigations": [
+    {
+      "test": "CT chest with contrast"
+    },
+    {
+      "test": "Tissue diagnosis"
+    }
+  ],
+  "treatmentRef": "svc_obstruction",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

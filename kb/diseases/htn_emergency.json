@@ -1,0 +1,62 @@
+{
+  "id": "htn_emergency",
+  "name": "Hypertensive emergency",
+  "class": "non_infective",
+  "system": "Cardiology / Neuro",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 22,
+      "hypertensionHx": 24,
+      "visualDisturbance": 16,
+      "papilledema": 18,
+      "chestPain": 12,
+      "focalNeuroDeficit": 10
+    },
+    "associatedFindings": [
+      "chestPain",
+      "focalNeuroDeficit",
+      "headache",
+      "hypertensionHx",
+      "papilledema",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Severe hypertension with headache, visual or neurological symptoms indicates a hypertensive emergency with end-organ damage."
+  },
+  "redFlags": [
+    "Controlled BP reduction; identify target-organ damage"
+  ],
+  "investigations": [
+    {
+      "test": "BP (both arms), fundoscopy"
+    },
+    {
+      "test": "ECG, troponin, renal function"
+    },
+    {
+      "test": "CT head if neuro signs"
+    }
+  ],
+  "treatmentRef": "htn_emergency",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,69 @@
+{
+  "id": "heart_failure",
+  "name": "Acute heart failure / pulmonary edema",
+  "class": "non_infective",
+  "system": "Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 34,
+      "orthopnea": 30,
+      "bilateralCrackles": 28,
+      "raisedJVP": 26,
+      "legSwellingBilateral": 20,
+      "knownHeartFailure": 18,
+      "ecgIschemia": 8,
+      "fever": -16
+    },
+    "associatedFindings": [
+      "bilateralCrackles",
+      "dyspnea",
+      "ecgIschemia",
+      "fever",
+      "knownHeartFailure",
+      "legSwellingBilateral",
+      "orthopnea",
+      "raisedJVP"
+    ],
+    "reasoningTemplate": "Orthopnoea, raised JVP and bilateral crackles favour cardiogenic pulmonary oedema rather than infection."
+  },
+  "redFlags": [
+    "Address precipitant; not an infection"
+  ],
+  "investigations": [
+    {
+      "test": "CXR"
+    },
+    {
+      "test": "BNP/NT-proBNP"
+    },
+    {
+      "test": "ECG, troponin"
+    },
+    {
+      "test": "Echocardiogram"
+    }
+  ],
+  "treatmentRef": "heart_failure",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

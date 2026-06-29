@@ -1,0 +1,57 @@
+{
+  "id": "ibs",
+  "name": "Irritable bowel syndrome",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "abdominalPain": 24,
+      "constipationOrDiarrhea": 18,
+      "fever": -14,
+      "weightLoss": -10,
+      "bloodyStool": -12
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "bloodyStool",
+      "constipationOrDiarrhea",
+      "fever",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Chronic abdominal pain with altered bowel habit and NO alarm features suggests IBS."
+  },
+  "redFlags": [
+    "Weight loss, bleeding or anaemia argue AGAINST IBS — investigate"
+  ],
+  "investigations": [
+    {
+      "test": "Diagnosis of exclusion (Rome criteria)"
+    },
+    {
+      "test": "Check alarm features absent"
+    }
+  ],
+  "treatmentRef": "ibs",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

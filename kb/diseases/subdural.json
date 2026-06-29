@@ -1,0 +1,64 @@
+{
+  "id": "subdural",
+  "name": "Subdural haematoma",
+  "class": "non_infective",
+  "system": "Neurology / Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 22,
+      "alteredSensorium": 22,
+      "focalNeuroDeficit": 18,
+      "headInjury": 26,
+      "anticoagulated": 18,
+      "ageOver50": 10,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "alteredSensorium",
+      "anticoagulated",
+      "fever",
+      "focalNeuroDeficit",
+      "headInjury",
+      "headache"
+    ],
+    "reasoningTemplate": "Headache and fluctuating consciousness after a fall, especially elderly/anticoagulated, suggests a subdural haematoma."
+  },
+  "redFlags": [
+    "Expanding bleed — may need evacuation"
+  ],
+  "investigations": [
+    {
+      "test": "Non-contrast CT head"
+    },
+    {
+      "test": "Coagulation; reverse anticoagulation"
+    },
+    {
+      "test": "Neurosurgical review"
+    }
+  ],
+  "treatmentRef": "subdural",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

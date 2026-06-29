@@ -1,0 +1,62 @@
+{
+  "id": "peptic_ulcer",
+  "name": "Peptic ulcer disease / upper GI bleed",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "abdominalPain": 24,
+      "melena": 30,
+      "hematemesis": 30,
+      "anticoagulated": 10,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "anticoagulated",
+      "fever",
+      "hematemesis",
+      "melena"
+    ],
+    "reasoningTemplate": "Epigastric pain with melena or haematemesis suggests bleeding peptic ulcer disease."
+  },
+  "redFlags": [
+    "Haemodynamic instability → resuscitate, urgent endoscopy"
+  ],
+  "investigations": [
+    {
+      "test": "Upper GI endoscopy"
+    },
+    {
+      "test": "CBC, crossmatch"
+    },
+    {
+      "test": "Stop NSAIDs; start PPI infusion"
+    }
+  ],
+  "treatmentRef": "peptic_ulcer",
+  "policyRef": null,
+  "calculatorRefs": [
+    "ppi"
+  ],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

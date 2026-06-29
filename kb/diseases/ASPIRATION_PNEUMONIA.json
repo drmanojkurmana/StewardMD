@@ -1,0 +1,110 @@
+{
+  "id": "ASPIRATION_PNEUMONIA",
+  "name": "Aspiration Pneumonia",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "aspirationRiskFactor",
+        {
+          "anyOf": [
+            "fever",
+            "cough",
+            "crepitations"
+          ]
+        },
+        {
+          "not": "severeCriteria"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "aspirationRiskFactor",
+          "add": 15
+        },
+        {
+          "when": "fever",
+          "add": 10
+        },
+        {
+          "when": "crepitations",
+          "add": 10
+        },
+        {
+          "when": "foulSmellingSputum",
+          "add": 10
+        },
+        {
+          "when": "consolidation",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "aspirationRiskFactor",
+      "consolidation",
+      "cough",
+      "crepitations",
+      "fever",
+      "foulSmellingSputum",
+      "severeCriteria"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Oral anaerobes (Peptostreptococcus, Prevotella, Fusobacterium)",
+      "Streptococcus pneumoniae"
+    ],
+    "likely": [
+      "Staphylococcus aureus",
+      "Enterobacteriaceae (if hospital-associated aspiration)"
+    ],
+    "possible": [
+      "Klebsiella pneumoniae (classically associated with aspiration in alcoholics)"
+    ],
+    "why": "Aspiration introduces oropharyngeal flora directly into the lower respiratory tract, making anaerobes a leading consideration alongside the typical community pathogens, particularly when foul-smelling sputum or dental disease/poor oral hygiene is present."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Chest X-ray",
+      "why": "Aspiration classically affects dependent lung segments (posterior upper lobes if aspirated supine, basal segments of lower lobes if upright) — helpful in confirming the diagnosis."
+    },
+    {
+      "test": "Swallowing assessment (if recurrent or ongoing risk)",
+      "why": "Identifies the underlying mechanism (dysphagia, reduced consciousness) to prevent recurrence."
+    },
+    {
+      "test": "CBC, CRP",
+      "why": "Supports severity assessment and baseline for response monitoring."
+    }
+  ],
+  "treatmentRef": "ASPIRATION_PNEUMONIA",
+  "policyRef": "ASPIRATION_PNEUMONIA",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

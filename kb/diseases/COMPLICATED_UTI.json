@@ -1,0 +1,105 @@
+{
+  "id": "COMPLICATED_UTI",
+  "name": "Complicated Urinary Tract Infection",
+  "class": "infective",
+  "system": "Genitourinary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        {
+          "anyOf": [
+            "dysuria",
+            "urinaryFrequency"
+          ]
+        },
+        "complicatedUTIRisk",
+        {
+          "not": "flankPain"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "complicatedUTIRisk",
+          "add": 15
+        },
+        {
+          "when": "indwellingCatheter",
+          "add": 10
+        },
+        {
+          "when": "priorAntibiotics",
+          "add": 10
+        },
+        {
+          "when": "feverGU",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "complicatedUTIRisk",
+      "dysuria",
+      "feverGU",
+      "flankPain",
+      "indwellingCatheter",
+      "priorAntibiotics",
+      "urinaryFrequency"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli (often with resistant phenotypes)"
+    ],
+    "likely": [
+      "Klebsiella pneumoniae",
+      "Proteus mirabilis",
+      "Enterococcus species"
+    ],
+    "possible": [
+      "Pseudomonas aeruginosa (catheter-associated, prior instrumentation)"
+    ],
+    "why": "Complicating factors (catheters, structural abnormality, diabetes, male sex) select for a broader and more resistant organism profile than uncomplicated cystitis, including a meaningfully higher chance of ESBL-producing organisms."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Urine culture and sensitivity",
+      "why": "Essential in complicated UTI given higher rates of resistant organisms — guides definitive therapy."
+    },
+    {
+      "test": "Renal function tests",
+      "why": "Assesses baseline renal function, particularly relevant if structural abnormality or obstruction is suspected."
+    },
+    {
+      "test": "Renal ultrasound (if recurrent or treatment failure)",
+      "why": "Evaluates for obstruction, stones, or structural abnormality contributing to complicated infection."
+    }
+  ],
+  "treatmentRef": "COMPLICATED_UTI",
+  "policyRef": "COMPLICATED_UTI",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

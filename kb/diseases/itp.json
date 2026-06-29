@@ -1,0 +1,55 @@
+{
+  "id": "itp",
+  "name": "Immune thrombocytopenia (ITP)",
+  "class": "non_infective",
+  "system": "Hematology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "mucocutaneousBleeding": 32,
+      "thrombocytopenia": 30,
+      "fever": -10,
+      "alteredSensorium": -6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "mucocutaneousBleeding",
+      "thrombocytopenia"
+    ],
+    "reasoningTemplate": "Isolated thrombocytopenia with mucocutaneous bleeding in a well patient suggests ITP."
+  },
+  "redFlags": [
+    "Major bleeding / very low platelets need urgent treatment"
+  ],
+  "investigations": [
+    {
+      "test": "CBC + film (isolated thrombocytopenia)"
+    },
+    {
+      "test": "Exclude secondary causes"
+    }
+  ],
+  "treatmentRef": "itp",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

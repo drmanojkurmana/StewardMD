@@ -1,0 +1,104 @@
+{
+  "id": "C_DIFF",
+  "name": "Clostridioides difficile Infection",
+  "class": "infective",
+  "system": "Gastrointestinal",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "diarrhea",
+        "priorAntibiotics",
+        {
+          "not": "bloodyStool"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "priorAntibiotics",
+          "add": 15
+        },
+        {
+          "when": "hospitalDay48",
+          "add": 10
+        },
+        {
+          "when": "abdominalPain",
+          "add": 5
+        },
+        {
+          "when": {
+            "anyOf": [
+              "feverGU",
+              "fever"
+            ]
+          },
+          "add": 5
+        },
+        {
+          "when": "severeAbdominalPain",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "bloodyStool",
+      "diarrhea",
+      "fever",
+      "feverGU",
+      "hospitalDay48",
+      "priorAntibiotics",
+      "severeAbdominalPain"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Clostridioides difficile (toxigenic strains)"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "C. difficile is essentially the sole cause of antibiotic-associated colitis with this clinical pattern; testing (toxin EIA, PCR, or a two-step algorithm) confirms the diagnosis since asymptomatic colonization is common and should not be treated."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Stool C. difficile toxin EIA and/or PCR (per local two-step algorithm)",
+      "why": "Confirms the diagnosis; testing only symptomatic patients (not all diarrhea, and never asymptomatic patients) avoids overdiagnosis of colonization."
+    },
+    {
+      "test": "Abdominal X-ray or CT (if severe/fulminant presentation suspected)",
+      "why": "Screens for toxic megacolon or ileus, which would change management to include surgical involvement."
+    },
+    {
+      "test": "CBC, renal function, albumin",
+      "why": "Supports severity classification (e.g., leukocytosis >15,000, rising creatinine define severe disease per IDSA criteria) which guides treatment intensity."
+    }
+  ],
+  "treatmentRef": "C_DIFF",
+  "policyRef": "C_DIFF",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

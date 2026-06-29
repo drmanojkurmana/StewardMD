@@ -1,0 +1,64 @@
+{
+  "id": "sah",
+  "name": "Subarachnoid hemorrhage",
+  "class": "non_infective",
+  "system": "Neurology / Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "thunderclapHeadache": 55,
+      "headache": 20,
+      "neckStiffness": 22,
+      "alteredSensorium": 18,
+      "seizure": 8,
+      "ageOver50": 6,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "alteredSensorium",
+      "fever",
+      "headache",
+      "neckStiffness",
+      "seizure",
+      "thunderclapHeadache"
+    ],
+    "reasoningTemplate": "Sudden worst-ever headache ± meningism and reduced consciousness is classic for subarachnoid hemorrhage."
+  },
+  "redFlags": [
+    "Thunderclap headache is SAH until proven otherwise — image immediately"
+  ],
+  "investigations": [
+    {
+      "test": "Non-contrast CT head (urgent)"
+    },
+    {
+      "test": "LP for xanthochromia if CT negative"
+    },
+    {
+      "test": "CT angiography"
+    }
+  ],
+  "treatmentRef": "sah",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

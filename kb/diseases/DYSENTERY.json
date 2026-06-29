@@ -1,0 +1,104 @@
+{
+  "id": "DYSENTERY",
+  "name": "Dysentery (Invasive Bacterial Diarrhea)",
+  "class": "infective",
+  "system": "Gastrointestinal",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "diarrhea",
+        {
+          "anyOf": [
+            "bloodyStool",
+            "tenesmus"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "bloodyStool",
+          "add": 25
+        },
+        {
+          "when": "highFeverGI",
+          "add": 10
+        },
+        {
+          "when": "tenesmus",
+          "add": 10
+        },
+        {
+          "when": "severeAbdominalPain",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "bloodyStool",
+      "diarrhea",
+      "highFeverGI",
+      "severeAbdominalPain",
+      "tenesmus"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Shigella species",
+      "Enteroinvasive/Enterohemorrhagic E. coli"
+    ],
+    "likely": [
+      "Campylobacter jejuni",
+      "Non-typhoidal Salmonella"
+    ],
+    "possible": [
+      "Entamoeba histolytica (if subacute, travel/endemic exposure)"
+    ],
+    "why": "The combination of fever, bloody stool, and tenesmus reflects mucosal invasion rather than toxin-mediated secretory diarrhea, pointing toward Shigella and other invasive enteric bacteria as the leading causes in this clinical pattern."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Stool culture",
+      "why": "Identifies the causative organism and susceptibility, the basis for de-escalation or confirmation of empiric choice."
+    },
+    {
+      "test": "Stool microscopy for ova and parasites",
+      "why": "Excludes or confirms Entamoeba histolytica, which requires different therapy (metronidazole)."
+    },
+    {
+      "test": "CBC",
+      "why": "Assesses degree of inflammatory response and any hemolysis (relevant if EHEC/HUS is suspected)."
+    },
+    {
+      "test": "Renal function tests",
+      "why": "Screens for hemolytic uremic syndrome, particularly important if Shiga-toxin-producing E. coli is suspected."
+    }
+  ],
+  "treatmentRef": "DYSENTERY",
+  "policyRef": "DYSENTERY",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

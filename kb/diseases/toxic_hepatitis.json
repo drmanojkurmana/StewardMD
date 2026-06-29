@@ -1,0 +1,62 @@
+{
+  "id": "toxic_hepatitis",
+  "name": "Drug-induced / toxic hepatitis",
+  "class": "non_infective",
+  "system": "Hepatology / Toxicology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "jaundice": 28,
+      "rightUpperQuadrantPain": 18,
+      "nauseaVomiting": 12,
+      "drugOverdose": 18,
+      "alteredSensorium": 8,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "drugOverdose",
+      "fever",
+      "jaundice",
+      "nauseaVomiting",
+      "rightUpperQuadrantPain"
+    ],
+    "reasoningTemplate": "Jaundice and transaminitis after a hepatotoxic drug/overdose, without sepsis, suggests toxic hepatitis."
+  },
+  "redFlags": [
+    "Acute liver failure (coagulopathy + encephalopathy) → transplant referral"
+  ],
+  "investigations": [
+    {
+      "test": "LFTs, INR (synthetic function)"
+    },
+    {
+      "test": "Paracetamol level"
+    },
+    {
+      "test": "Stop the offending agent"
+    }
+  ],
+  "treatmentRef": "toxic_hepatitis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

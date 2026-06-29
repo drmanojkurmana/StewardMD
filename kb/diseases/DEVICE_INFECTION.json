@@ -1,0 +1,113 @@
+{
+  "id": "DEVICE_INFECTION",
+  "name": "Device-Related Infection (CIED / Vascular Catheter)",
+  "class": "infective",
+  "system": "Cardiovascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        {
+          "anyOf": [
+            "centralLine",
+            "prostheticValve",
+            "cardiacImplantableDevice"
+          ]
+        },
+        {
+          "anyOf": [
+            "fever",
+            "purulentDrainage",
+            "erythemaAtSite"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "purulentDrainage",
+          "add": 15
+        },
+        {
+          "when": "erythemaAtSite",
+          "add": 10
+        },
+        {
+          "when": "fever",
+          "add": 10
+        },
+        {
+          "when": "persistentBacteremia",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "cardiacImplantableDevice",
+      "centralLine",
+      "erythemaAtSite",
+      "fever",
+      "persistentBacteremia",
+      "prostheticValve",
+      "purulentDrainage"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Coagulase-negative staphylococci",
+      "Staphylococcus aureus"
+    ],
+    "likely": [
+      "Enterococcus species",
+      "Candida species (especially with prolonged central line dwell time, TPN)"
+    ],
+    "possible": [
+      "Gram-negative bacilli (less common but seen, especially with femoral lines or GI source)"
+    ],
+    "why": "Device-related infections are dominated by skin-flora gram-positive organisms (coagulase-negative staphylococci, S. aureus) that colonize the device surface and form biofilm, with Candida becoming relevant in patients with prolonged central access and risk factors such as TPN or broad-spectrum antibiotic exposure."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Blood cultures (peripheral and through each catheter lumen if not removed)",
+      "why": "Differential time-to-positivity (catheter culture positive significantly earlier than peripheral) supports a catheter-related source."
+    },
+    {
+      "test": "Catheter tip culture (if removed)",
+      "why": "Confirms the device as the source when growth matches blood culture results."
+    },
+    {
+      "test": "Echocardiography (if S. aureus bacteremia, prosthetic valve, or persistent bacteremia)",
+      "why": "Screens for endocarditis, a serious complication of device-related bacteremia, particularly with S. aureus."
+    },
+    {
+      "test": "Repeat blood cultures after line removal/initiation of therapy",
+      "why": "Confirms clearance of bacteremia, especially important for S. aureus where persistent positivity changes management significantly."
+    }
+  ],
+  "treatmentRef": "DEVICE_INFECTION",
+  "policyRef": "DEVICE_INFECTION",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,55 @@
+{
+  "id": "pneumothorax",
+  "name": "Pneumothorax",
+  "class": "non_infective",
+  "system": "Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "pleuriticChestPain": 28,
+      "dyspnea": 26,
+      "hypoxia": 14,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "fever",
+      "hypoxia",
+      "pleuriticChestPain"
+    ],
+    "reasoningTemplate": "Sudden pleuritic pain with breathlessness and reduced breath sounds suggests pneumothorax."
+  },
+  "redFlags": [
+    "Tension pneumothorax → immediate needle decompression"
+  ],
+  "investigations": [
+    {
+      "test": "CXR (or POCUS)"
+    },
+    {
+      "test": "Decompress if tension"
+    }
+  ],
+  "treatmentRef": "pneumothorax",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

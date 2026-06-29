@@ -1,0 +1,59 @@
+{
+  "id": "panic",
+  "name": "Panic attack / anxiety",
+  "class": "non_infective",
+  "system": "Functional",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "palpitations": 28,
+      "chestPain": 16,
+      "dyspnea": 16,
+      "fever": -16,
+      "hypoxia": -12,
+      "ecgIschemia": -12
+    },
+    "associatedFindings": [
+      "chestPain",
+      "dyspnea",
+      "ecgIschemia",
+      "fever",
+      "hypoxia",
+      "palpitations"
+    ],
+    "reasoningTemplate": "Palpitations, chest tightness and breathlessness in a young patient with normal workup may be a panic attack — but exclude organic causes."
+  },
+  "redFlags": [
+    "Do not anchor on anxiety until cardiac/pulmonary emergencies excluded"
+  ],
+  "investigations": [
+    {
+      "test": "Diagnosis of exclusion — rule out ACS/PE first"
+    },
+    {
+      "test": "ECG normal"
+    }
+  ],
+  "treatmentRef": "panic",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

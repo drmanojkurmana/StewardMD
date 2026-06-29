@@ -1,0 +1,100 @@
+{
+  "id": "CYSTITIS",
+  "name": "Acute Uncomplicated Cystitis",
+  "class": "infective",
+  "system": "Genitourinary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        {
+          "anyOf": [
+            "dysuria",
+            "urinaryFrequency"
+          ]
+        },
+        {
+          "not": "flankPain"
+        },
+        {
+          "not": "feverGU"
+        },
+        {
+          "not": "complicatedUTIRisk"
+        }
+      ]
+    },
+    "score": {
+      "base": 75,
+      "modifiers": [
+        {
+          "when": "flankPain",
+          "add": -30
+        },
+        {
+          "when": "feverGU",
+          "add": -30
+        },
+        {
+          "when": "complicatedUTIRisk",
+          "add": -25
+        }
+      ]
+    },
+    "associatedFindings": [
+      "complicatedUTIRisk",
+      "dysuria",
+      "feverGU",
+      "flankPain",
+      "urinaryFrequency"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli"
+    ],
+    "likely": [
+      "Klebsiella pneumoniae",
+      "Staphylococcus saprophyticus"
+    ],
+    "possible": [
+      "Proteus mirabilis",
+      "Enterococcus species"
+    ],
+    "why": "E. coli accounts for the large majority of uncomplicated community-acquired cystitis. The other organisms listed account for most of the remainder, with S. saprophyticus particularly relevant in young sexually active women."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Urinalysis",
+      "why": "Confirms pyuria and supports the diagnosis before starting therapy."
+    },
+    {
+      "test": "Urine culture (only if treatment failure, recurrence, or atypical features)",
+      "why": "Not routinely needed in straightforward uncomplicated cystitis, but useful if symptoms persist or recur."
+    }
+  ],
+  "treatmentRef": "CYSTITIS",
+  "policyRef": "CYSTITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

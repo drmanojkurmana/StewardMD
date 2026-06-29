@@ -1,0 +1,58 @@
+{
+  "id": "myasthenic_crisis",
+  "name": "Myasthenic crisis",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 26,
+      "visualDisturbance": 18,
+      "ascendingWeakness": 16,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "ascendingWeakness",
+      "dyspnea",
+      "fever",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Fatigable weakness with diplopia and respiratory compromise suggests a myasthenic crisis."
+  },
+  "redFlags": [
+    "Bulbar/respiratory weakness — airway support; avoid precipitating drugs"
+  ],
+  "investigations": [
+    {
+      "test": "Serial FVC/NIF"
+    },
+    {
+      "test": "Anti-AChR / anti-MuSK"
+    },
+    {
+      "test": "Exclude infective trigger"
+    }
+  ],
+  "treatmentRef": "myasthenic_crisis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

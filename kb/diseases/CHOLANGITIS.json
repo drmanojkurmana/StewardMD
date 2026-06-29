@@ -1,0 +1,108 @@
+{
+  "id": "CHOLANGITIS",
+  "name": "Acute Cholangitis",
+  "class": "infective",
+  "system": "Hepatobiliary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "rightUpperQuadrantPain",
+        "feverGU",
+        "jaundice"
+      ]
+    },
+    "score": {
+      "base": 60,
+      "modifiers": [
+        {
+          "when": {
+            "allOf": [
+              "rightUpperQuadrantPain",
+              "feverGU",
+              "jaundice"
+            ]
+          },
+          "add": 20
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        },
+        {
+          "when": "alteredSensorium",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "feverGU",
+      "hypotension",
+      "jaundice",
+      "rightUpperQuadrantPain"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli",
+      "Klebsiella pneumoniae"
+    ],
+    "likely": [
+      "Enterococcus species",
+      "Enterobacter species"
+    ],
+    "possible": [
+      "Anaerobes (Bacteroides species) — particularly with prior biliary instrumentation or surgery"
+    ],
+    "why": "Cholangitis pathogens reflect ascending enteric flora from the duodenum into an obstructed biliary tree, dominated by gram-negative Enterobacteriaceae, with anaerobes and enterococci becoming more relevant with prior instrumentation (ERCP, stents) or recurrent disease."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Blood cultures",
+      "why": "Frequently positive in cholangitis and identifies organism/susceptibility for de-escalation."
+    },
+    {
+      "test": "Liver function tests",
+      "why": "Cholestatic pattern (elevated bilirubin, ALP, GGT) supports the diagnosis and tracks resolution after drainage."
+    },
+    {
+      "test": "Abdominal ultrasound",
+      "why": "First-line imaging to identify biliary dilation and the level of obstruction."
+    },
+    {
+      "test": "MRCP or CT abdomen (if ultrasound inconclusive)",
+      "why": "Better characterizes the cause and location of obstruction (stone, stricture, malignancy) to guide definitive drainage strategy."
+    },
+    {
+      "test": "Bile culture (at time of ERCP/drainage)",
+      "why": "Identifies the causative organism directly from the infected source for the most targeted de-escalation."
+    }
+  ],
+  "treatmentRef": "CHOLANGITIS",
+  "policyRef": "CHOLANGITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

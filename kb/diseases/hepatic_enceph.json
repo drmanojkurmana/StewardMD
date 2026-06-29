@@ -1,0 +1,59 @@
+{
+  "id": "hepatic_enceph",
+  "name": "Hepatic encephalopathy",
+  "class": "non_infective",
+  "system": "Hepatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 36,
+      "asterixis": 30,
+      "jaundice": 24,
+      "ascites": 18,
+      "fever": -6,
+      "neckStiffness": -10
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "ascites",
+      "asterixis",
+      "fever",
+      "jaundice",
+      "neckStiffness"
+    ],
+    "reasoningTemplate": "Encephalopathy with stigmata of chronic liver disease suggests hepatic encephalopathy — seek a precipitant."
+  },
+  "redFlags": [
+    "Look for precipitating infection (e.g. SBP)"
+  ],
+  "investigations": [
+    {
+      "test": "Ammonia, LFT, coagulation"
+    },
+    {
+      "test": "Identify precipitant (SBP, GI bleed)"
+    }
+  ],
+  "treatmentRef": "hepatic_enceph",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

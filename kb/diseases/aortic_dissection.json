@@ -1,0 +1,62 @@
+{
+  "id": "aortic_dissection",
+  "name": "Aortic dissection",
+  "class": "non_infective",
+  "system": "Vascular emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "chestPain": 30,
+      "backPain": 30,
+      "thunderclapHeadache": 6,
+      "hypertensionHx": 18,
+      "ageOver50": 8,
+      "syncope": 10
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "backPain",
+      "chestPain",
+      "hypertensionHx",
+      "syncope",
+      "thunderclapHeadache"
+    ],
+    "reasoningTemplate": "Severe tearing chest pain radiating to the back, especially with hypertension, raises aortic dissection."
+  },
+  "redFlags": [
+    "Tearing chest/back pain with pulse/BP differential — emergency imaging"
+  ],
+  "investigations": [
+    {
+      "test": "CT aortogram (urgent)"
+    },
+    {
+      "test": "BP in both arms"
+    },
+    {
+      "test": "Control HR & BP"
+    }
+  ],
+  "treatmentRef": "aortic_dissection",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

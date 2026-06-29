@@ -1,0 +1,62 @@
+{
+  "id": "tia",
+  "name": "Transient ischaemic attack",
+  "class": "non_infective",
+  "system": "Neurology / Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "focalNeuroDeficit": 38,
+      "ageOver50": 12,
+      "hypertensionHx": 10,
+      "atrialFibHx": 10,
+      "fever": -16,
+      "neckStiffness": -12
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "atrialFibHx",
+      "fever",
+      "focalNeuroDeficit",
+      "hypertensionHx",
+      "neckStiffness"
+    ],
+    "reasoningTemplate": "Transient focal neurological deficit that fully resolves suggests a TIA — high short-term stroke risk."
+  },
+  "redFlags": [
+    "High early stroke risk — urgent TIA clinic / admission"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent CT/MRI + carotid imaging"
+    },
+    {
+      "test": "ECG (AF)"
+    },
+    {
+      "test": "ABCD² risk; start antiplatelet/statin"
+    }
+  ],
+  "treatmentRef": "tia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,62 @@
+{
+  "id": "acute_leukemia",
+  "name": "Acute leukaemia",
+  "class": "non_infective",
+  "system": "Hematology / Oncology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "mucocutaneousBleeding": 20,
+      "lymphadenopathy": 16,
+      "weightLoss": 14,
+      "fever": 12,
+      "hepatosplenomegaly": 14,
+      "nightSweats": 10
+    },
+    "associatedFindings": [
+      "fever",
+      "hepatosplenomegaly",
+      "lymphadenopathy",
+      "mucocutaneousBleeding",
+      "nightSweats",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Cytopenias with bleeding, infections and blasts on film suggest acute leukaemia."
+  },
+  "redFlags": [
+    "Febrile neutropenia / leukostasis are emergencies"
+  ],
+  "investigations": [
+    {
+      "test": "CBC + peripheral smear (blasts)"
+    },
+    {
+      "test": "Bone marrow"
+    },
+    {
+      "test": "Coagulation (APML risk)"
+    }
+  ],
+  "treatmentRef": "acute_leukemia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

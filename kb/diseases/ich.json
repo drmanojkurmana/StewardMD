@@ -1,0 +1,64 @@
+{
+  "id": "ich",
+  "name": "Intracerebral hemorrhage",
+  "class": "non_infective",
+  "system": "Neurology / Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "focalNeuroDeficit": 36,
+      "headache": 24,
+      "alteredSensorium": 24,
+      "hypertensionHx": 16,
+      "anticoagulated": 16,
+      "ageOver50": 6,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "alteredSensorium",
+      "anticoagulated",
+      "fever",
+      "focalNeuroDeficit",
+      "headache",
+      "hypertensionHx"
+    ],
+    "reasoningTemplate": "Headache with focal deficit and reduced consciousness, especially with hypertension or anticoagulation, suggests intracerebral haemorrhage."
+  },
+  "redFlags": [
+    "Reverse anticoagulation; neurosurgical review"
+  ],
+  "investigations": [
+    {
+      "test": "Non-contrast CT head (urgent)"
+    },
+    {
+      "test": "Coagulation profile"
+    },
+    {
+      "test": "BP control"
+    }
+  ],
+  "treatmentRef": "ich",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

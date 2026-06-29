@@ -1,0 +1,92 @@
+{
+  "id": "CHIKUNGUNYA",
+  "name": "Chikungunya",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "severeArthralgia",
+        {
+          "not": "neckStiffness"
+        },
+        {
+          "not": "jaundice"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "severeArthralgia",
+          "add": 20
+        },
+        {
+          "when": "rash",
+          "add": 10
+        },
+        {
+          "when": "symmetricSmallJointInvolvement",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "fever",
+      "jaundice",
+      "neckStiffness",
+      "rash",
+      "severeArthralgia",
+      "symmetricSmallJointInvolvement"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Chikungunya virus"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "Severe, often disabling, symmetric small-joint arthralgia accompanying fever in an Aedes-endemic area and season is the clinical hallmark of chikungunya, distinguishing it from dengue (which favors myalgia/retro-orbital pain over severe arthralgia) and from bacterial causes of joint symptoms (which are typically asymmetric/monoarticular)."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Chikungunya IgM serology / RT-PCR (early illness)",
+      "why": "Confirms the diagnosis; RT-PCR is most sensitive in the first few days, IgM becomes detectable slightly later."
+    },
+    {
+      "test": "Dengue NS1/serology (concurrent testing)",
+      "why": "Co-circulation with dengue is common and clinical distinction is imperfect — concurrent testing avoids missing dengue, which has different monitoring needs."
+    },
+    {
+      "test": "CBC",
+      "why": "Typically shows lymphopenia rather than the thrombocytopenia more characteristic of dengue, supporting clinical distinction."
+    }
+  ],
+  "treatmentRef": "CHIKUNGUNYA",
+  "policyRef": "CHIKUNGUNYA",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

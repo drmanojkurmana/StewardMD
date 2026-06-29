@@ -1,0 +1,57 @@
+{
+  "id": "hypercalcemia",
+  "name": "Hypercalcaemia of malignancy",
+  "class": "non_infective",
+  "system": "Oncology / Metabolic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 18,
+      "polyuriaPolydipsia": 18,
+      "nauseaVomiting": 12,
+      "malignancy": 24,
+      "constipationOrDiarrhea": 8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "constipationOrDiarrhea",
+      "malignancy",
+      "nauseaVomiting",
+      "polyuriaPolydipsia"
+    ],
+    "reasoningTemplate": "'Stones, bones, groans, moans' with known malignancy suggests hypercalcaemia."
+  },
+  "redFlags": [
+    "Severe hypercalcaemia — IV fluids + bisphosphonate"
+  ],
+  "investigations": [
+    {
+      "test": "Corrected calcium, PTH/PTHrP"
+    },
+    {
+      "test": "Renal function"
+    }
+  ],
+  "treatmentRef": "hypercalcemia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,107 @@
+{
+  "id": "HAP",
+  "name": "Hospital Acquired Pneumonia",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "cough",
+        "fever",
+        "hospitalDay48",
+        {
+          "not": "mechanicalVentilation"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "hospitalDay48",
+          "add": 20
+        },
+        {
+          "when": "priorAntibiotics",
+          "add": 10
+        },
+        {
+          "when": "mdrRisk",
+          "add": 10
+        },
+        {
+          "when": "hypoxia",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "cough",
+      "fever",
+      "hospitalDay48",
+      "hypoxia",
+      "mdrRisk",
+      "mechanicalVentilation",
+      "priorAntibiotics"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Pseudomonas aeruginosa",
+      "Klebsiella pneumoniae",
+      "Escherichia coli"
+    ],
+    "likely": [
+      "Staphylococcus aureus (including MRSA)",
+      "Acinetobacter baumannii"
+    ],
+    "possible": [
+      "Enterobacter species",
+      "Other MDR gram-negatives based on local ICU flora"
+    ],
+    "why": "HAP arising after 48 hours of hospitalization reflects a shift toward hospital flora, which is enriched for gram-negative organisms with higher resistance rates, particularly in patients with prior antibiotic exposure or ICU stay."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Sputum/endotracheal aspirate culture",
+      "why": "Essential to identify the causative organism and de-escalate from broad empiric therapy."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "Identifies bacteremic spread and an organism for targeted therapy."
+    },
+    {
+      "test": "Chest X-ray",
+      "why": "Confirms new infiltrate consistent with pneumonia."
+    },
+    {
+      "test": "Procalcitonin (serial)",
+      "why": "Supports decisions about duration and early discontinuation if levels fall rapidly with clinical improvement."
+    }
+  ],
+  "treatmentRef": "HAP",
+  "policyRef": "HAP",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

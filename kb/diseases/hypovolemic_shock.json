@@ -1,0 +1,60 @@
+{
+  "id": "hypovolemic_shock",
+  "name": "Hypovolemic / haemorrhagic shock",
+  "class": "non_infective",
+  "system": "Critical care",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hypotension": 38,
+      "tachycardia": 22,
+      "melena": 18,
+      "anticoagulated": 8,
+      "fever": -12
+    },
+    "associatedFindings": [
+      "anticoagulated",
+      "fever",
+      "hypotension",
+      "melena",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Hypotension with tachycardia and evidence of fluid/blood loss suggests hypovolaemic shock."
+  },
+  "redFlags": [
+    "GI bleed / occult haemorrhage"
+  ],
+  "investigations": [
+    {
+      "test": "Identify bleeding source"
+    },
+    {
+      "test": "Crossmatch"
+    },
+    {
+      "test": "Resuscitate"
+    }
+  ],
+  "treatmentRef": "hypovolemic_shock",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

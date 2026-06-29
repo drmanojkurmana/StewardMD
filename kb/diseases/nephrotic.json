@@ -1,0 +1,58 @@
+{
+  "id": "nephrotic",
+  "name": "Nephrotic syndrome",
+  "class": "non_infective",
+  "system": "Nephrology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "legSwellingBilateral": 28,
+      "facialSwelling": 22,
+      "proteinuria": 30,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "facialSwelling",
+      "fever",
+      "legSwellingBilateral",
+      "proteinuria"
+    ],
+    "reasoningTemplate": "Heavy proteinuria with oedema and hypoalbuminaemia defines the nephrotic syndrome."
+  },
+  "redFlags": [
+    "Thrombosis & infection risk; consider underlying cause"
+  ],
+  "investigations": [
+    {
+      "test": "Urine protein:creatinine (heavy)"
+    },
+    {
+      "test": "Serum albumin, lipids"
+    },
+    {
+      "test": "Renal biopsy if indicated"
+    }
+  ],
+  "treatmentRef": "nephrotic",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

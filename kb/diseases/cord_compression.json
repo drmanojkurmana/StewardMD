@@ -1,0 +1,55 @@
+{
+  "id": "cord_compression",
+  "name": "Spinal cord compression",
+  "class": "non_infective",
+  "system": "Neurology / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "backPain": 28,
+      "focalNeuroDeficit": 26,
+      "urinaryRetention": 18,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "backPain",
+      "fever",
+      "focalNeuroDeficit",
+      "urinaryRetention"
+    ],
+    "reasoningTemplate": "Back pain with limb weakness and bladder dysfunction is cord compression until proven otherwise — image urgently."
+  },
+  "redFlags": [
+    "Time-critical for neurological recovery; high-dose steroids if malignant"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent whole-spine MRI"
+    },
+    {
+      "test": "Neurosurgical / oncology review"
+    }
+  ],
+  "treatmentRef": "cord_compression",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

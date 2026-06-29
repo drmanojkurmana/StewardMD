@@ -1,0 +1,118 @@
+{
+  "id": "DENGUE",
+  "name": "Dengue Fever",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        {
+          "anyOf": [
+            "retroorbitalPain",
+            "myalgiaArthralgia",
+            "rash"
+          ]
+        },
+        "thrombocytopenia",
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "retroorbitalPain",
+          "add": 15
+        },
+        {
+          "when": "myalgiaArthralgia",
+          "add": 10
+        },
+        {
+          "when": "rash",
+          "add": 10
+        },
+        {
+          "when": "thrombocytopenia",
+          "add": 15
+        },
+        {
+          "when": "bleedingManifestation",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": -5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "bleedingManifestation",
+      "fever",
+      "hypotension",
+      "myalgiaArthralgia",
+      "neckStiffness",
+      "rash",
+      "retroorbitalPain",
+      "thrombocytopenia"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Dengue virus (DENV-1 to DENV-4)"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "The combination of fever, retro-orbital pain, myalgia/arthralgia, rash, and thrombocytopenia in an Aedes-endemic area (essentially all of urban and semi-urban India in season) is classic for dengue; serology/antigen testing confirms the diagnosis."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "NS1 antigen (early, days 1-5 of fever)",
+      "why": "Detects dengue viral antigen early in illness before antibody response develops."
+    },
+    {
+      "test": "Dengue IgM/IgG serology (later in illness)",
+      "why": "Confirms diagnosis when NS1 is negative or testing occurs later in the course; IgG pattern can also suggest primary vs. secondary infection."
+    },
+    {
+      "test": "CBC with platelet count (serial)",
+      "why": "Tracks thrombocytopenia and hematocrit trends, central to monitoring for plasma leakage and bleeding risk."
+    },
+    {
+      "test": "Hematocrit (serial)",
+      "why": "A rising hematocrit with falling platelets signals plasma leakage and impending severe dengue — the single most important trend to follow."
+    },
+    {
+      "test": "Liver function tests",
+      "why": "Transaminitis is common in dengue and severe elevation can indicate more severe disease."
+    }
+  ],
+  "treatmentRef": "DENGUE",
+  "policyRef": "DENGUE",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

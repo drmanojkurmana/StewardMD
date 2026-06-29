@@ -1,0 +1,116 @@
+{
+  "id": "PROSTATITIS",
+  "name": "Acute Bacterial Prostatitis",
+  "class": "infective",
+  "system": "Genitourinary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "male",
+        {
+          "anyOf": [
+            "dysuria",
+            "urinaryFrequency"
+          ]
+        },
+        {
+          "anyOf": [
+            "perinealPain",
+            "feverGU"
+          ]
+        },
+        {
+          "not": "flankPain"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "perinealPain",
+          "add": 15
+        },
+        {
+          "when": "feverGU",
+          "add": 10
+        },
+        {
+          "when": "urinaryRetention",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "dysuria",
+      "feverGU",
+      "flankPain",
+      "hypotension",
+      "male",
+      "perinealPain",
+      "urinaryFrequency",
+      "urinaryRetention"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli"
+    ],
+    "likely": [
+      "Klebsiella pneumoniae",
+      "Proteus mirabilis",
+      "Enterococcus species"
+    ],
+    "possible": [
+      "Neisseria gonorrhoeae or Chlamydia trachomatis (younger sexually active men — different management)"
+    ],
+    "why": "Acute bacterial prostatitis in older men typically reflects the same uropathogens as other UTIs, ascending into the prostate; in younger sexually active men, sexually transmitted pathogens should specifically be considered as they require different antibiotic coverage and partner management."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Urinalysis and urine culture",
+      "why": "Identifies the causative organism; this is preferred over prostatic secretion sampling in the acute setting given bacteremia risk with prostatic massage."
+    },
+    {
+      "test": "Blood cultures (if febrile/systemically unwell)",
+      "why": "Bacteremia is not uncommon in acute prostatitis and positive cultures help confirm the organism."
+    },
+    {
+      "test": "Post-void residual / bladder scan (if retention suspected)",
+      "why": "Urinary retention is a recognized complication requiring catheterization (suprapubic preferred over urethral if prostatitis is causing obstruction)."
+    },
+    {
+      "test": "STI testing (NAAT for gonorrhea/chlamydia) if risk factors present",
+      "why": "Identifies sexually transmitted causes requiring different management and partner notification."
+    }
+  ],
+  "treatmentRef": "PROSTATITIS",
+  "policyRef": "PROSTATITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

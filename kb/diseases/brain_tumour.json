@@ -1,0 +1,63 @@
+{
+  "id": "brain_tumour",
+  "name": "Brain tumour / mass lesion",
+  "class": "non_infective",
+  "system": "Neuro-oncology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 30,
+      "focalNeuroDeficit": 22,
+      "seizure": 18,
+      "visualDisturbance": 12,
+      "papilledema": 20,
+      "weightLoss": 8,
+      "alteredSensorium": 8,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "focalNeuroDeficit",
+      "headache",
+      "papilledema",
+      "seizure",
+      "visualDisturbance",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Progressive headache with focal signs or new seizures raises concern for an intracranial mass."
+  },
+  "redFlags": [
+    "Progressive headache, morning vomiting, papilloedema"
+  ],
+  "investigations": [
+    {
+      "test": "MRI brain with contrast"
+    },
+    {
+      "test": "Refer neuro-oncology"
+    }
+  ],
+  "treatmentRef": "brain_tumour",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,60 @@
+{
+  "id": "atrial_fib",
+  "name": "Atrial fibrillation / arrhythmia",
+  "class": "non_infective",
+  "system": "Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "palpitations": 38,
+      "dyspnea": 14,
+      "syncope": 12,
+      "chestPain": 8,
+      "knownHeartFailure": 8
+    },
+    "associatedFindings": [
+      "chestPain",
+      "dyspnea",
+      "knownHeartFailure",
+      "palpitations",
+      "syncope"
+    ],
+    "reasoningTemplate": "Palpitations ± breathlessness suggest a tachyarrhythmia; an ECG is the key test."
+  },
+  "redFlags": [
+    "Rate/rhythm control; anticoagulation per CHA₂DS₂-VASc"
+  ],
+  "investigations": [
+    {
+      "test": "12-lead ECG"
+    },
+    {
+      "test": "Electrolytes, TSH"
+    },
+    {
+      "test": "Echocardiogram"
+    }
+  ],
+  "treatmentRef": "atrial_fib",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

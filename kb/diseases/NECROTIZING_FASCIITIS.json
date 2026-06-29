@@ -1,0 +1,119 @@
+{
+  "id": "NECROTIZING_FASCIITIS",
+  "name": "Necrotizing Fasciitis",
+  "class": "infective",
+  "system": "Skin & Soft Tissue",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "skinErythema",
+        {
+          "anyOf": [
+            "crepitusOrBullae",
+            "severePain"
+          ]
+        },
+        {
+          "anyOf": [
+            "rapidlySpreadingErythema",
+            "hypotension",
+            "toxicAppearing"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 70,
+      "modifiers": [
+        {
+          "when": "crepitusOrBullae",
+          "add": 15
+        },
+        {
+          "when": "severePain",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": 10
+        },
+        {
+          "when": "rapidlySpreadingErythema",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "crepitusOrBullae",
+      "hypotension",
+      "rapidlySpreadingErythema",
+      "severePain",
+      "skinErythema",
+      "toxicAppearing"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pyogenes (Group A Streptococcus) — monomicrobial type II",
+      "Polymicrobial flora including anaerobes and Enterobacteriaceae — type I (more common, often in diabetics/immunocompromised)"
+    ],
+    "likely": [
+      "Staphylococcus aureus (including community-associated MRSA)",
+      "Clostridium species (if gas gangrene/myonecrosis)"
+    ],
+    "possible": [
+      "Vibrio vulnificus (if marine/brackish water exposure)",
+      "Aeromonas species (if freshwater exposure)"
+    ],
+    "why": "Necrotizing fasciitis is classified as type I (polymicrobial, typically in diabetics or after abdominal surgery) or type II (monomicrobial, classically Group A Streptococcus, can occur in healthy individuals). Empiric coverage must be broad enough to address both patterns until surgical/microbiological findings narrow the picture."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent surgical exploration (diagnostic AND therapeutic)",
+      "why": "The definitive diagnostic test — direct visualization of necrotic fascia confirms the diagnosis and simultaneously allows debridement; imaging should not delay surgery when clinical suspicion is high."
+    },
+    {
+      "test": "Blood cultures and intraoperative tissue/fluid cultures",
+      "why": "Identifies the causative organism(s) to guide de-escalation."
+    },
+    {
+      "test": "CT or MRI (only if diagnosis uncertain and patient stable enough to tolerate delay)",
+      "why": "May show fascial thickening/gas, but should never delay surgery in a patient with high clinical suspicion."
+    },
+    {
+      "test": "CPK",
+      "why": "Markedly elevated levels suggest muscle involvement (myonecrosis), affecting the extent of surgical debridement needed."
+    },
+    {
+      "test": "LRINEC score (Laboratory Risk Indicator for Necrotizing Fasciitis)",
+      "why": "Can support clinical suspicion using CRP, WBC, hemoglobin, sodium, creatinine, and glucose, though it should not override strong clinical suspicion if score is low."
+    }
+  ],
+  "treatmentRef": "NECROTIZING_FASCIITIS",
+  "policyRef": "NECROTIZING_FASCIITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

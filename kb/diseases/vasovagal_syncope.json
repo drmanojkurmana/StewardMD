@@ -1,0 +1,55 @@
+{
+  "id": "vasovagal_syncope",
+  "name": "Vasovagal / orthostatic syncope",
+  "class": "non_infective",
+  "system": "Neurology / Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "syncope": 36,
+      "palpitations": -6,
+      "exertionalChestPain": -10,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "exertionalChestPain",
+      "fever",
+      "palpitations",
+      "syncope"
+    ],
+    "reasoningTemplate": "Situational syncope with prodrome and rapid recovery, without cardiac features, suggests a vasovagal cause."
+  },
+  "redFlags": [
+    "Exertional or cardiac syncope needs cardiac workup"
+  ],
+  "investigations": [
+    {
+      "test": "Lying/standing BP"
+    },
+    {
+      "test": "ECG (exclude arrhythmia)"
+    }
+  ],
+  "treatmentRef": "vasovagal_syncope",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

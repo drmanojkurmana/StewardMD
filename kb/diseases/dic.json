@@ -1,0 +1,58 @@
+{
+  "id": "dic",
+  "name": "Disseminated intravascular coagulation",
+  "class": "non_infective",
+  "system": "Hematology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "mucocutaneousBleeding": 32,
+      "thrombocytopenia": 24,
+      "hypotension": 12,
+      "fever": 6
+    },
+    "associatedFindings": [
+      "fever",
+      "hypotension",
+      "mucocutaneousBleeding",
+      "thrombocytopenia"
+    ],
+    "reasoningTemplate": "Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC — find and treat the trigger."
+  },
+  "redFlags": [
+    "Often secondary to sepsis/malignancy — treat the cause"
+  ],
+  "investigations": [
+    {
+      "test": "PT/APTT, fibrinogen, D-dimer"
+    },
+    {
+      "test": "Blood film"
+    },
+    {
+      "test": "Treat the underlying trigger"
+    }
+  ],
+  "treatmentRef": "dic",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

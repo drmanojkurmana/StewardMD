@@ -1,0 +1,100 @@
+{
+  "id": "ACUTE_BRONCHITIS",
+  "name": "Acute Bronchitis",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "cough",
+        {
+          "not": "fever"
+        },
+        {
+          "not": "crepitations"
+        },
+        {
+          "not": "consolidation"
+        },
+        {
+          "not": "severeCriteria"
+        }
+      ]
+    },
+    "score": {
+      "base": 70,
+      "modifiers": [
+        {
+          "when": "fever",
+          "add": -25
+        },
+        {
+          "when": "crepitations",
+          "add": -30
+        },
+        {
+          "when": "wheeze",
+          "add": 5
+        },
+        {
+          "when": "purulentSputum",
+          "add": -5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "consolidation",
+      "cough",
+      "crepitations",
+      "fever",
+      "purulentSputum",
+      "severeCriteria",
+      "wheeze"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Respiratory viruses (rhinovirus, influenza, RSV, coronavirus)"
+    ],
+    "likely": [
+      "Bordetella pertussis (if prolonged cough >2 weeks, paroxysmal, or known exposure)"
+    ],
+    "possible": [],
+    "why": "The overwhelming majority of acute bronchitis cases in immunocompetent adults are viral, regardless of sputum purulence (purulent sputum does not reliably predict bacterial etiology). Pertussis should be considered specifically with prolonged paroxysmal cough or known exposure, not treated empirically by default."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None routinely required",
+      "why": "Diagnosis is clinical; investigations are reserved for atypical course, prolonged symptoms, or red-flag features suggesting pneumonia."
+    },
+    {
+      "test": "Chest X-ray (only if pneumonia cannot be excluded clinically)",
+      "why": "To rule out consolidation if exam findings are equivocal or symptoms persist beyond expected course."
+    }
+  ],
+  "treatmentRef": "ACUTE_BRONCHITIS",
+  "policyRef": "ACUTE_BRONCHITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

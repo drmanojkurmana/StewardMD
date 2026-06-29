@@ -1,0 +1,58 @@
+{
+  "id": "rhabdo",
+  "name": "Rhabdomyolysis",
+  "class": "non_infective",
+  "system": "Nephrology / Metabolic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "myalgiaArthralgia": 24,
+      "darkUrine": 30,
+      "oliguria": 14,
+      "alteredSensorium": 6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "darkUrine",
+      "myalgiaArthralgia",
+      "oliguria"
+    ],
+    "reasoningTemplate": "Muscle pain with tea-coloured urine and very high CK indicates rhabdomyolysis with AKI risk."
+  },
+  "redFlags": [
+    "Aggressive fluids; watch hyperkalaemia and AKI"
+  ],
+  "investigations": [
+    {
+      "test": "Creatine kinase (markedly raised)"
+    },
+    {
+      "test": "Renal function, K⁺"
+    },
+    {
+      "test": "Urine myoglobin"
+    }
+  ],
+  "treatmentRef": "rhabdo",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

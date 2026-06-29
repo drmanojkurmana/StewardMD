@@ -1,0 +1,121 @@
+{
+  "id": "BRAIN_ABSCESS",
+  "name": "Brain Abscess",
+  "class": "infective",
+  "system": "Central Nervous System",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "headacheSevere",
+        {
+          "anyOf": [
+            "focalNeuroDeficit",
+            "seizure"
+          ]
+        },
+        {
+          "anyOf": [
+            "fever",
+            "prolongedFever"
+          ]
+        },
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "focalNeuroDeficit",
+          "add": 15
+        },
+        {
+          "when": "seizure",
+          "add": 10
+        },
+        {
+          "when": "fever",
+          "add": 10
+        },
+        {
+          "when": "alteredSensorium",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "focalNeuroDeficit",
+      "headacheSevere",
+      "neckStiffness",
+      "prolongedFever",
+      "seizure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus species (including anaerobic/microaerophilic strains)",
+      "Anaerobes (Bacteroides, Prevotella, Fusobacterium)"
+    ],
+    "likely": [
+      "Staphylococcus aureus (especially post-neurosurgery or hematogenous spread)",
+      "Enterobacteriaceae (especially with otogenic or sinus source)"
+    ],
+    "possible": [
+      "Nocardia, Toxoplasma, or fungal causes in immunocompromised patients (broader workup needed)"
+    ],
+    "why": "Brain abscess pathogens reflect the presumed source: contiguous spread from sinusitis/otitis/dental infection brings streptococci and anaerobes, hematogenous spread (e.g., from endocarditis) brings S. aureus, and post-neurosurgical abscesses carry a different staphylococcal/gram-negative profile. Immunocompromised hosts require broader consideration including Toxoplasma and fungal causes."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Contrast-enhanced CT or MRI brain",
+      "why": "Confirms the diagnosis, localizes the abscess, and is essential for surgical planning; MRI is more sensitive, particularly for early/cerebritis-stage lesions."
+    },
+    {
+      "test": "Stereotactic aspiration or surgical drainage with culture",
+      "why": "Provides definitive microbiological diagnosis and is often therapeutic, particularly for abscesses >2.5cm."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "May identify the organism in hematogenous spread, supporting de-escalation."
+    },
+    {
+      "test": "Echocardiography (if hematogenous spread suspected)",
+      "why": "Screens for infective endocarditis as the source, which would change the overall management plan significantly."
+    },
+    {
+      "test": "HIV testing (if risk factors or atypical presentation)",
+      "why": "Relevant given the broader differential (e.g., toxoplasmosis) in immunocompromised hosts."
+    }
+  ],
+  "treatmentRef": "BRAIN_ABSCESS",
+  "policyRef": "BRAIN_ABSCESS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

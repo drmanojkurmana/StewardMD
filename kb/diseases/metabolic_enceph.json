@@ -1,0 +1,60 @@
+{
+  "id": "metabolic_enceph",
+  "name": "Metabolic encephalopathy",
+  "class": "non_infective",
+  "system": "Neuro / Metabolic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 44,
+      "asterixis": 18,
+      "jaundice": 10,
+      "fever": -14,
+      "neckStiffness": -16
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "asterixis",
+      "fever",
+      "jaundice",
+      "neckStiffness"
+    ],
+    "reasoningTemplate": "Diffuse encephalopathy without meningism, driven by a metabolic derangement."
+  },
+  "redFlags": [
+    "Reversible — correct the derangement"
+  ],
+  "investigations": [
+    {
+      "test": "Electrolytes, glucose, calcium"
+    },
+    {
+      "test": "Renal & liver panel, ammonia"
+    },
+    {
+      "test": "ABG"
+    }
+  ],
+  "treatmentRef": "metabolic_enceph",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

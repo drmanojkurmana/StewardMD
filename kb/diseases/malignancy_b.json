@@ -1,0 +1,60 @@
+{
+  "id": "malignancy_b",
+  "name": "Malignancy (B-symptoms)",
+  "class": "non_infective",
+  "system": "Oncology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "weightLoss": 34,
+      "prolongedFever": 16,
+      "lymphadenopathy": 20,
+      "nightSweats": 18,
+      "hepatosplenomegaly": 12
+    },
+    "associatedFindings": [
+      "hepatosplenomegaly",
+      "lymphadenopathy",
+      "nightSweats",
+      "prolongedFever",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Weight loss, night sweats and lymphadenopathy raise concern for lymphoma or other malignancy."
+  },
+  "redFlags": [
+    "Persistent unexplained B-symptoms warrant urgent workup"
+  ],
+  "investigations": [
+    {
+      "test": "Imaging directed to site"
+    },
+    {
+      "test": "Biopsy/histology"
+    },
+    {
+      "test": "LDH, blood film"
+    }
+  ],
+  "treatmentRef": "malignancy_b",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}
