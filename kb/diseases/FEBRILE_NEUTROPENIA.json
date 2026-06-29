@@ -116,5 +116,59 @@
   "reason": [
     "lit",
     "Fever (single temperature ≥38.3°C or ≥38.0°C sustained for 1 hour) in a patient with neutropenia (ANC <500/µL or expected to fall below 500) is a medical emergency by definition. Empiric broad-spectrum antipseudomonal antibiotics must be administered within 1 hour of presentation without waiting for culture results, since this population can progress rapidly to severe sepsis with minimal localizing signs."
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e p.499-500 (Disorders of Granulocytes and Monocytes), p.617-618 (Principles of Cancer Treatment / myelosuppression), p.186 (ecthyma gangrenosum), p.154 (acute abdominal pain / typhlitis)",
+      "clinicalPearls": [
+        "Susceptibility to infection rises sharply once the neutrophil count drops below 1000/uL, and worsens markedly at lower thresholds (Harrison 22e p.499).",
+        "When the absolute neutrophil count falls below 500/uL, the host's ability to contain its own endogenous flora from sites such as the mouth and gut becomes impaired (Harrison 22e p.499).",
+        "Acute neutropenia from cancer chemotherapy carries a substantially higher infection risk than chronic neutropenia of months-to-years duration, which is often better tolerated (Harrison 22e p.499).",
+        "After conventional chemotherapy doses, the neutrophil nadir typically occurs about 6-14 days later, defining the window of highest infection risk (Harrison 22e p.617).",
+        "Certain agents (nitrosoureas, dacarbazine, temozolomide, procarbazine) can cause delayed marrow toxicity that may not appear until roughly 6 weeks after dosing (Harrison 22e p.617).",
+        "Ecthyma gangrenosum is a characteristic skin lesion of Pseudomonas bacteremia that occurs predominantly in neutropenic patients and is reported in up to roughly a quarter of Pseudomonas bacteremia cases (Harrison 22e p.186).",
+        "Even highly experienced clinicians may have no advantage over a junior physician in managing the neutropenic patient with fever and hypotension, underscoring the need for protocolized rapid response rather than reliance on intuition (Harrison 22e)."
+      ],
+      "pathophysiology": "Most cytotoxic chemotherapeutic agents suppress bone marrow function, and polymorphonuclear neutrophils, with their very short circulating half-life of roughly 6-8 hours, are the cell line most rapidly and severely depleted. As the neutrophil count falls, the host loses the first-line cellular defense that normally contains commensal flora at mucosal surfaces; below an ANC of 500/uL control of endogenous mouth and gut organisms is impaired, and below 200/uL the local inflammatory response is essentially absent, so signs of infection are blunted. The combination of profound neutropenia and chemotherapy-induced mucosal barrier injury allows translocation and rapid dissemination of bacteria from the patient's own gut and oral flora. Neutropenia is most commonly iatrogenic, arising from cytotoxic or immunosuppressive therapy. (Harrison 22e p.499-500, p.617)",
+      "additionalDifferentials": [],
+      "infectionMimics": [
+        "Neutropenic enterocolitis (typhlitis) presenting as abdominal pain and fever in chemotherapy-induced marrow suppression (Harrison 22e p.154)"
+      ],
+      "nonInfectiousMimics": [
+        "Acute graft-versus-host disease, which should be considered when a marrow-suppressed/transplant patient develops abdominal pain and fever (Harrison 22e p.154)",
+        "Drug fever and chemotherapy-related fever in the absence of demonstrable infection"
+      ],
+      "additionalInvestigations": [
+        "Serial absolute neutrophil count (band forms plus mature neutrophils) to track depth and duration of neutropenia (Harrison 22e p.499)",
+        "Skin examination for ecthyma gangrenosum suggesting Pseudomonas bacteremia (Harrison 22e p.186)",
+        "Cross-sectional abdominal imaging when neutropenic enterocolitis/typhlitis is suspected, with serial clinical examination for perforation (Harrison 22e p.154)"
+      ],
+      "redFlags": [
+        "Hypotension or hemodynamic instability accompanying fever and neutropenia (Harrison 22e)",
+        "Ecthyma gangrenosum skin lesions, signaling probable Pseudomonas bacteremia (Harrison 22e p.186)",
+        "Abdominal pain and fever suggesting neutropenic enterocolitis (typhlitis) with risk of bowel perforation (Harrison 22e p.154)"
+      ],
+      "prognosis": "Risk of serious infection is driven by both the depth and the expected duration of neutropenia; acute chemotherapy-induced neutropenia is more dangerous than chronic neutropenia, and the deepest risk corresponds to the post-chemotherapy nadir at roughly 6-14 days. Pseudomonas bacteremia in this setting is associated with rapidly progressive illness and characteristic ecthyma gangrenosum. (Harrison 22e p.499, p.617, p.186)",
+      "pitfalls": [
+        "Classic signs of infection and inflammation are blunted or absent in profound neutropenia (local inflammatory response is essentially lost below ANC 200/uL), so the usual physical findings of focal infection may be missing despite serious infection (Harrison 22e p.499).",
+        "The infecting organisms are frequently the patient's own endogenous mouth and gut flora rather than exogenous pathogens, so absence of an obvious external source does not exclude bacteremia (Harrison 22e p.499).",
+        "A single normal neutrophil count is insufficient; a falling count or failure to mount a neutrophil response to challenge is what defines risk and warrants attention (Harrison 22e p.499)."
+      ],
+      "severityClassification": "Febrile neutropenia is defined by fever together with neutropenia (granulocytes below ~1500/uL, with clinically significant risk concentrated at ANC <500/uL and severe impairment of host defense at ANC <200/uL) (Harrison 22e p.499, p.617). Risk stratification for management intensity is performed with validated tools such as the MASCC risk index, which separates low-risk from high-risk febrile neutropenia (referenced in existing curated investigations; specific scoring not detailed in this Harrison excerpt).",
+      "references": [
+        "Harrison 22e p.499",
+        "Harrison 22e p.500",
+        "Harrison 22e p.617",
+        "Harrison 22e p.618",
+        "Harrison 22e p.186",
+        "Harrison 22e p.154"
+      ],
+      "crossLinks": [],
+      "conflicts": [],
+      "importedAt": "2026-06-29T13:50:09Z",
+      "contentHash": "hae47cf7e"
+    }
+  }
 }
