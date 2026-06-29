@@ -25,16 +25,19 @@ const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
 const DZDIR = join(ROOT, "kb", "diseases");
 const TXDIR = join(ROOT, "kb", "treatments");
+const REFDIR = join(ROOT, "kb", "reference");
 const OUT = join(ROOT, "kb", "dist", "kb.index.json");
 
 const ids = readdirSync(DZDIR).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", ""));
-const realIds = new Set(ids);
-const lc = {}; ids.forEach((i) => (lc[i.toLowerCase()] = i));
+const refIds = existsSync(REFDIR) ? readdirSync(REFDIR).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", "")) : [];
+// cross-links resolve against BOTH diagnostic and reference disease ids
+const realIds = new Set(ids.concat(refIds));
+const lc = {}; ids.concat(refIds).forEach((i) => (lc[i.toLowerCase()] = i));
 const resolveLinks = (arr) => [...new Set((arr || [])
   .map((x) => lc[String(x).toLowerCase()]).filter((x) => x && realIds.has(x)))];
 
 const chunks = [];
-let nDz = 0, nTx = 0;
+let nDz = 0, nTx = 0, nRef = 0;
 function push(d, section, text, source, extra) {
   if (!text || !String(text).trim()) return;
   chunks.push(Object.assign({
@@ -103,6 +106,31 @@ for (const id of ids) {
   }
 }
 
+// ---- REFERENCE diseases (kb/reference): the broader Harrison disease universe,
+// KNOWLEDGE-only (no treatment/scoring). Same citable-chunk shape, tagged
+// referenceOnly so retrieval can distinguish them from diagnostic diseases. ----
+for (const id of refIds) {
+  const d = JSON.parse(readFileSync(join(REFDIR, id + ".json"), "utf8"));
+  nRef++;
+  const h = d.harrison || {};
+  const src = () => ({ ref: h.source || "Harrison 22e", page: h.pages || (d.page ? "p." + d.page : null) });
+  const tag = { referenceOnly: true };
+  const overview = [d.name, d.class === "infective" ? "(infective)" : "(non-infective)",
+    d.system ? "— " + d.system : "", (d.aliases || []).length ? "Also: " + d.aliases.join(", ") : ""]
+    .filter(Boolean).join(" ");
+  push(d, "overview", overview, src(), Object.assign({ crossLinks: resolveLinks(h.crossLinks) }, tag));
+  (h.clinicalPearls || []).forEach((t) => push(d, "harrison.pearl", t, src(), tag));
+  if (h.pathophysiology) push(d, "harrison.pathophysiology", h.pathophysiology, src(), tag);
+  (h.additionalDifferentials || []).forEach((t) => push(d, "harrison.differential", t, src(), tag));
+  (h.infectionMimics || []).forEach((t) => push(d, "harrison.infectionMimic", t, src(), tag));
+  (h.nonInfectiousMimics || []).forEach((t) => push(d, "harrison.nonInfectiousMimic", t, src(), tag));
+  (h.additionalInvestigations || []).forEach((t) => push(d, "harrison.investigation", t, src(), tag));
+  (h.redFlags || []).forEach((t) => push(d, "harrison.redFlag", t, src(), tag));
+  if (h.prognosis) push(d, "harrison.prognosis", h.prognosis, src(), tag);
+  (h.pitfalls || []).forEach((t) => push(d, "harrison.pitfall", t, src(), tag));
+  if (h.severityClassification) push(d, "harrison.severity", h.severityClassification, src(), tag);
+}
+
 // stable ordering for reproducible builds (no Date/random)
 chunks.sort((a, b) => a.chunkId < b.chunkId ? -1 : a.chunkId > b.chunkId ? 1 : 0);
 
@@ -110,7 +138,7 @@ const payload = {
   _meta: {
     note: "RAG-ready citable knowledge chunks. embedding is null until the embedding step runs. No AI integrated; no pharmacology duplicated (drugRefs = composition keys into the Drug Index).",
     schema: "chunkId|diseaseId|diseaseName|class|system|section|text|source{ref,page}|crossLinks[]|drugRefs[]|embedding(null)",
-    diseases: nDz, treatmentsIndexed: nTx, chunks: chunks.length,
+    diseases: nDz, referenceDiseases: nRef, totalDiseases: nDz + nRef, treatmentsIndexed: nTx, chunks: chunks.length,
   },
   chunks,
 };
@@ -122,5 +150,5 @@ if (!process.argv.includes("--stdout")) {
   writeFileSync(OUT, JSON.stringify(payload));
   console.log("wrote " + OUT);
 }
-console.log(`diseases=${nDz} treatments=${nTx} chunks=${chunks.length}`);
+console.log(`diagnostic=${nDz} reference=${nRef} totalDiseases=${nDz + nRef} treatments=${nTx} chunks=${chunks.length}`);
 console.log("by section group:", Object.entries(sections).map(([k, v]) => `${k}:${v}`).join("  "));
