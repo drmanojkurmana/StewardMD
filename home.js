@@ -375,6 +375,22 @@
       ".hv-acct-btn.out{background:transparent;border:1px solid var(--hbd);color:var(--hink)}",
       ".hv-acct-btn:active{transform:scale(.98)}",
       ".hv-acct-note{font:500 12px/1.5 var(--hfont);color:var(--hmut);margin-top:13px}",
+      // About modal: tabs + version-history timeline + facts
+      ".smd-ab-tabs{display:flex;gap:4px;margin:-4px 0 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}",
+      ".smd-ab-tab{border:none;background:none;font:700 12.5px var(--sans);color:var(--slate-soft);padding:8px 2px;margin-right:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}",
+      ".smd-ab-tab.on{color:var(--teal);border-bottom-color:var(--teal)}",
+      ".smd-ab-badge{display:inline-block;background:var(--teal-soft);color:var(--teal);font:700 11px var(--sans);padding:3px 10px;border-radius:999px;margin-bottom:12px}",
+      ".smd-vh-item{padding:0 0 16px 16px;border-left:2px solid var(--line);position:relative}",
+      ".smd-vh-item:last-child{border-left-color:transparent;padding-bottom:2px}",
+      ".smd-vh-item:before{content:'';position:absolute;left:-6px;top:3px;width:10px;height:10px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px var(--teal-soft)}",
+      ".smd-vh-ver{font:800 14px var(--sans);color:var(--ink);margin-bottom:6px}",
+      ".smd-vh ul{margin:0;padding-left:15px}",
+      ".smd-vh li{margin:4px 0;font-size:12.5px;color:var(--slate);line-height:1.55}",
+      ".smd-vh li b{color:var(--teal);font-weight:700}",
+      ".smd-vh-now{color:#b5460f;font-weight:800}",
+      "ul.smd-facts{list-style:none;padding:0;margin:0}",
+      "ul.smd-facts li{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;color:var(--slate);line-height:1.5}",
+      "ul.smd-facts .fn{font:800 17px var(--sans);color:var(--teal);min-width:62px;flex:0 0 auto}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -681,6 +697,83 @@
     var si = s.querySelector('[data-acct="signin"]');
     if (si) si.addEventListener("click", function () { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} setTimeout(openAccount, 900); });
   }
+  // ---- About modal: add Version History + Facts tabs (run once) ----
+  function aboutVersionHTML() {
+    return '<div class="smd-vh">' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v0 · Genesis</div><ul>' +
+        '<li><b>v0.1</b> — First static prototype mapping a clinical syndrome to an empiric antibiotic.</li>' +
+        '<li><b>v0.5</b> — The 8-question antimicrobial-stewardship framework defined as the core engine.</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v1 · Clinical engine</div><ul>' +
+        '<li><b>v1.0</b> — Structured clinical-findings wizard (vitals, system, risk factors).</li>' +
+        '<li><b>v1.1</b> — Added syndrome confidence scoring and a ranked differential.</li>' +
+        '<li><b>v1.2</b> — Tested on real cases; scoring edge-case bugs detected and fixed.</li>' +
+        '<li><b>v1.5</b> — Grew to dozens of internal-medicine syndromes.</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v2 · Knowledge base</div><ul>' +
+        '<li><b>v2.0</b> — Drug monograph database: dosing, route, spectrum, cautions.</li>' +
+        '<li><b>v2.1</b> — &quot;Gold format&quot; rewrite of every drug entry for consistency.</li>' +
+        '<li><b>v2.3</b> — IDSA / WHO / ICMR / Surviving Sepsis references wired throughout.</li>' +
+        '<li><b>v2.6</b> — Bug sweep: dosing display &amp; renal-adjustment corrections.</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v3 · Ground-up interface</div><ul>' +
+        '<li><b>v3.0</b> — Complete frontend rebuild — the &quot;Advanced UI by MaiK&quot;.</li>' +
+        '<li><b>v3.2</b> — Responsive layout for mobile / tablet / desktop, plus dark mode.</li>' +
+        '<li><b>v3.4</b> — Accessibility: font scaling, density control, auto-fit.</li>' +
+        '<li><b>v3.7</b> — Testing round: iOS viewport/zoom bugs detected and fixed.</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v4 · Intelligence</div><ul>' +
+        '<li><b>v4.0</b> — Clinical reasoning engine producing an explainable differential.</li>' +
+        '<li><b>v4.2</b> — Electrolyte engine: 13 analysis engines (Na, K, Mg, Ca, Cl, anion gap…).</li>' +
+        '<li><b>v4.4</b> — Medical calculators expanded to 74 bedside tools.</li>' +
+        '<li><b>v4.6</b> — Bug detected: reasoning &quot;select diagnosis&quot; mis-routed → fixed.</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v5 · Connected &amp; polished (current)</span></div><ul>' +
+        '<li><b>v5.0</b> — Google sign-in and cloud sync of saved cases.</li>' +
+        '<li><b>v5.1</b> — Share a case by unique code; the My Cases library.</li>' +
+        '<li><b>v5.2</b> — Account panel and guest mode.</li>' +
+        '<li><b>v5.3</b> — Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
+        '<li><b>v5.4</b> — Automated headless-browser regression testing introduced.</li>' +
+      '</ul></div>' +
+    '</div>' +
+    '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
+  }
+  function aboutFactsHTML() {
+    return '<span class="smd-ab-badge">By the numbers</span>' +
+      '<ul class="smd-facts">' +
+      '<li><span class="fn">51</span> clinical syndromes, each with a full empiric-therapy rationale.</li>' +
+      '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
+      '<li><span class="fn">74</span> bedside clinical calculators.</li>' +
+      '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
+      '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
+      '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
+      '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
+      '<li><span class="fn">1</span> clinician built the entire engine end to end.</li>' +
+      '</ul>' +
+      '<div class="smd-modal-section" style="margin-top:18px">What makes it unique</div>' +
+      '<p>StewardMD is one of the most content-dense clinical decision tools ever shipped as a single, buildless static web app — every syndrome, drug, calculator and reasoning rule is hand-authored, runs entirely in the browser, and works fully offline. Unlike a black-box AI, every antibiotic recommendation is <b>explainable</b>: it states why the diagnosis fits, why antibiotics are (or are not) needed, the likely pathogens, why each agent was chosen, what it covers, what it misses, and when to de-escalate or stop.</p>' +
+      '<p style="font-size:11.5px;color:var(--slate-soft)">Engineered and curated by Dr. Manoj Kumar Kurmana, MD — Internal Medicine physician and Stanford-certified antimicrobial-stewardship practitioner.</p>';
+  }
+  function enhanceAbout() {
+    var modal = document.getElementById("aboutModal"); if (!modal) return;
+    var body = modal.querySelector(".smd-modal-body"); if (!body || body.querySelector(".smd-ab-tabs")) return;
+    var aboutPanel = document.createElement("div"); aboutPanel.className = "smd-ab-panel"; aboutPanel.setAttribute("data-tab", "about");
+    while (body.firstChild) aboutPanel.appendChild(body.firstChild); // move existing About content into its panel
+    var nav = document.createElement("div"); nav.className = "smd-ab-tabs";
+    nav.innerHTML = '<button class="smd-ab-tab on" data-t="about" type="button">About</button>' +
+      '<button class="smd-ab-tab" data-t="version" type="button">Version history</button>' +
+      '<button class="smd-ab-tab" data-t="facts" type="button">Facts &amp; milestones</button>';
+    var vPanel = document.createElement("div"); vPanel.className = "smd-ab-panel"; vPanel.setAttribute("data-tab", "version"); vPanel.style.display = "none"; vPanel.innerHTML = aboutVersionHTML();
+    var fPanel = document.createElement("div"); fPanel.className = "smd-ab-panel"; fPanel.setAttribute("data-tab", "facts"); fPanel.style.display = "none"; fPanel.innerHTML = aboutFactsHTML();
+    body.appendChild(nav); body.appendChild(aboutPanel); body.appendChild(vPanel); body.appendChild(fPanel);
+    nav.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-t]"); if (!b) return;
+      var t = b.getAttribute("data-t");
+      nav.querySelectorAll(".smd-ab-tab").forEach(function (x) { x.classList.toggle("on", x === b); });
+      body.querySelectorAll(".smd-ab-panel").forEach(function (pn) { pn.style.display = (pn.getAttribute("data-tab") === t) ? "" : "none"; });
+      body.scrollTop = 0;
+    });
+  }
   function openAck() {
     var src = document.getElementById("ackCard");
     var inner = "";
@@ -862,7 +955,7 @@
     else if (t.id === "smdSbSignIn") { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} }
   }, false);
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar();
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
