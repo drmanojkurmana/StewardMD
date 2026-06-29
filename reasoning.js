@@ -30,6 +30,7 @@
       { key: "palpitations", label: "Palpitations" },
       { key: "backPain", label: "Back pain" },
       { key: "visualDisturbance", label: "Visual disturbance / loss" },
+      { key: "papilledema", label: "Papilloedema / optic disc swelling" },
       { key: "polyarthralgia", label: "Joint pain (polyarticular)" },
       { key: "legSwellingUnilateral", label: "Unilateral leg swelling" },
       { key: "legSwellingBilateral", label: "Bilateral leg swelling / edema" },
@@ -101,11 +102,11 @@
       inv:["Non-contrast CT head (urgent)","Coagulation profile","BP control"], red:["Reverse anticoagulation; neurosurgical review"],
       reason:"Headache with focal deficit and reduced consciousness, especially with hypertension or anticoagulation, suggests intracerebral haemorrhage." },
     { id:"brain_tumour", name:"Brain tumour / mass lesion", system:"Neuro-oncology",
-      find:{ headache:30, focalNeuroDeficit:22, seizure:18, visualDisturbance:12, weightLoss:8, alteredSensorium:8, fever:-10 },
+      find:{ headache:30, focalNeuroDeficit:22, seizure:18, visualDisturbance:12, papilledema:20, weightLoss:8, alteredSensorium:8, fever:-10 },
       inv:["MRI brain with contrast","Refer neuro-oncology"], red:["Progressive headache, morning vomiting, papilloedema"],
       reason:"Progressive headache with focal signs or new seizures raises concern for an intracranial mass." },
     { id:"iih", name:"Idiopathic intracranial hypertension", system:"Neurology",
-      find:{ headache:30, visualDisturbance:24, fever:-12, neckStiffness:-8 },
+      find:{ headache:30, visualDisturbance:24, papilledema:30, fever:-12, neckStiffness:-8 },
       inv:["Fundoscopy (papilloedema)","MRI + MR venography","LP with opening pressure"], red:["Progressive visual loss needs urgent treatment"],
       reason:"Headache with visual disturbance and papilloedema in the right demographic suggests raised intracranial pressure without a mass." },
     { id:"temporal_arteritis", name:"Giant cell (temporal) arteritis", system:"Rheumatology",
@@ -293,7 +294,7 @@
       inv:["Urgent echocardiogram","ECG (electrical alternans)"], red:["Obstructive shock — urgent pericardiocentesis"],
       reason:"Hypotension with raised JVP and muffled heart sounds (Beck's triad) suggests cardiac tamponade." },
     { id:"htn_emergency", name:"Hypertensive emergency", system:"Cardiology / Neuro",
-      find:{ headache:22, hypertensionHx:24, visualDisturbance:16, chestPain:12, focalNeuroDeficit:10 },
+      find:{ headache:22, hypertensionHx:24, visualDisturbance:16, papilledema:18, chestPain:12, focalNeuroDeficit:10 },
       inv:["BP (both arms), fundoscopy","ECG, troponin, renal function","CT head if neuro signs"], red:["Controlled BP reduction; identify target-organ damage"],
       reason:"Severe hypertension with headache, visual or neurological symptoms indicates a hypertensive emergency with end-organ damage." },
     { id:"glomerulonephritis", name:"Acute glomerulonephritis", system:"Nephrology",
@@ -875,10 +876,16 @@
         if (hit) { seen[fl.key] = true; matches.push(fl); }
       }
       ONT.forEach(function (g) { g.fields.forEach(consider); });
+      el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results' + (matches.length ? ' <span class="dx-sr-count">' + matches.length + '</span>' : '') + '</div><div class="dx-search-list">' +
+        (matches.length ? matches.map(function (fl) { return '<button class="dx-search-row" data-f="' + fl.key + '"><span class="dx-sr-plus">+</span><span class="dx-sr-lbl">' + esc(fl.label) + '</span></button>'; }).join("") : '<div class="dx-sel-empty" style="padding:14px">No matching findings. Try the free-text “Extract findings” in the Advanced workspace.</div>') +
+        '</div></div>';
+      el.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
+      return;
+      /* legacy chip render (replaced by vertical list above):
       el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results</div><div class="dx-chips">' +
         (matches.length ? matches.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">No matching findings. Try the free-text “Extract findings” in the Advanced workspace below.</span>') +
         '</div></div>';
-      wireAddChips(el); return;
+      wireAddChips(el); return; */
     }
 
     // --- progressive consultant workflow ---
@@ -949,7 +956,7 @@
     exertionalChestPain:["exertional","on exertion"], ecgIschemia:["st elevation","ischemic ecg","ischaemic ecg"], thunderclapHeadache:["thunderclap","worst headache","worst-ever"],
     hematuria:["hematuria","haematuria","blood in urine"], jointSwelling:["swollen joint","hot joint","joint swelling"],
     thrombocytopenia:["thrombocytopenia","low platelet"], polyarthralgia:["arthralgia","polyarthritis","joint pain","joint pains"],
-    visualDisturbance:["visual loss","blurred vision","vision loss","diplopia"], bloodyStool:["bloody stool","blood in stool","hematochezia","rectal bleed"],
+    visualDisturbance:["visual loss","blurred vision","vision loss","diplopia"], papilledema:["papill","papilloedema","papilledema","disc swelling","disc oedema","disc edema","optic disc","swollen disc","raised icp","fundoscopy"], bloodyStool:["bloody stool","blood in stool","hematochezia","rectal bleed"],
     raisedJVP:["raised jvp","elevated jvp"], hypertensionHx:["hypertensive","high bp","htn"],
     ascendingWeakness:["ascending weakness","areflexia","ascending paralysis"], rigidity:["rigidity","rigid"],
     hypothermia:["hypothermia","hypothermic","low temperature"], bradycardia:["bradycardia","slow heart"],
@@ -1384,13 +1391,47 @@
       alert("Opening the disease page — stewardship module is loading.");
       return;
     }
-    // non-infectious -> expand its card (no antimicrobial recommendation)
+    // non-infectious -> open the management / treatment panel for this diagnosis
+    var d = differential(), all = d.inf.concat(d.ni), r = null;
+    for (var i = 0; i < all.length; i++) { if (all[i].id === id) { r = all[i]; break; } }
+    if (r) { openMgmt(r); return; }
+    // fallback: expand the card
     S.expanded[id] = true; renderColsOnly();
     var c = root.querySelector('.dx-card.open .dx-detail');
     if (c) c.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  // Management / treatment panel for a NON-INFECTIVE working diagnosis.
+  function openMgmt(r) {
+    var m = (window.DX_MGMT && window.DX_MGMT[r.id]) || null;
+    var el = root.querySelector("#dxMgmt");
+    if (!el) { el = document.createElement("div"); el.id = "dxMgmt"; el.className = "dx-mgmt"; root.appendChild(el); }
+    var tx = (m && m.tx && m.tx.length) ? m.tx : null;
+    var ix = (m && m.ix && m.ix.length) ? m.ix : (r.inv || []);
+    var html = '<div class="dx-mgmt-top"><button class="dx-back" id="dxMgmtBack" type="button">‹ Back to differential</button></div>' +
+      '<div class="dx-mgmt-body">' +
+        '<div class="dx-mgmt-badge">Working diagnosis · non-infective</div>' +
+        '<h2 class="dx-mgmt-name">' + esc(r.name) + '</h2>' +
+        (r.system ? '<div class="dx-mgmt-sys">' + esc(r.system) + '</div>' : '') +
+        (m && m.dx ? '<div class="dx-mgmt-sec">How to confirm</div><p>' + esc(m.dx) + '</p>'
+                   : (r.reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(r.reason) + '</p>' : '')) +
+        (tx ? '<div class="dx-mgmt-sec tx">💊 Management / Treatment</div><ol class="dx-mgmt-tx">' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol>'
+            : '<div class="dx-mgmt-sec">Management</div><p>Specialist-guided management — see the investigations and red flags below and consult full guidelines.</p>') +
+        (ix && ix.length ? '<div class="dx-mgmt-sec">Key investigations</div><ul class="dx-mgmt-ul">' + ix.slice(0, 8).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
+        (m && m.dispo ? '<div class="dx-mgmt-sec">Disposition</div><p>' + esc(m.dispo) + '</p>' : '') +
+        (r.red && r.red.length ? '<div class="dx-mgmt-sec red">Red flags</div><ul class="dx-mgmt-ul">' + r.red.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : '') +
+        (m && m.src ? '<div class="dx-mgmt-src">Source: ' + esc(m.src) + '</div>' : '') +
+        '<div class="dx-mgmt-disc">⚠️ Decision-support only — provisional and aligned to standard guidelines / Harrison\'s 22e. Verify against full guidelines, local protocol and current prescribing references (doses, contraindications, renal/hepatic adjustment, pregnancy) before acting.</div>' +
+      '</div>';
+    el.innerHTML = html;
+    el.classList.add("on");
+    el.scrollTop = 0;
+    var bk = el.querySelector("#dxMgmtBack");
+    if (bk) bk.addEventListener("click", function () { el.classList.remove("on"); });
+  }
+  function closeMgmt() { var el = root && root.querySelector("#dxMgmt"); if (el) el.classList.remove("on"); }
+
+  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
     if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; }
@@ -1406,6 +1447,7 @@
   function close() {
     // sync findings back to the legacy wizard (one source of truth)
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
+    closeMgmt();
     if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
   }
 
@@ -1448,6 +1490,31 @@
       ".dx-cat{margin:4px 0 11px}",
       ".dx-cat-h{font:700 10.5px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft);margin-bottom:6px}",
       ".dx-chips{display:flex;flex-wrap:wrap;gap:6px}",
+      ".dx-sr-count{display:inline-block;background:var(--teal-soft);color:var(--teal);font:700 11px var(--sans);padding:1px 8px;border-radius:999px;margin-left:6px}",
+      ".dx-search-list{display:flex;flex-direction:column;max-height:46vh;overflow-y:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px;background:var(--panel);margin-top:4px}",
+      ".dx-search-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:13px 14px;cursor:pointer;font:600 14.5px var(--sans);color:var(--ink)}",
+      ".dx-search-row:last-child{border-bottom:none}",
+      ".dx-search-row:active{background:var(--teal-soft)}",
+      ".dx-sr-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:800;font-size:15px;flex:0 0 auto}",
+      ".dx-sr-lbl{flex:1}",
+      ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
+      ".dx-mgmt.on{display:flex;animation:dxIn .22s ease}",
+      ".dx-mgmt-top{padding:13px 16px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}",
+      ".dx-mgmt-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:18px 16px 48px;max-width:760px;margin:0 auto;width:100%}",
+      ".dx-mgmt-badge{display:inline-block;background:var(--teal-soft);color:var(--teal);font:700 11px var(--sans);padding:3px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em}",
+      ".dx-mgmt-name{font:800 22px var(--sans);color:var(--ink);margin:10px 0 2px;line-height:1.15}",
+      ".dx-mgmt-sys{font:600 13px var(--sans);color:var(--slate-soft);margin-bottom:4px}",
+      ".dx-mgmt-sec{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.05em;color:var(--slate);margin:18px 0 7px}",
+      ".dx-mgmt-sec.tx{color:var(--teal)}",
+      ".dx-mgmt-sec.red{color:#b5460f}",
+      ".dx-mgmt-body p{font:500 14px/1.6 var(--sans);color:var(--ink);margin:0}",
+      ".dx-mgmt-tx{margin:0;padding-left:20px}",
+      ".dx-mgmt-tx li{font:500 14px/1.55 var(--sans);color:var(--ink);margin:8px 0;padding-left:3px}",
+      ".dx-mgmt-tx li::marker{color:var(--teal);font-weight:800}",
+      ".dx-mgmt-ul{margin:0;padding-left:18px}",
+      ".dx-mgmt-ul li{font:500 13.5px/1.5 var(--sans);color:var(--slate);margin:4px 0}",
+      ".dx-mgmt-src{margin-top:18px;font:600 11.5px var(--sans);color:var(--slate-soft)}",
+      ".dx-mgmt-disc{margin-top:14px;padding:11px 13px;background:var(--panel);border:1px solid var(--line);border-radius:10px;font:500 11.5px/1.5 var(--sans);color:var(--slate-soft)}",
       ".dx-chip{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 11px;font:600 12px var(--sans);color:var(--slate);cursor:pointer;transition:all .12s}",
       ".dx-chip:hover{border-color:var(--teal);color:var(--teal)}",
       ".dx-gate{margin:14px 0 8px}",
