@@ -83,6 +83,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
+  await call("Network.enable", {}); await call("Network.setCacheDisabled", { cacheDisabled: true }); // always fetch fresh
   await call("Page.navigate", { url: BASE });
 
   // wait for the engine + syndrome DB to be present

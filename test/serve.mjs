@@ -18,7 +18,8 @@ http.createServer((req, res) => {
   const fp = join(root, normalize(p).replace(/^(\.\.[/\\])+/, ""));
   readFile(fp, (err, data) => {
     if (err) { res.writeHead(404); res.end("404"); return; }
-    res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream" });
+    // no-store so the test harness always sees the current working tree (defeats Chrome's cache)
+    res.writeHead(200, { "content-type": TYPES[extname(fp)] || "application/octet-stream", "cache-control": "no-store, must-revalidate" });
     res.end(data);
   });
 }).listen(port, () => console.log(`[serve] ${root} on http://localhost:${port}`));
