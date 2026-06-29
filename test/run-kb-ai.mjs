@@ -25,7 +25,11 @@ ok(existsSync(idxPath), "kb.index.json exists (run build-kb-index.mjs)");
 const index = existsSync(idxPath) ? JSON.parse(readFileSync(idxPath, "utf8")) : { chunks: [] };
 const chunks = index.chunks || [];
 ok(chunks.length > 500, `index has substantial chunks (${chunks.length})`);
-const realIds = new Set(readdirSync(join(ROOT, "kb", "diseases")).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", "")));
+// valid ids = diagnostic diseases + reference diseases (the RAG index spans both)
+const realIds = new Set([
+  ...readdirSync(join(ROOT, "kb", "diseases")).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", "")),
+  ...(existsSync(join(ROOT, "kb", "reference")) ? readdirSync(join(ROOT, "kb", "reference")).filter((f) => f.endsWith(".json")).map((f) => f.replace(".json", "")) : []),
+]);
 let badEmbed = 0, noSrc = 0, badLink = 0, noDz = 0;
 for (const c of chunks) {
   if (c.embedding !== null) badEmbed++;
