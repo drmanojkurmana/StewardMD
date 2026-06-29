@@ -1917,6 +1917,49 @@
    * Original runEngine is preserved on window.__smdOrigRunEngine for regression
    * tests (test/run-main-engine.mjs proves no infective regression).
    * ---------------------------------------------------------------------- */
+  // Add the broader NON-INFECTIVE finding inputs to the MAIN app's form so the
+  // 89 non-infective diagnoses can be ticked (and thus surface in the expanded
+  // engine). The main form is data-driven from window.FIELD_GROUPS + the system
+  // picker window.SYSTEM_PICKER_MAP — both globals from app.js. We append new
+  // organ-system groups (labels reused from the reasoning ontology) WITHOUT
+  // editing minified app.js. reasoning's own ontology is already built from
+  // EXTRA_GROUPS, so this is purely additive to the main form. Idempotent.
+  var NI_INPUT_GROUPS = [
+    { group: "Cardiac / Vascular (non-infective)", id: "ni_cardiac", label: "Cardiac / Vascular", icon: "🫀",
+      keys: ["chestPain","exertionalChestPain","pleuriticChestPain","dyspnea","orthopnea","palpitations","raisedJVP","bilateralCrackles","ecgIschemia","knownCAD","knownHeartFailure","atrialFibHx","legSwellingUnilateral","calfTenderness","pulsatileMass","backPain"] },
+    { group: "Neurological (non-infective)", id: "ni_neuro", label: "Neurological", icon: "🧠",
+      keys: ["headache","thunderclapHeadache","visualDisturbance","papilledema","ataxia","ascendingWeakness","rigidity","headInjury","anticoagulated","alcoholExcess","hypertensionHx"] },
+    { group: "Gastrointestinal / Hepatic (non-infective)", id: "ni_gihep", label: "GI / Hepatic", icon: "🫁",
+      keys: ["hematemesis","asterixis"] },
+    { group: "Renal / Genitourinary (non-infective)", id: "ni_renal", label: "Renal / Urinary", icon: "🩺",
+      keys: ["oliguria","hematuria","proteinuria","legSwellingBilateral"] },
+    { group: "Endocrine / Metabolic (non-infective)", id: "ni_endo", label: "Endocrine / Metabolic", icon: "🧬",
+      keys: ["diabetesHx","steroidUse","ketonemia","polyuriaPolydipsia","hypothermia","bradycardia"] },
+    { group: "Haematology / Rheum / Skin (non-infective)", id: "ni_heme", label: "Haem / Rheum / Skin", icon: "🩸",
+      keys: ["mucocutaneousBleeding","mucosalLesions","facialSwelling","polyarthralgia","jointSwelling"] },
+    { group: "Toxicology / General (non-infective)", id: "ni_tox", label: "Toxicology / General", icon: "⚗️",
+      keys: ["drugOverdose","bradypnea","miosisSecretions","cough","ageOver50","raised_lactate"] }
+  ];
+  var NI_INPUT_EXPLICIT_LABELS = { cough: "Cough", raised_lactate: "Raised lactate / hyperlactataemia" };
+  function augmentFindingInputs() {
+    if (window.__smdFindingsAugmented != null) return;
+    if (!window.FIELD_GROUPS || !window.FIELD_GROUPS.push) return;        // app.js not ready
+    try { buildOntology(); } catch (e) {}                                 // populate LABEL for reuse
+    var have = {};
+    window.FIELD_GROUPS.forEach(function (g) { (g.fields || []).forEach(function (f) { have[f.key] = true; }); });
+    var added = 0;
+    NI_INPUT_GROUPS.forEach(function (G) {
+      var fields = G.keys.filter(function (k) { return !have[k]; })
+        .map(function (k) { return { key: k, label: NI_INPUT_EXPLICIT_LABELS[k] || lbl(k) }; });
+      if (!fields.length) return;
+      window.FIELD_GROUPS.push({ group: G.group, fields: fields, nonInfective: true });
+      added += fields.length;
+      if (!window.SYSTEM_PICKER_MAP || !window.SYSTEM_PICKER_MAP.push) window.SYSTEM_PICKER_MAP = window.SYSTEM_PICKER_MAP || [];
+      window.SYSTEM_PICKER_MAP.push({ id: G.id, label: G.label, icon: G.icon, groups: [G.group], nonInfective: true });
+    });
+    window.__smdFindingsAugmented = added;
+  }
+
   function buildNIRegistry() {
     var reg = [], byId = {};
     (DDX_NI || []).forEach(function (d) {
@@ -1991,11 +2034,13 @@
     };
     window.__smdEngineExpanded = true;
   }
-  // app.js (classic script) runs before this; install now, and retry on DOM ready
-  // in case DDX_NI is repointed slightly later.
-  try { installMainEngineExpansion(); } catch (e) {}
-  if (!window.__smdEngineExpanded) {
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { try { installMainEngineExpansion(); } catch (e) {} });
-    else setTimeout(function () { try { installMainEngineExpansion(); } catch (e) {} }, 0);
+  // app.js (classic script) runs before this; augment the main form's finding
+  // inputs and install the engine expansion now, retrying on DOM ready in case a
+  // global is populated slightly later.
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} }
+  smdMainAppHooks();
+  if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
+    else setTimeout(smdMainAppHooks, 0);
   }
 })();
