@@ -1,0 +1,85 @@
+{
+  "id": "skin_cancer",
+  "name": "Skin Cancer",
+  "system": "Dermatology / Oncology",
+  "class": "non_infective",
+  "chapter": 81,
+  "page": 598,
+  "aliases": [
+    "melanoma",
+    "basal cell carcinoma",
+    "squamous cell carcinoma"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.598-609",
+    "clinicalPearls": [
+      "Apply the ABCDE rule to pigmented lesions to detect melanoma early: Asymmetry, Border irregularity, Color variegation, Diameter >6 mm (pencil-eraser size), and Evolving (any change in size, shape, color, elevation, or new symptoms such as bleeding, itching, or crusting) (p.601).",
+      "The 'ugly duckling' sign: any nevus that looks atypical and different from the rest of an individual's nevi should be considered suspicious (p.601).",
+      "Melanoma is an aggressive malignancy of melanocytes and accounts for over half of all deaths from skin cancer, even though it is far less common than nonmelanoma skin cancer (p.598).",
+      "Basal cell carcinoma is among the most common cancers; its natural history is a slowly enlarging, locally invasive neoplasm with low metastatic potential (~0.1% in immunocompetent patients), though the risk of recurrence or a new primary NMSC is about 40% over 5 years (p.607).",
+      "Nodular BCC classically presents as a pearly nodule with tortuous telangiectatic vessels, rolled borders, and a central crust; pigmented BCC may contain melanin and be confused with melanoma (p.606-607).",
+      "Squamous cell carcinoma arises from keratinizing epidermal cells on sun-exposed skin and can metastasize (0.3-5.2%), most often to regional lymph nodes; lower-lip and ear tumors metastasize in 13% and 11% respectively (p.606-607).",
+      "Actinic keratoses and actinic cheilitis are premalignant forms of SCC; SCC in situ (Bowen's disease) presents as a scaling erythematous plaque, and treating premalignant/in-situ lesions reduces subsequent invasive disease (p.607).",
+      "NMSCs (SCC ~80%, BCC ~18% of cases) are the most common cancers in the US, with an estimated >5.3 million cases annually (p.606).",
+      "Breslow thickness (greatest tumor thickness measured from the top of the granular layer or ulcer base to the bottom of the tumor) is the best predictor of melanoma recurrence and, with ulceration, defines the T stage (p.601-602)."
+    ],
+    "pathophysiology": "Melanoma is a malignancy of melanocytes, neural-crest-derived pigment-producing cells; most melanomas arise in skin but can occur in mucosa, eye, meninges, and upper esophagus. UV radiation is the dominant environmental driver, and cutaneous melanomas carry one of the highest somatic mutation rates of any cancer (>10 mutations/Mb), the majority bearing a UV signature. Key driver mutations affect the MAP-kinase and PI3K/AKT proliferative pathways: BRAF (commonly V600E) in 40-50% of cutaneous melanomas, NRAS in ~20%, and loss-of-function NF1 in 10-15%; germline CDKN2A (p16/ARF, RB and p53 pathways), CDK4, MITF, BAP1, POT1, TERT, and moderate-risk MC1R variants underlie inherited susceptibility. Nonmelanoma skin cancers are also UV-driven: SCC is associated with p53 and N-RAS damage, whereas BCC is driven by hedgehog (Hh) pathway activation, usually loss of function of the tumor-suppressor PTCH1 (which normally inhibits SMO). Merkel cell carcinoma is linked to the oncogenic Merkel cell polyomavirus, present in ~80% of tumors (p.598-607).",
+    "additionalDifferentials": [
+      "Benign nevomelanocytic nevus (vs melanoma)",
+      "Dysplastic/atypical nevus",
+      "Seborrheic keratosis",
+      "Lentigo",
+      "Nummular eczema and psoriasis (may mimic superficial BCC)",
+      "Wart or callus (may mimic SCC when inflammation is minimal)",
+      "Keratoacanthoma (rapidly growing low-grade SCC variant)",
+      "Merkel cell carcinoma",
+      "Cutaneous B- or T-cell lymphoma",
+      "Extramammary Paget's disease"
+    ],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Superficial BCC mimicking nummular eczema or psoriasis",
+      "SCC mistaken for a wart or callus when inflammatory response is minimal",
+      "Pigmented (nodular) BCC mimicking melanoma",
+      "Desmoplastic melanoma mimicking nodular basal cell carcinoma",
+      "Benign nevus mimicking melanoma"
+    ],
+    "additionalInvestigations": [
+      "Excisional biopsy with 1-3 mm narrow margins (preferred) for any changing/suspicious pigmented lesion; incisional (shave, saucerization, or punch) biopsy of the most nodular/darkest area when excision is impractical - incisional biopsy does not facilitate melanoma spread",
+      "Histopathology report should include Breslow thickness, mitotic rate, ulceration, lymphatic/vascular/neural invasion, regression, microsatellitosis, and margin status",
+      "Dermoscopy (low-level magnification with polarized light or water interface) and total-body photography for surveillance in high-risk patients",
+      "Genetic expression profiles (GEP, e.g. 31-gene), FISH with multiple probes, or comparative genomic hybridization to distinguish difficult melanomas from benign nevi and estimate prognosis",
+      "Complete blood count, complete metabolic panel, and serum LDH (LDH is part of AJCC stage IV criteria)",
+      "Sentinel lymph node biopsy for pathologic staging",
+      "CT, PET, or combined CT/PET (and MRI) when symptoms, exam, or abnormal labs suggest metastatic disease",
+      "Genetic testing for individuals with >=3 primary melanomas or with families having >=1 invasive melanoma plus >=2 cases of melanoma and/or pancreatic cancer, ocular melanoma, mesothelioma, or renal cell carcinoma on one side"
+    ],
+    "redFlags": [
+      "Any pigmented lesion that has changed (size, shape, color, elevation) or that meets ABCDE criteria is a candidate for biopsy",
+      "An 'ugly duckling' nevus that differs from a patient's other nevi",
+      "New bleeding, itching, or crusting in a pigmented lesion",
+      "Thick and/or ulcerated melanoma (key adverse T-stage features)",
+      "Microsatellite lesions, in-transit metastases, nodal involvement, elevated LDH, or distant metastases to brain/liver/bone",
+      "SCC on the lower lip or ear, recurrent SCC (~30% metastatic risk), or SCC in scars/chronic ulcers, genital/mucosal surfaces, or in immunosuppressed patients (aggressive behavior)",
+      "Rapidly expanding lesion in an older, immunosuppressed, UV-exposed patient (MCC: AEIOU - Asymptomatic, Expanding rapidly, Immunosuppression, Older than 50, UV-exposed site)"
+    ],
+    "prognosis": "Melanoma prognosis is dominated by Breslow thickness and ulceration (T stage); favorable primary sites are the forearm and leg, unfavorable sites the scalp, hands, feet, and mucous membranes. 10-year melanoma-specific survival ranges from >99% for stage 0 (in situ) and ~98% for stage IA down to ~24-30% for stage IIID. Women with stage I/II disease and younger patients do better; older men have worse outcomes (delayed diagnosis, thicker tumors, more head/neck, acral and BRAF wild-type tumors). High mitotic rate and lymphatic/vascular invasion are additional adverse factors. Overall melanoma mortality has been falling, attributed to immunotherapy and targeted therapy. BCC rarely metastasizes (~0.1% in immunocompetent patients) but recurs frequently. Cutaneous SCC metastasizes in 0.3-5.2% of cases overall, higher for lip/ear/recurrent/immunosuppressed disease. Merkel cell carcinoma is aggressive: ~90% cure with local disease but ~52% survival with nodal and ~10% with distant disease (p.602-609).",
+    "pitfalls": [
+      "Morpheaform, infiltrative, and micronodular BCCs have indistinct borders and subtle presentation, so treatment is often delayed and tumors are more extensive than they appear clinically",
+      "SCC can be mistaken for a benign wart or callus when the inflammatory response is minimal",
+      "Pigmented BCC may be confused with melanoma; desmoplastic melanoma can mimic nodular BCC",
+      "Melanoma frequently develops on non-sun-exposed skin (acral, mucosal); in dark-skinned, Hispanic, and East Asian populations melanoma is often non-UV-related, diagnosed at higher stage, and has worse outcomes",
+      "The 31-gene GEP can estimate distant-relapse probability but has not supplanted prognostic estimates from surgical staging, and genomic pathway data are not yet incorporated into AJCC staging",
+      "Standard labs and imaging rarely detect occult metastatic disease in early melanoma and should be directed by symptoms/exam findings"
+    ],
+    "severityClassification": "Melanoma is staged by the AJCC TNM system (T stage built primarily on Breslow thickness and ulceration; pathologic stage incorporates sentinel lymph node biopsy results), from stage 0 (in situ, Tis) through stage IV (distant metastasis); 10-year melanoma-specific survival is depicted by stage in Table 81-3. Merkel cell carcinoma has its own TNM staging incorporating tumor size (<2 cm vs >2 cm), nodal status, and distant metastases (p.602-609).",
+    "references": [
+      "Harrison 22e p.598-609"
+    ],
+    "crossLinks": []
+  }
+}

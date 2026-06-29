@@ -1,0 +1,89 @@
+{
+  "id": "infections_acquired_in_health_care",
+  "name": "Infections Acquired in Health Care Facilities",
+  "system": "Infectious Disease / Hospital Epidemiology",
+  "class": "infective",
+  "chapter": 147,
+  "page": 1146,
+  "aliases": [
+    "Nosocomial infections",
+    "Health care-associated infections",
+    "HAI",
+    "Hospital-acquired infections"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1146",
+    "clinicalPearls": [
+      "Infections appearing within the first 48-72 hours of admission are generally regarded as community-acquired (or attributed to a transferring institution); those arising afterward are considered health care-associated (nosocomial).",
+      "Patient-related vulnerabilities to nosocomial infection include indwelling invasive devices, immune deficiency (congenital or acquired), renal insufficiency, diabetes, and other major comorbidities.",
+      "Disruption of a patient's own microbiota by antibiotics or other drugs promotes colonization with multidrug-resistant organisms; colonized patients then act as silent reservoirs for transmission to others and to the environment.",
+      "Colonization pressure (the proportion of patients on a ward who are colonized) is itself a risk factor for the spread of resistant organisms.",
+      "Catheter-associated bloodstream infections roughly triple the risk of in-hospital death; central lines are foreign objects in direct contact with the bloodstream and each handling is a potential contamination event.",
+      "Ventilator-associated pneumonia occurs in up to 10% of mechanically ventilated patients and can prolong ventilation and ICU stay or be fatal.",
+      "Clostridioides difficile infection is both the most frequent cause of health care-associated diarrhea and the most frequent hospital-acquired infection in the United States; recent antibiotic exposure is the most common precipitant.",
+      "Alcohol-based hand gel and standard hospital cleaners do NOT kill C. difficile spores or inactivate norovirus, so handwashing with soap and water plus sporicidal (e.g., bleach) cleaning is required.",
+      "Candida species account for the vast majority of health care-associated fungal infections; antifungal prophylaxis can select for non-albicans species such as Candida glabrata.",
+      "Candida auris is a multidrug-resistant, environment-adapted pathogen that survives long periods on surfaces and is resistant to some standard disinfectants, requiring select agents and strict contact precautions.",
+      "Tap water is not sterile; waterborne organisms such as Legionella pneumophila and nontuberculous mycobacteria colonize plumbing biofilm, favored by low disinfectant levels, warm temperatures, and stagnation.",
+      "Apart from pregnant patients, asymptomatic bacteriuria in catheterized patients should generally not be cultured or treated; in the elderly nonspecific symptoms like confusion are often unrelated to bacteriuria, and overtreatment drives a cycle of escalating antimicrobial use and resistance.",
+      "Surveillance infection rates are expressed as standardized infection ratios (observed infections divided by predicted infections), benchmarked through the CDC National Healthcare Safety Network."
+    ],
+    "pathophysiology": "Hospitalized patients are exposed to pathogens from other patients, visitors, staff, and the inanimate environment. Health care personnel carry multidrug-resistant organisms between patients on hands or shared equipment (stethoscopes, portable imaging machines); spread also occurs via contaminated plumbing, person-to-person respiratory routes, or contamination of food, water, and medications. Antibiotic exposure disrupts the host microbiota, permitting colonization with resistant organisms; colonized but immunocompromised patients, or those whose barriers are breached by surgery or invasive devices, then develop infection either from their own flora or from cross-transmitted pathogens. Invasive devices (urinary catheters, central venous catheters, endotracheal tubes) create direct portals of entry, bypassing normal defenses. Resistant organisms frequently colonize the gastrointestinal and respiratory tracts and can establish enduring environmental reservoirs, with potential horizontal transfer of resistance genes between co-colonizing strains.",
+    "additionalDifferentials": [
+      "Community-acquired infection (onset within 48-72 h of admission)",
+      "Asymptomatic bacteriuria versus true catheter-associated urinary tract infection",
+      "Noninfectious causes of fever or organ dysfunction in the critically ill",
+      "Drug-related or transfusion-related complications mimicking infection"
+    ],
+    "infectionMimics": [
+      "Asymptomatic bacteriuria mistaken for symptomatic urinary tract infection (especially in the elderly with nonspecific confusion)",
+      "Colonization with multidrug-resistant organisms misread as active infection",
+      "Ventilator-associated events that are noninfectious complications of mechanical ventilation"
+    ],
+    "nonInfectiousMimics": [
+      "Aspiration pneumonitis without bacterial infection",
+      "Postoperative inflammatory fever",
+      "Thrombotic or chemical phlebitis at vascular access sites"
+    ],
+    "additionalInvestigations": [
+      "Laboratory-based surveillance supplemented by clinical chart review by infection preventionists",
+      "Whole genome sequencing as the gold standard for establishing clonality and detecting plasmid-borne resistance genes during outbreak investigation",
+      "Molecular typing of bacterial/fungal (less commonly viral) isolates to confirm an outbreak",
+      "PCR or culture screening for Candida auris in patients transferred from long-term care facilities (isolate pending results)",
+      "Interferon-gamma release assay (preferred over tuberculin skin test) for preemployment tuberculosis screening of health care personnel",
+      "Targeted water testing for Legionella pneumophila in facilities with prior nosocomial cases",
+      "Dedicated public health laboratory testing (nasopharyngeal swabs/washes, conjunctival swabs) for strain identification when novel influenza such as H5N1 is suspected, as commercial multiplex PCR panels are insufficient"
+    ],
+    "redFlags": [
+      "New bloodstream infection in a patient with a central venous catheter (markedly elevated in-hospital mortality)",
+      "Nosocomial diarrhea progressing toward toxic megacolon in C. difficile colitis",
+      "A single case of nosocomial Legionnaires disease, which should trigger a full investigation",
+      "Suspected active tuberculosis requiring immediate airborne precautions",
+      "Identification of Candida auris, carbapenem-resistant Enterobacterales, or other high-priority multidrug-resistant organisms requiring coordinated containment",
+      "Presentation of a returning traveler with possible viral hemorrhagic fever (Ebola, Marburg)"
+    ],
+    "prognosis": "Health care-associated infections are a substantial source of morbidity and mortality in hospitalized patients, frequently caused by antimicrobial-resistant organisms that prolong hospital stays and worsen outcomes. Catheter-associated bloodstream infections triple in-hospital mortality risk, and ventilator-associated pneumonia can be fatal or prolong ICU stay. Multidrug-resistant organism infections are associated with higher morbidity, higher mortality, and added costs; globally about 1.27 million deaths were attributed to antibiotic-resistant infections in 2019. After years of decline from prevention efforts, device-related and other nosocomial infection rates rose during the COVID-19 pandemic.",
+    "pitfalls": [
+      "Culturing and treating asymptomatic bacteriuria in catheterized patients, then re-testing for 'clearance', fueling a cycle of escalating antimicrobial use and resistance.",
+      "Relying on alcohol-based hand gel against C. difficile spores or norovirus, which it does not eliminate.",
+      "Failing to remove indwelling urinary catheters and central lines promptly when no longer needed, the principal driver of these preventable device infections.",
+      "Overlooking that patients already colonized with C. difficile on admission are by far the most likely to develop infection during the stay.",
+      "Missing exogenous transmission of Candida auris because it resists some standard disinfectant cleaners and recontaminates surfaces rapidly.",
+      "Treating commercial multiplex respiratory PCR results as adequate to exclude or identify novel influenza strains such as H5N1."
+    ],
+    "severityClassification": "C. difficile colitis spans a clinical spectrum from mild diarrhea to life-threatening toxic megacolon. Pathogen transmission risk is operationally classified by route into contact, droplet, and airborne precautions (per WHO and CDC); some conditions (e.g., concurrent varicella and SARS-CoV-2) warrant combined precautions. Airborne isolation requires a negative-pressure room with at least 12 air changes per hour, exhausted outdoors or through a HEPA filter, with respirator use; protective (positive-pressure, HEPA-filtered) isolation is used for highly susceptible patients such as those with prolonged neutropenia or stem cell transplants to exclude mold spores.",
+    "references": [
+      "Harrison 22e p.1146",
+      "Harrison 22e p.1147",
+      "Harrison 22e p.1148",
+      "Harrison 22e p.1149",
+      "Harrison 22e p.1150",
+      "Harrison 22e p.1151"
+    ],
+    "crossLinks": []
+  }
+}

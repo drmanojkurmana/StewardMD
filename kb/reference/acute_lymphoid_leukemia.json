@@ -1,0 +1,83 @@
+{
+  "id": "acute_lymphoid_leukemia",
+  "name": "Acute Lymphoid Leukemia",
+  "system": "Hematologic/Oncologic",
+  "class": "non_infective",
+  "chapter": 111,
+  "page": 844,
+  "aliases": [
+    "Acute Lymphoblastic Leukemia",
+    "ALL"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.844",
+    "clinicalPearls": [
+      "In ALL the malignant clone arises from hematopoietic progenitors in marrow or lymphatic tissue, producing immature nonfunctioning blasts; marrow infiltration causes anemia, granulocytopenia, and thrombocytopenia, so fatigue, infection, and hemorrhage (rather than tumor bulk) are usually the presenting complaints.",
+      "Tumor-bulk features such as lymphadenopathy, hepatosplenomegaly from leukemic infiltration, and CNS involvement (meningeosis leukemica) may occur but are less often the reason a patient first seeks care.",
+      "ALL is the most frequent neoplasm of childhood with an early peak at age 3-4 years; in adults the incidence ranges from about 0.7 to 1.8 per 100,000 per year, higher in adolescents/young adults and rising again in the elderly.",
+      "The WBC count is normal or reduced in roughly 40% of patients, and in about 8% no circulating blasts are seen, so automated counters may fail to flag the diagnosis; only about 16% present with WBC above 100 x 10^9/L.",
+      "Bone marrow is typically heavily packed, with more than 90% blasts in about 70% of patients and near-absent normal hematopoiesis; a biopsy is essential to confirm acute leukemia and distinguish ALL from AML.",
+      "Immunophenotyping is the principal tool for subclassification: more than 70% of adult ALL is B-lineage (common ALL being most frequent, CD10+), while about 25% is T-lineage (all express CD7 and cytoplasmic/surface CD3).",
+      "An immunologic marker is considered positive when more than 20% of cells stain with the monoclonal antibody.",
+      "Philadelphia chromosome-positive ALL (t(9;22), BCR-ABL1) is seen in roughly half of elderly B-lineage patients; subtype frequencies shift substantially with age.",
+      "Minimal residual disease detected by flow cytometry, RT-qPCR for clonal Ig/TCR rearrangements or fusion transcripts (limit ~0.1-0.001%, lower with NGS/ddPCR) is the most important prognostic factor during therapy; patient-specific markers should be banked from diagnostic marrow.",
+      "Achieving a molecular complete remission after induction predicts disease-free survival around 70% versus under 40% for MRD-positive patients, the single most relevant independent prognostic factor in both pediatric and adult ALL.",
+      "Mature B-ALL (Burkitt leukemia, ~3-4% of adults) expresses surface IgM, shows L3 morphology, and has short relapse kinetics (up to ~1-1.5 years) with frequent organ and CNS involvement.",
+      "Down syndrome carries a roughly 20-fold increased leukemia risk (ALL predominating in childhood, AML at older age), and other congenital disorders raising risk include Klinefelter, Fanconi anemia, Bloom syndrome, ataxia-telangiectasia, and neurofibromatosis."
+    ],
+    "pathophysiology": "Malignant transformation of lymphoid progenitor cells in the bone marrow or lymphatic system produces a clone of immature, nonfunctioning lymphoblasts. Progressive marrow infiltration crowds out normal hematopoiesis, yielding anemia, neutropenia, and thrombocytopenia. Blasts may also infiltrate lymph nodes, liver, spleen, mediastinum, and the central nervous system (a pharmacologic sanctuary site). Subtypes correspond to arrest at defined stages of B-cell or T-cell differentiation and carry characteristic cytogenetic/molecular lesions such as t(9;22)/BCR-ABL1, t(4;11)/MLL-AF4, t(1;19)/PBX-E2A, and t(8;14) in mature B-ALL, as well as newer entities including early T-precursor (ETP) ALL and Ph-like (BCR-ABL1-like) ALL driven by IKZF1 deletion, CRLF2 overexpression, and tyrosine kinase-activating rearrangements (ABL1, JAK2, PDGFRB).",
+    "additionalDifferentials": [
+      "Acute myeloid leukemia (distinguished by marrow biopsy, cytochemistry, and immunophenotype)",
+      "Biphenotypic/mixed-phenotype acute leukemia (markers of both lymphoid and myeloid lineages on the same cells)",
+      "Bilineage leukemia (two separate blast populations, lymphoid and myeloid)",
+      "Lymphoblastic lymphoma (e.g., precursor T- or B-lymphoblastic lymphoma)",
+      "Chronic myeloid leukemia in lymphoid blast crisis",
+      "Aplastic anemia or other marrow failure presenting with pancytopenia"
+    ],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Acute myeloid leukemia",
+      "Lymphoblastic lymphoma with marrow involvement",
+      "Marrow failure syndromes presenting as pancytopenia"
+    ],
+    "additionalInvestigations": [
+      "Peripheral blood count with Wright-Giemsa-stained differential smear at presentation",
+      "Bone marrow aspirate and biopsy for morphology, immunophenotype, cytogenetics, and molecular markers",
+      "Cytochemical stains and immunologic marker panel to assign B- versus T-lineage",
+      "Standard cytogenetics, FISH, and RT-PCR to detect t(9;22)/BCR-ABL1, t(4;11)/MLL, t(1;19)/PBX-E2A and other entities",
+      "Gene expression profiling, SNP array, array-CGH, and next-generation sequencing to identify ETP-ALL and Ph-like ALL",
+      "Lumbar puncture with CSF examination for CNS leukemia (diagnostic if >=5 cells/uL or blasts on morphology)",
+      "MRD assessment by flow cytometry or RT-qPCR/NGS/ddPCR with collection of patient-specific markers at diagnosis"
+    ],
+    "redFlags": [
+      "Platelet count below 20 x 10^9/L, signaling high bleeding risk",
+      "Neutropenia with neutrophils below 0.5 x 10^9/L, signaling high infection risk",
+      "Hemoglobin below 7-8 g/dL (present in nearly one-third of patients)",
+      "Hyperleukocytosis (WBC above 100 x 10^9/L), more common in t(4;11) and T-ALL",
+      "CNS involvement at diagnosis (5-10% overall, higher in mature B-ALL and T-ALL)",
+      "Large mediastinal mass in T-ALL (frequent, up to ~60%) with potential airway/vascular compromise",
+      "Risk of tumor lysis syndrome at treatment initiation given high tumor burden"
+    ],
+    "prognosis": "Outcome is strongly age-dependent, with cure rates around 90% in children falling to under 10% in elderly or frail patients. Prognostic stratification rests on age, WBC count at diagnosis, immunophenotype, cytogenetic/genetic lesions, and especially MRD response: molecular complete remission after induction predicts disease-free survival near 70% versus under 40% if MRD-positive. The greatest relapse risk is within the first 2 years and is much lower after 5 years. Relapse kinetics vary by subtype, being short (up to ~1-1.5 years) in mature B-ALL, intermediate (~3-4 years) in T-ALL, and prolonged (up to 5-7 years) in common ALL. CNS relapse, usually accompanied by marrow involvement, carries a dismal outcome.",
+    "pitfalls": [
+      "Because the WBC is normal or low in about 40% of patients and roughly 8% have no circulating blasts, automated blood counts may miss the diagnosis; a manual smear and marrow biopsy are required.",
+      "Failing to bank diagnostic marrow for patient-specific markers compromises later MRD follow-up.",
+      "Assuming an MRD-negative result guarantees cure: 20-30% of MRD-negative adults still relapse, attributable to loss of assay sensitivity, evolving subclones, or extramedullary disease.",
+      "Performing lumbar puncture without an adequate platelet count (>20 x 10^9/L) or in the presence of clinical hemorrhage; potentially seeded blasts should be addressed with intrathecal therapy at the first tap.",
+      "Overlooking that L1/L2 FAB morphology has no clinical bearing while only L3 morphology indicates mature B-ALL.",
+      "Misclassifying Ph-like ALL as Ph-positive: Ph-like ALL is BCR-ABL1 negative despite similar genetic lesions and requires molecular testing to identify."
+    ],
+    "severityClassification": "Lineage/immunophenotypic subtyping (EGIL-type) divides ALL into B-lineage (pro-B, common, pre-B, mature B/Burkitt) and T-lineage (early/ETP, cortical-thymic, mature) categories. MRD-based response categories (Harrison Table 111-3) include complete hematologic remission (<5% marrow blasts), complete molecular remission/MRD negativity (<=0.01%, i.e. <=1 leukemic cell in 10,000 marrow cells), molecular failure/MRD positivity (>0.01% with hematologic remission), molecular relapse, and hematologic relapse (>5% blasts in marrow or blood). Risk stratification assigns standard-risk patients (no risk factors) versus high-risk patients (one or more of advanced age, high WBC, adverse immunophenotype, or adverse cytogenetic/genetic lesions).",
+    "references": [
+      "Harrison 22e p.844",
+      "Harrison 22e p.845",
+      "Harrison 22e p.846",
+      "Harrison 22e p.847"
+    ],
+    "crossLinks": []
+  }
+}
