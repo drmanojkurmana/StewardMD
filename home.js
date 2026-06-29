@@ -354,6 +354,16 @@
       ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
       ".hv-fab{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:9999;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:flex}.hv-fab svg{width:34px;height:34px}.hv-fab svg image{opacity:.96}.hv-fab:active{transform:scale(.92)}",
       ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
+      // account/profile block injected into the sidebar (settings)
+      ".smd-sba{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(127,127,127,.18);background:linear-gradient(180deg,rgba(20,184,166,.10),transparent)}",
+      ".smd-sba-pic{width:42px;height:42px;border-radius:50%;object-fit:cover;flex:0 0 auto;background:#0F766E}",
+      ".smd-sba-ph{display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:17px}",
+      ".smd-sba-info{flex:1;min-width:0}",
+      ".smd-sba-name{font-weight:700;font-size:14px;color:var(--ink,#14202b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".smd-sba-email{font-size:12px;color:var(--slate-soft,#5a7184);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+      ".smd-sba-prov{font-size:10.5px;color:#0F766E;font-weight:600;margin-top:1px}",
+      ".smd-sba-btn{flex:0 0 auto;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);color:#0F766E;font-weight:600;font-size:12px;padding:7px 11px;border-radius:8px;cursor:pointer}",
+      ".smd-sba-btn:active{transform:scale(.96)}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -563,7 +573,12 @@
     function refreshFab() {
       if (!fab) return;
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
-        var el = document.getElementById(id); return el && el.offsetWidth > 0 && el.offsetHeight > 0;
+        var el = document.getElementById(id); if (!el) return false;
+        // A gate counts as "up" only if genuinely visible — these gates fade out via
+        // opacity/visibility but stay display:flex (width>0), so offsetWidth alone would
+        // keep the home button hidden forever once the gate is dismissed.
+        var cs = window.getComputedStyle(el);
+        return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
       });
       var want = gateUp ? "none" : "flex";
       if (fab.style.display !== want) fab.style.display = want;
@@ -767,8 +782,47 @@
       window.openMyCases._smdWrapped = true;
     }
   }
+  // ---- Account / profile block in the sidebar (settings) ----
+  function smdEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function readAccount() { try { return JSON.parse(localStorage.getItem("stewardmd_account") || "null"); } catch (e) { return null; } }
+  function injectSbAccount() {
+    var drawer = document.getElementById("sbDrawer"); if (!drawer) return;
+    var head = drawer.querySelector(".sb-head"); if (!head) return;
+    var box = document.getElementById("smdSbAccount");
+    if (!box) { box = document.createElement("div"); box.id = "smdSbAccount"; box.className = "smd-sba"; head.insertAdjacentElement("afterend", box); }
+    var a = readAccount();
+    if (a && a.email) {
+      var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
+      var pic = a.picture
+        ? '<img class="smd-sba-pic" src="' + smdEsc(a.picture) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=&quot;smd-sba-pic smd-sba-ph&quot;>' + smdEsc(initial) + '</div>\'">'
+        : '<div class="smd-sba-pic smd-sba-ph">' + smdEsc(initial) + '</div>';
+      box.innerHTML = pic +
+        '<div class="smd-sba-info"><div class="smd-sba-name">' + smdEsc(a.name || "Signed in") + '</div>' +
+        '<div class="smd-sba-email">' + smdEsc(a.email) + '</div>' +
+        '<div class="smd-sba-prov">' + (a.type === "google" ? "Google account" : "Account") + '</div></div>' +
+        '<button class="smd-sba-btn" id="smdSbSignOut" type="button">Sign out</button>';
+    } else {
+      box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +
+        '<div class="smd-sba-info"><div class="smd-sba-name">Not signed in</div>' +
+        '<div class="smd-sba-email">Guest mode — cloud sync off</div></div>' +
+        '<button class="smd-sba-btn" id="smdSbSignIn" type="button">Sign in</button>';
+    }
+  }
+  function wrapSidebar() {
+    if (window.SB && typeof window.SB.open === "function" && !window.SB.open._smdWrapped) {
+      var orig = window.SB.open;
+      window.SB.open = function () { var r = orig.apply(this, arguments); try { injectSbAccount(); } catch (e) {} return r; };
+      window.SB.open._smdWrapped = true;
+    }
+  }
+  // sign-in / sign-out buttons are re-created on each open → delegate.
+  document.addEventListener("click", function (e) {
+    var t = e.target; if (!t || !t.id) return;
+    if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
+    else if (t.id === "smdSbSignIn") { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} }
+  }, false);
   function start() {
-    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases();
+    injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar();
     if (IS_V2) {
       // show the new home as soon as the user is past splash/login, COVERING the app's own
       // Simple/Advanced screen so it isn't seen twice. Theme applies then (never on splash/consent).
