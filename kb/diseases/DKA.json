@@ -1,0 +1,27 @@
+{
+  "id": "DKA",
+  "name": "Diabetic ketoacidosis",
+  "aliases": ["DKA", "diabetic ketoacidosis"],
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": { "icd10": "E10.1", "icd11": null, "snomed": null },
+  "matching": {
+    "find": { "ketonemia": 40, "polyuriaPolydipsia": 28, "diabetesHx": 24, "dyspnea": 10, "abdominalPain": 10, "alteredSensorium": 10, "fever": -6 },
+    "reasoningTemplate": "High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA — search for a precipitant."
+  },
+  "differentials": ["hhs", "metabolic_enceph"],
+  "redFlags": ["DKA protocol; look for precipitating infection"],
+  "investigations": [{ "test": "Venous gas", "why": "Acidosis" }, { "test": "Blood & urine ketones", "why": "Confirm ketonaemia" }, { "test": "Glucose, electrolytes", "why": "Potassium critical" }],
+  "narrative": [
+    { "section": "overview", "text": "Fluid resuscitation, fixed-rate insulin, potassium replacement and treating the precipitant are the pillars of DKA management.", "source": { "ref": "Harrison 22e", "locator": { "page": null, "section": "Diabetic Ketoacidosis" } }, "embedding": null }
+  ],
+  "treatmentRef": "DKA",
+  "policyRef": null,
+  "calculatorRefs": ["dka"],
+  "icuModuleRefs": ["electrolytes"],
+  "drugRefs": ["insulin regular", "potassium chloride", "sodium chloride"],
+  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
+  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
+  "version": 1,
+  "contentHash": null
+}

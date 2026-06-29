@@ -1,0 +1,36 @@
+{
+  "id": "PYELONEPHRITIS",
+  "name": "Acute pyelonephritis",
+  "aliases": ["pyelonephritis", "upper UTI", "kidney infection"],
+  "class": "infective",
+  "system": "Genitourinary",
+  "coding": { "icd10": "N10", "icd11": null, "snomed": null },
+  "matching": {
+    "rule": { "allOf": ["flankPain", { "anyOf": ["feverGU", "dysuria", "costovertebralTenderness"] }] },
+    "score": { "base": 60, "modifiers": [
+      { "when": "flankPain", "add": 15 },
+      { "when": "feverGU", "add": 15 },
+      { "when": "costovertebralTenderness", "add": 10 },
+      { "when": "nauseaVomiting", "add": 5 },
+      { "when": "hypotension", "add": 15 }
+    ] },
+    "associatedFindings": ["flankPain", "feverGU", "dysuria", "costovertebralTenderness", "nauseaVomiting", "hypotension"],
+    "reasoningTemplate": "Flank pain with fever / dysuria / CVA tenderness indicates acute pyelonephritis; assess for urosepsis."
+  },
+  "pathogens": { "veryLikely": ["Escherichia coli"], "likely": ["Klebsiella", "Proteus"], "possible": ["Enterococcus", "Pseudomonas (complicated)"], "why": "Ascending Enterobacterales infection." },
+  "differentials": ["renal_colic", "PROSTATITIS"],
+  "redFlags": ["Hypotension → urosepsis; obstruction needs urgent decompression"],
+  "investigations": [{ "test": "Urinalysis + culture", "why": "Organism + susceptibility" }, { "test": "USS/CT if obstruction", "why": "Obstructed infected system = emergency" }],
+  "narrative": [
+    { "section": "overview", "text": "Treat empirically per local resistance; image to exclude obstruction when severe or not improving.", "source": { "ref": "Harrison 22e", "locator": { "page": null, "section": "Urinary Tract Infections" } }, "embedding": null }
+  ],
+  "treatmentRef": "PYELONEPHRITIS",
+  "policyRef": "PYELONEPHRITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": ["ceftriaxone", "amikacin", "piperacillin tazobactam"],
+  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
+  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
+  "version": 1,
+  "contentHash": null
+}
