@@ -95,9 +95,44 @@
     "IDSA Acute Bacterial Rhinosinusitis Guidelines",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>e.symptomsOver10Days||e.doubleSickening?`Symptoms persisting beyond 10 days without improvement${e.doubleSickening?\", or a pattern of ‘double sickening’ (initial improvement followed by worsening)\":\"\"}, raise suspicion for bacterial superinfection of acute sinusitis. This meets criteria where a short course of antibiotics is reasonable, though many cases still resolve without them.`:\"Symptoms of less than 10 days duration without double-sickening pattern are most consistent with viral rhinosinusitis. Antibiotics are not indicated at this stage; watchful waiting with symptomatic treatment is appropriate.\"",
   "decision": {
     "status": "yellow",
     "label": "Observe / Further evaluation required"
-  }
+  },
+  "reason": [
+    "cond",
+    {
+      "anyOf": [
+        "symptomsOver10Days",
+        "doubleSickening"
+      ]
+    },
+    [
+      "seq",
+      [
+        "lit",
+        "Symptoms persisting beyond 10 days without improvement"
+      ],
+      [
+        "cond",
+        "doubleSickening",
+        [
+          "lit",
+          ", or a pattern of ‘double sickening’ (initial improvement followed by worsening)"
+        ],
+        [
+          "lit",
+          ""
+        ]
+      ],
+      [
+        "lit",
+        ", raise suspicion for bacterial superinfection of acute sinusitis. This meets criteria where a short course of antibiotics is reasonable, though many cases still resolve without them."
+      ]
+    ],
+    [
+      "lit",
+      "Symptoms of less than 10 days duration without double-sickening pattern are most consistent with viral rhinosinusitis. Antibiotics are not indicated at this stage; watchful waiting with symptomatic treatment is appropriate."
+    ]
+  ]
 }

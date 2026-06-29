@@ -117,9 +117,43 @@
     "Harrison's Principles of Internal Medicine",
     "Surviving Sepsis Campaign (for hemodynamic support if shock present)"
   ],
-  "reasonSource": "e=>`Fever with neck stiffness${e.alteredSensorium?\", altered sensorium\":\"\"}${e.photophobia?\", and photophobia\":\"\"} is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.`",
   "decision": {
     "status": "red",
     "label": "Immediate empiric antibiotics required"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Fever with neck stiffness"
+    ],
+    [
+      "cond",
+      "alteredSensorium",
+      [
+        "lit",
+        ", altered sensorium"
+      ],
+      [
+        "lit",
+        ""
+      ]
+    ],
+    [
+      "cond",
+      "photophobia",
+      [
+        "lit",
+        ", and photophobia"
+      ],
+      [
+        "lit",
+        ""
+      ]
+    ],
+    [
+      "lit",
+      " is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay."
+    ]
+  ]
 }

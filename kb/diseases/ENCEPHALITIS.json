@@ -118,9 +118,38 @@
     "Harrison's Principles of Internal Medicine",
     "NCDC India Guidelines (Japanese Encephalitis)"
   ],
-  "reasonSource": "e=>`Fever with altered sensorium and ${[e.seizure&&\"seizure\",e.focalNeuroDeficit&&\"focal neurological deficit\",e.behavioralChange&&\"behavioral change\"].filter(Boolean).join(\", \")||\"encephalopathic features\"} suggests encephalitis. Empiric IV acyclovir for HSV encephalitis should be started immediately alongside antibacterial coverage for bacterial meningoencephalitis until CSF PCR results are available, since HSV encephalitis carries high mortality and morbidity if treatment is delayed.`",
   "decision": {
     "status": "red",
     "label": "Immediate empiric antibiotics required"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Fever with altered sensorium and "
+    ],
+    [
+      "join",
+      ", ",
+      "encephalopathic features",
+      [
+        [
+          "seizure",
+          "seizure"
+        ],
+        [
+          "focalNeuroDeficit",
+          "focal neurological deficit"
+        ],
+        [
+          "behavioralChange",
+          "behavioral change"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      " suggests encephalitis. Empiric IV acyclovir for HSV encephalitis should be started immediately alongside antibacterial coverage for bacterial meningoencephalitis until CSF PCR results are available, since HSV encephalitis carries high mortality and morbidity if treatment is delayed."
+    ]
+  ]
 }

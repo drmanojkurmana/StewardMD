@@ -25,7 +25,58 @@
         "htn_emergency:28"
       ],
       "nInf": 15,
-      "nNi": 46
+      "nNi": 46,
+      "leadInf": "MENINGITIS",
+      "leadInfReason": "Fever with neck stiffness, altered sensorium, and photophobia is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
+      "leadNi": "sah",
+      "leadNiReason": "Sudden worst-ever headache ± meningism and reduced consciousness is classic for subarachnoid hemorrhage.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "frequency": "every 12 hours",
+          "duration": "10-14 days (organism-dependent)",
+          "why": "Reliable CSF penetration and coverage of S. pneumoniae and N. meningitidis, the two dominant pathogens in community-acquired bacterial meningitis."
+        },
+        {
+          "drug": "Vancomycin",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "frequency": "every 8-12 hours (trough-guided)",
+          "duration": "10-14 days",
+          "why": "Added empirically to cover the possibility of ceftriaxone-resistant S. pneumoniae, given the high stakes of inadequate coverage in this disease."
+        },
+        {
+          "drug": "Dexamethasone (adjunctive)",
+          "dose": "10 mg",
+          "route": "IV",
+          "frequency": "every 6 hours, given with or just before first antibiotic dose",
+          "duration": "4 days",
+          "why": "Adjunctive dexamethasone reduces mortality and neurological sequelae specifically in pneumococcal meningitis when given with or before the first antibiotic dose."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus pneumoniae",
+          "Neisseria meningitidis"
+        ],
+        "likely": [
+          "Listeria monocytogenes (neonates, elderly, immunocompromised, pregnant)"
+        ],
+        "possible": [
+          "Haemophilus influenzae (unvaccinated populations)",
+          "Gram-negative bacilli (post-neurosurgery, immunocompromised)"
+        ],
+        "why": "S. pneumoniae and N. meningitidis are the leading causes of community-acquired bacterial meningitis across most age groups. Listeria is specifically added in neonates, those over 50, pregnant patients, and the immunocompromised, since standard empiric regimens do not cover it."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "alteredSensorium",
+        "hypotension",
+        "petechialRash",
+        "seizure"
+      ]
     },
     "cap": {
       "inf": [
@@ -45,7 +96,49 @@
         "svc_obstruction:26"
       ],
       "nInf": 6,
-      "nNi": 36
+      "nNi": 36,
+      "leadInf": "CAP",
+      "leadInfReason": "Clinical findings (fever, productive cough, crepitations, tachypnea) support a diagnosis of community-acquired pneumonia. Bacterial probability is high enough to justify empiric antibiotic therapy without delay for culture results.",
+      "leadNi": "sarcoidosis",
+      "leadNiReason": "Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Amoxicillin",
+          "dose": "1 g",
+          "route": "Oral",
+          "frequency": "every 8 hours",
+          "duration": "5 days",
+          "why": "Amoxicillin is first-line for outpatient CAP without comorbidity — it reliably covers Streptococcus pneumoniae, the dominant pathogen, with a narrow spectrum that limits collateral damage."
+        },
+        {
+          "drug": "Azithromycin (if atypical features or comorbidity)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "frequency": "once daily",
+          "duration": "5 days total",
+          "why": "Added when atypical features (dry cough, extrapulmonary symptoms) or comorbidities are present, to cover Mycoplasma, Chlamydophila and Legionella, which amoxicillin does not cover."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus pneumoniae",
+          "Haemophilus influenzae"
+        ],
+        "likely": [
+          "Mycoplasma pneumoniae",
+          "Chlamydophila pneumoniae"
+        ],
+        "possible": [
+          "Legionella pneumophila",
+          "Respiratory viruses (influenza, RSV)"
+        ],
+        "why": "Outpatient/ward-level CAP without severity criteria is overwhelmingly community-acquired and typical-organism predominant. S. pneumoniae remains the leading cause across age groups; H. influenzae is more frequent in smokers and COPD. Atypicals (Mycoplasma, Chlamydophila) are added because clinical and radiographic findings cannot reliably distinguish typical from atypical pneumonia."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "tachycardia",
+        "tachypnea"
+      ]
     },
     "pyelonephritis": {
       "inf": [
@@ -65,7 +158,49 @@
         "bowel_obstruction:2"
       ],
       "nInf": 7,
-      "nNi": 23
+      "nNi": 23,
+      "leadInf": "PYELONEPHRITIS",
+      "leadInfReason": "Flank pain with fever indicates upper urinary tract infection (pyelonephritis). This requires antibiotics with reliable renal tissue penetration, with outpatient oral therapy appropriate in hemodynamically stable, tolerating patients.",
+      "leadNi": "renal_colic",
+      "leadNiReason": "Severe colicky flank pain radiating to the groin with haematuria and no fever suggests a stone.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone",
+          "dose": "1-2 g",
+          "route": "IV",
+          "frequency": "once daily",
+          "duration": "7-14 days (step down to oral when improving)",
+          "why": "Reliable renal tissue penetration and coverage of E. coli and other common uropathogens, appropriate for an upper tract infection where treatment failure carries higher risk."
+        },
+        {
+          "drug": "Ciprofloxacin (outpatient, stable, low resistance area)",
+          "dose": "500 mg",
+          "route": "Oral",
+          "frequency": "every 12 hours",
+          "duration": "7 days",
+          "why": "Appropriate oral option for hemodynamically stable outpatients in regions with acceptable local E. coli fluoroquinolone resistance."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Escherichia coli"
+        ],
+        "likely": [
+          "Klebsiella pneumoniae",
+          "Proteus mirabilis"
+        ],
+        "possible": [
+          "Enterococcus species",
+          "Pseudomonas aeruginosa (catheter/structural risk)"
+        ],
+        "why": "Pyelonephritis pathogens largely mirror uncomplicated UTI but with greater clinical consequence of undertreatment, since ascending infection from the same uropathogens can progress to bacteremia and sepsis."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "hypotension",
+        "tachycardia",
+        "nauseaVomiting"
+      ]
     },
     "septic_shock": {
       "inf": [
@@ -85,7 +220,52 @@
         "adrenal_crisis:40"
       ],
       "nInf": 20,
-      "nNi": 48
+      "nNi": 48,
+      "leadInf": "SEVERE_CAP",
+      "leadInfReason": "Clinical findings meet severity criteria for severe CAP (hypotension, altered sensorium). This represents a high-risk presentation requiring immediate empiric broad-spectrum therapy and consideration of ICU-level care.",
+      "leadNi": "thyroid_storm",
+      "leadNiReason": "Fever, tachycardia and agitation with thyrotoxic features suggest thyroid storm — a non-infectious cause of fever.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "frequency": "once daily",
+          "duration": "7-10 days (step down to oral when stable)",
+          "why": "Ceftriaxone provides reliable coverage for S. pneumoniae and H. influenzae, the core typical pathogens, with good CNS and tissue penetration appropriate for severe disease."
+        },
+        {
+          "drug": "Azithromycin",
+          "dose": "500 mg",
+          "route": "IV/Oral",
+          "frequency": "once daily",
+          "duration": "5 days (can switch to oral)",
+          "why": "Added for atypical and Legionella coverage, which is essential in severe CAP given the disproportionate contribution of Legionella to severe and fatal presentations."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus pneumoniae",
+          "Legionella pneumophila"
+        ],
+        "likely": [
+          "Staphylococcus aureus (including post-influenza)",
+          "Gram-negative enteric bacilli",
+          "Haemophilus influenzae"
+        ],
+        "possible": [
+          "Pseudomonas aeruginosa (if structural lung disease)"
+        ],
+        "why": "Severe CAP carries a broader and more virulent pathogen spectrum than non-severe CAP. Legionella and S. aureus are disproportionately represented in ICU-level disease. Gram-negatives become relevant with comorbidity, aspiration risk, or recent hospitalization."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "tachycardia",
+        "tachypnea",
+        "hypotension",
+        "hypoxia",
+        "alteredSensorium"
+      ]
     },
     "cholangitis": {
       "inf": [
@@ -105,7 +285,41 @@
         "pancreatitis:12"
       ],
       "nInf": 8,
-      "nNi": 27
+      "nNi": 27,
+      "leadInf": "CHOLANGITIS",
+      "leadInfReason": "Right upper quadrant pain, fever, and jaundice (Charcot's triad) are consistent with acute cholangitis, a condition that can progress rapidly to septic shock from biliary obstruction. Empiric broad-spectrum antibiotics must be started immediately, with urgent biliary drainage (ERCP or percutaneous) as the definitive source control measure — antibiotics alone are insufficient if obstruction is not relieved.",
+      "leadNi": "toxic_hepatitis",
+      "leadNiReason": "Jaundice and transaminitis after a hepatotoxic drug/overdose, without sepsis, suggests toxic hepatitis.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "frequency": "every 6-8 hours",
+          "duration": "4-7 days after adequate biliary drainage",
+          "why": "Provides reliable coverage of gram-negative enteric organisms and anaerobes, the dominant pathogens in cholangitis, and is appropriate first-line per Tokyo Guidelines for moderate-severe disease."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Escherichia coli",
+          "Klebsiella pneumoniae"
+        ],
+        "likely": [
+          "Enterococcus species",
+          "Enterobacter species"
+        ],
+        "possible": [
+          "Anaerobes (Bacteroides species) — particularly with prior biliary instrumentation or surgery"
+        ],
+        "why": "Cholangitis pathogens reflect ascending enteric flora from the duodenum into an obstructed biliary tree, dominated by gram-negative Enterobacteriaceae, with anaerobes and enterococci becoming more relevant with prior instrumentation (ERCP, stents) or recurrent disease."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "hypotension",
+        "alteredSensorium",
+        "jaundice"
+      ]
     },
     "decomp_cirrhosis": {
       "inf": [
@@ -125,7 +339,40 @@
         "malignancy_b:12"
       ],
       "nInf": 11,
-      "nNi": 7
+      "nNi": 7,
+      "leadInf": "SBP",
+      "leadInfReason": "In a patient with ascites, clinical suspicion raises concern for spontaneous bacterial peritonitis. Diagnostic paracentesis with ascitic fluid analysis should be performed promptly, and empiric antibiotics should be started once ascitic fluid neutrophil count supports the diagnosis (or immediately if paracentesis is delayed and suspicion is high), without waiting for culture results given the risk of rapid deterioration in cirrhotic patients.",
+      "leadNi": "hepatic_enceph",
+      "leadNiReason": "Encephalopathy with stigmata of chronic liver disease suggests hepatic encephalopathy — seek a precipitant.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Cefotaxime",
+          "dose": "2 g",
+          "route": "IV",
+          "frequency": "every 8 hours",
+          "duration": "5 days",
+          "why": "Cefotaxime is the best-studied first-line agent for SBP, with reliable coverage of the dominant gram-negative and streptococcal pathogens and good ascitic fluid penetration."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Escherichia coli",
+          "Klebsiella pneumoniae"
+        ],
+        "likely": [
+          "Streptococcus species (including Streptococcus pneumoniae)"
+        ],
+        "possible": [
+          "Enterococcus species (more relevant in healthcare-associated SBP or prior antibiotic exposure)"
+        ],
+        "why": "SBP is monomicrobial in the great majority of cases and reflects bacterial translocation from the gut, dominated by gram-negative Enterobacteriaceae, with gram-positive cocci accounting for most of the remainder."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "hypotension",
+        "alteredSensorium",
+        "organDysfunction"
+      ]
     },
     "dka": {
       "inf": [
@@ -144,7 +391,35 @@
         "hypoglycemia:20"
       ],
       "nInf": 5,
-      "nNi": 19
+      "nNi": 19,
+      "leadInf": "C_DIFF",
+      "leadInfReason": "New diarrhea following recent antibiotic exposure (often within the preceding 8 weeks, though it can occur during therapy) raises suspicion for Clostridioides difficile infection. Note the specific terminology here — treatment is itself with a different class of \"antibiotics\" targeted at C. difficile (oral vancomycin or fidaxomicin), which is distinct from and the inverse of typical antibiotic stewardship: the priority is stopping the inciting antibiotic if still being given, plus starting C. difficile-directed therapy.",
+      "leadNi": "dka",
+      "leadNiReason": "High-anion-gap acidosis with ketonaemia in a diabetic indicates DKA — search for a precipitant.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Oral Vancomycin",
+          "dose": "125 mg",
+          "route": "Oral",
+          "frequency": "every 6 hours",
+          "duration": "10 days",
+          "why": "Oral (not IV) vancomycin is first-line for C. difficile infection — it acts locally in the gut lumen and is not systemically absorbed, which is precisely why it works here despite IV vancomycin having no role in typical gut infections."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Clostridioides difficile (toxigenic strains)"
+        ],
+        "likely": [],
+        "possible": [],
+        "why": "C. difficile is essentially the sole cause of antibiotic-associated colitis with this clinical pattern; testing (toxin EIA, PCR, or a two-step algorithm) confirms the diagnosis since asymptomatic colonization is common and should not be treated."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "hypotension",
+        "severeAbdominalPain",
+        "abdominalDistension"
+      ]
     },
     "acs": {
       "inf": [],
@@ -155,7 +430,14 @@
         "heart_failure:14"
       ],
       "nInf": 0,
-      "nNi": 4
+      "nNi": 4,
+      "leadInf": null,
+      "leadInfReason": null,
+      "leadNi": "acs",
+      "leadNiReason": "Pressure-type / exertional chest pain with ischaemic ECG or risk factors favours an acute coronary syndrome.",
+      "leadInfFirstLine": null,
+      "leadInfPathogens": null,
+      "leadInfStewardship": null
     },
     "pe": {
       "inf": [
@@ -171,7 +453,51 @@
         "heart_failure:40"
       ],
       "nInf": 2,
-      "nNi": 28
+      "nNi": 28,
+      "leadInf": "HAP",
+      "leadInfReason": "New fever, cough and radiographic infiltrate developing after 48 hours of hospitalization meet criteria for hospital-acquired pneumonia. The nosocomial setting shifts pathogen likelihood toward resistant gram-negatives, warranting empiric therapy that accounts for local resistance patterns and prior antibiotic exposure.",
+      "leadNi": "pe",
+      "leadNiReason": "Pleuritic chest pain and dyspnoea with hypoxia or DVT features suggest pulmonary embolism.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "frequency": "every 6-8 hours",
+          "duration": "7 days",
+          "why": "Covers Pseudomonas, Enterobacteriaceae, and other common hospital gram-negatives — appropriate empiric choice when MDR risk is not high."
+        },
+        {
+          "drug": "Vancomycin (if MRSA risk factors)",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "frequency": "every 8-12 hours (trough-guided)",
+          "duration": "7 days",
+          "why": "Added when MRSA risk factors are present (prior MRSA colonization, high local MRSA prevalence, recent broad-spectrum antibiotics)."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Pseudomonas aeruginosa",
+          "Klebsiella pneumoniae",
+          "Escherichia coli"
+        ],
+        "likely": [
+          "Staphylococcus aureus (including MRSA)",
+          "Acinetobacter baumannii"
+        ],
+        "possible": [
+          "Enterobacter species",
+          "Other MDR gram-negatives based on local ICU flora"
+        ],
+        "why": "HAP arising after 48 hours of hospitalization reflects a shift toward hospital flora, which is enriched for gram-negative organisms with higher resistance rates, particularly in patients with prior antibiotic exposure or ICU stay."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "tachypnea",
+        "hypoxia",
+        "hypotension"
+      ]
     },
     "heart_failure": {
       "inf": [
@@ -187,7 +513,51 @@
         "anaphylaxis:24"
       ],
       "nInf": 2,
-      "nNi": 26
+      "nNi": 26,
+      "leadInf": "HAP",
+      "leadInfReason": "New fever, cough and radiographic infiltrate developing after 48 hours of hospitalization meet criteria for hospital-acquired pneumonia. The nosocomial setting shifts pathogen likelihood toward resistant gram-negatives, warranting empiric therapy that accounts for local resistance patterns and prior antibiotic exposure.",
+      "leadNi": "heart_failure",
+      "leadNiReason": "Orthopnoea, raised JVP and bilateral crackles favour cardiogenic pulmonary oedema rather than infection.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "frequency": "every 6-8 hours",
+          "duration": "7 days",
+          "why": "Covers Pseudomonas, Enterobacteriaceae, and other common hospital gram-negatives — appropriate empiric choice when MDR risk is not high."
+        },
+        {
+          "drug": "Vancomycin (if MRSA risk factors)",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "frequency": "every 8-12 hours (trough-guided)",
+          "duration": "7 days",
+          "why": "Added when MRSA risk factors are present (prior MRSA colonization, high local MRSA prevalence, recent broad-spectrum antibiotics)."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Pseudomonas aeruginosa",
+          "Klebsiella pneumoniae",
+          "Escherichia coli"
+        ],
+        "likely": [
+          "Staphylococcus aureus (including MRSA)",
+          "Acinetobacter baumannii"
+        ],
+        "possible": [
+          "Enterobacter species",
+          "Other MDR gram-negatives based on local ICU flora"
+        ],
+        "why": "HAP arising after 48 hours of hospitalization reflects a shift toward hospital flora, which is enriched for gram-negative organisms with higher resistance rates, particularly in patients with prior antibiotic exposure or ICU stay."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "tachypnea",
+        "hypoxia",
+        "hypotension"
+      ]
     },
     "stroke": {
       "inf": [
@@ -204,7 +574,49 @@
         "cord_compression:32"
       ],
       "nInf": 3,
-      "nNi": 14
+      "nNi": 14,
+      "leadInf": "BRAIN_ABSCESS",
+      "leadInfReason": "Headache with focal neurological deficit or seizure and fever, without prominent meningismus, raises strong suspicion for brain abscess. This requires urgent neuroimaging (contrast CT or MRI) and empiric antibiotic therapy covering the likely polymicrobial source, alongside urgent neurosurgical consultation for possible drainage — antibiotics alone are often insufficient for abscesses requiring surgical source control.",
+      "leadNi": "ischemic_stroke",
+      "leadNiReason": "Acute focal neurological deficit favours a vascular event; image urgently and check the stroke pathway.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q12h + Metronidazole 500 mg IV q8h",
+          "route": "IV",
+          "frequency": "as above",
+          "duration": "6-8 weeks (organism- and response-dependent)",
+          "why": "This combination covers the major contiguous-spread pathogens (streptococci, anaerobes, and many Enterobacteriaceae) and provides good CNS penetration, appropriate pending culture/aspirate results."
+        },
+        {
+          "drug": "Add Vancomycin if S. aureus risk (post-neurosurgery, hematogenous spread, endocarditis)",
+          "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+          "route": "IV",
+          "frequency": "as above",
+          "duration": "6-8 weeks",
+          "why": "Added for empiric MRSA/staphylococcal coverage specifically when the clinical context suggests hematogenous or post-surgical seeding."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus species (including anaerobic/microaerophilic strains)",
+          "Anaerobes (Bacteroides, Prevotella, Fusobacterium)"
+        ],
+        "likely": [
+          "Staphylococcus aureus (especially post-neurosurgery or hematogenous spread)",
+          "Enterobacteriaceae (especially with otogenic or sinus source)"
+        ],
+        "possible": [
+          "Nocardia, Toxoplasma, or fungal causes in immunocompromised patients (broader workup needed)"
+        ],
+        "why": "Brain abscess pathogens reflect the presumed source: contiguous spread from sinusitis/otitis/dental infection brings streptococci and anaerobes, hematogenous spread (e.g., from endocarditis) brings S. aureus, and post-neurosurgical abscesses carry a different staphylococcal/gram-negative profile. Immunocompromised hosts require broader consideration including Toxoplasma and fungal causes."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "alteredSensorium",
+        "seizure",
+        "focalNeuroDeficit"
+      ]
     },
     "sah": {
       "inf": [
@@ -224,7 +636,58 @@
         "ich:30"
       ],
       "nInf": 7,
-      "nNi": 22
+      "nNi": 22,
+      "leadInf": "MENINGITIS",
+      "leadInfReason": "Fever with neck stiffness is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
+      "leadNi": "sah",
+      "leadNiReason": "Sudden worst-ever headache ± meningism and reduced consciousness is classic for subarachnoid hemorrhage.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "frequency": "every 12 hours",
+          "duration": "10-14 days (organism-dependent)",
+          "why": "Reliable CSF penetration and coverage of S. pneumoniae and N. meningitidis, the two dominant pathogens in community-acquired bacterial meningitis."
+        },
+        {
+          "drug": "Vancomycin",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "frequency": "every 8-12 hours (trough-guided)",
+          "duration": "10-14 days",
+          "why": "Added empirically to cover the possibility of ceftriaxone-resistant S. pneumoniae, given the high stakes of inadequate coverage in this disease."
+        },
+        {
+          "drug": "Dexamethasone (adjunctive)",
+          "dose": "10 mg",
+          "route": "IV",
+          "frequency": "every 6 hours, given with or just before first antibiotic dose",
+          "duration": "4 days",
+          "why": "Adjunctive dexamethasone reduces mortality and neurological sequelae specifically in pneumococcal meningitis when given with or before the first antibiotic dose."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus pneumoniae",
+          "Neisseria meningitidis"
+        ],
+        "likely": [
+          "Listeria monocytogenes (neonates, elderly, immunocompromised, pregnant)"
+        ],
+        "possible": [
+          "Haemophilus influenzae (unvaccinated populations)",
+          "Gram-negative bacilli (post-neurosurgery, immunocompromised)"
+        ],
+        "why": "S. pneumoniae and N. meningitidis are the leading causes of community-acquired bacterial meningitis across most age groups. Listeria is specifically added in neonates, those over 50, pregnant patients, and the immunocompromised, since standard empiric regimens do not cover it."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "alteredSensorium",
+        "hypotension",
+        "petechialRash",
+        "seizure"
+      ]
     },
     "iih": {
       "inf": [
@@ -242,7 +705,58 @@
         "tension_ha:38"
       ],
       "nInf": 4,
-      "nNi": 15
+      "nNi": 15,
+      "leadInf": "MENINGITIS",
+      "leadInfReason": "Fever with neck stiffness is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
+      "leadNi": "iih",
+      "leadNiReason": "Headache with visual disturbance and papilloedema in the right demographic suggests raised intracranial pressure without a mass.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "frequency": "every 12 hours",
+          "duration": "10-14 days (organism-dependent)",
+          "why": "Reliable CSF penetration and coverage of S. pneumoniae and N. meningitidis, the two dominant pathogens in community-acquired bacterial meningitis."
+        },
+        {
+          "drug": "Vancomycin",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "frequency": "every 8-12 hours (trough-guided)",
+          "duration": "10-14 days",
+          "why": "Added empirically to cover the possibility of ceftriaxone-resistant S. pneumoniae, given the high stakes of inadequate coverage in this disease."
+        },
+        {
+          "drug": "Dexamethasone (adjunctive)",
+          "dose": "10 mg",
+          "route": "IV",
+          "frequency": "every 6 hours, given with or just before first antibiotic dose",
+          "duration": "4 days",
+          "why": "Adjunctive dexamethasone reduces mortality and neurological sequelae specifically in pneumococcal meningitis when given with or before the first antibiotic dose."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Streptococcus pneumoniae",
+          "Neisseria meningitidis"
+        ],
+        "likely": [
+          "Listeria monocytogenes (neonates, elderly, immunocompromised, pregnant)"
+        ],
+        "possible": [
+          "Haemophilus influenzae (unvaccinated populations)",
+          "Gram-negative bacilli (post-neurosurgery, immunocompromised)"
+        ],
+        "why": "S. pneumoniae and N. meningitidis are the leading causes of community-acquired bacterial meningitis across most age groups. Listeria is specifically added in neonates, those over 50, pregnant patients, and the immunocompromised, since standard empiric regimens do not cover it."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "alteredSensorium",
+        "hypotension",
+        "petechialRash",
+        "seizure"
+      ]
     },
     "ugi_bleed": {
       "inf": [],
@@ -253,7 +767,14 @@
         "anemia_sympt:0"
       ],
       "nInf": 0,
-      "nNi": 4
+      "nNi": 4,
+      "leadInf": null,
+      "leadInfReason": null,
+      "leadNi": "peptic_ulcer",
+      "leadNiReason": "Epigastric pain with melena or haematemesis suggests bleeding peptic ulcer disease.",
+      "leadInfFirstLine": null,
+      "leadInfPathogens": null,
+      "leadInfStewardship": null
     },
     "gbs": {
       "inf": [],
@@ -263,7 +784,14 @@
         "hyperkalemia:16"
       ],
       "nInf": 0,
-      "nNi": 3
+      "nNi": 3,
+      "leadInf": null,
+      "leadInfReason": null,
+      "leadNi": "gbs",
+      "leadNiReason": "Progressive ascending weakness with areflexia and no fever suggests Guillain-Barré; watch respiratory function.",
+      "leadInfFirstLine": null,
+      "leadInfPathogens": null,
+      "leadInfStewardship": null
     },
     "ttp": {
       "inf": [
@@ -283,7 +811,33 @@
         "thyroid_storm:22"
       ],
       "nInf": 12,
-      "nNi": 40
+      "nNi": 40,
+      "leadInf": "MALARIA",
+      "leadInfReason": "Fever with chills/rigors, thrombocytopenia and/or splenomegaly in a patient from or travelling through an endemic area is most consistent with malaria — a protozoal infection. Antibiotics have no role here; the priority is urgent peripheral smear/rapid diagnostic testing and prompt antimalarial therapy specific to the Plasmodium species identified, since delay (especially in P. falciparum) can progress rapidly to severe/complicated malaria.",
+      "leadNi": "dic",
+      "leadNiReason": "Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC — find and treat the trigger.",
+      "leadInfFirstLine": [],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Plasmodium falciparum",
+          "Plasmodium vivax"
+        ],
+        "likely": [
+          "Plasmodium malariae",
+          "Plasmodium ovale (less common in South Asia)"
+        ],
+        "possible": [
+          "Mixed infections (P. falciparum + P. vivax)"
+        ],
+        "why": "P. falciparum and P. vivax account for the large majority of malaria in India; species identification on smear/RDT is essential since management, monitoring for severity, and radical cure (primaquine for P. vivax) differ significantly by species."
+      },
+      "leadInfStewardship": [
+        "fever",
+        "hypotension",
+        "alteredSensorium",
+        "organDysfunction",
+        "jaundice"
+      ]
     },
     "fuo_minimal": {
       "inf": [
@@ -303,7 +857,35 @@
         "sle_flare:8"
       ],
       "nInf": 8,
-      "nNi": 25
+      "nNi": 25,
+      "leadInf": "PULMONARY_TB",
+      "leadInfReason": "Cough for ≥2 weeks with weight loss, night sweats in this setting raises significant suspicion for pulmonary tuberculosis. This is NOT a syndrome to treat empirically with antitubercular therapy on clinical suspicion alone — microbiological confirmation (sputum smear/CBNAAT/culture) should be obtained first, since incorrect or premature ATT carries significant consequences (drug toxicity, resistance, delayed correct diagnosis).",
+      "leadNi": "malignancy_b",
+      "leadNiReason": "Weight loss, night sweats and lymphadenopathy raise concern for lymphoma or other malignancy.",
+      "leadInfFirstLine": [
+        {
+          "drug": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)",
+          "dose": "Weight-band dosing per national TB program (e.g., RNTCP/NTEP in India)",
+          "route": "Oral",
+          "frequency": "once daily (or per DOTS schedule)",
+          "duration": "2 months intensive phase, then HR for 4 months continuation phase (6 months total for drug-susceptible disease)",
+          "why": "Standard first-line four-drug regimen for drug-susceptible pulmonary TB, started ONLY after microbiological confirmation (or strong programmatic criteria per national guidelines) — not empirically on clinical suspicion alone."
+        }
+      ],
+      "leadInfPathogens": {
+        "veryLikely": [
+          "Mycobacterium tuberculosis"
+        ],
+        "likely": [],
+        "possible": [
+          "Non-tuberculous mycobacteria (if AFB smear positive but culture/PCR does not confirm M. tuberculosis)"
+        ],
+        "why": "The clinical syndrome of prolonged cough with constitutional symptoms (weight loss, evening fever, night sweats) in an endemic country is classically tuberculous, but microbiological confirmation remains essential since the clinical picture alone is not specific enough to justify treatment, which carries real toxicity and public health implications (resistance, contact tracing)."
+      },
+      "leadInfStewardship": [
+        "weightLoss",
+        "hemoptysis"
+      ]
     },
     "single_fever": {
       "inf": [],
@@ -316,7 +898,14 @@
         "sjs_ten:12"
       ],
       "nInf": 0,
-      "nNi": 15
+      "nNi": 15,
+      "leadInf": null,
+      "leadInfReason": null,
+      "leadNi": "serotonin_nms",
+      "leadNiReason": "Fever with rigidity/clonus and altered mental state after serotonergic or antipsychotic drugs suggests a toxidrome, not infection.",
+      "leadInfFirstLine": null,
+      "leadInfPathogens": null,
+      "leadInfStewardship": null
     }
   }
 }

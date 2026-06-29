@@ -44,6 +44,8 @@ for (const f of readdirSync(join(ROOT, "kb", "diseases"))) {
   const d = JSON.parse(readFileSync(join(ROOT, "kb", "diseases", f), "utf8"));
   if (d.class === "infective") {
     diseases[d.id] = { class: "infective", system: d.system, rule: d.matching.rule, score: d.matching.score, assoc: engineAssoc(d.id) };
+    if (d.reason) diseases[d.id].reason = d.reason;                 // declarative "why this" template
+    if (d.reasonDerived) diseases[d.id].derived = d.reasonDerived;  // derived counters (_centor/_anthonisen)
   } else {
     diseases[d.id] = { class: "non_infective", system: d.system, find: d.matching.find };
   }

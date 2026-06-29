@@ -682,6 +682,24 @@
   }
   function kbEvalScore(sm, e) { if (!sm) return 0; var i = sm.base || 0; var mo = sm.modifiers || []; for (var n = 0; n < mo.length; n++) if (kbEvalRule(mo[n].when, e)) i += mo[n].add; return i; }
   function kbDisease(id) { return (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[id] : null; }
+  // KB "why this" reason interpolator — renders the declarative template (no eval).
+  function kbRenderNode(node, e) {
+    if (!node) return "";
+    switch (node[0]) {
+      case "lit": return node[1];
+      case "seq": { var s = ""; for (var i = 1; i < node.length; i++) s += kbRenderNode(node[i], e); return s; }
+      case "cond": return kbEvalRule(node[1], e) ? kbRenderNode(node[2], e) : kbRenderNode(node[3], e);
+      case "join": { var arr = []; node[3].forEach(function (t) { if (kbEvalRule(t[0], e)) arr.push(t[1]); }); return arr.length ? arr.join(node[1]) : node[2]; }
+      case "var": return String(e[node[1]] || 0);
+    }
+    return "";
+  }
+  function kbReason(disease, e) {
+    if (!disease || !disease.reason) return null;
+    var ee = e;
+    if (disease.derived) { ee = {}; for (var x in e) ee[x] = e[x]; for (var k in disease.derived) { var c = 0; disease.derived[k].forEach(function (r) { if (kbEvalRule(r, e)) c++; }); ee[k] = c; } }
+    return kbRenderNode(disease.reason, ee);
+  }
 
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
@@ -726,7 +744,10 @@
       });
     }
     var reason = "";
-    try { if (s.decision && s.decision.reasoning) reason = s.decision.reasoning(S.fInf); } catch (e) {}
+    try {
+      if (_kb && _kb.reason) reason = kbReason(_kb, S.fInf);                       // KB declarative template (no eval)
+      else if (s.decision && s.decision.reasoning) reason = s.decision.reasoning(S.fInf); // fallback to legacy closure
+    } catch (e) {}
     var red = (s.decision && (s.decision.status === "red")) ? [s.decision.label || "Time-critical infection"] : [];
     var inv = (s.investigations || []).map(function (i) { return i.test ? (i.test) : i; });
     return { id: s.id, name: s.name, system: s.system || "Infectious", inf: true, matched: matched,

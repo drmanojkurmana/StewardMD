@@ -84,9 +84,55 @@
     "Harrison's Principles of Internal Medicine",
     "Centor Criteria"
   ],
-  "reasonSource": "e=>{const i=e._centor||0;return i>=3?`Centor score of ${i}/4 (fever, tonsillar exudate, tender cervical lymphadenopathy, absence of cough) raises probability of Group A Streptococcal pharyngitis. Throat swab/rapid antigen testing is recommended to confirm before committing to antibiotics, per stewardship principles — empiric treatment without testing is discouraged outside high Centor scores with epidemiologic risk.`:`Centor score of ${i}/4 is low, favoring a viral etiology. Antibiotics are not indicated at this time; testing (rapid strep/throat culture) should guide therapy if clinical suspicion for Group A Streptococcus persists.`}",
   "decision": {
     "status": "yellow",
     "label": "Observe / Further evaluation required"
+  },
+  "reason": [
+    "cond",
+    {
+      "key": "_centor",
+      "gte": 3
+    },
+    [
+      "seq",
+      [
+        "lit",
+        "Centor score of "
+      ],
+      [
+        "var",
+        "_centor"
+      ],
+      [
+        "lit",
+        "/4 (fever, tonsillar exudate, tender cervical lymphadenopathy, absence of cough) raises probability of Group A Streptococcal pharyngitis. Throat swab/rapid antigen testing is recommended to confirm before committing to antibiotics, per stewardship principles — empiric treatment without testing is discouraged outside high Centor scores with epidemiologic risk."
+      ]
+    ],
+    [
+      "seq",
+      [
+        "lit",
+        "Centor score of "
+      ],
+      [
+        "var",
+        "_centor"
+      ],
+      [
+        "lit",
+        "/4 is low, favoring a viral etiology. Antibiotics are not indicated at this time; testing (rapid strep/throat culture) should guide therapy if clinical suspicion for Group A Streptococcus persists."
+      ]
+    ]
+  ],
+  "reasonDerived": {
+    "_centor": [
+      "fever",
+      "tonsillarExudate",
+      "tenderCervicalNodes",
+      {
+        "not": "cough"
+      }
+    ]
   }
 }

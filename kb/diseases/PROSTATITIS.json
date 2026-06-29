@@ -117,9 +117,38 @@
     "IDSA/AUA Guidelines on Prostatitis",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`Lower urinary tract symptoms with ${[e.perinealPain&&\"perineal/pelvic pain\",e.feverGU&&\"fever\",e.urinaryRetention&&\"urinary retention\"].filter(Boolean).join(\", \")||\"pelvic symptoms\"} in a male patient is consistent with acute bacterial prostatitis. Antibiotics with reliable prostatic tissue penetration are required, and digital rectal examination should be performed gently (vigorous prostatic massage is avoided in the acute setting due to bacteremia risk).`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Lower urinary tract symptoms with "
+    ],
+    [
+      "join",
+      ", ",
+      "pelvic symptoms",
+      [
+        [
+          "perinealPain",
+          "perineal/pelvic pain"
+        ],
+        [
+          "feverGU",
+          "fever"
+        ],
+        [
+          "urinaryRetention",
+          "urinary retention"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      " in a male patient is consistent with acute bacterial prostatitis. Antibiotics with reliable prostatic tissue penetration are required, and digital rectal examination should be performed gently (vigorous prostatic massage is avoided in the acute setting due to bacteremia risk)."
+    ]
+  ]
 }

@@ -108,9 +108,43 @@
     "IDSA Skin and Soft Tissue Infection Guidelines",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`Localized erythema, warmth, and tenderness${e.fever?\" with fever\":\"\"} are consistent with non-purulent cellulitis. ${e.crepitusOrBullae?\"Crepitus or bullae formation raises concern for necrotizing soft tissue infection — this requires urgent surgical evaluation in addition to antibiotics, not antibiotics alone.\":\"Empiric antibiotics targeting streptococci (and staphylococci if purulent) are indicated.\"}`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Localized erythema, warmth, and tenderness"
+    ],
+    [
+      "cond",
+      "fever",
+      [
+        "lit",
+        " with fever"
+      ],
+      [
+        "lit",
+        ""
+      ]
+    ],
+    [
+      "lit",
+      " are consistent with non-purulent cellulitis. "
+    ],
+    [
+      "cond",
+      "crepitusOrBullae",
+      [
+        "lit",
+        "Crepitus or bullae formation raises concern for necrotizing soft tissue infection — this requires urgent surgical evaluation in addition to antibiotics, not antibiotics alone."
+      ],
+      [
+        "lit",
+        "Empiric antibiotics targeting streptococci (and staphylococci if purulent) are indicated."
+      ]
+    ]
+  ]
 }
