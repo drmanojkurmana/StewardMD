@@ -81,15 +81,27 @@
   // Universal "go home" — closes any open overlay/sheet and returns to the v3 home. Wired to the
   // logo (anywhere) and the home FAB, so the user can get home from any area.
   function goHome() {
+    // 1) Close every module via its own API (resets internal state + restores body scroll).
+    var apis = [
+      window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
+      window.MEDCALC && window.MEDCALC.close, window.INF && window.INF.close,
+      window.MEDDB && window.MEDDB.close, window.SB && window.SB.closeRef,
+      window.SB && window.SB.close, window.closeCalc, window.closeMyCases, window.closeSearch
+    ];
+    apis.forEach(function (fn) { try { if (typeof fn === "function") fn(); } catch (e) {} });
     try { closeSheet(); } catch (e) {}
-    try { if (window.DX && DX.close) DX.close(); } catch (e) {}
-    try { if (window.ELYTE && ELYTE.close) ELYTE.close(); } catch (e) {}
-    try { if (window.INF && INF.close) INF.close(); } catch (e) {}
-    try { if (window.closeMyCases) closeMyCases(); } catch (e) {}
-    try { if (window.closeSearch) closeSearch(); } catch (e) {}
-    try { if (window.SB && SB.closeRef) SB.closeRef(); if (window.SB && SB.close) SB.close(); } catch (e) {}
-    ["mcOverlay", "dbOverlay", "infOverlay", "eceOverlay", "csOverlay", "dxOverlay"].forEach(function (id) {
-      var el = document.getElementById(id); if (el) { el.classList.remove("on"); el.classList.remove("open"); }
+    try { if (window.closeDrawer) window.closeDrawer(); } catch (e) {}
+    // 2) Backstop — force-hide EVERY overlay/drawer/modal so nothing keeps running underneath.
+    //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
+    ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
+      "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
+      "hvSheet", "hvScrim"].forEach(function (id) {
+      var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
+    });
+    //    hidden-class modals: add .hidden (global .hidden{display:none}); reopening removes it.
+    ["modalBackdrop", "aboutModal", "disclaimerModal", "privacyModal", "termsModal", "contactModal",
+      "spBackdrop", "spCalcPopup", "storageChoiceModal"].forEach(function (id) {
+      var el = document.getElementById(id); if (el) el.classList.add("hidden");
     });
     try { document.body.style.overflow = ""; } catch (e) {}
     if (document.body.classList.contains("ui-v2")) { try { showV2(); } catch (e) {} }
