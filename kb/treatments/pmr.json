@@ -1,0 +1,48 @@
+{
+  "id": "pmr",
+  "diseaseId": "pmr",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Start prednisone 10-20 mg/day for isolated PMR — a prompt, near-complete response supports the diagnosis.",
+        "Taper gradually guided by symptoms and ESR/CRP; recurrent symptoms during tapering occur in the majority, so taper cautiously.",
+        "Screen for giant cell arteritis at every visit (headache, jaw/tongue claudication, visual symptoms) as PMR and GCA are a single disease spectrum.",
+        "Provide glucocorticoid-related risk management: bone protection (calcium/vitamin D +/- bisphosphonate) and glucose monitoring.",
+        "For glucocorticoid-resistant or relapsing disease use an IL-6 receptor inhibitor (sarilumab); methotrexate gives only marginal steroid-sparing benefit."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946",
+        "refs": [
+          "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946"
+        ]
+      }
+    }
+  ],
+  "confirm": "Bilateral shoulder/hip girdle pain and stiffness in age >50, raised ESR/CRP, dramatic steroid response. Screen for coexisting GCA.",
+  "investigations": [
+    {
+      "test": "ESR, CRP"
+    },
+    {
+      "test": "Exclude RA/myeloma/myositis (CK)"
+    }
+  ],
+  "disposition": "Outpatient; rheumatology if atypical/relapsing.",
+  "references": [
+    "Harrison 22e · ACR/EULAR PMR · rev. Harrison 22e 2902-2946"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

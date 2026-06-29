@@ -1,0 +1,48 @@
+{
+  "id": "gerd_chest",
+  "diseaseId": "gerd_chest",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "EXCLUDE cardiac cause first if any doubt.",
+        "Lifestyle: weight loss, smaller meals, avoid late meals/triggers, elevate head of bed.",
+        "PPI trial (e.g. omeprazole) for 4–8 weeks.",
+        "Endoscopy if alarm features (dysphagia, weight loss, anaemia, age/onset).",
+        "Step down to lowest effective therapy."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACG GERD",
+        "refs": [
+          "Harrison 22e · ACG GERD"
+        ]
+      }
+    }
+  ],
+  "confirm": "Burning retrosternal pain, postprandial/positional, acid regurgitation — once cardiac causes are excluded.",
+  "investigations": [
+    {
+      "test": "Clinical/PPI trial"
+    },
+    {
+      "test": "OGD if alarm features"
+    }
+  ],
+  "disposition": "Outpatient.",
+  "references": [
+    "Harrison 22e · ACG GERD"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

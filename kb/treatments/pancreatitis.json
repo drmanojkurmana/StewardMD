@@ -1,0 +1,51 @@
+{
+  "id": "pancreatitis",
+  "diseaseId": "pancreatitis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Aggressive early IV fluid resuscitation (balanced crystalloid) with monitoring.",
+        "Analgesia (opioids), antiemetics; early enteral nutrition as tolerated (avoid prolonged NBM).",
+        "NO routine antibiotics (only for proven infected necrosis/cholangitis).",
+        "Gallstone cause with cholangitis/obstruction: urgent ERCP; cholecystectomy on the same admission for mild biliary pancreatitis.",
+        "Severe/organ failure → HDU/ICU; monitor for necrosis, pseudocyst, collections."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACG/IAP pancreatitis",
+        "refs": [
+          "Harrison 22e · ACG/IAP pancreatitis"
+        ]
+      }
+    }
+  ],
+  "confirm": "Severe epigastric pain radiating to back with lipase/amylase >3× upper limit (or imaging). Identify cause (gallstones, alcohol); score severity.",
+  "investigations": [
+    {
+      "test": "Lipase/amylase, LFTs, calcium, triglycerides"
+    },
+    {
+      "test": "USS (gallstones)"
+    },
+    {
+      "test": "CT if severe/uncertain"
+    }
+  ],
+  "disposition": "Admit; severe → HDU/ICU.",
+  "references": [
+    "Harrison 22e · ACG/IAP pancreatitis"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

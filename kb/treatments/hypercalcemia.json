@@ -1,0 +1,51 @@
+{
+  "id": "hypercalcemia",
+  "diseaseId": "hypercalcemia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Aggressive IV 0.9% saline rehydration (cornerstone) with monitoring of fluid status.",
+        "IV bisphosphonate (e.g. zoledronic acid) for moderate–severe hypercalcaemia (effect over 2–4 days).",
+        "Calcitonin for rapid short-term lowering in severe/symptomatic cases.",
+        "Avoid thiazides; stop calcium/vitamin D; treat the underlying cause (malignancy, hyperparathyroidism).",
+        "Denosumab for bisphosphonate-refractory malignant hypercalcaemia."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison 22e · Endocrine Society"
+        ]
+      }
+    }
+  ],
+  "confirm": "Confusion, polyuria, constipation, abdominal pain with raised corrected calcium; PTH distinguishes hyperparathyroidism from malignancy/other.",
+  "investigations": [
+    {
+      "test": "Corrected calcium, PTH, phosphate"
+    },
+    {
+      "test": "U&E, vitamin D"
+    },
+    {
+      "test": "Malignancy work-up"
+    }
+  ],
+  "disposition": "Admit if symptomatic/severe.",
+  "references": [
+    "Harrison 22e · Endocrine Society"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

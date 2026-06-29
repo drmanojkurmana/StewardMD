@@ -1,0 +1,51 @@
+{
+  "id": "pericarditis",
+  "diseaseId": "pericarditis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "NSAID (e.g. ibuprofen) + COLCHICINE for ~3 months (reduces recurrence).",
+        "Add gastroprotection; restrict strenuous activity until resolved.",
+        "Echo to assess for effusion/tamponade.",
+        "Treat the underlying cause; reserve steroids for specific indications (refractory, autoimmune).",
+        "Investigate for tamponade if hypotensive/raised JVP."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC pericardial",
+        "refs": [
+          "Harrison 22e · ESC pericardial"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sharp pleuritic chest pain relieved by sitting forward, friction rub, widespread saddle ST-elevation/PR depression. Exclude ACS and effusion/tamponade.",
+  "investigations": [
+    {
+      "test": "ECG, echo"
+    },
+    {
+      "test": "Troponin, CRP"
+    },
+    {
+      "test": "Identify cause (viral, autoimmune, uraemic)"
+    }
+  ],
+  "disposition": "Outpatient if low-risk; admit if effusion/high-risk.",
+  "references": [
+    "Harrison 22e · ESC pericardial"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

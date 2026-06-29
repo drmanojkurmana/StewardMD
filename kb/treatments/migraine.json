@@ -1,0 +1,48 @@
+{
+  "id": "migraine",
+  "diseaseId": "migraine",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Acute: NSAID (e.g. naproxen) or paracetamol; add an oral triptan (e.g. sumatriptan 50–100 mg) if no vascular contraindication.",
+        "Add an antiemetic (metoclopramide / prochlorperazine) for nausea.",
+        "Treat early; rest in a dark, quiet room.",
+        "Limit acute drugs to <10–15 days/month to avoid medication-overuse headache.",
+        "Prophylaxis if frequent/disabling: propranolol, amitriptyline, topiramate or candesartan."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ICHD-3",
+        "refs": [
+          "Harrison 22e · ICHD-3"
+        ]
+      }
+    }
+  ],
+  "confirm": "Recurrent moderate–severe, often unilateral throbbing headache ± aura, photophobia, nausea with a normal exam (ICHD-3). Image only for red flags.",
+  "investigations": [
+    {
+      "test": "Clinical (ICHD-3)"
+    },
+    {
+      "test": "Neuroimaging only if red flags"
+    }
+  ],
+  "disposition": "Outpatient; neurology referral if refractory or atypical.",
+  "references": [
+    "Harrison 22e · ICHD-3"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

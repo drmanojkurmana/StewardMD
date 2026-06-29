@@ -1,0 +1,216 @@
+{
+  "id": "SEVERE_CAP",
+  "diseaseId": "SEVERE_CAP",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "7-10 days (step down to oral when stable)",
+          "coverage": null,
+          "why": "Ceftriaxone provides reliable coverage for S. pneumoniae and H. influenzae, the core typical pathogens, with good CNS and tissue penetration appropriate for severe disease."
+        },
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin",
+          "dose": "500 mg",
+          "route": "IV/Oral",
+          "freq": "once daily",
+          "duration": "5 days (can switch to oral)",
+          "coverage": null,
+          "why": "Added for atypical and Legionella coverage, which is essential in severe CAP given the disproportionate contribution of Legionella to severe and fatal presentations."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/ATS Severe CAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "levofloxacin",
+          "regimenLabel": "Levofloxacin (monotherapy)",
+          "dose": "750 mg",
+          "route": "IV/Oral",
+          "freq": "once daily",
+          "duration": "7-10 days",
+          "coverage": "Single-agent alternative covering typical and atypical organisms including Legionella; useful in macrolide or beta-lactam intolerance.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS Severe CAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam + azithromycin",
+          "regimenLabel": "Piperacillin-tazobactam + Azithromycin",
+          "dose": "4.5 g IV q6h + Azithromycin as above",
+          "route": "IV",
+          "freq": "every 6 hours",
+          "duration": "7-10 days",
+          "coverage": "Used when structural lung disease or risk factors raise concern for Pseudomonas.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS Severe CAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. pneumoniae",
+        "H. influenzae",
+        "Legionella",
+        "Atypicals",
+        "S. aureus"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Azithromycin",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✘",
+          "Partial"
+        ]
+      ],
+      "completeness": "Combination covers ~90% of severe CAP pathogens; MRSA not covered unless risk factors present.",
+      "gaps": [
+        "MRSA not covered — add vancomycin/linezolid only if post-influenza necrotizing pneumonia or risk factors are present.",
+        "Pseudomonas not covered unless structural lung disease present."
+      ]
+    },
+    "deescalation": "Narrow to pathogen-directed therapy once culture/antigen results return — e.g., positive pneumococcal urinary antigen with clinical improvement allows discontinuation of azithromycin and continuation of a beta-lactam alone.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "7-10 days (step down to oral when stable)",
+            "why": "Ceftriaxone provides reliable coverage for S. pneumoniae and H. influenzae, the core typical pathogens, with good CNS and tissue penetration appropriate for severe disease."
+          },
+          {
+            "drug": "Azithromycin",
+            "dose": "500 mg",
+            "route": "IV/Oral",
+            "frequency": "once daily",
+            "duration": "5 days (can switch to oral)",
+            "why": "Added for atypical and Legionella coverage, which is essential in severe CAP given the disproportionate contribution of Legionella to severe and fatal presentations."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Levofloxacin (monotherapy)",
+            "dose": "750 mg",
+            "route": "IV/Oral",
+            "frequency": "once daily",
+            "duration": "7-10 days",
+            "coverage": "Single-agent alternative covering typical and atypical organisms including Legionella; useful in macrolide or beta-lactam intolerance."
+          },
+          {
+            "drug": "Piperacillin-tazobactam + Azithromycin",
+            "dose": "4.5 g IV q6h + Azithromycin as above",
+            "route": "IV",
+            "frequency": "every 6 hours",
+            "duration": "7-10 days",
+            "coverage": "Used when structural lung disease or risk factors raise concern for Pseudomonas."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia",
+      "tachypnea",
+      "hypotension",
+      "hypoxia",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "Antipseudomonal and MRSA coverage are not added by default — reserved for specific risk factors (structural lung disease, prior MRSA colonization, post-influenza necrotizing pneumonia).",
+      "De-escalate from broad combination once an organism and susceptibility are identified.",
+      "Reassess for early oral switch once clinically stable (afebrile, hemodynamically stable, tolerating oral intake)."
+    ]
+  },
+  "references": [
+    "IDSA/ATS Severe CAP Guidelines",
+    "Surviving Sepsis Campaign",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

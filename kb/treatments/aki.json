@@ -1,0 +1,51 @@
+{
+  "id": "aki",
+  "diseaseId": "aki",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Assess volume status — fluid resuscitate if pre-renal/hypovolaemic; relieve obstruction (catheter/imaging) if post-renal.",
+        "Stop/avoid nephrotoxins (NSAIDs, ACEi/ARB, contrast, aminoglycosides); review drug doses.",
+        "Treat the cause (sepsis, obstruction, intrinsic disease); optimise perfusion and avoid both hypo- and hypervolaemia.",
+        "Monitor and treat complications — hyperkalaemia, acidosis, fluid overload, uraemia.",
+        "Urgent dialysis for refractory hyperkalaemia/acidosis/overload/uraemic complications; nephrology if intrinsic/unclear."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO AKI",
+        "refs": [
+          "Harrison 22e · KDIGO AKI"
+        ]
+      }
+    }
+  ],
+  "confirm": "Acute rise in creatinine and/or fall in urine output (KDIGO). Classify pre-renal / renal / post-renal.",
+  "investigations": [
+    {
+      "test": "U&E, VBG, urinalysis ± microscopy"
+    },
+    {
+      "test": "Renal tract US (obstruction)"
+    },
+    {
+      "test": "Creatine kinase, immunology if intrinsic"
+    }
+  ],
+  "disposition": "Admit; nephrology/ICU if severe.",
+  "references": [
+    "Harrison 22e · KDIGO AKI"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

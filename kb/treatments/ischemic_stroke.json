@@ -1,0 +1,51 @@
+{
+  "id": "ischemic_stroke",
+  "diseaseId": "ischemic_stroke",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "TIME-CRITICAL — activate stroke pathway, non-contrast CT immediately.",
+        "IV thrombolysis (alteplase/tenecteplase) if within window and no contraindication.",
+        "Mechanical thrombectomy for large-vessel occlusion up to 24 h in selected patients.",
+        "Aspirin 300 mg once haemorrhage excluded (delay 24 h after thrombolysis).",
+        "Admit to stroke unit; permissive hypertension, glucose/temperature control, swallow screen, early secondary prevention."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA stroke",
+        "refs": [
+          "Harrison 22e · AHA/ASA stroke"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sudden focal neurological deficit; non-contrast CT to exclude haemorrhage, then confirm ischaemia. Establish last-known-well time.",
+  "investigations": [
+    {
+      "test": "Non-contrast CT ± CT angio/perfusion"
+    },
+    {
+      "test": "Glucose, ECG"
+    },
+    {
+      "test": "Carotid imaging, echo"
+    }
+  ],
+  "disposition": "Stroke unit / ICU.",
+  "references": [
+    "Harrison 22e · AHA/ASA stroke"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

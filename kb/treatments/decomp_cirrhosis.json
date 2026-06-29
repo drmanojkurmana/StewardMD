@@ -1,0 +1,51 @@
+{
+  "id": "decomp_cirrhosis",
+  "diseaseId": "decomp_cirrhosis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Identify and treat the PRECIPITANT — always do a diagnostic ascitic tap to exclude SBP (treat with IV cefotaxime + albumin if PMN ≥250).",
+        "Ascites: salt restriction + spironolactone ± furosemide; large-volume paracentesis with albumin for tense ascites.",
+        "Encephalopathy: lactulose ± rifaximin; treat triggers (bleed, infection, constipation, electrolytes).",
+        "Variceal bleed: resuscitation, terlipressin, prophylactic antibiotics, urgent endoscopic band ligation.",
+        "Avoid nephrotoxins/NSAIDs; nutrition; assess for transplant; manage AKI/HRS."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AASLD/EASL",
+        "refs": [
+          "Harrison 22e · AASLD/EASL"
+        ]
+      }
+    }
+  ],
+  "confirm": "Ascites, jaundice, encephalopathy or variceal bleed with stigmata of chronic liver disease; LFTs/INR/imaging confirm. Always seek a precipitant.",
+  "investigations": [
+    {
+      "test": "LFTs, INR, ammonia, U&E"
+    },
+    {
+      "test": "Diagnostic ascitic tap (cell count + culture)"
+    },
+    {
+      "test": "USS ± Doppler, endoscopy"
+    }
+  ],
+  "disposition": "Admit; ICU for bleed/grade-3-4 encephalopathy.",
+  "references": [
+    "Harrison 22e · AASLD/EASL"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

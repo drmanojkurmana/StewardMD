@@ -1,0 +1,51 @@
+{
+  "id": "seizure_epilepsy",
+  "diseaseId": "seizure_epilepsy",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Status epilepticus: protect airway, O2, glucose; IV lorazepam (or IM midazolam), repeat once.",
+        "Second-line: IV levetiracetam, valproate or phenytoin/fosphenytoin.",
+        "Refractory status → ICU, intubation, anaesthetic infusion (propofol/midazolam).",
+        "Correct provoking causes (hypoglycaemia, hyponatraemia, alcohol, drugs, infection).",
+        "First unprovoked seizure: usually no drug; start AED if high recurrence risk / abnormal EEG-MRI; neurology referral, driving advice."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE/AES",
+        "refs": [
+          "Harrison 22e · NICE/AES"
+        ]
+      }
+    }
+  ],
+  "confirm": "Stereotyped paroxysmal event ± post-ictal confusion. First seizure vs known epilepsy; status if >5 min or recurrent without recovery.",
+  "investigations": [
+    {
+      "test": "Glucose, electrolytes, Ca/Mg"
+    },
+    {
+      "test": "CT/MRI brain, EEG"
+    },
+    {
+      "test": "Drug levels/toxicology"
+    }
+  ],
+  "disposition": "Status → ICU; first seizure → neurology.",
+  "references": [
+    "Harrison 22e · NICE/AES"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

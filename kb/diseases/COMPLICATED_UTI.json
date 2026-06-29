@@ -101,5 +101,14 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA Complicated UTI Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`Urinary symptoms in the presence of complicating factors (${[e.indwellingCatheter&&\"indwelling catheter\",e.structuralAbnormality&&\"structural urinary tract abnormality\",e.male&&\"male sex\",e.diabetes&&\"diabetes\",e.pregnancy&&\"pregnancy\"].filter(Boolean).join(\", \")||\"underlying risk factor\"}) increase the likelihood of resistant organisms and treatment failure with standard short-course therapy, warranting culture-guided or broader empiric antibiotics.`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

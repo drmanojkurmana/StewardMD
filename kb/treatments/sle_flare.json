@@ -1,0 +1,51 @@
+{
+  "id": "sle_flare",
+  "diseaseId": "sle_flare",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Assess organ involvement and severity (esp. renal, CNS, haematological).",
+        "Mild: hydroxychloroquine ± short NSAID/low-dose steroid.",
+        "Moderate–severe / organ-threatening: high-dose corticosteroids + immunosuppression (mycophenolate/cyclophosphamide; biologics).",
+        "Hydroxychloroquine for essentially all patients (reduces flares).",
+        "Exclude/treat concurrent infection (mimics flare and complicates immunosuppression); sun protection, vaccination."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EULAR SLE",
+        "refs": [
+          "Harrison 22e · EULAR SLE"
+        ]
+      }
+    }
+  ],
+  "confirm": "Multisystem flare (rash, arthritis, serositis, cytopenias, nephritis) in known/new SLE; raised anti-dsDNA, low complement.",
+  "investigations": [
+    {
+      "test": "anti-dsDNA, complement (C3/C4)"
+    },
+    {
+      "test": "FBC, renal function, urinalysis (casts/protein)"
+    },
+    {
+      "test": "Exclude infection"
+    }
+  ],
+  "disposition": "Rheumatology; admit if organ-threatening.",
+  "references": [
+    "Harrison 22e · EULAR SLE"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,208 @@
+{
+  "id": "VAP",
+  "diseaseId": "VAP",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "meropenem",
+          "regimenLabel": "Meropenem",
+          "dose": "1-2 g",
+          "route": "IV",
+          "freq": "every 8 hours (extended infusion preferred)",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Broad antipseudomonal carbapenem coverage is warranted given high MDR gram-negative risk in VAP; extended infusion improves pharmacodynamic target attainment in critically ill patients."
+        },
+        {
+          "composition": "vancomycin or linezolid",
+          "regimenLabel": "Vancomycin or Linezolid",
+          "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided) or Linezolid 600 mg IV q12h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Added for empiric MRSA coverage given high prevalence of MRSA in VAP, pending culture results."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Local ICU antibiogram"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "cefepime + aminoglycoside",
+          "regimenLabel": "Cefepime + Aminoglycoside (e.g., Amikacin)",
+          "dose": "Cefepime 2 g IV q8h + Amikacin per weight",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "7 days",
+          "coverage": "Double gram-negative coverage may be used in units with high resistance rates, pending de-escalation once susceptibility is known.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Local ICU antibiogram"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "polymyxin-based regimen",
+          "regimenLabel": "Polymyxin-based regimen",
+          "dose": "Per local protocol",
+          "route": "IV",
+          "freq": "per protocol",
+          "duration": "Per culture",
+          "coverage": "Reserved for confirmed carbapenem-resistant organisms based on prior colonization or culture data — not first-line empiric.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Surviving Sepsis Campaign",
+          "Local ICU antibiogram"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Pseudomonas",
+        "Carbapenem-resistant Klebsiella",
+        "Acinetobacter",
+        "MRSA"
+      ],
+      "drugs": [
+        "Meropenem",
+        "Vancomycin/Linezolid",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✘",
+          "Partial"
+        ],
+        [
+          "Partial",
+          "✘",
+          "Partial"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Coverage depends heavily on local carbapenem resistance rates — confirm with unit antibiogram.",
+      "gaps": [
+        "True carbapenem-resistant organisms require polymyxin/ceftazidime-avibactam-class agents based on culture data, not covered empirically."
+      ]
+    },
+    "deescalation": "Once culture and sensitivity are available, narrow to the single most targeted agent — e.g., Pseudomonas sensitive to cefepime allows discontinuation of meropenem and vancomycin if MRSA is not isolated.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Meropenem",
+            "dose": "1-2 g",
+            "route": "IV",
+            "frequency": "every 8 hours (extended infusion preferred)",
+            "duration": "7 days",
+            "why": "Broad antipseudomonal carbapenem coverage is warranted given high MDR gram-negative risk in VAP; extended infusion improves pharmacodynamic target attainment in critically ill patients."
+          },
+          {
+            "drug": "Vancomycin or Linezolid",
+            "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided) or Linezolid 600 mg IV q12h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "7 days",
+            "why": "Added for empiric MRSA coverage given high prevalence of MRSA in VAP, pending culture results."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Cefepime + Aminoglycoside (e.g., Amikacin)",
+            "dose": "Cefepime 2 g IV q8h + Amikacin per weight",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "7 days",
+            "coverage": "Double gram-negative coverage may be used in units with high resistance rates, pending de-escalation once susceptibility is known."
+          },
+          {
+            "drug": "Polymyxin-based regimen",
+            "dose": "Per local protocol",
+            "route": "IV",
+            "frequency": "per protocol",
+            "duration": "Per culture",
+            "coverage": "Reserved for confirmed carbapenem-resistant organisms based on prior colonization or culture data — not first-line empiric."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypoxia",
+      "hypotension",
+      "tachycardia",
+      "organDysfunction"
+    ],
+    "framework": [
+      "Double gram-negative coverage and empiric MRSA agents should be reassessed and de-escalated at 48-72 hours based on culture results.",
+      "Avoid prolonged empiric carbapenem use beyond what culture data supports.",
+      "Daily clinical reassessment for early antibiotic discontinuation is essential given high rates of antibiotic overuse in ICU settings."
+    ]
+  },
+  "references": [
+    "IDSA/ATS HAP/VAP Guidelines",
+    "Surviving Sepsis Campaign",
+    "Local ICU antibiogram"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

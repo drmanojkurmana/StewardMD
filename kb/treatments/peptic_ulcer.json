@@ -1,0 +1,51 @@
+{
+  "id": "peptic_ulcer",
+  "diseaseId": "peptic_ulcer",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Active bleed: resuscitate (IV access, fluids/blood, transfuse to Hb ~70 g/L threshold); correct coagulopathy.",
+        "Urgent endoscopy (within 24 h) for haemostasis; IV PPI infusion for high-risk stigmata.",
+        "Test and treat H. pylori; stop NSAIDs; continue PPI.",
+        "Repeat endoscopy/IR embolisation or surgery for rebleeding.",
+        "Risk score (Glasgow-Blatchford/Rockall) guides admission and timing."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE/ACG UGIB",
+        "refs": [
+          "Harrison 22e · NICE/ACG UGIB"
+        ]
+      }
+    }
+  ],
+  "confirm": "Epigastric pain ± upper-GI bleed (melaena/haematemesis). Risk-stratify bleed (Glasgow-Blatchford); OGD diagnostic and therapeutic.",
+  "investigations": [
+    {
+      "test": "FBC, U&E, coagulation, group&save"
+    },
+    {
+      "test": "OGD"
+    },
+    {
+      "test": "H. pylori testing"
+    }
+  ],
+  "disposition": "Admit; ICU/HDU if unstable bleed.",
+  "references": [
+    "Harrison 22e · NICE/ACG UGIB"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

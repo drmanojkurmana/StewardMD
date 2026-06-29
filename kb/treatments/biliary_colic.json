@@ -1,0 +1,51 @@
+{
+  "id": "biliary_colic",
+  "diseaseId": "biliary_colic",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Analgesia (NSAID/opioid) and antiemetics for the acute episode.",
+        "USS to confirm gallstones; check LFTs (exclude CBD stone/cholecystitis).",
+        "Low-fat dietary advice while awaiting surgery.",
+        "Elective laparoscopic cholecystectomy for symptomatic gallstones.",
+        "Escalate if fever, persistent pain or jaundice (cholecystitis/cholangitis)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE gallstones",
+        "refs": [
+          "Harrison 22e · NICE gallstones"
+        ]
+      }
+    }
+  ],
+  "confirm": "Postprandial RUQ/epigastric pain ± radiation to scapula, lasting <6 h, with gallstones on US and no fever/inflammation.",
+  "investigations": [
+    {
+      "test": "USS abdomen"
+    },
+    {
+      "test": "LFTs"
+    },
+    {
+      "test": "MRCP if CBD stone suspected"
+    }
+  ],
+  "disposition": "Outpatient; surgical referral.",
+  "references": [
+    "Harrison 22e · NICE gallstones"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

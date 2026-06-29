@@ -1,0 +1,179 @@
+{
+  "id": "CHOLANGITIS",
+  "diseaseId": "CHOLANGITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "4-7 days after adequate biliary drainage",
+          "coverage": null,
+          "why": "Provides reliable coverage of gram-negative enteric organisms and anaerobes, the dominant pathogens in cholangitis, and is appropriate first-line per Tokyo Guidelines for moderate-severe disease."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Tokyo Guidelines for Acute Cholangitis",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (if shock present)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone + metronidazole",
+          "regimenLabel": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q8h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "4-7 days after drainage",
+          "coverage": "Equally effective combination covering gram-negatives and anaerobes; useful when piperacillin-tazobactam is unavailable or contraindicated.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Tokyo Guidelines for Acute Cholangitis",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (if shock present)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "meropenem",
+          "regimenLabel": "Meropenem (if prior biliary instrumentation, MDR risk, or severe/grade III disease)",
+          "dose": "1 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "4-7 days after drainage",
+          "coverage": "Broader option for patients with prior resistant organism isolation or severe disease per Tokyo Guidelines grading.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Tokyo Guidelines for Acute Cholangitis",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (if shock present)"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli/Klebsiella",
+        "Enterococcus",
+        "Anaerobes"
+      ],
+      "drugs": [
+        "Piperacillin-tazobactam",
+        "Ceftriaxone+Metronidazole"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘"
+        ],
+        [
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Piperacillin-tazobactam alone covers enterococcus in addition to gram-negatives and anaerobes, making it a more complete single-agent choice.",
+      "gaps": [
+        "Vancomycin-resistant enterococcus is not covered by either regimen — relevant only with prior VRE colonization history."
+      ]
+    },
+    "deescalation": "Once biliary drainage is achieved and blood/bile cultures identify a susceptible organism, narrow to the most targeted single agent and limit total duration to 4-7 days from the time of adequate source control.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "4-7 days after adequate biliary drainage",
+            "why": "Provides reliable coverage of gram-negative enteric organisms and anaerobes, the dominant pathogens in cholangitis, and is appropriate first-line per Tokyo Guidelines for moderate-severe disease."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone + Metronidazole",
+            "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q8h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "4-7 days after drainage",
+            "coverage": "Equally effective combination covering gram-negatives and anaerobes; useful when piperacillin-tazobactam is unavailable or contraindicated."
+          },
+          {
+            "drug": "Meropenem (if prior biliary instrumentation, MDR risk, or severe/grade III disease)",
+            "dose": "1 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "4-7 days after drainage",
+            "coverage": "Broader option for patients with prior resistant organism isolation or severe disease per Tokyo Guidelines grading."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "alteredSensorium",
+      "jaundice"
+    ],
+    "framework": [
+      "Antibiotics alone do not resolve cholangitis if biliary obstruction persists — urgent source control (ERCP, percutaneous drainage, or surgery) is essential and should not be delayed while awaiting antibiotic response.",
+      "Limit duration to 4-7 days once adequate source control (drainage) has been achieved — antibiotics are frequently continued longer than necessary in this setting.",
+      "De-escalate based on bile/blood culture results once drainage is achieved and the patient is improving."
+    ]
+  },
+  "references": [
+    "Tokyo Guidelines for Acute Cholangitis",
+    "Harrison's Principles of Internal Medicine",
+    "Surviving Sepsis Campaign (if shock present)"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

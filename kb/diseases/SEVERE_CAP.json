@@ -119,5 +119,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA/ATS Severe CAP Guidelines",
+    "Surviving Sepsis Campaign",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`Clinical findings meet severity criteria for severe CAP (${[e.hypoxia&&\"hypoxia\",e.hypotension&&\"hypotension\",e.alteredSensorium&&\"altered sensorium\",e.multilobar&&\"multilobar infiltrates\"].filter(Boolean).join(\", \")||\"high CURB-65/severity score\"}). This represents a high-risk presentation requiring immediate empiric broad-spectrum therapy and consideration of ICU-level care.`",
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  }
 }

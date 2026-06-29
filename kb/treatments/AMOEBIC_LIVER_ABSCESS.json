@@ -1,0 +1,151 @@
+{
+  "id": "AMOEBIC_LIVER_ABSCESS",
+  "diseaseId": "AMOEBIC_LIVER_ABSCESS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "metronidazole",
+          "regimenLabel": "Metronidazole",
+          "dose": "500-750 mg",
+          "route": "Oral/IV",
+          "freq": "every 8 hours",
+          "duration": "7-10 days",
+          "coverage": null,
+          "why": "Highly effective tissue amoebicide for invasive disease including liver abscess, with response typically seen within days; first-line for amoebic liver abscess based on strong clinical/imaging suspicion."
+        },
+        {
+          "composition": "followed by a luminal agent",
+          "regimenLabel": "Followed by a luminal agent (Paromomycin or Diloxanide furoate)",
+          "dose": "Paromomycin 25-35 mg/kg/day in 3 divided doses",
+          "route": "Oral",
+          "freq": "as above",
+          "duration": "7 days (after completing metronidazole)",
+          "coverage": null,
+          "why": "A luminal agent is required after tissue amoebicide therapy to eradicate any colonic cyst carriage, since metronidazole alone does not reliably clear luminal infection and relapse/transmission risk remains otherwise."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO Guidelines on Amoebiasis",
+          "Harrison's Principles of Internal Medicine",
+          "NCDC India Guidelines"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "tinidazole",
+          "regimenLabel": "Tinidazole (alternative tissue amoebicide)",
+          "dose": "2 g",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "3-5 days",
+          "coverage": "Shorter-course alternative to metronidazole with similar efficacy, also requiring follow-up luminal agent therapy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO Guidelines on Amoebiasis",
+          "Harrison's Principles of Internal Medicine",
+          "NCDC India Guidelines"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Entamoeba histolytica"
+      ],
+      "drugs": [
+        "Metronidazole/Tinidazole"
+      ],
+      "grid": [
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Tissue amoebicides provide excellent coverage of the causative organism for invasive disease.",
+      "gaps": [
+        "Luminal cyst carriage is NOT covered by metronidazole/tinidazole alone — a luminal agent is required afterward to prevent relapse/transmission."
+      ]
+    },
+    "deescalation": "If serology/aspirate confirms isolated amoebic disease and the patient is responding to metronidazole, no antibacterial agents are needed; ensure the luminal agent course is completed after the tissue amoebicide regardless of rapid clinical improvement.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Metronidazole",
+            "dose": "500-750 mg",
+            "route": "Oral/IV",
+            "frequency": "every 8 hours",
+            "duration": "7-10 days",
+            "why": "Highly effective tissue amoebicide for invasive disease including liver abscess, with response typically seen within days; first-line for amoebic liver abscess based on strong clinical/imaging suspicion."
+          },
+          {
+            "drug": "Followed by a luminal agent (Paromomycin or Diloxanide furoate)",
+            "dose": "Paromomycin 25-35 mg/kg/day in 3 divided doses",
+            "route": "Oral",
+            "frequency": "as above",
+            "duration": "7 days (after completing metronidazole)",
+            "why": "A luminal agent is required after tissue amoebicide therapy to eradicate any colonic cyst carriage, since metronidazole alone does not reliably clear luminal infection and relapse/transmission risk remains otherwise."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Tinidazole (alternative tissue amoebicide)",
+            "dose": "2 g",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "3-5 days",
+            "coverage": "Shorter-course alternative to metronidazole with similar efficacy, also requiring follow-up luminal agent therapy."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension"
+    ],
+    "framework": [
+      "Aspiration is generally NOT required for typical amoebic liver abscess that responds to metronidazole — unlike pyogenic abscess, drainage is reserved for large abscesses (>5cm with rupture risk), left-lobe abscesses (pericardial rupture risk), or failure to improve within 5-7 days, where it also helps exclude a pyogenic or mixed process.",
+      "Always follow tissue amoebicide therapy with a luminal agent — omitting this step is a common and consequential oversight that risks relapse and continued transmission.",
+      "If the clinical/radiological picture is ambiguous between pyogenic and amoebic abscess, empiric metronidazole can reasonably be combined with antibacterial coverage pending aspirate/serology results rather than committing to one diagnosis prematurely."
+    ]
+  },
+  "references": [
+    "WHO Guidelines on Amoebiasis",
+    "Harrison's Principles of Internal Medicine",
+    "NCDC India Guidelines"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

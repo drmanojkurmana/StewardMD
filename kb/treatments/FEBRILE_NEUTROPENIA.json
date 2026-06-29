@@ -1,0 +1,189 @@
+{
+  "id": "FEBRILE_NEUTROPENIA",
+  "diseaseId": "FEBRILE_NEUTROPENIA",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours (extended infusion preferred)",
+          "duration": "Until afebrile and ANC recovering (typically ≥48h afebrile and ANC >500)",
+          "coverage": null,
+          "why": "Antipseudomonal beta-lactam monotherapy is standard first-line empiric therapy for febrile neutropenia per IDSA guidelines, providing reliable coverage of the most dangerous gram-negative pathogens."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Febrile Neutropenia Guidelines",
+          "NCCN Guidelines for Prevention and Treatment of Cancer-Related Infections",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "cefepime or meropenem",
+          "regimenLabel": "Cefepime or Meropenem",
+          "dose": "Cefepime 2 g IV q8h or Meropenem 1 g IV q8h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Per response",
+          "coverage": "Equivalent antipseudomonal alternatives; meropenem preferred if prior ESBL organism or higher MDR risk.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Febrile Neutropenia Guidelines",
+          "NCCN Guidelines for Prevention and Treatment of Cancer-Related Infections",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "add vancomycin",
+          "regimenLabel": "Add Vancomycin (specific indications only)",
+          "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Reassess at 48h; discontinue if no gram-positive organism identified",
+          "coverage": "Added only for specific indications: hemodynamic instability, suspected line infection, severe mucositis, known MRSA colonization, or skin/soft tissue infection — not added routinely to all febrile neutropenia.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Febrile Neutropenia Guidelines",
+          "NCCN Guidelines for Prevention and Treatment of Cancer-Related Infections",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Pseudomonas",
+        "E. coli/Klebsiella",
+        "Coagulase-negative Staph",
+        "Viridans streptococci"
+      ],
+      "drugs": [
+        "Piperacillin-tazobactam",
+        "Vancomycin (if added)",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Pip-tazo monotherapy covers the highest-mortality gram-negative risk; vancomycin is added selectively rather than by default.",
+      "gaps": [
+        "Fungal coverage is not included initially — added only if fever persists 4-7 days despite adequate antibacterial therapy and neutropenia continues."
+      ]
+    },
+    "deescalation": "If cultures are negative and the patient is afebrile for 48 hours with ANC recovery trending upward, antibiotics can be discontinued. If an organism is identified, narrow to the most targeted agent while maintaining antipseudomonal coverage until neutropenia resolves if Pseudomonas cannot be excluded.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours (extended infusion preferred)",
+            "duration": "Until afebrile and ANC recovering (typically ≥48h afebrile and ANC >500)",
+            "why": "Antipseudomonal beta-lactam monotherapy is standard first-line empiric therapy for febrile neutropenia per IDSA guidelines, providing reliable coverage of the most dangerous gram-negative pathogens."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Cefepime or Meropenem",
+            "dose": "Cefepime 2 g IV q8h or Meropenem 1 g IV q8h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Per response",
+            "coverage": "Equivalent antipseudomonal alternatives; meropenem preferred if prior ESBL organism or higher MDR risk."
+          },
+          {
+            "drug": "Add Vancomycin (specific indications only)",
+            "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Reassess at 48h; discontinue if no gram-positive organism identified",
+            "coverage": "Added only for specific indications: hemodynamic instability, suspected line infection, severe mucositis, known MRSA colonization, or skin/soft tissue infection — not added routinely to all febrile neutropenia."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "absoluteNeutrophilCountLow",
+      "mucositis"
+    ],
+    "framework": [
+      "Vancomycin (or other gram-positive-active agents) should not be added empirically to all febrile neutropenia patients by default — add only for specific indications (instability, line infection, mucositis, known resistant colonization).",
+      "Reassess daily; if afebrile and clinically stable with a reasonably short expected neutropenia duration, low-risk patients (per MASCC score) may be candidates for oral step-down or even outpatient management.",
+      "Empiric antifungal therapy should be reserved for persistent fever beyond 4-7 days on appropriate antibacterial therapy, not started upfront."
+    ]
+  },
+  "references": [
+    "IDSA Febrile Neutropenia Guidelines",
+    "NCCN Guidelines for Prevention and Treatment of Cancer-Related Infections",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

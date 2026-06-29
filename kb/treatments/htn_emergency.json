@@ -1,0 +1,51 @@
+{
+  "id": "htn_emergency",
+  "diseaseId": "htn_emergency",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Confirm target-organ damage (distinguishes emergency from urgency).",
+        "Controlled IV BP reduction — lower MAP by ~20–25% in the first hour (not to normal), titratable agent (labetalol, nicardipine, GTN).",
+        "Tailor target/agent to the syndrome (faster + lower in dissection/pulmonary oedema; cautious in acute stroke).",
+        "ICU/HDU monitoring with arterial line.",
+        "Identify cause; transition to oral agents once stable."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC/ACC HTN",
+        "refs": [
+          "Harrison 22e · ESC/ACC HTN"
+        ]
+      }
+    }
+  ],
+  "confirm": "Severe hypertension (often >180/120) WITH acute target-organ damage (encephalopathy, ACS, pulmonary oedema, AKI, retinopathy, dissection).",
+  "investigations": [
+    {
+      "test": "Fundoscopy"
+    },
+    {
+      "test": "ECG, troponin, U&E"
+    },
+    {
+      "test": "CT head/CXR as indicated"
+    }
+  ],
+  "disposition": "ICU/HDU.",
+  "references": [
+    "Harrison 22e · ESC/ACC HTN"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,167 @@
+{
+  "id": "SCRUB_TYPHUS",
+  "diseaseId": "SCRUB_TYPHUS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline",
+          "dose": "100 mg",
+          "route": "Oral (or IV if unable to tolerate oral/severe disease)",
+          "freq": "every 12 hours",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Doxycycline is first-line for scrub typhus with rapid and dramatic clinical response typically within 24-48 hours — a response so characteristic it is sometimes used as a retrospective diagnostic clue."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "NCDC India Guidelines for Rickettsial Diseases",
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/CDC Rickettsial Disease Resources"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin (pregnancy, young children, or doxycycline intolerance)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days total",
+          "coverage": "Effective alternative in situations where tetracyclines are relatively contraindicated.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "NCDC India Guidelines for Rickettsial Diseases",
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/CDC Rickettsial Disease Resources"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "chloramphenicol",
+          "regimenLabel": "Chloramphenicol (severe disease, select settings)",
+          "dose": "500 mg",
+          "route": "Oral/IV",
+          "freq": "every 6 hours",
+          "duration": "7 days",
+          "coverage": "Historic alternative, generally reserved given hematologic toxicity concerns; doxycycline remains preferred even in severe disease.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "NCDC India Guidelines for Rickettsial Diseases",
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/CDC Rickettsial Disease Resources"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Orientia tsutsugamushi"
+      ],
+      "drugs": [
+        "Doxycycline"
+      ],
+      "grid": [
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Doxycycline provides essentially complete coverage of the single causative organism.",
+      "gaps": [
+        "None for the primary pathogen — coverage gaps would only arise from a missed alternative diagnosis."
+      ]
+    },
+    "deescalation": "Not applicable — doxycycline is already the single most targeted agent. If the patient fails to defervesce within 48-72 hours, reconsider the diagnosis rather than escalating antibiotics.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Doxycycline",
+            "dose": "100 mg",
+            "route": "Oral (or IV if unable to tolerate oral/severe disease)",
+            "frequency": "every 12 hours",
+            "duration": "7 days",
+            "why": "Doxycycline is first-line for scrub typhus with rapid and dramatic clinical response typically within 24-48 hours — a response so characteristic it is sometimes used as a retrospective diagnostic clue."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Azithromycin (pregnancy, young children, or doxycycline intolerance)",
+            "dose": "500 mg day 1, then 250 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days total",
+            "coverage": "Effective alternative in situations where tetracyclines are relatively contraindicated."
+          },
+          {
+            "drug": "Chloramphenicol (severe disease, select settings)",
+            "dose": "500 mg",
+            "route": "Oral/IV",
+            "frequency": "every 6 hours",
+            "duration": "7 days",
+            "coverage": "Historic alternative, generally reserved given hematologic toxicity concerns; doxycycline remains preferred even in severe disease."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "organDysfunction",
+      "hypotension",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "Do not withhold empiric doxycycline while awaiting serology in a clinically compatible presentation — early treatment dramatically reduces morbidity and the response itself supports the diagnosis.",
+      "Doxycycline is not contraindicated for short courses even in children when scrub typhus is suspected, per current guidance, given the risk of untreated disease — this is a common point of unnecessary hesitation.",
+      "Treat the full 7-day course even after the characteristic rapid defervescence, to ensure complete clearance."
+    ]
+  },
+  "references": [
+    "NCDC India Guidelines for Rickettsial Diseases",
+    "Harrison's Principles of Internal Medicine",
+    "IDSA/CDC Rickettsial Disease Resources"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

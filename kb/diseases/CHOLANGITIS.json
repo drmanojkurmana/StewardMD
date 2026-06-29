@@ -104,5 +104,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "Tokyo Guidelines for Acute Cholangitis",
+    "Harrison's Principles of Internal Medicine",
+    "Surviving Sepsis Campaign (if shock present)"
+  ],
+  "reasonSource": "e=>`Right upper quadrant pain, fever, and jaundice (Charcot's triad)${e.hypotension&&e.alteredSensorium?\", together with hypotension and altered sensorium (Reynold's pentad),\":\"\"} are consistent with acute cholangitis, a condition that can progress rapidly to septic shock from biliary obstruction. Empiric broad-spectrum antibiotics must be started immediately, with urgent biliary drainage (ERCP or percutaneous) as the definitive source control measure — antibiotics alone are insufficient if obstruction is not relieved.`",
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  }
 }

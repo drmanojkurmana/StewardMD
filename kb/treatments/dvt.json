@@ -1,0 +1,51 @@
+{
+  "id": "dvt",
+  "diseaseId": "dvt",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Confirm proximal DVT with compression venous ultrasonography (D-dimer to help exclude when pretest probability is low).",
+        "Anticoagulate once confirmed: DOAC monotherapy (rivaroxaban or apixaban) first-line, or parenteral heparin/LMWH bridged to warfarin (target INR 2-3); warfarin not DOACs for antiphospholipid syndrome.",
+        "Treat at least 3 months; for first VTE consider extended/indefinite anticoagulation when there is no identifiable risk factor or a persistent risk factor (Harrison de-emphasises 'provoked vs unprovoked').",
+        "For cancer-associated VTE use LMWH or a DOAC (apixaban/edoxaban; avoid DOAC with GI cancer) and continue until cancer-free.",
+        "Compression stockings for symptomatic relief; check renal function for dosing; counsel on PE warning signs."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207",
+        "refs": [
+          "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207"
+        ]
+      }
+    }
+  ],
+  "confirm": "Unilateral leg pain/swelling/tenderness; risk-stratify (Wells), D-dimer if low probability, compression US confirms.",
+  "investigations": [
+    {
+      "test": "Compression US"
+    },
+    {
+      "test": "D-dimer (low prob)"
+    },
+    {
+      "test": "FBC, renal function for dosing"
+    }
+  ],
+  "disposition": "Usually outpatient pathway.",
+  "references": [
+    "Harrison 22e · ASH/NICE VTE · rev. Harrison 22e 2204-2207"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

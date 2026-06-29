@@ -1,0 +1,184 @@
+{
+  "id": "DYSENTERY",
+  "diseaseId": "DYSENTERY",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ciprofloxacin",
+          "regimenLabel": "Ciprofloxacin",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "3 days",
+          "coverage": null,
+          "why": "Covers the major invasive bacterial dysentery pathogens (Shigella, Campylobacter, invasive E. coli) and shortens illness duration and carriage in confirmed bacterial dysentery."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Infectious Diarrhea Guidelines",
+          "WHO Guidelines on Dysentery",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "3 days",
+          "coverage": "Preferred alternative given rising fluoroquinolone resistance in Shigella and Campylobacter in many regions, and useful in pediatric and pregnant patients where fluoroquinolones are avoided.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Infectious Diarrhea Guidelines",
+          "WHO Guidelines on Dysentery",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone (severe/hospitalized)",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "3-5 days",
+          "coverage": "Used for severe disease requiring hospitalization or when oral therapy is not tolerated.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Infectious Diarrhea Guidelines",
+          "WHO Guidelines on Dysentery",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Shigella",
+        "Campylobacter",
+        "Invasive E. coli",
+        "Non-typhoidal Salmonella"
+      ],
+      "drugs": [
+        "Ciprofloxacin",
+        "Azithromycin"
+      ],
+      "grid": [
+        [
+          "Partial (resistance variable)",
+          "✔"
+        ],
+        [
+          "Partial (resistance variable)",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Either agent covers the majority of dysentery pathogens; local resistance data should guide final choice.",
+      "gaps": [
+        "Entamoeba histolytica is not covered by either agent — requires metronidazole/tinidazole if confirmed on stool microscopy."
+      ]
+    },
+    "deescalation": "If stool culture identifies Entamoeba histolytica, discontinue antibacterial agents and switch to metronidazole/tinidazole. If a specific bacterial organism with known susceptibility is identified, narrow to the most targeted oral agent.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "3 days",
+            "why": "Covers the major invasive bacterial dysentery pathogens (Shigella, Campylobacter, invasive E. coli) and shortens illness duration and carriage in confirmed bacterial dysentery."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Azithromycin",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "3 days",
+            "coverage": "Preferred alternative given rising fluoroquinolone resistance in Shigella and Campylobacter in many regions, and useful in pediatric and pregnant patients where fluoroquinolones are avoided."
+          },
+          {
+            "drug": "Ceftriaxone (severe/hospitalized)",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "3-5 days",
+            "coverage": "Used for severe disease requiring hospitalization or when oral therapy is not tolerated."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "dehydration",
+      "hypotension",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "Avoid antimotility agents (e.g., loperamide) in dysentery as they may prolong invasive infection and increase complication risk (e.g., toxic megacolon, HUS with EHEC).",
+      "Send stool culture before or concurrent with starting antibiotics whenever feasible to allow de-escalation/confirmation.",
+      "Reserve empiric ciprofloxacin only where local Shigella/Campylobacter resistance rates are acceptable; otherwise azithromycin is preferred first-line."
+    ]
+  },
+  "references": [
+    "IDSA Infectious Diarrhea Guidelines",
+    "WHO Guidelines on Dysentery",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

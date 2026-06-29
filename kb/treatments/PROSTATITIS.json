@@ -1,0 +1,174 @@
+{
+  "id": "PROSTATITIS",
+  "diseaseId": "PROSTATITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ciprofloxacin",
+          "regimenLabel": "Ciprofloxacin",
+          "dose": "500 mg",
+          "route": "Oral (or 400 mg IV if severe/admitted)",
+          "freq": "every 12 hours",
+          "duration": "2-4 weeks",
+          "coverage": null,
+          "why": "Fluoroquinolones achieve excellent prostatic tissue penetration, which is essential since many antibiotics with good urinary concentration do not adequately penetrate prostatic tissue; prolonged duration (longer than typical UTI) reduces the risk of chronic prostatitis."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/AUA Guidelines on Prostatitis",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "trimethoprim-sulfamethoxazole",
+          "regimenLabel": "Trimethoprim-sulfamethoxazole (if susceptible)",
+          "dose": "160/800 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "2-4 weeks",
+          "coverage": "Alternative with reasonable prostatic penetration where local E. coli susceptibility is favorable.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/AUA Guidelines on Prostatitis",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone + azithromycin/doxycycline",
+          "regimenLabel": "Ceftriaxone + Azithromycin/Doxycycline (if STI risk in younger sexually active men)",
+          "dose": "Ceftriaxone 500 mg-1g IM/IV single dose + Doxycycline 100 mg PO q12h x 10-14 days",
+          "route": "Mixed",
+          "freq": "as above",
+          "duration": "10-14 days",
+          "coverage": "Specifically covers gonococcal and chlamydial causes in the appropriate epidemiological context, which require an entirely different regimen than typical uropathogen-directed therapy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/AUA Guidelines on Prostatitis",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli",
+        "Klebsiella/Proteus",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Ciprofloxacin",
+        "TMP-SMX"
+      ],
+      "grid": [
+        [
+          "✔",
+          "Variable"
+        ],
+        [
+          "✔",
+          "Variable"
+        ],
+        [
+          "✘",
+          "✘"
+        ]
+      ],
+      "completeness": "Fluoroquinolones provide the most reliable combination of organism coverage and prostatic tissue penetration for typical uropathogen-related prostatitis.",
+      "gaps": [
+        "Enterococcus and STI pathogens not covered by standard fluoroquinolone therapy — assess risk factors and adjust accordingly."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted oral agent once urine culture and susceptibility are available; complete the full extended duration even with early symptomatic improvement to reduce chronic prostatitis risk.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin",
+            "dose": "500 mg",
+            "route": "Oral (or 400 mg IV if severe/admitted)",
+            "frequency": "every 12 hours",
+            "duration": "2-4 weeks",
+            "why": "Fluoroquinolones achieve excellent prostatic tissue penetration, which is essential since many antibiotics with good urinary concentration do not adequately penetrate prostatic tissue; prolonged duration (longer than typical UTI) reduces the risk of chronic prostatitis."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Trimethoprim-sulfamethoxazole (if susceptible)",
+            "dose": "160/800 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "2-4 weeks",
+            "coverage": "Alternative with reasonable prostatic penetration where local E. coli susceptibility is favorable."
+          },
+          {
+            "drug": "Ceftriaxone + Azithromycin/Doxycycline (if STI risk in younger sexually active men)",
+            "dose": "Ceftriaxone 500 mg-1g IM/IV single dose + Doxycycline 100 mg PO q12h x 10-14 days",
+            "route": "Mixed",
+            "frequency": "as above",
+            "duration": "10-14 days",
+            "coverage": "Specifically covers gonococcal and chlamydial causes in the appropriate epidemiological context, which require an entirely different regimen than typical uropathogen-directed therapy."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "urinaryRetention"
+    ],
+    "framework": [
+      "Duration is intentionally longer (2-4 weeks) than typical UTI/pyelonephritis given the risk of chronic bacterial prostatitis with undertreatment — do not apply standard UTI duration logic here.",
+      "Specifically ask about sexual history/risk factors in younger men, since STI-related prostatitis requires entirely different therapy (and partner treatment) than typical uropathogen-related disease.",
+      "Avoid vigorous prostatic massage/instrumentation in the acute setting given bacteremia risk; gentle digital rectal exam for diagnostic purposes is acceptable."
+    ]
+  },
+  "references": [
+    "IDSA/AUA Guidelines on Prostatitis",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "atrial_fib",
+  "diseaseId": "atrial_fib",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Unstable (shock, ischaemia, pulmonary oedema): emergency synchronised DC cardioversion.",
+        "Stable: rate control with a beta-blocker or diltiazem/verapamil (digoxin if HF/hypotension).",
+        "Rhythm control (drug/electrical cardioversion) for selected/recent-onset; anticoagulate appropriately around cardioversion.",
+        "Anticoagulate per CHA2DS2-VASc (DOAC preferred) for stroke prevention.",
+        "Identify/treat triggers — sepsis, thyroid, electrolytes, alcohol, ischaemia."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC AF",
+        "refs": [
+          "Harrison 22e · ESC AF"
+        ]
+      }
+    }
+  ],
+  "confirm": "Irregularly irregular pulse; ECG shows AF/flutter. Assess haemodynamic stability and onset/duration.",
+  "investigations": [
+    {
+      "test": "ECG"
+    },
+    {
+      "test": "TFTs, electrolytes, echo"
+    },
+    {
+      "test": "CHA2DS2-VASc / HAS-BLED"
+    }
+  ],
+  "disposition": "Admit if unstable/new with HF; else outpatient pathway.",
+  "references": [
+    "Harrison 22e · ESC AF"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "malignancy_b",
+  "diseaseId": "malignancy_b",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Structured work-up: examination, bloods, imaging (CT) and targeted tissue diagnosis (excision/core biopsy).",
+        "Avoid empirical steroids before histology (can obscure lymphoma diagnosis).",
+        "Refer to the appropriate oncology/haematology MDT promptly.",
+        "Definitive treatment is tumour-specific after staging.",
+        "Manage symptoms and oncological emergencies (hypercalcaemia, SVCO, cord compression)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Constitutional 'B' symptoms (weight loss, fevers, night sweats) ± lymphadenopathy/organomegaly suggesting lymphoma/occult malignancy.",
+  "investigations": [
+    {
+      "test": "FBC, film, LDH, ESR"
+    },
+    {
+      "test": "CT chest/abdo/pelvis ± PET"
+    },
+    {
+      "test": "Tissue biopsy"
+    }
+  ],
+  "disposition": "Urgent oncology/haematology referral.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "hyperthyroidism",
+  "diseaseId": "hyperthyroidism",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Beta-blocker (propranolol) for symptomatic relief of adrenergic symptoms.",
+        "Antithyroid drug — carbimazole (or PTU in 1st-trimester pregnancy).",
+        "Determine cause (Graves vs nodular vs thyroiditis) — TRAb, uptake scan.",
+        "Discuss definitive options: radioactive iodine or surgery.",
+        "Monitor TFTs and FBC/LFTs (agranulocytosis, hepatotoxicity warning)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATA",
+        "refs": [
+          "Harrison 22e · ATA"
+        ]
+      }
+    }
+  ],
+  "confirm": "Weight loss, tremor, heat intolerance, palpitations with suppressed TSH and raised free T4/T3 (uncomplicated, no storm).",
+  "investigations": [
+    {
+      "test": "TFTs, TRAb"
+    },
+    {
+      "test": "Thyroid uptake scan/US"
+    },
+    {
+      "test": "FBC, LFTs baseline"
+    }
+  ],
+  "disposition": "Outpatient endocrinology (admit if storm).",
+  "references": [
+    "Harrison 22e · ATA"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

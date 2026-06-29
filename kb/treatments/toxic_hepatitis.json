@@ -1,0 +1,51 @@
+{
+  "id": "toxic_hepatitis",
+  "diseaseId": "toxic_hepatitis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Stop the offending drug/toxin immediately.",
+        "Paracetamol overdose: N-ACETYLCYSTEINE (use the nomogram / treat if staggered or uncertain timing).",
+        "Supportive care; monitor INR, glucose, lactate, creatinine and mental status for acute liver failure.",
+        "Contact a liver/transplant unit early if ALF criteria (rising INR, encephalopathy, acidosis) — King's College criteria.",
+        "Avoid further hepatotoxins; treat complications (coagulopathy, hypoglycaemia, cerebral oedema)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AASLD ALF",
+        "refs": [
+          "Harrison 22e · AASLD ALF"
+        ]
+      }
+    }
+  ],
+  "confirm": "Acute transaminitis ± jaundice temporally linked to a drug/toxin (esp. paracetamol). Assess for acute liver failure (INR, encephalopathy).",
+  "investigations": [
+    {
+      "test": "LFTs, INR, paracetamol level"
+    },
+    {
+      "test": "Glucose, lactate, ABG, creatinine"
+    },
+    {
+      "test": "Liver screen"
+    }
+  ],
+  "disposition": "Admit; ALF → transplant centre/ICU.",
+  "references": [
+    "Harrison 22e · AASLD ALF"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

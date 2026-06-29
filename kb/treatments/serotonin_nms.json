@@ -1,0 +1,51 @@
+{
+  "id": "serotonin_nms",
+  "diseaseId": "serotonin_nms",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "STOP the offending agent immediately (serotonergic drug or antipsychotic).",
+        "Aggressive cooling and IV fluids; benzodiazepines for agitation/rigidity; ICU for severe cases.",
+        "Serotonin syndrome: consider cyproheptadine. NMS: consider dantrolene ± bromocriptine.",
+        "Monitor for and treat rhabdomyolysis, hyperthermia, renal failure and DIC.",
+        "Supportive care; avoid restraints worsening hyperthermia."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hyperthermia, rigidity and altered mental state with autonomic instability — serotonergic excess (clonus, hyperreflexia, rapid onset) vs NMS (lead-pipe rigidity, antipsychotic, slower).",
+  "investigations": [
+    {
+      "test": "Creatine kinase, U&E, coagulation"
+    },
+    {
+      "test": "Temperature, ECG"
+    },
+    {
+      "test": "Drug history"
+    }
+  ],
+  "disposition": "Admit; ICU if severe/hyperthermic.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

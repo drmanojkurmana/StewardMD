@@ -1,0 +1,51 @@
+{
+  "id": "asthma_exac",
+  "diseaseId": "asthma_exac",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "High-flow oxygen to SpO2 94–98%; back-to-back nebulised salbutamol (+ ipratropium if severe).",
+        "Oral prednisolone 40–50 mg (or IV hydrocortisone) early.",
+        "IV magnesium sulfate for severe/life-threatening attacks.",
+        "Reassess with PEF/ABG; escalate to ICU for exhaustion, rising CO2 or silent chest.",
+        "Identify trigger; review inhaler technique/adherence and step-up preventer at discharge."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · GINA/BTS",
+        "refs": [
+          "Harrison 22e · GINA/BTS"
+        ]
+      }
+    }
+  ],
+  "confirm": "Acute wheeze/dyspnoea/cough with reduced PEF; grade severity (PEF, SpO2, ability to speak, silent chest).",
+  "investigations": [
+    {
+      "test": "PEF, SpO2"
+    },
+    {
+      "test": "ABG if severe"
+    },
+    {
+      "test": "CXR if atypical / no response"
+    }
+  ],
+  "disposition": "Admit if not responding; ICU if life-threatening.",
+  "references": [
+    "Harrison 22e · GINA/BTS"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

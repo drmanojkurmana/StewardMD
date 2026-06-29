@@ -1,0 +1,179 @@
+{
+  "id": "CELLULITIS",
+  "diseaseId": "CELLULITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "cefazolin or cephalexin",
+          "regimenLabel": "Cefazolin (IV) or Cephalexin (oral, mild)",
+          "dose": "Cefazolin 1-2 g IV q8h or Cephalexin 500 mg PO q6h",
+          "route": "IV or Oral depending on severity",
+          "freq": "as above",
+          "duration": "5-7 days (extend if slow response)",
+          "coverage": null,
+          "why": "First-generation cephalosporins reliably cover streptococci and methicillin-susceptible S. aureus, the dominant pathogens in non-purulent cellulitis."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "clindamycin",
+          "regimenLabel": "Clindamycin",
+          "dose": "300-450 mg",
+          "route": "Oral",
+          "freq": "every 8 hours",
+          "duration": "5-7 days",
+          "coverage": "Useful alternative in penicillin allergy, also covers MRSA in many regions — confirm local resistance.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "trimethoprim-sulfamethoxazole or doxycycline",
+          "regimenLabel": "Trimethoprim-sulfamethoxazole or Doxycycline (if MRSA risk/purulent)",
+          "dose": "TMP-SMX 160/800 mg PO q12h or Doxycycline 100 mg PO q12h",
+          "route": "Oral",
+          "freq": "as above",
+          "duration": "5-7 days",
+          "coverage": "Added or substituted when purulence or MRSA risk factors are present, since cephalosporins do not reliably cover MRSA.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Group A Streptococcus",
+        "MSSA",
+        "MRSA"
+      ],
+      "drugs": [
+        "Cefazolin/Cephalexin",
+        "TMP-SMX/Doxycycline",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Cephalosporin alone covers ~80% of non-purulent cellulitis; add MRSA-active agent if purulent or risk factors present.",
+      "gaps": [
+        "MRSA not covered by cephalosporins alone — add only with purulence or specific risk factors, not routinely."
+      ]
+    },
+    "deescalation": "If culture (from purulent component) identifies MSSA, narrow from broader MRSA-active agents to a cephalosporin. If no purulence and clinical improvement is seen, no escalation is needed regardless of culture status.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Cefazolin (IV) or Cephalexin (oral, mild)",
+            "dose": "Cefazolin 1-2 g IV q8h or Cephalexin 500 mg PO q6h",
+            "route": "IV or Oral depending on severity",
+            "frequency": "as above",
+            "duration": "5-7 days (extend if slow response)",
+            "why": "First-generation cephalosporins reliably cover streptococci and methicillin-susceptible S. aureus, the dominant pathogens in non-purulent cellulitis."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "dose": "300-450 mg",
+            "route": "Oral",
+            "frequency": "every 8 hours",
+            "duration": "5-7 days",
+            "coverage": "Useful alternative in penicillin allergy, also covers MRSA in many regions — confirm local resistance."
+          },
+          {
+            "drug": "Trimethoprim-sulfamethoxazole or Doxycycline (if MRSA risk/purulent)",
+            "dose": "TMP-SMX 160/800 mg PO q12h or Doxycycline 100 mg PO q12h",
+            "route": "Oral",
+            "frequency": "as above",
+            "duration": "5-7 days",
+            "coverage": "Added or substituted when purulence or MRSA risk factors are present, since cephalosporins do not reliably cover MRSA."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia",
+      "hypotension",
+      "crepitusOrBullae"
+    ],
+    "framework": [
+      "MRSA coverage should not be added by default for non-purulent cellulitis — reserve for purulent disease, abscess, or specific MRSA risk factors.",
+      "Crepitus, bullae, severe pain out of proportion to exam findings, or rapid progression should prompt urgent surgical consultation to rule out necrotizing fasciitis rather than antibiotic escalation alone.",
+      "Mark the border of erythema at presentation to objectively track response and avoid premature escalation for expected initial spread."
+    ]
+  },
+  "references": [
+    "IDSA Skin and Soft Tissue Infection Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

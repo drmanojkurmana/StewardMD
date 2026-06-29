@@ -1,0 +1,119 @@
+{
+  "id": "CNS_TB",
+  "diseaseId": "CNS_TB",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "isoniazid + rifampicin + pyrazinamide + ethambutol + corticosteroids",
+          "regimenLabel": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE) + Corticosteroids",
+          "dose": "Weight-band dosing per national TB program; Dexamethasone or Prednisolone per CNS TB protocol",
+          "route": "Oral (ATT); IV/Oral (steroid)",
+          "freq": "Once daily (DOTS schedule)",
+          "duration": "2 months intensive HRZE, then HR for 10 months (12 months total for CNS TB); steroids tapered over 6-8 weeks",
+          "coverage": null,
+          "why": "Same four-drug backbone as pulmonary TB but with a longer continuation phase given the severity of CNS involvement; adjunctive corticosteroids are specifically indicated in TB meningitis (unlike most TB) as they reduce mortality and neurological sequelae."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "modified regimens per drug-susceptibility/resistance testing",
+          "regimenLabel": "Modified regimens per drug-susceptibility/resistance testing",
+          "dose": "Per DR-TB program protocol",
+          "route": "Per regimen",
+          "freq": "Per regimen",
+          "duration": "Extended per resistance pattern",
+          "coverage": "Used when rifampicin resistance or treatment failure is identified — requires specialized TB program management.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Not applicable in the usual sense — continue the full empiric regimen for the complete duration once started, adjusting only if drug-susceptibility results (when available) indicate resistance requiring regimen modification.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE) + Corticosteroids",
+            "dose": "Weight-band dosing per national TB program; Dexamethasone or Prednisolone per CNS TB protocol",
+            "route": "Oral (ATT); IV/Oral (steroid)",
+            "frequency": "Once daily (DOTS schedule)",
+            "duration": "2 months intensive HRZE, then HR for 10 months (12 months total for CNS TB); steroids tapered over 6-8 weeks",
+            "why": "Same four-drug backbone as pulmonary TB but with a longer continuation phase given the severity of CNS involvement; adjunctive corticosteroids are specifically indicated in TB meningitis (unlike most TB) as they reduce mortality and neurological sequelae."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Modified regimens per drug-susceptibility/resistance testing",
+            "dose": "Per DR-TB program protocol",
+            "route": "Per regimen",
+            "frequency": "Per regimen",
+            "duration": "Extended per resistance pattern",
+            "coverage": "Used when rifampicin resistance or treatment failure is identified — requires specialized TB program management."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "alteredSensorium",
+      "focalNeuroDeficit",
+      "fever"
+    ],
+    "framework": [
+      "Unlike pulmonary TB, do NOT wait for microbiological confirmation before starting empiric ATT in strongly suspected TB meningitis — the consequences of treatment delay (death, severe neurological sequelae) outweigh the stewardship cost of treating a small number of false positives.",
+      "Adjunctive corticosteroids are a key, specific intervention for TB meningitis (reducing mortality) and should not be omitted — this differs from most other TB presentations.",
+      "Still send CSF for AFB smear, CBNAAT/Xpert, and culture even though treatment should not wait for results — confirmation remains important for resistance testing and case registration.",
+      "Monitor closely for hydrocephalus and raised intracranial pressure, which may require neurosurgical intervention (CSF diversion) independent of antitubercular therapy."
+    ]
+  },
+  "references": [
+    "WHO TB Guidelines",
+    "National TB Elimination Programme (NTEP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

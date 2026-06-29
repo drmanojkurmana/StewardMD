@@ -1,0 +1,48 @@
+{
+  "id": "ibs",
+  "diseaseId": "ibs",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Confirm alarm features absent (weight loss, bleeding, anaemia, nocturnal symptoms, onset >50) and basic tests normal.",
+        "Diet/lifestyle: regular meals, fibre adjustment, trial of low-FODMAP with dietitian; address triggers.",
+        "Symptom-targeted drugs: antispasmodics for pain, laxatives for IBS-C, loperamide for IBS-D.",
+        "Low-dose tricyclic or SSRI for pain/global symptoms; psychological therapies (CBT/gut-directed hypnotherapy).",
+        "Reassurance and a positive diagnosis; review and safety-net."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Rome IV/NICE IBS",
+        "refs": [
+          "Harrison 22e · Rome IV/NICE IBS"
+        ]
+      }
+    }
+  ],
+  "confirm": "Chronic abdominal pain related to defecation with altered bowel habit and no alarm features; positive symptom-based (Rome IV) diagnosis after excluding organic disease.",
+  "investigations": [
+    {
+      "test": "FBC, CRP, coeliac serology, faecal calprotectin"
+    },
+    {
+      "test": "Exclude organic disease"
+    }
+  ],
+  "disposition": "Outpatient.",
+  "references": [
+    "Harrison 22e · Rome IV/NICE IBS"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

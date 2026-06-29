@@ -1,0 +1,51 @@
+{
+  "id": "sarcoidosis",
+  "diseaseId": "sarcoidosis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Confirm histology (non-caseating granulomas) and EXCLUDE TB/infection/lymphoma first.",
+        "Asymptomatic/mild: observe — many resolve spontaneously.",
+        "Treat if organ-threatening (cardiac, neuro, eye, progressive lung, hypercalcaemia): corticosteroids first-line.",
+        "Steroid-sparing agents (methotrexate/azathioprine) for chronic disease.",
+        "Screen for cardiac and ocular involvement; monitor calcium."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATS sarcoid",
+        "refs": [
+          "Harrison 22e · ATS sarcoid"
+        ]
+      }
+    }
+  ],
+  "confirm": "Multisystem granulomatous disease — bilateral hilar lymphadenopathy, lung infiltrates ± skin/eye/cardiac involvement; non-caseating granulomas on biopsy (exclude TB).",
+  "investigations": [
+    {
+      "test": "CXR/HRCT, serum ACE, calcium"
+    },
+    {
+      "test": "Tissue biopsy"
+    },
+    {
+      "test": "ECG/echo, ophthalmology"
+    }
+  ],
+  "disposition": "Respiratory/multispecialty referral.",
+  "references": [
+    "Harrison 22e · ATS sarcoid"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "svc_obstruction",
+  "diseaseId": "svc_obstruction",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Sit the patient up; oxygen; assess airway (emergency if stridor/cerebral oedema).",
+        "CT chest to define cause and obtain tissue diagnosis before treatment where possible.",
+        "Endovascular stenting gives rapid relief, esp. for severe symptoms.",
+        "Cause-directed therapy: radiotherapy/chemotherapy for malignancy (SCLC/lymphoma chemo-sensitive).",
+        "Corticosteroids in steroid-responsive tumours/airway compromise; anticoagulate if thrombus."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Facial/neck/arm swelling, distended veins, dyspnoea ± plethora; usually malignant. CT confirms level/cause.",
+  "investigations": [
+    {
+      "test": "CT chest with contrast"
+    },
+    {
+      "test": "Tissue diagnosis"
+    },
+    {
+      "test": "Identify primary"
+    }
+  ],
+  "disposition": "Admit; oncology/IR.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

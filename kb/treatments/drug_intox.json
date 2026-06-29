@@ -1,0 +1,51 @@
+{
+  "id": "drug_intox",
+  "diseaseId": "drug_intox",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Resuscitate (airway, breathing, circulation); treat hypoglycaemia and give thiamine where relevant.",
+        "Identify the toxidrome; contact a poisons service (e.g. TOXBASE/Poison Centre) for agent-specific advice.",
+        "Decontamination (activated charcoal) only if early, airway-safe and appropriate agent.",
+        "Specific antidotes where indicated (naloxone, NAC, flumazenil caution, etc.); supportive monitoring.",
+        "Enhanced elimination/dialysis for selected toxins; psychiatric assessment after medical stabilisation."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Poisons service",
+        "refs": [
+          "Harrison 22e · Poisons service"
+        ]
+      }
+    }
+  ],
+  "confirm": "Altered consciousness/toxidrome after suspected ingestion; identify the agent and toxidrome; assess ABCs and risk.",
+  "investigations": [
+    {
+      "test": "Glucose, paracetamol/salicylate levels"
+    },
+    {
+      "test": "ABG, U&E, ECG, osmolar gap"
+    },
+    {
+      "test": "Agent-specific levels"
+    }
+  ],
+  "disposition": "Admit/observe; ICU if severe.",
+  "references": [
+    "Harrison 22e · Poisons service"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

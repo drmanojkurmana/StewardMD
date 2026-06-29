@@ -1,0 +1,172 @@
+{
+  "id": "BRAIN_ABSCESS",
+  "diseaseId": "BRAIN_ABSCESS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone + metronidazole",
+          "regimenLabel": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q12h + Metronidazole 500 mg IV q8h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "6-8 weeks (organism- and response-dependent)",
+          "coverage": null,
+          "why": "This combination covers the major contiguous-spread pathogens (streptococci, anaerobes, and many Enterobacteriaceae) and provides good CNS penetration, appropriate pending culture/aspirate results."
+        },
+        {
+          "composition": "add vancomycin",
+          "regimenLabel": "Add Vancomycin if S. aureus risk (post-neurosurgery, hematogenous spread, endocarditis)",
+          "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "6-8 weeks",
+          "coverage": null,
+          "why": "Added for empiric MRSA/staphylococcal coverage specifically when the clinical context suggests hematogenous or post-surgical seeding."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on CNS Infections"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "meropenem",
+          "regimenLabel": "Meropenem (broader gram-negative coverage, e.g. otogenic source with Pseudomonas risk)",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "6-8 weeks",
+          "coverage": "Broader alternative when gram-negative coverage including Pseudomonas is specifically needed (e.g., chronic otitis/mastoiditis as the source).",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on CNS Infections"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Streptococcus species",
+        "Anaerobes",
+        "S. aureus",
+        "Enterobacteriaceae"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Metronidazole",
+        "Vancomycin (if added)"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔ (backup)"
+        ],
+        [
+          "✘",
+          "✔",
+          "✘"
+        ],
+        [
+          "✘",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘",
+          "✘"
+        ]
+      ],
+      "completeness": "Combination covers the major contiguous-spread pathogens; staphylococcal coverage must be added based on specific risk factors.",
+      "gaps": [
+        "Pseudomonas and other resistant gram-negatives not reliably covered — add broader coverage if otogenic/post-surgical source with relevant risk factors."
+      ]
+    },
+    "deescalation": "Once aspirate culture identifies the organism(s), narrow to the most targeted regimen; continue for the full 6-8 week course with serial imaging to confirm resolution before considering early discontinuation.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone + Metronidazole",
+            "dose": "Ceftriaxone 2 g IV q12h + Metronidazole 500 mg IV q8h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "6-8 weeks (organism- and response-dependent)",
+            "why": "This combination covers the major contiguous-spread pathogens (streptococci, anaerobes, and many Enterobacteriaceae) and provides good CNS penetration, appropriate pending culture/aspirate results."
+          },
+          {
+            "drug": "Add Vancomycin if S. aureus risk (post-neurosurgery, hematogenous spread, endocarditis)",
+            "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "6-8 weeks",
+            "why": "Added for empiric MRSA/staphylococcal coverage specifically when the clinical context suggests hematogenous or post-surgical seeding."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Meropenem (broader gram-negative coverage, e.g. otogenic source with Pseudomonas risk)",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "6-8 weeks",
+            "coverage": "Broader alternative when gram-negative coverage including Pseudomonas is specifically needed (e.g., chronic otitis/mastoiditis as the source)."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "alteredSensorium",
+      "seizure",
+      "focalNeuroDeficit"
+    ],
+    "framework": [
+      "Antibiotics alone are frequently insufficient — neurosurgical aspiration/drainage is both diagnostic (culture) and therapeutic for abscesses of sufficient size, and should not be delayed in favor of antibiotics alone.",
+      "De-escalate aggressively once aspirate culture results are available — empiric triple/broad coverage is a starting point, not the intended endpoint.",
+      "Total duration (6-8 weeks) is substantially longer than most CNS infections — do not apply standard meningitis duration logic here."
+    ]
+  },
+  "references": [
+    "Harrison's Principles of Internal Medicine",
+    "IDSA Guidelines on CNS Infections"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

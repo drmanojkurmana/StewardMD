@@ -1,0 +1,50 @@
+{
+  "id": "brain_tumour",
+  "diseaseId": "brain_tumour",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "MRI with contrast; refer neuro-oncology / neurosurgery.",
+        "Dexamethasone for symptomatic vasogenic oedema (with PPI cover).",
+        "Antiepileptics only if seizures have occurred (not routine prophylaxis).",
+        "Definitive therapy (surgery, radiotherapy, chemotherapy) is tumour-specific via MDT."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Progressive headache (worse on waking/Valsalva), focal signs, new seizures, or papilloedema. MRI brain with contrast.",
+  "investigations": [
+    {
+      "test": "MRI brain + contrast"
+    },
+    {
+      "test": "Staging imaging if metastasis suspected"
+    },
+    {
+      "test": "Histology"
+    }
+  ],
+  "disposition": "Refer neuro-oncology/neurosurgery.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

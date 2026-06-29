@@ -102,5 +102,14 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA Pyelonephritis Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`Flank pain with fever${e.costovertebralTenderness?\" and costovertebral angle tenderness\":\"\"} indicates upper urinary tract infection (pyelonephritis). This requires antibiotics with reliable renal tissue penetration, ${e.hypotension?\"and given hemodynamic instability, urgent IV therapy and evaluation for urosepsis\":\"with outpatient oral therapy appropriate in hemodynamically stable, tolerating patients\"}.`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

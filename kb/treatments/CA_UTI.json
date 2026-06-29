@@ -1,0 +1,149 @@
+{
+  "id": "CA_UTI",
+  "diseaseId": "CA_UTI",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "per prior urine culture",
+          "regimenLabel": "Per prior urine culture if available; empirically Ceftriaxone if unknown",
+          "dose": "1-2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "7 days (10-14 days if delayed response)",
+          "coverage": null,
+          "why": "Empiric choice should ideally be guided by prior catheter-associated culture history given the high rate of resistant organisms in this population; ceftriaxone is a reasonable default pending current culture results."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Catheter-Associated UTI Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (if Pseudomonas risk or prior resistant organism)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "7-14 days",
+          "coverage": "Broader option for patients with prior Pseudomonas or other resistant gram-negative isolation.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Catheter-Associated UTI Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli/Klebsiella",
+        "Proteus",
+        "Pseudomonas",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Pip-Tazo"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔"
+        ]
+      ],
+      "completeness": "Coverage should be confirmed/adjusted against current urine culture given high resistance rates in this population.",
+      "gaps": [
+        "Empiric ceftriaxone does not cover Pseudomonas or Enterococcus — escalate based on culture results or known risk factors."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted agent once culture results return; remove or replace the catheter as part of management, and document the ongoing indication for catheterization to support eventual removal.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Per prior urine culture if available; empirically Ceftriaxone if unknown",
+            "dose": "1-2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "7 days (10-14 days if delayed response)",
+            "why": "Empiric choice should ideally be guided by prior catheter-associated culture history given the high rate of resistant organisms in this population; ceftriaxone is a reasonable default pending current culture results."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (if Pseudomonas risk or prior resistant organism)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "7-14 days",
+            "coverage": "Broader option for patients with prior Pseudomonas or other resistant gram-negative isolation."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "CRITICAL: Do not treat asymptomatic bacteriuria in a catheterized patient — pyuria and bacteriuria are nearly universal with long-term catheterization and do NOT by themselves indicate infection requiring antibiotics.",
+      "Replace the catheter (not just treat through it) as part of source control when initiating treatment for symptomatic CA-UTI — this improves response and reduces relapse.",
+      "Reassess ongoing need for the catheter itself at every encounter — removing unnecessary catheters is the single most effective prevention strategy and a core stewardship action independent of any single infection episode.",
+      "Send urine culture before starting antibiotics whenever feasible, ideally from a freshly placed/replaced catheter, since cultures from long-standing catheters often reflect colonization rather than the infecting organism alone."
+    ]
+  },
+  "references": [
+    "IDSA Catheter-Associated UTI Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

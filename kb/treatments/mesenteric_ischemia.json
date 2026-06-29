@@ -1,0 +1,51 @@
+{
+  "id": "mesenteric_ischemia",
+  "diseaseId": "mesenteric_ischemia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "EMERGENCY — urgent CT angiography; do not delay for equivocal exam.",
+        "Resuscitate (fluids), broad-spectrum antibiotics, correct acidosis; NG decompression.",
+        "Urgent surgical/IR intervention — revascularisation (embolectomy/stent) and resect non-viable bowel.",
+        "Therapeutic anticoagulation for embolic/thrombotic arterial or venous occlusion.",
+        "ICU; high mortality — speed is critical."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · WSES",
+        "refs": [
+          "Harrison 22e · WSES"
+        ]
+      }
+    }
+  ],
+  "confirm": "Severe abdominal pain OUT OF PROPORTION to exam, ± AF/vascular disease, rising lactate. CT angiography is key.",
+  "investigations": [
+    {
+      "test": "CT angiography"
+    },
+    {
+      "test": "Lactate, ABG, FBC"
+    },
+    {
+      "test": "ECG (AF)"
+    }
+  ],
+  "disposition": "Emergency surgery + ICU.",
+  "references": [
+    "Harrison 22e · WSES"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

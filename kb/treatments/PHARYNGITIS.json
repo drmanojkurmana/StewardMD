@@ -1,0 +1,164 @@
+{
+  "id": "PHARYNGITIS",
+  "diseaseId": "PHARYNGITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "penicillin v",
+          "regimenLabel": "Penicillin V (only if GAS confirmed or very high pretest probability)",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "10 days",
+          "coverage": null,
+          "why": "Penicillin remains first-line for confirmed Group A Streptococcal pharyngitis — narrow spectrum, no resistance reported, and prevents rheumatic fever when given for a full 10-day course."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Group A Streptococcal Pharyngitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Centor Criteria"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "amoxicillin",
+          "regimenLabel": "Amoxicillin",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "10 days",
+          "coverage": "Equally effective alternative to penicillin V with better palatability, especially in children.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Group A Streptococcal Pharyngitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Centor Criteria"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin (penicillin allergy)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days",
+          "coverage": "Reserved for confirmed penicillin allergy; rising macrolide resistance in some regions should be considered.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Group A Streptococcal Pharyngitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Centor Criteria"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Group A Streptococcus"
+      ],
+      "drugs": [
+        "Penicillin V"
+      ],
+      "grid": [
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Penicillin provides complete coverage of confirmed GAS pharyngitis.",
+      "gaps": [
+        "No coverage needed for viral causes — antibiotics provide no benefit there."
+      ]
+    },
+    "deescalation": "If RADT/culture is negative, discontinue any antibiotics started and manage symptomatically. If positive, continue the targeted penicillin-class regimen for the full duration to prevent rheumatic fever.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Penicillin V (only if GAS confirmed or very high pretest probability)",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "10 days",
+            "why": "Penicillin remains first-line for confirmed Group A Streptococcal pharyngitis — narrow spectrum, no resistance reported, and prevents rheumatic fever when given for a full 10-day course."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "10 days",
+            "coverage": "Equally effective alternative to penicillin V with better palatability, especially in children."
+          },
+          {
+            "drug": "Azithromycin (penicillin allergy)",
+            "dose": "500 mg day 1, then 250 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days",
+            "coverage": "Reserved for confirmed penicillin allergy; rising macrolide resistance in some regions should be considered."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever"
+    ],
+    "framework": [
+      "Do not treat empirically without testing unless Centor score is high (≥3) and rapid testing is unavailable.",
+      "A negative rapid strep test in a low-to-moderate pretest probability patient should not be treated with antibiotics.",
+      "Avoid azithromycin as a default first choice — reserve for confirmed penicillin allergy."
+    ]
+  },
+  "references": [
+    "IDSA Group A Streptococcal Pharyngitis Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "Centor Criteria"
+  ],
+  "decision": {
+    "status": "yellow",
+    "label": "Observe / Further evaluation required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

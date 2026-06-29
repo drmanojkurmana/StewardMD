@@ -1,0 +1,51 @@
+{
+  "id": "copd_exac_ni",
+  "diseaseId": "copd_exac_ni",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Controlled oxygen targeting SpO2 88–92% (avoid over-oxygenation).",
+        "Nebulised salbutamol + ipratropium.",
+        "Oral prednisolone 30 mg for ~5 days.",
+        "Antibiotics only if increased purulent sputum / consolidation / ventilatory support.",
+        "NIV for persistent respiratory acidosis (pH <7.35 with hypercapnia)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · GOLD",
+        "refs": [
+          "Harrison 22e · GOLD"
+        ]
+      }
+    }
+  ],
+  "confirm": "Increased dyspnoea/sputum/wheeze in known COPD without convincing infection. Assess for CO2 retention.",
+  "investigations": [
+    {
+      "test": "ABG"
+    },
+    {
+      "test": "CXR"
+    },
+    {
+      "test": "ECG"
+    }
+  ],
+  "disposition": "Admit if hypoxic/acidotic; ICU/NIV if failing.",
+  "references": [
+    "Harrison 22e · GOLD"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

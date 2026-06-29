@@ -1,0 +1,51 @@
+{
+  "id": "tamponade",
+  "diseaseId": "tamponade",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "EMERGENCY — urgent echo; cardiology/cardiothoracic input.",
+        "Echo-guided pericardiocentesis (or surgical drainage) to relieve tamponade.",
+        "IV fluids as a temporising measure to maintain filling.",
+        "Avoid positive-pressure ventilation if possible until drained.",
+        "Treat and investigate the underlying cause; send pericardial fluid for analysis."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC pericardial",
+        "refs": [
+          "Harrison 22e · ESC pericardial"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hypotension, raised JVP, muffled heart sounds (Beck's triad) with pulsus paradoxus; echo shows effusion with diastolic collapse.",
+  "investigations": [
+    {
+      "test": "Urgent echo"
+    },
+    {
+      "test": "ECG (low voltage/alternans)"
+    },
+    {
+      "test": "Pericardial fluid analysis"
+    }
+  ],
+  "disposition": "ICU + pericardiocentesis.",
+  "references": [
+    "Harrison 22e · ESC pericardial"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,213 @@
+{
+  "id": "DIABETIC_FOOT",
+  "diseaseId": "DIABETIC_FOOT",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "mild infection cephalexin or amoxicillin-clavulanate",
+          "regimenLabel": "Mild infection: Cephalexin or Amoxicillin-clavulanate",
+          "dose": "Cephalexin 500 mg PO q6h or Amoxicillin-clavulanate 875/125 mg PO q12h",
+          "route": "Oral",
+          "freq": "as above",
+          "duration": "1-2 weeks",
+          "coverage": null,
+          "why": "Mild infections without deep tissue involvement can be treated with narrow-spectrum oral agents targeting staphylococci and streptococci."
+        },
+        {
+          "composition": "moderate-severe piperacillin-tazobactam",
+          "regimenLabel": "Moderate-severe: Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "2-3 weeks (longer if bone involvement)",
+          "coverage": null,
+          "why": "Broader coverage including gram-negatives and anaerobes is warranted for deep, limb-threatening, or systemically significant infections."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Diabetic Foot Infection Guidelines",
+          "IWGDF Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "clindamycin + ciprofloxacin",
+          "regimenLabel": "Clindamycin + Ciprofloxacin (penicillin allergy)",
+          "dose": "Clindamycin 450 mg PO q8h + Ciprofloxacin 500 mg PO q12h",
+          "route": "Oral",
+          "freq": "as above",
+          "duration": "per severity",
+          "coverage": "Alternative combination covering gram-positives, gram-negatives, and anaerobes in penicillin-allergic patients.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Diabetic Foot Infection Guidelines",
+          "IWGDF Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "vancomycin added to above regimens",
+          "regimenLabel": "Vancomycin (if MRSA risk) added to above regimens",
+          "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "per severity",
+          "coverage": "Added when MRSA risk factors are present (prior MRSA, prolonged hospitalization, recent broad-spectrum antibiotics).",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Diabetic Foot Infection Guidelines",
+          "IWGDF Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. aureus",
+        "Streptococcus",
+        "Enterobacteriaceae",
+        "Anaerobes",
+        "Pseudomonas"
+      ],
+      "drugs": [
+        "Cephalexin/Amox-clav",
+        "Pip-Tazo",
+        "Combination with Vancomycin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔",
+          "✔ (incl. MRSA)"
+        ],
+        [
+          "✔",
+          "✔",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Coverage should be matched to wound severity — broad empiric coverage for all wounds is over-treatment for mild infections.",
+      "gaps": [
+        "Osteomyelitis requires bone biopsy/culture for truly targeted, often prolonged therapy — empiric coverage alone is insufficient if bone is involved."
+      ]
+    },
+    "deescalation": "Once deep tissue/bone culture results return, narrow to the most targeted agent(s) covering the confirmed organism(s), and reassess duration based on whether bone is involved (longer course) or soft tissue alone (shorter course).",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Mild infection: Cephalexin or Amoxicillin-clavulanate",
+            "dose": "Cephalexin 500 mg PO q6h or Amoxicillin-clavulanate 875/125 mg PO q12h",
+            "route": "Oral",
+            "frequency": "as above",
+            "duration": "1-2 weeks",
+            "why": "Mild infections without deep tissue involvement can be treated with narrow-spectrum oral agents targeting staphylococci and streptococci."
+          },
+          {
+            "drug": "Moderate-severe: Piperacillin-tazobactam",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "2-3 weeks (longer if bone involvement)",
+            "why": "Broader coverage including gram-negatives and anaerobes is warranted for deep, limb-threatening, or systemically significant infections."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Clindamycin + Ciprofloxacin (penicillin allergy)",
+            "dose": "Clindamycin 450 mg PO q8h + Ciprofloxacin 500 mg PO q12h",
+            "route": "Oral",
+            "frequency": "as above",
+            "duration": "per severity",
+            "coverage": "Alternative combination covering gram-positives, gram-negatives, and anaerobes in penicillin-allergic patients."
+          },
+          {
+            "drug": "Vancomycin (if MRSA risk) added to above regimens",
+            "dose": "15-20 mg/kg IV q8-12h (trough-guided)",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "per severity",
+            "coverage": "Added when MRSA risk factors are present (prior MRSA, prolonged hospitalization, recent broad-spectrum antibiotics)."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia",
+      "hypotension",
+      "deepTissueInvolvement"
+    ],
+    "framework": [
+      "Do not treat clinically uninfected ulcers with antibiotics — colonization without clinical signs of infection (erythema, warmth, purulence, pain) is not an indication for treatment.",
+      "Match spectrum to severity (IDSA/IWGDF mild/moderate/severe classification) rather than using broad-spectrum coverage for all diabetic foot wounds by default.",
+      "Obtain deep tissue or bone culture (not superficial swab) whenever possible before starting therapy, since superficial swabs often reflect colonizing rather than infecting organisms."
+    ]
+  },
+  "references": [
+    "IDSA Diabetic Foot Infection Guidelines",
+    "IWGDF Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

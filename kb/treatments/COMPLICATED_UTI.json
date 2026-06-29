@@ -1,0 +1,148 @@
+{
+  "id": "COMPLICATED_UTI",
+  "diseaseId": "COMPLICATED_UTI",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ciprofloxacin or based on prior culture",
+          "regimenLabel": "Ciprofloxacin (if local resistance acceptable) or based on prior culture",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "7-14 days",
+          "coverage": null,
+          "why": "Provides reliable broad coverage of typical complicated UTI pathogens; duration extended relative to uncomplicated cystitis given higher relapse risk."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Complicated UTI Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone (if oral therapy not tolerated or resistance suspected)",
+          "dose": "1-2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "7-14 days (step down to oral when able)",
+          "coverage": "Used when fluoroquinolone resistance is suspected or oral therapy is not feasible.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Complicated UTI Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli",
+        "Klebsiella",
+        "Proteus",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Ciprofloxacin",
+        "Ceftriaxone"
+      ],
+      "grid": [
+        [
+          "Variable",
+          "✔"
+        ],
+        [
+          "Variable",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✘"
+        ]
+      ],
+      "completeness": "Coverage should ideally be culture-confirmed given the higher resistance burden in complicated UTI.",
+      "gaps": [
+        "Enterococcus is not covered by either regimen — add amoxicillin if confirmed on culture.",
+        "Empiric coverage should be reassessed against prior urine culture history if available."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted oral agent once urine culture and sensitivity are available, and shorten duration if clinical response is rapid and the complicating factor has been addressed.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ciprofloxacin (if local resistance acceptable) or based on prior culture",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "7-14 days",
+            "why": "Provides reliable broad coverage of typical complicated UTI pathogens; duration extended relative to uncomplicated cystitis given higher relapse risk."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone (if oral therapy not tolerated or resistance suspected)",
+            "dose": "1-2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "7-14 days (step down to oral when able)",
+            "coverage": "Used when fluoroquinolone resistance is suspected or oral therapy is not feasible."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia"
+    ],
+    "framework": [
+      "Send urine culture before starting therapy whenever possible — empiric choice should be reviewed once results return given the higher resistance burden in this population.",
+      "Avoid reflexive carbapenem use; reserve for confirmed ESBL organisms.",
+      "Address and correct the underlying complicating factor where feasible (e.g., catheter removal/change) as part of source control."
+    ]
+  },
+  "references": [
+    "IDSA Complicated UTI Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

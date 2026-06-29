@@ -1,0 +1,51 @@
+{
+  "id": "dka",
+  "diseaseId": "dka",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "IV 0.9% saline resuscitation first (fluid deficit is large); careful in young/cardiac/renal.",
+        "Fixed-rate IV insulin infusion (~0.1 U/kg/h); continue basal insulin if on it.",
+        "Replace potassium once K <5.5 and urine output adequate (insulin drives K intracellularly).",
+        "Add dextrose when glucose <14 mmol/L; monitor ketones, glucose, K, pH hourly.",
+        "Find and treat the precipitant; do not stop insulin infusion until ketones cleared and eating."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ADA/JBDS DKA",
+        "refs": [
+          "Harrison 22e · ADA/JBDS DKA"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hyperglycaemia + ketonaemia/ketonuria + high-anion-gap metabolic acidosis. Often a precipitant (infection, missed insulin, new T1DM).",
+  "investigations": [
+    {
+      "test": "Glucose, ketones, VBG"
+    },
+    {
+      "test": "U&E (potassium), bicarbonate"
+    },
+    {
+      "test": "Septic screen, ECG"
+    }
+  ],
+  "disposition": "Admit (HDU/ICU if severe).",
+  "references": [
+    "Harrison 22e · ADA/JBDS DKA"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

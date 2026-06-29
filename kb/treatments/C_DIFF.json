@@ -1,0 +1,166 @@
+{
+  "id": "C_DIFF",
+  "diseaseId": "C_DIFF",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "oral vancomycin",
+          "regimenLabel": "Oral Vancomycin",
+          "dose": "125 mg",
+          "route": "Oral",
+          "freq": "every 6 hours",
+          "duration": "10 days",
+          "coverage": null,
+          "why": "Oral (not IV) vancomycin is first-line for C. difficile infection — it acts locally in the gut lumen and is not systemically absorbed, which is precisely why it works here despite IV vancomycin having no role in typical gut infections."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/SHEA Clostridioides difficile Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "fidaxomicin",
+          "regimenLabel": "Fidaxomicin (preferred where available/affordable)",
+          "dose": "200 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "10 days",
+          "coverage": "Associated with lower recurrence rates than vancomycin per current IDSA guidance; cost and availability often limit use.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/SHEA Clostridioides difficile Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "metronidazole",
+          "regimenLabel": "Metronidazole (only if vancomycin/fidaxomicin unavailable, non-severe disease)",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 8 hours",
+          "duration": "10 days",
+          "coverage": "No longer preferred first-line per current guidelines given inferior efficacy compared to vancomycin, but remains an option where the other agents are inaccessible.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/SHEA Clostridioides difficile Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Clostridioides difficile"
+      ],
+      "drugs": [
+        "Oral Vancomycin",
+        "Fidaxomicin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Either agent provides effective coverage of the causative organism when given correctly (oral route, adequate duration).",
+      "gaps": [
+        "IV vancomycin does NOT treat C. difficile colitis — this is a critical distinction, since IV vancomycin does not reach adequate concentrations in the gut lumen."
+      ]
+    },
+    "deescalation": "Not typically applicable in the de-escalation sense since therapy is already targeted; reassess for fulminant disease if not improving, which would escalate rather than narrow therapy.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Oral Vancomycin",
+            "dose": "125 mg",
+            "route": "Oral",
+            "frequency": "every 6 hours",
+            "duration": "10 days",
+            "why": "Oral (not IV) vancomycin is first-line for C. difficile infection — it acts locally in the gut lumen and is not systemically absorbed, which is precisely why it works here despite IV vancomycin having no role in typical gut infections."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Fidaxomicin (preferred where available/affordable)",
+            "dose": "200 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "10 days",
+            "coverage": "Associated with lower recurrence rates than vancomycin per current IDSA guidance; cost and availability often limit use."
+          },
+          {
+            "drug": "Metronidazole (only if vancomycin/fidaxomicin unavailable, non-severe disease)",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 8 hours",
+            "duration": "10 days",
+            "coverage": "No longer preferred first-line per current guidelines given inferior efficacy compared to vancomycin, but remains an option where the other agents are inaccessible."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "severeAbdominalPain",
+      "abdominalDistension"
+    ],
+    "framework": [
+      "Discontinue the inciting antibiotic if it is still being given and is not essential — this alone can resolve milder cases.",
+      "Avoid antimotility agents (e.g., loperamide), which can precipitate toxic megacolon.",
+      "For fulminant disease (ileus, megacolon, shock), oral vancomycin should be combined with IV metronidazole and surgical consultation — this is the one scenario where IV metronidazole plays a role alongside oral vancomycin.",
+      "This is a uniquely 'reverse stewardship' scenario: the treatment is itself an antibiotic, so the focus is on correct route/agent selection (oral, not IV vancomycin) rather than withholding therapy."
+    ]
+  },
+  "references": [
+    "IDSA/SHEA Clostridioides difficile Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,156 @@
+{
+  "id": "LIVER_ABSCESS",
+  "diseaseId": "LIVER_ABSCESS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone + metronidazole",
+          "regimenLabel": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500-750 mg IV/PO q8h",
+          "route": "IV (metronidazole can be oral)",
+          "freq": "as above",
+          "duration": "2-4 weeks depending on response and whether drainage performed",
+          "coverage": null,
+          "why": "This combination covers the most likely pyogenic pathogens (Klebsiella, E. coli, anaerobes) while metronidazole simultaneously provides empiric amebic coverage, addressing both major causes pending specific identification."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on Intra-abdominal Infections",
+          "WHO Guidelines on Amebiasis"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (monotherapy for pyogenic coverage)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "2-4 weeks",
+          "coverage": "Broader single-agent alternative if biliary source or polymicrobial infection is more strongly suspected; add metronidazole/amebic-specific therapy separately if amebic etiology cannot be excluded.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on Intra-abdominal Infections",
+          "WHO Guidelines on Amebiasis"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Klebsiella pneumoniae",
+        "E. coli",
+        "Anaerobes",
+        "Entamoeba histolytica"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Metronidazole",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Combination therapy covers both leading pyogenic organisms and amebic disease pending specific diagnosis.",
+      "gaps": [
+        "Definitive distinction between pyogenic and amebic abscess (and targeted single-agent therapy) requires aspirate analysis or serology."
+      ]
+    },
+    "deescalation": "If aspirate/serology confirms isolated amebic abscess, discontinue antibacterial agents and continue metronidazole alone (followed by a luminal agent to clear colonic cysts). If purely pyogenic with a known organism, narrow to the single most targeted antibacterial agent.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone + Metronidazole",
+            "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500-750 mg IV/PO q8h",
+            "route": "IV (metronidazole can be oral)",
+            "frequency": "as above",
+            "duration": "2-4 weeks depending on response and whether drainage performed",
+            "why": "This combination covers the most likely pyogenic pathogens (Klebsiella, E. coli, anaerobes) while metronidazole simultaneously provides empiric amebic coverage, addressing both major causes pending specific identification."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (monotherapy for pyogenic coverage)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "2-4 weeks",
+            "coverage": "Broader single-agent alternative if biliary source or polymicrobial infection is more strongly suspected; add metronidazole/amebic-specific therapy separately if amebic etiology cannot be excluded."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "weightLoss"
+    ],
+    "framework": [
+      "Image-guided aspiration or drainage of abscesses >5cm (or any size with risk of rupture) is an important adjunct to antibiotics, not a replacement — pursue source control in parallel.",
+      "Once amebic serology/aspirate confirms a single diagnosis, narrow therapy accordingly (discontinue antibacterial agents if purely amebic; discontinue metronidazole's amebic-dose course if purely pyogenic and anaerobic coverage isn't separately needed).",
+      "In diabetic patients with Klebsiella liver abscess, screen for endophthalmitis (a recognized association), since this changes management and prognosis."
+    ]
+  },
+  "references": [
+    "Harrison's Principles of Internal Medicine",
+    "IDSA Guidelines on Intra-abdominal Infections",
+    "WHO Guidelines on Amebiasis"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

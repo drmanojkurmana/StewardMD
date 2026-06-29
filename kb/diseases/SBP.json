@@ -100,5 +100,14 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "AASLD Practice Guidance on SBP",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`In a patient with ascites, ${[e.feverGU&&\"fever\",e.abdominalPain&&\"abdominal pain\",e.alteredSensorium&&\"altered sensorium (which can be the sole presenting feature of SBP, especially in those with underlying hepatic encephalopathy)\"].filter(Boolean).join(\", \")||\"clinical suspicion\"} raises concern for spontaneous bacterial peritonitis. Diagnostic paracentesis with ascitic fluid analysis should be performed promptly, and empiric antibiotics should be started once ascitic fluid neutrophil count supports the diagnosis (or immediately if paracentesis is delayed and suspicion is high), without waiting for culture results given the risk of rapid deterioration in cirrhotic patients.`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

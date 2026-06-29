@@ -1,0 +1,183 @@
+{
+  "id": "COPD_EXACERBATION",
+  "diseaseId": "COPD_EXACERBATION",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "amoxicillin-clavulanate",
+          "regimenLabel": "Amoxicillin-clavulanate",
+          "dose": "875/125 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "5 days",
+          "coverage": null,
+          "why": "Covers the three classic bacterial triggers (H. influenzae, S. pneumoniae, M. catarrhalis) when antibiotics are indicated by Anthonisen criteria, particularly sputum purulence."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "GOLD (Global Initiative for Chronic Obstructive Lung Disease) Guidelines",
+          "Anthonisen Criteria",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline",
+          "dose": "100 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "5 days",
+          "coverage": "Reasonable alternative covering the same core pathogens.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "GOLD (Global Initiative for Chronic Obstructive Lung Disease) Guidelines",
+          "Anthonisen Criteria",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "levofloxacin",
+          "regimenLabel": "Levofloxacin (severe exacerbation, frequent exacerbator, or Pseudomonas risk)",
+          "dose": "750 mg",
+          "route": "Oral/IV",
+          "freq": "once daily",
+          "duration": "5 days",
+          "coverage": "Broader option including Pseudomonas coverage for patients with severe COPD, recent hospitalization, or known prior Pseudomonas isolation.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "GOLD (Global Initiative for Chronic Obstructive Lung Disease) Guidelines",
+          "Anthonisen Criteria",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "H. influenzae",
+        "S. pneumoniae",
+        "M. catarrhalis",
+        "Pseudomonas (if risk factors)"
+      ],
+      "drugs": [
+        "Amoxicillin-clavulanate",
+        "Levofloxacin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔"
+        ]
+      ],
+      "completeness": "Amoxicillin-clavulanate covers the core bacterial triggers in typical exacerbations.",
+      "gaps": [
+        "Pseudomonas not covered by first-line — reserve levofloxacin or other antipseudomonal options for patients with specific risk factors."
+      ]
+    },
+    "deescalation": "Not typically needed given short empiric courses; if sputum culture (when obtained) identifies a resistant organism and the patient is not responding, adjust accordingly.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-clavulanate",
+            "dose": "875/125 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "5 days",
+            "why": "Covers the three classic bacterial triggers (H. influenzae, S. pneumoniae, M. catarrhalis) when antibiotics are indicated by Anthonisen criteria, particularly sputum purulence."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Doxycycline",
+            "dose": "100 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "5 days",
+            "coverage": "Reasonable alternative covering the same core pathogens."
+          },
+          {
+            "drug": "Levofloxacin (severe exacerbation, frequent exacerbator, or Pseudomonas risk)",
+            "dose": "750 mg",
+            "route": "Oral/IV",
+            "frequency": "once daily",
+            "duration": "5 days",
+            "coverage": "Broader option including Pseudomonas coverage for patients with severe COPD, recent hospitalization, or known prior Pseudomonas isolation."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "hypoxia",
+      "tachypnea",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "Antibiotics should be reserved for exacerbations meeting Anthonisen criteria (especially with purulent sputum), not given reflexively for every COPD exacerbation — many are viral or non-infectious (e.g., environmental triggers).",
+      "Systemic corticosteroids and bronchodilator optimization are the primary evidence-based interventions and should not be overlooked in favor of antibiotics alone.",
+      "Reserve antipseudomonal agents for patients with specific risk factors (severe airflow obstruction, frequent exacerbations, prior Pseudomonas isolation, recent hospitalization) rather than using broad-spectrum agents by default."
+    ]
+  },
+  "references": [
+    "GOLD (Global Initiative for Chronic Obstructive Lung Disease) Guidelines",
+    "Anthonisen Criteria",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "yellow",
+    "label": "Observe / Further evaluation required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

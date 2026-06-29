@@ -1,0 +1,51 @@
+{
+  "id": "pneumothorax",
+  "diseaseId": "pneumothorax",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "TENSION pneumothorax: immediate needle decompression then chest drain — do NOT wait for imaging.",
+        "Primary, small, minimal symptoms: observation ± oxygen.",
+        "Larger/symptomatic: needle aspiration or chest drain.",
+        "Secondary (underlying lung disease): low threshold for chest drain + admission.",
+        "Smoking cessation; refer for recurrence (pleurodesis)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · BTS pleural",
+        "refs": [
+          "Harrison 22e · BTS pleural"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sudden pleuritic pain and dyspnoea with reduced breath sounds; CXR confirms. Tension = hypotension + tracheal shift (clinical, treat immediately).",
+  "investigations": [
+    {
+      "test": "CXR (erect)"
+    },
+    {
+      "test": "CT if complex"
+    },
+    {
+      "test": "ABG if hypoxic"
+    }
+  ],
+  "disposition": "Admit if drained/secondary; ED observation if small primary.",
+  "references": [
+    "Harrison 22e · BTS pleural"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

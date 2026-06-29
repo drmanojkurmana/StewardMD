@@ -1,0 +1,118 @@
+{
+  "id": "PULMONARY_TB",
+  "diseaseId": "PULMONARY_TB",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "isoniazid + rifampicin + pyrazinamide + ethambutol",
+          "regimenLabel": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)",
+          "dose": "Weight-band dosing per national TB program (e.g., RNTCP/NTEP in India)",
+          "route": "Oral",
+          "freq": "once daily (or per DOTS schedule)",
+          "duration": "2 months intensive phase, then HR for 4 months continuation phase (6 months total for drug-susceptible disease)",
+          "coverage": null,
+          "why": "Standard first-line four-drug regimen for drug-susceptible pulmonary TB, started ONLY after microbiological confirmation (or strong programmatic criteria per national guidelines) — not empirically on clinical suspicion alone."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "modified regimens per drug-susceptibility testing",
+          "regimenLabel": "Modified regimens per drug-susceptibility testing",
+          "dose": "Per DR-TB program protocol",
+          "route": "Oral/Injectable per regimen",
+          "freq": "Per regimen",
+          "duration": "9-20 months depending on resistance pattern",
+          "coverage": "Used when drug-susceptibility testing identifies resistance (MDR/RR-TB) — managed under specialized TB program protocols, not generic empiric stewardship logic.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Not applicable in the empiric sense — therapy should only start after confirmation, at which point the regimen is followed per national program protocol for the determined duration, adjusted only by formal drug-susceptibility results.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)",
+            "dose": "Weight-band dosing per national TB program (e.g., RNTCP/NTEP in India)",
+            "route": "Oral",
+            "frequency": "once daily (or per DOTS schedule)",
+            "duration": "2 months intensive phase, then HR for 4 months continuation phase (6 months total for drug-susceptible disease)",
+            "why": "Standard first-line four-drug regimen for drug-susceptible pulmonary TB, started ONLY after microbiological confirmation (or strong programmatic criteria per national guidelines) — not empirically on clinical suspicion alone."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Modified regimens per drug-susceptibility testing",
+            "dose": "Per DR-TB program protocol",
+            "route": "Oral/Injectable per regimen",
+            "frequency": "Per regimen",
+            "duration": "9-20 months depending on resistance pattern",
+            "coverage": "Used when drug-susceptibility testing identifies resistance (MDR/RR-TB) — managed under specialized TB program protocols, not generic empiric stewardship logic."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "weightLoss",
+      "hemoptysis"
+    ],
+    "framework": [
+      "Do NOT start antitubercular therapy on clinical/radiological suspicion alone without microbiological attempt at confirmation (sputum smear, CBNAAT/Xpert MTB-RIF, culture) — premature ATT has consequences including masking the true diagnosis if it is not TB, and is a notifiable public health action.",
+      "Always send for rifampicin-resistance testing (e.g., via CBNAAT/Xpert) alongside initial diagnosis where available, since this directly determines whether standard first-line therapy or a drug-resistant TB regimen is appropriate.",
+      "Notify and register the case per national TB program requirements (e.g., NTEP in India) — this is a public health obligation, not optional.",
+      "Contact tracing and screening of close contacts (especially children and immunocompromised individuals) should be arranged once the diagnosis is confirmed."
+    ]
+  },
+  "references": [
+    "WHO TB Guidelines",
+    "National TB Elimination Programme (NTEP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "yellow",
+    "label": "Observe / Further evaluation required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}
