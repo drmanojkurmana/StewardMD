@@ -1570,7 +1570,7 @@
     var b = document.createElement("button");
     b.id = "dxLaunch"; b.className = "dx-launch"; b.type = "button";
     b.setAttribute("aria-label", "Open clinical reasoning");
-    b.innerHTML = "🧠 Reasoning";
+    b.innerHTML = '🧠<span class="dxl-txt"> Reasoning</span>';
     b.addEventListener("click", open);
     actions.insertBefore(b, actions.firstChild);
   }
