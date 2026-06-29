@@ -63,5 +63,104 @@
   "contentHash": null,
   "references": [
     "Harrison 22e · AHA/ASA stroke"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e p.3427-3450 (Ch 437 Introduction to Cerebrovascular Diseases; Ch 438 Ischemic Stroke)",
+      "clinicalPearls": [
+        "Stroke is a clinical diagnosis: abrupt-onset focal neurologic deficit from a vascular cause; imaging is used to support it and to separate ischemia from hemorrhage (p.3427).",
+        "Time-is-brain: with complete arterial occlusion, neurons die within roughly 4-10 minutes; flow <16-18 mL/100 g/min infarcts within an hour, while 18-20 mL/100 g/min causes reversible ischemia unless prolonged (p.3439).",
+        "The ischemic penumbra is reversibly dysfunctional tissue around the infarct core; it is the target of reperfusion and can be visualized as a perfusion-diffusion (or CT-perfusion) mismatch (p.3439).",
+        "A useful triage rule of thumb is that a deficit maximal at onset (or one that remits) favors ischemia, whereas a depressed conscious level, very high initial blood pressure, or progressive worsening favors hemorrhage - though no clinical feature reliably separates them, so CT is required (p.3440).",
+        "The public FAST acronym (Facial weakness, Arm weakness, Speech difficulty, Time) captures common stroke features and emphasizes time-sensitivity; about 85% of ischemic stroke patients have hemiparesis (p.3428).",
+        "Stroke onset is timed from when the patient was last seen well, not when found; wake-up strokes default to bedtime, though advanced imaging may still allow treatment selection (p.3441).",
+        "Cerebellar infarction can masquerade as labyrinthitis with vertigo and vomiting; accompanying head/neck pain should prompt suspicion of vertebral dissection, and even small cerebellar edema can obstruct CSF and compress the brainstem (p.3440).",
+        "Roughly 30% of ischemic strokes remain cryptogenic despite thorough evaluation (p.3443).",
+        "Painful neck or head pain preceding stroke in a young patient (under ~60) suggests arterial dissection (p.3445)."
+      ],
+      "pathophysiology": "Acute occlusion of an intracranial artery reduces regional cerebral blood flow; the resulting deficit depends on collateral supply, occlusion site, and systemic pressure. Energy failure from loss of glucose and oxygen halts ATP-dependent ion pumps, causing depolarization, sodium and calcium influx, excess synaptic glutamate, and excitotoxicity with reactive oxygen species that damage membranes and DNA, followed by an innate inflammatory response. Fever and hyperglycaemia (glucose >200 mg/dL) worsen the injury. Mechanistically, ischemic stroke arises by three routes (the basis of TOAST-style classification): (1) embolic occlusion of a large intracranial vessel - either cardioembolic (e.g., atrial fibrillation, mural thrombus, valvular disease) or artery-to-artery from carotid/aortic-arch plaque; (2) in-situ thrombosis of small penetrating arteries from lipohyalinosis or microatheroma, producing lacunar (small-vessel) infarcts; and (3) hypoperfusion from flow-limiting stenosis of a major extracranial or intracranial vessel, producing watershed/border-zone ischemia. Cardioembolism causes ~20%, large-artery/carotid atherosclerosis ~10%, and small-vessel disease ~20% of ischemic strokes (p.3439, p.3443-3446).",
+      "additionalDifferentials": [
+        "Intracerebral hemorrhage (must be excluded by CT before reperfusion)",
+        "Transient ischemic attack (deficit fully resolving within 24 h with no infarction on imaging)",
+        "Cerebral venous sinus thrombosis (headache, focal signs, seizures; CT often normal)",
+        "Hypoxic-ischemic encephalopathy from global hypoperfusion (e.g., cardiac arrest)",
+        "Brain tumour presenting acutely via hemorrhage, seizure, or hydrocephalus",
+        "Functional/non-organic deficit"
+      ],
+      "infectionMimics": [
+        "Stroke recrudescence: fever or sepsis unmasking a prior deficit, mimicking new hemiparesis, which clears as the infection is treated",
+        "Infective endocarditis with septic emboli (multifocal deficits; may evolve to abscess or hemorrhagic infarct)",
+        "Brain abscess",
+        "CNS infection-related vasculitis (syphilis, tuberculosis, fungal, bacterial, zoster meningitis)"
+      ],
+      "nonInfectiousMimics": [
+        "Seizure with postictal (Todd's) paralysis - an observer history of no convulsive onset usually excludes seizure, but ongoing complex partial seizures can mimic stroke",
+        "Migraine, including acephalgic migraine even without prior history; sensory/motor deficits migrate slowly over minutes and may cross vascular territories",
+        "Metabolic encephalopathy (fluctuating mental status, typically without focal signs)",
+        "Hypoglycaemia and hyperglycaemia (check finger-stick glucose before thrombolysis)",
+        "Intracranial tumour"
+      ],
+      "additionalInvestigations": [
+        "Finger-stick blood glucose - one of only two tests (with brain imaging) truly required before IV thrombolysis",
+        "ECG and continuous cardiac telemetry to detect atrial fibrillation or recent MI; ambulatory monitoring if AF not captured inpatient",
+        "Echocardiography (transthoracic/transoesophageal); bubble-contrast study to detect right-to-left shunt / PFO",
+        "Carotid duplex ultrasound and transcranial Doppler (can also detect microemboli)",
+        "CT/MR perfusion imaging to define the penumbra and select late-window candidates",
+        "MRI with diffusion-weighted imaging - most sensitive for acute infarction, especially in the posterior fossa, and detects new infarction after TIA",
+        "Catheter cerebral angiography (gold standard for stenosis/vasculopathy; reserved for when noninvasive studies are inadequate)",
+        "Secondary-prevention workup: lipid profile, ESR, FBC, electrolytes, renal function, coagulation (PT/PTT); selective thrombophilia/vasculitis screen in young or cryptogenic cases"
+      ],
+      "redFlags": [
+        "Disabling deficit (NIHSS >5) - candidate for thrombolysis and/or thrombectomy; act fast",
+        "Suspected large-vessel occlusion (ICA terminus, M1/M2, basilar) - candidate for mechanical thrombectomy",
+        "Cerebellar infarct with declining consciousness or new brainstem signs - impending herniation/hydrocephalus needing emergency decompression",
+        "Large hemispheric (malignant MCA) infarct - 5-10% develop space-occupying edema peaking on day 2-3, may need hemicraniectomy",
+        "Painful neck/Horner's or recent neck trauma/manipulation - suspect arterial dissection",
+        "Multifocal deficits with fever - suspect septic emboli from endocarditis"
+      ],
+      "prognosis": "Stroke is the second leading cause of death worldwide; outcome hinges on time to reperfusion ('time-is-brain'). For large-vessel occlusion, the chance of a good outcome falls steeply with delay - the odds of a good result exceed 3 if groin puncture for thrombectomy is within 2 h but fall to about 2 by 8 h, and over 80% do well if the vessel opens within 1 h of arrival versus about one-third at 6 h. In pooled thrombectomy trials ~46% achieved functional independence (modified Rankin 0-2) versus ~26.5% with medical care, with a mortality benefit. Small-vessel (lacunar) strokes generally recover more rapidly and completely than large-vessel strokes, though some stutter or leave severe disability. Without secondary prevention the annual risk of a further stroke after atherothrombotic stroke/TIA is about 8-10%; symptomatic intracranial atherosclerosis and untreated symptomatic carotid stenosis each carry ~15% per year. Care in a dedicated stroke unit followed by rehabilitation improves neurologic outcome and reduces mortality (p.3427, p.3441-3442, p.3445-3446).",
+      "pitfalls": [
+        "Treating a stroke mimic as stroke: a postictal (Todd's) paralysis, acephalgic migraine, or hypoglycaemia can convincingly imitate acute stroke - always confirm glucose and seek an observer history of convulsive onset.",
+        "Mislabelling cerebellar stroke as benign labyrinthitis and missing life-threatening brainstem compression / hydrocephalus.",
+        "Omitting the embolic-source workup (carotid, heart) after a lacunar-appearing infarct, since a large-vessel source can present as a small-vessel syndrome.",
+        "A normal early CT does not exclude infarction; CT may be only subtly abnormal acutely and the hyperdense MCA sign is specific but seen in only ~20% of MCA occlusions (DWI-MRI is far more sensitive).",
+        "Over-attributing stroke to a patent foramen ovale, which is present in ~15% of the general population and is often incidental.",
+        "Aggressively lowering blood pressure acutely can reduce pressure-dependent collateral flow and worsen the penumbra; permissive hypertension is generally allowed early.",
+        "Distinguish benign reperfusion petechial haemorrhage within an infarct from frank haemorrhagic transformation with mass effect."
+      ],
+      "severityClassification": "Severity is graded clinically by the National Institutes of Health Stroke Scale (NIHSS). A disabling deficit (NIHSS >5) flags potential eligibility for thrombolysis/endovascular therapy, whereas minor non-disabling stroke (NIHSS 0-5) may be managed with aspirin or short-term dual antiplatelet therapy. Mechanism-based (TOAST-style) classification - cardioembolic, large-artery atherosclerosis (carotid/intracranial), small-vessel/lacunar, other defined cause, and cryptogenic (~30%) - drives secondary prevention. Carotid disease is further classed as symptomatic vs asymptomatic and by degree of stenosis, with risk rising with stenosis severity except for near-occlusions, which carry lower risk (p.3440-3441, p.3443, p.3445).",
+      "references": [
+        "Harrison 22e p.3427",
+        "Harrison 22e p.3428",
+        "Harrison 22e p.3439",
+        "Harrison 22e p.3440",
+        "Harrison 22e p.3441",
+        "Harrison 22e p.3442",
+        "Harrison 22e p.3443",
+        "Harrison 22e p.3444",
+        "Harrison 22e p.3445",
+        "Harrison 22e p.3446"
+      ],
+      "crossLinks": [
+        "ich",
+        "tia",
+        "sah",
+        "atrial_fib",
+        "hypoglycemia",
+        "seizure_epilepsy",
+        "migraine",
+        "metabolic_enceph",
+        "brain_tumour",
+        "dvt",
+        "pe",
+        "vasculitis",
+        "IE"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "hc817e151"
+    }
+  }
 }
