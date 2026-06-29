@@ -61,5 +61,93 @@
   "contentHash": null,
   "references": [
     "Harrison 22e · AASLD/EASL"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e p.370-373, p.2672-2676, p.2756-2761",
+      "clinicalPearls": [
+        "Compensated cirrhosis can be asymptomatic for a decade or more; the transition to decompensation is marked by the first major event — ascites/edema, variceal hemorrhage, hepatic encephalopathy, or jaundice. (p.2756, p.2754)",
+        "Once clinically significant portal hypertension (HVPG ≥5 mmHg, with substantial decompensation risk at ≥10 mmHg) progresses to overt decompensation, median survival is under 2 years. (p.2756)",
+        "Encephalopathy in chronic liver disease is almost always triggered by an identifiable precipitant (GI bleeding, infection, volume depletion/overdiuresis, hyponatremia, constipation, uremia, sedatives/narcotics) rather than spontaneous progression. (p.2673, p.2759)",
+        "Ammonia levels correlate poorly with the severity of encephalopathy or liver disease; the diagnosis of hepatic encephalopathy is clinical, and most hepatologists do not rely on ammonia to make the diagnosis or follow progress. (p.2759)",
+        "A new or worsening encephalopathy episode mandates a search for occult infection — if ascites is present it should be tapped to exclude SBP. (p.2759)",
+        "A hyperdynamic circulation (widened pulse pressure, increased cardiac output, reduced peripheral resistance from splanchnic vasodilation) is a hallmark of advanced cirrhosis. (p.2673)",
+        "Acute-on-chronic liver failure (ACLF) is acutely decompensating cirrhosis with one or more extrahepatic organ failures, behaves like a sepsis syndrome, and carries 28-day mortality of 20-70% rising with the number of failing organs; it is most often precipitated by bacterial/fungal infection or alcoholic hepatitis. (p.2760)"
+      ],
+      "pathophysiology": "Decompensation is driven by portal hypertension plus renal sodium and water retention. Portal hypertension (elevation of the hepatic venous pressure gradient >5 mmHg) arises from two simultaneous processes: increased intrahepatic resistance from fibrosis disrupting sinusoidal architecture, stellate-cell-mediated smooth-muscle contraction, regenerative nodules, microthrombi, and reduced intrahepatic endothelial nitric oxide synthase (eNOS) causing intrahepatic vasoconstriction; and increased splanchnic blood flow from systemic vasodilation. Systemically, raised nitric oxide, VEGF and TNF cause splanchnic arterial vasodilation, pooling blood and reducing effective circulating volume; the kidneys sense this as hypovolemia and activate ADH, the sympathetic nervous system and the renin-angiotensin-aldosterone system, producing free-water and sodium retention (ascites/edema). Encephalopathy results from gut-derived neurotoxins bypassing the liver via portosystemic shunting and reduced hepatic mass. (p.370, p.2756, p.2759)",
+      "additionalDifferentials": [
+        "Cardiac ascites / constrictive pericarditis (high-SAAG ascites; pro-BNP elevated, ascitic protein typically ≥2.5 g/dL) (p.371)",
+        "Budd-Chiari syndrome (hepatic vein thrombosis) and sinusoidal obstruction syndrome (high-SAAG ascites) (p.371)",
+        "Massive hepatic metastases (high-SAAG ascites) (p.371)",
+        "Peritoneal carcinomatosis (low-SAAG, protein-rich ascites) (p.371)",
+        "Tuberculous peritonitis (low-SAAG, lymphocyte-rich ascites; raised ascitic adenosine deaminase) (p.371-372)",
+        "Pancreatic ascites (low-SAAG, ascitic amylase typically >1000) (p.371-372)",
+        "Nephrotic syndrome / protein-losing enteropathy / malnutrition (low-SAAG ascites from hypoalbuminemia) (p.370-371)"
+      ],
+      "infectionMimics": [
+        "Secondary bacterial peritonitis from a perforated viscus or abscess — distinguished from SBP by ascitic glucose <50 mg/dL, ascitic LDH above serum LDH, and multiple organisms on culture with a raised PMN count (p.372)",
+        "Tuberculous peritonitis presenting with new ascites (p.371-372)",
+        "Systemic sepsis producing leukocytosis and altered mental status that can mimic or precipitate decompensation (p.370, p.2759)"
+      ],
+      "nonInfectiousMimics": [
+        "Other causes of coma/altered mentation to exclude before attributing to encephalopathy: electrolyte imbalance, sedative use, renal or respiratory failure (p.2673)",
+        "Hepatopulmonary syndrome causing dyspnea/hypoxemia (platypnea, orthodeoxia) mimicking primary cardiopulmonary disease (p.2673, p.2760)",
+        "Portopulmonary hypertension causing exertional dyspnea and fatigue (p.2760)"
+      ],
+      "additionalInvestigations": [
+        "Diagnostic paracentesis with serum-ascites albumin gradient (SAAG): ≥1.1 g/dL indicates portal-hypertensive ascites, <1.1 g/dL indicates non-portal-hypertensive cause (p.371)",
+        "Ascitic fluid cell count/differential, total protein, Gram stain and culture inoculated into blood-culture bottles at the bedside (p.371)",
+        "In high-SAAG ascites, ascitic protein <2.5 g/dL suggests cirrhosis vs ≥2.5 g/dL suggesting cardiac/early Budd-Chiari sinusoidal sources (p.371)",
+        "Serum pro-BNP to identify heart failure as the cause of high-SAAG ascites (p.371)",
+        "Upper endoscopy to screen for and grade esophageal/gastric varices once cirrhosis is established (p.2676, p.2757)",
+        "Liver ultrasound (and contrast CT/MRI showing nodular liver and collateral circulation) for portal hypertension and HCC surveillance (p.2676, p.2757)",
+        "Transient elastography (liver stiffness) to stage fibrosis and predict variceal hemorrhage, ascites, and liver-related death (p.2676)",
+        "Hepatic venous pressure gradient measurement in selected cases to confirm sinusoidal portal hypertension (p.370, p.2757)",
+        "Pulse oximetry as a screen for hepatopulmonary syndrome (p.2673)",
+        "Serial serum creatinine and exclusion of volume depletion/intrinsic renal disease when HRS is suspected (p.2759)"
+      ],
+      "redFlags": [
+        "Variceal hemorrhage carries a 20-30% mortality per bleeding episode and is an immediate life-threatening event (p.2756)",
+        "A stepwise progressive rise in creatinine with large-volume ascites suggests hepatorenal syndrome (HRS-AKI), a poor-prognosis functional renal failure (p.2759)",
+        "ACLF with four or more organ failures persisting after 3-7 days of ICU support, when transplant is not an option, signals a transition toward palliative care (p.2760)",
+        "Avoid NSAIDs, aminoglycosides, and use ACE inhibitors/ARBs cautiously — they precipitate renal failure in cirrhotic ascites (p.371, p.2758)",
+        "New-onset or worsening encephalopathy, jaundice, or tense ascites in known cirrhosis should prompt an urgent search for a precipitant (p.2759)"
+      ],
+      "prognosis": "Decompensation defines a poor-prognosis state: with clinically significant portal hypertension that decompensates, median survival is under 2 years, and fewer than 50% of patients survive 2 years after the onset of ascites. Encephalopathy in chronic liver disease is a poor prognostic sign. HRS (both AKI and CKD types) carries a poor prognosis unless liver transplantation is achieved. ACLF 28-day mortality ranges from 20-70%, rising with the number of organ failures. Severity and transplant priority are graded by Child-Pugh class and the MELD/MELD-Na (MELD 3.0) systems. (p.371, p.2675-2676, p.2756, p.2759-2760)",
+      "pitfalls": [
+        "Relying on ammonia levels to diagnose or track hepatic encephalopathy — they correlate poorly with disease severity (p.2759)",
+        "Attributing altered mental status to encephalopathy without excluding electrolyte disturbance, sedatives, and renal/respiratory failure (p.2673)",
+        "Failing to tap the ascites in a decompensated cirrhotic with new symptoms — abdominal tenderness is present in only ~40% of SBP and rebound is uncommon, so SBP can be clinically silent (p.372)",
+        "Multiple organisms on ascitic culture with a raised PMN count indicate secondary (not spontaneous) peritonitis and a surgical source; multiple organisms without raised PMN suggest bowel perforation by the paracentesis needle (p.372)",
+        "Withholding paracentesis for fear of coagulopathy — paracentesis is safe even in coagulopathic patients (p.371)",
+        "Restricting dietary protein for encephalopathy — its harm to nutrition outweighs benefit and it is strongly discouraged (p.2760)"
+      ],
+      "severityClassification": "Child-Pugh score (5 factors: bilirubin, albumin, prothrombin time/INR, ascites, encephalopathy; range 5-15) classifies cirrhosis as class A (5-6, compensated), B (7-9), or C (10-15); a score ≥7 (class B) defines decompensation. MELD score uses INR, bilirubin, and creatinine to predict short-term mortality and allocate organs; it was extended with serum sodium and reweighted as MELD-Na / MELD 3.0 for transplant listing. PELD is the pediatric equivalent. Clinically significant portal hypertension is defined by HVPG ≥10 mmHg. (p.2675-2676, p.2756, p.2754)",
+      "references": [
+        "Harrison 22e p.370",
+        "Harrison 22e p.371",
+        "Harrison 22e p.372",
+        "Harrison 22e p.373",
+        "Harrison 22e p.2673",
+        "Harrison 22e p.2675",
+        "Harrison 22e p.2676",
+        "Harrison 22e p.2756",
+        "Harrison 22e p.2757",
+        "Harrison 22e p.2759",
+        "Harrison 22e p.2760"
+      ],
+      "crossLinks": [
+        "variceal_bleed",
+        "hepatic_enceph",
+        "SBP",
+        "aki",
+        "VIRAL_HEPATITIS"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "h4e8e6c78"
+    }
+  }
 }
