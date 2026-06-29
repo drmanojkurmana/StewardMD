@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "stewardmd/kb/disease.schema.json",
+  "title": "StewardMD Disease (knowledge object)",
+  "description": "Disease KNOWLEDGE only — matching/scoring + reference content. Treatment recommendations live in a SEPARATE Treatment object (treatmentRef). The reasoning engine is generic over this schema: adding a disease is adding one of these files; the engine never changes. Designed to represent every Internal Medicine disease in Harrison without redesign.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "class", "matching", "provenance", "review", "version"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[A-Z0-9_]+$", "description": "Stable uppercase universal disease key (e.g. MENINGITIS). Never reused." },
+    "name": { "type": "string" },
+    "aliases": { "type": "array", "items": { "type": "string" }, "description": "Synonyms / lay terms — also used for retrieval." },
+    "class": { "type": "string", "enum": ["infective", "non_infective"] },
+    "system": { "type": "string", "description": "Organ system (free text; mapped to an organ tag by the engine's dzTag)." },
+    "coding": {
+      "type": "object", "additionalProperties": false,
+      "description": "Optional external coding — reserved for interoperability; nullable now.",
+      "properties": { "icd10": { "type": ["string", "null"] }, "icd11": { "type": ["string", "null"] }, "snomed": { "type": ["string", "null"] } }
+    },
+    "applicability": {
+      "type": "object", "additionalProperties": false,
+      "description": "Optional patient-applicability constraints (future filtering; null = unrestricted).",
+      "properties": {
+        "ageMinYears": { "type": ["number", "null"] }, "ageMaxYears": { "type": ["number", "null"] },
+        "sex": { "type": "string", "enum": ["any", "male", "female"], "default": "any" },
+        "pregnancyRelevant": { "type": "boolean", "default": false }
+      }
+    },
+    "matching": {
+      "type": "object", "additionalProperties": false,
+      "description": "Declarative matching/scoring. Infective diseases use rule+score; non-infective use find. (Both forms are accepted so the two legacy paths unify into one schema.)",
+      "properties": {
+        "rule": { "$ref": "#/$defs/rule", "description": "Boolean match (infective). Mirrors legacy match: e=>..." },
+        "score": { "$ref": "#/$defs/scoreModel", "description": "Additive base score (infective). Mirrors legacy baseScore: e=>base+Σ" },
+        "find": { "type": "object", "additionalProperties": { "type": "number" }, "description": "Weighted finding map (non-infective). Mirrors legacy find:{key:weight}; negative = contradictory." },
+        "associatedFindings": { "type": "array", "items": { "type": "string" }, "description": "Findings the soft-score / missing-would-help logic ranges over (≈ engine assocKeys). Defaults to keys in rule/score/find." },
+        "reasoningTemplate": { "type": "string", "description": "Human-readable rationale template; replaces the legacy reasoning: e=> closure." }
+      }
+    },
+    "pathogens": {
+      "type": "object", "additionalProperties": false,
+      "description": "Infective only. Likely organisms by tier (display/reasoning, not pharmacology).",
+      "properties": {
+        "veryLikely": { "type": "array", "items": { "type": "string" } },
+        "likely": { "type": "array", "items": { "type": "string" } },
+        "possible": { "type": "array", "items": { "type": "string" } },
+        "why": { "type": "string" }
+      }
+    },
+    "differentials": { "type": "array", "items": { "type": "string" }, "description": "Related disease ids (KB cross-links)." },
+    "mimics": { "type": "array", "items": { "type": "string" }, "description": "Conditions that mimic this one (disease ids or text)." },
+    "redFlags": { "type": "array", "items": { "type": "string" } },
+    "investigations": {
+      "type": "array",
+      "items": { "type": "object", "additionalProperties": false, "required": ["test"], "properties": { "test": { "type": "string" }, "why": { "type": "string" } } }
+    },
+    "narrative": {
+      "type": "array",
+      "description": "RAG-ready knowledge chunks: each is an addressable, individually-citable section (stable id + text + source locator). A future embedding pipeline indexes these; no AI is integrated in this phase.",
+      "items": {
+        "type": "object", "additionalProperties": false, "required": ["section", "text"],
+        "properties": {
+          "section": { "type": "string", "description": "Stable chunk id, e.g. overview | pathophysiology | clinical_pearls | pitfalls | mimics_note." },
+          "text": { "type": "string" },
+          "source": { "$ref": "#/$defs/source" },
+          "embedding": { "type": ["null"], "description": "Reserved — populated by the future RAG build step; must be null in authored files." }
+        }
+      }
+    },
+    "treatmentRef": { "type": ["string", "null"], "description": "Id of the SEPARATE Treatment object (usually == id). Knowledge and treatment are kept apart by design." },
+    "policyRef": { "type": ["string", "null"], "description": "Key into hospital PolicyOverlay objects (optional, user-selected)." },
+    "calculatorRefs": { "type": "array", "items": { "type": "string" }, "description": "MEDCALC calculator ids to surface." },
+    "icuModuleRefs": { "type": "array", "items": { "type": "string" }, "description": "ICU/clinical module ids (e.g. electrolytes)." },
+    "drugRefs": { "type": "array", "items": { "type": "string" }, "description": "Composition keys (Drug Index) relevant to this disease — links, never copies. The Drug Index stays the only pharmacology DB." },
+    "provenance": {
+      "type": "object", "additionalProperties": false, "required": ["primaryRef"],
+      "properties": {
+        "primaryRef": { "type": "string", "description": "Primary disease reference — Harrison's by policy." },
+        "editions": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "review": { "$ref": "#/$defs/review" },
+    "version": { "type": "integer", "minimum": 1 },
+    "contentHash": { "type": ["string", "null"], "description": "Set by the build step for change detection." }
+  },
+  "$defs": {
+    "rule": {
+      "description": "Recursive boolean rule. String = finding key (truthy). Object = combinator or comparison.",
+      "anyOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "$ref": "#/$defs/rule" } },
+        { "type": "object", "properties": { "allOf": { "type": "array", "items": { "$ref": "#/$defs/rule" } } }, "required": ["allOf"] },
+        { "type": "object", "properties": { "anyOf": { "type": "array", "items": { "$ref": "#/$defs/rule" } } }, "required": ["anyOf"] },
+        { "type": "object", "properties": { "not": { "$ref": "#/$defs/rule" } }, "required": ["not"] },
+        { "type": "object", "properties": { "key": { "type": "string" }, "gte": {}, "gt": {}, "lte": {}, "lt": {}, "eq": {} }, "required": ["key"] }
+      ]
+    },
+    "scoreModel": {
+      "type": "object", "additionalProperties": false, "required": ["base"],
+      "properties": {
+        "base": { "type": "number" },
+        "modifiers": {
+          "type": "array",
+          "items": { "type": "object", "additionalProperties": false, "required": ["when", "add"], "properties": { "when": { "$ref": "#/$defs/rule" }, "add": { "type": "number" } } }
+        }
+      }
+    },
+    "source": {
+      "type": "object", "additionalProperties": false, "required": ["ref"],
+      "properties": {
+        "ref": { "type": "string", "description": "e.g. 'Harrison 22e', 'ICMR AMR 2024', 'IDSA 2017'." },
+        "locator": { "type": "object", "additionalProperties": false, "properties": { "page": { "type": ["integer", "null"] }, "section": { "type": ["string", "null"] }, "charSpan": { "type": ["array", "null"], "items": { "type": "integer" } } } }
+      }
+    },
+    "review": {
+      "type": "object", "additionalProperties": false, "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["draft", "ai_drafted", "in_review", "approved", "deprecated"] },
+        "reviewedBy": { "type": ["string", "null"] },
+        "reviewedAt": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

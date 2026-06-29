@@ -1,0 +1,35 @@
+{
+  "id": "SBP",
+  "name": "Spontaneous bacterial peritonitis",
+  "aliases": ["SBP", "spontaneous bacterial peritonitis"],
+  "class": "infective",
+  "system": "Hepatobiliary / GI",
+  "coding": { "icd10": "K65.2", "icd11": null, "snomed": null },
+  "matching": {
+    "rule": { "allOf": ["ascites", { "anyOf": ["abdominalPain", "feverGU", "alteredSensorium"] }] },
+    "score": { "base": 55, "modifiers": [
+      { "when": "feverGU", "add": 15 },
+      { "when": "abdominalPain", "add": 10 },
+      { "when": "alteredSensorium", "add": 15 },
+      { "when": "hypotension", "add": 10 }
+    ] },
+    "associatedFindings": ["ascites", "abdominalPain", "feverGU", "alteredSensorium", "hypotension"],
+    "reasoningTemplate": "Ascites with fever / abdominal pain / encephalopathy mandates a diagnostic tap to exclude spontaneous bacterial peritonitis."
+  },
+  "pathogens": { "veryLikely": ["Escherichia coli", "Klebsiella"], "likely": ["Streptococcus pneumoniae"], "possible": ["Enterococcus"], "why": "Monomicrobial gut translocation in cirrhotic ascites." },
+  "differentials": ["decomp_cirrhosis", "hepatic_enceph"],
+  "redFlags": ["Ascitic PMN ≥250 → treat; give albumin to reduce hepatorenal syndrome"],
+  "investigations": [{ "test": "Diagnostic ascitic tap (cell count + culture)", "why": "PMN ≥250 = SBP" }],
+  "narrative": [
+    { "section": "overview", "text": "Any decompensation in cirrhotic ascites warrants a diagnostic tap; treat SBP with IV cefotaxime + albumin.", "source": { "ref": "Harrison 22e", "locator": { "page": null, "section": "Cirrhosis / Ascites" } }, "embedding": null }
+  ],
+  "treatmentRef": "SBP",
+  "policyRef": "SBP",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": ["cefotaxime", "ceftriaxone", "albumin"],
+  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
+  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
+  "version": 1,
+  "contentHash": null
+}
