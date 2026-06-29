@@ -54,5 +54,89 @@
   "contentHash": null,
   "references": [
     "Harrison 22e · BTS pleural"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "89, 126, 314, 366, 373, 662, 663, 1235, 1430, 2243",
+      "clinicalPearls": [
+        "On examination an effusion gives dullness to percussion, reduced or absent breath sounds, and decreased tactile fremitus over the fluid; this contrasts with consolidation, where fremitus is increased (Harrison 22e p.2243).",
+        "Percussion helps separate the two causes of a quiet hemithorax: an effusion is dull, whereas a pneumothorax is hyper-resonant (Harrison 22e p.2243).",
+        "Skodaic resonance, a band of hyper-resonance just above the dull effusion, is a classic percussion sign (Harrison 22e p.89).",
+        "Bilateral effusions are characteristic of congestive heart failure (and some collagen-vascular disorders), whereas a unilateral effusion should raise suspicion of malignancy or pulmonary embolism, though heart failure and parapneumonic effusion can also be unilateral (Harrison 22e p.314).",
+        "A right-sided pleural effusion can occur in advanced cirrhosis even when no ascites is clinically detectable (Harrison 22e p.366).",
+        "In a malignant effusion an initially negative thoracentesis does not exclude cancer; repeating the tap is essential because cytologic yield improves with repeat sampling (Harrison 22e p.663)."
+      ],
+      "pathophysiology": "Fluid abnormally accumulates in the pleural space when the balance of hydrostatic and oncotic forces, lymphatic drainage, or capillary permeability is disturbed. Transudates arise from systemic forces (raised hydrostatic pressure or low plasma oncotic pressure) as in the sodium-avid edematous states of heart failure, cirrhosis, and nephrotic syndrome (Harrison 22e p.422). Exudates result from local pleural or capillary processes such as infection, malignancy, or inflammation. In hepatic hydrothorax, ascitic fluid migrates through diaphragmatic fenestrae into the pleural space (Harrison 22e p.373). Tuberculous effusion typically reflects a hypersensitivity reaction to mycobacterial antigens after recent primary infection, or contiguous spread from parenchymal disease (Harrison 22e p.1430). Malignant effusions arise from pleural involvement or from lymphatic obstruction by tumor (Harrison 22e p.662).",
+      "additionalDifferentials": [
+        "Congestive heart failure (typically bilateral transudative effusions) (Harrison 22e p.314)",
+        "Cirrhosis / hepatic hydrothorax (often right-sided) (Harrison 22e p.366, p.373)",
+        "Nephrotic syndrome and other hypoalbuminemic states (Harrison 22e p.422)",
+        "Parapneumonic effusion / empyema complicating pneumonia (Harrison 22e p.1235)",
+        "Malignant effusion (e.g., lung cancer, metastatic disease) (Harrison 22e p.662)",
+        "Tuberculous pleurisy (Harrison 22e p.1430)",
+        "Pulmonary embolism (Harrison 22e p.314)"
+      ],
+      "infectionMimics": [
+        "Tuberculous pleural effusion — straw-colored (sometimes hemorrhagic) lymphocyte-predominant exudate that can mimic a parapneumonic or malignant effusion (Harrison 22e p.1430).",
+        "Tuberculous empyema, usually from rupture of a cavity into the pleural space, sometimes with a bronchopleural fistula and air in the pleural space (Harrison 22e p.1431).",
+        "Spontaneous bacterial empyema complicating hepatic hydrothorax in cirrhosis (Harrison 22e p.373)."
+      ],
+      "nonInfectiousMimics": [
+        "Heart-failure transudate, which can be unilateral and be mistaken for a localized pathologic effusion (Harrison 22e p.314).",
+        "Hepatic hydrothorax from cirrhosis, mimicking other right-sided effusions (Harrison 22e p.366, p.373).",
+        "Malignant effusion, which may be exudative or bloody and can coexist with or be confused for a parapneumonic effusion (Harrison 22e p.663)."
+      ],
+      "additionalInvestigations": [
+        "Diagnostic thoracentesis to determine whether the fluid is a transudate or an exudate and to identify the underlying cause (Harrison 22e p.1430).",
+        "Pleural fluid pH — a value of ≤7.1 in a parapneumonic setting indicates empyema requiring drainage (Harrison 22e p.1235).",
+        "Pleural fluid protein, glucose, and cell count/differential; in TB the fluid is an exudate with protein >50% of serum (often ~4-6 g/dL), normal-to-low glucose, pH ~7.3 (occasionally <7.2), and 500-6000 WBC/uL, with neutrophils early and lymphocyte predominance later (Harrison 22e p.1430).",
+        "Pleural fluid adenosine deaminase (ADA) — an elevated level is consistent with TB and a very low level helps exclude it (Harrison 22e p.1430).",
+        "Pleural fluid IFN-gamma and lysozyme as adjuncts for suspected tuberculous effusion (Harrison 22e p.1430).",
+        "Pleural fluid cytology for malignancy, with repeat thoracentesis if the first sample is negative (Harrison 22e p.663).",
+        "Needle (closed) pleural biopsy for suspected TB, which reveals granulomas and/or yields positive culture in up to ~80% of cases and is favored over fluid analysis (Harrison 22e p.1430).",
+        "Xpert MTB/RIF on pleural biopsy tissue (positive in ~75%); testing pleural fluid itself with this assay is not recommended owing to low sensitivity (Harrison 22e p.1430).",
+        "Serum-to-pleural-fluid albumin gradient — a value >=1.1 g/dL suggests hepatic hydrothorax (Harrison 22e p.373)."
+      ],
+      "redFlags": [
+        "Frank pus, organisms on microscopy, or pleural fluid pH <=7.1 in a parapneumonic effusion — diagnostic of empyema and mandates aggressive complete drainage, usually via chest tube (Harrison 22e p.1235).",
+        "New or persistent fever and leukocytosis after 4-5 days of appropriate antibiotics for pneumonia — suspect empyema (Harrison 22e p.1235).",
+        "Exudative or bloody effusion — raises concern for malignancy (Harrison 22e p.663).",
+        "Unilateral effusion without an obvious cause — investigate for malignancy or pulmonary embolism (Harrison 22e p.314)."
+      ],
+      "prognosis": "Tuberculous pleural effusion responds rapidly to antituberculous chemotherapy and may even resolve spontaneously; concurrent glucocorticoids may shorten fever and chest pain but are of unproven benefit (Harrison 22e p.1430). Parapneumonic effusions are usually a self-limited inflammatory response, whereas a true empyema requires drainage and carries a worse course if undrained (Harrison 22e p.1235).",
+      "pitfalls": [
+        "Avoid attributing every quiet, dull hemithorax to effusion — confirm with percussion and fremitus, since pneumothorax and consolidation differ (Harrison 22e p.2243).",
+        "A negative initial pleural cytology does not rule out malignancy; failing to repeat the tap is a diagnostic pitfall (Harrison 22e p.663).",
+        "Do not assume a unilateral effusion is benign heart failure — it may be malignant or embolic (Harrison 22e p.314).",
+        "Testing pleural fluid (rather than biopsy tissue) with Xpert MTB/RIF is unreliable for TB because of low sensitivity (Harrison 22e p.1430).",
+        "AFB smears are rarely positive and cultures are often falsely negative in tuberculous effusions, so a negative smear/culture does not exclude pleural TB (Harrison 22e p.1430).",
+        "In hepatic hydrothorax, chest-tube placement should be avoided (Harrison 22e p.373)."
+      ],
+      "severityClassification": "Parapneumonic effusions are distinguished from empyema by their character: an uncomplicated parapneumonic effusion is a self-limited reaction to adjacent pneumonia, whereas frank pus, visible organisms, or a pleural fluid pH <=7.1 defines empyema (a complicated/infected collection) that requires complete drainage (Harrison 22e p.1235).",
+      "references": [
+        "Harrison 22e p.89",
+        "Harrison 22e p.126",
+        "Harrison 22e p.314",
+        "Harrison 22e p.366",
+        "Harrison 22e p.373",
+        "Harrison 22e p.662",
+        "Harrison 22e p.663",
+        "Harrison 22e p.1235",
+        "Harrison 22e p.1430",
+        "Harrison 22e p.2243"
+      ],
+      "crossLinks": [
+        "CAP",
+        "heart_failure",
+        "PULMONARY_TB",
+        "lung_cancer",
+        "decomp_cirrhosis"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "ha9ad616a"
+    }
+  }
 }

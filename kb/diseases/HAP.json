@@ -116,5 +116,88 @@
   "reason": [
     "lit",
     "New fever, cough and radiographic infiltrate developing after 48 hours of hospitalization meet criteria for hospital-acquired pneumonia. The nosocomial setting shifts pathogen likelihood toward resistant gram-negatives, warranting empiric therapy that accounts for local resistance patterns and prior antibiotic exposure."
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e Ch.131 (Pneumonia), pp.1066, 1072-1076",
+      "clinicalPearls": [
+        "VAP is defined as pneumonia with onset 48 hours or more after the start of mechanical ventilation; research on HAP has centred on VAP, but the same principles extend to ventilated HAP and to non-ICU HAP (p.1072).",
+        "About 70% of HAP cases are acquired outside the ICU and 30% within it; roughly 35% of all HAP patients require mechanical ventilation, which makes ventilated HAP a distinct entity whose bacteriology and outcome resemble those of VAP (p.1072).",
+        "In nonintubated HAP an expectorated sputum sample is used for microbiologic diagnosis but is confounded by frequent colonisation with oral pathogens; deep lower respiratory tract samples in VAP/ventilated HAP are more reliable yet may still contain colonising organisms (p.1072).",
+        "The non-MDR 'core pathogens' of VAP closely mirror those of severe CAP and predominate when pneumonia develops in the first 5-7 days of admission; with risk factors (especially prior antibiotics) MDR pathogens become a concern even early (p.1072).",
+        "Most hospitals contend with P. aeruginosa and MRSA, but the specific MDR organisms are institution-specific and can differ even between critical-care units in the same hospital (p.1072).",
+        "Prior antibiotic exposure is by far the dominant risk factor for colonisation with pathogenic organisms; P. aeruginosa almost never infects patients with no prior antibiotic exposure (pp.1073, 1076).",
+        "Only about one-third of colonised intubated patients go on to develop VAP, indicating that the final step is overwhelming of host defences by a large bacterial inoculum rather than colonisation alone (p.1073).",
+        "Severely ill septic or trauma patients appear to enter a state of immunoparalysis several days after ICU admission, coinciding with the period of greatest VAP risk; hyperglycaemia and frequent transfusions adversely affect immune response (p.1073).",
+        "Serial changes in oxygenation may detect HAP/VAP earlier than other findings and can also serve to monitor response to therapy (p.1073).",
+        "Absence of bacteria on a Gram stain of an endotracheal aspirate makes pneumonia an unlikely cause of the fever or infiltrate; presence of an MDR pathogen can be excluded as a target if tracheal aspirate cultures (or sensitive molecular tests) are negative, enabling de-escalation (p.1074).",
+        "Anaerobes may be somewhat more common in nonintubated HAP than in VAP because of greater macroaspiration risk and lower lower-airway oxygen tension, but they usually contribute only to polymicrobial pneumonia and rarely need specific targeted therapy (p.1076).",
+        "A bronchopneumonia pattern is most common in nosocomial pneumonias, in contrast to the lobar pattern more typical of bacterial CAP; in VAP, respiratory bronchiolitis may precede a radiologically apparent infiltrate (p.1066).",
+        "The 'healthcare-associated pneumonia' category has been abandoned because it did not reliably predict resistant-organism infection and drove excessive broad-spectrum antibiotic use; resistance risk should instead be judged individually from comorbidities, recent hospitalisation, and recent antibiotic therapy (p.1066)."
+      ],
+      "pathophysiology": "Three factors are central to VAP pathogenesis: colonisation of the oropharynx with pathogenic organisms, aspiration of those organisms into the lower respiratory tract, and compromise of host defences (p.1073). The endotracheal tube is the single most important risk factor: it bypasses normal anti-aspiration mechanisms, and although it blocks large-volume aspiration, microaspiration is worsened by secretions pooling above the cuff. The tube and suctioning damage tracheal mucosa and facilitate colonisation, and pathogenic bacteria form a protective glycocalyx biofilm on the tube surface that shields them from antibiotics and host defences; biofilm fragments can embolise to distal airways or be dislodged during suctioning to reinoculate the trachea (p.1073). Normal oropharyngeal flora is frequently replaced by pathogenic organisms under antibiotic selection pressure, cross-infection, severe systemic illness, and malnutrition (p.1073). Almost all intubated patients have transient colonisation, but progression to pneumonia reflects a large bacterial inoculum overwhelming host defences amid post-admission immunoparalysis (p.1073). More broadly, pneumonia is now viewed as an emergent disturbance of the lung microbiota driven by self-accelerating inflammatory feedback rather than simple invasion of a sterile space (p.1066).",
+      "additionalDifferentials": [
+        "Purulent tracheobronchitis (notably in chronic ventilator units, where it can impede weaning) (p.1073)"
+      ],
+      "infectionMimics": [
+        "Antibiotic-associated diarrhoea (as an alternative source of fever/leukocytosis) (p.1074)",
+        "Central line-associated infection (p.1074)",
+        "Sinusitis (p.1074)",
+        "Urinary tract infection (p.1074)",
+        "Fungal or viral pneumonia (mimics requiring different antimicrobials than VAP) (p.1074)"
+      ],
+      "nonInfectiousMimics": [
+        "Atypical pulmonary oedema (p.1074)",
+        "Pulmonary contusion (p.1074)",
+        "Alveolar haemorrhage (p.1074)",
+        "Hypersensitivity pneumonitis (p.1074)",
+        "Acute respiratory distress syndrome (ARDS) (p.1074)",
+        "Pulmonary infarction / pulmonary embolism (p.1074)",
+        "Pancreatitis (as a non-infective source of fever/leukocytosis) (p.1074)",
+        "Drug fever (p.1074)"
+      ],
+      "additionalInvestigations": [
+        "Quantitative culture of deep respiratory tract samples to separate colonisation from true infection; the more distal the sample, the more specific the result and the lower the colony-count threshold (e.g., endotracheal aspirate threshold ~10^6 cfu/mL vs protected specimen brush ~10^3 cfu/mL), at the cost of falling sensitivity for blindly collected distal samples (p.1074)",
+        "Gram stain of endotracheal aspirate (absence of bacteria argues against pneumonia) (p.1074)",
+        "Differential cell counts and staining for intracellular organisms on respiratory samples (p.1074)",
+        "Detection of local protein levels elevated in response to infection (p.1074)",
+        "Serial / repeat quantitative cultures to track microbiologic response and clarify treatment failure (p.1075)",
+        "Procalcitonin to help guide duration of therapy in conjunction with the initial clinical response (already curated; Harrison adds the duration-of-therapy context, p.1075)"
+      ],
+      "redFlags": [
+        "New or worsening hypoxaemia / serial decline in oxygenation in a ventilated patient (may herald pneumonia before other signs) (p.1073)",
+        "Septic shock accompanying suspected VAP (influences empirical regimen breadth) (p.1075)",
+        "Failure to improve clinically by 48-72 h of appropriate therapy (improvement, when it occurs, is usually evident in this window) (p.1076)",
+        "Necrotising pneumonia (e.g., P. aeruginosa or S. aureus) causing significant pulmonary haemorrhage or empyema (p.1075)"
+      ],
+      "prognosis": "Crude VAP mortality is reported as high as 50-70%, but the key measure is attributable mortality, since many VAP patients have underlying disease that would itself be fatal. Attributable mortality exceeded 25% in one matched-cohort study, whereas more recent estimates are much lower (5-10%); VAP complicating COVID-19 carries higher attributable mortality than other VAP. VAP in trauma patients shows no attributable mortality, likely because many were previously healthy. MDR pathogens carry significantly greater attributable mortality than non-MDR organisms, and some pathogens (e.g., S. maltophilia) chiefly mark a severely immunocompromised, high-risk host. Nonintubated non-ICU HAP has lower mortality and lower risk of antibiotic failure than VAP and ventilated HAP because of better host defences (pp.1076).",
+      "pitfalls": [
+        "Applying CAP-type clinical criteria to ventilated patients consistently overdiagnoses VAP, owing to frequent tracheal colonisation, multiple alternative causes of radiographic infiltrates, and many other sources of fever in the critically ill (pp.1073-1074).",
+        "No single set of criteria reliably diagnoses pneumonia in a ventilated patient; over-reliance on portable chest radiographs is limited by frequent pre-existing infiltrates and poor portable film quality (p.1073).",
+        "Effective antibiotic given in the 24-48 h before sampling can drive quantitative cultures below the diagnostic threshold and yield false-negative results; conversely, counts above threshold during therapy suggest the current antibiotics are ineffective (p.1074).",
+        "Sampling too early in the course, or after an effective host response has already reduced bacterial counts, can also give sub-threshold results; ideally sample as soon as pneumonia is suspected and before starting or changing antibiotics (p.1074).",
+        "Chest radiographs often worsen initially during treatment, making them less reliable than clinical criteria as indicators of response (p.1076).",
+        "Recurrent VAP with the same organism can occur because the endotracheal tube biofilm allows persistence and reintroduction; about half of recurrent Pseudomonas cases are actually due to a new strain (p.1075)."
+      ],
+      "severityClassification": "Harrison frames empirical management around two risk axes rather than a discrete severity score: (1) presence or absence of risk factors for MDR pathogens (prior antibiotic therapy, prior hospitalisation, local antibiogram; for MRSA additionally known MRSA colonisation, chronic haemodialysis, or local MRSA pneumonia rate >10% or unknown), and (2) predicted risk of death, with a mortality risk of 15% or less considered low risk. The frequency of VAP also varies with duration of ventilation, with the highest hazard in the first 5 days, a plateau (~1%/day) after about 2 weeks, and a cumulative rate up to ~70% by 30 days of ventilation (pp.1073, 1075).",
+      "references": [
+        "Harrison 22e p.1066",
+        "Harrison 22e p.1072",
+        "Harrison 22e p.1073",
+        "Harrison 22e p.1074",
+        "Harrison 22e p.1075",
+        "Harrison 22e p.1076"
+      ],
+      "crossLinks": [
+        "VAP",
+        "CAP",
+        "ASPIRATION_PNEUMONIA"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "hbf7e6a4f"
+    }
+  }
 }
