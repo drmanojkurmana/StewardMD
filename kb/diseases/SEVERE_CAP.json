@@ -162,5 +162,101 @@
       "lit",
       "). This represents a high-risk presentation requiring immediate empiric broad-spectrum therapy and consideration of ICU-level care."
     ]
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "1023-1029",
+      "clinicalPearls": [
+        "Neither the Pneumonia Severity Index (PSI) nor CURB-65 accurately determines the need for ICU admission; they predict mortality/site of care but not ICU need (p.1026).",
+        "Patients with septic shock requiring vasopressors or acute respiratory failure requiring intubation and mechanical ventilation meet a major criterion and should be admitted directly to an ICU (p.1026).",
+        "Presence of three or more of the nine minor severe-CAP criteria warrants admission to an ICU or high-level monitoring unit (p.1026).",
+        "Late or delayed ICU admission is associated with increased mortality; less-ill patients placed on a general ward who then deteriorate fare worse than equally ill patients monitored in the ICU from the outset (p.1026).",
+        "In ICU-admitted CAP specifically, treatment directed at an identified pathogen may be superior to empirical therapy, so etiologic workup carries more weight in severe disease (p.1025).",
+        "The microbial spectrum of severe (ICU) CAP differs from milder CAP: Legionella tends to cause more serious disease, and S. aureus and gram-negative bacilli become more prominent (p.1024).",
+        "Prior respiratory-tract isolation of MRSA or P. aeruginosa within the past year is a stronger (more robust) risk factor for these pathogens than recent hospitalization plus parenteral antibiotic exposure (p.1028).",
+        "Procalcitonin (PCT) is insufficiently accurate to diagnose bacterial CAP and must NOT be used as a basis for withholding initial antibiotics; CRP is even less sensitive than PCT (p.1026).",
+        "If only a viral pathogen (e.g., influenza or SARS-CoV-2) is found and no bacterial pathogen is evident, antibacterial therapy can be stopped — BUT in severe illness, bacterial-viral co-infection must still be considered (p.1028).",
+        "Gross hemoptysis suggests necrotizing pneumonia, e.g., due to CA-MRSA (p.1024).",
+        "In the elderly, severe CAP may present atypically as new-onset or worsening confusion or decompensation of a chronic illness with few classic respiratory findings (p.1025).",
+        "Recent data show a mortality benefit for corticosteroids in severe CAP, particularly when there is a high level of systemic inflammation (CRP >15 mg/dL) (p.1029)."
+      ],
+      "pathophysiology": "Pneumonia results from proliferation of microbial pathogens in the alveoli combined with the host inflammatory response. Organisms reach the lower respiratory tract by inhalation, microaspiration of oropharyngeal flora, or direct mucosal spread; mechanical defenses (nasal hairs/turbinates, the branching airway, mucociliary clearance, gag and cough reflexes) are insufficient to fully exclude bacteria, and the lung is now understood to harbor a microbiota rather than being sterile. An inflammatory/epithelial-endothelial injury event releases cytokines, chemokines, and catecholamines that can selectively promote growth of organisms such as S. pneumoniae and P. aeruginosa, generating a positive-feedback loop; in CAP the trigger is often a viral infection compounded by microaspiration. Inflammatory mediators (IL-6, TNF) cause fever, while IL-8 and G-CSF recruit neutrophils; mediators from macrophages and neutrophils produce alveolar-capillary leak with impaired oxygenation, hypoxemia, and radiographic infiltrates. Some pathogens interfere with hypoxic pulmonary vasoconstriction, worsening hypoxemia. Reduced compliance from capillary leak, increased respiratory drive and secretions, and intrapulmonary shunting drive worsening dyspnea, and when severe, reductions in lung volume/compliance and shunting can precipitate respiratory failure. Pathologically, classic (lobar pneumococcal) pneumonia evolves through edema, red hepatization, gray hepatization, and resolution phases.",
+      "additionalDifferentials": [
+        "Acute bronchitis",
+        "Exacerbation of chronic bronchitis",
+        "Heart failure / pulmonary edema",
+        "Pulmonary embolism",
+        "Lung carcinoma (including postobstructive pneumonia)",
+        "Tuberculosis (e.g., upper-lobe cavitating lesion)"
+      ],
+      "infectionMimics": [
+        "Tuberculosis",
+        "Endemic/invasive fungal pneumonia",
+        "Pneumocystis pneumonia (alveolar process despite interstitial radiographic appearance)"
+      ],
+      "nonInfectiousMimics": [
+        "Pulmonary edema",
+        "Pulmonary embolism / pulmonary infarction",
+        "Lung carcinoma",
+        "Radiation pneumonitis",
+        "Hypersensitivity pneumonitis",
+        "Connective tissue disease involving the lungs"
+      ],
+      "additionalInvestigations": [
+        "CT chest (for suspected loculated effusion, cavitary disease, or postobstructive pneumonia from tumor/foreign body)",
+        "Deep-suction aspirate or bronchoalveolar lavage in intubated ICU patients (high culture yield when sent promptly)",
+        "Multiplex respiratory PCR / nasopharyngeal swab PCR (influenza, coronaviruses; also Legionella, M. pneumoniae, C. pneumoniae, mycobacteria)",
+        "MRSA rapid nasal PCR (to guide adding/de-escalating MRSA coverage)",
+        "Diagnostic pleural fluid sampling (parapneumonic effusion: drainage indicated if pH <7.2, glucose <2.2 mmol/L, LDH >1000 U/L, or organisms seen/cultured)",
+        "Stains/cultures for M. tuberculosis and fungi in selected cases",
+        "Bronchoscopy in delayed responders or worsening disease"
+      ],
+      "redFlags": [
+        "Septic shock requiring vasopressors (major criterion - direct ICU admission)",
+        "Acute respiratory failure requiring invasive mechanical ventilation (major criterion - direct ICU admission)",
+        "Three or more minor severe-CAP criteria (warrants ICU/high-level monitoring)",
+        "O2 saturation <92% on room air (mandates hospitalization)",
+        "Multiorgan failure",
+        "Multilobar infiltrates or cavitation on imaging (increased severity)",
+        "Gross hemoptysis (suggests necrotizing pneumonia, e.g., CA-MRSA)",
+        "Failure to improve / deterioration by ~day 3 of therapy"
+      ],
+      "prognosis": "Prognosis depends on age, comorbidities, and site of treatment. For hospitalized CAP, overall mortality ranges from 12% to 40%, the higher end reflecting ICU-level disease and care-process factors such as timely administration of appropriate antibiotics (vs <5% for outpatients). CURB-65 scores >=3 carry an overall ~22% mortality and may indicate ICU admission; PSI class 5 has a ~29.2% mortality. CAP is a leading infectious cause of death in patients >65 years; about 18% of hospitalized CAP patients are readmitted within a month, and recent data show 1-year mortality after CAP (especially in older patients) exceeds 30-day mortality. Severe-CAP complications (respiratory failure, shock, multiorgan failure) and pneumonia-associated cardiovascular events worsen outcomes.",
+      "pitfalls": [
+        "Using PSI or CURB-65 to decide ICU admission - neither is accurate for that purpose (p.1026).",
+        "Withholding initial antibiotics based on a low procalcitonin - PCT is too inaccurate to exclude bacterial CAP (p.1026).",
+        "Assuming hospitalization alone is a significant risk factor for MRSA or P. aeruginosa - it is no longer considered so; severity plus specific risk factors drive coverage decisions (p.1028).",
+        "Requiring all three drug-resistance risk factors (recent hospitalization, recent oral/IV antibiotics, local validation) before considering resistant pathogens - any can apply (p.1028).",
+        "Stopping antibacterials when a virus is identified in a severely ill patient without considering bacterial-viral co-infection (p.1028).",
+        "Attributing failure to improve to the wrong cause: consider resistant or unexpected pathogen (CA-MRSA, M. tuberculosis, fungus), a sequestered focus (lung abscess, empyema), wrong drug/dose, or nosocomial superinfection (p.1029).",
+        "Routinely covering anaerobes in aspiration-related severe CAP - unnecessary unless poor dentition, lung abscess, or necrotizing pneumonia (p.1027)."
+      ],
+      "severityClassification": "IDSA/ATS severe-CAP criteria (Harrison 22e Table 131-3, p.1026). MAJOR criteria (either qualifies for ICU): (1) respiratory failure requiring invasive mechanical ventilation; (2) septic shock requiring vasopressors. MINOR criteria (>=3 warrant ICU/high-level monitoring): respiratory rate >=30 breaths/min; PaO2/FiO2 ratio <=250; multilobar infiltrates; confusion/disorientation; uremia (BUN >=20 mg/dL); leukopenia (WBC <4000/uL); thrombocytopenia (platelets <100,000/uL); hypothermia (core temperature <36 C); and hypotension requiring aggressive fluid resuscitation. Prognostic tools PSI (5 mortality classes, class 5 ~29.2%) and CURB-65 (confusion, urea >7 mmol/L, RR >=30, SBP <=90 or DBP <=60 mmHg, age >=65; score >=3 ~22% mortality) assess severity/site of care but are NOT accurate for determining ICU need.",
+      "references": [
+        "Harrison 22e p.1023",
+        "Harrison 22e p.1024",
+        "Harrison 22e p.1025",
+        "Harrison 22e p.1026",
+        "Harrison 22e p.1027",
+        "Harrison 22e p.1028",
+        "Harrison 22e p.1029"
+      ],
+      "crossLinks": [
+        "CAP",
+        "HAP",
+        "VAP",
+        "SEPSIS",
+        "SEPTIC_SHOCK",
+        "ASPIRATION_PNEUMONIA",
+        "LUNG_ABSCESS",
+        "pleural_effusion",
+        "PULMONARY_TB"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "h1335411e"
+    }
+  }
 }
