@@ -1,0 +1,100 @@
+{
+  "id": "covid19",
+  "name": "COVID-19 (SARS-CoV-2)",
+  "system": "Infectious Diseases",
+  "class": "infective",
+  "chapter": 205,
+  "page": 1539,
+  "aliases": [
+    "SARS-CoV-2",
+    "coronavirus disease 2019"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.1539",
+    "clinicalPearls": [
+      "SARS-CoV-2 is an enveloped, positive-sense RNA betacoronavirus; its trimeric spike (S) protein is primed by the host protease TMPRSS2 and attaches via a receptor-binding domain to the human ACE2 receptor (p.1539).",
+      "Disease course varies widely: asymptomatic infection, mild disease, moderate disease, or severe disease needing hospitalization, oxygen, intensive care, and mechanical ventilation. Possibly about a third of those infected are asymptomatic yet can still transmit the virus (p.1540).",
+      "Onset of disease typically manifests within 4-5 days after exposure and nearly always within 14 days; common symptoms are cough, fever, myalgia, headache, dyspnea, sore throat, and GI symptoms (nausea, vomiting, diarrhea) (p.1541).",
+      "Sudden-onset dysgeusia and anosmia (loss of taste and smell) occur in a substantial number of cases and often resolve over weeks to months (p.1541).",
+      "Spread is primarily via respiratory droplets between persons in close proximity; airborne transmission by small particles may occur but airborne transmission over long distances is unlikely. Fomite (contaminated-surface) transmission occurs, so hand washing is advised (p.1540).",
+      "The basic reproduction number (R0) of SARS-CoV-2 has been estimated to peak around 6, substantially higher than seasonal influenza (typically 1-2); densely populated settings (prisons, cruise ships, nursing homes, airplanes, large indoor gatherings) facilitate high transmission, while outdoor transmission is less common (p.1540).",
+      "RNA-dependent RNA polymerases are error-prone, so variants arise frequently; the WHO classifies variants under monitoring (VUMs), of interest (VOIs), and of concern (VOCs). Rapid variant evolution affecting transmission, severity, antigenicity, therapy effectiveness, and diagnostic accuracy is a distinguishing feature of the pandemic (p.1540).",
+      "An excessive proinflammatory host response to infection likely contributes directly to pulmonary pathology and disease severity; later in the clinical course pathogenesis is driven more by tissue and systemic inflammation than by direct viral cytopathic effect (p.1541-1542).",
+      "Children have lower rates of severe disease than adults, and schools have not been considered a primary driver of population transmission (p.1540).",
+      "Multisystem inflammatory syndrome in children (MIS-C / PMIS) is associated with COVID-19: persistent fever, multi-organ involvement (GI, dermatologic, cardiac, renal, hematologic, neurologic), and elevated inflammatory markers; highest US risk is in Black and Latino children aged 3-12 years. A similar adult syndrome (MIS-A) may rarely occur (p.1540).",
+      "Long COVID is a chronic condition occurring after infection, present for at least 3 months, with a wide range of symptoms (respiratory, metabolic, neuropsychiatric, pain) that may improve, worsen, or be ongoing; affected people may have increased suicidal ideation and suicide risk (p.1541).",
+      "Vaccination's principal goal is preventing severe COVID-19 (critical illness, death, hospitalization, emergency/urgent-care visits); preliminary data also suggest vaccinated persons with COVID are less likely than unvaccinated persons to develop long COVID (p.1543)."
+    ],
+    "pathophysiology": "SARS-CoV-2 (genus Betacoronavirus) is an enveloped positive-sense RNA virus with a ~30,000-nucleotide genome encoding four structural proteins (S spike, E envelope, M membrane, N nucleocapsid) plus a large polyprotein cleaved into 16 nonstructural proteins. The trimeric S protein is a type-1 fusion machine primed by the host transmembrane protease TMPRSS2 and mediates attachment via a receptor-binding domain (RBD) to the human angiotensin-converting enzyme 2 (hACE2) receptor, allowing viral entry into respiratory epithelium. Infection spreads chiefly by respiratory droplets, with possible short-range airborne and fomite spread. Disease results from direct viral pathogenesis in tissues and the associated immune response. An excessive proinflammatory host response contributes directly to pulmonary pathology; early in infection viral load (peak titer) correlates with severity, whereas later disease is increasingly driven by tissue and systemic inflammatory responses (cytokine storm) rather than direct viral cytopathic effect. The hyperinflammatory and hypercoagulable state drives severe multi-organ complications.",
+    "additionalDifferentials": [
+      "Influenza and other viral lower respiratory tract infections (RSV, human metapneumovirus, parainfluenza, rhinovirus)",
+      "Other coronaviruses: SARS-CoV-1, MERS-CoV, and common-cold coronaviruses HCoV-OC43 and HCoV-HKU1",
+      "Community-acquired or health care-associated bacterial pneumonia",
+      "Any respiratory symptom occurring where SARS-CoV-2 is circulating should be considered a potential manifestation of COVID-19"
+    ],
+    "infectionMimics": [
+      "Influenza",
+      "Respiratory syncytial virus (RSV) infection",
+      "Human metapneumovirus and parainfluenza virus infections",
+      "Rhinovirus / common cold (including HCoV-OC43, HCoV-HKU1 coronaviruses)",
+      "SARS-CoV-1 and MERS-CoV infections",
+      "Bacterial community-acquired pneumonia"
+    ],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Molecular nucleic acid amplification test (NAAT), usually RT-PCR on nasopharyngeal swab or saliva - most sensitive; cannot be done at home and is processed in a reference laboratory",
+      "Antigen tests (rapid / at-home) detecting SARS-CoV-2 proteins - reliable but less accurate than molecular tests, especially in exposed asymptomatic persons",
+      "CBC: lymphopenia and thrombocytopenia",
+      "Inflammatory markers: elevated IL-6, TNF-alpha, ferritin, C-reactive protein",
+      "Elevated liver enzymes and lactate dehydrogenase",
+      "Elevated markers of acute kidney injury",
+      "Elevated D-dimer and prothrombin time (coagulopathy)",
+      "Elevated troponin and creatine phosphokinase (cardiac/muscle injury)",
+      "Chest radiograph: bilateral consolidation and ground-glass opacities, especially in lower lung regions (may be normal despite respiratory compromise)",
+      "Chest CT: ground-glass opacification +/- consolidation, pleural thickening, interlobular septal thickening, air bronchograms - interpretable as typical, indeterminate, or atypical; more sensitive than radiograph but should be used for management, not as a primary diagnostic tool",
+      "Lung ultrasound to detect lung abnormalities"
+    ],
+    "redFlags": [
+      "Oxygen saturation <=94% on room air",
+      "Respiratory rate >30 breaths/min",
+      "PaO2/FiO2 <300 mmHg",
+      "Lung infiltrates occupying >50% of lung fields on chest radiograph",
+      "Moderate to severe dyspnea or cyanosis",
+      "Change in mental status (confusion, delirium) or new-onset mental status changes",
+      "Chest pain",
+      "Reduced urine output or anuria",
+      "Acute respiratory distress syndrome / respiratory failure requiring mechanical ventilation",
+      "Multiorgan failure or shock",
+      "Persistent fever with multiorgan disease and elevated inflammatory markers (excessive inflammatory response - high risk of fatal outcome)",
+      "Thromboembolic events (VTE/PE/DVT, arterial thrombosis, acute stroke, limb ischemia)"
+    ],
+    "prognosis": "Symptomatic infection is usually an acute syndrome that resolves within about 2 weeks in roughly 80% of persons, especially after mild or moderate disease. Severe disease often needs several months for recovery. Advanced age is the principal risk factor for severe illness: >95% of deaths occur in persons older than 45 years and >80% in those older than 65; male sex carries higher risk (odds ratio ~1.8), and most who die have preexisting comorbidities. Risk rises markedly with elevated BMI (overweight, obesity, severe obesity). As of September 2024 the virus had caused >700 million cases and >7 million deaths worldwide. A subset progress to recurring or persisting symptoms (long COVID); those with severe acute pulmonary or cardiac injury may have persisting respiratory or cardiac impairment, and adverse long-term mental-health consequences are common.",
+    "pitfalls": [
+      "Antibiotics are NOT generally indicated, as bacterial infection is an uncommon complication of COVID-19; reserve empiric antibiotics for diagnostic uncertainty or proven secondary infection, and deescalate or stop if no evidence of bacterial infection.",
+      "Chest CT should NOT be used as a primary diagnostic tool for COVID-19; it is principally for medical management of respiratory disease.",
+      "COVID-19-specific therapy is NOT recommended for individuals with asymptomatic SARS-CoV-2 infection.",
+      "Antigen (rapid/at-home) tests are less accurate than molecular tests, especially when testing exposed persons without symptoms.",
+      "Chest radiographs may be normal despite respiratory compromise, so a normal film does not exclude significant disease.",
+      "Possible association between NSAID use and worse outcomes has been raised; acetaminophen is the preferred antipyretic where possible (knowledge point - doses omitted).",
+      "Antibody-based therapies and EUAs are repeatedly revoked as new variants escape their activity, so confirm current authorization status before relying on a monoclonal antibody or long-acting antibody product.",
+      "Effectiveness of masking in community or health settings has been difficult to assess (most studies observational and confounded), so evidence is uncertain rather than absent."
+    ],
+    "severityClassification": "Spectrum: asymptomatic infection; mild disease (symptomatic, no pneumonia - most symptomatic cases); moderate disease; severe disease (pneumonia with dyspnea, radiographic involvement of more than half the lung, and/or hypoxia with oxygen saturation <=94%, typically requiring hospitalization and oxygen); critical disease (respiratory failure requiring mechanical ventilation, multiorgan failure, or shock - requires intensive care).",
+    "references": [
+      "Harrison 22e p.1539",
+      "Harrison 22e p.1540",
+      "Harrison 22e p.1541",
+      "Harrison 22e p.1542",
+      "Harrison 22e p.1543"
+    ],
+    "crossLinks": [
+      "ards",
+      "SEVERE_CAP",
+      "pe"
+    ]
+  }
+}
