@@ -700,6 +700,33 @@
     if (disease.derived) { ee = {}; for (var x in e) ee[x] = e[x]; for (var k in disease.derived) { var c = 0; disease.derived[k].forEach(function (r) { if (kbEvalRule(r, e)) c++; }); ee[k] = c; } }
     return kbRenderNode(disease.reason, ee);
   }
+  // T2-display: make the runtime display layer read the clinical fields from the KB.
+  // Overwrites SYNDROMES display fields + repoints DDX_NI from kb.clinical (data is
+  // lossless vs the legacy literals -> byte-identical; tamper-provable as KB-driven).
+  // Known display fields are assigned; the decision object's known fields are mutated
+  // (any other fields preserved) so there is no field-loss risk. Idempotent.
+  var _kbClinicalApplied = false;
+  function kbApplyClinical() {
+    if (_kbClinicalApplied) return;
+    if (!(window.KB_CLINICAL && window.KB_CORE && window.SYNDROMES)) return;
+    var clin = window.KB_CLINICAL.syndromes, core = window.KB_CORE.diseases, S = window.SYNDROMES;
+    Object.keys(clin).forEach(function (id) {
+      var c = clin[id], k = core[id], s = S[id]; if (!s) return;
+      s.name = c.name; s.system = c.system;
+      s.toxicityFactors = c.toxicityFactors; s.pathogens = c.pathogens;
+      s.firstLine = c.firstLine; s.alternatives = c.alternatives;
+      s.coverageMatrix = c.coverageMatrix; s.stewardship = c.stewardship;
+      s.investigations = c.investigations; s.deescalation = c.deescalation;
+      s.references = c.references; s.regimens = c.regimens;
+      s.antibioticRelevant = c.antibioticRelevant;
+      if (!s.decision) s.decision = {};
+      s.decision.status = c.decisionStatus; s.decision.label = c.decisionLabel;
+      s.decision.reasoning = (function (kk) { return function (e) { return kbReason(kk, e); }; })(k);
+    });
+    if (window.KB_CLINICAL.ddxNi && window.KB_CLINICAL.ddxNi.length) DDX_NI = window.KB_CLINICAL.ddxNi;
+    _kbClinicalApplied = true;
+  }
+  try { kbApplyClinical(); } catch (e) {}
 
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
