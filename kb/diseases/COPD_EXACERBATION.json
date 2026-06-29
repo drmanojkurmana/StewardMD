@@ -103,9 +103,60 @@
     "Anthonisen Criteria",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>{const i=e._anthonisen||0;return i>=2&&e.purulentSputum?`${i} of 3 Anthonisen criteria are met, including increased sputum purulence — the single most reliable indicator of a bacterial component to this exacerbation. Antibiotics are reasonable in this setting (Anthonisen type I exacerbation, or type II with purulence) alongside bronchodilators and systemic corticosteroids.`:i>=2?`${i} of 3 Anthonisen criteria are met without clear sputum purulence. Antibiotic benefit is less certain without purulent sputum — consider antibiotics particularly if the patient requires ventilatory support or has frequent exacerbations, but bronchodilator/steroid therapy is the primary intervention.`:\"Fewer than 2 Anthonisen criteria are met. This mild exacerbation is less likely to have a bacterial component — bronchodilators and corticosteroids are the primary therapy; antibiotics are not routinely indicated.\"}",
   "decision": {
     "status": "yellow",
     "label": "Observe / Further evaluation required"
+  },
+  "reason": [
+    "cond",
+    {
+      "allOf": [
+        {
+          "key": "_anthonisen",
+          "gte": 2
+        },
+        "purulentSputum"
+      ]
+    },
+    [
+      "seq",
+      [
+        "var",
+        "_anthonisen"
+      ],
+      [
+        "lit",
+        " of 3 Anthonisen criteria are met, including increased sputum purulence — the single most reliable indicator of a bacterial component to this exacerbation. Antibiotics are reasonable in this setting (Anthonisen type I exacerbation, or type II with purulence) alongside bronchodilators and systemic corticosteroids."
+      ]
+    ],
+    [
+      "cond",
+      {
+        "key": "_anthonisen",
+        "gte": 2
+      },
+      [
+        "seq",
+        [
+          "var",
+          "_anthonisen"
+        ],
+        [
+          "lit",
+          " of 3 Anthonisen criteria are met without clear sputum purulence. Antibiotic benefit is less certain without purulent sputum — consider antibiotics particularly if the patient requires ventilatory support or has frequent exacerbations, but bronchodilator/steroid therapy is the primary intervention."
+        ]
+      ],
+      [
+        "lit",
+        "Fewer than 2 Anthonisen criteria are met. This mild exacerbation is less likely to have a bacterial component — bronchodilators and corticosteroids are the primary therapy; antibiotics are not routinely indicated."
+      ]
+    ]
+  ],
+  "reasonDerived": {
+    "_anthonisen": [
+      "increasedDyspnea",
+      "increasedSputumVolume",
+      "purulentSputum"
+    ]
   }
 }

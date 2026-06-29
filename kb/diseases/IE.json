@@ -114,9 +114,42 @@
     "Modified Duke Criteria",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`Prolonged fever with ${[e.newMurmur&&\"a new regurgitant murmur\",e.embolicPhenomena&&\"embolic phenomena\",e.prostheticValve&&\"a prosthetic valve\",e.ivDrugUse&&\"a history of injection drug use\"].filter(Boolean).join(\", \")||\"risk factors\"} raises strong suspicion for infective endocarditis. Multiple blood cultures must be drawn before starting empiric antibiotics, since cultures drawn after antibiotic initiation may become falsely negative and complicate both diagnosis (Duke criteria) and subsequent targeted therapy.`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Prolonged fever with "
+    ],
+    [
+      "join",
+      ", ",
+      "risk factors",
+      [
+        [
+          "newMurmur",
+          "a new regurgitant murmur"
+        ],
+        [
+          "embolicPhenomena",
+          "embolic phenomena"
+        ],
+        [
+          "prostheticValve",
+          "a prosthetic valve"
+        ],
+        [
+          "ivDrugUse",
+          "a history of injection drug use"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      " raises strong suspicion for infective endocarditis. Multiple blood cultures must be drawn before starting empiric antibiotics, since cultures drawn after antibiotic initiation may become falsely negative and complicate both diagnosis (Duke criteria) and subsequent targeted therapy."
+    ]
+  ]
 }

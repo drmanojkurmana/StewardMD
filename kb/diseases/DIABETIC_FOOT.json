@@ -111,9 +111,59 @@
     "IWGDF Guidelines",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`A diabetic foot ulcer with ${[e.purulentDrainage&&\"purulent drainage\",e.deepTissueInvolvement&&\"deep tissue involvement\",e.boneInvolvement&&\"suspected bone involvement\",(e.fever||e.feverGU)&&\"systemic signs of infection\"].filter(Boolean).join(\", \")||\"clinical signs of infection\"} meets criteria for diabetic foot infection requiring antibiotics. ${e.boneInvolvement?\"Suspected osteomyelitis requires imaging and likely prolonged therapy in conjunction with surgical/orthopedic input.\":\"Severity (mild/moderate/severe per IDSA/IWGDF criteria) should guide route and spectrum.\"}`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "A diabetic foot ulcer with "
+    ],
+    [
+      "join",
+      ", ",
+      "clinical signs of infection",
+      [
+        [
+          "purulentDrainage",
+          "purulent drainage"
+        ],
+        [
+          "deepTissueInvolvement",
+          "deep tissue involvement"
+        ],
+        [
+          "boneInvolvement",
+          "suspected bone involvement"
+        ],
+        [
+          {
+            "anyOf": [
+              "fever",
+              "feverGU"
+            ]
+          },
+          "systemic signs of infection"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      " meets criteria for diabetic foot infection requiring antibiotics. "
+    ],
+    [
+      "cond",
+      "boneInvolvement",
+      [
+        "lit",
+        "Suspected osteomyelitis requires imaging and likely prolonged therapy in conjunction with surgical/orthopedic input."
+      ],
+      [
+        "lit",
+        "Severity (mild/moderate/severe per IDSA/IWGDF criteria) should guide route and spectrum."
+      ]
+    ]
+  ]
 }

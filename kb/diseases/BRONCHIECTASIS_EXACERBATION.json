@@ -103,9 +103,31 @@
     "British Thoracic Society Bronchiectasis Guidelines",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`A known bronchiectasis patient with increased sputum volume/purulence${e.hemoptysis?\" and hemoptysis\":\"\"} meets criteria for an infective exacerbation. Antibiotic choice should be guided by prior sputum culture history where available, since bronchiectasis patients frequently have chronic colonization with specific organisms (notably Pseudomonas) that recur with each exacerbation.`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "A known bronchiectasis patient with increased sputum volume/purulence"
+    ],
+    [
+      "cond",
+      "hemoptysis",
+      [
+        "lit",
+        " and hemoptysis"
+      ],
+      [
+        "lit",
+        ""
+      ]
+    ],
+    [
+      "lit",
+      " meets criteria for an infective exacerbation. Antibiotic choice should be guided by prior sputum culture history where available, since bronchiectasis patients frequently have chronic colonization with specific organisms (notably Pseudomonas) that recur with each exacerbation."
+    ]
+  ]
 }

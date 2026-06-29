@@ -60,17 +60,28 @@ function snapshotExpr(findings) {
     ${f}.forEach(function(k){ DX._state.f[k]=true; });
     var d = DX._differential();
     function top(arr){ return (arr||[]).slice(0,${TOPN}).map(function(r){ return r.id+':'+r.score; }); }
-    return JSON.stringify({ inf: top(d.inf), ni: top(d.ni), nInf:(d.inf||[]).length, nNi:(d.ni||[]).length });
+    var li = d.inf[0], ln = d.ni[0], S = window.SYNDROMES||{};
+    function fld(id,k){ var s=S[id]; return (s && s[k]!==undefined) ? s[k] : null; }
+    return JSON.stringify({
+      inf: top(d.inf), ni: top(d.ni), nInf:(d.inf||[]).length, nNi:(d.ni||[]).length,
+      leadInf: li?li.id:null, leadInfReason: li?li.reason:null,
+      leadNi: ln?ln.id:null, leadNiReason: ln?ln.reason:null,
+      leadInfFirstLine: li?fld(li.id,"firstLine"):null,
+      leadInfPathogens: li?fld(li.id,"pathogens"):null,
+      leadInfStewardship: li?fld(li.id,"toxicityFactors"):null
+    });
   `;
 }
 
 function diffRows(a, b) {
-  // returns array of human-readable difference lines, or [] if identical
+  // generic deep compare over every captured field (reason text, first-line,
+  // pathogens, stewardship, differential, scores) — byte-identical or it's a diff.
   const out = [];
-  const cmp = (label, x, y) => { if (JSON.stringify(x) !== JSON.stringify(y)) out.push(`    ${label}: baseline ${JSON.stringify(x)}  ->  now ${JSON.stringify(y)}`); };
-  cmp("inf", a.inf, b.inf); cmp("ni", a.ni, b.ni);
-  if (a.nInf !== b.nInf) out.push(`    nInf: ${a.nInf} -> ${b.nInf}`);
-  if (a.nNi !== b.nNi) out.push(`    nNi: ${a.nNi} -> ${b.nNi}`);
+  const keys = [...new Set([...Object.keys(a || {}), ...Object.keys(b || {})])];
+  for (const k of keys) {
+    const x = JSON.stringify(a ? a[k] : undefined), y = JSON.stringify(b ? b[k] : undefined);
+    if (x !== y) out.push(`    ${k}: baseline ${String(x).slice(0, 90)}  ->  now ${String(y).slice(0, 90)}`);
+  }
   return out;
 }
 

@@ -111,9 +111,54 @@
     "Harrison's Principles of Internal Medicine",
     "IDSA/ATS CAP Guidelines (Aspiration Pneumonia section)"
   ],
-  "reasonSource": "e=>`A witnessed or strongly suspected aspiration event (${[e.alteredSensorium&&\"altered consciousness\",e.dysphagia&&\"dysphagia\",e.aspirationRiskFactor&&\"known aspiration risk factor\"].filter(Boolean).join(\", \")||\"aspiration risk factor\"}) with new respiratory symptoms${e.foulSmellingSputum?\" and foul-smelling sputum (suggesting anaerobic involvement)\":\"\"} is consistent with aspiration pneumonia. Anaerobic coverage should be included given the oropharyngeal/dental flora typically implicated.`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "A witnessed or strongly suspected aspiration event ("
+    ],
+    [
+      "join",
+      ", ",
+      "aspiration risk factor",
+      [
+        [
+          "alteredSensorium",
+          "altered consciousness"
+        ],
+        [
+          "dysphagia",
+          "dysphagia"
+        ],
+        [
+          "aspirationRiskFactor",
+          "known aspiration risk factor"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      ") with new respiratory symptoms"
+    ],
+    [
+      "cond",
+      "foulSmellingSputum",
+      [
+        "lit",
+        " and foul-smelling sputum (suggesting anaerobic involvement)"
+      ],
+      [
+        "lit",
+        ""
+      ]
+    ],
+    [
+      "lit",
+      " is consistent with aspiration pneumonia. Anaerobic coverage should be included given the oropharyngeal/dental flora typically implicated."
+    ]
+  ]
 }

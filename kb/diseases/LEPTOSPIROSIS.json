@@ -121,9 +121,42 @@
     "NCDC India Guidelines",
     "Harrison's Principles of Internal Medicine"
   ],
-  "reasonSource": "e=>`Fever with ${[e.conjunctivalSuffusion&&\"conjunctival suffusion\",e.waterExposure&&\"exposure to floodwater/contaminated water\",e.jaundice&&\"jaundice\",e.renalImpairment&&\"renal impairment\"].filter(Boolean).join(\", \")||\"myalgia and relevant exposure\"} is consistent with leptospirosis, particularly in monsoon/flood settings. This is treatable with antibiotics, and severe disease (Weil's disease: jaundice, renal failure, hemorrhage) carries significant mortality if untreated, so empiric therapy should begin promptly on clinical suspicion.`",
   "decision": {
     "status": "orange",
     "label": "Antibiotics recommended"
-  }
+  },
+  "reason": [
+    "seq",
+    [
+      "lit",
+      "Fever with "
+    ],
+    [
+      "join",
+      ", ",
+      "myalgia and relevant exposure",
+      [
+        [
+          "conjunctivalSuffusion",
+          "conjunctival suffusion"
+        ],
+        [
+          "waterExposure",
+          "exposure to floodwater/contaminated water"
+        ],
+        [
+          "jaundice",
+          "jaundice"
+        ],
+        [
+          "renalImpairment",
+          "renal impairment"
+        ]
+      ]
+    ],
+    [
+      "lit",
+      " is consistent with leptospirosis, particularly in monsoon/flood settings. This is treatable with antibiotics, and severe disease (Weil's disease: jaundice, renal failure, hemorrhage) carries significant mortality if untreated, so empiric therapy should begin promptly on clinical suspicion."
+    ]
+  ]
 }
