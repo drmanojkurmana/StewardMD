@@ -82,7 +82,34 @@
     },
     "review": { "$ref": "#/$defs/review" },
     "version": { "type": "integer", "minimum": 1 },
-    "contentHash": { "type": ["string", "null"], "description": "Set by the build step for change detection." }
+    "contentHash": { "type": ["string", "null"], "description": "Set by the build step for change detection." },
+    "enrichment": {
+      "type": "object", "additionalProperties": true,
+      "description": "ADDITIVE reference enrichment, isolated from curated content (never overwrites it). Keyed by source so future re-imports replace only that source's block (idempotent, no duplication). Disease-KNOWLEDGE only — treatment is never sourced here.",
+      "properties": {
+        "harrison": {
+          "type": "object", "additionalProperties": false,
+          "description": "Paraphrased Internal-Medicine reference from Harrison 22e (page-cited; not verbatim, for copyright).",
+          "properties": {
+            "source": { "type": "string" }, "sourceEdition": { "type": "string" }, "pages": { "type": ["string", "null"] },
+            "clinicalPearls": { "type": "array", "items": { "type": "string" } },
+            "pathophysiology": { "type": ["string", "null"] },
+            "additionalDifferentials": { "type": "array", "items": { "type": "string" } },
+            "infectionMimics": { "type": "array", "items": { "type": "string" } },
+            "nonInfectiousMimics": { "type": "array", "items": { "type": "string" } },
+            "additionalInvestigations": { "type": "array", "items": { "type": "string" } },
+            "redFlags": { "type": "array", "items": { "type": "string" } },
+            "prognosis": { "type": ["string", "null"] },
+            "pitfalls": { "type": "array", "items": { "type": "string" } },
+            "severityClassification": { "type": ["string", "null"] },
+            "references": { "type": "array", "items": { "type": "string" } },
+            "crossLinks": { "type": "array", "items": { "type": "string" }, "description": "Related KB disease ids." },
+            "conflicts": { "type": "array", "items": { "type": "object" }, "description": "Where Harrison differs from curated content — both kept, attributed." },
+            "importedAt": { "type": ["string", "null"] }, "contentHash": { "type": ["string", "null"] }
+          }
+        }
+      }
+    }
   },
   "$defs": {
     "rule": {
