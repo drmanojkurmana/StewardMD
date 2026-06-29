@@ -1893,4 +1893,109 @@
         ni: d.ni.slice(0, 5).map(function (r) { return r.name + " " + r.score; }) };
     },
     _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
+
+  /* ---------------------------------------------------------------------- *
+   * MAIN STEWARDSHIP ENGINE EXPANSION → all 140 diseases (additive, safe).
+   *
+   * The main app's runEngine() ranks only the 51 infective SYNDROMES and
+   * renderOutput() builds an antibiotic page. app.js is a classic top-level
+   * script, so runEngine/renderOutput are GLOBAL functions we can wrap from
+   * here (reasoning.js loads after app.js). We DO NOT edit minified app.js and
+   * DO NOT mutate window.SYNDROMES (its other consumers stay infective-only).
+   *
+   *  - runEngine(e): wrapped to ALSO score the 89 non-infective diagnoses (from
+   *    the KB find-maps in DDX_NI) and merge them into the ranked candidate list,
+   *    so the main "possible matches" list can surface any of the 140. Infective
+   *    scoring is recomputed with the SAME match/baseScore closures (identical raw
+   *    scores + order) — only the normalisation denominator changes, exactly as it
+   *    would when any candidate is added. The sepsis-no-source fallback is left
+   *    untouched. Non-infective only surface when their findings are present.
+   *  - renderOutput(e,id): wrapped so selecting a non-infective diagnosis renders a
+   *    management + Harrison reference page (reusing DX_MGMT + harrisonRef) instead
+   *    of the antibiotic page; infective ids fall through to the original verbatim.
+   *
+   * Original runEngine is preserved on window.__smdOrigRunEngine for regression
+   * tests (test/run-main-engine.mjs proves no infective regression).
+   * ---------------------------------------------------------------------- */
+  function buildNIRegistry() {
+    var reg = [], byId = {};
+    (DDX_NI || []).forEach(function (d) {
+      if (!d || !d.id || byId[d.id]) return;
+      var syn = { id: d.id, name: d.name || d.id, system: d.system || "", nonInfective: true,
+        antibioticRelevant: false, decision: { status: "green", label: "Non-infective diagnosis — management" },
+        find: d.find || {}, reason: d.reason || "", red: d.red || [], inv: d.inv || [] };
+      reg.push(syn); byId[d.id] = syn;
+    });
+    return { reg: reg, byId: byId };
+  }
+  function niScoreFor(e, find) {
+    var sum = 0, anyPos = false;
+    for (var k in find) { if (e[k]) { sum += find[k]; if (find[k] > 0) anyPos = true; } }
+    return anyPos ? Math.max(1, Math.min(99, Math.round(sum))) : 0;
+  }
+  function renderNIPage(e, syn) {
+    var n = document.getElementById("outputArea"); if (!n) return;
+    var m = (window.DX_MGMT && window.DX_MGMT[syn.id]) || null;
+    var tx = (m && m.tx && m.tx.length) ? m.tx : null;
+    var ix = (m && m.ix && m.ix.length) ? m.ix : (syn.inv || []);
+    var li = function (arr, n2) { return '<ul>' + arr.slice(0, n2 || 10).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>'; };
+    n.innerHTML =
+      '<div class="quick-answer-card green">' +
+        '<div class="qa-header">Quick Decision · non-infective diagnosis</div>' +
+        '<div class="qa-grid">' +
+          '<div class="qa-item"><span class="qa-label">Diagnosis</span><span class="qa-value">' + esc(syn.name) + '</span></div>' +
+          '<div class="qa-item"><span class="qa-label">Antibiotics Needed</span><span class="qa-value qa-abx-na">N/A</span></div>' +
+          (syn.system ? '<div class="qa-item"><span class="qa-label">System</span><span class="qa-value">' + esc(syn.system) + '</span></div>' : '') +
+        '</div>' +
+      '</div>' +
+      (syn.reason ? '<div class="card"><div class="simple-section-label">Why this</div><p>' + esc(syn.reason) + '</p></div>' : '') +
+      (tx ? '<div class="card"><div class="simple-section-label">💊 Management / Treatment</div><ol>' + tx.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ol></div>'
+          : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management — see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
+      (ix && ix.length ? '<div class="card"><div class="simple-section-label">Key investigations</div>' + li(ix, 8) + '</div>' : '') +
+      (syn.red && syn.red.length ? '<div class="card"><div class="simple-section-label">Red flags</div>' + li(syn.red, 8) + '</div>' : '') +
+      (harrisonRef(syn.id) ? '<div class="card">' + harrisonRef(syn.id) + '</div>' : '') +
+      '<div class="qa-pregnancy-note" style="margin-top:10px">⚠️ Decision-support only — non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
+  }
+  function installMainEngineExpansion() {
+    if (window.__smdEngineExpanded) return;
+    if (typeof window.runEngine !== "function" || typeof window.renderOutput !== "function") return;
+    var NI = buildNIRegistry();
+    if (!NI.reg.length) return;                       // DDX_NI not ready yet — retry later
+    var origRun = window.runEngine, origRender = window.renderOutput;
+    window.__smdOrigRunEngine = origRun;
+    window.runEngine = function (e) {
+      var base; try { base = origRun(e); } catch (err) { return origRun(e); }
+      try {
+        if (!e || !base || base.isFallback) return base;
+        var scored = [], syn = window.SYNDROMES || {};
+        Object.keys(syn).forEach(function (id) {
+          var sd = syn[id]; if (!sd || sd.nonInfective) return;
+          var ok = false; try { ok = !!sd.match(e); } catch (_) {}
+          if (!ok) return;
+          var sc = 0; try { sc = sd.baseScore(e); } catch (_) {}
+          scored.push({ syn: sd, score: Math.max(1, Math.min(99, sc)) });
+        });
+        NI.reg.forEach(function (sd) { var sc = niScoreFor(e, sd.find); if (sc > 0) scored.push({ syn: sd, score: sc }); });
+        if (!scored.length) return base;
+        scored.sort(function (a, b) { return b.score - a.score; });   // score desc — matches origRun (no tiebreak)
+        var o = scored.reduce(function (t, x) { return t + x.score; }, 0) || 1;
+        var r = scored.slice(0, 5).map(function (x) { return { name: x.syn.name, id: x.syn.id, probability: Math.round(x.score / o * 100), syn: x.syn }; });
+        var s2 = r.reduce(function (t, x) { return t + x.probability; }, 0) || 1;
+        r.forEach(function (x) { x.probability = Math.round(x.probability / s2 * 100); });
+        return { toxicity: base.toxicity, toxicityOverride: base.toxicityOverride, ranked: r, top: r[0] || null, noMatch: false, isFallback: false };
+      } catch (_) { return base; }
+    };
+    window.renderOutput = function (e, i, a) {
+      try { if (i && NI.byId[i]) { renderNIPage(e, NI.byId[i]); return; } } catch (_) {}
+      return origRender(e, i, a);
+    };
+    window.__smdEngineExpanded = true;
+  }
+  // app.js (classic script) runs before this; install now, and retry on DOM ready
+  // in case DDX_NI is repointed slightly later.
+  try { installMainEngineExpansion(); } catch (e) {}
+  if (!window.__smdEngineExpanded) {
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { try { installMainEngineExpansion(); } catch (e) {} });
+    else setTimeout(function () { try { installMainEngineExpansion(); } catch (e) {} }, 0);
+  }
 })();
