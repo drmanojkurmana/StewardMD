@@ -364,6 +364,17 @@
       ".smd-sba-prov{font-size:10.5px;color:#0F766E;font-weight:600;margin-top:1px}",
       ".smd-sba-btn{flex:0 0 auto;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);color:#0F766E;font-weight:600;font-size:12px;padding:7px 11px;border-radius:8px;cursor:pointer}",
       ".smd-sba-btn:active{transform:scale(.96)}",
+      // account panel inside the More sheet
+      ".hv-acct{text-align:center;padding:6px 4px 2px}",
+      ".hv-acct-pic{width:74px;height:74px;border-radius:50%;object-fit:cover;margin:4px auto 12px;display:block;background:var(--hp)}",
+      ".hv-acct-ph{display:flex;align-items:center;justify-content:center;color:#fff;font:800 28px var(--hfont)}",
+      ".hv-acct-name{font:800 19px var(--hfont);color:var(--hink)}",
+      ".hv-acct-email{font:500 13px var(--hfont);color:var(--hmut);margin-top:3px;word-break:break-all}",
+      ".hv-acct-badge{display:inline-block;margin-top:11px;font:700 11px var(--hfont);color:var(--hp);background:var(--hps);padding:4px 12px;border-radius:999px}",
+      ".hv-acct-btn{display:block;width:100%;margin-top:18px;border:none;border-radius:12px;background:var(--hp);color:#fff;font:700 15px var(--hfont);padding:13px;cursor:pointer}",
+      ".hv-acct-btn.out{background:transparent;border:1px solid var(--hbd);color:var(--hink)}",
+      ".hv-acct-btn:active{transform:scale(.98)}",
+      ".hv-acct-note{font:500 12px/1.5 var(--hfont);color:var(--hmut);margin-top:13px}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -619,7 +630,7 @@
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
-      mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "menu") +
+      mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
@@ -633,6 +644,7 @@
       b.addEventListener("click", function () {
         var a = b.getAttribute("data-mi");
         if (a === "display") return openDisplay();
+        if (a === "account") return openAccount();
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
@@ -640,6 +652,34 @@
         if (ACT[a]) ACT[a]();
       });
     });
+  }
+  function openAccount() {
+    var a = readAccount();
+    var body;
+    if (a && a.email) {
+      var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
+      var pic = a.picture
+        ? '<img class="hv-acct-pic" src="' + smdEsc(a.picture) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
+        : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
+      body = '<div class="hv-acct">' + pic +
+        '<div class="hv-acct-name">' + smdEsc(a.name || "Signed in") + '</div>' +
+        '<div class="hv-acct-email">' + smdEsc(a.email) + '</div>' +
+        '<div class="hv-acct-badge">' + (a.type === "google" ? "Google · cloud sync on" : "Signed in") + '</div>' +
+        '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button></div>';
+    } else {
+      body = '<div class="hv-acct">' +
+        '<div class="hv-acct-pic hv-acct-ph">?</div>' +
+        '<div class="hv-acct-name">Not signed in</div>' +
+        '<div class="hv-acct-email">Guest mode — cases stay on this device only</div>' +
+        '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in with Google</button>' +
+        '<div class="hv-acct-note">Sign in to sync your cases across devices and share them by code.</div></div>';
+    }
+    openSheet('<div class="hv-sh-t">Account &amp; sign-in</div>' + body);
+    var s = sheetEl();
+    var so = s.querySelector('[data-acct="signout"]');
+    if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
+    var si = s.querySelector('[data-acct="signin"]');
+    if (si) si.addEventListener("click", function () { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} setTimeout(openAccount, 900); });
   }
   function openAck() {
     var src = document.getElementById("ackCard");
