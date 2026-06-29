@@ -1,0 +1,322 @@
+{
+  "_meta": {
+    "capturedAtNote": "baseline of CURRENT engine before KB migration",
+    "topN": 6,
+    "syndromeCount": 51,
+    "ddxNiCount": 89,
+    "vignetteCount": 18
+  },
+  "results": {
+    "meningitis": {
+      "inf": [
+        "MENINGITIS:100",
+        "BRAIN_ABSCESS:62",
+        "CNS_TB:62",
+        "ENCEPHALITIS:62",
+        "VIRAL_MENINGITIS:62",
+        "CHIKUNGUNYA:41"
+      ],
+      "ni": [
+        "sah:60",
+        "ich:44",
+        "serotonin_nms:42",
+        "subdural:40",
+        "brain_tumour:34",
+        "htn_emergency:28"
+      ],
+      "nInf": 15,
+      "nNi": 46
+    },
+    "cap": {
+      "inf": [
+        "CAP:71",
+        "HAP:51",
+        "SEVERE_CAP:51",
+        "ACUTE_BRONCHITIS:47",
+        "BRONCHIECTASIS_EXACERBATION:47",
+        "COPD_EXACERBATION:41"
+      ],
+      "ni": [
+        "sarcoidosis:40",
+        "asthma_exac:38",
+        "copd_exac_ni:30",
+        "pleural_effusion:28",
+        "ild:26",
+        "svc_obstruction:26"
+      ],
+      "nInf": 6,
+      "nNi": 36
+    },
+    "pyelonephritis": {
+      "inf": [
+        "PYELONEPHRITIS:86",
+        "PROSTATITIS:62",
+        "CYSTITIS:62",
+        "CA_UTI:62",
+        "COMPLICATED_UTI:62",
+        "VIRAL_HEPATITIS:15"
+      ],
+      "ni": [
+        "renal_colic:48",
+        "pancreatitis:12",
+        "serotonin_nms:6",
+        "thyroid_storm:6",
+        "salicylate_tox:4",
+        "bowel_obstruction:2"
+      ],
+      "nInf": 7,
+      "nNi": 23
+    },
+    "septic_shock": {
+      "inf": [
+        "SEVERE_CAP:56",
+        "CHOLANGITIS:52",
+        "SBP:52",
+        "DENGUE:35",
+        "FEBRILE_NEUTROPENIA:35",
+        "MENINGITIS:29"
+      ],
+      "ni": [
+        "thyroid_storm:58",
+        "tamponade:48",
+        "hypovolemic_shock:48",
+        "serotonin_nms:46",
+        "anaphylaxis:42",
+        "adrenal_crisis:40"
+      ],
+      "nInf": 20,
+      "nNi": 48
+    },
+    "cholangitis": {
+      "inf": [
+        "CHOLANGITIS:62",
+        "CHOLECYSTITIS:62",
+        "VIRAL_HEPATITIS:62",
+        "AMOEBIC_LIVER_ABSCESS:62",
+        "LIVER_ABSCESS:62",
+        "CHIKUNGUNYA:48"
+      ],
+      "ni": [
+        "toxic_hepatitis:58",
+        "biliary_colic:42",
+        "decomp_cirrhosis:24",
+        "hepatic_enceph:24",
+        "variceal_bleed:20",
+        "pancreatitis:12"
+      ],
+      "nInf": 8,
+      "nNi": 27
+    },
+    "decomp_cirrhosis": {
+      "inf": [
+        "SBP:50",
+        "CHOLANGITIS:48",
+        "CHOLECYSTITIS:48",
+        "VIRAL_HEPATITIS:48",
+        "AMOEBIC_LIVER_ABSCESS:48",
+        "LIVER_ABSCESS:48"
+      ],
+      "ni": [
+        "hepatic_enceph:78",
+        "decomp_cirrhosis:74",
+        "toxic_hepatitis:34",
+        "variceal_bleed:30",
+        "metabolic_enceph:28",
+        "malignancy_b:12"
+      ],
+      "nInf": 11,
+      "nNi": 7
+    },
+    "dka": {
+      "inf": [
+        "C_DIFF:27",
+        "SBP:27",
+        "CHOLECYSTITIS:9",
+        "PYELONEPHRITIS:9",
+        "VIRAL_HEPATITIS:9"
+      ],
+      "ni": [
+        "dka:100",
+        "hhs:48",
+        "pancreatitis:40",
+        "bowel_obstruction:36",
+        "hypercalcemia:36",
+        "hypoglycemia:20"
+      ],
+      "nInf": 5,
+      "nNi": 19
+    },
+    "acs": {
+      "inf": [],
+      "ni": [
+        "acs:98",
+        "cardiogenic_shock:36",
+        "aortic_stenosis:26",
+        "heart_failure:14"
+      ],
+      "nInf": 0,
+      "nNi": 4
+    },
+    "pe": {
+      "inf": [
+        "HAP:45",
+        "SEVERE_CAP:45"
+      ],
+      "ni": [
+        "pe:100",
+        "dvt:74",
+        "pneumothorax:60",
+        "tamponade:48",
+        "pleural_effusion:48",
+        "heart_failure:40"
+      ],
+      "nInf": 2,
+      "nNi": 28
+    },
+    "heart_failure": {
+      "inf": [
+        "HAP:27",
+        "SEVERE_CAP:27"
+      ],
+      "ni": [
+        "heart_failure:100",
+        "cardiogenic_shock:62",
+        "tamponade:60",
+        "ild:54",
+        "pe:40",
+        "anaphylaxis:24"
+      ],
+      "nInf": 2,
+      "nNi": 26
+    },
+    "stroke": {
+      "inf": [
+        "BRAIN_ABSCESS:62",
+        "CNS_TB:62",
+        "ENCEPHALITIS:62"
+      ],
+      "ni": [
+        "ischemic_stroke:60",
+        "ich:58",
+        "tia:54",
+        "htn_emergency:40",
+        "ms:36",
+        "cord_compression:32"
+      ],
+      "nInf": 3,
+      "nNi": 14
+    },
+    "sah": {
+      "inf": [
+        "MENINGITIS:38",
+        "BRAIN_ABSCESS:38",
+        "VIRAL_MENINGITIS:38",
+        "RICKETTSIAL_FEVER:32",
+        "CHOLECYSTITIS:9",
+        "PYELONEPHRITIS:9"
+      ],
+      "ni": [
+        "sah:81",
+        "migraine:58",
+        "tension_ha:44",
+        "brain_tumour:36",
+        "iih:36",
+        "ich:30"
+      ],
+      "nInf": 7,
+      "nNi": 22
+    },
+    "iih": {
+      "inf": [
+        "MENINGITIS:38",
+        "BRAIN_ABSCESS:38",
+        "VIRAL_MENINGITIS:38",
+        "RICKETTSIAL_FEVER:32"
+      ],
+      "ni": [
+        "iih:90",
+        "brain_tumour:68",
+        "migraine:64",
+        "htn_emergency:62",
+        "temporal_arteritis:40",
+        "tension_ha:38"
+      ],
+      "nInf": 4,
+      "nNi": 15
+    },
+    "ugi_bleed": {
+      "inf": [],
+      "ni": [
+        "peptic_ulcer:66",
+        "variceal_bleed:56",
+        "hypovolemic_shock:18",
+        "anemia_sympt:0"
+      ],
+      "nInf": 0,
+      "nNi": 4
+    },
+    "gbs": {
+      "inf": [],
+      "ni": [
+        "gbs:48",
+        "myasthenic_crisis:22",
+        "hyperkalemia:16"
+      ],
+      "nInf": 0,
+      "nNi": 3
+    },
+    "ttp": {
+      "inf": [
+        "MALARIA:65",
+        "DENGUE:56",
+        "MIXED_MALARIA:56",
+        "MENINGITIS:17",
+        "ASPIRATION_PNEUMONIA:17",
+        "BRAIN_ABSCESS:17"
+      ],
+      "ni": [
+        "dic:68",
+        "ttp_hus:62",
+        "itp:52",
+        "acute_leukemia:38",
+        "serotonin_nms:24",
+        "thyroid_storm:22"
+      ],
+      "nInf": 12,
+      "nNi": 40
+    },
+    "fuo_minimal": {
+      "inf": [
+        "PULMONARY_TB:62",
+        "DISSEMINATED_TB:56",
+        "LUNG_ABSCESS:55",
+        "BRAIN_ABSCESS:24",
+        "CNS_TB:18",
+        "ENTERIC_FEVER:18"
+      ],
+      "ni": [
+        "malignancy_b:68",
+        "lung_cancer:26",
+        "acute_leukemia:24",
+        "vasculitis:16",
+        "sarcoidosis:12",
+        "sle_flare:8"
+      ],
+      "nInf": 8,
+      "nNi": 25
+    },
+    "single_fever": {
+      "inf": [],
+      "ni": [
+        "serotonin_nms:18",
+        "thyroid_storm:18",
+        "vasculitis:14",
+        "acute_leukemia:12",
+        "sle_flare:12",
+        "sjs_ten:12"
+      ],
+      "nInf": 0,
+      "nNi": 15
+    }
+  }
+}
