@@ -57,5 +57,80 @@
   "contentHash": null,
   "references": [
     "Harrison 22e"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e Ch.63 (Cutaneous Drug Reactions) p.416-426, esp. p.467-468; Ch.21 (Fever and Rash) Table 21-1 p.142",
+      "clinicalPearls": [
+        "SJS/TEN is a single disease spectrum of full-thickness epidermal necrosis with blistering and mucosal/epidermal detachment, separated only by the extent of body surface area (BSA) detachment.",
+        "Drugs cause roughly 80% of cases; the most frequently implicated agents are sulfonamide antibiotics, allopurinol, antiepileptics (lamotrigine, phenytoin, carbamazepine), oxicam NSAIDs, beta-lactam and other antibiotics, and nevirapine.",
+        "Onset is typically delayed, around 5-28 days after starting the culprit drug.",
+        "Prodrome: fever >39 C (102.2 F), sore throat, and conjunctivitis precede or accompany the rash; lesions are painful, dusky, atypical and target-like.",
+        "It is uncommon in children and over-represented among people with HIV, SLE, certain HLA types, and slow acetylators.",
+        "Mucosal surfaces are characteristically involved, and Nikolsky's sign is positive.",
+        "SJS/TEN is mediated by CD8+ cytotoxic T cells recognizing a drug-HLA class I complex; granulysin released by these cells is thought to be the principal mediator of keratinocyte death.",
+        "Strong, drug- and phenotype-specific HLA associations exist: HLA-B*15:02 with carbamazepine SJS/TEN (Han Chinese), HLA-B*58:01 with allopurinol, HLA-B*13:01 with dapsone/sulfonamide.",
+        "Frozen-section skin biopsy can aid rapid diagnosis and distinguish SJS/TEN (full-thickness epidermal necrosis) from mimics.",
+        "Loss of skin barrier integrity leads to dehydration and secondary sepsis, which are major causes of death."
+      ],
+      "pathophysiology": "A delayed, T-cell-mediated (type IVa, cytotoxic) severe cutaneous adverse reaction. A drug or metabolite-altered antigen is presented in association with a risk HLA class I allele by keratinocytes or other antigen-presenting cells; a restricted T-cell receptor on skin-enriched CD8+ T cells recognizes this drug-HLA complex, triggering activation and release of cytolytic mediators (notably granulysin) that cause full-thickness epidermal keratinocyte death and detachment. Proposed antigen-presentation models include hapten/prohapten covalent binding, the pharmacologic-interaction (p-i) noncovalent model, and the altered-peptide-repertoire model (as proven for abacavir-HLA-B*57:01). Carbamazepine SJS/TEN shows a highly restricted V-alpha/V-beta TCR repertoire shared among HLA-B*15:02 patients. A risk HLA allele alone is insufficient; non-MHC factors such as drug metabolism (e.g., CYP2C9*3 slow metabolism with phenytoin) contribute. (Harrison 22e p.417-420)",
+      "additionalDifferentials": [
+        "Acute generalized exanthematous pustulosis (AGEP) - may resemble early SJS but erosions are superficial and prominent mucosal involvement is lacking",
+        "Drug-induced hypersensitivity syndrome / DRESS (DIHS) - can have TEN-like overlap features",
+        "Overlap hypersensitivity syndromes (DIHS-TEN-like, AGEP-TEN-like) - up to ~20% of severe drug eruptions show overlap, supporting a clinical spectrum"
+      ],
+      "infectionMimics": [
+        "Reactive infectious mucocutaneous eruption (RIME) - Mycoplasma and other respiratory infections in children cause prominent mucositis with limited cutaneous involvement",
+        "Erythema multiforme associated with herpes simplex virus - painful mucosal erosions and target lesions, typically acral, with limited skin detachment"
+      ],
+      "nonInfectiousMimics": [
+        "Staphylococcal scalded-skin syndrome (SSSS) - diffuse tender erythema with bullae/desquamation and positive Nikolsky's sign; cleavage is superficial (subcorneal), spares mucosa",
+        "DRESS / drug-induced hypersensitivity syndrome - maculopapular eruption, facial edema, eosinophilia, multiorgan (especially hepatic) involvement",
+        "Erythema multiforme major - target lesions with mucous-membrane involvement",
+        "Acute generalized exanthematous pustulosis (AGEP) - sterile pustules on erythema, flexural predominance",
+        "Exfoliative erythroderma syndrome - diffuse erythema/scaling, may be drug-induced",
+        "Autoimmune blistering disease (e.g., bullous pemphigoid, which can also be drug-induced/exacerbated)"
+      ],
+      "additionalInvestigations": [
+        "Frozen-section skin biopsy for rapid diagnosis; histology shows full-thickness epidermal necrosis (distinguishes from AGEP's superficial/subcorneal neutrophilic pustules)",
+        "Calculate BSA of epidermal detachment to classify SJS vs overlap vs TEN",
+        "Assess for renal insufficiency and consider underlying malignancy (both poor-prognosis markers)",
+        "Patch testing with the responsible drug (after recovery) and use of the ALDEN algorithm to rank likelihood of drug causality"
+      ],
+      "redFlags": [
+        "Extensive/rapidly progressing epidermal detachment (BSA toward TEN range) - maximal-severity form",
+        "Older age, malignancy, or renal insufficiency - independently associated with poor prognosis",
+        "Signs of sepsis or dehydration from loss of skin barrier integrity",
+        "Mucosal (ocular, oral, urogenital, respiratory) involvement - risk of acute and long-term sequelae"
+      ],
+      "prognosis": "Mortality is substantial and rises with the extent of epidermal detachment: at least ~10% of SJS and ~30% of TEN patients die from the disease (overall reported mortality up to ~30%). Older age, greater BSA detachment, malignancy, and renal insufficiency are independent poor-prognostic factors. Best outcomes follow early diagnosis and immediate withdrawal of the culprit drug. (Harrison 22e p.142, p.424-425)",
+      "pitfalls": [
+        "Early SJS may be hard to distinguish from AGEP; in AGEP erosions are superficial and prominent mucosal involvement is NOT present.",
+        "Drugs may be implicated even when the eruption appears shortly AFTER the drug has been discontinued (delayed-type reactions).",
+        "A risk HLA allele does NOT by itself cause SJS/TEN - most carriers remain drug-tolerant; other factors (e.g., drug metabolism) are required.",
+        "Designation of a single diagnosis is NOT always possible in overlap hypersensitivity syndromes; manage according to the dominant evolving clinical features.",
+        "Skin biopsy helps characterize the reaction but does NOT by itself establish drug causality."
+      ],
+      "severityClassification": "Classified by percent body surface area (BSA) of epidermal detachment: SJS = <10% BSA; SJS/TEN overlap = 10-30% BSA; TEN = >30% BSA (maximal form). (Harrison 22e p.142, p.424). SCORTEN (severity-of-illness score for TEN) is the standard prognostic tool; note the source text does not enumerate its parameters.",
+      "references": [
+        "Harrison 22e p.142",
+        "Harrison 22e p.416",
+        "Harrison 22e p.417",
+        "Harrison 22e p.418",
+        "Harrison 22e p.419",
+        "Harrison 22e p.420",
+        "Harrison 22e p.424",
+        "Harrison 22e p.425"
+      ],
+      "crossLinks": [
+        "anaphylaxis",
+        "angioedema_acei"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T13:34:16Z",
+      "contentHash": "hadeb1689"
+    }
+  }
 }
