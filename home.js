@@ -78,6 +78,28 @@
   var root, fab;
   function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
   function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; }
+  // Universal "go home" — closes any open overlay/sheet and returns to the v3 home. Wired to the
+  // logo (anywhere) and the home FAB, so the user can get home from any area.
+  function goHome() {
+    try { closeSheet(); } catch (e) {}
+    try { if (window.DX && DX.close) DX.close(); } catch (e) {}
+    try { if (window.ELYTE && ELYTE.close) ELYTE.close(); } catch (e) {}
+    try { if (window.INF && INF.close) INF.close(); } catch (e) {}
+    try { if (window.closeMyCases) closeMyCases(); } catch (e) {}
+    try { if (window.closeSearch) closeSearch(); } catch (e) {}
+    try { if (window.SB && SB.closeRef) SB.closeRef(); if (window.SB && SB.close) SB.close(); } catch (e) {}
+    ["mcOverlay", "dbOverlay", "infOverlay", "eceOverlay", "csOverlay", "dxOverlay"].forEach(function (id) {
+      var el = document.getElementById(id); if (el) { el.classList.remove("on"); el.classList.remove("open"); }
+    });
+    try { document.body.style.overflow = ""; } catch (e) {}
+    if (document.body.classList.contains("ui-v2")) { try { showV2(); } catch (e) {} }
+    try { window.scrollTo(0, 0); } catch (e) {}
+  }
+  // logo (and brand text) anywhere → go home
+  document.addEventListener("click", function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('.brand, .v3-mark, .v3-shield, img[alt="StewardMD"]') : null;
+    if (t) { e.preventDefault(); goHome(); }
+  }, false);
   // In v2 the app's own Simple/Advanced screen must NEVER appear (the v3 chooser replaces it).
   // The app auto-reveals #modeSelect ~1.2s after login; keep it hidden so only ONE prompt shows.
   var _msObs;
@@ -318,7 +340,8 @@
       ".hv-reset{width:100%;background:#fbe7e9;color:#ab1c2c;border:1px solid #efa9b1;border-radius:11px;padding:12px;font:700 13px var(--hfont);cursor:pointer;margin-top:6px}",
       ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
       ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
-      ".hv-fab{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:95;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:none}.hv-fab.on{display:flex}.hv-fab svg{stroke:#fff;width:24px;height:24px}.hv-fab:active{transform:scale(.92)}",
+      ".hv-fab{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:9999;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,#14B8A6,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:flex}.hv-fab svg{stroke:#fff;width:24px;height:24px}.hv-fab:active{transform:scale(.92)}",
+      ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
       // density (spacing) — independent of font zoom
       "body.smd-dens-compact #homeV2 .hv-stack{gap:11px}body.smd-dens-comfortable #homeV2 .hv-stack{gap:20px}body.smd-dens-large #homeV2 .hv-stack{gap:26px}",
       "body.smd-dens-compact #homeV2 .hv-hero{padding:14px}body.smd-dens-comfortable #homeV2 .hv-hero{padding:24px}body.smd-dens-large #homeV2 .hv-hero{padding:28px}",
@@ -518,7 +541,7 @@
     if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
     if (!document.getElementById("hvSheet")) { var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; document.body.appendChild(sheet); }
     fab = document.createElement("button"); fab.className = "hv-fab"; fab.id = "hvFab"; fab.setAttribute("aria-label", "StewardMD home"); fab.innerHTML = svg("home"); document.body.appendChild(fab);
-    fab.addEventListener("click", showV2);
+    fab.addEventListener("click", goHome);
 
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
