@@ -629,6 +629,8 @@
     return IDF;
   }
   function assocKeys(s) {
+    var _kbc = (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[s.id] : null;
+    if (_kbc && _kbc.assoc) return _kbc.assoc;   // KB is the runtime source of truth (P3)
     if (ASSOC[s.id]) return ASSOC[s.id];
     var src = "";
     try { src += s.match ? s.match.toString() : ""; } catch (e) {}
@@ -659,6 +661,28 @@
   }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
+  /* ---- KB declarative evaluator (P3 runtime source of truth; mirrors kb/engine/evaluator.mjs).
+     When window.KB_CORE is present the engine scores from the KB's declarative rule/score
+     instead of the per-syndrome match()/baseScore() closures. Proven byte-identical by the
+     parity fuzz + golden harness; falls back to the closures if KB_CORE is absent. ---- */
+  function kbEvalRule(rule, e) {
+    if (rule == null) return true;
+    if (typeof rule === "string") return !!e[rule];
+    if (Array.isArray(rule)) return rule.every(function (r) { return kbEvalRule(r, e); });
+    if (rule.allOf) return rule.allOf.every(function (r) { return kbEvalRule(r, e); });
+    if (rule.anyOf) return rule.anyOf.some(function (r) { return kbEvalRule(r, e); });
+    if (Object.prototype.hasOwnProperty.call(rule, "not")) return !kbEvalRule(rule.not, e);
+    if (Object.prototype.hasOwnProperty.call(rule, "key")) {
+      var v = e[rule.key];
+      if ("gte" in rule) return v >= rule.gte; if ("gt" in rule) return v > rule.gt;
+      if ("lte" in rule) return v <= rule.lte; if ("lt" in rule) return v < rule.lt;
+      if ("eq" in rule) return v === rule.eq; return !!v;
+    }
+    return false;
+  }
+  function kbEvalScore(sm, e) { if (!sm) return 0; var i = sm.base || 0; var mo = sm.modifiers || []; for (var n = 0; n < mo.length; n++) if (kbEvalRule(mo[n].when, e)) i += mo[n].add; return i; }
+  function kbDisease(id) { return (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[id] : null; }
+
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
   // scoring only — the non-infectious layer keeps the literal findings).
@@ -673,11 +697,12 @@
     var assoc = assocKeys(s);
     var present = assoc.filter(function (k) { return S.fInf[k]; });
     if (!present.length) return null;
+    var _kb = kbDisease(s.id);
     var matched = false;
-    try { matched = !!(s.match && s.match(S.fInf)); } catch (e) {}
+    try { matched = _kb ? kbEvalRule(_kb.rule, S.fInf) : !!(s.match && s.match(S.fInf)); } catch (e) {}
     var sc;
     if (matched) {
-      try { sc = clamp(Math.round(s.baseScore ? s.baseScore(S.fInf) : 60), 0, 100); } catch (e) { sc = 60; }
+      try { sc = clamp(Math.round(_kb ? kbEvalScore(_kb.score, S.fInf) : (s.baseScore ? s.baseScore(S.fInf) : 60)), 0, 100); } catch (e) { sc = 60; }
     } else {
       // soft pre-match suggestion weighted by finding specificity (IDF) AND
       // diagnostic weight, so a shared generic finding (fever) barely surfaces
@@ -693,10 +718,10 @@
     var missing = assoc.filter(function (k) { return !S.fInf[k]; }).slice(0, 5);
     // contradictory = entered findings whose removal RAISES the score (data-driven probe)
     var contra = [];
-    if (matched && s.baseScore) {
+    if (matched && (_kb || s.baseScore)) {
       present.forEach(function (k) {
         var clone = {}; for (var x in S.fInf) clone[x] = S.fInf[x]; delete clone[k];
-        var without; try { without = clamp(Math.round(s.baseScore(clone)), 0, 100); } catch (e) { without = sc; }
+        var without; try { without = clamp(Math.round(_kb ? kbEvalScore(_kb.score, clone) : s.baseScore(clone)), 0, 100); } catch (e) { without = sc; }
         if (without > sc) contra.push(k);
       });
     }
@@ -709,19 +734,21 @@
   }
 
   function scoreNI(d) {
+    var _kb = kbDisease(d.id);
+    var find = (_kb && _kb.find) ? _kb.find : d.find;   // KB is the runtime source of truth (P3)
     var sup = [], contra = [], sum = 0, any = false;
-    for (var k in d.find) { if (S.f[k]) { sum += d.find[k]; any = true; if (d.find[k] > 0) sup.push(k); else if (d.find[k] < 0) contra.push(k); } }
+    for (var k in find) { if (S.f[k]) { sum += find[k]; any = true; if (find[k] > 0) sup.push(k); else if (find[k] < 0) contra.push(k); } }
     if (!any) return null;
     var sc = clamp(Math.round(sum), 0, 100);
     if (sc <= 0 && sup.length === 0) return null;
     var hasVHI = sup.some(function (k) { return fw(k) === 3; });
     sc = clamp(sc + systemMod(dzTag(d.system), hasVHI, S._dom || {}), 0, 100);
     var missing = [];
-    for (var k2 in d.find) { if (!S.f[k2] && d.find[k2] >= 12) missing.push(k2); }
-    missing = missing.sort(function (a, b) { return d.find[b] - d.find[a]; }).slice(0, 5);
+    for (var k2 in find) { if (!S.f[k2] && find[k2] >= 12) missing.push(k2); }
+    missing = missing.sort(function (a, b) { return find[b] - find[a]; }).slice(0, 5);
     return { id: d.id, name: d.name, system: d.system, inf: false, matched: false,
-      score: sc, supporting: sup.sort(function (a, b) { return d.find[b] - d.find[a]; }),
-      contra: contra.sort(function (a, b) { return d.find[a] - d.find[b]; }),
+      score: sc, supporting: sup.sort(function (a, b) { return find[b] - find[a]; }),
+      contra: contra.sort(function (a, b) { return find[a] - find[b]; }),
       missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], tools: d.tools || [] };
   }
 
