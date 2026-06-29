@@ -1,0 +1,60 @@
+{
+  "id": "glomerulonephritis",
+  "name": "Acute glomerulonephritis",
+  "class": "non_infective",
+  "system": "Nephrology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hematuria": 30,
+      "legSwellingBilateral": 22,
+      "hypertensionHx": 16,
+      "headache": 6,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "fever",
+      "headache",
+      "hematuria",
+      "hypertensionHx",
+      "legSwellingBilateral"
+    ],
+    "reasoningTemplate": "Haematuria with oedema and hypertension (nephritic picture) suggests acute glomerulonephritis."
+  },
+  "redFlags": [
+    "Rapidly progressive GN needs urgent nephrology"
+  ],
+  "investigations": [
+    {
+      "test": "Urinalysis (dysmorphic RBCs, casts)"
+    },
+    {
+      "test": "Renal function, complement"
+    },
+    {
+      "test": "ASO / autoimmune serology"
+    }
+  ],
+  "treatmentRef": "glomerulonephritis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

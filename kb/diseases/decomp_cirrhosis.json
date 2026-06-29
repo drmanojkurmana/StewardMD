@@ -1,0 +1,62 @@
+{
+  "id": "decomp_cirrhosis",
+  "name": "Decompensated cirrhosis",
+  "class": "non_infective",
+  "system": "Hepatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "ascites": 30,
+      "jaundice": 24,
+      "asterixis": 14,
+      "legSwellingBilateral": 14,
+      "alteredSensorium": 8,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "ascites",
+      "asterixis",
+      "fever",
+      "jaundice",
+      "legSwellingBilateral"
+    ],
+    "reasoningTemplate": "Ascites and jaundice with stigmata of chronic liver disease suggest decompensated cirrhosis — look for a precipitant."
+  },
+  "redFlags": [
+    "Always tap ascites to exclude SBP (an infective trigger)"
+  ],
+  "investigations": [
+    {
+      "test": "LFTs, INR, ammonia"
+    },
+    {
+      "test": "Ascitic tap (exclude SBP)"
+    },
+    {
+      "test": "Identify decompensation trigger"
+    }
+  ],
+  "treatmentRef": "decomp_cirrhosis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

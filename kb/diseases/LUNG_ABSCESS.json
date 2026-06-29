@@ -1,0 +1,101 @@
+{
+  "id": "LUNG_ABSCESS",
+  "name": "Lung Abscess",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        {
+          "anyOf": [
+            "aspirationRiskFactor",
+            "foulSmellingSputum"
+          ]
+        },
+        "prolongedFever",
+        "cough"
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "foulSmellingSputum",
+          "add": 20
+        },
+        {
+          "when": "prolongedFever",
+          "add": 10
+        },
+        {
+          "when": "weightLoss",
+          "add": 10
+        },
+        {
+          "when": "cavitatingLesion",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "aspirationRiskFactor",
+      "cavitatingLesion",
+      "cough",
+      "foulSmellingSputum",
+      "prolongedFever",
+      "weightLoss"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Oral anaerobes (Peptostreptococcus, Prevotella, Fusobacterium, Bacteroides)"
+    ],
+    "likely": [
+      "Streptococcus species (including microaerophilic strains)",
+      "Staphylococcus aureus"
+    ],
+    "possible": [
+      "Klebsiella pneumoniae (necrotizing pneumonia, especially in diabetics/alcoholics)"
+    ],
+    "why": "Lung abscess is most often a polymicrobial anaerobic process following aspiration, with the same oropharyngeal flora implicated in aspiration pneumonia but with a more indolent, necrotizing course requiring longer treatment."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Chest X-ray and CT chest",
+      "why": "CT better characterizes cavity size, wall thickness, and surrounding parenchymal involvement, and helps distinguish abscess from other cavitary lesions (e.g., malignancy, TB)."
+    },
+    {
+      "test": "Sputum culture (including anaerobic culture if obtainable)",
+      "why": "May identify causative organisms, though anaerobic cultures are technically difficult to obtain without invasive sampling."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "May identify the organism if bacteremic spread has occurred."
+    }
+  ],
+  "treatmentRef": "LUNG_ABSCESS",
+  "policyRef": "LUNG_ABSCESS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,60 @@
+{
+  "id": "drug_intox",
+  "name": "Drug intoxication / poisoning",
+  "class": "non_infective",
+  "system": "Toxicology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 36,
+      "drugOverdose": 42,
+      "seizure": 8,
+      "fever": -10,
+      "neckStiffness": -12
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "drugOverdose",
+      "fever",
+      "neckStiffness",
+      "seizure"
+    ],
+    "reasoningTemplate": "Reduced consciousness with an overdose context points to a toxicological cause."
+  },
+  "redFlags": [
+    "Specific antidotes where available"
+  ],
+  "investigations": [
+    {
+      "test": "Toxidrome assessment"
+    },
+    {
+      "test": "Paracetamol/salicylate levels"
+    },
+    {
+      "test": "ABG, osmolar gap"
+    }
+  ],
+  "treatmentRef": "drug_intox",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

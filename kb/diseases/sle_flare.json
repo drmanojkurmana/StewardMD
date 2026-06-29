@@ -1,0 +1,62 @@
+{
+  "id": "sle_flare",
+  "name": "SLE / autoimmune flare",
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "polyarthralgia": 28,
+      "rash": 22,
+      "jointSwelling": 16,
+      "fever": 12,
+      "weightLoss": 8,
+      "hematuria": 8
+    },
+    "associatedFindings": [
+      "fever",
+      "hematuria",
+      "jointSwelling",
+      "polyarthralgia",
+      "rash",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Polyarthralgia with rash, cytopenias and serositis in the right patient suggests a lupus flare rather than infection."
+  },
+  "redFlags": [
+    "Exclude infection before escalating immunosuppression"
+  ],
+  "investigations": [
+    {
+      "test": "ANA / anti-dsDNA, complement"
+    },
+    {
+      "test": "Urinalysis (active sediment)"
+    },
+    {
+      "test": "CBC (cytopenias)"
+    }
+  ],
+  "treatmentRef": "sle_flare",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

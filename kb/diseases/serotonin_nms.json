@@ -1,0 +1,60 @@
+{
+  "id": "serotonin_nms",
+  "name": "Serotonin syndrome / NMS",
+  "class": "non_infective",
+  "system": "Toxicology / Neuro",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "fever": 18,
+      "rigidity": 32,
+      "alteredSensorium": 18,
+      "drugOverdose": 16,
+      "tachycardia": 10
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "drugOverdose",
+      "fever",
+      "rigidity",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Fever with rigidity/clonus and altered mental state after serotonergic or antipsychotic drugs suggests a toxidrome, not infection."
+  },
+  "redFlags": [
+    "Hyperthermia + rigidity — stop agent, cooling, supportive ICU care"
+  ],
+  "investigations": [
+    {
+      "test": "Medication review (serotonergics/antipsychotics)"
+    },
+    {
+      "test": "CK, renal function"
+    },
+    {
+      "test": "Temperature"
+    }
+  ],
+  "treatmentRef": "serotonin_nms",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

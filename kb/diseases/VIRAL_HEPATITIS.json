@@ -1,0 +1,116 @@
+{
+  "id": "VIRAL_HEPATITIS",
+  "name": "Acute Viral Hepatitis",
+  "class": "infective",
+  "system": "Tropical Fever / Hepatobiliary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "jaundice",
+        {
+          "anyOf": [
+            "fever",
+            "nauseaVomiting"
+          ]
+        },
+        {
+          "not": "rightUpperQuadrantPain"
+        }
+      ]
+    },
+    "score": {
+      "base": 45,
+      "modifiers": [
+        {
+          "when": "jaundice",
+          "add": 20
+        },
+        {
+          "when": "nauseaVomiting",
+          "add": 10
+        },
+        {
+          "when": "darkUrine",
+          "add": 10
+        },
+        {
+          "when": "contaminatedFoodWaterExposure",
+          "add": 10
+        },
+        {
+          "when": "fever",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "contaminatedFoodWaterExposure",
+      "darkUrine",
+      "fever",
+      "jaundice",
+      "nauseaVomiting",
+      "rightUpperQuadrantPain"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Hepatitis A virus",
+      "Hepatitis E virus"
+    ],
+    "likely": [
+      "Hepatitis B virus (if relevant risk factors: injection drug use, unsafe transfusion, vertical transmission)"
+    ],
+    "possible": [
+      "Hepatitis C virus (less commonly causes acute icteric illness)",
+      "Other hepatotropic viruses (CMV, EBV) in atypical presentations"
+    ],
+    "why": "In endemic settings with fecal-oral transmission risk (contaminated food/water), Hepatitis A and E are the dominant causes of acute viral hepatitis, with Hepatitis E of particular concern in pregnancy due to higher fulminant hepatic failure risk. Hepatitis B should be specifically considered with parenteral/sexual risk factors, since management and chronicity implications differ substantially."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Liver function tests",
+      "why": "Marked transaminase elevation (often >10x upper limit of normal) with hyperbilirubinemia is characteristic of acute viral hepatitis and helps distinguish it from other causes of jaundice."
+    },
+    {
+      "test": "Hepatitis A IgM, Hepatitis E IgM",
+      "why": "Confirms the most likely causes in this setting; both are the standard first-line serologic tests for acute fecal-oral hepatitis."
+    },
+    {
+      "test": "Hepatitis B surface antigen (HBsAg), IgM anti-HBc",
+      "why": "Identifies acute Hepatitis B, which has different counseling, monitoring, and contact-tracing/vaccination implications than A or E."
+    },
+    {
+      "test": "Coagulation profile (PT/INR)",
+      "why": "A rising INR is the key early warning sign of evolving acute liver failure and should be tracked closely."
+    },
+    {
+      "test": "Mental status assessment (serial)",
+      "why": "Screens for hepatic encephalopathy, the clinical hallmark of progression to acute liver failure requiring urgent escalation of care."
+    }
+  ],
+  "treatmentRef": "VIRAL_HEPATITIS",
+  "policyRef": "VIRAL_HEPATITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

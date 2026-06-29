@@ -1,0 +1,101 @@
+{
+  "id": "RICKETTSIAL_FEVER",
+  "name": "Rickettsial Fever (Spotted Fever Group)",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "maculopapularRash",
+        {
+          "anyOf": [
+            "tickExposure",
+            "headacheSevere"
+          ]
+        },
+        {
+          "not": "eschar"
+        }
+      ]
+    },
+    "score": {
+      "base": 45,
+      "modifiers": [
+        {
+          "when": "maculopapularRash",
+          "add": 20
+        },
+        {
+          "when": "tickExposure",
+          "add": 15
+        },
+        {
+          "when": "headacheSevere",
+          "add": 5
+        },
+        {
+          "when": "myalgiaArthralgia",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "eschar",
+      "fever",
+      "headacheSevere",
+      "maculopapularRash",
+      "myalgiaArthralgia",
+      "tickExposure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Rickettsia conorii / other spotted fever group Rickettsia species"
+    ],
+    "likely": [],
+    "possible": [
+      "Orientia tsutsugamushi (if eschar is found on closer examination — would reclassify as scrub typhus)"
+    ],
+    "why": "Spotted fever group rickettsioses are transmitted by ticks (rather than the chiggers/mites responsible for scrub typhus) and classically present with a generalized maculopapular or petechial rash rather than a single eschar, though clinical overlap exists and careful skin examination for an eschar should always be performed to distinguish from scrub typhus."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Careful skin examination for eschar and rash characterization",
+      "why": "Helps distinguish spotted fever group rickettsiosis (maculopapular/petechial rash, no eschar) from scrub typhus (eschar), though management is similar."
+    },
+    {
+      "test": "Rickettsial serology (IgM/IgG, species-specific where available) or Weil-Felix (less specific)",
+      "why": "Supports diagnosis, though treatment should not be delayed pending results when clinical suspicion is high."
+    },
+    {
+      "test": "CBC, LFTs, renal function",
+      "why": "Assesses organ involvement; thrombocytopenia and transaminitis are common supportive findings."
+    }
+  ],
+  "treatmentRef": "RICKETTSIAL_FEVER",
+  "policyRef": "RICKETTSIAL_FEVER",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

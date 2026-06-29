@@ -1,0 +1,60 @@
+{
+  "id": "gbs",
+  "name": "Guillain-Barré syndrome",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "ascendingWeakness": 42,
+      "focalNeuroDeficit": 12,
+      "dyspnea": 12,
+      "fever": -8,
+      "neckStiffness": -6
+    },
+    "associatedFindings": [
+      "ascendingWeakness",
+      "dyspnea",
+      "fever",
+      "focalNeuroDeficit",
+      "neckStiffness"
+    ],
+    "reasoningTemplate": "Progressive ascending weakness with areflexia and no fever suggests Guillain-Barré; watch respiratory function."
+  },
+  "redFlags": [
+    "Respiratory failure & autonomic instability — monitor FVC, may need ventilation"
+  ],
+  "investigations": [
+    {
+      "test": "Nerve conduction studies"
+    },
+    {
+      "test": "CSF (albuminocytologic dissociation)"
+    },
+    {
+      "test": "Serial vital capacity / NIF"
+    }
+  ],
+  "treatmentRef": "gbs",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

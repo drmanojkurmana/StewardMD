@@ -1,0 +1,107 @@
+{
+  "id": "CELLULITIS",
+  "name": "Cellulitis",
+  "class": "infective",
+  "system": "Skin & Soft Tissue",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "skinErythema",
+        "skinWarmth",
+        {
+          "not": "diabeticFootUlcer"
+        }
+      ]
+    },
+    "score": {
+      "base": 65,
+      "modifiers": [
+        {
+          "when": "fever",
+          "add": 10
+        },
+        {
+          "when": "purulentDrainage",
+          "add": 10
+        },
+        {
+          "when": "rapidlySpreadingErythema",
+          "add": 15
+        },
+        {
+          "when": "severePain",
+          "add": 10
+        },
+        {
+          "when": "crepitusOrBullae",
+          "add": -20
+        }
+      ]
+    },
+    "associatedFindings": [
+      "crepitusOrBullae",
+      "diabeticFootUlcer",
+      "fever",
+      "purulentDrainage",
+      "rapidlySpreadingErythema",
+      "severePain",
+      "skinErythema",
+      "skinWarmth"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pyogenes (Group A Streptococcus)"
+    ],
+    "likely": [
+      "Staphylococcus aureus (more likely if purulent drainage or abscess present)"
+    ],
+    "possible": [
+      "MRSA (if risk factors: prior MRSA, IV drug use, recent hospitalization)"
+    ],
+    "why": "Non-purulent cellulitis is predominantly streptococcal. Purulent cellulitis or associated abscess shifts likelihood toward S. aureus, including MRSA in at-risk populations, changing the empiric choice accordingly."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None routinely required for typical mild-moderate cellulitis",
+      "why": "Diagnosis is clinical; cultures of intact cellulitic skin have low yield."
+    },
+    {
+      "test": "Blood cultures (if systemically unwell or immunocompromised)",
+      "why": "Identifies bacteremic spread in more severe presentations."
+    },
+    {
+      "test": "Wound/abscess culture (if purulent drainage present)",
+      "why": "Identifies organism and susceptibility, particularly important given variable MRSA prevalence."
+    },
+    {
+      "test": "CBC, CRP",
+      "why": "Supports severity assessment and provides a baseline to track response."
+    }
+  ],
+  "treatmentRef": "CELLULITIS",
+  "policyRef": "CELLULITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

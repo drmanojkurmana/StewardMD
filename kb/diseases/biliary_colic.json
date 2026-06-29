@@ -1,0 +1,57 @@
+{
+  "id": "biliary_colic",
+  "name": "Biliary colic / cholelithiasis",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "rightUpperQuadrantPain": 34,
+      "nauseaVomiting": 16,
+      "murphySign": 10,
+      "fever": -12,
+      "jaundice": -6
+    },
+    "associatedFindings": [
+      "fever",
+      "jaundice",
+      "murphySign",
+      "nauseaVomiting",
+      "rightUpperQuadrantPain"
+    ],
+    "reasoningTemplate": "Episodic RUQ pain after meals without fever suggests biliary colic rather than infection."
+  },
+  "redFlags": [
+    "Fever/jaundice → cholecystitis/cholangitis (infective)"
+  ],
+  "investigations": [
+    {
+      "test": "Abdominal ultrasound"
+    },
+    {
+      "test": "LFTs"
+    }
+  ],
+  "treatmentRef": "biliary_colic",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

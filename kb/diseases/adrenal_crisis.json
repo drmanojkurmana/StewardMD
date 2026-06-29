@@ -1,0 +1,60 @@
+{
+  "id": "adrenal_crisis",
+  "name": "Adrenal crisis",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hypotension": 36,
+      "steroidUse": 34,
+      "fever": -4,
+      "alteredSensorium": 8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "hypotension",
+      "steroidUse"
+    ],
+    "reasoningTemplate": "Refractory hypotension in a steroid-dependent patient suggests adrenal crisis."
+  },
+  "redFlags": [
+    "Give IV hydrocortisone if suspected"
+  ],
+  "investigations": [
+    {
+      "test": "Random cortisol"
+    },
+    {
+      "test": "Electrolytes (Na↓ K↑)"
+    },
+    {
+      "test": "Empiric hydrocortisone"
+    }
+  ],
+  "treatmentRef": "adrenal_crisis",
+  "policyRef": null,
+  "calculatorRefs": [
+    "shock"
+  ],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

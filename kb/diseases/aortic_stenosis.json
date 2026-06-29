@@ -1,0 +1,60 @@
+{
+  "id": "aortic_stenosis",
+  "name": "Aortic stenosis (syncope)",
+  "class": "non_infective",
+  "system": "Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "syncope": 32,
+      "exertionalChestPain": 20,
+      "dyspnea": 16,
+      "ageOver50": 12,
+      "palpitations": 6
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "dyspnea",
+      "exertionalChestPain",
+      "palpitations",
+      "syncope"
+    ],
+    "reasoningTemplate": "Exertional syncope with an ejection systolic murmur suggests severe aortic stenosis."
+  },
+  "redFlags": [
+    "Exertional syncope is a red flag"
+  ],
+  "investigations": [
+    {
+      "test": "Echocardiogram"
+    },
+    {
+      "test": "ECG"
+    },
+    {
+      "test": "Examine for ejection systolic murmur"
+    }
+  ],
+  "treatmentRef": "aortic_stenosis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

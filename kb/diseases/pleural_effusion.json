@@ -1,0 +1,55 @@
+{
+  "id": "pleural_effusion",
+  "name": "Pleural effusion",
+  "class": "non_infective",
+  "system": "Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 26,
+      "pleuriticChestPain": 16,
+      "hypoxia": 10,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "fever",
+      "hypoxia",
+      "pleuriticChestPain"
+    ],
+    "reasoningTemplate": "Breathlessness with reduced breath sounds and stony dullness suggests a pleural effusion; tap to characterise."
+  },
+  "redFlags": [
+    "Empyema if infected — needs drainage"
+  ],
+  "investigations": [
+    {
+      "test": "CXR / thoracic ultrasound"
+    },
+    {
+      "test": "Diagnostic pleural tap (Light's criteria)"
+    }
+  ],
+  "treatmentRef": "pleural_effusion",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

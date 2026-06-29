@@ -1,0 +1,60 @@
+{
+  "id": "ild",
+  "name": "Interstitial lung disease",
+  "class": "non_infective",
+  "system": "Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 30,
+      "hypoxia": 18,
+      "bilateralCrackles": 24,
+      "weightLoss": 8,
+      "fever": -10
+    },
+    "associatedFindings": [
+      "bilateralCrackles",
+      "dyspnea",
+      "fever",
+      "hypoxia",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Progressive exertional dyspnoea with fine bibasal crackles and no fever points to interstitial lung disease."
+  },
+  "redFlags": [
+    "Acute exacerbation can be life-threatening"
+  ],
+  "investigations": [
+    {
+      "test": "High-resolution CT chest"
+    },
+    {
+      "test": "Pulmonary function tests"
+    },
+    {
+      "test": "Autoimmune serology"
+    }
+  ],
+  "treatmentRef": "ild",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,60 @@
+{
+  "id": "temporal_arteritis",
+  "name": "Giant cell (temporal) arteritis",
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 28,
+      "visualDisturbance": 24,
+      "ageOver50": 22,
+      "polyarthralgia": 8,
+      "weightLoss": 8
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "headache",
+      "polyarthralgia",
+      "visualDisturbance",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "New headache with visual symptoms in a patient over 50 with raised inflammatory markers suggests giant cell arteritis."
+  },
+  "redFlags": [
+    "Visual loss is an emergency — do not delay steroids"
+  ],
+  "investigations": [
+    {
+      "test": "ESR / CRP (markedly raised)"
+    },
+    {
+      "test": "Temporal artery biopsy"
+    },
+    {
+      "test": "Start high-dose steroids if suspected"
+    }
+  ],
+  "treatmentRef": "temporal_arteritis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

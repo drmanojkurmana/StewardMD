@@ -1,0 +1,108 @@
+{
+  "id": "SCRUB_TYPHUS",
+  "name": "Scrub Typhus",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        {
+          "anyOf": [
+            "eschar",
+            "lymphadenopathy",
+            "ruralExposure"
+          ]
+        },
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 45,
+      "modifiers": [
+        {
+          "when": "eschar",
+          "add": 30
+        },
+        {
+          "when": "lymphadenopathy",
+          "add": 10
+        },
+        {
+          "when": "ruralExposure",
+          "add": 10
+        },
+        {
+          "when": "rash",
+          "add": 5
+        },
+        {
+          "when": "organDysfunction",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "eschar",
+      "fever",
+      "lymphadenopathy",
+      "neckStiffness",
+      "organDysfunction",
+      "rash",
+      "ruralExposure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Orientia tsutsugamushi"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "Orientia tsutsugamushi is the sole cause of scrub typhus; the clinical diagnosis (eschar, lymphadenopathy, exposure history in an endemic rural/peri-urban setting) is often sufficiently characteristic to justify empiric treatment before serology returns."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Careful skin examination for eschar",
+      "why": "Eschar (a painless, often overlooked necrotic lesion at the chigger bite site) is highly specific for scrub typhus when found — actively look in skin folds, axillae, groin."
+    },
+    {
+      "test": "Scrub typhus IgM ELISA / Weil-Felix (less specific)",
+      "why": "Confirms diagnosis serologically, though treatment should not wait for results when clinical suspicion is high."
+    },
+    {
+      "test": "CBC, LFTs, renal function",
+      "why": "Assesses organ involvement; transaminitis and thrombocytopenia are common supportive findings."
+    },
+    {
+      "test": "Chest X-ray (if respiratory symptoms)",
+      "why": "Screens for ARDS, a recognized complication of severe/delayed scrub typhus."
+    }
+  ],
+  "treatmentRef": "SCRUB_TYPHUS",
+  "policyRef": "SCRUB_TYPHUS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

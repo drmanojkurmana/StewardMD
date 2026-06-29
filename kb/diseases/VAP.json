@@ -1,0 +1,109 @@
+{
+  "id": "VAP",
+  "name": "Ventilator Associated Pneumonia",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "mechanicalVentilation",
+        "hospitalDay48",
+        {
+          "anyOf": [
+            "fever",
+            "purulentSecretions"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 70,
+      "modifiers": [
+        {
+          "when": "mechanicalVentilation",
+          "add": 25
+        },
+        {
+          "when": "purulentSecretions",
+          "add": 10
+        },
+        {
+          "when": "worseningOxygenation",
+          "add": 15
+        },
+        {
+          "when": "mdrRisk",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "fever",
+      "hospitalDay48",
+      "mdrRisk",
+      "mechanicalVentilation",
+      "purulentSecretions",
+      "worseningOxygenation"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Pseudomonas aeruginosa",
+      "Klebsiella pneumoniae (including ESBL/carbapenem-resistant strains)",
+      "Acinetobacter baumannii"
+    ],
+    "likely": [
+      "MRSA",
+      "Escherichia coli"
+    ],
+    "possible": [
+      "Stenotrophomonas maltophilia in prolonged ICU stay"
+    ],
+    "why": "VAP pathogens reflect the most resistant end of the nosocomial spectrum, given prolonged ICU exposure, prior antibiotics, and device-associated colonization. Local ICU antibiogram should directly inform empiric choice."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Quantitative endotracheal aspirate or BAL culture",
+      "why": "Gold standard to identify causative organism and guide de-escalation in VAP."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "Detects bacteremic spread."
+    },
+    {
+      "test": "Chest X-ray (serial)",
+      "why": "Tracks new or progressive infiltrate."
+    },
+    {
+      "test": "Procalcitonin (serial)",
+      "why": "Supports shortened duration of therapy when trending down with clinical improvement."
+    }
+  ],
+  "treatmentRef": "VAP",
+  "policyRef": "VAP",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

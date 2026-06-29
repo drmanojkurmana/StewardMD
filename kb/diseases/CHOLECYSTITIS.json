@@ -1,0 +1,102 @@
+{
+  "id": "CHOLECYSTITIS",
+  "name": "Acute Cholecystitis",
+  "class": "infective",
+  "system": "Hepatobiliary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "rightUpperQuadrantPain",
+        "feverGU",
+        {
+          "not": "jaundice"
+        },
+        "murphySign"
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "murphySign",
+          "add": 20
+        },
+        {
+          "when": "feverGU",
+          "add": 10
+        },
+        {
+          "when": "nauseaVomiting",
+          "add": 5
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "feverGU",
+      "hypotension",
+      "jaundice",
+      "murphySign",
+      "nauseaVomiting",
+      "rightUpperQuadrantPain"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Escherichia coli",
+      "Klebsiella pneumoniae"
+    ],
+    "likely": [
+      "Enterococcus species",
+      "Anaerobes (Bacteroides) — more relevant in severe/gangrenous cholecystitis"
+    ],
+    "possible": [],
+    "why": "Acute cholecystitis pathogens reflect the same enteric flora seen in other biliary tract infections, dominated by gram-negative Enterobacteriaceae, with anaerobes becoming more relevant in more severe, necrotizing presentations."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Abdominal ultrasound",
+      "why": "First-line imaging — gallstones, gallbladder wall thickening, and pericholecystic fluid support the diagnosis."
+    },
+    {
+      "test": "Liver function tests",
+      "why": "Typically mildly elevated; significant jaundice should prompt consideration of choledocholithiasis or cholangitis instead."
+    },
+    {
+      "test": "CBC",
+      "why": "Leukocytosis supports the diagnosis and tracks response."
+    },
+    {
+      "test": "Blood cultures (if systemically unwell)",
+      "why": "May identify bacteremia and guide de-escalation."
+    }
+  ],
+  "treatmentRef": "CHOLECYSTITIS",
+  "policyRef": "CHOLECYSTITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

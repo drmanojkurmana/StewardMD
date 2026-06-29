@@ -1,0 +1,110 @@
+{
+  "id": "LIVER_ABSCESS",
+  "name": "Liver Abscess",
+  "class": "infective",
+  "system": "Hepatobiliary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "rightUpperQuadrantPain",
+        "feverGU",
+        {
+          "not": "jaundice"
+        },
+        {
+          "not": "murphySign"
+        }
+      ]
+    },
+    "score": {
+      "base": 60,
+      "modifiers": [
+        {
+          "when": "feverGU",
+          "add": 15
+        },
+        {
+          "when": "rightUpperQuadrantPain",
+          "add": 10
+        },
+        {
+          "when": "weightLoss",
+          "add": 5
+        },
+        {
+          "when": "hypotension",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "feverGU",
+      "hypotension",
+      "jaundice",
+      "murphySign",
+      "rightUpperQuadrantPain",
+      "weightLoss"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Klebsiella pneumoniae (especially in diabetics, particularly in Asia)",
+      "Escherichia coli"
+    ],
+    "likely": [
+      "Streptococcus species",
+      "Anaerobes (Bacteroides, if biliary or colonic source)"
+    ],
+    "possible": [
+      "Entamoeba histolytica (amebic liver abscess — common in endemic regions including India, typically single right lobe lesion)"
+    ],
+    "why": "Pyogenic liver abscess in this region is frequently caused by Klebsiella pneumoniae, especially in diabetic patients, often via cryptogenic or biliary spread. Amebic liver abscess remains an important and treatable alternative diagnosis with a different specific therapy (metronidazole), requiring serology/aspirate testing to distinguish."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Abdominal ultrasound or CT",
+      "why": "Confirms presence, size, number, and location of abscess(es), and guides drainage planning."
+    },
+    {
+      "test": "Image-guided aspiration with Gram stain, culture, and microscopy",
+      "why": "Definitively distinguishes pyogenic from amebic abscess and identifies the specific organism for targeted therapy."
+    },
+    {
+      "test": "Amebic serology (IgG)",
+      "why": "Supports diagnosis of amebic liver abscess, especially useful when aspiration is not performed or is inconclusive."
+    },
+    {
+      "test": "Blood cultures",
+      "why": "May identify the causative organism in pyogenic abscess, particularly Klebsiella, without requiring aspiration."
+    },
+    {
+      "test": "HbA1c/blood glucose",
+      "why": "Diabetes is a major risk factor for Klebsiella liver abscess and affects overall management."
+    }
+  ],
+  "treatmentRef": "LIVER_ABSCESS",
+  "policyRef": "LIVER_ABSCESS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

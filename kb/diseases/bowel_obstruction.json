@@ -1,0 +1,60 @@
+{
+  "id": "bowel_obstruction",
+  "name": "Bowel obstruction",
+  "class": "non_infective",
+  "system": "Surgical / GI",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "abdominalPain": 28,
+      "abdominalDistension": 30,
+      "nauseaVomiting": 20,
+      "constipationOrDiarrhea": 12,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "abdominalDistension",
+      "abdominalPain",
+      "constipationOrDiarrhea",
+      "fever",
+      "nauseaVomiting"
+    ],
+    "reasoningTemplate": "Colicky pain with distension and vomiting and absolute constipation suggests obstruction."
+  },
+  "redFlags": [
+    "Strangulation / perforation → emergency surgery"
+  ],
+  "investigations": [
+    {
+      "test": "Erect/supine abdominal X-ray or CT"
+    },
+    {
+      "test": "NG decompression"
+    },
+    {
+      "test": "Surgical review"
+    }
+  ],
+  "treatmentRef": "bowel_obstruction",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,60 @@
+{
+  "id": "iih",
+  "name": "Idiopathic intracranial hypertension",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 30,
+      "visualDisturbance": 24,
+      "papilledema": 30,
+      "fever": -12,
+      "neckStiffness": -8
+    },
+    "associatedFindings": [
+      "fever",
+      "headache",
+      "neckStiffness",
+      "papilledema",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Headache with visual disturbance and papilloedema in the right demographic suggests raised intracranial pressure without a mass."
+  },
+  "redFlags": [
+    "Progressive visual loss needs urgent treatment"
+  ],
+  "investigations": [
+    {
+      "test": "Fundoscopy (papilloedema)"
+    },
+    {
+      "test": "MRI + MR venography"
+    },
+    {
+      "test": "LP with opening pressure"
+    }
+  ],
+  "treatmentRef": "iih",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

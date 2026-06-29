@@ -1,0 +1,53 @@
+{
+  "id": "crystal_arthritis",
+  "name": "Crystal arthritis (gout / pseudogout)",
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "polyarthralgia": 24,
+      "jointSwelling": 30,
+      "fever": 8
+    },
+    "associatedFindings": [
+      "fever",
+      "jointSwelling",
+      "polyarthralgia"
+    ],
+    "reasoningTemplate": "Acute mono/oligoarticular hot joint may be crystal-induced — but exclude septic arthritis by aspiration."
+  },
+  "redFlags": [
+    "Septic arthritis must be excluded by aspiration"
+  ],
+  "investigations": [
+    {
+      "test": "Joint aspiration + polarised microscopy"
+    },
+    {
+      "test": "Serum urate (off-attack)"
+    }
+  ],
+  "treatmentRef": "crystal_arthritis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

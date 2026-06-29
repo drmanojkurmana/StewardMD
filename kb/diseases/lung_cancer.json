@@ -1,0 +1,62 @@
+{
+  "id": "lung_cancer",
+  "name": "Lung cancer",
+  "class": "non_infective",
+  "system": "Oncology / Pulmonary",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hemoptysis": 28,
+      "weightLoss": 24,
+      "ageOver50": 14,
+      "cough": 14,
+      "lymphadenopathy": 8,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "cough",
+      "fever",
+      "hemoptysis",
+      "lymphadenopathy",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Haemoptysis and weight loss in an older smoker raise concern for bronchogenic carcinoma."
+  },
+  "redFlags": [
+    "Haemoptysis with weight loss in a smoker — urgent 2-week-wait pathway"
+  ],
+  "investigations": [
+    {
+      "test": "CXR / CT chest"
+    },
+    {
+      "test": "Bronchoscopy / biopsy"
+    },
+    {
+      "test": "Staging imaging"
+    }
+  ],
+  "treatmentRef": "lung_cancer",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

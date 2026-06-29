@@ -1,0 +1,62 @@
+{
+  "id": "sarcoidosis",
+  "name": "Sarcoidosis",
+  "class": "non_infective",
+  "system": "Pulmonary / Multisystem",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "lymphadenopathy": 22,
+      "dyspnea": 16,
+      "polyarthralgia": 14,
+      "cough": 12,
+      "rash": 10,
+      "fever": 6
+    },
+    "associatedFindings": [
+      "cough",
+      "dyspnea",
+      "fever",
+      "lymphadenopathy",
+      "polyarthralgia",
+      "rash"
+    ],
+    "reasoningTemplate": "Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma."
+  },
+  "redFlags": [
+    "Exclude TB/lymphoma before steroids"
+  ],
+  "investigations": [
+    {
+      "test": "CXR (bilateral hilar lymphadenopathy)"
+    },
+    {
+      "test": "Serum ACE, calcium"
+    },
+    {
+      "test": "Biopsy (non-caseating granuloma)"
+    }
+  ],
+  "treatmentRef": "sarcoidosis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

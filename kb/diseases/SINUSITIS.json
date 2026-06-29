@@ -1,0 +1,94 @@
+{
+  "id": "SINUSITIS",
+  "name": "Acute Sinusitis (Rhinosinusitis)",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "anyOf": [
+        "facialPain",
+        "nasalCongestion",
+        "purulentNasalDischarge"
+      ]
+    },
+    "score": {
+      "base": 35,
+      "modifiers": [
+        {
+          "when": "symptomsOver10Days",
+          "add": 25
+        },
+        {
+          "when": "doubleSickening",
+          "add": 25
+        },
+        {
+          "when": {
+            "allOf": [
+              "fever",
+              "facialPain"
+            ]
+          },
+          "add": 15
+        },
+        {
+          "when": "unilateralFacialPain",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "doubleSickening",
+      "facialPain",
+      "fever",
+      "nasalCongestion",
+      "purulentNasalDischarge",
+      "symptomsOver10Days",
+      "unilateralFacialPain"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Respiratory viruses (vast majority of acute sinusitis)"
+    ],
+    "likely": [
+      "Streptococcus pneumoniae",
+      "Haemophilus influenzae (when bacterial criteria met)"
+    ],
+    "possible": [
+      "Moraxella catarrhalis"
+    ],
+    "why": "Bacterial sinusitis is a secondary, less common event following viral URTI; criteria such as symptom duration >10 days or double-sickening identify the subset where bacterial superinfection by typical respiratory pathogens is likely enough to justify treatment."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None routinely required",
+      "why": "Diagnosis is clinical; imaging is reserved for suspected complications (orbital/intracranial extension) or recurrent/chronic disease."
+    }
+  ],
+  "treatmentRef": "SINUSITIS",
+  "policyRef": "SINUSITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

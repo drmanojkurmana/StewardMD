@@ -1,0 +1,92 @@
+{
+  "id": "MIXED_MALARIA",
+  "name": "Mixed Malaria (P. falciparum + P. vivax)",
+  "class": "infective",
+  "system": "Tropical Fever",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "mixedMalariaConfirmed"
+      ]
+    },
+    "score": {
+      "base": 70,
+      "modifiers": [
+        {
+          "when": "thrombocytopenia",
+          "add": 10
+        },
+        {
+          "when": "splenomegaly",
+          "add": 5
+        },
+        {
+          "when": "organDysfunction",
+          "add": 15
+        }
+      ]
+    },
+    "associatedFindings": [
+      "fever",
+      "mixedMalariaConfirmed",
+      "organDysfunction",
+      "splenomegaly",
+      "thrombocytopenia"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Plasmodium falciparum",
+      "Plasmodium vivax"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "By definition, mixed malaria involves confirmed co-infection with both species on smear/RDT/PCR — management must address the more dangerous P. falciparum component fully (as the primary driver of severe disease risk) while also providing radical cure for P. vivax (including primaquine for hypnozoite clearance after G6PD testing)."
+  },
+  "redFlags": [
+    "Urgent antimalarial therapy required (NOT an antibiotic)"
+  ],
+  "investigations": [
+    {
+      "test": "Peripheral blood smear (thick and thin film) confirming both species",
+      "why": "Definitive method to confirm mixed infection and quantify parasitemia of each species, directly determining treatment approach and monitoring intensity."
+    },
+    {
+      "test": "Rapid diagnostic test (combination P.f/P.v if available)",
+      "why": "Can support or suggest mixed infection rapidly, though smear remains the definitive confirmatory test."
+    },
+    {
+      "test": "G6PD testing",
+      "why": "Mandatory before primaquine administration to avoid precipitating hemolysis in deficient patients."
+    },
+    {
+      "test": "CBC, renal function, blood glucose, LFTs",
+      "why": "Screens for organ dysfunction that would classify this as severe/complicated malaria requiring IV therapy and escalated care."
+    }
+  ],
+  "treatmentRef": "MIXED_MALARIA",
+  "policyRef": "MIXED_MALARIA",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

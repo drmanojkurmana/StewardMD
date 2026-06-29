@@ -1,0 +1,63 @@
+{
+  "id": "migraine",
+  "name": "Migraine",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "headache": 42,
+      "photophobia": 18,
+      "visualDisturbance": 16,
+      "nauseaVomiting": 10,
+      "fever": -18,
+      "neckStiffness": -14,
+      "alteredSensorium": -12,
+      "focalNeuroDeficit": -6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "focalNeuroDeficit",
+      "headache",
+      "nauseaVomiting",
+      "neckStiffness",
+      "photophobia",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Recurrent headache with photophobia and nausea, no fever or meningism, favours primary migraine."
+  },
+  "redFlags": [
+    "New focal deficit, thunderclap onset, or fever → exclude secondary cause"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical diagnosis (POUND criteria)"
+    },
+    {
+      "test": "Neuroimaging only if red flags"
+    }
+  ],
+  "treatmentRef": "migraine",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

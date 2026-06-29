@@ -1,0 +1,89 @@
+{
+  "id": "GASTROENTERITIS",
+  "name": "Acute Gastroenteritis",
+  "class": "infective",
+  "system": "Gastrointestinal",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "diarrhea",
+        {
+          "not": "bloodyStool"
+        },
+        {
+          "not": "highFeverGI"
+        }
+      ]
+    },
+    "score": {
+      "base": 75,
+      "modifiers": [
+        {
+          "when": "bloodyStool",
+          "add": -40
+        },
+        {
+          "when": "highFeverGI",
+          "add": -20
+        },
+        {
+          "when": "dehydration",
+          "add": -5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "bloodyStool",
+      "dehydration",
+      "diarrhea",
+      "highFeverGI"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Norovirus",
+      "Rotavirus (in children)",
+      "Enterotoxigenic E. coli"
+    ],
+    "likely": [
+      "Other viral enteropathogens"
+    ],
+    "possible": [],
+    "why": "Watery non-inflammatory diarrhea is predominantly viral or toxin-mediated; invasive bacterial pathogens are more strongly associated with bloody stool, high fever, and systemic symptoms (see Dysentery)."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None routinely required in mild self-limited cases",
+      "why": "Most cases resolve without specific identification of organism."
+    },
+    {
+      "test": "Stool routine/microscopy (if symptoms persist beyond 7 days or in immunocompromised)",
+      "why": "Identifies parasitic causes (e.g., Giardia) that require specific therapy."
+    }
+  ],
+  "treatmentRef": "GASTROENTERITIS",
+  "policyRef": "GASTROENTERITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

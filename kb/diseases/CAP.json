@@ -1,38 +1,128 @@
 {
   "id": "CAP",
-  "name": "Community-acquired pneumonia",
-  "aliases": ["pneumonia", "CAP"],
+  "name": "Community Acquired Pneumonia (non-severe)",
   "class": "infective",
   "system": "Respiratory",
-  "coding": { "icd10": "J18", "icd11": null, "snomed": null },
-  "matching": {
-    "rule": { "allOf": ["cough", { "anyOf": ["fever", "crepitations", "consolidation"] }, { "not": "severeCriteria" }] },
-    "score": { "base": 40, "modifiers": [
-      { "when": "fever", "add": 15 },
-      { "when": "productiveCough", "add": 10 },
-      { "when": "crepitations", "add": 20 },
-      { "when": "tachypnea", "add": 10 },
-      { "when": "pleuriticPain", "add": 8 },
-      { "when": "consolidation", "add": 15 },
-      { "when": { "key": "curb65", "gte": 2 }, "add": -30 }
-    ] },
-    "associatedFindings": ["cough", "fever", "crepitations", "consolidation", "productiveCough", "tachypnea", "pleuriticPain", "severeCriteria"],
-    "reasoningTemplate": "Cough with fever/crackles/consolidation and no severe-disease criteria fits community-acquired pneumonia; stratify severity (CURB-65)."
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
   },
-  "pathogens": { "veryLikely": ["Streptococcus pneumoniae"], "likely": ["Mycoplasma pneumoniae", "Haemophilus influenzae"], "possible": ["Legionella", "respiratory viruses"], "why": "Typical + atypical community pathogens." },
-  "differentials": ["SEVERE_CAP", "HAP", "PULMONARY_TB"],
-  "redFlags": ["Rising CURB-65 / hypoxia → severe CAP pathway"],
-  "investigations": [{ "test": "CXR", "why": "Confirm infiltrate" }, { "test": "CURB-65 + SpO2", "why": "Severity" }],
-  "narrative": [
-    { "section": "overview", "text": "Confirm with CXR, stratify with CURB-65, and start guideline-concordant empiric antibiotics promptly.", "source": { "ref": "Harrison 22e", "locator": { "page": null, "section": "Pneumonia" } }, "embedding": null }
+  "matching": {
+    "rule": {
+      "allOf": [
+        "cough",
+        {
+          "anyOf": [
+            "fever",
+            "crepitations",
+            "consolidation"
+          ]
+        },
+        {
+          "not": "severeCriteria"
+        }
+      ]
+    },
+    "score": {
+      "base": 40,
+      "modifiers": [
+        {
+          "when": "fever",
+          "add": 15
+        },
+        {
+          "when": "productiveCough",
+          "add": 10
+        },
+        {
+          "when": "crepitations",
+          "add": 20
+        },
+        {
+          "when": "tachypnea",
+          "add": 10
+        },
+        {
+          "when": "pleuriticPain",
+          "add": 8
+        },
+        {
+          "when": "consolidation",
+          "add": 15
+        },
+        {
+          "when": {
+            "key": "curb65",
+            "gte": 2
+          },
+          "add": -30
+        }
+      ]
+    },
+    "associatedFindings": [
+      "consolidation",
+      "cough",
+      "crepitations",
+      "curb65",
+      "fever",
+      "pleuriticPain",
+      "productiveCough",
+      "severeCriteria",
+      "tachypnea"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Streptococcus pneumoniae",
+      "Haemophilus influenzae"
+    ],
+    "likely": [
+      "Mycoplasma pneumoniae",
+      "Chlamydophila pneumoniae"
+    ],
+    "possible": [
+      "Legionella pneumophila",
+      "Respiratory viruses (influenza, RSV)"
+    ],
+    "why": "Outpatient/ward-level CAP without severity criteria is overwhelmingly community-acquired and typical-organism predominant. S. pneumoniae remains the leading cause across age groups; H. influenzae is more frequent in smokers and COPD. Atypicals (Mycoplasma, Chlamydophila) are added because clinical and radiographic findings cannot reliably distinguish typical from atypical pneumonia."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Chest X-ray",
+      "why": "Confirms presence and pattern of consolidation; supports diagnosis and baseline for response assessment."
+    },
+    {
+      "test": "CBC",
+      "why": "Leukocytosis with neutrophilia supports a bacterial process and provides a baseline."
+    },
+    {
+      "test": "CRP",
+      "why": "Elevated CRP supports bacterial etiology and can track response."
+    },
+    {
+      "test": "Pulse oximetry",
+      "why": "Screens for hypoxia which would reclassify severity and site of care."
+    }
   ],
   "treatmentRef": "CAP",
   "policyRef": "CAP",
-  "calculatorRefs": ["curb65"],
+  "calculatorRefs": [],
   "icuModuleRefs": [],
-  "drugRefs": ["amoxicillin", "azithromycin", "ceftriaxone", "doxycycline"],
-  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
-  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
   "version": 1,
   "contentHash": null
 }

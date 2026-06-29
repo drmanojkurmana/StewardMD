@@ -1,0 +1,60 @@
+{
+  "id": "salicylate_tox",
+  "name": "Salicylate toxicity",
+  "class": "non_infective",
+  "system": "Toxicology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "tachypnea": 24,
+      "alteredSensorium": 18,
+      "drugOverdose": 24,
+      "nauseaVomiting": 10,
+      "fever": 6
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "drugOverdose",
+      "fever",
+      "nauseaVomiting",
+      "tachypnea"
+    ],
+    "reasoningTemplate": "Tachypnoea with a mixed respiratory alkalosis/metabolic acidosis and tinnitus suggests salicylate poisoning."
+  },
+  "redFlags": [
+    "Consider urinary alkalinisation / dialysis"
+  ],
+  "investigations": [
+    {
+      "test": "Salicylate level (serial)"
+    },
+    {
+      "test": "ABG (mixed acid-base)"
+    },
+    {
+      "test": "Glucose, electrolytes"
+    }
+  ],
+  "treatmentRef": "salicylate_tox",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

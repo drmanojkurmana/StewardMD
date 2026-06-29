@@ -1,0 +1,60 @@
+{
+  "id": "anemia_sympt",
+  "name": "Symptomatic anaemia",
+  "class": "non_infective",
+  "system": "Hematology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 22,
+      "palpitations": 16,
+      "weightLoss": 8,
+      "melena": 12,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "fever",
+      "melena",
+      "palpitations",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Exertional breathlessness and palpitations with pallor suggest anaemia; seek the cause."
+  },
+  "redFlags": [
+    "Active bleeding → resuscitate"
+  ],
+  "investigations": [
+    {
+      "test": "CBC, peripheral smear"
+    },
+    {
+      "test": "Iron studies, B12/folate"
+    },
+    {
+      "test": "Identify blood loss"
+    }
+  ],
+  "treatmentRef": "anemia_sympt",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

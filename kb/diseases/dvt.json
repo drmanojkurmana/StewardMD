@@ -1,0 +1,58 @@
+{
+  "id": "dvt",
+  "name": "Deep vein thrombosis",
+  "class": "non_infective",
+  "system": "Vascular",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "legSwellingUnilateral": 38,
+      "calfTenderness": 30,
+      "anticoagulated": -8,
+      "fever": -12
+    },
+    "associatedFindings": [
+      "anticoagulated",
+      "calfTenderness",
+      "fever",
+      "legSwellingUnilateral"
+    ],
+    "reasoningTemplate": "Unilateral leg swelling and calf tenderness suggest DVT rather than cellulitis."
+  },
+  "redFlags": [
+    "Anticoagulate; assess for PE"
+  ],
+  "investigations": [
+    {
+      "test": "Compression ultrasound (Doppler)"
+    },
+    {
+      "test": "D-dimer"
+    },
+    {
+      "test": "Wells score"
+    }
+  ],
+  "treatmentRef": "dvt",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

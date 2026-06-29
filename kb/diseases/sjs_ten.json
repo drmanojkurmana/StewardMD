@@ -1,0 +1,58 @@
+{
+  "id": "sjs_ten",
+  "name": "Stevens-Johnson syndrome / TEN",
+  "class": "non_infective",
+  "system": "Dermatology / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "rash": 26,
+      "mucosalLesions": 34,
+      "drugOverdose": 14,
+      "fever": 12
+    },
+    "associatedFindings": [
+      "drugOverdose",
+      "fever",
+      "mucosalLesions",
+      "rash"
+    ],
+    "reasoningTemplate": "Painful rash with mucosal erosions and skin detachment after a new drug suggests SJS/TEN, not cellulitis."
+  },
+  "redFlags": [
+    "Skin detachment — manage like a burn; high mortality"
+  ],
+  "investigations": [
+    {
+      "test": "Stop the culprit drug"
+    },
+    {
+      "test": "Dermatology review"
+    },
+    {
+      "test": "SCORTEN severity"
+    }
+  ],
+  "treatmentRef": "sjs_ten",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,58 @@
+{
+  "id": "pericarditis",
+  "name": "Acute pericarditis",
+  "class": "non_infective",
+  "system": "Cardiology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "pleuriticChestPain": 30,
+      "chestPain": 18,
+      "fever": 8,
+      "ecgIschemia": -6
+    },
+    "associatedFindings": [
+      "chestPain",
+      "ecgIschemia",
+      "fever",
+      "pleuriticChestPain"
+    ],
+    "reasoningTemplate": "Sharp pleuritic chest pain relieved by sitting forward, with typical ECG changes, suggests pericarditis."
+  },
+  "redFlags": [
+    "Tamponade if effusion enlarges"
+  ],
+  "investigations": [
+    {
+      "test": "ECG (diffuse ST elevation, PR depression)"
+    },
+    {
+      "test": "Echocardiogram"
+    },
+    {
+      "test": "Inflammatory markers"
+    }
+  ],
+  "treatmentRef": "pericarditis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

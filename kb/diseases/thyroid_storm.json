@@ -1,0 +1,60 @@
+{
+  "id": "thyroid_storm",
+  "name": "Thyroid storm",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "fever": 18,
+      "tachycardia": 24,
+      "palpitations": 20,
+      "alteredSensorium": 16,
+      "diarrhea": 10
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "diarrhea",
+      "fever",
+      "palpitations",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Fever, tachycardia and agitation with thyrotoxic features suggest thyroid storm — a non-infectious cause of fever."
+  },
+  "redFlags": [
+    "Life-threatening — beta-blockade, antithyroid drugs"
+  ],
+  "investigations": [
+    {
+      "test": "TFTs (TSH↓, free T4/T3↑)"
+    },
+    {
+      "test": "ECG"
+    },
+    {
+      "test": "Burch-Wartofsky score"
+    }
+  ],
+  "treatmentRef": "thyroid_storm",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

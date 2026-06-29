@@ -7,7 +7,8 @@
   "additionalProperties": false,
   "required": ["id", "name", "class", "matching", "provenance", "review", "version"],
   "properties": {
-    "id": { "type": "string", "pattern": "^[A-Z0-9_]+$", "description": "Stable uppercase universal disease key (e.g. MENINGITIS). Never reused." },
+    "id": { "type": "string", "pattern": "^[A-Za-z0-9_]+$", "description": "Stable universal disease key, preserved verbatim from the legacy engine (e.g. MENINGITIS infective, dka non-infective) so the engine swap is a drop-in. Never reused." },
+    "legacyId": { "type": ["string", "null"], "description": "Original reasoning.js / SYNDROMES key if it differed; usually == id." },
     "name": { "type": "string" },
     "aliases": { "type": "array", "items": { "type": "string" }, "description": "Synonyms / lay terms — also used for retrieval." },
     "class": { "type": "string", "enum": ["infective", "non_infective"] },

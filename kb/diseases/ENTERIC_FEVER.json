@@ -1,0 +1,108 @@
+{
+  "id": "ENTERIC_FEVER",
+  "name": "Enteric Fever (Typhoid)",
+  "class": "infective",
+  "system": "Gastrointestinal",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "prolongedFever",
+        {
+          "anyOf": [
+            "relativeBradycardia",
+            "abdominalDiscomfort",
+            "constipationOrDiarrhea",
+            "hepatosplenomegaly"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "prolongedFever",
+          "add": 15
+        },
+        {
+          "when": "relativeBradycardia",
+          "add": 15
+        },
+        {
+          "when": "hepatosplenomegaly",
+          "add": 10
+        },
+        {
+          "when": "roseSpots",
+          "add": 10
+        },
+        {
+          "when": "stepladderFever",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "abdominalDiscomfort",
+      "constipationOrDiarrhea",
+      "hepatosplenomegaly",
+      "prolongedFever",
+      "relativeBradycardia",
+      "roseSpots",
+      "stepladderFever"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Salmonella enterica serovar Typhi"
+    ],
+    "likely": [
+      "Salmonella enterica serovar Paratyphi A/B"
+    ],
+    "possible": [],
+    "why": "The clinical syndrome of prolonged stepladder fever with relative bradycardia and hepatosplenomegaly in an endemic region is classically caused by S. Typhi, with S. Paratyphi producing a similar but generally milder illness."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Blood culture",
+      "why": "Gold standard for diagnosis and the only reliable way to confirm S. Typhi/Paratyphi and obtain susceptibility data."
+    },
+    {
+      "test": "CBC",
+      "why": "Typically shows leukopenia or normal counts in enteric fever, supporting the diagnosis and distinguishing from other causes of prolonged fever."
+    },
+    {
+      "test": "Liver function tests",
+      "why": "Mild transaminitis is common and helps support the diagnosis."
+    },
+    {
+      "test": "Stool/urine culture",
+      "why": "May identify the organism, particularly useful for detecting chronic carriers."
+    }
+  ],
+  "treatmentRef": "ENTERIC_FEVER",
+  "policyRef": "ENTERIC_FEVER",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

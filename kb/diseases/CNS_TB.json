@@ -1,0 +1,103 @@
+{
+  "id": "CNS_TB",
+  "name": "CNS Tuberculosis (TB Meningitis)",
+  "class": "infective",
+  "system": "Central Nervous System / Tuberculosis",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "prolongedFever",
+        "neckStiffness",
+        {
+          "anyOf": [
+            "alteredSensorium",
+            "focalNeuroDeficit"
+          ]
+        },
+        "subacuteOnset"
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "alteredSensorium",
+          "add": 10
+        },
+        {
+          "when": "focalNeuroDeficit",
+          "add": 10
+        },
+        {
+          "when": "tbContactHistory",
+          "add": 15
+        },
+        {
+          "when": "subacuteOnset",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "focalNeuroDeficit",
+      "neckStiffness",
+      "prolongedFever",
+      "subacuteOnset",
+      "tbContactHistory"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Mycobacterium tuberculosis"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "TB meningitis is caused by M. tuberculosis and is distinguished from bacterial meningitis by its subacute (days-to-weeks) evolution, basal meningeal involvement (often causing cranial nerve palsies and hydrocephalus), and characteristic CSF profile (lymphocytic pleocytosis, very low glucose, markedly elevated protein)."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Lumbar puncture with CSF analysis, AFB smear, CBNAAT/Xpert, and culture",
+      "why": "CSF in TB meningitis classically shows lymphocytic pleocytosis, very low glucose, and high protein; CBNAAT provides faster confirmation and rifampicin resistance status than culture."
+    },
+    {
+      "test": "MRI brain with contrast",
+      "why": "Identifies basal meningeal enhancement, tuberculomas, infarcts, and hydrocephalus — all characteristic complications requiring specific management."
+    },
+    {
+      "test": "Chest X-ray",
+      "why": "Concurrent or prior pulmonary TB is common and supports the diagnosis."
+    },
+    {
+      "test": "HIV testing",
+      "why": "TB meningitis is disproportionately seen in HIV co-infection, which changes overall management and prognosis."
+    }
+  ],
+  "treatmentRef": "CNS_TB",
+  "policyRef": "CNS_TB",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,107 @@
+{
+  "id": "FEBRILE_NEUTROPENIA",
+  "name": "Febrile Neutropenia",
+  "class": "infective",
+  "system": "Systemic / Oncology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "neutropenia"
+      ]
+    },
+    "score": {
+      "base": 75,
+      "modifiers": [
+        {
+          "when": "absoluteNeutrophilCountLow",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": 10
+        },
+        {
+          "when": "mucositis",
+          "add": 5
+        },
+        {
+          "when": "centralLine",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "absoluteNeutrophilCountLow",
+      "centralLine",
+      "fever",
+      "hypotension",
+      "mucositis",
+      "neutropenia"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Pseudomonas aeruginosa",
+      "Escherichia coli",
+      "Klebsiella pneumoniae"
+    ],
+    "likely": [
+      "Coagulase-negative staphylococci (especially if central line present)",
+      "Viridans group streptococci (if severe mucositis)"
+    ],
+    "possible": [
+      "Candida species and other fungi if fever persists beyond 4-7 days on antibacterial therapy"
+    ],
+    "why": "Antipseudomonal coverage is mandatory by definition in febrile neutropenia given the rapid, often source-occult progression Pseudomonas bacteremia can cause in neutropenic hosts. Gram-positive organisms become more relevant with central lines or severe mucositis; fungal coverage is escalated only if fever is persistent despite adequate antibacterial therapy."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Blood cultures (peripheral and from each lumen of central line if present)",
+      "why": "Identifies bacteremia and distinguishes line-associated infection, both common and consequential in this population."
+    },
+    {
+      "test": "CBC with differential (serial)",
+      "why": "Tracks neutrophil recovery, which determines duration of antibiotics and risk stratification."
+    },
+    {
+      "test": "Chest X-ray",
+      "why": "Screens for pulmonary source even when respiratory symptoms are minimal, since neutropenic patients may lack typical localizing signs."
+    },
+    {
+      "test": "Urinalysis and urine culture",
+      "why": "Screens for urinary source even in the absence of typical symptoms."
+    },
+    {
+      "test": "MASCC risk index calculation",
+      "why": "Stratifies low- versus high-risk febrile neutropenia, which determines candidacy for oral/outpatient therapy versus mandatory inpatient IV therapy."
+    }
+  ],
+  "treatmentRef": "FEBRILE_NEUTROPENIA",
+  "policyRef": "FEBRILE_NEUTROPENIA",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

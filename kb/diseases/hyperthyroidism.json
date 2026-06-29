@@ -1,0 +1,57 @@
+{
+  "id": "hyperthyroidism",
+  "name": "Thyrotoxicosis (uncomplicated)",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "palpitations": 28,
+      "weightLoss": 22,
+      "tachycardia": 18,
+      "diarrhea": 8,
+      "fever": -6
+    },
+    "associatedFindings": [
+      "diarrhea",
+      "fever",
+      "palpitations",
+      "tachycardia",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Palpitations, weight loss and tachycardia with appetite preserved suggest thyrotoxicosis."
+  },
+  "redFlags": [
+    "Escalation to thyroid storm if fever/altered sensorium"
+  ],
+  "investigations": [
+    {
+      "test": "TFTs (TSH↓, free T4/T3↑)"
+    },
+    {
+      "test": "ECG"
+    }
+  ],
+  "treatmentRef": "hyperthyroidism",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

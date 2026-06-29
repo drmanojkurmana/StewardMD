@@ -1,0 +1,57 @@
+{
+  "id": "wernicke",
+  "name": "Wernicke encephalopathy",
+  "class": "non_infective",
+  "system": "Neurology / Nutrition",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 24,
+      "ataxia": 26,
+      "visualDisturbance": 16,
+      "alcoholExcess": 30,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alcoholExcess",
+      "alteredSensorium",
+      "ataxia",
+      "fever",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Confusion, ataxia and eye signs in an alcohol-dependent or malnourished patient is Wernicke until proven otherwise."
+  },
+  "redFlags": [
+    "Reversible — treat empirically with thiamine, do not delay"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical triad (confusion, ataxia, ophthalmoplegia)"
+    },
+    {
+      "test": "Give IV thiamine BEFORE glucose"
+    }
+  ],
+  "treatmentRef": "wernicke",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

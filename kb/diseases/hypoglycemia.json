@@ -1,0 +1,57 @@
+{
+  "id": "hypoglycemia",
+  "name": "Hypoglycemia",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 34,
+      "diabetesHx": 14,
+      "seizure": 8,
+      "fever": -12,
+      "neckStiffness": -12
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "diabetesHx",
+      "fever",
+      "neckStiffness",
+      "seizure"
+    ],
+    "reasoningTemplate": "Altered sensorium with low glucose is rapidly reversible and must be excluded first."
+  },
+  "redFlags": [
+    "Rapidly reversible — check glucose first in any altered patient"
+  ],
+  "investigations": [
+    {
+      "test": "Capillary & lab glucose"
+    },
+    {
+      "test": "Give IV dextrose"
+    }
+  ],
+  "treatmentRef": "hypoglycemia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

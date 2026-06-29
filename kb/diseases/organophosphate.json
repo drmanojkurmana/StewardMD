@@ -1,0 +1,55 @@
+{
+  "id": "organophosphate",
+  "name": "Organophosphate / cholinergic poisoning",
+  "class": "non_infective",
+  "system": "Toxicology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "miosisSecretions": 38,
+      "drugOverdose": 18,
+      "alteredSensorium": 12,
+      "bradycardia": 10
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "bradycardia",
+      "drugOverdose",
+      "miosisSecretions"
+    ],
+    "reasoningTemplate": "Miosis, hypersalivation and bradycardia after exposure suggest organophosphate poisoning."
+  },
+  "redFlags": [
+    "Atropine + pralidoxime; airway/secretion control"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical cholinergic toxidrome"
+    },
+    {
+      "test": "Plasma/RBC cholinesterase"
+    }
+  ],
+  "treatmentRef": "organophosphate",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

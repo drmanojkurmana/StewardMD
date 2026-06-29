@@ -1,0 +1,55 @@
+{
+  "id": "gerd_chest",
+  "name": "GERD / non-cardiac chest pain",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "chestPain": 20,
+      "exertionalChestPain": -10,
+      "ecgIschemia": -14,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "chestPain",
+      "ecgIschemia",
+      "exertionalChestPain",
+      "fever"
+    ],
+    "reasoningTemplate": "Chest pain without ischaemic features or risk factors may be oesophageal, but cardiac causes must be excluded first."
+  },
+  "redFlags": [
+    "Do not attribute to GERD until ACS excluded"
+  ],
+  "investigations": [
+    {
+      "test": "Exclude cardiac cause first"
+    },
+    {
+      "test": "Trial of PPI"
+    }
+  ],
+  "treatmentRef": "gerd_chest",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

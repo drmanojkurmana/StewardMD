@@ -1,0 +1,105 @@
+{
+  "id": "DISSEMINATED_TB",
+  "name": "Disseminated (Miliary) Tuberculosis",
+  "class": "infective",
+  "system": "Systemic / Tuberculosis",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "prolongedFeverUnexplained",
+        "weightLoss",
+        {
+          "anyOf": [
+            "hepatosplenomegaly",
+            "immunocompromised"
+          ]
+        },
+        "nightSweats"
+      ]
+    },
+    "score": {
+      "base": 50,
+      "modifiers": [
+        {
+          "when": "hepatosplenomegaly",
+          "add": 15
+        },
+        {
+          "when": "immunocompromised",
+          "add": 15
+        },
+        {
+          "when": "nightSweats",
+          "add": 10
+        },
+        {
+          "when": "tbContactHistory",
+          "add": 10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "hepatosplenomegaly",
+      "immunocompromised",
+      "nightSweats",
+      "prolongedFeverUnexplained",
+      "tbContactHistory",
+      "weightLoss"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Mycobacterium tuberculosis"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "Disseminated TB reflects hematogenous spread of M. tuberculosis, classically producing miliary lung nodules and multi-organ involvement (liver, spleen, bone marrow, CNS), and is disproportionately seen in immunocompromised hosts (HIV, malnutrition, immunosuppressive therapy) where the presentation can be especially non-specific, contributing to diagnostic delay."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Chest X-ray / CT chest",
+      "why": "Classic miliary pattern (diffuse small nodules) supports the diagnosis, though it may be subtle or absent early."
+    },
+    {
+      "test": "Blood culture for mycobacteria (if available) and AFB smear of any accessible fluid/tissue",
+      "why": "May provide microbiological confirmation; mycobacterial blood culture has reasonable yield in disseminated disease, particularly in HIV co-infection."
+    },
+    {
+      "test": "Liver or bone marrow biopsy (if hepatosplenomegaly/cytopenias and other tests inconclusive)",
+      "why": "Can provide histological confirmation (caseating granulomas, AFB on staining) when other less invasive tests are unrevealing."
+    },
+    {
+      "test": "HIV testing",
+      "why": "Essential given the strong association between disseminated TB and immunosuppression, with direct treatment implications."
+    },
+    {
+      "test": "Lumbar puncture (if any neurological signs)",
+      "why": "Screens for concurrent CNS involvement, which would extend treatment duration."
+    }
+  ],
+  "treatmentRef": "DISSEMINATED_TB",
+  "policyRef": "DISSEMINATED_TB",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

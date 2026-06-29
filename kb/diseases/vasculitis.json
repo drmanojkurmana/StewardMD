@@ -1,0 +1,62 @@
+{
+  "id": "vasculitis",
+  "name": "Systemic vasculitis",
+  "class": "non_infective",
+  "system": "Rheumatology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "rash": 20,
+      "polyarthralgia": 18,
+      "fever": 14,
+      "hematuria": 18,
+      "weightLoss": 14,
+      "focalNeuroDeficit": 8
+    },
+    "associatedFindings": [
+      "fever",
+      "focalNeuroDeficit",
+      "hematuria",
+      "polyarthralgia",
+      "rash",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Multisystem disease with palpable purpura, glomerulonephritis and constitutional symptoms suggests a systemic vasculitis."
+  },
+  "redFlags": [
+    "Rapidly progressive renal/pulmonary involvement is an emergency"
+  ],
+  "investigations": [
+    {
+      "test": "ANCA, complement"
+    },
+    {
+      "test": "Urinalysis + renal function"
+    },
+    {
+      "test": "Biopsy of affected organ"
+    }
+  ],
+  "treatmentRef": "vasculitis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,55 @@
+{
+  "id": "opioid_od",
+  "name": "Opioid overdose",
+  "class": "non_infective",
+  "system": "Toxicology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 30,
+      "drugOverdose": 34,
+      "bradypnea": 28,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "bradypnea",
+      "drugOverdose",
+      "fever"
+    ],
+    "reasoningTemplate": "Reduced consciousness with depressed respiration and pinpoint pupils is opioid toxicity until proven otherwise."
+  },
+  "redFlags": [
+    "Respiratory depression — naloxone + airway support"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical (pinpoint pupils, ↓RR)"
+    },
+    {
+      "test": "Trial of naloxone"
+    }
+  ],
+  "treatmentRef": "opioid_od",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

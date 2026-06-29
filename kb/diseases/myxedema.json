@@ -1,0 +1,55 @@
+{
+  "id": "myxedema",
+  "name": "Myxoedema coma",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 26,
+      "hypothermia": 30,
+      "bradycardia": 14,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "bradycardia",
+      "fever",
+      "hypothermia"
+    ],
+    "reasoningTemplate": "Altered sensorium with hypothermia and bradycardia in a hypothyroid patient suggests myxoedema coma."
+  },
+  "redFlags": [
+    "IV thyroxine + hydrocortisone; treat precipitant"
+  ],
+  "investigations": [
+    {
+      "test": "TFTs, cortisol"
+    },
+    {
+      "test": "ECG, electrolytes (Na↓)"
+    }
+  ],
+  "treatmentRef": "myxedema",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

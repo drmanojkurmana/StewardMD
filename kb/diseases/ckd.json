@@ -1,0 +1,60 @@
+{
+  "id": "ckd",
+  "name": "Chronic kidney disease",
+  "class": "non_infective",
+  "system": "Nephrology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "legSwellingBilateral": 18,
+      "oliguria": 10,
+      "weightLoss": 6,
+      "alteredSensorium": 6,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "legSwellingBilateral",
+      "oliguria",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Longstanding reduced renal function with anaemia and small kidneys indicates CKD rather than acute injury."
+  },
+  "redFlags": [
+    "Distinguish from AKI; manage complications (K⁺, acidosis, anaemia)"
+  ],
+  "investigations": [
+    {
+      "test": "eGFR trend, urinalysis"
+    },
+    {
+      "test": "Renal ultrasound (small kidneys)"
+    },
+    {
+      "test": "Anaemia/bone profile"
+    }
+  ],
+  "treatmentRef": "ckd",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

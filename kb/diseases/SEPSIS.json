@@ -1,0 +1,103 @@
+{
+  "id": "SEPSIS",
+  "name": "Sepsis",
+  "class": "infective",
+  "system": "Systemic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "suspectedInfectionSource",
+        "sofaIncrease"
+      ]
+    },
+    "score": {
+      "base": 65,
+      "modifiers": [
+        {
+          "when": "sofaIncrease",
+          "add": 15
+        },
+        {
+          "when": "lactateElevated",
+          "add": 10
+        },
+        {
+          "when": "organDysfunction",
+          "add": 10
+        },
+        {
+          "when": "hypotension",
+          "add": -10
+        }
+      ]
+    },
+    "associatedFindings": [
+      "hypotension",
+      "lactateElevated",
+      "organDysfunction",
+      "sofaIncrease",
+      "suspectedInfectionSource"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Organism depends entirely on the suspected source (e.g., E. coli for urosepsis, S. pneumoniae for pulmonary sepsis)"
+    ],
+    "likely": [
+      "Polymicrobial flora if source is intra-abdominal"
+    ],
+    "possible": [
+      "Resistant organisms if healthcare-associated or recent antibiotic exposure"
+    ],
+    "why": "Sepsis is a syndromic response to infection, not a single pathogen — empiric antibiotic choice must be driven by the most likely source identified on history and examination (respiratory, urinary, abdominal, skin/soft tissue, CNS, line-related, etc.), not treated generically."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Blood cultures (x2, before antibiotics if feasible)",
+      "why": "Identifies the causative organism and susceptibility for de-escalation."
+    },
+    {
+      "test": "Lactate",
+      "why": "Core Sepsis-3/Surviving Sepsis Campaign marker of tissue hypoperfusion; guides resuscitation and risk-stratification toward septic shock."
+    },
+    {
+      "test": "Source-specific cultures (urine, sputum, wound, CSF as guided by clinical exam)",
+      "why": "Identifies and confirms the infectious source to allow targeted therapy."
+    },
+    {
+      "test": "CBC, renal function, liver function, coagulation profile",
+      "why": "Assesses organ dysfunction (SOFA components) and supports staging severity."
+    },
+    {
+      "test": "Imaging directed by suspected source (CXR, abdominal ultrasound/CT)",
+      "why": "Localizes the source and identifies any need for source control (drainage, debridement)."
+    }
+  ],
+  "treatmentRef": "SEPSIS",
+  "policyRef": "SEPSIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

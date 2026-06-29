@@ -1,0 +1,60 @@
+{
+  "id": "myeloma",
+  "name": "Multiple myeloma",
+  "class": "non_infective",
+  "system": "Hematology / Oncology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "backPain": 26,
+      "ageOver50": 16,
+      "weightLoss": 14,
+      "oliguria": 8,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "ageOver50",
+      "backPain",
+      "fever",
+      "oliguria",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Bone pain, anaemia, renal impairment and hypercalcaemia (CRAB) in an older patient suggests myeloma."
+  },
+  "redFlags": [
+    "Hypercalcaemia, renal failure, cord compression are emergencies (CRAB)"
+  ],
+  "investigations": [
+    {
+      "test": "Serum/urine protein electrophoresis, free light chains"
+    },
+    {
+      "test": "Calcium, renal function, CBC"
+    },
+    {
+      "test": "Skeletal survey/MRI"
+    }
+  ],
+  "treatmentRef": "myeloma",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

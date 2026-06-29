@@ -1,0 +1,57 @@
+{
+  "id": "tamponade",
+  "name": "Cardiac tamponade",
+  "class": "non_infective",
+  "system": "Cardiology / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "dyspnea": 24,
+      "hypotension": 30,
+      "raisedJVP": 30,
+      "tachycardia": 18,
+      "chestPain": 8
+    },
+    "associatedFindings": [
+      "chestPain",
+      "dyspnea",
+      "hypotension",
+      "raisedJVP",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Hypotension with raised JVP and muffled heart sounds (Beck's triad) suggests cardiac tamponade."
+  },
+  "redFlags": [
+    "Obstructive shock — urgent pericardiocentesis"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent echocardiogram"
+    },
+    {
+      "test": "ECG (electrical alternans)"
+    }
+  ],
+  "treatmentRef": "tamponade",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

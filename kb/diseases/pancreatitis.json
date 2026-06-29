@@ -1,0 +1,60 @@
+{
+  "id": "pancreatitis",
+  "name": "Acute pancreatitis",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "abdominalPain": 34,
+      "severeAbdominalPain": 24,
+      "nauseaVomiting": 18,
+      "backPain": 14,
+      "fever": 6
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "backPain",
+      "fever",
+      "nauseaVomiting",
+      "severeAbdominalPain"
+    ],
+    "reasoningTemplate": "Severe epigastric pain radiating to the back with raised lipase indicates pancreatitis."
+  },
+  "redFlags": [
+    "Assess severity (organ failure) — may need ICU"
+  ],
+  "investigations": [
+    {
+      "test": "Serum lipase/amylase (>3× ULN)"
+    },
+    {
+      "test": "CT abdomen if severe/uncertain"
+    },
+    {
+      "test": "Ultrasound for gallstones"
+    }
+  ],
+  "treatmentRef": "pancreatitis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,58 @@
+{
+  "id": "ms",
+  "name": "Multiple sclerosis (relapse)",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "focalNeuroDeficit": 30,
+      "visualDisturbance": 24,
+      "ataxia": 12,
+      "fever": -12
+    },
+    "associatedFindings": [
+      "ataxia",
+      "fever",
+      "focalNeuroDeficit",
+      "visualDisturbance"
+    ],
+    "reasoningTemplate": "Subacute neurological deficits disseminated in time and space (e.g. optic neuritis) suggest demyelination."
+  },
+  "redFlags": [
+    "Exclude infection before high-dose steroids"
+  ],
+  "investigations": [
+    {
+      "test": "MRI brain/cord with contrast"
+    },
+    {
+      "test": "CSF oligoclonal bands"
+    },
+    {
+      "test": "Evoked potentials"
+    }
+  ],
+  "treatmentRef": "ms",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

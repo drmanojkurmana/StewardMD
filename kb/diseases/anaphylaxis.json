@@ -1,0 +1,55 @@
+{
+  "id": "anaphylaxis",
+  "name": "Anaphylaxis",
+  "class": "non_infective",
+  "system": "Allergy / Emergency",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "hypotension": 30,
+      "dyspnea": 24,
+      "rash": 24,
+      "tachycardia": 12
+    },
+    "associatedFindings": [
+      "dyspnea",
+      "hypotension",
+      "rash",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Acute hypotension with urticaria/angioedema and bronchospasm after exposure indicates anaphylaxis."
+  },
+  "redFlags": [
+    "IM adrenaline immediately"
+  ],
+  "investigations": [
+    {
+      "test": "Clinical diagnosis"
+    },
+    {
+      "test": "Serum tryptase"
+    }
+  ],
+  "treatmentRef": "anaphylaxis",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

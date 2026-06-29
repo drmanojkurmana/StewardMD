@@ -1,0 +1,57 @@
+{
+  "id": "renal_colic",
+  "name": "Renal / ureteric colic",
+  "class": "non_infective",
+  "system": "Urology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "flankPain": 34,
+      "nauseaVomiting": 14,
+      "hematuria": 24,
+      "feverGU": -14,
+      "dysuria": -6
+    },
+    "associatedFindings": [
+      "dysuria",
+      "feverGU",
+      "flankPain",
+      "hematuria",
+      "nauseaVomiting"
+    ],
+    "reasoningTemplate": "Severe colicky flank pain radiating to the groin with haematuria and no fever suggests a stone."
+  },
+  "redFlags": [
+    "Fever with obstruction → emergency (infected obstructed system)"
+  ],
+  "investigations": [
+    {
+      "test": "Non-contrast CT KUB"
+    },
+    {
+      "test": "Urinalysis (haematuria)"
+    }
+  ],
+  "treatmentRef": "renal_colic",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

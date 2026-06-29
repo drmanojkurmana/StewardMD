@@ -1,0 +1,55 @@
+{
+  "id": "hyponatremia",
+  "name": "Symptomatic hyponatraemia / SIADH",
+  "class": "non_infective",
+  "system": "Metabolic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alteredSensorium": 24,
+      "seizure": 14,
+      "nauseaVomiting": 12,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "nauseaVomiting",
+      "seizure"
+    ],
+    "reasoningTemplate": "Confusion or seizures with low sodium suggest symptomatic hyponatraemia — establish the mechanism before correcting."
+  },
+  "redFlags": [
+    "Correct slowly (osmotic demyelination risk)"
+  ],
+  "investigations": [
+    {
+      "test": "Serum & urine osmolality, urine Na⁺"
+    },
+    {
+      "test": "Volume status assessment"
+    }
+  ],
+  "treatmentRef": "hyponatremia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

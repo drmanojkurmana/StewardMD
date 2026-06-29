@@ -1,0 +1,82 @@
+{
+  "id": "URTI",
+  "name": "Upper Respiratory Tract Infection (common cold)",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        {
+          "anyOf": [
+            "coryza",
+            "soreThroat",
+            "nasalCongestion"
+          ]
+        },
+        {
+          "not": "fever"
+        },
+        {
+          "not": "exudate"
+        },
+        {
+          "not": "severeCriteria"
+        }
+      ]
+    },
+    "score": {
+      "base": 75,
+      "modifiers": []
+    },
+    "associatedFindings": [
+      "coryza",
+      "exudate",
+      "fever",
+      "nasalCongestion",
+      "severeCriteria",
+      "soreThroat"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Rhinovirus",
+      "Coronavirus (non-SARS-CoV-2 strains)",
+      "Influenza virus",
+      "Adenovirus"
+    ],
+    "likely": [],
+    "possible": [],
+    "why": "URTI is almost universally viral. Bacterial superinfection (sinusitis, otitis media) is uncommon and is a separate diagnosis to be made on its own merits if symptoms evolve."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "None required",
+      "why": "Diagnosis is clinical and investigations rarely change management in uncomplicated URTI."
+    }
+  ],
+  "treatmentRef": "URTI",
+  "policyRef": "URTI",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

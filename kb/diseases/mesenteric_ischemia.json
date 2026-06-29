@@ -1,0 +1,62 @@
+{
+  "id": "mesenteric_ischemia",
+  "name": "Acute mesenteric ischemia",
+  "class": "non_infective",
+  "system": "Vascular / GI",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "severeAbdominalPain": 36,
+      "abdominalPain": 18,
+      "atrialFibHx": 18,
+      "ageOver50": 12,
+      "raised_lactate": 16,
+      "fever": -4
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "ageOver50",
+      "atrialFibHx",
+      "fever",
+      "raised_lactate",
+      "severeAbdominalPain"
+    ],
+    "reasoningTemplate": "Severe pain out of proportion to examination, especially with AF or vascular disease, suggests mesenteric ischaemia."
+  },
+  "redFlags": [
+    "Pain out of proportion to exam — time-critical"
+  ],
+  "investigations": [
+    {
+      "test": "CT angiography (mesenteric)"
+    },
+    {
+      "test": "Lactate"
+    },
+    {
+      "test": "Urgent surgical/vascular review"
+    }
+  ],
+  "treatmentRef": "mesenteric_ischemia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

@@ -1,0 +1,58 @@
+{
+  "id": "hyperkalemia",
+  "name": "Hyperkalaemia",
+  "class": "non_infective",
+  "system": "Metabolic / Nephrology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "palpitations": 18,
+      "ascendingWeakness": 16,
+      "bradycardia": 10,
+      "oliguria": 10
+    },
+    "associatedFindings": [
+      "ascendingWeakness",
+      "bradycardia",
+      "oliguria",
+      "palpitations"
+    ],
+    "reasoningTemplate": "Weakness and bradyarrhythmia with renal impairment suggest hyperkalaemia — an ECG-confirmed emergency."
+  },
+  "redFlags": [
+    "Risk of fatal arrhythmia — treat empirically on ECG changes"
+  ],
+  "investigations": [
+    {
+      "test": "Urgent ECG (peaked T waves)"
+    },
+    {
+      "test": "Repeat K⁺, renal function"
+    },
+    {
+      "test": "Calcium gluconate + insulin-dextrose"
+    }
+  ],
+  "treatmentRef": "hyperkalemia",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

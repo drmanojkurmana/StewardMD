@@ -1,0 +1,57 @@
+{
+  "id": "pheo",
+  "name": "Phaeochromocytoma crisis",
+  "class": "non_infective",
+  "system": "Endocrine",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "palpitations": 26,
+      "headache": 22,
+      "hypertensionHx": 18,
+      "tachycardia": 10,
+      "rash": -6
+    },
+    "associatedFindings": [
+      "headache",
+      "hypertensionHx",
+      "palpitations",
+      "rash",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Episodic headache, palpitations and sweating with paroxysmal hypertension suggests a catecholamine-secreting tumour."
+  },
+  "redFlags": [
+    "Paroxysmal severe hypertension — alpha-blockade before beta"
+  ],
+  "investigations": [
+    {
+      "test": "Plasma/urine metanephrines"
+    },
+    {
+      "test": "CT/MRI adrenals"
+    }
+  ],
+  "treatmentRef": "pheo",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

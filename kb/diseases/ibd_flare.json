@@ -1,0 +1,60 @@
+{
+  "id": "ibd_flare",
+  "name": "Inflammatory bowel disease flare",
+  "class": "non_infective",
+  "system": "Gastroenterology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "diarrhea": 26,
+      "bloodyStool": 26,
+      "abdominalPain": 16,
+      "weightLoss": 12,
+      "fever": 6
+    },
+    "associatedFindings": [
+      "abdominalPain",
+      "bloodyStool",
+      "diarrhea",
+      "fever",
+      "weightLoss"
+    ],
+    "reasoningTemplate": "Chronic bloody diarrhoea with weight loss suggests an IBD flare, but infective colitis must be excluded first."
+  },
+  "redFlags": [
+    "Toxic megacolon — surgical emergency"
+  ],
+  "investigations": [
+    {
+      "test": "Stool studies (exclude infection/C. difficile)"
+    },
+    {
+      "test": "CRP, faecal calprotectin"
+    },
+    {
+      "test": "Endoscopy"
+    }
+  ],
+  "treatmentRef": "ibd_flare",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

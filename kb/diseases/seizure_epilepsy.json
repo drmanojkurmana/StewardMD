@@ -1,0 +1,56 @@
+{
+  "id": "seizure_epilepsy",
+  "name": "Seizure / epilepsy",
+  "class": "non_infective",
+  "system": "Neurology",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "seizure": 44,
+      "alteredSensorium": 18,
+      "fever": -8
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "fever",
+      "seizure"
+    ],
+    "reasoningTemplate": "Witnessed convulsion with post-ictal state; exclude metabolic and structural causes."
+  },
+  "redFlags": [
+    "Status epilepticus → emergency"
+  ],
+  "investigations": [
+    {
+      "test": "Glucose, electrolytes, calcium"
+    },
+    {
+      "test": "EEG"
+    },
+    {
+      "test": "Neuroimaging if first seizure/focal"
+    }
+  ],
+  "treatmentRef": "seizure_epilepsy",
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

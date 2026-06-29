@@ -1,0 +1,99 @@
+{
+  "id": "SEPTIC_SHOCK",
+  "name": "Septic Shock",
+  "class": "infective",
+  "system": "Systemic",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "suspectedInfectionSource",
+        "hypotension",
+        "lactateElevated"
+      ]
+    },
+    "score": {
+      "base": 85,
+      "modifiers": [
+        {
+          "when": "hypotension",
+          "add": 10
+        },
+        {
+          "when": "lactateElevated",
+          "add": 10
+        },
+        {
+          "when": "vasopressorRequirement",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "hypotension",
+      "lactateElevated",
+      "suspectedInfectionSource",
+      "vasopressorRequirement"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Source-dependent — gram-negative bacilli are disproportionately represented in septic shock overall"
+    ],
+    "likely": [
+      "Gram-positive cocci (S. aureus, streptococci) depending on source"
+    ],
+    "possible": [
+      "Candida species in prolonged ICU stay, central lines, or broad-spectrum antibiotic exposure"
+    ],
+    "why": "Septic shock has the highest mortality of the sepsis spectrum and the broadest reasonable empiric coverage is justified initially, since the cost of inadequate empiric coverage (each hour of delay increases mortality) outweighs the stewardship cost of initial broad coverage — provided aggressive de-escalation follows."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "Blood cultures (x2) before antibiotics if no meaningful delay",
+      "why": "Identifies organism for urgent de-escalation given the broad initial empiric coverage."
+    },
+    {
+      "test": "Lactate (serial)",
+      "why": "Tracks resuscitation adequacy and response to therapy."
+    },
+    {
+      "test": "Source-specific cultures and imaging",
+      "why": "Identifies source requiring control (e.g., abscess drainage, line removal)."
+    },
+    {
+      "test": "Arterial blood gas",
+      "why": "Assesses acid-base status and oxygenation in the context of shock."
+    },
+    {
+      "test": "Central venous/arterial line monitoring as per unit protocol",
+      "why": "Guides hemodynamic management alongside antibiotic therapy."
+    }
+  ],
+  "treatmentRef": "SEPTIC_SHOCK",
+  "policyRef": "SEPTIC_SHOCK",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

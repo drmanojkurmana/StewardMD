@@ -1,0 +1,102 @@
+{
+  "id": "BRONCHIECTASIS_EXACERBATION",
+  "name": "Bronchiectasis Exacerbation",
+  "class": "infective",
+  "system": "Respiratory",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "knownBronchiectasis",
+        {
+          "anyOf": [
+            "increasedSputumVolume",
+            "purulentSputum",
+            "increasedDyspnea"
+          ]
+        }
+      ]
+    },
+    "score": {
+      "base": 55,
+      "modifiers": [
+        {
+          "when": "purulentSputum",
+          "add": 15
+        },
+        {
+          "when": "increasedSputumVolume",
+          "add": 10
+        },
+        {
+          "when": "hemoptysis",
+          "add": 10
+        },
+        {
+          "when": "fever",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "fever",
+      "hemoptysis",
+      "increasedDyspnea",
+      "increasedSputumVolume",
+      "knownBronchiectasis",
+      "purulentSputum"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Haemophilus influenzae",
+      "Pseudomonas aeruginosa (especially in advanced/long-standing disease)"
+    ],
+    "likely": [
+      "Streptococcus pneumoniae",
+      "Moraxella catarrhalis"
+    ],
+    "possible": [
+      "Non-tuberculous mycobacteria (in chronic, treatment-refractory cases — separate workup)"
+    ],
+    "why": "Bronchiectasis exacerbations are strongly influenced by individual chronic colonization patterns — Pseudomonas aeruginosa is disproportionately represented compared to typical community-acquired respiratory infections, particularly in patients with more severe or long-standing structural lung disease."
+  },
+  "redFlags": [],
+  "investigations": [
+    {
+      "test": "Sputum culture (every exacerbation)",
+      "why": "Tracks colonization status over time and directly informs both current and future empiric choices."
+    },
+    {
+      "test": "Chest X-ray (if new symptoms or to exclude complications)",
+      "why": "Excludes pneumonia or other acute complications superimposed on chronic bronchiectatic changes."
+    },
+    {
+      "test": "Pulse oximetry",
+      "why": "Assesses for hypoxia, particularly relevant in patients with significant structural lung disease."
+    }
+  ],
+  "treatmentRef": "BRONCHIECTASIS_EXACERBATION",
+  "policyRef": "BRONCHIECTASIS_EXACERBATION",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}

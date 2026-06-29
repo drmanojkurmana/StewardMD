@@ -1,0 +1,116 @@
+{
+  "id": "ENCEPHALITIS",
+  "name": "Encephalitis",
+  "class": "infective",
+  "system": "Central Nervous System",
+  "coding": {
+    "icd10": null,
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "rule": {
+      "allOf": [
+        "fever",
+        "alteredSensorium",
+        {
+          "anyOf": [
+            "seizure",
+            "focalNeuroDeficit",
+            "behavioralChange"
+          ]
+        },
+        {
+          "not": "neckStiffness"
+        }
+      ]
+    },
+    "score": {
+      "base": 60,
+      "modifiers": [
+        {
+          "when": "alteredSensorium",
+          "add": 15
+        },
+        {
+          "when": "seizure",
+          "add": 10
+        },
+        {
+          "when": "focalNeuroDeficit",
+          "add": 10
+        },
+        {
+          "when": "behavioralChange",
+          "add": 5
+        }
+      ]
+    },
+    "associatedFindings": [
+      "alteredSensorium",
+      "behavioralChange",
+      "fever",
+      "focalNeuroDeficit",
+      "neckStiffness",
+      "seizure"
+    ],
+    "reasoningTemplate": ""
+  },
+  "pathogens": {
+    "veryLikely": [
+      "Herpes simplex virus (HSV-1)"
+    ],
+    "likely": [
+      "Other viral causes (varicella zoster, enteroviruses)",
+      "Bacterial meningoencephalitis (overlapping presentation)"
+    ],
+    "possible": [
+      "Japanese encephalitis virus and other arboviruses (regional/seasonal, endemic areas)",
+      "Autoimmune/paraneoplastic encephalitis (if infectious workup negative)"
+    ],
+    "why": "HSV is the most common identifiable cause of sporadic encephalitis and is treatable, making empiric acyclovir mandatory pending CSF PCR. Bacterial meningoencephalitis and regional arboviruses (notably Japanese encephalitis in endemic parts of India) must also be considered given overlapping presentations."
+  },
+  "redFlags": [
+    "Immediate empiric antibiotics required"
+  ],
+  "investigations": [
+    {
+      "test": "CSF PCR for HSV (and other relevant viruses)",
+      "why": "Definitive test to confirm or exclude HSV encephalitis and guide duration of acyclovir."
+    },
+    {
+      "test": "MRI brain",
+      "why": "Temporal lobe involvement is characteristic of HSV encephalitis and supports the diagnosis pending PCR results."
+    },
+    {
+      "test": "EEG",
+      "why": "May show characteristic findings (e.g., periodic lateralized epileptiform discharges) supporting HSV encephalitis and helps detect non-convulsive seizures."
+    },
+    {
+      "test": "CSF routine analysis, Gram stain, culture",
+      "why": "Evaluates for bacterial meningoencephalitis as an overlapping or alternative diagnosis."
+    },
+    {
+      "test": "Serology for regional arboviruses (e.g., Japanese encephalitis IgM) where endemic",
+      "why": "Identifies regionally relevant viral causes that change counseling and prognosis even though treatment is supportive."
+    }
+  ],
+  "treatmentRef": "ENCEPHALITIS",
+  "policyRef": "ENCEPHALITIS",
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": [
+      "Harrison 22e (2025)"
+    ]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null
+}
