@@ -127,6 +127,24 @@ try {
   if (rr.infOk) console.log("✅ renderOutput(CAP) still renders the antibiotic page"); else { fails++; console.log("❌ renderOutput(CAP) did not render expected content"); }
   if (rr.niOk) console.log(`✅ renderOutput(aaa) renders a non-infective management page (${rr.niLen} chars, antibiotics N/A)`); else { fails++; console.log("❌ renderOutput(aaa) did not render an NI management page"); }
 
+  // 4) main-form finding-input augmentation
+  const formRaw = await ev(`
+    var fg = window.FIELD_GROUPS||[]; var keys={}; fg.forEach(function(g){(g.fields||[]).forEach(function(f){keys[f.key]=true;});});
+    var want = ["chestPain","headache","asterixis","ketonemia","oliguria","mucocutaneousBleeding","drugOverdose","cough","ascendingWeakness","papilledema"];
+    var missing = want.filter(function(k){return !keys[k];});
+    var niSys = (window.SYSTEM_PICKER_MAP||[]).filter(function(x){return x.nonInfective;}).length;
+    // functional: tick hepatic_enceph-style findings now available in the form
+    var f={asterixis:true,jaundice:true,alteredSensorium:true};
+    var p=window.runEngine(f); var ids=(p.ranked||[]).map(function(r){return r.id;});
+    return JSON.stringify({ augmented: window.__smdFindingsAugmented, missing: missing,
+      niSystems: niSys, hepEncSurfaces: ids.indexOf("hepatic_enceph")>=0, ids: ids });
+  `);
+  const fm = JSON.parse(formRaw);
+  if (fm.augmented > 0 && fm.missing.length === 0) console.log(`✅ main form augmented: +${fm.augmented} non-infective inputs, ${fm.niSystems} new system tabs, all sampled keys present`);
+  else { fails++; console.log(`❌ form augmentation: added=${fm.augmented} missingKeys=[${fm.missing}] niSystems=${fm.niSystems}`); }
+  if (fm.hepEncSurfaces) console.log(`✅ ticking now-available findings surfaces a non-infective dx (hepatic_enceph in ${fm.ids.join(",")})`);
+  else { fails++; console.log(`❌ non-infective dx did not surface from form findings (${fm.ids.join(",")})`); }
+
   console.log(`\n${fails === 0 ? "ALL GREEN — main engine expanded to 140, no infective regression" : fails + " checks FAILED"}`);
   process.exitCode = fails === 0 ? 0 : 1;
   ws.close();
