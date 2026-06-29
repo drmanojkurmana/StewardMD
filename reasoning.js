@@ -1720,7 +1720,68 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 
+  /* ---------------------------------------------------------------------- *
+   * Smart next-question engine (Phase 3 — additive + PURE, no eval).
+   *
+   * Consultant-style progressive questioning: given the current differential,
+   * rank the highest-yield UNENTERED findings to ask about next, by how much
+   * each would change the separation between the leading diagnosis and its
+   * closest rival (discrimination) and how broadly it moves the head of the
+   * differential (breadth). Each candidate is simulated by CLONING the finding
+   * set and re-scoring through the SAME engine (differential), after which the
+   * engine state is fully restored — so this never alters _differential output
+   * (golden/parity stay byte-identical). On-demand only; not in the keystroke
+   * hot path. Reuses the engine's own per-disease `missing` as the candidate
+   * pool, so it inherits the same KB-driven vocabulary.
+   * ---------------------------------------------------------------------- */
+  function scoreMapFor(extraKey) {
+    var savedF = S.f, savedFInf = S.fInf, savedDom = S._dom;
+    var f2 = {}; for (var x in savedF) f2[x] = savedF[x]; if (extraKey) f2[extraKey] = true;
+    S.f = f2;
+    var d; try { d = differential(); } catch (e) { d = { inf: [], ni: [] }; }
+    S.f = savedF; S.fInf = savedFInf; S._dom = savedDom;   // restore — purity guarantee
+    var m = {};
+    d.inf.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: true }; });
+    d.ni.forEach(function (r) { m[r.id] = { score: r.score, name: r.name, inf: false }; });
+    return { map: m, d: d };
+  }
+  function nextQuestions(limit) {
+    buildOntology();
+    limit = limit || 5;
+    var base = scoreMapFor(null);
+    var combined = base.d.inf.concat(base.d.ni).sort(function (a, b) { return b.score - a.score; });
+    if (!combined.length) return [];
+    var head = combined.slice(0, 6);
+    var A = head[0], B = head[1] || null;        // leading dx and closest rival
+    var cand = {};
+    head.forEach(function (r) { (r.missing || []).forEach(function (k) { if (k && !S.f[k] && VALID[k]) cand[k] = true; }); });
+    var keys = Object.keys(cand);
+    if (!keys.length) keys = GENERAL.filter(function (k) { return !S.f[k]; });   // fallback: offer core vitals
+    var out = [];
+    keys.forEach(function (k) {
+      var sim = scoreMapFor(k);
+      var gapChange = 0;
+      if (A && B) {
+        var a0 = (base.map[A.id] || {}).score || 0, b0 = (base.map[B.id] || {}).score || 0;
+        var a1 = (sim.map[A.id] || {}).score || 0, b1 = (sim.map[B.id] || {}).score || 0;
+        gapChange = Math.abs((a1 - b1) - (a0 - b0));
+      }
+      var moved = [], maxDelta = 0;
+      head.forEach(function (r) {
+        var s0 = (base.map[r.id] || {}).score || 0, s1 = (sim.map[r.id] || {}).score || 0, dlt = s1 - s0;
+        if (Math.abs(dlt) >= 4) moved.push({ name: r.name, delta: dlt });
+        if (Math.abs(dlt) > Math.abs(maxDelta)) maxDelta = dlt;
+      });
+      var value = gapChange * 2 + moved.length + Math.abs(maxDelta) * 0.5;
+      if (value > 0) out.push({ key: k, label: lbl(k), value: Math.round(value * 10) / 10,
+        discriminates: !!(A && B && gapChange >= 3), raises: maxDelta > 0, moves: moved.slice(0, 4) });
+    });
+    out.sort(function (a, b) { return b.value - a.value; });
+    return out.slice(0, limit);
+  }
+
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
+    _nextQuestions: nextQuestions,
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
