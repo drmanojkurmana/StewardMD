@@ -57,5 +57,72 @@
   "contentHash": null,
   "references": [
     "Harrison 22e · ISTH/BSH"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e p.976-978 (Ch. 121, Coagulation Disorders); p.974 (Ch. 120, thrombocytopenia algorithm)",
+      "clinicalPearls": [
+        "DIC is an acquired syndrome of intravascular activation of coagulation with loss of localization, which can damage the microvasculature and, if severe enough, cause organ dysfunction (ISTH 2001 definition) (p.976).",
+        "The central event is uncontrolled thrombin generation, compounded by disruption of physiologic anticoagulant mechanisms and abnormal fibrinolysis, producing systemic fibrin deposition in small and mid-size vessels (p.976).",
+        "Fibrin deposition can compromise blood supply to lung, kidney, liver and brain, causing organ failure; pulmonary microvascular thrombosis is a component of ARDS (p.976).",
+        "Most common causes: bacterial sepsis (also viral and fungal), trauma, obstetric events (abruptio placentae, amniotic fluid embolism), and malignancy (especially mucin-producing adenocarcinomas and acute promyelocytic leukemia) (p.976).",
+        "Sepsis-driven DIC reflects thrombo-inflammation: increased tissue factor expression, neutrophil/monocyte activation with cytokine release, neutrophil extracellular traps, and polyphosphate release driving thrombin generation (p.976).",
+        "Bleeding manifestations dominate clinically: petechiae, ecchymoses, oozing from venipuncture sites, and severe hemorrhage from GI tract, lung, or CNS; thrombosis of large vessels and cerebral embolism can also occur (p.977).",
+        "Chronic (low-grade, compensated) DIC is seen with giant hemangioma, metastatic carcinoma, and late-gestation fetal demise; bleeding is discrete and limited to skin/mucosa, with elevated FDP/d-dimer but PT/aPTT/fibrinogen often normal or high and only mild thrombocytopenia (p.977).",
+        "In critically ill patients, coagulation parameters should be repeated over 6-8 h because patients can deteriorate rapidly; an overt-DIC score should be rechecked daily (p.977)."
+      ],
+      "pathophysiology": "DIC arises from uncontrolled thrombin generation triggered by multiple mechanisms, with simultaneous disruption of physiologic anticoagulant pathways and abnormal fibrinolysis. In sepsis and trauma, activation of inflammatory pathways increases tissue factor expression, activates neutrophils and monocytes with cytokine release and neutrophil extracellular trap formation, and releases polyphosphates that cross-talk with the coagulation system (thrombo-inflammation); endothelial damage causes loss of native antithrombotic properties. The result is systemic fibrin deposition in small and mid-size vessels causing microvascular occlusion, ischemic organ damage, and red cell fragmentation/hemolysis. Sustained activation consumes platelets and clotting factors, producing systemic bleeding that is aggravated by secondary hyperfibrinolysis in late stages. Purpura fulminans is a severe form of DIC with extensive cutaneous thrombosis, predominantly in young children after viral or bacterial infection, especially with inherited or acquired protein C pathway deficiency (p.976).",
+      "additionalDifferentials": [
+        "Severe liver disease (thrombocytopenia from sequestration/portal hypertension/hypersplenism, decreased factor and natural-anticoagulant synthesis, elevated d-dimer) — distinguished because liver-disease parameters do not change rapidly, unlike DIC (p.977).",
+        "Immune thrombotic thrombocytopenic purpura (TTP) — acute thrombocytopenia, red cell fragmentation, multiorgan failure, but identified by ADAMTS13 inhibitor (p.977).",
+        "Vitamin K deficiency (isolated PT prolongation as earliest finding) (p.977-978)."
+      ],
+      "infectionMimics": [
+        "Gram-negative bacterial systemic infection (DIC is most commonly seen here) (p.974).",
+        "COVID-19-associated coagulopathy/thrombocytopenia (p.974)."
+      ],
+      "nonInfectiousMimics": [
+        "Severe/fulminant liver disease and cirrhosis (coexisting chronic or acute DIC can also occur) (p.977-978).",
+        "Thrombotic microangiopathies (TTP, HUS) (p.977).",
+        "Dysfibrinogenemia of liver disease (p.978)."
+      ],
+      "additionalInvestigations": [
+        "ISTH overt-DIC score using platelet count, d-dimer, PT prolongation, and fibrinogen (p.977).",
+        "Peripheral blood smear for schistocytes (red cell fragmentation) (p.977).",
+        "Serial/repeated PT, aPTT, fibrinogen, d-dimer measurements (every 6-8 h in critically ill; daily if overt DIC) to assess trajectory and distinguish from liver disease (p.977).",
+        "Fibrin degradation products (FDP) (p.976-977).",
+        "ADAMTS13 activity/inhibitor when TTP is in the differential (p.977)."
+      ],
+      "redFlags": [
+        "Hemodynamic instability and shock are common in acute DIC; mortality ranges from 30% to over 80% (p.977).",
+        "Purpura fulminans — extensive skin thrombosis, especially in children post-infection or with protein C pathway deficiency (p.976).",
+        "Bleeding into the CNS, lung, or GI tract (p.977).",
+        "Rapidly deteriorating coagulation parameters in a critically ill patient (p.977)."
+      ],
+      "prognosis": "Morbidity and mortality in DIC are primarily driven by the underlying disease; acute DIC carries mortality ranging from 30% to greater than 80%. Many patients with overt DIC are critically ill and require intensive care (p.977).",
+      "pitfalls": [
+        "Distinguishing DIC from severe liver disease is challenging and requires serial laboratory measurements — both share thrombocytopenia, reduced factor synthesis, and elevated d-dimer, but liver-disease values do not change rapidly (p.977).",
+        "The ISTH overt-DIC scoring tool is not validated for pregnant patients; a separate tool exists for pregnancy (p.977).",
+        "d-Dimer assays are not standardized and have differing normal ranges; degree of increase must be interpreted against the local laboratory range (p.977).",
+        "A single low score does not exclude evolving DIC — a non-overt score (<5) should be repeated every 1-2 days (p.977)."
+      ],
+      "severityClassification": "ISTH overt-DIC score (Table 121-3): Platelets >100x10^9/L = 0, 50-100 = 1, <50 = 2; d-dimer normal = 0, moderate increase = 2, severe increase = 3; PT prolongation <3 s = 0, 3-6 s = 1, >6 s = 2; fibrinogen >1 g/L = 0, <1 g/L = 1. Total <5 = non-overt/low-grade DIC (repeat in 1-2 days); >5 = overt DIC (repeat labs daily). Not for use in pregnant patients (p.977).",
+      "references": [
+        "Harrison 22e p.976",
+        "Harrison 22e p.977",
+        "Harrison 22e p.978",
+        "Harrison 22e p.974"
+      ],
+      "crossLinks": [
+        "ttp_hus",
+        "acute_leukemia",
+        "SEPTIC_SHOCK"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T13:50:09Z",
+      "contentHash": "h7ebecc0e"
+    }
+  }
 }
