@@ -1,0 +1,88 @@
+{
+  "id": "prostate_cancer",
+  "name": "Prostate Disease (BPH & Cancer)",
+  "system": "Oncology / Urology",
+  "class": "non_infective",
+  "chapter": 92,
+  "page": 695,
+  "aliases": [
+    "prostate cancer",
+    "BPH",
+    "benign prostatic hyperplasia"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.695-704",
+    "clinicalPearls": [
+      "Both benign and malignant prostate changes rise sharply with age: autopsies of men in the eighth decade show hyperplastic changes in >90% and malignant changes in >70%, so management is risk-adapted and weighed against competing causes of morbidity and mortality (p.695).",
+      "BPH arises in the periurethral transition zone surrounding the urethra, whereas most cancers arise in the peripheral zone; peripheral-zone cancers may or may not be palpable on digital rectal exam (DRE) (p.696).",
+      "BPH causes lower urinary tract symptoms (LUTS) split into obstructive symptoms (hesitancy, straining, weak stream, terminal dribbling, prolonged voiding, incomplete emptying) and irritative symptoms (frequency, urgency, urge incontinence, small voided volumes); LUTS reflect both prostatic enlargement and age-related detrusor dysfunction, not mass effect alone (p.703).",
+      "PSA (kallikrein KLK3) is prostate specific, NOT prostate cancer specific: it can rise from prostatitis, BPH, or cancer; a lower free PSA fraction is more likely associated with cancer at biopsy (p.696-697).",
+      "After radical prostatectomy PSA should become undetectable within about 6 weeks (no prostate = no detectable PSA); persistence of measurable PSA after gland removal is typical of recurrent cancer (p.696-697).",
+      "Only 20-25% of patients with an abnormal DRE have prostate cancer; carcinoma is characteristically hard, nodular, irregular, asymmetric, but induration can also be BPH or calculi (p.696).",
+      ">95% of prostate cancers are adenocarcinomas; the remainder are squamous, transitional cell, rarely carcinosarcoma or small-cell histologies (p.697).",
+      "Most men diagnosed with prostate cancer will NOT die of it; the incidence/mortality ratio is extremely high relative to other malignancies, which drives the active-surveillance vs treatment balance (p.695).",
+      "Multiparametric prostate MRI (mpMRI) graded by PI-RADS is now obtained in most cases BEFORE biopsy: PI-RADS 1-2 lesions can safely avoid biopsy; PI-RADS 3-5 lesions get targeted biopsy, reducing detection of indolent Gleason 6 (grade group 1) cancers without missing clinically relevant ones (p.697)."
+    ],
+    "pathophysiology": "The prostate (pelvic, adjacent to rectum, bladder, neurovascular bundles and urinary sphincter) is composed of tubuloalveolar glands in fibromuscular stroma. PSA is produced by epithelial cells; both epithelial and stromal cells express androgen receptors (AR) and depend on androgens for growth. Testosterone is converted by prostatic 5alpha-reductase to the more potent dihydrotestosterone. BPH is non-malignant proliferation of the periurethral transition zone (begins at puberty, accelerates after age 55) producing bladder-outlet obstruction; symptoms also reflect age-related detrusor dysfunction. Malignancy usually arises in the peripheral zone; the cancer continuum runs from preneoplastic/localized lesion to metastatic, symptomatic, lethal disease over years to decades. Prostate cancer is AR-signaling dependent, so androgen deprivation is the mainstay of metastatic therapy; castration-resistant prostate cancer (CRPC) progresses despite castrate testosterone (<=50 ng/mL) because most CRPCs continue to express and signal through the AR, and androgen-resistant cells are present from diagnosis (cure is not achieved by androgen depletion alone). (p.695-696, 702-703)",
+    "additionalDifferentials": [
+      "Benign prostatic hyperplasia (transition-zone enlargement, bladder-outlet obstruction)",
+      "Acute/chronic bacterial prostatitis (can elevate PSA)",
+      "Overactive bladder (frequently coexists with BPH-related LUTS)",
+      "Age-related detrusor dysfunction / primary bladder dysfunction (detected on pressure-flow urodynamics)",
+      "Urethral stricture or bladder-neck contracture as alternative cause of obstructive voiding",
+      "Prostatic calculi (cause of palpable induration on DRE)"
+    ],
+    "infectionMimics": [
+      "Bacterial prostatitis (raises PSA and can mimic malignancy biochemically; treat symptomatic bacterial prostatitis with antibiotics before biopsy, but routine antibiotics in an asymptomatic patient with elevated PSA are discouraged)",
+      "Recurrent urinary tract infection as a complication of bladder-outlet obstruction"
+    ],
+    "nonInfectiousMimics": [
+      "BPH-related induration on DRE mimicking carcinoma",
+      "Prostatic calculi causing nodularity",
+      "Degenerative spine disease, spinal stenosis, or osteoporotic vertebral collapse mimicking metastatic bone pain in advanced disease (require accurate diagnosis before attributing pain to metastases)",
+      "Direct invasion of the prostate by colon cancer or bladder transitional cell carcinoma (true metastases TO the prostate are rare)"
+    ],
+    "additionalInvestigations": [
+      "Digital rectal exam (assesses size, symmetry, consistency, nodules; NOT a validated standalone screening test due to frequent false positives and false negatives)",
+      "Serum PSA (total); free/total PSA ratio; common biopsy-prompting cut point total PSA >=4 ng/mL (no PSA level carries zero cancer risk)",
+      "Second-line stratifying tests after elevated PSA: 4K Score, Prostate Health Index (PHI = free PSA + total PSA + [-2]proPSA), urine ExoDx exosome test, Select-MDx mRNA test",
+      "Multiparametric prostate MRI (mpMRI) with PI-RADS scoring before biopsy",
+      "Image-guided needle biopsy (TRUS-, MRI-, or fusion-guided; extended 12-core pattern; MRI-guided superior to ultrasound-guided)",
+      "Gleason grading and the five-tier grade group system (grade group 1 = Gleason <=6 favorable, up to grade group 5 = Gleason 9-10)",
+      "TNM staging (T1c PSA-detected, T2 palpable organ-confined, T3-T4 extraprostatic); risk stratification into low/intermediate(favorable vs unfavorable)/high/very-high risk",
+      "PSMA PET scan (FDA approved for intermediate/high-risk disease; more sensitive/specific than conventional imaging but cannot detect low-volume microscopic disease)",
+      "For BPH: AUA Symptom Index (AUASI) / International Prostate Symptom Score (IPSS), uroflowmetry, bladder ultrasound for postvoid residual, pressure-flow urodynamics, cystoscopy if hematuria, upper-tract imaging if hematuria/calculi/prior tract problems"
+    ],
+    "redFlags": [
+      "Osteoblastic bone metastases (prostate cancer characteristically produces bone-forming metastases) presenting as back/skeletal pain; bone is the dominant site of metastatic and castration-resistant progression",
+      "Spinal cord compression / cord compromise or base-of-skull symptoms from metastatic disease require EMERGENCY evaluation because loss of neurologic function may be permanent if not treated quickly",
+      "GnRH agonists are relatively contraindicated in patients with significant urinary obstruction, cancer-related pain, or spinal cord compromise because the initial testosterone surge can cause a disease flare (AR antagonists are added to blunt flare; GnRH antagonists and abiraterone do not cause a surge)",
+      "BPH danger signs mandating evaluation/treatment regardless of gland size: inability to urinate (acute urinary retention), gross hematuria, recurrent infection, or bladder stones",
+      "Rising nadir PSA >4 ng/mL at 6-8 months after starting androgen deprivation predicts markedly inferior survival",
+      "Marrow infiltration (myelophthisis), coagulopathy, or thromboembolism as manifestations of widespread metastatic disease"
+    ],
+    "prognosis": "Most men with prostate cancer do not die from it; >70-80% of newly diagnosed cancers are now organ-confined. Nonmetastatic disease is stratified low/intermediate/high (and very-high) risk; grade group system accurately predicts prognosis with grade group 1 (Gleason <=6) being favorable. A single PSA at age 60 correlates strongly (AUC 0.90) with lifetime risk of death from prostate cancer, and ~90% of prostate-cancer deaths occur in the top PSA quartile (>2 ng/mL), though only a minority of those men develop lethal disease. Androgen deprivation produces an initial response and dormant period but is not curative; PSA normalizes in 60-70% and measurable disease regresses in >50%, with survival inversely proportional to disease extent at treatment start and to the 6-8 month nadir PSA. Castration-resistant prostate cancer is lethal for most patients; multiple agents (abiraterone, enzalutamide, docetaxel, cabazitaxel, radium-223, Lu-177 PSMA-617, PARP inhibitors for BRCA/DNA-repair mutations, checkpoint inhibitors for MSI-high/dMMR) prolong survival. (p.695, 697, 701-703)",
+    "pitfalls": [
+      "PSA screening is controversial: it generates both false positives and false negatives and can lead to diagnosis and treatment of indolent cancers that pose little risk; the decision (USPSTF: individual shared decision for men 55-69, recommended AGAINST screening at age >=70; AUA: shared decision, earlier for Black ancestry/germline mutations/strong family history) must balance benefit against overtreatment harm.",
+      "PSA is prostate specific, not cancer specific - do not equate an elevated PSA with cancer; BPH and prostatitis also raise it.",
+      "There is NO PSA level below which prostate cancer risk is zero (Prostate Cancer Prevention Trial); a 'normal' PSA does not exclude cancer.",
+      "DRE alone is inaccurate for staging (capsular invasion, seminal-vesicle and nodal involvement) and is not a validated screening test by itself.",
+      "Patients misread Gleason 6 as 'mid-scale' and assume aggressive disease; the grade group system was created because Gleason 6 (grade group 1) is actually the lowest, favorable-risk category.",
+      "PSMA PET, despite high sensitivity, cannot detect low-volume microscopic nodal disease - a negative scan does not exclude micrometastasis.",
+      "A negative biopsy in a patient with elevated PSA does NOT rule out a future cancer diagnosis - continue follow-up.",
+      "No agent is currently approved for prostate cancer prevention (5-alpha-reductase inhibitors reduced mainly low-risk indolent cancers; vitamins/supplements showed no benefit).",
+      "No rationale to screen asymptomatic men with short life expectancy; antiandrogen monotherapy gives inferior cancer-specific outcomes versus castration."
+    ],
+    "severityClassification": "Gleason grade group system: grade group 1 (Gleason <=6), 2 (3+4=7), 3 (4+3=7), 4 (4+4=8), 5 (Gleason 9-10). TNM staging: T1c clinically inapparent PSA-detected; T2 palpable, confined within prostate; T3 extends through capsule/seminal vesicles (T3b); T4 fixed or invading adjacent structures. Nonmetastatic risk groups: low (organ-confined, PSA <10, grade group 1); intermediate (organ-confined, PSA 10-20, or grade group 2 favorable / 3 unfavorable, with >50% positive cores = unfavorable); high (extraprostatic, PSA >20, or grade group 4-5); very-high (seminal vesicle T3b or adjacent-organ T4 invasion or multiple high-grade biopsy samples). Metastatic states: noncastrate metastatic (testosterone >50 ng/dL) vs castration-resistant (CRPC, testosterone <=50 ng/mL). (p.697-698, 701-703)",
+    "references": [
+      "Harrison 22e p.695-704"
+    ],
+    "crossLinks": [
+      "cord_compression"
+    ]
+  }
+}
