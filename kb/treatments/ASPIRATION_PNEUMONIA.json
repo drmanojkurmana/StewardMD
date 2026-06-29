@@ -1,0 +1,184 @@
+{
+  "id": "ASPIRATION_PNEUMONIA",
+  "diseaseId": "ASPIRATION_PNEUMONIA",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "amoxicillin-clavulanate",
+          "regimenLabel": "Amoxicillin-clavulanate",
+          "dose": "875/125 mg",
+          "route": "Oral (or 1.2 g IV if hospitalized)",
+          "freq": "every 12 hours (IV: every 8 hours)",
+          "duration": "5-7 days",
+          "coverage": null,
+          "why": "Provides reliable coverage of oral anaerobes alongside typical community pathogens, addressing the polymicrobial nature of aspiration pneumonia in a single well-tolerated agent."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/ATS CAP Guidelines (Aspiration Pneumonia section)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "clindamycin",
+          "regimenLabel": "Clindamycin (penicillin allergy)",
+          "dose": "450-600 mg",
+          "route": "Oral/IV",
+          "freq": "every 8 hours",
+          "duration": "5-7 days",
+          "coverage": "Strong anaerobic coverage; reasonable alternative in penicillin allergy, though lacks reliable gram-negative coverage.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/ATS CAP Guidelines (Aspiration Pneumonia section)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (hospital-associated or severe)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "7 days",
+          "coverage": "Broader coverage including anaerobes and gram-negatives for hospital-associated aspiration or more severe presentations.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA/ATS CAP Guidelines (Aspiration Pneumonia section)"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Oral anaerobes",
+        "S. pneumoniae",
+        "S. aureus",
+        "Enterobacteriaceae"
+      ],
+      "drugs": [
+        "Amoxicillin-clavulanate",
+        "Clindamycin",
+        "Pip-Tazo"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✘",
+          "Partial"
+        ],
+        [
+          "✘",
+          "✘",
+          "✔"
+        ]
+      ],
+      "completeness": "Amoxicillin-clavulanate covers the core polymicrobial flora for community-acquired aspiration.",
+      "gaps": [
+        "MRSA not reliably covered by any of these — add vancomycin/linezolid only with specific risk factors."
+      ]
+    },
+    "deescalation": "Narrow or stop anaerobic-specific coverage if cultures (when obtained) do not support it and the patient is improving on a narrower-spectrum agent; reassess for evolving lung abscess if response is slow.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-clavulanate",
+            "dose": "875/125 mg",
+            "route": "Oral (or 1.2 g IV if hospitalized)",
+            "frequency": "every 12 hours (IV: every 8 hours)",
+            "duration": "5-7 days",
+            "why": "Provides reliable coverage of oral anaerobes alongside typical community pathogens, addressing the polymicrobial nature of aspiration pneumonia in a single well-tolerated agent."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Clindamycin (penicillin allergy)",
+            "dose": "450-600 mg",
+            "route": "Oral/IV",
+            "frequency": "every 8 hours",
+            "duration": "5-7 days",
+            "coverage": "Strong anaerobic coverage; reasonable alternative in penicillin allergy, though lacks reliable gram-negative coverage."
+          },
+          {
+            "drug": "Piperacillin-tazobactam (hospital-associated or severe)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "7 days",
+            "coverage": "Broader coverage including anaerobes and gram-negatives for hospital-associated aspiration or more severe presentations."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypoxia",
+      "tachypnea"
+    ],
+    "framework": [
+      "Routine anaerobic coverage is appropriate for witnessed/strongly suspected aspiration — but not for typical CAP without an aspiration history, where it adds unnecessary spectrum.",
+      "Address the underlying aspiration risk (dysphagia evaluation, positioning, oral hygiene) as part of management, not antibiotics alone — recurrence is otherwise likely.",
+      "De-escalate based on clinical response; prolonged anaerobic coverage beyond 7 days is not routinely needed for uncomplicated aspiration pneumonia (distinct from lung abscess, which needs longer therapy)."
+    ]
+  },
+  "references": [
+    "Harrison's Principles of Internal Medicine",
+    "IDSA/ATS CAP Guidelines (Aspiration Pneumonia section)"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

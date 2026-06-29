@@ -109,5 +109,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA Guidelines for Intravascular Catheter-Related Infection",
+    "AHA/ESC Infective Endocarditis Guidelines (for CIED infection)",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`Fever${e.erythemaAtSite?\" with erythema/purulence at the device site\":\"\"} in a patient with an indwelling device (${[e.centralLine&&\"central venous catheter\",e.prostheticValve&&\"prosthetic valve\",e.cardiacImplantableDevice&&\"cardiac implantable electronic device\"].filter(Boolean).join(\", \")||\"indwelling device\"}) raises concern for device-related infection. Source control (device removal/exchange where feasible) is as important as antibiotics — antibiotics alone frequently fail to clear infection while the device remains in place, particularly for biofilm-forming organisms.`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

@@ -1,0 +1,51 @@
+{
+  "id": "itp",
+  "diseaseId": "itp",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "No/minor bleeding with platelets >20–30: often observe.",
+        "Treat if bleeding or very low count: corticosteroids (prednisolone or dexamethasone) ± IVIG for rapid rise.",
+        "Life-threatening bleeding: IVIG + IV methylprednisolone + platelet transfusion (and consider TXA).",
+        "Second-line: TPO-receptor agonists, rituximab, or splenectomy.",
+        "Avoid antiplatelets/anticoagulants; confirm diagnosis (exclude secondary causes)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ASH ITP",
+        "refs": [
+          "Harrison 22e · ASH ITP"
+        ]
+      }
+    }
+  ],
+  "confirm": "Isolated thrombocytopenia with otherwise normal counts/film and no alternative cause; bleeding risk relates to platelet count.",
+  "investigations": [
+    {
+      "test": "FBC + blood film"
+    },
+    {
+      "test": "Exclude secondary causes (HIV, HCV, drugs, SLE)"
+    },
+    {
+      "test": "H. pylori where relevant"
+    }
+  ],
+  "disposition": "Outpatient if stable; admit if bleeding/very low.",
+  "references": [
+    "Harrison 22e · ASH ITP"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

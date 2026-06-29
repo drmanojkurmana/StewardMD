@@ -1,0 +1,51 @@
+{
+  "id": "renal_colic",
+  "diseaseId": "renal_colic",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Analgesia: an NSAID (e.g. IM/PR diclofenac) is first-line; opioid if NSAID contraindicated.",
+        "Antiemetic and fluids as needed; non-contrast CT KUB to confirm and size the stone.",
+        "Most stones <5 mm pass spontaneously — manage conservatively with analgesia ± medical expulsive therapy (alpha-blocker) and strain urine.",
+        "URGENT urology if obstruction WITH infection (obstructed infected system = emergency decompression), AKI, single kidney, or uncontrolled pain.",
+        "Larger/non-passing stones → urology for lithotripsy/ureteroscopy; advise hydration and prevention."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · EAU urolithiasis",
+        "refs": [
+          "Harrison 22e · EAU urolithiasis"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sudden severe loin-to-groin colicky pain ± haematuria, restless patient; non-contrast CT KUB confirms a stone and its size/site.",
+  "investigations": [
+    {
+      "test": "Non-contrast CT KUB"
+    },
+    {
+      "test": "Urinalysis, U&E, FBC/CRP"
+    },
+    {
+      "test": "Stone analysis/metabolic work-up if recurrent"
+    }
+  ],
+  "disposition": "Often outpatient; admit if infected/obstructed, AKI, or intractable pain.",
+  "references": [
+    "Harrison 22e · EAU urolithiasis"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

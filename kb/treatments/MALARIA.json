@@ -1,0 +1,44 @@
+{
+  "id": "MALARIA",
+  "diseaseId": "MALARIA",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Not applicable to antibiotics. Once species is confirmed, ensure species-appropriate antimalarial therapy is given (e.g., artemisinin-based combination therapy for P. falciparum per national guidelines; chloroquine plus primaquine for P. vivax in chloroquine-sensitive regions, with G6PD testing before primaquine).",
+    "regimens": [],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "alteredSensorium",
+      "organDysfunction",
+      "jaundice"
+    ],
+    "framework": [
+      "This is a parasitic, not bacterial, infection — antibiotics provide no benefit and should not be given for malaria itself.",
+      "Confirm species by peripheral smear (gold standard, also allows parasite density quantification) or rapid diagnostic test before starting species-specific antimalarial therapy.",
+      "Watch closely for severity criteria (P. falciparum): impaired consciousness, acidosis, hypoglycemia, severe anemia, renal impairment, pulmonary edema, significant bleeding, shock, or high parasitemia — any of these mandate IV artesunate and higher level of care, not oral therapy."
+    ]
+  },
+  "references": [
+    "WHO Guidelines for Malaria",
+    "National Vector Borne Disease Control Programme (NVBDCP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "green",
+    "label": "Antibiotics NOT indicated"
+  },
+  "antibioticRelevant": false,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

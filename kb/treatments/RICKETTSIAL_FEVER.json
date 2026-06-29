@@ -1,0 +1,134 @@
+{
+  "id": "RICKETTSIAL_FEVER",
+  "diseaseId": "RICKETTSIAL_FEVER",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline",
+          "dose": "100 mg",
+          "route": "Oral (or IV if unable to tolerate oral)",
+          "freq": "every 12 hours",
+          "duration": "7-10 days",
+          "coverage": null,
+          "why": "Doxycycline is first-line for all spotted fever group rickettsioses, with the same rapid, dramatic clinical response characteristic of rickettsial disease in general."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "NCDC India Guidelines for Rickettsial Diseases",
+          "Harrison's Principles of Internal Medicine",
+          "CDC Rickettsial Disease Resources"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin (pregnancy or doxycycline intolerance)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days total",
+          "coverage": "Reasonable alternative when tetracyclines are relatively contraindicated, though doxycycline remains preferred even in most pregnancy guidance given disease severity considerations — individualize per specialist input.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "NCDC India Guidelines for Rickettsial Diseases",
+          "Harrison's Principles of Internal Medicine",
+          "CDC Rickettsial Disease Resources"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Rickettsia species (spotted fever group)"
+      ],
+      "drugs": [
+        "Doxycycline"
+      ],
+      "grid": [
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Doxycycline provides complete coverage of the causative organism.",
+      "gaps": [
+        "None for the primary pathogen — ensure careful skin exam to exclude scrub typhus (different epidemiological pattern, though same first-line treatment)."
+      ]
+    },
+    "deescalation": "Not applicable — doxycycline is already the single most targeted agent. If the patient fails to improve within 48-72 hours, reconsider the diagnosis rather than escalating antibiotics.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Doxycycline",
+            "dose": "100 mg",
+            "route": "Oral (or IV if unable to tolerate oral)",
+            "frequency": "every 12 hours",
+            "duration": "7-10 days",
+            "why": "Doxycycline is first-line for all spotted fever group rickettsioses, with the same rapid, dramatic clinical response characteristic of rickettsial disease in general."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Azithromycin (pregnancy or doxycycline intolerance)",
+            "dose": "500 mg day 1, then 250 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days total",
+            "coverage": "Reasonable alternative when tetracyclines are relatively contraindicated, though doxycycline remains preferred even in most pregnancy guidance given disease severity considerations — individualize per specialist input."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "organDysfunction",
+      "hypotension"
+    ],
+    "framework": [
+      "Do not withhold empiric doxycycline pending serology in a clinically compatible presentation — early treatment significantly reduces morbidity, similar to scrub typhus.",
+      "Always perform a careful skin examination for an eschar — if found, this points more specifically to scrub typhus, though treatment (doxycycline) is the same either way, so this distinction matters more for epidemiological/public health purposes than immediate management.",
+      "Treat for the full course even after rapid defervescence, which is characteristic of rickettsial disease but does not justify a shortened course."
+    ]
+  },
+  "references": [
+    "NCDC India Guidelines for Rickettsial Diseases",
+    "Harrison's Principles of Internal Medicine",
+    "CDC Rickettsial Disease Resources"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

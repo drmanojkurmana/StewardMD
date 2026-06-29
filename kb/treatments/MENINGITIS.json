@@ -1,42 +1,226 @@
 {
   "id": "MENINGITIS",
   "diseaseId": "MENINGITIS",
-  "precedence": ["icmr", "guideline", "harrison"],
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
   "recommendations": [
-    {
-      "tier": "icmr",
-      "line": "empiric",
-      "regimenLabel": "Ceftriaxone + Vancomycin (add Ampicillin if Listeria risk: age >50 / immunocompromised)",
-      "drugRefs": [
-        { "composition": "ceftriaxone", "dose": "2 g", "route": "IV", "freq": "q12h", "duration": "per organism", "comboLabel": "empiric backbone" },
-        { "composition": "vancomycin", "dose": "15–20 mg/kg", "route": "IV", "freq": "q8–12h (TDM)", "duration": null, "comboLabel": "pneumococcal resistance cover" },
-        { "composition": "ampicillin", "dose": "2 g", "route": "IV", "freq": "q4h", "duration": null, "comboLabel": "Listeria (if at risk)" }
-      ],
-      "evidence": { "source": "ICMR", "ref": "ICMR Treatment Guidelines for Antimicrobial Use (2024)", "locator": { "page": null, "section": "CNS infections" }, "grade": null },
-      "notes": "Default for India. Give dexamethasone with/just before the first antibiotic dose in suspected pneumococcal meningitis."
-    },
     {
       "tier": "guideline",
       "line": "empiric",
-      "regimenLabel": "Vancomycin + 3rd-gen cephalosporin (± Ampicillin for Listeria)",
       "drugRefs": [
-        { "composition": "vancomycin", "dose": null, "route": "IV", "freq": null, "duration": null, "comboLabel": null },
-        { "composition": "ceftriaxone", "dose": null, "route": "IV", "freq": null, "duration": null, "comboLabel": null }
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 12 hours",
+          "duration": "10-14 days (organism-dependent)",
+          "coverage": null,
+          "why": "Reliable CSF penetration and coverage of S. pneumoniae and N. meningitidis, the two dominant pathogens in community-acquired bacterial meningitis."
+        },
+        {
+          "composition": "vancomycin",
+          "regimenLabel": "Vancomycin",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "freq": "every 8-12 hours (trough-guided)",
+          "duration": "10-14 days",
+          "coverage": null,
+          "why": "Added empirically to cover the possibility of ceftriaxone-resistant S. pneumoniae, given the high stakes of inadequate coverage in this disease."
+        },
+        {
+          "composition": "dexamethasone",
+          "regimenLabel": "Dexamethasone (adjunctive)",
+          "dose": "10 mg",
+          "route": "IV",
+          "freq": "every 6 hours, given with or just before first antibiotic dose",
+          "duration": "4 days",
+          "coverage": null,
+          "why": "Adjunctive dexamethasone reduces mortality and neurological sequelae specifically in pneumococcal meningitis when given with or before the first antibiotic dose."
+        }
       ],
-      "evidence": { "source": "IDSA", "ref": "IDSA Practice Guidelines for Bacterial Meningitis", "locator": { "page": null, "section": null }, "grade": "A-III" },
-      "notes": "International evidence-based default when ICMR is silent."
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Bacterial Meningitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (for hemodynamic support if shock present)"
+        ]
+      }
     },
     {
-      "tier": "harrison",
-      "line": "empiric",
-      "regimenLabel": "Ceftriaxone + Vancomycin (± Ampicillin) + Dexamethasone",
-      "drugRefs": [],
-      "evidence": { "source": "Harrison 22e", "ref": "Harrison's Principles of Internal Medicine, 22e", "locator": { "page": null, "section": "Acute Bacterial Meningitis" }, "grade": null },
-      "notes": "Textbook fallback when neither ICMR nor a society guideline is available."
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ampicillin",
+          "regimenLabel": "Ampicillin (added if Listeria risk: age >50, pregnant, immunocompromised)",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 4 hours",
+          "duration": "≥21 days if Listeria confirmed",
+          "coverage": "Covers Listeria monocytogenes, which is intrinsically resistant to cephalosporins and would otherwise be missed by the standard regimen.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Bacterial Meningitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (for hemodynamic support if shock present)"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "meropenem",
+          "regimenLabel": "Meropenem (severe penicillin allergy or healthcare-associated)",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "10-14 days",
+          "coverage": "Alternative broad-spectrum option with good CSF penetration in specific allergy or healthcare-associated scenarios.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Bacterial Meningitis Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Surviving Sepsis Campaign (for hemodynamic support if shock present)"
+        ]
+      }
     }
   ],
-  "conflicts": [],
-  "review": { "status": "approved", "reviewedBy": null, "reviewedAt": null },
-  "version": 1,
-  "contentHash": null
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. pneumoniae",
+        "N. meningitidis",
+        "Listeria",
+        "H. influenzae"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Vancomycin",
+        "Ampicillin (if added)"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔ (backup)",
+          "✘"
+        ],
+        [
+          "✔",
+          "✘",
+          "✘"
+        ],
+        [
+          "✘",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘",
+          "✘"
+        ]
+      ],
+      "completeness": "Ceftriaxone + vancomycin covers the leading pathogens across most age groups; ampicillin must be added specifically for Listeria risk groups.",
+      "gaps": [
+        "Listeria is not covered unless ampicillin is added — this is a common and dangerous omission in patients over 50 or immunocompromised."
+      ]
+    },
+    "deescalation": "Once CSF culture confirms the organism, narrow to the single most targeted agent — e.g., confirmed penicillin-susceptible S. pneumoniae allows discontinuation of vancomycin; confirmed N. meningitidis allows narrowing to penicillin G or ceftriaxone alone.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 12 hours",
+            "duration": "10-14 days (organism-dependent)",
+            "why": "Reliable CSF penetration and coverage of S. pneumoniae and N. meningitidis, the two dominant pathogens in community-acquired bacterial meningitis."
+          },
+          {
+            "drug": "Vancomycin",
+            "dose": "15-20 mg/kg",
+            "route": "IV",
+            "frequency": "every 8-12 hours (trough-guided)",
+            "duration": "10-14 days",
+            "why": "Added empirically to cover the possibility of ceftriaxone-resistant S. pneumoniae, given the high stakes of inadequate coverage in this disease."
+          },
+          {
+            "drug": "Dexamethasone (adjunctive)",
+            "dose": "10 mg",
+            "route": "IV",
+            "frequency": "every 6 hours, given with or just before first antibiotic dose",
+            "duration": "4 days",
+            "why": "Adjunctive dexamethasone reduces mortality and neurological sequelae specifically in pneumococcal meningitis when given with or before the first antibiotic dose."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Ampicillin (added if Listeria risk: age >50, pregnant, immunocompromised)",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 4 hours",
+            "duration": "≥21 days if Listeria confirmed",
+            "coverage": "Covers Listeria monocytogenes, which is intrinsically resistant to cephalosporins and would otherwise be missed by the standard regimen."
+          },
+          {
+            "drug": "Meropenem (severe penicillin allergy or healthcare-associated)",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "10-14 days",
+            "coverage": "Alternative broad-spectrum option with good CSF penetration in specific allergy or healthcare-associated scenarios."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "alteredSensorium",
+      "hypotension",
+      "petechialRash",
+      "seizure"
+    ],
+    "framework": [
+      "Do not delay empiric antibiotics for lumbar puncture or imaging — give antibiotics immediately on clinical suspicion, then proceed to LP if safe and feasible.",
+      "Add ampicillin specifically for Listeria risk groups (age >50, pregnant, immunocompromised) — this is frequently missed and has serious consequences if omitted.",
+      "De-escalate promptly once CSF culture and Gram stain identify the specific organism and susceptibility."
+    ]
+  },
+  "references": [
+    "IDSA Bacterial Meningitis Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "Surviving Sepsis Campaign (for hemodynamic support if shock present)"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
 }

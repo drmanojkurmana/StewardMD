@@ -1,0 +1,119 @@
+{
+  "id": "DISSEMINATED_TB",
+  "diseaseId": "DISSEMINATED_TB",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "isoniazid + rifampicin + pyrazinamide + ethambutol",
+          "regimenLabel": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)",
+          "dose": "Weight-band dosing per national TB program",
+          "route": "Oral",
+          "freq": "once daily (DOTS schedule)",
+          "duration": "2 months intensive phase, then HR for 4-10 months continuation (total duration extended if CNS/bone involvement identified)",
+          "coverage": null,
+          "why": "Standard four-drug regimen; duration should be extended if disseminated disease is found to involve the CNS or skeletal system on further workup, which would change the continuation phase length."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "modified regimens per drug-susceptibility testing",
+          "regimenLabel": "Modified regimens per drug-susceptibility testing",
+          "dose": "Per DR-TB program protocol",
+          "route": "Per regimen",
+          "freq": "Per regimen",
+          "duration": "Extended per resistance pattern",
+          "coverage": "Used when resistance is identified or the patient fails to respond to first-line therapy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO TB Guidelines",
+          "National TB Elimination Programme (NTEP) India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Not applicable in the usual sense — continue empiric ATT for the determined duration once started, with duration extended if CNS or skeletal involvement is subsequently identified.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)",
+            "dose": "Weight-band dosing per national TB program",
+            "route": "Oral",
+            "frequency": "once daily (DOTS schedule)",
+            "duration": "2 months intensive phase, then HR for 4-10 months continuation (total duration extended if CNS/bone involvement identified)",
+            "why": "Standard four-drug regimen; duration should be extended if disseminated disease is found to involve the CNS or skeletal system on further workup, which would change the continuation phase length."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Modified regimens per drug-susceptibility testing",
+            "dose": "Per DR-TB program protocol",
+            "route": "Per regimen",
+            "frequency": "Per regimen",
+            "duration": "Extended per resistance pattern",
+            "coverage": "Used when resistance is identified or the patient fails to respond to first-line therapy."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "weightLoss",
+      "immunocompromised",
+      "organDysfunction"
+    ],
+    "framework": [
+      "Make reasonable, parallel attempts at microbiological/histological confirmation (sputum, blood culture for AFB/mycobacterial blood culture, bone marrow or liver biopsy if indicated) but do not let this delay treatment in a deteriorating or critically ill patient with strong clinical suspicion.",
+      "Screen for and manage immunosuppressive causes (notably HIV) concurrently, since these significantly affect both presentation and treatment considerations (drug interactions, immune reconstitution).",
+      "Register and notify per national TB program requirements once treatment is started.",
+      "Evaluate for CNS and skeletal involvement specifically, as this extends required treatment duration beyond the standard 6 months."
+    ]
+  },
+  "references": [
+    "WHO TB Guidelines",
+    "National TB Elimination Programme (NTEP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

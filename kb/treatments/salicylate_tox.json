@@ -1,0 +1,51 @@
+{
+  "id": "salicylate_tox",
+  "diseaseId": "salicylate_tox",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Resuscitate; correct hypokalaemia and hypoglycaemia (cerebral glucose may be low despite normal serum).",
+        "Activated charcoal if early; generous IV fluids.",
+        "Urinary alkalinisation with IV sodium bicarbonate (target urine pH ~7.5–8) — enhances elimination; keep K replete.",
+        "HAEMODIALYSIS for severe toxicity (high levels, acidosis, CNS features, renal failure, pulmonary oedema).",
+        "Avoid intubation if possible (loss of compensatory hyperventilation is dangerous); serial levels."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · poisons service",
+        "refs": [
+          "Harrison 22e · poisons service"
+        ]
+      }
+    }
+  ],
+  "confirm": "Tinnitus, hyperventilation, nausea, agitation with a mixed respiratory alkalosis + high-anion-gap metabolic acidosis; rising salicylate level.",
+  "investigations": [
+    {
+      "test": "Serial salicylate levels"
+    },
+    {
+      "test": "ABG/VBG, U&E (potassium), glucose"
+    },
+    {
+      "test": "Paracetamol level (co-ingestion)"
+    }
+  ],
+  "disposition": "Admit; severe → ICU/dialysis.",
+  "references": [
+    "Harrison 22e · poisons service"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

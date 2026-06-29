@@ -1,0 +1,51 @@
+{
+  "id": "pleural_effusion",
+  "diseaseId": "pleural_effusion",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Diagnostic pleural aspiration (US-guided) — protein, LDH, pH, cytology, microbiology.",
+        "Apply Light's criteria; treat the underlying cause (heart failure, malignancy, etc.).",
+        "Therapeutic drainage for breathlessness (avoid >1.5 L at once — re-expansion oedema).",
+        "Suspected empyema/complicated parapneumonic: chest drain.",
+        "Malignant effusion: consider indwelling pleural catheter or pleurodesis."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · BTS pleural",
+        "refs": [
+          "Harrison 22e · BTS pleural"
+        ]
+      }
+    }
+  ],
+  "confirm": "Dyspnoea with stony dull base, reduced breath sounds; CXR/US confirms. Tap to classify (Light's criteria: exudate vs transudate).",
+  "investigations": [
+    {
+      "test": "Pleural US + diagnostic tap"
+    },
+    {
+      "test": "Light's criteria, cytology"
+    },
+    {
+      "test": "Identify primary cause"
+    }
+  ],
+  "disposition": "Admit if large/symptomatic or infected.",
+  "references": [
+    "Harrison 22e · BTS pleural"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

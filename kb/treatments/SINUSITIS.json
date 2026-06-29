@@ -1,0 +1,137 @@
+{
+  "id": "SINUSITIS",
+  "diseaseId": "SINUSITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "amoxicillin-clavulanate",
+          "regimenLabel": "Amoxicillin-clavulanate",
+          "dose": "875/125 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "5-7 days",
+          "coverage": null,
+          "why": "First-line when bacterial criteria are met — covers S. pneumoniae, H. influenzae, and beta-lactamase-producing M. catarrhalis, addressing the main bacterial causes."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Acute Bacterial Rhinosinusitis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline",
+          "dose": "100 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "5-7 days",
+          "coverage": "Alternative in penicillin allergy, covering the same core pathogens.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Acute Bacterial Rhinosinusitis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. pneumoniae",
+        "H. influenzae",
+        "M. catarrhalis"
+      ],
+      "drugs": [
+        "Amoxicillin-clavulanate"
+      ],
+      "grid": [
+        [
+          "✔"
+        ],
+        [
+          "✔"
+        ],
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Covers essentially all expected bacterial pathogens when treatment is indicated.",
+      "gaps": [
+        "None for typical outpatient bacterial sinusitis."
+      ]
+    },
+    "deescalation": "If started empirically and the patient fails to improve in 7 days, reassess for resistant organism or alternative diagnosis rather than escalating reflexively.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Amoxicillin-clavulanate",
+            "dose": "875/125 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "5-7 days",
+            "why": "First-line when bacterial criteria are met — covers S. pneumoniae, H. influenzae, and beta-lactamase-producing M. catarrhalis, addressing the main bacterial causes."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Doxycycline",
+            "dose": "100 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "5-7 days",
+            "coverage": "Alternative in penicillin allergy, covering the same core pathogens."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever"
+    ],
+    "framework": [
+      "Most acute sinusitis is viral and self-limited within 7-10 days — antibiotics should be withheld until bacterial criteria are met.",
+      "Avoid routine imaging or antibiotics for uncomplicated symptoms under 10 days.",
+      "Watchful waiting for 7 days is an appropriate alternative to immediate antibiotics even when bacterial criteria are borderline, in a reliable patient who can follow up."
+    ]
+  },
+  "references": [
+    "IDSA Acute Bacterial Rhinosinusitis Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "yellow",
+    "label": "Observe / Further evaluation required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

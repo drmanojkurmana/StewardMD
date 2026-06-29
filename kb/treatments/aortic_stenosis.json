@@ -1,0 +1,51 @@
+{
+  "id": "aortic_stenosis",
+  "diseaseId": "aortic_stenosis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Echocardiography to grade severity; refer cardiology.",
+        "Avoid aggressive vasodilators/nitrates in severe AS (preload-dependent — risk of collapse).",
+        "Symptomatic severe AS → aortic valve replacement (surgical or TAVI).",
+        "Treat heart failure cautiously; manage concomitant CAD.",
+        "Endocarditis awareness/dental hygiene."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC/AHA valve",
+        "refs": [
+          "Harrison 22e · ESC/AHA valve"
+        ]
+      }
+    }
+  ],
+  "confirm": "Exertional syncope/angina/dyspnoea with an ejection-systolic murmur radiating to carotids, slow-rising pulse. Echo confirms severity.",
+  "investigations": [
+    {
+      "test": "Echocardiography"
+    },
+    {
+      "test": "ECG, CXR"
+    },
+    {
+      "test": "Coronary assessment pre-intervention"
+    }
+  ],
+  "disposition": "Cardiology referral; admit if decompensated.",
+  "references": [
+    "Harrison 22e · ESC/AHA valve"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

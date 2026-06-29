@@ -1,0 +1,51 @@
+{
+  "id": "myasthenic_crisis",
+  "diseaseId": "myasthenic_crisis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "ADMIT to ICU; monitor FVC/NIF — intubate early for respiratory failure.",
+        "IVIG or plasma exchange for the crisis.",
+        "Identify and remove triggers (infection, aminoglycosides, beta-blockers, magnesium).",
+        "Hold/adjust pyridostigmine acutely (secretions); optimise immunotherapy (steroids ± steroid-sparing) once stabilising.",
+        "Steroids may transiently worsen weakness — start cautiously under specialist care."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Worsening bulbar/respiratory weakness in myasthenia gravis (or new presentation) with respiratory failure; often triggered by infection/drugs.",
+  "investigations": [
+    {
+      "test": "FVC/NIF"
+    },
+    {
+      "test": "Anti-AChR/MuSK antibodies"
+    },
+    {
+      "test": "Septic screen, drug review"
+    }
+  ],
+  "disposition": "ICU + neurology.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

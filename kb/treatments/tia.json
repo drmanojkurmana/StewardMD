@@ -1,0 +1,51 @@
+{
+  "id": "tia",
+  "diseaseId": "tia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Start aspirin 300 mg immediately (then secondary prevention).",
+        "Short-term dual antiplatelet (aspirin + clopidogrel) for ~21 days in high-risk TIA/minor stroke.",
+        "Urgent assessment (specialist within 24 h); carotid imaging — endarterectomy if symptomatic high-grade stenosis.",
+        "Anticoagulate if AF; high-intensity statin; control BP, diabetes, smoking.",
+        "Driving advice."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA",
+        "refs": [
+          "Harrison 22e · AHA/ASA"
+        ]
+      }
+    }
+  ],
+  "confirm": "Transient focal neurological deficit fully resolving (usually <1 h) without infarction on imaging. Risk-stratify (ABCD2) and image vasculature.",
+  "investigations": [
+    {
+      "test": "MRI/CT brain, carotid Doppler"
+    },
+    {
+      "test": "ECG ± prolonged monitoring (AF)"
+    },
+    {
+      "test": "Lipids, glucose"
+    }
+  ],
+  "disposition": "Urgent TIA clinic / admit if crescendo.",
+  "references": [
+    "Harrison 22e · AHA/ASA"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

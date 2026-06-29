@@ -124,5 +124,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA/ATS CAP Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "Indian National Treatment Guidelines for Antimicrobial Use"
+  ],
+  "reasonSource": "e=>`Clinical findings (fever, productive cough, crepitations${e.tachypnea?\", tachypnea\":\"\"}${e.consolidation?\", radiographic consolidation\":\"\"}) support a diagnosis of community-acquired pneumonia. Bacterial probability is high enough to justify empiric antibiotic therapy without delay for culture results.`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

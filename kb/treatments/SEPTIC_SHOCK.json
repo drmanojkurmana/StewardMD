@@ -1,0 +1,138 @@
+{
+  "id": "SEPTIC_SHOCK",
+  "diseaseId": "SEPTIC_SHOCK",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam or meropenem",
+          "regimenLabel": "Piperacillin-tazobactam or Meropenem (broader if prior resistant organisms/healthcare exposure)",
+          "dose": "Pip-tazo 4.5 g IV q6-8h or Meropenem 1-2 g IV q8h",
+          "route": "IV",
+          "freq": "as above (extended infusion preferred)",
+          "duration": "Per source, reassessed at 48-72h",
+          "coverage": null,
+          "why": "Maximal reasonable empiric gram-negative and anaerobic coverage is warranted given the mortality risk of inadequate initial coverage in septic shock."
+        },
+        {
+          "composition": "vancomycin or linezolid",
+          "regimenLabel": "Vancomycin or Linezolid",
+          "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided)",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Per source, reassessed at 48-72h",
+          "coverage": null,
+          "why": "Empiric gram-positive/MRSA coverage is added given the severity of illness and the consequences of missing a resistant gram-positive organism."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Surviving Sepsis Campaign Guidelines",
+          "Sepsis-3 Definitions (JAMA)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "add antifungal",
+          "regimenLabel": "Add antifungal (e.g., Fluconazole or Echinocandin) if specific risk factors",
+          "dose": "Per agent and renal function",
+          "route": "IV",
+          "freq": "Per agent",
+          "duration": "Per culture results",
+          "coverage": "Considered in patients with multiple risk factors for invasive candidiasis (prolonged broad-spectrum antibiotics, central line, TPN, recent abdominal surgery) who remain unstable despite antibacterial therapy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Surviving Sepsis Campaign Guidelines",
+          "Sepsis-3 Definitions (JAMA)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Mandatory reassessment at 48-72 hours: narrow to source/organism-directed therapy, discontinue empiric antifungal or vancomycin if not supported by cultures, and target the shortest effective duration once source control is achieved.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam or Meropenem (broader if prior resistant organisms/healthcare exposure)",
+            "dose": "Pip-tazo 4.5 g IV q6-8h or Meropenem 1-2 g IV q8h",
+            "route": "IV",
+            "frequency": "as above (extended infusion preferred)",
+            "duration": "Per source, reassessed at 48-72h",
+            "why": "Maximal reasonable empiric gram-negative and anaerobic coverage is warranted given the mortality risk of inadequate initial coverage in septic shock."
+          },
+          {
+            "drug": "Vancomycin or Linezolid",
+            "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided)",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Per source, reassessed at 48-72h",
+            "why": "Empiric gram-positive/MRSA coverage is added given the severity of illness and the consequences of missing a resistant gram-positive organism."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Add antifungal (e.g., Fluconazole or Echinocandin) if specific risk factors",
+            "dose": "Per agent and renal function",
+            "route": "IV",
+            "frequency": "Per agent",
+            "duration": "Per culture results",
+            "coverage": "Considered in patients with multiple risk factors for invasive candidiasis (prolonged broad-spectrum antibiotics, central line, TPN, recent abdominal surgery) who remain unstable despite antibacterial therapy."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "hypotension",
+      "lactateElevated",
+      "vasopressorRequirement",
+      "organDysfunction",
+      "alteredSensorium"
+    ],
+    "framework": [
+      "Broad empiric coverage is justified in septic shock specifically because of the mortality cost of delay — but this must be paired with mandatory reassessment and de-escalation at 48-72 hours once cultures return.",
+      "Do not continue maximal broad-spectrum therapy beyond what culture data supports — septic shock survivors are at high risk of unnecessarily prolonged broad-spectrum exposure if this step is skipped.",
+      "Source control (drainage of abscess, removal of infected line/device, debridement) is as important as antibiotics and must be pursued in parallel, not after stabilization."
+    ]
+  },
+  "references": [
+    "Surviving Sepsis Campaign Guidelines",
+    "Sepsis-3 Definitions (JAMA)",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

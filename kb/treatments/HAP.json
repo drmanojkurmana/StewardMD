@@ -1,0 +1,207 @@
+{
+  "id": "HAP",
+  "diseaseId": "HAP",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Covers Pseudomonas, Enterobacteriaceae, and other common hospital gram-negatives — appropriate empiric choice when MDR risk is not high."
+        },
+        {
+          "composition": "vancomycin",
+          "regimenLabel": "Vancomycin (if MRSA risk factors)",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "freq": "every 8-12 hours (trough-guided)",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Added when MRSA risk factors are present (prior MRSA colonization, high local MRSA prevalence, recent broad-spectrum antibiotics)."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Local hospital antibiogram"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "cefepime",
+          "regimenLabel": "Cefepime",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "7 days",
+          "coverage": "Antipseudomonal cephalosporin alternative to piperacillin-tazobactam.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Local hospital antibiogram"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "meropenem",
+          "regimenLabel": "Meropenem (if high MDR risk)",
+          "dose": "1 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "7 days",
+          "coverage": "Reserved for patients with prior MDR organism isolation, prolonged ICU stay, or local high carbapenem-resistant organism prevalence.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS HAP/VAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Local hospital antibiogram"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Pseudomonas",
+        "Klebsiella/E. coli",
+        "MRSA",
+        "Acinetobacter"
+      ],
+      "drugs": [
+        "Pip-Tazo",
+        "Vancomycin",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✘",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✘",
+          "Partial"
+        ]
+      ],
+      "completeness": "~85% of expected HAP pathogens covered; Acinetobacter coverage uncertain without local susceptibility data.",
+      "gaps": [
+        "Carbapenem-resistant organisms not covered — escalate only if risk factors or local epidemiology support it."
+      ]
+    },
+    "deescalation": "If culture identifies a susceptible organism (e.g., Pseudomonas sensitive to piperacillin-tazobactam), discontinue vancomycin/broader agents and narrow to the single most active, narrowest-spectrum drug.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "7 days",
+            "why": "Covers Pseudomonas, Enterobacteriaceae, and other common hospital gram-negatives — appropriate empiric choice when MDR risk is not high."
+          },
+          {
+            "drug": "Vancomycin (if MRSA risk factors)",
+            "dose": "15-20 mg/kg",
+            "route": "IV",
+            "frequency": "every 8-12 hours (trough-guided)",
+            "duration": "7 days",
+            "why": "Added when MRSA risk factors are present (prior MRSA colonization, high local MRSA prevalence, recent broad-spectrum antibiotics)."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Cefepime",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "7 days",
+            "coverage": "Antipseudomonal cephalosporin alternative to piperacillin-tazobactam."
+          },
+          {
+            "drug": "Meropenem (if high MDR risk)",
+            "dose": "1 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "7 days",
+            "coverage": "Reserved for patients with prior MDR organism isolation, prolonged ICU stay, or local high carbapenem-resistant organism prevalence."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachypnea",
+      "hypoxia",
+      "hypotension"
+    ],
+    "framework": [
+      "Routine empiric carbapenem use is not recommended unless specific MDR risk factors are present — this preserves carbapenems for confirmed resistant infections.",
+      "MRSA coverage should be added only with defined risk factors, not by default.",
+      "Reassess at 48-72 hours with culture data; de-escalate or discontinue if cultures are negative and the patient improves."
+    ]
+  },
+  "references": [
+    "IDSA/ATS HAP/VAP Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "Local hospital antibiogram"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

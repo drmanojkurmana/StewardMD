@@ -1,0 +1,212 @@
+{
+  "id": "CAP",
+  "diseaseId": "CAP",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "amoxicillin",
+          "regimenLabel": "Amoxicillin",
+          "dose": "1 g",
+          "route": "Oral",
+          "freq": "every 8 hours",
+          "duration": "5 days",
+          "coverage": null,
+          "why": "Amoxicillin is first-line for outpatient CAP without comorbidity — it reliably covers Streptococcus pneumoniae, the dominant pathogen, with a narrow spectrum that limits collateral damage."
+        },
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin (if atypical features or comorbidity)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days total",
+          "coverage": null,
+          "why": "Added when atypical features (dry cough, extrapulmonary symptoms) or comorbidities are present, to cover Mycoplasma, Chlamydophila and Legionella, which amoxicillin does not cover."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA/ATS CAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Indian National Treatment Guidelines for Antimicrobial Use"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline",
+          "dose": "100 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "5-7 days",
+          "coverage": "Covers S. pneumoniae, H. influenzae, and atypicals in a single agent; useful in penicillin allergy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS CAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Indian National Treatment Guidelines for Antimicrobial Use"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "levofloxacin",
+          "regimenLabel": "Levofloxacin",
+          "dose": "750 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days",
+          "coverage": "Respiratory fluoroquinolone covering typical and atypical pathogens; reserve for true beta-lactam/macrolide intolerance due to stewardship concerns over fluoroquinolone overuse.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA/ATS CAP Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "Indian National Treatment Guidelines for Antimicrobial Use"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. pneumoniae",
+        "H. influenzae",
+        "Mycoplasma",
+        "Chlamydophila",
+        "Legionella"
+      ],
+      "drugs": [
+        "Amoxicillin",
+        "Azithromycin",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Combination therapy covers ~95% of expected outpatient CAP pathogens.",
+      "gaps": [
+        "Pseudomonas and resistant gram-negatives are not covered — not expected in this population."
+      ]
+    },
+    "deescalation": "If sputum or blood culture identifies a specific organism with known susceptibility, narrow to the most targeted agent (e.g., penicillin-susceptible S. pneumoniae → amoxicillin alone, discontinuing macrolide).",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Amoxicillin",
+            "dose": "1 g",
+            "route": "Oral",
+            "frequency": "every 8 hours",
+            "duration": "5 days",
+            "why": "Amoxicillin is first-line for outpatient CAP without comorbidity — it reliably covers Streptococcus pneumoniae, the dominant pathogen, with a narrow spectrum that limits collateral damage."
+          },
+          {
+            "drug": "Azithromycin (if atypical features or comorbidity)",
+            "dose": "500 mg day 1, then 250 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days total",
+            "why": "Added when atypical features (dry cough, extrapulmonary symptoms) or comorbidities are present, to cover Mycoplasma, Chlamydophila and Legionella, which amoxicillin does not cover."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Doxycycline",
+            "dose": "100 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "5-7 days",
+            "coverage": "Covers S. pneumoniae, H. influenzae, and atypicals in a single agent; useful in penicillin allergy."
+          },
+          {
+            "drug": "Levofloxacin",
+            "dose": "750 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days",
+            "coverage": "Respiratory fluoroquinolone covering typical and atypical pathogens; reserve for true beta-lactam/macrolide intolerance due to stewardship concerns over fluoroquinolone overuse."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia",
+      "tachypnea"
+    ],
+    "framework": [
+      "No risk factors for Pseudomonas aeruginosa identified — antipseudomonal therapy is not indicated.",
+      "No indication for respiratory fluoroquinolone as first-line — reserve for treatment failure or allergy.",
+      "Avoid routine combination beta-lactam + macrolide unless atypical features or comorbidity present, to limit unnecessary macrolide exposure."
+    ]
+  },
+  "references": [
+    "IDSA/ATS CAP Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "Indian National Treatment Guidelines for Antimicrobial Use"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

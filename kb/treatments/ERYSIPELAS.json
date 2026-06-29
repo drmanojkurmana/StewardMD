@@ -1,0 +1,134 @@
+{
+  "id": "ERYSIPELAS",
+  "diseaseId": "ERYSIPELAS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "penicillin v or penicillin g",
+          "regimenLabel": "Penicillin V (oral) or Penicillin G (IV if systemic symptoms)",
+          "dose": "Penicillin V 500 mg PO q6h or Penicillin G 2-4 million units IV q6h",
+          "route": "Oral or IV depending on severity",
+          "freq": "as above",
+          "duration": "5-10 days",
+          "coverage": null,
+          "why": "Penicillin remains first-line given the near-universal streptococcal etiology of erysipelas — a narrow-spectrum choice is appropriate and avoids unnecessary staphylococcal coverage needed for true cellulitis."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "clindamycin or cephalexin",
+          "regimenLabel": "Clindamycin or Cephalexin (penicillin allergy)",
+          "dose": "Clindamycin 300 mg PO q8h or Cephalexin 500 mg PO q6h",
+          "route": "Oral",
+          "freq": "as above",
+          "duration": "5-10 days",
+          "coverage": "Alternatives for penicillin-allergic patients, retaining reliable streptococcal coverage.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Group A Streptococcus",
+        "Other beta-hemolytic streptococci"
+      ],
+      "drugs": [
+        "Penicillin"
+      ],
+      "grid": [
+        [
+          "✔"
+        ],
+        [
+          "✔"
+        ]
+      ],
+      "completeness": "Penicillin provides essentially complete coverage of the expected pathogens in classic erysipelas.",
+      "gaps": [
+        "If atypical features (purulence, abscess) are present, reconsider the diagnosis toward cellulitis/abscess with staphylococcal coverage rather than treating as erysipelas."
+      ]
+    },
+    "deescalation": "Not typically needed given the reliably narrow-spectrum, targeted first-line therapy; reassess if not improving within 48-72 hours, which should prompt reconsideration of the diagnosis.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Penicillin V (oral) or Penicillin G (IV if systemic symptoms)",
+            "dose": "Penicillin V 500 mg PO q6h or Penicillin G 2-4 million units IV q6h",
+            "route": "Oral or IV depending on severity",
+            "frequency": "as above",
+            "duration": "5-10 days",
+            "why": "Penicillin remains first-line given the near-universal streptococcal etiology of erysipelas — a narrow-spectrum choice is appropriate and avoids unnecessary staphylococcal coverage needed for true cellulitis."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Clindamycin or Cephalexin (penicillin allergy)",
+            "dose": "Clindamycin 300 mg PO q8h or Cephalexin 500 mg PO q6h",
+            "route": "Oral",
+            "frequency": "as above",
+            "duration": "5-10 days",
+            "coverage": "Alternatives for penicillin-allergic patients, retaining reliable streptococcal coverage."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia"
+    ],
+    "framework": [
+      "Avoid broader-spectrum staphylococcal coverage by default — the sharply demarcated border is a genuinely useful clinical sign supporting narrow-spectrum penicillin therapy.",
+      "Elevate the affected limb and manage predisposing factors (lymphedema, venous insufficiency, tinea pedis as an entry point) to reduce recurrence risk.",
+      "Recurrent erysipelas may warrant prophylactic antibiotics in consultation with a specialist — this is a separate long-term decision from acute treatment."
+    ]
+  },
+  "references": [
+    "IDSA Skin and Soft Tissue Infection Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

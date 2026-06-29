@@ -1,0 +1,45 @@
+{
+  "id": "MIXED_MALARIA",
+  "diseaseId": "MIXED_MALARIA",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Not applicable to antibiotics. Complete the full antimalarial course for both species (ACT for the falciparum component, chloroquine/ACT plus primaquine radical cure for the vivax component per G6PD status and national guidelines).",
+    "regimens": [],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "alteredSensorium",
+      "organDysfunction",
+      "jaundice"
+    ],
+    "framework": [
+      "Treat as P. falciparum malaria first and foremost (artemisinin-based combination therapy) given its disproportionate severe-disease risk, while also addressing P. vivax with the appropriate radical cure regimen.",
+      "G6PD testing should be performed before primaquine administration (needed for P. vivax radical cure) given the hemolysis risk in G6PD-deficient patients — this is a mandatory safety step, not optional.",
+      "Monitor closely for severity criteria given the P. falciparum component — mixed infections should be managed with at least the same vigilance as pure falciparum malaria.",
+      "This is not an antibiotic stewardship scenario in the traditional sense — no antibacterial agents are indicated; the key decision is comprehensive antimalarial species coverage."
+    ]
+  },
+  "references": [
+    "WHO Guidelines for Malaria",
+    "National Vector Borne Disease Control Programme (NVBDCP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Urgent antimalarial therapy required (NOT an antibiotic)"
+  },
+  "antibioticRelevant": false,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

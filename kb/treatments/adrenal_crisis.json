@@ -1,0 +1,51 @@
+{
+  "id": "adrenal_crisis",
+  "diseaseId": "adrenal_crisis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Give IV HYDROCORTISONE 100 mg immediately — do NOT wait for cortisol results.",
+        "Aggressive IV fluids (0.9% saline) to correct volume and hypotension.",
+        "Correct hypoglycaemia (IV glucose) and electrolytes.",
+        "Treat the precipitant (often infection); continue hydrocortisone (e.g. 50 mg q6h) then taper.",
+        "Sick-day rules and steroid-emergency card education on recovery."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison 22e · Endocrine Society"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hypotension/shock, vomiting, hypoglycaemia, hyponatraemia ± known adrenal insufficiency or steroid withdrawal/stress. Treat on suspicion.",
+  "investigations": [
+    {
+      "test": "Paired cortisol/ACTH (don't delay treatment)"
+    },
+    {
+      "test": "U&E, glucose"
+    },
+    {
+      "test": "Septic screen"
+    }
+  ],
+  "disposition": "Admit; ICU if shocked.",
+  "references": [
+    "Harrison 22e · Endocrine Society"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

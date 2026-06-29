@@ -105,5 +105,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA Diabetic Foot Infection Guidelines",
+    "IWGDF Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`A diabetic foot ulcer with ${[e.purulentDrainage&&\"purulent drainage\",e.deepTissueInvolvement&&\"deep tissue involvement\",e.boneInvolvement&&\"suspected bone involvement\",(e.fever||e.feverGU)&&\"systemic signs of infection\"].filter(Boolean).join(\", \")||\"clinical signs of infection\"} meets criteria for diabetic foot infection requiring antibiotics. ${e.boneInvolvement?\"Suspected osteomyelitis requires imaging and likely prolonged therapy in conjunction with surgical/orthopedic input.\":\"Severity (mild/moderate/severe per IDSA/IWGDF criteria) should guide route and spectrum.\"}`",
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  }
 }

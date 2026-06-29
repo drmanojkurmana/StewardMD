@@ -1,0 +1,51 @@
+{
+  "id": "acute_leukemia",
+  "diseaseId": "acute_leukemia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Urgent haematology referral; admit.",
+        "Supportive: transfuse as needed, neutropenic-sepsis protocol for fever, tumour-lysis prophylaxis (hydration, allopurinol/rasburicase).",
+        "Treat coagulopathy/DIC (esp. APML — start ATRA promptly on suspicion).",
+        "Definitive remission-induction chemotherapy per subtype; consider transplant.",
+        "Central access, fertility/consent discussions as appropriate."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Pancytopenia or leucocytosis with blasts on film, bleeding/infection; bone marrow confirms. Watch for tumour lysis/DIC.",
+  "investigations": [
+    {
+      "test": "FBC + blood film, coagulation"
+    },
+    {
+      "test": "Bone marrow + cytogenetics/flow"
+    },
+    {
+      "test": "LDH, urate, U&E (TLS)"
+    }
+  ],
+  "disposition": "Admit; haematology.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

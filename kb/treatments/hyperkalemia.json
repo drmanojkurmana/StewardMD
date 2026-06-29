@@ -1,0 +1,51 @@
+{
+  "id": "hyperkalemia",
+  "diseaseId": "hyperkalemia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "ECG changes / K ≥6.5: IV CALCIUM gluconate to stabilise the myocardium FIRST.",
+        "Shift K intracellularly: IV insulin + dextrose, and nebulised salbutamol.",
+        "Remove K: stop K-raising drugs, give a potassium binder; loop diuretic if volume-replete.",
+        "Dialysis for refractory/severe hyperkalaemia or established renal failure.",
+        "Treat the cause (AKI, drugs — ACEi/ARB/K-sparing, acidosis, rhabdo); recheck K."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · UK Renal/KDIGO",
+        "refs": [
+          "Harrison 22e · UK Renal/KDIGO"
+        ]
+      }
+    }
+  ],
+  "confirm": "Raised serum potassium ± ECG changes (peaked T, wide QRS). Treat urgently if K ≥6.5 or ECG changes.",
+  "investigations": [
+    {
+      "test": "ECG (immediate)"
+    },
+    {
+      "test": "U&E, VBG"
+    },
+    {
+      "test": "Drug review"
+    }
+  ],
+  "disposition": "Admit/monitored area; nephrology if dialysis needed.",
+  "references": [
+    "Harrison 22e · UK Renal/KDIGO"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

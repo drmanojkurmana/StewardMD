@@ -1,0 +1,51 @@
+{
+  "id": "thyroid_storm",
+  "diseaseId": "thyroid_storm",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "ICU; beta-blocker (propranolol) for adrenergic symptoms and to block T4→T3 conversion.",
+        "Antithyroid drug — propylthiouracil (preferred in storm) or carbimazole.",
+        "Give iodine (Lugol's/potassium iodide) at least 1 h AFTER the antithyroid drug.",
+        "Hydrocortisone (reduces T4→T3 and treats relative adrenal insufficiency).",
+        "Supportive: cooling, fluids, treat the precipitant (often infection); avoid aspirin."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATA",
+        "refs": [
+          "Harrison 22e · ATA"
+        ]
+      }
+    }
+  ],
+  "confirm": "Severe thyrotoxicosis with fever, tachyarrhythmia, agitation/delirium, GI/hepatic dysfunction (Burch-Wartofsky score). Treat clinically.",
+  "investigations": [
+    {
+      "test": "TFTs (don't delay treatment)"
+    },
+    {
+      "test": "ECG, glucose, LFTs"
+    },
+    {
+      "test": "Septic screen"
+    }
+  ],
+  "disposition": "ICU.",
+  "references": [
+    "Harrison 22e · ATA"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,157 @@
+{
+  "id": "LEPTOSPIROSIS",
+  "diseaseId": "LEPTOSPIROSIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "doxycycline",
+          "regimenLabel": "Doxycycline (mild-moderate, outpatient)",
+          "dose": "100 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Effective for mild-moderate leptospirosis and also provides empiric coverage for scrub typhus, which can present similarly — a practical advantage when the two cannot be immediately distinguished."
+        },
+        {
+          "composition": "ceftriaxone or penicillin g",
+          "regimenLabel": "Ceftriaxone or Penicillin G (severe/hospitalized, Weil's disease)",
+          "dose": "Ceftriaxone 1 g IV q24h or Penicillin G 1.5 million units IV q6h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "IV therapy is preferred for severe disease with jaundice, renal impairment, or hemorrhage, where reliable drug delivery and the possibility of a Jarisch-Herxheimer-like reaction warrant inpatient monitoring."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO Leptospirosis Guidelines",
+          "NCDC India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin (alternative, mild disease)",
+          "dose": "500 mg day 1, then 250 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "5 days total",
+          "coverage": "Reasonable alternative in mild disease or doxycycline intolerance.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO Leptospirosis Guidelines",
+          "NCDC India Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Leptospira interrogans"
+      ],
+      "drugs": [
+        "Doxycycline",
+        "Ceftriaxone/Penicillin G"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Either regimen provides effective coverage of the causative organism; choice depends on severity and route feasibility.",
+      "gaps": [
+        "None for the primary pathogen."
+      ]
+    },
+    "deescalation": "Once leptospirosis is confirmed and scrub typhus/other alternatives are excluded, continue the chosen regimen for the full course; no specific narrowing is typically needed given the single-organism target.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Doxycycline (mild-moderate, outpatient)",
+            "dose": "100 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "7 days",
+            "why": "Effective for mild-moderate leptospirosis and also provides empiric coverage for scrub typhus, which can present similarly — a practical advantage when the two cannot be immediately distinguished."
+          },
+          {
+            "drug": "Ceftriaxone or Penicillin G (severe/hospitalized, Weil's disease)",
+            "dose": "Ceftriaxone 1 g IV q24h or Penicillin G 1.5 million units IV q6h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "7 days",
+            "why": "IV therapy is preferred for severe disease with jaundice, renal impairment, or hemorrhage, where reliable drug delivery and the possibility of a Jarisch-Herxheimer-like reaction warrant inpatient monitoring."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Azithromycin (alternative, mild disease)",
+            "dose": "500 mg day 1, then 250 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "5 days total",
+            "coverage": "Reasonable alternative in mild disease or doxycycline intolerance."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "jaundice",
+      "renalImpairment",
+      "hypotension",
+      "organDysfunction",
+      "bleedingManifestation"
+    ],
+    "framework": [
+      "Start empiric antibiotics promptly on clinical suspicion in endemic/exposure settings rather than waiting for serology, since early treatment improves outcomes and severe disease (Weil's syndrome) has substantial mortality.",
+      "Doxycycline is a reasonable single empiric choice when scrub typhus cannot be confidently distinguished from leptospirosis, since it covers both.",
+      "Monitor renal function and consider dialysis support early in severe disease — antibiotics alone do not address established acute kidney injury."
+    ]
+  },
+  "references": [
+    "WHO Leptospirosis Guidelines",
+    "NCDC India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

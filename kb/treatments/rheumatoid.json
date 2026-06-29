@@ -1,0 +1,51 @@
+{
+  "id": "rheumatoid",
+  "diseaseId": "rheumatoid",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Early referral to rheumatology — 'treat to target' (remission/low disease activity).",
+        "Start a DMARD early (methotrexate first-line) ± short-term steroid bridge.",
+        "Escalate to combination DMARDs or a biologic/targeted synthetic DMARD if inadequate response.",
+        "NSAID for symptom relief; monitor DMARD toxicity (FBC, LFTs).",
+        "Manage cardiovascular risk, bone health and vaccination."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACR/EULAR RA",
+        "refs": [
+          "Harrison 22e · ACR/EULAR RA"
+        ]
+      }
+    }
+  ],
+  "confirm": "Symmetrical small-joint polyarthritis with early-morning stiffness >30 min; RF/anti-CCP, raised ESR/CRP, erosions.",
+  "investigations": [
+    {
+      "test": "RF, anti-CCP, ESR/CRP"
+    },
+    {
+      "test": "X-rays of hands/feet"
+    },
+    {
+      "test": "FBC, LFTs baseline"
+    }
+  ],
+  "disposition": "Rheumatology referral.",
+  "references": [
+    "Harrison 22e · ACR/EULAR RA"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

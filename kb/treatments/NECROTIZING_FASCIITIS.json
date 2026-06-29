@@ -1,0 +1,190 @@
+{
+  "id": "NECROTIZING_FASCIITIS",
+  "diseaseId": "NECROTIZING_FASCIITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam + clindamycin + vancomycin",
+          "regimenLabel": "Piperacillin-tazobactam + Clindamycin + Vancomycin",
+          "dose": "Pip-tazo 4.5 g IV q6h + Clindamycin 900 mg IV q8h + Vancomycin 15-20 mg/kg IV q8-12h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Until surgical source control achieved and clinically improving (often 2-3 weeks total)",
+          "coverage": null,
+          "why": "This combination covers polymicrobial type I infection (pip-tazo), provides antitoxin effect against streptococcal/staphylococcal toxin production (clindamycin, via protein synthesis inhibition), and covers MRSA (vancomycin) — maximal reasonable empiric coverage is justified given the extreme mortality risk."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "meropenem + clindamycin + vancomycin",
+          "regimenLabel": "Meropenem + Clindamycin + Vancomycin (broader gram-negative coverage if indicated)",
+          "dose": "Meropenem 1 g IV q8h + Clindamycin and Vancomycin as above",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Until source control and clinical improvement",
+          "coverage": "Alternative broad-spectrum backbone for patients with risk factors for resistant gram-negatives or beta-lactam allergy considerations.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ivig",
+          "regimenLabel": "IVIG (adjunctive, for confirmed streptococcal toxic shock features)",
+          "dose": "Per institutional protocol",
+          "route": "IV",
+          "freq": "Per protocol",
+          "duration": "Per protocol",
+          "coverage": "Considered as adjunctive therapy in confirmed streptococcal necrotizing fasciitis with toxic shock syndrome features, in consultation with infectious disease.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Skin and Soft Tissue Infection Guidelines",
+          "Surviving Sepsis Campaign",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Group A Streptococcus",
+        "Polymicrobial/anaerobes",
+        "MRSA",
+        "Clostridium"
+      ],
+      "drugs": [
+        "Pip-Tazo",
+        "Clindamycin",
+        "Vancomycin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔ (+antitoxin effect)",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial",
+          "✘"
+        ],
+        [
+          "✘",
+          "Variable (resistance possible)",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✔",
+          "✘"
+        ]
+      ],
+      "completeness": "Triple combination covers both type I and type II necrotizing fasciitis patterns comprehensively pending surgical/culture findings.",
+      "gaps": [
+        "Clindamycin resistance in some Streptococcus/Staphylococcus strains exists — does not change the empiric approach but is relevant once susceptibility is known."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted regimen once intraoperative cultures identify the organism(s) (e.g., confirmed monomicrobial Group A Streptococcus allows narrowing from triple therapy to penicillin + clindamycin); continue until adequate source control and clear clinical improvement.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam + Clindamycin + Vancomycin",
+            "dose": "Pip-tazo 4.5 g IV q6h + Clindamycin 900 mg IV q8h + Vancomycin 15-20 mg/kg IV q8-12h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Until surgical source control achieved and clinically improving (often 2-3 weeks total)",
+            "why": "This combination covers polymicrobial type I infection (pip-tazo), provides antitoxin effect against streptococcal/staphylococcal toxin production (clindamycin, via protein synthesis inhibition), and covers MRSA (vancomycin) — maximal reasonable empiric coverage is justified given the extreme mortality risk."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Meropenem + Clindamycin + Vancomycin (broader gram-negative coverage if indicated)",
+            "dose": "Meropenem 1 g IV q8h + Clindamycin and Vancomycin as above",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Until source control and clinical improvement",
+            "coverage": "Alternative broad-spectrum backbone for patients with risk factors for resistant gram-negatives or beta-lactam allergy considerations."
+          },
+          {
+            "drug": "IVIG (adjunctive, for confirmed streptococcal toxic shock features)",
+            "dose": "Per institutional protocol",
+            "route": "IV",
+            "frequency": "Per protocol",
+            "duration": "Per protocol",
+            "coverage": "Considered as adjunctive therapy in confirmed streptococcal necrotizing fasciitis with toxic shock syndrome features, in consultation with infectious disease."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "tachycardia",
+      "crepitusOrBullae",
+      "severePain"
+    ],
+    "framework": [
+      "EMERGENT surgical exploration and debridement is the single most important intervention — antibiotics do not penetrate necrotic tissue effectively, and delay in surgery directly increases mortality regardless of antibiotic choice.",
+      "Maximal empiric coverage is justified here specifically because of the extreme mortality of undertreatment — this is one of the few scenarios where broad empiric triple therapy is the stewardship-correct choice, not an exception to be minimized.",
+      "De-escalate promptly once intraoperative cultures identify the organism(s) — the broad initial regimen should not be continued for the full course once a monomicrobial cause (e.g., confirmed Group A Streptococcus) is identified."
+    ]
+  },
+  "references": [
+    "IDSA Skin and Soft Tissue Infection Guidelines",
+    "Surviving Sepsis Campaign",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

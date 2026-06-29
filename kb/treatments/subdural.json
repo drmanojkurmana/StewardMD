@@ -1,0 +1,48 @@
+{
+  "id": "subdural",
+  "diseaseId": "subdural",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Non-contrast CT head; neurosurgical referral.",
+        "Reverse anticoagulation; correct coagulopathy.",
+        "Surgical evacuation (burr hole for chronic, craniotomy for acute) if symptomatic/large with mass effect.",
+        "Small asymptomatic collections: observe with repeat imaging.",
+        "Manage raised ICP; seizure precautions."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Headache, fluctuating consciousness or cognitive decline, sometimes after (minor) trauma — esp. elderly/anticoagulated. CT shows crescentic collection.",
+  "investigations": [
+    {
+      "test": "Non-contrast CT head"
+    },
+    {
+      "test": "Coagulation profile"
+    }
+  ],
+  "disposition": "Neurosurgery referral.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

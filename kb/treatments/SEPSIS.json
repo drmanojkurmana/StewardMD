@@ -1,0 +1,139 @@
+{
+  "id": "SEPSIS",
+  "diseaseId": "SEPSIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (broad empiric, source unclear)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours (extended infusion preferred)",
+          "duration": "Per source and culture results (typically 7-10 days)",
+          "coverage": null,
+          "why": "Broad empiric gram-positive, gram-negative, and anaerobic coverage is reasonable when the source is not yet localized, pending rapid source identification to allow narrowing."
+        },
+        {
+          "composition": "add vancomycin",
+          "regimenLabel": "Add Vancomycin if MRSA risk, line-associated, or skin/soft tissue source",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "freq": "every 8-12 hours (trough-guided)",
+          "duration": "Per source and culture results",
+          "coverage": null,
+          "why": "MRSA coverage should be added based on specific risk factors or suspected source rather than universally."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Surviving Sepsis Campaign Guidelines",
+          "Sepsis-3 Definitions (JAMA)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "source-directed narrow-spectrum therapy",
+          "regimenLabel": "Source-directed narrow-spectrum therapy (preferred once source identified)",
+          "dose": "Per identified syndrome (see relevant syndrome module)",
+          "route": "Per syndrome",
+          "freq": "Per syndrome",
+          "duration": "Per syndrome",
+          "coverage": "Once a likely source is identified (e.g., pneumonia, UTI, cellulitis), antibiotic choice should follow the source-specific syndrome recommendation rather than remaining on broad empiric coverage.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Surviving Sepsis Campaign Guidelines",
+          "Sepsis-3 Definitions (JAMA)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": null,
+    "deescalation": "Reassess at 48-72 hours: narrow to the most targeted agent once organism and source are confirmed, and discontinue any agent (e.g., empiric vancomycin) not supported by culture results.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (broad empiric, source unclear)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours (extended infusion preferred)",
+            "duration": "Per source and culture results (typically 7-10 days)",
+            "why": "Broad empiric gram-positive, gram-negative, and anaerobic coverage is reasonable when the source is not yet localized, pending rapid source identification to allow narrowing."
+          },
+          {
+            "drug": "Add Vancomycin if MRSA risk, line-associated, or skin/soft tissue source",
+            "dose": "15-20 mg/kg",
+            "route": "IV",
+            "frequency": "every 8-12 hours (trough-guided)",
+            "duration": "Per source and culture results",
+            "why": "MRSA coverage should be added based on specific risk factors or suspected source rather than universally."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Source-directed narrow-spectrum therapy (preferred once source identified)",
+            "dose": "Per identified syndrome (see relevant syndrome module)",
+            "route": "Per syndrome",
+            "frequency": "Per syndrome",
+            "duration": "Per syndrome",
+            "coverage": "Once a likely source is identified (e.g., pneumonia, UTI, cellulitis), antibiotic choice should follow the source-specific syndrome recommendation rather than remaining on broad empiric coverage."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "tachycardia",
+      "tachypnea",
+      "alteredSensorium",
+      "organDysfunction",
+      "lactateElevated"
+    ],
+    "framework": [
+      "Antibiotic choice in sepsis must be source-directed wherever possible — broad empiric therapy without an identified source should be reassessed urgently within 24-48 hours.",
+      "Obtain blood cultures (and other relevant cultures) before antibiotics whenever this does not meaningfully delay treatment (target within 45 minutes).",
+      "De-escalate aggressively once source and organism are identified — sepsis is the syndrome that most often leads to inappropriately prolonged broad-spectrum therapy if not actively reviewed daily."
+    ]
+  },
+  "references": [
+    "Surviving Sepsis Campaign Guidelines",
+    "Sepsis-3 Definitions (JAMA)",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

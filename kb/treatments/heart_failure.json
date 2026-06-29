@@ -1,0 +1,51 @@
+{
+  "id": "heart_failure",
+  "diseaseId": "heart_failure",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Acute pulmonary oedema: sit up, high-flow O2, IV loop diuretic (furosemide), IV nitrate if hypertensive.",
+        "Consider CPAP/NIV for severe respiratory distress.",
+        "Identify/treat precipitant (ischaemia, arrhythmia, non-adherence, infection).",
+        "Daily weights, fluid/salt restriction, monitor renal function and potassium.",
+        "Chronic HFrEF: ACEi/ARNI + beta-blocker + MRA + SGLT2 inhibitor."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC HF",
+        "refs": [
+          "Harrison 22e · ESC HF"
+        ]
+      }
+    }
+  ],
+  "confirm": "Dyspnoea, orthopnoea, raised JVP, basal crackles, oedema; raised BNP/NT-proBNP; echo for ejection fraction.",
+  "investigations": [
+    {
+      "test": "BNP/NT-proBNP"
+    },
+    {
+      "test": "Echo"
+    },
+    {
+      "test": "ECG, CXR, U&E, troponin"
+    }
+  ],
+  "disposition": "Admit; ICU/HDU if cardiogenic shock or NIV.",
+  "references": [
+    "Harrison 22e · ESC HF"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

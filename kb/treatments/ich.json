@@ -1,0 +1,51 @@
+{
+  "id": "ich",
+  "diseaseId": "ich",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Resuscitate; protect airway if GCS ≤8.",
+        "Reverse anticoagulation urgently (vitamin K + PCC for warfarin; specific reversal agents for DOACs).",
+        "Lower SBP to ~140 mmHg (e.g. IV labetalol/nicardipine).",
+        "Manage raised ICP; neurosurgical referral (esp. cerebellar bleed, hydrocephalus).",
+        "Admit to stroke unit/ICU; VTE prophylaxis (mechanical first)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AHA/ASA ICH",
+        "refs": [
+          "Harrison 22e · AHA/ASA ICH"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sudden focal deficit ± reduced consciousness, headache, vomiting; non-contrast CT shows intraparenchymal haemorrhage.",
+  "investigations": [
+    {
+      "test": "Non-contrast CT"
+    },
+    {
+      "test": "Coagulation profile"
+    },
+    {
+      "test": "CT angio if structural cause suspected"
+    }
+  ],
+  "disposition": "ICU / neurosurgery.",
+  "references": [
+    "Harrison 22e · AHA/ASA ICH"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

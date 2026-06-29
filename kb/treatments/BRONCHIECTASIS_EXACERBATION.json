@@ -1,0 +1,161 @@
+{
+  "id": "BRONCHIECTASIS_EXACERBATION",
+  "diseaseId": "BRONCHIECTASIS_EXACERBATION",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "per prior sputum culture",
+          "regimenLabel": "Per prior sputum culture if available; empirically Amoxicillin-clavulanate if no Pseudomonas history",
+          "dose": "875/125 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "10-14 days",
+          "coverage": null,
+          "why": "Bronchiectasis exacerbations are typically treated with longer courses than simple bronchitis given the structural lung disease; prior culture history should directly guide empiric choice given high rates of chronic colonization."
+        },
+        {
+          "composition": "ciprofloxacin",
+          "regimenLabel": "Ciprofloxacin (if prior Pseudomonas colonization)",
+          "dose": "500-750 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "10-14 days",
+          "coverage": null,
+          "why": "First-line oral option with reliable antipseudomonal activity for patients with known Pseudomonas colonization, avoiding the need for IV therapy in milder exacerbations."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "British Thoracic Society Bronchiectasis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (severe exacerbation with Pseudomonas history)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "10-14 days",
+          "coverage": "Used for more severe exacerbations or treatment failure on oral antipseudomonal therapy.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "British Thoracic Society Bronchiectasis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "H. influenzae",
+        "Pseudomonas aeruginosa",
+        "S. pneumoniae"
+      ],
+      "drugs": [
+        "Amoxicillin-clavulanate",
+        "Ciprofloxacin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "Variable"
+        ]
+      ],
+      "completeness": "Choice must be tailored to known colonization status — a one-size-fits-all empiric regimen is not appropriate for bronchiectasis.",
+      "gaps": [
+        "Empiric therapy without checking prior culture history risks under-treating chronic Pseudomonas colonization."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted oral agent once current sputum culture results are available, and ensure the patient's chronic colonization record is updated for future exacerbations.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Per prior sputum culture if available; empirically Amoxicillin-clavulanate if no Pseudomonas history",
+            "dose": "875/125 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "10-14 days",
+            "why": "Bronchiectasis exacerbations are typically treated with longer courses than simple bronchitis given the structural lung disease; prior culture history should directly guide empiric choice given high rates of chronic colonization."
+          },
+          {
+            "drug": "Ciprofloxacin (if prior Pseudomonas colonization)",
+            "dose": "500-750 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "10-14 days",
+            "why": "First-line oral option with reliable antipseudomonal activity for patients with known Pseudomonas colonization, avoiding the need for IV therapy in milder exacerbations."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (severe exacerbation with Pseudomonas history)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "10-14 days",
+            "coverage": "Used for more severe exacerbations or treatment failure on oral antipseudomonal therapy."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypoxia",
+      "hemoptysis"
+    ],
+    "framework": [
+      "Always check prior sputum culture history before choosing empiric therapy — this is the single most important stewardship action in bronchiectasis exacerbations given individual colonization patterns.",
+      "Longer courses (10-14 days) are appropriate for bronchiectasis exacerbations, unlike the shorter courses used for simple bronchitis, given the structural lung disease.",
+      "Address airway clearance (chest physiotherapy, mucolytics) as a critical adjunct to antibiotics, not optional."
+    ]
+  },
+  "references": [
+    "British Thoracic Society Bronchiectasis Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

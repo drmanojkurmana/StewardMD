@@ -1,0 +1,51 @@
+{
+  "id": "aortic_dissection",
+  "diseaseId": "aortic_dissection",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "EMERGENCY — CT angiogram of the aorta; involve cardiothoracic surgery.",
+        "Control HR then BP: IV beta-blocker (labetalol/esmolol) to HR <60 and SBP ~100–120, add vasodilator.",
+        "Type A (ascending): emergency surgery. Type B: usually medical ± endovascular for complications.",
+        "Adequate analgesia (reduces sympathetic drive).",
+        "Cross-match blood; ICU monitoring."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC aortic",
+        "refs": [
+          "Harrison 22e · ESC aortic"
+        ]
+      }
+    }
+  ],
+  "confirm": "Sudden tearing chest/back pain ± pulse/BP differential, new aortic regurgitation, widened mediastinum. CT angiography aorta.",
+  "investigations": [
+    {
+      "test": "CT angiography (or TOE)"
+    },
+    {
+      "test": "ECG, troponin (exclude MI mimic)"
+    },
+    {
+      "test": "Group & save"
+    }
+  ],
+  "disposition": "ICU + cardiothoracic surgery.",
+  "references": [
+    "Harrison 22e · ESC aortic"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,143 @@
+{
+  "id": "CHOLECYSTITIS",
+  "diseaseId": "CHOLECYSTITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone + metronidazole",
+          "regimenLabel": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q8h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Until cholecystectomy, or 4-7 days if surgery delayed/not performed",
+          "coverage": null,
+          "why": "Covers the typical gram-negative and anaerobic biliary pathogens; definitive treatment is cholecystectomy, with antibiotics primarily bridging to surgery or covering milder cases managed non-operatively."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Tokyo Guidelines for Acute Cholecystitis",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (more severe disease)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "Until cholecystectomy or per response",
+          "coverage": "Broader single-agent option for more severe (Tokyo Guidelines grade II-III) cholecystitis.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Tokyo Guidelines for Acute Cholecystitis",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli/Klebsiella",
+        "Enterococcus",
+        "Anaerobes"
+      ],
+      "drugs": [
+        "Ceftriaxone+Metronidazole",
+        "Pip-Tazo"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔"
+        ],
+        [
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Either regimen covers the major expected pathogens for typical acute cholecystitis.",
+      "gaps": [
+        "Enterococcus not covered by ceftriaxone-based regimen — relevant mainly in severe/healthcare-associated cases."
+      ]
+    },
+    "deescalation": "If cholecystectomy is performed, antibiotics are often stopped within 24 hours post-operatively for uncomplicated cases (per Tokyo Guidelines); if managed non-operatively, narrow based on culture data and limit total duration.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone + Metronidazole",
+            "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q8h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Until cholecystectomy, or 4-7 days if surgery delayed/not performed",
+            "why": "Covers the typical gram-negative and anaerobic biliary pathogens; definitive treatment is cholecystectomy, with antibiotics primarily bridging to surgery or covering milder cases managed non-operatively."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (more severe disease)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "Until cholecystectomy or per response",
+            "coverage": "Broader single-agent option for more severe (Tokyo Guidelines grade II-III) cholecystitis."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "nauseaVomiting"
+    ],
+    "framework": [
+      "Early laparoscopic cholecystectomy (within 24-72 hours in eligible patients) is the definitive treatment — antibiotics are adjunctive, not a substitute for source control.",
+      "If surgery is delayed or the patient is not a surgical candidate, antibiotics can usually be limited to a defined short course rather than continued indefinitely.",
+      "Percutaneous cholecystostomy is an alternative source control measure in high-risk surgical candidates — antibiotics alone without some form of source control are often inadequate."
+    ]
+  },
+  "references": [
+    "Tokyo Guidelines for Acute Cholecystitis",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

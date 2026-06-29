@@ -1,0 +1,51 @@
+{
+  "id": "ibd_flare",
+  "diseaseId": "ibd_flare",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "EXCLUDE infective colitis (stool culture + C. difficile toxin) before/with immunosuppression.",
+        "Acute severe UC: admit, IV corticosteroids, VTE prophylaxis, monitor (Truelove-Witts / day-3 response).",
+        "Steroid-refractory severe UC: rescue ciclosporin or infliximab; early surgical review (colectomy).",
+        "Crohn's flare: corticosteroids to induce remission; optimise/escalate maintenance (immunomodulator/biologic).",
+        "Avoid antimotility agents in severe colitis (toxic megacolon risk); nutrition support."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ECCO/BSG IBD",
+        "refs": [
+          "Harrison 22e · ECCO/BSG IBD"
+        ]
+      }
+    }
+  ],
+  "confirm": "Bloody diarrhoea, urgency, abdominal pain ± systemic features in known/new IBD; raised CRP/faecal calprotectin; exclude infection (incl. C. difficile).",
+  "investigations": [
+    {
+      "test": "CRP, FBC, albumin, faecal calprotectin"
+    },
+    {
+      "test": "Stool culture + C. diff"
+    },
+    {
+      "test": "AXR (toxic megacolon), flexi-sig"
+    }
+  ],
+  "disposition": "Admit if severe; gastroenterology + surgery.",
+  "references": [
+    "Harrison 22e · ECCO/BSG IBD"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

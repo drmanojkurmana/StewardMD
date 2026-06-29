@@ -1,0 +1,51 @@
+{
+  "id": "anaphylaxis",
+  "diseaseId": "anaphylaxis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "IM ADRENALINE 0.5 mg (0.5 mL 1:1000) into anterolateral thigh — repeat every 5 min as needed. FIRST and most important step.",
+        "Remove trigger; lie flat with legs raised (sit up if breathing difficulty); high-flow oxygen.",
+        "IV fluid bolus for hypotension; nebulised salbutamol for bronchospasm.",
+        "Refractory: IV adrenaline infusion in a monitored setting.",
+        "Observe 6–12 h (biphasic risk); prescribe adrenaline auto-injector + allergy referral."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · WAO/Resus Council",
+        "refs": [
+          "Harrison 22e · WAO/Resus Council"
+        ]
+      }
+    }
+  ],
+  "confirm": "Acute onset of airway/breathing/circulation compromise ± urticaria/angioedema after an allergen exposure.",
+  "investigations": [
+    {
+      "test": "Clinical diagnosis"
+    },
+    {
+      "test": "Serial mast-cell tryptase"
+    },
+    {
+      "test": "Allergy referral"
+    }
+  ],
+  "disposition": "Admit/observe; refractory → ICU.",
+  "references": [
+    "Harrison 22e · WAO/Resus Council"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

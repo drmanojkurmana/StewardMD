@@ -115,5 +115,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "IDSA Skin and Soft Tissue Infection Guidelines",
+    "Surviving Sepsis Campaign",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`${[e.crepitusOrBullae&&\"Crepitus or hemorrhagic bullae\",e.severePain&&\"pain out of proportion to examination findings\",e.rapidlySpreadingErythema&&\"rapidly spreading erythema\"].filter(Boolean).join(\", \")||\"Clinical findings\"} raise urgent concern for necrotizing fasciitis — a surgical emergency where mortality rises sharply with every hour of delay. EMERGENT surgical consultation for exploration and debridement must happen in parallel with antibiotics, not after — antibiotics alone do not cure necrotizing soft tissue infection.`",
+  "decision": {
+    "status": "red",
+    "label": "Immediate empiric antibiotics required"
+  }
 }

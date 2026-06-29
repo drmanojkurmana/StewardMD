@@ -1,0 +1,143 @@
+{
+  "id": "LUNG_ABSCESS",
+  "diseaseId": "LUNG_ABSCESS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ampicillin-sulbactam",
+          "regimenLabel": "Ampicillin-sulbactam",
+          "dose": "3 g",
+          "route": "IV",
+          "freq": "every 6 hours",
+          "duration": "3-6 weeks (transition to oral amoxicillin-clavulanate once improving)",
+          "coverage": null,
+          "why": "Reliable anaerobic and streptococcal coverage appropriate for the prolonged course required in lung abscess; IV therapy initially with oral step-down once clinically stable."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on Pleuropulmonary Infections"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "clindamycin",
+          "regimenLabel": "Clindamycin",
+          "dose": "600 mg",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "3-6 weeks",
+          "coverage": "Strong anaerobic coverage; historically first-line, though beta-lactam/beta-lactamase inhibitors are now generally preferred given clindamycin resistance trends.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "Harrison's Principles of Internal Medicine",
+          "IDSA Guidelines on Pleuropulmonary Infections"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Oral anaerobes",
+        "Streptococcus species",
+        "S. aureus"
+      ],
+      "drugs": [
+        "Ampicillin-sulbactam",
+        "Clindamycin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial"
+        ],
+        [
+          "Partial",
+          "✘"
+        ]
+      ],
+      "completeness": "Ampicillin-sulbactam covers the core polymicrobial anaerobic flora reliably.",
+      "gaps": [
+        "MRSA not covered — add if specific risk factors or culture-confirmed."
+      ]
+    },
+    "deescalation": "Transition from IV to oral once afebrile and clinically improving (often 1-2 weeks), continuing oral therapy to complete the total 3-6 week course; reassess imaging if response is slow to exclude an underlying obstructing lesion (e.g., malignancy).",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ampicillin-sulbactam",
+            "dose": "3 g",
+            "route": "IV",
+            "frequency": "every 6 hours",
+            "duration": "3-6 weeks (transition to oral amoxicillin-clavulanate once improving)",
+            "why": "Reliable anaerobic and streptococcal coverage appropriate for the prolonged course required in lung abscess; IV therapy initially with oral step-down once clinically stable."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Clindamycin",
+            "dose": "600 mg",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "3-6 weeks",
+            "coverage": "Strong anaerobic coverage; historically first-line, though beta-lactam/beta-lactamase inhibitors are now generally preferred given clindamycin resistance trends."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "weightLoss",
+      "hypoxia"
+    ],
+    "framework": [
+      "Prolonged duration (weeks, not days) is appropriate for lung abscess given the necrotizing, slow-resolving nature of the infection — do not apply standard CAP duration logic here.",
+      "Image-guided or surgical drainage should be considered for large abscesses (>6-8cm) or those failing to respond to antibiotics alone.",
+      "Transition to oral therapy once clinically improving rather than continuing IV for the entire prolonged course."
+    ]
+  },
+  "references": [
+    "Harrison's Principles of Internal Medicine",
+    "IDSA Guidelines on Pleuropulmonary Infections"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,160 @@
+{
+  "id": "IE",
+  "diseaseId": "IE",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "vancomycin + ceftriaxone",
+          "regimenLabel": "Vancomycin + Ceftriaxone (empiric, native valve, pending cultures)",
+          "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided) + Ceftriaxone 2 g IV q24h",
+          "route": "IV",
+          "freq": "as above",
+          "duration": "Per organism once identified (typically 4-6 weeks)",
+          "coverage": null,
+          "why": "This combination provides empiric coverage of the most likely organisms (streptococci, staphylococci including MRSA, and many enterococci) while blood culture and susceptibility results are pending, balancing broad coverage against the need for prolonged targeted therapy once identified."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "AHA Infective Endocarditis Guidelines",
+          "ESC Infective Endocarditis Guidelines",
+          "Modified Duke Criteria",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "vancomycin + gentamicin + rifampin",
+          "regimenLabel": "Vancomycin + Gentamicin + Rifampin (suspected prosthetic valve infection)",
+          "dose": "Per renal function and weight-based dosing",
+          "route": "IV",
+          "freq": "Per protocol",
+          "duration": "Per organism (often 6 weeks total, rifampin/gentamicin durations vary)",
+          "coverage": "Used specifically for suspected prosthetic valve endocarditis, where coagulase-negative staphylococci and biofilm-related organisms require this specific combination.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "AHA Infective Endocarditis Guidelines",
+          "ESC Infective Endocarditis Guidelines",
+          "Modified Duke Criteria",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Viridans streptococci",
+        "S. aureus (incl. MRSA)",
+        "Enterococcus",
+        "Coagulase-negative Staph"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Vancomycin",
+        "Combination"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ],
+        [
+          "Partial",
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✔",
+          "✔"
+        ]
+      ],
+      "completeness": "Combination empiric therapy covers the major native valve pathogens pending culture confirmation.",
+      "gaps": [
+        "Enterococcal endocarditis requires synergistic combination therapy (e.g., ampicillin + ceftriaxone or gentamicin) once confirmed — vancomycin alone is inferior for confirmed enterococcal IE and must be adjusted."
+      ]
+    },
+    "deescalation": "Once blood cultures confirm the organism and susceptibility, switch to the specific guideline-directed regimen for that organism (per AHA/ESC endocarditis guidelines) rather than continuing the broader empiric combination, and plan total duration (typically 4-6 weeks) from the first day of effective therapy.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Vancomycin + Ceftriaxone (empiric, native valve, pending cultures)",
+            "dose": "Vancomycin 15-20 mg/kg IV q8-12h (trough-guided) + Ceftriaxone 2 g IV q24h",
+            "route": "IV",
+            "frequency": "as above",
+            "duration": "Per organism once identified (typically 4-6 weeks)",
+            "why": "This combination provides empiric coverage of the most likely organisms (streptococci, staphylococci including MRSA, and many enterococci) while blood culture and susceptibility results are pending, balancing broad coverage against the need for prolonged targeted therapy once identified."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Vancomycin + Gentamicin + Rifampin (suspected prosthetic valve infection)",
+            "dose": "Per renal function and weight-based dosing",
+            "route": "IV",
+            "frequency": "Per protocol",
+            "duration": "Per organism (often 6 weeks total, rifampin/gentamicin durations vary)",
+            "coverage": "Used specifically for suspected prosthetic valve endocarditis, where coagulase-negative staphylococci and biofilm-related organisms require this specific combination."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "embolicPhenomena",
+      "hypotension",
+      "organDysfunction"
+    ],
+    "framework": [
+      "Draw at least 3 sets of blood cultures from separate venipuncture sites BEFORE starting any antibiotics — this is one of the highest-yield stewardship actions in suspected IE, since premature antibiotics can convert this into culture-negative endocarditis and complicate the entire treatment course.",
+      "Once an organism is identified, switch immediately to the specific guideline-directed regimen for that organism (e.g., penicillin-susceptible viridans streptococci have a distinctly different and often simpler regimen than what empiric coverage provides) rather than continuing broad empiric therapy.",
+      "Early cardiology/cardiac surgery and infectious disease involvement is essential — antibiotics alone do not address structural complications (abscess, severe valve destruction) that may require surgery."
+    ]
+  },
+  "references": [
+    "AHA Infective Endocarditis Guidelines",
+    "ESC Infective Endocarditis Guidelines",
+    "Modified Duke Criteria",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

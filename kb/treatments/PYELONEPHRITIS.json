@@ -1,0 +1,167 @@
+{
+  "id": "PYELONEPHRITIS",
+  "diseaseId": "PYELONEPHRITIS",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone",
+          "dose": "1-2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "7-14 days (step down to oral when improving)",
+          "coverage": null,
+          "why": "Reliable renal tissue penetration and coverage of E. coli and other common uropathogens, appropriate for an upper tract infection where treatment failure carries higher risk."
+        },
+        {
+          "composition": "ciprofloxacin",
+          "regimenLabel": "Ciprofloxacin (outpatient, stable, low resistance area)",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "7 days",
+          "coverage": null,
+          "why": "Appropriate oral option for hemodynamically stable outpatients in regions with acceptable local E. coli fluoroquinolone resistance."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Pyelonephritis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (if risk for resistant organisms or critically ill)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "7-14 days",
+          "coverage": "Broader option for patients with prior resistant organisms, recent hospitalization, or progression to sepsis.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Pyelonephritis Guidelines",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli",
+        "Klebsiella",
+        "Proteus",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Ciprofloxacin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "Variable"
+        ],
+        [
+          "✔",
+          "Variable"
+        ],
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✘",
+          "✘"
+        ]
+      ],
+      "completeness": "Ceftriaxone covers the large majority of community-acquired pyelonephritis pathogens.",
+      "gaps": [
+        "Enterococcus not covered by either regimen — add ampicillin if isolated on culture and blood cultures are positive."
+      ]
+    },
+    "deescalation": "Once urine/blood culture results return, narrow to the most targeted oral agent matching susceptibility, and complete the course orally once afebrile for 24-48 hours.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "dose": "1-2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "7-14 days (step down to oral when improving)",
+            "why": "Reliable renal tissue penetration and coverage of E. coli and other common uropathogens, appropriate for an upper tract infection where treatment failure carries higher risk."
+          },
+          {
+            "drug": "Ciprofloxacin (outpatient, stable, low resistance area)",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "7 days",
+            "why": "Appropriate oral option for hemodynamically stable outpatients in regions with acceptable local E. coli fluoroquinolone resistance."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Piperacillin-tazobactam (if risk for resistant organisms or critically ill)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "7-14 days",
+            "coverage": "Broader option for patients with prior resistant organisms, recent hospitalization, or progression to sepsis."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "tachycardia",
+      "nauseaVomiting"
+    ],
+    "framework": [
+      "Send urine culture (and blood culture if febrile/systemically unwell) before starting therapy to allow de-escalation.",
+      "Reserve broad-spectrum agents (piperacillin-tazobactam, carbapenems) for patients with risk factors for resistant organisms, not as routine first-line.",
+      "Step down to oral therapy once afebrile and clinically improving, rather than completing the full course intravenously by default."
+    ]
+  },
+  "references": [
+    "IDSA Pyelonephritis Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

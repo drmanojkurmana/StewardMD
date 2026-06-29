@@ -1,0 +1,51 @@
+{
+  "id": "bowel_obstruction",
+  "diseaseId": "bowel_obstruction",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "'Drip and suck': NBM, IV fluids + electrolyte correction, nasogastric decompression.",
+        "CT to identify cause/level and detect ischaemia/strangulation.",
+        "Strangulation, closed-loop, ischaemia or perforation → urgent surgery.",
+        "Adhesional small-bowel obstruction without ischaemia: trial of conservative management.",
+        "Analgesia, antiemetics, urinary catheter; surgical review for all."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ACS/WSES",
+        "refs": [
+          "Harrison 22e · ACS/WSES"
+        ]
+      }
+    }
+  ],
+  "confirm": "Colicky abdominal pain, vomiting, distension, absolute constipation; imaging (AXR/CT) confirms level and cause.",
+  "investigations": [
+    {
+      "test": "AXR / CT abdomen"
+    },
+    {
+      "test": "U&E, lactate, FBC"
+    },
+    {
+      "test": "VBG"
+    }
+  ],
+  "disposition": "Surgical admission; theatre if strangulation.",
+  "references": [
+    "Harrison 22e · ACS/WSES"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

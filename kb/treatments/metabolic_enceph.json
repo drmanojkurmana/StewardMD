@@ -1,0 +1,51 @@
+{
+  "id": "metabolic_enceph",
+  "diseaseId": "metabolic_enceph",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Find and correct the cause — glucose, Na, Ca, uraemia, hypercapnia, ammonia, drugs, hypoxia, sepsis.",
+        "Support airway, oxygenation and circulation.",
+        "Empirical thiamine in at-risk patients; naloxone if opioid suspected.",
+        "Treat the underlying organ failure; review/stop offending drugs.",
+        "Monitor neurological status."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Diffuse alteration of consciousness without focal deficit; asterixis, myoclonus. Identify the metabolic cause.",
+  "investigations": [
+    {
+      "test": "Glucose, U&E, Ca, LFTs, ammonia, ABG"
+    },
+    {
+      "test": "Toxicology"
+    },
+    {
+      "test": "CT/EEG if cause unclear"
+    }
+  ],
+  "disposition": "Admit; ICU if airway risk.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

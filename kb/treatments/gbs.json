@@ -1,0 +1,51 @@
+{
+  "id": "gbs",
+  "diseaseId": "gbs",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "ADMIT — monitor respiratory function (serial FVC) and autonomic status closely.",
+        "IVIG 0.4 g/kg/day ×5 days OR plasma exchange (equivalent efficacy).",
+        "ICU + ventilation if FVC falling, bulbar weakness or autonomic instability.",
+        "VTE prophylaxis, pain control, physiotherapy, pressure-area care.",
+        "Do NOT give corticosteroids (ineffective in GBS)."
+      ],
+      "evidence": {
+        "source": "Harrison 22e",
+        "refs": [
+          "Harrison 22e"
+        ]
+      }
+    }
+  ],
+  "confirm": "Progressive ascending weakness with areflexia ± sensory/autonomic involvement, often post-infective; albuminocytological dissociation on CSF; supportive NCS.",
+  "investigations": [
+    {
+      "test": "Serial spirometry (FVC)"
+    },
+    {
+      "test": "LP (albuminocytological dissociation)"
+    },
+    {
+      "test": "Nerve conduction studies"
+    }
+  ],
+  "disposition": "Admit; ICU if respiratory/autonomic compromise.",
+  "references": [
+    "Harrison 22e"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

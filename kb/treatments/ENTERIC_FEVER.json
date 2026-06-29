@@ -1,0 +1,183 @@
+{
+  "id": "ENTERIC_FEVER",
+  "diseaseId": "ENTERIC_FEVER",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "10-14 days",
+          "coverage": null,
+          "why": "Ceftriaxone is first-line in regions with high rates of multidrug-resistant and fluoroquinolone-resistant S. Typhi, providing reliable activity and good clinical response."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "WHO Typhoid Fever Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "NCDC India Guidelines"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "azithromycin",
+          "regimenLabel": "Azithromycin",
+          "dose": "1 g day 1, then 500 mg",
+          "route": "Oral",
+          "freq": "once daily",
+          "duration": "7 days total",
+          "coverage": "Effective oral option for uncomplicated enteric fever, particularly useful where oral step-down or outpatient management is appropriate.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO Typhoid Fever Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "NCDC India Guidelines"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ciprofloxacin",
+          "regimenLabel": "Ciprofloxacin (only if known fluoroquinolone-susceptible)",
+          "dose": "500 mg",
+          "route": "Oral",
+          "freq": "every 12 hours",
+          "duration": "7-10 days",
+          "coverage": "Should only be used where local susceptibility data confirm fluoroquinolone-susceptible Salmonella — resistance is widespread in many endemic areas including South Asia.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "WHO Typhoid Fever Guidelines",
+          "Harrison's Principles of Internal Medicine",
+          "NCDC India Guidelines"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "S. Typhi (MDR)",
+        "S. Typhi (fluoroquinolone-resistant)",
+        "S. Paratyphi"
+      ],
+      "drugs": [
+        "Ceftriaxone",
+        "Azithromycin",
+        "Ciprofloxacin"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔",
+          "Variable"
+        ],
+        [
+          "✔",
+          "✔",
+          "✘ (resistant)"
+        ],
+        [
+          "✔",
+          "✔",
+          "Variable"
+        ]
+      ],
+      "completeness": "Ceftriaxone or azithromycin reliably covers the expected pathogen given regional resistance patterns.",
+      "gaps": [
+        "Ciprofloxacin should not be used empirically without local susceptibility confirmation due to widespread fluoroquinolone resistance."
+      ]
+    },
+    "deescalation": "If blood culture confirms fluoroquinolone-susceptible S. Typhi, can switch to oral ciprofloxacin for outpatient completion. If azithromycin-susceptible and clinically improving, complete oral course without escalation to IV ceftriaxone.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "10-14 days",
+            "why": "Ceftriaxone is first-line in regions with high rates of multidrug-resistant and fluoroquinolone-resistant S. Typhi, providing reliable activity and good clinical response."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Azithromycin",
+            "dose": "1 g day 1, then 500 mg",
+            "route": "Oral",
+            "frequency": "once daily",
+            "duration": "7 days total",
+            "coverage": "Effective oral option for uncomplicated enteric fever, particularly useful where oral step-down or outpatient management is appropriate."
+          },
+          {
+            "drug": "Ciprofloxacin (only if known fluoroquinolone-susceptible)",
+            "dose": "500 mg",
+            "route": "Oral",
+            "frequency": "every 12 hours",
+            "duration": "7-10 days",
+            "coverage": "Should only be used where local susceptibility data confirm fluoroquinolone-susceptible Salmonella — resistance is widespread in many endemic areas including South Asia."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "alteredSensorium",
+      "hypotension",
+      "abdominalDistension"
+    ],
+    "framework": [
+      "Empiric fluoroquinolones should be avoided in enteric fever in regions with known high resistance (including most of South Asia) — ceftriaxone or azithromycin is preferred.",
+      "Confirm diagnosis with blood culture; Widal test alone is unreliable and should not be the sole basis for diagnosis or prolonged treatment.",
+      "Treat for the full recommended duration to reduce relapse and chronic carriage risk."
+    ]
+  },
+  "references": [
+    "WHO Typhoid Fever Guidelines",
+    "Harrison's Principles of Internal Medicine",
+    "NCDC India Guidelines"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

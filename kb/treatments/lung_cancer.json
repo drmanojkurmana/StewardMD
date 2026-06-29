@@ -1,0 +1,51 @@
+{
+  "id": "lung_cancer",
+  "diseaseId": "lung_cancer",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "CT chest/abdomen and tissue diagnosis (bronchoscopy/biopsy); PET-CT for staging.",
+        "Refer to lung-cancer MDT urgently.",
+        "Treatment by type/stage: surgery (early NSCLC), chemoradiotherapy, targeted/immunotherapy by molecular profile; SCLC is chemo-sensitive.",
+        "Smoking cessation; manage complications (effusion, SVCO, hypercalcaemia, cord compression).",
+        "Early palliative-care involvement improves outcomes."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · NICE/ESMO",
+        "refs": [
+          "Harrison 22e · NICE/ESMO"
+        ]
+      }
+    }
+  ],
+  "confirm": "Cough, haemoptysis, weight loss, or an incidental mass in a smoker; CT chest and tissue diagnosis with staging.",
+  "investigations": [
+    {
+      "test": "CT chest"
+    },
+    {
+      "test": "Biopsy + molecular markers"
+    },
+    {
+      "test": "PET-CT, brain MRI staging"
+    }
+  ],
+  "disposition": "Urgent oncology/MDT referral.",
+  "references": [
+    "Harrison 22e · NICE/ESMO"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

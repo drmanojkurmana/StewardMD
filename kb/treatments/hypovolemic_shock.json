@@ -1,0 +1,48 @@
+{
+  "id": "hypovolemic_shock",
+  "diseaseId": "hypovolemic_shock",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Two large-bore IV lines; rapid balanced crystalloid resuscitation.",
+        "Haemorrhagic: activate major haemorrhage protocol — transfuse blood/products, tranexamic acid early.",
+        "Identify and control the source (surgery, endoscopy, IR, compression).",
+        "Titrate to perfusion (MAP, urine output, lactate clearance) — avoid over-resuscitation in active bleeding.",
+        "Keep warm; correct coagulopathy and calcium."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ATLS",
+        "refs": [
+          "Harrison 22e · ATLS"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hypotension, tachycardia, cool peripheries, low JVP with a source of fluid/blood loss.",
+  "investigations": [
+    {
+      "test": "FBC, cross-match, coagulation, lactate"
+    },
+    {
+      "test": "Source imaging (CT/endoscopy)"
+    }
+  ],
+  "disposition": "Resuscitation area → ICU/theatre.",
+  "references": [
+    "Harrison 22e · ATLS"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

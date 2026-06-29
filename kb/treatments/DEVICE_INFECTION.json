@@ -1,0 +1,142 @@
+{
+  "id": "DEVICE_INFECTION",
+  "diseaseId": "DEVICE_INFECTION",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "vancomycin",
+          "regimenLabel": "Vancomycin",
+          "dose": "15-20 mg/kg",
+          "route": "IV",
+          "freq": "every 8-12 hours (trough-guided)",
+          "duration": "Per organism (typically 2 weeks for uncomplicated CLABSI with line removal; longer for prosthetic valve/CIED involvement)",
+          "coverage": null,
+          "why": "Empiric coverage for staphylococci including MRSA, the dominant pathogens in device-related infection, pending blood culture and device culture results."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "IDSA Guidelines for Intravascular Catheter-Related Infection",
+          "AHA/ESC Infective Endocarditis Guidelines (for CIED infection)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "daptomycin",
+          "regimenLabel": "Daptomycin (if vancomycin intolerance or treatment failure)",
+          "dose": "6-8 mg/kg",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "Per organism",
+          "coverage": "Alternative gram-positive agent, particularly useful for persistent staphylococcal bacteremia despite vancomycin.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "IDSA Guidelines for Intravascular Catheter-Related Infection",
+          "AHA/ESC Infective Endocarditis Guidelines (for CIED infection)",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "Coagulase-negative Staph",
+        "S. aureus (incl. MRSA)",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Vancomycin"
+      ],
+      "grid": [
+        [
+          "✔"
+        ],
+        [
+          "✔"
+        ],
+        [
+          "Partial"
+        ]
+      ],
+      "completeness": "Vancomycin covers the predominant gram-positive device pathogens including MRSA.",
+      "gaps": [
+        "Gram-negatives and Candida are not covered — add based on culture results or specific risk factors (e.g., TPN, prolonged broad-spectrum antibiotics for Candida)."
+      ]
+    },
+    "deescalation": "Narrow to the most targeted agent once organism and susceptibility are confirmed; duration is determined by organism and whether endocarditis/deep complications are excluded by echocardiography and clinical course.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Vancomycin",
+            "dose": "15-20 mg/kg",
+            "route": "IV",
+            "frequency": "every 8-12 hours (trough-guided)",
+            "duration": "Per organism (typically 2 weeks for uncomplicated CLABSI with line removal; longer for prosthetic valve/CIED involvement)",
+            "why": "Empiric coverage for staphylococci including MRSA, the dominant pathogens in device-related infection, pending blood culture and device culture results."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Daptomycin (if vancomycin intolerance or treatment failure)",
+            "dose": "6-8 mg/kg",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "Per organism",
+            "coverage": "Alternative gram-positive agent, particularly useful for persistent staphylococcal bacteremia despite vancomycin."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "persistentBacteremia",
+      "hypotension"
+    ],
+    "framework": [
+      "Device removal or exchange is frequently necessary for source control, particularly for S. aureus or Candida — antibiotics alone often fail with the device retained, especially for biofilm-forming organisms.",
+      "For suspected prosthetic valve or CIED (pacemaker/ICD) infection specifically, infectious disease and cardiology/cardiac surgery input is essential — these infections often require device extraction.",
+      "Document duration of bacteremia after line removal — persistent positive cultures despite removal should prompt evaluation for endocarditis or other deep-seated infection."
+    ]
+  },
+  "references": [
+    "IDSA Guidelines for Intravascular Catheter-Related Infection",
+    "AHA/ESC Infective Endocarditis Guidelines (for CIED infection)",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "cardiogenic_shock",
+  "diseaseId": "cardiogenic_shock",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "ICU; treat the cause — urgent revascularisation for ischaemic cause.",
+        "Inotrope/vasopressor (e.g. noradrenaline ± dobutamine) titrated to perfusion.",
+        "Cautious diuresis/fluid guided by filling status; treat arrhythmia.",
+        "Consider mechanical support (IABP/Impella/ECMO) in selected cases.",
+        "Invasive monitoring; serial lactate, urine output."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC",
+        "refs": [
+          "Harrison 22e · ESC"
+        ]
+      }
+    }
+  ],
+  "confirm": "Hypotension with hypoperfusion despite adequate filling, due to pump failure (often after large MI). Raised lactate, low cardiac output, congestion.",
+  "investigations": [
+    {
+      "test": "Echo, ECG, troponin"
+    },
+    {
+      "test": "Lactate, ABG"
+    },
+    {
+      "test": "Coronary angiography"
+    }
+  ],
+  "disposition": "ICU / cardiology.",
+  "references": [
+    "Harrison 22e · ESC"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "anemia_sympt",
+  "diseaseId": "anemia_sympt",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Assess haemodynamic tolerance; transfuse for symptomatic/severe anaemia (restrictive threshold ~70 g/L, ~80 if cardiac).",
+        "Identify and treat the cause — iron/B12/folate deficiency, bleeding, haemolysis, marrow, chronic disease.",
+        "Iron deficiency: oral iron (IV if intolerant/malabsorption) and find the source (GI evaluation in at-risk).",
+        "Replace B12/folate as indicated (give B12 before folate to avoid subacute combined degeneration).",
+        "Reticulocyte count and blood film direct further work-up."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AABB transfusion",
+        "refs": [
+          "Harrison 22e · AABB transfusion"
+        ]
+      }
+    }
+  ],
+  "confirm": "Fatigue, dyspnoea, pallor, tachycardia with low haemoglobin; classify by MCV and look for blood loss/haemolysis.",
+  "investigations": [
+    {
+      "test": "FBC, MCV, blood film, reticulocytes"
+    },
+    {
+      "test": "Iron studies, B12/folate"
+    },
+    {
+      "test": "Haemolysis screen; source of bleeding"
+    }
+  ],
+  "disposition": "By cause/severity; admit if unstable.",
+  "references": [
+    "Harrison 22e · AABB transfusion"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

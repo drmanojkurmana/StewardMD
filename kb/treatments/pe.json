@@ -1,0 +1,51 @@
+{
+  "id": "pe",
+  "diseaseId": "pe",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Start anticoagulation on clinical suspicion if high probability (LMWH/DOAC).",
+        "Massive PE (shock): thrombolysis (or embolectomy) and resuscitation.",
+        "Confirm with CTPA (or V/Q); echo for RV strain in unstable patients.",
+        "Continue DOAC/LMWH→oral; duration ≥3 months (longer if unprovoked/recurrent).",
+        "Oxygen, analgesia; assess for cancer/thrombophilia if unprovoked."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · ESC PE",
+        "refs": [
+          "Harrison 22e · ESC PE"
+        ]
+      }
+    }
+  ],
+  "confirm": "Pleuritic pain/dyspnoea/tachycardia ± leg DVT; risk-stratify (Wells), D-dimer if low probability, CTPA to confirm.",
+  "investigations": [
+    {
+      "test": "CTPA / V-Q"
+    },
+    {
+      "test": "D-dimer (low prob)"
+    },
+    {
+      "test": "ECG, troponin, echo (severity)"
+    }
+  ],
+  "disposition": "Admit; ICU if haemodynamically unstable.",
+  "references": [
+    "Harrison 22e · ESC PE"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

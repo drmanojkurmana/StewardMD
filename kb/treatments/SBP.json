@@ -1,0 +1,175 @@
+{
+  "id": "SBP",
+  "diseaseId": "SBP",
+  "class": "infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "cefotaxime",
+          "regimenLabel": "Cefotaxime",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "every 8 hours",
+          "duration": "5 days",
+          "coverage": null,
+          "why": "Cefotaxime is the best-studied first-line agent for SBP, with reliable coverage of the dominant gram-negative and streptococcal pathogens and good ascitic fluid penetration."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Harrison/IDSA-aligned)",
+        "refs": [
+          "AASLD Practice Guidance on SBP",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone",
+          "dose": "2 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "5 days",
+          "coverage": "Equally effective alternative to cefotaxime with the convenience of once-daily dosing.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "AASLD Practice Guidance on SBP",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "piperacillin-tazobactam",
+          "regimenLabel": "Piperacillin-tazobactam (healthcare-associated or prior antibiotic exposure)",
+          "dose": "4.5 g",
+          "route": "IV",
+          "freq": "every 6-8 hours",
+          "duration": "5-7 days",
+          "coverage": "Broader option when healthcare-associated SBP or recent antibiotic exposure raises concern for resistant organisms.",
+          "why": null
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD",
+        "refs": [
+          "AASLD Practice Guidance on SBP",
+          "Harrison's Principles of Internal Medicine"
+        ]
+      }
+    }
+  ],
+  "stewardship": {
+    "coverageMatrix": {
+      "organisms": [
+        "E. coli/Klebsiella",
+        "Streptococcus species",
+        "Enterococcus"
+      ],
+      "drugs": [
+        "Cefotaxime/Ceftriaxone",
+        "Pip-Tazo (if added)"
+      ],
+      "grid": [
+        [
+          "✔",
+          "✔"
+        ],
+        [
+          "✔",
+          "Partial"
+        ],
+        [
+          "✘",
+          "✔"
+        ]
+      ],
+      "completeness": "Third-generation cephalosporins cover the large majority of community-acquired SBP pathogens.",
+      "gaps": [
+        "Enterococcus is not covered by cephalosporins — relevant mainly in healthcare-associated SBP, where broader empiric coverage should be considered."
+      ]
+    },
+    "deescalation": "If ascitic fluid culture identifies a specific organism with known susceptibility, narrow to the most targeted single agent; reassess with repeat paracentesis at 48 hours if response is inadequate to exclude secondary peritonitis or a resistant organism.",
+    "regimens": [
+      {
+        "label": "First-line",
+        "drugs": [
+          {
+            "drug": "Cefotaxime",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "every 8 hours",
+            "duration": "5 days",
+            "why": "Cefotaxime is the best-studied first-line agent for SBP, with reliable coverage of the dominant gram-negative and streptococcal pathogens and good ascitic fluid penetration."
+          }
+        ]
+      },
+      {
+        "label": "Alternative",
+        "drugs": [
+          {
+            "drug": "Ceftriaxone",
+            "dose": "2 g",
+            "route": "IV",
+            "frequency": "once daily",
+            "duration": "5 days",
+            "coverage": "Equally effective alternative to cefotaxime with the convenience of once-daily dosing."
+          },
+          {
+            "drug": "Piperacillin-tazobactam (healthcare-associated or prior antibiotic exposure)",
+            "dose": "4.5 g",
+            "route": "IV",
+            "frequency": "every 6-8 hours",
+            "duration": "5-7 days",
+            "coverage": "Broader option when healthcare-associated SBP or recent antibiotic exposure raises concern for resistant organisms."
+          }
+        ]
+      }
+    ],
+    "toxicityFactors": [
+      "fever",
+      "hypotension",
+      "alteredSensorium",
+      "organDysfunction"
+    ],
+    "framework": [
+      "Diagnosis requires ascitic fluid analysis (neutrophil count ≥250 cells/mm³ supports the diagnosis) — avoid treating presumptively without paracentesis unless the patient is too unstable to tolerate delay.",
+      "IV albumin should be given alongside antibiotics in patients with significant renal impairment or bilirubin elevation, as this reduces mortality and renal complications — a key adjunct, not optional.",
+      "Secondary prophylaxis (e.g., norfloxacin) should be planned at discharge in survivors of an SBP episode, but this is a separate long-term decision from acute empiric treatment."
+    ]
+  },
+  "references": [
+    "AASLD Practice Guidance on SBP",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "decision": {
+    "status": "orange",
+    "label": "Antibiotics recommended"
+  },
+  "antibioticRelevant": true,
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

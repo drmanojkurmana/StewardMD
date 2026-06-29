@@ -1,0 +1,51 @@
+{
+  "id": "hypoglycemia",
+  "diseaseId": "hypoglycemia",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Conscious: 15–20 g fast-acting oral carbohydrate, repeat in 15 min if still low.",
+        "Impaired/NBM: IV glucose (e.g. 100 mL 20%) or IM glucagon if no IV access.",
+        "Follow with longer-acting carbohydrate once recovered.",
+        "Sulfonylurea/long-acting insulin overdose: prolonged monitoring ± octreotide; admit.",
+        "Review drugs/diabetes regimen; address recurrent causes."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · Endocrine Society",
+        "refs": [
+          "Harrison 22e · Endocrine Society"
+        ]
+      }
+    }
+  ],
+  "confirm": "Whipple's triad: low plasma glucose with autonomic/neuroglycopenic symptoms relieved by glucose. Identify cause (insulin/sulfonylurea, sepsis, etc.).",
+  "investigations": [
+    {
+      "test": "Capillary + lab glucose"
+    },
+    {
+      "test": "Insulin/C-peptide if cause unclear"
+    },
+    {
+      "test": "Drug review"
+    }
+  ],
+  "disposition": "Observe; admit if drug-induced (long-acting).",
+  "references": [
+    "Harrison 22e · Endocrine Society"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

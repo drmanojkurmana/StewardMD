@@ -107,5 +107,15 @@
     "reviewedAt": null
   },
   "version": 1,
-  "contentHash": null
+  "contentHash": null,
+  "references": [
+    "WHO TB Guidelines",
+    "National TB Elimination Programme (NTEP) India Guidelines",
+    "Harrison's Principles of Internal Medicine"
+  ],
+  "reasonSource": "e=>`Cough for ≥2 weeks with ${[e.weightLoss&&\"weight loss\",e.eveningFever&&\"evening fever\",e.nightSweats&&\"night sweats\",e.hemoptysis&&\"hemoptysis\"].filter(Boolean).join(\", \")||\"constitutional symptoms\"} in this setting raises significant suspicion for pulmonary tuberculosis. This is NOT a syndrome to treat empirically with antitubercular therapy on clinical suspicion alone — microbiological confirmation (sputum smear/CBNAAT/culture) should be obtained first, since incorrect or premature ATT carries significant consequences (drug toxicity, resistance, delayed correct diagnosis).`",
+  "decision": {
+    "status": "yellow",
+    "label": "Observe / Further evaluation required"
+  }
 }

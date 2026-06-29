@@ -1,0 +1,51 @@
+{
+  "id": "ttp_hus",
+  "diseaseId": "ttp_hus",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "HAEMATOLOGICAL EMERGENCY — urgent haematology referral.",
+        "TTP: start PLASMA EXCHANGE immediately (don't wait for ADAMTS13) + corticosteroids; add caplacizumab/rituximab.",
+        "Do NOT transfuse platelets unless life-threatening bleeding (may worsen thrombosis).",
+        "HUS: supportive care, renal support; eculizumab for atypical/complement-mediated HUS.",
+        "Monitor LDH, platelets, haemoglobin and organ function."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · BSH/ISTH",
+        "refs": [
+          "Harrison 22e · BSH/ISTH"
+        ]
+      }
+    }
+  ],
+  "confirm": "Microangiopathic haemolytic anaemia + thrombocytopenia (± renal failure, neuro signs, fever). Schistocytes on film; ADAMTS13 in TTP.",
+  "investigations": [
+    {
+      "test": "FBC + blood film (schistocytes)"
+    },
+    {
+      "test": "LDH, haptoglobin, bilirubin, reticulocytes"
+    },
+    {
+      "test": "ADAMTS13, renal function, coagulation"
+    }
+  ],
+  "disposition": "Admit; ICU/haematology, urgent.",
+  "references": [
+    "Harrison 22e · BSH/ISTH"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "glomerulonephritis",
+  "diseaseId": "glomerulonephritis",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Assess for rapidly progressive GN (rising creatinine) — nephrology emergency; urgent biopsy.",
+        "Send immunology (ANCA, anti-GBM, complement, ANA) before immunosuppression.",
+        "RPGN: high-dose corticosteroids + cyclophosphamide/rituximab ± plasma exchange (anti-GBM/severe).",
+        "Supportive: BP control (ACEi/ARB), manage fluid/electrolytes, treat any infection trigger.",
+        "Treat the specific cause; monitor renal function closely."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · KDIGO GN",
+        "refs": [
+          "Harrison 22e · KDIGO GN"
+        ]
+      }
+    }
+  ],
+  "confirm": "Haematuria (dysmorphic RBCs/casts), proteinuria, hypertension ± AKI. Rapidly progressive GN is an emergency.",
+  "investigations": [
+    {
+      "test": "Urinalysis + microscopy (casts)"
+    },
+    {
+      "test": "Renal function, immunology panel"
+    },
+    {
+      "test": "Renal biopsy"
+    }
+  ],
+  "disposition": "Admit; nephrology.",
+  "references": [
+    "Harrison 22e · KDIGO GN"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}

@@ -1,0 +1,51 @@
+{
+  "id": "hepatic_enceph",
+  "diseaseId": "hepatic_enceph",
+  "class": "non_infective",
+  "precedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "management",
+      "steps": [
+        "Identify and treat the PRECIPITANT (GI bleed, sepsis/SBP, constipation, hypokalaemia, dehydration, sedatives).",
+        "Lactulose titrated to 2–3 soft stools/day (oral or enema).",
+        "Add rifaximin for inadequate response / secondary prevention.",
+        "Avoid sedatives; do not over-restrict protein; correct electrolytes.",
+        "Manage underlying cirrhosis; assess for transplant."
+      ],
+      "evidence": {
+        "source": "Harrison 22e · AASLD/EASL",
+        "refs": [
+          "Harrison 22e · AASLD/EASL"
+        ]
+      }
+    }
+  ],
+  "confirm": "Confusion/asterixis with chronic liver disease or porto-systemic shunt; a precipitant (GI bleed, infection, constipation, electrolytes, sedatives) is usually present.",
+  "investigations": [
+    {
+      "test": "Ammonia (support, not diagnostic)"
+    },
+    {
+      "test": "Septic screen incl. ascitic tap"
+    },
+    {
+      "test": "Electrolytes, glucose"
+    }
+  ],
+  "disposition": "Admit; ICU if airway risk.",
+  "references": [
+    "Harrison 22e · AASLD/EASL"
+  ],
+  "review": {
+    "status": "approved",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1
+}
