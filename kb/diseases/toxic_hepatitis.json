@@ -61,5 +61,97 @@
   "contentHash": null,
   "references": [
     "Harrison 22e · AASLD ALF"
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e, Chapter 351 (Toxic and Drug-Induced Hepatitis), pp.2665-2672; anti-TB hepatotoxicity monitoring p.1463; liver transplantation/ALF context Chapter 356 pp.2718-2719",
+      "clinicalPearls": [
+        "DILI is the most common cause of acute liver failure, and signals of hepatotoxicity in clinical trials are the leading reason candidate drugs fail to reach approval (p.2665).",
+        "Two broad mechanisms are recognised: direct (intrinsic) toxicity that is predictable and dose-dependent with a short latency, versus idiosyncratic reactions that are infrequent (roughly 1 in 1,000 to 1 in 100,000), unpredictable, and may appear at any time but typically 5-90 days after starting the drug (p.2665, p.2667).",
+        "Although idiosyncratic injury is regarded as not dose-related, most implicated drugs are given at relatively high daily doses (often >100 mg); high-potency drugs given in milligram amounts rarely cause hepatotoxicity (p.2665).",
+        "The hepatocellular-versus-cholestatic pattern is defined by the R value, the ratio of ALT to alkaline phosphatase (each as multiples of the upper limit of normal): R >5.0 = hepatocellular, R <2.0 = cholestatic, R 2.0-5.0 = mixed (p.2667).",
+        "Hy's Law (named for Hyman Zimmerman): the appearance of jaundice during drug therapy predicts more serious injury, with roughly a 10:1 ratio of jaundiced cases to acute liver failure (about 1 in 10 jaundiced patients progresses to liver failure) (p.2667).",
+        "Amoxicillin-clavulanate (Augmentin) is the most frequently implicated single antibiotic/agent causing DILI in the US and Europe, typically producing mixed or predominantly cholestatic injury that may begin after the drug has already been stopped (p.2667, p.2670).",
+        "Acetaminophen (paracetamol) is the prototype direct hepatotoxin and the most prevalent cause of acute liver failure in the Western world (p.2667, p.2668).",
+        "A characteristic biochemical signature of acetaminophen injury is very high aminotransferases (often >10,000 IU/L, far above viral hepatitis) with relatively low bilirubin in the hyperacute phase; this should prompt focused questioning even without a clear overdose history (p.2668).",
+        "Complementary and alternative (herbal/dietary) medicines now account for over 20% of DILI in the US; weight-loss products and anabolic steroids are common culprits and are often unregulated (p.2671).",
+        "Acetaminophen toxicity is potentiated by chronic alcohol use (CYP2E1 induction plus glutathione depletion), so the toxic dose may be as low as ~2 g in chronic alcoholics; starvation/fasting and enzyme-inducing drugs (phenobarbital, isoniazid) also increase susceptibility (p.2668-2670).",
+        "Four agents are notable for causing a chronic, autoimmune-hepatitis-like picture with positive ANA: nitrofurantoin, minocycline, hydralazine, and alpha-methyldopa (p.2667, p.2670).",
+        "DILI is nearly always a presumptive diagnosis of exclusion; causality assessment relies on temporal association, injury pattern, the drug's prior record, and ruling out other causes (scoring tools: RUCAM, DILIN expert opinion, newer RECAM) (p.2667-2668).",
+        "Drug hepatotoxicity is generally not more frequent in those with pre-existing chronic liver disease, although the severity of outcome may be greater; statins specifically can be used safely in chronic hepatitis C and steatosis (p.2668, p.2671-2672)."
+      ],
+      "pathophysiology": "Liver injury can follow ingestion of essentially any xenobiotic (industrial toxins, drugs, herbal/dietary supplements). Most drugs are lipophilic and undergo phase I oxidation/methylation by cytochrome P450 enzymes followed by phase II conjugation (glucuronidation, sulfation) or glutathione inactivation to a water-soluble form for renal/biliary excretion; most hepatotoxicity arises from a reactive phase I metabolite, and glutathione depletion compounds the injury. Damage occurs through several overlapping routes: direct hepatocyte injury via free radicals/reactive intermediates causing membrane lipid peroxidation; activation of innate or adaptive immune responses (HLA-haplotype-dependent hapten binding, cytotoxic lymphocytes, antibody-mediated cytotoxicity); triggering of apoptosis via TNF-alpha/Fas pathways; disruption of bile canalicular transport pumps (e.g., MRP3) leading to toxic bile-acid accumulation and cholestasis; and inhibition of mitochondrial beta-oxidation/respiration producing lactic acidosis and microvesicular steatosis. Nuclear receptors such as CAR and PXR can also induce hepatotoxicity. For acetaminophen specifically, a minor fraction is converted by CYP2E1 to the reactive metabolite NAPQI, normally detoxified by conjugation with hepatoprotective glutathione; when NAPQI overwhelms or glutathione is depleted, NAPQI binds covalently to hepatocyte macromolecules forming protein adducts that drive centrilobular necrosis.",
+      "additionalDifferentials": [
+        "Viral hepatitis (idiosyncratic DILI from isoniazid or ciprofloxacin can be clinically and histologically indistinguishable from acute hepatitis A/B/C) (p.2667)",
+        "Autoimmune hepatitis (nitrofurantoin, minocycline, hydralazine, methyldopa produce an AIH-like picture with positive ANA) (p.2667, p.2670)",
+        "Alcohol-associated (alcoholic) hepatitis (amiodarone causes a pseudoalcoholic injury with steatosis, neutrophilic infiltration, and Mallory's hyaline) (p.2670)",
+        "Primary sclerosing cholangitis (a PSC-like picture can follow chemotherapy and long-term ketamine use) (p.2667)",
+        "Primary biliary cholangitis-like lesion (rarely associated with chlorpromazine) (p.2669)"
+      ],
+      "infectionMimics": [
+        "Acute viral hepatitis A, B, or C (hepatocellular idiosyncratic DILI mimics it; differentiate with viral serologies) (p.2667)"
+      ],
+      "nonInfectiousMimics": [
+        "Autoimmune hepatitis (p.2667, p.2670)",
+        "Alcoholic hepatitis / pseudoalcoholic liver injury (amiodarone) (p.2670)",
+        "Ischemic (hypoxic) hepatitis and other causes of marked transaminase elevation (p.2668)",
+        "Cholestasis of pregnancy / estrogen-induced cholestasis (genetically determined canalicular transporter defects) (p.2667)",
+        "Budd-Chiari syndrome / hepatic vein occlusion and venoocclusive (sinusoidal obstruction) disease as drug-related vascular mimics (oral contraceptives; pyrrolizidine alkaloids; pre-transplant chemotherapy) (p.2667, p.2670, p.2671)"
+      ],
+      "additionalInvestigations": [
+        "Calculate the R value (ALT/ALP, each as multiples of ULN) to classify hepatocellular vs cholestatic vs mixed injury (p.2667)",
+        "Detailed exposure history including occupational/home chemicals, prescription and OTC drugs, and herbal/dietary supplements (p.2665, p.2671)",
+        "Serum acetaminophen level interpreted against the time-based nomogram (levels 4-8 h post-ingestion guide risk; >300 ug/mL at 4 h predicts severe injury, <150 ug/mL makes injury highly unlikely) (p.2668, p.2670)",
+        "Viral hepatitis serologies and autoantibodies (ANA, anti-smooth muscle, anti-mitochondrial, anti-LKM2) to exclude/identify autoimmune-pattern DILI (p.2667, p.2670)",
+        "Eosinophil count (eosinophilia supports a hypersensitivity reaction, e.g., trimethoprim-sulfamethoxazole, phenytoin) (p.2665, p.2671)",
+        "Liver biopsy where the pattern is unclear (helps distinguish injury types; e.g., electron microscopy showing phospholipid-laden lamellar bodies in amiodarone toxicity) (p.2670)",
+        "Arterial lactate in severe acetaminophen injury (>3.5 mmol/L identifies patients much more likely to need transplantation) (p.2670)",
+        "Causality assessment tools (RUCAM, DILIN structured expert opinion, RECAM) and reference resources (LiverTox) (p.2668)"
+      ],
+      "redFlags": [
+        "Jaundice arising during drug therapy (Hy's Law) - predicts severe injury and a substantial risk of progression to liver failure (p.2667)",
+        "Rising aminotransferases to >5x the upper limit of normal (or >3x ULN with symptoms) - threshold to withdraw the suspected agent (p.2668)",
+        "Acute liver failure features: coagulopathy plus hepatic encephalopathy; develops in ~10% of DILI cases (p.2668)",
+        "Cerebral edema in progressing acute liver failure (p.2667, Chap.356)",
+        "Acute kidney injury and myocardial injury accompanying severe acetaminophen toxicity (renal injury in ~75% of severe cases) (p.2668, p.2670)",
+        "Lactic acidosis (mitochondrial toxicity, e.g., with nucleoside analogues/antiretrovirals or valproate) (p.2665, p.2672)",
+        "Hypersensitivity/DRESS features (rash, fever, eosinophilia) accompanying liver injury (e.g., trimethoprim-sulfamethoxazole) (p.2671)",
+        "Continued use of the offending agent despite symptoms - most fatalities (e.g., isoniazid) occur in this setting (p.2668, p.2670)"
+      ],
+      "prognosis": "Most DILI is self-limited and resolves after the offending agent is withdrawn. However, acute liver failure develops in about 10% of DILI cases; once that threshold (coagulopathy plus hepatic encephalopathy) is reached, spontaneous recovery occurs in fewer than 30%, and liver transplantation is undertaken in more than 40% of these patients (p.2668). For acetaminophen, up to 72% of poisoned patients in some Scandinavian series progress to encephalopathy and coagulopathy (lower in the UK/US); a single dose of 10-15 g can cause clinical injury and fulminant fatal disease is usually associated with >=25 g; the N-acetylcysteine antidote markedly reduces severity and is most effective given early (within ~8-12 h), though it retains some benefit up to 24-36 h. Survivors of acetaminophen overdose rarely have ongoing liver injury (p.2668, p.2670). Several agents cause chronic injury or progression to cirrhosis (methotrexate, tamoxifen, amiodarone), and the autoimmune-pattern agents (nitrofurantoin, minocycline, hydralazine, methyldopa) can lead to cirrhosis if not recognised early (p.2668-2670).",
+      "pitfalls": [
+        "Treating mild, transient aminotransferase rises ('adaptation', e.g., with isoniazid, valproate, phenytoin, statins) as significant injury - these often resolve despite continued use; conversely, ignoring symptomatic/progressive rises is dangerous (p.2665, p.2669, p.2671-2672).",
+        "Missing the acetaminophen diagnosis because of denial, altered mentation, or staggered/unintentional overdose - very high transaminases with low bilirubin should raise suspicion even without a clear history (p.2668).",
+        "Forgetting herbal/dietary supplements and OTC products in the drug history - they now cause >20% of US DILI and may contain undeclared chemicals (e.g., diclofenac in 'antirheumatic herbs') (p.2671).",
+        "Assuming standard acetaminophen doses are safe in chronic alcohol users - the toxic threshold can fall to ~2 g (p.2670).",
+        "Attributing cholestatic jaundice in a young male body-builder to hepatitis rather than anabolic/androgenic steroid use (p.2670).",
+        "Expecting injury only early in therapy - amoxicillin-clavulanate and nitrofurantoin can have long latency and may declare after the drug is stopped (p.2670).",
+        "In direct toxins, focusing on the liver while missing concurrent renal or other organ involvement that may threaten survival (p.2668)."
+      ],
+      "severityClassification": "Injury pattern is classified by the R value (ALT/ALP as multiples of ULN): R >5.0 hepatocellular, R <2.0 cholestatic, R 2.0-5.0 mixed (p.2667). Hy's Law serves as a severity/prognostic marker: jaundice (significant bilirubin rise) accompanying hepatocellular DILI predicts a markedly higher risk of acute liver failure (about a 10:1 jaundice-to-failure ratio) (p.2667). The aminotransferase threshold of >5x ULN (or >3x ULN with symptoms) marks the point at which the offending agent should be withdrawn (p.2668). Causality (not severity) is graded on a five-point likelihood scale by DILIN (definite, highly likely, probable, possible, unlikely) (p.2668). The clinical endpoint of severity is acute liver failure, defined by coagulopathy plus hepatic encephalopathy (p.2668).",
+      "references": [
+        "Harrison 22e p.2665",
+        "Harrison 22e p.2666",
+        "Harrison 22e p.2667",
+        "Harrison 22e p.2668",
+        "Harrison 22e p.2669",
+        "Harrison 22e p.2670",
+        "Harrison 22e p.2671",
+        "Harrison 22e p.2672",
+        "Harrison 22e p.1463",
+        "Harrison 22e p.2718"
+      ],
+      "crossLinks": [
+        "VIRAL_HEPATITIS",
+        "hepatic_enceph",
+        "decomp_cirrhosis",
+        "drug_intox"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "hbd6c4250"
+    }
+  }
 }

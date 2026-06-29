@@ -112,5 +112,66 @@
   "reason": [
     "lit",
     "New diarrhea following recent antibiotic exposure (often within the preceding 8 weeks, though it can occur during therapy) raises suspicion for Clostridioides difficile infection. Note the specific terminology here — treatment is itself with a different class of \"antibiotics\" targeted at C. difficile (oral vancomycin or fidaxomicin), which is distinct from and the inverse of typical antibiotic stewardship: the priority is stopping the inciting antibiotic if still being given, plus starting C. difficile-directed therapy."
-  ]
+  ],
+  "enrichment": {
+    "harrison": {
+      "source": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "sourceEdition": "22e-2025",
+      "pages": "Harrison 22e Chapter 139, p.1082-1086 (with CT-imaging note p.640)",
+      "clinicalPearls": [
+        "CDI is the most commonly diagnosed hospital-acquired diarrhoeal illness and the leading health care-associated infection; it follows ingestion of spores that germinate and produce toxins once the normal colonic microbiota has been disrupted (Harrison 22e p.1082).",
+        "Almost any antibiotic can precipitate CDI, including vancomycin itself; clindamycin, ampicillin, cephalosporins (especially 2nd/3rd generation), and fluoroquinolones carry the highest risk, whereas penicillin/beta-lactamase-inhibitor combinations carry notably less (Harrison 22e p.1082).",
+        "Proton pump inhibitors are at most a modest risk factor; the data are weak and PPIs have not been clearly implicated in patients not already on antibiotics (Harrison 22e p.1082).",
+        "Asymptomatic faecal carriage rises with length of hospital stay (often >=20% after 2 weeks inpatient) versus only 1-3% in community residents; neonates and infants are very frequently colonised yet almost never develop disease, attributed to absent mucosal toxin receptors early in life (Harrison 22e p.1082-1083).",
+        "Stools in CDI are essentially never grossly bloody and have a characteristic odour, ranging from soft/unformed to watery or mucoid (Harrison 22e p.1084).",
+        "Recurrence after treatment occurs in roughly 15-30% of cases and may be either relapse with the same strain or reinfection with a new one, driven by ongoing disruption of the faecal microbiota by the treating antibiotic; a first recurrence raises the risk of a second (Harrison 22e p.1084-1085).",
+        "Serum IgG antibody to toxins A and B from prior colonisation/childhood exposure helps determine who develops symptomatic disease versus remains an asymptomatic carrier and protects against recurrence (Harrison 22e p.1083).",
+        "Spores persist on environmental surfaces for months and on the hands of staff; alcohol hand gels are NOT sporicidal, so soap-and-water hand washing is required during outbreaks (Harrison 22e p.1083, p.1086)."
+      ],
+      "pathophysiology": "Ingested spores of toxigenic C. difficile survive gastric acid, germinate in the small bowel, and colonise the lower gut once antibiotic exposure has disrupted the protective microbiota. There they elaborate two large clostridial toxins: toxin A (an enterotoxin and potent neutrophil chemoattractant) and toxin B (a cytotoxin). Both glucosylate Rho-family GTP-binding proteins that regulate the actin cytoskeleton, causing loss of cell shape, adherence and tight junctions, with epithelial barrier breakdown, fluid leakage, diarrhoea and pseudomembrane formation. Toxin B appears to be the dominant virulence factor: disease occurs with toxin A-negative but not toxin B-negative strains. A third (binary) toxin, CDT, is present in all NAP1/BI/027 epidemic isolates but its pathogenic role is undefined. Disease typically requires at least three events: antibiotic exposure establishing susceptibility, acquisition of a toxigenic strain, and an inadequate host (anamnestic antibody) immune response. Notably, patients colonised by (often nontoxigenic) strains who have not previously had CDI actually have a DECREASED, not increased, risk of subsequent CDI (Harrison 22e p.1082-1084).",
+      "additionalDifferentials": [],
+      "infectionMimics": [],
+      "nonInfectiousMimics": [],
+      "additionalInvestigations": [
+        "Only diarrhoeal (unformed) stool should be tested; testing of asymptomatic patients is not recommended except for epidemiologic study (Harrison 22e p.1084).",
+        "NAAT/PCR for the toxin gene is rapid and sensitive but may detect mere colonisation in a patient whose diarrhoea is due to another cause; toxin EIA is specific but insensitive (Harrison 22e p.1084).",
+        "Recommended multi-step algorithms: NAAT followed by toxin EIA on NAAT-positive results, or GDH (glutamate dehydrogenase common-antigen) plus toxin EIA with NAAT as arbiter when the two disagree; confirming actual toxin in stool is favoured to avoid over-diagnosing colonisation (Harrison 22e p.1084).",
+        "Empirical treatment is appropriate if stool testing is delayed (Harrison 22e p.1084).",
+        "Endoscopy (sigmoidoscopy/colonoscopy) is highly specific only if pseudomembranes are seen but is insensitive (pseudomembranes visible in only ~50% of culture/toxin-positive diarrhoea); a negative endoscopy does NOT exclude CDI. It is most useful as a rapid test in the seriously ill patient with an acute abdomen and no diarrhoea (Harrison 22e p.1084).",
+        "Abdominal CT in colitis shows bowel-wall thickening (significantly more prominent than in other colitides), wall oedema, mesenteric stranding and ascites (Harrison 22e p.640, p.1085)."
+      ],
+      "redFlags": [
+        "Unexplained leukocytosis with WBC >=15,000/uL, especially when stool passage has ceased due to adynamic ileus (ileus seen on x-ray in ~20%) - a clue to unsuspected CDI and a marker of high risk for toxic megacolon and sepsis (Harrison 22e p.1084).",
+        "Marked leukocytosis >=20,000 WBCs/uL with an acute abdomen suggests fulminant CDI (Harrison 22e p.1085).",
+        "Fulminant disease may present WITHOUT diarrhoea, mimicking an acute surgical abdomen, with sepsis (hypotension, fever, tachycardia, leukocytosis), obstruction/ileus, colon-wall thickening and ascites - include CDI in the differential of acute abdomen, sepsis or toxic megacolon in anyone given antibiotics in the prior 2 months (Harrison 22e p.1085).",
+        "Toxic megacolon, colonic perforation, shock and the need for colectomy denote fulminant/complicated disease; a rising serum lactate (aim to operate before it reaches 5 mmol/L) signals the need for surgery (Harrison 22e p.1085-1086).",
+        "Even a single recurrence carries an ~11% risk of serious complications (shock, megacolon, perforation, colectomy or death within 30 days) (Harrison 22e p.1085)."
+      ],
+      "prognosis": "Most patients recover, but recurrences are common (~15-30%). Attributable mortality, historically 0.6-3.5%, has reached ~6.9% in recent epidemic-strain outbreaks and rises progressively with increasing age (Harrison 22e p.1086).",
+      "pitfalls": [
+        "Do not perform a 'test of cure' after treatment: >50% of patients keep harbouring the organism and its toxin after diarrhoea resolves, and results do not predict recurrence; such results must not be used to restrict long-term-care or nursing-home placement (Harrison 22e p.1084).",
+        "Distinguish colonisation from infection - a positive NAAT/PCR in a patient with diarrhoea from another cause may simply reflect colonisation; treating asymptomatic carriers is not indicated (Harrison 22e p.1084).",
+        "In adynamic ileus the diagnosis is frequently overlooked because stool passage stops - look for unexplained leukocytosis (Harrison 22e p.1084).",
+        "A negative endoscopy does not rule out CDI, and pseudomembranes are absent in roughly half of confirmed cases (Harrison 22e p.1084).",
+        "Antiperistaltic agents and opiates may mask symptoms and possibly worsen disease and should generally be avoided (Harrison 22e p.1084)."
+      ],
+      "severityClassification": "Harrison applies the IDSA/SHEA-aligned severity tiers as treatment-decision markers: SEVERE disease is indicated by leukocytosis >=15,000 WBCs/uL and/or a serum creatinine >=1.5 mg/dL; FULMINANT (severe complicated) disease is severe CDI plus hypotension/shock, ileus, or toxic megacolon, often with leukocytosis >=20,000/uL and a rising lactate. Mild-to-moderate disease lacks these features (Harrison 22e p.1084-1085).",
+      "references": [
+        "Harrison 22e p.1082",
+        "Harrison 22e p.1083",
+        "Harrison 22e p.1084",
+        "Harrison 22e p.1085",
+        "Harrison 22e p.1086",
+        "Harrison 22e p.640"
+      ],
+      "crossLinks": [
+        "GASTROENTERITIS",
+        "DYSENTERY",
+        "ibd_flare"
+      ],
+      "conflicts": [],
+      "importedAt": "2026-06-29T00:00:00Z",
+      "contentHash": "hcdbde9c7"
+    }
+  }
 }
