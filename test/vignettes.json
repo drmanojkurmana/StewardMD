@@ -1,0 +1,23 @@
+{
+  "_comment": "Golden-case regression vignettes for the StewardMD reasoning engine. Each = a finding set fed to DX._differential(). The harness snapshots the ranked infective+non-infective differential so any future KB migration can be proven behavior-preserving. Finding keys are validated against the live engine's vocabulary. NOT shipped — dev/test only.",
+  "vignettes": [
+    { "id": "meningitis", "label": "Fever + neck stiffness + photophobia + drowsy", "findings": ["fever","neckStiffness","headache","photophobia","alteredSensorium"] },
+    { "id": "cap", "label": "Fever + productive cough + breathless", "findings": ["fever","cough","purulentSputum","dyspnea","tachypnea"] },
+    { "id": "pyelonephritis", "label": "Fever + dysuria + flank pain + vomiting", "findings": ["fever","dysuria","flankPain","nauseaVomiting"] },
+    { "id": "septic_shock", "label": "Fever + hypotension + tachycardia + confusion + lactate", "findings": ["fever","hypotension","tachycardia","alteredSensorium","lactate"] },
+    { "id": "cholangitis", "label": "Fever + RUQ pain + jaundice + Murphy", "findings": ["fever","rightUpperQuadrantPain","jaundice","murphySign","nauseaVomiting"] },
+    { "id": "decomp_cirrhosis", "label": "Ascites + jaundice + asterixis + hepatosplenomegaly", "findings": ["ascites","jaundice","asterixis","hepatosplenomegaly"] },
+    { "id": "dka", "label": "Polyuria/polydipsia + ketonemia + abdo pain + vomiting", "findings": ["polyuriaPolydipsia","ketonemia","abdominalPain","nauseaVomiting","diabetesHx"] },
+    { "id": "acs", "label": "Exertional chest pain + ischemic ECG + known CAD", "findings": ["exertionalChestPain","ecgIschemia","knownCAD"] },
+    { "id": "pe", "label": "Pleuritic pain + breathless + tachycardia + unilateral leg swelling", "findings": ["pleuriticChestPain","dyspnea","tachycardia","legSwellingUnilateral","calfTenderness"] },
+    { "id": "heart_failure", "label": "Orthopnea + raised JVP + bilateral leg swelling + basal crackles", "findings": ["orthopnea","raisedJVP","legSwellingBilateral","bilateralCrackles","dyspnea"] },
+    { "id": "stroke", "label": "Focal deficit + hypertension", "findings": ["focalNeuroDeficit","hypertensionHx"] },
+    { "id": "sah", "label": "Thunderclap headache + vomiting", "findings": ["thunderclapHeadache","headache","nauseaVomiting"] },
+    { "id": "iih", "label": "Headache + papilloedema + visual disturbance", "findings": ["headache","papilledema","visualDisturbance"] },
+    { "id": "ugi_bleed", "label": "Haematemesis + melaena", "findings": ["hematemesis","melena"] },
+    { "id": "gbs", "label": "Ascending weakness", "findings": ["ascendingWeakness"] },
+    { "id": "ttp", "label": "Thrombocytopenia + mucocutaneous bleeding + fever + confusion", "findings": ["thrombocytopenia","mucocutaneousBleeding","fever","alteredSensorium"] },
+    { "id": "fuo_minimal", "label": "Isolated prolonged fever (sparse — threshold case)", "findings": ["fever","prolongedFever","weightLoss","nightSweats"] },
+    { "id": "single_fever", "label": "Single nonspecific finding (below reasoning threshold)", "findings": ["fever"] }
+  ]
+}
