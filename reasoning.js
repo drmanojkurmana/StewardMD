@@ -2459,36 +2459,51 @@
         f(_libState.branch === "all", "br", "all", "All") +
         branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div>' +
       '<div class="kblib-count" id="kblibCount"></div><div class="kblib-grid" id="kblibGrid"></div>';
-    function paint() {
-      var q = _libState.q.toLowerCase();
-      var res = kbBuildIndex().filter(function (d) {
-        if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
-        if (_libState.src === "ref" && !d.ref) return false;
-        if (_libState.src === "dx" && d.ref) return false;
-        if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
-        if (q.length >= 2 && d.text.indexOf(q) < 0) return false;
-        return true;
-      });
-      document.getElementById("kblibCount").textContent = res.length + " of " + kbBuildIndex().length + " entries";
-      document.getElementById("kblibGrid").innerHTML = res.slice(0, 400).map(function (d) {
-        return '<button class="kblib-card ' + d.cls + '" data-kb="' + d.id + '"><div class="kblib-name">' + esc(d.name) + '</div>' +
-          '<div class="kblib-meta"><span class="kblib-badge ' + d.cls + '">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</span>' +
-          '<span class="kblib-badge ' + (d.ref ? "ref" : "dx") + '">' + (d.ref ? "📖 Reference" : "⚙ Diagnostic") + '</span>' +
-          (d.sys ? '<span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div></button>';
-      }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
-      document.getElementById("kblibGrid").querySelectorAll("[data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
-    }
-    var qi = document.getElementById("kblibQ");
-    if (qi) qi.addEventListener("input", function () { _libState.q = qi.value.trim(); paint(); });
-    sec.querySelectorAll(".kblib-f").forEach(function (b) {
-      b.addEventListener("click", function () {
-        if (b.hasAttribute("data-cls")) _libState.cls = b.getAttribute("data-cls");
-        if (b.hasAttribute("data-src")) _libState.src = b.getAttribute("data-src");
-        if (b.hasAttribute("data-br")) _libState.branch = b.getAttribute("data-br");
-        kbRenderLibrary();
-      });
+    kbWireLibrary();   // ensure the (delegated) handlers exist
+    kbPaintLibrary();  // fill the grid from current filters/search
+    // No per-element addEventListener here: search/filter/card events are handled by ONE
+    // delegated listener (kbWireLibrary) so they survive the modal re-rendering .sbref-sec.
+  }
+  // repaint only the results grid from the current _libState (search + filters)
+  function kbPaintLibrary() {
+    var grid = document.getElementById("kblibGrid"); if (!grid) return;
+    var q = _libState.q.toLowerCase();
+    var all = kbBuildIndex();
+    var res = all.filter(function (d) {
+      if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
+      if (_libState.src === "ref" && !d.ref) return false;
+      if (_libState.src === "dx" && d.ref) return false;
+      if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
+      if (q.length >= 2 && d.text.indexOf(q) < 0) return false;
+      return true;
     });
-    paint();
+    var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = res.length + " of " + all.length + " entries";
+    grid.innerHTML = res.slice(0, 400).map(function (d) {
+      return '<button class="kblib-card ' + d.cls + '" data-kb="' + d.id + '"><div class="kblib-name">' + esc(d.name) + '</div>' +
+        '<div class="kblib-meta"><span class="kblib-badge ' + d.cls + '">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</span>' +
+        '<span class="kblib-badge ' + (d.ref ? "ref" : "dx") + '">' + (d.ref ? "📖 Reference" : "⚙ Diagnostic") + '</span>' +
+        (d.sys ? '<span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div></button>';
+    }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
+  }
+  // ONE delegated listener for the Knowledge Library — survives modal re-renders.
+  function kbWireLibrary() {
+    if (window.__smdKbLibWired) return; window.__smdKbLibWired = true;
+    document.addEventListener("input", function (e) {
+      if (e.target && e.target.id === "kblibQ") { _libState.q = String(e.target.value || "").trim(); kbPaintLibrary(); }
+    }, false);
+    document.addEventListener("click", function (e) {
+      var t = e.target; if (!t || !t.closest) return;
+      var fb = t.closest(".kblib-f");
+      if (fb) {
+        if (fb.hasAttribute("data-cls")) _libState.cls = fb.getAttribute("data-cls");
+        if (fb.hasAttribute("data-src")) _libState.src = fb.getAttribute("data-src");
+        if (fb.hasAttribute("data-br")) _libState.branch = fb.getAttribute("data-br");
+        try { kbRenderLibrary(); } catch (x) {}
+        return;
+      }
+      var card = t.closest(".kblib-card[data-kb]");
+      if (card) kbOpen(card.getAttribute("data-kb"));
+    }, false);
   }
   function kbInjectCSS() {
     if (document.getElementById("smdKbCSS")) return;
