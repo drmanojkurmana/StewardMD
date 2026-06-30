@@ -279,6 +279,128 @@
       }).join("") + "</div>";
   }
 
+  /* ======================================================= PHASE 2 engines */
+  var _trendWin = 24 * 60 * 60 * 1000;   // trends window (ms); default 24h
+
+  // --- TrendGraph (reusable SVG line chart over a [{ts,v}] series) ----------
+  function trendGraph(points, opts) {
+    opts = opts || {};
+    points = (points || []).filter(function (p) { return p && p.v != null && isFinite(p.v); }).sort(function (a, b) { return a.ts - b.ts; });
+    if (points.length < 2) return '<div class="icu-empty">Not enough data yet — add more readings to see a trend.</div>';
+    var W = 320, H = 78, pad = 6;
+    var xs = points.map(function (p) { return p.ts; }), ys = points.map(function (p) { return p.v; });
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs);
+    var minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    if (opts.band) { minY = Math.min(minY, opts.band[0]); maxY = Math.max(maxY, opts.band[1]); }
+    var spanY = (maxY - minY) || 1, spanX = (maxX - minX) || 1;
+    function X(t) { return (pad + (W - 2 * pad) * (t - minX) / spanX); }
+    function Y(v) { return (H - pad - (H - 2 * pad) * (v - minY) / spanY); }
+    var d = points.map(function (p, i) { return (i ? "L" : "M") + X(p.ts).toFixed(1) + " " + Y(p.v).toFixed(1); }).join(" ");
+    var band = "";
+    if (opts.band) { var y1 = Y(opts.band[1]), y2 = Y(opts.band[0]); band = '<rect x="0" y="' + y1.toFixed(1) + '" width="' + W + '" height="' + Math.max(0, y2 - y1).toFixed(1) + '" fill="var(--ok-soft)" opacity=".7"/>'; }
+    var dec = spanY < 5 ? 1 : 0, last = ys[ys.length - 1];
+    return '<svg viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" style="width:100%;height:78px;display:block">' + band +
+      '<path d="' + d + '" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>' +
+      '<div style="display:flex;justify-content:space-between;font:600 10px var(--font);color:var(--muted);margin-top:3px"><span>' + esc(minY.toFixed(dec)) + "–" + esc(maxY.toFixed(dec)) + (opts.unit ? " " + esc(opts.unit) : "") + '</span><span>last <b style="color:var(--ink)">' + esc(last) + "</b></span></div>";
+  }
+  function trendCard(title, series, opts) { return '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">' + esc(title) + "</div>" + trendGraph(series, opts) + "</div>"; }
+  function recsCard(title, recs, flags, ev) {
+    return '<div class="icu-card"><h3>' + esc(title) + "</h3>" +
+      ((flags && flags.length) ? flags.map(function (f) { return '<div class="icu-alert warn"><div><div class="am">⚠ ' + esc(f) + "</div></div></div>"; }).join("") : "") +
+      (recs || []).map(function (r) { return '<p style="margin:9px 0 0">• ' + esc(r) + "</p>"; }).join("") + evidenceBadges(ev) + "</div>";
+  }
+  function winSelector() {
+    var opts = [["24h", 864e5], ["48h", 1728e5], ["72h", 2592e5], ["7d", 6048e5]];
+    return '<div style="display:flex;gap:6px;justify-content:center;margin-top:4px">' + opts.map(function (o) {
+      return '<button class="icu-btn ghost" style="width:auto;margin:0;padding:7px 13px;font-size:12px;' + (_trendWin === o[1] ? "background:var(--primary-soft);border-color:var(--primary)" : "") + '" data-icu-act="win:' + o[1] + '">' + o[0] + "</button>";
+    }).join("") + "</div>";
+  }
+  function vitalSeries(key, win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return v[key] != null && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v[key] }; }); }
+  function mapSeries(win) { var c = Date.now(); return (_raw.vitals || []).filter(function (v) { return (v.map != null || (v.sbp != null && v.dbp != null)) && (!win || v.ts >= c - win); }).map(function (v) { return { ts: v.ts, v: v.map != null ? v.map : mapCalc(v.sbp, v.dbp) }; }); }
+  function labSeries(key, win) { var c = Date.now(); return (_raw.labs.trends || []).filter(function (r) { return r[key] != null && (!win || r.ts >= c - win); }).map(function (r) { return { ts: r.ts, v: r[key] }; }); }
+
+  // --- ABG / acid–base interpreter -----------------------------------------
+  function analyzeABG(g, L) {
+    g = g || {}; L = L || {};
+    var ph = g.ph, pco2 = g.paco2, hco3 = g.hco3;
+    if (ph == null || pco2 == null || hco3 == null) return null;
+    var rows = [], flags = [], primary = "", comp = "";
+    var acidemia = ph < 7.35, alkalemia = ph > 7.45;
+    if (acidemia) {
+      if (hco3 < 22) primary = "Metabolic acidosis";
+      if (pco2 > 45) primary = primary ? "Mixed metabolic & respiratory acidosis" : "Respiratory acidosis";
+      if (!primary) primary = "Acidaemia";
+    } else if (alkalemia) {
+      if (hco3 > 26) primary = "Metabolic alkalosis";
+      if (pco2 < 35) primary = primary ? "Mixed metabolic & respiratory alkalosis" : "Respiratory alkalosis";
+      if (!primary) primary = "Alkalaemia";
+    } else {
+      if (hco3 < 22 && pco2 < 35) primary = "Compensated / mixed (low HCO₃ & low CO₂)";
+      else if (hco3 > 26 && pco2 > 45) primary = "Compensated / mixed (high HCO₃ & high CO₂)";
+      else primary = "Normal acid–base";
+    }
+    if (/Metabolic acidosis/.test(primary)) {
+      var exp = 1.5 * hco3 + 8;
+      rows.push(["Winter's expected PaCO₂", exp.toFixed(0) + " ± 2 mmHg (actual " + pco2 + ")"]);
+      comp = pco2 > exp + 2 ? "Inadequate respiratory compensation → added respiratory acidosis" : pco2 < exp - 2 ? "Over-compensation → added respiratory alkalosis" : "Appropriate respiratory compensation";
+    } else if (/Metabolic alkalosis/.test(primary)) {
+      var expA = 0.7 * hco3 + 20;
+      rows.push(["Expected PaCO₂", expA.toFixed(0) + " ± 2 mmHg (actual " + pco2 + ")"]);
+      comp = pco2 < expA - 2 ? "Added respiratory alkalosis" : pco2 > expA + 2 ? "Added respiratory acidosis" : "Appropriate respiratory compensation";
+    } else if (/Respiratory/.test(primary)) {
+      comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mmol/L per 10 mmHg PaCO₂).";
+    }
+    if (L.na != null && L.cl != null) {
+      var ag = L.na - (L.cl + hco3), agc = ag;
+      if (L.alb != null) agc = ag + 0.25 * (40 - L.alb);     // albumin in g/L (normal ~40)
+      var agShown = L.alb != null ? agc : ag;
+      rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mmol/L"]);
+      if (agShown > 12) {
+        flags.push("High anion gap — consider lactate, ketones, renal failure, toxins (MUDPILES)");
+        var dr = (ag - 12) / (24 - hco3);
+        if (isFinite(dr) && (24 - hco3) !== 0) {
+          rows.push(["Delta ratio (ΔAG/ΔHCO₃)", dr.toFixed(1)]);
+          if (dr < 0.4) flags.push("Δ-ratio <0.4 → concurrent normal-AG (hyperchloraemic) acidosis");
+          else if (dr > 2) flags.push("Δ-ratio >2 → concurrent metabolic alkalosis or pre-existing high HCO₃");
+        }
+      }
+    }
+    if (g.pao2 != null && g.fio2) { var pf = Math.round(g.pao2 / (g.fio2 / 100)); rows.push(["P/F ratio", pf + (pf < 100 ? " (severe ARDS)" : pf < 200 ? " (moderate ARDS)" : pf < 300 ? " (mild ARDS)" : "")]); }
+    return { primary: primary, comp: comp, rows: rows, flags: flags };
+  }
+
+  // --- Fluid management engine ---------------------------------------------
+  function analyzeFluids(f, pt, lv) {
+    f = f || {}; pt = pt || {}; lv = lv || {};
+    var rows = [], recs = [], flags = [];
+    var net = f.net24h != null ? f.net24h : (f.intake24h != null && f.output24h != null ? f.intake24h - f.output24h : null);
+    rows.push(["Net balance (24h)", net != null ? (net > 0 ? "+" : "") + net + " mL" : "—"]);
+    rows.push(["Cumulative balance", f.cumulative != null ? (f.cumulative > 0 ? "+" : "") + f.cumulative + " mL" : "—"]);
+    if (pt.weightKg) { var w = pt.weightKg, m = w <= 10 ? 4 * w : w <= 20 ? 40 + 2 * (w - 10) : 60 + (w - 20); rows.push(["Maintenance (4-2-1)", Math.round(m) + " mL/h (" + Math.round(m * 24) + " mL/day)"]); }
+    var map = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
+    var oliguric = lv.uop != null && pt.weightKg && lv.uop < 0.5 * pt.weightKg;
+    var hypop = (map != null && map < 65) || (lv.lactate != null && lv.lactate > 2) || oliguric;
+    var phase;
+    if (hypop) { phase = "Resuscitation"; recs.push("Signs of hypoperfusion (low MAP / high lactate / oliguria) — give a guided fluid challenge (250–500 mL crystalloid) and REASSESS with dynamic measures; avoid reflexive large-volume boluses."); }
+    else if (f.cumulative != null && f.cumulative > 3000) { phase = "De-resuscitation"; recs.push("Positive cumulative balance with adequate perfusion — consider de-resuscitation (net-negative / diuresis) to reduce ventilator and AKI risk."); flags.push("Cumulative fluid overload risk (+" + f.cumulative + " mL)"); }
+    else { phase = "Maintenance / conservative"; recs.push("Perfusion adequate — favour conservative/maintenance fluids with daily reassessment of balance."); }
+    if (oliguric) flags.push("Oliguria (<0.5 mL/kg/h) — assess volume status and renal perfusion");
+    return { rows: rows, recs: recs, flags: flags, phase: phase };
+  }
+
+  // --- Hemodynamic interpretation ------------------------------------------
+  function interpretHemo(lv, inf) {
+    var recs = [], flags = [];
+    var map = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
+    var si = (lv.hr && lv.sbp) ? lv.hr / lv.sbp : null;
+    var pressors = (inf || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
+    if (map != null && map < 65) { recs.push(pressors.length ? "MAP <65 despite vasopressors — reassess volume, consider adding vasopressin or escalating noradrenaline, and exclude an untreated cause (sepsis source, tamponade, PE)." : "MAP <65 — after appropriate fluids, start a vasopressor (noradrenaline first-line) targeting MAP ≥65."); flags.push("MAP " + map + " mmHg below target (≥65)"); }
+    if (si != null && si > 0.9) flags.push("Shock index " + si.toFixed(2) + " (>0.9) — occult hypoperfusion");
+    if (lv.lactate != null && lv.lactate > 2) recs.push("Lactate " + lv.lactate + " mmol/L — target clearance; recheck in 2–4 h as a resuscitation marker.");
+    if (!recs.length) recs.push("Hemodynamics within target — continue monitoring.");
+    return { map: map, si: si, pressors: pressors, recs: recs, flags: flags };
+  }
+
   /* --------------------------------------------------------------- tabs */
   var TABS = [
     { id: "overview", ic: "❤️", label: "Overview" },
@@ -317,25 +439,26 @@
       return out;
     },
     hemo: function () {
-      var lv = latestVitals(), mp = curMap(), si = shockIndex();
+      var lv = latestVitals(), h = interpretHemo(lv, _raw.infusions);
       return '<div class="icu-card"><h3>Hemodynamics</h3>' +
-        row("MAP", mp, "mmHg") + row("Shock index", si) + row("Heart rate", lv.hr, "bpm") +
+        row("MAP", h.map, "mmHg") + row("Shock index", h.si != null ? h.si.toFixed(2) : null) + row("Heart rate", lv.hr, "bpm") +
         row("BP", (lv.sbp != null ? lv.sbp + "/" + lv.dbp : null)) + row("Lactate", lv.lactate, "mmol/L") +
-        row("Urine output", lv.uop, "mL/h") + row("CVP", lv.cvp, "mmHg") +
-        evidenceBadges(["Surviving Sepsis", "SCCM"]) +
-        '<button class="icu-btn ghost" data-icu-act="edit:monitor">✎ Update vitals</button>' +
-        '<button class="icu-btn" data-icu-act="calc:map">Open hemodynamic calculators</button></div>' +
-        phaseNote("Phase 2", "Trends & interpretation");
+        row("Urine output", lv.uop, "mL/h") + row("On vasopressors", h.pressors.length ? h.pressors.map(function (p) { return p.drug; }).join(", ") : "No") +
+        '<button class="icu-btn ghost" data-icu-act="edit:monitor">✎ Update vitals</button></div>' +
+        recsCard("Interpretation & recommendations", h.recs, h.flags, ["Surviving Sepsis", "SCCM"]) +
+        trendCard("MAP trend", mapSeries(_trendWin), { band: [65, 110], unit: "mmHg" }) +
+        trendCard("Lactate trend", vitalSeries("lactate", _trendWin), { unit: "mmol/L" }) +
+        winSelector() +
+        '<button class="icu-btn" data-icu-act="calc:map">Open hemodynamic calculators</button>';
     },
     fluids: function () {
-      var f = _raw.fluids || {};
+      var f = _raw.fluids || {}, r = analyzeFluids(f, _raw.patient, latestVitals());
       return '<div class="icu-card"><h3>Fluid Management</h3>' +
-        row("Intake (24h)", f.intake24h, "mL") + row("Output (24h)", f.output24h, "mL") +
-        row("Urine (24h)", f.urine24h, "mL") + row("Net balance (24h)", f.net24h, "mL") +
-        row("Cumulative balance", f.cumulative, "mL") + row("Strategy", f.strategyPhase) +
-        evidenceBadges(["Surviving Sepsis", "KDIGO"]) +
+        row("Phase", r.phase) + row("Intake (24h)", f.intake24h, "mL") + row("Output (24h)", f.output24h, "mL") +
+        row("Urine (24h)", f.urine24h, "mL") + r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
         '<button class="icu-btn ghost" data-icu-act="edit:flowsheet">✎ Update fluid balance</button></div>' +
-        phaseNote("Phase 2", "Fluid strategy engine");
+        recsCard("Strategy & warnings", r.recs, r.flags, ["Surviving Sepsis", "ROSE concept", "KDIGO"]) +
+        trendCard("Urine output trend", vitalSeries("uop", _trendWin), { unit: "mL/h" });
     },
     lytes: function () {
       var L = _raw.labs.recent || {};
@@ -350,13 +473,18 @@
         '<button class="icu-btn" data-icu-act="launch:elyte">Open Electrolyte Engine</button></div>';
     },
     abg: function () {
-      var g = _raw.abg || {};
-      return '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
+      var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
+      var head = '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
         row("pH", g.ph) + row("PaCO₂", g.paco2, "mmHg") + row("PaO₂", g.pao2, "mmHg") +
         row("HCO₃⁻", g.hco3, "mmol/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
-        evidenceBadges(["Harrison"]) +
-        '<button class="icu-btn ghost" data-icu-act="edit:abg">✎ Update ABG</button></div>' +
-        phaseNote("Phase 2", "Acid–base interpreter (Winter, delta ratio, mixed disorders)");
+        '<button class="icu-btn ghost" data-icu-act="edit:abg">✎ Update ABG</button></div>';
+      if (!r) return head + '<div class="icu-card"><div class="icu-empty">Enter pH, PaCO₂ and HCO₃ to interpret. (Anion gap also uses Na/Cl/albumin from Labs.)</div></div>';
+      var sev = /Mixed|acidosis/.test(r.primary) ? "warn" : "";
+      return head + '<div class="icu-card"><h3>Interpretation</h3>' +
+        '<div class="icu-alert ' + sev + '"><div><div class="at">' + esc(r.primary) + "</div>" + (r.comp ? '<div class="am">' + esc(r.comp) + "</div>" : "") + "</div></div>" +
+        r.rows.map(function (x) { return row(x[0], x[1]); }).join("") +
+        (r.flags.length ? r.flags.map(function (f) { return '<p style="margin:8px 0 0;color:var(--warn)">⚠ ' + esc(f) + "</p>"; }).join("") : "") +
+        evidenceBadges(["Harrison", "Winter 1967"]) + "</div>";
     },
     infusions: function () {
       var inf = _raw.infusions || [];
@@ -386,7 +514,21 @@
         '<button class="icu-btn ghost" data-icu-act="edit:ventilator">✎ Update ventilator</button></div>' +
         phaseNote("Phase 3", "Protective ventilation · proning · weaning · RSBI");
     },
-    trends: function () { return phaseNote("Phase 2", "Interactive trends (vitals, MAP, urine, creatinine, lactate, electrolytes, fluid balance) — 24h/48h/72h/7d"); },
+    trends: function () {
+      var w = _trendWin, metrics = [
+        ["Heart rate", vitalSeries("hr", w), { unit: "bpm" }],
+        ["MAP", mapSeries(w), { band: [65, 110], unit: "mmHg" }],
+        ["SpO₂", vitalSeries("spo2", w), { band: [92, 100], unit: "%" }],
+        ["Respiratory rate", vitalSeries("rr", w), { unit: "/min" }],
+        ["Temperature", vitalSeries("temp", w), { unit: "°C" }],
+        ["Urine output", vitalSeries("uop", w), { unit: "mL/h" }],
+        ["Lactate", vitalSeries("lactate", w), { unit: "mmol/L" }],
+        ["Creatinine", labSeries("creat", w), { unit: "" }],
+        ["Potassium", labSeries("k", w), { unit: "mmol/L" }],
+        ["Sodium", labSeries("na", w), { unit: "mmol/L" }]
+      ];
+      return winSelector() + metrics.map(function (m) { return trendCard(m[0], m[1], m[2]); }).join("");
+    },
     rounds: function () { return phaseNote("Phase 3", "Daily ICU Rounds checklist + generated summary"); }
   };
 
@@ -513,6 +655,7 @@
     switch (cmd) {
       case "close": ICU.close(); break;
       case "tab": _active = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
+      case "win": _trendWin = +arg || _trendWin; paint(); break;
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "save": saveForm(arg); break;
