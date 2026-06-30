@@ -53,6 +53,11 @@ try {
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Network.enable", {}); await call("Network.setCacheDisabled", { cacheDisabled: true });
+  // Simulate the HOSTED (non-localhost) backend before any page script runs: pin
+  // window.GHIS_PROXY to the same-origin Function target and record fetch URLs.
+  // (On real stewardmd.in the ward auto-detects this same '/api/ghis' value; on
+  // localhost it would instead pick http://localhost:3456 — the dev proxy.)
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: "window.GHIS_PROXY='/api/ghis';window.__ghisFetches=[];(function(){window.fetch=function(u){try{window.__ghisFetches.push(String(u));}catch(e){}if(String(u).indexOf('/status')>=0)return Promise.resolve({json:function(){return Promise.resolve({connected:false});}});return Promise.resolve({json:function(){return Promise.resolve([]);}});};})();" });
   // ensure the flag is ON for this run, then load
   await call("Page.navigate", { url: BASE });
   await ev(`try{localStorage.setItem('smd_ghis_ward','1');}catch(e){} return 1;`);
@@ -66,6 +71,9 @@ try {
   ok(await ev(`return typeof window.openGHIS==='function' && !!window.GHIS;`) === true, "window.GHIS / window.openGHIS globals defined");
   ok(await ev(`return typeof window.SMD_setGhis==='function';`) === true, "SMD_setGhis toggle exposed");
   ok(await ev(`return !!document.querySelector('style[data-ghis]');`) === true, "GHIS stylesheet injected");
+  // backend selection: hosted target → first call hits the same-origin Cloudflare Function
+  await ev(`try{ if(window.openGHIS) openGHIS(); }catch(e){} return 1;`); await sleep(300);
+  ok(await ev(`return (window.__ghisFetches||[]).some(function(u){return u.indexOf('/api/ghis/status')>=0;}) && !(window.__ghisFetches||[]).some(function(u){return u.indexOf('localhost:3456')>=0;});`) === true, "non-localhost → ward targets /api/ghis (Cloudflare Function), not the localhost proxy");
 
   // toggle OFF → everything removed instantly
   await ev(`window.SMD_setGhis(false); return 1;`); await sleep(150);
