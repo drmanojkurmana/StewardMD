@@ -1215,25 +1215,161 @@
   // 📖 Harrison reference block for a disease card — paraphrased, page-cited
   // KNOWLEDGE from window.KB_ENRICHMENT (built from kb/diseases enrichment.harrison).
   // Display-only; returns "" if no enrichment is loaded for this id.
-  function harrisonRef(id) {
+  /* ---------------------------------------------------------------------- *
+   * EVIDENCE VIEWER — premium, reusable clinical-evidence component (gold71)
+   *
+   * Replaces the old "wall of Harrison text" with a structured viewer: a source
+   * header, a Clinical Pearls HERO (callout cards), and independent animated
+   * collapsible sections (Pathophysiology · Diagnosis · Red flags & pitfalls ·
+   * Course & prognosis · Full reference). Progressive disclosure, mobile-first,
+   * lazy body build. SOURCE-AGNOSTIC: evViewerHTML(src) renders ANY evidence
+   * source (Harrison today; Sanford / IDSA / ESC / NICE / WHO later) — only the
+   * src-builder differs. Citations are preserved verbatim inside the content.
+   * ---------------------------------------------------------------------- */
+  function evList(arr) {
+    return arr && arr.length ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : "";
+  }
+  function evSub(label, html) { return html ? '<div class="ev-subh">' + esc(label) + '</div>' + html : ""; }
+  // build a source descriptor from the Harrison enrichment for a disease id
+  function evHarrisonSrc(id) {
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || null;
-    var e = H && H[id]; if (!e) return "";
-    function ul(arr, n) { return arr && arr.length ? '<ul>' + arr.slice(0, n || 6).map(function (x) { return '<li>' + esc(x) + '</li>'; }).join("") + '</ul>' : ""; }
-    var parts = "";
-    if (e.clinicalPearls && e.clinicalPearls.length) parts += '<div class="dx-h-sub">Clinical pearls</div>' + ul(e.clinicalPearls, 8);
-    if (e.pathophysiology) parts += '<div class="dx-h-sub">Pathophysiology</div><p>' + esc(e.pathophysiology) + '</p>';
-    if (e.severityClassification) parts += '<div class="dx-h-sub">Severity</div><p>' + esc(e.severityClassification) + '</p>';
-    if (e.redFlags && e.redFlags.length) parts += '<div class="dx-h-sub red">Red flags</div>' + ul(e.redFlags, 6);
-    if (e.pitfalls && e.pitfalls.length) parts += '<div class="dx-h-sub">Pitfalls</div>' + ul(e.pitfalls, 6);
+    var e = H && H[id]; if (!e) return null;
+    var pearls = (e.clinicalPearls || []).filter(Boolean);
+    var sections = [];
+    if (e.pathophysiology) sections.push({ ic: "🧬", title: "Pathophysiology", html: '<p>' + esc(e.pathophysiology) + '</p>' });
+    var dxh = "";
+    dxh += evSub("Investigations", evList(e.additionalInvestigations));
+    dxh += evSub("Other differentials", evList(e.additionalDifferentials));
     var mim = (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
-    if (mim.length) parts += '<div class="dx-h-sub">Mimics</div>' + ul(mim, 8);
-    if (e.additionalDifferentials && e.additionalDifferentials.length) parts += '<div class="dx-h-sub">Other differentials</div>' + ul(e.additionalDifferentials, 8);
-    if (e.additionalInvestigations && e.additionalInvestigations.length) parts += '<div class="dx-h-sub">Further investigations</div>' + ul(e.additionalInvestigations, 6);
-    if (e.prognosis) parts += '<div class="dx-h-sub">Prognosis</div><p>' + esc(e.prognosis) + '</p>';
-    if (!parts) return "";
-    return '<details class="dx-harrison"><summary>📖 Harrison reference (22e)' +
-      (e.pages ? ' <span class="dx-h-pg">' + esc(String(e.pages).slice(0, 60)) + '</span>' : '') + '</summary>' +
-      '<div class="dx-h-body">' + parts + '<div class="dx-h-cite">Source: ' + esc(e.source || "Harrison 22e") + ' — reference knowledge, paraphrased. Not a treatment regimen.</div></div></details>';
+    dxh += evSub("Mimics", evList(mim));
+    if (dxh) sections.push({ ic: "🩺", title: "Diagnosis & workup", html: dxh });
+    var rf = "";
+    rf += evSub("Red flags", evList(e.redFlags));
+    rf += evSub("Pitfalls", evList(e.pitfalls));
+    if (rf) sections.push({ ic: "⚠️", title: "Red flags & pitfalls", danger: true, html: rf });
+    var cp = "";
+    if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + esc(e.severityClassification) + '</p>';
+    if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + esc(e.prognosis) + '</p>';
+    if (cp) sections.push({ ic: "📈", title: "Course & prognosis", html: cp });
+    // Full reference — every detail in one place, page citations intact
+    var full = "";
+    full += evSub("Clinical pearls", evList(pearls));
+    if (e.pathophysiology) full += evSub("Pathophysiology", '<p>' + esc(e.pathophysiology) + '</p>');
+    full += dxh;
+    full += rf;
+    full += cp;
+    (e.references || []).length && (full += evSub("References", evList(e.references)));
+    if (!pearls.length && !sections.length) return null;
+    return {
+      _id: id, icon: "📖",
+      sourceName: e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine",
+      edition: "22e", tag: "Primary Reference",
+      pages: e.pages ? String(e.pages).slice(0, 80) : "",
+      pearls: pearls, sections: sections, fullHTML: full,
+      cite: "Reference knowledge paraphrased from " + esc(e.source || "Harrison's Principles of Internal Medicine, 22e") + ", with page citations. Not a treatment regimen — verify against full guidelines before acting."
+    };
+  }
+  // the collapsible body (pearls hero + sections + full reference) — lazy-built
+  function evBodyHTML(src) {
+    var h = '<div class="ev-body">';
+    if (src.pearls && src.pearls.length) {
+      h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> Key clinical pearls</div>' +
+        src.pearls.map(function (p) { return '<div class="ev-pearl"><span class="ev-pearl-ic">💡</span><span>' + esc(p) + '</span></div>'; }).join("") +
+        '</div>';
+    }
+    (src.sections || []).forEach(function (s) {
+      h += '<div class="ev-sec' + (s.danger ? " danger" : "") + '"><button type="button" class="ev-sec-h">' +
+        '<span class="ev-sec-ic">' + s.ic + '</span><span class="ev-sec-t">' + esc(s.title) + '</span><span class="ev-chev">⌄</span></button>' +
+        '<div class="ev-sec-p"><div class="ev-sec-in">' + s.html + '</div></div></div>';
+    });
+    if (src.fullHTML) {
+      h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
+        '<span class="ev-sec-ic">📚</span><span class="ev-sec-t">Full reference</span><span class="ev-chev">⌄</span></button>' +
+        '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
+    }
+    h += '<div class="ev-cite">' + src.cite + '</div></div>';
+    return h;
+  }
+  function evViewerHTML(src, opts) {
+    if (!src) return "";
+    opts = opts || {};
+    var open = !!opts.expanded;
+    var sub = [src.edition, src.tag, src.pages].filter(Boolean).join(" · ");
+    return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '">' +
+      '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
+        '<span class="ev-top-main"><span class="ev-top-title">' + esc(src.sourceName) + '</span>' +
+        (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
+        '<span class="ev-chev ev-chev-top">⌄</span></button>' +
+      '<div class="ev-panel"><div class="ev-panel-in">' + (open ? evBodyHTML(src) : '') + '</div></div></div>';
+  }
+  // delegated toggle + lazy build — wired once, works wherever the HTML is injected
+  function evEnsure() {
+    try { evInjectCSS(); } catch (e) {}
+    if (window.__smdEvWired) return; window.__smdEvWired = true;
+    document.addEventListener("click", function (ev) {
+      var t = ev.target; if (!t || !t.closest) return;
+      var top = t.closest(".ev-top");
+      if (top) {
+        var wrap = top.parentNode;
+        var pin = wrap.querySelector(".ev-panel-in");
+        if (pin && !pin.firstChild && wrap.getAttribute("data-ev")) {        // lazy build on first open
+          try { var src = evHarrisonSrc(wrap.getAttribute("data-ev")); if (src) pin.innerHTML = evBodyHTML(src); } catch (e) {}
+        }
+        wrap.classList.toggle("ev-open"); return;
+      }
+      var sh = t.closest(".ev-sec-h");
+      if (sh && sh.parentNode) sh.parentNode.classList.toggle("ev-open");
+    }, false);
+  }
+  function evInjectCSS() {
+    if (document.getElementById("smdEvCSS")) return;
+    var st = document.createElement("style"); st.id = "smdEvCSS";
+    st.textContent = [
+      ".ev-wrap{border:1px solid var(--line,#e2e8f0);border-radius:14px;background:#fff;overflow:hidden;margin:8px 0;font-size:14px}",
+      ".ev-top{display:flex;align-items:center;gap:11px;width:100%;border:none;background:linear-gradient(180deg,#f6fbfa,#eef6f4);padding:13px 14px;cursor:pointer;text-align:left;min-height:52px}",
+      ".ev-top-ic{font-size:18px;width:34px;height:34px;flex:none;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:10px}",
+      ".ev-top-main{display:flex;flex-direction:column;flex:1;min-width:0}",
+      ".ev-top-title{font-weight:700;color:var(--ink,#0f172a);font-size:13.5px;line-height:1.25}",
+      ".ev-top-sub{font-size:11.5px;color:var(--teal-d,#0b5a54);margin-top:2px}",
+      ".ev-chev{font-size:16px;color:var(--slate-soft,#94a3b8);transition:transform .28s ease;flex:none}",
+      ".ev-wrap.ev-open>.ev-top .ev-chev-top{transform:rotate(180deg)}",
+      ".ev-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}",
+      ".ev-wrap.ev-open>.ev-panel{grid-template-rows:1fr}",
+      ".ev-panel-in{overflow:hidden;min-height:0}",
+      ".ev-body{padding:13px 13px 4px}",
+      ".ev-pearls{background:linear-gradient(180deg,#fffdf5,#fff8e8);border:1px solid #fde9b8;border-radius:12px;padding:12px 13px;margin-bottom:13px}",
+      ".ev-pearls-h{font-weight:700;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:#a16207;margin-bottom:9px;display:flex;align-items:center;gap:6px}",
+      ".ev-pearl{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #fcebc2;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.5;color:var(--ink,#0f172a)}",
+      ".ev-pearl:last-child{margin-bottom:0}.ev-pearl-ic{flex:none;font-size:14px;line-height:1.4}",
+      ".ev-sec{border:1px solid var(--line,#e2e8f0);border-radius:11px;margin-bottom:8px;overflow:hidden;background:#fff}",
+      ".ev-sec.danger{border-color:#fecaca}",
+      ".ev-sec-h{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#fbfdfd;padding:12px 13px;cursor:pointer;text-align:left;min-height:48px;font:inherit}",
+      ".ev-sec.danger .ev-sec-h{background:#fef4f4}",
+      ".ev-sec-ic{font-size:15px;flex:none}.ev-sec-t{flex:1;font-weight:650;font-weight:600;color:var(--ink,#0f172a);font-size:13.5px}",
+      ".ev-wrap .ev-sec.ev-open>.ev-sec-h .ev-chev{transform:rotate(180deg)}",
+      ".ev-sec-p{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s ease}",
+      ".ev-sec.ev-open>.ev-sec-p{grid-template-rows:1fr}",
+      ".ev-sec-in{overflow:hidden;min-height:0}.ev-sec.ev-open>.ev-sec-p>.ev-sec-in{padding:4px 14px 13px}",
+      ".ev-subh{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--slate-soft,#94a3b8);margin:11px 0 5px}",
+      ".ev-sec-in p{margin:6px 0;line-height:1.6;color:#334155}",
+      ".ev-ul{margin:4px 0;padding-left:2px;list-style:none}",
+      ".ev-ul li{position:relative;padding:5px 0 5px 18px;line-height:1.55;color:#334155;border-bottom:1px solid #f1f5f9}",
+      ".ev-ul li:last-child{border-bottom:none}",
+      ".ev-ul li:before{content:'';position:absolute;left:3px;top:12px;width:5px;height:5px;border-radius:50%;background:var(--teal,#0f766e)}",
+      ".ev-sec.danger .ev-ul li:before{background:#dc2626}",
+      ".ev-cite{font-size:11px;color:var(--slate-soft,#94a3b8);line-height:1.5;padding:10px 2px 12px;border-top:1px solid #f1f5f9;margin-top:4px}",
+      "@media(max-width:520px){.ev-body{padding:11px 10px 4px}.ev-sec.ev-open>.ev-sec-p>.ev-sec-in{padding:4px 11px 12px}}"
+    ].join("");
+    (document.head || document.documentElement).appendChild(st);
+  }
+  // Public, source-agnostic entry. harrisonRef keeps its name/signature for the
+  // existing call sites; opts.expanded shows pearls immediately (reference panel),
+  // omitted = collapsed teaser (differential cards).
+  function harrisonRef(id, opts) {
+    evEnsure();
+    var src = evHarrisonSrc(id);
+    if (!src) return "";
+    return evViewerHTML(src, opts || {});
   }
 
   function card(r, rank) {
@@ -1601,7 +1737,7 @@
         '<h2 class="dx-mgmt-name">' + esc(name) + '</h2>' +
         (system ? '<div class="dx-mgmt-sys">' + esc(system) + '</div>' : '') +
         (reason ? '<div class="dx-mgmt-sec">Why this</div><p>' + esc(reason) + '</p>' : '') +
-        (harrisonRef(id) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
+        (harrisonRef(id, { expanded: true }) || '<p class="dx-sel-empty">No Harrison reference loaded for this disease.</p>') +
         '<button class="dx-select ' + (inf ? "inf" : "ni") + '" data-sel="' + id + '">Open full ' + (inf ? "stewardship" : "management") + ' page →</button>' +
         '<div class="dx-mgmt-disc">⚠️ Decision-support only — reference knowledge paraphrased from Harrison\'s 22e and standard guidelines. Verify against full guidelines and prescribing references before acting.</div>' +
       '</div>';
@@ -2200,7 +2336,7 @@
           : '<div class="card"><div class="simple-section-label">Management</div><p>Specialist-guided, non-antibiotic management — see the investigations, red flags and Harrison reference below and consult full guidelines.</p></div>') +
       (ix && ix.length ? '<div class="card"><div class="simple-section-label">Key investigations</div>' + li(ix, 8) + '</div>' : '') +
       (syn.red && syn.red.length ? '<div class="card"><div class="simple-section-label">Red flags</div>' + li(syn.red, 8) + '</div>' : '') +
-      (harrisonRef(syn.id) ? '<div class="card">' + harrisonRef(syn.id) + '</div>' : '') +
+      (harrisonRef(syn.id, { expanded: true }) ? '<div class="card">' + harrisonRef(syn.id, { expanded: true }) + '</div>' : '') +
       '<div class="qa-pregnancy-note" style="margin-top:10px">⚠️ Decision-support only — non-infective management aligned to standard guidelines / Harrison 22e. Verify before acting.</div>';
   }
   function installMainEngineExpansion() {
