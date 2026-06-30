@@ -1,0 +1,10 @@
+# Terraform — never commit state (may contain secrets), local cache, or real tfvars.
+# DO commit .terraform.lock.hcl (provider version/hash lock — reproducible installs).
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+!*.tfvars.example
+override.tf
+override.tf.json
