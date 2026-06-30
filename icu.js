@@ -736,12 +736,40 @@
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
     ensureModal();
-    var steps = [["📷", "Capture ICU Monitor", "monitor"], ["🫁", "Capture Ventilator", "ventilator"], ["🩸", "Capture Laboratory Report", "labs"], ["📋", "Capture ICU Flow Sheet", "flowsheet"]];
+    var ai = !!(window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on());
+    var steps = [["📷", "ICU Monitor", "monitor"], ["🫁", "Ventilator", "ventilator"], ["🩸", "Laboratory Report", "labs"], ["📋", "ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
-      '<div class="icu-steps">' + steps.map(function (s, i) { return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " " + s[1] + '</div><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span></div></div>'; }).join("") + "</div>" +
-      '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision Integration · Coming Soon</span><p style="margin-top:8px">A future Gemini/OpenAI Vision model will read these images and populate every ICU tab automatically via ICU_STATE.</p></div>' +
+      '<div class="icu-steps">' + steps.map(function (s, i) {
+        return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " Capture " + s[1] + "</div>" +
+          (ai
+            ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">📷 Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ✎ enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
+            : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span>') +
+          "</div></div>";
+      }).join("") + "</div>" +
+      (ai
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">✨ AI Vision ON</span><p style="margin-top:8px">Capture each screen — Gemini reads it and fills the ICU tabs via ICU_STATE. <b>Verify every value.</b></p></div>'
+        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision Integration · Coming Soon</span><p style="margin-top:8px">Enable AI (<code>SMD_AI.setFlag(true)</code>) and set the GEMINI_API_KEY secret to auto-read these images into ICU_STATE.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
+    if (ai) {
+      var ING = { monitor: "ingestMonitor", labs: "ingestLabs", ventilator: "ingestVentilator", flowsheet: "ingestFlowsheet" };
+      modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
+        inp.addEventListener("change", function () {
+          var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
+          var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
+          var rd = new FileReader();
+          rd.onload = function () {
+            window.SMD_AI.vision(rd.result, kind).then(function (r) {
+              if (r && r.fields && Object.keys(r.fields).length) {
+                try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
+                if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
+              } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
+            });
+          };
+          rd.readAsDataURL(f);
+        });
+      });
+    }
   }
 
   function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
