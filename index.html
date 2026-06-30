@@ -1097,5 +1097,25 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script src="/caseshare.js?v=gold88" defer></script>
 <script src="/home.js?v=gold92" defer></script>
 <script src="/icu.js?v=gold94" defer></script>
+<!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
+     ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel and talks to the
+     LOCAL proxy (node ghis-proxy.js on :3456). It is loaded ONLY when the
+     `smd_ghis_ward` flag is on (default ON); SMD_setGhis(false) removes the
+     button+panel instantly with no redeploy. Does not touch app.js. -->
+<script>
+(function () {
+  function ghisOn() { try { var v = localStorage.getItem("smd_ghis_ward"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
+  function loadGhis() { if (document.getElementById("ghis-ward-script")) return; var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold97"; document.body.appendChild(s); }
+  function killGhis() {
+    ["ghisBtn", "ghisPanel"].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
+    var st = document.querySelector("style[data-ghis]"); if (st) st.remove();
+    var sc = document.getElementById("ghis-ward-script"); if (sc) sc.remove();
+    try { window.__ghisWardLoaded = false; } catch (e) {}
+  }
+  // reversible toggle — flip the flag and add/remove the whole feature live (no redeploy)
+  window.SMD_setGhis = function (on) { try { localStorage.setItem("smd_ghis_ward", on ? "1" : "0"); } catch (e) {} if (on) loadGhis(); else killGhis(); };
+  if (ghisOn()) { if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadGhis); else loadGhis(); }
+})();
+</script>
 </body>
 </html>
