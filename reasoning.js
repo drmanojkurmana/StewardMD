@@ -2991,8 +2991,16 @@
       } catch (_) { return base; }
     };
     window.renderOutput = function (e, i, a) {
-      try { if (i && NI.byId[i]) { renderNIPage(e, NI.byId[i]); return; } } catch (_) {}
-      return origRender(e, i, a);
+      var ret;
+      try {
+        if (i && NI.byId[i]) { renderNIPage(e, NI.byId[i]); }
+        else { ret = origRender(e, i, a); }
+      } catch (_) { try { ret = origRender(e, i, a); } catch (__) {} }
+      // gold88: turn the long results page into collapsible accordions + move the
+      // Save-case box to the top. Runs AFTER the render, so a failure here can
+      // never corrupt the clinical output (it's purely progressive enhancement).
+      try { smdEnhanceOutput(); } catch (_) {}
+      return ret;
     };
     window.__smdEngineExpanded = true;
   }
@@ -3009,6 +3017,247 @@
   // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
+
+  /* ====================================================================== *
+   * gold88 — UI polish, all in one global place (no minified app.js edits):
+   *   (1) collapsible / accordion clinical-decision results
+   *   (2) a single global "⬆ Back to Top" floating action button
+   *   (3) relocate the "Save this case?" box to the top of the results
+   * Everything below is progressive enhancement layered on top of the markup
+   * app.js already produced, so it cannot change any calculation or break the
+   * underlying output — it only restyles/reorganises the DOM after render.
+   * ====================================================================== */
+
+  // --- (S) inject the CSS once -------------------------------------------
+  function smdInjectUIStyles() {
+    if (document.getElementById("smd-ui-enhance")) return;
+    if (!document.head) return;
+    var css =
+      /* accordion */
+      '#outputArea .card.smd-acc>h2{cursor:pointer;display:flex;align-items:center;gap:8px;flex-wrap:wrap;-webkit-user-select:none;user-select:none;margin:0;position:relative}' +
+      '#outputArea .card.smd-acc>h2:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:3px;border-radius:8px}' +
+      '.smd-acc-chev{margin-left:auto;flex:0 0 auto;transition:transform .25s ease;font-size:12px;color:var(--muted,#64748b);line-height:1}' +
+      '#outputArea .card.smd-acc.smd-collapsed .smd-acc-chev{transform:rotate(-90deg)}' +
+      '.smd-acc-summary{flex:1 1 100%;font-size:12.5px;font-weight:500;color:var(--muted,#64748b);margin-top:3px;line-height:1.35}' +
+      '#outputArea .card.smd-acc:not(.smd-collapsed) .smd-acc-summary{display:none}' +
+      '.smd-acc-wrap{display:grid;grid-template-rows:1fr;transition:grid-template-rows .28s ease}' +
+      '#outputArea .card.smd-acc.smd-collapsed .smd-acc-wrap{grid-template-rows:0fr}' +
+      '.smd-acc-body{overflow:hidden;min-height:0}' +
+      '#outputArea .card.smd-acc.smd-collapsed .smd-acc-body{visibility:hidden}' +
+      '.smd-acc-toolbar{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin:2px 0 8px}' +
+      '.smd-acc-toolbar button{font:inherit;font-size:12.5px;font-weight:600;padding:6px 13px;border-radius:999px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);color:var(--teal,#0e6e63);cursor:pointer;transition:background .15s,color .15s}' +
+      '.smd-acc-toolbar button:hover{background:var(--teal,#0e6e63);color:#fff}' +
+      '@media (max-width:640px){#outputArea .card{margin-bottom:9px!important}#outputArea .card.smd-acc>h2{padding-top:2px;padding-bottom:2px}.smd-acc-toolbar{margin-bottom:5px}}' +
+      /* back-to-top FAB (stacks 12px ABOVE the 56px .inf-fab so they never overlap) */
+      '#smdBackToTop{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(84px + env(safe-area-inset-bottom));z-index:var(--z-fab,50);width:46px;height:46px;border-radius:50%;border:none;background:var(--panel,#fff);color:var(--teal,#0e6e63);font-size:21px;line-height:1;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s ease,transform .25s ease,visibility .25s;-webkit-tap-highlight-color:transparent}' +
+      '#smdBackToTop.smd-show{opacity:.97;visibility:visible;transform:translateY(0)}' +
+      '#smdBackToTop:hover{opacity:1;background:var(--teal,#0e6e63);color:#fff}' +
+      '#smdBackToTop:focus-visible{outline:2px solid var(--teal,#0e6e63);outline-offset:3px}' +
+      'body.dark #smdBackToTop{background:#1e293b;color:#5eead4;box-shadow:0 4px 16px rgba(0,0,0,.55)}' +
+      '@media (prefers-reduced-motion:reduce){.smd-acc-wrap,#smdBackToTop{transition:none}html{scroll-behavior:auto}}';
+    var st = document.createElement("style");
+    st.id = "smd-ui-enhance";
+    st.textContent = css;
+    document.head.appendChild(st);
+  }
+
+  // --- (BT) one global Back-to-Top FAB -----------------------------------
+  // Detects the active scroll container automatically: scroll events do not
+  // bubble, so a capture-phase listener catches inner scrollers (modals,
+  // sidebar panels, calculator/reasoning workspaces) as well as the window.
+  function smdEnsureBackToTop() {
+    if (document.getElementById("smdBackToTop")) return;
+    if (!document.body) return;
+    var b = document.createElement("button");
+    b.id = "smdBackToTop";
+    b.type = "button";
+    b.setAttribute("aria-label", "Back to top");
+    b.title = "Back to top";
+    b.innerHTML = "↑";
+    document.body.appendChild(b);
+
+    var tracked = null;            // last element that scrolled (null = window)
+    var raf = 0;
+    function topOf(el) {
+      if (el && el.isConnected === false) { tracked = null; el = null; }
+      if (!el || el === document || el === document.documentElement || el === document.body) {
+        return window.pageYOffset || document.documentElement.scrollTop || 0;
+      }
+      return el.scrollTop || 0;
+    }
+    function update() {
+      raf = 0;
+      var st = topOf(tracked);
+      if (st > 380) b.classList.add("smd-show"); else b.classList.remove("smd-show");
+    }
+    function schedule() { if (!raf) raf = (window.requestAnimationFrame || function (f) { return setTimeout(f, 16); })(update); }
+    document.addEventListener("scroll", function (e) {
+      var t = e && e.target;
+      if (t && t.nodeType === 1 && t !== document.documentElement && t !== document.body) tracked = t;
+      else tracked = null;
+      schedule();
+    }, { passive: true, capture: true });
+    window.addEventListener("scroll", function () { tracked = null; schedule(); }, { passive: true });
+    b.addEventListener("click", function () {
+      var el = (tracked && topOf(tracked) > 0) ? tracked : null;
+      try {
+        if (el && el.scrollTo) el.scrollTo({ top: 0, behavior: "smooth" });
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      } catch (_) { if (el) el.scrollTop = 0; else window.scrollTo(0, 0); }
+      b.classList.remove("smd-show");
+    });
+  }
+
+  // --- (A) collapsible results ------------------------------------------
+  function smdTxt(el) { return el ? (el.textContent || "").replace(/\s+/g, " ").trim() : ""; }
+  function smdCardTitle(card) {
+    var h = card.querySelector(":scope > h2"); if (!h) return "";
+    var num = h.querySelector(".num"), t = h.textContent || "";
+    if (num) t = t.replace(num.textContent, "");
+    return t.replace(/\s+/g, " ").trim();
+  }
+  // a concise one-line summary shown in the collapsed header
+  function smdAccSummary(card, title) {
+    try {
+      var t = (title || "").toLowerCase();
+      if (/toxicity/.test(t)) return smdTxt(card.querySelector(".tox-pill"));
+      if (/severity/.test(t)) {
+        var n = smdTxt(card.querySelector(".score-name")), v = smdTxt(card.querySelector(".score-value"));
+        return n ? (n + (v ? " " + v : "")) : "";
+      }
+      if (/syndrome|differential/.test(t)) {
+        var row = card.querySelector(".syn-rank-row"); if (!row) return "";
+        var nm = smdTxt(row.querySelector(".syn-rank-name"));
+        var pct = (smdTxt(row).match(/(\d+)\s*%/) || [])[0] || "";
+        return nm ? ("Top: " + nm + (pct ? " · " + pct : "")) : "";
+      }
+      if (/pathogen/.test(t)) {
+        var li = card.querySelectorAll(".pathogen-list li"), n2 = li.length;
+        var first = smdTxt(card.querySelector(".pathogen-list li"));
+        return n2 ? (n2 + " likely pathogen" + (n2 > 1 ? "s" : "") + (first ? " · " + first : "")) : "";
+      }
+      if (/empiric antibiotic/.test(t)) {
+        var reg = smdTxt(card.querySelector(".regimen-name, .abx-name, .drug-name, .regimen-title"));
+        if (reg) return reg;
+        var txt = smdTxt(card).slice(0, 90);
+        return /no antibiotic|not indicated|not recommended/i.test(txt) ? "No antibiotic recommended" : "";
+      }
+      if (/duration/.test(t)) return smdTxt(card.querySelector(".duration-value"));
+      if (/coverage/.test(t)) { var c = card.querySelectorAll(".coverage-row, .cov-row, li").length; return c ? (c + " item" + (c > 1 ? "s" : "")) : ""; }
+      if (/investigation/.test(t)) { var iv = card.querySelectorAll("li").length; return iv ? (iv + " investigation" + (iv > 1 ? "s" : "")) : ""; }
+      if (/reference|evidence/.test(t)) { var rf = card.querySelectorAll(".ev-source, .ref-item, li").length; return rf ? (rf + " source" + (rf > 1 ? "s" : "")) : ""; }
+      if (/stewardship/.test(t)) return "Stewardship rationale";
+      if (/mdr risk/.test(t)) return smdTxt(card.querySelector(".tox-pill, .mdr-pill, .pill"));
+      if (/interaction/.test(t)) { var di = card.querySelectorAll(".ddi-row, li").length; return di ? (di + " interaction" + (di > 1 ? "s" : "")) : ""; }
+    } catch (_) {}
+    return "";
+  }
+  // every NUMBERED section card (<h2><span class="num">…) becomes collapsible,
+  // collapsed by default. Quick Decision (.quick-answer-card) and the critical
+  // alert banners are NOT .card-with-.num, so they always stay open — exactly the
+  // "keep expanded" set requested.
+  function smdAccordionize(root) {
+    if (!root) return;
+    var firstAcc = null;
+    var cards = root.querySelectorAll(":scope > .card");
+    Array.prototype.forEach.call(cards, function (card) {
+      if (card.getAttribute("data-smd-acc")) { if (!firstAcc) firstAcc = card; return; }
+      var h2 = card.querySelector(":scope > h2");
+      if (!h2 || !h2.querySelector(".num")) return;     // only numbered detail cards
+      var title = smdCardTitle(card);
+      var sum = smdAccSummary(card, title);             // compute BEFORE we move the body
+      card.setAttribute("data-smd-acc", "1");
+      card.classList.add("smd-acc", "smd-collapsed");
+      h2.setAttribute("role", "button");
+      h2.setAttribute("tabindex", "0");
+      h2.setAttribute("aria-expanded", "false");
+      var chev = document.createElement("span");
+      chev.className = "smd-acc-chev"; chev.setAttribute("aria-hidden", "true"); chev.textContent = "▼";
+      h2.appendChild(chev);
+      if (sum) {
+        var ss = document.createElement("span");
+        ss.className = "smd-acc-summary"; ss.textContent = sum;
+        h2.appendChild(ss);
+      }
+      var wrap = document.createElement("div"); wrap.className = "smd-acc-wrap";
+      var body = document.createElement("div"); body.className = "smd-acc-body";
+      var node = h2.nextSibling;
+      while (node) { var nx = node.nextSibling; body.appendChild(node); node = nx; }
+      wrap.appendChild(body); card.appendChild(wrap);
+      if (!firstAcc) firstAcc = card;
+    });
+    if (firstAcc && !root.querySelector(":scope > .smd-acc-toolbar")) {
+      var bar = document.createElement("div");
+      bar.className = "smd-acc-toolbar";
+      bar.innerHTML = '<button type="button" data-smd-acc-all="expand">Expand all</button>' +
+                      '<button type="button" data-smd-acc-all="collapse">Collapse all</button>';
+      firstAcc.parentNode.insertBefore(bar, firstAcc);
+    }
+  }
+  function smdWireAccordion() {
+    if (window.__smdAccWired) return; window.__smdAccWired = true;
+    function setOpen(card, open) {
+      if (open) card.classList.remove("smd-collapsed"); else card.classList.add("smd-collapsed");
+      var h = card.querySelector(":scope > h2");
+      if (h) h.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+    document.addEventListener("click", function (e) {
+      if (!e.target || !e.target.closest) return;
+      var all = e.target.closest("[data-smd-acc-all]");
+      if (all) {
+        var mode = all.getAttribute("data-smd-acc-all"), oa = document.getElementById("outputArea");
+        if (oa) Array.prototype.forEach.call(oa.querySelectorAll(".card.smd-acc"), function (c) { setOpen(c, mode === "expand"); });
+        return;
+      }
+      var h2 = e.target.closest(".card.smd-acc > h2");
+      if (h2) setOpen(h2.parentNode, h2.parentNode.classList.contains("smd-collapsed"));
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Enter" && e.key !== " " && e.key !== "Spacebar") return;
+      if (!e.target || !e.target.closest) return;
+      var h2 = e.target.closest(".card.smd-acc > h2");
+      if (h2) { e.preventDefault(); setOpen(h2.parentNode, h2.parentNode.classList.contains("smd-collapsed")); }
+    });
+  }
+
+  // --- (SV) move the "Save this case?" box to the top of the results -----
+  // We keep a persistent JS reference so app.js's outputArea.innerHTML="" clears
+  // never garbage-collect the node; we simply re-home it above the Clinical
+  // Toxicity Assessment card on each render. app.js still finds it by id and
+  // toggles its display exactly as before.
+  var _smdScp = null;
+  function smdRelocateSaveBox(oa) {
+    try {
+      if (!_smdScp) _smdScp = document.getElementById("saveCasePrompt");
+      var scp = _smdScp; if (!scp || !oa) return;
+      if (!oa.querySelector(":scope > .card")) return;  // no results yet
+      var target = oa.querySelector(":scope > .smd-acc-toolbar");
+      if (!target) {
+        Array.prototype.forEach.call(oa.querySelectorAll(":scope > .card"), function (c) {
+          if (target) return;
+          var h = c.querySelector(":scope > h2");
+          if (h && /toxicity assessment/i.test(h.textContent || "")) target = c;
+        });
+      }
+      if (!target) target = oa.querySelector(":scope > .card");
+      if (target) oa.insertBefore(scp, target); else oa.appendChild(scp);
+    } catch (_) {}
+  }
+
+  function smdEnhanceOutput() {
+    smdInjectUIStyles();
+    smdEnsureBackToTop();
+    smdWireAccordion();
+    var oa = document.getElementById("outputArea");
+    if (!oa) return;
+    smdAccordionize(oa);
+    smdRelocateSaveBox(oa);
+  }
+  // make the FAB + styles available app-wide, not only after a decision renders
+  function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
+  smdInitGlobalUI();
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdInitGlobalUI);
+  [300, 1200].forEach(function (ms) { setTimeout(smdInitGlobalUI, ms); });
 
   // --- Firebase sign-in guarantor (gold87) ---------------------------------
   // ROOT CAUSE of "Sign in with Google doesn't work": app.js lazily loads the
