@@ -1,0 +1,17 @@
+# Copy to terraform.tfvars and fill in. terraform.tfvars is gitignored.
+# Prefer NOT putting the token here — export it instead:
+#   export TF_VAR_cloudflare_api_token="..."   (or CLOUDFLARE_API_TOKEN)
+
+# cloudflare_api_token = "REDACTED — prefer the env var"
+zone_id = "REPLACE_WITH_32_CHAR_ZONE_ID"
+domain  = "stewardmd.in"
+
+# Rollout: start report-only (false), watch the browser console for CSP violations,
+# then set true to enforce.
+csp_enforce = false
+
+# Keep popup-safe COOP unless/until you migrate Firebase auth to signInWithRedirect.
+# coop_value = "same-origin-allow-popups"
+
+# Enable only after confirming every subdomain is HTTPS-only.
+# hsts_preload = false
