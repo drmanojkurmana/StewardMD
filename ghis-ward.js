@@ -258,18 +258,21 @@
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
-        // Check if proxy is up and we have a session
+        function toWard() { _connected = true; dot(true); showScreen('ward'); ghisLoadPatients(); }
+        // Check if proxy is up and already holds a session
         fetch(PROXY + '/status')
           .then(function(r) { return r.json(); })
           .then(function(s) {
-            if (s.connected) {
-              _connected = true;
-              dot(true);
-              showScreen('ward');
-              ghisLoadPatients();
-            } else {
-              showScreen('setup');
-            }
+            if (s.connected) { toWard(); return; }
+            // Proxy up but no session — silently re-use a remembered cookie so the
+            // doctor doesn't re-paste each session / after a proxy restart.
+            var saved = ''; try { saved = localStorage.getItem('ghis_cookie') || ''; } catch (e) {}
+            if (saved) {
+              fetch(PROXY + '/set-cookies', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cookies: saved }) })
+                .then(function(r) { return r.json(); })
+                .then(function(d) { if (d && d.success) toWard(); else showScreen('setup'); })
+                .catch(function() { showScreen('setup'); });
+            } else { showScreen('setup'); }
           })
           .catch(function() { showScreen('setup'); });
       };
@@ -296,6 +299,7 @@
         .then(function(d) {
           if (d.success) {
             _connected = true;
+            try { localStorage.setItem('ghis_cookie', cookies); } catch (e) {}   // remember for auto-reconnect
             dot(true);
             showScreen('ward');
             ghisLoadPatients();
@@ -310,6 +314,7 @@
     
       window.ghisDisconnect = function() {
         _connected = false;
+        try { localStorage.removeItem('ghis_cookie'); } catch (e) {}   // forget remembered cookie
         dot(false);
         _patients = [];
         showScreen('setup');
