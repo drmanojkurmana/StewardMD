@@ -3009,4 +3009,40 @@
   // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
+
+  // --- Firebase sign-in guarantor (gold87) ---------------------------------
+  // ROOT CAUSE of "Sign in with Google doesn't work": app.js lazily loads the
+  // Firebase compat SDK but its boot chain never reliably calls initializeApp,
+  // so window.SMD_AUTH stays null and every sign-in throws "No Firebase App
+  // '[DEFAULT]' has been created". Verified headless: calling SMD_bootFirebase()
+  // directly initializes the app (firebase.apps.length === 1, SMD_AUTH set) and
+  // signInWithPopup then returns auth/popup-blocked (NOT unauthorized-domain) —
+  // i.e. the domain is authorized and the only defect is that boot never runs.
+  // Fix: once the SDK is present, call the (working) boot ourselves so SMD_AUTH
+  // is ready BEFORE the user clicks; the button's fast path then opens the popup
+  // synchronously inside the click gesture. Idempotent, self-stopping.
+  function smdEnsureFirebaseBoot() {
+    try {
+      if (window.SMD_AUTH) return true;                 // already initialized
+      if (window.firebase && window.firebase.apps && window.firebase.apps.length && window.firebase.auth) {
+        window.SMD_AUTH = window.SMD_AUTH || window.firebase.auth(); // app exists, just expose auth
+        return !!window.SMD_AUTH;
+      }
+      if (window.SMD_bootFirebase && window.firebase) {  // SDK loaded → boot now (this is what was missing)
+        window.SMD_bootFirebase();
+        return !!window.SMD_AUTH;
+      }
+      // SDK not loaded yet — kick the lazy loader once so window.firebase appears.
+      if (window.SMD_loadFirebase && !window.__smdFbLoadKicked) {
+        window.__smdFbLoadKicked = true;
+        try { window.SMD_loadFirebase(function () { try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {} }); } catch (e) {}
+      }
+    } catch (e) {}
+    return false;
+  }
+  smdEnsureFirebaseBoot();
+  var _smdFbTries = 0;
+  var _smdFbTimer = setInterval(function () {
+    if (smdEnsureFirebaseBoot() || ++_smdFbTries > 60) clearInterval(_smdFbTimer);
+  }, 250);
 })();
