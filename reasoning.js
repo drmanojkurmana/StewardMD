@@ -1265,7 +1265,7 @@
     { cls: "md-resist", re: "\\b(?:MRSA|VRE|VRSA|ESBL|CRE|CRAB|MDRO|MDR|XDR|carbapenem[\\u2013\\- ]resistant|methicillin[\\u2013\\- ]resistant|vancomycin[\\u2013\\- ]resistant|multidrug[\\u2013\\- ]resistant|extensively drug[\\u2013\\- ]resistant)\\b" },
     { cls: "md-bug", re: "\\b(?:Staphylococcus aureus|Streptococcus pneumoniae|Streptococcus pyogenes|Klebsiella pneumoniae|Pseudomonas aeruginosa|Escherichia coli|Neisseria meningitidis|Mycobacterium tuberculosis|Clostridioides difficile|Clostridium difficile|Candida albicans|coagulase[\\u2013\\- ]negative staphylococci|S\\.\\s?aureus|E\\.\\s?coli|C\\.\\s?difficile|Staphylococcus|Streptococcus|Pseudomonas|Enterococcus|Acinetobacter|Klebsiella|Candida|Pneumococcus|Enterobacterales|Enterobacteriaceae)\\b" },
     { cls: "md-emerg", re: "\\b(?:septic shock|toxic shock|sepsis|necrotizing fasciitis|endocarditis|meningitis|encephalitis|anaphylaxis|status epilepticus|cardiac arrest|respiratory failure)\\b" },
-    { cls: "md-ix", re: "\\b(?:(?:CSF|blood|urine|sputum|stool|serum|synovial fluid|pleural fluid|ascitic fluid|pericardial fluid)\\s+(?:opening pressure|cell count(?: and differential)?|Gram stain|cultures?|multiplex PCR|PCR|analysis|glucose|protein|lactate|antigen(?: test)?|cytology|microscopy|smear)|transoesophageal echocardiography|transesophageal echocardiography|echocardiography|echocardiogram|lumbar puncture|chest X[\\u2013\\-]?ray|Gram stain|blood cultures?|TEE|TTE|MRI|PET[\\u2013\\-]CT|PET|CXR|ECG|EEG|ABG|CSF|cholinesterase)\\b" },
+    { cls: "md-ix", re: "\\b(?:(?:CSF|blood|urine|sputum|stool|serum|synovial fluid|pleural fluid|ascitic fluid|pericardial fluid)\\s+(?:opening pressure|cell count(?: and differential)?|Gram stain|cultures?|multiplex PCR|PCR|analysis|glucose|protein|lactate|antigen(?: test)?|cytology|microscopy|smear)|transoesophageal echocardiography|transesophageal echocardiography|echocardiography|echocardiogram|lumbar puncture|chest X[\\u2013\\-]?ray|CT angiography|CT pulmonary angiography|Gram stain|blood cultures?|procalcitonin|C[\\u2013\\- ]reactive protein|D[\\u2013\\- ]dimer|TEE|TTE|MRI|PET[\\u2013\\-]CT|PET|CXR|ECG|EEG|ABG|CSF|CRP|ESR|cholinesterase)\\b" },
     { cls: "md-drug", re: "\\b(?:piperacillin[\\u2013\\-/ ]?tazobactam|pip[\\u2013\\-/ ]?tazo|amoxicillin[\\u2013\\-/ ]?clavulanate|vancomycin|meropenem|imipenem|ertapenem|linezolid|daptomycin|cefazolin|ceftriaxone|cefepime|ceftazidime|cefotaxime|ceftaroline|ciprofloxacin|levofloxacin|azithromycin|doxycycline|metronidazole|ampicillin|amoxicillin|gentamicin|amikacin|rifampicin|rifampin|isoniazid|pyrazinamide|ethambutol|atropine|pralidoxime|naloxone|fluconazole|amphotericin|acyclovir|oseltamivir|colistin|tigecycline|clindamycin)\\b" },
     { cls: "md-action", re: "\\b(?:source control|device removal|removal of the device|remove the device|repeat blood cultures|repeat cultures|surgical debridement|urgent surgery|debridement|IV antibiotics|intravenous antibiotics|empi?ric antibiotics)\\b" },
     // high-yield SIGNAL markers + named signs/scores/criteria (the points worth noticing)
@@ -1309,6 +1309,7 @@
     return String(t == null ? "" : t)
       .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
       .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
+      .replace(/\s*\bpp?\.\s*\d{2,4}(?:[–\-]\d{2,4})?(?:\s*,\s*\d{2,4}(?:[–\-]\d{2,4})?)*/g, "") // bare "p.818" / "pp. 1118-1125" (dot required → p.o./p53 safe)
       .replace(/\s+([.;,])/g, "$1").replace(/\s{2,}/g, " ").trim();
   }
   // concise page list for the footer — prefer the curated `pages` field (already a
@@ -1372,16 +1373,22 @@
     rf += evSub("⚠️ Pitfalls", evCallouts(e.pitfalls, "warn", "⚠️"));
     if (rf) sections.push({ ic: "⚠️", title: "Red flags & pitfalls", danger: true, html: rf });
     var cp = "";
-    if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
-    if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
+    if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(stripCite(e.severityClassification)) + '</p>';
+    if (e.prognosis) cp += '<div class="ev-subh">Prognosis</div><p>' + medFormat(stripCite(e.prognosis)) + '</p>';
     if (cp) sections.push({ ic: "📈", title: "Course & prognosis", html: cp });
-    // Full reference — every detail in one place, page citations intact
+    // Original Reference — VERBATIM detail with inline page citations preserved
+    // (distinct from the de-cited summary sections above; citations also in footer).
+    var rawUl = function (arr) { return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>' : ""; };
     var full = "";
-    full += evSub("Clinical pearls", evList(pearls));
-    if (e.pathophysiology) full += evSub("Pathophysiology", medLead(e.pathophysiology));
-    full += dxh;
-    full += rf;
-    full += cp;
+    full += evSub("Clinical pearls", rawUl(pearls));
+    if (e.pathophysiology) full += evSub("Pathophysiology", '<p>' + medFormat(e.pathophysiology) + '</p>');
+    full += evSub("Investigations", rawUl(e.additionalInvestigations));
+    full += evSub("Other differentials", rawUl(e.additionalDifferentials));
+    full += evSub("Mimics", rawUl(mim));
+    full += evSub("Red flags", rawUl(e.redFlags));
+    full += evSub("Pitfalls", rawUl(e.pitfalls));
+    if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
+    if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
     var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine";
     var pages = evPages(e);
@@ -2334,7 +2341,7 @@
     return "General / Other";
   }
   function kbBuildIndex() {
-    if (_kbIdx) return _kbIdx;
+    if (_kbIdx && _kbIdx.length) return _kbIdx;   // never cache an empty index (KB script may still be loading)
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || {};
     var arr = [];
     for (var id in H) {
@@ -2346,7 +2353,8 @@
         text: ((d.name || "") + " " + id.replace(/_/g, " ") + " " + (d.system || "") + " " + know).toLowerCase() });
     }
     arr.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
-    _kbIdx = arr; return arr;
+    if (arr.length) _kbIdx = arr;                 // only memoise once the KB is actually present
+    return arr;
   }
   function kbSearch(q, limit) {
     q = (q || "").toLowerCase().trim(); if (q.length < 2) return [];
