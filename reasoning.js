@@ -2918,7 +2918,7 @@
     },
     mimicsFor: mimicsFor,
     flag: reasonV2,
-    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} }
+    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} }
   };
 
   /* ====================================================================== *
@@ -3016,6 +3016,77 @@
       '.sl-empty{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);padding:4px 2px}' +
       'body.dark .sl-wrap,body.dark .sl-card{background:var(--panel,#132030)}body.dark .sl-card{background:var(--paper,#0d1b26)}';
     var st = document.createElement("style"); st.id = "smd-livedx-css"; st.textContent = css; document.head.appendChild(st);
+  }
+
+  /* ---- Phase 2b — progressive disclosure of the primary form's Step-3 findings.
+   * Each .finding-grid shows the top ~8 findings first, the rest behind "Show
+   * more", with a per-section 🔍 search. Selected findings always stay visible.
+   * Structure-agnostic (operates on .finding-grid children) so it never breaks
+   * the minified app.js form; gated by smd_reason_v2 (revert = show full list).
+   * ---------------------------------------------------------------------- */
+  var PROG_TOP = 8;
+  function smdProgInjectCSS() {
+    if (document.getElementById("smd-prog-css")) return;
+    var st = document.createElement("style"); st.id = "smd-prog-css";
+    st.textContent =
+      '.smd-find-search{width:100%;box-sizing:border-box;margin:0 0 9px;padding:8px 11px;border:1px solid var(--line,#d7dee3);border-radius:9px;background:var(--panel,#fff);color:var(--ink,#14202b);font:500 13px var(--sans,sans-serif)}' +
+      '.smd-find-more{display:inline-block;margin:7px 0 2px;background:none;border:none;color:var(--teal,#0e6e63);font:700 12.5px var(--sans,sans-serif);cursor:pointer}';
+    document.head.appendChild(st);
+  }
+  function smdIsChecked(it) {
+    if (!it) return false;
+    if (it.querySelector && it.querySelector("input:checked")) return true;
+    var c = it.className || "";
+    return /\b(checked|selected|active|on)\b/.test(c);
+  }
+  function smdProgGrid(grid) {
+    var items = Array.prototype.slice.call(grid.children).filter(function (n) { return n.nodeType === 1 && !n.classList.contains("smd-find-more"); });
+    var q = (grid._smdQuery || "").trim().toLowerCase(), expanded = !!grid._smdExpanded, hiddenExtra = 0;
+    items.forEach(function (it, idx) {
+      var txt = (it.textContent || "").toLowerCase();
+      if (q) { it.style.display = txt.indexOf(q) >= 0 ? "" : "none"; return; }
+      if (expanded || idx < PROG_TOP || smdIsChecked(it)) it.style.display = "";
+      else { it.style.display = "none"; hiddenExtra++; }
+    });
+    var more = grid._smdMore;
+    if (more) { if (!q && hiddenExtra > 0) { more.style.display = ""; more.textContent = "▼ Show more (" + hiddenExtra + ")"; } else if (!q && expanded) { more.style.display = ""; more.textContent = "▲ Show fewer"; } else more.style.display = "none"; }
+  }
+  function smdProgressiveFindings() {
+    var host = document.getElementById("findingSections"); if (!host) return;
+    var grids = host.querySelectorAll(".finding-grid");
+    if (!reasonV2()) {   // reverted: reveal everything, strip augmentation
+      Array.prototype.forEach.call(grids, function (grid) {
+        if (!grid.getAttribute("data-smd-prog")) return;
+        Array.prototype.forEach.call(grid.children, function (n) { if (n.nodeType === 1) n.style.display = ""; });
+        if (grid._smdSearch) grid._smdSearch.remove(); if (grid._smdMore) grid._smdMore.remove();
+        grid._smdSearch = grid._smdMore = null; grid.removeAttribute("data-smd-prog");
+      });
+      return;
+    }
+    smdProgInjectCSS();
+    Array.prototype.forEach.call(grids, function (grid) {
+      if (grid.getAttribute("data-smd-prog")) { smdProgGrid(grid); return; }
+      var items = Array.prototype.slice.call(grid.children).filter(function (n) { return n.nodeType === 1; });
+      if (items.length <= PROG_TOP) return;             // short list — leave as-is
+      grid.setAttribute("data-smd-prog", "1");
+      var sb = document.createElement("input"); sb.className = "smd-find-search"; sb.type = "text"; sb.placeholder = "🔍 Search findings…";
+      sb.addEventListener("input", function () { grid._smdQuery = sb.value; smdProgGrid(grid); });
+      grid.parentNode.insertBefore(sb, grid); grid._smdSearch = sb;
+      var more = document.createElement("button"); more.type = "button"; more.className = "smd-find-more";
+      more.addEventListener("click", function (e) { e.preventDefault(); grid._smdExpanded = !grid._smdExpanded; smdProgGrid(grid); });
+      grid.parentNode.insertBefore(more, grid.nextSibling); grid._smdMore = more;
+      smdProgGrid(grid);
+    });
+  }
+  var _progWired = false;
+  function smdEnsureProgressive() {
+    var host = document.getElementById("findingSections"); if (!host) return;
+    try { smdProgressiveFindings(); } catch (e) {}
+    if (!_progWired && window.MutationObserver) {
+      _progWired = true;
+      var deb = null;
+      new MutationObserver(function () { clearTimeout(deb); deb = setTimeout(function () { try { smdProgressiveFindings(); } catch (e) {} }, 120); }).observe(host, { childList: true, subtree: true });
+    }
   }
 
   /* ---------------------------------------------------------------------- *
@@ -3187,7 +3258,7 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} }
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} }
   smdMainAppHooks();
   if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
@@ -3197,7 +3268,7 @@
   // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
-  [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} }, ms); });
+  [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} }, ms); });
 
   /* ====================================================================== *
    * gold88 — UI polish, all in one global place (no minified app.js edits):
