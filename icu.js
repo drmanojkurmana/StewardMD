@@ -113,6 +113,9 @@
     if (lv.uop != null && s.patient && s.patient.weightKg) { var thr = 0.5 * s.patient.weightKg; if (lv.uop < thr) add("warn", "Oliguria", "UOP " + lv.uop + " mL/h (<0.5 mL/kg/h)", "Fluids"); }
     // ABG
     if (g.ph != null) { if (g.ph < 7.2 || g.ph > 7.55) add("crit", "Severe acid–base disturbance", "pH " + g.ph, "ABG"); else if (g.ph < 7.30 || g.ph > 7.50) add("warn", "Acid–base disturbance", "pH " + g.ph, "ABG"); }
+    // Ventilation / ARDS (cross-tab: ABG PaO2 + ventilator FiO2 → P/F)
+    var vt = s.ventilator || {}, pf = vt.pf != null ? vt.pf : ((g.pao2 != null && vt.fio2) ? Math.round(g.pao2 / (vt.fio2 / 100)) : null);
+    if (pf != null && pf < 300) add(pf < 100 ? "crit" : "warn", "ARDS (P/F " + pf + ")", (pf < 100 ? "Severe" : pf < 200 ? "Moderate" : "Mild") + " ARDS" + (pf < 150 ? " — consider prone positioning" : ""), "Ventilator");
 
     var order = { crit: 0, warn: 1, info: 2 };
     a.sort(function (x, y) { return (order[x.severity] || 9) - (order[y.severity] || 9); });
@@ -401,6 +404,96 @@
     return { map: map, si: si, pressors: pressors, recs: recs, flags: flags };
   }
 
+  /* ======================================================= PHASE 3 engines */
+  // --- Ventilator: protective-ventilation / ARDS / weaning interpreter -----
+  function pbw(pt) { if (!pt || !pt.heightCm) return null; var inch = pt.heightCm / 2.54; var base = (pt.sex === "F" || pt.sex === "Female") ? 45.5 : 50; return Math.round((base + 2.3 * (inch - 60)) * 10) / 10; }
+  function interpretVent(v, pt, abg) {
+    v = v || {}; var rows = [], recs = [], flags = [], w = pbw(pt);
+    if (w) {
+      rows.push(["Predicted body weight", w + " kg"]);
+      rows.push(["Target tidal volume", "6 mL/kg ≈ " + Math.round(6 * w) + " mL (cap 8 mL/kg = " + Math.round(8 * w) + " mL)"]);
+      if (v.tv != null) { var mlkg = +(v.tv / w).toFixed(1); rows.push(["Current TV per PBW", mlkg + " mL/kg"]); if (mlkg > 8) { flags.push("Tidal volume " + mlkg + " mL/kg (>8) — risk of ventilator-induced lung injury"); recs.push("Reduce tidal volume toward 6 mL/kg predicted body weight (lung-protective ventilation)."); } }
+    } else recs.push("Enter height & sex (Patient) to compute predicted body weight and lung-protective targets.");
+    if (v.plateau != null) { rows.push(["Plateau pressure", v.plateau + " cmH₂O"]); if (v.plateau > 30) { flags.push("Plateau >30 cmH₂O"); recs.push("Plateau >30 cmH₂O — lower tidal volume / optimise PEEP to limit alveolar overdistension."); } }
+    var dp = v.drivingP != null ? v.drivingP : (v.plateau != null && v.peep != null ? v.plateau - v.peep : null);
+    if (dp != null) { rows.push(["Driving pressure", dp + " cmH₂O"]); if (dp > 15) flags.push("Driving pressure >15 cmH₂O — associated with higher mortality"); }
+    var pf = v.pf != null ? v.pf : ((abg && abg.pao2 != null && v.fio2) ? Math.round(abg.pao2 / (v.fio2 / 100)) : null);
+    if (pf != null) { rows.push(["P/F ratio", pf + (pf < 100 ? " (severe ARDS)" : pf < 200 ? " (moderate ARDS)" : pf < 300 ? " (mild ARDS)" : "")]); if (pf < 150) recs.push("P/F <150 — consider prone positioning (≥16 h/day), neuromuscular blockade, and PEEP optimisation."); }
+    if (v.rr != null && v.tv != null && v.tv > 0) { var rsbi = Math.round(v.rr / (v.tv / 1000)); rows.push(["RSBI (RR/Vt)", rsbi + (rsbi < 105 ? " — favourable for SBT" : " — ≥105, weaning likely to fail")]); }
+    if (!recs.length) recs.push("Settings within protective targets — reassess daily for weaning readiness.");
+    return { rows: rows, recs: recs, flags: flags, pf: pf };
+  }
+
+  // --- Critical-care protocol library (paraphrased checklists) -------------
+  var PROTOCOLS = [
+    { ic: "🦠", title: "Sepsis / Septic shock", checklist: ["Measure lactate; repeat if >2 mmol/L", "Blood cultures before antibiotics", "Broad-spectrum antibiotics within 1 hour", "30 mL/kg crystalloid for hypotension or lactate ≥4", "Vasopressors (noradrenaline first) for MAP ≥65 if fluid-refractory", "Identify & control the source"], monitoring: ["Lactate clearance", "MAP, urine output, mental status"], evidence: ["Surviving Sepsis 2021", "SCCM"] },
+    { ic: "🩸", title: "Undifferentiated shock", checklist: ["Identify type (RUSH / bedside echo, IVC)", "Fluids vs early vasopressors by type", "Treat the cause (sepsis, cardiogenic, obstructive, hypovolaemic)", "Arterial line + central access if escalating"], monitoring: ["MAP, lactate, perfusion", "Echo / dynamic measures"], evidence: ["SCCM", "Marino ICU"] },
+    { ic: "🍬", title: "DKA / HHS", checklist: ["IV crystalloid resuscitation", "Fixed-rate IV insulin infusion (0.1 U/kg/h)", "Replace potassium once K <5.5 and urine output present", "Hourly glucose/ketones; monitor pH, K", "Treat precipitant; avoid routine bicarbonate"], monitoring: ["Hourly glucose & ketones", "Potassium, pH, anion gap"], evidence: ["JBDS", "ADA"] },
+    { ic: "🩹", title: "Major GI bleed", checklist: ["Resuscitate; large-bore access; group & crossmatch", "Restrictive transfusion (target Hb ~7 g/dL)", "IV PPI infusion", "If variceal: terlipressin + prophylactic antibiotics", "Urgent endoscopy within 24 h (sooner if unstable)"], monitoring: ["Haemodynamics, Hb trend", "Re-bleeding signs"], evidence: ["BSG", "ACG"] },
+    { ic: "❤️", title: "Acute coronary syndrome", checklist: ["12-lead ECG within 10 min; serial troponin", "Dual antiplatelet + anticoagulation per pathway", "STEMI → primary PCI (or thrombolysis if PCI delayed)", "NSTE-ACS → risk-stratify (GRACE) & timing of angiography"], monitoring: ["Continuous ECG", "Recurrent ischaemia, arrhythmia"], evidence: ["ESC", "AHA/ACC"] },
+    { ic: "🧠", title: "Acute stroke", checklist: ["Time-critical: confirm last-known-well", "Non-contrast CT to exclude haemorrhage", "Thrombolysis within window / thrombectomy for LVO", "BP targets per reperfusion plan; glucose control", "NBM until swallow assessed"], monitoring: ["Neuro obs, BP", "Post-lysis bleeding"], evidence: ["AHA/ASA", "ESO"] },
+    { ic: "🫁", title: "ARDS", checklist: ["Lung-protective TV 6 mL/kg PBW", "Plateau <30, driving pressure <15 cmH₂O", "PEEP titration to oxygenation", "Prone ≥16 h if P/F <150", "Conservative fluid strategy; NMB if severe"], monitoring: ["P/F, plateau, driving pressure", "Compliance"], evidence: ["ARDSNet", "ESICM"] },
+    { ic: "⚡", title: "Hyperkalemia", checklist: ["IV calcium to stabilise myocardium if ECG changes", "Shift: insulin + dextrose, nebulised salbutamol (± bicarbonate)", "Remove: diuretic, binder, or dialysis", "Stop K-raising drugs; recheck K & glucose"], monitoring: ["Continuous ECG", "Serial K & glucose"], evidence: ["UK Renal", "KDIGO"] },
+    { ic: "🌀", title: "Status epilepticus", checklist: ["ABC, oxygen, glucose & electrolytes", "Benzodiazepine first-line (repeat once)", "IV anti-seizure med (levetiracetam / valproate / phenytoin)", "Refractory → anaesthesia (propofol/midazolam) + EEG", "Identify & treat the cause"], monitoring: ["Airway, seizure activity", "EEG if refractory"], evidence: ["NCS", "ILAE"] },
+    { ic: "🫀", title: "Pulmonary embolism", checklist: ["Risk-stratify (haemodynamics, sPESI, RV strain)", "Anticoagulate unless contraindicated", "High-risk/massive → systemic thrombolysis or embolectomy", "Supportive: oxygen, cautious fluids, vasopressors"], monitoring: ["Haemodynamics, oxygenation", "RV function"], evidence: ["ESC"] },
+    { ic: "💉", title: "Anaphylaxis", checklist: ["Remove trigger; call for help", "IM adrenaline 0.5 mg (0.5 mL 1:1000) anterolateral thigh — repeat at 5 min", "High-flow oxygen; lay flat, legs raised", "IV crystalloid bolus for hypotension", "Antihistamine / steroid are second-line; observe for biphasic reaction"], monitoring: ["Airway, BP, SpO₂", "Biphasic relapse"], evidence: ["Resus Council", "WAO"] }
+  ];
+  var _openProto = {};
+  function protocolCard(p, i) {
+    var open = !!_openProto[i];
+    var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + p.ic + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
+    var body = open ? '<div style="padding:0 15px 14px">' +
+      '<div class="icu-sec-lbl" style="margin:2px 0 4px">Checklist</div>' + p.checklist.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") +
+      (p.monitoring ? '<div class="icu-sec-lbl" style="margin:9px 0 4px">Monitoring</div>' + p.monitoring.map(function (c) { return '<div class="icu-row"><span>' + esc(c) + "</span></div>"; }).join("") : "") +
+      evidenceBadges(p.evidence) + "</div>" : "";
+    return '<div class="icu-card" style="padding:0;overflow:hidden">' + head + body + "</div>";
+  }
+
+  // --- Daily ICU Rounds checklist + summary --------------------------------
+  var ROUNDS_ITEMS = [
+    { k: "general", g: "General", label: "Overnight events / trajectory reviewed" },
+    { k: "airway", g: "Airway", label: "Airway secure / ETT position & cuff" },
+    { k: "breathing", g: "Breathing", label: "Ventilation & oxygenation reviewed" },
+    { k: "circulation", g: "Circulation", label: "Haemodynamics & pressors reviewed" },
+    { k: "fluids", g: "Fluids", label: "Fluid balance & strategy set" },
+    { k: "renal", g: "Renal", label: "Renal function / RRT need" },
+    { k: "lytes", g: "Electrolytes", label: "Electrolytes corrected / monitored" },
+    { k: "abg", g: "ABG", label: "Acid–base reviewed" },
+    { k: "nutrition", g: "Nutrition", label: "Feeding plan (enteral preferred)" },
+    { k: "sedation", g: "Sedation", label: "Sedation target / daily interruption" },
+    { k: "pain", g: "Pain", label: "Analgesia & delirium (CAM-ICU) assessed" },
+    { k: "cultures", g: "Cultures", label: "Cultures / micro results reviewed" },
+    { k: "antibiotics", g: "Antibiotics", label: "Antibiotic indication / de-escalation / stop date" },
+    { k: "dvt", g: "Prophylaxis", label: "DVT prophylaxis prescribed" },
+    { k: "ulcer", g: "Prophylaxis", label: "Stress-ulcer prophylaxis reviewed" },
+    { k: "lines", g: "Lines", label: "Central/arterial lines — still needed?" },
+    { k: "catheter", g: "Catheters", label: "Urinary catheter — still needed?" },
+    { k: "drains", g: "Drains", label: "Drains reviewed" },
+    { k: "family", g: "Family", label: "Family updated / counselling" },
+    { k: "disposition", g: "Disposition", label: "Disposition / step-down plan" }
+  ];
+  function buildSummary() {
+    var s = _raw, p = s.patient, lv = latestVitals(), L = s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = curMap(), out = [];
+    out.push("STEWARDMD — DAILY ICU SUMMARY");
+    out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
+    if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
+    out.push("");
+    out.push("HAEMODYNAMICS: HR " + (lv.hr != null ? lv.hr : "—") + ", BP " + (lv.sbp != null ? lv.sbp + "/" + lv.dbp : "—") + ", MAP " + (mp != null ? mp : "—") + ", lactate " + (lv.lactate != null ? lv.lactate : "—") + (s.infusions.length ? ", pressors/infusions: " + s.infusions.map(function (i) { return i.drug; }).join(", ") : ""));
+    if (g.ph != null) { var ab = analyzeABG(g, L); out.push("ABG: pH " + g.ph + " / pCO₂ " + g.paco2 + " / HCO₃ " + g.hco3 + (ab ? " → " + ab.primary : "")); }
+    var keyL = ["na", "k", "creat", "hb", "plt", "ferritin"].filter(function (k) { return L[k] != null; }).map(function (k) { return k.toUpperCase() + " " + L[k]; });
+    if (keyL.length) out.push("LABS: " + keyL.join(", "));
+    if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
+    if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
+    if (s.alerts.length) out.push("\nACTIVE ALERTS:\n" + s.alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
+    var pend = ROUNDS_ITEMS.filter(function (it) { return !(_raw.rounds[it.k] && _raw.rounds[it.k].done); });
+    if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
+    var notes = ROUNDS_ITEMS.filter(function (it) { return _raw.rounds[it.k] && _raw.rounds[it.k].note; }).map(function (it) { return "• " + it.label + ": " + _raw.rounds[it.k].note; });
+    if (notes.length) out.push("\nROUNDS NOTES:\n" + notes.join("\n"));
+    if (s.goals.length) out.push("\nGOALS:\n" + s.goals.map(function (x) { return "• " + x; }).join("\n"));
+    out.push("\n— Decision support only; verify against the patient. StewardMD ICU.");
+    return out.join("\n");
+  }
+
   /* --------------------------------------------------------------- tabs */
   var TABS = [
     { id: "overview", ic: "❤️", label: "Overview" },
@@ -488,31 +581,31 @@
     },
     infusions: function () {
       var inf = _raw.infusions || [];
+      var common = ["Noradrenaline", "Adrenaline", "Vasopressin", "Dopamine", "Dobutamine", "Phenylephrine"];
       var list = inf.length ? '<div class="icu-card">' + inf.map(function (i) { return row(i.drug + (i.indication ? " · " + i.indication : ""), (i.rateMlHr != null ? i.rateMlHr + " mL/h" : (i.dose != null ? i.dose + " " + (i.unit || "") : ""))); }).join("") + "</div>"
         : '<div class="icu-card"><div class="icu-empty">No infusions recorded</div></div>';
-      return '<div class="icu-sec-lbl">💉 Infusions</div>' + list +
-        '<div class="icu-card"><p>Weight-based pump rates, drug library, preparation protocols and Nurse Mode.</p>' +
+      var quick = '<div class="icu-card"><div class="icu-sec-lbl" style="margin:0 0 8px">Quick vasopressors — tap for pump rate</div><div class="icu-vitals">' +
+        common.map(function (d) { return '<button class="icu-vc" style="cursor:pointer;text-align:left;border-color:var(--primary-soft)" data-icu-act="drug:' + esc(d.toLowerCase()) + '"><div class="vl">weight-based</div><div class="vv" style="font:700 13px var(--font);color:var(--primary)">' + esc(d) + "</div></button>"; }).join("") + "</div>" +
         evidenceBadges(["Marino ICU", "Surviving Sepsis", "PADIS"]) +
         '<button class="icu-btn ghost" data-icu-act="edit:infusion">✎ Add infusion</button>' +
-        '<button class="icu-btn" data-icu-act="launch:inf">Open Infusion &amp; Vasopressor Calculator</button></div>';
+        '<button class="icu-btn" data-icu-act="launch:inf">Open full Infusion &amp; Vasopressor Calculator</button></div>';
+      return '<div class="icu-sec-lbl">💉 Infusions</div>' + list + quick;
     },
     protocols: function () {
-      var topics = ["Sepsis / Septic shock", "Shock (undifferentiated)", "DKA / HHS", "GI Bleed", "ACS", "Acute Stroke", "ARDS", "Hyperkalemia", "Status Epilepticus", "Pulmonary Embolism", "Anaphylaxis"];
       return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
-        '<div class="icu-card">' + topics.map(function (t) { return row(t, ""); }).join("") +
-        evidenceBadges(["Surviving Sepsis", "IDSA", "ICMR", "SCCM"]) +
-        '<button class="icu-btn" data-icu-act="launch:protocols">Open Protocol Library</button></div>' +
-        phaseNote("Phase 3", "Per-protocol checklists & monitoring");
+        PROTOCOLS.map(function (p, i) { return protocolCard(p, i); }).join("") +
+        '<button class="icu-btn" data-icu-act="launch:protocols">Open full protocol / drug library</button>';
     },
     vent: function () {
-      var v = _raw.ventilator || {};
-      return '<div class="icu-card"><h3>Ventilator</h3>' +
+      var v = _raw.ventilator || {}, iv = interpretVent(v, _raw.patient, _raw.abg);
+      var extub = ["Cause of respiratory failure resolving", "Oxygenation on low support (FiO₂ ≤0.4, PEEP ≤5–8)", "Haemodynamically stable, minimal vasopressors", "Awake, following commands, protecting airway", "Adequate cough & manageable secretions", "Passed spontaneous breathing trial (RSBI <105)"];
+      return '<div class="icu-card"><h3>Ventilator settings</h3>' +
         row("Mode", v.mode) + row("FiO₂", v.fio2, "%") + row("PEEP", v.peep, "cmH₂O") +
         row("Tidal volume", v.tv, "mL") + row("Resp rate", v.rr, "/min") + row("Plateau", v.plateau, "cmH₂O") +
-        row("Driving pressure", v.drivingP, "cmH₂O") + row("Compliance", v.compliance) + row("P/F ratio", v.pf) +
-        evidenceBadges(["ARDSNet", "ESICM"]) +
         '<button class="icu-btn ghost" data-icu-act="edit:ventilator">✎ Update ventilator</button></div>' +
-        phaseNote("Phase 3", "Protective ventilation · proning · weaning · RSBI");
+        '<div class="icu-card"><h3>Protective ventilation & ARDS</h3>' + iv.rows.map(function (x) { return row(x[0], x[1]); }).join("") + evidenceBadges(["ARDSNet", "ESICM"]) + "</div>" +
+        recsCard("Recommendations", iv.recs, iv.flags, ["ARDSNet", "ESICM"]) +
+        '<div class="icu-card"><h3>Extubation readiness</h3>' + extub.map(function (t) { return '<div class="icu-row"><span>' + esc(t) + '</span><b>☐</b></div>'; }).join("") + evidenceBadges(["ESICM", "SCCM"]) + "</div>";
     },
     trends: function () {
       var w = _trendWin, metrics = [
@@ -529,7 +622,20 @@
       ];
       return winSelector() + metrics.map(function (m) { return trendCard(m[0], m[1], m[2]); }).join("");
     },
-    rounds: function () { return phaseNote("Phase 3", "Daily ICU Rounds checklist + generated summary"); }
+    rounds: function () {
+      var done = 0; ROUNDS_ITEMS.forEach(function (it) { if (_raw.rounds[it.k] && _raw.rounds[it.k].done) done++; });
+      var groups = {}, order = []; ROUNDS_ITEMS.forEach(function (it) { if (!groups[it.g]) { groups[it.g] = []; order.push(it.g); } groups[it.g].push(it); });
+      var body = order.map(function (g) {
+        return '<div class="icu-sec-lbl" style="margin:8px 0 2px">' + esc(g) + "</div>" + groups[g].map(function (it) {
+          var r = _raw.rounds[it.k] || {};
+          return '<div class="icu-row" style="align-items:center;gap:8px"><button data-icu-act="round:' + it.k + '" style="border:none;background:none;cursor:pointer;font-size:19px;line-height:1;color:' + (r.done ? "var(--ok)" : "var(--muted)") + '">' + (r.done ? "☑" : "☐") + "</button>" +
+            '<span style="flex:1">' + esc(it.label) + (r.note ? ' <span style="color:var(--muted);font-size:12px">— ' + esc(r.note) + "</span>" : "") + "</span>" +
+            '<button data-icu-act="roundnote:' + it.k + '" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:14px">✎</button></div>';
+        }).join("");
+      }).join("");
+      return '<div class="icu-card"><h3>Daily ICU Rounds <span class="icu-phase">' + done + "/" + ROUNDS_ITEMS.length + " done</span></h3>" + body + "</div>" +
+        '<button class="icu-btn" data-icu-act="gensummary">📋 Generate Daily ICU Summary</button>';
+    }
   };
 
   /* ---------------------------------------------------------- shell render */
@@ -601,7 +707,7 @@
   var modalEl = null;
   function openForm(domain) {
     var F = FORMS[domain]; if (!F) return;
-    if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); }
+    ensureModal();
     var cur = domain === "patient" ? _raw.patient : domain === "abg" ? _raw.abg : domain === "ventilator" ? _raw.ventilator : domain === "flowsheet" ? _raw.fluids : domain === "labs" ? _raw.labs.recent : {};
     var fieldsHTML = F.fields.map(function (f) {
       var v = (F.custom === "goals") ? (_raw.goals || []).join("\n") : (cur[f.k] != null ? cur[f.k] : "");
@@ -629,7 +735,7 @@
 
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
-    if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); }
+    ensureModal();
     var steps = [["📷", "Capture ICU Monitor", "monitor"], ["🫁", "Capture Ventilator", "ventilator"], ["🩸", "Capture Laboratory Report", "labs"], ["📋", "Capture ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) { return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " " + s[1] + '</div><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span></div></div>'; }).join("") + "</div>" +
@@ -637,6 +743,24 @@
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
   }
+
+  function ensureModal() { if (!modalEl) { modalEl = document.createElement("div"); modalEl.className = "icu-modal"; modalEl.id = "icuModal"; document.body.appendChild(modalEl); modalEl.addEventListener("click", function (e) { if (e.target === modalEl) closeForm(); }); modalEl.addEventListener("click", onClick); } }
+  function openRoundNote(k) {
+    ensureModal();
+    var it = ROUNDS_ITEMS.filter(function (x) { return x.k === k; })[0] || { label: k };
+    var cur = (_raw.rounds[k] || {}).note || "";
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>' + esc(it.label) + '</h3><div class="icu-fld"><label>Note</label><textarea data-k="note" rows="4" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%">' + esc(cur) + "</textarea></div>" +
+      '<button class="icu-btn" data-icu-act="saveroundnote:' + k + '">Save note</button><button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function saveRoundNote(k) { if (!modalEl) return; var ta = modalEl.querySelector("[data-k=note]"); var cur = _raw.rounds[k] || {}; STATE.rounds[k] = { done: !!cur.done, note: ta ? ta.value : "" }; closeForm(); }
+  function openSummary() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Daily ICU Summary</h3><pre id="icuSummaryText" style="white-space:pre-wrap;font:500 12.5px/1.55 var(--mono);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--ink);max-height:52vh;overflow:auto">' + esc(buildSummary()) + "</pre>" +
+      '<button class="icu-btn" data-icu-act="copysummary">📋 Copy summary</button><button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+    modalEl.classList.add("on");
+  }
+  function copySummary() { var pre = modalEl && modalEl.querySelector("#icuSummaryText"); var t = pre ? pre.textContent : buildSummary(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {} if (window.toast) toast("Summary copied"); }
 
   /* -------------------------------------------------- launch embedded modules */
   // Raise the target overlay above the ICU surface, then open it via its existing
@@ -656,6 +780,13 @@
       case "close": ICU.close(); break;
       case "tab": _active = arg; paint(); var sc = rootEl && rootEl.querySelector(".icu-scroll"); if (sc) sc.scrollTop = 0; break;
       case "win": _trendWin = +arg || _trendWin; paint(); break;
+      case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
+      case "roundnote": openRoundNote(arg); break;
+      case "saveroundnote": saveRoundNote(arg); break;
+      case "proto": _openProto[arg] = !_openProto[arg]; paint(); break;
+      case "drug": launch(function () { window.INF && (INF.openDrug ? INF.openDrug(arg) : INF.open()); }, "infOverlay"); break;
+      case "gensummary": openSummary(); break;
+      case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "save": saveForm(arg); break;
