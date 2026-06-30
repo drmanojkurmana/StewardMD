@@ -1237,6 +1237,31 @@
     // rigidity" etc. captured as one purple span (lazy, verb/punctuation-bounded;
     // fails safe to no-match if no boundary within range, never runs away).
     { cls: "md-hi", re: "(?:classic(?:al)?\\s+|the\\s+)?(?:clinical\\s+)?(?:triad|tetrad|pentad)\\s+of\\s+[a-z][^.;:&()]{2,70}?(?=\\s+(?:is|are|was|were|can|may|occurs?|suggests?|implies|indicates?|usually|typically|often|seen|present|presents?|consists?|comprises?|includes?|with|that|which|but|while|and is|and are)\\b|[.;:&()]|$)" },
+    // ---- COMPLETE HIGH-YIELD PHRASES (matched before single terms; whole concept,
+    // not isolated words). Each captures one clinically meaningful span. ----
+    { cls: "md-bug", re: "\\b(?:persistent|recurrent|relapsing|breakthrough|continuous|ongoing)\\s+(?:(?:methicillin[\\u2013\\- ]resistant\\s+)?Staphylococcus aureus|S\\.\\s?aureus|MRSA|MSSA|Pseudomonas(?:\\s+aeruginosa)?|Candida(?:\\s+albicans)?|Enterococcus|Klebsiella(?:\\s+pneumoniae)?|Acinetobacter|Escherichia coli|E\\.\\s?coli|gram[\\u2013\\- ]negative|coagulase[\\u2013\\- ]negative staphylococc(?:us|i))\\s+(?:bacterae?mia|fungae?mia|candidemia|bloodstream infections?)" },
+    { cls: "md-bug", re: "\\b(?:Staphylococcus aureus|S\\.\\s?aureus|MRSA|Pseudomonas(?:\\s+aeruginosa)?|Candida(?:\\s+albicans)?|Enterococcus|Klebsiella(?:\\s+pneumoniae)?|Escherichia coli|E\\.\\s?coli)\\s+(?:bacterae?mia|fungae?mia|candidemia|bloodstream infections?)" },
+    { cls: "md-key", re: "\\bpain out of proportion(?:\\s+to(?:\\s+(?:the\\s+)?(?:examination|physical exam(?:ination)?|exam|clinical findings|findings))?)?" },
+    { cls: "md-key", re: "\\b(?:assume|suspect|consider|treat(?:ed)? as|regard as)\\s+[\\w][\\w\\s,/\\-]{3,45}?\\s+until proven otherwise" },
+    { cls: "md-key", re: "\\buntil proven otherwise" },
+    { cls: "md-action", re: "\\bsource control(?:\\s+(?:is|remains)\\s+(?:essential|required|critical|key|mandatory|paramount|the priority))?" },
+    { cls: "md-key", re: "\\bantibiotics?\\s+alone\\s+(?:usually\\s+|frequently\\s+|often\\s+|commonly\\s+|may\\s+|will\\s+|can\\s+)?(?:fail|are\\s+(?:insufficient|inadequate)|rarely\\s+(?:suffice|work|succeed))" },
+    { cls: "md-ix", re: "\\bblood cultures?\\s+(?:before|prior to)\\s+(?:starting\\s+)?(?:antibiotics?|antimicrobials?)" },
+    { cls: "md-action", re: "\\brepeat(?:\\s+blood)?\\s+cultures?\\s+every\\s+\\d{2}[\\u2013\\-]?\\d{0,2}\\s*(?:h|hours?|hrs?)\\b" },
+    { cls: "md-abs", re: "\\bdo not delay\\s+[a-z]+(?:\\s+[a-z]+)?" },
+    { cls: "md-action", re: "\\b(?:requires?|needs?|warrants?)\\s+urgent\\s+[a-z]+(?:\\s+[a-z]+)?" },
+    { cls: "md-action", re: "\\burgent\\s+(?:surgery|surgical\\s+[a-z]+|intervention|drainage|decompression|exploration|debridement|source control)" },
+    { cls: "md-action", re: "\\b(?:complete\\s+)?device\\s+(?:removal|explantation|extraction)(?:\\s+is\\s+(?:recommended|required|essential|advised|indicated)(?:\\s+wherever\\s+feasible)?)?" },
+    { cls: "md-sig", re: "\\bfirst[\\u2013\\- ]line\\s+(?:therapy|treatment|agents?|options?|regimens?)" },
+    { cls: "md-key", re: "\\bpoor\\s+prognos(?:is|tic(?:\\s+(?:factor|indicator|sign)s?)?)" },
+    { cls: "md-key", re: "\\bhigh\\s+(?:mortality|morbidity|case[\\u2013\\- ]fatality)(?:\\s+rate)?" },
+    { cls: "md-sig", re: "\\bstrongly\\s+associated\\s+with" },
+    { cls: "md-sig", re: "\\b(?:diagnostic\\s+)?gold\\s+standard(?:\\s+for\\s+[a-z]+(?:\\s+[a-z]+){0,2})?" },
+    { cls: "md-sig", re: "\\b(?:investigation|imaging|test|study)\\s+of\\s+choice" },
+    { cls: "md-sig", re: "\\bmost\\s+common\\s+(?:cause|organism|pathogen|presentation|site|aetiology|etiology)(?:\\s+of\\s+[a-z]+(?:\\s+[a-z]+){0,2})?" },
+    { cls: "md-sig", re: "\\bpathognomonic(?:\\s+(?:for|of|finding|sign))?" },
+    { cls: "md-ix", re: "\\b(?:TEE|TTE|MRI|CT|PET[\\u2013\\-]CT|echocardiography)\\s+is\\s+preferred\\s+over\\s+(?:TEE|TTE|MRI|CT|echocardiography)" },
+    { cls: "md-abs", re: "\\b(?:always\\s+investigate|never\\s+rely\\s+solely\\s+on|never\\s+ignore|never\\s+delay)" },
     { cls: "md-resist", re: "\\b(?:MRSA|VRE|VRSA|ESBL|CRE|CRAB|MDRO|MDR|XDR|carbapenem[\\u2013\\- ]resistant|methicillin[\\u2013\\- ]resistant|vancomycin[\\u2013\\- ]resistant|multidrug[\\u2013\\- ]resistant|extensively drug[\\u2013\\- ]resistant)\\b" },
     { cls: "md-bug", re: "\\b(?:Staphylococcus aureus|Streptococcus pneumoniae|Streptococcus pyogenes|Klebsiella pneumoniae|Pseudomonas aeruginosa|Escherichia coli|Neisseria meningitidis|Mycobacterium tuberculosis|Clostridioides difficile|Clostridium difficile|Candida albicans|coagulase[\\u2013\\- ]negative staphylococci|S\\.\\s?aureus|E\\.\\s?coli|C\\.\\s?difficile|Staphylococcus|Streptococcus|Pseudomonas|Enterococcus|Acinetobacter|Klebsiella|Candida|Pneumococcus|Enterobacterales|Enterobacteriaceae)\\b" },
     { cls: "md-emerg", re: "\\b(?:septic shock|toxic shock|sepsis|necrotizing fasciitis|endocarditis|meningitis|encephalitis|anaphylaxis|status epilepticus|cardiac arrest|respiratory failure)\\b" },
@@ -1257,10 +1282,12 @@
     return s.replace(medRe(), function () {
       var a = arguments;                       // [match, g1..gN, offset, string]
       for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
-        var cls = MED_RULES[i].cls, mt = a[0];
-        // keep trailing punctuation (comma/space/paren) OUTSIDE the enumeration span
-        if (cls === "md-hi") { var tr = mt.match(/[\s,)]+$/); if (tr) return '<span class="md-hi">' + mt.slice(0, mt.length - tr[0].length) + '</span>' + tr[0]; }
-        return '<span class="' + cls + '">' + mt + '</span>';
+        var cls = MED_RULES[i].cls, mt = a[0], tail = "";
+        // keep trailing punctuation AND any dangling connector word OUTSIDE the span
+        var p1 = mt.match(/[\s,;:)]+$/); if (p1) { tail = p1[0]; mt = mt.slice(0, mt.length - p1[0].length); }
+        var cm = mt.match(/\s+(?:and|or|to|for|with|that|than)$/i); if (cm) { tail = mt.slice(cm.index) + tail; mt = mt.slice(0, cm.index); }
+        var p2 = mt.match(/[\s,;:)]+$/); if (p2) { tail = p2[0] + tail; mt = mt.slice(0, mt.length - p2[0].length); }
+        return '<span class="' + cls + '">' + mt + '</span>' + tail;
       }
       return a[0];
     });
@@ -1268,10 +1295,11 @@
   // choose a pearl card's accent + icon from the dominant clinical concept in it
   function pearlKind(t) {
     var s = (t || "").toLowerCase();
-    if (/mrsa|vre|esbl|\bcre\b|crab|resistant|sepsis|septic|\bshock\b|endocarditis|meningitis|necroti|life[\s-]?threatening|contraindicated|fatal|fulminant|emergenc/.test(s)) return { a: "warn", ic: "⚠️" };
-    if (/vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|antibiotic|source control|drainage|debridement|surger|removal|remove the|\btherapy|treatment|regimen/.test(s)) return { a: "tx", ic: "💊" };
-    if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|cholinesterase|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "🔬" };
-    return { a: "pearl", ic: "💡" };
+    if (/persistent\s+\w+\s+bacter|persistent bacter|\bshock\b|hypotension|deteriorat|life[\s-]?threatening|high mortality|\bfatal\b|fulminant|until proven otherwise|do not delay|requires? urgent|impending|massive|emergenc/.test(s)) return { a: "warn", ic: "🚨", label: "Red flag" };
+    if (/source control|remove (?:the )?device|device removal|\bdrain\b|debridement|urgent surger|surgical|first[–\- ]line|drug of choice|mainstay|vancomycin|meropenem|linezolid|daptomycin|\bcef|piperacillin|\bantibiotics?\b|regimen|therapy is/.test(s)) return { a: "tx", ic: "💊", label: "Treatment pearl" };
+    if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|sensitivity|specificity|diagnostic|gold standard|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "🩺", label: "Diagnostic pearl" };
+    if (/most common|classic|pathognomonic|hallmark|triad|tetrad|pentad|remember|\bexam\b|associated with/.test(s)) return { a: "pearl", ic: "🎯", label: "Exam pearl" };
+    return { a: "pearl", ic: "💡", label: "Clinical pearl" };
   }
   // Remove inline citations from displayed text — references are collected ONCE in
   // the source footer instead of repeating "(Harrison 22e p.1120)" on every point.
@@ -1304,13 +1332,28 @@
   }
   // render prose with the opening DEFINITION sentence as a lead callout (Quick Take),
   // the rest as normal paragraphs — so the key statement is grasped at a glance.
+  // group sentences into short ~2-sentence paragraphs (readability; no text removed)
+  function paraChunks(text) {
+    var sents = String(text).match(/[^.;]*[.;]+|\S[^.;]*$/g) || [text];
+    var out = [], buf = [];
+    sents.forEach(function (s) { s = s.trim(); if (!s) return; buf.push(s); if (buf.length >= 2) { out.push(buf.join(" ")); buf = []; } });
+    if (buf.length) out.push(buf.join(" "));
+    return out.map(function (p) { return '<p>' + medFormat(p) + '</p>'; }).join("");
+  }
   function medLead(text) {
     var t = stripCite(text); if (!t) return "";
     var m = t.match(/^([\s\S]{25,300}?[.;])\s+([\s\S]+)$/);
-    if (m) return '<p class="ev-lead">' + medFormat(m[1]) + '</p><p>' + medFormat(m[2]) + '</p>';
+    if (m) return '<p class="ev-lead">' + medFormat(m[1]) + '</p>' + paraChunks(m[2]);
     return '<p>' + medFormat(t) + '</p>';
   }
   function evSub(label, html) { return html ? '<div class="ev-subh">' + esc(label) + '</div>' + html : ""; }
+  // red flags / pitfalls as distinct callout cards (never buried in a bullet list)
+  function evCallouts(arr, kind, ic) {
+    if (!arr || !arr.length) return "";
+    return '<div class="ev-callouts">' + arr.map(function (x) {
+      return '<div class="ev-callout ev-callout--' + kind + '"><span class="ev-callout-ic">' + ic + '</span><span>' + medFormat(stripCite(x)) + '</span></div>';
+    }).join("") + '</div>';
+  }
   // build a source descriptor from the Harrison enrichment for a disease id
   function evHarrisonSrc(id) {
     var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || null;
@@ -1325,8 +1368,8 @@
     dxh += evSub("Mimics", evList(mim));
     if (dxh) sections.push({ ic: "🩺", title: "Diagnosis & workup", html: dxh });
     var rf = "";
-    rf += evSub("Red flags", evList(e.redFlags, "danger"));
-    rf += evSub("Pitfalls", evList(e.pitfalls, "warn"));
+    rf += evSub("🚨 Red flags", evCallouts(e.redFlags, "danger", "🚨"));
+    rf += evSub("⚠️ Pitfalls", evCallouts(e.pitfalls, "warn", "⚠️"));
     if (rf) sections.push({ ic: "⚠️", title: "Red flags & pitfalls", danger: true, html: rf });
     var cp = "";
     if (e.severityClassification) cp += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
@@ -1357,7 +1400,7 @@
     var h = '<div class="ev-body">';
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> Key clinical pearls</div>' +
-        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><span>' + medFormat(stripCite(p)) + '</span></div>'; }).join("") +
+        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
         '</div>';
     }
     (src.sections || []).forEach(function (s) {
@@ -1367,7 +1410,7 @@
     });
     if (src.fullHTML) {
       h += '<div class="ev-sec ev-full"><button type="button" class="ev-sec-h">' +
-        '<span class="ev-sec-ic">📚</span><span class="ev-sec-t">Full reference</span><span class="ev-chev">⌄</span></button>' +
+        '<span class="ev-sec-ic">📄</span><span class="ev-sec-t">Original Reference</span><span class="ev-chev">⌄</span></button>' +
         '<div class="ev-sec-p"><div class="ev-sec-in">' + src.fullHTML + '</div></div></div>';
     }
     h += '<div class="ev-cite">' + src.cite + '</div></div>';
@@ -1425,6 +1468,14 @@
       ".ev-pearl{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:3px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:var(--ink,#0f172a)}",
       ".ev-pearl:last-child{margin-bottom:0}.ev-pearl-ic{flex:none;font-size:14px;line-height:1.45}",
       ".ev-pearl--warn{border-left-color:#fb923c}.ev-pearl--tx{border-left-color:#34d399}.ev-pearl--ix{border-left-color:#60a5fa}.ev-pearl--pearl{border-left-color:#c4b5fd}",
+      ".ev-pearl-bd{flex:1;min-width:0}",
+      ".ev-pearl-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px;background:#ede9fe;color:#6d28d9}",
+      ".ev-tag--warn{background:#fee2e2;color:#991b1b}.ev-tag--tx{background:#dcfce7;color:#166534}.ev-tag--ix{background:#dbeafe;color:#1e40af}.ev-tag--pearl{background:#ede9fe;color:#6d28d9}",
+      ".ev-callouts{display:flex;flex-direction:column;gap:7px;margin:4px 0}",
+      ".ev-callout{display:flex;gap:9px;align-items:flex-start;border-radius:10px;padding:10px 11px;line-height:1.5;border:1px solid}",
+      ".ev-callout-ic{flex:none;font-size:14px;line-height:1.4}",
+      ".ev-callout--danger{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}",
+      ".ev-callout--warn{background:#fff7ed;border-color:#fed7aa;color:#7c2d12}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
       ".md-bug{color:#b91c1c;font-weight:700}",
       ".md-resist{color:#b91c1c;font-weight:700}",
@@ -2201,7 +2252,11 @@
   function kbInjectSearch(q) {
     var box = document.getElementById("spResults"); if (!box) return;
     var old = document.getElementById("smdKbSec"); if (old && old.parentNode) old.parentNode.removeChild(old);
-    var hits = kbSearch(q, 30); if (!hits.length) return;
+    // dedupe against the native "Syndromes" section (the 51 stewardship syndromes
+    // in ASP_DATA are already listed there — don't repeat them as KB results).
+    var asp = window.ASP_DATA || {};
+    var hits = kbSearch(q, 40).filter(function (d) { return !asp[d.id]; }).slice(0, 30);
+    if (!hits.length) return;
     var emp = box.querySelector(".sp-empty"); if (emp) box.innerHTML = "";       // native found nothing
     var html = '<div id="smdKbSec"><div class="sp-section-label">📚 Diseases &amp; Knowledge</div>' +
       hits.map(function (d) {
