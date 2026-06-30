@@ -1395,9 +1395,124 @@
         '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
     };
   }
+  /* FLAGSHIP CLINICIAN-CURATED BRIEFINGS — hand-authored high-yield blocks for
+   * high-traffic diseases (Don't-miss / Exam pearl / Pitfall / Key action /
+   * Practice tip). Reviewed standard-IM teaching points, distinct from the
+   * AI-drafted Harrison paraphrase; rendered at the TOP of the viewer. */
+  var EXAM_PEARLS = {
+    MENINGITIS: [
+      { t: "action", x: "Do not delay antibiotics for imaging or LP — give empiric ceftriaxone + vancomycin (add ampicillin if >50y or immunocompromised, for Listeria) immediately, with dexamethasone before or with the first dose." },
+      { t: "exam", x: "The classic triad of fever, headache and nuchal rigidity is often incomplete, but nearly all patients have at least one of fever, neck stiffness or altered mental status." },
+      { t: "pitfall", x: "A head CT before LP is only needed for focal deficit, papilledema, new seizure, immunocompromise or reduced GCS — not for every patient." },
+      { t: "dx", x: "CSF in bacterial meningitis: neutrophilic pleocytosis, high protein, low glucose (CSF/serum ratio <0.4). Send CSF Gram stain, CSF culture and CSF multiplex PCR." }
+    ],
+    CAP: [
+      { t: "exam", x: "Decide site of care with CURB-65 / qSOFA rather than gestalt; most non-severe CAP is treated as an outpatient." },
+      { t: "tip", x: "First-line outpatient therapy is amoxicillin (with a macrolide if atypical cover is needed); blood cultures are reserved for severe disease." },
+      { t: "dontmiss", x: "Suspect Staphylococcus aureus (including MRSA) or Pseudomonas in post-influenza pneumonia, structural lung disease or recent hospitalization." }
+    ],
+    SEVERE_CAP: [
+      { t: "action", x: "Severe CAP needs ICU-level care: blood cultures before antibiotics, then do not delay the first dose; add MRSA and Pseudomonas cover when risk factors are present." }
+    ],
+    SEPSIS: [
+      { t: "action", x: "Hour-1 bundle: blood cultures before antibiotics, broad-spectrum antibiotics, lactate, and 30 mL/kg crystalloid for hypotension or lactate ≥4." },
+      { t: "dontmiss", x: "Source control is essential — identify and drain or remove the source whenever feasible; antibiotics alone usually fail without it." },
+      { t: "pitfall", x: "A normal early lactate or the absence of fever does not exclude sepsis, especially in the elderly or immunocompromised." }
+    ],
+    SEPTIC_SHOCK: [
+      { t: "dontmiss", x: "Septic shock = sepsis needing vasopressors to keep MAP ≥65 with lactate >2 despite fluids — start norepinephrine first-line and do not delay." },
+      { t: "action", x: "Early broad-spectrum antibiotics plus source control; reassess and de-escalate once cultures return." }
+    ],
+    PYELONEPHRITIS: [
+      { t: "exam", x: "Flank pain with fever and pyuria suggests pyelonephritis; image with CT if there is no improvement by 48–72h to exclude obstruction or abscess." },
+      { t: "dontmiss", x: "An obstructing infected stone is a urological emergency that requires urgent drainage (stent or nephrostomy) — antibiotics alone will fail." }
+    ],
+    CELLULITIS: [
+      { t: "pitfall", x: "Bilateral lower-limb 'cellulitis' is usually stasis dermatitis, not infection — true cellulitis is almost always unilateral." },
+      { t: "dontmiss", x: "Pain out of proportion to examination, rapid spread, bullae, crepitus or systemic toxicity should raise necrotizing fasciitis — get urgent surgery." }
+    ],
+    NECROTIZING_FASCIITIS: [
+      { t: "dontmiss", x: "Pain out of proportion to examination is the classic early clue; the diagnosis is surgical, not radiologic — do not delay surgical exploration." },
+      { t: "action", x: "Urgent surgical debridement plus broad-spectrum antibiotics (add clindamycin for toxin suppression); imaging must never delay the operating room." }
+    ],
+    IE: [
+      { t: "exam", x: "Apply the modified Duke criteria; persistent Staphylococcus aureus bacteremia without another source is infective endocarditis until proven otherwise." },
+      { t: "dx", x: "TEE is preferred over TTE when suspicion is high or TTE is non-diagnostic, and for prosthetic valves or intracardiac devices." },
+      { t: "action", x: "Take three sets of blood cultures before antibiotics, treat with prolonged IV therapy, and involve cardiac surgery early for heart failure, abscess or large vegetations." }
+    ],
+    DEVICE_INFECTION: [
+      { t: "dontmiss", x: "Complete device removal is recommended whenever feasible — antibiotics alone usually fail while the hardware remains." },
+      { t: "exam", x: "Persistent or relapsing Staphylococcus aureus or coagulase-negative staphylococcal bacteremia without another source suggests CIED infection." }
+    ],
+    CHOLANGITIS: [
+      { t: "dontmiss", x: "Charcot's triad (fever, jaundice, RUQ pain) and Reynolds' pentad point to acute cholangitis, which requires urgent biliary drainage — antibiotics alone are not enough." },
+      { t: "action", x: "Blood cultures, broad-spectrum antibiotics and source control by biliary decompression; emergent ERCP if septic shock or no response." }
+    ],
+    C_DIFF: [
+      { t: "tip", x: "First-line is oral vancomycin or fidaxomicin; use metronidazole only if these are unavailable, and stop the inciting antibiotic." },
+      { t: "dontmiss", x: "Ileus, toxic megacolon, rising lactate or shock indicate fulminant C. difficile — get a surgical consult; do not rely on stool tests to gauge severity." },
+      { t: "pitfall", x: "Do not test or treat asymptomatic carriers, and do not repeat testing to confirm cure." }
+    ],
+    FEBRILE_NEUTROPENIA: [
+      { t: "action", x: "A medical emergency — give an empiric antipseudomonal beta-lactam (piperacillin-tazobactam or cefepime) within 1 hour of presentation." },
+      { t: "pitfall", x: "Add vancomycin only for specific indications (line infection, skin/soft-tissue, severe mucositis, instability, known MRSA) — not routinely." }
+    ],
+    DENGUE: [
+      { t: "dontmiss", x: "Watch for warning signs around defervescence (days 3–7): abdominal pain, persistent vomiting, mucosal bleeding, lethargy, and a rising haematocrit with falling platelets — these herald plasma leak." },
+      { t: "pitfall", x: "Avoid NSAIDs and intramuscular injections; the danger is plasma leakage and shock, not the platelet count itself." }
+    ],
+    MALARIA: [
+      { t: "dontmiss", x: "Any fever with recent travel to or residence in an endemic area is malaria until proven otherwise — do thick and thin smears (repeat if negative) or a rapid antigen test." },
+      { t: "action", x: "Severe or falciparum malaria is a medical emergency — IV artesunate is first-line." }
+    ],
+    ENTERIC_FEVER: [
+      { t: "exam", x: "Sustained fever with relative bradycardia, abdominal pain and altered bowel habit after endemic exposure; blood culture is the diagnostic gold standard." },
+      { t: "pitfall", x: "The Widal test is unreliable — do not diagnose or exclude typhoid on Widal alone." }
+    ],
+    PULMONARY_TB: [
+      { t: "dontmiss", x: "Cough for more than 2 weeks with weight loss and night sweats — send sputum for Xpert MTB/RIF (detects rifampicin resistance) and AFB, and start airborne isolation." },
+      { t: "pitfall", x: "A normal chest X-ray does not exclude TB in HIV or immunocompromised patients." }
+    ],
+    SBP: [
+      { t: "dx", x: "Diagnose with an ascitic fluid PMN count ≥250/µL — perform a diagnostic paracentesis in any cirrhotic with ascites who develops fever, abdominal pain or encephalopathy." },
+      { t: "action", x: "Empiric ceftriaxone plus IV albumin (on day 1 and day 3) reduces hepatorenal syndrome and mortality." }
+    ],
+    dka: [
+      { t: "action", x: "Fluids first, then an IV insulin infusion; replace potassium before insulin if K+ <3.3, and never stop insulin until the anion gap has closed." },
+      { t: "pitfall", x: "Do not be reassured by glucose alone — beware euglycemic DKA in patients on SGLT2 inhibitors." }
+    ],
+    acs: [
+      { t: "action", x: "Obtain an ECG within 10 minutes; STEMI needs immediate reperfusion (PCI preferred), and give aspirin to all unless contraindicated." },
+      { t: "pitfall", x: "A normal initial troponin or ECG does not exclude ACS — serial testing is required." }
+    ],
+    pe: [
+      { t: "exam", x: "Risk-stratify with the Wells score and an age-adjusted D-dimer; CT pulmonary angiography is the investigation of choice in most patients." },
+      { t: "dontmiss", x: "Hypotension or RV strain means high-risk PE — consider thrombolysis, and do not delay anticoagulation while awaiting imaging when probability is high." }
+    ],
+    mesenteric_ischemia: [
+      { t: "dontmiss", x: "Pain out of proportion to examination with a vascular history is acute mesenteric ischaemia until proven otherwise — get urgent CT angiography." },
+      { t: "pitfall", x: "An almost normal abdominal exam and labs early on are typical and falsely reassuring; lactate rises late." }
+    ]
+  };
+  var EV_BRIEF_META = {
+    dontmiss: { ic: "🚨", label: "Don't miss", a: "warn" },
+    exam: { ic: "🎯", label: "Exam pearl", a: "pearl" },
+    pitfall: { ic: "⚠️", label: "Pitfall", a: "pitfall" },
+    tip: { ic: "📌", label: "Practice tip", a: "tip" },
+    action: { ic: "🔑", label: "Key action", a: "tx" },
+    dx: { ic: "🩺", label: "Diagnostic pearl", a: "ix" }
+  };
+  function evBriefing(id) {
+    var b = EXAM_PEARLS[id]; if (!b || !b.length) return "";
+    return '<div class="ev-brief"><div class="ev-brief-h"><span>⭐</span> StewardMD clinical briefing<span class="ev-brief-by">clinician-curated</span></div>' +
+      b.map(function (p) {
+        var m = EV_BRIEF_META[p.t] || EV_BRIEF_META.exam;
+        return '<div class="ev-bc ev-bc--' + m.a + '"><span class="ev-bc-ic">' + m.ic + '</span><div class="ev-bc-bd"><span class="ev-bc-tag ev-tag--' + m.a + '">' + m.label + '</span>' + medFormat(stripCite(p.x)) + '</div></div>';
+      }).join("") + '</div>';
+  }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
   function evBodyHTML(src) {
-    var h = '<div class="ev-body">';
+    var h = '<div class="ev-body">' + evBriefing(src._id);
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> Key clinical pearls</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
@@ -1476,6 +1591,14 @@
       ".ev-callout-ic{flex:none;font-size:14px;line-height:1.4}",
       ".ev-callout--danger{background:#fef2f2;border-color:#fecaca;color:#7f1d1d}",
       ".ev-callout--warn{background:#fff7ed;border-color:#fed7aa;color:#7c2d12}",
+      ".ev-brief{background:linear-gradient(180deg,#f8fafc,#f1f5f9);border:1px solid #e2e8f0;border-radius:13px;padding:12px 12px 9px;margin-bottom:13px}",
+      ".ev-brief-h{display:flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;letter-spacing:.02em;color:#0f172a;margin-bottom:10px}",
+      ".ev-brief-by{margin-left:auto;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#0b5a54;background:#d9f0eb;padding:2px 8px;border-radius:20px}",
+      ".ev-bc{display:flex;gap:9px;align-items:flex-start;background:#fff;border:1px solid #eef2f7;border-left:4px solid #c4b5fd;border-radius:10px;padding:10px 11px;margin-bottom:7px;line-height:1.55;color:#0f172a}",
+      ".ev-bc:last-child{margin-bottom:0}.ev-bc-ic{flex:none;font-size:15px;line-height:1.4}.ev-bc-bd{flex:1;min-width:0}",
+      ".ev-bc--warn{border-left-color:#ef4444}.ev-bc--pitfall{border-left-color:#f97316}.ev-bc--pearl{border-left-color:#8b5cf6}.ev-bc--tip{border-left-color:#0ea5e9}.ev-bc--tx{border-left-color:#10b981}.ev-bc--ix{border-left-color:#3b82f6}",
+      ".ev-bc-tag{display:inline-block;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:20px;margin-right:7px}",
+      ".ev-tag--pitfall{background:#ffedd5;color:#9a3412}.ev-tag--tip{background:#e0f2fe;color:#075985}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
       ".md-bug{color:#b91c1c;font-weight:700}",
       ".md-resist{color:#b91c1c;font-weight:700}",
