@@ -1236,9 +1236,11 @@
     { cls: "md-resist", re: "\\b(?:MRSA|VRE|VRSA|ESBL|CRE|CRAB|MDRO|MDR|XDR|carbapenem[\\u2013\\- ]resistant|methicillin[\\u2013\\- ]resistant|vancomycin[\\u2013\\- ]resistant|multidrug[\\u2013\\- ]resistant|extensively drug[\\u2013\\- ]resistant)\\b" },
     { cls: "md-bug", re: "\\b(?:Staphylococcus aureus|Streptococcus pneumoniae|Streptococcus pyogenes|Klebsiella pneumoniae|Pseudomonas aeruginosa|Escherichia coli|Neisseria meningitidis|Mycobacterium tuberculosis|Clostridioides difficile|Clostridium difficile|Candida albicans|coagulase[\\u2013\\- ]negative staphylococci|S\\.\\s?aureus|E\\.\\s?coli|C\\.\\s?difficile|Staphylococcus|Streptococcus|Pseudomonas|Enterococcus|Acinetobacter|Klebsiella|Candida|Pneumococcus|Enterobacterales|Enterobacteriaceae)\\b" },
     { cls: "md-emerg", re: "\\b(?:septic shock|toxic shock|sepsis|necrotizing fasciitis|endocarditis|meningitis|encephalitis|anaphylaxis|status epilepticus|cardiac arrest|respiratory failure)\\b" },
-    { cls: "md-ix", re: "\\b(?:blood cultures?|transoesophageal echocardiography|transesophageal echocardiography|echocardiography|echocardiogram|lumbar puncture|chest X[\\u2013\\-]?ray|TEE|TTE|MRI|PET[\\u2013\\-]CT|PET|CXR|ECG|EEG|ABG|CSF|Gram stain|cholinesterase)\\b" },
+    { cls: "md-ix", re: "\\b(?:(?:CSF|blood|urine|sputum|stool|serum|synovial fluid|pleural fluid|ascitic fluid|pericardial fluid)\\s+(?:opening pressure|cell count(?: and differential)?|Gram stain|cultures?|multiplex PCR|PCR|analysis|glucose|protein|lactate|antigen(?: test)?|cytology|microscopy|smear)|transoesophageal echocardiography|transesophageal echocardiography|echocardiography|echocardiogram|lumbar puncture|chest X[\\u2013\\-]?ray|Gram stain|blood cultures?|TEE|TTE|MRI|PET[\\u2013\\-]CT|PET|CXR|ECG|EEG|ABG|CSF|cholinesterase)\\b" },
     { cls: "md-drug", re: "\\b(?:piperacillin[\\u2013\\-/ ]?tazobactam|pip[\\u2013\\-/ ]?tazo|amoxicillin[\\u2013\\-/ ]?clavulanate|vancomycin|meropenem|imipenem|ertapenem|linezolid|daptomycin|cefazolin|ceftriaxone|cefepime|ceftazidime|cefotaxime|ceftaroline|ciprofloxacin|levofloxacin|azithromycin|doxycycline|metronidazole|ampicillin|amoxicillin|gentamicin|amikacin|rifampicin|rifampin|isoniazid|pyrazinamide|ethambutol|atropine|pralidoxime|naloxone|fluconazole|amphotericin|acyclovir|oseltamivir|colistin|tigecycline|clindamycin)\\b" },
     { cls: "md-action", re: "\\b(?:source control|device removal|removal of the device|remove the device|repeat blood cultures|repeat cultures|surgical debridement|urgent surgery|debridement|IV antibiotics|intravenous antibiotics|empi?ric antibiotics)\\b" },
+    // high-yield clinical CONCEPTS — bold the important medical points in context
+    { cls: "md-key", re: "\\b(?:purulent|suppurative|pyogenic|abscess|empyema|vegetations?|biofilm|bacterae?mia|fungae?mia|virae?mia|septic emboli|immunocompromised|immunosuppressed|neutropeni[ac]|subarachnoid space|blood[\\u2013\\- ]brain barrier|inflammatory reaction|foreign body|indwelling|prosthetic|necrosis|necrotic|ischae?mi[ac]|infarction|thrombosis|perforation|hydrocephalus|vasculitis|demyelination|granulomatous|granuloma|malignancy|metasta(?:sis|tic)|raised intracranial pressure|intracranial pressure|herniation|pleocytosis|coloni[sz](?:e|ed|ation)|opsoni[sz]ation|phagocytosis)\\b" },
     { cls: "md-abs", re: "\\b(?:never|always|must|contraindicated|mandatory|strongly recommended|strongly suggested|life[\\u2013\\- ]threatening)\\b" }
   ];
   var _medRe = null;
@@ -1260,9 +1262,42 @@
     if (/culture|echocard|\btee\b|\btte\b|\bmri\b|\bct\b|imaging|biopsy|gram stain|cholinesterase|investigat|\bpcr\b|serolog/.test(s)) return { a: "ix", ic: "🔬" };
     return { a: "pearl", ic: "💡" };
   }
+  // Remove inline citations from displayed text — references are collected ONCE in
+  // the source footer instead of repeating "(Harrison 22e p.1120)" on every point.
+  // Only strips citation parentheticals (Harrison… / p.NNN); clinical parentheticals
+  // like "(>45 mg/dL)" or "(meningoencephalitis)" are preserved.
+  function stripCite(t) {
+    return String(t == null ? "" : t)
+      .replace(/\s*\((?:Harrison[^)]*|pp?\.?\s*[\dIVXLC][\d,\s–\-]*)\)/g, "")
+      .replace(/\s*\bHarrison(?:[’']s)?\s*22e(?:\s*pp?\.?\s*[\d,\s–\-]+)?/g, "")
+      .replace(/\s+([.;,])/g, "$1").replace(/\s{2,}/g, " ").trim();
+  }
+  // concise page list for the footer — prefer the curated `pages` field (already a
+  // clean range like "1078, 1082-1085"); only fall back to scanning body "p.NNN"
+  // citations when no curated pages exist. Dedup + numeric sort, no body-number noise.
+  function evPages(e) {
+    var seen = {}, out = [];
+    function add(tok) { tok = String(tok).replace(/\s*[–\-]\s*/, "–").replace(/\s+/g, ""); if (/^\d{2,4}/.test(tok) && !seen[tok]) { seen[tok] = 1; out.push(tok); } }
+    function ctxScan(str) { var re = /pp?\.?\s*(\d{2,4}(?:\s*[–\-]\s*\d{2,4})?)/ig, m; while ((m = re.exec(str))) add(m[1]); }
+    var curated = String(e.pages || "");
+    if (/p\.?\s*\d/i.test(curated)) ctxScan(curated);                 // prose with p.NNN markers (ignore chapter/table numbers)
+    else if (/\d/.test(curated)) curated.replace(/[^\d,\s–\-]/g, " ").split(/[,\s]+/).forEach(add); // bare numeric list = all pages
+    else [].concat(e.clinicalPearls || [], e.pathophysiology ? [e.pathophysiology] : [], e.redFlags || [], e.pitfalls || [],
+      e.additionalInvestigations || [], e.additionalDifferentials || []).forEach(ctxScan);
+    out.sort(function (a, b) { return (parseInt(a, 10) || 0) - (parseInt(b, 10) || 0); });
+    return out;
+  }
   function evList(arr, kind) {
     if (!arr || !arr.length) return "";
-    return '<ul class="ev-ul' + (kind ? " ev-ul--" + kind : "") + '">' + arr.map(function (x) { return '<li>' + medFormat(x) + '</li>'; }).join("") + '</ul>';
+    return '<ul class="ev-ul' + (kind ? " ev-ul--" + kind : "") + '">' + arr.map(function (x) { return '<li>' + medFormat(stripCite(x)) + '</li>'; }).join("") + '</ul>';
+  }
+  // render prose with the opening DEFINITION sentence as a lead callout (Quick Take),
+  // the rest as normal paragraphs — so the key statement is grasped at a glance.
+  function medLead(text) {
+    var t = stripCite(text); if (!t) return "";
+    var m = t.match(/^([\s\S]{25,300}?[.;])\s+([\s\S]+)$/);
+    if (m) return '<p class="ev-lead">' + medFormat(m[1]) + '</p><p>' + medFormat(m[2]) + '</p>';
+    return '<p>' + medFormat(t) + '</p>';
   }
   function evSub(label, html) { return html ? '<div class="ev-subh">' + esc(label) + '</div>' + html : ""; }
   // build a source descriptor from the Harrison enrichment for a disease id
@@ -1271,7 +1306,7 @@
     var e = H && H[id]; if (!e) return null;
     var pearls = (e.clinicalPearls || []).filter(Boolean);
     var sections = [];
-    if (e.pathophysiology) sections.push({ ic: "🧬", title: "Pathophysiology", html: '<p>' + medFormat(e.pathophysiology) + '</p>' });
+    if (e.pathophysiology) sections.push({ ic: "🧬", title: "Pathophysiology", html: medLead(e.pathophysiology) });
     var dxh = "";
     dxh += evSub("Investigations", evList(e.additionalInvestigations));
     dxh += evSub("Other differentials", evList(e.additionalDifferentials));
@@ -1289,19 +1324,21 @@
     // Full reference — every detail in one place, page citations intact
     var full = "";
     full += evSub("Clinical pearls", evList(pearls));
-    if (e.pathophysiology) full += evSub("Pathophysiology", '<p>' + medFormat(e.pathophysiology) + '</p>');
+    if (e.pathophysiology) full += evSub("Pathophysiology", medLead(e.pathophysiology));
     full += dxh;
     full += rf;
     full += cp;
-    (e.references || []).length && (full += evSub("References", evList(e.references)));
     if (!pearls.length && !sections.length) return null;
+    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine";
+    var pages = evPages(e);
     return {
       _id: id, icon: "📖",
-      sourceName: e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine",
+      sourceName: srcName,
       edition: "22e", tag: "Primary Reference",
-      pages: e.pages ? String(e.pages).slice(0, 80) : "",
+      pages: "",                              // not in the header — references live in the footer
       pearls: pearls, sections: sections, fullHTML: full,
-      cite: "Reference knowledge paraphrased from " + esc(e.source || "Harrison's Principles of Internal Medicine, 22e") + ", with page citations. Not a treatment regimen — verify against full guidelines before acting."
+      cite: '<strong>📖 ' + esc(srcName) + ' (22e)</strong>' + (pages.length ? ' — pp. ' + pages.join(", ") : "") +
+        '<br>Reference knowledge paraphrased &amp; page-cited. Not a treatment regimen — verify against full guidelines before acting.'
     };
   }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
@@ -1309,7 +1346,7 @@
     var h = '<div class="ev-body">';
     if (src.pearls && src.pearls.length) {
       h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> Key clinical pearls</div>' +
-        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><span>' + medFormat(p) + '</span></div>'; }).join("") +
+        src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><span>' + medFormat(stripCite(p)) + '</span></div>'; }).join("") +
         '</div>';
     }
     (src.sections || []).forEach(function (s) {
@@ -1378,14 +1415,17 @@
       ".ev-pearl:last-child{margin-bottom:0}.ev-pearl-ic{flex:none;font-size:14px;line-height:1.45}",
       ".ev-pearl--warn{border-left-color:#fb923c}.ev-pearl--tx{border-left-color:#34d399}.ev-pearl--ix{border-left-color:#60a5fa}.ev-pearl--pearl{border-left-color:#c4b5fd}",
       ".ev-ul--danger li:before{background:#dc2626}.ev-ul--warn li:before{background:#ea580c}",
-      ".md-bug{color:#b91c1c;font-weight:600}",
-      ".md-resist{color:#991b1b;font-weight:700;background:#fee2e2;border-radius:5px;padding:0 5px}",
-      ".md-emerg{color:#9a3412;font-weight:600;background:#ffedd5;border-radius:5px;padding:0 5px}",
-      ".md-ix{color:#1d4ed8;font-weight:600}",
-      ".md-drug{color:#047857;font-weight:600}",
-      ".md-action{color:#0b5a54;font-weight:700;text-decoration:underline;text-decoration-color:#5eead4;text-underline-offset:2px}",
+      ".md-bug{color:#b91c1c;font-weight:700}",
+      ".md-resist{color:#b91c1c;font-weight:700}",
+      ".md-emerg{color:#c2410c;font-weight:700}",
+      ".md-ix{color:#1d4ed8;font-weight:700}",
+      ".md-drug{color:#047857;font-weight:700}",
+      ".md-action{color:#0b5a54;font-weight:700}",
       ".md-abs{font-weight:700;color:#0f172a}",
-      ".md-cite{font-size:.86em;color:#64748b;background:#f1f5f9;border-radius:4px;padding:0 5px;white-space:nowrap}",
+      ".md-key{font-weight:700;color:#1e293b}",
+      ".md-cite{font-size:.86em;color:#94a3b8}",
+      ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-left:3px solid #818cf8;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
+      ".ev-cite strong{color:#334155}",
       ".ev-sec{border:1px solid var(--line,#e2e8f0);border-radius:11px;margin-bottom:8px;overflow:hidden;background:#fff}",
       ".ev-sec.danger{border-color:#fecaca}",
       ".ev-sec-h{display:flex;align-items:center;gap:10px;width:100%;border:none;background:#fbfdfd;padding:12px 13px;cursor:pointer;text-align:left;min-height:48px;font:inherit}",
