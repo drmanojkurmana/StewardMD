@@ -964,6 +964,20 @@
           '</div></div>' : '');
       el.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
       el.querySelectorAll(".dx-search-row[data-dz]").forEach(function (b) { b.addEventListener("click", function () { openDiseaseRef(b.getAttribute("data-dz")); }); });
+      // suggested findings as chips BELOW the search list — contextual to the
+      // current differential (same source as the always-on suggest strip).
+      if (Object.keys(S.f).length) {
+        try {
+          var sg = suggestionKeys();
+          if (sg.length) {
+            el.insertAdjacentHTML("beforeend",
+              '<div class="dx-cat" style="margin-top:12px"><div class="dx-cat-h">💡 Suggested findings</div><div class="dx-chips">' +
+              sg.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") +
+              '</div></div>');
+            el.querySelectorAll(".dx-chip.sug[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
+          }
+        } catch (e) {}
+      }
       return;
       /* legacy chip render (replaced by vertical list above):
       el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Search results</div><div class="dx-chips">' +
@@ -1006,15 +1020,21 @@
 
   // smart next-finding suggestions = top missing findings aggregated across the
   // current leading differentials (data-driven; mimics consultant questioning)
-  function renderSuggest(d) {
-    var el = root.querySelector("#dxSuggest");
-    if (!el) return;
-    if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
+  // top missing findings aggregated across the current leading differentials
+  // (shared by the always-on suggest strip and the in-search chip block).
+  function suggestionKeys(d) {
+    if (!d) { try { d = differential(); } catch (e) { return []; } }
     var counts = {};
     d.inf.slice(0, 5).concat(d.ni.slice(0, 5)).forEach(function (r) {
       (r.missing || []).forEach(function (k) { if (!S.f[k] && LABEL[k]) counts[k] = (counts[k] || 0) + 1; });
     });
-    var sug = Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 6);
+    return Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a]; }).slice(0, 6);
+  }
+  function renderSuggest(d) {
+    var el = root.querySelector("#dxSuggest");
+    if (!el) return;
+    if (!Object.keys(S.f).length) { el.innerHTML = ""; return; }
+    var sug = suggestionKeys(d);
     if (!sug.length) { el.innerHTML = ""; return; }
     el.innerHTML = '<div class="dx-sugg-h">💡 Suggested next findings</div><div class="dx-chips">' +
       sug.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") + '</div>';
@@ -1882,8 +1902,174 @@
     return out.slice(0, limit);
   }
 
+  /* ---------------------------------------------------------------------- *
+   * KB-WIDE SEARCH + KNOWLEDGE LIBRARY (gold70)
+   * The new 444-entry KB (window.KB_ENRICHMENT) was never wired into the two
+   * app.js surfaces that only knew the 51 infective syndromes: the GLOBAL search
+   * (#smdSearchInput → #spResults) and the Syndrome library modal (window.SB).
+   * Wire both here — full-text over every Harrison detail, Infective/NI + system
+   * filters — with NO minified app.js edits. Click routes via DX.openRef / ASP.
+   * ---------------------------------------------------------------------- */
+  var _kbIdx = null;
+  function kbBranch(sys) {
+    var s = (sys || "").toLowerCase();
+    if (/cardio|cardiac|vascular|heart/.test(s)) return "Cardiology";
+    if (/neuro|cns|nerv|stroke|brain|seizure/.test(s)) return "Neurology";
+    if (/pulmon|respir|lung|airway/.test(s)) return "Respiratory";
+    if (/nephro|renal|urinary|kidney|genitourin/.test(s)) return "Renal / GU";
+    if (/gastro|hepat|liver|\bgi\b|biliary|pancrea|esoph|bowel|absorption/.test(s)) return "GI / Hepatology";
+    if (/endocrin|metaboli|diabet|thyroid|pituitar|adrenal|bone/.test(s)) return "Endocrine / Metabolic";
+    if (/hemat|haem|onco|cancer|leukem|lymphoma|myelo|coagul|transfus/.test(s)) return "Haem / Oncology";
+    if (/rheum|autoimmun|arthriti|vasculiti|connective|joint|immunolog/.test(s)) return "Rheum / Immuno";
+    if (/tox|poison|envenom|overdose|snakebite/.test(s)) return "Toxicology";
+    if (/derm|skin/.test(s)) return "Dermatology";
+    if (/infect|tropical|fever|viral|bacter|fungal|parasit|tubercul|hiv|sepsis|helminth|protozo|mycos|rickett/.test(s)) return "Infectious Disease";
+    return "General / Other";
+  }
+  function kbBuildIndex() {
+    if (_kbIdx) return _kbIdx;
+    var H = (window.KB_ENRICHMENT && window.KB_ENRICHMENT.byId) || {};
+    var arr = [];
+    for (var id in H) {
+      var d = H[id];
+      var know = [].concat(d.clinicalPearls || [], d.pathophysiology || [], d.additionalDifferentials || [],
+        d.redFlags || [], d.pitfalls || [], d.prognosis || []).join(" ");
+      arr.push({ id: id, name: d.name || id, sys: d.system || "", branch: kbBranch(d.system),
+        cls: d.class === "infective" ? "inf" : "ni", ref: !!d.referenceOnly,
+        text: ((d.name || "") + " " + id.replace(/_/g, " ") + " " + (d.system || "") + " " + know).toLowerCase() });
+    }
+    arr.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
+    _kbIdx = arr; return arr;
+  }
+  function kbSearch(q, limit) {
+    q = (q || "").toLowerCase().trim(); if (q.length < 2) return [];
+    var out = kbBuildIndex().filter(function (d) { return d.text.indexOf(q) >= 0; });
+    out.sort(function (a, b) {
+      var an = a.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1, bn = b.name.toLowerCase().indexOf(q) >= 0 ? 0 : 1;
+      return an - bn || (a.name < b.name ? -1 : 1);
+    });
+    return out.slice(0, limit || 40);
+  }
+  function kbOpen(id) {
+    try { var bd = document.getElementById("spBackdrop"); if (bd) bd.classList.add("hidden"); } catch (e) {}
+    try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
+    try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
+    try { document.body.style.overflow = ""; } catch (e) {}
+    if (window.ASP_DATA && window.ASP_DATA[id] && window.ASP && ASP.open) { try { ASP.open(id); return; } catch (e) {} }
+    if (window.DX && DX.openRef) DX.openRef(id);
+  }
+  // ---- global search: inject a KB section into #spResults after native render ----
+  function wireGlobalSearch() {
+    var inp = document.getElementById("smdSearchInput");
+    if (!inp || inp.__smdKbWired) return;
+    inp.__smdKbWired = true;
+    inp.addEventListener("input", function () { var q = inp.value; setTimeout(function () { kbInjectSearch(q); }, 0); });
+  }
+  function kbInjectSearch(q) {
+    var box = document.getElementById("spResults"); if (!box) return;
+    var old = document.getElementById("smdKbSec"); if (old && old.parentNode) old.parentNode.removeChild(old);
+    var hits = kbSearch(q, 30); if (!hits.length) return;
+    var emp = box.querySelector(".sp-empty"); if (emp) box.innerHTML = "";       // native found nothing
+    var html = '<div id="smdKbSec"><div class="sp-section-label">📚 Diseases &amp; Knowledge</div>' +
+      hits.map(function (d) {
+        return '<div class="sp-card" data-kb="' + d.id + '"><div class="sp-card-top">' +
+          '<span class="sp-card-icon">' + (d.cls === "inf" ? "🦠" : "🩺") + '</span><div>' +
+          '<div class="sp-card-type">' + (d.cls === "inf" ? "Infective" : "Non-infective") + (d.ref ? " · reference" : " · diagnostic") + '</div>' +
+          '<div class="sp-card-title">' + esc(d.name) + '</div></div></div>' +
+          (d.sys ? '<div class="sp-card-desc">' + esc(d.sys) + '</div>' : '') + '</div>';
+      }).join("") + '</div>';
+    box.insertAdjacentHTML("beforeend", html);
+    box.querySelectorAll("#smdKbSec [data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
+  }
+  // ---- Knowledge Library: override window.SB.openRef for the syndromes tab ----
+  var _libState = { q: "", cls: "all", src: "all", branch: "all" };
+  function wireSyndromeLibrary() {
+    if (!window.SB || typeof window.SB.openRef !== "function" || window.SB.__smdKbWrapped) return;
+    var orig = window.SB.openRef;
+    window.SB.__smdKbWrapped = true;
+    window.SB.openRef = function (tab) {
+      var r = orig.apply(this, arguments);
+      if (tab === "syndromes") { try { kbRenderLibrary(); } catch (e) {} }
+      return r;
+    };
+  }
+  function kbRenderLibrary() {
+    var body = document.getElementById("sbrefBody"); if (!body) return;
+    var sec = body.querySelector(".sbref-sec"); if (!sec) return;
+    try { var t = document.getElementById("sbrefTitle"); if (t) t.textContent = "Knowledge Library"; } catch (e) {}
+    var branches = [], seen = {};
+    kbBuildIndex().forEach(function (d) { if (!seen[d.branch]) { seen[d.branch] = 1; branches.push(d.branch); } });
+    branches.sort();
+    var f = function (on, attr, val, label) { return '<button class="kblib-f' + (on ? " on" : "") + '" data-' + attr + '="' + val + '">' + label + '</button>'; };
+    sec.innerHTML =
+      '<input id="kblibQ" class="kblib-search" placeholder="🔍  Search any disease or clinical detail…" autocomplete="off" value="' + esc(_libState.q) + '">' +
+      '<div class="kblib-filters">' +
+        '<div class="kblib-grp"><span class="kblib-lbl">Type</span>' +
+          f(_libState.cls === "all", "cls", "all", "All") + f(_libState.cls === "inf", "cls", "inf", "🔴 Infective") + f(_libState.cls === "ni", "cls", "ni", "🟢 Non-infective") + '</div>' +
+        '<div class="kblib-grp"><span class="kblib-lbl">Source</span>' +
+          f(_libState.src === "all", "src", "all", "All") + f(_libState.src === "dx", "src", "dx", "Diagnostic") + f(_libState.src === "ref", "src", "ref", "Reference") + '</div></div>' +
+      '<div class="kblib-grp" style="margin:8px 0 4px"><span class="kblib-lbl">System</span>' +
+        f(_libState.branch === "all", "br", "all", "All") +
+        branches.map(function (b) { return f(_libState.branch === b, "br", b, esc(b)); }).join("") + '</div>' +
+      '<div class="kblib-count" id="kblibCount"></div><div class="kblib-grid" id="kblibGrid"></div>';
+    function paint() {
+      var q = _libState.q.toLowerCase();
+      var res = kbBuildIndex().filter(function (d) {
+        if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
+        if (_libState.src === "ref" && !d.ref) return false;
+        if (_libState.src === "dx" && d.ref) return false;
+        if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
+        if (q.length >= 2 && d.text.indexOf(q) < 0) return false;
+        return true;
+      });
+      document.getElementById("kblibCount").textContent = res.length + " of " + kbBuildIndex().length + " entries";
+      document.getElementById("kblibGrid").innerHTML = res.slice(0, 400).map(function (d) {
+        return '<button class="kblib-card ' + d.cls + '" data-kb="' + d.id + '"><div class="kblib-name">' + esc(d.name) + '</div>' +
+          '<div class="kblib-meta"><span class="kblib-badge ' + d.cls + '">' + (d.cls === "inf" ? "Infective" : "Non-infective") + '</span>' +
+          '<span class="kblib-badge ' + (d.ref ? "ref" : "dx") + '">' + (d.ref ? "📖 Reference" : "⚙ Diagnostic") + '</span>' +
+          (d.sys ? '<span class="kblib-sys">' + esc(d.sys) + '</span>' : '') + '</div></button>';
+      }).join("") || '<div style="padding:30px;text-align:center;color:var(--slate-soft)">No matches.</div>';
+      document.getElementById("kblibGrid").querySelectorAll("[data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
+    }
+    var qi = document.getElementById("kblibQ");
+    if (qi) qi.addEventListener("input", function () { _libState.q = qi.value.trim(); paint(); });
+    sec.querySelectorAll(".kblib-f").forEach(function (b) {
+      b.addEventListener("click", function () {
+        if (b.hasAttribute("data-cls")) _libState.cls = b.getAttribute("data-cls");
+        if (b.hasAttribute("data-src")) _libState.src = b.getAttribute("data-src");
+        if (b.hasAttribute("data-br")) _libState.branch = b.getAttribute("data-br");
+        kbRenderLibrary();
+      });
+    });
+    paint();
+  }
+  function kbInjectCSS() {
+    if (document.getElementById("smdKbCSS")) return;
+    var st = document.createElement("style"); st.id = "smdKbCSS";
+    st.textContent =
+      ".kblib-search{width:100%;border:1.5px solid var(--line,#e2e8f0);border-radius:10px;padding:11px 13px;font-size:14px;outline:none;margin-bottom:10px;box-sizing:border-box}" +
+      ".kblib-filters{display:flex;flex-wrap:wrap;gap:14px}.kblib-grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}" +
+      ".kblib-lbl{font-size:10.5px;font-weight:700;color:var(--slate-soft,#94a3b8);text-transform:uppercase;letter-spacing:.04em}" +
+      ".kblib-f{background:#fff;border:1px solid var(--line,#e2e8f0);border-radius:20px;padding:5px 11px;font-size:12px;cursor:pointer}" +
+      ".kblib-f.on{background:var(--teal,#0f766e);color:#fff;border-color:var(--teal,#0f766e)}" +
+      ".kblib-count{font-size:12px;color:var(--slate,#475569);margin:10px 2px}" +
+      ".kblib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}" +
+      ".kblib-card{text-align:left;border:1px solid var(--line,#e2e8f0);border-left:4px solid var(--teal,#0f766e);border-radius:9px;padding:9px 11px;background:#fff;cursor:pointer}" +
+      ".kblib-card.inf{border-left-color:#dc2626}.kblib-card.ni{border-left-color:#16a34a}" +
+      ".kblib-name{font-weight:600;font-size:13px;margin-bottom:5px}.kblib-meta{display:flex;flex-wrap:wrap;gap:5px;align-items:center}" +
+      ".kblib-badge{font-size:10px;padding:1px 7px;border-radius:20px;font-weight:600}" +
+      ".kblib-badge.inf{background:#fee2e2;color:#991b1b}.kblib-badge.ni{background:#dcfce7;color:#166534}" +
+      ".kblib-badge.ref{background:#eef2ff;color:#3730a3}.kblib-badge.dx{background:#fef3c7;color:#92400e}" +
+      ".kblib-sys{font-size:10.5px;color:var(--slate-soft,#94a3b8)}";
+    document.head.appendChild(st);
+  }
+  function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
+
   window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
+    // open ANY disease's reference panel from outside the reasoning workspace
+    // (global search, knowledge library): open the panel, then show the ref.
+    openRef: function (id) { try { open(); } catch (e) {} setTimeout(function () { try { openDiseaseRef(id); } catch (e) {} }, 90); },
     _assess: function () {
       var d = differential(), g = gate(d), info = GATEINFO[g.cls];
       return { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name,
@@ -1924,21 +2110,26 @@
   // organ-system groups (labels reused from the reasoning ontology) WITHOUT
   // editing minified app.js. reasoning's own ontology is already built from
   // EXTRA_GROUPS, so this is purely additive to the main form. Idempotent.
+  // Each NI group either MERGES into an existing infective system tab (mergeInto =
+  // that tab's app.js id) so we get ONE tab per organ system — no "two Cardiac /
+  // two Neuro" — or, when there is no infective counterpart (Endocrine, Toxicology),
+  // adds a genuinely new tab. relabel broadens the merged tab's label to reflect it
+  // now covers infective + non-infective findings.
   var NI_INPUT_GROUPS = [
-    { group: "Cardiac / Vascular (non-infective)", id: "ni_cardiac", label: "Cardiac / Vascular", icon: "🫀",
+    { group: "Cardiac / Vascular (non-infective)", mergeInto: "cardiac", relabel: "Cardiac / Vascular",
       keys: ["chestPain","exertionalChestPain","pleuriticChestPain","dyspnea","orthopnea","palpitations","raisedJVP","bilateralCrackles","ecgIschemia","knownCAD","knownHeartFailure","atrialFibHx","legSwellingUnilateral","calfTenderness","pulsatileMass","backPain"] },
-    { group: "Neurological (non-infective)", id: "ni_neuro", label: "Neurological", icon: "🧠",
+    { group: "Neurological (non-infective)", mergeInto: "neuro", relabel: "Neuro / CNS",
       keys: ["headache","thunderclapHeadache","visualDisturbance","papilledema","ataxia","ascendingWeakness","rigidity","headInjury","anticoagulated","alcoholExcess","hypertensionHx"] },
-    { group: "Gastrointestinal / Hepatic (non-infective)", id: "ni_gihep", label: "GI / Hepatic", icon: "🫁",
-      keys: ["hematemesis","asterixis"] },
-    { group: "Renal / Genitourinary (non-infective)", id: "ni_renal", label: "Renal / Urinary", icon: "🩺",
+    { group: "Gastrointestinal / Hepatic (non-infective)", mergeInto: "gastrointestinal", relabel: "Abdominal / GI / Hepatic",
+      keys: ["hematemesis","asterixis","jaundice","rightUpperQuadrantPain","murphySign","ascites"] },
+    { group: "Renal / Genitourinary (non-infective)", mergeInto: "genitourinary", relabel: "Renal / Urinary",
       keys: ["oliguria","hematuria","proteinuria","legSwellingBilateral"] },
+    { group: "Haematology / Rheum / Skin (non-infective)", mergeInto: "skin", relabel: "Skin / Haem / Rheum",
+      keys: ["mucocutaneousBleeding","mucosalLesions","facialSwelling","polyarthralgia","jointSwelling"] },
     { group: "Endocrine / Metabolic (non-infective)", id: "ni_endo", label: "Endocrine / Metabolic", icon: "🧬",
       keys: ["diabetesHx","steroidUse","ketonemia","polyuriaPolydipsia","hypothermia","bradycardia"] },
-    { group: "Haematology / Rheum / Skin (non-infective)", id: "ni_heme", label: "Haem / Rheum / Skin", icon: "🩸",
-      keys: ["mucocutaneousBleeding","mucosalLesions","facialSwelling","polyarthralgia","jointSwelling"] },
     { group: "Toxicology / General (non-infective)", id: "ni_tox", label: "Toxicology / General", icon: "⚗️",
-      keys: ["drugOverdose","bradypnea","miosisSecretions","cough","ageOver50","raised_lactate"] }
+      keys: ["drugOverdose","bradypnea","miosisSecretions","rigidity","cough","ageOver50","raised_lactate"] }
   ];
   var NI_INPUT_EXPLICIT_LABELS = { cough: "Cough", raised_lactate: "Raised lactate / hyperlactataemia" };
   function augmentFindingInputs() {
@@ -1947,17 +2138,30 @@
     try { buildOntology(); } catch (e) {}                                 // populate LABEL for reuse
     var have = {};
     window.FIELD_GROUPS.forEach(function (g) { (g.fields || []).forEach(function (f) { have[f.key] = true; }); });
+    window.SYSTEM_PICKER_MAP = window.SYSTEM_PICKER_MAP || [];
     var added = 0;
     NI_INPUT_GROUPS.forEach(function (G) {
       var fields = G.keys.filter(function (k) { return !have[k]; })
         .map(function (k) { return { key: k, label: NI_INPUT_EXPLICIT_LABELS[k] || lbl(k) }; });
       if (!fields.length) return;
       window.FIELD_GROUPS.push({ group: G.group, fields: fields, nonInfective: true });
+      fields.forEach(function (f) { have[f.key] = true; });               // dedupe across NI groups
       added += fields.length;
-      if (!window.SYSTEM_PICKER_MAP || !window.SYSTEM_PICKER_MAP.push) window.SYSTEM_PICKER_MAP = window.SYSTEM_PICKER_MAP || [];
-      window.SYSTEM_PICKER_MAP.push({ id: G.id, label: G.label, icon: G.icon, groups: [G.group], nonInfective: true });
+      if (G.mergeInto) {
+        var tgt = null;
+        window.SYSTEM_PICKER_MAP.forEach(function (x) { if (x.id === G.mergeInto) tgt = x; });
+        if (tgt) { tgt.groups = (tgt.groups || []).concat([G.group]); if (G.relabel) tgt.label = G.relabel; }
+        else window.SYSTEM_PICKER_MAP.push({ id: G.mergeInto, label: G.relabel || G.group, groups: [G.group], nonInfective: true });
+      } else {
+        window.SYSTEM_PICKER_MAP.push({ id: G.id, label: G.label, icon: G.icon, groups: [G.group], nonInfective: true });
+      }
     });
     window.__smdFindingsAugmented = added;
+    // CRITICAL: buildOntology() above memoised ONT/SYSPICK as a SNAPSHOT taken
+    // BEFORE these groups + tabs were appended, so fieldsForSystem() could not
+    // resolve them (every NI/merged tab rendered "All added."). Invalidate and
+    // rebuild now that FIELD_GROUPS + SYSTEM_PICKER_MAP are complete.
+    try { ONT = null; SYSPICK = []; buildOntology(); } catch (e) {}
   }
 
   function buildNIRegistry() {
@@ -2037,10 +2241,14 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} }
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} }
   smdMainAppHooks();
   if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
     else setTimeout(smdMainAppHooks, 0);
   }
+  // the global search input + SB library object are created at/after DOMContentLoaded
+  // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
+  [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
 })();
