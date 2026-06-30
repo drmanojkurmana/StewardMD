@@ -538,14 +538,14 @@
     root.innerHTML =
       '<header class="v3-header">' +
         '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div style="min-width:0"><div class="v3-brand-tt">StewardMD</div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
+        '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div style="min-width:0"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">StewardMD</h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:62px;height:62px;object-fit:contain"></div></section>' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">Steward<span class="v3-md">MD</span></h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:62px;height:62px;object-fit:contain"></div></section>' +
         '<div class="v3-qrow">' +
           '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
           '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
@@ -885,7 +885,7 @@
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s2";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s3";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
