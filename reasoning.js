@@ -1524,6 +1524,143 @@
     mesenteric_ischemia: [
       { t: "dontmiss", x: "Pain out of proportion to examination with a vascular history is acute mesenteric ischaemia until proven otherwise — get urgent CT angiography." },
       { t: "pitfall", x: "An almost normal abdominal exam and labs early on are typical and falsely reassuring; lactate rises late." }
+    ],
+
+    // ---- next tier of common presentations ----
+    HAP: [
+      { t: "exam", x: "Pneumonia developing ≥48h after admission; cover MRSA and Pseudomonas empirically when MDR risk factors are present (recent IV antibiotics, prior resistant isolates, high local resistance)." },
+      { t: "action", x: "Send a respiratory culture and blood cultures before empiric antibiotics, then de-escalate at 48–72h on results." }
+    ],
+    VAP: [
+      { t: "exam", x: "Suspect with a new infiltrate plus fever, leukocytosis, purulent secretions and worsening oxygenation ≥48h after intubation." },
+      { t: "pitfall", x: "Tracheal colonisation is common — do not treat a positive aspirate without clinical/radiographic signs; aim for ~7-day courses to limit resistance." }
+    ],
+    ASPIRATION_PNEUMONIA: [
+      { t: "exam", x: "Dependent-segment infiltrate after impaired consciousness or dysphagia; routine anaerobic cover is not needed unless there is abscess/empyema or poor dentition." },
+      { t: "pitfall", x: "Aspiration pneumonitis (acid/chemical) is not infection — antibiotics are not needed in the first 48h unless features fail to resolve." }
+    ],
+    COPD_EXACERBATION: [
+      { t: "action", x: "Controlled O2 (target SpO2 88–92%), inhaled bronchodilators and systemic steroids; add antibiotics when sputum is purulent or ventilatory support is needed." },
+      { t: "dontmiss", x: "Rising CO2 with respiratory acidosis → start NIV early; it reduces intubation and mortality." }
+    ],
+    CYSTITIS: [
+      { t: "tip", x: "First-line is nitrofurantoin, fosfomycin or pivmecillinam; avoid fluoroquinolones for simple cystitis, and no culture is needed in classic uncomplicated cases." },
+      { t: "pitfall", x: "Do not treat asymptomatic bacteriuria except in pregnancy or before a urologic procedure." }
+    ],
+    COMPLICATED_UTI: [
+      { t: "exam", x: "UTI with fever, or in men, pregnancy, catheter, obstruction or immunocompromise — culture-guided and longer course; image if no response by 48–72h." },
+      { t: "dontmiss", x: "An obstructed, infected urinary tract needs urgent drainage — antibiotics alone will fail." }
+    ],
+    CHOLECYSTITIS: [
+      { t: "exam", x: "RUQ pain, fever and a positive Murphy's sign; ultrasound shows wall thickening, pericholecystic fluid and a sonographic Murphy's sign." },
+      { t: "action", x: "Antibiotics plus analgesia, and early laparoscopic cholecystectomy (within ~7 days) is preferred over delayed surgery." }
+    ],
+    GASTROENTERITIS: [
+      { t: "tip", x: "Most acute gastroenteritis is viral and self-limited — oral rehydration is the mainstay and antibiotics are not routinely needed." },
+      { t: "dontmiss", x: "In bloody diarrhoea, avoid antimotility agents and avoid empiric antibiotics if Shiga-toxin E. coli is possible (haemolytic-uraemic syndrome risk)." }
+    ],
+    DIABETIC_FOOT: [
+      { t: "exam", x: "Probe-to-bone, or an ulcer >2 cm or long-standing, suggests osteomyelitis — image (MRI) and take deep/bone cultures, not superficial swabs." },
+      { t: "action", x: "Debridement/drainage, offloading and vascular assessment matter as much as antibiotics." }
+    ],
+    ERYSIPELAS: [
+      { t: "exam", x: "Sharply demarcated, raised, fiery-red plaque (unlike cellulitis' ill-defined edge); usually group A Streptococcus, and penicillin is first-line." }
+    ],
+    BRAIN_ABSCESS: [
+      { t: "dontmiss", x: "Ring-enhancing lesion with headache, fever and focal deficit — neurosurgical aspiration gives both diagnosis and source control; avoid LP (herniation risk)." },
+      { t: "action", x: "Empiric cover for streptococci, anaerobes and gram-negatives (e.g., ceftriaxone + metronidazole), then prolonged IV therapy." }
+    ],
+    ENCEPHALITIS: [
+      { t: "dontmiss", x: "Fever with altered mental status, seizures or focal signs — start empiric IV acyclovir immediately for possible HSV; do not wait for PCR." },
+      { t: "dx", x: "CSF shows a lymphocytic pleocytosis; HSV PCR can be falsely negative very early (repeat), and MRI may show temporal-lobe changes in HSV." }
+    ],
+    CNS_TB: [
+      { t: "exam", x: "Subacute meningitis with cranial-nerve palsies and basal enhancement; CSF shows lymphocytic pleocytosis, high protein and very low glucose." },
+      { t: "action", x: "Start anti-TB therapy plus adjunctive corticosteroids early — do not delay for confirmation when suspicion is high." }
+    ],
+    VIRAL_HEPATITIS: [
+      { t: "exam", x: "Acute hepatitis with markedly raised transaminases; check A/B/C/E serologies. Hepatitis E can be severe in pregnancy." },
+      { t: "dontmiss", x: "Watch for acute liver failure — coagulopathy (rising INR) and encephalopathy — and refer to a transplant centre early." }
+    ],
+    LEPTOSPIROSIS: [
+      { t: "exam", x: "Fever with calf myalgia, conjunctival suffusion and AKI after water/soil exposure; Weil's disease = jaundice + AKI + bleeding." },
+      { t: "action", x: "Treat empirically (doxycycline, or IV penicillin/ceftriaxone if severe) — do not wait for serology." }
+    ],
+    SCRUB_TYPHUS: [
+      { t: "exam", x: "Acute undifferentiated fever with an eschar and regional lymphadenopathy in an endemic area." },
+      { t: "action", x: "Doxycycline is first-line and a reasonable empiric choice for tropical acute febrile illness; the response is rapid." }
+    ],
+    PHARYNGITIS: [
+      { t: "tip", x: "Use the Centor/McIsaac score to decide testing/treatment; most pharyngitis is viral. Treat group A Strep (penicillin/amoxicillin) to prevent rheumatic fever." },
+      { t: "pitfall", x: "Avoid amoxicillin if infectious mononucleosis is possible (rash), and avoid routine antibiotics for low Centor scores." }
+    ],
+    covid19: [
+      { t: "action", x: "Dexamethasone for patients needing oxygen; add an immunomodulator (e.g., tocilizumab or baricitinib) in rapidly progressing hypoxia per local protocol." },
+      { t: "pitfall", x: "Antibiotics are not routine — bacterial co-infection at presentation is uncommon; assess VTE risk and anticoagulate per protocol." }
+    ],
+    hiv_aids: [
+      { t: "dontmiss", x: "New HIV with hypoxia and bilateral infiltrates → think PCP (start co-trimoxazole, add steroids if PaO2 is low); consider cryptococcal disease and TB in advanced disease." },
+      { t: "tip", x: "Start ART early; check CD4 and viral load and screen for opportunistic infections by CD4 stratum." }
+    ],
+    heart_failure: [
+      { t: "action", x: "Acute pulmonary oedema: sit up, high-flow O2/NIV, IV loop diuretic, and nitrates if hypertensive; identify the precipitant (ischaemia, AF, non-adherence)." },
+      { t: "pitfall", x: "Avoid fluids, and recognise the cold-and-wet (hypoperfused) patient who needs inotropes/ICU rather than diuresis alone." }
+    ],
+    ischemic_stroke: [
+      { t: "action", x: "Time is brain — non-contrast CT to exclude haemorrhage, then IV thrombolysis within the window and thrombectomy for large-vessel occlusion. Document last-known-well." },
+      { t: "pitfall", x: "Do not aggressively lower BP in acute ischaemic stroke unless thrombolysing or BP >220/120; always check glucose (a stroke mimic)." }
+    ],
+    ich: [
+      { t: "action", x: "Reverse anticoagulation immediately, control BP (target ~140 mmHg systolic) and get neurosurgical review for posterior-fossa or large haematomas." },
+      { t: "dontmiss", x: "A rapid GCS drop or a posterior-fossa bleed signals impending herniation — urgent imaging and neurosurgery." }
+    ],
+    sah: [
+      { t: "exam", x: "Thunderclap (worst-ever, peaks in seconds) headache; CT is highly sensitive early — if negative and suspicion persists, do an LP for xanthochromia." },
+      { t: "action", x: "Secure the aneurysm early (coil/clip), give nimodipine to prevent vasospasm, and manage in a specialist centre." }
+    ],
+    aki: [
+      { t: "exam", x: "Classify pre-renal vs intrinsic vs post-renal, and always exclude obstruction with a bladder scan/ultrasound; review nephrotoxins and recent contrast." },
+      { t: "action", x: "Treat the cause and restore perfusion, stop nephrotoxins; urgent dialysis for refractory hyperkalaemia, acidosis, fluid overload or uraemia." }
+    ],
+    pancreatitis: [
+      { t: "exam", x: "Diagnose with 2 of 3: typical pain, lipase >3× upper limit, or imaging. Early aggressive fluid resuscitation is the cornerstone." },
+      { t: "pitfall", x: "Do not give prophylactic antibiotics — reserve them for confirmed infected necrosis; early CT severity is unreliable in the first 72h." }
+    ],
+    peptic_ulcer: [
+      { t: "action", x: "Resuscitate first (restrictive transfusion to Hb ~7 g/dL), IV PPI, and endoscopy within 24h; if cirrhotic, suspect varices and add a vasoactive drug plus antibiotics." },
+      { t: "pitfall", x: "Do not delay endoscopy in an unstable bleeder, and always test/treat H. pylori and stop NSAIDs." }
+    ],
+    asthma_exac: [
+      { t: "action", x: "Back-to-back salbutamol + ipratropium, early systemic steroids and controlled O2; add IV magnesium for severe or life-threatening attacks." },
+      { t: "dontmiss", x: "A normalising or rising CO2 during an acute asthma attack signals fatigue and impending respiratory failure — get ICU early." }
+    ],
+    anaphylaxis: [
+      { t: "action", x: "IM adrenaline 0.5 mg (1:1000) to the anterolateral thigh immediately is first-line; repeat at 5 minutes. Antihistamines and steroids are adjuncts, never the priority." },
+      { t: "pitfall", x: "Do not delay adrenaline for IV access or steroids, and observe for a biphasic reaction." }
+    ],
+    hyperkalemia: [
+      { t: "action", x: "ECG first — with changes (peaked T waves, wide QRS), give IV calcium to stabilise the myocardium, then insulin–glucose ± salbutamol to shift K+, and remove K+ (dialysis if severe)." },
+      { t: "pitfall", x: "Calcium does not lower potassium — it protects the heart while the shifting and removal measures work." }
+    ],
+    hyponatremia: [
+      { t: "action", x: "Symptomatic (seizures/coma) → 3% hypertonic saline boluses; otherwise correct slowly (≤8–10 mmol/L per 24h)." },
+      { t: "dontmiss", x: "Over-rapid correction causes osmotic demyelination — recheck sodium frequently and cap the rate of rise." }
+    ],
+    thyroid_storm: [
+      { t: "action", x: "Beta-blocker (propranolol), then a thionamide (PTU/methimazole), then iodine at least 1h AFTER the thionamide, plus hydrocortisone; treat the trigger." },
+      { t: "pitfall", x: "Give iodine only after the thionamide — given first it fuels hormone synthesis." }
+    ],
+    adrenal_crisis: [
+      { t: "action", x: "Give IV hydrocortisone 100 mg immediately (do not wait for cortisol), with aggressive IV fluids and glucose; treat the precipitant." },
+      { t: "dontmiss", x: "Suspect in any shocked patient on or recently off steroids, or with hyponatraemia plus hyperkalaemia." }
+    ],
+    gbs: [
+      { t: "exam", x: "Ascending symmetric weakness with areflexia after a recent infection; CSF shows albuminocytologic dissociation (high protein, normal cell count)." },
+      { t: "dontmiss", x: "Monitor FVC and respiratory function serially — a falling FVC means impending respiratory failure; treat with IVIG or plasma exchange." }
+    ],
+    htn_emergency: [
+      { t: "action", x: "Hypertensive emergency = severe BP plus acute target-organ damage — lower MAP by ~10–20% in the first hour with a titratable IV agent, not a rapid normalisation." },
+      { t: "pitfall", x: "Asymptomatic severe hypertension (urgency) does not need rapid IV lowering — over-aggressive drops cause ischaemia." }
     ]
   };
   var EV_BRIEF_META = {
