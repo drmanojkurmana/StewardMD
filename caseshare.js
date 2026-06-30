@@ -106,6 +106,20 @@
       db.collection("users").doc(user.uid).collection("cases").doc(code).set(c);
     } catch (e) {}
   }
+  // When a SIGNED-IN user OPENS a shared case, keep a copy in THEIR cloud account
+  // (users/{uid}/cases/{code}) so it persists in My Cases, keyed by the unique code.
+  // Stored html is sanitised; merge:true avoids clobbering an existing entry.
+  function autosaveOpened(db, code, rec){
+    var u = null; try { u = window.firebase && firebase.auth && firebase.auth().currentUser; } catch (e) {}
+    if (!u || !db) return;
+    try {
+      var c = { id: code, name: rec.title || "Shared case", syndrome: rec.title || "",
+                notes: "Opened shared case · " + code, savedAt: Date.now(), savedAtStr: new Date().toLocaleString(),
+                shared: true, openedShared: true, sharedCode: code, sharedByName: rec.ownerName || "",
+                text: rec.text || "", html: sanitizeHTML(rec.html || "") };
+      db.collection("users").doc(u.uid).collection("cases").doc(code).set(c, { merge: true });
+    } catch (e) {}
+  }
   function doShare(snap, db, user){
     if (sharesThisMonth() >= MONTHLY_LIMIT) { toast("Monthly share limit reached (" + MONTHLY_LIMIT + "/mo). Higher limits are coming with subscription plans."); return; }
     var code = genCode();
@@ -132,6 +146,7 @@
         var rec = d.data();
         if (rec.expiresAt && rec.expiresAt < Date.now()) { toast("This shared case has expired (30-day limit)."); return; }
         showViewer(rec, code);
+        autosaveOpened(db, code, rec);   // keep a copy in the opener's cloud account
       }).catch(function(e){
         // expiry is now enforced server-side: an expired/missing share fails the read
         var m = (e && (e.code || e.message)) || "";
