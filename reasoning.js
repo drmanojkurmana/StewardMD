@@ -2910,15 +2910,113 @@
     // dynamic consultant suggestions = highest-yield next findings given current picks.
     nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
     // clinical-information threshold: ≥3 findings OR ≥1 highly-discriminative OR a matched syndrome.
-    thresholdMet: function () {
-      var n = Object.keys(S.f).length; if (n >= 3) return true;
-      computeIDF(); for (var k in S.f) { if ((IDF[k] || 0) >= 1.7) return true; }
-      try { return differential().inf.some(function (x) { return x.matched; }); } catch (e) { return false; }
+    thresholdMet: function (findings) {
+      var f = findings || S.f, keys = Object.keys(f).filter(function (k) { return f[k]; });
+      if (keys.length >= 3) return true;
+      computeIDF(); for (var i = 0; i < keys.length; i++) { if ((IDF[keys[i]] || 0) >= 1.7) return true; }
+      try { return window.SMD_REASON.assess(findings).infectious.some(function (x) { return x.matched; }); } catch (e) { return false; }
     },
     mimicsFor: mimicsFor,
     flag: reasonV2,
-    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } }
+    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} }
   };
+
+  /* ====================================================================== *
+   * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
+   * Same engine (SMD_REASON), second view. A panel injected into #inputCard
+   * recomputes the 🔴/🟢 differential as findings are ticked (threshold-gated),
+   * and "Select this diagnosis" opens the EXISTING stewardship page (reuse, no
+   * duplication). No app.js edit; gated by smd_reason_v2 (instant revert).
+   * ---------------------------------------------------------------------- */
+  var _liveExp = {};
+  function smdLiveCard(c, inf, rank) {
+    var cls = inf ? "inf" : "ni", open = _liveExp[c.id];
+    function fl(arr, sign) { return (arr && arr.length) ? arr.map(function (k) { return '<span class="sl-f">' + (sign || "") + esc(lbl(k)) + "</span>"; }).join("") : '<span class="sl-none">—</span>'; }
+    var head = '<button class="sl-head" data-exp="' + esc(c.id) + '"><span class="sl-rank ' + cls + '">' + rank + '</span><span class="sl-nm">' + esc(c.name) + (c.matched ? ' <span class="sl-met">criteria met</span>' : "") + '</span><span class="sl-bar ' + cls + '"><i style="width:' + c.confidence + '%"></i></span><span class="sl-sc">' + c.confidence + "</span></button>";
+    if (!open) return '<div class="sl-card ' + cls + '">' + head + "</div>";
+    var mm = c.mimics || [];
+    var det = '<div class="sl-det">' +
+      '<div class="sl-r"><b>Supporting</b><div>' + fl(c.supporting, "✓ ") + "</div></div>" +
+      (c.contradictory && c.contradictory.length ? '<div class="sl-r"><b>Contradictory</b><div>' + fl(c.contradictory, "✕ ") + "</div></div>" : "") +
+      '<div class="sl-r"><b>Missing / would help</b><div>' + fl(c.missing, "? ") + "</div></div>" +
+      (c.reason ? '<div class="sl-r"><b>Why this</b><div class="sl-rz">' + esc(c.reason) + "</div></div>" : "") +
+      (mm.length ? '<div class="sl-r"><b>Important mimics to exclude</b><div class="sl-rz">' + (inf ? "Non-infectious overlaps: " : "Overlapping conditions: ") + mm.map(esc).join(", ") + "</div></div>" : "") +
+      (c.redFlags && c.redFlags.length ? '<div class="sl-r red"><b>Red flags</b><ul>' + c.redFlags.slice(0, 4).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : "") +
+      (c.investigations && c.investigations.length ? '<div class="sl-r"><b>Suggested investigations</b><ul>' + c.investigations.slice(0, 4).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul></div>" : "") +
+      '<button class="sl-select ' + cls + '" data-sel="' + esc(c.id) + '">Select this diagnosis →</button>' +
+      "</div>";
+    return '<div class="sl-card ' + cls + ' open">' + head + det + "</div>";
+  }
+  function smdLiveCols(a) {
+    function col(title, cls, rows) { return '<div class="sl-col ' + cls + '"><div class="sl-col-h">' + title + ' <span>' + rows.length + "</span></div>" + (rows.length ? rows.slice(0, 8).map(function (r, i) { return smdLiveCard(r, cls === "inf", i + 1); }).join("") : '<div class="sl-empty">No candidate yet.</div>') + "</div>"; }
+    return col("🔴 Infectious", "inf", a.infectious) + col("🟢 Non-infectious", "ni", a.nonInfectious);
+  }
+  function smdRenderLive() {
+    var panel = document.getElementById("smdLiveDx"); if (!panel) return;
+    var card = document.getElementById("inputCard");
+    if (!reasonV2() || !card || card.offsetParent === null) { panel.innerHTML = ""; return; }   // off, or simple mode hidden
+    var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
+    var keys = Object.keys(findings).filter(function (k) { return findings[k] && VALID[k]; });
+    if (!keys.length) { panel.innerHTML = ""; return; }
+    if (!window.SMD_REASON.thresholdMet(findings)) {
+      panel.innerHTML = '<div class="sl-wrap"><div class="sl-th">🧩 Please add more clinical findings to improve diagnostic accuracy.<span>Add at least 3 findings (or one highly specific finding) for a reliable live differential.</span></div></div>';
+      return;
+    }
+    var a = window.SMD_REASON.assess(findings), gi = a.gate || {};
+    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h">🧠 Live differential <span class="sl-hint">updates as you add findings</span></div>' +
+      (gi.label ? '<div class="sl-gate ' + (gi.ab ? "ab" : "") + '">' + esc(gi.label) + "</div>" : "") +
+      '<div class="sl-cols">' + smdLiveCols(a) + "</div></div>";
+    panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
+    panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
+  }
+  function smdLiveSelect(id) {
+    var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
+    try {
+      if (window.SYNDROMES && window.SYNDROMES[id] && typeof window.SMD_restoreCase === "function") window.SMD_restoreCase(findings, id, {});
+      else if (typeof window.renderOutput === "function") window.renderOutput(findings, id);
+    } catch (e) {}
+    setTimeout(function () { var oa = document.getElementById("outputArea"); if (oa && oa.innerHTML.trim()) oa.scrollIntoView({ behavior: "smooth", block: "start" }); }, 150);
+  }
+  var _liveWired = false, _liveDeb = null;
+  function smdEnsureLivePanel() {
+    var card = document.getElementById("inputCard"); if (!card) return;
+    if (!document.getElementById("smdLiveDx")) {
+      smdInjectLiveCSS();
+      var anchor = document.getElementById("findingsCount") || document.getElementById("findingSections");
+      var p = document.createElement("div"); p.id = "smdLiveDx"; p.className = "smd-livedx";
+      if (anchor && anchor.parentNode) anchor.parentNode.insertBefore(p, anchor.nextSibling); else card.appendChild(p);
+    }
+    if (!_liveWired) {
+      _liveWired = true;
+      function bump(ms) { clearTimeout(_liveDeb); _liveDeb = setTimeout(function () { try { smdRenderLive(); } catch (e) {} }, ms); }
+      document.addEventListener("change", function () { bump(80); }, true);
+      document.addEventListener("input", function () { bump(220); }, true);
+    }
+    try { smdRenderLive(); } catch (e) {}
+  }
+  function smdInjectLiveCSS() {
+    if (document.getElementById("smd-livedx-css")) return;
+    var css =
+      '.smd-livedx{margin:10px 0 0}' +
+      '.sl-wrap{border:1px solid var(--line,#d7dee3);border-radius:14px;background:var(--panel,#fff);padding:12px 13px;box-shadow:0 1px 2px rgba(15,23,42,.05),0 6px 18px rgba(15,23,42,.06)}' +
+      '.sl-h{font:800 14px var(--sans,sans-serif);color:var(--ink,#14202b);display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.sl-hint{font:500 11px var(--sans);color:var(--slate-soft,#5a7184)}' +
+      '.sl-th{font:600 13px/1.5 var(--sans);color:var(--slate,#2d4356);padding:6px 2px}.sl-th span{display:block;font-size:11.5px;color:var(--slate-soft,#5a7184);margin-top:3px}' +
+      '.sl-gate{display:inline-block;font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;border-radius:999px;padding:3px 10px;margin:8px 0 2px;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)}.sl-gate.ab{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c)}' +
+      '.sl-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}@media (max-width:560px){.sl-cols{grid-template-columns:1fr}}' +
+      '.sl-col-h{font:800 11px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin:0 0 6px}.sl-col-h span{color:var(--slate-soft,#5a7184)}' +
+      '.sl-card{border:1px solid var(--line,#d7dee3);border-radius:10px;margin-bottom:7px;overflow:hidden;background:var(--paper,#f6f7f5)}.sl-card.inf{border-left:3px solid var(--red,#ab1c2c)}.sl-card.ni{border-left:3px solid var(--green,#1c7a4a)}' +
+      '.sl-head{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;cursor:pointer;padding:9px 10px;text-align:left;color:var(--ink,#14202b)}' +
+      '.sl-rank{flex:0 0 auto;width:20px;height:20px;border-radius:50%;font:800 11px var(--sans);display:flex;align-items:center;justify-content:center;color:#fff}.sl-rank.inf{background:var(--red,#ab1c2c)}.sl-rank.ni{background:var(--green,#1c7a4a)}' +
+      '.sl-nm{flex:1;min-width:0;font:700 13px var(--sans)}.sl-met{font:700 9px var(--sans);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:5px;padding:1px 5px}' +
+      '.sl-bar{flex:0 0 54px;height:6px;border-radius:3px;background:var(--line,#d7dee3);overflow:hidden}.sl-bar i{display:block;height:100%}.sl-bar.inf i{background:var(--red,#ab1c2c)}.sl-bar.ni i{background:var(--green,#1c7a4a)}' +
+      '.sl-sc{flex:0 0 auto;font:800 13px var(--sans);color:var(--ink,#14202b)}' +
+      '.sl-det{padding:2px 11px 11px;font:500 12px/1.5 var(--sans);color:var(--slate,#2d4356)}.sl-r{margin-top:7px}.sl-r b{display:block;font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#5a7184);margin-bottom:2px}.sl-r.red b{color:var(--red,#ab1c2c)}.sl-r ul{margin:2px 0 0 16px;padding:0}.sl-rz{color:var(--ink,#14202b)}' +
+      '.sl-f{display:inline-block;font:600 11px var(--sans);background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:6px;padding:1px 7px;margin:2px 4px 0 0}.sl-none{color:var(--slate-soft,#5a7184)}' +
+      '.sl-select{width:100%;margin-top:10px;border:none;border-radius:9px;padding:10px;font:800 13px var(--sans);cursor:pointer;color:#fff}.sl-select.inf{background:var(--red,#ab1c2c)}.sl-select.ni{background:var(--green,#1c7a4a)}' +
+      '.sl-empty{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);padding:4px 2px}' +
+      'body.dark .sl-wrap,body.dark .sl-card{background:var(--panel,#132030)}body.dark .sl-card{background:var(--paper,#0d1b26)}';
+    var st = document.createElement("style"); st.id = "smd-livedx-css"; st.textContent = css; document.head.appendChild(st);
+  }
 
   /* ---------------------------------------------------------------------- *
    * MAIN STEWARDSHIP ENGINE EXPANSION → all 140 diseases (additive, safe).
@@ -3089,7 +3187,7 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} }
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} }
   smdMainAppHooks();
   if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
@@ -3099,6 +3197,7 @@
   // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
+  [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} }, ms); });
 
   /* ====================================================================== *
    * gold88 — UI polish, all in one global place (no minified app.js edits):
