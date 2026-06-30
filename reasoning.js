@@ -993,6 +993,8 @@
 
     // --- progressive consultant workflow ---
     var html = "";
+    // reversibility toggle: flip the unified "v2" reasoning on/off instantly (no redeploy)
+    html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button id="dxV2Tog" style="font:700 11px var(--sans,sans-serif);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:4px 11px;cursor:pointer;background:' + (reasonV2() ? "var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)" : "var(--panel,#fff);color:var(--slate-soft,#5a7184)") + '" title="Toggle the new unified reasoning experience on/off">⚙ Reasoning v2 · ' + (reasonV2() ? "ON" : "OFF") + '</button></div>';
     // Step 1 · general findings
     var gen = GENERAL.filter(function (k) { return !S.f[k] && LABEL[k]; });
     html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">1</span> General findings</div><div class="dx-chips">' +
@@ -1005,7 +1007,8 @@
     if (S.system) {
       var fs = fieldsForSystem(S.system);
       var avail = fs.fields.filter(function (fl) { return !S.f[fl.key]; });
-      var common = avail.slice(0, 6), rare = avail.slice(6);
+      var topN = reasonV2() ? 8 : 6;
+      var common = avail.slice(0, topN), rare = avail.slice(topN);
       html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">3</span> ' + esc(fs.sp ? fs.sp.label : "") + ' findings</div>' +
         '<div class="dx-chips">' + (common.length ? common.map(function (fl) { return chipBtn(fl.key, fl.label); }).join("") : '<span class="dx-sel-empty">All added.</span>') + '</div>';
       if (rare.length) {
@@ -1020,6 +1023,8 @@
     });
     var mb = el.querySelector("#dxMoreBtn");
     if (mb) mb.addEventListener("click", function () { S.showRare = !S.showRare; renderPickerOnly(); });
+    var v2 = el.querySelector("#dxV2Tog");
+    if (v2) v2.addEventListener("click", function () { window.SMD_REASON.setFlag(!reasonV2()); });
     wireAddChips(el);
   }
 
@@ -2018,6 +2023,14 @@
       whyNot +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
+      (function () {
+        if (!reasonV2()) return "";
+        var mm = mimicsFor(r.id, r.inf); if (!mm.length) return "";
+        return '<div class="dx-d-row"><b>Important mimics to exclude</b><div class="dx-reason">' +
+          (r.inf ? "Non-infectious conditions that overlap this presentation — distinguish before committing to an infective diagnosis: "
+                 : "Conditions (including infections) with an overlapping presentation — exclude before settling on this: ") +
+          mm.map(esc).join(", ") + '.</div></div>';
+      })() +
       (tools.length ? '<div class="dx-d-row"><b>Related bedside tools</b><div class="dx-tools">' + tools.map(function (t){return '<button class="dx-tool" data-tool="'+t+'">'+esc(TOOLREG[t].icon+" "+TOOLREG[t].label)+'</button>';}).join("") + '</div></div>' : '') +
       harrisonRef(r.id) +
       '<button class="dx-select ' + cls + '" data-sel="' + r.id + '">Select this diagnosis →</button>' +
@@ -2842,6 +2855,70 @@
         ni: d.ni.slice(0, 5).map(function (r) { return r.name + " " + r.score; }) };
     },
     _onHospitalChange: function () { if (root && root.classList.contains("on")) recompute(); } };
+
+  /* ====================================================================== *
+   * SMD_REASON — the ONE interface-independent reasoning engine API.
+   * Both the sidebar Clinical Reasoning workspace and (Phase 2) the primary
+   * 5-step workflow consume this; neither re-implements scoring. It is a thin,
+   * PURE facade over the existing differential()/gate()/nextQuestions()/IDF —
+   * no DOM, no duplication. Future AI Copilot / Vision / ICU Snapshot call it too.
+   *
+   * Reversibility: the new unified experience is gated by the `smd_reason_v2`
+   * flag (localStorage, default ON). reasonV2()===false reverts every view to
+   * the classic path instantly — no redeploy.
+   * ---------------------------------------------------------------------- */
+  function reasonV2() { try { var v = localStorage.getItem("smd_reason_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
+  function mimicsFor(id, inf) {
+    var e = window.KB_ENRICHMENT && KB_ENRICHMENT.byId && KB_ENRICHMENT.byId[id];
+    if (!e) return [];
+    // infectious dx → its common non-infectious mimics first; NI dx → infections it mimics.
+    var arr = inf ? (e.nonInfectiousMimics || []).concat(e.infectionMimics || []) : (e.infectionMimics || []).concat(e.nonInfectiousMimics || []);
+    var out = [], seen = {};
+    arr.forEach(function (m) { var s = String(m || "").trim(); if (s && !seen[s.toLowerCase()]) { seen[s.toLowerCase()] = 1; out.push(s); } });
+    return out.slice(0, 6);
+  }
+  window.SMD_REASON = {
+    // assess(findings?) → structured, interface-independent result. Pure: if a
+    // findings object is passed it is evaluated without disturbing live state.
+    assess: function (findings) {
+      var restore = null;
+      if (findings && typeof findings === "object") { restore = S.f; S.f = {}; Object.keys(findings).forEach(function (k) { if (findings[k]) S.f[k] = true; }); }
+      var out;
+      try {
+        var d = differential(), g = gate(d), info = GATEINFO[g.cls] || {};
+        function mapCand(r) {
+          return { id: r.id, name: r.name, system: r.system, confidence: r.score, matched: !!r.matched,
+            supporting: r.supporting || [], contradictory: r.contra || [], missing: r.missing || [],
+            reason: r.reason || "", redFlags: r.red || [], investigations: r.inv || [],
+            mimics: mimicsFor(r.id, r.inf), treatmentRef: r.id, delta: (S.prev && S.prev[r.id] != null) ? r.score - S.prev[r.id] : null };
+        }
+        out = { gate: { cls: g.cls, ab: !!info.ab, lead: g.lead && g.lead.name, label: info.t },
+          dominantSystem: Object.keys(S._dom || {}),
+          infectious: d.inf.map(mapCand), nonInfectious: d.ni.map(mapCand),
+          suggestions: (function () { try { return suggestionKeys(d); } catch (e) { return []; } })() };
+      } catch (e) { out = { gate: {}, infectious: [], nonInfectious: [], suggestions: [] }; }
+      if (restore) S.f = restore;
+      return out;
+    },
+    // progressive Step-3 source: top-N findings for a system, common-first, plus the rest.
+    topFindings: function (systemId, n) {
+      try {
+        var fs = fieldsForSystem(systemId); var avail = (fs.fields || []).filter(function (fl) { return !S.f[fl.key]; });
+        n = n || 8; return { top: avail.slice(0, n), rest: avail.slice(n), label: fs.sp ? fs.sp.label : "" };
+      } catch (e) { return { top: [], rest: [], label: "" }; }
+    },
+    // dynamic consultant suggestions = highest-yield next findings given current picks.
+    nextFindings: function (limit) { try { return nextQuestions(limit || 6); } catch (e) { return []; } },
+    // clinical-information threshold: ≥3 findings OR ≥1 highly-discriminative OR a matched syndrome.
+    thresholdMet: function () {
+      var n = Object.keys(S.f).length; if (n >= 3) return true;
+      computeIDF(); for (var k in S.f) { if ((IDF[k] || 0) >= 1.7) return true; }
+      try { return differential().inf.some(function (x) { return x.matched; }); } catch (e) { return false; }
+    },
+    mimicsFor: mimicsFor,
+    flag: reasonV2,
+    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } }
+  };
 
   /* ---------------------------------------------------------------------- *
    * MAIN STEWARDSHIP ENGINE EXPANSION → all 140 diseases (additive, safe).
