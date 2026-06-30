@@ -13,7 +13,38 @@
   function esc(s){ return String(s==null?"":s).replace(/[&<>"]/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
   function toast(m){ try { injectCSS(); } catch(e){} var t=document.getElementById("cs-toast"); if(!t){t=document.createElement("div");t.id="cs-toast";t.className="cs-toast";document.body.appendChild(t);} t.textContent=m; t.classList.add("on"); clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove("on");},2600); }
 
-  function genCode(){ var s=""; for (var i=0;i<5;i++){ s += ALPHABET.charAt(Math.floor(Math.random()*ALPHABET.length)); } return "SMD-"+s; }
+  // SECURITY: shared-case html comes from Firestore (publicly readable, writable by
+  // any signed-in user) — treat it as UNTRUSTED. Allowlist-sanitize before any
+  // innerHTML: drop dangerous tags, all on* handlers, and javascript:/data: URLs.
+  // Fails closed (returns "") so a parse error can never inject raw markup.
+  var CS_BAD_TAGS = { SCRIPT:1,IFRAME:1,OBJECT:1,EMBED:1,LINK:1,META:1,BASE:1,FORM:1,SVG:1,MATH:1,FRAME:1,FRAMESET:1,APPLET:1,STYLE:1,AUDIO:1,VIDEO:1,SOURCE:1,TEMPLATE:1,PORTAL:1 };
+  function sanitizeHTML(dirty){
+    try {
+      var tpl = document.createElement("template");
+      tpl.innerHTML = String(dirty == null ? "" : dirty);
+      var w = document.createTreeWalker(tpl.content, NodeFilter.SHOW_ELEMENT, null, false);
+      var rm = [], node;
+      while ((node = w.nextNode())) {
+        // SVG/MathML elements report a lowercase tagName (non-HTML namespace) — normalise.
+        if (CS_BAD_TAGS[String(node.tagName).toUpperCase()]) { rm.push(node); continue; }
+        for (var i = node.attributes.length - 1; i >= 0; i--) {
+          var a = node.attributes[i], n = a.name.toLowerCase(), v = String(a.value || "");
+          if (n.indexOf("on") === 0 || n === "srcset" || n === "formaction") node.removeAttribute(a.name);
+          else if ((n === "href" || n === "src" || n === "xlink:href" || n === "action") && /^\s*(?:javascript|data|vbscript):/i.test(v)) node.removeAttribute(a.name);
+          else if (n === "style" && /expression|javascript:|@import|url\s*\(/i.test(v)) node.removeAttribute(a.name);
+        }
+      }
+      rm.forEach(function (el) { if (el.parentNode) el.parentNode.removeChild(el); });
+      return tpl.innerHTML;
+    } catch (e) { return ""; }
+  }
+
+  function genCode(){
+    var s = "", n = ALPHABET.length, buf = null;
+    try { var c = window.crypto || window.msCrypto; if (c && c.getRandomValues) { buf = new Uint32Array(5); c.getRandomValues(buf); } } catch (e) { buf = null; }
+    for (var i=0;i<5;i++){ var r = buf ? buf[i] : Math.floor(Math.random()*n); s += ALPHABET.charAt(r % n); }
+    return "SMD-"+s;
+  }
   function normCode(c){ c=String(c||"").trim().toUpperCase().replace(/\s+/g,""); if(c && c.indexOf("SMD-")!==0 && /^[A-Z0-9]{5}$/.test(c)) c="SMD-"+c; return c; }
 
   // Ensure Firebase/Firestore is loaded (it is lazy-loaded), then run cb(db) or cb(null) on failure.
@@ -80,8 +111,10 @@
     var code = genCode();
     var now = Date.now();
     var name = (user.displayName) || ((user.email || "").split("@")[0]) || "Clinician";
+    // NOTE: this doc is PUBLICLY readable by code — do NOT store the owner's email
+    // (PII leak). Keep display name only; email stays in the private My Cases copy.
     var rec = { v:1, code:code, title:snap.title, html:snap.html, text:snap.text,
-                ownerUid:user.uid, ownerEmail:user.email||"", ownerName:name, createdAt:now, expiresAt: now + TTL_MS };
+                ownerUid:user.uid, ownerName:name, createdAt:now, expiresAt: now + TTL_MS };
     db.collection(COLL).doc(code).set(rec)
       .then(function(){ bumpShares(); saveToMyCases(db, user, code, snap, name); showResult(code); })
       .catch(function(e){ try { console.error("[CASESHARE] share failed:", e); } catch (x) {} toast("Share failed: " + ((e && e.code) || (e && e.message) || "error")); });
@@ -99,7 +132,12 @@
         var rec = d.data();
         if (rec.expiresAt && rec.expiresAt < Date.now()) { toast("This shared case has expired (30-day limit)."); return; }
         showViewer(rec, code);
-      }).catch(function(e){ toast("Could not open — " + friendly(e)); });
+      }).catch(function(e){
+        // expiry is now enforced server-side: an expired/missing share fails the read
+        var m = (e && (e.code || e.message)) || "";
+        if (/permission|insufficient|denied/i.test(m)) { toast("Case " + code + " not found or expired."); return; }
+        toast("Could not open — " + friendly(e));
+      });
     });
   }
 
@@ -137,7 +175,7 @@
     var link = location.origin + "/?case=" + code;
     show('<div class="cs-head"><h3>📤 Case shared</h3><button class="cs-x" data-cs-x>×</button></div>'
        + '<div class="cs-body"><div class="cs-code">'+esc(code)+'</div>'
-       + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days.</div>'
+       + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days. <b>Do not include patient identifiers (name, MRN, contact).</b></div>'
        + '<div class="cs-row"><button class="cs-btn" id="csCopyCode">Copy code</button><button class="cs-btn sec" id="csCopyLink">Copy link</button><button class="cs-btn sec" id="csShareLink">Share…</button></div>'
        + '<div class="cs-note">Saved to your account. Shares the clinical findings &amp; decision only — do not enter patient identifiers. Decision support only.</div></div>');
     var o=overlay();
@@ -167,7 +205,7 @@
     show('<div class="cs-head"><h3>'+esc(rec.title||"Shared case")+'</h3><button class="cs-x" data-cs-x>×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">'+esc(code)+(when?" · shared "+esc(when):"")+'</div>'
        + (by?'<div class="cs-by" style="text-align:center;font:600 12.5px var(--f);color:var(--ink);margin:-8px 0 14px">'+by+'</div>':'')
-       + '<div class="cs-viewer">'+(rec.html || ("<pre style=\"white-space:pre-wrap\">"+esc(rec.text||"")+"</pre>"))+'</div>'
+       + '<div class="cs-viewer">'+((rec.html && sanitizeHTML(rec.html)) || ("<pre style=\"white-space:pre-wrap\">"+esc(rec.text||"")+"</pre>"))+'</div>'
        + '<div class="cs-note">Read-only shared case. Decision support only — verify against clinical judgment &amp; local protocol.</div></div>');
   }
 

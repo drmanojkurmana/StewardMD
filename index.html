@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Conservative CSP: blocks <object>/<embed> and <base> hijacking, forces HTTPS subresources.
+     (script-src is intentionally not locked down here because the app uses inline handlers;
+     full script-src/frame-ancestors/HSTS should be set as Cloudflare response headers.) -->
+<meta http-equiv="Content-Security-Policy" content="object-src 'none'; base-uri 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <script>
 /* Block pinch-zoom on iOS Safari (it ignores user-scalable=no). Double-tap zoom is already
@@ -1076,19 +1080,19 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   </div>
 </div>
 
-<script src="/app.js?v=gold77" defer></script>
-<script src="/policy.js?v=gold77" defer></script>
-<script src="/features.js?v=gold77" defer></script>
-<script src="/calculators.js?v=gold77" defer></script>
-<script src="/drugs.js?v=gold77" defer></script>
-<script src="/api.js?v=gold77" defer></script>
-<script src="/kb/dist/kb.core.js?v=gold77" defer></script>
-<script src="/kb/dist/kb.clinical.js?v=gold77" defer></script>
-<script src="/kb/dist/kb.enrichment.js?v=gold77" defer></script>
-<script src="/dxmgmt.js?v=gold77" defer></script>
-<script src="/reasoning.js?v=gold77" defer></script>
-<script src="/electrolytes.js?v=gold77" defer></script>
-<script src="/caseshare.js?v=gold77" defer></script>
-<script src="/home.js?v=gold77" defer></script>
+<script src="/app.js?v=gold78" defer></script>
+<script src="/policy.js?v=gold78" defer></script>
+<script src="/features.js?v=gold78" defer></script>
+<script src="/calculators.js?v=gold78" defer></script>
+<script src="/drugs.js?v=gold78" defer></script>
+<script src="/api.js?v=gold78" defer></script>
+<script src="/kb/dist/kb.core.js?v=gold78" defer></script>
+<script src="/kb/dist/kb.clinical.js?v=gold78" defer></script>
+<script src="/kb/dist/kb.enrichment.js?v=gold78" defer></script>
+<script src="/dxmgmt.js?v=gold78" defer></script>
+<script src="/reasoning.js?v=gold78" defer></script>
+<script src="/electrolytes.js?v=gold78" defer></script>
+<script src="/caseshare.js?v=gold78" defer></script>
+<script src="/home.js?v=gold78" defer></script>
 </body>
 </html>

@@ -1,31 +1,31 @@
-// StewardMD — Firestore security rules for shareable case codes.
-// WHERE: Firebase Console → Firestore Database → Rules.
-// HOW: keep ALL your existing rules; just add the `match /sharedCases/{code}` block
-//      inside the existing  match /databases/{database}/documents { ... }  block.
-//
-// What it allows:
-//   • Any signed-in user can CREATE a share (must stamp their own ownerUid + an expiresAt).
-//   • ANYONE can READ a shared case by its code (that's the whole point of sharing).
-//   • Only the owner can update/delete their own share.
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // ---- keep your existing rules here (e.g. users/{uid}/cases) ----
+    // A user's saved cases are PRIVATE to that user. (Previously this allowed any
+    // signed-in user to read/write ANY user's cases — broken access control / PHI IDOR.)
+    match /users/{userId}/cases/{caseId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
 
+    // StewardMD shareable case codes: signed-in users create; anyone may read by code,
+    // but ONLY while unexpired (expiry is now enforced server-side, not just in the UI).
     match /sharedCases/{code} {
-      allow read: if true;
+      allow read: if resource.data.expiresAt is number
+                  && resource.data.expiresAt > request.time.toMillis();
       allow create: if request.auth != null
                     && request.resource.data.ownerUid == request.auth.uid
-                    && request.resource.data.expiresAt is int;
+                    && request.resource.data.expiresAt is number
+                    // cap the TTL so shares can't be made effectively permanent (~32 days max)
+                    && request.resource.data.expiresAt <= request.time.toMillis() + 32 * 24 * 60 * 60 * 1000
+                    // bound the public payload size (defense against abuse / large dumps)
+                    && (!('html' in request.resource.data) || request.resource.data.html.size() < 100000);
       allow update, delete: if request.auth != null
                     && resource.data.ownerUid == request.auth.uid;
     }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
   }
 }
-
-// OPTIONAL — true auto-deletion at 30 days (storage cleanup):
-// Firebase Console → Firestore Database → TTL → "Create policy"
-//   Collection: sharedCases   Timestamp field: expiresAt
-// (The app already HIDES expired cases on read, so this is only for tidying storage.)
