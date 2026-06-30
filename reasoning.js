@@ -1150,17 +1150,42 @@
     } catch (e) { fallback(); }
   }
   function printSummary() {
-    // Print the summary IN-PAGE via a print stylesheet so the OS shows its native print/share
-    // sheet (iOS) or popup (desktop) OVER the app — Cancel returns here. No new tab to get stuck on.
+    // Print the rendered clinical-reasoning OUTPUT in-page via a print stylesheet: the OS
+    // print/share sheet opens OVER the app and Cancel returns here (no blank new tab).
     try {
       var old = document.getElementById("dxPrintArea"); if (old) old.remove();
       if (!document.getElementById("dx-print-style")) {
         var st = document.createElement("style"); st.id = "dx-print-style";
-        st.textContent = "@media print{body>*{display:none!important}#dxPrintArea{display:block!important;position:static}@page{margin:14mm}}#dxPrintArea{display:none}";
+        // Hide the live app, show only the print area, and force legible black-on-white
+        // (the app's cards use coloured/dark styles that don't print well).
+        st.textContent =
+          "@media print{html,body{background:#fff!important}" +
+          "body>*{display:none!important}" +
+          "#dxPrintArea{display:block!important;position:static!important;color:#000!important}" +
+          "#dxPrintArea *{color:#000!important;background:#fff!important;box-shadow:none!important;border-color:#bbb!important}" +
+          "#dxPrintArea button{display:none!important}" +
+          "@page{margin:14mm}}" +
+          "#dxPrintArea{display:none}";
         document.head.appendChild(st);
       }
       var area = document.createElement("div"); area.id = "dxPrintArea";
-      area.innerHTML = "<pre style=\"white-space:pre-wrap;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#000;margin:0\">" + esc(buildSummary()) + "</pre>";
+      // Prefer the rendered differential (the "webpage"); fall back to the text summary.
+      var rendered = "";
+      try {
+        var cols = root && root.querySelector("#dxCols");
+        if (cols && cols.innerHTML.trim()) {
+          var clone = cols.cloneNode(true);
+          clone.querySelectorAll("button, .dx-scale, input, select").forEach(function (n) { n.remove(); });
+          rendered = clone.innerHTML;
+        }
+      } catch (e) {}
+      area.innerHTML =
+        '<h2 style="font:700 17px system-ui,Segoe UI,sans-serif;margin:0 0 2px">StewardMD — Clinical Reasoning</h2>' +
+        '<div style="font:12px system-ui,sans-serif;color:#555;margin:0 0 12px">Decision support — verify against clinical judgement. Printed ' + esc(new Date().toLocaleString()) + '</div>' +
+        (rendered
+          ? '<div class="dx-print-rendered">' + rendered + '</div><hr style="margin:14px 0;border:none;border-top:1px solid #ccc">'
+          : '') +
+        '<pre style="white-space:pre-wrap;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:#000;margin:0">' + esc(buildSummary()) + '</pre>';
       document.body.appendChild(area);
       var cleaned = false;
       function cleanup(){ if (cleaned) return; cleaned = true; try { area.remove(); } catch (e) {} window.removeEventListener("afterprint", cleanup); }
@@ -2370,7 +2395,9 @@
     try { var p = document.getElementById("smdSearchPanel"); if (p) p.classList.remove("open"); } catch (e) {}
     try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {}
     try { document.body.style.overflow = ""; } catch (e) {}
-    if (window.ASP_DATA && window.ASP_DATA[id] && window.ASP && ASP.open) { try { ASP.open(id); return; } catch (e) {} }
+    // ALWAYS open the Harrison evidence viewer (works for all 444, incl. the 51
+    // infective syndromes). For infective diseases the viewer itself offers a button
+    // to open the full antibiotic-stewardship console, so nothing is lost.
     if (window.DX && DX.openRef) DX.openRef(id);
   }
   // ---- global search: inject a KB section into #spResults after native render ----
@@ -2383,13 +2410,13 @@
   function kbInjectSearch(q) {
     var box = document.getElementById("spResults"); if (!box) return;
     var old = document.getElementById("smdKbSec"); if (old && old.parentNode) old.parentNode.removeChild(old);
-    // dedupe against the native "Syndromes" section (the 51 stewardship syndromes
-    // in ASP_DATA are already listed there — don't repeat them as KB results).
-    var asp = window.ASP_DATA || {};
-    var hits = kbSearch(q, 40).filter(function (d) { return !asp[d.id]; }).slice(0, 30);
+    // Search the FULL Harrison knowledge base — ALL 444 diseases incl. the 51 infective
+    // syndromes (malaria, sepsis, CAP…). No longer deduped against the native list, so
+    // every disease's Harrison reference is reachable. Clicking opens the evidence viewer.
+    var hits = kbSearch(q, 30);
     if (!hits.length) return;
     var emp = box.querySelector(".sp-empty"); if (emp) box.innerHTML = "";       // native found nothing
-    var html = '<div id="smdKbSec"><div class="sp-section-label">📚 Diseases &amp; Knowledge</div>' +
+    var html = '<div id="smdKbSec"><div class="sp-section-label">📚 Harrison Knowledge Base</div>' +
       hits.map(function (d) {
         return '<div class="sp-card" data-kb="' + d.id + '"><div class="sp-card-top">' +
           '<span class="sp-card-icon">' + (d.cls === "inf" ? "🦠" : "🩺") + '</span><div>' +
@@ -2397,7 +2424,8 @@
           '<div class="sp-card-title">' + esc(d.name) + '</div></div></div>' +
           (d.sys ? '<div class="sp-card-desc">' + esc(d.sys) + '</div>' : '') + '</div>';
       }).join("") + '</div>';
-    box.insertAdjacentHTML("beforeend", html);
+    // Prepend so the Harrison KB shows FIRST, above the legacy syndrome/drug/calc results.
+    box.insertAdjacentHTML("afterbegin", html);
     box.querySelectorAll("#smdKbSec [data-kb]").forEach(function (b) { b.addEventListener("click", function () { kbOpen(b.getAttribute("data-kb")); }); });
   }
   // ---- Knowledge Library: override window.SB.openRef for the syndromes tab ----
