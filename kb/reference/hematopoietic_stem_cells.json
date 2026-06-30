@@ -1,0 +1,65 @@
+{
+  "id": "hematopoietic_stem_cells",
+  "name": "Hematopoietic Stem Cells",
+  "system": "Hematologic / Bone Marrow",
+  "class": "non_infective",
+  "chapter": 101,
+  "page": 758,
+  "aliases": [
+    "HSC",
+    "blood stem cells",
+    "hematopoiesis"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.758",
+    "clinicalPearls": [
+      "Every blood cell type and certain tissue-resident cells (e.g., microglia, some macrophages) arise from hematopoietic stem cells (HSCs); catastrophic loss of HSC function leaves a person able to survive only about 2-4 weeks without extraordinary support.",
+      "The HSC pool is estimated at only about 20,000-200,000 cells, yet it generates hundreds of billions of mature blood cells daily and sustains this output over decades.",
+      "Stem cells are defined by two cardinal properties: self-renewal (dividing while staying undifferentiated) and differentiation into mature effector cells; loss of either leads to pool exhaustion or to organ failure/neoplasia.",
+      "A dividing HSC can yield two stem cells, two differentiating cells (symmetric division), or one of each (asymmetric division); this asymmetry lets a small pool produce roughly seven orders of magnitude more mature cells daily.",
+      "Mature blood cell lifespans vary widely, from hours for neutrophils to a few months for red cells to years for memory lymphocytes, but the durable source is the persistent stem cell pool.",
+      "HSCs circulate in blood throughout life, but free-circulating time is brief (minutes in the mouse); circulating HSCs remain functional and usable for transplantation.",
+      "The bone marrow niche (notably perivascular regions near trabecular bone) is both nurturing and constraining: mesenchymal and endothelial cells supply kit ligand and CXCL12, and the niche limits how many stem cells are produced.",
+      "CXCR4/CXCL12 (SDF1) signaling retains HSCs in marrow; disrupting it (via CXCR4 blockade, CXCL12 cleavage, or receptor downregulation) mobilizes stem cells into blood, enabling collection by leukapheresis rather than operative marrow harvest.",
+      "Differentiation proceeds along a branching hierarchy (stem cell to multipotent progenitor to lineage-committed precursor to mature cell), with progressive loss of plasticity and, in most lineages, loss of proliferative capacity.",
+      "Maturation of progenitors into mature cells takes roughly 10-14 days in humans, clinically reflected in the lag between cytotoxic chemotherapy and blood count recovery.",
+      "HSCs are heterogeneous: individual stem cells can be biased toward particular lineages and differ in proliferation and death responses, so the population behaves as an aggregate.",
+      "Clonal hematopoiesis: HSCs accumulate roughly 17 somatic mutations per year of life; variant alleles contributing to over 1% of blood cells become nearly universal by age 70, with an inactivating TET2 mutation able to worsen outcomes of some chronic inflammatory conditions.",
+      "Genetically modifying long-lived HSCs underlies curative cell therapies for cerebral adrenoleukodystrophy and the hemoglobinopathies, including a CRISPR gene-edited approach that suppresses BCL11A to reactivate fetal hemoglobin in beta thalassemia and sickle cell anemia."
+    ],
+    "pathophysiology": "Hematopoiesis originates from a small self-renewing HSC pool. During development, blood production shifts sequentially from the yolk sac (embryonic-hemoglobin red cells and tissue-resident macrophages) to the placenta and intraembryonic sites near the aorta-gonad-mesonephros region, then to fetal liver, and in the second trimester to bone marrow and spleen; HSCs reach marrow via bloodborne transit from fetal liver after long-bone calcification, and proliferation falls sharply soon after birth. HSCs reside in a specialized perivascular/endosteal marrow niche where mesenchymal, endothelial, neural, and other cells provide regulatory signals (kit ligand, CXCL12) governing survival, expansion, and constraint. Trafficking depends on selectins binding CD162/CD44, integrin-mediated firm adhesion (VCAM-1/VLA-4), and CXCL12-CXCR4 plus calcium-sensing receptor signaling. Most HSCs are deeply quiescent and cytokine-resistant, dividing on the order of months to years; quiescence is enforced by high cyclin-dependent kinase inhibitors (e.g., p57/CDKN1c blocking the G1-S transition) and niche signals such as angiogenin, IL-18, and angiopoietin 1. Self-renewal preserves any acquired mutation in the durable stem pool, whereas progenitor mutations are largely lost through terminal differentiation; epigenetic regulators (DNMT3a, TET2, ASXL1) are critical for pool homeostasis and for restraining outgrowth of potentially pathogenic clones.",
+    "additionalDifferentials": [],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [],
+    "additionalInvestigations": [
+      "Deep/next-generation sequencing to detect somatic mutations and clonal hematopoiesis (e.g., DNMT3a, TET2, ASXL1 variant allele fractions)",
+      "Surface immunophenotyping of stem/progenitor markers (CD34, CD90/Thy-1, CD117/c-Kit, CD133, CD164, CD110/c-Mpl) as described in murine-based studies"
+    ],
+    "redFlags": [
+      "Complete failure of HSC function (e.g., after a nuclear/radiation accident) predicts survival of only about 2-4 weeks without extraordinary support",
+      "Expansion of clones carrying 'driver' mutations seen in myelodysplasia and myeloid leukemias, with low-frequency progression to overt neoplastic disease",
+      "Acquired self-renewal via oncogenic mutation in stem or more mature populations, providing a substrate for leukemia"
+    ],
+    "prognosis": "In the absence of disease the HSC pool is essentially inexhaustible: serial murine transplants can reconstitute several animals in succession and allogeneic transplant recipients never run out of blood cells over decades, indicating even limiting stem cell numbers suffice. With aging, clonal diversity declines as a small number of expanded clones (estimated 10-20 clones supplying 30-60% of blood cells by age 70) dominate; most such clones are benign, but some carry driver mutations with a low risk of progression to myeloid malignancy.",
+    "pitfalls": [
+      "Regulators of mature/progenitor cells do not predict HSC behavior: erythropoietin and G-CSF drive precursor proliferation but do not directly cycle stem cells (G-CSF instead mobilizes HSCs by altering CXCL12 tethering).",
+      "Deep HSC quiescence and resistance to cytokines make robust in vitro expansion of human HSCs difficult.",
+      "Assuming leukemia must arise only from normal stem cells is an oversimplification, since less self-renewing mature populations can also be transformed and self-renewal can be acquired by mutation.",
+      "The classic differentiation hierarchy diagram is a simplification; lineage-biased and intermediate cell states are increasingly recognized.",
+      "Progenitor (transient amplifying) cells are short-lived and largely lack durable self-renewal, so gene-modifying progenitors rather than true stem cells fails to give lasting benefit."
+    ],
+    "severityClassification": "",
+    "references": [
+      "Harrison 22e p.758",
+      "Harrison 22e p.759",
+      "Harrison 22e p.760",
+      "Harrison 22e p.761",
+      "Harrison 22e p.762"
+    ],
+    "crossLinks": []
+  }
+}
