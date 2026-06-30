@@ -1,13 +1,16 @@
 /* StewardMD service worker — offline + instant repeat loads.
    UPDATE-SAFE BY DESIGN:
-   - Navigations/HTML = NETWORK-FIRST → users always get the latest page when online
-     (so ?v=goldN cache-busting keeps working); cache is only a fallback when offline.
-   - Same-origin static assets (.js/.css/.png/.webp/.woff…) = stale-while-revalidate
-     (instant from cache, refreshed in the background).
-   - Cross-origin (Firebase/gstatic, api.stewardmd.in, fonts) = NOT intercepted → normal
-     network, so auth + API are never affected.
+   - Navigations/HTML = NETWORK-FIRST with cache:"no-store" → users ALWAYS get the
+     latest index.html when online (so ?v=goldN cache-busting actually works and stale
+     browser-HTTP-cached HTML can never pin old asset versions); cache is offline fallback.
+   - Same-origin static assets (.js/.css/.png/.webp/.woff…) = stale-while-revalidate,
+     keyed by the full ?v=goldN URL (a version bump is a fresh key → fresh fetch).
+   - Cross-origin (Firebase/gstatic/accounts.google.com, api.stewardmd.in, fonts) = NOT
+     intercepted → normal network, so auth + API are never affected.
+   - On activate, the new SW RELOADS open tabs so a deploy can't leave a client stuck on
+     stale JS (this is what un-sticks users running an old reasoning.js/app.js).
    IMPORTANT: bump CACHE on every deploy (keep in step with ?v=goldN) so old caches purge. */
-var CACHE = "stewardmd-gold83";
+var CACHE = "stewardmd-gold84";
 
 self.addEventListener("install", function () {
   self.skipWaiting();
@@ -18,6 +21,12 @@ self.addEventListener("activate", function (e) {
     var keys = await caches.keys();
     await Promise.all(keys.map(function (k) { return k === CACHE ? null : caches.delete(k); }));
     await self.clients.claim();
+    // Force open StewardMD tabs to reload so they pick up the new versioned assets.
+    // Runs once per SW version (a reload fetches the SAME sw.js → no new activate → no loop).
+    try {
+      var cls = await self.clients.matchAll({ type: "window" });
+      cls.forEach(function (c) { try { c.navigate(c.url); } catch (err) {} });
+    } catch (err) {}
   })());
 });
 
@@ -38,12 +47,13 @@ self.addEventListener("fetch", function (e) {
   var isHTML = req.mode === "navigate" || (req.headers.get("accept") || "").indexOf("text/html") !== -1;
 
   if (isHTML) {
-    // NETWORK-FIRST: always try the network so updates flow; fall back to cache offline.
+    // NETWORK-FIRST, bypassing the browser HTTP cache so the freshest index.html
+    // (and thus the freshest ?v=goldN asset refs) always wins; cache is offline fallback.
     e.respondWith((async function () {
       try {
-        var net = await fetch(req);
+        var net = await fetch(url.pathname + url.search, { cache: "no-store", credentials: "same-origin" });
         if (net && net.status === 200) {
-          var copy = net.clone();  // clone immediately, before the body is consumed
+          var copy = net.clone();
           caches.open(CACHE).then(function (c) { c.put(req, copy); });
         }
         return net;
@@ -60,7 +70,7 @@ self.addEventListener("fetch", function (e) {
     var cached = await caches.match(req);
     var fetchP = fetch(req).then(function (net) {
       if (net && net.status === 200 && (net.type === "basic" || net.type === "default")) {
-        var copy = net.clone();  // clone NOW (sync), before net is returned/consumed
+        var copy = net.clone();
         caches.open(CACHE).then(function (c) { c.put(req, copy); });
       }
       return net;
