@@ -34,11 +34,11 @@ locals {
   # the gold78 shared-case HTML sanitizer is the compensating control for XSS.
   csp = join("; ", compact([
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com",
+    "script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com https://accounts.google.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
     "font-src 'self' data: https://fonts.gstatic.com",
     "img-src 'self' data: blob: https:",
-    trimspace("connect-src 'self' https://${var.api_domain} ${var.api_fallback_origin} https://*.googleapis.com https://*.firebaseio.com"),
+    trimspace("connect-src 'self' https://${var.api_domain} ${var.api_fallback_origin} https://*.googleapis.com https://*.firebaseio.com https://accounts.google.com"),
     "frame-src 'self' https://*.firebaseapp.com https://accounts.google.com",
     "worker-src 'self' blob:",
     "manifest-src 'self'",
