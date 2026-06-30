@@ -813,6 +813,9 @@
     var syn = window.SYNDROMES || {};
     Object.keys(syn).forEach(function (id) { var r = scoreInfectious(syn[id]); if (r) inf.push(r); });
     DDX_NI.forEach(function (d) { var r = scoreNI(d); if (r) ni.push(r); });
+    // Phase 4: expanded Harrison diseases (flag-gated; both lists EMPTY when off → no change)
+    (typeof _expInf !== "undefined" ? _expInf : []).forEach(function (d) { var r = scoreExpInf(d); if (r) inf.push(r); });
+    (typeof _expNi !== "undefined" ? _expNi : []).forEach(function (d) { var r = scoreNI(d); if (r) ni.push(r); });
     var by = function (a, b) { return b.score - a.score || a.name.localeCompare(b.name); };
     inf.sort(by); ni.sort(by);
     return { inf: inf, ni: ni };
@@ -2945,6 +2948,38 @@
       return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     }
   };
+  /* ====================================================================== *
+   * Phase 4 — EXPANDED Harrison KB: the ~268 reference diseases (window.
+   * KB_EXPANDED, auto-derived signatures) become diagnostic candidates when the
+   * `smd_kb_expanded` flag is ON (default OFF). Off → _expInf/_expNi stay empty
+   * → differential() is byte-identical (golden stays green). On → they score via
+   * the find-map path (same as DDX_NI) and join the 🔴/🟢 columns. Reversible;
+   * recovery tag reasoning-v1-stable. Signatures are AUTO-DERIVED — for review.
+   * ---------------------------------------------------------------------- */
+  var _expInf = [], _expNi = [];
+  function smdKbExpandedOn() { try { return localStorage.getItem("smd_kb_expanded") === "1"; } catch (e) { return false; } }   // default OFF
+  function scoreExpInf(d) { var r = scoreNI(d); if (r) { r.inf = true; if (!r.system) r.system = "Infectious"; } return r; }
+  function smdApplyExpandedKB() {
+    _expInf = []; _expNi = [];
+    if (!smdKbExpandedOn() || !window.KB_EXPANDED || !window.KB_EXPANDED.list) { IDF = null; return; }
+    var have = {};
+    Object.keys(window.SYNDROMES || {}).forEach(function (k) { have[k] = 1; });
+    DDX_NI.forEach(function (d) { have[d.id] = 1; });
+    window.KB_EXPANDED.list.forEach(function (d) {
+      if (have[d.id] || !d.find) return;                       // never shadow a curated diagnosis
+      var ent = { id: d.id, name: d.name, system: d.system, find: d.find, inv: [], red: [], reason: "" };
+      if (d.class === "infective" || d.class === "inf") _expInf.push(ent); else _expNi.push(ent);
+    });
+    IDF = null;                                                // recompute specificity with the wider set
+  }
+  window.SMD_setKbExpanded = function (on) {
+    try { localStorage.setItem("smd_kb_expanded", on ? "1" : "0"); } catch (e) {}
+    try { smdApplyExpandedKB(); } catch (e) {}
+    try { if (root && root.classList.contains("on")) recompute(); } catch (e) {}
+    try { smdRenderLive(); } catch (e) {}
+  };
+  window.SMD_kbExpandedCount = function () { return { on: smdKbExpandedOn(), inf: _expInf.length, ni: _expNi.length, available: (window.KB_EXPANDED && window.KB_EXPANDED.count) || 0 }; };
+
   // build a compact, de-identified engine summary for the explainer
   function aiSummaryFromAssess(a) {
     if (!a) return "";
@@ -3337,7 +3372,7 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} }
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} try { smdApplyExpandedKB(); } catch (e) {} }
   smdMainAppHooks();
   if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
