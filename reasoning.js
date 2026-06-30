@@ -2922,6 +2922,43 @@
   };
 
   /* ====================================================================== *
+   * SMD_AI — Gemini seam (decision-support EXPLAINER + Vision EXTRACTOR).
+   * The engine ALWAYS decides first; AI only explains an already-computed
+   * differential or extracts structured fields from a captured image. OFF by
+   * default (smd_ai flag) and requires a server-side GEMINI_API_KEY (set on the
+   * Cloudflare Pages project). When off / no key / error → callers fall back to
+   * the rule-based output. PHI note: explain sends findings, vision sends an
+   * image, to Google — only when explicitly enabled.
+   * ---------------------------------------------------------------------- */
+  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((h === "localhost" || h === "127.0.0.1") ? "" : "/api/ai"); }
+  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
+  window.SMD_AI = {
+    on: aiOn,
+    setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
+    status: function () { var b = aiBase(); if (!b) return Promise.resolve({ enabled: false }); return fetch(b + "/status").then(function (r) { return r.json(); }).catch(function () { return { enabled: false }; }); },
+    explain: function (summary, question) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ summary: summary, question: question || "" }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    vision: function (imageDataUrl, kind) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    }
+  };
+  // build a compact, de-identified engine summary for the explainer
+  function aiSummaryFromAssess(a) {
+    if (!a) return "";
+    function line(r, i) { return (i + 1) + ". " + r.name + " " + r.confidence + "/100" + (r.supporting && r.supporting.length ? " [+" + r.supporting.slice(0, 4).map(lbl).join(", ") + "]" : "") + (r.contradictory && r.contradictory.length ? " [-" + r.contradictory.slice(0, 3).map(lbl).join(", ") + "]" : ""); }
+    var out = [];
+    if (a.gate && a.gate.label) out.push("Infection assessment: " + a.gate.label);
+    out.push("INFECTIOUS:"); (a.infectious || []).slice(0, 5).forEach(function (r, i) { out.push(line(r, i)); });
+    out.push("NON-INFECTIOUS:"); (a.nonInfectious || []).slice(0, 5).forEach(function (r, i) { out.push(line(r, i)); });
+    var lead = (a.infectious[0] && a.nonInfectious[0]) ? (a.infectious[0].confidence >= a.nonInfectious[0].confidence ? a.infectious[0] : a.nonInfectious[0]) : (a.infectious[0] || a.nonInfectious[0]);
+    if (lead && lead.missing && lead.missing.length) out.push("Lead missing/would-help: " + lead.missing.slice(0, 5).map(lbl).join(", "));
+    return out.join("\n");
+  }
+
+  /* ====================================================================== *
    * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
    * Same engine (SMD_REASON), second view. A panel injected into #inputCard
    * recomputes the 🔴/🟢 differential as findings are ticked (threshold-gated),
@@ -2985,11 +3022,21 @@
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
       '<div class="sl-cols">' + smdLiveCols(a) + "</div>" +
       '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
+      (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:var(--teal,#0e6e63);margin-top:8px">✨ Explain with AI</button><div class="sl-aiout" id="slAiOut" style="font:500 12.5px/1.6 var(--sans,sans-serif);color:var(--ink,#14202b);margin-top:6px;white-space:pre-wrap"></div>' : "") +
       "</div>";
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
     panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
     panel.querySelectorAll(".sl-sug").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); var k = b.getAttribute("data-sug"), cb = document.getElementById("f-" + k); if (cb) { cb.checked = true; cb.dispatchEvent(new Event("change", { bubbles: true })); } else if (window.SMD_setFindings) { var o = {}; o[k] = true; window.SMD_setFindings(o); smdRenderLive(); } }); });
-    var ows = panel.querySelector(".sl-openws"); if (ows) ows.addEventListener("click", function (e) { e.preventDefault(); try { if (window.DX && DX.open) DX.open(); } catch (x) {} });
+    var ows = panel.querySelector('[data-openws="1"]'); if (ows) ows.addEventListener("click", function (e) { e.preventDefault(); try { if (window.DX && DX.open) DX.open(); } catch (x) {} });
+    var aib = panel.querySelector('[data-aiexplain="1"]');
+    if (aib) aib.addEventListener("click", function (e) {
+      e.preventDefault(); var out = panel.querySelector("#slAiOut"); if (out) out.textContent = "✨ Thinking…";
+      var fin = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
+      var aa = window.SMD_REASON.assess(fin);
+      window.SMD_AI.explain(aiSummaryFromAssess(aa)).then(function (r) {
+        if (out) out.textContent = (r && r.text) ? r.text : (r && r.error === "ai-off") ? "AI is off — enable it in Settings (SMD_AI.setFlag(true))." : "AI unavailable — the rule-based differential above stands. (" + ((r && r.error) || "no response") + ")";
+      });
+    });
     // snapshot for next-render deltas
     _liveStarted = true; _livePrev = {}; _livePrevKeys = {};
     a.infectious.concat(a.nonInfectious).forEach(function (r) { _livePrev[r.id] = r.confidence; });
