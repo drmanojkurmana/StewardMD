@@ -1105,11 +1105,28 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script>
 (function () {
   function ghisOn() { try { var v = localStorage.getItem("smd_ghis_ward"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
-  function loadGhis() { if (document.getElementById("ghis-ward-script")) return; var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold97"; document.body.appendChild(s); }
+  // Ward entry mounts ONLY in the sidebar (the floating FAB is hidden).
+  function ghisHideFab() { if (document.getElementById("ghis-nofab")) return; var st = document.createElement("style"); st.id = "ghis-nofab"; st.textContent = ".ghis-ward-fab{display:none!important}"; document.head.appendChild(st); }
+  function ghisSidebarItem() {
+    var menu = document.getElementById("sbMenu"); if (!menu || !ghisOn()) return;
+    if (menu.querySelector("[data-ghis-menu]")) return;          // already injected this open
+    var b = document.createElement("button");
+    b.setAttribute("data-ghis-menu", "1");
+    b.style.cssText = "display:block;width:100%;text-align:left;background:none;border:1px solid var(--line,#d7dee3);border-radius:10px;padding:11px 13px;margin:8px 0 0;font:600 14px/1.2 var(--sans,system-ui);color:var(--ink,#14202b);cursor:pointer";
+    b.innerHTML = "🏥 Ward Sync";
+    b.onclick = function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 80); };
+    menu.appendChild(b);
+  }
+  // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
+  function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
+  function loadGhis() {
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold100"; document.body.appendChild(s); }
+    ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
+    [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
+  }
   function killGhis() {
     ["ghisBtn", "ghisPanel"].forEach(function (id) { var e = document.getElementById(id); if (e) e.remove(); });
-    var st = document.querySelector("style[data-ghis]"); if (st) st.remove();
-    var sc = document.getElementById("ghis-ward-script"); if (sc) sc.remove();
+    ["style[data-ghis]", "#ghis-nofab", "[data-ghis-menu]", "#ghis-ward-script"].forEach(function (sel) { var e = document.querySelector(sel); if (e) e.remove(); });
     try { window.__ghisWardLoaded = false; } catch (e) {}
   }
   // reversible toggle — flip the flag and add/remove the whole feature live (no redeploy)

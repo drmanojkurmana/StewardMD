@@ -59,9 +59,10 @@ try {
   await call("Page.navigate", { url: BASE + "?cb=" + Date.now() });
 
   let ready = false;
-  for (let i = 0; i < 40; i++) { await sleep(400); if (await ev(`return !!document.getElementById('ghisBtn') && !!document.getElementById('ghisPanel');`) === true) { ready = true; break; } }
-  ok(ready, "flag ON → 🏥 Ward button (#ghisBtn) + #ghisPanel inject on load");
-  ok(await ev(`return (document.getElementById('ghisBtn')||{}).textContent && document.getElementById('ghisBtn').textContent.indexOf('Ward')>=0;`) === true, "Ward button shows the 🏥 Ward label");
+  for (let i = 0; i < 40; i++) { await sleep(400); if (await ev(`return !!document.getElementById('ghisPanel');`) === true) { ready = true; break; } }
+  ok(ready, "flag ON → #ghisPanel injects on load");
+  ok(await ev(`return !!document.getElementById('ghis-nofab');`) === true, "floating FAB suppressed (sidebar-only mount)");
+  ok(await ev(`var b=document.getElementById('ghisBtn'); return !b || getComputedStyle(b).display==='none';`) === true, "floating 🏥 Ward FAB is hidden");
   ok(await ev(`return typeof window.openGHIS==='function' && !!window.GHIS;`) === true, "window.GHIS / window.openGHIS globals defined");
   ok(await ev(`return typeof window.SMD_setGhis==='function';`) === true, "SMD_setGhis toggle exposed");
   ok(await ev(`return !!document.querySelector('style[data-ghis]');`) === true, "GHIS stylesheet injected");
