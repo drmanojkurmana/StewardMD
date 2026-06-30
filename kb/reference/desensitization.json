@@ -1,0 +1,89 @@
+{
+  "id": "desensitization",
+  "name": "Desensitization",
+  "system": "Immunologic/Allergy",
+  "class": "non_infective",
+  "chapter": 365,
+  "page": 2814,
+  "aliases": [
+    "Drug desensitization",
+    "Rapid drug desensitization",
+    "Temporary drug tolerance induction"
+  ],
+  "referenceOnly": true,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "harrison": {
+    "pages": "Harrison 22e p.2814",
+    "clinicalPearls": [
+      "Drug desensitization (DD) is a temporary immunotherapy that delivers sequential, incremental small doses of a culprit drug over hours to safely reach the full therapeutic dose, taking advantage of mast cell/basophil inhibitory pathways rather than producing lasting tolerance.",
+      "Tolerance achieved by DD is transient: it does not produce sustained tolerance and must be repeated for each new course, or when the interval between doses equals two or more drug half-lives; continued exposure (e.g., ongoing antibiotics or aspirin/COX-1 inhibitors) can maintain the desensitized state.",
+      "Roughly 10-20% of the health-care-engaged population claims a penicillin allergy, but most labels are unconfirmed; low-risk patients can be delabeled, and single-dose oral challenges have been shown safe in low-risk children and adults.",
+      "Serum tryptase is the specific biomarker of anaphylaxis: a level above the normal range (11.4 ng/mL) or above a patient's baseline (a 1.6-fold rise), measured within 30 min to 4 h of symptom onset, supports type I or mixed reactions.",
+      "A baseline tryptase of 7.5 ng/mL or higher may signal hereditary alpha tryptasemia (HαT) from TPSAB1 gene duplication on chromosome 16, an autosomal dominant trait in 4-6% of Caucasians that can worsen anaphylaxis severity.",
+      "Cytokine release reactions (CRRs) present with fever, chills, and back/chest/pelvic pain and headache with a transient IL-6 rise; mixed reactions combine type I and CRR features with both tryptase and IL-6 elevations.",
+      "The most widely used standardized protocol uses three bags (1/100, 1/10, and undiluted target concentration) with 12 doubling steps every 15 min, reaching target dose in about 5.7 h, adaptable to IV, oral, SC, IM, intraperitoneal, intraocular, and intrathecal routes.",
+      "Breakthrough reactions occur in roughly 10-30% of protocols, are usually mild and resemble the initial reaction, and do not prevent completion of DD in about 99% of cases; no deaths from DD have been reported.",
+      "Corticosteroids do NOT protect against anaphylaxis during desensitization; omalizumab (anti-IgE) has been used as an adjuvant in highly sensitized patients with severe IgE-mediated reactions.",
+      "Skin testing reliability falls with greater time since the index reaction and after severe anaphylaxis (mediator depletion can cause false negatives); anaphylaxis to penicillin or carboplatin has not been reported in skin-test-negative patients.",
+      "Platinum-drug IgE sensitization usually requires six or more exposures (fewer in BRCA-mutation carriers); skin testing is positive in over 85% of patients with recent reactions, and reexposure of skin-test-positive patients carries high anaphylaxis risk."
+    ],
+    "pathophysiology": "Drug hypersensitivity reactions are classified by timing, mechanism (endotype), and biomarkers. Type I reactions arise from mast cell and basophil activation, either IgE-dependent (requiring prior repeated sensitizing exposures, as with antibiotics, chemotherapy, and some biologics) or IgE-independent (first-exposure reactions via complement activation, COX-1 inhibition, or MRGPRX2 receptor activation by quinolones, vancomycin, icatibant, basic compounds, and certain THIQ-motif general anesthetics). Cytokine release reactions reflect T-cell and other immune-cell activation with transient IL-6 elevation. Delayed type IV reactions are T-cell mediated. Desensitization works because rapid, stepwise delivery of incremental antigen doses recruits inhibitory phosphatases to the IgE receptor, blocking signal transduction and mediator release so that the target dose can be reached without anaphylaxis; desensitized patients show transient conversion of skin tests from positive to negative. Mechanisms for non-IgE phenotypes are less well understood.",
+    "additionalDifferentials": [
+      "Type I IgE-mediated drug allergy",
+      "IgE-independent mast cell activation (complement-mediated, COX-1 inhibition, MRGPRX2-mediated)",
+      "Cytokine release reaction (IL-6 driven)",
+      "Mixed reaction (combined type I and CRR features)",
+      "Delayed type IV maculopapular eruption",
+      "Hereditary alpha tryptasemia",
+      "Infusion reaction (non-allergic)"
+    ],
+    "infectionMimics": [],
+    "nonInfectiousMimics": [
+      "Non-allergic infusion reaction",
+      "Anxiety/vasovagal episode during infusion",
+      "Kounis syndrome (allergic coronary vasospasm)",
+      "Takotsubo cardiomyopathy from drug-induced anaphylaxis"
+    ],
+    "additionalInvestigations": [
+      "Serum tryptase within 30 min to 4 h of reaction (and baseline tryptase)",
+      "Baseline tryptase with TPSAB1 genotyping if elevated (hereditary alpha tryptasemia)",
+      "Serum IL-6 (elevated in CRR and mixed reactions)",
+      "Skin testing (epicutaneous/intradermal) for IgE-mediated reactions",
+      "Basophil activation test (in vitro evidence of IgE sensitization)",
+      "Drug-specific serum IgE (e.g., penicillin, platins; low sensitivity)",
+      "Skin patch testing for delayed type IV reactions (high specificity, low sensitivity)",
+      "Lymphocyte transformation test for SCARS-causing drugs",
+      "HLA genotyping for SCARS risk (abacavir, anticonvulsants, allopurinol, vancomycin)"
+    ],
+    "redFlags": [
+      "Severe cutaneous adverse reactions (SJS, TEN, DRESS, AGEP) - contraindication to desensitization, avoid the drug",
+      "Type II cytotoxic, type III immune-complex, vasculitis, and single-organ toxic reactions - contraindications to DD",
+      "Hypotension with cardiovascular collapse, throat tightening, oxygen desaturation (grade 3 anaphylaxis)",
+      "Kounis syndrome or takotsubo cardiomyopathy from drug-induced anaphylaxis - contraindications to DD",
+      "Oxaliplatin-induced immune-mediated thrombocytopenia with bleeding - precludes further DD",
+      "Markedly elevated tryptase well above baseline indicating severe mast cell activation"
+    ],
+    "prognosis": "Rapid multistep desensitization is highly effective and safe across thousands of patients with infections, chronic inflammatory diseases, and malignancies. Protocols are completed in roughly 95-100% of cases (taxane series completed 95-100%), breakthrough reactions occur in about 10-30% and are usually mild, and no deaths attributable to DD have been reported. Drug delivery via DD achieves efficacy equal to standard administration (expected clearance of infection, reduced inflammation, comparable cancer responses); survival of platinum-desensitized cancer patients is noninferior to that of nonallergic patients, and ovarian cancer patients undergoing carboplatin DD have shown a 5-year life-expectancy advantage in one large series.",
+    "pitfalls": [
+      "Assuming corticosteroid premedication prevents anaphylaxis during DD - it does not.",
+      "Treating SCARS or other contraindicated phenotypes with DD, where even minute drug amounts can trigger severe reactions.",
+      "Expecting durable tolerance - DD is temporary and must be repeated each course or after a gap of two or more half-lives.",
+      "Relying on a negative skin test performed long after the index reaction or after severe anaphylaxis (false negatives from mediator depletion or time elapsed).",
+      "Maintaining unconfirmed penicillin allergy labels, leading to use of less effective, costlier second-line antibiotics.",
+      "Overusing one-bag protocols in highly sensitized type I patients, associated with more epinephrine use and failure to complete treatment.",
+      "Missing phenotype switching in oxaliplatin DD (type I converting to CRR/mixed reactions)."
+    ],
+    "severityClassification": "Hypersensitivity reactions are graded by organ involvement and vital signs: grade 1 (mild, one organ), grade 2 (moderate, two or more organs), grade 3 (severe, with changes in vital signs/cardiovascular collapse). Reactions are also categorized by timing as acute/immediate (during or within 1-6 h of exposure) versus delayed (6 h to days or weeks), and by endotype (type I IgE/non-IgE, cytokine release, mixed, and type II-IV delayed reactions).",
+    "references": [
+      "Harrison 22e p.2814",
+      "Harrison 22e p.2815",
+      "Harrison 22e p.2816",
+      "Harrison 22e p.2817",
+      "Harrison 22e p.2818",
+      "Harrison 22e p.2819"
+    ],
+    "crossLinks": []
+  }
+}

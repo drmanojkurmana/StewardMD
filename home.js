@@ -738,7 +738,7 @@
       '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v6 · Medical Knowledge Base (current)</span></div><ul>' +
         '<li><b>v6.0</b> — Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB — regression-locked and byte-identical to the trusted engine.</li>' +
         '<li><b>v6.1</b> — Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls — paraphrased and page-cited.</li>' +
-        '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>430 searchable diseases</b> (140 diagnostic + 290 reference), each with a page-cited Harrison reference panel.</li>' +
+        '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
         '<li><b>v6.3</b> — Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
         '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and Gemini-ready (decision-first, explanation second).</li>' +
       '</ul></div>' +
@@ -748,9 +748,9 @@
   function aboutFactsHTML() {
     return '<span class="smd-ab-badge">By the numbers</span>' +
       '<ul class="smd-facts">' +
-      '<li><span class="fn">430</span> searchable diseases — 140 with full diagnostic reasoning + 290 Harrison reference conditions.</li>' +
+      '<li><span class="fn">444</span> searchable entries — 140 with full diagnostic reasoning + 304 Harrison reference conditions &amp; clinical chapters.</li>' +
       '<li><span class="fn">51</span> infective syndromes, each with a full empiric-therapy stewardship rationale.</li>' +
-      '<li><span class="fn">20,905</span> page-cited Harrison 22e knowledge chunks — RAG-ready, no AI required.</li>' +
+      '<li><span class="fn">21,487</span> page-cited Harrison 22e knowledge chunks — RAG-ready, no AI required.</li>' +
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">74</span> bedside clinical calculators.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
