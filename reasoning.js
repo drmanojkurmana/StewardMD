@@ -2928,14 +2928,25 @@
    * and "Select this diagnosis" opens the EXISTING stewardship page (reuse, no
    * duplication). No app.js edit; gated by smd_reason_v2 (instant revert).
    * ---------------------------------------------------------------------- */
-  var _liveExp = {};
+  var _liveExp = {}, _livePrev = {}, _livePrevKeys = {}, _liveLastKey = null, _liveStarted = false;
   function smdLiveCard(c, inf, rank) {
     var cls = inf ? "inf" : "ni", open = _liveExp[c.id];
     function fl(arr, sign) { return (arr && arr.length) ? arr.map(function (k) { return '<span class="sl-f">' + (sign || "") + esc(lbl(k)) + "</span>"; }).join("") : '<span class="sl-none">—</span>'; }
-    var head = '<button class="sl-head" data-exp="' + esc(c.id) + '"><span class="sl-rank ' + cls + '">' + rank + '</span><span class="sl-nm">' + esc(c.name) + (c.matched ? ' <span class="sl-met">criteria met</span>' : "") + '</span><span class="sl-bar ' + cls + '"><i style="width:' + c.confidence + '%"></i></span><span class="sl-sc">' + c.confidence + "</span></button>";
+    var prev = _livePrev[c.id], dlt = "";
+    if (prev != null && prev !== c.confidence) dlt = c.confidence > prev ? ' <span class="sl-up">▲</span>' : ' <span class="sl-down">▼</span>';
+    else if (prev == null && _liveStarted) dlt = ' <span class="sl-new">NEW</span>';
+    var head = '<button class="sl-head" data-exp="' + esc(c.id) + '"><span class="sl-rank ' + cls + '">' + rank + '</span><span class="sl-nm">' + esc(c.name) + dlt + (c.matched ? ' <span class="sl-met">criteria met</span>' : "") + '</span><span class="sl-bar ' + cls + '"><i style="width:' + c.confidence + '%"></i></span><span class="sl-sc">' + c.confidence + "</span></button>";
     if (!open) return '<div class="sl-card ' + cls + '">' + head + "</div>";
     var mm = c.mimics || [];
-    var det = '<div class="sl-det">' +
+    var confLine = "";
+    if (prev != null && prev !== c.confidence) {
+      var eff = "";
+      if (_liveLastKey && c.supporting && c.supporting.indexOf(_liveLastKey) >= 0) eff = ' · <span class="sl-up">' + esc(lbl(_liveLastKey)) + ' supports this</span>';
+      else if (_liveLastKey && c.contradictory && c.contradictory.indexOf(_liveLastKey) >= 0) eff = ' · <span class="sl-down">' + esc(lbl(_liveLastKey)) + ' argues against this</span>';
+      else if (_liveLastKey) eff = ' · after adding ' + esc(lbl(_liveLastKey));
+      confLine = '<div class="sl-conf">Confidence ' + prev + ' → ' + c.confidence + eff + "</div>";
+    }
+    var det = '<div class="sl-det">' + confLine +
       '<div class="sl-r"><b>Supporting</b><div>' + fl(c.supporting, "✓ ") + "</div></div>" +
       (c.contradictory && c.contradictory.length ? '<div class="sl-r"><b>Contradictory</b><div>' + fl(c.contradictory, "✕ ") + "</div></div>" : "") +
       '<div class="sl-r"><b>Missing / would help</b><div>' + fl(c.missing, "? ") + "</div></div>" +
@@ -2958,16 +2969,31 @@
     var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
     var keys = Object.keys(findings).filter(function (k) { return findings[k] && VALID[k]; });
     if (!keys.length) { panel.innerHTML = ""; return; }
+    // track what was just added (for confidence deltas / "after adding X")
+    _liveLastKey = null;
+    for (var nk = 0; nk < keys.length; nk++) { if (!_livePrevKeys[keys[nk]]) { _liveLastKey = keys[nk]; break; } }
     if (!window.SMD_REASON.thresholdMet(findings)) {
       panel.innerHTML = '<div class="sl-wrap"><div class="sl-th">🧩 Please add more clinical findings to improve diagnostic accuracy.<span>Add at least 3 findings (or one highly specific finding) for a reliable live differential.</span></div></div>';
-      return;
+      _livePrev = {}; _livePrevKeys = {}; keys.forEach(function (k) { _livePrevKeys[k] = true; }); return;
     }
     var a = window.SMD_REASON.assess(findings), gi = a.gate || {};
+    var dom = (a.dominantSystem || []).map(function (t) { return (typeof TAG_LABEL !== "undefined" && TAG_LABEL[t]) || t; }).filter(Boolean);
+    var sug = (a.suggestions || []).filter(function (k) { return LABEL[k]; }).slice(0, 6);
     panel.innerHTML = '<div class="sl-wrap"><div class="sl-h">🧠 Live differential <span class="sl-hint">updates as you add findings</span></div>' +
       (gi.label ? '<div class="sl-gate ' + (gi.ab ? "ab" : "") + '">' + esc(gi.label) + "</div>" : "") +
-      '<div class="sl-cols">' + smdLiveCols(a) + "</div></div>";
+      (dom.length ? '<div class="sl-dom">🧭 Dominant system: <b>' + dom.map(esc).join(" · ") + "</b></div>" : "") +
+      (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
+      '<div class="sl-cols">' + smdLiveCols(a) + "</div>" +
+      '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
+      "</div>";
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
     panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
+    panel.querySelectorAll(".sl-sug").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); var k = b.getAttribute("data-sug"), cb = document.getElementById("f-" + k); if (cb) { cb.checked = true; cb.dispatchEvent(new Event("change", { bubbles: true })); } else if (window.SMD_setFindings) { var o = {}; o[k] = true; window.SMD_setFindings(o); smdRenderLive(); } }); });
+    var ows = panel.querySelector(".sl-openws"); if (ows) ows.addEventListener("click", function (e) { e.preventDefault(); try { if (window.DX && DX.open) DX.open(); } catch (x) {} });
+    // snapshot for next-render deltas
+    _liveStarted = true; _livePrev = {}; _livePrevKeys = {};
+    a.infectious.concat(a.nonInfectious).forEach(function (r) { _livePrev[r.id] = r.confidence; });
+    keys.forEach(function (k) { _livePrevKeys[k] = true; });
   }
   function smdLiveSelect(id) {
     var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
@@ -2988,7 +3014,7 @@
     }
     if (!_liveWired) {
       _liveWired = true;
-      function bump(ms) { clearTimeout(_liveDeb); _liveDeb = setTimeout(function () { try { smdRenderLive(); } catch (e) {} }, ms); }
+      function bump(ms) { clearTimeout(_liveDeb); _liveDeb = setTimeout(function () { try { if (reasonV2() && document.getElementById("inputCard") && !document.getElementById("smdLiveDx")) smdEnsureLivePanel(); smdRenderLive(); } catch (e) {} }, ms); }
       document.addEventListener("change", function () { bump(80); }, true);
       document.addEventListener("input", function () { bump(220); }, true);
     }
@@ -3014,6 +3040,12 @@
       '.sl-f{display:inline-block;font:600 11px var(--sans);background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:6px;padding:1px 7px;margin:2px 4px 0 0}.sl-none{color:var(--slate-soft,#5a7184)}' +
       '.sl-select{width:100%;margin-top:10px;border:none;border-radius:9px;padding:10px;font:800 13px var(--sans);cursor:pointer;color:#fff}.sl-select.inf{background:var(--red,#ab1c2c)}.sl-select.ni{background:var(--green,#1c7a4a)}' +
       '.sl-empty{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);padding:4px 2px}' +
+      '.sl-up{color:var(--green,#1c7a4a);font-weight:800}.sl-down{color:var(--red,#ab1c2c);font-weight:800}.sl-new{font:800 9px var(--sans);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:5px;padding:1px 5px}' +
+      '.sl-conf{font:600 11.5px var(--sans);color:var(--slate-soft,#5a7184);margin:2px 0 6px}' +
+      '.sl-dom{font:600 12px var(--sans);color:var(--slate,#2d4356);margin:8px 0 2px}.sl-dom b{color:var(--ink,#14202b)}' +
+      '.sl-sugwrap{margin:9px 0 2px}.sl-suglbl{font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184);margin-bottom:5px}.sl-sugrow{display:flex;flex-wrap:wrap;gap:6px}' +
+      '.sl-sug{font:700 12px var(--sans);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border:none;border-radius:999px;padding:5px 11px;cursor:pointer}.sl-sug:hover{filter:brightness(.97)}' +
+      '.sl-openws{width:100%;margin-top:10px;background:none;border:1px dashed var(--line,#d7dee3);border-radius:9px;padding:9px;font:700 12.5px var(--sans);color:var(--teal,#0e6e63);cursor:pointer}.sl-openws:hover{background:var(--teal-soft,#e3f1ee)}' +
       'body.dark .sl-wrap,body.dark .sl-card{background:var(--panel,#132030)}body.dark .sl-card{background:var(--paper,#0d1b26)}';
     var st = document.createElement("style"); st.id = "smd-livedx-css"; st.textContent = css; document.head.appendChild(st);
   }
