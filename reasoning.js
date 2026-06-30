@@ -313,6 +313,11 @@
       find:{ thrombocytopenia:30, alteredSensorium:16, fever:10, focalNeuroDeficit:8, hematuria:6 },
       inv:["Blood film (schistocytes)","LDH, haptoglobin, bilirubin","ADAMTS13"], red:["Haematological emergency — urgent plasma exchange"],
       reason:"Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively." },
+    { id:"HLH", name:"Hemophagocytic Lymphohistiocytosis (HLH)", system:"Hematology / Immunology",
+      find:{ fever:30, cytopenia:24, hepatosplenomegaly:20, splenomegaly:14, lymphadenopathy:10, organDysfunction:10, weightLoss:8, jaundice:8, nightSweats:8, mucocutaneousBleeding:8, rigors:6 },
+      inv:["Ferritin (often >10,000 µg/L in adults)","Triglycerides and fibrinogen","FBC + film (≥2-lineage cytopenias)","Soluble CD25 / NK-cell activity","Bone marrow for hemophagocytosis","Trigger work-up: EBV/CMV PCR, evaluate for lymphoma / autoimmune disease"],
+      red:["Persistent fever unresponsive to antibiotics with very high ferritin and falling fibrinogen → escalate; consider HLH/MAS urgently"],
+      reason:"Persistent fever with cytopenias, hepatosplenomegaly and a markedly elevated ferritin that does not respond to antibiotics suggests hemophagocytic lymphohistiocytosis (HLH/MAS) rather than ongoing sepsis." },
 
     /* ---- Neurology / neuromuscular ---- */
     { id:"gbs", name:"Guillain-Barré syndrome", system:"Neurology",
