@@ -3372,7 +3372,50 @@
   // app.js (classic script) runs before this; augment the main form's finding
   // inputs and install the engine expansion now, retrying on DOM ready in case a
   // global is populated slightly later.
-  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} try { smdApplyExpandedKB(); } catch (e) {} }
+  /* ---- Sidebar "🧪 Experimental features" toggles — one place to flip every
+   * flag I ship (reasoning v2, expanded KB, AI, GHIS) from the UI instead of the
+   * console. Injected into #sbMenu on each SB.open (the menu is rebuilt). Calls
+   * the existing public setters; purely a control surface (no behaviour of its own).
+   * ---------------------------------------------------------------------- */
+  function smdLabsState() {
+    function g(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
+    return { reason: g("smd_reason_v2", true), expanded: g("smd_kb_expanded", false), ai: g("smd_ai", false), ghis: g("smd_ghis_ward", true) };
+  }
+  function smdSettingsInject() {
+    var menu = document.getElementById("sbMenu"); if (!menu) return;
+    if (menu.querySelector("[data-smd-labs]")) return;
+    var st = smdLabsState();
+    var rows = [
+      ["reason", "🧠 Reasoning v2", "Live differential + progressive findings in the workflow"],
+      ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived — review)"],
+      ["ai", "✨ AI assist (Gemini)", "Explain differential + ICU Vision (needs server key)"],
+      ["ghis", "🏥 GHIS Ward Sync", "Live inpatient labs + radiology"]
+    ];
+    var w = document.createElement("div"); w.setAttribute("data-smd-labs", "1");
+    w.style.cssText = "margin:14px 0 4px;padding-top:12px;border-top:1px solid var(--line,#d7dee3)";
+    w.innerHTML = '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin:0 0 8px">🧪 Experimental features</div>' +
+      rows.map(function (r) {
+        var on = st[r[0]];
+        return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0"><div style="flex:1;min-width:0"><div style="font:700 13.5px var(--sans,system-ui);color:var(--ink,#14202b)">' + r[1] + '</div><div style="font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px">' + r[2] + '</div></div>' +
+          '<button data-labs="' + r[0] + '" role="switch" aria-checked="' + on + '" aria-label="' + r[1] + '" style="flex:0 0 auto;position:relative;width:42px;height:24px;border:none;border-radius:999px;cursor:pointer;background:' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';transition:background .15s"><span style="position:absolute;top:3px;left:' + (on ? "21px" : "3px") + ';width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s"></span></button></div>';
+      }).join("");
+    menu.appendChild(w);
+    w.querySelectorAll("[data-labs]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var k = b.getAttribute("data-labs"), nv = !smdLabsState()[k];
+        try {
+          if (k === "reason" && window.SMD_REASON) SMD_REASON.setFlag(nv);
+          else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
+          else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
+          else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+        } catch (e) {}
+        w.remove(); smdSettingsInject();
+      });
+    });
+  }
+  function smdWrapSBSettings() { try { if (window.SB && typeof SB.open === "function" && !SB.__smdLabsWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(smdSettingsInject, 60); return r; }; SB.__smdLabsWrapped = true; } } catch (e) {} }
+
+  function smdMainAppHooks() { try { augmentFindingInputs(); } catch (e) {} try { installMainEngineExpansion(); } catch (e) {} try { smdWireKBSurfaces(); } catch (e) {} try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} try { smdApplyExpandedKB(); } catch (e) {} try { smdWrapSBSettings(); smdSettingsInject(); } catch (e) {} }
   smdMainAppHooks();
   if (!window.__smdEngineExpanded || window.__smdFindingsAugmented == null) {
     if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdMainAppHooks);
@@ -3382,7 +3425,7 @@
   // and sometimes later — re-attempt the (idempotent) KB wiring a few times.
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", smdWireKBSurfaces);
   [250, 800, 2000].forEach(function (ms) { setTimeout(smdWireKBSurfaces, ms); });
-  [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} }, ms); });
+  [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { try { smdEnsureLivePanel(); } catch (e) {} try { smdEnsureProgressive(); } catch (e) {} try { smdWrapSBSettings(); } catch (e) {} }, ms); });
 
   /* ====================================================================== *
    * gold88 — UI polish, all in one global place (no minified app.js edits):
