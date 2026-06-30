@@ -1233,14 +1233,20 @@
    * meaning/wording is never changed — only visually emphasised. Citations kept. */
   var MED_RULES = [
     { cls: "md-cite", re: "Harrison(?:[’']s)?\\s*22e(?:\\s*pp?\\.?\\s*[\\dIVXLC]+(?:[\\u2013\\-,]\\s*\\d+)*)?" },
+    // high-yield ENUMERATION phrase — "classic triad of fever, headache and nuchal
+    // rigidity" etc. captured as one purple span (lazy, verb/punctuation-bounded;
+    // fails safe to no-match if no boundary within range, never runs away).
+    { cls: "md-hi", re: "(?:classic(?:al)?\\s+|the\\s+)?(?:clinical\\s+)?(?:triad|tetrad|pentad)\\s+of\\s+[a-z][^.;:&()]{2,70}?(?=\\s+(?:is|are|was|were|can|may|occurs?|suggests?|implies|indicates?|usually|typically|often|seen|present|presents?|consists?|comprises?|includes?|with|that|which|but|while|and is|and are)\\b|[.;:&()]|$)" },
     { cls: "md-resist", re: "\\b(?:MRSA|VRE|VRSA|ESBL|CRE|CRAB|MDRO|MDR|XDR|carbapenem[\\u2013\\- ]resistant|methicillin[\\u2013\\- ]resistant|vancomycin[\\u2013\\- ]resistant|multidrug[\\u2013\\- ]resistant|extensively drug[\\u2013\\- ]resistant)\\b" },
     { cls: "md-bug", re: "\\b(?:Staphylococcus aureus|Streptococcus pneumoniae|Streptococcus pyogenes|Klebsiella pneumoniae|Pseudomonas aeruginosa|Escherichia coli|Neisseria meningitidis|Mycobacterium tuberculosis|Clostridioides difficile|Clostridium difficile|Candida albicans|coagulase[\\u2013\\- ]negative staphylococci|S\\.\\s?aureus|E\\.\\s?coli|C\\.\\s?difficile|Staphylococcus|Streptococcus|Pseudomonas|Enterococcus|Acinetobacter|Klebsiella|Candida|Pneumococcus|Enterobacterales|Enterobacteriaceae)\\b" },
     { cls: "md-emerg", re: "\\b(?:septic shock|toxic shock|sepsis|necrotizing fasciitis|endocarditis|meningitis|encephalitis|anaphylaxis|status epilepticus|cardiac arrest|respiratory failure)\\b" },
     { cls: "md-ix", re: "\\b(?:(?:CSF|blood|urine|sputum|stool|serum|synovial fluid|pleural fluid|ascitic fluid|pericardial fluid)\\s+(?:opening pressure|cell count(?: and differential)?|Gram stain|cultures?|multiplex PCR|PCR|analysis|glucose|protein|lactate|antigen(?: test)?|cytology|microscopy|smear)|transoesophageal echocardiography|transesophageal echocardiography|echocardiography|echocardiogram|lumbar puncture|chest X[\\u2013\\-]?ray|Gram stain|blood cultures?|TEE|TTE|MRI|PET[\\u2013\\-]CT|PET|CXR|ECG|EEG|ABG|CSF|cholinesterase)\\b" },
     { cls: "md-drug", re: "\\b(?:piperacillin[\\u2013\\-/ ]?tazobactam|pip[\\u2013\\-/ ]?tazo|amoxicillin[\\u2013\\-/ ]?clavulanate|vancomycin|meropenem|imipenem|ertapenem|linezolid|daptomycin|cefazolin|ceftriaxone|cefepime|ceftazidime|cefotaxime|ceftaroline|ciprofloxacin|levofloxacin|azithromycin|doxycycline|metronidazole|ampicillin|amoxicillin|gentamicin|amikacin|rifampicin|rifampin|isoniazid|pyrazinamide|ethambutol|atropine|pralidoxime|naloxone|fluconazole|amphotericin|acyclovir|oseltamivir|colistin|tigecycline|clindamycin)\\b" },
     { cls: "md-action", re: "\\b(?:source control|device removal|removal of the device|remove the device|repeat blood cultures|repeat cultures|surgical debridement|urgent surgery|debridement|IV antibiotics|intravenous antibiotics|empi?ric antibiotics)\\b" },
+    // high-yield SIGNAL markers + named signs/scores/criteria (the points worth noticing)
+    { cls: "md-sig", re: "\\b(?:classic(?:al)?\\s+(?:triad|tetrad|pentad|presentation|features?)|pathognomonic|hallmark|gold standard|drug of choice|treatment of choice|first[\\u2013\\- ]line|second[\\u2013\\- ]line|mainstay|diagnostic of|diagnostic criteria|definitive diagnosis|Kernig(?:[’']s)?|Brudzinski(?:[’']s)?|Murphy(?:[’']s)? sign|Charcot(?:[’']s)?(?: triad)?|Reynolds pentad|Beck(?:[’']s)? triad|Whipple(?:[’']s)? triad|Cushing(?:[’']s)?(?: reflex| triad)?|Janeway lesions|Osler(?:[’']s)? nodes|Roth spots|Duke criteria|CURB[\\u2013\\-]?65|qSOFA|Wells score|Centor(?: criteria| score)?|Light(?:[’']s)? criteria|Ranson(?:[’']s)?(?: criteria)?|MELD(?:[\\u2013\\-]Na)?|Child[\\u2013\\- ]Pugh|Glasgow Coma Scale|GCS)\\b" },
     // high-yield clinical CONCEPTS — bold the important medical points in context
-    { cls: "md-key", re: "\\b(?:purulent|suppurative|pyogenic|abscess|empyema|vegetations?|biofilm|bacterae?mia|fungae?mia|virae?mia|septic emboli|immunocompromised|immunosuppressed|neutropeni[ac]|subarachnoid space|blood[\\u2013\\- ]brain barrier|inflammatory reaction|foreign body|indwelling|prosthetic|necrosis|necrotic|ischae?mi[ac]|infarction|thrombosis|perforation|hydrocephalus|vasculitis|demyelination|granulomatous|granuloma|malignancy|metasta(?:sis|tic)|raised intracranial pressure|intracranial pressure|herniation|pleocytosis|coloni[sz](?:e|ed|ation)|opsoni[sz]ation|phagocytosis)\\b" },
+    { cls: "md-key", re: "\\b(?:purulent|suppurative|pyogenic|abscess|empyema|vegetations?|biofilm|bacterae?mia|fungae?mia|virae?mia|septic emboli|immunocompromised|immunosuppressed|neutropeni[ac]|nuchal rigidity|meningismus|neck stiffness|subarachnoid space|blood[\\u2013\\- ]brain barrier|inflammatory reaction|foreign body|indwelling|prosthetic|necrosis|necrotic|ischae?mi[ac]|infarction|thrombosis|perforation|hydrocephalus|vasculitis|demyelination|granulomatous|granuloma|malignancy|metasta(?:sis|tic)|raised intracranial pressure|intracranial pressure|herniation|pleocytosis|coloni[sz](?:e|ed|ation)|opsoni[sz]ation|phagocytosis)\\b" },
     { cls: "md-abs", re: "\\b(?:never|always|must|contraindicated|mandatory|strongly recommended|strongly suggested|life[\\u2013\\- ]threatening)\\b" }
   ];
   var _medRe = null;
@@ -1250,7 +1256,12 @@
     var s = esc(String(text));
     return s.replace(medRe(), function () {
       var a = arguments;                       // [match, g1..gN, offset, string]
-      for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) return '<span class="' + MED_RULES[i].cls + '">' + a[0] + '</span>';
+      for (var i = 0; i < MED_RULES.length; i++) if (a[i + 1] != null) {
+        var cls = MED_RULES[i].cls, mt = a[0];
+        // keep trailing punctuation (comma/space/paren) OUTSIDE the enumeration span
+        if (cls === "md-hi") { var tr = mt.match(/[\s,)]+$/); if (tr) return '<span class="md-hi">' + mt.slice(0, mt.length - tr[0].length) + '</span>' + tr[0]; }
+        return '<span class="' + cls + '">' + mt + '</span>';
+      }
       return a[0];
     });
   }
@@ -1423,6 +1434,7 @@
       ".md-action{color:#0b5a54;font-weight:700}",
       ".md-abs{font-weight:700;color:#0f172a}",
       ".md-key{font-weight:700;color:#1e293b}",
+      ".md-hi,.md-sig{font-weight:700;color:#7c3aed}",
       ".md-cite{font-size:.86em;color:#94a3b8}",
       ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-left:3px solid #818cf8;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
       ".ev-cite strong{color:#334155}",
