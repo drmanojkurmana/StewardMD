@@ -1052,7 +1052,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
      patient. Last clinical review: 2026-06.
      ============================================================================ -->
 
-<button class="inf-fab" id="infFab" onclick="INF.open()" title="ICU Infusion & Vasopressor Calculator" aria-label="ICU infusion &amp; vasopressor calculator">💉<small>ICU</small></button>
+<button class="inf-fab" id="infFab" onclick="(window.ICU?ICU.open():INF.open())" title="ICU Infusion & Vasopressor Calculator" aria-label="ICU infusion &amp; vasopressor calculator">💉<small>ICU</small></button>
 <div class="inf-overlay" id="infOverlay" role="dialog" aria-modal="true">
   <div class="inf-shell">
     <div class="inf-top">
@@ -1095,6 +1095,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script src="/reasoning.js?v=gold91" defer></script>
 <script src="/electrolytes.js?v=gold88" defer></script>
 <script src="/caseshare.js?v=gold88" defer></script>
-<script src="/home.js?v=gold90" defer></script>
+<script src="/home.js?v=gold92" defer></script>
+<script src="/icu.js?v=gold92" defer></script>
 </body>
 </html>
