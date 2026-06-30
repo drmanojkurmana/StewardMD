@@ -1418,7 +1418,7 @@
     var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine";
     var pages = evPages(e);
     return {
-      _id: id, icon: "📖",
+      _id: id, srcKey: "harrison", icon: "📖",
       sourceName: srcName,
       edition: "22e", tag: "Primary Reference",
       pages: "",                              // not in the header — references live in the footer
@@ -1681,9 +1681,10 @@
   }
   // the collapsible body (pearls hero + sections + full reference) — lazy-built
   function evBodyHTML(src) {
-    var h = '<div class="ev-body">' + evBriefing(src._id);
+    // the clinician briefing belongs to the disease — show it once, in the primary (Harrison) panel.
+    var h = '<div class="ev-body">' + (src.srcKey === "harrison" ? evBriefing(src._id) : "");
     if (src.pearls && src.pearls.length) {
-      h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> Key clinical pearls</div>' +
+      h += '<div class="ev-pearls"><div class="ev-pearls-h"><span>⭐</span> ' + esc(src.pearlsLabel || "Key clinical pearls") + '</div>' +
         src.pearls.map(function (p) { var k = pearlKind(p); return '<div class="ev-pearl ev-pearl--' + k.a + '"><span class="ev-pearl-ic">' + k.ic + '</span><div class="ev-pearl-bd"><span class="ev-pearl-tag ev-tag--' + k.a + '">' + k.label + '</span>' + medFormat(stripCite(p)) + '</div></div>'; }).join("") +
         '</div>';
     }
@@ -1705,7 +1706,7 @@
     opts = opts || {};
     var open = !!opts.expanded;
     var sub = [src.edition, src.tag, src.pages].filter(Boolean).join(" · ");
-    return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '">' +
+    return '<div class="ev-wrap' + (open ? " ev-open" : "") + '" data-ev="' + src._id + '" data-ev-src="' + (src.srcKey || "harrison") + '">' +
       '<button type="button" class="ev-top"><span class="ev-top-ic">' + src.icon + '</span>' +
         '<span class="ev-top-main"><span class="ev-top-title">' + esc(src.sourceName) + '</span>' +
         (sub ? '<span class="ev-top-sub">' + esc(sub) + '</span>' : '') + '</span>' +
@@ -1723,7 +1724,12 @@
         var wrap = top.parentNode;
         var pin = wrap.querySelector(".ev-panel-in");
         if (pin && !pin.firstChild && wrap.getAttribute("data-ev")) {        // lazy build on first open
-          try { var src = evHarrisonSrc(wrap.getAttribute("data-ev")); if (src) pin.innerHTML = evBodyHTML(src); } catch (e) {}
+          try {
+            var k = wrap.getAttribute("data-ev-src") || "harrison";
+            var b = EV_BUILDERS[k] || evHarrisonSrc;
+            var src = b(wrap.getAttribute("data-ev"));
+            if (src) { src.srcKey = k; pin.innerHTML = evBodyHTML(src); }
+          } catch (e) {}
         }
         wrap.classList.toggle("ev-open"); return;
       }
@@ -1778,6 +1784,10 @@
       ".md-abs{font-weight:700;color:#0f172a}",
       ".md-key{font-weight:700;color:#1e293b}",
       ".md-hi,.md-sig{font-weight:700;color:#7c3aed}",
+      ".ev-wrap[data-ev-src=idsa]>.ev-top{background:linear-gradient(180deg,#f6f5ff,#eef2ff)}.ev-wrap[data-ev-src=idsa] .ev-top-sub{color:#5b21b6}",
+      ".ev-wrap[data-ev-src=sanford]>.ev-top{background:linear-gradient(180deg,#f0fdf4,#ecfdf5)}.ev-wrap[data-ev-src=sanford] .ev-top-sub{color:#047857}",
+      ".ev-rx-note{color:var(--slate-soft,#94a3b8);font-size:.92em}",
+      ".ev-sec-in a,.ev-cite a{color:#1d4ed8;text-decoration:underline;word-break:break-word}",
       ".md-cite{font-size:.86em;color:#94a3b8}",
       ".ev-sec-in p.ev-lead{font-weight:600;color:#0f172a;font-size:14px;line-height:1.6;background:#f6f8ff;border-left:3px solid #818cf8;border-radius:8px;padding:9px 11px;margin:2px 0 10px}",
       ".ev-cite strong{color:#334155}",
@@ -1805,11 +1815,160 @@
   // Public, source-agnostic entry. harrisonRef keeps its name/signature for the
   // existing call sites; opts.expanded shows pearls immediately (reference panel),
   // omitted = collapsed teaser (differential cards).
+  /* ---- ADDITIONAL EVIDENCE SOURCES (reusable, same viewer) ----
+   * Each builder returns the same descriptor shape as evHarrisonSrc and is rendered
+   * by the same evViewerHTML/evBodyHTML. Content is clinician-PARAPHRASED standard
+   * recommendations + standard empiric dosing for decision support — NOT verbatim
+   * proprietary text — with official source links. Future sources (ESC, ATS, NICE,
+   * WHO) drop in by adding a data store + a builder to EV_BUILDERS. */
+  var IDSA_GUIDELINES = {
+    CAP: { society: "IDSA / ATS", title: "Community-Acquired Pneumonia in Adults", year: 2019, url: "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/", recs: [
+      "Healthy outpatients: amoxicillin or doxycycline (a macrolide only where pneumococcal macrolide resistance is low).",
+      "Outpatients with comorbidities: a beta-lactam plus a macrolide, or a respiratory fluoroquinolone.",
+      "Do not routinely cover MRSA or Pseudomonas unless locally validated risk factors are present.",
+      "Corticosteroids are not recommended in non-severe CAP; treat for a minimum of 5 days once stable." ] },
+    SEVERE_CAP: { society: "IDSA / ATS", title: "Community-Acquired Pneumonia (severe / inpatient)", year: 2019, url: "https://www.idsociety.org/practice-guideline/community-acquired-pneumonia-cap-in-adults/", recs: [
+      "Inpatient/ICU: a beta-lactam plus a macrolide, OR a beta-lactam plus a respiratory fluoroquinolone.",
+      "Obtain blood and respiratory cultures in severe disease.",
+      "Add MRSA or Pseudomonas cover only with validated risk factors (prior isolation, recent hospitalization with IV antibiotics).",
+      "Reserve corticosteroids for refractory septic shock." ] },
+    HAP: { society: "IDSA / ATS", title: "Hospital-Acquired & Ventilator-Associated Pneumonia", year: 2016, url: "https://www.idsociety.org/practice-guideline/hap_vap/", recs: [
+      "Base empiric therapy on the local antibiogram; cover S. aureus and Pseudomonas.",
+      "Add MRSA cover with MRSA risk or in units with high MRSA prevalence.",
+      "Use two antipseudomonal agents only with high resistance risk or shock.",
+      "Treat for 7 days and de-escalate on culture results." ] },
+    VAP: { society: "IDSA / ATS", title: "Ventilator-Associated Pneumonia", year: 2016, url: "https://www.idsociety.org/practice-guideline/hap_vap/", recs: [
+      "Empiric cover for S. aureus, Pseudomonas and other gram-negatives, guided by the unit antibiogram.",
+      "Do not treat a positive tracheal aspirate without clinical and radiographic signs.",
+      "A 7-day course is recommended for most VAP, with de-escalation.",
+      "Use clinical criteria (not procalcitonin alone) to diagnose." ] },
+    MENINGITIS: { society: "IDSA", title: "Bacterial Meningitis", year: 2004, url: "https://www.idsociety.org/practice-guideline/bacterial-meningitis/", recs: [
+      "Start empiric vancomycin PLUS a third-generation cephalosporin (ceftriaxone/cefotaxime) immediately.",
+      "Add ampicillin when Listeria is a concern (age >50, immunocompromised, pregnant).",
+      "Give adjunctive dexamethasone before or with the first dose for suspected pneumococcal meningitis.",
+      "Do not delay antibiotics for CT or LP." ] },
+    IE: { society: "AHA / IDSA", title: "Infective Endocarditis in Adults (AHA Scientific Statement)", year: 2015, url: "https://www.ahajournals.org/doi/10.1161/CIR.0000000000000296", recs: [
+      "Obtain three sets of blood cultures from separate sites before antibiotics.",
+      "Apply the modified Duke criteria; echocardiography with TEE preferred when suspicion is high.",
+      "Definitive therapy is pathogen-directed and prolonged (typically 4–6 weeks IV).",
+      "Early surgery for heart failure, perivalvular abscess, large/mobile vegetations or persistent bacteremia." ] },
+    FEBRILE_NEUTROPENIA: { society: "IDSA", title: "Antimicrobial Use in Neutropenic Patients with Cancer", year: 2010, url: "https://www.idsociety.org/practice-guideline/fever-and-neutropenia/", recs: [
+      "High-risk patients: empiric monotherapy with an antipseudomonal beta-lactam within 1 hour.",
+      "Add vancomycin only for specific indications (line infection, skin/soft-tissue, severe mucositis, hypotension, known MRSA).",
+      "Low-risk patients (by MASCC score) may be eligible for oral outpatient therapy.",
+      "Reassess at 2–4 days and adjust on cultures and clinical response." ] },
+    CELLULITIS: { society: "IDSA", title: "Skin and Soft Tissue Infections", year: 2014, url: "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", recs: [
+      "Non-purulent cellulitis: cover streptococci (and MSSA) with a beta-lactam.",
+      "Purulent SSTI: incision and drainage; add MRSA cover for moderate/severe disease.",
+      "Mark the margin, elevate the limb and treat predisposing factors.",
+      "Severe or rapidly progressive infection: broaden cover and obtain surgical evaluation." ] },
+    NECROTIZING_FASCIITIS: { society: "IDSA", title: "Necrotizing Soft Tissue Infections (SSTI guideline)", year: 2014, url: "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", recs: [
+      "Urgent surgical exploration and debridement is the priority — do not delay for imaging.",
+      "Empiric broad-spectrum cover PLUS clindamycin for toxin suppression.",
+      "Narrow therapy once operative findings and cultures return.",
+      "Repeat debridement as needed with supportive ICU care." ] },
+    C_DIFF: { society: "IDSA / SHEA", title: "Clostridioides difficile Infection", year: 2021, url: "https://www.idsociety.org/practice-guideline/clostridioides-difficile/", recs: [
+      "Initial episode: oral fidaxomicin or oral vancomycin (preferred over metronidazole).",
+      "Fulminant disease: high-dose oral vancomycin plus IV metronidazole, with surgical consultation.",
+      "Stop the inciting antibiotic where possible.",
+      "Do not test or treat asymptomatic carriers; use fidaxomicin or a tapered regimen for recurrence." ] },
+    PYELONEPHRITIS: { society: "IDSA", title: "Acute Uncomplicated Pyelonephritis", year: 2010, url: "https://www.idsociety.org/practice-guideline/uncomplicated-cystitis-and-pyelonephritis-uti/", recs: [
+      "Obtain a urine culture before therapy.",
+      "Outpatient: a fluoroquinolone where local resistance is low, guided by susceptibility.",
+      "Hospitalized: an IV agent active against likely gram-negatives, narrowed on cultures.",
+      "Image to exclude obstruction or abscess if no improvement by 48–72 hours." ] },
+    COMPLICATED_UTI: { society: "IDSA", title: "Complicated Urinary Tract Infection", year: 2010, url: "https://www.idsociety.org/practice-guideline/uncomplicated-cystitis-and-pyelonephritis-uti/", recs: [
+      "Always obtain a urine culture and treat based on susceptibility.",
+      "Relieve any obstruction — antibiotics alone fail an obstructed, infected tract.",
+      "Use a longer course than for uncomplicated cystitis.",
+      "Remove or exchange an infected catheter where possible." ] },
+    CYSTITIS: { society: "IDSA", title: "Acute Uncomplicated Cystitis in Women", year: 2011, url: "https://www.idsociety.org/practice-guideline/uncomplicated-cystitis-and-pyelonephritis-uti/", recs: [
+      "First-line: nitrofurantoin, trimethoprim–sulfamethoxazole (resistance <20%), or fosfomycin.",
+      "Reserve fluoroquinolones for when first-line agents are unsuitable.",
+      "A urine culture is not required for classic uncomplicated cystitis.",
+      "Do not treat asymptomatic bacteriuria except in pregnancy or before urologic procedures." ] },
+    CHOLANGITIS: { society: "IDSA / SIS + Tokyo Guidelines", title: "Acute Cholangitis / Complicated Intra-abdominal Infection", year: 2010, url: "https://www.idsociety.org/practice-guideline/intra-abdominal-infections/", recs: [
+      "Source control by biliary drainage (ERCP) is essential — urgently if severe.",
+      "Empiric cover for enteric gram-negatives and anaerobes.",
+      "Obtain blood and bile cultures and narrow on results.",
+      "Tokyo severity grading guides the timing of drainage and level of care." ] },
+    DIABETIC_FOOT: { society: "IDSA", title: "Diabetic Foot Infections", year: 2012, url: "https://www.idsociety.org/practice-guideline/diabetic-foot-infections/", recs: [
+      "Grade severity clinically; mild infections often need only gram-positive cover.",
+      "Obtain deep-tissue or bone cultures, not superficial swabs.",
+      "Suspect osteomyelitis with probe-to-bone or a large/chronic ulcer; confirm with MRI or bone biopsy.",
+      "Combine antibiotics with debridement, offloading and vascular assessment." ] },
+    SBP: { society: "AASLD", title: "Spontaneous Bacterial Peritonitis (Ascites/Cirrhosis guidance)", year: 2021, url: "https://www.aasld.org/practice-guidelines", recs: [
+      "Diagnose with an ascitic PMN count ≥250/µL; do a diagnostic paracentesis on admission.",
+      "Empiric third-generation cephalosporin (ceftriaxone or cefotaxime).",
+      "Add IV albumin (day 1 and day 3) to reduce hepatorenal syndrome and mortality.",
+      "Start secondary prophylaxis after an episode." ] }
+  };
+  var SANFORD_RX = {
+    CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin", dose: "1 g", route: "PO TID", dur: "≥5 d" }, { drug: "Doxycycline", dose: "100 mg", route: "PO BID", dur: "5 d" }], alt: [{ drug: "Azithromycin", dose: "500 mg → 250 mg", route: "PO", note: "only where macrolide resistance is low" }], notes: "With comorbidities: amoxicillin–clavulanate or a cephalosporin PLUS a macrolide, or a respiratory fluoroquinolone (levofloxacin 750 mg)." },
+    SEVERE_CAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "+ Azithromycin", dose: "500 mg", route: "IV daily" }], alt: [{ drug: "Levofloxacin", dose: "750 mg", route: "IV daily" }], notes: "Add vancomycin/linezolid (MRSA) or piperacillin–tazobactam/cefepime (Pseudomonas) only with risk factors." },
+    HAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin or linezolid for MRSA; choose per unit antibiogram; 7-day course." },
+    VAP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Add vancomycin/linezolid for MRSA; de-escalate on cultures." },
+    MENINGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV q12h" }, { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }], alt: [{ drug: "+ Ampicillin", dose: "2 g", route: "IV q4h", note: "if Listeria risk" }], notes: "Dexamethasone 10 mg IV q6h before/with the first dose for suspected pneumococcal." },
+    IE: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }, { drug: "+ Ceftriaxone", dose: "2 g", route: "IV daily", note: "empiric, native valve, cultures pending" }], notes: "Definitive therapy is pathogen-directed and prolonged (4–6 weeks); add gentamicin/rifampin per organism and valve type." },
+    FEBRILE_NEUTROPENIA: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6h" }, { drug: "or Cefepime", dose: "2 g", route: "IV q8h" }], alt: [{ drug: "Meropenem", dose: "1 g", route: "IV q8h" }], notes: "Within 1 hour; add vancomycin only for specific indications." },
+    CELLULITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Cephalexin", dose: "500 mg", route: "PO QID", note: "mild, non-purulent" }, { drug: "or Cefazolin", dose: "1–2 g", route: "IV q8h", note: "moderate" }], alt: [{ drug: "Doxycycline / TMP–SMX", dose: "", route: "PO", note: "if MRSA suspected (purulent)" }], notes: "Purulent SSTI → incision & drainage plus MRSA cover." },
+    NECROTIZING_FASCIITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h" }, { drug: "+ Clindamycin", dose: "900 mg", route: "IV q8h", note: "toxin suppression" }], notes: "Surgery is the priority; antibiotics are adjunctive." },
+    C_DIFF: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Fidaxomicin", dose: "200 mg", route: "PO BID", dur: "10 d" }, { drug: "or Vancomycin", dose: "125 mg", route: "PO QID", dur: "10 d" }], alt: [{ drug: "Vancomycin 500 mg PO QID + Metronidazole 500 mg IV q8h", dose: "", route: "", note: "fulminant" }], notes: "Stop the inciting antibiotic; surgical consult if fulminant." },
+    PYELONEPHRITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1–2 g", route: "IV daily" }, { drug: "or Ciprofloxacin", dose: "500 mg", route: "PO BID", note: "outpatient, low resistance" }], notes: "Narrow on culture; image if no response by 48–72h." },
+    COMPLICATED_UTI: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "1–2 g", route: "IV daily" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q8h", note: "resistant-organism risk" }], notes: "Relieve obstruction; culture-guided; longer course." },
+    CYSTITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Nitrofurantoin", dose: "100 mg", route: "PO BID", dur: "5 d" }, { drug: "or Fosfomycin", dose: "3 g", route: "PO once" }], alt: [{ drug: "TMP–SMX", dose: "160/800 mg", route: "PO BID", dur: "3 d", note: "if resistance <20%" }], notes: "Avoid fluoroquinolones for simple cystitis." },
+    CHOLANGITIS: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h" }, { drug: "or Ceftriaxone + Metronidazole", dose: "2 g / 500 mg", route: "IV" }], notes: "Biliary drainage (ERCP) is essential — antibiotics are adjunctive." },
+    DIABETIC_FOOT: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Amoxicillin–clavulanate", dose: "875/125 mg", route: "PO BID", note: "mild" }, { drug: "or Piperacillin–tazobactam", dose: "4.5 g", route: "IV q6–8h", note: "moderate–severe" }], alt: [{ drug: "+ Vancomycin", dose: "15–20 mg/kg", route: "IV q8–12h", note: "MRSA risk" }], notes: "Combine with debridement, offloading and vascular assessment." },
+    SBP: { url: "https://www.sanfordguide.com/", firstLine: [{ drug: "Ceftriaxone", dose: "2 g", route: "IV daily" }, { drug: "or Cefotaxime", dose: "2 g", route: "IV q8h" }], notes: "Add IV albumin: 1.5 g/kg on day 1 and 1 g/kg on day 3." }
+  };
+  function evIdsaSrc(id) {
+    var g = IDSA_GUIDELINES[id]; if (!g) return null;
+    var sections = [];
+    if (g.url) sections.push({ ic: "🔗", title: "Official guideline", html: '<p><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</a></p>' });
+    return {
+      _id: id, srcKey: "idsa", icon: "📐", sourceName: g.society || "IDSA Clinical Practice Guideline",
+      edition: g.year ? String(g.year) : "", tag: "Guideline", pages: "", pearlsLabel: "Key recommendations",
+      pearls: g.recs || [], sections: sections, fullHTML: "",
+      cite: '<strong>📐 ' + esc(g.title) + (g.year ? " (" + g.year + ")" : "") + '</strong>' +
+        (g.url ? '<br><a href="' + esc(g.url) + '" target="_blank" rel="noopener noreferrer">' + esc(g.url) + '</a>' : '') +
+        '<br>Key recommendations paraphrased for decision support — consult the full guideline before acting.'
+    };
+  }
+  function evSanfordSrc(id) {
+    var rx = SANFORD_RX[id]; if (!rx) return null;
+    var rxList = function (arr) {
+      return (arr && arr.length) ? '<ul class="ev-ul">' + arr.map(function (r) {
+        var line = [r.drug, r.dose, r.route, r.dur].filter(Boolean).join(" · ");
+        return '<li>' + medFormat(line) + (r.note ? ' <span class="ev-rx-note">— ' + esc(r.note) + '</span>' : '') + '</li>';
+      }).join("") + '</ul>' : "";
+    };
+    var body = evSub("First-line", rxList(rx.firstLine)) + evSub("Alternative", rxList(rx.alt));
+    if (rx.notes) body += '<div class="ev-subh">Notes</div><p>' + medFormat(rx.notes) + '</p>';
+    return {
+      _id: id, srcKey: "sanford", icon: "💊", sourceName: "Empiric antimicrobial therapy",
+      edition: "", tag: "Regimens · Sanford-aligned", pages: "", pearls: [],
+      sections: body ? [{ ic: "💊", title: "Empiric regimens", html: body }] : [], fullHTML: "",
+      cite: '<strong>💊 Empiric regimens</strong> — standard adult dosing for decision support; <b>verify dose, route &amp; duration and adjust for renal function, allergy and local resistance.</b> ' +
+        'Cross-check the Sanford Guide' + (rx.url ? ' (<a href="' + esc(rx.url) + '" target="_blank" rel="noopener noreferrer">sanfordguide.com</a>)' : '') + '.'
+    };
+  }
+  var EV_BUILDERS = { harrison: evHarrisonSrc, idsa: evIdsaSrc, sanford: evSanfordSrc };
+  // render ALL available sources for a disease, stacked (Harrison first/primary).
+  function evAllSourcesHTML(id, opts) {
+    opts = opts || {};
+    var html = "", any = false;
+    ["harrison", "idsa", "sanford"].forEach(function (k) {
+      var src; try { src = EV_BUILDERS[k](id); } catch (e) { src = null; }
+      if (!src) return;
+      src.srcKey = k;
+      html += evViewerHTML(src, { expanded: !!opts.expanded && k === "harrison" });
+      any = true;
+    });
+    return any ? html : "";
+  }
   function harrisonRef(id, opts) {
     evEnsure();
-    var src = evHarrisonSrc(id);
-    if (!src) return "";
-    return evViewerHTML(src, opts || {});
+    return evAllSourcesHTML(id, opts || {});
   }
 
   function card(r, rank) {
