@@ -103,7 +103,7 @@
         }
         el.innerHTML = list.map(function(p, i) {
           var age = p.dob ? p.dob : '';
-          return '<div class="ghis-pt-card" onclick="GHIS.openLab(\'' + esc(p.episodeId) + '\',\'' + esc(p.patientId) + '\',\'' + esc(p.patientFirstName) + '\')">' +
+          return '<div class="ghis-pt-card" onclick="GHIS.onPatient(\'' + esc(p.episodeId) + '\',\'' + esc(p.patientId) + '\',\'' + esc(p.patientFirstName) + '\')">' +
             '<div class="ghis-pt-top">' +
               '<div>' +
                 '<div class="ghis-pt-name">' + esc(p.patientFirstName) + ' <span style="font-weight:400;font-size:12px;color:var(--slate)">· ' + esc(p.patientId) + '</span></div>' +
@@ -186,6 +186,54 @@
             if (typeof window.openGHIS === 'function') { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); }
             ICU.open();
           } catch (e) { try { alert('Could not load into ICU: ' + e.message); } catch (x) {} }
+        },
+        // Patient-card click dispatcher: normal browse -> lab drawer; import mode
+        // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.
+        onPatient: function(episodeId, patientId, name) {
+          if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }
+          else { GHIS.openLab(episodeId, patientId, name); }
+        },
+        // Entry point for Dx My Patient -> Import Patient. Opens the ward picker in
+        // import mode; selecting a patient assembles their reports and hands them to DX.
+        startImport: function() { GHIS._importMode = true; try { window.openGHIS(); } catch (e) {} },
+        // Assemble a ward patient's labs + imaging + culture and load into the reasoning
+        // workspace (display + suggest-with-confirm — DX never auto-ticks findings).
+        importPatientReports: function(patientId, name) {
+          if (!window.DX || !DX.importPatient) { alert('Dx workspace not loaded.'); return; }
+          var list = (typeof _patients !== 'undefined' && _patients) || [], pObj = null;
+          for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { pObj = list[i]; break; } }
+          var pnl = document.getElementById('ghisPanel');
+          var prevBody = pnl ? pnl.querySelector('.ghis-body') : null;
+          if (prevBody) prevBody.innerHTML = '<div class="ghis-loading">Importing reports for ' + esc(name || patientId) + '…</div>';
+          GHIS._patientId = patientId;
+          var labs = [], culture = [], radiology = [];
+          // 1) lab orders -> lab-detail for each recent order
+          authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function(j) {
+            var orders = ((j && j.orders) || []).slice(0, 25);
+            return Promise.all(orders.map(function(o) {
+              return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
+                .then(function(d) {
+                  (d && d.tests || []).forEach(function(t) {
+                    labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high, critical: t.critical });
+                    if (t.antibiogram && String(t.antibiogram).trim()) culture.push({ name: (o.serviceName || 'Culture') + ' — ' + (t.test || ''), detail: String(t.antibiogram) });
+                  });
+                  if (/culture|sensitivit/i.test(o.serviceName || '') && (!d || !(d.tests || []).length)) culture.push({ name: o.serviceName, detail: '(open in Ward Sync for full report)' });
+                }).catch(function(){});
+            }));
+          }).catch(function(){}).then(function() {
+            // 2) radiology orders -> reports
+            return authFetch('/radiology?patientId=' + encodeURIComponent(patientId)).then(function(j) {
+              var orders = ((j && j.orders) || []).slice(0, 12);
+              return Promise.all(orders.map(function(o) {
+                return authFetch('/radiology-report?resultid=' + encodeURIComponent(o.resultid) + '&type=' + encodeURIComponent(o.printType || 'manual'))
+                  .then(function(d) { radiology.push({ name: o.description || 'Imaging', report: (d && d.report) || 'No report text.' }); }).catch(function(){});
+              }));
+            }).catch(function(){});
+          }).then(function() {
+            var age = pObj ? parseInt(pObj.dob, 10) : NaN;
+            DX.importPatient({ patientName: name || (pObj && pObj.patientFirstName) || '', age: (!isNaN(age) && age > 0 && age < 130) ? age : null, sex: pObj && pObj.gender, labs: labs, radiology: radiology, culture: culture });
+            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
+          });
         },
         loadLabs: function(patientId) {
           var body = document.getElementById('ghisLabSection');
