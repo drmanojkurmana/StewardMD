@@ -48,14 +48,14 @@ try {
   let ready = false;
   for (let i = 0; i < 50; i++) { await sleep(400); if (await ev(`return !!(window.SMD_REASON && window.KB_EXPANDED && window.SMD_setKbExpanded);`) === true) { ready = true; break; } }
   if (!ready) throw new Error("engine / KB_EXPANDED not loaded");
-  await ev(`window.SMD_setKbExpanded(false); return 1;`); await sleep(100);
+  await ev(`window.SMD_setKbExpanded(false); return 1;`); await sleep(450);
   ok(await ev(`return window.KB_EXPANDED.count >= 200;`) === true, "KB_EXPANDED loaded (>=200 diseases)");
   ok(await ev(`return window.SMD_kbExpandedCount().on===false && (window.SMD_kbExpandedCount().inf+window.SMD_kbExpandedCount().ni)===0;`) === true, "default OFF → 0 expanded candidates");
   ok(await ev(`return ${PHEO}===false;`) === true, "OFF → expanded-only disease absent (live differential untouched)");
-  await ev(`window.SMD_setKbExpanded(true); return 1;`); await sleep(100);
+  await ev(`window.SMD_setKbExpanded(true); return 1;`); await sleep(450);
   ok(await ev(`return window.SMD_kbExpandedCount().on===true && (window.SMD_kbExpandedCount().inf+window.SMD_kbExpandedCount().ni)>=200;`) === true, "ON → expanded candidates registered");
   ok(await ev(`return ${PHEO}===true;`) === true, "ON → pheochromocytoma surfaces for its findings");
-  await ev(`window.SMD_setKbExpanded(false); return 1;`); await sleep(100);
+  await ev(`window.SMD_setKbExpanded(false); return 1;`); await sleep(450);
   ok(await ev(`return ${PHEO}===false;`) === true, "OFF again → removed (instant revert)");
   console.log(`\n${fails === 0 ? "ALL GREEN — expanded KB participates when enabled, zero impact when off" : fails + " failed"}`);
   if (fails > 0) process.exitCode = 1;

@@ -1,87 +1,53 @@
 /* StewardMD — build kb/dist/kb.expanded.js  (Phase 4: reference diseases → diagnostic)
  *
- * Derives a weighted finding-signature (matching.find) for each kb/reference/*.json
- * disease from its Harrison knowledge text, using the engine's controlled finding
- * vocabulary (keys + labels + FT_SYN synonyms scraped from reasoning.js). Purely
- * DETERMINISTIC (no AI): for each finding key it counts word-boundary term hits in
- * the disease's text and weights them by IDF (a finding shared by many diseases —
- * e.g. "fever" — gets a small weight; a specific one gets a large one), so the
- * derived map favours disease-defining findings. Conservative caps keep these below
- * the curated 140's weights.
+ * Compiles the committed, clinician-reviewable source
+ *     kb/expanded/ai-signatures.json   (AI-drafted, tier-classified finding maps,
+ *                                        produced by the kb-phase4-signatures
+ *                                        workflow + gate-phase4.mjs integrity gate)
+ * into the runtime artifact
+ *     window.KB_EXPANDED = { version, count, source, list:[{id,name,system,class,find,tiers,rationale}] }
  *
- * Output: window.KB_EXPANDED = { version, count, list:[{id,name,system,class,find}] }
- * The runtime only scores these when the `smd_kb_expanded` flag is ON (default OFF),
- * so this never perturbs the live differential until a clinician opts in to review.
- * The signatures are AUTO-DERIVED and need clinician refinement before clinical use.
+ * The runtime scores each disease's `find` map exactly like a curated NI/infective
+ * disease, but ONLY when the `smd_kb_expanded` flag is ON (default OFF) — so this
+ * never perturbs the live differential until a clinician opts in. `tiers`
+ * (pathognomonic / discriminative / supportive / negative) are carried through for
+ * review + future UI; the `find` weights already encode tier importance.
+ *
+ * Signatures are AI-DRAFTED from Harrison enrichment and flagged review:true — they
+ * need clinician sign-off before clinical use.
  *
  * USAGE: node kb/tools/build-kb-expanded.mjs [version]
  */
-import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
+import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, "..", "..");
-const REF = join(ROOT, "kb", "reference");
+const SRC = join(ROOT, "kb", "expanded", "ai-signatures.json");
 const OUT = join(ROOT, "kb", "dist", "kb.expanded.js");
 const version = process.argv[2] || "1";
 
-// ---- 1. controlled finding vocabulary (keys + search terms) from reasoning.js ----
-const rsrc = readFileSync(join(ROOT, "reasoning.js"), "utf8");
-const LEX = {};                       // key -> Set(lowercase search terms)
-function addTerm(key, term) {
-  term = String(term || "").toLowerCase().trim().replace(/[?.!]+$/, "");
-  if (term.length < 5) return;
-  (LEX[key] = LEX[key] || new Set()).add(term);
-}
-let m, re = /\{\s*key\s*:\s*["']([a-zA-Z0-9_]+)["']\s*,\s*label\s*:\s*["']([^"']+)["']/g;
-while ((m = re.exec(rsrc))) { addTerm(m[1], m[2]); m[2].split(/[\/,()]| or | and /i).forEach((p) => addTerm(m[1], p)); }
-const ftStart = rsrc.indexOf("var FT_SYN");
-if (ftStart >= 0) {
-  const block = rsrc.slice(ftStart, rsrc.indexOf("};", ftStart) + 2);
-  let r2 = /([a-zA-Z0-9_]+)\s*:\s*\[([^\]]*)\]/g, mm;
-  while ((mm = r2.exec(block))) { const key = mm[1]; (mm[2].match(/["']([^"']+)["']/g) || []).forEach((s) => addTerm(key, s.replace(/["']/g, ""))); }
-}
-const KEYS = Object.keys(LEX);
-
-// ---- 2. gather each reference disease's searchable text ----
-function dzText(d) {
-  const h = d.harrison || {};
-  return [d.name, h.pathophysiology, (h.clinicalPearls || []).join(" "), (h.redFlags || []).join(" "),
-    (h.additionalDifferentials || []).join(" "), (h.additionalInvestigations || []).join(" "),
-    (h.pitfalls || []).join(" "), (h.severityClassification || "")].join("  ").toLowerCase();
-}
-const diseases = [];
-if (existsSync(REF)) {
-  for (const f of readdirSync(REF).filter((x) => x.endsWith(".json"))) {
-    const d = JSON.parse(readFileSync(join(REF, f), "utf8"));
-    if (!d.id || !d.name) continue;
-    diseases.push({ id: d.id, name: d.name, system: d.system || "", cls: d.class || "", text: dzText(d) });
-  }
+if (!existsSync(SRC)) {
+  console.error("missing source: kb/expanded/ai-signatures.json — run the kb-phase4-signatures workflow + gate-phase4.mjs first.");
+  process.exit(1);
 }
 
-// ---- 3. word-boundary hit counts per (disease,key) + document frequency per key ----
-function esc(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
-const TERMRE = {};
-for (const k of KEYS) TERMRE[k] = [...LEX[k]].map((t) => new RegExp("\\b" + esc(t) + "\\b"));
-function hits(text, res) { let n = 0; for (const r of res) { if (r.test(text)) n++; } return n; }
-const df = {}; KEYS.forEach((k) => (df[k] = 0));
-for (const dz of diseases) { dz.hit = {}; for (const k of KEYS) { const h = hits(dz.text, TERMRE[k]); if (h > 0) { dz.hit[k] = h; df[k]++; } } }
-const N = diseases.length || 1;
-
-// ---- 4. IDF-weighted find map; keep diseases with >=2 meaningful findings ----
-const list = [];
-for (const dz of diseases) {
-  const find = {};
-  for (const k in dz.hit) {
-    const idf = Math.log((N + 1) / (df[k] + 1));            // common term -> ~0; specific -> larger
-    let w = Math.round(dz.hit[k] * (4 + idf * 8));          // hits x specificity
-    w = Math.max(0, Math.min(40, w));                       // conservative cap (< curated weights)
-    if (w >= 8) find[k] = w;                                // drop noise-floor findings
-  }
-  if (Object.keys(find).length >= 2) list.push({ id: dz.id, name: dz.name, system: dz.system, class: dz.cls, find: find });
+// palette size (informational): app.js FIELD_GROUPS/SYSTEM_PICKER_MAP + reasoning.js EXTRA_GROUPS
+const palette = new Set();
+const pairRe = /key\s*:\s*["']([a-zA-Z0-9_]+)["']\s*,\s*label\s*:\s*["']([^"']+)["']/g;
+for (const f of ["app.js", "reasoning.js"]) {
+  const txt = readFileSync(join(ROOT, f), "utf8"); let m;
+  while ((m = pairRe.exec(txt))) palette.add(m[1]);
 }
 
-writeFileSync(OUT, "/* GENERATED by kb/tools/build-kb-expanded.mjs — flag-gated (smd_kb_expanded), OFF by default. */\nwindow.KB_EXPANDED = " +
-  JSON.stringify({ version, count: list.length, vocab: KEYS.length, list }) + ";\n");
-console.log(`vocab keys=${KEYS.length}  reference diseases=${diseases.length}  scoreable=${list.length}  -> ${OUT}`);
+const src = JSON.parse(readFileSync(SRC, "utf8"));
+const list = (src.list || [])
+  .filter((d) => d && d.id && d.find && Object.keys(d.find).length >= 2)
+  .map((d) => ({ id: d.id, name: d.name, system: d.system, class: d.class, find: d.find, tiers: d.tiers || null, rationale: d.rationale || "" }));
+
+writeFileSync(OUT, "/* GENERATED by kb/tools/build-kb-expanded.mjs from kb/expanded/ai-signatures.json — flag-gated (smd_kb_expanded), OFF by default. AI-drafted, review:true. */\nwindow.KB_EXPANDED = " +
+  JSON.stringify({ version, count: list.length, source: "ai_drafted", vocab: palette.size, list }) + ";\n");
+
+const inf = list.filter((d) => d.class === "infective" || d.class === "inf").length;
+console.log(`palette=${palette.size}  scoreable diseases=${list.length} (inf=${inf} ni=${list.length - inf})  version=${version}  -> ${OUT}`);
