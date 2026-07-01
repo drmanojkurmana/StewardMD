@@ -1,0 +1,119 @@
+{
+  "id": "gc_065",
+  "specialty": "Oncology",
+  "condition": "Malignant spinal cord compression",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Progressive mid-back pain for 3 weeks, worse at night and lying flat, now with 2 days of bilateral leg weakness and difficulty walking.",
+  "history": "Known case of prostate adenocarcinoma (Gleason 8) diagnosed 2 years ago, previously treated with androgen deprivation therapy and radiotherapy, with rising PSA over the last 6 months suggestive of biochemical relapse and suspected bone metastases (not yet imaged). Presents with severe, band-like mid-thoracic back pain of 3 weeks duration, progressively worsening, disturbing sleep, and notably worse when lying supine and with coughing/straining (Valsalva). Over the last 48 hours has developed bilateral lower limb heaviness and weakness, difficulty climbing stairs, and two episodes of urinary hesitancy with a sense of incomplete bladder emptying. No fever. No recent trauma. No history of IV drug use or immunosuppression other than cancer-related.",
+  "examination": "Alert, oriented, in visible discomfort from back pain. Tenderness to percussion over the T8-T9 spinous processes. Bilateral lower limb power 3/5 (hip flexors and knee extensors), with brisk knee and ankle reflexes and bilateral extensor plantar responses (upgoing Babinski). Sensory level to pinprick at approximately T10 dermatome. Anal sphincter tone reduced on digital rectal exam. Post-void residual on bladder scan elevated. Upper limbs and cranial nerves normal. No cauda equina saddle anesthesia pattern (level is thoracic, consistent with cord rather than conus/cauda alone), though bladder involvement present due to cord-level dysfunction.",
+  "vitals": {
+    "hr": 92,
+    "bp": "138/84",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "psa": 142,
+    "alkalinePhosphatase": 310,
+    "calciumCorrected": 10.9,
+    "creatinine": 1,
+    "platelets": 260
+  },
+  "imaging": [
+    "Urgent whole-spine MRI (with contrast): epidural mass at T8-T9 arising from a pathological vertebral body lesion, causing >50% spinal canal compromise and cord signal change (T2 hyperintensity) at the level of compression, consistent with malignant epidural spinal cord compression",
+    "Additional metastatic vertebral lesions noted at L2 and L4 without current cord compromise",
+    "CT chest/abdomen/pelvis: multiple sclerotic bone metastases, no visceral metastases identified"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Malignant epidural spinal cord compression (metastatic prostate cancer)",
+    "Spinal epidural abscess",
+    "Vertebral compression fracture (osteoporotic) without cord compression",
+    "Transverse myelitis",
+    "Guillain-Barre syndrome (ascending weakness)",
+    "Disc herniation with cord/cauda compression",
+    "Spinal epidural hematoma"
+  ],
+  "finalDiagnosis": "Malignant spinal cord compression secondary to metastatic prostate cancer (T8-T9 epidural disease)",
+  "citations": [
+    "Harrison 22e — Neurologic Emergencies in Cancer Patients / Spinal Cord Compression",
+    "Harrison 22e — Prostate Cancer",
+    "ESMO Clinical Practice Guidelines — Malignant Spinal Cord Compression 2023",
+    "NICE Guideline CG75 — Metastatic Spinal Cord Compression"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid delaying high-dose corticosteroids while awaiting imaging if clinical suspicion is high and neurological deficit is present",
+    "Avoid lumbar puncture below the level of suspected compression until cord compression is excluded/treated (risk of herniation/worsening)",
+    "Use caution with high-dose dexamethasone in patients with uncontrolled diabetes or active infection"
+  ],
+  "edgeCases": [
+    "Sensory level and long-tract signs (hyperreflexia, upgoing plantars) distinguish true cord compression from cauda equina syndrome (which produces lower motor neuron signs, saddle anesthesia, and areflexia)",
+    "This is a neuro-oncologic emergency: MRI whole spine should not be delayed pending labs; empirical dexamethasone should be started immediately on clinical suspicion, before imaging confirmation",
+    "Multifocal spinal metastases (L2, L4) reinforce the need for imaging the entire spine, not just the symptomatic level",
+    "This diagnosis is not infective; 'stewardship' and antibiotic fields are not applicable (set to null)"
+  ],
+  "expectedMaiK": "MaiK should flag this as a neuro-oncologic emergency (back pain + progressive myelopathic weakness + bladder dysfunction in a patient with known malignancy) and recommend immediate empirical high-dose corticosteroids plus emergent whole-spine MRI, with urgent oncology/spine surgery/radiation oncology referral — treatment should not wait for imaging confirmation.",
+  "expectedNextQuestions": [
+    "Is there a sensory level, and at what dermatome?",
+    "Is there bladder or bowel dysfunction (retention, incontinence, reduced anal tone)?",
+    "Is pain worse when lying flat or with Valsalva/coughing?",
+    "What is the known primary malignancy and has bone metastasis been previously documented?",
+    "Are reflexes brisk (upper motor neuron) or absent (suggesting cauda equina/GBS instead)?",
+    "How long has weakness been present (ambulatory status is the strongest predictor of neurological outcome)?"
+  ],
+  "expectedInvestigations": [
+    "Urgent whole-spine MRI with contrast",
+    "Serum calcium (corrected), alkaline phosphatase",
+    "PSA (or tumor markers relevant to known primary)",
+    "Post-void residual bladder scan",
+    "CT chest/abdomen/pelvis for staging/other metastases",
+    "Baseline blood glucose prior to high-dose steroids"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "backPain": true,
+    "focalNeuroDeficit": true,
+    "malignancy": true,
+    "weightLoss": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "Malignant spinal cord compression secondary to metastatic prostate cancer (T8-T9 epidural disease)",
+    "acceptableIds": [
+      "cord_compression"
+    ],
+    "differentialIds": [
+      "cord_compression",
+      "brain_tumour",
+      "gbs"
+    ],
+    "investigations": [
+      "Urgent whole-spine MRI with contrast",
+      "Serum calcium and alkaline phosphatase",
+      "PSA",
+      "Post-void residual bladder scan",
+      "CT chest/abdomen/pelvis"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (cord_compression)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes cord_compression",
+    "recommendation surfaces urgent MRI whole spine and empirical corticosteroids without waiting for imaging",
+    "stewardship/antibiotics fields are null/empty since this is a non-infective emergency"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

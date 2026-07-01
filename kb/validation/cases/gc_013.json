@@ -1,0 +1,142 @@
+{
+  "id": "gc_013",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Reduced urine output and confusion for 1 day, on background of 3 days of fever and cough",
+  "history": "A 68-year-old man with type 2 diabetes mellitus and hypertension presents with a 3-day history of fever, productive cough, and progressive breathlessness, consistent with community-acquired pneumonia treated empirically as an outpatient with oral gentamicin-containing eye drops for conjunctivitis and, more relevantly, was started on IV piperacillin-tazobactam and empirical gentamicin 2 days ago after admission for severe CAP with septic features. Over the last 24 hours his family notes he has passed very little urine (only ~150 mL in the last day) and has become increasingly drowsy and confused. There is no prior history of chronic kidney disease; his baseline creatinine 3 months ago was 0.9 mg/dL. No history of contrast exposure, no NSAID use, no diarrhea or vomiting to suggest volume depletion. No known obstructive uropathy symptoms.",
+  "examination": "Lethargic, mildly disoriented to time. Warm peripheries initially with subsequent cool extremities. Dry mucous membranes are absent (patient appears euvolemic to mildly hypervolemic with bibasal crackles). No rash. Abdomen soft, non-tender, no palpable bladder. No flank tenderness. Bilateral basal crepitations on chest auscultation consistent with underlying pneumonia. No peripheral edema at presentation.",
+  "vitals": {
+    "hr": 112,
+    "bp": "88/56",
+    "rr": 26,
+    "spo2": 91,
+    "temp": 38.6
+  },
+  "labs": {
+    "creatinine_mg_dL": 4.2,
+    "creatinine_baseline_mg_dL": 0.9,
+    "urea_mmol_L": 28,
+    "potassium_mmol_L": 5.8,
+    "bicarbonate_mmol_L": 15,
+    "urineOutput_mL_24h": 150,
+    "wbc_10e9_L": 19.5,
+    "lactate_mmol_L": 3.4,
+    "hemoglobin_g_dL": 10.8,
+    "platelets_10e3_uL": 142,
+    "urinalysis": "muddy brown granular casts, renal tubular epithelial cells, no significant proteinuria, no dysmorphic RBCs",
+    "fractionalExcretionOfSodium_percent": 2.8,
+    "urineSodium_mmol_L": 55,
+    "CK_U_L": 210
+  },
+  "imaging": [
+    "Renal ultrasound: normal-sized kidneys bilaterally, no hydronephrosis, no obstruction, mildly increased cortical echogenicity",
+    "Chest X-ray: right lower lobe consolidation consistent with pneumonia"
+  ],
+  "microbiology": [
+    "Blood cultures pending at time of AKI onset (drawn on admission, prior culture growing Escherichia coli sensitive to piperacillin-tazobactam and gentamicin, reported after 48h)",
+    "Sputum culture: Escherichia coli, same susceptibility pattern as blood isolate",
+    "Urine culture: no growth"
+  ],
+  "differentialDiagnoses": [
+    "Acute tubular necrosis (sepsis-associated and aminoglycoside nephrotoxicity)",
+    "Prerenal azotemia from sepsis-related hypoperfusion",
+    "Postrenal obstruction",
+    "Acute interstitial nephritis (drug-induced, e.g., piperacillin-tazobactam)",
+    "Acute glomerulonephritis",
+    "Contrast-induced nephropathy (no contrast history, less likely)"
+  ],
+  "finalDiagnosis": "Acute kidney injury due to acute tubular necrosis, multifactorial (sepsis-associated hypoperfusion plus aminoglycoside nephrotoxicity)",
+  "citations": [
+    "Harrison 22e — Acute Kidney Injury",
+    "Harrison 22e — Sepsis and Septic Shock",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Continue source-directed therapy for the underlying E. coli bacteremic pneumonia per culture sensitivities (piperacillin-tazobactam); discontinue gentamicin immediately given nephrotoxicity and achievable de-escalation to a beta-lactam alone; renally dose all antimicrobials to actual GFR, avoid further nephrotoxins, and monitor levels/renal function closely if any aminoglycoside continuation were unavoidable.",
+  "contraindications": [
+    "Avoid further aminoglycoside dosing given established nephrotoxicity",
+    "Avoid NSAIDs and iodinated contrast unless absolutely necessary",
+    "Avoid ACE inhibitors/ARBs and potassium-sparing agents until AKI resolves",
+    "Renally adjust all renally-cleared drugs (including piperacillin-tazobactam) to current kidney function"
+  ],
+  "edgeCases": [
+    "If oliguria progresses to anuria with refractory hyperkalemia, fluid overload, or refractory acidosis, urgent renal replacement therapy is indicated regardless of creatinine trend",
+    "Differentiating ATN from prerenal azotemia can be difficult in early sepsis; FeNa and muddy brown casts favor established ATN here",
+    "Consider AIN if eosinophilia, rash, or fever pattern change after piperacillin-tazobactam exposure, though urinalysis here is more consistent with ATN",
+    "This presentation (aki) is captured in the diagnosable disease set as a discrete nephrology diagnosis rather than as a specific ATN subtype; acceptableIds therefore map to the general AKI entity"
+  ],
+  "expectedMaiK": "MaiK should flag this as sepsis-associated AKI with superimposed aminoglycoside nephrotoxicity, recommend immediate cessation of the nephrotoxic agent, renal dosing of remaining antimicrobials, and close monitoring for RRT indications (refractory hyperkalemia, acidosis, fluid overload, uremic complications).",
+  "expectedNextQuestions": [
+    "What is the trend in urine output over the next 6-12 hours despite fluid resuscitation?",
+    "Is there a need for renal replacement therapy based on the AEIOU criteria (acidosis, electrolyte, intoxication, overload, uremia)?",
+    "Has the aminoglycoside been discontinued and can the beta-lactam be renally dosed appropriately?",
+    "Is there any evidence of AIN (eosinophilia, rash, drug fever pattern) that would warrant a nephrology biopsy discussion?"
+  ],
+  "expectedInvestigations": [
+    "Serial serum creatinine and urea",
+    "Serum potassium and bicarbonate (arterial or venous blood gas)",
+    "Urinalysis with microscopy for casts/cells",
+    "Fractional excretion of sodium/urea",
+    "Renal ultrasound to exclude obstruction",
+    "Blood and urine cultures",
+    "CK to exclude rhabdomyolysis as contributing cause"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "oliguria": true,
+    "creatinine": true,
+    "urea": true,
+    "suspectedInfectionSource": true,
+    "sofaIncrease": true
+  },
+  "expected": {
+    "diagnosis": "Acute kidney injury due to acute tubular necrosis, multifactorial (sepsis-associated hypoperfusion plus aminoglycoside nephrotoxicity)",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "SEPTIC_SHOCK",
+      "CAP"
+    ],
+    "investigations": [
+      "Serum creatinine/urea trend",
+      "Serum potassium and venous blood gas for acid-base status",
+      "Urinalysis with microscopy",
+      "Fractional excretion of sodium",
+      "Renal ultrasound",
+      "Blood and urine cultures",
+      "CK level"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (aki)",
+    "confidence >= expectedConfidence.min",
+    "differential includes SEPSIS and/or SEPTIC_SHOCK",
+    "stewardship recommendation discontinues aminoglycoside and continues renally-dosed beta-lactam",
+    "engine flags oliguria, elevated creatinine, and organ dysfunction as key drivers"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

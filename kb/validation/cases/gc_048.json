@@ -1,0 +1,120 @@
+{
+  "id": "gc_048",
+  "specialty": "Nephrology",
+  "condition": "Hypokalaemia + hypomagnesaemia",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Generalized weakness, palpitations, and cramping for 3 days",
+  "history": "58-year-old woman with hypertension on long-term furosemide and a recent 5-day illness with profuse watery diarrhoea and vomiting presents with progressive generalized weakness, muscle cramps, and palpitations. She reports poor oral intake during the diarrhoeal illness and has continued her usual diuretic dose. No chest pain. No prior arrhythmia history. No laxative abuse. No diuretic other than furosemide; denies licorice ingestion.",
+  "examination": "Alert, mildly fatigued-appearing woman. Generalized muscle weakness (proximal > distal), diminished deep tendon reflexes. No focal neurological deficit. Mild diffuse abdominal discomfort, no distension. Chvostek and Trousseau signs negative. No oedema.",
+  "vitals": {
+    "hr": 108,
+    "bp": "102/64",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 36.8
+  },
+  "labs": {
+    "potassium": 2.6,
+    "magnesium": 1.1,
+    "sodium": 133,
+    "chloride": 88,
+    "bicarbonate": 31,
+    "creatinine": 1.1,
+    "urea": 7.2,
+    "calcium": 8.6,
+    "albumin": 3.8,
+    "glucose": 98,
+    "urinePotassium": 15,
+    "urineChloride": 22,
+    "venousBloodGasPh": 7.49
+  },
+  "imaging": [
+    "ECG: prolonged QU interval, prominent U waves, flattened T waves, occasional PVCs"
+  ],
+  "microbiology": [
+    "Stool studies not sent (self-limited pre-admission diarrhoeal illness); no active infective workup indicated at presentation"
+  ],
+  "differentialDiagnoses": [
+    "GI-loss (diarrhoea/vomiting) plus loop-diuretic-induced hypokalaemia and hypomagnesaemia",
+    "Primary hyperaldosteronism",
+    "Bartter/Gitelman-like renal tubular wasting",
+    "Diuretic-induced metabolic alkalosis with secondary hypokalaemia",
+    "Refeeding-related electrolyte shift",
+    "Laxative abuse (surreptitious)"
+  ],
+  "finalDiagnosis": "Combined hypokalaemia and hypomagnesaemia due to GI losses (diarrhoea/vomiting) compounded by chronic loop diuretic use, with arrhythmia risk",
+  "citations": [
+    "Harrison 22e — Hypokalemia",
+    "Harrison 22e — Hypomagnesemia",
+    "Harrison 22e — Disorders of Potassium Metabolism",
+    "KDIGO Clinical Practice Guidelines (electrolyte disorder management principles)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid rapid/undiluted IV potassium bolus (arrhythmogenic) — must be given as controlled infusion with cardiac monitoring",
+    "Potassium repletion alone will fail if hypomagnesaemia is not corrected concurrently (renal K wasting persists via ROMK channel effect until Mg is replete)",
+    "Avoid additional loop diuretic dosing until electrolytes corrected; reassess diuretic necessity",
+    "Caution with concurrent QT-prolonging drugs given ECG changes"
+  ],
+  "edgeCases": [
+    "Hypokalaemia refractory to potassium replacement should always prompt magnesium measurement and repletion",
+    "Low urine chloride (<25 mmol/L) here favours GI loss/contraction alkalosis over primary renal tubular wasting (Bartter/Gitelman, which typically show higher urine chloride)",
+    "Concurrent metabolic alkalosis (HCO3 31, pH 7.49) is expected from both vomiting/diarrhoea-associated volume contraction and chronic loop diuretic use",
+    "This composite electrolyte diagnosis (combined hypokalaemia + hypomagnesaemia) is not itself present as a discrete id in the current diagnosable-disease list, so acceptableIds is intentionally empty; closest listed conceptual neighbours (e.g. aki, rhabdo) are not primary diagnoses here and are not included as acceptable/differential matches"
+  ],
+  "expectedMaiK": "MaiK should flag the combined hypokalaemia/hypomagnesaemia pattern with arrhythmia risk (ECG U waves, prolonged QU), highlight that magnesium must be repleted alongside potassium for correction to succeed, and recommend cardiac monitoring during IV repletion given the diuretic + GI-loss aetiology.",
+  "expectedNextQuestions": [
+    "Is the patient on any other potassium/magnesium-wasting drugs (e.g. amphotericin, aminoglycosides, PPIs, laxatives)?",
+    "What is the trend of potassium/magnesium over prior admissions or outpatient labs?",
+    "Is there ongoing diarrhoea/vomiting requiring source control (e.g. infective workup, antiemetic)?",
+    "Should the loop diuretic be held or switched to a potassium-sparing agent?",
+    "Is telemetry/continuous ECG monitoring in place during repletion?"
+  ],
+  "expectedInvestigations": [
+    "Serum potassium and magnesium (repeat serial)",
+    "12-lead ECG and continuous cardiac monitoring",
+    "Serum calcium, phosphate",
+    "Venous/arterial blood gas",
+    "Urine potassium, urine chloride, urine magnesium",
+    "Renal function (creatinine, urea)",
+    "Consider aldosterone/renin if renal wasting suspected"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "diarrhea": true,
+    "nauseaVomiting": true,
+    "dehydration": true,
+    "palpitations": true,
+    "tachycardia": true,
+    "hypotension": true
+  },
+  "expected": {
+    "diagnosis": "Combined hypokalaemia and hypomagnesaemia due to GI losses (diarrhoea/vomiting) compounded by chronic loop diuretic use, with arrhythmia risk",
+    "acceptableIds": [],
+    "differentialIds": [],
+    "investigations": [
+      "Serum potassium and magnesium (serial)",
+      "12-lead ECG and continuous telemetry",
+      "Venous blood gas",
+      "Urine potassium and urine chloride",
+      "Serum calcium, phosphate, renal function"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "engine surfaces electrolyte-derangement / arrhythmia-risk commentary rather than forcing a top-1 infective diagnosis",
+    "confidence >= expectedConfidence.min only if engine explicitly supports non-infective metabolic reasoning",
+    "no acceptableIds asserted as top-1 since condition is outside current diagnosable-disease vocabulary",
+    "differential commentary should not include unrelated infective diagnoses as top-1"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

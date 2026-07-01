@@ -1,0 +1,133 @@
+{
+  "id": "gc_079",
+  "specialty": "Dermatology",
+  "condition": "Stevens-Johnson syndrome/TEN",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Painful mouth ulcers, red eyes, and a spreading rash with skin peeling for 3 days, starting 8 days after being started on lamotrigine for a mood disorder.",
+  "history": "34-year-old woman started on lamotrigine 12 days ago (with rapid dose escalation outside recommended titration) for bipolar disorder. Five days later she developed fever, sore throat, and malaise, initially attributed to a viral illness. Two days after that she noticed burning painful erosions in her mouth and conjunctival redness/grittiness, followed within 24 hours by a tender, dusky-red macular rash starting on the trunk and face and spreading to the limbs. Over the next 2 days the skin began to blister and slough off with gentle pressure. She reports odynophagia limiting oral intake, photophobia, and pain on urination. No other new drugs, supplements, or recent infections. No prior history of similar reaction. No known drug allergies previously documented.",
+  "examination": "Acutely unwell, febrile, and in visible pain. Widespread dusky erythematous and purpuric macules coalescing into sheets over face, trunk, and proximal limbs (~15% body surface area with epidermal detachment), with positive Nikolsky sign at the margins of blisters. Hemorrhagic crusting of the lips and buccal mucosa, oral erosions, bilateral conjunctival injection with mucopurulent discharge, and erosions of the labia minora. No epidermal detachment involving palms/soles. No lymphadenopathy. Chest and abdomen otherwise unremarkable; no hepatosplenomegaly.",
+  "vitals": {
+    "hr": 118,
+    "bp": "100/64",
+    "rr": 22,
+    "spo2": 95,
+    "temp": 38.9
+  },
+  "labs": {
+    "hemoglobin_gdl": 11.8,
+    "wbc_per_uL": 11200,
+    "platelets_10e3_uL": 132,
+    "creatinine_mgdl": 1.3,
+    "urea_mmolL": 9.8,
+    "bicarbonate_mmolL": 17,
+    "glucose_mgdl": 158,
+    "alt_uL": 78,
+    "ast_uL": 85,
+    "crp_mgL": 64,
+    "scorten_estimate": 2
+  },
+  "imaging": [
+    "Chest X-ray: no consolidation or effusion (baseline prior to potential respiratory mucosal involvement)"
+  ],
+  "microbiology": [
+    "Blood cultures pending, drawn to exclude concurrent sepsis given fever and tachycardia",
+    "Skin swab/biopsy sent for histopathology (full-thickness epidermal necrosis with subepidermal split expected) and to exclude staphylococcal scalded skin syndrome and infective causes",
+    "Mycoplasma pneumoniae serology/PCR pending (relevant differential trigger in this age group)"
+  ],
+  "differentialDiagnoses": [
+    "Stevens-Johnson syndrome/toxic epidermal necrolysis overlap (drug-induced)",
+    "Staphylococcal scalded skin syndrome",
+    "Erythema multiforme major",
+    "Mycoplasma pneumoniae-induced rash and mucositis (MIRM)",
+    "Acute generalized exanthematous pustulosis (AGEP)",
+    "Autoimmune bullous disease (paraneoplastic pemphigus, bullous pemphigoid)",
+    "Graft-versus-host disease (not applicable here, no transplant history)",
+    "Staphylococcal/streptococcal toxic shock syndrome"
+  ],
+  "finalDiagnosis": "Stevens-Johnson syndrome/toxic epidermal necrolysis overlap (SJS/TEN), drug-induced (lamotrigine), mucocutaneous variant with ~15% BSA epidermal detachment",
+  "citations": [
+    "Harrison 22e — Chapter on Cutaneous Drug Reactions / Stevens-Johnson Syndrome and Toxic Epidermal Necrolysis",
+    "Harrison 22e — Erythema Multiforme, SJS, and TEN (Dermatology section)",
+    "European Dermatology Forum (EDF/EADV) Guidelines on SJS/TEN management",
+    "SCORTEN prognostic scoring — original validation literature referenced in Harrison 22e"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Lamotrigine and all structurally related/cross-reactive drugs must be permanently discontinued and documented as an absolute allergy",
+    "Avoid empirical prophylactic systemic antibiotics unless culture-confirmed secondary infection is documented (risk of further drug reaction and resistance)",
+    "Avoid sulfonamides, allopurinol, and other high-risk SJS/TEN-associated drugs given demonstrated hypersensitivity predisposition",
+    "Avoid adhesive dressings and unnecessary skin trauma given Nikolsky-positive skin",
+    "Systemic corticosteroids/IVIG use is controversial and should follow specialist (burns/dermatology) unit protocols, not routine primary-care management"
+  ],
+  "edgeCases": [
+    "If body surface area of detachment exceeds 30%, this reclassifies as toxic epidermal necrolysis (TEN) rather than SJS, changing prognosis and mandating burns-unit-level care",
+    "Concurrent fever and tachycardia raise concern for evolving sepsis/toxic shock or secondary skin infection, which must be actively excluded rather than assumed to be part of the primary drug reaction",
+    "Rapid lamotrigine dose escalation and concomitant valproate use (not present here) are well-recognized risk factors that should be specifically asked about",
+    "Ocular involvement requires urgent ophthalmology co-management to prevent symblepharon and long-term visual sequelae",
+    "This diagnosis (sjs_ten) is present in the engine's diagnosable disease list as a discrete entity; it is not classified under the sepsis/infectious-disease framework despite overlapping fever and toxic appearance, so infectious mimics must be actively excluded rather than defaulting to a septic-source workup"
+  ],
+  "expectedMaiK": "MaiK should flag this as a dermatologic emergency (SJS/TEN spectrum) driven by mucosal + skin detachment findings with a recent high-risk drug trigger (lamotrigine), recommend immediate drug withdrawal, specialist (dermatology/burns) referral, and SCORTEN-based risk stratification, while distinguishing it from infectious/septic mimics.",
+  "expectedNextQuestions": [
+    "Exact timeline and dose-titration schedule of lamotrigine (or any other new drug) relative to symptom onset",
+    "Percentage of body surface area with epidermal detachment (recalculate serially)",
+    "Any prior history of drug allergy or hypersensitivity reactions",
+    "Ophthalmology assessment for corneal/conjunctival involvement",
+    "Any respiratory or genitourinary mucosal involvement",
+    "SCORTEN parameters: age, malignancy, heart rate, BSA detachment, urea, glucose, bicarbonate"
+  ],
+  "expectedInvestigations": [
+    "Skin biopsy with histopathology (full-thickness epidermal necrosis)",
+    "SCORTEN score calculation",
+    "Complete blood count, renal function, liver function, glucose, bicarbonate",
+    "Blood cultures to exclude concurrent bacteremia/sepsis",
+    "Mycoplasma pneumoniae serology/PCR",
+    "Ophthalmology evaluation",
+    "Skin swab for secondary bacterial infection"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "rash": true,
+    "maculopapularRash": true,
+    "mucosalLesions": true,
+    "mucocutaneousBleeding": true,
+    "skinErythema": true
+  },
+  "expected": {
+    "diagnosis": "Stevens-Johnson syndrome/toxic epidermal necrolysis overlap (SJS/TEN), drug-induced (lamotrigine)",
+    "acceptableIds": [
+      "sjs_ten"
+    ],
+    "differentialIds": [
+      "CELLULITIS"
+    ],
+    "investigations": [
+      "Skin biopsy with histopathology",
+      "SCORTEN score calculation",
+      "Blood cultures",
+      "Mycoplasma pneumoniae serology/PCR",
+      "Ophthalmology evaluation",
+      "Renal and liver function, glucose, bicarbonate"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (sjs_ten)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential list surfaces sepsis/toxic shock and infectious skin mimics as reasonable alternates without them outranking sjs_ten",
+    "engine does not recommend empirical antibiotics as primary management given stewardship tier is null",
+    "engine output explicitly flags causative drug withdrawal (lamotrigine) as immediate action"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

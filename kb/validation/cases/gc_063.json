@@ -1,0 +1,136 @@
+{
+  "id": "gc_063",
+  "specialty": "Hematology",
+  "condition": "Febrile neutropenia",
+  "age": 47,
+  "sex": "F",
+  "presentingComplaint": "Fever and chills for 6 hours, 9 days after chemotherapy",
+  "history": "47-year-old woman with newly diagnosed acute myeloid leukemia, currently on cycle 1 induction chemotherapy (7+3, day 9 post-completion), presents with a single temperature spike to 38.6°C at home followed by rigors, accompanied by generalized malaise and mild sore mouth. She denies cough, dysuria, or diarrhea. No focal pain elsewhere. She has had no bowel movements in 2 days but denies abdominal pain. She is otherwise adherent to prophylactic fluconazole and levofloxacin as per unit protocol. No recent travel. No known drug allergies. No central line complaints reported by patient, though she does have an implanted port used for chemotherapy infusions.",
+  "examination": "Ill-appearing but conversant and oriented. Oral mucosa shows mild erythema with a few small ulcerations (mucositis) but no thrush. Port site clean, no erythema or discharge. Chest clear to auscultation. Abdomen soft, mildly distended, non-tender, no rebound. No perianal erythema or fluctuance. No rash. No lymphadenopathy or hepatosplenomegaly. No focal neurological deficits.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/58",
+    "rr": 22,
+    "spo2": 96,
+    "temp": 38.7
+  },
+  "labs": {
+    "wbc_per_uL": 300,
+    "ANC_per_uL": 80,
+    "hemoglobin_g_dL": 8.1,
+    "platelets_x10e3_uL": 18,
+    "creatinine_mg_dL": 1,
+    "urea_mmol_L": 6.2,
+    "bilirubin_mg_dL": 0.6,
+    "albumin_g_dL": 3,
+    "lactate_mmol_L": 1.6,
+    "CRP_mg_L": 96,
+    "procalcitonin_ng_mL": 0.4
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate or effusion",
+    "Abdominal ultrasound: not performed (no localizing signs)"
+  ],
+  "microbiology": [
+    "Blood cultures x2 (peripheral and from port) sent prior to antibiotics — pending",
+    "Urine culture sent — pending",
+    "No sputum available for culture"
+  ],
+  "differentialDiagnoses": [
+    "Febrile neutropenia (no identified source)",
+    "Line-associated bloodstream infection",
+    "Early neutropenic enterocolitis (typhlitis)",
+    "Mucositis-associated bacteremia (viridans streptococcal translocation)",
+    "Drug fever"
+  ],
+  "finalDiagnosis": "Febrile neutropenia, high-risk, no identified source at presentation",
+  "citations": [
+    "Harrison 22e — Infections in the Compromised Host / Febrile Neutropenia",
+    "IDSA Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer 2011 (updated)",
+    "NCCN Guidelines for Prevention and Treatment of Cancer-Related Infections"
+  ],
+  "stewardship": "Empirical monotherapy with an anti-pseudomonal beta-lactam (e.g., piperacillin-tazobactam, or cefepime/carbapenem per local antibiogram) initiated immediately after cultures without waiting for ANC recovery; vancomycin added only if specific indications present (hemodynamic instability, suspected line infection, skin/soft tissue infection, known MRSA colonization, severe mucositis with quinolone prophylaxis); antifungal coverage considered if fever persists beyond 4-7 days of appropriate antibacterial therapy.",
+  "contraindications": [
+    "Avoid delaying empirical antibiotics pending culture results — treat as an oncologic emergency",
+    "Avoid rectal examination or rectal temperature measurement given neutropenia and thrombocytopenia",
+    "Avoid unnecessary antifungal escalation prior to appropriate antibacterial trial unless high-risk/persistent fever",
+    "Avoid aminoglycoside monotherapy"
+  ],
+  "edgeCases": [
+    "If hypotension or lactate rise develops, reclassify as septic shock and escalate per Surviving Sepsis bundle with source control evaluation",
+    "If abdominal pain, distension, or bloody stool develops, evaluate for neutropenic enterocolitis (typhlitis) with CT abdomen",
+    "If persistent fever beyond 96 hours despite broad-spectrum antibacterial therapy, consider empirical antifungal therapy per NCCN/IDSA",
+    "If port-site erythema or exit-site discharge emerges, consider line removal for tunnel infection or persistent bacteremia"
+  ],
+  "expectedMaiK": "Flag this as high-risk febrile neutropenia (ANC <100, expected duration >7 days) requiring immediate empirical anti-pseudomonal monotherapy without waiting for cultures; note absence of a localizing source and prompt reassessment for typhlitis or line infection if fever persists or new signs emerge.",
+  "expectedNextQuestions": [
+    "What is the expected duration of neutropenia based on chemotherapy regimen and marrow recovery timeline?",
+    "Any hemodynamic instability, rigors with the port line flush, or signs of catheter-related infection?",
+    "Is there abdominal pain, distension, or diarrhea suggestive of neutropenic enterocolitis?",
+    "Is the patient on fluoroquinolone prophylaxis and does culture data show any prior resistant organisms?",
+    "Has fever persisted despite 72-96 hours of empirical antibacterial therapy, warranting antifungal consideration?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 (peripheral and each catheter lumen) before antibiotics",
+    "Complete blood count with differential and ANC",
+    "Comprehensive metabolic panel including creatinine and liver function",
+    "Lactate",
+    "Chest X-ray",
+    "Urinalysis and urine culture",
+    "CRP/procalcitonin as adjuncts (not diagnostic alone)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "immunocompromised": true,
+    "malignancy": true,
+    "neutropenia": true,
+    "absoluteNeutrophilCountLow": true,
+    "mucositis": true,
+    "centralLine": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "Febrile neutropenia, high-risk, no identified source at presentation",
+    "acceptableIds": [
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "DEVICE_INFECTION",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Blood cultures x2 (peripheral and catheter)",
+      "CBC with differential and ANC",
+      "Comprehensive metabolic panel",
+      "Lactate",
+      "Chest X-ray",
+      "Urine culture"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "cefepime",
+        "meropenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis is in acceptableIds (FEBRILE_NEUTROPENIA)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes SEPSIS and/or DEVICE_INFECTION",
+    "stewardship recommends empirical anti-pseudomonal monotherapy without delay for cultures",
+    "no antifungal recommended as first-line empirical therapy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

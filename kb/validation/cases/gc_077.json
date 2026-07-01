@@ -1,0 +1,131 @@
+{
+  "id": "gc_077",
+  "specialty": "Respiratory",
+  "condition": "COVID-19 pneumonia",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "6 days of fever, dry cough, and progressively worsening breathlessness, now breathless at rest",
+  "history": "Previously well 58-year-old man, unvaccinated for COVID-19, presents with a 6-day history of fever, myalgia, and dry cough. Over the last 48 hours he has developed progressive exertional dyspnoea now present at rest, with subjective chest tightness but no true pleuritic pain. No purulent sputum. No recent travel or sick contacts identified beyond a household member with confirmed COVID-19 10 days ago. No significant past medical history; non-smoker. No diarrhoea, no rash, no urinary symptoms.",
+  "examination": "Alert, mildly tachypnoeic, speaking in short sentences, using accessory muscles of respiration. Bilateral fine end-inspiratory crepitations, most pronounced at the lung bases, no wheeze, no dullness to suggest consolidation or effusion. No cyanosis at rest on room air but desaturates on exertion. No lower limb oedema, no rash, no lymphadenopathy. Cardiovascular exam unremarkable, abdomen soft and non-tender.",
+  "vitals": {
+    "hr": 108,
+    "bp": "128/78",
+    "rr": 28,
+    "spo2": 89,
+    "temp": 38.6
+  },
+  "labs": {
+    "wbc": "5.8 x10^9/L (lymphopenia: ALC 0.7 x10^9/L)",
+    "crp": "98 mg/L",
+    "ferritin": "820 ng/mL",
+    "dDimer": "1.1 mg/L FEU (mildly elevated)",
+    "ldh": "410 U/L",
+    "procalcitonin": "0.08 ng/mL (low)",
+    "creatinine": "0.9 mg/dL",
+    "platelets": "180 x10^3/uL",
+    "pao2fio2": 230
+  },
+  "imaging": [
+    "CT chest: bilateral, peripheral and basal-predominant ground-glass opacities with a crazy-paving pattern; no lobar consolidation, no pleural effusion",
+    "CXR: bilateral peripheral hazy infiltrates, worse at bases, no focal consolidation"
+  ],
+  "microbiology": [
+    "SARS-CoV-2 RT-PCR (nasopharyngeal): positive",
+    "Blood cultures x2: no growth at 48h",
+    "Sputum Gram stain/culture: normal flora, no organism isolated",
+    "Urinary Streptococcus pneumoniae and Legionella antigen: negative",
+    "Influenza A/B PCR: negative"
+  ],
+  "differentialDiagnoses": [
+    "COVID-19 pneumonia",
+    "Community-acquired bacterial pneumonia",
+    "Other viral pneumonia (influenza, other respiratory viruses)",
+    "Acute interstitial lung disease / organizing pneumonia",
+    "Pulmonary oedema (cardiogenic)",
+    "Pulmonary embolism"
+  ],
+  "finalDiagnosis": "COVID-19 pneumonia with hypoxaemic respiratory failure (bilateral ground-glass opacities)",
+  "citations": [
+    "Harrison 22e — Coronavirus Disease 2019 (COVID-19)",
+    "NIH COVID-19 Treatment Guidelines 2023",
+    "IDSA COVID-19 Guidelines 2023",
+    "Surviving Sepsis Campaign COVID-19 Guidelines 2021"
+  ],
+  "stewardship": "Not a primary bacterial infection; empirical antibiotics are not routinely indicated unless secondary bacterial pneumonia is suspected (e.g., purulent sputum, lobar consolidation, elevated procalcitonin, or clinical deterioration suggesting superinfection). Low procalcitonin and absence of consolidation here argue against empirical antibacterial therapy; if started pending cultures, de-escalate/stop by 48-72h if bacterial workup remains negative. Management is supportive: supplemental oxygen titrated to target SpO2, systemic corticosteroids (e.g., dexamethasone) for patients requiring supplemental oxygen, consideration of antiviral therapy (e.g., remdesivir) per eligibility, and monitoring for thromboprophylaxis and clinical deterioration.",
+  "contraindications": [
+    "Avoid empirical broad-spectrum antibiotics without evidence of bacterial co-infection",
+    "Corticosteroids should not be started before oxygen requirement is confirmed (harm signal in patients not requiring oxygen per RECOVERY trial)",
+    "Avoid remdesivir in significant renal impairment per product labelling (check eGFR)"
+  ],
+  "edgeCases": [
+    "COVID-19 pneumonia is not present as a distinct id in the current diagnosable-disease list; acceptableIds is therefore set to [] and this case should be flagged for future engine mapping (e.g., a VIRAL_PNEUMONIA or COVID-specific id).",
+    "Low procalcitonin and negative bacterial/atypical microbiology support a primarily viral process, but clinicians must remain vigilant for secondary bacterial superinfection, especially with clinical worsening after initial improvement",
+    "Silent hypoxaemia (SpO2 89% with relatively preserved work of breathing) is a recognised COVID-19 phenomenon and can be missed without pulse oximetry"
+  ],
+  "expectedMaiK": "MaiK should recognize a hypoxaemic bilateral GGO pneumonia pattern with lymphopenia, low procalcitonin, and positive SARS-CoV-2 PCR as consistent with COVID-19 pneumonia, note this falls outside the current bacterial-infection diagnosis set, and steer away from empirical antibiotics toward supportive/antiviral/steroid management with a caveat about excluding bacterial co-infection.",
+  "expectedNextQuestions": [
+    "Vaccination status and time since last COVID-19 vaccine dose",
+    "Duration and trend of oxygen requirement (is FiO2 escalating?)",
+    "Any features suggesting bacterial superinfection (purulent sputum, new consolidation, rising procalcitonin)",
+    "Comorbidities/risk factors for severe disease (diabetes, obesity, immunosuppression, age)",
+    "Eligibility for antiviral therapy (remdesivir, nirmatrelvir-ritonavir) and renal/hepatic function",
+    "Thromboprophylaxis status and D-dimer trend"
+  ],
+  "expectedInvestigations": [
+    "SARS-CoV-2 RT-PCR or antigen test",
+    "CT chest or CXR",
+    "Arterial blood gas / SpO2 with PaO2:FiO2 ratio",
+    "CRP, ferritin, D-dimer, LDH, procalcitonin",
+    "Blood cultures and respiratory bacterial workup to exclude co-infection",
+    "Renal and hepatic function for antiviral dosing eligibility"
+  ],
+  "expectedConfidence": {
+    "min": 60
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "coughRadio": true,
+    "crepitations": true,
+    "consolidation": true,
+    "multilobar": true,
+    "pleuriticPain": true,
+    "wheeze": true,
+    "dyspnea": true,
+    "supplementalOxygen": true,
+    "pao2fio2": true
+  },
+  "expected": {
+    "diagnosis": "COVID-19 pneumonia with hypoxaemic respiratory failure (bilateral ground-glass opacities)",
+    "acceptableIds": [],
+    "differentialIds": [
+      "CAP",
+      "SEVERE_CAP",
+      "ild"
+    ],
+    "investigations": [
+      "SARS-CoV-2 RT-PCR or antigen test",
+      "CT chest or CXR",
+      "Arterial blood gas / PaO2:FiO2 ratio",
+      "CRP, ferritin, D-dimer, LDH, procalcitonin",
+      "Blood cultures and respiratory bacterial workup"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 not forced into a bacterial pneumonia id given low procalcitonin and negative bacterial workup",
+    "differential includes CAP/SEVERE_CAP as reasonable bacterial mimics",
+    "confidence >= expectedConfidence.min",
+    "stewardship output does not recommend empirical antibiotics as first-line given viral picture",
+    "engine surfaces caveat that case diagnosis is outside current diagnosable-disease id set"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

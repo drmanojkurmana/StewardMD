@@ -1,0 +1,128 @@
+{
+  "id": "gc_031",
+  "specialty": "Critical Care",
+  "condition": "COPD exacerbation",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressively worsening breathlessness for 3 days with increased sputum volume and purulence, now with drowsiness noted by family.",
+  "history": "68-year-old man with known GOLD stage III COPD (baseline home oxygen 1 L/min via nasal cannula, multiple prior exacerbations) presents with 3 days of worsening dyspnea, increased sputum volume, and change in sputum from white to yellow-green. Over the last 12 hours the family noted he has become increasingly drowsy and confused, with reduced oral intake. No fever reported at home. 40 pack-year smoking history, quit 2 years ago. No chest pain, no hemoptysis, no leg swelling. Compliant with tiotropium and salmeterol/fluticasone inhalers but ran out of rescue inhaler 2 days ago.",
+  "examination": "Drowsy but rousable to voice, oriented to person only (confused regarding place/time). Using accessory muscles of respiration, pursed-lip breathing, unable to speak in full sentences. Central cyanosis present. Bilateral wheeze with prolonged expiratory phase, reduced air entry at both bases, no crepitations. Asterixis present. No calf swelling. Barrel chest, reduced chest expansion bilaterally. JVP not elevated.",
+  "vitals": {
+    "hr": 118,
+    "bp": "148/92",
+    "rr": 32,
+    "spo2": 84,
+    "temp": 37.2
+  },
+  "labs": {
+    "arterialPH": 7.26,
+    "paCO2_mmHg": 78,
+    "paO2_mmHg": 52,
+    "hco3_mmolL": 30,
+    "wbc_perUl": 13200,
+    "creatinine_mgdl": 1.1,
+    "sodium_mmolL": 138,
+    "potassium_mmolL": 4.3,
+    "lactate_mmolL": 1.8,
+    "crp_mgL": 42,
+    "bnp_pgml": 110
+  },
+  "imaging": [
+    "Chest X-ray: hyperinflated lung fields, flattened diaphragms, no focal consolidation, no pneumothorax, no pleural effusion"
+  ],
+  "microbiology": [
+    "Sputum Gram stain: mixed flora, moderate polymorphs, no dominant organism seen (pending culture)"
+  ],
+  "differentialDiagnoses": [
+    "Acute exacerbation of COPD with hypercapnic respiratory failure",
+    "Community-acquired pneumonia",
+    "Acute decompensated heart failure",
+    "Pulmonary embolism",
+    "Pneumothorax"
+  ],
+  "finalDiagnosis": "COPD exacerbation with acute hypercapnic (Type II) respiratory failure",
+  "citations": [
+    "Harrison 22e — Chronic Obstructive Pulmonary Disease",
+    "Harrison 22e — Respiratory Failure",
+    "GOLD Global Strategy for COPD 2024"
+  ],
+  "stewardship": "Empirical antibiotics indicated per GOLD criteria (increased dyspnea, increased sputum volume, and increased sputum purulence — all three cardinal Anthonisen criteria met with severe exacerbation requiring ventilatory support); no evidence of pneumonia on imaging so pneumonia-specific coverage not required.",
+  "contraindications": [
+    "Avoid uncontrolled high-flow oxygen (target SpO2 88-92% to avoid worsening hypercapnia)",
+    "Avoid sedatives/opioids given depressed sensorium and hypercapnia",
+    "Caution with beta-blockers if concurrent cardiac disease (use cardioselective agents only if essential)"
+  ],
+  "edgeCases": [
+    "Distinguishing COPD exacerbation from decompensated heart failure can be difficult when both coexist; BNP and echocardiography help differentiate",
+    "Altered sensorium with hypercapnia may mimic sepsis-related encephalopathy — arterial blood gas is essential to avoid missing CO2 narcosis",
+    "If NIV fails to improve pH/mentation within 1-2 hours, escalate to invasive mechanical ventilation without delay"
+  ],
+  "expectedMaiK": "MaiK should flag this as a severe COPD exacerbation with impending ventilatory failure (pH 7.26, PaCO2 78) requiring urgent NIV/BiPAP, controlled oxygen titration, systemic corticosteroids, bronchodilators, and antibiotics per Anthonisen criteria — with a low threshold for ICU-level escalation given altered sensorium.",
+  "expectedNextQuestions": [
+    "Is the patient a candidate for non-invasive ventilation, or does depressed sensorium mandate intubation?",
+    "What is the patient's baseline (dry) PaCO2 and functional status for goals-of-care discussion?",
+    "Has heart failure been excluded (echocardiogram, BNP trend)?",
+    "Is the patient on home oxygen and what is the target SpO2 to avoid worsening hypercapnia?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas",
+    "Chest X-ray",
+    "ECG",
+    "Sputum culture",
+    "Blood cultures if febrile/toxic",
+    "BNP or echocardiogram if diagnosis uncertain",
+    "Theophylline/electrolytes if applicable"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "knownCOPD": true,
+    "increasedDyspnea": true,
+    "increasedSputumVolume": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "COPD exacerbation with acute hypercapnic (Type II) respiratory failure",
+    "acceptableIds": [
+      "COPD_EXACERBATION"
+    ],
+    "differentialIds": [
+      "CAP",
+      "SEVERE_CAP"
+    ],
+    "investigations": [
+      "Arterial blood gas",
+      "Chest X-ray",
+      "ECG",
+      "Sputum culture",
+      "Blood cultures",
+      "BNP/echocardiogram"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Amoxicillin-clavulanate",
+        "Azithromycin",
+        "Doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (COPD_EXACERBATION)",
+    "confidence >= min (75)",
+    "differential includes CAP or SEVERE_CAP",
+    "stewardship recommends empirical antibiotics per Anthonisen criteria, tier=guideline",
+    "engine flags urgent need for ventilatory support (NIV) given hypercapnic respiratory failure and altered sensorium"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

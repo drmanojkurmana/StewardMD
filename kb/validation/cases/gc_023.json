@@ -1,0 +1,136 @@
+{
+  "id": "gc_023",
+  "specialty": "Cardiology",
+  "condition": "Acute heart failure",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset severe breathlessness at rest for the past 45 minutes, woke from sleep gasping for air.",
+  "history": "68-year-old man with known hypertension (poorly controlled, self-reported non-adherence to antihypertensives over the past month) and known ischemic heart disease (prior NSTEMI 3 years ago, no revascularization) awoke abruptly from sleep with severe air hunger and a sensation of drowning. No preceding chest pain, fever, or cough productive of purulent sputum. He denies recent illness, diarrhea, or vomiting. He has been eating salty food at a family function over the last two days and admits missing his amlodipine and losartan doses for about a week. No history of trauma or drug ingestion. Family called emergency services immediately given his visible distress and pink frothy sputum.",
+  "examination": "Acutely distressed, sitting bolt upright, unable to speak in full sentences, using accessory muscles of respiration. Drenched in sweat (diaphoretic). Cool peripheries but no cyanosis. Bilateral coarse crepitations extending from lung bases to mid-zones on auscultation. Raised JVP. S3 gallop present. No murmurs. Frothy, blood-tinged sputum noted. No peripheral pitting edema (consistent with acute flash presentation rather than chronic decompensation). Abdomen soft, no hepatomegaly.",
+  "vitals": {
+    "hr": 128,
+    "bp": "212/118",
+    "rr": 38,
+    "spo2": 84,
+    "temp": 36.8
+  },
+  "labs": {
+    "bnpPgMl": 1850,
+    "troponinHsNgL": 42,
+    "creatinine": 1.6,
+    "sodium": 138,
+    "potassium": 4.3,
+    "hemoglobin": 13.8,
+    "arterialPH": 7.31,
+    "arterialPCO2": 30,
+    "arterialPO2": 52,
+    "lactate": 2.1
+  },
+  "imaging": [
+    "Chest X-ray: bilateral perihilar bat-wing alveolar infiltrates, upper lobe venous diversion, Kerley B lines, normal-to-mildly-enlarged cardiac silhouette",
+    "ECG: sinus tachycardia with left ventricular hypertrophy and strain pattern, no acute ST-elevation",
+    "Bedside echocardiogram: preserved-to-mildly-reduced LVEF (~45-50%), concentric LVH, no acute regional wall motion abnormality, no significant valvular lesion, no pericardial effusion"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute cardiogenic pulmonary oedema (flash, hypertensive)",
+    "Acute coronary syndrome with heart failure",
+    "Hypertensive emergency with pulmonary oedema",
+    "Acute severe asthma / COPD exacerbation",
+    "Pulmonary embolism",
+    "Community-acquired pneumonia with respiratory failure",
+    "Anaphylaxis with laryngeal/pulmonary involvement"
+  ],
+  "finalDiagnosis": "Acute heart failure — flash pulmonary oedema, hypertensive (HFpEF-range LVEF, hypertensive crisis-triggered)",
+  "citations": [
+    "Harrison 22e — Heart Failure",
+    "Harrison 22e — Hypertensive Emergencies",
+    "AHA/ACC/HFSA Heart Failure Guideline 2022",
+    "ESC Acute and Chronic Heart Failure Guideline 2021"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid high-dose intravenous fluids / aggressive volume loading",
+    "Avoid beta-blocker initiation during the acute decompensated phase",
+    "Avoid NSAIDs (worsen renal function and fluid retention)",
+    "Use nitrates cautiously if severe aortic stenosis or hypotension develops",
+    "Avoid non-selective vasodilators if concurrent significant hypotension"
+  ],
+  "edgeCases": [
+    "Flash pulmonary oedema with preserved EF should prompt exclusion of acute coronary ischemia and renal artery stenosis as precipitants",
+    "Severe hypoxia with rapid onset can mimic primary respiratory pathology (asthma/COPD) — bilateral crepitations plus hypertension plus S3 favour cardiogenic cause",
+    "If troponin rises further on serial testing, consider concomitant type 1 or type 2 myocardial infarction as the precipitant",
+    "This exact diagnosis (hypertensive flash pulmonary oedema) is not a distinct id in the engine's diagnosable-disease list; mapped to the closest available id 'heart_failure' for acceptable/differential scoring, and 'htn_emergency' listed as differential given the hypertensive-crisis trigger"
+  ],
+  "expectedMaiK": "MaiK should flag flash pulmonary oedema precipitated by hypertensive crisis/medication non-adherence, recommend urgent afterload reduction (IV nitrates), non-invasive ventilation, and loop diuretic, while excluding ACS as concomitant precipitant.",
+  "expectedNextQuestions": [
+    "Any chest pain or pressure preceding or during the episode?",
+    "Medication adherence history, specifically antihypertensives?",
+    "Any dietary sodium indiscretion in preceding days?",
+    "Prior echocardiogram / known baseline LVEF?",
+    "Any history of renal artery stenosis or resistant hypertension?",
+    "Serial troponin trend to exclude evolving ACS?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Chest X-ray",
+    "Serial high-sensitivity troponin",
+    "BNP or NT-proBNP",
+    "Arterial blood gas",
+    "Bedside echocardiogram",
+    "Renal function and electrolytes",
+    "Renal artery imaging if recurrent flash pulmonary oedema"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "bilateralCrackles": true,
+    "raisedJVP": true,
+    "chestPain": true,
+    "hypertensionHx": true,
+    "knownCAD": true,
+    "knownHeartFailure": true
+  },
+  "expected": {
+    "diagnosis": "Acute heart failure — flash pulmonary oedema, hypertensive",
+    "acceptableIds": [
+      "heart_failure"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "htn_emergency",
+      "asthma_exac",
+      "pe"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Chest X-ray",
+      "Serial high-sensitivity troponin",
+      "BNP or NT-proBNP",
+      "Arterial blood gas",
+      "Bedside echocardiogram"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (heart_failure)",
+    "confidence >= expectedConfidence.min",
+    "differential includes acs and htn_emergency",
+    "stewardship recommendation is null/not-applicable (non-infective case)",
+    "expectedInvestigations subset present in system-recommended investigations"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

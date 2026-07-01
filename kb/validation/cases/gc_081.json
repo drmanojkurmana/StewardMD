@@ -1,0 +1,131 @@
+{
+  "id": "gc_081",
+  "specialty": "Toxicology",
+  "condition": "Salicylate toxicity",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Brought to the emergency department by roommate after being found confused, breathing fast, and complaining of ringing in her ears, roughly 6 hours after an intentional ingestion of a large number of aspirin tablets.",
+  "history": "Previously well 24-year-old woman with a background of chronic tension headaches, on no regular medications apart from intermittent over-the-counter aspirin. Roommate reports finding an empty bottle that had contained approximately 100 tablets of aspirin 325 mg, last seen full the previous evening, following an argument with her partner. Patient admits to taking 'a large handful' of tablets about 6 hours prior to presentation in a single episode, followed by repeated vomiting. She denies co-ingestion of paracetamol, alcohol, or other drugs, though this history is unreliable given her mental state. She reports progressive nausea, vomiting, sweating, tinnitus (bilateral ringing in the ears), and a sensation of hearing loss over the preceding 2-3 hours. No prior psychiatric admissions; roommate reports low mood over the past month.",
+  "examination": "Anxious, diaphoretic young woman, intermittently confused and disoriented to time, oriented to person and place. Hyperventilating with deep, rapid breathing (Kussmaul-like pattern). Mucous membranes dry. No focal neurological deficit. Abdomen soft, mildly tender epigastrically, no guarding. No rash. Ears: tympanic membranes normal on otoscopy; patient reports subjective bilateral tinnitus and mild hearing dulling. Reflexes normal, no clonus or rigidity to suggest serotonin syndrome. Temperature mildly elevated.",
+  "vitals": {
+    "hr": 122,
+    "bp": "128/78",
+    "rr": 34,
+    "spo2": 98,
+    "temp": 38.1
+  },
+  "labs": {
+    "salicylateLevel_mgdL": 78,
+    "arterialPH": 7.44,
+    "paCO2_mmHg": 19,
+    "paO2_mmHg": 112,
+    "bicarbonate_mmolL": 12,
+    "anionGap": 24,
+    "lactate_mmolL": 3.1,
+    "sodium_mmolL": 138,
+    "potassium_mmolL": 3.1,
+    "chloride_mmolL": 100,
+    "glucose_mgdL": 142,
+    "creatinine_mgdL": 1.1,
+    "urea_mgdL": 28,
+    "ketones": "trace",
+    "inr": 1,
+    "paracetamolLevel": "undetectable",
+    "ethanolLevel": "undetectable",
+    "urinePH": 6.5
+  },
+  "imaging": [
+    "Chest X-ray: clear lung fields, no aspiration changes"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Salicylate toxicity",
+    "Diabetic ketoacidosis",
+    "Sepsis with lactic acidosis",
+    "Serotonin syndrome / sympathomimetic toxicity",
+    "Alcoholic ketoacidosis"
+  ],
+  "finalDiagnosis": "Salicylate toxicity with mixed respiratory alkalosis and high anion-gap metabolic acidosis",
+  "citations": [
+    "Harrison 22e — Poisoning and Drug Overdose (Salicylates)",
+    "American Academy of Clinical Toxicology (AACT) Position Statement on Salicylate Toxicity",
+    "Extracorporeal Treatments in Poisoning (EXTRIP) Workgroup Recommendations — Salicylate Poisoning 2015"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid acetazolamide (worsens systemic acidosis and enhances CNS salicylate penetration)",
+    "Avoid sedation/intubation without adequate pre-oxygenation and matching pre-intubation minute ventilation — loss of compensatory hyperventilation can precipitate acute decompensation and cerebral/systemic acidemia",
+    "Avoid gastric lavage beyond very early presentation; caution with repeated-dose activated charcoal if ileus or reduced consciousness without airway protection"
+  ],
+  "edgeCases": [
+    "Mixed acid-base picture (respiratory alkalosis from direct medullary stimulation plus high anion-gap metabolic acidosis) is classic and can mask true severity if only pH is considered; arterial pH may appear near-normal despite a very high salicylate level",
+    "Chronic salicylate toxicity in elderly patients presents more insidiously with lower levels causing severe toxicity than acute overdose",
+    "Tinnitus and hearing changes are an early, sensitive but nonspecific marker of salicylate levels and can guide dose-response monitoring",
+    "Serum salicylate level does not correlate perfectly with clinical severity, especially with chronic or ongoing absorption (bezoar formation, enteric-coated tablets) — repeat levels every 2 hours until decline confirmed",
+    "Concomitant ingestion of enteric-coated aspirin can cause delayed and prolonged absorption requiring extended monitoring"
+  ],
+  "expectedMaiK": "Flag classic salicylate triad (tinnitus, hyperventilation, mixed respiratory alkalosis/high anion-gap metabolic acidosis) after aspirin overdose; recommend urine/serum alkalinization with sodium bicarbonate to enhance renal elimination, serial salicylate levels, and hemodialysis threshold assessment given level and CNS involvement.",
+  "expectedNextQuestions": [
+    "What is the timing and total estimated dose of aspirin ingested, and was it enteric-coated or immediate-release?",
+    "Any co-ingestants (paracetamol, NSAIDs, alcohol, sedatives)?",
+    "Repeat salicylate level in 2 hours to confirm trend (rising vs falling)?",
+    "Any evidence of pulmonary or cerebral edema, or declining GCS?",
+    "Psychiatric risk assessment for intentional self-harm once medically stable"
+  ],
+  "expectedInvestigations": [
+    "Serum salicylate level (serial, every 1-2 hours)",
+    "Arterial blood gas with pH, pCO2, HCO3",
+    "Serum electrolytes, anion gap, glucose",
+    "Renal function tests",
+    "Paracetamol level (co-ingestion screen)",
+    "Urine pH monitoring during alkalinization",
+    "ECG"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "nauseaVomiting": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "fever": true,
+    "drugOverdose": true,
+    "ketonemia": true,
+    "abdominalPain": true
+  },
+  "expected": {
+    "diagnosis": "Salicylate toxicity with mixed respiratory alkalosis and high anion-gap metabolic acidosis",
+    "acceptableIds": [
+      "salicylate_tox"
+    ],
+    "differentialIds": [
+      "dka",
+      "drug_intox",
+      "serotonin_nms"
+    ],
+    "investigations": [
+      "Serial serum salicylate levels",
+      "Arterial blood gas",
+      "Serum electrolytes and anion gap",
+      "Renal function tests",
+      "Paracetamol level",
+      "Urine pH monitoring"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (salicylate_tox)",
+    "confidence >= expectedConfidence.min",
+    "differential includes dka given overlapping high anion-gap metabolic acidosis",
+    "engine surfaces tinnitus and mixed respiratory alkalosis/metabolic acidosis as key discriminators",
+    "engine does not recommend antibiotics/stewardship pathway for this non-infective toxicologic diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

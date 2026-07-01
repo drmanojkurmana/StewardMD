@@ -1,0 +1,136 @@
+{
+  "id": "gc_027",
+  "specialty": "Neurology",
+  "condition": "Transient ischaemic attack",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset right-sided weakness and slurred speech lasting about 45 minutes, now fully resolved.",
+  "history": "A 68-year-old man with known hypertension, type 2 diabetes mellitus, and atrial fibrillation (not on anticoagulation) presents to the emergency department 2 hours after an episode of sudden-onset right facial droop, right arm and leg weakness, and slurred speech. Symptoms began abruptly while he was having breakfast and lasted approximately 45 minutes before resolving completely and spontaneously; he was back to his baseline by the time his wife brought him in. He denies headache, loss of consciousness, seizure activity, or tongue biting during the episode. No prior similar episodes. He reports occasional palpitations over the past few months, not previously evaluated. No recent trauma, no anticoagulant use, no illicit drug use.",
+  "examination": "Alert, oriented, and cooperative. Speech fluent and clear at time of examination. No facial asymmetry. Motor power full (5/5) in all four limbs with normal tone and symmetric reflexes. Sensation intact. Cranial nerves II-XII grossly normal. Gait steady, no ataxia. Irregularly irregular pulse consistent with atrial fibrillation. No carotid bruits auscultated. Cardiac auscultation: irregular rhythm, no murmurs. No papilledema. NIHSS score 0 at presentation (fully resolved deficit).",
+  "vitals": {
+    "hr": 112,
+    "bp": "168/94",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "glucose_mgdl": 146,
+    "hba1c_percent": 7.8,
+    "sodium_mmolL": 138,
+    "potassium_mmolL": 4.1,
+    "creatinine_mgdl": 1.1,
+    "plateletCount_x10e3": 240,
+    "inr": 1,
+    "aptt_sec": 28,
+    "totalCholesterol_mgdl": 210,
+    "ldl_mgdl": 138,
+    "troponin": "not elevated"
+  },
+  "imaging": [
+    "Non-contrast CT head: no acute infarct, no hemorrhage, mild chronic small-vessel ischemic changes",
+    "MRI brain with DWI: no acute diffusion restriction (no infarct identified)",
+    "CT/MR angiography head and neck: no significant carotid stenosis; no large-vessel occlusion",
+    "Carotid Doppler ultrasound: less than 50% stenosis bilaterally",
+    "Transthoracic echocardiogram: mild left atrial enlargement, no intracardiac thrombus, preserved LV ejection fraction",
+    "12-lead ECG: atrial fibrillation with rapid ventricular response, no acute ischemic changes"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute ischaemic stroke with rapid resolution",
+    "Focal (Todd's) paresis following an unwitnessed seizure",
+    "Hemiplegic migraine",
+    "Hypoglycemia",
+    "Functional (psychogenic) neurological event",
+    "Peripheral vestibular/labyrinthine cause"
+  ],
+  "finalDiagnosis": "Transient ischaemic attack (cardioembolic, secondary to atrial fibrillation), ABCD2 score 6 (high risk)",
+  "citations": [
+    "Harrison 22e — Transient Ischemic Attack and Ischemic Stroke",
+    "AHA/ASA Guideline for the Prevention of Stroke in Patients With Stroke and TIA 2021",
+    "AHA/ASA Guideline for Early Management of Acute Ischemic Stroke 2019 (updated 2023)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not delay urgent brain and vascular imaging because symptoms have resolved — TIA with high ABCD2 score carries substantial short-term stroke risk",
+    "Avoid discharge without same-day (ideally admission-level) workup given ABCD2 score of 6",
+    "Anticoagulation for atrial fibrillation should not be started until intracranial hemorrhage is excluded and, per guidelines, timing balanced against infarct size (not applicable here as no infarct on imaging)",
+    "Avoid antiplatelet-anticoagulant dual therapy without clear indication due to bleeding risk"
+  ],
+  "edgeCases": [
+    "Symptoms fully resolved by the time of assessment, so exam is normal — diagnosis rests entirely on history plus imaging exclusion of infarct/hemorrhage and identification of a cardioembolic source",
+    "High ABCD2 score (6) despite complete resolution mandates urgent (within 24h) evaluation and consideration of hospital admission, per AHA/ASA guidance, rather than outpatient work-up",
+    "Underlying atrial fibrillation not previously anticoagulated is the likely mechanism; this shifts management toward anticoagulation rather than antiplatelet therapy once hemorrhage is excluded and timing is deemed safe",
+    "MRI-DWI negative does not exclude TIA; a subset of true TIAs show no restricted diffusion",
+    "This case is a cerebrovascular/vascular-neurology diagnosis rather than an infectious syndrome, so stewardship/antibiotic fields are not applicable"
+  ],
+  "expectedMaiK": "MaiK should flag this as a high-risk TIA (ABCD2 = 6) requiring urgent same-day neurovascular imaging and admission-level workup rather than reassurance from symptom resolution; it should highlight atrial fibrillation as the likely cardioembolic source and prompt consideration of anticoagulation once hemorrhage/infarct size concerns are excluded.",
+  "expectedNextQuestions": [
+    "What was the exact duration and full symptom timeline of the episode?",
+    "Is the patient currently on any antiplatelet or anticoagulant therapy?",
+    "Has atrial fibrillation been previously diagnosed or is this a new finding?",
+    "Are there contraindications to anticoagulation (bleeding history, falls risk, recent surgery)?",
+    "What is the patient's CHA2DS2-VASc score?",
+    "Any history of prior stroke/TIA?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head (urgent)",
+    "MRI brain with diffusion-weighted imaging",
+    "CT or MR angiography of head and neck / carotid Doppler",
+    "12-lead ECG and cardiac telemetry / prolonged rhythm monitoring",
+    "Transthoracic echocardiogram",
+    "Fasting glucose / HbA1c",
+    "Fasting lipid profile",
+    "Complete blood count, coagulation profile (INR/aPTT), renal function"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "focalNeuroDeficit": true,
+    "atrialFibHx": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "cerebrovascularDisease": true,
+    "syncope": true,
+    "headache": true
+  },
+  "expected": {
+    "diagnosis": "Transient ischaemic attack (cardioembolic, secondary to atrial fibrillation), ABCD2 score 6 (high risk)",
+    "acceptableIds": [
+      "tia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "seizure_epilepsy",
+      "migraine",
+      "atrial_fib"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "MRI brain with DWI",
+      "CT/MR angiography head and neck or carotid Doppler",
+      "ECG and cardiac monitoring",
+      "Transthoracic echocardiogram",
+      "Fasting glucose and lipid profile"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (tia)",
+    "confidence >= expectedConfidence.min",
+    "differential includes ischemic_stroke",
+    "differential includes seizure_epilepsy",
+    "system recommends urgent neuroimaging and vascular imaging despite resolved deficit",
+    "system flags high ABCD2 risk category prompting urgent/admission-level workup",
+    "stewardship/antibiotic recommendation is absent (non-infectious diagnosis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

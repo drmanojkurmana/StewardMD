@@ -1,0 +1,117 @@
+{
+  "id": "gc_009",
+  "specialty": "Genitourinary",
+  "condition": "Acute cystitis (UTI)",
+  "age": 26,
+  "sex": "F",
+  "presentingComplaint": "26-year-old woman presents with 2 days of burning on urination, urinary frequency, and urgency.",
+  "history": "Previously healthy woman with no significant past medical history reports acute onset of dysuria, increased urinary frequency (voiding every 1-2 hours), and a sense of urgency for the past 2 days. She notes mild suprapubic discomfort but denies flank pain, fever, chills, rigors, nausea, or vomiting. No vaginal discharge or irritation. She is sexually active with a single partner, uses no barrier contraception, and reports similar milder episodes twice in the past two years that resolved with short antibiotic courses. She denies pregnancy (last menstrual period 10 days ago, regular cycles), denies diabetes, denies known structural urinary tract abnormalities, and has no indwelling catheter. No recent hospitalization, antibiotic use in last 90 days, or travel. No hematuria noted by the patient.",
+  "examination": "Alert, well-appearing, non-toxic young woman in no acute distress. Afebrile. Mild suprapubic tenderness to palpation without rebound or guarding. No costovertebral angle tenderness bilaterally. Abdomen soft, non-distended. No pelvic organ tenderness on external exam; pelvic exam not performed as history is classic and low suspicion for STI/PID. No skin rash or lymphadenopathy.",
+  "vitals": {
+    "hr": 82,
+    "bp": "112/70",
+    "rr": 14,
+    "spo2": 99,
+    "temp": 37
+  },
+  "labs": {
+    "urinalysis": "positive leukocyte esterase, positive nitrites, WBC 15-20/hpf, few epithelial cells, no casts",
+    "urineMicroscopy_RBC": "0-2/hpf",
+    "serumCreatinine_mgdl": 0.7,
+    "wbcCount_perUL": 7200,
+    "urinePregnancyTest": "negative"
+  },
+  "imaging": [],
+  "microbiology": [
+    "Urine culture pending at time of presentation (empirical treatment initiated per uncomplicated cystitis protocol; not routinely required in uncomplicated cases but sent given recurrent episodes)"
+  ],
+  "differentialDiagnoses": [
+    "Acute uncomplicated cystitis",
+    "Acute urethritis (chlamydial/gonococcal)",
+    "Vulvovaginitis",
+    "Pelvic inflammatory disease",
+    "Interstitial cystitis / bladder pain syndrome",
+    "Early pyelonephritis"
+  ],
+  "finalDiagnosis": "Acute uncomplicated cystitis",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA/ESCMID Uncomplicated Cystitis and Pyelonephritis Guideline 2011"
+  ],
+  "stewardship": "Empirical short-course therapy for uncomplicated cystitis in a non-pregnant premenopausal woman: first-line agents per IDSA guidance include nitrofurantoin, trimethoprim-sulfamethoxazole (if local resistance <20%), or fosfomycin; fluoroquinolones reserved as alternatives due to collateral damage/resistance concerns. No imaging or blood cultures indicated. Duration per agent-specific short-course regimen.",
+  "contraindications": [
+    "Avoid trimethoprim-sulfamethoxazole if local E. coli resistance exceeds 20% or if sulfa allergy present",
+    "Avoid nitrofurantoin if estimated GFR is substantially reduced (agent still generally acceptable at this patient's normal renal function)",
+    "Avoid fluoroquinolones as first-line given availability of narrower-spectrum alternatives and resistance/toxicity concerns"
+  ],
+  "edgeCases": [
+    "If fever, flank pain, or costovertebral tenderness develop, reclassify as pyelonephritis and escalate workup/therapy",
+    "Recurrent cystitis (>=2 episodes in 6 months or >=3 in 12 months) may warrant urine culture confirmation, evaluation for recurrent UTI risk factors, and consideration of prophylactic strategies",
+    "Pregnancy must be excluded before selecting antibiotic (confirmed negative here) as this changes both diagnosis-in-list status and drug choice",
+    "If sexually transmitted infection risk factors present, consider concurrent testing for chlamydia/gonorrhea given overlapping urethritis symptoms"
+  ],
+  "expectedMaiK": "MaiK should recognize classic uncomplicated cystitis in a young non-pregnant woman (dysuria, frequency, urgency, suprapubic tenderness, positive nitrites/leukocyte esterase, afebrile, no systemic toxicity or flank pain) and recommend narrow-spectrum short-course empirical therapy without imaging or blood work escalation, while flagging recurrent episode history for follow-up.",
+  "expectedNextQuestions": [
+    "Any fever, chills, flank pain, or nausea/vomiting suggesting upper tract involvement?",
+    "Confirm last menstrual period / pregnancy status",
+    "Any vaginal discharge, new sexual partner, or symptoms suggesting urethritis/STI?",
+    "How many UTI episodes in the past 6-12 months (recurrence pattern)?",
+    "Any known structural urinary tract abnormality, diabetes, or immunosuppression?"
+  ],
+  "expectedInvestigations": [
+    "urinalysis with microscopy",
+    "urine pregnancy test",
+    "urine culture (if recurrent, atypical, or treatment failure)"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "feverGU": true,
+    "flankPain": true,
+    "costovertebralTenderness": true,
+    "complicatedUTIRisk": true,
+    "pregnancy": true,
+    "toxicAppearing": true,
+    "fever": true,
+    "sex": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "Acute uncomplicated cystitis",
+    "acceptableIds": [
+      "CYSTITIS"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "CA_UTI",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "urinalysis with microscopy",
+      "urine pregnancy test",
+      "urine culture (if recurrent or atypical)"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "nitrofurantoin",
+        "trimethoprim-sulfamethoxazole",
+        "fosfomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CYSTITIS)",
+    "confidence >= expectedConfidence.min",
+    "differential includes PYELONEPHRITIS",
+    "no flank pain or fever findings should not trigger pyelonephritis-tier antibiotics",
+    "stewardship recommendation does not include fluoroquinolone as first-line"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

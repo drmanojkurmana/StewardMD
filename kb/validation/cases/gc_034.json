@@ -1,0 +1,160 @@
+{
+  "id": "gc_034",
+  "specialty": "Hepatology",
+  "condition": "Decompensated cirrhosis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Progressive abdominal distension and swelling of both legs for 3 weeks, with one episode of black tarry stools yesterday.",
+  "history": "54-year-old man with known alcohol-related cirrhosis (diagnosed 2 years ago on ultrasound and endoscopy showing small esophageal varices) presents with 3 weeks of progressively increasing abdominal girth and bilateral leg swelling. He reports reduced oral intake and early satiety. Yesterday he passed one large melenic stool and today feels light-headed on standing. Family reports he has been more forgetful and slept most of yesterday, with reversal of sleep-wake pattern over the past 2 days. No hematemesis. He continues to drink alcohol regularly (last drink 2 days ago, ~80 g/day for over 15 years). No fever reported by family. No prior variceal bleed. Not on beta-blocker or diuretics currently — ran out of furosemide/spironolactone 10 days ago. No known diabetes. No NSAID or new medication use.",
+  "examination": "Icteric sclerae, spider angiomata over chest, palmar erythema, temporal wasting. Abdomen markedly distended, shifting dullness present, fluid thrill positive, mild diffuse tenderness without guarding, no rebound. Bilateral pitting pedal edema to mid-shin. Asterixis present on outstretched hands. Mildly drowsy but arousable, oriented to person only (disoriented to time/place) — consistent with grade II hepatic encephalopathy. No focal neurological deficit. Digital rectal exam: melena confirmed, no active bleeding at time of exam.",
+  "vitals": {
+    "hr": 104,
+    "bp": "96/62",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 37.1
+  },
+  "labs": {
+    "hemoglobin_g_dL": 8.2,
+    "platelets_x10e3_uL": 78,
+    "wbc_x10e3_uL": 9.8,
+    "inr": 1.9,
+    "bilirubin_total_mg_dL": 4.6,
+    "albumin_g_dL": 2.4,
+    "creatinine_mg_dL": 1.6,
+    "sodium_mmol_L": 128,
+    "potassium_mmol_L": 4.1,
+    "childPughScore": 11,
+    "childPughClass": "C",
+    "MELD_Na": 24,
+    "ascitesFluidTLC_cells_uL": 180,
+    "ascitesFluidPMN_cells_uL": 90,
+    "ascitesFluidAlbumin_g_dL": 0.8,
+    "SAAG_g_dL": 1.6
+  },
+  "imaging": [
+    "Abdominal ultrasound: shrunken nodular liver, splenomegaly, moderate-to-large ascites, patent portal vein with normal flow",
+    "Upper GI endoscopy (planned/urgent): assessment for esophageal varices"
+  ],
+  "microbiology": [
+    "Diagnostic ascitic fluid tap: PMN count 90 cells/µL (below 250/µL threshold, SBP not confirmed on this sample)",
+    "Ascitic fluid culture: pending (bedside inoculation into blood culture bottles sent)",
+    "Blood cultures: pending"
+  ],
+  "differentialDiagnoses": [
+    "Decompensated cirrhosis with ascites and grade II hepatic encephalopathy",
+    "Acute variceal upper GI bleed",
+    "Spontaneous bacterial peritonitis",
+    "Hepatorenal syndrome / acute kidney injury",
+    "Alcoholic hepatitis superimposed on cirrhosis",
+    "Hepatic encephalopathy precipitated by GI bleed and hypokalemia/infection"
+  ],
+  "finalDiagnosis": "Decompensated cirrhosis (Child-Pugh C) with tense ascites, upper GI bleed (likely variceal), and grade II hepatic encephalopathy",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications",
+    "Harrison 22e — Gastrointestinal Bleeding",
+    "AASLD Practice Guidance — Ascites, Spontaneous Bacterial Peritonitis, Hepatorenal Syndrome 2021",
+    "AASLD Practice Guidance — Portal Hypertensive Bleeding in Cirrhosis 2017 (variceal management)",
+    "Baveno VII Consensus Workshop 2022"
+  ],
+  "stewardship": "If SBP is confirmed (ascitic PMN ≥250 cells/µL) or clinically suspected despite a lower count in a decompensated cirrhotic with GI bleed, empirical antibiotic prophylaxis/treatment with an IV third-generation cephalosporin (e.g., ceftriaxone) is indicated per AASLD guidance; norfloxacin or ceftriaxone prophylaxis is also recommended for all cirrhotics with acute variceal bleeding regardless of ascitic fluid count, for 5-7 days.",
+  "contraindications": [
+    "Avoid NSAIDs and nephrotoxic agents (risk of hepatorenal syndrome/AKI)",
+    "Avoid aminoglycosides in cirrhosis with renal impairment",
+    "Use caution/avoid sedatives (benzodiazepines) which can precipitate or worsen hepatic encephalopathy",
+    "Correct coagulopathy cautiously; avoid over-transfusion of blood products which can raise portal pressure and precipitate rebleeding (restrictive transfusion strategy, target Hb ~7-8 g/dL)",
+    "Beta-blockers should be withheld or used cautiously in the setting of active bleeding, hypotension, or refractory ascites/AKI"
+  ],
+  "edgeCases": [
+    "Ascitic fluid PMN count here is below the 250 cells/µL SBP threshold, but a diagnostic tap in the setting of GI bleed and encephalopathy still mandates empirical antibiotic prophylaxis per guidelines given the high risk of bacterial translocation/infection in this population",
+    "Grade II hepatic encephalopathy in this case is multifactorial — precipitated by GI bleed (nitrogen load), hypovolemia, and possible early infection rather than a single cause",
+    "Hyponatremia (Na 128) and renal impairment (Cr 1.6) raise concern for evolving hepatorenal syndrome versus prerenal AKI from GI bleed/diuretic discontinuation — trial of albumin and diuretic/NSAID avoidance needed before HRS can be labeled",
+    "This composite presentation (decompensated cirrhosis + variceal bleed + hepatic encephalopathy) does not map to a single narrow disease id in the reference list; 'decomp_cirrhosis' is used as the primary acceptable id, with 'variceal_bleed', 'hepatic_enceph', and 'SBP' as reasonable differentials given overlapping presentations"
+  ],
+  "expectedMaiK": "Flag decompensated Child-Pugh C cirrhosis with concurrent GI bleed and grade II encephalopathy as a multi-system emergency; recommend urgent endoscopy, ascitic fluid analysis with empirical SBP prophylaxis, lactulose titration, and restrictive transfusion — avoid NSAIDs/sedatives/nephrotoxins.",
+  "expectedNextQuestions": [
+    "Has an urgent upper GI endoscopy been performed or scheduled to identify and band/ligate varices?",
+    "Has empirical vasoactive therapy (terlipressin/octreotide) been started for suspected variceal bleed?",
+    "Has diagnostic ascitic paracentesis been sent for cell count, culture, and albumin (SAAG) as above?",
+    "Is empirical antibiotic prophylaxis for SBP/variceal bleed being given per AASLD/Baveno VII recommendations?",
+    "What precipitant(s) for hepatic encephalopathy have been addressed (GI bleed, electrolyte disturbance, infection, constipation)?",
+    "Is a restrictive transfusion strategy (target Hb ~7-8 g/dL) being followed?",
+    "Has renal function trend been monitored to distinguish prerenal AKI from evolving hepatorenal syndrome?"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy",
+    "Diagnostic ascitic fluid analysis (cell count, culture, albumin, SAAG)",
+    "Liver function tests, INR, albumin",
+    "Renal function, electrolytes",
+    "Complete blood count",
+    "Blood cultures",
+    "Ammonia level (optional, clinical diagnosis of HE)",
+    "Abdominal ultrasound with Doppler"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "jaundice": true,
+    "ascites": true,
+    "ascitesGrade": true,
+    "abdominalDistension": true,
+    "legSwellingBilateral": true,
+    "liverDisease": true,
+    "melena": true,
+    "gibPresentation": true,
+    "hematemesis": true,
+    "asterixis": true,
+    "encephalopathyGrade": true,
+    "alteredSensorium": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "hemoglobin": true,
+    "platelets": true,
+    "inr": true,
+    "bilirubin": true,
+    "albumin": true,
+    "creatinine": true,
+    "alcoholExcess": true,
+    "splenomegaly": true
+  },
+  "expected": {
+    "diagnosis": "Decompensated cirrhosis (Child-Pugh C) with tense ascites, upper GI bleed (likely variceal), and grade II hepatic encephalopathy",
+    "acceptableIds": [
+      "decomp_cirrhosis"
+    ],
+    "differentialIds": [
+      "variceal_bleed",
+      "hepatic_enceph",
+      "SBP"
+    ],
+    "investigations": [
+      "Urgent upper GI endoscopy",
+      "Diagnostic ascitic fluid analysis (cell count, culture, albumin, SAAG)",
+      "Liver function tests, INR, albumin",
+      "Renal function, electrolytes",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ceftriaxone",
+        "norfloxacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (decomp_cirrhosis)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes variceal_bleed",
+    "differential includes hepatic_enceph",
+    "differential includes SBP",
+    "stewardship recommendation includes ceftriaxone or norfloxacin for SBP/variceal bleed prophylaxis",
+    "contraindications flag NSAIDs and sedative/benzodiazepine avoidance",
+    "expectedNextQuestions includes urgent endoscopy prompt"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

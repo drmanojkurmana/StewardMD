@@ -1,0 +1,139 @@
+{
+  "id": "gc_083",
+  "specialty": "Toxicology",
+  "condition": "Tricyclic antidepressant overdose",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Found unresponsive at home with an empty pill bottle nearby; witnessed generalized seizure en route to hospital",
+  "history": "29-year-old woman with a history of major depressive disorder on amitriptyline 150 mg/day, brought in by ambulance after her roommate found her unresponsive on the bathroom floor with an empty bottle of amitriptyline (previously containing approximately 50 tablets of 50 mg each) and a suicide note. Last seen normal approximately 2 hours earlier. Paramedics witnessed a single generalized tonic-clonic seizure lasting under 2 minutes during transport, which broke spontaneously. No history of co-ingestion reported by roommate, though empty wine glass was also found at scene. No known cardiac disease. No prior overdose attempts documented.",
+  "examination": "Drowsy, responds only to painful stimuli (GCS 9), intermittent myoclonic jerks. Pupils dilated (6mm), sluggishly reactive. Dry mucous membranes and flushed, dry skin. Absent bowel sounds. Diffusely hyperreflexic early in course. No focal neurological deficit. No signs of trauma. Skin warm and dry, no diaphoresis.",
+  "vitals": {
+    "hr": 138,
+    "bp": "82/50",
+    "rr": 10,
+    "spo2": 91,
+    "temp": 37.9
+  },
+  "labs": {
+    "venousPH": 7.18,
+    "bicarbonate_mmol_L": 12,
+    "baseExcess": -14,
+    "lactate_mmol_L": 6.8,
+    "sodium_mmol_L": 138,
+    "potassium_mmol_L": 4.1,
+    "creatinine_mg_dL": 1,
+    "glucose_mg_dL": 118,
+    "amitriptylineLevel": "sent, pending (not required for clinical management)",
+    "paracetamolLevel": "not detected",
+    "salicylateLevel": "not detected",
+    "ethanolLevel_mg_dL": 0
+  },
+  "imaging": [
+    "Chest X-ray: no aspiration infiltrate, ETT/lines not yet placed",
+    "CT head (performed given depressed GCS and seizure): no acute intracranial abnormality"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Tricyclic antidepressant overdose",
+    "Other sodium-channel-blocking drug overdose (e.g., cocaine, class Ia/Ic antiarrhythmics, diphenhydramine)",
+    "Serotonin syndrome / other polypharmacy overdose",
+    "Primary seizure disorder with postictal state",
+    "Sepsis with metabolic acidosis",
+    "Sympathomimetic toxidrome"
+  ],
+  "finalDiagnosis": "Tricyclic antidepressant (amitriptyline) overdose with wide-complex QRS, hypotension, and seizure",
+  "citations": [
+    "Harrison 22e — Poisoning and Drug Overdose",
+    "Harrison 22e — Approach to the Patient with Cardiac Arrhythmia (sodium-channel blockade)",
+    "American College of Medical Toxicology (ACMT) Cyclic Antidepressant Poisoning Guidance 2017",
+    "AHA Toxicology in ECC / ACLS Guidelines 2020"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid class Ia (procainamide, quinidine) and class Ic antiarrhythmics — additive sodium-channel blockade, can worsen QRS widening and precipitate arrest",
+    "Avoid flumazenil if co-ingestion with benzodiazepine suspected — can precipitate seizures in TCA overdose",
+    "Avoid physostigmine — historically used but contraindicated due to risk of asystole/seizures in TCA toxicity",
+    "Avoid routine gastric lavage beyond early presentation window; airway must be protected first given depressed sensorium"
+  ],
+  "edgeCases": [
+    "QRS >100ms and terminal R wave in aVR are more predictive of seizure/arrhythmia risk than measured drug level; do not wait for TCA level to act",
+    "Serum alkalinization with sodium bicarbonate is the cornerstone treatment for wide QRS/hypotension/arrhythmia, targeting arterial pH 7.50-7.55, independent of presenting pH",
+    "Refractory hypotension despite bicarbonate and fluids may require IV lipid emulsion or vasopressors (norepinephrine preferred over dopamine)",
+    "Recurrent seizures should be treated with benzodiazepines first-line; avoid phenytoin due to additional sodium-channel blocking effects that may worsen cardiotoxicity",
+    "TCA overdose is not one of the reference D1 diagnosable conditions in this build; mapped here to the closest available engine categories (drug_intox as primary; serotonin_nms and seizure_epilepsy as differential proxies) for regression purposes only — acceptableIds intentionally left as [] to avoid false-positive scoring against an unlisted condition",
+    "Clinical deterioration can be delayed and rapid; patients require continuous cardiac monitoring for at least 6 hours after any QRS widening or arrhythmia, even if asymptomatic on arrival"
+  ],
+  "expectedMaiK": "MaiK should flag this as sodium-channel blocker (TCA) toxicity given wide QRS, hypotension, seizure and anticholinergic exam, and recommend immediate IV sodium bicarbonate boluses/infusion targeting serum alkalinization, benzodiazepines for seizure control, continuous cardiac monitoring, and avoidance of class Ia/Ic antiarrhythmics and physostigmine.",
+  "expectedNextQuestions": [
+    "What is the co-ingestant history (alcohol, benzodiazepines, other psychotropics)?",
+    "What is the time since ingestion and estimated quantity/dose ingested?",
+    "Has the QRS duration been trended on serial ECGs?",
+    "Is the airway protected given depressed GCS, and is intubation being considered?",
+    "Has psychiatry/toxicology been consulted for ongoing risk assessment and antidote/lipid emulsion therapy planning?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (QRS duration, terminal R wave in aVR, QTc)",
+    "Continuous cardiac monitoring",
+    "Venous or arterial blood gas with lactate",
+    "Serum electrolytes, creatinine, glucose",
+    "Paracetamol and salicylate levels (co-ingestion screen)",
+    "Urine toxicology screen",
+    "CT head if depressed GCS or seizure to exclude alternative cause"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "seizure": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "drugOverdose": true,
+    "rigidity": true,
+    "lactateElevated": true,
+    "gcs": true,
+    "heartRate": true,
+    "sbp": true,
+    "dbp": true,
+    "spo2": true,
+    "respRate": true,
+    "tempC": true,
+    "age": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "Tricyclic antidepressant (amitriptyline) overdose with wide-complex QRS, hypotension, and seizure",
+    "acceptableIds": [],
+    "differentialIds": [
+      "drug_intox",
+      "seizure_epilepsy",
+      "serotonin_nms"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Continuous cardiac monitoring",
+      "Venous/arterial blood gas with lactate",
+      "Serum electrolytes and glucose",
+      "Paracetamol and salicylate levels",
+      "Urine toxicology screen",
+      "CT head"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 differential includes drug_intox or seizure_epilepsy given acceptableIds is empty (unlisted condition)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes drug_intox",
+    "findings.seizure and findings.hypotension and findings.alteredSensorium all true",
+    "expected.stewardship.tier == null (non-infective diagnosis, no antimicrobial recommendation should be generated)",
+    "engine output does not recommend class Ia/Ic antiarrhythmics or physostigmine"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

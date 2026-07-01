@@ -1,0 +1,145 @@
+{
+  "id": "gc_060",
+  "specialty": "Hematology",
+  "condition": "Thrombotic thrombocytopenic purpura",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "3 days of worsening confusion, headache, and easy bruising, with one witnessed transient episode of slurred speech this morning.",
+  "history": "Previously healthy 34-year-old woman brought by her husband with a 3-day history of progressive fatigue, headache, and intermittent confusion. Family noticed new bruises on her arms and gums bleeding while brushing her teeth. This morning she had a brief episode of slurred speech and word-finding difficulty lasting about 10 minutes that resolved spontaneously. No fever at home per family, no recent diarrheal illness, no new medications, no recent travel. No known malignancy, no chemotherapy, no prior similar episodes. No history of pregnancy currently; last menstrual period 2 weeks ago, normal flow. No family history of bleeding or clotting disorders.",
+  "examination": "Awake but intermittently disoriented to time and place (fluctuating mental status), mild dysarthria that resolved by the time of exam. Scattered petechiae over bilateral shins and forearms, ecchymoses at venipuncture sites, mucosal bleeding from gums. No lymphadenopathy. No hepatosplenomegaly. Mild scleral icterus. Cardiovascular and respiratory exam unremarkable. No focal motor or sensory deficits at time of exam; no neck stiffness.",
+  "vitals": {
+    "hr": 108,
+    "bp": "132/84",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 37.6
+  },
+  "labs": {
+    "hemoglobin_g_dL": 7.8,
+    "platelets_x10e3_uL": 12,
+    "reticulocyteCount_percent": 6.2,
+    "LDH_U_L": 1450,
+    "haptoglobin_mg_dL": "<10 (undetectable)",
+    "peripheralSmear": "numerous schistocytes (>1% per high-power field), thrombocytopenia, polychromasia",
+    "directCoombsTest": "negative",
+    "creatinine_mg_dL": 1.1,
+    "urea_mg_dL": 32,
+    "totalBilirubin_mg_dL": 3.4,
+    "indirectBilirubin_mg_dL": 2.9,
+    "PT_INR": 1,
+    "aPTT_sec": 30,
+    "fibrinogen_mg_dL": 320,
+    "ADAMTS13activity_percent": "<10 (severely deficient, pending confirmatory assay)",
+    "ADAMTS13inhibitor": "positive (pending)",
+    "troponin_ng_L": 8,
+    "urinalysis": "trace protein, no active sediment"
+  },
+  "imaging": [
+    "Non-contrast CT head: no acute hemorrhage or territorial infarct"
+  ],
+  "microbiology": [
+    "Stool PCR/culture for Shiga toxin-producing E. coli: pending, low pretest probability (no diarrheal prodrome)"
+  ],
+  "differentialDiagnoses": [
+    "Thrombotic thrombocytopenic purpura",
+    "Hemolytic uremic syndrome (typical/atypical)",
+    "Disseminated intravascular coagulation",
+    "Immune thrombocytopenic purpura",
+    "Evans syndrome / autoimmune hemolytic anemia with ITP",
+    "Malignant hypertension with microangiopathy",
+    "Catastrophic antiphospholipid syndrome"
+  ],
+  "finalDiagnosis": "Thrombotic thrombocytopenic purpura (TTP)",
+  "citations": [
+    "Harrison 22e — Thrombotic Microangiopathies (TTP-HUS)",
+    "Harrison 22e — Disorders of Platelets and Vessel Wall",
+    "ISTH Guidelines for TTP 2020",
+    "British Society for Haematology TTP Guideline 2023"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Platelet transfusion should be avoided unless life-threatening hemorrhage or need for an invasive procedure, as it may precipitate further microthrombosis",
+    "Avoid delaying plasma exchange while awaiting ADAMTS13 assay confirmation — treat empirically on clinical suspicion (PLASMIC score)"
+  ],
+  "edgeCases": [
+    "Coombs-negative microangiopathic hemolytic anemia with normal coagulation studies (normal PT/aPTT/fibrinogen) distinguishes TTP from DIC",
+    "Normal renal function argues against HUS as primary diagnosis but does not exclude it",
+    "Fluctuating neurologic signs (transient dysarthria, waxing-waning confusion) are classic for TTP and reflect microvascular CNS involvement",
+    "ADAMTS13 activity <10% with inhibitor supports acquired (immune) TTP; congenital TTP (Upshaw-Schulman) is a differential in recurrent/childhood cases",
+    "'ttp_hus' is the closest engine-diagnosable id available and is used for both acceptable and differential mapping since the vocabulary/disease list does not separately distinguish TTP from HUS"
+  ],
+  "expectedMaiK": "MaiK should flag the classic pentad-adjacent triad (MAHA + severe thrombocytopenia + neurologic findings) as a hematologic emergency requiring urgent plasma exchange, and caution against platelet transfusion.",
+  "expectedNextQuestions": [
+    "Has plasma exchange (therapeutic plasma exchange, TPE) been initiated or is hematology/apheresis service available emergently?",
+    "Send ADAMTS13 activity and inhibitor assay before starting plasma exchange if it does not delay treatment",
+    "Any recent diarrheal illness to help distinguish from Shiga-toxin HUS?",
+    "Is there a PLASMIC score calculated to risk-stratify likelihood of severe ADAMTS13 deficiency?",
+    "Consider caplacizumab and rituximab per institutional protocol for immune-mediated TTP",
+    "Screen for underlying triggers: pregnancy, infection, autoimmune disease (ANA), malignancy, drugs (e.g., quinine, clopidogrel)"
+  ],
+  "expectedInvestigations": [
+    "Peripheral blood smear (schistocytes)",
+    "Platelet count",
+    "LDH",
+    "Haptoglobin",
+    "Direct Coombs test",
+    "ADAMTS13 activity and inhibitor assay",
+    "Renal function panel",
+    "Coagulation profile (PT/aPTT/fibrinogen) to exclude DIC",
+    "PLASMIC score calculation",
+    "Non-contrast CT head if focal neurologic deficits"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "thrombocytopenia": true,
+    "petechialRash": true,
+    "bleedingManifestation": true,
+    "mucocutaneousBleeding": true,
+    "alteredSensorium": true,
+    "behavioralChange": true,
+    "focalNeuroDeficit": true,
+    "headache": true,
+    "renalImpairment": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "Thrombotic thrombocytopenic purpura (TTP)",
+    "acceptableIds": [
+      "ttp_hus"
+    ],
+    "differentialIds": [
+      "ttp_hus",
+      "dic",
+      "itp"
+    ],
+    "investigations": [
+      "Peripheral blood smear for schistocytes",
+      "ADAMTS13 activity and inhibitor assay",
+      "LDH, haptoglobin, indirect bilirubin",
+      "Direct Coombs test",
+      "Coagulation profile (PT/aPTT/fibrinogen)",
+      "Renal function panel",
+      "PLASMIC score"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ttp_hus)",
+    "confidence >= expectedConfidence.min",
+    "differential includes dic and itp",
+    "system output does NOT recommend empirical antibiotics",
+    "system flags urgency for plasma exchange / hematology referral",
+    "system warns against platelet transfusion absent life-threatening bleed"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

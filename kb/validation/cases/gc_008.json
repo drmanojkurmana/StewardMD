@@ -1,0 +1,135 @@
+{
+  "id": "gc_008",
+  "specialty": "Critical Care",
+  "condition": "Ventilator-associated pneumonia",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Intubated ICU patient, day 5 of mechanical ventilation for post-cardiac-arrest respiratory failure, now with new fever, purulent tracheal secretions, and worsening oxygenation.",
+  "history": "61-year-old man admitted 5 days ago after an out-of-hospital cardiac arrest (return of spontaneous circulation achieved, targeted temperature management completed) and intubated for airway protection and respiratory failure. He has remained on mechanical ventilation since admission (day 5), sedated intermittently, with a nasogastric tube for enteral feeding. Over the last 24 hours the bedside nurse notes new-onset fever, increasingly purulent and copious tracheal secretions on suctioning, and rising FiO2 requirement to maintain oxygen saturation. No diarrhea, no rash, no new focal neurological signs beyond his baseline post-arrest encephalopathy. No antibiotics have been given since admission. He has no known drug allergies. Past history: hypertension, type 2 diabetes mellitus.",
+  "examination": "Intubated, mechanically ventilated, sedated (RASS -2). Temp 38.9°C. New coarse crepitations and bronchial breath sounds over the right lower zone. Copious thick yellow-green tracheal secretions on suctioning. Chest wall movement symmetric, no crepitus. Abdomen soft, NG tube in situ, tolerating enteral feeds. No rash, no calf swelling. Endotracheal tube secure, cuff pressure adequate. No new murmur.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/58",
+    "rr": 26,
+    "spo2": 90,
+    "temp": 38.9
+  },
+  "labs": {
+    "wbc": 17.8,
+    "neutrophils_percent": 88,
+    "creatinine": 1.1,
+    "lactate": 1.9,
+    "pao2fio2": 178,
+    "crp": 142,
+    "procalcitonin": 2.1,
+    "platelets": 210,
+    "bilirubin": 0.8
+  },
+  "imaging": [
+    "Chest X-ray: new right lower lobe infiltrate not present on admission film, compared with prior ICU films showing progressive consolidation"
+  ],
+  "microbiology": [
+    "Endotracheal aspirate sent for Gram stain and quantitative/semi-quantitative culture (pending)",
+    "Blood cultures x2 sent (pending)",
+    "No prior MDR organism history documented"
+  ],
+  "differentialDiagnoses": [
+    "Ventilator-associated pneumonia",
+    "Ventilator-associated tracheobronchitis",
+    "Aspiration pneumonitis",
+    "Atelectasis with reactive fever",
+    "Acute respiratory distress syndrome (non-infectious)",
+    "Pulmonary embolism",
+    "Drug fever"
+  ],
+  "finalDiagnosis": "Ventilator-associated pneumonia (VAP), day 5 of mechanical ventilation",
+  "citations": [
+    "Harrison 22e — Healthcare-Associated Infections and Pneumonia",
+    "IDSA/ATS Hospital-Acquired and Ventilator-Associated Pneumonia Guidelines 2016",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Empirical coverage should target both typical and MDR gram-negative pathogens given ICU stay and mechanical ventilation duration >48h; base choice on local antibiogram and individual MDR risk factors. Since this patient has no prior MDR risk factors (no prior antibiotics, no prior resistant organism, not on dialysis, community admission), empirical therapy can reasonably use a single agent with activity against Pseudomonas and other common gram-negatives (e.g., piperacillin-tazobactam or cefepime) without automatic double gram-negative or empirical MRSA coverage unless local MRSA prevalence is high or septic shock is present; de-escalate per culture and sensitivity results at 48-72 hours.",
+  "contraindications": [
+    "Avoid empirical aminoglycoside monotherapy for VAP",
+    "Avoid unnecessarily broad empirical MRSA/double-pseudomonal coverage in a patient without MDR risk factors per IDSA/ATS 2016 stewardship principles",
+    "Check for penicillin allergy before beta-lactam selection (documented as none here)"
+  ],
+  "edgeCases": [
+    "Fever and secretions alone are non-specific in ventilated patients — the diagnosis requires the combination of new/progressive infiltrate plus clinical signs of infection (CPIS-type criteria)",
+    "Distinguish from ventilator-associated tracheobronchitis (VAT), which lacks a new infiltrate on imaging",
+    "Consider non-infectious mimics (atelectasis, ARDS, pulmonary edema, pulmonary embolism) before committing to a full antibiotic course",
+    "Quantitative culture thresholds and Gram stain should guide de-escalation once available",
+    "This patient does not yet meet septic shock criteria (no vasopressor requirement, lactate not significantly elevated) so SEPSIS/SEPTIC_SHOCK diagnoses do not apply at this stage"
+  ],
+  "expectedMaiK": "MaiK should flag hospital-day >48h plus current mechanical ventilation, purulent tracheal secretions, worsening oxygenation, and a new infiltrate as classic VAP criteria, and recommend empirical anti-pseudomonal/gram-negative coverage pending culture data with a clear de-escalation plan rather than reflexive dual/MRSA coverage in a patient lacking MDR risk factors.",
+  "expectedNextQuestions": [
+    "Any prior antibiotic exposure or hospitalization before this admission?",
+    "Local ICU antibiogram / unit-specific MRSA and Pseudomonas prevalence?",
+    "Has an endotracheal aspirate or bronchoalveolar lavage been sent for quantitative culture?",
+    "Is the patient hemodynamically stable or trending toward vasopressor requirement?",
+    "Any evidence of aspiration event at intubation or during ICU stay?"
+  ],
+  "expectedInvestigations": [
+    "Endotracheal aspirate/BAL Gram stain and quantitative culture",
+    "Blood cultures x2",
+    "Chest X-ray (serial) or CT chest if diagnosis unclear",
+    "Arterial blood gas / PaO2:FiO2 ratio",
+    "Procalcitonin trend to support antibiotic duration decisions",
+    "Complete blood count with differential"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "toxicAppearing": true,
+    "icuStay": true,
+    "hospitalDay48": true,
+    "mechanicalVentilation": true,
+    "purulentSecretions": true,
+    "worseningOxygenation": true,
+    "consolidation": true,
+    "crepitations": true,
+    "purulentSputum": true,
+    "pao2fio2": true
+  },
+  "expected": {
+    "diagnosis": "Ventilator-associated pneumonia (VAP), day 5 of mechanical ventilation",
+    "acceptableIds": [
+      "VAP"
+    ],
+    "differentialIds": [
+      "HAP",
+      "ASPIRATION_PNEUMONIA",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Endotracheal aspirate/BAL Gram stain and quantitative culture",
+      "Blood cultures x2",
+      "Chest X-ray",
+      "Arterial blood gas / PaO2:FiO2 ratio",
+      "Procalcitonin"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "cefepime"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (VAP)",
+    "confidence >= expectedConfidence.min",
+    "differential includes HAP and/or ASPIRATION_PNEUMONIA",
+    "stewardship tier == guideline and does not mandate empirical MRSA/dual-pseudomonal coverage absent MDR risk factors",
+    "engine does not classify case as SEPSIS/SEPTIC_SHOCK given absence of organDysfunction/lactateElevated/vasopressorRequirement findings"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "id": "gc_036",
+  "specialty": "Hepatology",
+  "condition": "Hepatic encephalopathy",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Brought by family for 2 days of increasing confusion, daytime somnolence, and sleep-wake reversal.",
+  "history": "Known case of alcohol-related cirrhosis (diagnosed 4 years ago, prior variceal bleed 2 years back, on propranolol and lactulose which family admits he has been skipping for the past week). No fever, no vomiting of blood, no melena reported by family. No new medications. Reports mild constipation over the last 3-4 days. No history of paracentesis or recent illness. No documented alcohol intake in the last several months per family, though compliance with abstinence is uncertain.",
+  "examination": "Drowsy but arousable to voice, disoriented to time and place (Grade II hepatic encephalopathy). Flapping tremor present bilaterally on wrist dorsiflexion. Scleral icterus present. Spider angiomata over chest. Mild ascites with shifting dullness and fluid thrill. No focal neurological deficit. No neck stiffness. No signs of active GI bleeding on rectal exam (no melena on glove).",
+  "vitals": {
+    "hr": 92,
+    "bp": "108/68",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 36.9
+  },
+  "labs": {
+    "totalBilirubin_mgdl": 4.2,
+    "albumin_gdl": 2.6,
+    "inr": 1.9,
+    "creatinine_mgdl": 1.1,
+    "sodium_mEqL": 129,
+    "potassium_mEqL": 3.6,
+    "plateletCount_x10e3": 88,
+    "hemoglobin_gdl": 10.8,
+    "ammonia_umolL": 118,
+    "wbc_x10e3": 7.2,
+    "ascitesFluidNeutrophils_perMm3": 120
+  },
+  "imaging": [
+    "Ultrasound abdomen: coarse echotexture liver, splenomegaly, moderate ascites, no focal liver lesion, patent portal vein"
+  ],
+  "microbiology": [
+    "Ascitic fluid culture: pending (neutrophil count 120/mm3, not diagnostic of SBP)",
+    "Blood cultures: pending"
+  ],
+  "differentialDiagnoses": [
+    "Hepatic encephalopathy (precipitated by constipation/non-adherence to lactulose)",
+    "Spontaneous bacterial peritonitis with secondary encephalopathy",
+    "Variceal/GI bleed with encephalopathy",
+    "Alcohol withdrawal or Wernicke encephalopathy",
+    "Uremic/metabolic encephalopathy",
+    "Sedative or benzodiazepine-related encephalopathy"
+  ],
+  "finalDiagnosis": "Hepatic encephalopathy (Grade II) in decompensated alcohol-related cirrhosis, precipitated by constipation and lactulose non-adherence",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications",
+    "Harrison 22e — Hepatic Encephalopathy",
+    "AASLD/EASL Hepatic Encephalopathy Guideline 2014"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid sedatives/benzodiazepines (can worsen encephalopathy)",
+    "Avoid protein restriction (not recommended, may worsen nutritional status)",
+    "Use caution with opioids and antipsychotics"
+  ],
+  "edgeCases": [
+    "If ascitic fluid PMN count rises >=250/mm3 or cultures turn positive, diagnosis shifts to SBP-precipitated encephalopathy (code SBP) rather than simple non-adherence-precipitated HE",
+    "If melena or hematemesis develops, variceal bleed becomes the precipitant and diagnosis shifts to variceal_bleed",
+    "Ammonia level correlates poorly with severity and is not required for diagnosis; used here only to support clinical impression",
+    "'decomp_cirrhosis' is a reasonable broader differential label but hepatic_enceph is the more specific/accurate id for this presentation and is used as the primary acceptable id"
+  ],
+  "expectedMaiK": "MaiK should flag hepatic encephalopathy precipitated by constipation/lactulose non-adherence in a known cirrhotic, recommend excluding SBP and GI bleeding as precipitants, and emphasize lactulose titration plus precipitant search rather than antibiotics unless infection confirmed.",
+  "expectedNextQuestions": [
+    "Any melena, hematemesis, or hemodynamic instability suggesting GI bleed?",
+    "Recent lactulose/rifaximin adherence and bowel movement frequency?",
+    "Any fever, abdominal pain, or signs suggesting spontaneous bacterial peritonitis?",
+    "Recent alcohol intake or new sedative/opioid use?",
+    "Renal function and electrolytes (dehydration, hyponatremia as precipitants)?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic paracentesis with ascitic fluid cell count and culture",
+    "Blood cultures",
+    "Serum ammonia (supportive, not diagnostic)",
+    "Renal function and electrolytes",
+    "Coagulation profile (INR)",
+    "Upper GI evaluation if bleeding suspected",
+    "Ultrasound abdomen with Doppler (portal vein patency)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "asterixis": true,
+    "liverDisease": true,
+    "ascites": true,
+    "jaundice": true,
+    "encephalopathyGrade": true,
+    "bilirubin": true,
+    "albumin": true,
+    "inr": true,
+    "platelets": true,
+    "ascitesGrade": true,
+    "constipationOrDiarrhea": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "Hepatic encephalopathy (Grade II) in decompensated alcohol-related cirrhosis, precipitated by constipation and lactulose non-adherence",
+    "acceptableIds": [
+      "hepatic_enceph"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "SBP",
+      "variceal_bleed",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Diagnostic paracentesis with cell count and culture",
+      "Blood cultures",
+      "Serum ammonia",
+      "Renal function and electrolytes",
+      "INR/coagulation profile",
+      "Ultrasound abdomen with Doppler"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (hepatic_enceph)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes SBP and variceal_bleed as precipitant considerations",
+    "stewardship tier is null (no empirical antibiotics unless SBP confirmed)",
+    "contraindications flag sedatives/benzodiazepines"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

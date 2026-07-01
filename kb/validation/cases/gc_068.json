@@ -1,0 +1,120 @@
+{
+  "id": "gc_068",
+  "specialty": "Neurology",
+  "condition": "Guillain-Barré syndrome",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Progressive weakness of both legs for 4 days, now spreading to the arms, with difficulty walking.",
+  "history": "A 34-year-old previously healthy man presents with a 4-day history of ascending, symmetric limb weakness. Symptoms began as tingling and numbness in the toes and fingertips, followed within 24-48 hours by difficulty climbing stairs and rising from a chair, which progressed to weakness in both hands. He denies bowel or bladder incontinence but reports mild breathlessness on exertion over the last day. He had a diarrheal illness with loose, watery stools 2 weeks prior that resolved spontaneously without treatment; no antecedent respiratory infection, vaccination, surgery, or trauma. No prior similar episodes. No significant past medical history, no regular medications, non-smoker, no alcohol excess. No family history of neuromuscular disease.",
+  "examination": "Alert and oriented, mildly anxious, speaking in full sentences without obvious respiratory distress at rest. Symmetric flaccid weakness: MRC grade 3/5 in proximal and distal lower limbs, 4/5 in upper limbs. Deep tendon reflexes absent at knees, ankles, and biceps/triceps bilaterally. Plantar responses mute (absent). Sensory exam shows mild distal glove-and-stocking paresthesia but no clear sensory level. Cranial nerve exam intact including facial muscles and extraocular movements. No ptosis. Single breath count reduced to 18. No autonomic instability noted at presentation (stable heart rate and blood pressure). No neck stiffness, no papilledema. No skin rash.",
+  "vitals": {
+    "hr": 92,
+    "bp": "128/82",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 37
+  },
+  "labs": {
+    "wbc": 8.4,
+    "hemoglobin": 14.2,
+    "platelets": 250,
+    "creatinine": 0.9,
+    "csfProtein": "elevated (albuminocytologic dissociation)",
+    "csfWbc": 2,
+    "antiGM1Antibody": "pending",
+    "campylobacterJejuniStool": "pending/exposure history positive"
+  },
+  "imaging": [
+    "MRI spine with contrast: no cord compression, no cord signal change; may show enhancement of cauda equina/nerve roots"
+  ],
+  "microbiology": [
+    "Stool culture pending for Campylobacter jejuni given recent diarrheal illness"
+  ],
+  "differentialDiagnoses": [
+    "Guillain-Barré syndrome (acute inflammatory demyelinating polyneuropathy)",
+    "Myasthenic crisis",
+    "Acute transverse myelitis / spinal cord compression",
+    "Hypokalemic periodic paralysis",
+    "Botulism",
+    "Tick paralysis",
+    "Acute intermittent porphyria"
+  ],
+  "finalDiagnosis": "Guillain-Barré syndrome (acute inflammatory demyelinating polyradiculoneuropathy, AIDP variant), post-infectious (antecedent Campylobacter jejuni-like diarrheal illness)",
+  "citations": [
+    "Harrison 22e — Guillain-Barré Syndrome and Other Immune-Mediated Neuropathies",
+    "AAN Practice Guideline — Guillain-Barré Syndrome Management 2023"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid corticosteroids — not effective in GBS and may delay recovery",
+    "Use IVIG with caution in IgA deficiency (risk of anaphylaxis) and in renal impairment (risk of osmotic nephrosis)",
+    "Plasma exchange contraindicated in hemodynamically unstable patients or those with active sepsis/severe autonomic instability",
+    "Avoid succinylcholine if intubation required (risk of hyperkalemia from denervation)"
+  ],
+  "edgeCases": [
+    "Early in the disease course, reflexes may still be present or only reduced (not fully absent), and CSF albuminocytologic dissociation may not appear until 1-2 weeks into illness — false reassurance if CSF checked too early",
+    "Must monitor forced vital capacity / single breath count serially, as respiratory failure can develop rapidly and unpredictably, warranting ICU admission before overt distress",
+    "Autonomic dysfunction (labile BP, arrhythmia, ileus, urinary retention) can occur later in the course and requires cardiac monitoring",
+    "Miller Fisher variant (ophthalmoplegia, ataxia, areflexia) can be misdiagnosed as brainstem stroke",
+    "This diagnosis maps to 'gbs' in the engine's disease list; it is not an infectious/septic syndrome, so stewardship/antibiotic fields are not applicable"
+  ],
+  "expectedMaiK": "MaiK should flag ascending symmetric weakness with areflexia and recent diarrheal prodrome as classic for Guillain-Barré syndrome, recommend urgent neurology referral, serial respiratory function monitoring (FVC/NIF), CSF study for albuminocytologic dissociation, and note that IVIG or plasma exchange (not steroids) are the guideline-directed therapies.",
+  "expectedNextQuestions": [
+    "Is there any respiratory distress, reduced forced vital capacity, or bulbar weakness (dysphagia, dysarthria)?",
+    "Is there autonomic instability (labile blood pressure, arrhythmia, urinary retention, ileus)?",
+    "Any antecedent illness in the preceding 1-4 weeks (diarrhea, upper respiratory infection, vaccination)?",
+    "Any ophthalmoplegia or ataxia to suggest Miller Fisher variant?",
+    "Any sensory level or bladder/bowel dysfunction suggesting a cord lesion instead?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture for CSF protein and cell count (albuminocytologic dissociation)",
+    "Nerve conduction studies / EMG",
+    "Serial forced vital capacity (FVC) and negative inspiratory force",
+    "Anti-ganglioside antibodies (e.g., anti-GM1, anti-GQ1b if Miller Fisher suspected)",
+    "MRI spine with contrast to exclude cord compression/myelitis",
+    "Stool culture / serology for Campylobacter jejuni",
+    "Serum electrolytes (potassium) to exclude periodic paralysis",
+    "ECG and continuous cardiac monitoring for autonomic dysfunction"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "ascendingWeakness": true,
+    "diarrhea": true,
+    "dyspnea": true
+  },
+  "expected": {
+    "diagnosis": "Guillain-Barré syndrome (acute inflammatory demyelinating polyradiculoneuropathy)",
+    "acceptableIds": [
+      "gbs"
+    ],
+    "differentialIds": [
+      "myasthenic_crisis",
+      "cord_compression"
+    ],
+    "investigations": [
+      "CSF analysis (albuminocytologic dissociation)",
+      "Nerve conduction studies/EMG",
+      "Serial FVC/respiratory monitoring",
+      "MRI spine with contrast",
+      "Anti-ganglioside antibody panel",
+      "Stool culture for Campylobacter jejuni"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (gbs)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes myasthenic_crisis or cord_compression",
+    "stewardship/antibiotics recommendation is absent or null (non-infectious neurological diagnosis)",
+    "expectedNextQuestions surfaces respiratory function / autonomic instability screening"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

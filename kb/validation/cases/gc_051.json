@@ -1,0 +1,118 @@
+{
+  "id": "gc_051",
+  "specialty": "Critical Care",
+  "condition": "Anaphylaxis (distributive shock)",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Sudden difficulty breathing, throat tightness, and facial swelling within minutes of eating a meal at a restaurant, followed by dizziness and collapse.",
+  "history": "A 34-year-old woman with a known history of shellfish allergy (previously mild urticaria only) ate a curry dish at a restaurant approximately 10 minutes before symptom onset. She developed generalized itching, lip and facial swelling, throat tightness with a hoarse voice, audible wheeze, and then felt light-headed and collapsed. Her partner reports she vomited once and became pale and clammy. No known insect sting. She has no other significant past medical history and takes no regular medications; she carries no adrenaline auto-injector. No prior episode of this severity.",
+  "examination": "Anxious, visibly distressed woman, sitting forward, using accessory muscles of respiration. Diffuse urticarial rash over trunk and limbs, marked lip and periorbital swelling, mild tongue swelling. Stridor audible on inspiration with hoarse voice. Bilateral expiratory wheeze on auscultation. Skin cool, pale, and mottled peripherally with delayed capillary refill (4 seconds). Tachycardic, weak thready pulse. Alert but anxious, GCS 15, no focal neurology.",
+  "vitals": {
+    "hr": 132,
+    "bp": "78/48",
+    "rr": 32,
+    "spo2": 89,
+    "temp": 36.8
+  },
+  "labs": {
+    "serumTryptaseAcute": "elevated (sample drawn within 2 hours of onset)",
+    "lactate": "3.1 mmol/L",
+    "wbc": "11.2 x10^9/L",
+    "hemoglobin": "13.1 g/dL",
+    "platelets": "260 x10^3/uL",
+    "creatinine": "0.9 mg/dL",
+    "abg": "pH 7.32, PaCO2 34 mmHg, PaO2 58 mmHg on room air"
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no pneumothorax, hyperinflation consistent with bronchospasm"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Anaphylaxis (food-triggered)",
+    "Acute severe asthma exacerbation",
+    "Angioedema (ACE-inhibitor or hereditary)",
+    "Vasovagal syncope",
+    "Septic shock",
+    "Foreign body airway obstruction",
+    "Panic attack with hyperventilation"
+  ],
+  "finalDiagnosis": "Anaphylaxis with distributive shock and upper airway compromise, triggered by food (shellfish) ingestion",
+  "citations": [
+    "Harrison 22e — Anaphylaxis and Diseases of Immediate Type Hypersensitivity",
+    "World Allergy Organization Anaphylaxis Guidance 2020",
+    "AAAAI/ACAAI Anaphylaxis Practice Parameter 2020"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not delay intramuscular adrenaline (epinephrine) for antihistamines or corticosteroids — these are adjuncts, not first-line therapy",
+    "Avoid beta-blocker use if patient is on one (blunts response to adrenaline; consider glucagon if refractory)",
+    "Do not administer aspirin/NSAIDs empirically for chest discomfort as cause may be allergic mediator release, not cardiac"
+  ],
+  "edgeCases": [
+    "Biphasic anaphylaxis may occur 1-72 hours after initial resolution — observation period required even after apparent response to treatment",
+    "Absence of skin findings does not exclude anaphylaxis (can be purely cardiovascular/respiratory)",
+    "Refractory hypotension despite adrenaline may require IM adrenaline repeat dosing, IV adrenaline infusion, and large-volume crystalloid resuscitation",
+    "Patient with no prior severe reaction and no carried auto-injector reflects a common real-world gap in secondary prevention"
+  ],
+  "expectedMaiK": "Recognize anaphylaxis as the unifying diagnosis (airway/breathing/circulation involvement after allergen exposure) and flag immediate IM adrenaline as first-line, with airway control, oxygen, and fluid resuscitation for shock; warn about biphasic reaction risk requiring observation.",
+  "expectedNextQuestions": [
+    "Time of allergen exposure and specific suspected trigger?",
+    "Any prior severe allergic reactions or known biphasic reactions?",
+    "Is patient on beta-blockers or ACE inhibitors?",
+    "Has intramuscular adrenaline already been given, and when/how much?",
+    "Any stridor progression or impending complete airway obstruction requiring advanced airway management?"
+  ],
+  "expectedInvestigations": [
+    "Serum tryptase (acute and convalescent)",
+    "Arterial blood gas",
+    "Lactate",
+    "Continuous cardiac and pulse oximetry monitoring",
+    "Chest X-ray to exclude alternative causes"
+  ],
+  "expectedConfidence": {
+    "min": 85
+  },
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "facialSwelling": true,
+    "rash": true,
+    "wheeze": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true
+  },
+  "expected": {
+    "diagnosis": "Anaphylaxis with distributive shock and upper airway compromise, triggered by food (shellfish) ingestion",
+    "acceptableIds": [
+      "anaphylaxis"
+    ],
+    "differentialIds": [
+      "asthma_exac",
+      "angioedema_acei"
+    ],
+    "investigations": [
+      "Serum tryptase (acute and convalescent)",
+      "Arterial blood gas",
+      "Lactate",
+      "Continuous cardiorespiratory monitoring",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (anaphylaxis)",
+    "confidence >= 85",
+    "differential includes asthma exacerbation and/or angioedema",
+    "does not misclassify as septic shock despite elevated lactate and vasopressor requirement",
+    "management commentary surfaces IM adrenaline as first-line before antihistamines/steroids"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

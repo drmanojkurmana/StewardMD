@@ -1,0 +1,144 @@
+{
+  "id": "gc_059",
+  "specialty": "Rheumatology",
+  "condition": "Granulomatosis with polyangiitis",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Hemoptysis, breathlessness, and reduced urine output for 5 days, on a background of 6 weeks of sinus symptoms, fatigue, and weight loss.",
+  "history": "A 52-year-old man presents with a 6-week history of persistent nasal congestion, purulent and blood-stained nasal discharge, and unilateral facial pain unresponsive to two courses of antibiotics for presumed sinusitis. Over the past 2 weeks he has developed migratory polyarthralgia, low-grade fevers, and unintentional weight loss of about 4 kg. In the last 5 days he has had increasing dyspnea, cough with streaky hemoptysis, and today noticed markedly decreased urine output with dark, tea-colored urine. He denies foreign travel, tuberculosis contact, or intravenous drug use. No prior renal disease. No recent trimethoprim-sulfamethoxazole or hydralazine use.",
+  "examination": "Ill-looking but alert man in mild respiratory distress. Saddle-nose deformity is absent but there is crusting and mild collapse of the nasal septum on anterior rhinoscopy. Scattered coarse crepitations at both lung bases. No cardiac murmur. Mild bilateral lower-limb pitting edema. Skin examination reveals a few palpable purpuric lesions over the shins. No focal neurological deficit.",
+  "vitals": {
+    "hr": 108,
+    "bp": "158/96",
+    "rr": 26,
+    "spo2": 91,
+    "temp": 37.8
+  },
+  "labs": {
+    "hemoglobin_g_dL": 9.1,
+    "wbc_per_uL": 13200,
+    "platelets_x10e3_uL": 410,
+    "creatinine_mg_dL": 3.8,
+    "creatinine_baseline_mg_dL": 0.9,
+    "urea_mg_dL": 92,
+    "esr_mm_hr": 88,
+    "crp_mg_L": 96,
+    "urinalysis": "dysmorphic red cells, red cell casts, proteinuria 2+",
+    "urineProteinCreatinineRatio_mg_mg": 1.8,
+    "cANCA": "positive",
+    "PR3_ANCA_titer": "high positive",
+    "pANCA_MPO": "negative",
+    "ANA": "negative",
+    "antiGBM": "negative",
+    "complementC3_C4": "normal",
+    "bloodCultures": "no growth at 48h"
+  },
+  "imaging": [
+    "Chest CT: multiple bilateral nodular and cavitating lung lesions, largest 3.2 cm, with surrounding ground-glass opacity consistent with alveolar hemorrhage",
+    "Sinus CT: mucosal thickening with early bony erosion of the nasal septum"
+  ],
+  "microbiology": [
+    "Sputum AFB smear x2: negative",
+    "Sputum Gram stain and culture: no pathogenic growth",
+    "Blood cultures x2: no growth"
+  ],
+  "differentialDiagnoses": [
+    "Granulomatosis with polyangiitis (GPA)",
+    "Microscopic polyangiitis",
+    "Anti-GBM (Goodpasture) disease",
+    "Pulmonary tuberculosis with cavitation",
+    "Infective endocarditis with septic emboli",
+    "SLE with lupus nephritis and pulmonary hemorrhage",
+    "Lung malignancy with cavitation"
+  ],
+  "finalDiagnosis": "Granulomatosis with polyangiitis (pulmonary-renal syndrome, PR3-ANCA positive)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Granulomatosis with Polyangiitis and Other ANCA-Associated Vasculitides",
+    "Harrison's Principles of Internal Medicine 22e — Pulmonary-Renal Syndromes",
+    "KDIGO Clinical Practice Guideline for the Management of ANCA-Associated Vasculitis 2021",
+    "EULAR Recommendations for the Management of ANCA-Associated Vasculitis 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid empirical fluoroquinolones/aminoglycosides without clear infective source — risk of masking vasculitis workup and unnecessary nephrotoxicity in a patient with acute kidney injury",
+    "High-dose corticosteroids and cyclophosphamide/rituximab should not be delayed pending full infection workup once alveolar hemorrhage and rapidly progressive glomerulonephritis are confirmed, but active infection (e.g., TB) must be reasonably excluded first",
+    "Trimethoprim-sulfamethoxazole and other sulfa drugs should be used cautiously given renal impairment"
+  ],
+  "edgeCases": [
+    "cANCA/PR3 positivity is highly specific but a small proportion of GPA cases are ANCA-negative; tissue biopsy (renal or lung) showing necrotizing granulomatous vasculitis remains the diagnostic gold standard",
+    "Overlap with microscopic polyangiitis (pANCA/MPO) can occur; this case's PR3/cANCA pattern favors classic GPA",
+    "Must exclude anti-GBM disease and infective causes of pulmonary-renal syndrome (e.g., leptospirosis, infective endocarditis) before immunosuppression",
+    "GPA is not a discrete entry in the current diagnosable-disease list used by the SMD engine; acceptableIds is therefore set to [] and this case is intended to validate that the engine safely defers/flags rather than mis-mapping to an unrelated infectious diagnosis"
+  ],
+  "expectedMaiK": "MaiK should flag a pulmonary-renal syndrome pattern (hemoptysis/cavitating lung lesions + rapidly progressive glomerulonephritis) with high suspicion for ANCA-associated vasculitis, recommend urgent ANCA serology and renal/lung biopsy, and caution against empirical antibiotics alone while excluding infective and anti-GBM mimics.",
+  "expectedNextQuestions": [
+    "Is there active alveolar hemorrhage (falling hemoglobin, new infiltrates, hemoptysis progression)?",
+    "What is the ANCA subtype (PR3 vs MPO) and titer?",
+    "Has a renal biopsy been performed to confirm pauci-immune crescentic glomerulonephritis?",
+    "Is there evidence of active infection (TB, endocarditis) that must be excluded before immunosuppression?",
+    "Any ENT involvement (septal perforation, saddle-nose) or ocular/orbital disease supporting a granulomatous phenotype?"
+  ],
+  "expectedInvestigations": [
+    "ANCA serology (cANCA/PR3, pANCA/MPO)",
+    "Renal biopsy",
+    "Chest CT",
+    "Urinalysis with microscopy and urine protein:creatinine ratio",
+    "Anti-GBM antibody",
+    "Complement levels (C3/C4)",
+    "Blood cultures",
+    "Sputum AFB smear and culture"
+  ],
+  "expectedConfidence": {
+    "min": 55
+  },
+  "findings": {
+    "hemoptysis": true,
+    "dyspnea": true,
+    "cavitatingLesion": true,
+    "hematuria": true,
+    "proteinuria": true,
+    "renalImpairment": true,
+    "weightLoss": true,
+    "myalgiaArthralgia": true,
+    "polyarthralgia": true,
+    "rash": true,
+    "prolongedFever": true,
+    "subacuteOnset": true,
+    "hypoxia": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "Granulomatosis with polyangiitis (pulmonary-renal syndrome, PR3-ANCA positive)",
+    "acceptableIds": [],
+    "differentialIds": [
+      "glomerulonephritis",
+      "PULMONARY_TB",
+      "IE"
+    ],
+    "investigations": [
+      "ANCA serology (cANCA/PR3, pANCA/MPO)",
+      "Renal biopsy",
+      "Chest CT",
+      "Urinalysis with microscopy",
+      "Anti-GBM antibody",
+      "Complement levels"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine does not force-map this case to an infectious diagnosis with high confidence",
+    "differential includes glomerulonephritis or a pulmonary-renal syndrome mimic (PULMONARY_TB, IE)",
+    "system surfaces ANCA-associated vasculitis / pulmonary-renal syndrome as a suggested consideration even though not in acceptableIds",
+    "no antibiotic stewardship recommendation is forced when findings indicate non-infective vasculitic pattern",
+    "confidence for any single infectious top-1 diagnosis stays below expectedConfidence.min given absence of positive microbiology"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

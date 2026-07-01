@@ -1,0 +1,152 @@
+{
+  "id": "gc_002",
+  "specialty": "Critical Care",
+  "condition": "Sepsis",
+  "age": 54,
+  "sex": "F",
+  "presentingComplaint": "High-grade fever and rigors 9 days after the second cycle of R-CHOP chemotherapy for diffuse large B-cell lymphoma.",
+  "history": "54-year-old woman with diffuse large B-cell lymphoma, day 9 post-cycle-2 R-CHOP, presents with a single spiking fever to 39.4°C accompanied by rigors and generalized malaise. Over the preceding 24 hours she has become progressively more lethargic and her family notes she is 'not making sense.' She reports no localizing cough, dysuria, or diarrhea, but complains of a sore, burning sensation in her mouth consistent with mucositis limiting oral intake for 2 days. No known drug allergies. No recent travel. She has a chemo port (central venous catheter) placed 3 months ago, accessed for the last infusion 9 days ago. No antibiotics in the last 90 days prior to today. Family reports she has been more confused than usual since this morning.",
+  "examination": "Ill-appearing, diaphoretic woman in mild distress. Oral cavity shows diffuse erythema and several shallow mucosal ulcers (grade 3 mucositis) without visible thrush. Central line exit site over the right chest is clean, no erythema or discharge. Chest clear to auscultation. Abdomen soft, mildly tender in the right lower quadrant without rebound or guarding, no rash noted on perianal exam. No focal neurological deficit; she is drowsy but arousable and oriented to person only.",
+  "vitals": {
+    "hr": 128,
+    "bp": "84/52",
+    "rr": 26,
+    "spo2": 93,
+    "temp": 39.4
+  },
+  "labs": {
+    "wbc_per_uL": 400,
+    "anc_per_uL": 80,
+    "hemoglobin_g_dL": 8.9,
+    "platelets_x10e3_uL": 42,
+    "creatinine_mg_dL": 1.8,
+    "urea_mmol_L": 14.2,
+    "lactate_mmol_L": 4.6,
+    "bilirubin_mg_dL": 1.1,
+    "albumin_g_dL": 2.6,
+    "inr": 1.3,
+    "crp_mg_L": 210,
+    "procalcitonin_ng_mL": 12.4,
+    "blood_glucose_mg_dL": 142
+  },
+  "imaging": [
+    "Chest X-ray: no focal consolidation or effusion",
+    "CT abdomen/pelvis: mild bowel wall thickening in the cecum/ascending colon suggestive of early neutropenic enterocolitis (typhlitis), no free air or abscess"
+  ],
+  "microbiology": [
+    "Blood cultures (peripheral x2 and central line) sent prior to antibiotics — pending at time of presentation",
+    "Urine culture sent — pending",
+    "Central line tip culture not yet indicated (line not removed)"
+  ],
+  "differentialDiagnoses": [
+    "Febrile neutropenia with evolving septic shock",
+    "Central line-associated bloodstream infection",
+    "Neutropenic enterocolitis (typhlitis)",
+    "Gram-negative bacteremia (e.g., Pseudomonas aeruginosa, E. coli)",
+    "Mucositis-associated bacterial translocation/bacteremia (viridans group streptococci)",
+    "Invasive fungal infection (less likely at this early stage without prolonged neutropenia)"
+  ],
+  "finalDiagnosis": "Febrile neutropenia with septic shock, likely gastrointestinal/mucosal or catheter-related source, in a post-chemotherapy lymphoma patient",
+  "citations": [
+    "Harrison 22e — Neutropenia and Neutrophilia; Approach to the Febrile Patient with Cancer",
+    "IDSA Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer 2010 (updated)",
+    "Surviving Sepsis Campaign International Guidelines 2021",
+    "NCCN Guidelines: Prevention and Treatment of Cancer-Related Infections 2023"
+  ],
+  "stewardship": "Immediate empirical anti-pseudomonal beta-lactam monotherapy (e.g., piperacillin-tazobactam, cefepime, or a carbapenem) within one hour of recognition per Surviving Sepsis and IDSA febrile neutropenia guidance; add empirical vancomycin (or other MRSA-active agent) given hemodynamic instability, suspected catheter-related infection, and severe mucositis; consider anaerobic coverage/escalation to carbapenem plus metronidazole if neutropenic enterocolitis is confirmed; do not delay antibiotics for line removal decision; reassess at 48-72h with cultures; add empirical antifungal only if fever persists beyond 4-7 days of appropriate antibacterial therapy or patient remains unstable.",
+  "contraindications": [
+    "Avoid delaying empirical antibiotics while awaiting neutrophil count confirmation or imaging",
+    "Avoid aminoglycoside monotherapy as sole empirical agent in unstable patients",
+    "Avoid rectal examination or rectal temperature measurement given neutropenia and mucosal fragility",
+    "Caution with nephrotoxic combinations given baseline renal impairment (creatinine 1.8) — dose-adjust and monitor renal function closely",
+    "Avoid NSAIDs for fever/pain control given thrombocytopenia and bleeding risk"
+  ],
+  "edgeCases": [
+    "SEPSIS and SEPTIC_SHOCK are the closest matches on the disease list for the overarching syndrome, but the clinically precise diagnosis is FEBRILE_NEUTROPENIA, which is the primary driver of empirical antibiotic selection and is included in the disease vocabulary as its own entity",
+    "Neutropenic enterocolitis (typhlitis) is not a separate id in the disease list and is captured narratively rather than as an acceptable/differential id",
+    "Early presentation (ANC nadir day 9) makes invasive fungal disease unlikely as the primary diagnosis; would become more relevant if fever persists beyond day 4-7 of antibiotics"
+  ],
+  "expectedMaiK": "MaiK should flag this as febrile neutropenia with septic shock (ANC <500, fever, hypotension, lactate >4) requiring immediate broad-spectrum anti-pseudomonal empirical therapy plus MRSA coverage, and should surface neutropenic enterocolitis and CLABSI as key differentials given the CT findings and central line.",
+  "expectedNextQuestions": [
+    "What is the trend of the ANC and expected duration/nadir of neutropenia?",
+    "Are there localizing signs at the central line exit or tunnel site?",
+    "Does the patient have any antifungal or antibacterial prophylaxis history?",
+    "Is there evidence of abdominal peritonism to suggest bowel perforation from typhlitis?",
+    "What are the blood culture and susceptibility results at 24-48 hours?"
+  ],
+  "expectedInvestigations": [
+    "Complete blood count with differential/ANC",
+    "Blood cultures x2 peripheral and from each central line lumen",
+    "Serum lactate",
+    "Renal and liver function tests",
+    "Urinalysis and urine culture",
+    "Chest X-ray",
+    "CT abdomen/pelvis if abdominal symptoms present",
+    "Procalcitonin/CRP as adjunct markers"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "immunocompromised": true,
+    "malignancy": true,
+    "neutropenia": true,
+    "absoluteNeutrophilCountLow": true,
+    "mucositis": true,
+    "centralLine": true,
+    "thrombocytopenia": true,
+    "suspectedInfectionSource": true,
+    "sofaIncrease": true,
+    "abdominalPain": true
+  },
+  "expected": {
+    "diagnosis": "Febrile neutropenia with septic shock, likely gastrointestinal/mucosal or catheter-related source, in a post-chemotherapy lymphoma patient",
+    "acceptableIds": [
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "CBC with differential/ANC",
+      "Blood cultures (peripheral and central line)",
+      "Serum lactate",
+      "Renal and liver function tests",
+      "Urinalysis and urine culture",
+      "Chest X-ray",
+      "CT abdomen/pelvis"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "cefepime",
+        "meropenem",
+        "vancomycin",
+        "metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (FEBRILE_NEUTROPENIA)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes SEPSIS or SEPTIC_SHOCK",
+    "stewardship recommendation includes an anti-pseudomonal beta-lactam plus MRSA coverage",
+    "engine surfaces neutropenia and immunocompromised as key driving findings"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

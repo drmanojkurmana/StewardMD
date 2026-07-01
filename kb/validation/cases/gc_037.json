@@ -1,0 +1,150 @@
+{
+  "id": "gc_037",
+  "specialty": "Gastroenterology",
+  "condition": "Upper GI bleed",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset of large-volume vomiting of fresh blood, followed by two episodes of black tarry stool over the preceding 12 hours.",
+  "history": "Known cirrhotic (chronic hepatitis B related, Child-Pugh B) with a history of alcohol excess, previously found on surveillance endoscopy to have grade II esophageal varices not on primary prophylaxis. Presents with sudden-onset hematemesis (approximately 400 mL of fresh blood) at home, followed by one episode of melena. Reports feeling dizzy and light-headed on standing, with one brief syncopal episode just before arrival. No prior variceal bleed. No NSAID or antiplatelet use. No fever or abdominal pain preceding the bleed. Family noted increasing abdominal girth over the past month and mild confusion over the last day.",
+  "examination": "Pale, diaphoretic, mildly disoriented (oriented to person only) male in mild distress. Stigmata of chronic liver disease: palmar erythema, spider angiomata over chest, scleral icterus. Abdomen distended with shifting dullness consistent with ascites; no localized tenderness; liver not palpable, spleen tip palpable. Mild asterixis present. Digital rectal exam confirms melena. Cool peripheries with delayed capillary refill.",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/56",
+    "rr": 24,
+    "spo2": 94,
+    "temp": 36.8
+  },
+  "labs": {
+    "hemoglobin_g_dL": 6.8,
+    "platelets_x10e3_uL": 78,
+    "inr": 1.9,
+    "bilirubin_mg_dL": 3.4,
+    "albumin_g_dL": 2.6,
+    "creatinine_mg_dL": 1.3,
+    "sodium_mEq_L": 132,
+    "ammonia_umol_L": 95,
+    "lactate_mmol_L": 3.1,
+    "childPughScore": "B (9 points)",
+    "meldScore": 19
+  },
+  "imaging": [
+    "Prior upper GI endoscopy (surveillance): grade II esophageal varices without red wale signs, not on primary prophylaxis",
+    "Abdominal ultrasound: cirrhotic liver contour, splenomegaly, moderate ascites, patent portal vein on this admission"
+  ],
+  "microbiology": [
+    "Diagnostic ascitic tap sent for cell count and culture to exclude spontaneous bacterial peritonitis (SBP) as bleed precipitant"
+  ],
+  "differentialDiagnoses": [
+    "Variceal hemorrhage (esophageal)",
+    "Peptic ulcer bleed",
+    "Portal hypertensive gastropathy bleed",
+    "Gastric varices",
+    "Mallory-Weiss tear"
+  ],
+  "finalDiagnosis": "Acute variceal hemorrhage (esophageal varices) in decompensated cirrhosis",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications",
+    "Harrison 22e — Gastrointestinal Bleeding",
+    "AASLD Practice Guidance — Portal Hypertensive Bleeding in Cirrhosis 2017",
+    "Baveno VII Consensus Workshop 2022"
+  ],
+  "stewardship": "Short-course prophylactic antibiotics (e.g., ceftriaxone) recommended in all cirrhotic patients with GI bleeding per AASLD/Baveno VII, regardless of overt infection, to reduce rebleeding and mortality risk from SBP/bacterial translocation",
+  "contraindications": [
+    "Avoid vasopressin alone (use terlipressin/octreotide instead) due to systemic vasoconstriction risk",
+    "Avoid over-transfusion beyond restrictive target (Hb ~7-8 g/dL) as it can worsen portal pressure and rebleeding",
+    "Avoid NSAIDs and nephrotoxic agents in decompensated cirrhosis",
+    "Caution with sedation for endoscopy given hepatic encephalopathy and risk of aspiration"
+  ],
+  "edgeCases": [
+    "Concurrent hepatic encephalopathy (asterixis, disorientation) may mask or mimic hypovolemic shock-related confusion",
+    "Coagulopathy (INR 1.9, platelets 78) reflects synthetic dysfunction, not primarily consumptive; correction strategy differs from DIC",
+    "Must exclude SBP as a precipitant of bleed via diagnostic paracentesis",
+    "If bleeding source were instead a bleeding peptic ulcer in a cirrhotic (portal hypertensive patient), management diverges significantly (PPI-based vs vasoactive-drug based) — this case is written specifically as variceal etiology"
+  ],
+  "expectedMaiK": "MaiK should flag this as a high-severity variceal hemorrhage in decompensated cirrhosis, recommend urgent resuscitation with restrictive transfusion strategy, vasoactive drug therapy (terlipressin/octreotide) plus prophylactic antibiotics, and emergent endoscopy with band ligation within 12 hours; should also surface hepatic encephalopathy and coagulopathy as complicating factors.",
+  "expectedNextQuestions": [
+    "Is there a history of prior variceal bleeding or banding?",
+    "What is the patient's baseline mental status (to contextualize encephalopathy grade)?",
+    "Any recent alcohol intake or medication non-adherence (e.g., non-selective beta-blocker)?",
+    "Is the patient a transplant candidate (relevant to overall management ceiling)?"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy",
+    "Hemoglobin/hematocrit, platelet count",
+    "INR/coagulation profile",
+    "Liver function tests (bilirubin, albumin)",
+    "Serum creatinine and electrolytes",
+    "Ammonia level (if encephalopathy suspected)",
+    "Diagnostic ascitic fluid tap (cell count, culture) to exclude SBP",
+    "Blood group and crossmatch",
+    "Lactate"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "hematemesis": true,
+    "melena": true,
+    "syncope": true,
+    "gibPresentation": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "liverDisease": true,
+    "ascites": true,
+    "jaundice": true,
+    "asterixis": true,
+    "alteredSensorium": true,
+    "thrombocytopenia": true,
+    "inr": true,
+    "bilirubin": true,
+    "albumin": true,
+    "platelets": true,
+    "hemoglobin": true,
+    "ascitesGrade": true,
+    "encephalopathyGrade": true,
+    "heartRate": true,
+    "respRate": true,
+    "sbp": true,
+    "dbp": true,
+    "spo2": true,
+    "tempC": true,
+    "age": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "Acute variceal hemorrhage (esophageal varices) in decompensated cirrhosis",
+    "acceptableIds": [
+      "variceal_bleed"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "peptic_ulcer",
+      "hepatic_enceph"
+    ],
+    "investigations": [
+      "Urgent upper GI endoscopy",
+      "Hemoglobin and coagulation profile (INR, platelets)",
+      "Liver function tests",
+      "Diagnostic ascitic tap to exclude SBP",
+      "Blood group and crossmatch"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (variceal_bleed)",
+    "confidence >= expectedConfidence.min",
+    "differential includes decomp_cirrhosis or hepatic_enceph",
+    "stewardship recommendation includes prophylactic antibiotic (ceftriaxone) per AASLD/Baveno VII",
+    "output surfaces restrictive transfusion strategy and vasoactive drug therapy as key management steps",
+    "output flags hepatic encephalopathy and coagulopathy as complicating factors"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

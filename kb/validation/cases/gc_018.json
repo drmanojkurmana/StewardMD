@@ -1,0 +1,154 @@
+{
+  "id": "gc_018",
+  "specialty": "Endocrinology",
+  "condition": "Hyperosmolar hyperglycaemic state",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Brought in by family after 3 days of worsening confusion and not eating or drinking properly.",
+  "history": "78-year-old woman with type 2 diabetes mellitus (on metformin and glimepiride) and hypertension, resident in a nursing home, presents after 3-4 days of progressive lethargy, reduced oral intake, and word-finding difficulty noted by staff. No fever, no cough, no dysuria reported, though family note she has been drinking less water than usual over the past week. No vomiting, no abdominal pain. No history of insulin omission (she is not on insulin). A urinary tract infection was suspected empirically two weeks ago and she completed a course of nitrofurantoin, but no clear precipitant has otherwise been identified. No known prior episodes of DKA or HHS. No recent steroid use.",
+  "examination": "Frail elderly woman, profoundly lethargic but rousable to voice, oriented to person only. Dry mucous membranes, reduced skin turgor, sunken eyes. No kussmaul breathing. No focal neurological deficit; no neck stiffness. Chest clear. Abdomen soft, non-tender. No rash, no cellulitis, no costovertebral tenderness. No indwelling catheter.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/58",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 36.8
+  },
+  "labs": {
+    "plasmaGlucose_mgdl": 812,
+    "serumOsmolality_mOsmkg": 356,
+    "effectiveOsmolality_mOsmkg": 328,
+    "sodiumCorrected_mEqL": 152,
+    "sodiumMeasured_mEqL": 138,
+    "potassium_mEqL": 4.6,
+    "bicarbonate_mEqL": 21,
+    "anionGap": 13,
+    "arterialPH": 7.34,
+    "betaHydroxybutyrate_mmolL": 0.4,
+    "serumKetones": "negative/trace",
+    "bun_mgdl": 58,
+    "creatinine_mgdl": 2.1,
+    "creatinineBaseline_mgdl": 1,
+    "wbc_kuL": 11.2,
+    "hemoglobin_gdl": 12.8,
+    "lactate_mmolL": 1.6,
+    "hba1c_pct": 11.8,
+    "urinalysis": "no ketones, no nitrites, no leukocyte esterase"
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no effusion",
+    "CT head (non-contrast): no acute intracranial abnormality, age-related atrophy, no evidence of stroke"
+  ],
+  "microbiology": [
+    "Blood cultures x2: pending/no growth at 48h",
+    "Urine culture: no growth"
+  ],
+  "differentialDiagnoses": [
+    "Diabetic ketoacidosis",
+    "Ischemic stroke / TIA",
+    "Sepsis with encephalopathy",
+    "Hypernatremic dehydration from reduced intake",
+    "Uremic encephalopathy",
+    "Central nervous system infection (meningitis/encephalitis)"
+  ],
+  "finalDiagnosis": "Hyperosmolar hyperglycaemic state (HHS)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Diabetes Mellitus: Complications (Hyperglycemic Crises)",
+    "ADA Standards of Care in Diabetes 2024",
+    "ADA/Kitabchi Hyperglycemic Crises Consensus Statement 2009"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid rapid correction of serum sodium/osmolality — risk of cerebral edema, especially in elderly",
+    "Avoid bolus insulin before adequate fluid resuscitation — risk of precipitous osmotic shift and cardiovascular collapse",
+    "Avoid empirical antibiotics in absence of identified infective source — no evidence of infection here"
+  ],
+  "edgeCases": [
+    "No significant ketosis or acidosis despite profound hyperglycaemia (glucose >600 mg/dL, pH >7.30, bicarbonate >18, minimal ketones) — classic HHS rather than DKA, though mixed DKA/HHS pictures occur in up to a third of cases",
+    "Elderly patients with HHS often lack a clear precipitant and may present with an insidious, several-day prodrome of altered mental status rather than acute presentation",
+    "Corrected sodium is markedly elevated despite a 'normal' measured sodium, reflecting the dilutional effect of severe hyperglycaemia — must calculate corrected Na to appreciate true free-water deficit",
+    "HHS is not present in the provided diagnosable-disease list, so acceptableIds is set to [] even though this is the correct clinical diagnosis; DKA (dka) is included as the closest listed differential concept but is not a correct top-1 for this presentation",
+    "Mortality of HHS (10-20%) exceeds that of DKA and is driven more by underlying precipitant/comorbidity and age than by the metabolic derangement itself"
+  ],
+  "expectedMaiK": "MaiK should flag profound hyperglycaemia with markedly elevated effective osmolality and corrected sodium but absent significant ketosis/acidosis as consistent with HHS rather than DKA, emphasize cautious fluid resuscitation before insulin, and prompt a search for an occult precipitant (infection, ischemia, medication non-adherence) despite a currently unremarkable septic/vascular workup.",
+  "expectedNextQuestions": [
+    "What precipitated this episode — infection, myocardial ischemia, stroke, medication changes, or reduced access to fluids?",
+    "What is the calculated effective serum osmolality and corrected sodium, and how rapidly is osmolality being corrected?",
+    "Is there any biochemical or clinical evidence of concurrent ketoacidosis (mixed DKA/HHS)?",
+    "What is the estimated free-water deficit and planned rate of fluid replacement given her age and cardiac status?",
+    "Has an ECG and troponin been done to exclude silent myocardial infarction as a precipitant?",
+    "Is there any evidence of pressure injury, aspiration, or occult infection given her nursing-home residence and immobility?"
+  ],
+  "expectedInvestigations": [
+    "plasmaGlucose",
+    "serumOsmolality",
+    "sodiumCorrected",
+    "arterialPH",
+    "bicarbonate",
+    "betaHydroxybutyrate",
+    "creatinine",
+    "ecg",
+    "bloodCultures",
+    "chestXray"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "dehydration": true,
+    "polyuriaPolydipsia": true,
+    "diabetesHx": true,
+    "nursingHomeResident": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "age": true,
+    "sex": true,
+    "heartRate": true,
+    "respRate": true,
+    "sbp": true,
+    "dbp": true,
+    "tempC": true,
+    "spo2": true,
+    "gcs": true,
+    "creatinine": true,
+    "hemoglobin": true
+  },
+  "expected": {
+    "diagnosis": "Hyperosmolar hyperglycaemic state (HHS)",
+    "acceptableIds": [],
+    "differentialIds": [
+      "dka",
+      "aki",
+      "metabolic_enceph",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "Plasma glucose",
+      "Serum/effective osmolality",
+      "Corrected sodium",
+      "Venous/arterial blood gas",
+      "Serum/urine ketones or beta-hydroxybutyrate",
+      "Renal function panel (BUN/creatinine, electrolytes)",
+      "ECG and troponin",
+      "Blood and urine cultures",
+      "Chest X-ray",
+      "CT head if focal neurology or unresponsive to correction"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis output should correspond conceptually to HHS (not present in disease list, so acceptableIds intentionally empty — flag as known gap)",
+    "differential should include dka as top-3 consideration given overlapping hyperglycaemic crisis picture",
+    "confidence >= 70",
+    "system should NOT recommend empirical antibiotics given negative infective workup",
+    "system should flag cautious rate of sodium/osmolality correction given patient age"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

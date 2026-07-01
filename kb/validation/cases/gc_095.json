@@ -1,0 +1,146 @@
+{
+  "id": "gc_095",
+  "specialty": "Cardiology",
+  "condition": "Hypertensive emergency",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Severe headache, blurred vision, and breathlessness for 6 hours",
+  "history": "58-year-old man with a 10-year history of poorly controlled hypertension (self-reported non-adherence to amlodipine and losartan for the past 2 months) presents with acute-onset severe occipital headache, blurred vision, and progressive breathlessness over the last 6 hours. He also reports two episodes of vomiting and mild chest tightness on exertion earlier today. No history of illicit drug use, no recent trauma, no fever. He has known type 2 diabetes mellitus. Family reports he appeared confused and slower to respond over the last hour.",
+  "examination": "Anxious, breathless man sitting upright. Bilateral basal crackles on chest auscultation with raised JVP and mild bilateral ankle edema. Fundoscopy shows bilateral flame hemorrhages, cotton-wool spots, and early papilledema. Neurological exam shows mild disorientation to time (GCS 14/15) without focal deficit. No carotid or renal bruits. Cardiac exam reveals a loud S2 and S4 gallop without murmur.",
+  "vitals": {
+    "hr": 112,
+    "bp": "228/134",
+    "rr": 28,
+    "spo2": 91,
+    "temp": 37
+  },
+  "labs": {
+    "creatinine": 2.1,
+    "urea": 14.5,
+    "hemoglobin": 11.8,
+    "platelets": 165,
+    "sodium": 138,
+    "potassium": 4.6,
+    "troponin": "mildly elevated",
+    "urinalysis": "proteinuria, few RBC casts",
+    "ntProBNP": "elevated"
+  },
+  "imaging": [
+    "Chest X-ray: bilateral perihilar haziness with pulmonary vascular congestion consistent with acute pulmonary edema",
+    "ECG: left ventricular hypertrophy with strain pattern, no acute ST-elevation",
+    "CT head (non-contrast): no acute hemorrhage or infarct; findings compatible with posterior reversible encephalopathy syndrome (PRES) pattern on subsequent MRI if performed"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Hypertensive emergency with acute pulmonary edema and hypertensive encephalopathy",
+    "Acute coronary syndrome with secondary severe hypertension",
+    "Acute ischemic stroke / intracerebral hemorrhage",
+    "Aortic dissection",
+    "Posterior reversible encephalopathy syndrome (PRES)",
+    "Renal artery stenosis-driven accelerated hypertension"
+  ],
+  "finalDiagnosis": "Hypertensive emergency (severe blood pressure elevation with acute target-organ damage: hypertensive encephalopathy, acute pulmonary edema/heart failure, and acute kidney injury)",
+  "citations": [
+    "Harrison 22e — Hypertensive Vascular Disease",
+    "AHA/ACC Hypertension Guideline 2017",
+    "ESC/ESH Arterial Hypertension Guideline 2018"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid rapid/precipitous BP lowering (>25% within first hour) — risk of watershed cerebral/coronary/renal ischemia",
+    "Avoid nifedipine (immediate-release) sublingual for BP control",
+    "Avoid beta-blockade as first-line if acute decompensated pulmonary edema dominates without concurrent aortic dissection or ACS indication",
+    "Avoid clonidine or other agents causing rebound hypertension in a patient who may have erratic follow-up/adherence"
+  ],
+  "edgeCases": [
+    "If chest/back pain were tearing in quality or pulse/BP differential present, must exclude aortic dissection urgently (CT angiogram) before treating as isolated hypertensive emergency",
+    "Renal impairment may represent chronic kidney disease with acute-on-chronic injury versus purely acute hypertensive nephrosclerosis — need baseline creatinine",
+    "Pregnancy-associated severe hypertension (pre-eclampsia/eclampsia) is a distinct entity not applicable here (male patient)",
+    "Cocaine/sympathomimetic-induced hypertensive crisis excluded by history; if present would change drug choice (avoid unopposed beta-blockade)"
+  ],
+  "expectedMaiK": "MaiK should flag this as a hypertensive emergency with multi-organ involvement (encephalopathy, pulmonary edema, AKI) requiring immediate IV antihypertensive titration with a controlled, gradual BP reduction target (~25% MAP reduction in the first hour), continuous monitoring, and urgent exclusion of aortic dissection/ACS/stroke as mimics.",
+  "expectedNextQuestions": [
+    "Is there tearing/radiating chest or back pain to suggest aortic dissection?",
+    "What is the patient's baseline/premorbid creatinine and blood pressure?",
+    "Any history of illicit sympathomimetic drug use (cocaine, amphetamines)?",
+    "Is the patient pregnant or postpartum (not applicable here but part of standard screen)?",
+    "Any visual field deficits or seizure activity suggesting evolving PRES?"
+  ],
+  "expectedInvestigations": [
+    "creatinine",
+    "urea",
+    "troponin",
+    "ntProBNP",
+    "urinalysis",
+    "ecg",
+    "chestXray",
+    "ctHeadNonContrast",
+    "fundoscopy"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "headacheSevere": true,
+    "visualDisturbance": true,
+    "papilledema": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "legSwellingBilateral": true,
+    "alteredSensorium": true,
+    "chestPain": true,
+    "sbp": true,
+    "dbp": true,
+    "map": true,
+    "heartRate": true,
+    "respRate": true,
+    "spo2": true,
+    "creatinine": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "renalImpairment": true,
+    "proteinuria": true,
+    "ecgIschemia": true
+  },
+  "expected": {
+    "diagnosis": "Hypertensive emergency (severe blood pressure elevation with acute target-organ damage: hypertensive encephalopathy, acute pulmonary edema/heart failure, and acute kidney injury)",
+    "acceptableIds": [
+      "htn_emergency"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "aortic_dissection",
+      "ich"
+    ],
+    "investigations": [
+      "creatinine",
+      "urea",
+      "troponin",
+      "ntProBNP",
+      "urinalysis",
+      "ecg",
+      "chestXray",
+      "ctHeadNonContrast",
+      "fundoscopy"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (htn_emergency)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes heart_failure and/or acs given pulmonary edema and mildly elevated troponin",
+    "differential includes aortic_dissection as a must-not-miss mimic given chest pain + severe hypertension",
+    "system flags target-organ damage (encephalopathy, pulmonary edema, AKI) rather than isolated severe asymptomatic hypertension",
+    "stewardship/antibiotics fields remain null/empty (non-infective case)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "id": "gc_088",
+  "specialty": "Nephrology",
+  "condition": "Nephrotic syndrome",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Progressive swelling of both legs and around the eyes for 3 weeks, with frothy urine.",
+  "history": "A 34-year-old man presents with a 3-week history of gradually worsening bilateral leg swelling and puffiness around the eyes, most noticeable on waking. He reports his urine has become persistently frothy, and he has had a 2-3 kg weight gain over this period. He denies gross haematuria, dysuria, fever, joint pains, oral ulcers, photosensitive rash, or recent sore throat/skin infection. No known diabetes, hypertension, hepatitis B/C, or HIV. No NSAID use. No history of recent vaccination, insect stings, or new drug exposure. No prior renal disease. Family history is non-contributory. He denies orthopnea or paroxysmal nocturnal dyspnea.",
+  "examination": "Alert, comfortable at rest. Bilateral pitting pedal and pretibial oedema extending to the shins, periorbital oedema, and mild ascites-like abdominal fullness. No skin rash, no joint swelling, no lymphadenopathy. Chest clear, no bibasal crackles. JVP not elevated. Abdomen soft, mild distension with shifting dullness suggestive of ascites; no organomegaly. No signs of DVT (calves non-tender, no unilateral swelling).",
+  "vitals": {
+    "hr": 82,
+    "bp": "126/80",
+    "rr": 16,
+    "spo2": 98,
+    "temp": 36.8
+  },
+  "labs": {
+    "serumAlbumin_g_dL": 1.9,
+    "urineProtein24h_g": 6.8,
+    "urineProteinCreatinineRatio_mg_mg": 6.2,
+    "serumCreatinine_mg_dL": 0.9,
+    "serumCholesterol_mg_dL": 320,
+    "serumTriglycerides_mg_dL": 210,
+    "urinalysis": "3+ protein, no dysmorphic RBCs, no red cell casts, occasional oval fat bodies/fatty casts",
+    "serumC3": "normal",
+    "serumC4": "normal",
+    "ANA": "negative",
+    "antiPLA2R_antibody": "pending",
+    "HbA1c_percent": 5.3,
+    "HBsAg": "negative",
+    "antiHCV": "negative",
+    "HIV": "negative",
+    "hemoglobin_g_dL": 13.8,
+    "platelets_x10e3": 310,
+    "coagulation": "INR 1.1, no evidence of DIC"
+  },
+  "imaging": [
+    "Renal ultrasound: both kidneys normal size, preserved cortical thickness, no obstruction"
+  ],
+  "microbiology": [
+    "Not clinically indicated at presentation"
+  ],
+  "differentialDiagnoses": [
+    "Primary (idiopathic) membranous nephropathy",
+    "Minimal change disease",
+    "Focal segmental glomerulosclerosis",
+    "Secondary membranous nephropathy (drug/malignancy/infection-associated)",
+    "Diabetic nephropathy",
+    "Lupus nephritis",
+    "Amyloidosis"
+  ],
+  "finalDiagnosis": "Nephrotic syndrome, likely primary glomerular disease (pending renal biopsy and anti-PLA2R result)",
+  "citations": [
+    "Harrison 22e — Glomerular Diseases / Nephrotic Syndrome",
+    "KDIGO Clinical Practice Guideline for Glomerular Diseases 2021"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid empirical high-dose diuretics without correcting for intravascular volume status — risk of AKI/thromboembolism",
+    "Avoid NSAIDs (worsen renal perfusion and fluid retention)",
+    "Avoid unnecessary IV albumin infusion without concurrent diuretic and clear indication"
+  ],
+  "edgeCases": [
+    "If renal biopsy shows FSGS or minimal change disease, management/prognosis differs substantially from membranous nephropathy",
+    "Nephrotic syndrome carries hypercoagulable risk (renal vein thrombosis, DVT/PE) due to urinary loss of antithrombin III — vigilance required",
+    "Secondary causes (malignancy screening in older patients, hepatitis B/C, lupus, drugs) must be excluded before labeling as primary/idiopathic",
+    "This case (id: nephrotic) is captured in the diagnosable disease list only as a generic nephrotic syndrome entity — specific histological subtype is not separately coded"
+  ],
+  "expectedMaiK": "Nephrotic-range proteinuria with hypoalbuminemia and oedema in a normotensive, non-diabetic adult should prompt secondary-cause screening (ANA, hepatitis, HIV, anti-PLA2R) and renal biopsy referral; flag hypercoagulability and infection risk during work-up.",
+  "expectedNextQuestions": [
+    "Any history of NSAID, lithium, gold, or penicillamine use?",
+    "Any features suggestive of malignancy (age >50, weight loss, smoking history)?",
+    "Any joint pains, photosensitivity, oral ulcers suggesting lupus?",
+    "Any leg pain/swelling asymmetry or breathlessness suggesting venous thromboembolism?",
+    "Any family history of renal disease or deafness (Alport)?"
+  ],
+  "expectedInvestigations": [
+    "24-hour urine protein or spot urine protein:creatinine ratio",
+    "Serum albumin, lipid profile",
+    "Renal function tests",
+    "Urinalysis with microscopy for dysmorphic RBCs/casts",
+    "ANA, complement levels (C3/C4)",
+    "Hepatitis B/C serology, HIV",
+    "Anti-PLA2R antibody",
+    "Renal ultrasound",
+    "Renal biopsy (definitive diagnosis in adults)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "legSwellingBilateral": true,
+    "facialSwelling": true,
+    "proteinuria": true,
+    "albumin": true
+  },
+  "expected": {
+    "diagnosis": "Nephrotic syndrome, likely primary glomerular disease (pending renal biopsy and anti-PLA2R result)",
+    "acceptableIds": [
+      "nephrotic"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "ckd",
+      "aki"
+    ],
+    "investigations": [
+      "24-hour urine protein / spot protein:creatinine ratio",
+      "Serum albumin and lipid profile",
+      "ANA, complement C3/C4",
+      "Hepatitis B/C, HIV serology",
+      "Anti-PLA2R antibody",
+      "Renal ultrasound",
+      "Renal biopsy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (nephrotic)",
+    "confidence >= 70",
+    "differential includes glomerulonephritis",
+    "does not recommend empirical antibiotics",
+    "flags hypercoagulability/thromboembolism risk as edge case"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

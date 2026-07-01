@@ -1,0 +1,123 @@
+{
+  "id": "gc_025",
+  "specialty": "Neurology",
+  "condition": "Ischaemic stroke",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset right-sided weakness and difficulty speaking, witnessed 55 minutes prior to arrival.",
+  "history": "68-year-old man with known hypertension, type 2 diabetes mellitus, and atrial fibrillation (not on anticoagulation, self-discontinued warfarin 6 months ago) was found by his wife suddenly unable to move his right arm and leg and slurring his speech while having breakfast. Last known well time is well documented at 55 minutes before ED arrival. No recent trauma, surgery, or GI bleeding. No seizure activity witnessed. No headache reported. Wife activated EMS immediately; stroke code called en route.",
+  "examination": "Alert but anxious, expressive aphasia with preserved comprehension. Right facial droop (lower face). Right arm drift to 0/5 power, right leg 1/5 power. Left gaze preference. NIHSS scored at 14 (facial palsy 2, arm 4, leg 3, aphasia 2, dysarthria 1, sensory 1, neglect 1). No neck stiffness. Cardiac exam: irregularly irregular rhythm, no murmurs. No signs of active bleeding. Pupils equal and reactive.",
+  "vitals": {
+    "hr": 118,
+    "bp": "168/94",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "glucose_mgdl": 142,
+    "creatinine": 1,
+    "platelets": 245,
+    "inr": 1.1,
+    "aptt_sec": 28,
+    "hemoglobin": 14.1,
+    "troponin_ngL": 8,
+    "sodium_mEqL": 138
+  },
+  "imaging": [
+    "Non-contrast CT head: no acute hemorrhage, ASPECTS 9, early loss of grey-white differentiation in left insular ribbon",
+    "CT angiogram head/neck: left M1 middle cerebral artery occlusion",
+    "CT perfusion: small core infarct with large penumbra (mismatch ratio >1.8), favorable for reperfusion therapy"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Ischaemic stroke (left MCA territory, cardioembolic)",
+    "Hypoglycemia mimicking stroke",
+    "Todd's paralysis (post-ictal)",
+    "Intracerebral hemorrhage",
+    "Complex migraine",
+    "Functional (conversion) weakness"
+  ],
+  "finalDiagnosis": "Acute ischaemic stroke, left MCA (M1) territory, cardioembolic (atrial fibrillation), within IV thrombolysis and mechanical thrombectomy window",
+  "citations": [
+    "Harrison 22e — Cerebrovascular Diseases",
+    "AHA/ASA Guideline for Early Management of Acute Ischemic Stroke 2019 (with 2023 update)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Confirm no anticoagulant use within therapeutic window / INR <1.7 before thrombolysis",
+    "Exclude hemorrhage on non-contrast CT before tPA/tenecteplase",
+    "Screen for recent major surgery, GI bleed, or trauma within 14-21 days",
+    "BP must be controlled <185/110 mmHg prior to thrombolysis",
+    "Platelet count and glucose must be checked (glucose <50 or >400 mg/dL alters diagnostic certainty)"
+  ],
+  "edgeCases": [
+    "Wake-up strokes or unclear onset time require perfusion/DWI-FLAIR mismatch imaging to determine eligibility",
+    "Large vessel occlusion (M1) within 24h may qualify for mechanical thrombectomy even outside the standard IV thrombolysis window if favorable perfusion mismatch present",
+    "Atrial fibrillation without anticoagulation is a major cardioembolic risk factor and should prompt cardiac monitoring and anticoagulation planning after the acute phase",
+    "This case is a vascular/neurological emergency rather than an infective syndrome, so the stewardship/antimicrobial tier is not applicable (null)"
+  ],
+  "expectedMaiK": "MaiK should flag this as a time-critical stroke code: confirm last-known-well time, rule out hemorrhage and mimics, and prioritize IV thrombolysis/thrombectomy eligibility screening; antimicrobial stewardship is not applicable.",
+  "expectedNextQuestions": [
+    "Exact last known well time and any anticoagulant/antiplatelet use",
+    "Blood glucose and INR/aPTT before thrombolysis decision",
+    "Eligibility for IV thrombolysis (tPA/tenecteplase) vs mechanical thrombectomy given M1 occlusion",
+    "Baseline functional status and pre-existing disability",
+    "Plan for cardiac monitoring and anticoagulation given atrial fibrillation"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head",
+    "CT angiogram head and neck",
+    "CT perfusion or MRI DWI/FLAIR if onset unclear",
+    "Blood glucose (point of care)",
+    "Coagulation profile (INR, aPTT, platelets)",
+    "ECG and cardiac monitoring",
+    "Echocardiogram (after acute phase) for cardioembolic source"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "focalNeuroDeficit": true,
+    "cerebrovascularDisease": true,
+    "atrialFibHx": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "headacheSevere": true
+  },
+  "expected": {
+    "diagnosis": "Acute ischaemic stroke, left MCA (M1) territory, cardioembolic (atrial fibrillation), within IV thrombolysis and mechanical thrombectomy window",
+    "acceptableIds": [
+      "ischemic_stroke"
+    ],
+    "differentialIds": [
+      "tia",
+      "ich",
+      "sah"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiogram head and neck",
+      "CT perfusion",
+      "Blood glucose",
+      "Coagulation profile",
+      "ECG and cardiac monitoring"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ischemic_stroke)",
+    "confidence >= expectedConfidence.min",
+    "differential includes tia and ich",
+    "stewardship tier is null/not applicable (non-infective case)",
+    "expectedNextQuestions surfaces last-known-well time and thrombolysis eligibility"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

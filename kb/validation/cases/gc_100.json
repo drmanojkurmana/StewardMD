@@ -1,0 +1,145 @@
+{
+  "id": "gc_100",
+  "specialty": "Endocrinology",
+  "condition": "Hypothyroidism / myxoedema",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Found unresponsive and cold at home by family; brought in with confusion and extreme lethargy over the preceding several days.",
+  "history": "74-year-old woman with known long-standing primary hypothyroidism (post-radioiodine ablation for Graves disease 15 years ago), reportedly poorly compliant with levothyroxine for the past several months after her prescription lapsed. Lives alone; family noticed progressive slowing of speech, increasing fatigue, constipation and cold intolerance over the past 3-4 weeks, culminating in worsening confusion over the last 2 days. No fever reported. Found this morning unarousable in an unheated house during a cold spell. No history of trauma, overdose, or alcohol use. No recent infection symptoms reported by family. Other history: hypertension on amlodipine.",
+  "examination": "Obtunded, responds only to painful stimuli, GCS 8/15. Profoundly hypothermic and bradycardic. Dry, coarse, doughy skin with non-pitting periorbital and peripheral (myxoedematous) swelling. Macroglossia. Hoarse voice. Sparse lateral eyebrows. Delayed relaxation phase of ankle reflexes. Bradypnea with shallow respirations. Distended abdomen with reduced bowel sounds (ileus). No focal neurological deficit, no neck stiffness, no rash. No signs of active infection on exam (no consolidation, no murmur, no cellulitis).",
+  "vitals": {
+    "hr": 42,
+    "bp": "84/54",
+    "rr": 8,
+    "spo2": 89,
+    "temp": 28.9
+  },
+  "labs": {
+    "tsh_mIU_L": 68.4,
+    "freeT4_ng_dL": 0.2,
+    "freeT3_pg_mL": 1.1,
+    "sodium_mmol_L": 122,
+    "glucose_mg_dL": 52,
+    "cortisol_random_ug_dL": 6.2,
+    "creatinine_mg_dL": 1.6,
+    "ck_U_L": 890,
+    "arterialPh": 7.28,
+    "pCO2_mmHg": 58,
+    "lactate_mmol_L": 2.1,
+    "hemoglobin_g_dL": 10.8,
+    "wbc_10e9_L": 6.4
+  },
+  "imaging": [
+    "Chest X-ray: cardiomegaly with possible small pericardial effusion, no consolidation",
+    "ECG: sinus bradycardia, low-voltage complexes, prolonged QT interval"
+  ],
+  "microbiology": [
+    "Blood cultures sent, pending — no clinical evidence of sepsis"
+  ],
+  "differentialDiagnoses": [
+    "Myxoedema coma (severe hypothyroidism)",
+    "Sepsis with septic shock",
+    "Hypothermia from environmental exposure",
+    "Adrenal crisis",
+    "Sedative/drug overdose",
+    "Central nervous system event (stroke) causing coma",
+    "Hypoglycemia-induced coma"
+  ],
+  "finalDiagnosis": "Myxoedema coma (decompensated severe primary hypothyroidism) precipitated by cold exposure and thyroid hormone non-adherence",
+  "citations": [
+    "Harrison 22e — Hypothyroidism and Myxedema Coma",
+    "American Thyroid Association Guidelines for Hypothyroidism 2014"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid rapid rewarming (risk of vasodilation and cardiovascular collapse)",
+    "Avoid sedatives/opioids (further respiratory depression)",
+    "Do not give levothyroxine alone without first addressing possible concurrent adrenal insufficiency — give stress-dose hydrocortisone before/with thyroid hormone replacement",
+    "Avoid rapid correction of hyponatremia"
+  ],
+  "edgeCases": [
+    "May coexist with adrenal insufficiency (autoimmune polyglandular syndrome) — empiric hydrocortisone should precede or accompany levothyroxine",
+    "Hypothermia and bradycardia can mimic or mask concurrent sepsis, which may itself be the precipitant — a low threshold for empiric antibiotics is reasonable if any diagnostic uncertainty exists, pending cultures",
+    "Myxoedema coma is not present in the provided diagnosable-disease vocabulary list (closest match 'myxedema' maps to hyperthyroid/thyroid storm category by label but represents the hypothyroid decompensated state here) — mapped to id 'myxedema'",
+    "Elevated CK can mimic rhabdomyolysis or ACS workup confounders",
+    "Hyponatremia and hypoglycemia can independently alter sensorium, complicating attribution"
+  ],
+  "expectedMaiK": "MaiK should flag hypothermia + bradycardia + altered sensorium in an elderly patient with known hypothyroidism as classic for myxoedema coma, recommend urgent thyroid function tests, cortisol, and cautious passive rewarming plus IV levothyroxine and stress-dose hydrocortisone, while noting infection must be excluded/empirically covered given diagnostic overlap with sepsis-related hypothermia.",
+  "expectedNextQuestions": [
+    "Confirm levothyroxine adherence and last dose taken",
+    "Any recent infection, cold exposure, sedative use, or other precipitant?",
+    "Assess for coexisting adrenal insufficiency (baseline cortisol/ACTH stim if time permits)",
+    "Any history of pituitary disease suggesting secondary hypothyroidism?",
+    "Screen for occult sepsis as an alternative or concurrent driver of hypothermia and shock"
+  ],
+  "expectedInvestigations": [
+    "TSH",
+    "Free T4",
+    "Free T3",
+    "Serum cortisol",
+    "Electrolytes (sodium)",
+    "Blood glucose",
+    "Arterial blood gas",
+    "ECG",
+    "CK",
+    "Blood cultures",
+    "Chest X-ray"
+  ],
+  "expectedConfidence": {
+    "min": 60
+  },
+  "findings": {
+    "hypothermia": true,
+    "bradycardia": true,
+    "bradypnea": true,
+    "alteredSensorium": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "age": true,
+    "sex": true,
+    "heartRate": true,
+    "respRate": true,
+    "sbp": true,
+    "dbp": true,
+    "tempC": true,
+    "spo2": true,
+    "gcs": true,
+    "creatinine": true
+  },
+  "expected": {
+    "diagnosis": "Myxoedema coma (decompensated severe primary hypothyroidism) precipitated by cold exposure and thyroid hormone non-adherence",
+    "acceptableIds": [
+      "myxedema"
+    ],
+    "differentialIds": [
+      "adrenal_crisis",
+      "hypoglycemia",
+      "drug_intox"
+    ],
+    "investigations": [
+      "TSH",
+      "Free T4",
+      "Serum cortisol",
+      "Electrolytes",
+      "Blood glucose",
+      "ABG",
+      "ECG",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (myxedema)",
+    "confidence >= expectedConfidence.min",
+    "differential includes adrenal_crisis given overlapping presentation",
+    "engine does not recommend empirical antibiotics as primary intervention when findings show no infective source",
+    "engine surfaces hypothermia + bradycardia + alteredSensorium as key drivers of SMD_REASON"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

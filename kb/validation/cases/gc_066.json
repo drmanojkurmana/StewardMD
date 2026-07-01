@@ -1,0 +1,127 @@
+{
+  "id": "gc_066",
+  "specialty": "Endocrinology",
+  "condition": "Adrenal crisis",
+  "age": 47,
+  "sex": "F",
+  "presentingComplaint": "Brought to the emergency department with severe weakness, vomiting, and a fainting episode after abruptly stopping her long-term steroid tablets 5 days ago.",
+  "history": "Known case of primary adrenal insufficiency (Addison's disease) for 6 years, previously stable on maintenance hydrocortisone and fludrocortisone. Ran out of her hydrocortisone tablets while travelling and did not restart them for 5 days. Over the last 2 days developed progressive nausea, vomiting, and diffuse abdominal pain, with inability to keep oral intake down. Today became profoundly weak and light-headed, with one witnessed syncopal episode at home. No fever, cough, or urinary symptoms reported by family. No history of trauma. No recent vaccination or new medication. Denies chest pain or breathlessness.",
+  "examination": "Lethargic but arousable, oriented to person only. Dry mucous membranes with reduced skin turgor. Hyperpigmentation noted over buccal mucosa, palmar creases, and old scars. Cool peripheries with delayed capillary refill. Abdomen diffusely tender without guarding or rigidity. No neck stiffness, no focal neurological deficit. Chest clear, heart sounds normal without murmur.",
+  "vitals": {
+    "hr": 128,
+    "bp": "78/48",
+    "rr": 26,
+    "spo2": 96,
+    "temp": 36.2
+  },
+  "labs": {
+    "sodium_mmolL": 122,
+    "potassium_mmolL": 6.4,
+    "glucose_mgdL": 58,
+    "creatinine_mgdL": 1.9,
+    "urea_mgdL": 68,
+    "bicarbonate_mmolL": 17,
+    "cortisol_random_ugdL": 1.8,
+    "acth_pgmL": 890,
+    "hemoglobin_gdL": 13.1,
+    "wbc_perUL": 11200,
+    "calcium_mgdL": 10.6,
+    "lactate_mmolL": 2.6
+  },
+  "imaging": [
+    "Chest X-ray: no acute infiltrate or effusion",
+    "Abdominal ultrasound: normal liver, biliary tree, and adrenal glands not well visualized (limited study)"
+  ],
+  "microbiology": [
+    "Blood cultures sent, pending",
+    "Urine culture sent, pending"
+  ],
+  "differentialDiagnoses": [
+    "Adrenal crisis (acute adrenal insufficiency)",
+    "Septic shock",
+    "Hypovolemic shock from gastroenteritis",
+    "Diabetic ketoacidosis",
+    "Myxedema coma",
+    "Pheochromocytoma crisis (less likely given hypotension)"
+  ],
+  "finalDiagnosis": "Adrenal crisis (acute primary adrenal insufficiency decompensation) precipitated by abrupt glucocorticoid withdrawal",
+  "citations": [
+    "Harrison 22e — Disorders of the Adrenal Cortex",
+    "Endocrine Society Clinical Practice Guideline 2016 (Primary Adrenal Insufficiency)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not delay empirical hydrocortisone administration pending confirmatory cortisol/ACTH results",
+    "Avoid etomidate for intubation if avoidable (suppresses adrenal steroidogenesis)",
+    "Avoid excessive free-water administration despite hyponatremia — correct with steroids and isotonic saline, not fluid restriction alone"
+  ],
+  "edgeCases": [
+    "Hyperpigmentation and elevated ACTH point to primary (not secondary) adrenal insufficiency, distinguishing this from pituitary-driven causes",
+    "Concurrent hyperkalemia, hyponatremia, and hypoglycemia together with hypotension unresponsive to fluids should prompt empirical steroid therapy before labs return",
+    "Mild lactate elevation and tachycardia can mimic early septic shock; absence of fever/localizing source and known steroid non-adherence favor adrenal crisis",
+    "This case does not map to an infective disease id in the engine list; sepsis/septic_shock are differentials to exclude but not the final diagnosis"
+  ],
+  "expectedMaiK": "Should flag classic triad of hypotension refractory to fluids, hyponatremia with hyperkalemia, and hypoglycemia in a patient with known steroid non-adherence, and recommend immediate empirical IV hydrocortisone plus isotonic saline resuscitation without waiting for cortisol/ACTH confirmation.",
+  "expectedNextQuestions": [
+    "When was the last dose of steroid taken and was there any recent illness, surgery, or stressor requiring stress-dose adjustment?",
+    "Is there a history of other autoimmune conditions (vitiligo, thyroid disease, type 1 diabetes) suggesting autoimmune polyendocrine syndrome?",
+    "Any abdominal pain radiating to the back or flank hemorrhage risk factors (anticoagulation) to exclude adrenal hemorrhage?",
+    "Has the patient been able to tolerate oral intake, and is there vomiting/diarrhea contributing to volume depletion?"
+  ],
+  "expectedInvestigations": [
+    "Random serum cortisol and plasma ACTH (before steroid administration if feasible, but do not delay treatment)",
+    "Serum electrolytes (sodium, potassium), renal function, glucose",
+    "ACTH stimulation (Synacthen) test once stabilized",
+    "Blood and urine cultures to exclude precipitating infection",
+    "ECG for hyperkalemia changes",
+    "Adrenal imaging (CT abdomen) if hemorrhage or malignancy suspected"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "steroidUse": true,
+    "syncope": true,
+    "weightLoss": true
+  },
+  "expected": {
+    "diagnosis": "Adrenal crisis (acute primary adrenal insufficiency decompensation) precipitated by abrupt glucocorticoid withdrawal",
+    "acceptableIds": [
+      "adrenal_crisis"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "SEPTIC_SHOCK",
+      "dka",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Random serum cortisol and plasma ACTH",
+      "Serum electrolytes and glucose",
+      "ACTH stimulation test after stabilization",
+      "Blood/urine cultures",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (adrenal_crisis)",
+    "confidence >= expectedConfidence.min",
+    "differential includes SEPSIS or SEPTIC_SHOCK as a mimic to exclude",
+    "stewardship.antibiotics is empty (non-infective primary diagnosis)",
+    "expectedNextQuestions surfaces steroid adherence history"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

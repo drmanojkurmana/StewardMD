@@ -1,0 +1,138 @@
+{
+  "id": "gc_022",
+  "specialty": "Cardiology",
+  "condition": "Acute decompensated heart failure",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressively worsening breathlessness over 4 days, now unable to lie flat, with 2-pillow orthopnoea and paroxysmal nocturnal dyspnoea last night.",
+  "history": "68-year-old man with known ischaemic HFrEF (prior anterior STEMI 3 years ago, echo 18 months ago showed LVEF 30%) on losartan, bisoprolol, spironolactone and furosemide, presents with 4 days of progressive exertional dyspnoea now present at rest, orthopnoea requiring 2 pillows, and one episode of paroxysmal nocturnal dyspnoea last night that woke him gasping for air. He reports 3 kg weight gain over the past week and bilateral ankle swelling. He admits to dietary indiscretion (salty food at a family function) and says he ran out of furosemide 5 days ago. No chest pain, no fevers, no cough with purulent sputum, no recent illness. No palpitations. No dysuria or diarrhoea.",
+  "examination": "Sitting bolt upright, visibly breathless at rest, using accessory muscles. Cool peripheries, mild diaphoresis. Raised JVP to angle of jaw. Bilateral fine basal crackles extending to mid-zones. Displaced apex beat, S3 gallop present. Bilateral pitting pedal oedema to mid-shin. No calf tenderness. Abdomen soft, mild hepatomegaly, no ascites. No rash, no fever.",
+  "vitals": {
+    "hr": 112,
+    "bp": "108/72",
+    "rr": 28,
+    "spo2": 89,
+    "temp": 36.8
+  },
+  "labs": {
+    "ntproBNP_pgml": 6800,
+    "troponin_ngL": 22,
+    "troponin_note": "mildly elevated, non-rising on serial testing — demand-type, no dynamic ischaemic change",
+    "creatinine_mgdl": 1.6,
+    "creatinine_baseline_mgdl": 1.1,
+    "urea_mmoll": 12.8,
+    "sodium_mmoll": 133,
+    "potassium_mmoll": 4.6,
+    "hemoglobin_gdl": 13.2,
+    "wbc_perµL": 8100,
+    "lactate_mmoll": 1.4,
+    "albumin_gdl": 3.8,
+    "venousBloodGas": "mild respiratory alkalosis, no significant hypercapnia"
+  },
+  "imaging": [
+    "CXR: cardiomegaly, bilateral perihilar haziness, upper lobe venous diversion, Kerley B lines, small bilateral pleural effusions — consistent with pulmonary venous congestion",
+    "ECG: sinus tachycardia, poor R-wave progression and Q waves in anterior leads consistent with old anterior MI, no acute ST-T changes",
+    "Bedside echocardiogram: severely reduced LVEF ~25-30%, global hypokinesia with anteroapical akinesia (old infarct), moderate functional mitral regurgitation, dilated IVC with reduced collapsibility"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure (HFrEF) due to dietary/medication non-adherence",
+    "Acute coronary syndrome with new heart failure",
+    "Community-acquired pneumonia with respiratory failure",
+    "Acute exacerbation of COPD",
+    "Pulmonary embolism",
+    "Cardiac tamponade"
+  ],
+  "finalDiagnosis": "Acute decompensated heart failure with reduced ejection fraction (HFrEF), pulmonary congestion, precipitated by dietary sodium indiscretion and diuretic non-adherence",
+  "citations": [
+    "Harrison 22e — Heart Failure: Pathophysiology and Diagnosis",
+    "Harrison 22e — Heart Failure Management",
+    "ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure 2021",
+    "AHA/ACC/HFSA Guideline for the Management of Heart Failure 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs (worsen fluid retention and renal function)",
+    "Avoid non-dihydropyridine calcium channel blockers (negative inotropic effect) in HFrEF",
+    "Use IV nitrates cautiously if hypotensive; avoid if SBP <90-100 mmHg",
+    "Avoid excessive/rapid diuresis if evidence of concomitant hypoperfusion (cardiorenal syndrome risk)",
+    "Do not abruptly stop beta-blocker unless cardiogenic shock present"
+  ],
+  "edgeCases": [
+    "Mildly elevated non-rising troponin is common in acute decompensated HF from demand ischaemia/wall stress and does not by itself indicate acute coronary syndrome — serial troponins and ECG needed to exclude ACS as precipitant",
+    "Worsening renal function with diuresis (cardiorenal syndrome) may require balancing decongestion against renal perfusion rather than stopping diuretics outright",
+    "If SpO2 fails to improve with initial therapy or work of breathing worsens, escalate to non-invasive ventilation (CPAP/BiPAP)",
+    "Hyponatraemia (133 mmol/L) reflects neurohormonal activation (dilutional) in chronic HF and usually improves with decongestion rather than fluid restriction alone",
+    "This condition (heart_failure) maps to a broader ICD category than the specific HFrEF/pulmonary-congestion phenotype described; acceptableIds reflect the general heart_failure entity"
+  ],
+  "expectedMaiK": "MaiK should recognise classic acute decompensated HFrEF with pulmonary congestion (orthopnoea, PND, raised JVP, bilateral crackles, S3, cardiomegaly with venous congestion on CXR, markedly elevated NT-proBNP), identify diuretic non-adherence/dietary indiscretion as the precipitant, flag the mildly elevated non-rising troponin as demand-type rather than ACS, and recommend IV loop diuretic plus precipitant workup rather than antimicrobial therapy.",
+  "expectedNextQuestions": [
+    "Adherence to diuretic and heart failure medications, and any recent dose changes?",
+    "Dietary sodium/fluid intake in preceding days?",
+    "Any chest pain, palpitations, or syncope to suggest ischaemic or arrhythmic precipitant?",
+    "Baseline weight and renal function for comparison?",
+    "Response of dyspnoea, oxygenation and urine output to initial diuresis?"
+  ],
+  "expectedInvestigations": [
+    "NT-proBNP or BNP",
+    "12-lead ECG",
+    "Serial troponin",
+    "Chest X-ray",
+    "Transthoracic echocardiogram (LVEF, wall motion, valvular function)",
+    "Renal function and electrolytes",
+    "Venous blood gas",
+    "Daily weight and fluid balance monitoring"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "legSwellingBilateral": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "supplementalOxygen": true,
+    "knownHeartFailure": true,
+    "knownCAD": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "Acute decompensated heart failure with reduced ejection fraction, pulmonary congestion",
+    "acceptableIds": [
+      "heart_failure"
+    ],
+    "differentialIds": [
+      "acs",
+      "cardiogenic_shock",
+      "pe",
+      "pleural_effusion"
+    ],
+    "investigations": [
+      "NT-proBNP",
+      "ECG",
+      "Serial troponin",
+      "Chest X-ray",
+      "Transthoracic echocardiogram",
+      "Renal function and electrolytes"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (heart_failure)",
+    "confidence >= min",
+    "differential includes acs or cardiogenic_shock",
+    "stewardship.antibiotics is empty (non-infective diagnosis)",
+    "contraindications flag NSAID avoidance and cautious diuresis in setting of renal function change"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

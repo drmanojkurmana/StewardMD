@@ -1,0 +1,127 @@
+{
+  "id": "gc_101",
+  "specialty": "Hematology",
+  "condition": "Vitamin B12 deficiency",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Progressive fatigue, breathlessness on exertion, and unsteady gait for the past 3 months, with tingling and numbness in both feet for 6 weeks.",
+  "history": "A 62-year-old man, strict vegetarian for over 30 years, presents with a 3-month history of progressive fatigue, exertional dyspnea, and low mood. Over the last 6 weeks he has developed symmetric numbness and tingling in both feet ascending toward the ankles, and his gait has become increasingly unsteady, worse in the dark or with eyes closed. His wife has noticed him becoming more forgetful and irritable. He denies overt GI bleeding, melena, or hematemesis, but reports intermittent glossitis and a sore tongue. No alcohol excess. No history of gastric or ileal surgery, but he mentions a family history of thyroid disease and was recently found to have mild vitiligo. No fever, no weight loss out of proportion to reduced appetite. No history of anticonvulsant, metformin, or proton-pump-inhibitor use beyond metformin for type 2 diabetes started 8 years ago.",
+  "examination": "Pallor with mild scleral icterus (lemon-yellow tinge). Glossitis with a smooth, beefy-red tongue. Neurological exam: reduced vibration and proprioception in both lower limbs, absent ankle jerks with exaggerated knee jerks, bilateral extensor plantar responses (upgoing Babinski), positive Romberg sign, and a broad-based, unsteady (ataxic) gait. No papilledema. Mild cognitive slowing on bedside testing (MMSE 26/30). No hepatosplenomegaly. No lymphadenopathy. No signs of active bleeding.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/74",
+    "rr": 16,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "hemoglobin_g_dL": 7.8,
+    "mcv_fL": 118,
+    "reticulocyteCount_percent": 0.8,
+    "wbc_per_uL": 3200,
+    "platelets_x10e3_uL": 98,
+    "peripheralSmear": "Macro-ovalocytes, hypersegmented neutrophils (>5 lobes), anisopoikilocytosis",
+    "serumB12_pg_mL": 98,
+    "serumFolate_ng_mL": 9.5,
+    "LDH_U_L": 890,
+    "indirectBilirubin_mg_dL": 2.1,
+    "haptoglobin_mg_dL": "low",
+    "methylmalonicAcid": "elevated",
+    "homocysteine": "elevated",
+    "intrinsicFactorAntibody": "positive",
+    "parietalCellAntibody": "positive",
+    "TSH_mIU_L": 4.1
+  },
+  "imaging": [
+    "MRI spine: T2 hyperintensity in the dorsal columns of the cervical and thoracic spinal cord, consistent with subacute combined degeneration"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Vitamin B12 deficiency with subacute combined degeneration of the cord",
+    "Folate deficiency anemia",
+    "Myelodysplastic syndrome",
+    "Autoimmune (pernicious anemia) atrophic gastritis",
+    "Copper deficiency myeloneuropathy",
+    "Hypothyroid-associated anemia",
+    "Guillain-Barre syndrome (for the ascending sensory/gait picture)"
+  ],
+  "finalDiagnosis": "Vitamin B12 (cobalamin) deficiency due to pernicious anemia, presenting with macrocytic anemia and subacute combined degeneration of the spinal cord",
+  "citations": [
+    "Harrison 22e — Megaloblastic Anemias",
+    "Harrison 22e — Disorders of the Autonomic Nervous System and peripheral/dorsal column disease (subacute combined degeneration)",
+    "British Society for Haematology Guidelines for the Diagnosis and Management of Cobalamin and Folate Disorders 2014"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not give folic acid alone before confirming/treating B12 deficiency — may correct hematologic picture while worsening or precipitating neurologic damage",
+    "Avoid delaying parenteral B12 replacement pending exhaustive workup once biochemical deficiency with neurologic signs is confirmed"
+  ],
+  "edgeCases": [
+    "Serum B12 can be falsely normal in early or mild deficiency; methylmalonic acid and homocysteine are more sensitive functional markers",
+    "Neurologic manifestations (subacute combined degeneration) can occur without anemia or macrocytosis being present",
+    "Metformin use is an independent risk factor for B12 deficiency and may confound the vegetarian-diet attribution",
+    "Concurrent autoimmune conditions (vitiligo, thyroid disease) support an autoimmune pernicious anemia diathesis and warrant screening for other autoimmune endocrinopathies",
+    "This diagnosis (vitamin B12 deficiency / pernicious anemia / subacute combined degeneration) is not represented as a discrete id in the current engine disease list, so acceptableIds is intentionally empty; the closest listed category is the generic 'anemia_sympt' entry, retained only as a differential"
+  ],
+  "expectedMaiK": "MaiK should flag the combination of macrocytic anemia, hypersegmented neutrophils, and dorsal column signs (impaired proprioception/vibration, positive Romberg, upgoing plantars) as classic for B12 deficiency with subacute combined degeneration, recommend confirmatory methylmalonic acid/homocysteine and intrinsic factor antibody testing, and caution against folate-only replacement.",
+  "expectedNextQuestions": [
+    "Any history of gastric surgery, bariatric surgery, or ileal (terminal ileum) resection or Crohn disease?",
+    "Dietary history — strict vegan/vegetarian intake duration?",
+    "Any features of autoimmune thyroid disease or other autoimmune conditions?",
+    "Duration and progression of gait instability — any bladder/bowel involvement suggesting cord compression mimic?",
+    "Current medications, especially metformin, proton-pump inhibitors, or H2 blockers?"
+  ],
+  "expectedInvestigations": [
+    "Complete blood count with peripheral smear",
+    "Serum vitamin B12 level",
+    "Serum methylmalonic acid and homocysteine",
+    "Serum folate",
+    "Intrinsic factor and parietal cell antibodies",
+    "Reticulocyte count, LDH, indirect bilirubin, haptoglobin (hemolysis markers)",
+    "MRI spine (dorsal columns) if neurologic signs present",
+    "Upper GI endoscopy (evaluate atrophic gastritis, screen for gastric neoplasm/carcinoid)",
+    "TSH (screen for co-existing autoimmune thyroid disease)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "weightLoss": true,
+    "hemoglobin": true,
+    "ataxia": true,
+    "focalNeuroDeficit": true,
+    "behavioralChange": true,
+    "jaundice": true,
+    "subacuteOnset": true,
+    "dyspnea": true
+  },
+  "expected": {
+    "diagnosis": "Vitamin B12 (cobalamin) deficiency due to pernicious anemia, presenting with macrocytic anemia and subacute combined degeneration of the spinal cord",
+    "acceptableIds": [],
+    "differentialIds": [
+      "anemia_sympt"
+    ],
+    "investigations": [
+      "Serum vitamin B12",
+      "Serum methylmalonic acid and homocysteine",
+      "Intrinsic factor antibody",
+      "Peripheral smear",
+      "MRI spine"
+    ],
+    "stewardship": {
+      "tier": "harrison",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "differential includes anemia_sympt (or equivalent hematologic category) given macrocytic anemia + neuro findings",
+    "acceptableIds is empty array (diagnosis not represented in current disease taxonomy)",
+    "confidence >= 70 given classic constellation (macrocytic anemia + hypersegmented neutrophils + dorsal column signs)",
+    "system does not recommend antibiotics/stewardship pathway for this non-infective diagnosis",
+    "system surfaces caution against isolated folic acid replacement"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

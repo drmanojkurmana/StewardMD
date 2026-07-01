@@ -1,0 +1,131 @@
+{
+  "id": "gc_069",
+  "specialty": "Neurology",
+  "condition": "Myasthenic crisis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Progressive weakness, double vision and difficulty breathing over 2 days in a known myasthenia gravis patient",
+  "history": "34-year-old woman with a 3-year history of acetylcholine-receptor-antibody-positive generalized myasthenia gravis, previously stable on pyridostigmine and azathioprine, presents with a 5-day history of worsening ptosis and diplopia followed by increasing difficulty swallowing and slurred speech over the last 2 days. She was started on amoxicillin-clavulanate 4 days ago for a presumed upper respiratory tract infection. Over the past 24 hours she has developed progressively worsening shortness of breath, cannot complete sentences without pausing for breath, and her family notes she now chokes on liquids. No fevers, chest pain, or leg swelling. She denies illicit drug use. No recent medication changes other than the new antibiotic; she has not missed pyridostigmine doses. No prior ICU admissions for MG; one outpatient exacerbation 18 months ago treated with a prednisone taper.",
+  "examination": "Alert, anxious-appearing, sitting upright, speaking in short fragmented sentences with a nasal, breathy quality. Bilateral ptosis worse on sustained upgaze (fatigable), bilateral partial ophthalmoplegia. Facial weakness with poor lip seal. Weak cough, pooling of oral secretions, unable to swallow water without coughing. Neck flexor weakness (unable to hold head off pillow >5 seconds). Proximal limb weakness 4-/5 in shoulders and hips, fatigable on repetitive testing, distal strength relatively preserved. Reflexes normal, no sensory deficit. Using accessory muscles of respiration (sternocleidomastoid, intercostal retractions), paradoxical abdominal breathing noted. Single-breath count = 12. No fever, chest clear to auscultation, no calf tenderness or leg edema.",
+  "vitals": {
+    "hr": 118,
+    "bp": "138/84",
+    "rr": 32,
+    "spo2": 91,
+    "temp": 37.1
+  },
+  "labs": {
+    "abgPaO2": 68,
+    "abgPaCO2": 50,
+    "abgPH": 7.32,
+    "forcedVitalCapacity_mL_per_kg": 12,
+    "negativeInspiratoryForce_cmH2O": -18,
+    "sodium": 138,
+    "potassium": 4.1,
+    "creatinine": 0.7,
+    "wbc": 9.8,
+    "crp": 0.6,
+    "achReceptorAntibody": "positive (known)",
+    "tsh": 2.1
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no cardiomegaly, low lung volumes consistent with poor inspiratory effort",
+    "CT chest/mediastinum (prior, on file): no thymoma"
+  ],
+  "microbiology": [
+    "Respiratory viral PCR panel: negative",
+    "Blood cultures: pending (drawn given tachycardia/tachypnea, no fever)"
+  ],
+  "differentialDiagnoses": [
+    "Myasthenic crisis",
+    "Cholinergic crisis (pyridostigmine excess)",
+    "Guillain-Barre syndrome",
+    "Acute inflammatory demyelinating polyneuropathy",
+    "Botulism",
+    "Aminoglycoside/antibiotic-induced neuromuscular blockade exacerbation of MG",
+    "Community-acquired pneumonia with respiratory decompensation",
+    "Thyrotoxic crisis with myopathy"
+  ],
+  "finalDiagnosis": "Myasthenic crisis (antibiotic-precipitated), impending respiratory failure",
+  "citations": [
+    "Harrison 22e — Myasthenia Gravis and Other Diseases of the Neuromuscular Junction",
+    "Myasthenia Gravis Foundation of America (MGFA) International Consensus Guidance for Management of Myasthenia Gravis 2020",
+    "Neurocritical Care Society Guideline on Management of Myasthenic Crisis"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid fluoroquinolones, aminoglycosides, macrolides (esp. azithromycin/erythromycin), and high-dose beta-lactams with known neuromuscular blocking potential in myasthenia gravis",
+    "Avoid magnesium-containing agents and non-depolarizing neuromuscular blockers where possible",
+    "Avoid beta-blockers unless essential",
+    "Caution with succinylcholine (resistance) and non-depolarizing agents (hypersensitivity) if intubation required"
+  ],
+  "edgeCases": [
+    "Amoxicillin-clavulanate is a recognized (though less potent than fluoroquinolones/macrolides) precipitant of MG exacerbation and should be reviewed/stopped",
+    "Cholinergic crisis from pyridostigmine overuse can mimic worsening weakness; distinguished by muscarinic excess (miosis, excess secretions, cramping, bradycardia) and improvement/no change with edrophonium/neostigmine test — absent here",
+    "Single-breath count <20 and FVC <15-20 mL/kg or NIF less negative than -20 to -25 cmH2O are indications for elective intubation before overt respiratory arrest",
+    "Bulbar weakness with poor secretion handling can precipitate aspiration pneumonia, complicating the picture",
+    "Infection is the most common trigger of myasthenic crisis overall, so a genuine underlying infection must be actively excluded even when antibiotic-precipitation is suspected"
+  ],
+  "expectedMaiK": "Recognize fatigable bulbar/ocular/proximal weakness plus falling FVC/NIF in a known MG patient started on a high-risk antibiotic as myasthenic crisis with impending respiratory failure; flag for urgent airway/ventilatory assessment, discontinuation of the precipitating drug, and initiation of PLEX/IVIG plus ICU-level monitoring rather than antimicrobial escalation.",
+  "expectedNextQuestions": [
+    "What is the trend in serial FVC and NIF over the last few hours?",
+    "Is there any evidence of an underlying infection (fever, leukocytosis, CXR/urine findings) triggering the crisis?",
+    "Has pyridostigmine dosing/timing been reviewed to exclude cholinergic crisis?",
+    "Is the patient a candidate for elective intubation now versus close monitoring in a monitored/ICU bed?",
+    "Any contraindications to IVIG (IgA deficiency, renal impairment) or to PLEX (hemodynamic instability, line access)?"
+  ],
+  "expectedInvestigations": [
+    "Serial forced vital capacity and negative inspiratory force (bedside spirometry)",
+    "Arterial blood gas",
+    "Chest X-ray",
+    "Complete blood count, CRP/procalcitonin, blood cultures, urinalysis to exclude infective trigger",
+    "AChR/MuSK antibody titers (if not already known)",
+    "TSH (thyroid dysfunction can worsen MG)",
+    "Medication reconciliation for MG-unsafe drugs"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "dyspnea": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "ascendingWeakness": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "Myasthenic crisis (antibiotic-precipitated), impending respiratory failure",
+    "acceptableIds": [
+      "myasthenic_crisis"
+    ],
+    "differentialIds": [
+      "gbs",
+      "asthma_exac",
+      "ASPIRATION_PNEUMONIA"
+    ],
+    "investigations": [
+      "Bedside spirometry (FVC, NIF)",
+      "Arterial blood gas",
+      "Chest X-ray",
+      "Blood cultures, CBC, CRP",
+      "AChR antibody titer",
+      "TSH"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (myasthenic_crisis)",
+    "confidence >= expectedConfidence.min",
+    "differential includes a neuromuscular/respiratory mimic (e.g., gbs)",
+    "stewardship.tier is null (non-infective primary process)",
+    "contraindications list flags MG-unsafe antibiotic classes"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

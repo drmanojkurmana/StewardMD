@@ -1,0 +1,136 @@
+{
+  "id": "gc_074",
+  "specialty": "Tropical Medicine",
+  "condition": "Enteric fever (typhoid)",
+  "age": 22,
+  "sex": "F",
+  "presentingComplaint": "10 days of stepwise rising fever, headache, and abdominal discomfort",
+  "history": "A 22-year-old woman presents with a 10-day history of fever that began low-grade and has progressively increased each day in a stepladder pattern, now peaking at 39.8°C in the evenings. She reports frontal headache, malaise, anorexia, and diffuse abdominal discomfort with constipation for the last 4 days (no diarrhea). She denies cough, dysuria, or joint pains. She works at a roadside food stall and admits to frequently eating uncooked salads and drinking water from unfiltered sources; she recalls a similar febrile illness affecting a co-worker two weeks ago. No recent travel outside the city, no tick or animal exposure, no rash noticed by the patient herself. No prior antibiotics in the last 90 days. Not pregnant, no known comorbidities, no immunosuppression.",
+  "examination": "Toxic-looking but alert and oriented young woman. Temperature 39.7°C with a pulse of 82/min — a pulse-temperature dissociation (relative bradycardia) is noted by the examining team. Blood pressure 106/68 mmHg, respiratory rate 18/min, SpO2 98% on room air. A few faint blanching, salmon-colored macules (rose spots) are seen over the upper abdomen. Abdomen is mildly distended and diffusely tender with soft hepatosplenomegaly (liver 2 cm, spleen tip palpable). No neck stiffness, no rash elsewhere, chest clear, no murmurs, no peripheral stigmata of endocarditis.",
+  "vitals": {
+    "hr": 82,
+    "bp": "106/68",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 39.7
+  },
+  "labs": {
+    "wbc": "4.2 x10^3/uL (leukopenia with relative lymphocytosis)",
+    "hemoglobin": 11.8,
+    "platelets": 132,
+    "creatinine": 0.8,
+    "alt": 78,
+    "ast": 65,
+    "bilirubin": 1.1,
+    "crp": "high",
+    "esr": "elevated",
+    "bloodCultureStatus": "pending at presentation, positive at 48h (per microbiology)",
+    "widalTest": "single-sample Widal sent but interpreted with caution due to low specificity"
+  },
+  "imaging": [
+    "Abdominal ultrasound: mild hepatosplenomegaly, no free fluid, no focal hepatic lesion, gallbladder wall unremarkable, mesenteric lymph nodes mildly prominent"
+  ],
+  "microbiology": [
+    "Blood culture (2 sets, drawn prior to antibiotics): growth of Salmonella enterica serotype Typhi at 48 hours, sensitivities pending/reported (guides definitive therapy and fluoroquinolone/azithromycin decision)",
+    "Stool culture: sent, may also yield S. Typhi in a minority of cases",
+    "Widal serology: single acute sample, low specificity/sensitivity, not diagnostic alone"
+  ],
+  "differentialDiagnoses": [
+    "Enteric fever (typhoid/paratyphoid)",
+    "Malaria",
+    "Dengue fever",
+    "Rickettsial infection (scrub typhus)",
+    "Amoebic liver abscess",
+    "Tuberculosis (disseminated/miliary)",
+    "Brucellosis",
+    "Viral hepatitis with prodrome",
+    "Pyrexia of unknown origin, other causes"
+  ],
+  "finalDiagnosis": "Enteric fever (typhoid) due to Salmonella enterica serotype Typhi, blood culture confirmed",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Salmonellosis (Typhoid and Paratyphoid Fever)",
+    "IDSA Guidelines for management of typhoid fever (general reference, no specific year cited)",
+    "WHO Typhoid Fever Guidelines"
+  ],
+  "stewardship": "Empirical therapy pending sensitivities: parenteral third-generation cephalosporin (e.g., ceftriaxone) is favored empirically in areas with fluoroquinolone-resistant/decreased-susceptibility S. Typhi; oral azithromycin is an alternative for uncomplicated cases; fluoroquinolones (e.g., ciprofloxacin) may be used only if local susceptibility is confirmed. De-escalate to a susceptibility-directed oral agent once culture results and antibiogram are available, typically completing a 7–14 day course depending on agent and clinical response.",
+  "contraindications": [
+    "Avoid empirical fluoroquinolone monotherapy in regions with high rates of decreased ciprofloxacin susceptibility without confirmed susceptibility",
+    "Avoid antipyretics/NSAIDs that mask fever pattern before diagnosis is secure; use paracetamol cautiously given potential hepatic involvement",
+    "Avoid unnecessary corticosteroids unless criteria for severe/complicated typhoid (e.g., shock, altered sensorium) are met"
+  ],
+  "edgeCases": [
+    "Widal test alone is unreliable for diagnosis due to cross-reactivity and prior exposure/vaccination; blood culture remains the diagnostic gold standard",
+    "Relative bradycardia may be absent in children and can be masked by concurrent dehydration or fever-associated tachycardia",
+    "Intestinal perforation or GI bleeding are feared complications typically occurring in the third week of untreated illness — must monitor for severe abdominal pain, peritonism, or melena",
+    "Paratyphoid fever (S. Paratyphi A/B) presents similarly and is not separately listed in the diagnosable disease set; it is captured under the same ENTERIC_FEVER category"
+  ],
+  "expectedMaiK": "MaiK should flag the classic triad of stepladder fever, relative bradycardia, and rose spots/hepatosplenomegaly as highly suggestive of enteric fever, recommend blood cultures before antibiotics, and note that Widal testing alone is not diagnostic.",
+  "expectedNextQuestions": [
+    "Any travel to or residence in a typhoid-endemic area, or exposure to contaminated food/water?",
+    "Any prior typhoid vaccination?",
+    "Any signs of complications — severe abdominal pain, guarding, melena, altered mental status?",
+    "Any antibiotic exposure in the preceding weeks that could affect culture yield or resistance pattern?"
+  ],
+  "expectedInvestigations": [
+    "Blood culture x2 before antibiotics",
+    "Complete blood count",
+    "Liver function tests",
+    "Abdominal ultrasound",
+    "Stool culture",
+    "Widal test (adjunctive only, interpret with caution)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "stepladderFever": true,
+    "relativeBradycardia": true,
+    "roseSpots": true,
+    "hepatosplenomegaly": true,
+    "toxicAppearing": true,
+    "abdominalPain": true,
+    "constipationOrDiarrhea": true,
+    "contaminatedFoodWaterExposure": true,
+    "headache": true
+  },
+  "expected": {
+    "diagnosis": "Enteric fever (typhoid) due to Salmonella enterica serotype Typhi, blood culture confirmed",
+    "acceptableIds": [
+      "ENTERIC_FEVER"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "DENGUE",
+      "RICKETTSIAL_FEVER",
+      "PUO"
+    ],
+    "investigations": [
+      "Blood culture x2 before antibiotics",
+      "Complete blood count",
+      "Liver function tests",
+      "Abdominal ultrasound",
+      "Stool culture"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin",
+        "ciprofloxacin (if susceptibility confirmed)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ENTERIC_FEVER)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes MALARIA and/or DENGUE and/or RICKETTSIAL_FEVER",
+    "recommended investigations include blood culture",
+    "stewardship recommendation does not suggest empirical fluoroquinolone monotherapy without susceptibility data"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "gc_020",
+  "specialty": "Cardiology",
+  "condition": "Acute coronary syndrome",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Recurrent central chest heaviness for 6 hours, ongoing at rest, associated with sweating and breathlessness.",
+  "history": "64-year-old man with known hypertension, type 2 diabetes mellitus, and hyperlipidaemia presents with three episodes of retrosternal chest heaviness over the past 6 hours, each lasting 15-20 minutes, the last episode still present on arrival with radiation to the left arm and jaw. Associated diaphoresis, nausea, and mild dyspnea. No relief with rest. Denies similar pain before today, though reports increasing exertional chest tightness over the preceding 2 weeks (crescendo pattern). No fever, no cough. Smoker, 20 pack-years. No prior MI or revascularization. No recent cocaine use.",
+  "examination": "Anxious, diaphoretic male, mild distress from ongoing chest discomfort. No pallor or cyanosis. JVP not raised. Heart sounds normal, no murmur, no rub. Chest clear, no crackles. No peripheral edema. No calf tenderness. Abdomen soft, non-tender. Peripheral pulses intact and symmetric.",
+  "vitals": {
+    "hr": 96,
+    "bp": "148/92",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 36.8
+  },
+  "labs": {
+    "highSensitivityTroponinT_0h_ngL": 210,
+    "highSensitivityTroponinT_3h_ngL": 540,
+    "creatinine_mgdL": 1.1,
+    "hemoglobin_gdL": 13.8,
+    "platelets_x10e3uL": 240,
+    "potassium_mmolL": 4.2,
+    "glucose_mgdL": 168,
+    "lipidProfile_LDL_mgdL": 142,
+    "bnp_pgmL": 180
+  },
+  "imaging": [
+    "12-lead ECG on admission: dynamic 1.5mm horizontal ST depression in leads V4-V6 and I, aVL, with T-wave inversion; resolved partially on repeat ECG after 30 minutes then recurred with pain",
+    "Chest X-ray: no cardiomegaly, no pulmonary edema, no pneumothorax",
+    "Transthoracic echocardiogram: mild hypokinesis of the antero-lateral wall, LVEF 48%, no pericardial effusion"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "ST-elevation myocardial infarction",
+    "Unstable angina",
+    "Aortic dissection",
+    "Acute pericarditis",
+    "Pulmonary embolism",
+    "Gastroesophageal reflux with chest pain"
+  ],
+  "finalDiagnosis": "Non-ST-elevation myocardial infarction (NSTEMI) with dynamic ECG changes",
+  "citations": [
+    "Harrison 22e — ST-Elevation and Non-ST-Elevation Acute Coronary Syndromes",
+    "AHA/ACC Guideline for the Management of Patients With Acute Coronary Syndromes 2025",
+    "ESC Guidelines for the management of acute coronary syndromes 2023"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs in suspected ACS",
+    "Caution with dual antiplatelet therapy and anticoagulation if active bleeding risk or planned urgent CABG",
+    "Beta-blockers should be used cautiously if signs of acute heart failure or cardiogenic shock present"
+  ],
+  "edgeCases": [
+    "Dynamic ST depression with rising troponin distinguishes NSTEMI from unstable angina (troponin-negative) and from STEMI (no ST elevation/new LBBB present)",
+    "Diabetic patients may have atypical or blunted anginal symptoms — index of suspicion must remain high",
+    "Early risk stratification (GRACE score) determines timing of invasive coronary angiography (urgent <24h given dynamic ECG changes and high-risk features)",
+    "aortic_dissection and pe are not present in the diagnosable disease list used by this engine; retained here as clinically important differentials but excluded from acceptableIds/differentialIds"
+  ],
+  "expectedMaiK": "MaiK should flag dynamic ischemic ECG changes plus rising high-sensitivity troponin as diagnostic of NSTEMI, recommend urgent cardiology referral, dual antiplatelet/anticoagulant therapy per ACS pathway, and early invasive strategy given high-risk (GRACE) features.",
+  "expectedNextQuestions": [
+    "Time of onset and pattern of pain (crescendo/rest pain)?",
+    "Serial ECGs and troponin trend?",
+    "Bleeding risk assessment before antiplatelet/anticoagulant therapy?",
+    "GRACE/TIMI risk score for timing of angiography?",
+    "Renal function for contrast planning?"
+  ],
+  "expectedInvestigations": [
+    "Serial 12-lead ECG",
+    "Serial high-sensitivity troponin (0h/3h or 0h/1h protocol)",
+    "Transthoracic echocardiogram",
+    "Coronary angiography (urgent, <24h)",
+    "Renal function, lipid profile, HbA1c",
+    "Chest X-ray"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "ecgIschemia": true,
+    "knownCAD": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "Non-ST-elevation myocardial infarction (NSTEMI) with dynamic ECG changes",
+    "acceptableIds": [
+      "acs"
+    ],
+    "differentialIds": [
+      "acs",
+      "pericarditis",
+      "gerd_chest"
+    ],
+    "investigations": [
+      "Serial 12-lead ECG",
+      "Serial high-sensitivity troponin",
+      "Transthoracic echocardiogram",
+      "Coronary angiography"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (acs)",
+    "confidence >= expectedConfidence.min",
+    "differential includes pericarditis or gerd_chest as plausible chest-pain mimics",
+    "expectedInvestigations includes serial troponin and coronary angiography",
+    "stewardship.tier is null (non-infective diagnosis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "id": "gc_087",
+  "specialty": "Gastroenterology",
+  "condition": "Inflammatory bowel disease flare",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "Bloody diarrhoea up to 10 times a day for 5 days with crampy abdominal pain and fever, on a background of known ulcerative colitis.",
+  "history": "27-year-old woman with left-sided ulcerative colitis diagnosed 4 years ago, previously well controlled on mesalazine, presents with a 5-day history of worsening bloody diarrhoea (now 8-10 bowel movements/day, most containing visible blood and mucus), urgency, and tenesmus. She reports crampy lower abdominal pain, subjective fevers, and malaise. She has had poor oral intake for 2 days due to nausea. No recent travel, no antibiotic use, no NSAID use. She stopped her mesalazine 3 weeks ago after running out of medication and has had escalating symptoms since. No prior surgery. No family history of colorectal cancer. No sick contacts. No recent hospitalization.",
+  "examination": "Ill-looking, mildly dehydrated young woman. Diffuse mild-to-moderate tenderness over the lower abdomen, worse in the left iliac fossa, without guarding, rigidity, or rebound. No abdominal distension. Bowel sounds present. Digital rectal exam reveals fresh blood and mucus. No perianal fistula or abscess. No skin, joint, or eye extra-intestinal manifestations noted on this visit.",
+  "vitals": {
+    "hr": 112,
+    "bp": "100/64",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 38.4
+  },
+  "labs": {
+    "hemoglobin": 9.8,
+    "wbc": 13.2,
+    "platelets": 480,
+    "crp": 68,
+    "esr": 52,
+    "albumin": 2.9,
+    "creatinine": 0.9,
+    "potassium": 3.3,
+    "stoolCalprotectin": "markedly elevated",
+    "stoolCultureAndOva": "pending/negative to date",
+    "cDiffToxin": "negative"
+  },
+  "imaging": [
+    "Abdominal X-ray: no evidence of toxic megacolon or free air, no significant colonic dilatation",
+    "Flexible sigmoidoscopy (limited, unprepped): diffuse continuous mucosal inflammation with loss of vascular pattern, friability, and superficial ulceration from rectum extending proximally, consistent with active severe colitis"
+  ],
+  "microbiology": [
+    "Stool microscopy, culture and sensitivity: pending, no pathogens isolated to date",
+    "Stool Clostridioides difficile toxin: negative",
+    "Stool ova, cysts and parasites: negative"
+  ],
+  "differentialDiagnoses": [
+    "Acute severe ulcerative colitis flare",
+    "Infectious colitis (bacterial dysentery)",
+    "Clostridioides difficile colitis",
+    "Crohn's colitis",
+    "Ischemic colitis",
+    "Amoebic colitis"
+  ],
+  "finalDiagnosis": "Acute severe ulcerative colitis flare (Truelove and Witts criteria met)",
+  "citations": [
+    "Harrison 22e — Inflammatory Bowel Disease",
+    "ACG Ulcerative Colitis Guideline 2019",
+    "ECCO Ulcerative Colitis Guideline 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid anti-motility agents (e.g., loperamide) — risk of precipitating toxic megacolon",
+    "Avoid NSAIDs — may exacerbate flare",
+    "Empirical antibiotics not routinely indicated once infection excluded, unless toxic megacolon or perforation suspected"
+  ],
+  "edgeCases": [
+    "Infectious colitis must be excluded with stool studies (culture, C. difficile toxin, ova/parasites) before committing to escalation of immunosuppression, though treatment should not be delayed pending results if severity criteria are met",
+    "Toxic megacolon is a critical complication to actively exclude with serial abdominal exams and imaging; colonic dilatation >6 cm with systemic toxicity changes management urgently toward surgery",
+    "Steroid-refractory disease at 72 hours requires rescue therapy (infliximab or ciclosporin) or colectomy discussion",
+    "Full colonoscopy is avoided in acute severe flare due to perforation risk; limited unprepped flexible sigmoidoscopy is preferred for initial assessment",
+    "This condition (ibd_flare) is present in the diagnosable disease list, but the acute severe/fulminant variant with Truelove-Witts criteria is a clinical severity classification rather than a distinct engine id — acceptableIds reflects the base ibd_flare id"
+  ],
+  "expectedMaiK": "MaiK should flag this as acute severe ulcerative colitis by Truelove and Witts criteria (≥6 bloody stools/day plus one systemic criterion: fever, tachycardia, anemia, or elevated CRP/ESR), recommend urgent stool studies to exclude infection/C. difficile, IV corticosteroids as first-line therapy, VTE prophylaxis, and close monitoring for toxic megacolon with a 72-hour reassessment for steroid response.",
+  "expectedNextQuestions": [
+    "How many bloody bowel movements per day and for how long?",
+    "Any recent antibiotic use or hospitalization (C. difficile risk)?",
+    "Any recent travel or sick contacts (infectious colitis)?",
+    "Adherence to maintenance IBD therapy — any recent discontinuation?",
+    "Any abdominal distension, absent bowel sounds, or signs suggesting toxic megacolon?",
+    "Extra-intestinal manifestations — joint pain, eye redness, skin lesions?"
+  ],
+  "expectedInvestigations": [
+    "Stool culture, C. difficile toxin, ova and parasites",
+    "Fecal calprotectin",
+    "CRP, ESR, full blood count, albumin, electrolytes, renal function",
+    "Abdominal X-ray to exclude toxic megacolon/perforation",
+    "Flexible sigmoidoscopy with biopsy (unprepped, limited)",
+    "Blood cultures if febrile/toxic"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "abdominalPain": true,
+    "severeAbdominalPain": true,
+    "fever": true,
+    "tachycardia": true,
+    "dehydration": true,
+    "highFeverGI": true
+  },
+  "expected": {
+    "diagnosis": "Acute severe ulcerative colitis flare (Truelove and Witts criteria met)",
+    "acceptableIds": [
+      "ibd_flare"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "C_DIFF"
+    ],
+    "investigations": [
+      "Stool culture and C. difficile toxin",
+      "Fecal calprotectin",
+      "CRP/ESR, full blood count, albumin",
+      "Abdominal X-ray",
+      "Flexible sigmoidoscopy with biopsy"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ibd_flare)",
+    "confidence >= expectedConfidence.min",
+    "differential includes infectious colitis / C. difficile as mimics to exclude",
+    "stewardship.antibiotics is empty (non-infective flare, antibiotics not indicated empirically)",
+    "expectedNextQuestions surfaces infection-exclusion and toxic megacolon screening questions"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

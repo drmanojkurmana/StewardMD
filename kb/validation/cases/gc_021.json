@@ -1,0 +1,130 @@
+{
+  "id": "gc_021",
+  "specialty": "Cardiology",
+  "condition": "Acute coronary syndrome",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "64-year-old man with recurrent episodes of central chest pressure at rest over the past 24 hours, most recent episode 2 hours ago lasting 15 minutes.",
+  "history": "Known hypertensive and type 2 diabetic for 10 years, on irregular treatment. Reports three episodes of retrosternal chest heaviness in the last 24 hours, each occurring at rest (including one that woke him from sleep), radiating to the left arm and jaw, associated with diaphoresis and mild breathlessness, each lasting 10-20 minutes and partially relieved by rest. No preceding exertional trigger for the most recent episodes. Previously had stable exertional angina on climbing two flights of stairs, relieved by rest, for the past 3 months, but over the last week the threshold has dropped and pain now occurs with minimal exertion and also at rest — consistent with crescendo (unstable) angina. No prior MI. Denies fever, cough, or recent long travel. Smoker, 20 pack-years. Father had MI at age 58.",
+  "examination": "Anxious, diaphoretic but not in acute distress at rest. No pallor or cyanosis. Chest clear. Heart sounds normal, no murmur or rub. No signs of heart failure (no raised JVP, no bilateral crackles, no peripheral edema). Peripheral pulses intact and symmetric. No calf tenderness.",
+  "vitals": {
+    "hr": 96,
+    "bp": "146/92",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "troponinI_initial_ng/L": 18,
+    "troponinI_3hr_ng/L": 22,
+    "troponinReferenceUpperLimit_ng/L": 26,
+    "hemoglobin_g/dL": 13.8,
+    "wbc_per_uL": 8200,
+    "platelets_x10e3/uL": 240,
+    "creatinine_mg/dL": 1,
+    "glucoseRandom_mg/dL": 168,
+    "hba1c_percent": 7.8,
+    "ldlCholesterol_mg/dL": 142,
+    "bnp_pg/mL": 60
+  },
+  "imaging": [
+    "12-lead ECG (during pain): dynamic 1.5 mm ST-segment depression in leads V4-V6, I, aVL with symmetric T-wave inversion; resolves partially with pain relief",
+    "ECG (pain-free): no significant ST-T changes",
+    "Chest X-ray: no cardiomegaly, no pulmonary edema, no consolidation",
+    "Transthoracic echocardiogram: mild hypokinesia of the inferolateral wall, LVEF 50%, no pericardial effusion, no valvular vegetation"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Unstable angina / NSTEMI spectrum acute coronary syndrome",
+    "Acute pericarditis",
+    "Aortic dissection",
+    "Pulmonary embolism",
+    "Gastroesophageal reflux disease / esophageal spasm",
+    "Musculoskeletal chest pain"
+  ],
+  "finalDiagnosis": "Unstable angina (high-risk non-ST-elevation acute coronary syndrome)",
+  "citations": [
+    "Harrison 22e — ST-Elevation and Non-ST-Elevation Acute Coronary Syndromes",
+    "AHA/ACC Guideline for the Management of Patients With Non-ST-Elevation Acute Coronary Syndromes 2021",
+    "ESC Guidelines for the management of acute coronary syndromes 2023"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs (including COX-2 selective agents) — increased cardiovascular risk",
+    "Caution with beta-blockers if signs of acute heart failure, bradycardia, or hypotension",
+    "Avoid unnecessary delay to antiplatelet/anticoagulant therapy while awaiting serial troponins in high pre-test probability presentation",
+    "Caution with dual antiplatelet therapy if active bleeding or planned urgent CABG"
+  ],
+  "edgeCases": [
+    "Normal/near-upper-limit single troponin does not exclude ACS — serial troponin at 0/1h or 0/3h per ESC/AHA algorithms required given crescendo rest-pain pattern and dynamic ECG changes",
+    "Absence of ST elevation and only mildly elevated troponin can be mistaken for low-risk chest pain; the escalating (crescendo) pattern of rest angina and dynamic ST depression classify this as high-risk unstable angina/NSATE-ACS spectrum warranting urgent invasive strategy",
+    "Diabetic patients may have atypical or blunted anginal symptoms — a high index of suspicion is needed even with modest symptom severity",
+    "If repeat troponin at 3 hours exceeds the diagnostic threshold with the appropriate delta, reclassify as NSTEMI rather than unstable angina"
+  ],
+  "expectedMaiK": "Flag this as high-risk unstable angina (rest pain, crescendo pattern, dynamic ST depression) warranting urgent cardiology involvement, serial troponins, dual antiplatelet therapy, anticoagulation, and an early invasive strategy per AHA/ACC and ESC NSTE-ACS guidelines; note this is not an infective process so no antimicrobial stewardship applies.",
+  "expectedNextQuestions": [
+    "Time of onset and duration of most recent pain episode relative to presentation?",
+    "Any prior coronary angiography or known coronary artery disease?",
+    "Current antiplatelet/anticoagulant use or bleeding risk factors?",
+    "Renal function and weight for anticoagulant dosing?",
+    "GRACE/TIMI risk score calculation for risk stratification?"
+  ],
+  "expectedInvestigations": [
+    "Serial high-sensitivity troponin (0/1h or 0/3h protocol)",
+    "Serial 12-lead ECG including during pain",
+    "Transthoracic echocardiogram",
+    "Lipid profile and HbA1c",
+    "GRACE and TIMI risk scores",
+    "Coronary angiography (early invasive strategy)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "ecgIschemia": true,
+    "knownCAD": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "tachycardia": true,
+    "age": true,
+    "ageOver50": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "Unstable angina (high-risk non-ST-elevation acute coronary syndrome)",
+    "acceptableIds": [
+      "acs"
+    ],
+    "differentialIds": [
+      "pericarditis",
+      "aortic_dissection",
+      "pe",
+      "gerd_chest"
+    ],
+    "investigations": [
+      "Serial troponin",
+      "Serial ECG",
+      "Echocardiogram",
+      "Lipid profile",
+      "Coronary angiography"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (acs)",
+    "confidence >= expectedConfidence.min",
+    "differential includes pericarditis and/or aortic_dissection and/or pe",
+    "stewardship tier resolves to null/none (non-infective case)",
+    "expectedInvestigations includes serial troponin and ECG"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

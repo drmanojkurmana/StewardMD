@@ -1,0 +1,127 @@
+{
+  "id": "gc_026",
+  "specialty": "Neurology",
+  "condition": "Haemorrhagic stroke",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset severe headache with left-sided weakness and vomiting while gardening, followed by progressive decline in consciousness over 30 minutes.",
+  "history": "A 62-year-old man with poorly controlled hypertension (self-reported non-adherence to amlodipine) developed abrupt severe headache and left-arm weakness at 4pm while gardening in hot weather. He vomited twice within minutes of onset. Family noted he became increasingly drowsy and slurred in speech over the next 20-30 minutes before collapsing. No witnessed seizure. No head trauma. No fever preceding the event. He is a known hypertensive for 12 years, intermittently on treatment, with no known diabetes, no prior stroke or TIA, no anticoagulant or antiplatelet use, and no history of alcohol excess or bleeding disorder. No recent illness or infective symptoms.",
+  "examination": "Drowsy, opens eyes to voice, localizes to pain on the right but only withdraws on the left (GCS 10: E3V2M5). Left hemiparesis (upper limb 1/5, lower limb 2/5) with left facial droop and left-sided sensory neglect. Right gaze preference. Pupils 3mm equal and reactive bilaterally at presentation. Plantar response extensor on the left. Neck supple, no meningism. Cardiovascular exam: markedly elevated blood pressure, regular rhythm, no murmurs. No signs of endocarditis or embolic phenomena. No skin rash, no petechiae.",
+  "vitals": {
+    "hr": 58,
+    "bp": "212/118",
+    "rr": 22,
+    "spo2": 94,
+    "temp": 37.1
+  },
+  "labs": {
+    "glucose_mgdl": 168,
+    "sodium_mEqL": 138,
+    "potassium_mEqL": 4.1,
+    "creatinine_mgdl": 1.1,
+    "platelets_x10e3": 245,
+    "inr": 1,
+    "aptt_sec": 28,
+    "hemoglobin_gdl": 14.2,
+    "troponin": "negative"
+  },
+  "imaging": [
+    "Non-contrast CT head: acute hyperdense hematoma in the right basal ganglia/thalamus, approximately 35 mL by ABC/2, with mild surrounding edema and 4mm midline shift; intraventricular extension into the right lateral ventricle; no evidence of underlying mass, aneurysm, or arteriovenous malformation on initial review",
+    "CT angiogram head: no spot sign identified; no aneurysm or vascular malformation seen"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Hypertensive intracerebral haemorrhage",
+    "Ischemic stroke with haemorrhagic transformation",
+    "Ruptured cerebral aneurysm with intraparenchymal extension",
+    "Haemorrhage from underlying arteriovenous malformation or cavernoma",
+    "Haemorrhage into an underlying tumour",
+    "Cerebral amyloid angiopathy-related lobar haemorrhage"
+  ],
+  "finalDiagnosis": "Hypertensive intracerebral haemorrhage (basal ganglia/thalamic ICH with intraventricular extension)",
+  "citations": [
+    "Harrison 22e — Cerebrovascular Diseases",
+    "AHA/ASA Guideline for the Management of Spontaneous Intracerebral Hemorrhage 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid antiplatelet or anticoagulant agents in the acute phase",
+    "Avoid aggressive/rapid overcorrection of blood pressure below systolic 140 mmHg due to risk of cerebral hypoperfusion",
+    "Avoid thrombolytics and mechanical thrombectomy (contraindicated in haemorrhagic stroke)",
+    "Avoid hypotonic IV fluids (risk of worsening cerebral edema)"
+  ],
+  "edgeCases": [
+    "Deep basal ganglia/thalamic location with classic hypertensive history strongly favors hypertensive etiology, but CTA should be reviewed for underlying vascular lesion, especially if patient is younger or hematoma is lobar",
+    "Intraventricular extension increases risk of obstructive hydrocephalus requiring neurosurgical consultation and possible external ventricular drain",
+    "If INR/coagulopathy or antithrombotic use were present, urgent reversal would take priority over BP control",
+    "Deterioration in GCS or pupillary asymmetry should prompt urgent repeat CT to assess for hematoma expansion or hydrocephalus",
+    "This diagnosis (ich) is present in the diagnosable disease list under Neurology/Vascular"
+  ],
+  "expectedMaiK": "MaiK should flag this as a hypertensive intracerebral haemorrhage (deep/basal ganglia location) requiring urgent BP control (target SBP ~140 mmHg), neurosurgical/ICU consultation for intraventricular extension, and explicit avoidance of antithrombotic/thrombolytic therapy.",
+  "expectedNextQuestions": [
+    "Is the patient on any antiplatelet or anticoagulant medication?",
+    "What is the time of symptom onset and any history of head trauma?",
+    "Is there a history of prior stroke, aneurysm, or vascular malformation?",
+    "Is neurosurgical evaluation available for hematoma evacuation or EVD placement?",
+    "What is the trend in GCS and pupillary exam over serial assessments?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head",
+    "CT angiogram (to exclude secondary vascular causes / spot sign)",
+    "Coagulation profile (PT/INR, aPTT, platelet count)",
+    "Serum glucose and electrolytes",
+    "ECG and troponin",
+    "Repeat CT head if clinical deterioration"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "headacheSevere": true,
+    "thunderclapHeadache": true,
+    "focalNeuroDeficit": true,
+    "alteredSensorium": true,
+    "hypertensionHx": true,
+    "gcs": true,
+    "sbp": true,
+    "dbp": true,
+    "age": true,
+    "sex": true,
+    "spo2": true,
+    "respRate": true,
+    "heartRate": true
+  },
+  "expected": {
+    "diagnosis": "Hypertensive intracerebral haemorrhage",
+    "acceptableIds": [
+      "ich"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "sah",
+      "htn_emergency",
+      "brain_tumour"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiogram head",
+      "Coagulation profile",
+      "Serum glucose and electrolytes"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ich)",
+    "confidence >= expectedConfidence.min",
+    "differential includes ischemic_stroke and sah",
+    "stewardship tier is null (non-infective diagnosis)",
+    "contraindications include avoidance of antiplatelet/anticoagulant/thrombolytic therapy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

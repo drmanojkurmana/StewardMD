@@ -1,0 +1,126 @@
+{
+  "id": "gc_080",
+  "specialty": "Toxicology",
+  "condition": "Paracetamol overdose",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Nausea, vomiting, and vague right upper quadrant pain for 2 days after taking extra paracetamol tablets over the preceding 3 days for menstrual cramps and a headache.",
+  "history": "A 29-year-old woman presents with a 2-day history of nausea, repeated vomiting, and dull right upper quadrant discomfort. On direct questioning she reports taking paracetamol tablets intermittently over the last 3 days for dysmenorrhoea and headache — estimated total intake around 90-100 mg/kg/24h on the worst day, taken as repeated supratherapeutic doses rather than a single acute ingestion (staggered overdose pattern). She denies co-ingestion of alcohol, other analgesics, or other drugs. No prior liver disease. No suicidal intent volunteered initially; further history raises concern for unintentional supratherapeutic dosing compounded by inadequate awareness of cumulative dose. No fever, no diarrhea. Last dose taken approximately 18 hours prior to presentation, making the single-timepoint Rumack-Matthew nomogram inapplicable given the staggered ingestion pattern.",
+  "examination": "Alert and oriented, mild distress from nausea. Mild right upper quadrant tenderness on palpation, no rebound or guarding. No scleral icterus at presentation. No asterixis. No hepatosplenomegaly. No signs of chronic liver disease.",
+  "vitals": {
+    "hr": 96,
+    "bp": "112/72",
+    "rr": 16,
+    "spo2": 99,
+    "temp": 36.9
+  },
+  "labs": {
+    "paracetamolLevel": "detectable, non-interpretable on nomogram (staggered ingestion)",
+    "ALT": 850,
+    "AST": 720,
+    "totalBilirubin": 2.1,
+    "INR": 2.3,
+    "creatinine": 1.4,
+    "venousLactate": 3.2,
+    "glucose": 68,
+    "phosphate": "pending",
+    "arterialPH": 7.32
+  },
+  "imaging": [
+    "Abdominal ultrasound: normal liver echotexture, no biliary dilatation, no gallstones"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Paracetamol-induced hepatotoxicity (staggered overdose)",
+    "Viral hepatitis (acute)",
+    "Ischemic hepatitis",
+    "Other drug-induced liver injury",
+    "Biliary colic / cholecystitis",
+    "Autoimmune hepatitis"
+  ],
+  "finalDiagnosis": "Paracetamol (acetaminophen) toxicity with acute hepatocellular injury from staggered supratherapeutic ingestion",
+  "citations": [
+    "Harrison 22e — Acetaminophen (Paracetamol) Poisoning",
+    "Harrison 22e — Toxin-Induced Liver Injury",
+    "AASLD/ACG guidance on acetaminophen hepatotoxicity",
+    "Royal College of Emergency Medicine / UK National Poisons Information Service — Paracetamol Overdose Guidance"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not withhold N-acetylcysteine while awaiting a single paracetamol level in staggered/repeated ingestion — treat empirically if history suggests hepatotoxic risk and enzymes/INR are deranged",
+    "Standard Rumack-Matthew nomogram is not valid for staggered or unknown-timing ingestions",
+    "Avoid antiemetics that mask hepatic encephalopathy assessment without adequate mental status monitoring"
+  ],
+  "edgeCases": [
+    "Staggered ingestion invalidates single-level nomogram interpretation; decision to treat with N-acetylcysteine is based on history of supratherapeutic cumulative dose plus biochemical evidence of liver injury (elevated ALT/AST, rising INR)",
+    "Rising INR with only mildly elevated bilirubin at this stage suggests early/evolving hepatocellular injury; trend over time and King's College Criteria assessment are needed if fulminant hepatic failure develops",
+    "This diagnosis (toxic/acetaminophen-induced hepatitis) maps only approximately to the diagnosable disease list; closest available id is toxic_hepatitis (general toxin-induced hepatitis) rather than a paracetamol-specific entity, and drug_intox is a reasonable broader differential label",
+    "Psychiatric assessment for intent (accidental vs. self-harm) is mandatory once medically stabilized, per routine overdose management, though not itself part of the acute hepatotoxicity workup"
+  ],
+  "expectedMaiK": "MaiK should flag paracetamol as the likely cause of acute hepatocellular injury given the ingestion history, note that the staggered dosing pattern invalidates standard nomogram-based risk stratification, and recommend prompt N-acetylcysteine therapy plus serial LFTs/INR/creatinine and King's College Criteria monitoring rather than awaiting a single treatment-threshold paracetamol level.",
+  "expectedNextQuestions": [
+    "What was the exact timing and cumulative dose of each paracetamol ingestion over the preceding days?",
+    "Any co-ingestion of alcohol, other hepatotoxic drugs, or herbal/complementary products?",
+    "Any pre-existing liver disease, chronic alcohol use, malnutrition, or enzyme-inducing medications (e.g., anticonvulsants) that could lower the hepatotoxic threshold?",
+    "Is there any history or evidence of suicidal intent requiring psychiatric evaluation once stabilized?",
+    "Has N-acetylcysteine already been started, and if so, what is the current infusion phase?"
+  ],
+  "expectedInvestigations": [
+    "Serum paracetamol level (with acknowledgment of nomogram limitation in staggered ingestion)",
+    "Liver function tests (ALT, AST, bilirubin, ALP)",
+    "INR/coagulation profile",
+    "Serum creatinine and electrolytes",
+    "Venous/arterial blood gas and lactate",
+    "Glucose",
+    "Serum phosphate",
+    "Paracetamol-protein adduct testing if available (research/reference labs)"
+  ],
+  "expectedConfidence": {
+    "min": 55
+  },
+  "findings": {
+    "nauseaVomiting": true,
+    "rightUpperQuadrantPain": true,
+    "abdominalPain": true,
+    "jaundice": true,
+    "bilirubin": true,
+    "inr": true,
+    "creatinine": true,
+    "drugOverdose": true,
+    "alteredSensorium": true
+  },
+  "expected": {
+    "diagnosis": "Paracetamol (acetaminophen) toxicity with acute hepatocellular injury from staggered supratherapeutic ingestion",
+    "acceptableIds": [
+      "toxic_hepatitis"
+    ],
+    "differentialIds": [
+      "drug_intox",
+      "toxic_hepatitis"
+    ],
+    "investigations": [
+      "Serum paracetamol level",
+      "LFTs (ALT, AST, bilirubin, ALP)",
+      "INR",
+      "Renal function and electrolytes",
+      "Venous/arterial blood gas and lactate",
+      "Glucose",
+      "Serum phosphate"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (toxic_hepatitis) OR differentialIds includes drug_intox",
+    "confidence >= expectedConfidence.min",
+    "differential includes viral hepatitis and ischemic hepatitis as alternative causes of transaminitis",
+    "engine does not incorrectly apply single-point Rumack-Matthew nomogram logic given staggered ingestion history",
+    "N-acetylcysteine / antidote therapy surfaced in expectedMaiK guidance despite non-interpretable single paracetamol level"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

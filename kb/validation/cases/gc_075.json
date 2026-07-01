@@ -1,0 +1,126 @@
+{
+  "id": "gc_075",
+  "specialty": "Dermatology",
+  "condition": "Cellulitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Rapidly spreading redness, swelling, and pain in the left lower leg for 2 days, with fever and chills.",
+  "history": "A 54-year-old man with type 2 diabetes mellitus and mild venous insufficiency presents with a 2-day history of a small area of redness over the medial left shin that began after minor trauma while gardening. Over the past 24 hours the redness has expanded rapidly to involve most of the lower leg, associated with increasing pain, warmth, and swelling. He developed fever with rigors this morning. No prior similar episodes. No recent hospitalization or antibiotic use. No known drug allergies. Denies chest pain, dyspnea, or urinary symptoms. Diabetes is diet and metformin controlled.",
+  "examination": "Alert, uncomfortable, mildly toxic-appearing. Left lower leg from mid-shin to ankle shows confluent, warm, tender erythema with indistinct, poorly demarcated advancing edge that has visibly extended since morning (marked with pen by triage nurse). Overlying skin is shiny and edematous; no bullae, crepitus, or skin necrosis. No purulent drainage or discrete abscess. No fluctuance. Pain is proportionate to degree of inflammation (not out of proportion). Dorsalis pedis and posterior tibial pulses palpable and symmetric. No calf tenderness on deep palpation. Mild bilateral ankle edema (chronic venous insufficiency). No overt ulcer. Ipsilateral inguinal lymph nodes mildly tender and enlarged. Right leg normal. No other rash. Cardiovascular and respiratory exam unremarkable.",
+  "vitals": {
+    "hr": 108,
+    "bp": "128/78",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 38.6
+  },
+  "labs": {
+    "wbc": "14.8 x10^3/uL",
+    "neutrophilPercent": "84%",
+    "crp": "96 mg/L",
+    "creatinine": "1.0 mg/dL",
+    "glucose": "168 mg/dL",
+    "lactate": "1.4 mmol/L",
+    "bloodCultures": "pending"
+  },
+  "imaging": [
+    "Plain radiograph left tibia/fibula: soft tissue swelling, no gas, no periosteal reaction or osteomyelitic change"
+  ],
+  "microbiology": [
+    "Blood cultures sent (drawn prior to antibiotics)",
+    "No skin swab obtained (no drainage or open wound present)"
+  ],
+  "differentialDiagnoses": [
+    "Cellulitis",
+    "Erysipelas",
+    "Necrotizing fasciitis",
+    "Deep vein thrombosis",
+    "Diabetic foot infection (extending)",
+    "Stasis dermatitis flare",
+    "Contact dermatitis"
+  ],
+  "finalDiagnosis": "Cellulitis (non-purulent), left lower limb",
+  "citations": [
+    "Harrison 22e — Cellulitis and Soft Tissue Infections",
+    "IDSA Skin and Soft Tissue Infections Guideline 2014"
+  ],
+  "stewardship": "Empirical therapy targets beta-hemolytic streptococci and methicillin-susceptible Staphylococcus aureus, as there is no purulent drainage or abscess to suggest MRSA; an antistreptococcal/antistaphylococcal agent (e.g., a first-generation cephalosporin or antistaphylococcal penicillin) is appropriate per IDSA SSTI guidance, with escalation to MRSA coverage only if risk factors, prior MRSA colonization, or poor response emerge.",
+  "contraindications": [
+    "Avoid empirical broad MRSA/gram-negative coverage in uncomplicated non-purulent cellulitis without risk factors (antimicrobial stewardship)",
+    "Caution with beta-lactams if documented penicillin/cephalosporin allergy — use clindamycin or a macrolide alternative per local policy"
+  ],
+  "edgeCases": [
+    "Rapidly advancing border and systemic toxicity mandate exclusion of necrotizing fasciitis (pain out of proportion, crepitus, bullae, skin necrosis, rapid progression despite antibiotics) — absent here but must be reassessed on serial exams",
+    "Diabetes and venous insufficiency are risk factors for recurrent/severe cellulitis and for underlying diabetic foot infection if an ulcer were present (none found here)",
+    "If purulent drainage or abscess develops, MRSA coverage and incision/drainage should be added",
+    "Unilateral leg swelling raises DVT as a differential; Wells score and/or venous duplex should be considered if diagnosis is unclear"
+  ],
+  "expectedMaiK": "MaiK should flag classic non-purulent cellulitis with systemic toxicity and rapidly spreading erythema, recommend empirical streptococcal/MSSA-targeted therapy per IDSA SSTI 2014, and prompt a safety check to exclude necrotizing fasciitis given the rapid spread and fever.",
+  "expectedNextQuestions": [
+    "Any pain out of proportion to clinical findings?",
+    "Any skin necrosis, bullae, or crepitus on palpation?",
+    "Any break in skin, ulcer, or portal of entry identified?",
+    "Any history of MRSA colonization or recent hospitalization/antibiotics?",
+    "Is limb pulse and sensation intact (rule out compartment/vascular compromise)?"
+  ],
+  "expectedInvestigations": [
+    "CBC with differential",
+    "CRP",
+    "Blood cultures",
+    "Blood glucose (diabetic)",
+    "Plain radiograph of limb (assess for gas/osteomyelitis if deep/chronic wound)",
+    "Venous duplex if DVT cannot be excluded clinically"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "rapidlySpreadingErythema": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "Cellulitis (non-purulent), left lower limb",
+    "acceptableIds": [
+      "CELLULITIS"
+    ],
+    "differentialIds": [
+      "ERYSIPELAS",
+      "NECROTIZING_FASCIITIS",
+      "DIABETIC_FOOT"
+    ],
+    "investigations": [
+      "CBC with differential",
+      "CRP",
+      "Blood cultures",
+      "Blood glucose",
+      "Plain radiograph of limb"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "cefazolin",
+        "cephalexin",
+        "flucloxacillin",
+        "clindamycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CELLULITIS)",
+    "confidence >= expectedConfidence.min",
+    "differential includes NECROTIZING_FASCIITIS as a safety-critical mimic",
+    "differential includes ERYSIPELAS",
+    "stewardship recommendation targets streptococcal/MSSA coverage, not empirical MRSA/broad gram-negative coverage",
+    "expectedNextQuestions surfaces necrotizing fasciitis red-flag screening (pain out of proportion, bullae, crepitus)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

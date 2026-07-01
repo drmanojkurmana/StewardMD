@@ -1,0 +1,133 @@
+{
+  "id": "gc_012",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Reduced urine output and dizziness for 2 days after several days of poor oral intake and diarrhoea.",
+  "history": "74-year-old woman with known hypertension and mild CKD (baseline creatinine 1.0 mg/dL) on losartan and hydrochlorothiazide, presented with 3 days of watery diarrhoea and vomiting following a viral gastroenteritis-like illness, associated with markedly reduced oral fluid intake due to nausea. Family noted she became increasingly lethargic and passed very little urine over the last 24 hours. No fevers, no dysuria, no flank pain, no recent NSAID use, no contrast exposure. She continued taking her antihypertensives through the illness. No chest pain or breathlessness.",
+  "examination": "Lethargic but oriented, dry oral mucosa, reduced skin turgor, sunken eyes. Cool peripheries with delayed capillary refill (~4s). Flat neck veins, no peripheral oedema, no crepitations on chest auscultation. Abdomen soft, non-tender, no ascites. No rash, no costovertebral angle tenderness.",
+  "vitals": {
+    "hr": 112,
+    "bp": "88/58",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 36.6
+  },
+  "labs": {
+    "creatinine_mgdl": 3.2,
+    "creatinine_baseline_mgdl": 1,
+    "urea_mmoll": 22.5,
+    "bun_creatinine_ratio": ">20:1",
+    "sodium_mmoll": 148,
+    "potassium_mmoll": 5.3,
+    "bicarbonate_mmoll": 19,
+    "urineOutput_mLkg_hr_24h": 0.3,
+    "fena_percent": 0.8,
+    "urineSodium_mmoll": 15,
+    "urineOsmolality_mOsmkg": 620,
+    "hemoglobin_gdl": 13.8,
+    "hematocrit_percent": 42,
+    "wbc_perµL": 9800,
+    "platelets_x10e3": 260,
+    "lactate_mmoll": 1.6,
+    "urinalysis": "bland sediment, no blood, no protein, occasional hyaline casts"
+  },
+  "imaging": [
+    "Renal ultrasound: normal-sized kidneys (bilateral, symmetric), no hydronephrosis, no calculi, normal cortical thickness"
+  ],
+  "microbiology": [
+    "Blood cultures not indicated / not sent (afebrile, no sepsis features)",
+    "Stool studies pending for viral gastroenteritis panel"
+  ],
+  "differentialDiagnoses": [
+    "Pre-renal AKI due to hypovolaemia (vomiting/diarrhoea, poor intake)",
+    "Acute tubular necrosis (if hypoperfusion prolonged/unresolved)",
+    "Acute-on-chronic kidney disease decompensation",
+    "Diuretic-induced volume depletion",
+    "Obstructive uropathy (excluded by ultrasound)",
+    "Sepsis-associated AKI (no fever/leukocytosis, less likely)"
+  ],
+  "finalDiagnosis": "Acute kidney injury, pre-renal, secondary to hypovolaemia from gastroenteritis and reduced oral intake, on a background of CKD",
+  "citations": [
+    "Harrison 22e — Acute Kidney Injury",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs",
+    "Hold ACE inhibitor/ARB (losartan) and diuretic (hydrochlorothiazide) until renal function recovers",
+    "Avoid nephrotoxic contrast agents unless essential",
+    "Avoid aggressive potassium-containing fluids given hyperkalaemia"
+  ],
+  "edgeCases": [
+    "If hypotension and hypoperfusion persist without adequate fluid resuscitation, pre-renal AKI can progress to established acute tubular necrosis",
+    "FeNa interpretation is unreliable if patient has been on diuretics (hydrochlorothiazide) — FeUrea would be a more reliable index in this setting",
+    "Underlying CKD narrows the safety margin and increases risk of progression to needing renal replacement therapy",
+    "Hyperkalaemia at 5.3 mmol/L requires ECG check and monitoring; escalate management if it rises further or ECG changes appear"
+  ],
+  "expectedMaiK": "MaiK should flag pre-renal AKI driven by volume depletion (low FeNa/FeUrea, high BUN:Cr ratio, bland sediment, normal renal ultrasound) in a CKD patient, recommend prompt isotonic fluid resuscitation, holding nephrotoxic/renin-angiotensin-blocking drugs, and monitoring potassium and urine output rather than reflexively escalating to intrinsic renal workup or antibiotics.",
+  "expectedNextQuestions": [
+    "Volume of fluid losses (diarrhoea/vomiting) and oral intake over preceding days?",
+    "Recent medication changes — diuretics, ACE inhibitor/ARB, NSAIDs, contrast exposure?",
+    "Baseline renal function and CKD stage?",
+    "Any fever, dysuria, or flank pain to suggest infective/obstructive cause?",
+    "Response to fluid challenge — does urine output and creatinine improve?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatinine and urea trend",
+    "Serum electrolytes (especially potassium)",
+    "Urinalysis and urine microscopy",
+    "Urine sodium / fractional excretion of sodium (or urea if on diuretics)",
+    "Renal ultrasound to exclude obstruction",
+    "ECG (to assess for hyperkalaemia-related changes)",
+    "Venous blood gas / bicarbonate"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "oliguria": true,
+    "dehydration": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "creatinine": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "Acute kidney injury, pre-renal, secondary to hypovolaemia",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "ckd",
+      "hyperkalemia",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Serum creatinine and urea trend",
+      "Serum electrolytes",
+      "Urinalysis and urine microscopy",
+      "Fractional excretion of sodium/urea",
+      "Renal ultrasound",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (aki)",
+    "confidence >= min",
+    "differential includes ckd or hypovolemic_shock",
+    "stewardship.antibiotics is empty (non-infective diagnosis)",
+    "contraindications flag ACEI/ARB and diuretic hold"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

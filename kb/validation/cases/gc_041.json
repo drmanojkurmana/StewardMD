@@ -1,0 +1,131 @@
+{
+  "id": "gc_041",
+  "specialty": "Neurology",
+  "condition": "Acute bacterial meningitis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Severe headache, high fever, and neck stiffness for 1 day, with progressive drowsiness.",
+  "history": "A previously healthy 34-year-old man presents with a 24-hour history of severe, holocranial headache and fever with rigors. He reports photophobia and pain on neck movement. His wife notes he became confused and increasingly drowsy over the past few hours. He vomited twice this morning. No recent head trauma, no ear discharge, no rash noted by family. No sick contacts with similar illness reported, no recent travel, no prior antibiotic use, and no known immunocompromise (HIV negative on prior testing, non-diabetic).",
+  "examination": "Toxic-looking, lethargic but arousable to voice (GCS 13: E3V4M6). Marked nuchal rigidity with positive Kernig's and Brudzinski's signs. Photophobia present. No papilledema on fundoscopy. No focal motor deficit; cranial nerves grossly intact. No petechial or purpuric rash on skin survey. Cardiovascular and respiratory examination unremarkable. No ear or sinus tenderness.",
+  "vitals": {
+    "hr": 118,
+    "bp": "100/62",
+    "rr": 24,
+    "spo2": 96,
+    "temp": 39.4
+  },
+  "labs": {
+    "wbc": "18.2 x10^9/L with left shift",
+    "crp": "182 mg/L",
+    "procalcitonin": "4.6 ng/mL",
+    "csfOpeningPressure": "elevated (>25 cmH2O)",
+    "csfWbc": "2400 cells/uL, 92% neutrophils",
+    "csfProtein": "210 mg/dL",
+    "csfGlucose": "22 mg/dL",
+    "serumGlucose": "98 mg/dL",
+    "csfGlucoseRatio": "0.22",
+    "csfGramStain": "Gram-positive diplococci seen",
+    "lactate": "2.1 mmol/L",
+    "platelets": 210,
+    "creatinine": 1
+  },
+  "imaging": [
+    "CT head (pre-LP): no mass lesion, no midline shift, basal cisterns preserved — safe for lumbar puncture"
+  ],
+  "microbiology": [
+    "CSF Gram stain: Gram-positive diplococci",
+    "CSF culture: pending at time of initial assessment (later grew Streptococcus pneumoniae)",
+    "Blood cultures: sent x2 sets before antibiotics"
+  ],
+  "differentialDiagnoses": [
+    "Acute bacterial meningitis",
+    "Viral (aseptic) meningitis",
+    "Encephalitis (HSV)",
+    "Subarachnoid hemorrhage",
+    "Brain abscess"
+  ],
+  "finalDiagnosis": "Acute bacterial meningitis (Streptococcus pneumoniae)",
+  "citations": [
+    "Harrison 22e — Acute Meningitis",
+    "IDSA Bacterial Meningitis Guidelines 2004",
+    "IDSA/ACR Practice Guidelines for Healthcare-Associated Ventriculitis and Meningitis 2017"
+  ],
+  "stewardship": "Empirical therapy for community-acquired bacterial meningitis in an immunocompetent adult: vancomycin plus a third-generation cephalosporin (ceftriaxone or cefotaxime) to cover penicillin/cephalosporin-resistant pneumococcus, with adjunctive dexamethasone given before or with the first antibiotic dose (started immediately after blood cultures, without waiting for CT or LP if there is any delay). De-escalate per CSF/blood culture and susceptibility results (e.g., to penicillin or ceftriaxone alone if pneumococcus is susceptible).",
+  "contraindications": [
+    "Avoid lumbar puncture without prior CT if focal neurologic deficit, papilledema, new seizure, severely depressed consciousness (GCS <=10-11), or immunocompromise is present — treat empirically first",
+    "Dexamethasone should not delay antibiotic administration",
+    "Caution with dexamethasone if considering listeriosis (may reduce vancomycin/ampicillin CNS penetration benefit) — not applicable here given Gram stain findings"
+  ],
+  "edgeCases": [
+    "If CT is required before LP, empirical antibiotics (plus dexamethasone) must be started immediately after blood cultures are drawn and must not be delayed for imaging",
+    "In patients >50 years, alcoholics, or immunocompromised, add ampicillin to empirically cover Listeria monocytogenes — not required in this immunocompetent young adult",
+    "A petechial/purpuric rash would raise strong suspicion for meningococcemia and warrants droplet isolation and prophylaxis for close contacts; absent in this case",
+    "CSF Gram stain positivity allows early pathogen-directed narrowing, but empirical vancomycin + ceftriaxone should continue until susceptibility (especially penicillin MIC) is confirmed"
+  ],
+  "expectedMaiK": "MaiK should flag this as classic acute bacterial meningitis (fever, neck stiffness, photophobia, altered sensorium) with CSF findings (neutrophilic pleocytosis, low glucose, high protein, Gram-positive diplococci) confirming pneumococcal etiology, and should emphasize immediate empirical antibiotics plus dexamethasone without delay for imaging/LP.",
+  "expectedNextQuestions": [
+    "Any focal neurological deficit, seizure, or papilledema warranting CT before LP?",
+    "Any petechial/purpuric rash suggesting meningococcemia?",
+    "Immunocompromise, age >50, or alcoholism raising concern for Listeria coverage?",
+    "Recent neurosurgery, CSF shunt, or penetrating head trauma (healthcare-associated meningitis)?",
+    "Any allergy history affecting choice of beta-lactam/vancomycin?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture with CSF cell count, protein, glucose, Gram stain, culture",
+    "Blood cultures x2 before antibiotics",
+    "CT head prior to LP if red-flag features present",
+    "Serum glucose (paired with CSF glucose)",
+    "CBC, CRP/procalcitonin, coagulation profile",
+    "CSF PCR (pneumococcal/meningococcal) if available"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "rigors": true
+  },
+  "expected": {
+    "diagnosis": "Acute bacterial meningitis (Streptococcus pneumoniae)",
+    "acceptableIds": [
+      "MENINGITIS"
+    ],
+    "differentialIds": [
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS",
+      "BRAIN_ABSCESS"
+    ],
+    "investigations": [
+      "Lumbar puncture with CSF analysis (cell count, protein, glucose, Gram stain, culture)",
+      "Blood cultures x2",
+      "CT head before LP if red-flag features present",
+      "Serum glucose",
+      "CBC, CRP/procalcitonin"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Vancomycin",
+        "Ceftriaxone",
+        "Dexamethasone (adjunct)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (MENINGITIS)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes VIRAL_MENINGITIS and/or ENCEPHALITIS",
+    "stewardship recommendation includes vancomycin + third-generation cephalosporin + adjunctive dexamethasone",
+    "no drug doses present in stewardship or expected.stewardship.antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

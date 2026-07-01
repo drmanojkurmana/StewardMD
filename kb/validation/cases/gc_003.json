@@ -1,0 +1,152 @@
+{
+  "id": "gc_003",
+  "specialty": "Infectious",
+  "condition": "Sepsis",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Brought to the emergency department by family for confusion and reduced responsiveness over the past 12 hours, preceded by 2 days of fever, dysuria, and foul-smelling urine.",
+  "history": "78-year-old woman with type 2 diabetes mellitus (on insulin, HbA1c 9.1% three months ago) and hypertension, living independently until this admission. Family reports she complained of burning micturition, urinary frequency, and low-grade fever for two days, then became increasingly drowsy and confused this morning, not recognizing her daughter. No cough, no diarrhea, no recent travel. No indwelling catheter. She had one prior UTI treated as an outpatient about 4 months ago; no hospitalization or antibiotics in the last 90 days. No known drug allergies.",
+  "examination": "Lethargic, arousable to voice but disoriented to time and place (GCS 13: E3V4M6). Warm, flushed skin with delayed capillary refill (~4 seconds) despite warmth. No neck stiffness, no rash. Mild left costovertebral angle tenderness. Abdomen soft, mild suprapubic discomfort, no rebound or guarding. No focal neurological deficit. Chest clear, heart sounds normal, no murmurs. No peripheral edema.",
+  "vitals": {
+    "hr": 118,
+    "bp": "84/50",
+    "rr": 26,
+    "spo2": 91,
+    "temp": 38.9
+  },
+  "labs": {
+    "wbc_10_9_L": 18.4,
+    "neutrophilPercent": 88,
+    "creatinine_mgdl": 2.6,
+    "creatinineBaseline_mgdl": 1,
+    "urea_mmoll": 18.2,
+    "lactate_mmolL": 4.2,
+    "platelets_10_3uL": 98,
+    "bilirubin_mgdl": 1.8,
+    "glucose_mgdl": 312,
+    "hba1c_percent": 9.1,
+    "sodium_mmolL": 133,
+    "potassium_mmolL": 5.1,
+    "procalcitonin_ngml": 12.5,
+    "venousBicarbonate_mmolL": 16,
+    "urinalysis": "cloudy urine, leukocyte esterase 3+, nitrite positive, WBC >50/hpf, few bacteria"
+  },
+  "imaging": [
+    "Renal ultrasound: right kidney unremarkable; left kidney mildly hydronephrotic with echogenic debris in a dilated collecting system, no discrete perinephric abscess",
+    "Chest X-ray: no consolidation or effusion"
+  ],
+  "microbiology": [
+    "Urine culture (collected pre-antibiotics): pending at initial assessment, later grew Escherichia coli >10^5 CFU/mL, ESBL-negative, sensitive to ceftriaxone and piperacillin-tazobactam",
+    "Blood cultures x2 (pre-antibiotics): pending at initial assessment, later grew Escherichia coli in both sets, concordant susceptibility with urine isolate"
+  ],
+  "differentialDiagnoses": [
+    "Urosepsis / complicated pyelonephritis with septic shock",
+    "Diabetic ketoacidosis with concurrent infection",
+    "Emphysematous pyelonephritis",
+    "Intra-abdominal sepsis (biliary or GI source)",
+    "Bacterial meningitis / CNS infection presenting with altered sensorium",
+    "Community-acquired pneumonia with sepsis"
+  ],
+  "finalDiagnosis": "Sepsis with septic shock secondary to complicated urosepsis (E. coli pyelonephritis/bacteremia) in an elderly patient with type 2 diabetes",
+  "citations": [
+    "Harrison 22e — Sepsis and Septic Shock",
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "Surviving Sepsis Campaign Guidelines 2021",
+    "IDSA Complicated UTI Guidelines 2010 (reaffirmed)"
+  ],
+  "stewardship": "Empirical broad-spectrum coverage for complicated/healthcare-associated urosepsis pending cultures: an anti-pseudomonal beta-lactam (piperacillin-tazobactam) or a third-generation cephalosporin (ceftriaxone) if local ESBL prevalence is low and no recent antibiotic exposure; add coverage escalation (carbapenem) only if prior ESBL/CRE history or septic shock with high local resistance prevalence. De-escalate to a narrow-spectrum agent (e.g., ciprofloxacin or trimethoprim-sulfamethoxazole if susceptible) once cultures return, guided by source control (ensure no obstruction) and clinical response. Duration typically 7 days for uncomplicated bacteremic pyelonephritis with prompt response, extendable to 10-14 days if slow to respond or complicated.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycosides as monotherapy given acute kidney injury unless no alternative and with close monitoring",
+    "Avoid fluoroquinolones empirically if patient has had recent fluoroquinolone exposure or resides in area with high resistance",
+    "Renal dose adjustment required for beta-lactams and TMP-SMX given creatinine 2.6 mg/dL",
+    "Caution with contrast-enhanced imaging given acute kidney injury unless essential for diagnosis (e.g., suspected emphysematous pyelonephritis or abscess)"
+  ],
+  "edgeCases": [
+    "Elderly diabetic patients with urosepsis may present with altered mentation and hypotension without high fever ('atypical' presentation) — a high index of suspicion is needed",
+    "Diabetes and hydronephrosis raise concern for emphysematous pyelonephritis or renal/perinephric abscess if the patient fails to improve — consider CT if ultrasound is inconclusive",
+    "Hyperglycemia with anion gap and bicarbonate 16 mmol/L warrants exclusion of concurrent diabetic ketoacidosis as a co-precipitant/mimic",
+    "Thrombocytopenia and mild hyperbilirubinemia here reflect sepsis-associated organ dysfunction (SOFA-relevant) rather than a separate hepatobiliary process; SEPSIS is the systemic diagnosable entity captured here — SEPTIC_SHOCK and PYELONEPHRITIS are the source-specific/severity-specific differentials from the disease list"
+  ],
+  "expectedMaiK": "Elderly diabetic with fever, dysuria, hypotension, tachycardia, altered sensorium, elevated lactate, and AKI — this is sepsis with septic shock from a urinary source; recommend immediate fluid resuscitation, blood/urine cultures before antibiotics, empirical broad-spectrum antibiotics per Surviving Sepsis 1-hour bundle, and imaging to exclude obstruction/abscess given diabetes.",
+  "expectedNextQuestions": [
+    "Has source control been addressed (e.g., is there any evidence of obstruction requiring urgent decompression)?",
+    "What is the trend in lactate after initial fluid resuscitation?",
+    "Is she becoming refractory to fluids, requiring vasopressor support?",
+    "Any history of prior multidrug-resistant organism colonization or recent antibiotic exposure to guide empirical choice?",
+    "Is there a need to rule out concurrent DKA given the anion gap and hyperglycemia?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 before antibiotics",
+    "Urine culture and urinalysis",
+    "Serum lactate (initial and repeat)",
+    "Complete blood count with differential",
+    "Renal function tests and electrolytes",
+    "Liver function tests",
+    "Coagulation profile",
+    "Venous/arterial blood gas",
+    "Renal ultrasound or CT abdomen/pelvis with contrast if renal function allows, to exclude obstruction or abscess",
+    "Procalcitonin (adjunctive)",
+    "Capillary/serum glucose and blood ketones"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "flankPain": true,
+    "feverGU": true,
+    "costovertebralTenderness": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true,
+    "age": true,
+    "sex": true,
+    "sofaIncrease": true
+  },
+  "expected": {
+    "diagnosis": "Sepsis with septic shock secondary to complicated urosepsis (E. coli pyelonephritis/bacteremia) in an elderly patient with type 2 diabetes",
+    "acceptableIds": [
+      "SEPSIS"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "Urine culture and urinalysis",
+      "Serum lactate",
+      "Renal function tests",
+      "Renal ultrasound / CT abdomen-pelvis"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (SEPSIS)",
+    "confidence >= expectedConfidence.min",
+    "differential includes SEPTIC_SHOCK and PYELONEPHRITIS/COMPLICATED_UTI",
+    "stewardship recommendation includes an anti-pseudomonal beta-lactam or third-generation cephalosporin as empirical option",
+    "engine flags organDysfunction and lactateElevated given SOFA-qualifying labs (AKI, thrombocytopenia, hyperbilirubinemia)",
+    "engine surfaces complicatedUTIRisk given diabetesHx and age driving broader empirical coverage than uncomplicated cystitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "gc_090",
+  "specialty": "Respiratory",
+  "condition": "Pneumothorax",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset right-sided sharp chest pain and breathlessness for 3 hours.",
+  "history": "A tall, thin 24-year-old man, previously well and a current smoker (5 cigarettes/day), presents with abrupt onset of right-sided pleuritic chest pain while at rest, followed within minutes by breathlessness. No preceding trauma, no cough, fever, or haemoptysis. No similar episode in the past. No known lung disease. He denies recent travel, IV drug use, or recent chest procedures. He is increasingly anxious and reports the pain is worse on deep inspiration.",
+  "examination": "Alert, anxious, mild respiratory distress, speaking in short sentences. Trachea appears central to minimally deviated. Reduced chest expansion on the right. Hyper-resonant percussion note over the right hemithorax with markedly diminished breath sounds on the right; normal vesicular breath sounds on the left. No crepitations or wheeze. No subcutaneous emphysema. No leg swelling or calf tenderness. Cardiovascular exam: normal heart sounds, no raised JVP at present.",
+  "vitals": {
+    "hr": 112,
+    "bp": "118/76",
+    "rr": 26,
+    "spo2": 93,
+    "temp": 36.9
+  },
+  "labs": {
+    "hemoglobin": 14.8,
+    "wbc": 8.2,
+    "abgPaO2": 68,
+    "abgPaCO2": 34,
+    "abgPH": 7.46
+  },
+  "imaging": [
+    "Erect chest X-ray: visible visceral pleural line with absent lung markings peripheral to it on the right; approx. 30% right-sided pneumothorax; no mediastinal shift; no rib fracture; left lung clear",
+    "No prior chest imaging available for comparison"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Primary spontaneous pneumothorax",
+    "Pulmonary embolism",
+    "Acute coronary syndrome / pericarditis",
+    "Pleurisy / pleural effusion",
+    "Musculoskeletal chest pain",
+    "Asthma / bronchospasm exacerbation"
+  ],
+  "finalDiagnosis": "Primary spontaneous pneumothorax (right-sided, moderate, no tension physiology at presentation)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Chapter on Disorders of the Pleura, Mediastinum, and Diaphragm (Pneumothorax)",
+    "BTS Pleural Disease Guideline 2023",
+    "ACCP Consensus Statement on Management of Spontaneous Pneumothorax 2001"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Positive pressure ventilation without prior chest drain if pneumothorax is untreated (risk of converting to tension pneumothorax)",
+    "Air travel or scuba diving until full radiographic resolution and clearance",
+    "Avoid needle decompression unless tension physiology develops (hemodynamic compromise, tracheal deviation, distended neck veins) — not indicated for this stable, non-tension presentation"
+  ],
+  "edgeCases": [
+    "If tracheal deviation, hypotension, or worsening hypoxia develop, this evolves into tension pneumothorax — a clinical diagnosis requiring immediate needle decompression, not imaging",
+    "Bilateral or recurrent pneumothorax should prompt CT chest to look for underlying bullous disease, Marfan syndrome, or Birt-Hogg-Dubé",
+    "Secondary spontaneous pneumothorax (e.g., underlying COPD, TB, ILD) carries higher risk and different management thresholds than primary spontaneous pneumothorax",
+    "Small (<2 cm) primary pneumothorax in a minimally symptomatic patient may be managed with observation alone per BTS 2023; this patient's degree of breathlessness and size favour active intervention (needle aspiration or chest drain)"
+  ],
+  "expectedMaiK": "Flag tension-pneumothorax risk given pleuritic pain, breathlessness, tachycardia and hyperresonance; recommend urgent tracheal/hemodynamic reassessment and escalation to needle decompression if trachea deviates, hypotension develops, or hypoxia worsens, rather than waiting for repeat imaging.",
+  "expectedNextQuestions": [
+    "Is the trachea deviated or are neck veins distended?",
+    "Is the patient hemodynamically stable (BP trend, HR trend)?",
+    "Any underlying lung disease (COPD, asthma, ILD, prior TB, connective tissue disease features suggesting Marfan)?",
+    "Size of pneumothorax on CXR (rim distance) and any evidence of tension?",
+    "Any contraindication to needle aspiration/chest drain (anticoagulation, bleeding diathesis)?"
+  ],
+  "expectedInvestigations": [
+    "Erect chest X-ray",
+    "Arterial blood gas / SpO2 monitoring",
+    "ECG to exclude cardiac cause of chest pain",
+    "CT chest if diagnosis unclear, recurrent, or underlying lung disease suspected"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "dyspnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "tachypnea": true
+  },
+  "expected": {
+    "diagnosis": "Primary spontaneous pneumothorax (right-sided, moderate, no tension physiology at presentation)",
+    "acceptableIds": [
+      "pneumothorax"
+    ],
+    "differentialIds": [
+      "pe",
+      "acs",
+      "pericarditis",
+      "pleural_effusion",
+      "asthma_exac"
+    ],
+    "investigations": [
+      "Erect chest X-ray",
+      "Arterial blood gas",
+      "ECG",
+      "CT chest (if diagnosis unclear or recurrent)"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (pneumothorax)",
+    "confidence >= expectedConfidence.min",
+    "differential includes pe and/or acs given pleuritic chest pain with breathlessness",
+    "commentary flags tension pneumothorax risk and hemodynamic/tracheal reassessment",
+    "stewardship tier is null (non-infective diagnosis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
