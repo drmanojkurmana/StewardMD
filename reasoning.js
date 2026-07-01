@@ -463,7 +463,7 @@
       inv:["CXR / CT chest","Bronchoscopy / biopsy","Staging imaging"], red:["Haemoptysis with weight loss in a smoker — urgent 2-week-wait pathway"],
       reason:"Haemoptysis and weight loss in an older smoker raise concern for bronchogenic carcinoma." },
     { id:"sarcoidosis", name:"Sarcoidosis", system:"Pulmonary / Multisystem",
-      find:{ lymphadenopathy:22, dyspnea:16, polyarthralgia:14, cough:12, rash:10, fever:6 },
+      find:{ lymphadenopathy:22, dyspnea:16, polyarthralgia:14, cough:12, rash:10, fever:6, subacuteOnset:16, weightLoss:8 },
       inv:["CXR (bilateral hilar lymphadenopathy)","Serum ACE, calcium","Biopsy (non-caseating granuloma)"], red:["Exclude TB/lymphoma before steroids"],
       reason:"Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma." },
 
@@ -736,7 +736,7 @@
   // Bridge generic presenting symptoms to the infection ontology's specific
   // keys so a generic pick still engages the relevant syndromes (infectious
   // scoring only — the non-infectious layer keeps the literal findings).
-  var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"] };
+  var ALIAS = { headache: ["headacheSevere"], dyspnea: ["hypoxia"], legSwellingUnilateral: ["dvtRisk"], coughRadio: ["cough"], purulentSputum: ["productiveCough"] };
   function infFindings() {
     var e = {};
     for (var k in S.f) { e[k] = true; (ALIAS[k] || []).forEach(function (a) { e[a] = true; }); }
