@@ -2692,7 +2692,7 @@
         d.redFlags || [], d.pitfalls || [], d.prognosis || []).join(" ");
       arr.push({ id: id, name: d.name || id, sys: d.system || "", branch: kbBranch(d.system),
         cls: d.class === "infective" ? "inf" : "ni", ref: !!d.referenceOnly,
-        text: ((d.name || "") + " " + id.replace(/_/g, " ") + " " + (d.system || "") + " " + know).toLowerCase() });
+        text: ((d.name || "") + " " + id.replace(/_/g, " ") + " " + (d.system || "") + " " + (d.aliases || []).join(" ") + " " + know).toLowerCase() });
     }
     arr.sort(function (a, b) { return a.name < b.name ? -1 : a.name > b.name ? 1 : 0; });
     if (arr.length) _kbIdx = arr;                 // only memoise once the KB is actually present
