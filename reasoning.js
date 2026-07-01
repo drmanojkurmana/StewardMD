@@ -2943,6 +2943,14 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ summary: summary, question: question || "" }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Grounded RAG explain: send the compact, de-identified, citable package
+    // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
+    // KB is the primary source. Falls back to summary explain if RAG is unavailable.
+    explainGrounded: function (pkg) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      if (!pkg) return Promise.resolve({ error: "no-package" });
+      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ package: pkg }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
@@ -2992,6 +3000,84 @@
     if (lead && lead.missing && lead.missing.length) out.push("Lead missing/would-help: " + lead.missing.slice(0, 5).map(lbl).join(", "));
     return out.join("\n");
   }
+
+  /* ---- MaiK UI: the deterministic StewardMD assessment and MaiK's independent AI
+   * commentary are rendered as TWO clearly separated blocks. The engine owns the
+   * diagnosis; MaiK never restates/overrides it (see the grounded prompt). ---- */
+  function maikEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function maikAssessmentHTML(pkg) {
+    var d = (pkg && pkg.reasoning && pkg.reasoning.differential) || [];
+    var lead = d[0], t = pkg && pkg.treatment;
+    var rows = d.slice(0, 5).map(function (x, i) {
+      return '<div class="maik-dx-row"><span>' + (i + 1) + ". " + maikEsc(x.name) + '</span><b>' + (x.confidence != null ? x.confidence + "/100" : "") + "</b></div>";
+    }).join("");
+    var ev = lead && lead.supporting && lead.supporting.length ? lead.supporting.slice(0, 8).map(maikEsc).join(", ") : "—";
+    var tx = "—";
+    if (t && t.default) tx = "[" + maikEsc(t.default.tier || "?") + "] " + maikEsc(t.default.line || "") + (t.default.drugRefs && t.default.drugRefs.length ? " · " + t.default.drugRefs.map(maikEsc).join(", ") : "");
+    var ov = (t && t.overlayApplied && t.overlay) ? '<div class="maik-kv"><span>Hospital overlay</span><b>' + maikEsc(t.overlay.hospitalId) + " (shown separately — does not replace default)</b></div>" : "";
+    return '<div class="maik-det">' +
+      '<div class="maik-sec-h maik-det-h">🧠 StewardMD Clinical Assessment <span class="maik-tag">Deterministic</span></div>' +
+      '<div class="maik-kv"><span>Primary diagnosis</span><b>' + (lead ? maikEsc(lead.name) : "—") + "</b></div>" +
+      '<div class="maik-kv"><span>Confidence</span><b>' + (lead && lead.confidence != null ? lead.confidence + "/100" : "—") + "</b></div>" +
+      '<div class="maik-kv-col"><span>Differential</span>' + (rows || "<b>—</b>") + "</div>" +
+      '<div class="maik-kv"><span>Evidence</span><b>' + ev + "</b></div>" +
+      '<div class="maik-kv"><span>Treatment</span><b>' + tx + "</b></div>" + ov +
+      "</div>";
+  }
+  function maikHeaderHTML() {
+    return '<div class="maik-ai">' +
+      '<div class="maik-sec-h maik-ai-h">✨ MaiK <span class="maik-tag maik-tag-ai">Medical AI Knowledge Engine</span></div>' +
+      '<div class="maik-sub">Powered by Google Gemini · Independent Clinical Commentary</div>';
+  }
+  function maikDivider() { return '<div class="maik-divider"></div>'; }
+  function maikDisclaimerHTML() { return '<div class="maik-warn">⚠ AI-generated commentary. Clinician confirmation required.</div></div>'; }
+  function maikCommentaryHTML(text, citations) {
+    var lines = String(text || "").split(/\n/), html = [], inList = false;
+    function closeList() { if (inList) { html.push("</ul>"); inList = false; } }
+    lines.forEach(function (ln) {
+      ln = ln.replace(/\*\*/g, "").trim();
+      if (!ln) return;
+      var h = ln.match(/^#{2,4}\s*(.+)$/);
+      if (h) { closeList(); html.push('<div class="maik-c-h">' + maikEsc(h[1].replace(/:$/, "")) + "</div>"); return; }
+      if (/^[-•*]\s+/.test(ln)) { if (!inList) { html.push('<ul class="maik-c-ul">'); inList = true; } html.push("<li>" + maikEsc(ln.replace(/^[-•*]\s+/, "")) + "</li>"); return; }
+      closeList(); html.push('<p class="maik-c-p">' + maikEsc(ln) + "</p>");
+    });
+    closeList();
+    var cites = (citations && citations.length) ? '<div class="maik-cite">Sources: ' + maikEsc(citations.join("; ")) + "</div>" : "";
+    return '<div class="maik-c-body">' + html.join("") + cites + "</div>";
+  }
+  function maikCSS() {
+    if (document.getElementById("maik-css")) return;
+    var s = document.createElement("style"); s.id = "maik-css";
+    s.textContent =
+      ".maik-det,.maik-ai{border-radius:12px;padding:12px 13px;margin-top:8px}" +
+      ".maik-det{background:rgba(13,110,99,0.06);border:1px solid rgba(13,110,99,0.28)}" +
+      ".maik-ai{background:rgba(124,58,237,0.055);border:1px solid rgba(124,58,237,0.3)}" +
+      ".maik-sec-h{font:800 13px var(--sans,system-ui);display:flex;align-items:center;gap:8px;flex-wrap:wrap}" +
+      ".maik-det-h{color:var(--teal,#0d6e63)}.maik-ai-h{color:#7c3aed}" +
+      ".maik-tag{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.05em;background:rgba(13,110,99,0.14);color:var(--teal,#0d6e63);padding:2px 7px;border-radius:999px}" +
+      ".maik-tag-ai{background:rgba(124,58,237,0.13);color:#7c3aed}" +
+      ".maik-sub{font:600 11px var(--sans);color:var(--slate,#64748b);margin:2px 0 8px}" +
+      ".maik-kv,.maik-dx-row{display:flex;justify-content:space-between;gap:10px;font:500 12.5px/1.5 var(--sans);padding:3px 0;border-bottom:1px solid rgba(100,116,139,0.14)}" +
+      ".maik-kv>span,.maik-kv-col>span{color:var(--slate,#64748b);font-weight:600}.maik-kv>b,.maik-dx-row>b{color:var(--ink,#14202b);text-align:right}" +
+      ".maik-kv-col{font:500 12.5px var(--sans);padding:3px 0}.maik-kv-col>span{display:block;margin-bottom:2px}" +
+      ".maik-divider{height:0;border-top:2px dashed rgba(100,116,139,0.35);margin:12px 2px}" +
+      ".maik-c-h{font:800 12px var(--sans);color:#6d28d9;margin:9px 0 3px}" +
+      ".maik-c-ul{margin:2px 0 6px;padding-left:18px}.maik-c-ul>li{font:500 12.5px/1.55 var(--sans);color:var(--ink,#14202b);margin:2px 0}" +
+      ".maik-c-p{font:500 12.5px/1.55 var(--sans);color:var(--ink,#14202b);margin:4px 0}" +
+      ".maik-cite{font:600 11px var(--sans);color:var(--slate,#64748b);margin-top:8px;border-top:1px solid rgba(100,116,139,0.18);padding-top:6px}" +
+      ".maik-warn{font:700 11.5px var(--sans);color:#b45309;background:#fef3c7;border-radius:8px;padding:8px 10px;margin-top:10px}" +
+      ".maik-note{font:500 12.5px var(--sans);color:var(--slate,#64748b);padding:4px 0}";
+    document.head.appendChild(s);
+  }
+  // full two-block composition (deterministic assessment ▸ divider ▸ MaiK commentary
+  // ▸ disclaimer). Used by the panel handler AND exposed for tests.
+  function maikCompose(pkg, r) {
+    var body = (r && r.text) ? maikCommentaryHTML(r.text, r.citations)
+      : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings (SMD_AI.setFlag(true))." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
+    return maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + body + maikDisclaimerHTML();
+  }
+  try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML }; } catch (e) {}
 
   /* ====================================================================== *
    * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
@@ -3057,7 +3143,7 @@
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
       '<div class="sl-cols">' + smdLiveCols(a) + "</div>" +
       '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
-      (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:var(--teal,#0e6e63);margin-top:8px">✨ Explain with AI</button><div class="sl-aiout" id="slAiOut" style="font:500 12.5px/1.6 var(--sans,sans-serif);color:var(--ink,#14202b);margin-top:6px;white-space:pre-wrap"></div>' : "") +
+      (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask MaiK (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
       "</div>";
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
     panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
@@ -3065,12 +3151,27 @@
     var ows = panel.querySelector('[data-openws="1"]'); if (ows) ows.addEventListener("click", function (e) { e.preventDefault(); try { if (window.DX && DX.open) DX.open(); } catch (x) {} });
     var aib = panel.querySelector('[data-aiexplain="1"]');
     if (aib) aib.addEventListener("click", function (e) {
-      e.preventDefault(); var out = panel.querySelector("#slAiOut"); if (out) out.textContent = "✨ Thinking…";
+      e.preventDefault(); maikCSS();
+      var out = panel.querySelector("#slAiOut"); if (!out) return;
       var fin = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
       var aa = window.SMD_REASON.assess(fin);
-      window.SMD_AI.explain(aiSummaryFromAssess(aa)).then(function (r) {
-        if (out) out.textContent = (r && r.text) ? r.text : (r && r.error === "ai-off") ? "AI is off — enable it in Settings (SMD_AI.setFlag(true))." : "AI unavailable — the rule-based differential above stands. (" + ((r && r.error) || "no response") + ")";
-      });
+      var labels = Object.keys(fin).filter(function (k) { return fin[k]; }).map(function (k) { return (window.SMD_REASON && SMD_REASON.label) ? SMD_REASON.label(k) : k; });
+      out.innerHTML = '<div class="maik-note">✨ MaiK is retrieving StewardMD knowledge…</div>';
+      // The deterministic StewardMD assessment and MaiK's independent AI commentary
+      // are rendered as TWO clearly separated blocks. MaiK never owns the diagnosis.
+      function render(pkg, r) {
+        if (!out) return;
+        var synth = pkg || { reasoning: { differential: [].concat(aa.infectious || [], aa.nonInfectious || []).sort(function (a, b) { return (b.confidence || 0) - (a.confidence || 0); }).slice(0, 5).map(function (c) { return { id: c.id, name: c.name, confidence: c.confidence, supporting: (c.supporting || []).map(lbl) }; }) } };
+        out.innerHTML = maikCompose(synth, r);
+      }
+      function fallback() { return window.SMD_AI.explain(aiSummaryFromAssess(aa)).then(function (r) { render(null, r); }); }
+      if (window.StewardRAG && window.StewardRAG.buildPackage) {
+        window.StewardRAG.buildPackage(aa, { caseData: { findings: labels } }).then(function (pkg) {
+          if (!pkg) return fallback();
+          out.innerHTML = maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + '<div class="maik-note">✨ MaiK is reviewing the retrieved knowledge…</div>' + maikDisclaimerHTML();
+          return window.SMD_AI.explainGrounded(pkg).then(function (r) { render(pkg, r); });
+        }, fallback).catch(fallback);
+      } else { fallback(); }
     });
     // snapshot for next-render deltas
     _liveStarted = true; _livePrev = {}; _livePrevKeys = {};
