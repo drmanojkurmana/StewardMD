@@ -10,6 +10,29 @@
   "recommendations": [
     {
       "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "ceftriaxone",
+          "regimenLabel": "Ceftriaxone — antibiotic prophylaxis in cirrhotic upper-GI bleeding",
+          "dose": "1 g",
+          "route": "IV",
+          "freq": "once daily",
+          "duration": "up to 7 days",
+          "coverage": null,
+          "why": "Short-course antibiotic prophylaxis at presentation reduces bacterial infection, rebleeding and mortality in cirrhotic UGIB and is a standard adjunct to vasoactive therapy + endoscopy (Baveno VII / AASLD)."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (Baveno VII / AASLD-aligned)",
+        "refs": [
+          "Baveno VII Consensus",
+          "AASLD Portal Hypertensive Bleeding Guideline"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
       "line": "management",
       "steps": [
         "Resuscitate: large-bore IV access; restrictive transfusion (transfuse when Hb <7 g/dL); correct marked coagulopathy/thrombocytopenia before endoscopy.",
@@ -47,5 +70,6 @@
     "reviewedBy": null,
     "reviewedAt": null
   },
-  "version": 1
+  "version": 1,
+  "antibioticRelevant": true
 }
