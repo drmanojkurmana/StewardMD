@@ -1,0 +1,104 @@
+{
+  "id": "gc_186",
+  "specialty": "Metabolic / Nephrology",
+  "condition": "Hyperkalaemia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressive weakness, palpitations and reduced urine output over 2 days",
+  "history": "68-year-old man with stage 4 chronic kidney disease (baseline eGFR ~22), type 2 diabetes and hypertension presents with 2 days of generalised muscle weakness, fatigue and palpitations. He was started on lisinopril and spironolactone for resistant hypertension 3 weeks ago and takes regular NSAIDs for knee osteoarthritis. Reduced oral intake and reduced urine output over the last 48 hours. No chest pain. No recent vomiting or diarrhoea. No crush injury or prolonged immobilisation.",
+  "examination": "Alert, oriented, not in distress. Generalised mild proximal muscle weakness with diminished deep tendon reflexes. Peripheries warm, no focal neurological deficit. No calf tenderness or leg swelling. Chest clear, no crepitations. Abdomen soft, non-tender. Pertinent negatives: no fever, no rash, no pulsatile abdominal mass, no signs of volume overload beyond trace pedal oedema.",
+  "vitals": {
+    "hr": 52,
+    "bp": "148/86",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "Potassium": "7.1 mmol/L",
+    "Sodium": "137 mmol/L",
+    "Bicarbonate": "17 mmol/L",
+    "Creatinine": "3.8 mg/dL (baseline ~2.6)",
+    "Urea": "24 mmol/L",
+    "eGFR": "14 mL/min/1.73m2",
+    "Corrected calcium": "8.6 mg/dL",
+    "Glucose": "132 mg/dL",
+    "Venous blood gas": "pH 7.30, HCO3 17",
+    "CK": "180 U/L (normal)"
+  },
+  "imaging": "Not indicated for diagnosis; renal ultrasound later showed small echogenic kidneys consistent with chronic disease, no obstruction",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Hyperkalaemia (drug-induced, on background CKD)",
+    "Acute-on-chronic kidney injury",
+    "Metabolic acidosis of CKD",
+    "Cardiac arrhythmia / bradyarrhythmia"
+  ],
+  "finalDiagnosis": "Severe hyperkalaemia (K+ 7.1 mmol/L) with ECG changes, driven by RAAS blockade + potassium-sparing diuretic + NSAID on background stage 4 CKD, with acute-on-chronic kidney injury",
+  "citations": [
+    "Harrison 22e — Fluid and Electrolyte Disturbances (Potassium homeostasis / hyperkalemia)",
+    "KDIGO Clinical Practice Guideline on Hyperkalemia Management 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Stop ACE inhibitor (lisinopril), spironolactone and NSAIDs immediately",
+    "Avoid further potassium-containing fluids/supplements",
+    "Use IV calcium with caution and cardiac monitoring; digoxin use is a relative caution for calcium administration"
+  ],
+  "edgeCases": [
+    "Pseudohyperkalaemia from haemolysed/clenched-fist sampling must be excluded before aggressive treatment if no ECG changes",
+    "Bradycardia and peaked T waves can progress rapidly to sine-wave pattern and asystole; normal-appearing ECG does not exclude dangerous hyperkalaemia"
+  ],
+  "expectedMaiK": "Potassium 7.1 mmol/L with bradycardia and neuromuscular weakness is a medical emergency; give IV calcium first for myocardial membrane stabilisation, then shift potassium intracellularly with insulin-dextrose and salbutamol, and remove potassium (loop diuretic if urine output, or dialysis given stage 4 CKD and refractory levels). Stop the offending ACEi, spironolactone and NSAID.",
+  "expectedNextQuestions": [
+    "Obtain an urgent 12-lead ECG — are there peaked T waves, widened QRS or bradyarrhythmia?",
+    "Confirm the sample is non-haemolysed and repeat potassium to exclude pseudohyperkalaemia"
+  ],
+  "expectedInvestigations": [
+    "Urgent 12-lead ECG",
+    "Repeat serum potassium (non-haemolysed) plus venous blood gas",
+    "Renal function panel and bicarbonate"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "bradycardia": true,
+    "heartRate": true,
+    "palpitations": true,
+    "creatinine": true,
+    "urea": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "hyperkalemia",
+    "acceptableIds": [
+      "hyperkalemia"
+    ],
+    "differentialIds": [
+      "aki",
+      "ckd",
+      "atrial_fib"
+    ],
+    "investigations": [
+      "Urgent 12-lead ECG",
+      "Repeat serum potassium and venous blood gas",
+      "Renal function panel"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hyperkalemia",
+    "stewardship tier must be null (non-infective)",
+    "acceptableIds must equal exactly [hyperkalemia]"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

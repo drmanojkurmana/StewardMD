@@ -1,0 +1,116 @@
+{
+  "id": "gc_144",
+  "specialty": "Tropical Fever",
+  "condition": "Scrub Typhus",
+  "age": 38,
+  "sex": "F",
+  "presentingComplaint": "High-grade fever for 8 days with headache, myalgia and a painless dark skin lesion",
+  "history": "A 38-year-old farmer from a sub-Himalayan foothill village presents with 8 days of continuous high-grade fever, severe frontal headache, generalized myalgia and malaise. She noticed a painless black-scabbed lesion in her left groin about a week ago that she cannot recall injuring. She reports recent work in scrub vegetation and paddy fields during the post-monsoon season. Over the last 2 days she has developed a mild non-productive cough and increasing breathlessness. No urinary symptoms, no diarrhoea. No recent travel abroad. Not pregnant. No significant PMH; no immunosuppression.",
+  "examination": "Ill-appearing, febrile and flushed. A 1 cm painless necrotic eschar with a black crust and erythematous rim is present in the left inguinal fold, with tender left inguinal lymphadenopathy and generalized non-tender lymphadenopathy. Faint blanching maculopapular rash over the trunk. Mild hepatosplenomegaly. Bilateral fine basal crepitations. No neck stiffness, no focal neurology, no jaundice.",
+  "vitals": {
+    "hr": 104,
+    "bp": "104/68",
+    "rr": 24,
+    "temp": 39.4,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": "11.8 g/dL",
+    "wbc": "6.2 x10^3/uL (normal count with left shift)",
+    "platelets": "78 x10^3/uL",
+    "AST": "142 U/L",
+    "ALT": "118 U/L",
+    "bilirubin": "1.1 mg/dL",
+    "albumin": "3.1 g/dL",
+    "creatinine": "1.3 mg/dL",
+    "urea": "8.6 mmol/L",
+    "CRP": "96 mg/L",
+    "sodium": "129 mmol/L"
+  },
+  "imaging": "Chest X-ray: bilateral fine interstitial/reticular infiltrates consistent with early scrub-typhus-associated interstitial pneumonitis; no lobar consolidation. Ultrasound abdomen: mild hepatosplenomegaly, no focal lesion, no ascites.",
+  "microbiology": "Scrub typhus IgM ELISA positive; Weil-Felix OX-K agglutination raised. Blood cultures sterile at 48h. Malaria rapid antigen and thick/thin smears negative. Dengue NS1/IgM negative. Leptospira IgM negative. PCR for Orientia tsutsugamushi (57 kDa) pending as confirmatory.",
+  "differentialDiagnoses": [
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis",
+    "Enteric fever",
+    "Malaria"
+  ],
+  "finalDiagnosis": "Scrub typhus (Orientia tsutsugamushi)",
+  "citations": [
+    "Harrison 22e — Rickettsial Diseases (Scrub Typhus / Orientia tsutsugamushi)",
+    "IDSA Rickettsial (Tickborne) Diseases 2016",
+    "WHO SEARO Scrub Typhus Diagnosis and Management 2015"
+  ],
+  "stewardship": "Empiric oral doxycycline 100 mg twice daily is first-line for scrub typhus; azithromycin is the preferred alternative in pregnancy and in children. Response is typically rapid with defervescence within 48 hours, which is itself supportive of the diagnosis. Treat presumptively in an endemic acute undifferentiated febrile illness with an eschar rather than waiting for serology.",
+  "contraindications": [
+    "Doxycycline relatively avoided in pregnancy/young children — use azithromycin instead",
+    "Chloramphenicol carries marrow-suppression risk; reserve for specific circumstances",
+    "Avoid delayed therapy — untreated disease risks ARDS, myocarditis, meningoencephalitis and multi-organ failure"
+  ],
+  "edgeCases": [
+    "Eschar is pathognomonic but absent in up to a third to half of cases, particularly in dark-skinned patients or when hidden in skin folds/perineum/axilla",
+    "Can progress to ARDS, meningoencephalitis, acute kidney injury and myocarditis — mimicking severe sepsis of unclear source",
+    "Weil-Felix is insensitive/nonspecific; single acute IgM may reflect background seroprevalence — paired sera or PCR of eschar is confirmatory"
+  ],
+  "expectedMaiK": "Acute undifferentiated febrile illness with an inguinal eschar, thrombocytopenia, transaminitis and rural scrub exposure in an endemic region strongly indicates scrub typhus; start empiric doxycycline promptly and expect defervescence within 48 hours. Rule out co-endemic dengue, leptospirosis, malaria and enteric fever, and watch for organ dysfunction (ARDS, AKI, encephalitis).",
+  "expectedNextQuestions": [
+    "Is there any eschar hidden in skin folds, axilla, groin or genital/perineal area?",
+    "What is the exact rural/scrub-vegetation and post-monsoon exposure history?",
+    "Any features of organ dysfunction — breathlessness, confusion, reduced urine output?"
+  ],
+  "expectedInvestigations": [
+    "Scrub typhus IgM ELISA (and paired sera or eschar/blood PCR for O. tsutsugamushi confirmation)",
+    "Full blood count and platelets, LFTs, renal function",
+    "Malaria smear/RDT, dengue NS1/IgM, leptospira serology to exclude co-endemic causes",
+    "Chest X-ray to assess for interstitial pneumonitis/ARDS"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "eschar": true,
+    "ruralExposure": true,
+    "lymphadenopathy": true,
+    "headache": true,
+    "myalgiaArthralgia": true,
+    "maculopapularRash": true,
+    "thrombocytopenia": true,
+    "hepatosplenomegaly": true,
+    "tachypnea": true
+  },
+  "expected": {
+    "diagnosis": "SCRUB_TYPHUS",
+    "acceptableIds": [
+      "SCRUB_TYPHUS"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER",
+      "MALARIA"
+    ],
+    "investigations": [
+      "Scrub typhus IgM ELISA / O. tsutsugamushi PCR",
+      "FBC and platelet count",
+      "LFTs and renal function",
+      "Malaria smear/RDT, dengue NS1/IgM, leptospira serology"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "doxycycline",
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SCRUB_TYPHUS",
+    "differential must include at least one of DENGUE or LEPTOSPIROSIS",
+    "empiric stewardship must include doxycycline"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "gc_104",
+  "specialty": "Respiratory",
+  "condition": "Aspiration Pneumonia",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Fever, productive cough with foul-smelling sputum and breathlessness for 4 days",
+  "history": "71-year-old man brought in by family with 4 days of fever, cough productive of copious foul-smelling sputum, and progressive breathlessness. He had an ischaemic stroke 8 months ago leaving him with dysphagia and occasional coughing episodes during meals; the family describes recurrent choking on thin liquids. He is bed-bound much of the day. Background of hypertension and heavy alcohol use. No recent hospitalisation or antibiotics. Onset was subacute over days rather than hours.",
+  "examination": "Ill-appearing, mildly confused elderly man. Poor dentition with gingival disease. Reduced gag reflex noted. Bronchial breathing and coarse crepitations over the right lower and mid zones (gravity-dependent segments), with dullness to percussion. No neck stiffness. No calf swelling; chest wall non-tender. No peripheral stigmata of endocarditis.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/74",
+    "rr": 26,
+    "temp": 38.6,
+    "spo2": 91
+  },
+  "labs": {
+    "WBC": "16.8 x10^9/L (neutrophil predominant)",
+    "CRP": "182 mg/L",
+    "Lactate": "1.8 mmol/L",
+    "Creatinine": "1.1 mg/dL",
+    "Urea": "8.2 mmol/L",
+    "Sodium": "137 mmol/L",
+    "Albumin": "3.0 g/dL",
+    "Procalcitonin": "1.9 ng/mL"
+  },
+  "imaging": "Chest radiograph: consolidation in the right lower lobe and posterior segment of right upper lobe (gravity-dependent zones typical of aspiration in a recumbent/supine patient); no discrete cavity or air-fluid level at this stage; small associated right pleural reaction.",
+  "microbiology": "Sputum Gram stain: mixed flora with polymorphs; blood cultures sent, pending. Sputum culture pending (anaerobes and oral streptococci suspected).",
+  "differentialDiagnoses": [
+    "Aspiration pneumonia",
+    "Community-acquired pneumonia",
+    "Lung abscess (evolving)",
+    "Pulmonary tuberculosis"
+  ],
+  "finalDiagnosis": "Aspiration pneumonia",
+  "citations": [
+    "Harrison 22e — Pneumonia (Aspiration and Anaerobic Pulmonary Infections)",
+    "IDSA/ATS Community-Acquired Pneumonia in Adults 2019"
+  ],
+  "stewardship": "Empiric ampicillin-sulbactam IV (covers oral streptococci, anaerobes and enteric Gram-negatives) as guideline-concordant choice for aspiration pneumonia with dependency on anaerobic/oral-flora coverage; amoxicillin-clavulanate is an oral step-down. Reserve routine anaerobic coverage for suspected abscess/empyema per 2019 IDSA/ATS guidance, but the foul sputum, dental disease and dependent-lobe consolidation here justify it. Address the underlying dysphagia (swallow assessment) to prevent recurrence.",
+  "contraindications": [
+    "Penicillin allergy — substitute a respiratory fluoroquinolone (moxifloxacin) or clindamycin for anaerobic cover",
+    "Avoid nephrotoxic combinations; monitor renal function given age and alcohol use",
+    "Clindamycin carries a higher C. difficile risk"
+  ],
+  "edgeCases": [
+    "Chemical (Mendelson) aspiration pneumonitis can mimic infection early but is sterile and often improves in 24-48h without antibiotics — avoid overtreatment",
+    "Progression to lung abscess/empyema with cavitation and air-fluid level if untreated, especially with poor dentition and anaerobes"
+  ],
+  "expectedMaiK": "Classic aspiration pneumonia in an elderly post-stroke patient with dysphagia: consolidation in gravity-dependent lung segments with foul sputum points to oral/anaerobic flora. Treat with ampicillin-sulbactam and arrange a swallow assessment to prevent recurrence.",
+  "expectedNextQuestions": [
+    "Is there a witnessed aspiration or documented dysphagia / abnormal swallow, and what is the level of consciousness?",
+    "Any poor dentition, periodontal disease, or reduced gag reflex?"
+  ],
+  "expectedInvestigations": [
+    "Chest radiograph (and CT chest if abscess/empyema suspected)",
+    "Bedside swallow evaluation / formal SALT assessment"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "foulSmellingSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "aspirationRiskFactor": true,
+    "dysphagia": true,
+    "cerebrovascularDisease": true,
+    "dyspnea": true,
+    "tachypnea": true,
+    "hypoxia": true
+  },
+  "expected": {
+    "diagnosis": "ASPIRATION_PNEUMONIA",
+    "acceptableIds": [
+      "ASPIRATION_PNEUMONIA"
+    ],
+    "differentialIds": [
+      "CAP",
+      "LUNG_ABSCESS",
+      "PULMONARY_TB"
+    ],
+    "investigations": [
+      "Chest radiograph",
+      "Bedside swallow assessment / SALT evaluation"
+    ],
+    "stewardship": {
+      "tier": "narrow-to-moderate (anaerobic/oral-flora cover)",
+      "antibiotics": [
+        "ampicillin-sulbactam",
+        "amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ASPIRATION_PNEUMONIA",
+    "empiric regimen must include anaerobic/oral-flora coverage (ampicillin-sulbactam or amoxicillin-clavulanate)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "gc_158",
+  "specialty": "Allergy / Emergency",
+  "condition": "Anaphylaxis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Acute onset of widespread itchy rash, throat tightness and breathlessness minutes after eating a prawn curry",
+  "history": "Previously well 34-year-old woman developed generalised pruritus and urticaria within about 10 minutes of eating a prawn dish at a restaurant, followed rapidly by lip and tongue swelling, a sensation of throat closing, hoarse voice, wheeze and light-headedness. She has a childhood history of shellfish sensitivity and known allergic rhinitis; no cardiac or respiratory disease. No current medications, not pregnant. Two prior milder reactions to seafood managed with oral antihistamines. No prior adrenaline use and no adrenaline auto-injector prescribed.",
+  "examination": "Anxious, flushed, with diffuse confluent urticaria and angioedema of the lips and periorbital region. Audible inspiratory stridor and expiratory wheeze; using accessory muscles. Cool peripheries with delayed capillary refill. Chest otherwise clear of consolidation; no fever. Abdomen soft with mild crampy discomfort. No focal neurology, neck supple.",
+  "vitals": {
+    "hr": 124,
+    "bp": "84/52",
+    "rr": 28,
+    "temp": 36.8,
+    "spo2": 91
+  },
+  "labs": {
+    "serum tryptase (acute)": "24 ng/mL (elevated; repeat baseline planned)",
+    "ABG": "mild hypoxaemia, PaO2 8.9 kPa on air",
+    "lactate": "2.1 mmol/L",
+    "WCC": "10.8 x10^9/L",
+    "CRP": "4 mg/L (normal)",
+    "creatinine": "0.8 mg/dL"
+  },
+  "imaging": "not indicated acutely; CXR later unremarkable",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Anaphylaxis (IgE-mediated, shellfish)",
+    "Acute asthma exacerbation",
+    "ACE-inhibitor/hereditary angioedema",
+    "Vasovagal syncope",
+    "Panic attack"
+  ],
+  "finalDiagnosis": "Anaphylaxis (food-triggered, shellfish)",
+  "citations": [
+    "Harrison 22e — Anaphylaxis and Systemic Anaphylaxis / Allergic Emergencies",
+    "WAO Anaphylaxis Guidance 2020"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "No absolute contraindication to IM adrenaline in anaphylaxis; give 0.5 mg (0.5 mL 1:1000) IM anterolateral thigh, repeat at 5 min if needed",
+    "Beta-blocker use can blunt adrenaline response and may need glucagon (not applicable here)",
+    "Avoid IV adrenaline boluses outside monitored/critical-care setting due to arrhythmia risk"
+  ],
+  "edgeCases": [
+    "Biphasic reaction can recur 1-72h after apparent recovery, so observe 6-12h",
+    "Normal tryptase does not exclude anaphylaxis, especially food-triggered",
+    "Absence of skin signs in up to 10-20% can delay recognition"
+  ],
+  "expectedMaiK": "Clinical picture is acute-onset multisystem involvement (skin, airway, breathing, circulation) after a likely allergen, meeting anaphylaxis criteria. First-line treatment is prompt IM adrenaline, oxygen, IV fluids and supine positioning; antihistamines/steroids are adjuncts only. Observe for a biphasic reaction and prescribe an adrenaline auto-injector with allergy referral.",
+  "expectedNextQuestions": [
+    "Exact timing/food eaten and prior reactions to shellfish?",
+    "Any beta-blocker or ACE-inhibitor use?",
+    "Has an adrenaline auto-injector ever been prescribed or used?"
+  ],
+  "expectedInvestigations": [
+    "Serum tryptase acutely and repeat baseline at 24h+",
+    "Referral for allergy testing (specific IgE / skin prick) after recovery"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "rash": true,
+    "facialSwelling": true,
+    "wheeze": true,
+    "dyspnea": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "toxicAppearing": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "anaphylaxis",
+    "acceptableIds": [
+      "anaphylaxis"
+    ],
+    "differentialIds": [
+      "asthma_exac",
+      "angioedema_acei",
+      "vasovagal_syncope",
+      "panic"
+    ],
+    "investigations": [
+      "Serum tryptase acutely and repeat baseline",
+      "Allergy referral / specific IgE testing"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include anaphylaxis",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

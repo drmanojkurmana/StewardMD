@@ -1,0 +1,103 @@
+{
+  "id": "gc_232",
+  "specialty": "Rheumatology",
+  "condition": "Giant cell (temporal) arteritis",
+  "age": 73,
+  "sex": "F",
+  "presentingComplaint": "New-onset right-sided temporal headache with scalp tenderness and jaw pain on chewing for 3 weeks",
+  "history": "A 73-year-old woman presents with a 3-week history of a new, persistent right temporal headache that is unlike any prior headache. She reports tenderness of the scalp when combing her hair and aching in the jaw muscles after a few minutes of chewing that resolves with rest (jaw claudication). Over the same period she has had bilateral shoulder and hip girdle stiffness worst in the mornings, low-grade malaise, fatigue and about 3 kg of unintentional weight loss. Two days ago she experienced a transient episode of blurring and 'greying out' of vision in the right eye lasting a few minutes (amaurosis fugax). No prior headache disorder. PMH: hypertension, hypothyroidism. No visual loss previously. Non-smoker.",
+  "examination": "Alert and oriented. Tender, thickened, nodular and pulseless right superficial temporal artery on palpation; scalp tenderness over the temporal region. Fundoscopy currently normal (no pallid disc swelling at this visit). Proximal shoulder-girdle tenderness with restricted active abduction from stiffness. No focal neurological deficit, neck supple, no meningism. Peripheral pulses and cardiovascular exam otherwise normal; no carotid or subclavian bruit.",
+  "vitals": {
+    "hr": 82,
+    "bp": "148/84",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "ESR": "82 mm/hr (markedly elevated)",
+    "CRP": "68 mg/L (markedly elevated)",
+    "hemoglobin": "10.8 g/dL (normochromic normocytic anaemia of chronic disease)",
+    "platelets": "512 x10^3/uL (thrombocytosis)",
+    "WBC": "9.1 x10^3/uL",
+    "creatinine": "0.9 mg/dL",
+    "ALP": "142 U/L (mildly elevated)",
+    "TSH": "2.4 mIU/L (on replacement, normal)"
+  },
+  "imaging": "Temporal artery colour Doppler ultrasound shows a non-compressible 'halo sign' (hypoechoic circumferential wall thickening) of the right temporal artery. No large-vessel involvement on limited exam; MR/CT angiography or PET can be considered to assess for aortic/large-vessel involvement.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Giant cell (temporal) arteritis",
+    "Polymyalgia rheumatica (overlapping / associated)",
+    "Tension-type headache",
+    "Migraine",
+    "Other systemic vasculitis"
+  ],
+  "finalDiagnosis": "Giant cell (temporal) arteritis",
+  "citations": [
+    "Harrison 22e — The Vasculitis Syndromes (Giant Cell Arteritis and Polymyalgia Rheumatica)",
+    "ACR/Vasculitis Foundation Giant Cell Arteritis 2021"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "High-dose glucocorticoids: caution in poorly controlled hypertension, diabetes and osteoporosis risk — start bone protection and gastric prophylaxis",
+    "Do NOT delay steroids awaiting temporal artery biopsy when visual symptoms are present — sight-threatening emergency"
+  ],
+  "edgeCases": [
+    "Vision loss (anterior ischaemic optic neuropathy) can be sudden, painless and irreversible; amaurosis fugax is a red-flag warning of impending permanent loss requiring emergency high-dose steroids",
+    "ESR/CRP can occasionally be normal in a small minority of biopsy-proven GCA, so normal inflammatory markers do not exclude it when clinical suspicion is high",
+    "Biopsy may be negative due to skip lesions — a negative biopsy does not exclude GCA"
+  ],
+  "expectedMaiK": "Classic giant cell arteritis in a woman over 50 with new temporal headache, jaw claudication, scalp tenderness, PMR-type stiffness and markedly raised ESR/CRP; the transient monocular visual loss makes this a sight-threatening emergency. Start high-dose glucocorticoids immediately and arrange urgent temporal artery biopsy/ultrasound — do not wait for the biopsy.",
+  "expectedNextQuestions": [
+    "Any jaw or tongue claudication, and any episodes of transient or persistent visual loss / double vision?",
+    "New headache in someone over 50 with proximal girdle stiffness suggestive of polymyalgia rheumatica?"
+  ],
+  "expectedInvestigations": [
+    "ESR and CRP",
+    "Temporal artery biopsy (and/or temporal artery Doppler ultrasound for the halo sign)",
+    "Urgent ophthalmology review"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "headache": true,
+    "headacheSevere": true,
+    "visualDisturbance": true,
+    "polyarthralgia": true,
+    "weightLoss": true,
+    "ageOver50": true,
+    "fever": true,
+    "myalgiaArthralgia": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "temporal_arteritis",
+    "acceptableIds": [
+      "temporal_arteritis"
+    ],
+    "differentialIds": [
+      "pmr",
+      "tension_ha",
+      "migraine",
+      "vasculitis"
+    ],
+    "investigations": [
+      "ESR/CRP",
+      "Temporal artery biopsy / temporal artery ultrasound",
+      "Urgent ophthalmology review"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include temporal_arteritis",
+    "stewardship tier must be null (non-infective)",
+    "differential should include pmr"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

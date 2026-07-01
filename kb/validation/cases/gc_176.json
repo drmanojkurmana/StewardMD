@@ -1,0 +1,105 @@
+{
+  "id": "gc_176",
+  "specialty": "Toxicology",
+  "condition": "Drug intoxication / poisoning (sedative-hypnotic / TCA overdose)",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Found drowsy at home beside empty medication blister packs",
+  "history": "Brought to ED by family after being found unresponsive on her bed ~2 hours ago, next to empty packets of amitriptyline (from a relative's prescription) and an over-the-counter sedative antihistamine. Empty vodka bottle nearby. Known depression on follow-up with community mental health; a note was found. No prior overdose. Time of ingestion uncertain but likely within the last 2-4 hours. No seizures witnessed, no head injury, no fever, no infective symptoms.",
+  "examination": "Drowsy, rousable to voice but not fully oriented (GCS 11, E3V3M5). Pupils dilated ~5 mm, sluggishly reactive. Dry warm flushed skin, dry mucous membranes, reduced bowel sounds, palpable bladder (urinary retention) — anticholinergic toxidrome. No focal neurological deficit, no neck stiffness, no rash. Chest clear, no aspiration signs at present. No injection marks, no organophosphate-type secretions.",
+  "vitals": {
+    "hr": 118,
+    "bp": "104/64",
+    "rr": 12,
+    "temp": 37.6,
+    "spo2": 97
+  },
+  "labs": {
+    "capillary_glucose": "6.4 mmol/L (normal — excludes hypoglycaemia)",
+    "paracetamol_level": "<10 mg/L (not detected)",
+    "salicylate_level": "not detected",
+    "venous_blood_gas": "pH 7.34, HCO3 20, lactate 2.1 mmol/L (mild)",
+    "sodium": "139 mmol/L",
+    "potassium": "3.9 mmol/L",
+    "creatinine": "0.8 mg/dL",
+    "ethanol": "120 mg/dL",
+    "creatine_kinase": "180 U/L",
+    "troponin": "normal"
+  },
+  "imaging": "CT head not indicated on initial assessment (no focal deficit, no trauma, toxidrome explains presentation); consider if fails to improve or focal signs emerge",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Tricyclic antidepressant / mixed sedative-hypnotic overdose",
+    "Opioid overdose",
+    "Alcohol intoxication",
+    "Hypoglycaemia",
+    "Metabolic / septic encephalopathy",
+    "Intracranial event (SAH / subdural)"
+  ],
+  "finalDiagnosis": "Acute drug intoxication / poisoning — tricyclic (amitriptyline) plus sedative antihistamine and alcohol co-ingestion with anticholinergic toxidrome",
+  "citations": [
+    "Harrison 22e — Poisoning and Drug Overdose",
+    "AACT/EAPCCT Position Statements on Gastrointestinal Decontamination (activated charcoal) 2004; ACMT TCA toxicity guidance"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid flumazenil empirically in mixed/TCA overdose — precipitates seizures and unmasks proconvulsant effect",
+    "Avoid Class Ia/Ic and Class III antiarrhythmics (worsen TCA cardiotoxicity); use IV sodium bicarbonate for QRS widening",
+    "Avoid physostigmine if TCA suspected — risk of asystole/seizure"
+  ],
+  "edgeCases": [
+    "TCA cardiotoxicity can evolve rapidly: watch for QRS >100 ms, terminal R wave in aVR, dysrhythmia and seizures even while sensorium looks stable",
+    "Delayed/staggered ingestion or co-ingested modified-release preparations can cause late deterioration despite initial mild picture",
+    "Anticholinergic toxidrome may mask/blunt expected bradycardia and mimic a hyperadrenergic state"
+  ],
+  "expectedMaiK": "This is an acute poisoning, not an infection — antibiotics are not indicated. Prioritise ABC, continuous cardiac monitoring and a 12-lead ECG looking for QRS prolongation and terminal R in aVR; give IV sodium bicarbonate if QRS >100 ms or ventricular dysrhythmia, and avoid flumazenil/physostigmine in suspected TCA co-ingestion.",
+  "expectedNextQuestions": [
+    "Exactly what agents, how many tablets, and at what time were they taken (staggered vs single ingestion)?",
+    "Any co-ingestants including paracetamol, and access to modified-release formulations?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (QRS duration, terminal R wave in aVR)",
+    "Paracetamol and salicylate levels, VBG, U&E, glucose",
+    "Continuous cardiac and neuro-observation"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "alteredSensorium": true,
+    "drugOverdose": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "nauseaVomiting": true,
+    "urinaryRetention": true,
+    "alcoholExcess": true,
+    "seizure": true
+  },
+  "expected": {
+    "diagnosis": "drug_intox",
+    "acceptableIds": [
+      "drug_intox"
+    ],
+    "differentialIds": [
+      "opioid_od",
+      "metabolic_enceph",
+      "hypoglycemia",
+      "salicylate_tox"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Paracetamol and salicylate levels",
+      "Capillary glucose and venous blood gas"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include drug_intox",
+    "expected.stewardship.tier must be null (non-infective — no antibiotic recommended)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

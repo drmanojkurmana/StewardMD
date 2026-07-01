@@ -1,0 +1,102 @@
+{
+  "id": "gc_106",
+  "specialty": "Respiratory",
+  "condition": "Bronchiectasis Exacerbation",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Three days of markedly increased cough with a larger volume of thick, discoloured sputum and worsening breathlessness.",
+  "history": "Known non-cystic-fibrosis bronchiectasis (diagnosed 6 years ago following recurrent childhood pneumonias, HRCT-confirmed, right lower and middle lobe predominant). Baseline chronic daily productive cough of ~2 tablespoons mucoid sputum; on airway clearance physiotherapy and PRN salbutamol. Over the last 3 days she reports a clear step-up from baseline: sputum volume doubled and turned green/purulent, increased breathlessness on exertion, low-grade fever and malaise, and mild right-sided pleuritic discomfort. Two similar exacerbations in the past year, the last treated with oral co-amoxiclav. Prior sputum culture grew Haemophilus influenzae; no prior Pseudomonas isolate. Ex-smoker (12 pack-years, quit 10 years ago). No recent hospitalisation or IV antibiotics.",
+  "examination": "Alert, mildly unwell but not toxic. Coarse inspiratory crepitations and scattered rhonchi over the right base that partially shift with coughing; no bronchial breathing suggesting frank lobar consolidation. No cyanosis, no peripheral oedema, JVP not raised. Purulent sputum expectorated during review. Pertinent negatives: no haemoptysis, no confusion, no calf swelling, no new murmur.",
+  "vitals": {
+    "hr": 96,
+    "bp": "128/78",
+    "rr": 22,
+    "temp": 37.9,
+    "spo2": 95
+  },
+  "labs": {
+    "WBC": "13.4 x10^9/L (neutrophilia)",
+    "CRP": "68 mg/L",
+    "Hemoglobin": "13.1 g/dL",
+    "Creatinine": "0.8 mg/dL",
+    "Procalcitonin": "0.4 ng/mL",
+    "ABG": "not required (SpO2 95% on room air)"
+  },
+  "imaging": "Chest X-ray: tram-track and ring shadows in the right lower/middle zones consistent with known bronchiectasis, with increased peribronchial thickening; no new lobar consolidation or effusion. (Baseline HRCT: cylindrical bronchiectasis, signet-ring sign, right lower/middle lobe predominant.)",
+  "microbiology": "Sputum sent for Gram stain, culture and sensitivity (pending); prior culture Haemophilus influenzae. Blood cultures not routinely indicated in absence of systemic sepsis.",
+  "differentialDiagnoses": [
+    "Bronchiectasis exacerbation",
+    "Community-acquired pneumonia",
+    "COPD exacerbation",
+    "Acute bronchitis"
+  ],
+  "finalDiagnosis": "Acute exacerbation of bronchiectasis",
+  "citations": [
+    "Harrison 22e — Bronchiectasis",
+    "BTS Guideline for Bronchiectasis in Adults 2019"
+  ],
+  "stewardship": "Empiric oral amoxicillin-clavulanate targeting Haemophilus influenzae, Streptococcus pneumoniae and Moraxella catarrhalis, guided by prior sputum culture (H. influenzae, no Pseudomonas). Treat for 14 days per BTS bronchiectasis guidance, then de-escalate/tailor to current sputum culture and sensitivities. Reserve anti-pseudomonal cover (e.g., ciprofloxacin) for patients with prior Pseudomonas isolation or risk factors — not indicated here.",
+  "contraindications": [
+    "Penicillin allergy — substitute doxycycline or a macrolide/respiratory fluoroquinolone",
+    "If prior Pseudomonas or fluoroquinolone use, avoid empiric ciprofloxacin monotherapy without sensitivities",
+    "Reduce/adjust dose in significant renal impairment (creatinine here normal)"
+  ],
+  "edgeCases": [
+    "Chronic Pseudomonas aeruginosa colonisation changes empiric choice to an anti-pseudomonal agent and predicts more frequent exacerbations",
+    "Massive haemoptysis can complicate bronchiectasis and is a separate emergency (bronchial artery embolisation)",
+    "Allergic bronchopulmonary aspergillosis or non-tuberculous mycobacteria may mimic or drive recurrent exacerbations and warrant specific testing"
+  ],
+  "expectedMaiK": "Classic infective bronchiectasis exacerbation in a patient with HRCT-confirmed disease: sustained increase from baseline in sputum volume and purulence plus increased breathlessness. Start guideline-concordant oral antibiotics (amoxicillin-clavulanate) tailored to prior culture, send fresh sputum, treat 14 days, and escalate airway clearance.",
+  "expectedNextQuestions": [
+    "Any prior Pseudomonas aeruginosa isolation or recent IV/oral antibiotics?",
+    "What is the patient's baseline sputum volume/colour and exacerbation frequency?",
+    "Any haemoptysis, and is she up to date with airway clearance and any long-term prophylaxis?"
+  ],
+  "expectedInvestigations": [
+    "Sputum Gram stain, culture and sensitivity (including Pseudomonas)",
+    "FBC, CRP",
+    "Chest X-ray to exclude new consolidation"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "knownBronchiectasis": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "increasedSputumVolume": true,
+    "increasedDyspnea": true,
+    "crepitations": true,
+    "fever": true,
+    "pleuriticPain": true,
+    "priorAntibiotics": true
+  },
+  "expected": {
+    "diagnosis": "BRONCHIECTASIS_EXACERBATION",
+    "acceptableIds": [
+      "BRONCHIECTASIS_EXACERBATION"
+    ],
+    "differentialIds": [
+      "CAP",
+      "COPD_EXACERBATION",
+      "ACUTE_BRONCHITIS"
+    ],
+    "investigations": [
+      "Sputum culture and sensitivity",
+      "Chest X-ray",
+      "FBC and CRP"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "Amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include BRONCHIECTASIS_EXACERBATION",
+    "empiric antibiotic must be oral amoxicillin-clavulanate (not empiric anti-pseudomonal cover, as no prior Pseudomonas)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

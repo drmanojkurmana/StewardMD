@@ -1,0 +1,102 @@
+{
+  "id": "gc_109",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Cellulitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Painful, hot, spreading redness of the right lower leg for 2 days with fever.",
+  "history": "Two days of a rapidly enlarging area of erythema, warmth and tenderness over the right shin, associated with fever and rigors. Recalls a minor abrasion at the site while gardening a few days earlier. Background of type 2 diabetes and chronic venous insufficiency with bilateral pedal oedema and interdigital tinea pedis. No prior similar episodes, no penetrating trauma, no immersion injury. No severe disproportionate pain, no skin blistering or crepitus.",
+  "examination": "Ill-defined, non-elevated, blanching erythema over the right shin measuring ~12 x 8 cm, with skin warmth, tenderness and mild pitting oedema; borders are indistinct (not sharply demarcated). Faint proximal streaking and tender right inguinal nodes. Interdigital maceration of the toes (likely portal of entry). No fluctuance, no crepitus, no haemorrhagic bullae, and pain is proportionate to examination findings. Distal pulses and sensation intact; no skip lesions.",
+  "vitals": {
+    "hr": 104,
+    "bp": "126/78",
+    "rr": 18,
+    "temp": 38.4,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "14.8 x10^9/L (neutrophilia)",
+    "CRP": "96 mg/L",
+    "Creatinine": "0.9 mg/dL",
+    "Random glucose": "212 mg/dL",
+    "Lactate": "1.4 mmol/L",
+    "HbA1c": "8.1%"
+  },
+  "imaging": "Not routinely indicated for uncomplicated cellulitis; bedside ultrasound performed to exclude abscess showed diffuse subcutaneous oedema (cobblestoning) without a drainable fluid collection.",
+  "microbiology": "Blood cultures sent (low yield in uncomplicated cellulitis); no purulent focus to swab. Pending.",
+  "differentialDiagnoses": [
+    "Cellulitis",
+    "Erysipelas",
+    "Deep vein thrombosis",
+    "Necrotizing fasciitis",
+    "Stasis dermatitis / lipodermatosclerosis"
+  ],
+  "finalDiagnosis": "Cellulitis of the right lower limb (non-purulent), portal of entry via tinea pedis",
+  "citations": [
+    "Harrison 22e — Infections of the Skin, Muscle, and Soft Tissues; Cellulitis",
+    "IDSA Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections 2014"
+  ],
+  "stewardship": "Non-purulent cellulitis: empiric coverage of beta-haemolytic streptococci and MSSA. Oral flucloxacillin (or IV if systemic features) is first-line; cefazolin IV if inpatient. Treat concomitant tinea pedis to remove the portal of entry. No routine MRSA cover unless purulence, penetrating trauma, MRSA colonization, or failure to respond.",
+  "contraindications": [
+    "Penicillin allergy — substitute clindamycin or a macrolide/doxycycline for streptococcal/MSSA cover",
+    "Reduce beta-lactam dose in significant renal impairment (creatinine here normal)",
+    "Avoid if evolving necrotizing infection — that requires urgent surgical review, not oral antibiotics"
+  ],
+  "edgeCases": [
+    "Rapidly worsening pain out of proportion, crepitus or haemorrhagic bullae signals necrotizing fasciitis — surgical emergency, do not delay for imaging",
+    "Bilateral 'cellulitis' is very often stasis dermatitis and is over-diagnosed; true cellulitis is almost always unilateral",
+    "In diabetics, exclude an underlying foot ulcer/osteomyelitis and a drainable abscess"
+  ],
+  "expectedMaiK": "Classic unilateral non-purulent cellulitis with a clear portal of entry (tinea pedis) in a diabetic; cover strep and MSSA and treat the tinea. Reassess urgently if pain becomes disproportionate or bullae/crepitus develop to exclude necrotizing fasciitis.",
+  "expectedNextQuestions": [
+    "Is the pain disproportionate to exam findings, or are there bullae/crepitus (necrotizing fasciitis red flags)?",
+    "Is there a portal of entry (tinea pedis, ulcer, trauma) or purulent focus suggesting abscess/MRSA?"
+  ],
+  "expectedInvestigations": [
+    "Mark the erythema border and reassess for progression",
+    "Blood glucose/HbA1c and inflammatory markers (CRP/WBC); ultrasound only if abscess suspected"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "rapidlySpreadingErythema": true,
+    "diabetesHx": true,
+    "legSwellingUnilateral": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "CELLULITIS",
+    "acceptableIds": [
+      "CELLULITIS"
+    ],
+    "differentialIds": [
+      "ERYSIPELAS",
+      "NECROTIZING_FASCIITIS",
+      "DIABETIC_FOOT",
+      "dvt"
+    ],
+    "investigations": [
+      "Mark and monitor erythema border",
+      "Bedside ultrasound to exclude abscess"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "flucloxacillin",
+        "cefazolin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CELLULITIS",
+    "must not classify as NECROTIZING_FASCIITIS given proportionate pain and absent crepitus/bullae"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "id": "gc_139",
+  "specialty": "Respiratory / Tuberculosis",
+  "condition": "Pulmonary Tuberculosis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Cough for 6 weeks with low-grade evening fever, night sweats and weight loss.",
+  "history": "6-week history of productive cough now streaked with blood on two occasions. Drenching night sweats and evening-predominant low-grade fever. Unintentional 5 kg weight loss and anorexia over 2 months. Migrant construction worker living in a crowded urban settlement; a co-worker was recently diagnosed and treated for sputum-positive TB. Non-diabetic, HIV status unknown, occasional smoker, no prior anti-tubercular therapy.",
+  "examination": "Thin, chronically ill-appearing man. Auscultation reveals coarse crepitations over the right upper zone with bronchial breathing; no wheeze. No lymphadenopathy, no clubbing. No focal neurology, no hepatosplenomegaly. Chest expansion symmetric; no signs of consolidation elsewhere.",
+  "vitals": {
+    "hr": 96,
+    "bp": "112/72",
+    "rr": 20,
+    "temp": 37.8,
+    "spo2": 97
+  },
+  "labs": {
+    "Hemoglobin": "10.8 g/dL (normocytic anemia)",
+    "WBC": "8.9 x10^3/µL",
+    "ESR": "68 mm/hr",
+    "CRP": "42 mg/L",
+    "HIV serology": "sent (pending)",
+    "Random blood glucose": "108 mg/dL",
+    "Creatinine": "0.9 mg/dL",
+    "LFTs": "normal baseline (pre-ATT)"
+  },
+  "imaging": "Chest X-ray: right upper lobe fibronodular opacity with a thick-walled cavity; no pleural effusion. Consistent with post-primary reactivation pulmonary TB.",
+  "microbiology": "Sputum Xpert MTB/RIF (GeneXpert): MTB detected, rifampicin resistance NOT detected. Sputum AFB smear 2+. Culture on liquid media sent (pending).",
+  "differentialDiagnoses": [
+    "Pulmonary tuberculosis",
+    "Lung abscess",
+    "Community-acquired (necrotizing) pneumonia",
+    "Bronchogenic carcinoma",
+    "Chronic pulmonary fungal infection"
+  ],
+  "finalDiagnosis": "Pulmonary tuberculosis (rifampicin-susceptible, smear-positive)",
+  "citations": [
+    "Harrison 22e — Tuberculosis (Mycobacterial Diseases)",
+    "WHO Consolidated Guidelines on Tuberculosis: Treatment of Drug-Susceptible TB 2022",
+    "Standards for TB Care in India (STCI) / NTEP Technical & Operational Guidelines 2022"
+  ],
+  "stewardship": "Not standard antibacterial stewardship — this is a notifiable mycobacterial infection. Start standard 4-drug regimen HRZE (isoniazid + rifampicin + pyrazinamide + ethambutol) for 2 months intensive phase, then HR for 4 months continuation, weight-band dosed, under NTEP/DOT. Confirm rifampicin susceptibility (Xpert) before empiric choice; notify public health and initiate contact tracing.",
+  "contraindications": [
+    "Baseline LFTs mandatory before isoniazid/rifampicin/pyrazinamide — hold/adjust if transaminases >3-5x ULN with symptoms",
+    "Add pyridoxine to prevent isoniazid peripheral neuropathy",
+    "Ethambutol needs dose reduction in renal impairment and baseline visual acuity/colour vision testing",
+    "Rifampicin: multiple CYP450 drug interactions (e.g., oral contraceptives, warfarin, ARVs)"
+  ],
+  "edgeCases": [
+    "Rifampicin resistance on Xpert mandates a switch to an MDR-TB regimen — do not start standard HRZE",
+    "HIV co-infection alters presentation (lower-zone/atypical, higher smear-negative rate) and timing of ART",
+    "Smear-negative but Xpert/culture-positive disease is common; a negative smear does not exclude TB"
+  ],
+  "expectedMaiK": "Classic subacute cough >2 weeks with evening fever, night sweats, weight loss, hemoptysis, TB contact and an upper-lobe cavity is textbook post-primary pulmonary TB. Confirm with sputum Xpert MTB/RIF (also gives rifampicin resistance), start weight-band HRZE under NTEP, and notify for contact tracing.",
+  "expectedNextQuestions": [
+    "HIV status and any immunosuppression?",
+    "Any prior anti-tubercular treatment (to define new vs previously treated)?",
+    "Detailed contact history and household/occupational exposures?"
+  ],
+  "expectedInvestigations": [
+    "Sputum Xpert MTB/RIF (or Truenat) with rifampicin resistance",
+    "Sputum AFB smear microscopy and mycobacterial culture/DST",
+    "HIV testing, baseline LFTs, and chest radiograph"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "hemoptysis": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "tbContactHistory": true,
+    "cavitatingLesion": true,
+    "crepitations": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "PULMONARY_TB",
+    "acceptableIds": [
+      "PULMONARY_TB"
+    ],
+    "differentialIds": [
+      "LUNG_ABSCESS",
+      "CAP",
+      "lung_cancer",
+      "DISSEMINATED_TB"
+    ],
+    "investigations": [
+      "Sputum Xpert MTB/RIF",
+      "Sputum AFB smear and mycobacterial culture",
+      "Chest X-ray",
+      "HIV serology"
+    ],
+    "stewardship": {
+      "tier": "notifiable-mycobacterial",
+      "antibiotics": [
+        "isoniazid",
+        "rifampicin",
+        "pyrazinamide",
+        "ethambutol"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include PULMONARY_TB",
+    "cavitatingLesion + prolongedCough2Weeks + tbContactHistory should rank PULMONARY_TB above CAP",
+    "stewardship must recommend HRZE, not a standard bacterial antibiotic"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

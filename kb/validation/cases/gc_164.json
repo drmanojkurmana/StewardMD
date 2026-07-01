@@ -1,0 +1,105 @@
+{
+  "id": "gc_164",
+  "specialty": "Cardiology",
+  "condition": "Atrial fibrillation with rapid ventricular response",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset palpitations with breathlessness for the past 5 hours",
+  "history": "68-year-old man with a 5-hour history of abrupt-onset irregular palpitations associated with mild exertional breathlessness and light-headedness. No chest pain, syncope, or focal neurological symptoms. Background of hypertension (on amlodipine), type 2 diabetes, and obesity; drinks alcohol at weekends and had a heavier-than-usual intake the previous evening. No prior documented arrhythmia. No fever, cough, or recent illness. Not currently anticoagulated.",
+  "examination": "Alert and comfortable at rest. Irregularly irregular pulse with a variable-volume apex and a radial pulse deficit. No raised JVP, no basal crackles, no peripheral oedema, heart sounds variable in intensity with no added murmur. No goitre, tremor, or lid lag. Chest clear. Pertinent negatives: no focal neurological deficit, no calf swelling, no signs of decompensated heart failure or shock.",
+  "vitals": {
+    "hr": 148,
+    "bp": "128/78",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "Hemoglobin": "14.2 g/dL",
+    "WCC": "8.1 x10^9/L",
+    "Potassium": "4.1 mmol/L",
+    "Magnesium": "0.78 mmol/L",
+    "Creatinine": "0.9 mg/dL",
+    "TSH": "1.8 mIU/L (normal)",
+    "Troponin": "normal (not dynamic)",
+    "Random glucose": "9.2 mmol/L"
+  },
+  "imaging": "CXR: clear lung fields, normal cardiac silhouette, no pulmonary congestion. Transthoracic echo (later): mild LA dilatation, preserved LV systolic function, no significant valvular lesion.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Atrial flutter with variable block",
+    "Multifocal atrial tachycardia",
+    "Atrial fibrillation with rapid ventricular response",
+    "Thyrotoxic arrhythmia",
+    "Paroxysmal SVT"
+  ],
+  "finalDiagnosis": "Atrial fibrillation with rapid ventricular response (new-onset, likely alcohol/'holiday heart' triggered)",
+  "citations": [
+    "Harrison 22e — The Tachyarrhythmias (Atrial Fibrillation)",
+    "AHA/ACC/ACCP/HRS Atrial Fibrillation Guideline 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid non-dihydropyridine calcium blockers/beta-blocker combination without monitoring",
+    "Rate-control caution if occult decompensated HF or pre-excitation (avoid AV-nodal blockers if WPW)",
+    "Anticoagulation decision per CHA2DS2-VASc weighed against HAS-BLED bleeding risk"
+  ],
+  "edgeCases": [
+    "Pre-excited AF (WPW) where AV-nodal blockers can precipitate VF — treat with procainamide/cardioversion",
+    "AF as the presenting sign of occult hyperthyroidism, PE, or sepsis — exclude secondary drivers",
+    "Rate-related demand ischaemia mimicking ACS"
+  ],
+  "expectedMaiK": "Irregularly irregular tachycardia with a pulse deficit and no P waves points to atrial fibrillation with rapid ventricular response; prioritise rate control, screen for reversible triggers (alcohol, thyroid, sepsis, PE), and formally assess stroke risk with CHA2DS2-VASc to guide anticoagulation.",
+  "expectedNextQuestions": [
+    "Exact time of symptom onset (guides <48h cardioversion window)?",
+    "Any chest pain, syncope, or features of heart failure/haemodynamic compromise?",
+    "Prior AF episodes, thyroid disease, alcohol intake, and current anticoagulation?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Serum electrolytes, magnesium and TSH",
+    "Transthoracic echocardiogram"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "palpitations": true,
+    "tachycardia": true,
+    "dyspnea": true,
+    "heartRate": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "alcoholExcess": true,
+    "chestPain": true,
+    "syncope": true
+  },
+  "expected": {
+    "diagnosis": "atrial_fib",
+    "acceptableIds": [
+      "atrial_fib"
+    ],
+    "differentialIds": [
+      "acs",
+      "heart_failure",
+      "hyperthyroidism",
+      "pe"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "TSH and electrolytes",
+      "Transthoracic echocardiogram"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include atrial_fib",
+    "expected.stewardship.tier is null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

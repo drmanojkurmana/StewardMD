@@ -1,0 +1,111 @@
+{
+  "id": "gc_129",
+  "specialty": "Cardiovascular",
+  "condition": "Infective Endocarditis (native mitral valve, subacute)",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of low-grade fever, night sweats, and progressive fatigue",
+  "history": "Previously healthy 42-year-old man with a 3-week history of intermittent low-grade fever, drenching night sweats, malaise, anorexia and ~4 kg unintentional weight loss. Reports new exertional breathlessness over the past week. Underwent dental scaling and extraction about 5 weeks ago without antibiotic prophylaxis. Childhood history of rheumatic fever with a known mitral valve murmur. No injection drug use, no prosthetic valve, no recent hospitalization.",
+  "examination": "Ill-looking, pale. New/changed pansystolic murmur at the apex radiating to the axilla (mitral regurgitation). Splinter haemorrhages in two nail beds, a Janeway lesion on the right palm and tender Osler's nodes on the finger pulps. Mild splenomegaly. Conjunctival petechiae. No neck stiffness, no focal neurological deficit; chest with bibasal fine crackles suggesting early pulmonary congestion.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/64",
+    "rr": 20,
+    "temp": 38.4,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": "10.2 g/dL (normochromic normocytic)",
+    "wbc": "13.8 x10^9/L (neutrophilia)",
+    "platelets": "180 x10^3/uL",
+    "ESR": "78 mm/hr",
+    "CRP": "96 mg/L",
+    "creatinine": "1.1 mg/dL",
+    "urinalysis": "microscopic haematuria with red-cell casts",
+    "rheumatoid factor": "positive"
+  },
+  "imaging": "Transthoracic echocardiogram shows a 12 mm mobile vegetation on the anterior mitral leaflet with moderate-to-severe mitral regurgitation; transoesophageal echo confirms the vegetation and excludes perivalvular abscess.",
+  "microbiology": "Three sets of blood cultures from separate venepunctures drawn before antibiotics; all three grow viridans group streptococci (Streptococcus sanguinis), penicillin-susceptible — persistently positive, consistent with a typical IE organism.",
+  "differentialDiagnoses": [
+    "Infective endocarditis",
+    "Pyrexia of unknown origin",
+    "Lymphoma / occult malignancy",
+    "Systemic vasculitis (e.g. ANCA-associated)",
+    "Acute rheumatic fever recurrence"
+  ],
+  "finalDiagnosis": "Infective endocarditis — Duke definite (native mitral valve, viridans streptococci)",
+  "citations": [
+    "Harrison 22e — Infective Endocarditis",
+    "AHA Infective Endocarditis: Diagnosis, Antimicrobial Therapy and Management of Complications 2015 (2023 update)"
+  ],
+  "stewardship": "Subacute native-valve IE with a typical organism: after 3 sets of blood cultures, start empiric IV therapy pending sensitivities. Reasonable empiric regimen for subacute native-valve disease is IV ampicillin plus a beta-lactamase-stable agent, or for staphylococcal cover vancomycin; here viridans streptococci confirmed penicillin-susceptible, so de-escalate to IV benzylpenicillin (or ceftriaxone) +/- gentamicin for a 4-week course per AHA/ESC. Directed narrow-spectrum therapy on culture and susceptibility is the goal.",
+  "contraindications": [
+    "Penicillin allergy — substitute vancomycin",
+    "Aminoglycoside (gentamicin) caution in renal impairment; monitor levels and renal function",
+    "Avoid empiric monotherapy that misses staphylococci before cultures return"
+  ],
+  "edgeCases": [
+    "Culture-negative IE (prior antibiotics, HACEK, Coxiella/Bartonella) — serology and prolonged cultures needed",
+    "Right-sided IE in injection drug users presents with septic pulmonary emboli rather than a murmur",
+    "Acute S. aureus IE can present fulminantly with valve destruction rather than this subacute picture"
+  ],
+  "expectedMaiK": "This is a Duke-definite native-valve infective endocarditis: a typical organism (viridans streptococci) on persistently positive blood cultures plus echocardiographic vegetation and a new regurgitant murmur. Secure at least three sets of blood cultures before antibiotics, obtain echocardiography, and use directed rather than broad empiric therapy while assessing for surgical indications.",
+  "expectedNextQuestions": [
+    "Any recent dental/surgical procedures or injection drug use?",
+    "History of valvular disease, prosthetic valve or previous endocarditis?",
+    "Any symptoms of embolic events (stroke, limb ischaemia, back pain)?"
+  ],
+  "expectedInvestigations": [
+    "Three sets of blood cultures from separate sites before antibiotics",
+    "Transthoracic then transoesophageal echocardiography",
+    "ECG (monitor for conduction delay indicating perivalvular abscess)"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "newMurmur": true,
+    "embolicPhenomena": true,
+    "persistentBacteremia": true,
+    "splenomegaly": true,
+    "dyspnea": true,
+    "tachycardia": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "IE",
+    "acceptableIds": [
+      "IE"
+    ],
+    "differentialIds": [
+      "PUO",
+      "DEVICE_INFECTION",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Three sets of blood cultures before antibiotics",
+      "Transthoracic/transoesophageal echocardiography",
+      "ECG and serial inflammatory markers"
+    ],
+    "stewardship": {
+      "tier": "directed / narrow-spectrum (targeted)",
+      "antibiotics": [
+        "benzylpenicillin",
+        "ceftriaxone",
+        "gentamicin",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include IE",
+    "new regurgitant murmur + persistent bacteremia + vegetation should yield Duke-definite IE",
+    "blood cultures must be drawn before empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

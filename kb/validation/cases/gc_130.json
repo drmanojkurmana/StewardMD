@@ -1,0 +1,116 @@
+{
+  "id": "gc_130",
+  "specialty": "Tropical Fever",
+  "condition": "Leptospirosis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "High fever, severe myalgia and red eyes for 5 days after wading through monsoon floodwater",
+  "history": "5-day history of abrupt-onset high fever with rigors, intense myalgia most marked in the calves and lumbar region, and severe frontal headache. Reports red, gritty eyes without discharge over the last 2 days and now dark, reduced urine output. He is a rice-field agricultural worker in coastal Kerala and waded barefoot through stagnant floodwater during recent heavy monsoon rains, with several minor foot abrasions. No cough, diarrhoea or dysuria. No prior comorbidity, not on medication, no known drug allergy.",
+  "examination": "Ill-looking, febrile, mildly icteric. Bilateral conjunctival suffusion without purulent discharge. Marked tenderness of calf and paraspinal muscles on palpation. Mild tender hepatomegaly. No neck stiffness, no rash, no lymphadenopathy, no eschar. Chest clear, no focal neurological deficit.",
+  "vitals": {
+    "hr": 108,
+    "bp": "104/64",
+    "rr": 22,
+    "temp": 39.4,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": "13.1 g/dL",
+    "WBC": "13.8 x10^3/uL (neutrophilia)",
+    "platelets": "78 x10^3/uL",
+    "creatinine": "2.4 mg/dL",
+    "urea": "16 mmol/L",
+    "bilirubin": "4.8 mg/dL (predominantly conjugated)",
+    "AST": "96 U/L",
+    "ALT": "88 U/L",
+    "ALP": "182 U/L",
+    "CK": "1450 U/L",
+    "CRP": "148 mg/L",
+    "urinalysis": "proteinuria, granular casts, no growth"
+  },
+  "imaging": "Chest X-ray clear; abdominal ultrasound shows mild hepatomegaly with normal biliary tree and normal-sized kidneys with preserved corticomedullary differentiation",
+  "microbiology": "Blood and urine cultures pending; malaria smear and dengue NS1 negative; leptospira IgM ELISA positive, MAT sent for confirmation",
+  "differentialDiagnoses": [
+    "Leptospirosis",
+    "Dengue fever",
+    "Scrub typhus",
+    "Malaria",
+    "Acute viral hepatitis"
+  ],
+  "finalDiagnosis": "Leptospirosis (anicteric-to-mild icteric, with early renal involvement)",
+  "citations": [
+    "Harrison 22e — Leptospirosis",
+    "WHO/ICMR Leptospirosis Diagnosis and Management Guidelines 2022"
+  ],
+  "stewardship": "IV ceftriaxone 1 g once daily (empiric) for moderate-to-severe leptospirosis with renal and hepatic involvement; IV penicillin G is an equally acceptable first-line agent, oral doxycycline reserved for mild ambulatory disease. Watch for Jarisch-Herxheimer reaction after first dose.",
+  "contraindications": [
+    "Doxycycline avoided in pregnancy; beta-lactam allergy contraindicates ceftriaxone/penicillin",
+    "Nephrotoxic NSAIDs contraindicated given AKI",
+    "Dose-adjust and monitor renal function closely"
+  ],
+  "edgeCases": [
+    "Weil's disease: severe icteric form with jaundice, AKI and pulmonary haemorrhage carrying high mortality",
+    "Severe pulmonary haemorrhage syndrome can occur with minimal jaundice and is a leading cause of death",
+    "Conjunctival suffusion is highly suggestive but present in only a minority; absence does not exclude the diagnosis"
+  ],
+  "expectedMaiK": "Classic leptospirosis in a floodwater-exposed patient with myalgia, conjunctival suffusion, thrombocytopenia, and combined hepatic and renal dysfunction; start empiric ceftriaxone or IV penicillin promptly and confirm with leptospira IgM/MAT, while excluding dengue, scrub typhus and malaria.",
+  "expectedNextQuestions": [
+    "Any breathlessness or haemoptysis suggesting pulmonary haemorrhage?",
+    "Trend of urine output and any oliguria?",
+    "Specific water/animal/rodent exposure and timing?"
+  ],
+  "expectedInvestigations": [
+    "Leptospira MAT (confirmatory) and repeat IgM",
+    "Serial platelets, creatinine and LFTs",
+    "Chest imaging if respiratory symptoms; blood cultures"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "myalgiaArthralgia": true,
+    "conjunctivalSuffusion": true,
+    "waterExposure": true,
+    "jaundice": true,
+    "thrombocytopenia": true,
+    "renalImpairment": true,
+    "darkUrine": true,
+    "hepatosplenomegaly": true,
+    "headache": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "LEPTOSPIROSIS",
+    "acceptableIds": [
+      "LEPTOSPIROSIS"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "MALARIA",
+      "VIRAL_HEPATITIS"
+    ],
+    "investigations": [
+      "Leptospira IgM ELISA / MAT",
+      "Serial platelets and renal function",
+      "Dengue and malaria workup"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "ceftriaxone",
+        "penicillin G",
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include LEPTOSPIROSIS",
+    "differential must include DENGUE and SCRUB_TYPHUS",
+    "stewardship antibiotics must include ceftriaxone or penicillin G"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

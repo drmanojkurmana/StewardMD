@@ -1,0 +1,105 @@
+{
+  "id": "gc_195",
+  "specialty": "Pulmonary",
+  "condition": "Interstitial lung disease (idiopathic pulmonary fibrosis)",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness on exertion and a persistent dry cough over 10 months",
+  "history": "Insidious, slowly progressive exertional dyspnea (now on climbing one flight of stairs) and a chronic non-productive cough for ~10 months, without fever, wheeze, or orthopnea. No paroxysmal nocturnal dyspnea, chest pain, or leg swelling. Ex-smoker (35 pack-years, quit 5 years ago). Retired; no occupational asbestos/silica exposure, no birds/mould/hot-tub or other hypersensitivity antigens, no relevant drug exposure (no amiodarone/methotrexate/nitrofurantoin). No arthralgia, rash, dry eyes/mouth, Raynaud, or dysphagia to suggest connective tissue disease. No GERD-directed symptoms initially but reports occasional reflux.",
+  "examination": "Comfortable at rest, tachypneic on minimal exertion. Fine, dry end-inspiratory bibasal 'Velcro' crackles that do not clear with coughing. Clubbing of the fingers. No wheeze, no raised JVP, no peripheral edema, no ascites, normal heart sounds with no murmur or gallop. No skin rash, sclerodactyly, or synovitis. Resting SpO2 borderline with desaturation on ambulation.",
+  "vitals": {
+    "hr": 92,
+    "bp": "128/78",
+    "rr": 22,
+    "temp": 36.8,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": "14.6 g/dL",
+    "WBC": "7.2 x10^3/uL",
+    "CRP": "6 mg/L (near normal)",
+    "creatinine": "0.9 mg/dL",
+    "ANA": "negative",
+    "RF/anti-CCP": "negative",
+    "ANCA": "negative",
+    "BNP": "normal",
+    "ABG": "mild hypoxemia, PaO2 72 mmHg on room air with widened A-a gradient"
+  },
+  "imaging": "HRCT chest: bibasal, subpleural, peripheral-predominant reticulation with honeycombing and traction bronchiectasis, minimal ground-glass, no significant mediastinal lymphadenopathy or air-trapping — a definite Usual Interstitial Pneumonia (UIP) pattern. CXR: reduced lung volumes with bibasal reticular shadowing.",
+  "microbiology": "n/a (non-infective)",
+  "differentialDiagnoses": [
+    "Idiopathic pulmonary fibrosis (UIP)",
+    "Chronic hypersensitivity pneumonitis",
+    "Connective-tissue-disease-associated ILD",
+    "Chronic heart failure",
+    "Asbestosis / pneumoconiosis"
+  ],
+  "finalDiagnosis": "Idiopathic pulmonary fibrosis (interstitial lung disease, UIP pattern)",
+  "citations": [
+    "Harrison 22e — Interstitial Lung Diseases",
+    "ATS/ERS/JRS/ALAT Idiopathic Pulmonary Fibrosis Diagnosis 2022"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid empiric broad-spectrum antibiotics — no infective process; avoid long-term high-dose corticosteroid/immunosuppression in confirmed IPF (PANTHER-IPF showed harm with prednisone+azathioprine+NAC)",
+    "Antifibrotics (pirfenidone/nintedanib) require baseline LFTs; nintedanib caution with bleeding risk/anticoagulation"
+  ],
+  "edgeCases": [
+    "Acute exacerbation of IPF can mimic infective pneumonia/ARDS with new bilateral ground-glass — do not reflexively attribute new decline to infection",
+    "Combined pulmonary fibrosis and emphysema (CPFE) in smokers can give preserved spirometry volumes with disproportionately reduced DLCO",
+    "A UIP pattern is not synonymous with IPF — must exclude CTD-ILD, chronic HP and drug/occupational causes first"
+  ],
+  "expectedMaiK": "The subacute-to-chronic course, bibasal Velcro crackles with clubbing, and a definite subpleural/basal UIP pattern with honeycombing on HRCT point to fibrotic interstitial lung disease rather than an infection or heart failure. This is not an infective presentation, so antibiotics are not indicated; the priority is a serologic/exposure workup to exclude secondary causes and PFTs to grade severity before antifibrotic therapy.",
+  "expectedNextQuestions": [
+    "Any occupational or environmental exposures (asbestos, silica, birds, mould, hot tubs) or culprit drugs (amiodarone, methotrexate, nitrofurantoin)?",
+    "Any connective-tissue-disease symptoms — arthralgia, rash, Raynaud, dry eyes/mouth, dysphagia, muscle weakness?",
+    "Rate of progression and any recent acute worsening suggesting an acute exacerbation?"
+  ],
+  "expectedInvestigations": [
+    "High-resolution CT chest (if not already done)",
+    "Pulmonary function tests with DLCO and 6-minute walk test",
+    "CTD serology panel (ANA, RF, anti-CCP, myositis panel, ANCA) and consideration of MDT discussion / lung biopsy if HRCT pattern is indeterminate"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "dyspnea": true,
+    "coughRadio": true,
+    "prolongedCough2Weeks": true,
+    "crepitations": true,
+    "bilateralCrackles": true,
+    "hypoxia": true,
+    "tachypnea": true,
+    "weightLoss": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "ild",
+    "acceptableIds": [
+      "ild"
+    ],
+    "differentialIds": [
+      "sarcoidosis",
+      "heart_failure",
+      "lung_cancer",
+      "pleural_effusion"
+    ],
+    "investigations": [
+      "HRCT chest",
+      "Pulmonary function tests with DLCO",
+      "CTD serology panel"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ild",
+    "stewardship tier must be null (non-infective) — no empiric antibiotics recommended",
+    "HRCT chest must appear in suggested investigations"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

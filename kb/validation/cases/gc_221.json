@@ -1,0 +1,100 @@
+{
+  "id": "gc_221",
+  "specialty": "Rheumatology",
+  "condition": "Rheumatoid arthritis",
+  "age": 46,
+  "sex": "F",
+  "presentingComplaint": "Progressive pain, swelling and morning stiffness of the hands and wrists for 4 months.",
+  "history": "A 46-year-old woman presents with a 4-month history of symmetrical pain and swelling affecting the metacarpophalangeal joints, proximal interphalangeal joints and wrists of both hands, with more recent involvement of the feet (metatarsophalangeal joints). She reports early-morning stiffness lasting over an hour that eases with activity, associated fatigue and low-grade malaise. No preceding diarrhoea, urethritis, psoriasis, photosensitive rash, oral ulcers or Raynaud's. No back stiffness. Non-smoker; mother has rheumatoid arthritis. No recent tick bite, travel or high fever.",
+  "examination": "Symmetrical soft, boggy synovitis of bilateral MCPs (positive MCP squeeze), PCPs and wrists with reduced grip; MTP squeeze tender. Distal interphalangeal joints spared. No tophi, no psoriatic nail/skin changes, no dactylitis, no enthesitis. No rash, no oral ulcers, no lymphadenopathy or organomegaly. No firm subcutaneous nodules yet. Systemically well and afebrile.",
+  "vitals": {
+    "hr": 78,
+    "bp": "122/76",
+    "rr": 14,
+    "temp": 37,
+    "spo2": 99
+  },
+  "labs": {
+    "ESR": "58 mm/hr (raised)",
+    "CRP": "42 mg/L (raised)",
+    "Rheumatoid factor": "positive, 96 IU/mL",
+    "Anti-CCP (ACPA)": "strongly positive, >200 U/mL",
+    "ANA": "negative",
+    "Hemoglobin": "10.9 g/dL (normocytic, anaemia of chronic disease)",
+    "Platelets": "430 ×10³/µL (reactive thrombocytosis)",
+    "Serum urate": "normal",
+    "Creatinine": "0.8 mg/dL"
+  },
+  "imaging": "Plain radiographs of hands/feet: periarticular osteopenia and early juxta-articular soft-tissue swelling; a few small marginal erosions at MCP and MTP heads. Musculoskeletal ultrasound confirms synovial hypertrophy with power-Doppler signal in wrists and MCPs.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Rheumatoid arthritis",
+    "SLE / other connective tissue disease arthritis",
+    "Psoriatic arthritis",
+    "Viral polyarthritis (e.g. chikungunya, parvovirus)",
+    "Crystal (polyarticular gout) arthritis"
+  ],
+  "finalDiagnosis": "Seropositive rheumatoid arthritis (erosive, ACR/EULAR criteria met)",
+  "citations": [
+    "Harrison 22e — Rheumatoid Arthritis",
+    "ACR/EULAR Classification Criteria for Rheumatoid Arthritis 2010"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Methotrexate contraindicated in pregnancy and significant hepatic/renal impairment or heavy alcohol use; check pregnancy status and baseline LFTs/FBC",
+    "NSAIDs cautioned in renal impairment, peptic ulcer disease and cardiovascular risk",
+    "Screen for latent TB and hepatitis B/C before any biologic/DMARD escalation"
+  ],
+  "edgeCases": [
+    "Seronegative RA (RF/anti-CCP negative) still occurs and does not exclude the diagnosis",
+    "Palindromic onset or single-joint presentation may precede established polyarthritis",
+    "Beware overlap syndromes and RA mimics such as chikungunya (recent epidemic exposure) and parvovirus B19 producing a self-limiting symmetrical polyarthritis"
+  ],
+  "expectedMaiK": "The symmetrical small-joint polyarthritis with prolonged morning stiffness, positive RF and high-titre anti-CCP, raised inflammatory markers and early marginal erosions is a textbook presentation of rheumatoid arthritis. Early referral to rheumatology and prompt DMARD initiation (methotrexate first-line) within the treat-to-target window limits irreversible joint damage.",
+  "expectedNextQuestions": [
+    "Duration and pattern of morning stiffness and which joints are involved symmetrically?",
+    "Any psoriasis, rash, oral ulcers, recent viral illness/travel or family history of autoimmune disease?"
+  ],
+  "expectedInvestigations": [
+    "Anti-CCP antibody and rheumatoid factor",
+    "Plain radiographs of hands and feet (and/or joint ultrasound) for erosions"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "polyarthralgia": true,
+    "jointSwelling": true,
+    "symmetricSmallJointInvolvement": true,
+    "myalgiaArthralgia": true,
+    "weightLoss": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "rheumatoid",
+    "acceptableIds": [
+      "rheumatoid"
+    ],
+    "differentialIds": [
+      "sle_flare",
+      "crystal_arthritis",
+      "vasculitis",
+      "CHIKUNGUNYA"
+    ],
+    "investigations": [
+      "Anti-CCP antibody and rheumatoid factor",
+      "Radiographs of hands and feet / joint ultrasound",
+      "ESR and CRP"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include rheumatoid",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

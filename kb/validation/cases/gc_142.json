@@ -1,0 +1,105 @@
+{
+  "id": "gc_142",
+  "specialty": "Tropical Fever",
+  "condition": "Rickettsial Fever (Spotted Fever Group)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever for 6 days with headache and a spreading maculopapular rash",
+  "history": "Farmer from a rural district who presents with 6 days of continuous high-grade fever, severe frontal headache, generalized myalgia and malaise. On day 3 he noticed a rash that began on the wrists and ankles and spread centripetally to the trunk. He recalls working in scrub and vegetation and reports a small painless dark scab on the left thigh. No cough, dysuria or diarrhoea. No recent travel abroad and no comorbidities; not immunocompromised.",
+  "examination": "Ill-looking, febrile. Diffuse maculopapular rash involving palms, soles and trunk; a single necrotic eschar with an erythematous halo over the left thigh. Mild tender hepatosplenomegaly and small tender regional lymph nodes. No neck stiffness, no focal neurological deficit, chest clear, no murmur.",
+  "vitals": {
+    "hr": 108,
+    "bp": "108/70",
+    "rr": 20,
+    "temp": 39.4,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "12.8 g/dL",
+    "WBC": "6.2 x10^9/L",
+    "platelets": "88 x10^3/uL",
+    "creatinine": "1.1 mg/dL",
+    "ALT": "96 U/L",
+    "AST": "110 U/L",
+    "bilirubin": "1.3 mg/dL",
+    "sodium": "131 mmol/L",
+    "CRP": "112 mg/L"
+  },
+  "imaging": "Chest radiograph normal; ultrasound abdomen shows mild hepatosplenomegaly with no focal lesion or collection",
+  "microbiology": "Weil-Felix OX-2/OX-19 elevated; SFG-specific IgM/IgG immunofluorescence assay (IFA) sent and pending; blood cultures sterile; malaria smear and dengue NS1/IgM negative",
+  "differentialDiagnoses": [
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis",
+    "Enteric fever",
+    "Malaria"
+  ],
+  "finalDiagnosis": "Spotted fever group rickettsiosis",
+  "citations": [
+    "Harrison 22e — Rickettsial Diseases",
+    "IDSA Rocky Mountain Spotted Fever and Other Rickettsial Diseases 2016"
+  ],
+  "stewardship": "Empiric doxycycline 100 mg PO/IV twice daily is first-line for all suspected rickettsial infections and should be started on clinical suspicion without waiting for serology; response is typically dramatic within 48 hours",
+  "contraindications": [
+    "True doxycycline/tetracycline hypersensitivity",
+    "Caution in pregnancy though doxycycline remains recommended for life-threatening rickettsiosis; azithromycin is an alternative in mild disease/pregnancy"
+  ],
+  "edgeCases": [
+    "Eschar may be absent or unnoticed in spotted fever group, delaying diagnosis",
+    "Rash can be minimal or absent early ('spotless' fever), and palm/sole involvement is a key discriminating clue",
+    "Weil-Felix is insensitive/nonspecific; a negative result does not exclude rickettsiosis and IFA is confirmatory"
+  ],
+  "expectedMaiK": "This is a classic spotted fever group rickettsiosis: rural scrub exposure, eschar, centripetal maculopapular rash involving palms and soles, thrombocytopenia and transaminitis. Start empiric doxycycline immediately on clinical suspicion rather than awaiting confirmatory serology.",
+  "expectedNextQuestions": [
+    "Is there a tick bite or eschar, and any scrub/rural/animal exposure?",
+    "Does the rash involve the palms and soles and did it spread centripetally?"
+  ],
+  "expectedInvestigations": [
+    "Rickettsial IgM/IgG indirect immunofluorescence assay (IFA)",
+    "Full blood count, LFTs and renal function; consider PCR of eschar/blood where available"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "headache": true,
+    "myalgiaArthralgia": true,
+    "maculopapularRash": true,
+    "eschar": true,
+    "tickExposure": true,
+    "ruralExposure": true,
+    "hepatosplenomegaly": true,
+    "thrombocytopenia": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "RICKETTSIAL_FEVER",
+    "acceptableIds": [
+      "RICKETTSIAL_FEVER"
+    ],
+    "differentialIds": [
+      "SCRUB_TYPHUS",
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Rickettsial IFA serology (IgM/IgG)",
+      "Full blood count and LFTs"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include RICKETTSIAL_FEVER",
+    "empiric antibiotic recommendation must include doxycycline"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "id": "gc_216",
+  "specialty": "Pulmonary",
+  "condition": "Pleural effusion (exudative, parapneumonic-free large effusion)",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Progressive exertional breathlessness and right-sided pleuritic chest discomfort over 2 weeks",
+  "history": "62-year-old man with 3 weeks of gradually worsening dyspnoea, now breathless on climbing one flight of stairs, with a dull right-sided pleuritic ache and a dry cough. No orthopnoea or PND, no leg swelling. Ex-smoker (30 pack-years, quit 5 years ago). No fevers, no night sweats, no haemoptysis, no known TB contact. No recent long-haul travel or leg symptoms. PMH: hypertension on amlodipine; no known cardiac, renal or liver disease.",
+  "examination": "Comfortable at rest, mildly tachypnoeic on exertion. Trachea central. Reduced chest expansion on the right; stony dull percussion note over the right lower two-thirds; absent breath sounds and reduced vocal resonance over the right base with an area of bronchial breathing at the upper level of dullness. No raised JVP, no peripheral oedema, no ascites, no clubbing, no palpable lymphadenopathy. Left lung clear.",
+  "vitals": {
+    "hr": 92,
+    "bp": "134/82",
+    "rr": 22,
+    "temp": 37.1,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": "13.8 g/dL",
+    "WBC": "8.2 x10^9/L",
+    "CRP": "28 mg/L",
+    "creatinine": "0.9 mg/dL",
+    "albumin (serum)": "3.9 g/dL",
+    "LDH (serum)": "260 U/L",
+    "pleural fluid protein": "4.6 g/dL",
+    "pleural fluid LDH": "410 U/L",
+    "pleural fluid/serum protein ratio": "0.72 (>0.5)",
+    "pleural fluid/serum LDH ratio": "1.58 (>0.6)",
+    "pleural fluid pH": "7.42",
+    "pleural fluid glucose": "88 mg/dL",
+    "pleural fluid appearance": "straw-coloured, lymphocyte-predominant, no organisms on Gram stain"
+  },
+  "imaging": "CXR: large right pleural effusion with meniscus, blunted costophrenic angle and dense homogeneous basal opacity, no mediastinal shift. Bedside thoracic ultrasound: moderate-large anechoic free-flowing effusion, safe pocket for aspiration, no gross pleural nodularity. CT chest (contrast) planned to characterise pleura.",
+  "microbiology": "Pleural fluid Gram stain negative; cultures and AFB/GeneXpert pending; blood cultures negative",
+  "differentialDiagnoses": [
+    "Exudative pleural effusion (malignant vs parapneumonic vs TB)",
+    "Transudative effusion from heart failure",
+    "Pulmonary embolism with effusion",
+    "Tuberculous pleuritis"
+  ],
+  "finalDiagnosis": "Right-sided exudative pleural effusion (Light's criteria positive)",
+  "citations": [
+    "Harrison 22e — Disorders of the Pleura (Pleural Effusion)",
+    "BTS Pleural Disease Guideline 2023"
+  ],
+  "stewardship": "not applicable — non-infective; empiric antibiotics not indicated for an afebrile, non-purulent, pH-normal exudate. Antimicrobials only if pleural fluid/cultures confirm empyema or an infective cause is established.",
+  "contraindications": [
+    "Avoid draining >1.5 L at a single sitting (re-expansion pulmonary oedema risk)",
+    "Correct coagulopathy/anticoagulation before pleural intervention",
+    "Amlodipine: no antibiotic interaction concern as antibiotics not indicated"
+  ],
+  "edgeCases": [
+    "Borderline Light's criteria in a diuretic-treated heart-failure patient can misclassify a transudate as exudate — check serum-pleural albumin gradient (>1.2 g/dL suggests transudate)",
+    "Lymphocyte-predominant exudate with low glucose/high ADA should raise TB or malignancy despite negative Gram stain"
+  ],
+  "expectedMaiK": "A right-sided effusion meeting Light's criteria is an exudate, so the priority is to identify the underlying cause (malignancy, TB, parapneumonic) rather than treat empirically. Diagnostic thoracocentesis with cytology, biochemistry, ADA and microbiology plus CT of the pleura should guide management; antibiotics are not warranted in an afebrile non-infective exudate.",
+  "expectedNextQuestions": [
+    "Any weight loss, night sweats or haemoptysis to suggest malignancy or TB?",
+    "Any asbestos exposure, prior TB or occupational history?",
+    "Any orthopnoea, PND or leg swelling to suggest a cardiac transudate?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic thoracocentesis with pleural fluid protein/LDH, glucose, pH, cytology, ADA, differential cell count and cultures",
+    "Contrast CT chest to assess pleura for nodularity/mass",
+    "Consider pleural biopsy / medical thoracoscopy if cytology non-diagnostic and malignancy/TB suspected"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "coughRadio": true,
+    "chestPain": true,
+    "weightLoss": true,
+    "tachypnea": true,
+    "subacuteOnset": true,
+    "crepitations": true
+  },
+  "expected": {
+    "diagnosis": "pleural_effusion",
+    "acceptableIds": [
+      "pleural_effusion"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "pe",
+      "lung_cancer",
+      "PULMONARY_TB"
+    ],
+    "investigations": [
+      "Diagnostic thoracocentesis with Light's criteria (protein/LDH), cytology, ADA and microbiology",
+      "Contrast CT chest to characterise the pleura",
+      "Thoracic ultrasound to guide aspiration"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pleural_effusion",
+    "stewardship tier must be null (non-infective effusion, no empiric antibiotics)",
+    "differential must include a cardiac transudate cause (heart_failure)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

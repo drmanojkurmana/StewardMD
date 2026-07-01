@@ -1,0 +1,112 @@
+{
+  "id": "gc_111",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholangitis",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Fever with rigors, right upper quadrant pain and jaundice for 2 days",
+  "history": "64-year-old woman with a 2-day history of high-grade fever with shaking chills, colicky right upper quadrant pain and progressive yellowing of the eyes and dark urine. Reports pale stools and generalised pruritus. Known gallstones on ultrasound 1 year ago; declined elective cholecystectomy. Type 2 diabetes on metformin. No prior biliary surgery or stent. No recent travel.",
+  "examination": "Ill-appearing and jaundiced, mildly dehydrated. Scleral icterus. Tender right upper quadrant with voluntary guarding; Murphy sign equivocal, no rebound. No shifting dullness, no palpable mass. Chest clear, no focal neurology, alert and oriented (no confusion). No peripheral stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 112,
+    "bp": "104/64",
+    "rr": 22,
+    "temp": 38.9,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "16.8 x10^9/L (neutrophilia)",
+    "CRP": "184 mg/L",
+    "Total bilirubin": "6.8 mg/dL (predominantly conjugated)",
+    "ALP": "412 U/L",
+    "GGT": "486 U/L",
+    "ALT": "138 U/L",
+    "AST": "124 U/L",
+    "Albumin": "3.4 g/dL",
+    "INR": "1.3",
+    "Creatinine": "1.1 mg/dL",
+    "Lactate": "1.8 mmol/L",
+    "Random glucose": "212 mg/dL"
+  },
+  "imaging": "Abdominal ultrasound: cholelithiasis with a dilated common bile duct (11 mm) and intrahepatic biliary dilatation; distal CBD calculus suspected. MRCP confirms an 8 mm impacted stone in the distal common bile duct with upstream ductal dilatation; gallbladder wall not thickened.",
+  "microbiology": "Blood cultures x2 drawn before antibiotics — pending (commonly Escherichia coli, Klebsiella spp., Enterococcus); bile culture to be sent at ERCP.",
+  "differentialDiagnoses": [
+    "Acute cholangitis",
+    "Acute cholecystitis",
+    "Choledocholithiasis / biliary colic without infection",
+    "Liver abscess",
+    "Acute viral hepatitis"
+  ],
+  "finalDiagnosis": "Acute ascending cholangitis secondary to choledocholithiasis (Charcot triad; Tokyo Guidelines TG18 'definite' cholangitis)",
+  "citations": [
+    "Harrison 22e — Diseases of the Gallbladder and Bile Ducts",
+    "Tokyo Guidelines (TG18) for Acute Cholangitis 2018"
+  ],
+  "stewardship": "IV piperacillin-tazobactam 4.5 g q6-8h as empiric cover for enteric Gram-negatives (E. coli, Klebsiella) and enterococci per Tokyo Guidelines Grade II biliary sepsis, plus urgent biliary drainage by ERCP; de-escalate to blood/bile culture sensitivities. A carbapenem is preferred if prior ESBL history or healthcare-associated risk.",
+  "contraindications": [
+    "Beta-lactam / penicillin allergy — substitute a fluoroquinolone plus metronidazole",
+    "Renal impairment — dose-adjust piperacillin-tazobactam by creatinine clearance",
+    "Avoid delaying biliary drainage; antibiotics alone are inadequate source control"
+  ],
+  "edgeCases": [
+    "Elderly or diabetic patients may present with sepsis or hypotension without the full Charcot triad",
+    "Progression to Reynolds pentad (adds hypotension + confusion) signals suppurative cholangitis requiring emergent drainage",
+    "Post-ERCP or indwelling-stent cholangitis often involves resistant organisms (ESBL, Pseudomonas, Enterococcus)"
+  ],
+  "expectedMaiK": "Fever with rigors plus jaundice and RUQ pain (Charcot triad) with a dilated CBD and obstructing stone indicates acute ascending cholangitis — a biliary emergency requiring prompt blood cultures, empiric Gram-negative/enterococcal antibiotics, and urgent biliary decompression (ERCP), not antibiotics alone.",
+  "expectedNextQuestions": [
+    "Any prior ERCP, biliary stent or biliary surgery?",
+    "Any confusion or hypotension to suggest Reynolds pentad / suppurative cholangitis?",
+    "Prior ESBL/resistant organism or recent healthcare exposure guiding antibiotic choice?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures before antibiotics",
+    "MRCP / abdominal ultrasound to confirm ductal obstruction",
+    "Urgent ERCP for biliary drainage and bile culture"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "darkUrine": true,
+    "toxicAppearing": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "CHOLANGITIS",
+    "acceptableIds": [
+      "CHOLANGITIS"
+    ],
+    "differentialIds": [
+      "CHOLECYSTITIS",
+      "LIVER_ABSCESS",
+      "VIRAL_HEPATITIS",
+      "SBP"
+    ],
+    "investigations": [
+      "Blood cultures",
+      "MRCP / abdominal ultrasound",
+      "Urgent ERCP for biliary drainage"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CHOLANGITIS",
+    "differential must include CHOLECYSTITIS",
+    "stewardship must recommend empiric Gram-negative/enterococcal cover plus biliary drainage"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

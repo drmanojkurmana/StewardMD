@@ -1,0 +1,110 @@
+{
+  "id": "gc_205",
+  "specialty": "Hematology / Oncology",
+  "condition": "Multiple myeloma",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressive low back pain, fatigue and reduced urine output over 8 weeks",
+  "history": "68-year-old man with 2 months of worsening axial (thoracolumbar) bone pain, worse on movement, with intermittent rib pain after a minor cough. Increasing fatigue, exertional breathlessness and poor appetite with about 6 kg unintentional weight loss. Recent constipation, polyuria and low-grade confusion by family report. No fever, night sweats or trauma. PMH: hypertension. No known renal disease. Non-smoker.",
+  "examination": "Pale, mildly dehydrated, alert but slowed. Tenderness over lower thoracic/lumbar spine and left lower ribs. No focal long-tract signs, no lymphadenopathy, no hepatosplenomegaly. Chest clear, no organomegaly. No rash, no joint swelling. Pertinent negatives: no fever, no meningism, no focal neuro deficit, no petechiae.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/74",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "8.4 g/dL (normocytic)",
+    "calcium (corrected)": "12.8 mg/dL",
+    "creatinine": "2.9 mg/dL",
+    "urea": "16 mmol/L",
+    "albumin": "3.0 g/dL",
+    "total protein": "9.6 g/dL (high globulin gap)",
+    "ESR": "112 mm/hr",
+    "beta-2 microglobulin": "6.8 mg/L",
+    "peripheral smear": "rouleaux formation",
+    "serum protein electrophoresis": "monoclonal (M) spike in gamma region",
+    "serum free light chains": "kappa:lambda ratio markedly abnormal",
+    "WBC": "6.1 x10^9/L",
+    "platelets": "180 x10^3/µL"
+  },
+  "imaging": "Whole-body low-dose CT / skeletal survey: multiple well-defined lytic 'punched-out' lesions in skull, vertebrae and ribs; a lytic lesion in T9 with mild vertebral height loss; no aggressive periosteal reaction. MRI spine confirms marrow infiltration without cord compression.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Multiple myeloma",
+    "Metastatic carcinoma (e.g., prostate/lung) with lytic bone disease",
+    "Hypercalcaemia of malignancy from solid tumour",
+    "Symptomatic anaemia of chronic disease",
+    "MGUS / smouldering myeloma (excluded by CRAB features)"
+  ],
+  "finalDiagnosis": "Multiple myeloma (symptomatic, with CRAB: hypercalcaemia, renal impairment, anaemia, lytic bone lesions)",
+  "citations": [
+    "Harrison 22e — Plasma Cell Disorders (Multiple Myeloma)",
+    "IMWG Diagnosis and Management of Multiple Myeloma 2014/updated criteria"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid nephrotoxins and IV iodinated contrast where possible given AKI; hold NSAIDs",
+    "Bisphosphonate/zoledronic acid dose-adjust or avoid in significant renal impairment; ensure dental review before antiresorptives",
+    "Avoid gadolinium caution / correct hypercalcaemia and volume before any contrast"
+  ],
+  "edgeCases": [
+    "Non-secretory or light-chain-only myeloma can have a normal SPEP — serum free light chains and urine Bence Jones are essential",
+    "Cast nephropathy may present as the dominant feature (myeloma kidney) before bone pain",
+    "Hypercalcaemia can precipitate altered sensorium mimicking primary metabolic encephalopathy"
+  ],
+  "expectedMaiK": "Classic CRAB tetrad (hyperCalcaemia, Renal impairment, Anaemia, Bone lytic lesions) with a monoclonal protein points strongly to symptomatic multiple myeloma; confirm with SPEP/SFLC, urine light chains and bone marrow, and correct hypercalcaemia urgently.",
+  "expectedNextQuestions": [
+    "Any prior monoclonal gammopathy (MGUS) or abnormal protein noted before?",
+    "Symptoms of cord compression — leg weakness, sphincter disturbance, saddle anaesthesia?",
+    "Any recurrent infections or bleeding suggesting marrow failure?"
+  ],
+  "expectedInvestigations": [
+    "Serum & urine protein electrophoresis with immunofixation and serum free light chain assay",
+    "Bone marrow aspirate/trephine with plasma cell % and cytogenetics (FISH)",
+    "Whole-body MRI or low-dose CT for bone disease staging; corrected calcium and renal function"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "backPain": true,
+    "weightLoss": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "alteredSensorium": true,
+    "constipationOrDiarrhea": true,
+    "polyuriaPolydipsia": true,
+    "ageOver50": true,
+    "dyspnea": true
+  },
+  "expected": {
+    "diagnosis": "myeloma",
+    "acceptableIds": [
+      "myeloma"
+    ],
+    "differentialIds": [
+      "hypercalcemia",
+      "malignancy_b",
+      "anemia_sympt",
+      "aki"
+    ],
+    "investigations": [
+      "Serum/urine protein electrophoresis with immunofixation and serum free light chains",
+      "Bone marrow biopsy with FISH cytogenetics",
+      "Skeletal survey / whole-body low-dose CT and corrected calcium"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include myeloma",
+    "findings must include hypercalcemia and renalImpairment (CRAB features)",
+    "stewardship must be null / non-infective"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

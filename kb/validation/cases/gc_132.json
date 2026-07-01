@@ -1,0 +1,110 @@
+{
+  "id": "gc_132",
+  "specialty": "Respiratory",
+  "condition": "Lung Abscess",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of cough with large volumes of foul-smelling sputum, low-grade fever and weight loss.",
+  "history": "Insidious onset over 3 weeks with progressive productive cough now yielding copious foul, putrid sputum, drenching night sweats, anorexia and 5 kg weight loss. Reports an episode of heavy alcohol intoxication with a witnessed vomiting/aspiration event about a month earlier. PMH: alcohol dependence, poor dentition with periodontal disease; no COPD, no immunosuppression. Ex-smoker.",
+  "examination": "Cachectic, halitosis with markedly foul breath. Poor dental hygiene with gingival disease. Reduced breath sounds and bronchial breathing with coarse crepitations over the right posterior base; dullness to percussion in the same zone. No clubbing yet, no cyanosis. No neck stiffness, abdomen soft (pertinent negative: no hepatomegaly, no peripheral stigmata of endocarditis).",
+  "vitals": {
+    "hr": 98,
+    "bp": "118/74",
+    "rr": 20,
+    "temp": 38.2,
+    "spo2": 95
+  },
+  "labs": {
+    "WBC": "17.4 x10^9/L (neutrophilia)",
+    "CRP": "162 mg/L",
+    "Hemoglobin": "10.8 g/dL (anemia of chronic disease)",
+    "Albumin": "2.9 g/dL",
+    "Creatinine": "0.9 mg/dL",
+    "Blood cultures": "sent, pending",
+    "HIV serology": "negative"
+  },
+  "imaging": "Chest radiograph: thick-walled cavity with an air-fluid level in the right lower lobe (superior segment) posterior distribution. Contrast CT chest: solitary ~5 cm cavitary lesion with an air-fluid level and surrounding consolidation, thick irregular wall, in the dependent (posterior/superior-segment) lung — typical aspiration territory.",
+  "microbiology": "Sputum Gram stain shows mixed flora with foul odour suggestive of anaerobes; culture pending. Sputum AFB smear negative x1; GeneXpert MTB/RIF negative. Blood cultures pending.",
+  "differentialDiagnoses": [
+    "Lung abscess (anaerobic, post-aspiration)",
+    "Cavitating pulmonary tuberculosis",
+    "Cavitating bronchogenic carcinoma with post-obstructive necrosis",
+    "Necrotizing pneumonia",
+    "Aspiration pneumonia (pre-cavitation)"
+  ],
+  "finalDiagnosis": "Anaerobic lung abscess following aspiration",
+  "citations": [
+    "Harrison 22e — Lung Abscess",
+    "IDSA/ATS Community-Acquired Pneumonia in Adults 2019"
+  ],
+  "stewardship": "Empiric coverage of oral anaerobes and streptococci with IV ampicillin-sulbactam; alternative is a carbapenem or amoxicillin-clavulanate. Clindamycin is second-line due to resistance and C. difficile risk. Prolonged course (typically 3-6 weeks or until radiographic resolution). Tier: broad-spectrum beta-lactam/beta-lactamase inhibitor.",
+  "contraindications": [
+    "Penicillin allergy — substitute with a respiratory fluoroquinolone plus metronidazole, or a carbapenem if non-anaphylactic",
+    "Clindamycin carries appreciable C. difficile risk; monitor for diarrhea",
+    "Avoid monotherapy that misses anaerobes (e.g., plain fluoroquinolone alone)"
+  ],
+  "edgeCases": [
+    "A non-resolving or right-sided cavity in a non-aspirating, non-alcoholic patient (especially a smoker over 50) mandates bronchoscopy/CT to exclude an obstructing bronchogenic carcinoma",
+    "Multiple bilateral cavities suggest septic emboli (right-sided endocarditis / Lemierre) rather than a primary aspiration abscess",
+    "Melioidosis or Klebsiella (currant-jelly) abscess in endemic/diabetic patients"
+  ],
+  "expectedMaiK": "Classic post-aspiration anaerobic lung abscess: solitary thick-walled cavity with air-fluid level in a dependent segment, foul sputum, indolent course with weight loss, in a patient with alcohol excess and poor dentition. Treat with prolonged anaerobe-active beta-lactam/beta-lactamase inhibitor and exclude an underlying obstructing tumour if features are atypical.",
+  "expectedNextQuestions": [
+    "Was the aspiration event witnessed, and are there ongoing dysphagia or reduced-consciousness risk factors?",
+    "Any smoking history or hemoptysis raising concern for underlying malignancy?",
+    "Any TB contact, prior TB, or endemic exposure (melioidosis)?"
+  ],
+  "expectedInvestigations": [
+    "Contrast CT chest to characterise the cavity",
+    "Sputum culture including anaerobic and AFB/GeneXpert, plus blood cultures",
+    "Bronchoscopy if non-resolving or malignancy suspected"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "foulSmellingSputum": true,
+    "cavitatingLesion": true,
+    "aspirationRiskFactor": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "crepitations": true,
+    "subacuteOnset": true,
+    "alcoholExcess": true,
+    "consolidation": true
+  },
+  "expected": {
+    "diagnosis": "LUNG_ABSCESS",
+    "acceptableIds": [
+      "LUNG_ABSCESS"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "PULMONARY_TB",
+      "lung_cancer",
+      "CAP"
+    ],
+    "investigations": [
+      "Contrast CT chest",
+      "Sputum culture (anaerobic) and AFB/GeneXpert",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum beta-lactam/beta-lactamase inhibitor",
+      "antibiotics": [
+        "ampicillin-sulbactam",
+        "amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include LUNG_ABSCESS",
+    "cavitating lesion + foul sputum + aspiration risk must rank LUNG_ABSCESS above ASPIRATION_PNEUMONIA",
+    "empiric regimen must cover anaerobes"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

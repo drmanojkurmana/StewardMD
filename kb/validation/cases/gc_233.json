@@ -1,0 +1,93 @@
+{
+  "id": "gc_233",
+  "specialty": "Neurology",
+  "condition": "Tension-type headache",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Recurrent bilateral pressing headaches over several months",
+  "history": "34-year-old office worker with a 4-month history of near-daily, bilateral, band-like head pain of mild-to-moderate intensity. Each episode lasts hours, is not aggravated by routine activity (she continues to work), and is not associated with nausea, vomiting, or aura. Reports poor sleep, prolonged screen work, neck strain, and psychosocial stress at work. Occasional relief with simple analgesics but with rising OTC analgesic use. No prior neurological disease. No thunderclap onset, no positional or nocturnal worsening, no fever, no weight loss.",
+  "examination": "Well, alert, oriented. Pericranial and trapezius muscle tenderness bilaterally. No focal neurological deficit, normal fundoscopy with no papilloedema, no meningism, normal visual fields and cranial nerves, no scalp/temporal artery tenderness. Gait and coordination normal.",
+  "vitals": {
+    "hr": 72,
+    "bp": "118/76",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "CBC": "normal",
+    "CRP": "2 mg/L (normal)",
+    "ESR": "8 mm/hr (normal)",
+    "electrolytes": "normal",
+    "TSH": "normal"
+  },
+  "imaging": "Not indicated — no red-flag features; neuroimaging not required for classic episodic tension-type headache with normal examination",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Tension-type headache",
+    "Migraine without aura",
+    "Medication-overuse headache",
+    "Cervicogenic headache",
+    "Secondary headache (excluded clinically)"
+  ],
+  "finalDiagnosis": "Tension-type headache (frequent episodic)",
+  "citations": [
+    "Harrison 22e — Headache / Migraine and Other Primary Headache Disorders",
+    "IHS International Classification of Headache Disorders (ICHD-3) Tension-Type Headache 2018"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid opioids and butalbital; risk of medication-overuse headache with frequent simple-analgesic/NSAID use",
+    "NSAID caution in renal impairment or peptic ulcer disease"
+  ],
+  "edgeCases": [
+    "Transformation to chronic tension-type or medication-overuse headache with escalating analgesic use",
+    "Overlap with migraine (featureless migraine can mimic TTH); reassess if photophobia/phonophobia, nausea, or activity-limiting pain emerge",
+    "New red flags (thunderclap onset, papilloedema, focal deficit, age >50 with new headache, systemic features) mandate imaging and reconsideration"
+  ],
+  "expectedMaiK": "Bilateral pressing, non-disabling headache without migrainous features, nausea, or red flags in a young patient with a normal neurological exam is a classic primary tension-type headache; neuroimaging is not indicated. Screen for and limit analgesic overuse, and address sleep, stress, and posture.",
+  "expectedNextQuestions": [
+    "How many days per month is the headache present, and how many days per month are analgesics taken (to detect chronic TTH / medication-overuse)?",
+    "Are there any migrainous features (throbbing, nausea, photophobia/phonophobia, aggravation by activity) or red-flag features?"
+  ],
+  "expectedInvestigations": [
+    "No neuroimaging indicated; clinical diagnosis with headache diary and reassessment",
+    "Consider limited bloods (ESR/CRP, TSH) only if atypical features"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "headache": true,
+    "subacuteOnset": true,
+    "myalgiaArthralgia": true,
+    "stable": true,
+    "afebrile": true
+  },
+  "expected": {
+    "diagnosis": "tension_ha",
+    "acceptableIds": [
+      "tension_ha"
+    ],
+    "differentialIds": [
+      "migraine",
+      "iih",
+      "temporal_arteritis"
+    ],
+    "investigations": [
+      "No neuroimaging indicated (normal exam, no red flags)",
+      "Headache diary and analgesic-use review"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include tension_ha",
+    "must NOT recommend empiric antibiotics",
+    "must NOT mandate urgent CT/MRI in the absence of red flags"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

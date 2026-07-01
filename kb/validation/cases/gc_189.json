@@ -1,0 +1,108 @@
+{
+  "id": "gc_189",
+  "specialty": "Metabolic",
+  "condition": "Symptomatic hyponatraemia due to SIADH",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Progressive confusion, nausea and unsteadiness over 4 days",
+  "history": "4-day history of increasing lethargy, headache, nausea and gait unsteadiness noted by family, without vomiting, diarrhoea or reduced fluid intake. No thirst, no polyuria. Recently commenced on citalopram for depression 3 weeks ago; no diuretic use. Known small-cell lung carcinoma diagnosed 2 months ago, not yet treated. No history of heart failure, liver or renal disease, no diuretic use, no vomiting or diarrhoea. Euvolaemic on assessment.",
+  "examination": "Drowsy but rousable, GCS 14 (E4V4M6), disoriented to time. Clinically euvolaemic — moist mucous membranes, no oedema, no raised JVP, normal skin turgor, no postural drop. No focal neurological deficit, no neck stiffness. Chest clear. No ascites, no stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 78,
+    "bp": "128/76",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "serum sodium": "112 mmol/L",
+    "serum potassium": "4.1 mmol/L",
+    "serum osmolality": "238 mOsm/kg (low)",
+    "urine osmolality": "540 mOsm/kg (inappropriately concentrated)",
+    "urine sodium": "68 mmol/L",
+    "creatinine": "0.7 mg/dL",
+    "urea": "2.8 mmol/L (low)",
+    "TSH": "2.1 mIU/L (normal)",
+    "0900h cortisol": "480 nmol/L (normal)",
+    "glucose": "5.4 mmol/L",
+    "uric acid": "2.1 mg/dL (low)"
+  },
+  "imaging": "CT head: no acute intracranial lesion, no cerebral oedema. CT chest (prior): central lung mass consistent with known small-cell carcinoma.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "SIADH (drug-induced by SSRI and/or paraneoplastic from SCLC)",
+    "Hypovolaemic hyponatraemia",
+    "Hypothyroidism",
+    "Adrenal insufficiency",
+    "Primary polydipsia"
+  ],
+  "finalDiagnosis": "Symptomatic euvolaemic hyponatraemia secondary to SIADH (SSRI- and SCLC-related)",
+  "citations": [
+    "Harrison 22e — Disorders of Fluid and Electrolyte Balance (Hyponatremia / SIADH)",
+    "European (ERBP/ESE/ESICM) Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia 2014"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid rapid correction: limit rise to <8-10 mmol/L in 24h to prevent osmotic demyelination syndrome",
+    "Avoid isotonic saline as sole therapy in SIADH — may worsen sodium given high urine osmolality",
+    "Fluid overload / heart failure risk if hypertonic saline used without monitoring"
+  ],
+  "edgeCases": [
+    "Overly rapid correction causing osmotic demyelination syndrome (especially with baseline Na <120, alcoholism, malnutrition)",
+    "Reset osmostat variant of SIADH producing stable mild hyponatraemia that does not need aggressive correction",
+    "Coexisting hypocortisolism can mimic SIADH — must exclude before attributing to SIADH"
+  ],
+  "expectedMaiK": "Severe symptomatic euvolaemic hyponatraemia with low serum osmolality, inappropriately concentrated urine (>100 mOsm/kg), urine Na >30 mmol/L and normal thyroid/adrenal axes fits SIADH, here plausibly driven by an SSRI and paraneoplastic small-cell lung cancer. Because the patient is symptomatic (confusion), give 100-150 mL 3% hypertonic saline boluses but cap correction at 8-10 mmol/L per 24h to avoid osmotic demyelination.",
+  "expectedNextQuestions": [
+    "Is the patient truly euvolaemic (any recent vomiting, diarrhoea, diuretic or fluid loss)?",
+    "What is the full drug history, especially SSRIs, thiazides, carbamazepine?",
+    "Are there symptoms of adrenal insufficiency or hypothyroidism?"
+  ],
+  "expectedInvestigations": [
+    "Paired serum and urine osmolality with urine sodium",
+    "Thyroid function and 0900h cortisol (short Synacthen if borderline)",
+    "Review CT chest / staging for paraneoplastic SIADH source"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "ataxia": true,
+    "headache": true,
+    "malignancy": true,
+    "weightLoss": true,
+    "creatinine": true,
+    "urea": true,
+    "sex": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "hyponatremia",
+    "acceptableIds": [
+      "hyponatremia"
+    ],
+    "differentialIds": [
+      "adrenal_crisis",
+      "myxedema",
+      "metabolic_enceph",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "Paired serum and urine osmolality with urine sodium",
+      "Thyroid function tests and morning cortisol"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hyponatremia",
+    "stewardship tier must be null (non-infective)",
+    "differential must not include any infective disease id"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

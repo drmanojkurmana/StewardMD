@@ -1,0 +1,106 @@
+{
+  "id": "gc_219",
+  "specialty": "Urology",
+  "condition": "Renal / ureteric colic (obstructing urolithiasis)",
+  "age": 38,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe left loin pain radiating to the groin with visible blood in the urine",
+  "history": "3 hours of abrupt-onset, severe, colicky left flank pain that comes in waves and radiates to the left testicle and groin. Unable to lie still, pacing and writhing with the pain (in contrast to the stillness of peritonism). Associated nausea and two episodes of vomiting. Notes pink discolouration of the urine. No fever, no dysuria proper but some urinary urgency. Prior similar but milder episode 2 years ago that passed spontaneously. Works outdoors, drinks little water, lives in a hot climate. No anticoagulants. No prior urological surgery. Family history of kidney stones in father.",
+  "examination": "Restless, unable to find a comfortable position (writhing rather than lying still). Marked left costovertebral angle tenderness. Abdomen soft, non-distended, no guarding, no rebound, bowel sounds present. No palpable/pulsatile mass. No pallor. Testes non-tender, no scrotal swelling. Afebrile.",
+  "vitals": {
+    "hr": 98,
+    "bp": "142/86",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 99
+  },
+  "labs": {
+    "urinalysis": "non-visible-to-visible haematuria: 3+ blood, no nitrites, no leukocyte esterase",
+    "creatinine": "1.0 mg/dL (normal)",
+    "wbc": "9.2 ×10^3/µL (normal)",
+    "crp": "6 mg/L (near normal)",
+    "serum calcium": "9.6 mg/dL (normal)",
+    "serum urate": "6.8 mg/dL"
+  },
+  "imaging": "Non-contrast CT KUB (low-dose): 5 mm calculus at the left vesicoureteric junction with mild proximal hydroureteronephrosis and perinephric fat stranding; no free fluid, no aneurysm. This is the gold-standard confirmatory study.",
+  "microbiology": "n/a — urine culture sent to exclude concurrent infection, no pyuria",
+  "differentialDiagnoses": [
+    "Obstructing ureteric calculus (renal colic)",
+    "Pyelonephritis",
+    "Leaking abdominal aortic aneurysm",
+    "Acute appendicitis / biliary colic",
+    "Testicular torsion",
+    "Musculoskeletal loin pain"
+  ],
+  "finalDiagnosis": "Left obstructing vesicoureteric-junction calculus (renal/ureteric colic)",
+  "citations": [
+    "Harrison 22e — Nephrolithiasis",
+    "AUA/EAU Surgical Management of Stones / EAU Urolithiasis Guideline 2023"
+  ],
+  "stewardship": "not applicable — non-infective. Antibiotics only if obstruction complicated by infection (pyuria/fever), which would upgrade to obstructed infected system requiring urgent decompression.",
+  "contraindications": [
+    "NSAIDs (first-line analgesia) contraindicated/cautioned in renal impairment, active peptic ulcer, and dehydration-related AKI — use opioids if eGFR reduced",
+    "Avoid contrast CT if renal function impaired without hydration; low-dose non-contrast CT KUB preferred",
+    "Alpha-blocker (tamsulosin) MET caution: postural hypotension"
+  ],
+  "edgeCases": [
+    "Obstructing stone plus fever/pyuria = obstructed infected kidney: urological emergency needing emergent decompression (stent/nephrostomy), not just analgesia",
+    "Solitary or transplant kidney with obstruction = functional anuria/AKI",
+    "First 'stone' in an older patient with cardiovascular risk can be a leaking AAA mimicking left renal colic — always consider and image",
+    "Stones >10 mm rarely pass spontaneously and need intervention"
+  ],
+  "expectedMaiK": "Classic renal colic: a patient writhing with sudden severe loin-to-groin pain and haematuria but no peritonism strongly suggests an obstructing ureteric calculus; confirm with low-dose non-contrast CT KUB and, critically, exclude an obstructed infected system (fever/pyuria) and, in older patients, a leaking AAA before attributing pain to a stone.",
+  "expectedNextQuestions": [
+    "Any fever, rigors or urinary symptoms suggesting concurrent infection (obstructed infected kidney)?",
+    "Solitary/transplant kidney or is this bilateral?",
+    "Age/cardiovascular risk — could this be an AAA?",
+    "Time-course, prior stones and current urine output"
+  ],
+  "expectedInvestigations": [
+    "Low-dose non-contrast CT KUB",
+    "Urinalysis/dipstick for blood and infection",
+    "Serum creatinine/eGFR",
+    "Urine culture",
+    "Serum calcium and urate; stone analysis if passed"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "flankPain": true,
+    "severeAbdominalPain": true,
+    "abdominalPain": true,
+    "hematuria": true,
+    "costovertebralTenderness": true,
+    "nauseaVomiting": true,
+    "urinaryFrequency": true,
+    "backPain": true
+  },
+  "expected": {
+    "diagnosis": "renal_colic",
+    "acceptableIds": [
+      "renal_colic"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "aaa",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "Low-dose non-contrast CT KUB",
+      "Urinalysis",
+      "Serum creatinine/eGFR"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include renal_colic",
+    "stewardship tier must be null (non-infective)",
+    "differential must include an obstructed/infected mimic (PYELONEPHRITIS)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

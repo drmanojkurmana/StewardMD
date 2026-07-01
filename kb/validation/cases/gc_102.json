@@ -1,0 +1,99 @@
+{
+  "id": "gc_102",
+  "specialty": "Respiratory",
+  "condition": "Acute Bronchitis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Cough for 6 days, initially dry now with some clear-to-yellow sputum, following a head cold",
+  "history": "Previously well non-smoker presents with a 6-day history of cough. It began 2 days after coryzal symptoms (sore throat, nasal congestion, low-grade malaise). The cough was dry at first and is now occasionally productive of scanty mucoid, sometimes yellowish, sputum. He reports mild substernal discomfort with bouts of coughing but no pleuritic pain and no true breathlessness at rest. No haemoptysis, no night sweats, no weight loss. Several colleagues at work have had a similar 'chest cold'. No underlying lung disease, no asthma, no immunosuppression, no recent travel, no TB contact. Not on any regular medication; no drug allergies.",
+  "examination": "Comfortable at rest, not toxic, well perfused. Mild pharyngeal erythema. Chest: normal expansion, resonant percussion, vesicular breath sounds with occasional scattered wheeze that clears on coughing; no focal crepitations, no bronchial breathing, no signs of consolidation. No lymphadenopathy. Cardiovascular and abdominal examination unremarkable. Pertinent negatives: no localised crackles, no dullness, no accessory muscle use, no cyanosis.",
+  "vitals": {
+    "hr": 84,
+    "bp": "122/76",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "8.9 x10^9/L (normal differential)",
+    "CRP": "9 mg/L (mildly raised)",
+    "Hemoglobin": "14.6 g/dL",
+    "Creatinine": "0.9 mg/dL",
+    "Procalcitonin": "0.05 ng/mL (low)"
+  },
+  "imaging": "Chest X-ray (obtained to exclude pneumonia given persistent cough): no consolidation, no effusion, normal cardiac silhouette and lung fields",
+  "microbiology": "Not routinely indicated; if sent, sputum is scant and non-diagnostic. Most cases viral (rhinovirus, coronavirus, influenza, RSV, parainfluenza)",
+  "differentialDiagnoses": [
+    "Acute bronchitis (viral)",
+    "Community-acquired pneumonia",
+    "Acute asthma / post-viral bronchial hyperreactivity",
+    "Pertussis",
+    "Acute exacerbation of undiagnosed COPD",
+    "Upper respiratory tract infection"
+  ],
+  "finalDiagnosis": "Acute bronchitis (self-limiting, predominantly viral)",
+  "citations": [
+    "Harrison 22e — Acute Bronchitis and Acute Tracheobronchitis",
+    "ACCP/CHEST Cough Due to Acute Bronchitis 2006"
+  ],
+  "stewardship": "No empiric antibiotic. Acute bronchitis in a previously healthy adult is overwhelmingly viral and self-limiting; normal vitals, absence of focal chest signs, normal CXR and low procalcitonin argue strongly against bacterial pneumonia. Manage symptomatically (fluids, antitussive/analgesia as needed); antibiotics do not shorten illness and drive resistance/adverse effects. Antibiotic stewardship: avoid antibiotics unless features of pneumonia, pertussis (targeted macrolide), or superimposed bacterial infection emerge.",
+  "contraindications": [
+    "Avoid unnecessary macrolides/fluoroquinolones — QT prolongation and C. difficile risk without benefit",
+    "If pertussis suspected in pregnancy, azithromycin preferred over doxycycline"
+  ],
+  "edgeCases": [
+    "Cough can persist 2-3 weeks (post-bronchitic bronchial hyperreactivity) and does NOT imply treatment failure or need for antibiotics",
+    "Purulent (yellow/green) sputum reflects sloughed tracheobronchial epithelium and does NOT indicate bacterial infection",
+    "Whooping/paroxysmal cough with post-tussive vomiting should prompt consideration of pertussis; focal crackles or hypoxia should prompt re-evaluation for pneumonia"
+  ],
+  "expectedMaiK": "This is a classic self-limiting acute bronchitis in a healthy adult; the constellation of normal vitals, absent focal chest findings, clear CXR and low procalcitonin makes bacterial pneumonia very unlikely, so antibiotics are not indicated. Advise symptomatic care and safety-net for hypoxia, high fever, or focal signs.",
+  "expectedNextQuestions": [
+    "Any paroxysmal/whooping cough or post-tussive vomiting to suggest pertussis?",
+    "Any breathlessness at rest, high fever, rigors or pleuritic pain suggesting pneumonia?",
+    "Any history of asthma, smoking or prior similar episodes?"
+  ],
+  "expectedInvestigations": [
+    "No routine investigation needed in a well patient; chest X-ray only if pneumonia suspected (focal signs, high fever, tachypnoea, hypoxia, HR >100, or elderly)",
+    "Consider pertussis testing if paroxysmal cough >2 weeks"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "coughRadio": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "coryza": true,
+    "soreThroat": true,
+    "chestPain": true,
+    "afebrile": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "ACUTE_BRONCHITIS",
+    "acceptableIds": [
+      "ACUTE_BRONCHITIS"
+    ],
+    "differentialIds": [
+      "CAP",
+      "URTI",
+      "COPD_EXACERBATION",
+      "PHARYNGITIS"
+    ],
+    "investigations": [
+      "Chest X-ray only if pneumonia suspected",
+      "Pertussis testing if paroxysmal cough >2 weeks"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ACUTE_BRONCHITIS",
+    "must NOT recommend empiric antibiotics for a well, afebrile patient with normal CXR",
+    "CAP should appear in differential but rank below ACUTE_BRONCHITIS given clear CXR and normal vitals"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

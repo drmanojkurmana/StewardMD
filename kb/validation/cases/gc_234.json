@@ -1,0 +1,109 @@
+{
+  "id": "gc_234",
+  "specialty": "Endocrine",
+  "condition": "Thyroid storm",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Fever, palpitations, agitation and vomiting for 24 hours after a recent flu-like illness",
+  "history": "34-year-old woman with a 2-year history of Graves' disease, poorly compliant with carbimazole, presenting with 24 hours of high fever, drenching sweats, marked palpitations, tremor, restlessness and multiple episodes of vomiting and loose stools. Symptoms escalated after an intercurrent upper-respiratory infection. Over the preceding weeks she reported heat intolerance, weight loss despite good appetite, and worsening anxiety. No chest pain. No recent iodinated contrast. Family reports increasing confusion in the last few hours.",
+  "examination": "Agitated, restless and disoriented (delirious). Warm, moist skin with profuse diaphoresis. Fine resting tremor of outstretched hands, brisk reflexes. Diffuse smooth goitre with an audible bruit; mild proptosis and lid lag bilaterally. Cardiovascular: irregularly irregular pulse, hyperdynamic apex, no murmur; no raised JVP or basal crackles (no overt heart failure). Chest clear. Abdomen soft; no focal source of sepsis identified; no neck stiffness.",
+  "vitals": {
+    "hr": 148,
+    "bp": "158/62",
+    "rr": 26,
+    "temp": 40.1,
+    "spo2": 97
+  },
+  "labs": {
+    "TSH": "<0.01 mIU/L (suppressed)",
+    "Free T4": "58 pmol/L (markedly elevated)",
+    "Free T3": "22 pmol/L (markedly elevated)",
+    "TRAb": "positive (elevated)",
+    "WBC": "12.4 x10^9/L",
+    "Glucose": "9.8 mmol/L",
+    "Corrected calcium": "2.68 mmol/L (mildly raised)",
+    "AST/ALT": "mildly elevated",
+    "Bilirubin": "1.8 mg/dL (mild)",
+    "Creatinine": "0.9 mg/dL",
+    "Na": "138 mmol/L"
+  },
+  "imaging": "ECG: atrial fibrillation with rapid ventricular response, no acute ischaemic changes. CXR: no consolidation or pulmonary oedema. Thyroid uptake scan not indicated acutely.",
+  "microbiology": "Blood/urine cultures sent as part of precipitant screen; no source identified — pending / n/a",
+  "differentialDiagnoses": [
+    "Thyroid storm (decompensated thyrotoxicosis)",
+    "Sepsis / systemic infection",
+    "Sympathomimetic or anticholinergic toxidrome",
+    "Serotonin syndrome / neuroleptic malignant syndrome",
+    "Phaeochromocytoma crisis"
+  ],
+  "finalDiagnosis": "Thyroid storm (Burch-Wartofsky ~70) on a background of Graves' disease, precipitated by intercurrent infection and treatment non-adherence",
+  "citations": [
+    "Harrison 22e — Hypothyroidism and Thyrotoxicosis (Disorders of the Thyroid Gland)",
+    "ATA Hyperthyroidism and Other Causes of Thyrotoxicosis 2016"
+  ],
+  "stewardship": "not applicable — non-infective (thyroid storm itself is not treated with antibiotics; culture and treat only a confirmed precipitating infection). Definitive therapy: beta-blockade (propranolol), thionamide (propylthiouracil or carbimazole), iodine ≥1 hour AFTER thionamide (Lugol's/SSKI), and hydrocortisone.",
+  "contraindications": [
+    "Avoid beta-blockade if overt cardiac failure/cardiogenic shock — use with caution and rate-control judiciously",
+    "PTU carries risk of fulminant hepatotoxicity; carbimazole/methimazole risk of agranulocytosis",
+    "Do NOT give iodine before a thionamide (would fuel hormone synthesis); avoid aspirin for pyrexia (displaces T4 from binding proteins)"
+  ],
+  "edgeCases": [
+    "Apathetic thyroid storm in the elderly — presents with lethargy, weakness and heart failure rather than agitation",
+    "Amiodarone-induced or iodinated-contrast-precipitated storm without classic Graves' eye signs",
+    "High-output cardiac failure or thromboembolism from new AF may dominate the picture"
+  ],
+  "expectedMaiK": "This is a life-threatening decompensated thyrotoxicosis (thyroid storm): treat empirically on clinical grounds—do not wait for thyroid function results. Give beta-blocker plus a thionamide, add iodine at least an hour after the thionamide, and cover with hydrocortisone, while actively seeking and treating the precipitant (here, infection and non-adherence).",
+  "expectedNextQuestions": [
+    "Any missed doses of antithyroid medication or recent iodine/contrast/amiodarone exposure?",
+    "Is there a precipitating infection, recent surgery, trauma, or pregnancy?",
+    "Any chest pain, orthopnoea or signs of cardiac decompensation to guide beta-blocker safety?"
+  ],
+  "expectedInvestigations": [
+    "Free T4, Free T3 and TSH (confirmatory, do not delay treatment)",
+    "ECG and continuous cardiac monitoring for AF/rate",
+    "Septic screen and precipitant workup (cultures, CXR, pregnancy test), LFTs and calcium"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "palpitations": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "weightLoss": true,
+    "atrialFibHx": true,
+    "toxicAppearing": true,
+    "tachypnea": true
+  },
+  "expected": {
+    "diagnosis": "thyroid_storm",
+    "acceptableIds": [
+      "thyroid_storm"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "serotonin_nms",
+      "pheo",
+      "atrial_fib"
+    ],
+    "investigations": [
+      "Free T4 / Free T3 / TSH",
+      "ECG and cardiac monitoring",
+      "Septic screen / precipitant workup"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include thyroid_storm",
+    "expected.stewardship.tier must be null (non-infective)",
+    "differentialIds must include SEPSIS as the key mimic"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

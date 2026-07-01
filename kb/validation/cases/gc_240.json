@@ -1,0 +1,101 @@
+{
+  "id": "gc_240",
+  "specialty": "Neurology / Cardiology",
+  "condition": "Vasovagal / orthostatic syncope",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Brief loss of consciousness after standing in a hot, crowded queue",
+  "history": "Previously well 24-year-old student who fainted while standing in a warm, crowded examination hall. Preceding 30-45 seconds of lightheadedness, nausea, sweating, warmth, tunnelling of vision and muffled hearing before collapsing. Witnesses describe her slumping to the floor, pale and clammy, with a few seconds of unconsciousness and rapid, complete recovery on lying flat. No tongue-biting, no incontinence, no post-event confusion. Similar milder episodes on prolonged standing and after venepuncture since teenage years. No cardiac symptoms at rest, no exertional syncope. Fasted since morning with poor fluid intake. No prescribed medications, no recreational drugs, no family history of sudden cardiac death.",
+  "examination": "Alert and fully oriented after the event, GCS 15. Warm, well perfused, no focal neurological deficit, normal gait, no tongue laceration. Cardiovascular exam normal with no murmurs and normal apex. Supine BP 118/74 with lying-to-standing drop to 104/68 at 3 minutes and reproduction of mild lightheadedness. Pertinent negatives: no exertional or supine onset, no prodrome-free 'drop attack', no cardiac murmur, no post-ictal state, no meningism.",
+  "vitals": {
+    "hr": 68,
+    "bp": "118/74",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": "13.2 g/dL",
+    "glucose": "5.1 mmol/L (capillary at scene 4.8)",
+    "sodium": "139 mmol/L",
+    "potassium": "4.1 mmol/L",
+    "creatinine": "0.8 mg/dL",
+    "troponin": "undetectable",
+    "betaHCG": "negative"
+  },
+  "imaging": "not indicated for typical reflex syncope; CT head deferred (no head injury, no focal deficit, normal neuro exam)",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Vasovagal (reflex neurally-mediated) syncope",
+    "Orthostatic hypotension",
+    "Cardiac arrhythmia / structural syncope",
+    "Seizure",
+    "Hypoglycaemia"
+  ],
+  "finalDiagnosis": "Vasovagal syncope (reflex neurally-mediated syncope) with orthostatic component",
+  "citations": [
+    "Harrison 22e — Syncope",
+    "ESC Guidelines for the Diagnosis and Management of Syncope 2018"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid beta-blockers as first-line for vasovagal syncope (no proven benefit under age 42)",
+    "Caution with midodrine/fludrocortisone in hypertension, heart failure or urinary retention if pharmacotherapy later considered"
+  ],
+  "edgeCases": [
+    "Convulsive syncope: brief myoclonic jerks from cerebral hypoperfusion can mimic epilepsy — the presence of a clear autonomic prodrome and rapid recovery without post-ictal confusion favours syncope",
+    "Exertional or supine syncope, syncope without prodrome, or a family history of sudden death should redirect toward cardiac (arrhythmic/structural) causes and mandate ECG/echo and rhythm monitoring"
+  ],
+  "expectedMaiK": "Classic reflex (vasovagal) syncope in a young patient: an orthostatic/emotional trigger with autonomic prodrome and rapid full recovery makes this benign, but a resting 12-lead ECG is mandatory to exclude arrhythmic causes before reassurance. Emphasise conservative measures (hydration, salt, counter-pressure manoeuvres) over drugs.",
+  "expectedNextQuestions": [
+    "Was there any prodrome, and was onset on standing or with emotion/pain rather than during exertion or when supine?",
+    "Any family history of sudden cardiac death or inherited arrhythmia?",
+    "Any tongue-biting, incontinence or post-event confusion to suggest seizure?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Orthostatic (lying and standing) blood pressure measurement",
+    "Capillary blood glucose"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "syncope": true,
+    "sex": true,
+    "age": true,
+    "heartRate": true,
+    "sbp": true,
+    "dbp": true,
+    "nauseaVomiting": true,
+    "dehydration": true
+  },
+  "expected": {
+    "diagnosis": "vasovagal_syncope",
+    "acceptableIds": [
+      "vasovagal_syncope"
+    ],
+    "differentialIds": [
+      "atrial_fib",
+      "aortic_stenosis",
+      "seizure_epilepsy",
+      "hypoglycemia"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Orthostatic blood pressure measurement",
+      "Capillary blood glucose"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include vasovagal_syncope",
+    "expected.stewardship.tier must be null (non-infective)",
+    "acceptableIds must equal [vasovagal_syncope]"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

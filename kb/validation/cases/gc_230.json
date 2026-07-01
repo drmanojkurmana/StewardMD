@@ -1,0 +1,104 @@
+{
+  "id": "gc_230",
+  "specialty": "Oncology / Emergency",
+  "condition": "Superior vena cava obstruction (SVC syndrome)",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Two weeks of progressive facial and arm swelling with breathlessness and a sensation of head fullness",
+  "history": "62-year-old man, 40 pack-year smoker, with 6 weeks of unintentional weight loss (~5 kg) and a persistent dry cough. Over the past 2 weeks he has developed swelling of the face and both arms, distended neck veins, and a bursting/fullness sensation in the head that worsens on bending forward or lying flat. He reports progressive exertional dyspnoea, hoarse voice, and mild dysphagia. No fever. No chest trauma. No known malignancy previously.",
+  "examination": "Plethoric, cyanotic dusky face with periorbital and bilateral upper-limb oedema. Distended, non-pulsatile neck veins and dilated superficial venous collaterals over the anterior chest wall. Positive Pemberton sign (facial congestion and stridor on raising both arms). Right supraclavicular firm lymph node. Chest: reduced air entry right upper zone. Pertinent negatives: no calf swelling or tenderness, no pericardial rub, JVP elevated but non-pulsatile, no ascites, no focal neurology.",
+  "vitals": {
+    "hr": 96,
+    "bp": "128/78",
+    "rr": 22,
+    "temp": 37,
+    "spo2": 95
+  },
+  "labs": {
+    "Hemoglobin": "13.1 g/dL",
+    "WCC": "8.4 x10^9/L",
+    "Platelets": "265 x10^3/uL",
+    "Creatinine": "0.9 mg/dL",
+    "Sodium": "131 mmol/L (mild SIADH pattern)",
+    "LDH": "410 U/L (elevated)",
+    "Corrected calcium": "2.4 mmol/L (normal)"
+  },
+  "imaging": "CXR: right superior mediastinal widening with a right paratracheal mass and right upper-lobe opacity. Contrast CT chest: 6 cm right upper-lobe/mediastinal mass encasing and severely narrowing the SVC with extensive venous collateral formation; mediastinal and right hilar lymphadenopathy; no acute pulmonary embolus.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Superior vena cava obstruction due to malignant mediastinal mass (lung cancer)",
+    "SVC thrombosis (catheter-related / thrombotic)",
+    "Lymphoma with mediastinal involvement",
+    "Fibrosing mediastinitis",
+    "Bilateral DVT / decompensated heart failure (mimics)"
+  ],
+  "finalDiagnosis": "Superior vena cava obstruction secondary to malignant mediastinal mass (likely bronchogenic carcinoma)",
+  "citations": [
+    "Harrison 22e — Oncologic Emergencies (Superior Vena Cava Syndrome)",
+    "Harrison 22e — Neoplasms of the Lung",
+    "NCCN Small Cell Lung Cancer / Oncologic Emergencies SVC Syndrome 2023"
+  ],
+  "stewardship": "not applicable — non-infective oncologic emergency",
+  "contraindications": [
+    "Avoid upper-limb IV access / central lines on the obstructed (upper-body) side — use lower-limb or femoral access",
+    "Avoid empiric high-dose steroids before biopsy in suspected lymphoma (can obscure histology) unless airway/cerebral compromise",
+    "Anticoagulation only if documented thrombus; caution if biopsy/procedure planned"
+  ],
+  "edgeCases": [
+    "Non-malignant SVCO from indwelling central venous catheters or pacemaker leads is increasingly common and needs thrombosis/lead evaluation",
+    "Cerebral oedema, laryngeal oedema/stridor, or haemodynamic compromise define a true emergency requiring urgent endovascular stenting before tissue diagnosis",
+    "Small-cell lung cancer and lymphoma are highly treatment-responsive, so obtaining tissue diagnosis before radiotherapy is preferred when the patient is stable"
+  ],
+  "expectedMaiK": "Facial/upper-limb swelling with distended non-pulsatile neck veins, dilated chest-wall collaterals and a positive Pemberton sign in a smoker with a mediastinal mass indicates superior vena cava obstruction; secure lower-limb venous access, obtain contrast CT and urgent tissue diagnosis, and escalate to stenting/oncology as this is an oncologic emergency, not an infective process.",
+  "expectedNextQuestions": [
+    "Any indwelling central venous catheter, pacemaker/ICD lead, or prior thrombosis? (malignant vs thrombotic SVCO)",
+    "Any stridor, worst-ever headache, visual change, or drowsiness suggesting laryngeal/cerebral oedema needing emergency intervention?",
+    "Smoking history and any prior malignancy or B-symptoms (fever, night sweats, weight loss)?"
+  ],
+  "expectedInvestigations": [
+    "Contrast CT of the chest (venous phase) to define level/cause of obstruction",
+    "Tissue diagnosis — sputum cytology, CT-guided or bronchoscopic biopsy, or lymph-node biopsy",
+    "Doppler/venogram if thrombosis suspected"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "facialSwelling": true,
+    "dyspnea": true,
+    "raisedJVP": true,
+    "weightLoss": true,
+    "coughRadio": true,
+    "malignancy": true,
+    "lymphadenopathy": true,
+    "legSwellingBilateral": true,
+    "dysphagia": true
+  },
+  "expected": {
+    "diagnosis": "svc_obstruction",
+    "acceptableIds": [
+      "svc_obstruction"
+    ],
+    "differentialIds": [
+      "lung_cancer",
+      "dvt",
+      "heart_failure",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Contrast CT chest (venous phase)",
+      "Tissue biopsy for histological diagnosis"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include svc_obstruction",
+    "stewardship.tier must be null (non-infective condition)",
+    "differentialIds must include lung_cancer"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

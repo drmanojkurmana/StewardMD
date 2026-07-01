@@ -1,0 +1,117 @@
+{
+  "id": "gc_147",
+  "specialty": "Respiratory",
+  "condition": "Severe Community Acquired Pneumonia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Three days of fever, productive cough and worsening breathlessness with confusion since this morning.",
+  "history": "A 68-year-old man presents with a 3-day history of high fever with rigors, cough productive of rust-coloured purulent sputum, and right-sided pleuritic chest pain. Over the last 24 hours he has become increasingly breathless at rest and his family report new confusion and reduced oral intake. Background of hypertension and 40-pack-year smoking history; no recent hospitalization, no antibiotics in the last 90 days, no recent travel or aspiration event. Community-onset illness.",
+  "examination": "Ill and toxic-appearing, confused (disoriented to time and place). Central cyanosis. Tachypnoeic with accessory muscle use. Right lower and mid-zone bronchial breathing, coarse crepitations and increased vocal resonance over the right base. No neck stiffness, no calf swelling, no peripheral stigmata of endocarditis; JVP not raised, no basal bilateral crackles suggestive of pulmonary oedema.",
+  "vitals": {
+    "hr": 118,
+    "bp": "88/56",
+    "rr": 34,
+    "temp": 39.4,
+    "spo2": 86
+  },
+  "labs": {
+    "WBC": "19.8 x10^9/L (neutrophilia, left shift)",
+    "CRP": "312 mg/L",
+    "urea": "11.4 mmol/L",
+    "creatinine": "1.6 mg/dL",
+    "lactate": "3.4 mmol/L",
+    "ABG": "pH 7.31, PaO2 54 mmHg on room air, PaCO2 38 mmHg, PaO2:FiO2 ~228",
+    "procalcitonin": "8.7 ng/mL",
+    "platelets": "142 x10^3/uL",
+    "sodium": "132 mmol/L"
+  },
+  "imaging": "Chest radiograph: dense right lower lobe consolidation with air bronchograms plus patchy right mid-zone infiltrate (multilobar involvement); small ipsilateral parapneumonic effusion. No cavitation.",
+  "microbiology": "Two sets of blood cultures and sputum Gram stain/culture sent before antibiotics; urinary pneumococcal and Legionella antigens sent. Results pending. SARS-CoV-2 and influenza PCR sent.",
+  "differentialDiagnoses": [
+    "Severe community-acquired pneumonia (pneumococcal)",
+    "Aspiration pneumonia",
+    "Pulmonary embolism with infarction",
+    "Acute cardiogenic pulmonary oedema",
+    "Lung abscess / cavitating pneumonia"
+  ],
+  "finalDiagnosis": "Severe community-acquired pneumonia (likely Streptococcus pneumoniae) with sepsis, meeting ICU-admission criteria (CURB-65 = 4)",
+  "citations": [
+    "Harrison 22e — Pneumonia",
+    "IDSA/ATS Community-Acquired Pneumonia in Adults 2019"
+  ],
+  "stewardship": "Severe CAP requiring ICU-level care: empiric IV beta-lactam (ceftriaxone or ampicillin-sulbactam) PLUS a macrolide (azithromycin) OR a beta-lactam plus respiratory fluoroquinolone (levofloxacin), per IDSA/ATS 2019 severe-CAP inpatient regimen. Add MRSA/Pseudomonas cover only if locally validated risk factors present (none here). Blood/sputum cultures and pneumococcal + Legionella urinary antigens before first dose; de-escalate on results.",
+  "contraindications": [
+    "Macrolides and fluoroquinolones prolong QT — review ECG/QTc and avoid combining with other QT-prolonging drugs",
+    "Fluoroquinolone caution in elderly (tendinopathy, dysglycaemia, CNS effects, C. difficile risk)",
+    "Dose-adjust renally cleared agents (e.g. levofloxacin) for the acute kidney injury (creatinine 1.6 mg/dL)"
+  ],
+  "edgeCases": [
+    "CURB-65 can under-triage: a young patient with profound hypoxaemia or multilobar disease may be severe despite a low score — use IDSA/ATS minor criteria / need for vasopressors or mechanical ventilation",
+    "Post-influenza CAP raises the probability of Staphylococcus aureus (including MRSA) and warrants reconsideration of empiric cover",
+    "Rapidly cavitating or necrotizing consolidation should prompt suspicion of MRSA or anaerobes and shift towards lung abscess"
+  ],
+  "expectedMaiK": "This is severe CAP with septic physiology (hypotension, lactate 3.4, PaO2:FiO2 ~228, confusion; CURB-65 = 4) requiring ICU assessment. Start guideline-concordant combination therapy (beta-lactam plus macrolide, or beta-lactam plus respiratory fluoroquinolone) immediately after cultures and antigen testing, with fluid resuscitation and oxygen; escalate care and reassess for MRSA/Pseudomonas risk factors.",
+  "expectedNextQuestions": [
+    "Any recent influenza-like illness or confirmed influenza (raises S. aureus/MRSA risk)?",
+    "Any structural lung disease, prior Pseudomonas isolation, or recent IV antibiotics/hospitalization (MDR risk factors)?",
+    "Aspiration risk — witnessed choking, dysphagia, or reduced consciousness preceding onset?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 and sputum Gram stain/culture before antibiotics",
+    "Pneumococcal and Legionella urinary antigen tests",
+    "Serial arterial blood gas / lactate and repeat chest imaging; respiratory viral PCR (influenza, SARS-CoV-2)"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "pleuriticPain": true,
+    "crepitations": true,
+    "consolidation": true,
+    "multilobar": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "severeCriteria": true,
+    "curb65": true,
+    "lactateElevated": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "SEVERE_CAP",
+    "acceptableIds": [
+      "SEVERE_CAP"
+    ],
+    "differentialIds": [
+      "CAP",
+      "ASPIRATION_PNEUMONIA",
+      "LUNG_ABSCESS",
+      "pe"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "Sputum Gram stain and culture",
+      "Pneumococcal and Legionella urinary antigens",
+      "Arterial blood gas and serum lactate"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SEVERE_CAP",
+    "findings include severeCriteria and hypotension so engine must flag severe/ICU-level disease, not uncomplicated CAP",
+    "stewardship tier must not be null (infective case) and empiric regimen must include atypical (macrolide/fluoroquinolone) cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

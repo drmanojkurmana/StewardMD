@@ -1,0 +1,112 @@
+{
+  "id": "gc_123",
+  "specialty": "Central Nervous System",
+  "condition": "Acute Viral Encephalitis (HSV-1)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Fever, confusion and a witnessed seizure over 3 days",
+  "history": "Previously well 34-year-old man with a 3-day history of fever and frontal headache, followed by progressive behavioural change (uncharacteristic irritability, disorientation to time and place) and one witnessed generalised tonic-clonic seizure this morning. Partner reports word-finding difficulty and transient odd smells the day before. No recent travel, animal or tick exposure, no immunosuppression, fully immunised. No neck trauma or drug use.",
+  "examination": "Febrile, GCS 13 (E3 V4 M6), disoriented with expressive dysphasia and a subtle right facial droop. Mild neck stiffness but no true meningism; Kernig negative. No papilloedema on fundoscopy. No rash, no lymphadenopathy, no ear/sinus focus. Cardiovascular and respiratory exam normal.",
+  "vitals": {
+    "hr": 104,
+    "bp": "128/78",
+    "rr": 20,
+    "temp": 38.9,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "11.8 x10^3/uL (neutrophils 72%)",
+    "CRP": "34 mg/L",
+    "Sodium": "137 mmol/L",
+    "Creatinine": "0.9 mg/dL",
+    "Glucose": "5.6 mmol/L (paired with CSF)",
+    "CSF opening pressure": "22 cmH2O",
+    "CSF WCC": "180 /uL, lymphocyte-predominant (88%)",
+    "CSF RBC": "45 /uL (no traumatic gradient)",
+    "CSF protein": "0.82 g/L (elevated)",
+    "CSF glucose": "3.4 mmol/L (CSF:serum ratio 0.61, normal)",
+    "CSF HSV-1 PCR": "positive",
+    "Blood cultures": "no growth at 48h"
+  },
+  "imaging": "MRI brain with contrast: T2/FLAIR hyperintensity and swelling of the right medial temporal lobe and insular cortex with gyral restricted diffusion, sparing the basal ganglia — classic HSV encephalitis distribution. EEG: right temporal periodic lateralised epileptiform discharges (PLEDs).",
+  "microbiology": "CSF HSV-1 DNA PCR positive; bacterial culture and Gram stain negative; CSF enterovirus and VZV PCR negative.",
+  "differentialDiagnoses": [
+    "Herpes simplex (viral) encephalitis",
+    "Bacterial meningitis / meningoencephalitis",
+    "Autoimmune (anti-NMDA-receptor) encephalitis",
+    "Brain abscess or space-occupying lesion",
+    "Non-convulsive status / metabolic encephalopathy"
+  ],
+  "finalDiagnosis": "Herpes simplex virus type 1 (HSV-1) encephalitis",
+  "citations": [
+    "Harrison 22e — Acute Meningitis and Encephalitis (Viral CNS Infections)",
+    "IDSA Encephalitis Management Guidelines 2008"
+  ],
+  "stewardship": "Empiric IV aciclovir 10 mg/kg every 8 hours started immediately on clinical suspicion (before PCR result), because untreated HSV encephalitis carries high mortality and delay worsens outcome. Add empiric IV ceftriaxone (+/- ampicillin for Listeria cover if risk factors) until bacterial meningoencephalitis is excluded, then stop once CSF confirms HSV. Continue aciclovir 14-21 days; ensure adequate hydration and monitor renal function.",
+  "contraindications": [
+    "Aciclovir nephrotoxicity — dose-adjust for renal impairment and hydrate to prevent crystal nephropathy",
+    "Avoid LP before imaging if focal deficit, GCS drop or suspected raised ICP (mass effect risk)",
+    "Beta-lactam allergy affects choice of adjunctive bacterial cover"
+  ],
+  "edgeCases": [
+    "Early MRI and even initial CSF HSV PCR can be negative in the first 72h — repeat PCR at 3-7 days and continue aciclovir if clinical suspicion remains high",
+    "Anti-NMDA-receptor autoimmune encephalitis can follow (post-HSV) or mimic viral encephalitis, especially with prominent psychiatric features and movement disorder",
+    "Lymphocytic CSF with mildly raised protein and normal glucose overlaps with TB and partially-treated bacterial meningitis"
+  ],
+  "expectedMaiK": "Fever plus encephalopathy, focal temporal-lobe signs, seizure and a lymphocytic CSF with positive HSV-1 PCR and medial temporal MRI changes indicate HSV encephalitis; empiric IV aciclovir must not wait for confirmatory testing as early treatment is the key determinant of survival and neurological outcome.",
+  "expectedNextQuestions": [
+    "Any focal seizure activity, personality change or olfactory/gustatory aura suggesting temporal-lobe onset?",
+    "Immunosuppression, recent travel, animal/mosquito/tick exposure or contact with encephalitis?",
+    "Was aciclovir started at first suspicion, and time from symptom onset to treatment?"
+  ],
+  "expectedInvestigations": [
+    "CSF HSV-1/2 and enterovirus PCR with cell count, protein and paired glucose",
+    "MRI brain with contrast and diffusion sequences",
+    "EEG to detect temporal epileptiform activity / non-convulsive seizures"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "alteredSensorium": true,
+    "behavioralChange": true,
+    "seizure": true,
+    "focalNeuroDeficit": true,
+    "neckStiffness": true,
+    "tachycardia": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "ENCEPHALITIS",
+    "acceptableIds": [
+      "ENCEPHALITIS"
+    ],
+    "differentialIds": [
+      "VIRAL_MENINGITIS",
+      "MENINGITIS",
+      "BRAIN_ABSCESS",
+      "CNS_TB"
+    ],
+    "investigations": [
+      "CSF HSV PCR with cell count and protein",
+      "MRI brain with contrast",
+      "EEG"
+    ],
+    "stewardship": {
+      "tier": "empiric",
+      "antibiotics": [
+        "aciclovir",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ENCEPHALITIS",
+    "empiric therapy must include aciclovir (antiviral), not antibiotics alone",
+    "differential must include a bacterial CNS infection (MENINGITIS)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

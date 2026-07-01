@@ -1,0 +1,100 @@
+{
+  "id": "gc_193",
+  "specialty": "Neurology / Vascular",
+  "condition": "Intracerebral hemorrhage",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe headache with right-sided weakness and vomiting for 1 hour",
+  "history": "68-year-old man with poorly controlled hypertension (on irregular amlodipine) developed abrupt-onset severe occipital headache while gardening, followed within minutes by right arm and leg weakness, slurred speech and two episodes of vomiting. Symptoms were maximal at onset and did not fluctuate. No head trauma. No prior TIA/stroke. Long-standing hypertension for 12 years, ex-smoker, no anticoagulant use. No fever or infective prodrome.",
+  "examination": "Drowsy but rousable (GCS 13, E3V4M6), right-sided hemiparesis (power 2/5 arm and leg) with right facial droop and dysarthria, right-sided upgoing plantar. Neck supple, no photophobia, no rash. Fundi without acute papilloedema. No carotid bruit. No signs of infection or meningism.",
+  "vitals": {
+    "hr": 58,
+    "bp": "212/116",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 97
+  },
+  "labs": {
+    "glucose": "8.1 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "platelets": "245 ×10³/µL",
+    "INR": "1.0",
+    "hemoglobin": "14.2 g/dL",
+    "sodium": "140 mmol/L",
+    "WBC": "9.8 ×10³/µL",
+    "CRP": "4 mg/L"
+  },
+  "imaging": "Non-contrast CT head: 32 mL hyperdense (acute) hematoma in the left basal ganglia/putamen with mild surrounding edema and 3 mm midline shift; no significant intraventricular extension. CT angiogram negative for aneurysm/AVM (no spot sign).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute ischemic stroke",
+    "Subarachnoid hemorrhage",
+    "Hypertensive emergency with encephalopathy",
+    "Brain tumour with hemorrhage"
+  ],
+  "finalDiagnosis": "Hypertensive spontaneous intracerebral hemorrhage (left putaminal)",
+  "citations": [
+    "Harrison 22e — Cerebrovascular Diseases (Intracerebral Hemorrhage)",
+    "AHA/ASA Guideline for the Management of Spontaneous Intracerebral Hemorrhage 2022"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid antiplatelet/anticoagulant agents; reverse any coagulopathy urgently",
+    "Avoid aggressive BP lowering below MAP that compromises cerebral perfusion; target SBP ~140 mmHg cautiously",
+    "Thrombolysis absolutely contraindicated"
+  ],
+  "edgeCases": [
+    "Lobar hemorrhage in an elderly normotensive patient should raise suspicion for cerebral amyloid angiopathy rather than hypertensive bleed",
+    "Hematoma expansion in first hours (CT 'spot sign') predicts deterioration; anticoagulant-associated ICH needs immediate reversal"
+  ],
+  "expectedMaiK": "Sudden focal deficit with severe headache, vomiting, depressed consciousness and markedly elevated BP in a hypertensive patient points to intracerebral hemorrhage; non-contrast CT is the immediate discriminator from ischemic stroke and mandates BP control, coagulopathy reversal and neurosurgical review.",
+  "expectedNextQuestions": [
+    "Is the patient on any anticoagulant or antiplatelet therapy?",
+    "What is the exact time of symptom onset and was the deficit maximal at onset?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "Coagulation profile (INR/aPTT) and platelet count",
+    "CT angiography to exclude underlying vascular lesion"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "headacheSevere": true,
+    "focalNeuroDeficit": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "hypertensionHx": true,
+    "cerebrovascularDisease": true,
+    "bradycardia": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "ich",
+    "acceptableIds": [
+      "ich"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "sah",
+      "htn_emergency",
+      "brain_tumour"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "Coagulation profile",
+      "CT angiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ich",
+    "non-infective case must not emit an antibiotic recommendation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

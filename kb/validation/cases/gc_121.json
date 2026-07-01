@@ -1,0 +1,113 @@
+{
+  "id": "gc_121",
+  "specialty": "Systemic / Tuberculosis",
+  "condition": "Disseminated (Miliary) Tuberculosis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of daily evening fever, drenching night sweats and progressive weight loss.",
+  "history": "Previously well daily-wage labourer from a peri-urban settlement, presents with 3 weeks of low-grade evening-predominant fever, marked night sweats, anorexia and ~6 kg unintentional weight loss. Dry cough for 2 weeks with mild exertional breathlessness. No haemoptysis. Household contact: elder brother treated for sputum-positive pulmonary TB last year. No known HIV status; no diabetes. Non-smoker, occasional alcohol. No recent travel outside region, no prior TB treatment.",
+  "examination": "Thin, mildly toxic-appearing young man. Temperature 38.7°C with relative bradycardia. Pallor present. Hepatosplenomegaly with soft, non-tender 2 cm splenic tip and liver edge 3 cm below costal margin. Fine bilateral basal crepitations. Fundoscopy shows scattered choroidal tubercles. No neck stiffness, no focal neurological deficit, no lymphadenopathy, no rash. Chest expansion symmetric; no signs of consolidation.",
+  "vitals": {
+    "hr": 92,
+    "bp": "112/72",
+    "rr": 24,
+    "temp": 38.7,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": "9.8 g/dL",
+    "WBC": "5.1 ×10³/µL (lymphopenia)",
+    "platelets": "118 ×10³/µL",
+    "ESR": "84 mm/hr",
+    "CRP": "62 mg/L",
+    "ALP": "310 U/L (cholestatic pattern)",
+    "ALT": "68 U/L",
+    "bilirubin": "1.1 mg/dL",
+    "albumin": "2.8 g/dL",
+    "sodium": "128 mmol/L (SIADH pattern)",
+    "creatinine": "0.9 mg/dL",
+    "HIV serology": "pending"
+  },
+  "imaging": "CXR: innumerable uniform 1-2 mm nodules diffusely and symmetrically distributed through both lung fields (classic miliary pattern). HRCT thorax: randomly distributed micronodules with mild mediastinal lymphadenopathy. USG abdomen: hepatosplenomegaly with micro-abscess-like hypoechoic foci in spleen.",
+  "microbiology": "Sputum Xpert MTB/RIF: MTB detected, rifampicin resistance not detected. AFB smear scanty positive. Blood cultures for pyogenic organisms sterile. Fundoscopic choroidal tubercles support disseminated disease. Mycobacterial blood/bone-marrow culture sent.",
+  "differentialDiagnoses": [
+    "Miliary tuberculosis (disseminated TB)",
+    "Disseminated fungal infection (histoplasmosis)",
+    "Lymphoma / haematological malignancy",
+    "Pyrexia of unknown origin",
+    "Enteric fever"
+  ],
+  "finalDiagnosis": "Disseminated (miliary) tuberculosis",
+  "citations": [
+    "Harrison 22e — Tuberculosis (Mycobacterial Diseases)",
+    "WHO Consolidated Guidelines on Tuberculosis: Treatment (Drug-Susceptible TB) 2022"
+  ],
+  "stewardship": "Not antibacterial stewardship in the usual sense — start standard 4-drug anti-tubercular therapy: 2 months intensive HRZE (isoniazid + rifampicin + pyrazinamide + ethambutol) then 4 months HR continuation, weight-band dosed, after baseline LFTs/visual acuity and HIV testing. Avoid empiric broad-spectrum antibacterials once TB confirmed.",
+  "contraindications": [
+    "Baseline and serial LFTs — hepatotoxicity risk from isoniazid/rifampicin/pyrazinamide, especially with low albumin",
+    "Ethambutol requires baseline visual acuity/colour vision and dose adjustment in renal impairment",
+    "Add pyridoxine (B6) with isoniazid to prevent peripheral neuropathy"
+  ],
+  "edgeCases": [
+    "Choroidal tubercles are pathognomonic but easily missed without dilated fundoscopy",
+    "Cryptic miliary TB in elderly/immunocompromised may present with FUO and a normal early CXR",
+    "Co-existing TB meningitis must be excluded (low threshold for LP) as it alters steroid and treatment duration"
+  ],
+  "expectedMaiK": "Classic miliary TB: weeks of evening fever, night sweats, weight loss with hepatosplenomegaly, a diffuse uniform micronodular CXR and choroidal tubercles. Confirm with Xpert MTB/RIF, test for HIV, screen for CNS involvement, and start weight-band HRZE with pyridoxine and baseline LFTs.",
+  "expectedNextQuestions": [
+    "HIV status and any other immunosuppression?",
+    "Any headache, neck stiffness or altered behaviour suggesting TB meningitis?",
+    "Duration and pattern of fever, night sweats and weight loss, plus TB contact history?"
+  ],
+  "expectedInvestigations": [
+    "Sputum/other-sample Xpert MTB/RIF + AFB smear and mycobacterial culture with drug-susceptibility testing",
+    "HIV serology and baseline LFTs",
+    "Fundoscopy for choroidal tubercles; consider lumbar puncture to exclude CNS TB"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "prolongedFever": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "coughRadio": true,
+    "tbContactHistory": true,
+    "hepatosplenomegaly": true,
+    "subacuteOnset": true,
+    "thrombocytopenia": true,
+    "toxicAppearing": true,
+    "crepitations": true
+  },
+  "expected": {
+    "diagnosis": "DISSEMINATED_TB",
+    "acceptableIds": [
+      "DISSEMINATED_TB"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "PUO",
+      "ENTERIC_FEVER",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Sputum Xpert MTB/RIF with mycobacterial culture and DST",
+      "HIV serology and baseline LFTs",
+      "CXR/HRCT thorax and dilated fundoscopy for choroidal tubercles"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include DISSEMINATED_TB",
+    "differential must include PULMONARY_TB",
+    "management must include 4-drug HRZE anti-tubercular therapy, not empiric broad-spectrum antibacterials"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

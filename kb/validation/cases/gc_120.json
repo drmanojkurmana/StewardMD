@@ -1,0 +1,107 @@
+{
+  "id": "gc_120",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Diabetic Foot Infection",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Painful, discharging ulcer over the right forefoot with surrounding redness and low-grade fever for 5 days.",
+  "history": "Type 2 diabetes for 14 years, poorly controlled (last HbA1c 9.8%). Noticed a callus under the right first metatarsal head 3 weeks ago that broke down into an ulcer; over the last 5 days it has become more painful with purulent discharge, spreading redness and mild fever. Reduced sensation in both feet with a history of stepping on objects without noticing. Peripheral vascular symptoms of intermittent claudication. Ex-smoker, hypertensive. No prior foot surgery or amputation. No recent hospitalization or antibiotics.",
+  "examination": "Alert, mildly unwell but not toxic. Right forefoot: 2.5 cm plantar ulcer over first metatarsal head with purulent base, surrounding erythema ~3 cm beyond the wound edge, warmth and tenderness; positive probe-to-bone test with a visible bony point at the ulcer base. Malodorous discharge. Reduced 10 g monofilament sensation to mid-foot bilaterally, absent ankle jerks. Dorsalis pedis and posterior tibial pulses feeble on the right. No crepitus, no hemorrhagic bullae, no rapidly advancing erythema. Left foot intact.",
+  "vitals": {
+    "hr": 96,
+    "bp": "132/78",
+    "rr": 18,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "14.2 x10^9/L (neutrophil predominant)",
+    "CRP": "88 mg/L",
+    "ESR": "72 mm/hr",
+    "HbA1c": "9.8%",
+    "Random glucose": "16.4 mmol/L",
+    "Creatinine": "1.1 mg/dL",
+    "Procalcitonin": "0.4 ng/mL"
+  },
+  "imaging": "Plain radiograph of the right foot: cortical erosion and periosteal reaction at the first metatarsal head with adjacent soft-tissue swelling, consistent with underlying osteomyelitis; no subcutaneous gas. MRI recommended to delineate extent of bone involvement.",
+  "microbiology": "Deep tissue / curettage culture sent after debridement (not superficial swab); Gram stain shows Gram-positive cocci in clusters. Blood cultures pending. Results pending.",
+  "differentialDiagnoses": [
+    "Diabetic foot infection with contiguous osteomyelitis",
+    "Uncomplicated cellulitis",
+    "Charcot neuroarthropathy",
+    "Necrotizing soft-tissue infection",
+    "Critical limb ischemia with gangrene"
+  ],
+  "finalDiagnosis": "Moderate diabetic foot infection with underlying osteomyelitis (IDSA/IWGDF moderate; probe-to-bone positive, radiographic bone changes)",
+  "citations": [
+    "Harrison 22e — Diabetes Mellitus: Complications (diabetic foot) and Soft-Tissue Infections",
+    "IDSA/IWGDF Diagnosis and Management of Diabetic Foot Infections 2023"
+  ],
+  "stewardship": "Empiric IV broad-spectrum cover for a moderate infection with MRSA and Gram-negative concern: amoxicillin-clavulanate or piperacillin-tazobactam, plus vancomycin given local MRSA prevalence and purulence; narrow to deep-tissue culture and sensitivities. Bone involvement extends duration to 4-6 weeks. Achieve glycemic control, urgent surgical debridement and vascular assessment.",
+  "contraindications": [
+    "Beta-lactam / penicillin allergy — substitute with a fluoroquinolone plus clindamycin",
+    "Vancomycin requires renal-adjusted dosing and trough/AUC monitoring",
+    "Avoid nephrotoxin stacking (vancomycin + piperacillin-tazobactam) given diabetic nephropathy risk — monitor creatinine"
+  ],
+  "edgeCases": [
+    "Positive probe-to-bone with radiographic changes markedly raises probability of osteomyelitis and changes duration/surgical planning — do not treat as simple cellulitis",
+    "Neuropathy can mask pain and blunt systemic signs, so a 'quiet' foot may still harbor deep infection",
+    "Charcot foot can mimic infection (warm, swollen) without an ulcer — distinguish before committing to prolonged antibiotics",
+    "Superficial swab cultures are misleading; base therapy on deep tissue or bone culture"
+  ],
+  "expectedMaiK": "Classic moderate diabetic foot infection: a neuropathic plantar ulcer in poorly controlled diabetes with spreading erythema, purulence, and a positive probe-to-bone plus radiographic changes indicating osteomyelitis. Prioritize deep-tissue culture, MRI, urgent debridement, vascular assessment, glycemic control, and MRSA-inclusive empiric antibiotics.",
+  "expectedNextQuestions": [
+    "Is the probe-to-bone test positive and are there radiographic/MRI signs of osteomyelitis?",
+    "What is the vascular status (pulses, ABI) — is there critical limb ischemia requiring revascularization?",
+    "Any prior MRSA colonization or recent antibiotics affecting empiric choice?"
+  ],
+  "expectedInvestigations": [
+    "MRI of the foot to confirm and stage osteomyelitis",
+    "Deep tissue / bone culture and sensitivities (avoid superficial swab)",
+    "Blood cultures, ESR/CRP, HbA1c, and lower-limb arterial assessment (ABI / Doppler)"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "diabetesHx": true,
+    "diabeticFootUlcer": true,
+    "purulentDrainage": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "boneInvolvement": true,
+    "deepTissueInvolvement": true,
+    "peripheralVascularDisease": true
+  },
+  "expected": {
+    "diagnosis": "DIABETIC_FOOT",
+    "acceptableIds": [
+      "DIABETIC_FOOT"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "NECROTIZING_FASCIITIS",
+      "ERYSIPELAS"
+    ],
+    "investigations": [
+      "MRI foot for osteomyelitis",
+      "Deep tissue / bone culture and sensitivities",
+      "Lower-limb arterial assessment (ABI / Doppler)"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include DIABETIC_FOOT",
+    "findings must include diabeticFootUlcer and boneInvolvement set true",
+    "stewardship tier must not be null (infective case)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

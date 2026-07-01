@@ -1,0 +1,113 @@
+{
+  "id": "gc_173",
+  "specialty": "Hepatology",
+  "condition": "Decompensated cirrhosis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Progressive abdominal distension, leg swelling and jaundice over 3 weeks",
+  "history": "54-year-old man with a 15-year history of heavy alcohol intake (approx 80 g/day) presents with gradually worsening abdominal swelling, bilateral ankle oedema and yellowing of the eyes over 3 weeks. Reduced appetite, early satiety and 4 kg apparent weight gain despite poor intake. No haematemesis or melaena. Mild intermittent confusion in the evenings noted by family. Known esophageal varices on prior endoscopy; not on beta-blocker. No recent GI bleed, sepsis or new medications. No fever.",
+  "examination": "Icteric sclerae, palmar erythema, multiple spider naevi over the chest, gynaecomastia. Abdomen distended with shifting dullness and a fluid thrill consistent with moderate-to-tense ascites; non-tender, no guarding (pertinent negative — no peritonism to suggest SBP). Splenomegaly palpable. Mild asterixis elicited. Bilateral pitting pedal oedema. No focal neurological deficit. Chest clear, no basal crackles (pertinent negative against cardiac failure).",
+  "vitals": {
+    "hr": 92,
+    "bp": "104/66",
+    "rr": 18,
+    "temp": 37,
+    "spo2": 97
+  },
+  "labs": {
+    "Hemoglobin": "10.8 g/dL",
+    "Platelets": "78 x10^3/uL",
+    "Total bilirubin": "6.4 mg/dL",
+    "Albumin": "2.4 g/dL",
+    "INR": "1.9",
+    "Serum creatinine": "1.1 mg/dL",
+    "Sodium": "129 mmol/L",
+    "AST": "96 U/L",
+    "ALT": "44 U/L (AST:ALT >2)",
+    "Ascitic fluid": "SAAG 1.6 g/dL, protein 0.8 g/dL, PMN 90 cells/mm3 (<250, no SBP)",
+    "Child-Pugh": "C (10 points)",
+    "MELD-Na": "22"
+  },
+  "imaging": "Abdominal ultrasound with Doppler: coarse, nodular, shrunken liver with surface irregularity, splenomegaly (15 cm), recanalised paraumbilical vein and patent but dilated portal vein consistent with portal hypertension; moderate ascites. No focal liver mass; portal vein patent (no thrombosis).",
+  "microbiology": "Ascitic fluid culture negative; blood cultures not indicated (afebrile, PMN <250)",
+  "differentialDiagnoses": [
+    "Decompensated cirrhosis with ascites and early hepatic encephalopathy",
+    "Spontaneous bacterial peritonitis",
+    "Congestive cardiac failure / constrictive physiology",
+    "Nephrotic syndrome",
+    "Hepatocellular carcinoma with portal invasion"
+  ],
+  "finalDiagnosis": "Decompensated alcohol-related cirrhosis (ascites + hepatic encephalopathy, Child-Pugh C)",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications",
+    "AASLD Management of Ascites due to Cirrhosis 2021"
+  ],
+  "stewardship": "Not applicable — non-infective decompensation. Ascitic PMN <250/mm3 and afebrile, so no empiric antibiotics indicated. Reserve antibiotic prophylaxis/treatment for confirmed SBP (PMN >=250) or GI bleed.",
+  "contraindications": [
+    "Avoid NSAIDs (precipitate AKI/hepatorenal syndrome and GI bleed)",
+    "Avoid nephrotoxins and aminoglycosides given borderline renal function",
+    "Cautious sedatives/benzodiazepines — may precipitate/worsen encephalopathy",
+    "Dose-adjust renally cleared drugs; avoid hepatotoxins"
+  ],
+  "edgeCases": [
+    "Ascitic PMN >=250/mm3 would reclassify as SBP requiring cefotaxime and albumin",
+    "Rapidly rising creatinine after diuresis/paracentesis may signal hepatorenal syndrome (HRS-AKI)",
+    "A new focal liver lesion on imaging mandates HCC surveillance (AFP + triphasic CT/MRI)"
+  ],
+  "expectedMaiK": "This is a classic decompensated cirrhosis picture — ascites (SAAG >=1.1), coagulopathy, hypoalbuminaemia, thrombocytopenia and early encephalopathy on an alcohol-related background. It is non-infective: with ascitic PMN <250 and no fever there is no indication for empiric antibiotics; prioritise diagnostic paracentesis to exclude SBP, sodium/fluid restriction with spironolactone-based diuresis, and lactulose for encephalopathy.",
+  "expectedNextQuestions": [
+    "Any recent GI bleeding (haematemesis, melaena) or missed lactulose doses?",
+    "Alcohol quantity and time since last drink; any withdrawal symptoms?",
+    "Fever, abdominal pain or constipation that could point to SBP or a precipitant?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic ascitic tap with cell count, SAAG and culture",
+    "Serum electrolytes, creatinine and MELD-Na for prognosis",
+    "Upper GI endoscopy for variceal surveillance",
+    "Ultrasound/AFP for HCC screening"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "liverDisease": true,
+    "jaundice": true,
+    "ascites": true,
+    "abdominalDistension": true,
+    "asterixis": true,
+    "alcoholExcess": true,
+    "splenomegaly": true,
+    "legSwellingBilateral": true,
+    "thrombocytopenia": true,
+    "encephalopathyGrade": true,
+    "ascitesGrade": true
+  },
+  "expected": {
+    "diagnosis": "decomp_cirrhosis",
+    "acceptableIds": [
+      "decomp_cirrhosis"
+    ],
+    "differentialIds": [
+      "SBP",
+      "hepatic_enceph",
+      "variceal_bleed",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Diagnostic ascitic tap (cell count, SAAG, culture)",
+      "MELD-Na and Child-Pugh scoring",
+      "Upper GI endoscopy for varices"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include decomp_cirrhosis",
+    "stewardship tier must be null (non-infective — no empiric antibiotics)",
+    "SBP must appear in differential given ascites but not be the top diagnosis (PMN <250)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

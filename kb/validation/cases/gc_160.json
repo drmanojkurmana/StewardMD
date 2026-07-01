@@ -1,0 +1,96 @@
+{
+  "id": "gc_160",
+  "specialty": "Allergy / Emergency",
+  "condition": "ACE-inhibitor-induced angioedema",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Sudden painless swelling of the lips and tongue overnight, with a sensation of throat tightness.",
+  "history": "Woke at 3 am with progressive swelling of the lower lip and tongue, now feeling that his throat is 'closing'. No urticaria, no itch, no wheeze. No new foods, drugs, insect stings or known allergen exposure. Hypertensive for 4 years; started lisinopril 10 mg daily approximately 8 months ago (recently up-titrated). No prior similar episodes and no family history of recurrent swelling. Denies recent NSAID use. Two prior mild self-limiting lip swellings over the past 2 months that he did not report.",
+  "examination": "Marked non-pitting, non-erythematous, non-pruritic swelling of the lower lip, tongue and floor of mouth with mild uvular oedema. No urticaria or generalized rash. Voice slightly muffled; no stridor at rest, chest clear with no wheeze, air entry symmetrical. No facial flushing, no periorbital involvement. Abdomen soft, non-tender.",
+  "vitals": {
+    "hr": 92,
+    "bp": "158/94",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "C4": "normal",
+    "C1-inhibitor level/function": "normal",
+    "tryptase (acute)": "normal",
+    "eosinophils": "normal",
+    "creatinine": "0.9 mg/dL",
+    "CBC": "unremarkable"
+  },
+  "imaging": "Not indicated acutely; flexible nasolaryngoscopy performed to assess airway shows tongue-base and mild supraglottic oedema, glottis patent.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "ACE-inhibitor-induced angioedema",
+    "Allergic (histaminergic/anaphylactic) angioedema",
+    "Hereditary / C1-inhibitor deficiency angioedema",
+    "Idiopathic angioedema"
+  ],
+  "finalDiagnosis": "ACE-inhibitor-induced (bradykinin-mediated) angioedema",
+  "citations": [
+    "Harrison 22e — Angioedema and Urticaria (Allergy, Anaphylaxis and Systemic Mastocytosis)",
+    "AAAAI/ACAAI/WAO Angioedema (bradykinin-mediated / ACE-inhibitor and hereditary) 2020"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Antihistamines/corticosteroids/adrenaline are largely ineffective for bradykinin-mediated angioedema and must not delay airway assessment",
+    "Absolute lifelong contraindication to all ACE inhibitors; avoid ARBs if reaction severe/recurrent",
+    "Icatibant/C1-inhibitor concentrate use per local protocol if airway threatened and drug available"
+  ],
+  "edgeCases": [
+    "Onset can occur months to years after starting an ACE inhibitor, misleading clinicians who look only for a recently started drug",
+    "Isolated tongue/laryngeal swelling without urticaria is the hallmark; presence of urticaria/itch should redirect to a histaminergic (mast-cell) mechanism",
+    "Black/Afro-Caribbean ancestry and smoking increase risk; normal C4 and C1-inhibitor distinguish from hereditary angioedema"
+  ],
+  "expectedMaiK": "Painless, non-urticarial swelling of the lips, tongue and airway in a patient on an ACE inhibitor is bradykinin-mediated angioedema — it does not respond to antihistamines, steroids or adrenaline, so priority is airway protection and permanent, lifelong discontinuation of the ACE inhibitor. Normal C4/C1-inhibitor and absence of urticaria separate it from hereditary and allergic angioedema.",
+  "expectedNextQuestions": [
+    "Which antihypertensive is he on and exactly when was it started or up-titrated?",
+    "Is there any urticaria, itch or wheeze (points to allergic rather than bradykinin mechanism)?",
+    "Any family history of recurrent swelling or prior episodes suggesting hereditary angioedema?"
+  ],
+  "expectedInvestigations": [
+    "Immediate airway assessment (flexible nasolaryngoscopy)",
+    "Serum C4 and C1-inhibitor level and function",
+    "Serum tryptase to help exclude mast-cell/anaphylactic mechanism"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "facialSwelling": true,
+    "dyspnea": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "stable": true,
+    "afebrile": true
+  },
+  "expected": {
+    "diagnosis": "angioedema_acei",
+    "acceptableIds": [
+      "angioedema_acei"
+    ],
+    "differentialIds": [
+      "anaphylaxis",
+      "sjs_ten"
+    ],
+    "investigations": [
+      "Airway assessment / flexible nasolaryngoscopy",
+      "C4 and C1-inhibitor level and function",
+      "Serum tryptase"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include angioedema_acei",
+    "expected.stewardship.tier is null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

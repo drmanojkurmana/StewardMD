@@ -1,0 +1,100 @@
+{
+  "id": "gc_152",
+  "specialty": "Central Nervous System",
+  "condition": "Viral (Aseptic) Meningitis",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Two days of severe headache, fever, neck stiffness and photophobia in an otherwise well young adult.",
+  "history": "Previously healthy 24-year-old man with a 2-day history of frontal-occipital headache, low-to-moderate grade fever, marked photophobia and neck discomfort. Reports a preceding week of coryza and a self-limiting diarrhoeal illness in a flatmate. No confusion, no seizures, no focal weakness, no rash. No recent travel, no TB contact, immunocompetent, not on immunosuppression. Presentation is late summer (enteroviral season).",
+  "examination": "Alert and fully oriented (GCS 15), looks uncomfortable but not toxic. Neck stiffness with positive Kernig sign; photophobia. No papilloedema on fundoscopy, no focal neurological deficit, no cranial nerve palsy. No petechial or purpuric rash. Kernig/Brudzinski positive but the patient remains lucid between examinations.",
+  "vitals": {
+    "hr": 96,
+    "bp": "122/74",
+    "rr": 16,
+    "temp": 38.3,
+    "spo2": 99
+  },
+  "labs": {
+    "WBC": "8.9 x10^9/L (normal differential)",
+    "CRP": "18 mg/L (mildly elevated)",
+    "Serum glucose": "5.2 mmol/L",
+    "CSF opening pressure": "18 cmH2O (normal)",
+    "CSF WBC": "180 cells/µL, lymphocytic predominance (~90% lymphocytes)",
+    "CSF protein": "0.55 g/L (mildly elevated)",
+    "CSF glucose": "3.4 mmol/L (CSF:serum ratio 0.65, normal)",
+    "CSF Gram stain": "no organisms seen",
+    "Serum creatinine": "0.9 mg/dL"
+  },
+  "imaging": "CT head prior to LP (young, no focal deficit, immunocompetent, alert) — normal, no mass lesion or midline shift; performed only to exclude contraindication where clinically indicated.",
+  "microbiology": "CSF bacterial culture negative at 48h; CSF multiplex PCR positive for enterovirus. HSV-1/2 and VZV PCR negative. Blood cultures negative.",
+  "differentialDiagnoses": [
+    "Viral (aseptic) meningitis",
+    "Early partially-treated bacterial meningitis",
+    "Viral encephalitis (HSV)",
+    "Tuberculous meningitis"
+  ],
+  "finalDiagnosis": "Viral (aseptic) meningitis — enteroviral",
+  "citations": [
+    "Harrison 22e — Acute Meningitis (Viral/Aseptic Meningitis)",
+    "IDSA Practice Guidelines for the Management of Bacterial Meningitis 2004 (differentiation of aseptic vs bacterial meningitis)"
+  ],
+  "stewardship": "Not applicable as a viral illness, but standard of care: because bacterial meningitis cannot be excluded at presentation, give empiric IV ceftriaxone (+ aciclovir if any encephalitic features) after blood cultures/LP, then STOP antibiotics once CSF shows lymphocytic pleocytosis with normal glucose, negative Gram stain and negative bacterial culture/positive enteroviral PCR. Management is supportive (analgesia, fluids); most enteroviral cases are self-limiting.",
+  "contraindications": [
+    "Ceftriaxone in documented severe beta-lactam anaphylaxis (use alternative)",
+    "Avoid LP before imaging if focal deficit, papilloedema, immunocompromise, seizures or reduced GCS",
+    "Aciclovir requires renal-adjusted dosing and adequate hydration"
+  ],
+  "edgeCases": [
+    "Partially treated bacterial meningitis can mimic aseptic meningitis with lymphocytic CSF — low CSF glucose or high protein argues against viral",
+    "HSV can cause aseptic meningitis (usually benign) but HSV encephalitis is a medical emergency — behavioural change, seizures or focal deficit should trigger empiric aciclovir",
+    "Drug-induced (NSAID, IVIG) and Mollaret recurrent lymphocytic meningitis are non-infective mimics"
+  ],
+  "expectedMaiK": "Classic enteroviral aseptic meningitis in an immunocompetent young adult: lymphocytic CSF with normal glucose and negative Gram stain supports a viral cause. Cover empirically for bacterial meningitis until CSF confirms a viral picture, then de-escalate; treatment is supportive with an excellent prognosis.",
+  "expectedNextQuestions": [
+    "Any altered mental status, seizures, or focal neurological signs to suggest encephalitis?",
+    "Any immunosuppression, recent neurosurgery, or antibiotics taken before presentation (partially-treated bacterial)?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture with CSF cell count/differential, protein, glucose (with paired serum glucose), Gram stain and culture",
+    "CSF viral multiplex PCR (enterovirus, HSV-1/2, VZV)"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "headache": true,
+    "coryza": true,
+    "subacuteOnset": true,
+    "myalgiaArthralgia": true
+  },
+  "expected": {
+    "diagnosis": "VIRAL_MENINGITIS",
+    "acceptableIds": [
+      "VIRAL_MENINGITIS"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "CNS_TB"
+    ],
+    "investigations": [
+      "Lumbar puncture with CSF analysis",
+      "CSF viral PCR (enterovirus/HSV/VZV)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include VIRAL_MENINGITIS",
+    "differential must include MENINGITIS (bacterial) given inability to exclude it at presentation",
+    "must not recommend continuing antibiotics once CSF confirms lymphocytic pleocytosis with normal glucose and negative Gram stain/culture"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

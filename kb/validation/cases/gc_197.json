@@ -1,0 +1,108 @@
+{
+  "id": "gc_197",
+  "specialty": "Hematology",
+  "condition": "Immune thrombocytopenia (ITP)",
+  "age": 32,
+  "sex": "F",
+  "presentingComplaint": "Easy bruising and a spreading rash of tiny red spots on the legs for the past 5 days",
+  "history": "Previously well 32-year-old woman presents with a 5-day history of spontaneous bruising, a non-blanching pinpoint rash over both shins, bleeding gums when brushing teeth, and one episode of epistaxis that stopped with pressure. Menstrual period this month was heavier than usual. Reports a mild viral upper respiratory illness roughly 2 weeks ago that has since resolved. No fever, weight loss, night sweats or bone pain. No new medications, no heparin exposure, no recent quinine/quinidine, no herbal supplements. No alcohol excess, no family history of bleeding disorders. No recent travel to a dengue/malaria-endemic area.",
+  "examination": "Alert and well-appearing, not toxic. Scattered petechiae over both lower legs and buccal mucosa, with several ecchymoses on the forearms. Wet purpura noted on the palate. No lymphadenopathy. No hepatosplenomegaly on careful palpation. No joint swelling, no sternal tenderness. No signs of active major bleeding; fundi normal; no focal neurology.",
+  "vitals": {
+    "hr": 82,
+    "bp": "118/74",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "Platelets": "8 x10^3/µL (isolated)",
+    "Hemoglobin": "12.9 g/dL",
+    "WBC": "6.8 x10^3/µL with normal differential",
+    "Peripheral smear": "Reduced platelet number with occasional large platelets; no schistocytes, blasts or clumping",
+    "PT/INR": "12.1 s / 1.0",
+    "aPTT": "31 s (normal)",
+    "Fibrinogen": "3.2 g/L (normal)",
+    "Creatinine": "0.8 mg/dL",
+    "LDH": "190 U/L (normal)",
+    "Bilirubin": "0.6 mg/dL",
+    "HIV/HCV/HBsAg": "negative",
+    "Dengue NS1/serology": "negative"
+  },
+  "imaging": "Not indicated for classic uncomplicated presentation; abdominal ultrasound (if performed) shows no splenomegaly",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Immune thrombocytopenia (primary ITP)",
+    "Thrombotic thrombocytopenic purpura (TTP/HUS)",
+    "Acute leukaemia / marrow infiltration",
+    "Drug-induced thrombocytopenia",
+    "Disseminated intravascular coagulation",
+    "Pseudothrombocytopenia (EDTA clumping)"
+  ],
+  "finalDiagnosis": "Primary immune thrombocytopenia (ITP)",
+  "citations": [
+    "Harrison 22e — Disorders of Platelets and Vessel Wall (Thrombocytopenia)",
+    "ASH Immune Thrombocytopenia (ITP) Guidelines 2019"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid platelet transfusion unless life-threatening bleeding (rapid consumption; reserve for ICH or major hemorrhage)",
+    "Caution with corticosteroids in undiagnosed infection or poorly controlled diabetes",
+    "Avoid NSAIDs/antiplatelet agents and IM injections while thrombocytopenic"
+  ],
+  "edgeCases": [
+    "Normal smear and isolated thrombocytopenia is the rule — presence of schistocytes should redirect to TTP/HUS, and blasts or cytopenias in other lineages to leukaemia",
+    "Secondary ITP (HIV, HCV, SLE, H. pylori) must be excluded before labelling primary",
+    "EDTA-induced pseudothrombocytopenia: repeat count in citrate tube if smear shows clumping"
+  ],
+  "expectedMaiK": "Isolated severe thrombocytopenia with a normal smear (no schistocytes/blasts), normal coagulation, and mucocutaneous bleeding in an otherwise well young adult is classic for primary ITP — a diagnosis of exclusion. Prioritise ruling out TTP, leukaemia and DIC, and treat with corticosteroids +/- IVIG given the very low count.",
+  "expectedNextQuestions": [
+    "Any recent new drugs, quinine, heparin or vaccinations?",
+    "Any features of TTP (fever, confusion, focal neurology) or systemic illness (weight loss, bone pain, night sweats)?"
+  ],
+  "expectedInvestigations": [
+    "Peripheral blood smear review to exclude schistocytes/blasts/clumping",
+    "HIV, HCV and hepatitis B serology; consider ANA and H. pylori testing"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "mucocutaneousBleeding": true,
+    "petechialRash": true,
+    "thrombocytopenia": true,
+    "platelets": true,
+    "bleedingManifestation": true,
+    "afebrile": true,
+    "stable": true,
+    "subacuteOnset": true,
+    "hemoglobin": true
+  },
+  "expected": {
+    "diagnosis": "itp",
+    "acceptableIds": [
+      "itp"
+    ],
+    "differentialIds": [
+      "ttp_hus",
+      "acute_leukemia",
+      "dic",
+      "DENGUE"
+    ],
+    "investigations": [
+      "Peripheral blood smear",
+      "HIV/HCV/HBV serology",
+      "Coagulation profile (PT/aPTT/fibrinogen)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include itp",
+    "stewardship tier must be null (non-infective)",
+    "differential should include ttp_hus and acute_leukemia"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

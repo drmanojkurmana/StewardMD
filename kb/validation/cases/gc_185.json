@@ -1,0 +1,111 @@
+{
+  "id": "gc_185",
+  "specialty": "Oncology / Metabolic",
+  "condition": "Hypercalcaemia of malignancy",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Progressive drowsiness, constipation and polyuria over 10 days on a background of known metastatic breast cancer",
+  "history": "Ten-day history of increasing lethargy, generalised weakness, anorexia, nausea, marked thirst and polyuria, and worsening constipation. Family report intermittent confusion for the past 48 hours. Known ER-positive invasive ductal breast carcinoma diagnosed 3 years ago, now with radiologically confirmed bone metastases; on an aromatase inhibitor. No fever, cough, dysuria or diarrhoea. Not on thiazides, lithium, calcium or vitamin D supplements. No prior renal disease.",
+  "examination": "Drowsy but rousable, dry mucous membranes and reduced skin turgor consistent with volume depletion. Abdomen soft with sluggish bowel sounds; no peritonism. No focal neurological deficit, no neck stiffness, no papilloedema. No cellulitis, calf tenderness or focal source of infection. Chest clear.",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/68",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "corrected calcium": "3.4 mmol/L (13.6 mg/dL)",
+    "albumin": "3.0 g/dL",
+    "phosphate": "0.7 mmol/L (low)",
+    "PTH": "1.1 pmol/L (suppressed)",
+    "PTHrP": "elevated",
+    "25-OH vitamin D": "normal",
+    "creatinine": "1.6 mg/dL",
+    "urea": "11 mmol/L",
+    "ALP": "310 U/L (raised)",
+    "TSH": "normal",
+    "ECG": "shortened QT interval"
+  },
+  "imaging": "Known lytic bony metastases on prior CT/bone scan; no new acute findings. CT head (done for confusion) unremarkable.",
+  "microbiology": "n/a — non-infective presentation",
+  "differentialDiagnoses": [
+    "Hypercalcaemia of malignancy (PTHrP-mediated / osteolytic)",
+    "Primary hyperparathyroidism",
+    "Dehydration / acute kidney injury from another cause",
+    "Metabolic encephalopathy from other cause",
+    "Sepsis-related delirium"
+  ],
+  "finalDiagnosis": "Hypercalcaemia of malignancy",
+  "citations": [
+    "Harrison 22e — Disorders of the Parathyroid Gland and Calcium Homeostasis / Hypercalcemia",
+    "ASCO Management of Hypercalcemia of Malignancy 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid thiazide diuretics (worsen hypercalcaemia)",
+    "Loop diuretics only after adequate volume repletion, not for routine calcium lowering",
+    "Bisphosphonate dosing must be adjusted for renal impairment; ensure adequate hydration before zoledronate",
+    "Avoid nephrotoxins and further volume depletion given creatinine 1.6 mg/dL"
+  ],
+  "edgeCases": [
+    "Concurrent primary hyperparathyroidism can coexist with malignancy — an inappropriately non-suppressed PTH should prompt reassessment",
+    "Calcium >3.5 mmol/L with obtundation is a hypercalcaemic crisis requiring urgent aggressive therapy",
+    "Denosumab is the preferred bone-targeted agent in significant renal impairment where bisphosphonates are contraindicated"
+  ],
+  "expectedMaiK": "Suppressed PTH with elevated PTHrP and lytic bone disease in a patient with known metastatic breast cancer confirms hypercalcaemia of malignancy; initiate aggressive isotonic saline rehydration and a bone-resorption inhibitor (IV bisphosphonate or denosumab), and treat the underlying tumour.",
+  "expectedNextQuestions": [
+    "What is the albumin-corrected calcium and the PTH level?",
+    "Is the patient on thiazides, lithium, calcium or vitamin D supplements?",
+    "What is the level of consciousness and urine output?"
+  ],
+  "expectedInvestigations": [
+    "Albumin-corrected serum calcium",
+    "Intact PTH and PTHrP",
+    "Renal function and phosphate",
+    "ECG for QT shortening"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "malignancy": true,
+    "alteredSensorium": true,
+    "weightLoss": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "dehydration": true,
+    "polyuriaPolydipsia": true,
+    "renalImpairment": true,
+    "tachycardia": true,
+    "abdominalPain": true
+  },
+  "expected": {
+    "diagnosis": "hypercalcemia",
+    "acceptableIds": [
+      "hypercalcemia"
+    ],
+    "differentialIds": [
+      "metabolic_enceph",
+      "aki",
+      "myeloma",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Albumin-corrected serum calcium",
+      "Intact PTH and PTHrP",
+      "Renal function and phosphate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hypercalcemia",
+    "stewardship tier must be null (non-infective)",
+    "differential must not include any infective diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

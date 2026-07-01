@@ -1,0 +1,107 @@
+{
+  "id": "gc_169",
+  "specialty": "Nephrology",
+  "condition": "Chronic kidney disease",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Several months of progressive fatigue, poor appetite, itching and bilateral ankle swelling.",
+  "history": "58-year-old man with a 12-year history of poorly controlled type 2 diabetes and hypertension presents with insidious, months-long fatigue, anorexia, nausea, generalised pruritus, nocturia and gradually worsening bilateral leg oedema. No dysuria, haematuria, colicky flank pain or recent illness. On amlodipine and an ACE inhibitor; NSAIDs used intermittently for knee pain. Long-standing microalbuminuria noted at prior reviews but no structured follow-up. No acute fluid loss, sepsis or nephrotoxin binge to suggest an abrupt insult.",
+  "examination": "Pale, mildly uraemic-looking, well perfused. Bilateral pitting pedal oedema to mid-shin. BP elevated. Chest clear, no gallop; JVP mildly raised. Abdomen soft, no bruit, no palpable bladder or pulsatile mass. No asterixis, no pericardial rub, no focal neurology. No rash. Fundi show hypertensive/diabetic changes.",
+  "vitals": {
+    "hr": 82,
+    "bp": "158/94",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "creatinine": "3.6 mg/dL",
+    "eGFR": "19 mL/min/1.73m2 (CKD stage G4)",
+    "urea": "24 mmol/L",
+    "potassium": "5.4 mmol/L",
+    "bicarbonate": "18 mmol/L",
+    "hemoglobin": "9.2 g/dL (normochromic normocytic)",
+    "calcium": "8.2 mg/dL (corrected)",
+    "phosphate": "5.6 mg/dL",
+    "PTH": "310 pg/mL (elevated)",
+    "albumin": "3.4 g/dL",
+    "urine ACR": "180 mg/mmol (heavy albuminuria, A3)",
+    "urinalysis": "proteinuria, no active sediment, no casts",
+    "prior creatinine 14 months ago": "2.9 mg/dL (chronicity confirmed)"
+  },
+  "imaging": "Renal ultrasound: bilaterally small (right 8.4 cm, left 8.7 cm) echogenic kidneys with cortical thinning and loss of corticomedullary differentiation; no hydronephrosis or obstructing calculus. Confirms chronic, irreversible parenchymal disease.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Chronic kidney disease (diabetic + hypertensive nephropathy)",
+    "Acute kidney injury superimposed on CKD",
+    "Nephrotic syndrome",
+    "Acute glomerulonephritis"
+  ],
+  "finalDiagnosis": "Chronic kidney disease, stage G4A3 (diabetic and hypertensive nephropathy)",
+  "citations": [
+    "Harrison 22e — Chronic Kidney Disease",
+    "KDIGO Clinical Practice Guideline for the Evaluation and Management of CKD 2024"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid nephrotoxic NSAIDs and iodinated contrast where possible",
+    "Renally dose all drugs to eGFR; hold/adjust metformin at eGFR <30",
+    "ACE inhibitor: monitor K+ and creatinine; hyperkalaemia risk at 5.4 mmol/L"
+  ],
+  "edgeCases": [
+    "Superimposed AKI (e.g., NSAID or contrast insult) can acutely worsen a chronic baseline and be missed if prior creatinine not sought",
+    "Normal-sized or large kidneys despite advanced CKD point to diabetic nephropathy, amyloid, HIV nephropathy or polycystic disease rather than typical shrunken kidneys"
+  ],
+  "expectedMaiK": "Bilaterally small echogenic kidneys, stable elevation of creatinine over >14 months, anaemia and CKD-mineral-bone disease indicate chronic rather than acute kidney disease; management centres on slowing progression (BP and glycaemic control, RAAS blockade with K+ monitoring, SGLT2 inhibitor) and treating complications, not on a reversible acute insult.",
+  "expectedNextQuestions": [
+    "Is there an earlier creatinine/eGFR to confirm chronicity and rate of decline?",
+    "Any NSAID, contrast or nephrotoxin exposure, or symptoms of obstruction?"
+  ],
+  "expectedInvestigations": [
+    "Urine albumin-to-creatinine ratio and urine microscopy for casts",
+    "Renal ultrasound for kidney size and to exclude obstruction",
+    "CKD complication panel: potassium, bicarbonate, calcium, phosphate, PTH, haemoglobin"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "renalImpairment": true,
+    "creatinine": true,
+    "urea": true,
+    "legSwellingBilateral": true,
+    "proteinuria": true,
+    "hemoglobin": true,
+    "subacuteOnset": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "ckd",
+    "acceptableIds": [
+      "ckd"
+    ],
+    "differentialIds": [
+      "aki",
+      "nephrotic",
+      "glomerulonephritis"
+    ],
+    "investigations": [
+      "urine albumin-to-creatinine ratio",
+      "renal ultrasound",
+      "serum potassium, bicarbonate, calcium, phosphate and PTH"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ckd",
+    "stewardship tier must be null (non-infective)",
+    "differentialIds must include aki"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

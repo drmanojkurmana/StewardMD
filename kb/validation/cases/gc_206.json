@@ -1,0 +1,110 @@
+{
+  "id": "gc_206",
+  "specialty": "Endocrine",
+  "condition": "Myxoedema coma",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Found drowsy and cold at home during a winter cold snap, with progressive lethargy over 2 weeks.",
+  "history": "Brought in by family after being found obtunded and unarousable at home on a very cold morning. Two-week history of increasing lethargy, cold intolerance, constipation, hoarse voice and reduced appetite. Long-standing primary hypothyroidism on levothyroxine, but admits she stopped taking it ~3 months ago because she 'felt fine'. Prior partial thyroidectomy for goitre. Recent minor chest infection treated with a sedating cough syrup. No focal neurology, no head injury. Risk factors: elderly female, non-adherence to thyroid replacement, cold exposure, intercurrent infection and CNS depressant exposure as precipitants.",
+  "examination": "Obtunded, arousable only to pain. Dry, coarse, doughy non-pitting skin; periorbital and pretibial puffiness; macroglossia; sparse eyebrows (lateral third loss). Bradycardic, hypothermic, hypoventilating with shallow breaths. Delayed relaxation of ankle reflexes ('hung-up' reflexes). Old transverse cervical thyroidectomy scar. Pertinent negatives: no neck stiffness, no focal deficit, no exophthalmos or tremor, no purpuric rash, no localising signs of sepsis.",
+  "vitals": {
+    "hr": 44,
+    "bp": "88/56",
+    "rr": 8,
+    "temp": 33.8,
+    "spo2": 89
+  },
+  "labs": {
+    "TSH": "68 mIU/L (markedly elevated)",
+    "Free T4": "0.2 ng/dL (very low)",
+    "Free T3": "low",
+    "Sodium": "122 mmol/L (hyponatraemia)",
+    "Glucose": "58 mg/dL (hypoglycaemia)",
+    "ABG": "pH 7.28, PaCO2 62 mmHg (type 2 respiratory acidosis)",
+    "CK": "820 U/L (raised)",
+    "Cortisol (random)": "sent to exclude concomitant adrenal insufficiency",
+    "Creatinine": "1.2 mg/dL",
+    "Hemoglobin": "10.8 g/dL",
+    "TSH-context": "consistent with severe primary hypothyroid decompensation"
+  },
+  "imaging": "CXR: low lung volumes, small pericardial effusion silhouette; no consolidation. ECG: sinus bradycardia, low-voltage complexes, prolonged QT. CT head unremarkable (done to exclude structural cause of coma).",
+  "microbiology": "Blood and urine cultures sent to exclude precipitating infection; pending. No antimicrobial indicated unless a source is confirmed.",
+  "differentialDiagnoses": [
+    "Myxoedema coma (decompensated severe hypothyroidism)",
+    "Sepsis / septic encephalopathy",
+    "Primary hyponatraemia / SIADH",
+    "Sedative or drug intoxication",
+    "Adrenal (Addisonian) crisis",
+    "Environmental hypothermia"
+  ],
+  "finalDiagnosis": "Myxoedema coma",
+  "citations": [
+    "Harrison 22e — Hypothyroidism (Disorders of the Thyroid Gland)",
+    "American Thyroid Association Guidelines for Hypothyroidism in Adults 2014"
+  ],
+  "stewardship": "Not applicable — non-infective. Empiric broad-spectrum antibiotics are given only if a precipitating infection is clinically suspected/confirmed; the decompensation itself is endocrine.",
+  "contraindications": [
+    "Aggressive external rewarming can precipitate vasodilatory shock — use passive rewarming",
+    "Do not give levothyroxine without first covering with IV hydrocortisone (risk of precipitating adrenal crisis)",
+    "Avoid sedatives/opioids which further depress ventilation",
+    "Correct hyponatraemia slowly to avoid osmotic demyelination"
+  ],
+  "edgeCases": [
+    "Precipitating illness (infection, MI, cold exposure, sedatives) is often the trigger and may mask the diagnosis",
+    "Concomitant secondary adrenal insufficiency mandates empiric IV hydrocortisone before thyroid hormone",
+    "Hypothermia may read as 'afebrile' even in the presence of sepsis; a normal temperature can be relatively high for a myxoedematous patient"
+  ],
+  "expectedMaiK": "This is decompensated severe hypothyroidism (myxoedema coma): the triad of altered mentation, hypothermia and a precipitant in a patient with hypothyroidism and very low free T4 with markedly raised TSH. Give IV hydrocortisone first, then IV levothyroxine, support ventilation and rewarm passively, and treat any precipitant.",
+  "expectedNextQuestions": [
+    "Has she been taking her levothyroxine, and when was the last dose?",
+    "Any recent infection, new sedative/opioid medication, or cold exposure as a precipitant?",
+    "Any history of adrenal insufficiency or steroid use?"
+  ],
+  "expectedInvestigations": [
+    "TSH and free T4/T3",
+    "Random serum cortisol (exclude adrenal insufficiency) before thyroid replacement",
+    "ABG, serum sodium and glucose",
+    "Septic screen (cultures, CXR) to identify precipitant"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "alteredSensorium": true,
+    "hypothermia": true,
+    "bradycardia": true,
+    "bradypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "steroidUse": true
+  },
+  "expected": {
+    "diagnosis": "myxedema",
+    "acceptableIds": [
+      "myxedema"
+    ],
+    "differentialIds": [
+      "hyponatremia",
+      "adrenal_crisis",
+      "metabolic_enceph",
+      "drug_intox"
+    ],
+    "investigations": [
+      "TSH and free T4",
+      "random cortisol",
+      "serum sodium and glucose",
+      "ABG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include myxedema",
+    "expected.stewardship.tier must be null (non-infective)",
+    "differential must include an alternative cause of coma with hyponatraemia (hyponatremia or metabolic_enceph)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

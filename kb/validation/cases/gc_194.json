@@ -1,0 +1,108 @@
+{
+  "id": "gc_194",
+  "specialty": "Neurology",
+  "condition": "Idiopathic intracranial hypertension",
+  "age": 28,
+  "sex": "F",
+  "presentingComplaint": "Daily worsening headache with transient visual obscurations for 6 weeks",
+  "history": "28-year-old obese woman (BMI 36) with 6 weeks of gradually worsening, generalised, throbbing daily headache that is worse on waking, on bending/straining and with Valsalva. She reports pulsatile tinnitus and brief (few-second) episodes of graying-out of vision in both eyes, often triggered by standing. Intermittent horizontal binocular diplopia over the past week. No fever, no focal weakness, no seizures. Weight gain of ~8 kg over the preceding year. She recently started an oral tetracycline (doxycycline) for acne. No history of head trauma. No other regular medications; not pregnant (LMP 1 week ago, urine bhCG negative).",
+  "examination": "Alert, oriented, no meningism and no photophobia. Fundoscopy: bilateral papilloedema (Frisen grade 2-3) with blurred disc margins and absent venous pulsations. Visual acuity preserved (6/6 both eyes); enlarged blind spots on confrontation. Bilateral partial abducens (CN VI) palsy causing horizontal diplopia (a non-localising false-localising sign). No other focal neurological deficit; normal power, tone, reflexes and gait. No rash, no lymphadenopathy.",
+  "vitals": {
+    "hr": 78,
+    "bp": "128/80",
+    "rr": 15,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "WBC": "7.2 x10^9/L",
+    "Hb": "13.4 g/dL",
+    "platelets": "260 x10^3/uL",
+    "Na": "139 mmol/L",
+    "creatinine": "0.7 mg/dL",
+    "CRP": "2 mg/L",
+    "TSH": "1.8 mIU/L",
+    "bhCG": "negative",
+    "CSF opening pressure": "34 cmH2O (lateral decubitus)",
+    "CSF cell count": "1 lymphocyte",
+    "CSF protein": "0.22 g/L (normal)",
+    "CSF glucose": "3.6 mmol/L (normal)"
+  },
+  "imaging": "MRI brain with MR venography: normal-sized/slit ventricles, no mass lesion or hydrocephalus; empty sella, flattening of the posterior globes, distension of the perioptic subarachnoid space and transverse venous sinus stenosis. MRV excludes cerebral venous sinus thrombosis.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Idiopathic intracranial hypertension (pseudotumor cerebri)",
+    "Cerebral venous sinus thrombosis",
+    "Space-occupying lesion / brain tumour",
+    "Migraine",
+    "Meningitis"
+  ],
+  "finalDiagnosis": "Idiopathic intracranial hypertension",
+  "citations": [
+    "Harrison 22e — Headache / Increased Intracranial Pressure and Idiopathic Intracranial Hypertension",
+    "AAN/consensus Friedman modified Dandy diagnostic criteria for idiopathic intracranial hypertension 2013"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid acetazolamide in sulfonamide allergy and in significant renal impairment/metabolic acidosis",
+    "Stop the causative agent (tetracyclines, high-dose vitamin A/retinoids) before escalating therapy",
+    "Lumbar puncture contraindicated until neuroimaging excludes a mass lesion"
+  ],
+  "edgeCases": [
+    "Fulminant IIH with rapidly progressive vision loss is a surgical emergency requiring urgent CSF diversion or optic nerve sheath fenestration",
+    "Atypical demographics (male, non-obese, elderly, child) should prompt a search for secondary causes (venous thrombosis, drugs)",
+    "IIH without papilloedema can present with isolated headache and CN VI palsy"
+  ],
+  "expectedMaiK": "Young obese woman with chronic postural headache, pulsatile tinnitus, transient visual obscurations, bilateral papilloedema and a false-localising VI nerve palsy with normal parenchymal imaging is classic for idiopathic intracranial hypertension; confirm with markedly elevated CSF opening pressure and normal CSF constituents, and prioritise protecting vision.",
+  "expectedNextQuestions": [
+    "Any transient visual obscurations, sustained visual loss or field defect?",
+    "Recent weight gain, or exposure to tetracyclines, retinoids/vitamin A, or hormonal agents?"
+  ],
+  "expectedInvestigations": [
+    "MR venography to exclude cerebral venous sinus thrombosis",
+    "Lumbar puncture with measurement of opening pressure and CSF analysis",
+    "Formal automated perimetry (Humphrey visual fields) and dilated fundoscopy/OCT"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "headache": true,
+    "visualDisturbance": true,
+    "papilledema": true,
+    "focalNeuroDeficit": true,
+    "subacuteOnset": true,
+    "nauseaVomiting": true,
+    "weight": true,
+    "sex": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "iih",
+    "acceptableIds": [
+      "iih"
+    ],
+    "differentialIds": [
+      "brain_tumour",
+      "migraine",
+      "sah",
+      "tension_ha"
+    ],
+    "investigations": [
+      "MR venography",
+      "lumbar puncture with opening pressure",
+      "visual field testing / fundoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include iih",
+    "differential must not collapse to an infective meningitis/encephalitis id",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

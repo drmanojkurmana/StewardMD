@@ -1,0 +1,103 @@
+{
+  "id": "gc_125",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Erysipelas",
+  "age": 62,
+  "sex": "F",
+  "presentingComplaint": "Rapidly spreading, painful red rash over the left shin with fever and chills for 2 days",
+  "history": "Two days of a sharply advancing, bright-red, hot patch on the left lower leg preceded by 12 hours of high fever and rigors. Reports a small interdigital fissure from chronic tinea pedis as the likely portal of entry. Background of lower-limb lymphoedema after prior cellulitis and mild venous insufficiency. No trauma, no animal/water exposure, no diabetes, no immunosuppression. No breathlessness, chest or abdominal symptoms.",
+  "examination": "Well-demarcated, raised, indurated erythematous plaque over the anteromedial left shin with a clear step-off from normal skin (peau d'orange texture), warm and tender, with early superficial blistering at the leading edge. Tender left inguinal lymphadenopathy and a faint lymphangitic streak. Interdigital maceration/fissuring present. No crepitus, no dusky discolouration, no bullae with skin necrosis, pain proportionate to appearance (not out of proportion). Alert, not toxic.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/72",
+    "rr": 18,
+    "temp": 38.7,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "15.8 x10^9/L (neutrophilia)",
+    "CRP": "142 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "lactate": "1.4 mmol/L",
+    "glucose": "5.6 mmol/L",
+    "ASO/anti-DNase B": "elevated (supportive, retrospective)"
+  },
+  "imaging": "Not indicated for typical erysipelas; bedside ultrasound (if performed) shows subcutaneous oedema/cobblestoning without a drainable collection or fascial fluid tracking",
+  "microbiology": "Blood cultures sent (positive in <5% of cases); surface swab not recommended. Group A beta-haemolytic Streptococcus (S. pyogenes) is the predominant cause",
+  "differentialDiagnoses": [
+    "Erysipelas",
+    "Cellulitis",
+    "Necrotizing fasciitis",
+    "Deep vein thrombosis",
+    "Acute contact/stasis dermatitis"
+  ],
+  "finalDiagnosis": "Erysipelas (Group A streptococcal) of the left lower leg",
+  "citations": [
+    "Harrison 22e — Skin and Soft-Tissue Infections (Cellulitis and Erysipelas)",
+    "IDSA Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections 2014"
+  ],
+  "stewardship": "Empiric penicillin-class therapy targeting beta-haemolytic streptococci: oral/IV penicillin V or amoxicillin (IV benzylpenicillin if febrile/systemic); non-purulent, non-severe SSTI does not need routine MRSA cover per IDSA 2014. Elevate limb, treat tinea pedis to remove portal of entry.",
+  "contraindications": [
+    "Penicillin allergy — substitute clindamycin or a macrolide (note rising macrolide resistance in S. pyogenes)",
+    "Reduce/adjust renally cleared beta-lactam doses only if significant renal impairment",
+    "Avoid unnecessary broad-spectrum/anti-MRSA agents in classic non-purulent erysipelas"
+  ],
+  "edgeCases": [
+    "Facial ('butterfly') erysipelas can mimic other facial dermatoses; recurrent erysipelas in a lymphoedematous limb may warrant prophylactic penicillin",
+    "Failure to improve or pain out of proportion, crepitus, or haemorrhagic bullae must trigger urgent reassessment for necrotizing fasciitis"
+  ],
+  "expectedMaiK": "Classic Group A streptococcal erysipelas: a sharply demarcated, raised, rapidly spreading erythema with systemic fever/rigors and a skin portal of entry (tinea pedis). First-line therapy is a penicillin targeting beta-haemolytic streptococci; MRSA cover is not routinely needed for non-purulent erysipelas.",
+  "expectedNextQuestions": [
+    "Is the border sharply demarcated/raised distinguishing it from cellulitis, and is pain out of proportion (red flag for necrotizing infection)?",
+    "Is there a portal of entry (tinea pedis, fissure, lymphoedema) or prior episodes suggesting recurrence?"
+  ],
+  "expectedInvestigations": [
+    "CBC with differential and CRP",
+    "Blood cultures if febrile/systemically unwell",
+    "Mark the erythema border and reassess; ultrasound only if abscess or DVT suspected"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "sharplyDemarcatedBorder": true,
+    "rapidlySpreadingErythema": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "ERYSIPELAS",
+    "acceptableIds": [
+      "ERYSIPELAS"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "NECROTIZING_FASCIITIS",
+      "dvt"
+    ],
+    "investigations": [
+      "CBC with differential and CRP",
+      "Blood cultures",
+      "Mark erythema border; ultrasound if abscess/DVT suspected"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "penicillin V",
+        "amoxicillin",
+        "benzylpenicillin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ERYSIPELAS",
+    "must not recommend routine MRSA-active empiric therapy for non-purulent erysipelas",
+    "necrotizing fasciitis red-flags (severePain out of proportion, crepitusOrBullae) are absent in this classic case"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

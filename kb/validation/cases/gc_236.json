@@ -1,0 +1,107 @@
+{
+  "id": "gc_236",
+  "specialty": "Hepatology / Toxicology",
+  "condition": "Drug-induced / toxic hepatitis (paracetamol-associated hepatocellular injury)",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Nausea, right upper quadrant discomfort and dark urine 3 days after a staggered paracetamol overdose taken for dental pain.",
+  "history": "34-year-old woman presents with 2 days of anorexia, nausea, malaise and vague right upper quadrant discomfort. She admits taking approximately 6-8 g/day of paracetamol over the preceding 4-5 days for severe dental pain, exceeding the recommended maximum, and reports moderate alcohol use during the same period. No prescription drugs, no herbal/ayurvedic supplements, no recent travel, no risk factors for viral hepatitis, no prior liver disease. She now notices darkening of the urine. No fever, no rash, no arthralgia.",
+  "examination": "Alert and oriented, mildly icteric sclerae. Mild tender hepatomegaly with right upper quadrant tenderness; Murphy sign negative. No stigmata of chronic liver disease (no spider naevi, no palmar erythema, no ascites), no asterixis, no organomegaly beyond liver edge, no lymphadenopathy, no rash. Pertinent negatives: no fever, no encephalopathy, no bleeding.",
+  "vitals": {
+    "hr": 88,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 99
+  },
+  "labs": {
+    "ALT": "3420 U/L (markedly elevated)",
+    "AST": "2980 U/L",
+    "ALP": "142 U/L (near-normal; R-factor hepatocellular pattern)",
+    "Total bilirubin": "3.1 mg/dL",
+    "INR": "1.6",
+    "Creatinine": "0.9 mg/dL",
+    "Glucose": "84 mg/dL",
+    "Paracetamol level": "detectable, taken outside nomogram-interpretable window (staggered ingestion)",
+    "Viral hepatitis serology (HAV IgM, HBsAg, anti-HCV, HEV IgM)": "negative",
+    "Autoimmune screen (ANA, ASMA)": "negative",
+    "Lactate": "1.8 mmol/L",
+    "Arterial pH": "7.40"
+  },
+  "imaging": "Abdominal ultrasound: normal liver echotexture, patent hepatic and portal vessels, no biliary dilatation, no gallstones, no ascites — excludes obstruction and confirms non-cholestatic pattern.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute viral hepatitis",
+    "Ischaemic (hypoxic) hepatitis",
+    "Autoimmune hepatitis",
+    "Acute biliary obstruction / cholangitis",
+    "Alcoholic hepatitis"
+  ],
+  "finalDiagnosis": "Drug-induced (paracetamol) hepatotoxicity — acute hepatocellular injury",
+  "citations": [
+    "Harrison 22e — Toxic and Drug-Induced Hepatitis",
+    "AASLD Drug-Induced Liver Injury 2014"
+  ],
+  "stewardship": "not applicable — non-infective. Management is N-acetylcysteine, not antibiotics.",
+  "contraindications": [
+    "Avoid further hepatotoxins including additional paracetamol and alcohol",
+    "Caution with sedatives that could mask evolving encephalopathy",
+    "Anaphylactoid reactions possible with IV N-acetylcysteine infusion"
+  ],
+  "edgeCases": [
+    "Staggered/therapeutic-excess ingestion makes the Rumack-Matthew nomogram uninterpretable — treat on the basis of dose history and transaminases rather than a single level",
+    "Alcohol and fasting induce CYP2E1 and deplete glutathione, lowering the toxic threshold",
+    "A rising INR and bilirubin with falling transaminases can signal progression to acute liver failure — apply King's College criteria"
+  ],
+  "expectedMaiK": "Marked hepatocellular transaminitis (ALT/AST in thousands) with near-normal ALP after documented paracetamol excess points to drug-induced hepatotoxicity; start N-acetylcysteine promptly and serially monitor INR, bilirubin, creatinine and pH for evolving acute liver failure using King's College criteria.",
+  "expectedNextQuestions": [
+    "Exact total paracetamol dose, timing and whether ingestion was staggered or single-time",
+    "Concurrent alcohol, herbal/OTC supplements, and any other hepatotoxic medications"
+  ],
+  "expectedInvestigations": [
+    "Serum paracetamol level with timed sampling",
+    "Coagulation profile (INR), venous lactate and arterial pH",
+    "Viral hepatitis serology and autoimmune screen to exclude alternatives"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "jaundice": true,
+    "rightUpperQuadrantPain": true,
+    "nauseaVomiting": true,
+    "darkUrine": true,
+    "liverDisease": true,
+    "bilirubin": true,
+    "inr": true,
+    "abdominalDiscomfort": true,
+    "drugOverdose": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "toxic_hepatitis",
+    "acceptableIds": [
+      "toxic_hepatitis"
+    ],
+    "differentialIds": [
+      "VIRAL_HEPATITIS",
+      "decomp_cirrhosis",
+      "hepatic_enceph"
+    ],
+    "investigations": [
+      "Serum paracetamol level",
+      "INR and coagulation profile",
+      "Viral hepatitis serology"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include toxic_hepatitis",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

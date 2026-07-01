@@ -1,0 +1,110 @@
+{
+  "id": "gc_191",
+  "specialty": "Gastroenterology",
+  "condition": "Inflammatory bowel disease flare (moderate-to-severe ulcerative colitis)",
+  "age": 28,
+  "sex": "F",
+  "presentingComplaint": "3 weeks of increasing bloody diarrhoea with urgency and lower abdominal cramping",
+  "history": "28-year-old woman with a 4-year history of ulcerative colitis (left-sided colitis) maintained on oral mesalazine 2.4 g/day. Over the past 3 weeks she reports up to 6-8 loose stools per day, most with visible fresh blood and mucus, associated with faecal urgency, tenesmus and lower abdominal cramping partially relieved by defecation. Reports nocturnal stools and mild unintentional weight loss (~3 kg). Admits to running out of mesalazine 2 weeks ago and recent psychosocial stress. No recent travel, no antibiotics, no sick contacts, no NSAID use. No fever or rigors. Non-smoker.",
+  "examination": "Alert, mildly pale, not toxic. Abdomen soft with mild tenderness in the left iliac fossa and suprapubic region, no guarding, no rebound, no palpable mass; bowel sounds present. No abdominal distension. No peritonism. Pertinent negatives: no peripheral stigmata of chronic liver disease, no jaundice, no ascites, no lower-limb oedema, no fever on serial observation.",
+  "vitals": {
+    "hr": 92,
+    "bp": "112/70",
+    "rr": 16,
+    "temp": 37.2,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": "10.4 g/dL",
+    "platelets": "455 x10^3/uL",
+    "wbc": "11.2 x10^3/uL",
+    "crp": "48 mg/L",
+    "esr": "42 mm/hr",
+    "albumin": "3.2 g/dL",
+    "creatinine": "0.7 mg/dL",
+    "fecalCalprotectin": "1180 ug/g",
+    "stoolCultureAndOvaParasite": "negative",
+    "cdiffToxin": "negative"
+  },
+  "imaging": "Plain abdominal radiograph shows no colonic dilatation (transverse colon <5.5 cm) and no free air; no features of toxic megacolon. Flexible sigmoidoscopy: continuous circumferential mucosal erythema, loss of vascular pattern, granularity, friability and contact bleeding from rectum to descending colon (Mayo endoscopic subscore 2-3) with normal proximal margin.",
+  "microbiology": "Stool cultures, ova & parasites and C. difficile toxin/GDH all negative; CMV workup pending on biopsy in refractory cases",
+  "differentialDiagnoses": [
+    "Ulcerative colitis flare",
+    "Infective/invasive bacterial colitis (dysentery)",
+    "Clostridioides difficile colitis",
+    "Ischaemic colitis",
+    "Irritable bowel syndrome"
+  ],
+  "finalDiagnosis": "Moderate-to-severe ulcerative colitis flare (relapse of left-sided disease)",
+  "citations": [
+    "Harrison 22e — Inflammatory Bowel Disease (Ulcerative Colitis and Crohn's Disease)",
+    "ACG Ulcerative Colitis in Adults Clinical Guideline 2019"
+  ],
+  "stewardship": "Not applicable — non-infective inflammatory flare. Infective colitis (bacterial dysentery, C. difficile) must be actively excluded before/at the time of escalating immunosuppression, but empiric antibiotics are not indicated for an uncomplicated UC flare. Treatment is anti-inflammatory: optimise/escalate 5-ASA (oral + topical) and add oral corticosteroids (e.g. prednisolone 40 mg/day) for moderate-to-severe activity, with early consideration of biologic/steroid-sparing therapy.",
+  "contraindications": [
+    "Avoid antimotility/opioid agents and anticholinergics — risk of precipitating toxic megacolon",
+    "Sulfasalazine contraindicated in sulfa allergy; check G6PD",
+    "Corticosteroids: caution/monitoring in occult infection, hyperglycaemia and osteoporosis; not for maintenance",
+    "Confirm C. difficile-negative before intensifying immunosuppression"
+  ],
+  "edgeCases": [
+    "Acute severe UC (ASUC/Truelove-Witts) with >6 bloody stools/day plus systemic toxicity (fever, tachycardia, anaemia, raised ESR) requires admission for IV steroids and daily monitoring for toxic megacolon/perforation",
+    "Superimposed CMV colitis or C. difficile can drive steroid-refractory flares and must be excluded",
+    "New-onset bloody diarrhoea can mimic invasive bacterial dysentery — negative stool studies plus chronicity and continuous endoscopic inflammation favour IBD"
+  ],
+  "expectedMaiK": "This is a classic relapse of ulcerative colitis: chronic relapsing bloody diarrhoea with urgency/tenesmus, raised inflammatory markers and markedly elevated faecal calprotectin with negative infective studies, on a background of known UC after mesalazine non-adherence. Confirm the flare is non-infective (stool cultures/C. difficile), grade severity (Truelove-Witts), and escalate anti-inflammatory therapy rather than antibiotics.",
+  "expectedNextQuestions": [
+    "How many stools per day and how many are bloody, including nocturnal stools?",
+    "Any recent antibiotic use or hospital contact (C. difficile risk) or travel/sick contacts?",
+    "Has mesalazine been taken as prescribed, and any NSAID use?",
+    "Any fever, tachycardia, severe abdominal distension or worsening pain suggesting acute severe colitis/toxic megacolon?"
+  ],
+  "expectedInvestigations": [
+    "Stool culture, ova & parasites and C. difficile toxin/GDH",
+    "Faecal calprotectin",
+    "CRP, ESR, FBC, albumin, U&E",
+    "Flexible sigmoidoscopy with biopsy (including CMV immunostaining if refractory)",
+    "Abdominal radiograph to exclude colonic dilatation/toxic megacolon"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "abdominalPain": true,
+    "abdominalDiscomfort": true,
+    "weightLoss": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "ibd_flare",
+    "acceptableIds": [
+      "ibd_flare"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "C_DIFF",
+      "GASTROENTERITIS",
+      "ibs"
+    ],
+    "investigations": [
+      "Stool culture, ova & parasites and C. difficile toxin",
+      "Faecal calprotectin",
+      "Flexible sigmoidoscopy with biopsy",
+      "Abdominal radiograph to exclude toxic megacolon"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ibd_flare",
+    "expected.stewardship.tier must be null (non-infective flare — no empiric antibiotics)",
+    "differential must include an infective colitis mimic (DYSENTERY or C_DIFF)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "gc_148",
+  "specialty": "Respiratory",
+  "condition": "Acute Bacterial Rhinosinusitis",
+  "age": 41,
+  "sex": "F",
+  "presentingComplaint": "Facial pain and purulent nasal discharge for 11 days, worsening after initial improvement",
+  "history": "Otherwise healthy office worker with an 11-day history that began as a typical viral upper respiratory illness (rhinorrhea, mild sore throat, low-grade fever). She started to feel better around day 6 but then, over the last 3 days, developed worsening right-sided facial pain and pressure, thick purulent yellow-green nasal discharge, nasal blockage and a return of fever. Pain is worse on bending forward. Mild maxillary dental discomfort. No visual change, no periorbital swelling, no severe headache, no neck stiffness. No prior sinus surgery. No known immunosuppression, no recent antibiotics, non-smoker, no relevant drug allergy.",
+  "examination": "Alert, comfortable at rest, not toxic. Tenderness to palpation over the right maxillary sinus and mucopurulent discharge visible in the right middle meatus on anterior rhinoscopy; boggy congested inferior turbinates. Oropharynx unremarkable, no tonsillar exudate. No periorbital erythema or swelling, no proptosis, extraocular movements full and painless, no chemosis. No focal neurological deficit, neck supple, Kernig negative. Chest clear.",
+  "vitals": {
+    "hr": 88,
+    "bp": "122/76",
+    "rr": 16,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "10.8 x10^9/L (mild neutrophilia)",
+    "CRP": "34 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "glucose": "5.2 mmol/L"
+  },
+  "imaging": "Not indicated for uncomplicated acute bacterial rhinosinusitis; diagnosis is clinical. (If obtained for atypical/complicated concern, CT would show right maxillary sinus mucosal thickening with an air-fluid level.)",
+  "microbiology": "n/a — routine cultures not recommended; sinus aspirate/endoscopic culture reserved for treatment failure or complications",
+  "differentialDiagnoses": [
+    "Acute bacterial rhinosinusitis",
+    "Prolonged viral rhinosinusitis / common cold",
+    "Odontogenic maxillary sinusitis",
+    "Allergic rhinitis",
+    "Migraine / tension-type facial pain",
+    "Orbital cellulitis (complication to exclude)"
+  ],
+  "finalDiagnosis": "Acute bacterial rhinosinusitis (maxillary)",
+  "citations": [
+    "Harrison 22e — Pharyngitis, Sinusitis, Otitis, and Other Upper Respiratory Tract Infections",
+    "IDSA Acute Bacterial Rhinosinusitis in Children and Adults 2012"
+  ],
+  "stewardship": "First-line empiric amoxicillin-clavulanate (e.g., 500/125 mg PO TDS or 875/125 mg BD) for 5-7 days in adults, targeting S. pneumoniae, H. influenzae and M. catarrhalis; doxycycline or a respiratory fluoroquinolone (levofloxacin/moxifloxacin) is the alternative in beta-lactam allergy. Not routine amoxicillin alone given beta-lactamase-producing H. influenzae/M. catarrhalis.",
+  "contraindications": [
+    "Penicillin allergy — avoid amoxicillin-clavulanate, use doxycycline or respiratory fluoroquinolone",
+    "Avoid fluoroquinolones in pregnancy and reserve due to tendinopathy/QT risk",
+    "Doxycycline contraindicated in pregnancy"
+  ],
+  "edgeCases": [
+    "Early treatment of uncomplicated viral rhinosinusitis (<10 days, no double-sickening) is antibiotic overuse — most cases are viral and self-limiting",
+    "Red-flag complications requiring urgent imaging/ENT: periorbital/orbital swelling, proptosis, ophthalmoplegia, severe or frontal headache, altered sensorium, or high fever suggest orbital cellulitis, cavernous sinus thrombosis or intracranial extension",
+    "Odontogenic source (unilateral maxillary with foul odour and dental disease) may need dental management"
+  ],
+  "expectedMaiK": "Classic acute bacterial rhinosinusitis: symptoms persisting >10 days or a 'double-sickening' pattern with unilateral facial pain and purulent discharge. Treat symptomatically first; reserve empiric amoxicillin-clavulanate for persistent, worsening or severe disease, and escalate/image only if orbital or intracranial red flags appear.",
+  "expectedNextQuestions": [
+    "Have symptoms lasted >10 days or worsened after initial improvement (double-sickening)?",
+    "Any periorbital swelling, visual change, severe headache or altered mental state suggesting complication?",
+    "Any penicillin allergy, pregnancy, or recent antibiotic use?"
+  ],
+  "expectedInvestigations": [
+    "Clinical diagnosis — no imaging routinely required",
+    "Reserve CT paranasal sinuses (contrast) for suspected complication or treatment failure",
+    "Endoscopically-guided sinus culture only if failing therapy or immunocompromised"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "facialPain": true,
+    "unilateralFacialPain": true,
+    "purulentNasalDischarge": true,
+    "nasalCongestion": true,
+    "symptomsOver10Days": true,
+    "doubleSickening": true,
+    "coryza": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "SINUSITIS",
+    "acceptableIds": [
+      "SINUSITIS"
+    ],
+    "differentialIds": [
+      "URTI",
+      "PHARYNGITIS",
+      "MENINGITIS"
+    ],
+    "investigations": [
+      "Clinical diagnosis; no routine imaging",
+      "CT paranasal sinuses if complication/treatment failure suspected"
+    ],
+    "stewardship": {
+      "tier": "first-line",
+      "antibiotics": [
+        "amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SINUSITIS",
+    "empiric antibiotic must be amoxicillin-clavulanate (not amoxicillin alone)",
+    "imaging must not be flagged as routinely required"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

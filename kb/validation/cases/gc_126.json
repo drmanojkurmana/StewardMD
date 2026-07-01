@@ -1,0 +1,100 @@
+{
+  "id": "gc_126",
+  "specialty": "Systemic / Oncology",
+  "condition": "Febrile Neutropenia",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Fever and rigors 9 days after chemotherapy for AML",
+  "history": "Known acute myeloid leukaemia on induction chemotherapy (cytarabine + daunorubicin), day 9 post-cycle. Presents with a single spike of fever to 38.6 C with rigors this evening, mild sore mouth and fatigue. No localising cough, dysuria, diarrhoea or skin symptoms. Has a tunnelled central venous catheter in situ. No recent antibiotics; last hospitalisation was for this chemotherapy cycle. No known drug allergies.",
+  "examination": "Ill but alert. Oral mucositis with shallow buccal ulcers. Central line exit site clean, non-tender, no erythema or discharge. Chest clear, abdomen soft and non-tender, no perianal cellulitis or fluctuance. No focus of infection identified on careful examination including skin, perineum and IV sites.",
+  "vitals": {
+    "hr": 108,
+    "bp": "112/68",
+    "rr": 20,
+    "temp": 38.6,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "0.6 x10^9/L",
+    "ANC": "180 /uL",
+    "Hemoglobin": "8.9 g/dL",
+    "Platelets": "42 x10^3/uL",
+    "Creatinine": "0.9 mg/dL",
+    "CRP": "78 mg/L",
+    "Lactate": "1.4 mmol/L",
+    "Bilirubin": "0.8 mg/dL"
+  },
+  "imaging": "Chest radiograph clear; no consolidation. CT reserved for persistent fever or localising signs.",
+  "microbiology": "Two sets of blood cultures drawn (peripheral + central line) before antibiotics; urine culture sent; results pending.",
+  "differentialDiagnoses": [
+    "Febrile neutropenia (occult bacteraemia)",
+    "Catheter-related bloodstream infection",
+    "Occult pneumonia",
+    "Sepsis"
+  ],
+  "finalDiagnosis": "Febrile neutropenia (high-risk, chemotherapy-induced)",
+  "citations": [
+    "Harrison 22e — Infections in Patients with Cancer",
+    "IDSA Clinical Practice Guideline for Antimicrobial Agents in Neutropenic Patients with Cancer 2010"
+  ],
+  "stewardship": "Empiric anti-pseudomonal beta-lactam monotherapy within 1 hour: IV piperacillin-tazobactam (or cefepime / meropenem). Add vancomycin only for suspected line infection, skin/soft-tissue focus, MRSA colonisation or haemodynamic instability; this patient does not yet meet those criteria. High-risk (MASCC-defined, prolonged profound neutropenia expected) so admit for IV therapy.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis — substitute aztreonam plus vancomycin; avoid aminoglycoside monotherapy; dose-adjust for renal impairment"
+  ],
+  "edgeCases": [
+    "A single temperature >=38.3 C (or >=38.0 C sustained 1h) with ANC <500 is sufficient to act; do NOT wait for a second spike or a localising focus",
+    "Neutropenic patients may mount minimal inflammatory signs (no infiltrate, no pus), so absence of a focus does not exclude serious infection"
+  ],
+  "expectedMaiK": "Fever with ANC <500/uL is an oncological emergency: give empiric anti-pseudomonal beta-lactam within 60 minutes after two sets of blood cultures, and reserve vancomycin for specific indications rather than routine addition.",
+  "expectedNextQuestions": [
+    "Any central-line tenderness, erythema or discharge, or MRSA colonisation history?",
+    "Expected depth and duration of neutropenia / MASCC risk score?"
+  ],
+  "expectedInvestigations": [
+    "Paired peripheral and central-line blood cultures",
+    "Urinalysis and urine culture, chest radiograph, repeat FBC and CRP"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "neutropenia": true,
+    "absoluteNeutrophilCountLow": true,
+    "malignancy": true,
+    "immunocompromised": true,
+    "mucositis": true,
+    "centralLine": true,
+    "thrombocytopenia": true
+  },
+  "expected": {
+    "diagnosis": "FEBRILE_NEUTROPENIA",
+    "acceptableIds": [
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "DEVICE_INFECTION",
+      "CAP"
+    ],
+    "investigations": [
+      "Paired blood cultures (peripheral + central line)",
+      "Urine culture and chest radiograph"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include FEBRILE_NEUTROPENIA",
+    "empiric antibiotic must be an anti-pseudomonal beta-lactam (piperacillin-tazobactam/cefepime/meropenem)",
+    "vancomycin not added by default without a specific indication"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

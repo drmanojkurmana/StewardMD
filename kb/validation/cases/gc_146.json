@@ -1,0 +1,111 @@
+{
+  "id": "gc_146",
+  "specialty": "Systemic",
+  "condition": "Septic Shock",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "High fever with rigors and confusion, now cold and clammy with a low blood pressure not responding to fluids.",
+  "history": "3-day history of fever, dysuria and left flank pain, worsening over the last 12 hours with rigors, reduced urine output and drowsiness. Type 2 diabetic on metformin; prior episode of urinary tract infection. Brought to ED by family who report progressive confusion since morning. No recent hospitalization or antibiotics. No known drug allergies.",
+  "examination": "Toxic-looking, drowsy (GCS 13, E3V4M6), peripherally cold with mottled knees and prolonged capillary refill (>3s). Left costovertebral angle tenderness. Chest clear, no murmur, abdomen soft with no peritonism. No focal neurological deficit, no neck stiffness, no rash.",
+  "vitals": {
+    "hr": 126,
+    "bp": "78/44",
+    "rr": 28,
+    "temp": 39.2,
+    "spo2": 93
+  },
+  "labs": {
+    "WBC": "19.4 x10^9/L (neutrophilia with left shift)",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.3 mg/dL (baseline 1.0)",
+    "urea": "16 mmol/L",
+    "platelets": "112 x10^3/uL",
+    "bilirubin": "1.4 mg/dL",
+    "CRP": "268 mg/L",
+    "procalcitonin": "14 ng/mL",
+    "glucose": "212 mg/dL",
+    "ABG": "pH 7.28, HCO3 16, base deficit -8",
+    "urinalysis": "leukocyte esterase +++, nitrite positive, pyuria"
+  },
+  "imaging": "Bedside USS: left hydronephrosis with echogenic debris suggestive of obstructed infected system; CT KUB advised to exclude obstructing calculus.",
+  "microbiology": "Two sets of blood cultures and urine culture sent before antibiotics; Gram-negative bacilli reported on urine Gram stain (culture pending).",
+  "differentialDiagnoses": [
+    "Urosepsis with septic shock",
+    "Hypovolemic shock",
+    "Cardiogenic shock",
+    "Diabetic ketoacidosis with sepsis",
+    "Acute pyelonephritis without shock"
+  ],
+  "finalDiagnosis": "Septic shock secondary to obstructive urosepsis (Gram-negative source)",
+  "citations": [
+    "Harrison 22e — Severe Sepsis and Septic Shock",
+    "Surviving Sepsis Campaign: Management of Sepsis and Septic Shock 2021"
+  ],
+  "stewardship": "Broad-spectrum empiric IV antibiotics within 1 hour after cultures: piperacillin-tazobactam 4.5 g IV (loading dose, then renally adjusted) covering Enterobacterales for community urosepsis; escalate to a carbapenem if ESBL risk. Concurrent source control with urgent urological decompression (ureteric stent or nephrostomy) of the obstructed infected system. De-escalate on culture and sensitivities.",
+  "contraindications": [
+    "Penicillin/beta-lactam allergy (use aztreonam + aminoglycoside or carbapenem depending on cross-reactivity)",
+    "Acute kidney injury — renal dose-adjust and avoid/limit nephrotoxic aminoglycosides",
+    "Avoid further metformin during AKI (lactic acidosis risk)"
+  ],
+  "edgeCases": [
+    "Warm vasodilated 'flash' presentation can mask early shock — normal-appearing extremities do not exclude it",
+    "Relative adrenal insufficiency: add hydrocortisone if pressor-refractory",
+    "Obstructed pyelonephritis will not respond to antibiotics alone — source control (decompression) is essential"
+  ],
+  "expectedMaiK": "This is septic shock — persistent hypotension requiring vasopressors to keep MAP >=65 mmHg plus lactate >2 mmol/L despite adequate fluid resuscitation, most likely from an obstructed urinary source. Prioritise the Surviving Sepsis 1-hour bundle: cultures, lactate, 30 mL/kg crystalloid, broad-spectrum antibiotics, and noradrenaline for refractory hypotension, alongside urgent urological source control.",
+  "expectedNextQuestions": [
+    "Has MAP responded to a 30 mL/kg crystalloid bolus, or is a vasopressor already needed?",
+    "Any history of renal stones, prior ESBL organism, or recent instrumentation?"
+  ],
+  "expectedInvestigations": [
+    "Serial lactate clearance and repeat blood cultures",
+    "CT KUB / urgent urological imaging to confirm and relieve obstruction"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "toxicAppearing": true,
+    "flankPain": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "SEPTIC_SHOCK",
+    "acceptableIds": [
+      "SEPTIC_SHOCK"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "PYELONEPHRITIS",
+      "hypovolemic_shock",
+      "cardiogenic_shock"
+    ],
+    "investigations": [
+      "Serial lactate",
+      "Blood and urine cultures",
+      "CT KUB for source control"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SEPTIC_SHOCK",
+    "vasopressorRequirement + lactateElevated + hypotension must not resolve to uncomplicated SEPSIS or PYELONEPHRITIS",
+    "stewardship tier must be broad with source control flagged"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

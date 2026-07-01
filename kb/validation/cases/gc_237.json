@@ -1,0 +1,111 @@
+{
+  "id": "gc_237",
+  "specialty": "Hematology",
+  "condition": "Thrombotic microangiopathy (Thrombotic Thrombocytopenic Purpura)",
+  "age": 38,
+  "sex": "F",
+  "presentingComplaint": "Progressive fatigue, easy bruising, confusion and dark urine over five days",
+  "history": "Previously well 38-year-old woman presenting with a 5-day history of increasing lethargy, generalised weakness and gum bleeding with spontaneous bruising over the limbs. Family report fluctuating confusion and one episode of transient slurred speech and right-arm clumsiness that resolved within an hour. She has noticed cola-coloured urine and mild fever. No preceding bloody diarrhoea, no recent antibiotics, no new drugs (no quinine, no clopidogrel), and no diarrhoeal illness. Not pregnant (LMP 1 week ago). No history of malignancy, HIV or autoimmune disease. No family history of similar illness.",
+  "examination": "Alert but disoriented to time, fluctuating GCS 14; scattered petechiae over both shins and buccal mucosa with two large ecchymoses. Mild scleral icterus, pallor of conjunctivae. No lymphadenopathy, no hepatosplenomegaly, no meningism. Neurological exam without fixed focal deficit at the time of assessment. Chest clear, abdomen soft and non-tender. No peripheral oedema. Pertinent negatives: no rash suggestive of vasculitis, no joint swelling, no oliguria at presentation, urine output preserved.",
+  "vitals": {
+    "hr": 104,
+    "bp": "128/78",
+    "rr": 18,
+    "temp": 37.8,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "7.6 g/dL",
+    "platelets": "11 x10^3/uL",
+    "peripheral_smear": "numerous schistocytes (>2 per high-power field), polychromasia, thrombocytopenia; no blasts",
+    "reticulocyte_count": "6.8% (elevated)",
+    "LDH": "1180 U/L (markedly elevated)",
+    "haptoglobin": "<10 mg/dL (undetectable)",
+    "total_bilirubin": "3.2 mg/dL (indirect predominant)",
+    "direct_coombs": "negative",
+    "creatinine": "1.3 mg/dL",
+    "urea": "9.5 mmol/L",
+    "PT_INR": "1.0",
+    "aPTT": "32 s (normal)",
+    "fibrinogen": "3.4 g/L (normal)",
+    "D_dimer": "mildly elevated",
+    "ADAMTS13_activity": "<5% with inhibitor detected (result pending at presentation, drawn before plasma exchange)",
+    "urinalysis": "1+ protein, hemoglobinuria, few RBCs"
+  },
+  "imaging": "CT head non-contrast: no haemorrhage, no established infarct (performed for confusion / transient neuro symptoms)",
+  "microbiology": "n/a (blood cultures sent to exclude sepsis, no diarrhoeal illness so stool Shiga-toxin testing low yield)",
+  "differentialDiagnoses": [
+    "Thrombotic thrombocytopenic purpura (TTP)",
+    "Haemolytic uraemic syndrome / atypical HUS",
+    "Disseminated intravascular coagulation",
+    "Immune thrombocytopenia with incidental anaemia",
+    "Evans syndrome / autoimmune haemolysis"
+  ],
+  "finalDiagnosis": "Acquired (immune) thrombotic thrombocytopenic purpura — a thrombotic microangiopathy",
+  "citations": [
+    "Harrison 22e — Coagulation Disorders / Thrombotic Microangiopathies (TTP-HUS)",
+    "ISTH Guidelines for the Diagnosis and Treatment of Thrombotic Thrombocytopenic Purpura 2020"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid platelet transfusion unless life-threatening haemorrhage or intracranial bleed — may precipitate further microvascular thrombosis",
+    "Do not delay therapeutic plasma exchange awaiting ADAMTS13 result",
+    "Caution with rituximab in unscreened chronic infection"
+  ],
+  "edgeCases": [
+    "Classic 'pentad' (fever, neuro signs, renal failure, thrombocytopenia, MAHA) is present in a minority; MAHA + thrombocytopenia without alternative cause is sufficient to start plasma exchange",
+    "Normal or near-normal creatinine favours TTP over HUS; predominant AKI with preceding bloody diarrhoea in a child favours Shiga-toxin HUS",
+    "Normal coagulation profile (PT/aPTT/fibrinogen) distinguishes TTP from DIC"
+  ],
+  "expectedMaiK": "This is a thrombotic microangiopathy: microangiopathic haemolytic anaemia (schistocytes, high LDH, undetectable haptoglobin, negative Coombs) plus severe thrombocytopenia with neurological features and normal coagulation strongly indicate acquired TTP. Start therapeutic plasma exchange urgently and give corticosteroids; send ADAMTS13 before PEX but do not await the result.",
+  "expectedNextQuestions": [
+    "Any recent bloody diarrhoea, new drugs (quinine, clopidogrel, calcineurin inhibitors), pregnancy or prior TTP episodes?",
+    "Any focal neurological deficit, seizure or worsening conscious level requiring urgent escalation?"
+  ],
+  "expectedInvestigations": [
+    "ADAMTS13 activity and inhibitor assay (drawn before plasma exchange)",
+    "Peripheral blood film for schistocytes, plus LDH, haptoglobin, reticulocytes, direct Coombs and coagulation profile"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "mucocutaneousBleeding": true,
+    "petechialRash": true,
+    "thrombocytopenia": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "fever": true,
+    "darkUrine": true,
+    "renalImpairment": true,
+    "hemoglobin": true,
+    "platelets": true
+  },
+  "expected": {
+    "diagnosis": "ttp_hus",
+    "acceptableIds": [
+      "ttp_hus"
+    ],
+    "differentialIds": [
+      "dic",
+      "itp",
+      "acute_leukemia",
+      "glomerulonephritis"
+    ],
+    "investigations": [
+      "Peripheral blood film for schistocytes with LDH, haptoglobin and direct Coombs",
+      "ADAMTS13 activity and inhibitor assay before plasma exchange"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ttp_hus",
+    "must not recommend platelet transfusion as first-line",
+    "coagulation profile normal must down-weight dic"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

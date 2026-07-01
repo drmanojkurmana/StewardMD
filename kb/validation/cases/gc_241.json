@@ -1,0 +1,105 @@
+{
+  "id": "gc_241",
+  "specialty": "Neurology / Nutrition",
+  "condition": "Wernicke encephalopathy",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Confusion, unsteady gait and double vision over several days",
+  "history": "54-year-old man brought by family with a few days of worsening confusion, unsteadiness and 'seeing double'. Long history of heavy daily alcohol use (~half a bottle of spirits/day for 20 years) with markedly reduced food intake and several weeks of recurrent vomiting. No head trauma. No fever. Not known diabetic. No focal limb weakness. Family reports he has been drinking more and eating almost nothing recently.",
+  "examination": "Disoriented to time and place, inattentive and apathetic but rousable; no meningism. Eye exam shows horizontal gaze-evoked nystagmus and bilateral partial abducens (lateral rectus) palsy causing diplopia. Broad-based ataxic gait, unable to walk unaided, with truncal instability; limb power and reflexes preserved, plantars flexor. No asterixis, no jaundice, no focal cortical signs. Pertinent negatives: no neck stiffness, no photophobia, no papilloedema, no lateralising weakness.",
+  "vitals": {
+    "hr": 98,
+    "bp": "128/78",
+    "rr": 16,
+    "temp": 36.9,
+    "spo2": 98
+  },
+  "labs": {
+    "Random glucose": "5.2 mmol/L",
+    "Sodium": "137 mmol/L",
+    "Serum creatinine": "0.9 mg/dL",
+    "AST/ALT": "82 / 40 U/L (AST>ALT)",
+    "GGT": "310 U/L (elevated)",
+    "MCV": "104 fL (macrocytosis)",
+    "Ammonia": "38 µmol/L (normal)",
+    "Serum thiamine (pre-treatment, sent)": "low",
+    "TSH": "normal"
+  },
+  "imaging": "MRI brain: symmetrical T2/FLAIR hyperintensity in the medial thalami, mammillary bodies, periaqueductal grey matter and tectal plate; no diffusion-restricting infarct, no mass, no haemorrhage. CT head (done first) unremarkable.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Wernicke encephalopathy",
+    "Hepatic encephalopathy",
+    "Alcohol withdrawal / delirium tremens",
+    "Metabolic encephalopathy",
+    "Posterior circulation ischaemic stroke"
+  ],
+  "finalDiagnosis": "Wernicke encephalopathy",
+  "citations": [
+    "Harrison 22e — Nutrition: Vitamin and Trace Mineral Deficiency and Excess (thiamine); Alcohol and Alcoholism",
+    "EFNS Guidelines on Diagnosis and Management of Wernicke Encephalopathy 2010"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Do NOT give IV glucose before/without thiamine in a malnourished or alcohol-dependent patient — a glucose load can precipitate or worsen Wernicke encephalopathy",
+    "Rare anaphylaxis to IV thiamine — give as slow infusion with resuscitation facilities available",
+    "Replace concurrent magnesium (a cofactor) as hypomagnesaemia impairs thiamine-dependent enzymes"
+  ],
+  "edgeCases": [
+    "The complete classic triad (confusion + ophthalmoplegia + ataxia) occurs in only ~10-20% of cases — treat empirically on any suggestive feature in an at-risk patient",
+    "Not exclusive to alcohol: also seen with hyperemesis gravidarum, bariatric surgery, prolonged vomiting, starvation, dialysis and TPN without thiamine",
+    "Normal MRI does not exclude the diagnosis; MRI sensitivity is limited (~50%) so treatment must not be delayed for imaging",
+    "Untreated Wernicke can progress to irreversible Korsakoff amnestic syndrome"
+  ],
+  "expectedMaiK": "In an alcohol-dependent, malnourished patient with confusion, ophthalmoplegia/nystagmus and gait ataxia, treat empirically as Wernicke encephalopathy with high-dose IV thiamine NOW, before any glucose. Do not wait for thiamine levels or MRI, and replace magnesium.",
+  "expectedNextQuestions": [
+    "Quantify alcohol intake and recent nutritional/oral intake and vomiting",
+    "Any bariatric surgery, prolonged vomiting, hyperemesis or malabsorption?",
+    "Has IV dextrose already been administered without thiamine?"
+  ],
+  "expectedInvestigations": [
+    "MRI brain (mammillary bodies, medial thalami, periaqueductal grey)",
+    "Serum/red-cell thiamine and erythrocyte transketolase (before replacement, do not delay treatment)",
+    "Serum magnesium, glucose, electrolytes and LFTs / ammonia to exclude mimics"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "alteredSensorium": true,
+    "ataxia": true,
+    "visualDisturbance": true,
+    "alcoholExcess": true,
+    "nauseaVomiting": true,
+    "behavioralChange": true,
+    "subacuteOnset": true,
+    "weightLoss": true
+  },
+  "expected": {
+    "diagnosis": "wernicke",
+    "acceptableIds": [
+      "wernicke"
+    ],
+    "differentialIds": [
+      "hepatic_enceph",
+      "metabolic_enceph",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "MRI brain",
+      "Serum thiamine / erythrocyte transketolase",
+      "Serum magnesium, glucose and LFTs"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include wernicke",
+    "expected.stewardship.tier must be null (non-infective condition)",
+    "advisory must warn against giving glucose before thiamine"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

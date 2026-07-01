@@ -1,0 +1,108 @@
+{
+  "id": "gc_138",
+  "specialty": "Genitourinary",
+  "condition": "Acute Bacterial Prostatitis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Two days of high fever with rigors, painful urination and perineal pain",
+  "history": "A 58-year-old man presents with a 2-day history of abrupt-onset high-grade fever with shaking chills, dysuria, urinary frequency and urgency, poor stream with a sense of incomplete emptying, and a dull aching perineal/pelvic pain radiating to the low back. He reports pain on defecation. Background of benign prostatic hyperplasia on tamsulosin; type 2 diabetes on metformin. No recent instrumentation, but a prior episode of cystitis 6 months ago. No urethral discharge and no new sexual partners.",
+  "examination": "Ill-looking, flushed, febrile. Abdomen soft; suprapubic fullness with mild tenderness and a palpable bladder suggesting partial retention. Digital rectal examination reveals an exquisitely tender, warm, boggy and swollen prostate. No fluctuant mass to suggest abscess. No costovertebral angle tenderness. Testes and epididymes non-tender; no urethral discharge; no genital ulcer or rash.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/74",
+    "rr": 20,
+    "temp": 39.2,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "16.4 x10^9/L with neutrophilia",
+    "CRP": "142 mg/L",
+    "creatinine": "1.0 mg/dL",
+    "random glucose": "184 mg/dL",
+    "urinalysis": "pyuria (WBC 60/hpf), positive leukocyte esterase and nitrites, bacteriuria",
+    "PSA": "not indicated acutely (falsely elevated in acute inflammation)"
+  },
+  "imaging": "Not routinely indicated in classic acute bacterial prostatitis; bedside bladder scan shows post-void residual ~180 mL. Transrectal ultrasound/CT reserved for suspected prostatic abscess (persistent fever >36 h on appropriate therapy).",
+  "microbiology": "Midstream urine culture sent (pending); blood cultures x2 drawn before antibiotics. Prostatic massage is contraindicated in acute prostatitis. Most likely Escherichia coli; other Enterobacterales (Klebsiella, Proteus) and Enterococcus possible.",
+  "differentialDiagnoses": [
+    "Acute bacterial prostatitis",
+    "Acute pyelonephritis",
+    "Complicated lower UTI / cystitis with retention",
+    "Epididymo-orchitis",
+    "Prostatic abscess"
+  ],
+  "finalDiagnosis": "Acute bacterial prostatitis",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA/AUA Prostatitis (acute bacterial prostatitis) management, contemporary guidance 2010-2022"
+  ],
+  "stewardship": "Empiric fluoroquinolone (ciprofloxacin) which achieves good prostatic penetration; in acutely inflamed gland a beta-lactam (e.g. ceftriaxone) is also acceptable given inflammation increases penetration, especially where local fluoroquinolone resistance in E. coli is high (relevant in India). Cover Enterobacterales; add empiric coverage per local resistance. Total duration 2-4 weeks to prevent chronic prostatitis. De-escalate on culture and sensitivity.",
+  "contraindications": [
+    "Prostatic massage contraindicated (risk of bacteraemia)",
+    "Fluoroquinolone caution: tendinopathy, QT prolongation, aortic aneurysm risk; avoid if allergy",
+    "Adjust ciprofloxacin/beta-lactam dose for renal function",
+    "Avoid nitrofurantoin/fosfomycin - poor prostatic tissue penetration"
+  ],
+  "edgeCases": [
+    "Failure to defervesce within 36-48h suggests prostatic abscess requiring imaging and drainage, especially in diabetics/immunocompromised",
+    "Acute urinary retention may require suprapubic (preferred) rather than urethral catheterisation to avoid pressure on the inflamed gland",
+    "In young sexually active men consider N. gonorrhoeae/C. trachomatis and treat accordingly"
+  ],
+  "expectedMaiK": "Classic acute bacterial prostatitis: febrile lower-UTI syndrome in a man with an exquisitely tender boggy prostate on DRE. Avoid prostatic massage, cover Enterobacterales with a prostate-penetrating agent (fluoroquinolone or, in the inflamed gland, a beta-lactam) for a prolonged 2-4 week course, and watch for abscess or retention.",
+  "expectedNextQuestions": [
+    "Any difficulty passing urine or complete inability to void (retention)?",
+    "Recent urinary catheterisation, prostate biopsy or instrumentation?",
+    "Sexual history / urethral discharge to gauge STI risk?"
+  ],
+  "expectedInvestigations": [
+    "Midstream urine microscopy and culture with sensitivities",
+    "Blood cultures",
+    "Post-void residual bladder scan; transrectal ultrasound or CT if abscess suspected"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "perinealPain": true,
+    "urinaryRetention": true,
+    "feverGU": true,
+    "tachycardia": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "PROSTATITIS",
+    "acceptableIds": [
+      "PROSTATITIS"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "CA_UTI"
+    ],
+    "investigations": [
+      "Midstream urine culture and sensitivity",
+      "Blood cultures",
+      "Post-void residual / transrectal ultrasound if abscess suspected"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "ciprofloxacin",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include PROSTATITIS",
+    "findings must include perinealPain and feverGU",
+    "prostatic massage must not be recommended"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

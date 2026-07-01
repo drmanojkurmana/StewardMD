@@ -1,0 +1,105 @@
+{
+  "id": "gc_209",
+  "specialty": "Toxicology",
+  "condition": "Organophosphate / cholinergic poisoning",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Found collapsed in his field with copious frothing at the mouth and difficulty breathing after suspected pesticide ingestion.",
+  "history": "Agricultural worker brought in ~45 minutes after deliberate ingestion of an unlabelled organophosphate insecticide (chlorpyrifos-type) following a family dispute. Empty pesticide container found beside him. Rapid onset of profuse salivation, lacrimation, vomiting, diarrhoea, urinary incontinence and progressive breathlessness. Clothing soaked and reeking of a solvent/garlic-like odour. No prior psychiatric history documented; no chronic illness, not on regular medication.",
+  "examination": "Confused and agitated, then progressively drowsy. Pinpoint pupils (miosis) poorly reactive to light. Profuse salivation and lacrimation, drenching sweat. Bilateral coarse crepitations with audible wheeze and copious bronchial secretions on auscultation. Diffuse muscle fasciculations over face and limbs; generalised weakness. Bowel sounds hyperactive, urinary and faecal incontinence. Pertinent negatives: no focal neurological deficit, no neck stiffness, no rash, skin not dry (contrasts with anticholinergic toxidrome).",
+  "vitals": {
+    "hr": 48,
+    "bp": "92/58",
+    "rr": 28,
+    "temp": 36.4,
+    "spo2": 88
+  },
+  "labs": {
+    "RBC/plasma cholinesterase": "markedly reduced (<10% of reference)",
+    "ABG": "pH 7.28, respiratory + metabolic acidosis, PaO2 62 mmHg on room air",
+    "potassium": "3.3 mmol/L",
+    "glucose": "146 mg/dL",
+    "creatinine": "0.9 mg/dL",
+    "amylase": "mildly elevated",
+    "troponin": "negative",
+    "ECG": "sinus bradycardia, prolonged QTc, no ischaemic changes"
+  },
+  "imaging": "Chest X-ray: bilateral patchy alveolar shadowing consistent with excess bronchial secretions / early aspiration; heart size normal.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Organophosphate / carbamate (cholinergic) poisoning",
+    "Opioid overdose",
+    "Sedative-hypnotic / drug intoxication",
+    "Aspiration pneumonia",
+    "Nerve-agent exposure (mass-casualty context)"
+  ],
+  "finalDiagnosis": "Acute organophosphate (anticholinesterase) poisoning with cholinergic crisis",
+  "citations": [
+    "Harrison 22e — Poisoning and Drug Overdose (cholinesterase inhibitors / insecticides)",
+    "WHO/AIIMS Management of Organophosphorus Poisoning 2019"
+  ],
+  "stewardship": "not applicable — non-infective. Management is antidotal: atropine titrated to drying of secretions plus pralidoxime (oxime), airway protection, and decontamination.",
+  "contraindications": [
+    "Avoid suxamethonium — prolonged paralysis due to plasma cholinesterase inhibition",
+    "Avoid aminophylline / theophylline and morphine",
+    "Withhold oximes only if a pure carbamate is confirmed; otherwise give with atropine"
+  ],
+  "edgeCases": [
+    "Intermediate syndrome (proximal/neck-flexor and respiratory-muscle weakness) 24-96h after apparent recovery",
+    "Delayed organophosphate-induced peripheral neuropathy weeks later",
+    "Carbamate poisoning gives a similar but shorter, self-limiting toxidrome",
+    "Massive lipophilic OP ingestion can cause recurrent/relapsing cholinergic crisis over days"
+  ],
+  "expectedMaiK": "Miosis with muscarinic overdrive (SLUDGE), bronchorrhoea, fasciculations and bradycardia after pesticide exposure define a cholinergic crisis from anticholinesterase poisoning; secure the airway, give escalating atropine titrated to dried secretions, add pralidoxime, and decontaminate. Confirm with low plasma/RBC cholinesterase but do not delay antidotes for the result.",
+  "expectedNextQuestions": [
+    "What exact pesticide/compound was ingested and how much, and was it an organophosphate or carbamate?",
+    "Are secretions drying and is the chest clearing after each atropine dose (atropinisation endpoint)?"
+  ],
+  "expectedInvestigations": [
+    "Plasma and RBC (acetyl)cholinesterase activity",
+    "Arterial blood gas and serial oxygenation/ventilation assessment",
+    "ECG (QTc, bradyarrhythmia) and continuous cardiac monitoring"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "miosisSecretions": true,
+    "bradycardia": true,
+    "bradypnea": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "hypotension": true,
+    "toxicAppearing": true,
+    "drugOverdose": true
+  },
+  "expected": {
+    "diagnosis": "organophosphate",
+    "acceptableIds": [
+      "organophosphate"
+    ],
+    "differentialIds": [
+      "opioid_od",
+      "drug_intox",
+      "serotonin_nms"
+    ],
+    "investigations": [
+      "Plasma / RBC cholinesterase activity",
+      "Arterial blood gas",
+      "ECG and cardiac monitoring"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include organophosphate",
+    "miosisSecretions + bradycardia + drugOverdose should rank organophosphate above opioid_od",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

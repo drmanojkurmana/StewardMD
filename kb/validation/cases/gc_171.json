@@ -1,0 +1,102 @@
+{
+  "id": "gc_171",
+  "specialty": "Neurology / Emergency",
+  "condition": "Malignant spinal cord compression (metastatic epidural)",
+  "age": 66,
+  "sex": "M",
+  "presentingComplaint": "Progressive mid-back pain for 3 weeks with bilateral leg weakness and urinary hesitancy for 48 hours",
+  "history": "Known metastatic prostate adenocarcinoma (Gleason 8, diagnosed 2 years ago, on androgen-deprivation therapy). Three weeks of constant thoracic back pain, worse at night and on lying flat, unrelieved by paracetamol. Over the last 2 days he has noticed heaviness and weakness of both legs, unsteadiness when walking, a band-like tightness around the trunk, and difficulty initiating micturition with a sense of incomplete emptying. Reports numbness rising from the feet to just below the umbilicus. No trauma. No fever, no recent infection.",
+  "examination": "Alert, oriented, not septic. Focal tenderness over the mid-thoracic spinous processes. Lower-limb power 3/5 bilaterally with increased tone, hyperreflexia at knees and ankles, bilateral upgoing plantars. Sensory level at approximately T10 to pinprick. Palpable bladder; reduced anal tone on PR with saddle sensory loss. Upper limbs and cranial nerves normal. Pertinent negatives: no neck stiffness, no meningism, no fever, no calf tenderness, no rash.",
+  "vitals": {
+    "hr": 84,
+    "bp": "134/80",
+    "rr": 16,
+    "temp": 36.9,
+    "spo2": 98
+  },
+  "labs": {
+    "Hb": "10.8 g/dL",
+    "WCC": "7.2 x10^9/L",
+    "platelets": "245 x10^9/L",
+    "CRP": "18 mg/L",
+    "creatinine": "1.1 mg/dL",
+    "corrected calcium": "2.68 mmol/L",
+    "ALP": "310 U/L (raised)",
+    "PSA": "84 ng/mL"
+  },
+  "imaging": "Urgent whole-spine MRI: T9-T10 posterior vertebral body metastasis with epidural soft-tissue extension causing thecal sac indentation and cord compression with early cord signal change; multiple sclerotic vertebral deposits. Bladder scan: 480 mL residual.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Malignant epidural spinal cord compression",
+    "Epidural abscess",
+    "Vertebral osteomyelitis/discitis",
+    "Disc prolapse with myelopathy",
+    "Transverse myelitis"
+  ],
+  "finalDiagnosis": "Metastatic (malignant) spinal cord compression at T9-T10 from prostate carcinoma",
+  "citations": [
+    "Harrison 22e — Approach to the Patient with Spinal Cord Disease / Neoplastic Diseases of the CNS",
+    "NICE Metastatic Spinal Cord Compression (NG234) 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid delaying dexamethasone while awaiting imaging if MSCC strongly suspected",
+    "Screen for hyperglycaemia/PUD when starting high-dose steroids",
+    "Caution with NSAIDs given renal function and steroid co-use"
+  ],
+  "edgeCases": [
+    "Back pain can precede neurological signs by weeks — a normal neuro exam does not exclude impending MSCC",
+    "Autonomic (bladder/bowel) dysfunction and painless retention may be the only early sign; conus/cauda lesions give mixed UMN/LMN and saddle anaesthesia",
+    "Ambulatory status at treatment is the strongest predictor of outcome — treat as an emergency"
+  ],
+  "expectedMaiK": "This is a neuro-oncological emergency: back pain with a sensory level, bilateral leg weakness, hyperreflexia and new bladder dysfunction in a patient with known metastatic prostate cancer indicates malignant spinal cord compression. Give high-dose dexamethasone immediately and arrange urgent whole-spine MRI with oncology/neurosurgery review — do not wait.",
+  "expectedNextQuestions": [
+    "Any bladder or bowel dysfunction, saddle numbness or reduced anal tone?",
+    "Is the pain worse on lying flat or at night, and is there a sensory level?",
+    "Is the patient still able to walk (ambulatory status)?"
+  ],
+  "expectedInvestigations": [
+    "Urgent whole-spine MRI",
+    "Post-void bladder scan / residual volume",
+    "Corrected calcium and baseline oncology bloods"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "backPain": true,
+    "malignancy": true,
+    "weightLoss": true,
+    "focalNeuroDeficit": true,
+    "urinaryRetention": true,
+    "subacuteOnset": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "cord_compression",
+    "acceptableIds": [
+      "cord_compression"
+    ],
+    "differentialIds": [
+      "brain_tumour",
+      "malignancy_b",
+      "gbs"
+    ],
+    "investigations": [
+      "Urgent whole-spine MRI",
+      "Post-void bladder residual scan",
+      "Corrected calcium / oncology bloods"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include cord_compression",
+    "stewardship tier must be null (non-infective)",
+    "findings must flag focalNeuroDeficit and malignancy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

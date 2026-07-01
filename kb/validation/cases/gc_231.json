@@ -1,0 +1,102 @@
+{
+  "id": "gc_231",
+  "specialty": "Cardiology / Emergency",
+  "condition": "Cardiac tamponade",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness and light-headedness over one week",
+  "history": "58-year-old man with a 7-day history of worsening exertional dyspnoea, orthopnoea and vague retrosternal chest discomfort, now breathless at rest. Reports two episodes of near-syncope on standing. Background of metastatic non-small-cell lung cancer diagnosed 4 months ago on carboplatin/pemetrexed. No fever, no recent chest trauma or cardiac intervention. Non-anticoagulated.",
+  "examination": "Anxious, cool peripheries. Markedly raised JVP with a prominent x-descent, quiet/muffled heart sounds and no pericardial rub. Palpable pulsus paradoxus. Chest clear to auscultation with no basal crackles and no focal consolidation. No calf swelling or tenderness; no focal neurological deficit.",
+  "vitals": {
+    "hr": 118,
+    "bp": "92/74",
+    "rr": 24,
+    "temp": 36.8,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": "11.2 g/dL",
+    "wbc": "8.1 x10^9/L",
+    "creatinine": "1.1 mg/dL",
+    "troponin": "mildly elevated (0.06 ng/mL)",
+    "NT-proBNP": "modestly raised",
+    "lactate": "1.8 mmol/L"
+  },
+  "imaging": "CXR: enlarged, globular 'water-bottle' cardiac silhouette with clear lung fields. Transthoracic echo: large circumferential pericardial effusion with diastolic collapse of the right atrium and right ventricle, dilated non-collapsing IVC, and >25% respirophasic variation in mitral inflow (echo tamponade physiology).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Cardiac tamponade (malignant pericardial effusion)",
+    "Acute decompensated heart failure / pulmonary oedema",
+    "Pulmonary embolism",
+    "Acute coronary syndrome",
+    "Tension pneumothorax"
+  ],
+  "finalDiagnosis": "Cardiac tamponade due to malignant pericardial effusion",
+  "citations": [
+    "Harrison 22e — Pericardial Disease",
+    "ESC Guidelines on the Diagnosis and Management of Pericardial Diseases 2015"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid aggressive diuresis and vasodilators (nitrates, ACE inhibitors) — preload-dependent state; may precipitate haemodynamic collapse",
+    "Positive-pressure ventilation can worsen venous return and cause arrest — secure haemodynamics/pericardiocentesis first"
+  ],
+  "edgeCases": [
+    "Low-pressure tamponade in hypovolaemic patients may lack overt hypotension and pulsus paradoxus",
+    "Pulsus paradoxus can be absent with coexisting aortic regurgitation, severe LV dysfunction, or large ASD; loculated effusions (e.g. post-surgical) can cause regional tamponade"
+  ],
+  "expectedMaiK": "Beck's triad (hypotension, raised JVP, muffled heart sounds) with pulsus paradoxus and an enlarged cardiac silhouette in a patient with malignancy points to cardiac tamponade — a non-infective obstructive shock. Urgent bedside echo confirms right-heart diastolic collapse, and emergency echo-guided pericardiocentesis is both diagnostic and life-saving; avoid diuretics/vasodilators and delay of positive-pressure ventilation.",
+  "expectedNextQuestions": [
+    "Is there pulsus paradoxus >10 mmHg, and any history of malignancy, recent cardiac procedure, uraemia or TB exposure?",
+    "Any preceding chest trauma, aortic dissection features, or anticoagulant use?"
+  ],
+  "expectedInvestigations": [
+    "Urgent transthoracic echocardiogram",
+    "12-lead ECG (low voltage / electrical alternans)",
+    "Chest X-ray",
+    "Pericardial fluid analysis and cytology after drainage"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "syncope": true,
+    "chestPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "raisedJVP": true,
+    "malignancy": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "tamponade",
+    "acceptableIds": [
+      "tamponade"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "pe",
+      "acs",
+      "pericarditis"
+    ],
+    "investigations": [
+      "Urgent transthoracic echocardiogram",
+      "12-lead ECG",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include tamponade",
+    "stewardship tier must be null (non-infective)",
+    "differential must include heart_failure and pe"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "gc_103",
+  "specialty": "Hepatobiliary / Tropical Fever",
+  "condition": "Amoebic Liver Abscess",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "One week of high fever with rigors and constant right upper abdominal pain",
+  "history": "Previously well 42-year-old man from a peri-urban settlement in Delhi, presents with 7 days of high-grade fever with chills and rigors and a dull, constant right upper quadrant pain that is worse on deep inspiration and radiates to the right shoulder tip. Reports anorexia, malaise and mild non-bloody loose stools two weeks earlier that resolved. Heavy alcohol use (approx 6 units/day for years). No prior jaundice, no gallstone history, no recent surgery. Lives in an area with poor sanitation; drinks unfiltered municipal water. No foreign travel outside India.",
+  "examination": "Ill-appearing, febrile, mildly dehydrated but not shocked. Tender hepatomegaly with the liver edge palpable 4 cm below the costal margin and marked point tenderness / intercostal tenderness over the lower right ribs. Positive right subcostal tenderness on percussion. No clinical jaundice, no Murphy sign, no splenomegaly, no peripheral stigmata of chronic liver disease. Right basal reduced air entry with dullness (sympathetic effusion). No peritonism.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/74",
+    "rr": 20,
+    "temp": 39.4,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "17.8 x10^3/uL with neutrophilia, no eosinophilia",
+    "Hemoglobin": "12.1 g/dL",
+    "Platelets": "310 x10^3/uL",
+    "CRP": "168 mg/L",
+    "ALP": "224 U/L (elevated)",
+    "ALT": "58 U/L",
+    "AST": "62 U/L",
+    "Total bilirubin": "1.3 mg/dL",
+    "Albumin": "3.0 g/dL",
+    "INR": "1.1",
+    "Creatinine": "0.9 mg/dL"
+  },
+  "imaging": "Ultrasound abdomen: single, large (8.5 cm) round hypoechoic lesion with ill-defined walls and low-level internal echoes in the right lobe of the liver (segment VII/VIII), no internal septations, no gallstones, normal biliary tree. Chest film shows raised right hemidiaphragm with small reactive right pleural effusion. CT confirms a solitary rim-enhancing cystic liver lesion.",
+  "microbiology": "Blood cultures sent (typically sterile in amoebic abscess). Serum Entamoeba histolytica IgG antibody positive; stool microscopy negative for cysts/trophozoites. Aspirate (if performed) classically sterile 'anchovy-sauce' pus, negative on routine bacterial culture.",
+  "differentialDiagnoses": [
+    "Amoebic liver abscess",
+    "Pyogenic liver abscess",
+    "Acute cholangitis",
+    "Acute cholecystitis with pericholecystic collection",
+    "Hepatocellular / metastatic tumour with necrosis"
+  ],
+  "finalDiagnosis": "Amoebic liver abscess (Entamoeba histolytica)",
+  "citations": [
+    "Harrison 22e — Amebiasis and Infection with Free-Living Amebae",
+    "IDSA Diagnosis and Management of Infectious Diarrhea / Amebiasis guidance 2017"
+  ],
+  "stewardship": "Empiric metronidazole (or tinidazole) as the tissue amoebicide for invasive amoebic liver abscess, followed by a luminal agent (paromomycin or diloxanide furoate) to eradicate intraluminal colonization and prevent relapse. Most abscesses respond to medical therapy alone; image-guided aspiration reserved for large (>5-10 cm), left-lobe, or non-responding lesions or when pyogenic abscess cannot be excluded.",
+  "contraindications": [
+    "Avoid alcohol during and 48-72h after metronidazole/tinidazole (disulfiram-like reaction) - relevant given this patient's alcohol use",
+    "Metronidazole dose caution in significant hepatic impairment",
+    "Do not omit the luminal agent after nitroimidazole - failure to clear colonization causes relapse"
+  ],
+  "edgeCases": [
+    "Stool microscopy is negative in most amoebic liver abscess cases and does not exclude it; serology is the key test",
+    "Rupture into pleural/pericardial/peritoneal space or into the biliary tree is a feared complication of large or left-lobe abscesses",
+    "Distinguishing from pyogenic abscess matters: amoebic is typically single, right lobe, in a younger male with a travel/endemic and alcohol background and sterile pus"
+  ],
+  "expectedMaiK": "Classic amoebic liver abscess: a single right-lobe hypoechoic liver collection with tender hepatomegaly, high fever and positive E. histolytica serology in a man from an endemic area. Treat with a nitroimidazole (metronidazole/tinidazole) plus a luminal amoebicide; reserve aspiration for large, left-lobe, or non-responding lesions or diagnostic uncertainty versus pyogenic abscess.",
+  "expectedNextQuestions": [
+    "Any recent dysentery/bloody diarrhoea, travel to or residence in an endemic area, and alcohol intake?",
+    "Any features of rupture - worsening pleuritic pain, breathlessness, or generalized abdominal pain?"
+  ],
+  "expectedInvestigations": [
+    "Serum Entamoeba histolytica antibody (IgG) serology",
+    "Abdominal ultrasound / CT to characterise the liver lesion",
+    "Blood cultures to help exclude pyogenic abscess"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "abdominalPain": true,
+    "hepatosplenomegaly": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "singleLesion": true,
+    "contaminatedFoodWaterExposure": true,
+    "alcoholExcess": true,
+    "prolongedFever": true
+  },
+  "expected": {
+    "diagnosis": "AMOEBIC_LIVER_ABSCESS",
+    "acceptableIds": [
+      "AMOEBIC_LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS"
+    ],
+    "investigations": [
+      "Entamoeba histolytica serology",
+      "Abdominal ultrasound / CT",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "metronidazole",
+        "paromomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include AMOEBIC_LIVER_ABSCESS",
+    "differential must include LIVER_ABSCESS (pyogenic)",
+    "stewardship must include a nitroimidazole (metronidazole) plus a luminal amoebicide"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

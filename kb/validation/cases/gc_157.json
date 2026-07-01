@@ -1,0 +1,103 @@
+{
+  "id": "gc_157",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Reduced urine output and lethargy for 3 days",
+  "history": "Three-day history of markedly reduced urine output, generalised fatigue and nausea. Preceded by one week of profuse watery diarrhoea and poor oral intake with clinical dehydration. Background of type 2 diabetes and hypertension; regular medications include lisinopril and ibuprofen taken for recent back pain. No haematuria, frothy urine, rash or joint symptoms. No recent contrast imaging.",
+  "examination": "Dry mucous membranes, reduced skin turgor and postural dizziness consistent with volume depletion. No peripheral oedema, no rash, no flank mass; bladder not palpable and no palpable distended bladder to suggest obstruction. Chest clear, no raised JVP.",
+  "vitals": {
+    "hr": 104,
+    "bp": "98/62",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 98
+  },
+  "labs": {
+    "creatinine": "3.4 mg/dL (baseline 1.0 three months ago)",
+    "urea": "24 mmol/L",
+    "potassium": "5.6 mmol/L",
+    "sodium": "148 mmol/L",
+    "bicarbonate": "18 mmol/L",
+    "urine output": "0.3 mL/kg/h over last 12 h (oliguric)",
+    "urinalysis": "no blood, no significant protein; bland sediment with hyaline casts",
+    "FeNa": "<1% (pre-renal pattern)",
+    "hemoglobin": "14.2 g/dL"
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys, no hydronephrosis, no obstruction; bladder empty post-void",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Pre-renal AKI from volume depletion (ACEi + NSAID + diarrhoea)",
+    "Acute tubular necrosis",
+    "Obstructive (post-renal) AKI",
+    "Acute-on-chronic kidney disease"
+  ],
+  "finalDiagnosis": "Acute kidney injury (KDIGO stage 2, pre-renal/volume-depletion aetiology)",
+  "citations": [
+    "Harrison 22e — Acute Kidney Injury",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Hold ACE inhibitor (lisinopril) and NSAID (ibuprofen) — nephrotoxic in volume depletion",
+    "Avoid iodinated contrast until renal function recovers",
+    "Dose-adjust or avoid renally-cleared drugs given reduced clearance"
+  ],
+  "edgeCases": [
+    "Prolonged pre-renal insult can transition to intrinsic acute tubular necrosis (FeNa >2%, muddy-brown granular casts)",
+    "Bland urinalysis argues against glomerulonephritis; active sediment/proteinuria would prompt an intrinsic-renal workup"
+  ],
+  "expectedMaiK": "Classic pre-renal AKI: an acute creatinine rise with oliguria in a volume-depleted patient on an ACE inhibitor plus NSAID after diarrhoeal losses. Withhold nephrotoxins, restore intravascular volume, treat hyperkalaemia and monitor for progression to ATN.",
+  "expectedNextQuestions": [
+    "Any recent contrast exposure or new nephrotoxic drugs?",
+    "Baseline renal function and true urine output trend?",
+    "Any obstructive urinary symptoms (hesitancy, retention)?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis with microscopy and urine electrolytes (FeNa/FeUrea)",
+    "Renal tract ultrasound to exclude obstruction",
+    "Serum potassium and ECG; venous blood gas for acidosis"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "oliguria": true,
+    "creatinine": true,
+    "urea": true,
+    "renalImpairment": true,
+    "dehydration": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "hypertensionHx": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "aki",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "ckd",
+      "hyperkalemia",
+      "glomerulonephritis",
+      "rhabdo"
+    ],
+    "investigations": [
+      "Urinalysis with microscopy and urine electrolytes",
+      "Renal tract ultrasound to exclude obstruction",
+      "Serum potassium and ECG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include aki",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

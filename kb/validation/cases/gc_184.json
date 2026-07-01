@@ -1,0 +1,100 @@
+{
+  "id": "gc_184",
+  "specialty": "Cardiology / Neuro",
+  "condition": "Hypertensive emergency (hypertensive encephalopathy)",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Severe headache, blurred vision and confusion over 12 hours with a very high home blood pressure reading",
+  "history": "12-hour history of progressively worsening throbbing headache, nausea, transient visual blurring and increasing drowsiness/confusion witnessed by family. Known essential hypertension for 8 years, poorly controlled; ran out of amlodipine and telmisartan 3 weeks ago and stopped taking them. No focal limb weakness, no chest pain, no seizure. Ex-smoker. No recreational stimulant use. No prior stroke or CKD.",
+  "examination": "Drowsy but rousable, GCS 14 (E3 V5 M6), no lateralising motor deficit and no neck stiffness. Fundoscopy shows bilateral flame haemorrhages, cotton-wool spots and papilloedema (Grade IV / KWB retinopathy). Heart sounds normal, no added sounds; chest clear; no peripheral oedema. Pertinent negatives: no unilateral weakness or dysphasia (argues against acute stroke), no radio-femoral delay or inter-arm BP difference, no thunderclap onset.",
+  "vitals": {
+    "hr": 92,
+    "bp": "232/134",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "creatinine": "1.4 mg/dL",
+    "urea": "8.5 mmol/L",
+    "potassium": "4.1 mmol/L",
+    "hemoglobin": "13.9 g/dL",
+    "platelets": "236 x10^3/uL",
+    "troponin": "normal",
+    "urinalysis": "mild proteinuria, no active sediment / no RBC casts",
+    "peripheral_smear": "no schistocytes"
+  },
+  "imaging": "CT head: no haemorrhage, no infarct, no mass; symmetrical subcortical/posterior white-matter hypodensity consistent with PRES-type vasogenic oedema. CXR: no pulmonary oedema.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Hypertensive emergency with hypertensive encephalopathy",
+    "Acute ischaemic stroke",
+    "Intracerebral haemorrhage / subarachnoid haemorrhage",
+    "Phaeochromocytoma crisis",
+    "Acute glomerulonephritis with severe hypertension"
+  ],
+  "finalDiagnosis": "Hypertensive emergency with hypertensive encephalopathy (PRES) due to abrupt antihypertensive withdrawal",
+  "citations": [
+    "Harrison 22e — Hypertensive Vascular Disease (Hypertensive Emergencies)",
+    "AHA/ACC High Blood Pressure in Adults Guideline 2017"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid abrupt/excessive BP reduction: lower MAP by no more than ~25% in the first hour to prevent watershed cerebral, coronary and renal hypoperfusion",
+    "Avoid sublingual short-acting nifedipine (uncontrolled precipitous drops)",
+    "Nitroprusside caution in renal impairment / prolonged use (cyanide-thiocyanate toxicity)"
+  ],
+  "edgeCases": [
+    "If focal deficit or acute ischaemic stroke is confirmed, permissive hypertension applies and aggressive lowering is harmful — a key pitfall",
+    "Consider secondary causes (phaeochromocytoma, renal artery stenosis, cocaine/amphetamine, eclampsia) when presentation is atypical or refractory"
+  ],
+  "expectedMaiK": "This is a hypertensive emergency (severe BP with acute encephalopathy and Grade IV retinopathy plus PRES on imaging), not merely severe asymptomatic hypertension. Manage with a titratable IV agent (e.g. labetalol or nicardipine) and controlled MAP reduction of ~25% in the first hour, having first excluded acute stroke where BP targets differ.",
+  "expectedNextQuestions": [
+    "Any focal weakness, speech disturbance or seizure to suggest a primary intracranial event?",
+    "History of antihypertensive non-adherence, and any stimulant/recreational drug use or pregnancy?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head to exclude haemorrhage/infarct",
+    "Fundoscopy, ECG, U&E/creatinine, urinalysis and troponin for end-organ assessment"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "headacheSevere": true,
+    "visualDisturbance": true,
+    "papilledema": true,
+    "alteredSensorium": true,
+    "hypertensionHx": true,
+    "nauseaVomiting": true,
+    "organDysfunction": true,
+    "sbp": true,
+    "dbp": true
+  },
+  "expected": {
+    "diagnosis": "htn_emergency",
+    "acceptableIds": [
+      "htn_emergency"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "ich",
+      "pheo",
+      "glomerulonephritis"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "Fundoscopy and end-organ bloods (U&E, creatinine, troponin, urinalysis)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include htn_emergency",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

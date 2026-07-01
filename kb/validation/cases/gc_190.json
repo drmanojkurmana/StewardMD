@@ -1,0 +1,99 @@
+{
+  "id": "gc_190",
+  "specialty": "Critical care",
+  "condition": "Hypovolemic / haemorrhagic shock",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Brought to ED after a high-speed motorcycle collision with abdominal pain, dizziness and near-collapse",
+  "history": "Healthy 34-year-old man, unrestrained motorcyclist, thrown against handlebars ~40 minutes ago. Progressive diffuse abdominal pain, light-headedness on sitting up, cold clammy skin and one episode of syncope at the scene. No known bleeding disorder, on no anticoagulants. Paramedics gave 500 mL crystalloid en route with transient improvement. No head injury, no chest pain, no external major haemorrhage seen.",
+  "examination": "Anxious, pale, cool peripheries with prolonged capillary refill (>3 s) and thready peripheral pulses. Abdomen distended with generalised guarding and rebound, maximal in the left upper quadrant; seat-belt/handlebar bruising over epigastrium. Pertinent negatives: no external exsanguinating wound, no long-bone deformity, chest clear with equal air entry, no raised JVP, no focal neuro deficit.",
+  "vitals": {
+    "hr": 128,
+    "bp": "84/58",
+    "rr": 26,
+    "temp": 36.1,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "9.2 g/dL (falling from 13.1 on arrival)",
+    "lactate": "4.8 mmol/L",
+    "base excess": "-8 mmol/L",
+    "platelets": "168 x10^3/uL",
+    "INR": "1.4",
+    "creatinine": "1.3 mg/dL",
+    "pH": "7.28",
+    "type and crossmatch": "sent, group O given emergently"
+  },
+  "imaging": "FAST scan positive with free fluid in the splenorenal recess and pelvis; portable CXR and pelvic film clear. Contrast CT (after initial stabilisation) shows grade IV splenic laceration with active contrast extravasation and moderate haemoperitoneum.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Haemorrhagic shock from blunt splenic injury",
+    "Distributive (septic) shock",
+    "Cardiogenic shock",
+    "Obstructive shock (tension pneumothorax / tamponade)"
+  ],
+  "finalDiagnosis": "Hypovolemic (haemorrhagic) shock due to grade IV blunt splenic injury",
+  "citations": [
+    "Harrison 22e — Approach to the Patient with Shock",
+    "ATLS 10th edition Hemorrhagic Shock Classification 2018"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid large-volume crystalloid resuscitation which worsens dilutional coagulopathy and rebleeding — use balanced 1:1:1 blood product transfusion and permissive hypotension until surgical control",
+    "Vasopressors are not a substitute for volume/haemorrhage control and may mask ongoing bleeding"
+  ],
+  "edgeCases": [
+    "Young fit patients maintain SBP by intense vasoconstriction and may look deceptively stable until ~30% blood loss (class III) then decompensate abruptly",
+    "Beta-blocker use or athletic conditioning can blunt the compensatory tachycardia and mask the degree of blood loss"
+  ],
+  "expectedMaiK": "The tachycardia, narrow pulse pressure, cool clammy peripheries, rising lactate and a positive FAST after blunt trauma indicate haemorrhagic (hypovolemic) shock from intra-abdominal bleeding. Prioritise haemorrhage control with activated major-haemorrhage protocol and balanced blood products, not crystalloid, alongside urgent surgical/IR intervention.",
+  "expectedNextQuestions": [
+    "Is there ongoing external or occult blood loss and what is the estimated volume?",
+    "Any anticoagulant/antiplatelet use or known coagulopathy?"
+  ],
+  "expectedInvestigations": [
+    "Serial haemoglobin and venous lactate",
+    "Contrast CT abdomen/pelvis (trauma protocol) once transiently stabilised",
+    "Coagulation profile / point-of-care viscoelastic testing and group-and-crossmatch"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "tachycardia": true,
+    "hypotension": true,
+    "tachypnea": true,
+    "toxicAppearing": true,
+    "lactateElevated": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "syncope": true,
+    "hemoglobin": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "hypovolemic_shock",
+    "acceptableIds": [
+      "hypovolemic_shock"
+    ],
+    "differentialIds": [
+      "cardiogenic_shock",
+      "tamponade"
+    ],
+    "investigations": [
+      "Serial haemoglobin and venous lactate",
+      "Contrast CT abdomen/pelvis (trauma protocol)",
+      "Coagulation profile and group-and-crossmatch"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hypovolemic_shock",
+    "expected.stewardship.tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "gc_198",
+  "specialty": "Oncology / Pulmonary",
+  "condition": "Lung cancer",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Six weeks of persistent cough with recent blood-streaked sputum and unintentional weight loss.",
+  "history": "68-year-old man, 45 pack-year smoker (still smoking 10/day), presents with a chronic cough that has changed in character over the past 6 weeks, now with intermittent blood-streaking of sputum on several occasions. Reports 7 kg unintentional weight loss over 3 months, reduced appetite, and progressive exertional breathlessness. Denies fever, rigors, night sweats or contact with tuberculosis. Occasional dull right-sided chest ache. Past history: COPD (mild), hypertension. No prior malignancy. No recent travel.",
+  "examination": "Cachectic, clubbing of the fingers. Right upper-zone reduced air entry with focal coarse crepitations; no signs of consolidation with bronchial breathing. No stridor, no facial/neck swelling, no palpable supraclavicular nodes on this visit. No pallor, no jaundice. Afebrile and not toxic-appearing. Chest wall non-tender.",
+  "vitals": {
+    "hr": 88,
+    "bp": "134/82",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": "11.9 g/dL",
+    "wbc": "8.2 x10^9/L",
+    "platelets": "310 x10^3/µL",
+    "sodium": "132 mmol/L (mild hyponatraemia)",
+    "corrected calcium": "2.55 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "LFTs": "normal",
+    "CRP": "22 mg/L"
+  },
+  "imaging": "Chest X-ray: 4 cm speculated right upper-lobe mass with hilar prominence, no cavitation, no effusion. Contrast CT thorax/upper abdomen: 4.2 cm spiculated RUL mass with ipsilateral hilar and mediastinal (station 4R/7) lymphadenopathy; no distant metastasis on this study; adrenals normal.",
+  "microbiology": "Sputum for AFB smear x3 negative; routine sputum culture negative. (Performed to exclude TB/infection.)",
+  "differentialDiagnoses": [
+    "Bronchogenic carcinoma (lung cancer)",
+    "Pulmonary tuberculosis",
+    "Lung abscess",
+    "Sarcoidosis",
+    "Community-acquired pneumonia (non-resolving)"
+  ],
+  "finalDiagnosis": "Lung cancer (non-small-cell, right upper lobe primary with mediastinal nodal involvement)",
+  "citations": [
+    "Harrison 22e — Neoplasms of the Lung",
+    "ACCP/CHEST Diagnosis and Management of Lung Cancer (Evidence-Based Guidelines, 3rd ed) 2013"
+  ],
+  "stewardship": "Not applicable — non-infective. Empiric antibiotics are not indicated; AFB/culture were sent to exclude TB and post-obstructive infection, both negative.",
+  "contraindications": [
+    "No antibiotic indicated; avoid reflexive empiric therapy for a non-resolving mass without infective evidence",
+    "Contrast CT: verify renal function/eGFR before iodinated contrast",
+    "Biopsy: check platelets/coagulation and stop antiplatelets/anticoagulants beforehand"
+  ],
+  "edgeCases": [
+    "Cough with haemoptysis and weight loss in a heavy smoker mimics reactivating pulmonary TB — always send AFB and do not anchor",
+    "Mild hyponatraemia (SIADH) and hypercalcaemia can be paraneoplastic clues to small-cell vs squamous histology",
+    "A non-resolving 'pneumonia' or persistent focal opacity in a smoker warrants CT and tissue diagnosis, not repeat antibiotic courses"
+  ],
+  "expectedMaiK": "In a heavy smoker over 50 with a new spiculated lung mass, chronic cough, haemoptysis and unexplained weight loss, lung cancer is the leading diagnosis; pursue staging CT and tissue biopsy rather than empiric antibiotics, while excluding TB given the overlapping picture.",
+  "expectedNextQuestions": [
+    "Detailed smoking pack-year history and occupational/asbestos exposure",
+    "Any hoarseness, dysphagia, bone pain, or new neurological symptoms suggesting spread?",
+    "Prior chest imaging available for comparison?"
+  ],
+  "expectedInvestigations": [
+    "Contrast CT thorax and upper abdomen for staging",
+    "Tissue diagnosis via bronchoscopy/EBUS-TBNA or CT-guided biopsy",
+    "PET-CT and MRI brain for full staging once malignancy confirmed"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "hemoptysis": true,
+    "weightLoss": true,
+    "dyspnea": true,
+    "chestPain": true,
+    "ageOver50": true,
+    "crepitations": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "lung_cancer",
+    "acceptableIds": [
+      "lung_cancer"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "LUNG_ABSCESS",
+      "sarcoidosis",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Contrast CT thorax for staging",
+      "Bronchoscopy/EBUS or CT-guided biopsy for tissue diagnosis",
+      "Sputum AFB to exclude TB"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include lung_cancer",
+    "must not recommend empiric antibiotics (non-infective; stewardship tier null)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

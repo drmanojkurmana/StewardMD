@@ -1,0 +1,105 @@
+{
+  "id": "gc_235",
+  "specialty": "Neurology / Vascular",
+  "condition": "Transient ischaemic attack",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden transient right-arm weakness and slurred speech that fully resolved within 40 minutes",
+  "history": "Witnessed abrupt onset of right upper-limb heaviness with difficulty gripping and mildly slurred speech while at breakfast this morning. Symptoms peaked immediately (no march or spread), lasted ~40 minutes, then resolved completely with no residual deficit. No headache, no loss of consciousness, no seizure activity, no positive visual phenomena. First such episode. PMH: hypertension (on amlodipine), type 2 diabetes, hyperlipidaemia, 30 pack-year ex-smoker. No prior stroke/TIA. Not on any antiplatelet or anticoagulant.",
+  "examination": "Alert, fully orientated, GCS 15. Neurological examination now completely normal: power 5/5 all limbs, no dysarthria, no facial droop, no sensory or visual field deficit, gait normal. Right carotid bruit audible. No AF on cardiac auscultation (regular rhythm). No papilloedema. Pertinent negatives: no thunderclap headache, no meningism, no neck/eye pain, no focal deficit persisting at review.",
+  "vitals": {
+    "hr": 78,
+    "bp": "168/92",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "glucose": "9.1 mmol/L (no hypoglycaemia)",
+    "HbA1c": "7.8%",
+    "LDL": "3.6 mmol/L",
+    "creatinine": "1.0 mg/dL",
+    "FBC": "normal",
+    "platelets": "260 x10^3/uL",
+    "INR": "1.0",
+    "electrolytes": "normal"
+  },
+  "imaging": "Non-contrast CT head: no haemorrhage, no established infarct, no mass lesion. MRI-DWI (obtained urgently): no acute diffusion restriction (consistent with TIA rather than minor stroke). Carotid Doppler: 60-70% stenosis of the symptomatic left internal carotid artery.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute ischaemic stroke (minor/resolving)",
+    "Focal (partial) seizure with Todd's paresis",
+    "Hypoglycaemia",
+    "Migraine with aura",
+    "Intracranial mass lesion"
+  ],
+  "finalDiagnosis": "Transient ischaemic attack (high-risk, symptomatic carotid stenosis)",
+  "citations": [
+    "Harrison 22e — Ischemic Stroke / Transient Ischemic Attack",
+    "AHA/ASA Guideline for the Prevention of Stroke in Patients with Stroke and TIA 2021"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Confirm no intracranial haemorrhage on imaging before starting antiplatelet therapy",
+    "Caution with dual antiplatelet therapy if active peptic ulcer or bleeding risk",
+    "Statin dose adjustment if hepatic impairment"
+  ],
+  "edgeCases": [
+    "Negative DWI does not exclude ischaemia — a true TIA has no infarct by definition, but minor stroke can mimic and mandates same urgent workup",
+    "Crescendo TIAs or ABCD2 high-risk features warrant admission",
+    "Must exclude hypoglycaemia and focal seizure as stroke mimics before labelling as TIA"
+  ],
+  "expectedMaiK": "Sudden focal neurological deficit that fully resolved with no acute infarct on DWI in a vasculopath is a transient ischaemic attack; this is a medical emergency carrying high early stroke risk, so urgent carotid imaging, antiplatelet therapy and risk-factor control are required.",
+  "expectedNextQuestions": [
+    "What was the exact duration and did the deficit fully resolve?",
+    "Any atrial fibrillation, palpitations or known cardiac source?",
+    "Any preceding amaurosis fugax or prior similar episodes (crescendo pattern)?"
+  ],
+  "expectedInvestigations": [
+    "MRI brain with DWI",
+    "Carotid Doppler / CT-angiography",
+    "ECG and prolonged rhythm monitoring for atrial fibrillation",
+    "Echocardiogram",
+    "Fasting lipids and HbA1c"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "focalNeuroDeficit": true,
+    "cerebrovascularDisease": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "clinicallyImproving": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "tia",
+    "acceptableIds": [
+      "tia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "seizure_epilepsy",
+      "hypoglycemia",
+      "migraine"
+    ],
+    "investigations": [
+      "MRI brain with DWI",
+      "Carotid Doppler / CT-angiography",
+      "ECG and rhythm monitoring for atrial fibrillation"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include tia",
+    "differential must include ischemic_stroke",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

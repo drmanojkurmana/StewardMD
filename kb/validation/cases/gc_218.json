@@ -1,0 +1,93 @@
+{
+  "id": "gc_218",
+  "specialty": "Pulmonary",
+  "condition": "Primary spontaneous pneumothorax",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset right-sided pleuritic chest pain and breathlessness at rest",
+  "history": "Tall, thin, previously well non-athletic man who developed abrupt right-sided sharp chest pain radiating to the shoulder while sitting quietly, immediately followed by mild breathlessness. No preceding trauma, exertion, cough, fever or infective symptoms. Long-standing smoker (10 pack-years); no known lung disease, asthma or connective-tissue disorder. No prior similar episodes. No calf pain, immobilisation or recent travel.",
+  "examination": "Comfortable at rest but mildly tachypnoeic. Trachea central. Reduced chest expansion on the right with hyper-resonant percussion note and diminished/absent breath sounds over the right hemithorax; reduced tactile vocal fremitus. No tracheal deviation, no raised JVP, no distended neck veins (no tension features). Left lung clear. Calves soft and non-tender; no leg swelling. Marfanoid habitus (tall, slim).",
+  "vitals": {
+    "hr": 96,
+    "bp": "124/78",
+    "rr": 22,
+    "temp": 36.9,
+    "spo2": 95
+  },
+  "labs": {
+    "CBC": "Normal, no leukocytosis",
+    "CRP": "Normal",
+    "ECG": "Sinus rhythm, no ischaemic changes, no S1Q3T3",
+    "D-dimer": "Not indicated (low pre-test probability of PE)",
+    "ABG": "Mild hypoxaemia, no acidosis"
+  },
+  "imaging": "Erect PA chest radiograph: visible visceral pleural line on the right with absence of lung markings peripheral to it; estimated rim of air ~2.5 cm at the hilum (large per BTS). No mediastinal shift, no fluid level, no underlying parenchymal disease. Lung point confirmed on bedside thoracic ultrasound (absent lung sliding with barcode sign).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Primary spontaneous pneumothorax",
+    "Pulmonary embolism",
+    "Acute coronary syndrome / musculoskeletal chest pain",
+    "Pleural effusion",
+    "Community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Primary spontaneous pneumothorax (large, right-sided)",
+  "citations": [
+    "Harrison 22e — Disorders of the Pleura (Pneumothorax)",
+    "BTS Pleural Disease Guideline 2023 (spontaneous pneumothorax)"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid positive-pressure ventilation / air travel and diving until resolved (risk of tension pneumothorax)",
+    "Needle/tube insertion caveat in coagulopathy or anticoagulation"
+  ],
+  "edgeCases": [
+    "Progression to tension pneumothorax with hypotension, tracheal deviation and distended neck veins — decompress immediately, do not wait for imaging",
+    "Secondary spontaneous pneumothorax in older smokers/COPD behaves more severely at smaller sizes"
+  ],
+  "expectedMaiK": "Sudden pleuritic chest pain with unilateral hyper-resonance and absent breath sounds in a tall young smoker is classic for a spontaneous pneumothorax; confirm with erect chest X-ray and watch for tension features which mandate immediate needle decompression.",
+  "expectedNextQuestions": [
+    "Any tracheal deviation, hypotension or distended neck veins to suggest tension?",
+    "Any preceding trauma, and is there a history of prior pneumothorax or underlying lung disease?"
+  ],
+  "expectedInvestigations": [
+    "Erect PA chest radiograph",
+    "Bedside thoracic ultrasound / point-of-care assessment for lung sliding"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "pleuriticPain": true,
+    "dyspnea": true,
+    "tachypnea": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "pneumothorax",
+    "acceptableIds": [
+      "pneumothorax"
+    ],
+    "differentialIds": [
+      "pe",
+      "acs",
+      "pleural_effusion",
+      "CAP"
+    ],
+    "investigations": [
+      "Erect PA chest radiograph",
+      "Bedside thoracic ultrasound"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pneumothorax",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

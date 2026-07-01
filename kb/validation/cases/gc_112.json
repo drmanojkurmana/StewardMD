@@ -1,0 +1,111 @@
+{
+  "id": "gc_112",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholecystitis",
+  "age": 52,
+  "sex": "F",
+  "presentingComplaint": "Constant right upper quadrant pain for 18 hours with fever and vomiting",
+  "history": "Obese multiparous woman with known gallstones on prior ultrasound. Episodic post-prandial RUQ colic for months, but this episode began after a fatty meal and has persisted continuously for ~18 hours (unlike her usual self-limiting colic). Pain radiates to the right scapular tip, associated with anorexia, nausea and two episodes of vomiting. Low-grade fever with rigors overnight. No dark urine, no pale stools, no confusion. PMH: type 2 diabetes, dyslipidaemia. No prior biliary surgery. No recent travel.",
+  "examination": "Ill-appearing, febrile. Marked RUQ tenderness with guarding; inspiratory arrest on deep palpation of the RUQ (positive Murphy sign). No palpable gallbladder mass. Sclerae anicteric. Bowel sounds present, no peritonism elsewhere. No stigmata of chronic liver disease; no asterixis.",
+  "vitals": {
+    "hr": 104,
+    "bp": "128/78",
+    "rr": 18,
+    "temp": 38.4,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "14.8 x10^9/L (neutrophilia, left shift)",
+    "CRP": "96 mg/L",
+    "Total bilirubin": "1.1 mg/dL",
+    "ALP": "138 U/L (mildly raised)",
+    "ALT": "48 U/L",
+    "AST": "42 U/L",
+    "GGT": "70 U/L",
+    "Lipase": "38 U/L (normal)",
+    "Creatinine": "0.9 mg/dL",
+    "Blood glucose": "184 mg/dL"
+  },
+  "imaging": "Abdominal ultrasound: distended gallbladder with wall thickening (5 mm), pericholecystic fluid, multiple echogenic gallstones with acoustic shadowing, and a sonographic Murphy sign. Common bile duct not dilated (4 mm). No intrahepatic biliary dilatation.",
+  "microbiology": "Blood cultures drawn, pending. (If cholecystectomy performed, bile cultures commonly grow E. coli, Klebsiella or Enterococcus.)",
+  "differentialDiagnoses": [
+    "Acute cholecystitis",
+    "Biliary colic / symptomatic cholelithiasis",
+    "Ascending cholangitis",
+    "Acute pancreatitis",
+    "Peptic ulcer disease"
+  ],
+  "finalDiagnosis": "Acute calculous cholecystitis",
+  "citations": [
+    "Harrison 22e — Diseases of the Gallbladder and Bile Ducts",
+    "Tokyo Guidelines (TG18) for Acute Cholecystitis 2018"
+  ],
+  "stewardship": "Community-acquired, non-severe (Grade I-II) acute cholecystitis: empiric IV cefuroxime plus metronidazole (or ceftriaxone + metronidazole) to cover enteric Gram-negatives and anaerobes, alongside analgesia, IV fluids and early laparoscopic cholecystectomy. Rationale: coverage targets gut flora (E. coli, Klebsiella, Enterococcus, Bacteroides) that seed obstructed bile; source control is definitive.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis — substitute ciprofloxacin + metronidazole",
+    "Avoid nephrotoxic aminoglycosides given diabetic nephropathy risk; adjust for eGFR",
+    "Metronidazole — counsel on alcohol avoidance"
+  ],
+  "edgeCases": [
+    "Acalculous cholecystitis in critically ill/fasting/diabetic patients — no stones on US but wall thickening and pericholecystic fluid",
+    "Mirizzi syndrome or evolving choledocholithiasis if bilirubin/ALP rise — reassess for cholangitis and consider MRCP/ERCP",
+    "Emphysematous cholecystitis (gas in gallbladder wall) in diabetics — surgical emergency"
+  ],
+  "expectedMaiK": "Continuous RUQ pain >6h with positive Murphy sign, fever, neutrophilia and ultrasound gallstones plus a thickened gallbladder wall indicate acute calculous cholecystitis rather than simple biliary colic; near-normal bilirubin and a non-dilated CBD argue against concurrent cholangitis, but rising bilirubin should prompt reassessment.",
+  "expectedNextQuestions": [
+    "Is the pain now continuous and lasting more than 6 hours (versus self-limiting colic)?",
+    "Any jaundice, dark urine, or rigors suggesting duct obstruction/cholangitis?"
+  ],
+  "expectedInvestigations": [
+    "Abdominal ultrasound (first-line)",
+    "LFTs and lipase to exclude cholangitis/pancreatitis",
+    "Blood cultures",
+    "HIDA scan or MRCP if ultrasound equivocal"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "rightUpperQuadrantPain": true,
+    "murphySign": true,
+    "fever": true,
+    "rigors": true,
+    "nauseaVomiting": true,
+    "tachycardia": true,
+    "abdominalPain": true,
+    "diabetesHx": true,
+    "toxicAppearing": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "CHOLECYSTITIS",
+    "acceptableIds": [
+      "CHOLECYSTITIS"
+    ],
+    "differentialIds": [
+      "CHOLANGITIS",
+      "biliary_colic",
+      "pancreatitis",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "Abdominal ultrasound",
+      "LFTs",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "narrow-spectrum empiric (community-acquired, Grade I-II)",
+      "antibiotics": [
+        "cefuroxime + metronidazole",
+        "ceftriaxone + metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CHOLECYSTITIS",
+    "differential must include CHOLANGITIS and biliary_colic",
+    "must not down-rank to pure biliary_colic given positive Murphy sign + fever + leukocytosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
