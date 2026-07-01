@@ -482,24 +482,24 @@
     { k: "family", g: "Family", label: "Family updated / counselling" },
     { k: "disposition", g: "Disposition", label: "Disposition / step-down plan" }
   ];
-  function buildSummary() {
-    var s = _raw, p = s.patient, lv = latestVitals(), L = s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = curMap(), out = [];
+  function buildSummary(st) {
+    var s = st || _raw, p = s.patient || {}, vits = s.vitals || [], lv = vits.length ? vits[vits.length - 1] : {}, L = s.labs && s.labs.recent || {}, g = s.abg || {}, f = s.fluids || {}, v = s.ventilator || {}, mp = (lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp)), rounds = s.rounds || {}, alerts = s.alerts || [], goals = s.goals || [], infusions = s.infusions || [], out = [];
     out.push("STEWARDMD — DAILY ICU SUMMARY");
     out.push((p.name || "ICU patient") + (p.age != null ? ", " + p.age + "y" : "") + (p.sex ? " " + p.sex : "") + (p.bed ? " · Bed " + p.bed : "") + (p.icuDay != null ? " · ICU day " + p.icuDay : ""));
     if (p.diagnosis) out.push("Diagnosis: " + p.diagnosis);
     out.push("");
-    out.push("HAEMODYNAMICS: HR " + (lv.hr != null ? lv.hr : "—") + ", BP " + (lv.sbp != null ? lv.sbp + "/" + lv.dbp : "—") + ", MAP " + (mp != null ? mp : "—") + ", lactate " + (lv.lactate != null ? lv.lactate : "—") + (s.infusions.length ? ", pressors/infusions: " + s.infusions.map(function (i) { return i.drug; }).join(", ") : ""));
+    out.push("HAEMODYNAMICS: HR " + (lv.hr != null ? lv.hr : "—") + ", BP " + (lv.sbp != null ? lv.sbp + "/" + lv.dbp : "—") + ", MAP " + (mp != null ? mp : "—") + ", lactate " + (lv.lactate != null ? lv.lactate : "—") + (infusions.length ? ", pressors/infusions: " + infusions.map(function (i) { return i.drug; }).join(", ") : ""));
     if (g.ph != null) { var ab = analyzeABG(g, L); out.push("ABG: pH " + g.ph + " / pCO₂ " + g.paco2 + " / HCO₃ " + g.hco3 + (ab ? " → " + ab.primary : "")); }
     var keyL = ["na", "k", "creat", "hb", "plt", "ferritin"].filter(function (k) { return L[k] != null; }).map(function (k) { return k.toUpperCase() + " " + L[k]; });
     if (keyL.length) out.push("LABS: " + keyL.join(", "));
     if (f.net24h != null || f.cumulative != null) out.push("FLUIDS: net 24h " + (f.net24h != null ? f.net24h + " mL" : "—") + ", cumulative " + (f.cumulative != null ? f.cumulative + " mL" : "—"));
     if (v.mode) out.push("VENT: " + v.mode + (v.fio2 ? ", FiO₂ " + v.fio2 + "%" : "") + (v.peep != null ? ", PEEP " + v.peep : "") + (v.tv != null ? ", TV " + v.tv + " mL" : ""));
-    if (s.alerts.length) out.push("\nACTIVE ALERTS:\n" + s.alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
-    var pend = ROUNDS_ITEMS.filter(function (it) { return !(_raw.rounds[it.k] && _raw.rounds[it.k].done); });
+    if (alerts.length) out.push("\nACTIVE ALERTS:\n" + alerts.map(function (a) { return "• [" + a.severity.toUpperCase() + "] " + a.title + " — " + a.msg; }).join("\n"));
+    var pend = ROUNDS_ITEMS.filter(function (it) { return !(rounds[it.k] && rounds[it.k].done); });
     if (pend.length) out.push("\nROUNDS PENDING: " + pend.map(function (it) { return it.label; }).join("; "));
-    var notes = ROUNDS_ITEMS.filter(function (it) { return _raw.rounds[it.k] && _raw.rounds[it.k].note; }).map(function (it) { return "• " + it.label + ": " + _raw.rounds[it.k].note; });
+    var notes = ROUNDS_ITEMS.filter(function (it) { return rounds[it.k] && rounds[it.k].note; }).map(function (it) { return "• " + it.label + ": " + rounds[it.k].note; });
     if (notes.length) out.push("\nROUNDS NOTES:\n" + notes.join("\n"));
-    if (s.goals.length) out.push("\nGOALS:\n" + s.goals.map(function (x) { return "• " + x; }).join("\n"));
+    if (goals.length) out.push("\nGOALS:\n" + goals.map(function (x) { return "• " + x; }).join("\n"));
     out.push("\n— Decision support only; verify against the patient. StewardMD ICU.");
     return out.join("\n");
   }
@@ -695,6 +695,8 @@
         '<button class="icu-chip" data-icu-act="edit:patient">✎ Patient</button>' +
         '<button class="icu-chip" data-icu-act="savept">💾 Save</button>' +
         '<button class="icu-chip" data-icu-act="patients">📋 Patients' + (n ? " (" + n + ")" : "") + '</button>' +
+        '<button class="icu-chip" data-icu-act="sharecase">📤 Share</button>' +
+        '<button class="icu-chip" data-icu-act="clearfindings">🧹 Clear</button>' +
         '<button class="icu-chip" data-icu-act="newpt">＋ New</button>' +
       '</div></div>';
   }
@@ -828,10 +830,37 @@
   function openSummary() {
     ensureModal();
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Daily ICU Summary</h3><pre id="icuSummaryText" style="white-space:pre-wrap;font:500 12.5px/1.55 var(--mono);background:var(--panel2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--ink);max-height:52vh;overflow:auto">' + esc(buildSummary()) + "</pre>" +
-      '<button class="icu-btn" data-icu-act="copysummary">📋 Copy summary</button><button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+      '<button class="icu-btn" data-icu-act="copysummary">📋 Copy</button>' +
+      '<button class="icu-btn" data-icu-act="sharecase">📤 Share</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
   }
   function copySummary() { var pre = modalEl && modalEl.querySelector("#icuSummaryText"); var t = pre ? pre.textContent : buildSummary(); try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(t); } catch (e) {} if (window.toast) toast("Summary copied"); }
+
+  /* --------------------------------------------------- share & clear findings */
+  // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
+  // (system share sheet) with a clipboard-copy fallback where it isn't supported.
+  function shareText(title, txt) {
+    try { if (navigator.share) { navigator.share({ title: title, text: txt }).catch(function () {}); return true; } } catch (e) {}
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); if (window.toast) toast("Case summary copied — sharing not supported here"); return true; } } catch (e) {}
+    return false;
+  }
+  function shareCase() { if (!shareText("StewardMD ICU — " + (_raw.patient.name || "ICU patient"), buildSummary())) openSummary(); }
+  function sharePatient(id) {
+    if (!id || id === _raw.patient._id) { shareCase(); return; }
+    var r = loadRoster(), e = null, i; for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
+    if (e && e.state) { shareText("StewardMD ICU — " + (e.name || "patient"), buildSummary(e.state)); return; }
+    cloudGet(id).then(function (j) { if (j && j.case && j.case.state) shareText("StewardMD ICU — " + (j.case.name || "patient"), buildSummary(j.case.state)); else if (window.toast) toast("Couldn't load that case"); });
+  }
+  function openClearConfirm() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>🧹 Clear current findings?</h3>' +
+      '<p style="margin:0 0 14px;color:var(--muted);font:600 13px var(--font)">Resets everything entered on the dashboard (vitals, labs, ABG, ventilator, fluids, infusions, rounds, goals) so you can start a fresh assessment. Your saved patients are not affected.</p>' +
+      '<button class="icu-btn" data-icu-act="clearconfirm" style="background:var(--danger);background-image:none;box-shadow:none">Clear findings</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  function clearFindings() { ICU.reset(); _lytesExp = {}; _active = "overview"; closeForm(); paint(); if (window.toast) toast("Findings cleared"); }
 
   /* -------------------------------------------------- launch embedded modules */
   // Raise the target overlay above the ICU surface, then open it via its existing
@@ -842,63 +871,112 @@
   }
 
   /* ------------------------------------------ patient roster (save / load old) */
-  // A patient is one full ICU_STATE snapshot, keyed by a stable _id and kept in a
-  // separate localStorage list so clinicians can save the current patient and
-  // reopen previous ones. The live working state stays in `stewardmd_icu_state`.
+  // A patient is one full ICU_STATE snapshot, keyed by a stable _id. Cases are
+  // saved to the CLOUD (KV, via /api/cases, capped at MAX_CASES) so they follow
+  // the clinician across devices, and MIRRORED to localStorage so the dashboard
+  // still works offline / before any KV is bound. The live working state stays
+  // in `stewardmd_icu_state`.
   var ROSTER_KEY = "stewardmd_icu_patients";
+  var MAX_CASES = 10;
+  var CASES_API = "/api/cases";
+  var _cloud = { enabled: null };   // null = not yet probed; true / false after a call
   function loadRoster() { try { var r = JSON.parse(localStorage.getItem(ROSTER_KEY)); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
   function saveRoster(r) { try { localStorage.setItem(ROSTER_KEY, JSON.stringify(r)); } catch (e) {} }
+  function capTen(r) { if (r.length <= MAX_CASES) return r; return r.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); }).slice(0, MAX_CASES); }
   function rosterCount() { return loadRoster().length; }
   function fmtWhen(ts) { if (!ts) return ""; try { var d = new Date(ts); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+
+  // ---- cloud transport (best-effort; every call degrades to localStorage) ----
+  function cloudFetch(path, opts) {
+    return fetch(CASES_API + (path || ""), Object.assign({ headers: { "Content-Type": "application/json" }, credentials: "same-origin" }, opts || {}));
+  }
+  function cloudList() {
+    return cloudFetch("").then(function (r) { return r.json(); }).then(function (j) { _cloud.enabled = !!(j && j.enabled); return j || {}; }).catch(function () { _cloud.enabled = false; return { enabled: false }; });
+  }
+  function cloudSave(entry) { return cloudFetch("/" + encodeURIComponent(entry.id), { method: "PUT", body: JSON.stringify(entry) }).then(function (r) { return r.json(); }).catch(function () { return null; }); }
+  function cloudGet(id) { return cloudFetch("/" + encodeURIComponent(id)).then(function (r) { return r.json(); }).catch(function () { return null; }); }
+  function cloudDel(id) { return cloudFetch("/" + encodeURIComponent(id), { method: "DELETE" }).then(function (r) { return r.json(); }).catch(function () { return null; }); }
+
   function savePatient() {
-    var r = loadRoster();
     var id = _raw.patient._id || ("p" + nowTs());
     STATE.patient._id = id;                                  // reactive write persists live state
     var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
     var entry = { id: id, name: _raw.patient.name || "Unnamed", dx: _raw.patient.diagnosis || "", bed: _raw.patient.bed || "", savedAt: nowTs(), state: snap };
-    var found = false, i;
+    // 1) local mirror (immediate, offline-safe), capped at MAX_CASES
+    var r = loadRoster(), found = false, i;
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
     if (!found) r.push(entry);
-    saveRoster(r);
-    if (window.toast) toast(found ? "Patient updated" : "Patient saved");
+    saveRoster(capTen(r));
     paint();
+    // 2) cloud (best-effort) — server enforces the same MAX_CASES cap
+    cloudSave(entry).then(function (res) {
+      if (res && res.ok) { _cloud.enabled = true; if (window.toast) toast(found ? "Updated · saved to cloud ☁︎" : "Saved to cloud ☁︎"); }
+      else { if (window.toast) toast(found ? "Updated (saved on this device)" : "Saved on this device"); }
+      paint();
+    });
+  }
+  function applyState(d, id) {
+    Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
+    STATE.patient._id = id;
+    _lytesExp = {}; _active = "overview"; closeForm(); paint();
   }
   function loadPatient(id) {
     var r = loadRoster(), e = null, i;
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
-    if (!e || !e.state) return;
-    var d = e.state;
-    Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
-    STATE.patient._id = id;
-    _active = "overview"; closeForm(); paint();
-    if (window.toast) toast("Loaded " + (e.name || "patient"));
+    if (e && e.state) { applyState(e.state, id); if (window.toast) toast("Loaded " + (e.name || "patient")); return; }
+    // not held locally → pull the full case from the cloud
+    cloudGet(id).then(function (j) {
+      if (j && j.case && j.case.state) { applyState(j.case.state, id); if (window.toast) toast("Loaded " + (j.case.name || "patient")); }
+      else if (window.toast) toast("Couldn't load that case");
+    });
   }
   function deletePatient(id) {
-    var r = loadRoster().filter(function (x) { return x.id !== id; });
-    saveRoster(r);
-    openRoster();                                            // refresh the open list
+    saveRoster(loadRoster().filter(function (x) { return x.id !== id; }));
+    cloudDel(id).then(function () { openRoster(); });
+    openRoster();                                            // optimistic refresh
   }
   function newPatient() {
     ICU.reset();
-    _active = "overview"; closeForm(); paint();
+    _lytesExp = {}; _active = "overview"; closeForm(); paint();
     openForm("patient");
   }
-  function openRoster() {
-    ensureModal();
-    var r = loadRoster().slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); });
-    var list = r.length ? r.map(function (e) {
+  function renderRoster(list, cloudOn) {
+    if (!modalEl) return;
+    var r = list.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); });
+    var items = r.length ? r.map(function (e) {
       var cur = (e.id === _raw.patient._id);
       return '<div class="icu-row" style="align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">' +
         '<button data-icu-act="loadpt:' + esc(e.id) + '" style="flex:1;text-align:left;border:none;background:none;cursor:pointer;color:var(--ink)">' +
           '<div style="font:800 14px var(--font)">' + esc(e.name || "Unnamed") + (cur ? ' <span style="color:var(--primary);font-size:11px">• current</span>' : "") + '</div>' +
           '<div style="font:600 12px var(--font);color:var(--muted)">' + (e.dx ? esc(e.dx) : "No diagnosis") + (e.bed ? " · Bed " + esc(e.bed) : "") + " · " + esc(fmtWhen(e.savedAt)) + '</div>' +
         '</button>' +
-        '<button data-icu-act="delpt:' + esc(e.id) + '" aria-label="Delete patient" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:16px;padding:6px">🗑</button></div>';
+        '<button data-icu-act="sharept:' + esc(e.id) + '" aria-label="Share case" title="Share" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:15px;padding:6px">📤</button>' +
+        '<button data-icu-act="delpt:' + esc(e.id) + '" aria-label="Delete patient" title="Delete" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:16px;padding:6px">🗑</button></div>';
     }).join("") : '<div class="icu-empty">No saved patients yet. Enter patient details, then tap 💾 Save.</div>';
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Saved patients</h3><div style="max-height:52vh;overflow:auto;margin-bottom:10px">' + list + "</div>" +
+    var status = cloudOn === true ? "☁︎ Synced to your cloud" : cloudOn === false ? "📱 Saved on this device (cloud unavailable)" : "…checking cloud";
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Saved patients <span class="icu-phase">' + r.length + "/" + MAX_CASES + "</span></h3>" +
+      '<div style="font:600 11px var(--font);color:var(--muted);margin:-6px 0 8px">' + status + " · max " + MAX_CASES + " cases (oldest is replaced)</div>" +
+      '<div style="max-height:50vh;overflow:auto;margin-bottom:10px">' + items + "</div>" +
       '<button class="icu-btn" data-icu-act="newpt">＋ New patient</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
+  }
+  function openRoster() {
+    ensureModal();
+    renderRoster(loadRoster(), _cloud.enabled);              // instant, from the local mirror
+    cloudList().then(function (j) {                          // then reconcile with the cloud
+      if (j && j.enabled && Array.isArray(j.cases)) {
+        var local = loadRoster(), byId = {}; local.forEach(function (x) { byId[x.id] = x; });
+        var merged = j.cases.map(function (c) {
+          var l = byId[c.id];
+          return l ? { id: c.id, name: c.name, dx: c.dx, bed: c.bed, savedAt: c.savedAt, state: l.state }
+                   : { id: c.id, name: c.name, dx: c.dx, bed: c.bed, savedAt: c.savedAt };
+        });
+        renderRoster(merged, true);
+      } else {
+        renderRoster(loadRoster(), false);
+      }
+    });
   }
 
   /* ------------------------------------------ prominent "enter data" chooser */
@@ -942,6 +1020,10 @@
       case "patients": openRoster(); break;
       case "loadpt": loadPatient(arg); break;
       case "delpt": deletePatient(arg); break;
+      case "sharept": sharePatient(arg); break;
+      case "sharecase": shareCase(); break;
+      case "clearfindings": openClearConfirm(); break;
+      case "clearconfirm": clearFindings(); break;
       case "newpt": newPatient(); break;
       case "lyte": _lytesExp[arg] = !_lytesExp[arg]; paint(); break;
       case "save": saveForm(arg); break;
@@ -978,8 +1060,9 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
-    // patient roster (save current / reopen previous)
-    savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient
+    // patient roster (save current / reopen previous / share / clear)
+    savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient,
+    shareCase: shareCase, clearFindings: clearFindings, summary: buildSummary
   };
   window.ICU = ICU;
 
