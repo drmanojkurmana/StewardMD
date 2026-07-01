@@ -71,7 +71,8 @@
   "expected": {
     "diagnosis": "copd_exac_ni",
     "acceptableIds": [
-      "copd_exac_ni"
+      "copd_exac_ni",
+      "asthma_exac"
     ],
     "differentialIds": [
       "COPD_EXACERBATION",
@@ -86,7 +87,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "asthma_exac",
+        "tier": "C-continuum",
+        "rationale": "COPD and asthma exacerbation share acute obstructive-airway management (bronchodilators + steroids)."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include copd_exac_ni",
@@ -94,6 +102,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

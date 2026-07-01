@@ -78,7 +78,8 @@
   "expected": {
     "diagnosis": "CHIKUNGUNYA",
     "acceptableIds": [
-      "CHIKUNGUNYA"
+      "CHIKUNGUNYA",
+      "DENGUE"
     ],
     "differentialIds": [
       "DENGUE",
@@ -93,7 +94,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "DENGUE",
+        "tier": "C-continuum",
+        "rationale": "Chikungunya and dengue are co-endemic arboviruses, clinically indistinguishable at onset, co-worked-up; supportive mgmt (avoid NSAIDs until dengue excluded)."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include CHIKUNGUNYA",
@@ -102,6 +110,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

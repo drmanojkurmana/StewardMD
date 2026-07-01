@@ -94,7 +94,8 @@
   "expected": {
     "diagnosis": "Hypovolaemic shock due to acute upper gastrointestinal haemorrhage (suspected variceal bleed in cirrhosis)",
     "acceptableIds": [
-      "hypovolemic_shock"
+      "hypovolemic_shock",
+      "variceal_bleed"
     ],
     "differentialIds": [
       "variceal_bleed",
@@ -111,7 +112,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "variceal_bleed",
+        "tier": "B-cause",
+        "rationale": "Hypovolaemic shock from a variceal bleed; variceal_bleed is the more-specific correct cause."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (hypovolemic_shock)",
@@ -122,6 +130,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

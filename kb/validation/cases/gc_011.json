@@ -107,7 +107,8 @@
   "expected": {
     "diagnosis": "Catheter-associated urinary tract infection, long-term catheter, with systemic inflammatory response (urosepsis)",
     "acceptableIds": [
-      "CA_UTI"
+      "CA_UTI",
+      "PYELONEPHRITIS"
     ],
     "differentialIds": [
       "PYELONEPHRITIS",
@@ -129,7 +130,14 @@
         "ceftriaxone",
         "ciprofloxacin"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "PYELONEPHRITIS",
+        "tier": "B-cause",
+        "rationale": "Catheter-associated upper-tract UTI/urosepsis; pyelonephritis is the source, same abx."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (CA_UTI)",
@@ -140,6 +148,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

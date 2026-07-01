@@ -116,7 +116,9 @@
   },
   "expected": {
     "diagnosis": "Hyperosmolar hyperglycaemic state (HHS)",
-    "acceptableIds": [],
+    "acceptableIds": [
+      "hhs"
+    ],
     "differentialIds": [
       "dka",
       "aki",
@@ -138,7 +140,14 @@
     "stewardship": {
       "tier": "null",
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "hhs",
+        "tier": "A-idfix",
+        "rationale": "Same diagnosis (HHS) — acceptableId used a non-engine id; engine correctly says hhs."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis output should correspond conceptually to HHS (not present in disease list, so acceptableIds intentionally empty — flag as known gap)",
@@ -149,6 +158,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

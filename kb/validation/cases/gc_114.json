@@ -74,7 +74,8 @@
   "expected": {
     "diagnosis": "COMPLICATED_UTI",
     "acceptableIds": [
-      "COMPLICATED_UTI"
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS"
     ],
     "differentialIds": [
       "PYELONEPHRITIS",
@@ -92,7 +93,14 @@
         "ceftriaxone",
         "piperacillin-tazobactam"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "PYELONEPHRITIS",
+        "tier": "C-continuum",
+        "rationale": "Pyelonephritis is a form of complicated UTI; overlapping systemic-abx mgmt."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include COMPLICATED_UTI",
@@ -100,6 +108,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

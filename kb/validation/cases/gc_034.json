@@ -121,7 +121,8 @@
   "expected": {
     "diagnosis": "Decompensated cirrhosis (Child-Pugh C) with tense ascites, upper GI bleed (likely variceal), and grade II hepatic encephalopathy",
     "acceptableIds": [
-      "decomp_cirrhosis"
+      "decomp_cirrhosis",
+      "hepatic_enceph"
     ],
     "differentialIds": [
       "variceal_bleed",
@@ -141,7 +142,14 @@
         "ceftriaxone",
         "norfloxacin"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "hepatic_enceph",
+        "tier": "C-component",
+        "rationale": "Case is decompensated cirrhosis WITH grade-II hepatic encephalopathy; HE is a genuine component of the presentation."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (decomp_cirrhosis)",
@@ -155,6 +163,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

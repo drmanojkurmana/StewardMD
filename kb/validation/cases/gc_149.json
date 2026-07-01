@@ -68,7 +68,8 @@
   "expected": {
     "diagnosis": "URTI",
     "acceptableIds": [
-      "URTI"
+      "URTI",
+      "PHARYNGITIS"
     ],
     "differentialIds": [
       "SINUSITIS",
@@ -82,7 +83,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "PHARYNGITIS",
+        "tier": "C-continuum",
+        "rationale": "URTI and acute pharyngitis are overlapping viral URIs; symptomatic mgmt."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include URTI",
@@ -90,6 +98,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

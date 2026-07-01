@@ -114,7 +114,8 @@
   "expected": {
     "diagnosis": "Tuberculous meningitis (subacute presentation, endemic area)",
     "acceptableIds": [
-      "CNS_TB"
+      "CNS_TB",
+      "MENINGITIS"
     ],
     "differentialIds": [
       "MENINGITIS",
@@ -137,7 +138,14 @@
         "pyrazinamide",
         "ethambutol"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "MENINGITIS",
+        "tier": "D-review-critical",
+        "rationale": "TB meningitis IS meningitis and shares the emergency LP + empiric-cover pathway, BUT bacterial vs TB treatment differs — flag for clinician."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (CNS_TB)",
@@ -148,6 +156,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

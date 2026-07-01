@@ -76,7 +76,8 @@
   "expected": {
     "diagnosis": "PROSTATITIS",
     "acceptableIds": [
-      "PROSTATITIS"
+      "PROSTATITIS",
+      "COMPLICATED_UTI"
     ],
     "differentialIds": [
       "PYELONEPHRITIS",
@@ -94,7 +95,14 @@
         "ciprofloxacin",
         "ceftriaxone"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "COMPLICATED_UTI",
+        "tier": "C-continuum",
+        "rationale": "Acute bacterial prostatitis is a complicated UTI in men."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include PROSTATITIS",
@@ -103,6 +111,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

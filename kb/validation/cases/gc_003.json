@@ -115,7 +115,8 @@
   "expected": {
     "diagnosis": "Sepsis with septic shock secondary to complicated urosepsis (E. coli pyelonephritis/bacteremia) in an elderly patient with type 2 diabetes",
     "acceptableIds": [
-      "SEPSIS"
+      "SEPSIS",
+      "PYELONEPHRITIS"
     ],
     "differentialIds": [
       "SEPTIC_SHOCK",
@@ -135,7 +136,14 @@
         "piperacillin-tazobactam",
         "ceftriaxone"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "PYELONEPHRITIS",
+        "tier": "B-cause",
+        "rationale": "Urosepsis: pyelonephritis is the infection source; empiric mgmt is identical."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (SEPSIS)",
@@ -147,6 +155,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

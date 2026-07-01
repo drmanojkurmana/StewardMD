@@ -76,7 +76,8 @@
   "expected": {
     "diagnosis": "MIXED_MALARIA",
     "acceptableIds": [
-      "MIXED_MALARIA"
+      "MIXED_MALARIA",
+      "MALARIA"
     ],
     "differentialIds": [
       "MALARIA",
@@ -95,7 +96,14 @@
         "Artemisinin-based combination therapy (ACT)",
         "Primaquine (G6PD-guided radical cure)"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "MALARIA",
+        "tier": "C-continuum",
+        "rationale": "Mixed malaria is a subtype of malaria; same antimalarial pathway."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include MIXED_MALARIA",
@@ -104,6 +112,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

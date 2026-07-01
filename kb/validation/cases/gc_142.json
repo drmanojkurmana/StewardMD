@@ -75,7 +75,8 @@
   "expected": {
     "diagnosis": "RICKETTSIAL_FEVER",
     "acceptableIds": [
-      "RICKETTSIAL_FEVER"
+      "RICKETTSIAL_FEVER",
+      "SCRUB_TYPHUS"
     ],
     "differentialIds": [
       "SCRUB_TYPHUS",
@@ -92,7 +93,14 @@
       "antibiotics": [
         "Doxycycline"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "SCRUB_TYPHUS",
+        "tier": "C-continuum",
+        "rationale": "Scrub typhus is a rickettsial infection; identical empiric management (doxycycline)."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include RICKETTSIAL_FEVER",
@@ -100,6 +108,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }
