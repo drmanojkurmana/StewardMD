@@ -35,6 +35,16 @@ for (const f of readdirSync(join(ROOT, "kb", "diseases"))) {
 }
 INFECTIVE_IDS.sort();
 
+// --- M3.3 intentional-divergence allowlist ---
+// These infective syndromes' KB rule/score were deliberately improved beyond the
+// frozen app.js closures (which cannot be edited — minified). They are therefore
+// EXEMPT from closure-parity and instead guarded by run-golden + the gold-case
+// benchmark (test/run-case-validation.mjs). Every other syndrome must still match
+// its closure exactly. Document each addition with the reason.
+const DIVERGENCE_ALLOWLIST = {
+  BRONCHIECTASIS_EXACERBATION: "M3.3: +knownBronchiectasis pathognomonic score modifier so a known-bronchiectasis exacerbation outranks generic CAP.",
+};
+
 // evaluator source -> injectable (strip ES export keywords; keep window attach)
 let evalSrc = readFileSync(join(ROOT, "kb", "engine", "evaluator.mjs"), "utf8")
   .replace(/export\s+function/g, "function").replace(/export\s+/g, "");
@@ -88,6 +98,7 @@ try {
 
   let totalMismatch = 0;
   for (const id of INFECTIVE_IDS) {
+    if (DIVERGENCE_ALLOWLIST[id]) { console.log(`➖ ${id.padEnd(15)} intentional divergence (guarded by golden + benchmark): ${DIVERGENCE_ALLOWLIST[id]}`); continue; }
     const present = await ev(`!!(window.SYNDROMES['${id}'] && window.SYNDROMES['${id}'].match && window.SYNDROMES['${id}'].baseScore && window.__KB['${id}'])`);
     if (!present) { console.log(`⚠️  ${id}: not present in live SYNDROMES — skipped`); continue; }
     const out = await ev(`(function(){
