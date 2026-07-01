@@ -2943,6 +2943,14 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ summary: summary, question: question || "" }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Grounded RAG explain: send the compact, de-identified, citable package
+    // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
+    // KB is the primary source. Falls back to summary explain if RAG is unavailable.
+    explainGrounded: function (pkg) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      if (!pkg) return Promise.resolve({ error: "no-package" });
+      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ package: pkg }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
@@ -3065,11 +3073,20 @@
     var ows = panel.querySelector('[data-openws="1"]'); if (ows) ows.addEventListener("click", function (e) { e.preventDefault(); try { if (window.DX && DX.open) DX.open(); } catch (x) {} });
     var aib = panel.querySelector('[data-aiexplain="1"]');
     if (aib) aib.addEventListener("click", function (e) {
-      e.preventDefault(); var out = panel.querySelector("#slAiOut"); if (out) out.textContent = "✨ Thinking…";
+      e.preventDefault(); var out = panel.querySelector("#slAiOut"); if (out) out.textContent = "✨ Retrieving StewardMD knowledge…";
       var fin = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
       var aa = window.SMD_REASON.assess(fin);
-      window.SMD_AI.explain(aiSummaryFromAssess(aa)).then(function (r) {
-        if (out) out.textContent = (r && r.text) ? r.text : (r && r.error === "ai-off") ? "AI is off — enable it in Settings (SMD_AI.setFlag(true))." : "AI unavailable — the rule-based differential above stands. (" + ((r && r.error) || "no response") + ")";
+      var labels = Object.keys(fin).filter(function (k) { return fin[k]; }).map(function (k) { return (window.SMD_REASON && SMD_REASON.label) ? SMD_REASON.label(k) : k; });
+      function fallback() { return window.SMD_AI.explain(aiSummaryFromAssess(aa)); }
+      // Grounded RAG path: retrieve StewardMD knowledge client-side, send only the
+      // compact package. Falls back to the summary explainer if RAG isn't ready.
+      var p = (window.StewardRAG && window.StewardRAG.buildPackage)
+        ? window.StewardRAG.buildPackage(aa, { caseData: { findings: labels } }).then(function (pkg) { return pkg ? window.SMD_AI.explainGrounded(pkg) : fallback(); }, fallback)
+        : fallback();
+      Promise.resolve(p).then(function (r) {
+        if (!out) return;
+        if (r && r.text) out.textContent = r.text + (r.mode === "grounded" && r.citations && r.citations.length ? "\n\nSources: " + r.citations.join("; ") : "");
+        else out.textContent = (r && r.error === "ai-off") ? "AI is off — enable it in Settings (SMD_AI.setFlag(true))." : "AI unavailable — the rule-based differential above stands. (" + ((r && r.error) || "no response") + ")";
       });
     });
     // snapshot for next-render deltas
