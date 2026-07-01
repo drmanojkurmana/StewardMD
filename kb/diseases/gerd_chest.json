@@ -10,16 +10,23 @@
   },
   "matching": {
     "find": {
-      "chestPain": 20,
+      "chestPain": 26,
       "exertionalChestPain": -10,
       "ecgIschemia": -14,
-      "fever": -8
+      "fever": -8,
+      "abdominalDiscomfort": 10,
+      "afebrile": 12,
+      "stable": 10,
+      "oralIntake": 8,
+      "abdominalPain": 4
     },
     "associatedFindings": [
+      "abdominalDiscomfort",
+      "abdominalPain",
+      "afebrile",
       "chestPain",
-      "ecgIschemia",
-      "exertionalChestPain",
-      "fever"
+      "oralIntake",
+      "stable"
     ],
     "reasoningTemplate": "Chest pain without ischaemic features or risk factors may be oesophageal, but cardiac causes must be excluded first."
   },
