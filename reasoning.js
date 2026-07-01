@@ -893,6 +893,7 @@
       '</div>' +
       '<div class="dx-body">' +
         '<div class="dx-discl"><b>⚠️ Beta — this clinical reasoning engine is still being built and is under active testing.</b> Treat all output as provisional. Live differential — updates as you add findings. Ranked by Clinical Confidence Score (a transparent rule-based score, not a validated probability). Nothing here is a confirmed diagnosis; StewardMD supports, not replaces, your clinical judgment.</div>' +
+        '<div id="dxImported" class="dx-imported"></div>' +
         '<div id="dxHosp" class="dx-hosp"></div>' +
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
@@ -2188,6 +2189,7 @@
   function recompute() {
     if (!root) return;
     renderSelected(); renderPicker(); renderHosp(); renderAdv();
+    if (S.imported) { try { renderImported(); } catch (e) {} }
     var d = differential();
     renderSuggest(d);
 
@@ -2402,6 +2404,12 @@
    * ---------------------------------------------------------------------- */
   function injectCSS() {
     var css = [
+      ".dx-imported{margin:0 0 4px}.dx-imp-wrap{border:1px solid var(--teal,#0e6e63);border-radius:12px;padding:12px;margin:8px 0;background:var(--teal-soft,#e3f1ee)}",
+      ".dx-imp-h{font:800 14px var(--sans);color:var(--ink);display:flex;align-items:center;gap:8px;margin-bottom:8px}.dx-imp-x{margin-left:auto;background:none;border:none;cursor:pointer;color:var(--slate);font-size:15px}",
+      ".dx-imp-sec{font:600 12.5px var(--sans);color:var(--ink);margin:8px 0}.dx-imp-sec summary{cursor:pointer;font-weight:700;padding:4px 0}",
+      ".dx-imp-tbl{width:100%;border-collapse:collapse;font:500 12px var(--sans);margin-top:4px}.dx-imp-tbl td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}.dx-imp-ab td{background:var(--red-bg,#fbe7e9)}",
+      ".dx-imp-rad{font:500 12.5px var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;white-space:pre-wrap}",
+      ".dx-imp-note{font:500 11px var(--sans);color:var(--slate);margin-top:8px;font-style:italic}",
       ".dx-overlay{position:fixed;inset:0;z-index:850;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
       ".dx-overlay.on{display:flex;animation:dxIn .25s ease}",
       "@keyframes dxIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
@@ -2850,7 +2858,81 @@
   }
   function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
 
-  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, _state: S, _ni: DDX_NI, _differential: differential,
+  /* ---------------------------------------------------------------------- *
+   * IMPORT PATIENT — pull a Ward Sync patient's labs/imaging/culture into the
+   * workspace. DISPLAY the reports + SUGGEST findings (clinician confirms — we
+   * never auto-tick). Structured lab values are matched to finding keys only by
+   * unambiguous name + abnormal direction; everything is shown transparently
+   * with its reference range so the clinician verifies before confirming.
+   * ---------------------------------------------------------------------- */
+  var IMPORT_MAP = [
+    { kw: ["platelet", "plt count", "plt"], dir: "low", find: "thrombocytopenia" },
+    { kw: ["haemoglobin", "hemoglobin", "hb "], dir: "low", find: "hemoglobin" },
+    { kw: ["creatinine"], dir: "high", find: "renalImpairment" },
+    { kw: ["creatinine"], dir: "high", find: "creatinine" },
+    { kw: ["urea", "blood urea", "bun"], dir: "high", find: "urea" },
+    { kw: ["bilirubin"], dir: "high", find: "jaundice" },
+    { kw: ["lactate"], dir: "high", find: "lactateElevated" },
+    { kw: ["inr", "prothrombin"], dir: "high", find: "inr" },
+    { kw: ["ketone"], dir: "high", find: "ketonemia" }
+  ];
+  function labAbnormal(t) {
+    var v = parseFloat(t.result), lo = parseFloat(t.low), hi = parseFloat(t.high);
+    if (isNaN(v)) return null;                       // non-numeric (e.g. "NEGATIVE") — no auto-suggest
+    if (!isNaN(hi) && hi > 0 && v > hi) return "high";
+    if (!isNaN(lo) && lo > 0 && v < lo) return "low";
+    return null;
+  }
+  function suggestFromLabs(labs) {
+    var out = {}, seen = {};
+    (labs || []).forEach(function (t) {
+      var nm = String(t.test || t.testName || "").toLowerCase();
+      var ab = labAbnormal(t);
+      if (!ab) return;
+      IMPORT_MAP.forEach(function (m) {
+        if (m.dir !== ab) return;
+        if (!m.kw.some(function (k) { return nm.indexOf(k) >= 0; })) return;
+        if (!VALID[m.find] || seen[m.find]) return;
+        seen[m.find] = 1; out[m.find] = { via: t.test || t.testName, val: t.result, units: t.units || "" };
+      });
+    });
+    return out;
+  }
+  function renderImported() {
+    var el = root && root.querySelector("#dxImported"); if (!el) return;
+    var imp = S.imported;
+    if (!imp) { el.innerHTML = ""; return; }
+    function esc2(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+    var sug = imp.suggestions || {};
+    var sugKeys = Object.keys(sug).filter(function (k) { return !S.f[k]; });
+    var chips = sugKeys.map(function (k) {
+      return '<button class="dx-chip sug" data-impf="' + k + '" title="Suggested by ' + esc2(sug[k].via) + ' = ' + esc2(sug[k].val) + ' ' + esc2(sug[k].units) + '">+ ' + esc2(LABEL[k] || k) + '</button>';
+    }).join("");
+    var labs = (imp.labs || []).map(function (t) {
+      var ab = labAbnormal(t);
+      return '<tr' + (ab ? ' class="dx-imp-ab"' : '') + '><td>' + esc2(t.test || t.testName) + '</td><td>' + esc2(t.result) + " " + esc2(t.units || "") + (ab ? ' <b>' + (ab === "high" ? "▲" : "▼") + '</b>' : '') + '</td><td>' + (t.low || t.high ? esc2((t.low || "") + "–" + (t.high || "")) : "") + '</td></tr>';
+    }).join("");
+    var rad = (imp.radiology || []).map(function (r) { return '<div class="dx-imp-rad"><b>' + esc2(r.name) + '</b><div>' + esc2(r.report) + '</div></div>'; }).join("");
+    var cult = (imp.culture || []).map(function (c) { return '<div class="dx-imp-rad"><b>🧫 ' + esc2(c.name || "Culture") + '</b><div>' + esc2(c.detail) + '</div></div>'; }).join("");
+    el.innerHTML =
+      '<div class="dx-imp-wrap"><div class="dx-imp-h">📋 Imported from Ward Sync' + (imp.patientName ? ' — ' + esc2(imp.patientName) : '') + ' <button class="dx-imp-x" id="dxImpClear" title="Clear import">✕</button></div>' +
+      (sugKeys.length ? '<div class="dx-imp-sec">💡 Findings suggested by these labs — <b>tap to confirm</b> (nothing added automatically):<div class="dx-chips" style="margin-top:6px">' + chips + '</div></div>' : '') +
+      (labs ? '<details class="dx-imp-sec" open><summary>🧪 Laboratory (' + (imp.labs || []).length + ')</summary><table class="dx-imp-tbl"><tbody>' + labs + '</tbody></table></details>' : '') +
+      (rad ? '<details class="dx-imp-sec"><summary>🩻 Imaging</summary>' + rad + '</details>' : '') +
+      (cult ? '<details class="dx-imp-sec"><summary>🧫 Culture / sensitivity</summary>' + cult + '</details>' : '') +
+      '<div class="dx-imp-note">Imported reports are clinician-reviewable context. The differential updates only from findings you confirm. Verify every value against the source.</div></div>';
+    el.querySelectorAll("[data-impf]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-impf")); }); });
+    var x = el.querySelector("#dxImpClear"); if (x) x.addEventListener("click", function () { S.imported = null; renderImported(); });
+  }
+  function importPatient(bundle) {
+    bundle = bundle || {};
+    bundle.suggestions = suggestFromLabs(bundle.labs);
+    S.imported = bundle;
+    openWorkspace();
+    setTimeout(renderImported, 60);
+  }
+
+  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.

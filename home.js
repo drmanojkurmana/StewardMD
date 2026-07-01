@@ -286,7 +286,7 @@
   //     (higher z-index) and return to it when closed — so we DON'T hide the home for them. Only in-shell flows hide it. ---
   var ACT = {
     startcase: openCaseChooser,
-    reasoning: function () { hideV2(); if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical Reasoning is loading…"); },
+    reasoning: function () { openDxChooser(); },
     search: function () { if (typeof openSearch === "function") openSearch(); else if (window.MEDDB) MEDDB.openList(); },
     cases: function () { if (typeof openMyCases === "function") openMyCases(); else toast("My Cases unavailable"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
@@ -816,6 +816,21 @@
     var subClose = sheetEl().querySelector("[data-close]");
     if (subClose) subClose.addEventListener("click", closeSheet);
   }
+  function openDxChooser() {
+    openSheet('<div class="hv-sh-t">Dx My Patient</div>' +
+      '<p style="font:500 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 16px">Reason through a patient — live differential, confidence &amp; next steps.</p>' +
+      '<button id="dxAddNew" style="width:100%;background:var(--hp);color:#fff;border:none;border-radius:12px;padding:14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px;text-align:center">➕ Add New Patient<div style="font:500 11.5px var(--hfont);opacity:.9;margin-top:2px">Enter symptoms &amp; findings manually</div></button>' +
+      '<button id="dxImportPt" style="width:100%;background:var(--hpanel);color:var(--hink);border:1px solid var(--hbd);border-radius:12px;padding:14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px;text-align:center">🏥 Import Patient<div style="font:500 11.5px var(--hfont);color:var(--hmut);margin-top:2px">Pull labs · imaging · culture from Ward Sync, then add symptoms</div></button>' +
+      '<button class="hv-back" data-close="1">Close</button>');
+    var s = sheetEl();
+    var addN = s.querySelector("#dxAddNew");
+    if (addN) addN.addEventListener("click", function () { closeSheet(); hideV2(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical reasoning is loading…"); } catch (e) {} });
+    var imp = s.querySelector("#dxImportPt");
+    if (imp) imp.addEventListener("click", function () { closeSheet(); hideV2(); try { if (window.GHIS && GHIS.startImport) GHIS.startImport(); else toast("Ward Sync is loading — try again in a moment."); } catch (e) {} });
+    var c = s.querySelector("[data-close]");
+    if (c) c.addEventListener("click", closeSheet);
+  }
+
   function openAskAi() {
     openSheet('<div class="hv-sh-t">Ask AI</div>' +
       '<div style="text-align:center;padding:8px 4px 4px">' +
