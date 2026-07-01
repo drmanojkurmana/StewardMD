@@ -54,7 +54,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, 
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 } }; }
 function parseCandidates(data, status) {
-  if (!data || data.error) throw new Error((data && data.error && data.error.message) || ("AI HTTP " + status));
+  if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
   return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
 }
@@ -138,15 +138,35 @@ function providerOrder(env) {
 }
 function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
 
-// Facade — callers (RAG explain / legacy explain / vision) are unchanged. Tries the
-// selected provider(s) in order; Vertex → Developer failover on unavailable/error.
+let _lastFailover = null;   // { from, to, reason, timestamp, model } — for /health + diagnostics
+function failReason(e) {
+  const m = String((e && e.message) || e);
+  if (/\b(401|403)\b|unauth|permission|IAM|forbidden|jwt|credential|token|STS|OAuth/i.test(m)) return "auth/permission";
+  if (/\b429\b|quota|rate.?limit|exhausted|RESOURCE_EXHAUSTED/i.test(m)) return "quota/rate-limit (429)";
+  if (/\b5\d\d\b|unavailable|UNAVAILABLE|internal|timeout|deadline|network|fetch failed|ECONN|ENOTFOUND/i.test(m)) return "vertex-unavailable/5xx/network";
+  return "error: " + m.slice(0, 80);
+}
+// Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
+// Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
+// permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
 async function callGemini(env, parts, maxTokens) {
+  const order = providerOrder(env);
   let lastErr = null;
-  for (const name of providerOrder(env)) {
-    const p = PROVIDERS[name];
+  for (let i = 0; i < order.length; i++) {
+    const name = order[i], p = PROVIDERS[name];
     if (!p || !p.available(env)) { lastErr = new Error(name + " provider unavailable"); continue; }
-    try { return await p.generate(env, parts, maxTokens); }
-    catch (e) { lastErr = e; }   // fail over to the next provider
+    const attempts = name === "vertex" ? 2 : 1;   // retry Vertex ONCE before switching
+    for (let a = 0; a < attempts; a++) {
+      try { return await p.generate(env, parts, maxTokens); }
+      catch (e) {
+        lastErr = e;
+        const nextProvider = order[i + 1];
+        if (a + 1 >= attempts && nextProvider && PROVIDERS[nextProvider] && PROVIDERS[nextProvider].available(env)) {
+          _lastFailover = { from: name, to: nextProvider, reason: failReason(e), timestamp: new Date().toISOString(), model: modelId(env) };
+          try { console.log("[MaiK failover] " + JSON.stringify(_lastFailover)); } catch (_) {}  // internal only; no PHI/secrets
+        }
+      }
+    }
   }
   throw lastErr || new Error("no AI provider configured");
 }
@@ -160,7 +180,7 @@ const EXPLAIN_SYS =
 // package is the PRIMARY source of truth; the model's own medical knowledge is
 // secondary. The deterministic engine OWNS the diagnosis.
 const RAG_SYS =
-  "You are MaiK (Medical AI Knowledge Engine), StewardMD's teaching assistant powered by Gemini. A DETERMINISTIC RULE ENGINE has ALREADY computed the diagnosis and ranked differential (in ENGINE OUTPUT below) — that assessment is AUTHORITATIVE and is shown to the clinician separately. " +
+  "You are MaiK (Medical AI Knowledge), StewardMD's clinician-assistive AI powered by Google Vertex AI. A DETERMINISTIC RULE ENGINE has ALREADY computed the diagnosis and ranked differential (in ENGINE OUTPUT below) — that assessment is AUTHORITATIVE and is shown to the clinician separately. " +
   "You are providing INDEPENDENT CLINICAL COMMENTARY on that assessment — you are NOT answering from scratch and NOT making the diagnosis. Do NOT restate, re-rank, override, or replace the primary diagnosis. Do NOT reason primarily from your own training. " +
   "Reason PRIMARILY from the RETRIEVED STEWARDMD KNOWLEDGE and TREATMENT RESOLUTION provided (Harrison-derived, page-cited; ICMR ▸ international-guideline ▸ Harrison precedence; hospital overlay shown separately). Your own medical knowledge is SECONDARY — use it only to connect or clarify the provided knowledge, and say so when you do. " +
   "Reply as commentary under EXACTLY these markdown headings, in this order, omitting a heading only if you have nothing evidence-based to add:\n" +
@@ -237,6 +257,24 @@ export async function onRequest(context) {
   const enabled = aiEnabled(env);
 
   if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
+
+  if (seg === "health") {
+    const order = providerOrder(env);
+    const vAvail = PROVIDERS.vertex.available(env), dAvail = PROVIDERS.developer.available(env);
+    const fb = order[1] || null;
+    return json({
+      enabled: enabled,
+      provider: order[0],
+      fallback_available: !!(fb && PROVIDERS[fb] && PROVIDERS[fb].available(env)),
+      fallback_provider: fb,
+      model: modelId(env),
+      token_cache: true,
+      last_failover: _lastFailover,
+      vertex_status: vAvail ? "healthy" : "unavailable",
+      developer_status: dAvail ? "ready" : "not_configured",
+      authentication: vAvail ? (env.GCP_WIF_PRIVATE_KEY ? "Workload Identity Federation" : "Service Account JWT") : "none"
+    });
+  }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
   let body = {};

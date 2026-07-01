@@ -59,10 +59,15 @@ try {
   r = await (await onRequest({ request: req({ package: pkg }), env: VERTEX_ENV, params: { path: ["explain"] } })).json();
   ok(r.text === "VERTEX-OK" && calls.token === 1 && calls.vertex === 2, "token cached across calls (still 1 exchange, 2 vertex calls)", JSON.stringify({ token: calls.token, vertex: calls.vertex }));
 
-  // 3) FAILOVER — Vertex primary but Vertex call fails → Developer fallback (GEMINI_API_KEY present)
+  // 3) FAILOVER — Vertex fails → RETRY ONCE on Vertex → then Developer hot standby
   stub(); calls.vertexShouldFail = true;
   r = await (await onRequest({ request: req({ package: pkg }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["explain"] } })).json();
-  ok(r.text === "DEV-OK" && calls.vertex === 1 && calls.dev === 1, "Vertex failure → automatic Developer fallback", r.text + " (vertex tried:" + calls.vertex + ", dev:" + calls.dev + ")");
+  ok(r.text === "DEV-OK" && calls.vertex === 2 && calls.dev === 1, "Vertex fails → retry once (2 attempts) → Developer hot standby", r.text + " (vertex attempts:" + calls.vertex + ", dev:" + calls.dev + ")");
+
+  // 3b) the failover was logged internally (previous/new provider, reason, timestamp, model)
+  let h = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/health", { headers: { Origin: "https://stewardmd.in" } }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
+  const lf = h.last_failover;
+  ok(lf && lf.from === "vertex" && lf.to === "developer" && /5xx|unavailable/i.test(lf.reason) && lf.timestamp && lf.model === "gemini-2.5-flash", "failover recorded (from/to/reason/timestamp/model)", JSON.stringify(lf));
 
   // 4) AI_PROVIDER=developer → developer only, no Vertex/token traffic
   stub();
@@ -84,6 +89,10 @@ try {
   stub();
   r = await (await onRequest({ request: req({ package: pkg }), env: { GEMINI_API_KEY: "dev-key" }, params: { path: ["explain"] } })).json();
   ok(r.text === "DEV-OK" && calls.vertex === 0, "Vertex unavailable (no GCP env) → Developer used", r.text);
+
+  // 8) /api/ai/health endpoint shape (Vertex primary + Developer hot standby configured)
+  h = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/health", { headers: { Origin: "https://stewardmd.in" } }), env: { ...VERTEX_ENV, GEMINI_API_KEY: "dev-key" }, params: { path: ["health"] } })).json();
+  ok(h.enabled === true && h.provider === "vertex" && h.fallback_available === true && h.fallback_provider === "developer" && h.model === "gemini-2.5-flash" && h.token_cache === true && h.vertex_status === "healthy" && h.developer_status === "ready" && h.authentication === "Service Account JWT", "/api/ai/health returns full shape", JSON.stringify(h).slice(0, 200));
 
   globalThis.fetch = realFetch;
   console.log(`\n${fails === 0 ? "ALL GREEN — provider abstraction: Vertex primary, Developer failover, token cached, 2.5-flash default" : fails + " failed"}`);
