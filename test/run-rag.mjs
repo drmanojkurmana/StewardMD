@@ -44,7 +44,7 @@ ok(!!t && t.overlayApplied && t.overlay && t.overlay.hospitalId === "GIMSR", "ho
 /* ---- build a browser-shaped package (what StewardRAG.buildPackage emits) ---- */
 const pkg = {
   schema: "steward-rag-1", hospitalId: "GIMSR",
-  patientCase: { age: 68, sex: "M", findings: ["Cough", "Fever", "Breathlessness (dyspnea)"], cultures: [{ organism: "S. pneumoniae", sensitivities: ["penicillin-S", "ceftriaxone-S"] }] },
+  patientCase: { age: 68, sex: "M", findings: ["Cough", "Fever", "Breathlessness (dyspnea)"], abnormalLabs: [{ name: "WBC", value: 18.2, unit: "10^9/L", flag: "high" }], cultures: [{ organism: "S. pneumoniae", sensitivities: ["penicillin-S", "ceftriaxone-S"] }] },
   reasoning: { gate: { cls: "infective" }, dominantSystem: "Respiratory", differential: [
     { id: "CAP", name: "Community Acquired Pneumonia", class: "infective", confidence: 82, supporting: ["Cough", "Fever"], contradictory: [], missing: ["CXR"] } ] },
   grounding: [{ diseaseId: "CAP", name: "Community Acquired Pneumonia", class: "infective",
@@ -72,9 +72,16 @@ ok(/PRIMARY SOURCE/.test(prompt) && /own medical knowledge is SECONDARY/i.test(p
 ok(/AUTHORITATIVE/.test(prompt) && /rule engine/i.test(prompt), "prompt marks the deterministic diagnosis authoritative");
 ok(/RETRIEVED STEWARDMD KNOWLEDGE/.test(prompt) && /TREATMENT RESOLUTION/.test(prompt), "prompt carries retrieved knowledge + treatment resolution");
 ok(/GIMSR/.test(prompt) && /SEPARATE/.test(prompt), "hospital overlay presented separately in prompt");
-// privacy: package + prompt carry NO identifiers
+ok(/INDEPENDENT CLINICAL COMMENTARY/i.test(prompt) && /not answering from scratch/i.test(prompt), "MaiK is framed as commentary, not answering from scratch");
+ok(/Do NOT.*(restate|re-rank|override|replace).*primary diagnosis/is.test(prompt), "MaiK forbidden from restating/overriding the primary diagnosis");
+ok(/Additional differentials/.test(prompt) && /Missing investigations/.test(prompt) && /Teaching points/.test(prompt) && /Alternative interpretations/.test(prompt), "MaiK output constrained to the required commentary sections");
+// privacy: the de-identified case exposes ONLY an allow-listed set of keys
+// (abnormalLabs[].name is a LAB name, not a patient identifier — so check top-level keys)
+const ALLOWED = ["age", "sex", "findings", "abnormalLabs", "labTrends", "cultures", "radiologyImpressions"];
+const pcKeys = Object.keys(pkg.patientCase);
+ok(pcKeys.every((k) => ALLOWED.indexOf(k) >= 0), "patientCase carries ONLY de-identified allow-listed fields", pcKeys.join(","));
 const sent = JSON.stringify(captured.body);
-ok(!/"name"\s*:/.test(JSON.stringify(pkg.patientCase)) && !/mrn|uhid|patientId|"bed"/i.test(sent), "no patient identifiers transmitted");
+ok(!/"(patientName|mrn|uhid|patientId|nationalId|phone|address|dob)"\s*:/i.test(sent), "no patient-identifier keys anywhere in the transmitted payload");
 
 /* ---- (3) fail-safe + legacy ---- */
 const rStatus = await (await onRequest({ request: new Request("https://stewardmd.in/api/ai/status", { headers: { Origin: "https://stewardmd.in" } }), env: {}, params: { path: ["status"] } })).json();
