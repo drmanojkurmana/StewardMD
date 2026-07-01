@@ -79,7 +79,7 @@
   function init() {
     if (_initP) return _initP;
     _initP = (function () {
-      var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold109") : Promise.resolve();
+      var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       return needRag.then(function () {
         return import("/kb/ai/interface.mjs?v=gold109");
       }).then(function (mod) {

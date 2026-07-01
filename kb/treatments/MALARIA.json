@@ -7,7 +7,63 @@
     "guideline",
     "harrison"
   ],
-  "recommendations": [],
+  "recommendations": [
+    {
+      "tier": "guideline",
+      "line": "empiric",
+      "drugRefs": [
+        {
+          "composition": "artemether-lumefantrine",
+          "regimenLabel": "Artemether-lumefantrine (ACT) — uncomplicated P. falciparum",
+          "dose": "80/480 mg (4 tablets)",
+          "route": "Oral",
+          "freq": "twice daily",
+          "duration": "3 days",
+          "coverage": null,
+          "why": "First-line artemisinin-based combination therapy for uncomplicated falciparum malaria; the partner drug protects the artemisinin from resistance (WHO / NVBDCP)."
+        },
+        {
+          "composition": "primaquine",
+          "regimenLabel": "Primaquine (gametocytocidal / radical cure — G6PD-guided)",
+          "dose": "0.25 mg/kg single dose (falciparum); 0.25-0.5 mg/kg/day x 14 days (vivax radical cure)",
+          "route": "Oral",
+          "freq": "per indication",
+          "duration": "single dose or 14 days",
+          "coverage": null,
+          "why": "Single low-dose primaquine is gametocytocidal to interrupt falciparum transmission; a 14-day course gives radical cure of P. vivax hypnozoites. Screen G6PD before the 14-day course."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (WHO / NVBDCP-aligned)",
+        "refs": [
+          "WHO Guidelines for Malaria",
+          "NVBDCP National Drug Policy on Malaria"
+        ]
+      }
+    },
+    {
+      "tier": "guideline",
+      "line": "alternative",
+      "drugRefs": [
+        {
+          "composition": "artesunate",
+          "regimenLabel": "IV Artesunate — severe/complicated malaria",
+          "dose": "2.4 mg/kg",
+          "route": "IV",
+          "freq": "at 0, 12, 24 h then once daily",
+          "duration": "until able to switch to a full oral ACT course",
+          "coverage": null,
+          "why": "IV artesunate is first-line for severe malaria (impaired consciousness, shock, high parasitaemia, organ dysfunction) — superior to quinine (WHO / SEAQUAMAT-AQUAMAT)."
+        }
+      ],
+      "evidence": {
+        "source": "StewardMD (WHO-aligned)",
+        "refs": [
+          "WHO Guidelines for Malaria"
+        ]
+      }
+    }
+  ],
   "stewardship": {
     "coverageMatrix": null,
     "deescalation": "Not applicable to antibiotics. Once species is confirmed, ensure species-appropriate antimalarial therapy is given (e.g., artemisinin-based combination therapy for P. falciparum per national guidelines; chloroquine plus primaquine for P. vivax in chloroquine-sensitive regions, with G6PD testing before primaquine).",
@@ -31,10 +87,10 @@
     "Harrison's Principles of Internal Medicine"
   ],
   "decision": {
-    "status": "green",
-    "label": "Antibiotics NOT indicated"
+    "status": "orange",
+    "label": "Antimalarial therapy indicated"
   },
-  "antibioticRelevant": false,
+  "antibioticRelevant": true,
   "review": {
     "status": "approved",
     "reviewedBy": null,
