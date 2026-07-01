@@ -11,9 +11,13 @@
  *   POST /api/ai/explain  -> { text }                    body: { summary, question? }
  *   POST /api/ai/vision   -> { fields }                  body: { image(base64|dataURL), kind }
  *
- * Config (Pages env, encrypted secret):
- *   GEMINI_API_KEY  (required to enable; absent => AI disabled, client falls back)
- *   GEMINI_MODEL    (optional, default 'gemini-2.0-flash')
+ * Config (Pages env / encrypted secrets):
+ *   AI_PROVIDER     (optional, 'vertex' [primary, default] | 'developer')
+ *   GEMINI_MODEL    (optional, default 'gemini-2.5-flash'; do NOT use gemini-2.0-flash)
+ *   Vertex (primary):  GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL,
+ *                      GCP_SA_PRIVATE_KEY (PKCS8 PEM) — OAuth via self-signed SA JWT.
+ *   Developer (fallback): GEMINI_API_KEY (AI Studio).
+ * Enabled if EITHER provider is configured. Vertex → Developer failover on error.
  * Auth: same gate as the GHIS Function (Cf-Access / X-App-Token / same-origin).
  *
  * PHI NOTE: /vision sends a clinical IMAGE and /explain sends clinical FINDINGS
@@ -21,7 +25,10 @@
  * flag is on. Nothing is persisted by this Function.
  */
 
-const GEMINI = "https://generativelanguage.googleapis.com/v1beta/models";
+// AI transport config. Selection ONLY via env.AI_PROVIDER ("vertex" [primary, default]
+// | "developer"). Model via env.GEMINI_MODEL (default gemini-2.5-flash; NOT 2.0).
+const DEV_HOST = "https://generativelanguage.googleapis.com/v1beta/models";
+const MODEL_DEFAULT = "gemini-2.5-flash";
 
 function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
@@ -32,21 +39,93 @@ function authorise(request, env) {
 }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
-async function callGemini(env, parts, maxTokens) {
-  const model = env.GEMINI_MODEL || "gemini-2.0-flash";
-  const r = await fetch(`${GEMINI}/${model}:generateContent?key=${env.GEMINI_API_KEY}`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ role: "user", parts: parts }],
-      generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 }
-    })
-  });
-  const data = await r.json();
-  if (!r.ok) throw new Error((data && data.error && data.error.message) || ("Gemini HTTP " + r.status));
+/* ===================================================================
+ * AI TRANSPORT — provider abstraction (this is the ONLY layer that changed).
+ * Prompt construction, RAG grounding, /vision, and response parsing are
+ * UNCHANGED. Providers share the Gemini generateContent request/response
+ * schema, so swapping transport needs no change to callers.
+ *   AIProvider = { name, available(env), generate(env, parts, maxTokens) -> text }
+ * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
+ * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
+ * =================================================================== */
+function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
+function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 } }; }
+function parseCandidates(data, status) {
+  if (!data || data.error) throw new Error((data && data.error && data.error.message) || ("AI HTTP " + status));
   const cand = data.candidates && data.candidates[0];
-  const text = cand && cand.content && cand.content.parts ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
-  return text || "";
+  return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
+}
+
+/* ---- Developer API (AI Studio) — FALLBACK ---- */
+const developerProvider = {
+  name: "developer",
+  available: function (env) { return !!env.GEMINI_API_KEY; },
+  generate: async function (env, parts, maxTokens) {
+    const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+    return parseCandidates(await r.json(), r.status);
+  }
+};
+
+/* ---- Vertex AI — PRIMARY. OAuth Bearer via a self-signed service-account JWT
+ *      exchanged for a cloud-platform access token; token cached per-isolate.
+ *      (Auth material is provisioned as Cloudflare secrets; no key is ever
+ *      committed or exposed client-side. Where org policy forbids SA keys, the
+ *      token seam below is swapped for Workload Identity Federation with no
+ *      change to the provider/transport contract.) ---- */
+let _vTok = null; // { value, exp } — per-isolate OAuth token cache
+function b64url(buf) { let s = ""; const u = new Uint8Array(buf); for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+function b64urlStr(str) { return b64url(new TextEncoder().encode(str)); }
+function pemToDer(pem) { const b = String(pem).replace(/-----[^-]+-----/g, "").replace(/\s+/g, ""); const bin = atob(b); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; }
+async function signSaJwt(env) {
+  const now = Math.floor(Date.now() / 1000);
+  const head = b64urlStr(JSON.stringify({ alg: "RS256", typ: "JWT" }));
+  const claims = b64urlStr(JSON.stringify({ iss: env.GCP_SA_EMAIL, sub: env.GCP_SA_EMAIL, aud: "https://oauth2.googleapis.com/token", scope: "https://www.googleapis.com/auth/cloud-platform", iat: now, exp: now + 3600 }));
+  const input = head + "." + claims;
+  const key = await crypto.subtle.importKey("pkcs8", pemToDer(env.GCP_SA_PRIVATE_KEY), { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
+  const sig = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, new TextEncoder().encode(input));
+  return input + "." + b64url(sig);
+}
+async function vertexAccessToken(env) {
+  const now = Math.floor(Date.now() / 1000);
+  if (_vTok && _vTok.exp > now + 60) return _vTok.value;                 // cache hit (~55 min reuse)
+  const assertion = await signSaJwt(env);
+  const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=" + encodeURIComponent(assertion) });
+  const j = await r.json();
+  if (!j.access_token) throw new Error("vertex token exchange failed: " + (j.error_description || j.error || ("HTTP " + r.status)));
+  _vTok = { value: j.access_token, exp: now + (j.expires_in || 3600) };
+  return _vTok.value;
+}
+const vertexProvider = {
+  name: "vertex",
+  available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && env.GCP_SA_PRIVATE_KEY); },
+  generate: async function (env, parts, maxTokens) {
+    const loc = env.GCP_LOCATION || "us-central1";
+    const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
+    const token = await vertexAccessToken(env);
+    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+    return parseCandidates(await r.json(), r.status);
+  }
+};
+
+const PROVIDERS = { vertex: vertexProvider, developer: developerProvider };
+function providerOrder(env) {
+  // Vertex is primary and fails over to Developer. If AI_PROVIDER=developer, use it directly.
+  return String(env.AI_PROVIDER || "vertex").toLowerCase() === "developer" ? ["developer"] : ["vertex", "developer"];
+}
+function aiEnabled(env) { return PROVIDERS.vertex.available(env) || PROVIDERS.developer.available(env); }
+
+// Facade — callers (RAG explain / legacy explain / vision) are unchanged. Tries the
+// selected provider(s) in order; Vertex → Developer failover on unavailable/error.
+async function callGemini(env, parts, maxTokens) {
+  let lastErr = null;
+  for (const name of providerOrder(env)) {
+    const p = PROVIDERS[name];
+    if (!p || !p.available(env)) { lastErr = new Error(name + " provider unavailable"); continue; }
+    try { return await p.generate(env, parts, maxTokens); }
+    catch (e) { lastErr = e; }   // fail over to the next provider
+  }
+  throw lastErr || new Error("no AI provider configured");
 }
 
 const EXPLAIN_SYS =
@@ -132,9 +211,9 @@ export async function onRequest(context) {
   const { request, env, params } = context;
   if (!authorise(request, env)) return json({ error: "unauthorised" }, 403);
   const seg = Array.isArray(params.path) ? params.path.join("/") : (params.path || "");
-  const enabled = !!env.GEMINI_API_KEY;
+  const enabled = aiEnabled(env);
 
-  if (seg === "status") return json({ enabled: enabled });
+  if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
   let body = {};
