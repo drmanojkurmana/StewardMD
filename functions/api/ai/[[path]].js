@@ -14,8 +14,11 @@
  * Config (Pages env / encrypted secrets):
  *   AI_PROVIDER     (optional, 'vertex' [primary, default] | 'developer')
  *   GEMINI_MODEL    (optional, default 'gemini-2.5-flash'; do NOT use gemini-2.0-flash)
- *   Vertex (primary):  GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL,
- *                      GCP_SA_PRIVATE_KEY (PKCS8 PEM) — OAuth via self-signed SA JWT.
+ *   Vertex (primary):  GCP_PROJECT, GCP_LOCATION (default us-central1), GCP_SA_EMAIL.
+ *     KEYLESS (production): Workload Identity Federation — GCP_WIF_PRIVATE_KEY (PKCS8 PEM,
+ *       Cloudflare secret; public JWK uploaded to the WIF provider), GCP_WIF_AUDIENCE,
+ *       GCP_WIF_KID, GCP_WIF_ISSUER, GCP_WIF_SUBJECT. No GCP SA key exists.
+ *     Legacy (only if org allows SA keys): GCP_SA_PRIVATE_KEY.
  *   Developer (fallback): GEMINI_API_KEY (AI Studio).
  * Enabled if EITHER provider is configured. Vertex → Developer failover on error.
  * Auth: same gate as the GHIS Function (Cf-Access / X-App-Token / same-origin).
@@ -77,28 +80,48 @@ let _vTok = null; // { value, exp } — per-isolate OAuth token cache
 function b64url(buf) { let s = ""; const u = new Uint8Array(buf); for (let i = 0; i < u.length; i++) s += String.fromCharCode(u[i]); return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
 function b64urlStr(str) { return b64url(new TextEncoder().encode(str)); }
 function pemToDer(pem) { const b = String(pem).replace(/-----[^-]+-----/g, "").replace(/\s+/g, ""); const bin = atob(b); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return u.buffer; }
-async function signSaJwt(env) {
-  const now = Math.floor(Date.now() / 1000);
-  const head = b64urlStr(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const claims = b64urlStr(JSON.stringify({ iss: env.GCP_SA_EMAIL, sub: env.GCP_SA_EMAIL, aud: "https://oauth2.googleapis.com/token", scope: "https://www.googleapis.com/auth/cloud-platform", iat: now, exp: now + 3600 }));
-  const input = head + "." + claims;
-  const key = await crypto.subtle.importKey("pkcs8", pemToDer(env.GCP_SA_PRIVATE_KEY), { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
+async function rsSign(pkcs8Pem, headerObj, claimsObj) {
+  const input = b64urlStr(JSON.stringify(headerObj)) + "." + b64urlStr(JSON.stringify(claimsObj));
+  const key = await crypto.subtle.importKey("pkcs8", pemToDer(pkcs8Pem), { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
   const sig = await crypto.subtle.sign("RSASSA-PKCS1-v1_5", key, new TextEncoder().encode(input));
   return input + "." + b64url(sig);
+}
+// PRODUCTION (keyless): Workload Identity Federation. The Worker self-signs an OIDC JWT
+// (signing key = Cloudflare secret; matching public JWK uploaded to the WIF provider — NO
+// GCP service-account key exists), exchanges it at Google STS for a federated token, then
+// impersonates the SA via IAM Credentials generateAccessToken. Nothing is hosted publicly.
+async function wifAccessToken(env) {
+  const now = Math.floor(Date.now() / 1000);
+  const oidc = await rsSign(env.GCP_WIF_PRIVATE_KEY, { alg: "RS256", typ: "JWT", kid: env.GCP_WIF_KID || undefined },
+    { iss: env.GCP_WIF_ISSUER || "https://stewardmd.in", sub: env.GCP_WIF_SUBJECT || "maik-worker", aud: env.GCP_WIF_AUDIENCE, iat: now, exp: now + 3600 });
+  const sts = await (await fetch("https://sts.googleapis.com/v1/token", { method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ grantType: "urn:ietf:params:oauth:grant-type:token-exchange", audience: env.GCP_WIF_AUDIENCE, scope: "https://www.googleapis.com/auth/cloud-platform", requestedTokenType: "urn:ietf:params:oauth:token-type:access_token", subjectToken: oidc, subjectTokenType: "urn:ietf:params:oauth:token-type:jwt" }) })).json();
+  if (!sts.access_token) throw new Error("STS exchange failed: " + (sts.error_description || sts.error || JSON.stringify(sts).slice(0, 140)));
+  const ic = await (await fetch(`https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${encodeURIComponent(env.GCP_SA_EMAIL)}:generateAccessToken`,
+    { method: "POST", headers: { "Authorization": "Bearer " + sts.access_token, "Content-Type": "application/json" }, body: JSON.stringify({ scope: ["https://www.googleapis.com/auth/cloud-platform"] }) })).json();
+  if (!ic.accessToken) throw new Error("SA impersonation failed: " + ((ic.error && ic.error.message) || JSON.stringify(ic).slice(0, 140)));
+  return { value: ic.accessToken, exp: ic.expireTime ? Math.floor(new Date(ic.expireTime).getTime() / 1000) : now + 3600 };
+}
+// Legacy: self-signed SA JWT → OAuth token. Only used if a SA private key is provided
+// (org policy normally forbids SA keys, so WIF above is the production path).
+async function saJwtAccessToken(env) {
+  const now = Math.floor(Date.now() / 1000);
+  const jwt = await rsSign(env.GCP_SA_PRIVATE_KEY, { alg: "RS256", typ: "JWT" },
+    { iss: env.GCP_SA_EMAIL, sub: env.GCP_SA_EMAIL, aud: "https://oauth2.googleapis.com/token", scope: "https://www.googleapis.com/auth/cloud-platform", iat: now, exp: now + 3600 });
+  const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=" + encodeURIComponent(jwt) });
+  const j = await r.json();
+  if (!j.access_token) throw new Error("SA-JWT token exchange failed: " + (j.error_description || j.error || ("HTTP " + r.status)));
+  return { value: j.access_token, exp: now + (j.expires_in || 3600) };
 }
 async function vertexAccessToken(env) {
   const now = Math.floor(Date.now() / 1000);
   if (_vTok && _vTok.exp > now + 60) return _vTok.value;                 // cache hit (~55 min reuse)
-  const assertion = await signSaJwt(env);
-  const r = await fetch("https://oauth2.googleapis.com/token", { method: "POST", headers: { "Content-Type": "application/x-www-form-urlencoded" }, body: "grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer&assertion=" + encodeURIComponent(assertion) });
-  const j = await r.json();
-  if (!j.access_token) throw new Error("vertex token exchange failed: " + (j.error_description || j.error || ("HTTP " + r.status)));
-  _vTok = { value: j.access_token, exp: now + (j.expires_in || 3600) };
+  _vTok = env.GCP_WIF_PRIVATE_KEY ? await wifAccessToken(env) : await saJwtAccessToken(env);
   return _vTok.value;
 }
 const vertexProvider = {
   name: "vertex",
-  available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && env.GCP_SA_PRIVATE_KEY); },
+  available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens) {
     const loc = env.GCP_LOCATION || "us-central1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
