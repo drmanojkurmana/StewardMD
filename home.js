@@ -553,7 +553,7 @@
           '<button class="v3-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
         '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision — choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
-        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Clinical Reasoning <span style="color:var(--v3-primary);font-size:12px;font-weight:700">(Beta)</span></div><div class="sub">Experimental step-by-step reasoning workspace</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Dx My Patient <span style="color:var(--v3-primary);font-size:12px;font-weight:700">(Beta)</span></div><div class="sub">Reason through your patient — live differential, confidence &amp; next steps</div></div><div class="arr">' + svg("chev") + '</div></button>' +
         '<div class="v3-sec-label">Quick access</div>' +
         '<div class="v3-grid">' +
           '<button class="v3-tile" data-act="cases"><div class="ic">' + svg("folder") + '</div><div style="min-width:0"><div class="tt">My Cases</div><div class="sub">Saved assessments</div></div></button>' +
@@ -823,8 +823,9 @@
         '<div style="font:800 10px/1 var(--hfont);letter-spacing:.14em;color:var(--hmut);margin-bottom:6px">OUR AI AGENT</div>' +
       '</div>' +
       '<p style="font:800 18px/1.35 var(--hfont);color:var(--hink);text-align:center;margin:0 0 4px">Medical AI Knowledge <span style="color:var(--hp)">(MaiK)</span></p>' +
-      '<p style="font:600 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 14px">Powered by Gemini</p>' +
-      '<div style="text-align:center;background:var(--hps);color:var(--hp);border-radius:12px;padding:12px 14px;font:700 14px/1.45 var(--hfont);margin-bottom:14px">🚧 Under construction — coming soon</div>' +
+      '<p style="font:600 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 12px">Powered by Google Vertex AI</p>' +
+      '<p style="font:500 13px/1.55 var(--hfont);color:var(--hink);text-align:center;margin:0 0 14px">MaiK reviews StewardMD’s deterministic assessment and adds independent, evidence-grounded commentary. The reasoning engine remains the diagnostic authority — MaiK is advisory and requires clinician verification.</p>' +
+      '<button id="v3AiStart" style="width:100%;background:var(--hp);color:#fff;border:none;border-radius:12px;padding:13px 14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px">✨ Start an AI-assisted assessment</button>' +
       '<button class="hv-back" data-close="1">Close</button>');
     var s = sheetEl();
     try {
@@ -832,6 +833,12 @@
       var fl = s.querySelector("#v3AiLogo");
       if (fl) fl.src = (dl && dl.src) ? dl.src : "/logo.png";
     } catch (e) {}
+    var aiStart = s.querySelector("#v3AiStart");
+    if (aiStart) aiStart.addEventListener("click", function () {
+      try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}   // enable MaiK commentary
+      closeSheet();
+      try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical reasoning is loading…"); } catch (e) {}
+    });
     var aiClose = s.querySelector("[data-close]");
     if (aiClose) aiClose.addEventListener("click", closeSheet);
   }

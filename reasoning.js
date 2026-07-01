@@ -1984,7 +1984,7 @@
     return evAllSourcesHTML(id, opts || {});
   }
 
-  function card(r, rank) {
+  function card(r, rank, above) {
     var open = S.expanded[r.id];
     var cls = r.inf ? "inf" : "ni";
     var delta = "";
@@ -2014,15 +2014,21 @@
       else if (S.lastAdded) eff = ' · after adding ' + esc(S.lastAdded);
       confLine = '<div class="dx-conf">Confidence ' + pv + ' → ' + r.score + eff + '</div>';
     }
-    var whyNot = (rank > 1 && ((r.contra && r.contra.length) || (r.missing && r.missing.length)))
-      ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' +
-        ((r.contra && r.contra.length) ? "Contradicted by " + r.contra.map(lbl).join(", ") + ". " : "") +
-        ((r.missing && r.missing.length) ? "Would rank higher with " + r.missing.slice(0, 3).map(lbl).join(", ") + "." : "") + '</div></div>' : "";
+    // Why-not-higher: name the actual competitor ranked immediately above (the
+    // differential a consultant voices), then the contradictory / would-strengthen findings.
+    var whyNotBits = [];
+    if (rank > 1 && above) whyNotBits.push("Ranked just below <b>" + esc(above.name) + "</b> (" + above.score + " vs " + r.score + "), which also fits the current findings");
+    if (r.contra && r.contra.length) whyNotBits.push("argued against by " + esc(r.contra.map(lbl).join(", ")));
+    if (r.missing && r.missing.length) whyNotBits.push("would move up with " + esc(r.missing.slice(0, 3).map(lbl).join(", ")));
+    var whyNot = (rank > 1 && whyNotBits.length)
+      ? '<div class="dx-d-row"><b>Why not higher</b><div class="dx-reason">' + whyNotBits.join("; ") + '.</div></div>' : "";
     var det = '<div class="dx-detail">' + confLine +
       '<div class="dx-d-row"><b>Supporting findings</b><div>' + fl(r.supporting, "sup", "✓ ") + '</div></div>' +
       (r.contra && r.contra.length ? '<div class="dx-d-row"><b>Contradictory findings</b><div>' + fl(r.contra, "con", "✕ ") + '</div></div>' : '') +
       '<div class="dx-d-row"><b>Missing / would help</b><div>' + fl(r.missing, "mis", "? ") + '</div></div>' +
-      (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' + esc(r.reason) + '</div></div>' : '') +
+      (r.reason ? '<div class="dx-d-row"><b>Why this — likely because</b><div class="dx-reason">' +
+        (function () { var s = (r.supporting || []).slice(0, 3).map(lbl); return s.length ? '<b>' + esc(s.join(", ")) + '</b> ' + (s.length > 1 ? "together point here — " : "points here — ") : ""; })() +
+        esc(r.reason) + '</div></div>' : '') +
       whyNot +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
@@ -2059,7 +2065,7 @@
   function colHTML(title, cls, rows, emptyMsg) {
     var shown = rows.slice(0, CAP);
     var more = rows.length - shown.length;
-    var body = rows.length ? shown.map(function (r, i) { return card(r, i + 1); }).join("") : '<div class="dx-empty">' + esc(emptyMsg) + '</div>';
+    var body = rows.length ? shown.map(function (r, i) { return card(r, i + 1, i > 0 ? rows[i - 1] : null); }).join("") : '<div class="dx-empty">' + esc(emptyMsg) + '</div>';
     if (more > 0) body += '<div class="dx-more">+ ' + more + ' lower-ranked ' + (cls === "inf" ? "infectious" : "non-infectious") + ' possibilities</div>';
     return '<div class="dx-col ' + cls + '"><div class="dx-col-h">' + title + ' <span class="dx-col-n">' + rows.length + '</span></div>' + body + '</div>';
   }

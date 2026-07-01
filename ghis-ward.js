@@ -158,10 +158,34 @@
           if (!drawer) return;
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
-          body.innerHTML = '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
+          body.innerHTML =
+            (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + esc(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
+            '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           GHIS.loadRadiology(patientId);
           GHIS.loadLabs(patientId);
+        },
+        // Bridge a ward patient into the ICU dashboard. Transfers DEMOGRAPHICS only
+        // (name/age/sex/bed/dept) — structured lab auto-import is deliberately NOT done
+        // here: mapping GHIS test names to typed analytes must be clinician-verified
+        // against the hospital's live schema before any value enters a clinical view.
+        loadIntoICU: function(patientId) {
+          try {
+            if (!window.ICU || !ICU.ingestPatient) { alert('ICU dashboard not loaded.'); return; }
+            var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
+            for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
+            var dem = { hospital: 'GHIS Ward', status: 'ward' };
+            if (p) {
+              if (p.patientFirstName) dem.name = p.patientFirstName;
+              if (p.gender) dem.sex = p.gender;
+              if (p.bedName) dem.bed = p.bedName;
+              if (p.deptDescription) dem.diagnosis = p.deptDescription;
+              var a = parseInt(p.dob, 10); if (!isNaN(a) && a > 0 && a < 130) dem.age = a;
+            }
+            ICU.ingestPatient(dem);
+            if (typeof window.openGHIS === 'function') { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); }
+            ICU.open();
+          } catch (e) { try { alert('Could not load into ICU: ' + e.message); } catch (x) {} }
         },
         loadLabs: function(patientId) {
           var body = document.getElementById('ghisLabSection');
