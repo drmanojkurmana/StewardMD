@@ -1,6 +1,9 @@
 /* StewardMD — GHIS Ward Sync (drop-in module)
- * Auto-injects the 🏥 Ward button, panel, lab drawer and radiology reports.
- * Requires the local proxy running:  node ghis-proxy.js   (listens on :3456)
+ * Auto-injects the 🏥 Ward button, per-doctor GHIS login, lab drawer + radiology.
+ * Backend: same-origin /api/ghis (Cloudflare Pages Function) in production;
+ *          http://localhost:3456 on localhost for dev. Override via window.GHIS_PROXY.
+ * Each doctor signs in with their own GHIS id/password; "Keep me logged in"
+ * persists the session; the ⏻ button logs out.
  *
  * Use:  <script src="ghis-ward.js"></script>   (place before </body>)
  * Optional: set  window.GHIS_BUTTON_SELECTOR = '#myHeader'  BEFORE this script
@@ -11,8 +14,8 @@
   if (window.__ghisWardLoaded) return;
   window.__ghisWardLoaded = true;
 
-  var CSS = "#ghisPanel {\n  position: fixed; inset: 0; z-index: 18000;\n  background: var(--paper, #ffffff); display: flex; flex-direction: column;\n  transform: translateX(100%);\n  transition: transform 0.3s cubic-bezier(.4,0,.2,1);\n}\n#ghisPanel.open { transform: translateX(0); }\n.ghis-header {\n  display: flex; align-items: center; gap: 10px;\n  padding: 14px 16px; border-bottom: 1px solid var(--line, #e2e8f0);\n  background: var(--panel, #f8fafc); flex-shrink: 0;\n}\n.ghis-back { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--teal, #14b8a6); padding: 4px 8px; }\n.ghis-title { flex: 1; font-size: 16px; font-weight: 700; color: var(--ink, #0f172a); display: flex; align-items: center; gap: 8px; }\n.ghis-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }\n.ghis-dot-off { background: #aaa; }\n.ghis-dot-on { background: #22c55e; box-shadow: 0 0 6px #22c55e88; }\n.ghis-refresh-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 16px; color: var(--teal, #14b8a6); padding: 4px 10px; }\n.ghis-body { flex: 1; overflow-y: auto; padding: 16px; }\n.ghis-setup-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 20px; max-width: 480px; margin: 20px auto; }\n.ghis-setup-title { font-size: 15px; font-weight: 700; color: var(--ink, #0f172a); margin-bottom: 14px; }\n.ghis-setup-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }\n.ghis-step { font-size: 13px; color: var(--slate, #64748b); display: flex; gap: 10px; align-items: flex-start; }\n.ghis-step-num { background: var(--teal, #14b8a6); color: #fff; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }\n.ghis-step code { background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 5px; padding: 1px 5px; font-size: 12px; color: var(--teal, #14b8a6); }\n.ghis-cookie-input { width: 100%; min-height: 80px; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 11px; padding: 8px; box-sizing: border-box; resize: vertical; font-family: monospace; }\n.ghis-connect-btn { margin-top: 10px; width: 100%; background: var(--teal, #14b8a6); color: #fff; border: none; border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; }\n.ghis-connect-btn:hover { opacity: 0.88; }\n.ghis-setup-error { color: #ef4444; font-size: 12px; margin-top: 8px; min-height: 16px; }\n.ghis-logout-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--slate, #64748b); padding: 6px 10px; }\n.ghis-filter-row { display: flex; gap: 8px; margin-bottom: 12px; }\n.ghis-filter-input { flex: 1; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 12px; font-size: 13px; }\n.ghis-pt-list { display: flex; flex-direction: column; gap: 8px; }\n.ghis-pt-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; }\n.ghis-pt-card:hover { border-color: var(--teal, #14b8a6); }\n.ghis-pt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }\n.ghis-pt-name { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-pt-status { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; }\n.ghis-status-occupied { background: #dcfce7; color: #16a34a; }\n.ghis-status-bed { background: #fef9c3; color: #b45309; }\n.ghis-status-discharge { background: #fee2e2; color: #dc2626; }\n.ghis-status-other { background: var(--paper, #ffffff); color: var(--slate, #64748b); }\n.ghis-pt-meta { font-size: 12px; color: var(--slate, #64748b); margin-top: 4px; }\n.ghis-pt-dept { font-size: 12px; color: var(--teal, #14b8a6); font-weight: 600; margin-top: 2px; }\n.ghis-loading { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n.ghis-empty { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n/* Lab drawer */\n.ghis-lab-drawer { position: absolute; inset: 56px 0 0; background: var(--paper, #ffffff); overflow-y: auto; z-index: 2; }\n.ghis-lab-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line, #e2e8f0); background: var(--panel, #f8fafc); position: sticky; top: 0; }\n.ghis-back-sm { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--teal, #14b8a6); font-weight: 700; padding: 4px 8px; }\n.ghis-lab-title { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-lab-body { padding: 14px 16px; }\n.ghis-lab-group { margin-bottom: 14px; }\n.ghis-lab-group-name { font-size: 12px; font-weight: 700; color: var(--teal, #14b8a6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }\n.ghis-lab-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line, #e2e8f0); font-size: 13px; }\n.ghis-lab-test { color: var(--ink, #0f172a); }\n.ghis-lab-val { font-weight: 700; }\n.ghis-lab-val.abnormal { color: #ef4444; }\n.ghis-lab-date { font-size: 11px; color: var(--slate, #64748b); }\n.ghis-lab-empty { color: var(--slate, #64748b); font-size: 13px; text-align: center; padding: 20px; }\n.ghis-lab-count { font-size: 12px; color: var(--slate, #64748b); margin-bottom: 10px; }\n.ghis-lab-order { border: 1px solid var(--line, #e2e8f0); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; transition: background .12s; }\n.ghis-lab-order:hover { background: rgba(20,184,166,0.05); }\n.ghis-lab-order.open { border-color: var(--teal, #14b8a6); background: rgba(20,184,166,0.04); }\n.ghis-lab-order-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }\n.ghis-lab-order-name { font-weight: 600; font-size: 13px; color: var(--ink, #0f172a); }\n.ghis-lab-order-dept { font-size: 11px; color: var(--slate, #64748b); white-space: nowrap; }\n.ghis-lab-detail { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line, #e2e8f0); }\n.ghis-lab-detail-empty { color: var(--slate, #64748b); font-size: 12px; padding: 6px 0; }\n.ghis-lab-abx { font-size: 12px; color: var(--ink, #0f172a); background: rgba(20,184,166,0.06); border-radius: 6px; padding: 6px 8px; margin: 4px 0 8px; white-space: pre-wrap; }\n.ghis-lab-section-title { font-size: 13px; font-weight: 700; color: var(--ink, #0f172a); margin: 4px 0 10px; }\n.ghis-rad-order { border-color: rgba(99,102,241,0.35); }\n.ghis-rad-order:hover { background: rgba(99,102,241,0.05); }\n.ghis-rad-order.open { border-color: #6366f1; background: rgba(99,102,241,0.05); }\n.ghis-rad-meta { font-size: 11px; color: var(--slate, #64748b); margin-bottom: 6px; }\n.ghis-rad-report { font-size: 13px; line-height: 1.5; color: var(--ink, #0f172a); white-space: pre-wrap; }\n.ghis-rad-divider { height: 1px; background: var(--line, #e2e8f0); margin: 14px 0; }\n/* dark mode overrides */\nbody.dark .ghis-status-occupied { background: #14532d; color: #86efac; }\nbody.dark .ghis-status-bed { background: #451a03; color: #fcd34d; }\nbody.dark .ghis-status-discharge { background: #450a0a; color: #fca5a5; }\n\n.ghis-ward-fab {\n  position: fixed; bottom: 20px; right: 20px; z-index: 17000;\n  display: inline-flex; align-items: center; gap: 6px;\n  padding: 10px 16px; border: none; border-radius: 999px; cursor: pointer;\n  background: var(--teal, #14b8a6); color: #fff; font-size: 14px; font-weight: 600;\n  box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-family: inherit;\n}\n.ghis-ward-fab:hover { filter: brightness(1.05); }\n";
-  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS()\">←</button>\n    <div class=\"ghis-title\">🏥 Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\">↻</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Connect to GHIS</div>\n      <div class=\"ghis-setup-steps\">\n        <div class=\"ghis-step\"><span class=\"ghis-step-num\">1</span> Make sure the proxy is running:<br><code>node ghis-proxy.js</code></div>\n        <div class=\"ghis-step\"><span class=\"ghis-step-num\">2</span> Log in to GHIS in Chrome</div>\n        <div class=\"ghis-step\"><span class=\"ghis-step-num\">3</span> DevTools → Network tab → click any request → Headers → copy the <strong>Cookie:</strong> value</div>\n        <div class=\"ghis-step\"><span class=\"ghis-step-num\">4</span> Paste below and tap Connect</div>\n      </div>\n      <textarea id=\"ghisCookieInput\" class=\"ghis-cookie-input\" placeholder=\"Paste Cookie header value here...\"></textarea>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Connect</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisFilterLocal()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Disconnect\">⏻</button>\n    </div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">← Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
+  var CSS = "#ghisPanel {\n  position: fixed; inset: 0; z-index: 18000;\n  background: var(--paper, #ffffff); display: flex; flex-direction: column;\n  transform: translateX(100%);\n  transition: transform 0.3s cubic-bezier(.4,0,.2,1);\n}\n#ghisPanel.open { transform: translateX(0); }\n.ghis-header {\n  display: flex; align-items: center; gap: 10px;\n  padding: 14px 16px; border-bottom: 1px solid var(--line, #e2e8f0);\n  background: var(--panel, #f8fafc); flex-shrink: 0;\n}\n.ghis-back { background: none; border: none; cursor: pointer; font-size: 20px; color: var(--teal, #14b8a6); padding: 4px 8px; }\n.ghis-title { flex: 1; font-size: 16px; font-weight: 700; color: var(--ink, #0f172a); display: flex; align-items: center; gap: 8px; }\n.ghis-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }\n.ghis-dot-off { background: #aaa; }\n.ghis-dot-on { background: #22c55e; box-shadow: 0 0 6px #22c55e88; }\n.ghis-refresh-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 16px; color: var(--teal, #14b8a6); padding: 4px 10px; }\n.ghis-body { flex: 1; overflow-y: auto; padding: 16px; }\n.ghis-setup-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 14px; padding: 20px; max-width: 480px; margin: 20px auto; }\n.ghis-setup-title { font-size: 15px; font-weight: 700; color: var(--ink, #0f172a); margin-bottom: 14px; }\n.ghis-setup-sub { font-size: 12px; color: var(--slate, #64748b); margin: -8px 0 14px; }\n.ghis-login-input { width: 100%; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 14px; padding: 11px; box-sizing: border-box; margin-bottom: 10px; }\n.ghis-login-input:focus { outline: none; border-color: var(--teal, #14b8a6); }\n.ghis-remember { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--slate, #64748b); margin-bottom: 4px; cursor: pointer; }\n.ghis-remember input { width: 15px; height: 15px; }\n.ghis-setup-steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }\n.ghis-step { font-size: 13px; color: var(--slate, #64748b); display: flex; gap: 10px; align-items: flex-start; }\n.ghis-step-num { background: var(--teal, #14b8a6); color: #fff; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 1px; }\n.ghis-step code { background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 5px; padding: 1px 5px; font-size: 12px; color: var(--teal, #14b8a6); }\n.ghis-cookie-input { width: 100%; min-height: 80px; background: var(--paper, #ffffff); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); font-size: 11px; padding: 8px; box-sizing: border-box; resize: vertical; font-family: monospace; }\n.ghis-connect-btn { margin-top: 10px; width: 100%; background: var(--teal, #14b8a6); color: #fff; border: none; border-radius: 10px; padding: 11px; font-size: 14px; font-weight: 700; cursor: pointer; }\n.ghis-connect-btn:hover { opacity: 0.88; }\n.ghis-setup-error { color: #ef4444; font-size: 12px; margin-top: 8px; min-height: 16px; }\n.ghis-logout-btn { background: none; border: 1px solid var(--line, #e2e8f0); border-radius: 8px; cursor: pointer; font-size: 14px; color: var(--slate, #64748b); padding: 6px 10px; }\n.ghis-filter-row { display: flex; gap: 8px; margin-bottom: 12px; }\n.ghis-filter-input { flex: 1; background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 8px; color: var(--ink, #0f172a); padding: 8px 12px; font-size: 13px; }\n.ghis-pt-list { display: flex; flex-direction: column; gap: 8px; }\n.ghis-pt-card { background: var(--panel, #f8fafc); border: 1px solid var(--line, #e2e8f0); border-radius: 12px; padding: 12px 14px; cursor: pointer; transition: border-color 0.15s; }\n.ghis-pt-card:hover { border-color: var(--teal, #14b8a6); }\n.ghis-pt-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }\n.ghis-pt-name { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-pt-status { font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 600; white-space: nowrap; }\n.ghis-status-occupied { background: #dcfce7; color: #16a34a; }\n.ghis-status-bed { background: #fef9c3; color: #b45309; }\n.ghis-status-discharge { background: #fee2e2; color: #dc2626; }\n.ghis-status-other { background: var(--paper, #ffffff); color: var(--slate, #64748b); }\n.ghis-pt-meta { font-size: 12px; color: var(--slate, #64748b); margin-top: 4px; }\n.ghis-pt-dept { font-size: 12px; color: var(--teal, #14b8a6); font-weight: 600; margin-top: 2px; }\n.ghis-loading { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n.ghis-empty { text-align: center; color: var(--slate, #64748b); font-size: 13px; padding: 30px; }\n/* Lab drawer */\n.ghis-lab-drawer { position: absolute; inset: 56px 0 0; background: var(--paper, #ffffff); overflow-y: auto; z-index: 2; }\n.ghis-lab-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line, #e2e8f0); background: var(--panel, #f8fafc); position: sticky; top: 0; }\n.ghis-back-sm { background: none; border: none; cursor: pointer; font-size: 14px; color: var(--teal, #14b8a6); font-weight: 700; padding: 4px 8px; }\n.ghis-lab-title { font-size: 14px; font-weight: 700; color: var(--ink, #0f172a); }\n.ghis-lab-body { padding: 14px 16px; }\n.ghis-lab-group { margin-bottom: 14px; }\n.ghis-lab-group-name { font-size: 12px; font-weight: 700; color: var(--teal, #14b8a6); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }\n.ghis-lab-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line, #e2e8f0); font-size: 13px; }\n.ghis-lab-test { color: var(--ink, #0f172a); }\n.ghis-lab-val { font-weight: 700; }\n.ghis-lab-val.abnormal { color: #ef4444; }\n.ghis-lab-date { font-size: 11px; color: var(--slate, #64748b); }\n.ghis-lab-empty { color: var(--slate, #64748b); font-size: 13px; text-align: center; padding: 20px; }\n.ghis-lab-count { font-size: 12px; color: var(--slate, #64748b); margin-bottom: 10px; }\n.ghis-lab-order { border: 1px solid var(--line, #e2e8f0); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; cursor: pointer; transition: background .12s; }\n.ghis-lab-order:hover { background: rgba(20,184,166,0.05); }\n.ghis-lab-order.open { border-color: var(--teal, #14b8a6); background: rgba(20,184,166,0.04); }\n.ghis-lab-order-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }\n.ghis-lab-order-name { font-weight: 600; font-size: 13px; color: var(--ink, #0f172a); }\n.ghis-lab-order-dept { font-size: 11px; color: var(--slate, #64748b); white-space: nowrap; }\n.ghis-lab-detail { margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line, #e2e8f0); }\n.ghis-lab-detail-empty { color: var(--slate, #64748b); font-size: 12px; padding: 6px 0; }\n.ghis-lab-abx { font-size: 12px; color: var(--ink, #0f172a); background: rgba(20,184,166,0.06); border-radius: 6px; padding: 6px 8px; margin: 4px 0 8px; white-space: pre-wrap; }\n.ghis-lab-section-title { font-size: 13px; font-weight: 700; color: var(--ink, #0f172a); margin: 4px 0 10px; }\n.ghis-rad-order { border-color: rgba(99,102,241,0.35); }\n.ghis-rad-order:hover { background: rgba(99,102,241,0.05); }\n.ghis-rad-order.open { border-color: #6366f1; background: rgba(99,102,241,0.05); }\n.ghis-rad-meta { font-size: 11px; color: var(--slate, #64748b); margin-bottom: 6px; }\n.ghis-rad-report { font-size: 13px; line-height: 1.5; color: var(--ink, #0f172a); white-space: pre-wrap; }\n.ghis-rad-divider { height: 1px; background: var(--line, #e2e8f0); margin: 14px 0; }\n/* dark mode overrides */\nbody.dark .ghis-status-occupied { background: #14532d; color: #86efac; }\nbody.dark .ghis-status-bed { background: #451a03; color: #fcd34d; }\nbody.dark .ghis-status-discharge { background: #450a0a; color: #fca5a5; }\n\n.ghis-ward-fab {\n  position: fixed; bottom: 20px; right: 20px; z-index: 17000;\n  display: inline-flex; align-items: center; gap: 6px;\n  padding: 10px 16px; border: none; border-radius: 999px; cursor: pointer;\n  background: var(--teal, #14b8a6); color: #fff; font-size: 14px; font-weight: 600;\n  box-shadow: 0 4px 14px rgba(0,0,0,0.18); font-family: inherit;\n}\n.ghis-ward-fab:hover { filter: brightness(1.05); }\n";
+  var PANEL_HTML = "<div id=\"ghisPanel\">\n  <div class=\"ghis-header\">\n    <button class=\"ghis-back\" onclick=\"closeGHIS()\">←</button>\n    <div class=\"ghis-title\">🏥 Ward Sync <span id=\"ghisConnDot\" class=\"ghis-dot ghis-dot-off\"></span></div>\n    <button class=\"ghis-refresh-btn\" id=\"ghisRefreshBtn\" onclick=\"ghisRefresh()\" title=\"Refresh\">↻</button>\n  </div>\n\n  <div id=\"ghisSetup\" class=\"ghis-body\">\n    <div class=\"ghis-setup-card\">\n      <div class=\"ghis-setup-title\">Sign in to GHIS</div>\n      <div class=\"ghis-setup-sub\">Use your own GITAM HIS login.</div>\n      <input id=\"ghisUserId\" class=\"ghis-login-input\" type=\"text\" autocomplete=\"username\" placeholder=\"GHIS User ID\">\n      <input id=\"ghisPassword\" class=\"ghis-login-input\" type=\"password\" autocomplete=\"current-password\" placeholder=\"Password\"\n             onkeydown=\"if(event.key==='Enter') ghisConnect()\">\n      <label class=\"ghis-remember\"><input id=\"ghisRemember\" type=\"checkbox\" checked> Keep me logged in</label>\n      <button class=\"ghis-connect-btn\" onclick=\"ghisConnect()\">Sign in</button>\n      <div id=\"ghisSetupError\" class=\"ghis-setup-error\"></div>\n    </div>\n  </div>\n\n  <div id=\"ghisWard\" class=\"ghis-body\" style=\"display:none;\">\n    <div class=\"ghis-filter-row\">\n      <input id=\"ghisSearchPt\" class=\"ghis-filter-input\" placeholder=\"Search patient ID or name…\" oninput=\"ghisFilterLocal()\" />\n      <button class=\"ghis-logout-btn\" onclick=\"ghisDisconnect()\" title=\"Disconnect\">⏻</button>\n    </div>\n\n    <div id=\"ghisPatientList\" class=\"ghis-pt-list\"></div>\n\n    <div id=\"ghisLabDrawer\" class=\"ghis-lab-drawer\" style=\"display:none;\">\n      <div class=\"ghis-lab-header\">\n        <button class=\"ghis-back-sm\" onclick=\"closeLabDrawer()\">← Back</button>\n        <div class=\"ghis-lab-title\" id=\"ghisLabTitle\"></div>\n      </div>\n      <div id=\"ghisLabBody\" class=\"ghis-lab-body\"></div>\n    </div>\n  </div>\n</div>";
 
   function inject() {
     if (document.getElementById('ghisPanel')) return;
@@ -49,6 +52,22 @@
         : '/api/ghis');
       var _patients = [];
       var _connected = false;
+    
+      // ── auth token (per-doctor GHIS login), persisted so they stay logged in ──
+      var TOKEN_KEY = 'ghis_token';
+      function getToken() { try { return localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; } }
+      function setToken(t) { try { t ? localStorage.setItem(TOKEN_KEY, t) : localStorage.removeItem(TOKEN_KEY); } catch (e) {} }
+      // fetch wrapper that attaches the bearer token; surfaces 401 as login_required
+      function authFetch(path, opts) {
+        opts = opts || {};
+        opts.headers = opts.headers || {};
+        var t = getToken();
+        if (t) opts.headers['Authorization'] = 'Bearer ' + t;
+        return fetch(PROXY + path, opts).then(function (r) {
+          if (r.status === 401) { setToken(''); _connected = false; dot(false); showScreen('setup'); throw new Error('login_required'); }
+          return r.json();
+        });
+      }
     
       function dot(on) {
         var d = document.getElementById('ghisConnDot');
@@ -147,8 +166,7 @@
         loadLabs: function(patientId) {
           var body = document.getElementById('ghisLabSection');
           if (!body) return;
-          fetch(PROXY + '/lab?patientId=' + encodeURIComponent(patientId))
-            .then(function(r) { return r.json(); })
+          authFetch('/lab?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
               if (j && j.error === 'session_expired') {
                 body.innerHTML = '<div class="ghis-lab-empty">Session expired — reconnect in the Ward panel (paste a fresh cookie).</div>';
@@ -190,8 +208,7 @@
         loadRadiology: function(patientId) {
           var sec = document.getElementById('ghisRadSection');
           if (!sec) return;
-          fetch(PROXY + '/radiology?patientId=' + encodeURIComponent(patientId))
-            .then(function(r) { return r.json(); })
+          authFetch('/radiology?patientId=' + encodeURIComponent(patientId))
             .then(function(j) {
               var orders = (j && j.orders) || [];
               if (orders.length === 0) { sec.innerHTML = ''; return; }
@@ -221,8 +238,7 @@
           det.style.display = '';
           el.classList.add('open');
           det.innerHTML = '<div class="ghis-loading" style="padding:8px 0">Loading report…</div>';
-          fetch(PROXY + '/radiology-report?resultid=' + encodeURIComponent(resultid) + '&type=' + encodeURIComponent(type))
-            .then(function(r) { return r.json(); })
+          authFetch('/radiology-report?resultid=' + encodeURIComponent(resultid) + '&type=' + encodeURIComponent(type))
             .then(function(d) {
               if (d && d.error === 'session_expired') { det.innerHTML = '<div class="ghis-lab-detail-empty">Session expired — reconnect.</div>'; return; }
               var meta = [];
@@ -247,10 +263,9 @@
           el.classList.add('open');
           if (det.getAttribute('data-loaded') === '1') return;
           det.innerHTML = '<div class="ghis-loading" style="padding:8px 0">Loading values…</div>';
-          fetch(PROXY + '/lab-detail?renderId=' + encodeURIComponent(renderId) +
+          authFetch('/lab-detail?renderId=' + encodeURIComponent(renderId) +
                 '&episodeId=' + encodeURIComponent(episodeId) +
                 '&patientId=' + encodeURIComponent(GHIS._patientId || ''))
-            .then(function(r) { return r.json(); })
             .then(function(d) {
               det.innerHTML = renderLabDetail(d);
               det.setAttribute('data-loaded', '1');
@@ -263,18 +278,13 @@
     
       window.openGHIS = function() {
         document.getElementById('ghisPanel').classList.add('open');
-        // Check if proxy is up and we have a session
-        fetch(PROXY + '/status')
+        // Already have a saved login? Verify the token and go straight to the ward.
+        if (!getToken()) { showScreen('setup'); return; }
+        fetch(PROXY + '/status', { headers: { 'Authorization': 'Bearer ' + getToken() } })
           .then(function(r) { return r.json(); })
           .then(function(s) {
-            if (s.connected) {
-              _connected = true;
-              dot(true);
-              showScreen('ward');
-              ghisLoadPatients();
-            } else {
-              showScreen('setup');
-            }
+            if (s.connected) { _connected = true; dot(true); showScreen('ward'); ghisLoadPatients(); }
+            else { setToken(''); showScreen('setup'); }
           })
           .catch(function() { showScreen('setup'); });
       };
@@ -288,32 +298,37 @@
       };
     
       window.ghisConnect = function() {
-        var cookies = (document.getElementById('ghisCookieInput').value || '').trim();
+        var userId = (document.getElementById('ghisUserId').value || '').trim();
+        var password = document.getElementById('ghisPassword').value || '';
+        var remember = !!document.getElementById('ghisRemember').checked;
         var errEl = document.getElementById('ghisSetupError');
-        if (!cookies) { errEl.textContent = 'Paste your Cookie value first.'; return; }
-        errEl.textContent = '';
-        fetch(PROXY + '/set-cookies', {
+        if (!userId || !password) { errEl.textContent = 'Enter your GHIS ID and password.'; return; }
+        errEl.textContent = 'Signing in…';
+        fetch(PROXY + '/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ cookies: cookies })
+          body: JSON.stringify({ userId: userId, password: password, remember: remember })
         })
-        .then(function(r) { return r.json(); })
-        .then(function(d) {
-          if (d.success) {
-            _connected = true;
-            dot(true);
+        .then(function(r) { return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+        .then(function(res) {
+          if (res.ok && res.d.token) {
+            setToken(res.d.token);
+            document.getElementById('ghisPassword').value = '';
+            _connected = true; dot(true);
+            errEl.textContent = '';
             showScreen('ward');
             ghisLoadPatients();
           } else {
-            errEl.textContent = 'Connection failed: ' + (d.error || 'unknown error');
+            errEl.textContent = res.d.error === 'bad_credentials' ? 'Wrong GHIS ID or password.' : ('Sign-in failed: ' + (res.d.error || 'unknown error'));
           }
         })
-        .catch(function(e) {
-          errEl.textContent = 'Proxy not reachable. Run: node ghis-proxy.js';
-        });
+        .catch(function() { errEl.textContent = 'Server not reachable. Try again.'; });
       };
     
       window.ghisDisconnect = function() {
+        var t = getToken();
+        if (t) { fetch(PROXY + '/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + t } }).catch(function(){}); }
+        setToken('');
         _connected = false;
         dot(false);
         _patients = [];
@@ -327,8 +342,7 @@
       function ghisLoadPatients() {
         var el = document.getElementById('ghisPatientList');
         if (el) el.innerHTML = '<div class="ghis-loading">Loading ward patients…</div>';
-        fetch(PROXY + '/patients')
-          .then(function(r) { return r.json(); })
+        authFetch('/patients')
           .then(function(raw) {
             var data;
             try { data = typeof raw === 'string' ? JSON.parse(raw) : raw; } catch(e) { data = []; }
