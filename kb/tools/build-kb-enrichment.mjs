@@ -61,6 +61,7 @@ if (existsSync(REF)) {
     const h = d.harrison || {};
     byId[d.id] = {
       name: d.name, system: d.system || null, class: d.class || null, referenceOnly: true,
+      aliases: d.aliases || [],   // carry synonyms into the search index (searchable by alias)
       chapter: d.chapter || null,
       source: h.source || "Harrison's Principles of Internal Medicine, 22e",
       pages: h.pages || (d.page ? "Harrison 22e p." + d.page : null),
