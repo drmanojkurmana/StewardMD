@@ -831,29 +831,51 @@
     if (c) c.addEventListener("click", closeSheet);
   }
 
+  // Ask MaiK — a dedicated chat. RAG-FIRST: each question retrieves only the top-K
+  // StewardMD knowledge-base chunks and sends just those + the question to the model
+  // (the whole KB never transits), so answers stay grounded AND cheap on tokens.
+  var _maikHist = [];
+  function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function openAskAi() {
-    openSheet('<div class="hv-sh-t">Ask AI</div>' +
-      '<div style="text-align:center;padding:8px 4px 4px">' +
-        '<img id="v3AiLogo" alt="MaiK" style="height:62px;width:auto;max-width:200px;object-fit:contain;display:block;margin:0 auto 12px" />' +
-        '<div style="font:800 10px/1 var(--hfont);letter-spacing:.14em;color:var(--hmut);margin-bottom:6px">OUR AI AGENT</div>' +
+    openSheet('<div class="hv-sh-t">✨ Ask MaiK</div>' +
+      '<div style="font:600 11.5px/1.4 var(--hfont);color:var(--hmut);text-align:center;margin:-4px 0 10px">Grounded in the StewardMD knowledge base · Google Vertex AI · advisory, verify clinically</div>' +
+      '<div id="maikChat" style="min-height:120px;max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px;margin-bottom:10px"></div>' +
+      '<div style="display:flex;gap:8px;align-items:flex-end">' +
+        '<textarea id="maikQ" rows="2" placeholder="Ask a clinical question — e.g. empiric antibiotics for febrile neutropenia?" style="flex:1;resize:none;background:var(--hpanel);border:1px solid var(--hbd);border-radius:12px;color:var(--hink);font:500 14px var(--hfont);padding:10px 12px;box-sizing:border-box"></textarea>' +
+        '<button id="maikSend" style="background:var(--hp);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer">Send</button>' +
       '</div>' +
-      '<p style="font:800 18px/1.35 var(--hfont);color:var(--hink);text-align:center;margin:0 0 4px">Medical AI Knowledge <span style="color:var(--hp)">(MaiK)</span></p>' +
-      '<p style="font:600 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 12px">Powered by Google Vertex AI</p>' +
-      '<p style="font:500 13px/1.55 var(--hfont);color:var(--hink);text-align:center;margin:0 0 14px">MaiK reviews StewardMD’s deterministic assessment and adds independent, evidence-grounded commentary. The reasoning engine remains the diagnostic authority — MaiK is advisory and requires clinician verification.</p>' +
-      '<button id="v3AiStart" style="width:100%;background:var(--hp);color:#fff;border:none;border-radius:12px;padding:13px 14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px">✨ Start an AI-assisted assessment</button>' +
-      '<button class="hv-back" data-close="1">Close</button>');
+      '<button class="hv-back" data-close="1" style="margin-top:10px">Close</button>');
     var s = sheetEl();
-    try {
-      var dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
-      var fl = s.querySelector("#v3AiLogo");
-      if (fl) fl.src = (dl && dl.src) ? dl.src : "/logo.png";
-    } catch (e) {}
-    var aiStart = s.querySelector("#v3AiStart");
-    if (aiStart) aiStart.addEventListener("click", function () {
-      try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}   // enable MaiK commentary
-      closeSheet();
-      try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else toast("Clinical reasoning is loading…"); } catch (e) {}
-    });
+    var chat = s.querySelector("#maikChat"), qEl = s.querySelector("#maikQ"), sendBtn = s.querySelector("#maikSend");
+    function bubble(who, html) {
+      var d = document.createElement("div");
+      var mine = who === "you";
+      d.style.cssText = "max-width:88%;padding:9px 12px;border-radius:13px;font:500 13.5px/1.5 var(--hfont);white-space:pre-wrap;word-break:break-word;" +
+        (mine ? "align-self:flex-end;background:var(--hp);color:#fff" : "align-self:flex-start;background:var(--hpanel);border:1px solid var(--hbd);color:var(--hink)");
+      d.innerHTML = html; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d;
+    }
+    _maikHist.forEach(function (m) { bubble(m.who, m.html); });
+    if (!_maikHist.length) bubble("maik", "Hi — I’m <b>MaiK</b>. Ask me anything clinical and I’ll answer from StewardMD’s knowledge base. I support, not replace, your judgment.");
+    function send() {
+      var q = (qEl.value || "").trim(); if (!q) return;
+      qEl.value = "";
+      _maikHist.push({ who: "you", html: maikEscH(q) }); bubble("you", maikEscH(q));
+      var think = bubble("maik", "✨ Retrieving StewardMD knowledge…");
+      Promise.resolve()
+        .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
+        .then(function () { var assess = window.SMD_REASON.assess({}); return StewardRAG.buildPackage(assess, { question: q }); })
+        .then(function (pkg) {
+          return window.SMD_AI.explainGrounded(pkg).then(function (r) {
+            var txt = (r && r.text) ? r.text : (r && r.error === "ai-off" ? "MaiK is off — enable AI in Settings." : "MaiK: " + ((r && r.error) || "no response."));
+            var cites = (pkg.retrieved || []).slice(0, 4).map(function (c) { return c.name || c.section; }).filter(Boolean);
+            var html = maikEscH(txt).replace(/\n/g, "<br>") + (cites.length ? '<div style="font:600 10.5px var(--hfont);color:var(--hmut);margin-top:7px">📚 ' + maikEscH(cites.join(" · ")) + '</div>' : "");
+            think.innerHTML = html; _maikHist.push({ who: "maik", html: html }); chat.scrollTop = chat.scrollHeight;
+          });
+        })
+        .catch(function (e) { think.innerHTML = "MaiK unavailable: " + maikEscH(e && e.message || e); });
+    }
+    if (sendBtn) sendBtn.addEventListener("click", send);
+    if (qEl) qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     var aiClose = s.querySelector("[data-close]");
     if (aiClose) aiClose.addEventListener("click", closeSheet);
   }
