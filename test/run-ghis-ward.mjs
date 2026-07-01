@@ -5,8 +5,10 @@
  * (default ON). This harness drives the REAL page headlessly and asserts:
  *   (1) with the flag ON, the Ward button + #ghisPanel inject on load and
  *       window.GHIS / window.openGHIS are defined;
- *   (2) SMD_setGhis(false) removes the button + panel + injected style instantly;
- *   (3) SMD_setGhis(true) re-injects them — fully reversible, no redeploy.
+ *   (2) the per-doctor login screen (#ghisUserId + #ghisPassword + Keep-me-logged-in)
+ *       is present, and on a non-localhost backend the ward targets /api/ghis;
+ *   (3) SMD_setGhis(false) removes the button + panel + injected style instantly;
+ *   (4) SMD_setGhis(true) re-injects them — fully reversible, no redeploy.
  *
  * USAGE:  node test/run-ghis-ward.mjs       (exit 0 = pass, 1 = fail)
  * Requires a local static server on $BASE (auto-spawned) and Google Chrome.
@@ -71,9 +73,15 @@ try {
   ok(await ev(`return typeof window.openGHIS==='function' && !!window.GHIS;`) === true, "window.GHIS / window.openGHIS globals defined");
   ok(await ev(`return typeof window.SMD_setGhis==='function';`) === true, "SMD_setGhis toggle exposed");
   ok(await ev(`return !!document.querySelector('style[data-ghis]');`) === true, "GHIS stylesheet injected");
-  // backend selection: hosted target → first call hits the same-origin Cloudflare Function
-  await ev(`try{ if(window.openGHIS) openGHIS(); }catch(e){} return 1;`); await sleep(300);
+  // per-doctor login screen: id + password inputs present (replaces the old cookie paste)
+  ok(await ev(`return !!document.getElementById('ghisUserId') && !!document.getElementById('ghisPassword');`) === true, "per-doctor login inputs (#ghisUserId + #ghisPassword) present");
+  ok(await ev(`return !!document.getElementById('ghisRemember');`) === true, "'Keep me logged in' checkbox present");
+  // backend selection: hosted target → calls hit the same-origin Cloudflare Function.
+  // Seed a saved token so openGHIS verifies it via /status (the new client only
+  // calls /status when a token exists; otherwise it shows the login screen).
+  await ev(`try{localStorage.setItem('ghis_token','test-token');}catch(e){} try{ if(window.openGHIS) openGHIS(); }catch(e){} return 1;`); await sleep(300);
   ok(await ev(`return (window.__ghisFetches||[]).some(function(u){return u.indexOf('/api/ghis/status')>=0;}) && !(window.__ghisFetches||[]).some(function(u){return u.indexOf('localhost:3456')>=0;});`) === true, "non-localhost → ward targets /api/ghis (Cloudflare Function), not the localhost proxy");
+  await ev(`try{localStorage.removeItem('ghis_token');}catch(e){} return 1;`);
 
   // toggle OFF → everything removed instantly
   await ev(`window.SMD_setGhis(false); return 1;`); await sleep(150);
