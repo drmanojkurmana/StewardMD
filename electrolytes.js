@@ -383,5 +383,20 @@
     document.head.appendChild(st);
   }
 
-  window.ELYTE = { open:open, close:close, _engines:{ correctedNa:correctedNa, correctedCa:correctedCa, anionGap:anionGap, analyzeNa:analyzeNa, analyzeK:analyzeK, analyzeMg:analyzeMg, analyzeCa:analyzeCa, analyzePO4:analyzePO4, analyzeCl:analyzeCl, analyzeHCO3:analyzeHCO3, detectWarnings:detectWarnings, detectInsights:detectInsights, monitoringPlan:monitoringPlan } };
+  // Reusable, DOM-free analysis so other surfaces (e.g. the ICU dashboard) can
+  // render electrolyte correction guidance INLINE instead of opening the overlay.
+  // rawL keys: na,k,cl,hco3,ca,mg,po4,glu,creat,alb (+egfr). `units` is the unit
+  // system the caller stored values in ("si" = mmol/L for ca/mg/po4, g/L alb —
+  // matches the ICU labs form; "conv" = conventional mg/dL, g/dL). Values are
+  // converted to the analyzers' canonical (conventional) units before scoring.
+  function analyzeAll(rawL, pt, units){
+    rawL = rawL || {}; pt = pt || {};
+    var L = {}, k;
+    for (k in rawL){ if(!Object.prototype.hasOwnProperty.call(rawL,k)) continue; L[k] = toCanonical(k, N(rawL[k]), units || "conv"); }
+    var fns = [analyzeNa, analyzeK, analyzeMg, analyzeCa, analyzePO4, analyzeCl, analyzeHCO3], out = [], i, r;
+    for (i=0;i<fns.length;i++){ try { r = fns[i](L, pt); if (r) out.push(r); } catch (e) {} }
+    return out;
+  }
+
+  window.ELYTE = { open:open, close:close, analyze:analyzeAll, _engines:{ correctedNa:correctedNa, correctedCa:correctedCa, anionGap:anionGap, analyzeNa:analyzeNa, analyzeK:analyzeK, analyzeMg:analyzeMg, analyzeCa:analyzeCa, analyzePO4:analyzePO4, analyzeCl:analyzeCl, analyzeHCO3:analyzeHCO3, detectWarnings:detectWarnings, detectInsights:detectInsights, monitoringPlan:monitoringPlan } };
 })();

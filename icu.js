@@ -159,12 +159,17 @@
   function injectCSS() {
     if (document.getElementById("icu-css")) return;
     var css =
-      '#icuRoot{--bg:#F1F5F9;--panel:#fff;--panel2:#F8FAFC;--border:#E2E8F0;--ink:#0F172A;--muted:#64748B;--primary:#0F766E;--primary2:#115E59;--primary3:#14B8A6;--primary-soft:#CCFBF1;--ok:#15803D;--ok-soft:#DCFCE7;--warn:#92620A;--warn-soft:#FEF3C7;--danger:#B91C1C;--danger-soft:#FEE2E2;' +
+      // Design tokens live on BOTH the root surface AND the modal — the modal is
+      // appended to <body> (outside #icuRoot), so without this its inputs/buttons
+      // would resolve var(--border/--panel2/--ink/--primary) to nothing and render
+      // invisible (white-on-white, no borders, no Save button).
+      '#icuRoot,.icu-modal{--bg:#F1F5F9;--panel:#fff;--panel2:#F8FAFC;--border:#E2E8F0;--ink:#0F172A;--muted:#64748B;--primary:#0F766E;--primary2:#115E59;--primary3:#14B8A6;--primary-soft:#CCFBF1;--ok:#15803D;--ok-soft:#DCFCE7;--warn:#92620A;--warn-soft:#FEF3C7;--danger:#B91C1C;--danger-soft:#FEE2E2;' +
       '--r:16px;--r-sm:12px;--r-pill:999px;--sh:0 1px 2px rgba(15,23,42,.05),0 4px 16px rgba(15,23,42,.07);--ease:.2s cubic-bezier(.2,.7,.2,1);' +
-      "--font:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;--mono:'IBM Plex Mono','SF Mono',Consolas,monospace;" +
-      'position:fixed;inset:0;z-index:10000;background:var(--bg);color:var(--ink);font-family:var(--font);display:none;flex-direction:column;overflow:hidden}' +
+      "--font:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;--mono:'IBM Plex Mono','SF Mono',Consolas,monospace}" +
+      '#icuRoot{position:fixed;inset:0;z-index:10000;background:var(--bg);color:var(--ink);font-family:var(--font);display:none;flex-direction:column;overflow:hidden}' +
+      '.icu-modal{font-family:var(--font)}' +
       '#icuRoot.on{display:flex}' +
-      'body.dark #icuRoot,body.v3-dark #icuRoot{--bg:#0B1220;--panel:#111B2E;--panel2:#0F1A2B;--border:#1E2B43;--ink:#E7EDF5;--muted:#8597AD;--primary:#2DD4BF;--primary2:#14B8A6;--primary3:#5EEAD4;--primary-soft:#0C2E2A;--ok:#4ADE80;--ok-soft:#06240F;--warn:#F0C060;--warn-soft:#241B00;--danger:#F87171;--danger-soft:#2A0E12;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}' +
+      'body.dark #icuRoot,body.v3-dark #icuRoot,body.dark .icu-modal,body.v3-dark .icu-modal{--bg:#0B1220;--panel:#111B2E;--panel2:#0F1A2B;--border:#1E2B43;--ink:#E7EDF5;--muted:#8597AD;--primary:#2DD4BF;--primary2:#14B8A6;--primary3:#5EEAD4;--primary-soft:#0C2E2A;--ok:#4ADE80;--ok-soft:#06240F;--warn:#F0C060;--warn-soft:#241B00;--danger:#F87171;--danger-soft:#2A0E12;--sh:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35)}' +
       '#icuRoot *{box-sizing:border-box}' +
       '#icuRoot button{font-family:inherit;-webkit-tap-highlight-color:transparent}' +
       // header / patient card (sticky)
@@ -175,6 +180,10 @@
       '.icu-edit{border:1px solid var(--border);background:var(--panel);color:var(--primary);border-radius:var(--r-pill);font:700 12px var(--font);padding:6px 12px;cursor:pointer;flex:0 0 auto}' +
       '.icu-hd-meta{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font:500 12.5px var(--font);color:var(--muted)}' +
       '.icu-hd-meta b{color:var(--ink);font-weight:700}' +
+      '.icu-hd-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}' +
+      '.icu-chip{border:1px solid var(--border);background:var(--panel2);color:var(--ink);border-radius:var(--r-pill);font:700 12.5px var(--font);padding:8px 14px;cursor:pointer;flex:0 0 auto;min-height:36px}' +
+      '.icu-chip:active{background:var(--primary-soft)}' +
+      '.icu-adddata{background:var(--primary);color:#fff;font:800 15px var(--font);padding:14px;border:none;border-radius:14px;width:100%;cursor:pointer;box-shadow:0 2px 10px var(--primary-soft)}' +
       // scroll area
       '.icu-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 12px calc(96px + env(safe-area-inset-bottom))}' +
       '.icu-wrap{max-width:560px;margin:0 auto;display:flex;flex-direction:column;gap:14px}' +
@@ -439,6 +448,7 @@
     { ic: "💉", title: "Anaphylaxis", checklist: ["Remove trigger; call for help", "IM adrenaline 0.5 mg (0.5 mL 1:1000) anterolateral thigh — repeat at 5 min", "High-flow oxygen; lay flat, legs raised", "IV crystalloid bolus for hypotension", "Antihistamine / steroid are second-line; observe for biphasic reaction"], monitoring: ["Airway, BP, SpO₂", "Biphasic relapse"], evidence: ["Resus Council", "WAO"] }
   ];
   var _openProto = {};
+  var _lytesExp = {};   // which electrolyte cards are expanded in the Electrolytes tab
   function protocolCard(p, i) {
     var open = !!_openProto[i];
     var head = '<button data-icu-act="proto:' + i + '" style="width:100%;text-align:left;background:none;border:none;padding:14px 15px;cursor:pointer;color:var(--ink);display:flex;align-items:center;gap:9px"><span style="font-size:18px">' + p.ic + '</span><b style="font:800 15px var(--font);flex:1">' + esc(p.title) + '</b><span style="color:var(--muted)">' + (open ? "▲" : "▼") + "</span></button>";
@@ -554,16 +564,42 @@
         trendCard("Urine output trend", vitalSeries("uop", _trendWin), { unit: "mL/h" });
     },
     lytes: function () {
-      var L = _raw.labs.recent || {};
+      var L = _raw.labs.recent || {}, p = _raw.patient || {};
       function f(k, lo, hi, clo, chi) { return { v: L[k], s: vstat(L[k], lo, hi, clo, chi) }; }
       var map = { na: f("na", 135, 145, 120, 160), k: f("k", 3.5, 5.0, 2.5, 6.0), cl: f("cl", 98, 107), hco3: f("hco3", 22, 28), ca: f("ca", 2.1, 2.6), mg: f("mg", 0.7, 1.0), po4: f("po4", 0.8, 1.5) };
       var labels = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "Bicarbonate", ca: "Calcium", mg: "Magnesium", po4: "Phosphate" };
+      var keys = ["na", "k", "cl", "hco3", "ca", "mg", "po4"];
+      var hasAny = keys.some(function (k) { return L[k] != null && L[k] !== ""; });
+      var out = '<div class="icu-sec-lbl">🧪 Electrolytes &amp; correction</div>';
+      if (!hasAny) {
+        return out + '<div class="icu-card"><div class="icu-empty">No electrolyte values entered yet.</div>' +
+          '<button class="icu-btn" data-icu-act="edit:labs">✎ Enter electrolytes</button></div>';
+      }
       var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
-      return '<div class="icu-sec-lbl">🧪 Electrolytes</div>' + grid +
-        '<div class="icu-card"><p>Correction targets, replacement doses and monitoring run in the full Electrolyte Engine.</p>' +
-        evidenceBadges(["KDIGO", "Surviving Sepsis", "Harrison"]) +
-        '<button class="icu-btn ghost" data-icu-act="edit:labs">✎ Update labs</button>' +
-        '<button class="icu-btn" data-icu-act="launch:elyte">Open Electrolyte Engine</button></div>';
+      // Correction guidance rendered INLINE (no redirect) — reuses the validated
+      // Electrolyte Engine analyzers via ELYTE.analyze(); "si" = the mmol/L (albumin g/L)
+      // units the Labs form collects. Each analyte is an expandable card.
+      var pt = { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") };
+      var res = [];
+      try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, pt, "si"); } catch (e) { res = []; }
+      var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)", ok: "var(--ok)" };
+      var cards = res.map(function (r) {
+        var c = COLOR[r.level] || "var(--muted)", open = !!_lytesExp[r.name];
+        return '<div class="icu-card" style="padding:0;overflow:hidden;border-left:3px solid ' + c + '">' +
+          '<button data-icu-act="lyte:' + esc(r.name) + '" style="width:100%;display:flex;align-items:center;gap:8px;padding:12px 14px;background:none;border:none;cursor:pointer;color:var(--ink);text-align:left">' +
+            '<b style="flex:1;font:800 14px var(--font)">' + esc(r.name) + (r.value != null ? ' <span style="color:var(--muted);font-weight:600">' + esc(r.value) + " " + esc(r.unit || "") + "</span>" : "") + '</b>' +
+            '<span style="font:800 10px var(--font);text-transform:uppercase;letter-spacing:.03em;color:' + c + '">' + esc(r.severity) + '</span>' +
+            '<span style="color:var(--muted);font-size:12px">' + (open ? "▲" : "▼") + '</span>' +
+          '</button>' +
+          (open ? '<div style="padding:0 14px 12px">' + (r.lines || []).map(function (ln) {
+            return '<div class="icu-row"><span>' + esc(ln[0]) + '</span><b style="text-align:right;max-width:62%">' + esc(ln[1]) + "</b></div>";
+          }).join("") + evidenceBadges(r.ev || []) + "</div>" : "") +
+        '</div>';
+      }).join("");
+      return out + grid + '<div class="icu-sec-lbl" style="margin-top:8px">Correction targets · tap to expand</div>' + cards +
+        '<div class="icu-card"><button class="icu-btn ghost" data-icu-act="edit:labs">✎ Update electrolytes</button>' +
+        '<button class="icu-btn ghost" data-icu-act="launch:elyte">Open full Electrolyte Engine (all analytes · unit toggle)</button>' +
+        '<p style="margin:8px 0 0;color:var(--muted);font:600 11px var(--font)">Interpreted as SI units (mmol/L; albumin g/L), as entered in Labs.</p></div>';
     },
     abg: function () {
       var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
@@ -650,11 +686,17 @@
     if (p.icuDay != null) meta.push("ICU day <b>" + esc(p.icuDay) + "</b>");
     if (p.hospital) meta.push(esc(p.hospital));
     if (p.diagnosis) meta.push("<b>" + esc(p.diagnosis) + "</b>");
+    var n = rosterCount();
     return '<div class="icu-hd"><div class="icu-hd-top">' +
       '<div class="icu-hd-name">' + (p.name ? esc(p.name) : "ICU Patient") + (p.status ? ' · <span style="font-weight:600;color:var(--muted)">' + esc(p.status) + "</span>" : "") + "</div>" +
-      '<button class="icu-edit" data-icu-act="edit:patient">✎ Patient</button>' +
       '<button class="icu-x" data-icu-act="close" aria-label="Close ICU">✕</button>' +
-      '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap ✎ Patient to begin") + "</div></div>";
+      '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap ✎ Patient, then ＋ Enter data below") + "</div>" +
+      '<div class="icu-hd-actions">' +
+        '<button class="icu-chip" data-icu-act="edit:patient">✎ Patient</button>' +
+        '<button class="icu-chip" data-icu-act="savept">💾 Save</button>' +
+        '<button class="icu-chip" data-icu-act="patients">📋 Patients' + (n ? " (" + n + ")" : "") + '</button>' +
+        '<button class="icu-chip" data-icu-act="newpt">＋ New</button>' +
+      '</div></div>';
   }
   function renderTabBar() {
     return '<div class="icu-tabs">' + TABS.map(function (t) {
@@ -666,6 +708,7 @@
     try { tab = RENDER[_active] ? RENDER[_active]() : ""; } catch (e) { tab = '<div class="icu-card"><p>Tab error.</p></div>'; }
     return '<div class="icu-scroll"><div class="icu-wrap">' +
       renderLiveStatus() +
+      '<button class="icu-adddata" data-icu-act="adddata">＋ Enter / update patient data</button>' +
       (_active === "overview" ? renderAIImport() : "") +
       '<div class="icu-sec-lbl">' + (TABS.filter(function (t) { return t.id === _active; })[0] || {}).ic + " " + (TABS.filter(function (t) { return t.id === _active; })[0] || {}).label + '</div>' +
       tab +
@@ -798,6 +841,83 @@
     try { fn(); } catch (e) { if (window.toast) toast("Module still loading…"); }
   }
 
+  /* ------------------------------------------ patient roster (save / load old) */
+  // A patient is one full ICU_STATE snapshot, keyed by a stable _id and kept in a
+  // separate localStorage list so clinicians can save the current patient and
+  // reopen previous ones. The live working state stays in `stewardmd_icu_state`.
+  var ROSTER_KEY = "stewardmd_icu_patients";
+  function loadRoster() { try { var r = JSON.parse(localStorage.getItem(ROSTER_KEY)); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
+  function saveRoster(r) { try { localStorage.setItem(ROSTER_KEY, JSON.stringify(r)); } catch (e) {} }
+  function rosterCount() { return loadRoster().length; }
+  function fmtWhen(ts) { if (!ts) return ""; try { var d = new Date(ts); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
+  function savePatient() {
+    var r = loadRoster();
+    var id = _raw.patient._id || ("p" + nowTs());
+    STATE.patient._id = id;                                  // reactive write persists live state
+    var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
+    var entry = { id: id, name: _raw.patient.name || "Unnamed", dx: _raw.patient.diagnosis || "", bed: _raw.patient.bed || "", savedAt: nowTs(), state: snap };
+    var found = false, i;
+    for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
+    if (!found) r.push(entry);
+    saveRoster(r);
+    if (window.toast) toast(found ? "Patient updated" : "Patient saved");
+    paint();
+  }
+  function loadPatient(id) {
+    var r = loadRoster(), e = null, i;
+    for (i = 0; i < r.length; i++) { if (r[i].id === id) { e = r[i]; break; } }
+    if (!e || !e.state) return;
+    var d = e.state;
+    Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = (d[k] != null) ? clone(d[k]) : clone(DEFAULT_STATE[k]); });
+    STATE.patient._id = id;
+    _active = "overview"; closeForm(); paint();
+    if (window.toast) toast("Loaded " + (e.name || "patient"));
+  }
+  function deletePatient(id) {
+    var r = loadRoster().filter(function (x) { return x.id !== id; });
+    saveRoster(r);
+    openRoster();                                            // refresh the open list
+  }
+  function newPatient() {
+    ICU.reset();
+    _active = "overview"; closeForm(); paint();
+    openForm("patient");
+  }
+  function openRoster() {
+    ensureModal();
+    var r = loadRoster().slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); });
+    var list = r.length ? r.map(function (e) {
+      var cur = (e.id === _raw.patient._id);
+      return '<div class="icu-row" style="align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">' +
+        '<button data-icu-act="loadpt:' + esc(e.id) + '" style="flex:1;text-align:left;border:none;background:none;cursor:pointer;color:var(--ink)">' +
+          '<div style="font:800 14px var(--font)">' + esc(e.name || "Unnamed") + (cur ? ' <span style="color:var(--primary);font-size:11px">• current</span>' : "") + '</div>' +
+          '<div style="font:600 12px var(--font);color:var(--muted)">' + (e.dx ? esc(e.dx) : "No diagnosis") + (e.bed ? " · Bed " + esc(e.bed) : "") + " · " + esc(fmtWhen(e.savedAt)) + '</div>' +
+        '</button>' +
+        '<button data-icu-act="delpt:' + esc(e.id) + '" aria-label="Delete patient" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:16px;padding:6px">🗑</button></div>';
+    }).join("") : '<div class="icu-empty">No saved patients yet. Enter patient details, then tap 💾 Save.</div>';
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Saved patients</h3><div style="max-height:52vh;overflow:auto;margin-bottom:10px">' + list + "</div>" +
+      '<button class="icu-btn" data-icu-act="newpt">＋ New patient</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+    modalEl.classList.add("on");
+  }
+
+  /* ------------------------------------------ prominent "enter data" chooser */
+  var DATA_MENU = [
+    ["🧑", "Patient details", "patient"], ["❤️", "Vitals (monitor)", "monitor"], ["🩸", "Labs / electrolytes", "labs"],
+    ["🫁", "ABG", "abg"], ["🌬", "Ventilator", "ventilator"], ["💧", "Fluid balance", "flowsheet"],
+    ["💉", "Infusion", "infusion"], ["🎯", "Today's goals", "goals"]
+  ];
+  function openDataMenu() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>＋ Enter / update data</h3>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Pick what to record — or use 📷 Snapshot to auto-read a photo.</p>' +
+      '<div class="icu-grid2">' + DATA_MENU.map(function (m) {
+        return '<button class="icu-btn ghost" data-icu-act="edit:' + m[2] + '" style="justify-content:flex-start;text-align:left">' + m[0] + " " + m[1] + "</button>";
+      }).join("") + "</div>" +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+    modalEl.classList.add("on");
+  }
+
   /* ------------------------------------------------------ event delegation */
   function onClick(e) {
     var t = e.target.closest ? e.target.closest("[data-icu-act]") : null; if (!t) return;
@@ -817,6 +937,13 @@
       case "copysummary": copySummary(); break;
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
+      case "adddata": openDataMenu(); break;
+      case "savept": savePatient(); break;
+      case "patients": openRoster(); break;
+      case "loadpt": loadPatient(arg); break;
+      case "delpt": deletePatient(arg); break;
+      case "newpt": newPatient(); break;
+      case "lyte": _lytesExp[arg] = !_lytesExp[arg]; paint(); break;
       case "save": saveForm(arg); break;
       case "closeform": closeForm(); break;
       case "snapshot": openSnapshot(); break;
@@ -850,7 +977,9 @@
     subscribe: function (fn) { if (typeof fn === "function") { _subs.push(fn); return function () { var i = _subs.indexOf(fn); if (i >= 0) _subs.splice(i, 1); }; } },
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
-    ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient
+    ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
+    // patient roster (save current / reopen previous)
+    savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient
   };
   window.ICU = ICU;
 
