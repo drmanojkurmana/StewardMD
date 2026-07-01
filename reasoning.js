@@ -3026,8 +3026,8 @@
   }
   function maikHeaderHTML() {
     return '<div class="maik-ai">' +
-      '<div class="maik-sec-h maik-ai-h">✨ MaiK <span class="maik-tag maik-tag-ai">Medical AI Knowledge Engine</span></div>' +
-      '<div class="maik-sub">Powered by Google Gemini · Independent Clinical Commentary</div>';
+      '<div class="maik-sec-h maik-ai-h">✨ MaiK <span class="maik-tag maik-tag-ai">Medical AI Knowledge</span></div>' +
+      '<div class="maik-sub">Powered by Google Vertex AI · Independent Clinical Commentary</div>';
   }
   function maikDivider() { return '<div class="maik-divider"></div>'; }
   function maikDisclaimerHTML() { return '<div class="maik-warn">⚠ AI-generated commentary. Clinician confirmation required.</div></div>'; }
@@ -3482,6 +3482,18 @@
     function g(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
     return { reason: g("smd_reason_v2", true), expanded: g("smd_kb_expanded", false), ai: g("smd_ai", false), ghis: g("smd_ghis_ward", true) };
   }
+  // MaiK branding + provider/auth summary + About section for AI Settings (presentation only).
+  function maikSettingsInfoHTML() {
+    var kv = [["Current provider", "Vertex AI"], ["Fallback provider", "Gemini Developer API"], ["Model", "gemini-2.5-flash"], ["Authentication", "Google Workload Identity Federation"]];
+    return '<div style="margin-top:14px;padding:12px 13px;border:1px solid rgba(124,58,237,0.3);border-radius:12px;background:rgba(124,58,237,0.05)">' +
+      '<div style="font:800 13px var(--sans,system-ui);color:#7c3aed">✨ MaiK</div>' +
+      '<div style="font:700 11.5px var(--sans,system-ui);color:var(--ink,#14202b);margin-top:1px">Medical AI Knowledge</div>' +
+      '<div style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-bottom:8px">Powered by Google Vertex AI</div>' +
+      kv.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 11.5px/1.6 var(--sans,system-ui);border-top:1px solid rgba(100,116,139,0.14);padding:3px 0"><span style="color:var(--slate-soft,#5a7184)">' + r[0] + '</span><b style="color:var(--ink,#14202b)">' + r[1] + '</b></div>'; }).join("") +
+      '<div style="font:500 11px/1.55 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px;border-top:1px solid rgba(100,116,139,0.14);padding-top:8px">' +
+        '<b style="color:var(--ink,#14202b)">About MaiK</b> — MaiK (Medical AI Knowledge) is StewardMD’s clinician-assistive AI, powered by Google Vertex AI using Google’s Gemini models. It provides evidence-supported clinical explanations and educational insights while StewardMD’s deterministic clinical reasoning engine remains the primary diagnostic authority. AI output is advisory and always requires clinician verification.' +
+      '</div></div>';
+  }
   function smdSettingsInject() {
     var menu = document.getElementById("sbMenu"); if (!menu) return;
     if (menu.querySelector("[data-smd-labs]")) return;
@@ -3489,7 +3501,7 @@
     var rows = [
       ["reason", "🧠 Reasoning v2", "Live differential + progressive findings in the workflow"],
       ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived — review)"],
-      ["ai", "✨ AI assist (Gemini)", "Explain differential + ICU Vision (needs server key)"],
+      ["ai", "✨ MaiK — Medical AI Knowledge", "Powered by Google Vertex AI · advisory commentary + ICU Vision"],
       ["ghis", "🏥 GHIS Ward Sync", "Live inpatient labs + radiology"]
     ];
     var w = document.createElement("div"); w.setAttribute("data-smd-labs", "1");
@@ -3500,6 +3512,7 @@
         return '<div style="display:flex;align-items:flex-start;gap:10px;padding:8px 0"><div style="flex:1;min-width:0"><div style="font:700 13.5px var(--sans,system-ui);color:var(--ink,#14202b)">' + r[1] + '</div><div style="font:500 11.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px">' + r[2] + '</div></div>' +
           '<button data-labs="' + r[0] + '" role="switch" aria-checked="' + on + '" aria-label="' + r[1] + '" style="flex:0 0 auto;position:relative;width:42px;height:24px;border:none;border-radius:999px;cursor:pointer;background:' + (on ? "var(--teal,#0e6e63)" : "var(--line,#d7dee3)") + ';transition:background .15s"><span style="position:absolute;top:3px;left:' + (on ? "21px" : "3px") + ';width:18px;height:18px;border-radius:50%;background:#fff;transition:left .15s"></span></button></div>';
       }).join("");
+    w.innerHTML += maikSettingsInfoHTML();
     menu.appendChild(w);
     w.querySelectorAll("[data-labs]").forEach(function (b) {
       b.addEventListener("click", function () {
