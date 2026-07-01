@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StewardMD Gold-Standard Validation Case",
+  "type": "object",
+  "required": ["id", "age", "sex", "chiefComplaint", "findings", "expected"],
+  "properties": {
+    "id": { "type": "string", "description": "stable case id" },
+    "age": { "type": "number" },
+    "sex": { "type": "string", "enum": ["M", "F", "Other"] },
+    "chiefComplaint": { "type": "string" },
+    "symptoms": { "type": "array", "items": { "type": "string" } },
+    "physicalFindings": { "type": "array", "items": { "type": "string" } },
+    "vitals": { "type": "object" },
+    "labs": { "type": "object" },
+    "imaging": { "type": "array", "items": { "type": "string" } },
+    "microbiology": { "type": "array", "items": { "type": "string" } },
+    "cultures": { "type": "array", "items": { "type": "object", "properties": { "organism": { "type": "string" }, "sensitivities": { "type": "array", "items": { "type": "string" } } } } },
+    "findings": { "type": "object", "description": "ENGINE finding-keys → true; drives SMD_REASON.assess" },
+    "expected": {
+      "type": "object",
+      "required": ["diagnosis", "acceptableIds"],
+      "properties": {
+        "diagnosis": { "type": "string", "description": "final confirmed diagnosis (human)" },
+        "acceptableIds": { "type": "array", "items": { "type": "string" }, "description": "engine ids/names accepted as a correct top-1" },
+        "differentialIds": { "type": "array", "items": { "type": "string" }, "description": "reasonable differential (for top-3 credit)" },
+        "investigations": { "type": "array", "items": { "type": "string" } },
+        "stewardship": { "type": "object", "properties": { "tier": { "type": "string" }, "antibiotics": { "type": "array", "items": { "type": "string" } } } }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "provenance": { "type": "string" }
+  }
+}
