@@ -25,7 +25,7 @@
         "htn_emergency:28"
       ],
       "nInf": 15,
-      "nNi": 46,
+      "nNi": 47,
       "leadInf": "MENINGITIS",
       "leadInfReason": "Fever with neck stiffness, altered sensorium, and photophobia is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
       "leadNi": "sah",
@@ -88,8 +88,8 @@
         "COPD_EXACERBATION:41"
       ],
       "ni": [
+        "asthma_exac:46",
         "sarcoidosis:40",
-        "asthma_exac:38",
         "copd_exac_ni:30",
         "pleural_effusion:28",
         "ild:26",
@@ -99,8 +99,8 @@
       "nNi": 36,
       "leadInf": "CAP",
       "leadInfReason": "Clinical findings (fever, productive cough, crepitations, tachypnea) support a diagnosis of community-acquired pneumonia. Bacterial probability is high enough to justify empiric antibiotic therapy without delay for culture results.",
-      "leadNi": "sarcoidosis",
-      "leadNiReason": "Bilateral hilar lymphadenopathy with multisystem involvement suggests sarcoidosis — exclude TB/lymphoma.",
+      "leadNi": "asthma_exac",
+      "leadNiReason": "Episodic breathlessness and wheeze without fever or consolidation suggests bronchospasm.",
       "leadInfFirstLine": [
         {
           "drug": "Amoxicillin",
@@ -158,7 +158,7 @@
         "bowel_obstruction:2"
       ],
       "nInf": 7,
-      "nNi": 23,
+      "nNi": 25,
       "leadInf": "PYELONEPHRITIS",
       "leadInfReason": "Flank pain with fever indicates upper urinary tract infection (pyelonephritis). This requires antibiotics with reliable renal tissue penetration, with outpatient oral therapy appropriate in hemodynamically stable, tolerating patients.",
       "leadNi": "renal_colic",
@@ -278,14 +278,14 @@
       ],
       "ni": [
         "toxic_hepatitis:58",
-        "biliary_colic:42",
+        "biliary_colic:52",
         "decomp_cirrhosis:24",
         "hepatic_enceph:24",
         "variceal_bleed:20",
-        "pancreatitis:12"
+        "ttp_hus:16"
       ],
       "nInf": 8,
-      "nNi": 27,
+      "nNi": 29,
       "leadInf": "CHOLANGITIS",
       "leadInfReason": "Right upper quadrant pain, fever, and jaundice (Charcot's triad) are consistent with acute cholangitis, a condition that can progress rapidly to septic shock from biliary obstruction. Empiric broad-spectrum antibiotics must be started immediately, with urgent biliary drainage (ERCP or percutaneous) as the definitive source control measure — antibiotics alone are insufficient if obstruction is not relieved.",
       "leadNi": "toxic_hepatitis",
@@ -333,13 +333,13 @@
       "ni": [
         "hepatic_enceph:78",
         "decomp_cirrhosis:74",
+        "metabolic_enceph:40",
         "toxic_hepatitis:34",
         "variceal_bleed:30",
-        "metabolic_enceph:28",
         "malignancy_b:12"
       ],
       "nInf": 11,
-      "nNi": 7,
+      "nNi": 8,
       "leadInf": "SBP",
       "leadInfReason": "In a patient with ascites, clinical suspicion raises concern for spontaneous bacterial peritonitis. Diagnostic paracentesis with ascitic fluid analysis should be performed promptly, and empiric antibiotics should be started once ascitic fluid neutrophil count supports the diagnosis (or immediately if paracentesis is delayed and suspicion is high), without waiting for culture results given the risk of rapid deterioration in cirrhotic patients.",
       "leadNi": "hepatic_enceph",
@@ -391,7 +391,7 @@
         "hypoglycemia:20"
       ],
       "nInf": 5,
-      "nNi": 19,
+      "nNi": 22,
       "leadInf": "C_DIFF",
       "leadInfReason": "New diarrhea following recent antibiotic exposure (often within the preceding 8 weeks, though it can occur during therapy) raises suspicion for Clostridioides difficile infection. Note the specific terminology here — treatment is itself with a different class of \"antibiotics\" targeted at C. difficile (oral vancomycin or fidaxomicin), which is distinct from and the inverse of typical antibiotic stewardship: the priority is stopping the inciting antibiotic if still being given, plus starting C. difficile-directed therapy.",
       "leadNi": "dka",
@@ -427,10 +427,11 @@
         "acs:98",
         "cardiogenic_shock:36",
         "aortic_stenosis:26",
-        "heart_failure:14"
+        "heart_failure:14",
+        "pericarditis:12"
       ],
       "nInf": 0,
-      "nNi": 4,
+      "nNi": 5,
       "leadInf": null,
       "leadInfReason": null,
       "leadNi": "acs",
@@ -447,7 +448,7 @@
       "ni": [
         "pe:100",
         "dvt:74",
-        "pneumothorax:60",
+        "pneumothorax:62",
         "tamponade:48",
         "pleural_effusion:48",
         "heart_failure:40"
@@ -510,7 +511,7 @@
         "tamponade:60",
         "ild:54",
         "pe:40",
-        "anaphylaxis:24"
+        "myasthenic_crisis:26"
       ],
       "nInf": 2,
       "nNi": 26,
@@ -636,7 +637,7 @@
         "ich:30"
       ],
       "nInf": 7,
-      "nNi": 22,
+      "nNi": 25,
       "leadInf": "MENINGITIS",
       "leadInfReason": "Fever with neck stiffness is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
       "leadNi": "sah",
@@ -705,7 +706,7 @@
         "tension_ha:38"
       ],
       "nInf": 4,
-      "nNi": 15,
+      "nNi": 16,
       "leadInf": "MENINGITIS",
       "leadInfReason": "Fever with neck stiffness is concerning for acute bacterial meningitis — a true medical emergency where delay in antibiotics directly worsens outcomes. Empiric therapy must be started immediately, ideally within 1 hour of suspicion, and should not be delayed for lumbar puncture or imaging if there is any logistical delay.",
       "leadNi": "iih",
@@ -764,7 +765,7 @@
         "peptic_ulcer:66",
         "variceal_bleed:56",
         "hypovolemic_shock:18",
-        "anemia_sympt:0"
+        "anemia_sympt:4"
       ],
       "nInf": 0,
       "nNi": 4,
@@ -803,10 +804,10 @@
         "BRAIN_ABSCESS:17"
       ],
       "ni": [
+        "ttp_hus:74",
         "dic:68",
-        "ttp_hus:62",
         "itp:52",
-        "acute_leukemia:38",
+        "acute_leukemia:50",
         "serotonin_nms:24",
         "thyroid_storm:22"
       ],
@@ -814,8 +815,8 @@
       "nNi": 40,
       "leadInf": "MALARIA",
       "leadInfReason": "Fever with chills/rigors, thrombocytopenia and/or splenomegaly in a patient from or travelling through an endemic area is most consistent with malaria — a protozoal infection. Antibiotics have no role here; the priority is urgent peripheral smear/rapid diagnostic testing and prompt antimalarial therapy specific to the Plasmodium species identified, since delay (especially in P. falciparum) can progress rapidly to severe/complicated malaria.",
-      "leadNi": "dic",
-      "leadNiReason": "Diffuse bleeding with thrombocytopenia and deranged coagulation suggests DIC — find and treat the trigger.",
+      "leadNi": "ttp_hus",
+      "leadNiReason": "Microangiopathic haemolysis with thrombocytopenia and neurological signs suggests TTP — do not transfuse platelets reflexively.",
       "leadInfFirstLine": [],
       "leadInfPathogens": {
         "veryLikely": [
@@ -852,12 +853,12 @@
         "malignancy_b:68",
         "lung_cancer:26",
         "acute_leukemia:24",
+        "thyroid_storm:20",
         "vasculitis:16",
-        "sarcoidosis:12",
-        "sle_flare:8"
+        "pleural_effusion:14"
       ],
       "nInf": 8,
-      "nNi": 25,
+      "nNi": 28,
       "leadInf": "PULMONARY_TB",
       "leadInfReason": "Cough for ≥2 weeks with weight loss, night sweats in this setting raises significant suspicion for pulmonary tuberculosis. This is NOT a syndrome to treat empirically with antitubercular therapy on clinical suspicion alone — microbiological confirmation (sputum smear/CBNAAT/culture) should be obtained first, since incorrect or premature ATT carries significant consequences (drug toxicity, resistance, delayed correct diagnosis).",
       "leadNi": "malignancy_b",

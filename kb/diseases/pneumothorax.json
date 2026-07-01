@@ -10,16 +10,19 @@
   },
   "matching": {
     "find": {
-      "pleuriticChestPain": 28,
+      "pleuriticChestPain": 30,
       "dyspnea": 26,
       "hypoxia": 14,
-      "fever": -8
+      "fever": -8,
+      "pleuriticPain": 16,
+      "chestPain": 8
     },
     "associatedFindings": [
+      "chestPain",
       "dyspnea",
-      "fever",
       "hypoxia",
-      "pleuriticChestPain"
+      "pleuriticChestPain",
+      "pleuriticPain"
     ],
     "reasoningTemplate": "Sudden pleuritic pain with breathlessness and reduced breath sounds suggests pneumothorax."
   },

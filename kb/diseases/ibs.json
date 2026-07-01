@@ -11,17 +11,20 @@
   "matching": {
     "find": {
       "abdominalPain": 24,
-      "constipationOrDiarrhea": 18,
+      "constipationOrDiarrhea": 22,
       "fever": -14,
       "weightLoss": -10,
-      "bloodyStool": -12
+      "bloodyStool": -12,
+      "abdominalDistension": 16,
+      "abdominalDiscomfort": 10,
+      "oralIntakeAdequate": 8
     },
     "associatedFindings": [
+      "abdominalDiscomfort",
+      "abdominalDistension",
       "abdominalPain",
-      "bloodyStool",
       "constipationOrDiarrhea",
-      "fever",
-      "weightLoss"
+      "oralIntakeAdequate"
     ],
     "reasoningTemplate": "Chronic abdominal pain with altered bowel habit and NO alarm features suggests IBS."
   },
