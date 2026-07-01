@@ -71,7 +71,8 @@
   "expected": {
     "diagnosis": "dvt",
     "acceptableIds": [
-      "dvt"
+      "dvt",
+      "pe"
     ],
     "differentialIds": [
       "pe",
@@ -84,7 +85,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "pe",
+        "tier": "C-continuum",
+        "rationale": "DVT and PE are one VTE continuum; identical anticoagulation."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include dvt",
@@ -92,6 +100,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

@@ -99,7 +99,8 @@
   "expected": {
     "diagnosis": "Exudative pleural effusion, likely tubercular aetiology",
     "acceptableIds": [
-      "pleural_effusion"
+      "pleural_effusion",
+      "PULMONARY_TB"
     ],
     "differentialIds": [
       "pleural_effusion",
@@ -115,7 +116,14 @@
     "stewardship": {
       "tier": "null",
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "PULMONARY_TB",
+        "tier": "D-review-critical",
+        "rationale": "Tubercular pleural effusion is a form of pulmonary TB (same ATT), but 'pulmonary TB' vs 'pleural effusion' framing differs — flag."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (pleural_effusion)",
@@ -126,6 +134,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

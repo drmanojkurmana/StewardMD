@@ -77,7 +77,8 @@
   "expected": {
     "diagnosis": "CNS_TB",
     "acceptableIds": [
-      "CNS_TB"
+      "CNS_TB",
+      "MENINGITIS"
     ],
     "differentialIds": [
       "MENINGITIS",
@@ -98,7 +99,14 @@
         "pyrazinamide",
         "ethambutol"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "MENINGITIS",
+        "tier": "D-review-critical",
+        "rationale": "CNS TB (TB meningitis) is meningitis; same caveat as gc_042 — flag."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include CNS_TB",
@@ -107,6 +115,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

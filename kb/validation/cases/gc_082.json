@@ -95,7 +95,9 @@
   },
   "expected": {
     "diagnosis": "Opioid overdose with respiratory depression and miosis",
-    "acceptableIds": [],
+    "acceptableIds": [
+      "opioid_od"
+    ],
     "differentialIds": [
       "drug_intox",
       "organophosphate"
@@ -112,7 +114,14 @@
     "stewardship": {
       "tier": "null",
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "opioid_od",
+        "tier": "A-idfix",
+        "rationale": "Same diagnosis (opioid overdose) — acceptableId id mismatch."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis reasoning surfaces opioid toxidrome (miosis + bradypnea + altered sensorium + drug overdose context)",
@@ -123,6 +132,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

@@ -113,7 +113,8 @@
   "expected": {
     "diagnosis": "Cardiogenic shock due to acute anterior STEMI (post-MI pump failure) with secondary ischemic mitral regurgitation",
     "acceptableIds": [
-      "cardiogenic_shock"
+      "cardiogenic_shock",
+      "acs"
     ],
     "differentialIds": [
       "acs",
@@ -131,7 +132,14 @@
     "stewardship": {
       "tier": "null",
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "acs",
+        "tier": "B-cause",
+        "rationale": "Cardiogenic shock is caused by the STEMI; ACS (→ PCI) is the correct underlying dx and the definitive treatment."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-1 diagnosis in acceptableIds (cardiogenic_shock)",
@@ -142,6 +150,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

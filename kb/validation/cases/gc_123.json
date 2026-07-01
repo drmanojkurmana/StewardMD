@@ -79,7 +79,8 @@
   "expected": {
     "diagnosis": "ENCEPHALITIS",
     "acceptableIds": [
-      "ENCEPHALITIS"
+      "ENCEPHALITIS",
+      "MENINGITIS"
     ],
     "differentialIds": [
       "VIRAL_MENINGITIS",
@@ -98,7 +99,14 @@
         "aciclovir",
         "ceftriaxone"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "MENINGITIS",
+        "tier": "D-review-critical",
+        "rationale": "Encephalitis and bacterial meningitis sit on the meningoencephalitis spectrum with overlapping empiric cover (ceftriaxone±acyclovir), but are distinct — flag."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include ENCEPHALITIS",
@@ -107,6 +115,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

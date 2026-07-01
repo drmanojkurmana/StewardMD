@@ -78,7 +78,8 @@
   "expected": {
     "diagnosis": "cardiogenic_shock",
     "acceptableIds": [
-      "cardiogenic_shock"
+      "cardiogenic_shock",
+      "acs"
     ],
     "differentialIds": [
       "acs",
@@ -96,7 +97,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "acs",
+        "tier": "B-cause",
+        "rationale": "Cardiogenic shock from ACS; ACS is the causal dx and the treatment target."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include cardiogenic_shock",
@@ -105,6 +113,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

@@ -70,7 +70,8 @@
   "expected": {
     "diagnosis": "ACUTE_BRONCHITIS",
     "acceptableIds": [
-      "ACUTE_BRONCHITIS"
+      "ACUTE_BRONCHITIS",
+      "URTI"
     ],
     "differentialIds": [
       "CAP",
@@ -85,7 +86,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "URTI",
+        "tier": "C-continuum",
+        "rationale": "Acute bronchitis and common cold are both self-limiting viral URIs; symptomatic mgmt, no antibiotics."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include ACUTE_BRONCHITIS",
@@ -94,6 +102,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

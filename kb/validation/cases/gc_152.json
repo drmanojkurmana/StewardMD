@@ -72,7 +72,8 @@
   "expected": {
     "diagnosis": "VIRAL_MENINGITIS",
     "acceptableIds": [
-      "VIRAL_MENINGITIS"
+      "VIRAL_MENINGITIS",
+      "MENINGITIS"
     ],
     "differentialIds": [
       "MENINGITIS",
@@ -86,7 +87,14 @@
     "stewardship": {
       "tier": null,
       "antibiotics": []
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "MENINGITIS",
+        "tier": "C-continuum",
+        "rationale": "Viral (aseptic) meningitis is meningitis; acute pathway (LP + empiric cover until CSF back) identical."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include VIRAL_MENINGITIS",
@@ -95,6 +103,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

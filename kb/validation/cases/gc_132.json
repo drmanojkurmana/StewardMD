@@ -77,7 +77,8 @@
   "expected": {
     "diagnosis": "LUNG_ABSCESS",
     "acceptableIds": [
-      "LUNG_ABSCESS"
+      "LUNG_ABSCESS",
+      "ASPIRATION_PNEUMONIA"
     ],
     "differentialIds": [
       "ASPIRATION_PNEUMONIA",
@@ -96,7 +97,14 @@
         "ampicillin-sulbactam",
         "amoxicillin-clavulanate"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "ASPIRATION_PNEUMONIA",
+        "tier": "C-continuum",
+        "rationale": "Lung abscess is a complication/continuum of aspiration pneumonia; overlapping anaerobic-cover abx."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include LUNG_ABSCESS",
@@ -105,6 +113,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }

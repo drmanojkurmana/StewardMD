@@ -78,7 +78,8 @@
   "expected": {
     "diagnosis": "SEPSIS",
     "acceptableIds": [
-      "SEPSIS"
+      "SEPSIS",
+      "SEPTIC_SHOCK"
     ],
     "differentialIds": [
       "SEPTIC_SHOCK",
@@ -98,7 +99,14 @@
         "ceftriaxone",
         "piperacillin-tazobactam"
       ]
-    }
+    },
+    "crossAccept": [
+      {
+        "id": "SEPTIC_SHOCK",
+        "tier": "C-continuum",
+        "rationale": "Septic shock is the severe end of the sepsis continuum; same Surviving-Sepsis bundle."
+      }
+    ]
   },
   "regressionAssertions": [
     "top-3 must include SEPSIS",
@@ -107,6 +115,7 @@
   ],
   "review": {
     "status": "ai_drafted",
-    "clinicianApproved": false
+    "clinicianApproved": false,
+    "crossAcceptPendingReview": true
   }
 }
