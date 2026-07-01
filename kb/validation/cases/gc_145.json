@@ -1,0 +1,112 @@
+{
+  "id": "gc_145",
+  "specialty": "Systemic",
+  "condition": "Sepsis",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Fever with rigors, confusion and reduced urine output for 2 days",
+  "history": "2-day history of high-grade fever with rigors on a background of dysuria and increased urinary frequency for a week. Over the last 24 hours family noted drowsiness and mild confusion, poor oral intake and markedly reduced urine output. Type 2 diabetic on metformin, with benign prostatic hyperplasia. No recent hospitalization or antibiotic use in the last 90 days. No known drug allergies.",
+  "examination": "Ill and toxic-appearing, drowsy but rousable (GCS 14), warm peripheries with flash capillary refill. Left costovertebral angle tenderness and suprapubic tenderness. Chest clear, no meningism, no rash. Pertinent negatives: no neck stiffness, no focal neurology, no cardiac murmur, no calf swelling.",
+  "vitals": {
+    "hr": 118,
+    "bp": "96/58",
+    "rr": 26,
+    "temp": 38.9,
+    "spo2": 94
+  },
+  "labs": {
+    "WBC": "18.4 x10^9/L (neutrophilia with 8% bands)",
+    "CRP": "212 mg/L",
+    "lactate": "3.4 mmol/L",
+    "creatinine": "1.9 mg/dL (baseline 0.9)",
+    "urea": "14.2 mmol/L",
+    "platelets": "108 x10^3/uL",
+    "bilirubin": "1.6 mg/dL",
+    "glucose": "214 mg/dL",
+    "procalcitonin": "6.8 ng/mL",
+    "urinalysis": "leucocyte esterase +++, nitrites positive, pyuria, WBC >100/hpf"
+  },
+  "imaging": "Bedside renal USS: mild left hydronephrosis, no calculus/obstruction; CXR clear. CT KUB deferred pending stabilisation.",
+  "microbiology": "Two sets of blood cultures and urine culture sent before antibiotics; Gram-negative bacilli on urine microscopy, cultures pending.",
+  "differentialDiagnoses": [
+    "Sepsis (urinary source)",
+    "Acute pyelonephritis progressing to sepsis",
+    "Septic shock",
+    "Diabetic ketoacidosis with intercurrent infection",
+    "Acute kidney injury (pre-renal)"
+  ],
+  "finalDiagnosis": "Sepsis secondary to urinary tract source (SOFA increase >=2 with lactate 3.4 and AKI)",
+  "citations": [
+    "Harrison 22e — Sepsis and Septic Shock",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 2 g OD (or piperacillin-tazobactam if higher MDR risk) after cultures, with Hour-1 bundle: blood cultures, lactate, 30 mL/kg balanced crystalloid, source control assessment. De-escalate on urine/blood culture sensitivities.",
+  "contraindications": [
+    "Beta-lactam / penicillin allergy (use if no true anaphylaxis history)",
+    "Dose-adjust for AKI (creatinine 1.9, monitor eGFR)",
+    "Avoid nephrotoxic aminoglycosides as sole agent given AKI"
+  ],
+  "edgeCases": [
+    "Sepsis can present normothermic or hypothermic and without frank hypotension; warm shock with flash capillary refill may mask hypoperfusion",
+    "Elderly/diabetic patients may lack classic localizing signs; confusion may be the only sepsis sign"
+  ],
+  "expectedMaiK": "Fever, tachycardia, tachypnea and hypotension with a urinary source plus new AKI, elevated lactate and thrombocytopenia indicate sepsis (life-threatening organ dysfunction from dysregulated host response). Initiate the Hour-1 bundle with cultures, lactate, fluids and empiric guideline-concordant antibiotics; monitor for progression to septic shock.",
+  "expectedNextQuestions": [
+    "Is there ongoing hypotension after fluid resuscitation requiring vasopressors (i.e., evolving septic shock)?",
+    "Any recent instrumentation, catheterization, or urinary obstruction requiring source control?"
+  ],
+  "expectedInvestigations": [
+    "Repeat serum lactate after fluid bolus",
+    "Blood and urine cultures with sensitivities",
+    "Serial creatinine/urine output and CT KUB to exclude obstructive uropathy"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "sofaIncrease": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "suspectedInfectionSource": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "SEPSIS",
+    "acceptableIds": [
+      "SEPSIS"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "PUO"
+    ],
+    "investigations": [
+      "Serum lactate",
+      "Blood cultures",
+      "Urine culture",
+      "CT KUB / renal ultrasound"
+    ],
+    "stewardship": {
+      "tier": "empiric-broad",
+      "antibiotics": [
+        "ceftriaxone",
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SEPSIS",
+    "findings sofaIncrease + lactateElevated + organDysfunction must raise SEPSIS above uncomplicated PYELONEPHRITIS",
+    "must trigger sepsis Hour-1 bundle / empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

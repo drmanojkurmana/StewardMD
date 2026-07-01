@@ -1,0 +1,107 @@
+{
+  "id": "gc_174",
+  "specialty": "Hematology",
+  "condition": "Disseminated intravascular coagulation",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Diffuse bleeding from IV/venepuncture sites and mucosae in a critically unwell patient",
+  "history": "Admitted 3 days ago with high-grade fever and suspected Gram-negative sepsis (urosepsis). Over the last 24 hours she has developed oozing from every cannula and venepuncture site, gum bleeding, epistaxis and bruising, with reduced urine output and increasing confusion. PMH: type 2 diabetes, hypertension. No prior bleeding disorder, on no anticoagulants.",
+  "examination": "Toxic, drowsy but rousable. Widespread ecchymoses and petechiae over trunk and limbs; continuous ooze from peripheral and central line sites and gums. Cool, mottled peripheries with delayed capillary refill. No focal source of surgical bleeding. No hepatosplenomegaly; no lymphadenopathy. No neck stiffness.",
+  "vitals": {
+    "hr": 122,
+    "bp": "88/52",
+    "rr": 26,
+    "temp": 38.9,
+    "spo2": 93
+  },
+  "labs": {
+    "Platelets": "38 x10^3/uL (falling from 180 on admission)",
+    "PT/INR": "INR 2.4 (PT markedly prolonged)",
+    "aPTT": "62 s (prolonged)",
+    "Fibrinogen": "0.8 g/L (low, falling)",
+    "D-dimer": ">20 (markedly elevated)",
+    "Peripheral smear": "schistocytes present, thrombocytopenia",
+    "Hemoglobin": "9.2 g/dL",
+    "Creatinine": "2.1 mg/dL",
+    "Lactate": "3.8 mmol/L",
+    "Bilirubin": "1.6 mg/dL"
+  },
+  "imaging": "not indicated for diagnosis; CT abdomen/pelvis pending to confirm urosepsis source",
+  "microbiology": "Blood and urine cultures sent; urine culture growing Gram-negative bacilli (pending sensitivities)",
+  "differentialDiagnoses": [
+    "Disseminated intravascular coagulation (sepsis-induced)",
+    "Thrombotic microangiopathy (TTP/HUS)",
+    "Immune thrombocytopenia",
+    "Acute liver failure / decompensated liver disease with coagulopathy",
+    "Heparin-induced thrombocytopenia"
+  ],
+  "finalDiagnosis": "Disseminated intravascular coagulation secondary to Gram-negative sepsis",
+  "citations": [
+    "Harrison 22e — Coagulation Disorders (Disseminated Intravascular Coagulation)",
+    "ISTH Diagnosis and Management of DIC 2013"
+  ],
+  "stewardship": "not applicable — non-infective (DIC is the coagulopathy; treat the precipitating sepsis per source-directed empiric therapy and address the underlying trigger)",
+  "contraindications": [
+    "Avoid routine prophylactic platelet/plasma transfusion in the absence of bleeding or planned procedure",
+    "Caution with heparin/anticoagulation in an actively bleeding patient",
+    "Nephrotoxic agents caution given AKI (creatinine 2.1)"
+  ],
+  "edgeCases": [
+    "Chronic/compensated DIC (e.g., malignancy, retained products of conception) may present with thrombosis rather than bleeding and near-normal screening tests",
+    "Overlap with TTP/HUS: schistocytes occur in both, but normal PT/aPTT and fibrinogen favour a primary thrombotic microangiopathy over DIC"
+  ],
+  "expectedMaiK": "The combination of a clear triggering illness (sepsis), consumptive thrombocytopenia with a falling platelet count, prolonged PT/aPTT, low/falling fibrinogen and markedly raised D-dimer indicates disseminated intravascular coagulation. Management is treatment of the underlying sepsis plus supportive blood-product replacement guided by bleeding and laboratory trends.",
+  "expectedNextQuestions": [
+    "Is there an identifiable precipitant (sepsis, malignancy, obstetric event, trauma, transfusion reaction)?",
+    "Is the platelet count and fibrinogen trending down on serial testing?"
+  ],
+  "expectedInvestigations": [
+    "Serial PT, aPTT, fibrinogen and platelet count",
+    "Peripheral blood film",
+    "D-dimer / fibrin degradation products",
+    "Blood cultures and source workup for the precipitant"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "mucocutaneousBleeding": true,
+    "bleedingManifestation": true,
+    "petechialRash": true,
+    "thrombocytopenia": true,
+    "platelets": true,
+    "inr": true,
+    "organDysfunction": true,
+    "oliguria": true,
+    "toxicAppearing": true,
+    "suspectedInfectionSource": true,
+    "hypotension": true,
+    "lactateElevated": true
+  },
+  "expected": {
+    "diagnosis": "dic",
+    "acceptableIds": [
+      "dic"
+    ],
+    "differentialIds": [
+      "ttp_hus",
+      "itp"
+    ],
+    "investigations": [
+      "Serial PT/aPTT, fibrinogen and platelet count",
+      "Peripheral blood film",
+      "D-dimer / fibrin degradation products"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include dic",
+    "expected.acceptableIds equals [dic]",
+    "stewardship tier is null (non-infective coagulopathy)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

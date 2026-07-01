@@ -1,0 +1,109 @@
+{
+  "id": "gc_227",
+  "specialty": "Dermatology / Emergency",
+  "condition": "Stevens-Johnson syndrome / toxic epidermal necrolysis (SJS/TEN)",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Painful blistering rash with mouth and eye erosions 2 weeks after starting a new medication",
+  "history": "10-day history of a new epileptic-seizure medication (lamotrigine) recently commenced. Over 3 days she developed a prodrome of fever, malaise, sore throat and stinging eyes, followed by a painful dusky maculopapular eruption starting on the face and trunk that rapidly coalesced, with flaccid blisters and skin sloughing. Painful oral erosions have limited oral intake. No prior similar reaction. No infective contacts. PMH: recently diagnosed epilepsy; no chronic skin disease.",
+  "examination": "Ill, distressed and in pain. Confluent dusky-erythematous macules with atypical targetoid lesions on face, trunk and proximal limbs; flaccid bullae and sheet-like epidermal detachment; positive Nikolsky sign. Detachment involves approximately 12% of body surface area (SJS/TEN overlap range). Haemorrhagic crusting of the lips with oral mucosal erosions; purulent conjunctivitis with conjunctival erosions; genital mucosal erosions. Pertinent negatives: no meningism, no focal neurology, no pus/localised abscess, no lymphangitis suggesting cellulitis.",
+  "vitals": {
+    "hr": 112,
+    "bp": "104/68",
+    "rr": 22,
+    "temp": 38.6,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "3.9 x10^9/L (lymphopenia)",
+    "Hb": "12.8 g/dL",
+    "platelets": "185 x10^3/uL",
+    "creatinine": "1.1 mg/dL",
+    "urea": "8.5 mmol/L",
+    "bicarbonate": "20 mmol/L",
+    "glucose": "148 mg/dL",
+    "ALT": "78 U/L",
+    "CRP": "62 mg/L",
+    "SCORTEN": "2 (age <40, tachycardia, BSA <10-30%)"
+  },
+  "imaging": "Not indicated for diagnosis; CXR normal (screening for mucosal/respiratory involvement)",
+  "microbiology": "Blood cultures sent to exclude secondary sepsis (pending); skin swabs pending. Diagnosis is clinical/histological, not microbiological.",
+  "differentialDiagnoses": [
+    "Stevens-Johnson syndrome / toxic epidermal necrolysis (drug-induced)",
+    "Staphylococcal scalded skin syndrome",
+    "Erythema multiforme major",
+    "Generalised bullous fixed drug eruption",
+    "DRESS syndrome",
+    "Autoimmune bullous disease (paraneoplastic pemphigus)"
+  ],
+  "finalDiagnosis": "Stevens-Johnson syndrome / toxic epidermal necrolysis overlap secondary to lamotrigine",
+  "citations": [
+    "Harrison 22e — Cutaneous Drug Reactions / Skin Manifestations of Internal Disease",
+    "British Association of Dermatologists Guidelines for the Management of Stevens-Johnson Syndrome/Toxic Epidermal Necrolysis in Adults 2016"
+  ],
+  "stewardship": "Not applicable — non-infective. This is a drug-hypersensitivity reaction; antibiotics are NOT indicated empirically and should be avoided (further antigenic exposure risk). Prophylactic systemic antibiotics are not recommended per BAD 2016; culture-directed antibiotics only if secondary infection/sepsis is proven.",
+  "contraindications": [
+    "Immediately stop and permanently avoid the culprit drug (lamotrigine) and cross-reacting aromatic anticonvulsants (carbamazepine, phenytoin)",
+    "Avoid prophylactic/empiric antibiotics and any non-essential drugs; each new drug adds hypersensitivity risk",
+    "Sulfonamides, allopurinol and NSAIDs are common culprits and should be avoided",
+    "Avoid adhesive dressings/tape over affected skin"
+  ],
+  "edgeCases": [
+    "SJS/TEN can be triggered by Mycoplasma pneumoniae infection rather than a drug (especially in children/young adults) — Mycoplasma-induced rash and mucositis is the mimic",
+    "Overlap with DRESS (eosinophilia, facial oedema, organ involvement) can coexist",
+    "Extent of detachment defines the spectrum: SJS <10% BSA, overlap 10-30%, TEN >30% — this case sits in the overlap zone",
+    "Early lesions can be mistaken for a benign morbilliform drug eruption; mucosal involvement and skin pain are red flags"
+  ],
+  "expectedMaiK": "Painful mucocutaneous blistering with a positive Nikolsky sign, multi-site mucosal erosions and skin detachment beginning 1-3 weeks after a high-risk drug (lamotrigine) is Stevens-Johnson syndrome/TEN until proven otherwise. Stop the culprit drug immediately, calculate SCORTEN, and manage as a dermatological emergency with supportive burns-type care; antibiotics are not indicated unless secondary infection is confirmed.",
+  "expectedNextQuestions": [
+    "Exact timeline of all new drugs in the last 8 weeks (especially anticonvulsants, allopurinol, sulfonamides, NSAIDs)?",
+    "What percentage body surface area is detached, and is there ocular, oral, genital or airway mucosal involvement?",
+    "Any features of DRESS (facial oedema, lymphadenopathy) or evidence of Mycoplasma infection?"
+  ],
+  "expectedInvestigations": [
+    "Skin biopsy for histology (full-thickness epidermal necrosis) +/- direct immunofluorescence to exclude autoimmune bullous disease",
+    "SCORTEN severity score and monitoring of fluid/electrolyte balance",
+    "Baseline FBC, U&E, LFTs, glucose, CRP and blood cultures to detect secondary sepsis and DRESS overlap"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "rash": true,
+    "mucosalLesions": true,
+    "fever": true,
+    "severePain": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "maculopapularRash": true,
+    "soreThroat": true,
+    "visualDisturbance": true
+  },
+  "expected": {
+    "diagnosis": "sjs_ten",
+    "acceptableIds": [
+      "sjs_ten"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "anaphylaxis",
+      "vasculitis"
+    ],
+    "investigations": [
+      "Skin biopsy with histology +/- direct immunofluorescence",
+      "SCORTEN severity scoring",
+      "FBC, U&E, LFTs, CRP and blood cultures"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include sjs_ten",
+    "expected.stewardship.tier must be null (non-infective; no empiric antibiotics)",
+    "culprit drug (lamotrigine) discontinuation must be advised"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

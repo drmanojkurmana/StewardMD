@@ -1,0 +1,95 @@
+{
+  "id": "gc_149",
+  "specialty": "Respiratory",
+  "condition": "Upper Respiratory Tract Infection (common cold)",
+  "age": 28,
+  "sex": "F",
+  "presentingComplaint": "Three days of nasal congestion, runny nose and sore throat with low-grade fever",
+  "history": "Previously healthy 28-year-old office worker with a 3-day history of gradually developing nasal congestion, clear-to-mucoid rhinorrhoea, sneezing, sore/scratchy throat and mild non-productive cough. Reports low-grade fever and general malaise on day 1-2, now settling. Two colleagues and her toddler had similar self-limiting illnesses the preceding week. No dyspnoea, no pleuritic pain, no ear pain. Symptoms are stable, peaked around day 2, and she feels she is beginning to improve. No significant PMH, non-smoker, no asthma/COPD, not immunocompromised, not pregnant, up to date on immunisations. No recent travel or antibiotic use.",
+  "examination": "Well-appearing, not toxic, in no respiratory distress. Erythematous nasal mucosa with clear/mucoid discharge, mild pharyngeal erythema without tonsillar exudate. No tender anterior cervical lymphadenopathy of note, no unilateral facial tenderness or maxillary/frontal sinus tenderness. Chest clear to auscultation bilaterally with no crepitations or wheeze. Tympanic membranes normal. Pertinent negatives: no tonsillar exudate, no consolidation, no focal chest signs, no rash.",
+  "vitals": {
+    "hr": 82,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 99
+  },
+  "labs": {
+    "note": "not routinely indicated for a classic clinical URTI",
+    "CRP (if checked)": "mildly elevated / normal (<20 mg/L)",
+    "WBC": "within normal limits"
+  },
+  "imaging": "not indicated",
+  "microbiology": "n/a — viral aetiology (rhinovirus/coronavirus/other respiratory viruses) is clinical; testing not required in a classic self-limiting case",
+  "differentialDiagnoses": [
+    "Viral upper respiratory tract infection (common cold)",
+    "Acute bacterial rhinosinusitis",
+    "Streptococcal pharyngitis",
+    "Allergic rhinitis",
+    "Early influenza / COVID-19"
+  ],
+  "finalDiagnosis": "Viral upper respiratory tract infection (common cold)",
+  "citations": [
+    "Harrison 22e — The Common Cold",
+    "IDSA Acute Bacterial Rhinosinusitis in Children and Adults 2012"
+  ],
+  "stewardship": "not applicable — antibiotics are NOT indicated for viral URTI. Manage symptomatically (analgesia/antipyretics, hydration, saline nasal spray, rest). Antibiotics offer no benefit and drive resistance; reserve only if a bacterial complication (e.g., acute bacterial rhinosinusitis with symptoms >10 days, double-sickening, or high fever with purulent discharge) develops.",
+  "contraindications": [
+    "Avoid unnecessary antibiotics (antimicrobial stewardship)",
+    "Caution with combination cold remedies in patients with hypertension (decongestants) or in young children",
+    "Avoid aspirin in children/adolescents (Reye syndrome risk)"
+  ],
+  "edgeCases": [
+    "Symptoms persisting or worsening beyond 10 days, or a 'double-sickening' pattern, should prompt reassessment for acute bacterial rhinosinusitis",
+    "Abrupt high fever, myalgia and prostration suggest influenza and may warrant antiviral therapy if within the treatment window",
+    "In immunocompromised or infants, a low threshold for reassessment is warranted"
+  ],
+  "expectedMaiK": "This is a classic self-limiting viral upper respiratory tract infection; supportive care alone is appropriate and antibiotics are not indicated. Advise the patient on expected 7-10 day course and red-flag symptoms (persistent high fever, worsening after initial improvement, dyspnoea, or symptoms beyond 10 days) that would warrant review.",
+  "expectedNextQuestions": [
+    "How many days have symptoms lasted, and are they improving or worsening after an initial peak (double-sickening)?",
+    "Any unilateral facial pain/pressure, purulent nasal discharge, or high fever suggesting bacterial rhinosinusitis?",
+    "Any breathlessness, pleuritic chest pain or productive purulent sputum suggesting lower respiratory tract involvement?"
+  ],
+  "expectedInvestigations": [
+    "None routinely — clinical diagnosis",
+    "Consider respiratory viral PCR (influenza/COVID-19) only if it would change management (antiviral eligibility, isolation)"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "coryza": true,
+    "nasalCongestion": true,
+    "soreThroat": true,
+    "coughRadio": true,
+    "fever": true,
+    "myalgiaArthralgia": true,
+    "subacuteOnset": true,
+    "clinicallyImproving": true
+  },
+  "expected": {
+    "diagnosis": "URTI",
+    "acceptableIds": [
+      "URTI"
+    ],
+    "differentialIds": [
+      "SINUSITIS",
+      "PHARYNGITIS",
+      "ACUTE_BRONCHITIS"
+    ],
+    "investigations": [
+      "None routinely indicated — clinical diagnosis",
+      "Respiratory viral PCR only if it alters management"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include URTI",
+    "stewardship tier must be null / no antibiotics recommended (viral, self-limiting)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

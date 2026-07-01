@@ -1,0 +1,106 @@
+{
+  "id": "gc_167",
+  "specialty": "Neuro-oncology",
+  "condition": "Brain tumour / mass lesion",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "6 weeks of progressively worsening headache with a new focal seizure and left-sided weakness",
+  "history": "58-year-old right-handed man with a 6-week history of a dull, holocranial headache that is worse in the early morning and on coughing/bending, occasionally waking him from sleep and now associated with intermittent nausea. Over the past 2 weeks his wife has noticed subtle personality change and word-finding difficulty. He had a first-ever witnessed generalised tonic-clonic seizure yesterday, preceded by twitching of the left hand. Progressive weakness of the left arm and leg over 10 days. No fever, neck stiffness, head trauma, or recent infection. Ex-smoker (30 pack-years). No known malignancy but has not had routine screening. No anticoagulants. No recent travel.",
+  "examination": "Alert, orientated but slowed responses and mild expressive difficulty. No fever, no meningism, no rash. Fundoscopy: bilateral papilloedema. Cranial nerves intact except a subtle left facial droop (upper motor neurone pattern). Left-sided pyramidal weakness (power 4/5 arm and leg), increased tone, brisk reflexes and an upgoing left plantar. Pertinent negatives: no neck stiffness, no photophobia, no petechiae, no lymphadenopathy, no hepatosplenomegaly, no signs of sepsis.",
+  "vitals": {
+    "hr": 62,
+    "bp": "158/92",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "8.2 x10^9/L (normal differential)",
+    "Hb": "13.9 g/dL",
+    "platelets": "265 x10^9/L",
+    "CRP": "4 mg/L",
+    "sodium": "138 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "glucose": "5.4 mmol/L",
+    "corrected calcium": "2.35 mmol/L",
+    "LFTs": "normal"
+  },
+  "imaging": "CT head (non-contrast): ill-defined hypodense right frontoparietal mass with surrounding vasogenic oedema, mass effect and ~6 mm midline shift, effacement of the ipsilateral ventricle. Contrast-enhanced MRI brain: solitary heterogeneously ring-enhancing intra-axial lesion ~4 cm in the right frontal lobe with central necrosis, extensive T2/FLAIR peritumoral oedema crossing into the corpus callosum, restricted diffusion in solid components — appearances most consistent with a high-grade glioma. CT chest/abdomen/pelvis to exclude a primary elsewhere.",
+  "microbiology": "n/a — no infective features; blood cultures not indicated",
+  "differentialDiagnoses": [
+    "High-grade primary brain tumour (glioblastoma)",
+    "Cerebral metastasis",
+    "Cerebral abscess",
+    "Primary CNS lymphoma",
+    "Demyelinating (tumefactive) lesion"
+  ],
+  "finalDiagnosis": "Primary brain tumour (high-grade glioma) — intracranial mass lesion",
+  "citations": [
+    "Harrison 22e — Primary and Metastatic Tumors of the Nervous System",
+    "NCCN Central Nervous System Cancers 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid lumbar puncture in the presence of a mass lesion with midline shift — risk of transtentorial herniation",
+    "Corticosteroids (dexamethasone) reduce vasogenic oedema but should ideally follow tissue sampling if CNS lymphoma is a serious consideration, as steroids can obscure histology",
+    "Caution with enzyme-inducing antiepileptics that interact with future chemotherapy — levetiracetam preferred"
+  ],
+  "edgeCases": [
+    "A solitary ring-enhancing lesion is non-specific — cerebral abscess, metastasis, lymphoma and tumefactive demyelination can mimic high-grade glioma; MR spectroscopy/perfusion and often biopsy are needed",
+    "Immunocompromised patients require exclusion of toxoplasmosis and primary CNS lymphoma",
+    "Subacute personality change plus morning headache and papilloedema should not be dismissed as tension headache or functional illness"
+  ],
+  "expectedMaiK": "Progressive morning headache, new focal seizure, focal deficit and papilloedema point to a space-occupying intracranial lesion with raised intracranial pressure; MRI shows a solitary ring-enhancing intra-axial mass consistent with a high-grade primary brain tumour. Avoid lumbar puncture, start dexamethasone for oedema, and refer urgently to neurosurgery/neuro-oncology for staging imaging and tissue diagnosis.",
+  "expectedNextQuestions": [
+    "Any prior or current malignancy, or systemic B-symptoms suggesting a primary elsewhere (to weigh metastasis)?",
+    "Immunocompromise (HIV, transplant, steroids) that would raise abscess, toxoplasmosis or CNS lymphoma?"
+  ],
+  "expectedInvestigations": [
+    "Contrast-enhanced MRI brain with MR spectroscopy/perfusion",
+    "CT chest/abdomen/pelvis to exclude a systemic primary",
+    "Neurosurgical referral for stereotactic biopsy / resection for histology and molecular markers (IDH, MGMT)"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "headache": true,
+    "seizure": true,
+    "focalNeuroDeficit": true,
+    "behavioralChange": true,
+    "papilledema": true,
+    "visualDisturbance": true,
+    "subacuteOnset": true,
+    "nauseaVomiting": true,
+    "ageOver50": true,
+    "singleLesion": true
+  },
+  "expected": {
+    "diagnosis": "brain_tumour",
+    "acceptableIds": [
+      "brain_tumour"
+    ],
+    "differentialIds": [
+      "BRAIN_ABSCESS",
+      "ischemic_stroke",
+      "subdural",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Contrast-enhanced MRI brain",
+      "CT chest/abdomen/pelvis",
+      "Stereotactic brain biopsy for histology/molecular markers"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include brain_tumour",
+    "must NOT recommend empiric antibiotics (non-infective)",
+    "must NOT suggest lumbar puncture given mass effect / midline shift"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

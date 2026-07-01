@@ -1,0 +1,106 @@
+{
+  "id": "gc_108",
+  "specialty": "Genitourinary",
+  "condition": "Catheter-Associated Urinary Tract Infection",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Fever and new suprapubic discomfort in a nursing-home resident with a long-term indwelling urinary catheter",
+  "history": "74-year-old man residing in a nursing home following a disabling stroke 2 years ago, with a chronically indwelling Foley catheter (in situ ~4 weeks, changed monthly for neurogenic bladder). Over the past 24-36 hours carers noted low-grade then rising fever, new rigors, suprapubic discomfort and increasingly cloudy, malodorous catheter drainage. No cough, no diarrhoea, no new skin lesions. PMH: ischaemic stroke with residual left hemiparesis, type 2 diabetes, hypertension. Recent course of oral antibiotics 6 weeks ago for a respiratory infection. No known drug allergies.",
+  "examination": "Alert but mildly lethargic. Suprapubic tenderness on palpation. Catheter draining cloudy, foul-smelling urine. No costovertebral angle tenderness, no flank mass. Chest clear, abdomen soft without peritonism, no cellulitis or pressure-sore over sacrum, calves non-tender. No meningism.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/72",
+    "rr": 20,
+    "temp": 38.6,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "14.8 x10^9/L (neutrophil predominant)",
+    "CRP": "112 mg/L",
+    "creatinine": "1.3 mg/dL (baseline 1.1)",
+    "urea": "8.4 mmol/L",
+    "lactate": "1.6 mmol/L",
+    "urinalysis": "pyuria (WBC >100/hpf), positive leukocyte esterase and nitrites",
+    "HbA1c": "7.8%",
+    "blood glucose": "9.1 mmol/L"
+  },
+  "imaging": "Bedside renal/bladder ultrasound: no hydronephrosis, no obstructing calculus, no perinephric collection or abscess (excludes complicating obstruction); CT not indicated at this stage",
+  "microbiology": "Catheter urine culture sent after catheter exchange; two sets of blood cultures drawn. Preliminary Gram stain: Gram-negative bacilli. Culture pending (Escherichia coli anticipated).",
+  "differentialDiagnoses": [
+    "Catheter-associated urinary tract infection",
+    "Acute pyelonephritis",
+    "Complicated (obstructive) UTI",
+    "Sepsis of other source",
+    "Asymptomatic bacteriuria (excluded by systemic signs)"
+  ],
+  "finalDiagnosis": "Catheter-associated urinary tract infection (CA-UTI)",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA Catheter-Associated Urinary Tract Infection in Adults 2009"
+  ],
+  "stewardship": "Empiric ceftriaxone 1-2 g IV once daily after catheter exchange and urine/blood cultures, targeting likely E. coli/Enterobacterales; de-escalate on susceptibilities and switch to oral (e.g., co-trimoxazole or a fluoroquinolone if susceptible). Total 7 days for prompt responders. Remove or, if still required, replace the catheter — source control is essential.",
+  "contraindications": [
+    "Beta-lactam allergy (avoid ceftriaxone; consider aztreonam or a fluoroquinolone)",
+    "Fluoroquinolones cautioned in the elderly (tendinopathy, QT, delirium, C. difficile risk)",
+    "Dose-adjust renally cleared agents if creatinine clearance falls; avoid nitrofurantoin (does not treat systemic/upper-tract involvement and needs adequate renal function)"
+  ],
+  "edgeCases": [
+    "Asymptomatic bacteriuria is common with chronic catheters and must NOT be treated unless systemic signs are present (this patient has fever/rigors, so treatment is warranted)",
+    "Localising urinary symptoms are often absent in catheterised or spinal-injury patients; fever, rigors or new confusion may be the only clue",
+    "Persistent fever after appropriate therapy should prompt imaging for obstruction, perinephric or prostatic abscess and reassessment for candiduria or resistant organisms"
+  ],
+  "expectedMaiK": "Fever, rigors and pyuria in a patient with a chronic indwelling catheter, no obstruction on ultrasound and no alternative source point to catheter-associated UTI; catheter exchange/removal plus culture-guided empiric ceftriaxone is appropriate, and asymptomatic bacteriuria should not be treated.",
+  "expectedNextQuestions": [
+    "How long has the catheter been in situ and when was it last changed?",
+    "Any flank pain, rigors or new confusion suggesting upper-tract or systemic involvement?",
+    "Prior urine culture results or history of resistant (ESBL) organisms?"
+  ],
+  "expectedInvestigations": [
+    "Urine culture and sensitivity from a freshly changed catheter",
+    "Two sets of blood cultures",
+    "Renal tract ultrasound to exclude obstruction/abscess"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "indwellingCatheter": true,
+    "longTermCatheter": true,
+    "feverGU": true,
+    "nursingHomeResident": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "CA_UTI",
+    "acceptableIds": [
+      "CA_UTI"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Urine culture and sensitivity",
+      "Blood cultures",
+      "Renal tract ultrasound"
+    ],
+    "stewardship": {
+      "tier": "targeted-empiric",
+      "antibiotics": [
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CA_UTI",
+    "stewardship must recommend catheter removal/exchange as source control alongside empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

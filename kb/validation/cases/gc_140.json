@@ -1,0 +1,105 @@
+{
+  "id": "gc_140",
+  "specialty": "Systemic",
+  "condition": "Pyrexia of Unknown Origin (classic)",
+  "age": 42,
+  "sex": "F",
+  "presentingComplaint": "Documented fever for over 4 weeks with no localising source despite outpatient workup",
+  "history": "Previously well 42-year-old teacher with 4+ weeks of daily fever peaking at 38.8-39.4C, associated with drenching night sweats, fatigue and ~4 kg unintentional weight loss. No dominant cough, dysuria, diarrhoea, headache, joint swelling or localising pain. Two courses of empirical outpatient antibiotics produced no response. No recent travel outside India, no known TB contact, no IV drug use, no prosthetic material. Immunocompetent (HIV negative), not on immunosuppressants. Fever has persisted despite two documented outpatient visits and initial investigations, meeting the classic PUO definition (fever >38.3C, duration >3 weeks, undiagnosed after appropriate initial evaluation).",
+  "examination": "Ill-appearing but not toxic. No neck stiffness, no meningism. Chest clear, no crepitations. Cardiovascular exam normal with no murmur. Mild non-tender hepatosplenomegaly. No focal lymphadenopathy, no rash, no eschar, no joint swelling, no calf tenderness. Fundi normal. No costovertebral or abdominal tenderness. Pertinent negatives: no new murmur, no petechiae, no focal neurological deficit.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/74",
+    "rr": 18,
+    "temp": 39.1,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "10.9 g/dL (normocytic)",
+    "wbc": "8.2 x10^3/uL",
+    "platelets": "340 x10^3/uL",
+    "ESR": "78 mm/hr",
+    "CRP": "96 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "ALT": "44 U/L",
+    "ALP": "182 U/L",
+    "bilirubin": "0.9 mg/dL",
+    "ferritin": "620 ng/mL",
+    "LDH": "310 U/L",
+    "HIV serology": "negative",
+    "ANA": "negative"
+  },
+  "imaging": "CXR normal. Abdominal ultrasound: mild hepatosplenomegaly, no abscess, no lymphadenopathy. CECT chest/abdomen/pelvis: no occult abscess, mild splenomegaly, borderline retroperitoneal nodes only.",
+  "microbiology": "Three sets of blood cultures (off antibiotics) sterile at 5 days; urine culture sterile; malaria smear/RDT negative; Widal/typhidot non-diagnostic. Mantoux pending; further cultures and serologies in progress.",
+  "differentialDiagnoses": [
+    "Disseminated / extrapulmonary tuberculosis",
+    "Occult abscess or infective endocarditis (culture-negative)",
+    "Lymphoma / occult malignancy",
+    "Adult-onset Still disease / connective tissue disease"
+  ],
+  "finalDiagnosis": "Classic pyrexia of unknown origin (undiagnosed after appropriate initial evaluation)",
+  "citations": [
+    "Harrison 22e — Fever of Unknown Origin",
+    "IDSA/Durack-Street Classic Fever of Unknown Origin definition and evaluation 1991/2022"
+  ],
+  "stewardship": "No empirical antimicrobials in a stable, non-neutropenic classic PUO patient. Avoid blind antibiotics: they obscure culture yield and rarely alter outcome. Withhold therapy pending a directed diagnostic workup; reserve empiric anti-TB or antibiotics only if the patient decompensates or a specific pathogen is identified.",
+  "contraindications": [
+    "Avoid empirical broad-spectrum antibiotics/antipyretic masking before cultures and diagnostic sampling are complete",
+    "No documented drug allergy; standard renal function so no dose caveat currently"
+  ],
+  "edgeCases": [
+    "Neutropenic or HIV-associated PUO is a distinct category requiring urgent empirical cover, unlike classic PUO",
+    "Temporal arteritis is a commonly missed treatable cause of PUO in patients >50; adult-onset Still disease is a classic non-infective mimic"
+  ],
+  "expectedMaiK": "This is classic PUO: a stable, immunocompetent patient with >3 weeks of documented fever that remains undiagnosed after appropriate initial evaluation. Resist blind empirical antibiotics in a haemodynamically stable patient and pursue a staged, clue-directed workup for the big three categories: infection (especially TB, occult abscess, endocarditis), malignancy (lymphoma), and non-infective inflammatory disease.",
+  "expectedNextQuestions": [
+    "Detailed exposure and travel history plus any TB contact or constitutional B-symptoms?",
+    "Any localising clues on repeat history/exam (rash, arthralgia, headache, jaw claudication)?"
+  ],
+  "expectedInvestigations": [
+    "Repeat blood cultures off antibiotics plus HIV, and targeted TB workup (sputum/tissue for AFB, GeneXpert)",
+    "CT chest/abdomen/pelvis and FDG-PET/CT to localise occult focus; consider echocardiography, autoimmune serologies, and biopsy of any identified lesion or bone marrow"
+  ],
+  "expectedConfidence": 62,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "prolongedFeverUnexplained": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "hepatosplenomegaly": true,
+    "subacuteOnset": true,
+    "priorAntibiotics": true
+  },
+  "expected": {
+    "diagnosis": "PUO",
+    "acceptableIds": [
+      "PUO"
+    ],
+    "differentialIds": [
+      "DISSEMINATED_TB",
+      "IE",
+      "malignancy_b",
+      "temporal_arteritis"
+    ],
+    "investigations": [
+      "Repeat blood cultures off antibiotics",
+      "TB workup (AFB / GeneXpert)",
+      "CT chest/abdomen/pelvis or FDG-PET/CT",
+      "Echocardiography and autoimmune serologies"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include PUO",
+    "must NOT recommend empirical broad-spectrum antibiotics in a stable non-neutropenic patient",
+    "differential must include DISSEMINATED_TB"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

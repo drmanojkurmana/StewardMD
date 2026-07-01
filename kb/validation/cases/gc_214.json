@@ -1,0 +1,104 @@
+{
+  "id": "gc_214",
+  "specialty": "Cardiology",
+  "condition": "Acute pericarditis",
+  "age": 32,
+  "sex": "M",
+  "presentingComplaint": "Sharp central chest pain for 2 days, worse lying flat and on deep inspiration",
+  "history": "Previously well 32-year-old man with a preceding coryzal/viral upper respiratory illness about 10 days ago. Two days of sharp, retrosternal, pleuritic chest pain radiating to the left trapezius ridge; markedly worse when supine and on inspiration, eased by sitting forward. No exertional relationship, no orthopnoea, no leg swelling. No prior cardiac history, no diabetes or hypertension, non-smoker, no injection drug use. No recent travel, no TB contact, no autoimmune symptoms.",
+  "examination": "Comfortable when sitting forward, distressed when supine. A superficial, triphasic scratchy pericardial friction rub best heard at the left lower sternal border with the patient leaning forward. Heart sounds otherwise normal, no murmur or gallop. No raised JVP, no pulsus paradoxus, clear lung fields, no peripheral oedema. No focal chest wall tenderness reproducing the pain.",
+  "vitals": {
+    "hr": 96,
+    "bp": "124/76",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 98
+  },
+  "labs": {
+    "Troponin I": "normal (<0.02 ng/mL)",
+    "CRP": "42 mg/L (elevated)",
+    "ESR": "38 mm/hr",
+    "WBC": "9.8 x10^3/uL",
+    "Creatinine": "0.9 mg/dL",
+    "TSH": "normal"
+  },
+  "imaging": "Chest X-ray: normal cardiac silhouette, clear lungs, no effusion. Transthoracic echocardiogram: normal LV function, no or only trivial pericardial effusion, no tamponade physiology.",
+  "microbiology": "n/a — viral aetiology presumed; blood cultures not indicated in afebrile stable case",
+  "differentialDiagnoses": [
+    "Acute pericarditis",
+    "Acute coronary syndrome / myocarditis",
+    "Pulmonary embolism",
+    "Pneumothorax",
+    "GERD / musculoskeletal chest pain"
+  ],
+  "finalDiagnosis": "Acute (viral/idiopathic) pericarditis",
+  "citations": [
+    "Harrison 22e — Pericardial Disease",
+    "ESC Guidelines on Diagnosis and Management of Pericardial Diseases 2015"
+  ],
+  "stewardship": "not applicable — non-infective (viral/idiopathic). First-line therapy is high-dose NSAID (e.g. ibuprofen or aspirin) with gastroprotection PLUS colchicine for 3 months to reduce recurrence; no antibiotics indicated.",
+  "contraindications": [
+    "Avoid NSAIDs in significant renal impairment, active peptic ulcer / GI bleeding, or late pregnancy",
+    "Colchicine dose reduction / caution in renal or hepatic impairment and with CYP3A4/P-gp inhibitors",
+    "Avoid corticosteroids as first-line (increase recurrence risk) unless NSAID/colchicine contraindicated"
+  ],
+  "edgeCases": [
+    "Concurrent troponin rise indicates myopericarditis and warrants exercise restriction and cardiology review",
+    "Development of pulsus paradoxus, raised JVP and hypotension signals evolving cardiac tamponade requiring urgent echo and pericardiocentesis",
+    "Do not miss STEMI: pericarditis ECG shows diffuse concave ST elevation with PR depression, not territorial changes with reciprocal depression"
+  ],
+  "expectedMaiK": "Classic viral/idiopathic acute pericarditis: pleuritic positional chest pain, pericardial friction rub, diffuse ST elevation with PR depression and raised inflammatory markers with normal troponin. Manage with NSAID plus colchicine; watch for troponin elevation (myopericarditis) or effusion progressing to tamponade.",
+  "expectedNextQuestions": [
+    "Does the pain change with posture (better sitting forward, worse lying flat)?",
+    "Was there a preceding viral illness in the last 1-2 weeks?",
+    "Any features of tamponade — breathlessness, dizziness, syncope?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (diffuse concave ST elevation, PR depression)",
+    "Troponin",
+    "CRP/ESR",
+    "Transthoracic echocardiogram"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "pleuriticPain": true,
+    "coryza": true,
+    "fever": true,
+    "tachycardia": true,
+    "subacuteOnset": true,
+    "ecgIschemia": true
+  },
+  "expected": {
+    "diagnosis": "pericarditis",
+    "acceptableIds": [
+      "pericarditis"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "pneumothorax",
+      "gerd_chest"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Troponin",
+      "CRP/ESR",
+      "Transthoracic echocardiogram"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pericarditis",
+    "stewardship tier must be null (non-infective)",
+    "acs and pe appear in differential"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

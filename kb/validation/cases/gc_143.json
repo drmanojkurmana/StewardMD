@@ -1,0 +1,108 @@
+{
+  "id": "gc_143",
+  "specialty": "Hepatobiliary / GI",
+  "condition": "Spontaneous Bacterial Peritonitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Known cirrhotic with 3 days of low-grade fever, worsening abdominal distension and diffuse abdominal discomfort.",
+  "history": "Alcohol-related cirrhosis (Child-Pugh B) with recurrent ascites managed on diuretics; two prior large-volume paracenteses. Over 3 days he has developed low-grade fever, increasing abdominal girth, mild diffuse abdominal pain and reduced appetite. Family note he has become slightly drowsy and muddled today. No haematemesis or melena. No recent antibiotics or hospitalisation. No prior SBP episode.",
+  "examination": "Ill-appearing, mildly icteric. Tense ascites with diffuse mild tenderness and reduced bowel sounds; no localised guarding or rigidity. Grade 1-2 asterixis and inattention. Spider naevi, palmar erythema. No cellulitis or focal source. Chest clear; no CVA tenderness or dysuria.",
+  "vitals": {
+    "hr": 104,
+    "bp": "102/64",
+    "rr": 20,
+    "temp": 38.1,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "13.8 x10^9/L (neutrophilia)",
+    "ascitic PMN": "640 cells/mm3 (>250 diagnostic)",
+    "ascitic fluid culture": "sent (single organism expected)",
+    "SAAG": "1.6 g/dL (high, portal hypertensive)",
+    "creatinine": "1.4 mg/dL",
+    "bilirubin": "3.2 mg/dL",
+    "albumin": "2.4 g/dL",
+    "INR": "1.6",
+    "platelets": "88 x10^3/uL",
+    "CRP": "elevated",
+    "sodium": "129 mmol/L"
+  },
+  "imaging": "Abdominal ultrasound: coarse cirrhotic liver, splenomegaly, moderate-to-large ascites, patent portal vein; no bowel perforation, abscess or biliary obstruction (helps exclude secondary peritonitis).",
+  "microbiology": "Ascitic fluid inoculated into blood-culture bottles at bedside; Gram-negative bacilli / E. coli commonly isolated. Blood cultures x2 sent.",
+  "differentialDiagnoses": [
+    "Spontaneous bacterial peritonitis",
+    "Secondary bacterial peritonitis (perforation/abscess)",
+    "Decompensated cirrhosis with intercurrent sepsis",
+    "Hepatic encephalopathy from another precipitant"
+  ],
+  "finalDiagnosis": "Spontaneous bacterial peritonitis",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications (Ascites and SBP)",
+    "AASLD Management of Ascites and SBP in Cirrhosis 2021"
+  ],
+  "stewardship": "Empiric third-generation cephalosporin (IV cefotaxime 2 g q8h, or ceftriaxone 2 g daily) started immediately on ascitic PMN >=250/mm3, before culture results. Add IV albumin 1.5 g/kg day 1 and 1 g/kg day 3 to reduce hepatorenal syndrome and mortality. Escalate to piperacillin-tazobactam or a carbapenem if nosocomial/recent beta-lactam exposure or local ESBL prevalence.",
+  "contraindications": [
+    "Nephrotoxins/aminoglycosides best avoided given renal impairment and HRS risk",
+    "Dose-adjust for renal function; monitor creatinine",
+    "Avoid NSAIDs and non-selective beta-blocker uptitration during acute SBP/hypotension"
+  ],
+  "edgeCases": [
+    "Culture-negative neutrocytic ascites (PMN >=250 but sterile culture) — treat as SBP",
+    "Bacterascites (positive culture, PMN <250) — treat if symptomatic",
+    "Polymicrobial growth, PMN very high, or failure to respond should trigger search for SECONDARY peritonitis (perforation) with CT and surgical review"
+  ],
+  "expectedMaiK": "In a cirrhotic with ascites, fever/abdominal pain/encephalopathy mandates diagnostic paracentesis; an ascitic PMN >=250 cells/mm3 establishes SBP and warrants immediate empiric cefotaxime plus IV albumin. A single organism and high SAAG support primary SBP, while polymicrobial or very high-PMN fluid should prompt exclusion of secondary peritonitis.",
+  "expectedNextQuestions": [
+    "Any recent GI bleed, prior SBP episodes, or antibiotic prophylaxis (norfloxacin/ciprofloxacin)?",
+    "Any localised peritonism or recent instrumentation suggesting a surgical/secondary cause?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic paracentesis with ascitic fluid cell count/differential, culture in blood-culture bottles, total protein and SAAG",
+    "Blood cultures, renal function and lactate before antibiotics"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "liverDisease": true,
+    "ascites": true,
+    "abdominalDistension": true,
+    "abdominalPain": true,
+    "alteredSensorium": true,
+    "asterixis": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "SBP",
+    "acceptableIds": [
+      "SBP"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "hepatic_enceph",
+      "SEPSIS",
+      "CHOLANGITIS"
+    ],
+    "investigations": [
+      "Diagnostic paracentesis with ascitic PMN count and culture",
+      "Blood cultures and renal function"
+    ],
+    "stewardship": {
+      "tier": "empiric",
+      "antibiotics": [
+        "cefotaxime",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include SBP",
+    "ascitic PMN >=250 with high SAAG should not rank secondary peritonitis above SBP without polymicrobial/localising features"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

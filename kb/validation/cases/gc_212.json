@@ -1,0 +1,106 @@
+{
+  "id": "gc_212",
+  "specialty": "Pulmonary / Vascular",
+  "condition": "Pulmonary embolism",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset breathlessness and right-sided pleuritic chest pain since this morning.",
+  "history": "Previously well 58-year-old woman with acute onset dyspnoea and pleuritic right chest pain for 6 hours, associated with a dry cough. Returned 4 days ago from a 10-hour long-haul flight. Three weeks ago had a right knee arthroscopy with reduced mobility since. On combined oral contraceptive pill. Reports mild right calf discomfort and swelling over the last 2 days. No haemoptysis, no fever. No prior VTE. Ex-smoker (15 pack-years).",
+  "examination": "Comfortable at rest but tachypnoeic on minimal exertion. Chest clear on auscultation with no focal crepitations or consolidation. Right calf is mildly swollen with tenderness over the deep veins and a positive measurement asymmetry (>3 cm vs left). Loud P2 audible. No signs of overt right heart failure, JVP not grossly elevated. Afebrile. No leg cellulitis or erythema.",
+  "vitals": {
+    "hr": 108,
+    "bp": "122/78",
+    "rr": 24,
+    "temp": 37.1,
+    "spo2": 91
+  },
+  "labs": {
+    "D-dimer": "3200 ng/mL (markedly elevated, age-adjusted cutoff 580)",
+    "Troponin": "mildly elevated 22 ng/L",
+    "BNP": "180 pg/mL",
+    "ABG": "pO2 8.9 kPa, pCO2 4.0 kPa (mild hypoxaemia with respiratory alkalosis)",
+    "Creatinine": "0.9 mg/dL",
+    "Hemoglobin": "13.4 g/dL",
+    "WCC": "8.2 x10^9/L (normal)",
+    "CRP": "12 mg/L"
+  },
+  "imaging": "CT pulmonary angiogram: filling defects in the right lower lobe segmental and subsegmental pulmonary arteries; no RV:LV ratio >1.0, no evidence of right heart strain. CXR clear (no consolidation, no effusion). ECG: sinus tachycardia; classic S1Q3T3 pattern present. Compression ultrasound right leg confirms popliteal DVT.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Pulmonary embolism",
+    "Community-acquired pneumonia",
+    "Acute coronary syndrome",
+    "Pneumothorax",
+    "Musculoskeletal chest pain / pleurisy"
+  ],
+  "finalDiagnosis": "Acute pulmonary embolism (intermediate-low risk / haemodynamically stable), provoked by recent surgery, immobility, long-haul travel and combined oral contraceptive use.",
+  "citations": [
+    "Harrison 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism",
+    "ESC Acute Pulmonary Embolism 2019"
+  ],
+  "stewardship": "not applicable — non-infective. No antibiotics indicated; management is therapeutic anticoagulation.",
+  "contraindications": [
+    "Assess bleeding risk before anticoagulation; recent surgery raises haemorrhage concern",
+    "DOACs require dose adjustment / caution in significant renal impairment (check CrCl)",
+    "Avoid CTPA contrast if severe contrast allergy or AKI — consider V/Q scan"
+  ],
+  "edgeCases": [
+    "Haemodynamically unstable (massive) PE with hypotension warrants systemic thrombolysis rather than anticoagulation alone",
+    "A normal D-dimer with low Wells score can safely exclude PE without imaging (PERC/age-adjusted D-dimer), avoiding unnecessary CTPA",
+    "PE can present with syncope or isolated tachycardia and a clear chest, mimicking other causes"
+  ],
+  "expectedMaiK": "This is a classic provoked pulmonary embolism: sudden pleuritic dyspnoea with hypoxia, tachycardia, an ipsilateral DVT and multiple VTE risk factors (recent surgery, immobility, long-haul flight, oestrogen). Risk-stratify (haemodynamically stable = not high-risk) and start therapeutic anticoagulation promptly while confirming with CTPA.",
+  "expectedNextQuestions": [
+    "Any haemodynamic instability, syncope or hypotension suggesting high-risk (massive) PE?",
+    "Any bleeding risk factors or contraindications to anticoagulation (recent surgery, active bleeding)?",
+    "Is there unilateral leg swelling/pain suggesting a source DVT?"
+  ],
+  "expectedInvestigations": [
+    "CT pulmonary angiogram (confirmatory)",
+    "Age-adjusted D-dimer with Wells score risk stratification",
+    "ECG and troponin/BNP for right heart strain assessment",
+    "Compression ultrasound of the leg"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "coughRadio": true,
+    "chestPain": true
+  },
+  "expected": {
+    "diagnosis": "pe",
+    "acceptableIds": [
+      "pe"
+    ],
+    "differentialIds": [
+      "CAP",
+      "acs",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "CT pulmonary angiogram",
+      "D-dimer",
+      "compression ultrasound leg",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pe",
+    "stewardship tier must be null (non-infective)",
+    "differential must not label this as an infective pneumonia as the primary diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "gc_201",
+  "specialty": "Neuro / Metabolic",
+  "condition": "Metabolic encephalopathy",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Progressive confusion and drowsiness over 3 days",
+  "history": "3-day history of fluctuating confusion, disorientation and increasing daytime somnolence noted by family. No headache, no focal weakness, no seizure witnessed. No trauma. Reduced oral intake and reduced urine output for 2 days. Background of type 2 diabetes, hypertension and chronic kidney disease (baseline creatinine ~1.8 mg/dL). Recently started on an NSAID for knee pain and takes an ACE inhibitor and metformin. No fever, cough or dysuria. No alcohol excess. No recent overdose or new sedatives.",
+  "examination": "Drowsy but rousable to voice, disoriented to time and place, GCS 13 (E3 V4 M6). Asterixis (bilateral flapping tremor) present. No neck stiffness, no photophobia. No focal neurological deficit; pupils equal and reactive; plantars flexor. No papilloedema. Mildly dehydrated mucous membranes. Chest clear, abdomen soft, no organomegaly, no ascites, no stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/86",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "creatinine": "4.9 mg/dL",
+    "urea": "38 mmol/L",
+    "eGFR": "12 mL/min/1.73m2",
+    "sodium": "129 mmol/L",
+    "potassium": "5.8 mmol/L",
+    "bicarbonate": "16 mmol/L",
+    "glucose": "128 mg/dL",
+    "calcium": "9.1 mg/dL",
+    "ammonia": "42 umol/L (normal)",
+    "TSH": "2.1 mIU/L (normal)",
+    "WCC": "8.2 x10^9/L",
+    "CRP": "6 mg/L",
+    "ABG": "pH 7.30, HCO3 16, high anion gap"
+  },
+  "imaging": "CT head non-contrast: age-related atrophy, no acute intracranial haemorrhage, infarct or mass; no midline shift",
+  "microbiology": "n/a (blood and urine cultures sent to exclude occult sepsis — no growth)",
+  "differentialDiagnoses": [
+    "Uraemic (metabolic) encephalopathy on acute-on-chronic kidney injury",
+    "Hepatic encephalopathy",
+    "Occult sepsis / septic encephalopathy",
+    "Structural intracranial lesion (stroke / subdural)",
+    "Drug toxicity / sedative effect"
+  ],
+  "finalDiagnosis": "Metabolic (uraemic) encephalopathy secondary to acute-on-chronic kidney injury (NSAID + ACE-inhibitor precipitated)",
+  "citations": [
+    "Harrison 22e — Confusion and Delirium; Acute Kidney Injury / Uremia",
+    "AAN / EFNS Diagnosis of Encephalopathy (metabolic-toxic) 2013"
+  ],
+  "stewardship": "not applicable — non-infective (no evidence of infection; cultures negative, afebrile, normal inflammatory markers)",
+  "contraindications": [
+    "Avoid further nephrotoxins — stop NSAID and hold ACE inhibitor",
+    "Hold metformin (renal impairment, lactic acidosis risk)",
+    "Avoid sedatives/benzodiazepines that worsen encephalopathy and accumulate in renal failure"
+  ],
+  "edgeCases": [
+    "Diffuse metabolic disturbance can mimic stroke but lacks a single vascular territory deficit — asterixis and preserved pupillary reflexes favour metabolic cause",
+    "Multiple concurrent metabolic derangements (uraemia + hyponatraemia + acidosis) may coexist; correct cautiously to avoid osmotic demyelination",
+    "Non-convulsive status epilepticus can masquerade as metabolic encephalopathy — EEG if no improvement with metabolic correction"
+  ],
+  "expectedMaiK": "Diffuse encephalopathy with asterixis, no focal deficit and a normal CT in the setting of severe acute-on-chronic renal failure points to a metabolic (uraemic) cause; identify and remove the precipitant (nephrotoxins), correct reversible derangements, and consider dialysis for refractory uraemic encephalopathy.",
+  "expectedNextQuestions": [
+    "Full medication and over-the-counter/nephrotoxin history and any recent dose changes?",
+    "Baseline renal function and urine output trend, plus any alcohol or overdose exposure?"
+  ],
+  "expectedInvestigations": [
+    "Electrolytes/renal panel, ABG with anion gap, calcium, magnesium, phosphate",
+    "Serum ammonia, glucose, TSH and toxicology/drug levels; EEG if no improvement after metabolic correction"
+  ],
+  "expectedConfidence": 72,
+  "findings": {
+    "alteredSensorium": true,
+    "asterixis": true,
+    "subacuteOnset": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "dehydration": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "ketonemia": true,
+    "afebrile": true
+  },
+  "expected": {
+    "diagnosis": "metabolic_enceph",
+    "acceptableIds": [
+      "metabolic_enceph"
+    ],
+    "differentialIds": [
+      "hepatic_enceph",
+      "aki",
+      "ischemic_stroke",
+      "hyponatremia"
+    ],
+    "investigations": [
+      "Renal panel and electrolytes",
+      "ABG with anion gap",
+      "Serum ammonia and TSH",
+      "CT head to exclude structural cause",
+      "EEG if no improvement after metabolic correction"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include metabolic_enceph",
+    "expected.stewardship.tier is null (non-infective)",
+    "no focal neurological deficit and normal CT should down-rank ischemic_stroke below metabolic_enceph"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

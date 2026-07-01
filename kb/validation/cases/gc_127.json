@@ -1,0 +1,100 @@
+{
+  "id": "gc_127",
+  "specialty": "Gastrointestinal",
+  "condition": "Acute Gastroenteritis (acute infectious diarrhoea)",
+  "age": 27,
+  "sex": "M",
+  "presentingComplaint": "Two days of watery diarrhoea, vomiting and crampy abdominal pain after eating at a roadside stall.",
+  "history": "Previously well 27-year-old man with 2 days of frequent (8-10/day) large-volume watery, non-bloody stools, associated nausea, several episodes of non-bilious vomiting and diffuse crampy peri-umbilical abdominal pain. Symptoms began ~18h after eating rice and chicken from a roadside vendor; a colleague who shared the meal has similar symptoms. Low-grade fever. Reduced oral intake with thirst and reduced urine output. No recent travel abroad, no recent antibiotics or hospitalisation, no bloody stool or tenesmus. No significant PMH; not immunocompromised.",
+  "examination": "Alert, mildly unwell, dry mucous membranes and reduced skin turgor consistent with mild-to-moderate volume depletion. Abdomen soft with mild diffuse tenderness and active bowel sounds; no guarding, rigidity or rebound. No jaundice, no organomegaly. Pertinent negatives: no bloody stool, no severe localised abdominal pain, no peritonism, no focal neurology, no rash.",
+  "vitals": {
+    "hr": 102,
+    "bp": "112/72",
+    "rr": 18,
+    "temp": 37.8,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "15.1 g/dL",
+    "wbc": "9.8 x10^3/uL",
+    "platelets": "245 x10^3/uL",
+    "sodium": "138 mmol/L",
+    "potassium": "3.4 mmol/L",
+    "urea": "7.8 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "bicarbonate": "20 mmol/L",
+    "crp": "22 mg/L",
+    "lactate": "1.4 mmol/L"
+  },
+  "imaging": "Not indicated for uncomplicated acute gastroenteritis; erect abdominal film/CT reserved for suspected obstruction, perforation or toxic megacolon.",
+  "microbiology": "Stool studies not routinely required in acute watery non-inflammatory diarrhoea in an immunocompetent host; if sent, no faecal leucocytes and multiplex panel likely viral (norovirus) or self-limited bacterial. Stool culture reserved for bloody diarrhoea, severe illness or public-health indication.",
+  "differentialDiagnoses": [
+    "Viral/bacterial acute gastroenteritis (food-borne)",
+    "Invasive bacterial dysentery",
+    "Enteric fever",
+    "Clostridioides difficile infection",
+    "Inflammatory bowel disease flare"
+  ],
+  "finalDiagnosis": "Acute infectious gastroenteritis (food-borne, non-inflammatory watery diarrhoea) with mild-to-moderate dehydration",
+  "citations": [
+    "Harrison 22e — Acute Infectious Diarrheal Diseases and Bacterial Food Poisoning",
+    "IDSA Infectious Diarrhea Clinical Practice Guidelines 2017"
+  ],
+  "stewardship": "Not applicable as first-line: acute watery non-inflammatory gastroenteritis in an immunocompetent adult is managed with oral rehydration therapy and supportive care; empiric antibiotics are NOT indicated. Reserve empiric therapy for dysentery, severe/septic illness, immunocompromise or confirmed pathogens requiring treatment.",
+  "contraindications": [
+    "Avoid empiric antibiotics in simple watery diarrhoea (risk of C. difficile, resistance, and HUS if Shiga-toxin E. coli)",
+    "Avoid anti-motility agents (loperamide) if bloody stool or high fever suggesting inflammatory/invasive diarrhoea",
+    "Correct hypokalaemia; monitor renal function before nephrotoxic drugs"
+  ],
+  "edgeCases": [
+    "Progression to bloody stool, high fever or tenesmus should reclassify as invasive dysentery and prompt stool culture plus targeted therapy",
+    "Persistent watery diarrhoea >14 days or immunocompromise warrants parasitology (Giardia, Cryptosporidium) and broader workup"
+  ],
+  "expectedMaiK": "Classic self-limited food-borne acute gastroenteritis with mild-to-moderate dehydration; prioritise oral rehydration and supportive care, and do not start empiric antibiotics in non-inflammatory watery diarrhoea in an immunocompetent host.",
+  "expectedNextQuestions": [
+    "Is the stool bloody or associated with tenesmus (to detect invasive/dysenteric disease)?",
+    "Any recent travel, antibiotic exposure or immunocompromise that would change management?"
+  ],
+  "expectedInvestigations": [
+    "Bedside assessment of hydration and urine output; U&E/electrolytes",
+    "Stool studies only if bloody, severe, prolonged or public-health indicated"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "diarrhea": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "fever": true,
+    "contaminatedFoodWaterExposure": true,
+    "tachycardia": true,
+    "oralIntakeAdequate": true
+  },
+  "expected": {
+    "diagnosis": "GASTROENTERITIS",
+    "acceptableIds": [
+      "GASTROENTERITIS"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "ENTERIC_FEVER",
+      "C_DIFF"
+    ],
+    "investigations": [
+      "Serum electrolytes and renal function",
+      "Stool culture only if bloody/severe/prolonged diarrhoea"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include GASTROENTERITIS",
+    "no empiric antibiotic recommended (stewardship tier null) for non-inflammatory watery diarrhoea"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

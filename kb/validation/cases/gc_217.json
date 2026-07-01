@@ -1,0 +1,98 @@
+{
+  "id": "gc_217",
+  "specialty": "Rheumatology",
+  "condition": "Polymyalgia rheumatica",
+  "age": 72,
+  "sex": "F",
+  "presentingComplaint": "Six weeks of severe bilateral shoulder and hip girdle pain and stiffness, worst in the mornings.",
+  "history": "72-year-old woman with a 6-week history of aching pain and profound stiffness across both shoulders, upper arms, neck, hips and thighs. Morning stiffness lasts over an hour and she now struggles to rise from a chair, comb her hair or turn over in bed. Onset was relatively abrupt over a few days. She reports low-grade malaise, fatigue and mild unintentional weight loss of about 2 kg, but no true muscle weakness. No headache, jaw claudication, scalp tenderness or visual symptoms. No peripheral small-joint swelling, no rash, no dysuria or cough. PMH: well-controlled hypertension. No recent statin change. Not on steroids. Symptoms markedly interfere with daily function.",
+  "examination": "Alert, comfortable at rest. Painful, restricted active abduction of both shoulders and reduced hip range due to pain; power is normal when pain is overcome (no true proximal weakness). Mild tenderness over shoulder and hip girdles. No synovitis of hands, wrists or knees, no joint swelling or effusion. Temporal arteries non-tender with normal pulses; no scalp tenderness or jaw claudication. No skin rash, no lymphadenopathy, no organomegaly. Neurological exam normal.",
+  "vitals": {
+    "hr": 78,
+    "bp": "138/82",
+    "rr": 16,
+    "temp": 37.1,
+    "spo2": 98
+  },
+  "labs": {
+    "ESR": "68 mm/hr (markedly raised)",
+    "CRP": "42 mg/L (raised)",
+    "Hemoglobin": "11.2 g/dL (mild normocytic anemia)",
+    "WBC": "7.8 x10^9/L (normal)",
+    "Platelets": "410 x10^3/µL (mild reactive thrombocytosis)",
+    "Creatine kinase": "88 U/L (normal)",
+    "TSH": "2.1 mIU/L (normal)",
+    "Calcium": "2.35 mmol/L (normal)",
+    "Creatinine": "0.9 mg/dL (normal)",
+    "Rheumatoid factor": "negative",
+    "Anti-CCP": "negative"
+  },
+  "imaging": "Not required for diagnosis. Shoulder ultrasound (if performed) may show bilateral subacromial-subdeltoid bursitis / biceps tenosynovitis supporting PMR; plain films of shoulders/hips normal or degenerative only.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Polymyalgia rheumatica",
+    "Giant cell (temporal) arteritis",
+    "Elderly-onset seronegative rheumatoid arthritis",
+    "Inflammatory myopathy",
+    "Hypothyroidism-related myalgia"
+  ],
+  "finalDiagnosis": "Polymyalgia rheumatica",
+  "citations": [
+    "Harrison 22e — Polymyalgia Rheumatica and Giant Cell Arteritis",
+    "EULAR/ACR Polymyalgia Rheumatica Classification and Management 2015"
+  ],
+  "stewardship": "Not applicable — non-infective inflammatory condition. Management is low-dose oral glucocorticoid (prednisolone 15 mg daily) with a dramatic response expected within days, then a slow taper; not antibiotics.",
+  "contraindications": [
+    "Screen for and manage steroid risks: osteoporosis prophylaxis (calcium/vitamin D, consider bisphosphonate), glycemic monitoring in diabetes, gastroprotection if needed",
+    "Do not start steroids until GCA excluded clinically if any cranial/visual symptoms present"
+  ],
+  "edgeCases": [
+    "PMR and GCA overlap: up to ~15-20% of PMR patients develop GCA — new headache, jaw claudication, scalp tenderness or visual loss mandates urgent high-dose steroids and temporal artery assessment",
+    "Poor or incomplete response to 15 mg prednisolone within 1 week should prompt reconsideration (e.g., late-onset RA, myositis, malignancy, infection)"
+  ],
+  "expectedMaiK": "Classic polymyalgia rheumatica in a woman over 50 with abrupt bilateral shoulder/hip girdle pain, prolonged morning stiffness and markedly raised inflammatory markers with normal CK. Actively screen for giant cell arteritis (headache, jaw claudication, visual symptoms) before and during steroid treatment, as this changes urgency and dosing.",
+  "expectedNextQuestions": [
+    "Any new headache, scalp tenderness, jaw claudication or visual disturbance (to screen for giant cell arteritis)?",
+    "Any true muscle weakness or difficulty swallowing (to exclude inflammatory myopathy)?"
+  ],
+  "expectedInvestigations": [
+    "ESR and CRP",
+    "CK, TSH, FBC and consider RF/anti-CCP to exclude mimics"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "ageOver50": true,
+    "polyarthralgia": true,
+    "myalgiaArthralgia": true,
+    "weightLoss": true,
+    "subacuteOnset": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "pmr",
+    "acceptableIds": [
+      "pmr"
+    ],
+    "differentialIds": [
+      "temporal_arteritis",
+      "rheumatoid",
+      "crystal_arthritis"
+    ],
+    "investigations": [
+      "ESR and CRP",
+      "CK, TSH and rheumatoid serology to exclude mimics"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pmr",
+    "stewardship tier must be null (non-infective condition)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "gc_220",
+  "specialty": "Nephrology / Metabolic",
+  "condition": "Rhabdomyolysis",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Severe muscle pain, weakness and dark 'cola-coloured' urine after prolonged strenuous exertion",
+  "history": "Previously well 24-year-old man, unaccustomed military-style recruit training in hot weather 2 days ago, followed by an intense unaccustomed CrossFit session yesterday. Woke with diffuse severe myalgia (worst in thighs, shoulders, low back), marked weakness and swelling of the thighs. Noted progressively darkening urine and reduced volume over the last 12 hours. Poor oral intake and vomiting once. No fever, no chest pain, no rash. No recent statin/fibrate use, no recreational drugs, no alcohol binge, no seizure, no prolonged immobilisation or crush injury, no family history of muscle disorders or malignant hyperthermia.",
+  "examination": "Alert, in pain. Tender, tense, swollen proximal muscle groups (thighs, calves) with reduced power (4/5) limited by pain; no true focal neurological deficit and reflexes intact. Compartments soft but tender — monitored for compartment syndrome. No rash, no joint effusion, no meningism. Mildly dry mucous membranes. Cardiorespiratory and abdominal exam unremarkable; no CVA tenderness.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/74",
+    "rr": 18,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "Creatine kinase": "48,200 U/L (>5x is diagnostic; markedly elevated)",
+    "Myoglobin (serum)": "elevated",
+    "Urine dipstick": "blood 3+ with few RBCs on microscopy (myoglobinuria)",
+    "Potassium": "5.9 mmol/L",
+    "Phosphate": "2.1 mmol/L (high)",
+    "Calcium": "1.98 mmol/L (corrected, low)",
+    "Creatinine": "1.9 mg/dL",
+    "Urea": "12.4 mmol/L",
+    "Bicarbonate": "18 mmol/L",
+    "Uric acid": "elevated",
+    "AST/ALT": "mildly elevated (muscle source)",
+    "Urine output": "reduced (~0.4 mL/kg/h)"
+  },
+  "imaging": "Not indicated for diagnosis; renal ultrasound normal-sized unobstructed kidneys if AKI workup pursued",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Rhabdomyolysis with pigment-induced AKI",
+    "Acute kidney injury (other cause)",
+    "Acute compartment syndrome",
+    "Inflammatory myopathy",
+    "Haematuria from glomerular/urological cause"
+  ],
+  "finalDiagnosis": "Exertional rhabdomyolysis with early pigment (myoglobinuric) acute kidney injury and hyperkalaemia",
+  "citations": [
+    "Harrison 22e — Rhabdomyolysis and Muscle Disorders / Acute Kidney Injury",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, contrast) given AKI",
+    "Caution with potassium-containing fluids; do not use Lactated Ringer's-based repletion strategies uncritically in hyperkalaemia — Hartmann's contains K+",
+    "Sodium bicarbonate for urinary alkalinisation is contraindicated if hypocalcaemia is symptomatic (risk of precipitating calcium phosphate)"
+  ],
+  "edgeCases": [
+    "Serum myoglobin/urine dipstick can normalise quickly while CK stays high — a negative dip does not exclude rhabdomyolysis",
+    "Watch for acute compartment syndrome (pain out of proportion, tense compartments) requiring urgent fasciotomy",
+    "Delayed hypercalcaemia may occur during recovery as deposited calcium is remobilised",
+    "Recurrent/exertional-out-of-proportion episodes should prompt evaluation for an underlying metabolic myopathy (e.g. McArdle, CPT II)"
+  ],
+  "expectedMaiK": "Classic exertional rhabdomyolysis: CK >5x upper limit with myoglobinuria (dip 'blood' positive, few RBCs) and evolving pigment AKI plus hyperkalaemia. Priority is aggressive early IV crystalloid to maintain brisk urine output, urgent treatment of hyperkalaemia, and monitoring for compartment syndrome.",
+  "expectedNextQuestions": [
+    "Any recent statins/fibrates, recreational drugs, alcohol, or prolonged immobilisation/crush?",
+    "Is the muscle pain/tenseness out of proportion, suggesting compartment syndrome?",
+    "Family or personal history of recurrent muscle breakdown / metabolic myopathy?"
+  ],
+  "expectedInvestigations": [
+    "Serial creatine kinase and renal function",
+    "Electrolytes including potassium, calcium, phosphate",
+    "ECG for hyperkalaemia changes",
+    "Urine dipstick/microscopy for myoglobinuria",
+    "Venous blood gas / bicarbonate"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "myalgiaArthralgia": true,
+    "darkUrine": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "creatinine": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "dehydration": true
+  },
+  "expected": {
+    "diagnosis": "rhabdo",
+    "acceptableIds": [
+      "rhabdo"
+    ],
+    "differentialIds": [
+      "aki",
+      "hyperkalemia",
+      "crystal_arthritis"
+    ],
+    "investigations": [
+      "Serial creatine kinase",
+      "Renal function and electrolytes",
+      "ECG",
+      "Urine dipstick/microscopy for myoglobinuria"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include rhabdo",
+    "expected.stewardship.tier is null (non-infective)",
+    "markedly elevated CK with myoglobinuria drives the diagnosis over isolated AKI"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

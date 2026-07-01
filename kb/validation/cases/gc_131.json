@@ -1,0 +1,110 @@
+{
+  "id": "gc_131",
+  "specialty": "Hepatobiliary",
+  "condition": "Pyogenic Liver Abscess",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "One week of high fever with rigors and right upper abdominal pain",
+  "history": "7-day history of swinging high-grade fever with shaking chills, dull constant right upper quadrant pain radiating to the right shoulder tip, anorexia and malaise. Poorly controlled type 2 diabetes (last HbA1c 9.1%). No recent travel abroad; resident of an urban Indian city. No prior amoebic dysentery, no bloody diarrhea. Denies weight loss over months, cough or urinary symptoms. Mild nausea, no jaundice noticed by patient.",
+  "examination": "Ill-looking, febrile and diaphoretic. Tender hepatomegaly with point tenderness over the lower right intercostal spaces; positive right intercostal/hepatic punch tenderness. Mild scleral icterus. No neck stiffness, no murmur, chest clear on the left with reduced air entry at the right base. No peripheral stigmata of chronic liver disease, no ascites, no splenomegaly.",
+  "vitals": {
+    "hr": 112,
+    "bp": "108/70",
+    "rr": 22,
+    "temp": 39.4,
+    "spo2": 96
+  },
+  "labs": {
+    "WBC": "18.2 x10^9/L (neutrophilic, left shift)",
+    "CRP": "214 mg/L",
+    "ALP": "310 U/L",
+    "GGT": "198 U/L",
+    "ALT": "68 U/L",
+    "AST": "74 U/L",
+    "Total bilirubin": "2.1 mg/dL",
+    "Albumin": "2.9 g/dL",
+    "Creatinine": "1.1 mg/dL",
+    "Random glucose": "268 mg/dL",
+    "Blood cultures": "sent x2, pending"
+  },
+  "imaging": "USG abdomen: single hypoechoic lesion ~6.5 cm in the right hepatic lobe with internal echoes. Contrast CT abdomen: solitary thick-walled rim-enhancing hypodense collection in segment VII/VIII with surrounding oedema, consistent with a pyogenic liver abscess; no biliary dilatation, gallbladder normal, right basal reactive pleural effusion/atelectasis.",
+  "microbiology": "Blood cultures pending; USG-guided aspiration of pus sent for Gram stain, aerobic/anaerobic culture and amoebic serology (Entamoeba histolytica IgG). Stool for E. histolytica as adjunct.",
+  "differentialDiagnoses": [
+    "Amoebic liver abscess",
+    "Acute cholangitis",
+    "Acute cholecystitis",
+    "Right lower lobe pneumonia / empyema"
+  ],
+  "finalDiagnosis": "Pyogenic liver abscess (diabetic host)",
+  "citations": [
+    "Harrison 22e — Intraabdominal Infections and Abscesses (Liver Abscess)",
+    "IDSA Diagnosis and Management of Complicated Intra-abdominal Infection 2010"
+  ],
+  "stewardship": "Empiric IV ceftriaxone plus metronidazole (broad Gram-negative/enteric + anaerobic and amoebic cover) alongside image-guided percutaneous drainage of the abscess; de-escalate to culture-directed therapy once pus and blood culture results return, total 4-6 weeks with oral step-down.",
+  "contraindications": [
+    "Beta-lactam / cephalosporin allergy (use fluoroquinolone + metronidazole alternative)",
+    "Metronidazole with concurrent alcohol (disulfiram-like reaction)",
+    "Renal impairment: dose-adjust and monitor"
+  ],
+  "edgeCases": [
+    "Klebsiella pneumoniae invasive liver abscess syndrome (hypervirulent K1/K2) in diabetics can seed metastatic endophthalmitis or meningitis — examine eyes and ask about visual symptoms",
+    "Amoebic abscess can be indistinguishable clinically; anchovy-sauce pus and positive serology distinguish it and it responds to metronidazole without routine drainage"
+  ],
+  "expectedMaiK": "Classic solitary right-lobe pyogenic liver abscess in a poorly controlled diabetic: combine image-guided drainage with empiric ceftriaxone + metronidazole and always cover/exclude amoebic aetiology with serology before committing to a purely pyogenic pathway.",
+  "expectedNextQuestions": [
+    "Any recent bloody diarrhoea, dysentery or travel to suggest amoebic origin?",
+    "Any biliary symptoms, prior gallstones or endoscopic procedures?",
+    "Any visual disturbance or new neurological symptoms (metastatic Klebsiella)?"
+  ],
+  "expectedInvestigations": [
+    "USG- or CT-guided diagnostic and therapeutic aspiration with pus culture",
+    "Entamoeba histolytica serology",
+    "Blood cultures before antibiotics"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "hepatosplenomegaly": true,
+    "jaundice": true,
+    "singleLesion": true,
+    "tachycardia": true,
+    "diabetesHx": true,
+    "toxicAppearing": true,
+    "prolongedFever": true
+  },
+  "expected": {
+    "diagnosis": "LIVER_ABSCESS",
+    "acceptableIds": [
+      "LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "AMOEBIC_LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS"
+    ],
+    "investigations": [
+      "Contrast CT abdomen",
+      "Image-guided aspiration with pus culture",
+      "Entamoeba histolytica serology",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum",
+      "antibiotics": [
+        "ceftriaxone",
+        "metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include LIVER_ABSCESS",
+    "differential must include AMOEBIC_LIVER_ABSCESS",
+    "stewardship antibiotics must include metronidazole for anaerobic/amoebic cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

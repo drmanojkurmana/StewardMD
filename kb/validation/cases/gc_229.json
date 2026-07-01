@@ -1,0 +1,102 @@
+{
+  "id": "gc_229",
+  "specialty": "Neurology / Vascular",
+  "condition": "Chronic subdural haematoma",
+  "age": 78,
+  "sex": "M",
+  "presentingComplaint": "Progressive headache, confusion and gait unsteadiness over 3 weeks",
+  "history": "78-year-old man brought by family with a 3-week history of gradually worsening dull global headache, increasing daytime drowsiness, word-finding difficulty and a subtle right-sided weakness noticed as tripping on the right foot. A minor fall backwards from standing height was recalled about 5 weeks ago with no loss of consciousness and no imaging at the time. Background of hypertension and atrial fibrillation for which he takes warfarin (self-reports variable INR monitoring). Independent at baseline; family report a personality change with apathy and fluctuating alertness rather than a sudden deficit.",
+  "examination": "Alert but slow, GCS 14 (E4 V4 M6) with intermittent drowsiness. Mild expressive dysphasia and a subtle right pronator drift with brisk right-sided reflexes. No neck stiffness, no photophobia, no fever. Fundoscopy shows early blurring of disc margins. No external head wound; no petechiae or purpura. Gait unsteady and wide-based.",
+  "vitals": {
+    "hr": 72,
+    "bp": "162/88",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 97
+  },
+  "labs": {
+    "INR": "3.8 (supratherapeutic)",
+    "platelets": "210 x10^3/uL",
+    "hemoglobin": "13.1 g/dL",
+    "creatinine": "1.0 mg/dL",
+    "sodium": "138 mmol/L",
+    "glucose": "6.2 mmol/L",
+    "CRP": "4 mg/L (normal)"
+  },
+  "imaging": "Non-contrast CT head: crescentic extra-axial collection over the left cerebral convexity, of mixed hypo-/iso-density (consistent with chronic-on-acute haematoma), with ~8 mm midline shift and effacement of the left lateral ventricle. No intraparenchymal haemorrhage or SAH.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Chronic subdural haematoma",
+    "Ischaemic stroke",
+    "Intracerebral haemorrhage",
+    "Brain tumour / mass lesion",
+    "Metabolic encephalopathy"
+  ],
+  "finalDiagnosis": "Chronic (chronic-on-acute) subdural haematoma with mass effect, on anticoagulation",
+  "citations": [
+    "Harrison 22e — Concussion and Other Traumatic Brain Injuries / Cerebrovascular Diseases",
+    "Neurocritical Care Society / SCCM Reversal of Antithrombotics in Intracranial Hemorrhage 2016"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Supratherapeutic warfarin/INR — urgent reversal with 4-factor PCC plus IV vitamin K before or alongside neurosurgical intervention",
+    "Avoid resuming anticoagulation until bleeding controlled and neurosurgery consulted",
+    "Caution with sedatives given fluctuating GCS"
+  ],
+  "edgeCases": [
+    "Classic elderly-on-anticoagulant presentation with only trivial or forgotten head trauma",
+    "Fluctuating consciousness and cognitive decline can mimic dementia, delirium or 'stroke-like' TIA — a stroke mimic",
+    "Bilateral chronic SDH may cause minimal midline shift despite large volume, masking severity"
+  ],
+  "expectedMaiK": "In an elderly anticoagulated patient with a subacute, fluctuating headache, confusion and a lateralising deficit after a minor fall, a chronic subdural haematoma is the leading diagnosis — obtain an urgent non-contrast CT head, reverse the coagulopathy promptly, and involve neurosurgery. The supratherapeutic INR is a key driver of bleeding and must be corrected urgently.",
+  "expectedNextQuestions": [
+    "Any history of head trauma or falls, even trivial, in the preceding weeks?",
+    "What anticoagulant/antiplatelet is he on and when was the last dose / most recent INR?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "Coagulation panel / INR and group-and-save"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "headache": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "behavioralChange": true,
+    "ataxia": true,
+    "headInjury": true,
+    "anticoagulated": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "atrialFibHx": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "subdural",
+    "acceptableIds": [
+      "subdural"
+    ],
+    "differentialIds": [
+      "ich",
+      "ischemic_stroke",
+      "brain_tumour",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Urgent non-contrast CT head",
+      "Coagulation panel / INR"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include subdural",
+    "non-infective: stewardship.tier is null"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

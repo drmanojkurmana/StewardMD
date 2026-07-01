@@ -1,0 +1,108 @@
+{
+  "id": "gc_153",
+  "specialty": "Vascular emergency",
+  "condition": "Ruptured abdominal aortic aneurysm",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe central abdominal and back pain with collapse",
+  "history": "74-year-old man, lifelong heavy smoker, brought in after abrupt onset of tearing epigastric and lumbar back pain radiating to the left flank while gardening, followed by a brief syncopal episode. Pain is constant and severe. Background of hypertension, treated hyperlipidaemia and peripheral vascular disease. No prior imaging but GP had noted a 'pulsatile tummy' 2 years ago. No haematemesis, dysuria or trauma.",
+  "examination": "Pale, clammy, cool peripheries and restless. A tender, expansile pulsatile mass is palpable in the epigastrium/periumbilical region with left flank bruising (early Grey-Turner). Peripheral pulses diminished. Abdomen mildly distended, soft elsewhere. No jaundice, no calf tenderness, chest clear, no focal neurology. Pertinent negatives: no urinary symptoms, no radio-femoral delay, no fever.",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/54",
+    "rr": 26,
+    "temp": 36.4,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": "9.1 g/dL",
+    "hematocrit": "28%",
+    "platelets": "180 x10^3/uL",
+    "creatinine": "1.6 mg/dL",
+    "lactate": "4.2 mmol/L",
+    "inr": "1.2",
+    "crossmatch": "urgent 6 units packed cells requested",
+    "troponin": "mildly raised (demand)"
+  },
+  "imaging": "Bedside FAST/USS: infrarenal aortic aneurysm ~7.2 cm with surrounding retroperitoneal fluid. CT aortogram (if haemodynamics permit): 7.2 cm infrarenal AAA with active contrast extravasation and left retroperitoneal haematoma confirming rupture.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Ruptured abdominal aortic aneurysm",
+    "Aortic dissection",
+    "Renal/ureteric colic",
+    "Acute mesenteric ischaemia",
+    "Perforated peptic ulcer"
+  ],
+  "finalDiagnosis": "Ruptured infrarenal abdominal aortic aneurysm",
+  "citations": [
+    "Harrison 22e — Diseases of the Aorta (aortic aneurysm)",
+    "ESVS Management of Abdominal Aorto-iliac Artery Aneurysms 2019"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid aggressive fluid resuscitation — permissive hypotension (target SBP ~70-90 mmHg / palpable radial pulse) until proximal control",
+    "Contrast CT caution with rising creatinine but must not delay definitive imaging/repair",
+    "Anticoagulants/antiplatelets worsen haemorrhage — reverse if present"
+  ],
+  "edgeCases": [
+    "Classic triad (pain + hypotension + pulsatile mass) present in only ~50%; back/flank pain with transient hypotension may mimic renal colic and be missed",
+    "Contained retroperitoneal rupture can present deceptively stable before catastrophic free rupture",
+    "Aortocaval or aortoenteric fistula variant (high-output failure or massive GI bleed)"
+  ],
+  "expectedMaiK": "This is a time-critical vascular catastrophe: a >5.5 cm AAA with hypotension, syncope and a tender pulsatile mass is a ruptured AAA until proven otherwise. Activate the vascular/theatre pathway immediately, use permissive hypotension, and do not delay for extensive workup.",
+  "expectedNextQuestions": [
+    "Is there a known AAA or prior aortic diameter on imaging?",
+    "Any anticoagulant or antiplatelet use?",
+    "Time of symptom onset and haemodynamic trend?"
+  ],
+  "expectedInvestigations": [
+    "Urgent CT aortogram (if haemodynamically stable enough)",
+    "Bedside ultrasound (FAST) for aortic diameter/free fluid",
+    "Group & crossmatch ≥ 6 units with activation of major haemorrhage protocol"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "abdominalPain": true,
+    "backPain": true,
+    "severeAbdominalPain": true,
+    "pulsatileMass": true,
+    "syncope": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "peripheralVascularDisease": true,
+    "lactateElevated": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "aaa",
+    "acceptableIds": [
+      "aaa"
+    ],
+    "differentialIds": [
+      "aortic_dissection",
+      "renal_colic",
+      "mesenteric_ischemia",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "CT aortogram",
+      "bedside ultrasound (aortic diameter / free fluid)",
+      "group and crossmatch / major haemorrhage protocol"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include aaa",
+    "expected.stewardship.tier is null (non-infective)",
+    "differentialIds must not contain aaa"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "id": "gc_154",
+  "specialty": "Cardiology",
+  "condition": "Acute coronary syndrome (NSTEMI)",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Central crushing chest pain radiating to the left arm for the past 90 minutes",
+  "history": "62-year-old man with a 2-hour history of retrosternal pressure-like chest pain radiating to the left arm and jaw, associated with diaphoresis and nausea. Pain began at rest, is not relieved by rest, and is unlike any prior musculoskeletal discomfort. Background of type 2 diabetes, hypertension, dyslipidaemia and a 30 pack-year smoking history. Father had an MI aged 55. No prior known coronary disease.",
+  "examination": "Anxious, diaphoretic and clammy. Heart sounds normal with no murmur; JVP not raised; chest clear to auscultation with no basal crackles; no peripheral oedema. No focal neurological deficit and no reproducible chest wall tenderness on palpation (pertinent negative against musculoskeletal cause).",
+  "vitals": {
+    "hr": 96,
+    "bp": "148/88",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "high-sensitivity troponin T (0h)": "82 ng/L (URL <14)",
+    "high-sensitivity troponin T (1h)": "146 ng/L (rising delta)",
+    "creatinine": "1.0 mg/dL",
+    "hemoglobin": "13.8 g/dL",
+    "random glucose": "184 mg/dL",
+    "potassium": "4.2 mmol/L",
+    "LDL cholesterol": "3.6 mmol/L"
+  },
+  "imaging": "Portable chest X-ray: no pulmonary oedema, normal mediastinal contour (argues against dissection/heart failure). Bedside echo: regional hypokinesia of the inferolateral wall, no pericardial effusion.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Aortic dissection",
+    "Acute pericarditis",
+    "Pulmonary embolism",
+    "GERD / non-cardiac chest pain"
+  ],
+  "finalDiagnosis": "Non-ST-elevation myocardial infarction (acute coronary syndrome)",
+  "citations": [
+    "Harrison 22e — Non-ST-Segment Elevation Acute Coronary Syndrome (NSTE-ACS)",
+    "ESC Acute Coronary Syndromes 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid dual antiplatelet loading if active bleeding or if aortic dissection not yet excluded",
+    "Ticagrelor/clopidogrel caution in high bleeding risk; nitrates contraindicated with recent PDE-5 inhibitor use and in RV infarction"
+  ],
+  "edgeCases": [
+    "Inferior/RV involvement can cause hypotension with preload-dependence — nitrates may precipitate profound hypotension",
+    "Diabetic and elderly patients may present with atypical or 'silent' ischaemia with dyspnoea rather than classic chest pain"
+  ],
+  "expectedMaiK": "The rising high-sensitivity troponin with a compatible ischaemic history and inferolateral regional wall-motion abnormality indicates NSTE-ACS; initiate anti-ischaemic and antithrombotic therapy and risk-stratify (GRACE) for timing of invasive coronary angiography.",
+  "expectedNextQuestions": [
+    "Any recent PDE-5 inhibitor use, active bleeding, or prior stroke before antithrombotic loading?",
+    "Character/onset of pain and response to sublingual nitrate?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (immediate, repeat serially)",
+    "Serial high-sensitivity troponin (0/1h protocol)",
+    "GRACE risk score and coronary angiography"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "exertionalChestPain": true,
+    "chestPain": true,
+    "ecgIschemia": true,
+    "nauseaVomiting": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "dyspnea": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "acs",
+    "acceptableIds": [
+      "acs"
+    ],
+    "differentialIds": [
+      "aortic_dissection",
+      "pericarditis",
+      "pe",
+      "gerd_chest"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "serial high-sensitivity troponin",
+      "coronary angiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include acs",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

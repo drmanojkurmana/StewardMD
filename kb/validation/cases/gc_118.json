@@ -1,0 +1,107 @@
+{
+  "id": "gc_118",
+  "specialty": "Tropical Fever",
+  "condition": "Dengue Fever",
+  "age": 26,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever for 4 days with severe headache, retro-orbital pain and body aches",
+  "history": "Previously healthy young adult from Chennai presenting during the post-monsoon season (July) with abrupt-onset high fever up to 40 C for 4 days, associated with intense frontal and retro-orbital pain, severe generalised myalgia and arthralgia ('breakbone'), anorexia and nausea. Reports a faint blanching rash appearing on day 3. Several neighbours have had similar febrile illness. No cough, dysuria, diarrhoea or altered sensorium. No recent travel outside the city, no jaundice, no bleeding to date. No comorbidities, no regular medications, no NSAID or aspirin use so far.",
+  "examination": "Alert, flushed, mildly dehydrated. Fine blanching maculopapular/erythematous rash over trunk and limbs with islands of sparing. Mild diffuse abdominal tenderness, no hepatomegaly on day 4. Tourniquet test positive (>15 petechiae). No neck stiffness, no focal neurological deficit, chest clear, no organomegaly, no jaundice. Pertinent negatives: no eschar, no lymphadenopathy, no conjunctival suffusion, no purpura, no mucosal bleeding, capillary refill <2s, no postural drop.",
+  "vitals": {
+    "hr": 96,
+    "bp": "112/72",
+    "rr": 18,
+    "temp": 39.6,
+    "spo2": 99
+  },
+  "labs": {
+    "Hemoglobin": "14.8 g/dL",
+    "Hematocrit": "44% (baseline ~42%)",
+    "WBC": "2.9 x10^3/uL (leukopenia)",
+    "Platelets": "88 x10^3/uL",
+    "AST": "112 U/L",
+    "ALT": "94 U/L",
+    "Creatinine": "0.9 mg/dL",
+    "NS1 antigen": "positive",
+    "Dengue IgM": "pending",
+    "Malaria rapid antigen / smear": "negative",
+    "CRP": "18 mg/L (relatively low)"
+  },
+  "imaging": "Not routinely indicated; bedside ultrasound at this stage shows no ascites or pleural effusion and no gallbladder wall oedema (reassuring for absence of plasma leakage)",
+  "microbiology": "NS1 antigen positive; dengue IgM/IgG serology and paired titres pending; blood cultures not indicated",
+  "differentialDiagnoses": [
+    "Dengue fever",
+    "Chikungunya",
+    "Malaria",
+    "Scrub typhus",
+    "Leptospirosis",
+    "Enteric fever"
+  ],
+  "finalDiagnosis": "Dengue fever (probable/confirmed by NS1) - febrile phase, without warning signs",
+  "citations": [
+    "Harrison 22e — Dengue and Dengue Hemorrhagic Fever (Flaviviruses)",
+    "WHO Dengue Guidelines for Diagnosis, Treatment, Prevention and Control 2009"
+  ],
+  "stewardship": "Not applicable for antibacterial therapy - dengue is viral. Management is supportive: oral/IV crystalloid rehydration guided by haematocrit and urine output, paracetamol for fever/pain. Empiric antibiotics are not indicated in classic dengue without an alternative bacterial source.",
+  "contraindications": [
+    "Avoid NSAIDs and aspirin (bleeding/gastritis, platelet inhibition)",
+    "Avoid intramuscular injections given thrombocytopenia",
+    "Cautious/monitored IV fluids to avoid overload during recovery/reabsorption phase"
+  ],
+  "edgeCases": [
+    "Watch the defervescence (day 4-6) critical phase when plasma leakage and warning signs (abdominal pain, persistent vomiting, mucosal bleeding, lethargy, rising haematocrit with falling platelets) can herald dengue haemorrhagic fever / shock syndrome",
+    "Co-endemic overlap with chikungunya and leptospirosis; co-infection possible",
+    "Secondary infection with a different serotype raises risk of severe dengue via antibody-dependent enhancement"
+  ],
+  "expectedMaiK": "Classic febrile-phase dengue confirmed by NS1 positivity with leukopenia, thrombocytopenia and mildly raised transaminases; manage supportively with fluids and paracetamol, strictly avoid NSAIDs/aspirin, and monitor closely around defervescence for warning signs of plasma leakage.",
+  "expectedNextQuestions": [
+    "Any warning signs - persistent vomiting, severe abdominal pain, mucosal bleeding, lethargy or restlessness?",
+    "Is this a first dengue episode or possible secondary infection?"
+  ],
+  "expectedInvestigations": [
+    "Serial CBC (haematocrit and platelet trend)",
+    "Dengue IgM/IgG serology",
+    "LFTs and haematocrit monitoring through the critical phase"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "retroorbitalPain": true,
+    "myalgiaArthralgia": true,
+    "rash": true,
+    "thrombocytopenia": true,
+    "nauseaVomiting": true,
+    "travelEndemicArea": true,
+    "dehydration": true
+  },
+  "expected": {
+    "diagnosis": "DENGUE",
+    "acceptableIds": [
+      "DENGUE"
+    ],
+    "differentialIds": [
+      "CHIKUNGUNYA",
+      "MALARIA",
+      "SCRUB_TYPHUS",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Serial CBC with haematocrit and platelet count",
+      "Dengue NS1/IgM serology"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include DENGUE",
+    "no empiric antibiotic recommended (infective but viral)",
+    "NSAIDs/aspirin flagged as contraindicated"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

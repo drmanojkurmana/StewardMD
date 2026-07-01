@@ -1,0 +1,97 @@
+{
+  "id": "gc_162",
+  "specialty": "Cardiology",
+  "condition": "Aortic stenosis (exertional syncope)",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Transient loss of consciousness while climbing stairs",
+  "history": "74-year-old man with an 8-month history of progressive exertional breathlessness and chest tightness that resolves with rest. Today he had a witnessed syncopal episode while walking up a flight of stairs, with rapid spontaneous recovery and no post-ictal confusion or incontinence. Two prior near-syncope episodes on exertion over the past month. Background of long-standing hypertension. No palpitations preceding the event, no focal neurology, no tongue-biting. Non-smoker, no diabetes.",
+  "examination": "Alert, GCS 15. Slow-rising, low-volume (parvus et tardus) carotid pulse. Ejection systolic murmur, loudest at the right upper sternal edge, radiating to both carotids, with a soft/absent A2 and a sustained (heaving) apex beat. No signs of pulmonary oedema at rest, no raised JVP, chest clear. No focal neurological deficit, no meningism, no calf swelling.",
+  "vitals": {
+    "hr": 78,
+    "bp": "128/86",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "13.8 g/dL",
+    "creatinine": "1.1 mg/dL",
+    "troponin": "mildly elevated, non-dynamic",
+    "BNP": "elevated",
+    "glucose": "5.4 mmol/L",
+    "electrolytes": "normal"
+  },
+  "imaging": "Transthoracic echocardiography: severe calcific aortic stenosis — aortic valve area 0.8 cm2, peak velocity 4.4 m/s, mean gradient 52 mmHg, with concentric LV hypertrophy and preserved ejection fraction. ECG: sinus rhythm with LV hypertrophy and strain pattern, no acute ischaemia. Chest X-ray: normal heart size, no pulmonary oedema.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Severe aortic stenosis with exertional syncope",
+    "Arrhythmic syncope (e.g. paroxysmal AV block / VT)",
+    "Acute coronary syndrome",
+    "Hypertrophic obstructive cardiomyopathy",
+    "Vasovagal / orthostatic syncope"
+  ],
+  "finalDiagnosis": "Severe symptomatic calcific aortic stenosis presenting with exertional syncope",
+  "citations": [
+    "Harrison 22e — Valvular Heart Disease (Aortic Stenosis)",
+    "ACC/AHA Management of Valvular Heart Disease 2020"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid vasodilators / GTN and other preload-reducing agents in severe AS (risk of profound hypotension)",
+    "Caution with beta-blockers or negative inotropes given fixed obstruction",
+    "Avoid aggressive diuresis — these patients are preload-dependent"
+  ],
+  "edgeCases": [
+    "Low-flow low-gradient severe AS with reduced EF or paradoxical low-flow with preserved EF may under-estimate severity on gradient alone — requires dobutamine stress echo / valve calcium scoring",
+    "Exertional syncope in AS is an ominous symptom (untreated survival ~2-3 years) and mandates expedited valve-intervention referral"
+  ],
+  "expectedMaiK": "Exertional syncope with a slow-rising pulse and an ejection systolic murmur radiating to the carotids in an elderly patient strongly suggests severe symptomatic aortic stenosis. This is a class I indication for aortic valve replacement (SAVR/TAVI); avoid preload-reducing drugs and arrange urgent echocardiography and heart-team referral.",
+  "expectedNextQuestions": [
+    "Was the syncope clearly exertional, and is there associated exertional angina or breathlessness?",
+    "Any features suggesting arrhythmia (palpitations, family history of sudden death) as an alternative cause?"
+  ],
+  "expectedInvestigations": [
+    "Transthoracic echocardiogram to quantify valve area and gradient",
+    "12-lead ECG and telemetry/ambulatory monitoring to exclude arrhythmic syncope",
+    "Coronary assessment prior to valve intervention"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "syncope": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "newMurmur": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "chestPain": true
+  },
+  "expected": {
+    "diagnosis": "aortic_stenosis",
+    "acceptableIds": [
+      "aortic_stenosis"
+    ],
+    "differentialIds": [
+      "acs",
+      "atrial_fib",
+      "vasovagal_syncope"
+    ],
+    "investigations": [
+      "Transthoracic echocardiogram",
+      "12-lead ECG",
+      "Ambulatory rhythm monitoring"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include aortic_stenosis",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

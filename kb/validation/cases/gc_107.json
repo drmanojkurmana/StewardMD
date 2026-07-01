@@ -1,0 +1,110 @@
+{
+  "id": "gc_107",
+  "specialty": "Respiratory",
+  "condition": "Community Acquired Pneumonia (non-severe)",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Three days of fever, productive cough and right-sided pleuritic chest pain",
+  "history": "Previously well 58-year-old man, ex-smoker (20 pack-years), presents with 3 days of rigors, fever to 39C, and cough productive of rusty-yellow sputum. Reports right-sided pleuritic chest pain and mild breathlessness on exertion. No haemoptysis, no recent travel, no hospitalisation or antibiotics in the past 90 days. No known lung disease, no aspiration risk. Type 2 diabetes on metformin, otherwise no comorbidity.",
+  "examination": "Alert and oriented (GCS 15), mildly tachypnoeic but comfortable at rest. Bronchial breathing and coarse crepitations over the right mid-to-lower zone with increased vocal resonance. No cyanosis, no confusion. Pertinent negatives: no neck stiffness, no calf swelling, no peripheral oedema, no new murmur, abdomen soft and non-tender.",
+  "vitals": {
+    "hr": 104,
+    "bp": "126/78",
+    "rr": 24,
+    "temp": 38.9,
+    "spo2": 93
+  },
+  "labs": {
+    "WBC": "15.8 x10^9/L (neutrophilia)",
+    "CRP": "168 mg/L",
+    "Urea": "6.2 mmol/L",
+    "Creatinine": "0.9 mg/dL",
+    "Lactate": "1.6 mmol/L",
+    "Na": "134 mmol/L",
+    "Glucose": "11.2 mmol/L",
+    "ABG": "pH 7.44, PaO2 9.1 kPa on room air"
+  },
+  "imaging": "Chest radiograph: dense right lower-zone consolidation with air bronchograms, no cavitation, no significant pleural effusion.",
+  "microbiology": "Blood cultures and sputum Gram stain/culture sent (pending); urinary pneumococcal and Legionella antigens sent. Sputum Gram stain shows Gram-positive diplococci.",
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia",
+    "Pulmonary embolism",
+    "Acute bronchitis",
+    "Pulmonary tuberculosis",
+    "Lung abscess"
+  ],
+  "finalDiagnosis": "Non-severe community-acquired pneumonia (likely pneumococcal)",
+  "citations": [
+    "Harrison 22e — Pneumonia",
+    "IDSA/ATS Community-Acquired Pneumonia in Adults 2019"
+  ],
+  "stewardship": "Non-severe CAP with no MRSA/Pseudomonas risk and no recent antibiotics: empiric beta-lactam plus macrolide (e.g. amoxicillin-clavulanate + azithromycin) or respiratory fluoroquinolone monotherapy (levofloxacin) per IDSA/ATS 2019; CURB-65 = 1 supports treatment on the ward, and de-escalate to targeted therapy once pneumococcus is confirmed.",
+  "contraindications": [
+    "Macrolides and fluoroquinolones prolong QT — review baseline ECG and concomitant QT-prolonging drugs",
+    "Fluoroquinolone caution in diabetes (dysglycaemia) and tendinopathy risk",
+    "Adjust beta-lactam dosing if renal function declines"
+  ],
+  "edgeCases": [
+    "Relative hypoxaemia (SpO2 93%) does not by itself meet severe-CAP criteria but warrants monitoring",
+    "Do not over-treat as HAP — no hospitalisation/antibiotics in 90 days means MDR cover is not indicated",
+    "Post-obstructive pneumonia from an underlying bronchial lesion should be considered in an ex-smoker if slow to resolve"
+  ],
+  "expectedMaiK": "Classic lobar CAP in a stable patient with CURB-65 = 1; treat empirically with a beta-lactam plus macrolide (or respiratory fluoroquinolone) and avoid broad MDR/HAP cover given no recent healthcare exposure. Reassess if hypoxia or confusion worsens.",
+  "expectedNextQuestions": [
+    "Any confusion, worsening breathlessness or symptoms suggesting severity/ICU need?",
+    "Any recent hospitalisation, antibiotics, or aspiration risk to reclassify as HAP/aspiration?"
+  ],
+  "expectedInvestigations": [
+    "Chest radiograph",
+    "Blood and sputum cultures",
+    "Urinary pneumococcal and Legionella antigens",
+    "CURB-65 severity scoring"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "pleuriticPain": true,
+    "crepitations": true,
+    "consolidation": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "CAP",
+    "acceptableIds": [
+      "CAP"
+    ],
+    "differentialIds": [
+      "ACUTE_BRONCHITIS",
+      "SEVERE_CAP",
+      "PULMONARY_TB",
+      "pe"
+    ],
+    "investigations": [
+      "Chest radiograph",
+      "Blood and sputum cultures",
+      "Urinary pneumococcal/Legionella antigens",
+      "CURB-65 scoring"
+    ],
+    "stewardship": {
+      "tier": "narrow-spectrum",
+      "antibiotics": [
+        "amoxicillin-clavulanate + azithromycin",
+        "levofloxacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CAP",
+    "must not classify as SEVERE_CAP given CURB-65 = 1 and no ICU criteria",
+    "stewardship must not include MDR/Pseudomonas cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

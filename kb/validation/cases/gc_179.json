@@ -1,0 +1,99 @@
+{
+  "id": "gc_179",
+  "specialty": "Gastroenterology",
+  "condition": "GERD / non-cardiac chest pain",
+  "age": 44,
+  "sex": "M",
+  "presentingComplaint": "Recurrent burning retrosternal chest pain, worse after meals and on lying down",
+  "history": "6-month history of intermittent burning retrosternal discomfort that radiates towards the throat, typically after large or spicy meals and on reclining at night, associated with acid regurgitation and an occasional sour taste in the mouth. Episodes last 20-40 minutes and are relieved by antacids and by sitting up; they are NOT provoked by exertion and do not settle specifically with rest. He describes intermittent nocturnal cough and morning hoarseness. No dysphagia, no weight loss, no melena, no haematemesis. Overweight, drinks 3-4 cups of coffee daily, eats late dinners, occasional alcohol, ex-smoker (quit 3 years ago). No prior cardiac events, no family history of premature coronary disease. Presented today after a prolonged episode that prompted worry about his heart.",
+  "examination": "Comfortable at rest, not distressed between episodes. BMI 31. Chest clear, no chest-wall tenderness reproducing the pain. Heart sounds normal, no murmurs, no signs of heart failure, JVP not raised, peripheral pulses normal and symmetric. Abdomen soft, mild epigastric tenderness, no organomegaly, no mass. No focal neurology. Pertinent negatives: pain not reproducible on palpation, no radiation to arm/jaw with exertion, no diaphoresis during review.",
+  "vitals": {
+    "hr": 78,
+    "bp": "128/80",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "Troponin (hs, 0h and 3h)": "normal / no delta",
+    "Hemoglobin": "14.6 g/dL",
+    "WBC": "7.2 x10^9/L",
+    "Creatinine": "0.9 mg/dL",
+    "Random glucose": "108 mg/dL",
+    "Lipid profile": "LDL 118 mg/dL (mildly elevated)"
+  },
+  "imaging": "ECG: normal sinus rhythm, no ischaemic ST/T changes. Chest X-ray: normal cardiac silhouette, clear lung fields. (Coronary assessment negative for ischaemia — exercise/stress testing or CT coronary angiography low-risk.)",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Gastro-oesophageal reflux disease / non-cardiac chest pain",
+    "Acute coronary syndrome / stable angina",
+    "Peptic ulcer disease",
+    "Oesophageal dysmotility (e.g. oesophageal spasm)",
+    "Musculoskeletal chest wall pain"
+  ],
+  "finalDiagnosis": "Gastro-oesophageal reflux disease presenting as non-cardiac chest pain",
+  "citations": [
+    "Harrison 22e — Diseases of the Esophagus (Gastroesophageal Reflux Disease)",
+    "ACG Clinical Guideline: Diagnosis and Management of Gastroesophageal Reflux Disease 2022"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Exclude cardiac cause before attributing chest pain to reflux — do not withhold cardiac workup in patients with risk factors",
+    "PPI caution with long-term use (hypomagnesaemia, B12 deficiency, C. difficile risk); review clopidogrel interaction if applicable"
+  ],
+  "edgeCases": [
+    "Reflux and coronary disease can coexist; a therapeutic PPI response does NOT reliably exclude cardiac pain",
+    "Alarm features (dysphagia, weight loss, GI bleeding, anaemia, age >60 new-onset) mandate upfront endoscopy rather than empiric therapy"
+  ],
+  "expectedMaiK": "Classic post-prandial, positional burning retrosternal pain with acid regurgitation and a normal cardiac workup (normal ECG and troponins) points to GERD-related non-cardiac chest pain; cardiac causes must be excluded first, then an empiric 8-week PPI trial with lifestyle measures is appropriate.",
+  "expectedNextQuestions": [
+    "Are there any alarm features — dysphagia, odynophagia, unintentional weight loss, GI bleeding or anaemia?",
+    "Does the pain relate to exertion or emotional stress in a way suggesting angina, and what are the cardiac risk factors?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG and serial high-sensitivity troponin to exclude ACS",
+    "Empiric 8-week trial of a proton-pump inhibitor (PPI test); upper GI endoscopy if alarm features or PPI non-response"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "chestPain": true,
+    "abdominalDiscomfort": true,
+    "nauseaVomiting": true,
+    "coughRadio": true,
+    "abdominalPain": true,
+    "afebrile": true,
+    "stable": true,
+    "oralIntake": true
+  },
+  "expected": {
+    "diagnosis": "gerd_chest",
+    "acceptableIds": [
+      "gerd_chest"
+    ],
+    "differentialIds": [
+      "acs",
+      "peptic_ulcer",
+      "pericarditis",
+      "panic"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "High-sensitivity troponin",
+      "Empiric PPI trial",
+      "Upper GI endoscopy if alarm features"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include gerd_chest",
+    "acs must appear in differential and be excluded by normal ECG + troponin before GERD is confirmed",
+    "no antibiotic recommendation is produced (non-infective case)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

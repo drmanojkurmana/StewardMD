@@ -1,0 +1,110 @@
+{
+  "id": "gc_168",
+  "specialty": "Cardiology / Critical care",
+  "condition": "Cardiogenic shock",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Crushing central chest pain for 3 hours followed by severe breathlessness, cold sweaty skin and near-collapse",
+  "history": "3 hours of severe retrosternal pressure radiating to the left arm and jaw, associated with diaphoresis and nausea. Over the last hour he has become acutely dyspnoeic, confused and clammy. Background of hypertension, type 2 diabetes and hyperlipidaemia; 40 pack-year smoker; prior stable angina on atorvastatin. No recent fever, cough, diarrhoea or bleeding. This is an anterior ST-elevation MI complicated by pump failure — the leading cause of cardiogenic shock.",
+  "examination": "Cold, mottled peripheries with delayed capillary refill >3s and thready pulse. Raised JVP, bilateral fine basal crackles to mid-zones and a soft S3 gallop. New pansystolic murmur not heard. Drowsy (GCS 14), agitated. No calf swelling, no focal neurology, abdomen soft and non-tender, no fever.",
+  "vitals": {
+    "hr": 118,
+    "bp": "76/52",
+    "rr": 30,
+    "temp": 36.4,
+    "spo2": 88
+  },
+  "labs": {
+    "troponin I": "markedly elevated (rising)",
+    "lactate": "5.2 mmol/L",
+    "creatinine": "1.8 mg/dL (baseline 1.0)",
+    "ABG": "pH 7.28, PaO2 58 mmHg on room air, HCO3 17, metabolic acidosis with respiratory compensation",
+    "NT-proBNP": "elevated",
+    "hemoglobin": "13.6 g/dL",
+    "glucose": "212 mg/dL",
+    "WBC": "11.2 x10^3/uL"
+  },
+  "imaging": "ECG: ST elevation V1-V6 with reciprocal inferior changes (anterior STEMI). Portable CXR: cardiomegaly with bilateral perihilar alveolar oedema. Bedside echo: severely reduced LVEF ~25%, akinetic anterior/apical wall, no pericardial effusion, no RV strain, no significant valve lesion.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (anterior STEMI) with pump failure",
+    "Acute decompensated heart failure / cardiogenic pulmonary oedema",
+    "Massive pulmonary embolism",
+    "Cardiac tamponade",
+    "Septic shock"
+  ],
+  "finalDiagnosis": "Cardiogenic shock secondary to acute anterior STEMI",
+  "citations": [
+    "Harrison 22e — Cardiogenic Shock and Pulmonary Edema",
+    "AHA/ACC 2013 STEMI Guideline & ESC 2023 Acute Coronary Syndromes Guideline"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid beta-blockers and high-dose nitrates in hypotension/shock",
+    "Contrast-induced nephropathy risk given creatinine rise — hydrate/limit contrast during PCI",
+    "Caution with morphine (worsens hypotension); avoid negative inotropes"
+  ],
+  "edgeCases": [
+    "Mechanical complications (acute mitral regurgitation from papillary muscle rupture, VSD, free-wall rupture) can present as cardiogenic shock 2-7 days post-MI — listen for a new murmur",
+    "Right ventricular infarction causes shock with clear lungs and is preload-dependent — nitrates worsen it",
+    "SCAI shock stages guide escalation; not all shock is ischaemic (fulminant myocarditis, stress cardiomyopathy)"
+  ],
+  "expectedMaiK": "This is cardiogenic shock — hypotension with hypoperfusion (lactataemia, oliguria, cold clammy skin, altered sensorium) driven by pump failure from a large anterior STEMI, not sepsis or hypovolaemia. Immediate priority is emergent revascularisation (primary PCI of the culprit artery) with haemodynamic support; empiric antibiotics are not indicated.",
+  "expectedNextQuestions": [
+    "Time of symptom onset and PCI eligibility window?",
+    "Any recent nitrate, PDE5-inhibitor or anticoagulant use?",
+    "Signs of a mechanical complication (new murmur, days since MI)?"
+  ],
+  "expectedInvestigations": [
+    "Serial 12-lead ECG and high-sensitivity troponin",
+    "Urgent bedside/formal echocardiography for LV function and mechanical complications",
+    "Serum lactate, ABG, renal function and coronary angiography"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "ecgIschemia": true,
+    "dyspnea": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "lactateElevated": true,
+    "alteredSensorium": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "knownCAD": true
+  },
+  "expected": {
+    "diagnosis": "cardiogenic_shock",
+    "acceptableIds": [
+      "cardiogenic_shock"
+    ],
+    "differentialIds": [
+      "acs",
+      "heart_failure",
+      "pe",
+      "tamponade"
+    ],
+    "investigations": [
+      "ECG",
+      "troponin",
+      "echocardiography",
+      "coronary angiography",
+      "serum lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include cardiogenic_shock",
+    "expected.stewardship.tier is null (non-infective)",
+    "differential includes acs and heart_failure"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "gc_150",
+  "specialty": "Respiratory",
+  "condition": "Ventilator-Associated Pneumonia",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "New fever, purulent tracheal secretions and worsening oxygenation on day 6 of mechanical ventilation",
+  "history": "Admitted 6 days ago to the medical ICU with acute-on-chronic respiratory failure and intubated for airway protection following a large territory ischaemic stroke. Sedated and mechanically ventilated since. Over the last 24 hours the bedside team notes new-onset fever, an increase in the volume and purulence of tracheal aspirate, and a rising FiO2 and PEEP requirement to maintain saturations. Received a course of piperacillin-tazobactam for a urinary source earlier in the admission. PMH: hypertension, type 2 diabetes, ex-smoker. No known drug allergies.",
+  "examination": "Sedated, intubated, RASS -3. New coarse crepitations and bronchial breathing at the right base. Copious thick yellow-green secretions on suctioning. No calf swelling; no rash. Pertinent negatives: no new murmur, no abdominal tenderness, catheter site clean, no peripheral stigmata of endocarditis.",
+  "vitals": {
+    "hr": 112,
+    "bp": "104/62",
+    "rr": 26,
+    "temp": 38.7,
+    "spo2": 90
+  },
+  "labs": {
+    "WBC": "17.8 x10^9/L (neutrophilia)",
+    "CRP": "184 mg/L",
+    "Procalcitonin": "3.9 ng/mL",
+    "Lactate": "1.8 mmol/L",
+    "Creatinine": "1.1 mg/dL",
+    "PaO2:FiO2": "180 (on FiO2 0.6)",
+    "ABG": "pH 7.34, PaCO2 48, PaO2 68 on FiO2 0.6"
+  },
+  "imaging": "Portable CXR: new right lower and middle lobe air-space opacification with air bronchograms, not present on admission film; no large effusion or pneumothorax",
+  "microbiology": "Endotracheal aspirate Gram stain: numerous polymorphs with Gram-negative bacilli; semi-quantitative culture and sensitivities pending. Two sets of blood cultures sent. Urinary Legionella/pneumococcal antigen negative.",
+  "differentialDiagnoses": [
+    "Ventilator-associated pneumonia",
+    "Ventilator-associated tracheobronchitis",
+    "Atelectasis with mucus plugging",
+    "Aspiration pneumonitis",
+    "Pulmonary embolism",
+    "ARDS progression / ventilator-associated event (non-infective)"
+  ],
+  "finalDiagnosis": "Ventilator-associated pneumonia (late-onset, MDR risk factors present)",
+  "citations": [
+    "Harrison 22e — Pneumonia (Hospital-Acquired and Ventilator-Associated Pneumonia)",
+    "IDSA/ATS Management of Adults with Hospital-Acquired and Ventilator-Associated Pneumonia 2016"
+  ],
+  "stewardship": "Empiric broad-spectrum cover for late-onset VAP (>5 days ventilation) with MDR risk (prior IV antibiotics within 90 days): antipseudomonal beta-lactam such as piperacillin-tazobactam or cefepime/meropenem PLUS an antipseudomonal second agent, and add anti-MRSA cover (vancomycin or linezolid) given prior antibiotic exposure and severity. De-escalate on endotracheal aspirate culture/sensitivity and stop at 7 days if responding.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis would preclude piperacillin-tazobactam/cefepime — use aztreonam-based regimen",
+    "Vancomycin requires renal-adjusted dosing and level monitoring; linezolid preferred if AKI or concurrent nephrotoxins",
+    "Avoid empiric aminoglycoside monotherapy for pneumonia"
+  ],
+  "edgeCases": [
+    "Ventilator-associated tracheobronchitis presents identically but without new radiographic infiltrate",
+    "Low-burden semi-quantitative culture may reflect colonisation rather than true VAP — correlate clinically",
+    "Non-infective ventilator-associated events (ARDS, fluid overload, atelectasis) can mimic VAP and inflate antibiotic use"
+  ],
+  "expectedMaiK": "Late-onset VAP (day 6 of ventilation) with prior antibiotic exposure carries MDR risk, so IDSA/ATS 2016 favours empiric antipseudomonal plus anti-MRSA cover guided by the unit antibiogram, followed by de-escalation on culture and a 7-day course if the patient improves.",
+  "expectedNextQuestions": [
+    "When was mechanical ventilation started relative to symptom onset (>48h and >5 days)?",
+    "What antibiotics has the patient received in the last 90 days and any prior resistant isolates?",
+    "What is the local ICU antibiogram / MDR prevalence?"
+  ],
+  "expectedInvestigations": [
+    "Endotracheal aspirate or BAL for semi-quantitative culture and sensitivities",
+    "Two sets of blood cultures",
+    "Serial CXR and PaO2:FiO2, WBC, procalcitonin trend"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "mechanicalVentilation": true,
+    "hospitalDay48": true,
+    "purulentSecretions": true,
+    "worseningOxygenation": true,
+    "consolidation": true,
+    "fever": true,
+    "crepitations": true,
+    "priorAntibiotics": true,
+    "mdrRisk": true,
+    "hypoxia": true,
+    "icuStay": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "VAP",
+    "acceptableIds": [
+      "VAP"
+    ],
+    "differentialIds": [
+      "HAP",
+      "ASPIRATION_PNEUMONIA",
+      "SEVERE_CAP",
+      "pe"
+    ],
+    "investigations": [
+      "Endotracheal aspirate / BAL culture and sensitivity",
+      "Blood cultures",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include VAP",
+    "stewardship tier must be broad with antipseudomonal + anti-MRSA empiric cover",
+    "differential must not collapse to CAP as primary given >48h ventilation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

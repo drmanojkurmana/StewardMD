@@ -1,0 +1,100 @@
+{
+  "id": "gc_215",
+  "specialty": "Endocrine",
+  "condition": "Phaeochromocytoma crisis",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe pounding headache with palpitations, drenching sweats and a hypertensive surge",
+  "history": "3-month history of paroxysmal episodes of throbbing headache, palpitations and profuse diaphoresis lasting 15-30 minutes, often with a sense of impending doom and facial pallor. Today's attack was the most severe, precipitated shortly after abdominal palpation at a clinic visit. Episodic hypertension noted on home readings, refractory to amlodipine. No prior thyroid disease. Non-smoker. Family history of a paternal uncle with 'adrenal tumour' and hypertension (query MEN2/VHL/SDHx). No fever, no infective symptoms.",
+  "examination": "Anxious, tremulous, cool clammy peripheries with pallor. Markedly elevated BP with orthostatic drop. Sinus tachycardia, no murmur, chest clear. Abdomen soft, no palpable mass, no bruit. No neck stiffness, no focal neurology, fundi show grade II hypertensive changes. Pertinent negatives: no exophthalmos or goitre, no rash, afebrile, no signs of infection.",
+  "vitals": {
+    "hr": 128,
+    "bp": "228/126",
+    "rr": 22,
+    "temp": 37,
+    "spo2": 98
+  },
+  "labs": {
+    "plasma free metanephrines": "markedly elevated (>4x upper limit)",
+    "plasma normetanephrine": "markedly elevated",
+    "glucose": "11.8 mmol/L (stress hyperglycaemia)",
+    "sodium": "139 mmol/L",
+    "potassium": "3.9 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "troponin": "mildly elevated (catecholamine myocardial injury)",
+    "TSH": "normal",
+    "white cell count": "normal",
+    "CRP": "normal"
+  },
+  "imaging": "CT abdomen: 4.5 cm heterogeneous right adrenal mass with high unenhanced Hounsfield units and avid contrast enhancement; ECG shows sinus tachycardia with LV strain, no ST-elevation MI. 123-I-MIBG / functional imaging planned for staging.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Phaeochromocytoma crisis",
+    "Hypertensive emergency (essential)",
+    "Thyroid storm / thyrotoxicosis",
+    "Acute coronary syndrome",
+    "Panic disorder / sympathomimetic (cocaine/amphetamine) toxicity"
+  ],
+  "finalDiagnosis": "Phaeochromocytoma crisis (catecholamine-secreting adrenal tumour)",
+  "citations": [
+    "Harrison 22e — Pheochromocytoma",
+    "Endocrine Society Clinical Practice Guideline: Pheochromocytoma and Paraganglioma 2014"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Do NOT give beta-blocker before adequate alpha-blockade (unopposed alpha stimulation precipitates hypertensive crisis / pulmonary oedema)",
+    "Avoid metoclopramide, unopposed vasopressors and abrupt tumour manipulation which can trigger catecholamine surge"
+  ],
+  "edgeCases": [
+    "Catecholamine cardiomyopathy / Takotsubo can mimic ACS with troponin rise and normal coronaries",
+    "Paradoxical hypotension/shock ('pheochromocytoma multisystem crisis') can follow the hypertensive phase",
+    "Extra-adrenal paraganglioma or normetanephrine-only (norepinephrine) secretion may present without classic paroxysms"
+  ],
+  "expectedMaiK": "Classic triad of episodic headache, palpitations and diaphoresis with paroxysmal severe hypertension and an adrenal mass points to a catecholamine crisis; control the surge with IV phenoxybenzamine/phentolamine (alpha first) and only then add a beta-blocker, and never beta-block first.",
+  "expectedNextQuestions": [
+    "Are episodes paroxysmal with the headache-palpitation-sweating triad, and any family history of MEN2/VHL/SDHx or paraganglioma?",
+    "Any drug/stimulant use (cocaine, amphetamines) or new medications (metoclopramide, beta-blocker) that could mimic or provoke this?"
+  ],
+  "expectedInvestigations": [
+    "Plasma free metanephrines (or 24-h urinary fractionated metanephrines)",
+    "CT/MRI adrenals to localise the tumour"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "headacheSevere": true,
+    "palpitations": true,
+    "tachycardia": true,
+    "hypertensionHx": true,
+    "chestPain": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "pheo",
+    "acceptableIds": [
+      "pheo"
+    ],
+    "differentialIds": [
+      "htn_emergency",
+      "thyroid_storm",
+      "acs",
+      "panic"
+    ],
+    "investigations": [
+      "Plasma free metanephrines / 24-h urinary fractionated metanephrines",
+      "CT or MRI adrenals for tumour localisation"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pheo",
+    "stewardship tier must be null (non-infective condition)",
+    "must not recommend beta-blocker before alpha-blockade"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

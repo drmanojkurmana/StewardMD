@@ -1,0 +1,106 @@
+{
+  "id": "gc_117",
+  "specialty": "Gastrointestinal",
+  "condition": "Clostridioides difficile Infection",
+  "age": 72,
+  "sex": "F",
+  "presentingComplaint": "Profuse watery diarrhoea and lower abdominal cramps 6 days after a course of antibiotics",
+  "history": "72-year-old woman with recent hospitalisation and a 7-day course of oral co-amoxiclav for a lower respiratory tract infection completed 5 days ago. Over the past 3 days she has developed frequent (8-10/day) foul-smelling, non-bloody watery stools with lower abdominal cramping, low-grade fever and reduced oral intake. Background of hypertension and type 2 diabetes. No recent travel, no unwell contacts, no NSAID/laxative use. Concurrent proton-pump inhibitor use. No prior C. difficile infection.",
+  "examination": "Mildly toxic, dry mucous membranes. Abdomen soft with generalised lower-abdominal tenderness, mild distension, active bowel sounds; no rebound, guarding or peritonism. No jaundice, no organomegaly. No focal chest or urinary findings. Not confused (GCS 15).",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/68",
+    "rr": 20,
+    "temp": 38.2,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "16.5 x10^9/L (neutrophilia)",
+    "Creatinine": "1.2 mg/dL (baseline 0.8)",
+    "Albumin": "3.1 g/dL",
+    "CRP": "88 mg/L",
+    "Lactate": "1.4 mmol/L",
+    "Potassium": "3.3 mmol/L",
+    "Stool C. difficile GDH": "positive",
+    "Stool toxin EIA": "positive"
+  },
+  "imaging": "Erect/supine abdominal X-ray: no toxic megacolon, no free air, mild non-specific colonic distension. CT abdomen not indicated at this stage.",
+  "microbiology": "Stool GDH antigen positive AND toxin A/B EIA positive (two-step algorithm), confirming toxigenic C. difficile. Stool culture for enteric pathogens negative; no ova/parasites.",
+  "differentialDiagnoses": [
+    "Clostridioides difficile infection",
+    "Antibiotic-associated (non-C. difficile) diarrhoea",
+    "Acute infectious gastroenteritis",
+    "Ischaemic or inflammatory colitis"
+  ],
+  "finalDiagnosis": "Clostridioides difficile infection (non-severe / initial episode)",
+  "citations": [
+    "Harrison 22e — Clostridioides difficile Infection, Including Pseudomembranous Colitis",
+    "IDSA/SHEA Clostridioides difficile Infection in Adults 2021 (focused update)"
+  ],
+  "stewardship": "Stop the inciting antibiotic (co-amoxiclav) wherever possible. First-line empiric therapy for an initial non-severe episode is oral fidaxomicin 200 mg BD for 10 days (preferred) or oral vancomycin 125 mg QDS for 10 days. Oral metronidazole is reserved for when neither is available. Avoid antiperistaltic agents; review/withdraw the PPI.",
+  "contraindications": [
+    "Oral metronidazole no longer preferred (inferior cure/recurrence) except when vancomycin/fidaxomicin unavailable; avoid metronidazole with alcohol",
+    "Avoid anti-motility agents (loperamide) - risk of toxin retention and ileus/toxic megacolon",
+    "Ensure IV vancomycin is NOT used for luminal disease (no colonic penetration); oral route required",
+    "Correct hypokalaemia and dehydration cautiously in renal impairment"
+  ],
+  "edgeCases": [
+    "Ileus or toxic megacolon can present with reduced stool frequency and worsening distension - a falling diarrhoea count is not always improvement",
+    "GDH-positive/toxin-negative results reflect colonisation or NAAT-only positivity and may not indicate active disease",
+    "Fulminant CDI (hypotension, ileus, megacolon, lactate rise) requires oral/NG vancomycin 500 mg QDS plus IV metronidazole and surgical review"
+  ],
+  "expectedMaiK": "Classic healthcare-associated C. difficile infection following recent broad-spectrum antibiotics: stop the inciting agent and start oral fidaxomicin or oral vancomycin (not metronidazole first-line) for an initial non-severe episode, avoid anti-motility drugs, and monitor for progression to severe/fulminant disease.",
+  "expectedNextQuestions": [
+    "Any blood in the stool, or reduction in stool frequency with worsening abdominal distension (suggesting ileus/toxic megacolon)?",
+    "Prior episodes of C. difficile infection and other recent antibiotic/PPI exposure?"
+  ],
+  "expectedInvestigations": [
+    "Two-step stool testing (GDH + toxin EIA, or NAAT with reflex toxin)",
+    "FBC, creatinine, albumin and lactate to grade severity",
+    "Abdominal imaging if severe/fulminant features to exclude toxic megacolon"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "diarrhea": true,
+    "antibioticsLast90Days": true,
+    "hospitalizationLast90Days": true,
+    "fever": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "dehydration": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "C_DIFF",
+    "acceptableIds": [
+      "C_DIFF"
+    ],
+    "differentialIds": [
+      "GASTROENTERITIS",
+      "DYSENTERY",
+      "ibd_flare"
+    ],
+    "investigations": [
+      "Stool GDH + C. difficile toxin EIA",
+      "FBC, creatinine, albumin, lactate for severity grading"
+    ],
+    "stewardship": {
+      "tier": "targeted-oral",
+      "antibiotics": [
+        "fidaxomicin",
+        "oral vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include C_DIFF",
+    "stewardship must recommend oral fidaxomicin or oral vancomycin, not first-line metronidazole",
+    "must flag stopping the inciting antibiotic and avoiding anti-motility agents"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

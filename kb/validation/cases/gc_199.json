@@ -1,0 +1,108 @@
+{
+  "id": "gc_199",
+  "specialty": "Oncology",
+  "condition": "Malignancy presenting with B-symptoms (lymphoma)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Six weeks of drenching night sweats, fever, and 8 kg unintentional weight loss with a painless neck lump.",
+  "history": "A previously well 34-year-old man presents with 6 weeks of recurrent low-grade evening fevers, profuse night sweats requiring change of bedclothes, and unintentional loss of approximately 8 kg (>10% body weight) over 2 months. He noticed a firm, painless, progressively enlarging left supraclavicular/cervical swelling, and reports generalized pruritus and occasional discomfort in the lump after alcohol. No cough, hemoptysis, dysuria, diarrhea, or localizing infective symptoms. No TB contact, no recent travel to endemic areas, and no injection drug use. No prior malignancy. Non-smoker, no significant PMH, on no regular medications.",
+  "examination": "Firm, rubbery, non-tender, matted left cervical and supraclavicular lymphadenopathy (~3-4 cm) and a palpable axillary node. Spleen tip palpable 2 cm below costal margin; liver not enlarged. No jaundice, no petechiae, no meningism. Chest clear, no consolidation. Pertinent negatives: no eschar, no rash, no localizing source of sepsis, no CVA tenderness, no murmur.",
+  "vitals": {
+    "hr": 92,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "Hemoglobin": "10.8 g/dL (normocytic)",
+    "WBC": "7.2 x10^3/uL",
+    "Platelets": "168 x10^3/uL",
+    "ESR": "78 mm/hr",
+    "LDH": "512 U/L (elevated)",
+    "Albumin": "3.2 g/dL",
+    "Calcium": "9.4 mg/dL",
+    "Creatinine": "0.9 mg/dL",
+    "Blood cultures": "no growth x2",
+    "HIV serology": "negative"
+  },
+  "imaging": "Contrast CT neck/chest/abdomen/pelvis: bulky bilateral cervical, mediastinal and para-aortic lymphadenopathy with mild splenomegaly; no cavitating lung lesion. FDG-PET confirms multiple hypermetabolic nodal stations above and below the diaphragm.",
+  "microbiology": "Blood cultures negative; malaria smear negative; Mantoux/IGRA negative. Excisional lymph node biopsy pending histology.",
+  "differentialDiagnoses": [
+    "Hodgkin / non-Hodgkin lymphoma",
+    "Disseminated tuberculosis",
+    "Acute leukemia",
+    "HIV with reactive/opportunistic lymphadenopathy",
+    "Metastatic solid tumour"
+  ],
+  "finalDiagnosis": "Lymphoma with B-symptoms (constitutional malignancy syndrome) pending histological subtyping",
+  "citations": [
+    "Harrison 22e — Approach to the Patient with Lymphadenopathy and Splenomegaly / Hodgkin Lymphoma",
+    "NCCN Hodgkin Lymphoma Guidelines 2023"
+  ],
+  "stewardship": "Not applicable — non-infective. Empiric antibiotics are not indicated; blood cultures negative and no septic source. Avoid reflexive antimicrobials; prioritise tissue diagnosis by excisional lymph node biopsy.",
+  "contraindications": [
+    "Avoid empirical corticosteroids before biopsy (can obscure lymphoma histology)",
+    "Avoid FNA alone — inadequate for lymphoma subtyping; excisional biopsy required",
+    "Do not start empiric anti-TB therapy without microbiological/histological confirmation"
+  ],
+  "edgeCases": [
+    "Alcohol-induced nodal pain is a classic but rare Hodgkin clue",
+    "Cyclical Pel-Ebstein fever may mimic infective/PUO picture",
+    "TB and lymphoma can coexist and share B-symptoms — biopsy is decisive"
+  ],
+  "expectedMaiK": "B-symptoms (fever, drenching night sweats, >10% weight loss) with painless firm lymphadenopathy, splenomegaly and raised LDH/ESR point strongly to lymphoma; this is a non-infective oncological syndrome and the priority is urgent excisional lymph node biopsy, not empiric antibiotics.",
+  "expectedNextQuestions": [
+    "Is the lymphadenopathy painless and progressive, and is there alcohol-induced nodal pain?",
+    "Any TB contact, HIV risk factors, or endemic travel to exclude mimics?",
+    "Any hepatosplenomegaly, bone pain, or bleeding to gauge marrow/systemic involvement?"
+  ],
+  "expectedInvestigations": [
+    "Excisional lymph node biopsy with immunohistochemistry",
+    "FDG-PET/CT for staging",
+    "LDH, ESR, HIV, and bone marrow biopsy"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "weightLoss": true,
+    "nightSweats": true,
+    "eveningFever": true,
+    "fever": true,
+    "lymphadenopathy": true,
+    "splenomegaly": true,
+    "hepatosplenomegaly": true,
+    "prolongedFever": true,
+    "subacuteOnset": true,
+    "malignancy": true
+  },
+  "expected": {
+    "diagnosis": "malignancy_b",
+    "acceptableIds": [
+      "malignancy_b"
+    ],
+    "differentialIds": [
+      "DISSEMINATED_TB",
+      "acute_leukemia",
+      "PUO",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "Excisional lymph node biopsy with immunohistochemistry",
+      "FDG-PET/CT staging",
+      "Bone marrow biopsy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include malignancy_b",
+    "stewardship tier must be null (non-infective)",
+    "differential must include DISSEMINATED_TB as an infective mimic"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "id": "gc_141",
+  "specialty": "Genitourinary",
+  "condition": "Acute Pyelonephritis",
+  "age": 32,
+  "sex": "F",
+  "presentingComplaint": "Two days of high fever with rigors, right flank pain and dysuria",
+  "history": "Previously healthy 32-year-old woman with a 2-day history of high-grade fever up to 39.5 C with shaking chills, dull constant right flank/loin pain, and burning micturition with urinary frequency and urgency. Symptoms began as lower-tract irritative symptoms 3 days ago and progressed to flank pain, fever and vomiting. Not pregnant (LMP 1 week ago, negative urine hCG). No prior urinary tract instrumentation, no indwelling catheter, no structural urinary tract abnormality, no diabetes. No recent hospitalisation or antibiotics in the last 90 days. Sexually active, uses condoms.",
+  "examination": "Ill-appearing but alert and oriented. Marked right costovertebral angle (renal angle) tenderness on percussion. Suprapubic mild tenderness. Abdomen otherwise soft, no guarding, bowel sounds normal, no palpable mass. No jaundice, no rash. Chest clear, heart sounds normal with no murmur. No peripheral oedema, no calf tenderness. Pertinent negatives: no neck stiffness, no meningism, no genital lesions, no vaginal discharge.",
+  "vitals": {
+    "hr": 108,
+    "bp": "112/70",
+    "rr": 20,
+    "temp": 39.4,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "16.8 x10^9/L with neutrophilia and left shift",
+    "CRP": "142 mg/L",
+    "creatinine": "0.9 mg/dL",
+    "urea": "5.8 mmol/L",
+    "urine dipstick": "leucocyte esterase +++, nitrite positive, blood ++, protein +",
+    "urine microscopy": "pyuria >50 WBC/hpf, WBC casts seen, bacteriuria",
+    "lactate": "1.6 mmol/L",
+    "urine hCG": "negative"
+  },
+  "imaging": "Renal tract ultrasound: normal-sized kidneys, no hydronephrosis, no calculus, no perinephric collection or abscess — excludes obstruction/complication (imaging not mandatory in uncomplicated cases but reassuring here)",
+  "microbiology": "Urine culture pending (sent before antibiotics); blood cultures x2 sent. Gram stain of urine shows Gram-negative bacilli. Subsequently grew Escherichia coli >10^5 CFU/mL, sensitive to nitrofurantoin, ciprofloxacin, ceftriaxone and gentamicin",
+  "differentialDiagnoses": [
+    "Acute pyelonephritis",
+    "Acute uncomplicated cystitis with systemic features",
+    "Renal/ureteric colic with superimposed infection",
+    "Acute cholecystitis / right upper quadrant pathology"
+  ],
+  "finalDiagnosis": "Acute uncomplicated pyelonephritis (community-acquired, E. coli)",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA International Clinical Practice Guidelines for Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women 2011"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 1 g once daily for the acutely unwell / vomiting patient, with step-down to an oral agent guided by susceptibilities; total 7 days if a fluoroquinolone is used or 10-14 days for beta-lactam therapy. Where local E. coli fluoroquinolone resistance is <10% and the patient can tolerate oral intake, oral ciprofloxacin is an acceptable first-line alternative. Rationale: covers Enterobacterales (predominantly E. coli); a single dose of a long-acting parenteral agent (ceftriaxone) is recommended when local FQ resistance exceeds 10%.",
+  "contraindications": [
+    "Avoid nitrofurantoin and fosfomycin for pyelonephritis — inadequate renal parenchymal/tissue levels",
+    "Fluoroquinolones: caution with QT prolongation, tendinopathy, and avoid in pregnancy",
+    "Adjust/avoid nephrotoxic aminoglycosides in renal impairment"
+  ],
+  "edgeCases": [
+    "Emphysematous pyelonephritis in diabetics (gas on imaging) is a surgical emergency",
+    "Obstructing calculus with infection (pyonephrosis) mandates urgent decompression, not antibiotics alone",
+    "Relative bradycardia and lack of pyuria should prompt reconsideration; pyelonephritis in pregnancy always warrants admission"
+  ],
+  "expectedMaiK": "Classic acute pyelonephritis: fever with rigors, CVA tenderness, dysuria and pyuria with nitrite-positive urine point to an ascending Enterobacterales UTI. Confirm with urine culture before antibiotics and start empiric agents with good renal tissue penetration; image only if obstruction, complication or failure to improve at 48-72h.",
+  "expectedNextQuestions": [
+    "Any pregnancy, diabetes, renal stones, urinary catheter or structural/functional urinary tract abnormality (complicating factors)?",
+    "Recent antibiotic exposure, hospitalisation or prior resistant (ESBL) urinary organism?"
+  ],
+  "expectedInvestigations": [
+    "Urine microscopy and culture with sensitivities",
+    "Blood cultures",
+    "Renal function and CRP; renal tract ultrasound/CT if no improvement in 48-72h or obstruction suspected"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "flankPain": true,
+    "feverGU": true,
+    "costovertebralTenderness": true,
+    "tachycardia": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "PYELONEPHRITIS",
+    "acceptableIds": [
+      "PYELONEPHRITIS"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "CYSTITIS",
+      "renal_colic",
+      "CHOLECYSTITIS"
+    ],
+    "investigations": [
+      "Urine microscopy and culture",
+      "Blood cultures",
+      "Renal tract ultrasound"
+    ],
+    "stewardship": {
+      "tier": "empiric-targeted",
+      "antibiotics": [
+        "ceftriaxone",
+        "ciprofloxacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include PYELONEPHRITIS",
+    "acceptableIds must equal [PYELONEPHRITIS]",
+    "stewardship antibiotics must not include nitrofurantoin"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

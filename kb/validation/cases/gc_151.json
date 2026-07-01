@@ -1,0 +1,108 @@
+{
+  "id": "gc_151",
+  "specialty": "Tropical Fever / Hepatobiliary",
+  "condition": "Acute Viral Hepatitis",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Progressive jaundice, dark urine and anorexia for 5 days following a week of flu-like illness",
+  "history": "Previously healthy young man, resident of an area with poor sanitation, who developed a prodrome of low-grade fever, marked anorexia, nausea, fatigue and myalgia about 10-12 days ago. Over the last 5 days he noticed dark (tea-coloured) urine, pale stools and yellowing of the eyes, with an aversion to fatty and fried food and a distaste for cigarettes. He reports eating at roadside food stalls and drinking untreated water. No prior liver disease, no regular medications, no herbal/traditional remedies, no paracetamol overdose, no alcohol excess, no blood transfusion, tattoos or high-risk sexual exposure. No prior hepatitis vaccination recalled.",
+  "examination": "Alert and oriented, comfortable at rest, with clinically obvious icterus of sclerae and skin. Tender, smooth, mildly enlarged liver ~2 cm below costal margin. No splenomegaly, no ascites, no asterixis, no flap, no stigmata of chronic liver disease (no spider naevi, palmar erythema or gynaecomastia). No scratch marks/excoriation prominent. Pertinent negatives: no altered sensorium, no bleeding, no Murphy sign, no right hypochondrial guarding suggesting biliary obstruction.",
+  "vitals": {
+    "hr": 78,
+    "bp": "116/74",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 99
+  },
+  "labs": {
+    "ALT": "1850 U/L",
+    "AST": "1420 U/L",
+    "Total bilirubin": "8.4 mg/dL",
+    "Direct bilirubin": "5.6 mg/dL",
+    "ALP": "180 U/L",
+    "INR": "1.2",
+    "Albumin": "4.0 g/dL",
+    "Hemoglobin": "14.2 g/dL",
+    "WBC": "5.2 x10^9/L (lymphocyte-predominant)",
+    "Platelets": "220 x10^3/uL",
+    "Creatinine": "0.8 mg/dL"
+  },
+  "imaging": "Ultrasound abdomen: mildly enlarged liver with normal echotexture, no biliary dilatation, gallbladder wall oedema (non-specific), patent portal vein, no focal lesion or ascites — excludes obstructive/surgical cause",
+  "microbiology": "Anti-HAV IgM positive; HBsAg negative, anti-HCV negative, anti-HEV IgM pending; blood cultures not indicated",
+  "differentialDiagnoses": [
+    "Acute viral hepatitis (hepatitis A/E)",
+    "Drug-induced / toxic hepatitis",
+    "Acute cholangitis / biliary obstruction",
+    "Leptospirosis",
+    "Enteric fever with hepatitis"
+  ],
+  "finalDiagnosis": "Acute viral hepatitis A",
+  "citations": [
+    "Harrison 22e — Acute Viral Hepatitis",
+    "AASLD Diagnosis and Management of Acute Viral Hepatitis 2023"
+  ],
+  "stewardship": "Not applicable — acute viral hepatitis is a self-limiting viral illness managed with supportive care (hydration, rest, antiemetics, avoidance of hepatotoxins/alcohol). No antibacterial or antiviral therapy indicated for acute HAV/HEV in the immunocompetent host.",
+  "contraindications": [
+    "Avoid paracetamol at high dose and all hepatotoxic drugs",
+    "Avoid alcohol until LFTs normalise",
+    "Avoid empiric antibiotics — not indicated"
+  ],
+  "edgeCases": [
+    "Fulminant hepatic failure — watch for rising INR, encephalopathy and shrinking liver",
+    "Cholestatic variant of hepatitis A with prolonged jaundice and pruritus",
+    "Hepatitis E in pregnancy carries high mortality and risk of fulminant course"
+  ],
+  "expectedMaiK": "Classic acute viral hepatitis in a young adult with faecal-oral exposure: a viral prodrome followed by jaundice with markedly elevated transaminases (ALT>AST, in thousands) and preserved synthetic function. Management is supportive; the key safety task is monitoring INR and mental state to detect the rare progression to acute liver failure.",
+  "expectedNextQuestions": [
+    "Any confusion, drowsiness or abnormal behaviour (encephalopathy)?",
+    "Any drug, herbal, or paracetamol/alcohol exposure to exclude toxic hepatitis?",
+    "Any bleeding, easy bruising or worsening jaundice?"
+  ],
+  "expectedInvestigations": [
+    "Viral hepatitis serology panel (anti-HAV IgM, HBsAg, anti-HCV, anti-HEV IgM)",
+    "INR / prothrombin time to assess synthetic function",
+    "Repeat LFTs and INR to track trajectory"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "fever": true,
+    "jaundice": true,
+    "darkUrine": true,
+    "nauseaVomiting": true,
+    "rightUpperQuadrantPain": true,
+    "myalgiaArthralgia": true,
+    "contaminatedFoodWaterExposure": true,
+    "subacuteOnset": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "VIRAL_HEPATITIS",
+    "acceptableIds": [
+      "VIRAL_HEPATITIS"
+    ],
+    "differentialIds": [
+      "toxic_hepatitis",
+      "LEPTOSPIROSIS",
+      "CHOLANGITIS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Viral hepatitis serology (anti-HAV IgM, HBsAg, anti-HCV, anti-HEV IgM)",
+      "INR / prothrombin time",
+      "Liver ultrasound to exclude biliary obstruction"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include VIRAL_HEPATITIS",
+    "must not recommend empiric antibiotics",
+    "differential should include a hepatotoxic/obstructive alternative (toxic_hepatitis or CHOLANGITIS)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

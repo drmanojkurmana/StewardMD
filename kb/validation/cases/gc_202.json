@@ -1,0 +1,99 @@
+{
+  "id": "gc_202",
+  "specialty": "Neurology",
+  "condition": "Migraine (with aura)",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Recurrent throbbing right-sided headache with nausea and light sensitivity",
+  "history": "18-month history of episodic headaches recurring 3-4 times per month, each lasting about a day. Attacks are unilateral (usually right fronto-temporal), pulsating, moderate-to-severe, and worsened by climbing stairs or routine activity. About 20 minutes before roughly half the attacks she sees a shimmering zig-zag arc that expands across her visual field over 15-20 minutes then resolves. She feels nauseated, occasionally vomits, and retreats to a dark quiet room. Triggers include menstruation, sleep deprivation and skipped meals. Mother has similar headaches. Takes combined oral contraceptive pill. No fever, no head injury, no thunderclap onset, no neck stiffness. Between attacks she is entirely well.",
+  "examination": "Alert, comfortable between attacks. Neurological examination normal: fundi normal with no papilloedema, no focal motor/sensory deficit, no neck stiffness or photophobia at rest, gait normal. No temporal artery tenderness. Blood pressure normal.",
+  "vitals": {
+    "hr": 76,
+    "bp": "118/74",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "Hemoglobin": "13.2 g/dL",
+    "WBC": "6.8 x10^3/uL",
+    "CRP": "2 mg/L (normal)",
+    "ESR": "8 mm/hr",
+    "Creatinine": "0.7 mg/dL",
+    "TSH": "1.9 mIU/L"
+  },
+  "imaging": "Not routinely indicated — presentation meets criteria for migraine with typical aura and normal neurological exam (no red flags). MRI brain reserved only if atypical/red-flag features emerge.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Migraine with aura",
+    "Tension-type headache",
+    "Idiopathic intracranial hypertension",
+    "Transient ischaemic attack",
+    "Secondary headache from mass lesion"
+  ],
+  "finalDiagnosis": "Migraine with aura",
+  "citations": [
+    "Harrison 22e — Migraine and Other Primary Headache Disorders",
+    "American Headache Society Consensus Statement on Integrating New Migraine Treatments 2021"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Combined oral contraceptive is contraindicated in migraine WITH aura (elevated ischaemic stroke risk) — switch to progestogen-only or non-hormonal method",
+    "Triptans contraindicated in ischaemic heart disease, uncontrolled hypertension and hemiplegic/basilar migraine",
+    "Avoid ergotamine/triptan overuse (medication-overuse headache) and NSAIDs in peptic ulcer/CKD"
+  ],
+  "edgeCases": [
+    "Aura without headache (acephalgic migraine) can mimic TIA in older patients",
+    "New or changed aura, aura >60 min, or motor weakness warrants imaging to exclude structural/vascular cause",
+    "Migraine with aura plus COC and smoking markedly raises stroke risk"
+  ],
+  "expectedMaiK": "Classic migraine with typical visual aura and a normal inter-ictal neurological exam is a clinical diagnosis; no neuroimaging is needed in the absence of red flags. Flag that a combined oral contraceptive is contraindicated in migraine with aura and should be reviewed.",
+  "expectedNextQuestions": [
+    "Any focal weakness, speech disturbance or aura lasting >60 minutes?",
+    "Any red-flag features — thunderclap onset, fever/neck stiffness, progressive daily headache, or headache waking from sleep?",
+    "How many headache/analgesic days per month (to assess chronicity and medication-overuse)?"
+  ],
+  "expectedInvestigations": [
+    "No imaging required if red-flag screen negative",
+    "Headache diary to characterise frequency and triggers",
+    "MRI brain ONLY if atypical or red-flag features present"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "headache": true,
+    "visualDisturbance": true,
+    "nauseaVomiting": true,
+    "photophobia": true,
+    "unilateralFacialPain": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "migraine",
+    "acceptableIds": [
+      "migraine"
+    ],
+    "differentialIds": [
+      "tension_ha",
+      "iih",
+      "tia"
+    ],
+    "investigations": [
+      "No imaging if red-flag screen negative",
+      "Headache diary",
+      "MRI brain only if red flags present"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include migraine",
+    "stewardship tier must be null (non-infective)",
+    "must not recommend empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "id": "gc_180",
+  "specialty": "Nephrology",
+  "condition": "Acute glomerulonephritis (post-streptococcal / acute nephritic syndrome)",
+  "age": 12,
+  "sex": "M",
+  "presentingComplaint": "Facial puffiness, dark cola-coloured urine and reduced urine output for 3 days",
+  "history": "Previously well boy presenting with a 3-day history of periorbital and facial swelling worst on waking, tea/cola-coloured urine, and reduced urine volume. He had an untreated sore throat with fever about 2 weeks ago that resolved. No recent NSAID or new drug use, no rash, no joint pains, no haemoptysis. No prior renal disease. Immunisations up to date. Lives in a semi-urban Indian household.",
+  "examination": "Alert, mild periorbital and pedal oedema, moderately elevated blood pressure. No rash, no arthritis, no oral ulcers. Chest clear, no crackles at rest; mild bibasal reduced air entry with fluid overload. Abdomen soft, no organomegaly, no ascites. Fundi normal, no papilloedema. Pertinent negatives: no purpura, no haemoptysis, no sinus/ENT bleeding, no features of chronicity (normal growth, no anaemia of chronic disease).",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/94",
+    "rr": 20,
+    "temp": 37,
+    "spo2": 98
+  },
+  "labs": {
+    "urinalysis": "3+ blood, 2+ protein, dysmorphic RBCs and RBC casts on microscopy",
+    "creatinine": "1.4 mg/dL (raised for age)",
+    "urea": "12 mmol/L",
+    "eGFR": "reduced",
+    "C3": "low (0.35 g/L)",
+    "C4": "normal",
+    "ASO titre": "elevated (>400 IU/mL)",
+    "anti-DNase B": "elevated",
+    "albumin": "3.6 g/dL (near normal, non-nephrotic proteinuria)",
+    "ANA": "negative",
+    "ANCA": "negative",
+    "anti-GBM": "negative"
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys with normal/slightly increased echogenicity, no obstruction or scarring — supports acute rather than chronic process",
+  "microbiology": "Throat swab negative (post-infectious phase); serology (ASO/anti-DNase B) supports recent streptococcal infection",
+  "differentialDiagnoses": [
+    "Post-streptococcal (post-infectious) glomerulonephritis",
+    "IgA nephropathy",
+    "Rapidly progressive / crescentic glomerulonephritis (ANCA vasculitis, anti-GBM)",
+    "Lupus nephritis",
+    "Acute kidney injury of other cause"
+  ],
+  "finalDiagnosis": "Acute post-streptococcal glomerulonephritis (acute nephritic syndrome)",
+  "citations": [
+    "Harrison 22e — Glomerular Diseases (Acute Nephritic Syndromes / Post-streptococcal Glomerulonephritis)",
+    "KDIGO Glomerular Diseases Guideline 2021"
+  ],
+  "stewardship": "Not applicable — non-infective at presentation. This is a post-infectious immune-mediated process; the antecedent streptococcal infection has already resolved and antibiotics do not alter the course of established nephritis. Management is supportive: salt/fluid restriction, loop diuretics and antihypertensives for volume overload/hypertension.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, contrast, aminoglycosides) in the setting of AKI",
+    "Dose renally-cleared drugs to reduced eGFR",
+    "Avoid ACE inhibitors/ARBs acutely if AKI/hyperkalaemia present"
+  ],
+  "edgeCases": [
+    "Persistently low C3 beyond 8-12 weeks or heavy nephrotic-range proteinuria should prompt biopsy and re-evaluation for C3 glomerulopathy or membranoproliferative GN",
+    "Rapid rise in creatinine, oliguria and RBC casts may signal a crescentic/RPGN course requiring urgent biopsy and immunosuppression",
+    "Can present as hypertensive encephalopathy or acute pulmonary oedema rather than simple oedema"
+  ],
+  "expectedMaiK": "Classic acute nephritic syndrome: haematuria with RBC casts, hypertension, oedema and mild renal impairment 1-2 weeks after streptococcal pharyngitis, with low C3 and raised ASO/anti-DNase B strongly favouring post-streptococcal GN. Management is supportive; watch for volume overload, malignant hypertension and any features of a rapidly progressive course.",
+  "expectedNextQuestions": [
+    "Timing and site of the preceding streptococcal infection (throat vs skin) relative to symptom onset",
+    "Urine output trend and any features of volume overload (breathlessness, orthopnoea)",
+    "Any haemoptysis, rash, joint symptoms or family history suggesting systemic/hereditary GN"
+  ],
+  "expectedInvestigations": [
+    "Complement levels (C3/C4) and streptococcal serology (ASO, anti-DNase B)",
+    "Urine microscopy for dysmorphic RBCs/RBC casts and quantified proteinuria (UPCR)",
+    "Renal function/electrolytes and, if atypical or worsening, renal biopsy with ANCA/anti-GBM/ANA"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "hematuria": true,
+    "darkUrine": true,
+    "proteinuria": true,
+    "legSwellingBilateral": true,
+    "oliguria": true,
+    "renalImpairment": true,
+    "hypertensionHx": true,
+    "creatinine": true,
+    "urea": true
+  },
+  "expected": {
+    "diagnosis": "glomerulonephritis",
+    "acceptableIds": [
+      "glomerulonephritis"
+    ],
+    "differentialIds": [
+      "nephrotic",
+      "aki",
+      "vasculitis"
+    ],
+    "investigations": [
+      "Urine microscopy (dysmorphic RBCs / RBC casts) and urine protein quantification",
+      "Complement (C3/C4) and streptococcal serology (ASO, anti-DNase B)",
+      "Renal function panel; renal biopsy if atypical/rapidly progressive"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include glomerulonephritis",
+    "stewardship tier must be null (non-infective post-infectious process)",
+    "differential must include an alternative renal cause (nephrotic or aki)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

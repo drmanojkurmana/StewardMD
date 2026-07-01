@@ -1,0 +1,98 @@
+{
+  "id": "gc_196",
+  "specialty": "Neurology / Vascular",
+  "condition": "Acute ischemic stroke",
+  "age": 72,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset right-sided weakness and slurred speech 90 minutes ago",
+  "history": "Witnessed acute onset at 08:15 of right facial droop, right arm and leg weakness, and difficulty speaking while eating breakfast; last known well clearly documented at 08:00. No headache, no seizure, no vomiting. Background of longstanding hypertension (on amlodipine), type 2 diabetes, dyslipidaemia, and permanent atrial fibrillation for which he was prescribed apixaban but self-discontinued it 3 weeks ago due to a minor gum bleed. Ex-smoker (30 pack-years). No recent trauma or surgery, no anticoagulant taken in preceding 48h.",
+  "examination": "Alert, GCS 15 but dysarthric with expressive aphasia. Right facial weakness (upper-motor-neuron pattern, forehead spared), right hemiparesis (arm MRC 2/5, leg 3/5) with right-sided sensory inattention and a left gaze preference. NIHSS 12. Irregularly irregular pulse. No neck stiffness, no papilloedema, no thunderclap features. Pertinent negatives: no fever, no meningism, no fluctuating consciousness, no recent head injury, capillary glucose normal.",
+  "vitals": {
+    "hr": 96,
+    "bp": "178/98",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "capillaryGlucose": "7.4 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "INR": "1.0",
+    "platelets": "245 x10^3/uL",
+    "hemoglobin": "13.8 g/dL",
+    "HbA1c": "7.9%",
+    "LDL": "3.4 mmol/L"
+  },
+  "imaging": "Non-contrast CT head: no haemorrhage, hyperdense left MCA sign, early loss of grey-white differentiation in left insula (ASPECTS 8). CT angiography: proximal left M1 middle cerebral artery occlusion. CT perfusion: small core with sizeable penumbra (favourable mismatch).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute ischemic stroke (cardioembolic, left MCA territory)",
+    "Intracerebral haemorrhage",
+    "Transient ischaemic attack",
+    "Hypoglycaemia",
+    "Todd's paresis post-seizure",
+    "Space-occupying lesion"
+  ],
+  "finalDiagnosis": "Acute ischemic stroke - left MCA cardioembolic (AF, anticoagulation lapse)",
+  "citations": [
+    "Harrison 22e — Ischemic Stroke (Cerebrovascular Diseases)",
+    "AHA/ASA Guidelines for the Early Management of Patients With Acute Ischemic Stroke 2019 (2019 update)"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Confirm no intracranial haemorrhage on CT before thrombolysis",
+    "Verify BP <185/110 before IV alteplase/tenecteplase; treat if higher",
+    "Recent anticoagulant use / coagulopathy would contraindicate thrombolysis (here apixaban stopped >48h, INR normal)"
+  ],
+  "edgeCases": [
+    "Stroke mimics (hypoglycaemia, seizure with Todd's paresis, complicated migraine) must be excluded before lysis",
+    "Wake-up / unknown-onset stroke may still be eligible via MRI DWI-FLAIR mismatch or perfusion imaging",
+    "Large-vessel occlusion warrants mechanical thrombectomy up to 24h in selected patients regardless of thrombolysis"
+  ],
+  "expectedMaiK": "Classic hyperacute left-MCA cardioembolic ischaemic stroke in an AF patient off anticoagulation, within the thrombolysis window with an LVO — this is a time-critical 'brain attack' requiring immediate stroke-team activation for IV thrombolysis and thrombectomy assessment.",
+  "expectedNextQuestions": [
+    "What is the exact last-known-well time and is the patient within 4.5h for thrombolysis / 24h for thrombectomy?",
+    "Any contraindication to thrombolysis (recent surgery, bleeding, anticoagulant timing, BP)?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head plus CT angiography (and CT perfusion) to exclude haemorrhage and identify large-vessel occlusion",
+    "Capillary blood glucose, coagulation profile and ECG"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "focalNeuroDeficit": true,
+    "cerebrovascularDisease": true,
+    "atrialFibHx": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "ischemic_stroke",
+    "acceptableIds": [
+      "ischemic_stroke"
+    ],
+    "differentialIds": [
+      "ich",
+      "tia",
+      "hypoglycemia",
+      "seizure_epilepsy"
+    ],
+    "investigations": [
+      "Non-contrast CT head with CT angiography",
+      "Capillary glucose and coagulation profile"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ischemic_stroke",
+    "differential must include ich (haemorrhagic stroke must be excluded by CT before thrombolysis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

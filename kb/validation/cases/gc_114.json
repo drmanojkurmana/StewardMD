@@ -1,0 +1,105 @@
+{
+  "id": "gc_114",
+  "specialty": "Genitourinary",
+  "condition": "Complicated Urinary Tract Infection",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "2 days of fever with dysuria, frequency and left flank pain",
+  "history": "64-year-old man with type 2 diabetes and benign prostatic hyperplasia presents with 2 days of high-grade fever with rigors, dysuria, increased urinary frequency and left loin pain. Reports poor urinary stream and incomplete voiding for months. Received a course of oral antibiotics 6 weeks ago for a similar episode. No recent hospitalization or indwelling catheter. Non-smoker, HbA1c 8.9% at last review.",
+  "examination": "Ill-looking but alert and oriented. Left costovertebral angle tenderness. Suprapubic mild tenderness. Palpable non-tender bladder suggesting incomplete emptying. No rash, no meningism. Chest clear, abdomen soft with no guarding or organomegaly. Peripheries warm, capillary refill <2s.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/72",
+    "rr": 20,
+    "temp": 38.7,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "15.8 x10^9/L (neutrophilia)",
+    "CRP": "142 mg/L",
+    "Creatinine": "1.4 mg/dL (baseline 1.0)",
+    "Urea": "9.2 mmol/L",
+    "Random glucose": "16.5 mmol/L",
+    "Urinalysis": "leucocyte esterase +++, nitrites positive, >100 WBC/hpf, many bacteria",
+    "Lactate": "1.6 mmol/L"
+  },
+  "imaging": "Renal ultrasound: mild left hydronephrosis, post-void residual 210 mL, enlarged prostate; no perinephric collection or abscess",
+  "microbiology": "Urine culture and blood cultures sent; Gram-negative bacilli on urine Gram stain (E. coli grown on culture, pending sensitivities)",
+  "differentialDiagnoses": [
+    "Acute pyelonephritis in a complicated host",
+    "Acute bacterial prostatitis",
+    "Uncomplicated cystitis",
+    "Renal/ureteric colic with secondary infection"
+  ],
+  "finalDiagnosis": "Complicated urinary tract infection (febrile UTI with obstructive uropathy/BPH and diabetes in a male)",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA Complicated Intra-abdominal/Urinary Tract Infection guidance; IDSA Catheter-Associated and Complicated UTI 2010"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 1-2 g daily (or piperacillin-tazobactam if ESBL risk factors) covering Enterobacterales; de-escalate to oral agent per culture sensitivities. Total 10-14 days given complicating factors (male sex, obstruction, diabetes). Relieve obstruction/ensure adequate bladder drainage.",
+  "contraindications": [
+    "Beta-lactam/cephalosporin allergy — use aztreonam or fluoroquinolone alternative",
+    "Avoid nitrofurantoin (inadequate tissue/renal penetration for febrile/complicated UTI and reduced efficacy with eGFR impairment)",
+    "Renal dose-adjust and monitor creatinine given AKI and diabetes"
+  ],
+  "edgeCases": [
+    "Prior antibiotics within 90 days raise ESBL-producing E. coli risk — escalate to carbapenem if severe or ESBL confirmed",
+    "Failure to relieve obstruction (hydronephrosis/high residual) can precipitate urosepsis despite appropriate antibiotics",
+    "In men, febrile UTI frequently reflects concurrent prostatic involvement requiring longer therapy"
+  ],
+  "expectedMaiK": "Febrile UTI with pyuria/nitrites plus a complicating factor (male sex, diabetes, BPH with obstruction, prior antibiotics) defines a complicated UTI; empiric coverage should target Enterobacterales with attention to ESBL risk, and source control by relieving the obstruction is essential alongside antibiotics.",
+  "expectedNextQuestions": [
+    "Any prior culture-proven resistant organism (ESBL/fluoroquinolone-resistant)?",
+    "Is there complete inability to void or worsening loin pain suggesting obstruction requiring drainage?"
+  ],
+  "expectedInvestigations": [
+    "Urine culture with sensitivities and blood cultures",
+    "Renal tract ultrasound / CT to exclude obstruction or abscess and measure post-void residual"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "flankPain": true,
+    "feverGU": true,
+    "costovertebralTenderness": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true,
+    "urinaryRetention": true,
+    "antibioticsLast90Days": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "COMPLICATED_UTI",
+    "acceptableIds": [
+      "COMPLICATED_UTI"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "PROSTATITIS",
+      "CYSTITIS",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Urine culture and sensitivities",
+      "Renal tract ultrasound/CT for obstruction"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum empiric (Enterobacterales cover)",
+      "antibiotics": [
+        "ceftriaxone",
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include COMPLICATED_UTI",
+    "stewardship tier is not null and antibiotics include an Enterobacterales-active beta-lactam"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "id": "gc_155",
+  "specialty": "Hematology / Oncology",
+  "condition": "Acute leukaemia (acute myeloid leukaemia)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Two weeks of progressive fatigue, easy bruising and low-grade fever",
+  "history": "34-year-old previously well man with a 2-week history of increasing tiredness and breathlessness on exertion, spontaneous bruising over the limbs and gum bleeding while brushing teeth. Reports intermittent low-grade fevers and drenching night sweats over the same period, plus two self-limiting nosebleeds. No overt weight loss but reduced appetite. No prior chemotherapy, radiation, benzene exposure or family history of haematological malignancy. No anticoagulant use.",
+  "examination": "Pale conjunctivae, scattered ecchymoses and petechiae over both shins and forearms, gingival bleeding and mild gum hypertrophy. No lymphadenopathy; spleen tip just palpable, liver not enlarged. No focal neurological deficit and no neck stiffness. Chest clear, no localising source of infection identified.",
+  "vitals": {
+    "hr": 104,
+    "bp": "112/70",
+    "rr": 18,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "7.6 g/dL",
+    "WBC": "48 x10^9/L (blasts predominant)",
+    "platelets": "18 x10^3/uL",
+    "peripheral_smear": "numerous circulating blasts, some with Auer rods",
+    "LDH": "820 U/L (elevated)",
+    "uric_acid": "9.1 mg/dL",
+    "creatinine": "1.0 mg/dL",
+    "coagulation": "PT/aPTT mildly deranged, fibrinogen low-normal (monitor for DIC)"
+  },
+  "imaging": "Chest X-ray clear; not diagnostic — imaging not required to establish diagnosis",
+  "microbiology": "Blood cultures sent as febrile; pending. No source identified",
+  "differentialDiagnoses": [
+    "Acute myeloid leukaemia",
+    "Acute lymphoblastic leukaemia",
+    "Aplastic anaemia",
+    "Immune thrombocytopenia with incidental anaemia",
+    "Severe sepsis with consumptive cytopenias"
+  ],
+  "finalDiagnosis": "Acute leukaemia (acute myeloid leukaemia — blasts with Auer rods)",
+  "citations": [
+    "Harrison 22e — Acute Myeloid Leukemia",
+    "NCCN Acute Myeloid Leukemia 2023"
+  ],
+  "stewardship": "not applicable — non-infective (low-grade fever is common at presentation; empiric antibiotics are indicated only if the patient meets febrile-neutropenia criteria, which is a separate pathway, not treatment of the leukaemia itself)",
+  "contraindications": [
+    "Avoid IM injections and antiplatelet/anticoagulant drugs given severe thrombocytopenia",
+    "Platelet transfusion threshold and avoidance of NSAIDs for fever",
+    "Allopurinol/rasburicase caution — check G6PD before rasburicase for tumour lysis prophylaxis"
+  ],
+  "edgeCases": [
+    "Acute promyelocytic leukaemia (APL) variant presents with prominent DIC and bleeding and is a haematological emergency requiring urgent ATRA before genetic confirmation",
+    "Pancytopenia without circulating blasts (aleukaemic leukaemia) can mimic aplastic anaemia and needs marrow examination",
+    "Hyperleukocytosis (WBC >100) can cause leukostasis with dyspnoea and neurological signs"
+  ],
+  "expectedMaiK": "Bicytopenia/pancytopenia with circulating blasts and Auer rods on smear points to acute myeloid leukaemia; this is a haematological emergency requiring urgent marrow examination, tumour-lysis and DIC monitoring, and referral rather than antibiotic treatment.",
+  "expectedNextQuestions": [
+    "Any recent chemotherapy/radiation, benzene or prior myelodysplasia?",
+    "Any bleeding from multiple sites or signs suggesting DIC/APL?",
+    "Any bone pain, gum infiltration or CNS symptoms?"
+  ],
+  "expectedInvestigations": [
+    "Urgent bone marrow aspirate and trephine with flow cytometry, cytogenetics and molecular studies",
+    "Peripheral blood film review and coagulation screen with fibrinogen (assess for DIC/APL)",
+    "Tumour lysis panel — uric acid, potassium, phosphate, calcium, LDH, renal function"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "petechialRash": true,
+    "mucocutaneousBleeding": true,
+    "splenomegaly": true,
+    "thrombocytopenia": true,
+    "bleedingManifestation": true,
+    "tachycardia": true,
+    "dyspnea": true
+  },
+  "expected": {
+    "diagnosis": "acute_leukemia",
+    "acceptableIds": [
+      "acute_leukemia"
+    ],
+    "differentialIds": [
+      "anemia_sympt",
+      "itp",
+      "malignancy_b",
+      "dic"
+    ],
+    "investigations": [
+      "Bone marrow aspirate and trephine with flow cytometry/cytogenetics",
+      "Peripheral blood film",
+      "Coagulation screen with fibrinogen",
+      "Tumour lysis panel"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include acute_leukemia",
+    "stewardship tier must be null (non-infective condition)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

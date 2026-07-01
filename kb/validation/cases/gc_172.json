@@ -1,0 +1,105 @@
+{
+  "id": "gc_172",
+  "specialty": "Rheumatology",
+  "condition": "Crystal arthritis (acute gout)",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe pain, swelling and redness of the right big-toe joint overnight",
+  "history": "Otherwise well 54-year-old man woken from sleep at ~3am by excruciating pain in the right first metatarsophalangeal joint, reaching peak intensity within 6-12 hours. The joint is exquisitely tender - even the weight of a bedsheet is intolerable. He describes a similar but milder self-limiting episode in the same toe 8 months ago. Risk factors: obesity (BMI 32), hypertension on hydrochlorothiazide, regular beer intake (4-5 units most evenings), and a diet rich in red meat and shellfish; a recent seafood binge preceded this attack. Family history of gout in his father. No prior joint trauma, no fever preceding onset.",
+  "examination": "Monoarticular arthritis: right first MTP joint is markedly swollen, erythematous, warm and exquisitely tender with overlying shiny skin; painful restricted range of movement. No tophi palpable at helices/olecranon (early disease). No portal of entry or skin breach over the joint. Rest of joint examination normal; no other hot joints, no lymphangitic streaking, systemically well.",
+  "vitals": {
+    "hr": 88,
+    "bp": "142/88",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "10.5 x10^9/L (mild leukocytosis)",
+    "CRP": "48 mg/L",
+    "ESR": "40 mm/hr",
+    "serum urate": "9.1 mg/dL (elevated; may be normal during acute attack)",
+    "creatinine": "1.0 mg/dL",
+    "eGFR": ">60 mL/min",
+    "random glucose": "6.4 mmol/L"
+  },
+  "imaging": "Plain radiograph of foot: soft-tissue swelling only in early disease; no erosions. (Chronic gout would show punched-out para-articular erosions with overhanging edges and preserved joint space.) Musculoskeletal ultrasound may show double-contour sign over cartilage.",
+  "microbiology": "Joint aspiration: synovial fluid shows negatively birefringent needle-shaped monosodium urate crystals under polarised light; WBC ~20,000/µL predominantly neutrophils; Gram stain negative; culture sent and pending to exclude septic arthritis.",
+  "differentialDiagnoses": [
+    "Acute gout",
+    "Septic arthritis",
+    "Pseudogout (CPPD)",
+    "Cellulitis",
+    "Reactive arthritis"
+  ],
+  "finalDiagnosis": "Acute gout (crystal arthritis) of the right first MTP joint (podagra)",
+  "citations": [
+    "Harrison 22e — Gout and Other Crystal-Associated Arthropathies",
+    "ACR Guideline for the Management of Gout 2020"
+  ],
+  "stewardship": "Not applicable - non-infective crystal arthropathy. Antibiotics are not indicated; septic arthritis must be excluded by aspiration before withholding them, but confirmed urate crystals with negative Gram stain support anti-inflammatory management (NSAIDs, colchicine, or corticosteroids) rather than antimicrobials.",
+  "contraindications": [
+    "Avoid NSAIDs in significant CKD, peptic ulcer disease or heart failure - use colchicine or corticosteroids instead",
+    "Colchicine dose reduction with renal/hepatic impairment and with strong CYP3A4/P-gp inhibitors (e.g., clarithromycin)",
+    "Do NOT start or stop urate-lowering therapy (allopurinol) during the acute attack; do not discontinue established allopurinol"
+  ],
+  "edgeCases": [
+    "Serum urate can be normal or low during an acute flare - a normal urate does not exclude gout",
+    "Polyarticular/tophaceous gout with low-grade fever and raised inflammatory markers can mimic sepsis",
+    "Septic arthritis and gout can coexist - always aspirate and culture a hot joint",
+    "Pseudogout (CPPD) favours knees/wrists in older patients with positively birefringent rhomboid crystals"
+  ],
+  "expectedMaiK": "Classic podagra with negatively birefringent monosodium urate crystals confirms acute gout; because a hot monoarticular joint can also be septic, joint aspiration for crystals, Gram stain and culture is mandatory before attributing it to crystals. Treat the flare with NSAIDs, colchicine or corticosteroids and defer starting urate-lowering therapy until the attack settles.",
+  "expectedNextQuestions": [
+    "Any fever, rigors or a skin breach/portal of entry to suggest joint sepsis?",
+    "Diuretic use, alcohol intake, purine-rich diet or family history of gout?",
+    "Previous similar self-limiting attacks or tophi?"
+  ],
+  "expectedInvestigations": [
+    "Joint aspiration with polarised-light microscopy plus Gram stain and culture",
+    "Serum urate (and repeat 2-4 weeks after the flare)",
+    "Renal function and inflammatory markers (CRP/ESR)"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "jointSwelling": true,
+    "severePain": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "polyarthralgia": true,
+    "myalgiaArthralgia": true,
+    "hypertensionHx": true,
+    "alcoholExcess": true,
+    "ageOver50": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "crystal_arthritis",
+    "acceptableIds": [
+      "crystal_arthritis"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "rheumatoid",
+      "sle_flare"
+    ],
+    "investigations": [
+      "Joint aspiration with polarised-light crystal microscopy, Gram stain and culture",
+      "Serum urate",
+      "CRP/ESR and renal function"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include crystal_arthritis",
+    "must recommend joint aspiration for crystal microscopy and to exclude septic arthritis",
+    "must NOT recommend empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "id": "gc_222",
+  "specialty": "Neurology / Vascular",
+  "condition": "Subarachnoid hemorrhage",
+  "age": 52,
+  "sex": "F",
+  "presentingComplaint": "Sudden, explosive, worst-ever headache peaking within seconds, with brief loss of consciousness and vomiting.",
+  "history": "Previously well 52-year-old woman developed an abrupt, severe occipital headache while straining at stool that reached maximal intensity almost instantly ('thunderclap'). She had transient loss of consciousness for under a minute, followed by two episodes of vomiting, photophobia and neck pain. No preceding trauma. Reports a milder self-limiting 'sentinel' headache 10 days earlier that she did not seek care for. Risk factors: long-standing hypertension (poorly controlled), current smoker (20 pack-years), and a mother with a 'brain bleed'. No anticoagulant use.",
+  "examination": "Alert but distressed, GCS 14 (E4 V4 M6), photophobic. Neck stiffness with positive Kernig sign; no focal limb deficit; pupils equal and reactive; no papilloedema acutely; fundoscopy shows a small subhyaloid haemorrhage. No fever, no rash. Pertinent negatives: no facial/limb weakness, no dysarthria, no signs of meningeal infection, cardiovascular and respiratory exams unremarkable.",
+  "vitals": {
+    "hr": 92,
+    "bp": "178/98",
+    "rr": 18,
+    "temp": 37.2,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "13.4 g/dL",
+    "wbc": "12.1 x10^9/L (mild stress leucocytosis)",
+    "platelets": "265 x10^3/uL",
+    "sodium": "138 mmol/L (baseline; monitor for later hyponatraemia)",
+    "creatinine": "0.8 mg/dL",
+    "inr": "1.0",
+    "glucose": "128 mg/dL",
+    "troponin": "mildly elevated (neurogenic)",
+    "ecg": "sinus rhythm with deep symmetric T-wave inversions and prolonged QT"
+  },
+  "imaging": "Non-contrast CT head: hyperdense blood in the basal cisterns, sylvian fissures and interhemispheric fissure — diffuse aneurysmal-pattern subarachnoid haemorrhage. CT angiography demonstrates a 7 mm saccular aneurysm at the anterior communicating artery.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Aneurysmal subarachnoid haemorrhage",
+    "Migraine / primary thunderclap headache",
+    "Bacterial meningitis",
+    "Intracerebral haemorrhage",
+    "Cerebral venous sinus thrombosis / RCVS"
+  ],
+  "finalDiagnosis": "Aneurysmal subarachnoid haemorrhage (anterior communicating artery aneurysm)",
+  "citations": [
+    "Harrison 22e — Cerebrovascular Diseases (Subarachnoid Hemorrhage)",
+    "AHA/ASA Guidelines for the Management of Aneurysmal Subarachnoid Hemorrhage 2023"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid antiplatelet/anticoagulant agents before aneurysm is secured",
+    "Nimodipine may cause hypotension — titrate carefully; caution in renal/hepatic impairment",
+    "Aggressive BP lowering below recommended targets risks cerebral ischaemia"
+  ],
+  "edgeCases": [
+    "Non-contrast CT sensitivity falls after 6 hours; a normal CT beyond this window requires lumbar puncture for xanthochromia (spectrophotometry) to exclude SAH",
+    "Sentinel ('warning') headache days earlier is easily dismissed",
+    "Perimesencephalic non-aneurysmal SAH has a benign course and negative angiography"
+  ],
+  "expectedMaiK": "A thunderclap, worst-ever headache with meningism and transient loss of consciousness is subarachnoid haemorrhage until proven otherwise; obtain an urgent non-contrast CT head immediately and, if negative beyond 6 hours, perform lumbar puncture for xanthochromia. Do not give antiplatelets/anticoagulation before the aneurysm is secured.",
+  "expectedNextQuestions": [
+    "Was the headache truly instantaneous ('like a thunderclap') and the worst of your life?",
+    "Any preceding sentinel headache, neck pain, or transient loss of consciousness?",
+    "Any family history of aneurysm/SAH, polycystic kidney disease, or anticoagulant use?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "CT angiography (aneurysm localisation)",
+    "Lumbar puncture for xanthochromia if CT negative and >6h from onset"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "thunderclapHeadache": true,
+    "headacheSevere": true,
+    "headache": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "nauseaVomiting": true,
+    "syncope": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "sah",
+    "acceptableIds": [
+      "sah"
+    ],
+    "differentialIds": [
+      "migraine",
+      "ich",
+      "MENINGITIS",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiography",
+      "Lumbar puncture for xanthochromia if CT negative"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include sah",
+    "thunderclapHeadache present must strongly weight sah over migraine/tension_ha"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

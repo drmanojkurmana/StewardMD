@@ -1,0 +1,109 @@
+{
+  "id": "gc_134",
+  "specialty": "Central Nervous System",
+  "condition": "Acute Bacterial Meningitis",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Severe headache, high fever and neck stiffness for 18 hours with progressive drowsiness",
+  "history": "Previously well university student, acute onset over less than a day of throbbing global headache, rigors and high fever, followed by photophobia, vomiting and increasing confusion. Two housemates recently had 'flu-like' illness. No recent travel, no head injury, immunisations not up to date for meningococcal booster. No anticoagulant or immunosuppressant use.",
+  "examination": "Ill and toxic-appearing, drowsy but rousable (GCS 14, E3V5M6). Neck stiffness with positive Kernig and Brudzinski signs. Sparse non-blanching petechial rash over trunk and lower limbs. No focal motor deficit, pupils equal and reactive, fundi normal (no papilloedema). Chest clear, no murmur.",
+  "vitals": {
+    "hr": 118,
+    "bp": "104/64",
+    "rr": 24,
+    "temp": 39.6,
+    "spo2": 97
+  },
+  "labs": {
+    "WBC": "19.8 x10^9/L (neutrophil predominant)",
+    "CRP": "218 mg/L",
+    "procalcitonin": "12 ng/mL",
+    "platelets": "138 x10^3/uL",
+    "creatinine": "1.0 mg/dL",
+    "lactate": "2.6 mmol/L",
+    "CSF opening pressure": "28 cm H2O",
+    "CSF WBC": "3200 /uL (90% neutrophils)",
+    "CSF protein": "220 mg/dL",
+    "CSF glucose": "1.4 mmol/L (CSF:serum ratio 0.28)",
+    "CSF Gram stain": "Gram-negative diplococci"
+  },
+  "imaging": "CT head prior to LP (due to drowsiness) normal, no mass lesion, no midline shift or hydrocephalus",
+  "microbiology": "CSF and blood cultures sent; CSF Gram stain shows Gram-negative diplococci consistent with Neisseria meningitidis; meningococcal PCR pending",
+  "differentialDiagnoses": [
+    "Bacterial meningitis (meningococcal)",
+    "Viral (aseptic) meningitis",
+    "Meningoencephalitis",
+    "Subarachnoid haemorrhage"
+  ],
+  "finalDiagnosis": "Acute bacterial meningitis (meningococcal)",
+  "citations": [
+    "Harrison 22e — Acute Meningitis",
+    "IDSA Practice Guidelines for the Management of Bacterial Meningitis 2004 (with 2016 ESCMID update)"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 2 g 12-hourly after immediate blood cultures and (once safe) LP; add IV dexamethasone 10 mg 6-hourly with/before first antibiotic dose. Add vancomycin where penicillin/cephalosporin-resistant pneumococcus is a concern, and ampicillin if >50 years or immunocompromised (Listeria cover). Do not delay antibiotics for imaging or LP.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis (use chloramphenicol or meropenem alternative)",
+    "Avoid LP before imaging if focal deficit, papilloedema or reduced GCS with mass-lesion concern",
+    "Coagulopathy/thrombocytopenia contraindicates immediate LP"
+  ],
+  "edgeCases": [
+    "Purpura fulminans with meningococcaemia and DIC may dominate over meningitic signs",
+    "Partially treated meningitis can produce lymphocyte-predominant CSF and negative Gram stain",
+    "Listeria in elderly/immunocompromised requires added ampicillin"
+  ],
+  "expectedMaiK": "Classic community-acquired bacterial meningitis: neutrophilic pleocytosis with low CSF glucose and Gram-negative diplococci indicate Neisseria meningitidis. This is a medical emergency requiring immediate parenteral ceftriaxone plus dexamethasone without waiting for LP or imaging, and public-health notification with contact chemoprophylaxis.",
+  "expectedNextQuestions": [
+    "Any focal neurological deficit, seizures or papilloedema mandating CT before LP?",
+    "Immunisation status, close contacts, and immunocompromise or age >50 (Listeria risk)?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture with CSF cell count, protein, glucose, Gram stain and culture",
+    "Blood cultures and meningococcal/pneumococcal PCR"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "alteredSensorium": true,
+    "petechialRash": true,
+    "nauseaVomiting": true,
+    "toxicAppearing": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "MENINGITIS",
+    "acceptableIds": [
+      "MENINGITIS"
+    ],
+    "differentialIds": [
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS",
+      "sah",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Lumbar puncture with CSF analysis and Gram stain",
+      "Blood cultures and CSF PCR"
+    ],
+    "stewardship": {
+      "tier": "empiric",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Dexamethasone",
+        "Vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include MENINGITIS",
+    "neutrophilic CSF pleocytosis with low CSF:serum glucose ratio must favour MENINGITIS over VIRAL_MENINGITIS",
+    "petechial rash + neck stiffness must not be top-ranked as SEPSIS without meningitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

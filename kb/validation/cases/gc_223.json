@@ -1,0 +1,103 @@
+{
+  "id": "gc_223",
+  "specialty": "Toxicology",
+  "condition": "Salicylate toxicity",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Ringing in the ears, rapid breathing and vomiting several hours after a deliberate overdose of aspirin tablets.",
+  "history": "Brought to the emergency department by her flatmate after ingesting an estimated 40 to 50 (325 mg) aspirin tablets around 5 hours earlier during an argument. Initially only nauseous, she has progressively developed persistent vomiting, marked tinnitus, subjective 'muffled' hearing and increasingly rapid, deep breathing. No co-ingestion of paracetamol reported but uncertain. Background of depression on no regular medication; no chronic salicylate or NSAID use; not pregnant by history.",
+  "examination": "Alert and oriented but restless and anxious, appears flushed and diaphoretic. Marked hyperpnoea with deep sighing (Kussmaul-like) respirations. Mild epigastric tenderness. No focal neurological deficit, no meningism, no rash, no asterixis. Pertinent negatives: no cyanosis, no pinpoint pupils, chest clear on auscultation, no focal seizure activity.",
+  "vitals": {
+    "hr": 118,
+    "bp": "118/74",
+    "rr": 32,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "ABG": "pH 7.44, PaCO2 22 mmHg, HCO3 15 mmol/L (mixed respiratory alkalosis + metabolic acidosis)",
+    "anion_gap": "20 mmol/L (elevated)",
+    "salicylate_level": "62 mg/dL at 6 h, rising on repeat",
+    "glucose": "84 mg/dL",
+    "potassium": "3.2 mmol/L",
+    "sodium": "139 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "lactate": "2.4 mmol/L",
+    "paracetamol_level": "undetectable",
+    "INR": "1.1"
+  },
+  "imaging": "Not indicated acutely; CXR reserved for hypoxia/suspected ARDS (non-cardiogenic pulmonary oedema is a late complication).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Salicylate toxicity",
+    "Diabetic ketoacidosis",
+    "Sepsis with mixed acid-base disturbance",
+    "Other toxic alcohol / anion-gap acidosis (e.g. metabolic encephalopathy)"
+  ],
+  "finalDiagnosis": "Acute salicylate toxicity",
+  "citations": [
+    "Harrison 22e — Chapter on Poisoning and Drug Overdose (aspirin/salicylate)",
+    "AACT/EAPCCT Salicylate Poisoning Management Consensus 2015"
+  ],
+  "stewardship": "Not applicable — non-infective toxicological emergency. Management is supportive: aggressive IV fluids with dextrose, serial salicylate levels and ABG/electrolytes, urinary alkalinisation with sodium bicarbonate (target urine pH 7.5-8.0), potassium repletion (alkalinisation fails if hypokalaemic), and haemodialysis for severe features (level >90-100 mg/dL acute, altered mental status, refractory acidosis, pulmonary/cerebral oedema, renal failure).",
+  "contraindications": [
+    "Avoid intubation/hypoventilation where possible — losing compensatory hyperventilation causes catastrophic pH fall; if intubation is unavoidable, match the patient's high minute ventilation",
+    "Do not give acetazolamide (worsens metabolic acidosis)",
+    "Correct hypokalaemia before/while attempting urinary alkalinisation"
+  ],
+  "edgeCases": [
+    "Chronic salicylate toxicity in the elderly presents with confusion and lower measured levels and is easily mistaken for sepsis or delirium",
+    "A 'normal' or falling salicylate level can be falsely reassuring during ongoing absorption from a tablet bezoar or enteric-coated preparation — repeat levels",
+    "Late CNS depression and non-cardiogenic pulmonary oedema herald severe/fatal toxicity"
+  ],
+  "expectedMaiK": "The mixed primary respiratory alkalosis with a high-anion-gap metabolic acidosis, tinnitus, hyperpnoea and confirmed history strongly indicate acute salicylate toxicity. Prioritise serial salicylate levels, urinary alkalinisation with potassium repletion, and early nephrology involvement for possible haemodialysis; avoid intubation unless the patient's minute ventilation can be matched.",
+  "expectedNextQuestions": [
+    "Exact quantity, timing and formulation (enteric-coated/extended-release) of aspirin ingested",
+    "Any co-ingestants, especially paracetamol",
+    "Trend of serial salicylate levels and ABG"
+  ],
+  "expectedInvestigations": [
+    "Serial serum salicylate levels",
+    "Arterial blood gas with electrolytes and anion gap",
+    "Serum paracetamol level and urine pH monitoring"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "tachypnea": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "drugOverdose": true,
+    "ketonemia": true,
+    "abdominalDiscomfort": true,
+    "fever": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "salicylate_tox",
+    "acceptableIds": [
+      "salicylate_tox"
+    ],
+    "differentialIds": [
+      "dka",
+      "metabolic_enceph",
+      "drug_intox"
+    ],
+    "investigations": [
+      "Serial serum salicylate levels",
+      "Arterial blood gas with anion gap",
+      "Serum paracetamol level"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include salicylate_tox",
+    "high-anion-gap metabolic acidosis with concurrent respiratory alkalosis must not be classified as a primary infective diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

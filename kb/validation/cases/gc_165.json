@@ -1,0 +1,99 @@
+{
+  "id": "gc_165",
+  "specialty": "Gastroenterology",
+  "condition": "Biliary colic / cholelithiasis",
+  "age": 44,
+  "sex": "F",
+  "presentingComplaint": "Recurrent episodes of severe right upper quadrant pain after fatty meals",
+  "history": "44-year-old woman with a 3-month history of intermittent, self-limiting attacks of severe steady right upper quadrant / epigastric pain, typically beginning 30-60 minutes after fatty or heavy meals, lasting 1-3 hours before resolving spontaneously. Pain radiates to the right scapula/interscapular region and is associated with nausea. Attacks are episodic with complete resolution and no symptoms between episodes. No fever, no jaundice, no dark urine or pale stools. Risk factors: female, overweight (BMI 31), two prior pregnancies (multiparous), age in 40s. No prior surgery. No alcohol excess.",
+  "examination": "Comfortable and afebrile between attacks; during the current attack mild right upper quadrant tenderness on deep palpation without guarding or rebound. Murphy sign NEGATIVE. No palpable mass, no hepatomegaly. No scleral icterus. Bowel sounds normal. No costovertebral angle tenderness.",
+  "vitals": {
+    "hr": 84,
+    "bp": "128/78",
+    "rr": 16,
+    "temp": 36.9,
+    "spo2": 99
+  },
+  "labs": {
+    "WBC": "8.2 x10^9/L (normal)",
+    "Total bilirubin": "0.7 mg/dL",
+    "ALT": "24 U/L",
+    "AST": "22 U/L",
+    "ALP": "78 U/L",
+    "GGT": "30 U/L",
+    "Lipase": "38 U/L (normal)",
+    "CRP": "3 mg/L"
+  },
+  "imaging": "Transabdominal ultrasound: multiple mobile echogenic gallstones with posterior acoustic shadowing in the gallbladder; gallbladder wall thickness normal (<3 mm); no pericholecystic fluid; common bile duct normal calibre (4 mm); no intra/extrahepatic ductal dilatation.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Biliary colic (symptomatic cholelithiasis)",
+    "Acute cholecystitis",
+    "Peptic ulcer disease / dyspepsia",
+    "GERD",
+    "Acute pancreatitis"
+  ],
+  "finalDiagnosis": "Biliary colic (symptomatic cholelithiasis)",
+  "citations": [
+    "Harrison 22e — Diseases of the Gallbladder and Bile Ducts",
+    "ACG Clinical Guideline: Management of Gallstone Disease / SAGES Guidelines for Cholecystectomy 2010"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "NSAIDs (e.g., diclofenac for analgesia) contraindicated in peptic ulcer disease, significant renal impairment, or aspirin-sensitive asthma"
+  ],
+  "edgeCases": [
+    "Prolonged pain (>4-6 hours), fever, or a positive Murphy sign signals progression to acute cholecystitis rather than uncomplicated biliary colic",
+    "Deranged LFTs or a dilated CBD suggests choledocholithiasis/cholangitis and warrants MRCP/EUS"
+  ],
+  "expectedMaiK": "Classic biliary colic from cholelithiasis: episodic post-prandial RUQ pain that fully resolves, normal inflammatory markers and LFTs, and gallstones without wall thickening on ultrasound. Because it is non-infective, no antibiotics are indicated; management is analgesia and elective laparoscopic cholecystectomy for recurrent symptoms.",
+  "expectedNextQuestions": [
+    "Does any single attack last longer than 4-6 hours or is it now accompanied by fever, jaundice, or dark urine (suggesting cholecystitis or CBD stone)?",
+    "How frequent and disabling are the attacks (to decide on elective cholecystectomy)?"
+  ],
+  "expectedInvestigations": [
+    "Transabdominal ultrasound (first-line)",
+    "Liver function tests and lipase to exclude choledocholithiasis/pancreatitis",
+    "MRCP or EUS only if LFTs deranged or CBD dilated"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "rightUpperQuadrantPain": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "abdominalDiscomfort": true,
+    "afebrile": true,
+    "stable": true,
+    "oralIntake": true
+  },
+  "expected": {
+    "diagnosis": "biliary_colic",
+    "acceptableIds": [
+      "biliary_colic"
+    ],
+    "differentialIds": [
+      "CHOLECYSTITIS",
+      "peptic_ulcer",
+      "gerd_chest",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "Transabdominal ultrasound",
+      "Liver function tests",
+      "Serum lipase"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include biliary_colic",
+    "stewardship tier is null (non-infective condition, no antibiotics)",
+    "Murphy sign negative and normal WBC/LFTs distinguish from CHOLECYSTITIS"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

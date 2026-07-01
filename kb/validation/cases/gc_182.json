@@ -1,0 +1,110 @@
+{
+  "id": "gc_182",
+  "specialty": "Hepatology",
+  "condition": "Hepatic encephalopathy",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Progressive drowsiness and confusion over 3 days in a known cirrhotic",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B) diagnosed 3 years ago, on spironolactone and furosemide. Over the past 3 days the family reports day-night reversal, increasing forgetfulness, slurred speech and today unarousable somnolence. Reduced stool frequency for 4 days (constipation) and dietary indiscretion with a high-protein meal. No overt GI bleed, no fever, no new medications. Ongoing intermittent alcohol use. No recent lactulose (ran out 1 week ago).",
+  "examination": "Drowsy, rousable to voice, disoriented to time and place. Coarse flapping tremor (asterixis) elicited. Icteric sclerae, spider naevi, palmar erythema, gynaecomastia. Abdomen distended with shifting dullness (moderate ascites), non-tender, no guarding. Fetor hepaticus present. No neck stiffness, no focal neurological deficit, pupils equal and reactive, plantars flexor. No purpura, no track marks, no signs of active bleeding on PR (stool brown, no melaena).",
+  "vitals": {
+    "hr": 92,
+    "bp": "108/68",
+    "rr": 18,
+    "temp": 37,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "11.8 g/dL",
+    "platelets": "84 x10^3/uL",
+    "bilirubin": "4.6 mg/dL",
+    "albumin": "2.6 g/dL",
+    "inr": "1.9",
+    "creatinine": "1.1 mg/dL",
+    "sodium": "131 mmol/L",
+    "potassium": "3.4 mmol/L",
+    "ammonia": "132 umol/L (elevated)",
+    "ast": "88 U/L",
+    "alt": "54 U/L",
+    "glucose": "96 mg/dL",
+    "wcc": "6.2 x10^3/uL"
+  },
+  "imaging": "Abdominal ultrasound: coarse nodular shrunken liver, splenomegaly, moderate ascites, patent portal vein with hepatopetal flow. CT head (to exclude structural cause): no intracranial haemorrhage or mass; age-appropriate atrophy.",
+  "microbiology": "Diagnostic ascitic tap: PMN 90 cells/mm3 (below 250), culture negative — no SBP. Blood cultures pending, no growth to date.",
+  "differentialDiagnoses": [
+    "Hepatic encephalopathy (West Haven grade II-III)",
+    "Spontaneous bacterial peritonitis precipitating encephalopathy",
+    "Intracranial haemorrhage (coagulopathy/fall)",
+    "Wernicke encephalopathy",
+    "Sedative/drug intoxication",
+    "Hyponatraemic encephalopathy"
+  ],
+  "finalDiagnosis": "Hepatic encephalopathy precipitated by constipation, dietary protein load and lactulose non-adherence in decompensated alcoholic cirrhosis",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications",
+    "AASLD/EASL Hepatic Encephalopathy in Chronic Liver Disease 2014"
+  ],
+  "stewardship": "Not applicable — non-infective. SBP actively excluded by diagnostic paracentesis (PMN <250, culture negative); no empiric antibiotics indicated. Treat the precipitant: lactulose titrated to 2-3 soft stools/day, correct hypokalaemia, thiamine for alcohol history, and identify/reverse triggers.",
+  "contraindications": [
+    "Avoid over-sedation and benzodiazepines (precipitate/worsen encephalopathy)",
+    "Protein restriction is NOT recommended long-term; avoid excessive restriction which worsens catabolism",
+    "Caution with diuretics if volume-deplete/hypokalaemic (hypokalaemia and alkalosis increase ammoniagenesis)"
+  ],
+  "edgeCases": [
+    "Minimal (covert) HE with normal exam but abnormal psychometric testing",
+    "Normal serum ammonia does not exclude HE — do not rely on ammonia to diagnose or grade",
+    "A structural cause (subdural in a coagulopathic faller) or SBP can masquerade as or precipitate HE — must be excluded"
+  ],
+  "expectedMaiK": "This is a classic decompensated-cirrhosis presentation of hepatic encephalopathy with asterixis, elevated ammonia and identifiable precipitants (constipation, protein load, lactulose non-adherence). Search for and treat precipitants, exclude SBP and structural causes, and start lactulose titrated to stool frequency rather than relying on ammonia levels.",
+  "expectedNextQuestions": [
+    "Any recent GI bleeding, missed lactulose doses, sedatives, or infection symptoms as precipitants?",
+    "Baseline liver disease severity, alcohol intake and prior episodes of encephalopathy?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic paracentesis with ascitic fluid cell count and culture to exclude SBP",
+    "Septic screen and serum ammonia; CT head if focal signs or trauma to exclude structural cause"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "liverDisease": true,
+    "alteredSensorium": true,
+    "asterixis": true,
+    "jaundice": true,
+    "ascites": true,
+    "alcoholExcess": true,
+    "abdominalDistension": true,
+    "encephalopathyGrade": true,
+    "behavioralChange": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "hepatic_enceph",
+    "acceptableIds": [
+      "hepatic_enceph"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "SBP",
+      "metabolic_enceph",
+      "wernicke"
+    ],
+    "investigations": [
+      "Diagnostic paracentesis to exclude SBP",
+      "Serum ammonia and septic screen",
+      "CT head to exclude structural cause"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hepatic_enceph",
+    "expected.stewardship.tier must be null (non-infective; SBP excluded)",
+    "must not trigger empiric antibiotics when ascitic PMN <250 and culture negative"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

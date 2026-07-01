@@ -1,0 +1,109 @@
+{
+  "id": "gc_135",
+  "specialty": "Tropical Fever",
+  "condition": "Mixed Malaria (P. falciparum + P. vivax)",
+  "age": 32,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever with chills and rigors for 5 days",
+  "history": "Previously well 32-year-old man, resident of a malaria-endemic district in eastern India, presents with 5 days of intermittent high-grade fever reaching 40 C, preceded by shaking chills and rigors and followed by drenching sweats. Fever has become near-daily with some paroxysms roughly every 48 hours. Associated headache, generalized myalgia, anorexia and two episodes of non-bloody vomiting. No cough, dysuria or diarrhea. Reports several previous episodes of 'malaria' treated locally. No recent antimalarial chemoprophylaxis. No comorbidities, no immunosuppression.",
+  "examination": "Ill-appearing, febrile and diaphoretic. Mild pallor and scleral subicterus. Spleen palpable 3 cm below costal margin; liver just palpable. No neck stiffness, no focal neurological deficit (GCS 15). Chest clear, no crepitations. No rash, no eschar, no lymphadenopathy. No bleeding manifestations.",
+  "vitals": {
+    "hr": 112,
+    "bp": "108/68",
+    "rr": 22,
+    "temp": 39.8,
+    "spo2": 97
+  },
+  "labs": {
+    "Hemoglobin": "9.8 g/dL",
+    "Platelets": "62 x10^3/uL",
+    "WBC": "5.4 x10^3/uL",
+    "Total bilirubin": "3.1 mg/dL (indirect predominant)",
+    "AST/ALT": "78 / 65 U/L",
+    "Creatinine": "1.1 mg/dL",
+    "Random glucose": "96 mg/dL",
+    "Lactate": "1.8 mmol/L"
+  },
+  "imaging": "USG abdomen: mild hepatosplenomegaly, no focal lesion, no biliary dilatation",
+  "microbiology": "Peripheral smear (thick and thin): asexual ring forms and gametocytes of P. falciparum PLUS trophozoites and schizonts with enlarged Schuffner-dotted erythrocytes of P. vivax — mixed infection confirmed. Parasitemia ~1.5% (P. falciparum). Rapid diagnostic test positive for HRP-2 (Pf) and pan-Plasmodium pLDH (non-falciparum). Blood cultures pending.",
+  "differentialDiagnoses": [
+    "Mixed P. falciparum + P. vivax malaria",
+    "Dengue fever",
+    "Enteric fever",
+    "Leptospirosis",
+    "Scrub typhus"
+  ],
+  "finalDiagnosis": "Mixed malaria (P. falciparum + P. vivax)",
+  "citations": [
+    "Harrison 22e — Malaria (Plasmodium species)",
+    "WHO Guidelines for the Treatment of Malaria 2015",
+    "NVBDCP/ICMR National Guidelines for Diagnosis and Treatment of Malaria in India 2014"
+  ],
+  "stewardship": "Treat as falciparum given the mixed infection: artemisinin-based combination therapy (artesunate-based ACT, e.g. artemether-lumefantrine or artesunate-sulfadoxine-pyrimethamine per regional policy) for the erythrocytic stage; ADD primaquine 0.25 mg/kg/day for 14 days after G6PD testing to eradicate P. vivax hypnozoites and prevent relapse, plus single-dose gametocytocidal primaquine for falciparum transmission blocking. IV artesunate reserved for severe disease.",
+  "contraindications": [
+    "Primaquine contraindicated in G6PD deficiency (hemolysis) and in pregnancy — test G6PD before radical cure",
+    "Avoid halofantrine/QT-prolonging combinations; caution with mefloquine if neuropsychiatric history"
+  ],
+  "edgeCases": [
+    "Mixed infections frequently under-recognized: P. vivax can be masked by P. falciparum on smear, and treating only falciparum leaves hypnozoites causing later relapse",
+    "Watch for progression to severe/cerebral malaria (cerebral impairment, AKI, ARDS, hypoglycemia, DIC) driven by the falciparum component"
+  ],
+  "expectedMaiK": "Smear-confirmed mixed P. falciparum + P. vivax infection should be managed as falciparum with an ACT for the acute erythrocytic stage, plus G6PD-guided 14-day primaquine radical cure to clear vivax hypnozoites and prevent relapse. Monitor closely for severe-malaria features from the falciparum component.",
+  "expectedNextQuestions": [
+    "Travel/residence in a malaria-endemic area and prior malaria episodes?",
+    "G6PD status and pregnancy status before giving primaquine?",
+    "Any features of severe malaria (impaired consciousness, reduced urine output, bleeding, breathlessness)?"
+  ],
+  "expectedInvestigations": [
+    "Repeat/quantified peripheral smear with parasite count",
+    "G6PD enzyme assay before primaquine",
+    "Renal/liver profile, glucose and lactate to screen for severe malaria"
+  ],
+  "expectedConfidence": 92,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "paroxysmalFever": true,
+    "travelEndemicArea": true,
+    "myalgiaArthralgia": true,
+    "thrombocytopenia": true,
+    "splenomegaly": true,
+    "hepatosplenomegaly": true,
+    "jaundice": true,
+    "mixedMalariaConfirmed": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "MIXED_MALARIA",
+    "acceptableIds": [
+      "MIXED_MALARIA"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "DENGUE",
+      "ENTERIC_FEVER",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Peripheral blood smear (thick and thin) with parasite count",
+      "Malaria rapid diagnostic test (HRP-2 + pan-pLDH)",
+      "G6PD assay before primaquine"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "Artemisinin-based combination therapy (ACT)",
+        "Primaquine (G6PD-guided radical cure)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include MIXED_MALARIA",
+    "differential must include DENGUE",
+    "stewardship must include primaquine for vivax radical cure"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

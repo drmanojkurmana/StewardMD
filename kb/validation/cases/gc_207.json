@@ -1,0 +1,106 @@
+{
+  "id": "gc_207",
+  "specialty": "Nephrology",
+  "condition": "Nephrotic syndrome",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Progressive facial puffiness and bilateral leg swelling with frothy urine over 3 weeks",
+  "history": "Previously well 34-year-old man with 3 weeks of insidious periorbital puffiness (worst on waking) progressing to pitting pedal and pretibial edema, abdominal fullness, and persistently frothy urine. Reports weight gain of ~5 kg and reduced exertional tolerance. No gross hematuria, dysuria, or flank pain. No recent sore throat, rash, joint pains, or diarrheal illness. No NSAID abuse, no known diabetes or hypertension, no recent travel. Family history unremarkable.",
+  "examination": "Alert, comfortable at rest, not toxic. Marked periorbital edema and bilateral pitting edema to the knees; mild shifting dullness suggesting early ascites. Pertinent negatives: no rash, no purpura, no synovitis, no lymphadenopathy, no raised JVP, chest clear with no basal crackles of cardiac failure, no hepatosplenomegaly, no CVA tenderness. No focal neurological deficit.",
+  "vitals": {
+    "hr": 82,
+    "bp": "126/80",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "urine dipstick": "protein 4+, no blood, no leukocytes/nitrites",
+    "spot urine protein:creatinine ratio": "6.8 g/g (nephrotic-range)",
+    "24h urine protein": "5.2 g/24h",
+    "serum albumin": "2.1 g/dL",
+    "serum total cholesterol": "342 mg/dL (LDL elevated)",
+    "serum creatinine": "0.9 mg/dL",
+    "eGFR": ">90 mL/min/1.73m2",
+    "urea": "5.6 mmol/L",
+    "urine microscopy": "oval fat bodies / fatty casts, no dysmorphic RBCs or RBC casts",
+    "hemoglobin": "14.2 g/dL",
+    "HbA1c": "5.3%"
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys with preserved corticomedullary differentiation and no obstruction; small-volume ascites noted",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Nephrotic syndrome (primary glomerular, e.g. minimal change / membranous / FSGS)",
+    "Nephritic syndrome / acute glomerulonephritis",
+    "Decompensated cirrhosis with hypoalbuminemia",
+    "Congestive cardiac failure",
+    "Protein-losing enteropathy"
+  ],
+  "finalDiagnosis": "Nephrotic syndrome (primary glomerular disease)",
+  "citations": [
+    "Harrison 22e — Glomerular Diseases (Nephrotic Syndrome)",
+    "KDIGO Glomerular Diseases Guideline 2021"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid nephrotoxic NSAIDs given proteinuria/glomerular disease",
+    "Use loop diuretics cautiously to avoid intravascular volume depletion and AKI",
+    "ACE-inhibitor/ARB for antiproteinuric effect — monitor creatinine and potassium",
+    "Statin caution if concurrent hepatic disease"
+  ],
+  "edgeCases": [
+    "Nephrotic-range proteinuria markedly raises venous and arterial thromboembolic risk (renal vein thrombosis, PE) — sudden flank pain or dyspnea should prompt imaging",
+    "In adults membranous nephropathy and FSGS are common; minimal change dominates in children — biopsy usually needed in adults",
+    "Secondary causes (diabetes, SLE, amyloid, hepatitis B/C, malignancy) must be excluded before labelling primary"
+  ],
+  "expectedMaiK": "This is a classic nephrotic syndrome: heavy (nephrotic-range) proteinuria, hypoalbuminemia, edema and hyperlipidemia with a bland urinary sediment and preserved renal function. Prioritise secondary-cause screening and renal biopsy, start antiproteinuric RAAS blockade plus a statin, and counsel on the elevated thromboembolic risk.",
+  "expectedNextQuestions": [
+    "Any frothy urine, and how heavy is the proteinuria (quantify with uPCR / 24h urine)?",
+    "Features of a secondary cause — diabetes, recent infection, rash/arthralgia, hepatitis risk factors, new medications, or symptoms of malignancy?",
+    "Any calf pain, unilateral leg swelling, or breathlessness suggesting venous thromboembolism?"
+  ],
+  "expectedInvestigations": [
+    "Quantify proteinuria (uPCR or 24h urine) with serum albumin and lipids",
+    "Secondary-cause serology: fasting glucose/HbA1c, ANA, complement (C3/C4), HBsAg/anti-HCV, serum/urine electrophoresis",
+    "Renal biopsy for histological diagnosis in an adult"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "proteinuria": true,
+    "legSwellingBilateral": true,
+    "facialSwelling": true,
+    "albumin": true,
+    "ascites": true,
+    "subacuteOnset": true,
+    "dyspnea": true
+  },
+  "expected": {
+    "diagnosis": "nephrotic",
+    "acceptableIds": [
+      "nephrotic"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "decomp_cirrhosis",
+      "heart_failure",
+      "aki"
+    ],
+    "investigations": [
+      "urine protein:creatinine ratio / 24h urine protein",
+      "serum albumin and lipid profile",
+      "renal biopsy and secondary-cause serology"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include nephrotic",
+    "bland sediment with nephrotic-range proteinuria + hypoalbuminemia should rank nephrotic above glomerulonephritis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "id": "gc_163",
+  "specialty": "Pulmonary",
+  "condition": "Acute asthma exacerbation",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "Progressive breathlessness, wheeze and cough over 2 days following a viral upper respiratory infection.",
+  "history": "Known atopic asthma since childhood on inhaled corticosteroid/formoterol; poorly compliant over the past month and relying increasingly on salbutamol (now several times daily). Coryzal symptoms 3 days ago followed by worsening nocturnal cough, chest tightness and audible wheeze. No fever, no purulent sputum, no pleuritic pain, no leg swelling. Previous exacerbations triggered by URTIs and cold weather; one prior ED visit but never intubated/ICU. Background eczema and allergic rhinitis. Non-smoker. No recent long-haul travel or immobilisation.",
+  "examination": "Alert but speaking in short phrases, sitting forward, using accessory muscles. Diffuse bilateral polyphonic expiratory wheeze with prolonged expiratory phase; air entry reduced but symmetrical, no focal consolidation and no crepitations. No calf tenderness, no unilateral leg swelling, JVP not raised, heart sounds normal with no murmur or added sounds. No fever, no rash.",
+  "vitals": {
+    "hr": 118,
+    "bp": "128/78",
+    "rr": 28,
+    "temp": 37,
+    "spo2": 93
+  },
+  "labs": {
+    "ABG": "pH 7.46, PaCO2 4.1 kPa (34 mmHg), PaO2 9.0 kPa on air — mild respiratory alkalosis",
+    "PEFR": "48% of personal best",
+    "WCC": "9.2 x10^9/L (mild eosinophilia)",
+    "CRP": "6 mg/L (normal)",
+    "U&E": "normal",
+    "potassium": "3.6 mmol/L (baseline pre-nebuliser)"
+  },
+  "imaging": "Chest X-ray: hyperinflation, no consolidation, no pneumothorax, no effusion (performed to exclude complications; not routinely required).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute asthma exacerbation",
+    "COPD exacerbation",
+    "Community-acquired pneumonia",
+    "Pulmonary embolism",
+    "Acute pulmonary oedema / heart failure"
+  ],
+  "finalDiagnosis": "Acute (moderate-to-severe) asthma exacerbation",
+  "citations": [
+    "Harrison 22e — Asthma",
+    "GINA Global Strategy for Asthma Management and Prevention 2023"
+  ],
+  "stewardship": "Not applicable — non-infective. No antibiotics: afebrile, normal CRP/WCC, no purulent sputum or consolidation; a viral URTI trigger does not warrant antibacterials per GINA.",
+  "contraindications": [
+    "Non-selective beta-blockers contraindicated (bronchospasm)",
+    "Monitor serum potassium — high-dose beta-2 agonists cause hypokalaemia",
+    "Caution with sedatives/opioids given risk of respiratory depression"
+  ],
+  "edgeCases": [
+    "A 'silent chest', normalising/rising PaCO2, exhaustion or altered sensorium signals life-threatening asthma requiring critical-care escalation — wheeze intensity does not track severity",
+    "Near-normal SpO2 can mask deterioration; falling PEFR and rising CO2 are more reliable"
+  ],
+  "expectedMaiK": "Classic acute asthma exacerbation triggered by a viral URTI — treat with controlled oxygen to target SpO2 94-98%, repeated inhaled SABA (+/- ipratropium) and early systemic corticosteroids. Watch for normalising/rising PaCO2 and exhaustion as red flags for life-threatening asthma; antibiotics are not indicated without evidence of bacterial infection.",
+  "expectedNextQuestions": [
+    "Any features of life-threatening asthma (silent chest, exhaustion, drowsiness, PEFR <33% best)?",
+    "Previous ICU admission or intubation for asthma?",
+    "Current inhaler/steroid adherence and SABA overuse?"
+  ],
+  "expectedInvestigations": [
+    "Serial peak expiratory flow rate (PEFR)",
+    "Arterial blood gas if severe or deteriorating",
+    "Chest X-ray if focal signs, failure to respond or suspected pneumothorax"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "dyspnea": true,
+    "wheeze": true,
+    "coughRadio": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "coryza": true,
+    "chestPain": true
+  },
+  "expected": {
+    "diagnosis": "asthma_exac",
+    "acceptableIds": [
+      "asthma_exac"
+    ],
+    "differentialIds": [
+      "copd_exac_ni",
+      "CAP",
+      "pe",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Serial peak expiratory flow rate (PEFR)",
+      "Arterial blood gas",
+      "Chest X-ray if focal signs or non-response"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include asthma_exac",
+    "stewardship tier must be null (non-infective)",
+    "CAP must not rank above asthma_exac given afebrile, normal CRP, no consolidation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

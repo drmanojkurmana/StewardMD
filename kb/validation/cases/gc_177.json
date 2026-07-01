@@ -1,0 +1,97 @@
+{
+  "id": "gc_177",
+  "specialty": "Vascular",
+  "condition": "Deep vein thrombosis",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Painful, swollen left calf for 3 days",
+  "history": "3-day history of progressive left calf pain, swelling and warmth with no antecedent trauma. Returned 5 days ago from a 10-hour long-haul flight. Started a combined oral contraceptive substitute (HRT) 4 months ago for menopausal symptoms. No chest pain, breathlessness or haemoptysis. PMH: obesity (BMI 33), varicose veins, treated hypertension. No prior VTE. Ex-smoker. Modified Wells score = 3 (calf swelling >3 cm, localized tenderness along deep venous system, unilateral pitting oedema), i.e. DVT likely.",
+  "examination": "Left leg diffusely swollen from mid-thigh down; calf circumference 4 cm greater than right measured 10 cm below tibial tuberosity. Tenderness along the course of the deep veins in the calf and popliteal fossa, warmth and mild erythema, pitting oedema to the ankle, dilated superficial collateral veins. Homans sign present but non-specific. Distal pulses intact, foot warm and well perfused. Pertinent negatives: no calf crepitus or bullae, no fluctuance or portal of entry to suggest cellulitis, no dyspnoea/tachypnoea or pleuritic pain, chest clear, no raised JVP, contralateral leg normal.",
+  "vitals": {
+    "hr": 84,
+    "bp": "138/82",
+    "rr": 16,
+    "temp": 37.1,
+    "spo2": 98
+  },
+  "labs": {
+    "D-dimer": "2.4 mg/L FEU (markedly elevated; ref <0.5)",
+    "Hemoglobin": "13.4 g/dL",
+    "WCC": "8.1 x10^9/L (no leukocytosis)",
+    "Platelets": "268 x10^9/L",
+    "Creatinine": "0.8 mg/dL (eGFR >60)",
+    "CRP": "12 mg/L (mildly raised)",
+    "INR": "1.0",
+    "aPTT": "32 s (baseline before anticoagulation)"
+  },
+  "imaging": "Whole-leg compression ultrasound with Doppler: non-compressible left popliteal and femoral veins with echogenic intraluminal thrombus and absent flow augmentation, confirming proximal (popliteal-femoral) DVT. No Baker cyst or haematoma.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Cellulitis of the lower limb",
+    "Ruptured Baker cyst / muscle (gastrocnemius) tear",
+    "Superficial thrombophlebitis",
+    "Post-thrombotic / chronic venous insufficiency oedema"
+  ],
+  "finalDiagnosis": "Acute proximal deep vein thrombosis (left leg), provoked by long-haul travel and hormone therapy",
+  "citations": [
+    "Harrison 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism / Venous Thromboembolism",
+    "ACCP/CHEST Antithrombotic Therapy for VTE Disease 2021"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Active bleeding or high bleeding risk contraindicates full-dose anticoagulation",
+    "DOACs (apixaban/rivaroxaban) avoided in severe renal impairment (CrCl <15-30) and in pregnancy — use LMWH",
+    "Exclude concurrent PE and assess for occult malignancy in unprovoked disease before deciding treatment duration"
+  ],
+  "edgeCases": [
+    "Isolated distal (calf) DVT may warrant surveillance ultrasound rather than immediate anticoagulation in low-risk patients",
+    "Phlegmasia cerulea dolens — massive proximal thrombus with limb ischaemia — is a limb-threatening emergency requiring urgent intervention",
+    "A low pre-test probability (Wells <2) with a normal D-dimer safely excludes DVT and avoids imaging; D-dimer is non-specific and should not be used when probability is high"
+  ],
+  "expectedMaiK": "Classic provoked proximal DVT: high Wells score plus unilateral calf swelling and a positive whole-leg compression ultrasound confirm the diagnosis; start therapeutic anticoagulation (DOAC first-line) and screen for coexisting PE, with attention to transient provoking factors (travel, hormone therapy) guiding a typical 3-month treatment course.",
+  "expectedNextQuestions": [
+    "Any breathlessness, pleuritic chest pain or haemoptysis to suggest concurrent pulmonary embolism?",
+    "Personal or family history of VTE, recent surgery/immobility, malignancy, or oestrogen use to establish provoked vs unprovoked status?"
+  ],
+  "expectedInvestigations": [
+    "Whole-leg compression venous ultrasound of the affected limb",
+    "Baseline FBC, renal and liver function and coagulation profile prior to anticoagulation"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "skinWarmth": true,
+    "skinErythema": true,
+    "pleuriticChestPain": true,
+    "dyspnea": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "dvt",
+    "acceptableIds": [
+      "dvt"
+    ],
+    "differentialIds": [
+      "pe",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Whole-leg compression venous ultrasound",
+      "D-dimer (if low pre-test probability)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include dvt",
+    "stewardship.tier must be null (non-infective condition)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

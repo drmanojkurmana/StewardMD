@@ -1,0 +1,100 @@
+{
+  "id": "gc_188",
+  "specialty": "Endocrine",
+  "condition": "Hypoglycemia",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Sudden confusion, sweating and tremor found by family, resolving after sugary drink",
+  "history": "Type 2 diabetic for 15 years on glibenclamide and metformin, recently reduced oral intake for 2 days due to a viral illness with poor appetite but continued her usual sulfonylurea dose. Found by her daughter this morning drowsy, diaphoretic and disoriented, unable to answer questions coherently. Similar milder episode last week relieved by biscuits. PMH: CKD stage 3 (baseline creatinine 1.5 mg/dL), hypertension. No alcohol. No insulin use.",
+  "examination": "Diaphoretic, pale, tremulous and confused (GCS 13) with cool clammy peripheries; no focal neurological deficit, pupils equal and reactive, no neck stiffness. Capillary blood glucose 34 mg/dL at bedside. Symptoms and sensorium improved markedly within 10 minutes of 25 g IV dextrose, confirming Whipple triad.",
+  "vitals": {
+    "hr": 104,
+    "bp": "138/82",
+    "rr": 18,
+    "temp": 36.6,
+    "spo2": 98
+  },
+  "labs": {
+    "capillary_glucose": "34 mg/dL",
+    "lab_plasma_glucose": "38 mg/dL (confirmed low)",
+    "post_dextrose_glucose": "126 mg/dL",
+    "creatinine": "1.7 mg/dL",
+    "eGFR": "34 mL/min/1.73m2",
+    "potassium": "4.1 mmol/L",
+    "sodium": "138 mmol/L",
+    "HbA1c": "7.2%",
+    "cortisol": "pending (drawn during episode)"
+  },
+  "imaging": "Not indicated for uncomplicated drug-induced hypoglycemia; CT head only if focal deficit persists or fails to correct with glucose",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Sulfonylurea-induced hypoglycemia",
+    "Acute ischemic stroke / TIA",
+    "Sepsis with hypoglycemia",
+    "Metabolic encephalopathy",
+    "Seizure (post-ictal)"
+  ],
+  "finalDiagnosis": "Drug-induced (sulfonylurea) hypoglycemia in an elderly patient with CKD and reduced oral intake",
+  "citations": [
+    "Harrison 22e — Hypoglycemia",
+    "Endocrine Society Evaluation and Management of Adult Hypoglycemic Disorders 2009"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Sulfonylurea (glibenclamide) contraindicated with reduced eGFR and poor intake — high hypoglycemia risk; renally cleared metabolites prolong action",
+    "Avoid discharging early: sulfonylurea hypoglycemia is prolonged/recurrent — observe and consider octreotide if refractory"
+  ],
+  "edgeCases": [
+    "Neuroglycopenia can mimic acute stroke (hemiparesis, dysarthria) that fully reverses with glucose — always check glucose before thrombolysis",
+    "Sulfonylurea and long-acting insulin hypoglycemia frequently recurs after initial dextrose correction; requires continued dextrose infusion and monitoring; octreotide for refractory sulfonylurea cases"
+  ],
+  "expectedMaiK": "Whipple triad is satisfied (low measured glucose, neuroglycopenic/autonomic symptoms, resolution with dextrose), and the cause is almost certainly the renally cleared sulfonylurea compounded by reduced oral intake and CKD. Anticipate recurrent hypoglycemia, so start a dextrose infusion, admit for monitoring, and hold the sulfonylurea.",
+  "expectedNextQuestions": [
+    "What is the exact list, dose and last-dose timing of diabetes medications (especially sulfonylurea/insulin)?",
+    "How much has the patient eaten in the last 24-48 hours and any alcohol intake?"
+  ],
+  "expectedInvestigations": [
+    "Confirmatory laboratory plasma glucose",
+    "Serial capillary blood glucose monitoring",
+    "Renal function and electrolytes",
+    "Paired insulin/C-peptide/sulfonylurea screen if cause unclear"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "alteredSensorium": true,
+    "diabetesHx": true,
+    "creatinine": true,
+    "tachycardia": true,
+    "clinicallyImproving": true,
+    "oralIntake": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "hypoglycemia",
+    "acceptableIds": [
+      "hypoglycemia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "metabolic_enceph",
+      "seizure_epilepsy"
+    ],
+    "investigations": [
+      "Confirmatory laboratory plasma glucose",
+      "Serial capillary blood glucose monitoring",
+      "Insulin/C-peptide and sulfonylurea screen"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include hypoglycemia",
+    "expected.stewardship.tier is null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

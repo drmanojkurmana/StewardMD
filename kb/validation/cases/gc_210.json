@@ -1,0 +1,116 @@
+{
+  "id": "gc_210",
+  "specialty": "Gastroenterology",
+  "condition": "Acute pancreatitis",
+  "age": 48,
+  "sex": "M",
+  "presentingComplaint": "Severe epigastric pain radiating to the back for 12 hours with persistent vomiting",
+  "history": "12-hour history of sudden, severe, constant epigastric pain boring through to the back, partially relieved by sitting forward and worsened by lying flat. Associated with repeated bilious vomiting and inability to tolerate oral intake. Heavy alcohol binge over the preceding weekend (habitual intake ~60 g/day for 15 years). No prior similar episodes, no known gallstones. PMH: hypertriglyceridemia noted previously, hypertension. No recent ERCP or new medications.",
+  "examination": "Distressed, lying still. Epigastric tenderness with voluntary guarding, no rebound. Reduced bowel sounds with mild abdominal distension. No Cullen or Grey Turner sign. Mildly dehydrated with dry mucosae. No jaundice, no palpable mass. Chest clear, no peritonism outside epigastrium.",
+  "vitals": {
+    "hr": 108,
+    "bp": "112/74",
+    "rr": 22,
+    "temp": 37.9,
+    "spo2": 96
+  },
+  "labs": {
+    "serum lipase": "1420 U/L (>3x upper limit of normal)",
+    "serum amylase": "890 U/L",
+    "WBC": "15.2 x10^9/L",
+    "CRP": "180 mg/L (at 48h)",
+    "triglycerides": "640 mg/dL",
+    "calcium": "8.4 mg/dL",
+    "LDH": "310 U/L",
+    "AST": "68 U/L",
+    "ALT": "54 U/L",
+    "bilirubin": "1.1 mg/dL",
+    "creatinine": "1.0 mg/dL",
+    "urea": "6.8 mmol/L",
+    "glucose": "168 mg/dL",
+    "hematocrit": "47%"
+  },
+  "imaging": "Abdominal ultrasound: no gallstones, no CBD dilatation; pancreas partially obscured by bowel gas. Contrast-enhanced CT (deferred to 72h if not improving) would show an oedematous, enlarged pancreas with peripancreatic fat stranding without necrosis (interstitial oedematous pancreatitis).",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Perforated peptic ulcer",
+    "Acute cholecystitis / biliary colic",
+    "Mesenteric ischemia",
+    "Inferior wall myocardial infarction",
+    "Bowel obstruction"
+  ],
+  "finalDiagnosis": "Acute pancreatitis (alcohol / hypertriglyceridemia related), interstitial oedematous, mild",
+  "citations": [
+    "Harrison 22e — Acute and Chronic Pancreatitis",
+    "ACG Management of Acute Pancreatitis 2013"
+  ],
+  "stewardship": "not applicable — non-infective. Prophylactic antibiotics are NOT indicated in acute pancreatitis (including sterile necrosis) per ACG 2013; antibiotics reserved for proven infected necrosis or extrapancreatic infection.",
+  "contraindications": [
+    "Avoid nephrotoxic contrast if AKI develops; ensure adequate hydration before contrast-enhanced CT",
+    "Opioid analgesia titrated cautiously; morphine acceptable despite theoretical sphincter-of-Oddi concern",
+    "Avoid unnecessary antibiotics"
+  ],
+  "edgeCases": [
+    "Diagnosis requires 2 of 3: characteristic pain, lipase/amylase >3x ULN, or imaging findings — lipase alone with typical pain suffices, CT not mandatory early",
+    "Amylase may be normal in hypertriglyceridemia-induced or late-presenting pancreatitis; lipase is more sensitive",
+    "Hypertriglyceridemia >1000 mg/dL as primary trigger may need insulin/apheresis; here alcohol is dominant",
+    "Early severity is dynamic — rising hematocrit and BUN and persistent SIRS predict severe disease/necrosis"
+  ],
+  "expectedMaiK": "Classic alcohol-related acute pancreatitis: diagnosis rests on typical epigastric-to-back pain plus lipase >3x ULN, so CT is not required upfront. Cornerstone management is aggressive goal-directed IV fluid resuscitation, analgesia, antiemetics and early enteral feeding as tolerated; antibiotics are not indicated without proven infection.",
+  "expectedNextQuestions": [
+    "Quantify alcohol intake and time of last drink; any prior pancreatitis episodes?",
+    "Any gallstone history, recent ERCP, or new drugs?",
+    "Fasting triglyceride level and family history of hyperlipidemia?"
+  ],
+  "expectedInvestigations": [
+    "Serum lipase (and amylase)",
+    "Fasting triglycerides and serum calcium",
+    "Transabdominal ultrasound for gallstones/CBD",
+    "LFTs to assess biliary aetiology",
+    "Contrast-enhanced CT abdomen at 72h if failing to improve"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "severeAbdominalPain": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "backPain": true,
+    "abdominalDistension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "fever": true,
+    "dehydration": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "pancreatitis",
+    "acceptableIds": [
+      "pancreatitis"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "biliary_colic",
+      "mesenteric_ischemia",
+      "bowel_obstruction"
+    ],
+    "investigations": [
+      "Serum lipase",
+      "Fasting triglycerides",
+      "Abdominal ultrasound",
+      "Contrast-enhanced CT abdomen if not improving"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include pancreatitis",
+    "stewardship tier must be null (non-infective — no empiric antibiotics)",
+    "lipase >3x ULN with epigastric-to-back pain should drive high confidence in pancreatitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

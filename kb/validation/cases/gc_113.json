@@ -1,0 +1,112 @@
+{
+  "id": "gc_113",
+  "specialty": "Central Nervous System / Tuberculosis",
+  "condition": "CNS Tuberculosis (Tuberculous Meningitis)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Two to three weeks of worsening headache, low-grade evening fever and progressive drowsiness.",
+  "history": "34-year-old man, migrant construction worker from a high TB-burden region, with ~18 days of insidious frontal headache, evening-predominant fever, drenching night sweats and 4 kg weight loss. Over the last 4 days he has become increasingly drowsy and confused with two episodes of vomiting. Household contact treated for pulmonary TB last year. No prior antiretroviral therapy; HIV status unknown. No head injury, no recent travel outside India, unvaccinated status uncertain.",
+  "examination": "Ill, thin, mildly drowsy (GCS 13, E3V4M6), oriented to person only. Neck stiffness with positive Kernig and Brudzinski signs. Right lateral rectus (CN VI) palsy causing horizontal diplopia. No papilloedema on this exam; no focal limb deficit. Chest clear. No skin rash. Pertinent negatives: no thunderclap onset, no petechial/purpuric rash, no lateralising motor deficit at presentation.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/76",
+    "rr": 20,
+    "temp": 38.4,
+    "spo2": 98
+  },
+  "labs": {
+    "CSF opening pressure": "26 cm H2O (raised)",
+    "CSF appearance": "clear, forms fibrin web on standing",
+    "CSF WBC": "220/µL, lymphocyte-predominant (85%)",
+    "CSF protein": "1.8 g/L (markedly raised)",
+    "CSF glucose": "1.9 mmol/L (CSF:plasma ratio 0.32, low)",
+    "CSF lactate": "5.2 mmol/L",
+    "Serum sodium": "128 mmol/L (SIADH pattern)",
+    "WBC": "8.4 x10^9/L",
+    "CRP": "38 mg/L",
+    "HIV serology": "sent, pending"
+  },
+  "imaging": "CT/MRI brain with contrast: basal meningeal enhancement, mild communicating hydrocephalus, no midline shift; chest X-ray shows an old right upper-lobe fibronodular scar suggesting prior/active pulmonary TB.",
+  "microbiology": "CSF Xpert MTB/RIF Ultra positive, rifampicin resistance not detected; CSF AFB smear negative; CSF mycobacterial culture pending; bacterial Gram stain and culture negative; CSF HSV PCR negative.",
+  "differentialDiagnoses": [
+    "Tuberculous meningitis",
+    "Partially treated / subacute bacterial meningitis",
+    "Cryptococcal or other fungal meningitis",
+    "Viral (aseptic) meningoencephalitis"
+  ],
+  "finalDiagnosis": "Tuberculous meningitis (CNS tuberculosis)",
+  "citations": [
+    "Harrison 22e — Tuberculosis (Mycobacterium tuberculosis; CNS/meningeal TB)",
+    "WHO Consolidated Guidelines on Tuberculosis: Treatment of Drug-Susceptible TB 2022"
+  ],
+  "stewardship": "Start standard 4-drug anti-tuberculous therapy: isoniazid + rifampicin + pyrazinamide + ethambutol (HRZE) with pyridoxine, plus adjunctive dexamethasone (tapered over ~6-8 weeks). Prolonged CNS regimen (2 months HRZE then 7-10 months HR). Empiric ceftriaxone may be co-administered initially until bacterial meningitis is excluded by culture.",
+  "contraindications": [
+    "Isoniazid: give pyridoxine to prevent peripheral neuropathy; monitor for hepatotoxicity",
+    "Ethambutol: baseline visual acuity/colour vision, dose-adjust in renal impairment",
+    "Rifampicin: strong CYP450 inducer with major drug interactions; hepatotoxicity",
+    "Correct/monitor hyponatraemia (SIADH) with judicious fluid strategy"
+  ],
+  "edgeCases": [
+    "CSF Xpert Ultra can be negative in paucibacillary TBM — a negative test does not exclude it; treat empirically on clinical/CSF grounds",
+    "May present as tuberculoma with focal deficit/seizure rather than classic meningism",
+    "HIV co-infection can blunt CSF pleocytosis and worsen prognosis; always test HIV"
+  ],
+  "expectedMaiK": "Subacute lymphocytic meningitis with very high CSF protein, low CSF glucose, basal enhancement and hydrocephalus in a patient from a TB-endemic setting with a TB contact strongly indicates tuberculous meningitis; start HRZE plus adjunctive corticosteroids without waiting for culture, and confirm HIV status.",
+  "expectedNextQuestions": [
+    "Any known HIV status, immunosuppression, or prior TB treatment?",
+    "Duration and pattern of fever/headache, and any TB contact or prior pulmonary TB?"
+  ],
+  "expectedInvestigations": [
+    "CSF Xpert MTB/RIF Ultra plus AFB smear and mycobacterial culture",
+    "HIV serology, MRI brain with contrast, and CSF cell count/protein/glucose with paired plasma glucose"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "headache": true,
+    "neckStiffness": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "subacuteOnset": true,
+    "tbContactHistory": true,
+    "prolongedFever": true
+  },
+  "expected": {
+    "diagnosis": "CNS_TB",
+    "acceptableIds": [
+      "CNS_TB"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS",
+      "BRAIN_ABSCESS"
+    ],
+    "investigations": [
+      "CSF Xpert MTB/RIF Ultra with AFB smear and mycobacterial culture",
+      "MRI brain with contrast",
+      "HIV serology"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "isoniazid",
+        "rifampicin",
+        "pyrazinamide",
+        "ethambutol"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CNS_TB",
+    "differential must include MENINGITIS (bacterial) as an alternative",
+    "stewardship must include isoniazid and rifampicin (HRZE regimen)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

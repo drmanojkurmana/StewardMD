@@ -1,0 +1,111 @@
+{
+  "id": "gc_239",
+  "specialty": "Rheumatology",
+  "condition": "Systemic vasculitis (ANCA-associated, granulomatosis with polyangiitis)",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Several weeks of constitutional upset with rising creatinine, haemoptysis and new arthralgia",
+  "history": "6-week history of malaise, low-grade fever, drenching night sweats and 5 kg unintentional weight loss. Persistent bloody nasal crusting and epistaxis, progressive breathlessness with two episodes of scant haemoptysis, and migratory joint pains affecting wrists, knees and ankles. GP-checked bloods showed a creatinine rise from 90 to 210 µmol/L over 4 weeks with new dipstick haematuria. No preceding sore throat, no travel, no injection drug use. PMH: mild hypertension. No prior renal disease.",
+  "examination": "Alert, not toxic. Nasal mucosal crusting with early septal collapse. Fine bibasal inspiratory crepitations. Palpable purpuric rash over both shins. Mildly tender wrists and knees without frank effusion. No new cardiac murmur, no neck stiffness. No lymphadenopathy or hepatosplenomegaly. Fundi normal. Pertinent negatives: no CVA tenderness, no genital or oral ulceration, no digital gangrene.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/86",
+    "rr": 20,
+    "temp": 37.6,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": "9.8 g/dL (normocytic)",
+    "wbc": "11.2 x10^9/L",
+    "platelets": "455 x10^3/uL",
+    "creatinine": "2.4 mg/dL (baseline ~1.0)",
+    "urea": "16 mmol/L",
+    "CRP": "128 mg/L",
+    "ESR": "92 mm/hr",
+    "urinalysis": "3+ blood, 2+ protein, dysmorphic RBCs and red-cell casts on microscopy",
+    "c-ANCA / anti-PR3": "strongly positive",
+    "ANA / anti-GBM": "negative",
+    "complement C3/C4": "normal",
+    "blood cultures": "negative x2"
+  },
+  "imaging": "CT chest: bilateral peripheral nodules, two with early cavitation, and patchy ground-glass consistent with alveolar haemorrhage. No consolidation typical of lobar pneumonia.",
+  "microbiology": "Blood cultures negative; sputum AFB smear negative x2; viral hepatitis and HIV serology negative",
+  "differentialDiagnoses": [
+    "ANCA-associated (systemic) vasculitis - GPA",
+    "Anti-GBM disease (Goodpasture)",
+    "Post-infective / rapidly progressive glomerulonephritis",
+    "Infective endocarditis with immune complex nephritis",
+    "Disseminated / pulmonary tuberculosis"
+  ],
+  "finalDiagnosis": "Systemic ANCA-associated vasculitis (granulomatosis with polyangiitis) with pulmonary-renal syndrome",
+  "citations": [
+    "Harrison 22e — The Vasculitis Syndromes (ANCA-associated vasculitis)",
+    "ACR/Vasculitis Foundation Management of ANCA-Associated Vasculitis 2021"
+  ],
+  "stewardship": "not applicable — non-infective; management is immunosuppression (high-dose glucocorticoids plus rituximab or cyclophosphamide) after excluding active infection, not antibiotics",
+  "contraindications": [
+    "Confirm no active infection/TB before immunosuppression (screen QuantiFERON, hepatitis B/C, HIV)",
+    "Dose-adjust cyclophosphamide for renal impairment; PJP prophylaxis co-trimoxazole caution with worsening renal function/hyperkalaemia",
+    "Live vaccines contraindicated once immunosuppressed"
+  ],
+  "edgeCases": [
+    "MPO/p-ANCA microscopic polyangiitis can present identically without ENT involvement",
+    "Drug-induced ANCA vasculitis (hydralazine, propylthiouracil, cocaine/levamisole) mimics GPA",
+    "Infective endocarditis can produce low-titre ANCA and RPGN and must be excluded before immunosuppression"
+  ],
+  "expectedMaiK": "The triad of upper-airway disease, cavitating pulmonary nodules with alveolar haemorrhage, and a rapidly progressive glomerulonephritis (active urinary sediment) with strong PR3-ANCA points to systemic ANCA-associated vasculitis (GPA). This is an organ-threatening emergency: urgently exclude infection/anti-GBM, involve nephrology, and start remission-induction immunosuppression.",
+  "expectedNextQuestions": [
+    "Any haemoptysis volume/desaturation suggesting significant alveolar haemorrhage?",
+    "Any drug exposure (hydralazine, PTU, cocaine) that can cause drug-induced ANCA vasculitis?",
+    "Any prior sinus/ear disease, saddle-nose or hearing loss?"
+  ],
+  "expectedInvestigations": [
+    "ANCA panel with anti-PR3/anti-MPO and anti-GBM antibody",
+    "Renal biopsy for pauci-immune crescentic glomerulonephritis",
+    "Urine microscopy for dysmorphic RBCs/red-cell casts and CT chest"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "weightLoss": true,
+    "fever": true,
+    "nightSweats": true,
+    "hemoptysis": true,
+    "hematuria": true,
+    "renalImpairment": true,
+    "petechialRash": true,
+    "polyarthralgia": true,
+    "purulentNasalDischarge": true,
+    "cavitatingLesion": true,
+    "proteinuria": true
+  },
+  "expected": {
+    "diagnosis": "vasculitis",
+    "acceptableIds": [
+      "vasculitis"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "IE",
+      "PULMONARY_TB",
+      "sle_flare"
+    ],
+    "investigations": [
+      "ANCA / anti-PR3 and anti-GBM antibodies",
+      "Renal biopsy",
+      "Urine microscopy and CT chest"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include vasculitis",
+    "expected.stewardship.tier must be null (non-infective)",
+    "differentialIds must include glomerulonephritis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

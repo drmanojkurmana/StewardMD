@@ -1,0 +1,107 @@
+{
+  "id": "gc_110",
+  "specialty": "Tropical Fever",
+  "condition": "Chikungunya",
+  "age": 38,
+  "sex": "M",
+  "presentingComplaint": "Abrupt high fever with severe, symmetric joint pain for 3 days during the post-monsoon season",
+  "history": "Previously healthy male from a peri-urban area of Kerala presents with sudden-onset high-grade fever (peak ~39.5 C) 3 days ago, immediately accompanied by disabling, symmetric pain and swelling of the small joints of the hands, wrists, ankles and feet. He reports marked morning stiffness and difficulty gripping objects, with a diffuse maculopapular rash appearing on day 2 over the trunk and limbs. He also describes retro-orbital discomfort, headache and severe myalgia. Several neighbours have had similar illness. There is heavy daytime Aedes mosquito activity around water-storage containers at home. No bleeding, no altered sensorium, no dysuria or diarrhoea. No significant past medical history, no regular medications, no recent travel outside the endemic region.",
+  "examination": "Alert, uncomfortable and in evident joint pain. Diffuse blanching maculopapular rash over trunk and extremities. Symmetric tenderness and mild soft-tissue swelling of MCP, PIP, wrist and ankle joints with pain on movement; no joint erythema or effusion warranting aspiration. Mild conjunctival injection. No neck stiffness, no focal neurological deficit. No petechiae, no mucosal bleeding, no tourniquet-positive signs. No hepatosplenomegaly, abdomen soft and non-tender. Chest clear, no murmurs.",
+  "vitals": {
+    "hr": 98,
+    "bp": "118/76",
+    "rr": 18,
+    "temp": 39.2,
+    "spo2": 98
+  },
+  "labs": {
+    "Hemoglobin": "14.1 g/dL",
+    "WBC": "3.9 x10^3/uL (mild leukopenia, relative lymphopenia)",
+    "Platelets": "148 x10^3/uL (mild thrombocytopenia)",
+    "CRP": "62 mg/L",
+    "ESR": "48 mm/hr",
+    "AST": "58 U/L",
+    "ALT": "49 U/L",
+    "Creatinine": "0.9 mg/dL",
+    "Dengue NS1/IgM": "negative",
+    "Chikungunya RT-PCR (day 3)": "positive"
+  },
+  "imaging": "Not indicated; no radiographic joint erosions in acute phase",
+  "microbiology": "Chikungunya RT-PCR positive on day 3 of illness; Chikungunya IgM to be confirmed after day 5. Dengue NS1 and malaria smear negative.",
+  "differentialDiagnoses": [
+    "Chikungunya",
+    "Dengue fever",
+    "Zika virus infection",
+    "Acute viral / reactive polyarthritis",
+    "Rickettsial fever"
+  ],
+  "finalDiagnosis": "Chikungunya",
+  "citations": [
+    "Harrison 22e — Alphaviruses and Arthritogenic Viral Infections (Chikungunya)",
+    "WHO/ICMR Guidelines on Clinical Management of Chikungunya 2016"
+  ],
+  "stewardship": "Not applicable — non-infective by antibiotics; chikungunya is a viral arboviral illness. Management is supportive: paracetamol for fever and analgesia, hydration and rest. Avoid NSAIDs and aspirin until dengue is excluded (overlapping presentation, bleeding risk).",
+  "contraindications": [
+    "Avoid aspirin/NSAIDs until dengue excluded (haemorrhagic risk)",
+    "Avoid empiric antibiotics — no bacterial target",
+    "Caution with hepatotoxic paracetamol dosing given mildly elevated transaminases"
+  ],
+  "edgeCases": [
+    "Persistent/chronic post-chikungunya arthralgia lasting months, mimicking rheumatoid arthritis",
+    "Co-infection with dengue in the same endemic season",
+    "Atypical severe forms with encephalitis or myocarditis in neonates and elderly comorbid patients"
+  ],
+  "expectedMaiK": "Classic post-monsoon arboviral febrile illness with abrupt high fever and disabling symmetric small-joint polyarthralgia plus maculopapular rash strongly suggests chikungunya; confirm with RT-PCR early and IgM after day 5, exclude dengue before giving NSAIDs, and manage supportively without antibiotics.",
+  "expectedNextQuestions": [
+    "Any bleeding, persistent vomiting, abdominal pain or lethargy suggesting dengue warning signs?",
+    "Duration and symmetry of joint involvement, and any prior similar episodes?",
+    "Local outbreak, mosquito exposure and recent travel history?"
+  ],
+  "expectedInvestigations": [
+    "Chikungunya RT-PCR (early) and IgM serology (after day 5)",
+    "Dengue NS1/IgM and malaria smear/RDT to exclude co-endemic causes",
+    "CBC with platelet trend and LFTs"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "severeArthralgia": true,
+    "symmetricSmallJointInvolvement": true,
+    "myalgiaArthralgia": true,
+    "maculopapularRash": true,
+    "rash": true,
+    "retroorbitalPain": true,
+    "headache": true,
+    "thrombocytopenia": true,
+    "travelEndemicArea": true
+  },
+  "expected": {
+    "diagnosis": "CHIKUNGUNYA",
+    "acceptableIds": [
+      "CHIKUNGUNYA"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "RICKETTSIAL_FEVER",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Chikungunya RT-PCR / IgM serology",
+      "Dengue NS1/IgM",
+      "CBC with platelet count and LFTs"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CHIKUNGUNYA",
+    "no antibiotic recommendation (non-bacterial viral arbovirus)",
+    "differential must include DENGUE"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

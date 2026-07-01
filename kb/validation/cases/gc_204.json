@@ -1,0 +1,104 @@
+{
+  "id": "gc_204",
+  "specialty": "Neurology",
+  "condition": "Myasthenic crisis",
+  "age": 42,
+  "sex": "F",
+  "presentingComplaint": "Progressive breathlessness and difficulty clearing secretions over 3 days in a woman with known myasthenia gravis",
+  "history": "Known acetylcholine-receptor-antibody-positive generalised myasthenia gravis for 4 years, maintained on pyridostigmine and low-dose prednisolone. Over the past week she developed a coryzal upper-respiratory illness, and in the last 72 hours has noted worsening fatigable ptosis, diplopia, nasal regurgitation of fluids, weak cough and progressive breathlessness that is worse when lying flat. Steroid dose was recently tapered by her GP. No chest pain. She reports difficulty finishing sentences today. Precipitant appears to be intercurrent viral infection plus steroid taper.",
+  "examination": "Alert and oriented but visibly anxious and using accessory muscles of respiration; unable to complete a sentence in one breath. Bilateral fatigable ptosis and complex ophthalmoplegia, weak neck flexion, nasal dysarthria and a poor 'wet' cough with pooling of oral secretions. Fatigable proximal limb weakness. Single-breath count 12. Pertinent negatives: no fever, no meningism, pupils normal and reactive (not pinpoint), no fasciculations, no excess sweating/salivation to suggest cholinergic crisis, reflexes present, sensation intact.",
+  "vitals": {
+    "hr": 118,
+    "bp": "138/84",
+    "rr": 30,
+    "temp": 37.1,
+    "spo2": 93
+  },
+  "labs": {
+    "ABG": "pH 7.31, PaCO2 6.9 kPa (52 mmHg), PaO2 9.0 kPa on air — early hypercapnic respiratory failure",
+    "FVC": "0.9 L (approx 15 mL/kg) and falling on serial measurement",
+    "NIF": "-22 cmH2O",
+    "WCC": "8.4 x10^9/L",
+    "CRP": "18 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "TSH": "normal",
+    "acetylcholine receptor antibody": "positive (known)"
+  },
+  "imaging": "Chest radiograph: low lung volumes, basal atelectasis, no consolidation. CT thorax previously showed no thymoma.",
+  "microbiology": "n/a — respiratory viral swab sent for precipitant identification; no evidence of bacterial infection",
+  "differentialDiagnoses": [
+    "Myasthenic crisis",
+    "Cholinergic crisis (pyridostigmine excess)",
+    "Guillain-Barré syndrome",
+    "Community-acquired pneumonia with respiratory compromise"
+  ],
+  "finalDiagnosis": "Myasthenic crisis (neuromuscular respiratory failure) precipitated by intercurrent viral infection and steroid taper",
+  "citations": [
+    "Harrison 22e — Myasthenia Gravis and Other Diseases of the Neuromuscular Junction",
+    "AAN/Myasthenia Gravis Foundation of America (MGFA) International Consensus Guidance for Management of Myasthenia Gravis 2021"
+  ],
+  "stewardship": "not applicable — non-infective (neuromuscular respiratory failure). Antibiotics only if a bacterial precipitant is proven; avoid aminoglycosides, macrolides and fluoroquinolones which worsen neuromuscular transmission.",
+  "contraindications": [
+    "Avoid neuromuscular-blocking-potentiating antibiotics (aminoglycosides, macrolides, fluoroquinolones)",
+    "Avoid magnesium sulphate",
+    "Caution with beta-blockers and high-dose corticosteroid initiation (may transiently worsen weakness); IVIG relatively contraindicated in IgA deficiency / high thrombotic risk"
+  ],
+  "edgeCases": [
+    "Cholinergic crisis from anticholinesterase overuse mimics myasthenic crisis but shows miosis, hypersalivation, fasciculations, cramps and bradycardia — misclassification is dangerous",
+    "Do not be reassured by 'normal' SpO2 and PaO2: neuromuscular failure causes CO2 retention and abrupt collapse; trend FVC/NIF, not oximetry",
+    "Steroid initiation can transiently worsen weakness in the first 1-2 weeks"
+  ],
+  "expectedMaiK": "This is impending neuromuscular respiratory failure from a myasthenic crisis; act on falling serial FVC/NIF and rising PaCO2 rather than SpO2, arrange ICU/HDU with elective airway support, and start IVIG or plasma exchange while treating the precipitant. Avoid drugs that impair neuromuscular transmission.",
+  "expectedNextQuestions": [
+    "Is this a myasthenic or cholinergic crisis (pupils, secretions, fasciculations, recent pyridostigmine dosing)?",
+    "What are the serial FVC and negative inspiratory force trends?",
+    "What precipitated it — infection, drug change, surgery, or steroid taper?"
+  ],
+  "expectedInvestigations": [
+    "Serial bedside spirometry (FVC) and negative inspiratory force",
+    "Arterial blood gas for hypercapnia",
+    "Screen for precipitant (viral swab / infection screen), and repeat acetylcholine-receptor antibody status if diagnosis uncertain"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "dyspnea": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "orthopnea": true,
+    "dysphagia": true,
+    "organDysfunction": true,
+    "subacuteOnset": true,
+    "toxicAppearing": true,
+    "steroidUse": true
+  },
+  "expected": {
+    "diagnosis": "myasthenic_crisis",
+    "acceptableIds": [
+      "myasthenic_crisis"
+    ],
+    "differentialIds": [
+      "gbs",
+      "organophosphate",
+      "pe"
+    ],
+    "investigations": [
+      "Serial forced vital capacity and negative inspiratory force",
+      "Arterial blood gas",
+      "Infection/precipitant screen"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include myasthenic_crisis",
+    "must not classify as CAP/pneumonia given afebrile, clear chest and normal WCC/CRP",
+    "must flag neuromuscular respiratory failure requiring FVC/NIF monitoring, not SpO2 reassurance"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

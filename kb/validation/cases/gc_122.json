@@ -1,0 +1,108 @@
+{
+  "id": "gc_122",
+  "specialty": "Gastrointestinal",
+  "condition": "Dysentery (Invasive Bacterial Diarrhea)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "2 days of frequent bloody, mucoid stools with painful straining and fever",
+  "history": "Previously well 34-year-old man presenting with a 2-day history of frequent small-volume bloody diarrhoea (10-12 stools/day) mixed with mucus, associated with lower abdominal cramping, painful ineffectual straining at stool, and fever with chills. Symptoms began ~24h after eating at a roadside eatery; two household contacts have milder loose stools. No recent travel abroad, no antibiotics in the preceding 90 days, no prior hospitalisation. No known immunosuppression. Mild reduced oral intake with thirst.",
+  "examination": "Alert but uncomfortable and mildly dehydrated (dry mucous membranes, reduced skin turgor). Abdomen soft with lower-abdominal and left-iliac-fossa tenderness, no guarding or rigidity, active bowel sounds; no palpable masses. Rectal exam shows blood-and-mucus streaking. Pertinent negatives: no jaundice, no hepatosplenomegaly, no rash, no neck stiffness, no peritonism.",
+  "vitals": {
+    "hr": 104,
+    "bp": "112/72",
+    "rr": 18,
+    "temp": 38.6,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "14.2 x10^9/L with neutrophilia and left shift",
+    "Hemoglobin": "14.1 g/dL",
+    "Platelets": "265 x10^3/uL",
+    "CRP": "78 mg/L",
+    "Creatinine": "1.0 mg/dL",
+    "Sodium": "138 mmol/L",
+    "Potassium": "3.6 mmol/L",
+    "Stool microscopy": "numerous RBCs and sheets of pus cells (fecal leukocytes)",
+    "Stool occult blood": "positive"
+  },
+  "imaging": "Not indicated in uncomplicated invasive diarrhoea; abdominal films reserved for suspected toxic megacolon or perforation, neither present here",
+  "microbiology": "Stool culture sent (Shigella/Salmonella/Campylobacter); stool for ova/cysts to exclude amoebiasis. Blood cultures obtained given fever. Results pending; empirical management started on clinical grounds.",
+  "differentialDiagnoses": [
+    "Shigellosis / invasive bacterial dysentery",
+    "Amoebic colitis (Entamoeba histolytica)",
+    "Inflammatory bowel disease flare",
+    "Non-invasive acute gastroenteritis",
+    "Enteric fever with intestinal involvement"
+  ],
+  "finalDiagnosis": "Dysentery (invasive bacterial diarrhea, most likely Shigella)",
+  "citations": [
+    "Harrison 22e — Acute Infectious Diarrheal Diseases and Bacterial Food Poisoning / Shigellosis",
+    "IDSA Infectious Diarrhea Diagnosis and Management 2017"
+  ],
+  "stewardship": "Empiric ciprofloxacin (fluoroquinolone) is guideline-concordant first-line for febrile invasive bacterial dysentery pending cultures; azithromycin is preferred where fluoroquinolone resistance is prevalent (e.g., many South/Southeast Asian Shigella/Campylobacter isolates). Oral/IV rehydration is the cornerstone of care. De-escalate/stop per stool culture and susceptibilities; avoid antimotility agents.",
+  "contraindications": [
+    "Avoid loperamide/antimotility agents in bloody diarrhoea (risk of toxic megacolon and prolonged shedding, esp. Shiga-toxin E. coli)",
+    "Fluoroquinolone: caution with QT prolongation, tendinopathy, and known local resistance",
+    "Avoid empiric antibiotics if STEC/EHEC suspected (raises HUS risk); reassess if hemolysis/AKI emerge"
+  ],
+  "edgeCases": [
+    "Amoebic colitis can mimic bacterial dysentery but classically has fewer fecal leukocytes and requires antiparasitic (metronidazole + luminal agent), not fluoroquinolone",
+    "Shiga-toxin-producing E. coli presents with bloody diarrhoea but antibiotics may precipitate HUS",
+    "Progression to toxic megacolon or intestinal perforation warrants urgent surgical/imaging evaluation"
+  ],
+  "expectedMaiK": "Classic febrile invasive bacterial dysentery with bloody, mucoid, small-volume stools, tenesmus and fecal leukocytes points to Shigella-type colitis; prioritise rehydration and a stool culture, give empiric ciprofloxacin (or azithromycin where fluoroquinolone resistance is high), and explicitly avoid antimotility drugs. Keep amoebic colitis and STEC on the differential.",
+  "expectedNextQuestions": [
+    "Any recent travel, sick contacts, or common-source food exposure?",
+    "Is there tenesmus and true blood/mucus in the stool versus watery diarrhoea?",
+    "Any features suggesting HUS or complications (reduced urine output, pallor, worsening pain/distension)?"
+  ],
+  "expectedInvestigations": [
+    "Stool culture with sensitivities",
+    "Stool microscopy for fecal leukocytes, RBCs, and ova/cysts (amoeba)",
+    "CBC, CRP, electrolytes and renal function"
+  ],
+  "expectedConfidence": 80,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "highFeverGI": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "contaminatedFoodWaterExposure": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "DYSENTERY",
+    "acceptableIds": [
+      "DYSENTERY"
+    ],
+    "differentialIds": [
+      "GASTROENTERITIS",
+      "AMOEBIC_LIVER_ABSCESS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Stool culture",
+      "Stool microscopy for fecal leukocytes and ova/cysts",
+      "CBC and electrolytes"
+    ],
+    "stewardship": {
+      "tier": "narrow-empiric",
+      "antibiotics": [
+        "Ciprofloxacin",
+        "Azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include DYSENTERY",
+    "stewardship must recommend empiric fluoroquinolone or azithromycin, not an antimotility agent"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "id": "gc_116",
+  "specialty": "Genitourinary",
+  "condition": "Acute Uncomplicated Cystitis",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "Two days of burning on passing urine with increased frequency and urgency",
+  "history": "Previously healthy, non-pregnant, premenopausal woman presents with 2 days of dysuria, urinary frequency and urgency, and mild suprapubic discomfort. She has noticed slightly cloudy, strong-smelling urine. No fever, rigors, flank pain, nausea or vomiting. No vaginal discharge or itch and no new sexual partner–related symptoms. She has had one similar self-limiting episode a year ago. No diabetes, no immunosuppression, no recent instrumentation, no urinary catheter, no known urological abnormality, and no antibiotics or hospitalization in the last 90 days. Last menstrual period 2 weeks ago; using condoms for contraception.",
+  "examination": "Alert and comfortable, well perfused. Mild suprapubic tenderness on deep palpation. No costovertebral angle tenderness bilaterally (pertinent negative). No flank tenderness, no abdominal guarding or rigidity. No vaginal discharge on external inspection. No rash.",
+  "vitals": {
+    "hr": 78,
+    "bp": "118/74",
+    "rr": 14,
+    "temp": 37,
+    "spo2": 99
+  },
+  "labs": {
+    "Urine dipstick": "Leukocyte esterase positive, nitrite positive, blood trace, protein negative",
+    "WBC": "7.8 x10^9/L (normal)",
+    "Creatinine": "0.8 mg/dL",
+    "Blood glucose": "5.1 mmol/L",
+    "Urine hCG": "Negative"
+  },
+  "imaging": "Not indicated for a first uncomplicated lower UTI in a non-pregnant woman",
+  "microbiology": "Urine culture not routinely required in classic uncomplicated cystitis; if sent, expect >10^5 CFU/mL Escherichia coli sensitive to nitrofurantoin and trimethoprim",
+  "differentialDiagnoses": [
+    "Acute uncomplicated cystitis",
+    "Acute pyelonephritis (excluded by absence of fever and CVA tenderness)",
+    "Vaginitis / urethritis (STI)",
+    "Interstitial cystitis / painful bladder syndrome"
+  ],
+  "finalDiagnosis": "Acute uncomplicated cystitis",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA Uncomplicated Cystitis and Pyelonephritis in Women 2011"
+  ],
+  "stewardship": "First-line empiric oral nitrofurantoin 100 mg BD for 5 days (narrow-spectrum, high urinary concentration, minimal collateral damage). Alternatives where local resistance is low: trimethoprim-sulfamethoxazole 3 days or single-dose fosfomycin. Avoid fluoroquinolones for uncomplicated cystitis (reserve for pyelonephritis).",
+  "contraindications": [
+    "Avoid nitrofurantoin if eGFR <30 mL/min (reduced efficacy, toxicity risk)",
+    "Avoid trimethoprim-sulfamethoxazole in sulfa allergy and in the first trimester / near term of pregnancy",
+    "Avoid nitrofurantoin at term pregnancy (neonatal hemolysis) and in G6PD deficiency"
+  ],
+  "edgeCases": [
+    "Nitrite may be falsely negative with non-nitrate-reducing organisms (e.g., Enterococcus, Staphylococcus saprophyticus) or dilute/frequently voided urine",
+    "Recurrent or male cystitis, pregnancy, catheter, or structural abnormality reclassifies this as complicated UTI and changes management"
+  ],
+  "expectedMaiK": "Classic acute uncomplicated cystitis in a healthy non-pregnant woman: dysuria, frequency, urgency with positive leukocyte esterase and nitrite, and no fever or flank pain. Treat empirically with a short course of nitrofurantoin; urine culture and imaging are not routinely needed.",
+  "expectedNextQuestions": [
+    "Any fever, rigors, flank or back pain suggesting upper tract involvement?",
+    "Could you be pregnant, and any chance of vaginal discharge or a sexually transmitted infection?"
+  ],
+  "expectedInvestigations": [
+    "Urine dipstick (leukocyte esterase and nitrite)",
+    "Urine pregnancy test",
+    "Urine culture only if recurrent, pregnant, or treatment failure"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "abdominalDiscomfort": true,
+    "afebrile": true,
+    "stable": true,
+    "sex": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "CYSTITIS",
+    "acceptableIds": [
+      "CYSTITIS"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "PROSTATITIS"
+    ],
+    "investigations": [
+      "Urine dipstick",
+      "Urine pregnancy test",
+      "Urine culture if recurrent or treatment failure"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "nitrofurantoin",
+        "trimethoprim-sulfamethoxazole",
+        "fosfomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include CYSTITIS",
+    "must not recommend fluoroquinolone as first-line empiric therapy for uncomplicated cystitis",
+    "must not classify as complicated UTI given non-pregnant female with no catheter/structural risk"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

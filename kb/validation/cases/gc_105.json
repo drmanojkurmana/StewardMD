@@ -1,0 +1,109 @@
+{
+  "id": "gc_105",
+  "specialty": "Central Nervous System",
+  "condition": "Brain Abscess",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "Two-week history of worsening left-sided headache with new right-arm weakness and one seizure this morning",
+  "history": "A 42-year-old man presents with a 12-14 day history of progressively worsening, dull, constant left frontotemporal headache that is worse in the mornings and only partially relieved by paracetamol. Over the last 3-4 days he has developed intermittent low-grade fever, nausea with two episodes of vomiting, and his wife noticed he has become uncharacteristically drowsy and 'not himself'. This morning he had a witnessed generalised tonic-clonic seizure lasting ~90 seconds followed by post-ictal confusion, and she then noticed weakness of the right hand. Relevant PMH: chronic left maxillary and frontal sinusitis with recurrent purulent nasal discharge over the past 2 months treated with intermittent oral antibiotics; poorly maintained dentition with a recently painful upper molar. No known HIV, no diabetes, no IV drug use, not on immunosuppressants. No recent travel or head trauma.",
+  "examination": "Alert but drowsy, GCS 14 (E4 V4 M6), oriented to person only. Febrile and unwell but not toxic/shocked. Neurological: subtle right pronator drift with 4/5 power in the right upper limb, brisk right-sided reflexes, equivocal right plantar; no neck stiffness or Kernig sign; no papilloedema on fundoscopy at presentation. Tenderness over the left maxillary sinus with purulent post-nasal drip; dental caries with tender left upper molar. Pertinent negatives: no rash, no new cardiac murmur, chest clear, no stigmata of endocarditis, no meningism.",
+  "vitals": {
+    "hr": 96,
+    "bp": "134/82",
+    "rr": 18,
+    "temp": 38.1,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "13.8 x10^9/L (neutrophil predominant)",
+    "CRP": "72 mg/L",
+    "ESR": "58 mm/hr",
+    "Hemoglobin": "13.9 g/dL",
+    "Platelets": "310 x10^3/uL",
+    "Creatinine": "0.9 mg/dL",
+    "Sodium": "137 mmol/L",
+    "Random glucose": "112 mg/dL",
+    "Blood cultures": "sent x2, pending"
+  },
+  "imaging": "MRI brain with contrast: a 2.6 cm ring-enhancing lesion in the left frontal lobe with a smooth, thin-walled capsule, surrounding vasogenic oedema and mild local mass effect. DWI shows marked central restricted diffusion (low ADC) within the cavity — the key feature distinguishing pyogenic abscess from necrotic tumour. Adjacent opacification of the left frontal/maxillary sinuses. No midline shift or impending herniation. (CT venogram unremarkable.)",
+  "microbiology": "Blood cultures pending; anticipated polymicrobial (viridans/anginosus-group streptococci and oral anaerobes) given contiguous sinus/odontogenic source. Definitive Gram stain and culture require CT-guided/stereotactic aspiration.",
+  "differentialDiagnoses": [
+    "Pyogenic brain abscess (contiguous sinus/odontogenic source)",
+    "High-grade glioma or cerebral metastasis (ring-enhancing lesion)",
+    "Bacterial meningitis with cerebritis",
+    "Tuberculoma / CNS tuberculosis"
+  ],
+  "finalDiagnosis": "Bacterial brain abscess (left frontal, secondary to contiguous paranasal sinus and odontogenic infection)",
+  "citations": [
+    "Harrison 22e — Brain Abscess and Empyema (Chapter on CNS infections)",
+    "IDSA Infectious Diseases Society of America has no dedicated 2017 brain-abscess guideline; use ESCMID Brain Abscess Guideline 2024"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 2 g q12h PLUS metronidazole 500 mg q8h to cover streptococci, Enterobacterales and oral/sinus anaerobes; add vancomycin if post-traumatic/post-neurosurgical or MRSA risk. Neurosurgical stereotactic aspiration for source control and culture is integral. Antiepileptic for the seizure. Tailor and de-escalate on aspirate culture; total duration typically 6-8 weeks IV-led.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis: substitute aztreonam or a fluoroquinolone with metronidazole",
+    "Avoid empiric corticosteroids unless significant mass effect/impending herniation, as they impair antibiotic penetration and capsule formation",
+    "Ceftriaxone caution in significant hepatobiliary disease; dose metronidazole for hepatic impairment"
+  ],
+  "edgeCases": [
+    "In HIV/immunocompromised hosts consider toxoplasmosis, nocardia, fungal (Aspergillus) or listerial abscess — broadens empiric cover",
+    "A necrotic glioma/metastasis can mimic a ring-enhancing lesion; DWI restricted diffusion strongly favours pyogenic abscess",
+    "Occipital/temporal abscess from otogenic source, or multiple abscesses suggesting haematogenous (endocarditis/right-to-left shunt) spread"
+  ],
+  "expectedMaiK": "A subacute focal neurological deficit and seizure with a DWI-restricting ring-enhancing lesion adjacent to infected sinuses/teeth is a classic contiguous-source bacterial brain abscess; prioritise urgent neurosurgical aspiration for diagnosis and source control alongside ceftriaxone plus metronidazole, and avoid routine lumbar puncture given mass effect.",
+  "expectedNextQuestions": [
+    "Any immunocompromise (HIV, transplant, steroids, uncontrolled diabetes) or IV drug use?",
+    "Any recent dental work, sinusitis, otitis/mastoiditis, or penetrating head trauma/neurosurgery as a source?",
+    "Any features of raised intracranial pressure (worsening headache, vomiting, visual change, reduced GCS)?"
+  ],
+  "expectedInvestigations": [
+    "Contrast MRI brain with DWI/ADC (already diagnostic here)",
+    "CT-guided / stereotactic aspiration for Gram stain, aerobic + anaerobic culture and 16S PCR",
+    "Blood cultures x2, and echocardiography + dental/sinus imaging to identify the source"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "focalNeuroDeficit": true,
+    "seizure": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "facialPain": true,
+    "purulentNasalDischarge": true,
+    "subacuteOnset": true,
+    "behavioralChange": true
+  },
+  "expected": {
+    "diagnosis": "BRAIN_ABSCESS",
+    "acceptableIds": [
+      "BRAIN_ABSCESS"
+    ],
+    "differentialIds": [
+      "brain_tumour",
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "CNS_TB"
+    ],
+    "investigations": [
+      "Contrast MRI brain with DWI",
+      "Stereotactic aspiration with Gram stain and culture",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum",
+      "antibiotics": [
+        "ceftriaxone",
+        "metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include BRAIN_ABSCESS",
+    "differential must include brain_tumour as a ring-enhancing mimic",
+    "empiric stewardship must include metronidazole for anaerobic cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

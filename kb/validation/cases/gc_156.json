@@ -1,0 +1,100 @@
+{
+  "id": "gc_156",
+  "specialty": "Endocrine",
+  "condition": "Adrenal crisis",
+  "age": 42,
+  "sex": "F",
+  "presentingComplaint": "Severe weakness, vomiting and near-collapse in a woman with known Addison's disease who stopped her steroids during a vomiting illness",
+  "history": "Known primary adrenal insufficiency (autoimmune Addison's disease) for 6 years, maintained on hydrocortisone 15/5 mg and fludrocortisone 100 mcg daily. Developed a diarrhoeal/vomiting illness 2 days ago and was unable to keep down her oral steroid doses; did not know to double her dose or use IM hydrocortisone. Over the last 24 hours she has become progressively weak, dizzy on standing, nauseated with repeated vomiting, and has diffuse abdominal pain. Brought in obtunded after a near-syncopal episode. No fever, no localising infective symptoms beyond the resolving gastroenteritis. PMH: autoimmune thyroiditis on levothyroxine, vitiligo. No prior documented crisis. Not pregnant.",
+  "examination": "Drowsy but rousable, appears volume-depleted with dry mucous membranes and reduced skin turgor. Marked postural drop. Diffuse mild abdominal tenderness without guarding or peritonism. Buccal and palmar-crease hyperpigmentation. No neck stiffness, no focal neurology, no rash, chest clear, no localising source of sepsis.",
+  "vitals": {
+    "hr": 118,
+    "bp": "78/48",
+    "rr": 22,
+    "temp": 36.4,
+    "spo2": 98
+  },
+  "labs": {
+    "sodium": "126 mmol/L",
+    "potassium": "5.9 mmol/L",
+    "glucose": "3.0 mmol/L (54 mg/dL)",
+    "creatinine": "1.6 mg/dL",
+    "urea": "12 mmol/L",
+    "cortisol (random, pre-treatment)": "43 nmol/L (inappropriately low)",
+    "ACTH": "markedly elevated (sent, pending)",
+    "hemoglobin": "13.1 g/dL",
+    "wcc": "9.8 x10^9/L",
+    "eosinophils": "mildly raised",
+    "venous gas": "mild metabolic acidosis, lactate 1.8"
+  },
+  "imaging": "Not indicated acutely; erect CXR and abdominal exam do not support surgical abdomen. Adrenal CT reserved for suspected haemorrhage if no known Addison's.",
+  "microbiology": "Blood/urine cultures sent to exclude precipitant; no focus identified. Stool for the resolving gastroenteritis if ongoing.",
+  "differentialDiagnoses": [
+    "Adrenal (Addisonian) crisis precipitated by intercurrent GI illness and steroid non-adherence",
+    "Septic shock",
+    "Hypovolaemic shock from gastroenteritis",
+    "Diabetic emergency / other metabolic collapse"
+  ],
+  "finalDiagnosis": "Adrenal crisis (acute adrenal insufficiency) on background of Addison's disease",
+  "citations": [
+    "Harrison 22e — Disorders of the Adrenal Cortex (adrenal insufficiency / adrenal crisis)",
+    "Endocrine Society Diagnosis and Treatment of Primary Adrenal Insufficiency 2016"
+  ],
+  "stewardship": "Not applicable — non-infective. Empirical antibiotics only if a genuine infective precipitant is suspected on evaluation; the crisis itself is treated with parenteral glucocorticoid and fluids, not antibiotics.",
+  "contraindications": [
+    "Do not delay hydrocortisone for confirmatory cortisol/ACTH results",
+    "Avoid dextrose-free correction if hypoglycaemic; treat glucose 3.0 mmol/L",
+    "Fludrocortisone unnecessary while on high-dose IV hydrocortisone (intrinsic mineralocorticoid effect); avoid aggressive over-correction of hyponatraemia"
+  ],
+  "edgeCases": [
+    "First presentation without known Addison's — consider bilateral adrenal haemorrhage (Waterhouse-Friderichsen) or secondary (pituitary) insufficiency where hyperkalaemia/hyperpigmentation may be absent",
+    "Crisis can be masked by, or precipitated by, sepsis — hypotension refractory to fluids/pressors is the classic clue"
+  ],
+  "expectedMaiK": "This is a life-threatening adrenal crisis: give IV hydrocortisone 100 mg immediately plus rapid 0.9% saline resuscitation and correct hypoglycaemia before any confirmatory testing. The combination of hypotension, hyponatraemia, hyperkalaemia and hypoglycaemia in a patient with known Addison's and steroid non-adherence is diagnostic — do not wait for cortisol results.",
+  "expectedNextQuestions": [
+    "Has the patient missed or reduced glucocorticoid doses, and does she have a sick-day / IM hydrocortisone plan?",
+    "Is there an infective or other precipitant (fever, dysuria, chest symptoms) driving the crisis?"
+  ],
+  "expectedInvestigations": [
+    "Paired random serum cortisol and plasma ACTH (before or with first steroid dose)",
+    "Urgent electrolytes, glucose and renal function; septic screen for precipitant"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "steroidUse": true,
+    "syncope": true
+  },
+  "expected": {
+    "diagnosis": "adrenal_crisis",
+    "acceptableIds": [
+      "adrenal_crisis"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "hypovolemic_shock",
+      "hyponatremia"
+    ],
+    "investigations": [
+      "Paired serum cortisol and plasma ACTH",
+      "Serum electrolytes, glucose and renal function"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include adrenal_crisis",
+    "stewardship tier must be null (non-infective condition)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

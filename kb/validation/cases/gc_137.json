@@ -1,0 +1,97 @@
+{
+  "id": "gc_137",
+  "specialty": "Respiratory",
+  "condition": "Acute Pharyngitis (Group A Streptococcal)",
+  "age": 14,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset sore throat and fever for 2 days",
+  "history": "Previously well 14-year-old schoolgirl with 2 days of abrupt sore throat, pain on swallowing, and fever up to 39°C. Reports headache and mild odynophagia. Notably NO cough, NO rhinorrhoea, and NO hoarseness. Two classmates recently had similar sore-throat illness. No known drug allergy. No prior rheumatic fever, no significant PMH.",
+  "examination": "Ill-appearing but not toxic. Oropharynx shows erythematous, swollen tonsils with patchy white-yellow tonsillar exudate. Tender, enlarged anterior cervical lymph nodes bilaterally. No conjunctival injection, no coryza, no cough during consult. No rash, no strawberry tongue at present. Chest clear. Abdomen soft, no hepatosplenomegaly.",
+  "vitals": {
+    "hr": 98,
+    "bp": "112/70",
+    "rr": 16,
+    "temp": 38.9,
+    "spo2": 99
+  },
+  "labs": {
+    "WBC": "13.2 x10^9/L (neutrophil predominant)",
+    "CRP": "42 mg/L",
+    "Rapid antigen detection test (RADT)": "positive for Group A Streptococcus",
+    "Monospot (heterophile)": "negative"
+  },
+  "imaging": "not indicated",
+  "microbiology": "Throat swab RADT positive for GAS; culture pending (confirmatory, not required before treatment when RADT positive)",
+  "differentialDiagnoses": [
+    "Viral pharyngitis",
+    "Infectious mononucleosis (EBV)",
+    "Acute tonsillitis with peritonsillar abscess",
+    "Common cold / URTI"
+  ],
+  "finalDiagnosis": "Group A streptococcal (bacterial) pharyngitis",
+  "citations": [
+    "Harrison 22e — Pharyngitis, Sinusitis, Otitis, and Other Upper Respiratory Tract Infections",
+    "IDSA Group A Streptococcal Pharyngitis 2012"
+  ],
+  "stewardship": "Oral penicillin V 500 mg BD (or amoxicillin 500 mg BD) for 10 days — first-line for confirmed GAS pharyngitis to eradicate organism and prevent acute rheumatic fever. Narrow-spectrum penicillin remains drug of choice; no documented GAS penicillin resistance.",
+  "contraindications": [
+    "Penicillin/beta-lactam allergy — use a macrolide (azithromycin) or first-generation cephalosporin (if non-anaphylactic)",
+    "Avoid amoxicillin/ampicillin empirically if infectious mononucleosis is possible (morbilliform rash risk)"
+  ],
+  "edgeCases": [
+    "Centor/McIsaac score of 4 (tonsillar exudate, tender anterior nodes, fever, no cough, age <15) supports testing and treatment",
+    "Scarlet fever if sandpaper rash + strawberry tongue develops",
+    "Missed peritonsillar abscess if trismus, uvular deviation or 'hot-potato' voice appears"
+  ],
+  "expectedMaiK": "Classic bacterial (Group A strep) pharyngitis with high Centor/McIsaac score and positive RADT — treat with narrow-spectrum penicillin to prevent rheumatic fever; do not use empiric antibiotics for low-probability viral sore throat.",
+  "expectedNextQuestions": [
+    "Any penicillin or other drug allergy?",
+    "Presence of cough, coryza or hoarseness (suggesting viral cause)?",
+    "Any prior rheumatic fever or recent streptococcal contact?"
+  ],
+  "expectedInvestigations": [
+    "Rapid antigen detection test (RADT) for Group A Streptococcus",
+    "Throat culture if RADT negative in a child/adolescent",
+    "Monospot / EBV serology if mononucleosis suspected"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "soreThroat": true,
+    "tonsillarExudate": true,
+    "tenderCervicalNodes": true,
+    "fever": true,
+    "lymphadenopathy": true,
+    "headache": true
+  },
+  "expected": {
+    "diagnosis": "PHARYNGITIS",
+    "acceptableIds": [
+      "PHARYNGITIS"
+    ],
+    "differentialIds": [
+      "URTI",
+      "SINUSITIS",
+      "ACUTE_BRONCHITIS"
+    ],
+    "investigations": [
+      "Rapid antigen detection test (RADT) for Group A Streptococcus",
+      "Throat culture"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "Penicillin V",
+        "Amoxicillin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include PHARYNGITIS",
+    "stewardship tier must be narrow (penicillin/amoxicillin), not broad-spectrum",
+    "must not recommend antibiotics without evidence of GAS (RADT/culture)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

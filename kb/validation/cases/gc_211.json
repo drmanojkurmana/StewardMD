@@ -1,0 +1,103 @@
+{
+  "id": "gc_211",
+  "specialty": "Functional",
+  "condition": "Panic attack / panic disorder",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "Sudden episodes of palpitations, chest tightness and 'feeling I am about to die' lasting minutes",
+  "history": "Recurrent, abrupt-onset episodes over 3 months of pounding heart, chest tightness, shortness of breath, tingling in the fingers and around the mouth, light-headedness and an intense fear of dying or 'going mad'. Episodes peak within 10 minutes and settle over 20-30 minutes, often occurring out of the blue including at rest and once waking her from sleep. Between attacks she is well but has developed anticipatory anxiety and now avoids the shopping mall where the first attack occurred. No exertional trigger, no syncope, no chest pain radiating to arm/jaw. Non-smoker, no cocaine/amphetamine or excess caffeine, not pregnant, no palpitations-provoking medications. No weight loss, heat intolerance or tremor at rest. Family history of anxiety in mother. No prior cardiac or thyroid disease.",
+  "examination": "Anxious young woman, hyperventilating during assessment but able to converse in full sentences. Cardiovascular exam normal: regular rhythm, no murmurs, normal heart sounds, no signs of heart failure. Chest clear with equal air entry. No goitre, no tremor, no lid lag, no exophthalmos. Neurological exam normal, no focal deficit. Peripheries warm, capillary refill <2s. Pertinent negatives: no fixed tachyarrhythmia on rhythm strip, no hypoxia, no calf swelling, no thyroid signs.",
+  "vitals": {
+    "hr": 108,
+    "bp": "128/78",
+    "rr": 24,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "ECG": "sinus tachycardia, no ischaemic ST/T changes, normal QTc",
+    "Troponin (hs)": "<5 ng/L (normal, serial)",
+    "TSH": "2.1 mIU/L (normal)",
+    "FT4": "normal",
+    "Capillary glucose": "5.4 mmol/L",
+    "FBC": "normal",
+    "U&E": "normal",
+    "Venous gas (during attack)": "mild respiratory alkalosis, pH 7.48, pCO2 3.9 kPa",
+    "Urine toxicology": "negative",
+    "Beta-hCG": "negative"
+  },
+  "imaging": "Not indicated for classic presentation; CXR (if performed for reassurance) normal",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Panic disorder / panic attack",
+    "Acute coronary syndrome",
+    "Paroxysmal supraventricular tachycardia / arrhythmia",
+    "Thyrotoxicosis",
+    "Pulmonary embolism",
+    "Phaeochromocytoma"
+  ],
+  "finalDiagnosis": "Panic disorder (recurrent panic attacks)",
+  "citations": [
+    "Harrison 22e — Anxiety and Panic Disorders (Psychiatric Disorders)",
+    "APA Practice Guideline: Treatment of Patients With Panic Disorder 2009"
+  ],
+  "stewardship": "Not applicable — non-infective functional disorder; no antimicrobial therapy indicated",
+  "contraindications": [
+    "Avoid escalating unnecessary cardiac/CT imaging or benzodiazepine dependence; benzodiazepines only short-term",
+    "SSRI first-line but caution: initial jitteriness can transiently worsen anxiety — start low, go slow",
+    "Avoid beta-blockers masking a missed true arrhythmia if diagnosis uncertain"
+  ],
+  "edgeCases": [
+    "Panic attacks can coexist with genuine organic disease (e.g. PSVT or thyrotoxicosis) — a single normal ECG does not exclude paroxysmal arrhythmia; consider ambulatory monitoring if episodes are stereotyped and abrupt",
+    "First-ever attack after age 45, or with true syncope/exertional trigger, mandates organic workup before attributing to panic"
+  ],
+  "expectedMaiK": "Classic panic disorder: recurrent, self-limiting attacks of autonomic and cognitive symptoms peaking within 10 minutes with normal cardiac, thyroid and toxicology workup. This is a diagnosis of exclusion in a young patient — reassure, screen for arrhythmia/thyroid/PE if any red flags, and treat with SSRI plus CBT rather than antibiotics or invasive tests.",
+  "expectedNextQuestions": [
+    "Are the attacks unexpected/at rest, and do they peak within 10 minutes?",
+    "Any exertional trigger, true syncope, or radiating chest pain suggesting cardiac cause?",
+    "Stimulant, caffeine, cocaine or thyroid symptoms; is there avoidance behaviour (agoraphobia)?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (and ambulatory Holter if paroxysmal arrhythmia suspected)",
+    "TSH/FT4 and serial high-sensitivity troponin",
+    "Urine drug screen; consider D-dimer/PE assessment only if Wells/PERC positive"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "palpitations": true,
+    "chestPain": true,
+    "dyspnea": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "headache": true
+  },
+  "expected": {
+    "diagnosis": "panic",
+    "acceptableIds": [
+      "panic"
+    ],
+    "differentialIds": [
+      "acs",
+      "atrial_fib",
+      "pe",
+      "hyperthyroidism"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "high-sensitivity troponin",
+      "TSH/FT4"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include panic",
+    "expected.stewardship.tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

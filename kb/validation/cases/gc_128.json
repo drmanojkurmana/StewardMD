@@ -1,0 +1,107 @@
+{
+  "id": "gc_128",
+  "specialty": "Respiratory",
+  "condition": "Hospital Acquired Pneumonia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "New fever, productive cough and increasing oxygen requirement on day 6 of a surgical ward admission.",
+  "history": "Admitted 6 days earlier for open reduction and internal fixation of a fractured femur. From the morning of day 6 he developed rigors, purulent yellow-green sputum and worsening breathlessness. He has NOT been intubated or ventilated at any point. Background: type 2 diabetes, ex-smoker (40 pack-years), reduced mobility since surgery. Received a course of IV cefuroxime perioperatively (within the last 90 days). No recent travel, no aspiration event witnessed.",
+  "examination": "Alert and oriented but appears unwell and flushed. Reduced air entry with bronchial breathing and coarse crepitations over the right lower zone; dullness to percussion at the right base. No neck stiffness, no calf swelling, no new cardiac murmur. Chest wall and surgical wound clean. Pertinent negatives: no witnessed aspiration, not on a ventilator, no foul-smelling sputum.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/72",
+    "rr": 26,
+    "temp": 38.7,
+    "spo2": 90
+  },
+  "labs": {
+    "WBC": "16.8 x10^9/L (neutrophilia)",
+    "CRP": "184 mg/L",
+    "procalcitonin": "2.1 ng/mL",
+    "creatinine": "1.1 mg/dL",
+    "lactate": "1.8 mmol/L",
+    "ABG": "PaO2 68 mmHg on 4 L/min, PaO2:FiO2 ~285",
+    "glucose": "11.4 mmol/L"
+  },
+  "imaging": "Portable chest radiograph: new right lower zone air-space consolidation with air bronchograms, not present on the admission film. No cavitation, no large effusion.",
+  "microbiology": "Sputum Gram stain: numerous polymorphs with Gram-negative bacilli; sputum and blood cultures sent, pending. Legionella/pneumococcal urinary antigens sent.",
+  "differentialDiagnoses": [
+    "Hospital-acquired (nosocomial, non-ventilator) pneumonia",
+    "Aspiration pneumonia",
+    "Pulmonary embolism (post-operative, immobile)",
+    "Community-acquired pneumonia",
+    "Postoperative atelectasis"
+  ],
+  "finalDiagnosis": "Hospital-acquired pneumonia (non-ventilator-associated, onset >48h after admission)",
+  "citations": [
+    "Harrison 22e — Pneumonia (Hospital-Acquired and Ventilator-Associated Pneumonia)",
+    "IDSA/ATS Management of Adults with Hospital-Acquired and Ventilator-Associated Pneumonia 2016"
+  ],
+  "stewardship": "Empiric IV piperacillin-tazobactam covering Pseudomonas and Gram-negative bacilli plus MSSA; no MRSA or double anti-pseudomonal coverage required as he lacks high mortality risk and has no MRSA risk factors per IDSA/ATS 2016 HAP algorithm. De-escalate on culture results.",
+  "contraindications": [
+    "Penicillin anaphylaxis — substitute cefepime or levofloxacin",
+    "Renal impairment — dose-adjust piperacillin-tazobactam to eGFR",
+    "Add vancomycin/linezolid only if MRSA colonised or high mortality risk"
+  ],
+  "edgeCases": [
+    "If patient were ventilated this would be VAP, not HAP, with different empiric thresholds",
+    "Pulmonary embolism can mimic HAP in a post-op immobile patient with hypoxia — normal-ish lactate and clear consolidation favour pneumonia but a low threshold for CTPA if consolidation is absent",
+    "Prior antibiotic exposure and hospitalisation elevate MDR/Pseudomonas risk"
+  ],
+  "expectedMaiK": "New consolidation with fever, purulent sputum and rising oxygen requirement arising >48h into admission indicates hospital-acquired pneumonia; start empiric anti-pseudomonal cover and de-escalate to culture-directed therapy once sensitivities return.",
+  "expectedNextQuestions": [
+    "Has the patient been intubated or mechanically ventilated (to distinguish HAP from VAP)?",
+    "Any local antibiogram data or prior MDR/Pseudomonas/MRSA colonisation?"
+  ],
+  "expectedInvestigations": [
+    "Blood and lower-respiratory (sputum/endotracheal) cultures before antibiotics",
+    "Legionella and pneumococcal urinary antigens; consider CTPA if PE not excluded"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "purulentSputum": true,
+    "coughRadio": true,
+    "crepitations": true,
+    "consolidation": true,
+    "hospitalDay48": true,
+    "worseningOxygenation": true,
+    "hypoxia": true,
+    "tachypnea": true,
+    "priorAntibiotics": true,
+    "hospitalizationLast90Days": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "HAP",
+    "acceptableIds": [
+      "HAP"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "CAP",
+      "pe",
+      "VAP"
+    ],
+    "investigations": [
+      "Blood and respiratory cultures before antibiotics",
+      "Chest radiograph / repeat imaging",
+      "Legionella and pneumococcal urinary antigens"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include HAP",
+    "must not diagnose VAP unless mechanicalVentilation is true",
+    "empiric regimen must include anti-pseudomonal beta-lactam"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

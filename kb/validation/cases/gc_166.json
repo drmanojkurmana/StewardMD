@@ -1,0 +1,105 @@
+{
+  "id": "gc_166",
+  "specialty": "Surgical / GI",
+  "condition": "Acute mechanical small bowel obstruction",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Colicky central abdominal pain, distension and bilious vomiting for 2 days with absolute constipation.",
+  "history": "2-day history of crampy, intermittent peri-umbilical pain occurring in waves every few minutes, associated with progressive abdominal distension and multiple episodes of vomiting that has become bilious then feculent. No flatus or stool passed for 24 hours (absolute constipation, a late feature). Prior open hysterectomy 8 years ago and appendicectomy in youth. No prior similar episodes. No NSAID use, no weight loss, no PR bleeding. Adhesional obstruction suspected given laparotomy history.",
+  "examination": "Alert, dry mucous membranes, mildly dehydrated. Abdomen distended and tympanitic with well-healed midline and RIF scars; high-pitched, tinkling ('obstructive') bowel sounds. Diffuse mild tenderness without guarding, rigidity or rebound (pertinent negative: no peritonism, no signs of strangulation). No palpable mass; hernial orifices intact and empty. PR: empty, collapsed rectum, no mass or blood.",
+  "vitals": {
+    "hr": 104,
+    "bp": "112/72",
+    "rr": 20,
+    "temp": 37.2,
+    "spo2": 98
+  },
+  "labs": {
+    "Hb": "14.6 g/dL (haemoconcentration)",
+    "WCC": "11.2 x10^9/L",
+    "Na": "134 mmol/L",
+    "K": "3.2 mmol/L",
+    "Cl": "92 mmol/L",
+    "urea": "9.8 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "lactate": "1.4 mmol/L",
+    "CRP": "18 mg/L",
+    "VBG": "mild hypochloraemic hypokalaemic metabolic alkalosis"
+  },
+  "imaging": "Erect/supine abdominal X-ray: dilated central small-bowel loops (>3 cm) with valvulae conniventes and multiple air-fluid levels; paucity of colonic/rectal gas. CT abdomen/pelvis with contrast: dilated proximal small bowel with a distal transition point in the pelvis and collapsed distal loops, no closed-loop, no pneumatosis, no free air, normal bowel-wall enhancement - adhesional SBO without ischaemia.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Adhesional small bowel obstruction",
+    "Obstructing colorectal malignancy",
+    "Incarcerated/strangulated hernia",
+    "Paralytic ileus",
+    "Acute mesenteric ischaemia"
+  ],
+  "finalDiagnosis": "Acute adhesional small bowel obstruction (mechanical), non-strangulated",
+  "citations": [
+    "Harrison 22e — Intestinal Obstruction / Acute Abdomen",
+    "WSES (World Society of Emergency Surgery) Adhesive Small Bowel Obstruction Guidelines 2017"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid oral osmotic/stimulant laxatives and prokinetics until mechanical obstruction excluded/relieved",
+    "Correct hypokalaemia and hypochloraemic alkalosis before any anaesthesia; caution with iodinated CT contrast given borderline urea/creatinine and dehydration",
+    "Avoid opioid over-sedation which worsens ileus and masks evolving peritonism"
+  ],
+  "edgeCases": [
+    "Closed-loop obstruction or strangulation can present with continuous (not colicky) pain, tachycardia, rising lactate, fever and localized peritonism - a surgical emergency mandating immediate operation rather than a trial of conservative management",
+    "Gallstone ileus, obstructing malignancy or Richter's hernia may lack classic external hernia findings",
+    "Water-soluble contrast (Gastrografin) challenge is both diagnostic and therapeutic in adhesional SBO and predicts need for surgery"
+  ],
+  "expectedMaiK": "Classic mechanical small bowel obstruction: colicky pain, distension, vomiting and absolute constipation with prior abdominal surgery pointing to adhesions. Manage with NBM, nasogastric decompression, IV fluids and electrolyte correction; monitor closely for strangulation (continuous pain, tachycardia, rising lactate, peritonism) which converts a conservative trial into an emergency laparotomy.",
+  "expectedNextQuestions": [
+    "Is the pain colicky/intermittent or has it become constant and severe (suggesting strangulation/ischaemia)?",
+    "Prior abdominal or pelvic surgery, hernias, or known malignancy?",
+    "When was the last passage of flatus and stool, and is the vomiting bilious or feculent?"
+  ],
+  "expectedInvestigations": [
+    "Erect/supine abdominal radiograph",
+    "CT abdomen and pelvis with IV contrast to confirm level, cause and exclude ischaemia/closed-loop",
+    "Serum electrolytes, lactate and venous blood gas"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "abdominalPain": true,
+    "severeAbdominalPain": true,
+    "abdominalDistension": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "tachycardia": true,
+    "dehydration": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "bowel_obstruction",
+    "acceptableIds": [
+      "bowel_obstruction"
+    ],
+    "differentialIds": [
+      "mesenteric_ischemia",
+      "ibd_flare",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "CT abdomen and pelvis with contrast",
+      "Abdominal X-ray (erect/supine)",
+      "Serum electrolytes and lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include bowel_obstruction",
+    "stewardship.tier must be null (non-infective)",
+    "differentialIds must not contain bowel_obstruction"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

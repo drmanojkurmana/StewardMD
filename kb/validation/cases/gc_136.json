@@ -1,0 +1,109 @@
+{
+  "id": "gc_136",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Necrotizing Fasciitis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Rapidly worsening, exquisitely painful swelling of the left lower leg over 24 hours with high fever",
+  "history": "Type 2 diabetic on metformin, presents with a 36-hour history of a red, swollen left calf that began after a minor gardening abrasion. Pain has escalated to being far worse than the visible skin changes suggest and is now not controlled by oral analgesia. He describes rigors, malaise and progressive difficulty weighing on the leg. Over the last 12 hours the erythema has spread rapidly up the shin, the skin has developed dusky discolouration, and he has felt increasingly unwell and light-headed. No trauma to a joint, no recent surgery. PMH: T2DM (HbA1c 9.2%), hypertension. No known drug allergies.",
+  "examination": "Toxic, sweaty and anxious. Left leg shows tense, spreading erythema extending beyond ill-defined margins, with tense oedema, patchy dusky-grey skin, early haemorrhagic bullae over the mid-shin and cutaneous anaesthesia over the affected area. Palpable subcutaneous crepitus. Pain grossly out of proportion to visible findings. Wound margins ooze thin 'dishwater' fluid. Pertinent negatives: no fluctuant abscess, no lymphangitic streaking limited to a discrete track, no joint effusion, distal pulses present.",
+  "vitals": {
+    "hr": 122,
+    "bp": "92/54",
+    "rr": 26,
+    "temp": 39.1,
+    "spo2": 96
+  },
+  "labs": {
+    "WBC": "22.4 x10^9/L (neutrophilia with left shift)",
+    "CRP": "260 mg/L",
+    "Na": "129 mmol/L",
+    "Creatinine": "1.9 mg/dL",
+    "Glucose": "18.5 mmol/L",
+    "Hemoglobin": "12.1 g/dL",
+    "Lactate": "4.2 mmol/L",
+    "LRINEC score": "9 (high risk)"
+  },
+  "imaging": "Plain radiograph and CT of the left leg show soft-tissue gas tracking along the fascial planes with fascial-plane oedema; imaging must not delay surgical exploration",
+  "microbiology": "Blood cultures drawn; deep tissue Gram stain and culture from operative specimens pending (mixed flora vs Group A Streptococcus / Clostridium)",
+  "differentialDiagnoses": [
+    "Necrotizing fasciitis",
+    "Severe cellulitis",
+    "Erysipelas",
+    "Gas gangrene / clostridial myonecrosis",
+    "Diabetic foot / limb infection"
+  ],
+  "finalDiagnosis": "Necrotizing fasciitis (type I/II) of the left lower limb with early septic shock",
+  "citations": [
+    "Harrison 22e — Infections of the Skin, Muscles, and Soft Tissues",
+    "IDSA Skin and Soft Tissue Infections 2014"
+  ],
+  "stewardship": "Empiric broad-spectrum cover per IDSA SSTI 2014: piperacillin-tazobactam (or a carbapenem) PLUS vancomycin for MRSA cover PLUS clindamycin for antitoxin/anti-exotoxin effect against Group A Streptococcus. Antibiotics are strictly adjunctive to emergent surgical debridement, which is the definitive intervention.",
+  "contraindications": [
+    "Beta-lactam / penicillin allergy would preclude piperacillin-tazobactam",
+    "Renal impairment (creatinine 1.9) requires vancomycin dosing by levels and pip-tazo dose adjustment",
+    "Clindamycin risk of C. difficile"
+  ],
+  "edgeCases": [
+    "Early NF can mimic simple cellulitis with deceptively benign-looking skin while deep fascia is necrotic; pain out of proportion and rapid progression are the key clues",
+    "Type II monomicrobial Group A Streptococcal NF can occur in healthy young patients with minimal trauma and progress to toxic shock",
+    "Absence of crepitus or gas does NOT exclude NF"
+  ],
+  "expectedMaiK": "Rapidly spreading erythema with pain out of proportion to exam, dusky skin, haemorrhagic bullae, crepitus and a high LRINEC score in a septic diabetic strongly suggests necrotizing fasciitis; this is a surgical emergency requiring immediate exploration and debridement alongside broad-spectrum antibiotics including clindamycin.",
+  "expectedNextQuestions": [
+    "Is the pain out of proportion to the visible skin changes, and how fast is the erythema advancing (marker pen the margin)?",
+    "Any crepitus, skin anaesthesia, or haemorrhagic bullae?"
+  ],
+  "expectedInvestigations": [
+    "Urgent surgical consultation for exploration/debridement",
+    "LRINEC-supporting bloods (CBC, CRP, sodium, creatinine, glucose, lactate), blood cultures, and deep tissue Gram stain/culture"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "toxicAppearing": true,
+    "lactateElevated": true,
+    "rapidlySpreadingErythema": true,
+    "severePain": true,
+    "crepitusOrBullae": true,
+    "skinErythema": true,
+    "diabetesHx": true,
+    "deepTissueInvolvement": true
+  },
+  "expected": {
+    "diagnosis": "NECROTIZING_FASCIITIS",
+    "acceptableIds": [
+      "NECROTIZING_FASCIITIS"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "ERYSIPELAS",
+      "DIABETIC_FOOT",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Urgent surgical exploration/debridement",
+      "Blood cultures and deep tissue Gram stain/culture",
+      "CBC, CRP, lactate (LRINEC components)"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "vancomycin",
+        "clindamycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include NECROTIZING_FASCIITIS",
+    "stewardship tier must be broad and antibiotics must include clindamycin"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

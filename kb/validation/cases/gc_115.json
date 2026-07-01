@@ -1,0 +1,105 @@
+{
+  "id": "gc_115",
+  "specialty": "Respiratory",
+  "condition": "Acute COPD Exacerbation",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "3 days of worsening breathlessness with increased sputum volume and change to green colour",
+  "history": "68-year-old man with a 45 pack-year smoking history and GOLD group E COPD (FEV1 48% predicted, two exacerbations last year) presents with 3 days of progressive breathlessness beyond his baseline, increased sputum volume, and a change from clear to purulent green sputum. Preceded by coryzal symptoms. Reduced exercise tolerance from 200 m to a few steps. Home therapy is a LABA/LAMA/ICS inhaler and PRN salbutamol, now needing near-hourly. No orthopnoea, PND, chest pain, or haemoptysis. Ex-farmer, lives with wife, on home oxygen 1 L/min at night.",
+  "examination": "Alert but breathless, using accessory muscles and pursed-lip breathing, speaking in short sentences. Barrel chest, hyperresonant percussion, prolonged expiratory phase with diffuse polyphonic wheeze and scattered coarse crepitations. Mild ankle oedema. Pertinent negatives: no focal consolidation dullness, no unilateral leg swelling/calf tenderness, no raised JVP suggestive of decompensated cor pulmonale, no asterixis, no fever.",
+  "vitals": {
+    "hr": 104,
+    "bp": "138/82",
+    "rr": 26,
+    "temp": 37.4,
+    "spo2": 90
+  },
+  "labs": {
+    "WBC": "12.8 x10^9/L (neutrophilia)",
+    "CRP": "42 mg/L",
+    "Hb": "15.9 g/dL (polycythaemia)",
+    "Creatinine": "0.9 mg/dL",
+    "ABG (room air)": "pH 7.36, PaCO2 6.4 kPa, PaO2 8.1 kPa, HCO3 27 mmol/L",
+    "Venous eosinophils": "0.15 x10^9/L"
+  },
+  "imaging": "CXR: hyperinflated lung fields with flattened diaphragms, no focal consolidation, pneumothorax or effusion — excludes pneumonia/pneumothorax as alternative causes.",
+  "microbiology": "Sputum culture sent (commonly H. influenzae, S. pneumoniae, M. catarrhalis; Pseudomonas if frequent exacerbations/prior isolation); blood cultures if febrile — pending.",
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia",
+    "Acute decompensated heart failure / pulmonary oedema",
+    "Pulmonary embolism",
+    "Pneumothorax"
+  ],
+  "finalDiagnosis": "Acute infective exacerbation of COPD (all three Anthonisen cardinal symptoms present)",
+  "citations": [
+    "Harrison 22e — Chronic Obstructive Pulmonary Disease",
+    "GOLD Report 2024 — Management of Exacerbations"
+  ],
+  "stewardship": "Oral amoxicillin-clavulanate (or doxycycline) empirically, indicated because all three Anthonisen cardinal symptoms (increased dyspnoea, sputum volume, and sputum purulence) are present; reserve anti-pseudomonal cover (e.g. ciprofloxacin) for those with prior Pseudomonas isolation or frequent exacerbations. Cornerstone treatment is controlled oxygen (target SpO2 88-92%), nebulised bronchodilators, and systemic corticosteroids (prednisolone 40 mg x5 days).",
+  "contraindications": [
+    "Penicillin allergy — substitute doxycycline or a macrolide",
+    "Avoid high-flow uncontrolled oxygen: risk of CO2 narcosis in chronic hypercapnia; titrate to 88-92%",
+    "Macrolide/fluoroquinolone QT prolongation caution"
+  ],
+  "edgeCases": [
+    "Hypercapnic respiratory failure (pH <7.35 with rising PaCO2) requiring NIV — do not miss",
+    "Eosinophilic exacerbation phenotype predicts steroid responsiveness",
+    "Overlap with heart failure or PE — pulmonary embolism found in a notable minority of exacerbations without clear cause"
+  ],
+  "expectedMaiK": "Classic infective COPD exacerbation with all three Anthonisen cardinal symptoms, justifying empiric antibiotics plus systemic steroids and controlled oxygen; watch for hypercapnic respiratory failure needing NIV and titrate O2 to 88-92%.",
+  "expectedNextQuestions": [
+    "How many exacerbations and hospital admissions in the past 12 months, and any prior Pseudomonas or resistant organism isolation?",
+    "Any prior need for NIV or intubation?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas to assess for hypercapnic respiratory failure",
+    "Chest X-ray to exclude pneumonia/pneumothorax",
+    "Sputum culture and sensitivity"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "knownCOPD": true,
+    "increasedDyspnea": true,
+    "increasedSputumVolume": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "dyspnea": true,
+    "coughRadio": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "COPD_EXACERBATION",
+    "acceptableIds": [
+      "COPD_EXACERBATION"
+    ],
+    "differentialIds": [
+      "CAP",
+      "heart_failure",
+      "pe",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "Arterial blood gas",
+      "Sputum culture"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "amoxicillin-clavulanate",
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include COPD_EXACERBATION",
+    "empiric antibiotics recommended only when Anthonisen cardinal symptoms / sputum purulence present",
+    "oxygen target 88-92% flagged to avoid CO2 narcosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

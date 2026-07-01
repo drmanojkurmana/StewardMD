@@ -1,0 +1,107 @@
+{
+  "id": "gc_208",
+  "specialty": "Toxicology",
+  "condition": "Opioid overdose",
+  "age": 27,
+  "sex": "M",
+  "presentingComplaint": "Found unresponsive with slow, shallow breathing at home",
+  "history": "Brought in by paramedics after being found unrousable in his bedroom by a flatmate. A used syringe and spoon were beside him. Known history of injection heroin use with two prior non-fatal overdoses; recently released from a 3-week inpatient detox programme (loss of tolerance). No preceding trauma, seizure, or febrile illness. No chronic cardiorespiratory disease.",
+  "examination": "Pinpoint pupils (miosis) bilaterally, reactive but sluggish. GCS 7 (E1 V2 M4), unrousable to voice, localizes to pain. Respirations slow and shallow with intermittent apnoeic pauses; cyanosis of lips. No focal neurological deficit, no neck stiffness, no rash. Fresh needle-track marks over both antecubital fossae. Chest clear, no crepitations. Abdomen soft. Afebrile, no signs of infection.",
+  "vitals": {
+    "hr": 52,
+    "bp": "104/64",
+    "rr": 6,
+    "temp": 36.3,
+    "spo2": 82
+  },
+  "labs": {
+    "capillary glucose": "6.4 mmol/L (normal — excludes hypoglycaemia)",
+    "ABG": "pH 7.24, PaCO2 8.9 kPa (67 mmHg), PaO2 7.8 kPa on room air — acute respiratory acidosis",
+    "lactate": "2.1 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "CK": "410 U/L",
+    "paracetamol/salicylate levels": "not detected",
+    "ethanol": "negative",
+    "urine toxicology": "positive for opioids, negative for benzodiazepines and stimulants"
+  },
+  "imaging": "CXR normal, no aspiration or pulmonary oedema. CT head (done after partial reversal, to exclude structural cause) — normal.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Opioid (heroin) overdose",
+    "Mixed sedative/benzodiazepine overdose",
+    "Hypoglycaemia",
+    "Intracranial event (haemorrhage/stroke)",
+    "Organophosphate poisoning",
+    "CNS infection"
+  ],
+  "finalDiagnosis": "Acute opioid overdose (heroin) with respiratory depression",
+  "citations": [
+    "Harrison 22e — Opioid Use Disorder and Opioid Intoxication/Overdose",
+    "ACMT/AACT Naloxone for Opioid Overdose 2015"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Naloxone precipitates acute withdrawal in opioid-dependent patients — titrate in small increments (40-100 mcg IV) to restore adequate ventilation, not full arousal",
+    "Avoid over-reversal in chronic users to prevent agitation, vomiting/aspiration, and flash pulmonary oedema",
+    "Short naloxone half-life (~30-90 min) < many opioids — mandatory observation and possible re-dosing/infusion"
+  ],
+  "edgeCases": [
+    "Long-acting or extended-release opioids (methadone, sustained-release oxycodone) may re-sedate hours after naloxone wears off",
+    "Co-ingestion with benzodiazepines or alcohol blunts the classic pinpoint-pupil response and prolongs sedation",
+    "Body-packer/stuffer rupture can cause recurrent overdose despite reversal"
+  ],
+  "expectedMaiK": "Classic opioid toxidrome — depressed consciousness, bradypnoea and miosis after injection heroin with lost tolerance post-detox. Priority is airway/ventilation support plus titrated naloxone; anticipate re-sedation because naloxone is shorter-acting than the opioid, so observe for a prolonged period rather than discharging early.",
+  "expectedNextQuestions": [
+    "What and how much was taken, and was any long-acting opioid (methadone/MR oxycodone) or co-ingestant (benzodiazepine/alcohol) involved?",
+    "How did he respond to naloxone, and has sedation recurred as it wears off?"
+  ],
+  "expectedInvestigations": [
+    "Capillary glucose and ABG",
+    "Titrated IV/IM naloxone with response monitoring",
+    "Urine toxicology and paracetamol/salicylate levels to exclude co-ingestion"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "alteredSensorium": true,
+    "bradypnea": true,
+    "bradycardia": true,
+    "hypoxia": true,
+    "miosisSecretions": true,
+    "drugOverdose": true,
+    "ivDrugUse": true,
+    "gcs": true,
+    "spo2": true,
+    "respRate": true
+  },
+  "expected": {
+    "diagnosis": "opioid_od",
+    "acceptableIds": [
+      "opioid_od"
+    ],
+    "differentialIds": [
+      "drug_intox",
+      "organophosphate",
+      "metabolic_enceph",
+      "ich"
+    ],
+    "investigations": [
+      "Capillary glucose",
+      "ABG",
+      "Urine toxicology screen",
+      "Titrated naloxone trial"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include opioid_od",
+    "miosisSecretions + bradypnea + drugOverdose must map to opioid toxidrome, not organophosphate",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

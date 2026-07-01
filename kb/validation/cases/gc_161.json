@@ -1,0 +1,105 @@
+{
+  "id": "gc_161",
+  "specialty": "Vascular emergency",
+  "condition": "Acute aortic dissection (Stanford type A)",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe tearing chest pain radiating to the back, maximal at onset",
+  "history": "One hour of abrupt-onset, 10/10 tearing/ripping anterior chest pain radiating between the scapulae and down the back, maximal at the instant of onset (unlike the crescendo pain of ACS). Associated diaphoresis and a transient near-syncopal episode. Long-standing poorly controlled hypertension on irregular amlodipine; 30 pack-year smoker; no prior cardiac catheterisation. No fever, no pleuritic component, no cough.",
+  "examination": "Distressed, diaphoretic, in severe pain. Blood pressure differential of 24 mmHg between right and left arms; right radial pulse fuller than left. Early diastolic murmur at the left sternal edge suggesting aortic regurgitation. No focal neurological deficit, no leg swelling, chest clear to auscultation, abdomen soft with no pulsatile mass. Pertinent negatives: no ST-elevation territory pain relieved by GTN, no calf tenderness, no signs of tamponade (no muffled heart sounds/raised JVP at present).",
+  "vitals": {
+    "hr": 104,
+    "bp": "188/72 (right arm) 164/70 (left arm)",
+    "rr": 22,
+    "temp": 36.9,
+    "spo2": 97
+  },
+  "labs": {
+    "D-dimer": "elevated 3.8 µg/mL",
+    "troponin": "marginally raised, not dynamic",
+    "hemoglobin": "13.4 g/dL",
+    "creatinine": "1.1 mg/dL",
+    "lactate": "1.6 mmol/L",
+    "WBC": "11.2 x10^3/µL"
+  },
+  "imaging": "CT aortography: intimal flap extending from the aortic root through the ascending aorta and arch into the descending thoracic aorta (Stanford type A / DeBakey I); true and false lumen with contrast in both; trace pericardial effusion. CXR (initial): widened mediastinum.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome",
+    "Pulmonary embolism",
+    "Acute pericarditis",
+    "Symptomatic thoracic aortic aneurysm",
+    "Musculoskeletal / GERD chest pain"
+  ],
+  "finalDiagnosis": "Acute Stanford type A aortic dissection with aortic regurgitation",
+  "citations": [
+    "Harrison 22e — Diseases of the Aorta",
+    "ACC/AHA Aortic Disease Guideline 2022"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid thrombolysis / full anticoagulation (would be catastrophic if misdiagnosed as STEMI or PE)",
+    "Beta-blockade contraindicated if severe acute AR with tamponade physiology or hypotension; use with caution",
+    "Avoid vasodilators (e.g., nitroprusside) before adequate rate control to prevent reflex tachycardia and increased aortic wall shear"
+  ],
+  "edgeCases": [
+    "Painless dissection or dissection presenting as isolated stroke, acute limb ischaemia, or paraplegia (branch-vessel malperfusion) can mask the diagnosis",
+    "Marfan / connective-tissue disease and pregnancy (third trimester) predispose to dissection at younger age",
+    "A normal D-dimer within the first hours makes dissection less likely but does not exclude it; ADD-RS plus D-dimer aids risk stratification"
+  ],
+  "expectedMaiK": "Sudden maximal-onset tearing chest/back pain with an inter-arm blood-pressure differential, a new aortic regurgitation murmur, and a widened mediastinum is a high-risk aortic dissection presentation requiring emergent CT aortography and control of heart rate and blood pressure. Type A dissection is a surgical emergency — obtain urgent cardiothoracic surgical review and avoid thrombolysis or anticoagulation.",
+  "expectedNextQuestions": [
+    "Is the pain maximal at onset and migrating/tearing in quality?",
+    "Any connective-tissue disease, known aortic aneurysm, or family history of dissection?",
+    "Any focal neurological deficit, limb ischaemia, or oligo-anuria suggesting branch malperfusion?"
+  ],
+  "expectedInvestigations": [
+    "CT aortography (gated chest-to-pelvis)",
+    "Bilateral arm blood pressures",
+    "12-lead ECG and troponin to exclude STEMI mimic",
+    "Transthoracic/transoesophageal echocardiography for aortic root, AR and pericardial effusion"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "chestPain": true,
+    "backPain": true,
+    "syncope": true,
+    "hypertensionHx": true,
+    "newMurmur": true,
+    "ageOver50": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "aortic_dissection",
+    "acceptableIds": [
+      "aortic_dissection"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "pericarditis",
+      "aaa"
+    ],
+    "investigations": [
+      "CT aortography",
+      "Bilateral arm blood pressures",
+      "ECG and troponin",
+      "Echocardiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include aortic_dissection",
+    "stewardship tier must be null (non-infective)",
+    "differential must not collapse to acs alone despite chest pain"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

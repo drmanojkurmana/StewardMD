@@ -1,0 +1,104 @@
+{
+  "id": "gc_213",
+  "specialty": "Gastroenterology",
+  "condition": "Peptic ulcer disease with upper GI bleed",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Vomiting altered blood and passing black tarry stools for one day",
+  "history": "One-day history of two episodes of coffee-ground/frank haematemesis followed by three episodes of black, tarry, offensive-smelling melena, with light-headedness on standing. Two-month history of intermittent epigastric burning pain, worse at night and partially relieved by antacids. Regular ibuprofen 400 mg TDS for chronic low-back pain over the past 3 months, no gastroprotection. Ex-smoker, moderate alcohol. No prior GI bleed, no known liver disease, no anticoagulants. No weight loss or dysphagia.",
+  "examination": "Pale, cool peripheries, mild postural dizziness. Epigastric tenderness without guarding or rebound. Digital rectal examination reveals melena. No stigmata of chronic liver disease (no spider naevi, palmar erythema, ascites or splenomegaly), no jaundice. Chest clear, abdomen soft, bowel sounds present.",
+  "vitals": {
+    "hr": 108,
+    "bp": "104/68",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "8.9 g/dL (baseline ~14)",
+    "urea": "14.5 mmol/L",
+    "creatinine": "1.0 mg/dL",
+    "urea:creatinine ratio": "disproportionately raised",
+    "platelets": "268 x10^3/uL",
+    "inr": "1.0",
+    "bilirubin": "0.8 mg/dL",
+    "albumin": "4.0 g/dL",
+    "lactate": "1.6 mmol/L"
+  },
+  "imaging": "Erect chest X-ray: no free subdiaphragmatic air (excludes perforation). CT not indicated at this stage.",
+  "microbiology": "H. pylori stool antigen sent; n/a for empiric decision",
+  "differentialDiagnoses": [
+    "Bleeding peptic ulcer (gastric/duodenal)",
+    "Oesophageal variceal haemorrhage",
+    "Mallory-Weiss tear",
+    "Erosive gastritis / NSAID gastropathy",
+    "Upper GI malignancy"
+  ],
+  "finalDiagnosis": "Bleeding peptic (duodenal) ulcer secondary to NSAID use",
+  "citations": [
+    "Harrison 22e — Peptic Ulcer Disease and Gastrointestinal Bleeding",
+    "ACG Upper Gastrointestinal and Ulcer Bleeding 2021"
+  ],
+  "stewardship": "not applicable - non-infective",
+  "contraindications": [
+    "Stop all NSAIDs immediately",
+    "Avoid aspirin/antiplatelets until source secured",
+    "Caution with high-dose IV PPI in renal impairment; here creatinine normal"
+  ],
+  "edgeCases": [
+    "Elevated urea with normal creatinine (raised urea:creatinine ratio) is a clue to upper GI bleed from digested blood, not renal failure",
+    "Absence of liver stigmata and normal INR/platelets argues against variceal bleed",
+    "A normal Hb early can falsely reassure before haemodilution; trend it"
+  ],
+  "expectedMaiK": "Classic NSAID-associated bleeding peptic ulcer presenting as haematemesis and melena with an elevated urea:creatinine ratio and no features of chronic liver disease. Resuscitate, calculate Glasgow-Blatchford score, give IV PPI, and arrange urgent upper GI endoscopy within 24 hours; test and treat H. pylori.",
+  "expectedNextQuestions": [
+    "Detailed NSAID/aspirin/anticoagulant and antiplatelet drug history",
+    "Any features of chronic liver disease or prior variceal bleed?",
+    "Ongoing haematemesis, syncope, or amount of blood passed?"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy (diagnostic and therapeutic) within 24h",
+    "Group and save / crossmatch and serial haemoglobin",
+    "H. pylori testing"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "gibPresentation": true,
+    "hematemesis": true,
+    "melena": true,
+    "abdominalPain": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "hemoglobin": true,
+    "urea": true
+  },
+  "expected": {
+    "diagnosis": "peptic_ulcer",
+    "acceptableIds": [
+      "peptic_ulcer"
+    ],
+    "differentialIds": [
+      "variceal_bleed",
+      "gerd_chest",
+      "mesenteric_ischemia"
+    ],
+    "investigations": [
+      "Upper GI endoscopy within 24h",
+      "Serial hemoglobin and crossmatch",
+      "H. pylori testing"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include peptic_ulcer",
+    "must NOT recommend empiric antibiotics (non-infective)",
+    "differential should include variceal_bleed"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "id": "gc_200",
+  "specialty": "Vascular / GI",
+  "condition": "Acute mesenteric ischemia",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe central abdominal pain for 6 hours with pain out of proportion to examination",
+  "history": "Acute onset of severe, poorly localised periumbilical pain 6 hours ago, associated with two episodes of vomiting and an urge to defaecate. Pain is constant and unrelieved by positioning or analgesia. Background of long-standing atrial fibrillation on suboptimal rate control (patient stopped his anticoagulant 3 weeks ago for a dental extraction and had not restarted). Hypertension and prior smoking (40 pack-years). No prior abdominal surgery. No haematemesis or melaena at onset.",
+  "examination": "Elderly man in obvious distress. Abdomen soft with only mild diffuse tenderness and no guarding or rebound early on — striking discordance between severe reported pain and unremarkable abdominal findings. Bowel sounds present initially. Irregularly irregular pulse. No pulsatile mass. Peripheral pulses reduced. No stigmata of chronic liver disease. Per rectum: no gross blood initially.",
+  "vitals": {
+    "hr": 118,
+    "bp": "148/92",
+    "rr": 24,
+    "temp": 37.4,
+    "spo2": 97
+  },
+  "labs": {
+    "lactate": "4.8 mmol/L (elevated)",
+    "wbc": "18.2 x10^9/L with left shift",
+    "hemoglobin": "13.8 g/dL",
+    "creatinine": "1.4 mg/dL",
+    "arterial pH": "7.29",
+    "bicarbonate": "16 mmol/L (high anion-gap metabolic acidosis)",
+    "amylase": "mildly elevated",
+    "INR": "1.1 (subtherapeutic)"
+  },
+  "imaging": "CT angiography of the abdomen (arterial + portal venous phases): abrupt filling defect / occlusion of the superior mesenteric artery just distal to its origin, with segmental non-enhancement of small-bowel wall. No bowel-wall gas or portal venous gas yet (no established transmural infarction). No AAA.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Acute mesenteric ischemia (SMA embolus)",
+    "Perforated viscus",
+    "Acute pancreatitis",
+    "Ruptured abdominal aortic aneurysm",
+    "Small-bowel obstruction"
+  ],
+  "finalDiagnosis": "Acute mesenteric ischemia (superior mesenteric artery embolism, cardioembolic from AF)",
+  "citations": [
+    "Harrison 22e — Mesenteric Vascular Insufficiency (Acute Intestinal Ischemia)",
+    "AHA Scientific Statement: Diagnosis and Management of Acute Mesenteric Ischemia 2021"
+  ],
+  "stewardship": "not applicable — non-infective (primary management is emergent revascularisation/laparotomy, IV fluid resuscitation, systemic anticoagulation with heparin; broad-spectrum antibiotics are given peri-operatively for bacterial translocation but the diagnosis itself is vascular, not primary infection)",
+  "contraindications": [
+    "IV contrast for CTA relative caution in renal impairment (creatinine 1.4) — do not delay diagnosis; hydrate",
+    "Anticoagulation caution if bowel infarction with impending surgery/bleeding risk",
+    "Metformin should be held around iodinated contrast"
+  ],
+  "edgeCases": [
+    "Pain out of proportion to a benign-appearing abdomen is the classic early clue; overt peritonism, rising lactate and bowel-wall/portal venous gas are LATE signs of transmural infarction with high mortality",
+    "Non-occlusive mesenteric ischemia (NOMI) in low-flow/vasopressor states and mesenteric venous thrombosis are variants that may lack a discrete arterial occlusion on CTA",
+    "A normal lactate early does not exclude AMI"
+  ],
+  "expectedMaiK": "Sudden severe abdominal pain out of proportion to exam in an elderly patient with atrial fibrillation off anticoagulation, plus lactic acidosis, is acute mesenteric ischemia until proven otherwise. Obtain urgent CT angiography and involve vascular surgery immediately — this is a time-critical, limb-of-bowel-threatening emergency.",
+  "expectedNextQuestions": [
+    "Is there a source of embolism (atrial fibrillation, recent MI, prosthetic valve) and is the patient anticoagulated?",
+    "Is the pain out of proportion to abdominal examination findings?"
+  ],
+  "expectedInvestigations": [
+    "Urgent CT angiography of the abdomen (arterial phase)",
+    "Serum lactate and arterial blood gas",
+    "ECG (confirm AF / exclude MI)"
+  ],
+  "expectedConfidence": 85,
+  "findings": {
+    "severeAbdominalPain": true,
+    "severePain": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "lactateElevated": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "atrialFibHx": true,
+    "ageOver50": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "mesenteric_ischemia",
+    "acceptableIds": [
+      "mesenteric_ischemia"
+    ],
+    "differentialIds": [
+      "bowel_obstruction",
+      "pancreatitis",
+      "aaa",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "CT angiography abdomen",
+      "serum lactate",
+      "arterial blood gas"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include mesenteric_ischemia",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

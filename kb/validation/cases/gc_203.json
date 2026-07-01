@@ -1,0 +1,103 @@
+{
+  "id": "gc_203",
+  "specialty": "Neurology",
+  "condition": "Multiple sclerosis (acute relapse)",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Sub-acute painful loss of vision in the right eye with worsening over 5 days",
+  "history": "5-day history of blurred, dim vision in the right eye with pain on eye movement, developing over days rather than seconds. Colours appear washed out (red desaturation). No headache, no jaw claudication, no scalp tenderness. Two years ago she had a self-limiting episode of numbness and tingling ascending both legs lasting ~3 weeks that resolved without treatment, and last year a transient episode of an electric-shock sensation running down her spine on neck flexion (Lhermitte). No fever, weight loss, or systemic symptoms. Non-smoker, oral contraceptive pill, no relevant family history. Symptoms worsen after a hot shower (Uhthoff phenomenon).",
+  "examination": "Reduced visual acuity right eye (6/24) with a right relative afferent pupillary defect; fundoscopy normal (retrobulbar optic neuritis). Mild internuclear ophthalmoplegia on left gaze. Brisk lower-limb reflexes with bilateral extensor plantars and a subtle sensory level. Pertinent negatives: no fever, no meningism, no scalp/temporal artery tenderness, no papilloedema, no proptosis, cardiovascularly normal.",
+  "vitals": {
+    "hr": 76,
+    "bp": "118/74",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "FBC": "normal",
+    "CRP": "3 mg/L (normal)",
+    "ESR": "8 mm/hr (normal)",
+    "glucose": "5.1 mmol/L",
+    "U&E": "normal",
+    "B12/folate": "normal",
+    "TFTs": "normal",
+    "ANA/ENA": "negative",
+    "aquaporin-4 IgG (NMO)": "negative",
+    "MOG-IgG": "negative"
+  },
+  "imaging": "MRI brain and whole spine with gadolinium: multiple ovoid T2/FLAIR hyperintense lesions in periventricular (Dawson's fingers), juxtacortical, and infratentorial white matter, plus two cervical cord lesions; one right optic nerve and one periventricular lesion show gadolinium enhancement indicating active inflammation, alongside non-enhancing lesions (dissemination in time and space).",
+  "microbiology": "n/a (non-infective)",
+  "differentialDiagnoses": [
+    "Acute demyelinating optic neuritis due to relapsing MS",
+    "Neuromyelitis optica spectrum disorder (NMOSD)",
+    "MOG-antibody-associated disease",
+    "Giant cell arteritis / anterior ischaemic optic neuropathy",
+    "CNS vasculitis / neurosarcoidosis"
+  ],
+  "finalDiagnosis": "Multiple sclerosis, acute relapse (right optic neuritis)",
+  "citations": [
+    "Harrison 22e — Multiple Sclerosis and Other Demyelinating Diseases",
+    "AAN Practice Guideline: Disease-modifying Therapies for Adults with MS 2018 / McDonald Criteria 2017"
+  ],
+  "stewardship": "not applicable — non-infective (acute relapse managed with IV methylprednisolone 1 g daily for 3-5 days, not antibiotics)",
+  "contraindications": [
+    "Exclude active infection and hyperglycaemia before high-dose corticosteroids",
+    "Avoid steroids if occult sepsis; gastric protection and glucose monitoring during pulse steroids",
+    "Confirm negative pregnancy status before starting disease-modifying therapy"
+  ],
+  "edgeCases": [
+    "Aquaporin-4-positive NMOSD can mimic MS but causes longitudinally extensive cord lesions and severe bilateral optic neuritis — must be excluded before some DMTs",
+    "A pseudo-relapse from intercurrent infection or heat (Uhthoff) must be distinguished from a true relapse before escalating therapy",
+    "Older patient with sudden painless visual loss and raised ESR should trigger evaluation for giant cell arteritis instead"
+  ],
+  "expectedMaiK": "Sub-acute painful unilateral visual loss with a RAPD, prior self-limiting neurological episodes, and MRI showing lesions disseminated in space and time strongly indicate an acute MS relapse presenting as optic neuritis; normal inflammatory markers and negative AQP4/MOG make GCA and NMOSD unlikely. Treat the relapse with high-dose corticosteroid and refer to neurology for disease-modifying therapy — antibiotics are not indicated.",
+  "expectedNextQuestions": [
+    "Any prior episodes of neurological symptoms lasting >24h that resolved (e.g. limb numbness, weakness, diplopia)?",
+    "Do symptoms worsen with heat or exercise (Uhthoff phenomenon)?",
+    "Any current infection or fever suggesting a pseudo-relapse?"
+  ],
+  "expectedInvestigations": [
+    "MRI brain and spinal cord with gadolinium",
+    "CSF analysis for oligoclonal bands",
+    "Serum aquaporin-4 and MOG antibodies",
+    "Visual evoked potentials"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "visualDisturbance": true,
+    "focalNeuroDeficit": true,
+    "subacuteOnset": true,
+    "afebrile": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "ms",
+    "acceptableIds": [
+      "ms"
+    ],
+    "differentialIds": [
+      "temporal_arteritis",
+      "sarcoidosis",
+      "vasculitis"
+    ],
+    "investigations": [
+      "MRI brain and spinal cord with gadolinium",
+      "CSF oligoclonal bands",
+      "Aquaporin-4 and MOG antibodies"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ms",
+    "stewardship tier must be null (non-infective relapse)",
+    "acuteMS relapse must not be classified as an infection"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

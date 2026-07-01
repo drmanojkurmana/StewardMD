@@ -1,0 +1,99 @@
+{
+  "id": "gc_170",
+  "specialty": "Pulmonary",
+  "condition": "COPD exacerbation (non-infective)",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening breathlessness and wheeze with increased sputum but no fever",
+  "history": "Known GOLD group D COPD (FEV1 42% predicted) on tiotropium and formoterol/budesonide. Ex-smoker, 45 pack-years, stopped 3 years ago. Over 48 hours has developed increasing dyspnoea from baseline, audible wheeze and a modest rise in sputum volume that remains mucoid (clear/grey), not purulent. No fever, rigors, pleuritic pain or haemoptysis. Symptoms began the day after a cold-front cold snap and heavy exposure to household smoke; no sick contacts. Two prior exacerbations in the past year. No recent hospitalisation or antibiotics.",
+  "examination": "Alert, mildly distressed, using accessory muscles, speaking in short sentences. Prolonged expiratory phase with diffuse polyphonic wheeze and reduced air entry bilaterally; no focal crepitations, no bronchial breathing, no consolidation. No calf tenderness or unilateral leg swelling. Mild ankle oedema chronic. No cyanosis at rest on 2L O2.",
+  "vitals": {
+    "hr": 104,
+    "bp": "138/84",
+    "rr": 26,
+    "temp": 36.9,
+    "spo2": 90
+  },
+  "labs": {
+    "WBC": "9.2 x10^9/L (normal differential)",
+    "CRP": "8 mg/L (near-normal)",
+    "procalcitonin": "0.08 ng/mL (low)",
+    "ABG": "pH 7.36, PaCO2 6.5 kPa, PaO2 8.1 kPa on 2L, HCO3 27 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "hemoglobin": "14.8 g/dL",
+    "BNP": "62 pg/mL (low)"
+  },
+  "imaging": "Chest X-ray: hyperinflated lung fields, flattened diaphragms, no focal consolidation, no effusion, no pneumothorax. No radiographic infiltrate to suggest pneumonia.",
+  "microbiology": "Sputum mucoid; Gram stain unremarkable, culture pending but low pretest suspicion. Blood cultures not indicated (afebrile).",
+  "differentialDiagnoses": [
+    "Infective COPD exacerbation (pneumonia/bacterial bronchitis)",
+    "Acute decompensated heart failure",
+    "Pulmonary embolism",
+    "Pneumothorax"
+  ],
+  "finalDiagnosis": "Non-infective (environmental/inflammatory) COPD exacerbation",
+  "citations": [
+    "Harrison 22e — Chronic Obstructive Pulmonary Disease",
+    "GOLD Global Strategy for Prevention, Diagnosis and Management of COPD 2024"
+  ],
+  "stewardship": "Not applicable — non-infective. No purulent sputum, afebrile, normal WBC/CRP and low procalcitonin argue against bacterial infection; per GOLD, antibiotics are reserved for increased sputum purulence plus increased volume/dyspnoea (2 of 3 Anthonisen criteria including purulence) or ventilatory support. Treat with controlled oxygen (target SpO2 88-92%), inhaled short-acting bronchodilators (salbutamol + ipratropium) and a short course of oral prednisolone 40 mg for 5 days.",
+  "contraindications": [
+    "Avoid high-flow uncontrolled oxygen — risk of hypercapnic respiratory failure in chronic CO2 retainer",
+    "Systemic corticosteroid caution if diabetic (monitor glucose)",
+    "Avoid unnecessary antibiotics — stewardship"
+  ],
+  "edgeCases": [
+    "Purulent sputum or a rise in CRP/procalcitonin would reclassify as infective and justify antibiotics",
+    "Sudden severe pleuritic dyspnoea with normal CXR should prompt CTPA to exclude PE, a common COPD mimic/precipitant",
+    "Rising PaCO2 with falling pH (respiratory acidosis) mandates consideration of NIV"
+  ],
+  "expectedMaiK": "Classic non-infective COPD exacerbation: increased dyspnoea and wheeze with mucoid (non-purulent) sputum, afebrile, and normal inflammatory markers, so antibiotics are not indicated. Manage with controlled oxygen to 88-92%, intensified bronchodilators and a 5-day oral corticosteroid course, and reassess for hypercapnic respiratory failure.",
+  "expectedNextQuestions": [
+    "Is the sputum purulent (colour change) or has its volume increased?",
+    "Any orthopnoea, PND or leg swelling to suggest heart failure as the cause?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas to assess for hypercapnia/respiratory acidosis",
+    "Chest X-ray to exclude pneumonia, pneumothorax and effusion"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "knownCOPD": true,
+    "increasedDyspnea": true,
+    "wheeze": true,
+    "increasedSputumVolume": true,
+    "dyspnea": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "copd_exac_ni",
+    "acceptableIds": [
+      "copd_exac_ni"
+    ],
+    "differentialIds": [
+      "COPD_EXACERBATION",
+      "heart_failure",
+      "pe",
+      "asthma_exac"
+    ],
+    "investigations": [
+      "Arterial blood gas",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include copd_exac_ni",
+    "stewardship tier must be null (non-infective — no antibiotics)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

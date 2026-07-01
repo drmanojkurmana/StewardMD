@@ -1,0 +1,112 @@
+{
+  "id": "gc_228",
+  "specialty": "Rheumatology",
+  "condition": "Systemic Lupus Erythematosus — acute flare",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "2 weeks of fever, symmetric small-joint pain, and a facial rash after sun exposure",
+  "history": "27-year-old woman, known SLE for 3 years (positive ANA and anti-dsDNA at diagnosis), on hydroxychloroquine with recent self-tapering of low-dose prednisolone. Two weeks of low-grade fever, marked fatigue, symmetric pain and morning stiffness of the wrists, MCPs and PIPs, and a photosensitive malar rash that worsened after a beach holiday. Reports frothy urine and mild ankle swelling over the past week. Mild oral ulcers and diffuse hair thinning. No cough, dysuria, diarrhoea, or localising infective symptoms. No sick contacts. Menstrual history normal, not pregnant. No new drugs.",
+  "examination": "Alert, mildly unwell but not toxic. Erythematous malar (butterfly) rash sparing nasolabial folds, painless palatal ulcer, active synovitis with tenderness and soft-tissue swelling of both wrists and several MCP/PIP joints without deformity. Bilateral pitting pedal oedema. No neck stiffness, no focal neurology, no organomegaly, chest clear, no murmur or rub. No purulent focus, no cellulitis, no eschar.",
+  "vitals": {
+    "hr": 96,
+    "bp": "128/78",
+    "rr": 16,
+    "temp": 37.9,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "9.6 g/dL (normocytic)",
+    "wbc": "3.1 x10^9/L (lymphopenia 0.8)",
+    "platelets": "118 x10^3/µL",
+    "creatinine": "1.1 mg/dL",
+    "urinalysis": "protein 3+, dysmorphic RBCs, red-cell casts",
+    "urine protein:creatinine": "180 mg/mmol",
+    "albumin": "3.0 g/dL",
+    "ESR": "78 mm/hr",
+    "CRP": "9 mg/L (near-normal)",
+    "ANA": "positive 1:1280 homogeneous",
+    "anti-dsDNA": "rising, 240 IU/mL",
+    "C3": "0.42 g/L (low)",
+    "C4": "0.06 g/L (low)",
+    "direct Coombs": "positive",
+    "blood cultures": "negative x2"
+  },
+  "imaging": "CXR clear; renal ultrasound normal-sized kidneys with preserved corticomedullary differentiation",
+  "microbiology": "Blood cultures negative x2; urine culture no growth; procalcitonin low",
+  "differentialDiagnoses": [
+    "SLE flare with lupus nephritis",
+    "Infection/sepsis in immunosuppressed host",
+    "Drug-induced lupus",
+    "Primary systemic vasculitis",
+    "Thrombotic microangiopathy (TTP/HUS)"
+  ],
+  "finalDiagnosis": "Acute SLE flare with active lupus nephritis and haematological involvement",
+  "citations": [
+    "Harrison 22e — Systemic Lupus Erythematosus",
+    "ACR/EULAR SLE Classification Criteria 2019"
+  ],
+  "stewardship": "not applicable — non-infective; low CRP with high ESR, low complement and rising anti-dsDNA point to an immunological flare rather than infection. Empiric antibiotics are not indicated; management is immunosuppression (pulse then oral glucocorticoids +/- mycophenolate for nephritis) after excluding infection with cultures.",
+  "contraindications": [
+    "Avoid sulfonamide antibiotics and sulfa drugs which can trigger lupus flares",
+    "NSAIDs cautioned given proteinuria/renal involvement",
+    "Live vaccines contraindicated once high-dose immunosuppression begins",
+    "Screen for latent TB/hepatitis before escalating immunosuppression"
+  ],
+  "edgeCases": [
+    "Low CRP with high ESR is characteristic of lupus flare; a markedly raised CRP should instead raise suspicion of intercurrent infection or serositis",
+    "Infection and flare can coexist and be clinically indistinguishable — culture and treat empirically if in doubt",
+    "Anti-dsDNA and complement changes may lag or be discordant; a normal titre does not exclude a flare"
+  ],
+  "expectedMaiK": "The combination of a photosensitive malar rash, symmetric small-joint synovitis, cytopenias, active urinary sediment with proteinuria, rising anti-dsDNA and low C3/C4 in a young woman with known SLE indicates an immunological flare with lupus nephritis rather than infection, supported by the disproportionately low CRP. Confirm renal involvement and exclude infection before escalating immunosuppression.",
+  "expectedNextQuestions": [
+    "Any recent medication changes, missed hydroxychloroquine doses, or steroid tapering?",
+    "Any features suggesting infection (localising symptoms, sick contacts) or thrombosis/pregnancy?"
+  ],
+  "expectedInvestigations": [
+    "Anti-dsDNA titre with C3/C4 complement levels",
+    "Urine protein:creatinine ratio with microscopy for casts; consider renal biopsy to grade lupus nephritis"
+  ],
+  "expectedConfidence": 84,
+  "findings": {
+    "fever": true,
+    "polyarthralgia": true,
+    "jointSwelling": true,
+    "symmetricSmallJointInvolvement": true,
+    "rash": true,
+    "proteinuria": true,
+    "hematuria": true,
+    "renalImpairment": true,
+    "thrombocytopenia": true,
+    "legSwellingBilateral": true,
+    "steroidUse": true
+  },
+  "expected": {
+    "diagnosis": "sle_flare",
+    "acceptableIds": [
+      "sle_flare"
+    ],
+    "differentialIds": [
+      "vasculitis",
+      "glomerulonephritis",
+      "rheumatoid",
+      "ttp_hus"
+    ],
+    "investigations": [
+      "Anti-dsDNA and complement (C3/C4)",
+      "Urinalysis with microscopy and urine protein:creatinine ratio"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include sle_flare",
+    "must not recommend empiric antibiotics (non-infective flare)",
+    "differential should include an alternative autoimmune/renal cause such as vasculitis or glomerulonephritis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

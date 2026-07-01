@@ -1,0 +1,109 @@
+{
+  "id": "gc_238",
+  "specialty": "Hepatology / GI",
+  "condition": "Acute Oesophageal Variceal Bleeding",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Large-volume haematemesis and black tarry stools for 6 hours with light-headedness on standing",
+  "history": "Two episodes of fresh-blood and coffee-ground vomiting since morning, followed by passage of foul black tarry stool. Reports near-syncope on standing. Known alcohol-related cirrhosis (Child-Pugh B) diagnosed 2 years ago on surveillance; prior endoscopy showed grade II-III oesophageal varices. Ongoing daily alcohol intake (~180 g/day), no NSAID use, not on beta-blocker. No prior variceal bleed. Increasing abdominal girth over recent weeks.",
+  "examination": "Alert but anxious, cool clammy peripheries. Pallor. Stigmata of chronic liver disease: spider naevi, palmar erythema, gynaecomastia. Moderate ascites with shifting dullness, no rebound. Splenomegaly. No asterixis at present; oriented. PR: melaena on glove. No focal source of upper GI bleeding externally.",
+  "vitals": {
+    "hr": 118,
+    "bp": "92/58",
+    "rr": 22,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "7.4 g/dL",
+    "platelets": "82 x10^3/uL",
+    "inr": "1.9",
+    "bilirubin": "3.1 mg/dL",
+    "albumin": "2.6 g/dL",
+    "creatinine": "1.4 mg/dL",
+    "urea": "16 mmol/L (disproportionately raised)",
+    "sodium": "132 mmol/L",
+    "lactate": "3.2 mmol/L",
+    "AST/ALT": "88 / 46 U/L (AST-predominant)"
+  },
+  "imaging": "Bedside USG abdomen: coarse nodular shrunken liver, splenomegaly, moderate ascites, patent portal vein with hepatopetal flow. No focal mass.",
+  "microbiology": "Blood cultures and ascitic diagnostic tap sent to exclude SBP; results pending",
+  "differentialDiagnoses": [
+    "Oesophageal variceal haemorrhage",
+    "Gastric variceal / portal hypertensive gastropathy bleed",
+    "Peptic ulcer bleed",
+    "Mallory-Weiss tear"
+  ],
+  "finalDiagnosis": "Acute oesophageal variceal bleeding on background alcohol-related cirrhosis",
+  "citations": [
+    "Harrison 22e — Cirrhosis and Its Complications / Approach to the Patient with GI Bleeding",
+    "AASLD Portal Hypertensive Bleeding in Cirrhosis 2016 (Baveno VII Consensus 2022)"
+  ],
+  "stewardship": "Not applicable as primary therapy; however guideline-mandated short-course prophylactic antibiotic (IV ceftriaxone 1 g daily up to 7 days) is standard adjunct in cirrhotic GI bleeding to reduce infection, rebleeding and mortality. Definitive management is vasoactive drug (terlipressin/octreotide), urgent endoscopic band ligation within 12 h, and restrictive transfusion (Hb target ~7-8 g/dL).",
+  "contraindications": [
+    "Terlipressin caution in ischaemic heart disease / peripheral vascular disease",
+    "Avoid over-transfusion (Hb >9) — raises portal pressure and rebleeding",
+    "Ceftriaxone: adjust/avoid with biliary sludge; use quinolone alternative only if low local resistance"
+  ],
+  "edgeCases": [
+    "Isolated gastric fundal (IGV1) varices need cyanoacrylate glue, not banding",
+    "Urea:creatinine disproportion and normal AST:ALT can mask ongoing bleed; a normal early Hb does not exclude major loss",
+    "Consider TIPS as pre-emptive rescue in Child-Pugh B with active bleeding at endoscopy or Child-Pugh C"
+  ],
+  "expectedMaiK": "Classic acute variceal bleed in decompensated cirrhosis with haemodynamic instability. Prioritise airway protection and resuscitation, start vasoactive drug and prophylactic ceftriaxone immediately, adopt a restrictive transfusion strategy, and arrange urgent endoscopic band ligation within 12 hours.",
+  "expectedNextQuestions": [
+    "Alcohol quantity and last drink; any prior variceal bleed or endoscopic banding",
+    "Recent NSAID/anticoagulant use and beta-blocker prophylaxis status",
+    "Confusion, fever or abdominal pain suggesting encephalopathy or SBP"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy (diagnostic and therapeutic band ligation)",
+    "Group & crossmatch, FBC, coagulation, LFTs, U&E",
+    "Diagnostic ascitic tap to exclude SBP"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "hematemesis": true,
+    "melena": true,
+    "gibPresentation": true,
+    "liverDisease": true,
+    "ascites": true,
+    "splenomegaly": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "syncope": true,
+    "alcoholExcess": true,
+    "jaundice": true
+  },
+  "expected": {
+    "diagnosis": "variceal_bleed",
+    "acceptableIds": [
+      "variceal_bleed"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "decomp_cirrhosis",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Urgent upper GI endoscopy with band ligation",
+      "Group and crossmatch / FBC / coagulation",
+      "Diagnostic ascitic tap to exclude SBP"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": [
+        "ceftriaxone (prophylactic adjunct in cirrhotic GI bleed)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include variceal_bleed",
+    "restrictive transfusion (Hb target 7-8 g/dL) recommended, not liberal",
+    "prophylactic antibiotic and vasoactive drug advised alongside urgent endoscopy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

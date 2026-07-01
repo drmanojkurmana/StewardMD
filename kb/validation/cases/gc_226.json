@@ -1,0 +1,101 @@
+{
+  "id": "gc_226",
+  "specialty": "Toxicology / Neuro",
+  "condition": "Serotonin syndrome",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Agitation, tremor and fever hours after a dose increase of his antidepressant plus a new painkiller",
+  "history": "34-year-old man with major depressive disorder on sertraline, whose dose was uptitrated 2 days ago. Yesterday he was started on tramadol for back pain and also took over-the-counter dextromethorphan for a cough. Over the last 6-8 hours he developed restlessness, shivering, profuse sweating, diarrhea and coarse tremor, followed by confusion. No preceding infection, no head injury, no illicit drug use reported. No neuroleptic exposure.",
+  "examination": "Anxious, diaphoretic and hyperthermic. Marked bilateral lower-limb hyperreflexia with sustained inducible clonus and spontaneous ankle clonus, greater in the legs than arms. Intermittent myoclonic jerks, mild lower-limb rigidity, bilateral mydriasis, ocular clonus. Alert but agitated (GCS 14). Neck supple, no photophobia, no focal deficit, no rash. Chest clear, abdomen soft with hyperactive bowel sounds.",
+  "vitals": {
+    "hr": 122,
+    "bp": "158/96",
+    "rr": 24,
+    "temp": 38.9,
+    "spo2": 98
+  },
+  "labs": {
+    "WBC": "12.1 x10^9/L",
+    "creatinine": "1.1 mg/dL",
+    "CK": "640 U/L (mildly elevated)",
+    "sodium": "139 mmol/L",
+    "bicarbonate": "20 mmol/L",
+    "lactate": "2.4 mmol/L",
+    "TSH": "1.8 mIU/L (normal)",
+    "paracetamol/salicylate screen": "negative"
+  },
+  "imaging": "CT head unremarkable; not the primary diagnostic modality",
+  "microbiology": "Blood cultures sent and pending; no clinical source of sepsis",
+  "differentialDiagnoses": [
+    "Serotonin syndrome",
+    "Neuroleptic malignant syndrome",
+    "Anticholinergic toxidrome",
+    "Sympathomimetic toxicity",
+    "Meningoencephalitis",
+    "Thyroid storm"
+  ],
+  "finalDiagnosis": "Serotonin syndrome (Hunter criteria positive; SSRI + tramadol + dextromethorphan)",
+  "citations": [
+    "Harrison 22e — Poisoning and Drug Overdose / Serotonin Syndrome",
+    "AACT/Hunter Serotonin Toxicity Criteria 2003"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid further serotonergic agents (stop sertraline, tramadol, dextromethorphan)",
+    "Avoid physical restraints which worsen hyperthermia and rhabdomyolysis",
+    "Avoid dantrolene/bromocriptine (NMS-oriented, not indicated); antipyretics ineffective as fever is muscular"
+  ],
+  "edgeCases": [
+    "Overlaps clinically with NMS — serotonin syndrome favours rapid onset (<24h), clonus, hyperreflexia and mydriasis, whereas NMS shows lead-pipe rigidity, bradyreflexia and slower onset over days",
+    "Hyperthermia >41.1C with severe rigidity is life-threatening and mandates paralysis, intubation and active cooling"
+  ],
+  "expectedMaiK": "Rapid-onset hyperthermia with inducible/spontaneous clonus, hyperreflexia and agitation after adding tramadol and dextromethorphan to an SSRI meets Hunter criteria for serotonin syndrome. Stop all serotonergic drugs, give benzodiazepines and active cooling, and consider cyproheptadine; distinguish from NMS by the clonus/hyperreflexia pattern and rapid onset.",
+  "expectedNextQuestions": [
+    "Full medication and recent dose-change history including OTC/analgesic and antidepressant agents (MAOI, SSRI, tramadol, linezolid, dextromethorphan)?",
+    "Any recent antipsychotic/dopamine-blocker exposure to exclude NMS?"
+  ],
+  "expectedInvestigations": [
+    "Serum CK and renal function to assess rhabdomyolysis",
+    "Basic sepsis and metabolic screen (cultures, TSH, toxicology) to exclude mimics"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "alteredSensorium": true,
+    "rigidity": true,
+    "toxicAppearing": true,
+    "drugOverdose": true,
+    "diarrhea": true,
+    "myalgiaArthralgia": true
+  },
+  "expected": {
+    "diagnosis": "serotonin_nms",
+    "acceptableIds": [
+      "serotonin_nms"
+    ],
+    "differentialIds": [
+      "drug_intox",
+      "thyroid_storm",
+      "SEPSIS",
+      "ENCEPHALITIS"
+    ],
+    "investigations": [
+      "Serum CK and renal function",
+      "Toxicology and metabolic screen to exclude mimics"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include serotonin_nms",
+    "expected.stewardship.tier is null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

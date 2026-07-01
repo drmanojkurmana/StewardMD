@@ -1,0 +1,101 @@
+{
+  "id": "gc_225",
+  "specialty": "Neurology",
+  "condition": "Seizure / epilepsy (first generalised tonic-clonic seizure)",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Witnessed generalised convulsion with loss of consciousness, brought to ED post-ictal",
+  "history": "Previously well 24-year-old man who had a witnessed episode at work: sudden loss of consciousness, generalised stiffening followed by rhythmic jerking of all four limbs lasting about 90 seconds, with tongue-biting and urinary incontinence. Followed by a confused, drowsy state for roughly 20 minutes with no memory of the event. No preceding aura clearly described. On careful history he reports two episodes of early-morning myoclonic jerks over recent months and admits to sleep deprivation and alcohol the night before. No fever, no head injury, no recreational drug use, no anticoagulants. No prior seizures diagnosed. Family history of epilepsy in a cousin.",
+  "examination": "Post-ictally drowsy but rousable and oriented on reassessment. Lateral tongue laceration present. No neck stiffness, no photophobia (pertinent negatives against meningitis). No focal neurological deficit, symmetric reflexes, plantars flexor. No papilloedema on fundoscopy. No rash. Cardiovascular and respiratory exam normal; no injuries other than tongue bite.",
+  "vitals": {
+    "hr": 96,
+    "bp": "128/78",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 98
+  },
+  "labs": {
+    "capillaryGlucose": "5.4 mmol/L (normal)",
+    "sodium": "139 mmol/L",
+    "calcium": "2.35 mmol/L (normal)",
+    "creatinine": "0.9 mg/dL",
+    "CK": "620 U/L (mildly elevated, post-ictal)",
+    "lactate": "resolving, 1.9 mmol/L at 2h",
+    "toxScreen": "negative",
+    "FBC": "normal",
+    "prolactin": "elevated at 40 min (supportive of GTC seizure)"
+  },
+  "imaging": "Non-contrast CT head normal (no haemorrhage, mass or structural lesion). Outpatient MRI brain and EEG arranged; EEG expected to show generalised 4-6 Hz polyspike-and-wave.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Vasovagal / convulsive syncope",
+    "Psychogenic non-epileptic seizure",
+    "Intracranial haemorrhage or mass lesion",
+    "Metabolic derangement (hypoglycaemia, hyponatraemia)",
+    "Alcohol-withdrawal seizure"
+  ],
+  "finalDiagnosis": "First generalised tonic-clonic seizure — juvenile myoclonic epilepsy phenotype",
+  "citations": [
+    "Harrison 22e — Seizures and Epilepsy",
+    "AAN/AES Evaluation of an Apparent Unprovoked First Seizure in Adults 2015"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid sodium valproate as first-line in a woman of child-bearing potential (not applicable here but note for JME); carbamazepine/phenytoin can aggravate myoclonic and absence seizures in JME",
+    "Counsel on driving cessation per statutory rules until reviewed"
+  ],
+  "edgeCases": [
+    "Convulsive syncope can produce brief myoclonic jerks and be mislabelled as a seizure — a clear precipitant and rapid recovery favour syncope",
+    "Provoked seizure (alcohol, sleep deprivation, hypoglycaemia) does not by itself establish epilepsy; recurrence risk drives the diagnosis",
+    "Normal CT does not exclude an epileptogenic lesion — MRI and EEG are needed"
+  ],
+  "expectedMaiK": "A witnessed generalised tonic-clonic event with lateral tongue-biting, post-ictal confusion and a history of morning myoclonus strongly suggests an epileptic seizure (likely juvenile myoclonic epilepsy) rather than syncope; prioritise a structural and metabolic workup, EEG and MRI, and safety/driving counselling before deciding on antiepileptic therapy.",
+  "expectedNextQuestions": [
+    "Was there tongue-biting (lateral) and post-event confusion, and how long did recovery take?",
+    "Any history of morning myoclonic jerks, absences, prior blackouts, or family history of epilepsy?",
+    "Any provoking factors — sleep deprivation, alcohol, drugs, missed meals, flashing lights?"
+  ],
+  "expectedInvestigations": [
+    "EEG (sleep-deprived if initial normal)",
+    "MRI brain",
+    "Metabolic panel including glucose, sodium, calcium and toxicology"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "seizure": true,
+    "alteredSensorium": true,
+    "behavioralChange": true,
+    "alcoholExcess": true,
+    "syncope": true
+  },
+  "expected": {
+    "diagnosis": "seizure_epilepsy",
+    "acceptableIds": [
+      "seizure_epilepsy"
+    ],
+    "differentialIds": [
+      "vasovagal_syncope",
+      "ich",
+      "hypoglycemia",
+      "drug_intox"
+    ],
+    "investigations": [
+      "EEG",
+      "MRI brain",
+      "Metabolic and toxicology panel"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include seizure_epilepsy",
+    "stewardship tier must be null (non-infective)",
+    "acceptableIds must equal [seizure_epilepsy]"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "id": "gc_124",
+  "specialty": "Gastrointestinal",
+  "condition": "Enteric Fever (Typhoid)",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Stepwise-rising fever for 9 days with headache, abdominal discomfort and constipation",
+  "history": "Previously healthy 24-year-old man, resident of Delhi, presents with 9 days of fever that began low-grade and rose in a stepladder fashion to 39-40 degrees C, associated with frontal headache, generalized malaise, anorexia and dull central abdominal discomfort. He reports constipation for the first week followed by loose stools. No dysuria, no cough, no rash noticed by patient. He frequently eats street food and drinks untreated water; no recent travel abroad and no known typhoid vaccination. No sick contacts identified. No prior antibiotics for this illness.",
+  "examination": "Ill-appearing but alert. Coated tongue. Temperature 39.6 C with a pulse of only 88/min (relative bradycardia / Faget sign). A few blanching, salmon-colored 2-3 mm macules on the anterior trunk (rose spots). Soft abdomen with mild diffuse tenderness and palpable soft splenomegaly 2 cm below the costal margin; liver just palpable. No neck stiffness, no focal neurology, no jaundice, no peripheral stigmata of endocarditis.",
+  "vitals": {
+    "hr": 88,
+    "bp": "112/70",
+    "rr": 18,
+    "temp": 39.6,
+    "spo2": 98
+  },
+  "labs": {
+    "Hemoglobin": "13.4 g/dL",
+    "WBC": "3.6 x10^3/uL (leukopenia with relative lymphocytosis)",
+    "Platelets": "132 x10^3/uL",
+    "AST": "78 U/L",
+    "ALT": "82 U/L",
+    "Total bilirubin": "1.1 mg/dL",
+    "Creatinine": "0.9 mg/dL",
+    "CRP": "68 mg/L",
+    "Malaria rapid antigen / smear": "negative"
+  },
+  "imaging": "Ultrasound abdomen: mild splenomegaly and small-volume mesenteric lymphadenopathy; no abscess, no gallstones",
+  "microbiology": "Blood cultures (two sets before antibiotics) sent; grew Salmonella enterica serovar Typhi at 48h, susceptible to ceftriaxone and azithromycin, with reduced susceptibility to fluoroquinolones (nalidixic acid resistant). Widal test single high titre O 1:320 (supportive only).",
+  "differentialDiagnoses": [
+    "Malaria",
+    "Dengue fever",
+    "Scrub typhus",
+    "Amoebic/pyogenic liver abscess",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Enteric fever (typhoid) due to Salmonella Typhi",
+  "citations": [
+    "Harrison 22e — Salmonellosis (Typhoid Fever and Nontyphoidal Salmonella)",
+    "WHO Typhoid Fever Diagnosis and Treatment 2018"
+  ],
+  "stewardship": "Empiric IV ceftriaxone 2 g once daily is the guideline-concordant first-line choice for suspected enteric fever in South Asia given widespread fluoroquinolone reduced-susceptibility; oral azithromycin is an alternative for uncomplicated ambulatory disease. De-escalate/streamline once susceptibilities return; treat 10-14 days.",
+  "contraindications": [
+    "Avoid empiric fluoroquinolones in South Asian acquisition due to high nalidixic-acid/fluoroquinolone reduced susceptibility and treatment failure",
+    "Cephalosporin use requires checking beta-lactam allergy history",
+    "Avoid unnecessary NSAIDs given risk of GI bleeding/perforation"
+  ],
+  "edgeCases": [
+    "Relative bradycardia and rose spots are classic but present in a minority; absence does not exclude typhoid",
+    "Watch for intestinal perforation or GI hemorrhage in the 3rd week — new severe abdominal pain or melena mandates urgent surgical review",
+    "MDR and XDR S. Typhi (including ceftriaxone resistance) is emerging in Pakistan; consider azithromycin/carbapenem if travel or failure"
+  ],
+  "expectedMaiK": "A subacute stepladder fever with relative bradycardia, rose spots, leukopenia and splenomegaly in someone with contaminated food/water exposure in an endemic area is classic enteric fever; obtain blood cultures before antibiotics and start ceftriaxone empirically because fluoroquinolone resistance is now widespread in South Asia.",
+  "expectedNextQuestions": [
+    "Any recent travel to or residence in a typhoid-endemic region and vaccination status?",
+    "Any new-onset severe abdominal pain, distension, or black/bloody stools suggesting perforation or hemorrhage?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures before antibiotics",
+    "Malaria smear/RDT and dengue NS1/serology to exclude co-endemic causes"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "stepladderFever": true,
+    "relativeBradycardia": true,
+    "roseSpots": true,
+    "hepatosplenomegaly": true,
+    "abdominalDiscomfort": true,
+    "constipationOrDiarrhea": true,
+    "headache": true,
+    "contaminatedFoodWaterExposure": true,
+    "highFeverGI": true,
+    "thrombocytopenia": true
+  },
+  "expected": {
+    "diagnosis": "ENTERIC_FEVER",
+    "acceptableIds": [
+      "ENTERIC_FEVER"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Blood cultures",
+      "Malaria smear/RDT",
+      "Dengue serology"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include ENTERIC_FEVER",
+    "acceptableIds must equal [ENTERIC_FEVER]",
+    "stewardship antibiotics must include a third-generation cephalosporin (ceftriaxone) for South Asian acquisition"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

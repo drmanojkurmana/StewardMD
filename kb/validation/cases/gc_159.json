@@ -1,0 +1,110 @@
+{
+  "id": "gc_159",
+  "specialty": "Hematology",
+  "condition": "Symptomatic anaemia",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Several weeks of progressive fatigue, exertional breathlessness and light-headedness.",
+  "history": "58-year-old woman with 6-8 weeks of worsening tiredness, dyspnoea on climbing one flight of stairs, palpitations and near-syncope on standing. Reports heavy, prolonged menstrual periods for over a year and long-standing NSAID use for osteoarthritis. Occasional black stools noted in the past month. No overt haematemesis. Poor dietary iron intake, no known bleeding disorder. No fever, night sweats or significant weight loss.",
+  "examination": "Marked conjunctival and palmar pallor, koilonychia and angular cheilitis. Resting tachycardia with a soft ejection systolic flow murmur at the left sternal edge. No lymphadenopathy, no hepatosplenomegaly, no petechiae or bruising. Chest clear; mild ankle oedema. PR examination: melaena on the glove, no mass.",
+  "vitals": {
+    "hr": 108,
+    "bp": "104/64",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "6.8 g/dL",
+    "MCV": "68 fL (microcytic)",
+    "MCH": "21 pg (hypochromic)",
+    "RDW": "18.5% (high)",
+    "platelets": "465 x10^3/uL (reactive thrombocytosis)",
+    "WBC": "7.2 x10^3/uL",
+    "reticulocyte count": "1.2% (inappropriately low for degree of anaemia)",
+    "serum ferritin": "6 ng/mL (low)",
+    "serum iron": "22 ug/dL (low)",
+    "TIBC": "465 ug/dL (high)",
+    "transferrin saturation": "5% (low)",
+    "peripheral smear": "microcytic hypochromic RBCs, anisopoikilocytosis, pencil cells",
+    "creatinine": "0.8 mg/dL",
+    "faecal occult blood": "positive"
+  },
+  "imaging": "Chest X-ray normal; no acute cardiopulmonary process. Upper and lower GI endoscopy planned to localise chronic blood loss.",
+  "microbiology": "n/a",
+  "differentialDiagnoses": [
+    "Iron-deficiency anaemia from chronic GI/menstrual blood loss",
+    "Anaemia of chronic disease",
+    "Occult GI malignancy causing blood loss",
+    "Thalassaemia trait",
+    "Myelodysplastic syndrome"
+  ],
+  "finalDiagnosis": "Symptomatic iron-deficiency anaemia due to chronic blood loss",
+  "citations": [
+    "Harrison 22e — Iron Deficiency and Other Hypoproliferative Anemias",
+    "AABB/ICMR Red Cell Transfusion Thresholds (restrictive strategy) 2016"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid unnecessary transfusion in a haemodynamically compensated patient — use restrictive threshold (Hb <7 g/dL, or <8 g/dL if cardiac disease/symptomatic)",
+    "Oral iron GI intolerance; consider IV iron if malabsorption or intolerance",
+    "Do not start iron before samples for ferritin/iron studies drawn"
+  ],
+  "edgeCases": [
+    "Coexisting anaemia of chronic disease can raise ferritin into the 'normal' range and mask iron deficiency — low transferrin saturation still suggests deficiency",
+    "In a postmenopausal woman or any man, iron deficiency must be assumed to be GI blood loss (occult malignancy) until proven otherwise by endoscopy"
+  ],
+  "expectedMaiK": "This is symptomatic iron-deficiency anaemia (microcytic, hypochromic, low ferritin, low transferrin saturation) driven by chronic blood loss; the priority is to determine the transfusion threshold based on symptoms/cardiac reserve and to localise the bleeding source, not to treat empirically as infection.",
+  "expectedNextQuestions": [
+    "Any overt or occult GI blood loss (melaena, haematochezia, dyspepsia, NSAID use)?",
+    "Menstrual and obstetric history / postmenopausal status?",
+    "Dietary iron intake and features of malabsorption (coeliac symptoms)?"
+  ],
+  "expectedInvestigations": [
+    "Iron studies (ferritin, serum iron, TIBC, transferrin saturation)",
+    "Peripheral blood smear and reticulocyte count",
+    "Upper and lower GI endoscopy to localise chronic blood loss",
+    "Coeliac serology (anti-tTG)"
+  ],
+  "expectedConfidence": 82,
+  "findings": {
+    "dyspnea": true,
+    "syncope": true,
+    "palpitations": true,
+    "melena": true,
+    "gibPresentation": true,
+    "tachycardia": true,
+    "hemoglobin": true,
+    "weightLoss": true,
+    "legSwellingBilateral": true
+  },
+  "expected": {
+    "diagnosis": "anemia_sympt",
+    "acceptableIds": [
+      "anemia_sympt"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "malignancy_b",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Iron studies (ferritin, transferrin saturation)",
+      "Peripheral smear and reticulocyte count",
+      "Upper and lower GI endoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include anemia_sympt",
+    "stewardship tier must be null (non-infective)",
+    "differential must not include any infective/sepsis id"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

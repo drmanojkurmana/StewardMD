@@ -1,0 +1,107 @@
+{
+  "id": "gc_224",
+  "specialty": "Pulmonary / Multisystem",
+  "condition": "Sarcoidosis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Progressive dry cough and exertional breathlessness for 3 months with fatigue",
+  "history": "34-year-old woman, non-smoker, with 3 months of dry cough, gradually worsening exertional dyspnea, generalised fatigue and low-grade intermittent fever. Reports tender red nodules over both shins that appeared 6 weeks ago (subsequently faded), and 4 kg unintentional weight loss. No haemoptysis, no purulent sputum, no night sweats of drenching type, no TB contact. No occupational dust/beryllium exposure. Mild bilateral ankle discomfort. No prior lung disease. Not immunocompromised, no recent travel to malaria/TB-endemic setting beyond usual residence.",
+  "examination": "Comfortable at rest, mildly tachypneic on exertion. Faint residual erythema nodosum over anterior shins. Bilateral non-tender palpable cervical lymphadenopathy. Chest auscultation largely clear (few fine end-inspiratory crackles at bases). No clubbing. No hepatosplenomegaly. No skin plaques on face, no lupus pernio. Eyes: no anterior uveitis on bedside exam. Cardiovascular exam normal, no murmur; JVP not raised.",
+  "vitals": {
+    "hr": 88,
+    "bp": "118/74",
+    "rr": 20,
+    "temp": 37.4,
+    "spo2": 96
+  },
+  "labs": {
+    "Hemoglobin": "12.6 g/dL",
+    "WBC": "6.2 x10^9/L (mild lymphopenia)",
+    "Platelets": "268 x10^3/µL",
+    "Serum calcium": "10.9 mg/dL (mildly elevated)",
+    "Serum ACE": "elevated (2x upper limit)",
+    "Creatinine": "0.8 mg/dL",
+    "ESR": "48 mm/hr",
+    "LFTs": "mildly elevated ALP",
+    "Mantoux/TST": "negative",
+    "IGRA": "negative"
+  },
+  "imaging": "CXR: bilateral symmetric hilar lymphadenopathy with fine reticulonodular interstitial infiltrates (Scadding stage II). HRCT thorax: bilateral hilar and mediastinal lymphadenopathy with perilymphatic micronodules along bronchovascular bundles and upper-zone predominance.",
+  "microbiology": "Sputum AFB smear negative x2; sputum culture pending/negative. n/a for bacterial pathogen.",
+  "differentialDiagnoses": [
+    "Sarcoidosis",
+    "Pulmonary tuberculosis / lymph-node TB",
+    "Lymphoma",
+    "Hypersensitivity pneumonitis / interstitial lung disease",
+    "Berylliosis"
+  ],
+  "finalDiagnosis": "Sarcoidosis (Scadding stage II, with Löfgren-type features)",
+  "citations": [
+    "Harrison 22e — Sarcoidosis",
+    "ATS/ERS/WASOG Statement on Sarcoidosis (ATS Diagnosis and Detection of Sarcoidosis 2020)"
+  ],
+  "stewardship": "not applicable — non-infective",
+  "contraindications": [
+    "Avoid empiric anti-TB therapy until TB excluded (AFB/culture/biopsy) as steroids can worsen active TB",
+    "Hypercalcemia: avoid vitamin D / calcium supplementation and excess sun exposure",
+    "If corticosteroids started, monitor glucose and bone health"
+  ],
+  "edgeCases": [
+    "Löfgren syndrome (bilateral hilar lymphadenopathy + erythema nodosum + arthralgia/fever) can be diagnosed clinically without biopsy and carries excellent prognosis",
+    "Cardiac or neurosarcoidosis may present without prominent pulmonary symptoms and requires directed workup",
+    "Bilateral hilar lymphadenopathy mandates exclusion of TB and lymphoma before attributing to sarcoid, especially in TB-endemic regions"
+  ],
+  "expectedMaiK": "Classic sarcoidosis: bilateral hilar lymphadenopathy, dry cough/dyspnea, erythema nodosum, elevated ACE and hypercalcemia in a young adult. Prioritise excluding TB and lymphoma; confirm with non-necrotising granulomas on nodal/lung biopsy and reserve corticosteroids for symptomatic or organ-threatening disease.",
+  "expectedNextQuestions": [
+    "Any eye symptoms (red eye, blurring) suggesting uveitis, or palpitations/syncope suggesting cardiac involvement?",
+    "Any occupational beryllium/organic dust exposure or TB contact?"
+  ],
+  "expectedInvestigations": [
+    "Endobronchial ultrasound-guided lymph node biopsy (EBUS-TBNA) for non-caseating granulomas",
+    "Serum ACE and 24h urinary calcium, ophthalmology slit-lamp exam, ECG (screen cardiac sarcoid)",
+    "Exclude TB: sputum AFB/culture and IGRA; biopsy stain/culture for AFB"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "coughRadio": true,
+    "dyspnea": true,
+    "lymphadenopathy": true,
+    "weightLoss": true,
+    "fever": true,
+    "rash": true,
+    "polyarthralgia": true,
+    "subacuteOnset": true,
+    "crepitations": true
+  },
+  "expected": {
+    "diagnosis": "sarcoidosis",
+    "acceptableIds": [
+      "sarcoidosis"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "ild",
+      "malignancy_b",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "EBUS-TBNA lymph node biopsy",
+      "Serum ACE and serum calcium",
+      "HRCT thorax",
+      "Sputum AFB / IGRA to exclude TB"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-3 must include sarcoidosis",
+    "differential must include PULMONARY_TB",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
