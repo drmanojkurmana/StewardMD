@@ -1,0 +1,135 @@
+{
+  "id": "gc_043",
+  "specialty": "Cardiology",
+  "condition": "Infective endocarditis",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Fever for 12 days with new breathlessness and painful red toe lesions for 2 days",
+  "history": "A 52-year-old man with no known prosthetic material or intravenous drug use presents with 12 days of intermittent high-grade fever with rigors, malaise, and 3 kg unintentional weight loss over the same period. He has a history of a bicuspid aortic valve noted incidentally on echocardiography 3 years ago, otherwise asymptomatic until now. He underwent a dental extraction for an abscessed molar about 3 weeks before symptom onset, without antibiotic prophylaxis. Over the last 2 days he has developed exertional breathlessness and noticed painful, tender red-purple nodules on the pulp of his fingers and a tender lesion on his left great toe. He also reports transient blurred vision in the right eye yesterday lasting a few minutes. No chest pain, no cough, no urinary symptoms. No recent travel outside the country, no known TB contact, no diabetes.",
+  "examination": "Ill-looking, febrile man. New early diastolic murmur at the left sternal border consistent with aortic regurgitation, not present on prior records. Bibasal fine crackles. Tender erythematous nodules on finger pulps (Osler nodes) and a non-tender macular hemorrhagic lesion on the sole (Janeway lesion). Splinter hemorrhages under several fingernails. Mild splenomegaly. No focal neurological deficit at present. Fundoscopy deferred (ophthalmology referral placed for suspected Roth spots given visual symptom).",
+  "vitals": {
+    "hr": 108,
+    "bp": "100/56",
+    "rr": 22,
+    "spo2": 95,
+    "temp": 38.9
+  },
+  "labs": {
+    "hemoglobin": 10.2,
+    "wbc": 14200,
+    "platelets": 138,
+    "esr": 78,
+    "crp": 96,
+    "creatinine": 1.3,
+    "urinalysis": "microscopic hematuria, no casts",
+    "rheumatoidFactor": "positive low titer",
+    "bloodCultureSet1": "pending",
+    "bloodCultureSet2": "pending",
+    "bloodCultureSet3": "pending"
+  },
+  "imaging": [
+    "Transthoracic echocardiogram: mobile 9 mm vegetation on a bicuspid aortic valve with moderate new aortic regurgitation, no abscess seen",
+    "Transesophageal echocardiogram (confirmatory, per ESC/AHA protocol): confirms aortic valve vegetation, no perivalvular extension or abscess",
+    "Chest X-ray: mild pulmonary vascular congestion, no consolidation",
+    "CT brain (for transient visual symptom): no acute infarct or hemorrhage, small nonspecific focus not requiring intervention"
+  ],
+  "microbiology": [
+    "Three sets of blood cultures drawn from separate venipuncture sites prior to antibiotics",
+    "Blood cultures (all 3 sets) growing Streptococcus mitis/viridans group streptococcus, susceptible to penicillin",
+    "Urine culture: no growth"
+  ],
+  "differentialDiagnoses": [
+    "Infective endocarditis (native valve)",
+    "Acute rheumatic fever with carditis",
+    "Systemic vasculitis (e.g., ANCA-associated)",
+    "Atrial myxoma with embolization",
+    "Marantic (non-bacterial thrombotic) endocarditis",
+    "Disseminated gonococcal infection"
+  ],
+  "finalDiagnosis": "Native valve infective endocarditis (bicuspid aortic valve) due to viridans group streptococcus, with septic embolic phenomena",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Infective Endocarditis",
+    "AHA/ACC Infective Endocarditis Diagnosis and Management Guideline 2015",
+    "ESC Guidelines for the Management of Infective Endocarditis 2023",
+    "Duke-ISCVID Criteria for Infective Endocarditis 2023"
+  ],
+  "stewardship": "Empirical therapy pending cultures should cover viridans streptococci, Staphylococcus aureus, and enterococci in native valve subacute presentation (e.g., ampicillin-sulbactam or vancomycin plus ceftriaxone/gentamicin per local protocol); once viridans group streptococcus with penicillin susceptibility is confirmed, de-escalate to penicillin G or ceftriaxone (± short-course gentamicin per susceptibility and regimen chosen), for a total of 4 weeks (native valve, uncomplicated) per AHA/ESC duration recommendations; early cardiothoracic surgery consultation for valve reasons if heart failure, uncontrolled infection, or recurrent emboli develop.",
+  "contraindications": [
+    "Avoid empirical aminoglycoside monotherapy",
+    "Avoid delaying blood cultures for antibiotic initiation in a hemodynamically stable patient",
+    "Avoid anticoagulation initiation solely for valve vegetation in absence of another indication (bleeding/embolic risk)"
+  ],
+  "edgeCases": [
+    "Culture-negative IE (prior antibiotic exposure) requires extended incubation and serology/PCR for fastidious organisms (Coxiella, Bartonella, HACEK)",
+    "Peripheral stigmata (Osler nodes, Janeway lesions, splinter hemorrhages) are minor Duke criteria, not pathognomonic and can occur in other embolic/vasculitic conditions",
+    "Bicuspid aortic valve is a recognized structural predisposing lesion for native valve IE even without prior symptomatic valve disease",
+    "Transient visual symptom warrants neuroimaging and consideration of septic embolic phenomenon before attributing to unrelated cause"
+  ],
+  "expectedMaiK": "MaiK should flag this as classic subacute native-valve infective endocarditis (new regurgitant murmur + embolic phenomena + prolonged unexplained fever) meeting Duke-ISCVID major/minor criteria, recommend three sets of blood cultures before antibiotics, echocardiography (TTE then TEE), and empirical regimen pending cultures with early de-escalation once viridans streptococcus and susceptibility are confirmed.",
+  "expectedNextQuestions": [
+    "Any recent dental, GI, or GU procedures without antibiotic prophylaxis?",
+    "History of injection drug use or prosthetic valve/cardiac device?",
+    "Duration and pattern of fever, and any prior antibiotic exposure that could cause culture negativity?",
+    "Any embolic symptoms — visual loss, focal weakness, flank pain, limb ischemia?",
+    "Baseline valve status — any known murmur or structural heart disease?"
+  ],
+  "expectedInvestigations": [
+    "Three sets of blood cultures from separate sites before antibiotics",
+    "Transthoracic echocardiogram followed by transesophageal echocardiogram if TTE inconclusive or high suspicion",
+    "ESR/CRP, complete blood count, renal function, urinalysis",
+    "ECG (to assess for conduction delay suggesting perivalvular extension)",
+    "CT brain if embolic neurological symptoms present"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "prolongedFever": true,
+    "weightLoss": true,
+    "newMurmur": true,
+    "embolicPhenomena": true,
+    "tachycardia": true,
+    "dyspnea": true,
+    "hepatosplenomegaly": true
+  },
+  "expected": {
+    "diagnosis": "Native valve infective endocarditis (bicuspid aortic valve) due to viridans group streptococcus, with septic embolic phenomena",
+    "acceptableIds": [
+      "IE"
+    ],
+    "differentialIds": [
+      "PUO",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Blood cultures x3 before antibiotics",
+      "Transthoracic echocardiogram",
+      "Transesophageal echocardiogram",
+      "ESR/CRP, CBC, renal function, urinalysis",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Penicillin G",
+        "Ceftriaxone",
+        "Ampicillin-sulbactam",
+        "Vancomycin",
+        "Gentamicin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (IE)",
+    "confidence >= expectedConfidence.min",
+    "differential includes PUO or SEPSIS in top-3",
+    "expectedInvestigations includes blood cultures and echocardiography",
+    "stewardship recommendation does not include drug doses"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

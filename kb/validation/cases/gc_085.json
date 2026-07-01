@@ -1,0 +1,124 @@
+{
+  "id": "gc_085",
+  "specialty": "Gastroenterology",
+  "condition": "Acute appendicitis",
+  "age": 22,
+  "sex": "M",
+  "presentingComplaint": "Migratory abdominal pain, now localized to the right lower quadrant, for the past 18 hours.",
+  "history": "22-year-old previously healthy man presents with 18 hours of abdominal pain. Pain began as vague, crampy, periumbilical/epigastric discomfort that he initially attributed to indigestion. Over the following 10-12 hours the pain migrated to and became sharp and localized in the right lower quadrant, worsening with movement, coughing, and the car ride to hospital. Anorexia since onset of pain. Nausea and one episode of vomiting occurred after the pain started (not before). No diarrhea. No dysuria or urinary frequency. No prior similar episodes. No significant past medical history, no prior abdominal surgery. Not sexually active in preceding weeks; no urethral discharge.",
+  "examination": "Uncomfortable, lying still on the trolley avoiding movement; mildly ill-looking but not toxic. Abdomen: focal tenderness and voluntary guarding at McBurney's point in the right lower quadrant; positive Rovsing's sign (palpation of left lower quadrant elicits right lower quadrant pain); mild rebound tenderness localized to the right lower quadrant; no diffuse rigidity or generalized peritonism; bowel sounds present but slightly reduced. Psoas sign negative. Rectal exam: no mass, mild right-sided tenderness. No costovertebral angle tenderness. No rash.",
+  "vitals": {
+    "hr": 96,
+    "bp": "122/78",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 37.8
+  },
+  "labs": {
+    "wbc": "13.8 x10^3/uL with left shift (increased band forms)",
+    "crp": "32 mg/L (mildly elevated)",
+    "hemoglobin": "14.5 g/dL",
+    "platelets": "260 x10^3/uL",
+    "urinalysis": "few WBCs, no nitrites, no significant hematuria (nonspecific, consistent with an inflamed appendix abutting the ureter/bladder)",
+    "betaHCG": "negative (not applicable, male)",
+    "amylaseLipase": "normal",
+    "electrolytesRenal": "normal"
+  },
+  "imaging": [
+    "Abdominal ultrasound: non-compressible, dilated appendix (~9 mm diameter) with wall thickening and periappendiceal free fluid in the right lower quadrant",
+    "Contrast-enhanced CT abdomen/pelvis (performed given equivocal ultrasound): dilated appendix >6 mm with wall thickening, periappendiceal fat stranding, no free air, no drainable abscess or fecalith seen"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute appendicitis",
+    "Mesenteric adenitis",
+    "Right-sided diverticulitis (Meckel's diverticulitis)",
+    "Gastroenteritis / infectious colitis",
+    "Ureteric colic / right renal colic",
+    "Right-sided inguinal or testicular pathology (in a young man: epididymo-orchitis, testicular torsion)",
+    "Terminal ileitis (Crohn's disease)",
+    "Right lower lobe pneumonia (referred pain)"
+  ],
+  "finalDiagnosis": "Acute (uncomplicated, non-perforated) appendicitis with classic migratory right lower quadrant pain",
+  "citations": [
+    "Harrison 22e — Acute Appendicitis and Peritonitis",
+    "American College of Surgeons / WSES Acute Appendicitis Guidelines 2020"
+  ],
+  "stewardship": "If managed operatively for uncomplicated appendicitis, a single preoperative prophylactic dose of a narrow-spectrum agent covering gram-negative enterics and anaerobes (e.g., a second-generation cephalosporin with anaerobic activity, or cefazolin plus metronidazole) is sufficient; postoperative antibiotics are not required for simple, non-perforated appendicitis. If non-operative (antibiotic-first) management is chosen or perforation/abscess is found, a longer empirical course targeting gram-negative enteric organisms and anaerobes is indicated per intra-abdominal infection stewardship principles, de-escalated once source control is achieved.",
+  "contraindications": [
+    "Avoid opioid analgesia withheld solely to 'preserve' the exam — adequate analgesia does not obscure diagnostic accuracy and should not be delayed",
+    "Avoid prolonged observation beyond 48 hours without surgical/imaging reassessment, as persistent unresolved symptoms increase perforation risk",
+    "Avoid unnecessary broad-spectrum or prolonged antibiotic courses for uncomplicated, non-perforated appendicitis undergoing timely appendectomy"
+  ],
+  "edgeCases": [
+    "Acute appendicitis is not represented as a discrete id in the current diagnosable-disease list (no dedicated APPENDICITIS entry); acceptableIds is therefore set to [] per rules, even though this is the textbook top diagnosis clinically",
+    "Retrocecal or pelvic appendix can present atypically with minimal anterior tenderness or with urinary/rectal symptoms — not present in this classic case but relevant for engine generalization",
+    "In women of childbearing age this presentation mandates a pregnancy test and consideration of ectopic pregnancy/ovarian pathology; not applicable here (male patient)",
+    "Temperature >38.3C or rigors would raise concern for perforation/abscess and should prompt urgent surgical reassessment rather than routine work-up"
+  ],
+  "expectedMaiK": "MaiK should recognize the classic migratory periumbilical-to-RLQ pain pattern with anorexia, McBurney's point tenderness, and positive Rovsing's sign as high pre-test probability for acute appendicitis, note that appendicitis is a surgical (not primarily antimicrobial) diagnosis, and flag that stewardship is limited to single-dose surgical prophylaxis unless perforation/abscess is present.",
+  "expectedNextQuestions": [
+    "How long has the pain been present, and has fever, rigors, or worsening diffuse peritonism developed suggesting perforation?",
+    "Has a pregnancy test been performed if applicable, and has gynecologic/urologic pathology been excluded?",
+    "What do ultrasound or CT findings show regarding appendiceal diameter, wall thickening, free fluid, or abscess?",
+    "Is surgical consultation already in progress, and is the patient being kept nil by mouth pending appendectomy?",
+    "Any evidence of complicated disease (fecalith, localized abscess, free perforation) that would change antibiotic duration and surgical urgency?"
+  ],
+  "expectedInvestigations": [
+    "Complete blood count with differential (leukocytosis with left shift)",
+    "C-reactive protein",
+    "Urinalysis and beta-hCG (if applicable) to exclude genitourinary/gynecologic mimics",
+    "Abdominal ultrasound (first-line, especially in younger/thinner patients and women)",
+    "Contrast-enhanced CT abdomen/pelvis if ultrasound equivocal",
+    "Serum amylase/lipase and electrolytes to exclude alternative diagnoses",
+    "Surgical consultation"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "abdominalPain": true,
+    "severeAbdominalPain": true,
+    "nauseaVomiting": true,
+    "fever": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "constipationOrDiarrhea": true,
+    "abdominalDistension": true
+  },
+  "expected": {
+    "diagnosis": "Acute appendicitis",
+    "acceptableIds": [],
+    "differentialIds": [
+      "bowel_obstruction",
+      "mesenteric_ischemia",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "CBC with differential",
+      "CRP",
+      "Urinalysis and beta-hCG if applicable",
+      "Abdominal ultrasound",
+      "Contrast-enhanced CT abdomen/pelvis if ultrasound equivocal",
+      "Surgical consultation"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "cefazolin",
+        "metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds is empty (appendicitis not a discrete engine id in the current disease list) — top-1 correctness not scored against acceptableIds for this case",
+    "differential surfaced includes at least one of the intra-abdominal surgical/GI emergency ids (e.g., bowel_obstruction, mesenteric_ischemia, pancreatitis)",
+    "confidence >= expectedConfidence.min when classic migratory RLQ pain pattern with McBurney's/Rovsing's findings is present",
+    "expectedMaiK commentary references migratory pain pattern, McBurney's point/Rovsing's sign, and surgical (not primarily antimicrobial) management",
+    "stewardship reflects single-dose surgical prophylaxis only for uncomplicated appendicitis, not a treatment course, unless perforation/abscess is flagged"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

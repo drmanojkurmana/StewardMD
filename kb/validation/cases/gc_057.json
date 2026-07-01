@@ -1,0 +1,121 @@
+{
+  "id": "gc_057",
+  "specialty": "Rheumatology",
+  "condition": "Acute gout",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset of excruciating pain, redness, and swelling of the right big toe since last night, waking him from sleep.",
+  "history": "A 52-year-old man presents with acute-onset severe pain in the right first metatarsophalangeal (MTP) joint that began abruptly around 2 AM, reaching maximal intensity within 6-12 hours. He describes the pain as so severe that even the weight of a bedsheet is intolerable (allodynia). He denies preceding trauma. He has a history of similar but milder episodes in the same joint twice over the past 2 years, each resolving spontaneously over 5-7 days without treatment. He reports a heavy dinner with red meat and several beers the evening before symptom onset. Past medical history includes stage 2 hypertension on hydrochlorothiazide, and obesity (BMI 32). No history of psoriasis, preceding diarrheal illness, urethritis, or conjunctivitis. No fevers, chills, or systemic symptoms. No IV drug use. No prosthetic joints. No family history of rheumatoid arthritis; father had 'gout attacks.'",
+  "examination": "Right first MTP joint is markedly swollen, erythematous, warm, and exquisitely tender with overlying shiny skin; active and passive range of motion severely limited by pain. No effusion in other joints. No tophi visible on ears, olecranon, or finger pads. No skin rash, no oral or genital ulcers, no conjunctivitis. No lymphadenopathy. Mild central obesity. Rest of joint examination unremarkable; no synovitis elsewhere.",
+  "vitals": {
+    "hr": 88,
+    "bp": "142/88",
+    "rr": 16,
+    "spo2": 98,
+    "temp": 37.1
+  },
+  "labs": {
+    "serumUricAcid": "8.9 mg/dL (elevated; may be normal in up to 30% during acute attack)",
+    "wbc": "9.8 x10^9/L (mildly elevated, consistent with acute inflammation)",
+    "esr": "38 mm/hr (elevated)",
+    "crp": "42 mg/L (elevated)",
+    "creatinine": "1.1 mg/dL (normal)",
+    "synovialFluidWBC": "18,000/µL, predominantly neutrophils",
+    "synovialFluidCrystals": "Negatively birefringent needle-shaped monosodium urate crystals on polarized light microscopy",
+    "synovialFluidGramStainCulture": "Negative (no organisms seen, culture pending/negative)"
+  },
+  "imaging": [
+    "Plain radiograph right foot: soft tissue swelling around first MTP joint; no erosions or 'rat-bite' periarticular erosions at this early stage",
+    "No cortical destruction or overhanging edges typical of chronic tophaceous gout"
+  ],
+  "microbiology": [
+    "Synovial fluid Gram stain: no organisms seen",
+    "Synovial fluid culture: no growth (pending finalization, obtained to exclude septic arthritis)"
+  ],
+  "differentialDiagnoses": [
+    "Acute gout (podagra)",
+    "Septic arthritis",
+    "Pseudogout (CPPD)",
+    "Cellulitis overlying the joint",
+    "Reactive arthritis",
+    "Trauma / fracture",
+    "Psoriatic arthritis"
+  ],
+  "finalDiagnosis": "Acute gout (podagra) — first MTP monoarthritis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Gout and Other Crystal-Associated Arthropathies",
+    "American College of Rheumatology (ACR) Guideline for the Management of Gout 2020",
+    "EULAR Recommendations for Gout 2016"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "NSAIDs relatively contraindicated in this patient if renal impairment, active peptic ulcer disease, or heart failure present",
+    "Colchicine dose reduction required in renal impairment; avoid in severe renal or hepatic impairment or with strong CYP3A4/P-glycoprotein inhibitors",
+    "Avoid initiating urate-lowering therapy during the acute attack (may prolong or exacerbate flare) unless already established"
+  ],
+  "edgeCases": [
+    "Serum uric acid may be normal or even low during an acute flare (up to ~30% of cases) and should not be used alone to rule out gout",
+    "Synovial fluid analysis with polarized microscopy is the gold standard for diagnosis and is essential to exclude septic arthritis, which can coexist with gout",
+    "In an elderly or immunocompromised patient, or with fever/systemic toxicity, septic arthritis must be aggressively excluded even with a low threshold for joint aspiration",
+    "First presentation of podagra in a woman or in a patient <30 years old should prompt evaluation for secondary causes (e.g., diuretic use, renal disease, myeloproliferative disorder, enzyme defects)"
+  ],
+  "expectedMaiK": "Classic podagra pattern with rapid-onset monoarticular first MTP inflammation and prior similar self-limited episodes strongly favors acute gout; joint aspiration with crystal analysis is mandatory to confirm diagnosis and exclude septic arthritis given overlapping presentation.",
+  "expectedNextQuestions": [
+    "Has synovial fluid been aspirated and sent for crystal analysis, Gram stain, and culture to exclude septic arthritis?",
+    "Any fever, rigors, or systemic toxicity suggesting concomitant septic arthritis?",
+    "Recent dietary triggers, alcohol intake, or diuretic use?",
+    "Any renal impairment that would affect choice/dosing of anti-inflammatory therapy?",
+    "History of tophi or prior urate-lowering therapy use/adherence?"
+  ],
+  "expectedInvestigations": [
+    "Synovial fluid aspiration with polarized light microscopy for crystals",
+    "Synovial fluid Gram stain and culture",
+    "Serum uric acid",
+    "CRP/ESR",
+    "Renal function (creatinine)",
+    "Plain radiograph of affected joint"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "jointSwelling": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "severePain": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "Acute gout (podagra) — first MTP monoarthritis",
+    "acceptableIds": [
+      "crystal_arthritis"
+    ],
+    "differentialIds": [
+      "crystal_arthritis",
+      "CELLULITIS",
+      "rheumatoid"
+    ],
+    "investigations": [
+      "Synovial fluid aspiration and polarized light microscopy",
+      "Synovial fluid Gram stain and culture",
+      "Serum uric acid",
+      "CRP/ESR",
+      "Plain radiograph of joint"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (crystal_arthritis)",
+    "confidence >= expectedConfidence.min",
+    "differential includes septic arthritis / cellulitis consideration",
+    "expectedInvestigations include synovial fluid crystal analysis",
+    "stewardship.antibiotics is empty (non-infective diagnosis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

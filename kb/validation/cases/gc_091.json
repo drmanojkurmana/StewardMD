@@ -1,0 +1,131 @@
+{
+  "id": "gc_091",
+  "specialty": "Respiratory",
+  "condition": "Pleural effusion",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness for 10 days with right-sided pleuritic chest pain and low-grade fever",
+  "history": "58-year-old man presents with a 10-day history of progressive exertional breathlessness, now present at rest, associated with right-sided pleuritic chest pain worsened by deep inspiration and coughing. He reports low-grade evening fever, dry cough, and a 3 kg unintentional weight loss over the past month. No prior TB treatment but recalls a household TB contact 2 years ago. No orthopnea or leg swelling. No prior cardiac or renal disease. Non-smoker, no significant alcohol use. No recent travel or animal exposure.",
+  "examination": "Alert, mildly tachypneic, comfortable at rest with oxygen. Decreased chest expansion on the right side. Stony dull percussion note over the right lower and mid zones with reduced/absent breath sounds and reduced vocal fremitus in the same area. Trachea and apex beat subtly shifted to the left. No crepitations over the unaffected lung. No pedal edema, no raised JVP. No lymphadenopathy or hepatosplenomegaly.",
+  "vitals": {
+    "hr": 104,
+    "bp": "122/78",
+    "rr": 26,
+    "spo2": 93,
+    "temp": 37.8
+  },
+  "labs": {
+    "hemoglobin": 11.8,
+    "totalLeukocyteCount": 9200,
+    "platelets": 310,
+    "esr": 62,
+    "creatinine": 0.9,
+    "albuminSerum": 3.2,
+    "ldhSerum": 210,
+    "pleuralFluidAppearance": "straw-coloured, mildly turbid",
+    "pleuralFluidProtein": 4.6,
+    "pleuralFluidLDH": 480,
+    "pleuralFluidGlucose": 58,
+    "pleuralFluidCellCount": "1200 cells/µL, lymphocyte-predominant (85%)",
+    "pleuralFluidADA": 68,
+    "lightsCriteria": "Exudate (pleural/serum protein ratio 0.62, pleural/serum LDH ratio 0.85)"
+  },
+  "imaging": [
+    "Chest X-ray PA view: moderate right-sided pleural effusion with meniscus sign, blunting of costophrenic angle, mediastinum not significantly shifted",
+    "Ultrasound thorax: free-flowing anechoic-to-echogenic pleural fluid, moderate volume, no loculations, safe site marked for thoracocentesis",
+    "CT chest (contrast): moderate right pleural effusion with mild pleural thickening/enhancement, no underlying mass lesion, no cavitary lung lesion identified"
+  ],
+  "microbiology": [
+    "Pleural fluid Gram stain: no organisms seen",
+    "Pleural fluid AFB smear: negative",
+    "Pleural fluid culture (aerobic): no growth at 48 hours (pending final)",
+    "Pleural fluid TB-PCR (GeneXpert MTB/RIF): pending",
+    "Sputum AFB smear x2: negative"
+  ],
+  "differentialDiagnoses": [
+    "Tubercular pleural effusion",
+    "Parapneumonic effusion",
+    "Malignant pleural effusion",
+    "Empyema"
+  ],
+  "finalDiagnosis": "Exudative pleural effusion, likely tubercular aetiology",
+  "citations": [
+    "Harrison 22e — Pleural Effusion",
+    "Harrison 22e — Tuberculosis",
+    "ATS/CDC/IDSA Clinical Practice Guidelines: Diagnosis of Tuberculosis in Adults and Children 2017"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid empirical broad-spectrum antibiotics before establishing aetiology in a subacute, afebrile-predominant, lymphocyte-rich exudate unless secondary bacterial infection/empyema is suspected",
+    "Avoid therapeutic thoracocentesis of large volumes without monitoring for re-expansion pulmonary oedema"
+  ],
+  "edgeCases": [
+    "Low pleural fluid ADA does not exclude TB in early disease; clinical and radiological correlation with GeneXpert/culture is required",
+    "Malignant effusion must be excluded with cytology, especially given weight loss and age >50; if cytology positive, this case is not in the current diagnosable set",
+    "If neutrophil-predominant fluid with low glucose/pH, reclassify toward parapneumonic effusion/empyema"
+  ],
+  "expectedMaiK": "MaiK should flag a lymphocyte-predominant, high-ADA exudative effusion with subacute constitutional symptoms as highly suggestive of tubercular pleuritis, recommend pleural fluid ADA/GeneXpert/cytology work-up, and caution against reflexive empirical antibiotics pending diagnostic confirmation.",
+  "expectedNextQuestions": [
+    "Any past history of TB or contact with a TB patient?",
+    "Is the patient immunocompromised (HIV status, diabetes, steroid use)?",
+    "Has pleural fluid cytology been sent to exclude malignancy?",
+    "Is there any night sweats or evening-predominant fever pattern?",
+    "Any occupational or environmental exposure suggesting alternative aetiology?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic thoracocentesis with fluid protein, LDH, glucose, cell count, ADA, cytology, AFB smear/culture, GeneXpert MTB/RIF",
+    "Light's criteria calculation (pleural/serum protein and LDH ratios)",
+    "Contrast-enhanced CT chest",
+    "HIV testing",
+    "Pleural biopsy (closed or thoracoscopic) if fluid analysis inconclusive"
+  ],
+  "expectedConfidence": {
+    "min": 55
+  },
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "prolongedCough2Weeks": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "tbContactHistory": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "Exudative pleural effusion, likely tubercular aetiology",
+    "acceptableIds": [
+      "pleural_effusion"
+    ],
+    "differentialIds": [
+      "pleural_effusion",
+      "PULMONARY_TB",
+      "CAP"
+    ],
+    "investigations": [
+      "Diagnostic thoracocentesis with Light's criteria",
+      "Pleural fluid ADA and GeneXpert MTB/RIF",
+      "Pleural fluid cytology",
+      "Contrast CT chest"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (pleural_effusion)",
+    "confidence >= expectedConfidence.min",
+    "differential includes tubercular/pleural TB consideration",
+    "no empirical antibiotic recommendation surfaced as primary stewardship action",
+    "expectedNextQuestions surfaces TB contact / immunocompromise / cytology probes"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

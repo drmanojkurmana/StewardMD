@@ -1,0 +1,133 @@
+{
+  "id": "gc_047",
+  "specialty": "Endocrinology",
+  "condition": "Hypercalcaemia",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Progressive confusion, nausea, and constipation for 5 days in a patient with known metastatic breast cancer.",
+  "history": "64-year-old woman with ER-positive, HER2-negative breast cancer diagnosed 3 years ago, now with known bone (vertebral and pelvic) metastases on prior imaging, presents with a 5-day history of worsening lethargy, generalized weakness, and confusion noticed by family. She reports profound nausea with several episodes of vomiting, marked constipation for a week, and increased thirst with frequent urination over the same period. She has had a 4 kg unintentional weight loss over the past month, which the family attributes to poor oral intake. No fever, no diarrhea, no focal weakness. She was last on zoledronic acid 10 weeks ago but missed her most recent infusion due to a dental procedure. No new medications, no excess vitamin D or calcium supplement use, no thiazide diuretics.",
+  "examination": "Lethargic but arousable, oriented to person only (baseline was fully oriented per family). Dry mucous membranes and reduced skin turgor consistent with dehydration. No focal neurological deficits. No rash. Mild diffuse abdominal discomfort with reduced bowel sounds, no peritonism. No palpable hepatosplenomegaly. No lymphadenopathy. Cardiovascular exam unremarkable apart from tachycardia; chest clear.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/62",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "correctedCalcium_mgdl": 14.8,
+    "ionizedCalcium_mmolL": 1.95,
+    "albumin_gdl": 3,
+    "phosphate_mgdl": 2.1,
+    "PTH_pgmL": 8,
+    "PTHrP": "elevated",
+    "vitaminD_25OH_ngmL": 22,
+    "vitaminD_1_25OH2": "not elevated",
+    "creatinine_mgdl": 1.9,
+    "urea_mgdl": 58,
+    "sodium_mmolL": 133,
+    "potassium_mmolL": 3.3,
+    "alkalinePhosphatase": "elevated",
+    "hemoglobin_gdl": 10.1,
+    "ecg": "shortened QT interval"
+  },
+  "imaging": [
+    "Skeletal survey / prior PET-CT: multiple lytic lesions in thoracic and lumbar vertebrae, pelvis, and femur consistent with known metastatic disease",
+    "Non-contrast CT head: no acute intracranial abnormality (performed given altered sensorium)"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Malignancy-associated hypercalcemia (humoral, PTHrP-mediated)",
+    "Malignancy-associated hypercalcemia due to osteolytic bone metastases",
+    "Primary hyperparathyroidism",
+    "Vitamin D toxicity",
+    "Granulomatous disease (sarcoidosis, TB)",
+    "Milk-alkali syndrome",
+    "Hyperthyroidism"
+  ],
+  "finalDiagnosis": "Malignancy-associated hypercalcemia (humoral hypercalcemia of malignancy, PTHrP-mediated, in a patient with metastatic breast cancer and coexisting osteolytic metastases)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Hypercalcemia and Hypocalcemia",
+    "Harrison's Principles of Internal Medicine 22e — Endocrine and Paraneoplastic Manifestations of Malignancy",
+    "ASCO Clinical Practice Guideline — Bone-Modifying Agents in Metastatic Breast Cancer 2017 (update 2021)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid thiazide diuretics (worsen hypercalcemia)",
+    "Avoid additional calcium or vitamin D supplementation until corrected",
+    "Use zoledronic acid cautiously / with renal dosing adjustment given acute kidney injury; consider delaying bisphosphonate until volume repletion improves renal function",
+    "Avoid aggressive furosemide use before adequate volume repletion (historic practice no longer recommended and risks worsening dehydration/AKI)"
+  ],
+  "edgeCases": [
+    "Severe symptomatic hypercalcemia (>14 mg/dL) with altered sensorium constitutes an oncological emergency requiring urgent IV isotonic saline hydration prior to antiresorptive therapy",
+    "PTH is appropriately suppressed, distinguishing this from primary hyperparathyroidism",
+    "Coexisting AKI (creatinine 1.9) may reflect both hypercalcemia-induced nephrogenic diabetes insipidus/volume depletion and pre-existing disease; renal function must be reassessed after rehydration before bisphosphonate dosing",
+    "'hypercalcemia' disease id in the reference list is not malignancy-subtype specific; this case is coded to that id since no separate humoral/PTHrP-specific id exists"
+  ],
+  "expectedMaiK": "MaiK should flag PTH-independent, PTHrP-driven hypercalcemia of malignancy as an oncologic emergency, recommend urgent IV isotonic saline volume repletion followed by IV bisphosphonate (or denosumab if renal impairment precludes bisphosphonate), and note calcitonin for rapid symptom control while awaiting bisphosphonate effect.",
+  "expectedNextQuestions": [
+    "What is the corrected/ionized calcium level and trend?",
+    "Is PTH suppressed, confirming a non-parathyroid (malignancy-driven) mechanism?",
+    "Is PTHrP elevated, supporting humoral hypercalcemia of malignancy?",
+    "What is the current renal function and volume status prior to bisphosphonate dosing?",
+    "When was the last bisphosphonate/denosumab dose administered?",
+    "Is there evidence of new or progressive bone metastases?"
+  ],
+  "expectedInvestigations": [
+    "Corrected serum calcium and ionized calcium",
+    "Intact PTH",
+    "PTHrP",
+    "25-OH vitamin D and 1,25-(OH)2 vitamin D",
+    "Serum phosphate, albumin, creatinine, electrolytes",
+    "ECG (QT interval)",
+    "Skeletal imaging / restaging scan for progression of metastatic disease"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "malignancy": true,
+    "weightLoss": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "polyuriaPolydipsia": true,
+    "dehydration": true,
+    "abdominalDiscomfort": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "Malignancy-associated hypercalcemia (humoral hypercalcemia of malignancy)",
+    "acceptableIds": [
+      "hypercalcemia"
+    ],
+    "differentialIds": [
+      "malignancy_b",
+      "myeloma",
+      "aki"
+    ],
+    "investigations": [
+      "Corrected/ionized calcium",
+      "Intact PTH",
+      "PTHrP",
+      "25-OH and 1,25-(OH)2 vitamin D",
+      "Renal function panel",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": "harrison",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hypercalcemia)",
+    "confidence >= expectedConfidence.min",
+    "differential includes malignancy_b and aki",
+    "expectedMaiK content mentions PTHrP/humoral mechanism and urgent IV saline + bisphosphonate management",
+    "stewardship.antibiotics is empty (non-infective etiology)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

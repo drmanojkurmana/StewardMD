@@ -78,7 +78,9 @@ try {
       function idOK(cand){ var acc=(c.expected.acceptableIds||[]).map(function(s){return String(s).toLowerCase();}); return acc.indexOf(String(cand.id).toLowerCase())>=0 || acc.some(function(a){return String(cand.name||'').toLowerCase().indexOf(a)>=0;}); }
       var top1=t3[0]||{}; var top1ok=idOK(top1); var top3ok=t3.some(idOK);
       // stewardship via grounded package (interface.resolveTreatment)
-      var pkg=null; try{ pkg=await window.StewardRAG.buildPackage(aa,{caseData:{age:c.age,sex:c.sex,findings:(c.symptoms||[])}}); }catch(e){}
+      // stewardship via grounded package — timeout-raced so a stall can NEVER lose the
+      // (reliable, synchronous) diagnosis metrics computed above.
+      var pkg=null; try{ pkg=await Promise.race([window.StewardRAG.buildPackage(aa,{caseData:{age:c.age,sex:c.sex,findings:(c.symptoms||[])}}), new Promise(function(res){setTimeout(function(){res(null);},8000);})]); }catch(e){}
       var tx=pkg&&pkg.treatment; var drugRefs=[]; if(tx){ if(tx.default&&tx.default.drugRefs)drugRefs=drugRefs.concat(tx.default.drugRefs); (tx.alternatives||[]).forEach(function(a){drugRefs=drugRefs.concat(a.drugRefs||[]);}); }
       var expAbx=(c.expected.stewardship&&c.expected.stewardship.antibiotics||[]).map(function(s){return String(s).toLowerCase();});
       var abxOK = expAbx.length===0 ? null : expAbx.some(function(a){return drugRefs.some(function(d){return String(d).toLowerCase().indexOf(a)>=0||a.indexOf(String(d).toLowerCase())>=0;});});

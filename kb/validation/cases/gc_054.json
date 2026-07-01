@@ -1,0 +1,139 @@
+{
+  "id": "gc_054",
+  "specialty": "Endocrinology",
+  "condition": "Thyroid storm",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Brought to the emergency department with high fever, palpitations, and confusion for 1 day.",
+  "history": "34-year-old woman with a 6-month history of untreated Graves' disease (previously diagnosed but non-compliant with antithyroid medication) presents after 3 days of worsening tremulousness, heat intolerance, and diarrhea, followed by acute onset of high fever, palpitations, and agitation progressing to confusion over the last 24 hours. Family reports a febrile illness (sore throat, cough) 5 days ago that was untreated and may have precipitated this episode. No history of recent iodine contrast exposure, thyroid surgery, or radioactive iodine therapy. No prior similar episodes. No known cardiac disease.",
+  "examination": "Agitated, diaphoretic, tremulous woman, disoriented to time and place (fluctuating sensorium). Warm, moist skin. Diffuse smooth goiter with audible bruit. Fine tremor of outstretched hands. Lid lag and stare present. Irregularly irregular pulse consistent with atrial fibrillation with rapid ventricular response. No focal neurological deficits. Mild diffuse abdominal tenderness, hyperactive bowel sounds. No signs of heart failure at presentation but tachycardic with bounding pulses.",
+  "vitals": {
+    "hr": 154,
+    "bp": "92/58",
+    "rr": 28,
+    "spo2": 94,
+    "temp": 40.2
+  },
+  "labs": {
+    "TSH": "<0.01 mIU/L (suppressed)",
+    "freeT4": "6.8 ng/dL (elevated)",
+    "freeT3": "22 pg/mL (elevated)",
+    "TSHReceptorAntibody": "positive",
+    "WBC": "13.8 x10^9/L (mild leukocytosis, can occur without infection)",
+    "glucose": "162 mg/dL",
+    "calcium": "10.9 mg/dL (mildly elevated)",
+    "ALT": "88 U/L (mildly elevated)",
+    "AST": "76 U/L (mildly elevated)",
+    "lactate": "2.6 mmol/L",
+    "creatinine": "1.0 mg/dL",
+    "ECG": "sinus tachycardia transitioning to atrial fibrillation with rapid ventricular response, no acute ischemic changes"
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate",
+    "Thyroid ultrasound: diffusely enlarged, hypervascular gland consistent with Graves' disease"
+  ],
+  "microbiology": [
+    "Blood cultures pending, no growth at 48h",
+    "Throat swab not obtained; no localizing signs of bacterial infection"
+  ],
+  "differentialDiagnoses": [
+    "Thyroid storm (thyrotoxic crisis)",
+    "Sepsis / septic shock",
+    "Neuroleptic malignant syndrome",
+    "Serotonin syndrome",
+    "Pheochromocytoma crisis",
+    "Malignant hyperthermia",
+    "Severe anxiety/panic attack with tachyarrhythmia"
+  ],
+  "finalDiagnosis": "Thyroid storm (thyrotoxic crisis) precipitated by underlying untreated Graves' disease and probable intercurrent infection",
+  "citations": [
+    "Harrison 22e — Thyrotoxicosis and Thyroid Storm",
+    "American Thyroid Association (ATA) Guidelines for Hyperthyroidism and Thyrotoxicosis 2016",
+    "Burch-Wartofsky Point Scale for thyroid storm (clinical scoring reference)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid aspirin for fever control — displaces thyroid hormone from binding globulin and worsens free hormone levels; use acetaminophen instead",
+    "Avoid iodinated contrast administration until thyroid status controlled",
+    "Beta-blocker (e.g., propranolol) should be used cautiously if overt heart failure present, but is generally still indicated in thyroid storm with AFib RVR",
+    "Do not delay antithyroid drug administration for definitive imaging or confirmatory results if clinical suspicion is high (Burch-Wartofsky score supports empirical treatment)"
+  ],
+  "edgeCases": [
+    "Diagnosis is clinical, based on Burch-Wartofsky Point Scale (score >45 highly suggestive) — biochemical thyrotoxicosis alone does not confirm storm; degree of TSH/T4 elevation does not correlate with severity",
+    "Concurrent infection may be the precipitant and can coexist with thyroid storm, making distinction from sepsis clinically difficult — both may require simultaneous treatment",
+    "Elderly or apathetic thyrotoxicosis patients may present with bradycardia and lethargy rather than tachycardia/agitation ('apathetic thyroid storm'), which can be missed",
+    "Beta-blocker use is relatively contraindicated in decompensated heart failure but should not be entirely withheld if AFib RVR is contributing to hemodynamic instability",
+    "This diagnosis (thyroid_storm) IS present in the diagnosable disease list under Endocrine"
+  ],
+  "expectedMaiK": "MaiK should flag thyroid storm as a life-threatening endocrine emergency requiring immediate empirical multimodal therapy (thionamide + iodine + beta-blocker + corticosteroid + cooling) without waiting for confirmatory free T4/T3, and should highlight the overlap with sepsis workup given fever and altered sensorium.",
+  "expectedNextQuestions": [
+    "What is the Burch-Wartofsky Point Scale score based on current findings?",
+    "Is there a precipitating infection that also needs empirical antimicrobial coverage?",
+    "Has the patient received any antithyroid medication or beta-blocker previously?",
+    "Any history of recent iodinated contrast exposure or amiodarone use?",
+    "Is there evidence of high-output heart failure or hemodynamic decompensation from AFib RVR?"
+  ],
+  "expectedInvestigations": [
+    "TSH, free T4, free T3",
+    "TSH receptor antibody / TSI",
+    "ECG and continuous cardiac monitoring",
+    "Blood cultures and infectious workup to exclude/identify precipitant",
+    "Liver function tests",
+    "Electrolytes, calcium, glucose",
+    "Chest X-ray"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "weightLoss": true,
+    "palpitations": true,
+    "diarrhea": true,
+    "nauseaVomiting": true,
+    "atrialFibHx": true
+  },
+  "expected": {
+    "diagnosis": "Thyroid storm (thyrotoxic crisis)",
+    "acceptableIds": [
+      "thyroid_storm"
+    ],
+    "differentialIds": [
+      "hyperthyroidism",
+      "SEPSIS",
+      "SEPTIC_SHOCK",
+      "serotonin_nms"
+    ],
+    "investigations": [
+      "TSH",
+      "free T4",
+      "free T3",
+      "TSH receptor antibody",
+      "ECG",
+      "blood cultures",
+      "liver function tests",
+      "electrolytes and calcium"
+    ],
+    "stewardship": {
+      "tier": "harrison",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (thyroid_storm)",
+    "confidence >= expectedConfidence.min",
+    "differential includes hyperthyroidism and SEPSIS as reasonable alternates",
+    "engine does not recommend aspirin for antipyresis",
+    "engine surfaces Burch-Wartofsky scoring concept or equivalent severity assessment",
+    "engine does not classify case purely as sepsis/septic_shock as sole top-1 without considering thyroid storm given goiter + weight loss + tachyarrhythmia + fever tetrad"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

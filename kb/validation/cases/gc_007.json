@@ -1,0 +1,132 @@
+{
+  "id": "gc_007",
+  "specialty": "Respiratory",
+  "condition": "Hospital-acquired pneumonia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "New fever, worsening breathlessness, and increased volume of purulent tracheal/sputum secretions on hospital day 6 of admission for an unrelated surgical procedure.",
+  "history": "68-year-old man admitted 6 days ago for elective open reduction and internal fixation of a femur fracture, now on the orthopedic ward (not intubated, breathing spontaneously with supplemental oxygen). Over the last 24-36 hours he has developed new fever, increasing dyspnea, and a rise in the volume of purulent sputum with a new cough. He received a single dose of cefazolin for surgical prophylaxis on the day of surgery only. He has no antibiotic exposure in the 90 days prior to this admission and no prior ICU stay. He has type 2 diabetes mellitus and is a resident of the community (not a nursing home). No known colonization with MRSA, ESBL, or CRE organisms. He remains hemodynamically stable, has not required vasopressors, and has no altered sensorium.",
+  "examination": "Toxic-appearing, mild respiratory distress. Crepitations and bronchial breath sounds at the right lower lung base. No signs of consolidation elsewhere. No rash, no calf tenderness, abdomen soft and non-tender. Surgical wound clean, dry, and healing well without erythema or discharge.",
+  "vitals": {
+    "hr": 108,
+    "bp": "108/68",
+    "rr": 26,
+    "spo2": 91,
+    "temp": 38.7
+  },
+  "labs": {
+    "wbc": 15.8,
+    "creatinine": 1.1,
+    "lactate": 1.6,
+    "platelets": 240,
+    "crp": 142,
+    "procalcitonin": 1.9,
+    "pao2fio2": 260
+  },
+  "imaging": [
+    "Chest X-ray: new right lower lobe consolidation not present on admission film"
+  ],
+  "microbiology": [
+    "Endotracheal/deep sputum culture sent (pending)",
+    "Blood cultures x2 sent (pending)"
+  ],
+  "differentialDiagnoses": [
+    "Hospital-acquired pneumonia (MDR risk)",
+    "Aspiration pneumonia",
+    "Atelectasis with superimposed infection",
+    "Pulmonary embolism",
+    "Post-operative fluid overload / heart failure"
+  ],
+  "finalDiagnosis": "Hospital-acquired pneumonia (HAP), day 6, with risk factors for multidrug-resistant organisms",
+  "citations": [
+    "Harrison 22e — Pneumonia",
+    "IDSA/ATS Hospital-Acquired and Ventilator-Associated Pneumonia Guidelines 2016"
+  ],
+  "stewardship": "Empirical broad-spectrum coverage targeting MDR gram-negatives and MRSA pending culture data: an anti-pseudomonal beta-lactam (e.g., piperacillin-tazobactam, cefepime, or a carbapenem) combined with an agent active against MRSA (e.g., vancomycin or linezolid); de-escalate based on culture and sensitivity results and clinical response within 48-72 hours.",
+  "contraindications": [
+    "Avoid aminoglycoside monotherapy for empirical HAP coverage",
+    "Adjust renally-cleared agents (e.g., vancomycin, piperacillin-tazobactam) if renal function changes"
+  ],
+  "edgeCases": [
+    "If patient were intubated/mechanically ventilated this would be reclassified as VAP rather than HAP",
+    "MDR risk here is driven by hospitalization >48h and current inpatient antibiotic-exposure environment, not by prior antibiotics/hospitalization in the preceding 90 days",
+    "Should distinguish from aspiration pneumonia if witnessed aspiration or dysphagia present (not described here)"
+  ],
+  "expectedMaiK": "Flag new-onset pneumonia occurring beyond 48 hours of hospital admission as HAP; given MDR risk factors (inpatient onset, hospital environment exposure), recommend empirical dual-agent coverage for MDR gram-negatives and MRSA per IDSA/ATS 2016, with de-escalation guided by cultures.",
+  "expectedNextQuestions": [
+    "Is the patient mechanically ventilated (reclassify as VAP)?",
+    "Any witnessed aspiration event or dysphagia?",
+    "Local antibiogram / unit-specific MDR prevalence?",
+    "Any known MRSA, ESBL, or CRE colonization history?",
+    "Trend in oxygenation and hemodynamics over next 48-72 hours?"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray",
+    "Sputum/endotracheal aspirate culture and Gram stain",
+    "Blood cultures x2",
+    "Complete blood count",
+    "Procalcitonin",
+    "Arterial blood gas / PaO2:FiO2",
+    "Renal function panel"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "toxicAppearing": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "hospitalDay48": true,
+    "purulentSecretions": true,
+    "worseningOxygenation": true,
+    "mdrRisk": true,
+    "supplementalOxygen": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "Hospital-acquired pneumonia (HAP), day 6, with risk factors for multidrug-resistant organisms",
+    "acceptableIds": [
+      "HAP"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "CAP",
+      "SEVERE_CAP"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "Sputum/endotracheal aspirate culture",
+      "Blood cultures x2",
+      "Complete blood count",
+      "Procalcitonin",
+      "Arterial blood gas"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "cefepime",
+        "meropenem",
+        "vancomycin",
+        "linezolid"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (HAP)",
+    "confidence >= expectedConfidence.min",
+    "differential includes aspiration pneumonia and/or CAP variants",
+    "stewardship recommendation includes anti-pseudomonal beta-lactam plus MRSA coverage",
+    "engine flags mdrRisk and hospitalDay48 as key drivers"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

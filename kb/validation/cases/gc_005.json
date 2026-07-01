@@ -1,0 +1,145 @@
+{
+  "id": "gc_005",
+  "specialty": "Respiratory",
+  "condition": "Community-acquired pneumonia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Fever, productive cough, and worsening breathlessness for 3 days, now confused and drowsy.",
+  "history": "68-year-old man with type 2 diabetes mellitus and hypertension brought by family with a 3-day history of high-grade fever with rigors, productive cough with rusty-yellow sputum, and rapidly worsening breathlessness. Over the last 12 hours he has become increasingly drowsy and confused, not recognizing his son. No prior antibiotics or hospitalization in the last 90 days. No known TB contact. Non-smoker. No vomiting or diarrhea.",
+  "examination": "Toxic-looking, drowsy, oriented only to person, GCS 13/15. Using accessory muscles of respiration. Right-sided coarse crepitations and bronchial breath sounds over the right lower and mid zones with dullness to percussion. No peripheral edema. Cool peripheries with delayed capillary refill; extremities mottled.",
+  "vitals": {
+    "hr": 128,
+    "bp": "82/50",
+    "rr": 34,
+    "spo2": 84,
+    "temp": 39.6
+  },
+  "labs": {
+    "wbc": 19.8,
+    "creatinine": 2.1,
+    "urea": 14.2,
+    "sodium": 130,
+    "lactate": 3.8,
+    "platelets": 98,
+    "albumin": 2.6,
+    "crp": 220,
+    "procalcitonin": 8.4,
+    "pao2fio2": 180,
+    "arterialPh": 7.29
+  },
+  "imaging": [
+    "Chest X-ray: dense right lower and mid zone consolidation with air bronchograms; small right pleural effusion",
+    "Bilateral patchy infiltrates suggestive of multilobar involvement"
+  ],
+  "microbiology": [
+    "Blood cultures sent x2 sets before antibiotics",
+    "Sputum Gram stain: gram-positive diplococci, plentiful pus cells",
+    "Urinary pneumococcal antigen sent",
+    "Urinary Legionella antigen sent"
+  ],
+  "differentialDiagnoses": [
+    "Severe community-acquired pneumonia with septic shock",
+    "Aspiration pneumonia",
+    "Hospital-acquired pneumonia (excluded — community onset)",
+    "Acute exacerbation of heart failure (excluded — no prior cardiac history, focal consolidation)",
+    "Pulmonary tuberculosis (excluded — acute onset, no chronicity)"
+  ],
+  "finalDiagnosis": "Severe community-acquired pneumonia (CURB-65 4-5) with septic shock, requiring ICU admission",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Pneumonia",
+    "IDSA/ATS Community-Acquired Pneumonia Guidelines 2019",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Empirical combination therapy for severe CAP per IDSA/ATS 2019: a beta-lactam (e.g., ceftriaxone or ampicillin-sulbactam) PLUS either a macrolide (e.g., azithromycin) or a respiratory fluoroquinolone (e.g., levofloxacin); add MRSA/Pseudomonas coverage only if risk factors present. Concurrent early sepsis bundle care (fluids, vasopressors, source control) per Surviving Sepsis Campaign.",
+  "contraindications": [
+    "Avoid fluoroquinolone monotherapy if concern for TB not yet excluded",
+    "Adjust renally-cleared antibiotic doses for acute kidney injury",
+    "Caution with fluid resuscitation given age and possible cardiac reserve — reassess with dynamic measures"
+  ],
+  "edgeCases": [
+    "Distinguishing severe CAP from early HAP/aspiration pneumonia is clinical — confirmed community onset here excludes HAP/VAP",
+    "Hyponatremia and thrombocytopenia may also raise suspicion for Legionella — antigen testing sent",
+    "If patient fails to improve in 48-72h, reassess for empyema, resistant organism, or alternate diagnosis (e.g., PE, ARDS)"
+  ],
+  "expectedMaiK": "MaiK should flag this as severe CAP meeting ICU-level severity criteria (CURB-65 high, hypotension, hypoxia, multilobar infiltrates, altered sensorium) and recommend combination empirical therapy plus early sepsis bundle, not standard ward-based monotherapy.",
+  "expectedNextQuestions": [
+    "Any history of aspiration, dysphagia, or reduced consciousness prior to onset?",
+    "Recent travel or influenza-like illness in the household?",
+    "Baseline functional status and code status/goals of care given ICU severity?",
+    "Any immunosuppression or recent steroid use?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 before antibiotics",
+    "Sputum Gram stain and culture",
+    "Urinary pneumococcal and Legionella antigen",
+    "Arterial blood gas",
+    "Chest X-ray / CT thorax if diagnosis unclear",
+    "Serum lactate",
+    "Procalcitonin",
+    "HIV testing (risk-based)"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "multilobar": true,
+    "pleuriticPain": true,
+    "severeCriteria": true,
+    "curb65": true
+  },
+  "expected": {
+    "diagnosis": "Severe community-acquired pneumonia (CURB-65 4-5) with septic shock, requiring ICU admission",
+    "acceptableIds": [
+      "SEVERE_CAP"
+    ],
+    "differentialIds": [
+      "CAP",
+      "SEPTIC_SHOCK",
+      "SEPSIS",
+      "ASPIRATION_PNEUMONIA"
+    ],
+    "investigations": [
+      "Blood cultures x2",
+      "Sputum Gram stain and culture",
+      "Urinary pneumococcal and Legionella antigen",
+      "Arterial blood gas",
+      "Chest X-ray",
+      "Serum lactate",
+      "Procalcitonin"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin",
+        "levofloxacin",
+        "ampicillin-sulbactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (SEVERE_CAP)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes CAP and/or SEPTIC_SHOCK",
+    "stewardship recommends combination beta-lactam + macrolide/fluoroquinolone (guideline tier), not monotherapy",
+    "engine flags severeCriteria and curb65 as true given vitals (hypotension, tachypnea, hypoxia, alteredSensorium)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

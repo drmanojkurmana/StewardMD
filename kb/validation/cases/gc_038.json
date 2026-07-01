@@ -1,0 +1,117 @@
+{
+  "id": "gc_038",
+  "specialty": "Gastroenterology",
+  "condition": "Lower GI bleed",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset of multiple episodes of bright red to maroon-coloured blood mixed with stool over the past 6 hours, associated with lightheadedness.",
+  "history": "68-year-old man with known colonic diverticulosis (diagnosed on colonoscopy 3 years ago) and hypertension on amlodipine presents with acute onset of painless haematochezia — five large-volume bowel movements of maroon stool with clots since this morning, no preceding severe abdominal pain. He denies haematemesis, melena, or NSAID/aspirin use in the preceding week, though he takes low-dose aspirin for cardiovascular prophylaxis. No fevers, no recent travel, no alcohol excess, no known liver disease. He felt dizzy on standing and had one presyncopal episode at home prompting his wife to bring him to the emergency department. No prior variceal bleeding or cirrhosis. Bowel habit was normal until today.",
+  "examination": "Pale conjunctivae. Mildly anxious, oriented. Abdomen soft, non-tender, no distension, no peritonism, no palpable mass. Digital rectal exam reveals maroon-coloured stool with clots, no external haemorrhoids seen, no anal fissure. No stigmata of chronic liver disease (no spider naevi, no palmar erythema, no caput medusae). Cardiovascular exam: tachycardic, no murmurs. Postural drop in blood pressure noted on standing.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/62",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 37
+  },
+  "labs": {
+    "hemoglobin": 8.9,
+    "hematocrit": 27,
+    "platelets": 245,
+    "inr": 1,
+    "creatinine": 1.1,
+    "urea": 7.2,
+    "bilirubin": 0.6,
+    "albumin": 4,
+    "lactate": 1.8,
+    "bloodGroupAndCrossmatch": "O positive, 2 units crossmatched"
+  },
+  "imaging": [
+    "CT angiography abdomen/pelvis: active contrast extravasation into a sigmoid colon diverticulum, no evidence of bowel wall thickening or perforation",
+    "Colonoscopy (after bowel prep, once stabilized): extensive sigmoid diverticulosis with a single diverticulum showing a visible vessel and adherent clot, no active spurting at time of scope; no colitis, no mass lesion"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Diverticular haemorrhage",
+    "Ischemic colitis",
+    "Haemorrhoidal bleeding",
+    "Colonic angiodysplasia (vascular ectasia)",
+    "Colorectal malignancy/polyp bleeding",
+    "Upper GI bleed with rapid transit (brisk haematochezia)",
+    "Ischemic or infectious colitis"
+  ],
+  "finalDiagnosis": "Acute lower gastrointestinal bleeding due to colonic diverticular haemorrhage",
+  "citations": [
+    "Harrison 22e — Gastrointestinal Bleeding",
+    "ACG Clinical Guideline: Management of Patients with Acute Lower Gastrointestinal Bleeding 2016"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid resuming aspirin/antiplatelet or anticoagulant therapy until bleeding source controlled and haemodynamically stable",
+    "Avoid NSAIDs indefinitely",
+    "Bowel preparation for colonoscopy should be given once patient is hemodynamically resuscitated"
+  ],
+  "edgeCases": [
+    "Up to 15% of presumed lower GI bleeds are actually brisk upper GI bleeds presenting as haematochezia — upper endoscopy should be considered if NG aspirate is bloody or if hemodynamic instability is disproportionate, or if colonoscopy is non-diagnostic",
+    "Diverticular bleeding is often self-limited (stops spontaneously in ~75-80% of cases) but has a rebleed rate of up to 25-40%",
+    "This specific diagnosis (diverticular lower GI bleed) is not present as a discrete id in the current diagnosable-disease list, so acceptableIds/differentialIds are set to [] per protocol rather than force-mapping to an unrelated id (e.g., variceal_bleed, which is a distinct upper GI/hepatic entity)"
+  ],
+  "expectedMaiK": "MaiK should flag this as an acute lower GI bleed (painless haematochezia in an elderly patient with known diverticulosis) requiring hemodynamic resuscitation, risk stratification, and urgent CT angiography or colonoscopy after bowel prep; it should recommend holding antiplatelet/anticoagulant agents and cross-matching blood, while noting diverticular bleeding as the leading cause of painless haematochezia in this age group.",
+  "expectedNextQuestions": [
+    "Any prior episodes of diverticular bleeding or known diverticulosis?",
+    "Use of aspirin, NSAIDs, anticoagulants, or antiplatelet agents?",
+    "Any history of chronic liver disease or known varices?",
+    "Any weight loss, change in bowel habit, or family history of colorectal cancer suggesting malignancy?",
+    "Nasogastric aspirate or upper endoscopy needed to exclude brisk upper GI source?",
+    "Hemodynamic response to fluid resuscitation and ongoing transfusion requirement?"
+  ],
+  "expectedInvestigations": [
+    "Complete blood count and haemoglobin trend",
+    "Coagulation profile (INR/PT/aPTT)",
+    "Renal function and electrolytes",
+    "Blood group and crossmatch",
+    "CT angiography of abdomen/pelvis",
+    "Colonoscopy after bowel preparation once stabilized",
+    "Consider upper endoscopy if source unclear or instability disproportionate"
+  ],
+  "expectedConfidence": {
+    "min": 55
+  },
+  "findings": {
+    "gibPresentation": true,
+    "hematemesis": true,
+    "syncope": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "abdominalPain": true,
+    "ageOver50": true,
+    "anticoagulated": true
+  },
+  "expected": {
+    "diagnosis": "Acute lower gastrointestinal bleeding due to colonic diverticular haemorrhage",
+    "acceptableIds": [],
+    "differentialIds": [],
+    "investigations": [
+      "CBC and haemoglobin trend",
+      "Coagulation profile",
+      "Renal function and electrolytes",
+      "Blood group and crossmatch",
+      "CT angiography abdomen/pelvis",
+      "Colonoscopy after bowel preparation"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "engine should not force-fit this case into an unrelated infective or hepatic diagnosis id (e.g., variceal_bleed) given acceptableIds=[]",
+    "differential list surfaced by engine should reasonably include GI bleed-related concepts if any exist in vocabulary/disease set",
+    "confidence >= expectedConfidence.min only if engine has a genuine LGIB-adjacent id; otherwise engine should gracefully abstain rather than mis-map",
+    "stewardship recommendation should be null/none since this is a non-infective bleeding presentation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "id": "gc_099",
+  "specialty": "Endocrinology",
+  "condition": "Hyperthyroidism (Graves)",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Palpitations, heat intolerance, and unintentional weight loss for 6 weeks, with a noticeable neck swelling.",
+  "history": "A 29-year-old woman presents with a 6-week history of palpitations, tremor, heat intolerance, excessive sweating, and increased frequency of loose stools. She reports unintentional weight loss of about 5 kg despite an increased appetite. She has also noticed anxiety, irritability, difficulty sleeping, and a gradually enlarging, painless swelling in the front of her neck over the past 2 months. She describes intermittent double vision and a gritty sensation in both eyes, with family noting her eyes 'look more prominent.' No fever, no neck pain, no recent viral illness, no new medications or contrast exposure, no history of amiodarone use. No prior thyroid disease. Family history is notable for an aunt with 'thyroid problems.' She takes no regular medications and is not pregnant (urine hCG negative). No history of biotin supplement use.",
+  "examination": "Anxious, fidgety woman with fine resting tremor of outstretched hands and warm, moist skin. Diffusely enlarged, non-tender, smooth goitre with an audible bruit on auscultation over the thyroid. Bilateral mild proptosis with lid retraction and lid lag; mild conjunctival injection, no corneal involvement. No thyroid nodularity or cervical lymphadenopathy. Cardiovascular exam: irregularly irregular pulse consistent with atrial fibrillation, no murmurs, no signs of heart failure. No pretibial myxoedema. Proximal muscle strength mildly reduced (4/5) at hips. No focal neurological deficit.",
+  "vitals": {
+    "hr": 118,
+    "bp": "138/76",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 37.4
+  },
+  "labs": {
+    "TSH_mIU_L": 0.01,
+    "freeT4_ng_dL": 3.8,
+    "freeT3_pg_mL": 9.2,
+    "TRAb_IU_L": 12.5,
+    "TSI_percent": 320,
+    "antiTPO": "elevated",
+    "hemoglobin_g_dL": 12.8,
+    "wbc_per_uL": 7200,
+    "platelets_x10_3_uL": 245,
+    "ALT_U_L": 58,
+    "AST_U_L": 49,
+    "creatinine_mg_dL": 0.7,
+    "calcium_mg_dL": 9.6,
+    "urinehCG": "negative"
+  },
+  "imaging": [
+    "Thyroid ultrasound: diffusely enlarged, hypoechoic, hypervascular gland ('thyroid inferno' pattern on Doppler)",
+    "Radioactive iodine uptake scan (if performed): diffusely increased, homogeneous uptake",
+    "Orbital exam/MRI (if indicated for ophthalmopathy assessment): extraocular muscle enlargement without optic nerve compression"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Graves disease",
+    "Toxic multinodular goitre",
+    "Toxic adenoma",
+    "Subacute (de Quervain) thyroiditis",
+    "Silent (painless) lymphocytic thyroiditis",
+    "Factitious thyrotoxicosis",
+    "TSH-secreting pituitary adenoma",
+    "Anxiety disorder / panic disorder"
+  ],
+  "finalDiagnosis": "Graves disease (autoimmune hyperthyroidism with thyroid eye disease and new atrial fibrillation)",
+  "citations": [
+    "Harrison 22e — Disorders of the Thyroid Gland",
+    "Harrison 22e — Graves' Disease and Thyrotoxicosis",
+    "ATA/AACE Hyperthyroidism and Other Causes of Thyrotoxicosis Guidelines 2016"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid iodinated contrast/amiodarone unless essential given active thyrotoxicosis (risk of Jod-Basedow effect)",
+    "Radioactive iodine therapy contraindicated in pregnancy and breastfeeding, and relatively contraindicated with moderate-to-severe active Graves ophthalmopathy without steroid cover",
+    "Methimazole is teratogenic in first trimester (embryopathy); propylthiouracil preferred if antithyroid drug required in first trimester",
+    "Beta-blockers should be used cautiously in reactive airway disease; avoid non-selective beta-blockers in significant bronchospasm"
+  ],
+  "edgeCases": [
+    "If atrial fibrillation with rapid ventricular response, hemodynamic instability, hyperpyrexia, or altered sensorium supervene, reclassify as impending/overt thyroid storm (Burch-Wartofsky score) — a distinct emergency entity mapped separately to 'thyroid_storm' in the disease list",
+    "Graves ophthalmopathy severity should be graded (e.g., EUGOGO criteria) as it affects choice/timing of definitive therapy (antithyroid drugs vs RAI vs surgery)",
+    "New atrial fibrillation in a young patient should prompt thyroid function testing as thyrotoxicosis is a classic reversible cause"
+  ],
+  "expectedMaiK": "Suppressed TSH with markedly elevated free T4/T3, diffuse goitre with bruit, positive TRAb/TSI, and orbitopathy are diagnostic of Graves disease; flag new atrial fibrillation as a thyrotoxicosis-related complication requiring rate control and anticoagulation risk assessment, and monitor for progression to thyroid storm.",
+  "expectedNextQuestions": [
+    "Any fever, marked agitation, delirium, or vomiting to suggest evolving thyroid storm (Burch-Wartofsky criteria)?",
+    "Degree and duration of visual symptoms — any diplopia progression or visual acuity loss suggesting compressive optic neuropathy?",
+    "Pregnancy status and reproductive plans (affects choice of antithyroid drug and timing of definitive therapy)?",
+    "Cardiovascular risk stratification for atrial fibrillation — CHA2DS2-VASc score and need for anticoagulation?",
+    "Smoking status (worsens Graves ophthalmopathy)?"
+  ],
+  "expectedInvestigations": [
+    "TSH, free T4, free T3",
+    "TSH-receptor antibody (TRAb) or thyroid-stimulating immunoglobulin (TSI)",
+    "Thyroid ultrasound with Doppler",
+    "Radioactive iodine uptake scan (if diagnosis unclear or planning RAI therapy)",
+    "ECG (assess for atrial fibrillation, ischemic changes)",
+    "Liver function tests (baseline before antithyroid drugs)",
+    "Complete blood count with differential (baseline before antithyroid drugs, risk of agranulocytosis)",
+    "Ophthalmologic assessment for thyroid eye disease"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "weightLoss": true,
+    "tachycardia": true,
+    "palpitations": true,
+    "heartRate": true,
+    "sex": true,
+    "age": true,
+    "tempC": true
+  },
+  "expected": {
+    "diagnosis": "Graves disease (autoimmune hyperthyroidism with thyroid eye disease and new atrial fibrillation)",
+    "acceptableIds": [
+      "hyperthyroidism"
+    ],
+    "differentialIds": [
+      "hyperthyroidism",
+      "thyroid_storm",
+      "atrial_fib"
+    ],
+    "investigations": [
+      "TSH, free T4, free T3",
+      "TSH-receptor antibody (TRAb)/TSI",
+      "Thyroid ultrasound with Doppler",
+      "ECG",
+      "Liver function tests and complete blood count (baseline before antithyroid drugs)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hyperthyroidism)",
+    "confidence >= expectedConfidence.min",
+    "differential includes thyroid_storm as a flagged complication/mimic",
+    "does not misclassify as sepsis/infective etiology given absence of infective findings",
+    "stewardship.antibiotics is empty (non-infective diagnosis)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "id": "gc_052",
+  "specialty": "Critical Care",
+  "condition": "ARDS",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness and worsening hypoxaemia three days after admission for community-acquired pneumonia, now requiring escalation of respiratory support in the ICU.",
+  "history": "54-year-old man admitted 3 days ago with community-acquired pneumonia (fever, productive cough, right lower zone consolidation on chest X-ray), started on empirical antibiotics and supplemental oxygen. Over the last 24-36 hours he has developed rapidly worsening dyspnea and oxygen requirement despite antimicrobial therapy, now requiring high-flow oxygen and subsequently intubation for refractory hypoxaemia. No prior cardiac history, no known heart failure, no recent large-volume fluid resuscitation beyond standard maintenance. No history of aspiration, pancreatitis, trauma, or transfusion. No known TB contact. Non-smoker, no occupational dust exposure. No pre-existing interstitial lung disease.",
+  "examination": "Intubated and mechanically ventilated, sedated. Bilateral diffuse fine crepitations extending beyond the original area of consolidation, symmetrical air entry with widespread crackles, no wheeze. No raised JVP, no peripheral oedema, no gallop rhythm, normal heart sounds with no murmur. Abdomen soft, non-distended. No rash, no calf tenderness. Peripheries warm, capillary refill normal, currently on low-dose vasopressor for post-intubation hypotension.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/58",
+    "rr": 32,
+    "spo2": 86,
+    "temp": 38.6
+  },
+  "labs": {
+    "pao2fio2_ratio": 105,
+    "wbc_10e9_L": 15.2,
+    "crp_mg_L": 210,
+    "procalcitonin_ng_mL": 3.8,
+    "lactate_mmol_L": 2.1,
+    "creatinine_mg_dL": 1.3,
+    "bnp_pg_mL": 85,
+    "platelets_10e3_uL": 165,
+    "d_dimer_ng_mL_FEU": 890,
+    "arterial_pH": 7.29,
+    "paco2_mmHg": 48
+  },
+  "imaging": [
+    "Chest X-ray: new bilateral diffuse airspace opacities/infiltrates, not fully explained by the original unilateral consolidation, no cardiomegaly, no pleural effusion",
+    "Bedside echocardiogram: normal left ventricular systolic function, no significant valvular disease, no evidence of elevated left atrial pressure to explain pulmonary oedema",
+    "CT chest (limited, post-stabilization): bilateral ground-glass and consolidative opacities in a non-lobar, gravity-dependent distribution consistent with ARDS pattern rather than cardiogenic oedema"
+  ],
+  "microbiology": [
+    "Blood cultures x2 sent — pending",
+    "Sputum/endotracheal aspirate Gram stain and culture sent — pending",
+    "Urinary pneumococcal and Legionella antigen sent — pending",
+    "Respiratory viral PCR panel (including influenza) sent — pending",
+    "Initial sputum culture from admission grew no significant pathogen"
+  ],
+  "differentialDiagnoses": [
+    "Acute respiratory distress syndrome secondary to pneumonia (pulmonary ARDS)",
+    "Cardiogenic pulmonary oedema / acute decompensated heart failure",
+    "Progressive/worsening bacterial pneumonia without ARDS",
+    "Pulmonary embolism with hypoxaemia",
+    "Transfusion-related or fluid-overload-related acute lung injury",
+    "Diffuse alveolar haemorrhage"
+  ],
+  "finalDiagnosis": "Moderate-to-severe ARDS (Berlin criteria) secondary to community-acquired pneumonia, with refractory hypoxaemia",
+  "citations": [
+    "Harrison 22e — Acute Respiratory Distress Syndrome",
+    "ARDS Definition Task Force (Berlin Definition) 2012",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Continue and, if not already broad enough, escalate empirical antimicrobial therapy for the underlying triggering pneumonia per severe CAP guidance (cover typical and atypical pathogens, consider MRSA/Pseudomonas coverage if risk factors present) while sending cultures and respiratory viral studies; ARDS itself has no antimicrobial treatment and management is supportive (lung-protective ventilation, conservative fluid strategy, prone positioning, consideration of neuromuscular blockade for severe cases), with de-escalation of antibiotics once a specific pathogen or non-infectious trigger is confirmed or excluded.",
+  "contraindications": [
+    "Avoid high tidal volume ventilation (>6 mL/kg predicted body weight) — associated with increased mortality in ARDS",
+    "Avoid liberal fluid strategy once shock is resolved — conservative fluid management improves ventilator-free days",
+    "Avoid delaying prone positioning in PaO2:FiO2 <150 refractory to initial ventilator optimization",
+    "Use caution with sedation/paralytic choice in hemodynamically unstable patients on vasopressors"
+  ],
+  "edgeCases": [
+    "ARDS is a syndromic diagnosis (Berlin criteria: acute onset within 1 week, bilateral infiltrates not fully explained by cardiac failure/fluid overload, and PaO2:FiO2 impairment) rather than a single disease entity, and is NOT present as a discrete id in the provided diagnosable-disease list; acceptableIds is therefore set to [] per instructions, even though this is the correct clinical diagnosis",
+    "Distinguishing ARDS from cardiogenic pulmonary oedema is essential — echocardiography showing normal LV function and a low/normal BNP argue against a primarily cardiac cause here, supporting ARDS over heart_failure",
+    "The underlying trigger (pneumonia) remains a relevant differential/co-diagnosis and is represented in the disease list (CAP/SEVERE_CAP) as the precipitant rather than a competing final diagnosis",
+    "Mild permissive hypercapnia (paCO2 48, pH 7.29) is an expected and accepted consequence of lung-protective ventilation and should not be over-corrected with aggressive hyperventilation",
+    "Elevated D-dimer is nonspecific in critical illness/pneumonia and does not by itself confirm pulmonary embolism as an alternative explanation for hypoxaemia"
+  ],
+  "expectedMaiK": "MaiK should recognize this as ARDS (Berlin criteria: acute bilateral infiltrates, PaO2:FiO2 105 in a patient with a clear risk factor of pneumonia, no evidence of cardiogenic cause) and prioritize lung-protective ventilation, conservative fluid strategy, and prone positioning, while continuing to treat the underlying pneumonia empirically and pursuing microbiological confirmation.",
+  "expectedNextQuestions": [
+    "What tidal volume and plateau pressure is the patient currently being ventilated with, and has lung-protective ventilation (≤6 mL/kg PBW) been instituted?",
+    "Has prone positioning been considered given PaO2:FiO2 <150?",
+    "Is there any evidence of volume overload or a cardiac contribution that would warrant diuresis versus a conservative fluid strategy?",
+    "Have respiratory viral PCR, urinary antigens, and blood/sputum cultures identified a causative organism to guide antimicrobial de-escalation?",
+    "Is there a need for neuromuscular blockade or additional rescue therapy (inhaled pulmonary vasodilator, ECMO referral) if hypoxaemia remains refractory?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas with PaO2:FiO2 ratio",
+    "Chest X-ray / CT chest",
+    "Bedside echocardiogram to exclude cardiogenic cause",
+    "BNP or NT-proBNP",
+    "Blood cultures x2",
+    "Sputum/endotracheal aspirate Gram stain and culture",
+    "Urinary pneumococcal and Legionella antigen",
+    "Respiratory viral PCR panel",
+    "D-dimer / consideration of CT pulmonary angiogram if PE suspected",
+    "Full blood count, renal function, lactate"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "organDysfunction": true,
+    "vasopressorRequirement": true,
+    "mechanicalVentilation": true,
+    "worseningOxygenation": true,
+    "pao2fio2": true,
+    "consolidation": true,
+    "multilobar": true,
+    "crepitations": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "severeCriteria": true,
+    "lactateElevated": true,
+    "hospitalDay48": true
+  },
+  "expected": {
+    "diagnosis": "Moderate-to-severe ARDS (Berlin criteria) secondary to community-acquired pneumonia, with refractory hypoxaemia",
+    "acceptableIds": [],
+    "differentialIds": [
+      "SEVERE_CAP",
+      "CAP",
+      "SEPSIS",
+      "pe",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Arterial blood gas with PaO2:FiO2 ratio",
+      "Chest X-ray / CT chest",
+      "Bedside echocardiogram",
+      "BNP",
+      "Blood cultures",
+      "Sputum/endotracheal aspirate culture",
+      "Urinary pneumococcal and Legionella antigen",
+      "Respiratory viral PCR"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin",
+        "piperacillin-tazobactam",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "ARDS is not a top-1-scorable id in this engine version (acceptableIds=[]); assertion checks that engine does not force an incorrect specific infectious diagnosis with high confidence when Berlin-criteria ARDS pattern is present",
+    "differential includes SEVERE_CAP or CAP as the identified precipitant",
+    "confidence >= expectedConfidence.min (65) for the top clinical picture (severe hypoxaemic respiratory failure requiring escalation)",
+    "engine flags worsening oxygenation, bilateral/multilobar infiltrates, and mechanical ventilation as key drivers",
+    "stewardship tier == guideline and antibiotics list is empirical severe-CAP coverage with no doses"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

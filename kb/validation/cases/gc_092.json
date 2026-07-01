@@ -1,0 +1,122 @@
+{
+  "id": "gc_092",
+  "specialty": "Neurology",
+  "condition": "Subarachnoid haemorrhage",
+  "age": 48,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset, severe 'worst headache of my life' that reached maximal intensity within seconds, followed by one episode of vomiting and brief loss of consciousness.",
+  "history": "A 48-year-old woman was cooking when she developed an explosive, thunderclap headache that peaked in intensity within less than a minute, described as 10/10 and unlike any headache she has had before. It was accompanied by neck stiffness, photophobia, and a single episode of vomiting. Bystanders report she briefly lost consciousness for under a minute and then appeared confused for several minutes before returning to baseline mentation. No fever, no preceding head trauma, no recent infection. She has a background of hypertension, treated inconsistently, and is a current smoker (15 pack-years). No history of anticoagulant use. No family history of known aneurysmal disease reported, though she recalls a maternal aunt who died suddenly of a 'brain bleed' at a young age.",
+  "examination": "Alert but drowsy and photophobic, grimacing in a darkened room. GCS 14/15 (E4V4M6). Neck stiffness present with positive Kernig's sign. No focal motor deficit. Pupils equal and reactive; mild right partial ptosis with the right pupil slightly larger and sluggish, raising concern for a partial third-nerve palsy. Fundoscopy shows subhyaloid (pre-retinal) haemorrhages bilaterally. No papilledema noted acutely. Cardiovascular and respiratory exam unremarkable aside from elevated blood pressure.",
+  "vitals": {
+    "hr": 96,
+    "bp": "168/98",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 37
+  },
+  "labs": {
+    "sodium_mmolL": 138,
+    "glucose_mgdL": 128,
+    "troponin": "mildly elevated (neurogenic stunning pattern)",
+    "coagulation": "PT/INR and aPTT normal",
+    "plateletsX10e3": 240,
+    "hemoglobin_gdL": 12.8
+  },
+  "imaging": [
+    "Non-contrast CT head (within 6 hours of onset): diffuse subarachnoid blood in the basal cisterns, sylvian fissures, and interhemispheric fissure, modified Fisher grade 3",
+    "CT angiography head/neck: 6 mm saccular aneurysm at the right posterior communicating artery origin, consistent with the partial third-nerve palsy",
+    "ECG: diffuse T-wave inversions / QTc prolongation consistent with neurogenic stunned myocardium, no acute ischemic pattern"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Aneurysmal subarachnoid haemorrhage",
+    "Reversible cerebral vasoconstriction syndrome",
+    "Migraine with aura",
+    "Bacterial or viral meningitis",
+    "Cervical artery dissection",
+    "Pituitary apoplexy",
+    "Intracerebral haemorrhage"
+  ],
+  "finalDiagnosis": "Aneurysmal subarachnoid haemorrhage (right posterior communicating artery aneurysm) presenting as thunderclap headache",
+  "citations": [
+    "Harrison 22e — Cerebrovascular Diseases: Subarachnoid Hemorrhage",
+    "AHA/ASA Guideline for the Management of Aneurysmal Subarachnoid Hemorrhage 2023"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid lumbar puncture before neuroimaging in a patient with thunderclap headache and suspected raised intracranial pressure or a mass lesion",
+    "Avoid anticoagulants/antiplatelets until the aneurysm is secured",
+    "Avoid aggressive antihypertensive lowering that drops cerebral perfusion pressure before the aneurysm is secured; blood pressure should be controlled to a target (e.g. SBP <160 mmHg) rather than normalized abruptly",
+    "Nimodipine should not be given intravenously (oral/enteral only) due to hypotension risk"
+  ],
+  "edgeCases": [
+    "If initial CT head is done beyond 6 hours from headache onset and is negative, lumbar puncture with xanthochromia assessment is required to exclude SAH before the diagnosis can be excluded",
+    "A sentinel headache (warning leak) may precede the major bleed by days to weeks and can be misdiagnosed as migraine or tension headache",
+    "Third-nerve palsy with a dilated pupil in the context of thunderclap headache should be treated as a posterior communicating artery aneurysm until proven otherwise",
+    "Perimesencephalic (non-aneurysmal) SAH has a similar presentation but a benign course and negative angiogram; not distinguishable from aneurysmal SAH on symptoms alone, requires imaging"
+  ],
+  "expectedMaiK": "Thunderclap headache with meningism, brief LOC, and a partial CN III palsy is aneurysmal SAH until proven otherwise; recommend emergent non-contrast CT head, and if negative beyond 6 hours, LP for xanthochromia, followed by CT/MR angiography to localize the aneurysm and urgent neurosurgical/neurointerventional referral for securing the aneurysm plus nimodipine for vasospasm prophylaxis.",
+  "expectedNextQuestions": [
+    "Exact time of headache onset and time since symptom onset (affects CT sensitivity and LP timing)",
+    "Any preceding sentinel headache in the prior days to weeks?",
+    "Any anticoagulant/antiplatelet use or coagulopathy?",
+    "Family history of aneurysm, polycystic kidney disease, or connective tissue disorder?",
+    "Any recent trauma to suggest traumatic rather than spontaneous SAH?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head",
+    "CT angiography head/neck (or digital subtraction angiography)",
+    "Lumbar puncture with xanthochromia if CT negative and clinical suspicion remains",
+    "ECG and troponin (neurogenic stunned myocardium)",
+    "Coagulation profile and platelet count",
+    "Electrolytes (risk of SIADH/cerebral salt wasting)"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "thunderclapHeadache": true,
+    "headacheSevere": true,
+    "headache": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "nauseaVomiting": true,
+    "syncope": true,
+    "focalNeuroDeficit": true,
+    "behavioralChange": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "Aneurysmal subarachnoid haemorrhage (right posterior communicating artery aneurysm) presenting as thunderclap headache",
+    "acceptableIds": [
+      "sah"
+    ],
+    "differentialIds": [
+      "ich",
+      "migraine",
+      "MENINGITIS",
+      "tension_ha"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiography head/neck",
+      "Lumbar puncture with xanthochromia if CT negative",
+      "ECG and troponin"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (sah)",
+    "confidence >= 80",
+    "differential includes intracerebral haemorrhage and/or meningitis as reasonable mimics",
+    "recommended investigations include non-contrast CT head as first-line study",
+    "system flags avoidance of lumbar puncture before neuroimaging and avoidance of anticoagulation pending aneurysm securing"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

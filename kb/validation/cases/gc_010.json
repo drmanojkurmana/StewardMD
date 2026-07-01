@@ -1,0 +1,125 @@
+{
+  "id": "gc_010",
+  "specialty": "Genitourinary",
+  "condition": "Acute pyelonephritis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Fever with chills and right flank pain for 2 days",
+  "history": "34-year-old woman with no significant past medical history presents with a 2-day history of high-grade fever with rigors, right-sided flank pain, and dysuria with urinary frequency for the preceding day. No nausea or vomiting limiting oral intake. No prior urinary tract instrumentation, no known urologic abnormality, not diabetic, not pregnant. No antibiotics or hospitalization in the last 90 days. No known drug allergies.",
+  "examination": "Alert, oriented, appears unwell and flushed but not toxic. No hypotension. Abdomen soft, mildly tender in the right flank/loin region without peritonism. Positive right costovertebral angle tenderness. No suprapubic tenderness. No lower limb edema. Cardiovascular and respiratory exam unremarkable.",
+  "vitals": {
+    "hr": 108,
+    "bp": "112/72",
+    "rr": 20,
+    "spo2": 98,
+    "temp": 39.2
+  },
+  "labs": {
+    "wbc": "15.8 x10^9/L (neutrophil predominant)",
+    "creatinine": 0.9,
+    "urea": 5.2,
+    "crp": "112 mg/L",
+    "lactate": 1.4,
+    "urinalysis": "Positive leukocyte esterase and nitrites; pyuria (>20 WBC/hpf); few RBCs; no significant proteinuria",
+    "urineGramStain": "Gram-negative bacilli"
+  },
+  "imaging": [
+    "Renal ultrasound: no hydronephrosis, no perinephric collection, kidneys normal in size and echotexture"
+  ],
+  "microbiology": [
+    "Urine culture: Escherichia coli >10^5 CFU/mL, pan-sensitive to first-line oral and parenteral agents including fluoroquinolones and third-generation cephalosporins",
+    "Blood cultures: no growth at 48 hours"
+  ],
+  "differentialDiagnoses": [
+    "Acute pyelonephritis",
+    "Complicated urinary tract infection",
+    "Renal/ureteric colic with secondary infection",
+    "Acute cystitis with referred flank pain",
+    "Cholecystitis (right upper quadrant differential)"
+  ],
+  "finalDiagnosis": "Acute uncomplicated pyelonephritis due to Escherichia coli",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA Uncomplicated UTI/Pyelonephritis Guideline 2011 (Gupta et al.)"
+  ],
+  "stewardship": "Empirical therapy for community-acquired uncomplicated pyelonephritis in a hemodynamically stable patient: oral fluoroquinolone (e.g., ciprofloxacin) if local E. coli resistance <10% or a single dose of a long-acting parenteral agent (e.g., ceftriaxone) followed by oral step-down once susceptibilities available; de-escalate to a narrow-spectrum oral agent (e.g., trimethoprim-sulfamethoxazole if susceptible) guided by urine culture. Avoid nitrofurantoin (does not achieve adequate renal parenchymal/tissue levels). Total duration typically 5-7 days depending on agent chosen.",
+  "contraindications": [
+    "Avoid fluoroquinolones as first-line if local resistance prevalence exceeds ~10% or if not tolerated (e.g., QT prolongation, tendon disease risk, pregnancy)",
+    "Avoid nitrofurantoin for pyelonephritis (inadequate tissue/parenchymal concentration)",
+    "Avoid empirical narrow-spectrum agents (e.g., trimethoprim-sulfamethoxazole) as first-line without known susceptibility given rising resistance"
+  ],
+  "edgeCases": [
+    "If patient were pregnant, admission and parenteral therapy would generally be favored regardless of severity",
+    "Presence of hydronephrosis, stones, or perinephric abscess on imaging would reclassify this as complicated pyelonephritis requiring urologic drainage evaluation",
+    "Male sex, diabetes, immunosuppression, indwelling catheter, or urinary tract structural abnormality would shift this toward complicated UTI/pyelonephritis pathway with broader empirical coverage and longer duration"
+  ],
+  "expectedMaiK": "MaiK should recognize classic triad of fever, flank pain, and CVA tenderness with pyuria/nitrites as pyelonephritis, flag it as uncomplicated given no risk factors, and recommend empirical fluoroquinolone or ceftriaxone with de-escalation once E. coli sensitivities return, while flagging need for outpatient vs inpatient triage based on hemodynamic stability and oral tolerance.",
+  "expectedNextQuestions": [
+    "Is the patient able to tolerate oral intake and fluids reliably (outpatient vs admission decision)?",
+    "Any risk factors for complicated UTI: pregnancy, diabetes, male sex, urologic abnormality, catheter, recent instrumentation?",
+    "Any signs of sepsis or hemodynamic instability requiring escalation of care?",
+    "Local antibiogram E. coli fluoroquinolone resistance rate to guide empirical choice?",
+    "Any history of recurrent UTIs or prior resistant organisms (ESBL)?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis with microscopy",
+    "Urine culture and sensitivity",
+    "Blood cultures",
+    "Complete blood count",
+    "Serum creatinine/renal function",
+    "CRP",
+    "Renal ultrasound (to exclude obstruction/abscess)"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "flankPain": true,
+    "feverGU": true,
+    "costovertebralTenderness": true,
+    "dysuria": true,
+    "urinaryFrequency": true
+  },
+  "expected": {
+    "diagnosis": "Acute uncomplicated pyelonephritis due to Escherichia coli",
+    "acceptableIds": [
+      "PYELONEPHRITIS"
+    ],
+    "differentialIds": [
+      "CYSTITIS",
+      "COMPLICATED_UTI",
+      "CA_UTI"
+    ],
+    "investigations": [
+      "Urinalysis with microscopy",
+      "Urine culture and sensitivity",
+      "Blood cultures",
+      "Complete blood count",
+      "Serum creatinine/renal function",
+      "CRP",
+      "Renal ultrasound"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "ciprofloxacin",
+        "ceftriaxone",
+        "trimethoprim-sulfamethoxazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (PYELONEPHRITIS)",
+    "confidence >= expectedConfidence.min",
+    "differential includes CYSTITIS and/or COMPLICATED_UTI",
+    "stewardship recommendation avoids nitrofurantoin",
+    "expectedInvestigations subset present in output investigations"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

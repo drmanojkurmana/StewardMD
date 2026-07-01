@@ -1,0 +1,157 @@
+{
+  "id": "gc_071",
+  "specialty": "Tropical Medicine",
+  "condition": "Dengue",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "High-grade fever for 5 days, now settling, with new-onset severe abdominal pain, persistent vomiting and lethargy over the last 24 hours.",
+  "history": "Previously healthy 27-year-old woman presents with a 5-day history of high-grade continuous fever, severe frontal and retro-orbital headache, diffuse myalgia and arthralgia, and mild maculopapular rash over the trunk on day 3. Fever defervesced over the last 12-18 hours, but rather than feeling better she has developed persistent vomiting (4 episodes), severe generalized abdominal pain, and increasing lethargy. She reports no bleeding from gums, no black stools, no hematemesis. She lives in a locality with an ongoing dengue outbreak; no travel outside the city. No history of NSAID use apart from one dose of ibuprofen on day 2 for fever. No known comorbidities, not on anticoagulants, not pregnant (urine pregnancy test negative).",
+  "examination": "Lethargic but arousable, oriented to time/place/person. Afebrile at presentation (temp settling from fever). Cool peripheries with delayed capillary refill (~3 seconds). Mild diffuse abdominal tenderness, positive fluid thrill with shifting dullness suggesting ascites; liver edge palpable 2 cm below costal margin, mildly tender (no frank Murphy sign). No overt bleeding manifestations; a few scattered petechiae over both shins. Tourniquet test positive. Chest: reduced air entry and dullness at both lung bases consistent with pleural effusion. No rash of erythema migrans, no eschar, no lymphadenopathy.",
+  "vitals": {
+    "hr": 118,
+    "bp": "92/74",
+    "rr": 26,
+    "spo2": 96,
+    "temp": 37.1
+  },
+  "labs": {
+    "hematocritAdmission": "38%",
+    "hematocritBaseline": "31% (2 days prior)",
+    "hematocritRisePercent": 22,
+    "plateletCount_x10e3_uL": 42,
+    "wbc_x10e3_uL": 3.1,
+    "ns1Antigen": "positive (day 3 of illness)",
+    "igmDengue": "negative (too early)",
+    "igmDengueRepeat": "pending",
+    "ast_U_L": 145,
+    "alt_U_L": 110,
+    "albumin_g_dL": 2.9,
+    "creatinine_mg_dL": 0.9,
+    "inr": 1.2,
+    "aptt_sec": 38,
+    "lactate_mmol_L": 2.6,
+    "urinePregnancyTest": "negative"
+  },
+  "imaging": [
+    "Ultrasound abdomen: moderate ascites, gallbladder wall thickening (edema), hepatomegaly",
+    "Chest X-ray / USG chest: bilateral pleural effusions, right > left"
+  ],
+  "microbiology": [
+    "Dengue NS1 antigen: positive",
+    "Dengue IgM: negative at day 3 (early), repeat serology pending",
+    "Blood culture: pending, no growth at 48h (sent to exclude concurrent bacteremia)",
+    "Peripheral smear for malaria parasite: negative x2",
+    "Widal / typhoid serology: not indicated given classic dengue picture"
+  ],
+  "differentialDiagnoses": [
+    "Dengue with warning signs (plasma leak)",
+    "Severe malaria",
+    "Leptospirosis",
+    "Enteric fever with complications",
+    "Acute viral hepatitis",
+    "Scrub typhus",
+    "Acute gastroenteritis with dehydration"
+  ],
+  "finalDiagnosis": "Dengue with warning signs (plasma leakage — rising hematocrit, ascites, pleural effusion, thrombocytopenia) per WHO 2009 classification",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Dengue and Other Arboviral Diseases",
+    "WHO Dengue Guidelines for Diagnosis, Treatment, Prevention and Control 2009",
+    "WHO Comprehensive Guideline for Prevention and Control of Dengue and Dengue Haemorrhagic Fever (SEARO) 2011"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs (ibuprofen, aspirin) — risk of bleeding and Reye syndrome-like complications",
+    "Avoid intramuscular injections — bleeding risk with thrombocytopenia",
+    "Avoid unnecessary IV cannulation sites / minimize invasive procedures",
+    "Avoid aggressive crystalloid boluses beyond WHO-recommended graded fluid protocol — risk of fluid overload once leak phase resolves",
+    "Avoid empirical antibiotics unless secondary bacterial infection or septic shock is confirmed/suspected"
+  ],
+  "edgeCases": [
+    "Rising hematocrit with falling platelet count in the defervescence window (afebrile phase) is the classic warning sign of plasma leakage — critical phase, not recovery, despite fever settling",
+    "IgM may be falsely negative early in illness (day 3-5); NS1 antigen is more sensitive in the first 5 days and should not be dismissed if IgM is negative",
+    "Concurrent malaria/leptospirosis co-infection should be excluded in endemic-overlap regions before anchoring solely on dengue",
+    "If hypotension/narrowed pulse pressure develops (<20 mmHg) this progresses to dengue shock syndrome (severe dengue) requiring urgent fluid resuscitation",
+    "This diagnosis (dengue with warning signs) is not itself a distinct id in the engine's disease list — it maps to DENGUE; severe/shock dengue would still map to DENGUE unless a SEPTIC_SHOCK phenotype supervenes",
+    "Careful fluid balance charting essential — over-resuscitation during the leak phase can precipitate pulmonary edema once reabsorption phase begins (~48-72h later)"
+  ],
+  "expectedMaiK": "Flag this as dengue with warning signs (plasma leak) — rising hematocrit + thrombocytopenia + ascites/pleural effusion around defervescence is a critical-phase red flag; recommend close hemodynamic monitoring, graded IV fluids per WHO protocol, platelet/hematocrit trend monitoring, and avoidance of NSAIDs/IM injections; no antibiotics indicated unless bacterial superinfection suspected.",
+  "expectedNextQuestions": [
+    "What is the trend in hematocrit and platelet count over the last 24-48 hours?",
+    "Is there narrowing of pulse pressure or any evidence of shock (dengue shock syndrome)?",
+    "Any bleeding manifestations — gum bleeding, melena, hematemesis, menorrhagia?",
+    "Has she received any NSAIDs or aspirin during this illness?",
+    "Is she able to tolerate oral fluids, or does she need IV fluid resuscitation per WHO graded protocol?",
+    "Any co-existing conditions (pregnancy, diabetes, obesity, infancy/old age) that increase risk of severe dengue?"
+  ],
+  "expectedInvestigations": [
+    "Serial hematocrit and platelet counts (every 6-12h during critical phase)",
+    "Dengue NS1 antigen / IgM-IgG serology",
+    "Liver function tests",
+    "Coagulation profile (PT/INR, aPTT) if bleeding or severe disease",
+    "Ultrasound abdomen and chest for ascites/pleural effusion (plasma leak assessment)",
+    "Peripheral smear for malaria parasite to exclude co-infection",
+    "Renal function tests",
+    "Blood pressure and pulse pressure monitoring for shock"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "myalgiaArthralgia": true,
+    "retroorbitalPain": true,
+    "rash": true,
+    "maculopapularRash": true,
+    "thrombocytopenia": true,
+    "bleedingManifestation": true,
+    "petechialRash": true,
+    "abdominalPain": true,
+    "severeAbdominalPain": true,
+    "nauseaVomiting": true,
+    "ascites": true,
+    "hepatosplenomegaly": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "dehydration": true,
+    "travelEndemicArea": true
+  },
+  "expected": {
+    "diagnosis": "Dengue with warning signs (plasma leakage)",
+    "acceptableIds": [
+      "DENGUE"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER",
+      "VIRAL_HEPATITIS",
+      "SCRUB_TYPHUS"
+    ],
+    "investigations": [
+      "Serial hematocrit and platelet counts",
+      "Dengue NS1 antigen / IgM-IgG serology",
+      "Liver function tests",
+      "Coagulation profile",
+      "Ultrasound abdomen/chest for plasma leak (ascites, pleural effusion)",
+      "Peripheral smear for malaria",
+      "Renal function tests"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (DENGUE)",
+    "confidence >= expectedConfidence.min",
+    "differential includes MALARIA and/or LEPTOSPIROSIS and/or SCRUB_TYPHUS",
+    "no antibiotic/stewardship recommendation generated (stewardship tier = null)",
+    "output flags plasma-leak warning signs (rising hematocrit, thrombocytopenia, ascites/effusion) as high-priority",
+    "output explicitly contraindicates NSAIDs and IM injections"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

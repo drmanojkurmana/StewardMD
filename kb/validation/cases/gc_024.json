@@ -1,0 +1,130 @@
+{
+  "id": "gc_024",
+  "specialty": "Cardiology",
+  "condition": "Heart failure",
+  "age": 76,
+  "sex": "F",
+  "presentingComplaint": "Progressive exertional breathlessness and ankle swelling for 3 weeks",
+  "history": "A 76-year-old woman with long-standing, poorly controlled hypertension presents with a 3-week history of progressively worsening breathlessness on exertion (now breathless walking to the bathroom, previously able to walk several blocks), two-pillow orthopnea, and bilateral ankle swelling. She denies chest pain, palpitations, or syncope. No fevers, cough, or recent respiratory infection. No prior diagnosis of heart failure. She has hypertension for over 20 years, often with poor medication adherence, and type 2 diabetes mellitus. No history of myocardial infarction. She takes amlodipine intermittently. No history of significant alcohol use. No known valvular disease. Family reports she has gained about 3 kg over the past 2-3 weeks and has reduced her usual activity.",
+  "examination": "Elderly woman in mild respiratory distress at rest, comfortable when propped up at 45 degrees. Raised JVP to the angle of the jaw. Bilateral fine basal crackles on auscultation, no wheeze. Heart sounds: loud S2, prominent S4 gallop, no S3, no significant murmur. Apex not displaced. Bilateral pitting pedal edema to mid-shin. No hepatomegaly. Peripheral pulses intact, no radiofemoral delay.",
+  "vitals": {
+    "hr": 96,
+    "bp": "182/98",
+    "rr": 24,
+    "spo2": 93,
+    "temp": 36.8
+  },
+  "labs": {
+    "ntProBNP_pg_mL": 1450,
+    "creatinine_mg_dL": 1.3,
+    "sodium_mmol_L": 137,
+    "potassium_mmol_L": 4.3,
+    "hemoglobin_g_dL": 12.1,
+    "hba1c_percent": 7.8,
+    "troponin": "not elevated"
+  },
+  "imaging": [
+    "Chest X-ray: cardiomegaly, bilateral pulmonary venous congestion, small bilateral pleural effusions",
+    "Transthoracic echocardiogram: LVEF 58%, concentric left ventricular hypertrophy, left atrial enlargement, grade II (moderate) diastolic dysfunction with elevated E/e' ratio, no significant valvular disease, no regional wall motion abnormality",
+    "ECG: sinus rhythm, voltage criteria for LVH with strain pattern, no acute ischemic changes"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Heart failure with preserved ejection fraction (HFpEF)",
+    "Hypertensive heart disease with diastolic dysfunction",
+    "Acute coronary syndrome",
+    "Chronic kidney disease with volume overload",
+    "Valvular heart disease (aortic stenosis)",
+    "Pulmonary embolism",
+    "Anemia-related high-output state"
+  ],
+  "finalDiagnosis": "New-onset heart failure with preserved ejection fraction (HFpEF), likely hypertensive heart disease, in an elderly hypertensive woman",
+  "citations": [
+    "Harrison 22e — Heart Failure",
+    "AHA/ACC/HFSA Heart Failure Guideline 2022",
+    "ESC Heart Failure Guidelines 2021"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid non-dihydropyridine calcium channel blockers (verapamil/diltiagem) as primary agents given diastolic HF with hypertension unless rate control specifically needed",
+    "Caution with NSAIDs — worsen fluid retention and renal function",
+    "Avoid aggressive diuresis causing hypotension given elderly age and baseline renal impairment"
+  ],
+  "edgeCases": [
+    "LVEF is preserved (58%), so this is HFpEF rather than HFrEF — management differs (focus on comorbidity control, SGLT2 inhibitors, diuretics for congestion) rather than guideline-directed neurohormonal therapy used in HFrEF",
+    "Elevated NT-proBNP in an elderly patient with renal impairment can be difficult to interpret; age- and renal-adjusted thresholds should be used",
+    "Differentiate from hypertensive emergency with pulmonary edema — this patient does not have acute end-organ damage requiring emergency parenteral therapy, presentation is subacute over weeks",
+    "Uncontrolled hypertension and diabetes are the dominant contributors — a search for underlying valvular or ischemic disease is still warranted before labeling as pure HFpEF"
+  ],
+  "expectedMaiK": "MaiK should flag new-onset HFpEF driven by longstanding uncontrolled hypertension in an elderly patient, recommend BP control, diuresis for congestion, and consider SGLT2 inhibitor per 2022 AHA/ACC/HFSA and 2021 ESC guidance; note this is not an infective process so no antimicrobial stewardship applies.",
+  "expectedNextQuestions": [
+    "What is the patient's volume status and response to initial diuresis?",
+    "Is there evidence of underlying coronary artery disease or valvular disease requiring further workup?",
+    "Is blood pressure now controlled and on an appropriate antihypertensive regimen?",
+    "Renal function trend with diuretic therapy?",
+    "Any sleep apnea symptoms that could be contributing to hypertension and HFpEF?"
+  ],
+  "expectedInvestigations": [
+    "NT-proBNP or BNP",
+    "Transthoracic echocardiogram",
+    "ECG",
+    "Chest X-ray",
+    "Renal function and electrolytes",
+    "HbA1c / glucose",
+    "Consider coronary evaluation if risk factors warrant"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "legSwellingBilateral": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "age": true,
+    "sex": true,
+    "heartRate": true,
+    "sbp": true,
+    "dbp": true,
+    "respRate": true,
+    "spo2": true,
+    "knownHeartFailure": true
+  },
+  "expected": {
+    "diagnosis": "New-onset heart failure with preserved ejection fraction (HFpEF), likely hypertensive heart disease, in an elderly hypertensive woman",
+    "acceptableIds": [
+      "heart_failure"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "aortic_stenosis",
+      "ckd"
+    ],
+    "investigations": [
+      "NT-proBNP",
+      "Transthoracic echocardiogram",
+      "ECG",
+      "Chest X-ray",
+      "Renal function panel"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (heart_failure)",
+    "confidence >= 65",
+    "differential includes heart_failure and acs",
+    "stewardship recommendation is null / not antimicrobial since this is a non-infective cardiology case",
+    "engine surfaces raised JVP, bilateral crackles, orthopnea, and bilateral leg swelling as key discriminators"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

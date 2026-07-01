@@ -1,0 +1,138 @@
+{
+  "id": "gc_017",
+  "specialty": "Endocrinology",
+  "condition": "Diabetic ketoacidosis",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Nausea, vomiting, and generalized weakness for 2 days, with progressive breathlessness",
+  "history": "58-year-old woman with type 2 diabetes mellitus on empagliflozin, metformin, and a basal insulin analogue presents with a 2-day history of nausea, repeated vomiting, malaise, and poor oral intake. She reports she reduced her food intake substantially over the preceding week because of a viral upper respiratory illness but continued taking her empagliflozin as usual, and also skipped several doses of her basal insulin because she was 'not eating much.' She denies polyuria or polydipsia beyond her baseline, and specifically denies severe hyperglycemic symptoms. No fever, dysuria, or abdominal pain other than mild diffuse discomfort. No recent surgery. She underwent a minor elective procedure with a 24-hour perioperative fast 4 days ago, during which the SGLT2 inhibitor was not withheld.",
+  "examination": "Alert but fatigued and mildly drowsy woman in mild respiratory distress with deep, sighing (Kussmaul) breathing. Dry mucous membranes, reduced skin turgor. No focal neurological deficit. Abdomen soft, mildly tender diffusely without guarding. No signs of infection. Chest clear. No fruity/acetone breath odor noted by examiner despite significant ketosis.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/62",
+    "rr": 28,
+    "spo2": 98,
+    "temp": 36.8
+  },
+  "labs": {
+    "glucosemgdl": 178,
+    "venousPH": 7.18,
+    "bicarbonate_mmolL": 9,
+    "anionGap": 24,
+    "betaHydroxybutyrate_mmolL": 5.8,
+    "urineKetones": "large",
+    "sodium_mmolL": 133,
+    "correctedSodium_mmolL": 135,
+    "potassium_mmolL": 5.1,
+    "chloride_mmolL": 98,
+    "creatinine_mgdl": 1.6,
+    "urea_mgdl": 42,
+    "lactate_mmolL": 2.1,
+    "hba1c_percent": 8.9,
+    "wbc_perul": 13200,
+    "hematocrit_percent": 48
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no effusion"
+  ],
+  "microbiology": [
+    "Urine culture: no growth",
+    "Blood cultures: pending, no growth at 48h"
+  ],
+  "differentialDiagnoses": [
+    "Euglycemic diabetic ketoacidosis (SGLT2 inhibitor-associated)",
+    "Starvation ketosis",
+    "Alcoholic ketoacidosis",
+    "Sepsis with high anion gap metabolic acidosis",
+    "Salicylate toxicity",
+    "Lactic acidosis",
+    "Hyperosmolar hyperglycemic state"
+  ],
+  "finalDiagnosis": "Euglycemic diabetic ketoacidosis precipitated by SGLT2 inhibitor use during a perioperative fasting/reduced-intake period",
+  "citations": [
+    "Harrison 22e — Diabetes Mellitus: Diabetic Ketoacidosis and Hyperosmolar Hyperglycemic State",
+    "ADA Standards of Care in Diabetes 2024",
+    "ADA/EASD Consensus Report on Hyperglycemic Crises 2024"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Do not withhold insulin infusion despite near-normal glucose — treat based on ketosis/acidosis, not glucose level",
+    "Avoid delaying dextrose-containing fluids once glucose approaches 200-250 mg/dL to prevent hypoglycemia while continuing insulin to clear ketosis",
+    "SGLT2 inhibitors should be held immediately and not resumed until the acute illness resolves",
+    "Avoid SGLT2 inhibitor continuation through perioperative fasting periods (should be withheld 3-4 days pre-procedure per guidance)"
+  ],
+  "edgeCases": [
+    "Glucose may be only mildly elevated or even normal, which can lead to under-recognition of DKA if clinicians anchor on glucose value alone",
+    "Kussmaul breathing and high anion gap with normal/near-normal glucose should prompt immediate ketone/blood gas testing",
+    "Concurrent perioperative fasting, low-carbohydrate intake, or acute illness are common precipitants of euglycemic DKA on SGLT2 inhibitors",
+    "This case is a recognized DKA subtype but the disease vocabulary list only contains generic 'dka' — no separate id exists for the euglycemic/SGLT2 variant, so this is mapped to the general dka id"
+  ],
+  "expectedMaiK": "MaiK should flag that a high anion gap metabolic acidosis with significant ketonemia in a patient on an SGLT2 inhibitor represents euglycemic DKA even though glucose is only mildly elevated, and should recommend immediate discontinuation of the SGLT2 inhibitor plus standard DKA protocol (IV fluids, insulin infusion with concurrent dextrose to prevent hypoglycemia, potassium replacement/monitoring).",
+  "expectedNextQuestions": [
+    "What is the venous/arterial blood gas and serum or urine ketone level?",
+    "Which glucose-lowering medications is the patient on, specifically any SGLT2 inhibitor?",
+    "Was there a recent reduction in caloric intake, fasting, surgery, or acute illness?",
+    "What is the corrected sodium and serum osmolality to exclude HHS?",
+    "Is there an alternative precipitant such as infection, alcohol use, or salicylate ingestion?"
+  ],
+  "expectedInvestigations": [
+    "Venous blood gas with pH and bicarbonate",
+    "Serum beta-hydroxybutyrate or urine ketones",
+    "Anion gap calculation",
+    "Basic metabolic panel (sodium, potassium, chloride, creatinine, urea)",
+    "Plasma glucose",
+    "Serum osmolality",
+    "Lactate",
+    "HbA1c",
+    "Workup for precipitant (blood cultures, urinalysis, chest X-ray) if infection suspected"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "nauseaVomiting": true,
+    "dehydration": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "tachypnea": true,
+    "ketonemia": true,
+    "alteredSensorium": true,
+    "diabetesHx": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "Euglycemic diabetic ketoacidosis precipitated by SGLT2 inhibitor use during a perioperative fasting/reduced-intake period",
+    "acceptableIds": [
+      "dka"
+    ],
+    "differentialIds": [
+      "hhs",
+      "aki",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Venous blood gas",
+      "Serum beta-hydroxybutyrate/urine ketones",
+      "Anion gap",
+      "Basic metabolic panel",
+      "Plasma glucose",
+      "Serum osmolality",
+      "Lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (dka)",
+    "confidence >= min (70)",
+    "differential includes hhs given overlapping presentation with near-normal glucose",
+    "engine commentary explicitly notes euglycemic/near-normal glucose despite ketoacidosis given SGLT2 inhibitor use",
+    "engine flags SGLT2 inhibitor as causative/precipitating factor and recommends discontinuation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

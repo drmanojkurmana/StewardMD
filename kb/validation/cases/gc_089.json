@@ -1,0 +1,137 @@
+{
+  "id": "gc_089",
+  "specialty": "Nephrology",
+  "condition": "Rapidly progressive glomerulonephritis",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Malaise, swelling of the legs and face, and dark urine for 2 weeks, with reduced urine output over the last 3 days.",
+  "history": "A 52-year-old man presents with a 2-week history of progressive fatigue, anorexia, and puffiness around the eyes on waking, followed by bilateral ankle swelling. He describes tea-coloured (dark) urine and a marked reduction in urine volume over the last 3 days. He denies dysuria or frank haematuria clots. He reports occasional low-grade fevers, arthralgias, and a faint rash on the lower legs about 3 weeks ago that has since resolved. No recent sore throat or skin infection. No haemoptysis, sinus symptoms, or epistaxis. No prior renal disease, no NSAID use. No known diabetes or hypertension previously. Non-smoker, no significant alcohol use.",
+  "examination": "Alert, mildly unwell-appearing man. Periorbital and bilateral pitting pedal oedema present. No skin rash currently, no palpable purpura. Chest clear, no crepitations. Cardiovascular exam unremarkable, no pericardial rub. No joint swelling. No oral ulcers or nasal crusting. Abdomen soft, no organomegaly.",
+  "vitals": {
+    "hr": 92,
+    "bp": "162/98",
+    "rr": 18,
+    "spo2": 97,
+    "temp": 37.1
+  },
+  "labs": {
+    "creatinine": 4.8,
+    "creatinine_baseline_2weeks_ago": 1,
+    "urea_mmolL": 22,
+    "hemoglobin": 10.2,
+    "platelets": 210,
+    "urinalysis": "dysmorphic RBCs, RBC casts, proteinuria 2+",
+    "urineProteinCreatinineRatio_mgmg": 2.1,
+    "serumAlbumin": 3.2,
+    "ANCA": "p-ANCA / MPO-ANCA positive",
+    "anti_GBM": "negative",
+    "ANA": "negative",
+    "complementC3C4": "normal",
+    "CRP_mgL": 38
+  },
+  "imaging": [
+    "Renal ultrasound: normal-sized kidneys, no obstruction, preserved corticomedullary differentiation",
+    "Chest X-ray: no infiltrates, no pulmonary haemorrhage"
+  ],
+  "microbiology": [
+    "Blood cultures: no growth",
+    "ASO titre: negative",
+    "Hepatitis B/C serology: negative",
+    "HIV: negative"
+  ],
+  "differentialDiagnoses": [
+    "ANCA-associated crescentic glomerulonephritis (microscopic polyangiitis / GPA)",
+    "Anti-GBM disease (Goodpasture syndrome)",
+    "Post-infectious glomerulonephritis",
+    "IgA nephropathy / IgA vasculitis with rapid progression",
+    "Lupus nephritis",
+    "Acute interstitial nephritis",
+    "Thrombotic microangiopathy"
+  ],
+  "finalDiagnosis": "Rapidly progressive glomerulonephritis (ANCA-associated, pauci-immune crescentic glomerulonephritis) with acute kidney injury",
+  "citations": [
+    "Harrison 22e — Glomerular Diseases: Rapidly Progressive Glomerulonephritis",
+    "Harrison 22e — Acute Kidney Injury",
+    "KDIGO Clinical Practice Guideline for Glomerular Diseases 2021",
+    "KDIGO Clinical Practice Guideline for ANCA-Associated Vasculitis 2024"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid nephrotoxic agents (NSAIDs, IV contrast unless essential, aminoglycosides)",
+    "High-dose glucocorticoids and cyclophosphamide/rituximab require infection screening (latent TB, hepatitis B) before immunosuppression",
+    "Avoid delay in renal biopsy unless contraindicated (uncontrolled bleeding risk, single functioning kidney, uncontrolled severe hypertension) as timely diagnosis dictates urgent immunosuppression"
+  ],
+  "edgeCases": [
+    "If anti-GBM antibodies were positive instead, plasma exchange becomes mandatory in addition to immunosuppression",
+    "Pulmonary-renal syndrome (diffuse alveolar haemorrhage) can coexist with ANCA-associated RPGN and changes urgency/ICU triage",
+    "Normal complement with positive ANCA favours pauci-immune GN over post-infectious (low C3/C4) or lupus (low C3/C4, positive ANA/dsDNA) GN",
+    "'aki' is listed separately in the disease vocabulary as a distinct diagnosable entity; this case is a glomerulonephritis-driven AKI, so 'glomerulonephritis' is the primary acceptable id, with 'aki' as a reasonable differential/downstream id since renal function is acutely deteriorating"
+  ],
+  "expectedMaiK": "MaiK should flag rapidly rising creatinine with active urinary sediment (dysmorphic RBCs/RBC casts) as RPGN until proven otherwise, prioritize urgent nephrology referral and renal biopsy, and note ANCA/anti-GBM/complement/ANA serologies as first-line workup before empirical immunosuppression.",
+  "expectedNextQuestions": [
+    "Any haemoptysis or dyspnea suggesting pulmonary haemorrhage?",
+    "Any sinonasal symptoms, saddle-nose deformity, or otologic disease suggesting GPA?",
+    "Recent streptococcal or other infection preceding onset?",
+    "Any features of systemic vasculitis (mononeuritis multiplex, skin purpura, scleritis)?",
+    "Medication history including recent new drugs for interstitial nephritis?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis with microscopy for dysmorphic RBCs and RBC casts",
+    "Serum creatinine trend / eGFR",
+    "ANCA (MPO/PR3), anti-GBM antibody, ANA, dsDNA, complement C3/C4",
+    "Renal ultrasound",
+    "Urgent renal biopsy with light, immunofluorescence, and electron microscopy",
+    "Chest imaging to assess for pulmonary haemorrhage"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "hematuria": true,
+    "proteinuria": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "legSwellingBilateral": true,
+    "hypertensionHx": true,
+    "fever": true,
+    "myalgiaArthralgia": true,
+    "rash": true,
+    "dysphagia": true,
+    "creatinine": true
+  },
+  "expected": {
+    "diagnosis": "Rapidly progressive glomerulonephritis (ANCA-associated, pauci-immune crescentic glomerulonephritis) with acute kidney injury",
+    "acceptableIds": [
+      "glomerulonephritis"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "aki",
+      "vasculitis",
+      "sle_flare"
+    ],
+    "investigations": [
+      "Urinalysis microscopy (dysmorphic RBCs, RBC casts)",
+      "ANCA (MPO/PR3)",
+      "Anti-GBM antibody",
+      "ANA / complement C3/C4",
+      "Renal biopsy",
+      "Renal ultrasound"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (glomerulonephritis)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes vasculitis or aki",
+    "expectedInvestigations includes renal biopsy and ANCA testing",
+    "stewardship tier is null (non-infective diagnosis, no antibiotics recommended)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

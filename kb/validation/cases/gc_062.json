@@ -1,0 +1,118 @@
+{
+  "id": "gc_062",
+  "specialty": "Hematology",
+  "condition": "Sickle cell vaso-occlusive crisis",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "24-year-old man with known homozygous sickle cell disease (HbSS) presents with severe generalized bone and joint pain of 8 hours' duration, rated 9/10, involving the lower back, bilateral thighs, and long bones, similar in character to his prior crises but more severe.",
+  "history": "Known HbSS since infancy, on hydroxyurea (reports inconsistent adherence over the past month) with baseline hemoglobin 8.0-8.5 g/dL. Approximately 8 crises requiring hospitalization in the past 3 years, none requiring exchange transfusion or ICU care. No history of acute chest syndrome, stroke, or priapism. Pain began abruptly this morning after a day of outdoor manual labor in hot weather with reduced fluid intake; no preceding trauma. Denies fever, cough, chest pain, or dyspnea at onset. No recent travel, no sick contacts, no diarrhea. Not on chronic opioids at baseline; uses NSAIDs and oral hydration for mild crises at home, which have not controlled this episode. No history of transfusion in the past 3 months (low alloimmunization/delayed hemolytic transfusion reaction risk for this episode). Vaccinated per sickle cell protocol (pneumococcal, meningococcal, Hib) per history.",
+  "examination": "Alert, in obvious distress from pain, grimacing, guarding lower extremities and back, unable to find a comfortable position. No pallor out of proportion to baseline. Mild scleral icterus (chronic hemolysis). No focal bony tenderness suggesting fracture; diffuse tenderness over lumbar spine, femora, and tibiae bilaterally without swelling, erythema, or warmth of joints. Chest clear to auscultation, no crepitations, no splinting. Abdomen soft, mild non-focal tenderness, no rebound, spleen not palpable (prior autosplenectomy likely). No priapism. No focal neurological deficit. No calf tenderness or asymmetric limb swelling.",
+  "vitals": {
+    "hr": 112,
+    "bp": "128/78",
+    "rr": 22,
+    "spo2": 96,
+    "temp": 37.4
+  },
+  "labs": {
+    "hemoglobin_g_dL": 7.6,
+    "baseline_hemoglobin_g_dL": 8.2,
+    "reticulocyteCount_percent": 9.5,
+    "wbc_x10e9_L": 14.2,
+    "platelets_x10e9_L": 410,
+    "totalBilirubin_mg_dL": 3.1,
+    "LDH_U_L": 620,
+    "creatinine_mg_dL": 0.9,
+    "sodium_mmol_L": 138,
+    "potassium_mmol_L": 4.1
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no consolidation, normal cardiac silhouette",
+    "Plain films of painful long bones: no fracture, no periosteal reaction"
+  ],
+  "microbiology": [
+    "Blood cultures pending (drawn given mild leukocytosis, not yet resulted)"
+  ],
+  "differentialDiagnoses": [
+    "Sickle cell vaso-occlusive (pain) crisis",
+    "Acute chest syndrome (excluded by clear CXR and normal SpO2 trend)",
+    "Osteomyelitis (less likely, no focal warmth/swelling, afebrile)",
+    "Avascular necrosis of femoral head (chronic, not acute pain generator here)",
+    "Septic arthritis (no joint effusion or focal joint findings)",
+    "Splenic sequestration (spleen not palpable, no acute hemoglobin drop with splenomegaly)"
+  ],
+  "finalDiagnosis": "Sickle cell vaso-occlusive crisis (severe pain crisis), uncomplicated by acute chest syndrome or sepsis",
+  "citations": [
+    "Harrison 22e — Sickle Cell Disease and Other Hemoglobinopathies",
+    "American Society of Hematology (ASH) Sickle Cell Disease Guidelines 2020"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid NSAIDs if renal impairment or concurrent sickle nephropathy",
+    "Avoid meperidine for pain control (seizure risk from normeperidine accumulation)",
+    "Avoid delaying analgesia pending full workup — rapid, protocol-driven opioid titration is standard of care per ASH guidelines",
+    "Avoid routine antibiotics without evidence of infection (no source identified here)"
+  ],
+  "edgeCases": [
+    "If fever, hypoxia, or new infiltrate develop, reclassify as acute chest syndrome — a distinct, more urgent diagnosis",
+    "Sickle cell vaso-occlusive crisis is not present in the provided diagnosable-disease list, so acceptableIds/differentialIds are set to [] per instructions; findings still populate the vocabulary-driven engine for downstream differential reasoning (e.g., against sepsis, osteomyelitis)",
+    "Mild leukocytosis is expected during VOC and does not necessarily indicate infection",
+    "Watch for evolution to multi-organ crisis or splenic/hepatic sequestration in severe presentations"
+  ],
+  "expectedMaiK": "MaiK should recognize a classic uncomplicated severe sickle cell pain crisis, flag the need for rapid weight-based opioid titration and hydration per ASH 2020 protocol, and highlight surveillance for acute chest syndrome as the key evolving complication to exclude serially.",
+  "expectedNextQuestions": [
+    "Any cough, chest pain, or breathlessness to suggest acute chest syndrome?",
+    "Any priapism, focal neurological deficits, or visual changes?",
+    "Adherence to hydroxyurea and recent transfusion history?",
+    "Any focal bony warmth/swelling to suggest osteomyelitis versus diffuse VOC pain?",
+    "Baseline hemoglobin and typical crisis pattern for this patient?"
+  ],
+  "expectedInvestigations": [
+    "hemoglobin",
+    "reticulocyteCount",
+    "wbc",
+    "totalBilirubin",
+    "LDH",
+    "chestXray",
+    "bloodCultures if febrile or toxic-appearing"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "severePain": true,
+    "sickleCellHx": true,
+    "dehydration": true,
+    "tachycardia": true,
+    "abdominalPain": true,
+    "jaundice": true
+  },
+  "expected": {
+    "diagnosis": "Sickle cell vaso-occlusive crisis (severe pain crisis), uncomplicated by acute chest syndrome or sepsis",
+    "acceptableIds": [],
+    "differentialIds": [],
+    "investigations": [
+      "hemoglobin",
+      "reticulocyte count",
+      "chest X-ray",
+      "LDH",
+      "bilirubin",
+      "blood cultures if febrile"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "System does not misclassify as sepsis/septic shock despite tachycardia and mild leukocytosis, given absence of fever, hypotension, or organ dysfunction",
+    "System does not recommend empirical antibiotics absent evidence of infection",
+    "System surfaces acute chest syndrome as a key complication to actively exclude",
+    "System avoids recommending meperidine for analgesia",
+    "confidence >= expectedConfidence.min for top clinical impression of vaso-occlusive crisis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

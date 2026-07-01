@@ -1,0 +1,147 @@
+{
+  "id": "gc_061",
+  "specialty": "Hematology",
+  "condition": "Disseminated intravascular coagulation",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Oozing from IV cannula sites, bruising, and worsening confusion 3 days after admission for septic shock secondary to E. coli pyelonephritis.",
+  "history": "58-year-old woman admitted 3 days ago with fever, rigors and flank pain, diagnosed with E. coli pyelonephritis complicated by septic shock requiring vasopressor support. Over the last 24 hours the nursing staff note persistent ooze from venepuncture and arterial line sites, new bruising over the forearms, and gum bleeding on toothbrushing. Family report she has become increasingly drowsy and less responsive over the same period. No prior bleeding disorder, not on anticoagulants, no known liver disease. No history of recent trauma or surgery.",
+  "examination": "Toxic-looking, drowsy but rousable to voice (GCS 13). Widespread petechiae and ecchymoses over the forearms and abdomen. Oozing blood from arterial line and peripheral IV sites that does not stop with pressure dressing. Mild gum bleeding. No focal neurological deficit. Abdomen soft, mild right flank tenderness. Extremities warm-to-cool with mottling, capillary refill 4 seconds. Chest clear. No overt gastrointestinal bleeding noted at this time.",
+  "vitals": {
+    "hr": 118,
+    "bp": "84/48",
+    "rr": 26,
+    "spo2": 93,
+    "temp": 38.6
+  },
+  "labs": {
+    "wbc": "18.2 x10^9/L",
+    "platelets": 42,
+    "hemoglobin": 8.9,
+    "inr": 2.1,
+    "aptt": "58 sec (control 30 sec)",
+    "fibrinogen": "0.9 g/L",
+    "dDimer": "markedly elevated (>20x ULN)",
+    "creatinine": 2.1,
+    "urea": 18.5,
+    "bilirubin": 2.4,
+    "albumin": 2.6,
+    "lactate": 4.8,
+    "schistocytesOnSmear": "present, 3-5 per high power field",
+    "procalcitonin": "elevated",
+    "sofaScoreDelta": "+4 from baseline"
+  },
+  "imaging": [
+    "CT abdomen/pelvis (prior to deterioration): right-sided perinephric stranding consistent with pyelonephritis, no abscess",
+    "CT head (non-contrast, for altered sensorium): no acute hemorrhage or mass lesion"
+  ],
+  "microbiology": [
+    "Blood cultures (drawn on admission): E. coli, pan-sensitive, growing in 2/2 bottles",
+    "Urine culture: E. coli >10^5 CFU/mL, concordant sensitivities"
+  ],
+  "differentialDiagnoses": [
+    "Disseminated intravascular coagulation secondary to sepsis",
+    "Thrombotic thrombocytopenic purpura / HUS",
+    "Immune thrombocytopenic purpura",
+    "Acute liver failure with coagulopathy",
+    "Heparin-induced thrombocytopenia",
+    "Dilutional coagulopathy from massive fluid resuscitation"
+  ],
+  "finalDiagnosis": "Disseminated intravascular coagulation (sepsis-associated, bleeding phenotype)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Disseminated Intravascular Coagulation",
+    "Harrison's Principles of Internal Medicine, 22e — Sepsis and Septic Shock",
+    "Surviving Sepsis Campaign Guidelines 2021",
+    "International Society on Thrombosis and Haemostasis (ISTH) DIC Scoring Guidance 2001/2018"
+  ],
+  "stewardship": "Continue source-directed empirical antimicrobials for the underlying E. coli urosepsis (e.g., a broad-spectrum beta-lactam such as piperacillin-tazobactam or a third-generation cephalosporin, de-escalated per culture sensitivities) per Surviving Sepsis Campaign 2021; DIC management itself is supportive (treat the underlying trigger, transfuse blood products as indicated for active bleeding) rather than antimicrobial-specific.",
+  "contraindications": [
+    "Avoid antifibrinolytics (e.g., tranexamic acid) in DIC with a dominant bleeding phenotype unless hyperfibrinolysis is clearly documented, as they may worsen microvascular thrombosis",
+    "Avoid unfractionated/low-molecular-weight heparin in the actively bleeding phase of DIC",
+    "Avoid delaying source control/antimicrobials while correcting coagulopathy — treating the underlying sepsis is the priority intervention"
+  ],
+  "edgeCases": [
+    "Distinguishing DIC from TTP/HUS is critical: DIC has prolonged PT/aPTT and low fibrinogen, whereas TTP/HUS typically has normal coagulation parameters with prominent schistocytosis and severe thrombocytopenia — this case has both prolonged PT/aPTT and low fibrinogen with high D-dimer, favoring DIC",
+    "Chronic/compensated DIC can present with a thrombotic rather than bleeding phenotype; this case represents the acute decompensated bleeding phenotype typical of sepsis-associated DIC",
+    "Liver dysfunction from shock/hypoperfusion can independently prolong INR and lower fibrinogen, confounding the DIC score — clinical correlation with ISTH scoring is required",
+    "DIC itself is a laboratory/clinical syndrome overlying the underlying sepsis; the disease list used by the engine represents the closest coded entity (dic) for this presentation"
+  ],
+  "expectedMaiK": "MaiK should flag decompensated DIC (ISTH overt score consistent) in the context of septic shock — recommend treating the underlying sepsis, transfusing platelets/FFP/cryoprecipitate for active bleeding, avoiding antifibrinolytics, and closely monitoring for progression to multiorgan failure.",
+  "expectedNextQuestions": [
+    "Is there any history of liver disease, anticoagulant use, or a pre-existing bleeding disorder?",
+    "Are there signs of active major hemorrhage (GI bleed, intracranial bleed) requiring urgent blood product transfusion?",
+    "What is the trend in platelet count, fibrinogen, and D-dimer over the last 24-48 hours?",
+    "Has source control been achieved for the underlying urosepsis (repeat imaging, catheter/stent if obstruction present)?",
+    "Is the patient a transfusion candidate, and are blood products (platelets, FFP, cryoprecipitate) available?"
+  ],
+  "expectedInvestigations": [
+    "Platelet count",
+    "PT/INR",
+    "aPTT",
+    "Fibrinogen",
+    "D-dimer",
+    "Peripheral blood smear (schistocytes)",
+    "Liver function tests",
+    "Renal function tests",
+    "Lactate",
+    "Blood and urine cultures"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "toxicAppearing": true,
+    "petechialRash": true,
+    "mucocutaneousBleeding": true,
+    "bleedingManifestation": true,
+    "thrombocytopenia": true,
+    "sofaIncrease": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "Disseminated intravascular coagulation (sepsis-associated, bleeding phenotype)",
+    "acceptableIds": [
+      "dic"
+    ],
+    "differentialIds": [
+      "ttp_hus",
+      "itp"
+    ],
+    "investigations": [
+      "Platelet count",
+      "PT/INR",
+      "aPTT",
+      "Fibrinogen",
+      "D-dimer",
+      "Peripheral smear for schistocytes",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (dic)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes sepsis/septic shock and TTP/HUS as key mimics",
+    "stewardship recommendation reflects underlying sepsis source control, not DIC-specific antimicrobial therapy",
+    "contraindication against antifibrinolytics and heparin in active bleeding phase is surfaced"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "id": "gc_016",
+  "specialty": "Endocrinology",
+  "condition": "Diabetic ketoacidosis",
+  "age": 19,
+  "sex": "F",
+  "presentingComplaint": "3-day history of increasing thirst, frequent urination, and vomiting, now with deep, labored breathing and abdominal pain",
+  "history": "Previously well 19-year-old woman with no known past medical history presents with a 4-6 week history of unintentional weight loss (~5 kg), polyuria, and polydipsia. Over the last 3 days she has developed nausea, repeated vomiting, and diffuse abdominal pain. Family noticed unusually deep, sighing breathing over the past several hours. No prior diagnosis of diabetes. No fever, cough, dysuria, or diarrhea. No history of missed insulin (treatment-naive, new-onset). No alcohol use. No recent illness reported by family, though she was mildly unwell with a sore throat about a week ago that resolved without treatment.",
+  "examination": "Young woman appears unwell, dehydrated, and drowsy but rousable and oriented (GCS 14). Dry mucous membranes, reduced skin turgor, sunken eyes. Deep, rapid, sighing respirations (Kussmaul breathing) with a fruity (acetone) odor on breath. Abdomen diffusely tender without guarding or rigidity; bowel sounds present. No focal neurological deficit. No rash, no signs of infection at any site.",
+  "vitals": {
+    "hr": 122,
+    "bp": "96/60",
+    "rr": 32,
+    "spo2": 98,
+    "temp": 36.8
+  },
+  "labs": {
+    "glucosePlasma_mgdL": 486,
+    "venousPH": 7.09,
+    "serumBicarbonate_mmolL": 8,
+    "anionGap_mmolL": 26,
+    "betaHydroxybutyrate_mmolL": 6.2,
+    "urineKetones": "large/4+",
+    "sodium_mmolL": 133,
+    "correctedSodium_mmolL": 138,
+    "potassium_mmolL": 5.3,
+    "chloride_mmolL": 96,
+    "creatinine_mgdL": 1.4,
+    "urea_mmolL": 9.8,
+    "hemoglobin_gdL": 13.8,
+    "wbc_perµL": 14200,
+    "hba1c_percent": 12.1,
+    "lactate_mmolL": 2.1,
+    "osmolality_mOsmkg": 302
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, clear lung fields"
+  ],
+  "microbiology": [
+    "Blood cultures: pending (sent as part of sepsis screen, no clinical focus of infection identified)",
+    "Urinalysis: large ketones, no nitrites/leukocyte esterase, no evidence of UTI"
+  ],
+  "differentialDiagnoses": [
+    "Diabetic ketoacidosis, new-onset type 1 diabetes",
+    "Hyperosmolar hyperglycemic state",
+    "Alcoholic ketoacidosis",
+    "Starvation ketosis",
+    "Sepsis with secondary hyperglycemia",
+    "Salicylate toxicity",
+    "Acute pancreatitis (as alternate cause of abdominal pain and vomiting)"
+  ],
+  "finalDiagnosis": "Diabetic ketoacidosis (new-onset type 1 diabetes mellitus)",
+  "citations": [
+    "Harrison 22e — Diabetes Mellitus: Diabetic Ketoacidosis and Hyperosmolar Hyperglycemic State",
+    "ADA Standards of Care in Diabetes 2024"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid bicarbonate therapy unless pH <6.9 (risk of paradoxical CNS acidosis, hypokalemia, delayed ketone clearance)",
+    "Do not give insulin bolus/infusion until potassium is known and, if <3.3 mmol/L, corrected first (risk of life-threatening hypokalemia and arrhythmia)",
+    "Avoid rapid correction of osmolality/glucose (risk of cerebral edema, especially in young patients)"
+  ],
+  "edgeCases": [
+    "Euglycemic DKA can occur (e.g., with SGLT2 inhibitor use) — not applicable here given treatment-naive new-onset presentation, but should be considered in known diabetics on SGLT2 inhibitors with normal glucose",
+    "Cerebral edema risk is highest in children/adolescents and young adults during treatment — requires slow, monitored correction",
+    "Abdominal pain and leukocytosis are common in DKA itself and can mimic an acute abdomen/sepsis; reassess only if pain persists after acidosis corrects",
+    "Mild lactate elevation (2.1) here reflects hypoperfusion/dehydration rather than sepsis; trend with resuscitation"
+  ],
+  "expectedMaiK": "This is a metabolic/endocrine emergency (DKA), not an infective syndrome — no antimicrobial stewardship pathway applies; management priorities are IV fluids, potassium-guided insulin therapy, and identification/treatment of any precipitant.",
+  "expectedNextQuestions": [
+    "Is there a precipitating infection (screen and treat only if a source is found)?",
+    "Any history suggesting insulin omission, new-onset diabetes, or SGLT2 inhibitor use?",
+    "What is the current serum potassium — safe to start insulin now?",
+    "Any red flags for cerebral edema (headache, altered mental status, seizure) during treatment?",
+    "Is this the patient's first presentation of diabetes requiring long-term insulin education and follow-up?"
+  ],
+  "expectedInvestigations": [
+    "Venous/arterial blood gas",
+    "Serum electrolytes with anion gap",
+    "Serum or capillary beta-hydroxybutyrate",
+    "Plasma glucose",
+    "Serum creatinine/urea",
+    "HbA1c",
+    "ECG (assess for hyperkalemia changes)",
+    "Septic/precipitant workup only if clinically indicated (blood cultures, urinalysis, chest X-ray)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "ketonemia": true,
+    "polyuriaPolydipsia": true,
+    "weightLoss": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "dehydration": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "Diabetic ketoacidosis (new-onset type 1 diabetes mellitus)",
+    "acceptableIds": [
+      "dka"
+    ],
+    "differentialIds": [
+      "hhs",
+      "aki",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Venous blood gas with anion gap",
+      "Serum beta-hydroxybutyrate / urine ketones",
+      "Plasma glucose",
+      "Electrolytes (especially potassium) and renal function",
+      "HbA1c"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (dka)",
+    "confidence >= expectedConfidence.min",
+    "differential includes hhs",
+    "stewardship tier is null (no antimicrobial recommendation generated)",
+    "MaiK commentary flags potassium-first-then-insulin sequencing and avoids bicarbonate unless pH <6.9"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

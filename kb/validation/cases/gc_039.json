@@ -1,0 +1,126 @@
+{
+  "id": "gc_039",
+  "specialty": "Gastroenterology",
+  "condition": "Acute pancreatitis",
+  "age": 52,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset severe epigastric pain radiating to the back for 8 hours, associated with repeated vomiting.",
+  "history": "A 52-year-old woman presents with acute-onset severe, constant epigastric pain that began after a large fatty meal the previous evening. The pain radiates to the back, is partially relieved by leaning forward, and is associated with nausea and multiple episodes of non-bilious vomiting. She reports similar, milder episodes of postprandial right upper quadrant discomfort over the past several months, previously attributed to 'gas'. No prior history of alcohol use. No recent trauma, ERCP, or new medications. She denies fever at home but felt generally unwell. No prior similar hospitalizations. No known gallstone disease diagnosed previously.",
+  "examination": "Uncomfortable, lying still, mildly diaphoretic. Epigastric and right upper quadrant tenderness with voluntary guarding, no rebound. Mild abdominal distension, bowel sounds reduced. No Grey Turner's or Cullen's sign. Mild scleral icterus noted. No jaundice of skin. Murphy's sign difficult to assess due to epigastric tenderness. No peritonism.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/76",
+    "rr": 22,
+    "spo2": 96,
+    "temp": 37.8
+  },
+  "labs": {
+    "lipase": "1450 U/L (>3x ULN)",
+    "amylase": "980 U/L",
+    "wbc": "14200 /uL",
+    "alt": "185 U/L",
+    "ast": "142 U/L",
+    "alkalinePhosphatase": "260 U/L",
+    "totalBilirubin": "2.8 mg/dL",
+    "ggt": "310 U/L",
+    "calcium": "8.6 mg/dL",
+    "triglycerides": "140 mg/dL",
+    "glucose": "128 mg/dL",
+    "creatinine": "0.9 mg/dL",
+    "hematocrit": "41%",
+    "crp": "62 mg/L"
+  },
+  "imaging": [
+    "Transabdominal ultrasound: gallbladder with multiple mobile gallstones, no wall thickening or pericholecystic fluid; common bile duct mildly dilated at 9 mm; pancreas obscured by bowel gas",
+    "Contrast-enhanced CT abdomen (performed given diagnostic uncertainty): diffusely enlarged pancreas with peripancreatic fat stranding, mild peripancreatic fluid, no necrosis, no pseudocyst — consistent with interstitial edematous pancreatitis (Balthazar grade C)"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute cholecystitis",
+    "Acute cholangitis",
+    "Choledocholithiasis with biliary colic",
+    "Perforated peptic ulcer",
+    "Acute mesenteric ischemia",
+    "Myocardial infarction (inferior wall)"
+  ],
+  "finalDiagnosis": "Acute pancreatitis, gallstone (biliary) etiology",
+  "citations": [
+    "Harrison 22e — Acute and Chronic Pancreatitis",
+    "IAP/APA Evidence-Based Guidelines for the Management of Acute Pancreatitis 2013",
+    "ACG Clinical Guideline: Management of Acute Pancreatitis 2013"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid prophylactic antibiotics in sterile acute pancreatitis (no proven benefit, per IAP/APA and ACG guidelines)",
+    "Avoid early aggressive feeding restriction beyond resolution of ileus/pain — early enteral (oral/enteral) feeding as tolerated is preferred over prolonged fasting",
+    "Avoid delaying cholecystectomy beyond the index admission in mild gallstone pancreatitis (increases risk of recurrent biliary events)"
+  ],
+  "edgeCases": [
+    "If common bile duct stone with cholangitis or persistent biliary obstruction is present, urgent ERCP (within 24-72h) is indicated in addition to pancreatitis management",
+    "Mildly elevated bilirubin/ALT here suggests transient stone passage; if LFTs and bilirubin trend up or cholangitis develops (fever, jaundice, RUQ pain triad), reclassify and treat per cholangitis pathway",
+    "Rule out concurrent acute cholecystitis if gallbladder wall thickening/pericholecystic fluid or positive sonographic Murphy sign develops",
+    "Severity should be reassessed at 48 hours using BISAP/Ranson/APACHE II or revised Atlanta classification; this case currently appears mild-to-moderate (interstitial, no organ failure)"
+  ],
+  "expectedMaiK": "Should flag gallstone pancreatitis (elevated lipase >3x ULN, biliary-pattern LFTs, ultrasound-confirmed cholelithiasis) and recommend against empirical antibiotics, early aggressive IV fluid resuscitation, and definitive cholecystectomy during the same admission once the episode settles.",
+  "expectedNextQuestions": [
+    "Is there evidence of cholangitis (fever, jaundice, RUQ pain triad) requiring urgent ERCP?",
+    "Are there signs of organ dysfunction (hypotension, hypoxia, rising creatinine) suggesting evolving severe pancreatitis?",
+    "What is the trend in bilirubin/ALT over the next 24-48 hours (resolving vs worsening obstruction)?",
+    "Is triglyceride level and calcium normal, effectively excluding other major etiologies?",
+    "Has alcohol use been fully excluded as a contributing factor?"
+  ],
+  "expectedInvestigations": [
+    "Serum lipase/amylase",
+    "Liver function tests (ALT, AST, ALP, GGT, bilirubin)",
+    "Transabdominal ultrasound for gallstones/biliary dilatation",
+    "Contrast-enhanced CT abdomen (if diagnosis unclear or severity assessment needed)",
+    "Serum calcium and triglycerides (to exclude alternate etiologies)",
+    "MRCP or endoscopic ultrasound if choledocholithiasis suspected but not confirmed",
+    "BISAP score / APACHE II for severity stratification at 48 hours"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "severeAbdominalPain": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "rightUpperQuadrantPain": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "fever": true,
+    "abdominalDistension": true
+  },
+  "expected": {
+    "diagnosis": "Acute pancreatitis, gallstone (biliary) etiology",
+    "acceptableIds": [
+      "pancreatitis"
+    ],
+    "differentialIds": [
+      "biliary_colic",
+      "CHOLANGITIS"
+    ],
+    "investigations": [
+      "Serum lipase",
+      "Liver function tests",
+      "Abdominal ultrasound",
+      "Contrast-enhanced CT abdomen",
+      "Serum calcium and triglycerides"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (pancreatitis)",
+    "confidence >= expectedConfidence.min",
+    "differential includes cholecystitis and/or CHOLANGITIS",
+    "stewardship output recommends against empirical antibiotics for sterile interstitial pancreatitis",
+    "expectedNextQuestions surfaces cholangitis/ERCP consideration given elevated bilirubin"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

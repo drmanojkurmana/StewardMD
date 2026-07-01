@@ -1,0 +1,123 @@
+{
+  "id": "gc_086",
+  "specialty": "Gastroenterology",
+  "condition": "Acute intestinal obstruction",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Progressive abdominal distension, vomiting, and absolute constipation (no passage of flatus or stool) for 2 days.",
+  "history": "A 62-year-old man presents with a 2-day history of progressive, generalized abdominal distension associated with colicky central abdominal pain and repeated non-bilious then bilious vomiting. He has not passed flatus or stool for the past 36 hours. He underwent an open appendicectomy 15 years ago and reports two similar but self-limiting episodes of colicky abdominal pain with distension over the past year that resolved spontaneously with conservative measures. No fevers, no hematochezia or melena. No history of hernia repair. He denies weight loss, but on direct questioning admits to mild anorexia over the last month. No prior history of malignancy. Bowel habit was normal until this episode.",
+  "examination": "Uncomfortable, mildly dehydrated male lying still due to colicky pain. Abdomen markedly distended, tympanitic to percussion, with a well-healed right lower quadrant surgical scar. Diffuse mild tenderness without guarding or rebound; no palpable mass. Bowel sounds are hyperactive with high-pitched, tinkling quality early in the exam. Digital rectal exam reveals an empty rectal vault with no mass or blood. No hernial orifices are impulsed on cough; no strangulated hernia found. No peritonism to suggest perforation at this time.",
+  "vitals": {
+    "hr": 108,
+    "bp": "108/70",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 37.1
+  },
+  "labs": {
+    "hemoglobin": 13.8,
+    "wbc": 11.2,
+    "platelets": 310,
+    "sodium": 133,
+    "potassium": 3.2,
+    "chloride": 90,
+    "bicarbonate": 30,
+    "urea": 9.8,
+    "creatinine": 1.4,
+    "lactate": 1.6,
+    "amylase": 60
+  },
+  "imaging": [
+    "Supine and erect abdominal X-ray: multiple dilated small bowel loops with air-fluid levels in a stepladder pattern; paucity of colonic gas",
+    "CT abdomen/pelvis with contrast: dilated small bowel loops up to 4.2 cm with a discrete transition point in the right iliac fossa adjacent to adhesive band near prior appendicectomy scar; distal collapsed bowel; no free air, no closed-loop obstruction, no bowel wall ischemic changes, mesentery preserved"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Adhesive small bowel obstruction",
+    "Strangulated hernia",
+    "Colonic pseudo-obstruction (Ogilvie syndrome)",
+    "Obstructing colorectal malignancy",
+    "Sigmoid or cecal volvulus",
+    "Paralytic ileus",
+    "Mesenteric ischemia"
+  ],
+  "finalDiagnosis": "Acute adhesive small bowel obstruction (uncomplicated, non-strangulated)",
+  "citations": [
+    "Harrison 22e — Intestinal Obstruction",
+    "Harrison 22e — Approach to the Patient with Nausea, Vomiting, and Abdominal Pain",
+    "World Society of Emergency Surgery (WSES) Adhesive Small Bowel Obstruction Guidelines 2017"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid oral intake and oral medications until obstruction is relieved (bowel rest)",
+    "Avoid prokinetic agents in mechanical obstruction",
+    "Avoid delaying surgical consultation if signs of strangulation (fever, tachycardia, peritonism, rising lactate) develop",
+    "Avoid contrast enema/colonoscopy until closed-loop obstruction or perforation is excluded on imaging"
+  ],
+  "edgeCases": [
+    "If CT shows closed-loop obstruction, bowel wall thickening, pneumatosis, or mesenteric fat stranding, urgent surgical exploration is indicated rather than a trial of conservative management",
+    "In an elderly patient without prior surgery, obstructing colorectal cancer becomes the leading differential and colonoscopy/biopsy should be pursued after decompression",
+    "Rising lactate, new fever, or peritonism during observation should prompt reclassification as strangulated obstruction and emergent surgery",
+    "This case (bowel_obstruction) is present in the diagnosable disease list; the differential item 'obstructing colorectal malignancy' does not map to a distinct id in the provided disease list and is therefore not included in differentialIds"
+  ],
+  "expectedMaiK": "MaiK should flag classic mechanical small bowel obstruction (distension, vomiting, absolute constipation, prior abdominal surgery) and recommend NG decompression, IV fluid/electrolyte correction, and surgical consultation, while highlighting warning signs of strangulation requiring escalation to emergency surgery.",
+  "expectedNextQuestions": [
+    "Any prior abdominal or pelvic surgeries, or known hernias?",
+    "Is there fever, peritonism, or rapidly worsening pain suggesting strangulation?",
+    "Any history of malignancy or unintentional weight loss?",
+    "Has the patient passed any flatus or stool, even in small amounts?",
+    "Any signs of hemodynamic instability or rising lactate on serial review?"
+  ],
+  "expectedInvestigations": [
+    "Erect and supine abdominal X-ray",
+    "CT abdomen and pelvis with IV contrast",
+    "Serum electrolytes, urea, creatinine",
+    "Complete blood count",
+    "Serum lactate",
+    "Venous or arterial blood gas"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "abdominalPain": true,
+    "severeAbdominalPain": true,
+    "abdominalDistension": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "dehydration": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "Acute adhesive small bowel obstruction (uncomplicated, non-strangulated)",
+    "acceptableIds": [
+      "bowel_obstruction"
+    ],
+    "differentialIds": [
+      "mesenteric_ischemia",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "Erect and supine abdominal X-ray",
+      "CT abdomen and pelvis with IV contrast",
+      "Serum electrolytes, urea, creatinine",
+      "Complete blood count",
+      "Serum lactate"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (bowel_obstruction)",
+    "confidence >= expectedConfidence.min",
+    "differential set includes mesenteric_ischemia given overlapping abdominal pain/distension presentation",
+    "stewardship.tier is null (non-infective surgical diagnosis)",
+    "recommended investigations include abdominal imaging (X-ray and/or CT) and electrolyte panel"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

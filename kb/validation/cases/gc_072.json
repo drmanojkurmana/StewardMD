@@ -1,0 +1,121 @@
+{
+  "id": "gc_072",
+  "specialty": "Infectious",
+  "condition": "Pulmonary tuberculosis",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Cough for 6 weeks with blood-streaked sputum, unintentional weight loss, and evening fevers with night sweats",
+  "history": "52-year-old man, works as a daily-wage construction laborer, presents with a productive cough for 6 weeks, initially dry, now with scant blood-streaked sputum for the last 4-5 days. He describes low-grade fever most afternoons/evenings with drenching night sweats, and has lost approximately 6 kg over the past 2 months with progressive anorexia and fatigue. He reports mild exertional breathlessness but no chest pain. No prior TB treatment. He mentions a paternal uncle was treated for 'chest TB' about a year ago and they shared living quarters for several months. No known HIV status (never tested), no diabetes, non-smoker, occasional alcohol use, no IV drug use. No recent travel outside India. No prior hospitalization or antibiotic use in the last 90 days.",
+  "examination": "Thin, chronically ill-appearing man in no acute distress. Mild pallor. No icterus, no lymphadenopathy. Chest: reduced breath sounds and coarse crepitations over the right upper zone posteriorly; no wheeze. Cardiovascular and abdominal exam unremarkable, no hepatosplenomegaly. No focal neurological deficit.",
+  "vitals": {
+    "hr": 96,
+    "bp": "112/72",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 37.9
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "wbc": 9200,
+    "esr": 68,
+    "crp": 34,
+    "hiv": "pending/unknown",
+    "sputumAFB": "positive (2+ on smear microscopy)",
+    "sputumCBNAAT": "MTB detected, rifampicin sensitive"
+  },
+  "imaging": [
+    "Chest X-ray: cavitary lesion in the right upper lobe with surrounding fibronodular infiltrates and volume loss",
+    "No pleural effusion"
+  ],
+  "microbiology": [
+    "Sputum AFB smear: 2+ positive (Ziehl-Neelsen)",
+    "Sputum CBNAAT (Xpert MTB/RIF): Mycobacterium tuberculosis detected, rifampicin resistance not detected",
+    "Sputum culture (liquid/MGIT) sent, pending"
+  ],
+  "differentialDiagnoses": [
+    "Pulmonary tuberculosis",
+    "Lung abscess",
+    "Bronchiectasis with secondary infection",
+    "Lung cancer with post-obstructive cavitation",
+    "Fungal infection (e.g., pulmonary aspergilloma/histoplasmosis)"
+  ],
+  "finalDiagnosis": "Pulmonary tuberculosis",
+  "citations": [
+    "Harrison 22e — Tuberculosis",
+    "WHO Consolidated Guidelines on Tuberculosis 2022",
+    "ICMR/National TB Elimination Programme (NTEP) Guidelines"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid empirical fluoroquinolone monotherapy before excluding TB in a patient with a compatible chronic respiratory syndrome, as this can partially treat TB, delay diagnosis, and promote fluoroquinolone-resistant TB",
+    "Confirm HIV status before initiating anti-TB therapy given implications for regimen/duration and ART interaction"
+  ],
+  "edgeCases": [
+    "If sputum AFB/CBNAAT were negative despite high clinical suspicion, would require further evaluation (repeat sputum, bronchoscopy with BAL, or empirical anti-TB therapy in high-prevalence settings per NTEP algorithm)",
+    "Hemoptysis in this setting should also prompt exclusion of secondary aspergilloma within an old TB cavity if symptoms persist after treatment",
+    "This case represents an infectious/granulomatous disease rather than an acute bacterial syndrome; not part of the acute sepsis/CAP severity scoring pathway"
+  ],
+  "expectedMaiK": "MaiK should flag chronic cough (>=2 weeks) with constitutional symptoms (weight loss, night sweats, evening fever) and cavitatory imaging as classic for pulmonary TB, prompting sputum AFB/CBNAAT and airborne isolation rather than empirical antibacterial therapy.",
+  "expectedNextQuestions": [
+    "HIV testing status and result",
+    "Any prior anti-TB treatment (to assess for drug resistance risk)",
+    "Contact tracing details and screening of household contacts",
+    "Diabetes screening (HbA1c) given TB-diabetes association",
+    "Assessment of hemoptysis severity and need for further imaging (CT chest) if it worsens"
+  ],
+  "expectedInvestigations": [
+    "Sputum AFB smear microscopy",
+    "Sputum CBNAAT (Xpert MTB/RIF)",
+    "Chest X-ray",
+    "HIV testing",
+    "Sputum culture with drug susceptibility testing",
+    "CT chest (if diagnosis unclear or complications suspected)"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "weightLoss": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "tbContactHistory": true,
+    "subacuteOnset": true,
+    "hemoptysis": true,
+    "cavitatingLesion": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "Pulmonary tuberculosis",
+    "acceptableIds": [
+      "PULMONARY_TB"
+    ],
+    "differentialIds": [
+      "LUNG_ABSCESS",
+      "BRONCHIECTASIS_EXACERBATION",
+      "CAP"
+    ],
+    "investigations": [
+      "Sputum AFB smear microscopy",
+      "Sputum CBNAAT (Xpert MTB/RIF)",
+      "Chest X-ray",
+      "HIV testing",
+      "Sputum culture with drug susceptibility testing"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (PULMONARY_TB)",
+    "confidence >= expectedConfidence.min",
+    "differential includes LUNG_ABSCESS or BRONCHIECTASIS_EXACERBATION",
+    "stewardship recommendation is null/none (not empirical antibacterial regimen)",
+    "expectedInvestigations includes sputum AFB and CBNAAT"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

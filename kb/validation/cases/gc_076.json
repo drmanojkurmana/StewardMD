@@ -1,0 +1,143 @@
+{
+  "id": "gc_076",
+  "specialty": "Critical Care",
+  "condition": "Necrotising fasciitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Rapidly worsening pain, swelling and redness of the right lower limb for 24 hours, now confused and hypotensive.",
+  "history": "A 54-year-old man with type 2 diabetes mellitus presented with a minor abrasion on the right shin sustained 3 days earlier while gardening. Over the last 24 hours he developed severe, disproportionate pain in the limb that progressed rapidly despite only modest skin changes initially. Pain has now become so severe that he cannot tolerate examination or weight-bearing. Over the past 6-8 hours he has become drowsy, less communicative, and family report he has been shivering with high fever. No prior similar episodes. No known peripheral vascular disease. No recent hospitalization or antibiotic use.",
+  "examination": "Toxic-looking, diaphoretic, drowsy but rousable man in obvious distress. Right lower leg shows rapidly spreading dusky erythema extending proximally from the shin over the preceding hours, with ill-defined, non-sharply-demarcated borders, tense edema, and patchy hemorrhagic bullae. Skin is exquisitely tender with pain grossly out of proportion to the visible findings; palpation reveals crepitus over the mid-shin. Overlying skin is dusky/violaceous in places with early skin necrosis. Distal pulses difficult to assess due to edema. No frank purulent drainage. Peripheral pulses present proximally.",
+  "vitals": {
+    "hr": 128,
+    "bp": "82/48",
+    "rr": 28,
+    "spo2": 92,
+    "temp": 39.4
+  },
+  "labs": {
+    "wbc": "24.5 x10^9/L",
+    "creatinine": "2.1 mg/dL",
+    "sodium": "128 mmol/L",
+    "creatineKinase": "1850 U/L",
+    "crp": "310 mg/L",
+    "lactate": "4.8 mmol/L",
+    "glucose": "310 mg/dL",
+    "platelets": "98 x10^3/uL",
+    "inr": "1.6",
+    "bilirubin": "1.4 mg/dL",
+    "procalcitonin": "18 ng/mL",
+    "lrinecScore": "9 (high risk)"
+  },
+  "imaging": [
+    "Plain radiograph right leg: soft tissue gas tracking along fascial planes",
+    "CT lower limb (if obtained pre-operatively, should not delay surgery): fascial thickening, non-enhancing fascia, and gas within soft tissue planes"
+  ],
+  "microbiology": [
+    "Intra-operative tissue and blood cultures pending at presentation",
+    "Gram stain of bullae fluid/tissue sent urgently",
+    "Blood cultures x2 sets drawn before antibiotics"
+  ],
+  "differentialDiagnoses": [
+    "Necrotising fasciitis (Type I polymicrobial or Type II monomicrobial/Group A Streptococcus)",
+    "Severe cellulitis/erysipelas",
+    "Gas gangrene (Clostridial myonecrosis)",
+    "Diabetic foot infection with deep tissue involvement",
+    "Pyomyositis",
+    "Septic shock from another source"
+  ],
+  "finalDiagnosis": "Necrotising fasciitis with septic shock",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Necrotizing Fasciitis and Myonecrosis",
+    "Harrison's Principles of Internal Medicine 22e — Sepsis and Septic Shock",
+    "IDSA Skin and Soft Tissue Infections Guidelines 2014",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Emergent surgical debridement is the definitive intervention and must not be delayed for imaging or antibiotics. Empirical broad-spectrum therapy should cover Group A Streptococcus, Staphylococcus aureus (including MRSA), gram-negative organisms, and anaerobes: a broad-spectrum beta-lactam/beta-lactamase inhibitor or carbapenem combined with vancomycin (or linezolid) plus clindamycin for antitoxin effect against toxin-producing streptococcal/staphylococcal strains. De-escalate once operative cultures and Gram stain/sensitivities are available. Concurrent aggressive fluid resuscitation and vasopressor support per Surviving Sepsis Campaign bundle.",
+  "contraindications": [
+    "Do not delay surgical exploration/debridement to await imaging confirmation in a clinically obvious case",
+    "Avoid NSAIDs (associated with masking symptoms and possible increased risk of progression in some case reports)",
+    "Clindamycin dose should be adjusted/avoided in severe hepatic impairment; monitor for C. difficile risk"
+  ],
+  "edgeCases": [
+    "Early presentation may show only modest skin erythema with pain out of proportion being the key discriminating clue - a high index of suspicion is essential as skin findings often lag behind the severity of underlying fascial necrosis",
+    "LRINEC score has imperfect sensitivity and should not be used to rule out the diagnosis in a clinically suspicious presentation",
+    "Diabetic patients may have blunted pain perception due to neuropathy, which can mask the 'pain out of proportion' sign and delay diagnosis",
+    "Crepitus is often absent even in true necrotising fasciitis and its absence does not exclude the diagnosis"
+  ],
+  "expectedMaiK": "MaiK should flag pain out of proportion plus rapidly spreading erythema, crepitus/bullae, and sepsis/organ dysfunction as a surgical emergency (necrotising fasciitis) requiring emergent surgical consultation, not solely antibiotic management.",
+  "expectedNextQuestions": [
+    "Is emergent surgical/orthopedic or general surgery consultation for exploration and debridement already arranged?",
+    "What is the LRINEC score and does it support the clinical suspicion?",
+    "Has broad-spectrum empirical antibiotics including clindamycin been started prior to surgery?",
+    "Is there evidence of compartment syndrome or need for fasciotomy?",
+    "What is the trend in lactate and hemodynamic status with resuscitation?"
+  ],
+  "expectedInvestigations": [
+    "LRINEC score calculation",
+    "Blood cultures x2 before antibiotics",
+    "CK, CRP, procalcitonin, lactate",
+    "Plain radiograph or CT of affected limb for soft tissue gas",
+    "Urgent surgical exploration (diagnostic and therapeutic)",
+    "Intra-operative tissue Gram stain and culture"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "rapidlySpreadingErythema": true,
+    "severePain": true,
+    "crepitusOrBullae": true,
+    "deepTissueInvolvement": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "Necrotising fasciitis with septic shock",
+    "acceptableIds": [
+      "NECROTIZING_FASCIITIS"
+    ],
+    "differentialIds": [
+      "NECROTIZING_FASCIITIS",
+      "SEPTIC_SHOCK",
+      "CELLULITIS",
+      "DIABETIC_FOOT"
+    ],
+    "investigations": [
+      "LRINEC score",
+      "Blood cultures",
+      "CK, CRP, lactate",
+      "Plain radiograph/CT for soft tissue gas",
+      "Urgent surgical exploration"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "vancomycin",
+        "clindamycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (NECROTIZING_FASCIITIS)",
+    "confidence >= expectedConfidence.min",
+    "differential includes SEPTIC_SHOCK and CELLULITIS",
+    "expectedMaiK surfaces surgical emergency messaging, not antibiotics-only management",
+    "stewardship recommendation includes anti-toxin agent (clindamycin) alongside broad-spectrum coverage"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

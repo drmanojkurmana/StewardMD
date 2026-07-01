@@ -1,0 +1,147 @@
+{
+  "id": "gc_049",
+  "specialty": "Critical Care",
+  "condition": "Cardiogenic shock",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset severe breathlessness and chest heaviness 6 hours ago, now cold, clammy and confused.",
+  "history": "A 64-year-old man with hypertension and type 2 diabetes was brought to the emergency department after 6 hours of central chest heaviness radiating to the left arm, associated with diaphoresis and nausea. He delayed seeking care. Over the last 2 hours he has become progressively breathless, drowsy, and his family noted his hands and feet turning cold and mottled. He has not passed urine since arrival. No prior history of MI; he is on amlodipine and metformin only, no antiplatelet or statin. No fever, no diarrhea/vomiting preceding the episode, no history of recent large-volume fluid loss.",
+  "examination": "Anxious but obtunded, responding only to voice (GCS 13). Cold, clammy, mottled peripheries with delayed capillary refill (>4 seconds). Raised JVP. Bilateral basal crackles two-thirds up both lung fields. Soft new pansystolic murmur at the apex not present on old records, raising concern for acute mitral regurgitation from papillary muscle involvement. Heart sounds soft with a gallop rhythm; no pericardial rub. Abdomen soft, no organomegaly. No peripheral edema yet (acute presentation). Urinary catheter placed in ED draining minimal concentrated urine.",
+  "vitals": {
+    "hr": 112,
+    "bp": "78/52",
+    "rr": 28,
+    "spo2": 89,
+    "temp": 36.4
+  },
+  "labs": {
+    "troponinI": "58 ng/mL (markedly elevated)",
+    "ckMb": "elevated",
+    "lactate": "5.2 mmol/L",
+    "creatinine": "2.1 mg/dL (baseline 1.0)",
+    "bnp": "1450 pg/mL",
+    "hemoglobin": "13.8 g/dL",
+    "wbc": "13.2 x10^9/L",
+    "platelets": "210 x10^3/uL",
+    "sodium": "133 mmol/L",
+    "potassium": "5.1 mmol/L",
+    "arterialPh": "7.28",
+    "arterialLactateTrend": "rising over 4 hours despite fluids",
+    "glucose": "210 mg/dL"
+  },
+  "imaging": [
+    "12-lead ECG: ST-segment elevation in leads V1-V4 with reciprocal inferior depression, consistent with acute anterior STEMI",
+    "Portable CXR: pulmonary venous congestion with bilateral perihilar haziness, no pneumothorax",
+    "Bedside echocardiogram: severe global and anteroapical hypokinesis, LVEF ~25%, moderate-severe functional/ischemic mitral regurgitation, no pericardial effusion, no mechanical complication (no VSD) identified on initial scan",
+    "Coronary angiography (emergent): proximal LAD 100% occlusion; culprit lesion"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Cardiogenic shock secondary to acute anterior STEMI (post-MI pump failure)",
+    "Septic shock",
+    "Hypovolemic shock",
+    "Acute mechanical complication of MI (papillary muscle rupture / VSD)",
+    "Pulmonary embolism with obstructive shock",
+    "Cardiac tamponade"
+  ],
+  "finalDiagnosis": "Cardiogenic shock due to acute anterior STEMI (post-MI pump failure) with secondary ischemic mitral regurgitation",
+  "citations": [
+    "Harrison 22e — ST-Elevation Myocardial Infarction and Cardiogenic Shock",
+    "ACC/AHA Guideline for the Management of ST-Elevation Myocardial Infarction 2013 (with 2015/2021 focused updates)",
+    "ESC Guidelines for the Management of Acute Myocardial Infarction in Patients Presenting with ST-Segment Elevation 2023",
+    "ESC/ESICM Guidelines on Cardiogenic Shock 2021 consensus statement"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid excessive IV fluid boluses given pulmonary edema; use cautious, small aliquots only if clearly volume-responsive",
+    "Beta-blockers contraindicated acutely in overt cardiogenic shock",
+    "Avoid NSAIDs for chest pain",
+    "Caution with nitrates given hypotension — avoid until shock reversed",
+    "Metformin should be held given AKI and shock (risk of lactic acidosis)"
+  ],
+  "edgeCases": [
+    "If mechanical complication (VSD or papillary muscle rupture) is confirmed, urgent cardiac surgery referral supersedes standard PCI-only pathway",
+    "Right ventricular infarction can mimic/complicate presentation and changes fluid management (may require preload support rather than restriction) — right-sided ECG leads should be checked",
+    "In elderly or frail patients, decisions about mechanical circulatory support (IABP/Impella/ECMO) require goals-of-care discussion",
+    "cardiogenic_shock is not a bacterial/infective diagnosis, so no antimicrobial stewardship tier applies (stewardship = null); do not force a septic-shock antibiotic pathway"
+  ],
+  "expectedMaiK": "MaiK should flag this as cardiogenic shock post-STEMI (not septic shock) given the temporal link to acute chest pain, ECG changes, and echo-confirmed severe LV dysfunction; commentary should recommend urgent reperfusion (primary PCI), inotrope/vasopressor support (e.g., norepinephrine first-line per ESC/AHA), avoidance of large fluid boluses, and consideration of mechanical circulatory support if refractory, while explicitly noting no antibiotics are indicated absent infective source.",
+  "expectedNextQuestions": [
+    "Time of symptom onset and door-to-balloon time target?",
+    "Any evidence of new murmur suggesting acute VSD or papillary muscle rupture on repeat echo?",
+    "Right-sided ECG leads to exclude RV infarction?",
+    "Response to initial fluid challenge vs need for inotropes/vasopressors?",
+    "Is the patient a candidate for mechanical circulatory support (IABP/Impella/ECMO) or urgent CABG/surgery?",
+    "Baseline renal function and trend given contrast-induced nephropathy risk during angiography?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Serial troponin",
+    "Bedside echocardiography",
+    "Emergent coronary angiography",
+    "Arterial lactate and blood gas",
+    "Renal function and electrolytes",
+    "Chest X-ray",
+    "Right-sided ECG leads to assess RV involvement"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "ecgIschemia": true,
+    "newMurmur": true,
+    "knownCAD": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "oliguria": true,
+    "sofaIncrease": true
+  },
+  "expected": {
+    "diagnosis": "Cardiogenic shock due to acute anterior STEMI (post-MI pump failure) with secondary ischemic mitral regurgitation",
+    "acceptableIds": [
+      "cardiogenic_shock"
+    ],
+    "differentialIds": [
+      "acs",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Serial troponin",
+      "Bedside echocardiography",
+      "Emergent coronary angiography",
+      "Arterial lactate and blood gas",
+      "Renal function panel",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (cardiogenic_shock)",
+    "confidence >= expectedConfidence.min (75)",
+    "differential includes acs (acute coronary syndrome)",
+    "no antibiotic/stewardship recommendation generated (stewardship tier = null)",
+    "output flags vasopressor/inotrope requirement and urgent reperfusion, not IV fluid resuscitation as primary therapy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

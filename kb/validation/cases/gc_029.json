@@ -1,0 +1,145 @@
+{
+  "id": "gc_029",
+  "specialty": "Respiratory",
+  "condition": "Pulmonary embolism",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Sudden collapse with severe breathlessness and near-syncope 40 minutes after a long-haul flight",
+  "history": "58-year-old woman, previously ambulant, developed acute-onset severe breathlessness and central chest tightness while disembarking after a 14-hour international flight. She had one witnessed brief loss of consciousness in the arrivals lounge lasting under a minute, with rapid spontaneous recovery to a confused, diaphoretic state. She reports right calf swelling and aching for the preceding 3 days, which she attributed to prolonged sitting. No chest trauma, no fever, no cough, no hemoptysis at onset (later develops scant hemoptysis). Past history of a total knee replacement 5 weeks ago with self-discontinuation of prophylactic anticoagulation after 2 weeks. No prior VTE. Non-smoker. On combined oral contraceptive pill. Family history of unprovoked DVT in her mother.",
+  "examination": "Acutely unwell, ashen, cool clammy peripheries, mottled skin over the knees. Central cyanosis. Markedly raised JVP with prominent 'a' wave. Right ventricular heave and loud, palpable P2 at the left sternal edge. Tachycardic, thready pulse. Right calf is swollen, warm, and tender with a positive Homans' sign equivalent (calf tenderness on dorsiflexion); circumference 4 cm greater than left. Chest is clear to auscultation bilaterally (no crackles, no wheeze). Abdomen soft. GCS 14 (E3V5M6), transiently drowsy but rousable, no focal neurological deficit.",
+  "vitals": {
+    "hr": 138,
+    "bp": "78/48",
+    "rr": 34,
+    "spo2": 82,
+    "temp": 36.4
+  },
+  "labs": {
+    "dDimer": "> 5000 ng/mL FEU (markedly elevated)",
+    "troponinI": "0.28 ng/mL (elevated)",
+    "ntProBNP": "1850 pg/mL (elevated)",
+    "arterialLactate": "3.8 mmol/L",
+    "arterialBloodGas": "pH 7.32, PaO2 52 mmHg on room air, PaCO2 29 mmHg, HCO3 18 mmol/L — hypoxemic respiratory alkalosis with metabolic acidosis",
+    "hemoglobin": "12.6 g/dL",
+    "platelets": "210 x10^3/uL",
+    "creatinine": "1.3 mg/dL (mild acute rise from baseline 0.8)",
+    "inr": "1.1 (not anticoagulated)",
+    "wellsScore": "score 9 (high probability: clinical signs of DVT, PE most likely diagnosis, HR >100, immobilization/surgery within 4 weeks, prior VTE risk)",
+    "pesiScoreClass": "PESI Class V (very high risk) / sPESI 2"
+  },
+  "imaging": [
+    "Bedside transthoracic echocardiogram: severe RV dilatation and dysfunction, McConnell's sign (akinesia of mid free wall with preserved apical contraction), septal flattening/D-shaped LV in systole (RV pressure overload), estimated RVSP ~55 mmHg, no pericardial effusion",
+    "CT pulmonary angiogram (once hemodynamics permitted, or performed after empirical thrombolysis per protocol): large saddle embolus straddling the main pulmonary artery bifurcation extending into bilateral proximal pulmonary arteries, RV:LV ratio > 1.5",
+    "Compression ultrasound Doppler right lower limb: non-compressible right popliteal and femoral veins confirming acute proximal DVT",
+    "12-lead ECG: sinus tachycardia, new incomplete right bundle branch block, S1Q3T3 pattern, T-wave inversions V1-V4 (RV strain)",
+    "Portable chest X-ray: unremarkable lung fields, no infiltrate, no pneumothorax (Westermark sign not definitively seen)"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Massive pulmonary embolism with obstructive shock",
+    "Acute myocardial infarction / cardiogenic shock",
+    "Cardiac tamponade",
+    "Aortic dissection",
+    "Tension pneumothorax",
+    "Vasovagal syncope",
+    "Septic shock"
+  ],
+  "finalDiagnosis": "Massive (high-risk) pulmonary embolism with obstructive shock",
+  "citations": [
+    "Harrison 22e — Pulmonary Thromboembolism and Deep Vein Thrombosis",
+    "ESC Guidelines for the diagnosis and management of acute pulmonary embolism 2019 (endorsed by ERS)",
+    "AHA Scientific Statement on Management of Massive and Submassive Pulmonary Embolism 2011"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Thrombolysis relatively/absolutely contraindicated if recent major surgery (this patient is only 5 weeks post-arthroplasty — surgical bleeding risk must be weighed against life-threatening obstructive shock; multidisciplinary/PERT discussion advised)",
+    "Avoid unfractionated heparin dose errors — weight-based nomogram required",
+    "Caution with fluid resuscitation — aggressive volume loading can worsen RV overload and shift septum, precipitating further hemodynamic collapse; limit to small boluses (~500 mL)",
+    "COCP should be discontinued permanently"
+  ],
+  "edgeCases": [
+    "Recent major orthopedic surgery (5 weeks prior) creates a bleeding-risk dilemma for systemic thrombolysis versus catheter-directed therapy or surgical embolectomy",
+    "If cardiac arrest occurs or is imminent, empirical thrombolysis may be given before CT confirmation based on bedside echo findings alone",
+    "Transient loss of consciousness (syncope) in PE is itself a marker of high-risk/massive PE and should not be dismissed as vasovagal",
+    "Normal chest X-ray and clear lung fields do not exclude PE and should not falsely reassure toward a primary pulmonary parenchymal cause of hypoxia",
+    "Hypotension with clear lungs and raised JVP is a classic pattern for obstructive shock (PE, tamponade) rather than cardiogenic/septic shock with pulmonary edema"
+  ],
+  "expectedMaiK": "Sudden collapse with hypotension, hypoxia, clear lung fields, raised JVP, RV strain on ECG/echo and a swollen tender calf after prolonged immobility/recent surgery should immediately raise massive PE with obstructive shock; flag as a time-critical diagnosis warranting bedside echo, urgent reperfusion decision (thrombolysis vs. embolectomy vs. catheter-directed therapy), and PERT activation rather than empirical antimicrobial therapy.",
+  "expectedNextQuestions": [
+    "Any absolute or relative contraindications to systemic thrombolysis (recent surgery, bleeding, recent stroke)?",
+    "Can the patient tolerate transfer for CTPA, or is bedside echo sufficient to proceed empirically given instability?",
+    "Is a Pulmonary Embolism Response Team (PERT) available for multidisciplinary reperfusion decision-making?",
+    "What is the trend in blood pressure and lactate with initial fluid bolus — improving or worsening?",
+    "Baseline anticoagulation history and renal function to guide choice/dosing of anticoagulant post-reperfusion?"
+  ],
+  "expectedInvestigations": [
+    "Bedside transthoracic echocardiography",
+    "CT pulmonary angiography (once stable enough / per protocol)",
+    "12-lead ECG",
+    "Arterial blood gas",
+    "D-dimer",
+    "Troponin and NT-proBNP",
+    "Compression Doppler ultrasound of lower limbs",
+    "Wells/PESI or sPESI risk stratification"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "dyspnea": true,
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "syncope": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "raisedJVP": true,
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "anticoagulated": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "Massive (high-risk) pulmonary embolism with obstructive shock",
+    "acceptableIds": [
+      "pe"
+    ],
+    "differentialIds": [
+      "acs",
+      "tamponade",
+      "aortic_dissection",
+      "pneumothorax",
+      "cardiogenic_shock"
+    ],
+    "investigations": [
+      "Bedside transthoracic echocardiography",
+      "CT pulmonary angiography",
+      "12-lead ECG",
+      "Arterial blood gas",
+      "D-dimer",
+      "Troponin/NT-proBNP",
+      "Lower limb compression Doppler ultrasound"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (pe)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes acute coronary syndrome / cardiogenic shock and cardiac tamponade as obstructive-shock mimics",
+    "engine does not recommend empirical antimicrobial therapy",
+    "engine surfaces urgency for reperfusion therapy / PERT activation given hemodynamic instability",
+    "engine flags recent major surgery as a contraindication consideration for systemic thrombolysis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

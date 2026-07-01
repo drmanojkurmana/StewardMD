@@ -1,0 +1,113 @@
+{
+  "id": "gc_032",
+  "specialty": "Respiratory",
+  "condition": "Acute asthma",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Sudden worsening of breathlessness and wheeze over the past 6 hours, poorly responsive to home salbutamol inhaler, brought to the emergency department by family.",
+  "history": "Known asthmatic since childhood, previously well-controlled on low-dose inhaled corticosteroid/formoterol, ran out of controller inhaler 3 weeks ago. Developed an upper respiratory tract viral infection 2 days ago with progressive cough, chest tightness and wheeze. Over the last 6 hours has been unable to speak in full sentences, using her rescue inhaler every 15-20 minutes without relief, and family noted her becoming increasingly tired and anxious. No fever, no purulent sputum, no chest pain. No known cardiac disease. Non-smoker. No recent NSAID or beta-blocker use. Two prior hospital admissions for asthma exacerbations, one requiring ICU-level care 3 years ago.",
+  "examination": "Young woman sitting upright, visibly distressed, speaking in single words only. Using accessory muscles of respiration with intercostal and suprasternal recession. Widespread bilateral polyphonic wheeze on auscultation with reduced air entry at both bases. No crepitations. Trachea central. No cyanosis at rest. Pulsus paradoxus not formally measured but radial pulse thready and rapid. Peak expiratory flow rate approximately 35% of her predicted/best value.",
+  "vitals": {
+    "hr": 128,
+    "bp": "138/88",
+    "rr": 34,
+    "spo2": 91,
+    "temp": 37
+  },
+  "labs": {
+    "arterialBloodGas": "pH 7.46, PaCO2 32 mmHg, PaO2 62 mmHg, HCO3 22 mmol/L (respiratory alkalosis with hypoxemia, no CO2 retention yet)",
+    "wbc": "9.8 x10^9/L",
+    "eosinophils": "mildly elevated",
+    "electrolytes": "potassium 3.6 mmol/L (mild hypokalemia post-nebulized salbutamol)",
+    "lactate": "1.4 mmol/L",
+    "bnp": "not indicated / not sent"
+  },
+  "imaging": [
+    "Chest X-ray: hyperinflated lung fields, no focal consolidation, no pneumothorax"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute severe asthma exacerbation",
+    "COPD exacerbation",
+    "Anaphylaxis with bronchospasm",
+    "Upper airway obstruction / vocal cord dysfunction",
+    "Pulmonary embolism",
+    "Cardiac (flash) pulmonary edema",
+    "Pneumothorax"
+  ],
+  "finalDiagnosis": "Acute severe asthma exacerbation",
+  "citations": [
+    "Harrison 22e — Asthma",
+    "GINA (Global Initiative for Asthma) Global Strategy for Asthma Management and Prevention 2024"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid non-selective beta-blockers",
+    "Avoid sedatives/opioids which can suppress respiratory drive in severe exacerbation",
+    "Avoid NSAIDs/aspirin if history of aspirin-exacerbated respiratory disease"
+  ],
+  "edgeCases": [
+    "A rising or normal PaCO2 in a tachypneic asthmatic is an ominous sign of impending respiratory failure, not reassurance of improvement.",
+    "Silent chest with minimal wheeze can indicate near-fatal asthma with critically reduced air movement rather than clinical improvement.",
+    "This condition (asthma_exac) maps to the diagnosable disease list; it is distinct from infective respiratory conditions (e.g., CAP, COPD_EXACERBATION) also present in the list — differentials chosen reflect genuine diagnostic uncertainty at presentation.",
+    "No antimicrobial therapy indicated as this is a non-infective bronchospastic emergency; stewardship field is null."
+  ],
+  "expectedMaiK": "Flag acute severe/life-threatening asthma features (inability to complete sentences, PEFR <50% predicted, tachycardia, hypoxia) and prioritize urgent bronchodilator/systemic corticosteroid therapy per GINA/Harrison; no antibiotics indicated absent evidence of bacterial infection.",
+  "expectedNextQuestions": [
+    "What is the peak expiratory flow rate as a percentage of predicted or personal best?",
+    "Is there a silent chest or reduced consciousness suggesting near-fatal asthma?",
+    "What was the trigger — viral URTI, allergen exposure, medication non-adherence, or NSAID exposure?",
+    "History of prior ICU admission or intubation for asthma (marker of high-risk asthma)?",
+    "Any features suggesting an alternative diagnosis such as anaphylaxis, foreign body, or cardiac cause?"
+  ],
+  "expectedInvestigations": [
+    "Peak expiratory flow rate",
+    "Arterial blood gas",
+    "Pulse oximetry",
+    "Chest X-ray (to exclude pneumothorax/consolidation)",
+    "Serum electrolytes (monitor for hypokalemia with beta-agonist therapy)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "dyspnea": true,
+    "wheeze": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "Acute severe asthma exacerbation",
+    "acceptableIds": [
+      "asthma_exac"
+    ],
+    "differentialIds": [
+      "copd_exac_ni",
+      "anaphylaxis",
+      "pe",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "Peak expiratory flow rate",
+      "Arterial blood gas",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (asthma_exac)",
+    "confidence >= expectedConfidence.min",
+    "differential includes copd_exac_ni or anaphylaxis",
+    "stewardship.antibiotics is empty (non-infective presentation)",
+    "expectedNextQuestions surfaces peak flow / silent chest assessment"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

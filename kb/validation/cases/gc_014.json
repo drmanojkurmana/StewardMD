@@ -1,0 +1,121 @@
+{
+  "id": "gc_014",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Decreased urine output and lower abdominal discomfort for 2 days, on a background of known benign prostatic enlargement.",
+  "history": "68-year-old man with long-standing lower urinary tract symptoms (poor stream, nocturia, hesitancy) for several years, previously offered but never started on alpha-blocker therapy. Over the past 2 days he has noted progressively reduced urine output, suprapubic fullness, and mild lower abdominal discomfort. He denies fever, dysuria, or hematuria. No prior episodes of acute urinary retention. No NSAID use, no recent contrast exposure, no diarrhea or vomiting. Known hypertension on amlodipine; no diabetes. No known kidney disease previously; last documented creatinine 1 year ago was normal.",
+  "examination": "Alert, mildly uncomfortable, not in acute distress. Suprapubic fullness and a palpable, mildly tender distended bladder on abdominal exam. No costovertebral angle tenderness. No peripheral edema. No flank masses. Digital rectal exam: smoothly enlarged, non-tender prostate consistent with benign hyperplasia; no nodularity.",
+  "vitals": {
+    "hr": 88,
+    "bp": "138/82",
+    "rr": 16,
+    "spo2": 98,
+    "temp": 36.9
+  },
+  "labs": {
+    "creatinine": 3.8,
+    "ureaMmol": 18.2,
+    "sodium": 133,
+    "potassium": 5.4,
+    "bicarbonate": 19,
+    "hemoglobin": 13.1,
+    "wbc": 8.4,
+    "platelets": 245,
+    "postVoidResidualMl": 850,
+    "urinalysis": "no significant proteinuria, occasional RBCs, no casts",
+    "fractionalExcretionOfUrea": "not obstructive-specific; used to exclude prerenal component"
+  },
+  "imaging": [
+    "Renal ultrasound: bilateral hydronephrosis (moderate-to-severe) with hydroureter down to the level of the bladder base; markedly distended bladder (~850 mL residual)",
+    "No renal calculi identified; kidneys normal in size and echotexture without cortical thinning to suggest chronicity"
+  ],
+  "microbiology": [
+    "Urine culture pending at presentation (sent prior to catheterization); no prior positive cultures"
+  ],
+  "differentialDiagnoses": [
+    "Obstructive (post-renal) AKI due to bladder outlet obstruction from benign prostatic hyperplasia",
+    "Prerenal AKI from volume depletion",
+    "Intrinsic acute tubular necrosis",
+    "Acute urinary retention with overflow incontinence",
+    "Neurogenic bladder",
+    "Pelvic malignancy causing ureteric obstruction"
+  ],
+  "finalDiagnosis": "Acute kidney injury, post-renal (obstructive) due to bladder outlet obstruction from benign prostatic hyperplasia with bilateral hydronephrosis",
+  "citations": [
+    "Harrison 22e — Acute Kidney Injury",
+    "Harrison 22e — Benign Prostatic Hyperplasia and Urinary Tract Obstruction",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid nephrotoxic agents (NSAIDs, IV contrast, aminoglycosides) until obstruction relieved and renal function trending toward baseline",
+    "Avoid alpha-blocker initiation until acute retention decompressed and hemodynamics assessed"
+  ],
+  "edgeCases": [
+    "Post-obstructive diuresis may follow catheter decompression; requires close monitoring of urine output and electrolytes (risk of hypokalemia, hyponatremia, volume depletion)",
+    "Bilateral disease (as here, at the bladder outlet level) is required to cause AKI from obstruction — unilateral ureteric obstruction with a normal contralateral kidney would not typically cause AKI",
+    "If hyperkalemia (K 5.4) or severe acidosis worsens before decompression is effective, urgent dialysis may be required",
+    "Underlying prostate malignancy must be excluded once acute issue is managed (PSA, further prostate assessment) — not addressed acutely",
+    "This case (uncomplicated obstructive AKI) is not itself a discrete diagnosis in the current disease vocabulary list; closest listed engine diagnosis is generic 'aki' (Nephrology) used as acceptable top-1"
+  ],
+  "expectedMaiK": "MaiK should flag this as post-renal AKI driven by bladder outlet obstruction (large post-void residual, bilateral hydronephrosis) and prioritize urgent bladder decompression (catheterization) over renal-specific workup, then monitor for post-obstructive diuresis and hyperkalemia.",
+  "expectedNextQuestions": [
+    "Was a urinary catheter placed and what was the immediate drained volume?",
+    "Is there a history of hematuria, weight loss, or bone pain to suggest prostate or pelvic malignancy?",
+    "What is the trend in urine output and electrolytes over the following 24-48 hours after decompression?",
+    "Is the patient on any anticholinergic or sympathomimetic medications that could precipitate retention?",
+    "Any neurological symptoms suggesting neurogenic bladder?"
+  ],
+  "expectedInvestigations": [
+    "Renal ultrasound",
+    "Serum creatinine and electrolytes (including potassium)",
+    "Post-void residual measurement / bladder scan",
+    "Urinalysis and urine culture",
+    "PSA (once acute issue managed, not during acute retention)",
+    "ECG if hyperkalemia present"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "oliguria": true,
+    "flankPain": true,
+    "abdominalDistension": true,
+    "urinaryRetention": true,
+    "renalImpairment": true,
+    "complicatedUTIRisk": true
+  },
+  "expected": {
+    "diagnosis": "Acute kidney injury, post-renal (obstructive) due to bladder outlet obstruction from benign prostatic hyperplasia with bilateral hydronephrosis",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "ckd",
+      "hyperkalemia"
+    ],
+    "investigations": [
+      "Renal ultrasound",
+      "Post-void residual / bladder scan",
+      "Serum electrolytes including potassium",
+      "Urinalysis and culture"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (aki)",
+    "confidence >= expectedConfidence.min",
+    "differential includes ckd or hyperkalemia",
+    "system flags urgent bladder decompression / catheterization as immediate management priority",
+    "system does not recommend empirical antibiotics in absence of infective findings"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

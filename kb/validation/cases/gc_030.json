@@ -1,0 +1,130 @@
+{
+  "id": "gc_030",
+  "specialty": "Respiratory",
+  "condition": "COPD exacerbation",
+  "age": 67,
+  "sex": "M",
+  "presentingComplaint": "Increased breathlessness and cough with change in sputum colour to yellow-green for the past 3 days",
+  "history": "67-year-old man with known moderate-to-severe COPD (GOLD stage III, prior spirometry FEV1 48% predicted), on home tiotropium and formoterol/budesonide, ex-smoker (40 pack-years, quit 5 years ago), presents with a 3-day history of worsening dyspnea on minimal exertion (from his baseline of dyspnea on moderate exertion), increased cough frequency, and a marked increase in sputum volume that has turned purulent (yellow-green) over the last 2 days. He denies fever at home but feels generally unwell. No chest pain, no hemoptysis, no leg swelling or orthopnea. No sick contacts. Two prior COPD exacerbations in the past year, one requiring hospitalization 4 months ago (treated with antibiotics and oral steroids, no ICU admission). No recent antibiotic use in the last 90 days. No nursing home residence, no immunosuppression.",
+  "examination": "Alert, mildly breathless at rest, speaking in full sentences. Using accessory muscles of respiration mildly. Barrel chest, hyperresonant on percussion bilaterally. Bilateral expiratory wheeze with scattered coarse crepitations at both bases, no focal consolidation signs. No cyanosis. No pedal edema. JVP not raised. Cardiovascular exam unremarkable apart from tachycardia.",
+  "vitals": {
+    "hr": 104,
+    "bp": "138/82",
+    "rr": 24,
+    "spo2": 91,
+    "temp": 37.6
+  },
+  "labs": {
+    "wbc": "13.2 x10^9/L",
+    "crp": "42 mg/L",
+    "procalcitonin": "0.18 ng/mL",
+    "abgPaO2": "58 mmHg on room air",
+    "abgPaCO2": "48 mmHg",
+    "abgPh": "7.36",
+    "hemoglobin": "14.1 g/dL",
+    "creatinine": "0.9 mg/dL",
+    "sodium": "138 mmol/L",
+    "eosinophilCount": "0.15 x10^9/L"
+  },
+  "imaging": [
+    "Chest X-ray: hyperinflated lung fields, flattened diaphragms, no focal consolidation or effusion"
+  ],
+  "microbiology": [
+    "Sputum Gram stain: many polymorphonuclear leukocytes, moderate gram-negative coccobacilli",
+    "Sputum culture pending at time of assessment"
+  ],
+  "differentialDiagnoses": [
+    "Infective exacerbation of COPD",
+    "Community-acquired pneumonia",
+    "Acute decompensated heart failure",
+    "Pulmonary embolism",
+    "Pneumothorax"
+  ],
+  "finalDiagnosis": "Acute infective exacerbation of COPD (Anthonisen type I: increased dyspnea, increased sputum volume, increased sputum purulence)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Chronic Obstructive Pulmonary Disease",
+    "GOLD (Global Initiative for Chronic Obstructive Lung Disease) Report 2024",
+    "IDSA/ATS Community-Acquired Pneumonia Guidelines 2019 (for differential exclusion)"
+  ],
+  "stewardship": "Empirical oral antibiotic therapy is indicated as this patient meets all three Anthonisen criteria (increased dyspnea, increased sputum volume, increased sputum purulence). Per GOLD 2024, preferred agents include aminopenicillin with clavulanic acid, a macrolide, or doxycycline as first-line; given no recent antibiotic exposure, no risk factors for Pseudomonas (no severe airflow obstruction with FEV1 <30%, no prior Pseudomonas isolation, no bronchiectasis), a respiratory fluoroquinolone is not required. Local antibiogram should guide final choice.",
+  "contraindications": [
+    "Avoid fluoroquinolones as first-line if no risk factors for resistant/Pseudomonas organisms, to preserve stewardship and limit tendon/QT/dysglycemia risk",
+    "Avoid unnecessary use of azithromycin in patients with significant QT prolongation risk",
+    "Systemic corticosteroids should be short-course (per GOLD, typically 5 days) to minimize hyperglycemia and other steroid-related adverse effects"
+  ],
+  "edgeCases": [
+    "If sputum culture later grows Pseudomonas aeruginosa or patient has FEV1 <30% predicted / prior Pseudomonas isolation / bronchiectasis, antipseudomonal coverage (e.g., piperacillin-tazobactam or antipseudomonal fluoroquinolone) would be warranted",
+    "If hypercapnic respiratory failure worsens (pH <7.35) despite bronchodilators and controlled oxygen, non-invasive ventilation should be considered per GOLD/BTS criteria",
+    "Distinguishing infective COPD exacerbation from CAP-on-COPD requires chest imaging; absence of new consolidation here favors exacerbation over pneumonia",
+    "Not all COPD exacerbations are infective — up to a third are triggered by non-infectious causes (pollution, non-adherence, PE) and antibiotics should be reserved for those meeting Anthonisen criteria or requiring ventilatory support"
+  ],
+  "expectedMaiK": "MaiK should recognize this as an Anthonisen type I infective COPD exacerbation warranting empirical antibiotics (aminopenicillin/clavulanate, macrolide, or doxycycline) plus bronchodilators and short-course systemic corticosteroids, while flagging that imaging shows no consolidation (arguing against CAP) and that Pseudomonas risk factors are absent so fluoroquinolones/antipseudomonal agents are not first-line.",
+  "expectedNextQuestions": [
+    "What is the patient's baseline FEV1 and has Pseudomonas aeruginosa been isolated previously?",
+    "Any recent hospitalization or antibiotic exposure in the last 3 months?",
+    "Has the patient had escalating home oxygen or NIV requirements?",
+    "Is there a history of bronchiectasis on prior imaging?",
+    "What was the sputum culture result once available?"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray",
+    "Arterial blood gas",
+    "Sputum Gram stain and culture",
+    "CBC with differential",
+    "CRP/procalcitonin",
+    "ECG (to exclude cardiac cause of dyspnea)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "knownCOPD": true,
+    "increasedDyspnea": true,
+    "increasedSputumVolume": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "crepitations": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "supplementalOxygen": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "Acute infective exacerbation of COPD (Anthonisen type I: increased dyspnea, increased sputum volume, increased sputum purulence)",
+    "acceptableIds": [
+      "COPD_EXACERBATION"
+    ],
+    "differentialIds": [
+      "CAP",
+      "ACUTE_BRONCHITIS",
+      "BRONCHIECTASIS_EXACERBATION"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "Arterial blood gas",
+      "Sputum Gram stain and culture",
+      "CBC with differential",
+      "CRP/procalcitonin"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "amoxicillin-clavulanate",
+        "doxycycline",
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (COPD_EXACERBATION)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes CAP",
+    "stewardship recommendation does not default to fluoroquinolone as first-line",
+    "no unnecessary antipseudomonal coverage recommended given absence of MDR/Pseudomonas risk factors"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

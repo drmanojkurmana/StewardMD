@@ -1,0 +1,145 @@
+{
+  "id": "gc_011",
+  "specialty": "Genitourinary",
+  "condition": "Catheter-associated UTI",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Brought in from a nursing home with new-onset fever, rigors, and confusion over the past 24 hours in the setting of a long-term indwelling urinary catheter.",
+  "history": "78-year-old woman, nursing home resident, with a long-term indwelling urethral catheter in place for 3 years for neurogenic bladder secondary to a prior stroke. Catheter is routinely changed monthly by nursing staff; last change was 3 weeks ago. Over the past 24 hours she developed fevers to 39.5°C with rigors, new confusion (baseline is oriented but mildly forgetful), and reduced oral intake, noted by nursing home staff. Catheter bag noted to contain cloudy, foul-smelling urine with new sediment. No cough, no diarrhea, no new skin breakdown reported. No recent catheter manipulation or trauma. No known drug allergies. History of hypertension and prior ischemic stroke with residual mild hemiparesis. No documented history of multidrug-resistant organism colonization. No antibiotics in the last 90 days; no recent hospitalization.",
+  "examination": "Toxic-appearing, febrile, mildly drowsy but rousable, oriented to person only (new from baseline). Warm, well-perfused peripherally, no rash or petechiae. Suprapubic and bilateral flank/costovertebral angle tenderness present, worse on the right. Catheter in situ, draining cloudy, malodorous urine with visible sediment; peri-urethral area mildly erythematous but no purulent discharge at insertion site. Chest clear, abdomen soft apart from suprapubic and flank tenderness, no peritonism. No focal neurological deficit beyond known baseline hemiparesis.",
+  "vitals": {
+    "hr": 118,
+    "bp": "92/58",
+    "rr": 24,
+    "spo2": 94,
+    "temp": 39.3
+  },
+  "labs": {
+    "wbc_10e9_L": 17.2,
+    "neutrophil_percent": 88,
+    "creatinine_mg_dL": 1.6,
+    "creatinine_baseline_mg_dL": 0.8,
+    "urea_mmol_L": 14.2,
+    "lactate_mmol_L": 2.8,
+    "platelets_10e3_uL": 165,
+    "crp_mg_L": 182,
+    "procalcitonin_ng_mL": 4.6,
+    "glucose_mg_dL": 142,
+    "urinalysis": "pyuria (>50 WBC/hpf), numerous bacteria, positive nitrites and leukocyte esterase",
+    "hemoglobin_g_dL": 11.4
+  },
+  "imaging": [
+    "Renal and bladder ultrasound: no hydronephrosis, no perinephric collection, catheter balloon well seated in bladder, no bladder stone",
+    "Chest X-ray: no consolidation or effusion (to exclude alternative source)"
+  ],
+  "microbiology": [
+    "Blood cultures x2 sent prior to antibiotics — pending",
+    "Urine culture from freshly replaced catheter sent — pending (prior colonizing organisms unknown)",
+    "No prior documented ESBL or CRE isolates on record"
+  ],
+  "differentialDiagnoses": [
+    "Catheter-associated urinary tract infection with systemic/bacteremic features (urosepsis)",
+    "Acute pyelonephritis",
+    "Complicated UTI with catheter as risk factor",
+    "Sepsis of urinary source",
+    "Intra-abdominal source (e.g., diverticulitis, cholangitis) presenting with fever and confusion",
+    "Aspiration pneumonia (occult, given nursing home resident with altered sensorium)"
+  ],
+  "finalDiagnosis": "Catheter-associated urinary tract infection, long-term catheter, with systemic inflammatory response (urosepsis)",
+  "citations": [
+    "Harrison 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "IDSA Catheter-Associated Urinary Tract Infection Guidelines 2010 (updated guidance)",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Empirical antimicrobial therapy targeting broad gram-negative coverage including Pseudomonas given long-term catheterization and nursing home residence (risk factors for resistant/nosocomial uropathogens), with consideration of enterococcal coverage; catheter should be exchanged (not merely left in place) before or at initiation of therapy to reduce biofilm-associated bacterial burden, with de-escalation once urine/blood culture and susceptibility data are available.",
+  "contraindications": [
+    "Avoid nephrotoxic agents (e.g., aminoglycoside monotherapy prolonged, NSAIDs) given acute kidney injury on baseline renal function",
+    "Do not rely on urinalysis/pyuria alone to distinguish infection from asymptomatic catheter colonization — treatment is guided by systemic symptoms (fever, rigors, altered sensorium, hemodynamic change), not urinalysis findings alone",
+    "Avoid delaying catheter exchange and antimicrobials while awaiting imaging in a toxic-appearing patient"
+  ],
+  "edgeCases": [
+    "Asymptomatic bacteriuria is universal in long-term catheterized patients and must not be treated; this case is distinguished by new systemic features (fever, rigors, altered sensorium, tachycardia, relative hypotension) attributable to no other source, meeting criteria for symptomatic CA-UTI",
+    "Confusion in an elderly nursing home resident can itself be a nonspecific presentation of UTI without systemic sepsis, but the combination of fever, rigors, tachycardia, and borderline hypotension here supports a systemic/bacteremic presentation rather than isolated delirium",
+    "Catheter should be changed (ideally before or with initiation of antibiotics) to disrupt biofilm; if catheter is left in situ, cultures obtained from an old catheter are less reliable",
+    "Long-term catheter and nursing home residence are risk factors for MDR gram-negative organisms (ESBL, Pseudomonas) even without documented prior resistant isolates, and should broaden initial empirical coverage pending cultures"
+  ],
+  "expectedMaiK": "MaiK should flag this as catheter-associated UTI with systemic/sepsis features (urosepsis) given fever, rigors, tachycardia, and altered sensorium in a long-term catheterized nursing-home resident, recommend catheter exchange plus blood and urine cultures before antibiotics, and select broad empirical gram-negative coverage (with Pseudomonas and MDR risk factors considered) pending susceptibilities.",
+  "expectedNextQuestions": [
+    "Has the indwelling catheter been exchanged, and were urine cultures obtained from the freshly placed catheter?",
+    "Were blood cultures drawn prior to antibiotic initiation?",
+    "Is there any history of prior MDR organism colonization (ESBL, CRE, Pseudomonas) from previous urine cultures?",
+    "Has the patient met sepsis criteria requiring escalation of care (repeat lactate, fluid responsiveness, need for vasopressors)?",
+    "Are there alternative sources for fever and confusion (e.g., aspiration, skin/pressure injury) that should be excluded in this nursing home resident?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis and urine culture (from freshly exchanged catheter)",
+    "Blood cultures x2 before antibiotics",
+    "Complete blood count with differential",
+    "Renal function tests (creatinine, urea)",
+    "Serum lactate",
+    "CRP/procalcitonin",
+    "Renal and bladder ultrasound to exclude obstruction/abscess",
+    "Chest X-ray to exclude alternative source"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "nursingHomeResident": true,
+    "longTermCatheter": true,
+    "indwellingCatheter": true,
+    "complicatedUTIRisk": true,
+    "dysuria": true,
+    "flankPain": true,
+    "costovertebralTenderness": true,
+    "feverGU": true,
+    "lactateElevated": true,
+    "hospitalizationLast90Days": true,
+    "antibioticsLast90Days": true
+  },
+  "expected": {
+    "diagnosis": "Catheter-associated urinary tract infection, long-term catheter, with systemic inflammatory response (urosepsis)",
+    "acceptableIds": [
+      "CA_UTI"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Urine culture from freshly exchanged catheter",
+      "Blood cultures x2 before antibiotics",
+      "Renal and bladder ultrasound",
+      "Renal function tests",
+      "Serum lactate",
+      "Complete blood count"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "ceftriaxone",
+        "ciprofloxacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CA_UTI)",
+    "confidence >= expectedConfidence.min (65)",
+    "differential includes PYELONEPHRITIS and/or SEPSIS",
+    "stewardship tier == guideline and antibiotics list has no doses",
+    "engine flags longTermCatheter and indwellingCatheter as key drivers alongside systemic findings (fever, rigors, tachycardia, hypotension, alteredSensorium)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

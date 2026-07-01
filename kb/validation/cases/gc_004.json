@@ -1,0 +1,130 @@
+{
+  "id": "gc_004",
+  "specialty": "Respiratory",
+  "condition": "Community-acquired pneumonia",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "2 days of high-grade fever with shaking chills, right-sided pleuritic chest pain, and a productive cough with rusty-tinged sputum.",
+  "history": "Previously well 42-year-old man with no significant past medical history presents with abrupt onset of fever and rigors 2 days ago, followed by a productive cough with rust-colored sputum and right-sided pleuritic chest pain worse on deep inspiration. No preceding coryza or sore throat. No vomiting, diarrhea, or urinary symptoms. No recent hospitalization, antibiotic use, or travel. No smoking history. No known TB contact. Denies hemoptysis, weight loss, or night sweats. No immunocompromising conditions.",
+  "examination": "Alert, oriented, appears unwell but not toxic. Flushed with dry lips (mild dehydration). Right lower zone shows dullness to percussion, increased tactile fremitus, bronchial breath sounds, and coarse crepitations. No wheeze. No cyanosis. No signs of meningism. No peripheral stigmata of endocarditis. Abdomen soft, non-tender.",
+  "vitals": {
+    "hr": 108,
+    "bp": "118/76",
+    "rr": 24,
+    "spo2": 94,
+    "temp": 39.2
+  },
+  "labs": {
+    "wbc": "16.8 x10^9/L (neutrophil predominant)",
+    "crp": "182 mg/L",
+    "procalcitonin": "2.1 ng/mL",
+    "creatinine": "0.9 mg/dL",
+    "urea": "5.8 mmol/L",
+    "sodium": "136 mmol/L",
+    "platelets": "310 x10^3/uL",
+    "lactate": "1.4 mmol/L",
+    "abg_pao2fio2": "380 (room air estimate)"
+  },
+  "imaging": [
+    "Chest X-ray: dense right lower lobe consolidation with air bronchograms, no effusion, no cavitation"
+  ],
+  "microbiology": [
+    "Sputum Gram stain: gram-positive diplococci, moderate polymorphs",
+    "Sputum culture pending",
+    "Blood cultures x2 sent before antibiotics",
+    "Urinary pneumococcal antigen pending"
+  ],
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia (typical, lobar)",
+    "Acute bronchitis",
+    "Pulmonary embolism with infarction",
+    "Lung abscess (early)",
+    "Pleurisy from other cause"
+  ],
+  "finalDiagnosis": "Community-acquired pneumonia (typical lobar pattern, likely pneumococcal), CURB-65 = 0-1, low severity, outpatient/short-stay candidate",
+  "citations": [
+    "Harrison 22e — Pneumonia",
+    "IDSA/ATS Community-Acquired Pneumonia in Adults Guideline 2019"
+  ],
+  "stewardship": "Empirical therapy for low-severity CAP in a previously healthy outpatient without comorbidities per IDSA/ATS 2019: amoxicillin as preferred monotherapy, or a macrolide (azithromycin) / doxycycline as alternative if local pneumococcal macrolide resistance is low; combination beta-lactam plus macrolide reserved for comorbidities or more severe disease. Narrow to targeted therapy once sputum/blood culture and urinary antigen results return. De-escalate and convert to oral therapy once clinically stable.",
+  "contraindications": [
+    "Avoid fluoroquinolone monotherapy as first-line in low-severity CAP given resistance/adverse-effect concerns unless beta-lactam/macrolide contraindicated",
+    "Avoid delaying antibiotics pending culture results in a symptomatic febrile patient with radiographic consolidation",
+    "Caution with macrolides if QT-prolonging comorbidity or interacting drugs present (not applicable here but standard check)"
+  ],
+  "edgeCases": [
+    "If CURB-65 rises to >=2 or hypoxia worsens, escalate to inpatient combination therapy and reassess severity criteria",
+    "If patient fails to improve within 48-72h, consider resistant organism, empyema, or alternative diagnosis (e.g., PE) and repeat imaging",
+    "This case represents low-severity, previously well host; if immunocompromised or nursing-home resident, aspiration/HAP pathways would instead apply"
+  ],
+  "expectedMaiK": "MaiK should recognize a classic typical lobar CAP presentation (acute fever, rigors, productive/rusty sputum, pleuritic pain, focal consolidation) in a previously well adult, calculate a low CURB-65, and recommend outpatient-appropriate empirical therapy (amoxicillin or macrolide/doxycycline) rather than broad-spectrum escalation.",
+  "expectedNextQuestions": [
+    "Calculate/confirm CURB-65 or PSI to determine site of care",
+    "Any comorbidities (COPD, diabetes, heart failure, immunosuppression) that would change empirical choice?",
+    "Any recent antibiotic exposure or resistance risk factors?",
+    "Assess hydration status and need for admission for observation",
+    "Confirm no red flags for severe CAP (hypotension, multilobar disease, altered sensorium)"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray",
+    "CBC with differential",
+    "CRP/procalcitonin",
+    "Blood cultures x2 before antibiotics",
+    "Sputum Gram stain and culture",
+    "Urinary pneumococcal antigen",
+    "SpO2 / arterial blood gas if hypoxic",
+    "Renal function and electrolytes for CURB-65"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "pleuriticPain": true
+  },
+  "expected": {
+    "diagnosis": "Community-acquired pneumonia (typical lobar pattern, likely pneumococcal), CURB-65 = 0-1, low severity, outpatient/short-stay candidate",
+    "acceptableIds": [
+      "CAP"
+    ],
+    "differentialIds": [
+      "ACUTE_BRONCHITIS",
+      "SEVERE_CAP",
+      "LUNG_ABSCESS"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "CBC with differential",
+      "CRP/procalcitonin",
+      "Blood cultures x2",
+      "Sputum Gram stain and culture",
+      "Urinary pneumococcal antigen"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "amoxicillin",
+        "azithromycin",
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CAP)",
+    "confidence >= expectedConfidence.min",
+    "differential includes ACUTE_BRONCHITIS or SEVERE_CAP",
+    "stewardship recommendation does not default to fluoroquinolone or broad-spectrum IV therapy given low-severity presentation",
+    "expectedInvestigations includes chest imaging and blood cultures before antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

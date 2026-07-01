@@ -1,0 +1,127 @@
+{
+  "id": "gc_050",
+  "specialty": "Critical Care",
+  "condition": "Hypovolaemic shock",
+  "age": 42,
+  "sex": "M",
+  "presentingComplaint": "Sudden collapse with massive haematemesis and dizziness",
+  "history": "A 42-year-old man with known alcohol excess and chronic liver disease was brought to the emergency department after vomiting a large volume of fresh blood at home, followed by two further episodes en route. Witnesses report he became progressively pale, sweaty, and confused over 20 minutes prior to arrival. He denies chest pain or shortness of breath but is too drowsy to give a full history. Family report melena for the preceding two days and worsening fatigue. No known peptic ulcer disease; no NSAID or anticoagulant use reported. No fever or recent infection.",
+  "examination": "Pale, diaphoretic, cool peripheries with delayed capillary refill (>4s). Drowsy but rousable, oriented to person only. Cool, clammy skin. Weak, thready radial pulse. No neck stiffness. Abdomen soft, mildly distended with shifting dullness consistent with ascites; no peritonism. Spider naevi and palmar erythema noted. Per-rectal exam confirms melena on glove.",
+  "vitals": {
+    "hr": 132,
+    "bp": "78/48",
+    "rr": 26,
+    "spo2": 94,
+    "temp": 36.1
+  },
+  "labs": {
+    "hemoglobin": 6.8,
+    "platelets": 98,
+    "inr": 1.7,
+    "bilirubin": 2.8,
+    "albumin": 2.6,
+    "creatinine": 1.6,
+    "urea": 18.2,
+    "lactate": 5.4,
+    "sodium": 133,
+    "potassium": 4.8
+  },
+  "imaging": [
+    "Erect chest X-ray: no free air, no infiltrate",
+    "Bedside ultrasound: ascites present, no pericardial effusion, IVC collapsed with minimal respiratory variation consistent with hypovolaemia"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Hypovolaemic (haemorrhagic) shock secondary to variceal bleed",
+    "Hypovolaemic shock secondary to bleeding peptic ulcer",
+    "Septic shock (SBP with GI bleed as red herring)",
+    "Cardiogenic shock",
+    "Decompensated cirrhosis with hepatic encephalopathy"
+  ],
+  "finalDiagnosis": "Hypovolaemic shock due to acute upper gastrointestinal haemorrhage (suspected variceal bleed in cirrhosis)",
+  "citations": [
+    "Harrison 22e — Hypovolemic Shock",
+    "Harrison 22e — Gastrointestinal Bleeding",
+    "AASLD Practice Guidance — Portal Hypertensive Bleeding in Cirrhosis 2023",
+    "Surviving Sepsis Campaign 2021 (fluid resuscitation principles, applied by analogy for shock resuscitation)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid large-volume crystalloid over-resuscitation targeting supranormal BP in suspected variceal bleed — permissive/restrictive resuscitation strategy preferred until source control",
+    "Avoid NSAIDs and other nephrotoxic/antiplatelet agents",
+    "Avoid delaying blood product transfusion while awaiting crossmatch in exsanguinating haemorrhage — use emergency-release O-negative blood"
+  ],
+  "edgeCases": [
+    "Cirrhotic patients may have blunted tachycardic response due to non-selective beta-blocker use, masking severity of shock",
+    "Coagulopathy and thrombocytopenia from liver disease compound haemorrhagic shock and complicate resuscitation",
+    "Encephalopathy from hepatic dysfunction and/or hypoperfusion may mimic or mask hypovolaemic shock's altered sensorium",
+    "'hypovolemic_shock' is the closest engine id for this presentation, but the underlying trigger (variceal bleed in cirrhosis) also maps to 'variceal_bleed' and 'decomp_cirrhosis' as clinically relevant differentials/co-diagnoses"
+  ],
+  "expectedMaiK": "MaiK should flag haemorrhagic hypovolaemic shock from a likely variceal source in a cirrhotic patient, prioritizing airway protection, massive transfusion protocol activation, restrictive fluid/blood resuscitation, and urgent endoscopy over vasopressor escalation.",
+  "expectedNextQuestions": [
+    "Is there a history of known oesophageal varices or prior variceal bleeding?",
+    "What is the estimated total blood loss and time course?",
+    "Has massive transfusion protocol been activated and is crossmatched blood available?",
+    "Is urgent upper GI endoscopy available within the recommended window?",
+    "Is terlipressin/octreotide and prophylactic antibiotic (per cirrhosis GI bleed protocol) indicated?"
+  ],
+  "expectedInvestigations": [
+    "Full blood count, coagulation profile, liver function tests",
+    "Group and crossmatch / massive transfusion panel",
+    "Serum lactate and venous/arterial blood gas",
+    "Urgent upper GI endoscopy",
+    "Bedside ultrasound (IVC assessment, FAST if trauma suspected)",
+    "Renal function and electrolytes"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "tachycardia": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "hematemesis": true,
+    "melena": true,
+    "gibPresentation": true,
+    "liverDisease": true,
+    "ascites": true,
+    "jaundice": true,
+    "thrombocytopenia": true,
+    "tachypnea": true
+  },
+  "expected": {
+    "diagnosis": "Hypovolaemic shock due to acute upper gastrointestinal haemorrhage (suspected variceal bleed in cirrhosis)",
+    "acceptableIds": [
+      "hypovolemic_shock"
+    ],
+    "differentialIds": [
+      "variceal_bleed",
+      "decomp_cirrhosis",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "Full blood count, coagulation profile, liver function tests",
+      "Group and crossmatch / massive transfusion panel",
+      "Serum lactate and venous/arterial blood gas",
+      "Urgent upper GI endoscopy",
+      "Bedside ultrasound (IVC assessment)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hypovolemic_shock)",
+    "confidence >= 70",
+    "differential includes variceal_bleed and/or decomp_cirrhosis",
+    "expectedMaiK surfaces restrictive resuscitation strategy and urgent endoscopy, not vasopressor-first management",
+    "no antibiotics recommended as primary stewardship action (stewardship tier = null)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "id": "gc_040",
+  "specialty": "Critical Care",
+  "condition": "Acute pancreatitis",
+  "age": 44,
+  "sex": "M",
+  "presentingComplaint": "Severe, constant epigastric pain radiating to the back for 24 hours, associated with repeated vomiting, after a heavy alcohol binge.",
+  "history": "44-year-old man with a long history of heavy daily alcohol use (>80 g/day for over a decade) presents with severe, boring epigastric pain that began about 18 hours after a prolonged drinking binge two nights ago, radiating through to the back, partially relieved by leaning forward. Associated with multiple episodes of non-bloody vomiting and inability to tolerate oral intake. No prior episodes of pancreatitis documented, though he admits to similar milder pain in the past that he did not seek care for. No gallstone disease history, no recent ERCP, no new medications. Over the last 12 hours he has become increasingly drowsy and confused according to family, with decreased urine output. No melena or hematemesis.",
+  "examination": "Ill-looking, diaphoretic male in obvious distress, lying still with knees drawn up. Marked epigastric tenderness with voluntary guarding, mild abdominal distension, hypoactive bowel sounds. No Cullen's or Grey Turner's sign noted at presentation. Mild scleral icterus. No asterixis. Peripheries cool and mottled with delayed capillary refill. Alert but intermittently disoriented to time (GCS 14).",
+  "vitals": {
+    "hr": 128,
+    "bp": "84/52",
+    "rr": 32,
+    "spo2": 89,
+    "temp": 38.1
+  },
+  "labs": {
+    "amylase": "1450 U/L (>3x ULN)",
+    "lipase": "2100 U/L (>3x ULN)",
+    "wbc": "19.8 x10^9/L",
+    "crp_48h": "220 mg/L",
+    "hematocrit": "52% (hemoconcentrated)",
+    "bun_admission": "28 mg/dL",
+    "creatinine": 2.1,
+    "calcium": "7.2 mg/dL (corrected, low)",
+    "glucose": "220 mg/dL",
+    "ast": "110 U/L",
+    "alt": "95 U/L",
+    "bilirubin": 2.4,
+    "albumin": 2.6,
+    "lactate": "4.2 mmol/L",
+    "platelets": 138,
+    "inr": 1.3,
+    "abg_pao2": "58 mmHg on room air",
+    "pao2fio2": 210,
+    "triglycerides": "180 mg/dL (not causative)"
+  },
+  "imaging": [
+    "Contrast-enhanced CT abdomen (planned at 72-96h once stabilized, not on admission): to assess for pancreatic necrosis per guideline timing",
+    "Admission abdominal ultrasound: pancreas obscured by bowel gas, no gallstones or biliary dilatation seen, mild free fluid in the pelvis",
+    "Chest X-ray: small left pleural effusion, no focal consolidation"
+  ],
+  "microbiology": [
+    "Blood cultures x2 sent (pending) - not yet on antibiotics, no evidence of infected necrosis at this stage"
+  ],
+  "differentialDiagnoses": [
+    "Acute severe alcoholic pancreatitis with SIRS and early organ dysfunction",
+    "Perforated peptic ulcer",
+    "Acute cholecystitis / ascending cholangitis",
+    "Mesenteric ischemia",
+    "Diabetic ketoacidosis with abdominal pain",
+    "Ruptured or leaking abdominal aortic aneurysm",
+    "Acute myocardial infarction (inferior) with atypical presentation"
+  ],
+  "finalDiagnosis": "Severe acute alcoholic pancreatitis with SIRS, early acute kidney injury, hypoxemia and shock (revised Atlanta classification: severe)",
+  "citations": [
+    "Harrison 22e — Acute and Chronic Pancreatitis",
+    "American College of Gastroenterology (ACG) Guideline: Management of Acute Pancreatitis 2013",
+    "Surviving Sepsis Campaign 2021 (for hemodynamic/organ support principles applied to non-infectious SIRS/shock)",
+    "International Association of Pancreatology / American Pancreatic Association (IAP/APA) Guidelines 2013"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid routine prophylactic antibiotics in sterile necrotizing pancreatitis (not supported by ACG/IAP-APA guidelines)",
+    "Avoid early aggressive surgical debridement in the first 2 weeks unless infected necrosis confirmed or clinical deterioration mandates intervention",
+    "Avoid NSAIDs for analgesia given AKI and hypotension",
+    "Caution with aggressive fluid resuscitation in the presence of hypoxemia/ARDS risk - goal-directed rather than very-high-volume resuscitation preferred"
+  ],
+  "edgeCases": [
+    "Distinguishing sterile SIRS-driven organ dysfunction from early infected necrosis is difficult in the first week; antibiotics should be reserved for confirmed or strongly suspected infected necrosis (e.g., gas on CT, positive FNA culture, or clinical sepsis with source), not given empirically at this stage",
+    "Hypocalcemia and hemoconcentration are markers of severity (fat saponification, capillary leak) rather than primary abnormalities requiring aggressive correction unless symptomatic",
+    "Contrast-enhanced CT is deliberately deferred to 72-96 hours unless diagnosis is in doubt or the patient deteriorates, to avoid overestimating necrosis extent early and to reduce contrast-induced nephropathy risk in a patient with AKI",
+    "This case (pancreatitis) is not part of the infectious-disease finding vocabulary's typical target set, so no antimicrobial stewardship tier applies; 'stewardship' is null unless infected necrosis supervenes later in the course"
+  ],
+  "expectedMaiK": "MaiK should flag this as severe acute pancreatitis (revised Atlanta criteria) with SIRS and multi-organ dysfunction (renal, respiratory, circulatory) in a patient with a clear alcohol-use trigger, and should explicitly caution against empirical antibiotics since there is no current evidence of infected necrosis.",
+  "expectedNextQuestions": [
+    "Does the patient meet ≥2 SIRS criteria persisting beyond 48 hours (persistent SIRS predicts severe disease)?",
+    "What is the trend in BUN/creatinine and hematocrit over the first 24-48 hours (hemoconcentration/AKI trajectory)?",
+    "Is there any evidence of gallstone etiology on repeat/formal ultrasound requiring urgent ERCP?",
+    "Is a contrast CT indicated now for diagnostic uncertainty, or should it be deferred to 72-96h?",
+    "Does the patient require ICU-level support (vasopressors, mechanical ventilation, renal replacement therapy)?",
+    "Is there clinical or CT evidence to suggest infected pancreatic necrosis warranting antibiotics and possible intervention?"
+  ],
+  "expectedInvestigations": [
+    "Serum lipase/amylase",
+    "Contrast-enhanced CT abdomen (delayed 72-96h)",
+    "Serum calcium, triglycerides",
+    "Arterial blood gas / PaO2:FiO2",
+    "Renal function panel (BUN, creatinine) serial",
+    "Hematocrit trend",
+    "Lactate",
+    "Abdominal ultrasound (biliary etiology)",
+    "CRP at 48 hours"
+  ],
+  "expectedConfidence": {
+    "min": 78
+  },
+  "findings": {
+    "severeAbdominalPain": true,
+    "abdominalPain": true,
+    "nauseaVomiting": true,
+    "abdominalDistension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "fever": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "alcoholExcess": true,
+    "jaundice": true,
+    "sofaIncrease": true
+  },
+  "expected": {
+    "diagnosis": "Severe acute alcoholic pancreatitis with SIRS and early organ dysfunction",
+    "acceptableIds": [
+      "pancreatitis"
+    ],
+    "differentialIds": [
+      "biliary_colic",
+      "dka",
+      "aki"
+    ],
+    "investigations": [
+      "Serum lipase/amylase",
+      "Contrast-enhanced CT abdomen (delayed 72-96h)",
+      "Serum calcium",
+      "Arterial blood gas",
+      "Renal function panel",
+      "Abdominal ultrasound"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (pancreatitis)",
+    "confidence >= expectedConfidence.min",
+    "differential includes a biliary/hepatobiliary or metabolic mimic (biliary_colic/cholecystitis/dka/aki)",
+    "system does NOT recommend empirical antibiotics given absence of confirmed infected necrosis",
+    "engine flags severity criteria (organ dysfunction, lactate elevation, hypoxia) consistent with severe (not mild) pancreatitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

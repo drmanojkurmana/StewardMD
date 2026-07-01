@@ -1,0 +1,147 @@
+{
+  "id": "gc_097",
+  "specialty": "Critical Care",
+  "condition": "Heat stroke",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Found confused and collapsed after working outdoors during a severe heat wave; brought in unresponsive to commands.",
+  "history": "62-year-old man, a construction laborer, was working outdoors during a heat wave (ambient temperature ~44°C, high humidity) for several hours with inadequate water intake. Co-workers noted he became confused, stumbled, and then collapsed. No witnessed seizure at onset, though he had one brief generalized convulsion en route to hospital. No prior history of similar episodes. No reported chest pain, no vomiting/diarrhea preceding the event. Known hypertension on amlodipine; no diabetes. No history of recent infection, no antecedent fever over preceding days, no diarrheal illness, no rash prior to the event. Non-alcoholic. Not on antipsychotics, anticholinergics, diuretics, or stimulant drugs. No history of recent travel to malaria-endemic or rickettsial-exposure areas.",
+  "examination": "Confused, disoriented to time and place, GCS 10/15 (E3V3M4), intermittently agitated. Skin hot and flushed; sweating present at initial contact but skin becoming drier over the next 30 minutes. No rash, no eschar, no petechiae. No neck stiffness, no photophobia. Pupils equal and reactive. No focal neurological deficit. Chest clear, no crepitations. Cardiovascular exam: tachycardic, warm peripheries, bounding pulses, no murmur. Abdomen soft, non-tender, no organomegaly. No calf tenderness. No signs of dehydration-related skin tenting excessively; mucous membranes dry.",
+  "vitals": {
+    "hr": 138,
+    "bp": "88/54",
+    "rr": 32,
+    "spo2": 91,
+    "temp": 41.8
+  },
+  "labs": {
+    "wbc": "16,200/µL",
+    "hemoglobin": "15.1 g/dL (hemoconcentration)",
+    "platelets": "92,000/µL",
+    "creatinine": "2.4 mg/dL (baseline unknown, presumed normal)",
+    "urea": "14.2 mmol/L",
+    "sodium": "148 mEq/L",
+    "potassium": "5.6 mEq/L",
+    "ast": "612 U/L",
+    "alt": "488 U/L",
+    "totalBilirubin": "1.8 mg/dL",
+    "ck": "8,900 U/L (rhabdomyolysis)",
+    "lactate": "5.4 mmol/L",
+    "inr": "1.6",
+    "aptt": "prolonged (42 sec)",
+    "fibrinogen": "low-normal, trending down (DIC screen sent)",
+    "glucose": "162 mg/dL",
+    "abg": "pH 7.28, pCO2 30 mmHg, HCO3 15 mEq/L, lactate 5.4 mmol/L",
+    "urineMyoglobin": "positive",
+    "urinalysis": "dark tea-colored urine, positive for blood on dipstick with few RBCs on microscopy (myoglobinuria)"
+  },
+  "imaging": [
+    "Chest X-ray: no consolidation, no effusion",
+    "CT head (non-contrast): no acute hemorrhage or mass lesion; done given seizure and altered sensorium"
+  ],
+  "microbiology": [
+    "Blood cultures x2 sent (pending) — obtained to exclude concurrent sepsis given overlapping features",
+    "Malaria antigen/smear negative (relevant given febrile encephalopathy differential)"
+  ],
+  "differentialDiagnoses": [
+    "Classic (non-exertional) heat stroke",
+    "Sepsis with septic shock",
+    "Malaria (cerebral)",
+    "Meningoencephalitis",
+    "Neuroleptic malignant syndrome",
+    "Serotonin syndrome",
+    "Thyroid storm",
+    "Anticholinergic toxidrome"
+  ],
+  "finalDiagnosis": "Heat stroke (classic/non-exertional) with multiorgan dysfunction — hyperthermia with CNS dysfunction",
+  "citations": [
+    "Harrison 22e — Heat-Related Illness (Hyperthermia and Heat Stroke)",
+    "Harrison 22e — Approach to the Patient with Multiorgan Dysfunction in Critical Illness",
+    "Surviving Sepsis Campaign 2021 (used for supportive shock/organ-dysfunction management framework, not as primary etiologic guideline)"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid antipyretics (e.g., paracetamol/NSAIDs) — ineffective in heat stroke and may worsen hepatic or renal injury",
+    "Avoid aggressive vasoconstrictor use before adequate cooling and volume assessment, as it can impair heat dissipation",
+    "Avoid empirical antibiotics as first-line therapy unless a concurrent infective source is identified — treat hyperthermia as environmental/non-infective initially and pursue rapid cooling"
+  ],
+  "edgeCases": [
+    "Heat stroke ('gc_097') is not present in the current diagnosable-disease vocabulary list provided to the engine; therefore acceptableIds and differentialIds are set to [] per rule, even though sepsis/septic shock and CNS-infection mimics are represented and should appear in the differential-scoring output.",
+    "Distinguishing classic heat stroke from sepsis-induced hyperthermia can be difficult when SIRS-type findings (tachycardia, tachypnea, altered sensorium, organ dysfunction, elevated lactate) overlap; the absence of an antecedent infective prodrome and presence of an extreme environmental exposure history is the key discriminator.",
+    "Rhabdomyolysis-driven AKI and DIC are expected complications of severe heat stroke and should not be mistaken for a primary hematologic or renal diagnosis.",
+    "Cessation of sweating is a classic but unreliable sign — many heat stroke patients (especially exertional) continue to sweat; diagnosis rests on core temperature plus CNS dysfunction in the correct exposure context."
+  ],
+  "expectedMaiK": "MaiK should flag hyperthermia (>40°C) with CNS dysfunction (altered sensorium, seizure) in a heat-exposure context as heat stroke, prioritize rapid active cooling over antimicrobial workup, and separately flag overlapping organ dysfunction/lactate/lab picture as needing sepsis exclusion rather than automatic antibiotic initiation.",
+  "expectedNextQuestions": [
+    "What was the environmental exposure — ambient temperature, humidity, duration of exposure, exertional vs non-exertional?",
+    "Was there any antecedent fever or infective prodrome before the collapse?",
+    "Any medications that impair thermoregulation or sweating (anticholinergics, antipsychotics, diuretics, beta-blockers)?",
+    "Is the patient still sweating or has skin become dry — and has core temperature been re-checked after initiation of cooling?",
+    "Any history suggestive of malaria/rickettsial exposure given overlapping febrile encephalopathy picture?"
+  ],
+  "expectedInvestigations": [
+    "Core (rectal) temperature monitoring",
+    "Comprehensive metabolic panel (electrolytes, renal function)",
+    "Liver function tests",
+    "Creatine kinase",
+    "Coagulation profile (PT/INR, aPTT, fibrinogen) for DIC screening",
+    "Arterial blood gas and lactate",
+    "Urinalysis for myoglobinuria",
+    "CT head and consideration of lumbar puncture if infective CNS cause not excluded",
+    "Blood cultures and malaria smear to exclude infective mimics"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "tempC": true,
+    "alteredSensorium": true,
+    "seizure": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "creatinine": true,
+    "platelets": true,
+    "inr": true
+  },
+  "expected": {
+    "diagnosis": "Heat stroke (classic/non-exertional) with multiorgan dysfunction",
+    "acceptableIds": [],
+    "differentialIds": [
+      "SEPSIS",
+      "SEPTIC_SHOCK",
+      "MENINGITIS",
+      "MALARIA",
+      "aki"
+    ],
+    "investigations": [
+      "Core temperature monitoring",
+      "Electrolytes and renal function",
+      "Liver function tests",
+      "Creatine kinase",
+      "Coagulation profile",
+      "Arterial blood gas and lactate",
+      "Urinalysis for myoglobinuria",
+      "CT head",
+      "Blood cultures and malaria smear"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should not force-match to a listed infective diagnosis with high confidence given non-infective heat-exposure context",
+    "Differential should surface SEPSIS/SEPTIC_SHOCK and MENINGITIS/MALARIA as reasonable mimics given overlapping findings, without assigning a stewardship antibiotic tier as top recommendation",
+    "confidence >= expectedConfidence.min for correctly flagging severe organ dysfunction requiring ICU-level care",
+    "stewardship.antibiotics must remain empty given no confirmed infective source at presentation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

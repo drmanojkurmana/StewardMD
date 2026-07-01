@@ -1,0 +1,128 @@
+{
+  "id": "gc_006",
+  "specialty": "Respiratory",
+  "condition": "Community-acquired pneumonia",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Dry cough, low-grade fever and headache for 6 days, now with mild breathlessness",
+  "history": "A 24-year-old previously healthy university student presents with a 6-day history of low-grade fever, malaise, sore throat and headache, followed by a persistent dry, hacking cough over the last 3-4 days. She reports mild retrosternal chest discomfort with coughing and some breathlessness on exertion. No rigors, no purulent sputum, no hemoptysis. A roommate had a similar prolonged cough illness 2 weeks ago. No significant travel, no comorbidities, non-smoker, no sick contacts with TB, no recent hospitalization or antibiotic use.",
+  "examination": "Alert, mildly unwell but not toxic-appearing. Oropharynx mildly injected without exudate. Chest: scattered crepitations at the left lower zone, no dullness to percussion, no wheeze. No skin rash. Cardiovascular and abdominal exam unremarkable.",
+  "vitals": {
+    "hr": 98,
+    "bp": "112/72",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 37.9
+  },
+  "labs": {
+    "wbc": 8.4,
+    "crp": 28,
+    "hemoglobin": 12.8,
+    "platelets": 260,
+    "creatinine": 0.7,
+    "coldAgglutinins": "weakly positive",
+    "mycoplasmaIgM": "positive",
+    "procalcitonin": 0.08
+  },
+  "imaging": [
+    "Chest X-ray: patchy reticulonodular/interstitial infiltrate in the left lower lobe, disproportionately mild compared to clinical findings, no effusion or cavitation"
+  ],
+  "microbiology": [
+    "Mycoplasma pneumoniae IgM serology positive",
+    "Sputum Gram stain: no organisms seen, mixed flora",
+    "Blood cultures: no growth (pending final)"
+  ],
+  "differentialDiagnoses": [
+    "Atypical (Mycoplasma) community-acquired pneumonia",
+    "Acute bronchitis",
+    "Viral pneumonia",
+    "Chlamydophila pneumoniae pneumonia",
+    "Pertussis",
+    "Pulmonary tuberculosis"
+  ],
+  "finalDiagnosis": "Community-acquired pneumonia, atypical presentation (Mycoplasma pneumoniae), non-severe (CURB-65 = 0)",
+  "citations": [
+    "Harrison 22e — Pneumonia",
+    "Harrison 22e — Mycoplasma pneumoniae Infections",
+    "IDSA/ATS Community-Acquired Pneumonia Guideline 2019"
+  ],
+  "stewardship": "Outpatient empirical therapy targeting atypical organisms: a macrolide (e.g., azithromycin) or doxycycline as first-line per IDSA/ATS 2019 for a healthy young adult without comorbidities; a respiratory fluoroquinolone reserved as alternative if macrolide resistance or intolerance/allergy.",
+  "contraindications": [
+    "Avoid fluoroquinolone as first-line in an otherwise healthy young adult without comorbidities (reserve for treatment failure/allergy)",
+    "QT-prolonging co-medications caution with macrolides"
+  ],
+  "edgeCases": [
+    "Chest X-ray findings are often subtly disproportionate to clinical exam (\"walking pneumonia\") in Mycoplasma, which can lead to under-triage or misdiagnosis as bronchitis",
+    "Cold agglutinin-associated hemolysis is a recognized extrapulmonary complication and should prompt hemoglobin/haptoglobin monitoring if anemia or jaundice develops",
+    "Mycoplasma serology (IgM) can be falsely negative early in illness or falsely positive from past infection; PCR is more specific where available",
+    "Household/close-contact clustering (roommate with similar illness) supports atypical/community outbreak pathogens over typical bacterial pneumonia"
+  ],
+  "expectedMaiK": "Young, non-toxic patient with a subacute prodrome, dry cough, and CXR-exam dissociation strongly suggests atypical CAP (Mycoplasma); CURB-65 is 0, so outpatient macrolide/doxycycline therapy is appropriate without need for hospitalization.",
+  "expectedNextQuestions": [
+    "Any extrapulmonary features (rash, hemolysis, arthralgia, neurological symptoms) suggesting Mycoplasma-associated complications?",
+    "Duration and severity of dyspnea — any red flags for deterioration or hypoxia?",
+    "Any exposure/contact history for TB or other atypical pathogens?",
+    "Confirm vaccination status (influenza, pertussis) to further narrow differential"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray",
+    "Mycoplasma serology or PCR",
+    "CRP/procalcitonin",
+    "Pulse oximetry",
+    "CURB-65 severity assessment"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "fever": true,
+    "coughRadio": true,
+    "crepitations": true,
+    "consolidation": true,
+    "pleuriticPain": true,
+    "dyspnea": true,
+    "headache": true,
+    "soreThroat": true,
+    "myalgiaArthralgia": true,
+    "subacuteOnset": true,
+    "multilobar": true,
+    "curb65": true,
+    "severeCriteria": true
+  },
+  "expected": {
+    "diagnosis": "Community-acquired pneumonia, atypical presentation (Mycoplasma pneumoniae), non-severe (CURB-65 = 0)",
+    "acceptableIds": [
+      "CAP"
+    ],
+    "differentialIds": [
+      "ACUTE_BRONCHITIS",
+      "PHARYNGITIS",
+      "PULMONARY_TB"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "Mycoplasma serology or PCR",
+      "CRP/procalcitonin",
+      "Pulse oximetry",
+      "CURB-65 severity assessment"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "azithromycin",
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (CAP)",
+    "confidence >= 65",
+    "differential includes ACUTE_BRONCHITIS or PULMONARY_TB",
+    "stewardship tier == guideline and antibiotics include a macrolide or doxycycline, not a fluoroquinolone as first-line",
+    "severeCriteria/curb65 flags remain false given non-toxic exam and normal vitals"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

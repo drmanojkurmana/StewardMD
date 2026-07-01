@@ -1,0 +1,132 @@
+{
+  "id": "gc_046",
+  "specialty": "Endocrinology",
+  "condition": "Hyponatraemia (SIADH)",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Progressive lethargy, poor appetite and headache for 4 days, with one witnessed episode of confusion this morning",
+  "history": "A 64-year-old woman, ex-smoker (40 pack-years), presents with a 4-day history of malaise, anorexia, dull generalised headache and mild nausea without vomiting. Her daughter reports she became increasingly forgetful and briefly disoriented in time and place this morning, prompting presentation. There is no fever, diarrhoea, vomiting, or diuretic use. She has not been vomiting or fasting, and reports normal oral intake of food and fluids (mostly water) until yesterday. No history of head injury, seizures, or alcohol excess. She was seen 6 weeks ago for a persistent cough and 4 kg unintentional weight loss over 2 months; a chest X-ray at that time reportedly showed a left hilar opacity, and she was awaiting further work-up before this admission. No known diabetes, thyroid disease, or adrenal disease. No recent hospitalisation, no diarrhoeal illness, no excessive water intake (not polydipsic), no history of heart failure, liver disease, or nephrotic syndrome. She takes no diuretics, SSRIs, carbamazepine, or other drugs classically associated with SIADH.",
+  "examination": "Alert but intermittently drowsy and mildly disoriented to time (GCS 14, E4V4M6). No focal neurological deficit. No papilloedema. Mucous membranes moist, skin turgor normal, no postural drop in blood pressure or pulse. No peripheral or sacral oedema, no raised JVP, chest clear, no ascites. No goitre. Reduced breath sounds at the left upper zone with a few crackles; no wheeze. Abdomen soft, non-tender, no hepatosplenomegaly. Clinically euvolaemic on volume assessment.",
+  "vitals": {
+    "hr": 82,
+    "bp": "126/78",
+    "rr": 16,
+    "spo2": 96,
+    "temp": 36.8
+  },
+  "labs": {
+    "sodium": 116,
+    "potassium": 4,
+    "chloride": 82,
+    "serumOsmolality": 248,
+    "urineOsmolality": 512,
+    "urineSodium": 62,
+    "serumUricAcid": 2.8,
+    "glucose": 98,
+    "urea": 3.1,
+    "creatinine": 0.7,
+    "albumin": 4.1,
+    "tsh": 2.1,
+    "morningCortisol": 18,
+    "hemoglobin": 12.6,
+    "wbc": 8100,
+    "platelets": 260
+  },
+  "imaging": [
+    "Chest X-ray: left hilar mass with associated left upper lobe atelectasis, unchanged from 6 weeks prior",
+    "CT chest with contrast: 3.8 cm left hilar/perihilar mass with ipsilateral mediastinal lymphadenopathy, radiologically suspicious for bronchogenic carcinoma (small-cell pattern favoured)",
+    "CT brain (non-contrast, for altered sensorium): no acute infarct, haemorrhage, or mass lesion; no cerebral oedema"
+  ],
+  "microbiology": [
+    "Blood cultures: no growth (sent given fluctuating sensorium, to exclude sepsis-associated SIADH)",
+    "Sputum culture: no growth",
+    "Urine culture: no growth"
+  ],
+  "differentialDiagnoses": [
+    "Syndrome of inappropriate antidiuretic hormone secretion (SIADH), likely paraneoplastic from suspected small-cell lung carcinoma",
+    "Hypovolaemic hyponatraemia (diuretic-induced or GI/renal salt losing)",
+    "Hypothyroidism-associated hyponatraemia",
+    "Secondary adrenal insufficiency (glucocorticoid deficiency)",
+    "Pseudohyponatraemia (hyperlipidaemia/hyperproteinaemia)",
+    "Hyperglycaemia-induced translocational hyponatraemia",
+    "Primary polydipsia",
+    "Cerebral salt wasting"
+  ],
+  "finalDiagnosis": "Euvolaemic, hypotonic (low serum osmolality) hyponatraemia due to SIADH, probably paraneoplastic secondary to suspected small-cell lung carcinoma",
+  "citations": [
+    "Harrison 22e — Hyponatraemia and Hyperosmolar Disorders",
+    "European Hyponatraemia Guideline (ESE/ERA-EDTA/ESICM) 2014"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid rapid correction of chronic hyponatraemia (limit to ≤8-10 mmol/L per 24 hours) — risk of osmotic demyelination syndrome",
+    "Avoid isotonic saline as sole therapy in confirmed SIADH — will not correct and may worsen hyponatraemia",
+    "Avoid diagnosing SIADH without first excluding hypothyroidism, adrenal insufficiency, diuretic use, and pseudohyponatraemia",
+    "Avoid free water administration or hypotonic fluids"
+  ],
+  "edgeCases": [
+    "Malignancy-associated SIADH (especially small-cell lung carcinoma) is a paraneoplastic diagnosis of exclusion; definitive oncological work-up (bronchoscopy/biopsy, staging) is required and is not itself represented as a discrete id in this engine's disease list, so acceptableIds reflects the metabolic diagnosis (hyponatremia) rather than the underlying malignancy",
+    "Fluctuating sensorium with sodium 116 mmol/L is at the threshold of severe symptomatic hyponatraemia and may warrant cautious hypertonic saline if a seizure or marked confusion supervenes, rather than fluid restriction alone",
+    "Low serum uric acid (<4 mg/dL) and urine sodium >30 mmol/L support SIADH physiology over hypovolaemic hyponatraemia in this euvolaemic patient",
+    "TSH and morning cortisol were checked and are normal, which helps exclude hypothyroidism and adrenal insufficiency as alternative euvolaemic causes before labelling SIADH"
+  ],
+  "expectedMaiK": "MaiK should recognise euvolaemic, hypotonic, hyponatraemia (urine osmolality >100 mOsm/kg, urine Na+ >30 mmol/L, low uric acid) with normal thyroid/adrenal function as consistent with SIADH, flag the hilar mass as a probable paraneoplastic driver (small-cell lung carcinoma) needing urgent oncological work-up, and caution against rapid sodium correction given osmotic demyelination risk.",
+  "expectedNextQuestions": [
+    "Is the patient volume-depleted, euvolaemic, or volume-overloaded on careful clinical assessment?",
+    "Is she on any drugs associated with SIADH (SSRIs, carbamazepine, diuretics, chemotherapy)?",
+    "Has thyroid and adrenal function been checked to exclude alternative euvolaemic causes?",
+    "How long has the hyponatraemia been present (acute <48h vs chronic), given correction-rate implications?",
+    "Has the hilar mass been biopsied or staged, given probable paraneoplastic aetiology?"
+  ],
+  "expectedInvestigations": [
+    "Serum and urine osmolality",
+    "Urine sodium",
+    "Serum uric acid",
+    "TSH and morning cortisol (± short Synacthen test)",
+    "CT chest and bronchoscopy/tissue diagnosis for the hilar mass",
+    "Serial sodium monitoring during correction"
+  ],
+  "expectedConfidence": {
+    "min": 65
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "headache": true,
+    "nauseaVomiting": true,
+    "weightLoss": true,
+    "malignancy": true,
+    "afebrile24h": true
+  },
+  "expected": {
+    "diagnosis": "Euvolaemic, hypotonic (low serum osmolality) hyponatraemia due to SIADH, probably paraneoplastic secondary to suspected small-cell lung carcinoma",
+    "acceptableIds": [
+      "hyponatremia"
+    ],
+    "differentialIds": [
+      "metabolic_enceph",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "Serum and urine osmolality",
+      "Urine sodium",
+      "Serum uric acid",
+      "TSH and morning cortisol",
+      "CT chest / bronchoscopy for hilar mass"
+    ],
+    "stewardship": {
+      "tier": "harrison",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hyponatremia)",
+    "confidence >= expectedConfidence.min",
+    "differential includes metabolic_enceph or lung_cancer in top-3",
+    "expectedInvestigations includes serum/urine osmolality and urine sodium",
+    "stewardship.antibiotics is empty (non-infective cause)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "id": "gc_058",
+  "specialty": "Rheumatology",
+  "condition": "Septic arthritis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Rapid onset of a hot, swollen, exquisitely painful right knee with fever for 2 days.",
+  "history": "A 58-year-old man with type 2 diabetes mellitus presents with a 2-day history of severe right knee pain that began abruptly, associated with swelling, warmth, and inability to bear weight. He reports fever with chills starting the same day as the joint pain. No preceding trauma. No history of similar episodes, gout, or pseudogout. No recent joint injection. He denies IV drug use. He has a history of a minor abrasion on the ipsilateral shin 5 days ago that has since become mildly erythematous. No urethral discharge, diarrhea, or preceding conjunctivitis to suggest reactive arthritis. No other joints involved.",
+  "examination": "Toxic-appearing, uncomfortable man lying still with the right knee held in slight flexion. Right knee is markedly swollen, erythematous, and warm with a large effusion; skin over the joint is tense and shiny. Severe pain on any attempted active or passive range of motion (guarding), with pain out of proportion to gentle palpation. No crepitus or bullae. No overlying skin breakdown or draining sinus. Small area of cellulitic erythema over the ipsilateral shin abrasion, non-fluctuant, without ascending lymphangitic streaking. No other joints swollen or tender. No cardiac murmur. No skin pustules, tenosynovitis, or rash to suggest disseminated gonococcal infection.",
+  "vitals": {
+    "hr": 112,
+    "bp": "108/68",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 38.9
+  },
+  "labs": {
+    "wbc": "16.8 x10^9/L (neutrophil predominant)",
+    "crp": "182 mg/L",
+    "esr": "88 mm/hr",
+    "procalcitonin": "1.4 ng/mL",
+    "glucose_random": "238 mg/dL",
+    "hba1c": "8.6%",
+    "creatinine": "1.0 mg/dL",
+    "bloodCultures": "pending at presentation",
+    "synovialFluidWBC": "78,000 /µL with 92% neutrophils",
+    "synovialFluidGramStain": "Gram-positive cocci in clusters seen",
+    "synovialFluidCrystals": "none seen"
+  },
+  "imaging": [
+    "Plain radiograph right knee: joint effusion, soft tissue swelling, no bony erosion or osteomyelitis at presentation",
+    "Point-of-care/formal ultrasound right knee: confirms large effusion, guides diagnostic aspiration"
+  ],
+  "microbiology": [
+    "Synovial fluid Gram stain: Gram-positive cocci in clusters",
+    "Synovial fluid culture: pending (subsequently grew Staphylococcus aureus, methicillin-susceptible, in this scenario)",
+    "Blood cultures: sent x2 sets before antibiotics, pending"
+  ],
+  "differentialDiagnoses": [
+    "Septic (bacterial) arthritis",
+    "Gout (acute crystal arthritis)",
+    "Pseudogout (CPPD arthritis)",
+    "Reactive arthritis",
+    "Cellulitis with sympathetic joint effusion",
+    "Disseminated gonococcal infection"
+  ],
+  "finalDiagnosis": "Septic arthritis (bacterial, non-gonococcal) of the right knee, likely Staphylococcus aureus",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Infectious Arthritis",
+    "IDSA Clinical Practice Guidelines — Native Joint Septic Arthritis (relevant general IDSA framework)"
+  ],
+  "stewardship": "Empirical IV antibiotics targeting Staphylococcus aureus (including MRSA coverage pending local resistance data and risk factors) and streptococci should be started promptly after synovial fluid and blood cultures are obtained, with urgent orthopedic consultation for joint drainage (arthrocentesis/arthroscopic washout); narrow therapy once organism and susceptibilities are known.",
+  "contraindications": [
+    "Do not delay empirical antibiotics or source control awaiting culture results in a toxic-appearing patient",
+    "Avoid intra-articular corticosteroid injection until septic arthritis is excluded",
+    "Avoid NSAID/analgesic masking of exam findings before diagnostic aspiration is performed"
+  ],
+  "edgeCases": [
+    "Diabetes mellitus increases risk of S. aureus septic arthritis and worse outcomes",
+    "Concurrent skin/soft tissue infection (shin abrasion with cellulitis) may be the bacteremic source",
+    "Gonococcal arthritis is an important differential in sexually active adults and can present with migratory polyarthralgia, tenosynovitis, and pustular rash (dermatitis-arthritis syndrome) — absent here",
+    "This exact diagnosis (septic arthritis) is not present in the current engine disease list, so acceptableIds is set to [] per protocol; crystal_arthritis and rheumatoid are included only as plausible differential ids from the list, not as correct top-1 matches",
+    "Delayed diagnosis risks rapid cartilage destruction and joint destruction within 24-48 hours, mandating emergent arthrocentesis"
+  ],
+  "expectedMaiK": "MaiK should flag hot, swollen, monoarticular joint with fever and toxic appearance as a rheumatologic/orthopedic emergency requiring urgent arthrocentesis before antibiotics, and note this diagnosis is outside the current structured disease taxonomy (no acceptable engine id), prompting differential consideration of crystal arthropathy.",
+  "expectedNextQuestions": [
+    "Has diagnostic arthrocentesis been performed with synovial fluid cell count, Gram stain, culture, and crystal analysis?",
+    "Have blood cultures been drawn prior to antibiotic initiation?",
+    "Is there a source of bacteremia (skin lesion, IV drug use, recent bacteremia, endocarditis risk)?",
+    "Has orthopedic surgery been consulted for urgent joint washout/drainage?",
+    "Any sexual history or risk factors suggesting disseminated gonococcal infection?"
+  ],
+  "expectedInvestigations": [
+    "Urgent diagnostic arthrocentesis with synovial fluid cell count, Gram stain, culture, and crystal analysis",
+    "Blood cultures x2 before antibiotics",
+    "CBC, CRP, ESR",
+    "Plain radiograph of affected joint",
+    "Consider joint ultrasound to guide aspiration"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "jointSwelling": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "severePain": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "Septic arthritis (bacterial, non-gonococcal) of the right knee, likely Staphylococcus aureus",
+    "acceptableIds": [],
+    "differentialIds": [
+      "crystal_arthritis",
+      "rheumatoid"
+    ],
+    "investigations": [
+      "Diagnostic arthrocentesis with synovial fluid cell count, Gram stain, culture, crystal analysis",
+      "Blood cultures x2",
+      "CBC, CRP, ESR",
+      "Plain radiograph of affected joint"
+    ],
+    "stewardship": {
+      "tier": "harrison",
+      "antibiotics": [
+        "vancomycin",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds is empty (condition not in current taxonomy) so top-1 exact match is not expected",
+    "differential set includes crystal_arthritis given overlapping presentation of hot swollen joint",
+    "confidence >= min (70) given classic toxic-appearing monoarticular presentation with high synovial WBC and positive Gram stain",
+    "expectedInvestigations includes urgent arthrocentesis before antibiotic administration",
+    "stewardship recommends empirical MRSA + streptococcal coverage pending cultures, with orthopedic drainage"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "id": "gc_078",
+  "specialty": "Dermatology",
+  "condition": "DRESS syndrome",
+  "age": 52,
+  "sex": "F",
+  "presentingComplaint": "Widespread itchy rash, fever, and facial swelling 4 weeks after starting a new anticonvulsant.",
+  "history": "A 52-year-old woman was started on phenytoin 5 weeks ago for post-craniotomy seizure prophylaxis. Two weeks ago she developed a morbilliform rash on the trunk that progressively spread to the limbs and face, accompanied by pruritus, low-grade fever, and malaise. Over the past 3-4 days she has noted facial and periorbital swelling, worsening fever, sore throat, and reduced urine output. No new soaps, foods, or other new medications. No mucosal blistering or skin sloughing. No recent travel or known TB contact.",
+  "examination": "Confluent, edematous, morbilliform to erythrodermic rash involving >50% body surface area with facial edema and follicular accentuation. No skin detachment, no target lesions, no mucosal erosions (oral, ocular, genital mucosa spared). Cervical and axillary lymphadenopathy palpable, non-tender. Mild hepatomegaly. No Nikolsky sign.",
+  "vitals": {
+    "hr": 108,
+    "bp": "110/70",
+    "rr": 20,
+    "spo2": 96,
+    "temp": 38.6
+  },
+  "labs": {
+    "wbc": 14200,
+    "eosinophilCount": 2800,
+    "eosinophilPercent": 19,
+    "atypicalLymphocytes": "present",
+    "alt": 210,
+    "ast": 185,
+    "alkalinePhosphatase": 260,
+    "totalBilirubin": 1.1,
+    "creatinine": 1.6,
+    "baselineCreatinine": 0.8,
+    "urea": 9.8,
+    "crp": 68,
+    "regiscarScore": 6
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate",
+    "Abdominal ultrasound: mild hepatomegaly, no biliary obstruction"
+  ],
+  "microbiology": [
+    "Blood cultures: no growth at 48h",
+    "HHV-6 serology/PCR pending",
+    "ANA negative"
+  ],
+  "differentialDiagnoses": [
+    "Stevens-Johnson syndrome/toxic epidermal necrolysis",
+    "Acute generalized exanthematous pustulosis",
+    "Viral exanthem (EBV, CMV, HHV-6 primary infection)",
+    "Serum sickness-like reaction",
+    "Hypereosinophilic syndrome",
+    "Staphylococcal scalded skin syndrome"
+  ],
+  "finalDiagnosis": "DRESS syndrome (drug rash with eosinophilia and systemic symptoms) secondary to phenytoin, with hepatic and renal involvement",
+  "citations": [
+    "Harrison 22e — Cutaneous Drug Reactions",
+    "Harrison 22e — Disorders of Eosinophils",
+    "European Registry of Severe Cutaneous Adverse Reactions (RegiSCAR) diagnostic criteria",
+    "AAD Guidelines — Severe cutaneous adverse drug reactions"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid re-challenge with phenytoin or other aromatic anticonvulsants (carbamazepine, phenobarbital) due to cross-reactivity",
+    "Avoid empirical antibiotics unless a concurrent infection is confirmed, as sulfonamide antibiotics and beta-lactams can themselves trigger or mimic DRESS",
+    "Avoid abrupt high-dose systemic steroid taper — relapse is common with rapid withdrawal"
+  ],
+  "edgeCases": [
+    "DRESS syndrome is not present in the current disease-classification list used by the diagnostic engine; acceptableIds/differentialIds are therefore set to [] and this case should be flagged for a future vocabulary/disease-list expansion covering severe cutaneous adverse drug reactions (DRESS, SJS/TEN, AGEP).",
+    "Latency period (2-8 weeks after drug start) distinguishes DRESS from more immediate hypersensitivity reactions",
+    "HHV-6 reactivation is reported in a majority of cases and may drive relapsing course after drug withdrawal",
+    "Diagnosis requires exclusion of infectious and other drug-induced mimics; RegiSCAR score of 6 in this case is consistent with 'definite' DRESS"
+  ],
+  "expectedMaiK": "MaiK should flag the combination of new anticonvulsant exposure ~2-8 weeks prior, facial edema, morbilliform/erythrodermic rash, peripheral eosinophilia, and multi-organ (hepatic, renal) involvement as classic for DRESS syndrome, recommend immediate culprit drug withdrawal, RegiSCAR scoring, and dermatology/toxicology consultation rather than an infectious work-up alone.",
+  "expectedNextQuestions": [
+    "What new medications (especially anticonvulsants, allopurinol, sulfonamides, vancomycin) were started in the preceding 2-8 weeks?",
+    "Is there mucosal involvement or skin detachment (to exclude SJS/TEN)?",
+    "Has the causative drug been discontinued?",
+    "Any prior history of drug hypersensitivity reactions?",
+    "Ethnicity/HLA status if carbamazepine or allopurinol implicated (for HLA-B risk alleles)?"
+  ],
+  "expectedInvestigations": [
+    "Full blood count with differential and eosinophil count",
+    "Liver function tests",
+    "Renal function tests",
+    "Skin biopsy",
+    "HHV-6/CMV/EBV serology or PCR",
+    "ANA and viral hepatitis screen to exclude mimics",
+    "RegiSCAR scoring"
+  ],
+  "expectedConfidence": {
+    "min": 60
+  },
+  "findings": {
+    "fever": true,
+    "rash": true,
+    "maculopapularRash": true,
+    "facialSwelling": true,
+    "lymphadenopathy": true,
+    "organDysfunction": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "DRESS syndrome (drug rash with eosinophilia and systemic symptoms) secondary to phenytoin, with hepatic and renal involvement",
+    "acceptableIds": [],
+    "differentialIds": [],
+    "investigations": [
+      "Full blood count with differential and eosinophil count",
+      "Liver function tests",
+      "Renal function tests",
+      "Skin biopsy",
+      "HHV-6/CMV/EBV serology or PCR"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Case correctly routes to a non-infectious/dermatology-adverse-drug-reaction pathway rather than sepsis/PUO workup",
+    "Engine does not force-fit an infectious diagnosis id given acceptableIds=[]",
+    "Confidence >= expectedConfidence.min once mapped to an appropriate disease entry, or explicit 'not in taxonomy' flag is raised",
+    "Differential list surfaces SJS/TEN and AGEP as key mimics to exclude",
+    "Stewardship recommendation is null/no empirical antibiotics absent confirmed secondary infection"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

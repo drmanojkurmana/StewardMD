@@ -1,0 +1,132 @@
+{
+  "id": "gc_035",
+  "specialty": "Hepatology",
+  "condition": "Spontaneous bacterial peritonitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Fever and worsening abdominal distension for 2 days in a patient with known cirrhosis.",
+  "history": "54-year-old man with alcohol-related cirrhosis (Child-Pugh C) and chronic ascites, previously managed with diuretics and intermittent large-volume paracentesis, presents with a 2-day history of fever, chills, and increasing abdominal distension. He reports diffuse abdominal discomfort and mild nausea without vomiting. Family notes he has been more drowsy and confused over the last 24 hours, with intermittent disorientation to time. No diarrhea, no dysuria, no cough. No recent GI bleeding or hematemesis. He has not had a paracentesis in the last month. No known prior episodes of SBP. Alcohol intake ongoing until 3 weeks ago. No NSAID or antibiotic use in the last 90 days.",
+  "examination": "Ill-looking, jaundiced male, oriented to person only, mild asterixis present. Abdomen markedly distended with shifting dullness and a positive fluid thrill, diffusely tender without rebound or guarding. No palpable organomegaly appreciated due to ascites. Spider angiomata over chest, palmar erythema. No peripheral edema. Chest clear. No focal neurological deficit.",
+  "vitals": {
+    "hr": 112,
+    "bp": "92/58",
+    "rr": 22,
+    "spo2": 96,
+    "temp": 38.6
+  },
+  "labs": {
+    "wbc": "14.2 x10^9/L",
+    "ascitesPMNCount": "620 cells/mm3 (>250 PMN/mm3, diagnostic threshold)",
+    "ascitesTotalProtein": "0.9 g/dL",
+    "serumAscitesAlbuminGradient": "1.4 g/dL (SAAG >1.1, consistent with portal hypertension)",
+    "bilirubin": 4.8,
+    "albumin": 2.4,
+    "inr": 1.9,
+    "creatinine": 1.6,
+    "sodium": "129 mmol/L",
+    "platelets": 92,
+    "lactate": "2.6 mmol/L",
+    "cultureAscites": "pending at presentation"
+  },
+  "imaging": [
+    "Abdominal ultrasound: large-volume ascites, coarse/nodular liver echotexture consistent with cirrhosis, patent portal vein, no focal hepatic lesion"
+  ],
+  "microbiology": [
+    "Ascitic fluid Gram stain and culture sent (blood culture bottle inoculation at bedside)",
+    "Blood cultures x2 sent prior to antibiotics"
+  ],
+  "differentialDiagnoses": [
+    "Spontaneous bacterial peritonitis",
+    "Secondary bacterial peritonitis (perforation)",
+    "Hepatic encephalopathy from other precipitant",
+    "Decompensated cirrhosis with sepsis from another source",
+    "Cholangitis"
+  ],
+  "finalDiagnosis": "Spontaneous bacterial peritonitis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Cirrhosis and Its Complications",
+    "Harrison's Principles of Internal Medicine 22e — Ascites",
+    "AASLD Practice Guidance 2021 — Ascites, SBP, and other complications of cirrhosis",
+    "EASL Clinical Practice Guidelines 2018 — Decompensated cirrhosis"
+  ],
+  "stewardship": "Empirical third-generation cephalosporin (e.g., IV cefotaxime or ceftriaxone) as first-line per AASLD/EASL guidance; adjust per local antibiogram and ascitic fluid culture/sensitivity once available. IV albumin (1.5 g/kg on day 1, 1 g/kg on day 3) recommended in patients with SBP and creatinine >1 mg/dL, BUN >30 mg/dL, or bilirubin >4 mg/dL to reduce risk of hepatorenal syndrome. Avoid nephrotoxic agents (aminoglycosides). De-escalate based on culture results; duration typically 5 days if clinical response is adequate.",
+  "contraindications": [
+    "Avoid aminoglycosides due to high nephrotoxicity risk in cirrhosis",
+    "Avoid NSAIDs (renal and GI bleeding risk)",
+    "Caution with large-volume paracentesis without albumin replacement in setting of active infection and renal dysfunction"
+  ],
+  "edgeCases": [
+    "Secondary peritonitis (e.g., bowel perforation) must be excluded if ascitic fluid shows multiple organisms on Gram stain, very high protein, low glucose, or markedly elevated LDH — mandates imaging/surgical evaluation rather than SBP management alone",
+    "Culture-negative neutrocytic ascites (PMN >250 with negative culture) is treated identically to culture-positive SBP",
+    "Bacterascites (positive culture, PMN <250) requires repeat paracentesis and treatment only if patient symptomatic or repeat tap remains positive",
+    "Consider hepatorenal syndrome if renal function fails to improve despite albumin and treated infection"
+  ],
+  "expectedMaiK": "MaiK should flag ascites + fever + PMN count >250/mm3 as diagnostic of SBP, recommend empirical third-generation cephalosporin plus albumin given elevated bilirubin/creatinine, and prompt exclusion of secondary peritonitis if fluid analysis is atypical.",
+  "expectedNextQuestions": [
+    "Is there any prior history of GI bleeding, bowel perforation, or recent abdominal surgery to suggest secondary peritonitis?",
+    "What is the ascitic fluid glucose, LDH, and Gram stain result?",
+    "Has the patient received SBP prophylaxis previously (e.g., norfloxacin)?",
+    "Is there any evidence of gastrointestinal bleeding as a precipitant?",
+    "What is the trend in renal function after initial fluid/albumin resuscitation?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic paracentesis with ascitic fluid cell count/differential, albumin, total protein, Gram stain and culture (bedside inoculation into blood culture bottles)",
+    "Blood cultures x2",
+    "Serum albumin, bilirubin, INR, creatinine, electrolytes",
+    "Complete blood count",
+    "Abdominal ultrasound to assess ascites and exclude other hepatobiliary pathology"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "liverDisease": true,
+    "ascites": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "jaundice": true,
+    "asterixis": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "Spontaneous bacterial peritonitis",
+    "acceptableIds": [
+      "SBP"
+    ],
+    "differentialIds": [
+      "hepatic_enceph",
+      "decomp_cirrhosis",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Diagnostic paracentesis with ascitic fluid cell count and culture",
+      "Blood cultures",
+      "Serum albumin, bilirubin, INR, creatinine",
+      "Abdominal ultrasound"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "cefotaxime",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (SBP)",
+    "confidence >= expectedConfidence.min",
+    "differential includes hepatic encephalopathy and/or decompensated cirrhosis",
+    "stewardship recommends third-generation cephalosporin, not aminoglycoside",
+    "output flags need for IV albumin given bilirubin and creatinine thresholds",
+    "output does not miss secondary peritonitis edge-case caveat"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

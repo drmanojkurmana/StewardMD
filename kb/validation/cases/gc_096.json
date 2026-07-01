@@ -1,0 +1,115 @@
+{
+  "id": "gc_096",
+  "specialty": "Cardiology",
+  "condition": "Acute limb ischaemia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset of severe pain, coldness, and numbness in the left leg for 3 hours.",
+  "history": "A 68-year-old man with known permanent atrial fibrillation (subtherapeutic INR, missed his last two doses of warfarin) and hypertension presents with abrupt onset of excruciating left leg pain that began 3 hours ago while he was resting. He describes the leg as feeling 'dead' and progressively cold and numb over the last hour. No preceding trauma, no similar prior episodes, and no history of claudication or peripheral vascular disease. He denies chest pain, palpitations at onset, or syncope, though he reports his heart 'feels irregular' at baseline. No fever. No recent immobilization or long travel.",
+  "examination": "Left lower limb pale and mottled from mid-thigh down, markedly cooler than the right on palpation. Absent femoral pulse on the left by palpation (confirmed with handheld Doppler showing no signal at popliteal, dorsalis pedis, or posterior tibial). Right lower limb pulses normal. Sensation reduced to light touch over the left foot and distal calf; power reduced (3/5) at the ankle and toes with early paresis. Capillary refill markedly delayed on the left. Cardiac exam: irregularly irregular rhythm, no murmurs. No abdominal pulsatile mass. Right leg examination entirely normal.",
+  "vitals": {
+    "hr": 118,
+    "bp": "142/88",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 37
+  },
+  "labs": {
+    "creatinine": 1.3,
+    "potassium": 4.6,
+    "lactateElevated": true,
+    "ckTotal": "elevated (rising)",
+    "inr": 1.3,
+    "hemoglobin": 13.8,
+    "platelets": 240
+  },
+  "imaging": [
+    "Bedside arterial Doppler: no flow signal below left common femoral artery",
+    "CT angiography lower limb (urgent): abrupt occlusion of the left common femoral artery with a filling defect consistent with embolus; no atherosclerotic disease elsewhere; contralateral limb normal",
+    "ECG: atrial fibrillation, ventricular rate ~118/min, no acute ST changes",
+    "Transthoracic echocardiogram (after limb revascularization): dilated left atrium, no obvious mural thrombus visualized (transesophageal deferred), no significant valvular disease"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute limb ischaemia (arterial embolism, cardioembolic from atrial fibrillation)",
+    "Acute arterial thrombosis in situ (atherosclerotic)",
+    "Aortic dissection with limb malperfusion",
+    "Deep vein thrombosis (phlegmasia cerulea dolens)",
+    "Acute compartment syndrome",
+    "Spinal cord/cauda equina compression (for neurological deficit)"
+  ],
+  "finalDiagnosis": "Acute limb ischaemia (Rutherford class IIb) due to cardioembolic arterial occlusion from atrial fibrillation",
+  "citations": [
+    "Harrison 22e — Arterial Diseases of the Extremities",
+    "Harrison 22e — Arterial and Venous Thrombosis",
+    "ESC Guidelines on Diagnosis and Treatment of Peripheral Arterial Diseases 2017",
+    "ESC Guidelines for the Diagnosis and Management of Atrial Fibrillation 2020"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Thrombolysis contraindicated if sensorimotor deficit is advanced/irreversible (Rutherford IIb-III) — favors urgent surgical/endovascular embolectomy over thrombolysis",
+    "Avoid delay for full anticoagulation workup — immediate unfractionated heparin should be started empirically once diagnosis suspected, before imaging completion, unless contraindicated",
+    "Caution with contrast CT angiography in renal impairment — weigh urgency against risk, use lowest volume needed"
+  ],
+  "edgeCases": [
+    "Acute limb ischaemia (ALI) does not correspond to a dedicated id in the current disease-diagnosis list, so acceptableIds is set to [] per rule; the closest listed vascular-emergency entries (aortic_dissection, dvt) are not true synonyms and are only included as differentials where clinically defensible for the painful-limb presentation.",
+    "Motor/sensory deficit present (Rutherford IIb) — this is a surgical/interventional emergency requiring revascularization within hours to prevent irreversible limb loss; distinguish from Rutherford I (viable, no deficit) and Rutherford III (irreversible, non-salvageable) which changes management to primary amputation",
+    "If pulses were preset before onset (embolic event) vs. gradual (in-situ thrombosis on chronic PAD) changes pre-test probability of embolic vs. thrombotic source and surgical planning",
+    "Post-reperfusion, watch for reperfusion syndrome: hyperkalemia, myoglobinuria/AKI, compartment syndrome, and metabolic acidosis"
+  ],
+  "expectedMaiK": "MaiK should flag this as a time-critical vascular emergency (not an infective syndrome) — recommend immediate vascular surgery consultation, empirical systemic anticoagulation (heparin) pending imaging, and note that antimicrobial stewardship logic does not apply here.",
+  "expectedNextQuestions": [
+    "Exact time of symptom onset (determines viability window and revascularization urgency)",
+    "Is motor/sensory function present, reduced, or completely absent (Rutherford classification)?",
+    "Any history of atrial fibrillation, recent MI, or known cardiac thrombus source?",
+    "Baseline functional status and any pre-existing claudication suggesting chronic PAD with acute-on-chronic thrombosis?",
+    "Contraindications to anticoagulation or thrombolysis (recent surgery, bleeding, hemorrhagic stroke)?"
+  ],
+  "expectedInvestigations": [
+    "Urgent bedside handheld arterial Doppler",
+    "Urgent CT angiography (or catheter angiography) of the affected limb",
+    "ECG and echocardiography (source of embolus)",
+    "Serum lactate, creatine kinase, potassium, renal function",
+    "Coagulation profile (INR/aPTT) before anticoagulation/thrombolysis"
+  ],
+  "expectedConfidence": {
+    "min": 60
+  },
+  "findings": {
+    "severePain": true,
+    "legSwellingUnilateral": true,
+    "atrialFibHx": true,
+    "anticoagulated": true,
+    "peripheralVascularDisease": true,
+    "tachycardia": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "Acute limb ischaemia (Rutherford class IIb) due to cardioembolic arterial occlusion from atrial fibrillation",
+    "acceptableIds": [],
+    "differentialIds": [],
+    "investigations": [
+      "Urgent bedside handheld arterial Doppler",
+      "Urgent CT angiography of the affected limb",
+      "ECG",
+      "Echocardiography",
+      "Serum lactate, CK, potassium, renal function",
+      "Coagulation profile"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Case correctly recognized as a non-infective vascular surgical emergency (no antimicrobial recommendation generated)",
+    "MaiK output flags time-critical limb-threatening ischaemia and recommends urgent vascular surgery referral",
+    "System does not force-fit this case into an infectious-disease diagnosis category",
+    "Differential list includes cardioembolic source (atrial fibrillation) as an etiological driver",
+    "confidence >= expectedConfidence.min if the engine attempts a vascular-category classification; otherwise flagged as out-of-scope for current disease taxonomy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

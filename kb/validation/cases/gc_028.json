@@ -1,0 +1,130 @@
+{
+  "id": "gc_028",
+  "specialty": "Respiratory",
+  "condition": "Pulmonary embolism",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset breathlessness and right-sided pleuritic chest pain for 1 day, with a near-syncopal episode this morning.",
+  "history": "A 58-year-old woman presents with acute-onset dyspnea and pleuritic right chest pain that began yesterday evening, progressively worsening. She reports one episode of pre-syncope while climbing stairs this morning, describing lightheadedness and graying of vision without complete loss of consciousness. She underwent total knee replacement surgery 12 days ago and has been largely immobile at home since discharge, not compliant with prescribed post-operative thromboprophylaxis after the first week. She denies fever, cough, or hemoptysis. No prior history of venous thromboembolism. No known malignancy. Non-smoker. No recent long-haul travel apart from the surgical admission.",
+  "examination": "Anxious, mildly diaphoretic woman in mild respiratory distress, speaking in short sentences. Right calf is mildly swollen and tender compared to the left, consistent with the post-operative leg. JVP is elevated to the angle of the jaw. Cardiovascular exam reveals tachycardia with a loud, palpable P2 and a right-sided S3; no murmurs. Chest is clear to auscultation bilaterally, no crepitations or wheeze. No peripheral cyanosis at rest but mild desaturation on exertion. Abdomen soft, non-tender. No calf erythema or warmth beyond the mild swelling.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/68",
+    "rr": 26,
+    "spo2": 91,
+    "temp": 37
+  },
+  "labs": {
+    "dDimer_ugFEUmL": 4.8,
+    "troponinI_ngL": 62,
+    "ntProBNP_pgmL": 610,
+    "lactate_mmolL": 1.8,
+    "creatinine_mgdL": 0.9,
+    "hemoglobin_gdL": 12.6,
+    "platelets_x10e3uL": 245,
+    "inr": 1,
+    "arterialBloodGas": "pH 7.46, PaO2 62 mmHg, PaCO2 31 mmHg, SaO2 91% on room air (widened A-a gradient)",
+    "pesiScore": "Class III (intermediate-high risk)"
+  },
+  "imaging": [
+    "CT pulmonary angiogram: filling defects in the right main and segmental pulmonary arteries consistent with acute PE; RV/LV ratio 1.4 on axial images indicating right ventricular dilation",
+    "Transthoracic echocardiogram: RV dilation and hypokinesis with McConnell's sign, flattened interventricular septum ('D-sign'), estimated RVSP 45 mmHg, preserved LV systolic function",
+    "ECG: sinus tachycardia with S1Q3T3 pattern and new incomplete right bundle branch block; no ST-elevation",
+    "Compression ultrasound of right lower limb: non-compressible right popliteal vein consistent with acute DVT"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute submassive (intermediate-high risk) pulmonary embolism with right heart strain",
+    "Acute coronary syndrome",
+    "Pericarditis with effusion",
+    "Pneumothorax",
+    "Community-acquired pneumonia with pleuritic pain",
+    "Musculoskeletal chest wall pain"
+  ],
+  "finalDiagnosis": "Acute submassive pulmonary embolism with right ventricular strain (intermediate-high risk PE), provoked by recent orthopedic surgery",
+  "citations": [
+    "Harrison 22e — Pulmonary Thromboembolism and Deep Vein Thrombosis",
+    "ESC Guidelines for the diagnosis and management of acute pulmonary embolism 2019",
+    "ACC/AHA Scientific Statement on Management of Massive and Submassive Pulmonary Embolism 2011"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Recent major surgery (12 days) is a relative contraindication to systemic thrombolysis given bleeding risk; catheter-directed therapy or anticoagulation alone favored unless hemodynamic deterioration occurs",
+    "Avoid thrombolysis in the absence of hemodynamic instability (this is submassive, not massive/high-risk PE) per current risk-stratified approach",
+    "Caution with therapeutic anticoagulation given recent surgical site — balance VTE extension risk against post-surgical bleeding risk"
+  ],
+  "edgeCases": [
+    "If hemodynamic instability (sustained hypotension/shock) develops, reclassify as high-risk/massive PE and consider systemic thrombolysis or catheter-directed therapy despite recent surgery",
+    "Elevated troponin and NT-proBNP with echocardiographic RV strain in a normotensive patient defines intermediate-high risk (submassive) category, warranting closer monitoring (consider ICU/step-down) rather than routine ward care",
+    "If renal function permits, direct oral anticoagulants are acceptable alternatives to heparin/warfarin per ESC 2019 once patient stabilized, though parenteral anticoagulation is typically preferred initially in intermediate-high risk PE"
+  ],
+  "expectedMaiK": "Flag intermediate-high risk (submassive) PE: normotensive but with RV strain on echo/CT and biomarker elevation (troponin, NT-proBNP) — recommend monitored setting, therapeutic anticoagulation, and close watch for hemodynamic deterioration that would upgrade to high-risk PE requiring thrombolysis.",
+  "expectedNextQuestions": [
+    "Is the patient hemodynamically stable or showing any signs of shock (to distinguish high-risk from intermediate-risk PE)?",
+    "What is the PESI/sPESI risk score and renal function to guide anticoagulant choice?",
+    "Any absolute contraindication to anticoagulation (active bleeding, recent intracranial event)?",
+    "Is there echocardiographic or biomarker evidence of RV strain confirming submassive classification?",
+    "Any indication for IVC filter (e.g., absolute contraindication to anticoagulation)?"
+  ],
+  "expectedInvestigations": [
+    "CT pulmonary angiogram",
+    "Transthoracic echocardiogram",
+    "Troponin and NT-proBNP/BNP",
+    "D-dimer",
+    "ECG",
+    "Lower limb compression ultrasound",
+    "Arterial blood gas"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "chestPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "syncope": true,
+    "raisedJVP": true,
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "hypotension": true,
+    "ecgIschemia": true
+  },
+  "expected": {
+    "diagnosis": "Acute submassive pulmonary embolism with right ventricular strain",
+    "acceptableIds": [
+      "pe"
+    ],
+    "differentialIds": [
+      "acs",
+      "pericarditis",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "CT pulmonary angiogram",
+      "Transthoracic echocardiogram",
+      "Troponin",
+      "NT-proBNP",
+      "D-dimer",
+      "Lower limb compression ultrasound",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (pe)",
+    "confidence >= expectedConfidence.min (75)",
+    "differential includes acute coronary syndrome and/or pericarditis given overlapping chest pain/dyspnea presentation",
+    "stewardship recommendation is null/none (non-infective diagnosis)",
+    "case flags right heart strain / intermediate-high risk features (troponin/NT-proBNP elevation, echo RV strain) distinct from low-risk PE"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

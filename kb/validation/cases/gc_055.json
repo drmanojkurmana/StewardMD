@@ -1,0 +1,154 @@
+{
+  "id": "gc_055",
+  "specialty": "Rheumatology",
+  "condition": "Systemic lupus erythematosus flare",
+  "age": 27,
+  "sex": "F",
+  "presentingComplaint": "Facial rash, joint pains, and frothy urine for 3 weeks, with worsening fatigue and low-grade fever",
+  "history": "A 27-year-old woman with SLE diagnosed 4 years ago (previously well-controlled on hydroxychloroquine, now non-adherent for the past 3 months due to financial constraints) presents with a 3-week history of worsening malar rash, symmetric small-joint pain and swelling in the hands and wrists, low-grade fevers, and increasing fatigue. Over the last 10 days she has noticed frothy, bubbly urine and bilateral ankle swelling. She denies dysuria, hematuria visible to the naked eye, chest pain, or shortness of breath. No recent infections, new medications, or excessive sun exposure reported, though she did attend an outdoor wedding 4 weeks ago. She has had increased hair shedding and two painless oral ulcers over the past week. No history of seizures, psychosis, or focal neurological symptoms.",
+  "examination": "Malar (butterfly) rash sparing the nasolabial folds, healed discoid-type scarring on the scalp with patchy alopecia, one small painless ulcer on the hard palate. Bilateral pitting edema of the ankles to mid-shin. Symmetric synovitis and tenderness of the MCP and PIP joints of both hands and wrists without deformity. No oral candidiasis. Chest clear to auscultation, no pericardial rub. Abdomen soft, non-tender, no organomegaly. No focal neurological deficits; alert and oriented.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/94",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 37.6
+  },
+  "labs": {
+    "hemoglobin_g_dL": 9.4,
+    "wbc_x10e9_L": 3.1,
+    "lymphocytes_x10e9_L": 0.7,
+    "platelets_x10e3_uL": 118,
+    "creatinine_mg_dL": 1.6,
+    "baseline_creatinine_mg_dL": 0.7,
+    "urea_mg_dL": 48,
+    "albumin_g_dL": 2.6,
+    "urineProteinCreatinineRatio_mg_g": 3200,
+    "urinalysis": "3+ protein, dysmorphic RBCs, RBC casts, few WBCs, no nitrites",
+    "complementC3_mg_dL": 42,
+    "complementC4_mg_dL": 6,
+    "antiDsDNA_IU_mL": 310,
+    "ANA": "positive, homogeneous pattern, titer 1:1280",
+    "antiSm": "positive",
+    "ESR_mm_hr": 78,
+    "CRP_mg_L": 14,
+    "directCoombs": "positive, non-hemolyzing",
+    "urineMicroscopy": "active sediment with dysmorphic RBCs and RBC casts"
+  },
+  "imaging": [
+    "Renal ultrasound: normal-sized kidneys, preserved corticomedullary differentiation, no obstruction",
+    "Chest X-ray: no infiltrate or effusion",
+    "Hand X-rays: soft tissue swelling only, no erosions"
+  ],
+  "microbiology": [
+    "Urine culture: no growth",
+    "Blood cultures x2: no growth",
+    "HIV, hepatitis B and C serologies: negative"
+  ],
+  "differentialDiagnoses": [
+    "Lupus nephritis flare (Class III/IV)",
+    "Rheumatoid arthritis",
+    "Post-infectious glomerulonephritis",
+    "ANCA-associated vasculitis",
+    "Drug-induced lupus",
+    "Mixed connective tissue disease",
+    "Thrombotic microangiopathy (TTP/HUS) given cytopenias"
+  ],
+  "finalDiagnosis": "Systemic lupus erythematosus flare with active lupus nephritis (multisystem: mucocutaneous, articular, hematologic, renal)",
+  "citations": [
+    "Harrison 22e — Systemic Lupus Erythematosus",
+    "Harrison 22e — Glomerular Diseases",
+    "KDIGO Glomerular Diseases Guideline 2021",
+    "EULAR/ACR Classification Criteria for SLE 2019",
+    "EULAR Recommendations for Management of SLE 2019"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid live vaccines if escalating immunosuppression (e.g., high-dose steroids, mycophenolate, cyclophosphamide)",
+    "Avoid NSAIDs given renal impairment",
+    "Screen for TB and hepatitis B before starting biologics or heavy immunosuppression",
+    "Confirm G6PD status not required for hydroxychloroquine but check baseline ophthalmologic exam before continuing",
+    "Avoid nephrotoxic agents (e.g., contrast, aminoglycosides) given active nephritis"
+  ],
+  "edgeCases": [
+    "Cytopenias (leukopenia, lymphopenia, mild thrombocytopenia) with a positive but non-hemolyzing Coombs test can mimic TTP/HUS or hematologic malignancy — schistocytes on smear and ADAMTS13 help exclude TMA",
+    "Active urine sediment with rising creatinine mandates renal biopsy to classify lupus nephritis class and guide induction therapy (not modeled as a distinct engine id — case is captured under 'sle_flare')",
+    "Non-adherence to hydroxychloroquine is a common precipitant of flare and should be addressed alongside acute management",
+    "Because 'lupus nephritis' is not a separate id in the diagnosable list, the overall flare with renal involvement is best captured as sle_flare; acceptableIds intentionally excludes a separate nephritis-specific id"
+  ],
+  "expectedMaiK": "MaiK should flag multisystem lupus flare with renal involvement (active urinary sediment, rising creatinine, hypocomplementemia, high anti-dsDNA) as requiring urgent nephrology referral and renal biopsy to guide immunosuppressive induction; this is a non-infective rheumatologic emergency, not a sepsis/infection pathway.",
+  "expectedNextQuestions": [
+    "Is there a history of new medications suggestive of drug-induced lupus?",
+    "Any prior renal biopsy or known lupus nephritis class?",
+    "Adherence to hydroxychloroquine and other immunosuppressants?",
+    "Any neuropsychiatric symptoms (seizures, psychosis, headache) suggesting CNS lupus?",
+    "Any pregnancy or plans for pregnancy (affects drug choice)?",
+    "Prior thrombosis history or antiphospholipid antibody status?"
+  ],
+  "expectedInvestigations": [
+    "Renal biopsy for lupus nephritis classification (ISN/RPS)",
+    "Anti-dsDNA titer",
+    "Complement C3/C4",
+    "24-hour urine protein or spot urine protein:creatinine ratio",
+    "Urinalysis with microscopy for dysmorphic RBCs/casts",
+    "Antiphospholipid antibody panel (lupus anticoagulant, anticardiolipin, anti-beta2-glycoprotein I)",
+    "Direct Coombs test",
+    "Complete blood count with differential",
+    "ANA, anti-Sm, anti-Ro/La"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "rash": true,
+    "polyarthralgia": true,
+    "symmetricSmallJointInvolvement": true,
+    "jointSwelling": true,
+    "proteinuria": true,
+    "hematuria": true,
+    "renalImpairment": true,
+    "legSwellingBilateral": true,
+    "thrombocytopenia": true,
+    "fever": true,
+    "weightLoss": true,
+    "steroidUse": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "Systemic lupus erythematosus flare with active lupus nephritis",
+    "acceptableIds": [
+      "sle_flare"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "vasculitis",
+      "rheumatoid",
+      "ttp_hus"
+    ],
+    "investigations": [
+      "Renal biopsy (ISN/RPS classification)",
+      "Anti-dsDNA",
+      "Complement C3/C4",
+      "Urine protein:creatinine ratio",
+      "Urinalysis with microscopy",
+      "Antiphospholipid antibody panel",
+      "Direct Coombs test"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (sle_flare)",
+    "confidence >= expectedConfidence.min",
+    "differential includes glomerulonephritis and/or vasculitis",
+    "expectedInvestigations includes renal biopsy and anti-dsDNA/complement panel",
+    "stewardship tier is null (non-infective flare, no antimicrobials recommended)",
+    "engine does not misclassify as infective/sepsis pathway despite fever and elevated inflammatory markers"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

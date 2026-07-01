@@ -1,0 +1,145 @@
+{
+  "id": "gc_084",
+  "specialty": "Gastroenterology",
+  "condition": "Ascending cholangitis",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Right upper quadrant pain, high fever with rigors, and yellowing of eyes for 1 day",
+  "history": "A 68-year-old woman with known gallstone disease presents with a 2-day history of colicky right upper quadrant pain radiating to the back, followed by high-grade fever with shaking chills over the last 24 hours. Family notes she has become confused and drowsy over the past few hours. She has also noted dark urine and yellowing of the eyes since this morning. No hematemesis or melena. She has not passed loose stools. She was previously well apart from known cholelithiasis on ultrasound 2 years ago, for which she deferred elective cholecystectomy.",
+  "examination": "Toxic-looking, jaundiced, confused and disoriented to time (GCS 13). Temp 39.6C, HR 118/min, BP 88/54 mmHg, RR 24/min, SpO2 94% on room air. Sclera icteric. Abdomen soft, tender in right upper quadrant with voluntary guarding; positive Murphy sign; no rebound or rigidity; bowel sounds present. No ascites or organomegaly beyond mild hepatomegaly. No skin rash or petechiae. Extremities warm, capillary refill 3 seconds.",
+  "vitals": {
+    "hr": 118,
+    "bp": "88/54",
+    "rr": 24,
+    "spo2": 94,
+    "temp": 39.6
+  },
+  "labs": {
+    "wbc": 19.8,
+    "neutrophilPercent": 88,
+    "totalBilirubin": 6.2,
+    "directBilirubin": 4.8,
+    "alp": 410,
+    "ggt": 380,
+    "alt": 145,
+    "ast": 160,
+    "lactate": 3.4,
+    "creatinine": 1.9,
+    "platelets": 118,
+    "inr": 1.5,
+    "crp": 210,
+    "procalcitonin": 8.6
+  },
+  "imaging": [
+    "Abdominal ultrasound: dilated common bile duct (12 mm) with multiple gallstones in the gallbladder and a distal CBD calculus; no gallbladder wall thickening or pericholecystic fluid",
+    "MRCP (if performed): choledocholithiasis with CBD dilatation confirming distal obstruction"
+  ],
+  "microbiology": [
+    "Blood cultures x2 sent prior to antibiotics: pending (subsequently grew Escherichia coli, ESBL-negative, in this scenario)",
+    "Bile culture obtained at ERCP: pending"
+  ],
+  "differentialDiagnoses": [
+    "Acute cholecystitis",
+    "Choledocholithiasis without cholangitis",
+    "Acute pancreatitis (gallstone-related)",
+    "Hepatic abscess",
+    "Viral hepatitis with sepsis of another source",
+    "Perforated peptic ulcer with biliary peritonitis"
+  ],
+  "finalDiagnosis": "Acute ascending cholangitis with septic shock (Charcot triad plus Reynolds pentad features), secondary to choledocholithiasis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Acute Cholangitis and Cholecystitis",
+    "Tokyo Guidelines 2018 (TG18) for acute cholangitis and cholecystitis",
+    "Surviving Sepsis Campaign Guidelines 2021"
+  ],
+  "stewardship": "Empirical broad-spectrum antimicrobial therapy targeting gram-negative enteric organisms (including Enterobacteriaceae) and enterococci, per Tokyo Guidelines 2018 severity-stratified recommendations, combined with emergent biliary decompression (ERCP with sphincterotomy/stent, or percutaneous drainage if ERCP unavailable/fails). De-escalate per blood/bile culture and sensitivity results; total duration guided by adequacy of source control.",
+  "contraindications": [
+    "Avoid delaying biliary drainage while awaiting antibiotic response in Grade III (severe) cholangitis with organ dysfunction — source control is time-critical",
+    "Avoid nephrotoxic antibiotic regimens without dose adjustment given acute kidney injury (creatinine 1.9)",
+    "Avoid anticoagulant/antiplatelet-sensitive procedures without correcting coagulopathy (INR 1.5) prior to intervention if feasible",
+    "Avoid ceftriaxone-calcium co-administration cautions in neonates (not applicable here but standard caveat) and avoid drugs requiring hepatic dose adjustment without consideration of cholestasis"
+  ],
+  "edgeCases": [
+    "Elderly or immunosuppressed patients may present without classic Charcot triad ('silent' cholangitis) — a high index of suspicion is needed",
+    "Reynolds pentad (triad plus hypotension and altered mentation) as seen here indicates suppurative/severe (Tokyo Grade III) cholangitis with high mortality risk if drainage is delayed",
+    "Malignant distal biliary obstruction (e.g., pancreatic head or cholangiocarcinoma) can present identically and must be excluded once sepsis is controlled",
+    "Post-ERCP cholangitis and cholangitis in the setting of indwelling biliary stents are important recurrent variants requiring different empirical coverage assumptions"
+  ],
+  "expectedMaiK": "MaiK should flag Charcot triad plus hypotension/confusion as Reynolds pentad indicating Grade III (severe) ascending cholangitis with septic shock, and prioritize urgent biliary source control (ERCP) alongside broad-spectrum antibiotics per Tokyo Guidelines 2018 / Surviving Sepsis bundle.",
+  "expectedNextQuestions": [
+    "Is there a known malignant biliary obstruction or prior biliary instrumentation/stent?",
+    "Any penicillin/cephalosporin allergy history?",
+    "Is urgent ERCP or percutaneous transhepatic drainage available at this facility?",
+    "What is the baseline renal function and current fluid status for antibiotic dosing and resuscitation?",
+    "Any recent antibiotic exposure or hospitalization suggesting resistant organisms?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 before antibiotics",
+    "Liver function tests (bilirubin, ALP, GGT, transaminases)",
+    "Complete blood count with differential",
+    "Serum lactate",
+    "Renal function tests and coagulation profile",
+    "Abdominal ultrasound",
+    "MRCP or CT abdomen if diagnosis unclear",
+    "Urgent ERCP (diagnostic and therapeutic)",
+    "Procalcitonin (supportive, optional)"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "jaundice": true,
+    "rightUpperQuadrantPain": true,
+    "murphySign": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "Acute ascending cholangitis with septic shock (Charcot triad plus Reynolds pentad features), secondary to choledocholithiasis",
+    "acceptableIds": [
+      "CHOLANGITIS"
+    ],
+    "differentialIds": [
+      "CHOLECYSTITIS",
+      "SEPTIC_SHOCK",
+      "SEPSIS",
+      "biliary_colic"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "Liver function tests",
+      "Abdominal ultrasound",
+      "MRCP or CT abdomen",
+      "Urgent ERCP",
+      "Serum lactate",
+      "Renal function and coagulation profile"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Ceftriaxone plus metronidazole",
+        "Meropenem (if prior resistant organisms or critically ill)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CHOLANGITIS)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes CHOLECYSTITIS and SEPTIC_SHOCK",
+    "stewardship recommendation includes broad-spectrum gram-negative/anaerobic coverage",
+    "output flags need for urgent biliary source control (ERCP) given Reynolds pentad features"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

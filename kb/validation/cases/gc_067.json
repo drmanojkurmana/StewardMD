@@ -1,0 +1,123 @@
+{
+  "id": "gc_067",
+  "specialty": "Endocrinology",
+  "condition": "Hypoglycaemia",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Found confused and drowsy at home by her daughter, about 2 hours after her usual evening meal.",
+  "history": "68-year-old woman with type 2 diabetes mellitus of 15 years' duration, on glimepiride and metformin, plus insulin glargine started 3 weeks ago by her physician for suboptimal control. Daughter reports the patient ate poorly at dinner last night ('only a few bites') because of nausea, but took her usual glimepiride and glargine doses as scheduled. This morning she was found sitting on the floor, confused, sweaty, and slurring her words, unable to state the correct day or recognize her daughter at first. No history of seizure witnessed, no head trauma. No fever, vomiting, or diarrhea preceding the event. No alcohol intake. She has chronic kidney disease stage 3 (baseline creatinine ~1.6 mg/dL) which has been stable. No history of similar episodes since starting glimepiride 2 years ago, but she has had two mild low-sugar episodes (shakiness, sweating) in the past week since the insulin was added, both self-treated with juice.",
+  "examination": "Confused, diaphoretic, and drowsy but arousable to voice; oriented to person only. Cool, clammy skin. No focal neurological deficits, no neck stiffness, no signs of head injury. No pallor, no icterus. Chest clear, heart sounds normal, abdomen soft non-tender. No signs of infection.",
+  "vitals": {
+    "hr": 112,
+    "bp": "138/86",
+    "rr": 18,
+    "spo2": 98,
+    "temp": 36.4
+  },
+  "labs": {
+    "capillaryGlucose_mgdl": 32,
+    "labGlucose_mgdl": 35,
+    "creatinine_mgdl": 1.9,
+    "egfr_ml_min": 29,
+    "sodium_mmolL": 137,
+    "potassium_mmolL": 4.1,
+    "hba1c_percent": 7.2,
+    "insulinLevel": "not sent (clinical diagnosis sufficient given exogenous insulin/sulfonylurea use)",
+    "cPeptide": "not sent",
+    "ketones": "negative",
+    "ecg": "sinus tachycardia, no acute ischemic changes"
+  },
+  "imaging": [
+    "Non-contrast CT head: no acute intracranial abnormality (obtained given altered sensorium to exclude structural cause)"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Insulin/sulfonylurea-induced hypoglycaemia (primary)",
+    "Acute ischemic stroke / TIA",
+    "Sepsis with metabolic encephalopathy",
+    "Uremic encephalopathy",
+    "Alcohol-related hypoglycaemia or intoxication",
+    "Adrenal insufficiency",
+    "Postictal state"
+  ],
+  "finalDiagnosis": "Severe hypoglycaemia due to insulin and sulfonylurea (glimepiride) use, precipitated by reduced oral intake in a patient with worsening renal function",
+  "citations": [
+    "Harrison 22e — Hypoglycemia",
+    "Harrison 22e — Diabetes Mellitus: Management",
+    "ADA Standards of Care in Diabetes 2024",
+    "Endocrine Society Clinical Practice Guideline — Hypoglycemia 2009"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid IV dextrose bolus without subsequent glucose monitoring/infusion — risk of rebound hypoglycaemia, especially with sulfonylureas which have prolonged action",
+    "Glimepiride-induced hypoglycaemia can be prolonged and recurrent, particularly with renal impairment (reduced drug clearance) — requires extended monitoring (24-48h), not just a single dextrose bolus",
+    "Avoid glucagon as first-line in a patient who can receive IV dextrose and who is on sulfonylurea (glucagon may cause secondary insulin release from sulfonylurea-stimulated beta cells, blunting response and risking rebound hypoglycaemia)"
+  ],
+  "edgeCases": [
+    "Sulfonylurea-induced hypoglycaemia may warrant octreotide if recurrent despite dextrose, as octreotide suppresses sulfonylurea-stimulated insulin secretion",
+    "Renal impairment reduces clearance of both glimepiride and insulin, prolonging hypoglycaemia risk — dose adjustment/discontinuation should be reviewed",
+    "This case is grouped under the disease-list entry 'hypoglycemia' (Endocrine); no separate ICD-style split exists in the current diagnosable list for drug class (insulin vs sulfonylurea) etiology"
+  ],
+  "expectedMaiK": "MaiK should flag this as drug-induced severe hypoglycaemia (insulin + sulfonylurea) with altered sensorium, recommend immediate IV dextrose plus prolonged glucose monitoring given renal impairment and glimepiride's long duration of action, and prompt review/dose reduction of glimepiride and insulin regimen.",
+  "expectedNextQuestions": [
+    "What time was the last dose of glimepiride and insulin glargine taken?",
+    "Was oral intake reduced or missed before the episode?",
+    "Any recent change in renal function or new nephrotoxic medications?",
+    "History of alcohol use or other medications that could potentiate hypoglycaemia?",
+    "Any prior episodes of hypoglycaemia unawareness?"
+  ],
+  "expectedInvestigations": [
+    "Immediate capillary and laboratory glucose",
+    "Renal function panel (creatinine, eGFR)",
+    "Serum electrolytes",
+    "HbA1c to assess background glycaemic control",
+    "ECG",
+    "CT head if altered sensorium does not rapidly resolve with glucose correction or focal deficits present",
+    "Consider cortisol if hypoglycaemia recurrent/unexplained"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "tachycardia": true,
+    "polyuriaPolydipsia": true,
+    "diabetesHx": true,
+    "renalImpairment": true,
+    "ketonemia": true
+  },
+  "expected": {
+    "diagnosis": "Severe hypoglycaemia due to insulin and sulfonylurea (glimepiride) use, precipitated by reduced oral intake in a patient with worsening renal function",
+    "acceptableIds": [
+      "hypoglycemia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "metabolic_enceph",
+      "ckd"
+    ],
+    "investigations": [
+      "Capillary and lab glucose",
+      "Renal function panel",
+      "Serum electrolytes",
+      "HbA1c",
+      "ECG",
+      "CT head (if no rapid improvement with glucose correction)"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hypoglycemia)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes ischemic_stroke or metabolic_enceph",
+    "stewardship.antibiotics is empty (non-infective diagnosis)",
+    "expectedInvestigations includes glucose and renal function panel"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

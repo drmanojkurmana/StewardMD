@@ -1,0 +1,127 @@
+{
+  "id": "gc_093",
+  "specialty": "Cardiology",
+  "condition": "Aortic dissection",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Sudden-onset severe tearing chest pain radiating to the back, ongoing for 45 minutes.",
+  "history": "A 62-year-old man with long-standing poorly controlled hypertension presents to the emergency department with abrupt-onset, severe, tearing/ripping chest pain that began while straining during a bowel movement. The pain was maximal at onset, located retrosternally, and migrated within minutes to the interscapular region of the back. He describes it as the worst pain of his life. He denies preceding exertional chest discomfort. He reports transient lightheadedness but no loss of consciousness. No fever, cough, or recent travel. He has a 20-year history of hypertension with inconsistent medication adherence and a 30-pack-year smoking history. No known connective tissue disorder, but his father died suddenly at age 55 of an unspecified 'heart problem.' No history of recent trauma, cocaine use, or cardiac surgery.",
+  "examination": "Anxious, diaphoretic man in acute distress from pain. Blood pressure discordant between limbs: right arm 178/98 mmHg, left arm 138/86 mmHg. Radial pulse in the left arm is weaker in volume compared to the right (pulse deficit). Heart sounds reveal a soft early diastolic decrescendo murmur at the right upper sternal border consistent with aortic regurgitation. No pericardial rub. Chest is clear to auscultation bilaterally. Abdomen is soft, non-tender, no pulsatile mass. Lower limb pulses are symmetric and intact. No focal neurological deficits; fully alert and oriented.",
+  "vitals": {
+    "hr": 108,
+    "bp": "178/98",
+    "rr": 22,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "troponinI_ngL": 28,
+    "dDimer_ugFEUmL": 3.8,
+    "creatinine_mgdL": 1.3,
+    "hemoglobin_gdL": 13.9,
+    "lactate_mmolL": 1.6,
+    "wbc_10e3uL": 11.2,
+    "ck_UL": 140
+  },
+  "imaging": [
+    "CT aortogram (chest/abdomen/pelvis with contrast): intimal flap in the ascending and descending thoracic aorta with a dilated aortic root (4.6 cm), true and false lumen identified, extending from just above the aortic valve to the level of the renal arteries (Stanford type A / DeBakey type I)",
+    "Chest X-ray: widened mediastinum, left pleural effusion",
+    "Transthoracic echocardiogram: dilated aortic root, intimal flap in ascending aorta, moderate aortic regurgitation, no pericardial effusion or tamponade"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute coronary syndrome / STEMI",
+    "Pulmonary embolism",
+    "Acute pericarditis",
+    "Spontaneous pneumothorax",
+    "Musculoskeletal chest pain",
+    "Esophageal rupture (Boerhaave syndrome)"
+  ],
+  "finalDiagnosis": "Acute Type A aortic dissection",
+  "citations": [
+    "Harrison 22e — Diseases of the Aorta (Aortic Dissection)",
+    "ESC Guidelines on Aortic Diseases 2014",
+    "AHA/ACC Guideline for the Diagnosis and Management of Aortic Disease 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid thrombolytic therapy (contraindicated if dissection is suspected/confirmed, e.g. in a patient initially misdiagnosed as STEMI)",
+    "Avoid anticoagulation until dissection is excluded",
+    "Beta-blockade should be initiated before vasodilators to avoid reflex tachycardia and increased aortic wall shear stress"
+  ],
+  "edgeCases": [
+    "Pulse deficit and inter-arm blood pressure differential may be absent in up to 30% of confirmed dissections; a normal exam does not exclude the diagnosis",
+    "Type A dissection is a surgical emergency; misdiagnosis as ACS (due to elevated troponin from coronary ostial involvement) can lead to inappropriate thrombolysis with catastrophic hemorrhage",
+    "D-dimer, while sensitive, is not specific and should not be used to defer definitive imaging in a high pre-test probability presentation",
+    "New aortic regurgitation murmur plus tearing chest pain should prompt urgent aortic imaging even without a widened mediastinum on CXR"
+  ],
+  "expectedMaiK": "Tearing chest/back pain with inter-arm BP differential, pulse deficit, and new AR murmur is classic for acute aortic dissection; flag as a surgical emergency requiring urgent CT aortogram/TEE, aggressive HR/BP control (beta-blocker first), and immediate cardiothoracic surgery consultation for Type A disease — do not anticoagulate or thrombolyse.",
+  "expectedNextQuestions": [
+    "Is the dissection Type A (ascending, surgical) or Type B (descending, typically managed medically unless complicated)?",
+    "Is there evidence of malperfusion (coronary, cerebral, mesenteric, renal, or limb)?",
+    "Is there pericardial effusion or tamponade physiology?",
+    "Does the patient have a connective tissue disorder (Marfan, Ehlers-Danlos, Loeys-Dietz) given family history of sudden death?",
+    "What is the aortic root/ascending aorta diameter and is there aortic regurgitation severity requiring valve intervention?"
+  ],
+  "expectedInvestigations": [
+    "CT aortogram (chest/abdomen/pelvis with IV contrast)",
+    "Transesophageal echocardiogram if CT not immediately available or patient unstable",
+    "12-lead ECG to exclude/assess concomitant coronary involvement",
+    "Troponin",
+    "Chest X-ray",
+    "Type and crossmatch",
+    "Bilateral blood pressure measurement"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "chestPain": true,
+    "backPain": true,
+    "syncope": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "sex": true,
+    "age": true,
+    "heartRate": true,
+    "sbp": true,
+    "dbp": true,
+    "tachycardia": true,
+    "newMurmur": true
+  },
+  "expected": {
+    "diagnosis": "Acute Type A aortic dissection",
+    "acceptableIds": [
+      "aortic_dissection"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "pericarditis",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "CT aortogram (chest/abdomen/pelvis with contrast)",
+      "Transesophageal echocardiogram",
+      "12-lead ECG",
+      "Troponin",
+      "Chest X-ray",
+      "Bilateral blood pressure measurement"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (aortic_dissection)",
+    "confidence >= expectedConfidence.min (80)",
+    "differential includes acs and pe within top-3",
+    "does not recommend thrombolysis or anticoagulation",
+    "flags as surgical emergency requiring urgent imaging and cardiothoracic/vascular surgery consultation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

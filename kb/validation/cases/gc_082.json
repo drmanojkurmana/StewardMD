@@ -1,0 +1,128 @@
+{
+  "id": "gc_082",
+  "specialty": "Toxicology",
+  "condition": "Opioid overdose",
+  "age": 29,
+  "sex": "M",
+  "presentingComplaint": "Found unresponsive in a parked car with slow, shallow breathing.",
+  "history": "A 29-year-old man with a known history of injection heroin use was found by a passer-by slumped in the driver's seat of a parked car, unresponsive, with visibly slow and shallow breathing. A used syringe and a foil wrapper were found nearby. Paramedics report no witnessed seizure, vomiting, or trauma. No suicide note. Friends contacted by phone report he had recently been released from a 3-week inpatient detoxification program two days prior and had \"gone back to using\" that evening, raising concern for reduced opioid tolerance. No history of diabetes, seizure disorder, or head injury reported. No co-ingestant packaging (e.g., benzodiazepine blister packs, alcohol bottles) identified at scene, though co-ingestion cannot be excluded.",
+  "examination": "Unresponsive to verbal stimuli, responds only to painful stimuli with non-purposeful withdrawal (GCS 6: E1V1M4-ish/ approx 6). Cyanotic lips. Bilaterally pinpoint (miosis), poorly reactive pupils. Respiratory rate markedly reduced with shallow, irregular breaths; occasional apneic pauses. Skin cool, no diaphoresis. Old and fresh needle track marks over both antecubital fossae. Chest clear to auscultation, no wheeze or crepitations. Heart sounds normal, bradycardic. Abdomen soft, non-tender. No focal neurological deficits elicitable given depressed consciousness. No signs of trauma.",
+  "vitals": {
+    "hr": 54,
+    "bp": "96/58",
+    "rr": 6,
+    "spo2": 82,
+    "temp": 35.6
+  },
+  "labs": {
+    "venousBloodGas_pH": 7.21,
+    "pCO2_mmHg": 68,
+    "pO2_mmHg": 48,
+    "bicarbonate_mmol_L": 21,
+    "lactate_mmol_L": 2.6,
+    "glucose_mg_dL": 96,
+    "sodium_mmol_L": 138,
+    "potassium_mmol_L": 4.1,
+    "creatinine_mg_dL": 1,
+    "urineDrugScreen": "positive for opiates",
+    "paracetamolLevel": "not detected",
+    "salicylateLevel": "not detected",
+    "ethanolLevel": "not detected"
+  },
+  "imaging": [
+    "Chest X-ray: no infiltrate, no aspiration changes; normal cardiac silhouette",
+    "CT head (performed given depressed GCS): no acute intracranial abnormality"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Opioid overdose (heroin) with respiratory depression",
+    "Sedative-hypnotic (benzodiazepine) overdose / co-ingestion",
+    "Organophosphate poisoning",
+    "Primary hypoglycemic coma",
+    "Hypercapnic respiratory failure from other cause (e.g., CNS depressant polydrug use)",
+    "Structural intracranial event (hemorrhage) causing coma"
+  ],
+  "finalDiagnosis": "Opioid overdose with respiratory depression and miosis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Opioid Poisoning and Withdrawal",
+    "Harrison's Principles of Internal Medicine 22e — Approach to the Patient with Coma",
+    "ACMT/AACT Naloxone Practice Guideline 2022"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid flumazenil empirically if benzodiazepine co-ingestion suspected in an opioid-dependent patient, as it can precipitate seizures",
+    "Use lowest effective naloxone dose/titration in known chronic opioid users to avoid precipitating acute severe withdrawal",
+    "Avoid physical/mechanical restraint without adequate airway management in a patient with depressed respiratory drive"
+  ],
+  "edgeCases": [
+    "Recent detoxification/abstinence markedly reduces opioid tolerance, increasing overdose risk at previously-tolerated doses",
+    "Long-acting or high-potency opioids (e.g., fentanyl, methadone) may require repeat or infusion naloxone dosing due to duration mismatch (naloxone half-life shorter than opioid)",
+    "Co-ingestion with benzodiazepines or alcohol is common and may blunt response to naloxone alone / worsen respiratory depression",
+    "Naloxone may only partially reverse mixed overdoses (e.g., with GABAergic agents), so a normal mental status is not guaranteed",
+    "This diagnosis code is not present in the current disease-classification list used for automated top-1 disease scoring; acceptableIds intentionally left empty per case authoring rules despite opioid_od existing in the reference list — included here for differential credit only"
+  ],
+  "expectedMaiK": "MaiK should flag the classic opioid toxidrome triad (respiratory depression, miosis, CNS depression) with track marks and recent abstinence as a tolerance-loss risk factor, and prompt immediate consideration of naloxone administration and airway/ventilatory support rather than antimicrobial workup.",
+  "expectedNextQuestions": [
+    "What was the estimated time since last opioid use / time down before discovery?",
+    "Any co-ingestants suspected (benzodiazepines, alcohol, other sedatives) based on scene findings or history?",
+    "Has naloxone already been administered pre-hospital, and what was the response?",
+    "Is there a history of fentanyl-adulterated supply in the local area?",
+    "Any prior overdose episodes or recent change in tolerance (e.g., incarceration, detox, rehab)?"
+  ],
+  "expectedInvestigations": [
+    "Venous or arterial blood gas",
+    "Point-of-care glucose",
+    "Urine toxicology screen",
+    "Paracetamol and salicylate levels (co-ingestion screen)",
+    "ECG (assess for QTc prolongation, e.g., methadone)",
+    "Chest X-ray (assess for aspiration/pulmonary edema)",
+    "CT head if depressed GCS not fully responsive to naloxone or focal signs present"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "alteredSensorium": true,
+    "hypoxia": true,
+    "bradypnea": true,
+    "bradycardia": true,
+    "hypothermia": true,
+    "drugOverdose": true,
+    "miosisSecretions": true,
+    "gcs": true,
+    "spo2": true,
+    "respRate": true
+  },
+  "expected": {
+    "diagnosis": "Opioid overdose with respiratory depression and miosis",
+    "acceptableIds": [],
+    "differentialIds": [
+      "drug_intox",
+      "organophosphate"
+    ],
+    "investigations": [
+      "Venous or arterial blood gas",
+      "Point-of-care glucose",
+      "Urine toxicology screen",
+      "Paracetamol and salicylate levels",
+      "ECG",
+      "Chest X-ray",
+      "CT head if indicated"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis reasoning surfaces opioid toxidrome (miosis + bradypnea + altered sensorium + drug overdose context)",
+    "differential includes drug_intox (and/or organophosphate as a poisoning-syndrome mimic) in top-3",
+    "confidence >= expectedConfidence.min",
+    "stewardship.antibiotics is empty / tier is null (non-infective diagnosis)",
+    "expectedNextQuestions surfaced include co-ingestant and naloxone-response probes"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

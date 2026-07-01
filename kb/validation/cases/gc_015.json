@@ -1,0 +1,137 @@
+{
+  "id": "gc_015",
+  "specialty": "Nephrology",
+  "condition": "Chronic kidney disease",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Progressive leg swelling, frothy urine, and increasing fatigue over the past 3 months in a man with long-standing type 2 diabetes.",
+  "history": "61-year-old man with a 15-year history of type 2 diabetes mellitus (last HbA1c 8.9%) and hypertension for 10 years, on metformin, glimepiride, and amlodipine. He reports progressive bilateral ankle and pretibial swelling over 3 months, frothy discoloration of urine noticed by his wife, reduced appetite, nausea, and generalized fatigue. No dysuria, no gross hematuria, no fevers. He has known diabetic retinopathy (laser-treated 4 years ago) and mild sensorimotor peripheral neuropathy. No NSAID use, no recent contrast exposure. No prior known kidney disease diagnosis but has missed several outpatient follow-ups over the past 2 years. Family history negative for polycystic kidney disease.",
+  "examination": "Alert, mildly puffy-faced, oriented. Bilateral pitting pedal and pretibial edema to mid-shin. No rash, no oral ulcers. Chest clear, no crackles. JVP mildly raised. Cardiac exam: no murmur, regular rhythm. Abdomen soft, non-tender, no ascites clinically. Fundoscopy: background diabetic retinopathy with laser scars. Reduced vibration sense and ankle reflexes bilaterally consistent with diabetic peripheral neuropathy. No asterixis. No pericardial rub.",
+  "vitals": {
+    "hr": 84,
+    "bp": "158/92",
+    "rr": 16,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "creatinine_mgdl": 3.4,
+    "egfr_ml_min_1.73m2": 19,
+    "urea_mgdl": 88,
+    "potassium_mmol_l": 5.3,
+    "bicarbonate_mmol_l": 18,
+    "hemoglobin_g_dl": 9.6,
+    "calcium_mgdl": 8.2,
+    "phosphate_mgdl": 5.8,
+    "intact_pth_pg_ml": 210,
+    "albumin_g_dl": 3.1,
+    "hba1c_percent": 8.9,
+    "urineACR_mg_g": 2450,
+    "urinalysis": "no active sediment, no dysmorphic RBCs, no RBC casts, trace leukocytes",
+    "renal_ultrasound_kidney_size": "normal-sized kidneys (10.5 cm bilaterally) with increased cortical echogenicity, no hydronephrosis, no stones"
+  },
+  "imaging": [
+    "Renal ultrasound: bilateral kidneys of normal size (~10.5 cm), increased echogenicity, no obstruction, no cysts, no calculi",
+    "Fundoscopy: moderate non-proliferative to laser-treated diabetic retinopathy"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Diabetic nephropathy (diabetic kidney disease) with CKD stage 4",
+    "Primary glomerulonephritis (e.g., membranous nephropathy, FSGS) superimposed on diabetes",
+    "Hypertensive nephrosclerosis",
+    "Nephrotic-range proteinuria from another glomerulopathy",
+    "Obstructive uropathy (excluded by ultrasound)",
+    "Contrast- or NSAID-induced acute-on-chronic kidney injury (no exposure history)"
+  ],
+  "finalDiagnosis": "Diabetic nephropathy (diabetic kidney disease) causing CKD stage 4 (eGFR 15-29 mL/min/1.73m2)",
+  "citations": [
+    "Harrison 22e — Diabetic Nephropathy and Chronic Kidney Disease",
+    "KDIGO Diabetes Management in CKD Guideline 2022",
+    "KDIGO Clinical Practice Guideline for the Evaluation and Management of CKD 2024",
+    "ADA Standards of Care in Diabetes 2024 — Chronic Kidney Disease and Risk Management"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid nephrotoxic agents (NSAIDs, IV contrast without precaution, aminoglycosides)",
+    "Metformin should be discontinued/dose-reconsidered at eGFR <30 mL/min/1.73m2 per label and KDIGO guidance",
+    "Caution with RAAS inhibitor initiation given baseline hyperkalemia (K 5.3) — correct potassium and monitor closely before/after starting ACEi/ARB",
+    "SGLT2 inhibitors generally not initiated de novo at eGFR <20 mL/min/1.73m2 (formulation-dependent; check product-specific eGFR cutoff)"
+  ],
+  "edgeCases": [
+    "Absence of diabetic retinopathy would raise suspicion for a non-diabetic glomerular disease and should prompt consideration of renal biopsy",
+    "Active urinary sediment (dysmorphic RBCs, RBC casts) would argue against pure diabetic nephropathy and favor glomerulonephritis, warranting biopsy",
+    "Rapid decline in eGFR (over weeks) is atypical for diabetic nephropathy and should trigger evaluation for a superimposed acute process",
+    "This case (ckd/diabetic nephropathy) is not itself a disease-list entry distinct from 'ckd'; the underlying disease-list id 'ckd' is used as the acceptable top-1 since a dedicated 'diabetic_nephropathy' id does not exist in the vocabulary/disease list",
+    "Renal biopsy is not routinely required when the clinical picture (long-standing diabetes, retinopathy, proteinuria, bland sediment, gradual course) is classic for diabetic nephropathy"
+  ],
+  "expectedMaiK": "MaiK should flag CKD stage 4 secondary to long-standing diabetic nephropathy (proteinuria, low eGFR, diabetic retinopathy as a supportive marker), recommend nephrotoxin avoidance, metformin dose review, cautious RAAS-inhibitor use given hyperkalemia, and nephrology referral for CKD-MBD and anemia management.",
+  "expectedNextQuestions": [
+    "Is there a history of diabetic retinopathy or other microvascular complications?",
+    "Any recent NSAID use, IV contrast exposure, or other nephrotoxic drug exposure?",
+    "Is urine sediment active (dysmorphic RBCs/RBC casts) suggesting glomerulonephritis rather than diabetic nephropathy?",
+    "What is the trajectory of renal function decline (gradual over years vs. rapid over weeks)?",
+    "Is the patient already on an ACEi/ARB or SGLT2 inhibitor for renoprotection?",
+    "What is the current potassium and acid-base status given the risk of hyperkalemia limiting RAAS therapy?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatinine and eGFR (CKD-EPI)",
+    "Urine albumin-to-creatinine ratio (ACR)",
+    "Urinalysis with microscopy for dysmorphic RBCs/casts",
+    "Renal ultrasound",
+    "Serum electrolytes (potassium, bicarbonate)",
+    "Calcium, phosphate, intact PTH, vitamin D (CKD-MBD workup)",
+    "Hemoglobin and iron studies (CKD-associated anemia)",
+    "HbA1c",
+    "Fundoscopy for diabetic retinopathy",
+    "Consider renal biopsy if atypical features present"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "proteinuria": true,
+    "legSwellingBilateral": true,
+    "raisedJVP": true,
+    "creatinine": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "Diabetic nephropathy (diabetic kidney disease) causing CKD stage 4",
+    "acceptableIds": [
+      "ckd"
+    ],
+    "differentialIds": [
+      "ckd",
+      "glomerulonephritis",
+      "nephrotic",
+      "aki"
+    ],
+    "investigations": [
+      "Serum creatinine and eGFR",
+      "Urine ACR",
+      "Urinalysis microscopy",
+      "Renal ultrasound",
+      "Calcium, phosphate, PTH",
+      "Hemoglobin",
+      "HbA1c",
+      "Fundoscopy"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (ckd)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes glomerulonephritis or nephrotic as reasonable alternative",
+    "no antibiotics recommended (non-infective case)",
+    "engine surfaces nephrotoxin avoidance and metformin dose-adjustment guidance at this eGFR"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

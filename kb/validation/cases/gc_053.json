@@ -1,0 +1,128 @@
+{
+  "id": "gc_053",
+  "specialty": "Neurology",
+  "condition": "Status epilepticus",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Brought in by ambulance with continuous convulsive seizure activity for more than 10 minutes, ongoing on arrival.",
+  "history": "34-year-old man with known epilepsy on phenytoin, poorly compliant with medication over the past week, was found by a roommate on the floor having a generalized tonic-clonic seizure. The roommate called emergency services when the seizure did not stop after several minutes. Paramedics report the patient has been convulsing continuously or with only brief (<1 minute) interruptions in consciousness between jerking episodes for at least 15 minutes prior to arrival, with no return to baseline mental status between events. No fever reported prior to onset. No head trauma witnessed. No alcohol odor noted. No history of recent illness. Family history of epilepsy since childhood following a febrile seizure in infancy.",
+  "examination": "Ongoing generalized tonic-clonic movements of all four limbs on arrival in the emergency department, with rhythmic jerking, upgaze deviation, and clenched jaw with oral secretions. No response to voice or painful stimuli between jerks. Cyanosis around lips noted intermittently. No focal asymmetry of movements observed. No neck stiffness assessable during convulsion. Tongue laceration on the lateral tongue. Incontinence of urine noted. No signs of trauma on rapid survey.",
+  "vitals": {
+    "hr": 138,
+    "bp": "162/98",
+    "rr": 8,
+    "spo2": 84,
+    "temp": 37.8
+  },
+  "labs": {
+    "glucose_mgdl": 92,
+    "sodium_mmolL": 137,
+    "potassium_mmolL": 4.1,
+    "calcium_mgdl": 9.2,
+    "magnesium_mgdl": 2,
+    "phenytoin_level_ugmL": 3.5,
+    "lactate_mmolL": 4.8,
+    "creatinine_mgdl": 1,
+    "cpk_UL": 410,
+    "abg_pH": 7.22,
+    "abg_pco2_mmHg": 52,
+    "wbc_per_uL": 13200,
+    "ethanol_level": "not detected"
+  },
+  "imaging": [
+    "Non-contrast CT head (post-stabilization): no acute hemorrhage, mass, or midline shift"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Status epilepticus due to subtherapeutic antiepileptic levels (non-compliance)",
+    "Hypoglycemic seizure",
+    "Meningoencephalitis with seizures",
+    "Intracranial hemorrhage / structural lesion",
+    "Toxic/metabolic seizure (electrolyte, toxin-induced)",
+    "Psychogenic non-epileptic seizure (PNES)",
+    "Eclampsia (if applicable by sex/pregnancy status - not applicable here)"
+  ],
+  "finalDiagnosis": "Convulsive status epilepticus (>5 minutes), secondary to subtherapeutic phenytoin from medication non-adherence",
+  "citations": [
+    "Harrison 22e — Seizures and Epilepsy / Status Epilepticus",
+    "American Epilepsy Society (AES) Guideline for the Evaluation and Management of Status Epilepticus 2016",
+    "Neurocritical Care Society Guideline for the Evaluation and Management of Status Epilepticus 2012"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid phenytoin/fosphenytoin rapid IV push without cardiac monitoring due to arrhythmia/hypotension risk",
+    "Avoid excessive benzodiazepine dosing without airway readiness given respiratory depression risk",
+    "Avoid delaying second-line agent beyond 5 minutes after first-line benzodiazepine failure per treat-to-target algorithm"
+  ],
+  "edgeCases": [
+    "If seizure persists beyond 30-60 minutes despite two appropriate agents, this becomes refractory status epilepticus requiring continuous IV anesthetic infusion and EEG monitoring",
+    "Non-convulsive status epilepticus can be missed if patient stops convulsing but remains unresponsive — continuous EEG is required to exclude this",
+    "'Status epilepticus' as an operational diagnosis (time-based, >5 min continuous or recurrent seizures without return to baseline) is not itself a listed disease id in the engine's diagnosable-disease vocabulary; the closest engine category is generic 'seizure_epilepsy', which does not capture the emergency time-threshold definition — acceptableIds intentionally left as a reasonable single mapping with differential coverage, and this mismatch should be flagged for vocabulary expansion",
+    "Underlying etiology (structural, toxic-metabolic, infectious) must be pursued in parallel with abortive therapy — do not delay treatment for imaging in patients with known epilepsy and a clear precipitant (non-compliance)"
+  ],
+  "expectedMaiK": "Recognize convulsive status epilepticus as a neurological emergency requiring immediate benzodiazepine administration per the treat-to-target time-based algorithm (first-line at 5 min, second-line at 20 min, refractory management if seizures continue at 40 min), with simultaneous airway/glucose/electrolyte assessment and search for a precipitant such as subtherapeutic antiepileptic levels.",
+  "expectedNextQuestions": [
+    "What time did the seizure activity actually begin (to confirm the >5 minute threshold)?",
+    "Is there a history of medication non-adherence or recent AED dose changes?",
+    "Any fever, neck stiffness, or signs of CNS infection preceding the seizure?",
+    "Any history of head trauma, alcohol/substance use, or toxin exposure?",
+    "Point-of-care glucose result — has hypoglycemia been excluded?",
+    "Is airway patent and is oxygenation being actively supported?"
+  ],
+  "expectedInvestigations": [
+    "Point-of-care glucose",
+    "Serum electrolytes (sodium, calcium, magnesium)",
+    "Antiepileptic drug level (phenytoin)",
+    "Arterial blood gas",
+    "CPK",
+    "Non-contrast CT head",
+    "EEG (continuous, once convulsions controlled, to exclude non-convulsive status)",
+    "Consider lumbar puncture if infectious etiology suspected once stabilized"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "seizure": true,
+    "alteredSensorium": true,
+    "hypoxia": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "gcs": true
+  },
+  "expected": {
+    "diagnosis": "Convulsive status epilepticus (>5 minutes), secondary to subtherapeutic phenytoin from medication non-adherence",
+    "acceptableIds": [
+      "seizure_epilepsy"
+    ],
+    "differentialIds": [
+      "seizure_epilepsy",
+      "ich",
+      "metabolic_enceph",
+      "MENINGITIS"
+    ],
+    "investigations": [
+      "Point-of-care glucose",
+      "Serum electrolytes",
+      "Antiepileptic drug level",
+      "Arterial blood gas",
+      "Non-contrast CT head",
+      "EEG"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (seizure_epilepsy) OR flagged as vocabulary gap for status epilepticus",
+    "confidence >= expectedConfidence.min",
+    "differential includes structural (ich) and metabolic/infectious (metabolic_enceph, MENINGITIS) mimics",
+    "MaiK commentary surfaces time-based treat-to-target algorithm and airway/glucose priority",
+    "stewardship.antibiotics is empty given non-infectious primary diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

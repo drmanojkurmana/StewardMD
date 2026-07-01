@@ -1,0 +1,154 @@
+{
+  "id": "gc_073",
+  "specialty": "Tropical Medicine",
+  "condition": "Leptospirosis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever with yellowish discoloration of eyes and reduced urine output for 3 days",
+  "history": "34-year-old sanitation worker presents with abrupt-onset high-grade fever, severe myalgia (predominantly calf muscles), frontal headache, and chills for 6 days. Over the last 3 days he has developed yellowish discoloration of the sclera and skin, dark-colored urine, and progressively decreasing urine output. He reports wading through flood-contaminated water while clearing a blocked drain 10 days ago. No prior liver disease. No alcohol excess. No history of jaundice previously. No rash, no joint symptoms, no recent travel outside the flood-affected city area. No known TB contact. Not on any nephrotoxic medications.",
+  "examination": "Toxic-looking, icteric, mildly dehydrated. Conjunctival suffusion present bilaterally (without discharge). Marked tenderness over calf muscles on palpation. Mild hepatomegaly (liver span 14 cm, non-tender). No splenomegaly. No rash or petechiae. No lymphadenopathy. Chest clear. No neck stiffness. Alert and oriented, no asterixis.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/60",
+    "rr": 22,
+    "spo2": 96,
+    "temp": 39.4
+  },
+  "labs": {
+    "wbc": "14,200/uL with neutrophilia",
+    "platelets": 78,
+    "hemoglobin": 12.8,
+    "creatinine": 3.6,
+    "urea_mmol_l": 21.4,
+    "bilirubin_total": 9.8,
+    "bilirubin_direct_predominant": true,
+    "ast_alt": "mildly elevated (2-3x ULN, disproportionately lower than bilirubin)",
+    "alp": "mildly elevated",
+    "cpk": "elevated (reflecting myositis)",
+    "inr": 1.3,
+    "albumin": 3,
+    "urinalysis": "proteinuria, granular casts, few RBCs, no significant pyuria"
+  },
+  "imaging": [
+    "Ultrasound abdomen: mild hepatomegaly, normal biliary tree, no ascites, kidneys normal size with preserved corticomedullary differentiation"
+  ],
+  "microbiology": [
+    "Leptospira IgM ELISA: positive",
+    "Blood culture: no growth (routine culture)",
+    "Microscopic agglutination test (MAT) sent, pending/confirmatory",
+    "Malaria antigen/smear: negative",
+    "Dengue NS1/IgM: negative",
+    "Widal / typhoid blood culture: negative"
+  ],
+  "differentialDiagnoses": [
+    "Leptospirosis (Weil's disease)",
+    "Viral hepatitis with acute kidney injury",
+    "Malaria",
+    "Dengue with warning signs",
+    "Enteric fever with hepatic/renal involvement",
+    "Rickettsial (scrub typhus) infection",
+    "Sepsis with acute liver and kidney dysfunction"
+  ],
+  "finalDiagnosis": "Leptospirosis (Weil's disease) with jaundice and acute kidney injury",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Leptospirosis",
+    "WHO Human Leptospirosis: Guidance for Diagnosis, Surveillance and Control 2003",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012"
+  ],
+  "stewardship": "Empirical therapy for severe leptospirosis (Weil's disease): intravenous penicillin G or ceftriaxone; doxycycline is an alternative for milder disease not requiring hospitalization. Supportive care with fluid/electrolyte management and renal replacement therapy if indicated for AKI. Watch for Jarisch-Herxheimer-like reaction after first antibiotic dose.",
+  "contraindications": [
+    "Avoid nephrotoxic drugs (e.g., NSAIDs, aminoglycosides) given AKI",
+    "Adjust renally-cleared drug doses to current creatinine clearance",
+    "Doxycycline relatively avoided if significant hepatic dysfunction/pregnancy consideration"
+  ],
+  "edgeCases": [
+    "Anicteric leptospirosis (mild, self-limited) is far more common than the icteric Weil's disease variant presented here",
+    "Severe pulmonary hemorrhage syndrome (SPHS) is a distinct life-threatening leptospirosis presentation not covered in this case",
+    "MAT (microscopic agglutination test) remains the reference/confirmatory serologic test; IgM ELISA is a sensitive screening test but confirmatory testing is recommended",
+    "LEPTOSPIROSIS is present in the engine disease list as its own id, so acceptableIds correctly maps to it rather than falling back to []"
+  ],
+  "expectedMaiK": "MaiK should flag the combination of water/flood exposure, conjunctival suffusion, disproportionate jaundice with only mild transaminase elevation, myalgia with elevated CPK, and AKI as classic for icteric leptospirosis (Weil's disease), recommending empirical penicillin/ceftriaxone and MAT confirmation while excluding malaria, dengue, and enteric fever.",
+  "expectedNextQuestions": [
+    "Any hemoptysis or respiratory symptoms suggestive of pulmonary hemorrhage syndrome?",
+    "Any bleeding manifestations (epistaxis, melena) suggesting more severe disease?",
+    "Occupational or recreational water exposure details and timeline?",
+    "Urine output trend and need for renal replacement therapy?",
+    "Has MAT confirmatory serology been sent, and any convalescent sample planned?"
+  ],
+  "expectedInvestigations": [
+    "Leptospira IgM ELISA / MAT",
+    "Blood culture",
+    "Renal function panel (creatinine, urea, electrolytes)",
+    "Liver function tests including bilirubin fractions",
+    "CPK",
+    "Complete blood count with platelets",
+    "Urinalysis",
+    "Malaria smear/antigen and dengue NS1/IgM to exclude overlapping tropical fevers",
+    "Ultrasound abdomen"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "myalgiaArthralgia": true,
+    "jaundice": true,
+    "darkUrine": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "conjunctivalSuffusion": true,
+    "waterExposure": true,
+    "hepatosplenomegaly": true,
+    "thrombocytopenia": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "Leptospirosis (Weil's disease) with jaundice and acute kidney injury",
+    "acceptableIds": [
+      "LEPTOSPIROSIS"
+    ],
+    "differentialIds": [
+      "LEPTOSPIROSIS",
+      "VIRAL_HEPATITIS",
+      "MALARIA",
+      "DENGUE",
+      "ENTERIC_FEVER",
+      "RICKETTSIAL_FEVER"
+    ],
+    "investigations": [
+      "Leptospira IgM ELISA / MAT",
+      "Blood culture",
+      "Renal function panel",
+      "Liver function tests with bilirubin fractions",
+      "CPK",
+      "Platelet count",
+      "Urinalysis",
+      "Malaria smear/antigen",
+      "Dengue NS1/IgM"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Penicillin G",
+        "Ceftriaxone",
+        "Doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (LEPTOSPIROSIS)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes VIRAL_HEPATITIS and MALARIA and DENGUE",
+    "stewardship recommendation includes penicillin G or ceftriaxone as empirical severe leptospirosis therapy",
+    "engine flags waterExposure and conjunctivalSuffusion as key discriminating findings",
+    "engine does not misclassify as pure ENTERIC_FEVER or VIRAL_HEPATITIS as top-1 given water exposure + conjunctival suffusion + AKI triad"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

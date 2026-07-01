@@ -1,0 +1,123 @@
+{
+  "id": "gc_033",
+  "specialty": "Critical Care",
+  "condition": "Acute asthma",
+  "age": 24,
+  "sex": "F",
+  "presentingComplaint": "Brought in by ambulance drowsy and struggling to breathe after a rapidly worsening asthma attack over the preceding 3 hours.",
+  "history": "24-year-old woman with a long-standing history of poorly controlled asthma (two prior ICU admissions for near-fatal attacks, one requiring intubation). She has a history of brittle asthma with rapid symptom escalation and known reduced perception of dyspnea. She ran out of her inhaled corticosteroid/formoterol maintenance inhaler two weeks ago and has been using only an over-the-counter salbutamol inhaler intermittently. Over the last 24 hours she developed a viral upper respiratory illness with cough and today acutely worsened, using her entire salbutamol inhaler in under an hour without relief. Family noted she became confused and unusually quiet just before calling the ambulance. No known anaphylaxis trigger, no recent NSAID or beta-blocker use. Non-smoker.",
+  "examination": "Drowsy, rousable only to voice, unable to complete single words. Using accessory muscles of respiration with paradoxical abdominal movement and visible tracheal tug. Central cyanosis present. On auscultation the chest is strikingly quiet with markedly reduced air entry bilaterally and only faint wheeze audible at the apices — a silent chest. Pulse is thready and rapid; pulsus paradoxus could not be reliably assessed given severity. No urticaria, angioedema, or stridor. Trachea central, no evidence of pneumothorax on exam (no tracheal deviation, equal but markedly reduced breath sounds bilaterally).",
+  "vitals": {
+    "hr": 142,
+    "bp": "88/56",
+    "rr": 8,
+    "spo2": 82,
+    "temp": 36.8
+  },
+  "labs": {
+    "arterialPH": 7.18,
+    "paCO2_mmHg": 68,
+    "paO2_mmHg": 48,
+    "bicarbonate_mmolL": 19,
+    "lactate_mmolL": 4.2,
+    "potassium_mmolL": 3.1,
+    "wbc_perUL": 13200,
+    "peakFlow_percentPredicted": "unrecordable - unable to perform"
+  },
+  "imaging": [
+    "Portable chest X-ray: hyperinflated lung fields, no consolidation, no pneumothorax, no pneumomediastinum"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Near-fatal (life-threatening) acute severe asthma with silent chest and impending respiratory arrest",
+    "Anaphylaxis with bronchospasm",
+    "Tension pneumothorax",
+    "Upper airway obstruction / foreign body",
+    "Acute exacerbation of COPD (less likely given age and history)",
+    "Cardiogenic pulmonary edema"
+  ],
+  "finalDiagnosis": "Near-fatal acute asthma exacerbation with silent chest, hypercapnic respiratory failure, and impending respiratory arrest",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Asthma",
+    "GINA (Global Initiative for Asthma) 2024 — Difficult-to-treat and severe asthma / acute exacerbations",
+    "British Thoracic Society/SIGN British Guideline on the Management of Asthma 2019 (updated) — Life-threatening asthma criteria"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid sedatives/opioids — will worsen respiratory drive and precipitate arrest",
+    "Avoid beta-blockers (including ophthalmic) — risk of bronchospasm",
+    "Non-selective NSAIDs if history of aspirin-exacerbated respiratory disease",
+    "Do not delay intubation in a patient with silent chest, exhaustion, and rising CO2 awaiting further trials of nebulized therapy"
+  ],
+  "edgeCases": [
+    "Silent chest is an ominous sign reflecting near-total airflow obstruction, not clinical improvement — wheeze intensity does not correlate with severity",
+    "Normal or rising PaCO2 in an asthmatic with tachypnea signals fatigue and impending respiratory arrest, not stabilization",
+    "Bradycardia, drowsiness, or a silent chest are life-threatening features mandating immediate ICU/anesthesia involvement and consideration of intubation",
+    "Hypokalemia is common and worsened by high-dose beta-agonist and steroid therapy — monitor potassium",
+    "This exact 'near-fatal, silent chest' asthma presentation is not separately represented as a distinct diagnosable id in the engine's disease list beyond the general asthma exacerbation entity, so severity-specific nuance must be captured via findings/vitals rather than a unique id"
+  ],
+  "expectedMaiK": "Flag this as life-threatening/near-fatal asthma: silent chest + drowsiness + hypercapnia (PaCO2 68) with hypoxia despite high work of breathing indicates imminent respiratory arrest — recommend immediate senior/ICU/anesthesia involvement, continuous nebulized bronchodilators plus IV therapy, and low threshold for rapid sequence intubation rather than further trials of nebulizers alone.",
+  "expectedNextQuestions": [
+    "Is the patient exhausted or losing respiratory effort — should intubation be prepared now rather than after further nebulizer trials?",
+    "What is the trend in PaCO2 and mental status over the last 15-30 minutes?",
+    "Has IV magnesium sulfate and IV/nebulized bronchodilator plus systemic corticosteroid already been given?",
+    "Is there any evidence of pneumothorax or anaphylaxis that would change management?",
+    "Who is available at bedside for a difficult airway (senior anesthesia/ICU) given known near-fatal asthma history?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas",
+    "Chest X-ray to exclude pneumothorax/consolidation",
+    "Serum potassium and magnesium",
+    "Continuous SpO2 and cardiac monitoring",
+    "Peak expiratory flow rate once patient able (not reliable in current state)"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "wheeze": true,
+    "dyspnea": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "supplementalOxygen": true
+  },
+  "expected": {
+    "diagnosis": "Near-fatal acute asthma exacerbation with silent chest and impending respiratory arrest",
+    "acceptableIds": [
+      "asthma_exac"
+    ],
+    "differentialIds": [
+      "anaphylaxis",
+      "pneumothorax",
+      "copd_exac_ni"
+    ],
+    "investigations": [
+      "Arterial blood gas",
+      "Chest X-ray",
+      "Serum potassium/magnesium",
+      "Continuous cardiorespiratory monitoring"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 in acceptableIds (asthma_exac)",
+    "confidence >= expectedConfidence.min",
+    "differential includes anaphylaxis and pneumothorax as must-exclude mimics",
+    "output flags life-threatening/near-fatal severity given silent chest + bradypnea/normalizing RR + hypercapnia pattern + altered sensorium",
+    "output does not recommend sedation or opioids",
+    "output surfaces low threshold for intubation given exhaustion and silent chest"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

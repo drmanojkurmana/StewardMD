@@ -1,0 +1,153 @@
+{
+  "id": "gc_042",
+  "specialty": "Neurology",
+  "condition": "Tuberculous meningitis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "3 weeks of low-grade evening fever, worsening headache, and increasing confusion for 4 days",
+  "history": "A 34-year-old woman from a TB-endemic region presents with a 3-week history of low-grade, evening-predominant fever, drenching night sweats, and unintentional weight loss of approximately 4 kg. Over the past 10 days she has developed a dull, gradually worsening holocranial headache with associated photophobia and intermittent vomiting. For the last 4 days her family has noted progressive behavioral change, apathy, and difficulty recognizing family members, with one witnessed generalized tonic-clonic seizure earlier today. There is no history of head trauma. She reports no cough, but her husband was treated for pulmonary TB 8 months ago and the couple lives in the same household. No history of diabetes, HIV testing has never been done, and she is not on any immunosuppressive medication.",
+  "examination": "Drowsy but rousable, oriented to person only, GCS 12/15 (E3V3M6). Neck stiffness present with positive Kernig sign. Photophobia present. Cranial nerve exam reveals a subtle right partial ptosis with sluggishly reactive pupil suggestive of early third/sixth nerve involvement; fundoscopy shows bilateral early papilledema without frank choroidal tubercles visualized. No focal limb weakness at present but reflexes are brisk bilaterally with equivocal plantars. No skin rash, no lymphadenopathy, chest clear to auscultation, no hepatosplenomegaly.",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/68",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 38.1
+  },
+  "labs": {
+    "wbc_blood": "9,800/mm3 (mild neutrophil predominance)",
+    "hemoglobin_g_dl": 11.2,
+    "platelets_x10_3_ul": 245,
+    "sodium_mmol_l": 128,
+    "esr_mm_hr": 62,
+    "hiv_test": "pending/unknown status",
+    "csf_appearance": "clear, mildly turbid, cobweb clot on standing",
+    "csf_opening_pressure_cmH2O": 28,
+    "csf_wbc_per_mm3": 180,
+    "csf_differential": "lymphocyte-predominant (78% lymphocytes)",
+    "csf_protein_g_l": 1.8,
+    "csf_glucose_mmol_l": 1.9,
+    "serum_glucose_mmol_l": 5.6,
+    "csf_glucose_serum_ratio": 0.34,
+    "csf_adenosine_deaminase_U_L": 14,
+    "csf_afb_smear": "negative",
+    "csf_genexpert_mtb_rif": "pending"
+  },
+  "imaging": [
+    "Contrast MRI brain: basal exudates thickening the suprasellar and interpeduncular cisterns with leptomeningeal enhancement; mild communicating hydrocephalus; no discrete ring-enhancing tuberculoma seen but small punctate enhancing foci in basal ganglia region suspicious for early tuberculomas",
+    "Chest X-ray: no active parenchymal infiltrate; old fibrotic scarring at right apex, no cavitation"
+  ],
+  "microbiology": [
+    "CSF AFB smear negative (expected low sensitivity, does not exclude TBM)",
+    "CSF GeneXpert MTB/RIF sent, pending",
+    "CSF mycobacterial culture (MGIT) sent, result pending (weeks)",
+    "Blood cultures sent, no growth at 48h",
+    "HIV serology sent, pending"
+  ],
+  "differentialDiagnoses": [
+    "Tuberculous meningitis",
+    "Partially treated bacterial meningitis",
+    "Cryptococcal meningitis",
+    "Viral meningoencephalitis",
+    "Fungal (non-cryptococcal) meningitis",
+    "Neurosarcoidosis",
+    "Carcinomatous/lymphomatous meningitis"
+  ],
+  "finalDiagnosis": "Tuberculous meningitis (subacute presentation, endemic area)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Tuberculosis (Mycobacterium tuberculosis infections) and CNS infections chapters",
+    "WHO Consolidated Guidelines on Tuberculosis — Module 1: Prevention, and Guidelines for management of drug-susceptible TB 2022",
+    "IDSA/ATS/CDC/ERS Clinical Practice Guidelines: Treatment of Drug-Susceptible Tuberculosis 2016"
+  ],
+  "stewardship": "Empirical anti-tuberculous therapy should be started promptly on clinical suspicion without waiting for microbiological confirmation, given the high morbidity/mortality of delayed treatment: standard four-drug intensive phase (isoniazid, rifampicin, pyrazinamide, ethambutol) for 2 months followed by isoniazid and rifampicin continuation phase, extended to a total of 9-12 months for CNS disease per guideline recommendation; adjunctive corticosteroids (dexamethasone or prednisolone with taper) are recommended for all HIV-negative patients with TBM to reduce mortality and neurological sequelae; evaluate for hydrocephalus requiring neurosurgical CSF diversion.",
+  "contraindications": [
+    "Confirm baseline liver function before starting isoniazid/rifampicin/pyrazinamide given hepatotoxicity risk",
+    "Screen for pregnancy status and HIV status before finalizing regimen and steroid dosing decisions",
+    "Ethambutol dose adjustment and visual acuity/color vision baseline testing needed",
+    "Avoid delaying empirical anti-TB therapy pending culture confirmation, as this worsens neurological outcome"
+  ],
+  "edgeCases": [
+    "CSF AFB smear and even GeneXpert can be negative in a substantial proportion of TBM cases (paucibacillary CSF); diagnosis often remains 'probable' based on clinico-radiological-CSF criteria (e.g., Thwaites/consensus TBM diagnostic criteria/Lancet uniform case definition) pending culture",
+    "Low CSF ADA (14 U/L) does not exclude TBM as sensitivity/specificity of ADA is imperfect and cutoffs vary by lab",
+    "HIV status unknown — if HIV-positive, corticosteroid benefit and drug interactions (rifampicin with antiretrovirals) require reassessment",
+    "Hyponatremia may reflect SIADH or cerebral salt wasting, both recognized complications of TBM, and requires careful fluid/sodium management",
+    "Communicating hydrocephalus may progress and require urgent neurosurgical CSF diversion (VP shunt or external ventricular drain) independent of antimicrobial therapy"
+  ],
+  "expectedMaiK": "MaiK should flag subacute fever/headache/altered sensorium with basal meningeal enhancement, hydrocephalus, and lymphocyte-predominant CSF with low glucose/high protein as high pre-test probability for tuberculous meningitis in a TB-endemic/contact setting, recommending immediate empirical anti-TB therapy plus adjunctive corticosteroids without awaiting culture confirmation, while flagging need for HIV testing and neurosurgical review for hydrocephalus.",
+  "expectedNextQuestions": [
+    "What is the patient's HIV status?",
+    "Is there a history of TB contact or prior TB treatment (confirmed: husband treated for pulmonary TB)?",
+    "Has neurosurgery been consulted for the hydrocephalus / raised ICP?",
+    "Are baseline liver function tests, renal function, and visual acuity assessed before starting therapy?",
+    "Is there any evidence of disseminated (miliary) TB on further imaging (chest CT, abdominal ultrasound, fundoscopy for choroidal tubercles)?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture with CSF cell count, protein, glucose (paired serum glucose), AFB smear, GeneXpert MTB/RIF, mycobacterial culture (MGIT), CSF ADA",
+    "Contrast-enhanced MRI brain",
+    "HIV serology",
+    "Chest X-ray / CT chest for concurrent pulmonary TB",
+    "Baseline liver function tests, renal function, complete blood count",
+    "Fundoscopic examination for choroidal tubercles",
+    "Serum sodium and osmolality (assess for SIADH/CSW)"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "eveningFever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "subacuteOnset": true,
+    "tbContactHistory": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "seizure": true,
+    "behavioralChange": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "papilledema": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "Tuberculous meningitis (subacute presentation, endemic area)",
+    "acceptableIds": [
+      "CNS_TB"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS",
+      "BRAIN_ABSCESS"
+    ],
+    "investigations": [
+      "CSF analysis (cell count, protein, glucose, AFB smear, GeneXpert MTB/RIF, mycobacterial culture, ADA)",
+      "Contrast MRI brain",
+      "HIV serology",
+      "Chest imaging for pulmonary TB",
+      "Baseline liver and renal function tests"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "isoniazid",
+        "rifampicin",
+        "pyrazinamide",
+        "ethambutol"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (CNS_TB)",
+    "confidence >= expectedConfidence.min",
+    "differential includes MENINGITIS and/or ENCEPHALITIS",
+    "stewardship recommendation includes empirical four-drug anti-tuberculous therapy plus adjunctive corticosteroids",
+    "expectedNextQuestions surfaces HIV status and neurosurgical evaluation for hydrocephalus"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "id": "gc_044",
+  "specialty": "Cardiology",
+  "condition": "Infective endocarditis",
+  "age": 32,
+  "sex": "M",
+  "presentingComplaint": "Fever, chills, and malaise for 10 days in a person who injects drugs, with new pleuritic chest pain and cough.",
+  "history": "32-year-old man with a history of active injection drug use (heroin, most recent injection into the right antecubital vein 5 days ago, shared needles) presents with 10 days of intermittent high-grade fever, rigors, drenching night sweats, malaise, and myalgias. Over the last 2 days he has developed pleuritic right-sided chest pain, a worsening productive cough, and mild dyspnea. No prior known heart disease or prosthetic valve. No recent dental work. He has a track-mark abscess scar on the right forearm that he reports was 'infected' two weeks ago but was not treated. No history of rheumatic fever. No known HIV status; declines testing in the past. No recent hospitalization.",
+  "examination": "Toxic-appearing, diaphoretic young man. Multiple healed and fresh needle-track marks over both antecubital fossae with a small area of erythema over the right forearm injection site. Cardiovascular exam reveals a new soft systolic murmur best heard at the left lower sternal border that increases with inspiration (suggestive of tricuspid regurgitation). No Osler nodes or Janeway lesions noted on this exam. Scattered petechiae on the conjunctivae. Lungs: focal crackles and dullness at the right lower zone with pleuritic tenderness. Abdomen: mild splenomegaly, non-tender. No focal neurological deficits.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/62",
+    "rr": 24,
+    "spo2": 93,
+    "temp": 39.4
+  },
+  "labs": {
+    "wbc": "17.8 x10^9/L (neutrophil predominant)",
+    "hemoglobin": "10.8 g/dL",
+    "platelets": "142 x10^3/uL",
+    "esr": "72 mm/hr",
+    "crp": "168 mg/L",
+    "creatinine": "1.3 mg/dL",
+    "urea": "9.5 mmol/L",
+    "bilirubin": "1.1 mg/dL",
+    "albumin": "3.2 g/dL",
+    "lactate": "1.9 mmol/L",
+    "hivTest": "pending/declined historically",
+    "urinalysis": "microscopic hematuria, no casts"
+  },
+  "imaging": [
+    "CXR: multiple bilateral peripheral nodular/wedge-shaped opacities, right greater than left, some with early cavitation — consistent with septic pulmonary emboli",
+    "Transthoracic echocardiogram (TTE): 1.1 cm mobile vegetation on the tricuspid valve with moderate tricuspid regurgitation; no prosthetic material; normal LV/RV function",
+    "Transesophageal echocardiogram (TEE) performed given high clinical suspicion despite positive TTE, to exclude perivalvular extension: confirms tricuspid vegetation, no abscess or perivalvular leak"
+  ],
+  "microbiology": [
+    "Three sets of blood cultures drawn from separate venipuncture sites over several hours prior to antibiotics",
+    "Two of three blood culture sets growing methicillin-resistant Staphylococcus aureus (MRSA) at >12 hours, confirming persistent bacteremia",
+    "Sputum culture: no significant growth (septic emboli, not primary pneumonia)"
+  ],
+  "differentialDiagnoses": [
+    "Right-sided infective endocarditis (tricuspid valve) with septic pulmonary emboli",
+    "Community-acquired pneumonia",
+    "Septic thrombophlebitis of injection site",
+    "Staphylococcal bacteremia with skin/soft-tissue source without endocarditis",
+    "Pulmonary embolism (bland)",
+    "Necrotizing skin/soft tissue infection at injection site with secondary bacteremia"
+  ],
+  "finalDiagnosis": "Right-sided (tricuspid valve) infective endocarditis due to MRSA in a person who injects drugs, complicated by septic pulmonary emboli",
+  "citations": [
+    "Harrison 22e — Infective Endocarditis",
+    "AHA Infective Endocarditis Diagnosis and Management Scientific Statement 2015",
+    "ESC Guidelines for the Management of Infective Endocarditis 2023"
+  ],
+  "stewardship": "Empirical therapy pending cultures should cover MRSA and gram-negatives given IVDU risk (e.g., vancomycin ± an agent with gram-negative/streptococcal coverage); once MRSA confirmed on blood cultures, narrow to a definitive anti-MRSA regimen per susceptibility (vancomycin or daptomycin, dosed for endocarditis) for a prolonged course (typically 4-6 weeks depending on valve involved and complications), with source control (address the injection site) and addiction medicine/harm-reduction involvement; right-sided native valve IE due to MRSA in select uncomplicated cases may qualify for a shorter 2-week course per specific criteria, but this patient has septic pulmonary emboli and should be treated as complicated.",
+  "contraindications": [
+    "Avoid empirical narrow-spectrum beta-lactams alone until MRSA is excluded in a high-risk IVDU host",
+    "Avoid short-course (2-week) therapy given septic pulmonary emboli/complicated presentation",
+    "Use caution with nephrotoxic combinations (e.g., vancomycin plus other nephrotoxins) given borderline renal function"
+  ],
+  "edgeCases": [
+    "TTE may be falsely negative or indeterminate in up to 20-30% of IE cases, especially with tricuspid vegetations in adults with poor acoustic windows; TEE (or repeat TTE if TEE unavailable) should be pursued if clinical suspicion remains high, as in this vignette",
+    "Right-sided IE can present primarily with pulmonary symptoms (septic emboli mimicking pneumonia) rather than classic peripheral stigmata, which are less common than in left-sided IE",
+    "This case models the IVDU/right-sided phenotype specifically; a prosthetic-valve variant would instead usually present with left-sided (aortic/mitral) involvement, higher risk of perivalvular abscess/dehiscence, and different empirical microbiology (coagulase-negative staphylococci early post-op vs staphylococcal/streptococcal/enterococcal later) — engine findings below are tuned to the IVDU/right-sided variant as specified",
+    "HIV status is unknown/undocumented; untreated HIV can alter immune status and organism risk but is not required for the diagnosis of IE"
+  ],
+  "expectedMaiK": "MaiK should flag this as a Duke-criteria-positive presentation of infective endocarditis (new regurgitant murmur + persistent MRSA bacteremia + echocardiographic vegetation) in a high-risk IVDU host presenting atypically with septic pulmonary emboli, and prompt for empirical MRSA-active coverage with source control and infectious disease/cardiology input rather than treating as isolated pneumonia.",
+  "expectedNextQuestions": [
+    "Is there a history of injection drug use or a prosthetic/structural valve, and when was the last injection?",
+    "Have three sets of blood cultures been drawn from separate sites before starting antibiotics?",
+    "Has an echocardiogram (TTE, and TEE if TTE is negative/indeterminate) been obtained to look for vegetations?",
+    "Are there embolic phenomena (pulmonary, cerebral, splenic, renal) or immunologic stigmata (Osler nodes, Roth spots, glomerulonephritis)?",
+    "What is the HIV status of the patient given IVDU risk?",
+    "Is there evidence of persistent bacteremia on repeat cultures after starting therapy?"
+  ],
+  "expectedInvestigations": [
+    "Three sets of blood cultures from separate sites prior to antibiotics",
+    "Transthoracic echocardiogram; transesophageal echocardiogram if TTE negative/indeterminate or high suspicion",
+    "Chest imaging (CXR/CT) to assess for septic pulmonary emboli",
+    "Complete blood count, renal function, inflammatory markers (ESR/CRP)",
+    "HIV testing",
+    "Urinalysis for hematuria (immune-complex glomerulonephritis)",
+    "ECG to assess for new conduction abnormalities (suggesting perivalvular extension)"
+  ],
+  "expectedConfidence": {
+    "min": 75
+  },
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "toxicAppearing": true,
+    "prolongedFever": true,
+    "newMurmur": true,
+    "embolicPhenomena": true,
+    "ivDrugUse": true,
+    "persistentBacteremia": true,
+    "pleuriticChestPain": true,
+    "hemoptysis": true,
+    "splenomegaly": true,
+    "petechialRash": true,
+    "myalgiaArthralgia": true,
+    "nightSweats": true
+  },
+  "expected": {
+    "diagnosis": "Right-sided (tricuspid valve) infective endocarditis due to MRSA in a person who injects drugs, complicated by septic pulmonary emboli",
+    "acceptableIds": [
+      "IE"
+    ],
+    "differentialIds": [
+      "CAP",
+      "SEPSIS",
+      "PUO"
+    ],
+    "investigations": [
+      "Three sets of blood cultures from separate sites prior to antibiotics",
+      "Transthoracic echocardiogram (TTE)",
+      "Transesophageal echocardiogram (TEE) if TTE negative/indeterminate",
+      "Chest CT/CXR for septic pulmonary emboli",
+      "HIV testing"
+    ],
+    "stewardship": {
+      "tier": "guideline",
+      "antibiotics": [
+        "Vancomycin",
+        "Daptomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis is in acceptableIds (IE)",
+    "confidence >= expectedConfidence.min",
+    "differential includes CAP and SEPSIS within top-3",
+    "stewardship recommendation includes an anti-MRSA agent (vancomycin or daptomycin)",
+    "expectedNextQuestions surface echocardiography and blood culture timing",
+    "engine does not anchor solely on CAP despite pulmonary findings, given ivDrugUse + newMurmur + persistentBacteremia + embolicPhenomena findings"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

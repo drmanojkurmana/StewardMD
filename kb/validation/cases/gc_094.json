@@ -1,0 +1,121 @@
+{
+  "id": "gc_094",
+  "specialty": "Cardiology",
+  "condition": "Atrial fibrillation with RVR",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Sudden onset palpitations and breathlessness for 6 hours, associated with lightheadedness.",
+  "history": "A 68-year-old woman with known hypertension and type 2 diabetes presents with abrupt onset of rapid, irregular palpitations that began 6 hours ago while she was resting. She describes associated mild breathlessness on exertion and one episode of near-syncope while standing up, but no true loss of consciousness. No chest pain. She denies fever, cough, or recent illness. She reports two similar but self-terminating episodes of palpitations over the past 3 months, each lasting under an hour, which she did not seek care for. She has never been diagnosed with atrial fibrillation before. No history of thyroid disease, alcohol excess, or recent stimulant/caffeine binge. She takes amlodipine and metformin; no anticoagulants. No history of stroke or bleeding.",
+  "examination": "Alert and mildly anxious, in no acute distress. Pulse irregularly irregular at 138/min, weaker in volume with beat-to-beat variation; pulse deficit noted on apical-radial comparison. Blood pressure 108/68 mmHg. JVP not elevated. Precordial exam: irregular rhythm, no murmurs, normal S1/S2 intensity variation consistent with AF. Chest clear to auscultation, no crackles. No peripheral edema. No focal neurological deficit. No goiter or thyroid enlargement.",
+  "vitals": {
+    "hr": 138,
+    "bp": "108/68",
+    "rr": 20,
+    "spo2": 97,
+    "temp": 36.8
+  },
+  "labs": {
+    "tsh": "0.9 mIU/L (normal)",
+    "potassium": "4.2 mmol/L",
+    "magnesium": "1.9 mg/dL",
+    "hemoglobin": "12.8 g/dL",
+    "troponin": "Negative x1",
+    "creatinine": "0.9 mg/dL",
+    "inr": "1.0 (not on anticoagulation)"
+  },
+  "imaging": [
+    "12-lead ECG: absence of P waves, irregularly irregular narrow QRS rhythm at ~140/min consistent with atrial fibrillation with rapid ventricular response, no acute ST-T ischemic changes",
+    "Chest X-ray: normal cardiac silhouette, no pulmonary edema",
+    "Transthoracic echocardiogram (pending): to assess left atrial size, LV function, and valvular disease"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Atrial fibrillation with rapid ventricular response",
+    "Atrial flutter with variable block",
+    "Multifocal atrial tachycardia",
+    "Sinus tachycardia secondary to underlying stressor",
+    "Supraventricular tachycardia (AVNRT/AVRT)",
+    "Thyrotoxicosis-induced arrhythmia",
+    "Acute coronary syndrome with arrhythmic presentation"
+  ],
+  "finalDiagnosis": "Atrial fibrillation with rapid ventricular response (new-onset, hemodynamically stable)",
+  "citations": [
+    "Harrison 22e — Chapter on Atrial Fibrillation and Other Supraventricular Arrhythmias",
+    "AHA/ACC/HRS Atrial Fibrillation Guideline 2023",
+    "ESC Guidelines for the diagnosis and management of atrial fibrillation 2024"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid AV nodal blocking agents (beta-blockers, non-dihydropyridine calcium channel blockers) if pre-excitation (WPW) is suspected — assess ECG for delta waves first",
+    "Anticoagulation decisions must weigh bleeding risk (e.g., use HAS-BLED) against stroke risk (CHA2DS2-VASc), especially before cardioversion strategies",
+    "Rhythm control with cardioversion contraindicated without adequate anticoagulation or TEE exclusion of atrial thrombus if AF duration >48h or unknown"
+  ],
+  "edgeCases": [
+    "If patient becomes hemodynamically unstable (hypotension, altered sensorium, ischemic chest pain, or acute heart failure), urgent synchronized DC cardioversion is indicated regardless of anticoagulation status",
+    "Unknown duration of AF (given prior undiagnosed self-terminating episodes) mandates a rate-control-first strategy with anticoagulation rather than immediate rhythm control, per AHA/ACC/HRS and ESC guidance",
+    "CHA2DS2-VASc score in this patient (age ≥65, hypertension, diabetes, female sex) is ≥3, indicating a clear indication for long-term oral anticoagulation regardless of rhythm control strategy"
+  ],
+  "expectedMaiK": "New-onset AF with RVR in a hemodynamically stable patient — prioritize rate control, calculate CHA2DS2-VASc for anticoagulation decision, and evaluate for reversible precipitants (thyroid, electrolytes, ischemia) before considering rhythm control given uncertain AF duration.",
+  "expectedNextQuestions": [
+    "What is the exact duration/onset time of this current episode versus prior self-terminating episodes?",
+    "Is there a history of thyroid disease, alcohol use, or sleep apnea?",
+    "Are there any bleeding risk factors or contraindications to anticoagulation?",
+    "Has the patient had a transthoracic echocardiogram to evaluate left atrial size, LV function, and valve disease?",
+    "What is the CHA2DS2-VASc and HAS-BLED score?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Thyroid function tests (TSH, free T4)",
+    "Electrolytes (potassium, magnesium)",
+    "Troponin",
+    "Transthoracic echocardiogram",
+    "CHA2DS2-VASc and HAS-BLED scoring"
+  ],
+  "expectedConfidence": {
+    "min": 70
+  },
+  "findings": {
+    "palpitations": true,
+    "dyspnea": true,
+    "syncope": true,
+    "tachycardia": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "atrialFibHx": true
+  },
+  "expected": {
+    "diagnosis": "Atrial fibrillation with rapid ventricular response (new-onset, hemodynamically stable)",
+    "acceptableIds": [
+      "atrial_fib"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "vasovagal_syncope",
+      "hyperthyroidism"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Thyroid function tests",
+      "Electrolytes (potassium, magnesium)",
+      "Troponin",
+      "Transthoracic echocardiogram"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (atrial_fib)",
+    "confidence >= expectedConfidence.min (70)",
+    "differential includes acute coronary syndrome (acs) as a reasonable mimic",
+    "expectedInvestigations includes ECG and thyroid function tests",
+    "stewardship.tier is null (non-infective cardiology case)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

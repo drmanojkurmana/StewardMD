@@ -1,0 +1,122 @@
+{
+  "id": "gc_045",
+  "specialty": "Nephrology",
+  "condition": "Hyperkalaemia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Generalised weakness, palpitations, and reduced urine output for 2 days.",
+  "history": "68-year-old man with known CKD stage 4 (baseline creatinine ~2.8 mg/dL, not yet on dialysis) and type 2 diabetes presents with a 2-day history of progressive generalised weakness, mild breathlessness, and palpitations. He reports his urine output has fallen sharply over the last 48 hours and he has had no bowel motions for 3 days. He was started on an ACE inhibitor and a potassium-sparing diuretic combination two weeks ago for poorly controlled hypertension, and has also been taking over-the-counter NSAIDs for knee pain over the past week. No chest pain, no fevers, no diarrhoea or vomiting. No history of missed dialysis (not yet on dialysis). No recent trauma or muscle injury.",
+  "examination": "Alert but appears fatigued and mildly drowsy. No focal neurological deficit. Reduced muscle power globally (4/5) with diminished deep tendon reflexes. Irregular pulse noted on palpation. Mild bibasal crepitations. No peripheral oedema. Abdomen soft, non-tender. No signs of volume overload beyond mild bibasal crackles; mucous membranes dry suggesting reduced intake.",
+  "vitals": {
+    "hr": 38,
+    "bp": "96/58",
+    "rr": 22,
+    "spo2": 95,
+    "temp": 36.7
+  },
+  "labs": {
+    "potassium": 7.6,
+    "sodium": 133,
+    "creatinine": 5.4,
+    "urea": 38.2,
+    "bicarbonate": 14,
+    "calcium_ionized": 1.05,
+    "glucose": 142,
+    "venous_pH": 7.28,
+    "hemoglobin": 10.8,
+    "ecg": "Peaked T waves, widened QRS, loss of P waves, sine-wave pattern"
+  },
+  "imaging": [
+    "Renal ultrasound: bilateral small echogenic kidneys consistent with chronic kidney disease, no hydronephrosis"
+  ],
+  "microbiology": [],
+  "differentialDiagnoses": [
+    "Acute-on-chronic kidney injury with hyperkalaemia",
+    "Medication-induced hyperkalaemia (ACE inhibitor + potassium-sparing diuretic + NSAID)",
+    "Type 4 renal tubular acidosis",
+    "Adrenal insufficiency",
+    "Rhabdomyolysis-induced hyperkalaemia",
+    "Bradyarrhythmia from primary cardiac conduction disease"
+  ],
+  "finalDiagnosis": "Severe hyperkalaemia with ECG changes secondary to acute-on-chronic kidney injury (drug-induced: ACE inhibitor, potassium-sparing diuretic, NSAID)",
+  "citations": [
+    "Harrison 22e — Hypokalemia and Hyperkalemia",
+    "Harrison 22e — Acute Kidney Injury",
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012",
+    "AHA/ACC 2023 — Management of Hyperkalemia consensus recommendations"
+  ],
+  "stewardship": null,
+  "contraindications": [
+    "Avoid further ACE inhibitor, ARB, potassium-sparing diuretic, or NSAID administration until potassium normalises and renal function stabilises",
+    "Avoid succinylcholine if intubation required (risk of exacerbating hyperkalaemia)",
+    "Use calcium gluconate cautiously in patients on digoxin (risk of digoxin toxicity precipitating arrhythmia)"
+  ],
+  "edgeCases": [
+    "Sine-wave ECG pattern and bradycardia represent a peri-arrest emergency requiring immediate IV calcium gluconate before other measures",
+    "Concurrent metabolic acidosis (bicarbonate 14) both contributes to and is worsened by hyperkalaemia; correction of acidosis is adjunctive, not primary therapy",
+    "Diabetic patients may have coexisting hyporeninaemic hypoaldosteronism (type 4 RTA) amplifying drug-induced hyperkalaemia",
+    "Distinguish from pseudohyperkalaemia due to haemolysed sample — repeat sample on a non-haemolysed draw only if clinically stable, not if ECG changes present",
+    "If refractory to medical therapy or with oliguric AKI, emergent dialysis is indicated"
+  ],
+  "expectedMaiK": "Flag this as a hyperkalaemic emergency: peaked T waves progressing to sine-wave pattern with bradycardia mandate immediate IV calcium gluconate for cardiac membrane stabilisation, followed by insulin-dextrose and potassium-removal measures (potassium binders/dialysis); stop all potassium-raising drugs (ACEi, potassium-sparing diuretic, NSAID) and evaluate for urgent dialysis given oliguric AKI on CKD.",
+  "expectedNextQuestions": [
+    "Is the patient anuric/oliguric and how long has this progressed?",
+    "What is the exact timeline of NSAID and ACE inhibitor/potassium-sparing diuretic initiation relative to symptom onset?",
+    "Any history of missed dialysis sessions or known dialysis dependence?",
+    "Is there evidence of rhabdomyolysis (CK level) or adrenal insufficiency (cortisol)?",
+    "Is the patient on digoxin (affects calcium gluconate administration)?"
+  ],
+  "expectedInvestigations": [
+    "Stat 12-lead ECG",
+    "Repeat serum potassium (non-haemolysed sample) with basic metabolic panel",
+    "Venous/arterial blood gas",
+    "Renal function tests and urinalysis",
+    "CK (creatine kinase) to exclude rhabdomyolysis",
+    "Renal ultrasound",
+    "Cortisol/ACTH if adrenal insufficiency suspected"
+  ],
+  "expectedConfidence": {
+    "min": 80
+  },
+  "findings": {
+    "renalImpairment": true,
+    "oliguria": true,
+    "bradycardia": true,
+    "hypotension": true,
+    "ecgIschemia": true,
+    "alteredSensorium": true,
+    "creatinine": true
+  },
+  "expected": {
+    "diagnosis": "Severe hyperkalaemia with ECG changes secondary to acute-on-chronic kidney injury (drug-induced: ACE inhibitor, potassium-sparing diuretic, NSAID)",
+    "acceptableIds": [
+      "hyperkalemia"
+    ],
+    "differentialIds": [
+      "aki",
+      "ckd"
+    ],
+    "investigations": [
+      "Stat 12-lead ECG",
+      "Repeat serum potassium (non-haemolysed sample)",
+      "Renal function tests and urinalysis",
+      "Venous/arterial blood gas",
+      "CK to exclude rhabdomyolysis"
+    ],
+    "stewardship": {
+      "tier": "null",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "top-1 diagnosis in acceptableIds (hyperkalemia)",
+    "confidence >= 80",
+    "differential includes aki and/or ckd",
+    "case does not trigger any antimicrobial/stewardship recommendation",
+    "system flags ECG changes (peaked T/sine wave) as an emergency requiring urgent calcium gluconate"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
