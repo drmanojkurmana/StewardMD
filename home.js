@@ -17,26 +17,120 @@
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
-  // sidebar settings — in BOTH modes — so users can switch either way from Settings.
+  // ── Sidebar navigation cleanup (gold121) ─────────────────────────────────
+  // Clinician-first mobile sidebar. Consolidates every previously-appended block
+  // (Interface, Credits, Experimental toggles, MaiK provider card, standalone Ward
+  // Sync) into: primary clinical actions at the top + advanced controls tucked into
+  // the existing Settings section as collapsible subgroups + credits inside About.
+  // Functionality/flags unchanged — this only reorganises navigation. Runs on each
+  // SB.open (the menu is rebuilt) and is idempotent.
   function setupSidebarToggle(isV2) {
-    function inject() {
-      var menu = document.getElementById("sbMenu");
-      if (!menu || menu.querySelector("[data-smd-ui]")) return;
-      var bs = "display:block;width:100%;text-align:left;margin:6px 0 0;padding:11px 12px;border:1px solid var(--line,#d7dee3);border-radius:10px;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui);cursor:pointer";
-      var w = document.createElement("div"); w.setAttribute("data-smd-ui", "1");
-      w.style.cssText = "padding:12px 14px;border-top:1px solid var(--line,#d7dee3);margin-top:8px";
-      w.innerHTML = '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin-bottom:6px">Interface</div>' +
-        '<button id="smdUiV2" style="' + bs + (isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Advanced UI — by MaiK' + (isV2 ? '  &#10003;' : '') + '</button>' +
-        '<button id="smdUiCl" style="' + bs + (!isV2 ? ';border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)' : '') + '">Classic UI — previous' + (!isV2 ? '  &#10003;' : '') + '</button>' +
-        '<div style="font:700 11px/1.4 var(--sans,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--slate-soft,#5a7184);margin:14px 0 6px">Credits</div>' +
-        '<button id="smdAck" style="' + bs + '">★ Acknowledgements &amp; Contributors</button>';
-      menu.appendChild(w);
-      w.querySelector("#smdUiV2").onclick = function () { if (window.SMD_setUI) SMD_setUI(true); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
-      w.querySelector("#smdUiCl").onclick = function () { if (window.SMD_setUI) SMD_setUI(false); try { if (window.SB && SB.close) SB.close(); } catch (e) {} };
-      w.querySelector("#smdAck").onclick = function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { openAck(); } catch (e) {} }, 60); };
+    function flag(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
+    function injectCSS() {
+      if (document.getElementById("smd-nav-css")) return;
+      var st = document.createElement("style"); st.id = "smd-nav-css";
+      st.textContent = [
+        "#sbMenu [data-smd-top]{margin:0}",
+        ".smd-nav-grp{border-top:1px solid var(--line,#d7dee3);margin-top:6px;padding-top:6px}",
+        ".smd-nav-gh{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:8px 2px;font:700 12px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);text-transform:uppercase;letter-spacing:.04em}",
+        ".smd-nav-chev{color:var(--slate-soft,#5a7184);font-size:11px}",
+        ".smd-nav-gb{padding:2px 0 6px}",
+        ".smd-nav-row{display:flex;align-items:center;gap:10px;padding:7px 2px}",
+        ".smd-nav-rl{flex:1;min-width:0}.smd-nav-lbl{font:600 13.5px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)}.smd-nav-sub{font:500 11px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px}",
+        ".smd-nav-sw{flex:0 0 auto;position:relative;width:40px;height:23px;border:none;border-radius:999px;cursor:pointer;background:var(--line,#d7dee3);transition:background .15s}.smd-nav-sw.on{background:var(--teal,#0e6e63)}.smd-nav-sw>span{position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:#fff;transition:left .15s}.smd-nav-sw.on>span{left:20px}",
+        ".smd-nav-btn{display:block;width:100%;text-align:left;margin:5px 0 0;padding:9px 11px;border:1px solid var(--line,#d7dee3);border-radius:9px;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui);cursor:pointer}.smd-nav-btn.on{border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)}",
+        ".smd-nav-note{font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:2px 2px 4px}"
+      ].join("");
+      (document.head || document.documentElement).appendChild(st);
     }
-    try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(inject, 40); return r; }; } } catch (e) {}
-    setTimeout(inject, 1500);
+    function swRow(id, label, sub, on) {
+      return '<div class="smd-nav-row"><div class="smd-nav-rl"><div class="smd-nav-lbl">' + label + '</div>' + (sub ? '<div class="smd-nav-sub">' + sub + '</div>' : '') + '</div>' +
+        '<button class="smd-nav-sw' + (on ? ' on' : '') + '" data-tgl="' + id + '" role="switch" aria-checked="' + on + '" aria-label="' + label + '"><span></span></button></div>';
+    }
+    function group(key, title, body, openDefault) {
+      return '<div class="smd-nav-grp" data-smd-adv="1"><button class="smd-nav-gh" data-grp="' + key + '">' + title + '<span class="smd-nav-chev">' + (openDefault ? '▾' : '▸') + '</span></button>' +
+        '<div class="smd-nav-gb" data-grpbody="' + key + '"' + (openDefault ? '' : ' style="display:none"') + '>' + body + '</div></div>';
+    }
+    function topBtn(icon, label, beta, onclick) {
+      var b = document.createElement("button"); b.className = "sb-main sb-main-link"; b.setAttribute("data-smd-top", "1");
+      b.innerHTML = '<span class="ic">' + icon + '</span><span>' + label + (beta ? ' <span class="sb-beta" style="font:700 9px/1 var(--sans,system-ui);background:var(--teal,#0e6e63);color:#fff;border-radius:5px;padding:2px 5px;vertical-align:middle;margin-left:5px">beta</span>' : '') + '</span>';
+      b.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(onclick, 60); });
+      return b;
+    }
+    function reorganize() {
+      var menu = document.getElementById("sbMenu"); if (!menu) return;
+      injectCSS();
+      // 0) strip any legacy appended blocks (older builds / re-open)
+      ["[data-smd-ui]", "[data-smd-labs]", "[data-ghis-menu]", "[data-smd-nav]", "[data-smd-top]"].forEach(function (sel) { menu.querySelectorAll(sel).forEach(function (e) { e.remove(); }); });
+
+      // 1) TOP primary actions — add "Dx My Patient" + "Ward Sync" beside the existing
+      //    Clinical Reasoning / Drugs Database links.
+      var links = Array.prototype.slice.call(menu.querySelectorAll(".sb-main-link"));
+      var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
+      if (cr && cr.parentNode) {
+        var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
+        var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
+        cr.parentNode.insertBefore(dx, cr);            // Dx My Patient first
+        cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
+      }
+
+      // 2) Advanced controls INTO Settings (#sbsub_set) as collapsible subgroups
+      var setBody = document.getElementById("sbsub_set");
+      if (setBody && !setBody.querySelector("[data-smd-adv]")) {
+        var interfaceBody = '<button class="smd-nav-btn' + (isV2 ? ' on' : '') + '" data-ui="v2">Advanced UI' + (isV2 ? ' ✓' : '') + '</button>' +
+          '<button class="smd-nav-btn' + (!isV2 ? ' on' : '') + '" data-ui="classic">Classic UI' + (!isV2 ? ' ✓' : '') + '</button>';
+        var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
+          swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
+          '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
+        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", null, flag("smd_ai", false)) +
+          '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
+        var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
+          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
+        setBody.insertAdjacentHTML("beforeend",
+          group("interface", "Interface", interfaceBody, false) +
+          group("engine", "Clinical Engine (Advanced)", engineBody, false) +
+          group("ai", "AI Assistant", aiBody, false) +
+          group("ward", "Ward Integration", wardBody, false));
+        // wire subgroup collapse
+        setBody.querySelectorAll("[data-grp]").forEach(function (h) {
+          h.addEventListener("click", function () {
+            var b = setBody.querySelector('[data-grpbody="' + h.getAttribute("data-grp") + '"]'); if (!b) return;
+            var open = b.style.display !== "none"; b.style.display = open ? "none" : "";
+            var ch = h.querySelector(".smd-nav-chev"); if (ch) ch.textContent = open ? "▸" : "▾";
+          });
+        });
+        // wire toggles
+        setBody.querySelectorAll("[data-tgl]").forEach(function (sw) {
+          sw.addEventListener("click", function () {
+            var k = sw.getAttribute("data-tgl"), on = sw.classList.contains("on"), nv = !on;
+            try {
+              if (k === "reason" && window.SMD_REASON) SMD_REASON.setFlag(nv);
+              else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
+              else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
+              else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);
+            } catch (e) {}
+            sw.classList.toggle("on", nv); sw.setAttribute("aria-checked", nv);
+          });
+        });
+        // wire interface + open-ward
+        setBody.querySelectorAll("[data-ui]").forEach(function (b) {
+          b.addEventListener("click", function () { try { if (window.SMD_setUI) SMD_setUI(b.getAttribute("data-ui") === "v2"); } catch (e) {} try { if (window.SB && SB.close) SB.close(); } catch (e) {} });
+        });
+        var og = setBody.querySelector("[data-open-ghis]");
+        if (og) og.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { if (window.openGHIS) openGHIS(); } catch (e) {} }, 60); });
+      }
+
+      // 3) Credits INTO About & Help (#sbsub_about)
+      var aboutBody = document.getElementById("sbsub_about");
+      if (aboutBody && !aboutBody.querySelector("[data-smd-cred]")) {
+        var ack = document.createElement("button"); ack.className = "sb-subitem"; ack.setAttribute("data-smd-cred", "1");
+        ack.innerHTML = '<span class="ic">★</span><span>Acknowledgements &amp; Contributors</span>';
+        ack.addEventListener("click", function () { try { if (window.SB && SB.close) SB.close(); } catch (e) {} setTimeout(function () { try { openAck(); } catch (e) {} }, 60); });
+        aboutBody.appendChild(ack);
+      }
+    }
+    try { if (window.SB && typeof SB.open === "function") { var orig = SB.open; SB.open = function () { var r = orig.apply(this, arguments); setTimeout(reorganize, 40); return r; }; } } catch (e) {}
+    setTimeout(reorganize, 1500);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
 

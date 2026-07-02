@@ -3583,6 +3583,7 @@
       '</div></div>';
   }
   function smdSettingsInject() {
+    return;   // DISABLED gold121 — sidebar settings consolidated into home.js reorganizer
     var menu = document.getElementById("sbMenu"); if (!menu) return;
     if (menu.querySelector("[data-smd-labs]")) return;
     var st = smdLabsState();
