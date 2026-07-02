@@ -1,0 +1,136 @@
+{
+  "id": "gc_393",
+  "specialty": "Central Nervous System / Tuberculosis",
+  "condition": "CNS Tuberculosis (TB Meningitis)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of worsening headache, low-grade fever and progressive drowsiness with double vision for 4 days.",
+  "history": "A 34-year-old man from a peri-urban area of Maharashtra presents with a 3-week history of insidious, unremitting frontal headache, evening-predominant fever and drenching night sweats, with roughly 6 kg of unintentional weight loss over 2 months. Over the past 4-5 days his family have noticed increasing lethargy, slowed responses and intermittent confusion, and for the last 4 days he has complained of horizontal diplopia on lateral gaze. He was diagnosed HIV-positive 5 weeks ago and started tenofovir/lamivudine/dolutegravir; his baseline CD4 was 74 cells/µL. There is a household contact (uncle) treated for pulmonary TB last year. No prior neurosurgery, no head injury. He is not on steroids. On direct questioning there is mild photophobia and neck discomfort but no rash, no ear discharge and no seizures. The subacute, indolent evolution over weeks rather than hours, in a profoundly immunocompromised host with a TB contact, points strongly to tuberculous meningitis; empiric broad meningo-encephalitic cover was started at the door and is narrowed once CSF confirms TB.",
+  "examination": "Ill, wasted young man, GCS 13 (E3 V4 M6), mildly disoriented to time. Temperature 38.4°C. Neck stiffness present with a positive Kernig sign. Left lateral rectus palsy (VI nerve) producing diplopia; fundi show early disc blurring but no gross papilloedema. No focal limb deficit, plantars flexor. Oral candidiasis and generalised small-volume lymphadenopathy noted. Chest clear, no hepatosplenomegaly, no skin rash. No meningococcal-type purpura.",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/70",
+    "rr": 20,
+    "temp": 38.4,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin_g_dl": 10.4,
+    "wbc_10e3_uL": 6.2,
+    "platelets_10e3_uL": 228,
+    "sodium_mmol_L": 124,
+    "creatinine_mg_dl": 0.9,
+    "cd4_cells_uL": 74,
+    "hiv": "Positive (confirmed)",
+    "csf_appearance": "Clear, colourless, forms fibrin web on standing",
+    "csf_opening_pressure_cm": 28,
+    "csf_wbc_cells_uL": 240,
+    "csf_lymphocyte_pct": 88,
+    "csf_protein_mg_dl": 185,
+    "csf_glucose_mg_dl": 28,
+    "paired_serum_glucose_mg_dl": 96,
+    "csf_adenosine_deaminase_U_L": 14,
+    "csf_lactate_mmol_L": 5.8
+  },
+  "imaging": "MRI brain with contrast: thick basal (suprasellar and interpeduncular) leptomeningeal enhancement, mild communicating hydrocephalus and a small ring-enhancing left thalamic tuberculoma; no midline shift. CT head prior to LP excluded a mass effect that would contraindicate the tap. CXR shows subtle upper-zone reticulonodular shadowing consistent with old/active TB.",
+  "microbiology": "CSF CBNAAT (Xpert MTB/RIF Ultra): Mycobacterium tuberculosis DETECTED, rifampicin resistance NOT detected. CSF AFB smear negative; mycobacterial culture pending. Bacterial Gram stain and culture negative; CSF meningococcal/pneumococcal antigen negative; HSV PCR negative; CSF cryptococcal antigen negative; blood cultures sterile.",
+  "differentialDiagnoses": [
+    "Tuberculous meningitis (CNS TB)",
+    "Partially-treated / bacterial meningitis",
+    "Cryptococcal meningitis (given HIV/CD4 74)",
+    "Viral (aseptic) meningoencephalitis",
+    "Cerebral toxoplasmosis / focal mass lesion"
+  ],
+  "finalDiagnosis": "CNS tuberculosis — tuberculous meningitis with basal exudates, communicating hydrocephalus and thalamic tuberculoma, in a treatment-naive AIDS patient (CD4 74).",
+  "citations": [
+    "WHO Consolidated Guidelines on Tuberculosis — Drug-Susceptible TB Treatment 2022",
+    "WHO Guidelines Managing TB in People Living with HIV 2024",
+    "Harrison's Principles of Internal Medicine 22e — Tuberculosis (CNS/Meningeal TB)"
+  ],
+  "stewardship": "This is a targeted, long-course antitubercular case, not an empiric antibacterial one. At presentation the toxic, drowsy meningitic patient received broad meningo-encephalitic cover (ceftriaxone + vancomycin + aciclovir) pending CSF; once CBNAAT confirmed M. tuberculosis with no rifampicin resistance and bacterial/HSV/cryptococcal work-up returned negative, antibacterials and aciclovir were stopped and therapy narrowed to WHO-concordant regimen: intensive-phase isoniazid + rifampicin + pyrazinamide + ethambutol (HRZE) for 2 months, then isoniazid + rifampicin continuation to complete 9-12 months for CNS disease, with pyridoxine. Adjunctive dexamethasone (tapered over 6-8 weeks) reduces mortality in TBM. ART is continued but the rifampicin-dolutegravir interaction is managed (dolutegravir dose doubled to 50 mg BD); ART timing balances IRIS risk. This tranche demonstrates de-escalation from broad empiric cover to pathogen-directed anti-TB therapy.",
+  "contraindications": [
+    "Do not perform LP before imaging when focal deficit, reduced GCS or raised-ICP signs are present — mass lesion must be excluded first.",
+    "Ethambutol requires baseline and monitored visual acuity/colour vision (optic neuritis) and dose adjustment in renal impairment.",
+    "Rifampicin is a potent CYP inducer — halves dolutegravir/most ART and protease-inhibitor levels; requires dose adjustment, and hepatotoxicity monitoring with isoniazid/pyrazinamide.",
+    "Avoid abrupt corticosteroid start without concurrent effective anti-TB cover."
+  ],
+  "edgeCases": [
+    "Rifampicin resistance on Xpert Ultra would mandate an MDR-TBM regimen and specialist referral rather than standard HRZE.",
+    "Paradoxical worsening / TB-IRIS after ART initiation in this CD4-74 patient — anticipate and treat with steroids, do not misread as treatment failure.",
+    "Progressive communicating hydrocephalus may need CSF diversion (VP shunt / EVD).",
+    "Xpert Ultra 'trace' calls can be false-positive in prior-TB settings — correlate with CSF cytobiochemistry and ADA."
+  ],
+  "expectedMaiK": "Lumbar puncture (after CT to exclude mass effect) with CSF CBNAAT/Xpert MTB/RIF Ultra plus cell count, protein, glucose, ADA and lactate — a lymphocytic CSF with high protein, low glucose and MTB detected is diagnostic of TB meningitis.",
+  "expectedNextQuestions": [
+    "HIV status and most recent CD4 count / ART history?",
+    "Duration and tempo of symptoms — subacute over weeks versus hours?",
+    "Any TB contact or prior TB treatment?",
+    "Cranial nerve or visual symptoms, seizures or focal weakness?",
+    "Any raised-ICP features contraindicating immediate LP?"
+  ],
+  "expectedInvestigations": [
+    "CT head before LP to exclude mass effect, then MRI brain with contrast",
+    "CSF analysis: cell count/differential, protein, glucose (with paired serum), ADA, lactate",
+    "CSF CBNAAT (Xpert MTB/RIF Ultra), AFB smear and mycobacterial culture with DST",
+    "HIV serology with CD4 count",
+    "CSF cryptococcal antigen and HSV PCR to exclude mimics",
+    "Serum sodium (SIADH), LFTs and baseline visual acuity before ATT",
+    "Chest X-ray for concurrent pulmonary/miliary TB"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "subacuteOnset": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "immunocompromised": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "tbContactHistory": true
+  },
+  "expected": {
+    "diagnosis": "CNS_TB",
+    "acceptableIds": [
+      "CNS_TB"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS",
+      "BRAIN_ABSCESS"
+    ],
+    "investigations": [
+      "CT head then contrast MRI brain",
+      "CSF analysis (cells/protein/glucose/ADA/lactate)",
+      "CSF Xpert MTB/RIF Ultra + AFB culture/DST",
+      "HIV serology and CD4",
+      "CSF cryptococcal antigen and HSV PCR"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "Isoniazid",
+        "Rifampicin",
+        "Pyrazinamide",
+        "Ethambutol",
+        "Pyridoxine",
+        "Adjunctive dexamethasone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return CNS_TB as the top diagnosis for subacute lymphocytic meningitis with low CSF glucose, high protein and MTB detected on CBNAAT.",
+    "Given immunocompromised host + TB contact + subacute onset, CNS_TB must rank above acute bacterial MENINGITIS.",
+    "Stewardship must recommend HRZE + adjunctive dexamethasone (targeted anti-TB), not continued broad-spectrum antibacterials, once CBNAAT confirms MTB.",
+    "System must flag the rifampicin-dolutegravir interaction and ethambutol visual monitoring.",
+    "LP must be deferred until CT excludes mass effect given focal deficit and reduced GCS."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

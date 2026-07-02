@@ -1,0 +1,123 @@
+{
+  "id": "gc_430",
+  "specialty": "Respiratory",
+  "condition": "Ventilator Associated Pneumonia",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Day-6 ICU patient on mechanical ventilation with new fever, purulent tracheal secretions and worsening oxygenation, now requiring vasopressors.",
+  "history": "Admitted 6 days ago with an acute exacerbation of COPD complicated by type 2 respiratory failure requiring intubation and mechanical ventilation. Intubated since day 1. Received empirical amoxicillin-clavulanate for the initial exacerbation, stopped on day 4. Over the last 12 hours the nursing team noted a rising temperature, an increase in the volume and purulence of tracheal aspirates, and escalating FiO2 and PEEP requirements to maintain saturations. Urine output has fallen over the same period. No recent surgery. No known drug allergies. Not previously colonised with resistant organisms on admission screen.",
+  "examination": "Sedated, intubated and ventilated. Warm peripheries early, now becoming mottled at the knees. Coarse bilateral crepitations, worse at the right base. Copious thick yellow-green secretions on suctioning. Abdomen soft. No rash. Reduced urine in the catheter bag.",
+  "vitals": {
+    "hr": 122,
+    "bp": "82/48",
+    "rr": 28,
+    "temp": 38.9,
+    "spo2": 90
+  },
+  "labs": {
+    "wbc": "18.6 x10^9/L (neutrophilia)",
+    "crp": "268 mg/L",
+    "procalcitonin": "9.4 ng/mL",
+    "lactate": "4.1 mmol/L",
+    "creatinine": "2.1 mg/dL (baseline 0.9)",
+    "urea": "16.8 mmol/L",
+    "platelets": "94 x10^3/uL",
+    "bilirubin": "1.6 mg/dL",
+    "pao2fio2": "148 (on FiO2 0.7)",
+    "abg": "pH 7.28, PaCO2 6.9 kPa, HCO3 18"
+  },
+  "imaging": "Portable CXR: new right lower and mid-zone alveolar infiltrates with early left basal shadowing, not present on the day-3 film; no large effusion or pneumothorax.",
+  "microbiology": "Two sets of blood cultures and an endotracheal aspirate (semi-quantitative) sent before antibiotic escalation. Gram stain of aspirate: numerous polymorphs and Gram-negative bacilli. At 48h: endotracheal aspirate grows Pseudomonas aeruginosa >10^5 CFU/mL, susceptible to piperacillin-tazobactam, cefepime, ceftazidime, meropenem and ciprofloxacin; resistant only to gentamicin. Blood cultures no growth. MRSA screen negative.",
+  "differentialDiagnoses": [
+    "Ventilator-associated pneumonia (VAP) with septic shock",
+    "Hospital-acquired (non-ventilator) pneumonia",
+    "Aspiration pneumonia",
+    "Sepsis from an alternative source",
+    "Pulmonary embolism / non-infective ARDS mimic"
+  ],
+  "finalDiagnosis": "Ventilator-associated pneumonia due to Pseudomonas aeruginosa, complicated by septic shock and acute kidney injury; empirical broad-spectrum therapy de-escalated to culture-directed monotherapy.",
+  "citations": [
+    "ATS/IDSA Guidelines for Management of Hospital-acquired and Ventilator-associated Pneumonia 2016",
+    "Surviving Sepsis Campaign International Guidelines 2021",
+    "Harrison's Principles of Internal Medicine 22e - Pneumonia"
+  ],
+  "stewardship": "VAP arising >48h after intubation with septic shock and MDR risk factors (prior IV antibiotics within 90 days, >5 days of hospitalisation, ICU stay) warrants broad-spectrum empirical cover per ATS/IDSA 2016: an antipseudomonal beta-lactam PLUS a second antipseudomonal agent from a different class PLUS empirical MRSA cover, guided by unit antibiogram. Draw a lower respiratory sample and blood cultures before starting. At 48h, cultures grew pan-susceptible P. aeruginosa with no MRSA and negative blood cultures: STOP the anti-MRSA agent and the second Gram-negative agent, and de-escalate to a single antipseudomonal beta-lactam directed by susceptibilities (e.g. piperacillin-tazobactam). Total duration 7 days if clinically improving. Send daily lactate, reassess vasopressors, and stop antibiotics that are no longer needed.",
+  "contraindications": [
+    "Avoid aminoglycoside monotherapy or continuation given nephrotoxicity in evolving AKI and gentamicin resistance",
+    "Dose-adjust piperacillin-tazobactam and other renally cleared agents for AKI / CVVH",
+    "Avoid double beta-lactam combinations",
+    "Do not continue empirical vancomycin/linezolid once MRSA excluded"
+  ],
+  "edgeCases": [
+    "If the isolate were carbapenem-resistant or a difficult-to-treat P. aeruginosa, escalate to ceftolozane-tazobactam or ceftazidime-avibactam rather than de-escalate",
+    "Persistent shock and worsening infiltrates despite therapy should prompt search for empyema, undrained source or non-infective ARDS",
+    "If PaO2:FiO2 remains <150 with bilateral infiltrates, manage concurrent ARDS with lung-protective ventilation"
+  ],
+  "expectedMaiK": "Recognise VAP with septic shock, start guideline-concordant broad empirical cover after cultures, then de-escalate to culture-directed monotherapy once a pan-susceptible pathogen and negative MRSA/blood cultures are known.",
+  "expectedNextQuestions": [
+    "How many days has the patient been intubated (onset >48h)?",
+    "Any antibiotic exposure or prior resistant organisms in the last 90 days?",
+    "What does the local ICU antibiogram show for P. aeruginosa and MRSA?",
+    "Have blood cultures and a lower respiratory tract sample been taken before escalation?"
+  ],
+  "expectedInvestigations": [
+    "Endotracheal aspirate for Gram stain, culture and sensitivity",
+    "Two sets of blood cultures",
+    "Serum lactate and repeat after resuscitation",
+    "Chest radiograph",
+    "FBC, CRP/procalcitonin, U&E/creatinine, LFTs, ABG with PaO2:FiO2"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "mechanicalVentilation": true,
+    "hospitalDay48": true,
+    "purulentSecretions": true,
+    "worseningOxygenation": true,
+    "fever": true,
+    "hypotension": true,
+    "vasopressorRequirement": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "mdrRisk": true,
+    "priorAntibiotics": true,
+    "multilobar": true
+  },
+  "expected": {
+    "diagnosis": "VAP",
+    "acceptableIds": [
+      "VAP"
+    ],
+    "differentialIds": [
+      "HAP",
+      "ASPIRATION_PNEUMONIA",
+      "SEPSIS",
+      "pe"
+    ],
+    "investigations": [
+      "Endotracheal aspirate culture and sensitivity",
+      "Blood cultures x2",
+      "Serum lactate",
+      "Chest radiograph",
+      "ABG with PaO2:FiO2 ratio"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "ciprofloxacin",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to VAP given ventilation >48h with new infiltrate, purulent secretions and worsening oxygenation",
+    "Empirical regimen must include antipseudomonal beta-lactam + second antipseudomonal agent + MRSA cover",
+    "After 48h cultures (pan-susceptible P. aeruginosa, MRSA-negative), plan de-escalates to single antipseudomonal beta-lactam",
+    "Septic shock recognised (lactate 4.1, vasopressor requirement, MAP low) and treated per Surviving Sepsis",
+    "Total antibiotic duration 7 days if improving"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "gc_436",
+  "specialty": "Endocrine",
+  "condition": "Adrenal crisis",
+  "age": 46,
+  "sex": "F",
+  "presentingComplaint": "Two days of vomiting, diarrhoea and lightheadedness, now collapsed at home with profound weakness and drowsiness.",
+  "history": "Known primary adrenal insufficiency (Addison's disease, autoimmune, diagnosed 6 years ago) maintained on hydrocortisone 10 mg morning / 5 mg midday / 5 mg evening and fludrocortisone 100 mcg daily. Developed acute gastroenteritis-type illness 48 hours ago after a family gathering, with watery diarrhoea and repeated vomiting. Unable to keep down oral hydrocortisone and did not take her 'sick-day' extra doses, was not aware she should double them or use her emergency injection. Progressive nausea, generalised abdominal pain, salt craving, postural dizziness and increasing lethargy. No haematemesis or melaena. She carries a steroid emergency card. On the surface the picture of vomiting/diarrhoea with shock suggested a gastrointestinal source or septic/hypovolaemic shock, which initially anchored the receiving team toward a fluids-and-antibiotics pathway.",
+  "examination": "Ill, dehydrated and drowsy (GCS 13). Cool peripheries with prolonged capillary refill, but no rash or focal source of sepsis. Diffuse mild abdominal tenderness without peritonism or organomegaly. Longstanding buccal and palmar-crease hyperpigmentation noted. Chest clear, no murmur, no calf swelling. No neck stiffness.",
+  "vitals": {
+    "hr": 122,
+    "bp": "78/46",
+    "rr": 24,
+    "temp": 37.8,
+    "spo2": 97
+  },
+  "labs": {
+    "sodium_mmol_L": 122,
+    "potassium_mmol_L": 5.9,
+    "glucose_mg_dL": 52,
+    "creatinine_mg_dL": 1.6,
+    "urea_mmol_L": 11.8,
+    "bicarbonate_mmol_L": 17,
+    "random_cortisol_nmol_L": 48,
+    "ACTH_pg_mL": 640,
+    "hemoglobin_g_dL": 13.1,
+    "wbc_10e9_L": 9.2,
+    "eosinophils_pct": 6,
+    "lactate_mmol_L": 2.2,
+    "crp_mg_L": 14
+  },
+  "imaging": "Bedside abdominal ultrasound and erect chest/abdominal films unremarkable, excluding perforation, obstruction or free fluid; no source of sepsis identified. ECG shows sinus tachycardia with peaked T waves consistent with hyperkalaemia.",
+  "microbiology": "Blood cultures and stool studies sent to exclude a precipitating infection; no growth. Not the primary driver of the presentation.",
+  "differentialDiagnoses": [
+    "Adrenal (Addisonian) crisis precipitated by intercurrent gastroenteritis and missed sick-day steroid dosing",
+    "Septic shock from a gastrointestinal source",
+    "Hypovolaemic shock from vomiting/diarrhoea",
+    "Diabetic ketoacidosis / other metabolic emergency",
+    "Primary hyperkalaemia with associated illness"
+  ],
+  "finalDiagnosis": "Adrenal crisis in known primary adrenal insufficiency, precipitated by a gastrointestinal illness and interrupted glucocorticoid intake; the concurrent GI illness raised sepsis/hypovolaemia as competing emergencies but the hyponatraemia, hyperkalaemia, hypoglycaemia, hyperpigmentation, low cortisol with markedly raised ACTH, and steroid-responsive shock are diagnostic.",
+  "citations": [
+    "Endocrine Society Clinical Practice Guideline, Diagnosis and Treatment of Primary Adrenal Insufficiency, 2016",
+    "Harrison's Principles of Internal Medicine, 22e, Disorders of the Adrenal Cortex"
+  ],
+  "stewardship": "Non-infective endocrine emergency. Sepsis was actively excluded (no source, near-normal WBC/CRP, negative cultures); empirical antibiotics are not indicated for the adrenal crisis itself and should be reserved only if a specific infection is later confirmed. Management is immediate parenteral hydrocortisone plus fluid and glucose resuscitation, not antimicrobials.",
+  "contraindications": [
+    "Do not delay hydrocortisone while awaiting the cortisol result",
+    "Avoid aggressive/rapid sodium correction to prevent osmotic demyelination once cortisol replacement begins",
+    "Avoid potassium-lowering measures in isolation without treating the underlying cortisol/aldosterone deficiency",
+    "Fludrocortisone is unnecessary while high-dose hydrocortisone is running (mineralocorticoid effect covered)"
+  ],
+  "edgeCases": [
+    "Concurrent true infection can coexist and precipitate the crisis, so a source must still be sought without letting sepsis anchoring delay steroids",
+    "Mild fever and lactate elevation may be attributed to sepsis but often resolve rapidly after hydrocortisone",
+    "Relative eosinophilia and hypoglycaemia are useful clues that are frequently overlooked"
+  ],
+  "expectedMaiK": "Recognise adrenal crisis and give IV hydrocortisone 100 mg immediately with rapid IV isotonic saline and dextrose for hypoglycaemia, without waiting for the cortisol result.",
+  "expectedNextQuestions": [
+    "Is there a known diagnosis of adrenal insufficiency or chronic steroid use, and were sick-day rules followed?",
+    "Has she missed or vomited her recent steroid doses?",
+    "Is there a precipitating infection or other acute stressor?",
+    "What is the point-of-care glucose and potassium right now?"
+  ],
+  "expectedInvestigations": [
+    "Paired serum cortisol and plasma ACTH (before or concurrent with, but not delaying, treatment)",
+    "Urea, electrolytes and glucose (looking for hyponatraemia, hyperkalaemia, hypoglycaemia)",
+    "Venous blood gas / bicarbonate and lactate",
+    "ECG for hyperkalaemic changes",
+    "Septic screen (cultures, CXR, urinalysis) to identify a precipitant"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "weightLoss": true,
+    "steroidUse": true,
+    "vasopressorRequirement": true,
+    "toxicAppearing": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "adrenal_crisis",
+    "acceptableIds": [
+      "adrenal_crisis"
+    ],
+    "differentialIds": [
+      "hypovolemic_shock",
+      "SEPTIC_SHOCK",
+      "dka",
+      "hyperkalemia"
+    ],
+    "investigations": [
+      "Paired serum cortisol and plasma ACTH",
+      "Urea, electrolytes and glucose",
+      "Venous blood gas with lactate",
+      "ECG",
+      "Septic screen for precipitant"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Ranks adrenal_crisis as the top diagnosis despite overlapping shock/GI features",
+    "Recommends immediate IV hydrocortisone before biochemical confirmation",
+    "Prescribes IV fluids and dextrose correction for hypoglycaemia",
+    "Does not recommend empirical antibiotics as primary therapy in the absence of a confirmed source",
+    "Identifies hyponatraemia, hyperkalaemia and hypoglycaemia as supporting features"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "id": "gc_432",
+  "specialty": "Central Nervous System",
+  "condition": "Viral (Aseptic) Meningitis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Severe headache, neck stiffness and fever for 2 days",
+  "history": "34-year-old man on maintenance rituximab for follicular lymphoma (last infusion 5 weeks ago) presents with a 2-day history of frontal-occipital headache, photophobia, low-grade fever, nausea and generalised myalgia, preceded by a 3-day coryzal illness. Two colleagues at work had a 'summer flu'. No seizures, no limb weakness, no behavioural change, no rash. No recent travel, no mosquito or tick exposure, no head injury. Because of his immunosuppressed state he was admitted and started on broad empiric cover pending CSF results.",
+  "examination": "Alert and fully oriented (GCS 15). Neck stiffness with positive Kernig sign. No focal neurological deficit, normal fundi, no papilloedema. No rash or petechiae. No lymphadenopathy or hepatosplenomegaly. Chest, cardiovascular and abdominal examination unremarkable.",
+  "vitals": {
+    "hr": 98,
+    "bp": "122/76",
+    "rr": 18,
+    "temp": 38.4,
+    "spo2": 98
+  },
+  "labs": {
+    "bloodWBC": "5.2 x10^9/L (neutrophils 3.1, ANC not profoundly low)",
+    "CRP": "18 mg/L",
+    "procalcitonin": "0.12 ng/mL (low)",
+    "creatinine": "0.9 mg/dL",
+    "platelets": "196 x10^3/µL",
+    "sodium": "138 mmol/L",
+    "CSF_opening_pressure": "18 cmH2O (normal-to-mildly raised)",
+    "CSF_WBC": "182 cells/µL, 88% lymphocytes",
+    "CSF_protein": "0.72 g/L (mildly raised)",
+    "CSF_glucose": "3.5 mmol/L, CSF:serum ratio 0.62 (normal)",
+    "CSF_lactate": "2.1 mmol/L (normal)",
+    "CSF_Gram_stain": "no organisms seen"
+  },
+  "imaging": "CT head performed before LP (immunocompromised host): no mass lesion, hydrocephalus or midline shift. MRI brain with contrast: no parenchymal signal change or temporal-lobe involvement to suggest encephalitis; meninges unremarkable.",
+  "microbiology": "CSF multiplex PCR (BioFire ME panel): ENTEROVIRUS detected; HSV-1, HSV-2, VZV, CMV and bacterial targets NOT detected. CSF bacterial culture no growth at 48h. Blood cultures x2 no growth. HIV Ag/Ab negative.",
+  "differentialDiagnoses": [
+    "Bacterial meningitis",
+    "Viral encephalitis (HSV/enteroviral)",
+    "Tuberculous meningitis"
+  ],
+  "finalDiagnosis": "Enteroviral (aseptic) meningitis in a rituximab-immunosuppressed host",
+  "citations": [
+    "IDSA — Management of Bacterial Meningitis — 2004",
+    "IDSA — Encephalitis — 2008",
+    "Harrison's Principles of Internal Medicine 22e — Acute Meningitis / Viral (Aseptic) Meningitis"
+  ],
+  "stewardship": "Because he is immunocompromised and presented as a meningitis syndrome, empiric broad cover was started after CT/LP: ceftriaxone + vancomycin (community-acquired bacterial meningitis) PLUS ampicillin for Listeria cover given immunosuppression, PLUS aciclovir until HSV encephalitis excluded. CSF was lymphocytic with normal glucose, normal lactate, negative Gram stain and low procalcitonin — an aseptic picture. Once enterovirus PCR returned positive with negative bacterial cultures and HSV/VZV PCR, all antibacterials and aciclovir were discontinued and management de-escalated to supportive care (analgesia, antiemetics, fluids). This is the antimicrobial stewardship point: a broad empiric bundle appropriate for an immunocompromised host must be actively stopped once the aseptic/viral diagnosis is confirmed.",
+  "contraindications": [
+    "Aciclovir needs adequate hydration and renal-adjusted dosing to avoid crystal nephropathy",
+    "Vancomycin requires level monitoring; combined nephrotoxin exposure should be minimised",
+    "Do not omit CT head before LP in an immunocompromised host, but do not let imaging delay empiric antimicrobials"
+  ],
+  "edgeCases": [
+    "If CSF glucose were low with neutrophilic pleocytosis and high lactate, treat as bacterial meningitis and continue antibiotics",
+    "High CSF protein with lymphocytosis and low glucose in an at-risk patient should prompt TB meningitis workup",
+    "Enteroviral meningitis in agammaglobulinaemia (or heavy B-cell depletion) can become chronic/relapsing and may need IVIG",
+    "Persistent altered mentation, seizures or temporal-lobe MRI change means encephalitis — do not stop aciclovir until HSV PCR negative"
+  ],
+  "expectedMaiK": "CT head then lumbar puncture with CSF cell count/differential, protein, glucose (with paired serum), Gram stain, culture and multiplex PCR; start empiric ceftriaxone + vancomycin + ampicillin + aciclovir after cultures drawn, then discontinue antimicrobials once CSF confirms aseptic/viral meningitis and cultures are negative; supportive care.",
+  "expectedNextQuestions": [
+    "What is the nature and degree of immunosuppression (rituximab, steroids, HIV status, hypogammaglobulinaemia)?",
+    "Was there a viral prodrome, sick contacts or enteroviral-season exposure?",
+    "Any seizures, focal deficit or altered mentation to suggest encephalitis rather than meningitis?",
+    "Any rash, travel or mosquito/tick exposure pointing to an arboviral cause?"
+  ],
+  "expectedInvestigations": [
+    "CT head prior to LP (immunocompromised host)",
+    "Lumbar puncture: CSF cell count and differential, protein, glucose with paired serum glucose",
+    "CSF Gram stain and bacterial culture",
+    "CSF multiplex PCR / BioFire ME panel (enterovirus, HSV-1/2, VZV)",
+    "Blood cultures, CRP and procalcitonin",
+    "HIV Ag/Ab test and serum immunoglobulins"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "nauseaVomiting": true,
+    "myalgiaArthralgia": true,
+    "coryza": true,
+    "immunocompromised": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "VIRAL_MENINGITIS",
+    "acceptableIds": [
+      "VIRAL_MENINGITIS"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "CNS_TB"
+    ],
+    "investigations": [
+      "CT head prior to LP",
+      "Lumbar puncture with CSF cell count, protein, glucose (paired serum)",
+      "CSF Gram stain and bacterial culture",
+      "CSF multiplex PCR / ME panel (enterovirus, HSV-1/2, VZV)",
+      "Blood cultures, CRP, procalcitonin",
+      "HIV test and serum immunoglobulins"
+    ],
+    "stewardship": {
+      "tier": "Empiric community-meningitis cover (immunocompromised: add Listeria + HSV cover) — de-escalate/discontinue on viral confirmation",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Vancomycin",
+        "Ampicillin",
+        "Aciclovir"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Must diagnose VIRAL_MENINGITIS given lymphocytic CSF pleocytosis with normal glucose, normal lactate, negative Gram stain and positive enterovirus PCR",
+    "Must NOT classify as bacterial meningitis despite immunocompromised host and broad empiric start",
+    "Must recommend discontinuing antibacterials and aciclovir once enterovirus PCR positive and cultures/HSV PCR negative",
+    "CT head before LP is appropriate in this immunocompromised patient"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

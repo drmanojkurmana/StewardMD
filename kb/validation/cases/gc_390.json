@@ -1,0 +1,123 @@
+{
+  "id": "gc_390",
+  "specialty": "Tropical Fever",
+  "condition": "Chikungunya",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "High fever with sudden, severe, incapacitating symmetric joint pain for 2 days in a patient on chemotherapy.",
+  "history": "54-year-old man from Chennai with diffuse large B-cell lymphoma, day 9 after his third R-CHOP cycle, presents during the monsoon with abrupt-onset fever to 39.5C, rigors, and severe, symmetric small-joint pain of the wrists, hands (MCP/PIP), ankles and feet that is so disabling he cannot grip or bear weight. He reports frontal headache, marked myalgia and a faintly itchy maculopapular rash appearing over the trunk on day 2. There is heavy Aedes mosquito activity and several neighbours have had similar febrile arthralgic illness. No dysuria, cough, diarrhoea, neck stiffness, or catheter. Last known ANC pre-cycle was low; he is on no prophylactic antibiotic. No recent travel outside the region, no antibiotics in the last 90 days.",
+  "examination": "Ill-appearing but alert and oriented. Warm peripheries. Bilateral symmetric tenderness and mild swelling of wrists and small hand joints with painful, restricted movement; ankles tender. Blanching maculopapular rash over trunk and extensor forearms. No eschar, no purpura, no oral mucositis, no neck stiffness, no focal neurology. No central line; peripheral cannula site clean. Chest clear, abdomen soft, no hepatosplenomegaly.",
+  "vitals": {
+    "hr": 108,
+    "bp": "112/70",
+    "rr": 20,
+    "temp": 39.5,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 10.4,
+    "wbc": "1.1 x10^3/uL",
+    "absoluteNeutrophilCount": "0.32 x10^3/uL (ANC 320)",
+    "platelets": 96,
+    "creatinine": 0.9,
+    "bilirubin": 0.8,
+    "alt": 78,
+    "ast": 84,
+    "crp": 62,
+    "lactate": 1.4,
+    "chikungunyaRTPCR": "positive (day 2 of illness)",
+    "chikungunyaIgM": "pending",
+    "dengueNS1": "negative",
+    "malariaSmearAndAntigen": "negative"
+  },
+  "imaging": "Chest radiograph clear. No focal source on point-of-care ultrasound of abdomen.",
+  "microbiology": "Two sets of blood cultures drawn at presentation before antibiotics: no growth at 48h. Urine culture negative. Chikungunya RT-PCR positive; dengue NS1/IgM negative; peripheral smear and malaria antigen negative; scrub typhus IgM negative.",
+  "differentialDiagnoses": [
+    "Chikungunya (arboviral febrile polyarthralgia)",
+    "Dengue fever",
+    "Febrile neutropenia / occult bacteraemia",
+    "Rickettsial (scrub typhus) fever",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Chikungunya virus infection presenting during chemotherapy-induced neutropenia; empiric anti-pseudomonal cover started for the neutropenic fever and then stopped once RT-PCR confirmed chikungunya and blood cultures remained sterile.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Alphaviruses and Chikungunya",
+    "IDSA — Clinical Practice Guideline for Fever and Neutropenia in Patients with Cancer 2011",
+    "ICMR/NCDC — National Guidelines for Clinical Management of Chikungunya 2016"
+  ],
+  "stewardship": "This febrile patient has an ANC of 320 and is therefore treated as high-risk febrile neutropenia: after two sets of blood cultures, start empiric IV anti-pseudomonal monotherapy (piperacillin-tazobactam, or cefepime) within 60 minutes per IDSA 2011. Chikungunya itself is a self-limiting viral illness needing only supportive care (paracetamol for fever/arthralgia; avoid NSAIDs/aspirin until dengue excluded and platelets recover), so once the RT-PCR confirms chikungunya, blood cultures are sterile at 48h and the patient is clinically stable, the empiric antibiotics are stopped/de-escalated. Antibiotics treat the neutropenic-fever risk, not the chikungunya. No vancomycin is added in the absence of line infection, skin/soft-tissue focus, MRSA colonisation or haemodynamic instability.",
+  "contraindications": [
+    "Avoid NSAIDs/aspirin while dengue is not excluded and platelets are low (bleeding risk)",
+    "Do not add empiric antifungal or anti-MRSA therapy at day 1 without specific indication",
+    "Do not withhold empiric antibacterials while awaiting viral serology in a neutropenic febrile patient"
+  ],
+  "edgeCases": [
+    "Chikungunya and dengue co-circulate and can co-infect; a positive chikungunya RT-PCR does not exclude dengue, so dengue must still be actively excluded before NSAIDs",
+    "Persistent or recurrent fever, new focal signs, or positive cultures should prompt escalation rather than attributing all fever to chikungunya",
+    "Arthralgia may persist for weeks-months post-infection (chronic chikungunya arthropathy) and is not a sign of ongoing bacterial infection"
+  ],
+  "expectedMaiK": "Draw blood cultures and start empiric IV anti-pseudomonal beta-lactam for high-risk febrile neutropenia, while sending arboviral studies; stop antibiotics once chikungunya is confirmed and cultures are sterile.",
+  "expectedNextQuestions": [
+    "What is the current absolute neutrophil count and days since last chemotherapy?",
+    "Is there any localising source (line, skin, urinary, respiratory, GI)?",
+    "Have blood cultures been drawn before antibiotics?",
+    "What is the local arbovirus epidemiology and mosquito exposure?",
+    "Have dengue and malaria been excluded given overlapping presentation?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures before antibiotics",
+    "Full blood count with differential / ANC",
+    "Chikungunya RT-PCR and IgM serology",
+    "Dengue NS1 antigen and IgM; malaria smear/antigen",
+    "Liver function tests, renal function, CRP, lactate"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "severeArthralgia": true,
+    "symmetricSmallJointInvolvement": true,
+    "myalgiaArthralgia": true,
+    "maculopapularRash": true,
+    "headache": true,
+    "immunocompromised": true,
+    "neutropenia": true,
+    "thrombocytopenia": true,
+    "malignancy": true
+  },
+  "expected": {
+    "diagnosis": "CHIKUNGUNYA",
+    "acceptableIds": [
+      "CHIKUNGUNYA"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "FEBRILE_NEUTROPENIA",
+      "RICKETTSIAL_FEVER",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Chikungunya RT-PCR / IgM serology",
+      "Blood cultures x2 before antibiotics",
+      "FBC with ANC",
+      "Dengue NS1/IgM and malaria smear/antigen"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum empiric (high-risk febrile neutropenia)",
+      "antibiotics": [
+        "Piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Final diagnosis resolves to CHIKUNGUNYA, not dengue or malaria",
+    "Neutropenic fever triggers empiric IV anti-pseudomonal beta-lactam after blood cultures",
+    "Empiric antibiotics are stopped/de-escalated once chikungunya confirmed and cultures sterile",
+    "No antiviral or specific antibiotic is indicated for chikungunya itself; management is supportive",
+    "NSAIDs/aspirin are avoided until dengue excluded and platelets recover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

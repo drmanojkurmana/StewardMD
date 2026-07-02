@@ -1,0 +1,126 @@
+{
+  "id": "gc_418",
+  "specialty": "Genitourinary",
+  "condition": "Acute Bacterial Prostatitis",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "High fever with rigors, painful obstructed micturition and progressive collapse over 24 hours",
+  "history": "A 64-year-old man with type 2 diabetes and benign prostatic hyperplasia presented with 2 days of severe perineal and suprapubic pain, dysuria, urinary frequency and a poor, straining stream that progressed to near-complete inability to pass urine. Over the preceding 24 hours he developed swinging fevers with drenching rigors, worsening lethargy and light-headedness on standing. He underwent a transrectal prostate biopsy three weeks earlier for a raised PSA and received a single dose of oral ciprofloxacin as prophylaxis. He had a UTI treated with an oral cephalosporin two months ago. No flank pain, no cough, no diarrhoea. By arrival he was drowsy, cold peripherally and had passed very little urine since the previous evening.",
+  "examination": "Toxic, diaphoretic and peripherally shut-down with a capillary refill of 4 seconds and mottled knees. Warm-then-cold septic picture with a palpable tender bladder to the umbilicus and marked suprapubic tenderness. Digital rectal examination revealed an exquisitely tender, hot, boggy and enlarged prostate; the gland was not massaged. No costovertebral angle tenderness, no scrotal swelling, chest clear, abdomen otherwise soft. Drowsy but rousable, no neck stiffness or focal neurology.",
+  "vitals": {
+    "hr": 124,
+    "bp": "76/42",
+    "rr": 28,
+    "temp": 39.6,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "18.9 x10^9/L (neutrophilia with left shift)",
+    "crp": "312 mg/L",
+    "procalcitonin": "24 ng/mL",
+    "creatinine": "2.3 mg/dL (baseline 1.0)",
+    "urea": "16.8 mmol/L",
+    "lactate": "4.6 mmol/L",
+    "platelets": "94 x10^3/uL",
+    "bilirubin": "1.9 mg/dL",
+    "inr": "1.4",
+    "glucose": "17 mmol/L",
+    "psa": "grossly elevated (not diagnostic in acute inflammation)",
+    "urinalysis": "pyuria with nitrites and leucocyte esterase positive"
+  },
+  "imaging": "Bladder scan showed >600 mL retained urine consistent with acute retention. Trans-abdominal / trans-rectal ultrasound demonstrated a diffusely enlarged, oedematous prostate with no drainable abscess collection. CT was deferred pending stabilisation.",
+  "microbiology": "Two sets of blood cultures and a catheter urine sample sent before antibiotics. Blood cultures at 14 hours grew Gram-negative bacilli, speciated as Escherichia coli; urine culture grew >10^5 CFU/mL of the same organism. Susceptibilities returned as an ESBL-negative isolate fully susceptible to ceftriaxone, ciprofloxacin and co-trimoxazole, allowing de-escalation from empiric carbapenem.",
+  "differentialDiagnoses": [
+    "Acute bacterial prostatitis with septic shock (post-biopsy)",
+    "Complicated urinary tract infection with obstruction",
+    "Acute pyelonephritis",
+    "Undifferentiated Gram-negative sepsis/septic shock"
+  ],
+  "finalDiagnosis": "Acute bacterial prostatitis complicated by septic shock and acute kidney injury, following transrectal prostate biopsy",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e - Prostatitis and Urinary Tract Infections",
+    "EAU Guidelines - Urological Infections (Acute Bacterial Prostatitis) 2024",
+    "Surviving Sepsis Campaign - Septic Shock 2021"
+  ],
+  "stewardship": "This is a life-threatening acute bacterial prostatitis with septic shock following transrectal biopsy - a setting with elevated risk of resistant Gram-negative organisms. Draw blood and urine cultures immediately and start broad empiric IV therapy within the first hour alongside 30 mL/kg balanced crystalloid and early noradrenaline for a MAP <65 mmHg. Given septic shock plus recent fluoroquinolone prophylaxis and prior beta-lactam exposure, empiric cover should be a carbapenem (meropenem) to cover possible ESBL-producing Enterobacterales until susceptibilities return. Relieve the obstructed bladder as source control (urethral, or suprapubic if urethral catheterisation fails) and avoid prostatic massage. Once cultures confirmed an ESBL-negative, ceftriaxone- and ciprofloxacin-susceptible E. coli, de-escalate from meropenem to IV ceftriaxone, then transition to an oral fluoroquinolone (ciprofloxacin) once haemodynamically stable to complete a prolonged 4-week course given prostatic tissue penetration and abscess-prevention needs.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, contrast without hydration) given acute kidney injury",
+    "Do not perform vigorous prostatic massage in acute bacterial prostatitis - risk of precipitating bacteraemia",
+    "Fluoroquinolone-specific cautions (QT, tendinopathy, dysglycaemia in diabetes) - reserve oral step-down for confirmed susceptibility",
+    "Renal dose-adjust all agents once AKI stage established"
+  ],
+  "edgeCases": [
+    "Persistent fever or rising inflammatory markers despite adequate therapy should prompt CT/MRI to exclude a prostatic abscess requiring drainage",
+    "Post-biopsy sepsis raises the pre-test probability of fluoroquinolone-resistant and ESBL organisms - empiric fluoroquinolone monotherapy would be inappropriate here",
+    "Elevated PSA is expected in acute inflammation and must not be interpreted as malignancy at this stage"
+  ],
+  "expectedMaiK": "Acute bacterial prostatitis with septic shock in a post-biopsy diabetic man - resuscitate for shock, obtain cultures, start empiric carbapenem covering possible ESBL Gram-negatives, relieve bladder obstruction as source control, then de-escalate to a culture-directed agent with good prostatic penetration for a prolonged course.",
+  "expectedNextQuestions": [
+    "When was the transrectal prostate biopsy and what prophylaxis was given?",
+    "Has the patient passed urine, and is there palpable bladder distension (retention)?",
+    "Any prior resistant organisms (ESBL/CRE) or recent antibiotic exposure?",
+    "Is there back/perineal fluctuance or failure to improve suggesting prostatic abscess?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures plus urine culture before antibiotics",
+    "Serum lactate, venous gas and renal function/electrolytes",
+    "Full blood count, CRP/procalcitonin, coagulation and glucose",
+    "Bladder scan and urgent catheterisation for retention",
+    "Prostate/pelvic ultrasound (and CT/MRI if abscess suspected)"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "toxicAppearing": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "organDysfunction": true,
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "perinealPain": true,
+    "urinaryRetention": true,
+    "feverGU": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "PROSTATITIS",
+    "acceptableIds": [
+      "PROSTATITIS"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS",
+      "CA_UTI",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Blood cultures x2 and urine culture before antibiotics",
+      "Serum lactate and renal function",
+      "Bladder scan with catheterisation for retention",
+      "Prostate/pelvic ultrasound (CT/MRI if abscess suspected)"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "meropenem",
+        "ceftriaxone",
+        "ciprofloxacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank PROSTATITIS as the top diagnosis given febrile perineal pain, exquisitely tender boggy prostate on DRE, retention and post-biopsy context",
+    "Empiric regimen must cover ESBL-risk Gram-negatives (carbapenem) in septic shock post-biopsy, not fluoroquinolone monotherapy",
+    "Must flag bladder obstruction relief as source control and avoid prostatic massage",
+    "Must de-escalate to culture-directed ceftriaxone/ciprofloxacin once susceptibilities confirm an ESBL-negative E. coli",
+    "Must recommend a prolonged (approximately 4-week) total antibiotic course"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "id": "gc_448",
+  "specialty": "Cardiology / Critical care",
+  "condition": "Cardiogenic shock",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Central chest pressure for 5 hours, then progressive breathlessness, sweating and collapse.",
+  "history": "Ex-smoker with hypertension, type 2 diabetes and known coronary artery disease (PCI to RCA 4 years ago). Woke with crushing retrosternal pressure radiating to the left arm; over the next few hours became increasingly breathless and clammy. Family noted he was drowsy and 'not making sense'. In the 2 days before, he had a productive cough and one febrile episode, and he vomited once with a witnessed choking spell during the ambulance transfer, so the referring team queried aspiration and raised the possibility of septic shock. No melena, no recent travel, no leg swelling or immobilisation.",
+  "examination": "Cold, mottled peripheries with delayed capillary refill (>4 s). Anxious, drowsy (GCS 14). JVP elevated to the angle of the jaw. Bilateral fine basal crepitations to mid-zones with a soft S3 gallop; no new murmur, no pericardial rub. Chest otherwise clear with no focal bronchial breathing. Abdomen soft, no organomegaly. Feeble peripheral pulses, no radio-radial or radio-femoral delay.",
+  "vitals": {
+    "hr": 118,
+    "bp": "78/54",
+    "rr": 30,
+    "temp": 37.9,
+    "spo2": 88
+  },
+  "labs": {
+    "lactate_mmol_L": 5.6,
+    "creatinine_mg_dL": 1.9,
+    "troponinI_ng_L": 14200,
+    "NTproBNP_pg_mL": 9800,
+    "wbc_10e9_L": 14.2,
+    "hemoglobin_g_dL": 13.1,
+    "platelets_10e9_L": 214,
+    "CRP_mg_L": 48,
+    "pH": 7.24,
+    "HCO3_mmol_L": 15,
+    "ScvO2_pct": 48,
+    "glucose_mg_dL": 212
+  },
+  "imaging": "Bedside echo: severely impaired LV systolic function (visual EF ~25%) with akinetic anterior wall and septum; no pericardial effusion, normal RV size, IVC dilated and non-collapsing. Portable CXR: bilateral perihilar alveolar shadowing consistent with pulmonary oedema, no lobar consolidation. Coronary angiography: acute occlusion of proximal LAD.",
+  "microbiology": "Blood cultures sent; no growth. Sputum not obtained. Procalcitonin 0.3 ng/mL (low).",
+  "differentialDiagnoses": [
+    "Cardiogenic shock complicating acute anterior STEMI (LAD occlusion, EF ~25%, raised JVP, pulmonary oedema, low ScvO2)",
+    "Septic shock from aspiration pneumonia (raised by fever, cough, leucocytosis, witnessed aspiration) — argued against by low procalcitonin, clear CXR fields, cold vasoconstricted shock and severe LV dysfunction",
+    "Cardiac tamponade — excluded by echo (no effusion)",
+    "Hypovolaemic shock — argued against by raised JVP and dilated IVC",
+    "Massive pulmonary embolism — argued against by normal RV and clear LAD/anterior wall infarct picture"
+  ],
+  "finalDiagnosis": "Cardiogenic shock (SCAI stage C-D) due to acute anterior STEMI from proximal LAD occlusion",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Cardiogenic Shock and Pulmonary Edema",
+    "SCAI Clinical Expert Consensus — SCAI Shock Classification 2022",
+    "ESC Guidelines — Acute Coronary Syndromes 2023"
+  ],
+  "stewardship": "Non-infective diagnosis: the febrile, coughing, leucocytosis picture prompted a septic-shock differential, but low procalcitonin, clear CXR lung fields, a vasoconstricted (cold) shock phenotype, low ScvO2 and echo-proven severe LV dysfunction confirm a cardiac cause. No empiric antibiotics are indicated for cardiogenic shock itself; reassess only if cultures/imaging later confirm true infection. Management is emergency revascularisation (primary PCI to LAD), cautious inotrope/vasopressor support (e.g., norepinephrine +/- dobutamine), and consideration of mechanical circulatory support.",
+  "contraindications": [
+    "Avoid beta-blockers and negative inotropes in acute shock",
+    "Avoid aggressive fluid boluses given raised JVP and pulmonary oedema",
+    "Avoid nephrotoxic contrast overload where possible given AKI, but do not delay life-saving PCI"
+  ],
+  "edgeCases": [
+    "Concurrent fever/leucocytosis can be a stress/inflammatory response to infarction and must not trigger reflex antibiotics",
+    "Mechanical complications (VSD, papillary muscle rupture) must be excluded when shock is out of proportion to LV function",
+    "Right-ventricular infarction can mimic tamponade/hypovolaemia and alters fluid strategy"
+  ],
+  "expectedMaiK": "Recognise pump-failure (cardiogenic) shock from acute STEMI despite an overlapping infective-appearing presentation, and prioritise emergency revascularisation and haemodynamic support over antibiotics.",
+  "expectedNextQuestions": [
+    "Time of symptom onset and duration of chest pain?",
+    "Is there a new murmur or signs of a mechanical complication?",
+    "What is the ScvO2 / lactate trend and urine output?",
+    "Any contraindication to urgent PCI or anticoagulation?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "High-sensitivity troponin",
+    "Bedside echocardiography",
+    "Serum lactate and ScvO2",
+    "Urgent coronary angiography",
+    "Portable chest X-ray",
+    "Arterial blood gas and renal function"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "ecgIschemia": true,
+    "chestPain": true,
+    "oliguria": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "cardiogenic_shock",
+    "acceptableIds": [
+      "cardiogenic_shock"
+    ],
+    "differentialIds": [
+      "acs",
+      "SEPTIC_SHOCK",
+      "tamponade",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "High-sensitivity troponin",
+      "Bedside echocardiography",
+      "Serum lactate / ScvO2",
+      "Urgent coronary angiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank cardiogenic_shock as top diagnosis",
+    "Must not recommend empiric antibiotics for cardiogenic shock",
+    "Must recommend urgent coronary angiography / revascularisation",
+    "Must distinguish cold cardiogenic shock (raised JVP, low ScvO2, severe LV dysfunction) from septic shock despite fever/leucocytosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

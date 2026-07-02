@@ -1,0 +1,127 @@
+{
+  "id": "gc_423",
+  "specialty": "Hepatobiliary / GI",
+  "condition": "Spontaneous Bacterial Peritonitis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Increasing abdominal distension, diffuse abdominal discomfort and drowsiness for 2 days in a patient with known cirrhosis, recently discharged after a hospital admission.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh C), on long-term propranolol, spironolactone/furosemide and a proton-pump inhibitor. Discharged 3 weeks ago after a variceal bleed and had a 6-day course of intravenous antibiotics during that admission (healthcare-associated exposure). Cirrhosis-associated immune dysfunction places him in an effectively immunocompromised state with impaired opsonisation and low ascitic complement. Over 48 hours he has had worsening abdominal fullness, generalised dull abdominal pain, reduced appetite, low-grade fever and progressive drowsiness noted by family. No large-volume diarrhoea, no localised guarding, no recent abdominal surgery or instrumentation. No obvious extra-abdominal source of sepsis identified.",
+  "examination": "Ill-looking, jaundiced, mildly drowsy with grade 2 encephalopathy and asterixis. Tense grade 3 ascites with generalised mild tenderness but no rigidity, rebound or localised peritonism. Spider naevi, palmar erythema and mild pedal oedema. Chest clear, no cellulitis, no catheter or line, urine output reduced.",
+  "vitals": {
+    "hr": 108,
+    "bp": "96/58",
+    "rr": 22,
+    "temp": 38.2,
+    "spo2": 96
+  },
+  "labs": {
+    "asciticPMN": "620 cells/mm3 (>250 diagnostic)",
+    "asciticTotalWBC": "1100 cells/mm3",
+    "asciticProtein": "0.9 g/dL",
+    "serumAscitesAlbuminGradient": "1.7 g/dL (portal hypertensive)",
+    "wbc": "13.4 x10^9/L",
+    "neutrophils": "82%",
+    "hemoglobin": "9.1 g/dL",
+    "platelets": "78 x10^3/uL",
+    "crp": "96 mg/L",
+    "creatinine": "1.9 mg/dL (baseline 1.0 — AKI/HRS physiology)",
+    "urea": "14 mmol/L",
+    "sodium": "128 mmol/L",
+    "bilirubin": "4.6 mg/dL",
+    "albumin": "2.4 g/dL",
+    "inr": 1.9,
+    "lactate": "2.4 mmol/L"
+  },
+  "imaging": "Abdominal ultrasound: gross ascites, coarse nodular shrunken liver, splenomegaly and patent portal vein; no biliary dilatation, no localised collection, no free air and no bowel-wall abnormality to suggest a secondary surgical source.",
+  "microbiology": "Ascitic fluid PMN 620 cells/mm3 (diagnostic of SBP). Ascitic fluid and blood cultures collected at bedside into blood-culture bottles before antibiotics; ascitic culture grew a single organism, Escherichia coli, sensitive to third-generation cephalosporins (ESBL-negative). Monomicrobial growth, normal ascitic glucose and LDH argue against secondary bacterial peritonitis.",
+  "differentialDiagnoses": [
+    "Spontaneous bacterial peritonitis (ascitic PMN >=250/mm3)",
+    "Decompensated cirrhosis with tense ascites without infection",
+    "Secondary bacterial peritonitis / cholangitis",
+    "Hepatic encephalopathy from another precipitant",
+    "Sepsis from an extra-abdominal source"
+  ],
+  "finalDiagnosis": "Spontaneous bacterial peritonitis complicating decompensated cirrhosis (healthcare-associated, E. coli), with precipitated hepatic encephalopathy and acute kidney injury.",
+  "citations": [
+    "AASLD — Diagnosis, Evaluation and Management of Ascites and Spontaneous Bacterial Peritonitis in Cirrhosis — 2021",
+    "EASL — Clinical Practice Guidelines on Decompensated Cirrhosis — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications"
+  ],
+  "stewardship": "Diagnostic paracentesis before antibiotics is mandatory; ascitic PMN >=250/mm3 establishes SBP and empiric therapy must start immediately. Because this is a healthcare-associated episode (hospitalisation and antibiotics within the last 90 days) in a cirrhotic with immune dysfunction, empiric cover is broadened to piperacillin-tazobactam to include resistant Enterobacterales rather than a narrow third-generation cephalosporin alone. Add intravenous albumin 1.5 g/kg on day 1 and 1 g/kg on day 3 to prevent hepatorenal syndrome. Once cultures return ESBL-negative E. coli sensitive to third-generation cephalosporins, DE-ESCALATE to cefotaxime/ceftriaxone for a total 5-7 day course, and start secondary norfloxacin prophylaxis after recovery. Repeat paracentesis at 48h if not improving to confirm >25% PMN fall.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycosides given AKI/hepatorenal physiology",
+    "Avoid non-selective beta-blockers if progressing to refractory hypotension/HRS",
+    "Avoid NSAIDs (renal and bleeding risk)",
+    "Do not delay antibiotics awaiting culture results"
+  ],
+  "edgeCases": [
+    "Ascitic PMN >=250/mm3 but negative culture = culture-negative neutrocytic ascites, treat as SBP",
+    "Polymicrobial growth, low ascitic glucose, high LDH or protein >1 g/dL should prompt CT to exclude secondary peritonitis needing source control",
+    "ESBL or carbapenem-resistant isolate would require escalation to a carbapenem rather than de-escalation"
+  ],
+  "expectedMaiK": "Cirrhotic with new ascitic PMN >=250/mm3 and no surgical source = SBP; start empiric antibiotics plus albumin immediately, then narrow to culture-directed therapy.",
+  "expectedNextQuestions": [
+    "Any recent hospitalisation, invasive procedure or antibiotic exposure (healthcare-associated risk)?",
+    "Is there localised peritonism, prior abdominal surgery or features suggesting a secondary source?",
+    "Baseline renal function and current diuretic/beta-blocker use?",
+    "Prior SBP episodes or existing SBP prophylaxis?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic ascitic tap with cell count and differential (PMN)",
+    "Ascitic fluid culture in blood-culture bottles + paired blood cultures",
+    "Ascitic protein, albumin, glucose, LDH and SAAG to exclude secondary peritonitis",
+    "Renal function, electrolytes, LFTs, INR and lactate",
+    "Abdominal ultrasound"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "ascites": true,
+    "liverDisease": true,
+    "jaundice": true,
+    "immunocompromised": true,
+    "alteredSensorium": true,
+    "tachycardia": true,
+    "renalImpairment": true,
+    "hospitalizationLast90Days": true,
+    "antibioticsLast90Days": true
+  },
+  "expected": {
+    "diagnosis": "SBP",
+    "acceptableIds": [
+      "SBP"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "hepatic_enceph"
+    ],
+    "investigations": [
+      "diagnostic_paracentesis_pmn_count",
+      "ascitic_and_blood_cultures",
+      "ascitic_protein_glucose_ldh_saag",
+      "renal_function_and_lfts",
+      "abdominal_ultrasound"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Cefotaxime"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis must resolve to SBP when ascitic PMN >=250/mm3 with monomicrobial growth and no surgical source",
+    "Diagnostic paracentesis must precede antibiotics",
+    "Empiric therapy must be broadened (piperacillin-tazobactam) for healthcare-associated SBP with recent hospitalisation/antibiotics",
+    "Therapy must be de-escalated to cefotaxime/ceftriaxone once ESBL-negative E. coli sensitivities are known",
+    "IV albumin (1.5 g/kg day 1, 1 g/kg day 3) must be recommended to prevent hepatorenal syndrome",
+    "Must not recommend surgical source control or aminoglycosides"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

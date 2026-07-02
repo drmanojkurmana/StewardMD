@@ -1,0 +1,123 @@
+{
+  "id": "gc_469",
+  "specialty": "Metabolic",
+  "condition": "Symptomatic hyponatraemia / SIADH",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening confusion, nausea and unsteadiness, with a witnessed brief seizure at home.",
+  "history": "Retired factory supervisor and ex-smoker (45 pack-years) brought in by family with 48 hours of increasing drowsiness, poor concentration, nausea without vomiting blood, headache and an unsteady, staggering gait. A brief generalised seizure occurred this morning. Over the preceding two months he has had a dry cough and 6 kg of unintentional weight loss. Background of type 2 diabetes mellitus (on metformin and gliclazide, last HbA1c 7.4%) and CKD stage 3b (baseline creatinine ~1.8 mg/dL). No diuretics; family GP recently started him on a proton-pump inhibitor. Fluid intake normal, no vomiting or diarrhoea, no polyuria or excessive thirst, no chest pain or breathlessness at rest. No alcohol excess.",
+  "examination": "Drowsy but rousable, GCS 13 (E3 V4 M6), disoriented to time. Clinically euvolaemic: moist mucous membranes, JVP not raised, no peripheral oedema, no ascites, normal skin turgor, capillary refill <2s. No postural hypotension. Chest: reduced air entry right upper zone, no crackles or wheeze. Cardiovascular and abdominal exam unremarkable. Mild gait ataxia; no focal limb weakness, no neck stiffness, plantars flexor, no asterixis.",
+  "vitals": {
+    "hr": 82,
+    "bp": "132/80",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 96
+  },
+  "labs": {
+    "serum_sodium_mmol_L": 111,
+    "serum_potassium_mmol_L": 4.2,
+    "serum_osmolality_mOsm_kg": 248,
+    "urine_osmolality_mOsm_kg": 512,
+    "urine_sodium_mmol_L": 68,
+    "random_glucose_mg_dL": 168,
+    "corrected_sodium_for_glucose_mmol_L": 112,
+    "creatinine_mg_dL": 1.9,
+    "egfr_mL_min": 36,
+    "urea_mmol_L": 6.1,
+    "serum_uric_acid_mg_dL": 2.4,
+    "tsh_mIU_L": 1.8,
+    "9am_cortisol_nmol_L": 468,
+    "hba1c_pct": 7.4,
+    "serum_bicarbonate_mmol_L": 24
+  },
+  "imaging": "Chest radiograph: right hilar/perihilar mass with right upper zone volume loss. CT head (non-contrast): no haemorrhage, mass or acute infarct; consistent with metabolic encephalopathy. Staging CT chest recommended for suspected bronchogenic malignancy.",
+  "microbiology": "Not applicable — no infective focus; septic screen not indicated on clinical grounds.",
+  "differentialDiagnoses": [
+    "SIADH (euvolaemic hypotonic hyponatraemia), likely paraneoplastic from a bronchogenic (small-cell) tumour",
+    "Hyperglycaemia-related (translocational) hyponatraemia / HHS — excluded: glucose only mildly raised, corrected Na still 112, osmolality low",
+    "Hypervolaemic hyponatraemia from heart failure — no oedema, no raised JVP, no orthopnoea",
+    "CKD-related dilutional hyponatraemia — degree far exceeds CKD stage 3b expectation",
+    "Adrenal insufficiency — 9am cortisol reassuring"
+  ],
+  "finalDiagnosis": "Severe symptomatic hyponatraemia (Na 111 mmol/L) due to SIADH, most likely paraneoplastic from an underlying lung malignancy; diabetes and CKD are confounders that must be excluded before anchoring on SIADH.",
+  "citations": [
+    "European Society of Endocrinology — Clinical Practice Guideline on Diagnosis and Treatment of Hyponatraemia — 2014",
+    "American Diabetes Association — Standards of Care in Diabetes (hyperglycaemic crises) — 2024",
+    "Harrison's Principles of Internal Medicine 22e — Disorders of Sodium and Water Balance / Paraneoplastic Syndromes"
+  ],
+  "stewardship": "Not applicable — non-infective metabolic emergency; no antibiotics indicated. 'Stewardship' here is diagnostic and therapeutic restraint: establish true volume status and hypotonic state before treatment, avoid unnecessary saline boluses, and above all avoid overly rapid sodium correction.",
+  "contraindications": [
+    "Do NOT correct sodium faster than 8 mmol/L in 24h (or 4-6 mmol/L if very high osmotic demyelination risk) — malnourished ex-smoker is high-risk",
+    "Avoid 0.9% saline as sole therapy in SIADH — may worsen hyponatraemia when urine osmolality exceeds infusate osmolality",
+    "Avoid gliclazide-driven hypoglycaemia masking the picture; recheck glucose",
+    "Fluid restriction alone is inadequate for acute symptomatic (seizure) presentation — needs hypertonic saline"
+  ],
+  "edgeCases": [
+    "Symptomatic (seizure) hyponatraemia warrants 100-150 mL boluses of 3% hypertonic saline regardless of chronicity to raise Na 4-6 mmol/L acutely",
+    "Corrected sodium for glucose reclassifies apparent hyperglycaemic hyponatraemia; here correction is negligible, confirming true hypotonicity",
+    "Low serum uric acid (<4 mg/dL) and high fractional excretion of urate support SIADH over other causes",
+    "CKD blunts urinary dilution/concentration — interpret urine osmolality with caution, but 512 mOsm/kg with low serum osmolality is still inappropriate"
+  ],
+  "expectedMaiK": "Euvolaemic, hypotonic hyponatraemia (low serum osmolality) with inappropriately concentrated urine (osm >100), urine Na >30, low uric acid, and normal thyroid/adrenal/renal-adjusted status = SIADH; exclude the diabetes (glucose correction) and CKD confounders, then treat symptomatic Na 111 with cautious hypertonic saline while investigating an underlying lung malignancy.",
+  "expectedNextQuestions": [
+    "What is the true volume status (JVP, oedema, postural BP, mucous membranes)?",
+    "Any diuretics, PPI, SSRI, carbamazepine or other drugs precipitating SIADH?",
+    "Is there weight loss, cough, haemoptysis or smoking history suggesting malignancy?",
+    "How acute is the drop — any prior sodium results to gauge chronicity and demyelination risk?"
+  ],
+  "expectedInvestigations": [
+    "Paired serum and urine osmolality with urine sodium",
+    "Serum glucose with glucose-corrected sodium",
+    "9am cortisol and TSH to exclude adrenal insufficiency and hypothyroidism",
+    "Serum uric acid and renal function (contextualise for CKD)",
+    "Chest imaging (CXR then staging CT) to seek occult malignancy"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "alteredSensorium": true,
+    "seizure": true,
+    "nauseaVomiting": true,
+    "headache": true,
+    "ataxia": true,
+    "weightLoss": true,
+    "malignancy": true,
+    "diabetesHx": true,
+    "renalImpairment": true,
+    "coughRadio": true
+  },
+  "expected": {
+    "diagnosis": "hyponatremia",
+    "acceptableIds": [
+      "hyponatremia"
+    ],
+    "differentialIds": [
+      "hhs",
+      "heart_failure",
+      "ckd",
+      "adrenal_crisis"
+    ],
+    "investigations": [
+      "paired serum and urine osmolality",
+      "urine sodium",
+      "glucose-corrected sodium",
+      "9am cortisol and TSH",
+      "chest imaging for malignancy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank hyponatremia first given euvolaemic hypotonic hyponatraemia with concentrated urine and high urine sodium",
+    "Must not anchor on hhs — glucose-corrected sodium remains ~112 with low serum osmolality",
+    "Must flag risk of osmotic demyelination and cap correction at 8 mmol/L/24h",
+    "Must recommend no antibiotics (non-infective) and set stewardship tier null",
+    "Must trigger malignancy work-up given weight loss, smoking history and hilar mass"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

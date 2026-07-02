@@ -1,0 +1,121 @@
+{
+  "id": "gc_466",
+  "specialty": "Metabolic / Nephrology",
+  "condition": "Hyperkalaemia",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Generalised weakness, palpitations and reduced urine output for two days in a man with known alcohol-related cirrhosis.",
+  "history": "58-year-old man with Child-Pugh B alcohol-related cirrhosis and diuretic-controlled ascites, admitted with worsening fatigue, muscle weakness, and a sensation of a 'skipped, slow heartbeat'. Over the preceding week he had reduced oral intake, a diarrhoeal illness, and was up-titrated to spironolactone 100 mg daily; he also takes ramipril 5 mg for portal hypertension-associated hypertension and had recently started ibuprofen for back pain. Urine output has fallen to roughly 300 mL/day. No chest pain. The overlapping cirrhotic picture (ascites, lethargy, mild confusion) initially raised concern for decompensation and hepatic encephalopathy, but the dominant, immediately life-threatening abnormality is severe hyperkalaemia with characteristic ECG change driven by a potassium-sparing diuretic + ACE inhibitor + NSAID combination on a background of pre-renal/hepatorenal AKI.",
+  "examination": "Lethargic but rousable, GCS 14 with a subtle flap. Mild scleral icterus. Moderate tense ascites and shifting dullness. Peripheries cool with sluggish capillary refill; JVP not raised. Reduced power (4/5) globally with depressed reflexes. No focal neurology. Chest clear.",
+  "vitals": {
+    "hr": 46,
+    "bp": "104/68",
+    "rr": 16,
+    "temp": 36.5,
+    "spo2": 97
+  },
+  "labs": {
+    "potassium_mmol_L": 7.2,
+    "sodium_mmol_L": 129,
+    "bicarbonate_mmol_L": 16,
+    "creatinine_mg_dL": 3.1,
+    "urea_mmol_L": 22.4,
+    "egfr_mL_min": 21,
+    "baseline_creatinine_mg_dL": 1.1,
+    "bilirubin_mg_dL": 3.4,
+    "albumin_g_dL": 2.7,
+    "inr": 1.6,
+    "hemoglobin_g_dL": 10.8,
+    "platelets_x10_3": 96,
+    "glucose_mg_dL": 104,
+    "venous_pH": 7.29,
+    "haemolysed_sample": false
+  },
+  "imaging": "Bedside USS: coarse cirrhotic liver, splenomegaly, moderate ascites, normal-sized kidneys with no hydronephrosis (supports a functional/pre-renal AKI rather than obstruction).",
+  "microbiology": "Not applicable — non-infective metabolic emergency. Ascitic fluid PMN count sent to exclude SBP as a decompensation trigger; result <250 cells/mm3 (negative).",
+  "differentialDiagnoses": [
+    "Acute kidney injury (pre-renal / hepatorenal physiology) with secondary hyperkalaemia",
+    "Adrenal insufficiency / crisis (hyponatraemia + hyperkalaemia + hypotension)",
+    "Chronic kidney disease with acute-on-chronic potassium retention",
+    "Hepatic encephalopathy accounting for the altered sensorium"
+  ],
+  "finalDiagnosis": "Severe hyperkalaemia (serum K+ 7.2 mmol/L) with ECG changes, precipitated by spironolactone + ACE inhibitor + NSAID and AKI in decompensated cirrhosis — a medical emergency requiring immediate cardiac protection and potassium lowering.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Fluid and Electrolyte Disturbances (Potassium homeostasis and hyperkalaemia)",
+    "UK Kidney Association — Clinical Practice Guideline: Treatment of Acute Hyperkalaemia in Adults, 2023"
+  ],
+  "stewardship": "Non-infective emergency; no antimicrobials indicated. 'Stewardship' here is drug stewardship: immediately stop all potassium-raising agents (spironolactone, ramipril, ibuprofen) and avoid potassium-containing IV fluids and suxamethonium.",
+  "contraindications": [
+    "Avoid suxamethonium (can precipitate further potassium release and arrest)",
+    "Avoid potassium-containing IV fluids (e.g. Hartmann's) and salt substitutes",
+    "Continue potassium-sparing diuretic / ACE inhibitor / NSAID — all must be withheld",
+    "Use IV sodium bicarbonate cautiously given volume overload risk in cirrhosis with ascites"
+  ],
+  "edgeCases": [
+    "Pseudohyperkalaemia from haemolysed or delayed sample — confirm on a fresh, non-haemolysed specimen if ECG is normal (here ECG is abnormal, so treat immediately)",
+    "IV calcium stabilises the myocardium but does NOT lower potassium — insulin-dextrose and definitive removal are still required",
+    "Insulin-dextrose can cause delayed hypoglycaemia in cirrhosis/poor glycogen stores — monitor capillary glucose",
+    "Refractory hyperkalaemia with oliguric AKI in cirrhosis may need urgent renal replacement therapy"
+  ],
+  "expectedMaiK": "Recognise severe hyperkalaemia with ECG changes as an immediate arrest risk: give IV calcium gluconate for cardiac membrane stabilisation, then insulin-dextrose (+/- nebulised salbutamol) to shift potassium, and stop spironolactone/ramipril/NSAID while arranging definitive potassium removal.",
+  "expectedNextQuestions": [
+    "What are the current medications and doses, specifically potassium-sparing diuretics, ACE inhibitors/ARBs, NSAIDs and any potassium/salt substitutes?",
+    "What is the baseline renal function and urine output trend?",
+    "Any features of adrenal insufficiency (steroid use/withdrawal, hyperpigmentation, postural hypotension)?",
+    "Was the sample haemolysed or delayed, and does the ECG corroborate true hyperkalaemia?"
+  ],
+  "expectedInvestigations": [
+    "Immediate 12-lead ECG (peaked T waves, widened QRS, loss of P waves)",
+    "Urgent repeat serum potassium on a fresh non-haemolysed sample plus venous blood gas",
+    "Renal function (urea, creatinine, eGFR) with comparison to baseline",
+    "Serum sodium, bicarbonate, calcium, magnesium and glucose",
+    "9am cortisol / short Synacthen test if adrenal insufficiency suspected"
+  ],
+  "expectedConfidence": 0.92,
+  "findings": {
+    "liverDisease": true,
+    "ascites": true,
+    "alcoholExcess": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "palpitations": true,
+    "bradycardia": true,
+    "nauseaVomiting": true,
+    "jaundice": true,
+    "asterixis": true
+  },
+  "expected": {
+    "diagnosis": "hyperkalemia",
+    "acceptableIds": [
+      "hyperkalemia"
+    ],
+    "differentialIds": [
+      "aki",
+      "adrenal_crisis",
+      "ckd",
+      "hepatic_enceph"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Urgent repeat serum potassium + venous blood gas",
+      "Renal function vs baseline",
+      "Serum sodium, bicarbonate, calcium, glucose"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be hyperkalemia given serum K+ 7.2 mmol/L with ECG changes.",
+    "Management must include IV calcium salt for cardiac membrane stabilisation before or alongside potassium-shifting therapy.",
+    "Insulin-dextrose (+/- nebulised salbutamol) must be recommended to shift potassium intracellularly.",
+    "All potassium-raising drugs (spironolactone, ACE inhibitor, NSAID) must be stopped.",
+    "No antibiotics should be recommended (non-infective); stewardship tier is null.",
+    "Cirrhosis/hepatic encephalopathy must not be allowed to obscure the life-threatening hyperkalaemia."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "gc_421",
+  "specialty": "Genitourinary",
+  "condition": "Acute Pyelonephritis",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "High fever with rigors, right loin pain and increasing confusion over 2 days, now cold and clammy.",
+  "history": "Type 2 diabetic (HbA1c 9.1%) woman brought to the emergency department with 48 hours of high-grade fever, shaking chills, right-sided loin pain and dysuria with urinary frequency. Over the preceding 6 hours she became drowsy, passed very little urine and felt cold and sweaty. No prior urinary catheter and no recent hospitalisation, but she was treated 3 months ago for an E. coli urinary infection that grew an ESBL-producing organism, managed at that time with oral fosfomycin. No prior stone disease. Not pregnant (post-menopausal). No abdominal surgery, no jaundice, no cough or diarrhoea.",
+  "examination": "Toxic, drowsy but rousable, peripherally cool with mottled knees and prolonged capillary refill (4 s). Marked right costovertebral-angle tenderness; no renal-angle mass. Abdomen soft with no guarding, Murphy negative, no organomegaly. Chest clear, heart sounds normal with no murmur. No rash, no calf tenderness.",
+  "vitals": {
+    "hr": 124,
+    "bp": "80/46",
+    "rr": 28,
+    "temp": 39.6,
+    "spo2": 94
+  },
+  "labs": {
+    "wbc": "19.8 x10^9/L (90% neutrophils)",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.4 mg/dL (baseline 0.9)",
+    "urea": "18.2 mmol/L",
+    "platelets": "94 x10^3/uL",
+    "crp": "312 mg/L",
+    "procalcitonin": "38 ng/mL",
+    "bilirubin": "1.0 mg/dL",
+    "glucose": "348 mg/dL",
+    "urinalysis": "leucocyte esterase 3+, nitrites positive, >100 WBC/hpf, numerous bacteria"
+  },
+  "imaging": "Point-of-care and formal renal ultrasound: bulky, oedematous right kidney with loss of corticomedullary differentiation; no hydronephrosis, no calculus and no perinephric collection or abscess. No obstruction requiring drainage.",
+  "microbiology": "Two sets of blood cultures and a clean-catch urine culture sent before antibiotics. Urine Gram stain shows Gram-negative bacilli. At 36 h both blood cultures and urine grow Escherichia coli >10^5 CFU/mL; susceptibility confirms an ESBL producer (ceftriaxone and ciprofloxacin resistant) but susceptible to meropenem, ertapenem, amikacin and nitrofurantoin.",
+  "differentialDiagnoses": [
+    "Acute pyelonephritis with urosepsis / septic shock (obstruction excluded on imaging)",
+    "Complicated lower urinary tract infection",
+    "Ascending cholangitis (excluded - normal bilirubin, no RUQ pain, biliary tree normal)",
+    "Undifferentiated septic shock from another source"
+  ],
+  "finalDiagnosis": "Acute pyelonephritis (ESBL E. coli) complicated by septic shock with acute kidney injury and lactic acidosis",
+  "citations": [
+    "IDSA — Acute Uncomplicated Cystitis and Pyelonephritis in Women — 2011",
+    "Surviving Sepsis Campaign — Management of Sepsis and Septic Shock — 2021",
+    "IDSA — Guidance on Treatment of ESBL, AmpC and CRE Infections — 2024"
+  ],
+  "stewardship": "This is urosepsis with septic shock in a patient with a documented ESBL E. coli within 90 days, so empiric therapy must reliably cover ESBL organisms: give IV meropenem 1 g 8-hourly (dose-adjusted for AKI) within the first hour after cultures, alongside Surviving Sepsis resuscitation (30 mL/kg balanced crystalloid, source assessment, noradrenaline titrated to MAP >=65 mmHg). A carbapenem rather than piperacillin-tazobactam is preferred in shock given the ESBL history. Because ultrasound excludes obstruction, no urgent drainage is required. Once cultures confirm a meropenem-susceptible ESBL E. coli and the patient stabilises, de-escalate: for pyelonephritis, IV ertapenem 1 g daily is a carbapenem-sparing consolidation, and oral step-down to nitrofurantoin is NOT appropriate for pyelonephritis (inadequate renal-parenchymal levels) - so complete 10-14 days with a carbapenem or, if a susceptible oral agent emerges, an appropriate directed agent. Review daily and stop when the source is controlled.",
+  "contraindications": [
+    "Avoid empiric ceftriaxone or ciprofloxacin monotherapy given prior ESBL and resistance on susceptibilities",
+    "Nitrofurantoin and fosfomycin are inadequate for pyelonephritis and are contraindicated in significant AKI/renal parenchymal infection",
+    "Avoid nephrotoxic contrast/NSAIDs during AKI; dose-adjust renally cleared agents",
+    "Aminoglycosides need caution and level monitoring in AKI"
+  ],
+  "edgeCases": [
+    "If ultrasound had shown hydronephrosis or an obstructing stone, urgent urological decompression (stent/nephrostomy) would take priority over antibiotics alone",
+    "Failure to defervesce or clinical worsening at 48-72 h should prompt CT to exclude emphysematous pyelonephritis or perinephric/renal abscess",
+    "In a prior-CRE patient the empiric choice would escalate beyond meropenem (e.g. ceftazidime-avibactam)"
+  ],
+  "expectedMaiK": "Septic shock from acute pyelonephritis in a diabetic with prior ESBL E. coli - resuscitate per Surviving Sepsis and start empiric carbapenem cover within the hour, then de-escalate on culture.",
+  "expectedNextQuestions": [
+    "Any prior urinary tract infections, and were resistant (ESBL/MDR) organisms grown?",
+    "Any urinary catheter, stones, obstruction or recent urological procedure?",
+    "Antibiotic exposure or hospitalisation in the last 90 days?",
+    "Urine output over the last few hours and fluid intake?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures plus urine culture and sensitivity BEFORE antibiotics",
+    "Serum lactate, venous blood gas and repeat after resuscitation",
+    "Renal function, electrolytes, FBC, CRP/procalcitonin, coagulation and glucose",
+    "Renal tract ultrasound (urgent) to exclude obstruction/abscess; CT if not improving"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "flankPain": true,
+    "costovertebralTenderness": true,
+    "feverGU": true,
+    "dysuria": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "organDysfunction": true,
+    "esblHistory": true
+  },
+  "expected": {
+    "diagnosis": "PYELONEPHRITIS",
+    "acceptableIds": [
+      "PYELONEPHRITIS"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "SEPTIC_SHOCK",
+      "CHOLANGITIS",
+      "PROSTATITIS"
+    ],
+    "investigations": [
+      "Blood cultures x2 and urine culture with sensitivities before antibiotics",
+      "Serum lactate and venous blood gas",
+      "Renal function, FBC, CRP/procalcitonin, coagulation, glucose",
+      "Renal tract ultrasound to exclude obstruction/abscess"
+    ],
+    "stewardship": {
+      "tier": "reserve",
+      "antibiotics": [
+        "Meropenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine identifies PYELONEPHRITIS as the leading diagnosis",
+    "Recognises septic shock (hypotension + lactate + vasopressor) and triggers Surviving Sepsis resuscitation",
+    "Empiric antibiotic covers ESBL (carbapenem) given prior ESBL history rather than ceftriaxone/ciprofloxacin",
+    "Recommends renal tract imaging to exclude obstruction before assuming uncomplicated course",
+    "Advises culture-directed de-escalation and does not step down to nitrofurantoin/fosfomycin for pyelonephritis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

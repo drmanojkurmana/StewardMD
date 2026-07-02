@@ -1,0 +1,115 @@
+{
+  "id": "gc_451",
+  "specialty": "Neurology / Emergency",
+  "condition": "Spinal cord compression",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Progressive weakness of both legs and difficulty passing urine, 4 days after hemiarthroplasty for a fractured neck of femur.",
+  "history": "A 74-year-old man is on the orthopaedic ward, day 4 following right hip hemiarthroplasty. He has a background of metastatic castration-resistant prostate carcinoma (Gleason 9, on abiraterone plus prednisolone and a GnRH agonist), type 2 diabetes, hypertension and chronic constipation. His regular medications include modified-release oxycodone and oral morphine PRN for post-operative pain, gabapentin, amlodipine, metformin, atorvastatin, prophylactic enoxaparin and docusate. Over the preceding 5 days he described worsening thoracolumbar back pain, initially attributed to positioning during surgery, that is worse when lying flat and wakes him at night. In the last 48 hours he has developed progressively heavy, unsteady legs and today could not stand to transfer. Nursing staff noted he has not passed urine for 10 hours and has a distended bladder; a residual of 780 mL was drained on catheterisation. He also reports a tight band-like sensation around the lower chest and numbness of both feet. The post-operative team had ascribed his symptoms to opioid effect, deconditioning and constipation. He has had 6 kg of unintentional weight loss over 3 months.",
+  "examination": "Alert and orientated, not septic. Focal, non-radicular tenderness over the mid-thoracic spinous processes. Lower-limb tone is increased with bilateral pyramidal weakness (hip flexion 3/5, knee extension 3/5, ankle dorsiflexion 2/5), brisk knee and ankle reflexes, sustained ankle clonus and bilateral extensor plantar responses. There is a sensory level to pin-prick at approximately T8 with loss of light touch and proprioception distally. Palpable, non-tender bladder to the umbilicus pre-catheterisation; reduced anal tone with impaired perianal (saddle) sensation on rectal examination. Upper limbs and cranial nerves are normal.",
+  "vitals": {
+    "hr": 88,
+    "bp": "146/82",
+    "rr": 16,
+    "temp": 36.9,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "10.4 g/dL",
+    "wbc": "8.1 x10^9/L",
+    "platelets": "236 x10^3/uL",
+    "creatinine": "1.3 mg/dL",
+    "correctedCalcium": "2.68 mmol/L",
+    "alkalinePhosphatase": "412 U/L (raised)",
+    "PSA": "148 ng/mL",
+    "CRP": "22 mg/L",
+    "HbA1c": "7.8%"
+  },
+  "imaging": "Urgent whole-spine MRI: T6-T8 posterior vertebral body metastatic deposits with an epidural soft-tissue mass causing circumferential thecal sac compression and cord signal change (oedema) at T7; multiple additional sclerotic vertebral and pelvic metastases. No cauda equina level lesion; the level of neurological compromise is the thoracic cord. Plain radiographs had shown loss of a pedicle ('winking owl' sign) at T7.",
+  "microbiology": "Not applicable - no clinical or biochemical evidence of infection; blood cultures not indicated. Non-infective aetiology.",
+  "differentialDiagnoses": [
+    "Malignant (metastatic) spinal cord compression - confirmed",
+    "Guillain-Barre syndrome (post-operative ascending weakness)",
+    "Multiple sclerosis / transverse myelitis",
+    "Myeloma with vertebral involvement and cord compression",
+    "Opioid-related urinary retention and deconditioning (the initial incorrect attribution)"
+  ],
+  "finalDiagnosis": "Metastatic spinal cord compression at T7 secondary to prostate carcinoma",
+  "citations": [
+    "NICE — Spinal metastases and metastatic spinal cord compression — 2023",
+    "Harrison's Principles of Internal Medicine 22e — Neoplastic Spinal Cord Compression",
+    "ASCO / EAU — Bone metastases and spinal cord compression in advanced prostate cancer — 2021"
+  ],
+  "stewardship": "Not applicable - this is a non-infective neuro-oncological emergency. No antibiotics indicated. The stewardship-relevant issue is avoiding reflex empirical antibiotics for an afebrile patient whose deterioration is mechanical/neoplastic; the therapeutic emergency is high-dose corticosteroid (dexamethasone 16 mg loading then 8 mg BD with PPI and glucose monitoring), immediate spinal MRI of the whole spine, discussion with spinal surgery/oncology within 24 hours for decompressive surgery versus urgent radiotherapy, VTE and pressure-area care, and medication review of the confounding opioids/gabapentin.",
+  "contraindications": [
+    "Do not delay whole-spine MRI or steroids while attributing symptoms to opioids/constipation",
+    "Avoid lumbar puncture before imaging given epidural mass",
+    "Caution with high-dose dexamethasone worsening this diabetic patient's glycaemic control - monitor and adjust",
+    "Review therapeutic anticoagulation/enoxaparin timing if urgent surgical decompression is planned"
+  ],
+  "edgeCases": [
+    "Peri-operative opioids and gabapentin can mask the pain and blunt the weakness, delaying diagnosis",
+    "A thoracic sensory level with retention can be mislabelled as post-operative urinary retention",
+    "Corticosteroid-induced hyperglycaemia may dominate the picture in a diabetic patient",
+    "Mild hypercalcaemia and anaemia of malignancy can co-exist and confound"
+  ],
+  "expectedMaiK": "Progressive bilateral leg weakness with UMN signs, a T8 sensory level, back pain worse when supine, and painless urinary retention in a man with metastatic prostate cancer = malignant spinal cord compression requiring emergency whole-spine MRI and dexamethasone.",
+  "expectedNextQuestions": [
+    "Is the back pain worse lying flat or at night, and is it band-like/radicular?",
+    "When did bladder or bowel function change, and is there saddle numbness?",
+    "What is the known cancer history and current oncological treatment?",
+    "How rapidly has the leg weakness progressed and is it ascending or a sensory level?"
+  ],
+  "expectedInvestigations": [
+    "Urgent MRI of the whole spine with contrast",
+    "Post-void bladder scan / catheterisation for residual volume",
+    "Serum corrected calcium, renal function and full blood count",
+    "PSA, alkaline phosphatase and staging review",
+    "Neurosurgical/oncology referral for decompression vs radiotherapy"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "backPain": true,
+    "focalNeuroDeficit": true,
+    "urinaryRetention": true,
+    "malignancy": true,
+    "ageOver50": true,
+    "weightLoss": true,
+    "subacuteOnset": true,
+    "steroidUse": true
+  },
+  "expected": {
+    "diagnosis": "cord_compression",
+    "acceptableIds": [
+      "cord_compression"
+    ],
+    "differentialIds": [
+      "gbs",
+      "ms",
+      "myeloma",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Urgent whole-spine MRI with contrast",
+      "Bladder scan / post-void residual",
+      "Corrected calcium, U&E, FBC",
+      "PSA and alkaline phosphatase",
+      "Neurosurgery/clinical oncology referral"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank cord_compression as the top diagnosis",
+    "Must recommend emergency whole-spine MRI",
+    "Must recommend high-dose corticosteroid (dexamethasone) as time-critical management",
+    "Must NOT recommend empirical antibiotics in this afebrile, non-infective presentation",
+    "Must flag urinary retention with a sensory level as a red-flag neurological emergency"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

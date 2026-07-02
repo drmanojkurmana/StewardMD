@@ -1,0 +1,127 @@
+{
+  "id": "gc_412",
+  "specialty": "Respiratory",
+  "condition": "Lung Abscess",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Two weeks of cough with copious foul-smelling sputum, fever and right-sided chest pain, now acutely unwell with drowsiness and low blood pressure.",
+  "history": "Alcohol-dependent labourer with poor dentition and known gastro-oesophageal reflux, admitted 12 days after an unwitnessed collapse during a drinking binge. Initially had a low-grade fever and productive cough that his family attributed to a 'chest infection'; over the past 2 weeks the sputum became copious, purulent and putrid-smelling, with drenching night sweats and ~4 kg weight loss. In the last 24 hours he has become confused, cold and clammy, with reduced urine output. No prior TB, no known immunosuppression, no recent hospitalisation or antibiotics. Heavy smoker (30 pack-years).",
+  "examination": "Toxic, drowsy (GCS 13) and peripherally shut down with cool mottled extremities and prolonged capillary refill. Halitosis with grossly carious teeth and poor oral hygiene. Reduced expansion, dull percussion note and bronchial breathing with coarse crepitations over the right mid/lower zone; no stony dullness. No neck stiffness. Abdomen soft, no organomegaly.",
+  "vitals": {
+    "hr": 128,
+    "bp": "82/48",
+    "rr": 30,
+    "temp": 39.4,
+    "spo2": 89
+  },
+  "labs": {
+    "wbc": "22.4 x10^9/L (neutrophilia with left shift)",
+    "hemoglobin": "10.8 g/dL",
+    "platelets": "96 x10^3/µL",
+    "creatinine": "2.3 mg/dL (baseline normal)",
+    "urea": "16.5 mmol/L",
+    "bilirubin": "1.9 mg/dL",
+    "lactate": "4.6 mmol/L",
+    "crp": "312 mg/L",
+    "procalcitonin": "18 ng/mL",
+    "albumin": "2.4 g/dL",
+    "inr": "1.5"
+  },
+  "imaging": "Chest radiograph: thick-walled cavity with an air-fluid level in the right lower lobe (superior segment distribution) with surrounding consolidation. Contrast CT thorax confirms a 6 cm cavitating abscess with an air-fluid level, enhancing wall and adjacent necrotising consolidation; no empyema or endobronchial mass, patent bronchi.",
+  "microbiology": "Two sets of blood cultures drawn before antibiotics. Sputum Gram stain: mixed flora with abundant neutrophils. Day-3 blood cultures and CT-guided aspirate grew a polymicrobial anaerobic-predominant flora — Fusobacterium nucleatum, Prevotella spp. and Streptococcus anginosus (milleri) group — susceptible to ampicillin-sulbactam; no MRSA, Pseudomonas or Gram-negative bacilli isolated. AFB smear negative x3, GeneXpert MTB/RIF not detected.",
+  "differentialDiagnoses": [
+    "Lung abscess (primary, aspiration-related) — target",
+    "Aspiration pneumonia with necrotising consolidation",
+    "Severe community-acquired (necrotising) pneumonia",
+    "Cavitary pulmonary tuberculosis",
+    "Cavitating bronchogenic carcinoma with post-obstructive sepsis"
+  ],
+  "finalDiagnosis": "Aspiration-related lung abscess complicated by septic shock and acute organ dysfunction (AKI, thrombocytopenia, encephalopathy), polymicrobial anaerobic-predominant.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Lung Abscess",
+    "IDSA/ATS — Community-Acquired Pneumonia (empiric therapy of severe/aspiration disease) — 2019",
+    "Surviving Sepsis Campaign — Sepsis and Septic Shock — 2021"
+  ],
+  "stewardship": "Septic shock from a suppurative pulmonary source: give the Surviving Sepsis 1-hour bundle (blood cultures before antibiotics, broad-spectrum IV antibiotics, 30 mL/kg balanced crystalloid, lactate, norepinephrine to keep MAP >=65). Empiric cover must include anaerobes and oral streptococci: piperacillin-tazobactam IV is appropriate for a shocked patient and covers the anaerobic/streptococcal flora (a carbapenem is the alternative if ESBL risk). Avoid metronidazole monotherapy — it misses microaerophilic streptococci and has ~50% failure in lung abscess. Once cultures returned anaerobes + S. anginosus susceptible to ampicillin-sulbactam and haemodynamics normalised, de-escalate to IV ampicillin-sulbactam, then step down to oral amoxicillin-clavulanate to complete a prolonged course (typically 3-6 weeks, guided by radiographic resolution). Source control: most abscesses drain via the airway with antibiotics and physiotherapy; percutaneous/bronchoscopic drainage reserved for large (>6-8 cm) or non-resolving cavities.",
+  "contraindications": [
+    "Penicillin anaphylaxis — substitute a respiratory fluoroquinolone (e.g., moxifloxacin) or clindamycin-based regimen for anaerobic/streptococcal cover",
+    "Renal dose-adjustment of piperacillin-tazobactam given AKI (creatinine 2.3 mg/dL)",
+    "Avoid metronidazole monotherapy (fails to cover microaerophilic streptococci)",
+    "Aminoglycoside caution given acute kidney injury"
+  ],
+  "edgeCases": [
+    "If AFB/GeneXpert positive or non-resolving cavity, reclassify as cavitary TB and start ATT",
+    "Persistent cavity with obstruction on CT mandates bronchoscopy to exclude cavitating malignancy or foreign body",
+    "Development of empyema/pyopneumothorax requires intercostal drainage as source control",
+    "MRSA or Pseudomonas on culture would require escalation rather than the anaerobic de-escalation path"
+  ],
+  "expectedMaiK": "A subacute foul-smelling productive cough with a thick-walled cavity and air-fluid level in a dependent lung segment of an alcohol-dependent patient with poor dentition and aspiration risk is a lung abscess; the priority is recognising superimposed septic shock, delivering the sepsis bundle with anaerobe-inclusive empiric antibiotics, then de-escalating on culture data to a prolonged beta-lactam/beta-lactamase-inhibitor course.",
+  "expectedNextQuestions": [
+    "Any witnessed aspiration, seizures, dysphagia or reduced consciousness at collapse?",
+    "State of dentition and periodontal disease?",
+    "Alcohol and smoking history and immune status (HIV, diabetes, steroids)?",
+    "TB contact, weight loss, night sweats and prior chest imaging?",
+    "Urine output, mentation and peripheral perfusion trend over the last 24h?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures before antibiotics",
+    "Contrast CT thorax to characterise the cavity and exclude obstruction/empyema",
+    "Sputum Gram stain and culture; AFB smear x3 and GeneXpert MTB/RIF",
+    "Serial venous lactate and arterial blood gas",
+    "FBC, renal and liver profile, coagulation, CRP/procalcitonin",
+    "CT-guided or bronchoscopic aspirate for microbiology if not resolving"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "hypoxia": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "organDysfunction": true,
+    "toxicAppearing": true,
+    "purulentSputum": true,
+    "foulSmellingSputum": true,
+    "cavitatingLesion": true,
+    "aspirationRiskFactor": true
+  },
+  "expected": {
+    "diagnosis": "LUNG_ABSCESS",
+    "acceptableIds": [
+      "LUNG_ABSCESS"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "SEVERE_CAP",
+      "PULMONARY_TB",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "Contrast CT thorax",
+      "Sputum Gram stain/culture and AFB/GeneXpert",
+      "Serial lactate and ABG"
+    ],
+    "stewardship": {
+      "tier": "reserve",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Ampicillin-sulbactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return LUNG_ABSCESS as top diagnosis given cavitating lesion + foul-smelling sputum + aspiration risk",
+    "Must flag septic shock (hypotension + elevated lactate + vasopressor requirement) and trigger the sepsis bundle",
+    "Empiric antibiotic recommendation must cover anaerobes and oral streptococci (piperacillin-tazobactam), not metronidazole monotherapy",
+    "Must recommend culture-directed de-escalation to ampicillin-sulbactam / amoxicillin-clavulanate for a prolonged course",
+    "Must recommend excluding TB (AFB/GeneXpert) and malignancy before committing to the abscess pathway"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

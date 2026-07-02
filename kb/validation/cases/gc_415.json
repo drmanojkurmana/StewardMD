@@ -1,0 +1,129 @@
+{
+  "id": "gc_415",
+  "specialty": "Tropical Fever",
+  "condition": "Mixed Malaria (P. falciparum + P. vivax)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever with rigors for 5 days, now drowsy with reduced urine output and cold peripheries.",
+  "history": "Migrant construction worker who returned 12 days ago from a 3-month posting in a forested district of Chhattisgarh (high-transmission zone). Five days of paroxysmal fever with shaking chills and drenching sweats, initially alternate-day then daily, with severe myalgia and headache. Over the past 24 hours he became progressively confused, passed only a small volume of dark 'tea-coloured' urine, and developed breathlessness. No cough, dysuria, diarrhoea, or rash. Took no chemoprophylaxis. No prior antibiotics or hospitalisation. No comorbidities; not immunocompromised.",
+  "examination": "Ill, drowsy and toxic-looking (GCS 13, E3V4M6). Deeply icteric. Peripheries cold and mottled with capillary refill 4 s. Mild pallor. Tender splenomegaly 3 cm below costal margin and smooth hepatomegaly. Chest with bibasal crepitations; no focal consolidation. No neck stiffness, no rash, no eschar. Passing scanty dark urine via catheter.",
+  "vitals": {
+    "hr": 128,
+    "bp": "80/48",
+    "rr": 30,
+    "temp": 39.7,
+    "spo2": 91
+  },
+  "labs": {
+    "hemoglobin": 8.4,
+    "platelets": 38,
+    "wbc": 11.2,
+    "creatinine": 3.1,
+    "urea": 22.4,
+    "bilirubin": 7.8,
+    "directBilirubin": 4.9,
+    "ast": 96,
+    "alt": 78,
+    "lactate": 4.6,
+    "glucose": 62,
+    "inr": 1.4,
+    "arterialpH": 7.29,
+    "bicarbonate": 15,
+    "parasiteIndex": "P. falciparum ring-form parasitaemia 6.2% + P. vivax trophozoites/gametocytes co-present"
+  },
+  "imaging": "Chest radiograph: bilateral lower-zone interstitial opacities consistent with early ARDS/pulmonary oedema; no lobar consolidation. USG abdomen: hepatosplenomegaly, no biliary obstruction, no abscess.",
+  "microbiology": "Thick and thin peripheral smear (Giemsa): P. falciparum asexual ring forms with high parasitaemia PLUS P. vivax trophozoites and gametocytes — mixed infection confirmed. Rapid diagnostic test positive for both HRP-2 (falciparum) and pan-Plasmodium/vivax LDH. Two sets of blood cultures drawn before antibiotics: no growth at 48 h. Urine culture negative. Dengue NS1/IgM negative; leptospira IgM negative; scrub typhus IgM negative.",
+  "differentialDiagnoses": [
+    "Severe mixed-species malaria with septic shock and multi-organ dysfunction (target)",
+    "Bacterial sepsis / Gram-negative bacteraemia (co-infection must be excluded and empirically covered)",
+    "Dengue with shock syndrome",
+    "Leptospirosis (Weil disease)",
+    "Scrub typhus with organ dysfunction"
+  ],
+  "finalDiagnosis": "Severe mixed malaria (P. falciparum + P. vivax) complicated by septic shock, acute kidney injury, hyperbilirubinaemia, metabolic acidosis with hyperlactataemia, thrombocytopenia and hypoglycaemia.",
+  "citations": [
+    "WHO Guidelines for Malaria — Severe Malaria Management 2023",
+    "NVBDCP/NCVBDC India National Drug Policy on Malaria 2013 (rev.)",
+    "Harrison's Principles of Internal Medicine, 22e — Malaria"
+  ],
+  "stewardship": "This is severe malaria: definitive therapy is IV artesunate 2.4 mg/kg at 0, 12 and 24 h then daily, transitioning to a full oral ACT (artemether-lumefantrine) once tolerating orally, plus a 14-day radical-cure course of primaquine after G6PD testing to clear the P. vivax hypnozoites. Because severe malaria with shock is clinically indistinguishable from, and frequently co-exists with, invasive bacterial infection (esp. non-typhoidal Salmonella / Gram-negative bacteraemia), WHO advises empiric broad-spectrum antibacterial cover after taking blood cultures — IV ceftriaxone 2 g daily here. Stewardship endpoint: with two negative blood cultures at 48 h, no localising bacterial source, and clear clinical + parasitological response to artesunate, de-escalate by STOPPING ceftriaxone at 48 h and continuing antimalarial therapy alone. Antimalarials are not de-escalated.",
+  "contraindications": [
+    "Avoid primaquine until G6PD status known (haemolysis risk) and defer in pregnancy",
+    "Do not use oral-only ACT as sole initial therapy in severe malaria — parenteral artesunate is mandatory",
+    "Avoid nephrotoxic and QT-prolonging agents; monitor for delayed post-artesunate haemolysis",
+    "Renal-dose all cleared drugs given AKI (creatinine 3.1)"
+  ],
+  "edgeCases": [
+    "Mixed infection: falciparum drives the severe/shock phenotype while vivax mandates hypnozoite eradication — treating only falciparum leads to later relapse",
+    "Persisting shock/lactate despite adequate antimalarials should trigger active search for occult bacterial co-infection rather than reflex antibiotic continuation",
+    "Hypoglycaemia may be both a malaria complication and an artesunate/quinine effect — recheck glucose frequently"
+  ],
+  "expectedMaiK": "Severe malaria (WHO criteria: impaired consciousness, shock, AKI, jaundice, hyperlactataemia, hyperparasitaemia) on a positive mixed-species smear from an endemic-area returnee mandates immediate IV artesunate; empiric antibiotics cover concurrent bacterial sepsis and are de-escalated once cultures are negative.",
+  "expectedNextQuestions": [
+    "G6PD status before primaquine radical cure?",
+    "Exact parasitaemia percentage and trend on serial smears?",
+    "Urine output trend and need for renal replacement therapy?",
+    "Any chemoprophylaxis or prior antimalarial use to gauge resistance risk?"
+  ],
+  "expectedInvestigations": [
+    "Giemsa thick/thin smear with parasite count + species speciation (serial)",
+    "Malaria RDT (HRP-2 and pan-LDH/vivax)",
+    "Two sets of blood cultures before antibiotics",
+    "Arterial blood gas with lactate",
+    "Renal function, LFTs, glucose, FBC/platelets, coagulation",
+    "G6PD assay prior to primaquine"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "hypotension": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "alteredSensorium": true,
+    "thrombocytopenia": true,
+    "jaundice": true,
+    "renalImpairment": true,
+    "travelEndemicArea": true,
+    "mixedMalariaConfirmed": true
+  },
+  "expected": {
+    "diagnosis": "MIXED_MALARIA",
+    "acceptableIds": [
+      "MIXED_MALARIA"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "SCRUB_TYPHUS"
+    ],
+    "investigations": [
+      "Giemsa thick/thin smear with species-specific parasite count",
+      "Malaria RDT (HRP-2 + pan/vivax LDH)",
+      "Blood cultures x2 before antibiotics",
+      "ABG with lactate",
+      "Renal and liver function, glucose, platelets, coagulation",
+      "G6PD assay before primaquine"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum empiric (WHO AWaRe: Watch) pending culture-directed de-escalation",
+      "antibiotics": [
+        "IV artesunate (antimalarial, definitive)",
+        "Ceftriaxone (empiric antibacterial for possible co-infection, stop at 48h if cultures negative)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return MIXED_MALARIA as the primary diagnosis given a confirmed mixed P. falciparum + P. vivax smear.",
+    "IV artesunate must be recommended as definitive therapy for this severe malaria presentation.",
+    "Empiric ceftriaxone must be de-escalated/stopped at 48h given negative blood cultures and no bacterial source.",
+    "Primaquine radical cure must be flagged as G6PD-dependent for vivax hypnozoite clearance.",
+    "Malaria smear findings must NOT be overridden by a purely bacterial-sepsis diagnosis."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

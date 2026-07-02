@@ -1,0 +1,111 @@
+{
+  "id": "gc_388",
+  "specialty": "Genitourinary",
+  "condition": "Catheter-Associated Urinary Tract Infection",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Brought from home with 1 day of rigors, drowsiness and a rising, foul, turbid output in his long-term urinary catheter bag.",
+  "history": "Chronic indwelling urethral catheter for 14 months following management of neurogenic bladder and prior acute urinary retention; catheter last changed 6 weeks ago and never flushed since. Over the preceding 18 hours he developed shaking chills, reduced urine output, and progressive confusion noted by his daughter. No cough, no abdominal pain, no diarrhoea. Type 2 diabetes and hypertension. No known drug allergy. No antibiotics or hospital admission in the last 90 days and no prior resistant-organism isolates. On admission he was hypotensive and lactate-elevated; despite a 30 mL/kg balanced crystalloid bolus his mean arterial pressure remained below 65 mmHg, so a noradrenaline infusion was commenced. Blood and catheter-specimen cultures were drawn and the chronic catheter was removed and replaced with a fresh catheter before empiric antibiotics. Empiric intravenous piperacillin-tazobactam was started within the first hour given septic shock from a presumed urinary source; at 48 hours cultures grew a pan-susceptible Escherichia coli and therapy was de-escalated to intravenous ceftriaxone, with a planned 7-day total course from the day of source control and clinical response.",
+  "examination": "Toxic, drowsy but rousable (GCS 13). Warm peripheries early then mottled knees. Chest clear. Abdomen soft, mild suprapubic fullness, no peritonism, no flank mass. New catheter draining turbid urine. No skin rash or eschar. No focal neurology.",
+  "vitals": {
+    "hr": 122,
+    "bp": "82/48",
+    "rr": 26,
+    "temp": 39.1,
+    "spo2": 94
+  },
+  "labs": {
+    "wbc": "17.8 x10^9/L (neutrophilia)",
+    "lactate": "3.9 mmol/L",
+    "creatinine": "2.3 mg/dL (baseline 1.0)",
+    "urea": "16.4 mmol/L",
+    "platelets": "112 x10^3/uL",
+    "crp": "248 mg/L",
+    "procalcitonin": "9.4 ng/mL",
+    "urinalysis": "pyuria with >100 WBC/hpf, nitrite positive, bacteria +++"
+  },
+  "imaging": "Bedside renal/bladder ultrasound: no hydronephrosis, no renal or perinephric collection, no obstructing stone; post-change catheter correctly sited. CT not required.",
+  "microbiology": "Two sets of blood cultures and a fresh catheter-specimen urine culture (drawn after catheter replacement). At 48h: E. coli >10^5 CFU/mL in urine and E. coli in one blood-culture set; isolate pan-susceptible (susceptible to ampicillin, cephalosporins, ciprofloxacin, gentamicin; ESBL-negative). Confirms urinary source with secondary bacteraemia and permits de-escalation.",
+  "differentialDiagnoses": [
+    "Complicated UTI / obstructive uropathy with urosepsis",
+    "Acute pyelonephritis",
+    "Acute bacterial prostatitis",
+    "Undifferentiated septic shock from a non-urinary source"
+  ],
+  "finalDiagnosis": "Catheter-associated urinary tract infection (CA-UTI) with secondary Gram-negative bacteraemia and septic shock",
+  "citations": [
+    "IDSA Catheter-Associated UTI Diagnosis, Prevention and Treatment Guideline 2010",
+    "Surviving Sepsis Campaign Sepsis and Septic Shock 2021",
+    "Harrison's Principles of Internal Medicine 22e — Urinary Tract Infections and Sepsis"
+  ],
+  "stewardship": "Septic shock from a presumed urinary source in a patient with a chronic indwelling catheter mandates cultures then empiric broad-spectrum Gram-negative cover within the first hour (Surviving Sepsis). Piperacillin-tazobactam is a guideline-concordant empiric choice for severe CA-UTI/urosepsis, covering Enterobacterales and Pseudomonas pending susceptibilities. Source control is integral: the biofilm-laden chronic catheter must be removed or exchanged before/at antibiotic initiation. Once the pan-susceptible E. coli returned at 48h, therapy was de-escalated to ceftriaxone (narrower, once-daily, retains full activity), completing a 7-day course given prompt source control and clinical improvement. Catheter cultures should only be sent when infection is clinically suspected, and asymptomatic bacteriuria in catheterised patients must not be treated.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycoside monotherapy given AKI unless required for resistance",
+    "Do not treat asymptomatic catheter bacteriuria",
+    "Renal dose-adjust and reassess with resolving AKI"
+  ],
+  "edgeCases": [
+    "If no clinical response by 48-72h or a collection is seen, image for obstruction/abscess requiring drainage",
+    "Prior ESBL/CRE colonisation or recent broad-spectrum exposure would justify empiric carbapenem instead of piperacillin-tazobactam",
+    "Persistent bacteraemia should prompt evaluation for endocarditis or an undrained focus"
+  ],
+  "expectedMaiK": "Chronic indwelling catheter + systemic sepsis with a urinary source = CA-UTI with urosepsis: draw cultures, replace/remove the catheter for source control, give empiric broad-spectrum Gram-negative cover, resuscitate for shock, then de-escalate on susceptibilities.",
+  "expectedNextQuestions": [
+    "When was the catheter last changed and has it been flushed or blocked?",
+    "Any prior resistant urinary isolates or recent antibiotic/hospital exposure?",
+    "Any flank pain, prior stones, or known obstruction suggesting an undrained focus?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures plus fresh catheter-specimen urine culture after catheter exchange",
+    "Serum lactate, renal function and full blood count",
+    "Renal/bladder ultrasound to exclude obstruction or collection"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "organDysfunction": true,
+    "toxicAppearing": true,
+    "indwellingCatheter": true,
+    "longTermCatheter": true,
+    "feverGU": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "CA_UTI",
+    "acceptableIds": [
+      "CA_UTI"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS",
+      "PROSTATITIS",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Blood cultures x2 and post-exchange catheter-specimen urine culture",
+      "Serum lactate and renal function",
+      "Renal/bladder ultrasound to exclude obstruction"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine should rank CA_UTI top given chronic indwelling catheter plus urinary-source septic shock",
+    "Source control (catheter removal/exchange) must be flagged alongside antibiotics",
+    "Empiric therapy is broad-spectrum Gram-negative cover with de-escalation to ceftriaxone once pan-susceptible E. coli is identified",
+    "Asymptomatic catheter bacteriuria must not trigger antibiotic treatment"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

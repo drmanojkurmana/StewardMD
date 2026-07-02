@@ -1,0 +1,114 @@
+{
+  "id": "gc_457",
+  "specialty": "Vascular",
+  "condition": "Deep vein thrombosis",
+  "age": 67,
+  "sex": "M",
+  "presentingComplaint": "Painful, progressively swelling left leg for 3 days",
+  "history": "A 67-year-old man with type 2 diabetes mellitus (18 years, on insulin) and stage 4 chronic kidney disease (baseline creatinine ~2.3 mg/dL, not yet on dialysis) presents with a 3-day history of increasing swelling, aching pain and tightness of the LEFT leg. He notes the left calf is now noticeably larger and warmer than the right and hurts when he walks or dorsiflexes the foot. He returned 10 days ago from a 9-hour flight and has been relatively immobile since a recent minor foot ulcer dressing. He has longstanding mild bilateral ankle puffiness which he attributes to his kidneys and diabetes, but insists the left leg change is new, one-sided and painful. He denies chest pain, syncope or new breathlessness at rest. No fever, no spreading redness with a defined border, no break in the skin over the swollen area. Medications: insulin, amlodipine, ramipril, atorvastatin, aspirin. No prior VTE; family history of 'clots' in a sibling.",
+  "examination": "Comfortable at rest, not toxic. Left lower limb diffusely swollen from mid-thigh to ankle; calf circumference 4 cm greater than right measured 10 cm below tibial tuberosity. Left calf warm and tender along the deep venous line, with mild pitting oedema and dilated superficial veins; no sharply demarcated erythematous border, no fluctuance, no ulcer at the swollen site (chronic healing ulcer present on contralateral forefoot). Homans sign present but non-specific. Chronic mild bilateral pedal oedema consistent with CKD/diabetes noted for comparison. Chest clear, no raised JVP, heart sounds normal. Abdomen soft.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/86",
+    "rr": 18,
+    "temp": 37,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "11.8 g/dL",
+    "wbc": "8.9 x10^9/L (no left shift)",
+    "platelets": "236 x10^3/uL",
+    "creatinine": "2.4 mg/dL (baseline 2.3)",
+    "eGFR": "26 mL/min/1.73m2 (CKD stage 4)",
+    "urea": "14.2 mmol/L",
+    "potassium": "4.8 mmol/L",
+    "hba1c": "8.6%",
+    "randomGlucose": "212 mg/dL",
+    "crp": "18 mg/L (mildly raised)",
+    "dDimer": "3.9 mg/L FEU (markedly elevated; note reduced specificity in CKD/age)",
+    "inr": "1.0"
+  },
+  "imaging": "Whole-leg compression venous duplex ultrasound of the left lower limb: non-compressible, echogenic thrombus within the left popliteal and superficial femoral veins with absent Doppler flow and loss of respiratory phasicity, extending proximally to the common femoral vein. Contralateral limb veins fully compressible. No sonographic features of Baker cyst rupture or cellulitic phlegmon.",
+  "microbiology": "Not indicated; no clinical evidence of infection. Blood cultures not sent.",
+  "differentialDiagnoses": [
+    "Proximal deep vein thrombosis (left femoropopliteal) — confirmed",
+    "Cellulitis of the leg (no demarcated border, no fever/toxicity, no portal of entry at site)",
+    "Decompensated fluid overload / dependent oedema from CKD + diabetes (but that is bilateral and painless)",
+    "Pulmonary embolism as a complication (currently no cardiorespiratory compromise; requires vigilance)"
+  ],
+  "finalDiagnosis": "Acute proximal deep vein thrombosis of the left lower limb (femoropopliteal), provoked by long-haul travel and immobility, in a patient whose baseline CKD- and diabetes-related bilateral oedema confounds the picture; unilateral, painful, asymmetric swelling with a positive whole-leg compression ultrasound is diagnostic.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Venous Thrombosis / Deep Vein Thrombosis and Pulmonary Thromboembolism",
+    "American Society of Hematology (ASH) — Management of Venous Thromboembolism — 2020"
+  ],
+  "stewardship": "Not applicable — deep vein thrombosis is a non-infective vascular diagnosis. No antimicrobial therapy is indicated. Management is anticoagulation, not antibiotics; cellulitis was actively excluded so empiric antibiotics would be inappropriate and represent antibiotic misuse.",
+  "contraindications": [
+    "Renal dosing critical: eGFR 26 mL/min/1.73m2 — avoid standard-dose direct oral anticoagulants where clearance is renally dependent; dabigatran contraindicated at this eGFR; if a DOAC is used, choose a renally-appropriate agent/dose or use LMWH with anti-Xa monitoring / dose reduction, or a VKA.",
+    "Avoid full therapeutic LMWH at fixed weight-based dose without accounting for CKD accumulation and bleeding risk.",
+    "Ongoing aspirin plus anticoagulation increases bleeding risk — review need for concurrent antiplatelet.",
+    "Assess bleeding risk before anticoagulation; no active bleeding here."
+  ],
+  "edgeCases": [
+    "Bilateral chronic oedema from CKD/diabetes can mask or mimic DVT — asymmetry, pain and warmth on one side are the discriminators.",
+    "D-dimer has poor specificity in the elderly and in CKD; a raised value here is non-diagnostic and imaging is required.",
+    "If breathlessness, hypoxia or syncope develop, escalate to evaluate for pulmonary embolism.",
+    "Phlegmasia cerulea dolens (massive proximal DVT with limb ischaemia) is the limb-threatening extreme to watch for."
+  ],
+  "expectedMaiK": "dvt",
+  "expectedNextQuestions": [
+    "Is the leg swelling unilateral/asymmetric and painful, or symmetric and painless?",
+    "Any recent immobility, surgery, long-haul travel, malignancy or prior VTE / family history of thrombosis?",
+    "Any chest pain, breathlessness or syncope suggesting pulmonary embolism?",
+    "What is the current renal function and bleeding risk to guide anticoagulant choice and dosing?"
+  ],
+  "expectedInvestigations": [
+    "Whole-leg compression venous duplex ultrasound of the affected limb",
+    "Wells score for DVT to structure pretest probability",
+    "Renal function (creatinine/eGFR) and full blood count to guide anticoagulant selection and dosing",
+    "D-dimer (interpreted with caution given age and CKD)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "skinWarmth": true,
+    "legSwellingBilateral": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "renalImpairment": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "dvt",
+    "acceptableIds": [
+      "dvt"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "pe",
+      "heart_failure",
+      "ckd"
+    ],
+    "investigations": [
+      "Compression venous duplex ultrasound (affected leg)",
+      "Wells DVT score",
+      "Renal function / FBC to guide anticoagulation",
+      "D-dimer (context-adjusted)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return dvt as the top diagnosis given unilateral painful asymmetric leg swelling with positive compression ultrasound.",
+    "Engine must NOT recommend antibiotics — cellulitis was excluded and DVT is non-infective.",
+    "Engine must flag renal impairment (eGFR ~26) as a driver of anticoagulant choice/dosing.",
+    "Coexisting bilateral CKD/diabetic oedema must not override the unilateral DVT signal.",
+    "stewardship.tier must be null and antibiotics empty."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

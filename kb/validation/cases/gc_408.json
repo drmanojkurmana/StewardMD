@@ -1,0 +1,119 @@
+{
+  "id": "gc_408",
+  "specialty": "Respiratory",
+  "condition": "Hospital Acquired Pneumonia",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "New fever, purulent sputum and worsening breathlessness on day 6 of a chemotherapy admission for acute myeloid leukaemia.",
+  "history": "Admitted 6 days ago for induction chemotherapy (cytarabine + daunorubicin) for newly diagnosed AML. Profoundly neutropenic since day 4. Over the past 24 hours he has developed new fever to 39°C, increasingly purulent sputum and rising oxygen requirement, now needing 4 L/min nasal cannula having been on room air. He received a 3-day course of empirical piperacillin-tazobactam for a line-related fever two weeks earlier during a prior admission. No mechanical ventilation. No overt aspiration event witnessed. Not on chronic steroids beyond antiemetic dexamethasone. Non-smoker.",
+  "examination": "Toxic-looking, in mild respiratory distress. Coarse crepitations and bronchial breathing over the right lower zone with reduced air entry at the right base. No oral thrush. Central line site clean and non-tender. No calf tenderness or unilateral leg swelling. Chest wall non-tender.",
+  "vitals": {
+    "hr": 114,
+    "bp": "102/62",
+    "rr": 28,
+    "temp": 38.9,
+    "spo2": 89
+  },
+  "labs": {
+    "WBC_x10e3_uL": 0.6,
+    "ANC_cells_uL": 180,
+    "hemoglobin_g_dL": 8.4,
+    "platelets_x10e3_uL": 42,
+    "creatinine_mg_dL": 1,
+    "CRP_mg_L": 214,
+    "procalcitonin_ng_mL": 3.8,
+    "lactate_mmol_L": 1.9
+  },
+  "imaging": "Portable CXR: new right lower and middle zone air-space consolidation not present on the admission film 6 days earlier; no cavitation, no effusion. Consistent with new nosocomial pneumonia arising >48h after admission.",
+  "microbiology": "Two sets of peripheral and line blood cultures sent. Sputum Gram stain: numerous polymorphs (relatively few given neutropenia) with Gram-negative bacilli. Sputum and endotracheal-aspirate-equivalent deep respiratory sample sent for culture and sensitivities. Respiratory viral PCR and galactomannan sent to exclude alternative opportunistic pathogens. Culture at 48h: Pseudomonas aeruginosa, susceptible to piperacillin-tazobactam, cefepime, meropenem, ciprofloxacin and amikacin; MRSA screen negative; galactomannan negative — enabling de-escalation from broad empiric cover to a single anti-pseudomonal agent.",
+  "differentialDiagnoses": [
+    "Hospital-acquired (nosocomial) pneumonia — new consolidation >48h after admission in a neutropenic host",
+    "Aspiration pneumonia",
+    "Invasive pulmonary aspergillosis / opportunistic fungal pneumonia (neutropenic host)",
+    "Early lung abscess",
+    "Undifferentiated febrile neutropenia without a focus"
+  ],
+  "finalDiagnosis": "Hospital-acquired pneumonia (right lower/middle lobe) due to Pseudomonas aeruginosa in a neutropenic AML patient",
+  "citations": [
+    "IDSA/ATS Management of Hospital-acquired and Ventilator-associated Pneumonia 2016",
+    "Harrison's Principles of Internal Medicine 22e — Pneumonia (Hospital-Acquired and Ventilator-Associated)"
+  ],
+  "stewardship": "Onset >48h after admission with new consolidation defines HAP. In a neutropenic host with a recent antibiotic course (MDR risk factor), start broad guideline-concordant empiric cover: an anti-pseudomonal beta-lactam (piperacillin-tazobactam or cefepime) plus a second anti-pseudomonal agent (amikacin) for double Gram-negative cover, plus vancomycin for MRSA given severity and prior antibiotic exposure. Obtain deep respiratory and blood cultures before/with the first dose. Once cultures return P. aeruginosa susceptible to piperacillin-tazobactam with a negative MRSA screen and negative galactomannan at 48h, de-escalate: stop vancomycin and the aminoglycoside and continue monotherapy with piperacillin-tazobactam. Reassess daily, use procalcitonin trend to support duration, and treat for a 7-day course provided clinical improvement.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycoside continuation once double cover is no longer needed, especially with any renal impairment",
+    "Vancomycin only while MRSA remains a possibility — discontinue on negative MRSA screen to limit selection pressure and AKI risk",
+    "Avoid unnecessary carbapenem escalation unless a resistant/ESBL organism is confirmed"
+  ],
+  "edgeCases": [
+    "Persistent fever/infiltrate despite appropriate antibacterials in a neutropenic host should trigger reassessment for invasive fungal disease (aspergillosis) with CT chest and antifungals",
+    "If the isolate had been MDR/carbapenem-resistant, escalation (e.g. ceftolozane-tazobactam or ceftazidime-avibactam) and infection-control isolation would be required rather than de-escalation",
+    "Neutropenia blunts the inflammatory response, so infiltrates and purulence may be subtle early and evolve as counts recover"
+  ],
+  "expectedMaiK": "New consolidation appearing >48h after hospital admission with purulent sputum and worsening oxygenation in a neutropenic patient is hospital-acquired pneumonia; empiric cover must be broad (anti-pseudomonal + MRSA) given MDR risk, then de-escalated to culture-directed monotherapy.",
+  "expectedNextQuestions": [
+    "When exactly did symptoms start relative to admission (>48h)?",
+    "Any recent antibiotic exposure or prior resistant organisms?",
+    "Any witnessed aspiration, dysphagia or reduced consciousness?",
+    "Current absolute neutrophil count and trajectory?",
+    "Local unit antibiogram / prior Pseudomonas or MRSA colonisation?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures (peripheral + line) before antibiotics",
+    "Deep respiratory (sputum/endotracheal aspirate) Gram stain, culture and sensitivities",
+    "Chest X-ray (repeat/serial) ± CT chest if not improving",
+    "Serum galactomannan and respiratory viral PCR",
+    "FBC with ANC, CRP/procalcitonin, renal function and lactate"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "hospitalDay48": true,
+    "purulentSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "worseningOxygenation": true,
+    "hypoxia": true,
+    "tachypnea": true,
+    "immunocompromised": true,
+    "neutropenia": true,
+    "priorAntibiotics": true,
+    "mdrRisk": true
+  },
+  "expected": {
+    "diagnosis": "HAP",
+    "acceptableIds": [
+      "HAP"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "VAP",
+      "LUNG_ABSCESS",
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "investigations": [
+      "Blood cultures before antibiotics",
+      "Deep respiratory sample Gram stain, culture and sensitivities",
+      "Chest X-ray / CT chest",
+      "Serum galactomannan and respiratory viral PCR",
+      "FBC/ANC, procalcitonin, renal function, lactate"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "amikacin",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to HAP (onset >48h after admission with new consolidation)",
+    "Empiric regimen provides anti-pseudomonal + MRSA cover in a neutropenic MDR-risk host",
+    "De-escalation to piperacillin-tazobactam monotherapy after susceptible P. aeruginosa with negative MRSA screen",
+    "Not classified as VAP (patient not mechanically ventilated) or CAP (nosocomial onset)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

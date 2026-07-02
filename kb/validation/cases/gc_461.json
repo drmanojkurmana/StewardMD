@@ -1,0 +1,125 @@
+{
+  "id": "gc_461",
+  "specialty": "Cardiology",
+  "condition": "Acute heart failure / pulmonary edema",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Acute breathlessness at rest for 12 hours, unable to lie flat, with reduced urine output over 3 days.",
+  "history": "Known hypertensive and type 2 diabetic for 15 years, with ischaemic heart disease (inferior MI 4 years ago, on aspirin, bisoprolol and ramipril). Also has stage 3b chronic kidney disease (baseline creatinine ~1.8 mg/dL). Over the preceding week he had progressive exertional dyspnoea, then two nights of paroxysmal nocturnal dyspnoea and orthopnoea (now sleeping on 3 pillows), and worsening bilateral ankle swelling. He admits to missing his diuretic and eating heavily salted festival food. No fever, cough or chest pain of ischaemic character, but reports mild central chest tightness during the acute episode. No haemoptysis. His diabetes has been poorly controlled (last HbA1c 9.4%). The concurrent oliguria and known CKD raise the question of whether breathlessness is uraemic/volume-driven from renal failure versus cardiac — but orthopnoea, PND and raised JVP point clearly to decompensated cardiac failure with secondary cardiorenal deterioration.",
+  "examination": "Sitting upright, anxious, using accessory muscles, unable to complete sentences. JVP raised to the angle of the jaw with positive hepatojugular reflux. Bilateral fine basal-to-mid inspiratory crepitations. Displaced apex beat, soft S3 gallop, no new murmur. Bilateral pitting pedal and pretibial oedema to mid-shin. Cool peripheries with delayed capillary refill. Abdomen soft, mild tender hepatomegaly. No focal chest signs of consolidation, no unilateral calf swelling.",
+  "vitals": {
+    "hr": 116,
+    "bp": "168/98",
+    "rr": 30,
+    "temp": 36.7,
+    "spo2": 86
+  },
+  "labs": {
+    "NT_proBNP_pg_ml": 6840,
+    "hs_troponinT_ng_L": 48,
+    "creatinine_mg_dl": 2.9,
+    "urea_mmol_l": 18.5,
+    "potassium_mmol_l": 5.3,
+    "sodium_mmol_l": 133,
+    "hemoglobin_g_dl": 10.8,
+    "hba1c_percent": 9.4,
+    "eGFR_ml_min": 24,
+    "abg": "pH 7.31, pO2 58 mmHg (room air), pCO2 34 mmHg, HCO3 18",
+    "wcc_10e9_l": 9.2,
+    "crp_mg_l": 8
+  },
+  "imaging": "Chest X-ray: cardiomegaly (CTR >0.55), upper-lobe venous diversion, perihilar bat-wing alveolar opacities, Kerley B lines and small bilateral pleural effusions — consistent with cardiogenic pulmonary oedema, no lobar consolidation. Bedside echocardiogram: dilated LV, LVEF ~30% with inferior wall akinesia, moderate functional mitral regurgitation, dilated IVC with reduced collapsibility. Lung ultrasound: diffuse bilateral B-lines.",
+  "microbiology": "Not indicated; no clinical features of infection. Blood cultures not sent.",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure with cardiogenic pulmonary oedema (ischaemic cardiomyopathy)",
+    "Acute coronary syndrome precipitating pulmonary oedema",
+    "COPD/other cause of acute dyspnoea",
+    "Pulmonary embolism",
+    "Uraemic fluid overload from CKD progression / community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Acute decompensated heart failure with reduced ejection fraction (HFrEF, ischaemic) causing cardiogenic pulmonary oedema, complicated by type 2 cardiorenal syndrome on background CKD and poorly controlled diabetes.",
+  "citations": [
+    "ESC — Acute and Chronic Heart Failure — 2021",
+    "Harrison's Principles of Internal Medicine 22e — Heart Failure and Cor Pulmonale"
+  ],
+  "stewardship": "Not applicable — this is a non-infective cardiac decompensation. No antibiotics indicated. Mildly raised inflammatory markers and hypoxia are explained by pulmonary oedema, not infection; empirical antibiotics would be inappropriate and add nephrotoxic/QT risk in a CKD patient. Management is IV loop diuretic (dose adjusted for CKD, e.g. IV furosemide with escalation per response), oxygen and non-invasive ventilation (CPAP) for hypoxaemic pulmonary oedema, IV nitrate/afterload reduction given hypertension, careful potassium and renal monitoring, continuation of guideline-directed medical therapy where tolerated, and treating the ischaemic precipitant.",
+  "contraindications": [
+    "Avoid nephrotoxic contrast and NSAIDs given CKD and cardiorenal syndrome",
+    "Caution with ACE inhibitor uptitration during acute worsening renal function and K+ 5.3",
+    "Avoid aggressive beta-blocker initiation/uptitration during acute decompensation with hypoperfusion",
+    "Avoid fluid boluses"
+  ],
+  "edgeCases": [
+    "Elevated hs-troponin and prior MI can mimic primary ACS — a type 1 MI must be excluded, but modest troponin rise here reflects demand ischaemia/strain from pulmonary oedema",
+    "CKD elevates baseline NT-proBNP and creatinine, blunting their specificity — the clinical congestion picture and echo drive the diagnosis",
+    "Diuresis can transiently worsen creatinine (type 2 cardiorenal syndrome); worsening renal function should not automatically stop decongestion if the patient remains volume-overloaded",
+    "Hyperkalaemia may limit RAAS-inhibitor therapy"
+  ],
+  "expectedMaiK": "In an elderly diabetic hypertensive with prior MI, orthopnoea/PND, raised JVP, S3, bilateral basal crepitations, pedal oedema and bat-wing pulmonary oedema on CXR with LVEF ~30% indicate acute decompensated heart failure; concurrent oliguria and rising creatinine represent type 2 cardiorenal syndrome, not a competing primary renal diagnosis.",
+  "expectedNextQuestions": [
+    "Recent medication adherence (diuretic) and dietary salt/fluid intake?",
+    "Any ischaemic-type chest pain, and time course, to exclude ACS precipitant?",
+    "Baseline renal function and usual weight/diuretic dose?",
+    "Orthopnoea and PND severity (number of pillows)?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (ischaemia/arrhythmia precipitant)",
+    "Serial high-sensitivity troponin",
+    "NT-proBNP / BNP",
+    "Chest X-ray",
+    "Transthoracic echocardiogram (LVEF, valves, wall motion)",
+    "Renal function and electrolytes with serial monitoring",
+    "Arterial blood gas"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "legSwellingBilateral": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "renalImpairment": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "knownCAD": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "heart_failure",
+    "acceptableIds": [
+      "heart_failure"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "copd_exac_ni",
+      "aki"
+    ],
+    "investigations": [
+      "ECG",
+      "high-sensitivity troponin",
+      "NT-proBNP",
+      "chest X-ray",
+      "transthoracic echocardiogram",
+      "renal function and electrolytes",
+      "arterial blood gas"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank heart_failure as the top diagnosis",
+    "No antibiotics should be recommended (infective:false)",
+    "Cardiorenal syndrome / raised creatinine must not divert primary diagnosis to a purely renal id",
+    "Elevated NT-proBNP + pulmonary oedema on CXR + LVEF ~30% must support heart_failure",
+    "ACS must be retained as a differential/precipitant but not the final diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

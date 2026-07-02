@@ -1,0 +1,120 @@
+{
+  "id": "gc_449",
+  "specialty": "Nephrology",
+  "condition": "Chronic kidney disease",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness, bilateral leg swelling and fatigue over 6 weeks in a long-standing type 2 diabetic.",
+  "history": "64-year-old man with type 2 diabetes mellitus for 18 years and hypertension for 12 years presents with insidious, progressively worsening exertional breathlessness, bilateral ankle swelling, nausea, reduced appetite and declining urine output over the last 6 weeks. He reports frothy urine noted for over a year and nocturia. He has known 'background retinopathy' and reduced sensation in both feet. Long-term medications include metformin, glimepiride, amlodipine, telmisartan and atorvastatin; he intermittently takes over-the-counter NSAIDs for knee pain. Old records show a creatinine of 2.1 mg/dL two years ago and 3.3 mg/dL nine months ago, with dipstick proteinuria documented repeatedly. No recent vomiting, diarrhoea, sepsis, radiocontrast exposure or new nephrotoxic drug. No haematuria, rash, joint symptoms or haemoptysis. The clinical challenge is that the coexisting diabetes and heart failure-like fluid overload confound the picture, but the chronic, stepwise creatinine trajectory, anaemia and small echogenic kidneys point clearly to established chronic kidney disease (diabetic nephropathy) rather than an acute insult.",
+  "examination": "Comfortable at rest but breathless on minimal exertion. Pallor of conjunctivae. Blood pressure elevated. Mild periorbital and pitting bilateral pedal oedema to mid-shin. Raised JVP at 5 cm. Bibasal fine crackles. Heart sounds normal, no murmur. Abdomen soft, no organomegaly, no ascites. Bilateral reduced monofilament sensation and absent ankle jerks (diabetic peripheral neuropathy). Fundoscopy: diabetic retinopathy changes. No asterixis, no uraemic frost, no pericardial rub.",
+  "vitals": {
+    "hr": 88,
+    "bp": "172/98",
+    "rr": 22,
+    "temp": 36.8,
+    "spo2": 95
+  },
+  "labs": {
+    "creatinine_mg_dL": 5.4,
+    "eGFR_mL_min_1.73m2": 11,
+    "urea_BUN_mg_dL": 92,
+    "potassium_mmol_L": 5.7,
+    "bicarbonate_mmol_L": 17,
+    "sodium_mmol_L": 134,
+    "hemoglobin_g_dL": 8.6,
+    "calcium_corrected_mg_dL": 8.1,
+    "phosphate_mg_dL": 6.2,
+    "iPTH_pg_mL": 388,
+    "albumin_g_dL": 3.2,
+    "HbA1c_percent": 9.1,
+    "urine_ACR_mg_g": 2100,
+    "urinalysis": "3+ protein, no active sediment, no dysmorphic RBCs or casts"
+  },
+  "imaging": "Renal ultrasound: both kidneys small (right 8.2 cm, left 8.6 cm) with increased cortical echogenicity and loss of corticomedullary differentiation; no hydronephrosis or calculi. Chest X-ray: mild pulmonary venous congestion, no consolidation.",
+  "microbiology": "Not indicated; no features of infection. Blood and urine cultures not sent.",
+  "differentialDiagnoses": [
+    "Acute kidney injury / acute-on-chronic (excluded by chronic stepwise creatinine rise, anaemia and bilateral small echogenic kidneys)",
+    "Acute decompensated heart failure (fluid overload overlaps, but LV normal and renal chronicity dominant)",
+    "Symptomatic anaemia (present, but secondary to CKD rather than primary)",
+    "Hyperkalaemia (a metabolic complication of the CKD, not the primary diagnosis)"
+  ],
+  "finalDiagnosis": "Chronic kidney disease, stage G5 (diabetic nephropathy), with anaemia of CKD, CKD-mineral bone disorder, metabolic acidosis and hyperkalaemia; approaching renal replacement therapy.",
+  "citations": [
+    "KDIGO — Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease — 2024",
+    "Harrison's Principles of Internal Medicine 22e — Chronic Kidney Disease"
+  ],
+  "stewardship": "Not applicable — this is a non-infective presentation. No empiric antibiotics indicated. Focus on stopping nephrotoxins (discontinue NSAIDs, hold metformin and RAAS-blocker in the setting of hyperkalaemia/advanced CKD), managing hyperkalaemia and acidosis, treating anaemia and CKD-MBD, blood pressure and glycaemic control, and timely nephrology referral for RRT planning and vascular access.",
+  "contraindications": [
+    "Metformin contraindicated at eGFR <30 (lactic acidosis risk)",
+    "NSAIDs contraindicated — worsen renal perfusion and hyperkalaemia",
+    "Caution/hold RAAS blockade given K 5.7 mmol/L and advanced CKD",
+    "Avoid iodinated contrast and gadolinium where possible",
+    "Renally dose-adjust all excreted drugs"
+  ],
+  "edgeCases": [
+    "Do not over-diagnose acute-on-chronic AKI: the chronic creatinine trajectory, anaemia and small kidneys define chronicity",
+    "Fluid overload can mimic primary heart failure — confirm cardiac function before attributing solely to CKD",
+    "Hyperkalaemia may be silent; obtain ECG to exclude peaked T waves before it becomes life-threatening"
+  ],
+  "expectedMaiK": "Recognise established chronic kidney disease (diabetic nephropathy, stage G5) from the chronic stepwise creatinine rise, anaemia, CKD-MBD and bilateral small echogenic kidneys, and initiate metabolic complication management with nephrology referral.",
+  "expectedNextQuestions": [
+    "What is the trend of previous creatinine/eGFR values over the past 1-2 years?",
+    "Duration and control of diabetes and hypertension; presence of retinopathy/neuropathy?",
+    "Use of nephrotoxins (NSAIDs, contrast) or new medications?",
+    "Urine output trend and symptoms of uraemia (nausea, itch, appetite)?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatinine with eGFR and comparison to historical values",
+    "Urine albumin-to-creatinine ratio and urinalysis",
+    "Renal ultrasound to assess kidney size and echogenicity",
+    "Serum electrolytes, bicarbonate, calcium, phosphate, PTH",
+    "Full blood count with iron studies; ECG for hyperkalaemia"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "renalImpairment": true,
+    "proteinuria": true,
+    "oliguria": true,
+    "legSwellingBilateral": true,
+    "raisedJVP": true,
+    "dyspnea": true,
+    "nauseaVomiting": true,
+    "bilateralCrackles": true
+  },
+  "expected": {
+    "diagnosis": "ckd",
+    "acceptableIds": [
+      "ckd"
+    ],
+    "differentialIds": [
+      "aki",
+      "heart_failure",
+      "anemia_sympt",
+      "hyperkalemia"
+    ],
+    "investigations": [
+      "Serum creatinine and eGFR with historical trend",
+      "Urine albumin-to-creatinine ratio and urinalysis",
+      "Renal ultrasound (kidney size and echogenicity)",
+      "Electrolytes, bicarbonate, calcium, phosphate, PTH",
+      "FBC with iron studies and ECG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ckd as the top diagnosis",
+    "acceptableIds must contain only ckd",
+    "No antibiotic recommendation should be produced (non-infective)",
+    "Chronicity markers (small echogenic kidneys, anaemia, prior creatinine rise) must distinguish from aki",
+    "Hyperkalaemia and metabolic acidosis flagged as complications requiring management"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

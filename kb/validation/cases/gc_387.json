@@ -1,0 +1,120 @@
+{
+  "id": "gc_387",
+  "specialty": "Respiratory",
+  "condition": "Community Acquired Pneumonia (non-severe)",
+  "age": 59,
+  "sex": "M",
+  "presentingComplaint": "3 days of fever, productive cough with rust-coloured sputum and right-sided pleuritic chest pain",
+  "history": "59-year-old man with rheumatoid arthritis on long-term methotrexate 15 mg weekly plus prednisolone 10 mg daily, presenting with 3 days of fever, rigors, productive cough with rust-coloured sputum and right-sided pleuritic chest pain. Mild breathlessness on exertion but no orthopnoea, haemoptysis or weight loss. No recent hospitalisation, no antibiotics in the last 90 days and no ICU stay. No aspiration event, choking or dysphagia; swallow is normal. No prior TB, no known TB contact and no evening fever or night sweats. Ex-smoker (20 pack-years), lives at home independently, not from an endemic malaria area and no recent travel. Because he is immunosuppressed (steroid + methotrexate), he was started on broad empiric cover pending cultures, with a plan to narrow once a pathogen was identified.",
+  "examination": "Alert and oriented, mildly unwell but not toxic. Respiratory exam reveals reduced expansion and bronchial breathing with coarse crepitations over the right lower zone and dullness to percussion; no bronchial breathing elsewhere. No oral thrush or mucositis. Cardiovascular exam normal with no murmur. Abdomen soft, no organomegaly. No rash, no calf tenderness, no lymphadenopathy.",
+  "vitals": {
+    "hr": 98,
+    "bp": "124/78",
+    "rr": 22,
+    "temp": 38.6,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "13.8 x10^3/uL (neutrophils 10.9, ANC 10900)",
+    "hemoglobin": "12.6 g/dL",
+    "platelets": "268 x10^3/uL",
+    "creatinine": "0.9 mg/dL",
+    "urea": "6.1 mmol/L",
+    "crp": "168 mg/L",
+    "procalcitonin": "1.4 ng/mL",
+    "lactate": "1.6 mmol/L",
+    "bilirubin": "0.8 mg/dL",
+    "albumin": "3.4 g/dL",
+    "pneumococcalUrinaryAntigen": "positive"
+  },
+  "imaging": "Chest radiograph: dense right lower lobe consolidation with air bronchograms and a small associated parapneumonic effusion; no cavitation, no multilobar involvement, no upper-lobe fibrocavitary disease.",
+  "microbiology": "Pneumococcal urinary antigen positive. Blood cultures x2 sent on admission; sputum Gram stain shows Gram-positive diplococci with abundant neutrophils. Sputum culture at 48h grew penicillin-susceptible Streptococcus pneumoniae (penicillin MIC 0.03 mg/L; ceftriaxone and amoxicillin susceptible). Two sputum AFB smears negative; respiratory viral PCR (including influenza and SARS-CoV-2) negative.",
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia (pneumococcal) — favoured: lobar consolidation, rust-coloured sputum, positive pneumococcal urinary antigen and culture",
+    "Aspiration pneumonia — no aspiration event, dysphagia or dependent-segment/foul-smelling disease",
+    "Pulmonary tuberculosis — no chronic cough, night sweats, upper-lobe cavitation; smears negative",
+    "Lung abscess — no cavitating lesion or foul sputum on imaging"
+  ],
+  "finalDiagnosis": "Non-severe community-acquired pneumonia due to penicillin-susceptible Streptococcus pneumoniae in an immunocompromised host (methotrexate + corticosteroid), managed as an inpatient with initial broad empiric cover then de-escalation",
+  "citations": [
+    "ATS/IDSA Community-Acquired Pneumonia Guideline 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Pneumonia"
+  ],
+  "stewardship": "Immunosuppression (methotrexate plus daily prednisolone) prompts broader initial empiric cover and inpatient management despite a low severity score (CURB-65 1, non-ICU). Empiric therapy per ATS/IDSA 2019 for a non-severe inpatient without pseudomonal/MRSA risk factors: a beta-lactam (ceftriaxone) plus a macrolide (azithromycin) for atypical cover, or respiratory fluoroquinolone monotherapy. Once pneumococcal urinary antigen and sputum culture confirmed penicillin-susceptible S. pneumoniae with no atypical/resistant pathogen, therapy was de-escalated to targeted amoxicillin (or IV benzylpenicillin) and the macrolide stopped. Total 5-day course given clinical stability and defervescence; switch IV-to-oral once afebrile and haemodynamically stable with functioning GI tract.",
+  "contraindications": [
+    "Macrolide caution with QT-prolonging drugs and known long-QT",
+    "Fluoroquinolones associated with tendinopathy, QT prolongation and dysglycaemia — avoid as first choice if beta-lactam/macrolide feasible",
+    "Continue folic acid; withhold/adjust methotrexate during acute infection per rheumatology advice"
+  ],
+  "edgeCases": [
+    "Immunocompromise widens the differential to opportunistic pathogens (Pneumocystis, Nocardia, fungi) if lobar consolidation does not respond or diffuse/atypical infiltrates appear",
+    "Positive pneumococcal urinary antigen may persist after recent infection — correlate with culture before over-interpreting",
+    "If parapneumonic effusion enlarges or patient fails to improve, sample the pleural fluid to exclude empyema"
+  ],
+  "expectedMaiK": "Non-severe CAP in an immunocompromised host: confirm lobar consolidation, start guideline-concordant empiric therapy with broader initial cover given immunosuppression, then de-escalate to pathogen-directed penicillin once S. pneumoniae is confirmed.",
+  "expectedNextQuestions": [
+    "Any aspiration event, dysphagia or reduced consciousness?",
+    "Duration of cough and any night sweats, weight loss or TB contact?",
+    "Details of immunosuppression (methotrexate/steroid dose) and last chemotherapy or biologic?",
+    "Recent antibiotics, hospitalisation or ICU stay in the last 90 days?"
+  ],
+  "expectedInvestigations": [
+    "Chest radiograph",
+    "Blood cultures before antibiotics",
+    "Sputum Gram stain and culture",
+    "Pneumococcal (and Legionella) urinary antigen",
+    "FBC, CRP/procalcitonin, U&E, LFTs, lactate",
+    "Respiratory viral PCR"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "pleuriticPain": true,
+    "crepitations": true,
+    "consolidation": true,
+    "tachypnea": true,
+    "dyspnea": true,
+    "immunocompromised": true,
+    "steroidUse": true
+  },
+  "expected": {
+    "diagnosis": "CAP",
+    "acceptableIds": [
+      "CAP"
+    ],
+    "differentialIds": [
+      "ASPIRATION_PNEUMONIA",
+      "PULMONARY_TB",
+      "LUNG_ABSCESS",
+      "HAP"
+    ],
+    "investigations": [
+      "Chest radiograph",
+      "Blood cultures",
+      "Sputum Gram stain and culture",
+      "Pneumococcal urinary antigen",
+      "CRP/procalcitonin"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Azithromycin",
+        "Amoxicillin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks CAP as top diagnosis",
+    "Lobar consolidation with positive pneumococcal antigen/culture supports CAP over TB, aspiration and lung abscess",
+    "Immunocompromised host flagged, justifying broader initial empiric cover and inpatient management despite low CURB-65",
+    "Stewardship recommends guideline-concordant empiric beta-lactam plus macrolide with de-escalation to penicillin/amoxicillin once susceptible S. pneumoniae confirmed"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

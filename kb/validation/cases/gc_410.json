@@ -1,0 +1,123 @@
+{
+  "id": "gc_410",
+  "specialty": "Tropical Fever",
+  "condition": "Leptospirosis",
+  "age": 41,
+  "sex": "M",
+  "presentingComplaint": "5 days of high fever, severe calf pain, and yellow discolouration of the eyes, now with reduced urine output and blood-streaked sputum",
+  "history": "Municipal sanitation worker from peri-urban Mumbai, presenting during the monsoon after two weeks of wading through stagnant floodwater to clear blocked drains, often barefoot with minor foot abrasions. Illness began abruptly 5 days ago with rigors, frontal headache and intense bilateral calf myalgia that made walking difficult. Over the last 48 hours he became jaundiced, urine turned dark and scanty, and today he coughed up blood-streaked frothy sputum. He was admitted to a peripheral hospital 2 days ago where blood cultures were drawn and empiric piperacillin-tazobactam was started for presumed Gram-negative urosepsis after a recent short catheterisation; he did not improve and was referred. No prior liver disease. No alcohol excess. Not diabetic.",
+  "examination": "Toxic, restless and icteric. Marked conjunctival suffusion without discharge. Exquisite tenderness of both gastrocnemius muscles. Mild hepatomegaly, no splenomegaly, no ascites. Fine bibasal crepitations with occasional blood-tinged expectoration. No neck stiffness, no rash. Cool peripheries with delayed capillary refill.",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/52",
+    "rr": 28,
+    "temp": 39.4,
+    "spo2": 90
+  },
+  "labs": {
+    "hemoglobin": 10.9,
+    "wbc": 16.8,
+    "platelets": 62,
+    "creatinine": 4.1,
+    "urea": 28.5,
+    "bilirubin": 7.8,
+    "directBilirubin": 5.9,
+    "ast": 88,
+    "alt": 74,
+    "alkPhos": 210,
+    "cpk": 620,
+    "inr": 1.4,
+    "lactate": 3.6,
+    "crp": 190,
+    "urinalysis": "granular casts, mild proteinuria, no significant pyuria"
+  },
+  "imaging": "Chest radiograph: patchy bilateral alveolar infiltrates consistent with pulmonary haemorrhage. Abdominal ultrasound: mildly enlarged liver, normal biliary tree, no abscess or ductal dilatation, kidneys normal size with preserved cortico-medullary differentiation.",
+  "microbiology": "Blood cultures from referring hospital and on arrival: no growth at 48h (including no MDR/ESBL Gram-negative isolate despite prior broad-spectrum therapy). Malaria rapid test and smear negative x2. Dengue NS1/IgM negative. Scrub typhus IgM negative. Leptospira IgM ELISA positive; microscopic agglutination test (MAT) titre 1:800 to serogroup Icterohaemorrhagiae, confirming the diagnosis.",
+  "differentialDiagnoses": [
+    "Leptospirosis (Weil disease)",
+    "Dengue with hepatic involvement",
+    "Scrub typhus",
+    "Severe falciparum malaria",
+    "Acute viral hepatitis"
+  ],
+  "finalDiagnosis": "Severe icterohaemorrhagic leptospirosis (Weil disease) with acute kidney injury and pulmonary haemorrhage",
+  "citations": [
+    "WHO Leptospirosis: Diagnosis, Surveillance and Control 2003",
+    "Harrison's Principles of Internal Medicine 22e — Leptospirosis"
+  ],
+  "stewardship": "This is a stewardship de-escalation case, not a true MDR case. The patient was placed on empiric anti-pseudomonal piperacillin-tazobactam at the referring centre for a presumed catheter-associated Gram-negative urosepsis. When blood cultures returned sterile at 48h (no MDR/ESBL organism recovered) and the classic epidemiological and clinical picture (floodwater exposure, conjunctival suffusion, calf myalgia, hepatorenal dysfunction, pulmonary haemorrhage) plus a positive Leptospira MAT confirmed leptospirosis, therapy should be narrowed. Guideline-concordant definitive treatment for severe leptospirosis is IV penicillin G or IV ceftriaxone; broad-spectrum Gram-negative and anti-pseudomonal cover should be stopped. There is NO drug-resistance issue with Leptospira — 'escalation' here is escalation of organ support (vasopressors, renal replacement therapy, lung-protective ventilation for alveolar haemorrhage), and 'source control' is not applicable as there is no abscess or obstructed source. A Jarisch-Herxheimer reaction may follow the first antibiotic dose and should be anticipated.",
+  "contraindications": [
+    "Avoid nephrotoxic agents (aminoglycosides, NSAIDs) given established AKI",
+    "Dose-adjust renally cleared drugs for AKI",
+    "Avoid delaying antibiotics pending confirmatory serology — treat on clinical suspicion"
+  ],
+  "edgeCases": [
+    "Sterile blood cultures after prior broad-spectrum antibiotics can be misread as 'treated MDR sepsis' rather than prompting a search for a fastidious/zoonotic organism",
+    "Pulmonary haemorrhage may be mistaken for ARDS or fluid overload",
+    "Anicteric leptospirosis can mimic dengue; jaundice with low-grade transaminase rise (bilirubin out of proportion to AST/ALT) favours leptospirosis"
+  ],
+  "expectedMaiK": "Floodwater/occupational exposure + conjunctival suffusion + calf myalgia + jaundice with disproportionately mild transaminitis + AKI + thrombocytopenia + pulmonary haemorrhage = severe leptospirosis (Weil disease); sterile cultures after empiric broad-spectrum antibiotics should prompt de-escalation to IV penicillin G/ceftriaxone rather than escalation for MDR organisms.",
+  "expectedNextQuestions": [
+    "Detailed occupational and floodwater/rodent exposure history",
+    "Whether urine output is falling and trend of creatinine",
+    "Any haemoptysis or worsening oxygenation suggesting alveolar haemorrhage",
+    "Review of prior blood culture results and current antibiotic rationale"
+  ],
+  "expectedInvestigations": [
+    "Leptospira IgM ELISA and MAT (paired titres)",
+    "Repeat blood cultures / review sterility",
+    "Renal panel and urine output monitoring",
+    "Chest radiograph and arterial blood gas for pulmonary haemorrhage",
+    "Platelet count, coagulation profile, LFTs and CPK"
+  ],
+  "expectedConfidence": 88,
+  "findings": {
+    "fever": true,
+    "myalgiaArthralgia": true,
+    "conjunctivalSuffusion": true,
+    "waterExposure": true,
+    "jaundice": true,
+    "renalImpairment": true,
+    "thrombocytopenia": true,
+    "hemoptysis": true,
+    "oliguria": true,
+    "darkUrine": true,
+    "toxicAppearing": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "LEPTOSPIROSIS",
+    "acceptableIds": [
+      "LEPTOSPIROSIS"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "MALARIA",
+      "VIRAL_HEPATITIS"
+    ],
+    "investigations": [
+      "Leptospira IgM ELISA and MAT",
+      "Renal function and urine output",
+      "Chest radiograph for pulmonary haemorrhage",
+      "Platelets and LFTs"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "IV ceftriaxone",
+        "IV penicillin G"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return LEPTOSPIROSIS as top diagnosis",
+    "Must recommend de-escalation from empiric broad-spectrum/anti-pseudomonal therapy to IV penicillin G or ceftriaxone",
+    "Must not label sterile cultures as treated MDR infection",
+    "Must flag AKI and pulmonary haemorrhage requiring organ support, not antibiotic escalation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

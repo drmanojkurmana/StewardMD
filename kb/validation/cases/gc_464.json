@@ -1,0 +1,117 @@
+{
+  "id": "gc_464",
+  "specialty": "Cardiology / Neuro",
+  "condition": "Hypertensive emergency",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Severe throbbing headache, blurred vision and breathlessness for 6 hours, with a 1-hour episode of central chest tightness.",
+  "history": "Known hypertensive for 9 years, self-discontinued amlodipine and telmisartan 6 weeks ago because he 'felt well'. Woke with a severe occipital headache, then developed progressive blurring of vision, two episodes of vomiting and increasing breathlessness that worsens on lying flat. In the last hour he also noticed a band-like central chest tightness, which — together with his risk factors — prompted the ED team to activate the chest-pain pathway and consider acute coronary syndrome and aortic dissection. No limb weakness, no slurred speech, no tearing interscapular pain, no syncope. Urine output has fallen since morning. Ex-smoker (20 pack-years). No recreational drug use, no sympathomimetic ingestion.",
+  "examination": "Alert but drowsy and mildly confused (GCS 14, disoriented to time). Grossly elevated blood pressure symmetrical in both arms (no inter-arm differential, equal volume peripheral pulses, no radio-femoral delay). Fundoscopy shows bilateral flame haemorrhages, cotton-wool spots and early disc oedema (grade IV retinopathy). Bibasal fine crepitations with raised JVP consistent with acute pulmonary congestion. Heart sounds normal, no murmur, no rub, apex not displaced. Abdomen soft, no pulsatile mass, no bruit. No focal neurological deficit, plantars flexor, neck supple.",
+  "vitals": {
+    "hr": 104,
+    "bp": "232/134",
+    "rr": 28,
+    "temp": 36.9,
+    "spo2": 88
+  },
+  "labs": {
+    "creatinine": "2.3 mg/dL (baseline 1.0 six months ago)",
+    "urea": "14.6 mmol/L",
+    "potassium": "4.4 mmol/L",
+    "hemoglobin": "13.8 g/dL",
+    "platelets": "236 x10^3/uL",
+    "urinalysis": "proteinuria 2+, microscopic haematuria, no casts",
+    "troponinT_hs": "38 ng/L then 41 ng/L (minimal rise, non-dynamic — demand ischaemia)",
+    "NTproBNP": "2650 pg/mL",
+    "LDH": "normal",
+    "peripheralSmear": "no schistocytes (excludes microangiopathy)",
+    "lactate": "1.8 mmol/L"
+  },
+  "imaging": "Chest X-ray: bilateral perihilar alveolar oedema with upper-lobe diversion, normal mediastinal width and normal aortic contour. 12-lead ECG: sinus tachycardia with LV strain pattern (lateral ST depression/T inversion), no acute ST elevation, no dynamic evolution. CT aortogram (done to exclude dissection given chest pain): no intimal flap, normal calibre thoracic and abdominal aorta. Non-contrast CT head: no haemorrhage or established infarct; appearances compatible with posterior white-matter vasogenic oedema (PRES spectrum).",
+  "microbiology": "Not indicated — non-infective presentation.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (chest tightness with troponin — excluded by non-dynamic troponin and LV-strain ECG without ischaemic evolution)",
+    "Aortic dissection (severe hypertension + chest pain — excluded by equal arm pressures and normal CT aortogram)",
+    "Acute ischaemic stroke (headache, confusion, visual symptoms — excluded by absent focal deficit and clear CT)",
+    "Acute decompensated heart failure as primary process (reframed as hypertension-driven flash pulmonary oedema)"
+  ],
+  "finalDiagnosis": "Hypertensive emergency with acute target-organ damage — hypertensive encephalopathy (PRES) plus flash pulmonary oedema and acute kidney injury, precipitated by antihypertensive non-adherence. Chest pain represented demand ischaemia, not a primary coronary or aortic event.",
+  "citations": [
+    "ACC/AHA — Hypertension in Adults (Hypertensive Emergencies) — 2017",
+    "ESC/ESH — Management of Arterial Hypertension (Hypertensive Emergencies) — 2023"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; no antimicrobial therapy indicated. Management is controlled parenteral BP reduction (IV labetalol or nicardipine, or GTN/nitroprusside where pulmonary oedema predominates), targeting a ~20-25% MAP reduction in the first hour rather than normalisation, in a monitored/HDU setting; avoid abrupt over-correction to prevent watershed cerebral, coronary and renal hypoperfusion.",
+  "contraindications": [
+    "Avoid rapid/complete BP normalisation (risk of cerebral, myocardial and renal ischaemia)",
+    "Avoid short-acting sublingual/oral nifedipine (uncontrolled precipitous drop)",
+    "Avoid pure beta-blockade in undiagnosed possible dissection until sympathetic/rate control balanced; here dissection excluded",
+    "Cautious IV nitrate/diuretic titration given AKI"
+  ],
+  "edgeCases": [
+    "A non-dynamic minimal troponin rise reflects demand ischaemia from severe afterload, not type-1 MI — do not anticoagulate/cath reflexively",
+    "Concurrent chest pain can anchor on ACS or dissection and delay recognition of the primary hypertensive emergency",
+    "PRES on imaging is reversible with BP control and should not be mistaken for ischaemic stroke (avoid thrombolysis)",
+    "Screen for secondary causes (renovascular disease, phaeochromocytoma) once stabilised, especially in abrupt severe hypertension"
+  ],
+  "expectedMaiK": "Markedly elevated BP (232/134) with simultaneous multi-organ target damage — hypertensive/PRES encephalopathy (headache, confusion, grade IV retinopathy, posterior white-matter oedema), flash pulmonary oedema and acute kidney injury — following antihypertensive non-adherence, with chest pain explained by demand ischaemia after ACS and dissection are actively excluded.",
+  "expectedNextQuestions": [
+    "Adherence to and timing of stopping antihypertensive medication",
+    "Any sympathomimetic/recreational drug or decongestant use, or symptoms of phaeochromocytoma",
+    "Character of chest pain (tearing/radiating to back?) and any inter-scapular pain",
+    "Visual and neurological symptom progression and baseline renal function"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG and serial high-sensitivity troponin",
+    "Fundoscopy for hypertensive retinopathy",
+    "CT head (and CT aortogram to exclude dissection given chest pain)",
+    "Renal function, urinalysis and chest radiograph",
+    "Peripheral smear/LDH to exclude thrombotic microangiopathy"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "hypertensionHx": true,
+    "headacheSevere": true,
+    "visualDisturbance": true,
+    "papilledema": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "chestPain": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "bilateralCrackles": true,
+    "raisedJVP": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "htn_emergency",
+    "acceptableIds": [
+      "htn_emergency"
+    ],
+    "differentialIds": [
+      "acs",
+      "aortic_dissection",
+      "ischemic_stroke",
+      "heart_failure"
+    ],
+    "investigations": [
+      "12-lead ECG and serial high-sensitivity troponin",
+      "CT head and CT aortogram",
+      "Fundoscopy",
+      "Renal function, urinalysis and chest radiograph"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine returns htn_emergency as top diagnosis",
+    "Severe BP elevation with acute target-organ damage recognised as the unifying diagnosis over ACS/dissection/stroke",
+    "No antibiotics recommended (non-infective)",
+    "Recommends controlled parenteral BP reduction (~20-25% MAP in first hour), not abrupt normalisation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

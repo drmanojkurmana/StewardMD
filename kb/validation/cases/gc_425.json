@@ -1,0 +1,123 @@
+{
+  "id": "gc_425",
+  "specialty": "Systemic",
+  "condition": "Sepsis",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Fever with rigors, right loin pain and reduced urine output for 2 days, now confused and lethargic.",
+  "history": "Type 2 diabetic on metformin and empagliflozin, with recurrent complicated urinary tract infections. Two prior admissions in the last 90 days for pyelonephritis; the most recent urine culture grew an ESBL-producing Klebsiella pneumoniae treated with a carbapenem. Known 12 mm obstructing right vesico-ureteric junction calculus awaiting elective stenting. Over 48 hours developed high fever with shaking chills, right flank pain, dysuria and progressive oliguria. In the last 12 hours the family noted new drowsiness and confusion. No prior CRE isolate documented.",
+  "examination": "Ill and toxic-appearing, warm peripheries with a bounding pulse and prolonged capillary refill (3 s). Drowsy, rousable to voice, disoriented to time and place (GCS 13). Marked right costovertebral-angle tenderness. Chest clear, abdomen soft with right renal-angle fullness. No rash. Catheter drains scanty cloudy urine.",
+  "vitals": {
+    "hr": 122,
+    "bp": "92/54",
+    "rr": 28,
+    "temp": 39.3,
+    "spo2": 95
+  },
+  "labs": {
+    "wbc": "19.4 x10^9/L (neutrophilia with left shift)",
+    "lactate": "3.6 mmol/L",
+    "creatinine": "2.4 mg/dL (baseline 0.9)",
+    "urea": "16.8 mmol/L",
+    "platelets": "112 x10^3/uL",
+    "bilirubin": "1.9 mg/dL",
+    "crp": "268 mg/L",
+    "procalcitonin": "24 ng/mL",
+    "glucose": "214 mg/dL",
+    "sofaScore": "increase of 4 from baseline (renal, CNS, coagulation, cardiovascular)"
+  },
+  "imaging": "Bedside ultrasound and non-contrast CT KUB confirm a 12 mm obstructing right VUJ calculus with moderate hydroureteronephrosis and perinephric stranding, consistent with an obstructed infected upper tract requiring urgent decompression.",
+  "microbiology": "Two sets of blood cultures and a catheter urine specimen sent before antibiotics. Urine microscopy: pyuria with Gram-negative bacilli. At 36 h blood and urine cultures grew Klebsiella pneumoniae resistant to cephalosporins, piperacillin-tazobactam and, on this occasion, meropenem (carbapenem-resistant, OXA-48-like); susceptible to ceftazidime-avibactam.",
+  "differentialDiagnoses": [
+    "Sepsis with obstructive uropathy as the source (target)",
+    "Acute pyelonephritis without organ dysfunction",
+    "Complicated UTI",
+    "Early septic shock"
+  ],
+  "finalDiagnosis": "Sepsis (life-threatening organ dysfunction, SOFA rise >=2) secondary to an obstructed infected upper urinary tract, caused by a carbapenem-resistant ESBL/OXA-48 Klebsiella pneumoniae requiring antimicrobial escalation and urgent source control.",
+  "citations": [
+    "Surviving Sepsis Campaign, Management of Sepsis and Septic Shock, 2021",
+    "IDSA, Guidance on Treatment of Antimicrobial-Resistant Gram-Negative Infections, 2023",
+    "Harrison's Principles of Internal Medicine, 22e, Sepsis and Septic Shock"
+  ],
+  "stewardship": "Sepsis bundle within 1 hour: obtain blood and urine cultures and lactate, then start broad empiric IV antibiotics with balanced crystalloid resuscitation. Given prior ESBL isolate and recent hospitalisation (MDR risk), empiric cover is escalated beyond piperacillin-tazobactam to a carbapenem (meropenem) plus a source-directed plan. The definitive priority is emergency source control - ureteric stent or percutaneous nephrostomy to decompress the obstructed infected system; antibiotics alone will fail without drainage. When cultures return carbapenem-resistant OXA-48 Klebsiella, escalate to ceftazidime-avibactam and de-escalate/narrow according to susceptibilities once the patient stabilises. Review IV-to-oral switch, daily need, and stop-date; nephrotoxic and renally-cleared agents dosed for AKI.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, contrast without hydration) given AKI",
+    "Do not rely on antibiotics alone - obstructed infected tract mandates urgent decompression",
+    "Aminoglycoside cover risky with evolving AKI",
+    "Renal dose-adjust and avoid delayed source control"
+  ],
+  "edgeCases": [
+    "Progression to septic shock with vasopressor need if decompression delayed",
+    "Carbapenem-resistant OXA-48 phenotype misclassified as carbapenem-susceptible on automated panels",
+    "SGLT2-inhibitor associated euglycaemic ketoacidosis complicating the picture"
+  ],
+  "expectedMaiK": "Sepsis is life-threatening organ dysfunction (SOFA increase >=2) from a dysregulated host response to infection; here an obstructed infected urinary tract with an MDR organism demands both guideline-concordant empiric escalation and urgent source control.",
+  "expectedNextQuestions": [
+    "Prior culture results and known resistant-organism history?",
+    "Any structural/obstructive urinary abnormality or indwelling device?",
+    "Recent antibiotic and hospitalisation exposure (MDR risk)?",
+    "Urine output trend and mental-status change timeline?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures plus urine culture before antibiotics",
+    "Serum lactate and repeat clearance",
+    "Renal function, FBC, coagulation and bilirubin for SOFA",
+    "Urgent CT KUB / renal ultrasound to identify obstruction",
+    "Antimicrobial susceptibility including carbapenemase testing"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "sofaIncrease": true,
+    "suspectedInfectionSource": true,
+    "flankPain": true,
+    "oliguria": true,
+    "esblHistory": true,
+    "hospitalizationLast90Days": true,
+    "mdrRisk": true
+  },
+  "expected": {
+    "diagnosis": "SEPSIS",
+    "acceptableIds": [
+      "SEPSIS"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Blood cultures x2 and urine culture pre-antibiotics",
+      "Serum lactate",
+      "Renal function and SOFA components",
+      "CT KUB / renal ultrasound for obstruction",
+      "Carbapenemase / susceptibility testing"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum-escalation",
+      "antibiotics": [
+        "Meropenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine identifies SEPSIS (organ dysfunction with SOFA rise >=2 from infection), not uncomplicated UTI/pyelonephritis.",
+    "Flags MDR risk and recommends empiric escalation to a carbapenem over piperacillin-tazobactam.",
+    "Recommends urgent source control (ureteric stent/nephrostomy) for the obstructed infected tract.",
+    "On carbapenem-resistant OXA-48 result, escalates to ceftazidime-avibactam.",
+    "Does not classify as septic shock in absence of persistent vasopressor requirement/refractory hypotension."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

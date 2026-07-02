@@ -1,0 +1,123 @@
+{
+  "id": "gc_475",
+  "specialty": "Pulmonary",
+  "condition": "Interstitial lung disease",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Progressive breathlessness and dry cough, worsening since an elective total hip replacement 6 weeks ago",
+  "history": "Retired schoolteacher admitted for post-operative rehabilitation after elective right total hip replacement. Over the preceding 6-8 weeks he has developed insidiously progressive exertional dyspnoea (now breathless washing/dressing) and a persistent non-productive cough, with 4 kg unintentional weight loss. No orthopnoea, PND, chest pain or leg swelling. No fever, rigors, purulent sputum or sick contacts, and he has not improved despite a course of oral antibiotics prescribed by his GP for presumed chest infection. Background: permanent atrial fibrillation on amiodarone 200 mg daily for ~18 months, hypertension, type 2 diabetes, gout and BPH. Polypharmacy: amiodarone, ramipril, bisoprolol, metformin, allopurinol, tamsulosin, atorvastatin and post-op enoxaparin. Ex-smoker (20 pack-years, quit 15 years ago). No occupational asbestos/dust exposure, no birds/pigeons, no known connective-tissue disease. Amiodarone is the standout culprit given dose, duration and the compatible subacute picture.",
+  "examination": "Elderly man, comfortable at rest but desaturates on walking. Not toxic or febrile. Fine, dry, bibasal end-inspiratory 'Velcro' crepitations extending to mid-zones, no wheeze, no bronchial breathing. Early digital clubbing. Irregularly irregular pulse. No raised JVP, no peripheral oedema, no third heart sound, apex not displaced. No calf tenderness or asymmetric leg swelling. Cardiovascular and abdominal exam otherwise unremarkable.",
+  "vitals": {
+    "hr": 92,
+    "bp": "132/80",
+    "rr": 26,
+    "temp": 37,
+    "spo2": 88
+  },
+  "labs": {
+    "wbc": 8.1,
+    "neutrophils": 5.4,
+    "crp": 12,
+    "procalcitonin": 0.08,
+    "hemoglobin": 12.9,
+    "platelets": 244,
+    "creatinine": 1.1,
+    "nt_proBNP": 210,
+    "tsh": 4.1,
+    "abg_room_air": "pH 7.44, PaO2 58 mmHg, PaCO2 34 mmHg",
+    "pao2fio2": 276,
+    "spirometry": "Restrictive: FVC 58% predicted, FEV1/FVC 0.84, DLCO 40% predicted",
+    "autoimmune_serology": "ANA negative, RF negative, anti-CCP negative, myositis panel negative"
+  },
+  "imaging": "HRCT thorax: bilateral, symmetric peripheral and basal-predominant reticulation with traction bronchiectasis and patchy ground-glass opacity; areas of high-attenuation lung/pleura consistent with amiodarone deposition; no honeycombing sufficient for definite UIP, no lobar consolidation, no pulmonary embolus on CTPA component, no significant pleural effusion. CXR: bilateral reticular interstitial infiltrates with reduced lung volumes.",
+  "microbiology": "Blood cultures negative. Sputum bacterial culture and respiratory viral PCR negative. No microbiological evidence of infection.",
+  "differentialDiagnoses": [
+    "Interstitial lung disease (amiodarone-induced pulmonary toxicity / fibrosing ILD)",
+    "Congestive cardiac failure / pulmonary oedema",
+    "Community-acquired / hospital-acquired pneumonia",
+    "Pulmonary embolism (post-operative)",
+    "Pleural effusion"
+  ],
+  "finalDiagnosis": "Interstitial lung disease — drug-induced (amiodarone) pulmonary toxicity in an elderly post-operative patient on polypharmacy",
+  "citations": [
+    "ATS/ERS/JRS/ALAT — Idiopathic Pulmonary Fibrosis and Progressive Pulmonary Fibrosis Clinical Practice Guideline — 2022",
+    "ATS/ERS — International Multidisciplinary Classification of the Idiopathic Interstitial Pneumonias — 2013",
+    "Harrison's Principles of Internal Medicine, 22e — Interstitial Lung Diseases"
+  ],
+  "stewardship": "Non-infective interstitial lung disease. No antimicrobials indicated: afebrile, normal WBC/procalcitonin, negative cultures and viral PCR, and imaging shows diffuse interstitial fibrosis rather than consolidation. Prior empiric antibiotics were inappropriate and should be stopped. Management is discontinuation of the culprit drug (amiodarone) with cardiology liaison for AF rate/rhythm alternative, corticosteroids for symptomatic drug-induced pneumonitis, supplemental oxygen, and multidisciplinary ILD referral with PFT/HRCT-based confirmation.",
+  "contraindications": [
+    "Avoid continuing amiodarone once pulmonary toxicity suspected",
+    "Avoid reflexive broad-spectrum antibiotics in the absence of infective evidence",
+    "Caution with high-dose corticosteroids given diabetes — monitor glycaemia",
+    "Nephrotoxic contrast caution if renal function borderline"
+  ],
+  "edgeCases": [
+    "Amiodarone pulmonary toxicity can present months after starting and may progress despite drug cessation due to long tissue half-life",
+    "Post-operative setting raises PE and hospital-acquired pneumonia as mimics — both must be excluded before attributing to ILD",
+    "Cardiac failure can coexist; a normal/low NT-proBNP and absence of congestion help separate ILD from pulmonary oedema"
+  ],
+  "expectedMaiK": "Recognise a subacute fibrosing interstitial lung disease (drug-induced, amiodarone) in an elderly polypharmacy patient — bibasal Velcro crackles, hypoxia, restrictive PFTs with low DLCO and HRCT reticulation/ground-glass — and stop the culprit drug rather than treat as infection.",
+  "expectedNextQuestions": [
+    "Full drug history and durations (amiodarone, nitrofurantoin, methotrexate, chemotherapy)?",
+    "Occupational/environmental and organic antigen exposures (asbestos, birds, mould)?",
+    "Any features of connective-tissue disease (Raynaud, arthralgia, rash, dysphagia)?",
+    "Baseline exertional tolerance and rate of progression?",
+    "Prior imaging/PFTs for comparison?"
+  ],
+  "expectedInvestigations": [
+    "HRCT thorax (high-resolution, prone/expiratory)",
+    "Pulmonary function tests with DLCO",
+    "Resting and exertional oximetry / ABG",
+    "Autoimmune / CTD serology panel (ANA, ENA, RF, anti-CCP, myositis panel)",
+    "NT-proBNP and echocardiography to exclude cardiac cause",
+    "Multidisciplinary ILD team review +/- bronchoalveolar lavage"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "dyspnea": true,
+    "coughRadio": true,
+    "crepitations": true,
+    "bilateralCrackles": true,
+    "hypoxia": true,
+    "supplementalOxygen": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "ageOver50": true,
+    "atrialFibHx": true,
+    "hospitalizationLast90Days": true
+  },
+  "expected": {
+    "diagnosis": "ild",
+    "acceptableIds": [
+      "ild"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "pe",
+      "CAP",
+      "pleural_effusion"
+    ],
+    "investigations": [
+      "HRCT thorax",
+      "Pulmonary function tests with DLCO",
+      "Autoimmune/CTD serology",
+      "NT-proBNP and echocardiography",
+      "ABG / exertional oximetry"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ild as the top diagnosis",
+    "Must not recommend antibiotics (non-infective ILD)",
+    "Must flag amiodarone as likely culprit drug and advise discontinuation",
+    "HRCT and PFT with DLCO must appear in recommended investigations",
+    "Must exclude cardiac failure, PE and pneumonia before finalising"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

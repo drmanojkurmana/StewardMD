@@ -1,0 +1,122 @@
+{
+  "id": "gc_422",
+  "specialty": "Tropical Fever",
+  "condition": "Rickettsial Fever (Spotted Fever Group)",
+  "age": 36,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever for 7 days with severe headache and a spreading rash, not improving despite 4 days of intravenous antibiotics at a district hospital.",
+  "history": "Farmer from a hilly, scrub-vegetation village in the Western Ghats. Fever began abruptly 7 days ago with rigors, severe frontal headache and diffuse myalgia. On day 3 he developed a rash that started around the wrists and ankles and spread centripetally to the trunk. He was admitted to a district hospital where blood cultures were sent and he was started empirically on IV ceftriaxone, later escalated to piperacillin-tazobactam on day 5 for presumed 'resistant sepsis' as fever and rash persisted and platelets fell. There was no clinical response to either beta-lactam. He recalls removing ticks from his legs after clearing brush ~10 days ago. No cough, dysuria or diarrhoea. No prior comorbidities; not immunocompromised. Blood cultures at the referring hospital were sterile at 48h.",
+  "examination": "Ill-looking, flushed, alert. Widespread blanching maculopapular rash over trunk and limbs including the palms and soles, with early petechiae over the shins. A 1 cm black necrotic eschar with an erythematous halo is present in the left popliteal fossa. Mild tender hepatosplenomegaly. Small tender inguinal nodes on the left. No neck stiffness, no focal neurology. Chest clear.",
+  "vitals": {
+    "hr": 116,
+    "bp": "98/62",
+    "rr": 22,
+    "temp": 39.5,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 11.8,
+    "platelets": 68,
+    "wbc": "6.2 x10^9/L",
+    "creatinine": 1.6,
+    "urea": 9.8,
+    "bilirubin": 1.9,
+    "alt": 138,
+    "ast": 165,
+    "albumin": 3.1,
+    "sodium": 130,
+    "crp": 142
+  },
+  "imaging": "Chest radiograph clear. Ultrasound abdomen: mild hepatosplenomegaly, no abscess or biliary dilatation, no ascites.",
+  "microbiology": "Two sets of blood cultures (referring hospital and on admission) sterile at 48h. Malaria smear and rapid antigen negative x2. Dengue NS1/IgM negative. Leptospira IgM negative. Weil-Felix OX-2/OX-19 titre 1:320 (rising). Spotted-fever-group Rickettsia IgM ELISA positive; eschar-swab PCR positive for Rickettsia species (spotted fever group). Sterile cultures despite non-response to beta-lactams reflect an obligate intracellular pathogen unresponsive to cell-wall agents, not a multidrug-resistant bacterium.",
+  "differentialDiagnoses": [
+    "Spotted fever group rickettsiosis (Indian tick typhus)",
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis",
+    "Enteric fever"
+  ],
+  "finalDiagnosis": "Spotted Fever Group Rickettsial Fever (tick-borne), with eschar and centripetal maculopapular rash; apparent 'antibiotic-resistant sepsis' explained by inappropriate empiric beta-lactam therapy for an intracellular organism.",
+  "citations": [
+    "CDC — Diagnosis and Management of Tickborne Rickettsial Diseases — 2016",
+    "ICMR — Guidelines for Diagnosis and Management of Rickettsial Diseases — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Rickettsial Diseases"
+  ],
+  "stewardship": "The picture of persistent fever, rash and thrombocytopenia despite escalation from ceftriaxone to piperacillin-tazobactam is not beta-lactam resistance but the expected failure of cell-wall-active agents against an obligate intracellular Rickettsia. Empiric broad-spectrum beta-lactams should be STOPPED (de-escalated) and doxycycline 100 mg BD started immediately in any acute undifferentiated tropical febrile illness with eschar, palm/sole rash or tick exposure; defervescence within 48h supports the diagnosis and is itself diagnostic. Doxycycline is first-line regardless of age; a tetracycline should not be withheld for eschar-positive spotted fever. There is no source to drain — 'source control' here means removing the wrong antibiotic and treating the causative intracellular pathogen. Azithromycin is a second-line alternative in pregnancy.",
+  "contraindications": [
+    "Do not treat with beta-lactams/carbapenems — ineffective against intracellular Rickettsia and drives unnecessary broad-spectrum escalation",
+    "Do not delay doxycycline awaiting serology confirmation",
+    "Avoid sulphonamides — associated with worsening of rickettsial illness",
+    "Caution with nephrotoxic/hepatotoxic co-medications given the mild AKI and transaminitis"
+  ],
+  "edgeCases": [
+    "Beta-lactam non-response mislabelled as 'MDR sepsis' when the true issue is an intracellular pathogen requiring doxycycline",
+    "Eschar overlooked in a skin fold (popliteal fossa) leading to delayed diagnosis",
+    "Progression to petechiae with thrombocytopenia can mimic dengue or meningococcaemia",
+    "Weil-Felix is insensitive/nonspecific — a negative result should not exclude the diagnosis if clinical suspicion is high"
+  ],
+  "expectedMaiK": "Acute undifferentiated tropical febrile illness with an eschar, centripetal maculopapular rash involving palms/soles, thrombocytopenia and tick exposure is spotted fever group rickettsiosis until proven otherwise; start empiric doxycycline and stop ineffective beta-lactams rather than escalating antibacterial spectrum.",
+  "expectedNextQuestions": [
+    "Any tick bite, brush-clearing or scrub/rural exposure in the preceding 1-2 weeks?",
+    "Has anyone examined for an eschar in skin folds, groin, axillae and behind knees?",
+    "Distribution and timing of the rash — did it start peripherally on wrists/ankles including palms and soles?",
+    "Response (or lack of it) to the beta-lactams already given, and blood culture results?"
+  ],
+  "expectedInvestigations": [
+    "Spotted-fever-group Rickettsia serology (IgM/IgG IFA) and, where available, eschar-swab or whole-blood PCR",
+    "Weil-Felix (OX-2/OX-19) as an adjunct only",
+    "FBC, LFTs, renal function and coagulation to assess organ involvement",
+    "Malaria smear/RDT, dengue NS1/IgM and leptospira serology to exclude mimics",
+    "Repeat blood cultures to confirm sterility and exclude bacterial sepsis"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "headacheSevere": true,
+    "myalgiaArthralgia": true,
+    "maculopapularRash": true,
+    "eschar": true,
+    "tickExposure": true,
+    "ruralExposure": true,
+    "thrombocytopenia": true,
+    "tachycardia": true,
+    "hepatosplenomegaly": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "RICKETTSIAL_FEVER",
+    "acceptableIds": [
+      "RICKETTSIAL_FEVER"
+    ],
+    "differentialIds": [
+      "SCRUB_TYPHUS",
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Spotted-fever-group Rickettsia IgM/IgG IFA serology",
+      "Eschar-swab / whole-blood Rickettsia PCR",
+      "FBC, LFTs, renal function",
+      "Malaria RDT/smear, dengue NS1/IgM, leptospira IgM to exclude mimics"
+    ],
+    "stewardship": {
+      "tier": "first-line",
+      "antibiotics": [
+        "Doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks RICKETTSIAL_FEVER as top diagnosis given eschar + palm/sole maculopapular rash + tick exposure + thrombocytopenia",
+    "Recommends doxycycline as first-line therapy",
+    "Recommends stopping/de-escalating empiric beta-lactams rather than broadening spectrum",
+    "Includes scrub typhus, dengue, leptospirosis and enteric fever in the differential",
+    "Does not label the beta-lactam non-response as multidrug-resistant bacterial sepsis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

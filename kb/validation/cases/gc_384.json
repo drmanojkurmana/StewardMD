@@ -1,0 +1,118 @@
+{
+  "id": "gc_384",
+  "specialty": "Respiratory",
+  "condition": "Aspiration Pneumonia",
+  "age": 59,
+  "sex": "M",
+  "presentingComplaint": "Fever, breathlessness and cough productive of foul-smelling sputum, 3 days after a witnessed choking episode while vomiting.",
+  "history": "59-year-old man on day 11 of induction chemotherapy (7+3, cytarabine/daunorubicin) for newly diagnosed acute myeloid leukaemia, currently profoundly neutropenic. Over the last 3 days he has developed fever with rigors, worsening dyspnoea and a cough bringing up copious foul-smelling, purulent sputum. Nursing staff witnessed him aspirate during an episode of chemotherapy-related vomiting while drowsy 3 days ago. He also reports intermittent difficulty swallowing attributed to grade 3 oral mucositis. He has been on prophylactic levofloxacin during neutropenia (recent prior antibiotic exposure). No pleuritic chest pain at rest. No prior TB, no travel.",
+  "examination": "Ill, toxic-looking man, mildly confused at the edges but orientated. Poor dentition and extensive oral mucositis. Reduced air entry and coarse crepitations over the right lower and mid zones with bronchial breathing; dullness to percussion at the right base. No calf swelling. No focal neurological deficit.",
+  "vitals": {
+    "hr": 118,
+    "bp": "104/66",
+    "rr": 30,
+    "temp": 38.9,
+    "spo2": 90
+  },
+  "labs": {
+    "hemoglobin": 8.4,
+    "platelets": 42,
+    "wbc": 0.6,
+    "absoluteNeutrophilCount": 180,
+    "creatinine": 1.1,
+    "crp": 214,
+    "procalcitonin": 3.8,
+    "lactate": 1.9
+  },
+  "imaging": "Chest radiograph: dense right lower lobe and posterior segment consolidation in a dependent/gravitational distribution with an early air-fluid level, consistent with aspiration into dependent lung segments. No large effusion or lobar collapse.",
+  "microbiology": "Two sets of blood cultures drawn. Sputum Gram stain: mixed flora with polymorphs; culture pending. Nasopharyngeal respiratory viral panel negative. Endotracheal/BAL not yet obtained. Legionella and pneumococcal urinary antigens negative.",
+  "differentialDiagnoses": [
+    "Aspiration pneumonia (dependent-segment consolidation after witnessed aspiration)",
+    "Community-acquired pneumonia in a neutropenic host",
+    "Evolving lung abscess",
+    "Febrile neutropenia from an alternative source"
+  ],
+  "finalDiagnosis": "Aspiration pneumonia in a neutropenic, immunocompromised host, with broad empiric antipseudomonal/anaerobic cover pending cultures and planned de-escalation.",
+  "citations": [
+    "IDSA/ATS — Community-Acquired Pneumonia in Adults — 2019",
+    "IDSA — Antimicrobial Use in Neutropenic Patients with Cancer — 2011",
+    "Harrison's Principles of Internal Medicine 22e — Pneumonia / Aspiration and Lung Abscess"
+  ],
+  "stewardship": "Immunocompromised, profoundly neutropenic host with aspiration-pattern pneumonia after a witnessed aspiration event: start broad empiric cover that spans Pseudomonas and enteric Gram-negatives (mandatory in febrile neutropenia) as well as oral anaerobes implicated in aspiration. Piperacillin-tazobactam is the single agent that meets both needs and is guideline-concordant here; it removes the need to add metronidazole for anaerobic cover. Obtain blood cultures and quality lower-respiratory samples BEFORE the first dose. Because he received levofloxacin prophylaxis, do not rely on fluoroquinolone monotherapy. Reassess at 48-72h: if he is stabilising, cultures are unrevealing and there is no pseudomonal isolate, de-escalate to a narrower anaerobe/streptococci-active regimen such as ampicillin-sulbactam (or amoxicillin-clavulanate), and stop double Gram-negative cover. Total course 5-7 days if uncomplicated and clinically improving; extend and image (CT) only if an abscess or empyema evolves. Add empiric antifungal cover only if fever persists beyond 4-7 days of broad antibacterials.",
+  "contraindications": [
+    "Avoid aminoglycoside add-on if renal function is borderline or nephrotoxic chemotherapy given",
+    "Do not use fluoroquinolone monotherapy given recent levofloxacin prophylaxis (breakthrough/resistance risk)",
+    "Avoid routine corticosteroids for aspiration pneumonitis — no benefit and immunosuppressive in neutropenia"
+  ],
+  "edgeCases": [
+    "Distinguish bacterial aspiration pneumonia from chemical aspiration pneumonitis, which does not require prolonged antibiotics",
+    "Persistent fever with cavitation suggests evolving lung abscess needing longer therapy and CT",
+    "In deep neutropenia, radiographic consolidation may be subtle initially and evolve as counts recover"
+  ],
+  "expectedMaiK": "Aspiration pneumonia in a neutropenic host requires broad empiric antipseudomonal + anaerobic cover (piperacillin-tazobactam) after cultures, with structured de-escalation once stable and culture data return.",
+  "expectedNextQuestions": [
+    "Was the aspiration event witnessed, and what is the swallowing/consciousness status now?",
+    "What is the current absolute neutrophil count and day of chemotherapy cycle?",
+    "Has he had recent antibiotic prophylaxis or prior resistant organisms?",
+    "Are there features of an evolving abscess or empyema (persistent fever, cavitation, pleural collection)?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 before antibiotics",
+    "Lower-respiratory sample (sputum/tracheal aspirate or BAL) for Gram stain and culture",
+    "Chest radiograph, with CT chest if abscess/empyema suspected",
+    "Full blood count with ANC, renal function and lactate",
+    "Respiratory viral panel and Legionella/pneumococcal urinary antigens"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "aspirationRiskFactor": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "foulSmellingSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "immunocompromised": true,
+    "neutropenia": true,
+    "priorAntibiotics": true
+  },
+  "expected": {
+    "diagnosis": "ASPIRATION_PNEUMONIA",
+    "acceptableIds": [
+      "ASPIRATION_PNEUMONIA"
+    ],
+    "differentialIds": [
+      "CAP",
+      "LUNG_ABSCESS",
+      "FEBRILE_NEUTROPENIA",
+      "HAP"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "Lower-respiratory sample for Gram stain and culture",
+      "Chest radiograph (CT if abscess/empyema suspected)",
+      "FBC with ANC, renal function, lactate"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks ASPIRATION_PNEUMONIA as top diagnosis",
+    "Empiric regimen provides both antipseudomonal and anaerobic cover in a neutropenic host",
+    "De-escalation to ampicillin-sulbactam / amoxicillin-clavulanate proposed once stable and cultures unrevealing",
+    "Cultures recommended before first antibiotic dose",
+    "Fluoroquinolone monotherapy not recommended given recent prophylaxis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "gc_470",
+  "specialty": "Critical care",
+  "condition": "Hypovolemic / haemorrhagic shock",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Two large-volume vomits of fresh blood and black tarry stools with collapse at home",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B, prior grade II oesophageal varices banded 8 months ago, non-adherent to carvedilol) presents after two episodes of massive haematemesis (approx 500 mL fresh blood each) over 3 hours followed by three episodes of melaena and a witnessed syncopal collapse while walking to the toilet. He reports light-headedness, cold clammy peripheries and increasing drowsiness during transfer. No fever, no cough, no dysuria, no abdominal pain of note. Last drink 2 days ago. On no anticoagulants. The overlapping picture (jaundice, ascites, mild confusion) initially raised concern for decompensation/sepsis, but the dominant, time-critical problem is acute blood loss with haemodynamic collapse.",
+  "examination": "Cold, mottled peripheries with prolonged capillary refill (>4 s), thready pulse. Pallor of conjunctivae. Drowsy but rousable, GCS 14 (E3V5M6), grade 1 asterixis. Stigmata of chronic liver disease: spider naevi, palmar erythema, mild scleral icterus, shifting dullness consistent with moderate ascites. Abdomen soft, non-tender, no guarding or Murphy sign. PR examination reveals melaena. No focal neurology, no meningism. Chest clear.",
+  "vitals": {
+    "hr": 128,
+    "bp": "78/44",
+    "rr": 26,
+    "temp": 36.4,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 6.8,
+    "hematocrit": 21,
+    "platelets": 74,
+    "inr": 1.9,
+    "bilirubin": 3.4,
+    "albumin": 2.6,
+    "creatinine": 1.8,
+    "urea_mmol_l": 18.5,
+    "sodium": 132,
+    "potassium": 4.6,
+    "lactate_mmol_l": 4.2,
+    "wbc": 8.9,
+    "crp": 12
+  },
+  "imaging": "Bedside FAST: moderate ascites, no free intraperitoneal air/haemorrhage. Erect CXR normal, no free air under diaphragm. Urgent upper GI endoscopy after resuscitation: large oesophageal varices with active spurting (Forrest-equivalent active) bleeding, controlled by endoscopic band ligation.",
+  "microbiology": "Not indicated for the shock diagnosis. Blood cultures and ascitic diagnostic tap sent given cirrhosis (SBP screen / prophylaxis decision), pending.",
+  "differentialDiagnoses": [
+    "Haemorrhagic (hypovolemic) shock from oesophageal variceal bleeding",
+    "Bleeding peptic ulcer",
+    "Decompensated cirrhosis / hepatic encephalopathy",
+    "Septic shock (SBP-related distributive shock)"
+  ],
+  "finalDiagnosis": "Hypovolemic (haemorrhagic) shock secondary to acute variceal haemorrhage in decompensated cirrhosis",
+  "citations": [
+    "Baveno VII Consensus — Management of acute variceal haemorrhage and portal hypertension — 2022",
+    "AASLD Practice Guidance — Portal hypertensive bleeding in cirrhosis — 2016",
+    "ATLS (American College of Surgeons) — Classification and management of haemorrhagic shock — 2018"
+  ],
+  "stewardship": "Non-infective shock: the primary intervention is haemostatic resuscitation and source control, not antimicrobials. However, in cirrhosis with acute GI bleeding, short-course antibiotic PROPHYLAXIS (e.g., IV ceftriaxone) is guideline-mandated to reduce infection/rebleeding/mortality — this is prophylaxis, not treatment of an infection, so no empiric therapeutic antibiotic tier applies to the shock itself. Resuscitation priorities: restrictive transfusion (target Hb 7-8 g/dL), correct coagulopathy judiciously, IV terlipressin/octreotide, urgent endoscopic band ligation, consider TIPS if refractory.",
+  "contraindications": [
+    "Avoid over-transfusion / aggressive volume expansion to normal BP — raises portal pressure and precipitates rebleeding (target Hb 7-8 g/dL, permissive hypotension SBP ~90-100)",
+    "Avoid indiscriminate FFP/platelet correction to normal values in cirrhosis (rebalanced haemostasis; volume overload risk)",
+    "Avoid non-selective NSAIDs and nephrotoxins given renal impairment / hepatorenal risk"
+  ],
+  "edgeCases": [
+    "Urea disproportionately high relative to creatinine reflects an upper GI blood 'protein meal' plus prerenal state, not primarily renal disease",
+    "Coexisting cirrhosis can mask tachycardia if on beta-blockade and lower baseline BP, causing under-estimation of shock severity",
+    "Confusion may be dual: hypoperfusion AND precipitated hepatic encephalopathy from the GI blood load"
+  ],
+  "expectedMaiK": "Recognise haemorrhagic (hypovolemic) shock from variceal bleeding as the immediate life threat; resuscitate with blood products using a restrictive strategy, give vasoactive therapy (terlipressin) plus antibiotic prophylaxis, and secure source control by urgent endoscopy — do not anchor on decompensated cirrhosis or sepsis.",
+  "expectedNextQuestions": [
+    "Estimated volume and rate of blood loss and number of bleeding episodes?",
+    "History of known varices, prior banding, beta-blocker adherence?",
+    "Any anticoagulant/antiplatelet or NSAID use?",
+    "Alcohol intake and last drink; features of encephalopathy?",
+    "Urine output since onset and trend in conscious level?"
+  ],
+  "expectedInvestigations": [
+    "Group and crossmatch + urgent FBC, coagulation/INR, fibrinogen",
+    "Serial lactate and venous blood gas",
+    "LFTs, renal function/urea, electrolytes",
+    "Urgent upper GI endoscopy (diagnostic and therapeutic)",
+    "Bedside FAST / erect CXR to exclude other sources"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "hematemesis": true,
+    "melena": true,
+    "gibPresentation": true,
+    "syncope": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "liverDisease": true,
+    "ascites": true,
+    "jaundice": true,
+    "lactateElevated": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "hypovolemic_shock",
+    "acceptableIds": [
+      "hypovolemic_shock"
+    ],
+    "differentialIds": [
+      "variceal_bleed",
+      "peptic_ulcer",
+      "decomp_cirrhosis",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Group and crossmatch with urgent FBC and coagulation profile",
+      "Serial lactate / venous blood gas",
+      "Urgent upper GI endoscopy",
+      "Bedside FAST and erect chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks hypovolemic_shock as top diagnosis given hematemesis + melena + hypotension + tachycardia + elevated lactate",
+    "System flags haemorrhagic shock as an immediate life threat requiring blood-product resuscitation and source control",
+    "No therapeutic empiric antibiotic tier is asserted for the shock (infective:false); antibiotic use is prophylaxis in the cirrhotic GI-bleed context only",
+    "Restrictive transfusion target (Hb 7-8 g/dL) and avoidance of over-resuscitation are recommended",
+    "decomp_cirrhosis and SEPTIC_SHOCK appear as differentials but not as the primary diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

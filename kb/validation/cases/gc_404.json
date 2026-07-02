@@ -1,0 +1,119 @@
+{
+  "id": "gc_404",
+  "specialty": "Gastrointestinal",
+  "condition": "Enteric Fever (Typhoid)",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "High-grade continuous fever for 10 days with abdominal discomfort, headache and worsening lethargy despite two prior courses of oral antibiotics.",
+  "history": "Previously well university student from Karachi visiting family in Delhi, presents with a 10-day history of insidious-onset fever that has climbed in a stepwise fashion to 39.5-40 C, now sustained rather than intermittent. He describes frontal headache, marked anorexia, dull peri-umbilical/right-lower-quadrant abdominal discomfort and abdominal fullness, with alternating loose stools and constipation. He drank untreated water and ate street food shortly before onset. His GP started oral ciprofloxacin on day 3 with no defervescence, then switched to oral cefixime on day 7, again without response - hence the concern for a drug-resistant organism. No respiratory symptoms, dysuria, jaundice or rash noted by the patient. No prior typhoid vaccination. No known TB contact. This is a resistant/MDR-organism scenario: failure of both fluoroquinolone and oral third-generation cephalosporin points to fluoroquinolone-non-susceptible and possibly XDR Salmonella Typhi originating from the endemic Indus-valley clone, requiring in-patient escalation and search for a suppurative complication (source control).",
+  "examination": "Ill and apathetic but oriented, flushed. Coated tongue. A few blanching, 2-3 mm pink macules (rose spots) noted on the lower chest and upper abdomen. Abdomen soft with mild diffuse tenderness and a palpable, non-tender liver edge 2 cm below the costal margin and a just-palpable spleen tip. No peritonism, no guarding, bowel sounds present. Chest clear, no murmur. No focal neurology, no neck stiffness. No peripheral oedema.",
+  "vitals": {
+    "hr": 84,
+    "bp": "110/72",
+    "rr": 18,
+    "temp": 39.6,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 11.8,
+    "wbc": 3.4,
+    "platelets": 118,
+    "bilirubin": 1.3,
+    "ALT": 96,
+    "AST": 88,
+    "creatinine": 0.9,
+    "CRP": 84,
+    "note": "Leukopenia with relative eosinopenia, mild thrombocytopenia and modest transaminitis - typical of enteric fever; anaemia mild."
+  },
+  "imaging": "Ultrasound abdomen: mild hepatosplenomegaly with prominent mesenteric lymph nodes and a trace of pelvic free fluid; no liver abscess, no gallbladder or biliary pathology, no bowel-wall thickening to suggest perforation. Erect chest/abdominal film: no free air.",
+  "microbiology": "Blood cultures (two sets, drawn before escalation) grew Salmonella enterica serovar Typhi. Susceptibility: RESISTANT to ampicillin, chloramphenicol, co-trimoxazole (classic MDR), ciprofloxacin (MIC high; also nalidixic-acid resistant) AND ceftriaxone/cefixime (blaCTX-M-15 ESBL) - i.e. an extensively drug-resistant (XDR) S. Typhi. SUSCEPTIBLE to azithromycin and meropenem. Stool culture pending. Widal single high titre is supportive but non-diagnostic and not relied upon.",
+  "differentialDiagnoses": [
+    "Malaria",
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Enteric (typhoid) fever due to extensively drug-resistant (XDR) Salmonella Typhi",
+  "citations": [
+    "WHO Typhoid Fever Guidance 2018",
+    "IDSA Infectious Diarrhea Guideline 2017",
+    "Harrison's Principles of Internal Medicine 22e - Enteric (Typhoid) Fever"
+  ],
+  "stewardship": "Blood-culture-confirmed XDR S. Typhi that has clinically failed both a fluoroquinolone and an oral third-generation cephalosporin. Empiric guideline-concordant therapy for suspected enteric fever in a South-Asian traveller with prior treatment failure should already cover resistant strains: IV ceftriaxone is standard first-line empiric cover, but in this high-XDR-prevalence setting with documented cephalosporin failure, ESCALATE to IV meropenem (or high-dose azithromycin for non-severe disease). De-escalate/narrow once susceptibilities confirm - here oral/IV azithromycin can complete therapy as the organism is azithromycin-susceptible and the patient is not severely ill. Total duration 10-14 days. 'Source control' in enteric fever means active exclusion and management of suppurative/perforative complications (intestinal perforation, GI bleed, cholecystitis with chronic carriage) - none present here, so no surgical intervention required. Public-health notification and safe-water/food counselling; screen for chronic biliary carriage if fever relapses.",
+  "contraindications": [
+    "Avoid continued fluoroquinolone or oral 3rd-gen cephalosporin monotherapy given documented resistance and clinical failure",
+    "Avoid empiric oral cefixime for confirmed/suspected XDR strains",
+    "Caution with carbapenems if documented beta-lactam anaphylaxis"
+  ],
+  "edgeCases": [
+    "Intestinal perforation or GI haemorrhage in the 3rd week - watch for sudden abdominal pain, peritonism or melena mandating surgical source control",
+    "Relapse after apparent cure suggests inadequate duration or chronic biliary carriage",
+    "Co-endemic malaria/dengue may coexist - smear and NS1/serology if course atypical"
+  ],
+  "expectedMaiK": "Prolonged stepladder fever with relative bradycardia, rose spots, hepatosplenomegaly, leukopenia and positive blood culture for S. Typhi in a South-Asian traveller = enteric fever; failure of fluoroquinolone and oral cephalosporin signals XDR requiring escalation to meropenem/azithromycin.",
+  "expectedNextQuestions": [
+    "Travel/residence and drinking-water/food exposure in an endemic (South Asian) region?",
+    "Exact antibiotics already taken and clinical response (to gauge resistance)?",
+    "Any typhoid vaccination history?",
+    "Features of complication - severe abdominal pain, melena, altered sensorium?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures (>=2 sets) before/at escalation with full susceptibilities",
+    "FBC with differential, LFTs, CRP, renal function",
+    "Stool and, if available, bone-marrow culture (highest yield)",
+    "Abdominal ultrasound to exclude abscess/biliary source and assess organomegaly",
+    "Malaria smear/RDT and dengue NS1 to exclude co-endemic causes"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "stepladderFever": true,
+    "relativeBradycardia": true,
+    "roseSpots": true,
+    "hepatosplenomegaly": true,
+    "abdominalPain": true,
+    "headache": true,
+    "constipationOrDiarrhea": true,
+    "contaminatedFoodWaterExposure": true,
+    "priorAntibiotics": true,
+    "mdrRisk": true
+  },
+  "expected": {
+    "diagnosis": "ENTERIC_FEVER",
+    "acceptableIds": [
+      "ENTERIC_FEVER"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "SCRUB_TYPHUS",
+      "DENGUE",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Blood cultures with susceptibilities",
+      "FBC, LFTs, CRP",
+      "Stool culture",
+      "Abdominal ultrasound",
+      "Malaria smear/RDT and dengue NS1"
+    ],
+    "stewardship": {
+      "tier": "escalation",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Meropenem",
+        "Azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ENTERIC_FEVER as top diagnosis",
+    "Stepladder fever + relative bradycardia + rose spots + positive S. Typhi culture must anchor enteric fever over malaria/dengue/scrub typhus",
+    "Documented ceftriaxone/ciprofloxacin resistance must drive escalation to meropenem/azithromycin, not continued FQ or oral cephalosporin",
+    "No liver abscess or perforation present, so no surgical source control is asserted"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

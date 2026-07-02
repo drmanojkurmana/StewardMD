@@ -1,0 +1,121 @@
+{
+  "id": "gc_413",
+  "specialty": "Tropical Fever",
+  "condition": "Malaria",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever with rigors for 5 days, now drowsy with dark urine and reduced urine output, deteriorating despite 2 days of oral chloroquine.",
+  "history": "Migrant construction worker who returned 12 days ago from a P. falciparum-endemic district of eastern India (Odisha). Five days of intermittent high-grade fever with teeth-chattering rigors followed by drenching sweats, occurring roughly every 36-48 hours, with severe myalgia and anorexia. A local practitioner made a clinical diagnosis of malaria and started oral chloroquine 48 hours ago; instead of improving he has become progressively more unwell with persisting daily fevers, passing dark 'cola-coloured' urine, and today the family report him being confused and difficult to rouse. No prior antimalarials in this region are reliably effective as chloroquine-resistant falciparum is well established locally. No cough, dysuria, diarrhoea, neck stiffness or rash. No prior splenectomy. Not on regular medication; no known G6PD status.",
+  "examination": "Ill-looking, drowsy but rousable, icteric sclerae. Mildly dehydrated. Pallor present. Chest clear; abdomen soft with a palpable spleen 3 cm below costal margin and mild tender hepatomegaly. No focal neurological deficit, no meningism, no rash or eschar. Capillary refill 3 seconds, cool peripheries.",
+  "vitals": {
+    "hr": 122,
+    "bp": "94/58",
+    "rr": 28,
+    "temp": 39.9,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": 8.1,
+    "platelets": 42,
+    "creatinine": 2.8,
+    "urea": 18.5,
+    "bilirubin": 4.6,
+    "albumin": 3,
+    "lactate": 3.4,
+    "glucose": 58,
+    "parasitaemia": "P. falciparum ring forms, 6% parasitised RBCs",
+    "ast": 92,
+    "alt": 78
+  },
+  "imaging": "USG abdomen: mild hepatosplenomegaly, no biliary dilatation, no focal hepatic lesion, no ascites. Chest X-ray clear.",
+  "microbiology": "Peripheral thick and thin smear: Plasmodium falciparum, only ring-stage trophozoites and occasional banana-shaped gametocytes seen, parasite density ~6% (approx 300,000/µL) — high parasitaemia. Rapid diagnostic test positive for P. falciparum HRP-2 antigen, negative for pan-Plasmodium/P. vivax LDH. Blood cultures sterile at 48h. This represents chloroquine-resistant P. falciparum with clinical progression on chloroquine, meeting WHO criteria for severe malaria (hyperparasitaemia, jaundice, AKI, impaired consciousness, hypoglycaemia).",
+  "differentialDiagnoses": [
+    "Severe (complicated) P. falciparum malaria",
+    "Dengue fever",
+    "Scrub typhus",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Severe chloroquine-resistant Plasmodium falciparum malaria with cerebral involvement, acute kidney injury, jaundice and hypoglycaemia — requiring escalation from failed oral chloroquine to parenteral artesunate.",
+  "citations": [
+    "WHO — Guidelines for Malaria (severe malaria, parenteral artesunate) — 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Malaria",
+    "NVBDCP/ICMR India — National Guidelines for Diagnosis and Treatment of Malaria — 2014"
+  ],
+  "stewardship": "This is a treatment-failure/resistance scenario: chloroquine-resistant P. falciparum with clinical deterioration on oral chloroquine, now meeting severe-malaria criteria (impaired consciousness, parasitaemia >5%, AKI, jaundice, hypoglycaemia, lactate >2). Escalate immediately to IV artesunate 2.4 mg/kg at 0, 12, 24h then daily; this is superior to quinine (SEAQUAMAT/AQUAMAT). Continue parenteral therapy for a minimum of 24h and until able to tolerate orals, then complete a full 3-day course of oral artemisinin-based combination therapy (artemether-lumefantrine) to prevent recrudescence; add primaquine single 0.25 mg/kg gametocytocidal dose after G6PD screening. 'Source control' here is parasite clearance plus supportive ICU care: correct hypoglycaemia, judicious fluids, monitor for haemolysis and delayed post-artesunate haemolytic anaemia. Antibacterials are not routinely indicated but empirical cover is warranted only if concurrent bacterial sepsis is suspected.",
+  "contraindications": [
+    "Chloroquine is inappropriate/ineffective for chloroquine-resistant P. falciparum — do not continue.",
+    "Avoid mefloquine as a partner in cerebral malaria due to neuropsychiatric risk.",
+    "Check G6PD status before primaquine to avoid acute haemolysis.",
+    "Avoid aggressive fluid boluses (FEAST) — risk of pulmonary oedema in severe malaria."
+  ],
+  "edgeCases": [
+    "Delayed post-artesunate haemolytic anaemia at day 7-21 requires Hb monitoring after discharge.",
+    "Hypoglycaemia may be masked by quinine-induced hyperinsulinaemia if quinine is used.",
+    "Coma may be attributed to hypoglycaemia rather than cerebral malaria — recheck glucose.",
+    "High parasitaemia with only ring forms can under-represent sequestered burden."
+  ],
+  "expectedMaiK": "Severe falciparum malaria failing oral chloroquine (chloroquine-resistant) mandates immediate escalation to IV artesunate plus supportive care, not another oral agent.",
+  "expectedNextQuestions": [
+    "Exact travel dates and specific endemic region visited?",
+    "What antimalarial, dose and duration has already been given?",
+    "Any reduction in urine output or dark urine (blackwater)?",
+    "G6PD status and prior haemolysis history?",
+    "Level of consciousness / any seizures?"
+  ],
+  "expectedInvestigations": [
+    "Urgent thick and thin peripheral smear with parasite density (% parasitaemia)",
+    "Malaria rapid diagnostic test (HRP-2 / pLDH)",
+    "Blood glucose (rule out hypoglycaemia)",
+    "FBC, renal function, LFTs, lactate, coagulation",
+    "Blood cultures to exclude concurrent bacteraemia"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "paroxysmalFever": true,
+    "travelEndemicArea": true,
+    "thrombocytopenia": true,
+    "splenomegaly": true,
+    "jaundice": true,
+    "darkUrine": true,
+    "renalImpairment": true,
+    "alteredSensorium": true,
+    "myalgiaArthralgia": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "MALARIA",
+    "acceptableIds": [
+      "MALARIA"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Peripheral blood smear (thick and thin) with parasite density",
+      "Malaria rapid diagnostic test (HRP-2/pLDH)",
+      "Blood glucose",
+      "Renal function, LFTs, FBC, lactate"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "IV artesunate",
+        "Artemether-lumefantrine (follow-on ACT)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Must identify severe/complicated falciparum malaria and escalate to IV artesunate.",
+    "Must NOT continue or recommend chloroquine given chloroquine resistance and clinical failure.",
+    "Must recognise severe-malaria criteria (impaired consciousness, hyperparasitaemia, AKI, jaundice, hypoglycaemia).",
+    "Must include follow-on oral ACT to complete treatment and prevent recrudescence."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

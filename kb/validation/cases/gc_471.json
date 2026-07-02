@@ -1,0 +1,117 @@
+{
+  "id": "gc_471",
+  "specialty": "Gastroenterology",
+  "condition": "Inflammatory bowel disease flare",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Increasing bloody diarrhoea, up to 9 stools/day with urgency and tenesmus, on day 4 after elective right total hip replacement.",
+  "history": "71-year-old woman with a 14-year history of ulcerative colitis (left-sided, previously well controlled on oral mesalazine 2.4 g/day) admitted electively for right total hip arthroplasty for osteoarthritis. Post-operative recovery complicated by escalating loose, bloody stools from post-op day 2, now 8-9 times daily with nocturnal motions, urgency, tenesmus, cramping lower abdominal pain and 3 kg weight loss over the admission. Her mesalazine was inadvertently omitted on the peri-operative drug chart while nil-by-mouth. Regular medications include amlodipine, atorvastatin, levothyroxine, omeprazole and, since surgery, regular diclofenac and codeine for analgesia plus subcutaneous enoxaparin thromboprophylaxis. No recent antibiotics before admission, no foreign travel, no sick contacts. Reports fatigue and anorexia; no vomiting.",
+  "examination": "Elderly woman, mildly distressed and pale. Dry mucous membranes with reduced skin turgor. Abdomen soft but diffusely tender in the lower quadrants with mild distension and active bowel sounds; no guarding, rigidity or rebound; no palpable mass. Digital rectal examination shows fresh blood and mucus. Surgical hip wound clean and dry. No peripheral oedema; peripheral pulses intact.",
+  "vitals": {
+    "hr": 108,
+    "bp": "104/66",
+    "rr": 20,
+    "temp": 37.6,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 9.8,
+    "wbc": 13.2,
+    "platelets": 512,
+    "crp": 88,
+    "esr": 54,
+    "albumin": 2.7,
+    "creatinine": 1.1,
+    "urea": 9.4,
+    "sodium": 137,
+    "potassium": 3.3,
+    "faecalCalprotectin": ">1800 µg/g",
+    "cdiffToxinPCR": "negative",
+    "stoolCulture": "no pathogens isolated"
+  },
+  "imaging": "Abdominal X-ray: continuous mucosal oedema/thumbprinting through the descending and sigmoid colon; transverse colonic diameter 4.2 cm (no toxic megacolon, no free air). Flexible sigmoidoscopy (unprepped, limited): continuous, circumferential erythema, loss of vascular pattern, granularity and superficial ulceration with contact bleeding from rectum to descending colon (Mayo endoscopic subscore 3); biopsies taken.",
+  "microbiology": "Stool C. difficile GDH/toxin and PCR negative; routine stool culture and ova/parasites negative; CMV immunohistochemistry on biopsy pending. Blood cultures not indicated (afebrile, no sepsis).",
+  "differentialDiagnoses": [
+    "Acute severe flare of ulcerative colitis (Truelove-Witts criteria)",
+    "Clostridioides difficile infection superimposed on IBD",
+    "Ischaemic colitis in an elderly vasculopath",
+    "Infective/invasive bacterial colitis",
+    "NSAID-associated colopathy exacerbating disease activity"
+  ],
+  "finalDiagnosis": "Acute flare of ulcerative colitis (acute severe colitis) precipitated by peri-operative mesalazine omission and NSAID exposure, with negative C. difficile and stool studies.",
+  "citations": [
+    "ACG — Ulcerative Colitis in Adults — 2019",
+    "ECCO — Ulcerative Colitis: Medical Treatment — 2022",
+    "Harrison's Principles of Internal Medicine 22e — Inflammatory Bowel Disease"
+  ],
+  "stewardship": "Non-infective diagnosis: no antibiotics indicated. C. difficile and stool cultures are negative, so empiric antimicrobials are not warranted and would represent inappropriate use. Management is anti-inflammatory: reinstate/escalate to IV corticosteroids (hydrocortisone 100 mg QDS) for acute severe UC, with day-3 reassessment for rescue therapy (infliximab or ciclosporin) if non-responding. Stop NSAIDs (diclofenac) as a colitis precipitant, review opioid/anticholinergic burden given megacolon risk, correct hypokalaemia and dehydration, continue VTE prophylaxis, and involve colorectal surgery and IBD MDT.",
+  "contraindications": [
+    "Avoid NSAIDs (diclofenac) — precipitate/worsen IBD flares",
+    "Avoid antimotility/opioid agents (codeine, loperamide) in acute severe colitis — risk of toxic megacolon",
+    "Withhold empiric antibiotics without evidence of infection",
+    "Caution with high-dose corticosteroids in an elderly diabetic-risk peri-operative patient (glycaemia, wound healing)"
+  ],
+  "edgeCases": [
+    "Peri-operative mesalazine omission on the drug chart is an easily missed medication-reconciliation trigger for the flare",
+    "Superimposed C. difficile or CMV colitis can mimic or drive a refractory flare and must be excluded before escalating immunosuppression",
+    "Toxic megacolon (transverse colon >6 cm) can supervene rapidly — serial exams and abdominal films needed",
+    "Polypharmacy (NSAID + opioid) both worsens colitis and masks/adds abdominal signs in the elderly"
+  ],
+  "expectedMaiK": "Recognise acute severe ulcerative colitis flare (Truelove-Witts), exclude C. difficile/infective colitis, stop NSAIDs and antimotility agents, and start IV corticosteroids with day-3 rescue-therapy planning.",
+  "expectedNextQuestions": [
+    "Number of stools per 24h, nocturnal stools and volume of rectal bleeding?",
+    "Was maintenance mesalazine continued through the peri-operative period?",
+    "Any recent antibiotic or NSAID exposure, or C. difficile risk factors?",
+    "Baseline IBD disease extent, prior flares and previous response to steroids/biologics?"
+  ],
+  "expectedInvestigations": [
+    "Stool C. difficile toxin/PCR and stool culture",
+    "Flexible sigmoidoscopy with biopsy (including CMV immunohistochemistry)",
+    "CRP, FBC, albumin, U&E and abdominal X-ray for toxic megacolon",
+    "Faecal calprotectin"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "weightLoss": true,
+    "dehydration": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "ibd_flare",
+    "acceptableIds": [
+      "ibd_flare"
+    ],
+    "differentialIds": [
+      "C_DIFF",
+      "mesenteric_ischemia",
+      "DYSENTERY",
+      "ibs"
+    ],
+    "investigations": [
+      "Stool C. difficile toxin/PCR and stool culture",
+      "Flexible sigmoidoscopy with biopsy",
+      "CRP, FBC, albumin, U&E",
+      "Abdominal X-ray for toxic megacolon"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to ibd_flare (acute severe ulcerative colitis flare)",
+    "No antibiotics recommended; C. difficile and stool cultures negative",
+    "IV corticosteroids recommended with day-3 rescue-therapy assessment",
+    "NSAIDs and antimotility/opioid agents flagged as contraindicated",
+    "C. difficile infection actively excluded before escalating immunosuppression"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

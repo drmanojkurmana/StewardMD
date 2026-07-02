@@ -1,0 +1,121 @@
+{
+  "id": "gc_414",
+  "specialty": "Central Nervous System",
+  "condition": "Acute Bacterial Meningitis",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Fever, worsening headache and increasing drowsiness over 3 days",
+  "history": "Renal transplant recipient (deceased-donor graft 3 years ago) on maintenance tacrolimus, mycophenolate mofetil and low-dose prednisolone. Three days of fever with rigors, a diffuse severe headache, neck ache and progressive drowsiness. Family report he became confused this morning and was unsteady on his feet. No recent travel; he regularly eats unpasteurised soft cheese and deli meats. No head injury. No prior meningitis or neurosurgery. Because of the sustained immunosuppression he is regarded as an immunocompromised host at risk of atypical CNS pathogens, in particular Listeria monocytogenes.",
+  "examination": "Ill and toxic-looking, drowsy but rousable (GCS 13, E3V4M6). Temperature 39.1°C, warm peripheries. Neck stiffness with positive Kernig sign; no photophobia elicited reliably due to drowsiness. Mild gaze-evoked nystagmus and subtle right-sided ataxia raising concern for brainstem (rhombencephalitic) involvement typical of Listeria. No focal limb weakness, no rash, no papilloedema on fundoscopy. Chest clear, abdomen soft, transplant graft non-tender.",
+  "vitals": {
+    "hr": 114,
+    "bp": "94/56",
+    "rr": 24,
+    "temp": 39.1,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "14.8 x10^9/L (neutrophils 12.1)",
+    "crp": "168 mg/L",
+    "creatinine": "1.7 mg/dL (baseline graft function ~1.4)",
+    "platelets": "212 x10^3/uL",
+    "sodium": "131 mmol/L",
+    "lactate": "2.4 mmol/L",
+    "gcs": 13,
+    "csf_opening_pressure": "26 cmH2O",
+    "csf_wbc": "640 /uL (78% neutrophils)",
+    "csf_protein": "1.9 g/L (elevated)",
+    "csf_glucose": "1.8 mmol/L (CSF:serum ratio 0.29)",
+    "blood_cultures": "2 sets drawn before antibiotics"
+  },
+  "imaging": "Non-contrast CT head before lumbar puncture: no mass lesion, midline shift or hydrocephalus; safe to proceed with LP. MRI brain (subsequent) shows T2/FLAIR hyperintensity in the pons and cerebellar peduncles consistent with rhombencephalitis.",
+  "microbiology": "CSF Gram stain: scanty Gram-positive bacilli, some intracellular. CSF and one blood culture set grow Listeria monocytogenes at 48h, susceptible to ampicillin and meropenem (cephalosporin-resistant, as expected for Listeria). BioFire meningitis/encephalitis panel positive for Listeria monocytogenes; HSV and enterovirus PCR negative.",
+  "differentialDiagnoses": [
+    "Viral (aseptic) meningitis / meningoencephalitis",
+    "CNS tuberculosis",
+    "Cerebral / brainstem abscess",
+    "Viral encephalitis (HSV / other)"
+  ],
+  "finalDiagnosis": "Acute bacterial meningitis due to Listeria monocytogenes in an immunocompromised (transplant) host, with brainstem (rhombencephalitic) involvement",
+  "citations": [
+    "IDSA Practice Guidelines for Bacterial Meningitis 2004 (and 2017 healthcare-associated ventriculitis/meningitis update)",
+    "Harrison's Principles of Internal Medicine, 22e - Acute Meningitis; Listeria monocytogenes infections"
+  ],
+  "stewardship": "Immunocompromised host with suspected acute bacterial meningitis: after CT and immediate blood cultures, give empiric broad cover WITHOUT delay - vancomycin PLUS ampicillin PLUS a broad beta-lactam active against Pseudomonas (cefepime or meropenem in the immunosuppressed/neutropenic host), with adjunctive IV dexamethasone. Ampicillin is essential because Listeria is intrinsically resistant to all cephalosporins and is a leading cause of meningitis in this population. Once CSF/blood cultures confirm Listeria monocytogenes, NARROW/de-escalate: stop vancomycin, cefepime and (given a non-pneumococcal organism) dexamethasone, and treat with high-dose IV ampicillin, adding gentamicin for synergy where renal function permits. Trimethoprim-sulfamethoxazole or meropenem is the alternative for beta-lactam allergy. Duration >=21 days given immunosuppression and rhombencephalitis; monitor tacrolimus levels and renal function closely.",
+  "contraindications": [
+    "Cephalosporins alone are inadequate - Listeria is intrinsically cephalosporin-resistant",
+    "Avoid/limit aminoglycoside (gentamicin) given transplant graft with rising creatinine and concurrent tacrolimus nephrotoxicity - use with caution and level monitoring",
+    "Do not delay antibiotics for MRI or LP; give empiric therapy immediately after blood cultures",
+    "Dexamethasone benefit is established mainly for pneumococcal meningitis - stop once a non-pneumococcal organism (Listeria) is confirmed"
+  ],
+  "edgeCases": [
+    "Immunosuppression can blunt classic meningism, CSF pleocytosis and fever - a normal-looking CSF does not exclude Listeria",
+    "CSF Gram stain is positive in only a minority of Listeria cases, so absent organisms should not stop empiric ampicillin",
+    "Brainstem (rhombencephalitis) presentation with ataxia/cranial nerve signs can mimic posterior-circulation stroke or abscess",
+    "Tacrolimus interactions and graft dysfunction complicate antibiotic dosing and choice"
+  ],
+  "expectedMaiK": "Immediate empiric vancomycin + ampicillin + cefepime/meropenem with adjunctive dexamethasone after blood cultures and CT, then lumbar puncture; de-escalate to ampicillin (+/- gentamicin) once Listeria monocytogenes is confirmed.",
+  "expectedNextQuestions": [
+    "Degree and type of immunosuppression (transplant, steroids, neutropenia) and its duration?",
+    "Dietary exposure to unpasteurised dairy or deli meats (Listeria risk)?",
+    "Any focal neurological or brainstem signs suggesting rhombencephalitis?",
+    "Beta-lactam allergy history and current renal/graft function?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures x2 before antibiotics",
+    "CT head prior to lumbar puncture (immunocompromised, altered sensorium)",
+    "Lumbar puncture with CSF cell count, protein, glucose (with paired serum), Gram stain and culture",
+    "CSF multiplex meningitis/encephalitis PCR panel including Listeria and HSV",
+    "Serum lactate, renal function and tacrolimus level"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "immunocompromised": true,
+    "steroidUse": true,
+    "focalNeuroDeficit": true,
+    "ataxia": true
+  },
+  "expected": {
+    "diagnosis": "MENINGITIS",
+    "acceptableIds": [
+      "MENINGITIS"
+    ],
+    "differentialIds": [
+      "VIRAL_MENINGITIS",
+      "CNS_TB",
+      "BRAIN_ABSCESS",
+      "ENCEPHALITIS"
+    ],
+    "investigations": [
+      "Blood cultures before antibiotics",
+      "CT head then lumbar puncture",
+      "CSF cell count, protein, glucose, Gram stain and culture",
+      "CSF meningitis/encephalitis multiplex PCR"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Vancomycin",
+        "Ampicillin",
+        "Cefepime"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal exactly [MENINGITIS]",
+    "Empiric regimen must include ampicillin for Listeria cover in an immunocompromised host",
+    "Culture-confirmed Listeria must trigger de-escalation to ampicillin (+/- gentamicin) and stopping cephalosporin/vancomycin/dexamethasone",
+    "Antibiotics must not be delayed for imaging or LP"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

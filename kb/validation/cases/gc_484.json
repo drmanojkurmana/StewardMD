@@ -1,0 +1,120 @@
+{
+  "id": "gc_484",
+  "specialty": "Neurology",
+  "condition": "Myasthenic crisis",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Acute breathlessness and difficulty swallowing over 36 hours, with sudden pleuritic chest tightness and palpitations 2 hours before arrival.",
+  "history": "Known seropositive (anti-AChR) generalised myasthenia gravis for 6 years, maintained on pyridostigmine 60 mg five times daily and azathioprine, with prednisolone recently tapered. Over the last week he had progressive fatigable diplopia, ptosis worse in the evenings, nasal regurgitation of liquids and a weakening voice by end of day. Five days ago a locum started oral ciprofloxacin for presumed UTI, after which weakness escalated sharply. Today he developed rapidly worsening dyspnoea, orthopnoea and inability to clear secretions, then abruptly complained of right-sided pleuritic chest pain and palpitations, prompting a query of pulmonary embolism / acute coronary syndrome by the referring team. No fever, cough or sputum. No calf pain. Ex-smoker, hypertensive on amlodipine.",
+  "examination": "Anxious, tachypnoeic, using accessory muscles, speaking in short broken sentences with a nasal quality and pooling of oral secretions. Bilateral fatigable ptosis and complex ophthalmoplegia; weak neck flexion (unable to lift head from pillow); proximal limb weakness that worsens on repetition. Reflexes preserved, no sensory level, plantars flexor. Weak cough and paradoxical abdominal breathing. Chest clear on auscultation; heart sounds normal, no murmur; calves soft and non-tender. Single-breath count reduced to 8.",
+  "vitals": {
+    "hr": 122,
+    "bp": "148/92",
+    "rr": 32,
+    "temp": 37.1,
+    "spo2": 91
+  },
+  "labs": {
+    "fvc": "0.9 L (predicted ~3.8 L), fallen from 2.1 L 6 hours earlier",
+    "nif_mip": "-18 cmH2O (<20-25 indicates impending failure)",
+    "singleBreathCount": "8",
+    "abg": "pH 7.31, pCO2 6.9 kPa (rising), pO2 8.4 kPa on room air — hypercapnic respiratory failure",
+    "acetylcholineReceptorAb": "positive, 14 nmol/L (historical)",
+    "troponinT_hs": "9 ng/L (normal, serial flat) — argues against ACS",
+    "dDimer": "0.4 mg/L (normal) — low probability PE",
+    "wbc": "8.2 x10^9/L",
+    "crp": "6 mg/L (not elevated)",
+    "creatinine": 1,
+    "potassium": 4.2,
+    "tsh": "1.8 mIU/L (normal)"
+  },
+  "imaging": "Portable CXR: clear lung fields, no consolidation, effusion or pneumothorax; low lung volumes with basal atelectasis. Bedside CTPA (done for the pleuritic pain/palpitations query) shows no pulmonary embolus. ECG: sinus tachycardia, no ischaemic ST-T changes.",
+  "microbiology": "Not indicated for the crisis itself; no clinical infection. Urine culture (from prior locum episode) negative.",
+  "differentialDiagnoses": [
+    "Pulmonary embolism (raised by acute pleuritic pain, tachycardia, hypoxia — excluded by normal D-dimer and negative CTPA)",
+    "Acute coronary syndrome (chest tightness/palpitations — excluded by flat hs-troponin and non-ischaemic ECG)",
+    "Guillain-Barré syndrome (acute neuromuscular respiratory failure — argues against: preserved reflexes, fatigable ocular/bulbar pattern, known MG)",
+    "Cholinergic crisis from pyridostigmine excess (mimic — argues against: no miosis, no hypersecretion/fasciculations; picture is weakness-dominant)"
+  ],
+  "finalDiagnosis": "Myasthenic crisis (neuromuscular respiratory failure) in seropositive generalised myasthenia gravis, precipitated by fluoroquinolone, with a concurrent chest-pain/palpitations presentation that mimicked PE/ACS.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Myasthenia Gravis and Myasthenic Crisis",
+    "MGFA — International Consensus Guidance for Management of Myasthenia Gravis — 2021"
+  ],
+  "stewardship": "Non-infective emergency; no antibiotics indicated. Critically, the recently started fluoroquinolone (ciprofloxacin) is a recognised precipitant of myasthenic worsening and should be stopped immediately; aminoglycosides, macrolides, telithromycin, magnesium, beta-blockers and neuromuscular blockers must be avoided. Antibiotic stewardship point: the original 'UTI' course was likely unnecessary and directly harmful here.",
+  "contraindications": [
+    "Fluoroquinolones, aminoglycosides, macrolides, telithromycin (worsen neuromuscular transmission) — stop ciprofloxacin now",
+    "IV magnesium",
+    "Non-selective beta-blockers and calcium-channel blockers in high dose",
+    "Escalating pyridostigmine to treat crisis (increases secretions, risks cholinergic crisis; hold or reduce during ventilatory support)",
+    "Depolarising/prolonged non-depolarising neuromuscular blockers if intubation needed"
+  ],
+  "edgeCases": [
+    "Normal CTPA and flat troponin can falsely reassure and delay recognition that the true emergency is ventilatory muscle failure, not a cardiopulmonary event",
+    "Rising pCO2 with 'clear chest' and normal-ish SpO2 is a late/ominous sign — trend FVC/NIF, do not wait for desaturation",
+    "Distinguishing myasthenic from cholinergic crisis at the bedside guides whether to hold pyridostigmine",
+    "Steroid initiation can transiently worsen weakness in the first 1-2 weeks"
+  ],
+  "expectedMaiK": "Recognise impending neuromuscular respiratory failure (falling FVC/NIF, rising pCO2), secure airway with ICU-level ventilatory support, stop the offending fluoroquinolone, and start definitive immunotherapy with IVIG or plasma exchange — not to chase PE/ACS.",
+  "expectedNextQuestions": [
+    "What is the serial forced vital capacity and negative inspiratory force trend?",
+    "Is the patient able to protect the airway and clear secretions (bulbar involvement, single-breath count)?",
+    "What precipitated this — new drugs (fluoroquinolone/other), infection, recent steroid taper, surgery?",
+    "Is this myasthenic or cholinergic crisis (pupils, secretions, fasciculations)?",
+    "Have PE and ACS been actively excluded so treatment is not misdirected?"
+  ],
+  "expectedInvestigations": [
+    "Serial bedside FVC and NIF/MIP",
+    "Arterial blood gas (looking for hypercapnia)",
+    "ECG and serial high-sensitivity troponin",
+    "D-dimer +/- CTPA to exclude PE",
+    "Chest radiograph",
+    "Review medication list for precipitating agents"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "dysphagia": true,
+    "tachycardia": true,
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "palpitations": true
+  },
+  "expected": {
+    "diagnosis": "myasthenic_crisis",
+    "acceptableIds": [
+      "myasthenic_crisis"
+    ],
+    "differentialIds": [
+      "gbs",
+      "pe",
+      "acs",
+      "organophosphate"
+    ],
+    "investigations": [
+      "Serial FVC and NIF/MIP",
+      "Arterial blood gas",
+      "ECG and serial troponin",
+      "D-dimer / CTPA to exclude PE",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank myasthenic_crisis as the top diagnosis despite concurrent pleuritic chest pain and palpitations.",
+    "Engine must NOT recommend antibiotics (infective:false; stewardship tier null).",
+    "Engine should flag the fluoroquinolone as a precipitant to stop.",
+    "Engine should prioritise FVC/NIF-guided ventilatory support and IVIG or plasma exchange over PE/ACS pathways.",
+    "PE and ACS should appear only as excluded differentials, not the final diagnosis."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

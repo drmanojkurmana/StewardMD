@@ -1,0 +1,129 @@
+{
+  "id": "gc_465",
+  "specialty": "Oncology / Metabolic",
+  "condition": "Hypercalcaemia of malignancy",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Progressive confusion, polyuria and constipation over 10 days in a woman with metastatic breast cancer, type 2 diabetes and CKD.",
+  "history": "68-year-old woman with oestrogen-receptor-positive breast cancer treated 3 years ago, now with known bone metastases (spine, pelvis) on an aromatase inhibitor. Comorbid type 2 diabetes (metformin, on background of stage 3b CKD; baseline creatinine ~1.6 mg/dL) and hypertension. Over 10 days she has become increasingly lethargic, low in mood and confused, with polyuria, marked thirst, anorexia, nausea, constipation and generalised bony/back pain. Family note reduced oral intake and two falls. Because of the diabetes and CKD, symptoms were initially attributed to poor glycaemic control and worsening renal function, but random glucose was only modestly raised and ketones negative. No fever, cough, dysuria or focal infective symptoms. Not taking calcium/vitamin D supplements or thiazides.",
+  "examination": "Drowsy but rousable, oriented to person only. Clinically dehydrated: dry mucous membranes, reduced skin turgor, sunken eyes. Abdomen soft with sluggish bowel sounds and palpable faecal loading; no peritonism. Tender lower thoracic/lumbar spine on percussion. No neck stiffness, no focal neurological deficit, reflexes reduced. Chest clear, no signs of infection or heart failure.",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/68",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "calciumTotal_mgdl": 15.4,
+    "calciumCorrected_mgdl": 16,
+    "albumin_gdl": 2.9,
+    "phosphate_mgdl": 2.4,
+    "pth_pgml": 6,
+    "pthrp": "elevated",
+    "vitaminD_25OH_ngml": 22,
+    "alkPhos_UL": 340,
+    "creatinine_mgdl": 3.1,
+    "creatinine_baseline_mgdl": 1.6,
+    "urea_mmol_L": 22,
+    "egfr": 16,
+    "sodium_mmol_L": 148,
+    "potassium_mmol_L": 4,
+    "glucose_mmol_L": 12.5,
+    "hba1c_pct": 7.4,
+    "serumKetones": "negative",
+    "hemoglobin_gdl": 10.4,
+    "serumProteinElectrophoresis": "no monoclonal band",
+    "tsh_mUL": 1.8
+  },
+  "imaging": "CT/plain films confirm lytic and sclerotic metastatic deposits in thoracic/lumbar vertebrae and pelvis. Renal tract normal, no obstruction. No new pulmonary lesion. Skeletal disease consistent with progressive bony metastatic breast cancer.",
+  "microbiology": "Not indicated; no clinical evidence of infection. Blood/urine cultures not sent.",
+  "differentialDiagnoses": [
+    "Hypercalcaemia of malignancy (humoral PTHrP-mediated + osteolytic bone metastases)",
+    "Primary hyperparathyroidism (excluded — PTH suppressed)",
+    "Multiple myeloma (excluded — no monoclonal band, imaging fits breast metastases)",
+    "Hyperosmolar hyperglycaemic state (glucose only modestly raised, ketones negative)",
+    "Uraemic/metabolic encephalopathy from AKI-on-CKD (contributory but does not explain hypercalcaemia)"
+  ],
+  "finalDiagnosis": "Severe hypercalcaemia of malignancy in metastatic breast cancer, with dehydration-driven AKI on background CKD and confounding type 2 diabetes",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Hypercalcemia and Disorders of Calcium Homeostasis",
+    "Endocrine Society — Hypercalcemia of Malignancy, 2023"
+  ],
+  "stewardship": "Not applicable — non-infective metabolic emergency. Management priorities: aggressive isotonic saline rehydration with careful monitoring given CKD and volume status, IV bisphosphonate (zoledronic acid, dose-adjusted for renal function) or denosumab if bisphosphonate contraindicated by eGFR, calcitonin for rapid short-term lowering, hold nephrotoxins and calcium/vitamin D, review causative oncological therapy, and treat the underlying malignancy.",
+  "contraindications": [
+    "Avoid thiazide diuretics (worsen hypercalcaemia)",
+    "Loop diuretics only after euvolaemia restored, not for routine calcium-lowering",
+    "Zoledronic acid caution/dose reduction with eGFR <30-35; consider denosumab instead",
+    "Avoid calcium- or vitamin D-containing supplements",
+    "Avoid nephrotoxins (NSAIDs, contrast) given AKI on CKD"
+  ],
+  "edgeCases": [
+    "CKD raises baseline creatinine, masking the acuity of dehydration-driven AKI",
+    "Diabetes-related polyuria/thirst can be mistaken for poor glycaemic control, delaying calcium testing",
+    "Low albumin means total calcium underestimates true burden — corrected/ionised calcium essential",
+    "Renal impairment limits bisphosphonate choice and dosing"
+  ],
+  "expectedMaiK": "In a patient with metastatic malignancy presenting with confusion, polyuria, constipation and dehydration, check corrected/ionised calcium early; suppressed PTH with elevated PTHrP and known bone metastases confirms hypercalcaemia of malignancy — CKD and diabetes are confounders, not the primary cause.",
+  "expectedNextQuestions": [
+    "Any calcium/vitamin D supplements, thiazides or lithium?",
+    "Baseline renal function and usual creatinine?",
+    "Progression of the underlying cancer and current oncological treatment?",
+    "Fluid intake, urine output and recent weight change?",
+    "Symptoms of infection or other cause of altered sensorium?"
+  ],
+  "expectedInvestigations": [
+    "Albumin-corrected or ionised serum calcium",
+    "PTH (intact) and PTHrP",
+    "Phosphate, magnesium, renal profile and eGFR",
+    "25-OH vitamin D",
+    "Serum/urine protein electrophoresis and free light chains to exclude myeloma",
+    "ECG (QT shortening)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "malignancy": true,
+    "weightLoss": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "polyuriaPolydipsia": true,
+    "dehydration": true,
+    "renalImpairment": true,
+    "diabetesHx": true,
+    "backPain": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "hypercalcemia",
+    "acceptableIds": [
+      "hypercalcemia"
+    ],
+    "differentialIds": [
+      "myeloma",
+      "hhs",
+      "aki",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Albumin-corrected/ionised serum calcium",
+      "PTH and PTHrP",
+      "Renal profile and eGFR",
+      "Serum/urine protein electrophoresis with free light chains"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank hypercalcemia as the top diagnosis",
+    "Suppressed PTH with elevated PTHrP and bone metastases should point to hypercalcaemia of malignancy, not primary hyperparathyroidism",
+    "Elevated glucose with negative ketones and only modest hyperglycaemia should not be classified as HHS/DKA as the primary diagnosis",
+    "Management must include IV isotonic fluids and an antiresorptive agent with renal dose consideration, and must not recommend antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

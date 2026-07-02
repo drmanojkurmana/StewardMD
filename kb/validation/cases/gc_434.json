@@ -1,0 +1,123 @@
+{
+  "id": "gc_434",
+  "specialty": "Cardiology",
+  "condition": "Acute coronary syndrome",
+  "age": 63,
+  "sex": "M",
+  "presentingComplaint": "Central crushing chest pain for 3 hours with breathlessness and sweating",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B, MELD 13) under hepatology follow-up, with prior variceal banding and grade 1 ascites. Also hypertensive and type 2 diabetic. For the last month he had described exertional chest tightness while climbing stairs that eased on rest, initially attributed to deconditioning and anaemia of chronic liver disease. Today, while at rest, he developed severe retrosternal pressure radiating to the left arm and jaw, associated with diaphoresis, nausea and breathlessness, unrelieved after 20 minutes. He denies haematemesis, melaena, fever or preceding vomiting. No recent variceal bleed or paracentesis. He is a lifelong smoker (40 pack-years) and stopped alcohol 8 months ago. The overlap of his baseline hyperdynamic cirrhotic circulation, low-grade breathlessness and mild ankle oedema had previously masked cardiac symptoms.",
+  "examination": "Anxious, diaphoretic, in pain but alert (GCS 15). Peripherally warm with bounding pulses reflecting hyperdynamic cirrhotic circulation. Mild scleral icterus and a few spider naevi. JVP not raised; heart sounds normal with no new murmur; chest with fine bibasal crackles. Abdomen soft with mild shifting dullness (grade 1 ascites), no tenderness, spleen tip palpable. No asterixis, oriented, no focal neurology. No calf swelling.",
+  "vitals": {
+    "hr": 104,
+    "bp": "148/88",
+    "rr": 22,
+    "temp": 36.9,
+    "spo2": 94
+  },
+  "labs": {
+    "troponinT_hs_ng_L": "high (312, rising to 640 at 3h)",
+    "hemoglobin_g_dL": 10.4,
+    "platelets_x10e3": 78,
+    "inr": 1.6,
+    "creatinine_mg_dL": 1.3,
+    "sodium_mmol_L": 133,
+    "potassium_mmol_L": 4.2,
+    "bilirubin_mg_dL": 2.4,
+    "albumin_g_dL": 2.9,
+    "ALT_U_L": 46,
+    "randomGlucose_mg_dL": 214,
+    "NT_proBNP_pg_mL": 1180
+  },
+  "imaging": "ECG: sinus tachycardia with 1.5-2 mm horizontal ST depression and T-wave inversion in leads V4-V6, II, III, aVF; no ST elevation. Portable chest X-ray: mild upper-lobe vascular redistribution, no consolidation or pneumothorax. Bedside echo: regional hypokinesia of the inferolateral wall, LVEF ~45%, no pericardial effusion, normal aortic root.",
+  "microbiology": "Not applicable; no infective focus. Blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Non-ST-elevation myocardial infarction (NSTEMI) — target",
+    "Acute pericarditis",
+    "Aortic dissection",
+    "Pulmonary embolism",
+    "GERD / oesophageal spasm"
+  ],
+  "finalDiagnosis": "Acute coronary syndrome (NSTEMI) in a patient with alcohol-related cirrhosis (Child-Pugh B), with coagulopathy and thrombocytopenia complicating antithrombotic therapy",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Non-ST-Segment Elevation Acute Coronary Syndrome",
+    "ESC — Guidelines for the management of acute coronary syndromes — 2023"
+  ],
+  "stewardship": "Non-infective presentation: no antimicrobial therapy indicated; antimicrobial stewardship tier is null. Management stewardship centres on antithrombotic and anti-ischaemic therapy balanced against cirrhotic coagulopathy. Give aspirin loading and anti-ischaemic therapy (nitrate, beta-blocker as BP/HR allow), high-intensity statin used cautiously with LFT monitoring in Child-Pugh B, and risk-stratify (GRACE) for early invasive coronary angiography. Because thrombocytopenia (78) and elevated INR reflect hepatic synthetic dysfunction rather than true anticoagulation, DAPT and anticoagulation decisions must be individualised with cardiology-hepatology input, favouring radial access, weight/renal-adjusted anticoagulation, and shortened DAPT duration to limit variceal/GI bleeding risk. Avoid empirical antibiotics.",
+  "contraindications": [
+    "Full-dose thrombolysis / aggressive anticoagulation without weighing variceal and coagulopathic bleeding risk",
+    "Standard-duration potent dual antiplatelet therapy (e.g., ticagrelor/prasugrel) without bleeding-risk assessment given thrombocytopenia and cirrhosis",
+    "Nephrotoxic contrast load without hydration in a patient prone to hepatorenal physiology",
+    "NSAIDs for chest pain in cirrhosis with ascites"
+  ],
+  "edgeCases": [
+    "Cirrhotic hyperdynamic circulation and baseline breathlessness can mask or mimic anginal symptoms and delay presentation",
+    "Elevated INR and thrombocytopenia here reflect liver disease, not therapeutic anticoagulation, and do not protect against coronary thrombosis",
+    "Troponin may be mildly elevated in stable cirrhosis; the dynamic rise plus ischaemic ECG and regional wall-motion abnormality confirms ACS",
+    "Statin hepatotoxicity fears often lead to inappropriate under-treatment in compensated cirrhosis"
+  ],
+  "expectedMaiK": "Dynamic troponin rise with ischaemic ST depression/T inversion and regional wall-motion abnormality confirms NSTEMI; cirrhosis modifies antithrombotic strategy but not the diagnosis",
+  "expectedNextQuestions": [
+    "Character, radiation and duration of the chest pain and its relation to exertion versus rest",
+    "Any haematemesis, melaena or recent variceal bleeding that would raise antithrombotic bleeding risk",
+    "Cardiac risk factors and prior ischaemic events",
+    "Current antiplatelet/anticoagulant use and last endoscopy/variceal status"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (repeated)",
+    "High-sensitivity troponin with serial measurement",
+    "Transthoracic echocardiography",
+    "FBC, coagulation profile (INR/PT), renal and liver function",
+    "GRACE risk score and early invasive coronary angiography"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "ecgIschemia": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "liverDisease": true,
+    "thrombocytopenia": true,
+    "ascites": true,
+    "age": true,
+    "inr": true,
+    "platelets": true,
+    "bilirubin": true,
+    "albumin": true
+  },
+  "expected": {
+    "diagnosis": "acs",
+    "acceptableIds": [
+      "acs"
+    ],
+    "differentialIds": [
+      "pericarditis",
+      "aortic_dissection",
+      "pe",
+      "gerd_chest"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "high-sensitivity troponin (serial)",
+      "transthoracic echocardiography",
+      "coagulation profile and FBC",
+      "coronary angiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return acs as top diagnosis given ischaemic ECG changes plus rising troponin and regional wall-motion abnormality",
+    "Must not recommend empirical antibiotics (infective:false; tier null)",
+    "Should flag cirrhosis-related coagulopathy/thrombocytopenia as modifying antithrombotic therapy rather than excluding ACS",
+    "Differentials must include at least one of pericarditis, aortic_dissection, pe"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
