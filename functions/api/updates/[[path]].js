@@ -22,9 +22,16 @@
  *   Optional    UPDATES_FEEDS  — comma-separated "category|url" trusted RSS feeds
  *                                (defaults to FDA MedWatch, press releases, recalls)
  */
+import { sendPushToAll, pushEnabled } from "../../_webpush.js";
+
 const LIST_KEY = "updates:list";
 const CAP = 120;                 // keep the newest N
 const DESC_MAX = 600;
+
+// Fire OS push banners to subscribed devices (best-effort, non-blocking).
+function firePush(context) {
+  try { if (pushEnabled(context.env)) context.waitUntil(sendPushToAll(context.env)); } catch (e) {}
+}
 
 function kv(env) { return env.UPDATES_KV || env.GHIS_KV || env.CASES_KV || null; }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
@@ -152,6 +159,7 @@ export async function onRequest(context) {
   try {
     if (method === "POST" && id === "sync") {
       const res = await ingestFeeds(env, store);
+      if (res.added > 0) firePush(context);           // banner devices when the FDA pull adds something
       return json({ ok: true, ...res });
     }
     if (method === "POST" && !id) {
@@ -172,6 +180,7 @@ export async function onRequest(context) {
       const list = await readList(store);
       list.push(item);
       await writeList(store, list);
+      firePush(context);                                // banner subscribed devices on manual publish
       return json({ ok: true, item });
     }
     if (method === "DELETE" && id) {

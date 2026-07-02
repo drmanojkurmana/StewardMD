@@ -1217,6 +1217,7 @@
       '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
         '<div class="ntf-h">🔔 Notifications</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
       '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates — approvals, safety alerts, recalls — plus notices from StewardMD.</div>' +
+        '<div id="ntfPush" class="ntf-push"></div>' +
         '<div id="ntfBody" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>';
     document.body.appendChild(_notifRoot);
     _notifRoot.querySelector("#ntfClose").addEventListener("click", closeNotifications);
@@ -1225,11 +1226,68 @@
   }
   function openNotifications() {
     buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
+    renderPushRow();
     (_notifItems ? Promise.resolve(_notifItems) : fetchUpdates()).then(function () {
       renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge();
     });
   }
   function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
+
+  /* ---- Web Push (OS banner) opt-in for this device ---- */
+  function pushSupported() { return ("serviceWorker" in navigator) && ("PushManager" in window) && ("Notification" in window); }
+  function isStandalone() { try { return window.navigator.standalone === true || (window.matchMedia && matchMedia("(display-mode: standalone)").matches); } catch (e) { return false; } }
+  function isIOS() { try { return /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1); } catch (e) { return false; } }
+  function urlB64ToU8(s) { var pad = "=".repeat((4 - s.length % 4) % 4); var b = (s + pad).replace(/-/g, "+").replace(/_/g, "/"); var raw = atob(b); var a = new Uint8Array(raw.length); for (var i = 0; i < raw.length; i++) a[i] = raw.charCodeAt(i); return a; }
+  function pushIsOn() { try { return localStorage.getItem("smd_push_on") === "1" && ("Notification" in window) && Notification.permission === "granted"; } catch (e) { return false; } }
+  function renderPushRow() {
+    var el = _notifRoot && _notifRoot.querySelector("#ntfPush"); if (!el) return;
+    if (!pushSupported()) {
+      // iOS only exposes Push inside the installed (home-screen) PWA.
+      el.innerHTML = (isIOS() && !isStandalone())
+        ? '<div class="ntf-push-hint">📲 To get alerts on your phone: tap <b>Share → Add to Home Screen</b>, then open StewardMD from the home-screen icon and enable notifications here.</div>'
+        : '';
+      return;
+    }
+    if (pushIsOn()) {
+      el.innerHTML = '<div class="ntf-push-on"><span>🔔 Phone alerts are <b>on</b> for this device</span><button class="ntf-push-btn ghost" data-push="off">Turn off</button></div>';
+    } else if (("Notification" in window) && Notification.permission === "denied") {
+      el.innerHTML = '<div class="ntf-push-hint">🔕 Notifications are blocked in your device settings. Enable them for StewardMD to get phone alerts.</div>';
+    } else {
+      el.innerHTML = '<div class="ntf-push-off"><span>Get a phone banner when new medical updates arrive</span><button class="ntf-push-btn" data-push="on">Enable notifications</button></div>';
+    }
+    var b = el.querySelector("[data-push]");
+    if (b) b.addEventListener("click", function () { b.getAttribute("data-push") === "on" ? enablePush() : disablePush(); });
+  }
+  function enablePush() {
+    if (!pushSupported()) { toast("Push isn't supported here."); return; }
+    fetch("/api/push/status").then(function (r) { return r.json(); }).then(function (st) {
+      if (!st || !st.enabled || !st.publicKey) { toast("Push isn't switched on server-side yet."); return; }
+      return Notification.requestPermission().then(function (perm) {
+        if (perm !== "granted") { toast("Permission not granted."); renderPushRow(); return; }
+        return navigator.serviceWorker.ready.then(function (reg) {
+          return reg.pushManager.getSubscription().then(function (sub) {
+            return sub || reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: urlB64ToU8(st.publicKey) });
+          });
+        }).then(function (sub) {
+          return fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subscription: sub.toJSON ? sub.toJSON() : sub }) });
+        }).then(function () {
+          try { localStorage.setItem("smd_push_on", "1"); } catch (e) {}
+          toast("Phone alerts enabled ✅"); renderPushRow();
+        });
+      });
+    }).catch(function () { toast("Couldn't enable notifications — try again."); renderPushRow(); });
+  }
+  function disablePush() {
+    navigator.serviceWorker.ready.then(function (reg) {
+      return reg.pushManager.getSubscription().then(function (sub) {
+        if (!sub) return;
+        return fetch("/api/push/unsubscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) }).then(function () { return sub.unsubscribe(); });
+      });
+    }).catch(function () {}).then(function () {
+      try { localStorage.removeItem("smd_push_on"); } catch (e) {}
+      toast("Phone alerts turned off."); renderPushRow();
+    });
+  }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;
     var css = [
@@ -1256,7 +1314,13 @@
       ".ntf-foot{display:flex;align-items:center;gap:10px;margin-top:9px}",
       ".ntf-src{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888)}",
       ".ntf-link{margin-left:auto;font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);text-decoration:none}",
-      ".ntf-empty{text-align:center;color:var(--slate-soft,#888);font:600 14px var(--sans,system-ui);padding:40px 16px}.ntf-empty div{font-weight:500;font-size:12.5px;margin-top:8px;line-height:1.5}"
+      ".ntf-empty{text-align:center;color:var(--slate-soft,#888);font:600 14px var(--sans,system-ui);padding:40px 16px}.ntf-empty div{font-weight:500;font-size:12.5px;margin-top:8px;line-height:1.5}",
+      ".ntf-push{margin-bottom:12px}.ntf-push:empty{display:none}",
+      ".ntf-push-off,.ntf-push-on{display:flex;align-items:center;gap:10px;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px}",
+      ".ntf-push-off span,.ntf-push-on span{flex:1;font:600 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}",
+      ".ntf-push-btn{flex:0 0 auto;border:none;background:var(--teal,#0a9396);color:#fff;font:700 12.5px var(--sans,system-ui);border-radius:9px;padding:9px 13px;cursor:pointer}",
+      ".ntf-push-btn.ghost{background:transparent;color:var(--teal,#0a9396);border:1px solid var(--line,#e5e5e0)}",
+      ".ntf-push-hint{background:var(--teal-soft,#e0f2f1);border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);line-height:1.5}.ntf-push-hint b{color:var(--ink,#1a1a1a)}"
     ].join("");
     var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
   }
