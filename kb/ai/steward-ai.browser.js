@@ -72,6 +72,46 @@
       (h.pitfalls || []).forEach(function (t) { push(id, name, cls, system, "harrison.pitfall", t, src); });
       if (core && (core.redFlags || []).length) push(id, name, cls, system, "redFlags", "Red flags: " + core.redFlags.join("; "), src);
       (core && core.investigations || []).forEach(function (iv) { push(id, name, cls, system, "investigation", (iv.test || "") + (iv.why ? " — " + iv.why : ""), src); });
+
+      // ── MANAGEMENT / TREATMENT chunks (gold122) ──────────────────────────
+      // Previously NO management content was indexed, so "how to treat X" could only
+      // retrieve pathophysiology/pearls (root cause of the organophosphate failure).
+      // Index the already-curated StewardMD management content so treatment queries
+      // retrieve treatment. This is disease-level reference content (no patient data,
+      // no new clinical claims) — RAG privacy/de-identification rules are unchanged.
+      var mgmtSrc = { ref: "StewardMD management protocol", page: null };
+      var dm = (window.DX_MGMT && window.DX_MGMT[id]) || null;   // non-infective management (curated)
+      if (dm && dm.tx && dm.tx.length) push(id, name, cls, system, "management", "Management / how to treat " + name + ": " + dm.tx.join(" "), mgmtSrc);
+      if (dm && dm.ix && dm.ix.length) push(id, name, cls, system, "management.investigation", "Investigations & monitoring: " + dm.ix.join("; "), mgmtSrc);
+      var tx = (window.KB_RAG && window.KB_RAG.treatments && window.KB_RAG.treatments[id]) || null;   // infective + NI treatment resolution
+      if (tx) {
+        var drugSrc = { ref: "StewardMD Drug Index / protocol", page: null };
+        (tx.recommendations || []).forEach(function (r) {
+          var drugs = (r.drugRefs || []).map(function (d) { return (d.composition || d.regimenLabel || "") + (d.why ? " — " + d.why : ""); }).filter(Boolean);
+          if (drugs.length) push(id, name, cls, system, "management.treatment", "Treatment (" + (r.line || "empiric") + ") for " + name + ": " + drugs.join("; "), drugSrc);
+          if (r.steps && r.steps.length) push(id, name, cls, system, "management", "Management steps (" + (r.line || "management") + ") for " + name + ": " + r.steps.join(" "), mgmtSrc);
+        });
+        var stw = tx.stewardship || {};
+        if (stw.framework && stw.framework.length) push(id, name, cls, system, "management.stewardship", "Stewardship principles for " + name + ": " + stw.framework.join(" "), mgmtSrc);
+        if (stw.deescalation) push(id, name, cls, system, "management.stewardship", "De-escalation for " + name + ": " + stw.deescalation, mgmtSrc);
+      }
+    });
+
+    // ── DX_MGMT-only canonical objects (gold122) ─────────────────────────────
+    // Some high-risk topics (e.g. dedicated toxicology entries) live only in
+    // DX_MGMT with no enrichment record — the loop above would skip them, so they
+    // were unretrievable. Index every DX_MGMT entry not already covered, using its
+    // name + synonyms so "how to treat X" (and synonym queries) find its management.
+    var DM_ALL = window.DX_MGMT || {};
+    var covered = {}; out.forEach(function (c) { covered[c.diseaseId] = 1; });
+    Object.keys(DM_ALL).forEach(function (id) {
+      if (covered[id]) return;
+      var m = DM_ALL[id] || {}, nm = m.name || id.replace(/_/g, " ");
+      var mgmtSrc2 = { ref: m.src || "StewardMD management protocol", page: null };
+      var synText = (m.syn && m.syn.length) ? " (also: " + m.syn.join(", ") + ")" : "";
+      push(id, nm, m.class || null, m.system || null, "overview", nm + synText + (m.dx ? " — " + m.dx : ""), mgmtSrc2);
+      if (m.tx && m.tx.length) push(id, nm, m.class || null, m.system || null, "management", "Management / how to treat " + nm + ": " + m.tx.join(" "), mgmtSrc2);
+      if (m.ix && m.ix.length) push(id, nm, m.class || null, m.system || null, "management.investigation", "Investigations & monitoring: " + m.ix.join("; "), mgmtSrc2);
     });
     return out;
   }
@@ -81,7 +121,7 @@
     _initP = (function () {
       var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       return needRag.then(function () {
-        return import("/kb/ai/interface.mjs?v=gold109");
+        return import("/kb/ai/interface.mjs?v=gold122");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });

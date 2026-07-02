@@ -57,6 +57,10 @@ export function createStewardAI(store, opts) {
     k = k || 8;
     const q = tokenize(query);
     if (!q.length) return [];
+    // Treatment-intent detection (gold122): for "how to treat / manage X" queries,
+    // float management/treatment chunks above pathophysiology WITHIN the named disease.
+    // Name-match stays the dominant sort key, so the correct disease still leads.
+    const treatIntent = /\b(treat|treatment|treating|manage|management|managing|therapy|therapeutic|antidote|regimen|empiric|initial|approach|protocol|first[\s-]?line|dose|dosing|give|administer)\b/i.test(query) || /how\s+to/i.test(query);
     const qset = {}; q.forEach((t) => (qset[t] = (qset[t] || 0) + 1));
     const scored = bags.map((b) => {
       const tf = {}; b.toks.forEach((t) => (tf[t] = (tf[t] || 0) + 1));
@@ -64,6 +68,12 @@ export function createStewardAI(store, opts) {
       for (const t in qset) {
         if (tf[t]) s += qset[t] * (1 + Math.log(tf[t])) * idf(t);
         if (b.nameToks.has(t)) nameHits++;           // query token naming this disease
+      }
+      if (treatIntent && s > 0) {
+        const sec = String(b.c.section || "");
+        if (/^management/.test(sec)) s *= 2.4;                          // treatment/how-to chunks
+        else if (/(redflag|investigation|pitfall)/i.test(sec)) s *= 1.3; // safety-relevant
+        else if (/(pathophysiolog|overview|reasoning|differential|mimic)/i.test(sec)) s *= 0.6; // demote non-management
       }
       return { b, s, nameHits };
     }).filter((x) => x.s > 0);
