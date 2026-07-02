@@ -928,50 +928,131 @@
   // Ask MaiK — a dedicated chat. RAG-FIRST: each question retrieves only the top-K
   // StewardMD knowledge-base chunks and sends just those + the question to the model
   // (the whole KB never transits), so answers stay grounded AND cheap on tokens.
+  // ── Ask MaiK — mobile consult sheet (gold122) ────────────────────────────
+  // Dedicated bottom sheet: sticky header + sticky composer, only the message area
+  // scrolls, ≤90vh, iOS safe-areas, all other FABs hidden while open. No provider/
+  // model names anywhere; a single persistent advisory badge replaces per-message
+  // disclaimers; answers render as safe Markdown with human-readable Sources ▸.
   var _maikHist = [];
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function maikCSS() {
+    if (document.getElementById("maik-sheet-css")) return;
+    var st = document.createElement("style"); st.id = "maik-sheet-css";
+    st.textContent = [
+      "#maikScrim{position:fixed;inset:0;background:rgba(15,23,42,.45);z-index:16000;opacity:0;transition:opacity .2s}#maikScrim.on{opacity:1}",
+      "#maikSheet{position:fixed;left:0;right:0;bottom:0;z-index:16001;background:var(--hpanel,#fff);color:var(--hink,#0f172a);border-radius:18px 18px 0 0;box-shadow:0 -8px 40px rgba(0,0,0,.28);display:flex;flex-direction:column;max-height:90vh;height:90vh;transform:translateY(100%);transition:transform .24s cubic-bezier(.4,0,.2,1);font-family:var(--hfont,system-ui)}",
+      "#maikSheet.on{transform:translateY(0)}",
+      ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:13px 14px 6px}",
+      ".maik-hd .mk-ti{flex:1 1 auto;min-width:0}",
+      ".maik-hd .mk-t{font:800 17px var(--hfont);color:var(--hink);line-height:1.1}.maik-hd .mk-s{font:600 12px var(--hfont);color:var(--hmut,#64748b);margin-top:2px}",
+      ".maik-adv{flex:0 0 auto;padding:0 16px 10px;border-bottom:1px solid var(--hbd,#e2e8f0)}",
+      ".maik-badge{display:inline-block;font:700 10.5px var(--hfont);color:var(--hp,#0f766e);background:var(--hps,#ccfbf1);border-radius:999px;padding:5px 11px;white-space:nowrap;letter-spacing:.01em}",
+      ".maik-x{margin-left:auto;flex:0 0 auto;width:34px;height:34px;border:none;background:var(--hbg,#f1f5f9);color:var(--hink);border-radius:50%;font-size:17px;cursor:pointer;line-height:1}",
+      ".maik-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:10px}",
+      ".maik-cmp{flex:0 0 auto;display:flex;gap:8px;align-items:flex-end;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
+      ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);border-radius:12px;color:var(--hink);font:500 15px var(--hfont);padding:10px 12px;box-sizing:border-box}",
+      ".maik-cmp button{flex:0 0 auto;background:var(--hp,#0f766e);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer}",
+      ".maik-b{max-width:90%;padding:10px 13px;border-radius:14px;font:500 14px/1.55 var(--hfont);word-break:break-word}",
+      ".maik-b.you{align-self:flex-end;background:var(--hp,#0f766e);color:#fff}",
+      ".maik-b.ai{align-self:flex-start;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);color:var(--hink)}",
+      ".maik-b .maik-h{font:800 13.5px var(--hfont);margin:8px 0 3px;color:var(--hp,#0f766e)}.maik-b .maik-h:first-child{margin-top:0}",
+      ".maik-b p{margin:4px 0}.maik-b ul,.maik-b ol{margin:4px 0;padding-left:20px}.maik-b li{margin:2px 0}.maik-b code{background:rgba(100,116,139,.15);border-radius:4px;padding:0 4px;font-size:12.5px}",
+      ".maik-edu{font:600 11px var(--hfont);color:var(--hmut);background:rgba(100,116,139,.1);border-radius:8px;padding:5px 8px;margin-bottom:6px}",
+      ".maik-src{margin-top:8px;font:600 11.5px var(--hfont);color:var(--hmut)}.maik-src summary{cursor:pointer;color:var(--hp,#0f766e)}.maik-src ul{margin:4px 0 0;padding-left:18px}",
+      ".maik-more{background:none;border:none;color:var(--hp,#0f766e);font:700 12px var(--hfont);cursor:pointer;padding:4px 0}",
+      ".maik-chips{display:flex;flex-wrap:wrap;gap:8px}.maik-chip{background:var(--hpanel,#fff);border:1px solid var(--hbd,#e2e8f0);border-radius:999px;padding:9px 13px;font:600 13px var(--hfont);color:var(--hink);cursor:pointer}",
+      ".maik-welcome{font:500 14px/1.6 var(--hfont);color:var(--hink)}",
+      "body.maik-open #hvFab,body.maik-open #infFab,body.maik-open #dxLaunch,body.maik-open .inf-fab,body.maik-open .ghis-ward-fab{display:none!important}"
+    ].join("");
+    (document.head || document.documentElement).appendChild(st);
+  }
+  function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
   function openAskAi() {
-    openSheet('<div class="hv-sh-t">✨ Ask MaiK</div>' +
-      '<div style="font:600 11.5px/1.4 var(--hfont);color:var(--hmut);text-align:center;margin:-4px 0 10px">Grounded in the StewardMD knowledge base · Google Vertex AI · advisory, verify clinically</div>' +
-      '<div id="maikChat" style="min-height:120px;max-height:46vh;overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px;margin-bottom:10px"></div>' +
-      '<div style="display:flex;gap:8px;align-items:flex-end">' +
-        '<textarea id="maikQ" rows="2" placeholder="Ask a clinical question — e.g. empiric antibiotics for febrile neutropenia?" style="flex:1;resize:none;background:var(--hpanel);border:1px solid var(--hbd);border-radius:12px;color:var(--hink);font:500 14px var(--hfont);padding:10px 12px;box-sizing:border-box"></textarea>' +
-        '<button id="maikSend" style="background:var(--hp);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer">Send</button>' +
-      '</div>' +
-      '<button class="hv-back" data-close="1" style="margin-top:10px">Close</button>');
-    var s = sheetEl();
-    var chat = s.querySelector("#maikChat"), qEl = s.querySelector("#maikQ"), sendBtn = s.querySelector("#maikSend");
-    function bubble(who, html) {
-      var d = document.createElement("div");
-      var mine = who === "you";
-      d.style.cssText = "max-width:88%;padding:9px 12px;border-radius:13px;font:500 13.5px/1.5 var(--hfont);white-space:pre-wrap;word-break:break-word;" +
-        (mine ? "align-self:flex-end;background:var(--hp);color:#fff" : "align-self:flex-start;background:var(--hpanel);border:1px solid var(--hbd);color:var(--hink)");
-      d.innerHTML = html; chat.appendChild(d); chat.scrollTop = chat.scrollHeight; return d;
+    maikCSS();
+    var old = document.getElementById("maikSheet"); if (old) old.remove();
+    var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
+    var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
+    var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
+    sheet.innerHTML =
+      '<div class="maik-hd"><div class="mk-ti"><div class="mk-t">MaiK</div><div class="mk-s">Clinical knowledge assistant</div></div>' +
+        '<button class="maik-x" id="maikX" aria-label="Close">✕</button></div>' +
+      '<div class="maik-adv"><span class="maik-badge">✓ Advisory — clinician verifies</span></div>' +
+      '<div class="maik-body" id="maikBody"></div>' +
+      '<div class="maik-cmp"><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div>';
+    document.body.appendChild(sheet);
+    document.body.classList.add("maik-open");
+    requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
+    var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+    function close() { sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
+    function scroll() { body.scrollTop = body.scrollHeight; }
+    function bubble(who, html) { var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); return d; }
+    function chips(list) {
+      var w = document.createElement("div"); w.className = "maik-chips";
+      list.forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.textContent = c.label; b.addEventListener("click", c.on); w.appendChild(b); });
+      body.appendChild(w); scroll();
     }
-    _maikHist.forEach(function (m) { bubble(m.who, m.html); });
-    if (!_maikHist.length) bubble("maik", "Hi — I’m <b>MaiK</b>. Ask me anything clinical and I’ll answer from StewardMD’s knowledge base. I support, not replace, your judgment.");
+    function emptyState() {
+      bubble("ai", '<div class="maik-welcome">Hello — I’m <b>MaiK</b>, your clinical knowledge assistant. Ask a general clinical question and I’ll answer from StewardMD’s knowledge base, or start a patient assessment.</div>');
+      if (maikActiveCase()) chips([
+        { label: "What findings are missing?", on: function () { qEl.value = "What findings are missing for the current differential?"; send(); } },
+        { label: "Explain this differential", on: function () { qEl.value = "Explain the leading diagnosis in the current assessment."; send(); } },
+        { label: "What investigations next?", on: function () { qEl.value = "What investigations should I order next?"; send(); } },
+        { label: "Culture-directed options", on: function () { qEl.value = "What are the culture-directed antibiotic options?"; send(); } }
+      ]);
+      else chips([
+        { label: "Start a clinical assessment", on: function () { close(); try { openDxChooser(); } catch (e) {} } },
+        { label: "Ask a general knowledge question", on: function () { qEl.value = "How to treat organophosphate poisoning?"; try { qEl.focus(); } catch (e) {} } },
+        { label: "Open Drug Index", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="drugs"]'); if (b) b.click(); else toast("Open Drugs from the home screen."); } },
+        { label: "Open calculator", on: function () { close(); var b = document.querySelector('#homeV2 [data-act="calculators"]'); if (b) b.click(); else toast("Open Calculators from the home screen."); } }
+      ]);
+    }
+    // patient-specific (individualized) request with NO active case → redirect, don't answer
+    function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q); }
+    function isGreeting(q) { return q.length <= 24 && /^(hi|hey|hello|yo|thanks|thank you|thx|ok|okay|cool|good (morning|afternoon|evening)|namaste)\b/i.test(q); }
     function send() {
-      var q = (qEl.value || "").trim(); if (!q) return;
-      qEl.value = "";
-      _maikHist.push({ who: "you", html: maikEscH(q) }); bubble("you", maikEscH(q));
-      var think = bubble("maik", "✨ Retrieving StewardMD knowledge…");
+      var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      _maikHist.push({ q: q }); bubble("you", maikEscH(q));
+      var active = maikActiveCase();
+      if (isGreeting(q) && !active) { bubble("ai", '<div class="maik-welcome">Hi! Ask me a clinical knowledge question (e.g. “how to treat DKA?”), or start a patient assessment.</div>'); return; }
+      if (isPatientSpecific(q) && !active) {
+        var d = bubble("ai", 'For advice about a specific patient, use <b>Dx My Patient</b> / <b>Clinical Reasoning</b> so StewardMD’s engine computes the assessment first — MaiK then adds commentary on it.');
+        var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
+        b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
+      }
+      var think = bubble("ai", "✨ Searching StewardMD knowledge…");
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
-        .then(function () { var assess = window.SMD_REASON.assess({}); return StewardRAG.buildPackage(assess, { question: q }); })
+        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: q }); })
         .then(function (pkg) {
           return window.SMD_AI.explainGrounded(pkg).then(function (r) {
-            var txt = (r && r.text) ? r.text : (r && r.error === "ai-off" ? "MaiK is off — enable AI in Settings." : "MaiK: " + ((r && r.error) || "no response."));
-            var cites = (pkg.retrieved || []).slice(0, 4).map(function (c) { return c.name || c.section; }).filter(Boolean);
-            var html = maikEscH(txt).replace(/\n/g, "<br>") + (cites.length ? '<div style="font:600 10.5px var(--hfont);color:var(--hmut);margin-top:7px">📚 ' + maikEscH(cites.join(" · ")) + '</div>' : "");
-            think.innerHTML = html; _maikHist.push({ who: "maik", html: html }); chat.scrollTop = chat.scrollHeight;
+            if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : maikEscH("MaiK is unavailable right now. " + (r.error || "")); return; }
+            var md = (r && r.text) ? String(r.text) : "No response.";
+            var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
+            var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
+            var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
+            var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
+            var full = eduHTML + rendered + srcHTML;
+            // long answers: collapse behind "Show more"
+            if (md.length > 700) {
+              think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
+              var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "220px"; cd.style.overflow = "hidden";
+              var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
+              mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "220px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
+              think.insertBefore(mb, think.querySelector(".maik-src") || null);
+            } else { think.innerHTML = full; }
+            scroll();
           });
         })
-        .catch(function (e) { think.innerHTML = "MaiK unavailable: " + maikEscH(e && e.message || e); });
+        .catch(function (e) { think.innerHTML = maikEscH("MaiK unavailable: " + (e && e.message || e)); });
     }
-    if (sendBtn) sendBtn.addEventListener("click", send);
-    if (qEl) qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
-    var aiClose = s.querySelector("[data-close]");
-    if (aiClose) aiClose.addEventListener("click", closeSheet);
+    // restore prior session history, else empty state
+    if (_maikHist.length) { _maikHist.forEach(function (m) { bubble("you", maikEscH(m.q)); }); } else { emptyState(); }
+    sheet.querySelector("#maikX").addEventListener("click", close);
+    scrim.addEventListener("click", close);
+    sendBtn.addEventListener("click", send);
+    qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; });
+    qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
+    setTimeout(function () { try { qEl.focus(); } catch (e) {} }, 300);
   }
 
   // ---- Display & Accessibility engine ----

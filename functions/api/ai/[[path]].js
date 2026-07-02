@@ -189,6 +189,19 @@ const RAG_SYS =
   "Keep each section to 1–4 short bullets. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Reference drugs by name/class only — NO specific doses beyond what the provided treatment resolution states. Never use patient identifiers. " +
   "End with exactly: 'Decision-support only — the StewardMD rule engine owns the diagnosis; verify clinically.'";
 
+// General-knowledge system prompt (gold122): used when NO deterministic diagnosis
+// has been computed (empty differential) — the clinician is asking a general named-
+// topic question, not seeking individualized management. Educational reference,
+// grounded in the retrieved KB, with a clean clinical structure. No provider/model
+// names; no long trailing disclaimer (the UI shows a persistent advisory badge).
+const KNOWLEDGE_SYS =
+  "You are MaiK (Medical AI Knowledge), StewardMD's clinician knowledge assistant. Answer the clinician's GENERAL CLINICAL KNOWLEDGE question as a concise EDUCATIONAL reference for a qualified doctor. " +
+  "Reason PRIMARILY from the RETRIEVED STEWARDMD KNOWLEDGE below (Harrison-derived + StewardMD management protocols, source-cited); your own medical knowledge is SECONDARY and used only to connect the provided material. If the retrieved knowledge does not cover the question, say so briefly rather than inventing specifics. " +
+  "This is NOT individualized patient advice — do not tailor to a specific patient. If the question is clearly about a specific patient, briefly advise using StewardMD's Clinical Reasoning / Dx My Patient so the engine computes the assessment first. " +
+  "Reply as short Markdown under EXACTLY these headings, omitting any with nothing evidence-based to add:\n" +
+  "### Clinical take\n### Key supporting points\n### What to check next\n### Management considerations\n### Red flags\n" +
+  "Keep each section to 1–4 short bullets. Reference drugs by name/class and standard principles only — no specific doses beyond what the retrieved knowledge states; never use patient identifiers. Do NOT mention the AI provider, model, or any internal implementation detail. Do NOT append a long disclaimer — the interface already shows a persistent advisory note.";
+
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
   const L = [];
@@ -287,8 +300,12 @@ export async function onRequest(context) {
       // it to Gemini with the KB-primary system prompt. The whole KB never transits.
       const pkg = body.package || (body.grounding || body.reasoning ? body : null);
       if (pkg && (pkg.grounding || pkg.reasoning)) {
+        // No computed diagnosis → general-knowledge (educational) mode; otherwise
+        // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
+        const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
+        const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
         const grounded = renderGroundedPrompt(pkg).slice(0, 24000);
-        const text = await callGemini(env, [{ text: RAG_SYS + "\n\n" + grounded }], 1536);
+        const text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], 1536);
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });

@@ -3165,7 +3165,47 @@
       : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings (SMD_AI.setFlag(true))." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
     return maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + body + maikDisclaimerHTML();
   }
-  try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML }; } catch (e) {}
+  // Safe Markdown → HTML for MaiK answers (headings, bold/italic, bullet + numbered
+  // lists, paragraphs). HTML is escaped first, so raw ### / * / JSON never surface.
+  function maikMarkdown(md) {
+    function esc(s) { return String(s).replace(/[&<>]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]; }); }
+    function inline(t) {
+      t = esc(t);
+      t = t.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>").replace(/__([^_]+)__/g, "<b>$1</b>");
+      t = t.replace(/(^|[^*])\*(?!\s)([^*]+?)\*/g, "$1<i>$2</i>");
+      t = t.replace(/`([^`]+)`/g, "<code>$1</code>");
+      return t;
+    }
+    var lines = String(md == null ? "" : md).replace(/\r/g, "").split("\n"), html = [], lt = null;
+    function closeL() { if (lt) { html.push(lt === "ol" ? "</ol>" : "</ul>"); lt = null; } }
+    lines.forEach(function (ln) {
+      var m;
+      if (/^\s*#{1,6}\s+/.test(ln)) { closeL(); html.push("<div class='maik-h'>" + inline(ln.replace(/^\s*#{1,6}\s+/, "")) + "</div>"); return; }
+      if ((m = ln.match(/^\s*(?:[-*•])\s+(.*)/))) { if (lt !== "ul") { closeL(); html.push("<ul>"); lt = "ul"; } html.push("<li>" + inline(m[1]) + "</li>"); return; }
+      if ((m = ln.match(/^\s*\d+[.)]\s+(.*)/))) { if (lt !== "ol") { closeL(); html.push("<ol>"); lt = "ol"; } html.push("<li>" + inline(m[1]) + "</li>"); return; }
+      if (!ln.trim()) { closeL(); return; }
+      closeL(); html.push("<p>" + inline(ln) + "</p>");
+    });
+    closeL();
+    return html.join("");
+  }
+  // Map retrieved chunks → compact HUMAN-READABLE source titles (never chunk IDs /
+  // section keys / raw refs). De-duplicated, in reading order.
+  function maikSourceTitles(chunks) {
+    var out = [], seen = {};
+    (chunks || []).forEach(function (c) {
+      var ref = String((c && c.source && c.source.ref) || ""), sec = String((c && c.section) || ""), title;
+      if (/harrison/i.test(ref)) title = "Harrison's Principles of Internal Medicine";
+      else if (/icmr/i.test(ref)) title = "ICMR guidelines";
+      else if (/drug index/i.test(ref)) title = "StewardMD Drug Index";
+      else if (/idsa|ats|kdigo|\bada\b|aha|acc|esc|surviving sepsis|gold|gina|who|baveno|aasld|\bncs\b|acr|eular/i.test(ref)) title = ref.replace(/\s*·.*$/, "").trim();
+      else if (/stewardmd|management|stewardship|protocol/i.test(ref) || /^management/.test(sec)) title = "StewardMD management protocol";
+      else title = "StewardMD Knowledge Base";
+      if (title && !seen[title]) { seen[title] = 1; out.push(title); }
+    });
+    return out;
+  }
+  try { window.SMD_MaiK = { compose: maikCompose, css: maikCSS, assessmentHTML: maikAssessmentHTML, renderMarkdown: maikMarkdown, sourceTitles: maikSourceTitles }; } catch (e) {}
 
   /* ====================================================================== *
    * Phase 2 — LIVE differential inside the PRIMARY 5-step Advanced form.
