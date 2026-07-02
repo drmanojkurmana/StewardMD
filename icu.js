@@ -1218,8 +1218,22 @@
   function fmtWhen(ts) { if (!ts) return ""; try { var d = new Date(ts); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
 
   // ---- cloud transport (best-effort; every call degrades to localStorage) ----
+  // Cases are PHI and stored PER USER server-side, so every call carries the
+  // signed-in clinician's Firebase ID token. Signed out (or Firebase not yet
+  // loaded) → no token → server reports enabled:false → on-device fallback.
+  function idToken() {
+    try {
+      var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
+      if (a && a.currentUser && a.currentUser.getIdToken) return a.currentUser.getIdToken();
+    } catch (e) {}
+    return Promise.resolve(null);
+  }
   function cloudFetch(path, opts) {
-    return fetch(CASES_API + (path || ""), Object.assign({ headers: { "Content-Type": "application/json" }, credentials: "same-origin" }, opts || {}));
+    return idToken().then(function (t) {
+      var headers = { "Content-Type": "application/json" };
+      if (t) headers["Authorization"] = "Bearer " + t;
+      return fetch(CASES_API + (path || ""), Object.assign({ headers: headers, credentials: "same-origin" }, opts || {}));
+    });
   }
   function cloudList() {
     return cloudFetch("").then(function (r) { return r.json(); }).then(function (j) { _cloud.enabled = !!(j && j.enabled); return j || {}; }).catch(function () { _cloud.enabled = false; return { enabled: false }; });

@@ -37,8 +37,11 @@ function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
   if (env.GHIS_APP_TOKEN && request.headers.get("X-App-Token") === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && request.headers.get("X-App-Token") === env.AI_APP_TOKEN) return true;
+  // Exact host allowlist (NOT endsWith — that matched attacker domains like
+  // "evil-stewardmd.in"). Empty Origin is still allowed for same-origin GETs,
+  // which browsers send without an Origin header.
   const o = request.headers.get("Origin") || "";
-  return o.endsWith("stewardmd.in") || o === "";
+  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "";
 }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
