@@ -1,0 +1,113 @@
+{
+  "id": "gc_488",
+  "specialty": "Toxicology",
+  "condition": "Opioid overdose",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Found unresponsive on a bathroom floor by a housemate, with slow, shallow breathing.",
+  "history": "34-year-old man with a history of chronic low-back pain on prescribed modified-release oxycodone and a background of heroin use. He had reportedly relapsed after a period of abstinence following an inpatient detox 3 weeks ago (loss of tolerance). Housemate last saw him well ~90 minutes earlier; found him slumped against the bath with a fresh scalp laceration and a small pool of blood, having apparently fallen and struck his head. Empty codeine-linctus bottle and used injecting paraphernalia nearby; an open box of zopiclone was also on the sink, raising concern for possible sedative co-ingestion. No witnessed seizure. No prior head injury. The witnessed fall and head laceration initially raised concern for traumatic intracranial bleed as an alternative or coexisting cause of coma.",
+  "examination": "Unresponsive, GCS 6 (E1 V2 M3), not maintaining airway with intermittent snoring respiration. Pupils pinpoint (1 mm) and sluggishly reactive bilaterally. Respirations slow and shallow at 6/min with prolonged apnoeic pauses. Cool peripheries; 3 cm right parietal scalp laceration with boggy haematoma, no CSF otorrhoea/rhinorrhoea, no obvious focal limb weakness or lateralising sign, no neck deformity. Chest: reduced air entry, no crepitations. No track-mark cellulitis. After 0.4 mg IV naloxone, respiratory rate rose to 14/min, SpO2 improved and GCS recovered to 14 within 3 minutes, strongly supporting opioid toxicity as the primary cause.",
+  "vitals": {
+    "hr": 48,
+    "bp": "104/66",
+    "rr": 6,
+    "temp": 35.3,
+    "spo2": 82
+  },
+  "labs": {
+    "abg": "pH 7.21, PaCO2 8.9 kPa (67 mmHg), PaO2 7.4 kPa on air, HCO3 24 (acute respiratory acidosis)",
+    "capillaryGlucose": "5.8 mmol/L (normal - excludes hypoglycaemia)",
+    "creatinine": "0.9 mg/dL",
+    "sodium": "139 mmol/L",
+    "potassium": "4.1 mmol/L",
+    "lactate": "2.1 mmol/L",
+    "paracetamolLevel": "not detected",
+    "salicylateLevel": "not detected",
+    "ethanol": "negative",
+    "creatineKinase": "640 U/L (mildly raised - period of immobility)",
+    "urineToxicology": "positive for opioids and benzodiazepine metabolites"
+  },
+  "imaging": "CT head (performed given witnessed fall + scalp laceration): no intracranial haemorrhage, no mass effect, no fracture - effectively excludes subdural/intracerebral bleed as the cause of coma. CXR: no aspiration consolidation.",
+  "microbiology": "Not applicable - non-infective toxicological presentation.",
+  "differentialDiagnoses": [
+    "Traumatic intracranial haemorrhage (subdural) from witnessed fall - excluded on CT",
+    "Sedative-hypnotic (benzodiazepine/zopiclone) co-ingestion contributing to CNS depression",
+    "Hypoglycaemic coma - excluded by normal capillary glucose",
+    "Metabolic/hypercapnic encephalopathy"
+  ],
+  "finalDiagnosis": "Opioid overdose (opioid toxidrome: depressed consciousness, bradypnoea, miosis) precipitated by relapse with lost tolerance, with a concurrent minor head injury from a fall; dramatic reversal with naloxone confirms opioid toxicity as the primary cause.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e - Opioid Overdose and Poisoning",
+    "American Heart Association - Opioid-Associated Life-Threatening Emergency (Adult BLS/ALS) - 2020",
+    "American College of Medical Toxicology - Naloxone for Opioid Toxicity - 2015"
+  ],
+  "stewardship": "Not applicable - non-infective toxicological emergency. No antimicrobials indicated. Management is supportive: airway/oxygenation, titrated IV/IM naloxone (0.4 mg boluses, repeat/uptitrate to restore adequate ventilation rather than full arousal), and observation for re-sedation given long-acting modified-release oxycodone and possible zopiclone co-ingestion. Consider naloxone infusion if recurrent hypoventilation. Antibiotics would only be warranted if aspiration pneumonia or injection-related soft-tissue infection subsequently develops.",
+  "contraindications": [
+    "Avoid abrupt high-dose naloxone in an opioid-dependent patient - risk of precipitated acute withdrawal, agitation, vomiting and aspiration; titrate to respiratory rate.",
+    "Do not attribute coma solely to head injury and delay naloxone - reversible opioid toxicity must be treated empirically.",
+    "Do not discharge early: modified-release opioid and possible zopiclone co-ingestion mandate prolonged observation for re-sedation beyond naloxone half-life."
+  ],
+  "edgeCases": [
+    "Response to naloxone is diagnostic but transient; re-sedation is expected as naloxone (t1/2 ~60 min) wears off before long-acting oxycodone is cleared.",
+    "Coexisting head injury/CT could have masked a dual pathology - CT excluding haemorrhage anchors opioid toxicity as the primary driver.",
+    "Loss of tolerance after recent detox markedly increases overdose fatality risk on relapse."
+  ],
+  "expectedMaiK": "Recognise the opioid toxidrome (coma + bradypnoea + miosis), secure airway/oxygenation, and give titrated naloxone; use its dramatic reversal plus a normal CT head and normal glucose to distinguish opioid overdose from traumatic intracranial bleed and hypoglycaemia.",
+  "expectedNextQuestions": [
+    "What opioids and other agents (benzodiazepines/zopiclone, alcohol) were taken, in what dose and formulation (immediate vs modified-release)?",
+    "When was the patient last seen well, and how long has he been down?",
+    "Has there been a recent period of abstinence/detox causing loss of tolerance?",
+    "Was the fall witnessed, and is there any anticoagulant use or seizure to raise concern for intracranial injury?"
+  ],
+  "expectedInvestigations": [
+    "Capillary blood glucose",
+    "Arterial blood gas",
+    "12-lead ECG",
+    "Urine toxicology screen",
+    "Serum paracetamol and salicylate levels",
+    "CT head (given witnessed fall / head injury)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "alteredSensorium": true,
+    "bradypnea": true,
+    "hypoxia": true,
+    "drugOverdose": true,
+    "headInjury": true,
+    "hypothermia": true,
+    "bradycardia": true
+  },
+  "expected": {
+    "diagnosis": "opioid_od",
+    "acceptableIds": [
+      "opioid_od"
+    ],
+    "differentialIds": [
+      "subdural",
+      "drug_intox",
+      "hypoglycemia",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "capillary blood glucose",
+      "arterial blood gas",
+      "urine toxicology screen",
+      "CT head"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis must resolve to opioid_od given the opioid toxidrome (coma, RR 6, pinpoint pupils) and reversal with naloxone.",
+    "System must recommend titrated naloxone and airway/ventilatory support as the immediate intervention.",
+    "System must NOT recommend any antibiotic - this is a non-infective toxicological emergency (stewardship tier null).",
+    "Normal CT head and normal capillary glucose should down-rank traumatic intracranial haemorrhage and hypoglycaemia as the primary cause.",
+    "System must flag risk of re-sedation from modified-release opioid / possible zopiclone co-ingestion and advise prolonged observation."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

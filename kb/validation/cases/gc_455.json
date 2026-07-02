@@ -1,0 +1,112 @@
+{
+  "id": "gc_455",
+  "specialty": "Endocrine",
+  "condition": "Diabetic ketoacidosis",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Nausea, vomiting and breathlessness on the second post-operative day after emergency hip fracture fixation.",
+  "history": "Type 2 diabetes for 14 years managed with metformin and empagliflozin, alongside hypertension (amlodipine, indapamide), osteoporosis and hypothyroidism (levothyroxine). Admitted 3 days ago after a fall with a fractured neck of femur and underwent hemiarthroplasty on day 1. Her SGLT2 inhibitor (empagliflozin) was inadvertently continued through the peri-operative fasting period. Since surgery she has eaten little, vomited twice overnight and become progressively more short of breath with diffuse abdominal discomfort. Nursing staff note capillary glucose readings that are only modestly elevated (14-17 mmol/L), which had reassured the team. No cough, dysuria or wound discharge. Increasingly drowsy this morning.",
+  "examination": "Elderly woman, unwell and mildly drowsy but rousable. Dry mucous membranes, reduced skin turgor and prolonged capillary refill. Deep sighing (Kussmaul) respiration with a faint fruity odour to the breath. Chest clear, heart sounds normal. Abdomen soft with generalised mild tenderness, no peritonism; surgical wound clean and dry. No calf swelling.",
+  "vitals": {
+    "hr": 112,
+    "bp": "104/62",
+    "rr": 26,
+    "temp": 36.7,
+    "spo2": 97
+  },
+  "labs": {
+    "capillaryGlucose_mmol_L": 16.4,
+    "venous_pH": 7.16,
+    "bicarbonate_mmol_L": 10,
+    "bloodBetaHydroxybutyrate_mmol_L": 5.6,
+    "anionGap_mmol_L": 24,
+    "sodium_mmol_L": 133,
+    "potassium_mmol_L": 5.2,
+    "urea_mmol_L": 14.8,
+    "creatinine_mg_dL": 1.7,
+    "lactate_mmol_L": 1.9,
+    "wbc_10e9_L": 12.1,
+    "hba1c_percent": 8.4
+  },
+  "imaging": "Portable chest radiograph clear with no consolidation or effusion; ECG shows sinus tachycardia with peaked T waves consistent with hyperkalaemia.",
+  "microbiology": "Blood and urine cultures sent to exclude a surgical/urinary precipitant; no organism isolated. Wound swab not indicated (clean site).",
+  "differentialDiagnoses": [
+    "Diabetic ketoacidosis (SGLT2 inhibitor-associated, relatively euglycaemic)",
+    "Hyperosmolar hyperglycaemic state",
+    "Sepsis with lactic acidosis / post-operative infection",
+    "Complicated urinary tract infection as precipitant"
+  ],
+  "finalDiagnosis": "Diabetic ketoacidosis precipitated by peri-operative continuation of an SGLT2 inhibitor and surgical stress (relatively euglycaemic DKA).",
+  "citations": [
+    "JBDS — Management of DKA in Adults — 2023",
+    "ADA — Standards of Care in Diabetes (Hyperglycaemic Crises) — 2024"
+  ],
+  "stewardship": "Non-infective metabolic emergency. Cultures are appropriate to exclude an occult precipitant, but empirical antibiotics are not warranted in the absence of any infective focus (clear chest film, clean wound, no fever, negative urinalysis); the modest leucocytosis is explained by the ketoacidotic stress response. Avoid reflexive antibiotic initiation for the raised WBC alone.",
+  "contraindications": [
+    "Do not give insulin without concurrent potassium monitoring; withhold insulin if K+ <3.3 mmol/L until replaced.",
+    "Avoid sodium bicarbonate unless pH <6.9 per protocol.",
+    "Hold and do not restart the SGLT2 inhibitor during the acute illness; do not resume until eating normally and ketosis resolved.",
+    "Avoid nephrotoxins (NSAIDs, contrast where avoidable) given acute kidney injury."
+  ],
+  "edgeCases": [
+    "Relatively normal glucose (euglycaemic DKA) from SGLT2 inhibitor use can mask the diagnosis if clinicians anchor on capillary glucose rather than checking ketones and venous gas.",
+    "Peri-operative fasting plus continued SGLT2 inhibitor is a classic, preventable trigger.",
+    "Initial potassium may be high despite a total-body deficit; it will fall rapidly once insulin starts."
+  ],
+  "expectedMaiK": "Check blood ketones and a venous blood gas in any unwell diabetic even when glucose is only modestly raised — SGLT2 inhibitors cause euglycaemic DKA, especially peri-operatively.",
+  "expectedNextQuestions": [
+    "Was the SGLT2 inhibitor (empagliflozin) continued through the peri-operative fasting period?",
+    "Is there any focus of infection or other precipitant (chest, urine, wound)?",
+    "What are the blood ketone level and venous pH/bicarbonate?"
+  ],
+  "expectedInvestigations": [
+    "Venous blood gas (pH, bicarbonate, anion gap)",
+    "Blood beta-hydroxybutyrate (ketones)",
+    "Urea, electrolytes and creatinine with hourly capillary glucose and ketone monitoring",
+    "ECG for hyperkalaemia",
+    "Septic screen (blood/urine cultures, CXR) to identify precipitant"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "polyuriaPolydipsia": true,
+    "ketonemia": true,
+    "dehydration": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "dka",
+    "acceptableIds": [
+      "dka"
+    ],
+    "differentialIds": [
+      "hhs",
+      "SEPSIS",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "Venous blood gas (pH, bicarbonate, anion gap)",
+      "Blood beta-hydroxybutyrate",
+      "Urea, electrolytes and creatinine",
+      "ECG for hyperkalaemia"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks dka as the top diagnosis.",
+    "High anion-gap metabolic acidosis with ketonemia is recognised as DKA despite only modestly elevated glucose (euglycaemic/SGLT2i pattern).",
+    "No empirical antibiotics are recommended in the absence of an infective focus.",
+    "Management flags fluid resuscitation, fixed-rate insulin infusion and potassium monitoring, and withholding the SGLT2 inhibitor."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

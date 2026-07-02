@@ -1,0 +1,122 @@
+{
+  "id": "gc_411",
+  "specialty": "Hepatobiliary",
+  "condition": "Liver Abscess",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "5 days of high spiking fever with rigors, right upper abdominal pain and drenching night sweats in a man recovering from chemotherapy.",
+  "history": "Type 2 diabetic (HbA1c 9.4%) with stage II sigmoid colon adenocarcinoma, 12 days out from his 3rd cycle of FOLFOX and on tapering dexamethasone as anti-emetic. Nadir ANC on day 7 was 0.4 x10^9/L (now recovering). Reports swinging fevers to 39-40 C with rigors for 5 days, dull constant right hypochondrial pain radiating to the right shoulder tip, anorexia and 4 kg weight loss over 3 weeks. No diarrhoea, no cough, no dysuria. No recent travel abroad; lives in Chennai. No known biliary disease.",
+  "examination": "Ill-looking, mildly icteric, warm peripheries. Tender hepatomegaly 4 cm below costal margin with tenderness and reduced excursion over the right lower ribs; positive right hepatic punch sign. Chest clear apart from reduced air entry at right base. No peritonism, no organomegaly elsewhere, no peripheral stigmata of chronic liver disease. Fundi normal.",
+  "vitals": {
+    "hr": 114,
+    "bp": "104/64",
+    "rr": 22,
+    "temp": 39.3,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "16.8 x10^9/L (recovered from neutropenic nadir)",
+    "anc": "9.1 x10^9/L",
+    "hemoglobin": "10.2 g/dL",
+    "platelets": "512 x10^3/µL",
+    "crp": "268 mg/L",
+    "alkalinePhosphatase": "412 U/L",
+    "alt": "78 U/L",
+    "bilirubin": "2.6 mg/dL",
+    "albumin": "2.7 g/dL",
+    "creatinine": "1.1 mg/dL",
+    "randomGlucose": "268 mg/dL",
+    "lactate": "2.1 mmol/L",
+    "inr": "1.2"
+  },
+  "imaging": "Ultrasound abdomen: single 6.8 cm hypoechoic lesion with internal debris in the right hepatic lobe (segment VII). Contrast CT abdomen: solitary thick-walled multiloculated collection with rim enhancement and surrounding oedema in the right lobe, small reactive right pleural effusion; biliary tree not dilated, gallbladder normal, no colonic mass complication.",
+  "microbiology": "Two sets of blood cultures drawn before antibiotics grew Klebsiella pneumoniae (hypermucoviscous, string-test positive), ESBL-negative, sensitive to ceftriaxone, piperacillin-tazobactam and carbapenems. Percutaneous aspirate: thick non-anchovy pus, Gram-negative bacilli, culture Klebsiella pneumoniae matching the blood isolate. Amoebic serology (IHA) negative; stool for E. histolytica antigen negative.",
+  "differentialDiagnoses": [
+    "Pyogenic liver abscess (Klebsiella hypervirulent, diabetic host)",
+    "Amoebic liver abscess",
+    "Ascending cholangitis",
+    "Acute cholecystitis with pericholecystic collection"
+  ],
+  "finalDiagnosis": "Pyogenic liver abscess (hypervirulent Klebsiella pneumoniae) in an immunocompromised diabetic host",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Liver Abscess",
+    "IDSA — Diagnosis and Management of Complicated Intra-abdominal Infection — 2010",
+    "WSES — Management of Intra-abdominal Infections — 2017"
+  ],
+  "stewardship": "Immunocompromised (post-chemotherapy, recent neutropenia, poorly controlled diabetes) host with a large solitary pyogenic liver abscess and bacteraemia. Take two sets of blood cultures and secure the abscess aspirate BEFORE antibiotics, then start broad empiric IV cover to include enteric Gram-negatives and anaerobes: piperacillin-tazobactam 4.5 g q6h (plus empiric metronidazole cover for amoebic/anaerobic disease until amoebic aetiology excluded). Once blood and pus cultures confirm ESBL-negative, carbapenem-susceptible K. pneumoniae and amoebic serology is negative, DE-ESCALATE to IV ceftriaxone 2 g daily (stop metronidazole). Source control is essential and diagnostic: image-guided percutaneous catheter drainage of the >5 cm collection. Plan a 4-6 week course (2-3 weeks IV then oral step-down guided by response and repeat imaging); screen for the metastatic complications of the invasive Klebsiella syndrome (endophthalmitis, CNS/lung septic emboli) and optimise glycaemic control.",
+  "contraindications": [
+    "Avoid aminoglycoside-based empiric regimens given recent nephrotoxic chemotherapy and diabetes",
+    "Do not rely on antibiotics alone for a >5 cm abscess — drainage required",
+    "Avoid unnecessary prolonged anaerobic (metronidazole) cover once amoebic disease excluded and pure Klebsiella confirmed"
+  ],
+  "edgeCases": [
+    "Hypervirulent Klebsiella liver abscess can seed metastatic endophthalmitis and meningitis — low threshold for ophthalmology review and neuroimaging",
+    "In diabetics gas-forming abscess may occur — consider emphysematous change on CT",
+    "Colonic adenocarcinoma is itself a portal source of pyogenic liver abscess — ensure oncological staging accounts for this"
+  ],
+  "expectedMaiK": "Recognise a pyogenic (Klebsiella) liver abscess needing image-guided percutaneous drainage plus broad empiric antibiotics that are de-escalated to culture-directed ceftriaxone.",
+  "expectedNextQuestions": [
+    "Any recent travel to or residence in an amoebiasis-endemic area or contaminated water exposure?",
+    "Current neutrophil count, chemotherapy timeline and steroid dose?",
+    "Any visual symptoms, headache or neck stiffness suggesting metastatic Klebsiella seeding?",
+    "Glycaemic control and HbA1c?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures before antibiotics",
+    "Ultrasound abdomen then contrast-enhanced CT abdomen",
+    "Image-guided percutaneous aspiration with Gram stain and culture",
+    "Amoebic serology (IHA) and stool antigen",
+    "LFTs, CRP, full blood count with differential, glucose/HbA1c"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "nauseaVomiting": true,
+    "weightLoss": true,
+    "immunocompromised": true,
+    "diabetesHx": true,
+    "singleLesion": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "LIVER_ABSCESS",
+    "acceptableIds": [
+      "LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "AMOEBIC_LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS",
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "investigations": [
+      "Blood cultures (x2) before antibiotics",
+      "Contrast-enhanced CT abdomen",
+      "Image-guided percutaneous aspiration and culture",
+      "Amoebic serology"
+    ],
+    "stewardship": {
+      "tier": "broad_spectrum",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Metronidazole",
+        "Ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be LIVER_ABSCESS",
+    "Must recommend image-guided percutaneous drainage (source control)",
+    "Empiric regimen must cover enteric Gram-negatives and anaerobes and be de-escalated to ceftriaxone once ESBL-negative K. pneumoniae confirmed and amoebic disease excluded",
+    "Blood cultures must be obtained before starting antibiotics",
+    "Amoebic liver abscess must be actively excluded"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "id": "gc_444",
+  "specialty": "Cardiology",
+  "condition": "Atrial fibrillation / arrhythmia",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden palpitations and breathlessness for 5 hours, with tightness across the chest",
+  "history": "A 68-year-old man presented to the emergency department with abrupt-onset, fast, irregular palpitations for 5 hours, associated with progressive exertional breathlessness, mild central chest tightness and one episode of light-headedness on standing. He denied syncope with loss of consciousness, no diaphoresis radiating to the arm, and no calf pain or recent immobilisation. Background of hypertension (on amlodipine), no prior documented arrhythmia. Moderate alcohol intake, occasional binge drinking; last heavy intake the previous evening. No fever, cough or weight loss. The combination of chest tightness with a borderline troponin and acute breathlessness initially raised concern for a concurrent acute coronary syndrome and for pulmonary embolism, both of which required active exclusion, but the presentation is dominated by a new sustained tachyarrhythmia.",
+  "examination": "Alert, mildly anxious, not in extremis. Pulse irregularly irregular at approximately 148/min with a pulse deficit versus apex. No raised JVP, no pedal oedema, no calf swelling or tenderness. Heart sounds variable in intensity, no new murmur, no pericardial rub. Chest clear with no focal crackles. No goitre, no tremor, no lid lag. Peripheries warm, capillary refill normal.",
+  "vitals": {
+    "hr": 148,
+    "bp": "126/82",
+    "rr": 22,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 13.9,
+    "platelets": 232,
+    "creatinine": 1.1,
+    "urea": 6.4,
+    "troponinI_ng_L": "38 (mildly elevated, rate-related demand pattern, flat on repeat)",
+    "tsh_mIU_L": "1.8 (normal)",
+    "freeT4_pmol_L": "15 (normal)",
+    "potassium_mmol_L": 4.1,
+    "magnesium_mmol_L": 0.78,
+    "dDimer_ng_mL": "410 (below age-adjusted threshold)",
+    "nt_proBNP_pg_mL": "620 (modest, tachycardia-related)"
+  },
+  "imaging": "Chest X-ray: normal cardiothoracic ratio, clear lung fields, no consolidation or pulmonary oedema. Transthoracic echocardiogram: preserved LV systolic function (EF 55%), mild left atrial dilatation, no regional wall-motion abnormality, no significant valvular lesion, no RV strain. CTPA (performed to exclude PE given chest tightness and dyspnea): no pulmonary embolism.",
+  "microbiology": "Not applicable — non-infective presentation; no cultures indicated.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (chest tightness with borderline troponin — excluded by flat serial troponin, normal wall motion, ischaemia attributable to rate-related demand)",
+    "Pulmonary embolism (acute dyspnea — excluded by low age-adjusted D-dimer, no RV strain, negative CTPA)",
+    "Thyrotoxic arrhythmia (excluded by normal TSH/free T4)",
+    "Acute heart failure / pulmonary oedema (no congestion clinically or radiographically)"
+  ],
+  "finalDiagnosis": "New-onset atrial fibrillation with rapid ventricular response (likely alcohol-precipitated 'holiday heart'), with concurrent emergencies (ACS and PE) actively excluded",
+  "citations": [
+    "ESC — Guidelines for the Management of Atrial Fibrillation, 2024",
+    "AHA/ACC/ACCP/HRS — Atrial Fibrillation Guideline, 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Supraventricular Tachyarrhythmias / Atrial Fibrillation"
+  ],
+  "stewardship": "Not applicable — non-infective arrhythmia; no antimicrobial therapy indicated. Antimicrobial stewardship point: resist reflexive antibiotics for a tachycardic, mildly troponin-positive patient when the syndrome is a primary arrhythmia rather than sepsis.",
+  "contraindications": [
+    "Avoid non-dihydropyridine calcium-channel blockers (diltiazem/verapamil) if occult LV systolic dysfunction is suspected",
+    "Do not cardiovert electively without >48h of therapeutic anticoagulation or TOE exclusion of LA thrombus given uncertain arrhythmia duration",
+    "Caution with rate-control agents in the setting of hypotension"
+  ],
+  "edgeCases": [
+    "Rate-related ST depression and modest troponin rise can mimic NSTEMI — flat serial troponin and normal echo wall motion argue for demand ischaemia",
+    "Alcohol binge ('holiday heart') as a reversible precipitant may be missed",
+    "If AF onset is truly <48h and CHA2DS2-VASc supports it, early cardioversion may be considered, but duration is often uncertain"
+  ],
+  "expectedMaiK": "12-lead ECG showing an irregularly irregular narrow-complex tachycardia with absent P waves and fibrillatory baseline confirms atrial fibrillation; manage with rate control and CHA2DS2-VASc-based anticoagulation assessment while excluding ACS/PE.",
+  "expectedNextQuestions": [
+    "How long have the palpitations been present (is onset clearly <48 hours)?",
+    "Any prior episodes, and what is the CHA2DS2-VASc and HAS-BLED profile?",
+    "Alcohol intake, thyroid symptoms and other reversible precipitants?",
+    "Any features of ischaemia, decompensation or haemodynamic instability requiring emergency cardioversion?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Serial troponin",
+    "TSH / free T4",
+    "Serum electrolytes including potassium and magnesium",
+    "Transthoracic echocardiogram",
+    "Age-adjusted D-dimer +/- CTPA if PE clinically plausible"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "palpitations": true,
+    "tachycardia": true,
+    "dyspnea": true,
+    "chestPain": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "orthopnea": true,
+    "syncope": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "atrial_fib",
+    "acceptableIds": [
+      "atrial_fib"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "hyperthyroidism",
+      "heart_failure"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Serial troponin",
+      "TSH / free T4",
+      "Transthoracic echocardiogram",
+      "Electrolytes (K/Mg)"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Primary diagnosis resolves to atrial_fib",
+    "ECG-confirmed irregularly irregular narrow-complex tachycardia is the pivotal feature",
+    "ACS and PE are considered and excluded rather than treated as primary",
+    "No antibiotics are recommended (infective:false)",
+    "Management includes rate control and CHA2DS2-VASc-based anticoagulation decision"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

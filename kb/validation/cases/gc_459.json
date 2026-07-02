@@ -1,0 +1,113 @@
+{
+  "id": "gc_459",
+  "specialty": "Gastroenterology",
+  "condition": "GERD / non-cardiac chest pain",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Retrosternal burning chest discomfort on the third post-operative day after left hip hemiarthroplasty, prompting an urgent cardiology review.",
+  "history": "A 78-year-old woman is on the orthopaedic ward, day 3 after cemented left hip hemiarthroplasty for a fractured neck of femur. Overnight she developed a burning central chest discomfort radiating up to the throat with an associated sour/acid taste and intermittent belching. The discomfort is worse when she lies flat for physiotherapy positioning and after her enteral supplement drinks, and it eases when the head of the bed is raised and after a dose of ward antacid. It is NOT exertional (she is largely bed-bound), not pleuritic, and not associated with sweating or radiation to the arm/jaw. She reports long-standing intermittent heartburn and 'indigestion' for years, never formally investigated. Post-operatively she has been supine much of the time, is on regular diclofenac and codeine for analgesia, prophylactic enoxaparin, plus her usual amlodipine, atorvastatin, alendronate (taken that morning) and aspirin. No melaena, no haematemesis, no weight loss, no dysphagia to solids, no odynophagia. Bowels opened normally. She is anxious that she is 'having a heart attack'. Background: hypertension, type 2 diabetes, known stable coronary artery disease (angiogram 2 years ago, medically managed, no prior infarct).",
+  "examination": "Comfortable at rest with the bed-head elevated, not distressed, well perfused. Chest clear with normal air entry and no crepitations. Heart sounds normal, no rub, no murmur, no gallop. JVP not raised. Mild epigastric tenderness on deep palpation, no guarding, no organomegaly, bowel sounds present. Calves soft and non-tender, no unilateral leg swelling. Operative hip wound clean and dry.",
+  "vitals": {
+    "hr": 82,
+    "bp": "138/78",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 11.4,
+    "wbc": 8.2,
+    "platelets": 246,
+    "creatinine": 1,
+    "troponinT_hs_ng_L": "12 (baseline) then 11 at 3h (no dynamic rise)",
+    "sodium": 138,
+    "potassium": 4.2,
+    "crp_mg_L": 34,
+    "randomGlucose_mg_dL": 156
+  },
+  "imaging": "Portable chest X-ray: clear lung fields, no consolidation, no effusion, no pneumothorax, normal cardiac silhouette. No acute cardiopulmonary process.",
+  "microbiology": "Not indicated; no infective focus. No cultures sent.",
+  "differentialDiagnoses": [
+    "Gastro-oesophageal reflux disease causing non-cardiac chest pain (positional burning, acid regurgitation, antacid-responsive, NSAID/supine provocation)",
+    "Acute coronary syndrome (must be excluded in an elderly diabetic with known CAD; excluded here by non-exertional character and flat serial high-sensitivity troponins)",
+    "NSAID-related peptic ulcer / gastritis (on diclofenac + aspirin; no melaena or anaemia drop, but co-prescribed acid suppression warranted)",
+    "Acute pericarditis (no pleuritic component, no rub, no ECG concordance)",
+    "Anxiety / panic-related chest pain (peri-operative anxiety present but symptom pattern is clearly reflux-typical)"
+  ],
+  "finalDiagnosis": "Gastro-oesophageal reflux disease presenting as non-cardiac chest pain in a peri-operative elderly patient (supine positioning, NSAID use and known reflux history), after exclusion of acute coronary syndrome.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Esophagus (GERD) and Chest Discomfort",
+    "American College of Gastroenterology (ACG) — Clinical Guideline: Diagnosis and Management of Gastroesophageal Reflux Disease, 2022"
+  ],
+  "stewardship": "Non-infective presentation; no antimicrobial therapy indicated. Peri-operative reflux-type chest pain is managed by first excluding ACS (serial high-sensitivity troponin + ECG), then addressing reversible aggravators: elevate the head of the bed, avoid supine feeds, and rationalise gastro-toxic polypharmacy. This patient is on dual mucosal insult (diclofenac + aspirin) with an alendronate dose that morning — strong indication to stop the NSAID, switch to paracetamol-based analgesia, review alendronate timing/necessity, and start a proton-pump inhibitor for both symptom control and NSAID/aspirin gastroprotection.",
+  "contraindications": [
+    "Continuing NSAID (diclofenac) alongside aspirin without acid suppression in a 78-year-old — high GI bleeding risk",
+    "Empirical antibiotics — no infective indication",
+    "Attributing chest pain to reflux before ACS is excluded in an elderly diabetic with known CAD",
+    "Clopidogrel/antiplatelet–PPI interaction consideration if the patient were on clopidogrel (prefer pantoprazole)"
+  ],
+  "edgeCases": [
+    "If serial high-sensitivity troponin rises or ECG shows dynamic ischaemic change, reclassify as ACS and manage accordingly",
+    "New melaena, haematemesis or a haemoglobin drop would mandate upper GI endoscopy for NSAID/aspirin peptic ulcer",
+    "Alarm features (progressive dysphagia, weight loss, iron-deficiency anaemia) at this age warrant endoscopy rather than empirical PPI alone"
+  ],
+  "expectedMaiK": "In an elderly peri-operative patient with known CAD, chest pain must first be triaged as cardiac vs non-cardiac; the positional, acid-tasting, antacid-responsive, non-exertional pattern with flat serial troponins and a normal ECG points to GERD-related non-cardiac chest pain driven by supine positioning and NSAID/aspirin use.",
+  "expectedNextQuestions": [
+    "Is the pain exertional, or related to lying flat and to meals/enteral feeds?",
+    "Any melaena, haematemesis, dysphagia, odynophagia or weight loss (alarm features)?",
+    "What analgesics and gastro-toxic drugs are currently charted (NSAID, aspirin, bisphosphonate, steroid)?",
+    "Any relief with antacids or sitting up?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Serial high-sensitivity troponin",
+    "Chest X-ray",
+    "Full blood count (assess for anaemia / occult GI bleed)",
+    "Empirical PPI trial with symptom review (upper GI endoscopy reserved for alarm features or treatment failure)"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "chestPain": true,
+    "nauseaVomiting": true,
+    "abdominalDiscomfort": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "knownCAD": true,
+    "anticoagulated": true,
+    "afebrile": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "gerd_chest",
+    "acceptableIds": [
+      "gerd_chest"
+    ],
+    "differentialIds": [
+      "acs",
+      "peptic_ulcer",
+      "pericarditis",
+      "panic"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Serial high-sensitivity troponin",
+      "Chest X-ray",
+      "Empirical PPI trial"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks gerd_chest as top diagnosis after ACS exclusion",
+    "acs appears in the differential and is flagged for exclusion (troponin/ECG) before GERD is accepted",
+    "No antibiotic is recommended (tier null)",
+    "NSAID (diclofenac) is flagged for discontinuation and a PPI is recommended for gastroprotection"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "gc_391",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholangitis",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Fever with rigors, right upper abdominal pain and yellow discolouration of eyes for 2 days, now confused and hypotensive.",
+  "history": "68-year-old man with known gallstone disease and a prior endoscopic sphincterotomy 3 years ago presents with a 2-day history of high-grade fever with shaking chills, right upper quadrant pain and progressive jaundice. Over the last 12 hours the family report increasing drowsiness and confusion. He passed dark urine and pale stools. No prior antibiotics in the last 90 days and no recent hospitalisation. Background of type 2 diabetes and hypertension. On arrival in the ED he is hypotensive and disoriented, consistent with severe (Grade III) cholangitis / Reynolds pentad.",
+  "examination": "Toxic, drowsy and disoriented (GCS 13). Deeply icteric. Warm peripheries with prolonged capillary refill. Abdomen soft with tender right upper quadrant, no guarding, no palpable gallbladder. Murphy sign negative. No flank tenderness. No stigmata of chronic liver disease. Remains hypotensive after 30 mL/kg crystalloid, requiring noradrenaline.",
+  "vitals": {
+    "hr": 124,
+    "bp": "82/46",
+    "rr": 28,
+    "temp": 39.5,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "19.8 x10^9/L (neutrophilia with left shift)",
+    "totalBilirubin": "8.4 mg/dL (predominantly conjugated)",
+    "alp": "412 U/L",
+    "ggt": "486 U/L",
+    "alt": "128 U/L",
+    "ast": "96 U/L",
+    "creatinine": "2.3 mg/dL (baseline 1.0)",
+    "lactate": "4.6 mmol/L",
+    "platelets": "88 x10^9/L",
+    "inr": "1.7",
+    "crp": "268 mg/L",
+    "procalcitonin": "14.2 ng/mL"
+  },
+  "imaging": "Abdominal ultrasound: dilated common bile duct (12 mm) with an obstructing distal CBD calculus and intrahepatic biliary dilatation; gallbladder contains stones without wall thickening or pericholecystic fluid. MRCP/CT confirms choledocholithiasis with biliary obstruction.",
+  "microbiology": "Two sets of blood cultures drawn before antibiotics. Bile aspirated at ERCP sent for culture. Blood and bile cultures at 48h grew Escherichia coli, susceptible to third-generation cephalosporins and fluoroquinolones (non-ESBL, ceftriaxone-S, ciprofloxacin-S).",
+  "differentialDiagnoses": [
+    "Acute cholangitis (ascending, obstructive) — Charcot triad plus hypotension and confusion (Reynolds pentad)",
+    "Acute cholecystitis",
+    "Pyogenic liver abscess",
+    "Biliary colic / choledocholithiasis without cholangitis",
+    "Acute pancreatitis"
+  ],
+  "finalDiagnosis": "Acute cholangitis (TG18 Grade III / severe) due to obstructing choledocholithiasis, complicated by septic shock and acute kidney injury.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Gallbladder and Bile Ducts (Acute Cholangitis)",
+    "Tokyo Guidelines (TG18) — Diagnostic criteria and severity grading of acute cholangitis, 2018",
+    "Tokyo Guidelines (TG18) — Antimicrobial therapy for acute cholangitis and cholecystitis, 2018"
+  ],
+  "stewardship": "TG18 Grade III (severe) acute cholangitis with septic shock mandates urgent broad-spectrum empiric IV therapy PLUS early biliary drainage as definitive source control. Empiric piperacillin-tazobactam (or a carbapenem if ESBL risk) started within 1 hour of recognising septic shock, after two blood culture sets and with bile sent for culture at ERCP. Once blood/bile cultures returned non-ESBL, ceftriaxone-susceptible E. coli, de-escalate to IV ceftriaxone (culture-directed). Source control by urgent ERCP with stone extraction / stent drainage is essential and antibiotics alone are insufficient. Duration typically 4-7 days after adequate biliary drainage and clinical improvement; oral step-down (e.g., ciprofloxacin) once afebrile and tolerating oral intake.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycosides as sole/adjunct empiric agent given acute kidney injury",
+    "Do not delay ERCP biliary drainage pending clinical stabilisation in suppurative cholangitis",
+    "Fluoroquinolone empiric monotherapy inappropriate given high local resistance and shock"
+  ],
+  "edgeCases": [
+    "ESBL or prior carbapenem-resistant history would mandate carbapenem empiric cover pending sensitivities",
+    "Failed or delayed ERCP may require percutaneous transhepatic biliary drainage",
+    "Post-sphincterotomy anatomy raises risk of enteric-flora and Enterococcus involvement"
+  ],
+  "expectedMaiK": "Acute cholangitis is a biliary obstruction with superimposed infection; severe (Grade III) disease with organ dysfunction requires immediate empiric broad-spectrum antibiotics AND emergent biliary drainage (ERCP) for source control, followed by culture-directed de-escalation.",
+  "expectedNextQuestions": [
+    "Prior biliary interventions, stents or sphincterotomy?",
+    "Any prior resistant organism (ESBL/CRE) or recent antibiotic exposure?",
+    "Timing and access for emergent ERCP / biliary drainage?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures before antibiotics",
+    "LFTs (bilirubin, ALP, GGT, transaminases) and coagulation profile",
+    "Serum lactate, creatinine and full blood count",
+    "Abdominal ultrasound then MRCP/CT for biliary obstruction",
+    "Bile culture at time of ERCP drainage"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "jaundice": true,
+    "alteredSensorium": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true
+  },
+  "expected": {
+    "diagnosis": "CHOLANGITIS",
+    "acceptableIds": [
+      "CHOLANGITIS"
+    ],
+    "differentialIds": [
+      "CHOLECYSTITIS",
+      "LIVER_ABSCESS",
+      "biliary_colic",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "Blood cultures x2 before antibiotics",
+      "LFTs and coagulation profile",
+      "Serum lactate and creatinine",
+      "Abdominal ultrasound / MRCP",
+      "Bile culture at ERCP"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Ceftriaxone (culture-directed de-escalation)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank CHOLANGITIS as top diagnosis given Charcot triad plus biliary obstruction on imaging",
+    "Must flag TG18 Grade III severity due to hypotension/vasopressor and AKI",
+    "Must recommend emergent biliary drainage (ERCP) as source control, not antibiotics alone",
+    "Must start empiric broad-spectrum cover then de-escalate to ceftriaxone on non-ESBL E. coli sensitivities"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

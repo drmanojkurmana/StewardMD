@@ -1,0 +1,118 @@
+{
+  "id": "gc_392",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholecystitis",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening severe right upper quadrant pain with fever and vomiting.",
+  "history": "Type 2 diabetic with known gallstones on ultrasound 6 months ago. Reports steady, severe right upper quadrant pain radiating to the right scapula since 48 hours, now constant (not colicky), with associated fever, rigors and multiple episodes of bilious vomiting. He was admitted 5 weeks ago for a complicated lower urinary tract infection from which an ESBL-producing Escherichia coli was isolated, and completed a course of oral co-amoxiclav then IV piperacillin-tazobactam. No prior biliary surgery. No significant alcohol intake. No jaundice or pale stools noted by the patient.",
+  "examination": "Ill-looking, flushed and diaphoretic. Abdomen soft but markedly tender in the right upper quadrant with guarding; Murphy sign strongly positive with inspiratory arrest. Palpable tender gallbladder fossa. No clinical jaundice, no shifting dullness, bowel sounds present. No peripheral stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 110,
+    "bp": "104/62",
+    "rr": 20,
+    "temp": 38.7,
+    "spo2": 97
+  },
+  "labs": {
+    "wbc": "17.8 x10^9/L (neutrophilia)",
+    "crp": "212 mg/L",
+    "bilirubin": "1.6 mg/dL",
+    "alp": "168 U/L",
+    "alt": "74 U/L",
+    "ast": "68 U/L",
+    "creatinine": "1.1 mg/dL",
+    "lactate": "1.9 mmol/L",
+    "glucose": "13.4 mmol/L",
+    "amylase": "62 U/L (normal)"
+  },
+  "imaging": "Abdominal ultrasound: distended gallbladder with wall thickening 6 mm, pericholecystic fluid, multiple gallstones and a sonographic Murphy sign; common bile duct not dilated (4 mm). No intrahepatic biliary dilatation. Contrast CT confirms an acutely inflamed, distended gallbladder with pericholecystic fat stranding and no hepatic abscess or perforation.",
+  "microbiology": "Blood cultures sent. Bile obtained at percutaneous cholecystostomy grew ESBL-producing Escherichia coli, resistant to co-amoxiclav, ceftriaxone and ciprofloxacin, sensitive to meropenem and amikacin. Consistent with prior ESBL colonisation on last admission.",
+  "differentialDiagnoses": [
+    "Acute cholecystitis (gallstone) with resistant biliary organism",
+    "Acute cholangitis",
+    "Pyogenic liver abscess",
+    "Biliary colic",
+    "Acute pancreatitis"
+  ],
+  "finalDiagnosis": "Acute calculous cholecystitis (Tokyo Guidelines Grade II / moderate) complicated by an ESBL-producing E. coli, requiring antibiotic escalation and source control.",
+  "citations": [
+    "Tokyo Guidelines (TG18) — Antimicrobial therapy and severity grading for acute cholecystitis — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Gallbladder and Bile Ducts"
+  ],
+  "stewardship": "TG18 moderate (Grade II) acute cholecystitis warrants prompt empiric therapy plus source control. Given documented ESBL E. coli on a recent admission (a healthcare-associated / prior-resistant-organism risk factor), empiric piperacillin-tazobactam is inadequate; escalate to a carbapenem (meropenem) to cover ESBL Enterobacterales pending bile/blood cultures. Source control is the definitive stewardship step: early laparoscopic cholecystectomy where feasible, or percutaneous cholecystostomy if the patient is a poor surgical candidate, allowing later interval cholecystectomy. De-escalate/narrow according to bile culture and duration limited to ~4-7 days after adequate source control (shorter if cholecystectomy achieves complete control).",
+  "contraindications": [
+    "Avoid ceftriaxone or ciprofloxacin monotherapy given known ESBL organism (predictable failure)",
+    "Avoid nephrotoxic aminoglycoside as sole prolonged agent in a diabetic at renal risk",
+    "Delaying source control while escalating antibiotics"
+  ],
+  "edgeCases": [
+    "Rising bilirubin or CBD dilatation would suggest concomitant cholangitis needing ERCP",
+    "Emphysematous or gangrenous cholecystitis in a diabetic mandates urgent surgery",
+    "Persistent bacteraemia despite carbapenem should prompt search for abscess or perforation"
+  ],
+  "expectedMaiK": "Acute calculous cholecystitis with a resistant (ESBL) biliary organism requiring carbapenem escalation and source control.",
+  "expectedNextQuestions": [
+    "Any prior resistant organisms or recent antibiotic/hospital exposure?",
+    "Is there jaundice, dark urine or pale stools suggesting CBD obstruction/cholangitis?",
+    "Is the patient a suitable candidate for early cholecystectomy or does he need cholecystostomy?"
+  ],
+  "expectedInvestigations": [
+    "Abdominal ultrasound (RUQ)",
+    "Blood cultures before antibiotics",
+    "LFTs and inflammatory markers",
+    "Bile culture at drainage",
+    "Contrast CT abdomen if complication suspected"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "rightUpperQuadrantPain": true,
+    "murphySign": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "toxicAppearing": true,
+    "esblHistory": true,
+    "antibioticsLast90Days": true,
+    "hospitalizationLast90Days": true,
+    "mdrRisk": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "CHOLECYSTITIS",
+    "acceptableIds": [
+      "CHOLECYSTITIS"
+    ],
+    "differentialIds": [
+      "CHOLANGITIS",
+      "LIVER_ABSCESS",
+      "biliary_colic",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "RUQ ultrasound",
+      "blood cultures",
+      "LFTs",
+      "bile culture",
+      "CT abdomen"
+    ],
+    "stewardship": {
+      "tier": "escalation",
+      "antibiotics": [
+        "meropenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to CHOLECYSTITIS with positive Murphy sign and imaging-confirmed calculous cholecystitis",
+    "ESBL history triggers escalation from piperacillin-tazobactam to a carbapenem",
+    "Source control (cholecystectomy or percutaneous cholecystostomy) is recommended, not antibiotics alone",
+    "Absence of CBD dilatation/marked hyperbilirubinaemia argues against primary cholangitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

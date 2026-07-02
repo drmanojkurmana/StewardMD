@@ -1,0 +1,124 @@
+{
+  "id": "gc_385",
+  "specialty": "Central Nervous System",
+  "condition": "Brain Abscess",
+  "age": 47,
+  "sex": "M",
+  "presentingComplaint": "Worsening left-sided headache, fever and confusion for 6 days, with a witnessed generalised seizure and rapid deterioration into shock this morning.",
+  "history": "Type-2 diabetic tea-estate worker with a 3-month history of a foul-smelling discharging right ear (chronic suppurative otitis media), previously treated with repeated short courses of oral antibiotics. Over the past week he developed a progressively severe, largely right-temporal headache with nausea, low-grade fever and increasing drowsiness. Family noted uncharacteristic irritability and word-finding difficulty over 48h. This morning he had a witnessed generalised tonic-clonic seizure lasting ~2 minutes followed by prolonged post-ictal confusion, then became cold, clammy and unrousable, prompting emergency transfer. No recent travel, no IV drug use, no known immunodeficiency other than poorly controlled diabetes (last HbA1c 9.4%).",
+  "examination": "Toxic, drowsy (GCS E3 V4 M5 = 12), not following commands consistently. Peripherally shut down with cool mottled extremities and prolonged capillary refill (4s). Right ear with mucopurulent discharge and a dull, immobile tympanic membrane; mastoid mildly tender. Neurological: subtle left-sided pronator drift and left facial asymmetry, mild neck stiffness but no photophobia. Fundi without frank papilloedema. Chest clear; abdomen soft. No rash.",
+  "vitals": {
+    "hr": 126,
+    "bp": "82/46",
+    "rr": 28,
+    "temp": 38.9,
+    "spo2": 94
+  },
+  "labs": {
+    "wbc": "19.2 x10^9/L (88% neutrophils)",
+    "crp": "248 mg/L",
+    "procalcitonin": "6.8 ng/mL",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.1 mg/dL (baseline 0.9)",
+    "urea": "16.8 mmol/L",
+    "platelets": "96 x10^3/uL",
+    "inr": "1.6",
+    "bilirubin": "1.4 mg/dL",
+    "glucose": "312 mg/dL",
+    "bloodCultures": "two sets drawn before antibiotics"
+  },
+  "imaging": "Contrast CT head: 3.4 cm ring-enhancing lesion in the right temporal lobe with surrounding vasogenic oedema, mild midline shift (4 mm) and effacement of the ipsilateral temporal horn; opacified right mastoid air cells with bony dehiscence into the middle cranial fossa. MRI brain with DWI: central restricted diffusion (low ADC) within the lesion, confirming pyogenic abscess rather than necrotic tumour.",
+  "microbiology": "Empiric blood cultures grew a Gram-negative bacillus at 36h. CT-guided/neurosurgical aspiration of the abscess yielded frank pus; Gram stain showed Gram-negative bacilli plus Gram-positive cocci. Cultures (aerobic + anaerobic) grew Proteus mirabilis and Peptostreptococcus spp.; the P. mirabilis was fully susceptible to third-generation cephalosporins (no ESBL). CSF not sampled by LP due to mass effect / herniation risk.",
+  "differentialDiagnoses": [
+    "Pyogenic brain abscess (otogenic, right temporal lobe)",
+    "Cerebral neoplasm / metastasis with central necrosis",
+    "Bacterial meningoencephalitis",
+    "Viral (herpes) encephalitis",
+    "Acute ischaemic stroke with post-ictal deficit"
+  ],
+  "finalDiagnosis": "Otogenic pyogenic brain abscess (right temporal lobe) complicated by septic shock and acute kidney injury; polymicrobial (Proteus mirabilis + anaerobes) secondary to chronic suppurative otitis media / mastoiditis.",
+  "citations": [
+    "IDSA — Healthcare-Associated Ventriculitis and Meningitis, 2017",
+    "Surviving Sepsis Campaign — Management of Sepsis and Septic Shock, 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Brain Abscess"
+  ],
+  "stewardship": "Life-threatening intracranial infection with septic shock: after two blood-culture sets, start empiric broad-spectrum IV therapy that penetrates the CNS and covers the likely otogenic polymicrobial flora (streptococci, anaerobes, Enterobacterales) — ceftriaxone 2 g IV 12-hourly plus metronidazole 500 mg IV 8-hourly, with vancomycin added to cover possible staphylococci/resistant Gram-positives pending cultures. Concurrent source control (neurosurgical aspiration of the abscess and ENT management of the mastoiditis) is essential and diagnostic. Once aspirate and blood cultures identified fully-cephalosporin-susceptible P. mirabilis with anaerobes and no MRSA/staphylococci, de-escalate by STOPPING vancomycin and continuing ceftriaxone + metronidazole, completing a prolonged (6-8 week) IV course with serial imaging. Bundle: fluid resuscitation, early noradrenaline for MAP >=65, glycaemic control, and renal dosing review as AKI resolves.",
+  "contraindications": [
+    "Lumbar puncture contraindicated given ring-enhancing mass with midline shift (herniation risk)",
+    "Avoid nephrotoxic combinations / dose-adjust vancomycin and monitor levels in AKI",
+    "Corticosteroids only if significant mass effect/impending herniation, not routine"
+  ],
+  "edgeCases": [
+    "DWI restricted diffusion distinguishes pyogenic abscess from necrotic tumour when the ring-enhancing lesion is otherwise ambiguous",
+    "Repeated prior short antibiotic courses may render blood/CSF cultures sterile, making stereotactic aspiration the key to a microbiological diagnosis and safe de-escalation",
+    "Septic shock from an intracranial focus is uncommon; a concurrent otogenic bacteraemia/mastoiditis explains the haemodynamic collapse"
+  ],
+  "expectedMaiK": "Recognise a ring-enhancing intracranial lesion with septic shock as an otogenic pyogenic brain abscess: resuscitate for shock, secure blood cultures, start empiric CNS-penetrating ceftriaxone + metronidazole (+ vancomycin), obtain urgent neurosurgical aspiration for source control and culture, then de-escalate on results.",
+  "expectedNextQuestions": [
+    "Is there chronic ear discharge, sinus or dental sepsis, or a recent neurosurgical/penetrating source?",
+    "Any focal neurological deficit, seizure, or signs of raised intracranial pressure?",
+    "What is the immune/diabetic status and recent antibiotic exposure that could alter flora?",
+    "Have two sets of blood cultures been taken before antibiotics, and is aspiration feasible?"
+  ],
+  "expectedInvestigations": [
+    "MRI brain with contrast and diffusion-weighted imaging",
+    "Contrast CT head (± CT temporal bones/mastoid for source)",
+    "Two sets of blood cultures before antibiotics",
+    "Neurosurgical/CT-guided aspiration with Gram stain, aerobic + anaerobic culture",
+    "Serum lactate, renal function, coagulation, glucose/HbA1c",
+    "Avoid lumbar puncture until mass effect excluded"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "focalNeuroDeficit": true,
+    "seizure": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "vasopressorRequirement": true,
+    "suspectedInfectionSource": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "BRAIN_ABSCESS",
+    "acceptableIds": [
+      "BRAIN_ABSCESS"
+    ],
+    "differentialIds": [
+      "brain_tumour",
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "MRI brain with contrast + DWI",
+      "Contrast CT head with CT mastoid/temporal bone",
+      "Blood cultures x2",
+      "Neurosurgical aspiration for Gram stain and culture"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "ceftriaxone",
+        "metronidazole",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks BRAIN_ABSCESS as top diagnosis given ring-enhancing lesion with DWI restriction, focal deficit, seizure and otogenic source",
+    "Engine flags lumbar puncture as contraindicated in the presence of mass effect/midline shift",
+    "Empiric regimen includes a CNS-penetrating cephalosporin plus metronidazole with vancomycin, not a non-penetrating agent",
+    "After culture of cephalosporin-susceptible P. mirabilis + anaerobes with no staphylococci, engine recommends stopping vancomycin (de-escalation)",
+    "Engine identifies septic shock (hypotension + lactate >4 + vasopressor need) and recommends sepsis resuscitation plus source control"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

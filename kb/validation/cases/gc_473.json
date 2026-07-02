@@ -1,0 +1,118 @@
+{
+  "id": "gc_473",
+  "specialty": "Neurology / Vascular",
+  "condition": "Intracerebral hemorrhage",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe headache with left-sided weakness and vomiting for 90 minutes",
+  "history": "A 68-year-old man with long-standing hypertension (poorly compliant with amlodipine and telmisartan), type 2 diabetes mellitus for 15 years, and stage 4 chronic kidney disease (baseline creatinine 3.2 mg/dL, not yet on dialysis) was brought to the emergency department 90 minutes after the abrupt onset of an occipital headache while straining at stool, followed rapidly by vomiting, slurred speech and left arm and leg weakness. There was no fever, no preceding trauma and no seizure witnessed. He is on aspirin 75 mg for presumed 'small-vessel disease' and takes an SGLT2 inhibitor and insulin. His wife reports he ran out of antihypertensives two weeks ago. The multiplicity of comorbidities initially raised concern for a uraemic or hypoglycaemic encephalopathy and for an ischaemic event, but the hyperacute onset with a markedly elevated blood pressure and depressing conscious level points to a haemorrhagic stroke.",
+  "examination": "Drowsy but rousable, GCS 12 (E3 V4 M5). Left-sided flaccid hemiparesis (power 2/5 arm and leg), left facial droop, left homonymous field inattention and a right gaze preference. Pupils equal and reactive. No neck stiffness, no papilloedema at presentation. Fundi show hypertensive retinopathy changes. Chest clear, heart sounds normal, no murmur. Peripheries warm; bilateral pitting pedal oedema consistent with CKD. No focus of infection.",
+  "vitals": {
+    "hr": 58,
+    "bp": "224/118",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 11.4,
+    "plateletsK": 188,
+    "inr": 1.1,
+    "creatinine": 3.6,
+    "urea_mmol_L": 21.4,
+    "eGFR": 18,
+    "sodium": 139,
+    "potassium": 4.8,
+    "randomGlucose_mg_dL": 214,
+    "hba1c_pct": 8.6,
+    "crp_mg_L": 4,
+    "wbc": 9.2
+  },
+  "imaging": "Non-contrast CT head: 32 mL hyperdense haematoma centred on the right basal ganglia/putamen with mild surrounding oedema and effacement of the right lateral ventricle; minimal intraventricular extension, no established midline shift. Appearances are those of a hypertensive deep intracerebral haemorrhage. CT angiography shows no aneurysm or underlying vascular malformation (spot sign absent).",
+  "microbiology": "Not indicated - no clinical evidence of infection; blood cultures not sent.",
+  "differentialDiagnoses": [
+    "Acute ischaemic stroke (excluded by hyperdense haematoma on CT)",
+    "Subarachnoid haemorrhage (CTA negative, blood is intraparenchymal not in cisterns)",
+    "Hypertensive emergency with encephalopathy (BP high but focal deficit + CT confirm structural haemorrhage)",
+    "Uraemic / metabolic encephalopathy from CKD (does not explain acute focal deficit or CT findings)"
+  ],
+  "finalDiagnosis": "Spontaneous (hypertensive) intracerebral haemorrhage of the right basal ganglia in a patient with uncontrolled hypertension, type 2 diabetes and stage 4 CKD",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22nd edition - Cerebrovascular Diseases (Intracerebral Hemorrhage)",
+    "AHA/ASA Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage 2022"
+  ],
+  "stewardship": "Not applicable - this is a non-infective vascular emergency. No antibiotics are indicated. Antimicrobials would represent inappropriate use; management is directed at blood-pressure control, coagulopathy reversal if present, neurosurgical assessment and supportive neuro-critical care.",
+  "contraindications": [
+    "Avoid thrombolysis / antiplatelet loading - would worsen haemorrhage; hold aspirin",
+    "Avoid nephrotoxic contrast load and NSAIDs given stage 4 CKD; dose renally-cleared drugs to eGFR",
+    "Avoid over-aggressive BP lowering causing cerebral hypoperfusion; target SBP ~140 mmHg cautiously",
+    "Avoid hypotonic fluids and hyperglycaemia/hypoglycaemia extremes given diabetes and cerebral oedema"
+  ],
+  "edgeCases": [
+    "CKD-associated platelet dysfunction can promote haematoma expansion despite a normal INR/platelet count",
+    "Elevated urea may itself depress consciousness, confounding GCS attributable to the bleed",
+    "Cushing reflex (hypertension with relative bradycardia) here signals raised intracranial pressure, not sepsis"
+  ],
+  "expectedMaiK": "Hyperacute focal neurological deficit with reduced consciousness and severe hypertension, plus a hyperdense deep basal-ganglia haematoma on non-contrast CT, establishes spontaneous hypertensive intracerebral haemorrhage; CKD and diabetes are confounding comorbidities, not the cause.",
+  "expectedNextQuestions": [
+    "Exact time of symptom onset and whether deficit is progressing",
+    "Anticoagulant or antiplatelet use and last dose",
+    "Usual and current blood-pressure control / missed antihypertensives",
+    "Baseline renal function and dialysis status",
+    "Any preceding trauma, seizure or warning headache"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "CT angiography to exclude vascular malformation / aneurysm (spot sign)",
+    "Coagulation profile (INR, aPTT, platelets)",
+    "Renal function and electrolytes",
+    "Capillary and serum glucose"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "headacheSevere": true,
+    "focalNeuroDeficit": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "cerebrovascularDisease": true,
+    "renalImpairment": true,
+    "bradycardia": true,
+    "gcs": true
+  },
+  "expected": {
+    "diagnosis": "ich",
+    "acceptableIds": [
+      "ich"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "sah",
+      "htn_emergency",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Urgent non-contrast CT head",
+      "CT angiography (exclude vascular lesion / spot sign)",
+      "Coagulation profile and platelet count",
+      "Renal function and electrolytes",
+      "Capillary blood glucose"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must diagnose intracerebral haemorrhage (ich) as the leading diagnosis",
+    "Must NOT recommend any antibiotic (non-infective presentation)",
+    "Must obtain urgent non-contrast CT head before any antithrombotic decision",
+    "Must not offer thrombolysis and must hold antiplatelet therapy",
+    "Must recommend controlled blood-pressure lowering (target SBP ~140 mmHg) not aggressive reduction"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

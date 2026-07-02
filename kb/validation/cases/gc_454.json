@@ -1,0 +1,122 @@
+{
+  "id": "gc_454",
+  "specialty": "Hematology",
+  "condition": "Disseminated intravascular coagulation",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Oozing from venepuncture sites, new petechiae and worsening abdominal distension over 24 hours",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B, prior ascites, one previous variceal bleed banded 8 months ago) admitted 3 days ago with fever and diffuse abdominal pain. Over the past 24 hours the nursing staff noted persistent bleeding from every cannula and phlebotomy site, spontaneous gum bleeding, and a rapidly spreading petechial and purpuric rash over the trunk and limbs. He has passed a small amount of dark blood per rectum and urine output has fallen to <20 mL/h. He also developed dusky discolouration of two fingertips. The picture has evolved acutely against a background of chronic liver disease, and the family report he was coagulopathic at baseline but never bled spontaneously before. No new drugs other than routine ward medications; not on anticoagulation.",
+  "examination": "Toxic, drowsy but rousable, deeply jaundiced. Diffuse petechiae and confluent purpura over trunk and extremities with continued oozing from cannula and arterial-line sites. Mucosal (gingival) bleeding. Two acrocyanotic, cool fingertips suggesting microvascular thrombosis. Tense ascites with shifting dullness, mild hepatic flap. No focal peritonism. Cool peripheries with prolonged capillary refill.",
+  "vitals": {
+    "hr": 118,
+    "bp": "88/54",
+    "rr": 26,
+    "temp": 38.4,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": "7.9 g/dL (fell from 10.8 g/dL over 24h)",
+    "platelets": "34 ×10³/µL (was 96 on admission — rapidly falling)",
+    "inr": "2.9",
+    "aptt": "58 s (prolonged)",
+    "fibrinogen": "0.7 g/L (fell from 2.1 g/L 48h earlier)",
+    "dDimer": ">20,000 ng/mL (markedly elevated)",
+    "factorVIII": "42% (LOW — key discriminator: consumed in DIC, typically normal/high in cirrhotic coagulopathy)",
+    "peripheralFilm": "schistocytes (fragmented red cells) present, thrombocytopenia confirmed",
+    "bilirubin": "6.8 mg/dL",
+    "albumin": "2.4 g/dL",
+    "creatinine": "2.4 mg/dL (baseline 1.0)",
+    "lactate": "4.1 mmol/L",
+    "ISTH_overt_DIC_score": "6 (≥5 = overt DIC): platelets <50 (2), markedly raised D-dimer (3), fibrinogen <1 g/L (1), prolonged PT"
+  },
+  "imaging": "Bedside ultrasound: moderate ascites, coarse nodular cirrhotic liver, patent portal vein, no new focal collection. CXR clear.",
+  "microbiology": "Blood cultures and diagnostic ascitic tap sent (results pending); ascitic PMN count awaited to exclude a precipitating infective trigger. No organism identified at time of assessment.",
+  "differentialDiagnoses": [
+    "Baseline decompensated cirrhotic coagulopathy (without DIC)",
+    "Thrombotic thrombocytopenic purpura / HUS",
+    "Variceal / GI bleed with dilutional coagulopathy",
+    "Immune thrombocytopenia"
+  ],
+  "finalDiagnosis": "Overt disseminated intravascular coagulation (consumptive coagulopathy with simultaneous microvascular bleeding and thrombosis) superimposed on chronic liver disease, ISTH score 6",
+  "citations": [
+    "ISTH — Diagnosis and management of overt DIC (scoring system and guidance) — 2013",
+    "Harrison's Principles of Internal Medicine, 22e — Disseminated Intravascular Coagulation",
+    "BSH (British Society for Haematology) — Diagnosis and management of DIC — 2009"
+  ],
+  "stewardship": "Not an antimicrobial-stewardship case per se; management is treat-the-trigger plus haemostatic support. Distinguish overt DIC from stable cirrhotic coagulopathy: DIC shows RAPIDLY FALLING platelets and fibrinogen on serial testing, disproportionately high D-dimer, schistocytes, and a LOW factor VIII (factor VIII is endothelially derived and preserved or elevated in pure liver disease). Support only with active bleeding or planned procedure: platelets if <50 ×10³/µL and bleeding, cryoprecipitate/fibrinogen concentrate for fibrinogen <1.0-1.5 g/L, FFP for global factor deficiency; identify and treat the precipitant (search for occult sepsis such as SBP, malignancy). Avoid routine correction of numbers in the absence of bleeding.",
+  "contraindications": [
+    "Do not give tranexamic acid / antifibrinolytics routinely in DIC — risks catastrophic microvascular thrombosis",
+    "Avoid prophylactic transfusion purely to normalise INR/platelets when the patient is not bleeding and no procedure is planned",
+    "Therapeutic heparin only in DIC where thrombosis dominates and bleeding risk is acceptable — hazardous here given active haemorrhage"
+  ],
+  "edgeCases": [
+    "Cirrhotic coagulopathy alone can mimic DIC (low platelets, high INR, low fibrinogen) — the discriminators are a normal/high factor VIII, stable (not falling) trends, and modestly raised D-dimer",
+    "Concurrent SBP or gram-negative sepsis can be the DIC trigger yet the diagnosis being tested remains DIC, not the infection",
+    "Chronic/compensated DIC of malignancy can present with thrombosis rather than bleeding"
+  ],
+  "expectedMaiK": "Overt DIC on top of cirrhosis: consumptive coagulopathy (falling platelets and fibrinogen, very high D-dimer, schistocytes, LOW factor VIII) with combined microvascular bleeding and thrombosis — find and treat the trigger, give targeted haemostatic support only for active bleeding, and do NOT give antifibrinolytics.",
+  "expectedNextQuestions": [
+    "Is there an identifiable DIC trigger — occult sepsis (SBP), malignancy, or ischaemic tissue?",
+    "Are platelets and fibrinogen falling on serial samples rather than being stably low?",
+    "What is the factor VIII level (low favours DIC over pure liver disease)?",
+    "Is the patient actively bleeding or does a procedure require haemostatic correction?"
+  ],
+  "expectedInvestigations": [
+    "Serial platelet count and fibrinogen (trend)",
+    "D-dimer / fibrin degradation products",
+    "PT/INR and aPTT",
+    "Peripheral blood film for schistocytes",
+    "Factor VIII level to discriminate DIC from cirrhotic coagulopathy",
+    "ISTH overt DIC score",
+    "Septic screen including diagnostic ascitic tap (PMN count, culture)"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "bleedingManifestation": true,
+    "mucocutaneousBleeding": true,
+    "petechialRash": true,
+    "thrombocytopenia": true,
+    "organDysfunction": true,
+    "oliguria": true,
+    "liverDisease": true,
+    "jaundice": true,
+    "ascites": true,
+    "toxicAppearing": true,
+    "hypotension": true
+  },
+  "expected": {
+    "diagnosis": "dic",
+    "acceptableIds": [
+      "dic"
+    ],
+    "differentialIds": [
+      "decomp_cirrhosis",
+      "ttp_hus",
+      "variceal_bleed",
+      "itp"
+    ],
+    "investigations": [
+      "Serial platelets and fibrinogen",
+      "D-dimer / FDPs",
+      "PT/INR and aPTT",
+      "Peripheral blood film (schistocytes)",
+      "Factor VIII level",
+      "ISTH overt DIC score"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['dic']",
+    "expected.stewardship must be {tier:null, antibiotics:[]} because this is a non-infective diagnosis",
+    "A LOW factor VIII with falling fibrinogen and markedly elevated D-dimer must point to DIC over baseline cirrhotic coagulopathy (decomp_cirrhosis)",
+    "Antifibrinolytics must NOT be recommended as routine management",
+    "differentialIds must include decomp_cirrhosis as the closest mimic"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

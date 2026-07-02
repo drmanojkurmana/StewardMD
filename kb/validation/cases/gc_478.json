@@ -1,0 +1,123 @@
+{
+  "id": "gc_478",
+  "specialty": "Oncology / Pulmonary",
+  "condition": "Lung cancer",
+  "age": 66,
+  "sex": "M",
+  "presentingComplaint": "Cough for 3 months with recent blood-streaked sputum and 8 kg weight loss.",
+  "history": "A 66-year-old man, 45 pack-year smoker with known alcohol-related cirrhosis (Child-Pugh B, on spironolactone and propranolol for varices), presents with a persistent cough for about 3 months that has changed in character over the last 6 weeks, now productive with intermittent blood-streaked sputum. He reports progressive exertional breathlessness, a dull right-sided chest ache, drenching night sweats and an unintentional weight loss of roughly 8 kg over 2 months, which he and his GP initially attributed to worsening liver disease and poor appetite. He denies contact with tuberculosis and had a negative sputum AFB smear x2 arranged by his GP. He has mild ankle swelling and a distended abdomen he says is 'the usual fluid'. No recent fever spikes. He continues to drink intermittently and has had one prior admission for ascites.",
+  "examination": "Cachectic, mildly icteric man. Clubbing present. Right supraclavicular lymphadenopathy (1.5 cm, firm, non-tender). Reduced breath sounds and dullness at the right base with reduced expansion. Abdomen distended with shifting dullness (grade 2 ascites) and a firm irregular liver edge; spider naevi and palmar erythema present. No asterixis. No focal neurological deficit.",
+  "vitals": {
+    "hr": 94,
+    "bp": "106/68",
+    "rr": 22,
+    "temp": 37.2,
+    "spo2": 92
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "wbc": 8.4,
+    "platelets": 96,
+    "sodium": 131,
+    "potassium": 4.2,
+    "creatinine": 1.1,
+    "urea": 6.8,
+    "bilirubin": 2.4,
+    "albumin": 2.7,
+    "alt": 46,
+    "ast": 78,
+    "alp": 210,
+    "inr": 1.5,
+    "correctedCalcium": 11.6,
+    "crp": 34
+  },
+  "imaging": "Chest radiograph: 4.5 cm spiculated mass in the right upper lobe with right hilar prominence and a small right pleural effusion. CECT thorax/upper abdomen: 4.8 cm spiculated RUL mass invading the mediastinal pleura, enlarged right hilar and subcarinal nodes, right supraclavicular node, and small right malignant-appearing pleural effusion; cirrhotic liver with splenomegaly and ascites, no discrete liver metastasis on this study. Two subcentimetre indeterminate hepatic lesions noted against a nodular cirrhotic background.",
+  "microbiology": "Sputum AFB smear negative x3; sputum culture and GeneXpert MTB/RIF not detected. Pleural fluid: exudate, lymphocyte-predominant, ADA not elevated, cytology positive for malignant cells.",
+  "differentialDiagnoses": [
+    "Primary lung cancer (non-small-cell) with nodal and pleural spread",
+    "Pulmonary tuberculosis",
+    "Lung abscess / necrotising pneumonia",
+    "Malignant pleural effusion secondary to another primary",
+    "Interstitial lung disease with traction changes"
+  ],
+  "finalDiagnosis": "Primary lung cancer (right upper lobe mass, likely NSCLC) with hilar/supraclavicular nodal and malignant pleural involvement, on a background of alcohol-related cirrhosis (Child-Pugh B) complicating the clinical picture and management.",
+  "citations": [
+    "NICE — Lung cancer: diagnosis and management (NG122) — 2019",
+    "ACCP/CHEST — Diagnosis and Staging of Lung Cancer — 2013",
+    "Harrison's Principles of Internal Medicine 22e — Neoplasms of the Lung"
+  ],
+  "stewardship": "Not applicable — this is a non-infective (neoplastic) presentation. TB has been actively excluded (repeated negative AFB/GeneXpert, pleural ADA not raised, positive malignant cytology), so empiric antitubercular or antibacterial therapy is not indicated and should be withheld. Antimicrobials would only be justified if a secondary infection were later documented.",
+  "contraindications": [
+    "Hepatic impairment (Child-Pugh B) and thrombocytopenia/coagulopathy (INR 1.5, platelets 96) increase bleeding risk for transbronchial/CT-guided biopsy — correct coagulopathy and choose safest sampling route (e.g., pleural fluid cytology or supraclavicular node biopsy first).",
+    "Avoid hepatotoxic and renally cleared chemotherapy dosing without adjustment; many systemic agents require dose modification in cirrhosis.",
+    "Contrast load with caution given cirrhosis-related haemodynamics; avoid nephrotoxic insults."
+  ],
+  "edgeCases": [
+    "Weight loss, night sweats and reduced appetite wrongly attributed to decompensating cirrhosis, delaying cancer diagnosis.",
+    "Hypercalcaemia (corrected Ca 11.6) as a paraneoplastic feature rather than a primary metabolic disorder.",
+    "Thrombocytopenia here is from hypersplenism/cirrhosis, not marrow infiltration — affects biopsy planning.",
+    "Small indeterminate hepatic nodules on a cirrhotic background raise the question of HCC versus metastasis, needing dedicated liver imaging."
+  ],
+  "expectedMaiK": "Recognise a spiculated lung mass with nodal, pleural and paraneoplastic features as probable primary lung cancer and prioritise tissue diagnosis by the safest route plus staging, while accounting for cirrhosis-related bleeding risk and treatment limitations.",
+  "expectedNextQuestions": [
+    "Smoking pack-year history and any occupational asbestos exposure?",
+    "Quantity and duration of haemoptysis?",
+    "Timeline and magnitude of weight loss versus known liver disease?",
+    "Any bone pain, headache or neurological symptoms suggesting metastasis?",
+    "Current performance status and Child-Pugh/decompensation history to gauge fitness for investigation and therapy?"
+  ],
+  "expectedInvestigations": [
+    "Contrast-enhanced CT thorax and upper abdomen (staging and mass characterisation)",
+    "Tissue diagnosis via least-invasive route (pleural fluid cytology, supraclavicular node FNA/biopsy, or EBUS-TBNA)",
+    "PET-CT for metabolic staging and MRI brain if symptomatic",
+    "Coagulation profile, platelets and LFTs prior to any biopsy; correct coagulopathy",
+    "Dedicated liver imaging (triple-phase CT/MRI) to characterise cirrhotic nodules and AFP",
+    "Molecular/PD-L1 testing on tissue once histology confirmed"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "hemoptysis": true,
+    "weightLoss": true,
+    "dyspnea": true,
+    "chestPain": true,
+    "nightSweats": true,
+    "lymphadenopathy": true,
+    "liverDisease": true,
+    "ascites": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "lung_cancer",
+    "acceptableIds": [
+      "lung_cancer"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "pleural_effusion",
+      "LUNG_ABSCESS",
+      "ild"
+    ],
+    "investigations": [
+      "CECT thorax and upper abdomen",
+      "Tissue biopsy (pleural cytology / supraclavicular node / EBUS-TBNA)",
+      "PET-CT staging",
+      "Coagulation profile and platelets before biopsy",
+      "Dedicated liver imaging with AFP"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank lung_cancer as the top diagnosis given spiculated lung mass, weight loss, haemoptysis, clubbing, lymphadenopathy and malignant pleural cytology.",
+    "Engine must NOT recommend empiric antibiotics or antitubercular therapy given negative AFB/GeneXpert and positive malignant cytology.",
+    "Engine should flag cirrhosis/coagulopathy as modifying biopsy choice and systemic-therapy dosing.",
+    "Engine should recognise corrected hypercalcaemia as a paraneoplastic feature, not a primary endocrine emergency."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

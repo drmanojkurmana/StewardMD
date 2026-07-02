@@ -1,0 +1,118 @@
+{
+  "id": "gc_407",
+  "specialty": "Gastrointestinal",
+  "condition": "Acute Gastroenteritis",
+  "age": 41,
+  "sex": "M",
+  "presentingComplaint": "3 days of profuse watery diarrhoea, vomiting and crampy abdominal pain, not settling despite self-started ciprofloxacin.",
+  "history": "Previously well 41-year-old businessman, 5 days back from a work trip to Dhaka and Kolkata where he ate street food and drank untreated water. Symptoms began on day 3 of travel with sudden nausea, vomiting and up to 10 large-volume, non-bloody watery stools per day with periumbilical cramps and low-grade fever. He bought over-the-counter ciprofloxacin 500 mg twice daily from a pharmacy and has taken it for 48 hours with no improvement in stool frequency and worsening lethargy and thirst. No prior GI disease, no recent hospitalisation, immunocompetent. Two other colleagues on the same trip had a similar self-limiting diarrhoeal illness. Reduced urine output over the last day.",
+  "examination": "Alert but unwell and dehydrated: dry mucous membranes, reduced skin turgor, capillary refill 3 s. Abdomen soft with generalised mild tenderness and active bowel sounds, no guarding, no organomegaly, no peritonism. No rash, no eschar, no lymphadenopathy. PR: soft stool, no gross blood.",
+  "vitals": {
+    "hr": 112,
+    "bp": "102/64",
+    "rr": 18,
+    "temp": 38.3,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "13.4 x10^9/L (neutrophilia)",
+    "hemoglobin": "15.8 g/dL (haemoconcentration)",
+    "platelets": "241 x10^3/uL",
+    "sodium": "148 mmol/L",
+    "potassium": "3.1 mmol/L",
+    "bicarbonate": "17 mmol/L",
+    "creatinine": "1.5 mg/dL (baseline 0.9, pre-renal AKI)",
+    "urea": "12.8 mmol/L",
+    "crp": "84 mg/L",
+    "lactate": "1.9 mmol/L",
+    "stoolLeukocytes": "few",
+    "stoolOccultBlood": "negative"
+  },
+  "imaging": "No imaging required; erect abdominal film (done to exclude perforation given severe pain) shows non-specific gas pattern, no free air, no toxic dilatation.",
+  "microbiology": "Stool culture: Campylobacter jejuni isolated. Susceptibility: RESISTANT to ciprofloxacin (fluoroquinolone) and to co-amoxiclav; SUSCEPTIBLE to azithromycin. Stool multiplex PCR positive for Campylobacter, negative for Shigella/Salmonella/STEC (no shiga toxin), C. difficile toxin negative. Blood cultures no growth at 48 h. Malaria antigen/smear negative.",
+  "differentialDiagnoses": [
+    "Bacillary dysentery (Shigella)",
+    "Enteric fever (typhoid)",
+    "Non-typhoidal Salmonella gastroenteritis",
+    "Clostridioides difficile infection (post-antibiotic)"
+  ],
+  "finalDiagnosis": "Acute infective gastroenteritis due to fluoroquinolone-resistant Campylobacter jejuni, with pre-renal AKI and hypokalaemia from volume depletion",
+  "citations": [
+    "IDSA Infectious Diarrhea Diagnosis and Management Guideline 2017",
+    "Harrison's Principles of Internal Medicine 22e - Acute Infectious Diarrheal Diseases and Bacterial Food Poisoning"
+  ],
+  "stewardship": "Most acute gastroenteritis is self-limiting and needs only rehydration; antimicrobials are reserved for severe disease, dysentery, or vulnerable hosts. This traveller has severe volume-depleting illness with systemic upset warranting therapy. The key stewardship lesson is that empiric fluoroquinolones are inappropriate for travel-associated diarrhoea from South Asia because of very high Campylobacter fluoroquinolone resistance; his self-medicated ciprofloxacin was destined to fail. Empiric therapy of choice for severe/traveller's diarrhoea from this region is oral azithromycin. Culture-directed de-escalation confirms azithromycin and stops the ineffective ciprofloxacin. Antimotility agents are avoided given fever and possible invasive pathogen, and empiric anti-C. difficile therapy is not started because toxin testing is negative despite recent antibiotic exposure.",
+  "contraindications": [
+    "Avoid empiric fluoroquinolones for South/Southeast Asian travel diarrhoea due to high Campylobacter resistance",
+    "Avoid loperamide/antimotility agents with fever and suspected invasive/inflammatory diarrhoea",
+    "Caution with azithromycin QT prolongation given hypokalaemia - correct potassium first",
+    "Avoid nephrotoxic NSAIDs in the setting of pre-renal AKI"
+  ],
+  "edgeCases": [
+    "Guillain-Barre syndrome is a recognised post-Campylobacter complication - counsel on ascending weakness",
+    "If bloody stool with shiga toxin positive (STEC O157), antibiotics could precipitate haemolytic-uraemic syndrome and are contraindicated",
+    "Persistent symptoms or bacteraemia in an immunocompromised host would change management and antibiotic duration"
+  ],
+  "expectedMaiK": "Severe travel-associated acute gastroenteritis is fluoroquinolone-resistant Campylobacter; treat with rehydration plus azithromycin, not ciprofloxacin.",
+  "expectedNextQuestions": [
+    "Detailed travel, food and water exposure and sick contacts",
+    "Stool character - blood, mucus, volume and frequency",
+    "What antibiotics has he already self-administered and for how long",
+    "Urine output and features of dehydration",
+    "Immune status and comorbidities"
+  ],
+  "expectedInvestigations": [
+    "Stool culture with antimicrobial susceptibility testing",
+    "Stool multiplex PCR / enteric pathogen panel including C. difficile toxin",
+    "Serum electrolytes, urea and creatinine",
+    "Full blood count and CRP",
+    "Blood cultures given fever and systemic upset"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "diarrhea": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "fever": true,
+    "contaminatedFoodWaterExposure": true,
+    "tachycardia": true,
+    "priorAntibiotics": true,
+    "mdrRisk": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "GASTROENTERITIS",
+    "acceptableIds": [
+      "GASTROENTERITIS"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "ENTERIC_FEVER",
+      "C_DIFF"
+    ],
+    "investigations": [
+      "Stool culture with susceptibility",
+      "Stool enteric PCR panel including C. difficile toxin",
+      "Serum electrolytes and renal function",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "targeted-oral",
+      "antibiotics": [
+        "Azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['GASTROENTERITIS']",
+    "empiric ciprofloxacin must be flagged as inappropriate for South Asian travel diarrhoea (Campylobacter FQ resistance)",
+    "recommended antibiotic is azithromycin, culture-directed",
+    "antimotility agents contraindicated with fever/invasive pathogen",
+    "rehydration and electrolyte correction are core management, not just antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

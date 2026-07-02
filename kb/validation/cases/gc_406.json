@@ -1,0 +1,120 @@
+{
+  "id": "gc_406",
+  "specialty": "Systemic / Oncology",
+  "condition": "Febrile Neutropenia",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Fever and rigors with rapid deterioration 9 days after induction chemotherapy",
+  "history": "Known acute myeloid leukaemia on day 9 of intensive induction chemotherapy (cytarabine + daunorubicin), managed via a tunnelled central venous catheter. Over the preceding 48 hours he developed painful oral ulceration limiting oral intake (grade 3 mucositis), then this evening spiked a fever to 39.4°C with drenching rigors. In the last 2 hours he has become clammy, confused and light-headed on standing. No localising urinary, respiratory or abdominal symptoms; no diarrhoea. No recent travel. He received no antibiotics in the preceding 90 days. Recorded penicillin 'rash' in childhood, subsequently tolerated cephalosporins without reaction.",
+  "examination": "Toxic, mottled peripheries with prolonged capillary refill (4 s). Alert but disoriented to time. Oral cavity shows extensive ulcerative mucositis. Tunnelled line exit site is clean with no erythema or discharge; no fluctuance. Chest clear, abdomen soft and non-tender, no focal source identified. No rash, no meningism.",
+  "vitals": {
+    "hr": 130,
+    "bp": "80/46",
+    "rr": 28,
+    "temp": 39.4,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "0.4 x10^9/L",
+    "anc": "0.12 x10^9/L (120/uL)",
+    "hemoglobin": "8.1 g/dL",
+    "platelets": "22 x10^3/uL",
+    "creatinine": "1.9 mg/dL (baseline 0.8)",
+    "urea": "14.6 mmol/L",
+    "lactate": "4.6 mmol/L",
+    "bilirubin": "1.4 mg/dL",
+    "crp": "212 mg/L",
+    "procalcitonin": "18 ng/mL",
+    "inr": "1.4",
+    "map": "57 mmHg after 30 mL/kg crystalloid, requiring noradrenaline"
+  },
+  "imaging": "Chest radiograph clear. Bedside echo shows hyperdynamic left ventricle with a collapsing IVC consistent with distributive shock; no pericardial effusion or vegetation seen.",
+  "microbiology": "Two sets of paired peripheral and central-line blood cultures drawn before antibiotics; differential time-to-positivity requested. Urine culture and mucosal swabs sent. At 14 h, both peripheral and line cultures flag Gram-negative bacilli; at 40 h identified as Pseudomonas aeruginosa, susceptible to piperacillin-tazobactam, cefepime, ceftazidime, meropenem and amikacin (not an ESBL/carbapenem-resistant phenotype). Differential time-to-positivity not suggestive of a line-primary source; no MRSA isolated.",
+  "differentialDiagnoses": [
+    "Septic shock from an occult Gram-negative bacteraemia in a neutropenic host",
+    "Central line-associated bloodstream infection",
+    "Occult pneumonia / typhlitis as a source",
+    "Non-infective (drug/transfusion) pyrexia — excluded by shock and positive cultures"
+  ],
+  "finalDiagnosis": "High-risk febrile neutropenia (post-chemotherapy, ANC 120/uL) complicated by septic shock and acute organ dysfunction, source Pseudomonas aeruginosa bacteraemia",
+  "citations": [
+    "IDSA Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer 2011",
+    "Surviving Sepsis Campaign Septic Shock 2021",
+    "Harrison's Principles of Internal Medicine 22e — Infections in Patients with Cancer"
+  ],
+  "stewardship": "High-risk febrile neutropenia (anticipated prolonged ANC <100, mucositis, haemodynamic instability) mandates immediate empiric anti-pseudomonal beta-lactam monotherapy within one hour. Because the patient is in septic shock, guideline-concordant escalation adds an aminoglycoside (amikacin) for double Gram-negative cover and empiric vancomycin for the tunnelled line and severe mucositis; the childhood penicillin rash with tolerated cephalosporins does not preclude cefepime/piperacillin-tazobactam. Once cultures confirm a fully susceptible, non-line-primary Pseudomonas aeruginosa and the patient stabilises, de-escalate to targeted anti-pseudomonal beta-lactam monotherapy (e.g. piperacillin-tazobactam or cefepime), stop vancomycin (no Gram-positive isolate) and stop the aminoglycoside once shock resolves. Continue until afebrile ≥48 h AND ANC recovering >500/uL.",
+  "contraindications": [
+    "Avoid aminoglycoside continuation beyond shock resolution given evolving AKI (creatinine 1.9)",
+    "Nephrotoxin stacking (vancomycin + amikacin + contrast) requires level monitoring and renal dosing",
+    "Do not withhold empiric antibiotics to await imaging or a localising source"
+  ],
+  "edgeCases": [
+    "Persistent fever beyond 4-7 days despite broad cover should trigger empiric antifungal therapy and CT chest/sinuses",
+    "If cultures had shown carbapenem-resistant or ESBL organism, escalate to a carbapenem or novel beta-lactam/beta-lactamase inhibitor",
+    "Differential time-to-positivity favouring the line would mandate catheter removal for source control"
+  ],
+  "expectedMaiK": "Any fever in a patient with ANC <500/uL is a medical emergency requiring blood cultures and empiric broad-spectrum anti-pseudomonal antibiotics within one hour; with septic shock, escalate cover then de-escalate on culture data.",
+  "expectedNextQuestions": [
+    "What is the current ANC and expected duration of neutropenia?",
+    "When did chemotherapy finish and what regimen was used?",
+    "Is there any catheter-site, respiratory, urinary, skin or perianal source?",
+    "Any prior resistant organisms, recent antibiotics or true beta-lactam allergy?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures (peripheral + central line) with differential time-to-positivity",
+    "Full blood count with differential (ANC), serum lactate, renal and liver profile, CRP/procalcitonin",
+    "Urinalysis and culture, chest radiograph",
+    "Coagulation screen given thrombocytopenia and organ dysfunction"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "neutropenia": true,
+    "absoluteNeutrophilCountLow": true,
+    "mucositis": true,
+    "malignancy": true,
+    "immunocompromised": true,
+    "centralLine": true,
+    "hypotension": true,
+    "vasopressorRequirement": true,
+    "lactateElevated": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "FEBRILE_NEUTROPENIA",
+    "acceptableIds": [
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "SEPSIS",
+      "DEVICE_INFECTION",
+      "HAP"
+    ],
+    "investigations": [
+      "Paired peripheral and central-line blood cultures with differential time-to-positivity",
+      "FBC with ANC, lactate, renal and liver profile",
+      "Urinalysis and culture, chest radiograph",
+      "Coagulation screen"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Amikacin",
+        "Vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must identify high-risk febrile neutropenia (fever + ANC <500) as the primary diagnosis",
+    "Empiric therapy must include an anti-pseudomonal beta-lactam started within one hour",
+    "Septic shock must trigger escalation (add aminoglycoside +/- vancomycin) then culture-directed de-escalation",
+    "Vancomycin and aminoglycoside must be stopped once no Gram-positive isolate and shock resolves"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

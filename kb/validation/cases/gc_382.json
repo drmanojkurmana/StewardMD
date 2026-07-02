@@ -1,0 +1,128 @@
+{
+  "id": "gc_382",
+  "specialty": "Respiratory",
+  "condition": "Acute Bronchitis",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "4 days of productive cough with rigors, then a rapid collapse with low blood pressure at home",
+  "history": "Previously independent retired schoolteacher, ex-smoker (quit 12 years ago, no known COPD or bronchiectasis, no home oxygen). Began with 2 days of coryza, sore throat and low-grade fever during a local influenza outbreak, followed by a hacking cough productive of mucopurulent sputum and chest tightness. On the morning of admission he had a shaking rigor, felt clammy and near-collapse; family found him confused and cold-peripheried and called an ambulance. No pleuritic chest pain, no haemoptysis, no orthopnoea, no leg swelling. No recent hospitalisation, no antibiotics in the last 90 days, no indwelling devices, not immunocompromised. Influenza vaccine not taken this season.",
+  "examination": "Ill-looking, peripherally shut down with cool mottled knees and delayed capillary refill (4 s). Chest expansion symmetrical; percussion resonant throughout; auscultation reveals widespread coarse rhonchi and expiratory wheeze that shift with coughing, with NO focal crepitations, NO bronchial breathing and NO area of dullness/consolidation. Mild upper-airway rattle. Heart sounds normal, no murmur, JVP not raised. Abdomen soft, no organomegaly. No rash, no neck stiffness, no focal neurology (GCS 14, mildly drowsy).",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/50",
+    "rr": 26,
+    "temp": 38.9,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc_x10e9L": 13.1,
+    "neutrophils_x10e9L": 10.8,
+    "lactate_mmol_L": 3.2,
+    "procalcitonin_ng_mL": 0.12,
+    "crp_mg_L": 48,
+    "creatinine_mg_dL": 1.9,
+    "urea_mmol_L": 11.4,
+    "baseline_creatinine_mg_dL": 0.9,
+    "hemoglobin_g_dL": 13.6,
+    "platelets_x10e3_uL": 188,
+    "bilirubin_mg_dL": 0.8,
+    "abg": "pH 7.33, pCO2 4.4 kPa, HCO3 18, mild high-anion-gap lactic acidosis"
+  },
+  "imaging": "Portable chest X-ray: clear lung fields with NO consolidation, NO effusion and NO cavitation; only mild bronchial wall thickening. Repeat PA film at 48h remains clear, excluding evolving pneumonia. POCUS: hyperdynamic left ventricle, no B-lines, IVC underfilled (distributive/hypovolaemic picture responsive to fluids).",
+  "microbiology": "Two sets of blood cultures: no growth at 48h. Sputum Gram stain: mixed oropharyngeal flora, no predominant pathogen; routine culture negative. Urinary pneumococcal and Legionella antigens negative. Respiratory multiplex PCR: INFLUENZA A (H3) detected; SARS-CoV-2 not detected. Procalcitonin trend 0.12 → 0.09 ng/mL.",
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia (excluded by repeatedly clear CXR and absence of consolidation)",
+    "Sepsis of undefined source presenting as distributive shock",
+    "Infective COPD exacerbation (no prior COPD diagnosis, normal baseline function)",
+    "Upper respiratory tract infection"
+  ],
+  "finalDiagnosis": "Acute bronchitis (influenza A associated), presenting with a transient viral sepsis-mimic — hypotension and pre-renal AKI that resolved rapidly with fluids; no bacterial source identified",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Acute Bronchitis and Acute Respiratory Tract Infections",
+    "NICE — Cough (acute): antimicrobial prescribing (NG120) 2019",
+    "CHEST/ACCP — Evaluation and Management of Acute Bronchitis 2006",
+    "Surviving Sepsis Campaign — International Guidelines for Management of Sepsis and Septic Shock 2021"
+  ],
+  "stewardship": "Distributive shock of unclear source mandated the sepsis bundle: after cultures were drawn, broad-spectrum empiric piperacillin-tazobactam was started within the first hour alongside 30 mL/kg balanced crystalloid and a brief low-dose noradrenaline requirement. By 48h the diagnosis had declared itself as acute bronchitis: chest X-ray clear on two occasions (no consolidation), blood and sputum cultures negative, procalcitonin low and falling, and influenza A PCR positive. This is the textbook de-escalation trigger — acute bronchitis is a self-limiting airway infection (predominantly viral) for which antibiotics are NOT indicated. Antibiotics were therefore stopped, not merely narrowed, and oseltamivir was given for influenza (renally dose-adjusted for the AKI). Management became supportive: hydration, antipyretics and reassurance that cough may persist 2–3 weeks.",
+  "contraindications": [
+    "Avoid continuing/escalating antibiotics once bacterial infection is excluded — acute bronchitis does not warrant antibacterials",
+    "Avoid NSAIDs for antipyresis in the setting of AKI and hypotension",
+    "Dose-adjust oseltamivir for reduced creatinine clearance",
+    "Do not label as COPD exacerbation without spirometric/clinical basis"
+  ],
+  "edgeCases": [
+    "If a follow-up film shows new consolidation, reclassify as community-acquired pneumonia and reinstate antibiotics",
+    "Cough persisting >3 weeks warrants consideration of pertussis or pulmonary TB",
+    "In a genuine COPD or bronchiectasis patient the antibiotic threshold and target organisms differ",
+    "Elevated lactate here reflected hypoperfusion/adrenergic drive, not necessarily bacterial sepsis — trend it against clinical response"
+  ],
+  "expectedMaiK": "Recognise that a septic-shock presentation with a repeatedly clear chest X-ray, negative cultures, low/falling procalcitonin and a positive influenza PCR is influenza-associated acute bronchitis; give supportive care plus oseltamivir and STOP the empiric antibiotics rather than continue them.",
+  "expectedNextQuestions": [
+    "How long has the cough been present, and was it preceded by coryza/sore throat?",
+    "Does the chest X-ray show any focal consolidation or effusion?",
+    "Any prior diagnosis of COPD, bronchiectasis or home oxygen use?",
+    "Influenza/COVID exposure, outbreak contact and vaccination status?",
+    "Recent antibiotic exposure, hospitalisation or indwelling devices?"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray (to exclude consolidation)",
+    "Two sets of blood cultures before antibiotics",
+    "Serum lactate and venous/arterial blood gas",
+    "Procalcitonin",
+    "Respiratory multiplex viral PCR (influenza/COVID)",
+    "Sputum Gram stain and culture",
+    "U&E/creatinine and full blood count"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true,
+    "organDysfunction": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "coryza": true
+  },
+  "expected": {
+    "diagnosis": "ACUTE_BRONCHITIS",
+    "acceptableIds": [
+      "ACUTE_BRONCHITIS"
+    ],
+    "differentialIds": [
+      "CAP",
+      "SEPSIS",
+      "COPD_EXACERBATION",
+      "URTI"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "Blood cultures x2",
+      "Serum lactate",
+      "Procalcitonin",
+      "Respiratory viral PCR",
+      "Sputum culture"
+    ],
+    "stewardship": {
+      "tier": "empiric-broad-spectrum",
+      "antibiotics": [
+        "Piperacillin-tazobactam 4.5 g IV q6h — empiric per sepsis bundle at presentation while source unclear; de-escalated and DISCONTINUED at 48h once blood/sputum cultures negative, procalcitonin low and falling, influenza A PCR positive and chest X-ray clear (acute bronchitis needs no antibiotics)",
+        "Oseltamivir 75 mg PO BD (renally dose-adjusted) for confirmed influenza A"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "A repeatedly clear chest X-ray with acute productive cough <3 weeks supports acute bronchitis over pneumonia",
+    "Empiric broad-spectrum antibiotics are appropriate at the initial undifferentiated septic-shock presentation per Surviving Sepsis",
+    "Antibiotics must be STOPPED (not just narrowed) once bacterial infection is excluded by negative cultures, low procalcitonin, positive viral PCR and clear imaging",
+    "acceptableIds is exactly [ACUTE_BRONCHITIS]"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

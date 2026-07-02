@@ -1,0 +1,111 @@
+{
+  "id": "gc_440",
+  "specialty": "Allergy / Emergency",
+  "condition": "ACE-inhibitor induced angioedema",
+  "age": 62,
+  "sex": "M",
+  "presentingComplaint": "Progressive lip and tongue swelling with a sensation of throat tightness over 6 hours.",
+  "history": "Known hypertensive and type 2 diabetic on ramipril 10 mg once daily for the past 3 years (recently up-titrated) for blood pressure and diabetic nephroprotection, plus metformin and atorvastatin. He woke at 4 am with tingling and swelling of the lower lip that progressed over the next several hours to marked tongue and floor-of-mouth swelling, muffled 'hot-potato' voice and a feeling that his throat was closing. He had attended a family function the previous evening and eaten prawns for the first time in months, which prompted the referring team to treat him as anaphylaxis. He denies any itching, hives, flushing, abdominal cramps, wheeze or light-headedness. In the emergency department he received IM adrenaline 0.5 mg, IV hydrocortisone 200 mg and IV chlorphenamine 10 mg with no discernible improvement in the swelling over 45 minutes. No prior episodes; no family history of recurrent swelling; no new soaps, drugs, NSAIDs or contrast. He has not previously had any reaction to seafood.",
+  "examination": "Alert, anxious, sitting forward and drooling slightly, speaking in a muffled voice. Gross non-pitting swelling of the lower lip, anterior tongue and floor of mouth without surrounding erythema, warmth or tenderness; no tonsillar or peritonsillar asymmetry. Crucially there is NO urticaria, no generalised flush and no pruritus anywhere on the skin. Chest clear with good air entry and no wheeze; mild inspiratory stridor at rest on lying flat only. No facial cellulitic erythema, no eschar. Abdomen soft, non-tender. Peripheries warm and well perfused.",
+  "vitals": {
+    "hr": 104,
+    "bp": "162/94",
+    "rr": 22,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "serumTryptase_acute": "4.2 ng/mL (normal <11.4; NOT elevated)",
+    "serumTryptase_baseline": "3.8 ng/mL",
+    "C4": "0.28 g/L (normal)",
+    "C1_esterase_inhibitor_level": "0.31 g/L (normal)",
+    "C1_esterase_inhibitor_function": "normal",
+    "creatinine_mgdl": 1.6,
+    "eGFR": "48 mL/min/1.73m2",
+    "eosinophils": "0.2 x10^9/L (normal)",
+    "hb_gdl": 13.4,
+    "glucose_mgdl": 168
+  },
+  "imaging": "Flexible nasendoscopy: supraglottic and tongue-base oedema with a patent but narrowed airway; vocal cords mobile, no laryngeal mass or foreign body. Soft-tissue neck imaging not required acutely; no gas or collection to suggest deep space infection.",
+  "microbiology": "Not applicable — non-infective presentation; no fever and no clinical features of a deep neck space infection, so cultures not indicated.",
+  "differentialDiagnoses": [
+    "Anaphylaxis to prawns (leading mimic given the temporal food exposure) — argued against by absence of urticaria/pruritus/bronchospasm/hypotension, normal acute tryptase and lack of response to adrenaline/antihistamine/steroid",
+    "Hereditary / acquired C1-inhibitor deficiency angioedema — excluded by normal C4, C1-INH level and function and no prior/family history",
+    "Facial cellulitis / erysipelas — no erythema, warmth, tenderness or fever",
+    "Ludwig's angina / deep neck space infection — no fever, dental source or induration on imaging"
+  ],
+  "finalDiagnosis": "ACE-inhibitor (ramipril) induced bradykinin-mediated angioedema of the lips, tongue and supraglottis, presenting as a food-associated 'anaphylaxis' mimic.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Urticaria and Angioedema",
+    "WAO/EAACI — Hereditary and Bradykinin-Mediated Angioedema Guideline — 2021",
+    "Resuscitation Council UK — Emergency Treatment of Anaphylaxis Guideline — 2021"
+  ],
+  "stewardship": "Non-infective emergency — no antibiotics indicated. Antimicrobial stewardship point: fever and infective markers are absent and imaging shows no deep neck space collection, so empirical antibiotics for a presumed 'throat infection' would be inappropriate. Management is drug-cessation and airway-directed, not antimicrobial.",
+  "contraindications": [
+    "Permanently discontinue ramipril and avoid all ACE inhibitors for life",
+    "Use ARBs only with caution and counselling (small cross-reactivity risk); avoid the DPP-4 inhibitor/neprilysin-inhibitor combination that further raises bradykinin",
+    "Adrenaline, antihistamines and corticosteroids are largely ineffective in bradykinin-mediated angioedema but are still given once when the diagnosis is uncertain to cover possible anaphylaxis and to protect the airway"
+  ],
+  "edgeCases": [
+    "ACEi angioedema can appear months to years after starting the drug, not just on initiation — a common reason it is missed",
+    "Isolated tongue/floor-of-mouth swelling with a normal acute tryptase and no urticaria should shift the diagnosis away from anaphylaxis toward a bradykinin mechanism",
+    "Higher incidence and severity in patients of African ancestry and with concurrent DPP-4 inhibitor use",
+    "Airway compromise can progress despite 'anaphylaxis' treatment; early anaesthetic/ENT involvement and readiness for fibreoptic intubation or surgical airway is the priority"
+  ],
+  "expectedMaiK": "Recognise this as ACE-inhibitor (bradykinin-mediated) angioedema, not anaphylaxis: stop ramipril immediately, prioritise the airway with early ENT/anaesthetic involvement, and do not rely on adrenaline/antihistamines/steroids to resolve the swelling.",
+  "expectedNextQuestions": [
+    "Is there any urticaria, itching, flushing, wheeze or hypotension to support anaphylaxis?",
+    "How long has he been on an ACE inhibitor and was the dose recently changed?",
+    "Any previous episodes of unexplained swelling or a family history of recurrent angioedema?",
+    "Has there been any response to the adrenaline, antihistamine and steroid already given?",
+    "Is the airway threatened — voice change, stridor, drooling or difficulty handling secretions?"
+  ],
+  "expectedInvestigations": [
+    "Immediate airway assessment with flexible nasendoscopy",
+    "Serum mast cell tryptase (acute and baseline) to exclude anaphylaxis",
+    "C4, C1-esterase-inhibitor level and function to exclude hereditary/acquired C1-INH deficiency",
+    "Renal function (ACEi accumulation, diabetic nephropathy)"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "facialSwelling": true,
+    "dyspnea": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "tachycardia": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "angioedema_acei",
+    "acceptableIds": [
+      "angioedema_acei"
+    ],
+    "differentialIds": [
+      "anaphylaxis",
+      "CELLULITIS",
+      "ERYSIPELAS"
+    ],
+    "investigations": [
+      "Flexible nasendoscopy / airway assessment",
+      "Serum tryptase (acute and baseline)",
+      "C4 and C1-esterase-inhibitor level and function",
+      "Renal function"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine top diagnosis must be angioedema_acei",
+    "anaphylaxis must appear as a differential but must not be the accepted diagnosis",
+    "No antibiotic must be recommended (stewardship.tier null, antibiotics empty)",
+    "Management must include stopping the ACE inhibitor and airway prioritisation",
+    "Normal acute tryptase and normal C4/C1-INH must be used to distinguish from anaphylaxis and hereditary angioedema"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

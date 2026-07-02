@@ -1,0 +1,124 @@
+{
+  "id": "gc_424",
+  "specialty": "Tropical Fever",
+  "condition": "Scrub Typhus",
+  "age": 49,
+  "sex": "M",
+  "presentingComplaint": "High-grade fever for 8 days with breathlessness, reduced urine output and drowsiness for 1 day.",
+  "history": "Paddy farmer from a sub-Himalayan foothill district, admitted during the post-monsoon season. Eight days of continuous high fever with rigors, severe myalgia and frontal headache. Over the last 36 hours he developed progressive breathlessness, oliguria and increasing drowsiness. He was started 3 days earlier at a local clinic on empiric intravenous ceftriaxone for 'enteric fever / undifferentiated sepsis' with no defervescence. He recalls a painless 'insect bite scab' in the left groin noticed a week ago. No dysuria, no localising abdominal or urinary symptoms. No prior TB, no known comorbidity, non-diabetic. Frequent barefoot fieldwork with exposure to scrub grass and bush undergrowth.",
+  "examination": "Toxic, drowsy but rousable (GCS 13). A single 8 mm black necrotic eschar with an erythematous rim in the left inguinal fold, with tender regional inguinal lymphadenopathy; scattered blanching maculopapular rash over the trunk. Mild tender hepatosplenomegaly. Bilateral fine crepitations at both lung bases. Cool peripheries with prolonged capillary refill; mottled knees. Mild conjunctival suffusion.",
+  "vitals": {
+    "hr": 126,
+    "bp": "76/44",
+    "rr": 32,
+    "temp": 39.6,
+    "spo2": 88
+  },
+  "labs": {
+    "hemoglobin": "11.2 g/dL",
+    "wbc": "6.8 x10^9/L",
+    "platelets": "38 x10^3/µL",
+    "creatinine": "2.9 mg/dL",
+    "urea": "18.4 mmol/L",
+    "bilirubin": "3.4 mg/dL",
+    "ALT": "228 U/L",
+    "AST": "310 U/L",
+    "albumin": "2.6 g/dL",
+    "INR": "1.4",
+    "CRP": "168 mg/L",
+    "lactate": "4.3 mmol/L",
+    "sodium": "128 mmol/L",
+    "pao2fio2": "182"
+  },
+  "imaging": "Chest radiograph: bilateral lower-zone interstitial and alveolar infiltrates consistent with early ARDS; no lobar consolidation. USG abdomen: mild hepatosplenomegaly, no biliary dilatation, small bilateral pleural effusions.",
+  "microbiology": "Two sets of blood cultures sterile at 48 h (drawn on ceftriaxone). Urine culture no growth. Malaria antigen/smear negative x2. Dengue NS1/IgM negative. Leptospira IgM negative. Scrub typhus IgM ELISA positive with high OD; Orientia tsutsugamushi PCR (eschar swab) positive. Weil-Felix OX-K high titre. Note: Orientia is not recoverable on routine culture media.",
+  "differentialDiagnoses": [
+    "Scrub typhus with septic shock and MODS",
+    "Leptospirosis",
+    "Severe dengue",
+    "Complicated malaria",
+    "Enteric fever"
+  ],
+  "finalDiagnosis": "Scrub typhus (Orientia tsutsugamushi) complicated by septic shock, ARDS, AKI and hepatic dysfunction — eschar-positive, IgM/PCR-confirmed.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Scrub Typhus and Rickettsial Diseases",
+    "Indian Society of Critical Care Medicine (ISCCM) — Management of Tropical Fevers/Scrub Typhus in the ICU — 2014",
+    "WHO SEARO — Scrub Typhus Guidance for the South-East Asia Region — 2015"
+  ],
+  "stewardship": "Undifferentiated septic shock in a returning-from-fieldwork patient was reasonably started on empiric broad-spectrum ceftriaxone at first contact, but persistent fever plus a pathognomonic eschar, thrombocytopenia, transaminitis and rural scrub exposure point firmly to scrub typhus — for which beta-lactams are ineffective. Once the eschar is recognised (and confirmed by IgM/PCR), the correct move is to add and pivot to doxycycline 100 mg IV/PO 12-hourly (first-line; azithromycin IV the alternative in pregnancy or intolerance), and to DE-ESCALATE by stopping the empiric ceftriaxone since blood cultures are sterile and there is no concurrent bacterial focus. Doxycycline typically produces defervescence within 48 h; failure to respond should prompt review of the diagnosis rather than antibiotic escalation. Doxycycline is a WHO AWaRe 'Access' agent, so directed therapy here is also good stewardship.",
+  "contraindications": [
+    "Avoid empiric aminoglycosides given established AKI",
+    "Doxycycline preferred over azithromycin except in pregnancy; azithromycin is the pregnancy-safe alternative",
+    "Avoid unnecessary continuation of ceftriaxone once sterile cultures and confirmed rickettsial diagnosis (collateral resistance, C. difficile risk)"
+  ],
+  "edgeCases": [
+    "Eschar may be absent or hidden in axilla/groin/perineum in up to half of cases — a deliberate search is essential",
+    "Scrub typhus can precipitate ARDS, myocarditis, meningoencephalitis and AKI simultaneously (MODS)",
+    "Weil-Felix has poor sensitivity; a negative test does not exclude the diagnosis",
+    "Empiric doxycycline should be started on clinical suspicion in endemic acute undifferentiated febrile illness without waiting for serology"
+  ],
+  "expectedMaiK": "A pathognomonic eschar plus rural scrub exposure, thrombocytopenia and transaminitis in a returning febrile patient with septic shock is scrub typhus until proven otherwise; treat with doxycycline and de-escalate the empiric beta-lactam.",
+  "expectedNextQuestions": [
+    "Careful whole-body search for an eschar (groin, axilla, perineum, behind ears)?",
+    "Season and specific rural/scrub-vegetation exposure history?",
+    "Response (defervescence) to any prior antibiotic and its class?",
+    "Features of organ involvement — urine output, breathlessness, sensorium?"
+  ],
+  "expectedInvestigations": [
+    "Scrub typhus IgM ELISA and/or Orientia PCR from eschar/blood",
+    "Blood cultures (to exclude concurrent bacterial sepsis) plus malaria smear/RDT, dengue NS1/IgM, leptospira IgM",
+    "Serum lactate, ABG with PaO2:FiO2, renal and liver panel, platelet count",
+    "Chest radiograph and bedside echo (ARDS / myocarditis screen)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "eschar": true,
+    "maculopapularRash": true,
+    "ruralExposure": true,
+    "lymphadenopathy": true,
+    "thrombocytopenia": true,
+    "hepatosplenomegaly": true,
+    "hypotension": true,
+    "vasopressorRequirement": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "hypoxia": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "SCRUB_TYPHUS",
+    "acceptableIds": [
+      "SCRUB_TYPHUS"
+    ],
+    "differentialIds": [
+      "LEPTOSPIROSIS",
+      "DENGUE",
+      "MALARIA",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Scrub typhus IgM ELISA / Orientia PCR from eschar",
+      "Blood cultures + malaria RDT + dengue NS1/IgM + leptospira IgM",
+      "Lactate, ABG (PaO2:FiO2), renal and liver profile, platelets",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": "Access (targeted)",
+      "antibiotics": [
+        "Doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank SCRUB_TYPHUS as top diagnosis given eschar + rural exposure + thrombocytopenia + transaminitis",
+    "Directed therapy must be doxycycline (azithromycin only as pregnancy/intolerance alternative), not a beta-lactam",
+    "Empiric ceftriaxone should be flagged for de-escalation/stop given sterile cultures and confirmed rickettsial diagnosis",
+    "Septic shock + ARDS + AKI must be recognised as scrub-typhus MODS, not a separate bacterial sepsis requiring escalation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

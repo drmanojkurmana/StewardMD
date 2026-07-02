@@ -1,0 +1,123 @@
+{
+  "id": "gc_437",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Reduced urine output and increasing lethargy for 3 days",
+  "history": "Type 2 diabetic for 18 years and hypertensive with known stage 3b CKD (baseline creatinine 1.8 mg/dL, eGFR ~38 six weeks ago). Presented after a 4-day diarrhoeal-vomiting illness during which he continued his usual ramipril and indapamide and self-medicated with diclofenac for backache. Family report he has passed only small volumes of concentrated urine for 3 days despite drinking little. Over the last 24h he has become drowsy, nauseated and off his food, with generalised itch and a metallic taste. No fever, no rash, no dysuria, no flank pain, no haematuria and no recent contrast imaging. This acute deterioration on a background of pre-existing CKD and diabetes is the source of diagnostic confounding — the question is how much is new (acute) versus chronic.",
+  "examination": "Elderly man, drowsy but rousable, looks dry: reduced skin turgor, dry mucous membranes, capillary refill 3s, empty neck veins on inspection. No peripheral or sacral oedema. Chest clear, no added heart sounds. Abdomen soft, non-tender, no palpable bladder, no bruit, kidneys not ballotable. Uraemic flap (asterixis) present. No focal neurology, no meningism. Fundi show background diabetic retinopathy.",
+  "vitals": {
+    "hr": 104,
+    "bp": "102/60",
+    "rr": 18,
+    "temp": 36.7,
+    "spo2": 97
+  },
+  "labs": {
+    "creatinine_mg_dL": 5.2,
+    "baseline_creatinine_mg_dL": 1.8,
+    "urea_mmol_L": 34,
+    "potassium_mmol_L": 6.2,
+    "sodium_mmol_L": 133,
+    "bicarbonate_mmol_L": 15,
+    "eGFR_mL_min": 11,
+    "hemoglobin_g_dL": 10.4,
+    "hba1c_pct": 8.6,
+    "urine_output_mL_24h": 320,
+    "urine_sodium_mmol_L": 12,
+    "fractional_excretion_sodium_pct": 0.6,
+    "urinalysis": "trace protein, no blood, no leucocytes/nitrites; occasional hyaline and muddy-brown granular casts",
+    "CK_U_L": 180,
+    "venous_pH": 7.28,
+    "anion_gap": 18
+  },
+  "imaging": "Renal ultrasound: both kidneys normal in position, mildly echogenic (chronic change), right 9.6 cm and left 9.9 cm, no hydronephrosis, no stones, no post-void residual — obstruction excluded, kidney size preserved rather than shrunken suggesting largely reversible acute component.",
+  "microbiology": "Not applicable — no clinical evidence of infection; blood and urine cultures sent for completeness and were negative at 48h.",
+  "differentialDiagnoses": [
+    "Acute kidney injury (acute-on-chronic; prerenal/ischaemic ATN from volume depletion, ACE-inhibitor, diuretic and NSAID — 'triple whammy')",
+    "Progression of underlying diabetic CKD alone",
+    "Life-threatening hyperkalaemia complicating the AKI",
+    "Acute glomerulonephritis",
+    "Obstructive uropathy"
+  ],
+  "finalDiagnosis": "Acute kidney injury (KDIGO stage 3, acute-on-chronic) — prerenal azotaemia progressing to ischaemic acute tubular necrosis, precipitated by GI fluid losses plus RAAS blockade, diuretic and NSAID nephrotoxicity, on a background of diabetic CKD stage 3b, complicated by hyperkalaemia and metabolic acidosis.",
+  "citations": [
+    "KDIGO — Acute Kidney Injury Clinical Practice Guideline — 2012",
+    "Harrison's Principles of Internal Medicine, 22e — Acute Kidney Injury"
+  ],
+  "stewardship": "Not applicable — this is a non-infective presentation. No antibiotics indicated. Stewardship focus is on nephrotoxin stewardship: stop the ACE-inhibitor, diuretic and NSAID, avoid contrast and other nephrotoxins, and renally dose all drugs.",
+  "contraindications": [
+    "Do NOT continue ramipril, indapamide or diclofenac in acute volume depletion with rising creatinine (the nephrotoxic 'triple whammy')",
+    "Avoid iodinated contrast and nephrotoxic antibiotics (e.g., aminoglycosides) unless unavoidable",
+    "Avoid potassium-containing fluids and hold metformin (lactic-acidosis risk with eGFR <30) and SGLT2 inhibitors during acute illness",
+    "Do not give large potassium-sparing or Hartmann's boluses given K+ 6.2"
+  ],
+  "edgeCases": [
+    "Distinguishing acute-on-chronic AKI from stable CKD: preserved kidney size, near-normal recent baseline and muddy-brown casts favour a reversible acute component",
+    "Hyperkalaemia with ECG changes may be the immediate life threat and dictates emergency treatment before the AKI workup is complete",
+    "If oliguria and acidosis fail to respond to volume resuscitation and hyperkalaemia is refractory, urgent dialysis is indicated (AEIOU criteria)",
+    "Diabetes and CKD can mask or mimic features — euvolaemia may be misjudged, and HHS/DKA must be excluded as an alternative cause of the metabolic disturbance"
+  ],
+  "expectedMaiK": "Acute-on-chronic AKI (KDIGO stage 3) from prerenal/ischaemic ATN due to volume depletion plus ACEi/diuretic/NSAID nephrotoxicity in a diabetic with CKD; priorities are treating hyperkalaemia, isotonic volume resuscitation, and stopping all nephrotoxins.",
+  "expectedNextQuestions": [
+    "What is the patient's baseline creatinine/eGFR and how fast has it changed?",
+    "Full drug history including ACE-inhibitors/ARBs, diuretics, NSAIDs, metformin and any recent contrast?",
+    "Quantify fluid losses and urine output — is he anuric/oliguric?",
+    "Any features of obstruction, glomerulonephritis (haematuria, oedema) or systemic disease?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatinine, urea and electrolytes with potassium (compare to baseline)",
+    "Venous blood gas / bicarbonate for metabolic acidosis",
+    "12-lead ECG to look for hyperkalaemic changes",
+    "Urinalysis with microscopy (casts) and urine electrolytes / FeNa",
+    "Renal tract ultrasound to exclude obstruction and assess kidney size"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "oliguria": true,
+    "dehydration": true,
+    "nauseaVomiting": true,
+    "asterixis": true,
+    "renalImpairment": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "creatinine": true,
+    "urea": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "aki",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "ckd",
+      "hyperkalemia",
+      "glomerulonephritis",
+      "rhabdo"
+    ],
+    "investigations": [
+      "Serum creatinine and urea versus baseline",
+      "Serum potassium and venous bicarbonate",
+      "ECG for hyperkalaemia",
+      "Urinalysis, microscopy and urine electrolytes/FeNa",
+      "Renal tract ultrasound"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return aki as the top diagnosis given oliguria, dehydration, acute rise in creatinine/urea over a CKD baseline, and nephrotoxin exposure",
+    "Must not recommend antibiotics for this non-infective presentation",
+    "Must flag hyperkalaemia (K+ 6.2) and metabolic acidosis as urgent complications requiring treatment",
+    "Must advise stopping ACE-inhibitor, diuretic and NSAID and avoiding further nephrotoxins",
+    "Must not misclassify as stable CKD alone given the acute change from baseline and preserved kidney size on ultrasound"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "gc_438",
+  "specialty": "Allergy / Emergency",
+  "condition": "Anaphylaxis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Sudden collapse, facial swelling and wheeze minutes after starting an intravenous antibiotic on the ward.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B) admitted 2 days ago with tense ascites and low-grade abdominal discomfort; started empirically on IV co-amoxiclav for suspected spontaneous bacterial peritonitis pending ascitic tap. Approximately 5 minutes into the first infusion he developed generalised itching, flushing, lip and tongue swelling, throat tightness, an urticarial rash over the trunk, breathlessness with audible wheeze, and then felt light-headed and slumped in the chair (transient near-syncope). No prior documented drug allergy, though he recalls a 'rash' with penicillin in childhood. No fever spike, rigors or new abdominal pain at the time of the event. Regular medications: spironolactone, furosemide, propranolol for varices, lactulose.",
+  "examination": "Anxious, flushed, with peri-oral and tongue angioedema and audible inspiratory stridor plus expiratory wheeze. Widespread urticarial wheals. Cool peripheries with weak, thready pulse. Chest: bilateral polyphonic wheeze, no focal crepitations. Abdomen distended with shifting dullness (known ascites), mildly tender diffusely but no guarding; no worsening from baseline. No asterixis; oriented (GCS 15). Infusion stopped immediately.",
+  "vitals": {
+    "hr": 132,
+    "bp": "76/44",
+    "rr": 30,
+    "temp": 36.8,
+    "spo2": 88
+  },
+  "labs": {
+    "hemoglobin": "11.4 g/dL",
+    "platelets": "94 x10^3/uL",
+    "creatinine": "1.3 mg/dL",
+    "bilirubin": "3.1 mg/dL",
+    "albumin": "2.6 g/dL",
+    "inr": "1.6",
+    "serumTryptase": "24 ng/mL at 90 min (baseline 5 ng/mL at 24h) - elevated, supports mast-cell activation",
+    "lactate": "2.4 mmol/L"
+  },
+  "imaging": "No acute imaging required for diagnosis; portable CXR (post-stabilisation) shows no consolidation or pneumothorax, hyperinflation only.",
+  "microbiology": "Ascitic fluid sent at admission: PMN count pending; blood cultures drawn - no growth to date. (Event is a drug hypersensitivity reaction, not an infective deterioration.)",
+  "differentialDiagnoses": [
+    "Anaphylaxis to beta-lactam (co-amoxiclav) - clinical diagnosis",
+    "Sepsis / worsening spontaneous bacterial peritonitis with distributive shock",
+    "Acute severe asthma / bronchospasm",
+    "Vasovagal near-syncope"
+  ],
+  "finalDiagnosis": "Anaphylaxis (grade III, drug-induced by intravenous co-amoxiclav) in a patient with decompensated cirrhosis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e - Anaphylaxis and Systemic Anaphylaxis",
+    "Resuscitation Council UK - Emergency Treatment of Anaphylaxis Guideline 2021",
+    "EAACI - Anaphylaxis Guideline 2021"
+  ],
+  "stewardship": "This is a non-infective adverse drug (immunological hypersensitivity) event. Management is IM adrenaline, not antimicrobials; there is no antibiotic-selection decision for the reaction itself. The offending beta-lactam must be stopped and documented as a serious allergy. If treatment of the underlying suspected SBP is still required after stabilisation, avoid all penicillins/beta-lactams pending allergy review and choose a non-cross-reactive agent per local policy - but that decision is separate from managing the anaphylaxis and is dose-adjusted for hepatic impairment.",
+  "contraindications": [
+    "Re-exposure to penicillins / co-amoxiclav (offending allergen) is absolutely contraindicated",
+    "Do not delay IM adrenaline while giving antihistamines/steroids - these are second-line and do not treat airway/circulatory compromise",
+    "Caution with beta-blockade (patient on propranolol) - may blunt adrenaline response; consider IV glucagon if refractory hypotension",
+    "Avoid IV adrenaline boluses outside a monitored/critical-care setting due to arrhythmia risk"
+  ],
+  "edgeCases": [
+    "Concurrent propranolol (varices prophylaxis) can cause adrenaline-resistant hypotension - glucagon is the antidote",
+    "In cirrhosis, baseline vasodilation/low SVR and thrombocytopenia can mask or mimic distributive shock, blurring the line with sepsis/SBP",
+    "Childhood 'penicillin rash' was an under-appreciated allergy label - reinforces need for allergy documentation and testing",
+    "Biphasic reaction can occur 1-72h later; observe and warn"
+  ],
+  "expectedMaiK": "Stop the infusion and give IM adrenaline 0.5 mg (0.5 mL of 1:1000) into the anterolateral thigh immediately, repeatable every 5 min; high-flow oxygen, lay flat with legs raised, and rapid IV crystalloid bolus.",
+  "expectedNextQuestions": [
+    "Exact timing between starting the infusion and symptom onset?",
+    "Any previous reactions to penicillins or other drugs, and what happened?",
+    "Is there airway swelling/stridor threatening the airway now?",
+    "Response to the first dose of IM adrenaline - improving or refractory (consider beta-blocker effect)?"
+  ],
+  "expectedInvestigations": [
+    "Serial serum mast-cell tryptase (acute at 1-2h and 24h baseline)",
+    "Continuous ECG, BP and SpO2 monitoring",
+    "Ascitic fluid PMN count and culture to clarify whether SBP is genuinely present",
+    "Referral for allergy testing / drug provocation once recovered"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "hypotension": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "wheeze": true,
+    "dyspnea": true,
+    "facialSwelling": true,
+    "rash": true,
+    "syncope": true,
+    "liverDisease": true,
+    "ascites": true
+  },
+  "expected": {
+    "diagnosis": "anaphylaxis",
+    "acceptableIds": [
+      "anaphylaxis"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "asthma_exac",
+      "angioedema_acei",
+      "vasovagal_syncope"
+    ],
+    "investigations": [
+      "Serial serum tryptase",
+      "Continuous cardiorespiratory monitoring",
+      "Ascitic fluid cell count and culture",
+      "Allergy referral / testing"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank anaphylaxis as top diagnosis given acute-onset hypotension, angioedema, wheeze and urticaria minutes after IV drug exposure.",
+    "First-line management action must be IM adrenaline, not antihistamines, steroids or antibiotics.",
+    "No antibiotic tier/agent should be recommended for the anaphylaxis event itself (stewardship tier null).",
+    "Offending beta-lactam must be flagged as contraindicated and documented as allergy.",
+    "Beta-blocker (propranolol) use should trigger consideration of glucagon for refractory hypotension."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

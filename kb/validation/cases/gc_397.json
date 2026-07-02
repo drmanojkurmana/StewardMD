@@ -1,0 +1,122 @@
+{
+  "id": "gc_397",
+  "specialty": "Gastrointestinal",
+  "condition": "Clostridioides difficile Infection",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Profuse watery diarrhoea, abdominal distension and progressive drowsiness for 3 days",
+  "history": "Elderly woman admitted 2 weeks earlier for community-acquired pneumonia and treated with a 7-day course of IV ceftriaxone plus a fluoroquinolone; a proton-pump inhibitor was added. Four days after discharge she developed high-volume, foul, non-bloody watery diarrhoea (>10 episodes/day) with cramping lower abdominal pain. Over the last 24 hours stool frequency has paradoxically dropped while the abdomen has become distended and tympanitic, associated with rising fever, reduced urine output and increasing confusion. No recent travel, no sick contacts, no NSAID use. Background: type 2 diabetes, hypertension. Family note she has passed almost no urine since the previous evening.",
+  "examination": "Toxic, drowsy and peripherally shut down with cool mottled extremities and prolonged capillary refill. Marked abdominal distension with generalised tenderness, sluggish bowel sounds and tympany suggesting evolving ileus/toxic megacolon. No guarding of a localised nature but diffuse discomfort. Dry mucous membranes and reduced skin turgor. Chest clear. No rash. Foley placed drains scant concentrated urine.",
+  "vitals": {
+    "hr": 128,
+    "bp": "78/44",
+    "rr": 30,
+    "temp": 39.2,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "28.4 x10^9/L (neutrophilic, left shift)",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.9 mg/dL (baseline 0.9)",
+    "urea": "21 mmol/L",
+    "albumin": "2.4 g/dL",
+    "crp": "268 mg/L",
+    "potassium": "3.1 mmol/L",
+    "platelets": "96 x10^3/uL",
+    "stoolGDH": "positive",
+    "stoolToxinEIA": "toxin A/B positive",
+    "stoolNAAT": "tcdB gene detected"
+  },
+  "imaging": "CT abdomen/pelvis: diffuse pancolonic wall thickening with mucosal 'accordion' and thumbprinting, pericolonic stranding and colonic dilatation to 6.2 cm with early transverse-colon distension consistent with fulminant colitis / evolving toxic megacolon. No free air or discrete abscess.",
+  "microbiology": "Stool GDH antigen positive with confirmatory toxin A/B EIA positive and NAAT detecting toxin B (tcdB) gene — two-step algorithm confirms toxigenic C. difficile. Blood cultures x2 drawn and sterile at 48h; no alternative enteric pathogen isolated on culture/multiplex panel, allowing de-escalation of empiric broad-spectrum sepsis cover once CDI confirmed as the source.",
+  "differentialDiagnoses": [
+    "Fulminant Clostridioides difficile infection with septic shock and toxic megacolon (leading)",
+    "Invasive bacterial dysentery / other infective colitis",
+    "Acute severe inflammatory bowel disease flare",
+    "Non-CDI sepsis with hypoperfusion and ileus"
+  ],
+  "finalDiagnosis": "Fulminant Clostridioides difficile infection (pseudomembranous colitis) complicated by septic shock, vasopressor-dependent hypotension and acute kidney injury",
+  "citations": [
+    "IDSA/SHEA Clinical Practice Guideline for Clostridioides difficile Infection in Adults 2021 (focused update on fulminant CDI)",
+    "ACG Clinical Guideline: Prevention, Diagnosis and Treatment of C. difficile Infections 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Clostridioides difficile Infection, Including Pseudomembranous Colitis"
+  ],
+  "stewardship": "This is fulminant (severe-complicated) CDI defined by hypotension/shock, ileus and toxic megacolon. Immediately stop the inciting antibiotics (cephalosporin/fluoroquinolone) and the PPI where feasible. Per IDSA/SHEA 2021, first-line therapy for fulminant CDI is high-dose enteral vancomycin 500 mg PO/NG four times daily PLUS IV metronidazole 500 mg every 8 hours; because ileus limits luminal delivery, add vancomycin retention enema (500 mg in 100 mL saline PR q6h). Early surgical consultation for subtotal colectomy or diverting loop ileostomy with colonic lavage is mandated given megacolon, rising lactate and vasopressor need — source control is the decisive intervention. Empiric broad-spectrum sepsis cover started at presentation is de-escalated/stopped once toxigenic CDI is confirmed as the sole source and blood cultures remain negative, exemplifying pathogen-directed narrowing. Avoid anti-motility agents. Fidaxomicin is preferred in non-fulminant disease and for relapse but oral vancomycin remains the backbone in fulminant illness.",
+  "contraindications": [
+    "Do not use anti-motility/anti-peristaltic agents (loperamide, opioids) — precipitate toxic megacolon",
+    "Oral metronidazole monotherapy is inadequate for fulminant CDI",
+    "Avoid ongoing unnecessary broad-spectrum antibiotics/PPI that perpetuate dysbiosis",
+    "Avoid nephrotoxins and dose-adjust for AKI"
+  ],
+  "edgeCases": [
+    "Ileus can cause diarrhoea to cease deceptively while colitis worsens — falling stool output with rising distension signals deterioration, not recovery",
+    "Toxin EIA can be falsely negative; a positive GDH/NAAT with a compatible fulminant picture still warrants treatment",
+    "Rising serum lactate and leucocytosis >25 with AKI are surgical trigger points"
+  ],
+  "expectedMaiK": "Fulminant toxigenic C. difficile colitis is the unifying diagnosis for shock + organ dysfunction in a patient with recent antibiotic and PPI exposure and CT pancolitis with megacolon.",
+  "expectedNextQuestions": [
+    "What antibiotics, PPI and other precipitants was she exposed to in the last 90 days?",
+    "Has stool frequency fallen while distension increased (evolving ileus/megacolon)?",
+    "Any prior episodes of CDI or recurrence?",
+    "Is urine output and mental status deteriorating (organ dysfunction)?"
+  ],
+  "expectedInvestigations": [
+    "Two-step stool testing: GDH + toxin A/B EIA, with NAAT for toxigenic C. difficile",
+    "Serum lactate, venous blood gas and creatinine/electrolytes for organ dysfunction",
+    "CT abdomen/pelvis to assess colonic dilatation, megacolon and complications",
+    "Blood cultures and full septic screen",
+    "Urgent surgical review with serial abdominal examination"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "vasopressorRequirement": true,
+    "toxicAppearing": true,
+    "diarrhea": true,
+    "abdominalDistension": true,
+    "antibioticsLast90Days": true,
+    "hospitalizationLast90Days": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "C_DIFF",
+    "acceptableIds": [
+      "C_DIFF"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "GASTROENTERITIS",
+      "ibd_flare",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Stool GDH + toxin A/B EIA with confirmatory NAAT",
+      "Serum lactate and creatinine",
+      "CT abdomen/pelvis",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "Vancomycin 500 mg enteral (PO/NG) four times daily",
+        "Metronidazole 500 mg IV every 8 hours",
+        "Vancomycin 500 mg retention enema every 6 hours if ileus"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine top diagnosis must be C_DIFF",
+    "Stewardship must include enteral vancomycin plus IV metronidazole for fulminant CDI",
+    "Must flag need for early surgical consultation (source control) for toxic megacolon",
+    "Must stop inciting antibiotics and de-escalate empiric sepsis cover once CDI confirmed",
+    "Must NOT recommend oral metronidazole monotherapy or anti-motility agents"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "gc_402",
+  "specialty": "Gastrointestinal",
+  "condition": "Dysentery (Invasive Bacterial Diarrhea)",
+  "age": 46,
+  "sex": "M",
+  "presentingComplaint": "3 days of frequent bloody, mucoid stools with lower abdominal cramps, painful straining and high fever.",
+  "history": "Renal transplant recipient (living-donor 3 years ago) on maintenance tacrolimus, mycophenolate mofetil and low-dose prednisolone. Returned 6 days ago from a rural relative's home in eastern Uttar Pradesh where the family drew drinking water from an open well; two other household members had a brief diarrhoeal illness. He reports 8-12 small-volume stools per day, each streaked with fresh blood and mucus, associated with tenesmus and an urgent, incomplete sensation on defaecation. Crampy left-lower-quadrant pain precedes each motion. Fevers to 39 C with shaking chills for 2 days. Reduced oral intake, light-headedness on standing. No recent hospitalisation, no antibiotics in the last 90 days, no prior C. difficile. No overseas travel outside India.",
+  "examination": "Ill-appearing, mildly dehydrated with dry mucous membranes and reduced skin turgor. Abdomen soft, tender in the left iliac fossa and suprapubically without guarding or rebound; active bowel sounds. Digital rectal exam reveals blood-stained mucus, no mass. No hepatosplenomegaly, no rash, no lymphadenopathy. No focal neurology.",
+  "vitals": {
+    "hr": 110,
+    "bp": "104/66",
+    "rr": 20,
+    "temp": 39,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 13.2,
+    "wbc": "14.8 (left shift, band forms)",
+    "platelets": 240,
+    "creatinine": 1.6,
+    "urea": 9.8,
+    "sodium": 134,
+    "potassium": 3.4,
+    "crp": 128,
+    "lactate": 1.8,
+    "albumin": 3.6,
+    "stoolMicroscopy": "Numerous faecal leucocytes and red cells; no ova, cysts or trophozoites; no motile trophozoites of E. histolytica on fresh saline mount",
+    "stoolLactoferrin": "positive",
+    "tacrolimusTrough": "8.2 ng/mL"
+  },
+  "imaging": "Abdominal ultrasound: mild, diffuse wall thickening of the sigmoid/descending colon; no liver abscess, no free fluid, no obstruction.",
+  "microbiology": "Stool culture on selective media grows Shigella flexneri. Blood cultures x2 no growth at 48h. Stool C. difficile GDH/toxin EIA negative. Stool PCR panel positive for Shigella/EIEC, negative for Salmonella, Campylobacter, STEC, Entamoeba histolytica. Susceptibility (culture-directed, day 3): resistant to ampicillin and co-trimoxazole; intermediate to ciprofloxacin (raised MIC); SUSCEPTIBLE to ceftriaxone and to azithromycin.",
+  "differentialDiagnoses": [
+    "Non-invasive acute gastroenteritis / viral diarrhoea",
+    "Enteric (typhoid) fever",
+    "Clostridioides difficile infection",
+    "Amoebic colitis"
+  ],
+  "finalDiagnosis": "Invasive bacterial dysentery due to Shigella flexneri in an immunosuppressed (renal transplant) host, with dehydration and pre-renal impairment.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Shigellosis and Bacillary Dysentery",
+    "IDSA Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea 2017"
+  ],
+  "stewardship": "Invasive, febrile, bloody diarrhoea in a solid-organ-transplant recipient is an indication for empiric antimicrobial therapy (IDSA 2017): antibiotics shorten illness, reduce complications and limit prolonged Shigella shedding in the immunocompromised. Because bacillary dysentery in returning travellers/immunosuppressed hosts increasingly shows fluoroquinolone and co-trimoxazole resistance, empiric therapy is broad with IV ceftriaxone (also covering possible invasive non-typhoidal Salmonella / enteric fever until stool and blood cultures return). On day-3 culture the isolate is ciprofloxacin-intermediate but ceftriaxone- and azithromycin-susceptible: de-escalate/narrow to a targeted oral agent (azithromycin) to complete a course and step down from IV, avoiding the fluoroquinolone given the raised MIC. Rehydrate (oral/IV), correct hypokalaemia, avoid anti-motility agents (loperamide) in invasive dysentery, and check tacrolimus levels as azithromycin/diarrhoea can alter exposure. Total directed course 5 days (longer, e.g. 7-10 days, may be needed given immunosuppression).",
+  "contraindications": [
+    "Avoid loperamide / anti-motility agents in febrile invasive dysentery (risk of toxic megacolon and prolonged shedding)",
+    "Avoid empiric fluoroquinolone once ciprofloxacin MIC is raised (intermediate) — clinical failure risk",
+    "Dose-adjust and monitor for QT prolongation with azithromycin; watch tacrolimus interaction",
+    "Do not use anti-secretory/steroid escalation without excluding CMV colitis if not responding"
+  ],
+  "edgeCases": [
+    "If no clinical improvement by 48-72h, consider CMV colitis or superimposed amoebic colitis in the immunocompromised and perform colonoscopy/serology",
+    "Beware haemolytic-uraemic syndrome with Shiga-toxin producing organisms — antibiotics are relatively contraindicated if STEC confirmed (here STEC PCR negative, so treatment is appropriate)",
+    "Extraintestinal spread / bacteraemia is more likely in transplant recipients — persistent fever warrants repeat blood cultures"
+  ],
+  "expectedMaiK": "Febrile bloody diarrhoea with tenesmus, faecal leucocytes and a positive stool culture for Shigella flexneri in an immunosuppressed host = invasive bacterial dysentery requiring empiric broad cover (ceftriaxone) then culture-directed narrowing.",
+  "expectedNextQuestions": [
+    "Detailed travel, water source and sick-contact history?",
+    "Degree and net state of immunosuppression (agents, doses, recent changes)?",
+    "Any recent antibiotics, hospitalisation or C. difficile risk?",
+    "Volume status, urine output and features of dehydration?",
+    "Any focal neurology, abdominal distension or peritonism suggesting complication?"
+  ],
+  "expectedInvestigations": [
+    "Stool microscopy for leucocytes/RBCs and ova/cysts/parasites (wet mount for E. histolytica)",
+    "Stool culture with antimicrobial susceptibility",
+    "Stool multiplex PCR panel (Shigella/EIEC, Salmonella, Campylobacter, STEC, Entamoeba)",
+    "Stool C. difficile GDH + toxin EIA",
+    "Blood cultures, FBC, CRP, renal function and electrolytes, lactate"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "highFeverGI": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "immunocompromised": true,
+    "contaminatedFoodWaterExposure": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "DYSENTERY",
+    "acceptableIds": [
+      "DYSENTERY"
+    ],
+    "differentialIds": [
+      "GASTROENTERITIS",
+      "ENTERIC_FEVER",
+      "C_DIFF",
+      "AMOEBIC_LIVER_ABSCESS"
+    ],
+    "investigations": [
+      "Stool culture with susceptibility",
+      "Stool microscopy (leucocytes, ova/cysts/parasites)",
+      "Stool multiplex PCR enteric panel",
+      "Blood cultures",
+      "Renal function and electrolytes"
+    ],
+    "stewardship": {
+      "tier": "broad-empiric-then-narrow",
+      "antibiotics": [
+        "ceftriaxone",
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return DYSENTERY as top diagnosis for febrile bloody diarrhoea with tenesmus, faecal leucocytes and Shigella-positive stool culture",
+    "Must recommend empiric ceftriaxone with culture-directed de-escalation to azithromycin",
+    "Must flag avoidance of anti-motility agents in invasive dysentery",
+    "Must not down-triage antibiotics to purely supportive care given immunosuppressed host"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

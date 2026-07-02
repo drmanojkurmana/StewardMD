@@ -1,0 +1,119 @@
+{
+  "id": "gc_492",
+  "specialty": "Pulmonary / Vascular",
+  "condition": "Pulmonary embolism",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Sudden breathlessness and right-sided chest pain with a transient collapse",
+  "history": "A 58-year-old man presented to the emergency department after a witnessed syncopal episode while walking to the bathroom that morning. For two days he had noticed progressive breathlessness and a sharp right-sided chest pain that was worse on deep inspiration. He returned four days ago from a 9-hour long-haul flight and had spent the preceding week largely immobile after a right knee arthroscopy. On the way to hospital he complained of central chest tightness radiating to the left arm, and the paramedic ECG showed anterior T-wave inversion, prompting a working diagnosis of acute coronary syndrome and administration of aspirin. He has hypertension on amlodipine, is an ex-smoker (20 pack-years), and has no prior cardiac history. He denies fever, cough or sputum. He noticed the right calf had become swollen and tender over the last three days.",
+  "examination": "Alert but anxious and clammy, speaking in short sentences. Peripherally cool. Elevated JVP with a prominent 'a' wave and a loud pulmonary component of the second heart sound; a soft parasternal heave is palpable. Chest is clear to auscultation with no crepitations and equal air entry. Abdomen soft. Right calf is swollen with a 3.5 cm difference in circumference compared with the left, warm and tender along the deep venous line, with a positive Homans sign. No focal neurology.",
+  "vitals": {
+    "hr": 118,
+    "bp": "94/62",
+    "rr": 30,
+    "temp": 37.2,
+    "spo2": 88
+  },
+  "labs": {
+    "hemoglobin": 14.2,
+    "wbc": 10.8,
+    "platelets": 236,
+    "creatinine": 1.1,
+    "sodium": 138,
+    "potassium": 4.2,
+    "dDimer_ngmL_FEU": 4200,
+    "troponinT_hs_ngL": 68,
+    "ntProBNP_pgmL": 1980,
+    "lactate_mmolL": 2.4,
+    "abg": "pH 7.47, PaO2 8.1 kPa on room air, PaCO2 3.9 kPa, HCO3 22 (hypoxaemia with respiratory alkalosis)"
+  },
+  "imaging": "ECG: sinus tachycardia with S1Q3T3 pattern, incomplete RBBB and T-wave inversion in V1-V4 (right precordial), no ST elevation. CTPA: large filling defects in the right main and lobar pulmonary arteries extending into segmental branches, with RV:LV diameter ratio 1.3, straightening of the interventricular septum and contrast reflux into the IVC, consistent with acute pulmonary embolism and right heart strain. Bedside echocardiography: dilated hypokinetic right ventricle with McConnell sign and TAPSE 14 mm; normal LV wall motion. Compression ultrasound of the right leg: non-compressible popliteal vein confirming proximal DVT.",
+  "microbiology": "Not applicable — no infective focus; blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (raised by anterior T-wave inversion, troponin elevation and radiating chest tightness — but coronary territory changes are explained by RV strain and normal LV on echo)",
+    "Acute aortic dissection (chest pain with hypotension — excluded by CTPA showing normal aorta and clear PA filling defects)",
+    "Acute heart failure / cardiogenic shock",
+    "Spontaneous pneumothorax"
+  ],
+  "finalDiagnosis": "Acute intermediate-high-risk pulmonary embolism with right ventricular strain, provoked by recent surgery, immobility and long-haul travel; concurrent troponin rise and anterior T-wave inversion mimic ACS.",
+  "citations": [
+    "ESC — Acute Pulmonary Embolism (Diagnosis and Management) — 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism"
+  ],
+  "stewardship": "Non-infective diagnosis — no antimicrobials indicated. Antithrombotic stewardship applies: start therapeutic anticoagulation without delay while confirming the diagnosis (LMWH or a factor Xa inhibitor). This is intermediate-high risk (RV dysfunction plus troponin elevation) but not overt haemodynamic collapse, so systemic thrombolysis is NOT given up front — monitor on a high-dependency/ICU bed for haemodynamic deterioration and reserve reperfusion (systemic thrombolysis or catheter-directed therapy) for rescue if hypotension/shock develops. Avoid unnecessary antibiotics despite the acute febrile-appearing presentation.",
+  "contraindications": [
+    "Systemic thrombolysis contraindicated if active bleeding, recent surgery (note recent knee arthroscopy — relative contraindication), recent stroke or intracranial pathology",
+    "Avoid DOACs in severe renal impairment (CrCl <15) and in significant hepatic impairment with coagulopathy",
+    "Do not delay anticoagulation waiting for CTPA when clinical probability is high and no bleeding risk"
+  ],
+  "edgeCases": [
+    "Troponin and anterior T-wave inversion misdirecting to ACS and cath lab activation, delaying anticoagulation",
+    "Hypotension progressing to obstructive shock, converting intermediate-high to high-risk PE requiring reperfusion",
+    "Syncope as the sole presenting feature of PE with minimal respiratory symptoms"
+  ],
+  "expectedMaiK": "Recognise acute PE with right ventricular strain (intermediate-high risk) despite an ACS-like ECG and troponin rise; confirm with CTPA, start immediate therapeutic anticoagulation, and monitor for haemodynamic deterioration rather than reflexively thrombolysing or treating as ACS.",
+  "expectedNextQuestions": [
+    "Any recent surgery, immobilisation, long-haul travel, malignancy or prior VTE?",
+    "Is there unilateral leg swelling or calf pain suggesting DVT?",
+    "Any bleeding, recent stroke or contraindications to anticoagulation/thrombolysis?",
+    "Is the patient haemodynamically stable, or is systolic BP falling / lactate rising?"
+  ],
+  "expectedInvestigations": [
+    "CT pulmonary angiography (CTPA)",
+    "12-lead ECG",
+    "High-sensitivity troponin and NT-proBNP",
+    "Bedside transthoracic echocardiography for RV strain",
+    "Lower-limb compression ultrasound",
+    "Arterial blood gas and lactate"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "chestPain": true,
+    "syncope": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "ecgIschemia": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "pe",
+    "acceptableIds": [
+      "pe"
+    ],
+    "differentialIds": [
+      "acs",
+      "aortic_dissection",
+      "heart_failure",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "CT pulmonary angiography",
+      "ECG",
+      "High-sensitivity troponin",
+      "NT-proBNP",
+      "Bedside echocardiography (RV strain)",
+      "Lower-limb compression ultrasound",
+      "Arterial blood gas / lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be pe (pulmonary embolism), not acs despite anterior T-wave inversion and troponin rise",
+    "No antibiotics should be recommended (infective:false)",
+    "Management must include immediate therapeutic anticoagulation",
+    "Intermediate-high risk PE: systemic thrombolysis withheld up front, reserved for haemodynamic deterioration",
+    "CTPA must be listed as the confirmatory investigation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

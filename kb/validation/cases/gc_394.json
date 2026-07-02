@@ -1,0 +1,123 @@
+{
+  "id": "gc_394",
+  "specialty": "Genitourinary",
+  "condition": "Complicated Urinary Tract Infection",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "High fever with rigors, burning micturition and worsening left loin pain for 3 days, now drowsy with cold clammy peripheries for 6 hours.",
+  "history": "Type 2 diabetic (18 years, HbA1c 8.9%) with long-standing benign prostatic obstruction and a post-void residual of ~180 mL on prior scans. Two episodes of febrile UTI in the past year; a urine culture 4 months ago grew an ESBL-producing E. coli treated with a course of oral fosfomycin. No indwelling catheter. Over 3 days he developed dysuria, frequency and left flank pain with rigors; today the family found him confused, with reduced urine output and cool mottled limbs, prompting emergency presentation.",
+  "examination": "Toxic, drowsy but rousable (GCS 14). Warm-to-cool peripheries with delayed capillary refill (4 s), mottled knees. Marked left costovertebral-angle tenderness. Suprapubic fullness, palpable bladder; per-rectal exam shows a smoothly enlarged, non-tender prostate. Chest clear, abdomen otherwise soft. No rash.",
+  "vitals": {
+    "hr": 124,
+    "bp": "80/46",
+    "rr": 28,
+    "temp": 39.5,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "19.8 x10^9/L (neutrophilia, left shift)",
+    "crp": "268 mg/L",
+    "procalcitonin": "22 ng/mL",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.4 mg/dL (baseline 1.0)",
+    "urea": "18.5 mmol/L",
+    "platelets": "96 x10^3/uL",
+    "bilirubin": "1.9 mg/dL",
+    "inr": "1.4",
+    "glucose": "16.8 mmol/L",
+    "urinalysis": "leucocyte esterase +++, nitrite positive, >100 WBC/hpf, many bacteria",
+    "abg": "pH 7.29, HCO3 16, base deficit -8"
+  },
+  "imaging": "Bedside/renal ultrasound: mild left pelvicalyceal dilatation, no obstructing calculus; grossly trabeculated bladder with 190 mL post-void residual and enlarged prostate. CT KUB (after stabilisation): left-sided perinephric fat stranding consistent with pyelonephritis in a functionally obstructed lower tract; no abscess or emphysematous change.",
+  "microbiology": "Two sets of blood cultures and a catheter-obtained urine culture sent before antibiotics. Urine and one blood culture set grew Escherichia coli >10^5 CFU/mL; sensitivities returned at 48 h: ESBL-producer, resistant to ceftriaxone, ciprofloxacin and co-trimoxazole; susceptible to meropenem, ertapenem, amikacin and nitrofurantoin (urine only).",
+  "differentialDiagnoses": [
+    "Complicated UTI / urosepsis with septic shock (obstructive uropathy + diabetes)",
+    "Acute pyelonephritis",
+    "Acute bacterial prostatitis",
+    "Undifferentiated sepsis from another source"
+  ],
+  "finalDiagnosis": "Complicated urinary tract infection (obstructive uropathy and diabetes) with ESBL E. coli bacteraemic urosepsis and septic shock",
+  "citations": [
+    "European Association of Urology (EAU) — Urological Infections — 2023",
+    "Surviving Sepsis Campaign — Sepsis and Septic Shock — 2021",
+    "Harrison's Principles of Internal Medicine 22e — Urinary Tract Infections and Pyelonephritis"
+  ],
+  "stewardship": "This is a complicated UTI with septic shock and organ dysfunction in a host with a documented prior ESBL E. coli — the highest-risk category. After two blood cultures and a urine culture, give a broad empiric carbapenem (meropenem 1 g IV 8-hourly, renally dose-adjusted) within the first hour alongside 30 mL/kg balanced crystalloid and early noradrenaline to maintain MAP >=65 mmHg; a carbapenem is guideline-concordant empiric cover here because prior ESBL colonisation plus septic shock makes beta-lactam/beta-lactamase-inhibitor cover unreliable. Source control is central: relieve lower-tract obstruction with a urethral/suprapubic catheter and ensure the mildly obstructed upper tract drains. Once susceptibilities confirm a carbapenem-susceptible ESBL E. coli at 48 h and the patient is off vasopressors and improving, de-escalate from meropenem to ertapenem 1 g IV once daily to complete a 10-14 day course for complicated UTI, reserving broader agents. Avoid nitrofurantoin (no tissue/bloodstream cover) and fluoroquinolones (resistant, plus tendinopathy/QT risk).",
+  "contraindications": [
+    "Nitrofurantoin inappropriate for pyelonephritis/bacteraemia and contraindicated at eGFR-reducing AKI",
+    "Fluoroquinolones inappropriate given documented resistance and adverse-effect profile",
+    "Nephrotoxin exposure (NSAIDs, contrast without hydration) to be minimised during AKI",
+    "Metformin should be held during AKI and lactic acidosis"
+  ],
+  "edgeCases": [
+    "If ultrasound had shown hydronephrosis with an obstructing stone, emergency decompression (ureteric stent/nephrostomy) would take priority over antibiotic choice",
+    "Emphysematous pyelonephritis in a poorly controlled diabetic can mimic this and needs urgent CT and possible drainage/nephrectomy",
+    "Persistent bacteraemia or failure to improve at 72 h should prompt search for renal/prostatic abscess"
+  ],
+  "expectedMaiK": "Complicated UTI with septic shock in a diabetic with obstructive uropathy and prior ESBL warrants immediate cultures, empiric carbapenem cover, sepsis resuscitation and source control, then culture-directed de-escalation to ertapenem.",
+  "expectedNextQuestions": [
+    "Any indwelling catheter, recent instrumentation or stones?",
+    "Details of the prior ESBL organism and its susceptibilities?",
+    "Urine output over the last 12 hours and fluid already given?",
+    "Recent antibiotic exposure and drug allergies?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures plus urine culture before antibiotics",
+    "Serum lactate and venous/arterial blood gas",
+    "Renal function, electrolytes, FBC, LFTs, coagulation, procalcitonin",
+    "Renal tract ultrasound (obstruction) with CT KUB if not resolving",
+    "Post-void residual / bladder scan"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "dysuria": true,
+    "flankPain": true,
+    "feverGU": true,
+    "complicatedUTIRisk": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "vasopressorRequirement": true,
+    "esblHistory": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "COMPLICATED_UTI",
+    "acceptableIds": [
+      "COMPLICATED_UTI"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "CA_UTI",
+      "PROSTATITIS",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Blood cultures x2 and urine culture before antibiotics",
+      "Serum lactate and ABG",
+      "Renal function and electrolytes",
+      "Renal tract ultrasound and post-void residual"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Meropenem",
+        "Ertapenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine top diagnosis is COMPLICATED_UTI",
+    "Recognises septic shock (hypotension + lactate + vasopressor need) with organ dysfunction (AKI, thrombocytopenia)",
+    "Recommends blood and urine cultures before empiric antibiotics",
+    "Empiric cover is a carbapenem given prior ESBL plus septic shock",
+    "De-escalates from meropenem to ertapenem once ESBL E. coli susceptibilities return",
+    "Includes source control of lower-tract obstruction"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

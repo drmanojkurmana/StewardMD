@@ -1,0 +1,115 @@
+{
+  "id": "gc_429",
+  "specialty": "Respiratory",
+  "condition": "Upper Respiratory Tract Infection (common cold)",
+  "age": 46,
+  "sex": "F",
+  "presentingComplaint": "Three days of nasal congestion, runny nose, sneezing and a scratchy sore throat, with a mild low-grade temperature, in a patient on maintenance chemotherapy.",
+  "history": "46-year-old woman receiving maintenance chemotherapy for follicular non-Hodgkin lymphoma (last cycle 12 days ago). She developed progressive coryza, profuse clear rhinorrhoea, sneezing, nasal stuffiness and a mildly sore, scratchy throat over three days, alongside a mild dry cough and low-grade fever to 37.8 C. Her 8-year-old son had an identical head-cold the week before. She denies dyspnoea, pleuritic pain, purulent sputum, ear pain or sinus pressure. Because she is immunosuppressed, the on-call oncology service brought her in and, per neutropenic-precaution protocol, drew cultures and started empiric broad-spectrum IV cefepime while awaiting counts and a respiratory viral panel. Over the next 24 hours she remained haemodynamically stable, defervesced, and her symptoms stayed confined to the upper airway. No recent travel, no TB contact, no diarrhoea.",
+  "examination": "Comfortable, not toxic. Boggy oedematous nasal mucosa with clear discharge, mild pharyngeal erythema without tonsillar exudate, and small mildly tender anterior cervical nodes. Chest clear with good air entry and no crepitations. No sinus tenderness, no ear signs, no rash. Cardiovascular and abdominal exam unremarkable; no focal source of sepsis.",
+  "vitals": {
+    "hr": 90,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "3.2 x10^9/L",
+    "ANC": "1100 /uL (recovered from nadir 700 at presentation)",
+    "hemoglobin": "10.8 g/dL",
+    "platelets": "182 x10^9/L",
+    "CRP": "16 mg/L (mildly raised)",
+    "procalcitonin": "0.06 ng/mL (low, argues against bacterial infection)",
+    "creatinine": "0.8 mg/dL",
+    "lactate": "1.1 mmol/L"
+  },
+  "imaging": "Chest X-ray: clear lung fields, no consolidation or effusion. No paranasal sinus imaging indicated.",
+  "microbiology": "Respiratory multiplex PCR from nasopharyngeal swab: rhinovirus/enterovirus detected; influenza A/B, RSV and SARS-CoV-2 not detected. Two sets of blood cultures at 48 h: no growth. Urinalysis clear.",
+  "differentialDiagnoses": [
+    "Viral upper respiratory tract infection (common cold) — dominant coryzal picture, positive rhinovirus PCR, self-limiting",
+    "Acute pharyngitis — sore throat present but no exudate and Centor-low, viral pattern",
+    "Acute rhinosinusitis — no facial pain, no symptoms >10 days, no double-sickening",
+    "Early community-acquired pneumonia — excluded by clear chest and normal CXR",
+    "Febrile neutropenia — considered given host and prompted empiric cover, but ANC recovering, no bacterial source and negative cultures"
+  ],
+  "finalDiagnosis": "Viral upper respiratory tract infection (common cold) due to rhinovirus in an immunocompromised host; empiric antibacterials appropriately de-escalated and stopped once bacterial infection was excluded.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — The Common Cold / Viral Respiratory Infections",
+    "ACP/CDC — Appropriate Antibiotic Use for Acute Respiratory Tract Infection in Adults — 2016",
+    "IDSA — Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer — 2010"
+  ],
+  "stewardship": "The common cold is viral and self-limiting; antibiotics are not indicated and provide no benefit. In this immunocompromised patient, a low threshold for empiric broad-spectrum cover (cefepime) at presentation was reasonable while febrile neutropenia was being excluded, but the priority is prompt de-escalation. With ANC recovering above 500, haemodynamic stability, a low procalcitonin, negative blood cultures at 48 h, a clear chest and a positive rhinovirus PCR, the bacterial workup is negative and the empiric antibiotic should be stopped. Management is supportive: hydration, analgesia/antipyretics, saline nasal care, safety-netting for secondary bacterial complications, and continued neutropenic precautions.",
+  "contraindications": [
+    "Do not continue or add antibiotics for an uncomplicated viral URTI once bacterial infection is excluded",
+    "Avoid nephrotoxic combinations; review renal dosing of any empiric agent",
+    "Avoid NSAIDs if platelets fall or gastric/renal risk; prefer paracetamol for symptom relief"
+  ],
+  "edgeCases": [
+    "If fever recurs while ANC <500, manage as febrile neutropenia with sustained empiric antipseudomonal cover",
+    "Secondary bacterial sinusitis or pneumonia (double-sickening, new focal signs, rising procalcitonin) would change management",
+    "If influenza or RSV had been detected, directed antiviral therapy (e.g. oseltamivir) rather than antibacterials would be indicated"
+  ],
+  "expectedMaiK": "A viral common cold in an immunocompromised host: broad empiric antibacterial cover started for neutropenic precautions must be de-escalated and stopped once counts recover, cultures are negative and a viral cause is confirmed; treatment is supportive, not antibiotic.",
+  "expectedNextQuestions": [
+    "What is the ANC trend and when was the chemotherapy nadir expected?",
+    "Are there any sick contacts or a coryzal illness in the household?",
+    "Any localising features of sinusitis, otitis, or lower-tract involvement (facial pain, ear pain, dyspnoea, purulent sputum)?",
+    "Has an empiric antibiotic already been started, and can it now be stopped?"
+  ],
+  "expectedInvestigations": [
+    "Nasopharyngeal respiratory viral multiplex PCR",
+    "Full blood count with differential / ANC",
+    "Blood cultures (x2) before/at empiric antibiotics",
+    "CRP and procalcitonin",
+    "Chest X-ray to exclude lower respiratory tract involvement"
+  ],
+  "expectedConfidence": 0.72,
+  "findings": {
+    "coryza": true,
+    "nasalCongestion": true,
+    "soreThroat": true,
+    "coughRadio": true,
+    "tenderCervicalNodes": true,
+    "fever": true,
+    "immunocompromised": true,
+    "neutropenia": true,
+    "clinicallyImproving": true
+  },
+  "expected": {
+    "diagnosis": "URTI",
+    "acceptableIds": [
+      "URTI"
+    ],
+    "differentialIds": [
+      "PHARYNGITIS",
+      "SINUSITIS",
+      "CAP",
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "investigations": [
+      "Nasopharyngeal respiratory viral multiplex PCR",
+      "Full blood count with differential / ANC",
+      "Blood cultures x2",
+      "CRP and procalcitonin",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Cefepime"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine should return URTI as the top diagnosis",
+    "Should recognise the illness as viral and self-limiting, requiring no antibiotics for the URTI itself",
+    "Should recommend de-escalation/stopping empiric antibiotics once ANC recovers, cultures are negative and viral PCR is positive",
+    "Should not escalate to sustained antibacterial therapy in the absence of a bacterial source",
+    "Differential should include pharyngitis, sinusitis, CAP and febrile neutropenia"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

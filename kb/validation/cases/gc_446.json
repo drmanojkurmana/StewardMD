@@ -1,0 +1,121 @@
+{
+  "id": "gc_446",
+  "specialty": "Surgical / GI",
+  "condition": "Bowel obstruction",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Two days of colicky central abdominal pain, progressive distension, bilious vomiting and absolute constipation.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B) with recurrent ascites, on spironolactone and furosemide, and an untreated umbilical hernia. Over 48h he developed cramping peri-umbilical pain in waves, several episodes of bilious then feculent-smelling vomiting, and has passed neither flatus nor stool for a day. He reports his abdomen is 'more tense than my usual ascites'. Prior open cholecystectomy 6 years ago. The clinical picture is confounded by his baseline abdominal distension from ascites and by mild background confusion, raising the question of decompensated liver disease, but the cardinal features here are colicky pain, vomiting and obstipation.",
+  "examination": "Uncomfortable, mildly dehydrated. Abdomen distended and tympanitic with visible peristalsis; tender peri-umbilically. A tense, tender, non-reducible umbilical hernia is palpable. High-pitched 'tinkling' bowel sounds. Shifting dullness consistent with known ascites but a disproportionately tense, resonant upper abdomen. No guarding or rebound. No asterixis at rest; PR shows an empty rectum.",
+  "vitals": {
+    "hr": 106,
+    "bp": "110/72",
+    "rr": 20,
+    "temp": 37.2,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 11.8,
+    "wbc": 9.2,
+    "platelets": 96,
+    "sodium": 131,
+    "potassium": 3.2,
+    "urea": 11.5,
+    "creatinine": 1.4,
+    "bilirubin": 2.6,
+    "albumin": 2.8,
+    "inr": 1.4,
+    "lactate": 2.1,
+    "crp": 22,
+    "vbg": "metabolic alkalosis from vomiting; pH 7.48, HCO3 32"
+  },
+  "imaging": "Erect abdominal/chest film: multiple dilated central small-bowel loops with valvulae conniventes and air-fluid levels, no free sub-diaphragmatic air. CT abdomen/pelvis with contrast: dilated fluid-filled small-bowel loops to a transition point at the neck of the umbilical hernia containing a loop of small bowel, collapsed distal bowel, and moderate ascites; bowel wall enhances normally with no pneumatosis or portal venous gas (no strangulation).",
+  "microbiology": "Not applicable — no infective source; ascitic fluid tap (to exclude concurrent SBP) shows PMN <250/mm³.",
+  "differentialDiagnoses": [
+    "Mechanical small-bowel obstruction from incarcerated umbilical hernia / adhesions (working diagnosis)",
+    "Decompensated cirrhosis with tense ascites (confounder — but does not explain obstipation, vomiting and dilated loops with air-fluid levels)",
+    "Acute mesenteric ischaemia (excluded by normal lactate, enhancing bowel, no pneumatosis)",
+    "Acute pancreatitis",
+    "Biliary colic"
+  ],
+  "finalDiagnosis": "Mechanical small-bowel obstruction secondary to an incarcerated umbilical hernia, in a patient with alcohol-related cirrhosis and ascites.",
+  "citations": [
+    "World Society of Emergency Surgery (WSES) — Adhesive Small Bowel Obstruction, Bologna Guidelines — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Intestinal Obstruction / Acute Abdomen"
+  ],
+  "stewardship": "No antibiotics indicated for uncomplicated mechanical obstruction. Management is supportive and surgical: NG-tube decompression, correct hypokalaemic hypochloraemic alkalosis and volume/electrolyte deficits, and urgent surgical review for hernia reduction/repair. Antibiotics would only be warranted if strangulation, perforation or concurrent SBP were demonstrated.",
+  "contraindications": [
+    "Avoid prokinetics — contraindicated in mechanical obstruction",
+    "Cautious opioid analgesia given hepatic impairment; avoid benzodiazepines that may precipitate encephalopathy",
+    "Aggressive diuresis inappropriate while volume-deplete from vomiting",
+    "Correct coagulopathy/thrombocytopenia before any operative intervention"
+  ],
+  "edgeCases": [
+    "Baseline ascites masks the disproportionate obstructive distension",
+    "Mild confusion may be mis-attributed to hepatic encephalopathy rather than dehydration/obstruction",
+    "Feculent vomiting is a late marker of distal/prolonged obstruction",
+    "A tense, tender, non-reducible hernia mandates urgent surgical review to exclude strangulation"
+  ],
+  "expectedMaiK": "Recognise mechanical small-bowel obstruction (colicky pain + vomiting + obstipation + distension + dilated loops with air-fluid levels) with an incarcerated umbilical hernia as the transition point; initiate NG decompression, IV fluid/electrolyte resuscitation and urgent surgical referral rather than treating the cirrhosis/ascites as the primary problem.",
+  "expectedNextQuestions": [
+    "When did the patient last pass flatus or stool?",
+    "Any previous abdominal surgery or known hernia?",
+    "Is the vomiting bilious or feculent, and what is its volume?",
+    "Is the hernia reducible, and is there overlying skin change or exquisite tenderness suggesting strangulation?",
+    "Any fever, peritonism or rising lactate suggesting compromised bowel?"
+  ],
+  "expectedInvestigations": [
+    "Erect chest and supine/erect abdominal X-ray",
+    "CT abdomen/pelvis with IV contrast to define level, cause and viability",
+    "Serum lactate and venous blood gas",
+    "Urea, electrolytes and creatinine",
+    "FBC, LFTs, coagulation profile",
+    "Diagnostic ascitic tap to exclude concurrent SBP"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "liverDisease": true,
+    "ascites": true,
+    "dehydration": true,
+    "tachycardia": true,
+    "jaundice": true
+  },
+  "expected": {
+    "diagnosis": "bowel_obstruction",
+    "acceptableIds": [
+      "bowel_obstruction"
+    ],
+    "differentialIds": [
+      "mesenteric_ischemia",
+      "decomp_cirrhosis",
+      "pancreatitis",
+      "biliary_colic"
+    ],
+    "investigations": [
+      "Erect chest and abdominal X-ray",
+      "CT abdomen/pelvis with IV contrast",
+      "Serum lactate / venous blood gas",
+      "Urea, electrolytes and creatinine",
+      "Diagnostic ascitic tap to exclude SBP"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must identify mechanical bowel obstruction, not decompensated cirrhosis/ascites, as the primary diagnosis despite the confounding liver disease.",
+    "Must not recommend antibiotics for uncomplicated mechanical obstruction (tier null, empty antibiotic list).",
+    "Must recommend CT abdomen/pelvis to define the transition point and exclude strangulation/mesenteric ischaemia.",
+    "Must prioritise NG decompression, fluid/electrolyte correction and urgent surgical review.",
+    "Must not recommend prokinetics in mechanical obstruction."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

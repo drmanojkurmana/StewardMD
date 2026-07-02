@@ -1,0 +1,122 @@
+{
+  "id": "gc_441",
+  "specialty": "Vascular emergency",
+  "condition": "Aortic dissection",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe tearing chest pain radiating to the back, with reduced urine output over the last few hours",
+  "history": "A 64-year-old man with a 15-year history of poorly controlled hypertension, type 2 diabetes mellitus on metformin and glimepiride, and stage 3b chronic kidney disease (baseline creatinine 1.9 mg/dL) presented with abrupt onset of severe, tearing anterior chest pain that migrated to the interscapular region and then to the lower back over 30 minutes. He had a brief syncopal episode at onset. Over the subsequent 4 hours he passed only a small volume of urine. He denied fever, cough or diarrhoea. The combination of longstanding diabetes and CKD initially prompted consideration of a cardiac/renal picture, but the migratory tearing pain, the syncope and the pulse/BP asymmetry pointed to an aortic catastrophe. He is an ex-smoker (30 pack-years). Regular drugs: amlodipine, telmisartan, atorvastatin, metformin, glimepiride, aspirin.",
+  "examination": "Anxious, diaphoretic and in obvious distress but alert (GCS 15). Blood pressure markedly asymmetric between arms: 182/104 mmHg in the right arm versus 126/72 mmHg in the left. Radial pulse volume reduced on the left. A soft early diastolic murmur is audible at the left sternal edge consistent with new aortic regurgitation. Chest clear, no crepitations. Abdomen soft, no pulsatile mass palpable, mild generalised tenderness. Peripheries cool; capillary refill 3 seconds. No focal limb weakness. No rash.",
+  "vitals": {
+    "hr": 104,
+    "bp": "182/104 (right arm)",
+    "rr": 22,
+    "temp": 37,
+    "spo2": 96
+  },
+  "labs": {
+    "creatinine": 3.4,
+    "urea": 18.5,
+    "hemoglobin": 12.1,
+    "platelets": 210,
+    "dDimer": "markedly elevated (>4000 ng/mL)",
+    "troponin": "mildly elevated (demand)",
+    "lactate": 2.8,
+    "potassium": 5.1,
+    "hba1c": 8.6,
+    "baselineCreatinine": 1.9
+  },
+  "imaging": "CT aortic angiogram: intimal flap extending from the ascending aorta (proximal to the brachiocephalic origin) through the arch into the descending thoracic and abdominal aorta — Stanford type A / DeBakey type I. The false lumen compromises the origin of the left renal artery with delayed left nephrogram (renal malperfusion). Small pericardial effusion, no tamponade. Left subclavian origin partially involved, correlating with the arm BP differential.",
+  "microbiology": "Not applicable — non-infective vascular emergency; blood cultures sent as part of shock workup returned no growth.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome",
+    "Pulmonary embolism",
+    "Ruptured/symptomatic abdominal aortic aneurysm",
+    "Cardiac tamponade"
+  ],
+  "finalDiagnosis": "Acute Stanford type A aortic dissection with renal malperfusion (acute-on-chronic kidney injury) and new aortic regurgitation, in a patient with CKD and diabetes",
+  "citations": [
+    "ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease 2022",
+    "ESC Guidelines on the Diagnosis and Treatment of Aortic Diseases 2014",
+    "Harrison's Principles of Internal Medicine 22e — Diseases of the Aorta"
+  ],
+  "stewardship": "Not applicable — aortic dissection is a non-infective vascular emergency; no antibiotics indicated. Empiric antibiotics would be inappropriate and the diabetes/CKD comorbidity must not misdirect toward an infective sepsis label.",
+  "contraindications": [
+    "Thrombolysis (would be catastrophic if misdiagnosed as STEMI/PE)",
+    "Iodinated contrast caution given CKD — but CT angiography is still mandatory and should not be withheld",
+    "Avoid pure vasodilators (hydralazine, nitroprusside) before rate control, as reflex tachycardia increases aortic wall shear stress",
+    "Therapeutic anticoagulation"
+  ],
+  "edgeCases": [
+    "Painless dissection presenting only as syncope or acute kidney injury",
+    "BP differential masked if the dominant arm is the malperfused side",
+    "Demand troponin rise and ECG changes falsely suggesting ACS",
+    "Renal malperfusion mistaken for contrast nephropathy or diabetic-nephropathy progression"
+  ],
+  "expectedMaiK": "Recognise acute aortic dissection: obtain urgent CT aortic angiogram, initiate impulse (anti-shear) control targeting heart rate <60/min and SBP 100-120 mmHg with IV beta-blockade (labetalol or esmolol) BEFORE any vasodilator, provide analgesia, and make an emergency cardiothoracic surgical referral — Stanford type A requires immediate surgery.",
+  "expectedNextQuestions": [
+    "Is the pain migratory or tearing in quality, and where did it radiate?",
+    "Was there syncope or a focal neurological deficit at onset?",
+    "Is there a blood pressure or pulse differential between the two arms?",
+    "What is the baseline renal function and is urine output falling (malperfusion)?",
+    "Any history of hypertension, connective tissue disease or prior aortic imaging?"
+  ],
+  "expectedInvestigations": [
+    "CT aortic angiogram (whole aorta)",
+    "12-lead ECG",
+    "Bilateral arm blood pressures",
+    "Troponin",
+    "Serum creatinine/urea and urine output monitoring",
+    "Transthoracic/transoesophageal echocardiography for aortic regurgitation and pericardial effusion",
+    "Group and save / crossmatch"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "chestPain": true,
+    "backPain": true,
+    "syncope": true,
+    "newMurmur": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "aortic_dissection",
+    "acceptableIds": [
+      "aortic_dissection"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "aaa",
+      "tamponade"
+    ],
+    "investigations": [
+      "CT aortic angiogram",
+      "12-lead ECG",
+      "bilateral arm blood pressures",
+      "troponin",
+      "echocardiography",
+      "serum creatinine and urine output"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank aortic_dissection as the leading diagnosis",
+    "Must not recommend any antibiotics (non-infective)",
+    "Must prioritise CT aortic angiography over troponin-driven ACS pathway",
+    "Must recommend impulse/anti-shear control (IV beta-blockade, SBP 100-120, HR<60) before vasodilators",
+    "Must flag type A dissection as an emergency surgical referral",
+    "Must not attribute the acute kidney injury solely to CKD/diabetes and must recognise renal malperfusion"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

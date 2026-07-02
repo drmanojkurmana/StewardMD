@@ -1,0 +1,112 @@
+{
+  "id": "gc_417",
+  "specialty": "Respiratory",
+  "condition": "Acute Pharyngitis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Three days of severe sore throat, painful swallowing and fever in a renal transplant recipient.",
+  "history": "A 34-year-old woman, 14 months post live-related renal transplant, maintained on tacrolimus, mycophenolate mofetil and prednisolone 7.5 mg daily, presents with a 3-day history of rapidly worsening sore throat, odynophagia and fever peaking at 39°C with associated rigors. She denies cough, coryza, nasal congestion or hoarseness. Her school-aged son had a sore throat the previous week. No dysphagia to the point of drooling, no trismus, no neck swelling and no respiratory distress. She has been unable to eat solids for a day because of throat pain but is tolerating sips. No prior antibiotics in the last 90 days. She is anxious about her immunosuppression and attended early. Graft function has been stable.",
+  "examination": "Unwell, flushed and febrile but not in respiratory distress and no stridor. Oropharynx shows markedly erythematous tonsils with bilateral confluent white-yellow exudate; no unilateral bulge, uvular deviation or trismus to suggest a peritonsillar abscess. Tender, enlarged anterior cervical lymph nodes bilaterally. No cough during examination. Chest clear, no crepitations. Abdomen soft, graft non-tender. No rash, no oral ulceration or mucositis elsewhere, no conjunctival injection.",
+  "vitals": {
+    "hr": 106,
+    "bp": "116/72",
+    "rr": 18,
+    "temp": 38.9,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "9.8 x10^9/L",
+    "neutrophils": "6.9 x10^9/L (ANC not neutropenic)",
+    "lymphocytes": "1.2 x10^9/L",
+    "crp": "72 mg/L",
+    "creatinine": "1.1 mg/dL (baseline 1.0)",
+    "tacrolimusTrough": "6.4 ng/mL (therapeutic)",
+    "rapidAntigenDetectionTest": "positive for Group A Streptococcus",
+    "monospot": "negative",
+    "ebvSerology": "past infection, not acute"
+  },
+  "imaging": "Not routinely indicated; lateral soft-tissue neck film not performed as no features of deep-space infection or airway compromise.",
+  "microbiology": "Rapid antigen detection test positive for Group A Streptococcus (Streptococcus pyogenes). Throat swab culture subsequently confirmed heavy growth of beta-haemolytic group A Streptococcus, penicillin-susceptible. Blood cultures (sent given immunosuppression) sterile at 48h.",
+  "finalDiagnosis": "Acute streptococcal (Group A) pharyngitis in an immunosuppressed renal transplant recipient",
+  "differentialDiagnoses": [
+    "Viral upper respiratory tract infection / viral pharyngitis",
+    "Infectious mononucleosis (EBV) — excluded by negative Monospot and EBV serology",
+    "Emerging febrile neutropenia / opportunistic mucosal infection given immunosuppression",
+    "Early community-acquired pneumonia (excluded — no cough, clear chest)"
+  ],
+  "citations": [
+    "IDSA — Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis — 2012",
+    "Harrison's Principles of Internal Medicine, 22e — Pharyngitis and Streptococcus pyogenes infections"
+  ],
+  "stewardship": "In an immunosuppressed host with acute exudative pharyngitis, sepsis and deep-space infection were first excluded; because of immunosuppression and rigors, blood cultures were drawn and a short broad empiric course (e.g. amoxicillin-clavulanate) was reasonable while awaiting confirmation. With RADT and culture confirming penicillin-susceptible Group A Streptococcus and no evidence of bacteraemia or complication, therapy was narrowed (de-escalated) to targeted phenoxymethylpenicillin (penicillin V) for 10 days — the guideline-concordant first-line agent — which also limits selection pressure. Amoxicillin is an acceptable equivalent. Beta-haemolytic GAS remains uniformly penicillin-susceptible, so no broader gram-negative or antipseudomonal cover is warranted once the diagnosis is established. Note tacrolimus interaction: avoid macrolides (e.g. clarithromycin/azithromycin) as first choice where feasible due to CYP3A4 inhibition raising tacrolimus levels.",
+  "contraindications": [
+    "Avoid azithromycin/clarithromycin as routine first-line here — macrolides inhibit CYP3A4 and raise tacrolimus levels (nephrotoxicity risk)",
+    "Avoid amoxicillin/ampicillin if infectious mononucleosis is the true diagnosis (rash) — excluded here by serology",
+    "True penicillin anaphylaxis would preclude penicillin V; use clindamycin or a first-generation cephalosporin (if non-severe allergy)"
+  ],
+  "edgeCases": [
+    "Immunosuppression can blunt classic signs; maintain low threshold to exclude peritonsillar/retropharyngeal abscess and airway compromise",
+    "If ANC were <500, this would be reclassified and managed as febrile neutropenia with broad empiric antipseudomonal cover",
+    "Persistent fever or failure to improve at 48–72h should prompt reassessment for suppurative complication or non-streptococcal cause"
+  ],
+  "expectedMaiK": "Acute Group A streptococcal pharyngitis confirmed by RADT/culture; treat with narrow-spectrum penicillin V (or amoxicillin) for 10 days, de-escalating from any empiric broad cover once GAS is confirmed and complications/neutropenia excluded.",
+  "expectedNextQuestions": [
+    "Any difficulty breathing, drooling, trismus or muffled voice suggesting deep-space/airway involvement?",
+    "What is the current absolute neutrophil count — is the patient neutropenic?",
+    "Any penicillin allergy?",
+    "Sick contacts and recent antibiotic exposure?"
+  ],
+  "expectedInvestigations": [
+    "Rapid antigen detection test for Group A Streptococcus",
+    "Throat swab culture with susceptibility",
+    "Full blood count with differential / ANC",
+    "CRP",
+    "Blood cultures (given immunosuppression + rigors)",
+    "Monospot / EBV serology to exclude infectious mononucleosis"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "soreThroat": true,
+    "tonsillarExudate": true,
+    "tenderCervicalNodes": true,
+    "immunocompromised": true,
+    "steroidUse": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "PHARYNGITIS",
+    "acceptableIds": [
+      "PHARYNGITIS"
+    ],
+    "differentialIds": [
+      "URTI",
+      "FEBRILE_NEUTROPENIA",
+      "CAP"
+    ],
+    "investigations": [
+      "Rapid antigen detection test for Group A Streptococcus",
+      "Throat swab culture with susceptibility",
+      "Full blood count with differential / ANC",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Phenoxymethylpenicillin (Penicillin V)",
+        "Amoxicillin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return PHARYNGITIS as the top diagnosis given exudative sore throat, tender anterior cervical nodes, absence of cough and positive GAS RADT/culture.",
+    "Stewardship must recommend narrow-spectrum penicillin V or amoxicillin (Access tier) and NOT antipseudomonal or broad gram-negative cover once GAS is confirmed.",
+    "Case must NOT be classified as febrile neutropenia given a normal ANC.",
+    "Macrolides should be flagged/avoided as first-line due to tacrolimus CYP3A4 interaction."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "id": "gc_443",
+  "specialty": "Pulmonary",
+  "condition": "Asthma exacerbation",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Acute breathlessness and audible wheeze on the second post-operative day after elective total knee replacement.",
+  "history": "71-year-old woman, long-standing physician-diagnosed asthma since her 30s (never intubated, one prior ICU admission a decade ago), admitted for elective total knee arthroplasty. Baseline treatment is inhaled budesonide/formoterol, but adherence has been poor in the peri-operative period and her inhalers were omitted from the ward drug chart for 24 hours. Polypharmacy is prominent: amlodipine and a recently up-titrated non-selective beta-blocker (propranolol) for essential hypertension and tremor, regular diclofenac plus a post-operative NSAID for analgesia, and omeprazole. On the second post-operative day she developed progressive chest tightness, difficulty completing sentences, cough and loud expiratory wheeze. There is no fever, no pleuritic pain, no calf swelling, no orthopnoea or paroxysmal nocturnal dyspnoea, and no chest pain. She reports a similar milder episode after taking ibuprofen years ago. Ex-smoker (8 pack-years, quit 25 years ago). No known cardiac disease.",
+  "examination": "Alert but anxious and speaking in short phrases, sitting upright using accessory muscles of respiration. Widespread bilateral polyphonic expiratory wheeze with prolonged expiratory phase; air entry reduced but symmetrical, no focal crepitations, no bronchial breathing. Chest is resonant. No raised JVP, no peripheral oedema, no added heart sounds or murmur, apex non-displaced. Calves soft and non-tender. Peak expiratory flow 190 L/min against a personal best of 400 L/min (48% predicted). No urticaria, angioedema or stridor.",
+  "vitals": {
+    "hr": 118,
+    "bp": "148/86",
+    "rr": 28,
+    "temp": 36.8,
+    "spo2": 90
+  },
+  "labs": {
+    "abg": "pH 7.46, PaCO2 32 mmHg, PaO2 62 mmHg on 2 L/min O2 (mild hypoxaemia with respiratory alkalosis; normalising/rising CO2 would be an ominous sign)",
+    "peakFlow": "190 L/min (48% of personal best)",
+    "wbc": "10.8 x10^9/L (mild, attributable to recent surgery/steroids)",
+    "eosinophils": "0.6 x10^9/L (blood eosinophilia)",
+    "creatinine": "1.1 mg/dL",
+    "potassium": "3.4 mmol/L (mild hypokalaemia after repeated beta-agonist nebulisation)",
+    "bnp": "48 pg/mL (not elevated)",
+    "troponin": "normal",
+    "crp": "9 mg/L"
+  },
+  "imaging": "Portable chest X-ray: hyperinflated lung fields, no consolidation, no pneumothorax, no pulmonary oedema or cardiomegaly. ECG: sinus tachycardia, no ischaemic changes, no right-heart strain.",
+  "microbiology": "Not indicated; no features of infection. No sputum sent (scant, non-purulent).",
+  "differentialDiagnoses": [
+    "Acute heart failure / pulmonary oedema (peri-operative fluid shifts, elderly) — excluded by normal BNP, clear chest X-ray, absent JVP/oedema",
+    "Non-infective COPD exacerbation — less likely given long asthma history, reversible pattern, minimal smoking and eosinophilia",
+    "Post-operative pulmonary embolism — considered given recent surgery/immobility but no pleuritic pain, no hypocapnia-refractory hypoxia, no right-heart strain",
+    "Anaphylaxis to peri-operative drugs — excluded by absence of urticaria, angioedema, hypotension and clear temporal trigger"
+  ],
+  "finalDiagnosis": "Acute asthma exacerbation (moderate-to-severe) precipitated in a hospitalised elderly patient by non-selective beta-blocker and NSAID exposure plus inhaled-controller omission during the peri-operative period.",
+  "citations": [
+    "GINA (Global Initiative for Asthma) — Management of asthma exacerbations, 2024",
+    "BTS/SIGN — British Guideline on the Management of Asthma, 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Asthma"
+  ],
+  "stewardship": "Not applicable — this is a non-infective acute asthma exacerbation. No antibiotics indicated; CRP low, no purulent sputum, no consolidation. Antibiotic avoidance is itself a stewardship point: peri-operative breathlessness with wheeze should not trigger reflexive antibiotics.",
+  "contraindications": [
+    "Non-selective beta-blockers (propranolol) — can precipitate/worsen bronchospasm; stop and switch to a cardioselective agent if a beta-blocker is essential",
+    "NSAIDs (diclofenac/ibuprofen) — avoid given probable aspirin/NSAID-exacerbated respiratory disease; use paracetamol/opioid-sparing analgesia",
+    "Uncontrolled high-flow oxygen — titrate to SpO2 94-98%; avoid over-oxygenation but do not withhold in true hypoxaemia"
+  ],
+  "edgeCases": [
+    "A rising or normalising PaCO2 with fatigue signals impending respiratory failure and need for critical-care review despite an initially 'reassuring' gas",
+    "Repeated beta-agonist nebulisation causes hypokalaemia and lactic acidosis, mimicking deterioration",
+    "In the elderly, wheeze is frequently misattributed to heart failure or COPD, delaying recognition of asthma"
+  ],
+  "expectedMaiK": "Recognise moderate-to-severe acute asthma exacerbation in a hospitalised elderly patient and identify the reversible peri-operative precipitants (non-selective beta-blocker, NSAID, controller omission); treat with controlled oxygen, repeated inhaled SABA plus ipratropium and early systemic corticosteroids, and stop the offending drugs.",
+  "expectedNextQuestions": [
+    "What is the personal-best peak flow and current PEF/FEV1 to grade severity?",
+    "Which peri-operative drugs (beta-blockers, NSAIDs, opioids) were given and were the usual inhalers omitted?",
+    "Any features suggesting an alternative cause — chest pain, orthopnoea, calf swelling, fever?",
+    "Is there rising PaCO2, exhaustion or silent chest indicating life-threatening asthma?"
+  ],
+  "expectedInvestigations": [
+    "Serial peak expiratory flow rate before and after bronchodilator",
+    "Arterial blood gas (watch for rising/normalising PaCO2)",
+    "Chest X-ray to exclude pneumothorax, consolidation and pulmonary oedema",
+    "ECG and BNP/troponin to exclude cardiac cause",
+    "Serum potassium after repeated beta-agonist therapy"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "dyspnea": true,
+    "wheeze": true,
+    "coughRadio": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "supplementalOxygen": true,
+    "hospitalizationLast90Days": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "asthma_exac",
+    "acceptableIds": [
+      "asthma_exac"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "copd_exac_ni",
+      "pe",
+      "anaphylaxis"
+    ],
+    "investigations": [
+      "Serial peak expiratory flow rate",
+      "Arterial blood gas",
+      "Chest X-ray",
+      "ECG and BNP",
+      "Serum potassium"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis engine returns asthma_exac as top diagnosis",
+    "No antibiotic recommendation is generated (non-infective presentation)",
+    "Non-selective beta-blocker and NSAID are flagged as contraindicated precipitants",
+    "Heart failure and pulmonary embolism appear in the differential but are ranked below asthma_exac"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

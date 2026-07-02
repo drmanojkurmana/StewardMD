@@ -1,0 +1,118 @@
+{
+  "id": "gc_489",
+  "specialty": "Toxicology",
+  "condition": "Organophosphate / cholinergic poisoning",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Found collapsed at home, drooling and drowsy, ~2 hours after a household argument; an empty bottle of an organophosphate insecticide (chlorpyrifos) was beside him.",
+  "history": "Farmer with type 2 diabetes mellitus (on metformin and glimepiride) and CKD stage 4 (baseline creatinine 3.1 mg/dL, not yet on dialysis). Family report deliberate ingestion of insecticide. Since arrival he has had profuse salivation, sweating, watering eyes, repeated vomiting and loose stools, and progressively depressed consciousness with muscle twitching over the chest and thighs. No fever, no prior seizures. His CKD and diabetes cloud the picture: the family and referring clinician initially attributed the drowsiness and vomiting to uraemia/hyperglycaemia and the bradycardia to his usual state, but the garlicky odour, pinpoint pupils and drenching secretions point to a cholinergic crisis. Reduced renal clearance is expected to prolong toxicity and delay recovery.",
+  "examination": "Drowsy, GCS 10/15 (E3V3M4), diaphoretic with a garlic-like odour. Pinpoint (miotic) pupils poorly reactive. Marked salivation and lacrimation, bilateral coarse crackles from bronchorrhoea. Fasciculations over pectorals and quadriceps with generalised proximal weakness. Bowel sounds hyperactive, bladder not palpable but incontinent of urine. No focal neurological deficit, no meningism. Mild pedal oedema consistent with CKD.",
+  "vitals": {
+    "hr": 48,
+    "bp": "104/64",
+    "rr": 9,
+    "temp": 36.4,
+    "spo2": 89
+  },
+  "labs": {
+    "creatinine": "3.6 mg/dL (baseline 3.1, AKI-on-CKD)",
+    "urea": "22 mmol/L",
+    "potassium": "5.1 mmol/L",
+    "glucose": "16.5 mmol/L (298 mg/dL)",
+    "plasma_pseudocholinesterase": "markedly reduced (<10% of lower reference limit)",
+    "rbc_acetylcholinesterase": "severely depressed",
+    "abg": "pH 7.28, pCO2 6.8 kPa, pO2 8.4 kPa, HCO3 19 mmol/L (mixed respiratory + metabolic acidosis)",
+    "lactate": "2.6 mmol/L",
+    "troponin": "mildly elevated (demand)",
+    "wcc": "12.1 x10^9/L"
+  },
+  "imaging": "Chest radiograph: bilateral perihilar haziness consistent with bronchorrhoea / early aspiration; no lobar consolidation. ECG: sinus bradycardia at 48/min, prolonged QTc, no ischaemic ST changes.",
+  "microbiology": "Not applicable; blood and sputum cultures sent as baseline given depressed consciousness and aspiration risk, but no infective source identified. Diagnosis is toxicological, not infective.",
+  "differentialDiagnoses": [
+    "Organophosphate (cholinergic) poisoning",
+    "Opioid overdose (miosis, bradypnoea, depressed consciousness)",
+    "Uraemic / metabolic encephalopathy from decompensated CKD",
+    "Cholinergic (myasthenic) crisis"
+  ],
+  "finalDiagnosis": "Acute organophosphate (chlorpyrifos) poisoning with muscarinic, nicotinic and central features, complicated by pre-existing CKD (prolonging toxicity) and diabetes",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Insecticide and Cholinesterase-Inhibitor Poisoning",
+    "WHO — Clinical Management of Acute Pesticide Intoxication — 2008"
+  ],
+  "stewardship": "Non-infective toxicological emergency: no empiric antibiotics indicated on presentation. Management is airway protection, high-flow oxygen, atropine titrated to drying of secretions and reversal of bradycardia, and pralidoxime (oxime) for nicotinic/muscular features. Antibiotics are withheld unless microbiologically or radiographically confirmed aspiration pneumonia develops; sending baseline cultures does not justify empiric therapy. Renal dosing considerations apply to all agents given the CKD.",
+  "contraindications": [
+    "Avoid suxamethonium for intubation (prolonged paralysis due to cholinesterase inhibition)",
+    "Avoid morphine, theophylline, phenothiazines and reserpine in organophosphate poisoning",
+    "Do not withhold atropine waiting for cholinesterase results; treat clinically",
+    "Care with renally cleared and nephrotoxic drugs given CKD/AKI"
+  ],
+  "edgeCases": [
+    "CKD reduces clearance and prolongs the cholinergic phase, mandating longer atropine infusion and monitoring",
+    "Risk of intermediate syndrome (proximal weakness, respiratory failure) 24-96h after apparent recovery",
+    "Delayed peripheral neuropathy (OPIDN) weeks later",
+    "Hyperglycaemia may be attributed to diabetes but can also be a stress/toxic effect; avoid anchoring"
+  ],
+  "expectedMaiK": "Cholinergic toxidrome (miosis, bronchorrhoea/salivation, bradycardia, bradypnoea, fasciculations) after insecticide ingestion = organophosphate poisoning; treat empirically with atropine and pralidoxime, protect the airway, and confirm with depressed plasma/RBC cholinesterase; CKD prolongs toxicity but does not change the diagnosis.",
+  "expectedNextQuestions": [
+    "What was ingested, how much, and how long ago?",
+    "Any co-ingestants (alcohol, other tablets)?",
+    "Is the airway protected and are secretions controlled with atropine?",
+    "What is the baseline renal function and current urine output?"
+  ],
+  "expectedInvestigations": [
+    "Plasma butyrylcholinesterase and RBC acetylcholinesterase",
+    "Arterial blood gas",
+    "Serum electrolytes, urea and creatinine",
+    "ECG (QTc, bradyarrhythmia)",
+    "Chest radiograph",
+    "Capillary/serum glucose"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "miosisSecretions": true,
+    "bradycardia": true,
+    "bradypnea": true,
+    "alteredSensorium": true,
+    "hypoxia": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "renalImpairment": true,
+    "diabetesHx": true,
+    "organDysfunction": true,
+    "drugOverdose": true
+  },
+  "expected": {
+    "diagnosis": "organophosphate",
+    "acceptableIds": [
+      "organophosphate"
+    ],
+    "differentialIds": [
+      "opioid_od",
+      "metabolic_enceph",
+      "drug_intox",
+      "myasthenic_crisis"
+    ],
+    "investigations": [
+      "Plasma butyrylcholinesterase and RBC acetylcholinesterase",
+      "Arterial blood gas",
+      "Serum electrolytes, urea and creatinine",
+      "ECG",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should rank organophosphate as top diagnosis given cholinergic toxidrome",
+    "No empiric antibiotics recommended (non-infective)",
+    "Atropine and pralidoxime identified as first-line treatment",
+    "Suxamethonium flagged as contraindicated",
+    "CKD recognised as prolonging toxicity, not as the primary cause of altered sensorium"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

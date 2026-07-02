@@ -1,0 +1,120 @@
+{
+  "id": "gc_426",
+  "specialty": "Systemic",
+  "condition": "Septic Shock",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Fever, rigors and collapse 10 days after chemotherapy",
+  "history": "Known diffuse large B-cell lymphoma, day 10 after the second cycle of R-CHOP, brought to the emergency department with a 6-hour history of high fever with rigors, progressive light-headedness and reduced urine output. Over the preceding day he had noted soreness of the mouth and mild loosening of stool but no localising respiratory, urinary or abdominal symptoms. He has a tunnelled central venous catheter in situ for chemotherapy. His wife reports he became increasingly drowsy and clammy in the car, prompting the call for help. No recent travel, no diarrhoea with blood, no cough or dysuria. He received no prophylactic antibiotics after this cycle. Background: hypertension on amlodipine; no diabetes; no known drug allergy.",
+  "examination": "Ill and toxic-looking, cold peripheries with prolonged capillary refill (4 s) and mottled knees. Drowsy but rousable, GCS 14. Oral mucosa shows grade 2 mucositis. Tunnelled line exit site is clean with no erythema or discharge. Chest clear, abdomen soft and non-tender, no focal neurology, no rash, no meningism. Peripherally shut down with a thready pulse.",
+  "vitals": {
+    "hr": 128,
+    "bp": "76/42",
+    "rr": 30,
+    "temp": 39.4,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "0.6 x10^9/L",
+    "anc": "0.18 x10^9/L (profound neutropenia)",
+    "hemoglobin": "9.2 g/dL",
+    "platelets": "62 x10^3/µL",
+    "creatinine": "2.1 mg/dL (baseline 0.9)",
+    "urea": "14.5 mmol/L",
+    "lactate": "4.8 mmol/L",
+    "crp": "212 mg/L",
+    "procalcitonin": "11.4 ng/mL",
+    "bilirubin": "1.6 mg/dL",
+    "inr": "1.4",
+    "map": "53 mmHg (after 30 mL/kg crystalloid, requiring noradrenaline)"
+  },
+  "imaging": "Portable chest radiograph clear. Bedside echo shows a hyperdynamic, well-filled left ventricle with no effusion or focal wall-motion abnormality, consistent with distributive (not cardiogenic or hypovolaemic) shock.",
+  "microbiology": "Two sets of blood cultures drawn (peripheral and central line) before antibiotics; lactate, urine culture and mucositis swab sent. At 18 hours peripheral and line cultures flag Gram-negative bacilli; at 48 hours identified as Escherichia coli, sensitive to piperacillin-tazobactam, cefepime and meropenem, with a shorter differential time-to-positivity from the peripheral draw arguing against catheter as source.",
+  "differentialDiagnoses": [
+    "Septic shock in a neutropenic host (distributive shock with vasopressor-dependent hypotension and hyperlactataemia)",
+    "Uncomplicated febrile neutropenia without shock",
+    "Cardiogenic shock",
+    "Hypovolaemic shock"
+  ],
+  "finalDiagnosis": "Septic shock (Sepsis-3: infection with vasopressor requirement to maintain MAP ≥65 mmHg and lactate >2 mmol/L despite adequate fluid resuscitation) in a profoundly neutropenic host, source Gram-negative (E. coli) bacteraemia",
+  "citations": [
+    "Surviving Sepsis Campaign — International Guidelines for Management of Sepsis and Septic Shock — 2021",
+    "IDSA — Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer — 2010",
+    "Harrison's Principles of Internal Medicine, 22e — Severe Sepsis and Septic Shock"
+  ],
+  "stewardship": "This is neutropenic septic shock, so empiric therapy must be immediate (within 1 hour) and broad, covering Pseudomonas aeruginosa and Enterobacterales. First line is an anti-pseudomonal beta-lactam — piperacillin-tazobactam 4.5 g IV (or cefepime/meropenem). Because the patient is in shock with a central line and mucositis, add empiric IV vancomycin for Gram-positive/line cover and a single dose of amikacin for double Gram-negative cover pending sensitivities, per Surviving Sepsis/IDSA neutropenia guidance. Draw paired peripheral and line cultures before the first dose but do not delay antibiotics. Once E. coli sensitive to piperacillin-tazobactam is confirmed and the line is exonerated by differential time-to-positivity, de-escalate: stop vancomycin and the aminoglycoside and continue piperacillin-tazobactam (or narrow further guided by the antibiogram). Continue until neutrophil recovery (ANC >0.5) and clinical resolution; review at 48-72 h.",
+  "contraindications": [
+    "Avoid aminoglycoside continuation beyond empiric dosing given acute kidney injury (creatinine 2.1) — de-escalate promptly",
+    "Do not use starch-based colloids for resuscitation",
+    "Avoid nephrotoxin stacking (vancomycin + aminoglycoside + contrast) once cultures allow narrowing"
+  ],
+  "edgeCases": [
+    "If cultures grow a resistant Gram-negative (ESBL/CRE) or the patient fails to improve, escalate to a carbapenem or resistance-directed agent rather than persisting empirically",
+    "If line differential time-to-positivity favoured a catheter source, catheter removal (source control) would be required",
+    "Persistent fever beyond 4-7 days of broad-spectrum cover in ongoing neutropenia should prompt empiric antifungal therapy"
+  ],
+  "expectedMaiK": "Neutropenic septic shock: give broad anti-pseudomonal empiric cover within 1 hour after paired cultures, resuscitate to MAP ≥65 with fluids then noradrenaline, and de-escalate to culture-directed therapy once the organism and sensitivities are known.",
+  "expectedNextQuestions": [
+    "How many days since the last chemotherapy cycle and what was the regimen?",
+    "Is there a central venous catheter, and any exit-site erythema or discharge?",
+    "Has the MAP responded to a 30 mL/kg crystalloid bolus or is a vasopressor already needed?",
+    "Any prior resistant organisms (ESBL/CRE/MRSA) or recent antibiotic exposure?"
+  ],
+  "expectedInvestigations": [
+    "Paired peripheral and central-line blood cultures before antibiotics",
+    "Serum lactate and repeat after resuscitation",
+    "Full blood count with ANC, renal function, LFTs, coagulation",
+    "Urinalysis/culture and chest radiograph to seek a source"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "vasopressorRequirement": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "toxicAppearing": true,
+    "immunocompromised": true,
+    "neutropenia": true,
+    "centralLine": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "SEPTIC_SHOCK",
+    "acceptableIds": [
+      "SEPTIC_SHOCK"
+    ],
+    "differentialIds": [
+      "FEBRILE_NEUTROPENIA",
+      "SEPSIS",
+      "cardiogenic_shock",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Paired peripheral and central-line blood cultures before antibiotics",
+      "Serum lactate with repeat after fluid resuscitation",
+      "FBC with ANC, renal and liver function, coagulation profile",
+      "Urine culture and chest radiograph for source identification"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "vancomycin",
+        "amikacin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must diagnose SEPTIC_SHOCK given vasopressor requirement plus elevated lactate despite fluids",
+    "Must recognise the neutropenic host and mandate broad anti-pseudomonal empiric cover within 1 hour",
+    "Must recommend paired peripheral and central-line cultures before antibiotics",
+    "Must de-escalate to piperacillin-tazobactam once E. coli sensitivities return and the line is exonerated"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

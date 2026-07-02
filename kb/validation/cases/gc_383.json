@@ -1,0 +1,125 @@
+{
+  "id": "gc_383",
+  "specialty": "Hepatobiliary / Tropical Fever",
+  "condition": "Amoebic Liver Abscess",
+  "age": 44,
+  "sex": "M",
+  "presentingComplaint": "High fever with rigors and worsening right upper quadrant pain for 12 days",
+  "history": "A 44-year-old male labourer from a peri-urban settlement in eastern India presents with 12 days of fever with rigors, dull-then-sharp right upper quadrant pain radiating to the right shoulder tip, anorexia and roughly 4 kg unintentional weight loss. He reports intermittent loose stools a few weeks earlier and admits to heavy daily alcohol intake. He was started on empirical oral amoxicillin-clavulanate by a local practitioner one week ago with no improvement, and had a documented ESBL-producing E. coli urinary isolate treated 3 months ago. No prior biliary surgery. No jaundice noticed by the patient until the last 2 days.",
+  "examination": "Ill and toxic-appearing, mildly icteric. Tender, smooth hepatomegaly 5 cm below the costal margin with marked point tenderness and an intercostal tenderness sign over the lower right ribs. Right basal reduced air entry (sympathetic effusion). No peritonism, no palpable gallbladder, Murphy sign negative. No stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 116,
+    "bp": "102/66",
+    "rr": 24,
+    "temp": 39.6,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "wbc": "19.4 x10^3/uL (neutrophilia)",
+    "platelets": 356,
+    "crp": "228 mg/L",
+    "esr": "88 mm/hr",
+    "bilirubin": 2.6,
+    "alp": "412 U/L",
+    "ast": "78 U/L",
+    "alt": "64 U/L",
+    "albumin": 2.7,
+    "inr": 1.3,
+    "creatinine": 1.1,
+    "amoebicSerology": "E. histolytica IHA positive, high titre",
+    "bloodCultures": "sent x2"
+  },
+  "imaging": "Ultrasound abdomen: single large (9.2 cm) hypoechoic lesion in the postero-superior right hepatic lobe abutting the diaphragm with a small right pleural effusion. Contrast CT confirms a solitary thick-walled right-lobe collection with peripheral rim enhancement and adjacent segmental atelectasis; no biliary dilatation, gallbladder normal.",
+  "microbiology": "Diagnostic/therapeutic percutaneous aspiration yielded thick reddish-brown 'anchovy-sauce' pus. Amoebic trophozoites not seen on wet mount (expected). E. histolytica serology strongly positive and stool antigen positive. Aspirate bacterial culture unexpectedly grew an ESBL-producing Klebsiella pneumoniae (secondary bacterial superinfection), resistant to third-generation cephalosporins and amoxicillin-clavulanate, sensitive to meropenem.",
+  "differentialDiagnoses": [
+    "Pyogenic liver abscess",
+    "Acute cholangitis",
+    "Acute cholecystitis",
+    "Hepatocellular carcinoma with necrosis"
+  ],
+  "finalDiagnosis": "Amoebic liver abscess (solitary right-lobe) with secondary ESBL-Klebsiella bacterial superinfection, complicated by sympathetic pleural effusion",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Amebiasis (Entamoeba histolytica) and Amoebic Liver Abscess",
+    "WSES Guidelines — Management of Intra-abdominal Infections and Source Control 2017",
+    "WGO World Gastroenterology Organisation Global Guideline — Amoebiasis 2019"
+  ],
+  "stewardship": "Amoebic liver abscess is a tissue amoebic infection: the anchor therapy is a nitroimidazole (IV/oral metronidazole 750 mg tds for 7-10 days, or tinidazole) followed by a luminal amoebicide (paromomycin or diloxanide furoate) to eradicate intraluminal cysts and prevent relapse. Uncomplicated abscesses respond to drugs alone. Here the illness has features mandating escalation and source control: a large (>5 cm) postero-superior right-lobe abscess unresponsive to a week of therapy, near the diaphragm with a sympathetic effusion, and aspirate culture confirming secondary ESBL-Klebsiella superinfection. Management therefore combines (1) image-guided percutaneous catheter drainage for source control, (2) continued metronidazole plus luminal paromomycin for the amoebic component, and (3) escalation of antibacterial cover from the failed amoxicillin-clavulanate to a carbapenem (meropenem) guided by ESBL susceptibility. De-escalation/stop of the carbapenem should be reviewed once drainage is achieved and cultures/clinical response allow; the nitroimidazole+luminal course is completed regardless.",
+  "contraindications": [
+    "Avoid alcohol during and for 3 days after metronidazole (disulfiram-like reaction)",
+    "Ceftriaxone/amoxicillin-clavulanate inadequate against confirmed ESBL organism — do not rely on them",
+    "Avoid blind large-bore surgical drainage as first line when percutaneous catheter drainage is feasible"
+  ],
+  "edgeCases": [
+    "Rupture into pleural/pericardial space or peritoneum is a surgical emergency",
+    "Absence of trophozoites on aspirate is typical and does not exclude amoebic aetiology",
+    "Failure to give a luminal amoebicide after metronidazole leads to relapse from persistent cyst carriage"
+  ],
+  "expectedMaiK": "Recognise a solitary right-lobe amoebic liver abscess (endemic-area male, RUQ pain, tender hepatomegaly, anchovy-sauce pus, positive E. histolytica serology) that has failed oral therapy and is secondarily infected with an ESBL organism — treat with metronidazole plus a luminal amoebicide, perform image-guided percutaneous drainage for source control, and escalate antibacterial cover to a carbapenem per susceptibility.",
+  "expectedNextQuestions": [
+    "Recent travel/residence in an endemic area and dysentery history?",
+    "Any prior antibiotic exposure or documented resistant organisms?",
+    "Alcohol intake and features of chronic liver disease?",
+    "Any pleuritic pain, breathlessness or signs suggesting rupture?"
+  ],
+  "expectedInvestigations": [
+    "Abdominal ultrasound / contrast CT liver",
+    "E. histolytica serology (IHA/ELISA) and stool antigen",
+    "Image-guided diagnostic and therapeutic aspiration with Gram stain, culture and sensitivity",
+    "Blood cultures x2",
+    "Full blood count, CRP, LFTs, coagulation profile"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "hepatosplenomegaly": true,
+    "singleLesion": true,
+    "jaundice": true,
+    "weightLoss": true,
+    "nauseaVomiting": true,
+    "esblHistory": true,
+    "alcoholExcess": true
+  },
+  "expected": {
+    "diagnosis": "AMOEBIC_LIVER_ABSCESS",
+    "acceptableIds": [
+      "AMOEBIC_LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS",
+      "VIRAL_HEPATITIS"
+    ],
+    "investigations": [
+      "Abdominal ultrasound / contrast CT liver",
+      "E. histolytica serology and stool antigen",
+      "Image-guided aspiration with culture and sensitivity",
+      "Blood cultures",
+      "LFTs, FBC, CRP, coagulation"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "metronidazole",
+        "paromomycin",
+        "meropenem"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to AMOEBIC_LIVER_ABSCESS, not pyogenic LIVER_ABSCESS",
+    "Metronidazole (nitroimidazole) plus a luminal amoebicide is included in management",
+    "Percutaneous drainage (source control) is recommended for the large, non-responding, subdiaphragmatic abscess",
+    "Antibacterial cover is escalated to a carbapenem for the ESBL superinfection, not left on amoxicillin-clavulanate/ceftriaxone",
+    "Luminal amoebicide is prescribed to prevent relapse"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
