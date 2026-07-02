@@ -16,6 +16,33 @@ self.addEventListener("install", function () {
   self.skipWaiting();
 });
 
+// ── Web Push (payloadless): on push, pull the latest update and show a banner. ──
+self.addEventListener("push", function (e) {
+  e.waitUntil((async function () {
+    var title = "StewardMD", body = "New medical update", url = "/", tag = "smd-update";
+    try {
+      if (e.data) { var d = e.data.json(); title = d.title || title; body = d.body || body; url = d.url || url; if (d.tag) tag = d.tag; }
+      else {
+        var r = await fetch("/api/updates", { cache: "no-store" });
+        var j = await r.json(); var it = (j.items || [])[0];
+        if (it) { title = it.title || title; body = (it.source ? it.source + " · " : "") + (it.category || "update"); tag = "smd-" + it.id; }
+      }
+    } catch (x) {}
+    return self.registration.showNotification(title, {
+      body: body, icon: "/android-chrome-192x192.png", badge: "/favicon-32x32.png",
+      tag: tag, renotify: true, data: { url: url }
+    });
+  })());
+});
+self.addEventListener("notificationclick", function (e) {
+  e.notification.close();
+  var url = (e.notification.data && e.notification.data.url) || "/";
+  e.waitUntil(self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (cls) {
+    for (var i = 0; i < cls.length; i++) { if ("focus" in cls[i]) { try { cls[i].navigate && cls[i].navigate(url); } catch (x) {} return cls[i].focus(); } }
+    return self.clients.openWindow(url);
+  }));
+});
+
 self.addEventListener("activate", function (e) {
   e.waitUntil((async function () {
     var keys = await caches.keys();
