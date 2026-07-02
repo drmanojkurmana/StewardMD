@@ -945,6 +945,7 @@
       ".maik-hd{flex:0 0 auto;display:flex;align-items:center;gap:10px;padding:13px 14px 6px}",
       ".maik-hd .mk-ti{flex:1 1 auto;min-width:0}",
       ".maik-hd .mk-t{font:800 17px var(--hfont);color:var(--hink);line-height:1.1}.maik-hd .mk-s{font:600 12px var(--hfont);color:var(--hmut,#64748b);margin-top:2px}",
+      ".maik-hd .mk-logo{height:26px;width:auto;flex:0 0 auto;display:block}",
       ".maik-adv{flex:0 0 auto;padding:0 16px 10px;border-bottom:1px solid var(--hbd,#e2e8f0)}",
       ".maik-badge{display:inline-block;font:700 10.5px var(--hfont);color:var(--hp,#0f766e);background:var(--hps,#ccfbf1);border-radius:999px;padding:5px 11px;white-space:nowrap;letter-spacing:.01em}",
       ".maik-x{margin-left:auto;flex:0 0 auto;width:34px;height:34px;border:none;background:var(--hbg,#f1f5f9);color:var(--hink);border-radius:50%;font-size:17px;cursor:pointer;line-height:1}",
@@ -974,7 +975,7 @@
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
     sheet.innerHTML =
-      '<div class="maik-hd"><div class="mk-ti"><div class="mk-t">MaiK</div><div class="mk-s">Medical AI Knowledge · Powered by Google AI</div></div>' +
+      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.webp" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Powered by Google AI</div></div>' +
         '<button class="maik-x" id="maikX" aria-label="Close">✕</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">✓ Advisory — clinician verifies</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
