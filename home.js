@@ -32,14 +32,14 @@
       st.textContent = [
         "#sbMenu [data-smd-top]{margin:0}",
         ".smd-nav-grp{border-top:1px solid var(--line,#d7dee3);margin-top:6px;padding-top:6px}",
-        ".smd-nav-gh{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:8px 2px;font:700 12px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);text-transform:uppercase;letter-spacing:.04em}",
+        ".smd-nav-gh{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;cursor:pointer;padding:8px 18px 8px 32px;font:700 12px/1.3 var(--sans,system-ui);color:var(--ink,#14202b);text-transform:uppercase;letter-spacing:.04em}",
         ".smd-nav-chev{color:var(--slate-soft,#5a7184);font-size:11px}",
-        ".smd-nav-gb{padding:2px 0 6px}",
-        ".smd-nav-row{display:flex;align-items:center;gap:10px;padding:7px 2px}",
+        ".smd-nav-gb{padding:2px 18px 6px 32px}",
+        ".smd-nav-row{display:flex;align-items:center;gap:10px;padding:7px 0}",
         ".smd-nav-rl{flex:1;min-width:0}.smd-nav-lbl{font:600 13.5px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)}.smd-nav-sub{font:500 11px/1.35 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:1px}",
         ".smd-nav-sw{flex:0 0 auto;position:relative;width:40px;height:23px;border:none;border-radius:999px;cursor:pointer;background:var(--line,#d7dee3);transition:background .15s}.smd-nav-sw.on{background:var(--teal,#0e6e63)}.smd-nav-sw>span{position:absolute;top:3px;left:3px;width:17px;height:17px;border-radius:50%;background:#fff;transition:left .15s}.smd-nav-sw.on>span{left:20px}",
         ".smd-nav-btn{display:block;width:100%;text-align:left;margin:5px 0 0;padding:9px 11px;border:1px solid var(--line,#d7dee3);border-radius:9px;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui);cursor:pointer}.smd-nav-btn.on{border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)}",
-        ".smd-nav-note{font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:2px 2px 4px}"
+        ".smd-nav-note{font:500 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:2px 0 4px}"
       ].join("");
       (document.head || document.documentElement).appendChild(st);
     }
@@ -789,7 +789,7 @@
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var si = s.querySelector('[data-acct="signin"]');
-    if (si) si.addEventListener("click", function () { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} setTimeout(openAccount, 900); });
+    if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
   }
   // ---- About modal: add Version History + Facts tabs (run once) ----
   function aboutVersionHTML() {
@@ -1180,7 +1180,7 @@
   document.addEventListener("click", function (e) {
     var t = e.target; if (!t || !t.id) return;
     if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
-    else if (t.id === "smdSbSignIn") { try { if (window.SMD_firebaseSignIn) window.SMD_firebaseSignIn(); } catch (_) {} }
+    else if (t.id === "smdSbSignIn") { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }
   }, false);
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
