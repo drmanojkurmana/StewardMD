@@ -1,0 +1,105 @@
+{
+  "id": "gc_342",
+  "specialty": "Neurology",
+  "condition": "Migraine",
+  "age": 29,
+  "sex": "F",
+  "presentingComplaint": "Left-sided throbbing headache building over the past hour, preceded by 20 minutes of shimmering zig-zag lights in the right visual field.",
+  "history": "A 29-year-old graphic designer presents to the day-assessment unit 90 minutes into a headache. Twenty minutes before the pain began she noticed a small shimmering, expanding crescent of zig-zag lines (fortification spectrum) drifting across the right half of her vision, which fully resolved over about 20 minutes and was then followed by a gradually intensifying left fronto-temporal throbbing headache. She rates it 5/10 and, atypically for her, has come in early because it started at work. She feels mildly nauseated but has not vomited, dislikes the office lights, and wants to sit in a dim room. Movement makes it worse. She has had 3-4 milder episodes over the last two years, usually perimenstrual (day 1 of her period today) and previously self-managed with ibuprofen and sleep; she has never sought care before. No fever, no neck pain, no recent head injury, no anticoagulants. Mother has 'sick headaches'. On combined oral contraceptive pill. This attack is much less severe and caught far earlier than the fully evolved disabling attacks described in textbooks.",
+  "examination": "Alert, orientated, comfortable but photophobic, preferring the lights dimmed. No meningism; Kernig and Brudzinski negative. Cranial nerves normal including full visual fields to confrontation and normal fundi with sharp disc margins (no papilloedema). Power, tone, reflexes, coordination and gait all normal. No pronator drift. No temporal artery tenderness. Cardiovascular and general examination unremarkable.",
+  "vitals": {
+    "hr": 78,
+    "bp": "124/76",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": "13.4 g/dL",
+    "platelets": "265 x10^3/uL",
+    "wbc": "7.2 x10^3/uL",
+    "crp": "2 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "sodium": "139 mmol/L",
+    "glucose": "5.1 mmol/L"
+  },
+  "imaging": "Not indicated for this typical presentation; non-contrast CT head, if performed to exclude alternatives, is normal.",
+  "microbiology": "Not applicable.",
+  "differentialDiagnoses": [
+    "Migraine with aura (typical aura with headache)",
+    "Tension-type headache",
+    "Transient ischaemic attack (occipital)",
+    "Acute ischaemic stroke",
+    "Subarachnoid haemorrhage"
+  ],
+  "finalDiagnosis": "Migraine with aura, moderate intensity, caught in the early headache phase",
+  "citations": [
+    "International Headache Society — ICHD-3 diagnostic criteria for migraine with aura — 2018",
+    "American Headache Society — Acute treatment of migraine in adults — 2021",
+    "NICE — Headaches in over 12s: diagnosis and management (CG150) — 2021"
+  ],
+  "stewardship": "Not applicable — non-infective condition.",
+  "contraindications": [
+    "Combined oral contraceptive is contraindicated in migraine with aura owing to elevated ischaemic stroke risk — switch to a progestogen-only or non-hormonal method",
+    "Avoid triptans in uncontrolled hypertension or ischaemic vascular disease",
+    "Limit acute analgesic/triptan use to <10-15 days/month to prevent medication-overuse headache"
+  ],
+  "edgeCases": [
+    "First presentation of aura in an older patient or aura persisting >60 minutes should prompt neuroimaging and stroke/TIA workup",
+    "Aura without subsequent headache (acephalgic migraine) can mimic TIA",
+    "Sudden maximal (thunderclap) headache is NOT migraine and mandates SAH evaluation"
+  ],
+  "expectedMaiK": "Fully reversible visual aura lasting ~20 minutes followed within 60 minutes by unilateral throbbing headache with photophobia and nausea, on a background of recurrent perimenstrual episodes and a normal interval neurological examination, is diagnostic of migraine with aura by ICHD-3; neuroimaging is not required for this typical picture.",
+  "expectedNextQuestions": [
+    "Did the visual symptoms spread gradually and fully resolve, and how long did they last?",
+    "Have you had similar attacks before, and are they linked to your periods?",
+    "Any weakness, speech difficulty, or symptoms that persisted after the visual disturbance settled?",
+    "How many days per month do you take painkillers or other headache medication?",
+    "Are you on the combined contraceptive pill or a smoker?"
+  ],
+  "expectedInvestigations": [
+    "Clinical diagnosis using ICHD-3 criteria; no bloods or imaging needed for typical migraine with aura",
+    "Consider non-contrast CT/MRI head only if red flags or atypical/first aura in an older patient",
+    "Blood pressure check and review of contraceptive/vascular risk factors"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "headache": true,
+    "visualDisturbance": true,
+    "photophobia": true,
+    "nauseaVomiting": true,
+    "age": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "migraine",
+    "acceptableIds": [
+      "migraine"
+    ],
+    "differentialIds": [
+      "tension_ha",
+      "tia",
+      "ischemic_stroke",
+      "sah"
+    ],
+    "investigations": [
+      "Clinical diagnosis by ICHD-3 criteria",
+      "Neuroimaging only if red flags/atypical aura",
+      "Review vascular risk and contraception"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should return migraine as the top diagnosis",
+    "Engine must NOT recommend antibiotics (non-infective)",
+    "Reversible visual aura + headache + photophobia + nausea with normal exam should favour migraine over TIA/stroke",
+    "Should flag combined oral contraceptive as contraindicated in migraine with aura"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

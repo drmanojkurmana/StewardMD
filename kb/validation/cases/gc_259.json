@@ -1,0 +1,115 @@
+{
+  "id": "gc_259",
+  "specialty": "Cardiovascular",
+  "condition": "Device-Related Infection (CIED / Vascular Catheter)",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Low-grade fever, malaise and a tender, reddened area over the pacemaker site for 3 weeks, referred as 'pocket cellulitis' not settling on oral antibiotics.",
+  "history": "Dual-chamber permanent pacemaker implanted 9 months ago for symptomatic sick sinus syndrome; generator changed once. Over the past 3 weeks progressive dull ache and redness over the left infraclavicular pocket, with intermittent evening fevers, drenching sweats, reduced appetite and ~3 kg weight loss. Primary care diagnosed pocket-site cellulitis and prescribed flucloxacillin for 7 days with only transient improvement, and symptoms recurred within days of stopping. No overt discharge or wound dehiscence initially. No IV drug use, no dental procedures. Background: type 2 diabetes, CKD stage 3, hypertension. This subacute, relapsing course over a device pocket is the key clue that this is a device-related infection rather than simple skin cellulitis or native-valve endocarditis, and that the overlying erythema reflects deep pocket/lead involvement.",
+  "examination": "Ill-looking, mildly cachectic. Left prepectoral pacemaker pocket is erythematous, warm and tender with early skin thinning/adherence over the generator but no frank pus at presentation; no fluctuance yet. No peripheral stigmata of endocarditis (no Janeway lesions, splinters or Osler nodes). Heart sounds normal with no new murmur. Chest clear. No focal neurology.",
+  "vitals": {
+    "hr": 102,
+    "bp": "122/74",
+    "rr": 18,
+    "temp": 38.2,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 10.4,
+    "wbc": 13.8,
+    "neutrophils": 10.5,
+    "platelets": 268,
+    "crp": 96,
+    "esr": 74,
+    "creatinine": 1.6,
+    "procalcitonin": 1.2,
+    "bloodCulturesSet1": "Staphylococcus aureus (MSSA) in 2/2 bottles",
+    "bloodCulturesSet2_48h": "Staphylococcus aureus persisting despite oral flucloxacillin"
+  },
+  "imaging": "Transthoracic echo: no clear valve vegetation, normal LV function. Transoesophageal echo: mobile echodensity (~9 mm) adherent to the right ventricular pacing lead; native valves free of vegetation. Pocket ultrasound: peri-generator fluid collection with soft-tissue oedema tracking to the device.",
+  "microbiology": "Two separate blood culture sets grow Staphylococcus aureus (methicillin-susceptible); repeat cultures at 48h remain positive (persistent bacteraemia). Pocket aspirate Gram stain: Gram-positive cocci in clusters; culture confirms same S. aureus. Lead tip sent for culture at extraction.",
+  "differentialDiagnoses": [
+    "CIED generator-pocket and lead infection (device-related infection) — target",
+    "Simple pocket-overlying cellulitis (the referred/mimicking diagnosis)",
+    "Native-valve infective endocarditis with secondary device seeding",
+    "Occult sepsis of undetermined source"
+  ],
+  "finalDiagnosis": "Cardiovascular implantable electronic device (CIED) infection — pocket infection with lead-associated (endovascular) involvement and persistent S. aureus bacteraemia; NOT isolated skin cellulitis.",
+  "citations": [
+    "Heart Rhythm Society (HRS) — Consensus Statement on Management of Cardiovascular Implantable Electronic Device Infections — 2017",
+    "American Heart Association (AHA) — Cardiovascular Implantable Electronic Device Infections and Their Management (Scientific Statement) — 2024",
+    "Harrison's Principles of Internal Medicine, 22e — Infections of Prosthetic Devices / Infective Endocarditis"
+  ],
+  "stewardship": "Empiric IV vancomycin (covers MRSA and coagulase-negative staphylococci, the commonest CIED pathogens) pending susceptibilities; de-escalate to IV cefazolin/flucloxacillin once MSSA confirmed. Cornerstone of therapy is COMPLETE removal of the entire device system (generator + all leads) — antibiotics alone will not cure a lead-associated infection. Duration guided by bacteraemia clearance and TEE findings (typically 2-6 weeks after extraction).",
+  "contraindications": [
+    "Do NOT manage as simple cellulitis with a short oral antibiotic course — attempted device salvage/partial treatment risks relapse and lead endocarditis.",
+    "Avoid reimplanting a new device on the ipsilateral side until bacteraemia has cleared.",
+    "Dose-adjust vancomycin for CKD stage 3 and monitor levels/renal function."
+  ],
+  "edgeCases": [
+    "Overlying erythema initially indistinguishable from benign pocket cellulitis; the discriminators are subacute relapsing course, systemic features and persistent S. aureus bacteraemia.",
+    "TTE can be falsely negative for lead vegetations — TEE (or intracardiac echo) is required.",
+    "Any S. aureus bacteraemia in a patient with a CIED should be presumed device-related until proven otherwise."
+  ],
+  "expectedMaiK": "Recognise CIED device infection (not cellulitis): draw serial blood cultures, start empiric IV vancomycin, obtain TEE, and refer urgently for complete device and lead extraction.",
+  "expectedNextQuestions": [
+    "When was the device implanted or last manipulated, and has there been any wound breakdown or discharge?",
+    "Have blood cultures been taken, and are they persistently positive?",
+    "Any history of prior bacteraemia, IV drug use, or prosthetic valve?",
+    "Is there erosion or threatened skin breakdown over the generator?"
+  ],
+  "expectedInvestigations": [
+    "At least 2 sets of blood cultures before antibiotics (repeat to document clearance)",
+    "Transoesophageal echocardiography for lead/valve vegetations",
+    "Pocket ultrasound and aspirate/tissue culture (avoid needle aspiration of a closed pocket per guidance; sample at extraction)",
+    "CRP/ESR, FBC, renal function",
+    "Culture of extracted generator and lead tips"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "cardiacImplantableDevice": true,
+    "erythemaAtSite": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "persistentBacteremia": true,
+    "tachycardia": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "DEVICE_INFECTION",
+    "acceptableIds": [
+      "DEVICE_INFECTION"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "IE",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Serial blood cultures (document persistent bacteraemia and clearance)",
+      "Transoesophageal echocardiography",
+      "Pocket ultrasound / tissue and lead-tip culture at extraction",
+      "CRP, ESR, FBC, renal function"
+    ],
+    "stewardship": {
+      "tier": "reserve",
+      "antibiotics": [
+        "Vancomycin IV (empiric); de-escalate to Cefazolin/Flucloxacillin IV once MSSA confirmed"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank DEVICE_INFECTION above CELLULITIS despite pocket-overlying erythema.",
+    "Presence of a CIED plus persistent S. aureus bacteraemia must trigger device-infection reasoning, not simple cellulitis.",
+    "Management output must include complete device/lead extraction, not antibiotics alone.",
+    "Empiric regimen must include MRSA cover (vancomycin) pending susceptibilities."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

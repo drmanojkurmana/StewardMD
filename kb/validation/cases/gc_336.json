@@ -1,0 +1,111 @@
+{
+  "id": "gc_336",
+  "specialty": "Neurology / Vascular",
+  "condition": "Acute ischemic stroke",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Sudden onset of slurred speech and mild left arm clumsiness, noticed 70 minutes ago",
+  "history": "Retired accountant, brought in by his wife who noticed at breakfast that his speech had become slightly slurred and he dropped his teacup from the left hand. Symptoms began abruptly and have neither progressed nor resolved over the last 70 minutes. No headache, no vomiting, no seizure, no loss of consciousness. Fully alert and conversant throughout. He initially minimised the event ('just tiredness') and only presented after his wife insisted. Background: hypertension on amlodipine, type 2 diabetes on metformin, and paroxysmal atrial fibrillation for which he admits to inconsistent adherence to his prescribed apixaban (last dose uncertain, likely missed for several days). Ex-smoker. Independent in all activities of daily living, no prior stroke or TIA. Last known well time is clearly documented at 70 minutes prior to arrival.",
+  "examination": "Alert, orientated, cooperative. Speech mildly dysarthric but fluent with normal comprehension and naming. Subtle left lower facial droop. Mild pronator drift of the left arm with power 4+/5 proximally; left hand fine-finger movements marginally slowed. Left leg power full. Sensation grossly intact, mild left-sided sensory inattention on double simultaneous stimulation. Gait cautious but safe. NIHSS = 3. No neck stiffness, no meningism. Pulse irregularly irregular. Capillary blood glucose 7.2 mmol/L at bedside.",
+  "vitals": {
+    "hr": 92,
+    "bp": "172/96",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "capillaryGlucose_mmol_L": 7.2,
+    "creatinine_mg_dL": 1,
+    "platelets_x10e3_uL": 244,
+    "inr": 1.1,
+    "hemoglobin_g_dL": 13.8,
+    "sodium_mmol_L": 139,
+    "hba1c_pct": 7.4
+  },
+  "imaging": "Non-contrast CT head: no intracranial haemorrhage; subtle loss of grey-white differentiation and early insular ribbon sign in the right MCA territory; ASPECTS 9. CT angiography: partial (M2) branch occlusion of the right middle cerebral artery. MRI DWI (obtained subsequently): small area of restricted diffusion in the right corona radiata/insular cortex confirming acute infarction.",
+  "microbiology": "Not applicable",
+  "differentialDiagnoses": [
+    "Transient ischaemic attack (deficit persisting >1h with DWI lesion argues against)",
+    "Intracerebral haemorrhage (excluded on non-contrast CT)",
+    "Hypoglycaemia (excluded, glucose 7.2 mmol/L)",
+    "Hemiplegic migraine / migraine aura (no headache, no march of symptoms, sudden onset)",
+    "Focal seizure with Todd paresis (no witnessed seizure activity)"
+  ],
+  "finalDiagnosis": "Acute ischemic stroke (minor, right MCA M2 territory) of probable cardioembolic origin (AF, subtherapeutic anticoagulation)",
+  "citations": [
+    "AHA/ASA — Guidelines for the Early Management of Patients With Acute Ischemic Stroke — 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Ischemic Stroke"
+  ],
+  "stewardship": "Not applicable (non-infective condition)",
+  "contraindications": [
+    "Confirm no intracranial haemorrhage on CT before any thrombolysis",
+    "Establish accurate last-known-well and last apixaban dose before considering IV alteplase/tenecteplase (recent DOAC use is a thrombolysis contraindication unless reversed or activity confirmed low)",
+    "Avoid aggressive BP lowering pre-reperfusion; permissive hypertension up to 220/120 mmHg if not for thrombolysis"
+  ],
+  "edgeCases": [
+    "Minor deficits (NIHSS <4) risk being dismissed as non-disabling, yet may still be thrombolysis-eligible if disabling to the patient (e.g., dominant-hand or speech involvement)",
+    "Recent DOAC intake complicates thrombolysis eligibility and may favour mechanical thrombectomy for large-vessel occlusion",
+    "Early ischaemic changes on CT can be extremely subtle within the first hours — do not exclude stroke on a 'normal-looking' CT"
+  ],
+  "expectedMaiK": "Treat as an acute stroke code: immediate non-contrast CT head to exclude haemorrhage, confirm last-known-well and anticoagulation status, and urgently assess eligibility for reperfusion therapy (IV thrombolysis and/or mechanical thrombectomy for the M2 occlusion) within the time window.",
+  "expectedNextQuestions": [
+    "What is the precise last-known-well time?",
+    "When was the last dose of apixaban taken?",
+    "Is the deficit disabling to the patient despite a low NIHSS?",
+    "Any contraindications to thrombolysis (recent surgery, bleeding, anticoagulation)?",
+    "Is there a documented history of atrial fibrillation and prior imaging?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head (urgent)",
+    "CT angiography head and neck (large-vessel occlusion assessment)",
+    "Capillary and serum glucose",
+    "12-lead ECG (confirm atrial fibrillation)",
+    "Coagulation profile / INR and anti-Xa if available",
+    "MRI-DWI for confirmation and infarct characterisation"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "focalNeuroDeficit": true,
+    "cerebrovascularDisease": true,
+    "atrialFibHx": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "anticoagulated": true
+  },
+  "expected": {
+    "diagnosis": "ischemic_stroke",
+    "acceptableIds": [
+      "ischemic_stroke"
+    ],
+    "differentialIds": [
+      "tia",
+      "ich",
+      "hypoglycemia",
+      "migraine"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiography head and neck",
+      "Capillary blood glucose",
+      "12-lead ECG",
+      "MRI-DWI"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ischemic_stroke as the top diagnosis despite a low NIHSS (minor/early presentation).",
+    "Engine must recommend urgent non-contrast CT head before any thrombolysis decision.",
+    "Engine must not recommend antibiotics (non-infective).",
+    "Engine must retain tia, ich, hypoglycemia and migraine within the differential set.",
+    "Engine must flag recent DOAC use and last-known-well time as determinants of thrombolysis eligibility."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

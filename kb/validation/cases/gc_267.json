@@ -1,0 +1,123 @@
+{
+  "id": "gc_267",
+  "specialty": "Gastrointestinal",
+  "condition": "Acute Gastroenteritis",
+  "age": 84,
+  "sex": "F",
+  "presentingComplaint": "Increasing confusion and reduced oral intake for 1 day, on a background of 2 days of loose stools and vomiting",
+  "history": "84-year-old frail nursing-home resident (Clinical Frailty Scale 6, baseline mild dementia) brought in by carers because she became more drowsy and 'not herself' overnight. Over the preceding 48 hours she had 6-8 episodes/day of watery, non-bloody, non-mucoid diarrhoea and several episodes of vomiting, with progressively poor oral intake. Two other residents on her floor developed a similar short self-limiting diarrhoeal illness in the past week (suspected facility outbreak). No dysentery, no tenesmus, no recent travel. No antibiotic or PPI exposure in the last 90 days. Comorbidities: hypertension, mild CKD (baseline creatinine ~1.0 mg/dL), dementia. In the elderly the illness has presented atypically — dominated by delirium and volume depletion rather than by GI symptoms, which the family under-reported.",
+  "examination": "Frail, drowsy but rousable, disoriented to time and place (delirium; GCS 14). Dry mucous membranes, reduced skin turgor, sunken eyes, capillary refill 3-4 s — clinically dehydrated. Abdomen soft with mild generalised discomfort, no guarding, no rebound, no focal peritonism; bowel sounds active. No rash, no meningism, chest clear, no CVA tenderness, no suprapubic tenderness.",
+  "vitals": {
+    "hr": 108,
+    "bp": "96/56",
+    "rr": 20,
+    "temp": 38.1,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 13.1,
+    "wbc": 12.8,
+    "platelets": 240,
+    "sodium": 149,
+    "potassium": 3.1,
+    "creatinine": 2.2,
+    "urea": 16.5,
+    "lactate": 2.3,
+    "crp": 62,
+    "comment": "Pre-renal AKI (creatinine risen from baseline ~1.0), hypernatraemic dehydration and hypokalaemia from GI losses; mild leucocytosis and CRP rise"
+  },
+  "imaging": "Erect chest and supine abdominal X-ray unremarkable — no free air, no obstruction, non-distended gas pattern. (Imaging performed to exclude an intra-abdominal mimic given the atypical delirium presentation.)",
+  "microbiology": "Blood cultures sent. Stool sent for culture, ova/parasites and C. difficile GDH/toxin — C. difficile toxin negative. Stool multiplex viral panel positive for norovirus (facility outbreak); no invasive bacterial pathogen isolated. Urinalysis negative for nitrites/leucocytes.",
+  "differentialDiagnoses": [
+    "Acute infectious gastroenteritis (norovirus outbreak) with dehydration and pre-renal AKI",
+    "Invasive bacterial diarrhoea (dysentery) — argued against by absence of blood/mucus/tenesmus",
+    "Clostridioides difficile infection — argued against by no antibiotic/PPI exposure and negative toxin",
+    "Sepsis of alternative source (e.g. UTI) presenting as delirium in the elderly",
+    "C. difficile / drug or metabolic delirium"
+  ],
+  "finalDiagnosis": "Acute infectious (viral) gastroenteritis in a frail elderly patient, complicated by hypovolaemic delirium, hypernatraemic dehydration and pre-renal acute kidney injury",
+  "citations": [
+    "IDSA — Clinical Practice Guidelines for the Diagnosis and Management of Infectious Diarrhea — 2017",
+    "Harrison's Principles of Internal Medicine 22e — Acute Infectious Diarrheal Diseases and Bacterial Food Poisoning",
+    "ICMR — Treatment Guidelines for Antimicrobial Use in Common Syndromes (Acute Gastroenteritis) — 2022"
+  ],
+  "stewardship": "Mainstay of management is aggressive fluid and electrolyte resuscitation (isotonic IV rehydration with cautious sodium correction and potassium replacement), not antibiotics — most acute gastroenteritis, including this norovirus outbreak, is self-limiting and antimicrobials are not indicated. Empiric antibacterial therapy is reserved for the subset with severe febrile illness, sepsis or dysentery; given this frail elderly patient's fever, tachycardia, hypotension and borderline lactate, an empiric course was started at presentation before stool results returned and de-escalated/stopped once norovirus was confirmed and C. difficile excluded. When empiric therapy is chosen, azithromycin (WHO AWaRe Watch) is the guideline-concordant agent (covers Campylobacter/Shigella, avoids fluoroquinolone toxicity in the elderly). Avoid antimotility agents in possible invasive disease.",
+  "contraindications": [
+    "Avoid loperamide/antimotility agents if invasive/inflammatory diarrhoea is suspected",
+    "Avoid empiric fluoroquinolones in the frail elderly (QT, tendinopathy, delirium, C. difficile risk)",
+    "Correct hypernatraemia slowly (<10 mmol/L/24h) to avoid cerebral oedema",
+    "Nephrotoxins (NSAIDs, contrast) contraindicated with pre-renal AKI"
+  ],
+  "edgeCases": [
+    "In the elderly, gastroenteritis frequently presents as delirium, falls or dehydration with under-reported GI symptoms",
+    "Facility outbreak clustering strongly suggests norovirus and argues against a bacterial cause",
+    "Negative C. difficile toxin with no antibiotic/PPI exposure makes CDI unlikely despite institutional residence",
+    "Hypovolaemic pre-renal AKI can be mistaken for intrinsic renal failure if the volume history is missed"
+  ],
+  "expectedMaiK": "Recognise acute infectious gastroenteritis with hypovolaemic delirium and pre-renal AKI in a frail elderly patient; prioritise IV rehydration and electrolyte correction, send stool/blood studies, and treat supportively rather than reflexively with antibiotics.",
+  "expectedNextQuestions": [
+    "Stool character — any blood, mucus or tenesmus (to distinguish invasive dysentery)?",
+    "Any antibiotic, PPI or hospitalisation exposure in the last 90 days (C. difficile risk)?",
+    "Are other residents/contacts affected (outbreak clustering)?",
+    "Baseline renal function and usual fluid/oral intake and medication list (diuretics, ACE-i, nephrotoxins)?",
+    "Urinary and respiratory symptoms to exclude an alternative sepsis source causing delirium?"
+  ],
+  "expectedInvestigations": [
+    "Serum electrolytes, urea and creatinine (assess dehydration, hypernatraemia, hypokalaemia, AKI)",
+    "Venous lactate and CRP; full blood count",
+    "Stool culture, ova & parasites, and C. difficile GDH/toxin",
+    "Stool multiplex/viral PCR (norovirus) in the outbreak setting",
+    "Blood cultures and urinalysis to exclude an alternative sepsis source"
+  ],
+  "expectedConfidence": 0.72,
+  "findings": {
+    "fever": true,
+    "diarrhea": true,
+    "nauseaVomiting": true,
+    "dehydration": true,
+    "abdominalPain": true,
+    "nursingHomeResident": true,
+    "alteredSensorium": true,
+    "tachycardia": true,
+    "contaminatedFoodWaterExposure": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "GASTROENTERITIS",
+    "acceptableIds": [
+      "GASTROENTERITIS"
+    ],
+    "differentialIds": [
+      "DYSENTERY",
+      "C_DIFF",
+      "SEPSIS",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "Serum electrolytes, urea, creatinine",
+      "Stool culture, ova/parasites and C. difficile toxin",
+      "Stool viral PCR (norovirus)",
+      "Venous lactate and CRP",
+      "Blood cultures and urinalysis"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be GASTROENTERITIS",
+    "Must recommend fluid/electrolyte resuscitation as primary management",
+    "Must flag pre-renal AKI and hypernatraemic dehydration secondary to GI losses",
+    "Must not misclassify as DYSENTERY given absence of bloody stool/tenesmus",
+    "Must consider and appropriately exclude C_DIFF (negative toxin, no antibiotic/PPI exposure)",
+    "Empiric antibiotics (azithromycin) reserved for severe febrile presentation and stopped once norovirus confirmed",
+    "Must avoid antimotility agents and fluoroquinolones in this frail elderly patient"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

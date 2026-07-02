@@ -1,0 +1,108 @@
+{
+  "id": "gc_373",
+  "specialty": "Neurology",
+  "condition": "Tension-type headache",
+  "age": 44,
+  "sex": "F",
+  "presentingComplaint": "Recurrent, near-daily bilateral 'tight band' head pressure for the past 4 months, worse at the end of the working day.",
+  "history": "A 44-year-old female office administrator with a stressful workload and poor sleep describes a dull, pressing, non-pulsatile headache felt across the forehead and around the head like a tight band, radiating into the posterior neck and shoulders. Episodes last most of the day, occur on roughly 15 days per month, and are mild-to-moderate in intensity (4-5/10). The pain is NOT aggravated by walking or routine physical activity and she is able to continue working through it. There is no vomiting; she reports only mild sensitivity to noise on bad days but no true photophobia, no aura, no visual scotoma, and no unilateral throbbing quality. She initially wondered if these were migraines because a friend had migraine, and she has been taking paracetamol/ibuprofen 2-3 days per week without clear benefit. No thunderclap onset, no worst-ever headache, no headache waking her from sleep, no worsening on coughing/bending, no fever, no weight loss, no jaw claudication or scalp tenderness. No new neurological symptoms. She frequently palpates tender knots in her neck and temples. Not pregnant; not on hormonal contraception.",
+  "examination": "Alert, comfortable, well. No cranial bruit. Marked tenderness of the pericranial and cervical paraspinal muscles (frontalis, temporalis, trapezius) on manual palpation. Temporal arteries soft, non-tender, pulsatile. Cranial nerves normal. Fundoscopy: crisp optic discs, no papilloedema. No focal motor or sensory deficit, normal coordination and gait, no neck stiffness. Blood pressure normal.",
+  "vitals": {
+    "hr": 78,
+    "bp": "126/80",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "esr_mm_hr": 12,
+    "crp_mg_l": 2,
+    "hemoglobin_g_dl": 13.4,
+    "tsh_miu_l": 2.1,
+    "note": "ESR/CRP normal (argues against giant cell arteritis); routine bloods unremarkable"
+  },
+  "imaging": "MRI brain with contrast and MR venogram (obtained because of near-daily pattern to reassure and exclude secondary cause): normal parenchyma, no mass or midline shift, ventricles normal, no hydrocephalus, no meningeal enhancement, patent dural venous sinuses.",
+  "microbiology": "Not applicable (non-infective condition).",
+  "differentialDiagnoses": [
+    "Chronic/episodic migraine without aura",
+    "Medication-overuse headache (analgesic use 2-3 days/week, below the usual overuse threshold)",
+    "Idiopathic intracranial hypertension",
+    "Space-occupying lesion",
+    "Giant cell arteritis (excluded by age, normal temporal arteries and normal ESR/CRP)"
+  ],
+  "finalDiagnosis": "Frequent episodic tension-type headache (ICHD-3), with associated pericranial tenderness",
+  "citations": [
+    "International Headache Society — ICHD-3 Tension-Type Headache classification — 2018",
+    "American Academy of Neurology / American Headache Society — Tension-Type Headache diagnosis and management — 2021",
+    "Harrison's Principles of Internal Medicine 22e — Headache / Tension-Type Headache"
+  ],
+  "stewardship": "Not applicable — tension-type headache is non-infective; no antibiotics indicated. Management is reassurance, stress/sleep/posture modification, limiting acute analgesic use to <10-15 days/month to avoid medication-overuse headache, and amitriptyline as first-line preventive if frequent.",
+  "contraindications": [
+    "Avoid opioids and butalbital-containing combinations (risk of medication-overuse headache and dependence)",
+    "Caution with escalating NSAID/paracetamol frequency (medication-overuse headache risk)",
+    "Amitriptyline: avoid/caution in significant cardiac conduction disease, closed-angle glaucoma, urinary retention"
+  ],
+  "edgeCases": [
+    "Overlap with migraine: bilateral, non-throbbing, activity-independent pain without vomiting favours TTH over migraine",
+    "A change to daily headache always warrants a red-flag review before labelling as primary headache",
+    "If analgesic days rise above 10-15/month, reclassify as medication-overuse headache",
+    "New papilloedema, focal deficit, or positional/valsalva-triggered pain would mandate urgent imaging and change the diagnosis"
+  ],
+  "expectedMaiK": "Recognise this as a primary tension-type headache: bilateral pressing band-like pain, mild-moderate, not aggravated by activity, no vomiting, with pericranial muscle tenderness and a normal neurological exam — distinguishing it from migraine and excluding red-flag secondary causes.",
+  "expectedNextQuestions": [
+    "Frequency of headache days and number of days per month using acute analgesics?",
+    "Any red-flag features: thunderclap onset, positional worsening, waking from sleep, focal deficit, visual loss, fever, weight loss, jaw claudication?",
+    "Impact of routine physical activity and presence of nausea/vomiting or aura?",
+    "Sleep, stress, posture, screen time and caffeine pattern?"
+  ],
+  "expectedInvestigations": [
+    "Clinical diagnosis using ICHD-3 criteria — no routine imaging required in absence of red flags",
+    "Full neurological examination including fundoscopy for papilloedema",
+    "ESR/CRP if age or features raise concern for giant cell arteritis",
+    "MRI brain (+/- MR venography) only if red-flag or atypical features present"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "headache": true,
+    "age": true,
+    "sex": true,
+    "heartRate": true,
+    "sbp": true,
+    "dbp": true,
+    "tempC": true,
+    "spo2": true,
+    "gcs": true
+  },
+  "expected": {
+    "diagnosis": "tension_ha",
+    "acceptableIds": [
+      "tension_ha"
+    ],
+    "differentialIds": [
+      "migraine",
+      "iih",
+      "brain_tumour"
+    ],
+    "investigations": [
+      "Clinical diagnosis per ICHD-3 criteria",
+      "Neurological examination with fundoscopy",
+      "MRI brain if red-flag/atypical features",
+      "ESR/CRP to exclude giant cell arteritis"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['tension_ha']",
+    "No antibiotics should be recommended (non-infective condition)",
+    "Differential must include migraine as the primary overlapping mimic",
+    "Normal neurological exam and normal imaging must not be overridden toward a secondary-cause diagnosis",
+    "Absence of aggravation by activity, vomiting, and throbbing quality supports TTH over migraine"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

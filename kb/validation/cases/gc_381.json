@@ -1,0 +1,109 @@
+{
+  "id": "gc_381",
+  "specialty": "Neurology / Nutrition",
+  "condition": "Wernicke encephalopathy",
+  "age": 79,
+  "sex": "F",
+  "presentingComplaint": "Progressive confusion, unsteadiness and double vision over 10 days in a frail, non-drinking elderly woman.",
+  "history": "79-year-old widow, lives alone, increasingly frail over the past year with 8 kg unintentional weight loss and poor appetite following her husband's death and a recent hip fracture. For the past 6 weeks she has eaten very little, subsisting mainly on tea and biscuits, with intermittent nausea and vomiting attributed to 'a bad tummy'. She was admitted 5 days ago for dehydration and a fall and started on IV 5% dextrose maintenance fluids without vitamin supplementation. Family now report she has become drowsy, muddled about where she is, apathetic, and has developed double vision and a staggering gait. No alcohol use (lifelong near-teetotaller). No fever, no headache, no focal weakness. Background: osteoporosis, mild cognitive baseline but independent until recently, hypertension.",
+  "examination": "Cachectic, frail elderly woman. Disoriented to time and place, inattentive and apathetic (global confusional state) but no aphasia or hemiparesis. Eye movements: horizontal gaze-evoked nystagmus with impaired bilateral abduction (partial ophthalmoplegia). Gait wide-based and ataxic, unable to stand unaided; heel-shin dysmetria bilaterally. Reflexes reduced at ankles (peripheral neuropathy). No neck stiffness. No asterixis. No jaundice or stigmata of chronic liver disease.",
+  "vitals": {
+    "hr": 96,
+    "bp": "116/72",
+    "rr": 16,
+    "temp": 36.1,
+    "spo2": 97
+  },
+  "labs": {
+    "sodium": "137 mmol/L (normocorrected)",
+    "glucose": "6.2 mmol/L",
+    "lactate": "3.1 mmol/L (mildly elevated)",
+    "creatinine": "1.0 mg/dL",
+    "ammonia": "38 µmol/L (normal)",
+    "magnesium": "0.58 mmol/L (low)",
+    "wholeBloodThiamine": "42 nmol/L (low; ref 66-200)",
+    "tsh": "2.1 mIU/L",
+    "b12": "310 ng/L",
+    "gcs": "13 (E3 V4 M6)"
+  },
+  "imaging": "MRI brain: symmetrical T2/FLAIR hyperintensity in the mammillary bodies, medial thalami and periaqueductal grey matter, without diffusion restriction of a vascular territory; no acute infarct, no subdural collection, no mass lesion.",
+  "microbiology": "Not applicable (non-infective).",
+  "differentialDiagnoses": [
+    "Metabolic/toxic encephalopathy",
+    "Acute ischaemic stroke (posterior circulation)",
+    "Hyponatraemic encephalopathy",
+    "Chronic subdural haematoma (post-fall, elderly)"
+  ],
+  "finalDiagnosis": "Wernicke encephalopathy due to nutritional thiamine deficiency in a frail elderly woman, precipitated by carbohydrate (IV dextrose) loading without thiamine — a non-alcoholic presentation.",
+  "citations": [
+    "EFNS — Guideline on diagnosis and management of Wernicke encephalopathy — 2010",
+    "Harrison's Principles of Internal Medicine, 22e — Thiamine (Vitamin B1) Deficiency and Wernicke-Korsakoff Syndrome"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Do NOT administer IV glucose/dextrose before parenteral thiamine — glucose loading can precipitate or worsen Wernicke encephalopathy",
+    "Oral thiamine is inadequate for acute treatment (poor and unreliable enteral absorption); give parenteral (IV) thiamine",
+    "Correct coexisting hypomagnesaemia — magnesium is a cofactor and deficiency impairs thiamine-dependent enzyme activity and response to replacement"
+  ],
+  "edgeCases": [
+    "The classic triad (confusion, ophthalmoplegia, ataxia) is present in a minority; diagnosis is clinical and treatment must not await MRI or thiamine levels",
+    "Non-alcoholic causes (starvation, prolonged vomiting, hyperemesis, bariatric surgery, malignancy, refeeding) are frequently missed, especially in the elderly",
+    "Normal thiamine level does not exclude the diagnosis; empirical high-dose IV thiamine is low-risk and should be given on suspicion"
+  ],
+  "expectedMaiK": "Wernicke encephalopathy — a clinical emergency of thiamine deficiency presenting with confusion, ocular signs and gait ataxia; here in a non-alcoholic frail elderly woman with starvation and dextrose-precipitated decompensation.",
+  "expectedNextQuestions": [
+    "Detailed dietary/nutritional history and duration of reduced intake or vomiting",
+    "Was IV dextrose or a carbohydrate load given before thiamine?",
+    "Any bariatric surgery, malignancy, hyperemesis or dialysis (non-alcoholic risk factors)?",
+    "Timeline and progression of ocular, gait and cognitive changes"
+  ],
+  "expectedInvestigations": [
+    "Immediate high-dose parenteral thiamine (do not delay for tests)",
+    "MRI brain (mammillary bodies, medial thalami, periaqueductal grey)",
+    "Serum magnesium, glucose, sodium, renal and liver function",
+    "Whole-blood thiamine / erythrocyte transketolase (result should not delay treatment)"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "alteredSensorium": true,
+    "ataxia": true,
+    "visualDisturbance": true,
+    "weightLoss": true,
+    "nauseaVomiting": true,
+    "behavioralChange": true,
+    "dehydration": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "wernicke",
+    "acceptableIds": [
+      "wernicke"
+    ],
+    "differentialIds": [
+      "metabolic_enceph",
+      "ischemic_stroke",
+      "hyponatremia",
+      "subdural"
+    ],
+    "investigations": [
+      "Immediate high-dose IV thiamine before any glucose",
+      "MRI brain",
+      "Serum magnesium, glucose, sodium",
+      "Whole-blood thiamine / erythrocyte transketolase"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank wernicke as top diagnosis despite absence of alcohol history",
+    "Must flag contraindication: parenteral thiamine before IV glucose",
+    "Must not recommend antibiotics (non-infective)",
+    "Should recognise nutritional/starvation aetiology as a valid non-alcoholic cause"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

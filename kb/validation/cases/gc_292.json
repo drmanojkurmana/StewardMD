@@ -1,0 +1,113 @@
+{
+  "id": "gc_292",
+  "specialty": "Central Nervous System",
+  "condition": "Viral (Aseptic) Meningitis",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening headache, fever and neck discomfort in a man with poorly controlled type 2 diabetes.",
+  "history": "A 54-year-old man with a 9-year history of type 2 diabetes mellitus (last HbA1c 9.1%, on metformin and glimepiride) presents with a 48-hour history of frontal and occipital headache, low-grade fever, generalised myalgia and photophobia. He describes a mild diarrhoeal illness in the preceding week and reports a similar coryzal illness in his teenage son. He denies focal weakness, confusion, seizures, rash or recent antibiotic use. Because of his diabetes and the presence of fever with neck stiffness, the admitting team were initially concerned about pyogenic bacterial meningitis and started empiric therapy in the emergency department pending CSF. He remains fully oriented throughout, with no drowsiness or behavioural change. No recent travel, no head trauma, not immunosuppressed beyond diabetes, HIV non-reactive.",
+  "examination": "Alert and fully oriented, GCS 15. Neck stiffness with mild Kernig sign; no Brudzinski. Photophobia present. No papilloedema on fundoscopy. No focal neurological deficit, normal power, tone, reflexes and plantars. No cranial nerve palsy. No petechial or purpuric rash. Chest clear, abdomen soft, no organomegaly. Capillary glucose 214 mg/dL, no ketonuria.",
+  "vitals": {
+    "hr": 96,
+    "bp": "138/82",
+    "rr": 18,
+    "temp": 38.4,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "9.8 x10^9/L (neutrophils 62%)",
+    "crp": "38 mg/L",
+    "procalcitonin": "0.12 ng/mL (low, argues against bacterial)",
+    "sodium": "137 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "glucose_serum": "214 mg/dL",
+    "hba1c": "9.1%",
+    "csf_opening_pressure": "18 cmH2O",
+    "csf_wbc": "185 cells/µL, 92% lymphocytes",
+    "csf_rbc": "2 cells/µL",
+    "csf_protein": "0.68 g/L (mildly raised)",
+    "csf_glucose": "3.9 mmol/L (CSF:serum ratio 0.62, normal)",
+    "csf_lactate": "1.9 mmol/L (normal)",
+    "csf_gram_stain": "no organisms seen"
+  },
+  "imaging": "CT head without contrast prior to LP: normal, no mass lesion, no midline shift, no hydrocephalus, basal cisterns patent.",
+  "microbiology": "CSF Gram stain negative; CSF bacterial culture no growth at 48h; blood cultures negative; CSF meningo/encephalitis multiplex PCR POSITIVE for Enterovirus; HSV-1/2, VZV, S. pneumoniae, N. meningitidis, H. influenzae, L. monocytogenes and Cryptococcus antigen all negative; CSF AFB smear/GeneXpert MTB negative.",
+  "differentialDiagnoses": [
+    "Viral (aseptic) enteroviral meningitis",
+    "Early partially-treated bacterial meningitis",
+    "Viral encephalitis (HSV)",
+    "Tuberculous meningitis"
+  ],
+  "finalDiagnosis": "Viral (aseptic) meningitis due to Enterovirus, with type 2 diabetes as a confounding comorbidity that initially raised concern for pyogenic bacterial meningitis",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Acute Meningitis (Viral/Aseptic Meningitis), 2022",
+    "IDSA — Practice Guidelines for the Management of Bacterial Meningitis, 2004 (empiric therapy and CSF interpretation for exclusion)"
+  ],
+  "stewardship": "Empiric IV ceftriaxone was appropriately started in the ED for a diabetic patient with fever and meningism while awaiting CSF. Once the LP showed a lymphocytic pleocytosis with normal CSF:serum glucose ratio, normal lactate, negative Gram stain and low procalcitonin, and the multiplex PCR confirmed Enterovirus with negative bacterial and HSV targets, empiric antibacterials (and any empiric acyclovir) should be STOPPED. Enteroviral meningitis in an immunocompetent adult is self-limiting; management is supportive (analgesia, antipyretics, IV fluids, glycaemic control). No ongoing antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid NSAIDs at high dose given diabetes/renal risk; NSAID-induced aseptic meningitis is also a mimic to keep in mind",
+    "Do not delay LP for CT unless focal deficit, papilloedema, immunosuppression or reduced GCS — none present here"
+  ],
+  "edgeCases": [
+    "Diabetes and mild CSF protein elevation can wrongly anchor on bacterial meningitis; the normal CSF:serum glucose ratio, normal lactate and low procalcitonin are the discriminators",
+    "Preserved GCS with no focal deficit, seizure or behavioural change argues against encephalitis",
+    "Lymphocytic pleocytosis with low CSF glucose would instead point to TB meningitis — here CSF glucose ratio is normal and GeneXpert negative"
+  ],
+  "expectedMaiK": "Viral (aseptic) meningitis: lymphocytic CSF pleocytosis with normal glucose ratio, normal lactate, negative Gram stain/culture and positive enterovirus PCR in a fully-alert patient; diabetes is a confounder, not the cause. Stop empiric antibiotics once bacterial meningitis excluded.",
+  "expectedNextQuestions": [
+    "Any confusion, drowsiness, seizures or behavioural change to suggest encephalitis?",
+    "Preceding diarrhoeal/coryzal illness or sick contacts (enteroviral clustering)?",
+    "Any recent NSAID, IVIG, or antibiotic use (drug-induced aseptic meningitis)?",
+    "HIV status and other immunosuppression beyond diabetes?"
+  ],
+  "expectedInvestigations": [
+    "Lumbar puncture with CSF cell count, protein, glucose (with paired serum glucose) and lactate",
+    "CSF Gram stain, bacterial culture and meningitis/encephalitis multiplex PCR (enterovirus, HSV, VZV)",
+    "Serum procalcitonin/CRP to help discriminate viral vs bacterial",
+    "CT head before LP only if focal signs/reduced GCS (normal here)"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "nauseaVomiting": true,
+    "myalgiaArthralgia": true,
+    "subacuteOnset": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "VIRAL_MENINGITIS",
+    "acceptableIds": [
+      "VIRAL_MENINGITIS"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "CNS_TB"
+    ],
+    "investigations": [
+      "Lumbar puncture with CSF cell count/protein/glucose and paired serum glucose",
+      "CSF meningitis/encephalitis multiplex PCR (enterovirus, HSV)",
+      "CSF Gram stain and bacterial culture",
+      "Serum procalcitonin/CRP"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Ceftriaxone (empiric in ED pending CSF; DISCONTINUE once bacterial meningitis excluded and enterovirus PCR positive — viral meningitis is managed supportively)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be VIRAL_MENINGITIS",
+    "CSF shows lymphocytic pleocytosis with NORMAL CSF:serum glucose ratio and normal lactate",
+    "Empiric antibiotics must be stopped once enterovirus PCR positive and bacterial cultures negative",
+    "Preserved GCS with no focal deficit distinguishes from encephalitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

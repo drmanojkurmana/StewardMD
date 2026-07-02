@@ -1,0 +1,113 @@
+{
+  "id": "gc_306",
+  "specialty": "Surgical / GI",
+  "condition": "Bowel obstruction",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "One day of intermittent cramping central abdominal pain with mild bloating and a single episode of vomiting.",
+  "history": "Retired teacher, brought by daughter with ~24 hours of colicky, waxing-and-waning peri-umbilical pain that comes in short waves every few minutes and then settles almost completely. She feels 'blown up' after meals and has vomited once (bilious, non-projectile). She has passed a small amount of flatus this morning but no stool since yesterday and describes reduced flatus overall. Appetite poor but she is still sipping fluids without difficulty. No fever, no rigors, no diarrhoea, no haematemesis or melaena, no urinary symptoms. Past surgical history of total abdominal hysterectomy with bilateral salpingo-oophorectomy 12 years ago and an open appendicectomy in her twenties. No prior obstruction episodes. Not on opioids. This presentation is deliberately early and subtle: she looks well, pain is mild and colicky rather than constant, and obstipation is only partial — the diagnosis rests on the surgical history plus early distension and a clear transition point on imaging rather than a florid 'absolute constipation and copious vomiting' textbook picture.",
+  "examination": "Comfortable between episodes, not distressed, well perfused. Abdomen mildly distended, soft, with only mild generalised tenderness and no guarding, rebound or rigidity. No palpable mass. Old midline (Pfannenstiel) and right iliac fossa scars, no incisional hernia palpable, no groin hernia. Bowel sounds increased and intermittently high-pitched/tinkling. Empty rectum on PR, no blood. No peritonism.",
+  "vitals": {
+    "hr": 92,
+    "bp": "128/76",
+    "rr": 16,
+    "temp": 37.1,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "13.4 g/dL",
+    "wbc": "9.1 x10^9/L",
+    "platelets": "270 x10^3/µL",
+    "creatinine": "0.9 mg/dL",
+    "urea": "6.8 mmol/L",
+    "sodium": "138 mmol/L",
+    "potassium": "3.6 mmol/L",
+    "chloride": "99 mmol/L",
+    "bicarbonate": "24 mmol/L",
+    "lactate": "1.4 mmol/L",
+    "crp": "8 mg/L"
+  },
+  "imaging": "Erect and supine abdominal X-ray: two or three mildly dilated central small-bowel loops (up to ~3.2 cm) with a couple of short air-fluid levels; gas still present in colon and rectum (incomplete/partial obstruction). CT abdomen/pelvis with contrast: dilated proximal small bowel with a smooth transition point in the right lower quadrant adjacent to adhesional banding at the old appendicectomy site, collapsed distal small bowel, no closed loop, no free air, normal bowel-wall enhancement, no mesenteric oedema or pneumatosis — early adhesive partial small-bowel obstruction without ischaemia.",
+  "microbiology": "Not applicable — non-infective mechanical process. Blood cultures not indicated in the absence of sepsis.",
+  "differentialDiagnoses": [
+    "Adhesive partial small-bowel obstruction (most likely given surgical history and CT transition point)",
+    "Irritable bowel syndrome / functional bloating",
+    "Acute gastroenteritis",
+    "Biliary colic",
+    "Early mesenteric ischaemia (excluded by normal lactate and normal bowel enhancement on CT)"
+  ],
+  "finalDiagnosis": "Early adhesive partial (incomplete) small-bowel obstruction secondary to post-operative adhesions.",
+  "citations": [
+    "World Society of Emergency Surgery (WSES) — Bologna Guidelines for Adhesive Small Bowel Obstruction — 2018",
+    "American College of Radiology (ACR) Appropriateness Criteria — Suspected Small-Bowel Obstruction — 2020",
+    "Harrison's Principles of Internal Medicine, 22e — Intestinal Obstruction"
+  ],
+  "stewardship": "Non-infective mechanical obstruction — no empiric antibiotics indicated. Antibiotics are reserved for suspected strangulation, perforation, or peri-operative prophylaxis if surgery is undertaken.",
+  "contraindications": [
+    "Avoid opioid analgesia as first line where possible — worsens ileus and can mask progression",
+    "Do not give prokinetics or bulk laxatives in mechanical obstruction",
+    "Avoid oral gastrografin challenge before excluding complete obstruction/ischaemia if CT is ambiguous"
+  ],
+  "edgeCases": [
+    "Early obstruction can pass a small amount of flatus/stool from distal bowel, falsely reassuring against a mechanical cause",
+    "Normal WBC, CRP and lactate do NOT exclude obstruction and are used mainly to argue against strangulation",
+    "Adhesions are the commonest cause after previous abdominal/pelvic surgery even without a hernia",
+    "A rising lactate, constant (rather than colicky) pain, tachycardia, fever or peritonism signals strangulation and mandates urgent surgery"
+  ],
+  "expectedMaiK": "Recognise post-surgical colicky pain with early distension, reduced flatus and high-pitched bowel sounds as mechanical small-bowel obstruction; confirm with CT showing a transition point; manage a non-strangulated partial SBO conservatively (NBM, NG decompression, IV fluids, electrolyte correction, serial exam) while watching for strangulation.",
+  "expectedNextQuestions": [
+    "Previous abdominal or pelvic surgery, or prior obstruction episodes?",
+    "When did she last pass flatus and stool?",
+    "Is the pain colicky/intermittent or constant and worsening?",
+    "Any fever, or is the abdomen becoming rigid/tender (signs of strangulation)?",
+    "Any groin or incisional swelling suggesting a hernia?"
+  ],
+  "expectedInvestigations": [
+    "Erect/supine abdominal X-ray",
+    "CT abdomen and pelvis with contrast to identify cause, level and transition point and exclude ischaemia/closed loop",
+    "FBC, U&E and serum lactate",
+    "Venous blood gas",
+    "Group and save"
+  ],
+  "expectedConfidence": 0.83,
+  "findings": {
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "abdominalDiscomfort": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "ageOver50": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "bowel_obstruction",
+    "acceptableIds": [
+      "bowel_obstruction"
+    ],
+    "differentialIds": [
+      "ibs",
+      "GASTROENTERITIS",
+      "biliary_colic",
+      "mesenteric_ischemia"
+    ],
+    "investigations": [
+      "CT abdomen/pelvis with contrast",
+      "Erect/supine abdominal X-ray",
+      "FBC, U&E, lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank bowel_obstruction as the top diagnosis given post-surgical history, colicky pain, distension and reduced flatus.",
+    "Engine must NOT recommend empiric antibiotics for uncomplicated non-infective obstruction.",
+    "Engine should recommend cross-sectional imaging (CT) to localise the transition point and exclude strangulation.",
+    "Engine should flag strangulation red flags (rising lactate, constant pain, peritonism, fever) as escalation criteria."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

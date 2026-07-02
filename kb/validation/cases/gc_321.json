@@ -1,0 +1,122 @@
+{
+  "id": "gc_321",
+  "specialty": "Cardiology",
+  "condition": "Acute heart failure / pulmonary edema",
+  "age": 86,
+  "sex": "F",
+  "presentingComplaint": "Two weeks of increasing breathlessness and confusion, worse over the last 3 days, brought in by her care-home staff after she became unable to lie flat overnight.",
+  "history": "Frail 86-year-old nursing-home resident with long-standing hypertension and permanent atrial fibrillation (on apixaban and bisoprolol). No prior formal diagnosis of heart failure. Family and staff describe an insidious decline rather than dramatic acute distress: progressive fatigue, reduced appetite, needing an extra pillow, and mild daytime drowsiness/confusion that they initially attributed to a 'urine infection'. Ankle swelling has crept up over the fortnight. She has become slower to mobilise and eats little. She recently ran out of her indapamide for about ten days when a repeat prescription lapsed. No fever, cough or sputum, no chest pain, no leg pain. This atypical, subacute, confusion-predominant picture in a frail elderly woman is easily mistaken for infection or delirium, but the underlying process is decompensated heart failure with preserved ejection fraction.",
+  "examination": "Elderly, frail, mildly agitated and disoriented to time and place (baseline normally oriented per staff). Sitting upright, mild respiratory distress, using accessory muscles intermittently. JVP raised to the angle of the jaw at 45 degrees. Bilateral fine inspiratory crackles to mid-zones. Irregularly irregular pulse. Displaced, dyskinetic apex not well localised. Soft systolic murmur at apex. Pitting edema to both knees. Warm peripheries, cap refill 3s. Abdomen soft, mild hepatic congestion, no tenderness. Chest wall non-tender.",
+  "vitals": {
+    "hr": 104,
+    "bp": "158/92",
+    "rr": 26,
+    "temp": 36.9,
+    "spo2": 90
+  },
+  "labs": {
+    "ntProBNP_pg_mL": 6820,
+    "creatinine_mg_dL": 1.6,
+    "urea_mmol_L": 12.4,
+    "sodium_mmol_L": 133,
+    "potassium_mmol_L": 4.4,
+    "hemoglobin_g_dL": 11.2,
+    "wbc_x10e9_L": 8.1,
+    "crp_mg_L": 9,
+    "troponinT_ng_L": 38,
+    "albumin_g_dL": 3.3,
+    "tsh_mIU_L": 2.1
+  },
+  "imaging": "Chest X-ray: cardiomegaly, upper-lobe blood diversion, interstitial (Kerley B) lines and bilateral perihilar bat-wing haziness with small bilateral pleural effusions; no focal consolidation. Bedside lung ultrasound: multiple bilateral B-lines. Transthoracic echo: preserved LVEF (~55%), concentric LV hypertrophy, grade II-III diastolic dysfunction, dilated left atrium, elevated E/e', moderate functional mitral regurgitation, dilated IVC with reduced collapse.",
+  "microbiology": "Urinalysis with trace leukocytes only; urine culture subsequently no significant growth. Blood cultures not indicated (afebrile, no septic features).",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure with preserved ejection fraction (HFpEF) causing cardiogenic pulmonary edema",
+    "Community-acquired pneumonia",
+    "Pulmonary embolism",
+    "COPD/other airways exacerbation",
+    "Bilateral pleural effusion of other cause"
+  ],
+  "finalDiagnosis": "Acute decompensated heart failure (HFpEF) with cardiogenic pulmonary edema, precipitated by rapid AF and diuretic non-adherence, presenting atypically with confusion in a frail elderly patient",
+  "citations": [
+    "ESC — Acute and Chronic Heart Failure Guidelines — 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Heart Failure and Cor Pulmonale"
+  ],
+  "stewardship": "Not applicable — non-infective cardiogenic pulmonary edema; avoid reflex antibiotics for the CXR haziness, which reflects pulmonary edema rather than consolidation.",
+  "contraindications": [
+    "Avoid excessive/rapid diuresis given AKI (creatinine 1.6) and frailty — titrate IV loop diuretic and monitor renal function and electrolytes",
+    "Avoid beta-blocker uptitration during acute decompensation; continue existing bisoprolol cautiously if not hypoperfused",
+    "Avoid nephrotoxins and NSAIDs",
+    "Nitrates only if BP tolerant (here hypertensive, so acceptable) — avoid if hypotensive"
+  ],
+  "edgeCases": [
+    "Elevated NT-proBNP must be interpreted against age and renal impairment (age-adjusted thresholds), but 6820 pg/mL is well above any cut-off",
+    "Mildly raised troponin is common in acute HF (demand ischaemia/strain) and does not by itself indicate type 1 MI",
+    "Preserved EF does NOT exclude heart failure — HFpEF predominates in elderly women",
+    "Confusion may be the dominant presenting feature of decompensation in the frail elderly, mimicking sepsis or delirium"
+  ],
+  "expectedMaiK": "In a frail elderly patient, subacute breathlessness with orthopnea, raised JVP, bilateral crackles and edema plus markedly elevated NT-proBNP and echo showing preserved EF with diastolic dysfunction indicates acute decompensated HFpEF, not infection.",
+  "expectedNextQuestions": [
+    "Baseline functional status and orthopnea/PND history from care-home staff",
+    "Medication adherence, especially recent diuretic interruption",
+    "Rate control and anticoagulation status of atrial fibrillation",
+    "Fluid/sodium intake and recent weight trend",
+    "Any chest pain or ischaemic symptoms to exclude ACS as a precipitant"
+  ],
+  "expectedInvestigations": [
+    "NT-proBNP",
+    "Transthoracic echocardiogram",
+    "Chest X-ray / bedside lung ultrasound",
+    "12-lead ECG (rate/rhythm, ischaemia)",
+    "Renal function and electrolytes",
+    "Troponin"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "legSwellingBilateral": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "hypertensionHx": true,
+    "atrialFibHx": true,
+    "age": true,
+    "nursingHomeResident": true
+  },
+  "expected": {
+    "diagnosis": "heart_failure",
+    "acceptableIds": [
+      "heart_failure"
+    ],
+    "differentialIds": [
+      "pe",
+      "CAP",
+      "copd_exac_ni",
+      "pleural_effusion"
+    ],
+    "investigations": [
+      "NT-proBNP",
+      "Transthoracic echocardiogram",
+      "Chest X-ray / lung ultrasound",
+      "ECG",
+      "Renal function and electrolytes"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == heart_failure",
+    "acceptableIds == ['heart_failure']",
+    "stewardship.tier is null and antibiotics empty (non-infective)",
+    "does not misclassify as CAP/pneumonia despite CXR haziness and confusion",
+    "recommends NT-proBNP and echocardiography"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "id": "gc_380",
+  "specialty": "Neurology / Cardiology",
+  "condition": "Vasovagal / orthostatic syncope",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Two brief 'blackouts' over the past month, the most recent an unwitnessed fall while getting up at night",
+  "history": "71-year-old woman with hypertension (on amlodipine and recently up-titrated ramipril) and long-standing type 2 diabetes brought in after a fall in the bathroom at 2 a.m. She recalls standing up quickly from the toilet, feeling briefly 'muzzy' and warm with mild nausea, then finding herself on the floor. Loss of consciousness was seconds only; she got herself up within a minute or two, was immediately oriented, and telephoned her daughter. No tongue-biting, no incontinence, no limb-jerking witnessed or reported, and no post-event drowsiness or confusion. A similar episode three weeks earlier occurred after standing in a warm temple queue; on that occasion a bystander noted she looked pale and clammy before slumping. She denies chest pain, palpitations preceding the events, exertional symptoms, or breathlessness. Poor recent oral fluid intake during hot weather. The atypical/subtle feature is the near-absent, very short prodrome and the fact that both events were provoked by standing rather than the textbook prolonged upright posture with a florid autonomic prelude. No family history of sudden cardiac death.",
+  "examination": "Alert, fully oriented, GCS 15, no focal neurological deficit, no tongue laceration. Cardiovascular exam normal: regular pulse, no murmurs, no signs of aortic stenosis, JVP not raised, chest clear, no peripheral oedema. Active standing (orthostatic) test: supine BP 138/80 (HR 70); at 3 minutes standing BP 108/66 (HR 74) with reproduction of her light-headedness and nausea — a sustained symptomatic systolic drop of ~30 mmHg with a blunted heart-rate rise consistent with autonomic impairment from diabetes and antihypertensive load. Reduced skin turgor and dry mucous membranes. No carotid bruits.",
+  "vitals": {
+    "hr": 70,
+    "bp": "138/80",
+    "rr": 14,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 12.8,
+    "creatinine": 1.1,
+    "urea": 8.4,
+    "glucose_mg_dl": 156,
+    "sodium": 139,
+    "potassium": 4.2,
+    "troponin": "not elevated (serial)",
+    "platelets": 240
+  },
+  "imaging": "12-lead ECG: sinus rhythm, normal axis, PR 168 ms, QRS 92 ms, corrected QT normal, no ischaemic changes, no pre-excitation or Brugada pattern. Chest X-ray normal. CT head (done for unwitnessed fall): no acute intracranial abnormality.",
+  "microbiology": "Not applicable — non-infective presentation.",
+  "differentialDiagnoses": [
+    "Cardiac (arrhythmic) syncope",
+    "Aortic stenosis",
+    "Acute coronary syndrome",
+    "Seizure"
+  ],
+  "finalDiagnosis": "Reflex (vasovagal) with orthostatic hypotension syncope — drug- and autonomic-related, precipitated by volume depletion",
+  "citations": [
+    "ESC — Guidelines for the Diagnosis and Management of Syncope — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Syncope"
+  ],
+  "stewardship": "Not applicable — non-infective condition; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid reflex prescription of anticonvulsants — no evidence of seizure",
+    "Avoid empirical antibiotics — no infective focus",
+    "Caution with further blood-pressure lowering; review/de-escalate ramipril and diuretic burden"
+  ],
+  "edgeCases": [
+    "Blunted compensatory tachycardia despite orthostatic drop can mask the diagnosis and mimic normal haemodynamics in patients on rate-limiting or autonomic-affecting drugs",
+    "Unwitnessed nocturnal fall raises concern for cardiac syncope or intracranial event, mandating ECG and CT before attributing to reflex/orthostatic cause",
+    "Diabetic autonomic neuropathy plus antihypertensive up-titration and dehydration can convert benign reflex susceptibility into recurrent orthostatic syncope"
+  ],
+  "expectedMaiK": "Recurrent transient loss of consciousness with rapid complete recovery, benign prodrome, situational/postural triggers, a reproducible symptomatic orthostatic BP drop and a normal ECG points to reflex/orthostatic syncope; management is medication review, volume repletion, orthostatic counter-manoeuvres and reassurance — not antibiotics or anticonvulsants.",
+  "expectedNextQuestions": [
+    "Was there any tongue-biting, incontinence, limb-jerking or post-event confusion (to exclude seizure)?",
+    "Any exertional or supine syncope, palpitations, or family history of sudden cardiac death (red flags for cardiac syncope)?",
+    "What is the full medication list and were any antihypertensives or diuretics recently started or up-titrated?",
+    "How was fluid intake and were there prodromal warmth, nausea or pallor before the event?"
+  ],
+  "expectedInvestigations": [
+    "Lying and standing (active orthostatic) blood pressure measurement",
+    "12-lead ECG",
+    "Serial troponin and basic metabolic panel / glucose",
+    "Full blood count to exclude anaemia",
+    "Consider ambulatory ECG monitoring if cardiac syncope not excluded"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "syncope": true,
+    "hypotension": true,
+    "bradycardia": true,
+    "nauseaVomiting": true,
+    "dehydration": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "age": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "vasovagal_syncope",
+    "acceptableIds": [
+      "vasovagal_syncope"
+    ],
+    "differentialIds": [
+      "atrial_fib",
+      "aortic_stenosis",
+      "acs",
+      "seizure_epilepsy"
+    ],
+    "investigations": [
+      "orthostatic (lying/standing) blood pressure",
+      "12-lead ECG",
+      "serial troponin",
+      "full blood count",
+      "CT head for unwitnessed fall"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine returns vasovagal_syncope as top diagnosis",
+    "No antimicrobial therapy is recommended (non-infective)",
+    "ECG and orthostatic BP are recommended before attributing syncope to a benign cause",
+    "Cardiac syncope, aortic stenosis and seizure appear in the differential and are actively excluded"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

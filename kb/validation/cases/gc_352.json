@@ -1,0 +1,109 @@
+{
+  "id": "gc_352",
+  "specialty": "Pulmonary / Vascular",
+  "condition": "Pulmonary embolism",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Worsening breathlessness over 3 days, initially assumed to be a flare of her heart failure",
+  "history": "Known HFrEF (LVEF 35%, ischaemic) on bisoplol, ramipril and furosemide, and completing adjuvant chemotherapy for breast cancer 3 weeks ago. Referred by GP as a 'decompensated heart failure' after progressive exertional dyspnoea and one presyncopal episode on standing. On direct questioning she also reports right-sided pleuritic chest pain and a swollen, tender right calf that she attributed to 'fluid'. No orthopnoea worse than baseline, no PND, weight unchanged, and she had not missed diuretic doses — features that sit awkwardly with a pure heart-failure decompensation. Largely immobile since her last chemotherapy cycle.",
+  "examination": "Alert, mildly distressed at rest. Chest clear with no new basal crackles and JVP not elevated above baseline, arguing against volume overload. Right calf visibly larger than left (3 cm difference) with tenderness along the deep venous line. Loud P2. No peripheral oedema disproportionate to baseline.",
+  "vitals": {
+    "hr": 112,
+    "bp": "104/68",
+    "rr": 28,
+    "temp": 37.1,
+    "spo2": 88
+  },
+  "labs": {
+    "dDimer": "4.8 mg/L FEU (markedly raised)",
+    "troponinT": "58 ng/L (mildly elevated)",
+    "ntProBNP": "2200 pg/mL (elevated but near her known baseline)",
+    "creatinine": "1.1 mg/dL",
+    "hemoglobin": "11.2 g/dL",
+    "abg": "Type 1 respiratory failure: pO2 8.0 kPa, pCO2 3.9 kPa on air"
+  },
+  "imaging": "CTPA: filling defects in the right lower lobe segmental and subsegmental pulmonary arteries with a small wedge-shaped peripheral infarct; RV:LV diameter ratio 1.0. Chest radiograph without consolidation or pulmonary oedema. Lower-limb Doppler: occlusive right popliteal DVT.",
+  "microbiology": "Not applicable",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure",
+    "Acute coronary syndrome (NSTEMI)",
+    "Pneumothorax",
+    "Community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Acute pulmonary embolism (intermediate-low risk) provoked by active malignancy and immobility, misattributed to her background heart failure",
+  "citations": [
+    "ESC — Acute Pulmonary Embolism Diagnosis and Management — 2019",
+    "Harrison's Principles of Internal Medicine 22e — Pulmonary Thromboembolism and Deep-Vein Thrombosis"
+  ],
+  "stewardship": "Not applicable (non-infective diagnosis)",
+  "contraindications": [
+    "Assess bleeding risk before anticoagulation given recent chemotherapy and possible thrombocytopenia",
+    "Avoid unnecessary IV fluid loading — the picture is not volume overload and RV is strained"
+  ],
+  "edgeCases": [
+    "Elevated NT-proBNP and troponin can be wrongly attributed to her chronic heart failure, masking RV strain from PE",
+    "Clear chest and non-elevated JVP should prompt reconsideration of a heart-failure-only diagnosis",
+    "D-dimer is non-discriminatory in active malignancy, so imaging (CTPA) is required rather than relying on biomarkers"
+  ],
+  "expectedMaiK": "Sudden hypoxia and pleuritic pain with a unilateral swollen calf in a cancer patient point to PE even when a heart-failure history offers an easy alternative explanation; clear lungs and a non-raised JVP argue against decompensation.",
+  "expectedNextQuestions": [
+    "Any recent immobility, surgery or long travel?",
+    "Is the leg swelling new and unilateral?",
+    "Is the breathlessness accompanied by pleuritic chest pain distinct from her usual heart-failure symptoms?",
+    "Any haemoptysis or presyncope?"
+  ],
+  "expectedInvestigations": [
+    "CTPA",
+    "Lower-limb compression Doppler ultrasound",
+    "ECG",
+    "Troponin and NT-proBNP",
+    "Transthoracic echocardiogram for RV strain",
+    "Arterial blood gas"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "dyspnea": true,
+    "pleuriticChestPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "syncope": true,
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "knownHeartFailure": true,
+    "malignancy": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "pe",
+    "acceptableIds": [
+      "pe"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "pneumothorax"
+    ],
+    "investigations": [
+      "CTPA",
+      "lower-limb Doppler ultrasound",
+      "ECG",
+      "echocardiogram",
+      "arterial blood gas"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be pe despite the confounding heart-failure history",
+    "Unilateral leg swelling with calf tenderness plus disproportionate hypoxia should raise PE over decompensated heart failure",
+    "Clear chest and non-raised JVP should argue against volume overload",
+    "Management centres on risk-stratified anticoagulation, not diuresis or antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

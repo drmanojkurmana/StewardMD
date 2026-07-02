@@ -1,0 +1,107 @@
+{
+  "id": "gc_319",
+  "specialty": "Gastroenterology",
+  "condition": "GERD / non-cardiac chest pain",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Recurrent retrosternal chest pain, latest episode this morning, prompting a third ED visit in six weeks for 'possible heart attack'.",
+  "history": "Hypertensive ex-smoker who describes an 8-week history of episodic squeezing/burning retrosternal pain that he initially thought was exertional angina because it sometimes came on while walking uphill after meals. On closer questioning the pain is far more reliably triggered by large evening meals, bending forward and lying flat at night (waking him around 2 am), is often accompanied by an acid/sour taste and mild regurgitation, and is promptly relieved within minutes by antacids or sitting up rather than by rest. Episodes last 20-60 minutes, do not consistently track with exertion, and are not associated with true dyspnoea or diaphoresis. Two prior ED attendances showed normal serial troponins, normal ECGs and a negative exercise stress test 3 weeks ago. He takes occasional NSAIDs for knee pain and drinks coffee heavily. No weight loss, no melaena, no true dysphagia to solids initially but reports occasional food 'sticking' when eating quickly.",
+  "examination": "Comfortable, not distressed at rest. No chest wall tenderness. Cardiovascular exam normal with no added sounds, no signs of heart failure. Chest clear. Abdomen soft with mild epigastric discomfort on deep palpation, no guarding, no organomegaly. No leg swelling or calf tenderness.",
+  "vitals": {
+    "hr": 78,
+    "bp": "142/86",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 14.2,
+    "troponin": "negative x3 (high-sensitivity)",
+    "creatinine": 0.9,
+    "electrolytes": "normal",
+    "lipidProfile": "LDL 3.1 mmol/L",
+    "hba1c": "5.6%"
+  },
+  "imaging": "ECG normal sinus rhythm, no ischaemic changes on serial tracings. Chest X-ray normal. Recent exercise tolerance test negative for inducible ischaemia.",
+  "microbiology": "Not applicable.",
+  "differentialDiagnoses": [
+    "GERD-related non-cardiac chest pain (oesophageal)",
+    "Acute coronary syndrome / stable angina (excluded by serial troponin, ECG and negative stress test)",
+    "Peptic ulcer disease (NSAID and coffee use)",
+    "Panic/anxiety-related chest pain",
+    "Pericarditis"
+  ],
+  "finalDiagnosis": "Gastro-oesophageal reflux disease presenting as non-cardiac chest pain, after objective exclusion of an acute coronary syndrome.",
+  "citations": [
+    "ACG Clinical Guideline: Diagnosis and Management of GERD, 2022",
+    "AHA/ACC Guideline for the Evaluation and Diagnosis of Chest Pain, 2021",
+    "Harrison's Principles of Internal Medicine, 22e - GERD and non-cardiac chest pain"
+  ],
+  "stewardship": "Not applicable - non-infective condition.",
+  "contraindications": [
+    "Do not attribute pain to GERD until an acute coronary syndrome has been objectively excluded in a patient with cardiac risk factors",
+    "Avoid long-term high-dose NSAIDs given reflux/PUD risk",
+    "Caution with PPI-clopidogrel interaction if antiplatelet therapy is later required"
+  ],
+  "edgeCases": [
+    "Overlapping exertional trigger and cardiac risk factors make ACS the critical mimic that must be excluded first",
+    "An empirical PPI trial supports the diagnosis but does not by itself exclude cardiac disease",
+    "New/progressive dysphagia or weight loss would mandate upper GI endoscopy to exclude malignancy or stricture"
+  ],
+  "expectedMaiK": "In a patient with cardiac risk factors and chest pain, the target diagnosis of GERD-related non-cardiac chest pain is only appropriate once ACS has been excluded by serial high-sensitivity troponin, ECG and non-invasive ischaemia testing; postprandial/nocturnal burning pain relieved by antacids and provoked by recumbency, with acid regurgitation, points to reflux.",
+  "expectedNextQuestions": [
+    "Is the pain reliably relieved by antacids or acid suppression, and worsened by lying flat or bending?",
+    "Are there alarm features - dysphagia, odynophagia, weight loss, GI bleeding or anaemia?",
+    "Have serial troponins, ECGs and a stress/ischaemia test excluded a cardiac cause?",
+    "What is the NSAID, caffeine, alcohol and late-meal pattern?"
+  ],
+  "expectedInvestigations": [
+    "Serial high-sensitivity troponin and 12-lead ECG to exclude ACS",
+    "Empirical 8-week trial of high-dose proton pump inhibitor (diagnostic and therapeutic)",
+    "Upper GI endoscopy if alarm features or PPI-refractory symptoms",
+    "Ambulatory oesophageal pH / pH-impedance monitoring if diagnosis remains uncertain"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "chestPain": true,
+    "exertionalChestPain": true,
+    "abdominalDiscomfort": true,
+    "nauseaVomiting": true,
+    "dysphagia": true,
+    "palpitations": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "gerd_chest",
+    "acceptableIds": [
+      "gerd_chest"
+    ],
+    "differentialIds": [
+      "acs",
+      "peptic_ulcer",
+      "panic",
+      "pericarditis"
+    ],
+    "investigations": [
+      "Serial high-sensitivity troponin and 12-lead ECG",
+      "Empirical high-dose PPI trial",
+      "Upper GI endoscopy if alarm features or PPI-refractory",
+      "Ambulatory oesophageal pH-impedance monitoring if uncertain"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acs must be excluded (normal serial troponin/ECG/stress test) before gerd_chest is accepted",
+    "gerd_chest must appear as the top diagnosis with acs retained in the differential",
+    "no antibiotics recommended (non-infective)",
+    "alarm features (dysphagia progression, weight loss, GI bleeding) trigger endoscopy recommendation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

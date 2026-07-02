@@ -1,0 +1,117 @@
+{
+  "id": "gc_286",
+  "specialty": "Systemic",
+  "condition": "Septic Shock",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Increasing abdominal distension, drowsiness and cold peripheries over 24 hours",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh C) with prior decompensations (ascites requiring intermittent large-volume paracentesis, one previous episode of grade 2 hepatic encephalopathy). Brought in by family who report he has become progressively more confused and lethargic since the previous evening, with a low-grade temperature and reduced urine output. On lactulose and spironolactone; abstinent from alcohol for 4 months. No haematemesis or melena reported. The picture was initially attributed to worsening hepatic encephalopathy, but he is hypotensive out of proportion to his baseline and poorly responsive to fluid, raising concern for an infective precipitant (spontaneous bacterial peritonitis) driving distributive shock. No indwelling lines or urinary catheter.",
+  "examination": "Drowsy, rousable to voice, disoriented in time and place with asterixis. Jaundiced, warm flushed peripheries centrally but cool mottled knees, capillary refill 4 s. Tense ascites with mild diffuse abdominal tenderness and no guarding. No shifting focus of infection on skin/chest. Mucous membranes dry.",
+  "vitals": {
+    "hr": 118,
+    "bp": "78/44",
+    "rr": 28,
+    "temp": 37.9,
+    "spo2": 94
+  },
+  "labs": {
+    "wbc": "16.8 ×10⁹/L (neutrophilia)",
+    "lactate": "4.6 mmol/L",
+    "creatinine": "2.4 mg/dL (baseline 1.0 — acute kidney injury)",
+    "bilirubin": "6.8 mg/dL",
+    "inr": "2.1",
+    "albumin": "2.4 g/dL",
+    "platelets": "78 ×10³/µL",
+    "sodium": "128 mmol/L",
+    "crp": "142 mg/L",
+    "map": "55 mmHg pre-vasopressor, 62 on noradrenaline"
+  },
+  "imaging": "Bedside ultrasound: gross ascites, coarse nodular cirrhotic liver, patent portal vein, no biliary dilatation. Chest radiograph clear.",
+  "microbiology": "Diagnostic paracentesis: ascitic PMN count 640 cells/mm³ (>250), consistent with spontaneous bacterial peritonitis; ascitic and blood cultures sent (subsequently grew Escherichia coli, ceftriaxone-susceptible). Urinalysis unremarkable.",
+  "differentialDiagnoses": [
+    "Septic shock secondary to spontaneous bacterial peritonitis",
+    "Hepatic encephalopathy with decompensated cirrhosis (comorbid confounder)",
+    "Hypovolaemic shock from occult variceal bleed",
+    "Type 1 hepatorenal syndrome"
+  ],
+  "finalDiagnosis": "Septic shock (distributive) precipitated by spontaneous bacterial peritonitis in decompensated cirrhosis",
+  "citations": [
+    "Surviving Sepsis Campaign — International Guidelines for Management of Sepsis and Septic Shock — 2021",
+    "EASL — Clinical Practice Guidelines on Decompensated Cirrhosis (including SBP) — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Sepsis and Septic Shock"
+  ],
+  "stewardship": "Sepsis-3 / SSC-2021 septic shock: persistent hypotension requiring vasopressors to maintain MAP ≥65 mmHg AND lactate >2 mmol/L despite adequate fluid resuscitation. The decompensated cirrhosis (low-grade fever, encephalopathy, warm vasodilated state and baseline hypotension) confounds recognition, but SOFA has risen ≥2, there is a confirmed infective source (SBP) and vasopressor-dependent hypotension. Broad-spectrum IV antibiotics within 1 hour, balanced crystalloid resuscitation, noradrenaline as first-line vasopressor, and IV albumin (SBP-specific, reduces hepatorenal syndrome/mortality). Blood and ascitic cultures before antibiotics; de-escalate to ceftriaxone once susceptibilities confirmed.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycosides given AKI and cirrhosis",
+    "Avoid excessive chloride-rich fluids; caution with over-resuscitation in tense ascites",
+    "Avoid non-selective beta-blockers acutely during shock"
+  ],
+  "edgeCases": [
+    "Cirrhotics may be afebrile or hypothermic despite severe sepsis, masking the diagnosis",
+    "Baseline vasodilated/hyperdynamic circulation lowers the 'normal' BP, so relative hypotension can be underappreciated",
+    "Encephalopathy and sepsis-associated delirium overlap — do not anchor on encephalopathy alone"
+  ],
+  "expectedMaiK": "Recognise vasopressor-dependent, lactate-elevated distributive shock from spontaneous bacterial peritonitis in a cirrhotic, not decompensated cirrhosis alone.",
+  "expectedNextQuestions": [
+    "Has diagnostic paracentesis been performed and what is the ascitic PMN count?",
+    "What was the MAP and lactate response after a fluid bolus?",
+    "Any recent GI bleeding, melena or drop in haemoglobin?",
+    "Recent healthcare contact, prior SBP or antibiotic prophylaxis?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic ascitic tap with cell count, differential and culture",
+    "Serial lactate and venous blood gas",
+    "Blood cultures x2 before antibiotics",
+    "Full blood count, renal and liver profile, coagulation",
+    "MAP monitoring on vasopressor support"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "hypotension": true,
+    "vasopressorRequirement": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "sofaIncrease": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "alteredSensorium": true,
+    "liverDisease": true,
+    "ascites": true,
+    "suspectedInfectionSource": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "SEPTIC_SHOCK",
+    "acceptableIds": [
+      "SEPTIC_SHOCK"
+    ],
+    "differentialIds": [
+      "SBP",
+      "decomp_cirrhosis",
+      "hepatic_enceph",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Diagnostic ascitic paracentesis with PMN count and culture",
+      "Serial lactate",
+      "Blood cultures before antibiotics",
+      "Renal and liver function, coagulation, FBC"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum",
+      "antibiotics": [
+        "Piperacillin-tazobactam IV",
+        "IV albumin (SBP adjunct)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['SEPTIC_SHOCK']",
+    "Model must identify vasopressor-dependent hypotension + elevated lactate as septic shock, not isolated hepatic decompensation",
+    "Empiric therapy must be broad-spectrum within 1 hour with source-directed ascitic sampling and IV albumin"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

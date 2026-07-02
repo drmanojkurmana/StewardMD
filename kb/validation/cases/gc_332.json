@@ -1,0 +1,113 @@
+{
+  "id": "gc_332",
+  "specialty": "Gastroenterology",
+  "condition": "Irritable bowel syndrome",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Long-standing lower abdominal discomfort with bloating and erratic bowel habit, present for years but reviewed today after a friend was diagnosed with bowel cancer.",
+  "history": "A 58-year-old male accountant with a 6-year history of intermittent crampy lower-abdominal discomfort that is characteristically relieved by passing stool or flatus. He describes prominent abdominal bloating that builds through the day and eases overnight, together with an unpredictable bowel habit alternating between loose morning stools and several days of harder, infrequent motions. Symptoms flare during periods of work stress and after large or fatty meals, and he reports a sensation of incomplete evacuation. There is NO rectal bleeding, no melaena, no nocturnal symptoms waking him from sleep, no unintentional weight loss, and no anaemia. Appetite is preserved and oral intake is normal. He has no family history of colorectal cancer, coeliac disease or inflammatory bowel disease. Background of well-controlled hypertension and mild anxiety; no NSAID or recent antibiotic use, no travel. This atypical picture (older man, bloating- and distension-predominant, long duration) prompted a full organic work-up which returned entirely normal, and the Rome IV criteria for IBS-mixed subtype are met.",
+  "examination": "Comfortable, well-nourished, not pale or jaundiced. Abdomen soft with mild generalised distension and non-specific lower-abdominal tenderness without guarding, rebound or a palpable mass; bowel sounds normal. No hepatosplenomegaly, no lymphadenopathy. Digital rectal examination normal with no mass and brown stool, faecal occult blood negative.",
+  "vitals": {
+    "hr": 74,
+    "bp": "126/78",
+    "rr": 14,
+    "temp": 36.7,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin_g_dL": 14.4,
+    "mcv_fL": 88,
+    "wbc_x10e9_L": 6.8,
+    "platelets_x10e3_uL": 258,
+    "crp_mg_L": 2,
+    "esr_mm_hr": 8,
+    "fecal_calprotectin_ug_g": 24,
+    "tissue_transglutaminase_IgA": "negative",
+    "tsh_mIU_L": 2.1,
+    "creatinine_mg_dL": 0.9,
+    "albumin_g_dL": 4.4,
+    "bilirubin_mg_dL": 0.6,
+    "stool_culture": "no pathogen isolated"
+  },
+  "imaging": "Abdominal ultrasound unremarkable (no mass, normal bowel wall, no obstruction). No cross-sectional imaging indicated.",
+  "microbiology": "Not applicable — no infective process. Stool culture and ova/parasite examination negative.",
+  "differentialDiagnoses": [
+    "Inflammatory bowel disease flare (excluded by normal CRP and faecal calprotectin)",
+    "Colorectal neoplasm (excluded by normal colonoscopy given age >50)",
+    "Coeliac disease (negative tTG-IgA)",
+    "Chronic infective/parasitic gastroenteritis (negative stool studies)"
+  ],
+  "finalDiagnosis": "Irritable bowel syndrome, mixed subtype (IBS-M) — positive clinical diagnosis by Rome IV criteria after a normal organic work-up including age-appropriate colonoscopy.",
+  "citations": [
+    "American College of Gastroenterology — Clinical Guideline: Management of Irritable Bowel Syndrome (2021)",
+    "British Society of Gastroenterology — Guidelines on the Management of Irritable Bowel Syndrome (2021)",
+    "Rome Foundation — Rome IV Diagnostic Criteria for Irritable Bowel Syndrome (2016)"
+  ],
+  "stewardship": "Not applicable — functional GI disorder; no antimicrobial therapy indicated. Management is dietary (low-FODMAP trial, soluble fibre), antispasmodics, and reassurance.",
+  "contraindications": [
+    "Avoid empirical antibiotics; not indicated in functional bowel disease",
+    "Avoid opioids (worsen motility and cause narcotic bowel syndrome)"
+  ],
+  "edgeCases": [
+    "New-onset symptoms in a patient >50 mandate exclusion of organic disease before labelling as IBS — done here via colonoscopy",
+    "Any alarm feature (weight loss, rectal bleeding, anaemia, nocturnal symptoms, family history of CRC/IBD) would override the IBS diagnosis and trigger further investigation"
+  ],
+  "expectedMaiK": "Irritable bowel syndrome (mixed type): a positive symptom-based diagnosis by Rome IV criteria (recurrent abdominal pain related to defecation with change in stool frequency/form) once alarm features are absent and organic disease is excluded. No antibiotics; manage with diet, antispasmodics and reassurance.",
+  "expectedNextQuestions": [
+    "Are there any alarm features — rectal bleeding, weight loss, nocturnal symptoms, or family history of colorectal cancer or IBD?",
+    "Is the abdominal pain relieved by defecation and associated with a change in stool frequency or form?",
+    "What dietary triggers (FODMAPs, fatty meals) and psychosocial stressors precipitate the symptoms?",
+    "Any recent travel, antibiotics, or NSAID use?"
+  ],
+  "expectedInvestigations": [
+    "Full blood count",
+    "CRP and/or ESR",
+    "Faecal calprotectin (to exclude IBD)",
+    "Coeliac serology (anti-tTG IgA)",
+    "TSH",
+    "Colonoscopy (indicated given age >50 / new presentation)"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "abdominalDiscomfort": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "constipationOrDiarrhea": true,
+    "nauseaVomiting": true,
+    "oralIntake": true,
+    "afebrile": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "ibs",
+    "acceptableIds": [
+      "ibs"
+    ],
+    "differentialIds": [
+      "ibd_flare",
+      "GASTROENTERITIS",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "Full blood count",
+      "CRP",
+      "Faecal calprotectin",
+      "Coeliac serology (anti-tTG IgA)",
+      "Colonoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ibs as the top diagnosis given relief with defecation, bloating, altered stool habit, and a normal organic work-up.",
+    "Engine must NOT recommend any antibiotic (non-infective functional disorder).",
+    "Absence of alarm features (no weight loss, bleeding, anaemia, fever) plus normal CRP and faecal calprotectin should lower ibd_flare below ibs.",
+    "Engine should flag age >50 as a trigger for colonoscopy to exclude organic disease before confirming IBS."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

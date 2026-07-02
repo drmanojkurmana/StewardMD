@@ -1,0 +1,128 @@
+{
+  "id": "gc_374",
+  "specialty": "Endocrine",
+  "condition": "Thyroid storm",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Two weeks of increasing lethargy, poor appetite and breathlessness, with new fast irregular heartbeat; brought in confused and mildly jaundiced.",
+  "history": "Elderly widow living alone, brought by her daughter for 2 weeks of uncharacteristic apathy, low mood and withdrawal rather than agitation. Progressive fatigue, anorexia and 6 kg unintentional weight loss over 2 months. Loose stools 3-4 times daily for a week and intermittent nausea. Daughter reports new palpitations and ankle swelling. No classic heat intolerance, sweating or tremor volunteered. Background of long-standing nodular goitre that was never investigated; recently started amiodarone by a peripheral clinic for palpitations 6 weeks ago (likely precipitant). No sedative or antipsychotic exposure, no serotonergic drugs, no fever-inducing illness identified. On presentation she is drowsy and disoriented to time and place.",
+  "examination": "Frail, apathetic elderly woman, minimally interactive (apathetic thyrotoxicosis phenotype). Warm peripheries, fine skin. Small firm multinodular goitre palpable, no bruit appreciated over noise. No exophthalmos or lid lag. Irregularly irregular pulse ~140/min with pulse deficit. Raised JVP, bibasal crepitations and bilateral pitting pedal oedema (high-output failure). Mild scleral icterus, tender smooth hepatomegaly. Fine distal tremor when hands examined. Drowsy, GCS 13 (E3V4M6), no focal neurological deficit, no neck stiffness. Reflexes brisk.",
+  "vitals": {
+    "hr": 142,
+    "bp": "104/62",
+    "rr": 24,
+    "temp": 38.4,
+    "spo2": 92
+  },
+  "labs": {
+    "tsh": "<0.01 mIU/L (suppressed)",
+    "freeT4": "58 pmol/L (markedly elevated)",
+    "freeT3": "14.2 pmol/L (elevated)",
+    "hemoglobin": "11.8 g/dL",
+    "wbc": "9.2 x10^9/L",
+    "platelets": "188 x10^3/uL",
+    "sodium": "134 mmol/L",
+    "potassium": "3.9 mmol/L",
+    "creatinine": "1.1 mg/dL",
+    "totalBilirubin": "3.4 mg/dL",
+    "alt": "78 U/L",
+    "alp": "156 U/L",
+    "albumin": "3.1 g/dL",
+    "inr": "1.3",
+    "calciumCorrected": "10.6 mg/dL",
+    "glucose": "146 mg/dL",
+    "lactate": "2.1 mmol/L",
+    "bwScore": "Burch-Wartofsky 60 (temp 15 + CNS 20 + GI/hepatic 10 + tachycardia 15 + CHF 10, minus precipitant absent) — highly suggestive of thyroid storm"
+  },
+  "imaging": "ECG: atrial fibrillation with rapid ventricular response ~140/min, no acute ischaemia. Chest X-ray: cardiomegaly with mild upper-lobe diversion and small bilateral effusions consistent with congestive failure. Bedside echo: preserved-to-hyperdynamic LV, no tamponade.",
+  "microbiology": "Blood cultures and urine culture sent to exclude sepsis as mimic/precipitant; no source identified. Not infective.",
+  "differentialDiagnoses": [
+    "Rapid atrial fibrillation with rate-related decompensation",
+    "Sepsis / systemic infection with encephalopathy",
+    "Decompensated high-output / congestive heart failure",
+    "Metabolic (hepatic) encephalopathy from congestive hepatopathy"
+  ],
+  "finalDiagnosis": "Thyroid storm (apathetic, cardiac-predominant variant) precipitated by amiodarone-induced thyrotoxicosis on a background nodular goitre; Burch-Wartofsky score 60.",
+  "citations": [
+    "American Thyroid Association (ATA) — Hyperthyroidism and Thyrotoxicosis, 2016",
+    "Burch & Wartofsky — Diagnostic Criteria for Thyroid Storm, 1993",
+    "Harrison's Principles of Internal Medicine, 22e — Thyroid Gland / Thyrotoxic Crisis"
+  ],
+  "stewardship": "Non-infective endocrine emergency; no empiric antibiotics indicated. Send cultures to exclude an occult precipitant but do not start antimicrobials without a source.",
+  "contraindications": [
+    "Avoid abrupt beta-blocker withdrawal and use cautiously given congestive failure; use rate control with monitoring",
+    "Do NOT give iodine (Lugol's/SSKI) until at least 1 hour after thionamide to avoid substrate for hormone synthesis",
+    "Salicylates contraindicated for pyrexia (displace T4 from binding proteins, worsen thyrotoxicosis) — use paracetamol",
+    "Amiodarone must be stopped (precipitant); avoid further iodinated contrast"
+  ],
+  "edgeCases": [
+    "Apathetic presentation in the elderly can be mistaken for depression, dementia or sepsis, delaying diagnosis",
+    "Amiodarone-induced thyrotoxicosis (type 1 vs 2) may need combined thionamide plus glucocorticoid",
+    "Absence of high fever or florid agitation does not exclude storm — Burch-Wartofsky remains high",
+    "Congestive hepatopathy causing jaundice can be misread as primary liver disease"
+  ],
+  "expectedMaiK": "Recognise decompensated thyrotoxicosis (thyroid storm) despite the atypical apathetic presentation using the Burch-Wartofsky score, and begin multimodal therapy: beta-blockade (rate control), a thionamide (propylthiouracil/carbimazole), iodine given >1h after thionamide, and stress-dose hydrocortisone, while stopping amiodarone and supporting heart failure.",
+  "expectedNextQuestions": [
+    "Any recent iodinated contrast, amiodarone, or antithyroid drug cessation as a precipitant?",
+    "History of goitre, prior thyroid disease or radio-iodine?",
+    "Any concurrent infection, surgery or trauma?",
+    "Baseline cognition and functional status (to interpret the apathy/confusion)?",
+    "Cardiac history and current medications?"
+  ],
+  "expectedInvestigations": [
+    "TSH, free T4 and free T3",
+    "ECG (confirm AF with RVR)",
+    "Liver function tests and coagulation profile",
+    "Chest X-ray and bedside echocardiography",
+    "Blood and urine cultures to screen for a precipitating infection",
+    "Serum calcium, glucose, renal profile and electrolytes"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "weightLoss": true,
+    "atrialFibHx": true,
+    "palpitations": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "jaundice": true,
+    "raisedJVP": true,
+    "legSwellingBilateral": true
+  },
+  "expected": {
+    "diagnosis": "thyroid_storm",
+    "acceptableIds": [
+      "thyroid_storm"
+    ],
+    "differentialIds": [
+      "atrial_fib",
+      "heart_failure",
+      "SEPSIS",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "TSH, free T4, free T3",
+      "ECG",
+      "LFTs and coagulation",
+      "Chest X-ray and echocardiography",
+      "Blood/urine cultures",
+      "Electrolytes, calcium, glucose, renal profile"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank thyroid_storm as the top diagnosis despite absence of florid agitation/heat intolerance",
+    "Suppressed TSH with elevated free T4/T3 plus high Burch-Wartofsky must drive the endocrine emergency over primary AF or heart failure",
+    "No empiric antibiotics should be recommended (non-infective); cultures only to exclude precipitant",
+    "Iodine must be sequenced after thionamide, and salicylate antipyretics must be flagged as contraindicated"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "gc_369",
+  "specialty": "Neurology / Vascular",
+  "condition": "Subdural haematoma (chronic, elderly anticoagulated variant)",
+  "age": 82,
+  "sex": "M",
+  "presentingComplaint": "Brought in by daughter with three weeks of increasing confusion, unsteadiness and a dragging left arm; no dramatic collapse.",
+  "history": "Frail 82-year-old man, lives alone with a carer twice daily. Background of paroxysmal atrial fibrillation on apixaban, hypertension, prior TIA, and mild pre-existing cognitive impairment. Family report he slipped in the bathroom about three weeks ago and knocked his head on the sink; he did not attend hospital and seemed 'fine' at the time. Over the following fortnight he became progressively more muddled, drowsy in the afternoons, and complained of a dull constant headache. In the last week his gait has deteriorated with two further near-falls, and the daughter noticed he now struggles to lift his left arm and is intermittently nauseated. No fever, neck stiffness, seizure, or sudden focal onset. Symptoms have fluctuated day to day, which had been attributed by the GP to 'worsening dementia'.",
+  "examination": "Elderly, thin, sarcopenic man. Drowsy but rousable, GCS 14 (E4 V4 M6), disoriented to time and place. Mild left pronator drift with 4/5 power in the left upper limb; left facial asymmetry is subtle. Reflexes brisker on the left with an equivocal left plantar. Gait broad-based and unsteady, unable to walk unaided. No neck stiffness, no papilloedema, pupils equal and reactive. Bruise over the right parietal scalp. No signs of sepsis.",
+  "vitals": {
+    "hr": 74,
+    "bp": "162/86",
+    "rr": 16,
+    "temp": 36.6,
+    "spo2": 97
+  },
+  "labs": {
+    "hb": "11.8 g/dL",
+    "wbc": "7.4 x10^9/L",
+    "platelets": "188 x10^9/L",
+    "inr": "1.1",
+    "aptt": "34 s",
+    "sodium": "138 mmol/L",
+    "creatinine": "112 umol/L (eGFR 52)",
+    "glucose": "6.4 mmol/L",
+    "crp": "6 mg/L",
+    "gcs": "14/15"
+  },
+  "imaging": "Non-contrast CT head: crescentic extra-axial collection over the right cerebral convexity of mixed hypo-/iso-density with internal membranes, crossing suture lines, effacing the right cortical sulci with 6 mm midline shift and early subfalcine herniation. Appearances of a chronic (with acute-on-chronic) subdural haematoma, not confined by sutures — no arterial pattern of extradural haematoma, no intra-axial infarct or mass.",
+  "microbiology": "Not applicable.",
+  "differentialDiagnoses": [
+    "Chronic (acute-on-chronic) subdural haematoma",
+    "Ischaemic stroke",
+    "Intracranial neoplasm / metastasis",
+    "Transient ischaemic attack / delirium superimposed on dementia"
+  ],
+  "finalDiagnosis": "Chronic subdural haematoma with acute-on-chronic component, right convexity, in an anticoagulated frail elderly man following a minor unwitnessed head injury.",
+  "citations": [
+    "NICE — Head injury: assessment and early management (NG232), 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Traumatic Brain Injury / Subdural Haematoma",
+    "British Society for Haematology — Reversal of anticoagulation in major bleeding, 2023"
+  ],
+  "stewardship": "Not infective — no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid continued anticoagulation until haematoma stabilised/evacuated; hold apixaban.",
+    "Consider anticoagulation reversal (e.g. andexanet/PCC per haematology) given intracranial bleed.",
+    "Avoid lumbar puncture given mass effect and midline shift.",
+    "Caution with sedatives/opioids that mask conscious level."
+  ],
+  "edgeCases": [
+    "Insidious fluctuating cognition mislabelled as progressive dementia delays diagnosis.",
+    "Normal INR/aPTT does not exclude anticoagulant effect from a factor Xa inhibitor.",
+    "Cerebral atrophy in the elderly allows large collections with only subtle focal signs.",
+    "Bilateral chronic subdural collections can present with little or no midline shift."
+  ],
+  "expectedMaiK": "Elderly anticoagulated patient with a minor head injury weeks earlier and subacute fluctuating confusion, gait disturbance and mild lateralising signs is a chronic subdural haematoma until CT proves otherwise.",
+  "expectedNextQuestions": [
+    "Any head injury or fall in the preceding weeks, even trivial or unwitnessed?",
+    "What anticoagulant/antiplatelet is he on and when was the last dose?",
+    "Has the confusion and gait been progressive or fluctuating rather than sudden?",
+    "Any headache, vomiting or worsening drowsiness?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "Coagulation screen and anti-Xa (apixaban) level",
+    "Full blood count, U&E, LFTs, glucose",
+    "Neurosurgical referral for consideration of burr-hole evacuation"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "ageOver50": true,
+    "headInjury": true,
+    "anticoagulated": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "headache": true,
+    "ataxia": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "subdural",
+    "acceptableIds": [
+      "subdural"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "brain_tumour",
+      "tia"
+    ],
+    "investigations": [
+      "Urgent non-contrast CT head",
+      "Coagulation screen and anti-Xa level",
+      "Neurosurgical referral"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank 'subdural' as the top diagnosis.",
+    "CT head must be recommended as the first-line investigation.",
+    "No antibiotics should be recommended (non-infective).",
+    "Anticoagulation must be flagged for holding/reversal.",
+    "Diagnosis must not default to dementia/delirium despite fluctuating cognition."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

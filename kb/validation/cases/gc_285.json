@@ -1,0 +1,122 @@
+{
+  "id": "gc_285",
+  "specialty": "Systemic",
+  "condition": "Sepsis",
+  "age": 84,
+  "sex": "F",
+  "presentingComplaint": "Brought from her care home with two days of increasing confusion, poor oral intake and a fall; no fever reported by staff.",
+  "history": "Frail 84-year-old nursing-home resident with background dementia, type 2 diabetes, chronic kidney disease (baseline creatinine ~1.3 mg/dL) and a long-term indwelling urinary catheter. Over 48 hours she has become progressively drowsy, off her feet and refusing food and fluids. Carers noted the catheter bag contained cloudy, malodorous urine but she never mounted a temperature and did not complain of dysuria. She had an unwitnessed fall this morning. No cough, breathlessness, abdominal pain or diarrhoea. No recent hospital admission but received a course of oral nitrofurantoin 6 weeks ago for a catheter-associated UTI.",
+  "examination": "Frail, cachectic elderly woman appearing unwell and mottled peripherally. Drowsy but rousable, disoriented to time and place (a clear change from her usual baseline where she converses). Peripheries cool with prolonged capillary refill (4 s). Mucous membranes dry, reduced skin turgor. Chest clear, abdomen soft with mild suprapubic fullness; catheter draining scanty cloudy urine. No focal neurology, no neck stiffness, no rash. No cellulitis or pressure-sore infection identified.",
+  "vitals": {
+    "hr": 112,
+    "bp": "86/50",
+    "rr": 26,
+    "temp": 35.4,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "18.9 x10^9/L (neutrophils 16.2)",
+    "lactate": "3.6 mmol/L",
+    "creatinine": "2.4 mg/dL (baseline ~1.3)",
+    "urea": "18 mmol/L",
+    "platelets": "128 x10^3/µL",
+    "bilirubin": "1.2 mg/dL",
+    "crp": "212 mg/L",
+    "procalcitonin": "6.8 ng/mL",
+    "glucose": "11.4 mmol/L",
+    "na": "133 mmol/L",
+    "venousBicarb": "18 mmol/L"
+  },
+  "imaging": "Portable chest radiograph clear with no consolidation or effusion. Bedside bladder scan shows a partially obstructed catheter with ~180 mL residual; renal tract ultrasound shows no hydronephrosis or abscess.",
+  "microbiology": "Urinalysis: leucocytes +++, nitrites positive. Catheter urine and two sets of blood cultures sent before antibiotics; Gram-negative bacilli subsequently grown from urine and one blood-culture set (E. coli, ESBL result pending given prior antibiotic exposure).",
+  "differentialDiagnoses": [
+    "Sepsis of urinary source (urosepsis) with acute organ dysfunction",
+    "Early septic shock",
+    "Acute pyelonephritis / complicated UTI",
+    "Hypovolaemia / dehydration from poor intake",
+    "Metabolic (toxic) encephalopathy / delirium from another cause"
+  ],
+  "finalDiagnosis": "Sepsis (Sepsis-3: suspected urinary infection plus acute organ dysfunction, SOFA rise ≥2) in a frail elderly catheterised patient presenting atypically without fever",
+  "citations": [
+    "Surviving Sepsis Campaign (SCCM/ESICM) — Management of Sepsis and Septic Shock — 2021",
+    "Sepsis-3 Consensus (SCCM/ESICM/JAMA) — Definitions for Sepsis and Septic Shock — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Sepsis and Septic Shock"
+  ],
+  "stewardship": "Sepsis bundle within 1 hour: obtain blood and urine cultures and lactate before antibiotics, give broad-spectrum empiric IV antibiotics, and begin balanced crystalloid resuscitation (30 mL/kg titrated cautiously given CKD/frailty). Healthcare-associated urinary source with recent antibiotic exposure and prior CA-UTI raises ESBL risk, so empiric cover is broadened accordingly. Exchange the blocked catheter for source control. De-escalate to a targeted agent once susceptibilities return; reassess lactate and perfusion, escalate to vasopressors if hypotension persists despite fluids.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycoside monotherapy given AKI on CKD",
+    "Cautious high-volume fluid bolus given frailty and risk of pulmonary oedema — titrate to perfusion",
+    "Nitrofurantoin inappropriate for systemic/urosepsis and contraindicated at this eGFR"
+  ],
+  "edgeCases": [
+    "Elderly septic patients are frequently normothermic or hypothermic rather than febrile; absence of fever must not lower suspicion",
+    "Delirium/new confusion may be the ONLY presenting feature of sepsis in frail older adults",
+    "Blocked catheter can precipitate ascending infection and mandates source control (catheter change)"
+  ],
+  "expectedMaiK": "Recognise sepsis in a frail elderly patient despite the absence of fever: new confusion, hypotension, tachypnoea, hypothermia and raised lactate indicate infection with organ dysfunction. Activate the 1-hour sepsis bundle (cultures, lactate, broad-spectrum antibiotics, IV fluids) and achieve urinary source control.",
+  "expectedNextQuestions": [
+    "Baseline cognition and functional status (to confirm confusion is acute)?",
+    "Duration and appearance of catheter urine; when was the catheter last changed?",
+    "Recent antibiotic courses or prior resistant urinary isolates (ESBL/MDR)?",
+    "Fluid intake and urine output over the last 24-48 hours?",
+    "Any competing source: chest, skin/pressure sores, abdomen, lines?"
+  ],
+  "expectedInvestigations": [
+    "Serial venous lactate",
+    "Blood cultures x2 and catheter urine culture before antibiotics",
+    "FBC, CRP/procalcitonin, U&E and creatinine (organ dysfunction / SOFA)",
+    "Venous blood gas for acid-base status",
+    "Urinalysis and bladder/renal tract ultrasound to confirm and exclude obstruction"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "nursingHomeResident": true,
+    "alteredSensorium": true,
+    "hypotension": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypothermia": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "sofaIncrease": true,
+    "suspectedInfectionSource": true,
+    "toxicAppearing": true,
+    "indwellingCatheter": true
+  },
+  "expected": {
+    "diagnosis": "SEPSIS",
+    "acceptableIds": [
+      "SEPSIS"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "PYELONEPHRITIS",
+      "hypovolemic_shock",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "lactate",
+      "blood_cultures",
+      "urine_culture",
+      "fbc",
+      "creatinine",
+      "venous_blood_gas"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must diagnose SEPSIS despite the patient being afebrile/hypothermic rather than febrile",
+    "Presence of infection source plus organ dysfunction (SOFA ≥2: hypotension, raised lactate, AKI, altered sensorium) must trigger sepsis recognition",
+    "Empiric therapy must be broad-spectrum IV covering Gram-negatives with source control, not narrow oral urinary agents",
+    "Must not down-triage to simple UTI/delirium given hypotension and lactataemia"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "id": "gc_280",
+  "specialty": "Systemic",
+  "condition": "Pyrexia of Unknown Origin",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Documented fever for 5 weeks with fatigue and 4 kg weight loss, referred as query 'diabetic infection vs cancer recurrence'.",
+  "history": "Type 2 diabetes for 18 years (HbA1c 8.4%) and breast carcinoma treated 4 years ago (currently in remission on annual surveillance). For 5 weeks she has had daily fevers to 38.5-38.8 C, worse in the late afternoon, with drenching night sweats, anorexia and 4 kg unintentional weight loss. Two prior primary-care courses of empirical antibiotics (co-amoxiclav then nitrofuranitoin for presumed UTI) produced no response. Comorbidities repeatedly anchored the picture: fever was first attributed to a diabetic foot/urinary focus, then to suspected breast-cancer relapse. However, a complete first-pass inpatient work-up has been unrevealing: three sets of blood cultures negative, urine culture sterile, chest radiograph and CT chest/abdomen/pelvis show no abscess, no lymph-node mass and no recurrent tumour, and mammography/tumour-marker surveillance are stable. No localising symptoms, no cough, no dysuria, no joint swelling. No recent travel; lives in an urban area; no TB contact known; no IVDU. She thus fulfils classic PUO criteria (fever >38.3 C, >3 weeks, undiagnosed after appropriate initial inpatient investigation), with two major comorbidities confounding early triage.",
+  "examination": "Frail, mildly cachectic elderly woman, alert and not toxic. No rash, no eschar, no stigmata of endocarditis, no new murmur. Chest clear. Abdomen soft; spleen tip just palpable; no hepatomegaly, no focal tenderness. Small mobile 1 cm cervical and axillary nodes. Diabetic feet intact, no ulcer. Temporal arteries non-tender, no scalp tenderness or jaw claudication reported. No synovitis.",
+  "vitals": {
+    "hr": 94,
+    "bp": "126/74",
+    "rr": 18,
+    "temp": 38.6,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin_g_dL": 9.8,
+    "wbc_x10e3_uL": 7.2,
+    "platelets_x10e3_uL": 410,
+    "ESR_mm_hr": 88,
+    "CRP_mg_L": 96,
+    "ferritin_ng_mL": 640,
+    "albumin_g_dL": 3,
+    "creatinine_mg_dL": 1.1,
+    "ALT_U_L": 34,
+    "ALP_U_L": 118,
+    "HbA1c_pct": 8.4,
+    "LDH_U_L": 240,
+    "bloodCultures_x3": "no growth at 5 days",
+    "urineCulture": "sterile",
+    "HIV_serology": "non-reactive",
+    "procalcitonin_ng_mL": 0.18
+  },
+  "imaging": "CXR normal. CT chest/abdomen/pelvis: no abscess, no dominant lymphadenopathy, no organomegaly beyond a marginally enlarged spleen, no recurrent breast malignancy. No focal source identified on first-pass cross-sectional imaging.",
+  "microbiology": "Three sets of blood cultures negative; urine sterile; procalcitonin low; HIV non-reactive. No microbiological source identified after initial appropriate work-up.",
+  "differentialDiagnoses": [
+    "Disseminated/occult tuberculosis",
+    "Occult lymphoma or relapsed malignancy (B-symptoms)",
+    "Culture-negative infective endocarditis",
+    "Large-vessel / giant cell arteritis (elderly)"
+  ],
+  "finalDiagnosis": "Pyrexia (fever) of unknown origin - classic PUO fulfilling criteria after unrevealing initial inpatient work-up, with diabetes and prior malignancy as confounding comorbidities",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e - Fever of Unknown Origin (2022)",
+    "IDSA - Diagnostic Approach to Fever of Unknown Origin (2022)"
+  ],
+  "stewardship": "Classic PUO in a haemodynamically stable, non-neutropenic, non-toxic patient: empirical antibiotics are NOT indicated and should be withheld, as they obscure the diagnosis (e.g. partially treat endocarditis, delay TB/lymphoma diagnosis) and drive resistance - two prior empirical courses already failed. Pursue a structured second-tier work-up before any antimicrobial. Reserve empirical therapy (Access-tier, e.g. IV ceftriaxone) only if she develops sepsis/haemodynamic instability or a source is confirmed. Avoid empirical corticosteroids until GCA/lymphoma are excluded.",
+  "contraindications": [
+    "Do not start empirical broad-spectrum antibiotics in a stable classic PUO",
+    "Do not give empirical corticosteroids before excluding lymphoma and confirming GCA",
+    "Avoid anchoring on diabetes/prior malignancy and stopping the systematic work-up"
+  ],
+  "edgeCases": [
+    "Diabetes and prior breast cancer bias clinicians toward diabetic infection or relapse, delaying the true diagnosis",
+    "Low procalcitonin with high ESR/CRP argues against occult bacterial sepsis and toward TB, malignancy or vasculitis",
+    "Elderly patient: GCA can present as isolated fever without headache and must be actively excluded"
+  ],
+  "expectedMaiK": "Recognise this fulfils classic PUO criteria; continue a structured, escalating diagnostic work-up (directed by potentially diagnostic clues) and WITHHOLD empirical antibiotics and steroids while haemodynamically stable.",
+  "expectedNextQuestions": [
+    "Any night sweats, cough, or known TB contact/prior TB?",
+    "Any headache, scalp tenderness, jaw claudication or visual symptoms (GCA)?",
+    "Detailed drug, travel, animal and occupational exposure history?",
+    "Any localising symptom or new lymph-node/mass since onset?"
+  ],
+  "expectedInvestigations": [
+    "Repeat/extended blood cultures (prolonged incubation) and echocardiography for culture-negative endocarditis",
+    "Peripheral smear, LDH, protein electrophoresis and excision biopsy of an accessible lymph node",
+    "Temporal artery biopsy / large-vessel imaging given age and very high ESR",
+    "FDG-PET/CT to localise occult infection, malignancy or large-vessel vasculitis",
+    "Interferon-gamma release assay, sputum/tissue AFB and mycobacterial cultures"
+  ],
+  "expectedConfidence": 0.6,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "prolongedFeverUnexplained": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "eveningFever": true,
+    "splenomegaly": true,
+    "lymphadenopathy": true,
+    "diabetesHx": true,
+    "malignancy": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "PUO",
+    "acceptableIds": [
+      "PUO"
+    ],
+    "differentialIds": [
+      "DISSEMINATED_TB",
+      "malignancy_b",
+      "IE",
+      "temporal_arteritis"
+    ],
+    "investigations": [
+      "extended_blood_cultures",
+      "echocardiography",
+      "lymph_node_biopsy",
+      "temporal_artery_biopsy",
+      "FDG_PET_CT",
+      "igra_afb"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return PUO as the primary diagnosis",
+    "Engine must NOT recommend empirical antibiotics for a stable classic PUO (antibiotics list empty)",
+    "Differential must include occult TB, malignancy/lymphoma, culture-negative endocarditis and GCA",
+    "Engine must flag prolongedFeverUnexplained as the key discriminator despite confounding comorbidities"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

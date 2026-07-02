@@ -1,0 +1,112 @@
+{
+  "id": "gc_248",
+  "specialty": "Genitourinary",
+  "condition": "Catheter-Associated Urinary Tract Infection",
+  "age": 82,
+  "sex": "F",
+  "presentingComplaint": "New-onset confusion and reduced oral intake over 2 days, noted by nursing-home staff.",
+  "history": "Resident of a long-term care facility with a chronic indwelling urethral catheter in situ for 4 months (neurogenic bladder after prior stroke). Over the last 48 hours she has become intermittently drowsy and disoriented, has eaten poorly and has had one unwitnessed fall. No dysuria, urgency or suprapubic pain reported (catheter in place). No cough, breathlessness, diarrhoea or new focal weakness. The catheter bag has shown darker, more cloudy urine over the same period. No recent antibiotics; last catheter change 3 weeks ago. Background: hypertension, type 2 diabetes, prior ischaemic stroke with residual left hemiparesis, mild baseline cognitive impairment.",
+  "examination": "Frail elderly woman, drowsy but rousable and localising, mildly dehydrated with dry mucous membranes. No neck stiffness, no new focal neurological deficit beyond her chronic left hemiparesis, pupils equal and reactive. Chest clear, heart sounds normal, abdomen soft with mild suprapubic fullness but no guarding; no flank tenderness elicited. Urethral catheter draining cloudy, dark urine. No rash, no calf swelling, feet warm.",
+  "vitals": {
+    "hr": 98,
+    "bp": "116/68",
+    "rr": 18,
+    "temp": 37.9,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "13.8 x10^9/L (neutrophilia)",
+    "crp": "112 mg/L",
+    "creatinine": "1.4 mg/dL (baseline 0.9)",
+    "urea": "11.2 mmol/L",
+    "sodium": "141 mmol/L",
+    "glucose": "168 mg/dL",
+    "lactate": "1.6 mmol/L",
+    "urinalysis": "leucocyte esterase positive, nitrite positive, pyuria (WBC >100/hpf) on catheter specimen"
+  },
+  "imaging": "Bedside bladder scan shows no significant retained residual with catheter patent. Chest radiograph clear. CT head (given confusion) shows only established old infarct with age-related atrophy, no acute intracranial pathology.",
+  "microbiology": "Catheter-specimen urine culture (sent after catheter exchange) grows >10^5 CFU/mL Escherichia coli, sensitive to co-amoxiclav, cephalosporins, nitrofurantoin and gentamicin; ESBL negative. Blood cultures pending.",
+  "differentialDiagnoses": [
+    "Catheter-associated urinary tract infection presenting as delirium",
+    "Complicated (non-catheter) urinary tract infection",
+    "Acute pyelonephritis",
+    "Metabolic/toxic encephalopathy from another source",
+    "Early sepsis of undetermined source"
+  ],
+  "finalDiagnosis": "Catheter-associated urinary tract infection (CA-UTI) with a subtle, non-localising presentation (delirium and low-grade fever) in a frail elderly woman with a chronic indwelling catheter.",
+  "citations": [
+    "IDSA — Diagnosis, Prevention and Treatment of Catheter-Associated UTI — 2009",
+    "Harrison's Principles of Internal Medicine 22e — Urinary Tract Infections, Pyelonephritis and Prostatitis"
+  ],
+  "stewardship": "CA-UTI with systemic signs: remove or exchange the catheter before starting therapy and send a fresh catheter/urine specimen. Start empiric IV ceftriaxone and de-escalate to a narrow oral agent guided by susceptibilities; treat 7 days if prompt response (up to 10-14 days if delayed response). Do NOT treat asymptomatic catheter-associated bacteriuria — systemic features (delirium, fever, neutrophilia) here justify treatment.",
+  "contraindications": [
+    "Avoid nitrofurantoin for suspected upper-tract/systemic involvement and if eGFR is reduced",
+    "Do not treat asymptomatic bacteriuria in catheterised patients",
+    "Adjust renally-cleared agents (e.g. gentamicin) given AKI and age"
+  ],
+  "edgeCases": [
+    "Delirium and anorexia may be the ONLY manifestation of CA-UTI in the elderly; classic dysuria/frequency are typically absent because the catheter bypasses the urethra",
+    "Pyuria and a positive dipstick are near-universal with a catheter and do NOT by themselves diagnose infection; correlate with systemic features",
+    "Culture from an old catheter reflects biofilm — replace the catheter and re-sample before treatment"
+  ],
+  "expectedMaiK": "In a catheterised frail elderly patient, new delirium plus low-grade fever, neutrophilia and cloudy urine indicate CA-UTI even without urinary symptoms; catheter exchange and fresh culture precede empiric therapy, and asymptomatic bacteriuria must not be treated.",
+  "expectedNextQuestions": [
+    "How long has the catheter been in situ and when was it last changed?",
+    "Any localising symptoms (flank pain, rigors) or features suggesting an alternative source of confusion?",
+    "Recent antibiotics, prior resistant organisms (ESBL/CRE) or hospitalisations?",
+    "Baseline cognition and functional status to gauge delirium?"
+  ],
+  "expectedInvestigations": [
+    "Exchange catheter then send catheter-specimen urine microscopy and culture",
+    "Blood cultures before antibiotics",
+    "FBC, CRP, U&E/creatinine, glucose",
+    "Bladder scan for retention/catheter patency",
+    "Consider CT head only if focal deficit or no infective source found"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "indwellingCatheter": true,
+    "longTermCatheter": true,
+    "complicatedUTIRisk": true,
+    "fever": true,
+    "alteredSensorium": true,
+    "nursingHomeResident": true,
+    "tachycardia": true,
+    "diabetesHx": true,
+    "cerebrovascularDisease": true
+  },
+  "expected": {
+    "diagnosis": "CA_UTI",
+    "acceptableIds": [
+      "CA_UTI"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS",
+      "SEPSIS",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Catheter exchange with fresh catheter-specimen urine culture",
+      "Blood cultures",
+      "FBC, CRP, U&E/creatinine",
+      "Urinalysis (leucocyte esterase/nitrite)"
+    ],
+    "stewardship": {
+      "tier": "moderate",
+      "antibiotics": [
+        "Ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['CA_UTI']",
+    "Engine should not flag asymptomatic bacteriuria for treatment; systemic features drive the decision",
+    "Recommendation must include catheter exchange plus fresh culture before/at antibiotic initiation",
+    "Empiric therapy should be a guideline-concordant agent (e.g. ceftriaxone) with de-escalation on susceptibilities"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

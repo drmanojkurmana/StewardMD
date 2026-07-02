@@ -1,0 +1,113 @@
+{
+  "id": "gc_311",
+  "specialty": "Neurology / Emergency",
+  "condition": "Spinal cord compression",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden inability to move both legs and inability to pass urine for 12 hours, on a background of 3 weeks of mid-back pain.",
+  "history": "Known castration-resistant metastatic prostate adenocarcinoma diagnosed 2 years ago (on abiraterone), with documented thoracic and lumbar vertebral metastases on prior bone scan. For 3 weeks he had progressive band-like interscapular/mid-thoracic back pain, worse on lying flat and with coughing, initially attributed to his known bone disease and managed with escalating opioids. Over the last 48 hours he developed rapidly progressive heaviness and numbness of both legs, and this morning became unable to stand or walk. For the last 12 hours he has been unable to void despite a strong urge, with suprapubic fullness, and has had one episode of faecal incontinence. He reports a clear sensory 'cut-off' around the lower chest with numbness below. No recent trauma, no fever, no preceding diarrhoeal or respiratory illness. Unintentional weight loss of ~7 kg over 3 months. This is a time-critical presentation: complete motor loss has been present for under 24 hours.",
+  "examination": "Alert, in distress from urinary retention and pain, not toxic or febrile. Focal midline tenderness and a percussion 'step' over the mid-thoracic spine. Neurological exam: flaccid paraplegia with power 0-1/5 in both lower limbs, hypotonia (early spinal shock), absent knee and ankle reflexes, and bilateral extensor plantar responses. A well-demarcated sensory level to pinprick and light touch at T6 with loss of sensation below. Upper limbs entirely normal. Palpable, distended, dull, non-tender bladder to the umbilicus; reduced anal tone with absent anal wink on PR. Saddle numbness present. No neck stiffness; upper-limb and cranial nerve exam normal.",
+  "vitals": {
+    "hr": 104,
+    "bp": "138/84",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 9.8,
+    "wbc": 7.4,
+    "platelets": 210,
+    "creatinine": 1.6,
+    "urea": 9.2,
+    "correctedCalcium": 2.78,
+    "alkalinePhosphatase": 486,
+    "psa": 312,
+    "crp": 18,
+    "albumin": 3.2
+  },
+  "imaging": "Urgent whole-spine MRI (within hours of presentation): T5-T6 vertebral body metastatic deposit with posterior epidural soft-tissue extension causing severe circumferential compression and T2 signal change within the cord; multiple additional non-compressive vertebral metastases at T10 and L2. Post-void bladder ultrasound shows >800 mL retained urine.",
+  "microbiology": "Not applicable — non-infective, mechanical/malignant cord compression. Blood cultures not indicated; afebrile with no infective source.",
+  "differentialDiagnoses": [
+    "Metastatic epidural spinal cord compression (MESCC) from prostate carcinoma — confirmed",
+    "Guillain-Barré syndrome (flaccid areflexic weakness) — excluded by clear sensory level, sphincter involvement and MRI",
+    "Multiple myeloma with vertebral collapse and cord compression",
+    "Aortic dissection / spinal cord infarction causing acute paraparesis",
+    "Metastatic malignancy with paraneoplastic/systemic decline"
+  ],
+  "finalDiagnosis": "Acute metastatic spinal cord compression (T5-T6) from prostate carcinoma — complete motor and sphincter loss <24h; oncological neurosurgical emergency.",
+  "citations": [
+    "NICE — Spinal metastases and metastatic spinal cord compression — 2023",
+    "Harrison's Principles of Internal Medicine 22e — Diseases of the Spinal Cord / Neoplastic Spinal Cord Compression"
+  ],
+  "stewardship": "Not applicable — non-infective condition; no empiric antibiotics indicated.",
+  "contraindications": [
+    "Do not delay MRI for other tests — whole-spine MRI is emergent and time-critical for neurological salvage",
+    "Avoid lumbar puncture before imaging in suspected cord compression",
+    "Mobilise flat / nurse with spinal precautions until spinal stability assessed",
+    "High-dose corticosteroids with caution in uncontrolled diabetes; give PPI cover"
+  ],
+  "edgeCases": [
+    "Early spinal shock can produce flaccidity and areflexia, mimicking a lower-motor-neuron/Guillain-Barré picture — the sensory level and sphincter loss are discriminating",
+    "Painless retention with overflow may be the only sphincter clue in a distracted or heavily opioid-loaded patient",
+    "Return of ambulation is strongly time-dependent: patients treated while still ambulant do far better than those already paraplegic"
+  ],
+  "expectedMaiK": "Recognise MESCC as a neurosurgical/oncological emergency: immediate high-dose dexamethasone (e.g., 16 mg IV then maintenance) plus emergent whole-spine MRI and same-day referral to spinal surgery/clinical oncology for decompression or urgent radiotherapy; catheterise for retention.",
+  "expectedNextQuestions": [
+    "Exact time of onset of leg weakness and last time able to walk (window for intervention)?",
+    "Bladder and bowel function — any retention, incontinence or loss of sensation?",
+    "Level and character of back pain, and any nocturnal/recumbent worsening?",
+    "Known primary malignancy, current oncological treatment and prior imaging?"
+  ],
+  "expectedInvestigations": [
+    "Urgent whole-spine MRI with contrast",
+    "Bladder scan / post-void residual and immediate catheterisation",
+    "FBC, U&E, corrected calcium, LFTs, ALP",
+    "PSA and coagulation profile",
+    "CT chest/abdomen/pelvis or bone scan for staging if not recent"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "age": true,
+    "sex": true,
+    "ageOver50": true,
+    "backPain": true,
+    "focalNeuroDeficit": true,
+    "urinaryRetention": true,
+    "constipationOrDiarrhea": true,
+    "weightLoss": true,
+    "malignancy": true
+  },
+  "expected": {
+    "diagnosis": "cord_compression",
+    "acceptableIds": [
+      "cord_compression"
+    ],
+    "differentialIds": [
+      "gbs",
+      "myeloma",
+      "aortic_dissection",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Urgent whole-spine MRI",
+      "Bladder scan and catheterisation for post-void residual",
+      "Corrected calcium, U&E, FBC, ALP",
+      "PSA / staging imaging"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank cord_compression as top diagnosis given back pain + T6 sensory level + flaccid paraplegia + urinary retention in a patient with metastatic prostate cancer",
+    "Engine must flag this as an emergency requiring immediate MRI and steroids, not deferred workup",
+    "Engine must NOT recommend empiric antibiotics (non-infective, afebrile)",
+    "Sensory level plus sphincter loss should down-weight GBS relative to cord compression"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "id": "gc_293",
+  "specialty": "Vascular emergency",
+  "condition": "Ruptured abdominal aortic aneurysm",
+  "age": 76,
+  "sex": "M",
+  "presentingComplaint": "Sudden collapse with left flank and back pain, initially triaged as renal colic",
+  "history": "76-year-old man, ex-smoker (50 pack-years), longstanding hypertension and known COPD, brought in after a witnessed syncopal episode at home. Two hours earlier he developed abrupt, severe left flank and lumbar back pain radiating to the left groin, with one episode of vomiting. The junior triage note labelled this 'likely renal colic' because of the flank-to-groin radiation and prior nephrolithiasis. However the pain is constant (not colicky), unrelieved by position, and was accompanied by transient loss of consciousness with pallor and sweating. No haematuria reported. He is on amlodipine and had not previously had aortic imaging. Over 40 minutes in the department he became progressively drowsy and clammy.",
+  "examination": "Cold, pale, diaphoretic and restless. Peripheries poorly perfused with thready pulses. Abdomen shows a tender, expansile, pulsatile epigastric/periumbilical mass with left flank fullness and bruising developing over the left loin (early Grey-Turner). Peritonism in the left flank. Femoral pulses palpable but weak and symmetric. No focal neurology.",
+  "vitals": {
+    "hr": 128,
+    "bp": "76/48",
+    "rr": 28,
+    "temp": 36.2,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": "8.4 g/dL (dropping)",
+    "hematocrit": "26%",
+    "platelets": "168 x10^3/uL",
+    "creatinine": "2.1 mg/dL",
+    "urea": "13.4 mmol/L",
+    "lactate": "5.6 mmol/L",
+    "inr": "1.4",
+    "bloodGroupCrossmatch": "urgent 6 units packed cells requested (massive transfusion protocol activated)"
+  },
+  "imaging": "Bedside FAST/aortic POCUS: dilated infrarenal aorta ~8.2 cm with surrounding hypoechoic retroperitoneal fluid. Emergent non-contrast then CT angiogram (haemodynamics briefly permitting): 8.3 cm infrarenal fusiform abdominal aortic aneurysm with a large left-sided retroperitoneal haematoma and active contrast extravasation — confirmed rupture.",
+  "microbiology": "Not applicable (non-infective vascular catastrophe); blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Ruptured abdominal aortic aneurysm (leading)",
+    "Left ureteric/renal colic (the triage mimic)",
+    "Acute mesenteric ischaemia",
+    "Aortic dissection extending to abdominal aorta",
+    "Non-aneurysmal haemorrhagic/hypovolaemic shock"
+  ],
+  "finalDiagnosis": "Ruptured infrarenal abdominal aortic aneurysm (8.3 cm) with retroperitoneal haemorrhage and haemorrhagic shock",
+  "citations": [
+    "European Society for Vascular Surgery (ESVS) — Management of Abdominal Aorto-iliac Artery Aneurysms — 2019",
+    "Society for Vascular Surgery (SVS) — Care of Patients with an Abdominal Aortic Aneurysm — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Aorta"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; no antibiotics indicated. This is a time-critical surgical emergency.",
+  "contraindications": [
+    "Avoid aggressive crystalloid over-resuscitation — target permissive hypotension (systolic ~70-90 mmHg while conscious) to limit clot disruption",
+    "Do not delay for extensive imaging in the crashing patient — transfer directly to theatre",
+    "Avoid opioid-induced hypotension without volume/blood readiness"
+  ],
+  "edgeCases": [
+    "Flank-to-groin pain radiation misattributed to renal colic is a classic lethal pitfall in elderly hypertensive men",
+    "Femoral pulses may remain palpable and symmetric despite rupture, falsely reassuring against dissection",
+    "Contained retroperitoneal rupture can produce transient haemodynamic stabilisation before catastrophic free rupture"
+  ],
+  "expectedMaiK": "Recognise haemorrhagic shock from a ruptured AAA: activate vascular surgery and massive transfusion protocol immediately, apply permissive hypotension, and move to theatre/EVAR rather than pursuing a renal-colic workup.",
+  "expectedNextQuestions": [
+    "Is there a known AAA or prior aortic imaging?",
+    "Is the abdominal mass pulsatile and expansile?",
+    "Character of pain — constant tearing vs colicky?",
+    "Is the patient on anticoagulants/antiplatelets?"
+  ],
+  "expectedInvestigations": [
+    "Immediate bedside aortic ultrasound (POCUS/FAST)",
+    "Urgent CT angiogram of aorta if haemodynamically permissible",
+    "Group and crossmatch 6 units + activate massive transfusion protocol",
+    "Point-of-care haemoglobin, lactate, coagulation and renal function"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "pulsatileMass": true,
+    "severeAbdominalPain": true,
+    "backPain": true,
+    "flankPain": true,
+    "syncope": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "oliguria": true
+  },
+  "expected": {
+    "diagnosis": "aaa",
+    "acceptableIds": [
+      "aaa"
+    ],
+    "differentialIds": [
+      "renal_colic",
+      "aortic_dissection",
+      "mesenteric_ischemia",
+      "hypovolemic_shock"
+    ],
+    "investigations": [
+      "Bedside aortic POCUS / FAST",
+      "CT angiogram of the aorta",
+      "Group and crossmatch + massive transfusion protocol",
+      "Point-of-care haemoglobin and lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['aaa']",
+    "Model must prioritise ruptured AAA over the renal-colic triage label given pulsatile expansile mass + shock",
+    "No antibiotics should be recommended (non-infective)",
+    "Management must include permissive hypotension and immediate vascular surgery activation, not fluid overload"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

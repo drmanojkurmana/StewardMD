@@ -1,0 +1,127 @@
+{
+  "id": "gc_323",
+  "specialty": "Endocrine",
+  "condition": "Hyperosmolar hyperglycaemic state",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Found unresponsive at home with two witnessed focal seizures of the right arm",
+  "history": "Type 2 diabetic for 12 years on metformin and gliclazide, with hypertension and stage 3 CKD. Over the preceding 10 days he had progressive polyuria, unquenchable thirst and increasing daytime somnolence following a lower-respiratory viral illness for which he had reduced his oral intake. In the last 48 hours family noted profound lethargy, poor fluid intake and reduced urine output. This morning he was found slumped and unrousable with two episodes of rhythmic twitching of the right arm lasting under a minute each. No preceding chest pain, headache or trauma. No abdominal pain or vomiting. Medication adherence had been erratic during the illness.",
+  "examination": "Deeply obtunded (GCS E2V2M4 = 8), profoundly volume-depleted with dry mucous membranes, sunken eyes, cool peripheries and prolonged capillary refill (4 s). Skin turgor markedly reduced. Subtle right-sided pronator drift with an extensor right plantar noted between seizures, resolving over subsequent hours with rehydration. No neck stiffness, no rash, chest clear, abdomen soft. No ketotic fetor.",
+  "vitals": {
+    "hr": 128,
+    "bp": "84/52",
+    "rr": 24,
+    "temp": 36.6,
+    "spo2": 96
+  },
+  "labs": {
+    "glucose_mg_dl": 1082,
+    "sodium_mmol_l": 149,
+    "corrected_sodium_mmol_l": 166,
+    "potassium_mmol_l": 5.3,
+    "bicarbonate_mmol_l": 19,
+    "venous_pH": 7.31,
+    "anion_gap": 14,
+    "measured_osmolality_mOsm_kg": 374,
+    "effective_osmolality_mOsm_kg": 358,
+    "serum_ketones_mmol_l": 0.9,
+    "urine_ketones": "trace",
+    "creatinine_mg_dl": 3.2,
+    "urea_mmol_l": 32,
+    "lactate_mmol_l": 2.1,
+    "hemoglobin": 15.8,
+    "wbc": 13.2,
+    "hba1c_percent": 13.4
+  },
+  "imaging": "Non-contrast CT head: no haemorrhage, no established infarct, age-appropriate atrophy — excludes structural cause for the seizures and focal signs, consistent with a metabolic aetiology. CXR: clear.",
+  "microbiology": "Blood cultures sent; urinalysis negative for nitrites/leucocytes. No source of sepsis identified.",
+  "differentialDiagnoses": [
+    "Hyperosmolar hyperglycaemic state (HHS)",
+    "Diabetic ketoacidosis",
+    "Acute ischaemic stroke (focal deficit and seizures)",
+    "Hypovolaemic shock from another cause",
+    "Metabolic / septic encephalopathy"
+  ],
+  "finalDiagnosis": "Severe hyperosmolar hyperglycaemic state (glucose 1082 mg/dL, effective osmolality 358 mOsm/kg, minimal ketosis, pH 7.31) complicated by hypovolaemic shock, hyperosmolar coma, focal seizures and pre-renal acute kidney injury on CKD",
+  "citations": [
+    "ADA/EASD — Hyperglycaemic Crises in Adults (DKA and HHS) Consensus, 2024",
+    "JBDS-IP — Management of the Hyperosmolar Hyperglycaemic State (HHS) in Adults with Diabetes, 2022"
+  ],
+  "stewardship": "Non-infective metabolic emergency; no empiric antibiotics indicated. Treat with graded IV 0.9% sodium chloride resuscitation, hourly monitoring of glucose, sodium and osmolality (aim controlled fall in osmolality <3–8 mOsm/kg/h), potassium replacement guided by levels, and low-dose insulin only after fluid resuscitation is under way and once glucose is no longer falling with fluids alone. VTE prophylaxis and precipitant search.",
+  "contraindications": [
+    "Avoid rapid insulin bolus before fluid resuscitation — precipitates circulatory collapse and rapid osmotic shift",
+    "Do not correct sodium/osmolality faster than recommended — risk of cerebral oedema",
+    "Avoid hypotonic fluids as first-line resuscitation despite hypernatraemia",
+    "Withhold nephrotoxic agents and metformin given AKI"
+  ],
+  "edgeCases": [
+    "Focal seizures and focal neurological deficit in HHS mimic acute stroke but characteristically reverse with correction of osmolality",
+    "Measured sodium appears only mildly high but corrected sodium reveals severe free-water deficit",
+    "Mild acidosis with a modestly raised anion gap can occur in HHS from lactate/starvation ketosis and should not be mislabelled as DKA"
+  ],
+  "expectedMaiK": "Recognise severe HHS (marked hyperglycaemia + effective osmolality >320 with minimal ketosis) presenting as hyperosmolar coma with shock; prioritise aggressive isotonic fluid resuscitation and osmolality monitoring over early insulin, and treat focal neurology as metabolic once CT excludes stroke.",
+  "expectedNextQuestions": [
+    "Timeline of polyuria, polydipsia and reduced oral intake",
+    "Precipitating illness or infection and medication adherence",
+    "Baseline renal function and current urine output",
+    "Any preceding focal weakness, headache or trauma to weigh against stroke"
+  ],
+  "expectedInvestigations": [
+    "Bedside and laboratory glucose",
+    "Serum and calculated effective osmolality",
+    "U&E with corrected sodium and potassium",
+    "Venous blood gas with pH and bicarbonate",
+    "Serum and urine ketones (to distinguish from DKA)",
+    "Non-contrast CT head for focal signs/seizures",
+    "ECG and cardiac/renal precipitant screen",
+    "Septic screen (blood cultures, urinalysis, CXR)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "alteredSensorium": true,
+    "polyuriaPolydipsia": true,
+    "dehydration": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "seizure": true,
+    "focalNeuroDeficit": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "hhs",
+    "acceptableIds": [
+      "hhs"
+    ],
+    "differentialIds": [
+      "dka",
+      "ischemic_stroke",
+      "hypovolemic_shock",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "glucose",
+      "serum_osmolality",
+      "electrolytes_corrected_sodium",
+      "venous_blood_gas",
+      "serum_urine_ketones",
+      "ct_head"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == hhs",
+    "effective osmolality > 320 with minimal ketosis distinguishes HHS from DKA",
+    "differential includes dka and ischemic_stroke",
+    "fluid resuscitation prioritised before insulin",
+    "no empiric antibiotics recommended (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

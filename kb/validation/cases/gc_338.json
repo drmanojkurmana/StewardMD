@@ -1,0 +1,116 @@
+{
+  "id": "gc_338",
+  "specialty": "Oncology / Pulmonary",
+  "condition": "Lung cancer",
+  "age": 69,
+  "sex": "F",
+  "presentingComplaint": "Six weeks of persistent dry cough with occasional blood-streaked sputum, not settling after two courses of antibiotics.",
+  "history": "Retired schoolteacher, lifelong near-non-smoker (approx 8 pack-years, quit 25 years ago), no fever, no rigors. Cough initially attributed to a 'post-viral chest' and treated twice in the community as acute bronchitis with amoxicillin-clavulanate and later azithromycin, with no improvement. Over the same period she has noticed mild reduction in appetite and about 4 kg unintentional weight loss, and gets a little more breathless climbing her usual two flights of stairs. Two episodes of blood-streaked sputum (small volume, not frank haemoptysis) prompted review. No night sweats, no known TB contact, no prior TB. No B-symptom drenching sweats. Prolonged exposure to biomass cooking smoke in earlier life. No occupational asbestos exposure recalled. Comorbidities: well-controlled hypertension, osteoarthritis. Presentation is deliberately subtle — the low-tobacco history, absence of fever, and repeated misattribution to bronchitis obscure the diagnosis.",
+  "examination": "Comfortable at rest, not toxic. Early finger clubbing noted. No cervical or supraclavicular lymphadenopathy palpable on the first pass but a small, firm, non-tender right supraclavicular node found on careful examination. Chest: reduced breath sounds and dullness over the right upper zone with no crepitations; trachea slightly deviated to the right suggesting volume loss. No stridor. Cardiovascular and abdominal examination unremarkable. No focal neurology.",
+  "vitals": {
+    "hr": 84,
+    "bp": "132/78",
+    "rr": 18,
+    "temp": 36.9,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": "10.8 g/dL (normocytic)",
+    "wbc": "8.2 x10^9/L",
+    "platelets": "365 x10^3/uL",
+    "sodium": "133 mmol/L (mild)",
+    "corrected_calcium": "10.4 mg/dL (upper normal)",
+    "creatinine": "0.9 mg/dL",
+    "albumin": "3.4 g/dL",
+    "ldh": "mildly elevated",
+    "crp": "22 mg/L",
+    "esr": "48 mm/hr"
+  },
+  "imaging": "Chest radiograph: subtle right perihilar opacity with associated right upper lobe volume loss and elevation of the horizontal fissure — easily missed and previously read as 'possible resolving infection'. Contrast-enhanced CT thorax: 3.4 cm spiculated soft-tissue mass in the right upper lobe abutting the hilum with proximal bronchial narrowing, enlarged right paratracheal and subcarinal nodes, and a suspicious right supraclavicular node; no cavitation, no lobar consolidation.",
+  "microbiology": "Sputum for acid-fast bacilli smear negative x2 and sputum GeneXpert MTB/RIF not detected — actively performed to exclude the main mimic (pulmonary TB). Routine sputum bacterial culture unremarkable.",
+  "differentialDiagnoses": [
+    "Primary lung cancer (bronchogenic carcinoma, likely NSCLC)",
+    "Pulmonary tuberculosis (key mimic in this population/geography)",
+    "Lung abscess / chronic necrotizing infection",
+    "Non-resolving community-acquired pneumonia",
+    "Sarcoidosis / other granulomatous or nodal disease"
+  ],
+  "finalDiagnosis": "Primary bronchogenic carcinoma (non-small cell lung cancer) presenting subtly with a non-resolving cough, minor haemoptysis, weight loss and clubbing in a near-non-smoker; TB actively excluded.",
+  "citations": [
+    "American College of Chest Physicians (CHEST) — Diagnosis and Evaluation of Lung Cancer, 2013",
+    "NCCN — Non-Small Cell Lung Cancer Clinical Practice Guidelines, 2024",
+    "NICE — Lung Cancer: Diagnosis and Management, 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Neoplasms of the Lung"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; no empiric antibiotics indicated. Note: repeated inappropriate antibiotic courses for a non-resolving cough delayed the diagnosis.",
+  "contraindications": [
+    "Do not attribute a cough persisting >3 weeks with haemoptysis and weight loss to recurrent bronchitis without imaging.",
+    "Avoid further empiric antibiotics; pursue tissue diagnosis.",
+    "Do not start empiric anti-tuberculous therapy solely on clinical/radiological grounds once TB is microbiologically negative and malignancy is suspected."
+  ],
+  "edgeCases": [
+    "Never-smoker / light-smoker lung cancer (adenocarcinoma) is increasingly common, especially in women with biomass smoke exposure, and is easily missed.",
+    "Mild hyponatraemia may reflect paraneoplastic SIADH (small cell histology).",
+    "A non-resolving 'pneumonia' on serial films should raise suspicion of an obstructing endobronchial lesion.",
+    "In endemic regions this presentation is frequently misdiagnosed and treated as pulmonary TB."
+  ],
+  "expectedMaiK": "Contrast-enhanced CT thorax followed by tissue sampling (bronchoscopic or image-guided/EBUS biopsy) to obtain a histological diagnosis; concurrently exclude pulmonary TB with sputum GeneXpert/AFB.",
+  "expectedNextQuestions": [
+    "Detailed smoking (pack-years) and biomass/occupational exposure history (asbestos, radon)?",
+    "Any prior TB, TB contact, or previous abnormal chest imaging?",
+    "Quantify and characterise the haemoptysis and its progression?",
+    "Any bone pain, headache, or new neurological or focal symptoms suggesting metastatic spread?",
+    "Family history of malignancy and functional/performance status?"
+  ],
+  "expectedInvestigations": [
+    "Contrast-enhanced CT thorax and upper abdomen",
+    "Sputum AFB smear and GeneXpert MTB/RIF to exclude TB",
+    "Bronchoscopy with biopsy/washings or image-guided percutaneous biopsy for histology",
+    "EBUS-guided mediastinal nodal sampling / supraclavicular node biopsy",
+    "PET-CT and CT/MRI brain for staging",
+    "Baseline bloods including sodium and corrected calcium (paraneoplastic screen)"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "coughRadio": true,
+    "hemoptysis": true,
+    "weightLoss": true,
+    "subacuteOnset": true,
+    "ageOver50": true,
+    "dyspnea": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "lung_cancer",
+    "acceptableIds": [
+      "lung_cancer"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "LUNG_ABSCESS",
+      "CAP",
+      "sarcoidosis"
+    ],
+    "investigations": [
+      "CECT thorax",
+      "Sputum GeneXpert MTB/RIF and AFB smear",
+      "Bronchoscopic or image-guided biopsy for histology",
+      "PET-CT staging"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank lung_cancer as the leading diagnosis despite a near-non-smoker history and afebrile, non-toxic presentation.",
+    "PULMONARY_TB must appear in the differential but be down-ranked once GeneXpert/AFB are negative.",
+    "No empiric antibiotic recommendation should be generated (non-infective).",
+    "Persistent cough >3 weeks with haemoptysis, weight loss and clubbing must trigger a recommendation for CT thorax and tissue diagnosis rather than further antibiotics."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

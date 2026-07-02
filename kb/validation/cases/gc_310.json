@@ -1,0 +1,115 @@
+{
+  "id": "gc_310",
+  "specialty": "Pulmonary",
+  "condition": "COPD exacerbation (non-infective)",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening breathlessness and wheeze after running out of inhalers, on a background of a heavy winter smog episode.",
+  "history": "Retired factory worker, 55 pack-year smoker, with GOLD group E COPD (FEV1 42% predicted) on baseline home oxygen 1 L/min. He also carries diagnoses of heart failure with preserved ejection fraction (last echo EF 55%, grade 1 diastolic dysfunction) and ischaemic heart disease, which repeatedly complicate his admissions. Over the past 48 hours he has become progressively more short of breath with audible wheeze and chest tightness, triggered by 4 days without his inhalers (pharmacy delay) coinciding with a severe air-pollution advisory. Crucially he reports NO fever, NO change in sputum colour (remains scanty and white/mucoid) and NO increase in sputum volume. Mild bilateral ankle swelling is chronic and unchanged; he denies orthopnoea, paroxysmal nocturnal dyspnoea or acute weight gain. No chest pain, no calf pain, no immobilisation or long travel. Adherent to bisoprolol, ramipril, atorvastatin and furosemide 20 mg; no recent diuretic change.",
+  "examination": "Elderly, mildly distressed, using accessory muscles, speaking in short phrases but no cyanosis. Chest hyperinflated with reduced expansion, hyper-resonant percussion, widespread polyphonic expiratory wheeze and prolonged expiratory phase; scattered basal crepitations that clear on coughing. JVP not elevated, mild chronic pitting ankle oedema unchanged from baseline, no gallop, apex non-displaced. No calf tenderness, no localising consolidation.",
+  "vitals": {
+    "hr": 104,
+    "bp": "142/84",
+    "rr": 26,
+    "temp": 36.8,
+    "spo2": 88
+  },
+  "labs": {
+    "wbc": "9.1 x10^9/L (normal differential, no left shift)",
+    "crp": "8 mg/L (not elevated)",
+    "abg_on_1L_O2": "pH 7.35, PaCO2 6.9 kPa, PaO2 8.2 kPa, HCO3 28 mmol/L (chronic compensated respiratory acidosis with acute-on-chronic hypercapnia)",
+    "bloodEosinophils": "0.18 x10^9/L",
+    "ntProBNP": "410 pg/mL (near patient baseline for age/renal function; below acute decompensation threshold)",
+    "creatinine": "1.2 mg/dL (baseline)",
+    "hemoglobin": "15.8 g/dL (polycythaemia)",
+    "troponin": "within reference range on serial testing"
+  },
+  "imaging": "Portable chest X-ray: hyperinflated lung fields with flattened diaphragms and bullous change, no focal consolidation, no lobar collapse, no pleural effusion, cardiothoracic ratio upper-normal, NO Kerley B lines / no interstitial pulmonary oedema. Bedside lung ultrasound: A-profile bilaterally, no diffuse B-lines. ECG: sinus tachycardia, old ischaemic changes unchanged, no acute ST shift or right-heart strain.",
+  "microbiology": "Not indicated — no purulent sputum; sputum culture not sent. Respiratory viral panel not routinely required. Blood cultures not indicated (afebrile, no sepsis features).",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure (HFpEF) — confounding comorbidity, argued against by unchanged JVP/oedema, absent orthopnoea/PND, near-baseline NT-proBNP, no interstitial oedema on CXR and A-profile on lung ultrasound",
+    "Asthma exacerbation — wheeze overlaps but there is fixed obstruction, smoking history and hypercapnic COPD physiology rather than reversible young-onset disease",
+    "Pulmonary embolism — considered given tachycardia/hypoxia but no pleuritic pain, no leg findings, no risk factors and no RV strain",
+    "Pneumonia — excluded by absence of fever, normal WCC/CRP and clear chest film"
+  ],
+  "finalDiagnosis": "Non-infective acute exacerbation of COPD (dyspnoea-predominant, Anthonisen type without sputum purulence) precipitated by inhaler non-adherence and air-pollution exposure, with coexisting stable HFpEF/IHD confounding the presentation.",
+  "citations": [
+    "GOLD — Global Strategy for Prevention, Diagnosis and Management of COPD (2024 Report)",
+    "Harrison's Principles of Internal Medicine, 22e — Chronic Obstructive Pulmonary Disease"
+  ],
+  "stewardship": "Non-infective exacerbation: antibiotics NOT indicated. Per GOLD 2024 and Anthonisen criteria, antibiotics are reserved for increased sputum purulence PLUS increased dyspnoea/volume, or need for ventilatory support; none present here (white mucoid sputum, no fever, normal CRP/WCC). Treat with controlled oxygen titrated to SpO2 88-92%, inhaled short-acting bronchodilators (salbutamol + ipratropium via nebuliser), a short course of oral prednisolone 40 mg for 5 days, and resumption of maintenance inhaled therapy; consider NIV if hypercapnic acidosis worsens.",
+  "contraindications": [
+    "Avoid high-flow uncontrolled oxygen — risk of worsening CO2 retention in chronic hypercapnia; target SpO2 88-92%",
+    "Avoid empiric antibiotics — no purulence/systemic infection markers; antimicrobial stewardship",
+    "Avoid aggressive IV diuresis for presumed heart failure — euvolaemic, risks hypovolaemia/AKI and metabolic alkalosis worsening hypercapnia",
+    "Caution with sedatives — may precipitate hypercapnic respiratory failure"
+  ],
+  "edgeCases": [
+    "The coexisting HFpEF is the confounder: basal crepitations and chronic ankle oedema can be misread as decompensated heart failure, leading to inappropriate diuresis and missed COPD therapy.",
+    "Near-baseline NT-proBNP and A-profile lung ultrasound are key discriminators favouring COPD over cardiac pulmonary oedema.",
+    "Low blood eosinophils (<0.3) predict limited corticosteroid benefit but do not change the decision to treat this exacerbation.",
+    "If hypercapnic acidosis (pH <7.35 with rising PaCO2) persists despite therapy, escalate to NIV."
+  ],
+  "expectedMaiK": "Recognise a non-infective (dyspnoea-predominant) COPD exacerbation in a patient whose coexisting HFpEF/IHD confounds the picture, and manage with bronchodilators, systemic steroids and controlled oxygen WITHOUT antibiotics or unnecessary diuresis.",
+  "expectedNextQuestions": [
+    "Has sputum changed colour or volume, and is there any fever? (purulence drives antibiotic decision)",
+    "Any orthopnoea, PND, acute weight gain or recent diuretic change to suggest cardiac decompensation?",
+    "Inhaler adherence and any environmental/pollution or smoking trigger?",
+    "Any pleuritic pain, leg swelling or immobilisation to raise PE suspicion?"
+  ],
+  "expectedInvestigations": [
+    "Arterial blood gas to assess hypercapnia/acidosis and guide NIV",
+    "Chest X-ray to exclude consolidation, pneumothorax and pulmonary oedema",
+    "NT-proBNP to help exclude decompensated heart failure",
+    "ECG and serial troponin given IHD",
+    "FBC/CRP to assess for infective component",
+    "Bedside lung ultrasound (A- vs B-profile) to differentiate COPD from cardiogenic oedema"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "knownCOPD": true,
+    "increasedDyspnea": true,
+    "dyspnea": true,
+    "wheeze": true,
+    "hypoxia": true,
+    "tachypnea": true,
+    "supplementalOxygen": true,
+    "knownHeartFailure": true,
+    "knownCAD": true,
+    "legSwellingBilateral": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "copd_exac_ni",
+    "acceptableIds": [
+      "copd_exac_ni"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "asthma_exac",
+      "pe"
+    ],
+    "investigations": [
+      "abg",
+      "chest_xray",
+      "nt_probnp",
+      "ecg",
+      "fbc_crp"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['copd_exac_ni']",
+    "No antibiotics recommended (non-infective exacerbation; no sputum purulence, normal CRP/WCC, afebrile)",
+    "Heart failure must not be selected as the primary diagnosis despite basal crepitations and chronic ankle oedema (near-baseline NT-proBNP, no orthopnoea/PND, A-profile ultrasound, no interstitial oedema on CXR)",
+    "Oxygen target 88-92% (controlled) must be respected given chronic hypercapnia",
+    "Systemic corticosteroids and bronchodilators are the core therapy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

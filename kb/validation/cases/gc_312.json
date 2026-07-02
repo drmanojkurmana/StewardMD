@@ -1,0 +1,114 @@
+{
+  "id": "gc_312",
+  "specialty": "Rheumatology",
+  "condition": "Crystal arthritis (gout / pseudogout)",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "2-day history of a mildly painful, slightly swollen and warm right knee.",
+  "history": "Retired schoolteacher with hypertension on hydrochlorothiazide for 4 years and mild chronic kidney disease. Over the past 48 hours she has developed a niggling ache, mild swelling and warmth over the right knee. She can still weight-bear and walk short distances with only moderate discomfort, and the joint is not exquisitely tender - quite unlike the incapacitating first-toe attacks described to her by a friend. No preceding trauma, no fever, no rash elsewhere, no prior diagnosed joint disease. She admits to a recent period of higher alcohol intake at a family wedding and has been advised to eat more red meat for 'anaemia'. No morning stiffness beyond 15 minutes, no small-joint symptoms, no psoriasis, no recent diarrhoea, urethritis or conjunctivitis.",
+  "examination": "Comfortable, ambulant, afebrile. Right knee has a small effusion with mild overlying erythema and warmth, mild tenderness and a slightly restricted terminal flexion. No spreading cellulitic margin, no lymphangitis, no regional lymphadenopathy. No tophi seen but a small firm nodule is noted over the right olecranon. Other joints, including first MTPs, are normal. No skin rash or nail changes.",
+  "vitals": {
+    "hr": 78,
+    "bp": "146/84",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "12.6 g/dL",
+    "wbc": "8.9 x10^3/uL",
+    "crp": "34 mg/L (mildly raised)",
+    "esr": "38 mm/hr",
+    "serumUrate": "9.1 mg/dL (elevated)",
+    "creatinine": "1.4 mg/dL",
+    "egfr": "48 mL/min/1.73m2",
+    "calcium": "9.4 mg/dL",
+    "randomGlucose": "112 mg/dL"
+  },
+  "imaging": "Knee radiograph: soft-tissue swelling with a small effusion; no chondrocalcinosis, no erosions, joint space preserved. Ultrasound shows a 'double contour' sign over the femoral cartilage and a small hyperechoic aggregate within the effusion.",
+  "microbiology": "Synovial fluid aspiration: slightly turbid, WBC ~18,000/uL (predominantly neutrophils), Gram stain negative, culture negative at 48h. Polarised light microscopy: numerous needle-shaped, strongly negatively birefringent intracellular crystals consistent with monosodium urate.",
+  "differentialDiagnoses": [
+    "Early/mild acute gout (monosodium urate crystal arthritis) - confirmed by crystal analysis",
+    "Septic arthritis - low WBC-count for sepsis, afebrile, negative Gram stain/culture, but always excluded by aspiration",
+    "Rheumatoid arthritis - argues against: monoarticular, no symmetric small-joint involvement, no prolonged morning stiffness",
+    "Overlying cellulitis - no advancing erythematous margin, warmth is joint-centred with an effusion",
+    "Calcium pyrophosphate (pseudogout) - no chondrocalcinosis and urate crystals seen"
+  ],
+  "finalDiagnosis": "Early / mild acute gouty (crystal) arthritis of the knee, thiazide- and diet-precipitated, in an elderly woman with CKD.",
+  "citations": [
+    "ACR - Management of Gout - 2020",
+    "EULAR - Diagnosis and Management of Gout - 2020",
+    "Harrison's Principles of Internal Medicine, 22e - Gout and Other Crystal-Associated Arthropathies"
+  ],
+  "stewardship": "Not an infective condition - no antimicrobial therapy indicated. Septic arthritis must be actively excluded by arthrocentesis before withholding antibiotics; here Gram stain/culture negative and crystals confirmed. Management is anti-inflammatory (low-dose colchicine, NSAID with caution given CKD, or short oral/intra-articular corticosteroid), review of hydrochlorothiazide as a modifiable precipitant, and later urate-lowering therapy discussion.",
+  "contraindications": [
+    "NSAIDs relatively contraindicated given eGFR 48 and age - use with caution or avoid",
+    "Full-dose colchicine inappropriate with renal impairment - use low-dose regimen",
+    "Do not start urate-lowering therapy for symptom control during an acute attack without anti-inflammatory cover",
+    "Avoid empiric antibiotics once septic arthritis excluded"
+  ],
+  "edgeCases": [
+    "Elderly, thiazide-treated, CKD patients often present with atypical, oligosymptomatic large-joint gout rather than classic podagra",
+    "A normal serum urate during an acute attack does not exclude gout; crystal analysis is definitive",
+    "Mildly elevated synovial WBC and CRP can coexist with, and be mistaken for, early septic arthritis"
+  ],
+  "expectedMaiK": "crystal_arthritis",
+  "expectedNextQuestions": [
+    "Any previous self-limiting attacks of joint pain, especially first toe?",
+    "Full drug history including diuretics, low-dose aspirin and any urate-lowering agents?",
+    "Diet and alcohol pattern, and any recent dehydration or acute illness?",
+    "Any fever, rigors or a portal of infection to raise concern for septic joint?"
+  ],
+  "expectedInvestigations": [
+    "Joint aspiration with polarised light microscopy for crystals",
+    "Synovial fluid Gram stain, cell count and culture to exclude sepsis",
+    "Serum urate, renal function and eGFR",
+    "Inflammatory markers (CRP/ESR)",
+    "Joint radiograph +/- ultrasound for double-contour sign / chondrocalcinosis"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "jointSwelling": true,
+    "skinWarmth": true,
+    "skinErythema": true,
+    "subacuteOnset": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "stable": true,
+    "age": true,
+    "sex": true
+  },
+  "expected": {
+    "diagnosis": "crystal_arthritis",
+    "acceptableIds": [
+      "crystal_arthritis"
+    ],
+    "differentialIds": [
+      "rheumatoid",
+      "CELLULITIS",
+      "pmr"
+    ],
+    "investigations": [
+      "Joint aspiration with polarised light microscopy",
+      "Synovial fluid Gram stain and culture",
+      "Serum urate and renal function",
+      "CRP/ESR",
+      "Joint radiograph / ultrasound"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should rank crystal_arthritis as the leading diagnosis given confirmed negatively birefringent urate crystals on synovial fluid.",
+    "Engine must NOT recommend empiric antibiotics once Gram stain/culture negative and crystals confirmed.",
+    "Engine should flag septic arthritis exclusion via arthrocentesis before ruling out infection.",
+    "Engine should not require classic podagra or exquisite pain to identify crystal arthritis in an elderly thiazide-treated patient.",
+    "stewardship tier must be null and antibiotics empty (non-infective)."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

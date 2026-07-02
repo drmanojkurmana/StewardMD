@@ -1,0 +1,124 @@
+{
+  "id": "gc_274",
+  "specialty": "Central Nervous System",
+  "condition": "Acute Bacterial Meningitis",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Fever and worsening confusion over 24 hours in a man with known alcohol-related cirrhosis.",
+  "history": "68-year-old man with decompensated alcohol-related cirrhosis (Child-Pugh B, prior ascites and one episode of hepatic encephalopathy), type 2 diabetes and ongoing heavy alcohol intake, brought by family with 1 day of fever, headache and increasing drowsiness. The family and referring team initially attributed the confusion to a further episode of hepatic encephalopathy and lactulose was started, but sensorium continued to deteriorate and neck stiffness was noted. He last drank alcohol two days ago. No recent GI bleed, no obvious constipation, and stool frequency was normal on lactulose. No recent travel; no sick contacts. He has had no ear discharge, sinus symptoms or head trauma. This atypical, comorbidity-confounded picture (an elderly, cirrhotic, alcohol-dependent host in whom Listeria and pneumococcus are both leading pathogens) obscured the meningitic process behind an assumed metabolic/hepatic cause.",
+  "examination": "Drowsy but rousable, GCS 12 (E3 V4 M5), appears toxic and dehydrated. Neck stiffness present with a positive Kernig sign; no focal limb deficit and no papilloedema. Stigmata of chronic liver disease (spider naevi, palmar erythema, mild ascites, no asterixis at time of exam). No rash or purpura. Chest clear; abdomen soft with shifting dullness but no marked tenderness or guarding. No ear or sinus focus.",
+  "vitals": {
+    "hr": 116,
+    "bp": "138/82",
+    "rr": 24,
+    "temp": 39.1,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "16.8 x10^3/uL (neutrophil predominant)",
+    "platelets": "94 x10^3/uL",
+    "crp": "182 mg/L",
+    "glucose_serum": "9.2 mmol/L",
+    "creatinine": "1.4 mg/dL",
+    "bilirubin": "2.6 mg/dL",
+    "albumin": "2.8 g/dL",
+    "inr": "1.5",
+    "ammonia": "mildly raised (non-diagnostic)",
+    "csf_opening_pressure": "high",
+    "csf_wbc": "2100 /uL, 88% neutrophils",
+    "csf_protein": "1.8 g/L (markedly raised)",
+    "csf_glucose": "1.4 mmol/L (CSF:serum ratio <0.3)",
+    "lactate_csf": "elevated"
+  },
+  "imaging": "CT head prior to LP: no mass lesion, midline shift or hydrocephalus; basal cisterns patent. Chest X-ray clear. Ultrasound abdomen: cirrhotic liver with mild ascites.",
+  "microbiology": "CSF Gram stain: Gram-positive bacilli. CSF and blood cultures grew Listeria monocytogenes. Diagnostic ascitic tap performed to exclude SBP: PMN count <250/uL, culture negative (excludes SBP).",
+  "differentialDiagnoses": [
+    "Hepatic encephalopathy (the assumed initial diagnosis)",
+    "Spontaneous bacterial peritonitis with encephalopathy",
+    "Viral meningoencephalitis",
+    "Metabolic/toxic (alcohol-related) encephalopathy"
+  ],
+  "finalDiagnosis": "Acute bacterial meningitis (Listeria monocytogenes) in a cirrhotic, immunocompromised elderly host",
+  "citations": [
+    "IDSA — Practical Guidelines for the Management of Bacterial Meningitis — 2004",
+    "ESCMID — Diagnosis and Treatment of Acute Bacterial Meningitis — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Acute Bacterial Meningitis"
+  ],
+  "stewardship": "Empiric therapy for community-acquired bacterial meningitis in an adult >50 years and immunocompromised (cirrhosis/alcohol): IV ceftriaxone 2 g q12h PLUS IV vancomycin (weight-based) PLUS IV ampicillin 2 g q4h to cover Listeria monocytogenes. Adjunctive dexamethasone 10 mg IV q6h with/just before first antibiotic dose. Do not delay antibiotics for imaging/LP. De-escalate to IV ampicillin (+ gentamicin synergy) once Listeria confirmed and susceptibilities known.",
+  "contraindications": [
+    "Avoid delaying empiric antibiotics while awaiting CT/LP",
+    "Ceftriaxone alone does NOT cover Listeria — ampicillin is mandatory in this host",
+    "Caution with vancomycin/aminoglycoside nephrotoxicity given cirrhosis and raised creatinine — monitor levels and renal function",
+    "Coagulopathy (INR 1.5, platelets 94) increases LP bleeding risk — correct/assess before LP"
+  ],
+  "edgeCases": [
+    "Confusion in a cirrhotic is easily mis-triaged as hepatic encephalopathy, delaying LP and antibiotics",
+    "Listeria CSF may show lower cell counts and negative Gram stain in up to half of cases",
+    "SBP must be excluded in parallel with a diagnostic ascitic tap in any febrile cirrhotic"
+  ],
+  "expectedMaiK": "MENINGITIS",
+  "expectedNextQuestions": [
+    "Is there neck stiffness, photophobia or a rash?",
+    "Has an ascitic tap been done to exclude SBP as the cause of the encephalopathy?",
+    "Any dietary/immunosuppression risk for Listeria (age, alcohol, cirrhosis, diabetes)?",
+    "Have empiric antibiotics and dexamethasone been given without waiting for the LP?"
+  ],
+  "expectedInvestigations": [
+    "Urgent lumbar puncture with CSF cell count, protein, glucose (with paired serum), Gram stain and culture",
+    "Blood cultures before antibiotics",
+    "CT head before LP given age/altered sensorium to exclude mass effect",
+    "Diagnostic ascitic tap (PMN count, culture) to exclude SBP",
+    "CSF meningoencephalitis PCR panel (incl. HSV) if diagnosis unclear"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "alteredSensorium": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "immunocompromised": true,
+    "liverDisease": true,
+    "alcoholExcess": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "MENINGITIS",
+    "acceptableIds": [
+      "MENINGITIS"
+    ],
+    "differentialIds": [
+      "hepatic_enceph",
+      "SBP",
+      "VIRAL_MENINGITIS",
+      "ENCEPHALITIS"
+    ],
+    "investigations": [
+      "Lumbar puncture with CSF analysis (cell count, protein, glucose, Gram stain, culture)",
+      "Blood cultures",
+      "CT head prior to LP",
+      "Diagnostic ascitic tap to exclude SBP"
+    ],
+    "stewardship": {
+      "tier": "watch",
+      "antibiotics": [
+        "Ceftriaxone 2 g IV q12h",
+        "Vancomycin IV (weight-based, level-guided)",
+        "Ampicillin 2 g IV q4h (Listeria cover)",
+        "Adjunctive dexamethasone 10 mg IV q6h"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank MENINGITIS as the top diagnosis despite the confounding cirrhosis/hepatic-encephalopathy picture",
+    "hepatic_enceph and SBP must appear only in the differential, never as the primary diagnosis",
+    "Empiric regimen must include ampicillin for Listeria cover given age >50 and immunocompromise",
+    "System must recommend not delaying antibiotics/dexamethasone for imaging or LP"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

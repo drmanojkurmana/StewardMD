@@ -1,0 +1,115 @@
+{
+  "id": "gc_309",
+  "specialty": "Nephrology",
+  "condition": "Chronic kidney disease",
+  "age": 81,
+  "sex": "F",
+  "presentingComplaint": "Progressive tiredness, poor appetite and generalized itching over 3 months, brought in by daughter after two falls.",
+  "history": "An 81-year-old frail widow living alone (Clinical Frailty Scale 6) presents with insidious fatigue, anorexia, nausea, unintentional 4 kg weight loss and troublesome pruritus over the past three months, with restless legs at night. There is no acute deterioration, no dysuria and no recent vomiting or diarrhoea to explain volume loss. She has long-standing type 2 diabetes (22 years) and hypertension, both managed by her GP; a creatinine from 14 months ago was 1.9 mg/dL and she has never seen a nephrologist. Medications: amlodipine, ramipril, metformin, gliclazide and, for the last 6 weeks, regular ibuprofen bought over-the-counter for knee pain. She has nocturia 3-4 times nightly. No haematuria, no frothy urine noticed, no rash, no oliguria. The subacute, non-dramatic course in a frail elderly woman with pre-existing modest renal impairment, anaemia and bland presentation is characteristic of advancing chronic rather than purely acute disease.",
+  "examination": "Frail, pale, mild uraemic sallow complexion with excoriation marks. Euvolaemic to mildly overloaded: JVP mildly raised, bilateral pitting ankle oedema to mid-shin, chest clear. No asterixis at rest, orientated but slowed. Fundi show background diabetic retinopathy. No flank tenderness, bladder not palpable, no palpable masses. Peripheral pulses present; reduced sensation to monofilament in both feet.",
+  "vitals": {
+    "hr": 78,
+    "bp": "162/84",
+    "rr": 16,
+    "temp": 36.6,
+    "spo2": 97
+  },
+  "labs": {
+    "creatinine": "4.1 mg/dL (baseline 1.9 fourteen months ago; eGFR ~11 mL/min/1.73m2)",
+    "urea": "31 mmol/L",
+    "hemoglobin": "8.9 g/dL (normocytic, normochromic)",
+    "potassium": "5.6 mmol/L",
+    "bicarbonate": "17 mmol/L",
+    "calcium": "2.02 mmol/L (corrected)",
+    "phosphate": "1.9 mmol/L",
+    "intactPTH": "318 pg/mL",
+    "albumin": "3.3 g/dL",
+    "hba1c": "7.4%",
+    "urineACR": "142 mg/mmol (A3)",
+    "ironStudies": "ferritin 180 ng/mL, TSAT 18%"
+  },
+  "imaging": "Renal ultrasound: both kidneys small (right 8.4 cm, left 8.1 cm) with increased cortical echogenicity and cortical thinning; no hydronephrosis, no calculi, normal bladder residual. Findings indicate chronic, irreversible parenchymal disease.",
+  "microbiology": "Not applicable; urine culture negative, no features of infection.",
+  "differentialDiagnoses": [
+    "Acute kidney injury (NSAID/ACE-inhibitor and hypoperfusion component superimposed)",
+    "Symptomatic anaemia from another cause",
+    "Congestive heart failure",
+    "Nephrotic syndrome"
+  ],
+  "finalDiagnosis": "Chronic kidney disease (diabetic and hypertensive nephropathy), CKD stage G5 A3, with acute-on-chronic component from NSAID/RAAS use; complicated by anaemia of CKD, CKD-mineral bone disease (secondary hyperparathyroidism, hyperphosphataemia) and metabolic acidosis.",
+  "citations": [
+    "KDIGO — Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease — 2024",
+    "Harrison's Principles of Internal Medicine, 22e — Chronic Kidney Disease"
+  ],
+  "stewardship": "Not applicable — non-infective presentation; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Stop NSAIDs (nephrotoxic, worsen hyperkalaemia and hypertension)",
+    "Hold/adjust RAAS inhibitor given eGFR ~11 and K+ 5.6; recheck after intervention",
+    "Discontinue metformin at eGFR <30 (lactic acidosis risk)",
+    "Avoid iodinated/gadolinium contrast where possible; nephrology-guided dosing of renally cleared drugs"
+  ],
+  "edgeCases": [
+    "Superimposed reversible AKI (NSAID + ACEi + relative hypovolaemia) may recover some function — chronicity confirmed by small echogenic kidneys, longstanding proteinuria, anaemia and prior raised creatinine",
+    "In frail elderly, eGFR overestimates function if muscle mass is low; use trends and clinical context",
+    "Consider conservative (non-dialytic) kidney management pathway given frailty and patient preference"
+  ],
+  "expectedMaiK": "Recognise this as advanced chronic kidney disease (CKD G5 A3) in a frail elderly diabetic-hypertensive patient with a superimposed nephrotoxic acute-on-chronic insult, evidenced by small echogenic kidneys, chronic anaemia, secondary hyperparathyroidism, metabolic acidosis and prior renal impairment.",
+  "expectedNextQuestions": [
+    "Trajectory of previous creatinine/eGFR values and urine ACR over time",
+    "Full nephrotoxin and OTC drug history (NSAIDs), volume status and recent intake",
+    "Symptoms/signs of uraemia and indications for urgent dialysis (pericarditis, refractory hyperkalaemia, acidosis, overload, encephalopathy)",
+    "Goals of care and frailty assessment to guide dialysis vs conservative management"
+  ],
+  "expectedInvestigations": [
+    "Repeat renal function with electrolytes, bicarbonate, calcium, phosphate and intact PTH",
+    "Urine albumin:creatinine ratio and urinalysis/microscopy",
+    "Renal ultrasound to assess kidney size, echogenicity and obstruction",
+    "Iron studies, ferritin, TSAT, B12/folate for anaemia; review medication list for nephrotoxins"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "age": true,
+    "weightLoss": true,
+    "hypertensionHx": true,
+    "diabetesHx": true,
+    "creatinine": true,
+    "urea": true,
+    "hemoglobin": true,
+    "nauseaVomiting": true,
+    "legSwellingBilateral": true,
+    "proteinuria": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "ckd",
+    "acceptableIds": [
+      "ckd"
+    ],
+    "differentialIds": [
+      "aki",
+      "anemia_sympt",
+      "heart_failure",
+      "nephrotic"
+    ],
+    "investigations": [
+      "Serum creatinine, eGFR and electrolytes with bicarbonate",
+      "Urine albumin:creatinine ratio and urinalysis",
+      "Renal ultrasound (kidney size and echogenicity)",
+      "Calcium, phosphate, intact PTH and iron studies"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to ckd",
+    "Small echogenic kidneys plus chronic anaemia and prior raised creatinine confirm chronicity over pure AKI",
+    "No antibiotics recommended (non-infective)",
+    "NSAID and RAAS inhibitor flagged as nephrotoxic/hyperkalaemia contraindications"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

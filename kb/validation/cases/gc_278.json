@@ -1,0 +1,111 @@
+{
+  "id": "gc_278",
+  "specialty": "Genitourinary",
+  "condition": "Acute Bacterial Prostatitis",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "3 days of increasing difficulty passing urine with vague lower abdominal and perineal discomfort, referred by GP for acute urinary retention.",
+  "history": "Type 2 diabetic (on metformin, HbA1c 8.1%) with known benign prostatic enlargement, brought by daughter with 3 days of poor urinary stream, straining, dribbling and a dull ache behind the scrotum and low back. He denies rigors and only felt 'a bit off and tired'; family noticed reduced appetite. No frank haematuria. No recent instrumentation or catheter. Because his dominant complaint was retention and malaise rather than dysuria or high fever, he was initially assumed to have simple BPH-related obstruction — the atypical, subtle infective picture. On direct questioning he admits mild burning on the little urine he passes and increased daytime frequency over the preceding week.",
+  "examination": "Comfortable at rest, not toxic. Suprapubic fullness with a palpable distended bladder. Digital rectal examination reveals an enlarged, exquisitely tender, warm and boggy prostate — vigorous massage deliberately avoided. No scrotal swelling; testes and epididymes non-tender. No flank tenderness. No peritonism.",
+  "vitals": {
+    "hr": 96,
+    "bp": "132/80",
+    "rr": 18,
+    "temp": 37.9,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "14.2 x10^9/L (neutrophilia)",
+    "crp": "88 mg/L",
+    "creatinine": "1.1 mg/dL",
+    "urea": "7.2 mmol/L",
+    "randomGlucose": "11.4 mmol/L",
+    "hba1c": "8.1%",
+    "urinalysis": "leucocytes 3+, nitrites positive, blood trace"
+  },
+  "imaging": "Bladder ultrasound: distended bladder with post-void residual 480 mL; no hydronephrosis. Prostate enlarged (58 mL), no discrete abscess collection.",
+  "microbiology": "Midstream urine culture pending; blood cultures sent. Subsequent urine culture grew Escherichia coli >10^5 CFU/mL, sensitive to ceftriaxone, ciprofloxacin and co-trimoxazole (ESBL-negative).",
+  "differentialDiagnoses": [
+    "Acute bacterial prostatitis",
+    "Complicated (male) urinary tract infection",
+    "Acute pyelonephritis",
+    "BPH with simple acute urinary retention"
+  ],
+  "finalDiagnosis": "Acute bacterial prostatitis (E. coli) presenting subtly as acute urinary retention in an elderly diabetic man",
+  "citations": [
+    "EAU Guidelines on Urological Infections 2023 — Acute Bacterial Prostatitis",
+    "Harrison's Principles of Internal Medicine, 22e — Prostatitis and Urinary Tract Infections"
+  ],
+  "stewardship": "Guideline-concordant empiric therapy targeting Enterobacterales with good prostatic penetration; obtain urine and blood cultures first, then IV ceftriaxone with step-down to an oral fluoroquinolone (or co-trimoxazole) once afebrile and sensitivities known, for a total 2-4 week course to prevent chronic prostatitis. Avoid vigorous prostatic massage in acute infection. Manage retention with a gentle urethral (or suprapubic) catheter.",
+  "contraindications": [
+    "Avoid vigorous digital prostatic massage in acute bacterial prostatitis (bacteraemia risk)",
+    "Fluoroquinolone caution in the elderly (tendinopathy, QT, CNS effects, aortic risk)",
+    "Nephrotoxic contrast / NSAIDs caution given diabetes"
+  ],
+  "edgeCases": [
+    "Failure to respond in 48-72h or swinging fever should prompt imaging for prostatic abscess",
+    "Post-void residual and obstruction may need catheterisation; prefer suprapubic if urethral catheter difficult",
+    "Under-treatment (short course) risks progression to chronic bacterial prostatitis"
+  ],
+  "expectedMaiK": "Tender, boggy prostate on gentle DRE plus pyuria/positive urine culture in a man distinguishes acute bacterial prostatitis from simple BPH retention or cystitis; culture before antibiotics.",
+  "expectedNextQuestions": [
+    "Any rigors, high fever or back/perineal pain?",
+    "Recent urinary catheterisation, prostate biopsy or instrumentation?",
+    "Degree of urinary hesitancy, stream and any retention or dribbling?",
+    "Any burning on urination or increased frequency?",
+    "Diabetes control and prior urinary infections?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis and midstream urine microscopy/culture (before antibiotics)",
+    "Blood cultures",
+    "FBC, CRP, renal function and glucose/HbA1c",
+    "Bladder scan / ultrasound for post-void residual and to exclude abscess/hydronephrosis"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "perinealPain": true,
+    "urinaryRetention": true,
+    "feverGU": true,
+    "fever": true,
+    "backPain": true,
+    "complicatedUTIRisk": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "PROSTATITIS",
+    "acceptableIds": [
+      "PROSTATITIS"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "PYELONEPHRITIS",
+      "CYSTITIS"
+    ],
+    "investigations": [
+      "Urinalysis and midstream urine culture",
+      "Blood cultures",
+      "Bladder ultrasound / post-void residual",
+      "FBC, CRP, renal function, glucose"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Ceftriaxone (IV empiric)",
+        "Ciprofloxacin (oral step-down / directed)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be PROSTATITIS",
+    "Differential must include COMPLICATED_UTI and PYELONEPHRITIS",
+    "Empiric antibiotic must cover Enterobacterales with prostatic penetration (ceftriaxone or fluoroquinolone)",
+    "Must recommend urine and blood cultures before antibiotics",
+    "Must flag avoidance of vigorous prostatic massage"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

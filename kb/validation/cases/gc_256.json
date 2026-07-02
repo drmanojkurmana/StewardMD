@@ -1,0 +1,109 @@
+{
+  "id": "gc_256",
+  "specialty": "Genitourinary",
+  "condition": "Acute Uncomplicated Cystitis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Two days of burning on passing urine with increased frequency and lower abdominal discomfort, initially assumed to be another flare of her irritable bowel syndrome.",
+  "history": "Healthy, non-pregnant, premenopausal woman (LMP 3 weeks ago, uses condoms, negative urine pregnancy test) with a 6-year history of diarrhoea-predominant irritable bowel syndrome (IBS-D) managed with dietary measures and occasional mebeverine. She reports her long-standing intermittent lower abdominal cramping and loose stools flared over the past 3 days, and she and her GP initially attributed the abdominal discomfort to IBS. However, on direct questioning she describes new, distinct dysuria, urinary frequency every 30-45 minutes with urgency, and one episode of visibly pink urine — symptoms she does not get with her usual IBS flares. No fever, no rigors, no flank or loin pain, no vaginal discharge or itch, no back pain. Sexually active with a new partner in the last month. No diabetes, no urinary catheter, no known renal tract abnormality, no recent hospitalisation or antibiotics, not immunosuppressed. Two prior uncomplicated UTIs in her twenties, both resolved with a short antibiotic course.",
+  "examination": "Comfortable, well, afebrile and not toxic. Abdomen soft with mild suprapubic tenderness; mild generalised lower abdominal tenderness consistent with her IBS but no guarding or rebound. No renal angle (costovertebral) tenderness bilaterally. No palpable bladder, no masses. Bowel sounds normal. No rash.",
+  "vitals": {
+    "hr": 82,
+    "bp": "122/78",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 99
+  },
+  "labs": {
+    "urineDipstick": "Leukocyte esterase 2+, nitrite positive, blood 2+, protein trace, glucose negative, ketones negative",
+    "urineMicroscopy": "Pyuria (WBC 60/hpf), RBC 20/hpf, bacteria present, no casts, occasional squamous cells",
+    "creatinine": "0.8 mg/dL",
+    "urea": "4.2 mmol/L",
+    "wbc": "8.9 x10^9/L",
+    "crp": "12 mg/L",
+    "urinePregnancyTest": "Negative"
+  },
+  "imaging": "Not indicated for uncomplicated cystitis; none performed.",
+  "microbiology": "Urine culture sent: subsequently grew Escherichia coli >10^5 CFU/mL, sensitive to nitrofurantoin, fosfomycin and co-trimoxazole; resistant to ampicillin.",
+  "differentialDiagnoses": [
+    "Acute uncomplicated cystitis (lower UTI)",
+    "Acute pyelonephritis (excluded: afebrile, no flank pain, no CVA tenderness)",
+    "Complicated UTI (excluded: healthy non-pregnant woman, no catheter/structural abnormality/diabetes)",
+    "Ureteric colic (excluded: no severe colicky loin-to-groin pain, discomfort mild and suprapubic)",
+    "IBS flare (confounder: explains bowel symptoms but not dysuria/frequency/haematuria/pyuria)"
+  ],
+  "finalDiagnosis": "Acute uncomplicated cystitis in a premenopausal woman whose coexisting irritable bowel syndrome confounded and initially masked the urinary presentation.",
+  "citations": [
+    "IDSA — Uncomplicated Cystitis and Pyelonephritis in Women — 2011",
+    "Harrison's Principles of Internal Medicine, 22e — Urinary Tract Infections, Pyelonephritis, and Prostatitis",
+    "NICE — Urinary Tract Infection (Lower): Antimicrobial Prescribing — 2018"
+  ],
+  "stewardship": "Infective, lower urinary tract. First-line empiric therapy for acute uncomplicated cystitis per IDSA 2011: nitrofurantoin 100 mg PO BID for 5 days (WHO AWaRe Access agent). Fosfomycin 3 g single dose or co-trimoxazole (if local resistance <20%) are acceptable alternatives. Avoid fluoroquinolones for uncomplicated cystitis (reserve/collateral-damage concern). No imaging or urine culture routinely required in uncomplicated cystitis, though culture is reasonable here given recurrence and visible haematuria. Nitrofurantoin appropriate as eGFR is normal.",
+  "contraindications": [
+    "Avoid nitrofurantoin if creatinine clearance <30 mL/min (not applicable here)",
+    "Avoid nitrofurantoin at term pregnancy and in G6PD deficiency",
+    "Avoid co-trimoxazole if local E. coli resistance >20% or sulfa allergy",
+    "Avoid empiric fluoroquinolones for uncomplicated cystitis"
+  ],
+  "edgeCases": [
+    "Bowel-predominant symptoms from IBS can anchor clinicians away from a coexisting UTI; dysuria, frequency and pyuria remain the discriminators.",
+    "Visible haematuria in a young woman with an otherwise typical UTI usually reflects haemorrhagic cystitis, but persistent haematuria after treatment warrants follow-up urinalysis.",
+    "If fever, flank pain or CVA tenderness develop, reclassify as pyelonephritis and escalate."
+  ],
+  "expectedMaiK": "Acute uncomplicated cystitis: treat with a short course of a first-line oral agent (nitrofurantoin); the coexisting IBS is a confounder, not a complicating factor.",
+  "expectedNextQuestions": [
+    "Any fever, rigors or flank/loin pain to suggest upper tract involvement?",
+    "Pregnancy status and last menstrual period?",
+    "Any indwelling catheter, diabetes, immunosuppression or known renal tract abnormality?",
+    "Frequency of prior UTIs and any recent antibiotic use?"
+  ],
+  "expectedInvestigations": [
+    "Urine dipstick (leukocyte esterase and nitrite)",
+    "Urine microscopy and culture with sensitivities",
+    "Urine pregnancy test"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "dysuria": true,
+    "urinaryFrequency": true,
+    "abdominalDiscomfort": true,
+    "hematuria": true,
+    "constipationOrDiarrhea": true,
+    "nauseaVomiting": true
+  },
+  "expected": {
+    "diagnosis": "CYSTITIS",
+    "acceptableIds": [
+      "CYSTITIS"
+    ],
+    "differentialIds": [
+      "PYELONEPHRITIS",
+      "COMPLICATED_UTI",
+      "renal_colic",
+      "ibs"
+    ],
+    "investigations": [
+      "Urine dipstick",
+      "Urine microscopy and culture",
+      "Urine pregnancy test"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Nitrofurantoin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == CYSTITIS",
+    "acceptableIds == [CYSTITIS]",
+    "stewardship.tier == Access",
+    "stewardship.antibiotics includes Nitrofurantoin",
+    "does not classify as PYELONEPHRITIS or COMPLICATED_UTI",
+    "no fluoroquinolone recommended for uncomplicated cystitis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

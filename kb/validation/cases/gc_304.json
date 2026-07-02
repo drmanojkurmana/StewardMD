@@ -1,0 +1,118 @@
+{
+  "id": "gc_304",
+  "specialty": "Cardiology",
+  "condition": "Atrial fibrillation / arrhythmia",
+  "age": 78,
+  "sex": "M",
+  "presentingComplaint": "Two days of worsening breathlessness and fatigue, now breathless at rest",
+  "history": "Known ischaemic cardiomyopathy with HFrEF (LVEF 32% six months ago), on bisoprolol 5 mg, ramipril, and furosemide 40 mg daily. Long-standing hypertension. Over 48 hours he has become progressively short of breath, cannot lie flat, and has woken at night gasping. He describes only vague 'fluttering' in the chest that he initially attributed to his usual heart failure. No chest pain, no fever, no cough or sputum, no calf pain or long travel. His weight is up 3 kg and ankle swelling has worsened. The dominant story is decompensated heart failure, but he has never previously had an irregular pulse and had a normal (sinus) ECG at his last clinic visit.",
+  "examination": "Elderly, mildly distressed at rest, speaking in short sentences. Pulse irregularly irregular with a variable-volume apex-radial deficit. Raised JVP to the angle of the jaw, bilateral basal crepitations to mid-zones, and pitting oedema to the mid-shins. Apex beat displaced. No new murmur, no signs of DVT, chest otherwise clear with no consolidation.",
+  "vitals": {
+    "hr": 138,
+    "bp": "104/72",
+    "rr": 26,
+    "temp": 36.8,
+    "spo2": 91
+  },
+  "labs": {
+    "ECG": "Irregularly irregular narrow-complex tachycardia at ~135/min, absent discrete P waves with a fibrillatory baseline, no acute ST-segment changes; confirms atrial fibrillation with rapid ventricular response",
+    "hemoglobin": "12.9 g/dL",
+    "creatinine": "1.4 mg/dL",
+    "potassium": "4.2 mmol/L",
+    "NT-proBNP": "6800 pg/mL (markedly elevated, consistent with decompensation)",
+    "hs-troponin T": "28 ng/L then 30 ng/L (mildly raised, flat serial trend — demand-type, no dynamic rise)",
+    "TSH": "1.8 mIU/L (normal — excludes thyrotoxic AF)",
+    "D-dimer": "not sent (low clinical suspicion for PE)"
+  },
+  "imaging": "Chest X-ray: cardiomegaly with upper-lobe diversion, Kerley B lines and small bilateral effusions — pulmonary congestion, no consolidation or pneumothorax. Bedside echo: known LV systolic dysfunction, no pericardial effusion, no regional wall-motion change from prior.",
+  "microbiology": "Not applicable",
+  "differentialDiagnoses": [
+    "New-onset atrial fibrillation with rapid ventricular response precipitating acute decompensated heart failure",
+    "Acute decompensated heart failure from another trigger",
+    "Acute coronary syndrome (NSTEMI)",
+    "Pulmonary embolism",
+    "Thyrotoxicosis-induced arrhythmia"
+  ],
+  "finalDiagnosis": "New-onset atrial fibrillation with rapid ventricular response, which has precipitated decompensation of his known HFrEF",
+  "citations": [
+    "ESC — Management of Atrial Fibrillation — 2024",
+    "AHA/ACC/HRS — Diagnosis and Management of Atrial Fibrillation — 2023"
+  ],
+  "stewardship": "Not applicable (non-infective)",
+  "contraindications": [
+    "Avoid non-dihydropyridine calcium-channel blockers (verapamil/diltiazem) for rate control given reduced LVEF — negative inotropy risks worsening decompensation",
+    "Caution with aggressive IV beta-blockade during overt pulmonary oedema",
+    "Anticoagulation decision (high CHA2DS2-VASc) must weigh bleeding risk before initiation"
+  ],
+  "edgeCases": [
+    "Rate vs rhythm control: if haemodynamic instability develops, urgent synchronised DCCV is indicated",
+    "Mildly raised troponin is demand ischaemia from tachycardia, not a primary ACS — serial flat trend and absent dynamic ECG changes are reassuring",
+    "Ventricular rate may settle as congestion is treated, but underlying AF persists and needs anticoagulation assessment"
+  ],
+  "expectedMaiK": "Recognise that the breathlessness is driven by new atrial fibrillation with rapid ventricular response decompensating known heart failure — the irregularly irregular pulse and ECG are diagnostic despite the heart-failure picture dominating the presentation.",
+  "expectedNextQuestions": [
+    "Any preceding palpitations, syncope or pre-syncope?",
+    "When was the last documented sinus rhythm / is onset within 48 hours (relevant to cardioversion and anticoagulation)?",
+    "Alcohol, infection, missed diuretic doses or other AF triggers?",
+    "Assess CHA2DS2-VASc and HAS-BLED for anticoagulation decision"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG",
+    "Serum electrolytes, renal function and magnesium",
+    "Thyroid function tests",
+    "Serial high-sensitivity troponin",
+    "NT-proBNP",
+    "Chest X-ray",
+    "Transthoracic echocardiogram"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "palpitations": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "knownHeartFailure": true,
+    "hypertensionHx": true,
+    "knownCAD": true,
+    "tachycardia": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "heartRate": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "atrial_fib",
+    "acceptableIds": [
+      "atrial_fib"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "pe",
+      "hyperthyroidism"
+    ],
+    "investigations": [
+      "ECG",
+      "electrolytes",
+      "thyroid function tests",
+      "troponin",
+      "NT-proBNP",
+      "chest X-ray",
+      "echocardiogram"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be atrial_fib",
+    "ECG showing irregularly irregular narrow-complex tachycardia with absent P waves must anchor the diagnosis over heart_failure alone",
+    "Must recommend rate control and anticoagulation assessment (CHA2DS2-VASc)",
+    "Must not classify the mildly raised, non-dynamic troponin as a primary ACS",
+    "Must not recommend non-dihydropyridine calcium-channel blockers given reduced LVEF"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

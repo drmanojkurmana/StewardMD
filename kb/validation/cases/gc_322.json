@@ -1,0 +1,117 @@
+{
+  "id": "gc_322",
+  "specialty": "Hepatology",
+  "condition": "Hepatic encephalopathy",
+  "age": 69,
+  "sex": "M",
+  "presentingComplaint": "Two days of increasing daytime drowsiness, muddled speech and one episode of disorientation, brought in by his daughter who reports he 'has not been himself'.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh B, last variceal screen 6 months ago, abstinent 1 year) with a background of type 2 diabetes mellitus on gliclazide and metformin, and CKD stage 3b (baseline creatinine 1.9 mg/dL). The comorbid picture is confounding: the family initially attributed the confusion to 'low sugar' from his diabetes and to his known kidney trouble, and his primary physician had wondered about uraemic slowing. However, symptoms are fluctuating with a reversed sleep-wake pattern, he has not opened his bowels for 4 days after running out of lactulose, and there is no focal history. No recent head injury, no seizure, no fever, no melaena or haematemesis, no new sedatives. Bedside capillary glucose on arrival was 7.2 mmol/L, excluding hypoglycaemia as the cause. He takes a thiazide diuretic and spironolactone for ascites.",
+  "examination": "Drowsy but rousable, disoriented to time and place (West Haven grade 2). Coarse asterixis (flap) present bilaterally. Fetor hepaticus noted. Icteric sclerae, spider naevi, palmar erythema. Mild moderate ascites with shifting dullness; no rebound or guarding, non-tender. No neck stiffness, pupils equal and reactive, no lateralising motor deficit, plantars flexor. No focal neurology to suggest a structural cause. Chest clear, no signs of sepsis focus.",
+  "vitals": {
+    "hr": 88,
+    "bp": "128/76",
+    "rr": 16,
+    "temp": 36.9,
+    "spo2": 97
+  },
+  "labs": {
+    "bilirubin_mg_dl": 4.6,
+    "albumin_g_dl": 2.7,
+    "inr": 1.8,
+    "creatinine_mg_dl": 2,
+    "urea_mmol_l": 11.5,
+    "sodium_mmol_l": 130,
+    "potassium_mmol_l": 3.4,
+    "platelets_10e3_ul": 88,
+    "hemoglobin_g_dl": 11.2,
+    "glucose_mmol_l": 7.2,
+    "venous_ammonia_umol_l": 96,
+    "crp_mg_l": 6
+  },
+  "imaging": "Abdominal ultrasound: coarse nodular shrunken liver, splenomegaly, moderate ascites, patent portal vein. Non-contrast CT head (to exclude structural mimic given falls risk and CKD): age-related atrophy, no haemorrhage, no mass, no subdural collection.",
+  "microbiology": "Diagnostic ascitic tap: PMN 90 cells/mm3 (below 250), culture negative — excludes spontaneous bacterial peritonitis as precipitant. Blood cultures pending, urinalysis bland.",
+  "differentialDiagnoses": [
+    "Uraemic / metabolic encephalopathy from CKD (confounder)",
+    "Hypoglycaemia from sulfonylurea (excluded by bedside glucose)",
+    "Wernicke encephalopathy given alcohol history",
+    "Subdural haematoma (excluded on CT)"
+  ],
+  "finalDiagnosis": "Overt hepatic encephalopathy (West Haven grade 2) in decompensated alcohol-related cirrhosis, precipitated by constipation and lactulose non-adherence, with confounding diabetes and CKD.",
+  "citations": [
+    "AASLD/EASL — Hepatic Encephalopathy in Chronic Liver Disease — 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and its Complications"
+  ],
+  "stewardship": "Not an infective indication; no empiric antibiotics warranted. Ascitic tap excludes SBP and blood/urine screens are unremarkable, so antimicrobials are not indicated. Rifaximin here is a gut-selective agent for HE, not systemic antibacterial therapy.",
+  "contraindications": [
+    "Avoid benzodiazepines/sedatives which precipitate and mask HE",
+    "Avoid empiric broad-spectrum antibiotics without an infective source",
+    "Caution with further diuresis given hypokalaemia and CKD (hypokalaemia worsens HE)"
+  ],
+  "edgeCases": [
+    "CKD raises urea and can independently cloud sensorium (uraemic encephalopathy mimic) — asterixis and fetor plus response to lactulose point to HE",
+    "Sulfonylurea-treated diabetic: always exclude hypoglycaemia at the bedside before attributing confusion to HE",
+    "Ammonia level supports but does not define HE; a normal ammonia would not exclude it"
+  ],
+  "expectedMaiK": "Treat as overt hepatic encephalopathy: give lactulose titrated to 2-3 soft stools/day, correct hypokalaemia, and identify/treat the precipitant (here constipation and lactulose non-adherence); this is not an infective indication.",
+  "expectedNextQuestions": [
+    "Was there any GI bleeding (melaena, haematemesis) or recent sedative/opioid use as a precipitant?",
+    "Bowel habit and lactulose adherence over the past week?",
+    "Any fever or symptoms of infection (SBP, urinary, chest)?",
+    "Recent diuretic changes, fluid balance and salt/protein intake?"
+  ],
+  "expectedInvestigations": [
+    "Venous ammonia (supportive)",
+    "Diagnostic ascitic tap with cell count and culture (exclude SBP precipitant)",
+    "Serum electrolytes, urea, creatinine and glucose",
+    "LFTs, INR, albumin and full blood count",
+    "Non-contrast CT head to exclude structural mimic when focal signs or trauma suspected",
+    "Septic screen (blood cultures, urinalysis, chest imaging)"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "alteredSensorium": true,
+    "asterixis": true,
+    "liverDisease": true,
+    "jaundice": true,
+    "ascites": true,
+    "encephalopathyGrade": true,
+    "constipationOrDiarrhea": true,
+    "alcoholExcess": true,
+    "diabetesHx": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "hepatic_enceph",
+    "acceptableIds": [
+      "hepatic_enceph"
+    ],
+    "differentialIds": [
+      "metabolic_enceph",
+      "wernicke",
+      "hyponatremia",
+      "subdural"
+    ],
+    "investigations": [
+      "Venous ammonia",
+      "Diagnostic ascitic tap with cell count and culture",
+      "Electrolytes, urea, creatinine, glucose",
+      "LFTs, INR, albumin, FBC",
+      "CT head to exclude structural mimic"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank hepatic_enceph as the top diagnosis despite comorbid CKD and diabetes as confounders",
+    "Asterixis + known cirrhosis + identifiable precipitant (constipation) should drive the HE diagnosis",
+    "Must NOT recommend empiric antibiotics (non-infective; SBP excluded on ascitic tap)",
+    "Bedside glucose 7.2 mmol/L should exclude hypoglycaemia from the differential",
+    "First-line management should be lactulose titrated to 2-3 stools/day plus precipitant correction"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

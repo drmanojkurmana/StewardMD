@@ -1,0 +1,122 @@
+{
+  "id": "gc_297",
+  "specialty": "Nephrology",
+  "condition": "Acute kidney injury",
+  "age": 84,
+  "sex": "F",
+  "presentingComplaint": "Increasing confusion and reduced urine output over 3 days, brought in by care-home staff",
+  "history": "An 84-year-old woman, resident of a nursing home, with frailty (Clinical Frailty Scale 6), longstanding hypertension, type 2 diabetes and osteoarthritis. Baseline creatinine 1.1 mg/dL (eGFR ~48) documented 2 months ago. Her regular medicines include ramipril and furosemide; two weeks ago ibuprofen was added by a locum for a painful back. Over the past 4-5 days she had loose stools and markedly reduced oral intake during a hot spell, and staff noted she was drinking little. There is no fever, dysuria, flank pain, rash or bleeding. She has become progressively drowsy and confused (a change from her usual orientation) and her incontinence pads have been much drier than normal. No recent contrast imaging, no new antibiotics. She has not been catheterised. This is a subtle, non-classic presentation: no dramatic collapse or single obvious insult, but a frail elder with the 'triple-whammy' of ACE inhibitor + diuretic + NSAID superimposed on volume depletion.",
+  "examination": "Frail, mildly drowsy elderly woman, GCS 14 (E4 V4 M6), disoriented to time and place but no focal neurological deficit and no neck stiffness. Dry mucous membranes, reduced skin turgor, empty-looking neck veins. No peripheral oedema, no ascites. Chest clear, heart sounds normal with no new murmur. Abdomen soft, non-tender, no palpable bladder and no suprapubic fullness; bladder scan post-void <50 mL (excludes retention/obstruction). No rash, no calf tenderness.",
+  "vitals": {
+    "hr": 96,
+    "bp": "104/62",
+    "rr": 18,
+    "temp": 36.7,
+    "spo2": 96
+  },
+  "labs": {
+    "creatinine": "3.4 mg/dL (baseline 1.1)",
+    "urea": "27 mmol/L",
+    "potassium": "5.6 mmol/L",
+    "sodium": "148 mmol/L",
+    "bicarbonate": "18 mmol/L",
+    "hemoglobin": "11.8 g/dL",
+    "wbc": "8.9 x10^9/L",
+    "platelets": "244 x10^3/µL",
+    "albumin": "3.4 g/dL",
+    "urineNa": "12 mmol/L (low)",
+    "feUrea": "28% (<35%, pre-renal pattern)",
+    "urinalysis": "trace protein, no blood, no leucocytes/nitrites; few hyaline/granular casts",
+    "ck": "180 U/L (not elevated)"
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys with preserved cortical thickness, no hydronephrosis and no obstructing calculus; bladder empty. Findings exclude post-renal obstruction and suggest a non-chronic, non-obstructive process.",
+  "microbiology": "Blood cultures not indicated (afebrile, no sepsis features); urine culture sent and subsequently no significant growth.",
+  "differentialDiagnoses": [
+    "Acute kidney injury (pre-renal progressing to ischaemic ATN, drug-precipitated 'triple whammy')",
+    "Acute-on-chronic kidney disease",
+    "Hypovolaemia from gastroenteritis",
+    "Hyperkalaemia as a metabolic complication",
+    "Urinary tract obstruction / retention (excluded on scan)"
+  ],
+  "finalDiagnosis": "Acute kidney injury (KDIGO Stage 2-3), pre-renal/ischaemic ATN precipitated by volume depletion plus ACE inhibitor, diuretic and NSAID in a frail elderly patient",
+  "citations": [
+    "KDIGO Clinical Practice Guideline for Acute Kidney Injury 2012",
+    "Harrison's Principles of Internal Medicine, 22e — Acute Kidney Injury"
+  ],
+  "stewardship": "Not applicable — non-infective acute kidney injury. Management is supportive: stop nephrotoxins (hold ramipril, furosemide and ibuprofen), cautious isotonic fluid resuscitation with reassessment of volume status, treat hyperkalaemia, review and renally dose all medicines, and monitor urine output and electrolytes.",
+  "contraindications": [
+    "Avoid further NSAIDs and nephrotoxic agents",
+    "Avoid iodinated contrast unless essential",
+    "Withhold ACE inhibitor and diuretic until euvolaemic and creatinine trending down",
+    "Avoid potassium-containing fluids while hyperkalaemic",
+    "Caution with fluid boluses given age and cardiac risk — reassess frequently"
+  ],
+  "edgeCases": [
+    "Frail elderly frequently have non-oliguric AKI, so a modest fall in output can mask significant injury",
+    "Baseline sarcopenia lowers creatinine generation, so 'normal-looking' creatinine can conceal a large drop in GFR",
+    "Rising potassium and falling bicarbonate may be the first alert rather than symptoms",
+    "Distinguishing acute from acute-on-chronic requires the prior baseline creatinine, which is essential here"
+  ],
+  "expectedMaiK": "In a frail elderly patient, the combination of volume depletion plus the 'triple whammy' (ACE inhibitor + diuretic + NSAID) is a classic and reversible cause of AKI; a low urine sodium/FeUrea and normal-sized non-obstructed kidneys point to pre-renal/ischaemic ATN, and the immediate priority is stopping nephrotoxins and correcting hypovolaemia.",
+  "expectedNextQuestions": [
+    "What was the previous (baseline) creatinine and is this acute or acute-on-chronic?",
+    "Full medication reconciliation including recently added and over-the-counter drugs",
+    "Detailed fluid intake/output and weight change over recent days",
+    "Any recent contrast, sepsis source, or urinary symptoms/obstruction?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatinine and urea trend with eGFR",
+    "Serum electrolytes including potassium and bicarbonate",
+    "Urinalysis with urine sodium and fractional excretion of urea",
+    "Renal tract ultrasound to exclude obstruction",
+    "ECG to assess for hyperkalaemic changes",
+    "Venous blood gas / bicarbonate for acidosis"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "age": true,
+    "nursingHomeResident": true,
+    "oliguria": true,
+    "dehydration": true,
+    "alteredSensorium": true,
+    "renalImpairment": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "hypertensionHx": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "aki",
+    "acceptableIds": [
+      "aki"
+    ],
+    "differentialIds": [
+      "ckd",
+      "hypovolemic_shock",
+      "hyperkalemia"
+    ],
+    "investigations": [
+      "creatinine",
+      "urea",
+      "potassium",
+      "urinalysis",
+      "renal_ultrasound",
+      "ecg"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be aki",
+    "acceptableIds must equal ['aki']",
+    "No antibiotics recommended (non-infective AKI)",
+    "Must flag nephrotoxin cessation (ACEi, diuretic, NSAID) and volume correction",
+    "Renal ultrasound expected to exclude obstruction"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

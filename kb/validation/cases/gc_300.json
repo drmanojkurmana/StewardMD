@@ -1,0 +1,105 @@
+{
+  "id": "gc_300",
+  "specialty": "Allergy / Emergency",
+  "condition": "ACE-inhibitor / hereditary angioedema",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Gradual, mild swelling of the lower lip and side of the tongue since waking this morning.",
+  "history": "A 68-year-old man presents to the emergency department with painless swelling of the lower lip and left side of the tongue, first noticed on waking about 5 hours ago and slowly progressing. He denies itch, hives, or a rash, and there is no wheeze, throat tightness, drooling or voice change. He has not started any new food, drug or over-the-counter medication and has had no insect sting. He has been on lisinopril 10 mg daily for hypertension for the past 3 years with good adherence; no dose change recently. He recalls two milder, self-limiting episodes of lip puffiness over the last 6 months that he attributed to 'sleeping awkwardly'. No family history of recurrent swelling or unexplained abdominal pain. No prior anaphylaxis, no asthma, no atopy. Not on NSAIDs, DPP-4 inhibitors or sacubitril/valsartan.",
+  "examination": "Comfortable, speaking in full sentences with a normal voice. Non-pitting, non-tender, non-erythematous swelling of the lower lip and left lateral tongue without uvular deviation. Oropharynx patent, no stridor, no drooling, no floor-of-mouth elevation. No urticaria or pruritus anywhere on the skin. No facial flushing. Chest clear with no wheeze. No peripheral or periorbital oedema. Cardiovascular and abdominal examination unremarkable.",
+  "vitals": {
+    "hr": 82,
+    "bp": "150/88",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "14.1 g/dL",
+    "wbc": "7.2 x10^9/L (no eosinophilia)",
+    "platelets": "244 x10^3/uL",
+    "creatinine": "1.0 mg/dL",
+    "serumTryptase": "4.1 ng/mL (normal; drawn during swelling)",
+    "C4": "22 mg/dL (normal)",
+    "C1inhibitorLevelAndFunction": "normal (sent to exclude hereditary/acquired C1-INH deficiency)"
+  },
+  "imaging": "No imaging required for this mild presentation; flexible nasolaryngoscopy deferred as no supraglottic or laryngeal involvement clinically. Soft-tissue neck imaging not indicated.",
+  "microbiology": "Not applicable (non-infective).",
+  "differentialDiagnoses": [
+    "Allergic (histaminergic/IgE-mediated) angioedema or early anaphylaxis",
+    "Hereditary or acquired C1-esterase inhibitor deficiency angioedema",
+    "Facial/lip cellulitis",
+    "Superior vena cava obstruction (facial/upper-body swelling)"
+  ],
+  "finalDiagnosis": "ACE-inhibitor–induced (bradykinin-mediated) angioedema — early/mild, isolated lip and tongue swelling without airway compromise.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Urticaria and Angioedema",
+    "WAO/EAACI Guideline for the Management of Hereditary Angioedema, 2021",
+    "AAAAI/ACAAI Joint Task Force — Bradykinin-mediated Angioedema (ACE-inhibitor associated), 2020"
+  ],
+  "stewardship": "Not applicable (non-infective condition).",
+  "contraindications": [
+    "Do not restart lisinopril or any other ACE inhibitor — permanent contraindication; document allergy/adverse-reaction alert.",
+    "Avoid substituting an ARB without caution and counselling (small cross-reactivity risk).",
+    "Antihistamines, corticosteroids and adrenaline are largely ineffective for bradykinin-mediated angioedema and must not delay airway assessment if progression occurs."
+  ],
+  "edgeCases": [
+    "Onset can occur months to years after starting the ACE inhibitor, so temporal distance does not exclude the diagnosis.",
+    "Black patients and smokers are at higher risk and may have more severe episodes.",
+    "Isolated tongue/lip swelling can progress rapidly to laryngeal obstruction over hours — mild presentation still warrants observation.",
+    "Concomitant DPP-4 inhibitor, mTOR inhibitor or sacubitril/valsartan potentiates risk."
+  ],
+  "expectedMaiK": "Recognise bradykinin-mediated ACE-inhibitor angioedema; permanently discontinue the ACE inhibitor, protect and monitor the airway, and avoid inappropriate reliance on antihistamines/steroids/adrenaline.",
+  "expectedNextQuestions": [
+    "How long ago was the ACE inhibitor started and have there been prior milder swelling episodes?",
+    "Is there any itch, hives, throat tightness, voice change or difficulty swallowing/breathing?",
+    "Any family history of recurrent angioedema or unexplained abdominal pain (to consider hereditary angioedema)?",
+    "Any recent new drugs (NSAIDs, DPP-4 inhibitors, sacubitril/valsartan) or a trigger such as food or insect sting?"
+  ],
+  "expectedInvestigations": [
+    "Airway assessment +/- flexible nasolaryngoscopy if any tongue base/laryngeal concern",
+    "Serum tryptase during the episode (normal supports bradykinin-mediated, not mast-cell/anaphylaxis)",
+    "C4 level and C1-esterase inhibitor level and function (to exclude hereditary/acquired C1-INH deficiency)",
+    "Clinical monitoring/observation for progression"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "facialSwelling": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "age": true,
+    "sex": true,
+    "stable": true,
+    "afebrile": true
+  },
+  "expected": {
+    "diagnosis": "angioedema_acei",
+    "acceptableIds": [
+      "angioedema_acei"
+    ],
+    "differentialIds": [
+      "anaphylaxis",
+      "CELLULITIS",
+      "svc_obstruction"
+    ],
+    "investigations": [
+      "serum tryptase",
+      "C4 and C1-esterase inhibitor level and function",
+      "airway assessment / nasolaryngoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks angioedema_acei as the top diagnosis given facialSwelling + long-term ACE-inhibitor use and absence of urticaria/pruritus.",
+    "Engine does NOT recommend antibiotics (non-infective; stewardship tier null).",
+    "Management flags permanent discontinuation of the ACE inhibitor and airway monitoring.",
+    "anaphylaxis and CELLULITIS appear as differentials but are ranked below angioedema_acei."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

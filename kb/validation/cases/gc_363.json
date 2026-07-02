@@ -1,0 +1,118 @@
+{
+  "id": "gc_363",
+  "specialty": "Toxicology",
+  "condition": "Salicylate toxicity",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Three days of worsening confusion, nausea and rapid breathing in a frail elderly woman.",
+  "history": "Frail 78-year-old woman with osteoarthritis, hypertension and mild chronic kidney disease, living alone, brought by her daughter for progressive drowsiness and muddled behaviour over three days. She takes regular soluble aspirin for joint pain and, during a recent painful flare, had been adding extra doses plus an OTC aspirin-containing cold remedy for about a week. She had complained of persistent ringing in the ears and nausea before becoming confused. There is no history of deliberate self-harm and no single large ingestion identified; this is a chronic therapeutic-misadventure picture. Poor oral intake and vomiting for two days. No fever reported at home, no cough, dysuria or focal pain.",
+  "examination": "Frail, mildly agitated and disoriented (AMTS 4/10), appears unwell and dehydrated with dry mucous membranes and reduced skin turgor. Deep, sighing hyperpnoea at rest. Chest clear, no consolidation. Abdomen soft, mildly tender epigastrium, no peritonism. No neck stiffness, no focal neurological deficit, no rash. Warm peripheries, capillary refill 3 s.",
+  "vitals": {
+    "hr": 112,
+    "bp": "138/84",
+    "rr": 30,
+    "temp": 38.3,
+    "spo2": 93
+  },
+  "labs": {
+    "abg": "Mixed disorder: pH 7.39, PaCO2 22 mmHg (2.9 kPa), HCO3 13 mmol/L, base excess -10 — primary respiratory alkalosis with concurrent high-anion-gap metabolic acidosis",
+    "anionGap": 22,
+    "sodium": 141,
+    "potassium": 3.1,
+    "chloride": 100,
+    "bicarbonate": 13,
+    "glucose": "4.6 mmol/L (82 mg/dL)",
+    "lactate": "2.8 mmol/L",
+    "creatinine": "1.8 mg/dL (baseline 1.1)",
+    "urea": "12.5 mmol/L",
+    "salicylateLevel": "58 mg/dL (4.2 mmol/L) and rising on repeat 2 h later",
+    "ketones": "trace",
+    "inr": 1.3,
+    "wbc": "13.2 ×10⁹/L"
+  },
+  "imaging": "Chest radiograph clear with no consolidation or overt pulmonary oedema; CT head unremarkable, excluding acute intracranial cause for the delirium.",
+  "microbiology": "Blood cultures, urine culture and CSF studies not indicated on initial assessment; septic screen sent given fever and delirium returned negative.",
+  "differentialDiagnoses": [
+    "Chronic salicylate (aspirin) toxicity / therapeutic misadventure",
+    "Sepsis with delirium",
+    "Diabetic / starvation ketoacidosis or other high-anion-gap acidosis",
+    "Metabolic encephalopathy",
+    "Community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Chronic salicylate toxicity presenting as delirium in a frail elderly woman (respiratory alkalosis with concurrent high-anion-gap metabolic acidosis; salicylate 58 mg/dL and rising).",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Aspirin and Salicylate Poisoning",
+    "EXTRIP Workgroup — Extracorporeal Treatment for Salicylate Poisoning: Recommendations — 2015",
+    "American College of Medical Toxicology — Guidance on Salicylate Poisoning Management — 2015"
+  ],
+  "stewardship": "Not applicable — non-infective toxicological emergency; empiric antibiotics not indicated despite low-grade fever once salicylate toxicity is established and sepsis screen is negative.",
+  "contraindications": [
+    "Avoid intubation with resulting hypoventilation — loss of compensatory hyperventilation causes catastrophic worsening of acidaemia and CNS salicylate penetration; if unavoidable, match the patient's high minute ventilation",
+    "Do not give bicarbonate boluses without concurrent potassium correction — hypokalaemia prevents effective urinary alkalinisation",
+    "Avoid volume overload from aggressive fluids in frail patient with CKD given risk of salicylate-associated non-cardiogenic pulmonary oedema"
+  ],
+  "edgeCases": [
+    "Chronic salicylism in the elderly is frequently mistaken for sepsis, pneumonia or primary delirium, delaying diagnosis and increasing mortality",
+    "Serum salicylate concentrations are lower in chronic than acute poisoning yet toxicity is more severe — do not be reassured by a 'moderate' level",
+    "A normal or near-normal pH masks a serious mixed acid-base disturbance; check both PaCO2 and anion gap"
+  ],
+  "expectedMaiK": "Recognise that unexplained delirium with tachypnoea, tinnitus, vomiting and a mixed respiratory alkalosis plus high-anion-gap metabolic acidosis in an elderly patient on regular aspirin is chronic salicylate toxicity until proven otherwise — send a serum salicylate level and ABG rather than anchoring on sepsis.",
+  "expectedNextQuestions": [
+    "Exactly which aspirin-containing products (prescription, soluble, OTC cold/pain remedies) and what doses over the past week?",
+    "Any tinnitus, hearing change, hyperventilation or vomiting preceding the confusion?",
+    "Baseline renal function and usual mental state to gauge the delirium and AKI?",
+    "Any co-ingestants or other analgesics?"
+  ],
+  "expectedInvestigations": [
+    "Serum salicylate level, repeated 2-hourly to confirm a rising trend",
+    "Arterial blood gas with electrolytes and anion gap",
+    "Serum glucose and ketones to exclude DKA",
+    "Renal function, potassium and lactate",
+    "Paracetamol level as routine co-ingestant screen"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "tachypnea": true,
+    "dehydration": true,
+    "toxicAppearing": true,
+    "fever": true,
+    "tachycardia": true,
+    "drugOverdose": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "salicylate_tox",
+    "acceptableIds": [
+      "salicylate_tox"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "dka",
+      "metabolic_enceph",
+      "CAP"
+    ],
+    "investigations": [
+      "Serum salicylate level (serial)",
+      "Arterial blood gas with anion gap",
+      "Serum glucose and ketones",
+      "Renal function and potassium",
+      "Paracetamol co-ingestant level"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank salicylate_tox as the top diagnosis",
+    "Mixed respiratory alkalosis with high-anion-gap metabolic acidosis plus tinnitus/hyperpnoea should trigger a salicylate level recommendation",
+    "Must NOT recommend empiric antibiotics once sepsis screen is negative and salicylate toxicity is established",
+    "Must flag hypokalaemia correction as prerequisite for urinary alkalinisation and warn against unmatched mechanical ventilation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "gc_350",
+  "specialty": "Gastroenterology",
+  "condition": "Acute pancreatitis",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Two days of vague upper-abdominal discomfort, nausea and dull lower-back ache, without the classic severe epigastric pain",
+  "history": "Retired schoolteacher, brought in by his wife for feeling 'not right' — poor appetite, mild constant discomfort across the upper abdomen and a nagging ache in the mid-back that he attributed to his chronic lumbar spondylosis. He denies the sudden severe, boring epigastric pain typically expected; discomfort has been low-grade and gnawing throughout. Two episodes of non-bilious vomiting and reduced oral intake. Drinks around 40 units of alcohol per week for years with a recent binge at a family function 3 days ago. Type 2 diabetic on metformin. No prior similar episodes, no gallstone history. This subtle, pain-light presentation in an older heavy-drinker is easy to mistake for gastritis or a musculoskeletal back complaint.",
+  "examination": "Alert, mildly uncomfortable but not writhing. Mild epigastric fullness with only modest deep tenderness disproportionately less than the biochemical severity; no guarding or rigidity. Bowel sounds sluggish, mild abdominal distension. No jaundice, no flank ecchymosis. Dry mucous membranes.",
+  "vitals": {
+    "hr": 104,
+    "bp": "122/76",
+    "rr": 20,
+    "temp": 37.4,
+    "spo2": 97
+  },
+  "labs": {
+    "lipase_U_L": 1240,
+    "lipase_ULN_U_L": 60,
+    "amylase_U_L": 498,
+    "wbc_x10e9_L": 13.4,
+    "hemoglobin_g_dL": 14.1,
+    "platelets_x10e9_L": 236,
+    "crp_mg_L": 96,
+    "corrected_calcium_mg_dL": 8.6,
+    "triglycerides_mg_dL": 210,
+    "glucose_mg_dL": 214,
+    "creatinine_mg_dL": 1,
+    "urea_mmol_L": 8.2,
+    "ast_U_L": 68,
+    "alt_U_L": 52,
+    "total_bilirubin_mg_dL": 1.1,
+    "ldh_U_L": 320,
+    "bisap_score": 1
+  },
+  "imaging": "Contrast-enhanced CT abdomen: diffusely enlarged, oedematous pancreas with peripancreatic fat stranding and a small amount of free peripancreatic fluid; normal pancreatic enhancement with no necrosis (interstitial oedematous pancreatitis, CT Severity Index low). No gallstones or biliary dilatation. Ultrasound: no cholelithiasis, normal common bile duct.",
+  "microbiology": "Not applicable — sterile inflammatory process; blood cultures not indicated in the absence of infected necrosis or cholangitis.",
+  "differentialDiagnoses": [
+    "Peptic ulcer disease",
+    "Biliary colic / cholelithiasis",
+    "Acute cholecystitis",
+    "Acute mesenteric ischaemia"
+  ],
+  "finalDiagnosis": "Acute (alcohol-related) interstitial oedematous pancreatitis — atypical pain-light presentation, diagnosis secured by lipase >3x ULN plus characteristic CT findings",
+  "citations": [
+    "American College of Gastroenterology (ACG) — Management of Acute Pancreatitis — 2013",
+    "International Association of Pancreatology / American Pancreatic Association (IAP/APA) — Evidence-based Guidelines for the Management of Acute Pancreatitis — 2013",
+    "Harrison's Principles of Internal Medicine 22e — Acute and Chronic Pancreatitis — 2022"
+  ],
+  "stewardship": "No antibiotics indicated. Prophylactic antibiotics are NOT recommended in acute pancreatitis, including predicted-severe or sterile necrotising disease; antibiotics are reserved for proven infected necrosis or an extrapancreatic infection (e.g. cholangitis). Management is supportive: goal-directed fluid resuscitation, analgesia, early oral/enteral nutrition as tolerated, and treatment of the precipitant (alcohol cessation, glycaemic control).",
+  "contraindications": [
+    "Avoid empiric prophylactic antibiotics (no survival benefit, promotes resistance and fungal superinfection)",
+    "Avoid aggressive over-resuscitation causing volume overload — use moderate goal-directed crystalloid (Ringer's lactate preferred)",
+    "Avoid prolonged nil-by-mouth / routine parenteral nutrition when enteral feeding is tolerable"
+  ],
+  "edgeCases": [
+    "Pain-light or painless pancreatitis in elderly, diabetic, or post-operative patients can lead to missed or delayed diagnosis",
+    "Lipase can be normal if presentation is very late; a normal amylase does not exclude pancreatitis",
+    "Hypertriglyceridaemia and alcohol may coexist as dual precipitants — check triglycerides",
+    "Progression to necrotising pancreatitis or organ failure can occur despite an initially benign-appearing exam — reassess with severity scoring"
+  ],
+  "expectedMaiK": "Diagnose acute pancreatitis by the revised Atlanta criteria (2 of 3: characteristic pain, lipase/amylase >3x ULN, or cross-sectional imaging) even when the pain is atypical/subtle, and manage supportively without antibiotics.",
+  "expectedNextQuestions": [
+    "Alcohol quantity and timing of last binge?",
+    "Any gallstone disease or prior biliary symptoms?",
+    "Current medications and recent new drugs (drug-induced pancreatitis)?",
+    "Fasting triglyceride and calcium levels?",
+    "Any features of organ failure (urine output, breathlessness, confusion)?"
+  ],
+  "expectedInvestigations": [
+    "Serum lipase (and amylase)",
+    "Contrast-enhanced CT / abdominal ultrasound for gallstones and biliary duct",
+    "LFTs, calcium, fasting triglycerides",
+    "Renal function, CRP and severity scoring (BISAP / revised Atlanta)",
+    "Blood glucose / HbA1c"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "abdominalDiscomfort": true,
+    "nauseaVomiting": true,
+    "backPain": true,
+    "abdominalDistension": true,
+    "tachycardia": true,
+    "dehydration": true,
+    "alcoholExcess": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "pancreatitis",
+    "acceptableIds": [
+      "pancreatitis"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "biliary_colic",
+      "CHOLECYSTITIS",
+      "mesenteric_ischemia"
+    ],
+    "investigations": [
+      "Serum lipase (>3x ULN)",
+      "Contrast-enhanced CT abdomen",
+      "Abdominal ultrasound for gallstones",
+      "Fasting triglycerides and serum calcium"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must identify pancreatitis as top diagnosis despite atypical pain-light presentation",
+    "Diagnosis rests on lipase >3x ULN plus CT findings (revised Atlanta), not on pain severity",
+    "No antibiotics should be recommended (prophylaxis contraindicated in acute pancreatitis)",
+    "Differential should include peptic ulcer, biliary colic, cholecystitis and mesenteric ischaemia"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

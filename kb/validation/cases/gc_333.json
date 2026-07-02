@@ -1,0 +1,111 @@
+{
+  "id": "gc_333",
+  "specialty": "Neurology / Vascular",
+  "condition": "Intracerebral hemorrhage",
+  "age": 84,
+  "sex": "F",
+  "presentingComplaint": "Found drowsy with right-sided weakness and word-finding difficulty by her daughter, evolving over roughly one hour.",
+  "history": "Frail 84-year-old woman living with her daughter, baseline Clinical Frailty Score 6 (mobilises with a frame). Background of longstanding hypertension and permanent atrial fibrillation for which she takes apixaban 5 mg BD. Previous lacunar TIA 3 years ago. Two prior episodes of transient visual disturbance in the past year (possibly amyloid spells) not investigated. This morning she complained of a mild 'pressure' headache and mild nausea, then over the next hour became progressively drowsy with difficulty getting her words out and a weak right arm. No preceding trauma or fall witnessed. No fever, no neck stiffness. Last apixaban dose taken this morning.",
+  "examination": "Elderly frail woman, drowsy but rousable to voice, GCS E3V4M6 (13). Non-fluent (expressive) dysphasia. Right hemiparesis MRC 3/5 in arm, 4/5 in leg, with a right facial droop. Right plantar upgoing. No neck stiffness, no papilloedema. Irregularly irregular pulse. No external head injury. No focal source of infection.",
+  "vitals": {
+    "hr": 96,
+    "bp": "196/102",
+    "rr": 18,
+    "temp": 36.7,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 12.1,
+    "platelets": 224,
+    "inr": 1.2,
+    "aptt_ratio": 1.1,
+    "creatinine": 1.3,
+    "eGFR": 42,
+    "glucose_mmol_L": 6.8,
+    "sodium": 139,
+    "apixaban_anti_Xa_ng_mL": 118
+  },
+  "imaging": "Non-contrast CT head: acute 4.3 x 3.1 cm lobar haematoma in the left temporoparietal region with mild surrounding oedema and 3 mm midline shift; no intraventricular extension, no subdural or extradural collection. Lobar location with adjacent cortical superficial siderosis suggests cerebral amyloid angiopathy rather than deep hypertensive haemorrhage. CT angiogram: no 'spot sign', no macrovascular cause (aneurysm/AVM).",
+  "microbiology": "Not applicable — non-infective presentation.",
+  "differentialDiagnoses": [
+    "Acute ischaemic stroke (cardioembolic, given AF) — excluded by CT showing haemorrhage",
+    "Chronic/acute subdural haematoma in a frail anticoagulated elder — excluded on CT",
+    "Underlying brain tumour with haemorrhage — no mass/enhancement on imaging",
+    "Aneurysmal subarachnoid haemorrhage — no SAH, no aneurysm on CTA"
+  ],
+  "finalDiagnosis": "Spontaneous lobar intracerebral haemorrhage in an anticoagulated frail elderly patient, most consistent with cerebral amyloid angiopathy.",
+  "citations": [
+    "AHA/ASA — Guideline for the Management of Patients With Spontaneous Intracerebral Hemorrhage — 2022",
+    "Harrison's Principles of Internal Medicine, 22e — Cerebrovascular Diseases (Hemorrhagic Stroke / Intracerebral Hemorrhage)"
+  ],
+  "stewardship": "Not applicable — non-infective. Priority is rapid anticoagulation reversal (andexanet alfa or 4-factor PCC for apixaban), controlled BP lowering (target SBP ~140), and neurosurgical/stroke consult.",
+  "contraindications": [
+    "Do not give antiplatelet/anticoagulant agents acutely",
+    "Avoid abrupt/excessive BP reduction below ~130 mmHg SBP given cerebral autoregulation in the elderly",
+    "Avoid thrombolysis — this is haemorrhage, not ischaemic stroke"
+  ],
+  "edgeCases": [
+    "Near-normal INR does not exclude clinically significant DOAC effect — anti-Xa/apixaban level confirms recent activity and reversal is still indicated",
+    "Lobar location + superficial siderosis in an elder points to amyloid angiopathy and high re-bleed risk, influencing decisions on restarting anticoagulation",
+    "Mild headache and gradual drowsiness (not thunderclap) is a realistic atypical elderly presentation and can be mistaken for ischaemic stroke or delirium"
+  ],
+  "expectedMaiK": "Elderly anticoagulated patient with acute focal deficit and reduced GCS — obtain urgent non-contrast CT head; a lobar haematoma diagnoses spontaneous intracerebral haemorrhage, mandating immediate DOAC reversal and controlled BP management.",
+  "expectedNextQuestions": [
+    "Exact time of last apixaban dose and indication for anticoagulation?",
+    "Any witnessed trauma or fall (to exclude traumatic haemorrhage/subdural)?",
+    "Baseline functional status/frailty and prior neurological events?",
+    "Current blood pressure trend and airway/GCS trajectory?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head",
+    "CT angiography (spot sign, macrovascular cause)",
+    "Coagulation screen including apixaban/anti-Xa level",
+    "FBC, U&E, glucose",
+    "ECG (confirm AF)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "focalNeuroDeficit": true,
+    "alteredSensorium": true,
+    "headache": true,
+    "nauseaVomiting": true,
+    "anticoagulated": true,
+    "atrialFibHx": true,
+    "hypertensionHx": true,
+    "cerebrovascularDisease": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "ich",
+    "acceptableIds": [
+      "ich"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "subdural",
+      "brain_tumour",
+      "sah"
+    ],
+    "investigations": [
+      "Non-contrast CT head",
+      "CT angiogram head",
+      "Coagulation screen / apixaban level",
+      "FBC and U&E"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return ich as top diagnosis",
+    "Must not recommend thrombolysis or anticoagulation acutely",
+    "Must flag urgent non-contrast CT head as first investigation",
+    "Must recommend DOAC reversal and controlled BP lowering",
+    "stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

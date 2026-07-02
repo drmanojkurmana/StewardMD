@@ -1,0 +1,116 @@
+{
+  "id": "gc_252",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholecystitis",
+  "age": 41,
+  "sex": "M",
+  "presentingComplaint": "Right upper abdominal ache for ~26 hours with nausea, not settling after antacids",
+  "history": "41-year-old man, previously well apart from known gallstones noted incidentally on an ultrasound 2 years ago (never symptomatic before). Since a fatty takeaway dinner the previous evening he has had a steady, dull right-upper-quadrant and epigastric ache that, unlike his usual none-existent symptoms, has NOT resolved after several hours. Mild nausea and one episode of non-bilious vomiting. He has taken paracetamol and an over-the-counter antacid with only slight relief. He is still eating small amounts and passing normal-coloured stool and urine. No true rigors, no drenching sweats, no jaundice noticed, no pruritus, no dark urine, no pale stools, no bowel change, no urinary symptoms. He self-presented early because the pain 'just won't go this time'. Non-smoker, minimal alcohol, no recent travel, no NSAID overuse, no prior biliary interventions.",
+  "examination": "Comfortable at rest, not toxic, not jaundiced, well perfused. Abdomen soft; localized tenderness and guarding in the right upper quadrant with a positive Murphy sign (inspiratory arrest on RUQ palpation). No mass palpable, no rebound elsewhere, bowel sounds present. No hepatomegaly, no shifting dullness, no flank tenderness. Chest clear, calves soft.",
+  "vitals": {
+    "hr": 96,
+    "bp": "128/78",
+    "rr": 16,
+    "temp": 37.8,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "11.9 x10^9/L (neutrophils 8.2)",
+    "crp": "38 mg/L",
+    "totalBilirubin": "0.9 mg/dL",
+    "alp": "96 U/L (normal)",
+    "alt": "34 U/L",
+    "ast": "30 U/L",
+    "ggt": "41 U/L (normal)",
+    "lipase": "31 U/L (normal)",
+    "creatinine": "0.9 mg/dL",
+    "inr": "1.0"
+  },
+  "imaging": "Abdominal ultrasound: multiple mobile gallstones with a stone impacted in the gallbladder neck; gallbladder wall thickened at 4.5 mm with a thin rim of pericholecystic fluid; positive sonographic Murphy sign; common bile duct not dilated (4 mm), no intrahepatic biliary dilatation. Liver, pancreas and kidneys unremarkable.",
+  "microbiology": "Blood cultures drawn, pending (no rigors, low pre-test probability). Bile not sampled. No prior resistant-organism history.",
+  "differentialDiagnoses": [
+    "Biliary colic (uncomplicated cholelithiasis)",
+    "Acute cholangitis",
+    "Acute pancreatitis",
+    "Peptic ulcer disease"
+  ],
+  "finalDiagnosis": "Acute cholecystitis, Tokyo Guidelines (TG18) Grade I (mild), early presentation with intact liver function and no biliary obstruction",
+  "citations": [
+    "Tokyo Guidelines (TG18) — Diagnostic criteria and severity grading of acute cholecystitis, 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Gallbladder and Bile Ducts"
+  ],
+  "stewardship": "Community-acquired Grade I (mild) acute cholecystitis in a low-risk host. WHO AWaRe Access-tier empiric cover is appropriate; a second-generation cephalosporin (cefuroxime) or cefazolin covers the usual Enterobacterales and enterococci sufficiently for mild disease. Anaerobic cover / metronidazole is not required in the absence of biliary-enteric anastomosis or obstruction. Definitive management is early laparoscopic cholecystectomy (within the index admission); antibiotics are an adjunct and can often be stopped once the gallbladder is removed. De-escalate/stop per culture results and clinical course.",
+  "contraindications": [
+    "Avoid metronidazole/broad anaerobic and antipseudomonal cover here — no indication in mild community-acquired cholecystitis",
+    "Caution with cephalosporins if documented severe (anaphylactic) beta-lactam allergy",
+    "Avoid delaying source control (cholecystectomy) by relying on antibiotics alone"
+  ],
+  "edgeCases": [
+    "Rising bilirubin/ALP or CBD dilatation would signal choledocholithiasis/cholangitis and mandate MRCP/ERCP",
+    "Development of high fever, rigors or hypotension would upgrade severity (Grade II/III) and broaden antibiotics",
+    "Gallbladder wall gas or non-enhancing wall would suggest gangrenous/emphysematous cholecystitis needing urgent surgery",
+    "Elderly or diabetic patients may present with minimal signs despite advanced disease"
+  ],
+  "expectedMaiK": "Acute cholecystitis is likely: localized RUQ pain with a positive clinical and sonographic Murphy sign, gallbladder wall thickening (4.5 mm), pericholecystic fluid and a neck-impacted stone, with mild systemic inflammation but preserved liver function and a non-dilated CBD — an early, TG18 Grade I picture rather than biliary colic (which would have settled and lacks inflammatory/sonographic signs) or cholangitis (which requires cholestasis/CBD obstruction).",
+  "expectedNextQuestions": [
+    "Any fever with rigors, or episodes of jaundice/dark urine/pale stools?",
+    "How does the pain relate to fatty meals, and is it now constant rather than colicky?",
+    "Any prior biliary or abdominal surgery, ERCP, or known bile-duct stones?",
+    "Beta-lactam allergy history and current medications?"
+  ],
+  "expectedInvestigations": [
+    "Right upper quadrant ultrasound",
+    "LFTs (bilirubin, ALP, GGT, ALT/AST)",
+    "Serum lipase/amylase",
+    "FBC and CRP",
+    "Blood cultures",
+    "Consider MRCP if LFTs rise or CBD appears dilated"
+  ],
+  "expectedConfidence": 0.83,
+  "findings": {
+    "fever": true,
+    "rightUpperQuadrantPain": true,
+    "murphySign": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "tachycardia": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "CHOLECYSTITIS",
+    "acceptableIds": [
+      "CHOLECYSTITIS"
+    ],
+    "differentialIds": [
+      "biliary_colic",
+      "CHOLANGITIS",
+      "pancreatitis",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "Right upper quadrant ultrasound",
+      "LFTs",
+      "Serum lipase",
+      "FBC and CRP",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Cefuroxime IV",
+        "Cefazolin IV (alternative)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == CHOLECYSTITIS",
+    "normal bilirubin/ALP and non-dilated CBD exclude cholangitis/choledocholithiasis as primary diagnosis",
+    "normal lipase argues against acute pancreatitis",
+    "persistent pain with positive sonographic Murphy sign and wall thickening distinguishes acute cholecystitis from simple biliary colic",
+    "empiric antibiotics remain Access-tier (cefuroxime/cefazolin) without anaerobic cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

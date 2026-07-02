@@ -1,0 +1,112 @@
+{
+  "id": "gc_370",
+  "specialty": "Oncology / Emergency",
+  "condition": "Superior vena cava obstruction",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Progressive facial and neck swelling with breathlessness over 12 days, not responding to increased diuretics",
+  "history": "Ex-smoker (45 pack-years). Known HFrEF (EF 35%) on furosemide, bisoprolol and ramipril, previously stable. Over the past 2 weeks developed a puffy face, swollen eyelids worst on waking, and a 'tight collar' with visible chest wall veins. His GP doubled the furosemide dose assuming fluid overload, but the facial swelling and a dull bursting headache (worse on bending forward or lying flat) have progressed, and his voice has become slightly hoarse. He reports 6 kg unintentional weight loss over 3 months, a persistent dry cough, and two episodes of blood-streaked sputum. No orthopnoea relief despite diuresis, and — unlike his previous heart failure decompensations — he has no worsening leg oedema or nocturnal cough.",
+  "examination": "Alert, plethoric and cyanotic-tinged facial appearance with periorbital and facial oedema and conjunctival oedema. Dilated, non-pulsatile jugular veins that do not vary with respiration, plus dilated collateral veins over the anterior chest wall and shoulders. Facial fullness and duskiness worsen on raising both arms above the head (positive Pemberton sign). Trachea central; reduced air entry right upper zone. Heart sounds normal, no added third sound; JVP appears elevated but is fixed and non-pulsatile. Legs show only trace ankle oedema, disproportionate to the marked upper-body congestion.",
+  "vitals": {
+    "hr": 104,
+    "bp": "148/90",
+    "rr": 24,
+    "temp": 37,
+    "spo2": 92
+  },
+  "labs": {
+    "hemoglobin": 12.1,
+    "wbc": 9.4,
+    "platelets": 268,
+    "creatinine": 1.2,
+    "sodium": 133,
+    "potassium": 4.4,
+    "bnp": 210,
+    "albumin": 3.6,
+    "correctedCalcium": 9.8
+  },
+  "imaging": "Chest radiograph: right upper mediastinal widening with a right paratracheal mass and no cardiomegaly or pulmonary oedema. Contrast-enhanced CT thorax: a 6 cm right upper-lobe/paratracheal mass encasing and compressing the superior vena cava with >70% luminal narrowing, prominent azygos and chest-wall venous collaterals, and mediastinal lymphadenopathy. No pericardial effusion.",
+  "microbiology": "Not applicable (non-infective oncologic emergency).",
+  "differentialDiagnoses": [
+    "Decompensated heart failure (known comorbidity, initially treated)",
+    "Cardiac tamponade / pericardial disease",
+    "Bronchogenic carcinoma with mediastinal involvement",
+    "Pulmonary embolism"
+  ],
+  "finalDiagnosis": "Superior vena cava obstruction due to extrinsic compression by a mediastinal malignancy (probable bronchogenic carcinoma)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Oncologic Emergencies: Superior Vena Cava Syndrome",
+    "ESMO — Management of Oncological Emergencies (SVC Obstruction) 2020"
+  ],
+  "stewardship": "Not applicable (non-infective oncologic emergency).",
+  "contraindications": [
+    "Avoid IV access, cannulation or central lines in the upper limbs on the affected side (impaired venous return); use lower-limb/femoral access if required",
+    "Avoid indiscriminate escalation of diuretics — fluid depletion worsens hypotension without relieving fixed venous obstruction",
+    "Caution with deep sedation in the presence of airway or cerebral venous congestion"
+  ],
+  "edgeCases": [
+    "Thrombotic SVC obstruction from an indwelling central catheter or pacemaker lead rather than tumour",
+    "Stridor, laryngeal or cerebral oedema signalling life-threatening obstruction requiring emergent stenting",
+    "SVC obstruction as the first presentation of an undiagnosed malignancy — tissue diagnosis should be obtained before radiotherapy when clinically safe"
+  ],
+  "expectedMaiK": "Recognise that fixed non-pulsatile neck vein distension, facial/upper-body oedema, dilated chest-wall collaterals and positional bursting headache indicate SVC obstruction from a mediastinal mass — not simple heart-failure fluid overload; confirm with contrast-enhanced CT thorax and pursue tissue diagnosis.",
+  "expectedNextQuestions": [
+    "How long have the facial swelling and dilated chest-wall veins been present, and do symptoms worsen on bending forward or lying flat?",
+    "Is there associated weight loss, haemoptysis or a change in voice suggesting malignancy?",
+    "Detailed smoking history and any prior malignancy or indwelling central venous device/pacemaker?",
+    "Is there stridor, dysphagia, confusion or reduced consciousness suggesting airway or cerebral compromise?"
+  ],
+  "expectedInvestigations": [
+    "Contrast-enhanced CT of the thorax (confirm SVC compression, define mass and collaterals)",
+    "Chest radiograph",
+    "Transthoracic echocardiography (exclude tamponade and reassess LV function given known heart failure)",
+    "Histological/cytological tissue diagnosis (CT-guided or bronchoscopic biopsy)",
+    "Full blood count, renal function and electrolytes"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "facialSwelling": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "raisedJVP": true,
+    "headache": true,
+    "coughRadio": true,
+    "hemoptysis": true,
+    "weightLoss": true,
+    "knownHeartFailure": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "svc_obstruction",
+    "acceptableIds": [
+      "svc_obstruction"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "tamponade",
+      "lung_cancer",
+      "pe"
+    ],
+    "investigations": [
+      "Contrast-enhanced CT thorax",
+      "Chest radiograph",
+      "Transthoracic echocardiography",
+      "Tissue biopsy for histological diagnosis"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == svc_obstruction",
+    "Known heart failure must not override SVC obstruction: fixed non-pulsatile neck vein distension with facial/upper-body oedema and chest-wall collaterals disproportionate to leg oedema points to SVCO, not fluid overload",
+    "Non-infective case: stewardship.tier is null and antibiotics list is empty",
+    "Contrast CT thorax showing a mediastinal mass compressing the SVC is the confirmatory investigation",
+    "heart_failure and tamponade are considered but rejected as the primary diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

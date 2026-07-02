@@ -1,0 +1,120 @@
+{
+  "id": "gc_364",
+  "specialty": "Pulmonary / Multisystem",
+  "condition": "Sarcoidosis",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "3 months of progressive breathlessness and dry cough, previously attributed to worsening COPD",
+  "history": "Ex-smoker (30 pack-years, quit 6 years ago) with GOLD B COPD on tiotropium/formoterol, whose escalating exertional dyspnoea and dry cough over 3 months were initially managed as a COPD decline with repeated bronchodilator up-titration and two courses of oral prednisolone, each giving transient relief. He reports 5 kg unintentional weight loss, migratory ankle and wrist arthralgia, and 3 weeks of a red, gritty right eye with blurring. No fever, night sweats, haemoptysis or TB contact. No recent travel. Tender violaceous plaques appeared over both shins. Repeated courses of antibiotics gave no benefit and sputum was never purulent.",
+  "examination": "Comfortable at rest, no clubbing. Chest largely clear with mildly prolonged expiration and scattered wheeze consistent with his COPD; no significant crackles. Right eye shows ciliary injection with anterior chamber cells (anterior uveitis). Bilateral tender erythematous nodules over the shins (erythema nodosum) and indurated violaceous plaques over the nose and cheeks (lupus pernio). Mild bilateral parotid fullness. No hepatosplenomegaly. Non-tender small cervical lymphadenopathy.",
+  "vitals": {
+    "hr": 84,
+    "bp": "132/80",
+    "rr": 18,
+    "temp": 37,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": 12.9,
+    "wbc": 6.2,
+    "lymphocytes_low": true,
+    "platelets": 244,
+    "creatinine": 1,
+    "correctedCalcium_mgdl": 11.4,
+    "serumACE_UL": 96,
+    "serumACE_reference": "8-52 U/L",
+    "vitaminD_1_25_high": true,
+    "24h_urine_calcium_high": true,
+    "esr_mm": 42,
+    "alp_high": true,
+    "spirometry": "reduced FVC with mild restriction superimposed on obstruction; DLCO reduced"
+  },
+  "imaging": "CXR: bilateral symmetric hilar and right paratracheal lymphadenopathy with upper/mid-zone reticulonodular opacities. HRCT thorax: symmetric mediastinal and bilateral hilar lymphadenopathy with perilymphatic micronodules along bronchovascular bundles and interlobular septa, upper-zone predominant — Scadding stage II. No cavitation, no lobar consolidation, no pleural effusion.",
+  "microbiology": "Sputum AFB smear negative x3; mycobacterial culture negative; TB-PCR (Xpert MTB/RIF) not detected. IGRA negative. Bronchoalveolar lavage: lymphocytosis with elevated CD4:CD8 ratio (>3.5), AFB and fungal stains negative.",
+  "differentialDiagnoses": [
+    "Sarcoidosis (Scadding stage II) with pulmonary, ocular and cutaneous involvement",
+    "Pulmonary tuberculosis / mediastinal nodal TB",
+    "Lymphoma or metastatic lung malignancy",
+    "Progression of underlying COPD (initial working diagnosis)"
+  ],
+  "finalDiagnosis": "Multisystem sarcoidosis (pulmonary Scadding stage II with anterior uveitis, erythema nodosum, lupus pernio and hypercalcaemia), presenting in a patient whose symptoms were confounded by pre-existing COPD",
+  "citations": [
+    "ATS/ERS/WASOG — Clinical Practice Guideline: Diagnosis and Detection of Sarcoidosis — 2020",
+    "Harrison's Principles of Internal Medicine, 22e — Sarcoidosis"
+  ],
+  "stewardship": "Not applicable — non-infective granulomatous disease; empiric antibiotics/antitubercular therapy are not indicated. Exclude infection (negative AFB, culture, IGRA, Xpert) before immunosuppression; first-line treatment for symptomatic disease with hypercalcaemia and uveitis is systemic corticosteroids.",
+  "contraindications": [
+    "Do not start empiric anti-tuberculous therapy without microbiological or histological support given negative AFB, culture, Xpert and IGRA",
+    "Avoid vitamin D and calcium supplementation — risks worsening hypercalcaemia via granuloma 1-alpha-hydroxylase activity",
+    "Confirm negative TB workup before corticosteroid/immunosuppressive therapy"
+  ],
+  "edgeCases": [
+    "COPD comorbidity masks the restrictive/reduced-DLCO physiology and anchors clinicians on bronchodilator failure",
+    "Prior transient steroid responses (given as COPD 'rescue') can partially treat and blunt sarcoid features",
+    "Hypercalcaemia and lupus pernio can be mistaken for malignancy; symmetric hilar adenopathy and non-caseating granulomas are the discriminators",
+    "Cardiac and neuro involvement must be screened for even when the presentation looks purely pulmonary"
+  ],
+  "expectedMaiK": "sarcoidosis",
+  "expectedNextQuestions": [
+    "Any ocular symptoms (red eye, blurring), skin lesions, or joint swelling suggesting multisystem involvement?",
+    "Any TB contact, prior TB, or endemic exposure to weigh against granulomatous infection?",
+    "Any palpitations, syncope or arrhythmia to prompt cardiac sarcoid screening?",
+    "Occupational/environmental exposures (beryllium, organic antigens) that could mimic granulomatous disease?"
+  ],
+  "expectedInvestigations": [
+    "HRCT thorax",
+    "EBUS-TBNA / mediastinal node biopsy for histology (non-caseating granulomas)",
+    "Serum corrected calcium and 24h urinary calcium",
+    "Serum ACE",
+    "AFB smear, mycobacterial culture and Xpert MTB/RIF to exclude TB",
+    "Slit-lamp ophthalmology assessment",
+    "ECG (screen for conduction disease / cardiac sarcoid)",
+    "Pulmonary function tests with DLCO"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "dyspnea": true,
+    "coughRadio": true,
+    "prolongedCough2Weeks": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "knownCOPD": true,
+    "lymphadenopathy": true,
+    "rash": true,
+    "visualDisturbance": true,
+    "polyarthralgia": true
+  },
+  "expected": {
+    "diagnosis": "sarcoidosis",
+    "acceptableIds": [
+      "sarcoidosis"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "lung_cancer",
+      "ild"
+    ],
+    "investigations": [
+      "HRCT thorax",
+      "EBUS-TBNA mediastinal node biopsy (histology)",
+      "Serum ACE and corrected calcium",
+      "AFB smear/culture and Xpert MTB/RIF",
+      "Slit-lamp ophthalmology exam"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank sarcoidosis as the top diagnosis despite the COPD comorbidity anchor",
+    "Non-caseating granulomas with negative AFB/culture/Xpert/IGRA must down-rank PULMONARY_TB",
+    "Symmetric bilateral hilar adenopathy plus hypercalcaemia and raised ACE must be treated as discriminative for sarcoidosis over lung_cancer/lymphoma",
+    "Stewardship output must be non-infective (tier null, no antibiotics)",
+    "Hypercalcaemia must flag a contraindication to vitamin D/calcium supplementation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

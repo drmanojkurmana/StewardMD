@@ -1,0 +1,122 @@
+{
+  "id": "gc_368",
+  "specialty": "Rheumatology",
+  "condition": "SLE / autoimmune flare",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Six weeks of fatigue, mild aching in the hands and wrists, and 'frothy' urine noticed by her husband; no rash.",
+  "history": "58-year-old woman with a 2-year history of vague joint aches previously attributed to osteoarthritis, and a single episode of unexplained thrombocytopenia 4 years ago. Over the past 6 weeks she reports increasing tiredness, poor appetite with ~4 kg unintentional weight loss, and low-grade evening temperatures she attributed to the menopause. She has noticed mild ankle swelling and persistently frothy urine. She denies a facial rash, photosensitivity, oral ulcers, or Raynaud phenomenon — hence the presentation was initially thought to be 'age-related' and non-specific. No recent infection, no new drugs, no NSAID overuse. This is a late-onset, pauci-symptomatic flare dominated by renal and haematological features rather than the classic malar-rash / acute polyarthritis picture.",
+  "examination": "Comfortable, not toxic. No malar or discoid rash, no oral ulcers. Mild symmetrical synovitis of the 2nd/3rd MCPs and wrists with no deformity. Bilateral pitting pedal oedema to mid-shin. No lymphadenopathy or hepatosplenomegaly. Cardiorespiratory exam unremarkable; no rub. BP mildly elevated.",
+  "vitals": {
+    "hr": 88,
+    "bp": "148/92",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin_g_dl": 9.8,
+    "mcv_fl": 89,
+    "wbc_10e3_ul": 3.1,
+    "lymphocytes_10e3_ul": 0.7,
+    "platelets_10e3_ul": 92,
+    "creatinine_mg_dl": 1.5,
+    "egfr_ml_min": 44,
+    "albumin_g_dl": 3,
+    "urinalysis": "protein 3+, blood 2+, dysmorphic RBCs with occasional RBC casts",
+    "urine_protein_creatinine_ratio_mg_mmol": 180,
+    "ANA": "positive 1:1280 homogeneous",
+    "anti_dsDNA_IU_ml": 320,
+    "anti_Smith": "positive",
+    "C3_mg_dl": 52,
+    "C4_mg_dl": 7,
+    "direct_coombs": "positive",
+    "haptoglobin": "low-normal",
+    "CRP_mg_l": 6,
+    "ESR_mm_hr": 78
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys with preserved cortico-medullary differentiation, no obstruction. CXR clear, no effusion.",
+  "microbiology": "Blood cultures negative; urine culture no growth; hepatitis B/C and HIV serology negative (pre-immunosuppression screen).",
+  "differentialDiagnoses": [
+    "Primary/ANCA-associated glomerulonephritis",
+    "Thrombotic microangiopathy (TTP/HUS)",
+    "Primary immune thrombocytopenia",
+    "Systemic vasculitis"
+  ],
+  "finalDiagnosis": "SLE flare with proliferative lupus nephritis and autoimmune cytopenias (late-onset, atypical constitutional/renal-dominant presentation)",
+  "citations": [
+    "EULAR/ACR — Classification criteria for SLE — 2019",
+    "EULAR — Recommendations for the management of SLE — 2023",
+    "KDIGO — Lupus nephritis guideline — 2024",
+    "Harrison's Principles of Internal Medicine, 22e — Systemic Lupus Erythematosus"
+  ],
+  "stewardship": "Non-infective autoimmune flare; no empirical antibiotics indicated. Exclude infection (cultures, viral screen) before immunosuppression; ensure vaccination and PJP prophylaxis consideration once high-dose steroids/cyclophosphamide or MMF started.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, iodinated contrast) given active nephritis",
+    "Screen and treat latent infection (HBV/HCV/HIV/TB) before immunosuppression",
+    "Live vaccines contraindicated once immunosuppressed"
+  ],
+  "edgeCases": [
+    "Late-onset SLE (>50y) is frequently misattributed to malignancy, infection or degenerative disease due to prominent constitutional and serositis features and fewer cutaneous signs",
+    "Normal/near-normal CRP with high ESR helps distinguish active lupus from intercurrent infection",
+    "Low C3/C4 with high anti-dsDNA supports renal flare over TMA or ANCA vasculitis"
+  ],
+  "expectedMaiK": "Recognise a serologically-active SLE flare with proliferative lupus nephritis and autoimmune cytopenias despite the absence of classic mucocutaneous features; confirm with anti-dsDNA/complement and proceed to renal biopsy for ISN/RPS class, then induction immunosuppression (glucocorticoids plus MMF or cyclophosphamide, with hydroxychloroquine as backbone).",
+  "expectedNextQuestions": [
+    "Any prior episodes of cytopenia, miscarriage, or clotting (APS overlap)?",
+    "Photosensitivity, oral ulcers, alopecia, or Raynaud on direct questioning?",
+    "Drug history (procainamide/hydralazine) to exclude drug-induced lupus?",
+    "Degree and duration of proteinuria and any prior urinalysis for baseline?"
+  ],
+  "expectedInvestigations": [
+    "Anti-dsDNA, anti-Sm, C3/C4, ANA panel",
+    "Antiphospholipid antibodies (lupus anticoagulant, anticardiolipin, anti-β2GPI)",
+    "Quantified proteinuria (uPCR/24h) with urine microscopy for casts",
+    "Renal biopsy for ISN/RPS lupus nephritis class",
+    "Peripheral smear, haptoglobin, LDH, reticulocytes and direct Coombs to characterise cytopenias"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "polyarthralgia": true,
+    "symmetricSmallJointInvolvement": true,
+    "proteinuria": true,
+    "hematuria": true,
+    "thrombocytopenia": true,
+    "legSwellingBilateral": true,
+    "weightLoss": true,
+    "fever": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "sle_flare",
+    "acceptableIds": [
+      "sle_flare"
+    ],
+    "differentialIds": [
+      "glomerulonephritis",
+      "ttp_hus",
+      "itp",
+      "vasculitis"
+    ],
+    "investigations": [
+      "anti-dsDNA and C3/C4 complement",
+      "urine microscopy and protein:creatinine ratio",
+      "renal biopsy for lupus nephritis class",
+      "peripheral smear, LDH, haptoglobin, direct Coombs"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "sle_flare must rank above glomerulonephritis and vasculitis given positive anti-dsDNA/anti-Sm with low C3/C4",
+    "ttp_hus should be down-ranked in the absence of MAHA (no schistocytes, normal LDH pattern) and with immune (Coombs-positive) cytopenias",
+    "Engine must not recommend empirical antibiotics for this non-infective flare",
+    "Low CRP with markedly raised ESR should not be interpreted as excluding active disease"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

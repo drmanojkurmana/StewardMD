@@ -1,0 +1,115 @@
+{
+  "id": "gc_349",
+  "specialty": "Toxicology",
+  "condition": "Organophosphate / cholinergic poisoning",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Elderly farmworker brought unconscious after being found slumped near a knapsack sprayer; initially triaged as suspected opioid overdose.",
+  "history": "61-year-old marginal cotton farmer with mild COPD and hypertension, found drowsy and then unresponsive in his field mid-morning by a relative. An empty chlorpyrifos (organophosphate insecticide) container was later noted nearby; the family first assumed he had taken sedatives after a recent land dispute. Prehospital team gave 2 doses of naloxone for pinpoint pupils and slow breathing with NO improvement. On arrival he is vomiting, incontinent of urine and stool, with profuse oral secretions requiring repeated suction. No prior psychiatric history; no opioid or alcohol use reported. Intentional versus occupational ingestion/absorption uncertain.",
+  "examination": "Comatose, not responding to naloxone. Diaphoretic with a faint garlicky/solvent odour. Pinpoint (miotic) pupils poorly reactive. Copious salivation, lacrimation and audible bronchorrhoea with coarse crackles throughout both lungs. Bradycardic with low-normal BP. Fine muscle fasciculations over chest wall and thighs, with generalised weakness. Hyperactive bowel sounds; bladder not distended.",
+  "vitals": {
+    "hr": 46,
+    "bp": "98/58",
+    "rr": 8,
+    "temp": 36.6,
+    "spo2": 87
+  },
+  "labs": {
+    "serumPseudocholinesterase": "820 U/L (markedly reduced; ref 5300-12900)",
+    "rbcAcetylcholinesterase": "severely depressed (<20% predicted)",
+    "abg": "pH 7.28, PaO2 58 mmHg on FiO2 0.4, PaCO2 55 mmHg (mixed hypoxaemic/hypercapnic respiratory failure)",
+    "potassium": "3.9 mmol/L",
+    "glucose": "142 mg/dL",
+    "creatinine": "1.1 mg/dL",
+    "lactate": "2.8 mmol/L",
+    "troponin": "not elevated",
+    "paracetamolSalicylateScreen": "negative"
+  },
+  "imaging": "CXR: bilateral perihilar haziness consistent with bronchorrhoea/aspiration, no lobar consolidation or pneumothorax. CT head (done to exclude structural cause of coma): normal.",
+  "microbiology": "Not applicable — non-infective toxidrome. Blood cultures sent as coma workup were negative.",
+  "differentialDiagnoses": [
+    "Opioid overdose (miosis + respiratory depression) — excluded by naloxone non-response and muscarinic secretions",
+    "Serotonin syndrome / NMS",
+    "Metabolic / hypoxic encephalopathy",
+    "Non-convulsive seizure / post-ictal state"
+  ],
+  "finalDiagnosis": "Acute organophosphate (chlorpyrifos) poisoning with cholinergic crisis and respiratory failure",
+  "citations": [
+    "WHO — Clinical Management of Acute Pesticide Intoxication (Organophosphorus and Carbamate) — 2008",
+    "Indian Society of Critical Care Medicine (ISCCM) — Management of Organophosphorus Poisoning — 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Insecticide (Organophosphate/Anticholinesterase) Poisoning"
+  ],
+  "stewardship": "Not applicable — non-infective poisoning. No empiric antibiotics indicated for the toxidrome itself; management is airway protection, high-dose IV atropine titrated to drying of secretions, pralidoxime (oxime), decontamination and supportive ICU care. Reserve antibiotics only for microbiologically/radiologically confirmed aspiration pneumonia.",
+  "contraindications": [
+    "Do NOT rely on naloxone — miosis/respiratory depression here is cholinergic, not opioid",
+    "Avoid succinylcholine for intubation (prolonged paralysis due to depressed plasma cholinesterase); use non-depolarising agent",
+    "Avoid morphine, aminophylline, phenothiazines and reflex-slowing/atropine-antagonising drugs",
+    "Do not withhold atropine for the bradycardia/hypotension — atropine is the treatment"
+  ],
+  "edgeCases": [
+    "Naloxone non-response in an apparent 'opioid' toxidrome should trigger reconsideration toward cholinergic poisoning",
+    "Intermediate syndrome (proximal/respiratory muscle weakness 24-96h later) can cause delayed respiratory failure after initial recovery",
+    "Pseudocholinesterase can be normal early or in chronic low-level exposure; treat clinically",
+    "Fasciculations plus miosis plus bronchorrhoea is the discriminating triad against opioid overdose"
+  ],
+  "expectedMaiK": "Recognise cholinergic crisis: secure airway, give high-dose IV atropine titrated to secretions, add pralidoxime, and provide supportive ICU care — do not treat as opioid overdose",
+  "expectedNextQuestions": [
+    "Was there naloxone given, and did it change the pupils or breathing?",
+    "Any container, pesticide or insecticide found at the scene, and any occupational spraying exposure?",
+    "Are there excessive secretions, salivation, lacrimation, urination, defecation and fasciculations?",
+    "Time since exposure and route (ingestion vs dermal/inhalational)?"
+  ],
+  "expectedInvestigations": [
+    "Serum pseudocholinesterase and RBC acetylcholinesterase",
+    "Arterial blood gas",
+    "12-lead ECG (bradyarrhythmia, QT prolongation)",
+    "Chest X-ray",
+    "Bedside glucose and basic metabolic panel"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "miosisSecretions": true,
+    "bradycardia": true,
+    "bradypnea": true,
+    "hypoxia": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "toxicAppearing": true,
+    "drugOverdose": true,
+    "ruralExposure": true
+  },
+  "expected": {
+    "diagnosis": "organophosphate",
+    "acceptableIds": [
+      "organophosphate"
+    ],
+    "differentialIds": [
+      "opioid_od",
+      "serotonin_nms",
+      "metabolic_enceph",
+      "seizure_epilepsy"
+    ],
+    "investigations": [
+      "Serum pseudocholinesterase / RBC acetylcholinesterase",
+      "Arterial blood gas",
+      "ECG",
+      "Chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be organophosphate poisoning, not opioid overdose despite miosis + respiratory depression",
+    "Naloxone non-response plus muscarinic secretions must down-rank opioid_od",
+    "Management must include high-dose atropine + pralidoxime and airway support",
+    "No empiric antibiotics recommended for the toxidrome itself",
+    "Succinylcholine flagged as contraindicated for intubation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

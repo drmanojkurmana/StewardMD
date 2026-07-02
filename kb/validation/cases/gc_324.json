@@ -1,0 +1,120 @@
+{
+  "id": "gc_324",
+  "specialty": "Cardiology / Neuro",
+  "condition": "Hypertensive emergency (accelerated/malignant hypertension)",
+  "age": 46,
+  "sex": "M",
+  "presentingComplaint": "Three days of mild bifrontal headache and intermittently blurred vision; otherwise feels well and walked into the department unaided.",
+  "history": "Known hypertension for 6 years, self-discontinued amlodipine and telmisartan ~4 months ago citing cost and feeling well. No prior specialist follow-up. Denies chest pain, breathlessness, orthopnoea, focal weakness, speech disturbance, seizure or vomiting. No recreational stimulant use, no OTC decongestants, no NSAID or licorice ingestion. Non-smoker, occasional alcohol. No prior renal disease known. Because symptoms are so mild he nearly did not attend — the presentation could easily be mistaken for uncomplicated hypertensive urgency, but the combination of grade III/IV retinal changes, new dipstick proteinuria and a rising creatinine confirms acute target-organ damage and therefore a true hypertensive emergency (accelerated/malignant phase) at an early stage.",
+  "examination": "Alert, fully oriented, GCS 15, comfortable at rest and not distressed. No focal neurological deficit, no neck stiffness. Fundoscopy: bilateral flame-shaped retinal haemorrhages, cotton-wool spots and early blurring of the optic disc margins (accelerated/malignant hypertensive retinopathy, Keith-Wagener grade III progressing to IV). Cardiovascular: forceful apex beat, loud A2, no added sounds, no pulmonary crackles, no peripheral oedema. Abdomen soft, no renal bruit appreciated. Peripheral pulses symmetric with no radio-radial or radio-femoral delay.",
+  "vitals": {
+    "hr": 88,
+    "bp": "226/134",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "creatinine_mg_dl": 1.6,
+    "baseline_creatinine_mg_dl": 1,
+    "urea_mmol_l": 8.2,
+    "potassium_mmol_l": 3.9,
+    "sodium_mmol_l": 139,
+    "hemoglobin_g_dl": 13.4,
+    "platelets_10e3_ul": 232,
+    "ldh": "mildly elevated",
+    "blood_film": "occasional schistocytes, no established microangiopathic haemolysis",
+    "urinalysis": "protein 2+, no significant haematuria, no casts",
+    "urine_pcr_mg_g": 480,
+    "troponin": "normal",
+    "tsh": "normal"
+  },
+  "imaging": "ECG: voltage criteria for left ventricular hypertrophy with lateral strain pattern, no acute ischaemic changes. Chest X-ray: borderline cardiomegaly, clear lung fields, no pulmonary oedema. Non-contrast CT head (to exclude haemorrhage given headache): no intracranial bleed, no established posterior white-matter oedema of PRES.",
+  "microbiology": "Not applicable (non-infective presentation). No cultures indicated.",
+  "differentialDiagnoses": [
+    "Uncomplicated hypertensive urgency (excluded — acute target-organ damage present)",
+    "Idiopathic intracranial hypertension (headache + disc changes, but BP and retinal haemorrhages point to malignant hypertension)",
+    "Intracerebral haemorrhage (excluded on CT)",
+    "Secondary hypertension from phaeochromocytoma",
+    "Acute glomerulonephritis (proteinuria + hypertension)"
+  ],
+  "finalDiagnosis": "Hypertensive emergency — accelerated/malignant hypertension with grade III/IV retinopathy and acute hypertension-mediated renal injury (early/mild symptomatic phase).",
+  "citations": [
+    "ACC/AHA — Prevention, Detection, Evaluation and Management of High Blood Pressure (Hypertensive Emergencies) — 2017",
+    "ESC/ESH — Guidelines for the Management of Arterial Hypertension (Hypertensive Emergencies) — 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Hypertensive Vascular Disease / Hypertensive Emergencies"
+  ],
+  "stewardship": "",
+  "contraindications": [
+    "Avoid rapid or excessive BP reduction: lower mean arterial pressure by no more than ~25% in the first hour to prevent watershed cerebral, coronary or renal hypoperfusion.",
+    "Avoid immediate-release / sublingual nifedipine (uncontrolled precipitous drop in BP).",
+    "Avoid abrupt normalisation of BP in the setting of chronic hypertension with autoregulatory shift."
+  ],
+  "edgeCases": [
+    "Mild symptoms can lead to misclassification as hypertensive urgency and inappropriate outpatient discharge — fundoscopy and urinalysis reclassify it as an emergency.",
+    "Malignant-phase hypertension can trigger a microangiopathic picture (schistocytes, LDH rise) mimicking a primary thrombotic microangiopathy.",
+    "Secondary causes (phaeochromocytoma, renovascular disease) must be screened once BP is controlled, especially in a patient this age with severe hypertension."
+  ],
+  "expectedMaiK": "Severe hypertension with acute hypertension-mediated organ damage (retinal haemorrhages/early papilloedema, new proteinuria, acute creatinine rise) defines a hypertensive emergency requiring controlled IV BP reduction, not oral outpatient management — distinguish from hypertensive urgency by presence of acute target-organ damage.",
+  "expectedNextQuestions": [
+    "Antihypertensive adherence and reason for stopping medication?",
+    "Any chest pain, breathlessness, focal neurological or visual symptoms suggesting other organ involvement?",
+    "Recreational stimulant, decongestant, NSAID or licorice use?",
+    "Symptoms suggesting secondary hypertension (episodic palpitations/sweating/headache, flank bruit)?"
+  ],
+  "expectedInvestigations": [
+    "Dilated fundoscopy for hypertensive retinopathy grading",
+    "12-lead ECG and chest X-ray for cardiac target-organ damage",
+    "Serum creatinine/urea/electrolytes and urinalysis with protein quantification",
+    "Blood film, LDH, haptoglobin, platelets to assess microangiopathy",
+    "Non-contrast CT head to exclude intracranial haemorrhage",
+    "Secondary hypertension screen (plasma/urine metanephrines, renal imaging) once stabilised"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "headache": true,
+    "visualDisturbance": true,
+    "papilledema": true,
+    "hypertensionHx": true,
+    "organDysfunction": true,
+    "proteinuria": true,
+    "creatinine": true,
+    "sbp": true,
+    "dbp": true,
+    "map": true
+  },
+  "expected": {
+    "diagnosis": "htn_emergency",
+    "acceptableIds": [
+      "htn_emergency"
+    ],
+    "differentialIds": [
+      "iih",
+      "ich",
+      "pheo",
+      "glomerulonephritis"
+    ],
+    "investigations": [
+      "Dilated fundoscopy",
+      "12-lead ECG",
+      "Serum creatinine and urinalysis (protein)",
+      "Non-contrast CT head",
+      "Blood film / LDH / platelets"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == htn_emergency",
+    "Presence of acute target-organ damage (grade III/IV retinopathy, new proteinuria, acute creatinine rise) reclassifies from hypertensive urgency to hypertensive emergency despite mild symptoms.",
+    "Management requires controlled IV BP reduction with MAP lowered by no more than ~25% in the first hour.",
+    "No antibiotics indicated (non-infective).",
+    "Secondary hypertension screen recommended after stabilisation."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

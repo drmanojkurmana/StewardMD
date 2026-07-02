@@ -1,0 +1,113 @@
+{
+  "id": "gc_301",
+  "specialty": "Vascular emergency",
+  "condition": "Aortic dissection",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe chest pain radiating to the back, referred from the emergency department as a suspected acute coronary syndrome",
+  "history": "A 58-year-old man with long-standing poorly controlled hypertension (irregular amlodipine use) and a family history of premature vascular disease presented with abrupt-onset, maximal-at-onset severe chest pain that began while gardening. The pain radiated between the shoulder blades and migrated downward toward the epigastrium over the following 20 minutes. He had one brief syncopal episode at onset. He described the pain as tearing rather than pressure-like. He denied exertional angina previously. The emergency team initially triaged him as a possible acute coronary syndrome after the first ECG showed inferior-lead changes, and loading-dose aspirin was considered; antiplatelet/anticoagulant loading was held pending re-evaluation once inter-arm blood-pressure asymmetry was noticed. There was no cough, fever, leg swelling or recent immobilisation.",
+  "examination": "Anxious, diaphoretic, in severe pain but alert (GCS 15). Blood pressure 178/96 mmHg in the right arm and 142/80 mmHg in the left arm (>20 mmHg inter-arm differential). Right radial pulse fuller than the left. A soft early diastolic murmur was audible at the left sternal edge consistent with new aortic regurgitation. Chest clear, no crepitations. Abdomen soft, no pulsatile mass palpable. No focal limb weakness; peripheral pulses otherwise present but asymmetric.",
+  "vitals": {
+    "hr": 104,
+    "bp": "178/96 (R arm), 142/80 (L arm)",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 13.4,
+    "wbc": 12.1,
+    "platelets": 238,
+    "creatinine": 1.3,
+    "troponinT_ng_L": 34,
+    "dDimer_ng_mL": 3800,
+    "lactate": 1.8,
+    "inr": 1
+  },
+  "imaging": "Portable chest radiograph showed a widened mediastinum with an abnormal aortic contour. CT aortography demonstrated an intimal flap extending from the aortic root through the ascending aorta and across the arch into the descending thoracic aorta (Stanford type A / DeBakey type I), with a small pericardial effusion and involvement of the right coronary ostium accounting for the inferior ECG changes.",
+  "microbiology": "Not applicable (non-infective vascular emergency).",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (inferior STEMI/NSTEMI)",
+    "Pulmonary embolism",
+    "Acute pericarditis",
+    "Ruptured/symptomatic abdominal aortic aneurysm"
+  ],
+  "finalDiagnosis": "Acute Stanford type A aortic dissection presenting as an ACS mimic (RCA-ostial involvement causing inferior ECG changes and mild troponin rise)",
+  "citations": [
+    "ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease 2022",
+    "ESC Guidelines on the Diagnosis and Treatment of Aortic Diseases 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Aorta"
+  ],
+  "stewardship": "Not applicable — non-infective vascular emergency; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid antiplatelet/anticoagulant/thrombolytic loading if ACS is assumed — thrombolysis in dissection is potentially fatal",
+    "Avoid pure vasodilators (e.g., hydralazine) before rate control — reflex tachycardia increases aortic wall shear stress",
+    "Avoid delay: target impulse control with IV beta-blockade (labetalol/esmolol) to HR <60 and SBP 100-120 mmHg before/with vasodilators"
+  ],
+  "edgeCases": [
+    "Type A dissection involving the coronary ostium can mimic inferior STEMI and lead to catastrophic thrombolysis",
+    "Dissection can present with syncope, stroke, or limb ischaemia rather than pain, masking the diagnosis",
+    "A normal D-dimer lowers but does not exclude dissection; a widened mediastinum may be absent on portable films"
+  ],
+  "expectedMaiK": "Sudden tearing chest pain radiating to the back with an inter-arm BP differential and a new aortic regurgitation murmur points to acute aortic dissection, not ACS — urgent CT aortography and impulse control are required before any antiplatelet/anticoagulant therapy.",
+  "expectedNextQuestions": [
+    "Is there a blood-pressure or pulse differential between the arms?",
+    "Was the pain maximal at onset and tearing/migratory in quality?",
+    "Is there a new diastolic (aortic regurgitation) murmur or a pulse deficit?",
+    "Any focal neurological deficit or limb ischaemia suggesting branch-vessel involvement?"
+  ],
+  "expectedInvestigations": [
+    "CT aortography (chest/abdomen/pelvis)",
+    "ECG (assess for coronary ostial involvement)",
+    "Chest radiograph (mediastinal width/aortic contour)",
+    "Transthoracic/transoesophageal echocardiography (root, AR, pericardial effusion)",
+    "Bedside troponin and D-dimer",
+    "Group and save / crossmatch"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "chestPain": true,
+    "backPain": true,
+    "syncope": true,
+    "newMurmur": true,
+    "ecgIschemia": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "tachycardia": true,
+    "toxicAppearing": true
+  },
+  "expected": {
+    "diagnosis": "aortic_dissection",
+    "acceptableIds": [
+      "aortic_dissection"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "pericarditis",
+      "aaa"
+    ],
+    "investigations": [
+      "CT aortography",
+      "ECG",
+      "chest radiograph",
+      "transoesophageal echocardiography",
+      "troponin",
+      "D-dimer"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be aortic_dissection despite inferior ECG changes and mild troponin elevation",
+    "Must not recommend thrombolysis/antiplatelet loading before excluding dissection",
+    "Inter-arm BP differential + new AR murmur + tearing/migratory pain must drive the diagnosis over acs",
+    "CT aortography must be prioritised as the confirmatory investigation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

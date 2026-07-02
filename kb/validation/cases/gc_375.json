@@ -1,0 +1,116 @@
+{
+  "id": "gc_375",
+  "specialty": "Neurology / Vascular",
+  "condition": "Transient ischaemic attack",
+  "age": 84,
+  "sex": "F",
+  "presentingComplaint": "Brought by daughter after a brief episode of slurred speech and right-sided facial droop the previous evening, now fully resolved.",
+  "history": "Frail, independent-with-aids 84-year-old woman living alone. Yesterday around 7pm, while watching television, she abruptly developed slurred speech and drooping of the right side of the mouth with clumsiness of the right hand; she could not name objects for a few minutes. Her neighbour noticed and stayed with her. Symptoms resolved completely within roughly 20-25 minutes and she went to bed, attributing it to tiredness. No headache, no loss of consciousness, no limb jerking, no incontinence, no tongue-biting, no visual aura or scintillations, no chest pain or palpitations at the time. Daughter visited this morning, was told of the event, and brought her in. Background: long-standing hypertension, type 2 diabetes on metformin, a previous minor TIA-like episode 3 years ago (never investigated), and paroxysmal atrial fibrillation documented on a GP ECG last year for which anticoagulation was declined by the patient. Frailty with slow gait and one fall in the past 6 months. Not currently on any antithrombotic. No recent infection, dysuria or fever.",
+  "examination": "Alert, orientated, comfortable. Neurological examination now entirely normal: cranial nerves intact with symmetrical face, no dysarthria or dysphasia, power 5/5 throughout, normal coordination, gait cautious but no focal deficit. No carotid bruit audible. Pulse irregularly irregular. No signs of infection; chest clear, abdomen soft, no urinary symptoms. Clinically frail (Rockwood ~5).",
+  "vitals": {
+    "hr": 92,
+    "bp": "168/88",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "12.1 g/dL",
+    "platelets": "244 x10^3/uL",
+    "creatinine": "1.1 mg/dL",
+    "eGFR": "52 mL/min/1.73m2",
+    "randomGlucose": "8.4 mmol/L (151 mg/dL)",
+    "capillaryGlucoseAtTriage": "6.9 mmol/L (124 mg/dL)",
+    "HbA1c": "7.4%",
+    "totalCholesterol": "5.6 mmol/L",
+    "LDL": "3.4 mmol/L",
+    "INR": "1.0",
+    "electrolytes": "normal"
+  },
+  "imaging": "CT head (non-contrast): age-related involutional change and small-vessel white-matter hypodensities; no acute infarct or haemorrhage. MRI brain with DWI: no restricted diffusion / no acute infarct; chronic lacunes in left basal ganglia. Carotid Doppler: 30-40% stenosis of the left internal carotid artery, right <30%.",
+  "microbiology": "Not applicable; no evidence of infection (urinalysis clear, afebrile).",
+  "differentialDiagnoses": [
+    "Transient ischaemic attack (cardioembolic, paroxysmal AF; left hemisphere)",
+    "Minor ischaemic stroke with early symptom resolution",
+    "Focal seizure with post-ictal (Todd's) speech disturbance",
+    "Hypoglycaemia-related transient neuroglycopenia",
+    "Migraine with aura (atypical, late-onset)"
+  ],
+  "finalDiagnosis": "Transient ischaemic attack (high-risk, cardioembolic in the context of untreated paroxysmal atrial fibrillation) — ABCD2 score 6 (age >=60, BP >=140/90, speech disturbance with unilateral weakness, duration 10-59 min, diabetes).",
+  "citations": [
+    "NICE — Stroke and transient ischaemic attack in over 16s: diagnosis and initial management (NG128) — 2022",
+    "AHA/ASA — Guideline for the Prevention of Stroke in Patients With Stroke and TIA — 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Ischemic Stroke and Transient Ischemic Attack"
+  ],
+  "stewardship": "Not applicable — non-infective vascular presentation; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid delaying antithrombotic/anticoagulation assessment; balance high embolic risk against falls and bleeding risk in frailty",
+    "Do not give thrombolysis — deficit fully resolved, no acute infarct",
+    "Review renal function before dosing DOAC"
+  ],
+  "edgeCases": [
+    "Complete symptom resolution with normal DWI can still be a TIA; tissue-negative does not exclude the diagnosis",
+    "Delayed presentation in a frail elderly patient risks under-triage despite high ABCD2 and untreated AF",
+    "Prior undiagnosed AF with declined anticoagulation markedly raises recurrent-stroke risk",
+    "Distinguish from focal seizure (no post-ictal drowsiness, no automatisms) and hypoglycaemia (normal glucose)"
+  ],
+  "expectedMaiK": "Transient, fully-resolving focal neurological deficit (dysarthria, right facial weakness, transient dysphasia) of sudden onset with negative DWI in an elderly patient with untreated paroxysmal AF — a high-risk cardioembolic TIA requiring urgent secondary prevention.",
+  "expectedNextQuestions": [
+    "Exact time of onset, duration and complete resolution of symptoms?",
+    "Any jerking, tongue-biting, incontinence or post-event drowsiness (to exclude seizure)?",
+    "Capillary glucose at the time of the episode?",
+    "Is she on any anticoagulation/antiplatelet, and why was anticoagulation declined?",
+    "Any preceding visual aura, headache or prior similar episodes?"
+  ],
+  "expectedInvestigations": [
+    "Urgent non-contrast CT head then MRI brain with DWI",
+    "12-lead ECG plus prolonged/ambulatory cardiac monitoring for paroxysmal AF",
+    "Carotid imaging (Doppler / CTA)",
+    "Bloods: capillary and lab glucose, HbA1c, FBC, U&E, lipid profile, coagulation",
+    "Transthoracic echocardiography",
+    "ABCD2 risk stratification"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "focalNeuroDeficit": true,
+    "ageOver50": true,
+    "atrialFibHx": true,
+    "hypertensionHx": true,
+    "cerebrovascularDisease": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "tia",
+    "acceptableIds": [
+      "tia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "seizure_epilepsy",
+      "hypoglycemia",
+      "migraine"
+    ],
+    "investigations": [
+      "MRI brain with DWI",
+      "12-lead ECG and prolonged cardiac monitoring",
+      "Carotid Doppler / CT angiography",
+      "Capillary and laboratory glucose",
+      "Transthoracic echocardiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == tia",
+    "acceptableIds == ['tia']",
+    "stewardship.tier is null and antibiotics empty",
+    "MRI DWI and cardiac monitoring recommended",
+    "AF flagged as cardioembolic source warranting anticoagulation assessment"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

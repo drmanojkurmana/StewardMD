@@ -1,0 +1,119 @@
+{
+  "id": "gc_257",
+  "specialty": "Gastrointestinal",
+  "condition": "Clostridioides difficile Infection",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Abdominal distension, confusion and low-grade fever 3 days after discharge; diarrhoea has paradoxically stopped in the last 24 hours.",
+  "history": "Frail 78-year-old care-facility resident, recently completed a 10-day course of IV piperacillin-tazobactam for a hospital-treated aspiration pneumonia (discharged 4 days ago). Developed profuse watery non-bloody diarrhoea (8-10 stools/day) 2 days after starting antibiotics. Over the last 24 hours stool frequency has dropped sharply and the abdomen has become distended and tense, with worsening lethargy and reduced oral intake. Background: type 2 diabetes, chronic kidney disease (baseline creatinine 1.3 mg/dL), atrial fibrillation on apixaban. No recent travel. This paradoxical cessation of diarrhoea with distension in a septic patient signals evolving ileus/toxic megacolon rather than clinical improvement.",
+  "examination": "Drowsy, GCS 13, appears toxic and dehydrated. Abdomen grossly distended, tympanitic, diffusely tender with sluggish bowel sounds; no peritonism yet but guarding in lower quadrants. Cool peripheries, prolonged capillary refill. No rash, no focal chest signs.",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/50",
+    "rr": 26,
+    "temp": 38.9,
+    "spo2": 94
+  },
+  "labs": {
+    "wbc": "32,000/µL (leukemoid reaction with left shift)",
+    "neutrophils": "88%",
+    "creatinine": "2.8 mg/dL (>1.5x baseline, acute-on-chronic)",
+    "lactate": "4.6 mmol/L",
+    "albumin": "2.4 g/dL",
+    "crp": "310 mg/L",
+    "potassium": "5.4 mmol/L",
+    "hemoglobin": "11.8 g/dL"
+  },
+  "imaging": "CT abdomen/pelvis: diffuse pancolonic wall thickening with mural oedema, 'accordion sign' and pericolic stranding; transverse colon dilated to 7 cm consistent with early toxic megacolon; no free air or perforation.",
+  "microbiology": "Stool NAAT positive for C. difficile toxin B gene (tcdB) with confirmatory positive stool toxin EIA. Blood cultures pending. No enteric pathogens on multiplex panel.",
+  "differentialDiagnoses": [
+    "Septic shock from another source",
+    "Acute mesenteric ischaemia",
+    "Large bowel obstruction / pseudo-obstruction",
+    "Invasive bacterial dysentery"
+  ],
+  "finalDiagnosis": "Fulminant (severe-complicated) Clostridioides difficile infection with early toxic megacolon and septic shock",
+  "citations": [
+    "IDSA/SHEA — Clinical Practice Guidelines for Clostridioides difficile Infection — 2021 (focused update)",
+    "ACG — Clinical Guideline: Management of Clostridioides difficile Infection — 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Clostridioides difficile Infection"
+  ],
+  "stewardship": "Fulminant CDI: high-dose oral (or NG) vancomycin 500 mg QID PLUS IV metronidazole 500 mg q8h; add vancomycin retention enema if ileus present. Discontinue the inciting piperacillin-tazobactam. Urgent surgical review for possible colectomy given toxic megacolon. Avoid antimotility agents.",
+  "contraindications": [
+    "Do not give antiperistaltic/antimotility agents (loperamide) — precipitate megacolon",
+    "IV vancomycin is ineffective for CDI (no luminal concentration) — must be enteral",
+    "Oral metronidazole monotherapy inadequate for fulminant disease",
+    "Caution with nephrotoxins given acute kidney injury"
+  ],
+  "edgeCases": [
+    "Diarrhoea may cease as ileus develops — absence of diarrhoea does NOT exclude CDI and can herald deterioration",
+    "Marked leukemoid reaction (WBC >25,000) and rising creatinine define severe/fulminant disease even before megacolon",
+    "NAAT positivity alone can reflect colonisation; here toxin EIA positivity plus clinical picture confirms active disease"
+  ],
+  "expectedMaiK": "Recent antibiotic exposure plus a toxic, distended abdomen with leukemoid reaction and AKI — even with waning diarrhoea — is fulminant C. difficile infection until proven otherwise.",
+  "expectedNextQuestions": [
+    "Timing and type of recent antibiotic exposure?",
+    "Trend of stool frequency versus abdominal distension?",
+    "Any prior CDI episodes or proton-pump inhibitor use?",
+    "Signs of peritonism or need for urgent surgical assessment?"
+  ],
+  "expectedInvestigations": [
+    "Stool C. difficile toxin testing (NAAT + toxin EIA, two-step algorithm)",
+    "CT abdomen/pelvis to assess colonic dilatation and complications",
+    "Serial lactate, WBC, creatinine and albumin for severity staging",
+    "Blood cultures and abdominal X-ray to monitor for megacolon/perforation",
+    "Early surgical consultation"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "antibioticsLast90Days": true,
+    "hospitalizationLast90Days": true,
+    "diarrhea": true,
+    "abdominalPain": true,
+    "abdominalDistension": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "organDysfunction": true,
+    "alteredSensorium": true
+  },
+  "expected": {
+    "diagnosis": "C_DIFF",
+    "acceptableIds": [
+      "C_DIFF"
+    ],
+    "differentialIds": [
+      "SEPTIC_SHOCK",
+      "mesenteric_ischemia",
+      "bowel_obstruction",
+      "DYSENTERY"
+    ],
+    "investigations": [
+      "Stool C. difficile NAAT and toxin EIA",
+      "CT abdomen/pelvis",
+      "Serial lactate/WBC/creatinine",
+      "Blood cultures"
+    ],
+    "stewardship": {
+      "tier": "definitive",
+      "antibiotics": [
+        "Oral vancomycin 500 mg QID",
+        "IV metronidazole 500 mg q8h",
+        "Vancomycin retention enema (if ileus)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank C_DIFF as the top diagnosis despite reduced diarrhoea and prominent distension",
+    "Recent antibiotic exposure + leukemoid reaction + AKI must trigger severe/fulminant CDI severity flag",
+    "Recommended therapy must be enteral vancomycin (high-dose) plus IV metronidazole, NOT IV vancomycin alone",
+    "System must flag toxic megacolon and prompt surgical review",
+    "Antimotility agents must be flagged as contraindicated"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

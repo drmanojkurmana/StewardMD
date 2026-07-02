@@ -1,0 +1,114 @@
+{
+  "id": "gc_356",
+  "specialty": "Pulmonary",
+  "condition": "Pleural effusion",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Gradually worsening breathlessness on exertion over 7 weeks, without fever or acute chest pain.",
+  "history": "A 71-year-old retired schoolteacher presents with insidious, slowly progressive exertional dyspnoea over roughly 7 weeks. She initially attributed the breathlessness to 'getting older' and deconditioning after a chest infection her GP treated with oral antibiotics 2 months ago, but she has not improved. She now stops to catch her breath after climbing a single flight of stairs and sleeps propped on two pillows. There is a dry, non-productive cough and a vague dragging discomfort in the right lower chest that is not clearly pleuritic. She denies fever, rigors, night sweats, haemoptysis or purulent sputum. She has noticed her clothes are looser and estimates around 4 kg of unintentional weight loss. Ex-smoker (20 pack-years, quit 15 years ago). No known cardiac disease, no orthopnoea from leg swelling, no calf pain. Not on anticoagulation. The atypical, subtle course — subacute breathlessness with almost no pain and no systemic sepsis — obscured the diagnosis until examination.",
+  "examination": "Comfortable at rest, no distress, not cyanosed. Trachea central. Reduced chest expansion on the right base. Stony dull percussion note over the right lower and mid zones with an upper border sloping into the axilla. Markedly diminished breath sounds and reduced vocal resonance over the same area; bronchial breathing with egophony just above the effusion level. Left chest clear. No raised JVP, no pedal oedema, no gallop. No lymphadenopathy, no clubbing. Abdomen soft, no hepatomegaly or ascites.",
+  "vitals": {
+    "hr": 92,
+    "bp": "128/78",
+    "rr": 22,
+    "temp": 37.1,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": "11.4 g/dL",
+    "wbc": "8.2 x10^9/L",
+    "platelets": "312 x10^3/µL",
+    "creatinine": "0.9 mg/dL",
+    "albumin_serum": "3.4 g/dL",
+    "ldh_serum": "260 IU/L",
+    "protein_serum": "6.8 g/dL",
+    "nt_probnp": "180 pg/mL (not elevated)",
+    "crp": "22 mg/L"
+  },
+  "imaging": "CXR PA: moderate right pleural effusion with a homogeneous opacity, meniscus sign and blunted costophrenic angle occupying the lower two-thirds of the hemithorax; no clear mediastinal shift. Thoracic ultrasound: moderate anechoic right pleural collection with a few thin septations and an estimated volume ~1.1 L; underlying compressed lung; diaphragm freely mobile. Contrast CT thorax: moderate right pleural effusion with smooth, non-nodular pleural thickening and a small right lower-lobe area of passive collapse; no large parenchymal mass, no lymphangitic pattern, mediastinal nodes not pathologically enlarged.",
+  "microbiology": "Pleural fluid Gram stain: no organisms. Aerobic/anaerobic pleural fluid and blood cultures: no growth at 48h. Pleural fluid AFB smear negative; GeneXpert MTB/RIF not detected; ADA 22 U/L (low). Sputum for AFB not obtained (dry cough).",
+  "differentialDiagnoses": [
+    "Malignant / paramalignant pleural effusion",
+    "Transudative effusion from occult heart failure",
+    "Pulmonary embolism with effusion",
+    "Tuberculous pleural effusion",
+    "Parapneumonic effusion / empyema",
+    "Interstitial lung disease"
+  ],
+  "finalDiagnosis": "Right-sided pleural effusion (exudative, lymphocyte-predominant) — subacute, minimally symptomatic presentation warranting diagnostic thoracocentesis and workup for underlying malignancy/TB.",
+  "citations": [
+    "BTS (British Thoracic Society) Pleural Disease Guideline — Investigation of a Unilateral Pleural Effusion in Adults, 2023",
+    "ATS/STS/STR Clinical Practice Guideline — Management of Malignant Pleural Effusions, 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Disorders of the Pleura (Pleural Effusion)"
+  ],
+  "stewardship": "Not applicable — this is a non-infective diagnostic problem. No empiric antibiotics are indicated: there is no fever, no leukocytosis, cultures are sterile and imaging shows no consolidation or loculated empyema. Management centres on ultrasound-guided diagnostic thoracocentesis with pleural fluid analysis (protein, LDH, pH, cytology, differential cell count, AFB/GeneXpert, ADA) applying Light's criteria, and treating the identified underlying cause.",
+  "contraindications": [
+    "Avoid empiric antibiotics for an afebrile, culture-negative effusion without consolidation — no infective indication.",
+    "Do not perform thoracocentesis without prior imaging (ultrasound) localisation.",
+    "Correct significant coagulopathy/thrombocytopenia before pleural intervention."
+  ],
+  "edgeCases": [
+    "An exudate by Light's criteria in a patient on diuretics may be a mislabelled transudate — check serum-to-pleural albumin gradient (>1.2 g/dL suggests transudate).",
+    "Cytology-negative exudative lymphocytic effusion still requires exclusion of malignancy and TB; consider thoracoscopic pleural biopsy.",
+    "A large effusion with contralateral mediastinal shift absent should raise concern for endobronchial obstruction or fixed mediastinum (malignant infiltration)."
+  ],
+  "expectedMaiK": "Subacute, minimally painful, afebrile unilateral breathlessness with stony-dull base, absent breath sounds and reduced vocal resonance = pleural effusion until proven otherwise; confirm with imaging and sample the fluid before treating.",
+  "expectedNextQuestions": [
+    "Any prior malignancy, asbestos exposure or occupational dust history?",
+    "Any orthopnoea, PND or leg swelling to suggest cardiac cause?",
+    "Any night sweats, TB contact or endemic exposure?",
+    "Rate and duration of weight loss and appetite change?"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray PA (and lateral) to confirm and quantify effusion",
+    "Thoracic ultrasound to localise and characterise the fluid",
+    "Ultrasound-guided diagnostic thoracocentesis with Light's criteria (pleural protein, LDH, pH, glucose)",
+    "Pleural fluid cytology and differential cell count",
+    "Pleural fluid AFB smear/GeneXpert and ADA",
+    "Contrast CT thorax to assess pleura, parenchyma and mediastinum"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "dyspnea": true,
+    "coughRadio": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "ageOver50": true,
+    "orthopnea": true,
+    "pleuriticChestPain": true
+  },
+  "expected": {
+    "diagnosis": "pleural_effusion",
+    "acceptableIds": [
+      "pleural_effusion"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "pe",
+      "lung_cancer",
+      "ild"
+    ],
+    "investigations": [
+      "Chest X-ray PA",
+      "Thoracic ultrasound",
+      "Diagnostic thoracocentesis with pleural fluid analysis (Light's criteria)",
+      "Pleural fluid cytology",
+      "Contrast CT thorax"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank pleural_effusion as the primary diagnosis given stony-dull base, absent breath sounds, reduced vocal resonance and radiographic meniscus.",
+    "Engine must NOT recommend empiric antibiotics for this afebrile, culture-negative, non-consolidated effusion.",
+    "Engine must recommend imaging-guided diagnostic thoracocentesis with Light's criteria as the key next step.",
+    "Engine must retain malignancy and TB in the differential given subacute course, weight loss and exudative lymphocytic fluid.",
+    "Engine must not misclassify as CAP or heart failure given absent fever/consolidation and normal NT-proBNP/JVP."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

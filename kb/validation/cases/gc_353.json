@@ -1,0 +1,123 @@
+{
+  "id": "gc_353",
+  "specialty": "Gastroenterology",
+  "condition": "Peptic ulcer disease / upper GI bleed",
+  "age": 76,
+  "sex": "M",
+  "presentingComplaint": "Collapse at home with a single episode of coffee-ground vomiting and black stools",
+  "history": "Brought to the emergency department after a witnessed syncopal collapse while walking to the bathroom. For the past two days he had passed several jet-black, tarry, offensive-smelling stools but attributed this to iron tablets and did not seek help. There was one episode of coffee-ground vomiting this morning; no frank haematemesis. Notably he denies significant epigastric pain — only vague upper-abdominal fullness — which is typical of NSAID-related ulceration in the elderly where the classic burning dyspepsia is blunted. Background: osteoarthritis treated with regular naproxen plus low-dose aspirin for prior TIA, hypertension, and a previous documented duodenal ulcer 6 years ago. No known liver disease, no alcohol excess, no prior varices. He has felt increasingly lightheaded, breathless on minimal exertion and cold over 24 hours.",
+  "examination": "Cold, clammy, peripherally shut-down and drowsy but rousable. Marked pallor of conjunctivae and palms. No stigmata of chronic liver disease, no spider naevi, no ascites, liver not enlarged, no splenomegaly. Abdomen soft with mild epigastric tenderness and no guarding or peritonism. Digital rectal examination reveals melaena. No pulsatile abdominal mass. Capillary refill 4 seconds.",
+  "vitals": {
+    "hr": 124,
+    "bp": "82/54",
+    "rr": 26,
+    "temp": 36.2,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 6.4,
+    "platelets": 244,
+    "urea": 22.5,
+    "creatinine": 1.6,
+    "inr": 1.2,
+    "albumin": 3.8,
+    "bilirubin": 0.8,
+    "lactate": 3.9,
+    "ureaCreatinineRatioElevated": true,
+    "mcv": 78
+  },
+  "imaging": "Erect chest and supine abdominal films: no free sub-diaphragmatic air, no dilated bowel loops, no aortic calcification suggesting aneurysm. CT not required once source confirmed endoscopically.",
+  "microbiology": "Rapid urease (CLO) test on antral biopsy positive for Helicobacter pylori. Blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Bleeding peptic (duodenal) ulcer",
+    "Oesophageal/gastric variceal haemorrhage",
+    "Erosive oesophagitis / GORD-related bleeding",
+    "Mesenteric ischaemia",
+    "Upper GI malignancy"
+  ],
+  "finalDiagnosis": "Severe upper gastrointestinal haemorrhage from an NSAID/H. pylori-associated duodenal ulcer (Forrest IIa, visible vessel) with hypovolaemic shock",
+  "citations": [
+    {
+      "source": "Harrison's Principles of Internal Medicine",
+      "topic": "Peptic Ulcer Disease and Gastrointestinal Bleeding",
+      "year": "2022",
+      "edition": "22e"
+    },
+    {
+      "source": "American College of Gastroenterology (ACG)",
+      "topic": "Management of Patients with Acute Upper Gastrointestinal Bleeding / Peptic Ulcer Bleeding",
+      "year": "2021"
+    }
+  ],
+  "stewardship": "Non-infective haemorrhagic emergency; no antimicrobial therapy indicated for the bleed itself. (Antibiotic prophylaxis is reserved for variceal bleeding in cirrhosis, which is excluded here.) H. pylori eradication with a PPI-based triple regimen is indicated after the acute phase but is treatment of the ulcer, not empiric sepsis therapy.",
+  "contraindications": [
+    "Withhold/reverse antiplatelet-anticoagulant burden: stop naproxen permanently; hold aspirin acutely and restart early once haemostasis achieved given cardiovascular indication",
+    "Avoid oral iron and delayed presentation masking severity",
+    "No NSAIDs going forward — substitute paracetamol +/- gastroprotection for osteoarthritis"
+  ],
+  "edgeCases": [
+    "Elderly NSAID users frequently bleed painlessly, so absence of classic dyspepsia must not lower suspicion",
+    "Urea disproportionately elevated relative to creatinine reflects an upper GI blood 'protein meal' plus pre-renal state, not intrinsic renal disease",
+    "Haemoglobin can be near-normal initially before haemodilution — do not be reassured by an early value",
+    "Must actively exclude variceal source: a normal-looking abdomen with no liver stigmata favours ulcer, but endoscopy is definitive"
+  ],
+  "expectedMaiK": "A severe/critical upper GI bleed with hypovolaemic shock in an elderly patient on NSAIDs and aspirin points to a bleeding peptic (duodenal) ulcer; priorities are resuscitation with a restrictive transfusion strategy (Hb target ~7 g/dL), high-dose IV proton pump inhibitor, and urgent endoscopy within 24 hours for haemostasis, with H. pylori testing and eradication and permanent NSAID cessation to prevent rebleeding.",
+  "expectedNextQuestions": [
+    "Any prior peptic ulcer, H. pylori treatment, or previous GI bleeding?",
+    "Exact NSAID, aspirin, anticoagulant and steroid usage with doses and duration?",
+    "Any features of chronic liver disease or known varices to exclude a variceal source?",
+    "Volume and character of haematemesis and melaena, and time course of collapse?",
+    "Cardiovascular comorbidity guiding transfusion threshold and timing of antiplatelet resumption?"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy (OGD) within 24h for diagnosis and endoscopic haemostasis",
+    "Full blood count, urea/creatinine/electrolytes, LFTs, coagulation/INR, group & crossmatch",
+    "Serial haemoglobin and lactate; venous blood gas",
+    "Glasgow-Blatchford and Rockall risk scoring",
+    "H. pylori testing (biopsy urease/urea breath) and review of NSAID/antiplatelet drug chart"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "gibPresentation": true,
+    "hematemesis": true,
+    "melena": true,
+    "syncope": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "anticoagulated": true,
+    "lactateElevated": true,
+    "ageOver50": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "peptic_ulcer",
+    "acceptableIds": [
+      "peptic_ulcer"
+    ],
+    "differentialIds": [
+      "variceal_bleed",
+      "gerd_chest",
+      "mesenteric_ischemia"
+    ],
+    "investigations": [
+      "Urgent upper GI endoscopy within 24h with endoscopic haemostasis",
+      "FBC, U&E, LFTs, coagulation, group & crossmatch",
+      "High-dose IV proton pump inhibitor and restrictive transfusion strategy",
+      "H. pylori testing and Glasgow-Blatchford/Rockall risk scoring"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank peptic_ulcer as top diagnosis given NSAID/aspirin use, melaena, coffee-ground vomiting and haemodynamic shock",
+    "Must not classify as an infective condition or recommend empiric antibiotics",
+    "Must flag hypovolaemic shock and prioritise resuscitation plus urgent endoscopy within 24h",
+    "variceal_bleed must appear in the differential but be down-ranked by absence of liver disease/portal hypertension stigmata"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

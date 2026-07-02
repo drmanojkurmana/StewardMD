@@ -1,0 +1,113 @@
+{
+  "id": "gc_328",
+  "specialty": "Endocrine",
+  "condition": "Hypoglycemia",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Acute confusion and right-sided weakness for the past hour, initially triaged as an acute stroke",
+  "history": "Frail 78-year-old woman with long-standing type 2 diabetes (on glimepiride 4 mg daily and metformin), hypertension, and stage 4 chronic kidney disease (baseline eGFR ~22). She had a minor ischaemic stroke two years ago with mild residual left facial weakness. Over the last week she had poor oral intake because of a viral gastroenteritis and had continued her usual glimepiride despite eating very little. This morning her carer found her drowsy, sweating minimally, slurring words and unable to lift her right arm, prompting a stroke call. She is also on bisoprolol, which had been blunting the usual adrenergic warning symptoms. No preceding headache or trauma. The focal deficit and dense confusion strongly mimicked an acute cerebrovascular event, and the coexisting CKD (which markedly prolongs sulfonylurea and insulin clearance) plus her prior stroke confounded the initial picture until a bedside glucose was checked.",
+  "examination": "Drowsy, GCS 12 (E3 V4 M5), diaphoretic. Right upper and lower limb weakness (power 3/5) with an upgoing right plantar, alongside the old left facial droop. No neck stiffness. Chest clear, abdomen soft. Bedside capillary glucose 1.9 mmol/L (34 mg/dL). Within 10 minutes of 100 mL 20% dextrose IV her GCS returned to 15, the right-sided weakness fully resolved and dysarthria cleared, confirming the deficit was a metabolic (hypoglycaemic) hemiparesis rather than a new stroke.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/82",
+    "rr": 16,
+    "temp": 36.4,
+    "spo2": 97
+  },
+  "labs": {
+    "capillaryGlucose_mmol_L": 1.9,
+    "labPlasmaGlucose_mg_dL": 36,
+    "postDextroseGlucose_mmol_L": 8.4,
+    "creatinine_mg_dL": 3.1,
+    "urea_mmol_L": 21,
+    "eGFR": 20,
+    "sodium_mmol_L": 138,
+    "potassium_mmol_L": 4.6,
+    "hba1c_pct": 6.4,
+    "cValidatedInsulinCpeptide": "not required (clear sulfonylurea + CKD context)",
+    "ctHeadNonContrast": "no acute infarct or haemorrhage; established old left MCA territory changes"
+  },
+  "imaging": "Non-contrast CT head: no acute intracranial pathology; chronic left-sided infarct only — argues against a new stroke as the cause of the acute right-sided deficit.",
+  "microbiology": "Not applicable (non-infective presentation).",
+  "differentialDiagnoses": [
+    "Acute ischaemic stroke (stroke mimic — deficit reversed fully with dextrose)",
+    "Diabetic ketoacidosis / hyperglycaemic crisis (excluded — glucose low)",
+    "Hyponatraemia / metabolic encephalopathy",
+    "Sedative or drug intoxication"
+  ],
+  "finalDiagnosis": "Sulfonylurea-induced (glimepiride) hypoglycaemia precipitated by reduced oral intake and prolonged in the setting of stage 4 CKD, presenting as a stroke mimic with focal hemiparesis; Whipple's triad satisfied (low plasma glucose, neuroglycopenic symptoms, resolution with glucose)",
+  "citations": [
+    "Endocrine Society — Evaluation and Management of Adult Hypoglycemic Disorders — 2009",
+    "ADA Standards of Care — Glycemic Targets / Hypoglycemia — 2025",
+    "Harrison's Principles of Internal Medicine, 22e — Hypoglycemia"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid further sulfonylurea dosing; glimepiride must be withheld given CKD and prolonged half-life",
+    "Do not rely on a single glucose correction — sulfonylurea hypoglycaemia in CKD characteristically recurs and needs continuous 10% dextrose infusion and prolonged observation (≥24-48h)",
+    "Avoid attributing the focal deficit to stroke and giving thrombolysis before excluding hypoglycaemia with bedside glucose"
+  ],
+  "edgeCases": [
+    "Beta-blocker (bisoprolol) masks adrenergic warning symptoms, so neuroglycopenia may be the first sign",
+    "Consider octreotide for refractory or recurrent sulfonylurea-induced hypoglycaemia",
+    "Reduced eGFR prolongs both insulin and sulfonylurea action, causing protracted/recurrent hypoglycaemia"
+  ],
+  "expectedMaiK": "Check a bedside capillary glucose immediately in any patient with acute confusion or focal neurological deficit — hypoglycaemia is a fully reversible stroke mimic, and sulfonylurea hypoglycaemia in CKD is prolonged and recurrent, mandating dextrose infusion and extended monitoring rather than a single bolus.",
+  "expectedNextQuestions": [
+    "What diabetes medications is she on, and at what doses (especially sulfonylureas or insulin)?",
+    "What has her oral intake and renal function been over the last few days?",
+    "Did the neurological deficit resolve after glucose administration?"
+  ],
+  "expectedInvestigations": [
+    "Immediate bedside capillary blood glucose",
+    "Laboratory plasma glucose",
+    "Renal function (creatinine, urea, eGFR)",
+    "Serum electrolytes including sodium",
+    "Non-contrast CT head to exclude structural stroke/haemorrhage"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "seizure": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "cerebrovascularDisease": true,
+    "ageOver50": true,
+    "renalImpairment": true,
+    "behavioralChange": true
+  },
+  "expected": {
+    "diagnosis": "hypoglycemia",
+    "acceptableIds": [
+      "hypoglycemia"
+    ],
+    "differentialIds": [
+      "ischemic_stroke",
+      "dka",
+      "hyponatremia",
+      "drug_intox"
+    ],
+    "investigations": [
+      "bedside capillary blood glucose",
+      "laboratory plasma glucose",
+      "renal function (creatinine/urea/eGFR)",
+      "serum electrolytes",
+      "non-contrast CT head"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Bedside glucose must be checked before treating as stroke",
+    "Full neurological recovery after dextrose confirms hypoglycaemic stroke mimic",
+    "CKD + sulfonylurea mandates dextrose infusion and prolonged (≥24-48h) observation, not a single bolus",
+    "Glimepiride must be withheld"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

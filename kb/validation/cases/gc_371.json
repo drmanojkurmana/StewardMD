@@ -1,0 +1,111 @@
+{
+  "id": "gc_371",
+  "specialty": "Cardiology / Emergency",
+  "condition": "Cardiac tamponade",
+  "age": 61,
+  "sex": "F",
+  "presentingComplaint": "Progressive breathlessness for 4 days with two near-faint episodes today and light-headedness on sitting up.",
+  "history": "Known metastatic breast carcinoma (on palliative systemic therapy), no prior cardiac history. Over the past week she has had worsening exertional then rest dyspnoea, orthopnoea and vague retrosternal heaviness. This morning she nearly collapsed twice on standing. No fever, cough, pleuritic pain or calf swelling. She was initially triaged as a suspected pulmonary embolism given the malignancy and acute dyspnoea, but she then became progressively hypotensive and cool peripherally despite a fluid bolus. Note: heart sounds were audible (not muffled) and the presentation was dominated by shock and dyspnoea rather than the classic triad, which delayed recognition.",
+  "examination": "Ill and anxious, cool clammy peripheries, prolonged capillary refill. Markedly elevated JVP with prominent systolic (x) descent. Pulsus paradoxus 24 mmHg. Heart sounds present but quiet apex; no murmur or rub. Chest clear with no focal crackles or wheeze. Abdomen soft, mild tender hepatomegaly. No unilateral leg swelling.",
+  "vitals": {
+    "hr": 128,
+    "bp": "84/66",
+    "rr": 30,
+    "temp": 36.7,
+    "spo2": 92
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "platelets": 244,
+    "creatinine": 1.6,
+    "lactate": 3.8,
+    "troponin": "mildly elevated",
+    "bnp": "mildly elevated",
+    "dDimer": "elevated (non-specific)"
+  },
+  "imaging": "Portable CXR: enlarged, globular ('water-bottle') cardiac silhouette with clear lung fields and no pulmonary oedema. Bedside echocardiography: large circumferential pericardial effusion with early diastolic right ventricular free-wall collapse and right atrial systolic collapse, dilated non-collapsing IVC (>50% respiratory variation absent), and marked (>30%) respirophasic mitral inflow variation - findings diagnostic of tamponade physiology. CT pulmonary angiogram (done before echo): no pulmonary embolus, large pericardial effusion noted.",
+  "microbiology": "Not applicable; subsequent pericardial fluid sent for cytology and culture after drainage.",
+  "differentialDiagnoses": [
+    "Cardiac tamponade (malignant pericardial effusion)",
+    "Pulmonary embolism (obstructive shock mimic)",
+    "Cardiogenic shock",
+    "Acute coronary syndrome",
+    "Septic shock"
+  ],
+  "finalDiagnosis": "Cardiac tamponade due to a malignant (metastatic) pericardial effusion, presenting as obstructive shock.",
+  "citations": [
+    "ESC Guidelines on the Diagnosis and Management of Pericardial Diseases, 2015",
+    "Harrison's Principles of Internal Medicine, Pericardial Disease and Cardiac Tamponade, 22e, 2022"
+  ],
+  "stewardship": "",
+  "contraindications": [
+    "Avoid aggressive diuresis or vasodilators - both reduce preload and can precipitate cardiovascular collapse in tamponade.",
+    "Avoid positive-pressure ventilation / intubation if avoidable before drainage, as it further impairs venous return.",
+    "Do not delay pericardiocentesis for a normal blood pressure - low-pressure or evolving tamponade can decompensate abruptly."
+  ],
+  "edgeCases": [
+    "Malignant effusions accumulate rapidly and can cause tamponade at relatively small volumes; heart sounds may remain audible, so absence of the full Beck triad does not exclude it.",
+    "An elevated D-dimer and dyspnoea in a cancer patient can anchor toward PE and delay echocardiography.",
+    "Pulsus paradoxus may be attenuated if there is coexisting severe LV dysfunction, aortic regurgitation or a very low output state."
+  ],
+  "expectedMaiK": "Urgent echocardiography-guided pericardiocentesis with cautious preload support (IV fluids) as a temporising measure while arranging drainage.",
+  "expectedNextQuestions": [
+    "How rapidly has the dyspnoea and pre-syncope progressed, and is there orthopnoea?",
+    "Any recent chest trauma, cardiac procedure, uraemia, TB exposure or anticoagulation?",
+    "What is the pulsus paradoxus and does the JVP rise on inspiration?",
+    "Is there a history that would favour PE (immobility, prior VTE) versus effusion?"
+  ],
+  "expectedInvestigations": [
+    "Immediate bedside transthoracic echocardiography",
+    "12-lead ECG (look for low voltages / electrical alternans)",
+    "Chest radiograph",
+    "Serum lactate and venous/arterial blood gas",
+    "Pericardial fluid analysis (cytology, protein/LDH, culture) after drainage"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "syncope": true,
+    "chestPain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "raisedJVP": true,
+    "vasopressorRequirement": true,
+    "malignancy": true,
+    "lactateElevated": true
+  },
+  "expected": {
+    "diagnosis": "tamponade",
+    "acceptableIds": [
+      "tamponade"
+    ],
+    "differentialIds": [
+      "pe",
+      "cardiogenic_shock",
+      "acs"
+    ],
+    "investigations": [
+      "Bedside transthoracic echocardiography",
+      "12-lead ECG",
+      "Chest radiograph",
+      "Serum lactate",
+      "Pericardial fluid cytology and culture"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine top diagnosis must be tamponade given large pericardial effusion with RV diastolic collapse and pulsus paradoxus.",
+    "PE must be considered but excluded by the negative CTPA and diagnostic echo tamponade physiology.",
+    "Management output must prioritise urgent pericardiocentesis and must NOT recommend diuretics or vasodilators.",
+    "No antibiotics should be recommended (non-infective aetiology)."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

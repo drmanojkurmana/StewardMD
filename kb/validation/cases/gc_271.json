@@ -1,0 +1,127 @@
+{
+  "id": "gc_271",
+  "specialty": "Hepatobiliary",
+  "condition": "Liver Abscess",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Five days of right-sided chest and upper abdominal pain with high fever and rigors, initially treated as chest infection.",
+  "history": "A 58-year-old man with type 2 diabetes (HbA1c 9.4%) on metformin presented with 5 days of fever with rigors and a dull ache in the right upper abdomen radiating to the right shoulder tip. Over the last 48h he developed right-sided pleuritic pain and a dry cough, prompting a primary-care diagnosis of 'right basal pneumonia' and a course of oral amoxicillin, with no improvement. He reports anorexia, nausea, and 3 kg unintentional weight loss over the fortnight. No diarrhoea, no recent travel outside urban India, no dysentery history. Non-drinker. No prior biliary disease or gallstone symptoms.",
+  "examination": "Ill-looking, mildly dehydrated. Tender hepatomegaly with point tenderness over the lower right intercostal spaces and a positive 'intercostal tenderness' sign. Right basal breath sounds reduced with a small sympathetic pleural effusion; no bronchial breathing or coarse consolidation. Mild scleral icterus. Murphy sign negative. No peritonism.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/74",
+    "rr": 22,
+    "temp": 38.7,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": 18.9,
+    "neutrophilPct": 88,
+    "hemoglobin": 11.2,
+    "platelets": 410,
+    "crp": 214,
+    "alp": 268,
+    "altU_L": 74,
+    "astU_L": 66,
+    "bilirubinTotal": 2.1,
+    "albumin": 2.8,
+    "creatinine": 1.2,
+    "randomGlucose": 268,
+    "inr": 1.2,
+    "bloodCulture": "pending"
+  },
+  "imaging": "Chest X-ray: elevated right hemidiaphragm with small right pleural effusion, no lobar consolidation. Abdominal ultrasound: single 6.4 cm hypoechoic lesion with internal echoes in segment VII/VIII of the right lobe. Contrast CT abdomen: solitary thick-walled, rim-enhancing hypodense hepatic collection with peripheral oedema, no biliary dilatation and normal gallbladder.",
+  "microbiology": "Ultrasound-guided percutaneous aspiration yielded ~40 mL of thick 'anchovy-sauce'-negative, foul, greenish pus; Gram stain: Gram-negative bacilli. Pus and blood cultures grew Klebsiella pneumoniae (hypermucoviscous, string-test positive), pan-susceptible. Amoebic serology (IHA) negative; stool for E. histolytica antigen negative.",
+  "differentialDiagnoses": [
+    "Pyogenic liver abscess",
+    "Right basal community-acquired pneumonia with effusion",
+    "Acute cholangitis",
+    "Acute cholecystitis",
+    "Amoebic liver abscess"
+  ],
+  "finalDiagnosis": "Pyogenic (Klebsiella pneumoniae) liver abscess in a poorly controlled diabetic, masquerading as right basal pneumonia",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Liver Abscess",
+    "IDSA — Complicated Intra-abdominal Infection — 2010",
+    "WSES — Management of Intra-abdominal Infections — 2017"
+  ],
+  "stewardship": "Empiric IV ceftriaxone plus metronidazole after obtaining blood cultures and pus for culture; combine antibiotics with source control by image-guided percutaneous drainage. Rationale: covers enteric Gram-negative bacilli (including Klebsiella, the dominant organism in diabetic Asian patients), streptococci, and anaerobes, with metronidazole also treating amoebic abscess empirically until serology returns. De-escalate to a narrow agent once susceptibilities are known.",
+  "contraindications": [
+    "Avoid metronidazole with concurrent alcohol (disulfiram-like reaction)",
+    "Cap contrast load / monitor renal function given diabetic nephropathy risk",
+    "Correct coagulopathy before percutaneous drainage"
+  ],
+  "edgeCases": [
+    "Hypermucoviscous K. pneumoniae liver abscess can seed metastatic infection (endophthalmitis, meningitis) — perform fundoscopy and low threshold for imaging if neurological or ocular symptoms appear",
+    "A right basal effusion and pleuritic pain can wrongly anchor to pneumonia and delay abdominal imaging",
+    "Negative amoebic serology does not exclude early amoebic abscess but pus culture growing Klebsiella confirms pyogenic aetiology"
+  ],
+  "expectedMaiK": "Solitary rim-enhancing hepatic collection with fever, rigors, tender hepatomegaly, and neutrophilic leukocytosis in a diabetic indicates pyogenic liver abscess; the right pleuritic component is sympathetic/diaphragmatic, not primary pneumonia.",
+  "expectedNextQuestions": [
+    "Any diarrhoea, dysentery, or travel to suggest amoebic aetiology?",
+    "History of gallstones, biliary colic, or prior biliary intervention?",
+    "Glycaemic control and diabetes duration?",
+    "Any visual symptoms or headache suggesting metastatic Klebsiella seeding?"
+  ],
+  "expectedInvestigations": [
+    "Abdominal ultrasound",
+    "Contrast-enhanced CT abdomen",
+    "Blood cultures (two sets)",
+    "Image-guided aspiration/drainage with pus Gram stain and culture",
+    "Liver function tests and CRP",
+    "Amoebic serology and stool antigen",
+    "Random/fasting glucose and HbA1c",
+    "Fundoscopy (screen for metastatic endophthalmitis)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "pleuriticPain": true,
+    "tachycardia": true,
+    "nauseaVomiting": true,
+    "weightLoss": true,
+    "jaundice": true,
+    "singleLesion": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "LIVER_ABSCESS",
+    "acceptableIds": [
+      "LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "AMOEBIC_LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS",
+      "CAP"
+    ],
+    "investigations": [
+      "Abdominal ultrasound",
+      "Contrast-enhanced CT abdomen",
+      "Blood cultures",
+      "Image-guided aspiration with culture",
+      "Liver function tests",
+      "Amoebic serology"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Metronidazole"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "expected.diagnosis == LIVER_ABSCESS",
+    "acceptableIds equals ['LIVER_ABSCESS']",
+    "differentialIds include CHOLANGITIS and AMOEBIC_LIVER_ABSCESS",
+    "stewardship antibiotics include ceftriaxone and metronidazole",
+    "imaging shows a solitary rim-enhancing hepatic collection without biliary dilatation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

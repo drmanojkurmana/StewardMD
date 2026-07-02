@@ -1,0 +1,109 @@
+{
+  "id": "gc_242",
+  "specialty": "Respiratory",
+  "condition": "Acute Bronchitis",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Persistent nagging cough for 10 days after a 'head cold', now bringing up discoloured phlegm",
+  "history": "Retired schoolteacher, ex-smoker (quit 8 years ago, 15 pack-years) with no diagnosis of COPD or asthma and normal exercise tolerance until this illness. Ten days ago developed sore throat, blocked nose and generalised aches which settled within 4-5 days. However a dry cough that started with the coryza has persisted and become intermittently productive of yellow-green sputum over the last 3 days, worse at night and on talking, with occasional end-expiratory wheeze he can hear himself. He denies frank fevers, rigors, breathlessness at rest, pleuritic pain, haemoptysis, weight loss or night sweats. No paroxysms of coughing, whoop or post-tussive vomiting. No recent travel, TB contact, aspiration risk or immunosuppression. This subtle, lingering post-viral picture without systemic toxicity is the atypical feature - it superficially raises concern for pneumonia or a COPD/asthma flare, but the trajectory and examination point to self-limiting acute bronchitis. He is anxious and specifically requesting antibiotics because the sputum is 'coloured'.",
+  "examination": "Comfortable at rest, speaking in full sentences, well perfused and not toxic. No accessory muscle use. Oropharynx unremarkable, no tonsillar exudate, no significant cervical lymphadenopathy. Chest: normal expansion and resonance; air entry good bilaterally with scattered high-pitched expiratory wheeze and a few coarse sounds that clear on coughing; NO focal crackles, NO bronchial breathing, NO area of dullness. Occasional cough during examination productive of mucopurulent sputum. Cardiovascular and abdominal examination normal. No peripheral oedema or clubbing.",
+  "vitals": {
+    "hr": 86,
+    "bp": "134/82",
+    "rr": 18,
+    "temp": 37.4,
+    "spo2": 97
+  },
+  "labs": {
+    "wbc": "8.9 x10^9/L (normal differential)",
+    "neutrophils": "6.1 x10^9/L",
+    "crp": "14 mg/L (mildly raised)",
+    "procalcitonin": "0.06 ng/mL (low - does not support bacterial infection)",
+    "creatinine": "0.9 mg/dL",
+    "urea": "5.1 mmol/L"
+  },
+  "imaging": "Chest X-ray (PA): clear lung fields, no focal consolidation, effusion or cavitation; normal cardiac silhouette and hila. Effectively excludes pneumonia.",
+  "microbiology": "Respiratory multiplex viral PCR positive for human rhinovirus/enterovirus. Sputum Gram stain and culture not indicated in uncomplicated acute bronchitis. Blood cultures not performed (no systemic sepsis).",
+  "differentialDiagnoses": [
+    "Community-acquired pneumonia (excluded by clear CXR, no focal signs, normal vitals and low procalcitonin)",
+    "Acute exacerbation of COPD or asthma (no prior obstructive lung disease, isolated post-viral cough)",
+    "Upper respiratory tract infection / persistent post-viral cough",
+    "Pertussis (no paroxysms, whoop or post-tussive vomiting)"
+  ],
+  "finalDiagnosis": "Acute bronchitis (viral, post-coryzal) in an ex-smoker with subtle protracted cough and transient bronchial hyper-reactivity",
+  "citations": [
+    "ACP/CDC - Appropriate Antibiotic Use for Acute Respiratory Tract Infection in Adults (Acute Bronchitis), 2016",
+    "CHEST (ACCP) - Diagnosis and Management of Cough: Acute Bronchitis, 2006",
+    "NICE - Cough (acute): antimicrobial prescribing (NG120), 2019",
+    "Harrison's Principles of Internal Medicine, 22e - Acute Bronchitis"
+  ],
+  "stewardship": "Uncomplicated acute bronchitis is predominantly viral and self-limiting - antibiotics are NOT indicated and do not shorten illness. Purulent/discoloured sputum reflects sloughed tracheobronchial epithelium and inflammatory cells, NOT bacterial infection, and must not trigger a prescription. Management is symptomatic (fluids, analgesia/antipyretics, honey, consideration of a short bronchodilator trial for the wheeze) with clear safety-netting: cough may persist up to 3 weeks. Antibiotics are reserved only for specific exceptions - suspected pertussis (macrolide), a superimposed COPD/CAP diagnosis, or frailty/high risk with deterioration. Low procalcitonin and a clear chest film support withholding antibiotics.",
+  "contraindications": [
+    "Avoid empirical antibiotics for uncomplicated acute bronchitis (drives resistance, C. difficile, adverse effects with no benefit)",
+    "If a macrolide is ever used for suspected pertussis, review QT-prolonging drug interactions",
+    "Avoid sedating antitussives/codeine in the elderly or those at aspiration risk"
+  ],
+  "edgeCases": [
+    "Suspected pertussis: paroxysmal cough >2 weeks with whoop or post-tussive vomiting - then a macrolide (e.g. azithromycin/clarithromycin) IS indicated",
+    "Underlying COPD/asthma unmasking as an infective exacerbation would change management",
+    "Development of focal signs, hypoxia, high fever, tachypnea or a positive CXR reclassifies as pneumonia",
+    "Immunocompromise or frailty lowers the threshold for investigation and treatment"
+  ],
+  "expectedMaiK": "Recognise acute bronchitis as a self-limiting, predominantly viral lower respiratory infection; sputum discoloration/purulence does NOT indicate bacterial infection or justify antibiotics. Exclude pneumonia clinically (no focal crackles/bronchial breathing, normal vitals, no hypoxia/tachypnea, clear CXR) and then manage symptomatically with safety-netting rather than prescribing antibiotics.",
+  "expectedNextQuestions": [
+    "Are there red flags for pneumonia (high fever, rigors, pleuritic pain, breathlessness, hypoxia)?",
+    "Any paroxysmal cough, whoop or post-tussive vomiting suggesting pertussis?",
+    "Known COPD, asthma or other chronic lung disease, and baseline exercise tolerance?",
+    "Smoking history, immunosuppression, or frailty/comorbidity that would alter risk?",
+    "Duration and trajectory of the cough - is it improving or worsening?"
+  ],
+  "expectedInvestigations": [
+    "Usually none - diagnosis is clinical",
+    "Chest X-ray only if focal signs, abnormal vitals (tachypnea, hypoxia, tachycardia), high fever or diagnostic uncertainty, to exclude pneumonia",
+    "Procalcitonin/CRP optional to support withholding antibiotics",
+    "Pertussis testing if paroxysmal cough with characteristic features"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "coughRadio": true,
+    "purulentSputum": true,
+    "wheeze": true,
+    "coryza": true,
+    "nasalCongestion": true,
+    "soreThroat": true,
+    "subacuteOnset": true,
+    "myalgiaArthralgia": true
+  },
+  "expected": {
+    "diagnosis": "ACUTE_BRONCHITIS",
+    "acceptableIds": [
+      "ACUTE_BRONCHITIS"
+    ],
+    "differentialIds": [
+      "CAP",
+      "URTI",
+      "COPD_EXACERBATION",
+      "asthma_exac"
+    ],
+    "investigations": [
+      "Clinical diagnosis - no routine investigations",
+      "Chest X-ray to exclude pneumonia if focal signs or abnormal vitals",
+      "Procalcitonin to support withholding antibiotics"
+    ],
+    "stewardship": {
+      "tier": "none",
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must diagnose ACUTE_BRONCHITIS and not escalate to CAP given clear CXR, no focal signs and normal vitals",
+    "Must NOT recommend antibiotics for uncomplicated acute bronchitis",
+    "Must not treat purulent/discoloured sputum as evidence of bacterial infection",
+    "Should recommend symptomatic management with safety-netting and pneumonia red-flag advice",
+    "expected.stewardship.antibiotics must be empty"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

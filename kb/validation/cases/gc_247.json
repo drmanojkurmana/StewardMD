@@ -1,0 +1,121 @@
+{
+  "id": "gc_247",
+  "specialty": "Respiratory",
+  "condition": "Community Acquired Pneumonia (non-severe)",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "3 days of worsening breathlessness and productive cough, referred as a query heart-failure decompensation.",
+  "history": "Retired schoolteacher with HFrEF (EF 38%, on bisoprolol, ramipril, furosemide) and mild COPD (ex-smoker, 30 pack-years, no home oxygen). Over 3 days he developed a productive cough with yellow-green sputum, low-grade then higher fever, and a sharp right-sided chest pain worse on deep inspiration. Breathlessness increased from his baseline of climbing one flight to breathlessness on flat ground; he also noticed mild ankle swelling. His GP increased furosemide with little benefit and referred him as decompensated heart failure. No orthopnoea or PND beyond his chronic two-pillow baseline, no chest tightness on exertion, no haemoptysis, no calf pain or long-haul travel. No recent hospitalisation or antibiotics in the last 90 days. Adherent to cardiac medications.",
+  "examination": "Alert and oriented, mildly dyspnoeic at rest but able to speak in full sentences. Warm peripheries. JVP not raised. Chest: bronchial breathing and coarse crepitations localised to the right lower zone with increased vocal resonance; scattered expiratory wheeze bilaterally at baseline; no bibasal fine crackles of pulmonary oedema. Heart sounds normal, no gallop, no new murmur. Mild bilateral pitting ankle oedema (chronic). Abdomen soft. No calf swelling or tenderness.",
+  "vitals": {
+    "hr": 98,
+    "bp": "128/76",
+    "rr": 24,
+    "temp": 38.4,
+    "spo2": 92
+  },
+  "labs": {
+    "wbc": "15.8 x10^9/L (neutrophilia 82%)",
+    "crp": "168 mg/L",
+    "procalcitonin": "1.4 ng/mL",
+    "urea": "6.1 mmol/L",
+    "creatinine": "1.0 mg/dL",
+    "sodium": "137 mmol/L",
+    "hemoglobin": "13.4 g/dL",
+    "platelets": "265 x10^9/L",
+    "ntprobnp": "890 pg/mL (near patient baseline, not markedly elevated)",
+    "lactate": "1.6 mmol/L",
+    "glucose": "6.8 mmol/L"
+  },
+  "imaging": "Chest X-ray: dense right lower lobe consolidation with air bronchograms; no cardiomegaly change from prior film, no Kerley B lines, no upper-lobe diversion or pleural effusion suggesting fluid overload. Bedside lung ultrasound: focal B-lines with hepatisation and dynamic air bronchograms in the right base, not the bilateral diffuse B-line pattern of cardiogenic oedema.",
+  "microbiology": "Sputum Gram stain: numerous polymorphs with Gram-positive diplococci. Blood cultures sent, pending. Pneumococcal urinary antigen positive. Nasopharyngeal respiratory viral panel negative.",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure / cardiogenic pulmonary oedema (referral diagnosis; excluded by focal consolidation, only baseline NT-proBNP, absence of raised JVP/bibasal fine crackles)",
+    "Infective COPD exacerbation (wheeze present but focal lobar consolidation and pneumococcal antigen point to pneumonia)",
+    "Pulmonary embolism (pleuritic pain, but no tachycardia out of proportion, normal-ish oxygenation with clear consolidation explaining hypoxia)",
+    "Lung malignancy with post-obstructive pneumonia (age/smoking; requires interval CXR after treatment)"
+  ],
+  "finalDiagnosis": "Non-severe community-acquired pneumonia (right lower lobe, pneumococcal), CURB-65 = 1, in a patient with background HFrEF and COPD that mimicked heart-failure decompensation.",
+  "citations": [
+    "ATS/IDSA - Diagnosis and Treatment of Adults with Community-Acquired Pneumonia - 2019",
+    "Harrison's Principles of Internal Medicine, 22e - Pneumonia",
+    "ICMR - Treatment Guidelines for Antimicrobial Use in Common Syndromes (Community-Acquired Pneumonia) - 2019"
+  ],
+  "stewardship": "Non-severe CAP with cardiopulmonary comorbidity, treatable on the ward/oral route. Guideline-concordant empiric therapy targets S. pneumoniae plus atypical cover: amoxicillin-clavulanate plus a macrolide (or doxycycline). De-escalate to targeted therapy once pneumococcal antigen/culture confirmed; total 5 days if afebrile and clinically stable at 48-72h. Send blood cultures before antibiotics; do NOT escalate diuresis as primary therapy.",
+  "contraindications": [
+    "Beta-lactam anaphylaxis (use respiratory fluoroquinolone or doxycycline + macrolide alternative)",
+    "Macrolide caution with QT-prolonging cardiac drugs / significant hepatic impairment",
+    "Avoid unnecessary furosemide up-titration - no objective evidence of fluid overload"
+  ],
+  "edgeCases": [
+    "NT-proBNP can be mildly raised in sepsis/pneumonia without heart failure - interpret against the patient's own baseline",
+    "Coexisting COPD wheeze can obscure focal consolidation - localised bronchial breathing is the key discriminator",
+    "In a smoker >50, a non-resolving opacity mandates a follow-up CXR at 6 weeks to exclude underlying malignancy"
+  ],
+  "expectedMaiK": "Non-severe community-acquired pneumonia (CURB-65 1); focal lobar consolidation with fever and purulent sputum distinguishes it from the referring heart-failure diagnosis.",
+  "expectedNextQuestions": [
+    "Is the breathlessness accompanied by fever and purulent sputum rather than pure orthopnoea/PND?",
+    "Is there any recent hospitalisation or antibiotic exposure in the last 90 days (HAP/MDR risk)?",
+    "What is the patient's baseline exercise tolerance and NT-proBNP for comparison?",
+    "Any smoking history or prior abnormal chest imaging warranting malignancy follow-up?"
+  ],
+  "expectedInvestigations": [
+    "Chest X-ray (PA)",
+    "Full blood count and CRP",
+    "Blood cultures before antibiotics",
+    "Sputum Gram stain and culture",
+    "Pneumococcal and Legionella urinary antigens",
+    "NT-proBNP compared with baseline",
+    "SpO2 / arterial blood gas if hypoxic"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "crepitations": true,
+    "consolidation": true,
+    "pleuriticPain": true,
+    "tachypnea": true,
+    "dyspnea": true,
+    "knownHeartFailure": true,
+    "knownCOPD": true
+  },
+  "expected": {
+    "diagnosis": "CAP",
+    "acceptableIds": [
+      "CAP"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "copd_exac_ni",
+      "pe",
+      "lung_cancer"
+    ],
+    "investigations": [
+      "Chest X-ray",
+      "FBC and CRP",
+      "Blood cultures",
+      "Sputum Gram stain and culture",
+      "Pneumococcal urinary antigen"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Amoxicillin-clavulanate",
+        "Azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return CAP as the top diagnosis despite the heart-failure referral framing.",
+    "heart_failure must appear only as a differential, not the final diagnosis, given focal consolidation and non-elevated NT-proBNP relative to baseline.",
+    "Severity must be classified as non-severe (CURB-65 = 1); must NOT trigger SEVERE_CAP.",
+    "Empiric recommendation must include a beta-lactam (amoxicillin-clavulanate) plus atypical cover (macrolide/doxycycline), not diuretic escalation.",
+    "Recommended duration should be 5 days with clinical stability review at 48-72h."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

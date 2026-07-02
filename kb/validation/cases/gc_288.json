@@ -1,0 +1,101 @@
+{
+  "id": "gc_288",
+  "specialty": "Respiratory",
+  "condition": "Acute Sinusitis (Rhinosinusitis)",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "5 days of blocked nose and a dull ache over the right cheek",
+  "history": "Previously well non-smoker with no prior sinus disease presents on day 5 of a coryzal illness that began with sneezing, sore throat and clear rhinorrhoea. Over the last two days the discharge from the right nostril has turned thick and yellow-green and she has developed a dull pressure over the right cheek that is worse when she bends forward. Mild low-grade temperature at home. She denies visual change, diplopia, periorbital swelling, severe unilateral headache, or neck stiffness. No dental pain. She is working and eating normally and describes herself as only 'a bit run down' rather than unwell. No prior antibiotics this year, no drug allergies, not pregnant, no immunosuppression.",
+  "examination": "Comfortable, well-hydrated, no toxicity. Tenderness on percussion over the right maxillary sinus; anterior rhinoscopy shows congested mucosa with mucopurulent discharge in the right middle meatus. No periorbital erythema, proptosis or chemosis; extraocular movements full and painless. Oropharynx mildly injected without exudate. No cervical lymphadenopathy of note. Chest clear. Neurologically intact, no meningism.",
+  "vitals": {
+    "hr": 82,
+    "bp": "122/76",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 99
+  },
+  "labs": {
+    "wbc": "9.2 x10^9/L",
+    "crp": "14 mg/L",
+    "note": "Bloods not routinely indicated in uncomplicated presentation; mild values consistent with a viral-predominant early rhinosinusitis"
+  },
+  "imaging": "None. Sinus imaging (plain films/CT) not indicated for uncomplicated acute rhinosinusitis and would not distinguish viral from bacterial cause; reserved for suspected complications or recurrent/chronic disease.",
+  "microbiology": "None. Sinus aspirate/culture not indicated in uncomplicated community acute rhinosinusitis; nasal swabs are unhelpful as they do not reflect sinus flora.",
+  "differentialDiagnoses": [
+    "Viral upper respiratory tract infection (viral rhinosinusitis)",
+    "Acute pharyngitis",
+    "Acute bronchitis (if cough predominates)"
+  ],
+  "finalDiagnosis": "Acute rhinosinusitis, currently mild and viral-predominant (early presentation); does not yet meet criteria for acute bacterial rhinosinusitis",
+  "citations": [
+    "IDSA — Acute Bacterial Rhinosinusitis (2012)",
+    "AAO-HNS — Adult Sinusitis Clinical Practice Guideline (2015)",
+    "Harrison's Principles of Internal Medicine, 22e — Pharyngitis, Sinusitis, Otitis, and Other Upper Respiratory Tract Infections"
+  ],
+  "stewardship": "Early, mild presentation (<10 days, no double-sickening, systemically well): manage as viral rhinosinusitis with symptomatic care (analgesia, saline irrigation, intranasal corticosteroid) and watchful waiting rather than immediate antibiotics. Antibiotics are reserved for symptoms persisting >10 days without improvement, severe onset (high fever + purulent discharge/facial pain >=3-4 days), or 'double-sickening'. When an antibiotic is warranted, the guideline-concordant first-line empiric agent is amoxicillin-clavulanate; reserve broader agents and imaging for suspected orbital/intracranial complications.",
+  "contraindications": [
+    "Avoid antibiotics at this stage — an early, mild, self-limiting presentation does not warrant them and drives resistance/adverse effects",
+    "Fluoroquinolones are not first-line for uncomplicated sinusitis given their toxicity profile",
+    "Avoid CT/plain sinus imaging for uncomplicated acute rhinosinusitis"
+  ],
+  "edgeCases": [
+    "Escalate urgently if periorbital/orbital swelling, proptosis, diplopia, vision change (orbital cellulitis)",
+    "Escalate urgently if severe headache, neck stiffness, altered sensorium or focal deficit (intracranial extension)",
+    "Reassess and consider antibiotics if no improvement by day 10, or if she worsens after initial improvement (double-sickening)"
+  ],
+  "expectedMaiK": "Most acute rhinosinusitis is viral; distinguish early/mild disease (symptomatic care, watchful waiting) from acute bacterial rhinosinusitis (>10 days, severe onset, or double-sickening) which warrants amoxicillin-clavulanate.",
+  "expectedNextQuestions": [
+    "How many days have symptoms lasted, and are they improving, static or worsening?",
+    "Has there been a biphasic 'double-sickening' course (initial improvement then relapse)?",
+    "Any red flags: periorbital swelling, visual change, severe headache, neck stiffness?",
+    "Any facial/dental pain localisation, and is the pain unilateral?"
+  ],
+  "expectedInvestigations": [
+    "Clinical diagnosis — no routine investigations needed",
+    "CT sinuses only if suspected complication or recurrent/chronic disease",
+    "Consider ENT referral if complications or treatment failure"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "nasalCongestion": true,
+    "coryza": true,
+    "facialPain": true,
+    "unilateralFacialPain": true,
+    "purulentNasalDischarge": true,
+    "headache": true,
+    "soreThroat": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "SINUSITIS",
+    "acceptableIds": [
+      "SINUSITIS"
+    ],
+    "differentialIds": [
+      "URTI",
+      "PHARYNGITIS",
+      "ACUTE_BRONCHITIS"
+    ],
+    "investigations": [
+      "Clinical diagnosis without routine imaging or microbiology",
+      "CT sinuses reserved for suspected complications or chronic/recurrent disease"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return SINUSITIS as the top diagnosis",
+    "Must not recommend immediate antibiotics for an early (<10 day), mild, systemically well presentation",
+    "Must not order routine sinus imaging or sinus culture for uncomplicated disease",
+    "If an antibiotic is indicated, first-line empiric choice must be amoxicillin-clavulanate (not a fluoroquinolone)",
+    "Must flag orbital/intracranial red flags as escalation triggers"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

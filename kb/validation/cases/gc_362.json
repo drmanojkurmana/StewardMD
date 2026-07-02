@@ -1,0 +1,111 @@
+{
+  "id": "gc_362",
+  "specialty": "Neurology / Vascular",
+  "condition": "Subarachnoid hemorrhage",
+  "age": 63,
+  "sex": "F",
+  "presentingComplaint": "Two days of a persistent, unusual headache with a brief blackout at onset; now more drowsy and confused.",
+  "history": "A 63-year-old woman presented via her GP with a 2-day history of a moderate, dull, generalised headache that she says is 'not the worst ever' but is 'different from my usual heads'. She recalls a sudden pressure at the back of her head while gardening 48 hours ago, immediately followed by a witnessed brief collapse (a few seconds of unresponsiveness) from which she recovered spontaneously. Since then she has had persistent nausea, two episodes of vomiting, neck ache and dislike of bright light. She initially attributed it to migraine and took paracetamol with little relief. Over the last several hours her daughter reports she has become intermittently muddled and slow to answer, prompting review. Background: long-standing hypertension (variably compliant with amlodipine), current smoker, no prior aneurysm or stroke. No anticoagulants. No preceding fever, rash, cough or foreign travel. This subtle, non-thunderclap picture with a late presentation is deliberately atypical for the textbook 'worst-ever headache'.",
+  "examination": "Alert but slowed, GCS 14 (E4 V4 M6) with mild disorientation to time. Mild neck stiffness on passive flexion; Kernig equivocal. No focal limb weakness, no dysphasia, pupils equal and reactive. Fundoscopy: possible early subhyaloid haemorrhage in the right eye, no frank papilloedema. No rash. Cardiovascular and respiratory examination unremarkable.",
+  "vitals": {
+    "hr": 58,
+    "bp": "182/98",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "13.2 g/dL",
+    "wbc": "12.4 x10^9/L",
+    "platelets": "268 x10^3/µL",
+    "sodium": "133 mmol/L (mild hyponatraemia)",
+    "creatinine": "0.9 mg/dL",
+    "glucose": "8.1 mmol/L",
+    "inr": "1.0",
+    "troponin": "mildly elevated (neurogenic)"
+  },
+  "imaging": "Non-contrast CT head at 48h reported by on-call team as 'no obvious acute haemorrhage' but on senior review shows subtle hyperdensity layering in the left sylvian fissure and interpeduncular cistern. Because presentation is >6 hours (indeed >24h) from ictus, CT sensitivity is reduced; CT angiography demonstrates a 6 mm left middle cerebral artery bifurcation aneurysm.",
+  "microbiology": "Not applicable. Lumbar puncture (performed as CT was equivocal and presentation delayed): uniformly blood-stained CSF that did not clear across tubes, and spectrophotometry positive for xanthochromia; opening pressure mildly raised. CSF cell count and glucose otherwise not consistent with infective meningitis.",
+  "differentialDiagnoses": [
+    "Aneurysmal subarachnoid haemorrhage (sentinel/warning leak with delayed presentation)",
+    "Migraine",
+    "Bacterial meningitis",
+    "Tension-type headache",
+    "Ischaemic stroke"
+  ],
+  "finalDiagnosis": "Aneurysmal subarachnoid haemorrhage from a left MCA aneurysm, presenting atypically (non-thunderclap sentinel headache with syncope at onset and delayed, subtle CT), confirmed by xanthochromia on LP and aneurysm on CTA.",
+  "citations": [
+    "AHA/ASA Guideline for the Management of Aneurysmal Subarachnoid Hemorrhage 2023",
+    "Neurocritical Care Society Guidelines for Critical Care Management of aSAH 2023",
+    "Harrison's Principles of Internal Medicine 22e, Cerebrovascular Diseases / Subarachnoid Hemorrhage"
+  ],
+  "stewardship": "Not applicable — non-infective vascular emergency; no empiric antibiotics indicated.",
+  "contraindications": [
+    "Avoid lumbar puncture before CT if raised ICP / mass effect suspected",
+    "Avoid nephrotoxic contrast pitfalls without hydration in CTA if renal impairment",
+    "Nimodipine is the only calcium channel blocker indicated for vasospasm prophylaxis; avoid abrupt aggressive BP lowering that risks cerebral hypoperfusion"
+  ],
+  "edgeCases": [
+    "A normal or 'clean' CT beyond 6 hours does NOT exclude SAH — LP for xanthochromia is required when suspicion persists",
+    "Sentinel (warning) bleeds can be moderate and non-thunderclap, easily misattributed to migraine or tension headache",
+    "Neurogenic ECG changes and troponin rise can mimic ACS and mislead triage",
+    "Relative bradycardia with hypertension (Cushing-type response) may be the only vital-sign clue"
+  ],
+  "expectedMaiK": "Recognise atypical SAH: urgent non-contrast CT head; if CT is negative/equivocal and onset >6h, perform LP for xanthochromia; on confirmation, start nimodipine, control BP, and refer emergently to neurosurgery/interventional neuroradiology for aneurysm CTA and securing.",
+  "expectedNextQuestions": [
+    "Exact mode of onset — was there an instantaneous 'thunderclap' component or peak within seconds?",
+    "Any transient loss of consciousness, seizure or focal deficit at ictus?",
+    "Prior similar sentinel headaches in preceding days/weeks?",
+    "Family history of aneurysm, polycystic kidney disease or connective tissue disorder?",
+    "Anticoagulant/antiplatelet use and recent cocaine/sympathomimetic exposure?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT head (urgent)",
+    "Lumbar puncture with CSF spectrophotometry for xanthochromia if CT negative/equivocal and >6h",
+    "CT angiography of intracranial vessels (aneurysm localisation)",
+    "Baseline bloods including sodium, coagulation, ECG and troponin"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "headache": true,
+    "syncope": true,
+    "nauseaVomiting": true,
+    "neckStiffness": true,
+    "photophobia": true,
+    "alteredSensorium": true,
+    "hypertensionHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "sah",
+    "acceptableIds": [
+      "sah"
+    ],
+    "differentialIds": [
+      "migraine",
+      "MENINGITIS",
+      "tension_ha",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "ct_head",
+      "lumbar_puncture_xanthochromia",
+      "ct_angiography",
+      "ecg"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank sah as the top diagnosis despite absent thunderclapHeadache finding",
+    "Engine must recommend LP/xanthochromia when CT is negative and onset >6h",
+    "Engine must NOT recommend empiric antibiotics (non-infective)",
+    "Bacterial meningitis and migraine may appear as differentials but must not outrank sah"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "id": "gc_264",
+  "specialty": "Gastrointestinal",
+  "condition": "Enteric Fever (Typhoid)",
+  "age": 24,
+  "sex": "M",
+  "presentingComplaint": "Six days of low-grade fever, dull frontal headache and malaise, still working and eating.",
+  "history": "Previously well engineering student living in a peri-urban part of Pune. For the past 6 days he has had a daily fever that starts each afternoon and climbs a little higher each day (37.8°C rising to 38.7°C), with a persistent dull frontal headache, marked lethargy and poor appetite. He describes vague central abdominal discomfort and mild constipation rather than diarrhoea. No rigors, no localising urinary, respiratory or joint symptoms, no bleeding. He frequently eats from roadside food and cold cut-fruit stalls and drinks unfiltered water at the hostel. No travel to a hilly/scrub area, no known mosquito-heavy exposure, no sick contacts. Not immunocompromised, no comorbidities, no recent antibiotics. He self-medicated with paracetamol with only transient relief and presents early because the fever will not settle.",
+  "examination": "Alert, oriented and not toxic-looking; comfortable at rest. Flushed but well perfused. Coated tongue. Chest clear, no added heart sounds. Abdomen soft with mild diffuse discomfort on deep palpation, no guarding; spleen tip just palpable, no hepatomegaly. No rash, no eschar, no lymphadenopathy, no neck stiffness. Notably the pulse is only 68/min despite a temperature of 38.6°C (relative bradycardia).",
+  "vitals": {
+    "hr": 68,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 38.6,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": 13.6,
+    "wbc": "3.9 (leukopenia, no left shift)",
+    "platelets": 168,
+    "alt": 78,
+    "ast": 71,
+    "bilirubin": 0.9,
+    "crp": "62 mg/L",
+    "creatinine": 0.9,
+    "malariaAntigenAndSmear": "negative x1",
+    "dengueNS1": "negative"
+  },
+  "imaging": "Abdominal ultrasound: mild splenomegaly (12.6 cm), no focal liver lesion, no gallbladder wall thickening, no free fluid.",
+  "microbiology": "Two sets of blood cultures drawn before antibiotics; preliminary growth of Gram-negative bacilli at 36h, later confirmed as Salmonella enterica serovar Typhi. Widal single-titre sent but regarded as non-diagnostic. Stool culture pending.",
+  "differentialDiagnoses": [
+    "Enteric fever (typhoid)",
+    "Malaria",
+    "Dengue fever",
+    "Scrub typhus",
+    "Acute gastroenteritis / viral febrile illness"
+  ],
+  "finalDiagnosis": "Enteric fever (typhoid) — early, uncomplicated (week 1)",
+  "citations": [
+    "WHO — Typhoid fever guidance (2018)",
+    "IDSA — Salmonella / Enteric Fever management",
+    "Harrison's Principles of Internal Medicine, 22e — Typhoid (Enteric) Fever"
+  ],
+  "stewardship": "Endemic South Asian setting with high fluoroquinolone resistance and circulating XDR S. Typhi; empiric therapy should NOT be a fluoroquinolone. For an early, uncomplicated, hemodynamically stable patient with adequate oral intake, oral azithromycin is guideline-concordant first-line; ceftriaxone is the parenteral option if oral therapy is not tolerated or complications emerge. De-escalate to a susceptible oral agent guided by blood-culture sensitivities. Avoid empiric fluoroquinolones.",
+  "contraindications": [
+    "Avoid empiric fluoroquinolones (high MDR/XDR and DCS resistance in South Asian S. Typhi)",
+    "Avoid NSAIDs given febrile GI illness and possible platelet decline"
+  ],
+  "edgeCases": [
+    "Relative bradycardia and leukopenia are subtle early clues that can be missed in a well-appearing patient",
+    "A single Widal titre is unreliable; do not treat or exclude on Widal alone",
+    "Watch for week 2-3 complications (intestinal perforation, GI bleed) even after starting antibiotics",
+    "Overlap with malaria/dengue in endemic settings mandates concurrent smear/NS1 testing"
+  ],
+  "expectedMaiK": "Early, uncomplicated enteric fever in an endemic setting: subacute stepladder fever with relative bradycardia, leukopenia and food/water exposure; confirm with blood culture and treat with XDR-aware empiric therapy (oral azithromycin), avoiding fluoroquinolones.",
+  "expectedNextQuestions": [
+    "Exact fever pattern and duration, and any prior similar episodes",
+    "Detailed food/water and travel exposure history",
+    "Any diarrhoea vs constipation, abdominal pain progression, or GI bleeding",
+    "Prior antibiotic use and typhoid vaccination status"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures (two sets before antibiotics)",
+    "Malaria rapid antigen + thick/thin smear",
+    "Dengue NS1/serology",
+    "CBC with differential, LFTs, CRP",
+    "Stool culture"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "stepladderFever": true,
+    "relativeBradycardia": true,
+    "prolongedFever": true,
+    "headache": true,
+    "abdominalDiscomfort": true,
+    "constipationOrDiarrhea": true,
+    "contaminatedFoodWaterExposure": true,
+    "splenomegaly": true,
+    "myalgiaArthralgia": true
+  },
+  "expected": {
+    "diagnosis": "ENTERIC_FEVER",
+    "acceptableIds": [
+      "ENTERIC_FEVER"
+    ],
+    "differentialIds": [
+      "MALARIA",
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "GASTROENTERITIS"
+    ],
+    "investigations": [
+      "Blood cultures (two sets before antibiotics)",
+      "Malaria smear/antigen",
+      "Dengue NS1/serology",
+      "CBC, LFTs, CRP",
+      "Stool culture"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Azithromycin",
+        "Ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be ENTERIC_FEVER",
+    "Differential must include MALARIA and DENGUE",
+    "Empiric plan must avoid fluoroquinolones",
+    "Empiric plan should include azithromycin (or ceftriaxone if parenteral needed)",
+    "Blood culture must be recommended before antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

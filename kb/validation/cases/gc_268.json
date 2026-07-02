@@ -1,0 +1,124 @@
+{
+  "id": "gc_268",
+  "specialty": "Respiratory",
+  "condition": "Hospital Acquired Pneumonia",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Day-6 inpatient with new fever, worsening breathlessness and increasing oxygen requirement, on a background of decompensated heart failure.",
+  "history": "Admitted 6 days ago through the emergency department with acute decompensated heart failure (ischaemic cardiomyopathy, LVEF 30%) precipitated by rapid atrial fibrillation. He was diuresed with IV furosemide with good early response — weight fell 3.2 kg, orthopnoea and leg oedema improved, and oxygen was weaned from 6 L to 2 L by day 3. From the morning of day 5 he became newly febrile, more breathless despite ongoing net-negative fluid balance, and began producing yellow-green sputum, which is a change from his baseline. Nursing staff note thicker, purulent secretions and he needed oxygen escalated back up to 4 L then 6 L. He has type 2 diabetes, CKD stage 3, and had a 5-day course of co-amoxiclav for a chest infection 7 weeks ago. No recent travel. The confounding question on the ward round was whether this simply represents heart-failure decompensation / flash pulmonary oedema rather than a new infection.",
+  "examination": "Elderly man, mildly confused from baseline, using accessory muscles. Bilateral basal crepitations (long-standing with his heart failure) but NEW coarse bronchial crepitations and increased vocal resonance at the right base. JVP raised at 4 cm (down from admission), trace bilateral ankle oedema, no new gallop. Chest otherwise as before. No calf swelling.",
+  "vitals": {
+    "hr": 104,
+    "bp": "126/72",
+    "rr": 28,
+    "temp": 38.7,
+    "spo2": 89
+  },
+  "labs": {
+    "wbc": "16.8 x10^9/L",
+    "neutrophils": "14.1 x10^9/L",
+    "crp": "188 mg/L",
+    "procalcitonin": "2.4 ng/mL",
+    "creatinine": "1.9 mg/dL (baseline 1.5)",
+    "urea": "14.2 mmol/L",
+    "sodium": "137 mmol/L",
+    "potassium": "4.4 mmol/L",
+    "hemoglobin": "11.2 g/dL",
+    "platelets": "402 x10^3/uL",
+    "lactate": "1.8 mmol/L",
+    "ntprobnp": "3100 pg/mL (down from 8400 on admission)",
+    "abg": "pH 7.42, PaO2 8.1 kPa on 6L, PaCO2 4.6 kPa"
+  },
+  "imaging": "Portable CXR: new dense right lower/mid-zone consolidation with air bronchograms, distinct from the pre-existing upper-zone vascular redistribution and small pleural effusions seen on admission; cardiomegaly stable, no new interstitial oedema pattern to explain the focal opacity. Lung ultrasound: focal subpleural consolidation with dynamic air bronchograms at right base (not a bilateral B-line oedema pattern).",
+  "microbiology": "Blood cultures x2 sent. Sputum Gram stain: numerous polymorphs with Gram-negative bacilli; culture pending. Nasopharyngeal respiratory viral PCR negative. Legionella and pneumococcal urinary antigens sent.",
+  "differentialDiagnoses": [
+    "Hospital-acquired pneumonia (right basal)",
+    "Decompensated heart failure / flash pulmonary oedema",
+    "Aspiration pneumonia",
+    "Pulmonary embolism"
+  ],
+  "finalDiagnosis": "Hospital-acquired pneumonia (non-ventilator) developing on day 6 of admission, superimposed on treated decompensated heart failure",
+  "citations": [
+    "IDSA/ATS — Management of Hospital-Acquired and Ventilator-Associated Pneumonia — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Pneumonia"
+  ],
+  "stewardship": "Empiric broad-spectrum therapy for non-ventilator HAP with a single anti-pseudomonal beta-lactam (piperacillin-tazobactam), covering P. aeruginosa and Gram-negative bacilli given onset >48h, recent antibiotic exposure and diabetes/CKD; add MRSA cover only if local MRSA prevalence >20% or prior MRSA. De-escalate on culture and clinical response; reassess at 48-72h and treat for 7 days if responding.",
+  "contraindications": [
+    "Avoid nephrotoxic combinations where possible given CKD stage 3 and rising creatinine — dose-adjust piperacillin-tazobactam and monitor renal function",
+    "Avoid empiric fluid boluses / over-hydration given underlying heart failure",
+    "Caution with aminoglycosides given renal impairment"
+  ],
+  "edgeCases": [
+    "Falsely attributing the new focal consolidation to heart-failure decompensation and withholding antibiotics",
+    "Bilateral basal crackles from chronic heart failure masking the new focal HAP",
+    "Elevated NT-proBNP being over-interpreted as pure cardiac decompensation despite it falling from admission",
+    "Distinguishing HAP from early aspiration given confusion and reduced mobility"
+  ],
+  "expectedMaiK": "Recognise that a new focal consolidation, purulent secretions, fever, leukocytosis and raised procalcitonin arising >48h after admission indicate hospital-acquired pneumonia rather than heart-failure decompensation alone, and start empiric anti-pseudomonal cover.",
+  "expectedNextQuestions": [
+    "Exact day of admission and timing of symptom onset relative to it (>48h)?",
+    "Change in sputum character/volume from baseline?",
+    "Prior antibiotic exposure and any prior resistant organisms (MDR risk)?",
+    "Local unit antibiogram / MRSA and Pseudomonas prevalence?",
+    "Aspiration risk — dysphagia, reduced consciousness, witnessed aspiration?"
+  ],
+  "expectedInvestigations": [
+    "Lower respiratory tract sample for Gram stain and culture (sputum/tracheal aspirate)",
+    "Blood cultures x2",
+    "Repeat/portable chest radiograph",
+    "Full blood count, CRP/procalcitonin, renal function and electrolytes",
+    "Legionella and pneumococcal urinary antigens; respiratory viral PCR"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "hospitalDay48": true,
+    "coughRadio": true,
+    "purulentSputum": true,
+    "purulentSecretions": true,
+    "consolidation": true,
+    "crepitations": true,
+    "worseningOxygenation": true,
+    "tachypnea": true,
+    "increasedDyspnea": true,
+    "knownHeartFailure": true,
+    "priorAntibiotics": true,
+    "hospitalizationLast90Days": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "HAP",
+    "acceptableIds": [
+      "HAP"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "ASPIRATION_PNEUMONIA",
+      "pe"
+    ],
+    "investigations": [
+      "lower respiratory tract culture",
+      "blood cultures",
+      "chest radiograph",
+      "procalcitonin",
+      "urinary antigens"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == HAP",
+    "hospitalDay48 == true",
+    "consolidation == true differentiates HAP from pure heart-failure decompensation",
+    "stewardship.antibiotics includes an anti-pseudomonal beta-lactam",
+    "heart_failure appears as a differential but is not the final diagnosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
