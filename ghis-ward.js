@@ -170,22 +170,35 @@
         // here: mapping GHIS test names to typed analytes must be clinician-verified
         // against the hospital's live schema before any value enters a clinical view.
         loadIntoICU: function(patientId) {
-          try {
-            if (!window.ICU || !ICU.ingestPatient) { alert('ICU dashboard not loaded.'); return; }
-            var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
-            for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
-            var dem = { hospital: 'GHIS Ward', status: 'ward' };
-            if (p) {
-              if (p.patientFirstName) dem.name = p.patientFirstName;
-              if (p.gender) dem.sex = p.gender;
-              if (p.bedName) dem.bed = p.bedName;
-              if (p.deptDescription) dem.diagnosis = p.deptDescription;
-              var a = parseInt(p.dob, 10); if (!isNaN(a) && a > 0 && a < 130) dem.age = a;
-            }
-            ICU.ingestPatient(dem);
-            if (typeof window.openGHIS === 'function') { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); }
+          if (!window.ICU || !ICU.ingestFromWard) { alert('ICU dashboard not loaded.'); return; }
+          var p = null, list = (typeof _patients !== 'undefined' && _patients) || [];
+          for (var i = 0; i < list.length; i++) { if (String(list[i].patientId) === String(patientId)) { p = list[i]; break; } }
+          var dem = { hospital: 'GHIS Ward', status: 'ward' };
+          if (p) {
+            if (p.patientFirstName) dem.name = p.patientFirstName;
+            if (p.gender) dem.sex = p.gender;
+            if (p.bedName) dem.bed = p.bedName;
+            if (p.deptDescription) dem.diagnosis = p.deptDescription;
+            var a = parseInt(p.dob, 10); if (!isNaN(a) && a > 0 && a < 130) dem.age = a;
+          }
+          var pnl = document.getElementById('ghisPanel');
+          var body = pnl ? pnl.querySelector('.ghis-body') : null;
+          if (body) body.innerHTML = '<div class="ghis-loading">Syncing labs into ICU dashboard…</div>';
+          GHIS._patientId = patientId;
+          // Fetch recent lab panels and flatten to test/result/ref rows for ICU's safe mapper.
+          var labs = [];
+          authFetch('/lab?patientId=' + encodeURIComponent(patientId)).then(function (j) {
+            var orders = ((j && j.orders) || []).slice(0, 25);
+            return Promise.all(orders.map(function (o) {
+              return authFetch('/lab-detail?renderId=' + encodeURIComponent(o.renderId) + '&episodeId=' + encodeURIComponent(o.episodeId) + '&patientId=' + encodeURIComponent(patientId))
+                .then(function (d) { (d && d.tests || []).forEach(function (t) { labs.push({ test: t.test, result: t.result, units: t.units, low: t.low, high: t.high }); }); }).catch(function () {});
+            }));
+          }).catch(function () {}).then(function () {
+            var res = ICU.ingestFromWard({ patient: dem, patientId: patientId, source: 'Ward Sync', labs: labs });
+            try { if (pnl) pnl.classList.remove('open'); } catch (e) {}
             ICU.open();
-          } catch (e) { try { alert('Could not load into ICU: ' + e.message); } catch (x) {} }
+            try { if (window.toast) toast('ICU synced — ' + (res && res.mappedLabs || 0) + ' labs from Ward Sync' + (res && res.conflicts ? ' · ' + res.conflicts + ' to review' : '')); } catch (e) {}
+          }).catch(function (e) { if (body) body.innerHTML = '<div class="ghis-lab-empty">Could not sync — is the proxy running?</div>'; });
         },
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode
         // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.

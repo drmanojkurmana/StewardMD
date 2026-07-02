@@ -42,6 +42,9 @@
     goals: [],                  // [string]
     rounds: {},                 // checklist state (Phase 3)
     alerts: [],                 // DERIVED — written by recompute()
+    src: {},                    // per-field provenance: { <field>: { source, ts } } source ∈ Ward Sync|Imported report|Manual
+    wardSync: { connected: false, lastTs: null, newUpdate: false, patientId: null },
+    conflicts: [],              // [{ key, label, ward, manual, wardTs, manualTs }] — clinician resolves
     meta: { updated: null }
   };
   var LS_KEY = "stewardmd_icu_state";
@@ -155,6 +158,72 @@
   }
   function ingestPatient(o) { o = o || {}; Object.keys(o).forEach(function (k) { if (k in STATE.patient) STATE.patient[k] = o[k]; }); }
 
+  /* ---- Ward Sync / imported-report → ICU lab mapping (gold124) ------------
+   * Maps free-text HIS/report test names → ICU analyte keys by keyword, with
+   * EXCLUSION guards to prevent dangerous mis-files (validated against the live
+   * GHIS test vocabulary): "Alkaline Phosphatase" must NOT become phosphate;
+   * "Blood Urea Nitrogen (BUN)" is NOT urea (different scale); "Mean corpuscular
+   * haemoglobin" is NOT haemoglobin; direct/indirect bilirubin is NOT total. Only
+   * numeric results are mapped; anything unmatched is left for clinician entry. */
+  var WARD_LAB_MAP = [
+    { key: "na", kw: /\bsodium\b|\bserum na\b|(^|[^a-z])na([^a-z]|$)/i, ex: /urin|spot|fractional|excretion/i },
+    { key: "k", kw: /\bpotassium\b|\bserum k\b/i, ex: /urin/i },
+    { key: "cl", kw: /\bchloride\b/i, ex: /urin/i },
+    { key: "hco3", kw: /bicarbonate|\bhco3\b|\btco2\b|carbon dioxide|(^|[^a-z])co2([^a-z]|$)/i, ex: /partial|pco2|paco2/i },
+    { key: "ca", kw: /\bcalcium\b/i, ex: /urin|ioni|24/i },   // ionised calcium tracked separately elsewhere
+    { key: "mg", kw: /magnesium/i, ex: /urin/i },
+    { key: "po4", kw: /phosphate|phosphorus|\bpo4\b/i, ex: /alkaline|phosphatase|creatine/i }, // exclude Alk Phosphatase / CPK
+    { key: "glu", kw: /glucose|blood sugar|\brbs\b|\bcbg\b/i, ex: /urin|csf|tolerance|dipsi/i },
+    { key: "creat", kw: /creatinine/i, ex: /urin|clearance|ratio/i },
+    { key: "urea", kw: /\burea\b/i, ex: /nitrogen|\bbun\b|urin/i },   // BUN ≠ urea (scale differs) — excluded
+    { key: "alb", kw: /\balbumin\b/i, ex: /globulin|ratio|urin|micro/i },
+    { key: "wbc", kw: /\bwbc\b|leucocyte|leukocyte|total leu|\btlc\b/i, ex: /differential|urin|csf/i },
+    { key: "hb", kw: /h[ae]moglobin/i, ex: /corpuscular|\bmch\b|\bmchc\b|a1c|glycated|equivalent|reticulocyte/i },
+    { key: "plt", kw: /platelet/i, ex: /immature|fraction/i },
+    { key: "inr", kw: /\binr\b|prothrombin|\bpt\b\/inr/i, ex: /aptt|partial/i },
+    { key: "bili", kw: /bilirubin/i, ex: /direct|indirect|conjugat|neonat/i },   // total only
+    { key: "ast", kw: /\bast\b|sgot/i, ex: null },
+    { key: "alt", kw: /\balt\b|sgpt/i, ex: null },
+    { key: "crp", kw: /c-reactive|\bcrp\b/i, ex: /procalcitonin/i },
+    { key: "lactate", kw: /\blactate\b/i, ex: /dehydrogenase|\bldh\b|csf/i }
+  ];
+  function mapWardLab(name) {
+    var n = String(name || "").toLowerCase();
+    for (var i = 0; i < WARD_LAB_MAP.length; i++) {
+      var m = WARD_LAB_MAP[i];
+      if (m.kw.test(n) && !(m.ex && m.ex.test(n))) return m.key;
+    }
+    return null;
+  }
+  // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
+  // overwrites a clinician's Manual value — records a conflict for the clinician to resolve.
+  // bundle: { patient?, source?, ts?, labs:[{test,result,units,low,high}], vitals?, abg? }
+  function ingestFromWard(bundle) {
+    bundle = bundle || {};
+    var source = bundle.source || "Ward Sync", ts = bundle.ts || nowTs(), applied = {}, conflicts = [], hadNew = false;
+    if (bundle.patient) ingestPatient(bundle.patient);
+    var labVals = {};
+    (bundle.labs || []).forEach(function (t) {
+      var key = mapWardLab(t.test); if (!key) return;
+      var v = parseFloat(t.result); if (isNaN(v)) return;
+      var prevSrc = STATE.src[key];
+      if (prevSrc && prevSrc.source === "Manual" && STATE.labs.recent[key] != null && Number(STATE.labs.recent[key]) !== v) {
+        conflicts.push({ key: key, label: t.test, ward: v, manual: STATE.labs.recent[key], wardTs: ts, manualTs: prevSrc.ts, source: source });
+        return;  // preserve manual override; surface both for the clinician
+      }
+      if (STATE.labs.recent[key] == null || Number(STATE.labs.recent[key]) !== v) hadNew = true;
+      labVals[key] = v; applied[key] = { source: source, ts: ts };
+    });
+    if (Object.keys(labVals).length) ingestLabs(labVals);
+    Object.keys(applied).forEach(function (k) { STATE.src[k] = applied[k]; });
+    if (bundle.vitals && Object.keys(bundle.vitals).length) { ingestMonitor(bundle.vitals); ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate"].forEach(function (k) { if (bundle.vitals[k] != null) STATE.src[k] = { source: source, ts: ts }; }); }
+    if (bundle.abg && Object.keys(bundle.abg).length) { Object.keys(bundle.abg).forEach(function (k) { STATE.abg[k] = bundle.abg[k]; }); STATE.abg.ts = ts; STATE.src.abg = { source: source, ts: ts }; }
+    // merge (don't clobber) any newly-detected conflicts
+    if (conflicts.length) { STATE.conflicts = (STATE.conflicts || []).filter(function (c) { return !conflicts.some(function (n) { return n.key === c.key; }); }).concat(conflicts); }
+    STATE.wardSync = { connected: true, lastTs: ts, patientId: bundle.patientId || (STATE.wardSync && STATE.wardSync.patientId) || null, newUpdate: hadNew && !!(STATE.wardSync && STATE.wardSync.lastTs) };
+    return { applied: Object.keys(applied), conflicts: conflicts.length, mappedLabs: Object.keys(labVals).length };
+  }
+
   /* ---------------------------------------------------------------- styles */
   function injectCSS() {
     if (document.getElementById("icu-css")) return;
@@ -191,6 +260,11 @@
       // live status grid
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
+      '.icu-ward{font:700 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px}.icu-ward.on{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}' +
+      '.icu-ward-new{font:700 12px var(--font);color:#1d4ed8;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:9px 12px;margin:0 0 8px;cursor:pointer}body.dark .icu-ward-new{background:#0a1a33;border-color:#1e3a8a;color:#93c5fd}' +
+      '.icu-elyte-alerts{font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}' +
+      '.icu-elyte-pill{font:700 11px var(--font);border:1.5px solid var(--muted);border-radius:999px;padding:2px 9px}' +
+      '.icu-src{font:600 11px var(--font);color:var(--muted);margin:8px 2px 0}' +
       '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;box-shadow:var(--sh);min-width:0}' +
       '.icu-vc .vl{font:700 9.5px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
@@ -577,6 +651,10 @@
           '<button class="icu-btn" data-icu-act="edit:labs">✎ Enter electrolytes</button></div>';
       }
       var grid = '<div class="icu-vitals">' + Object.keys(map).map(function (k) { return vitalCard(labels[k], map[k].v, "", map[k].s); }).join("") + "</div>";
+      // provenance line — where these electrolyte values came from + freshness
+      var srcs = {}; keys.forEach(function (k) { var s = (_raw.src || {})[k]; if (s && L[k] != null) srcs[s.source] = Math.max(srcs[s.source] || 0, s.ts || 0); });
+      var srcLine = Object.keys(srcs).length ? '<div class="icu-src">' + Object.keys(srcs).map(function (s) { return "📎 " + esc(s) + " · " + fmtAgo(srcs[s]); }).join("  ·  ") + "</div>" : "";
+      grid += srcLine;
       // Correction guidance rendered INLINE (no redirect) — reuses the validated
       // Electrolyte Engine analyzers via ELYTE.analyze(); "si" = the mmol/L (albumin g/L)
       // units the Labs form collects. Each analyte is an expandable card.
@@ -714,6 +792,48 @@
       '<span class="vs-k">HR</span> ' + v(lv.hr) + '<span class="vs-k">MAP</span> ' + v(mp) +
       '<span class="vs-k">SpO₂</span> ' + v(lv.spo2, "%") + '<span class="vs-k">K⁺</span> ' + v(L.k);
   }
+  // human "x min ago" for source freshness (no Date.now in template — uses nowTs)
+  function fmtAgo(ts) {
+    if (!ts) return "";
+    var s = Math.max(0, Math.round((nowTs() - ts) / 1000));
+    if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + " min ago";
+    if (s < 86400) return Math.floor(s / 3600) + " h ago"; return Math.floor(s / 86400) + " d ago";
+  }
+  // Ward Sync status — non-technical, never shows raw API errors.
+  function renderWardBanner() {
+    var w = _raw.wardSync || {}; var loggedIn = false;
+    try { loggedIn = !!localStorage.getItem("ghis_token"); } catch (e) {}
+    var s;
+    if (w.connected && w.lastTs) s = { c: "ok", t: "🟢 Ward Sync connected · synced " + fmtAgo(w.lastTs) };
+    else if (loggedIn) s = { c: "muted", t: "Ward Sync · no ward data for this patient" };
+    else s = { c: "muted", t: "Sign in to Ward Sync to auto-fill this patient", act: "wardsync" };
+    return '<div class="icu-ward' + (s.c === "ok" ? " on" : "") + '"' + (s.act ? ' data-icu-act="' + s.act + '" style="cursor:pointer"' : "") + '>' + s.t + "</div>" +
+      (w.newUpdate ? '<div class="icu-ward-new" data-icu-act="dismissupdate">🔵 New laboratory update detected — widgets refreshed. Tap to dismiss.</div>' : "");
+  }
+  // Ward-vs-manual conflicts (clinician resolves; never auto-overwritten).
+  function renderConflicts() {
+    var cs = _raw.conflicts || []; if (!cs.length) return "";
+    return '<div class="icu-sec-lbl">⚠️ Value conflicts — your choice</div>' + cs.map(function (c) {
+      return '<div class="icu-card" style="border-left:3px solid var(--warn)"><b>' + esc(c.label) + '</b>' +
+        '<div class="icu-row"><span>Ward Sync (' + fmtAgo(c.wardTs) + ')</span><b>' + esc(c.ward) + "</b></div>" +
+        '<div class="icu-row"><span>Your manual entry (' + fmtAgo(c.manualTs) + ')</span><b>' + esc(c.manual) + "</b></div>" +
+        '<div style="display:flex;gap:8px;margin-top:8px"><button class="icu-btn" data-icu-act="conflict:' + esc(c.key) + '|ward">Use Ward value</button>' +
+        '<button class="icu-btn" data-icu-act="conflict:' + esc(c.key) + '|manual">Keep mine</button></div></div>';
+    }).join("");
+  }
+  // Compact electrolyte/renal alert summary from the deterministic ELYTE engine.
+  function renderElyteAlerts() {
+    var L = _raw.labs.recent || {}, p = _raw.patient || {}, res = [];
+    try { if (window.ELYTE && ELYTE.analyze) res = ELYTE.analyze(L, { weight: p.weightKg, age: p.age, sex: (String(p.sex).toLowerCase() === "f" ? "f" : "m") }, "si"); } catch (e) {}
+    var ab = res.filter(function (r) { return r.level && r.level !== "ok"; });
+    if (!ab.length) return "";
+    var COLOR = { crit: "var(--danger)", red: "var(--danger)", amber: "var(--warn)" };
+    return '<div class="icu-elyte-alerts">⚠️ Electrolyte alerts: ' + ab.map(function (r) {
+      // name + severity word only — the grid below shows the numeric value + units
+      // (r.value from ELYTE is in its own display units, so we don't repeat it here).
+      return '<span class="icu-elyte-pill" style="border-color:' + (COLOR[r.level] || "var(--muted)") + ';color:' + (COLOR[r.level] || "var(--ink)") + '">' + esc(r.name) + (r.severity ? " · " + esc(r.severity) : "") + "</span>";
+    }).join("") + '</div>';
+  }
   function renderBody() {
     var tab = "", isOv = _active === "overview";
     try { tab = RENDER[_active] ? RENDER[_active]() : ""; } catch (e) { tab = '<div class="icu-card"><p>Tab error.</p></div>'; }
@@ -721,7 +841,11 @@
     // so the tab's own content is immediately visible (was buried below the grid).
     var status = isOv ? renderLiveStatus()
       : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>';
+    var elyteAlerts = (isOv || _active === "lytes") ? renderElyteAlerts() : "";
     return '<div class="icu-scroll"><div class="icu-wrap">' +
+      renderWardBanner() +
+      renderConflicts() +
+      elyteAlerts +
       status +
       '<button class="icu-adddata" data-icu-act="adddata">＋ Enter / update patient data</button>' +
       (isOv ? renderAIImport() : "") +
@@ -787,6 +911,12 @@
     else if (F.custom === "infusion") { if (obj.drug) STATE.infusions.push({ drug: obj.drug, dose: num(obj.dose), unit: obj.unit, rateMlHr: num(obj.rateMlHr), indication: obj.indication }); }
     else if (domain === "patient") { ingestPatient(obj); }
     else if (F.ingest) { F.ingest(obj); }
+    // tag manually-entered fields as a Manual source so Ward Sync never silently
+    // overwrites a clinician override (it records a conflict instead).
+    if (F.custom !== "goals" && F.custom !== "infusion" && domain !== "patient") {
+      var mts = nowTs();
+      Object.keys(obj).forEach(function (k) { if (obj[k] != null && obj[k] !== "") STATE.src[k] = { source: "Manual", ts: mts }; });
+    }
     closeForm();
   }
 
@@ -1028,6 +1158,9 @@
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
+      case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
+      case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
+      case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
       case "savept": savePatient(); break;
       case "patients": openRoster(); break;
       case "loadpt": loadPatient(arg); break;
@@ -1072,6 +1205,15 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
+    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab,
+    wardStatus: function () { return STATE.wardSync || {}; },
+    clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
+    resolveConflict: function (key, choice) { // choice: "ward" | "manual"
+      var c = (STATE.conflicts || []).filter(function (x) { return x.key === key; })[0]; if (!c) return;
+      if (choice === "ward") { var o = {}; o[key] = c.ward; ingestLabs(o); STATE.src[key] = { source: c.source || "Ward Sync", ts: c.wardTs }; }
+      else { STATE.src[key] = { source: "Manual", ts: c.manualTs }; }
+      STATE.conflicts = (STATE.conflicts || []).filter(function (x) { return x.key !== key; });
+    },
     // patient roster (save current / reopen previous / share / clear)
     savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient,
     shareCase: shareCase, clearFindings: clearFindings, summary: buildSummary
