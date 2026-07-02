@@ -1434,6 +1434,36 @@
     }
   }
 
+  // ---- My Cases integration (read-only summaries + guest migration) ----
+  function _summaryFrom(e) {
+    var st = e.state || {}, pt = st.pt || (st.patient) || {};
+    return { id: e.id, kind: "icu",
+      label: e.name || (st.patient && st.patient.name) || "ICU patient",
+      name: e.name || (st.patient && st.patient.name) || "",
+      age: pt.age != null ? pt.age : (st.patient && st.patient.age) || "",
+      sex: pt.sex || (st.patient && st.patient.sex) || "",
+      savedAt: e.savedAt || 0, savedAtStr: fmtWhen(e.savedAt || 0),
+      subtitle: e.dx || (st.patient && st.patient.diagnosis) || (e.bed ? "Bed " + e.bed : "") };
+  }
+  function listCasesForMyCases() {
+    // Cloud when signed in (cross-device); always fall back to the local roster.
+    return cloudList().then(function (j) {
+      if (j && j.enabled && Array.isArray(j.cases) && j.cases.length) return j.cases.map(_summaryFrom);
+      return loadRoster().map(_summaryFrom);
+    }).catch(function () { return loadRoster().map(_summaryFrom); });
+  }
+  function anonRoster() { try { var r = JSON.parse(localStorage.getItem(ROSTER_BASE + ":anon")); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
+  function countAnonCases() { return anonRoster().length; }
+  function migrateAnonCases() {
+    var list = anonRoster(); if (!list.length) return Promise.resolve(0);
+    // Re-home anon entries under the current (signed-in) owner: local roster + cloud.
+    var mine = loadRoster();
+    list.forEach(function (e) { if (!mine.some(function (m) { return m.id === e.id; })) mine.push(e); });
+    saveRoster(capTen(mine));
+    return Promise.all(list.map(function (e) { return cloudSave(e).catch(function () { return null; }); }))
+      .then(function () { try { localStorage.removeItem(ROSTER_BASE + ":anon"); } catch (e) {} return list.length; });
+  }
+
   /* ------------------------------------------------------------- controller */
   var ICU = {
     open: function () {
@@ -1467,6 +1497,7 @@
     },
     // patient roster (save current / reopen previous / share / clear)
     savePatient: savePatient, loadPatient: loadPatient, listPatients: loadRoster, deletePatient: deletePatient, newPatient: newPatient,
+    listCasesForMyCases: listCasesForMyCases, countAnonCases: countAnonCases, migrateAnonCases: migrateAnonCases,
     shareCase: shareCase, clearFindings: clearFindings, summary: buildSummary
   };
   window.ICU = ICU;
