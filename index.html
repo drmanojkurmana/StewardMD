@@ -1093,11 +1093,11 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script src="/kb/dist/kb.enrichment.js?v=gold114" defer></script>
 <script src="/kb/dist/kb.expanded.js?v=gold111" defer></script>
 <script src="/dxmgmt.js?v=gold88" defer></script>
-<script src="/reasoning.js?v=gold119" defer></script>
+<script src="/reasoning.js?v=gold121" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold117" defer></script>
 <script src="/electrolytes.js?v=gold105" defer></script>
 <script src="/caseshare.js?v=gold88" defer></script>
-<script src="/home.js?v=gold120" defer></script>
+<script src="/home.js?v=gold121" defer></script>
 <script src="/icu.js?v=gold106" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
@@ -1112,6 +1112,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   // Ward entry mounts ONLY in the sidebar (the floating FAB is hidden).
   function ghisHideFab() { if (document.getElementById("ghis-nofab")) return; var st = document.createElement("style"); st.id = "ghis-nofab"; st.textContent = ".ghis-ward-fab{display:none!important}"; document.head.appendChild(st); }
   function ghisSidebarItem() {
+    return;   // DISABLED gold121 — Ward Sync now surfaced by the home.js sidebar reorganizer (top action + Settings›Ward)
     var menu = document.getElementById("sbMenu"); if (!menu || !ghisOn()) return;
     if (menu.querySelector("[data-ghis-menu]")) return;          // already injected this open
     var b = document.createElement("button");
