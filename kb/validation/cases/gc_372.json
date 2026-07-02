@@ -1,0 +1,112 @@
+{
+  "id": "gc_372",
+  "specialty": "Rheumatology",
+  "condition": "Giant cell (temporal) arteritis",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "New right-sided headache and scalp tenderness for 12 days, with a single brief episode of blurred vision that resolved.",
+  "history": "A 71-year-old woman presents with a 12-day history of a new, dull right temporal headache unlike any she has had before. She notes tenderness when brushing her hair on that side and mild aching of the jaw when chewing tougher foods that eases with rest. She has had low-grade constitutional symptoms for about three weeks: reduced appetite, roughly 3 kg unintentional weight loss, and morning stiffness and aching across both shoulders and hips lasting over an hour. Yesterday she had a single episode of transient blurring of the right eye lasting under a minute, with full recovery. She has not had a fixed loss of vision, diplopia, tongue pain, or neurological deficit. Background: well-controlled hypertension, osteopenia. No prior visual or neurological events. This is an early, subtle presentation caught before established anterior ischaemic optic neuropathy.",
+  "examination": "Alert, comfortable, not toxic. Right superficial temporal artery is mildly tender and thickened with a reduced pulse; scalp tenderness over the temporal region. No jaw or tongue tenderness at rest. Shoulder and hip girdle movements are mildly restricted by stiffness with normal power. Fundoscopy normal bilaterally with no disc pallor or oedema; visual acuity and fields normal at review. No carotid bruit, no focal neurological deficit, temperature only mildly raised.",
+  "vitals": {
+    "hr": 78,
+    "bp": "142/84",
+    "rr": 16,
+    "temp": 37.4,
+    "spo2": 98
+  },
+  "labs": {
+    "ESR_mm_hr": 74,
+    "CRP_mg_L": 58,
+    "hemoglobin_g_dL": 11.3,
+    "platelets_10e3_uL": 468,
+    "albumin_g_dL": 3.4,
+    "ALP_U_L": 138,
+    "creatinine_mg_dL": 0.9,
+    "WBC_10e3_uL": 9.2
+  },
+  "imaging": "Temporal artery colour-Doppler ultrasound shows a non-compressible hypoechoic 'halo' around the right superficial temporal artery. No large-vessel FDG-PET performed at this stage.",
+  "microbiology": "Not applicable; blood cultures negative, sent to exclude infective mimic in an elderly patient with constitutional symptoms.",
+  "differentialDiagnoses": [
+    "Giant cell (temporal) arteritis",
+    "Polymyalgia rheumatica in isolation",
+    "Tension-type / cervicogenic headache",
+    "Amaurosis fugax from carotid TIA",
+    "Other systemic vasculitis"
+  ],
+  "finalDiagnosis": "Giant cell (temporal) arteritis (early cranial GCA with PMR overlap, threatened vision)",
+  "citations": [
+    "ACR/EULAR — Giant Cell Arteritis Classification Criteria — 2022",
+    "BSR — Diagnosis and Management of Giant Cell Arteritis — 2020",
+    "Harrison's Principles of Internal Medicine 22e — The Vasculitis Syndromes (Giant Cell Arteritis)"
+  ],
+  "stewardship": "Not applicable — non-infective large/medium-vessel granulomatous vasculitis; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Do not delay high-dose glucocorticoids awaiting temporal artery biopsy or ultrasound when GCA is suspected, especially with any visual symptoms.",
+    "Avoid low/tapering steroid doses initially if visual symptoms present — undertreatment risks irreversible blindness.",
+    "Caution with glucocorticoids given osteopenia and hypertension: start bone protection and monitor BP/glucose."
+  ],
+  "edgeCases": [
+    "ESR and CRP can occasionally be near-normal in early GCA; a normal inflammatory marker does not exclude it when clinical suspicion is high.",
+    "Transient monocular visual loss (amaurosis) is a red-flag heralding impending permanent visual loss and mandates immediate treatment.",
+    "PMR overlap present in ~40-50%; isolated PMR lacks cranial ischaemic features (headache, scalp tenderness, jaw claudication)."
+  ],
+  "expectedMaiK": "Start high-dose glucocorticoids urgently (prednisolone 40-60 mg/day; consider IV methylprednisolone given transient visual symptoms) without waiting for confirmation, and arrange same-day ophthalmology review plus temporal artery ultrasound/biopsy within the treatment window.",
+  "expectedNextQuestions": [
+    "Any jaw or tongue claudication, or scalp tenderness?",
+    "Any transient or persistent visual loss, double vision, or amaurosis?",
+    "Shoulder/hip girdle stiffness or pain (PMR features)?",
+    "Duration of the new headache and any prior similar headaches?",
+    "Constitutional symptoms — fever, weight loss, night sweats?"
+  ],
+  "expectedInvestigations": [
+    "ESR and CRP",
+    "Temporal artery colour-Doppler ultrasound (halo/compression sign)",
+    "Temporal artery biopsy",
+    "Full blood count (normochromic anaemia, thrombocytosis)",
+    "Urgent ophthalmology assessment"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "headache": true,
+    "ageOver50": true,
+    "subacuteOnset": true,
+    "visualDisturbance": true,
+    "myalgiaArthralgia": true,
+    "polyarthralgia": true,
+    "weightLoss": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "temporal_arteritis",
+    "acceptableIds": [
+      "temporal_arteritis"
+    ],
+    "differentialIds": [
+      "pmr",
+      "tension_ha",
+      "tia",
+      "vasculitis"
+    ],
+    "investigations": [
+      "ESR and CRP",
+      "Temporal artery ultrasound (halo sign)",
+      "Temporal artery biopsy",
+      "Ophthalmology review"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank temporal_arteritis as the top diagnosis.",
+    "Engine must recommend urgent high-dose glucocorticoids without waiting for biopsy.",
+    "Engine must flag transient visual disturbance as a sight-threatening red flag.",
+    "Engine must not recommend any antibiotics (non-infective).",
+    "pmr, tension_ha, tia and vasculitis are acceptable differentials but must not outrank temporal_arteritis."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

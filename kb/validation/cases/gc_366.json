@@ -1,0 +1,120 @@
+{
+  "id": "gc_366",
+  "specialty": "Toxicology / Neuro",
+  "condition": "Serotonin syndrome / NMS",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Restlessness, sweating, tremor and loose stools for one day",
+  "history": "68-year-old woman with long-standing depression (on sertraline 100 mg daily for 3 years, dose unchanged) and osteoarthritis. Two days ago her GP added tramadol 50 mg TDS for a flare of low-back pain. Within 24-36 hours she became anxious and 'jittery', with a fine tremor of the hands, intermittent sweating, mild palpitations and three episodes of loose stool. Family note she is more talkative and slightly muddled but rousable and orientated to person. No headache, neck stiffness, photophobia, rash, or preceding infective symptoms. No recent dose change of sertraline; denies extra tablets, OTC cold remedies, St John's wort, triptans or recreational drugs. This is deliberately an early/mild presentation, not the classic hyperthermic rigid crisis.",
+  "examination": "Alert, anxious, mildly diaphoretic and flushed. Fine resting tremor of the upper limbs. Neuro: hyperreflexia most marked in the lower limbs; spontaneous and easily inducible clonus at both ankles; no sustained truncal rigidity, no lead-pipe tone. Pupils mildly dilated but reactive. Mild agitation, GCS 15 (E4V5M6). No neck stiffness, Kernig negative. Chest clear, abdomen soft with active bowel sounds. Meets Hunter Serotonin Toxicity Criteria (spontaneous clonus plus agitation and diaphoresis).",
+  "vitals": {
+    "hr": 104,
+    "bp": "150/90",
+    "rr": 20,
+    "temp": 37.8,
+    "spo2": 98
+  },
+  "labs": {
+    "wbc": "9.8 x10^9/L",
+    "creatinine": "0.9 mg/dL",
+    "sodium": "139 mmol/L",
+    "potassium": "4.1 mmol/L",
+    "bicarbonate": "22 mmol/L",
+    "creatineKinase": "310 U/L (mildly elevated)",
+    "lactate": "1.9 mmol/L",
+    "ALT": "34 U/L",
+    "bilirubin": "0.7 mg/dL",
+    "inr": "1.0",
+    "TSH": "1.8 mIU/L (normal)",
+    "salicylateLevel": "not detected",
+    "capillaryGlucose": "6.2 mmol/L"
+  },
+  "imaging": "No neuroimaging required at presentation; CT head deferred given clear toxidrome, GCS 15 and no focal deficit. Would obtain CT +/- LP only if diagnosis remained uncertain or sensorium deteriorated.",
+  "microbiology": "Not indicated - non-infective toxidrome. Blood cultures not sent given absence of an infective source; sepsis screen low priority.",
+  "differentialDiagnoses": [
+    "Neuroleptic malignant syndrome (slower onset, lead-pipe rigidity, hyporeflexia, bradykinesia - not fitting here)",
+    "Thyroid storm / thyrotoxicosis (TSH normal)",
+    "Anticholinergic toxicity / drug intoxication",
+    "Salicylate toxicity (level not detected)",
+    "CNS infection - meningitis/encephalitis (no meningism, no fever spike, GCS 15)"
+  ],
+  "finalDiagnosis": "Early / mild serotonin syndrome precipitated by addition of tramadol to chronic sertraline (Hunter Criteria positive: spontaneous clonus + agitation + diaphoresis)",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e - Serotonin Syndrome / Drug Toxicity - 2022",
+    "American College of Medical Toxicology (ACMT) - Serotonin Syndrome / Serotonin Toxicity - 2023",
+    "Hunter Area Toxicology Service - Hunter Serotonin Toxicity Criteria - 2003"
+  ],
+  "stewardship": "Not applicable - non-infective toxidrome. No antibiotics indicated; management is immediate cessation of all serotonergic agents (stop tramadol and hold sertraline) plus supportive care and observation, with oral cyproheptadine if symptoms progress.",
+  "contraindications": [
+    "Do not add further serotonergic drugs (avoid pethidine, further tramadol, fentanyl, ondansetron, metoclopramide, linezolid, triptans)",
+    "Avoid physical restraints - isometric contractions worsen hyperthermia and lactic acidosis; use chemical sedation with benzodiazepines instead",
+    "Do not use dantrolene / bromocriptine (these are for NMS and are not effective in serotonin syndrome)",
+    "Antipyretics are ineffective as hyperthermia is muscular, not hypothalamic"
+  ],
+  "edgeCases": [
+    "Overlap with NMS: serotonin syndrome favours rapid onset (<24h), clonus, hyperreflexia, mydriasis and GI hyperactivity, whereas NMS is subacute with rigidity, hyporeflexia and normal pupils",
+    "Mild cases can escalate within hours to hyperthermia >38.5C, severe rigidity, rhabdomyolysis and DIC - warrants active monitoring",
+    "Tramadol + SSRI is a classic real-world precipitant that is frequently missed at the mild stage",
+    "Clonus may be masked in a patient with intercurrent neuropathy - inducible ankle clonus is the key sign"
+  ],
+  "expectedMaiK": "Recognise early serotonin toxicity from the Hunter Criteria (spontaneous/inducible clonus + agitation + diaphoresis after adding tramadol to chronic sertraline); stop ALL serotonergic agents, give supportive care and benzodiazepines, and consider oral cyproheptadine - not antibiotics or NMS-directed dantrolene.",
+  "expectedNextQuestions": [
+    "Full medication reconciliation including exact timing of the newly added drug",
+    "Any OTC, herbal (St John's wort), antiemetic, antimigraine (triptan) or recreational drug (MDMA/amphetamine) use?",
+    "Any deliberate overdose or extra doses taken?",
+    "Trend of temperature, agitation and clonus over the next few hours?"
+  ],
+  "expectedInvestigations": [
+    "Creatine kinase and renal function/electrolytes (rhabdomyolysis screen)",
+    "LFTs and coagulation/INR (screen for progression to organ dysfunction/DIC)",
+    "Venous lactate and blood gas",
+    "ECG (QT, sinus tachycardia)",
+    "TSH and salicylate/paracetamol levels to exclude mimics",
+    "CT head +/- lumbar puncture ONLY if diagnosis unclear or sensorium deteriorates"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "tachycardia": true,
+    "tachypnea": true,
+    "alteredSensorium": true,
+    "rigidity": true,
+    "drugOverdose": true,
+    "nauseaVomiting": true,
+    "diarrhea": true,
+    "palpitations": true
+  },
+  "expected": {
+    "diagnosis": "serotonin_nms",
+    "acceptableIds": [
+      "serotonin_nms"
+    ],
+    "differentialIds": [
+      "thyroid_storm",
+      "drug_intox",
+      "salicylate_tox",
+      "MENINGITIS"
+    ],
+    "investigations": [
+      "Creatine kinase and renal function",
+      "LFTs and coagulation/INR",
+      "Venous lactate and blood gas",
+      "ECG",
+      "TSH and salicylate/paracetamol levels"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['serotonin_nms']",
+    "Must NOT be classified as MENINGITIS, SEPSIS or ENCEPHALITIS despite altered sensorium and low-grade temperature",
+    "Must identify the tramadol + sertraline serotonergic drug interaction as the precipitant",
+    "Must not recommend antibiotics (non-infective toxidrome)",
+    "Management must prioritise stopping serotonergic agents + supportive care/benzodiazepines +/- cyproheptadine, not dantrolene/bromocriptine"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

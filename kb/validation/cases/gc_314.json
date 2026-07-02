@@ -1,0 +1,121 @@
+{
+  "id": "gc_314",
+  "specialty": "Hematology",
+  "condition": "Disseminated intravascular coagulation",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "Easy bruising and oozing from a venepuncture site over 2 weeks, without dramatic bleeding",
+  "history": "A 68-year-old woman referred from the anticoagulation clinic. Over the preceding 6 weeks she noticed progressive fatigue, 5 kg unintentional weight loss and vague epigastric fullness. For the last 2 weeks she developed spontaneous bruising over the forearms and thighs, gum bleeding on brushing, and prolonged oozing after a routine blood draw. Three weeks ago she was treated for a spontaneous left calf deep vein thrombosis and started on a DOAC, which was recently held because of the bruising. She denies melaena, haematuria or heavy mucosal bleeding. No fever, no recent infection, no new drugs other than the DOAC (now stopped 4 days). No prior bleeding history, normal menstrual/obstetric bleeding history. This is a subtle, sub-acute picture rather than catastrophic haemorrhage — a low-grade, compensated consumptive coagulopathy. Background: ex-smoker, mild osteoarthritis, no known liver disease or alcohol excess.",
+  "examination": "Alert, not distressed, well perfused. Scattered ecchymoses over both forearms and thighs and a few petechiae over the shins. Oozing from the antecubital venepuncture site with a small haematoma. Mild conjunctival pallor. No jaundice, no stigmata of chronic liver disease, no splenomegaly. Left calf mildly swollen and tender (resolving DVT). Vague epigastric fullness; no gross ascites. No focal neurology, no fever.",
+  "vitals": {
+    "hr": 94,
+    "bp": "116/74",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": "9.6 g/dL",
+    "platelets": "78 x10^3/uL (falling from 210 six weeks earlier)",
+    "wbc": "8.1 x10^3/uL",
+    "PT": "18.5 s (control 12)",
+    "inr": 1.6,
+    "aPTT": "41 s (prolonged)",
+    "fibrinogen": "0.9 g/L (low; had been high-normal, now falling)",
+    "D-dimer": ">20 mg/L (markedly elevated)",
+    "bloodFilm": "occasional schistocytes, thrombocytopenia, no blasts, leucoerythroblastic changes",
+    "creatinine": "0.9 mg/dL",
+    "bilirubin": "1.1 mg/dL",
+    "ALT": "34 U/L",
+    "albumin": "3.2 g/dL",
+    "LDH": "410 U/L (elevated)",
+    "ISTH_DIC_score": "6 (platelets<100=1, strong D-dimer rise=3, PT prolonged=1, fibrinogen<1.0 g/L=1) -> overt DIC"
+  },
+  "imaging": "CT abdomen: 4 cm irregular mass at the tail of pancreas with peritoneal nodularity, suspicious for adenocarcinoma; no active bleeding focus. Doppler confirms partially recanalised left popliteal DVT.",
+  "microbiology": "Blood cultures negative; no clinical or biochemical evidence of sepsis (normal WBC, afebrile, procalcitonin normal).",
+  "differentialDiagnoses": [
+    "Chronic/compensated disseminated intravascular coagulation secondary to occult malignancy (Trousseau syndrome)",
+    "Thrombotic microangiopathy (TTP/HUS)",
+    "Immune thrombocytopenia",
+    "Coagulopathy of chronic liver disease"
+  ],
+  "finalDiagnosis": "Chronic (low-grade, compensated) disseminated intravascular coagulation secondary to occult pancreatic adenocarcinoma, presenting subtly with bruising, mucosal oozing and a preceding unprovoked DVT",
+  "citations": [
+    "ISTH — Diagnosis and Scoring of Overt DIC — 2013",
+    "British Society for Haematology (BSH) — Diagnosis and Management of DIC — 2009",
+    "Harrison's Principles of Internal Medicine, 22e — Disseminated Intravascular Coagulation"
+  ],
+  "stewardship": "Not applicable — non-infective consumptive coagulopathy. No empiric antibiotics indicated. Management is treatment of the underlying malignancy plus supportive blood-product/anticoagulation strategy per bleeding vs thrombotic phenotype.",
+  "contraindications": [
+    "Avoid antifibrinolytics (tranexamic acid) as routine therapy in DIC — risk of precipitating widespread thrombosis",
+    "Avoid platelet/plasma transfusion in the absence of active bleeding or a planned procedure (treat the patient, not the number)",
+    "Full-dose therapeutic anticoagulation is hazardous while platelets are low and patient is bruising — requires haematology-guided balance given concurrent DVT"
+  ],
+  "edgeCases": [
+    "Chronic compensated DIC in malignancy can present with thrombosis (Trousseau) rather than bleeding, or with both simultaneously",
+    "A normal or high-normal fibrinogen can be misleading early because it is an acute-phase reactant; a falling trend from a high baseline is the key clue",
+    "Schistocytes plus thrombocytopenia can mimic TTP/HUS, but DIC uniquely shows consumption of clotting factors (prolonged PT/aPTT, low fibrinogen, very high D-dimer)"
+  ],
+  "expectedMaiK": "Overt DIC by ISTH criteria despite a deceptively mild clinical picture; the combination of thrombocytopenia, prolonged PT/aPTT, low/falling fibrinogen and markedly elevated D-dimer indicates consumptive coagulopathy, and a preceding unprovoked DVT plus weight loss points to an underlying occult malignancy as the trigger.",
+  "expectedNextQuestions": [
+    "Is there a trend showing falling platelets and falling fibrinogen from prior baseline values?",
+    "Any features of an underlying trigger — malignancy (weight loss, mass), sepsis, obstetric event, or trauma?",
+    "Is there active bleeding or evidence of thrombosis to determine the dominant phenotype?",
+    "Is there liver disease or drug exposure that could explain the coagulopathy instead?"
+  ],
+  "expectedInvestigations": [
+    "Serial platelet count, PT/INR, aPTT and fibrinogen (trend, not single value)",
+    "D-dimer / fibrin degradation products",
+    "Peripheral blood film for schistocytes and blasts",
+    "ISTH DIC scoring",
+    "Search for underlying cause: CT abdomen/thorax, tumour markers (CA 19-9)",
+    "ADAMTS13 activity to exclude TTP if microangiopathy dominates"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "mucocutaneousBleeding": true,
+    "bleedingManifestation": true,
+    "thrombocytopenia": true,
+    "petechialRash": true,
+    "platelets": true,
+    "inr": true,
+    "malignancy": true,
+    "weightLoss": true,
+    "legSwellingUnilateral": true
+  },
+  "expected": {
+    "diagnosis": "dic",
+    "acceptableIds": [
+      "dic"
+    ],
+    "differentialIds": [
+      "ttp_hus",
+      "itp",
+      "decomp_cirrhosis",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Serial platelets, PT/INR, aPTT, fibrinogen",
+      "D-dimer / FDP",
+      "Peripheral blood film",
+      "ISTH DIC score",
+      "CT for occult malignancy",
+      "ADAMTS13 to exclude TTP"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "expected.acceptableIds === ['dic']",
+    "DIC must rank above ttp_hus given prolonged PT/aPTT and low fibrinogen (factor consumption, not isolated microangiopathy)",
+    "No antibiotics recommended (non-infective)",
+    "Must flag underlying malignancy as the DIC trigger and recommend treating the cause",
+    "Must not recommend routine tranexamic acid or prophylactic platelet/plasma transfusion in the absence of active bleeding"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

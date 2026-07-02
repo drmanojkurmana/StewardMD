@@ -1,0 +1,121 @@
+{
+  "id": "gc_345",
+  "specialty": "Hematology / Oncology",
+  "condition": "Multiple myeloma",
+  "age": 83,
+  "sex": "F",
+  "presentingComplaint": "Progressive confusion, nausea and being 'off legs' for 3 weeks in a frail nursing-home resident",
+  "history": "An 83-year-old frail woman with baseline mild cognitive impairment, brought in by carers with 3 weeks of worsening drowsiness, poor oral intake, nausea and constipation. Over 2 months she has become increasingly fatigued, has lost ~5 kg, and had two courses of antibiotics for lower respiratory tract infections. No dramatic bone pain, though she reports vague, longstanding lower back ache attributed to 'old age'. No overt bleeding, no fevers. This is a deliberately non-classic, elderly/frail presentation dominated by hypercalcaemic delirium, renal impairment and anaemia rather than the textbook young patient with severe bone pain and pathological fracture.",
+  "examination": "Frail, dehydrated, drowsy but rousable (GCS 14), oriented to person only. Dry mucous membranes, reduced skin turgor. Pallor. No lymphadenopathy, no hepatosplenomegaly. Mild non-specific lumbar spinal tenderness without focal neurology; normal lower-limb power, tone and reflexes (no cord compression). Chest clear, abdomen soft with sluggish bowel sounds.",
+  "vitals": {
+    "hr": 96,
+    "bp": "108/64",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin_g_dl": 8.7,
+    "mcv_fl": 89,
+    "wbc_10e3_ul": 5.2,
+    "platelets_10e3_ul": 148,
+    "corrected_calcium_mmol_l": 3.12,
+    "creatinine_mg_dl": 3.4,
+    "egfr_ml_min": 14,
+    "urea_mmol_l": 21,
+    "albumin_g_dl": 2.9,
+    "total_protein_g_dl": 9.6,
+    "globulin_gap_g_dl": 6.7,
+    "serum_free_light_kappa_lambda_ratio": 68,
+    "beta2_microglobulin_mg_l": 7.8,
+    "esr_mm_hr": 118,
+    "spep": "Discrete monoclonal (M) band in gamma region, IgG kappa",
+    "urine_bence_jones": "Positive (monoclonal kappa free light chains)"
+  },
+  "imaging": "Whole-body low-dose CT: multiple lytic lesions in the calvarium, pelvis and thoracolumbar vertebrae with a wedge compression of L2; no extradural soft-tissue mass or cord compression. No sclerotic metastatic pattern.",
+  "microbiology": "Not applicable; no active infection identified. Blood and urine cultures negative.",
+  "differentialDiagnoses": [
+    "Metastatic bone malignancy (e.g., breast/lung) with hypercalcaemia",
+    "Hypercalcaemia of other cause (primary hyperparathyroidism)",
+    "Symptomatic anaemia of chronic disease/malignancy",
+    "Acute kidney injury from dehydration"
+  ],
+  "finalDiagnosis": "Multiple myeloma (IgG kappa) presenting with CRAB features — hyperCalcaemia, Renal impairment, Anaemia and lytic Bone disease — in a frail elderly patient",
+  "citations": [
+    "International Myeloma Working Group (IMWG) — Updated criteria for the diagnosis of multiple myeloma — 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Plasma Cell Disorders (Multiple Myeloma) — 2022"
+  ],
+  "stewardship": "Not applicable — non-infective condition; no empiric antibiotics indicated.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, iodinated contrast without hydration, aminoglycosides) given AKI on cast nephropathy",
+    "Avoid bisphosphonates until renal function and hydration optimised; dose-adjust for eGFR",
+    "Correct hypercalcaemia with IV isotonic saline before considering loop diuretics"
+  ],
+  "edgeCases": [
+    "Elderly hypercalcaemic delirium is easily misattributed to dementia, infection or dehydration, delaying myeloma diagnosis",
+    "Normal WBC and near-normal platelets can falsely reassure; the wide globulin gap and very high ESR are key clues",
+    "AKI may be the presenting feature via light-chain cast nephropathy even without prominent bone pain"
+  ],
+  "expectedMaiK": "Frail elderly patient with hypercalcaemia + renal impairment + normocytic anaemia + wide globulin gap and lytic lesions = multiple myeloma; confirm with SPEP/immunofixation, serum free light chains and marrow plasma cells.",
+  "expectedNextQuestions": [
+    "Any bone pain, especially back pain, or recent fractures?",
+    "History of recurrent or recent infections?",
+    "Symptoms of hypercalcaemia (thirst, polyuria, constipation, confusion)?",
+    "Any frothy urine, reduced urine output or ankle swelling?"
+  ],
+  "expectedInvestigations": [
+    "Serum protein electrophoresis with immunofixation",
+    "Serum free light chain assay (kappa/lambda ratio)",
+    "24h urine / urine immunofixation for Bence Jones protein",
+    "Corrected calcium, renal function, albumin, beta-2 microglobulin",
+    "Bone marrow aspirate and trephine biopsy",
+    "Whole-body low-dose CT or MRI skeletal survey"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "age": true,
+    "sex": true,
+    "alteredSensorium": true,
+    "weightLoss": true,
+    "renalImpairment": true,
+    "polyuriaPolydipsia": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "backPain": true,
+    "dehydration": true,
+    "immunocompromised": true
+  },
+  "expected": {
+    "diagnosis": "myeloma",
+    "acceptableIds": [
+      "myeloma"
+    ],
+    "differentialIds": [
+      "malignancy_b",
+      "hypercalcemia",
+      "anemia_sympt",
+      "aki"
+    ],
+    "investigations": [
+      "Serum protein electrophoresis with immunofixation",
+      "Serum free light chain assay",
+      "Corrected calcium and renal function",
+      "Bone marrow biopsy",
+      "Whole-body low-dose CT skeletal survey"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank 'myeloma' as the top diagnosis",
+    "Engine must recommend serum protein electrophoresis / immunofixation and serum free light chains",
+    "Engine must NOT recommend empiric antibiotics (non-infective case)",
+    "Engine should flag hypercalcaemia and renal impairment as urgent, actionable CRAB features"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

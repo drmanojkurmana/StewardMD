@@ -1,0 +1,110 @@
+{
+  "id": "gc_351",
+  "specialty": "Functional",
+  "condition": "Panic attack / anxiety",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Recurrent sudden episodes of pounding heart, chest tightness and breathlessness with intense fear, brought to the emergency department by her daughter after a third attack in a week.",
+  "history": "A 74-year-old frail widow, living alone since her husband died 4 months ago, describes discrete episodes that begin abruptly, peak within a few minutes and settle spontaneously within 15-20 minutes. During attacks she feels her heart racing, a tight band across the chest, shortness of breath, tingling in the fingers, dizziness and an overwhelming fear that she is dying. Episodes occur unpredictably, some waking her from sleep, and are increasingly triggered by anticipation of being alone; she has begun avoiding leaving the house. She has had two prior emergency attendances this year with identical symptoms; each time troponin was negative, ECG showed only sinus tachycardia, and a recent outpatient echocardiogram and thyroid function were normal. Between episodes she is entirely well and pain-free. Background: well-controlled hypertension, osteoarthritis, no chest pain on exertion, no orthopnoea or PND, no leg swelling, no weight loss, no palpitations of sustained irregular character. She takes amlodipine only and drinks no alcohol; she has cut down markedly on food and is sleeping poorly.",
+  "examination": "Anxious, tremulous elderly woman, fully alert and oriented, breathing rapidly with peripheral tingling but no cyanosis. Chest clear with equal air entry, no crepitations or wheeze. Heart sounds normal, no murmur, regular pulse. Calves soft and non-tender, no unilateral swelling. No goitre, no tremor at rest, no lid lag. Symptoms resolve fully during observation with reassurance and slowed breathing; repeat examination between episodes is unremarkable.",
+  "vitals": {
+    "hr": 110,
+    "bp": "150/88",
+    "rr": 26,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "troponin_hs": "8 ng/L (normal, unchanged on 3h repeat)",
+    "tsh": "1.8 mIU/L (normal)",
+    "hemoglobin": "12.8 g/dL",
+    "creatinine": "0.9 mg/dL",
+    "potassium": "4.1 mmol/L",
+    "glucose": "5.6 mmol/L",
+    "d_dimer": "not indicated (low pre-test probability, Wells 0)",
+    "abg": "acute respiratory alkalosis (pH 7.49, pCO2 30 mmHg) consistent with hyperventilation"
+  },
+  "imaging": "ECG: sinus tachycardia at 110/min, no ischaemic ST-T changes, no acute changes compared with prior tracings. Chest X-ray clear.",
+  "microbiology": "Not applicable.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (atypical presentation in an elderly woman)",
+    "Paroxysmal atrial fibrillation / arrhythmia",
+    "Pulmonary embolism",
+    "Hyperthyroidism / thyrotoxicosis"
+  ],
+  "finalDiagnosis": "Panic disorder with recurrent panic attacks (late-onset, precipitated by bereavement and social isolation) after exclusion of cardiac, arrhythmic and endocrine mimics.",
+  "citations": [
+    "NICE — Generalised anxiety disorder and panic disorder in adults — 2020",
+    "Harrison's Principles of Internal Medicine 22e — Panic Disorder and Anxiety Disorders"
+  ],
+  "stewardship": "Not applicable — non-infective functional presentation; no antimicrobials indicated.",
+  "contraindications": [
+    "Avoid anchoring on 'anxiety' before serial troponin and ECG comparison have excluded ACS in an elderly hypertensive woman.",
+    "Avoid long-term benzodiazepines in the frail elderly (falls, delirium, dependence); use as a very short-term bridge only if at all.",
+    "Do not miss paroxysmal arrhythmia — ambulatory rhythm monitoring warranted given palpitations."
+  ],
+  "edgeCases": [
+    "Late-onset panic disorder is uncommon and mandates a lower threshold for organic screening than in a young patient.",
+    "Recurrent attendances with reproducibly normal cardiac workup and full inter-episode wellness strongly favour panic disorder.",
+    "Acute respiratory alkalosis with paraesthesiae supports hyperventilation rather than a primary cardiopulmonary cause."
+  ],
+  "expectedMaiK": "Recurrent, abrupt, self-limiting episodes of intense fear with autonomic symptoms and full inter-episode recovery, in an elderly bereaved woman with repeatedly normal cardiac and thyroid workup, indicate panic disorder once ACS, arrhythmia and PE are excluded.",
+  "expectedNextQuestions": [
+    "Are the episodes reproducibly abrupt in onset, peaking within minutes and resolving spontaneously within 30 minutes?",
+    "Is there any exertional component, or are episodes unrelated to activity?",
+    "Any recent psychosocial stressor, bereavement or new avoidance behaviour?",
+    "History of similar attacks with previously negative cardiac investigations?"
+  ],
+  "expectedInvestigations": [
+    "Serial high-sensitivity troponin and 12-lead ECG with comparison to prior tracings",
+    "Ambulatory ECG / Holter monitoring to capture paroxysmal arrhythmia",
+    "Thyroid function tests",
+    "Consider structured anxiety screening (e.g. GAD-7 / panic assessment) once organic causes excluded"
+  ],
+  "expectedConfidence": 78,
+  "findings": {
+    "palpitations": true,
+    "chestPain": true,
+    "dyspnea": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "heartRate": true,
+    "respRate": true,
+    "sbp": true,
+    "age": true,
+    "sex": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "panic",
+    "acceptableIds": [
+      "panic"
+    ],
+    "differentialIds": [
+      "acs",
+      "atrial_fib",
+      "pe",
+      "hyperthyroidism"
+    ],
+    "investigations": [
+      "Serial high-sensitivity troponin and comparative 12-lead ECG",
+      "Ambulatory ECG / Holter monitoring",
+      "Thyroid function tests",
+      "GAD-7 / structured panic disorder assessment"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should rank 'panic' as the leading diagnosis after negative serial troponin, unchanged ECG and normal TFTs.",
+    "ACS must remain in the differential and not be prematurely discarded given age and hypertension.",
+    "No antibiotics or infective workup should be recommended.",
+    "Long-term benzodiazepine use should not be recommended in this frail elderly patient."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

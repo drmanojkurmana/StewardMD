@@ -1,0 +1,122 @@
+{
+  "id": "gc_326",
+  "specialty": "Metabolic / Nephrology",
+  "condition": "Hyperkalaemia",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Vague generalised weakness and two unwitnessed falls over 3 days, with a near-collapse this morning",
+  "history": "78-year-old woman brought by daughter with several days of progressive fatigue, heavy legs and difficulty rising from a chair; no chest pain, palpitations volunteered, or overt symptoms until a transient loss of consciousness while walking to the bathroom. Background of hypertension, type 2 diabetes and stage 3b CKD (baseline creatinine 1.6 mg/dL). Long-standing ramipril and spironolactone; primary care added trimethoprim 5 days ago for dysuria, and she has been taking ibuprofen for knee pain. Reduced oral intake for 2 days. No diarrhoea. This is deliberately an atypical, subtle presentation — no dramatic arrhythmic collapse or classic muscle cramps — dominated instead by nonspecific weakness and falls in a frail, polypharmacy patient (ACE-inhibitor + potassium-sparing diuretic + trimethoprim + NSAID 'quadruple whammy').",
+  "examination": "Frail, alert but flat affect. Symmetrical proximal>distal limb weakness with globally diminished/absent deep tendon reflexes; sensation intact. No focal cranial or long-tract signs. Mildly dry mucous membranes, JVP not raised, chest clear, abdomen soft and non-tender, bladder not palpable. Peripheries warm.",
+  "vitals": {
+    "hr": 44,
+    "bp": "148/78",
+    "rr": 16,
+    "temp": 36.6,
+    "spo2": 97
+  },
+  "labs": {
+    "potassium_mmol_L": 7.3,
+    "sodium_mmol_L": 133,
+    "bicarbonate_mmol_L": 16,
+    "creatinine_mg_dL": 3.4,
+    "urea_mmol_L": 24,
+    "eGFR_mL_min": 12,
+    "glucose_mmol_L": 9.8,
+    "corrected_calcium_mg_dL": 8.9,
+    "venous_pH": 7.29,
+    "CK_U_L": 210,
+    "hemoglobin_g_dL": 11.4
+  },
+  "imaging": "Bedside ultrasound: no hydronephrosis, non-distended bladder (excludes obstructive AKI).",
+  "microbiology": "Urine dipstick trace leucocytes, nitrite negative; not clinically infected. Blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Severe hyperkalaemia with hyperkalaemic muscle weakness and bradyarrhythmia (drug-induced, on background of AKI-on-CKD)",
+    "Acute kidney injury on chronic kidney disease",
+    "Primary neuromuscular cause of falls (excluded by reflex pattern and biochemistry)",
+    "Adrenal insufficiency",
+    "Rhabdomyolysis"
+  ],
+  "finalDiagnosis": "Severe hyperkalaemia (K+ 7.3 mmol/L) presenting atypically as weakness, falls and bradycardia — precipitated by RAAS blockade + spironolactone + trimethoprim + NSAID on AKI-on-CKD",
+  "citations": [
+    "UK Kidney Association — Treatment of Acute Hyperkalaemia in Adults, 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Fluid and Electrolyte Disturbances (Potassium), 2022",
+    "KDIGO — Acute Kidney Injury, 2012"
+  ],
+  "stewardship": "Not applicable — non-infective metabolic emergency. Discontinue offending agents (ramipril, spironolactone, trimethoprim, ibuprofen).",
+  "contraindications": [
+    "Avoid IV calcium in the same line as bicarbonate (precipitation)",
+    "Do not give insulin-dextrose without capillary glucose monitoring for delayed hypoglycaemia",
+    "Avoid further potassium-sparing/RAAS agents and NSAIDs",
+    "Caution with salbutamol as sole agent; it is adjunctive, not definitive"
+  ],
+  "edgeCases": [
+    "ECG may look deceptively benign or show only bradycardia/absent P waves rather than classic peaked T waves — do not be reassured",
+    "Hyperkalaemic paralysis can mimic Guillain-Barré (ascending weakness, areflexia) but resolves rapidly with potassium correction",
+    "Trimethoprim blocks the distal nephron ENaC channel like amiloride, a commonly missed precipitant",
+    "Refractory hyperkalaemia with oligoanuric AKI may need emergency haemodialysis"
+  ],
+  "expectedMaiK": "Recognise severe hyperkalaemia as the unifying cause of weakness, areflexia and bradycardia in a frail patient on multiple potassium-retaining drugs; obtain immediate ECG and give IV calcium for myocardial protection, then insulin-dextrose ± salbutamol to shift potassium, address AKI and stop all offending agents.",
+  "expectedNextQuestions": [
+    "Full medication and over-the-counter/NSAID history and any recent new prescriptions?",
+    "Urine output over the last 24-48 hours and fluid intake?",
+    "Any potassium-rich salt substitutes or supplements?",
+    "Prior baseline renal function and potassium values?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (immediate)",
+    "Venous/arterial blood gas with potassium",
+    "Urea, electrolytes and creatinine (compare to baseline)",
+    "Bicarbonate/venous pH",
+    "Creatine kinase",
+    "Repeat potassium after treatment"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "ascendingWeakness": true,
+    "bradycardia": true,
+    "syncope": true,
+    "oliguria": true,
+    "renalImpairment": true,
+    "nauseaVomiting": true,
+    "creatinine": true,
+    "urea": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "hyperkalemia",
+    "acceptableIds": [
+      "hyperkalemia"
+    ],
+    "differentialIds": [
+      "aki",
+      "adrenal_crisis",
+      "rhabdo",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Serum/venous potassium",
+      "Urea, electrolytes and creatinine",
+      "Venous blood gas / bicarbonate",
+      "Creatine kinase"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be hyperkalemia",
+    "Must recommend an immediate 12-lead ECG",
+    "Management must include IV calcium for myocardial membrane stabilisation",
+    "Management must include a potassium-shifting agent (insulin-dextrose)",
+    "Must advise stopping the precipitant drugs (ACE-inhibitor, spironolactone, trimethoprim, NSAID)",
+    "Must not label this as primarily infective / must set stewardship tier to null"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

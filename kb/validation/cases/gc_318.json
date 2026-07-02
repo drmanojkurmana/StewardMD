@@ -1,0 +1,114 @@
+{
+  "id": "gc_318",
+  "specialty": "Neurology",
+  "condition": "Guillain-Barré syndrome",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "3 days of tingling and mild weakness in both legs, with unsteadiness on the stairs.",
+  "history": "Previously well 34-year-old software engineer. Ten to fourteen days ago had a self-limiting diarrhoeal illness (loose stools for ~4 days, no blood, resolved without treatment). Over the last 3 days he has noticed symmetrical 'pins-and-needles' in both feet spreading to the calves, aching low back and thigh pain, and mild difficulty rising from a chair and climbing stairs. Still fully ambulant and self-caring. No breathlessness, no swallowing or speech difficulty, no double vision, no bladder or bowel disturbance, no fever. No recent travel, no new drugs, no vaccination, no toxin/alcohol exposure. This is an early, mild, still-ambulant presentation rather than the classic fulminant flaccid quadriparesis.",
+  "examination": "Alert, comfortable, afebrile, well perfused. Cranial nerves normal; no facial or bulbar weakness. Symmetrical mild lower-limb weakness (MRC grade 4/5 proximally and distally), upper limbs grade 5. Distal-to-proximal sensory tingling with subtly reduced pinprick in a stocking distribution. Ankle jerks absent and knee jerks depressed bilaterally; upper-limb reflexes reduced. Plantars flexor. No sensory level, no spinal tenderness, no sphincter disturbance. Gait cautious but independent. Single-breath count 30.",
+  "vitals": {
+    "hr": 86,
+    "bp": "126/78",
+    "rr": 16,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "14.6 g/dL",
+    "wbc": "7.2 x10^9/L",
+    "platelets": "255 x10^3/µL",
+    "sodium": "139 mmol/L",
+    "potassium": "4.2 mmol/L (normal — excludes hypokalaemic paralysis)",
+    "creatinine": "0.9 mg/dL",
+    "cpk": "110 U/L (normal)",
+    "csfProtein": "0.62 g/L (mildly elevated)",
+    "csfWBC": "2 /µL (albuminocytological dissociation; may still be normal in first week)",
+    "bedsideFVC": "3.4 L (>20 mL/kg — reassuring)"
+  },
+  "imaging": "MRI whole spine with contrast: no cord compression, no cord signal change; may show subtle contrast enhancement of anterior nerve roots/cauda equina supporting inflammatory polyradiculopathy.",
+  "microbiology": "Stool culture from the antecedent illness not obtained; Campylobacter jejuni serology may be positive. No active infection on current bloods.",
+  "differentialDiagnoses": [
+    "Guillain-Barré syndrome (acute inflammatory demyelinating polyradiculoneuropathy) — antecedent GI illness, ascending symmetric weakness with areflexia, albuminocytological dissociation",
+    "Compressive myelopathy / cauda equina — excluded by absence of sensory level and normal MRI spine",
+    "Multiple sclerosis / transverse myelitis — CNS pattern, would expect UMN signs",
+    "Myasthenia gravis — fatigable weakness, but reflexes preserved and no bulbar/ocular signs",
+    "Hypokalaemic periodic paralysis — excluded by normal potassium"
+  ],
+  "finalDiagnosis": "Early Guillain-Barré syndrome (AIDP), mild/ambulant stage, post-Campylobacter",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Guillain-Barré Syndrome and Other Immune-Mediated Neuropathies",
+    "Peripheral Nerve Society / GBS-CIDP Foundation — Guillain-Barré Syndrome Diagnosis and Management Guideline — 2023",
+    "Brighton Collaboration — Case Definition for Guillain-Barré Syndrome"
+  ],
+  "stewardship": "",
+  "contraindications": [
+    "Do NOT give corticosteroids — no benefit in GBS and may harm",
+    "Avoid discharging without serial respiratory monitoring — weakness can progress rapidly over hours to days",
+    "Caution with drugs causing autonomic or respiratory depression"
+  ],
+  "edgeCases": [
+    "Miller-Fisher variant (ophthalmoplegia, ataxia, areflexia) with anti-GQ1b antibodies",
+    "Rapid progression to respiratory failure (falling FVC/single-breath count) requiring intubation",
+    "Autonomic instability with labile BP and arrhythmias",
+    "Normal CSF protein in the first week does not exclude GBS — repeat if needed"
+  ],
+  "expectedMaiK": "Recognise early GBS from antecedent infection plus ascending symmetric weakness with areflexia; admit for serial respiratory (FVC/single-breath count) and autonomic monitoring, confirm with CSF and nerve conduction studies, and start IVIg or plasma exchange if progressive or non-ambulant. Not an infection — no antibiotics.",
+  "expectedNextQuestions": [
+    "Any antecedent diarrhoeal or respiratory infection in the past 4 weeks?",
+    "Any breathlessness, difficulty swallowing, slurred speech, or double vision?",
+    "How fast is the weakness progressing (hours vs days)?",
+    "Any bladder/bowel disturbance or a sensory level (to exclude cord pathology)?",
+    "Any recent vaccination, new medication, or toxin exposure?"
+  ],
+  "expectedInvestigations": [
+    "Bedside forced vital capacity and single-breath count (serial)",
+    "Lumbar puncture — CSF for albuminocytological dissociation",
+    "Nerve conduction studies / electromyography",
+    "MRI whole spine with contrast to exclude cord compression",
+    "Serum electrolytes including potassium, CPK",
+    "Anti-ganglioside antibodies (anti-GM1, anti-GQ1b) and Campylobacter serology"
+  ],
+  "expectedConfidence": 0.72,
+  "findings": {
+    "ascendingWeakness": true,
+    "subacuteOnset": true,
+    "backPain": true,
+    "myalgiaArthralgia": true,
+    "diarrhea": true,
+    "afebrile": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "gbs",
+    "acceptableIds": [
+      "gbs"
+    ],
+    "differentialIds": [
+      "cord_compression",
+      "ms",
+      "myasthenic_crisis"
+    ],
+    "investigations": [
+      "Serial FVC / single-breath count",
+      "CSF analysis (albuminocytological dissociation)",
+      "Nerve conduction studies",
+      "MRI whole spine with contrast"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be gbs",
+    "Must recommend serial respiratory monitoring (FVC / single-breath count)",
+    "Must recommend CSF analysis and nerve conduction studies",
+    "Must consider and exclude cord compression via MRI spine",
+    "Must NOT recommend antibiotics or corticosteroids"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

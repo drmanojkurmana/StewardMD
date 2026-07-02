@@ -1,0 +1,117 @@
+{
+  "id": "gc_273",
+  "specialty": "Tropical Fever",
+  "condition": "Malaria",
+  "age": 78,
+  "sex": "M",
+  "presentingComplaint": "Three days of low-grade fever with worsening confusion and two unwitnessed falls at home",
+  "history": "A 78-year-old retired schoolteacher, frail (baseline modified Rasch frailty, uses a walking stick, lives with his daughter) with hypertension and mild chronic kidney disease, was brought in by family. He had returned 12 days earlier from a 3-week visit to his ancestral village in the forested belt of Odisha, where he had not taken chemoprophylaxis and slept without a bed-net. The illness was atypical for his age: instead of dramatic rigors he had only a 'run-down' feeling with intermittent low-grade fevers, reduced appetite and progressive lethargy over 3 days. The family's main concern was that he had become confused, disoriented to time, and had fallen twice; they initially attributed it to a 'urine infection' as he is prone to. There were no localising urinary, respiratory or abdominal symptoms. He has had mild myalgia and one episode of dark urine.",
+  "examination": "Frail, drowsy but rousable elderly man, oriented to person only (GCS 14). Mildly icteric sclerae. No neck stiffness, no focal neurological deficit, no rash. Mild splenomegaly palpable 2 cm below the costal margin. Chest clear, abdomen soft and non-tender, no CVA tenderness. Mild pallor. Peripheries warm.",
+  "vitals": {
+    "hr": 104,
+    "bp": "108/64",
+    "rr": 22,
+    "temp": 38.1,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": "9.8 g/dL",
+    "platelets": "64 ×10³/µL",
+    "wbc": "6.1 ×10³/µL",
+    "creatinine": "1.9 mg/dL (baseline 1.3)",
+    "bilirubin": "3.4 mg/dL (predominantly indirect)",
+    "alt": "58 U/L",
+    "urea": "12.4 mmol/L",
+    "crp": "96 mg/L",
+    "randomGlucose": "88 mg/dL",
+    "lactate": "2.4 mmol/L"
+  },
+  "imaging": "Chest radiograph clear. CT head (given falls and confusion) shows only age-related atrophy, no bleed or mass.",
+  "microbiology": "Peripheral blood smear (thick and thin films): Plasmodium falciparum ring forms, parasitaemia ~1.8%; no gametocytes seen. Rapid diagnostic test positive for P. falciparum HRP-2 antigen, negative for pan-malarial/vivax LDH. Blood cultures sent and later negative. Dengue NS1/IgM negative, urine culture no growth.",
+  "differentialDiagnoses": [
+    "Falciparum malaria (elderly, atypical/subtle presentation)",
+    "Urosepsis / occult bacterial sepsis",
+    "Dengue fever",
+    "Enteric fever",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Plasmodium falciparum malaria with early severity features (impaired consciousness, jaundice, acute kidney injury) in a frail elderly returned traveller",
+  "citations": [
+    "WHO — Guidelines for Malaria (severe malaria management) — 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Malaria",
+    "NVBDCP/ICMR — National Guidelines for Diagnosis and Treatment of Malaria in India — 2014"
+  ],
+  "stewardship": "Blood-smear-confirmed P. falciparum with impaired consciousness, jaundice and rising creatinine meets WHO severe-malaria criteria; treat with IV artesunate rather than oral ACT, admit for monitoring of parasitaemia, glucose and renal function, and follow with a full oral ACT course once able to tolerate orally.",
+  "contraindications": [
+    "Avoid oral-only ACT while consciousness is impaired / severity features present",
+    "Caution with quinine (hypoglycaemia, QT) in the elderly if artesunate unavailable",
+    "Renally-adjust concomitant drugs given AKI"
+  ],
+  "edgeCases": [
+    "Confusion wrongly attributed to UTI or delirium of frailty, delaying blood film",
+    "Low-grade rather than paroxysmal fever in elderly masking the diagnosis",
+    "Progression to cerebral malaria / renal failure if treated as uncomplicated"
+  ],
+  "expectedMaiK": "In a frail elderly patient returning from a malaria-endemic area, fever with confusion, thrombocytopenia, jaundice and splenomegaly is malaria until proven otherwise; the subtle, non-paroxysmal presentation and early organ dysfunction (impaired sensorium, jaundice, AKI) mandate urgent blood films/RDT and treatment as severe falciparum malaria with IV artesunate.",
+  "expectedNextQuestions": [
+    "Exact travel dates, region and chemoprophylaxis/bed-net use",
+    "Urine output and colour, any bleeding",
+    "Baseline cognition and functional status (to interpret confusion)",
+    "Any prior malaria episodes or blood transfusions"
+  ],
+  "expectedInvestigations": [
+    "Thick and thin peripheral blood smear with parasite density (%)",
+    "Malaria rapid diagnostic test (HRP-2 and pan-LDH)",
+    "G6PD status (before any primaquine)",
+    "Blood glucose, lactate, renal and liver panel, coagulation",
+    "Blood cultures to exclude concurrent bacterial sepsis"
+  ],
+  "expectedConfidence": 90,
+  "findings": {
+    "fever": true,
+    "travelEndemicArea": true,
+    "paroxysmalFever": true,
+    "thrombocytopenia": true,
+    "splenomegaly": true,
+    "alteredSensorium": true,
+    "jaundice": true,
+    "myalgiaArthralgia": true,
+    "renalImpairment": true,
+    "darkUrine": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "MALARIA",
+    "acceptableIds": [
+      "MALARIA"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "ENTERIC_FEVER",
+      "LEPTOSPIROSIS",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "Peripheral blood smear (thick and thin) with parasite density",
+      "Malaria rapid diagnostic test",
+      "Renal and liver function, glucose, lactate",
+      "G6PD status before primaquine"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "IV artesunate (severe P. falciparum malaria), followed by full oral ACT course"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "MALARIA must rank first in the differential",
+    "Blood smear / RDT for malaria must be recommended",
+    "Severe-malaria features (impaired consciousness, jaundice, AKI) should trigger IV artesunate rather than oral ACT",
+    "Confusion in a frail elderly returned traveller must not be closed as UTI/delirium without a malaria film"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

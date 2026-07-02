@@ -1,0 +1,122 @@
+{
+  "id": "gc_251",
+  "specialty": "Hepatobiliary",
+  "condition": "Acute Cholangitis",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Brought to ED confused and 'not himself' for a day, with fever and low blood pressure.",
+  "history": "74-year-old man, known gallstones and a prior ERCP-cleared common bile duct stone 3 years ago, on amlodipine for hypertension. Family report 24-36 hours of high fever with shaking chills and progressive drowsiness; he became confused this morning and passed only a small amount of dark urine. Notably he complains only of vague upper-abdominal discomfort rather than severe pain, and RUQ pain was easily missed at triage. No prior antibiotics or hospitalisation in the last 90 days. This is a severe (Tokyo Guidelines Grade III) presentation: the classic Charcot triad has progressed to Reynolds pentad (hypotension + altered sensorium) with organ dysfunction.",
+  "examination": "Ill, drowsy and disoriented (GCS 13, E3V4M6), clinically icteric with scleral jaundice. Cool peripheries, prolonged capillary refill. Abdomen soft with mild right-upper-quadrant tenderness only and equivocal Murphy sign; no guarding or rebound, no palpable gallbladder. No flank tenderness, no meningism.",
+  "vitals": {
+    "hr": 124,
+    "bp": "80/46",
+    "rr": 28,
+    "temp": 39.2,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": 21.4,
+    "neutrophilPercent": 92,
+    "platelets": 88,
+    "creatinine": 2.6,
+    "urea": 16.8,
+    "totalBilirubin": 7.9,
+    "directBilirubin": 5.6,
+    "alp": 486,
+    "ggt": 512,
+    "alt": 138,
+    "ast": 121,
+    "inr": 1.7,
+    "albumin": 2.9,
+    "lactate": 4.4,
+    "crp": 268,
+    "hemoglobin": 12.1
+  },
+  "imaging": "Bedside/abdominal ultrasound: dilated common bile duct (11 mm) with an echogenic stone and acoustic shadowing at the distal CBD; intrahepatic biliary dilatation; gallbladder contains calculi without pericholecystic fluid. MRCP/contrast CT confirms choledocholithiasis with obstructive biliary dilatation and no liver abscess or free fluid.",
+  "microbiology": "Two sets of blood cultures drawn before antibiotics; subsequently grew Escherichia coli (ESBL-negative). Bile cultures at drainage grew the same organism.",
+  "differentialDiagnoses": [
+    "Acute cholecystitis",
+    "Pyogenic liver abscess",
+    "Acute (gallstone) pancreatitis",
+    "Septic shock from another source"
+  ],
+  "finalDiagnosis": "Severe acute cholangitis (Tokyo Guidelines 2018 Grade III) due to obstructing choledocholithiasis, complicated by septic shock and acute kidney injury",
+  "citations": [
+    "Tokyo Guidelines (TG18) — Diagnostic criteria and severity grading of acute cholangitis — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Diseases of the Gallbladder and Bile Ducts (cholangitis)"
+  ],
+  "stewardship": "Grade III severe acute cholangitis: obtain blood cultures, start empiric IV piperacillin-tazobactam (anti-pseudomonal beta-lactam per TG18), and arrange URGENT biliary drainage (ERCP) as definitive source control alongside sepsis resuscitation. WHO AWaRe tier: Watch. De-escalate once E. coli susceptibilities return.",
+  "contraindications": [
+    "Avoid delaying biliary drainage in Grade III disease — antibiotics alone are inadequate without source control",
+    "Dose-adjust renally cleared antibiotics for AKI (creatinine 2.6 mg/dL)",
+    "Caution with nephrotoxic contrast and aminoglycosides given acute kidney injury"
+  ],
+  "edgeCases": [
+    "Elderly patients may present with sepsis and altered sensorium rather than severe RUQ pain, so cholangitis is easily missed",
+    "Reynolds pentad (Charcot triad + shock + confusion) marks Grade III severe disease requiring emergent drainage",
+    "Normal-sized CBD on early ultrasound does not exclude obstruction; proceed to MRCP/EUS if suspicion is high"
+  ],
+  "expectedMaiK": "Obstructive suppurative cholangitis from CBD stone with ascending biliary sepsis; cholestatic LFTs (high ALP/GGT/bilirubin) plus dilated CBD with stone localise the source to the biliary tree, distinguishing it from other septic-shock sources.",
+  "expectedNextQuestions": [
+    "Prior gallstones, ERCP or biliary surgery?",
+    "Duration and pattern of fever, jaundice and any RUQ pain?",
+    "Urine output and mental status change over last 24 hours?",
+    "Recent antibiotics, hospitalisation or prior resistant organisms?"
+  ],
+  "expectedInvestigations": [
+    "Blood cultures (2 sets) before antibiotics",
+    "LFTs including ALP, GGT, bilirubin",
+    "Serum lactate, creatinine/urea, coagulation profile",
+    "Abdominal ultrasound then MRCP/CT to confirm obstruction",
+    "Serum lipase to exclude concurrent pancreatitis"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "rightUpperQuadrantPain": true,
+    "jaundice": true,
+    "alteredSensorium": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "toxicAppearing": true,
+    "organDysfunction": true,
+    "lactateElevated": true,
+    "vasopressorRequirement": true
+  },
+  "expected": {
+    "diagnosis": "CHOLANGITIS",
+    "acceptableIds": [
+      "CHOLANGITIS"
+    ],
+    "differentialIds": [
+      "CHOLECYSTITIS",
+      "LIVER_ABSCESS",
+      "pancreatitis",
+      "SEPTIC_SHOCK"
+    ],
+    "investigations": [
+      "Blood cultures (2 sets)",
+      "LFTs (ALP, GGT, bilirubin)",
+      "Serum lactate",
+      "Abdominal ultrasound",
+      "MRCP / contrast CT abdomen"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Piperacillin-tazobactam"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['CHOLANGITIS']",
+    "Must flag Grade III severity (Reynolds pentad + organ dysfunction: hypotension, altered sensorium, AKI, coagulopathy)",
+    "Must recommend urgent biliary drainage (ERCP) as source control, not antibiotics alone",
+    "Empiric therapy must be a guideline-concordant anti-pseudomonal beta-lactam (e.g., piperacillin-tazobactam)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

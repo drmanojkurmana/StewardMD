@@ -1,0 +1,125 @@
+{
+  "id": "gc_295",
+  "specialty": "Hematology / Oncology",
+  "condition": "Acute leukaemia",
+  "age": 74,
+  "sex": "M",
+  "presentingComplaint": "Two weeks of easy bruising, gum bleeding and low-grade fevers in a frail elderly man initially thought to have immune thrombocytopenia.",
+  "history": "A 74-year-old retired schoolteacher, independent but frail (clinical frailty scale 5), presents with a 2-week history of spontaneous bruising over the limbs and trunk, bleeding from the gums when brushing his teeth, and increasing lethargy. His wife reports intermittent low-grade evening fevers and drenching night sweats, plus a 4 kg unintentional weight loss over 6 weeks. He was seen at a walk-in clinic 5 days earlier where an isolated low platelet count led to a provisional diagnosis of immune thrombocytopenia (ITP) and a plan for oral prednisolone, but he was referred on when he became progressively more anaemic and unwell. No recent new drugs, no NSAIDs, no herbal remedies. No prior bleeding disorder. Past history: type 2 diabetes, treated hypertension. No B12/folate deficiency previously documented. No travel, no tick or animal exposure, no diarrhoea. Ex-smoker (20 pack-years).",
+  "examination": "Frail, pale, mildly unwell but not septic-looking. Widespread petechiae over both shins and forearms with several ecchymoses; wet purpura and gum oozing in the mouth. Modest splenomegaly palpable 3 cm below the costal margin and shotty bilateral cervical and axillary lymphadenopathy. No focal source of infection; chest clear, abdomen soft. No neck stiffness, no focal neurology. Gingival hypertrophy noted.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/70",
+    "rr": 18,
+    "temp": 37.9,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin_g_dL": 7.6,
+    "wbc_x10e9_L": 34.5,
+    "circulating_blasts_pct": 42,
+    "neutrophils_absolute_x10e9_L": 0.8,
+    "platelets_x10e9_L": 16,
+    "reticulocyte_pct": 0.4,
+    "peripheral_smear": "leukoerythroblastic picture with numerous large blasts, some with Auer rods; teardrop cells absent",
+    "LDH_U_L": 820,
+    "uric_acid_mg_dL": 9.4,
+    "potassium_mmol_L": 5.1,
+    "phosphate_mg_dL": 5.6,
+    "corrected_calcium_mg_dL": 8.4,
+    "creatinine_mg_dL": 1.4,
+    "INR": 1.3,
+    "fibrinogen_g_L": 1.9,
+    "d_dimer": "moderately raised",
+    "bilirubin_mg_dL": 0.9,
+    "haptoglobin": "normal",
+    "dat_coombs": "negative",
+    "b12_folate": "normal"
+  },
+  "imaging": "CXR clear, no consolidation. CT abdomen: splenomegaly (16 cm), mild retroperitoneal and mesenteric lymphadenopathy, no abscess or mass.",
+  "microbiology": "Blood cultures x2 drawn for fever: no growth at 48 h. Urinalysis unremarkable. Fever attributed to the underlying haematological malignancy rather than a documented infection.",
+  "differentialDiagnoses": [
+    "Immune thrombocytopenia (ITP) - excluded: pancytopenia with circulating blasts, not isolated thrombocytopenia",
+    "Disseminated intravascular coagulation - partially overlapping (low fibrinogen, raised D-dimer); consider acute promyelocytic leukaemia sub-type",
+    "Thrombotic thrombocytopenic purpura / HUS - excluded: no schistocytes, normal haptoglobin, negative DAT, blasts on film",
+    "Symptomatic anaemia from B12/folate deficiency or MDS - excluded: normal B12/folate, blast excess"
+  ],
+  "finalDiagnosis": "Acute leukaemia (elderly de novo acute myeloid leukaemia; >20% blasts with Auer rods on peripheral film), presenting as a mimic of immune thrombocytopenia",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e - Acute Myeloid Leukemia",
+    "European LeukemiaNet (ELN) - AML Diagnosis and Management Recommendations, 2022",
+    "British Society for Haematology (BSH) - Management of AML in Adults, 2023"
+  ],
+  "stewardship": "Non-infective diagnosis; fever attributed to malignancy with negative cultures. No empiric antibiotics mandated by the leukaemia diagnosis itself; if neutropenic fever criteria are met a separate febrile-neutropenia pathway applies. Urgent priority is haematology referral, tumour lysis prophylaxis and blast confirmation, not antimicrobials.",
+  "contraindications": [
+    "Avoid platelet-lowering or nephrotoxic agents; correct coagulopathy before any procedure",
+    "Do not start empirical steroids for presumed ITP without a blood film / marrow review - masks and delays leukaemia diagnosis",
+    "Hold on lumbar puncture or central line insertion until platelets/coagulation corrected"
+  ],
+  "edgeCases": [
+    "APL (acute promyelocytic leukaemia) can present with the same DIC-like picture and is a haematological emergency requiring ATRA before genetic confirmation",
+    "Elderly AML is frequently mislabelled as MDS, ITP or 'anaemia of chronic disease' when only one cell line is checked",
+    "Hyperleukocytosis with blasts >50-100 x10e9/L risks leukostasis (dyspnoea, confusion) needing urgent cytoreduction"
+  ],
+  "expectedMaiK": "Bicytopenia/pancytopenia with a high WBC driven by circulating blasts (with Auer rods) in a frail elderly man is acute leukaemia, not ITP; the isolated low platelet count initially seen is only one part of marrow failure, and the blood film plus urgent bone marrow examination are diagnostic.",
+  "expectedNextQuestions": [
+    "Is there associated fatigue, dyspnoea or infection suggesting other cytopenias rather than isolated thrombocytopenia?",
+    "Any bleeding, bruising or mucosal ooze suggesting coagulopathy (DIC/APL)?",
+    "Recent drugs, chemotherapy, radiation or prior MDS/myeloproliferative disorder?",
+    "Symptoms of leukostasis (breathlessness, confusion, visual change) given the high blast count?"
+  ],
+  "expectedInvestigations": [
+    "Urgent peripheral blood film review by a haematologist",
+    "Bone marrow aspirate and trephine with flow cytometry immunophenotyping",
+    "Cytogenetics and molecular studies (including PML-RARA to exclude APL)",
+    "Coagulation screen with fibrinogen and D-dimer (DIC/APL screen)",
+    "Tumour lysis panel: LDH, uric acid, potassium, phosphate, calcium, renal function"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "nightSweats": true,
+    "weightLoss": true,
+    "petechialRash": true,
+    "mucocutaneousBleeding": true,
+    "bleedingManifestation": true,
+    "thrombocytopenia": true,
+    "splenomegaly": true,
+    "lymphadenopathy": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "acute_leukemia",
+    "acceptableIds": [
+      "acute_leukemia"
+    ],
+    "differentialIds": [
+      "itp",
+      "dic",
+      "ttp_hus",
+      "anemia_sympt"
+    ],
+    "investigations": [
+      "peripheral_blood_film",
+      "bone_marrow_aspirate_and_trephine_with_flow_cytometry",
+      "cytogenetics_and_molecular_including_PML_RARA",
+      "coagulation_screen_fibrinogen_d_dimer",
+      "tumour_lysis_panel_ldh_urate_electrolytes_renal"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acute_leukemia must be the top diagnosis",
+    "itp must NOT be the final diagnosis despite the initial referral label",
+    "differential must include a bleeding/microangiopathic mimic (dic or ttp_hus)",
+    "no empiric antibiotic tier should be asserted (non-infective, cultures negative)",
+    "peripheral blood film and bone marrow examination must appear in recommended investigations"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

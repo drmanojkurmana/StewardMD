@@ -1,0 +1,109 @@
+{
+  "id": "gc_282",
+  "specialty": "Tropical Fever",
+  "condition": "Rickettsial Fever (Spotted Fever Group)",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Fever, headache and body aches for 4 days with a spreading rash noticed today",
+  "history": "Previously well farmer from a rural hill district who returned from working in scrub and cattle sheds 6 days ago. Four days of moderate continuous fever with frontal headache and diffuse myalgia. He remained ambulant, ate reasonably and self-medicated with paracetamol with partial relief. This morning he noticed small pink-red spots starting on the ankles and wrists. He recalls removing ticks from his dog and had an itchy 'insect bite' on the left flank about a week ago. No breathlessness, no bleeding, no confusion, urine output normal. No prior comorbidity, not on any regular medication.",
+  "examination": "Alert, oriented, not toxic. A single 0.8 cm painless black-crusted lesion (eschar/tache noire) with a surrounding erythematous halo on the left flank, with a small non-tender inguinal node. Sparse blanching maculopapular rash over both ankles, wrists and forearms including early involvement of the palms; no petechiae, no mucosal bleeding. Chest clear, abdomen soft, no hepatosplenomegaly, no meningism, no focal neurology.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/74",
+    "rr": 18,
+    "temp": 38.6,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 13.4,
+    "wbc": 6.8,
+    "platelets": 118,
+    "creatinine": 0.9,
+    "bilirubin": 0.9,
+    "ast": 74,
+    "alt": 68,
+    "sodium": 134,
+    "crp": 62
+  },
+  "imaging": "Chest radiograph normal. Abdominal ultrasound normal, no hepatosplenomegaly.",
+  "microbiology": "Malaria rapid antigen and peripheral smear negative. Dengue NS1 and IgM negative. Weil-Felis OX-2/OX-19 weakly positive; Spotted Fever Group Rickettsia IgM ELISA positive; convalescent IFA seroconversion planned. Blood cultures sterile at 48h.",
+  "differentialDiagnoses": [
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis",
+    "Enteric fever"
+  ],
+  "finalDiagnosis": "Early spotted fever group rickettsiosis (Indian tick typhus, Rickettsia conorii) with eschar and acral maculopapular rash",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, Rickettsial Diseases, 22e (2022)",
+    "ICMR Guidelines for Diagnosis and Management of Rickettsial Diseases (2015)"
+  ],
+  "stewardship": "Mild, early, outpatient-manageable spotted fever group rickettsiosis. Empiric doxycycline started on clinical/epidemiological grounds (eschar + acral rash + tick exposure) without waiting for confirmatory serology; response is expected within 48 hours.",
+  "contraindications": [
+    "Doxycycline hypersensitivity",
+    "Use with caution in pregnancy (doxycycline still preferred in severe/confirmed rickettsial disease per WHO/ICMR as benefit outweighs risk)"
+  ],
+  "edgeCases": [
+    "Eschar is often single and painless and is easily missed in skin folds, groin, axilla or scalp",
+    "Weil-Felis is insensitive early; a negative early serology does not exclude the diagnosis",
+    "Acral rash involving palms/soles and an eschar favour spotted fever group over scrub typhus and over dengue"
+  ],
+  "expectedMaiK": "Early, mild spotted fever group rickettsiosis identified from the triad of an eschar, an acral (wrists/ankles/palms) maculopapular rash and rural tick exposure; start empiric doxycycline promptly rather than awaiting confirmatory serology.",
+  "expectedNextQuestions": [
+    "Any tick or dog/livestock contact and search for an overlooked eschar in skin folds?",
+    "Distribution and progression of the rash, including palms and soles?",
+    "Any bleeding, breathlessness, reduced urine output or confusion to flag early organ dysfunction?"
+  ],
+  "expectedInvestigations": [
+    "FBC with platelets and LFTs",
+    "Spotted Fever Group Rickettsia IgM ELISA / paired IFA serology",
+    "Malaria smear/RDT and dengue NS1/IgM to exclude mimics",
+    "Renal function and urinalysis"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "myalgiaArthralgia": true,
+    "rash": true,
+    "maculopapularRash": true,
+    "eschar": true,
+    "tickExposure": true,
+    "ruralExposure": true,
+    "thrombocytopenia": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "RICKETTSIAL_FEVER",
+    "acceptableIds": [
+      "RICKETTSIAL_FEVER"
+    ],
+    "differentialIds": [
+      "SCRUB_TYPHUS",
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "Spotted Fever Group Rickettsia IgM ELISA / paired IFA serology",
+      "FBC with platelets and LFTs",
+      "Malaria RDT/smear and dengue NS1/IgM"
+    ],
+    "stewardship": {
+      "tier": "first_line_oral",
+      "antibiotics": [
+        "Doxycycline 100 mg PO twice daily for 7 days"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "RICKETTSIAL_FEVER must rank first",
+    "SCRUB_TYPHUS must appear in the differential",
+    "Empiric doxycycline must be recommended without waiting for serology",
+    "Presence of an eschar with acral maculopapular rash must be weighted toward spotted fever group rickettsiosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

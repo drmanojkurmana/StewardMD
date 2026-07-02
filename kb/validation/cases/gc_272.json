@@ -1,0 +1,117 @@
+{
+  "id": "gc_272",
+  "specialty": "Respiratory",
+  "condition": "Lung Abscess",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of low-grade illness, tiredness and a chronic cough, referred as ?lung cancer / ?TB after an abnormal chest X-ray.",
+  "history": "Warehouse worker who presented not with a dramatic febrile illness but with an insidious 3-week history of malaise, anorexia and a persistent cough now productive of moderate volumes of sputum. He and his family noticed only intermittent low-grade evening temperatures rather than swinging fevers, and drenching night sweats twice in the last week. He has lost about 5 kg unintentionally. Only on direct questioning did he admit the sputum has recently become foul-tasting/foul-smelling. Background of heavy alcohol use and poor dental hygiene with several carious teeth and periodontal disease; a witnessed episode of choking/vomiting after a drinking binge roughly 4 weeks ago. No prior TB, no known malignancy, non-diabetic. Because of the weight loss, night sweats and indolent course he was initially worked up for pulmonary TB and malignancy rather than a pyogenic abscess.",
+  "examination": "Thin, mildly unwell but not toxic. Dentition poor with gingival disease and halitosis. Reduced breath sounds and coarse crepitations over the right posterior base with bronchial breathing; no clubbing. No lymphadenopathy. Cardiovascular and abdominal examination unremarkable.",
+  "vitals": {
+    "hr": 94,
+    "bp": "122/78",
+    "rr": 18,
+    "temp": 37.8,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "13.8 x10^9/L (neutrophilia)",
+    "hemoglobin": "10.4 g/dL (normocytic, anaemia of chronic disease)",
+    "platelets": "466 x10^3/uL",
+    "crp": "138 mg/L",
+    "esr": "88 mm/hr",
+    "albumin": "2.9 g/dL",
+    "creatinine": "0.9 mg/dL",
+    "hiv": "negative"
+  },
+  "imaging": "Chest X-ray: thick-walled cavity with an air-fluid level in the right lower lobe (superior segment). CT thorax: 5.2 cm cavitating lesion with an internal air-fluid level and surrounding consolidation in the superior segment of the right lower lobe (dependent segment favoured by aspiration); no mediastinal mass or lobar collapse to suggest an obstructing tumour.",
+  "microbiology": "Sputum Gram stain: mixed flora with abundant neutrophils. Sputum AFB smear negative x2 and CBNAAT (GeneXpert MTB/RIF) not detected. Sputum bacterial culture grew mixed anaerobic/oral flora. Blood cultures negative. Cytology on bronchial washings: no malignant cells.",
+  "differentialDiagnoses": [
+    "Lung abscess (primary aspiration / anaerobic)",
+    "Cavitary pulmonary tuberculosis",
+    "Cavitating bronchogenic carcinoma",
+    "Necrotizing bacterial pneumonia"
+  ],
+  "finalDiagnosis": "Primary (aspiration-related) anaerobic lung abscess presenting subacutely as a TB/malignancy mimic",
+  "citations": [
+    "Harrison's Principles of Internal Medicine 22e — Lung Abscess",
+    "IDSA/ATS — Diagnosis and Treatment of Adults with Community-Acquired Pneumonia, 2019",
+    "British Thoracic Society — Management of Suppurative/Community-Acquired Lower Respiratory Tract Infection, 2009"
+  ],
+  "stewardship": "Infective; empiric cover targets oral anaerobes and streptococci. Guideline-concordant first-line is IV ampicillin-sulbactam (or amoxicillin-clavulanate); metronidazole monotherapy is inadequate. Prolonged course (often 4-6 weeks) guided by clinical and radiographic response, with dental source control.",
+  "contraindications": [
+    "Avoid metronidazole monotherapy (fails to cover microaerophilic streptococci)",
+    "Penicillin allergy: substitute clindamycin",
+    "Avoid premature narrowing before anaerobic/aerobic cultures resulted"
+  ],
+  "edgeCases": [
+    "Foul-smelling sputum may be absent or only elicited on direct questioning, masking the diagnosis",
+    "Indolent presentation with weight loss and night sweats is frequently mislabelled as TB or lung cancer",
+    "Superior segment of lower lobe / posterior segment of upper lobe involvement points to aspiration in a supine/obtunded patient"
+  ],
+  "expectedMaiK": "A cavity with an air-fluid level in a dependent (aspiration-prone) segment, in a patient with poor dentition, alcohol excess and a recent aspiration event, plus foul sputum and mixed anaerobic flora, indicates a primary anaerobic lung abscess even when the course is indolent and TB/malignancy have been excluded.",
+  "expectedNextQuestions": [
+    "Any witnessed aspiration, reduced consciousness, alcohol binges or swallowing difficulty?",
+    "State of dentition and periodontal disease?",
+    "Duration and change in character/smell of sputum; any haemoptysis?",
+    "TB contact, prior TB, HIV or immunosuppression?",
+    "Smoking history and features suggesting an obstructing endobronchial tumour?"
+  ],
+  "expectedInvestigations": [
+    "Contrast CT thorax",
+    "Sputum Gram stain and aerobic/anaerobic culture",
+    "Sputum AFB smear plus CBNAAT (GeneXpert) to exclude TB",
+    "Blood cultures",
+    "Bronchoscopy with washings/cytology to exclude endobronchial obstruction and malignancy"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "coughRadio": true,
+    "prolongedCough2Weeks": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "foulSmellingSputum": true,
+    "cavitatingLesion": true,
+    "aspirationRiskFactor": true,
+    "crepitations": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "LUNG_ABSCESS",
+    "acceptableIds": [
+      "LUNG_ABSCESS"
+    ],
+    "differentialIds": [
+      "PULMONARY_TB",
+      "lung_cancer",
+      "ASPIRATION_PNEUMONIA",
+      "CAP"
+    ],
+    "investigations": [
+      "Contrast CT thorax",
+      "Sputum Gram stain and anaerobic/aerobic culture",
+      "Sputum AFB smear and CBNAAT (GeneXpert MTB/RIF)",
+      "Blood cultures",
+      "Bronchoscopy with cytology"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "Ampicillin-sulbactam",
+        "Amoxicillin-clavulanate"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be LUNG_ABSCESS",
+    "Differential must include PULMONARY_TB and cavitating lung_cancer",
+    "Must not recommend metronidazole monotherapy",
+    "Empiric regimen must cover oral anaerobes and streptococci (ampicillin-sulbactam / amoxicillin-clavulanate; clindamycin if penicillin-allergic)",
+    "Must recommend AFB smear + CBNAAT to exclude TB before labelling as pyogenic abscess"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

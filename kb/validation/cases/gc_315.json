@@ -1,0 +1,123 @@
+{
+  "id": "gc_315",
+  "specialty": "Endocrine",
+  "condition": "Diabetic ketoacidosis",
+  "age": 79,
+  "sex": "F",
+  "presentingComplaint": "Two days of nausea, vague generalised abdominal discomfort, reduced oral intake and increasing drowsiness in a frail nursing-home resident.",
+  "history": "79-year-old frail woman with type 2 diabetes of 14 years, recently started on empagliflozin (an SGLT2 inhibitor) 8 weeks ago in addition to metformin and gliclazide. Over the preceding 4-5 days she had poor appetite following a self-limiting diarrhoeal illness on the ward and had continued her SGLT2 inhibitor while eating little. Family and carers noted she was more thirsty, passing urine frequently, then over the last 24 hours became progressively lethargic and confused with several episodes of vomiting. Background hypertension, mild cognitive impairment and CKD stage 3a. No chest pain, cough, dysuria or fever reported. This presentation is atypical: glucose is only modestly elevated (euglycaemic/near-euglycaemic DKA) and Kussmaul breathing is easily mistaken for a chest problem in a frail elderly patient, yet the biochemistry is unambiguous ketoacidosis.",
+  "examination": "Frail, dehydrated elderly woman, drowsy but rousable (GCS 13, E3 V4 M6). Dry mucous membranes, reduced skin turgor, sunken eyes. Deep sighing (Kussmaul) respiration with a faint fruity odour on the breath. Abdomen soft with mild diffuse tenderness, no guarding, bowel sounds present. Chest clear, no focal crepitations. No focal neurology. Peripheries cool with prolonged capillary refill.",
+  "vitals": {
+    "hr": 108,
+    "bp": "104/62",
+    "rr": 26,
+    "temp": 36.3,
+    "spo2": 97
+  },
+  "labs": {
+    "glucose_mmol_L": 15.4,
+    "glucose_mg_dL": 277,
+    "capillary_ketones_mmol_L": 5.8,
+    "betahydroxybutyrate_mmol_L": 5.6,
+    "venous_pH": 7.14,
+    "bicarbonate_mmol_L": 8,
+    "anion_gap_mmol_L": 27,
+    "sodium_mmol_L": 133,
+    "potassium_mmol_L": 5.3,
+    "chloride_mmol_L": 98,
+    "urea_mmol_L": 18.2,
+    "creatinine_mg_dL": 1.9,
+    "baseline_creatinine_mg_dL": 1.2,
+    "lactate_mmol_L": 1.8,
+    "wcc_10e9_L": 12.1,
+    "hba1c_percent": 8.9,
+    "urinalysis": "ketones 4+, glucose 3+, no nitrites, trace leucocytes"
+  },
+  "imaging": "Chest radiograph clear, no consolidation or effusion. Abdominal examination and bedside ultrasound show no acute surgical pathology.",
+  "microbiology": "Blood cultures sent as precaution given borderline WCC; no growth. Urine culture negative. No source of sepsis identified.",
+  "differentialDiagnoses": [
+    "Diabetic ketoacidosis (SGLT2-inhibitor-associated, near-euglycaemic) - target",
+    "Hyperosmolar hyperglycaemic state (mixed picture in elderly)",
+    "Sepsis with lactic acidosis",
+    "Acute pancreatitis / intra-abdominal cause of high-anion-gap acidosis"
+  ],
+  "finalDiagnosis": "Diabetic ketoacidosis (near-euglycaemic, SGLT2-inhibitor-associated) precipitated by reduced oral intake and intercurrent illness in a frail elderly patient",
+  "citations": [
+    "American Diabetes Association (ADA) - Hyperglycaemic Crises in Adults (DKA/HHS consensus) - 2024",
+    "Joint British Diabetes Societies (JBDS-IP) - Management of DKA in Adults - 2023",
+    "Harrison's Principles of Internal Medicine, 22e - Diabetic Ketoacidosis and Hyperglycaemic Emergencies"
+  ],
+  "stewardship": "Non-infective metabolic emergency; no empiric antibiotics indicated unless a source of infection is confirmed. Precipitant here is SGLT2-inhibitor use with reduced intake, not sepsis.",
+  "contraindications": [
+    "Do not withhold insulin because glucose is only modestly elevated - euglycaemic DKA still requires a fixed-rate insulin infusion with concurrent dextrose",
+    "Avoid aggressive bicarbonate; not indicated at pH >7.0",
+    "Cautious fluid resuscitation given age, CKD and cardiac reserve - monitor for fluid overload",
+    "Correct/monitor potassium before and during insulin; do not start high-dose insulin if K+ falls untreated"
+  ],
+  "edgeCases": [
+    "SGLT2 inhibitors cause near-euglycaemic DKA - a normal or only mildly raised glucose must not lead to a missed diagnosis; check ketones/pH in any unwell diabetic on these agents",
+    "Kussmaul respiration in a frail elder is frequently misattributed to pneumonia or heart failure",
+    "Overlapping dehydration/hyperosmolar features can mimic HHS; the high anion gap and ketonaemia distinguish DKA",
+    "SGLT2 inhibitor should be stopped and DKA protocol continued until ketones <0.6 and acidosis resolves, even once glucose normalises"
+  ],
+  "expectedMaiK": "Recognise that ketoacidosis (high anion-gap metabolic acidosis with ketonaemia) in a diabetic on an SGLT2 inhibitor is DKA even when glucose is only modestly elevated (euglycaemic DKA), and treat with fixed-rate insulin plus dextrose, fluids and potassium replacement.",
+  "expectedNextQuestions": [
+    "Which glucose-lowering agents is she taking, and specifically any SGLT2 inhibitor (e.g. empagliflozin)?",
+    "What has oral intake and any recent illness (vomiting/diarrhoea) been like?",
+    "Is there any symptom or sign pointing to an infective or ischaemic precipitant?",
+    "What is the capillary/serum ketone level and venous blood gas?"
+  ],
+  "expectedInvestigations": [
+    "Venous blood gas (pH, bicarbonate, anion gap)",
+    "Capillary and serum beta-hydroxybutyrate / ketones",
+    "Capillary and laboratory glucose",
+    "Urea, electrolytes and creatinine with serial potassium",
+    "Screen for precipitant (FBC, CRP, urinalysis/culture, ECG, chest X-ray)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "ketonemia": true,
+    "polyuriaPolydipsia": true,
+    "dehydration": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "diabetesHx": true,
+    "ageOver50": true,
+    "renalImpairment": true,
+    "nursingHomeResident": true
+  },
+  "expected": {
+    "diagnosis": "dka",
+    "acceptableIds": [
+      "dka"
+    ],
+    "differentialIds": [
+      "hhs",
+      "pancreatitis"
+    ],
+    "investigations": [
+      "Venous blood gas with anion gap",
+      "Serum/capillary beta-hydroxybutyrate",
+      "Blood glucose",
+      "Urea, electrolytes, creatinine and serial potassium"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis must resolve to dka despite only modestly elevated glucose (euglycaemic/near-euglycaemic DKA).",
+    "System must flag high anion-gap ketoacidosis (ketonaemia + low bicarbonate/pH) as the defining feature.",
+    "No empiric antibiotics should be recommended in the absence of a confirmed infective source.",
+    "Management must include fixed-rate insulin with concurrent dextrose, fluids and potassium monitoring, and stopping the SGLT2 inhibitor.",
+    "HHS and sepsis should appear as differentials but not as the primary diagnosis."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

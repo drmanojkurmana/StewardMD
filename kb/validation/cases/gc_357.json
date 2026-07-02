@@ -1,0 +1,123 @@
+{
+  "id": "gc_357",
+  "specialty": "Rheumatology",
+  "condition": "Polymyalgia rheumatica",
+  "age": 82,
+  "sex": "F",
+  "presentingComplaint": "Progressive difficulty getting out of bed and rising from a chair over 5 weeks, with generalised aching and weight loss.",
+  "history": "Frail 82-year-old woman, lives alone with a home carer, referred by her GP as 'off legs / functional decline'. Over the past 5 weeks she has become increasingly unable to lift her arms to comb her hair or wash, and needs help to stand from a chair or the toilet. She describes deep aching across both shoulders, the back of the neck and both hips/thighs, with severe stiffness that is worst on waking and lasts well over an hour before she can loosen up. Symptoms are markedly worse in the early morning and disturb her sleep, causing her to turn over with difficulty. She has felt generally unwell with poor appetite, low-grade fevers and about 4 kg unintentional weight loss, prompting worry about cancer. No true muscle weakness when tested against resistance once the pain settles; the limitation is pain- and stiffness-related. Specifically denies headache, scalp tenderness, jaw claudication and any visual disturbance. No preceding trauma. Background: osteoporosis, mild chronic kidney disease, hypertension, and increasing frailty with two falls this year. She was seen twice already and given paracetamol and a short NSAID course with negligible benefit.",
+  "examination": "Frail, thin elderly woman in obvious discomfort on movement. Marked painful restriction of active shoulder abduction and hip flexion bilaterally with pain on the arc of movement; passive range better than active and no fixed weakness once analgesia given. No synovitis of small joints, no joint effusions, no rash. Temporal arteries non-tender with normal pulsation; no scalp tenderness. Muscle bulk preserved, power grossly normal when pain allows, reflexes intact. No lymphadenopathy or organomegaly; breast and abdominal examination unremarkable.",
+  "vitals": {
+    "hr": 86,
+    "bp": "138/80",
+    "rr": 16,
+    "temp": 37.5,
+    "spo2": 97
+  },
+  "labs": {
+    "esr": "82 mm/hr",
+    "crp": "64 mg/L",
+    "hemoglobin": "10.6 g/dL (normocytic)",
+    "wbc": "8.9 x10^9/L",
+    "platelets": "441 x10^9/L (reactive thrombocytosis)",
+    "creatinine": "1.3 mg/dL (baseline CKD)",
+    "albumin": "3.2 g/dL",
+    "ck": "92 U/L (normal)",
+    "alkPhos": "148 U/L (mildly raised)",
+    "tsh": "2.1 mIU/L (normal)",
+    "rheumatoidFactor": "negative",
+    "antiCCP": "negative",
+    "calcium": "2.32 mmol/L (normal)",
+    "serumProteinElectrophoresis": "no paraprotein"
+  },
+  "imaging": "Shoulder ultrasound: bilateral subacromial-subdeltoid bursitis and biceps tenosynovitis. Chest radiograph and abdominal ultrasound unremarkable (no occult malignancy identified).",
+  "microbiology": "Not applicable — non-infective inflammatory syndrome; blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Elderly-onset rheumatoid arthritis (RS3PE / seronegative)",
+    "Giant cell (temporal) arteritis with occult cranial disease",
+    "Occult malignancy presenting with constitutional symptoms",
+    "Hypothyroid myopathy"
+  ],
+  "finalDiagnosis": "Polymyalgia rheumatica",
+  "citations": [
+    "BSR/BHPR — Guidelines for the management of polymyalgia rheumatica — 2010",
+    "ACR/EULAR — Polymyalgia rheumatica classification criteria — 2012",
+    "Harrison's Principles of Internal Medicine, 22e — Polymyalgia Rheumatica and Giant Cell Arteritis"
+  ],
+  "stewardship": "Not applicable — non-infective inflammatory condition; no antibiotics indicated. Treat with low-dose glucocorticoid (prednisolone 15 mg/day) with bone/gastric protection and glucocorticoid stewardship (taper to lowest effective dose).",
+  "contraindications": [
+    "Avoid high-dose glucocorticoids unless GCA features emerge — no cranial or visual symptoms here",
+    "Caution with NSAIDs given age and chronic kidney disease",
+    "Ensure bone protection (calcium/vitamin D, bisphosphonate) given osteoporosis before prolonged steroids"
+  ],
+  "edgeCases": [
+    "Overlap with giant cell arteritis: must screen for headache, jaw claudication and visual loss at every review as PMR can herald GCA",
+    "Failure to respond briskly to 15 mg prednisolone within a week should prompt reconsideration (malignancy, RA, myositis)",
+    "Constitutional symptoms and reactive thrombocytosis in the frail elderly can mimic malignancy — but normal CK, seronegative markers and steroid response support PMR"
+  ],
+  "expectedMaiK": "Elderly frail patient with new bilateral shoulder and pelvic girdle pain and prolonged morning stiffness, markedly raised ESR and CRP, normal creatine kinase, seronegative markers and bursitis on ultrasound — polymyalgia rheumatica; confirm with a dramatic response to low-dose glucocorticoid and screen for coexistent giant cell arteritis.",
+  "expectedNextQuestions": [
+    "Any headache, scalp tenderness, jaw claudication or visual disturbance (giant cell arteritis screen)?",
+    "How long does the morning stiffness last, and is it bilateral shoulder and hip girdle?",
+    "Any true weakness versus pain-limited movement?",
+    "Red flags for malignancy — night sweats, focal symptoms, prior cancer?",
+    "How did she respond to any previous steroid or the planned prednisolone trial?"
+  ],
+  "expectedInvestigations": [
+    "ESR and CRP",
+    "Full blood count",
+    "Creatine kinase",
+    "Thyroid function tests",
+    "Rheumatoid factor and anti-CCP",
+    "Serum protein electrophoresis",
+    "Shoulder/hip ultrasound",
+    "Therapeutic trial of low-dose glucocorticoid with documented response"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "ageOver50": true,
+    "weightLoss": true,
+    "myalgiaArthralgia": true,
+    "polyarthralgia": true,
+    "subacuteOnset": true,
+    "fever": true
+  },
+  "expected": {
+    "diagnosis": "pmr",
+    "acceptableIds": [
+      "pmr"
+    ],
+    "differentialIds": [
+      "rheumatoid",
+      "temporal_arteritis",
+      "malignancy_b",
+      "myxedema"
+    ],
+    "investigations": [
+      "ESR",
+      "CRP",
+      "creatine kinase",
+      "thyroid function tests",
+      "rheumatoid factor / anti-CCP",
+      "serum protein electrophoresis",
+      "shoulder ultrasound",
+      "glucocorticoid response trial"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis resolves to pmr",
+    "differential includes elderly-onset rheumatoid arthritis and giant cell arteritis",
+    "creatine kinase is normal despite proximal girdle symptoms",
+    "ESR/CRP markedly elevated",
+    "giant cell arteritis screening (headache/jaw claudication/visual loss) is documented",
+    "no antibiotics recommended (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "id": "gc_246",
+  "specialty": "Respiratory",
+  "condition": "Bronchiectasis Exacerbation",
+  "age": 52,
+  "sex": "F",
+  "presentingComplaint": "3 days of a change in her usual daily cough with more, and now discoloured, phlegm.",
+  "history": "Known non-CF bronchiectasis (post-tuberculous, diagnosed 8 years ago on HRCT with lower-lobe cylindrical bronchiectasis). At baseline she raises about a tablespoon of mucoid sputum each morning and walks 2 km without limitation. Over the past 3 days she has noticed the sputum has roughly doubled in volume and turned yellow-green, with occasional flecks of blood on expectoration. She feels slightly more breathless on her usual walk and more fatigued, but has no fever, chills, pleuritic pain, or night sweats, and continues normal activities and full oral intake. Two prior exacerbations over the last year, the last sputum culture (6 months ago) grew Haemophilus influenzae; never grown Pseudomonas. Non-smoker. No recent travel, hospitalisation, or antibiotics in the last 90 days.",
+  "examination": "Comfortable, well-perfused, speaking in full sentences. No cyanosis or accessory muscle use. Scattered coarse crepitations at both lung bases that shift with coughing; a few expiratory wheezes. No focal consolidation, no signs of respiratory distress. No peripheral oedema, no clubbing change from baseline.",
+  "vitals": {
+    "hr": 88,
+    "bp": "126/78",
+    "rr": 18,
+    "temp": 37.4,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 13.1,
+    "wbc": 10.2,
+    "neutrophils": "70%",
+    "crp": 28,
+    "creatinine": 0.8,
+    "platelets": 268
+  },
+  "imaging": "Chest X-ray: bilateral lower-zone tram-track and ring shadows consistent with known bronchiectasis; no new lobar consolidation or effusion.",
+  "microbiology": "Sputum sent for Gram stain, culture and sensitivity; purulent sample. Prior culture (6 months ago): Haemophilus influenzae, beta-lactamase negative, amoxicillin-sensitive. No prior Pseudomonas isolation.",
+  "differentialDiagnoses": [
+    "Bronchiectasis exacerbation",
+    "COPD exacerbation",
+    "Acute bronchitis",
+    "Community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Acute exacerbation of bronchiectasis (early/mild, ambulatory) — deterioration in ≥3 symptoms (sputum volume, sputum purulence, breathlessness) in a patient with established bronchiectasis, without consolidation or systemic sepsis.",
+  "citations": [
+    "British Thoracic Society (BTS) — Guideline for Bronchiectasis in Adults — 2019",
+    "Harrison's Principles of Internal Medicine, 22e — Bronchiectasis"
+  ],
+  "stewardship": "Guideline-concordant empiric oral therapy targeting prior/likely airway pathogen. BTS recommends a 14-day antibiotic course for exacerbations, guided by the most recent sputum microbiology. Given prior amoxicillin-sensitive H. influenzae and no Pseudomonas risk, high-dose oral amoxicillin is first-line; send sputum culture and de-escalate/adjust on sensitivities. Mild ambulatory case suitable for oral outpatient treatment with airway clearance intensification; reserve IV/antipseudomonal cover for Pseudomonas colonisation or systemic deterioration.",
+  "contraindications": [
+    "Penicillin allergy (use doxycycline or a macrolide as alternative)",
+    "Avoid unnecessary fluoroquinolone unless Pseudomonas isolated or suspected"
+  ],
+  "edgeCases": [
+    "Blood-streaked sputum here is minor and exacerbation-related; frank/massive haemoptysis would mandate urgent imaging and bronchial artery assessment",
+    "If baseline or new Pseudomonas aeruginosa colonisation, switch empiric therapy to ciprofloxacin",
+    "Failure to improve at 48-72h or development of fever/hypoxia should prompt reassessment for pneumonia"
+  ],
+  "expectedMaiK": "Recognise an early/mild bronchiectasis exacerbation in a patient with established disease (increased sputum volume + purulence + breathlessness) and treat with a guideline-based 14-day oral antibiotic directed by prior sputum microbiology, rather than escalating to IV or broad-spectrum cover.",
+  "expectedNextQuestions": [
+    "Baseline sputum volume/colour and how it has changed",
+    "Most recent sputum culture result and any prior Pseudomonas isolation",
+    "Frequency of previous exacerbations and prior antibiotic response",
+    "Presence of fever, haemoptysis volume, or pleuritic pain",
+    "Adherence to airway clearance and any inhaled therapy"
+  ],
+  "expectedInvestigations": [
+    "Sputum Gram stain, culture and sensitivity",
+    "Chest X-ray to exclude new consolidation",
+    "FBC and CRP",
+    "Baseline oxygen saturation / spirometry if available"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "knownBronchiectasis": true,
+    "increasedSputumVolume": true,
+    "purulentSputum": true,
+    "coughRadio": true,
+    "increasedDyspnea": true,
+    "crepitations": true,
+    "wheeze": true,
+    "hemoptysis": true
+  },
+  "expected": {
+    "diagnosis": "BRONCHIECTASIS_EXACERBATION",
+    "acceptableIds": [
+      "BRONCHIECTASIS_EXACERBATION"
+    ],
+    "differentialIds": [
+      "COPD_EXACERBATION",
+      "ACUTE_BRONCHITIS",
+      "CAP"
+    ],
+    "investigations": [
+      "Sputum culture and sensitivity",
+      "Chest X-ray",
+      "FBC and CRP"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "Amoxicillin (high-dose oral, 14-day course)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be BRONCHIECTASIS_EXACERBATION",
+    "Must not escalate to IV/antipseudomonal therapy given no Pseudomonas risk and ambulatory mild presentation",
+    "Recommended empiric antibiotic is guided by prior sputum microbiology (amoxicillin for amoxicillin-sensitive H. influenzae)",
+    "Sputum culture must be recommended before/at initiation of antibiotics",
+    "Duration should reflect BTS 14-day course, not a short 5-day CAP course"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

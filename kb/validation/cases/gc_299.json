@@ -1,0 +1,119 @@
+{
+  "id": "gc_299",
+  "specialty": "Hematology",
+  "condition": "Symptomatic anaemia",
+  "age": 79,
+  "sex": "F",
+  "presentingComplaint": "Collapse at home with exertional chest tightness and breathlessness climbing stairs over the past week.",
+  "history": "Independent-living widow, brought in after a witnessed near-syncopal collapse while walking to the bathroom. For 2-3 weeks she has felt progressively short of breath on minimal exertion with a dull central chest tightness that eases at rest, and today briefly lost consciousness. She has noticed intermittent black tarry stools for around a fortnight, attributed by her to iron tablets she is NOT actually taking. Long-standing osteoarthritis managed with regular over-the-counter ibuprofen. Background of hypertension and mild chronic kidney disease. No haematemesis, no fever. Mild reduction in appetite but no dramatic weight loss. No prior transfusions.",
+  "examination": "Frail, markedly pale conjunctivae and palmar creases, cool peripheries. Alert and orientated but visibly breathless at rest. Soft ejection systolic flow murmur loudest at the base. Chest with fine bibasal crackles. Abdomen soft, non-tender, no organomegaly or masses. PR examination reveals black tarry melaena on the glove. No focal neurology; no peripheral oedema of note.",
+  "vitals": {
+    "hr": 118,
+    "bp": "94/58",
+    "rr": 26,
+    "temp": 36.7,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": "4.3 g/dL",
+    "mcv": "68 fL (microcytic)",
+    "wbc": "8.1 x10^9/L",
+    "platelets": "402 x10^9/L",
+    "ferritin": "6 ng/mL",
+    "transferrinSaturation": "4%",
+    "urea": "14.8 mmol/L",
+    "creatinine": "1.4 mg/dL",
+    "troponinT_hs": "78 ng/L (mildly elevated, non-dynamic)",
+    "reticulocyteCount": "low-normal",
+    "bloodFilm": "microcytic hypochromic red cells, anisopoikilocytosis, pencil cells"
+  },
+  "imaging": "Chest X-ray: mild upper-lobe vascular redistribution and small bilateral effusions, no consolidation, normal cardiac silhouette. ECG: sinus tachycardia with widespread horizontal ST depression in lateral leads (rate-related / demand pattern), no ST elevation.",
+  "microbiology": "Not applicable - non-infective presentation.",
+  "differentialDiagnoses": [
+    "Severe symptomatic iron-deficiency anaemia from chronic occult GI (NSAID-related) blood loss with demand myocardial ischaemia",
+    "Acute coronary syndrome",
+    "Decompensated heart failure",
+    "Bleeding peptic ulcer"
+  ],
+  "finalDiagnosis": "Severe symptomatic anaemia (Hb 4.3 g/dL) due to chronic occult NSAID-induced GI blood loss, presenting critically with high-output cardiac decompensation, exertional angina from demand ischaemia (type 2), and near-syncope.",
+  "citations": [
+    "British Society for Haematology - Guideline on the management of iron deficiency anaemia - 2021",
+    "AABB - Red Blood Cell Transfusion Thresholds and Storage - 2023",
+    "Harrison's Principles of Internal Medicine, 22e - Anemia and Iron Deficiency"
+  ],
+  "stewardship": "Not applicable - non-infective. No antimicrobial indicated.",
+  "contraindications": [
+    "Avoid rapid large-volume transfusion given cardiac decompensation - transfuse one unit at a time with furosemide cover and reassessment to prevent transfusion-associated circulatory overload (TACO).",
+    "Stop all NSAIDs immediately; start high-dose PPI.",
+    "Do not reflexively anticoagulate/treat as primary ACS - troponin rise is demand-driven (type 2) and there is active GI bleeding."
+  ],
+  "edgeCases": [
+    "Profoundly low Hb (4.3 g/dL) with a normal SpO2 - pulse oximetry does not detect anaemic hypoxia; oxygen content is critically reduced despite good saturation.",
+    "Elderly patients tolerate chronic anaemia until a threshold is crossed, then decompensate abruptly with cardiac/syncopal features rather than classic fatigue.",
+    "Melaena wrongly attributed by the patient to iron therapy she was never taking."
+  ],
+  "expectedMaiK": "Recognise that critically low haemoglobin from chronic occult GI blood loss is the unifying diagnosis driving the exertional angina, dyspnoea and syncope; prioritise cautious blood transfusion plus haemostatic/PPI management over treating a primary coronary event.",
+  "expectedNextQuestions": [
+    "Quantity, duration and colour of stool changes and any haematemesis?",
+    "Exact NSAID/antiplatelet/anticoagulant use and doses?",
+    "Any dizziness, angina or breathlessness at rest, and baseline exercise tolerance?",
+    "Dietary intake, prior anaemia or transfusions, and red-flag weight loss?"
+  ],
+  "expectedInvestigations": [
+    "Group and save / crossmatch",
+    "Full blood count with red cell indices and blood film",
+    "Iron studies (ferritin, transferrin saturation)",
+    "Reticulocyte count",
+    "Urea, electrolytes and creatinine",
+    "High-sensitivity troponin (serial)",
+    "12-lead ECG",
+    "Upper and lower GI endoscopy (OGD then colonoscopy) once haemodynamically stabilised"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "hemoglobin": true,
+    "ageOver50": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "dyspnea": true,
+    "exertionalChestPain": true,
+    "syncope": true,
+    "melena": true,
+    "palpitations": true,
+    "ecgIschemia": true,
+    "bilateralCrackles": true
+  },
+  "expected": {
+    "diagnosis": "anemia_sympt",
+    "acceptableIds": [
+      "anemia_sympt"
+    ],
+    "differentialIds": [
+      "acs",
+      "heart_failure",
+      "peptic_ulcer"
+    ],
+    "investigations": [
+      "Full blood count with red cell indices and blood film",
+      "Iron studies (ferritin, transferrin saturation)",
+      "Group and save / crossmatch",
+      "Serial high-sensitivity troponin and ECG",
+      "Upper and lower GI endoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank anemia_sympt as the primary diagnosis, not acs.",
+    "Must recommend crossmatch/transfusion and iron studies.",
+    "Must flag NSAID cessation + PPI and endoscopic evaluation for GI blood loss source.",
+    "Must not recommend any antibiotic (non-infective).",
+    "Must recognise normal SpO2 does not exclude critical anaemic hypoxia."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

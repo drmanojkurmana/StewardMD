@@ -1,0 +1,108 @@
+{
+  "id": "gc_354",
+  "specialty": "Cardiology",
+  "condition": "Acute pericarditis",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Two days of mild, sharp central chest discomfort following a head cold",
+  "history": "A 34-year-old primary school teacher presents to the ambulatory clinic with 2 days of intermittent, mild sharp retrosternal discomfort. She recalls a coryzal illness with sore throat and diffuse body aches about a week earlier that had almost resolved. The chest discomfort is not severe (she rates it 3/10) and she initially attributed it to muscle strain. It is clearly worse when she lies flat at night and on deep inspiration, and eases noticeably when she sits up and leans forward. There is no exertional component, no diaphoresis, and no radiation to the arm or jaw. She has had no true dyspnoea at rest, only mild breath-holding because deep breaths hurt. No syncope or palpitations of note. No cardiovascular risk factors, non-smoker, no family history of premature coronary disease, no recent travel or immobilisation, on no regular medication and no recent NSAID use.",
+  "examination": "Comfortable, well-perfused, speaking in full sentences. A soft, scratchy, tri-phasic friction rub is just audible at the left lower sternal edge, best heard sitting forward in end-expiration; it is easy to miss. Heart sounds otherwise normal with no gallop or murmur. JVP not raised, no pulsus paradoxus, no peripheral oedema. Chest clear with equal air entry; abdomen soft. No calf tenderness or leg swelling.",
+  "vitals": {
+    "hr": 96,
+    "bp": "122/76",
+    "rr": 16,
+    "temp": 37.6,
+    "spo2": 99
+  },
+  "labs": {
+    "wbc": "9.8 x10^3/uL (mild lymphocytosis)",
+    "crp": "28 mg/L (mildly elevated)",
+    "esr": "34 mm/hr",
+    "hs_troponin_T": "9 ng/L (normal, <14) - repeat at 3h also normal",
+    "creatinine": "0.8 mg/dL",
+    "tsh": "normal"
+  },
+  "imaging": "Chest X-ray: normal cardiac silhouette, clear lung fields, no effusion or consolidation. Transthoracic echocardiography: structurally normal heart with preserved biventricular function and only a physiological/trace rim of pericardial fluid, no tamponade physiology.",
+  "microbiology": "Not indicated; presumed viral/idiopathic. No blood cultures sent (afebrile-range, non-toxic).",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (diffuse ST elevation can mimic STEMI)",
+    "Pulmonary embolism (pleuritic pain post-viral illness)",
+    "Gastro-oesophageal reflux / musculoskeletal chest pain",
+    "Community-acquired pneumonia / early pleurisy"
+  ],
+  "finalDiagnosis": "Acute (viral/idiopathic) pericarditis - early, mild presentation",
+  "citations": [
+    "ESC — Diagnosis and Management of Pericardial Diseases — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Pericardial Disease"
+  ],
+  "stewardship": "Not an antibiotic-appropriate condition. Presumed viral/idiopathic acute pericarditis: first-line is high-dose NSAID (e.g., ibuprofen) or aspirin with gastroprotection, PLUS colchicine for 3 months to reduce recurrence, with activity restriction until symptom resolution and CRP normalisation. No antimicrobials indicated.",
+  "contraindications": [
+    "Avoid systemic corticosteroids first-line (associated with higher recurrence unless NSAID/colchicine contraindicated or specific indication)",
+    "Avoid anticoagulation where pericarditis is suspected due to haemorrhagic effusion/tamponade risk",
+    "Colchicine dose reduction / caution in renal impairment and with CYP3A4/P-gp inhibitors",
+    "NSAID caution in peptic ulcer disease, renal impairment"
+  ],
+  "edgeCases": [
+    "Concomitant troponin rise would indicate myopericarditis and mandate admission, echo surveillance and exercise restriction",
+    "Development of raised JVP, pulsus paradoxus or hypotension signals evolving effusion/tamponade requiring urgent echo",
+    "Failure to respond within a week or fever/weight loss should prompt evaluation for bacterial, tuberculous, autoimmune or neoplastic aetiology"
+  ],
+  "expectedMaiK": "Recognise early/mild acute pericarditis from positional (worse supine, better sitting forward) pleuritic chest pain after a viral prodrome, a subtle pericardial friction rub, mildly raised inflammatory markers with NORMAL troponin, and to distinguish it from ACS and PE; manage with NSAID plus colchicine rather than antibiotics.",
+  "expectedNextQuestions": [
+    "Is the pain positional (worse lying flat, relieved leaning forward) and pleuritic?",
+    "Was there a preceding viral/coryzal illness?",
+    "Any features of tamponade (breathlessness at rest, presyncope) or of myocarditis?",
+    "Any recent MI, cardiac surgery, autoimmune disease, TB exposure or malignancy?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (look for widespread concave ST elevation with PR depression, spared aVR)",
+    "High-sensitivity troponin (to exclude ACS and detect myopericarditis)",
+    "CRP/ESR and FBC",
+    "Transthoracic echocardiography (assess for effusion/tamponade)",
+    "Chest X-ray"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "chestPain": true,
+    "pleuriticChestPain": true,
+    "pleuriticPain": true,
+    "coryza": true,
+    "myalgiaArthralgia": true,
+    "fever": true,
+    "subacuteOnset": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "pericarditis",
+    "acceptableIds": [
+      "pericarditis"
+    ],
+    "differentialIds": [
+      "acs",
+      "pe",
+      "gerd_chest",
+      "CAP"
+    ],
+    "investigations": [
+      "ECG",
+      "hs-troponin",
+      "CRP/ESR",
+      "transthoracic echocardiography",
+      "chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == pericarditis",
+    "troponin within normal limits (distinguishes from ACS/myopericarditis)",
+    "no antibiotics recommended (non-infective; NSAID + colchicine)",
+    "echocardiography shows no significant effusion / no tamponade in this mild presentation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

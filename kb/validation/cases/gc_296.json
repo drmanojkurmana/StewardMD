@@ -1,0 +1,113 @@
+{
+  "id": "gc_296",
+  "specialty": "Endocrine",
+  "condition": "Adrenal crisis",
+  "age": 71,
+  "sex": "F",
+  "presentingComplaint": "Three days of worsening nausea, vague abdominal pain, profound lethargy and 'not being herself' after a chest infection",
+  "history": "71-year-old woman with a 4-year history of polymyalgia rheumatica managed on long-term low-dose prednisolone (5 mg daily), which her GP tapered and then stopped 10 days ago because her symptoms had settled. Over the past week she developed a productive cough treated with oral amoxicillin. In the last 3 days she has become increasingly nauseated with two episodes of vomiting, poorly localised abdominal discomfort, anorexia and marked fatigue. Family report she has been intermittently drowsy and muddled today, and dizzy on standing. No diarrhoea, no dysuria, no focal neurological symptoms. She has lost about 4 kg over a month with reduced appetite. No hyperpigmentation noted (secondary/iatrogenic axis suppression). Past history: PMR, hypertension, osteopenia. The presentation is subtle - she was initially referred as ?intra-abdominal sepsis / gastroenteritis, and the recent steroid withdrawal on a background of intercurrent infection is the key overlooked trigger.",
+  "examination": "Frail, drowsy but rousable and orientable to person. Mild global abdominal tenderness with no guarding, rigidity or organomegaly; bowel sounds present. Dry mucous membranes and reduced skin turgor. No hyperpigmentation of palmar creases or buccal mucosa (consistent with steroid-withdrawal/secondary insufficiency). Chest with a few right basal crackles from resolving infection. No neck stiffness, no focal neurological deficit. Postural drop in blood pressure (lying 108/64, standing 88/56 with dizziness).",
+  "vitals": {
+    "hr": 106,
+    "bp": "92/58",
+    "rr": 18,
+    "temp": 37.2,
+    "spo2": 97
+  },
+  "labs": {
+    "sodium_mmol_L": 126,
+    "potassium_mmol_L": 5.5,
+    "glucose_mg_dL": 58,
+    "urea_mmol_L": 11.2,
+    "creatinine_mg_dL": 1.4,
+    "hemoglobin_g_dL": 12.1,
+    "wbc_10e9_L": 9.8,
+    "eosinophils_pct": 6,
+    "cortisol_random_nmol_L": 84,
+    "acth_pg_mL": 8,
+    "TSH_mIU_L": 2.1,
+    "lactate_mmol_L": 1.6,
+    "crp_mg_L": 22
+  },
+  "imaging": "CT abdomen/pelvis (done to exclude surgical cause of pain) unremarkable; no free air, no obstruction, normal adrenals with no calcification. Chest radiograph shows minor residual right basal atelectasis/consolidation, resolving.",
+  "microbiology": "Blood cultures pending and subsequently negative; urine culture negative. No focus of ongoing sepsis identified.",
+  "differentialDiagnoses": [
+    "Adrenal crisis precipitated by abrupt steroid withdrawal plus intercurrent infection (secondary/tertiary adrenal insufficiency)",
+    "Sepsis / intra-abdominal infection",
+    "Hypovolaemia from poor intake and vomiting",
+    "Symptomatic hyponatraemia of another cause"
+  ],
+  "finalDiagnosis": "Adrenal crisis (acute glucocorticoid deficiency) precipitated by recent cessation of long-term prednisolone during an intercurrent chest infection - subtle presentation dominated by GI symptoms, lethargy, hyponatraemia, hypoglycaemia and postural hypotension rather than overt shock",
+  "citations": [
+    "Endocrine Society - Diagnosis and Treatment of Primary Adrenal Insufficiency Clinical Practice Guideline - 2016",
+    "Society for Endocrinology - Emergency Management of Acute Adrenal Insufficiency (Adrenal Crisis) in Adults - 2016",
+    "Harrison's Principles of Internal Medicine 22e - Disorders of the Adrenal Cortex"
+  ],
+  "stewardship": "Not applicable - non-infective endocrine emergency; antibiotics only if a concurrent infective trigger is confirmed.",
+  "contraindications": [
+    "Do not delay parenteral hydrocortisone while awaiting confirmatory cortisol/ACTH results",
+    "Avoid aggressive rapid correction of hyponatraemia (risk of osmotic demyelination); sodium usually corrects with hydrocortisone and fluids",
+    "Avoid hypotonic maintenance fluids initially; resuscitate with isotonic saline containing dextrose to treat hypoglycaemia"
+  ],
+  "edgeCases": [
+    "Absence of hyperpigmentation because this is steroid-withdrawal (secondary/tertiary) insufficiency rather than Addison's - does not exclude crisis",
+    "Normothermia/low-grade findings and only modest tachycardia can mask the diagnosis in the frail elderly",
+    "Hyperkalaemia may be mild or absent in secondary insufficiency because mineralocorticoid (aldosterone) axis is preserved"
+  ],
+  "expectedMaiK": "Recognise adrenal crisis and give immediate IV hydrocortisone 100 mg (then 50 mg 6-hourly or infusion) plus rapid IV isotonic saline with dextrose to correct hypoglycaemia; take a random cortisol/ACTH before steroid but never delay treatment.",
+  "expectedNextQuestions": [
+    "Exact steroid history - dose, duration, and how recently prednisolone was stopped or tapered?",
+    "Any preceding illness, vomiting, or other physiological stressor acting as a trigger?",
+    "Symptoms of chronic insufficiency - weight loss, salt craving, dizziness, pigmentation?"
+  ],
+  "expectedInvestigations": [
+    "Random serum cortisol and paired plasma ACTH (before hydrocortisone)",
+    "Urea and electrolytes (sodium, potassium), capillary and serum glucose",
+    "Short Synacthen (ACTH stimulation) test once stabilised",
+    "Septic screen to identify precipitating infection"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "steroidUse": true,
+    "nauseaVomiting": true,
+    "abdominalPain": true,
+    "weightLoss": true,
+    "dehydration": true,
+    "hypotension": true,
+    "alteredSensorium": true,
+    "tachycardia": true,
+    "syncope": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "adrenal_crisis",
+    "acceptableIds": [
+      "adrenal_crisis"
+    ],
+    "differentialIds": [
+      "hyponatremia",
+      "hypovolemic_shock",
+      "hypoglycemia"
+    ],
+    "investigations": [
+      "Random serum cortisol and plasma ACTH",
+      "Serum electrolytes and glucose",
+      "Short Synacthen test",
+      "Septic screen for precipitant"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "adrenal_crisis must appear in the ranked differential",
+    "Immediate IV hydrocortisone must be recommended without waiting for confirmatory cortisol",
+    "Hyponatraemia plus hypoglycaemia plus recent steroid withdrawal should raise adrenal crisis even without overt shock or hyperpigmentation",
+    "No antibiotics recommended as first-line unless an infective precipitant is confirmed"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

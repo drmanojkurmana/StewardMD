@@ -1,0 +1,121 @@
+{
+  "id": "gc_245",
+  "specialty": "Central Nervous System",
+  "condition": "Brain Abscess",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Progressive headache for 10 days, now with two witnessed seizures, right-sided weakness and rapidly declining consciousness over the last 6 hours.",
+  "history": "Poorly controlled type 2 diabetic with a 3-week history of chronic left ear discharge treated as 'ear infection' by a local practitioner. Over the past 10 days he developed a dull, progressively worsening left-sided headache with intermittent low-grade fever, initially dismissed as sinusitis. In the 24 hours before admission he became increasingly drowsy and confused, vomited several times, and this morning had two generalized tonic-clonic seizures at home followed by right arm and leg weakness. Family report he is now difficult to rouse. No recent travel. No prior neurosurgery or head trauma. This is deliberately NOT the classic well-localized subacute vignette: he presents in extremis with an evolving space-occupying, raised-ICP picture and secondary sepsis physiology.",
+  "examination": "Drowsy, opens eyes to pain only, localizes with left arm, confused vocalization (GCS E2V3M5 = 10). Febrile and toxic-looking. Left ear with foul purulent discharge and mastoid tenderness. Fundoscopy shows bilateral papilloedema. Neck mildly stiff. Dense right-sided pyramidal weakness (power 3/5 arm and leg) with an extensor plantar on the right. Right pupil 1 mm larger than left but reactive. No skin rash. Chest clear; abdomen soft.",
+  "vitals": {
+    "hr": 116,
+    "bp": "162/94",
+    "rr": 22,
+    "temp": 38.9,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "18.4 x10^9/L (neutrophil predominant)",
+    "crp": "184 mg/L",
+    "esr": "72 mm/hr",
+    "platelets": 268,
+    "creatinine": 1.1,
+    "randomGlucose": "296 mg/dL",
+    "hba1c": "9.4%",
+    "lactate": "2.1 mmol/L",
+    "bloodCultures": "sent x2, pending",
+    "note": "Lumbar puncture deferred due to focal deficit, depressed GCS and radiological mass effect (herniation risk)."
+  },
+  "imaging": "Contrast MRI brain: a 3.4 cm left temporo-parietal ring-enhancing lesion with a smooth thin wall, central marked restricted diffusion on DWI/ADC (characteristic of pyogenic abscess rather than tumour necrosis), surrounding vasogenic oedema, 7 mm midline shift and early uncal herniation. Coalescent left mastoid air-cell opacification with bony dehiscence indicating contiguous otogenic source.",
+  "microbiology": "Stereotactic aspiration: frank pus; Gram stain shows Gram-positive cocci in chains plus Gram-negative bacilli. Culture grew Streptococcus anginosus (milleri) group with mixed anaerobes (Prevotella spp.). Ear swab: mixed flora.",
+  "differentialDiagnoses": [
+    "Brain abscess (otogenic, contiguous spread) — confirmed",
+    "Cerebral neoplasm / metastasis with necrotic ring enhancement",
+    "Bacterial meningitis / meningoencephalitis",
+    "Herpes / other viral encephalitis",
+    "Intracerebral haemorrhage with mass effect"
+  ],
+  "finalDiagnosis": "Otogenic bacterial brain abscess (left temporo-parietal) with mass effect and impending uncal herniation, secondary to chronic suppurative otitis media / mastoiditis in a poorly controlled diabetic.",
+  "citations": [
+    "ESCMID — Diagnosis and Treatment of Brain Abscess — 2024",
+    "Harrison's Principles of Internal Medicine, 22e — Brain Abscess and Empyema",
+    "IDSA — Bacterial Meningitis / CNS Infections (empiric CNS coverage principles) — 2017"
+  ],
+  "stewardship": "Neurosurgical drainage/aspiration is both diagnostic and therapeutic and must be coordinated urgently. Start empiric IV therapy after cultures with good CNS penetration at meningeal doses: a third-generation cephalosporin (ceftriaxone or cefotaxime) PLUS metronidazole for anaerobic/otogenic cover, PLUS vancomycin pending Gram stain/MRSA risk. High-dose IV dexamethasone and mannitol for oedema/raised ICP with neurosurgical input; anti-epileptic for seizures. Typical duration 6-8 weeks IV, de-escalated on aspirate culture and source control (mastoidectomy). Tight glycaemic control.",
+  "contraindications": [
+    "Lumbar puncture contraindicated with focal deficit, GCS 10 and radiological mass effect/midline shift (herniation risk)",
+    "Avoid aminoglycoside monotherapy — poor CNS penetration",
+    "Avoid delaying neurosurgical decompression while awaiting culture results"
+  ],
+  "edgeCases": [
+    "Restricted diffusion on DWI distinguishes pyogenic abscess from necrotic tumour, which typically does not restrict",
+    "Streptococcus anginosus group has a strong association with abscess formation and otogenic/odontogenic sources",
+    "Cushing response (hypertension) may coexist with sepsis-driven tachycardia, masking classic bradycardia"
+  ],
+  "expectedMaiK": "A severe, critically-ill otogenic brain abscess must be recognized as a neurosurgical emergency: ring-enhancing lesion with DWI restriction plus mass effect in a septic diabetic mandates urgent aspiration, meningeal-dose ceftriaxone + metronidazole (+ vancomycin), ICP control, and LP avoidance.",
+  "expectedNextQuestions": [
+    "Is there a contiguous source (ear, sinus, dental) or a right-to-left cardiac/pulmonary shunt?",
+    "Any immunocompromise beyond diabetes (HIV, steroids, transplant)?",
+    "Onset and evolution of the deficit and seizures to gauge herniation trajectory?",
+    "Any prior antibiotics that could alter culture yield?"
+  ],
+  "expectedInvestigations": [
+    "Urgent contrast MRI brain with DWI/ADC",
+    "Neurosurgical referral for stereotactic aspiration with Gram stain, aerobic/anaerobic culture",
+    "Blood cultures x2 before antibiotics",
+    "CT temporal bones / mastoid for source",
+    "FBC, CRP/ESR, glucose/HbA1c, renal function; HIV test",
+    "Echocardiogram if no contiguous source found"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "headacheSevere": true,
+    "focalNeuroDeficit": true,
+    "seizure": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "papilledema": true,
+    "toxicAppearing": true,
+    "subacuteOnset": true,
+    "diabetesHx": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "BRAIN_ABSCESS",
+    "acceptableIds": [
+      "BRAIN_ABSCESS"
+    ],
+    "differentialIds": [
+      "brain_tumour",
+      "MENINGITIS",
+      "ENCEPHALITIS",
+      "ich"
+    ],
+    "investigations": [
+      "Contrast MRI brain with DWI/ADC",
+      "Stereotactic aspiration with Gram stain and culture",
+      "Blood cultures x2",
+      "CT temporal bones / mastoid"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Ceftriaxone",
+        "Metronidazole",
+        "Vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['BRAIN_ABSCESS']",
+    "Model should flag LP as contraindicated given mass effect and depressed GCS",
+    "Empiric regimen must include anaerobic cover (metronidazole) for otogenic source",
+    "Should recommend urgent neurosurgical aspiration/source control, not antibiotics alone",
+    "DWI restriction should be used to favour abscess over necrotic tumour"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

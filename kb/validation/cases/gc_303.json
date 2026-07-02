@@ -1,0 +1,118 @@
+{
+  "id": "gc_303",
+  "specialty": "Pulmonary",
+  "condition": "Asthma exacerbation",
+  "age": 78,
+  "sex": "F",
+  "presentingComplaint": "Progressive breathlessness and wheeze over 2 days in a frail elderly woman with long-standing asthma.",
+  "history": "78-year-old lifelong non-smoker, frail (uses a walking frame, lives with daughter), with asthma since her thirties maintained on low-dose inhaled corticosteroid/long-acting beta-agonist. Over the past 2 days she has had increasing breathlessness, an audible wheeze and a dry night-time cough that wakes her, following a coryzal illness in her grandchild. She has needed her salbutamol inhaler every 2-3 hours with only partial, transient relief. No chest pain, no orthopnoea or paroxysmal nocturnal dyspnoea, no ankle swelling, no fever or purulent sputum. Comorbidities: hypertension, type 2 diabetes, osteoporosis. She has had two similar episodes over the past year, each responding to oral steroids. Poor inhaler technique noted at last review; she often forgets her preventer. No recent travel or immobility.",
+  "examination": "Frail, alert, speaking in short phrases but able to complete sentences with effort. Using accessory muscles, mild intercostal recession. Widespread bilateral polyphonic expiratory wheeze with prolonged expiratory phase; air entry reduced but symmetrical, no focal crepitations, no bronchial breathing. JVP not raised, no peripheral oedema, heart sounds normal with no added sounds or murmur. Calves soft and non-tender. Peak expiratory flow 150 L/min (personal best 320 L/min, ~47% predicted). No cyanosis.",
+  "vitals": {
+    "hr": 112,
+    "bp": "148/86",
+    "rr": 26,
+    "temp": 36.8,
+    "spo2": 91
+  },
+  "labs": {
+    "peakExpiratoryFlow_Lmin": 150,
+    "percentPersonalBest": 47,
+    "wbc": 9.2,
+    "eosinophils_x10e9L": 0.6,
+    "neutrophils_x10e9L": 6.1,
+    "crp_mgL": 8,
+    "abg_pH": 7.44,
+    "abg_paco2_kPa": 4.2,
+    "abg_pao2_kPa": 8.6,
+    "bnp_pgml": 48,
+    "creatinine": 0.9,
+    "potassium": 3.9,
+    "glucose_mgdl": 184
+  },
+  "imaging": "Chest radiograph: hyperinflated lung fields, no consolidation, no pleural effusion, no pneumothorax; cardiac silhouette normal, no upper-lobe diversion or interstitial oedema.",
+  "microbiology": "Not indicated; no fever or purulent sputum. Respiratory viral swab pending (index coryzal contact).",
+  "differentialDiagnoses": [
+    "Acute asthma exacerbation (viral-triggered)",
+    "Acute heart failure / pulmonary oedema",
+    "COPD exacerbation",
+    "Pulmonary embolism",
+    "Community-acquired pneumonia"
+  ],
+  "finalDiagnosis": "Acute asthma exacerbation (moderate-to-severe, viral-triggered) in a frail elderly woman with long-standing atopic asthma",
+  "citations": [
+    "GINA — Global Strategy for Asthma Management and Prevention — 2024",
+    "Harrison's Principles of Internal Medicine, 22e — Asthma"
+  ],
+  "stewardship": "Non-infective exacerbation; no antibiotics indicated. Reserve antibiotics only if clear evidence of bacterial infection (fever, purulent sputum, radiographic consolidation).",
+  "contraindications": [
+    "Avoid non-selective beta-blockers",
+    "Caution with sedatives given hypercapnia risk in fatigue",
+    "Monitor serum potassium with repeated beta-agonist nebulisation",
+    "Systemic steroids will raise blood glucose in this diabetic patient — monitor and adjust"
+  ],
+  "edgeCases": [
+    "Silent chest or rising PaCO2 signalling life-threatening asthma and need for critical-care review",
+    "Elderly wheeze frequently mislabelled as heart failure or COPD — normal BNP, normal cardiac silhouette and lifelong non-smoker with childhood-onset reversible disease point to asthma",
+    "Frailty and accessory-muscle use may mask fatigue; monitor for exhaustion"
+  ],
+  "expectedMaiK": "Recognise a moderate-to-severe acute asthma exacerbation and treat promptly with controlled oxygen to target SpO2 94-98%, repeated inhaled short-acting beta-agonist plus ipratropium, and early systemic corticosteroids, while excluding heart failure and PE as mimics.",
+  "expectedNextQuestions": [
+    "What is the personal-best/predicted peak expiratory flow and current percentage?",
+    "Is she able to speak in full sentences, and are there signs of exhaustion or a silent chest?",
+    "Any orthopnoea, PND or leg swelling to suggest cardiac cause?",
+    "Inhaler adherence and technique, and number of exacerbations/steroid courses in the past year?",
+    "Any fever, purulent sputum or pleuritic pain suggesting infection?"
+  ],
+  "expectedInvestigations": [
+    "Serial peak expiratory flow",
+    "Pulse oximetry and arterial blood gas if deteriorating or SpO2 <92%",
+    "Chest radiograph to exclude pneumonia/pneumothorax",
+    "ECG",
+    "BNP/NT-proBNP if cardiac cause suspected"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "wheeze": true,
+    "dyspnea": true,
+    "increasedDyspnea": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "coughRadio": true,
+    "hypertensionHx": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "asthma_exac",
+    "acceptableIds": [
+      "asthma_exac"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "copd_exac_ni",
+      "pe",
+      "CAP"
+    ],
+    "investigations": [
+      "Serial peak expiratory flow",
+      "Arterial blood gas",
+      "Chest radiograph",
+      "ECG"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be asthma_exac",
+    "Must not recommend antibiotics (non-infective exacerbation)",
+    "Must recommend inhaled short-acting beta-agonist and systemic corticosteroid",
+    "Heart failure and COPD must appear only as differentials, not as the final diagnosis",
+    "Oxygen target 94-98% should be used, not high-flow uncontrolled oxygen"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

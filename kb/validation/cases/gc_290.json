@@ -1,0 +1,115 @@
+{
+  "id": "gc_290",
+  "specialty": "Respiratory",
+  "condition": "Ventilator Associated Pneumonia",
+  "age": 64,
+  "sex": "M",
+  "presentingComplaint": "Day-6 intubated ICU patient with a subtle, insidious rise in ventilator support and low-grade temperature — no dramatic septic deterioration.",
+  "history": "Admitted 6 days ago with a large-vessel ischaemic stroke; intubated on day 1 for airway protection and depressed consciousness. Received empiric ceftriaxone for 3 days early in admission for suspected aspiration at presentation, stopped 48h ago. Over the past 24-36h the bedside nurse noted the FiO2 requirement creeping up from 0.35 to 0.55 and slightly more frequent, thicker tracheal aspirate on suctioning. No overt fever spikes, no rigors, haemodynamically stable on no vasopressors. Enteral feeds ongoing via NG tube. The change is subtle and easily attributable to atelectasis or fluid — the classic florid VAP picture is absent.",
+  "examination": "Sedated, GCS not assessable off sedation. Chest: new coarse crepitations over the right lower and mid zones, reduced air entry at the right base. Increased volume of purulent (yellow) tracheal secretions on suctioning. No peripheral stigmata of shock; warm peripheries, cap refill <2s. Abdomen soft, NG feeds absorbing. No calf swelling.",
+  "vitals": {
+    "hr": 98,
+    "bp": "122/70",
+    "rr": 24,
+    "temp": 37.7,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": 10.8,
+    "wbc": 13.9,
+    "neutrophilPct": 84,
+    "platelets": 240,
+    "creatinine": 0.9,
+    "crp": 96,
+    "procalcitonin": 0.9,
+    "lactate": 1.4,
+    "pao2fio2": 168
+  },
+  "imaging": "Portable CXR: NEW right lower/mid-zone alveolar infiltrate not present on the day-3 film; no large effusion, cardiomediastinal silhouette unchanged, no pneumothorax. Bedside echo: preserved LV function, no gross volume overload (argues against cardiogenic pulmonary oedema).",
+  "microbiology": "Endotracheal aspirate: Gram stain shows abundant neutrophils and Gram-negative bacilli; semi-quantitative culture pending (sent at threshold ≥10^5 CFU/mL). Blood cultures x2 sent. Prior admission surveillance flagged Pseudomonas-risk unit exposure.",
+  "differentialDiagnoses": [
+    "Hospital-acquired (non-ventilator) pneumonia",
+    "Aspiration pneumonia / chemical pneumonitis",
+    "Pulmonary embolism",
+    "Cardiogenic pulmonary oedema / atelectasis"
+  ],
+  "finalDiagnosis": "Ventilator-associated pneumonia (onset day 6 of mechanical ventilation) — subtle/atypical presentation with insidiously rising FiO2 requirement, new infiltrate, purulent secretions and low-grade fever rather than florid sepsis.",
+  "citations": [
+    "IDSA/ATS — Management of Hospital-Acquired and Ventilator-Associated Pneumonia — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Pneumonia (Hospital-Acquired and Ventilator-Associated)"
+  ],
+  "stewardship": "Infective. VAP with late onset (>5 days ventilation) plus recent IV antibiotic exposure = MDR risk. Per IDSA/ATS 2016, cover MRSA + antipseudomonal Gram-negatives empirically after cultures: e.g. piperacillin-tazobactam (or cefepime) PLUS vancomycin. De-escalate on culture/sensitivity; treat 7 days if improving. Broad/restricted tier requiring stewardship approval.",
+  "contraindications": [
+    "Avoid aminoglycoside monotherapy for Gram-negative cover",
+    "Vancomycin: monitor levels/renal function; adjust in AKI",
+    "Do not delay empiric therapy awaiting culture in a deteriorating patient"
+  ],
+  "edgeCases": [
+    "Subtle FiO2 creep and low-grade temperature can be misread as atelectasis or fluid overload, delaying diagnosis",
+    "Tracheal colonisation vs true infection — quantitative/semi-quantitative culture thresholds help distinguish",
+    "Recent ceftriaxone may partially treat and mask, selecting for resistant organisms"
+  ],
+  "expectedMaiK": "New/progressive radiographic infiltrate plus purulent tracheal secretions and worsening oxygenation arising >48h after intubation defines VAP; the presentation is deliberately subtle (no high fever/shock).",
+  "expectedNextQuestions": [
+    "How many days has the patient been mechanically ventilated?",
+    "Has the FiO2/PEEP requirement changed from baseline?",
+    "What is the character and volume trend of tracheal secretions?",
+    "Any antibiotic exposure or MDR-organism history in the last 90 days?"
+  ],
+  "expectedInvestigations": [
+    "Endotracheal aspirate for Gram stain and semi-quantitative culture",
+    "Blood cultures x2",
+    "Portable chest radiograph (compare with prior films)",
+    "Arterial blood gas / PaO2:FiO2 ratio",
+    "CBC, CRP/procalcitonin, renal function"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "mechanicalVentilation": true,
+    "hospitalDay48": true,
+    "purulentSecretions": true,
+    "worseningOxygenation": true,
+    "consolidation": true,
+    "crepitations": true,
+    "priorAntibiotics": true,
+    "mdrRisk": true,
+    "icuStay": true,
+    "hospitalizationLast90Days": true,
+    "hypoxia": true
+  },
+  "expected": {
+    "diagnosis": "VAP",
+    "acceptableIds": [
+      "VAP"
+    ],
+    "differentialIds": [
+      "HAP",
+      "ASPIRATION_PNEUMONIA",
+      "pe",
+      "heart_failure"
+    ],
+    "investigations": [
+      "Endotracheal aspirate Gram stain and semi-quantitative culture",
+      "Blood cultures x2",
+      "Portable chest radiograph vs prior",
+      "PaO2:FiO2 / arterial blood gas"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "Piperacillin-tazobactam",
+        "Vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine should return VAP as the top diagnosis given onset >48h on mechanical ventilation with new infiltrate and purulent secretions",
+    "Empiric regimen must include both antipseudomonal Gram-negative cover and MRSA cover given late-onset + prior antibiotics",
+    "HAP, aspiration pneumonia and PE should appear as differentials but not outrank VAP",
+    "Absence of high fever/shock must not lower confidence below diagnostic threshold"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

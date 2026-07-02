@@ -1,0 +1,108 @@
+{
+  "id": "gc_358",
+  "specialty": "Pulmonary",
+  "condition": "Pneumothorax",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Sudden worsening breathlessness and right-sided chest pain in a patient with severe COPD, initially treated as an infective exacerbation.",
+  "history": "71-year-old man with GOLD stage 4 COPD (FEV1 28% predicted) on home oxygen 2 L/min and triple inhaled therapy, ex-smoker (55 pack-years). For 2 days he had noticed increasing dyspnoea and was started on oral prednisolone and amoxicillin by his GP for a presumed COPD exacerbation. Whilst climbing the stairs this morning he developed abrupt right-sided pleuritic chest pain and a sharp step-change in breathlessness far beyond his usual exacerbation pattern, with no improvement after repeated salbutamol nebulisers. No cough productive of new purulent sputum, no fever, no haemoptysis, no leg swelling. Because he has chronic exertional dyspnoea and habitually reduced breath sounds, the sudden deterioration was first attributed to his COPD, delaying recognition. No trauma. Prior CT had shown apical bullous emphysema.",
+  "examination": "Alert but distressed and tachypnoeic, using accessory muscles, speaking in short phrases. Trachea central to slightly deviated left. Markedly reduced chest expansion on the right with hyper-resonant percussion note and absent/greatly diminished breath sounds over the right hemithorax; left side shows the patient's baseline quiet vesicular breath sounds with a prolonged expiratory phase. No JVP elevation, no pedal oedema, calves soft and non-tender. Underlying hyperinflation makes the contrast between sides the key discriminating sign.",
+  "vitals": {
+    "hr": 114,
+    "bp": "106/72",
+    "rr": 30,
+    "temp": 36.7,
+    "spo2": 83
+  },
+  "labs": {
+    "hemoglobin": "14.1 g/dL",
+    "wbc": "10.8 x10^3/uL",
+    "crp": "18 mg/L",
+    "creatinine": "0.9 mg/dL",
+    "abg_on_2L_O2": "pH 7.31, PaO2 7.4 kPa, PaCO2 7.8 kPa, HCO3 30 mmol/L (baseline compensated hypercapnia, now acute-on-chronic)"
+  },
+  "imaging": "Erect chest radiograph: large right-sided pneumothorax with a visible visceral pleural edge and >2 cm rim of air at the hilar level, absent lung markings peripherally, and depression of the right hemidiaphragm; underlying bullous emphysema at both apices makes edge interpretation harder but the lucent zone is confirmed. No mediastinal shift to suggest tension at rest. CT thorax confirms a secondary spontaneous pneumothorax arising from ruptured apical bullae.",
+  "microbiology": "Not applicable; no features of active infection driving this presentation.",
+  "differentialDiagnoses": [
+    "Secondary spontaneous pneumothorax complicating severe COPD (target)",
+    "Acute infective COPD exacerbation (the confounding comorbidity)",
+    "Pulmonary embolism",
+    "Acute coronary syndrome",
+    "Large bulla mimicking pneumothorax on plain film"
+  ],
+  "finalDiagnosis": "Secondary spontaneous pneumothorax in severe COPD",
+  "citations": [
+    "British Thoracic Society (BTS) — Pleural Disease Guideline, Pneumothorax — 2023",
+    "Harrison's Principles of Internal Medicine, 22e — Disorders of the Pleura / Pneumothorax"
+  ],
+  "stewardship": "Not applicable — non-infective diagnosis; empirical antibiotics started by the GP for a presumed exacerbation should be reviewed and de-escalated once pneumothorax is confirmed as the cause of deterioration.",
+  "contraindications": [
+    "Avoid attributing the acute step-change solely to COPD exacerbation and escalating bronchodilators/steroids without imaging",
+    "Do not delay decompression if the patient becomes haemodynamically unstable (tension physiology)",
+    "Small-bore Seldinger chest drain preferred over needle aspiration alone in secondary pneumothorax given high failure rate in emphysematous lung"
+  ],
+  "edgeCases": [
+    "Apical bullae on plain film can be mistaken for pneumothorax (or vice versa) — CT resolves the ambiguity before drain insertion",
+    "In severe COPD even a modest-volume pneumothorax causes profound decompensation because respiratory reserve is minimal",
+    "Baseline quiet breath sounds bilaterally can mask the classic unilateral silence; percussion asymmetry and hyper-resonance are more reliable"
+  ],
+  "expectedMaiK": "Sudden step-change dyspnoea and pleuritic pain in a severe-COPD patient with unilateral hyper-resonance and absent breath sounds indicates secondary spontaneous pneumothorax; confirm on erect CXR (CT if bullae confound), insert a small-bore intercostal drain, and admit — do not treat as an exacerbation alone.",
+  "expectedNextQuestions": [
+    "Was the deterioration abrupt/step-change versus the patient's usual gradual exacerbation course?",
+    "Any preceding barotrauma, coughing bout, or recent positive-pressure ventilation?",
+    "Is there haemodynamic instability or tracheal shift suggesting tension?",
+    "Prior imaging showing bullous disease or previous pneumothorax?"
+  ],
+  "expectedInvestigations": [
+    "Erect chest radiograph",
+    "CT thorax to differentiate large bullae from pneumothorax",
+    "Arterial blood gas",
+    "ECG and troponin to exclude ACS",
+    "Consider CTPA if PE remains plausible after CXR"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "dyspnea": true,
+    "increasedDyspnea": true,
+    "pleuriticChestPain": true,
+    "chestPain": true,
+    "hypoxia": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "knownCOPD": true,
+    "supplementalOxygen": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "pneumothorax",
+    "acceptableIds": [
+      "pneumothorax"
+    ],
+    "differentialIds": [
+      "copd_exac_ni",
+      "pe",
+      "acs",
+      "pleural_effusion"
+    ],
+    "investigations": [
+      "erect chest radiograph",
+      "CT thorax",
+      "arterial blood gas",
+      "ECG and troponin"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank pneumothorax as the top diagnosis despite the confounding COPD history",
+    "copd_exac_ni must appear in the differential but not displace pneumothorax",
+    "No antibiotic recommendation should be generated for this non-infective case",
+    "Unilateral hyper-resonance + absent breath sounds + acute step-change dyspnoea must drive imaging (CXR/CT) rather than bronchodilator escalation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

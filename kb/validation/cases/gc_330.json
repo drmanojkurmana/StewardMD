@@ -1,0 +1,113 @@
+{
+  "id": "gc_330",
+  "specialty": "Critical care",
+  "condition": "Hypovolemic / haemorrhagic shock",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Black tarry stools for two days with light-headedness on standing",
+  "history": "68-year-old man, retired accountant, brought to the emergency department after nearly fainting while getting out of a chair. He reports two days of black, tarry, offensive stools and mild epigastric discomfort. He denies overt vomiting of blood but noticed a single episode of 'dark specks' in the sink. He is on apixaban for paroxysmal atrial fibrillation and takes intermittent ibuprofen for knee osteoarthritis. No chest pain, no fever, no diarrhoea, no known liver disease or prior varices. He feels 'a bit weak and thirsty' but is fully alert and conversant. This is deliberately an EARLY / COMPENSATED presentation: supine blood pressure is still maintained, so the shock is easy to underestimate.",
+  "examination": "Alert and orientated (GCS 15) but anxious and pale. Peripheries cool with delayed capillary refill (~3.5 s) and reduced pulse volume. Supine BP 118/88 mmHg (narrow pulse pressure) but a clear postural drop to 96/72 with symptomatic dizziness on standing. Mild epigastric tenderness, no peritonism, no organomegaly, no stigmata of chronic liver disease. Digital rectal examination confirms melaena. Reduced urine output reported since the previous evening.",
+  "vitals": {
+    "hr": 106,
+    "bp": "118/88",
+    "rr": 20,
+    "temp": 36.4,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 11.4,
+    "urea": 18.2,
+    "creatinine": 1.3,
+    "lactate": 2.6,
+    "inr": 2.7,
+    "platelets": 244,
+    "albumin": 3.9
+  },
+  "imaging": "Erect chest and supine abdominal radiographs: no free air, no obstruction. Point-of-care echocardiography shows a hyperdynamic, under-filled left ventricle with a small, collapsible IVC (supporting hypovolaemia rather than a cardiogenic cause).",
+  "microbiology": "Not applicable — non-infective presentation. No fever, no source of sepsis; blood cultures not indicated on current findings.",
+  "differentialDiagnoses": [
+    "Compensated (Class II) haemorrhagic shock from an upper GI source",
+    "Bleeding peptic ulcer as the underlying lesion",
+    "Cardiogenic shock (excluded by hyperdynamic under-filled LV and no ischaemic features)",
+    "Septic shock (no fever/infective source)",
+    "Adrenal crisis (no steroid history, biochemistry not suggestive)"
+  ],
+  "finalDiagnosis": "Early / compensated hypovolaemic (haemorrhagic) shock secondary to an anticoagulant- and NSAID-associated upper gastrointestinal bleed",
+  "citations": [
+    "American College of Surgeons — ATLS Classification of Haemorrhagic Shock — 2018",
+    "Harrison's Principles of Internal Medicine 22e — Approach to the Patient with Shock — 2022",
+    "British Society of Gastroenterology — Acute Upper Gastrointestinal Bleeding — 2021"
+  ],
+  "stewardship": "Not applicable — non-infective hypovolaemic (haemorrhagic) shock; no empiric antibiotics indicated. Priorities are IV access, balanced resuscitation, anticoagulant reversal and urgent source control.",
+  "contraindications": [
+    "Avoid large-volume crystalloid over-resuscitation before source control; use balanced, restrictive resuscitation and early blood products",
+    "Do not substitute vasopressors for volume replacement in haemorrhagic shock",
+    "Continue anticoagulation — apixaban should be held and reversal considered given active bleeding and INR/anti-Xa effect"
+  ],
+  "edgeCases": [
+    "Beta-blockade or advanced age can blunt the compensatory tachycardia and mask the severity of blood loss",
+    "Early haemoglobin may be near-normal before haemodilution — a single Hb value does not exclude significant haemorrhage",
+    "Maintained supine systolic BP with only a narrowed pulse pressure and postural drop is the classic trap of early (Class II) shock"
+  ],
+  "expectedMaiK": "This is compensated (Class II) haemorrhagic shock from an upper GI source. The discriminating early signs are tachycardia with a NARROWED pulse pressure, a symptomatic postural blood-pressure drop, cool peripheries with delayed capillary refill, a disproportionately raised urea (upper GI blood load) and a mildly elevated lactate — all present despite a maintained supine systolic BP. Do not be falsely reassured by the normal supine SBP or near-normal early haemoglobin.",
+  "expectedNextQuestions": [
+    "Any haematemesis or coffee-ground vomiting?",
+    "Recent NSAID, antiplatelet or anticoagulant use and last dose?",
+    "History of peptic ulcer, dyspepsia, varices or liver disease?",
+    "Symptoms on standing (dizziness/near-syncope) and urine output?"
+  ],
+  "expectedInvestigations": [
+    "Group and crossmatch / activate massive transfusion protocol if deterioration",
+    "Serial full blood count (haemoglobin) and lactate clearance",
+    "Coagulation screen / anti-Xa and consider anticoagulant reversal",
+    "Venous blood gas for lactate and base deficit",
+    "Urea:creatinine ratio to support upper GI source",
+    "Urgent upper GI endoscopy for diagnosis and haemostasis"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "tachycardia": true,
+    "melena": true,
+    "gibPresentation": true,
+    "syncope": true,
+    "lactateElevated": true,
+    "oliguria": true,
+    "anticoagulated": true,
+    "ageOver50": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "hypovolemic_shock",
+    "acceptableIds": [
+      "hypovolemic_shock"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "cardiogenic_shock",
+      "SEPTIC_SHOCK",
+      "adrenal_crisis"
+    ],
+    "investigations": [
+      "Group and crossmatch",
+      "Serial haemoglobin / full blood count",
+      "Venous lactate and base deficit",
+      "Coagulation screen and anticoagulant reversal assessment",
+      "Upper GI endoscopy"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must diagnose hypovolaemic (haemorrhagic) shock without requiring frank hypotension — a maintained supine SBP with narrowed pulse pressure and postural drop is sufficient",
+    "Must not classify this as cardiogenic shock given the hyperdynamic, under-filled LV and collapsible IVC",
+    "Must not label as septic shock in the absence of fever or an infective source, and must NOT recommend empiric antibiotics",
+    "Should prioritise IV access, group-and-crossmatch, balanced resuscitation and anticoagulant reversal over vasopressors",
+    "Should recognise the elevated urea:creatinine ratio as supportive of an upper GI bleeding source"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

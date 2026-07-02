@@ -1,0 +1,116 @@
+{
+  "id": "gc_316",
+  "specialty": "Toxicology",
+  "condition": "Drug intoxication / poisoning",
+  "age": 61,
+  "sex": "M",
+  "presentingComplaint": "Found drowsy and confused at home, then a witnessed generalised seizure en route to hospital.",
+  "history": "61-year-old man with ischaemic cardiomyopathy (LVEF 30%, on bisoprolol and ramipril) and CKD stage 3, recently started on amitriptyline 6 weeks ago for painful diabetic neuropathy and low mood. Found by his wife slumped in a chair, difficult to rouse, having been low in mood after a bereavement. An empty amitriptyline blister strip (reportedly ~1.5 g dispensed) and his bisoprolol box were on the table; last seen well ~3 hours earlier. En route he had a self-terminating generalised tonic-clonic seizure. Because of his cardiac history the referring team initially queried decompensated heart failure / cardiogenic shock or a primary arrhythmia. No fever, chest pain or focal neurology reported before collapse.",
+  "examination": "Drowsy, GCS 10 (E2V3M5), not localising well. Dry mucous membranes, flushed warm skin, dilated sluggish pupils (~6 mm), sluggishly reactive; absent bowel sounds and palpable bladder (anticholinergic toxidrome). No neck stiffness, no rash. Chest clear, no crackles or raised JVP to suggest acute pulmonary oedema. Peripheries warm despite hypotension. No focal neurological deficit; brief myoclonic jerks noted.",
+  "vitals": {
+    "hr": 122,
+    "bp": "84/52",
+    "rr": 22,
+    "temp": 37.6,
+    "spo2": 96
+  },
+  "labs": {
+    "gcs": 10,
+    "creatinine": 1.9,
+    "potassium_mmol_L": 4.4,
+    "sodium_mmol_L": 139,
+    "bicarbonate_mmol_L": 15,
+    "lactate_mmol_L": 4.1,
+    "arterial_pH": 7.24,
+    "anionGap": 20,
+    "glucose_mg_dL": 148,
+    "paracetamol_level": "not detected",
+    "salicylate_level": "not detected",
+    "ethanol": "negative"
+  },
+  "imaging": "CT head (to exclude structural cause of altered sensorium/seizure): no acute intracranial abnormality, no mass, no haemorrhage. CXR: no pulmonary oedema, normal cardiac silhouette for known cardiomyopathy.",
+  "microbiology": "Not indicated; no clinical features of infection. Blood cultures not sent.",
+  "differentialDiagnoses": [
+    "Tricyclic antidepressant (amitriptyline) overdose with sodium-channel blockade",
+    "Cardiogenic shock from decompensated ischaemic cardiomyopathy",
+    "Primary cardiac arrhythmia / conduction disease",
+    "Metabolic encephalopathy on background CKD",
+    "Beta-blocker toxicity"
+  ],
+  "finalDiagnosis": "Tricyclic antidepressant (amitriptyline) overdose — sodium-channel blockade with wide-complex tachycardia, hypotension, seizure and anticholinergic toxidrome.",
+  "citations": [
+    "American Heart Association — Management of Patients With Cardiovascular Toxicity Associated With Drug Poisoning (Scientific Statement) 2023",
+    "Harrison's Principles of Internal Medicine 22e — Poisoning and Drug Overdose (Tricyclic Antidepressants)"
+  ],
+  "stewardship": "Not applicable — non-infective toxicological emergency; no antimicrobials indicated.",
+  "contraindications": [
+    "Avoid class Ia/Ic and class III antiarrhythmics (further QRS/QT prolongation)",
+    "Avoid flumazenil (may precipitate seizures)",
+    "Avoid physostigmine (risk of asystole/seizures in TCA toxicity)",
+    "Caution with beta-agonist/inotrope choice given concurrent beta-blocker ingestion"
+  ],
+  "edgeCases": [
+    "Cardiac comorbidity and beta-blocker co-ingestion make bradycardia vs TCA-driven sinus tachycardia harder to interpret; QRS widening and terminal R in aVR are the discriminating clues.",
+    "Warm peripheries with hypotension argue against a purely cardiogenic low-output state.",
+    "Deteriorating conscious level warrants early airway protection before gastric decontamination."
+  ],
+  "expectedMaiK": "Tricyclic antidepressant (amitriptyline) overdose",
+  "expectedNextQuestions": [
+    "How much amitriptyline was dispensed vs remaining, and exact time of ingestion?",
+    "Were any other agents co-ingested (bisoprolol, ramipril, alcohol)?",
+    "Is there QRS widening (>100 ms) or a terminal R wave in aVR on ECG?",
+    "What is the trend in conscious level and airway protection status?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (QRS duration, terminal R in aVR, QT)",
+    "Venous/arterial blood gas with lactate",
+    "Serum electrolytes, renal function, glucose",
+    "Paracetamol and salicylate levels (co-ingestion screen)",
+    "Continuous cardiac monitoring"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "drugOverdose": true,
+    "alteredSensorium": true,
+    "seizure": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "knownHeartFailure": true,
+    "knownCAD": true,
+    "lactateElevated": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "drug_intox",
+    "acceptableIds": [
+      "drug_intox"
+    ],
+    "differentialIds": [
+      "cardiogenic_shock",
+      "seizure_epilepsy",
+      "metabolic_enceph",
+      "hyperkalemia"
+    ],
+    "investigations": [
+      "12-lead ECG",
+      "Venous blood gas with lactate",
+      "Serum electrolytes and renal function",
+      "Paracetamol and salicylate levels"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['drug_intox']",
+    "Must not classify as an infective diagnosis or recommend antibiotics",
+    "Wide-complex tachycardia + seizure + anticholinergic toxidrome + collateral ingestion history should point to TCA overdose over cardiogenic shock",
+    "Management must include IV sodium bicarbonate for QRS widening/hypotension, not antiarrhythmics",
+    "expected.stewardship.tier must be null"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "gc_266",
+  "specialty": "Systemic / Oncology",
+  "condition": "Febrile Neutropenia",
+  "age": 64,
+  "sex": "F",
+  "presentingComplaint": "Malaise and a single self-reported temperature spike 10 days after chemotherapy, with no localising symptoms",
+  "history": "Known stage III breast cancer on dose-dense AC (doxorubicin/cyclophosphamide), day 10 of the current cycle (expected nadir). Over the last 12 hours she felt increasingly tired and 'not right', with a couple of brief shaking chills. She measured her temperature once at home at 38.4 C but by arrival it had settled; she denies cough, dysuria, diarrhoea, headache or localised pain. She has a tunnelled central venous catheter (Hickman) for chemotherapy and reports no line-site redness or discomfort. On corticosteroid antiemetics. This subtle, largely afebrile-on-arrival presentation is characteristic of blunted inflammatory signs in the neutropenic host.",
+  "examination": "Alert, mildly unwell but not overtly toxic. No focus of infection identified: chest clear, abdomen soft and non-tender, Hickman exit site clean and non-erythematous, no skin lesions. Mild oral mucosal soreness with a few shallow erosions (grade 1-2 mucositis). No neck stiffness, no CVA tenderness. Warm peripheries, capillary refill <2s.",
+  "vitals": {
+    "hr": 108,
+    "bp": "116/70",
+    "rr": 20,
+    "temp": 38.3,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc_10e9L": 1.1,
+    "absoluteNeutrophilCount_cells_uL": 280,
+    "hemoglobin_g_dL": 9.8,
+    "platelets_10e3_uL": 96,
+    "creatinine_mg_dL": 0.9,
+    "crp_mg_L": 84,
+    "lactate_mmol_L": 1.4,
+    "bilirubin_mg_dL": 0.7
+  },
+  "imaging": "Chest radiograph: no consolidation or effusion (expected — neutropenia may mask radiographic infiltrates).",
+  "microbiology": "Two sets of blood cultures drawn (one peripheral, one from each Hickman lumen) plus urine culture sent before first antibiotic dose; results pending at presentation.",
+  "differentialDiagnoses": [
+    "Febrile neutropenia (chemotherapy-induced) — high-risk given profound neutropenia and expected nadir",
+    "Central line-associated bloodstream infection",
+    "Occult sepsis without clear source",
+    "Early pneumonia masked by neutropenia"
+  ],
+  "finalDiagnosis": "Febrile neutropenia (high-risk, chemotherapy-induced) presenting subtly at the expected post-chemotherapy nadir",
+  "citations": [
+    "IDSA — Clinical Practice Guideline for the Use of Antimicrobial Agents in Neutropenic Patients with Cancer — 2010",
+    "ASCO/IDSA — Outpatient Management of Fever and Neutropenia in Adults with Cancer — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Infections in Patients with Cancer"
+  ],
+  "stewardship": "Meets febrile neutropenia definition (single oral temperature >=38.3 C with ANC <500 cells/uL, expected to fall further). This is a medical emergency requiring empiric broad-spectrum anti-pseudomonal therapy within 60 minutes, before culture results. MASCC risk index and profound neutropenia place her in the high-risk group warranting IV inpatient therapy.",
+  "contraindications": [
+    "Avoid empiric aminoglycoside monotherapy — inadequate as sole agent",
+    "Do not delay antibiotics awaiting imaging or culture results",
+    "Avoid nephrotoxins where possible given ongoing chemotherapy"
+  ],
+  "edgeCases": [
+    "Neutropenic patients frequently lack fever, purulence, or radiographic infiltrates — absence of localising signs does not exclude serious infection",
+    "A single temperature >=38.3 C (or >=38.0 C sustained for 1 hour) with neutropenia is sufficient to trigger empiric antibiotics even if afebrile on arrival",
+    "Add empiric vancomycin only for specific indications (line-related infection, haemodynamic instability, MRSA colonisation, severe mucositis, skin/soft-tissue infection)"
+  ],
+  "expectedMaiK": "Recognise that a single temperature >=38.3 C with an ANC <500 in a chemotherapy patient at nadir is febrile neutropenia and an emergency, despite a subtle, near-afebrile, source-negative presentation.",
+  "expectedNextQuestions": [
+    "Date of last chemotherapy and expected nadir timing?",
+    "Any central venous catheter and is there line-site pain or erythema?",
+    "Any recent antibiotic prophylaxis or prior resistant organisms?",
+    "MASCC risk score / signs of haemodynamic instability?"
+  ],
+  "expectedInvestigations": [
+    "Two sets of blood cultures (peripheral plus each catheter lumen)",
+    "Full blood count with differential and absolute neutrophil count",
+    "Serum lactate, renal and liver function, CRP",
+    "Urinalysis and urine culture",
+    "Chest radiograph"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "neutropenia": true,
+    "absoluteNeutrophilCountLow": true,
+    "immunocompromised": true,
+    "malignancy": true,
+    "mucositis": true,
+    "centralLine": true,
+    "thrombocytopenia": true
+  },
+  "expected": {
+    "diagnosis": "FEBRILE_NEUTROPENIA",
+    "acceptableIds": [
+      "FEBRILE_NEUTROPENIA"
+    ],
+    "differentialIds": [
+      "SEPSIS",
+      "DEVICE_INFECTION",
+      "CAP",
+      "COMPLICATED_UTI"
+    ],
+    "investigations": [
+      "Blood cultures (peripheral and catheter lumens)",
+      "FBC with differential / ANC",
+      "Serum lactate and metabolic panel",
+      "Urine culture",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": "broad-spectrum-antipseudomonal",
+      "antibiotics": [
+        "Piperacillin-tazobactam 4.5 g IV q6h (or cefepime 2 g IV q8h)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must diagnose FEBRILE_NEUTROPENIA despite a subtle, near-afebrile, source-negative presentation",
+    "Empiric anti-pseudomonal beta-lactam monotherapy must be recommended within 60 minutes",
+    "Antibiotics must not be withheld pending culture or imaging results",
+    "Empiric vancomycin should not be added without a specific indication"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

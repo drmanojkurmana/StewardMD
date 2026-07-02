@@ -1,0 +1,107 @@
+{
+  "id": "gc_360",
+  "specialty": "Nephrology / Metabolic",
+  "condition": "Rhabdomyolysis",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Three days of aching thighs and shoulders with tea-coloured urine, noticed by her daughter; no collapse or long lie.",
+  "history": "Independent, community-dwelling woman with hypertension and hyperlipidaemia on long-standing atorvastatin 40 mg. Ten days ago her GP started clarithromycin for a chest infection. Over the last 3 days she has felt her proximal limbs are heavy and tender and has struggled to climb stairs, though she is still eating, drinking and passing good volumes of urine. She specifically noticed her urine turned a dark cola colour yesterday. No fever, no rash, no recent trauma, seizures, immobilisation or excess alcohol. No new confusion.",
+  "examination": "Alert, orientated, well-perfused and comfortable at rest. Mild, symmetric proximal muscle tenderness in thighs and shoulders with 4+/5 proximal power; no compartment swelling, no calf tenderness, no focal neurology. No rigidity, clonus or hyperthermia. Chest clear. Urine in the pot is dark reddish-brown.",
+  "vitals": {
+    "hr": 86,
+    "bp": "138/82",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 98
+  },
+  "labs": {
+    "creatineKinase": "7,400 U/L (baseline normal)",
+    "creatinine": "1.5 mg/dL (baseline 0.9 mg/dL)",
+    "urea": "10.5 mmol/L",
+    "potassium": "4.6 mmol/L",
+    "calcium": "2.18 mmol/L (mildly low)",
+    "phosphate": "1.5 mmol/L",
+    "AST": "180 U/L",
+    "urineDipstick": "blood 3+ with only 2-3 RBC/hpf on microscopy (pigment, not haematuria)",
+    "bicarbonate": "23 mmol/L"
+  },
+  "imaging": "Renal ultrasound normal-sized unobstructed kidneys, no calculus or hydronephrosis.",
+  "microbiology": "Not applicable; blood and urine cultures not indicated for this metabolic presentation.",
+  "differentialDiagnoses": [
+    "Statin/macrolide drug-interaction rhabdomyolysis (early, mild) with pigment nephropathy",
+    "Intrinsic AKI from another cause (ATN, interstitial nephritis)",
+    "Hypercalcaemia-related myopathy/weakness",
+    "Serotonin syndrome / NMS with muscle injury"
+  ],
+  "finalDiagnosis": "Early, mild rhabdomyolysis due to atorvastatin-clarithromycin interaction, with dark (myoglobinuric) urine and early renal impairment but preserved urine output and no severe electrolyte derangement.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e - Rhabdomyolysis / Acute Kidney Injury, 2022",
+    "National Lipid Association - Statin Muscle Safety and Myopathy, 2014"
+  ],
+  "stewardship": "Not applicable - non-infective metabolic diagnosis; no antibiotics indicated.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, contrast) until renal function recovers",
+    "Stop atorvastatin and clarithromycin immediately (offending interaction)",
+    "Avoid potassium-containing fluids until hyperkalaemia excluded on trend"
+  ],
+  "edgeCases": [
+    "Urine dipstick 'blood' positive with scant RBCs is the classic clue to myoglobinuria rather than true haematuria",
+    "CK is only moderately elevated in early presentation - repeat in 6-12h as it may still be rising",
+    "Mild hypocalcaemia is expected early; avoid calcium replacement unless symptomatic given later rebound hypercalcaemia risk"
+  ],
+  "expectedMaiK": "Recognise early/mild rhabdomyolysis (raised CK + pigmenturia) from a statin-macrolide interaction and start early IV volume repletion while stopping offending drugs, before overt AKI develops.",
+  "expectedNextQuestions": [
+    "Any recent new or dose-changed medications, herbal or recreational drugs?",
+    "Any prolonged immobilisation, fall with long lie, seizures or strenuous exertion?",
+    "How much urine is she passing and is the volume falling?"
+  ],
+  "expectedInvestigations": [
+    "Serum creatine kinase (with repeat trend)",
+    "Renal function and electrolytes including potassium, calcium, phosphate",
+    "Urine dipstick with microscopy (blood-positive, scant RBCs = myoglobinuria)",
+    "ECG to screen for hyperkalaemic changes",
+    "Venous blood gas / bicarbonate for acidosis"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "darkUrine": true,
+    "myalgiaArthralgia": true,
+    "renalImpairment": true,
+    "subacuteOnset": true,
+    "oralIntakeAdequate": true,
+    "stable": true,
+    "ageOver50": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "rhabdo",
+    "acceptableIds": [
+      "rhabdo"
+    ],
+    "differentialIds": [
+      "aki",
+      "hypercalcemia",
+      "serotonin_nms"
+    ],
+    "investigations": [
+      "Serum creatine kinase",
+      "Renal function and electrolytes (K, Ca, PO4)",
+      "Urine dipstick and microscopy for myoglobinuria",
+      "ECG for hyperkalaemia"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank rhabdo as top diagnosis given raised CK, myalgia and pigmenturia",
+    "Must flag dipstick-blood-positive with scant RBCs as myoglobinuria not haematuria",
+    "Must recommend stopping atorvastatin and clarithromycin and starting IV fluids",
+    "Must not recommend antibiotics (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

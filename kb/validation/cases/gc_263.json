@@ -1,0 +1,121 @@
+{
+  "id": "gc_263",
+  "specialty": "Central Nervous System",
+  "condition": "Encephalitis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Progressive confusion and behavioural change for 4 days, now brought in after a prolonged generalised seizure with failure to regain consciousness.",
+  "history": "Previously well 34-year-old software engineer with no significant past medical history. Four days of low-grade fever and frontal headache initially attributed to 'viral flu'. Over the next 48h the family noticed marked personality change — inappropriate laughing, disorientation to place, and one episode of transient inability to name objects and word-finding difficulty. On the morning of admission he was found unresponsive on the floor having had a witnessed generalised tonic-clonic seizure lasting >5 minutes; a second seizure occurred in the ambulance. He did not regain consciousness between events (features of status epilepticus). No recent travel, no immunosuppression, no injection drug use, no recent antibiotics or hospitalisation. No prior seizure history. HIV status unknown but no risk factors elicited.",
+  "examination": "Critically ill, not responding to voice, localising only to painful stimulus. GCS E2 V2 M4 = 8 with post-ictal state; airway at risk with pooled secretions and O2 requirement. Temperature 39.3°C. Mild neck stiffness but no purpuric rash. Pupils equal and reactive. Right pronator drift and an extensor plantar on the right before intubation, suggesting left temporal/frontal cortical involvement. No papilloedema. No focal source of infection; chest clear, abdomen soft. Post-intubation for airway protection and status control.",
+  "vitals": {
+    "hr": 122,
+    "bp": "150/92",
+    "rr": 26,
+    "temp": 39.3,
+    "spo2": 91
+  },
+  "labs": {
+    "wbc": "13.8 x10^9/L (neutrophil predominant)",
+    "crp": "48 mg/L",
+    "sodium": "131 mmol/L (mild SIADH)",
+    "glucose": "6.2 mmol/L",
+    "creatinine": "0.9 mg/dL",
+    "lactate": "3.1 mmol/L (post-status)",
+    "csf": "opening pressure 24 cmH2O; WBC 180/µL with 92% lymphocytes; RBC 320/µL (non-traumatic, suggesting haemorrhagic necrosis); protein 0.92 g/L (elevated); glucose 3.4 mmol/L (CSF:serum ratio normal at 0.55)",
+    "csfHSV_PCR": "HSV-1 DNA detected by PCR (result returned day 2)"
+  },
+  "imaging": "MRI brain: T2/FLAIR hyperintensity with restricted diffusion and gyral swelling in the left medial temporal lobe, insula and inferior frontal cortex, with small foci of blooming on GRE (haemorrhagic component) — classical asymmetric limbic distribution of HSV encephalitis. No ring-enhancing abscess, no mass with midline shift. EEG: periodic lateralised epileptiform discharges (PLEDs) over the left temporal region.",
+  "microbiology": "CSF HSV-1 PCR positive. Bacterial CSF culture and Gram stain negative. Blood cultures negative. CSF cryptococcal antigen and CBNAAT for M. tuberculosis negative.",
+  "differentialDiagnoses": [
+    "Acute bacterial meningitis / meningoencephalitis",
+    "Tuberculous (CNS) meningoencephalitis",
+    "Cerebral abscess / space-occupying lesion",
+    "Metabolic / autoimmune (anti-NMDA) encephalitis"
+  ],
+  "finalDiagnosis": "Severe HSV-1 encephalitis complicated by convulsive status epilepticus and respiratory failure requiring intubation",
+  "citations": [
+    {
+      "source": "IDSA",
+      "topic": "Management of Encephalitis",
+      "year": 2008
+    },
+    {
+      "source": "Harrison's Principles of Internal Medicine 22e",
+      "topic": "Acute Viral Encephalitis (HSV)",
+      "year": 2022
+    }
+  ],
+  "stewardship": "Start IV aciclovir 10 mg/kg 8-hourly (dose-adjusted for renal function, adequate hydration) IMMEDIATELY on clinical suspicion — do not wait for PCR. Add empiric ceftriaxone (+ vancomycin) until bacterial meningitis is excluded given depressed consciousness and CSF pleocytosis. Continue aciclovir for 14–21 days; consider repeat CSF PCR before stopping.",
+  "contraindications": [
+    "Ensure adequate hydration and monitor renal function/urine output with high-dose IV aciclovir (risk of crystal nephropathy)",
+    "Avoid lumbar puncture before imaging given focal deficit and reduced GCS (herniation risk) — CT/MRI first",
+    "Correct hyponatraemia cautiously to avoid osmotic demyelination"
+  ],
+  "edgeCases": [
+    "Early MRI and CSF can be normal in the first 24–48h — a negative initial HSV PCR does not exclude the diagnosis; repeat if suspicion persists",
+    "Consider anti-NMDA-receptor autoimmune encephalitis if PCR negative and prominent psychiatric/movement features (may follow HSV encephalitis)",
+    "Status epilepticus and cerebral oedema are the immediate life threats requiring ICU-level care"
+  ],
+  "expectedMaiK": "Acute febrile encephalopathy with focal (temporal) features, seizures and a lymphocytic CSF pleocytosis is HSV encephalitis until proven otherwise; empiric IV aciclovir must be started immediately without waiting for confirmatory PCR.",
+  "expectedNextQuestions": [
+    "Any immunosuppression, HIV risk, or recent travel/animal exposure?",
+    "Timeline of behavioural change vs fever and seizure onset?",
+    "Any prior cold sores or mucocutaneous HSV history?",
+    "Vaccination status and TB contact history?"
+  ],
+  "expectedInvestigations": [
+    "MRI brain with DWI/GRE",
+    "CSF analysis with HSV-1/2 PCR (and enterovirus/VZV panel)",
+    "EEG",
+    "CT head prior to LP given focal deficit and low GCS",
+    "Blood cultures, HIV test, serum sodium and lactate"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "behavioralChange": true,
+    "seizure": true,
+    "alteredSensorium": true,
+    "focalNeuroDeficit": true,
+    "toxicAppearing": true,
+    "tachycardia": true,
+    "organDysfunction": true,
+    "subacuteOnset": true
+  },
+  "expected": {
+    "diagnosis": "ENCEPHALITIS",
+    "acceptableIds": [
+      "ENCEPHALITIS"
+    ],
+    "differentialIds": [
+      "MENINGITIS",
+      "CNS_TB",
+      "BRAIN_ABSCESS",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "MRI brain with DWI/GRE",
+      "CSF HSV PCR and analysis",
+      "EEG",
+      "CT head before LP"
+    ],
+    "stewardship": {
+      "tier": "restricted",
+      "antibiotics": [
+        "Aciclovir IV",
+        "Ceftriaxone IV"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ENCEPHALITIS as top diagnosis given fever + altered sensorium + focal temporal deficit + seizure + lymphocytic CSF",
+    "Empiric IV aciclovir must be recommended immediately without awaiting HSV PCR",
+    "Bacterial meningitis (MENINGITIS) must appear in the differential until CSF excludes it",
+    "System must flag CT head before LP given focal deficit and reduced GCS"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

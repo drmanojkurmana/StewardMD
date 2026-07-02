@@ -1,0 +1,105 @@
+{
+  "id": "gc_378",
+  "specialty": "Hepatology / GI",
+  "condition": "Variceal bleeding (early / mild presentation)",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Two days of intermittent black, tarry stools and a single small coffee-ground vomit, without collapse or ongoing brisk bleeding.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh A, MELD low) diagnosed 2 years ago, abstinent for 6 months. He noticed dark tarry stools over the last 48 hours and this morning brought up a small amount of coffee-ground material once. He feels mildly light-headed on standing but has not fainted, has had no fresh haematemesis, and has continued taking oral fluids and a light diet. No NSAID or anticoagulant use, no prior documented ulcer. A surveillance endoscopy 8 months earlier had shown small (grade I) oesophageal varices on non-selective beta-blocker prophylaxis (carvedilol), which he admits to taking irregularly. No fever, abdominal pain, jaundice or confusion.",
+  "examination": "Alert, orientated, comfortable at rest. Mild conjunctival pallor. No asterixis, no jaundice. A few spider naevi over the chest and palmar erythema. Abdomen soft, non-tender; spleen tip palpable 2 cm below costal margin; no clinically detectable ascites. Rectal examination confirms melaena. No stigmata of active large-volume bleeding; peripheries warm, capillary refill <2 s.",
+  "vitals": {
+    "hr": 94,
+    "bp": "116/74",
+    "rr": 16,
+    "temp": 36.7,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 10.4,
+    "platelets": 84,
+    "inr": 1.4,
+    "bilirubin": 1.6,
+    "albumin": 3.5,
+    "creatinine": 0.9,
+    "urea": 9.2
+  },
+  "imaging": "Bedside ultrasound: coarse, nodular liver with splenomegaly (14 cm) and patent, mildly dilated portal vein consistent with portal hypertension; trace perihepatic fluid only, no gross ascites.",
+  "microbiology": "Not applicable; no features of infection. Blood cultures not indicated on clinical grounds.",
+  "differentialDiagnoses": [
+    "Bleeding oesophageal varices (portal hypertensive source)",
+    "Peptic ulcer bleed",
+    "Portal hypertensive gastropathy",
+    "Decompensating cirrhosis with occult bleed"
+  ],
+  "finalDiagnosis": "Acute variceal bleeding — small-volume, haemodynamically stable (early/mild) presentation in compensated alcohol-related cirrhosis, confirmed as a recent variceal bleed at endoscopy.",
+  "citations": [
+    "Baveno VII — Portal Hypertension and Variceal Bleeding — 2022",
+    "AASLD — Portal Hypertensive Bleeding in Cirrhosis — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Portal Hypertension"
+  ],
+  "stewardship": "Non-infective diagnosis. Note: current guidelines recommend short-course prophylactic antibiotics (e.g., ceftriaxone) for any cirrhotic patient with acute GI bleeding, but this case is coded non-infective; empiric therapy is captured narratively rather than as a stewardship tier.",
+  "contraindications": [
+    "Avoid over-transfusion — target restrictive haemoglobin threshold ~7 g/dL (transfuse to 7-8 g/dL) as over-transfusion raises portal pressure and rebleeding risk",
+    "Avoid excessive crystalloid volume resuscitation for the same reason",
+    "Beta-blocker should be withheld during the acute bleed while assessing haemodynamics"
+  ],
+  "edgeCases": [
+    "Mild presentation can be falsely reassuring — early endoscopy (within 24 h) is still required as small varices can rebleed",
+    "Urea elevated out of proportion to creatinine supports an upper-GI source even without haematemesis",
+    "Thrombocytopenia and splenomegaly point to portal hypertension rather than a simple peptic ulcer",
+    "Beta-blocker may blunt the expected tachycardia, masking blood loss"
+  ],
+  "expectedMaiK": "Suspect acute variceal bleeding in any cirrhotic with melaena/haematemesis even when haemodynamically stable; risk-stratify, start vasoactive therapy (terlipressin/octreotide) and prophylactic antibiotics, and arrange early upper GI endoscopy for band ligation.",
+  "expectedNextQuestions": [
+    "Volume and frequency of melaena and any fresh haematemesis?",
+    "Postural symptoms, syncope or ongoing light-headedness?",
+    "Adherence to non-selective beta-blocker and last surveillance endoscopy findings?",
+    "Alcohol intake, NSAID/anticoagulant use and prior bleeding episodes?"
+  ],
+  "expectedInvestigations": [
+    "Urgent upper GI endoscopy within 24 hours (diagnostic and for band ligation)",
+    "FBC, coagulation profile (INR), U&E, LFTs and group-and-save/crossmatch",
+    "Assess Child-Pugh / MELD for prognosis and rebleeding risk"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "melena": true,
+    "gibPresentation": true,
+    "hematemesis": true,
+    "liverDisease": true,
+    "alcoholExcess": true,
+    "splenomegaly": true,
+    "thrombocytopenia": true,
+    "stable": true
+  },
+  "expected": {
+    "diagnosis": "variceal_bleed",
+    "acceptableIds": [
+      "variceal_bleed"
+    ],
+    "differentialIds": [
+      "peptic_ulcer",
+      "decomp_cirrhosis",
+      "hepatic_enceph"
+    ],
+    "investigations": [
+      "Urgent upper GI endoscopy within 24 hours with band ligation",
+      "FBC, INR, U&E, LFTs, crossmatch",
+      "Child-Pugh / MELD scoring"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank variceal_bleed as the top diagnosis despite haemodynamic stability",
+    "peptic_ulcer must appear in the differential but not displace variceal_bleed given cirrhosis + thrombocytopenia + splenomegaly",
+    "Recommendation must include early upper GI endoscopy and vasoactive therapy",
+    "Must not recommend liberal/over-transfusion (restrictive Hb target)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

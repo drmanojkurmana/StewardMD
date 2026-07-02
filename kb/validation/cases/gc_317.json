@@ -1,0 +1,107 @@
+{
+  "id": "gc_317",
+  "specialty": "Vascular",
+  "condition": "Deep vein thrombosis",
+  "age": 72,
+  "sex": "M",
+  "presentingComplaint": "Rapidly progressive swelling, severe pain and duskiness of the whole left leg over the past 24 hours.",
+  "history": "72-year-old man with metastatic colorectal adenocarcinoma on palliative oxaliplatin-based chemotherapy (day 9 of last cycle), recently semi-bedbound. Over the preceding day the entire left lower limb, from groin to foot, became tensely swollen, intensely painful and discoloured, with new numbness of the toes. He also reports mild breathlessness and one episode of light-headedness on standing. No prior VTE, not on anticoagulation. This is a severe/critical iliofemoral presentation (phlegmasia cerulea dolens) rather than the classic isolated calf DVT.",
+  "examination": "Massively swollen, tense left lower limb with a bluish (cyanotic) mottled hue extending to the thigh; taut shiny skin and early tense blistering over the calf. Pain grossly out of proportion, with tenderness along the femoral and popliteal veins and marked calf tenderness. Reduced sensation over the forefoot; pedal pulses weak and difficult to palpate through oedema (venous outflow obstruction with compromised arterial inflow). Right leg normal. Mild tachypnoea, no focal chest signs.",
+  "vitals": {
+    "hr": 118,
+    "bp": "98/62",
+    "rr": 24,
+    "temp": 37.1,
+    "spo2": 90
+  },
+  "labs": {
+    "d_dimer": "markedly elevated (>10x ULN)",
+    "hemoglobin": 11.2,
+    "platelets": 168,
+    "wbc": 9.4,
+    "creatinine": 1.3,
+    "lactate": 2.4,
+    "inr": 1.1,
+    "troponin": "mildly elevated"
+  },
+  "imaging": "Whole-leg compression Doppler ultrasound: non-compressible, thrombus-filled common femoral, femoral and popliteal veins with extension into the external iliac vein and absent flow; findings consistent with extensive iliofemoral DVT. CTPA (for breathlessness/hypoxia): small bilateral segmental pulmonary emboli.",
+  "microbiology": "Not applicable — non-infective vascular emergency.",
+  "differentialDiagnoses": [
+    "Acute limb ischaemia / arterial occlusion",
+    "Cellulitis",
+    "Ruptured Baker cyst / haematoma",
+    "Decompensated heart failure with dependent oedema"
+  ],
+  "finalDiagnosis": "Severe (critical) extensive iliofemoral deep vein thrombosis presenting as phlegmasia cerulea dolens, cancer-provoked, with concurrent segmental pulmonary embolism.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Deep Venous Thrombosis and Pulmonary Thromboembolism",
+    "American College of Chest Physicians (CHEST) — Antithrombotic Therapy for VTE Disease — 2021",
+    "American Society of Hematology (ASH) — Management of Venous Thromboembolism in Cancer — 2021"
+  ],
+  "stewardship": "N/A — non-infective vascular condition; no antimicrobial therapy indicated. Management is urgent therapeutic anticoagulation, limb elevation, and vascular/IR assessment for catheter-directed thrombolysis or thrombectomy given threatened limb.",
+  "contraindications": [
+    "Active or recent major bleeding contraindicating full-dose anticoagulation/thrombolysis",
+    "Severe thrombocytopenia",
+    "Recent CNS surgery or intracranial metastases (relative contraindication to thrombolysis)"
+  ],
+  "edgeCases": [
+    "Phlegmasia cerulea dolens can progress to venous gangrene and limb loss — a time-critical vascular emergency, not a routine DVT",
+    "Compromised distal pulses may mimic primary arterial occlusion; the massive tense swelling and cyanosis point to venous outflow obstruction",
+    "Cancer-associated VTE favours LMWH or a DOAC over warfarin; watch for GI bleeding risk with luminal GI tumours"
+  ],
+  "expectedMaiK": "Extensive iliofemoral DVT (phlegmasia cerulea dolens) — a limb-threatening severe DVT requiring immediate anticoagulation and vascular intervention.",
+  "expectedNextQuestions": [
+    "Any active bleeding, recent surgery, or intracranial disease that would limit anticoagulation or thrombolysis?",
+    "Is the limb viable — sensory/motor deficit, capillary return, and distal pulses on Doppler?",
+    "Any chest pain, breathlessness or syncope suggesting concurrent pulmonary embolism?"
+  ],
+  "expectedInvestigations": [
+    "Whole-leg compression Doppler ultrasound",
+    "CT pulmonary angiography given hypoxia/breathlessness",
+    "D-dimer",
+    "FBC, renal function, coagulation profile before anticoagulation",
+    "CT venography if intervention (thrombolysis/thrombectomy) planned"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "legSwellingUnilateral": true,
+    "calfTenderness": true,
+    "severePain": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "dyspnea": true,
+    "hypoxia": true,
+    "malignancy": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "dvt",
+    "acceptableIds": [
+      "dvt"
+    ],
+    "differentialIds": [
+      "pe",
+      "heart_failure"
+    ],
+    "investigations": [
+      "compression_ultrasound_doppler",
+      "d_dimer",
+      "ctpa",
+      "coagulation_profile"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['dvt']",
+    "must not classify as cellulitis despite limb swelling and pain",
+    "must recognise limb-threatening severity (phlegmasia cerulea dolens) and urgency of anticoagulation +/- vascular intervention",
+    "no antibiotics should be recommended (non-infective condition)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

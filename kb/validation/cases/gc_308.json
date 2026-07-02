@@ -1,0 +1,127 @@
+{
+  "id": "gc_308",
+  "specialty": "Cardiology / Critical care",
+  "condition": "Cardiogenic shock",
+  "age": 76,
+  "sex": "M",
+  "presentingComplaint": "Two days of progressive fatigue, breathlessness and new confusion; no chest pain.",
+  "history": "Long-standing type 2 diabetes (on metformin), prior anterior MI with a drug-eluting stent 4 years ago, and treated hypertension. Family noticed he had become increasingly lethargic and 'not himself' over 48 hours, eating poorly, unusually breathless on minimal exertion and dozing during the day. He denied any chest pain or palpitations, which is characteristic of silent ischaemia in long-standing diabetics. Urine output over the last day was noticeably reduced. No fever, cough, diarrhoea or dysuria. No recent travel, sick contacts or new drugs. This is a subtle, low-output presentation — the dominant complaints are fatigue and confusion rather than the textbook crushing chest pain with florid pulmonary oedema.",
+  "examination": "Elderly man, drowsy but rousable, oriented only to person. Peripheries cool with prolonged capillary refill (~4 s) and mottled knees, yet only mildly dusky rather than profusely diaphoretic. JVP elevated at 6 cm. Heart sounds: soft S1, audible S3 gallop, no new murmur. Bibasal fine inspiratory crackles to mid-zones. Abdomen soft, mild tender hepatomegaly. No focal neurology, no meningism, no rash, no calf swelling.",
+  "vitals": {
+    "hr": 112,
+    "bp": "90/64",
+    "rr": 26,
+    "temp": 36.3,
+    "spo2": 90
+  },
+  "labs": {
+    "lactate_mmol_L": 4.3,
+    "creatinine_mg_dL": 1.9,
+    "baseline_creatinine_mg_dL": 1,
+    "urea_mmol_L": 14.2,
+    "sodium_mmol_L": 132,
+    "potassium_mmol_L": 4.8,
+    "hs_troponin_T_ng_L": 640,
+    "NT_proBNP_pg_mL": 8900,
+    "hemoglobin_g_dL": 12.6,
+    "wbc_10e9_L": 9.8,
+    "platelets_10e3_uL": 210,
+    "bilirubin_mg_dL": 1.3,
+    "ALT_U_L": 88,
+    "venous_ScvO2_pct": 52,
+    "urine_output_mL_kg_hr": 0.3
+  },
+  "imaging": "Bedside echo: severely reduced LV systolic function (visual LVEF ~25%) with regional anteroapical akinesis on a background of prior infarction; no significant valvular lesion, no pericardial effusion, dilated non-collapsing IVC. Chest X-ray: cardiomegaly with bilateral perihilar interstitial oedema and small effusions. No RV dilatation to suggest acute PE.",
+  "microbiology": "Not applicable — no infective source. Blood cultures sent to exclude occult sepsis were subsequently negative.",
+  "differentialDiagnoses": [
+    "Acute decompensated heart failure without shock",
+    "Septic shock (warm-shock mimic given confusion, tachypnoea and lactataemia)",
+    "Acute coronary syndrome",
+    "Acute pulmonary embolism (obstructive shock)"
+  ],
+  "finalDiagnosis": "Cardiogenic shock (SCAI stage C) complicating silent recurrent myocardial ischaemia on a background of ischaemic cardiomyopathy — a subtle, near-normotensive low-output presentation dominated by confusion and hypoperfusion rather than classic chest pain and profound hypotension.",
+  "citations": [
+    "SCAI — Cardiogenic Shock Classification (SCAI SHOCK Stages), 2022",
+    "AHA — Contemporary Management of Cardiogenic Shock (Scientific Statement), 2017",
+    "ESC — Acute and Chronic Heart Failure Guidelines, 2021"
+  ],
+  "stewardship": "Not applicable — non-infective cardiogenic aetiology; no empiric antibiotics indicated unless sepsis is objectively confirmed.",
+  "contraindications": [
+    "Avoid beta-blockers and negatively inotropic agents in the acute low-output state",
+    "Avoid aggressive fluid boluses given elevated JVP, S3 and pulmonary oedema (fluid-overloaded, not hypovolaemic)",
+    "Withhold nephrotoxins and metformin given acute kidney injury and lactataemia"
+  ],
+  "edgeCases": [
+    "Normotensive / near-normotensive cardiogenic shock: SBP may be preserved (~90 mmHg) by intense vasoconstriction while tissue perfusion is already failing (high lactate, low ScvO2, oliguria).",
+    "Silent ischaemia in diabetics: cardiogenic shock can present without chest pain, mimicking sepsis or a primary neurological event.",
+    "Low ScvO2 (~52%) with elevated lactate distinguishes low-output cardiogenic shock from high-output/warm septic shock."
+  ],
+  "expectedMaiK": "Elderly diabetic with prior MI, now cool-peripheries + elevated JVP/S3 + pulmonary oedema, high lactate, low ScvO2, oliguria and AKI, and echo showing severe LV dysfunction = end-organ hypoperfusion from pump failure, i.e. cardiogenic shock, despite only borderline hypotension and absent chest pain.",
+  "expectedNextQuestions": [
+    "Is there any (even atypical) ischaemic symptom — exertional dyspnoea equivalent, indigestion, arm/jaw discomfort?",
+    "What is the baseline exercise tolerance, weight trend and adherence to heart-failure/antianginal therapy?",
+    "Any precipitant: missed dialysis/diuretic, arrhythmia, recent illness, new negatively inotropic drugs?",
+    "Trend of blood pressure and urine output over the last 24-48 hours?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG (serial) for ischaemia/arrhythmia",
+    "High-sensitivity troponin (serial) and NT-proBNP",
+    "Serum lactate and central venous oxygen saturation (ScvO2)",
+    "Urgent transthoracic echocardiogram (LV function, valves, mechanical complications, effusion)",
+    "Renal function, electrolytes and arterial blood gas",
+    "Chest X-ray"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "dyspnea": true,
+    "orthopnea": true,
+    "alteredSensorium": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "organDysfunction": true,
+    "oliguria": true,
+    "raisedJVP": true,
+    "bilateralCrackles": true,
+    "ecgIschemia": true,
+    "knownCAD": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "cardiogenic_shock",
+    "acceptableIds": [
+      "cardiogenic_shock"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "acs",
+      "SEPTIC_SHOCK",
+      "pe"
+    ],
+    "investigations": [
+      "ECG",
+      "high-sensitivity troponin",
+      "NT-proBNP",
+      "serum lactate",
+      "ScvO2",
+      "transthoracic echocardiogram",
+      "chest X-ray"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank cardiogenic_shock as the top diagnosis.",
+    "Must not classify as primary sepsis/septic shock or recommend empiric antibiotics without confirmed infection.",
+    "Must recognise near-normotensive shock: hypoperfusion (high lactate, low ScvO2, oliguria, AKI) despite SBP ~90 still qualifies as shock.",
+    "Must recommend urgent echocardiography and ECG/troponin rather than fluid resuscitation as the primary step.",
+    "Stewardship tier must be null with an empty antibiotic list."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

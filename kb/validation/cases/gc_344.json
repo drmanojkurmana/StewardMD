@@ -1,0 +1,116 @@
+{
+  "id": "gc_344",
+  "specialty": "Neurology",
+  "condition": "Myasthenic crisis",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Progressive breathlessness and difficulty swallowing over 5 days, with two episodes of choking on fluids",
+  "history": "74-year-old woman, ex-smoker (12 pack-years, quit 15 years ago), previously independent, referred as a presumed 'COPD exacerbation' after a 5-day history of exertional then rest breathlessness. She denies fever, cough or sputum. On closer questioning she describes a nasal, tired quality to her voice that worsens through the day, food 'sticking' and regurgitating through the nose, and jaw tiredness while chewing her evening meal — all better after morning rest. No prominent diplopia or ptosis, and no limb complaints, which delayed the diagnosis. There is no antecedent diarrhoeal or respiratory illness and no ascending numbness or paraesthesiae. She started clarithromycin from her GP 3 days ago for 'a chest infection', after which breathlessness accelerated. Late-onset myasthenia gravis had been queried 8 months earlier for transient fatigable ptosis but she was lost to follow-up. No thymoma history. On no regular respiratory inhalers.",
+  "examination": "Alert, oriented, sitting forward, using accessory muscles, speaking in short phrases with a nasal dysarthric quality that deteriorates on counting aloud (fatigable). Single-breath count 12. Weak cough and pooled oropharyngeal secretions; nasal escape of air on speech. Bilateral fatigable ptosis emerges only after 45 s of sustained upgaze. Neck flexion weak (unable to lift head from pillow against gravity after repetition), proximal limb power near-normal at rest but fatigues on repeated shoulder abduction. Reflexes preserved and symmetrical; no sensory level, no long-tract signs. Chest clear with reduced air entry from poor effort; no wheeze or crepitations. Paradoxical abdominal breathing when supine.",
+  "vitals": {
+    "hr": 108,
+    "bp": "142/84",
+    "rr": 28,
+    "temp": 36.7,
+    "spo2": 93
+  },
+  "labs": {
+    "ABG_on_air": "pH 7.31, PaCO2 7.6 kPa, PaO2 8.9 kPa, HCO3 29 mmol/L (acute-on-chronic hypercapnic respiratory failure)",
+    "FVC_bedside": "0.9 L (~18 mL/kg), falling from 1.4 L on arrival; supine drop >25%",
+    "NIF": "-22 cmH2O",
+    "WCC": "8.1 x10^9/L",
+    "CRP": "6 mg/L",
+    "creatinine": "0.8 mg/dL",
+    "TSH": "2.1 mIU/L",
+    "K": "4.2 mmol/L"
+  },
+  "imaging": "Chest radiograph: low lung volumes, no consolidation, no effusion. CT thorax: no thymic mass, no acute pulmonary parenchymal disease or PE.",
+  "microbiology": "No infective source identified; blood cultures negative; respiratory viral panel negative.",
+  "differentialDiagnoses": [
+    "Myasthenic crisis (late-onset MG, bulbar/respiratory-predominant, precipitated by macrolide)",
+    "Guillain-Barre syndrome",
+    "COPD exacerbation",
+    "Metabolic / toxic encephalopathy causing hypoventilation"
+  ],
+  "finalDiagnosis": "Myasthenic crisis — impending neuromuscular respiratory failure in late-onset seropositive myasthenia gravis, precipitated by clarithromycin, with bulbar and ventilatory involvement and minimal ocular/limb signs",
+  "citations": [
+    "MGFA — International Consensus Guidance for Management of Myasthenia Gravis (2021)",
+    "AAN — Myasthenia Gravis and Myasthenic Crisis management (2021)",
+    "Harrison's Principles of Internal Medicine, 22e — Myasthenia Gravis and Other Diseases of the Neuromuscular Junction"
+  ],
+  "stewardship": "Non-infective neuromuscular emergency; no empiric antibiotics indicated as CRP/WCC normal and no source identified. Antibiotic stewardship point: stop the precipitating clarithromycin (macrolides, aminoglycosides and fluoroquinolones worsen neuromuscular transmission).",
+  "contraindications": [
+    "Avoid macrolides, aminoglycosides, fluoroquinolones, IV magnesium and beta-blockers — all exacerbate neuromuscular blockade",
+    "Avoid high-dose corticosteroid initiation before airway is secured (risk of transient steroid-induced worsening)",
+    "IVIG relatively contraindicated in significant renal impairment / hyperviscosity; use plasma exchange if thrombotic risk",
+    "Depolarising/non-depolarising neuromuscular blockers if intubation needed require dose adjustment"
+  ],
+  "edgeCases": [
+    "Bulbar/respiratory-onset crisis with minimal ocular and limb signs is easily mislabelled as COPD/LRTI in the elderly",
+    "Normal SpO2 can mask rising PaCO2 — trend FVC/NIF, not saturations, to time intubation",
+    "Cholinergic crisis from over-treatment with pyridostigmine can mimic myasthenic crisis (look for miosis, secretions, fasciculations)",
+    "Seronegative and MuSK-antibody disease may present with predominant bulbar/respiratory weakness"
+  ],
+  "expectedMaiK": "Recognise impending neuromuscular respiratory failure (falling FVC <15-20 mL/kg, NIF weaker than -20 to -30 cmH2O, rising PaCO2, weak cough, paradoxical breathing); admit to ICU/HDU for airway monitoring, stop clarithromycin and other neuromuscular-blocking drugs, and start IVIG or plasma exchange with early elective intubation rather than waiting for hypoxia.",
+  "expectedNextQuestions": [
+    "Is symptom fatigability diurnal (worse in the evening / after use, better with rest)?",
+    "Any recent new drug precipitant (macrolide, fluoroquinolone, aminoglycoside, beta-blocker, magnesium)?",
+    "Prior fatigable ptosis, diplopia, dysphagia or nasal speech / known MG or thymoma?",
+    "Bedside FVC and negative inspiratory force with supine measurement — trending?",
+    "Any features of cholinergic excess to exclude over-anticholinesterase treatment?"
+  ],
+  "expectedInvestigations": [
+    "Serial bedside FVC and negative inspiratory force (single-breath count as surrogate)",
+    "Arterial blood gas looking for hypercapnia",
+    "Acetylcholine-receptor and MuSK antibodies",
+    "Repetitive nerve stimulation / single-fibre EMG",
+    "CT thorax for thymoma",
+    "Bedside ice-pack / edrophonium or safe fatigability testing where available"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "dyspnea": true,
+    "tachypnea": true,
+    "dysphagia": true,
+    "aspirationRiskFactor": true,
+    "hypoxia": true,
+    "worseningOxygenation": true,
+    "afebrile": true,
+    "ageOver50": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "myasthenic_crisis",
+    "acceptableIds": [
+      "myasthenic_crisis"
+    ],
+    "differentialIds": [
+      "gbs",
+      "COPD_EXACERBATION",
+      "metabolic_enceph",
+      "ischemic_stroke"
+    ],
+    "investigations": [
+      "Serial FVC and negative inspiratory force",
+      "Arterial blood gas",
+      "Acetylcholine-receptor / MuSK antibodies",
+      "Repetitive nerve stimulation / single-fibre EMG",
+      "CT thorax for thymoma"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank myasthenic_crisis as top diagnosis despite absence of prominent diplopia/ptosis and normal-ish SpO2",
+    "Engine must not label this an infective COPD exacerbation / LRTI given normal CRP, WCC and clear chest",
+    "Engine must flag falling FVC/NIF and hypercapnia as impending respiratory failure warranting ICU/airway monitoring",
+    "Engine must identify clarithromycin as a neuromuscular precipitant to be stopped",
+    "Engine must recommend IVIG or plasma exchange and must NOT recommend empiric antibiotics"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

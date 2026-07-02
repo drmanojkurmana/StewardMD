@@ -1,0 +1,123 @@
+{
+  "id": "gc_283",
+  "specialty": "Hepatobiliary / GI",
+  "condition": "Spontaneous Bacterial Peritonitis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "Brought in by family with 2 days of increasing drowsiness and confusion; no abdominal pain volunteered.",
+  "history": "Known alcohol-related cirrhosis (Child-Pugh C) with recurrent ascites managed on spironolactone and furosemide; two prior large-volume paracenteses. Family report he became progressively muddled over 48 hours, with disturbed sleep-wake reversal, slurred speech and one episode of disorientation to place. He was recently prescribed lactulose which he has been taking irregularly. No haematemesis or melena, no obvious dietary indiscretion or new sedatives, and he has not missed diuretics. Only a vague sense of abdominal fullness, no localised pain, and appetite is poor. The presentation strongly resembles a simple bout of hepatic encephalopathy, but no clear precipitant is evident on initial history, prompting a search for occult infection.",
+  "examination": "Drowsy but rousable, disoriented to time and place, GCS 13 (E3V4M6). Coarse flapping tremor (asterixis) present. Icteric sclerae, spider naevi, palmar erythema. Tense ascites with mild diffuse abdominal tenderness on deep palpation but NO guarding, rigidity or rebound. Bowel sounds present. No peripheral stigmata of bleeding; PR examination brown stool, no melena. Mild pedal oedema.",
+  "vitals": {
+    "hr": 104,
+    "bp": "98/62",
+    "rr": 20,
+    "temp": 37.8,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 10.4,
+    "platelets": 78,
+    "wbc": 11.9,
+    "creatinine": 1.6,
+    "urea": 12.5,
+    "sodium": 129,
+    "bilirubin": 4.8,
+    "albumin": 2.4,
+    "inr": 1.9,
+    "crp": 62,
+    "ammonia": 118,
+    "ascitic_fluid_pmn": 480,
+    "ascitic_fluid_total_protein": 0.9,
+    "ascitic_saag": 1.6,
+    "ascitic_glucose_normal": true,
+    "ascitic_ldh_below_serum": true
+  },
+  "imaging": "Bedside ultrasound: coarse nodular shrunken liver, splenomegaly, moderate-to-large free ascites without loculation; no biliary dilatation, no discrete collection or perforation. Chest and abdominal films show no free sub-diaphragmatic air.",
+  "microbiology": "Diagnostic paracentesis: ascitic fluid PMN 480 cells/mm3 (monomicrobial neutrocytic pattern). Ascitic fluid culture (bedside blood-culture bottle inoculation) grew Escherichia coli. Blood cultures: E. coli in 1/2 sets. Single organism, near-normal ascitic glucose and ascitic LDH below serum level argue against secondary bacterial peritonitis.",
+  "differentialDiagnoses": [
+    "Hepatic encephalopathy from another precipitant (the leading clinical mimic here)",
+    "Decompensated cirrhosis without infection",
+    "Secondary bacterial peritonitis (perforation/abscess) - excluded by imaging and fluid chemistry",
+    "Sepsis from an extra-abdominal source"
+  ],
+  "finalDiagnosis": "Spontaneous bacterial peritonitis (culture-positive) presenting as hepatic encephalopathy in decompensated alcohol-related cirrhosis",
+  "citations": [
+    "AASLD - Diagnosis, Evaluation and Management of Ascites, SBP and Hepatorenal Syndrome in Cirrhosis - 2021",
+    "EASL - Clinical Practice Guidelines for Decompensated Cirrhosis - 2018",
+    "Harrison's Principles of Internal Medicine, 22e - Cirrhosis and its Complications"
+  ],
+  "stewardship": "Empiric third-generation cephalosporin (cefotaxime 2 g IV every 8 h, or ceftriaxone 2 g IV daily) is the guideline-concordant first line for community-acquired SBP. Add IV albumin 1.5 g/kg on day 1 and 1 g/kg on day 3 to reduce hepatorenal syndrome and mortality (creatinine >1 mg/dL / bilirubin >4 mg/dL qualify). De-escalate per ascitic fluid culture and sensitivities; total duration 5-7 days. Screen for secondary peritonitis if no fall in ascitic PMN on repeat tap. Start secondary prophylaxis (e.g. norfloxacin) after recovery.",
+  "contraindications": [
+    "Avoid nephrotoxic aminoglycosides in this cirrhotic with rising creatinine",
+    "Avoid non-selective beta-blockers acutely given borderline hypotension and risk of impaired renal perfusion in SBP",
+    "Hold/avoid sedatives that could worsen encephalopathy"
+  ],
+  "edgeCases": [
+    "Culture-negative neutrocytic ascites (PMN >=250 with negative culture) is still treated as SBP",
+    "Bacterascites (positive culture, PMN <250) - treat if symptomatic",
+    "PMN count must be corrected for bloody taps (subtract 1 PMN per 250 RBC)",
+    "If polymicrobial, high protein, low glucose or high LDH - suspect secondary peritonitis and image for perforation"
+  ],
+  "expectedMaiK": "In a decompensated cirrhotic with new encephalopathy and no obvious precipitant, a diagnostic paracentesis is mandatory: ascitic fluid PMN >=250 cells/mm3 establishes SBP even when abdominal pain and high fever are absent.",
+  "expectedNextQuestions": [
+    "Any recent GI bleed, sedatives, constipation or infection as encephalopathy precipitants?",
+    "Prior episodes of SBP or current antibiotic prophylaxis?",
+    "Recent healthcare exposure or antibiotics (to gauge resistant-organism risk)?",
+    "Diuretic and lactulose adherence?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic paracentesis with ascitic fluid cell count and differential",
+    "Ascitic fluid culture in blood-culture bottles at bedside, plus total protein, albumin (SAAG), glucose and LDH",
+    "Blood cultures before antibiotics",
+    "Serum creatinine, electrolytes, LFTs, INR, venous ammonia",
+    "Abdominal ultrasound and erect chest/abdominal film to exclude secondary causes"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "liverDisease": true,
+    "ascites": true,
+    "alteredSensorium": true,
+    "asterixis": true,
+    "abdominalDiscomfort": true,
+    "fever": true,
+    "jaundice": true,
+    "tachycardia": true,
+    "suspectedInfectionSource": true
+  },
+  "expected": {
+    "diagnosis": "SBP",
+    "acceptableIds": [
+      "SBP"
+    ],
+    "differentialIds": [
+      "hepatic_enceph",
+      "decomp_cirrhosis",
+      "SEPSIS",
+      "CHOLANGITIS"
+    ],
+    "investigations": [
+      "diagnostic_paracentesis_pmn_count",
+      "ascitic_fluid_culture",
+      "blood_cultures",
+      "abdominal_ultrasound"
+    ],
+    "stewardship": {
+      "tier": "watch",
+      "antibiotics": [
+        "cefotaxime",
+        "ceftriaxone"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Ascitic fluid PMN >=250 cells/mm3 must classify as SBP even without abdominal pain or high-grade fever",
+    "Empiric therapy must be a third-generation cephalosporin (cefotaxime or ceftriaxone), not an aminoglycoside",
+    "IV albumin must be recommended alongside antibiotics given creatinine >1 mg/dL and bilirubin >4 mg/dL",
+    "Monomicrobial growth with normal ascitic glucose and low LDH should NOT be classified as secondary peritonitis",
+    "New encephalopathy in a cirrhotic with ascites must trigger a diagnostic paracentesis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "gc_258",
+  "specialty": "Tropical Fever",
+  "condition": "Dengue Fever",
+  "age": 29,
+  "sex": "M",
+  "presentingComplaint": "2 days of moderate fever, frontal headache and body aches",
+  "history": "Previously healthy software professional in Chennai presents on day 2 of illness with abrupt-onset fever to 38.5-39C, a dull frontal and retro-orbital headache worse on eye movement, and diffuse myalgia and low-back ache. He describes mild nausea and reduced appetite but is tolerating oral fluids well and is fully ambulant. No abdominal pain, no bleeding, no breathlessness, no rash noticed by him. He has continued to work from home. Several colleagues and a neighbour have had a similar febrile illness in the past fortnight; the locality has had reported dengue cases and stagnant monsoon water. No recent travel outside the city, no jungle/rural exposure, no freshwater wading, no animal contact. No comorbidities, no regular medications; he took paracetamol with partial relief and specifically has not taken any NSAID. This is an early, mild presentation without warning signs rather than the classic prostrate high-grade textbook case.",
+  "examination": "Alert, comfortable, well-perfused and not toxic. Flushed face with mild conjunctival injection. A faint blanching macular flush is visible over the trunk. Mild epigastric tenderness only; no hepatomegaly, no guarding, no ascites. No neck stiffness. Tourniquet test positive (>10 petechiae). No spontaneous bleeding, no petechiae elsewhere, capillary refill <2s, no postural drop. Hydration adequate.",
+  "vitals": {
+    "hr": 94,
+    "bp": "116/74",
+    "rr": 16,
+    "temp": 38.7,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": 14.6,
+    "hematocrit": 44,
+    "wbc": 3.1,
+    "neutrophils_pct": 48,
+    "lymphocytes_pct": 42,
+    "platelets": 112,
+    "ast": 68,
+    "alt": 54,
+    "creatinine": 0.9,
+    "sodium": 138,
+    "crp_mg_l": 18,
+    "dengue_ns1": "positive",
+    "dengue_igm": "negative (day 2)"
+  },
+  "imaging": "Bedside ultrasound: no ascites, no pleural effusion, no gallbladder wall edema (no plasma-leak features at this early stage).",
+  "microbiology": "Dengue NS1 antigen positive. Peripheral smear for malaria parasite negative x1; rapid malaria antigen negative. Blood cultures sent and later sterile.",
+  "differentialDiagnoses": [
+    "Chikungunya",
+    "Malaria",
+    "Scrub typhus",
+    "Leptospirosis"
+  ],
+  "finalDiagnosis": "Dengue fever (febrile phase, without warning signs) — WHO Group A",
+  "citations": [
+    "WHO — Dengue Guidelines for Diagnosis, Treatment, Prevention and Control — 2009",
+    "NVBDCP India — National Guidelines for Clinical Management of Dengue — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Flaviviruses / Dengue"
+  ],
+  "stewardship": "Viral illness — NO antibiotics indicated. Manage as WHO Group A: ambulatory supportive care with oral fluids, paracetamol for fever, and strict avoidance of NSAIDs/aspirin and IM injections. Educate on warning signs and arrange daily CBC/hematocrit monitoring through the critical (defervescence) phase.",
+  "contraindications": [
+    "Avoid NSAIDs and aspirin (bleeding/gastritis risk)",
+    "Avoid intramuscular injections",
+    "Avoid empirical/prophylactic antibiotics",
+    "Avoid unnecessary IV fluids while oral intake is adequate"
+  ],
+  "edgeCases": [
+    "Watch for warning signs at defervescence (day 3-6): abdominal pain, persistent vomiting, mucosal bleed, lethargy, rising hematocrit with falling platelets — reclassify to Group B/C",
+    "Rising hematocrit with a falling platelet count signals plasma leakage even if BP is normal",
+    "Secondary dengue infection carries higher risk of severe disease",
+    "Do not be reassured by a normal first-day platelet count — monitor the trend"
+  ],
+  "expectedMaiK": "Recognize early dengue (NS1-positive, leukopenia, mild thrombocytopenia, positive tourniquet test) as a WHO Group A case: outpatient supportive care, oral hydration, paracetamol, no antibiotics, avoid NSAIDs, and daily CBC with warning-sign safety-netting.",
+  "expectedNextQuestions": [
+    "Any abdominal pain, persistent vomiting, or bleeding (gums, nose, stools)?",
+    "Day of illness and pattern of fever?",
+    "Urine output and ability to drink adequately?",
+    "Any NSAID/aspirin use or bleeding tendency?",
+    "Prior dengue infection (secondary-infection risk)?"
+  ],
+  "expectedInvestigations": [
+    "CBC with hematocrit and platelet trend",
+    "Dengue NS1 antigen (and IgM/IgG serology)",
+    "Malaria smear / rapid antigen to exclude malaria",
+    "LFTs (transaminases)",
+    "Baseline renal function and electrolytes"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "headache": true,
+    "retroorbitalPain": true,
+    "myalgiaArthralgia": true,
+    "rash": true,
+    "thrombocytopenia": true,
+    "nauseaVomiting": true,
+    "travelEndemicArea": true
+  },
+  "expected": {
+    "diagnosis": "DENGUE",
+    "acceptableIds": [
+      "DENGUE"
+    ],
+    "differentialIds": [
+      "CHIKUNGUNYA",
+      "MALARIA",
+      "SCRUB_TYPHUS",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "Dengue NS1 antigen and IgM/IgG serology",
+      "CBC with serial hematocrit and platelet count",
+      "Malaria smear / rapid antigen",
+      "LFTs"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == DENGUE",
+    "no antibiotics recommended (viral illness)",
+    "classified as WHO Group A / dengue without warning signs",
+    "NSAIDs and aspirin flagged as contraindicated",
+    "serial CBC/hematocrit monitoring recommended"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

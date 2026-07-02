@@ -1,0 +1,105 @@
+{
+  "id": "gc_277",
+  "specialty": "Respiratory",
+  "condition": "Acute Pharyngitis",
+  "age": 19,
+  "sex": "F",
+  "presentingComplaint": "Sudden-onset severe sore throat with fever for 2 days, initially thought to be glandular fever",
+  "history": "A 19-year-old female college student presents with an abrupt onset of severe sore throat, odynophagia, high-grade fever and headache over 2 days. She has associated nausea with one episode of vomiting. There is NO cough, no rhinorrhoea/coryza, no hoarseness and no conjunctivitis. A roommate was recently treated for 'strep throat'. She initially attended a walk-in clinic where infectious mononucleosis was suspected (a friend had recently had glandular fever with prolonged fatigue), and a heterophile antibody (monospot) test was requested. However, she reports no significant fatigue preceding the illness, no left upper-quadrant discomfort. No prior tonsillectomy. No drug allergies. Not sexually active recently; no risk factors for gonococcal pharyngitis. This overlapping picture (exudative tonsillitis with tender nodes) raised infectious mononucleosis as the leading alternative, but the acute febrile onset, absence of cough/coryza, anterior (not posterior) cervical nodes and absence of splenomegaly point to Group A streptococcal pharyngitis, later confirmed.",
+  "examination": "Alert, mildly flushed, not toxic. Oropharynx: markedly erythematous tonsils with bilateral creamy-white tonsillar exudate; a few palatal petechiae; no unilateral tonsillar bulge, no uvular deviation and no trismus (excludes peritonsillar abscess). Tender, enlarged ANTERIOR cervical lymph nodes bilaterally; no posterior cervical or generalised lymphadenopathy. No hepatosplenomegaly on abdominal exam. No rash/scarlatiniform eruption at presentation. Chest clear.",
+  "vitals": {
+    "hr": 104,
+    "bp": "118/74",
+    "rr": 16,
+    "temp": 38.7,
+    "spo2": 99
+  },
+  "labs": {
+    "wbc": "12.8 x10^9/L (neutrophil predominant, no atypical lymphocytes)",
+    "hemoglobin": "13.4 g/dL",
+    "platelets": "265 x10^3/uL",
+    "crp": "48 mg/L",
+    "heterophileAntibody": "Negative (monospot negative)",
+    "ebmVCA_IgM": "Negative"
+  },
+  "imaging": "Not indicated; no imaging performed (no features of deep neck space infection).",
+  "microbiology": "Rapid antigen detection test (RADT) for Group A Streptococcus: POSITIVE. Throat swab culture: Streptococcus pyogenes (group A beta-haemolytic streptococcus). Monospot negative and no atypical lymphocytosis, arguing against EBV infectious mononucleosis.",
+  "differentialDiagnoses": [
+    "Infectious mononucleosis (EBV) — the principal mimic given exudative tonsillitis and cervical adenopathy",
+    "Viral pharyngitis / URTI",
+    "Peritonsillar abscess (excluded: no trismus, uvular deviation or unilateral swelling)",
+    "Acute rhinosinusitis"
+  ],
+  "finalDiagnosis": "Group A streptococcal (bacterial) acute pharyngitis — McIsaac/Centor score 4 (fever >38C, tonsillar exudate, tender anterior cervical nodes, absence of cough), RADT and culture confirmed; infectious mononucleosis excluded by negative monospot and absence of posterior adenopathy/splenomegaly/atypical lymphocytosis.",
+  "citations": [
+    "IDSA — Clinical Practice Guideline for the Diagnosis and Management of Group A Streptococcal Pharyngitis — 2012",
+    "Harrison's Principles of Internal Medicine, 22nd edition — Pharyngitis and Streptococcus pyogenes infections"
+  ],
+  "stewardship": "Confirmed GAS pharyngitis warrants narrow-spectrum therapy to prevent acute rheumatic fever and suppurative complications. First-line: oral penicillin V 500 mg BD (or amoxicillin 500 mg BD) for 10 days. Amoxicillin is deliberately AVOIDED empirically if mononucleosis is not yet excluded because it can precipitate a florid maculopapular rash in EBV infection — here EBV is excluded, so a beta-lactam is appropriate. Macrolide (azithromycin) reserved for penicillin allergy. Antibiotics are NOT indicated for viral pharyngitis; confirmatory testing before treating avoids unnecessary prescribing.",
+  "contraindications": [
+    "Avoid empirical aminopenicillins (amoxicillin/ampicillin) if infectious mononucleosis is not excluded — high risk of drug rash",
+    "Penicillin allergy: use a macrolide (azithromycin) or first-generation cephalosporin if non-anaphylactic"
+  ],
+  "edgeCases": [
+    "Overlap with infectious mononucleosis: exudative tonsillitis plus adenopathy can be either; posterior cervical nodes, splenomegaly, marked fatigue and atypical lymphocytosis favour EBV",
+    "Co-infection: a positive RADT does not exclude concurrent EBV; both can coexist",
+    "Beware unilateral swelling, trismus or 'hot potato' voice signalling peritonsillar abscess requiring drainage"
+  ],
+  "expectedMaiK": "Acute sore throat with fever, tonsillar exudate, tender anterior cervical nodes and absence of cough (McIsaac 4) plus positive RADT/culture indicates Group A streptococcal pharyngitis; treat with a 10-day narrow-spectrum penicillin.",
+  "expectedNextQuestions": [
+    "Is there cough, coryza or conjunctivitis (would favour a viral cause)?",
+    "Are the enlarged nodes anterior or posterior, and is there splenomegaly or profound fatigue (would favour EBV)?",
+    "Any prior rheumatic fever, penicillin allergy, or recent sick contacts with strep throat?",
+    "Any trismus, drooling or unilateral throat swelling suggesting peritonsillar abscess?"
+  ],
+  "expectedInvestigations": [
+    "Rapid antigen detection test (RADT) for Group A Streptococcus",
+    "Throat swab culture (confirm/backup where RADT negative in high-risk)",
+    "Heterophile antibody (monospot) / EBV serology to exclude infectious mononucleosis",
+    "Full blood count with film (atypical lymphocytes suggest EBV)"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "soreThroat": true,
+    "tonsillarExudate": true,
+    "tenderCervicalNodes": true,
+    "fever": true,
+    "headache": true,
+    "nauseaVomiting": true,
+    "tachycardia": true,
+    "lymphadenopathy": true
+  },
+  "expected": {
+    "diagnosis": "PHARYNGITIS",
+    "acceptableIds": [
+      "PHARYNGITIS"
+    ],
+    "differentialIds": [
+      "URTI",
+      "SINUSITIS",
+      "ACUTE_BRONCHITIS"
+    ],
+    "investigations": [
+      "Rapid antigen detection test (RADT) for Group A Streptococcus",
+      "Throat swab culture",
+      "Heterophile antibody (monospot) / EBV serology",
+      "Full blood count with film"
+    ],
+    "stewardship": {
+      "tier": "narrow",
+      "antibiotics": [
+        "Penicillin V 500 mg PO BD for 10 days (or Amoxicillin 500 mg PO BD)"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must return PHARYNGITIS as the top diagnosis",
+    "Positive RADT/culture with McIsaac 4 must trigger antibiotic recommendation (narrow-spectrum penicillin)",
+    "Must not recommend broad-spectrum agents for uncomplicated GAS pharyngitis",
+    "URTI/viral pharyngitis should appear as a differential but rank below PHARYNGITIS given exudate + anterior nodes + no cough + positive RADT"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

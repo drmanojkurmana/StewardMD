@@ -1,0 +1,122 @@
+{
+  "id": "gc_262",
+  "specialty": "Gastrointestinal",
+  "condition": "Dysentery (Invasive Bacterial Diarrhea)",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "3 days of frequent bloody, mucoid stools with fever and lower abdominal cramps",
+  "history": "Known ulcerative colitis for 9 years, maintained in remission on azathioprine 100 mg/day and oral mesalazine; last flare over 2 years ago. Attended a family wedding 4 days ago and ate buffet chicken and cut fruit; two other guests developed diarrhoea. Now passing 10-12 small-volume stools per day mixed with fresh blood and mucus, with painful straining and a constant urge to defaecate. Fever with chills for 2 days. His gastroenterology clinic was contacted and, assuming a UC relapse, advised increasing mesalazine and considering oral steroids. Reduced oral intake, dizzy on standing. No recent antibiotics or hospitalisation. No prior similar acute febrile episodes with his UC flares, which are usually afebrile and gradual.",
+  "examination": "Ill-looking, dry mucous membranes, reduced skin turgor. Abdomen soft with tenderness in the left iliac fossa and suprapubic region; bowel sounds active; no guarding, rigidity or palpable mass. Digital rectal examination reveals blood-stained mucus. No stigmata of chronic liver disease. Alert and oriented.",
+  "vitals": {
+    "hr": 110,
+    "bp": "102/62",
+    "rr": 20,
+    "temp": 38.9,
+    "spo2": 97
+  },
+  "labs": {
+    "hemoglobin": 12.8,
+    "wbc": 15.4,
+    "neutrophils_pct": 84,
+    "platelets": 245,
+    "crp": 138,
+    "creatinine": 1.4,
+    "urea_mmol": 9.8,
+    "sodium": 133,
+    "potassium": 3.4,
+    "lactate": 1.9,
+    "albumin": 3.4,
+    "fecal_leukocytes": "positive",
+    "fecal_calprotectin": "elevated (non-discriminatory)"
+  },
+  "imaging": "Erect abdominal X-ray: no free air, no toxic megacolon (transverse colon diameter normal). Flexible sigmoidoscopy (limited, unprepped): diffuse mucosal erythema, oedema and contact bleeding in the recto-sigmoid — appearances overlap with an acute UC flare; biopsies deferred pending stool results.",
+  "microbiology": "Stool culture: Shigella flexneri isolated. Stool for Clostridioides difficile GDH/toxin: negative. Stool microscopy: abundant polymorphs, no Entamoeba histolytica trophozoites/cysts. Blood cultures: no growth at 48h. Stool film-array panel: positive for Shigella/EIEC.",
+  "differentialDiagnoses": [
+    "Ulcerative colitis flare (baseline comorbidity, mimics the bloody diarrhoea)",
+    "Clostridioides difficile infection (immunosuppressed host)",
+    "Amoebic colitis",
+    "Non-invasive viral/bacterial gastroenteritis",
+    "Enteric fever with intestinal involvement"
+  ],
+  "finalDiagnosis": "Acute bacterial dysentery due to Shigella flexneri superimposed on quiescent ulcerative colitis in an azathioprine-immunosuppressed host",
+  "citations": [
+    "IDSA Infectious Diarrhea Clinical Practice Guidelines 2017",
+    "ACG Acute Diarrheal Infections in Adults 2016",
+    "Harrison's Principles of Internal Medicine 22e — Acute Infectious Diarrheal Diseases and Bacterial Food Poisoning"
+  ],
+  "stewardship": "Confirmed invasive bacterial dysentery in an immunocompromised host warrants targeted antimicrobial therapy. In South Asia fluoroquinolone resistance in Shigella is high, so azithromycin is the preferred empiric/first-line agent pending susceptibility; ceftriaxone is an alternative for severe/parenteral needs. Antimotility agents contraindicated. Crucially, do NOT escalate immunosuppression (steroids/biologics for a presumed UC flare) until enteric infection is excluded, as this risks fulminant colitis and dissemination.",
+  "contraindications": [
+    "Loperamide / antimotility agents (risk of toxic megacolon and prolonged carriage)",
+    "Empiric corticosteroid escalation for presumed UC flare before infection excluded",
+    "Empiric fluoroquinolone monotherapy without regard to local Shigella resistance"
+  ],
+  "edgeCases": [
+    "Immunosuppression by azathioprine both increases susceptibility and blunts classic signs, delaying diagnosis",
+    "Overlapping UC means calprotectin and sigmoidoscopy are non-discriminatory — stool culture is decisive",
+    "Missing the infection and treating as a flare with steroids could precipitate toxic megacolon"
+  ],
+  "expectedMaiK": "Send stool culture, fecal leukocytes and C. difficile toxin BEFORE escalating immunosuppression; treat confirmed invasive bacterial dysentery with a guideline-concordant agent (azithromycin) and rehydrate.",
+  "expectedNextQuestions": [
+    "Food/water exposure and any ill contacts from the wedding?",
+    "Recent antibiotic or hospital exposure (C. difficile risk)?",
+    "How does this episode differ from his usual UC flares (fever, acuity)?",
+    "Travel history and any immunosuppression dose changes?"
+  ],
+  "expectedInvestigations": [
+    "Stool culture and sensitivity",
+    "Stool microscopy for ova/cysts/parasites (Entamoeba)",
+    "Stool C. difficile GDH/toxin assay",
+    "Fecal leukocytes / calprotectin",
+    "Blood cultures",
+    "FBC, CRP, U&E, lactate",
+    "Erect abdominal X-ray to exclude toxic megacolon"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "diarrhea": true,
+    "bloodyStool": true,
+    "tenesmus": true,
+    "highFeverGI": true,
+    "fever": true,
+    "abdominalPain": true,
+    "dehydration": true,
+    "contaminatedFoodWaterExposure": true,
+    "immunocompromised": true,
+    "tachycardia": true
+  },
+  "expected": {
+    "diagnosis": "DYSENTERY",
+    "acceptableIds": [
+      "DYSENTERY"
+    ],
+    "differentialIds": [
+      "ibd_flare",
+      "C_DIFF",
+      "GASTROENTERITIS",
+      "ENTERIC_FEVER"
+    ],
+    "investigations": [
+      "stool_culture",
+      "stool_microscopy_ova_parasites",
+      "cdiff_toxin",
+      "fecal_leukocytes",
+      "blood_cultures"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "azithromycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine top diagnosis must be DYSENTERY despite the confounding ulcerative colitis comorbidity",
+    "ibd_flare must appear in the differential but must not displace DYSENTERY as the primary diagnosis",
+    "Must recommend stool culture / infection workup before immunosuppression escalation",
+    "Must flag azithromycin (Watch tier) as guideline-concordant empiric therapy and contraindicate antimotility agents"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

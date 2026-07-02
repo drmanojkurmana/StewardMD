@@ -1,0 +1,126 @@
+{
+  "id": "gc_367",
+  "specialty": "Dermatology / Emergency",
+  "condition": "Stevens-Johnson syndrome / toxic epidermal necrolysis (SJS/TEN)",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "3 days of fever with a rapidly spreading, painful red rash and difficulty opening the eyes and swallowing.",
+  "history": "Frail woman referred by her GP as 'query cellulitis / sepsis' after a spreading tender erythema of the trunk failed to settle on oral flucloxacillin. Rash began as ill-defined dusky macules on the chest and face 3 days ago, coalescing into sheets of erythema over the trunk and proximal limbs with new flaccid blisters and skin that 'peels off' on rubbing. Preceding this she noticed gritty painful eyes, mouth soreness with inability to eat, and burning on micturition. Allopurinol was started 24 days ago for recurrent gout; also on ramipril and amlodipine (both long-standing). No prior similar reaction, no known drug allergy. Reduced oral intake and reduced urine output over 48h.",
+  "examination": "Ill and dehydrated. Confluent dusky-erythematous and purpuric macules with atypical flat targetoid lesions coalescing over face, trunk and proximal limbs; flaccid bullae with epidermal detachment. Nikolsky sign positive; lateral pressure extends erosion; estimated body surface area detached/detachable ~22%. Haemorrhagic crusting of the lips with confluent oral mucosal erosions; bilateral purulent conjunctivitis with conjunctival erosions; erosive vulvovaginitis and dysuria. No lymphangitic streaking, no fluctuant collection, no deep-tissue crepitus.",
+  "vitals": {
+    "hr": 112,
+    "bp": "98/60",
+    "rr": 24,
+    "temp": 38.6,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": 12.1,
+    "wbc": 14.2,
+    "neutrophils": 11,
+    "lymphocytes": 0.7,
+    "platelets": 178,
+    "sodium": 133,
+    "potassium": 4.6,
+    "urea_mmol_l": 14.2,
+    "creatinine_mg_dl": 1.9,
+    "bicarbonate": 18,
+    "glucose_mg_dl": 268,
+    "crp": 96,
+    "albumin": 2.8,
+    "bilirubin": 1.1,
+    "alt": 74,
+    "SCORTEN": "4 (age>40, HR>120, BSA>10%, urea high, glucose high, bicarbonate low) — predicted mortality ~58%"
+  },
+  "imaging": "Chest radiograph clear; no focus of soft-tissue gas or abscess on bedside review.",
+  "microbiology": "Blood cultures and skin swab of intact bulla sent (SJS/TEN blister fluid is typically sterile); skin biopsy for frozen section/H&E requested to confirm full-thickness epidermal necrosis and exclude staphylococcal scalded skin syndrome.",
+  "differentialDiagnoses": [
+    "Severe cellulitis / erysipelas (initial referral label; excluded by mucosal erosions, positive Nikolsky and epidermal detachment)",
+    "Sepsis / toxic shock (fever + spreading erythema + hypotension mimic)",
+    "SLE-related bullous/mucocutaneous eruption",
+    "Cutaneous small-vessel / drug-induced vasculitis",
+    "Staphylococcal scalded skin syndrome (subcorneal split; biopsy distinguishes)",
+    "DRESS and generalized bullous fixed drug eruption"
+  ],
+  "finalDiagnosis": "SJS/TEN overlap (SCORTEN 4) — allopurinol-induced, presenting as a cellulitis/sepsis mimic in a frail elderly woman",
+  "citations": [
+    "British Association of Dermatologists — UK guidelines for the management of Stevens-Johnson syndrome / toxic epidermal necrolysis in adults 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Cutaneous Drug Reactions / Severe cutaneous adverse reactions",
+    "ALDEN algorithm — Assessment of drug causality in epidermal necrolysis"
+  ],
+  "stewardship": "Not an antibiotic-indicated condition. Empirical antibiotics are NOT started for the skin per se; the mainstay is immediate withdrawal of the culprit drug (allopurinol), transfer to a burns/ICU or dermatology high-dependency unit, meticulous wound and fluid/electrolyte management, ophthalmology and urogynaecology review, and analgesia. Antibiotics only if microbiologically confirmed secondary infection or sepsis, guided by cultures.",
+  "contraindications": [
+    "Do NOT continue allopurinol or rechallenge (culprit) — also avoid other high-risk aromatic drugs",
+    "Avoid prophylactic systemic antibiotics",
+    "Avoid adhesive dressings and unnecessary skin trauma over Nikolsky-positive skin",
+    "Avoid sulfonamides and NSAIDs"
+  ],
+  "edgeCases": [
+    "Frail/elderly presentation is easily mislabelled as cellulitis or sepsis, delaying drug withdrawal",
+    "Latency of 1-3 weeks after starting allopurinol is typical and helps causality (ALDEN)",
+    "Renal impairment and thiazide/loop co-use raise oxypurinol levels and SJS/TEN risk; HLA-B*58:01 association",
+    "SCORTEN best calculated within first 24h; reassess on day 3"
+  ],
+  "expectedMaiK": "Recognise SJS/TEN (not cellulitis/sepsis) from mucosal erosions at ≥2 sites, positive Nikolsky sign, epidermal detachment and a 1-3 week drug latency; stop the culprit drug immediately and escalate to burns/ICU-level supportive care.",
+  "expectedNextQuestions": [
+    "Exact start date of allopurinol and all new drugs in the last 8 weeks (ALDEN causality)?",
+    "How many mucosal sites are involved (ocular, oral, genital)?",
+    "Estimated percentage body surface area of detached/detachable epidermis?",
+    "Urine output and oral intake over the last 24h?"
+  ],
+  "expectedInvestigations": [
+    "Skin biopsy (frozen section + H&E) confirming full-thickness epidermal necrosis",
+    "SCORTEN prognostic scoring (urea, bicarbonate, glucose, HR, BSA, age, malignancy)",
+    "Full metabolic panel, renal function and electrolytes; fluid balance",
+    "Blood cultures and skin surveillance swabs for secondary infection",
+    "Ophthalmology slit-lamp assessment"
+  ],
+  "expectedConfidence": 0.88,
+  "findings": {
+    "age": true,
+    "sex": true,
+    "tempC": true,
+    "heartRate": true,
+    "respRate": true,
+    "fever": true,
+    "toxicAppearing": true,
+    "rash": true,
+    "skinErythema": true,
+    "rapidlySpreadingErythema": true,
+    "mucosalLesions": true,
+    "dysuria": true
+  },
+  "expected": {
+    "diagnosis": "sjs_ten",
+    "acceptableIds": [
+      "sjs_ten"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "sle_flare",
+      "vasculitis",
+      "SEPSIS"
+    ],
+    "investigations": [
+      "skin biopsy",
+      "SCORTEN",
+      "renal panel and electrolytes",
+      "blood cultures"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must NOT be classified as CELLULITIS or SEPSIS despite spreading erythema and fever",
+    "Must identify mucosalLesions + positive Nikolsky + drug latency as diagnostic of SJS/TEN",
+    "Must recommend immediate withdrawal of allopurinol as first action",
+    "Must NOT recommend empirical antibiotics for the skin",
+    "Stewardship tier must be null (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "id": "gc_250",
+  "specialty": "Tropical Fever",
+  "condition": "Chikungunya",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Three days of high fever with sudden, severe, symmetric small-joint pain and swelling, initially attributed to a flare of her rheumatoid arthritis.",
+  "history": "Seropositive rheumatoid arthritis for 9 years, well controlled on methotrexate 15 mg weekly and hydroxychloroquine; also type 2 diabetes on metformin. She lives in coastal Karnataka and presents at the peak of the post-monsoon Aedes season, with several neighbours recently febrile. Her illness began abruptly with rigors and a temperature to 39.5 C, followed within hours by intense, symmetric pain and swelling of the wrists, MCPs, PIPs, ankles and knees — far more severe and abrupt than her usual RA morning stiffness, and accompanied by marked myalgia and a frontal headache. Her rheumatologist was initially contacted about an RA flare, but the explosive onset with high fever, a new rash and the community outbreak prompted admission. No prior similar febrile episodes; last documented RA flare was insidious and afebrile.",
+  "examination": "Uncomfortable and in obvious joint pain but not toxic or drowsy. Symmetric tenderness and soft-tissue swelling of wrists, MCP/PIP joints, ankles and knees with pain on the slightest movement; no joint erythema or effusion suggestive of septic arthritis. A fine maculopapular rash over the trunk and extensor limbs. No eschar, no conjunctival suffusion, no meningism. Chest clear, abdomen soft with no hepatosplenomegaly. Established RA changes (ulnar deviation, small nodules) noted but the acute swelling is out of keeping with baseline.",
+  "vitals": {
+    "hr": 104,
+    "bp": "126/78",
+    "rr": 18,
+    "temp": 39.3,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": 12.4,
+    "hematocrit": "38% (not raised)",
+    "wbc": "3.4 x10^3/uL (leukopenia)",
+    "platelets": 158,
+    "crp": "elevated",
+    "esr": "elevated",
+    "creatinine": 0.9,
+    "alt": "mildly elevated",
+    "dengue_ns1": "negative",
+    "dengue_igm": "negative",
+    "chikv_igm_elisa": "positive",
+    "chikv_rt_pcr": "positive",
+    "rheumatoid_factor": "known positive (baseline)",
+    "malaria_smear": "negative"
+  },
+  "imaging": "No consolidation on chest radiograph; joint radiographs show only pre-existing erosive RA changes without new destructive or septic features.",
+  "microbiology": "Blood cultures sterile at 48h. CHIKV RT-PCR positive and CHIKV IgM ELISA positive; dengue NS1 and IgM negative; peripheral smear negative for malaria parasites.",
+  "differentialDiagnoses": [
+    "Rheumatoid arthritis flare (the confounding comorbidity)",
+    "Dengue fever",
+    "Leptospirosis",
+    "Septic / reactive arthritis"
+  ],
+  "finalDiagnosis": "Chikungunya fever with acute symmetric polyarthritis, mimicking a rheumatoid arthritis flare",
+  "citations": [
+    "ICMR — National Guidelines on Chikungunya Fever — 2016",
+    "WHO — Chikungunya Fact Sheet / Clinical Management — 2022",
+    "Harrison's Principles of Internal Medicine 22e — Alphavirus Infections (Chikungunya)"
+  ],
+  "stewardship": "No antibiotics indicated — chikungunya is a self-limiting arboviral infection. Management is supportive: paracetamol for fever and analgesia, adequate hydration and rest. Avoid NSAIDs and aspirin until dengue is confidently excluded (bleeding risk); NSAIDs may be used later for arthralgia once dengue is ruled out. Do not escalate immunosuppression assuming an RA flare during an acute febrile arboviral illness. Antibiotic stewardship point: empiric antibacterials add no benefit and should be withheld absent evidence of bacterial co-infection.",
+  "contraindications": [
+    "Avoid NSAIDs/aspirin until dengue excluded due to bleeding risk",
+    "Avoid unnecessary corticosteroid pulse for presumed RA flare during acute viral illness",
+    "Avoid empiric antibiotics without evidence of bacterial infection"
+  ],
+  "edgeCases": [
+    "Symmetric small-joint arthralgia closely mimics an RA flare, especially in a known seropositive RA patient on DMARDs",
+    "Fever plus thrombocytopenia and leukopenia overlaps with dengue; normal haematocrit and positive CHIKV serology/PCR discriminate",
+    "A subset progress to chronic post-chikungunya arthralgia lasting months, which can be misread as worsening RA"
+  ],
+  "expectedMaiK": "Acute-onset high fever with explosive, symmetric small-joint polyarthralgia and a maculopapular rash during an Aedes-season community outbreak, in a patient whose RA is a red herring — pattern and serology point to chikungunya.",
+  "expectedNextQuestions": [
+    "Is there a local chikungunya/dengue outbreak or febrile contacts in the neighbourhood?",
+    "How does this joint pain compare in onset and severity to her usual RA flares?",
+    "Any bleeding, persistent vomiting, abdominal pain or postural dizziness (dengue warning signs)?",
+    "Recent freshwater/floodwater exposure or rodent contact (leptospirosis)?"
+  ],
+  "expectedInvestigations": [
+    "CHIKV RT-PCR (early) and CHIKV IgM ELISA",
+    "Dengue NS1 antigen and dengue IgM/IgG",
+    "FBC with platelets and haematocrit trend",
+    "Peripheral smear / rapid test for malaria",
+    "CRP/ESR, renal and liver function"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "severeArthralgia": true,
+    "symmetricSmallJointInvolvement": true,
+    "myalgiaArthralgia": true,
+    "polyarthralgia": true,
+    "jointSwelling": true,
+    "maculopapularRash": true,
+    "rash": true,
+    "headache": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "CHIKUNGUNYA",
+    "acceptableIds": [
+      "CHIKUNGUNYA"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "rheumatoid",
+      "LEPTOSPIROSIS"
+    ],
+    "investigations": [
+      "CHIKV RT-PCR / IgM ELISA",
+      "Dengue NS1 and IgM",
+      "FBC with platelets and haematocrit",
+      "Malaria smear/RDT"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis resolves to CHIKUNGUNYA despite the confounding rheumatoid arthritis history",
+    "No antibiotics are recommended (viral, supportive care only)",
+    "Dengue is actively considered and excluded before recommending NSAIDs",
+    "Symmetric small-joint polyarthralgia with fever in an outbreak setting is not misclassified as an RA flare"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

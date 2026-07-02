@@ -1,0 +1,113 @@
+{
+  "id": "gc_302",
+  "specialty": "Cardiology",
+  "condition": "Aortic stenosis (syncope)",
+  "age": 82,
+  "sex": "F",
+  "presentingComplaint": "Two episodes of transient loss of consciousness while walking to the bathroom, with several weeks of unusual breathlessness and fatigue on exertion.",
+  "history": "Frail 82-year-old woman brought by her daughter after a witnessed collapse while climbing the stairs; she went pale, slumped, was unresponsive for about 20 seconds, then recovered fully within a minute without confusion, incontinence or tongue-biting. A similar exertional 'greying-out' spell occurred 3 weeks earlier and was dismissed as dehydration. She denies palpitations, chest heaviness at rest, or a preceding aura, but on close questioning admits mild pressure-like exertional chest discomfort that she attributed to 'old age'. Over 2 months she has become breathless walking on the flat and now sleeps on two pillows. Background: long-standing hypertension, type 2 diabetes, mild CKD. She was told years ago of a 'heart murmur' but never had an echocardiogram. No recent GI blood loss, no vomiting, medications recently unchanged. The classic dramatic exertional syncope is muted here — the presentation is dominated by nonspecific fatigue and near-syncope in a frail elderly woman, and the murmur is soft and easily missed.",
+  "examination": "Comfortable at rest, not distressed. Small-volume, slow-rising (parvus et tardus) carotid pulse. Apex beat sustained and non-displaced. A grade 2/6 ejection systolic murmur is heard at the right upper sternal edge radiating faintly to the carotids; the murmur is deceptively soft and the A2 component of the second heart sound is diminished. Late-peaking character on careful auscultation. Bibasal fine crackles. No focal neurology, no postural BP drop reproduced, tongue and continence intact.",
+  "vitals": {
+    "hr": 72,
+    "bp": "126/98",
+    "rr": 20,
+    "temp": 36.7,
+    "spo2": 95
+  },
+  "labs": {
+    "hemoglobin": 11.8,
+    "creatinine": 1.4,
+    "urea": 9.2,
+    "sodium": 138,
+    "potassium": 4.3,
+    "troponin": "mildly elevated (16 ng/L, stable on serial testing)",
+    "ntProBNP": "markedly elevated (3800 pg/mL)",
+    "glucose": 172
+  },
+  "imaging": "ECG: sinus rhythm with LVH by voltage criteria and secondary repolarisation changes; no acute ST-elevation, no complete heart block. Chest X-ray: mildly enlarged cardiac silhouette with upper-lobe venous diversion, no calcified aorta commented on. Transthoracic echocardiogram: heavily calcified aortic valve with severely restricted leaflet opening; aortic valve area 0.8 cm2, dimensionless index 0.22, peak velocity 4.3 m/s, mean gradient 46 mmHg; concentric LV hypertrophy with preserved ejection fraction and impaired relaxation — findings diagnostic of severe aortic stenosis.",
+  "microbiology": "Not applicable; blood cultures not indicated (afebrile, non-infective presentation).",
+  "differentialDiagnoses": [
+    "Severe calcific aortic stenosis with exertional syncope (leading diagnosis)",
+    "Vasovagal / orthostatic syncope",
+    "Arrhythmic syncope (paroxysmal AF or conduction disease)",
+    "Acute coronary syndrome"
+  ],
+  "finalDiagnosis": "Severe calcific aortic stenosis presenting with exertional (near-)syncope, dyspnoea and heart failure in a frail elderly woman — an atypical, soft-murmur presentation.",
+  "citations": [
+    "ACC/AHA Guideline for the Management of Valvular Heart Disease 2020/2021",
+    "ESC/EACTS Guidelines for the Management of Valvular Heart Disease 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Valvular Heart Disease (Aortic Stenosis) & Syncope"
+  ],
+  "stewardship": "Not applicable — non-infective cardiac diagnosis; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid vasodilators/nitrates (ACE inhibitors, GTN) which can precipitate profound hypotension and syncope in fixed severe AS",
+    "Avoid aggressive diuresis or volume depletion — preload-dependent LV in AS",
+    "Avoid negatively inotropic/chronotropic agents that reduce cardiac output",
+    "Caution: soft murmur and low troponin can falsely reassure — severity is often underestimated in the elderly and in low-flow states"
+  ],
+  "edgeCases": [
+    "Low-flow, low-gradient severe AS with preserved EF may show a lower mean gradient despite a critically small valve area — do not exclude severe AS on gradient alone",
+    "A quiet murmur with soft/absent A2 can indicate more severe, not milder, disease",
+    "Exertional syncope in severe AS is an urgent indication for aortic valve replacement (surgical or TAVI) referral"
+  ],
+  "expectedMaiK": "Exertional syncope plus dyspnoea in an elderly patient with a slow-rising pulse, soft late-peaking ejection systolic murmur and diminished A2 should trigger urgent echocardiography for severe aortic stenosis; the softness of the murmur must not be falsely reassuring, and vasodilators must be avoided.",
+  "expectedNextQuestions": [
+    "Is the syncope exertional and effort-related (versus postural or situational)?",
+    "Any associated exertional chest pressure or breathlessness suggesting the AS triad?",
+    "Character of the carotid pulse (parvus et tardus) and audibility of A2?",
+    "Prior murmur history and any previous echocardiogram?",
+    "Medications that lower preload/afterload (nitrates, ACE inhibitors, diuretics)?"
+  ],
+  "expectedInvestigations": [
+    "Transthoracic echocardiography (aortic valve area, peak velocity, mean gradient, LV function)",
+    "12-lead ECG (rhythm, conduction disease, LVH)",
+    "Chest radiograph",
+    "Serial troponin to exclude ACS mimic",
+    "NT-proBNP",
+    "Basic metabolic panel and full blood count"
+  ],
+  "expectedConfidence": 0.86,
+  "findings": {
+    "syncope": true,
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "ageOver50": true,
+    "hypertensionHx": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "aortic_stenosis",
+    "acceptableIds": [
+      "aortic_stenosis"
+    ],
+    "differentialIds": [
+      "vasovagal_syncope",
+      "atrial_fib",
+      "acs",
+      "aortic_dissection"
+    ],
+    "investigations": [
+      "Transthoracic echocardiography",
+      "12-lead ECG",
+      "Serial troponin",
+      "NT-proBNP",
+      "Chest radiograph"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank aortic_stenosis as the primary diagnosis",
+    "Engine must not classify this as an infective condition or recommend antibiotics",
+    "Engine should recommend transthoracic echocardiography as a key investigation",
+    "Engine should flag exertional syncope in severe AS as an urgent valve-replacement referral indication",
+    "Engine should warn against vasodilators/nitrates in suspected severe aortic stenosis"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

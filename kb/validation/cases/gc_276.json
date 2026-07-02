@@ -1,0 +1,113 @@
+{
+  "id": "gc_276",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Necrotizing Fasciitis",
+  "age": 58,
+  "sex": "M",
+  "presentingComplaint": "36 hours of increasingly severe pain in the left calf with a small area of redness, now feeling generally unwell",
+  "history": "Type 2 diabetic (HbA1c 8.9%) on metformin. Three days ago sustained a minor abrasion to the left shin while gardening. Redness appeared the next day and he was started on oral flucloxacillin by his GP for presumed cellulitis. Over the last 12-18 hours the pain has become disproportionately severe, described as a deep, boring, relentless ache that keeps him awake and is far worse than the modest-looking redness would suggest, and now extends well beyond the visible margin. No obvious blistering, dusky skin or crepitus yet. Reports rigors and reduced appetite. Not clinically septic-shocked but feels markedly worse than 24h ago. No immunosuppression beyond diabetes.",
+  "examination": "Alert and oriented, mildly distressed by pain. Left calf shows an ill-defined area (~8 cm) of erythema and firm induration with local warmth and tense oedema; skin is intact without bullae, dusky discoloration or crepitus. Tenderness extends approximately 4-5 cm beyond the visible erythematous border (pain out of proportion to visible findings). Overlying skin has patchy reduced sensation. No fluctuance or pus. Distal pulses intact. Systemically warm peripheries, no purpuric rash.",
+  "vitals": {
+    "hr": 112,
+    "bp": "118/72",
+    "rr": 24,
+    "temp": 38.6,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "18.4 x10^3/uL",
+    "crp": "310 mg/L",
+    "creatinine": "1.4 mg/dL",
+    "sodium": "132 mmol/L",
+    "glucose": "16.2 mmol/L",
+    "hemoglobin": "13.1 g/dL",
+    "lactate": "2.6 mmol/L",
+    "ck": "540 U/L",
+    "LRINEC": "7 (high risk)"
+  },
+  "imaging": "Point-of-care and formal ultrasound show subcutaneous oedema with a thin rim of fluid tracking along the deep fascial plane. Plain radiograph shows soft-tissue swelling without gas. MRI (obtained without delaying surgical review) shows thickening and hyperintensity of the deep fascia with fascial fluid, suggestive of early necrotizing fascial involvement.",
+  "microbiology": "Blood cultures sent. Finger-test / bedside exploration at surgical assessment: dishwater-grey exudate and lack of fascial resistance to blunt dissection. Gram stain of fascial fluid pending; deep tissue cultures sent intra-operatively.",
+  "differentialDiagnoses": [
+    "Necrotizing fasciitis (early)",
+    "Severe cellulitis",
+    "Erysipelas",
+    "Diabetic soft-tissue infection"
+  ],
+  "finalDiagnosis": "Early necrotizing fasciitis of the left lower limb (type II / polymicrobial risk; diabetic host)",
+  "citations": [
+    "IDSA — Skin and Soft Tissue Infections (Necrotizing) — 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Necrotizing Soft Tissue Infections"
+  ],
+  "stewardship": "Surgical emergency: urgent surgical exploration/debridement is the priority; empiric broad-spectrum antibiotics with anti-toxin (protein-synthesis-inhibiting) cover started immediately and narrowed on cultures.",
+  "contraindications": [
+    "Do not delay surgical exploration for imaging if suspicion is high",
+    "Avoid attributing disproportionate pain to simple cellulitis"
+  ],
+  "edgeCases": [
+    "Early NF can mimic uncomplicated cellulitis with intact skin and no crepitus/bullae; pain out of proportion and systemic upset are the discriminators",
+    "Failure to improve on/progression despite appropriate cellulitis antibiotics should prompt NF consideration"
+  ],
+  "expectedMaiK": "Pain out of proportion to modest overlying erythema, extending beyond the visible margin, with systemic toxicity and high LRINEC in a diabetic host, indicates early necrotizing fasciitis requiring urgent surgical exploration rather than continued antibiotics for cellulitis.",
+  "expectedNextQuestions": [
+    "Is the pain out of proportion to visible skin changes and progressing rapidly?",
+    "Any progression despite oral antibiotics for presumed cellulitis?",
+    "Any skin anaesthesia, dusky discoloration, bullae or crepitus developing?",
+    "Diabetic control and portal of entry?"
+  ],
+  "expectedInvestigations": [
+    "Urgent surgical consult for exploration / finger test",
+    "FBC, CRP, U&E, glucose, lactate, CK (LRINEC score)",
+    "Blood cultures",
+    "Deep tissue Gram stain and culture",
+    "MRI/USS only if it does not delay surgery"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "severePain": true,
+    "rapidlySpreadingErythema": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "lactateElevated": true,
+    "diabetesHx": true
+  },
+  "expected": {
+    "diagnosis": "NECROTIZING_FASCIITIS",
+    "acceptableIds": [
+      "NECROTIZING_FASCIITIS"
+    ],
+    "differentialIds": [
+      "CELLULITIS",
+      "ERYSIPELAS",
+      "DIABETIC_FOOT"
+    ],
+    "investigations": [
+      "Urgent surgical exploration / finger test",
+      "LRINEC labs (FBC, CRP, U&E, glucose, CK)",
+      "Blood cultures",
+      "Deep tissue Gram stain and culture",
+      "MRI if no surgical delay"
+    ],
+    "stewardship": {
+      "tier": "broad",
+      "antibiotics": [
+        "piperacillin-tazobactam",
+        "clindamycin",
+        "vancomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must contain NECROTIZING_FASCIITIS",
+    "CELLULITIS must not be the top diagnosis despite intact skin and no crepitus",
+    "Must flag pain out of proportion as key discriminator and recommend urgent surgical exploration",
+    "Empiric regimen must include clindamycin for toxin suppression alongside broad-spectrum cover"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

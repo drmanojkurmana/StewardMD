@@ -1,0 +1,118 @@
+{
+  "id": "gc_325",
+  "specialty": "Oncology / Metabolic",
+  "condition": "Hypercalcaemia of malignancy",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "5 days of worsening confusion, thirst and passing large volumes of urine, with several days of constipation and poor oral intake.",
+  "history": "Known metastatic ER-positive breast carcinoma (bone and hepatic metastases) on an aromatase inhibitor. Over the past week the family noticed progressive drowsiness, muddled speech, marked polyuria and polydipsia, nausea and stubborn constipation. She was initially referred by her GP as possible 'hyperosmolar hyperglycaemic state / urosepsis' because of the thirst, polyuria, confusion and dry appearance. No fever, dysuria or diarrhoea. Not a known diabetic. Recent unintentional weight loss of about 6 kg over two months. Taking regular calcium/vitamin-D supplement and thiazide for hypertension. No proton-pump-inhibitor-associated symptoms.",
+  "examination": "Elderly, cachectic, drowsy but rousable and oriented to person only. Dry mucous membranes, reduced skin turgor, no focal neurology and neck supple. Abdomen soft with mild generalised discomfort and sluggish bowel sounds; no peritonism or organomegaly beyond known hepatic edge. No cellulitis, no rash. Bony tenderness over the thoracic spine.",
+  "vitals": {
+    "hr": 96,
+    "bp": "104/64",
+    "rr": 18,
+    "temp": 36.8,
+    "spo2": 97
+  },
+  "labs": {
+    "correctedCalcium_mg_dL": 14.6,
+    "totalCalcium_mg_dL": 13.4,
+    "albumin_g_dL": 2.8,
+    "phosphate_mg_dL": 2.4,
+    "intactPTH_pg_mL": 6,
+    "PTHrP": "elevated",
+    "vitaminD_25OH": "low-normal",
+    "creatinine_mg_dL": 2.1,
+    "urea_mmol_L": 14.5,
+    "sodium_mmol_L": 148,
+    "potassium_mmol_L": 3.6,
+    "glucose_mg_dL": 168,
+    "serumOsmolality_mOsm_kg": 312,
+    "betaHydroxybutyrate": "negative",
+    "hemoglobin_g_dL": 10.4,
+    "alkalinePhosphatase": "elevated",
+    "SPEP": "no monoclonal band"
+  },
+  "imaging": "CT/known staging: lytic and sclerotic vertebral and pelvic metastases with hepatic deposits; no obstructing bowel lesion, no free air. CXR clear.",
+  "microbiology": "Urinalysis bland; blood and urine cultures negative — no infective source to explain confusion.",
+  "differentialDiagnoses": [
+    "Hyperosmolar hyperglycaemic state (mimic: thirst, polyuria, confusion, dehydration)",
+    "Multiple myeloma-related hypercalcaemia",
+    "Acute kidney injury / metabolic encephalopathy from another cause",
+    "Primary hyperparathyroidism (excluded by suppressed PTH)"
+  ],
+  "finalDiagnosis": "Severe hypercalcaemia of malignancy (PTHrP-mediated, humoral) with hypercalcaemic crisis causing nephrogenic diabetes insipidus, dehydration and encephalopathy in metastatic breast cancer.",
+  "citations": [
+    "Endocrine Society — Treatment of Hypercalcemia of Malignancy in Adults (2023)",
+    "Harrison's Principles of Internal Medicine, 22e — Hypercalcemia and Disorders of Malignancy"
+  ],
+  "stewardship": "Not applicable — non-infective metabolic emergency; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid thiazide diuretics and calcium/vitamin-D supplements — worsen hypercalcaemia; stop on admission.",
+    "Loop diuretics only after volume repletion, not for forced diuresis in a dehydrated patient.",
+    "Adjust/avoid zoledronic acid dosing caution with renal impairment; hydrate first."
+  ],
+  "edgeCases": [
+    "Hyperglycaemia and polyuria can be misread as HHS; measured osmolality and glucose are too low to explain the picture, and ketones are negative.",
+    "Corrected calcium essential — low albumin masks severity if only total calcium read.",
+    "Suppressed intact PTH with high calcium points to non-parathyroid (malignant/PTHrP) mechanism, distinguishing from primary hyperparathyroidism."
+  ],
+  "expectedMaiK": "Confusion + polyuria + constipation + dehydration in a patient with metastatic cancer and markedly elevated corrected calcium with suppressed PTH indicates hypercalcaemia of malignancy, not HHS.",
+  "expectedNextQuestions": [
+    "What is the corrected (albumin-adjusted) serum calcium?",
+    "What is the intact PTH, and is PTHrP elevated?",
+    "Any calcium/vitamin-D supplements or thiazide diuretics to stop?",
+    "Are ketones/glucose high enough to be a hyperosmolar hyperglycaemic state?"
+  ],
+  "expectedInvestigations": [
+    "Corrected serum calcium and albumin",
+    "Intact PTH and PTHrP",
+    "Renal function and electrolytes",
+    "Phosphate, 25-OH vitamin D, ALP",
+    "Serum/urine electrophoresis to exclude myeloma"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "malignancy": true,
+    "weightLoss": true,
+    "alteredSensorium": true,
+    "nauseaVomiting": true,
+    "constipationOrDiarrhea": true,
+    "polyuriaPolydipsia": true,
+    "dehydration": true,
+    "renalImpairment": true,
+    "abdominalDiscomfort": true
+  },
+  "expected": {
+    "diagnosis": "hypercalcemia",
+    "acceptableIds": [
+      "hypercalcemia"
+    ],
+    "differentialIds": [
+      "hhs",
+      "myeloma",
+      "aki",
+      "metabolic_enceph"
+    ],
+    "investigations": [
+      "Corrected serum calcium and albumin",
+      "Intact PTH and PTHrP",
+      "Renal function and electrolytes",
+      "Serum/urine protein electrophoresis"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Corrected calcium >14 mg/dL with suppressed PTH must be classified as hypercalcaemia of malignancy, not primary hyperparathyroidism.",
+    "Negative ketones with only mild hyperglycaemia and osmolality ~312 must exclude HHS as the primary diagnosis.",
+    "Management ranks IV isotonic saline rehydration first, then bisphosphonate (or denosumab if renal impairment); calcitonin for rapid short-term lowering.",
+    "Thiazide and calcium/vitamin-D supplements must be flagged for discontinuation."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

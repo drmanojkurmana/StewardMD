@@ -1,0 +1,109 @@
+{
+  "id": "gc_359",
+  "specialty": "Urology",
+  "condition": "Renal / ureteric colic",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe left loin pain with near-complete cessation of urine output over 12 hours",
+  "history": "Retired man with a solitary functioning left kidney (right nephrectomy for a benign cause 15 years ago), hypertension and a prior episode of a passed stone. Woke with abrupt, colicky left flank pain radiating to the groin, unable to lie still, with several episodes of vomiting. Alarmed that he has passed almost no urine since the pain began. Not febrile, no rigors, no dysuria before onset. NSAIDs at home gave no relief and he presents in extremis from pain rather than sepsis. This is a severe/critical variant: obstruction of a single functioning kidney producing acute post-renal kidney injury and anuria, not the self-limiting textbook colic of a young patient.",
+  "examination": "Restless, writhing, pale and diaphoretic but not toxic. Marked left costovertebral angle tenderness; abdomen soft, no peritonism, no pulsatile or expansile mass, femoral pulses equal. Bladder not palpable. No skin lesions, no jaundice.",
+  "vitals": {
+    "hr": 110,
+    "bp": "172/98",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 98
+  },
+  "labs": {
+    "creatinine": "3.4 mg/dL (baseline 1.0)",
+    "urea": "16.8 mmol/L",
+    "potassium": "5.6 mmol/L",
+    "wbc": "10.2 x10^3/uL",
+    "crp": "8 mg/L",
+    "hemoglobin": "14.1 g/dL",
+    "urinalysis": "non-visible haematuria, no nitrites, no leucocyte esterase"
+  },
+  "imaging": "Non-contrast CT KUB: 7 mm obstructing calculus at the left vesicoureteric junction with proximal hydroureteronephrosis and perinephric stranding; single left kidney, surgically absent right kidney. No aortic aneurysm; aorta normal calibre.",
+  "microbiology": "Urine culture sent and sterile; blood cultures not indicated (afebrile, no sepsis features).",
+  "differentialDiagnoses": [
+    "Obstructing ureteric calculus in a solitary kidney (renal/ureteric colic with post-renal AKI)",
+    "Ruptured/symptomatic abdominal aortic aneurysm (classic elderly mimic of colic)",
+    "Acute pyelonephritis / obstructed infected system",
+    "Bowel obstruction"
+  ],
+  "finalDiagnosis": "Ureteric colic from a 7 mm obstructing VUJ stone in a solitary functioning kidney, causing anuria and acute post-renal kidney injury (obstruction of a single kidney = urological emergency requiring urgent decompression)",
+  "citations": [
+    "EAU Guidelines on Urolithiasis 2023",
+    "AUA/Endourological Society Surgical Management of Stones 2016",
+    "Harrison's Principles of Internal Medicine, 22e, Nephrolithiasis"
+  ],
+  "stewardship": "Not an infective presentation; no empiric antibiotics indicated. Priority is emergency urinary decompression (ureteric stent or percutaneous nephrostomy) of the obstructed solitary kidney plus correction of hyperkalaemia and AKI.",
+  "contraindications": [
+    "Avoid NSAIDs given acute kidney injury and hyperkalaemia",
+    "Avoid nephrotoxins and IV contrast until obstruction relieved and renal function assessed"
+  ],
+  "edgeCases": [
+    "Obstruction of a solitary or transplant kidney presents as anuria and rapidly rising creatinine rather than preserved urine output",
+    "In patients >50 with first colic, ruptured AAA must be excluded before anchoring on stone",
+    "Superimposed infection behind an obstruction (obstructed pyonephrosis) mandates emergency drainage and antibiotics"
+  ],
+  "expectedMaiK": "An obstructing ureteric stone in a solitary functioning kidney is a urological emergency: anuria plus acute post-renal AKI/hyperkalaemia requires urgent decompression, not conservative stone-passage management.",
+  "expectedNextQuestions": [
+    "How much urine has been passed since pain onset?",
+    "Is there a single/solitary or transplanted kidney?",
+    "Any fever, rigors or features suggesting an infected obstructed system?",
+    "In a man over 50, any features of a leaking aortic aneurysm?"
+  ],
+  "expectedInvestigations": [
+    "Non-contrast CT KUB",
+    "Serum creatinine, urea and electrolytes (potassium)",
+    "Urinalysis and urine culture",
+    "ECG to assess for hyperkalaemia",
+    "Bedside aortic assessment / ultrasound if AAA suspected"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "flankPain": true,
+    "severeAbdominalPain": true,
+    "hematuria": true,
+    "nauseaVomiting": true,
+    "tachycardia": true,
+    "costovertebralTenderness": true,
+    "oliguria": true,
+    "renalImpairment": true,
+    "ageOver50": true,
+    "hypertensionHx": true
+  },
+  "expected": {
+    "diagnosis": "renal_colic",
+    "acceptableIds": [
+      "renal_colic"
+    ],
+    "differentialIds": [
+      "aaa",
+      "PYELONEPHRITIS",
+      "bowel_obstruction",
+      "biliary_colic"
+    ],
+    "investigations": [
+      "Non-contrast CT KUB",
+      "Serum creatinine and electrolytes",
+      "Urinalysis and urine culture",
+      "ECG for hyperkalaemia"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['renal_colic']",
+    "must flag obstruction of a solitary kidney with AKI/anuria as an emergency needing urgent decompression",
+    "must not recommend empiric antibiotics in this non-infective presentation",
+    "must consider and exclude ruptured AAA in this patient over 50"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "id": "gc_243",
+  "specialty": "Hepatobiliary / Tropical Fever",
+  "condition": "Amoebic Liver Abscess",
+  "age": 76,
+  "sex": "M",
+  "presentingComplaint": "Three weeks of low-grade fever, right-sided abdominal discomfort, poor appetite and increasing confusion in a frail elderly man.",
+  "history": "A 76-year-old retired farmer from rural Madhya Pradesh, living alone with limited access to piped water, was brought by relatives with about three weeks of intermittent low-grade fever, dull right upper abdominal discomfort, anorexia and roughly 5 kg of unintentional weight loss. Over the last few days he had become intermittently drowsy and confused, with reduced oral intake. He denied cough, dysuria or overt jaundice. There was a remote history of loose stools months earlier that settled without treatment. Background: frailty, mild chronic kidney disease, treated hypertension and prior modest alcohol use. Presentation is blunted and non-specific relative to the classic young male with high swinging fever and dramatic RUQ pain.",
+  "examination": "Frail, mildly dehydrated, intermittently disoriented (not the classic toxic febrile young adult). Tender hepatomegaly with the liver edge palpable 4 cm below the costal margin and tenderness over the lower right intercostal spaces. Mild right basal reduction in air entry. No frank jaundice, no peritonism, no peripheral stigmata of chronic liver disease. No focal neurological deficit.",
+  "vitals": {
+    "hr": 104,
+    "bp": "116/70",
+    "rr": 20,
+    "temp": 38.1,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "15.8 x10^9/L",
+    "neutrophils": "82%",
+    "hemoglobin": "10.4 g/dL",
+    "platelets": "265 x10^3/uL",
+    "alkalinePhosphatase": "268 U/L",
+    "alt": "48 U/L",
+    "ast": "56 U/L",
+    "totalBilirubin": "1.6 mg/dL",
+    "albumin": "2.8 g/dL",
+    "crp": "142 mg/L",
+    "creatinine": "1.5 mg/dL",
+    "sodium": "131 mmol/L",
+    "inr": "1.2"
+  },
+  "imaging": "Ultrasound abdomen: single large (approx 8 cm) hypoechoic, rounded lesion with fine internal echoes in the right lobe of the liver, near the dome, with sympathetic right pleural reaction. Contrast CT: solitary peripherally rim-enhancing hypodense collection in segment VII/VIII abutting the diaphragm, no biliary dilatation, no gallstones.",
+  "microbiology": "Entamoeba histolytica serology (IgG ELISA) strongly positive. Blood cultures sterile. Stool microscopy negative for cysts/trophozoites. Ultrasound-guided aspirate (performed because of large size and diagnostic doubt): odourless 'anchovy-sauce' reddish-brown pus, sterile on bacterial culture; E. histolytica antigen detected.",
+  "differentialDiagnoses": [
+    "Pyogenic (bacterial) liver abscess",
+    "Acute cholangitis",
+    "Acute cholecystitis",
+    "Hepatic malignancy / metastasis"
+  ],
+  "finalDiagnosis": "Amoebic liver abscess (solitary right-lobe), atypically indolent presentation in a frail elderly patient",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Amebiasis (Entamoeba histolytica infection)",
+    "WHO — Amoebiasis: Diagnosis and Management — 1997"
+  ],
+  "stewardship": "Anti-amoebic therapy is definitive: a tissue amoebicide (metronidazole) to treat the invasive abscess, followed by a luminal amoebicide (paromomycin) to eradicate intraluminal cysts and prevent relapse. Empiric antibacterial cover is added only when pyogenic abscess cannot be excluded; here sterile anchovy-sauce aspirate plus positive serology confirm amoebic aetiology, so broad antibacterial cover can be de-escalated. Image-guided aspiration is reserved for large, left-lobe, or non-responding abscesses or diagnostic uncertainty.",
+  "contraindications": [
+    "Avoid alcohol during and for 48h after metronidazole (disulfiram-like reaction)",
+    "Dose-adjust and monitor for neurotoxicity/confusion with prolonged metronidazole in the frail elderly with CKD",
+    "Caution with metronidazole-related CNS effects given baseline altered sensorium"
+  ],
+  "edgeCases": [
+    "Blunted fever and non-specific confusion in the elderly delaying diagnosis",
+    "Rupture into pleural/pericardial/peritoneal space from a dome abscess",
+    "Negative stool microscopy does not exclude amoebic liver abscess",
+    "Co-existent mild CKD complicating drug dosing"
+  ],
+  "expectedMaiK": "Solitary right-lobe liver abscess with positive Entamoeba histolytica serology and sterile anchovy-sauce aspirate = amoebic liver abscess; treat with metronidazole plus a luminal amoebicide.",
+  "expectedNextQuestions": [
+    "Residence/travel in an endemic area and source of drinking water",
+    "Prior dysentery or bloody diarrhoea",
+    "Alcohol intake history",
+    "Immunosuppression or diabetes",
+    "Features suggesting rupture (worsening pleuritic pain, breathlessness)"
+  ],
+  "expectedInvestigations": [
+    "Abdominal ultrasound",
+    "Contrast-enhanced CT abdomen",
+    "Entamoeba histolytica serology (IgG ELISA)",
+    "LFTs and inflammatory markers",
+    "Blood cultures",
+    "Ultrasound-guided diagnostic/therapeutic aspiration if indicated"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "fever": true,
+    "rightUpperQuadrantPain": true,
+    "abdominalPain": true,
+    "singleLesion": true,
+    "weightLoss": true,
+    "subacuteOnset": true,
+    "tachycardia": true,
+    "contaminatedFoodWaterExposure": true,
+    "alteredSensorium": true,
+    "dehydration": true,
+    "hepatosplenomegaly": true
+  },
+  "expected": {
+    "diagnosis": "AMOEBIC_LIVER_ABSCESS",
+    "acceptableIds": [
+      "AMOEBIC_LIVER_ABSCESS"
+    ],
+    "differentialIds": [
+      "LIVER_ABSCESS",
+      "CHOLANGITIS",
+      "CHOLECYSTITIS",
+      "malignancy_b"
+    ],
+    "investigations": [
+      "Abdominal ultrasound",
+      "Contrast-enhanced CT abdomen",
+      "Entamoeba histolytica serology (IgG ELISA)",
+      "Blood cultures",
+      "Ultrasound-guided aspiration if indicated"
+    ],
+    "stewardship": {
+      "tier": "definitive",
+      "antibiotics": [
+        "Metronidazole",
+        "Paromomycin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank AMOEBIC_LIVER_ABSCESS as the top diagnosis",
+    "Solitary right-lobe lesion with positive E. histolytica serology must not be classified as pyogenic LIVER_ABSCESS",
+    "Must recommend metronidazole plus a luminal amoebicide (paromomycin)",
+    "Blunted fever/confusion in a frail elderly host must not lower diagnostic confidence below threshold"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "id": "gc_377",
+  "specialty": "Hematology",
+  "condition": "Thrombotic microangiopathy (TTP/HUS)",
+  "age": 58,
+  "sex": "F",
+  "presentingComplaint": "Brought to the emergency department obtunded after a witnessed generalised seizure, preceded by 3 days of confusion, dark urine and easy bruising.",
+  "history": "58-year-old woman with type 2 diabetes and hypothyroidism, previously independent. Over 5 days she developed increasing lethargy, fluctuating confusion and slurred speech, which the family initially attributed to a 'stroke'. In the last 48 hours she passed cola-coloured urine, developed spontaneous bruises over the limbs and bled from the gums after brushing. This morning she had a generalised tonic-clonic seizure at home lasting 2 minutes and did not fully regain consciousness. No preceding diarrhoea, no recent new drugs, no fever documented at home, no history of similar episodes. Not pregnant (post-menopausal). No recent chemotherapy, transplant or quinine use.",
+  "examination": "Critically ill, GCS 9 (E2 V2 M5), pale with scleral icterus. Scattered petechiae over both shins and forearms with fresh gum bleeding. Transient right-sided pronator drift noted between episodes of agitation; no fixed dense hemiparesis. No neck stiffness. No splenomegaly. Cardiovascular exam reveals a soft gallop; chest clear. No focal source of sepsis identified.",
+  "vitals": {
+    "hr": 124,
+    "bp": "104/68",
+    "rr": 24,
+    "temp": 38.3,
+    "spo2": 94
+  },
+  "labs": {
+    "hemoglobin": 6.7,
+    "platelets": 9,
+    "wbc": 11.2,
+    "reticulocytePercent": 8.5,
+    "totalBilirubin": 4.4,
+    "indirectBilirubin": 3.6,
+    "ldh": 1620,
+    "haptoglobin": "<10 (undetectable)",
+    "directCoombs": "negative",
+    "creatinine": 1.7,
+    "urea": 68,
+    "inr": 1.1,
+    "aptt": "normal",
+    "fibrinogen": 3.4,
+    "dDimer": "mildly raised",
+    "troponinI": 0.85,
+    "adamts13Activity": "<5%",
+    "adamts13Inhibitor": "present"
+  },
+  "imaging": "CT head: no haemorrhage, no established infarct, no mass — findings out of proportion to depressed conscious level, consistent with a diffuse microvascular process rather than a single territorial stroke.",
+  "microbiology": "Blood cultures no growth at 48h; malaria antigen and thick/thin films negative x2; leptospira and dengue serology negative. Stool not diarrhoeal; Shiga-toxin testing not indicated.",
+  "differentialDiagnoses": [
+    "Immune (acquired) thrombotic thrombocytopenic purpura — ADAMTS13 <10% with inhibitor",
+    "Disseminated intravascular coagulation secondary to sepsis",
+    "Severe malaria with intravascular haemolysis",
+    "Immune thrombocytopenia with incidental haemolysis"
+  ],
+  "finalDiagnosis": "Acquired (immune) thrombotic thrombocytopenic purpura presenting as a critical thrombotic microangiopathy with encephalopathy, cardiac involvement and life-threatening thrombocytopenia (ADAMTS13 <5%, inhibitor positive).",
+  "citations": [
+    "ISTH — Guidelines for diagnosis and management of thrombotic thrombocytopenic purpura, 2020",
+    "ASH — Immune TTP guideline, 2020",
+    "Harrison's Principles of Internal Medicine, 22e — Thrombotic Microangiopathies (TTP/HUS)"
+  ],
+  "stewardship": "Non-infective thrombotic microangiopathy; no empiric antibiotics indicated once malaria and sepsis are reasonably excluded. Definitive therapy is urgent therapeutic plasma exchange with corticosteroids and caplacizumab; rituximab for immune TTP.",
+  "contraindications": [
+    "Platelet transfusion is contraindicated in TTP except for immediately life-threatening haemorrhage — it can precipitate further microvascular thrombosis",
+    "Do not delay plasma exchange while awaiting ADAMTS13 results",
+    "Avoid empiric anticoagulation for the raised D-dimer — this is a platelet-consumptive TMA, not primary DIC"
+  ],
+  "edgeCases": [
+    "Normal/near-normal coagulation (INR, aPTT, fibrinogen) with severe thrombocytopenia and MAHA distinguishes TTP from DIC",
+    "Renal impairment is mild and neurology dominant, favouring TTP over typical (Shiga-toxin) HUS",
+    "Elevated troponin reflects cardiac microvascular involvement and marks a poor prognosis in severe TTP",
+    "If ADAMTS13 were normal, reconsider atypical HUS / complement-mediated TMA"
+  ],
+  "expectedMaiK": "Blood-film-confirmed MAHA plus severe thrombocytopenia with no better explanation IS TTP until proven otherwise — start therapeutic plasma exchange and steroids emergently, calculate a PLASMIC score, send ADAMTS13 before PEX, and withhold platelet transfusion.",
+  "expectedNextQuestions": [
+    "Are there schistocytes on the peripheral blood film?",
+    "What is the PLASMIC score?",
+    "Any recent diarrhoeal illness, drugs (quinine, clopidogrel), pregnancy, autoimmune disease or malignancy?",
+    "Are coagulation studies (INR, aPTT, fibrinogen) normal to exclude DIC?",
+    "Has an ADAMTS13 activity and inhibitor sample been drawn before plasma exchange?"
+  ],
+  "expectedInvestigations": [
+    "Peripheral blood film for schistocytes",
+    "LDH, haptoglobin, indirect bilirubin, reticulocyte count",
+    "Direct antiglobulin (Coombs) test — expected negative",
+    "Coagulation profile: INR, aPTT, fibrinogen, D-dimer",
+    "ADAMTS13 activity and inhibitor (before plasma exchange)",
+    "Renal function and urinalysis",
+    "Troponin and ECG for cardiac involvement"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "thrombocytopenia": true,
+    "petechialRash": true,
+    "mucocutaneousBleeding": true,
+    "jaundice": true,
+    "darkUrine": true,
+    "alteredSensorium": true,
+    "seizure": true,
+    "focalNeuroDeficit": true,
+    "fever": true,
+    "tachycardia": true,
+    "renalImpairment": true
+  },
+  "expected": {
+    "diagnosis": "ttp_hus",
+    "acceptableIds": [
+      "ttp_hus"
+    ],
+    "differentialIds": [
+      "dic",
+      "SEPSIS",
+      "MALARIA",
+      "itp"
+    ],
+    "investigations": [
+      "Peripheral blood film for schistocytes",
+      "LDH / haptoglobin / indirect bilirubin",
+      "Direct Coombs test",
+      "Coagulation profile (INR, aPTT, fibrinogen)",
+      "ADAMTS13 activity and inhibitor"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == ttp_hus",
+    "MAHA (schistocytes, high LDH, undetectable haptoglobin, negative Coombs) with severe thrombocytopenia is recognised as TTP",
+    "Normal INR/aPTT/fibrinogen is used to exclude DIC",
+    "Therapeutic plasma exchange + steroids recommended emergently without waiting for ADAMTS13",
+    "Platelet transfusion flagged as contraindicated",
+    "No empiric antibiotics recommended for this non-infective TMA"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

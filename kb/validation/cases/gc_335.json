@@ -1,0 +1,116 @@
+{
+  "id": "gc_335",
+  "specialty": "Pulmonary",
+  "condition": "Interstitial lung disease",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Rapidly worsening breathlessness over 12 days, now breathless at rest and requiring oxygen",
+  "history": "Retired schoolteacher, lifelong non-smoker, with a 3-year history of idiopathic pulmonary fibrosis (surgical-lung-biopsy-confirmed usual interstitial pneumonia) on pirfenidone and 2 L/min home oxygen for exertional desaturation. Baseline could walk ~200 m before stopping. Over the last 12 days he has become progressively and severely more breathless, now dyspneic at rest and unable to complete a sentence, with a dry, non-productive cough. No new purulent sputum, no chest pain, no calf swelling, no orthopnea or paroxysmal nocturnal dyspnea, and no recent long-haul travel or immobility. No fever or chills reported at home. No sick contacts and influenza/COVID rapid tests at triage were negative. He has lost about 4 kg over the preceding months. Not on any new medications; last echocardiogram 4 months ago showed preserved LV systolic function with mild pulmonary hypertension.",
+  "examination": "Elderly, frail, visibly dyspneic and using accessory muscles, speaking in single words. Central cyanosis. Finger clubbing present. Chest auscultation reveals bilateral fine end-inspiratory 'velcro' crepitations extending from bases to mid-zones, more than at his documented baseline. No bronchial breathing, no localized dullness. Heart sounds normal with a loud P2; no gallop, no raised JVP, no peripheral edema, no leg asymmetry. He is drowsy but rousable and oriented.",
+  "vitals": {
+    "hr": 118,
+    "bp": "132/80",
+    "rr": 34,
+    "temp": 37.3,
+    "spo2": 83
+  },
+  "labs": {
+    "hemoglobin": 13.8,
+    "wbc": "10.9 x10^3/uL (no left shift)",
+    "platelets": 288,
+    "creatinine": 1,
+    "crp": "62 mg/L",
+    "procalcitonin": "0.11 ng/mL (low)",
+    "bnp": "88 pg/mL (not elevated)",
+    "ldh": "402 U/L (elevated)",
+    "dDimer": "0.4 ug/mL (negative)",
+    "abg": "pH 7.46, PaO2 51 mmHg on room air, PaCO2 32 mmHg, HCO3 22, P/F ratio ~170 on supplemental O2"
+  },
+  "imaging": "HRCT thorax: pre-existing peripheral, basal-predominant reticulation with honeycombing and traction bronchiectasis (established UIP pattern), now with NEW bilateral superimposed ground-glass opacities and early consolidation not confined to a single lobe. No lobar consolidation, no pleural effusion, no filling defect in the pulmonary arteries on CT pulmonary angiogram. Bedside echo: preserved LV function, no significant valvular disease, dilated RV with elevated estimated PA pressures.",
+  "microbiology": "Blood cultures pending and subsequently negative. Sputum could not be expectorated. Respiratory viral PCR panel (including influenza A/B, SARS-CoV-2, RSV) negative. Urinary pneumococcal and Legionella antigens negative.",
+  "differentialDiagnoses": [
+    "Acute exacerbation of idiopathic pulmonary fibrosis (underlying interstitial lung disease)",
+    "Severe community-acquired pneumonia",
+    "Pulmonary embolism",
+    "Acute decompensated heart failure / cardiogenic pulmonary edema"
+  ],
+  "finalDiagnosis": "Acute exacerbation of interstitial lung disease (idiopathic pulmonary fibrosis, UIP pattern) with acute-on-chronic type 1 hypoxemic respiratory failure",
+  "citations": [
+    "ATS/ERS/JRS/ALAT — Idiopathic Pulmonary Fibrosis Diagnosis Clinical Practice Guideline — 2022",
+    "ATS International Working Group — Acute Exacerbation of Idiopathic Pulmonary Fibrosis Definition and Diagnostic Criteria — 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Interstitial Lung Diseases"
+  ],
+  "stewardship": "Non-infective diagnosis. Acute exacerbation of IPF is a diagnosis of exclusion once infection, PE, and heart failure are ruled out; low procalcitonin, negative viral panel and negative CTPA support this. Empiric antibiotics are frequently started while infection is excluded but are not the definitive therapy; management centers on high-flow oxygen/ventilatory support, high-dose corticosteroids, and early palliative/goals-of-care discussion given high mortality. Avoid unnecessary prolonged antibiotics once infection is excluded.",
+  "contraindications": [
+    "Avoid aggressive diuresis in the absence of volume overload (BNP not elevated, no raised JVP) as it may worsen renal perfusion",
+    "Caution with high-tidal-volume invasive ventilation; barotrauma risk is high in fibrotic lungs and outcomes of mechanical ventilation in AE-IPF are poor",
+    "Confirm goals of care before escalation to invasive ventilation given very high mortality"
+  ],
+  "edgeCases": [
+    "Superimposed infection can precipitate an acute exacerbation and coexist — a low procalcitonin does not fully exclude it",
+    "Acute exacerbation may be the first presentation of previously subclinical ILD",
+    "New drug (including pirfenidone-associated) or aspiration-related lung injury can mimic AE-IPF"
+  ],
+  "expectedMaiK": "Acute rapid worsening (<1 month) of dyspnea with new bilateral ground-glass superimposed on an established UIP/honeycombing pattern, in the absence of infection, PE, or fluid overload, defines an acute exacerbation of ILD — the underlying diagnosis is interstitial lung disease.",
+  "expectedNextQuestions": [
+    "Any new purulent sputum, fever, or sick contacts to suggest infection as a trigger?",
+    "Any symptoms or signs of DVT, recent immobility, or leg swelling?",
+    "History of orthopnea, PND, or weight gain suggesting cardiac decompensation?",
+    "Any recent new drugs, aspiration events, or reflux symptoms?",
+    "What are the patient's ceiling-of-care wishes regarding intubation and ICU?"
+  ],
+  "expectedInvestigations": [
+    "HRCT thorax to confirm new bilateral ground-glass on a background UIP pattern",
+    "CT pulmonary angiogram / D-dimer to exclude pulmonary embolism",
+    "BNP and bedside echocardiography to exclude cardiac cause",
+    "Arterial blood gas to quantify hypoxemic respiratory failure and P/F ratio",
+    "Procalcitonin, blood/sputum cultures, respiratory viral PCR and urinary antigens to exclude infection"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "dyspnea": true,
+    "hypoxia": true,
+    "tachypnea": true,
+    "tachycardia": true,
+    "bilateralCrackles": true,
+    "crepitations": true,
+    "supplementalOxygen": true,
+    "coughRadio": true,
+    "subacuteOnset": true,
+    "weightLoss": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "ild",
+    "acceptableIds": [
+      "ild"
+    ],
+    "differentialIds": [
+      "SEVERE_CAP",
+      "pe",
+      "heart_failure",
+      "sarcoidosis"
+    ],
+    "investigations": [
+      "HRCT thorax",
+      "CT pulmonary angiogram",
+      "arterial blood gas",
+      "BNP and echocardiography",
+      "procalcitonin and respiratory cultures/viral PCR"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank ild as the top diagnosis given new ground-glass superimposed on established UIP/honeycombing with clubbing and velcro crackles",
+    "Engine must NOT recommend antibiotics as definitive therapy once low procalcitonin, negative viral panel and negative cultures exclude infection",
+    "Engine must exclude pulmonary embolism (negative CTPA/D-dimer) and cardiogenic pulmonary edema (normal BNP, no raised JVP/edema) before settling on acute exacerbation of ILD",
+    "Engine must flag severe hypoxemic respiratory failure (SpO2 83%, P/F ~170) and prompt goals-of-care discussion before invasive ventilation"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

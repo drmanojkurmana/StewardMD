@@ -1,0 +1,109 @@
+{
+  "id": "gc_334",
+  "specialty": "Neurology",
+  "condition": "Idiopathic intracranial hypertension",
+  "age": 34,
+  "sex": "F",
+  "presentingComplaint": "Three months of worsening daily headache with intermittent blurring of vision, on a background of long-standing migraine with aura.",
+  "history": "A 34-year-old woman with a 10-year history of migraine with visual aura (previously 2-3 attacks/month, well controlled on topiramate until it was stopped 6 months ago for planned pregnancy) presents with a distinct change in her headaches. Over 3 months they have become daily, holocranial and pressure-like, worse on waking, on lying flat and on coughing/straining, and no longer relieved by her usual triptans. She reports several episodes of transient graying-out of vision in both eyes lasting seconds, typically on standing, which she and her GP initially attributed to migrainous aura. She also describes a whooshing pulsatile noise in both ears. There has been 14 kg of weight gain over the past year following a diagnosis of polycystic ovary syndrome. No thunderclap onset, no fever, neck stiffness, focal weakness or seizures. No recent tetracyclines, retinoids or excess vitamin A; combined oral contraceptive stopped 6 months ago. The overlap with her known migraine delayed recognition of the new positional, valsalva-aggravated pattern and the visual obscurations.",
+  "examination": "Obese (BMI 36). Alert, fully oriented, GCS 15. Dilated fundoscopy shows bilateral Frisen grade 3 papilloedema with blurred disc margins and obscuration of vessels at the disc. Visual acuity 6/6 bilaterally; enlarged blind spots on confrontation. Mild bilateral abducens (VI nerve) palsy with horizontal diplopia on lateral gaze — a false-localising sign. No other focal neurological deficit; no meningism. Gait normal.",
+  "vitals": {
+    "hr": 78,
+    "bp": "132/84",
+    "rr": 14,
+    "temp": 36.8,
+    "spo2": 99
+  },
+  "labs": {
+    "hemoglobin": "13.4 g/dL",
+    "wcc": "7.1 x10^9/L",
+    "platelets": "268 x10^3/uL",
+    "sodium": "139 mmol/L",
+    "creatinine": "0.7 mg/dL",
+    "tsh": "2.1 mIU/L",
+    "crp": "3 mg/L",
+    "esr": "8 mm/hr",
+    "betaHCG": "negative"
+  },
+  "imaging": "MRI brain with contrast: no mass, hydrocephalus or meningeal enhancement. Supportive signs of raised intracranial pressure present — empty sella, flattening of the posterior globes, distension of the perioptic subarachnoid spaces and bilateral transverse venous sinus stenosis. MR venography: no cerebral venous sinus thrombosis (patent sinuses; stenoses are smooth/tapering, consistent with IIH rather than filling defects).",
+  "microbiology": "Not applicable — non-infective presentation. Lumbar puncture in lateral decubitus: opening pressure 34 cmH2O (markedly elevated); CSF cell count, protein and glucose all normal.",
+  "differentialDiagnoses": [
+    "Idiopathic intracranial hypertension (pseudotumour cerebri)",
+    "Chronic migraine (known comorbidity — the principal confounder)",
+    "Cerebral venous sinus thrombosis (excluded on MRV)",
+    "Intracranial mass lesion / brain tumour (excluded on MRI)"
+  ],
+  "finalDiagnosis": "Idiopathic intracranial hypertension — meeting modified Dandy criteria (papilloedema, normal neurological exam apart from a false-localising VI palsy, normal neuroimaging bar signs of raised ICP, normal CSF constituents, and elevated opening pressure of 34 cmH2O), in an obese woman of childbearing age. Superimposed on and initially masked by pre-existing migraine with aura.",
+  "citations": [
+    "Harrison's Principles of Internal Medicine, 22e — Idiopathic Intracranial Hypertension (Pseudotumor Cerebri)",
+    "UK IIH Consensus Guidelines — Diagnosis and Management of Idiopathic Intracranial Hypertension — 2018",
+    "Idiopathic Intracranial Hypertension Treatment Trial (IIHTT) — 2014"
+  ],
+  "stewardship": "Non-infective condition — no antimicrobial therapy indicated. Management centres on weight reduction, acetazolamide, and monitoring of visual fields with urgent surgical referral (CSF diversion or optic nerve sheath fenestration) for fulminant vision-threatening disease.",
+  "contraindications": [
+    "Avoid attributing the new headache pattern to migraine alone — fundoscopy is mandatory to detect papilloedema.",
+    "Do not perform lumbar puncture before neuroimaging excludes a mass lesion and CVST.",
+    "Avoid topiramate/acetazolamide counselling pitfalls if pregnancy is being planned; coordinate with obstetrics."
+  ],
+  "edgeCases": [
+    "Fulminant IIH with rapidly progressive visual field loss requires emergency CSF diversion or optic nerve sheath fenestration.",
+    "Transverse sinus stenosis on MRV can be mistaken for thrombosis — the smooth tapering pattern and patent flow distinguish IIH.",
+    "IIH without papilloedema can occur, making the diagnosis harder when headache overlaps with established migraine."
+  ],
+  "expectedMaiK": "Positional, valsalva-aggravated daily headache with transient visual obscurations, pulsatile tinnitus and bilateral papilloedema in an obese woman of childbearing age, with elevated LP opening pressure and normal CSF/neuroimaging — idiopathic intracranial hypertension emerging on a background of migraine.",
+  "expectedNextQuestions": [
+    "Are the headaches positional (worse lying flat/on waking) and aggravated by coughing or straining, unlike her prior migraine?",
+    "Any transient visual obscurations, pulsatile tinnitus or new diplopia?",
+    "Recent weight change and drug history (tetracyclines, retinoids, vitamin A, oral contraceptive)?",
+    "Any fever, neck stiffness, focal deficit or thunderclap onset to suggest an alternative cause?"
+  ],
+  "expectedInvestigations": [
+    "Dilated fundoscopy / optic disc assessment for papilloedema",
+    "MRI brain with contrast and MR venography (exclude mass and cerebral venous sinus thrombosis)",
+    "Lumbar puncture with measurement of opening pressure and CSF constituents",
+    "Formal automated perimetry (Humphrey visual fields) and OCT for baseline and monitoring"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "headache": true,
+    "papilledema": true,
+    "visualDisturbance": true,
+    "nauseaVomiting": true,
+    "photophobia": true,
+    "age": true,
+    "sex": true,
+    "weight": true
+  },
+  "expected": {
+    "diagnosis": "iih",
+    "acceptableIds": [
+      "iih"
+    ],
+    "differentialIds": [
+      "migraine",
+      "brain_tumour",
+      "tension_ha"
+    ],
+    "investigations": [
+      "Dilated fundoscopy for papilloedema",
+      "MRI brain with MR venography",
+      "Lumbar puncture with opening pressure",
+      "Automated perimetry / OCT"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine ranks iih as the top diagnosis despite the confounding history of migraine with aura.",
+    "Bilateral papilloedema plus positional/valsalva headache and transient visual obscurations must not be dismissed as migraine.",
+    "Engine recommends neuroimaging with MR venography before LP and to exclude CVST and mass lesion.",
+    "Elevated LP opening pressure with normal CSF constituents is treated as confirmatory for IIH.",
+    "No antibiotics are recommended (non-infective)."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

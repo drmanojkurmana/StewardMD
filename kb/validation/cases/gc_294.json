@@ -1,0 +1,113 @@
+{
+  "id": "gc_294",
+  "specialty": "Cardiology",
+  "condition": "Acute coronary syndrome",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "2 days of mild exertional breathlessness and vague upper-abdominal/lower-chest heaviness, now settling at rest",
+  "history": "Retired schoolteacher with type 2 diabetes (18 years, on metformin + gliclazide), hypertension and dyslipidaemia. Over the last 48 hours she noticed she had to stop twice while walking to the temple because of a dull, heavy discomfort across the lower chest and epigastrium, associated with breathlessness and mild sweating. She attributed it to 'gas/acidity' and took an antacid with partial relief. No severe crushing pain, no radiation she can clearly describe, no collapse. Episodes last 10-15 minutes and ease with rest. Two brief similar episodes overnight woke her. She remains largely well between episodes. Ex-smoker (quit 10 years ago), father had MI at 60. Diabetic autonomic neuropathy suspected on prior review.",
+  "examination": "Comfortable at rest, not distressed. Chest clear, no crepitations, normal heart sounds, no murmur or added sounds. JVP not raised, no peripheral oedema. Abdomen soft, mild epigastric tenderness only, no guarding. Peripheral pulses intact and symmetric; equal BP in both arms. No calf swelling.",
+  "vitals": {
+    "hr": 92,
+    "bp": "148/84",
+    "rr": 20,
+    "temp": 36.8,
+    "spo2": 96
+  },
+  "labs": {
+    "hs_troponin_T_0h_ng_L": 42,
+    "hs_troponin_T_3h_ng_L": 88,
+    "creatinine_mg_dl": 1.1,
+    "eGFR_ml_min": 58,
+    "hemoglobin_g_dl": 12.4,
+    "potassium_mmol_l": 4.2,
+    "random_glucose_mg_dl": 214,
+    "hba1c_percent": 8.1,
+    "LDL_mg_dl": 132,
+    "NT_proBNP_pg_ml": 410
+  },
+  "imaging": "Chest X-ray: no consolidation, no pulmonary oedema, normal cardiac silhouette, no widened mediastinum. Bedside echo: mild regional hypokinesia of the inferolateral wall, preserved overall LV function (EF ~52%), no pericardial effusion, no RV strain.",
+  "microbiology": "Not applicable (non-infective presentation).",
+  "differentialDiagnoses": [
+    "NSTEMI / non-ST-elevation ACS (inferolateral territory) - fits dynamic troponin, subtle ECG changes and regional wall-motion abnormality",
+    "GORD / acid-peptic disease - suggested by epigastric heaviness and antacid response, but does not explain rising troponin",
+    "Pericarditis - excluded by absence of pleuritic positional pain, rub and typical diffuse ST changes",
+    "Pulmonary embolism - possible with dyspnoea but no RV strain, normal SpO2/A-a and no leg findings",
+    "Acute decompensated heart failure - mildly raised NT-proBNP but no congestion clinically or radiographically"
+  ],
+  "finalDiagnosis": "Non-ST-elevation acute coronary syndrome (NSTEMI) presenting atypically as anginal-equivalent dyspnoea and epigastric discomfort in an elderly diabetic woman",
+  "citations": [
+    "ESC Guidelines for the Management of Acute Coronary Syndromes 2023",
+    "ACC/AHA Guideline for the Management of Non-ST-Elevation ACS 2014",
+    "Harrison's Principles of Internal Medicine, 22e - Non-ST-Segment Elevation Acute Coronary Syndrome"
+  ],
+  "stewardship": "Not applicable - non-infective condition; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid nitrates if inferior/RV involvement with hypotension or recent PDE5 inhibitor use",
+    "Caution with high-dose beta-blockade if signs of low output or bradyarrhythmia",
+    "Metformin held around planned coronary angiography given contrast and eGFR"
+  ],
+  "edgeCases": [
+    "Diabetic autonomic neuropathy blunts classic pain, so anginal-equivalent (dyspnoea, epigastric heaviness) is the dominant symptom",
+    "Elderly women more often present with atypical/mild ACS and are under-triaged",
+    "Single normal first troponin is insufficient; the diagnosis rests on the significant delta on serial high-sensitivity troponin"
+  ],
+  "expectedMaiK": "In an elderly diabetic with anginal-equivalent dyspnoea/epigastric discomfort, a significant rise in serial high-sensitivity troponin with a regional wall-motion abnormality confirms NSTEMI even when pain is mild and ECG changes are subtle.",
+  "expectedNextQuestions": [
+    "Are the episodes clearly provoked by exertion and relieved by rest (crescendo pattern)?",
+    "Any prior stress test, angiogram or known coronary disease?",
+    "Any bleeding risk factors before dual antiplatelet therapy and anticoagulation?",
+    "GRACE risk features: ongoing symptoms, haemodynamic or rhythm instability?"
+  ],
+  "expectedInvestigations": [
+    "12-lead ECG immediately and repeated / continuous ST monitoring",
+    "Serial high-sensitivity troponin (0h and 1-3h delta)",
+    "GRACE 2.0 risk stratification",
+    "Transthoracic echocardiogram for regional wall motion and LV function",
+    "Coronary angiography (early invasive strategy for intermediate-high risk NSTE-ACS)"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "exertionalChestPain": true,
+    "dyspnea": true,
+    "ecgIschemia": true,
+    "abdominalDiscomfort": true,
+    "diabetesHx": true,
+    "hypertensionHx": true,
+    "ageOver50": true,
+    "palpitations": true
+  },
+  "expected": {
+    "diagnosis": "acs",
+    "acceptableIds": [
+      "acs"
+    ],
+    "differentialIds": [
+      "gerd_chest",
+      "pe",
+      "pericarditis",
+      "heart_failure"
+    ],
+    "investigations": [
+      "12-lead ECG with serial monitoring",
+      "Serial high-sensitivity troponin (delta)",
+      "GRACE risk score",
+      "Transthoracic echocardiography",
+      "Coronary angiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acs must be the top diagnosis despite atypical/mild presentation",
+    "A significant delta on serial hs-troponin must drive the diagnosis over a single value",
+    "gerd_chest must not be selected as final diagnosis despite epigastric symptoms and antacid response",
+    "No antibiotics should be recommended (non-infective)"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

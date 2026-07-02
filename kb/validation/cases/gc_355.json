@@ -1,0 +1,116 @@
+{
+  "id": "gc_355",
+  "specialty": "Endocrine",
+  "condition": "Phaeochromocytoma crisis",
+  "age": 52,
+  "sex": "M",
+  "presentingComplaint": "Sudden severe chest tightness, pounding palpitations and acute breathlessness for the past 2 hours.",
+  "history": "A 52-year-old man was brought to the emergency department after abruptly developing crushing central chest tightness, a thunderous frontal headache and drenching sweats while sitting at his desk. Within 30 minutes he became severely breathless and could not lie flat. He describes similar but milder self-limiting episodes over the preceding 4 months — sudden spells of palpitations, pallor, pounding headache and anxiety lasting 15–30 minutes, often triggered by bending or straining, each time attributed to ‘panic attacks’. He has lost roughly 6 kg over 3 months despite no dieting. He was noted at a recent pharmacy check to have a blood pressure of 190/110 and was started on amlodipine, with little effect. No prior cardiac history, no exertional symptoms between spells, non-smoker. The paramedic ECG and troponin prompted an initial working diagnosis of acute coronary syndrome, but the ED consultant was struck by the strikingly labile blood pressure — oscillating between 230/130 and 90/60 within minutes without intervention — and the episodic prior history.",
+  "examination": "Anxious, diaphoretic and pale, sitting bolt upright. Cool peripheries with tremor. Marked beat-to-beat blood-pressure lability documented on the arterial line, swinging from severe hypertension to transient hypotension. Bibasal fine crepitations to mid-zones with a gallop rhythm consistent with acute pulmonary oedema. No focal neurological deficit, no goitre, no lid lag. Abdomen soft, no bruit or palpable mass.",
+  "vitals": {
+    "hr": 132,
+    "bp": "228/128 (labile, swinging to 92/58)",
+    "rr": 30,
+    "temp": 37.2,
+    "spo2": 88
+  },
+  "labs": {
+    "hemoglobin": 15.1,
+    "wbc": 12.4,
+    "platelets": 240,
+    "creatinine": 1.3,
+    "glucose_mg_dl": 214,
+    "troponinT_ng_L": 210,
+    "bnp_pg_ml": 940,
+    "lactate_mmol_l": 2.1,
+    "plasma_free_metanephrines": "markedly elevated (normetanephrine 4.8 nmol/L, ref <0.71)",
+    "24h_urinary_fractionated_metanephrines": "elevated >4x upper limit",
+    "tsh_mIU_L": 1.8
+  },
+  "imaging": "Portable CXR: bilateral perihilar alveolar oedema with upper-lobe diversion, normal cardiac silhouette. Bedside echo: hyperdynamic then transiently hypokinetic LV with apical ballooning pattern (stress cardiomyopathy), no significant valve lesion. CT abdomen (once stabilised): 4.5 cm heterogeneous right adrenal mass with avid, patchy enhancement and central necrosis.",
+  "microbiology": "Not applicable — non-infective presentation. Blood cultures not indicated.",
+  "differentialDiagnoses": [
+    "Acute coronary syndrome (troponin-positive chest pain with ECG changes)",
+    "Hypertensive emergency with flash pulmonary oedema",
+    "Acute heart failure / stress (Takotsubo) cardiomyopathy",
+    "Thyroid storm (adrenergic surge with tremor, tachycardia, weight loss)"
+  ],
+  "finalDiagnosis": "Phaeochromocytoma crisis — catecholamine-induced cardiomyopathy with flash pulmonary oedema and troponin elevation, mimicking acute coronary syndrome; confirmed by grossly elevated plasma/urinary metanephrines and a 4.5 cm enhancing right adrenal mass.",
+  "citations": [
+    "Endocrine Society — Pheochromocytoma and Paraganglioma Clinical Practice Guideline — 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Pheochromocytoma"
+  ],
+  "stewardship": "Not applicable — non-infective endocrine emergency; no antibiotics indicated.",
+  "contraindications": [
+    "Do NOT give beta-blocker before adequate alpha-blockade — unopposed alpha stimulation precipitates hypertensive crisis and worsens pulmonary oedema",
+    "Avoid drugs that provoke catecholamine release (metoclopramide, glucagon, unopposed beta-agonists)",
+    "Avoid biopsy of the adrenal mass — risk of precipitating fatal crisis"
+  ],
+  "edgeCases": [
+    "Blood pressure may be paradoxically normal or hypotensive between paroxysms, masking the diagnosis",
+    "Catecholamine cardiomyopathy can be reversible with alpha-blockade and tumour resection despite troponin rise",
+    "Coronary angiography often shows unobstructed coronaries despite an ACS-like presentation"
+  ],
+  "expectedMaiK": "Recognise a phaeochromocytoma crisis behind an ACS/hypertensive-emergency mimic: markedly LABILE blood pressure plus a prior history of paroxysmal headache-palpitations-sweating spells is the key. Confirm biochemically with plasma free (or 24h urinary fractionated) metanephrines, then localise with CT/MRI adrenals. Control the crisis with alpha-blockade FIRST (e.g. phentolamine / phenoxybenzamine), add a beta-blocker only after alpha-blockade, and refer for surgical resection after adequate preoperative alpha-blockade.",
+  "expectedNextQuestions": [
+    "Are there prior episodic spells of headache, palpitations, pallor and sweating (paroxysmal pattern)?",
+    "Is the blood pressure labile/fluctuating rather than fixed?",
+    "Any family history of phaeochromocytoma, MEN2, VHL, NF1 or paraganglioma?",
+    "Any recent unexplained weight loss, tremor or heat intolerance to weigh against thyroid storm?"
+  ],
+  "expectedInvestigations": [
+    "Plasma free metanephrines and normetanephrines",
+    "24-hour urinary fractionated metanephrines and catecholamines",
+    "12-lead ECG and serial troponin",
+    "CT / MRI of the adrenal glands and abdomen",
+    "Bedside echocardiography",
+    "TSH and free T4 to exclude thyroid storm"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "chestPain": true,
+    "palpitations": true,
+    "headache": true,
+    "dyspnea": true,
+    "orthopnea": true,
+    "tachycardia": true,
+    "hypertensionHx": true,
+    "ecgIschemia": true,
+    "bilateralCrackles": true,
+    "weightLoss": true
+  },
+  "expected": {
+    "diagnosis": "pheo",
+    "acceptableIds": [
+      "pheo"
+    ],
+    "differentialIds": [
+      "acs",
+      "htn_emergency",
+      "heart_failure",
+      "thyroid_storm"
+    ],
+    "investigations": [
+      "Plasma free metanephrines",
+      "24-hour urinary fractionated metanephrines",
+      "CT/MRI adrenals",
+      "12-lead ECG and troponin",
+      "Echocardiography"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "acceptableIds must equal ['pheo']",
+    "differentialIds must be a subset of diagnosable engine ids and include acs and htn_emergency",
+    "stewardship.tier must be null and antibiotics empty (non-infective)",
+    "engine must not down-rank pheo despite ACS-like troponin/ECG when BP is labile with paroxysmal spell history",
+    "all finding keys must exist in the permitted vocabulary"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

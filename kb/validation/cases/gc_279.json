@@ -1,0 +1,128 @@
+{
+  "id": "gc_279",
+  "specialty": "Respiratory / Tuberculosis",
+  "condition": "Pulmonary Tuberculosis",
+  "age": 78,
+  "sex": "M",
+  "presentingComplaint": "Six weeks of progressive tiredness, poor appetite and a persistent cough, brought in by care-home staff after unintentional weight loss and one episode of blood-streaked sputum.",
+  "history": "Frail 78-year-old man, resident in a long-term care home, with type 2 diabetes, treated hypertension and chronic kidney disease. Over 6 weeks he has become increasingly withdrawn, eating poorly and losing an estimated 6 kg. Carers report a chronic productive cough that they had attributed to his known mild COPD, low-grade evening temperatures and drenching night sweats requiring linen changes. Today he coughed up blood-streaked sputum. No classic high fever or rigors, no pleuritic pain. Not on steroids or other immunosuppression. A fellow resident was treated for tuberculosis last year. Present presentation is deliberately non-classic: the dominant picture is nonspecific failure-to-thrive and functional decline in a frail elderly man rather than the textbook young adult with florid febrile cavitary disease.",
+  "examination": "Cachectic, frail elderly man, low body mass, appears chronically unwell but not acutely toxic. Temperature only mildly elevated. Bronchial breathing and coarse crepitations over the right upper and mid zones. No lymphadenopathy palpable. No clubbing. Abdomen soft, no organomegaly. Mildly confused at baseline (care-home report), GCS 15.",
+  "vitals": {
+    "hr": 96,
+    "bp": "118/72",
+    "rr": 22,
+    "temp": 37.8,
+    "spo2": 93
+  },
+  "labs": {
+    "hemoglobin": "9.8 g/dL (normocytic, anaemia of chronic disease)",
+    "wbc": "8.1 x10^3/uL",
+    "lymphocytes": "relative lymphopenia",
+    "platelets": "impression thrombocytosis 480 x10^3/uL",
+    "esr": "88 mm/hr",
+    "crp": "62 mg/L",
+    "albumin": "2.6 g/dL",
+    "sodium": "129 mmol/L (SIADH-pattern hyponatraemia)",
+    "creatinine": "1.6 mg/dL (baseline CKD)",
+    "hba1c": "8.4%",
+    "hiv": "negative",
+    "baselineLFT": "normal (pre-treatment)"
+  },
+  "imaging": "Chest X-ray: right upper/mid-zone fibronodular opacity with a thick-walled cavity and volume loss; patchy right lower-zone infiltrate (lower-lobe/atypical distribution as is common in the elderly and diabetic). No effusion. HRCT confirms a cavitary lesion with tree-in-bud nodularity and no discrete spiculated mass.",
+  "microbiology": "Sputum Xpert MTB/RIF: Mycobacterium tuberculosis complex DETECTED, rifampicin resistance NOT detected. AFB smear (fluorescence): scanty positive (1+). Mycobacterial culture sent. Routine bacterial sputum culture: mixed oral flora, no dominant pathogen. Blood cultures negative.",
+  "differentialDiagnoses": [
+    "Lung cancer (weight loss, elderly smoker, haemoptysis, cavitary lesion)",
+    "Lung abscess / cavitary bacterial pneumonia",
+    "Community-acquired pneumonia (non-resolving)",
+    "Bronchiectasis exacerbation on background COPD"
+  ],
+  "finalDiagnosis": "Pulmonary tuberculosis (smear- and Xpert-confirmed, rifampicin-susceptible) presenting as failure-to-thrive in a frail elderly care-home resident with diabetes.",
+  "citations": [
+    "WHO Consolidated Guidelines on Tuberculosis: Treatment of Drug-Susceptible TB, 2022",
+    "India NTEP / Central TB Division Technical and Operational Guidelines for TB Control, 2023",
+    "ATS/CDC/IDSA Treatment of Drug-Susceptible Tuberculosis, 2016",
+    "Harrison's Principles of Internal Medicine, 22e — Tuberculosis"
+  ],
+  "stewardship": "Not a target for empiric broad-spectrum antibacterial therapy. Confirmed rifampicin-susceptible pulmonary TB: start standard first-line anti-tubercular therapy (2 months HRZE intensive phase, then 4 months HR continuation) per WHO/NTEP. Notify TB programme, screen and place under airborne isolation, baseline LFTs/visual acuity, pyridoxine cover, and contact tracing of the care home. Avoid reflexively escalating antibacterials for the 'non-resolving pneumonia' pattern.",
+  "contraindications": [
+    "Ethambutol: pre-existing visual/optic issues and renal impairment — dose-adjust in CKD and monitor colour vision",
+    "Pyrazinamide/isoniazid/rifampicin hepatotoxicity risk — baseline and serial LFTs given frailty and polypharmacy",
+    "Rifampicin drug interactions with antihypertensives and other care-home medications",
+    "Renal dose adjustment of ethambutol and pyrazinamide in CKD"
+  ],
+  "edgeCases": [
+    "Elderly TB frequently lacks classic fever and presents as anorexia, weight loss and functional decline — high index of suspicion required",
+    "Lower-lobe and atypical radiographic distribution is common in the elderly and in diabetics, mimicking bacterial pneumonia",
+    "Cavitary lesion with weight loss can be mistaken for lung malignancy — obtain microbiological confirmation before assuming cancer",
+    "Care-home / congregate setting raises transmission and reactivation risk (recent contact)",
+    "SIADH-pattern hyponatraemia is a recognised metabolic clue in pulmonary TB"
+  ],
+  "expectedMaiK": "PULMONARY_TB",
+  "expectedNextQuestions": [
+    "Duration and pattern of cough, and any prior TB or TB treatment?",
+    "Documented weight loss, appetite, and functional decline over what period?",
+    "Known TB contact (fellow resident) and prior BCG/exposure history?",
+    "Diabetes control, HIV status, and any immunosuppression?",
+    "Smoking history to weigh malignancy risk"
+  ],
+  "expectedInvestigations": [
+    "Sputum Xpert MTB/RIF (Ultra) on at least one specimen",
+    "Sputum AFB smear microscopy x2 and mycobacterial culture with drug-susceptibility testing",
+    "Chest X-ray (and HRCT thorax if malignancy suspected)",
+    "HIV test and blood glucose/HbA1c",
+    "Baseline LFTs, renal function, visual acuity and colour vision before starting ATT"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "prolongedCough2Weeks": true,
+    "coughRadio": true,
+    "weightLoss": true,
+    "nightSweats": true,
+    "eveningFever": true,
+    "fever": true,
+    "hemoptysis": true,
+    "crepitations": true,
+    "cavitatingLesion": true,
+    "subacuteOnset": true,
+    "nursingHomeResident": true
+  },
+  "expected": {
+    "diagnosis": "PULMONARY_TB",
+    "acceptableIds": [
+      "PULMONARY_TB"
+    ],
+    "differentialIds": [
+      "lung_cancer",
+      "LUNG_ABSCESS",
+      "CAP",
+      "BRONCHIECTASIS_EXACERBATION"
+    ],
+    "investigations": [
+      "Sputum Xpert MTB/RIF (Ultra)",
+      "Sputum AFB smear x2 and mycobacterial culture with DST",
+      "Chest X-ray / HRCT thorax",
+      "HIV test",
+      "Baseline LFTs, renal function and visual acuity"
+    ],
+    "stewardship": {
+      "tier": "TB-specific first-line (WHO/NTEP), not AWaRe antibacterial",
+      "antibiotics": [
+        "Isoniazid",
+        "Rifampicin",
+        "Pyrazinamide",
+        "Ethambutol"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == PULMONARY_TB",
+    "differentialIds include lung_cancer",
+    "recommends sputum Xpert MTB/RIF and AFB smear/culture",
+    "starts first-line anti-TB therapy (HRZE), not empiric broad-spectrum antibacterials",
+    "flags airborne isolation, TB notification and contact tracing"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

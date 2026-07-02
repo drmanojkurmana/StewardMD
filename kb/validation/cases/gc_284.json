@@ -1,0 +1,118 @@
+{
+  "id": "gc_284",
+  "specialty": "Tropical Fever",
+  "condition": "Scrub Typhus",
+  "age": 54,
+  "sex": "M",
+  "presentingComplaint": "Undifferentiated fever for 9 days with generalised bodyache; no localising symptoms.",
+  "history": "Subsistence farmer from a sub-Himalayan foothill village (Uttarakhand), presenting during the post-monsoon season. Nine days of intermittent low-to-moderate fever with generalised myalgia, anorexia and mild frontal headache. He denies cough, dysuria, loose stools, joint swelling, rash or bleeding. He was treated at a local clinic with oral amoxicillin-clavulanate for 4 days with no defervescence — an atypical, non-specific febrile illness that has been labelled 'viral fever' twice. He works in scrub grass and paddy fields and recalls no insect bite. No recent travel outside the region, no sick contacts, no jaundice noticed. He is not diabetic. There is no obvious eschar reported by the patient; the presentation is deliberately subtle with no textbook triad volunteered.",
+  "examination": "Alert, mildly dehydrated, not toxic-looking. Sclerae anicteric. Careful head-to-toe skin survey performed because of persistent undifferentiated fever: a single small (~8 mm) painless black-crusted necrotic lesion with a surrounding erythematous halo found in the left inguinal fold, easily missed on cursory examination — a classic eschar in a hidden site. Firm, mildly tender left inguinal lymph node ~1.5 cm. Mild tender hepatomegaly 2 cm below costal margin; spleen tip just palpable. Chest clear, no meningism, no focal neurology.",
+  "vitals": {
+    "hr": 84,
+    "bp": "112/72",
+    "rr": 20,
+    "temp": 39.1,
+    "spo2": 96
+  },
+  "labs": {
+    "hemoglobin": 12.4,
+    "wbc": "6.8 x10^9/L (normal count, mild left shift)",
+    "platelets": 88,
+    "ast": 168,
+    "alt": 142,
+    "bilirubin": 1.1,
+    "albumin": 3.3,
+    "creatinine": 1.3,
+    "urea": 7.8,
+    "crp": "112 mg/L",
+    "sodium": 129,
+    "peripheralSmear": "No malarial parasites; mild thrombocytopenia confirmed"
+  },
+  "imaging": "Chest radiograph clear. Abdominal ultrasound: mild hepatosplenomegaly, no focal lesion, no biliary dilatation, minimal perisplenic fluid.",
+  "microbiology": "Scrub typhus IgM ELISA positive (OD strongly raised); Weil-Felix OX-K titre 1:320. Blood cultures sterile at 48h. Dengue NS1/IgM negative. Leptospira IgM negative. Widal non-diagnostic. Malaria antigen and smear negative. IgM for Orientia tsutsugamushi supported diagnosis; PCR (56-kDa gene) confirmatory where available.",
+  "differentialDiagnoses": [
+    "Scrub typhus",
+    "Dengue fever",
+    "Leptospirosis",
+    "Enteric fever",
+    "Malaria"
+  ],
+  "finalDiagnosis": "Scrub typhus (Orientia tsutsugamushi) presenting as prolonged undifferentiated fever with a hidden inguinal eschar",
+  "citations": [
+    "ICMR — Guidelines for Diagnosis and Management of Rickettsial Diseases — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Rickettsial Diseases (Scrub Typhus / Orientia tsutsugamushi)"
+  ],
+  "stewardship": "Undifferentiated tropical fever non-responsive to beta-lactam in a rural scrub-exposed patient with thrombocytopenia and transaminitis: empirically cover rickettsial illness. Doxycycline is first-line and produces rapid defervescence (often within 48h), which is itself supportive. A full skin survey for a hidden eschar is essential before labelling as pyrexia of unknown origin.",
+  "contraindications": [
+    "Doxycycline photosensitivity counselling",
+    "Azithromycin preferred in pregnancy as doxycycline alternative"
+  ],
+  "edgeCases": [
+    "Eschar absent or hidden in up to half of Indian cases — its absence must not exclude the diagnosis",
+    "Normal or low-normal WBC with thrombocytopenia and transaminitis is a common subtle biochemical signature",
+    "Failure to defervesce on beta-lactams is a diagnostic clue, not evidence against infection",
+    "Untreated cases can progress to ARDS, AKI, myocarditis or meningoencephalitis"
+  ],
+  "expectedMaiK": "Prolonged undifferentiated fever with a hidden eschar, tender regional lymphadenopathy, thrombocytopenia and transaminitis after scrub exposure — treat empirically as scrub typhus with doxycycline.",
+  "expectedNextQuestions": [
+    "Detailed occupational/environmental exposure to scrub or grassland?",
+    "Has a full skin survey including groin, axillae and natal cleft been done for an eschar?",
+    "Any breathlessness, reduced urine output or altered sensorium suggesting organ involvement?",
+    "Response (defervescence) after starting doxycycline?"
+  ],
+  "expectedInvestigations": [
+    "Scrub typhus IgM ELISA",
+    "Full blood count and platelets",
+    "Liver function tests",
+    "Renal function and electrolytes",
+    "Dengue NS1/IgM and malaria smear/antigen to exclude mimics",
+    "Weil-Felix (OX-K) / PCR where available"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "prolongedFever": true,
+    "ruralExposure": true,
+    "eschar": true,
+    "lymphadenopathy": true,
+    "myalgiaArthralgia": true,
+    "headache": true,
+    "thrombocytopenia": true,
+    "hepatosplenomegaly": true,
+    "relativeBradycardia": true
+  },
+  "expected": {
+    "diagnosis": "SCRUB_TYPHUS",
+    "acceptableIds": [
+      "SCRUB_TYPHUS"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "LEPTOSPIROSIS",
+      "ENTERIC_FEVER",
+      "MALARIA"
+    ],
+    "investigations": [
+      "Scrub typhus IgM ELISA",
+      "Full blood count with platelets",
+      "Liver and renal function tests",
+      "Dengue and malaria testing to exclude mimics"
+    ],
+    "stewardship": {
+      "tier": "targeted",
+      "antibiotics": [
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Diagnosis must resolve to SCRUB_TYPHUS despite subtle, non-triad presentation",
+    "Absence of a volunteered eschar must not remove SCRUB_TYPHUS from the differential",
+    "Doxycycline must be recommended as first-line empiric therapy",
+    "Dengue, leptospirosis, enteric fever and malaria should appear as considered differentials"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

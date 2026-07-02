@@ -1,0 +1,122 @@
+{
+  "id": "gc_313",
+  "specialty": "Hepatology",
+  "condition": "Decompensated cirrhosis",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Three days of increasing drowsiness, muddled speech and abdominal swelling, referred by GP as query heart failure",
+  "history": "Non-drinker with long-standing type 2 diabetes, obesity and hyperlipidaemia (biopsy-proven MASH cirrhosis 2 years ago, lost to follow-up). Family report progressive confusion, day-night reversal and mild hand flapping over 72 hours, plus gradual abdominal distension and bilateral ankle swelling for a fortnight. Initially thought by relatives to be worsening memory/dementia. No fever, chest pain, orthopnoea or PND. No melaena or haematemesis noted, but he has been constipated for 4 days. Recently started ibuprofen for knee pain. No prior variceal bleed.",
+  "examination": "Drowsy but rousable, disoriented to time and place, coarse flapping tremor (asterixis) elicited. Icteric sclerae, multiple spider naevi over upper chest, palmar erythema, gynaecomastia. Abdomen distended with shifting dullness and flank fullness (moderate ascites), splenomegaly palpable 3 cm below costal margin, liver edge firm and small. Bilateral pitting pedal oedema to mid-shin. JVP not raised, no cardiac murmur, chest clear, no S3 or displaced apex. No focal neurological deficit, no neck stiffness.",
+  "vitals": {
+    "hr": 94,
+    "bp": "106/62",
+    "rr": 18,
+    "temp": 36.7,
+    "spo2": 96
+  },
+  "labs": {
+    "bilirubin": 6.4,
+    "albumin": 2.3,
+    "inr": 1.9,
+    "platelets": 74,
+    "creatinine": 1.4,
+    "urea": 9.2,
+    "hemoglobin": 10.4,
+    "sodium": 128,
+    "ast": 88,
+    "alt": 61,
+    "ammonia": 118,
+    "ascitesGrade": 2,
+    "encephalopathyGrade": 2,
+    "childPugh": "C (11 points)",
+    "meld": 22,
+    "bnp": "mildly raised, non-specific"
+  },
+  "imaging": "USG abdomen: shrunken coarse nodular liver, splenomegaly, dilated portal vein 14 mm with hepatopetal flow, moderate ascites, patent hepatic veins and IVC (no congestive hepatopathy). Transthoracic echo: normal biventricular size and systolic function (LVEF 58%), no valvular lesion, normal IVC calibre and no pericardial effusion — cardiac cause of ascites excluded.",
+  "microbiology": "Diagnostic ascitic tap: SAAG 1.6 g/dL (high, portal hypertensive), ascitic PMN 90 cells/mm3 (<250), Gram stain negative, culture sterile — spontaneous bacterial peritonitis excluded. Blood and urine cultures negative.",
+  "differentialDiagnoses": [
+    "Congestive (cardiac) ascites from heart failure",
+    "Nephrotic syndrome",
+    "Primary metabolic encephalopathy (e.g., uraemic/septic/drug)",
+    "Spontaneous bacterial peritonitis as decompensation trigger"
+  ],
+  "finalDiagnosis": "Decompensated cirrhosis (MASH-related) presenting with grade 2 hepatic encephalopathy and new ascites, precipitated by NSAID use and constipation; Child-Pugh C, MELD 22",
+  "citations": [
+    "AASLD — Hepatic Encephalopathy in Chronic Liver Disease — 2014",
+    "EASL — Decompensated Cirrhosis Clinical Practice Guidelines — 2018",
+    "Harrison's Principles of Internal Medicine, 22e — Cirrhosis and Its Complications"
+  ],
+  "stewardship": "Not an infective presentation. Ascitic PMN <250 cells/mm3 with sterile fluid excludes SBP, so no empiric antibiotics are indicated. Management targets the decompensation: identify and reverse precipitants (stop NSAID, treat constipation), lactulose titrated to 2-3 soft stools/day, sodium restriction and cautious diuresis, and correct hyponatraemia. Reserve antibiotics/SBP prophylaxis only if ascitic PMN rises or clinical infection emerges.",
+  "contraindications": [
+    "NSAIDs (precipitate AKI, hepatorenal syndrome and variceal bleeding) — the likely precipitant here, stop immediately",
+    "Benzodiazepines/sedatives — worsen and mask hepatic encephalopathy",
+    "Aggressive over-diuresis and nephrotoxins in the setting of hyponatraemia and rising creatinine",
+    "Large-volume paracentesis without albumin cover"
+  ],
+  "edgeCases": [
+    "SBP can present with encephalopathy alone and a bland exam; always tap the ascites before attributing confusion purely to a metabolic cause",
+    "Occult variceal or slow GI bleed is a classic precipitant even without overt melaena — check per-rectal exam and haemoglobin trend",
+    "Rising creatinine with hyponatraemia may herald hepatorenal syndrome rather than simple dehydration",
+    "Mildly raised BNP and pedal oedema can wrongly anchor toward heart failure; a normal echo and high SAAG redirect to portal hypertension"
+  ],
+  "expectedMaiK": "New grade 2 hepatic encephalopathy plus high-SAAG ascites, jaundice, thrombocytopenia, splenomegaly and a small nodular liver make decompensated cirrhosis the unifying diagnosis; the normal echo excludes cardiac ascites and the bland ascitic fluid excludes SBP, so the priority is reversing precipitants (NSAID, constipation) with lactulose rather than starting antibiotics or diuresing for presumed heart failure.",
+  "expectedNextQuestions": [
+    "Any melaena, haematemesis or fresh blood per rectum, and when was the last bowel movement?",
+    "Recent NSAID, diuretic, opioid or sedative use, or non-adherence to lactulose?",
+    "Any preceding fever, dysuria, cough or abdominal pain suggesting an infective precipitant?",
+    "Baseline liver disease severity, prior decompensation events and current diuretic regimen?"
+  ],
+  "expectedInvestigations": [
+    "Diagnostic ascitic tap with cell count, SAAG and culture",
+    "Transthoracic echocardiogram to exclude cardiac ascites",
+    "Serum ammonia, electrolytes, renal and liver function, INR",
+    "Urinalysis and urine protein:creatinine to exclude nephrotic-range proteinuria",
+    "Septic screen (blood/urine cultures, CXR) to find occult precipitant"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "jaundice": true,
+    "ascites": true,
+    "abdominalDistension": true,
+    "asterixis": true,
+    "alteredSensorium": true,
+    "splenomegaly": true,
+    "thrombocytopenia": true,
+    "legSwellingBilateral": true,
+    "diabetesHx": true,
+    "ageOver50": true
+  },
+  "expected": {
+    "diagnosis": "decomp_cirrhosis",
+    "acceptableIds": [
+      "decomp_cirrhosis"
+    ],
+    "differentialIds": [
+      "heart_failure",
+      "nephrotic",
+      "metabolic_enceph",
+      "SBP"
+    ],
+    "investigations": [
+      "ascitic_tap_cell_count_saag_culture",
+      "echocardiogram",
+      "serum_ammonia_electrolytes_lft",
+      "urine_protein_creatinine_ratio"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Top-ranked diagnosis is decomp_cirrhosis",
+    "heart_failure and nephrotic are ranked below decomp_cirrhosis despite ascites and bilateral oedema",
+    "SBP is considered but downgraded once ascitic PMN <250 is provided",
+    "No empiric antibiotics are recommended for this non-infective presentation",
+    "Diagnostic ascitic tap and lactulose are recommended; NSAID is flagged as the precipitant to stop"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

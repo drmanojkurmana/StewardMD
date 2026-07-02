@@ -1,0 +1,127 @@
+{
+  "id": "gc_365",
+  "specialty": "Neurology",
+  "condition": "Seizure / epilepsy",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Continuous convulsions for over 20 minutes, brought in unresponsive by paramedics",
+  "history": "Known idiopathic generalized epilepsy since adolescence, usually well controlled on sodium valproate. Reports having stopped his medication ~2 weeks ago after running out of a repeat prescription, compounded by recent alcohol binge and sleep deprivation over a stressful work period. Family witnessed a generalized tonic-clonic seizure at home that did not stop; a second convulsion began before the patient regained awareness. Paramedics gave 10 mg buccal midazolam en route with only transient effect. No preceding fever, headache, head trauma, or focal neurological symptoms. No recreational drug use reported.",
+  "examination": "Comatose between visible motor activity with ongoing intermittent right-sided clonic jerking of the face and arm; eyes deviated to the right. Not obeying commands, GCS 6 (E1 V1 M4) in the inter-ictal period. Bilateral extensor plantars, tongue laceration, urinary incontinence. Post-ictally a residual right arm weakness (Todd's paresis) is noted. No neck stiffness, no rash, pupils equal and reactive, no papilloedema. Chest clear, no signs of aspiration on initial exam.",
+  "vitals": {
+    "hr": 132,
+    "bp": "162/98",
+    "rr": 28,
+    "temp": 38.4,
+    "spo2": 90
+  },
+  "labs": {
+    "glucose_mgdl": 118,
+    "sodium_mmol_l": 139,
+    "potassium_mmol_l": 4.1,
+    "calcium_mgdl": 9,
+    "magnesium_mgdl": 1.9,
+    "lactate_mmol_l": 7.8,
+    "ph": 7.24,
+    "bicarbonate_mmol_l": 16,
+    "creatine_kinase_u_l": 2450,
+    "creatinine_mgdl": 1.4,
+    "wbc_10e9_l": 15.2,
+    "valproate_level": "sub-therapeutic (<10 mg/L)",
+    "ethanol": "not detected",
+    "crp_mg_l": 8
+  },
+  "imaging": "Non-contrast CT head: no acute haemorrhage, mass, or established infarct; no midline shift. EEG (once initiated): rhythmic epileptiform discharges consistent with ongoing electrographic status.",
+  "microbiology": "Not indicated; no clinical features of CNS infection. Blood cultures deferred pending stabilisation.",
+  "differentialDiagnoses": [
+    "Generalized convulsive status epilepticus due to antiepileptic drug withdrawal (target)",
+    "Hypoglycaemia-induced seizures",
+    "Hyponatraemic seizures",
+    "CNS infection (encephalitis/meningitis)",
+    "Acute ischaemic stroke with seizure"
+  ],
+  "finalDiagnosis": "Generalized convulsive status epilepticus in known epilepsy precipitated by antiepileptic drug non-adherence, sleep deprivation and alcohol",
+  "citations": [
+    "American Epilepsy Society — Treatment of Convulsive Status Epilepticus (Guideline) — 2016",
+    "Neurocritical Care Society — Evaluation and Management of Status Epilepticus — 2012",
+    "ILAE — Definition and Classification of Status Epilepticus — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Seizures and Epilepsy"
+  ],
+  "stewardship": "Not applicable — non-infective aetiology; empiric antimicrobials not indicated in the absence of features of CNS infection.",
+  "contraindications": [
+    "Avoid delaying benzodiazepine because BP is elevated — under-dosing prolongs status",
+    "Avoid phenytoin/fosphenytoin bolus without cardiac monitoring (risk of hypotension/arrhythmia); avoid rapid infusion",
+    "Do not give IV valproate load without considering that valproate withdrawal is the precipitant — resume but also confirm no hepatic contraindication",
+    "Correct hypoxia and protect airway before assuming a purely metabolic cause"
+  ],
+  "edgeCases": [
+    "Post-ictal lactic acidosis and raised CK can mimic sepsis or primary metabolic collapse but resolve rapidly once seizures stop",
+    "Todd's paresis can be mistaken for acute stroke, prompting inappropriate thrombolysis",
+    "Convulsive activity may become subtle/electrographic (non-convulsive status) despite persistent coma — requires EEG",
+    "Fever may be post-ictal rather than infective; reassess after seizure control"
+  ],
+  "expectedMaiK": "Generalized convulsive status epilepticus (>5 min continuous or recurrent seizures without recovery) requiring emergent benzodiazepine, urgent second-line AED and airway/haemodynamic support",
+  "expectedNextQuestions": [
+    "How long has the seizure activity been continuous, and did the patient recover consciousness between episodes?",
+    "What is the usual antiepileptic regimen and when was the last dose taken?",
+    "Any prehospital benzodiazepine given, dose and response?",
+    "Any fever, headache, head trauma, alcohol or drug use preceding the event?",
+    "Point-of-care glucose result?"
+  ],
+  "expectedInvestigations": [
+    "Point-of-care capillary glucose (immediate)",
+    "Continuous EEG monitoring",
+    "Non-contrast CT head",
+    "Venous/arterial blood gas with lactate",
+    "Serum electrolytes, calcium, magnesium, renal and liver function",
+    "Antiepileptic drug levels and toxicology screen",
+    "Creatine kinase (rhabdomyolysis)"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "seizure": true,
+    "alteredSensorium": true,
+    "gcs": true,
+    "focalNeuroDeficit": true,
+    "tachycardia": true,
+    "tachypnea": true,
+    "hypoxia": true,
+    "lactateElevated": true,
+    "alcoholExcess": true,
+    "organDysfunction": true
+  },
+  "expected": {
+    "diagnosis": "seizure_epilepsy",
+    "acceptableIds": [
+      "seizure_epilepsy"
+    ],
+    "differentialIds": [
+      "hypoglycemia",
+      "hyponatremia",
+      "ischemic_stroke",
+      "ENCEPHALITIS"
+    ],
+    "investigations": [
+      "Point-of-care capillary glucose",
+      "Continuous EEG",
+      "Non-contrast CT head",
+      "Blood gas with lactate",
+      "Serum electrolytes, calcium, magnesium",
+      "Antiepileptic drug levels and toxicology screen"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank seizure_epilepsy as top diagnosis",
+    "Must recommend immediate capillary glucose and a benzodiazepine as first-line therapy",
+    "Must NOT recommend empiric antibiotics/antivirals in the absence of CNS-infection features",
+    "Must flag need for urgent second-line AED and EEG if consciousness does not recover (non-convulsive status)",
+    "Must not attribute raised lactate/CK/leukocytosis to sepsis without reassessment after seizure control"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": "gc_320",
+  "specialty": "Nephrology",
+  "condition": "Acute glomerulonephritis",
+  "age": 68,
+  "sex": "M",
+  "presentingComplaint": "Two weeks of fatigue, mild bilateral ankle swelling and reduced urine output; no visible blood in urine.",
+  "history": "A 68-year-old retired schoolteacher presents with insidious tiredness, mild breathlessness on exertion and puffy ankles for a fortnight. He denies the classic 'cola-coloured' urine, loin pain or frank haematuria, which is why he did not seek care earlier. Three weeks ago he was treated with oral antibiotics by his GP for an infected lower-limb skin lesion (cellulitis of the shin), which has since healed. Background of well-controlled type 2 diabetes and no prior renal disease; baseline creatinine 6 months ago was normal (0.9 mg/dL). No NSAID use, no rash, no joint pain, no haemoptysis. On direct questioning he reports his morning urine has looked 'slightly smoky' and frothy but he attributed this to dehydration. This subtle, insidious, normotensive-to-mildly-hypertensive picture in an older adult after a resolving skin infection is the atypical face of post-infectious acute glomerulonephritis, rather than the textbook child with acute cola-coloured urine and florid oedema.",
+  "examination": "Alert, comfortable, not encephalopathic. Mild periorbital puffiness and pitting oedema to mid-shin bilaterally. No rash, no palpable purpura, no arthritis. JVP marginally elevated; chest with fine bibasal crackles; heart sounds normal. Abdomen soft, no organomegaly, no bruit. Healed, non-inflamed scar over right shin.",
+  "vitals": {
+    "hr": 78,
+    "bp": "166/96",
+    "rr": 16,
+    "temp": 37,
+    "spo2": 97
+  },
+  "labs": {
+    "creatinine_mg_dl": 2.2,
+    "egfr_ml_min": 29,
+    "urea_mmol_l": 16.5,
+    "potassium_mmol_l": 5.1,
+    "hemoglobin_g_dl": 11.4,
+    "albumin_g_dl": 3.4,
+    "c3_low": true,
+    "c4_normal": true,
+    "aso_titre": "elevated",
+    "urinalysis": "3+ blood, 2+ protein, dysmorphic RBCs with red-cell casts on microscopy",
+    "urine_protein_creatinine_ratio_mg_g": 1600,
+    "anca": "negative",
+    "anti_gbm": "negative"
+  },
+  "imaging": "Renal ultrasound: normal-sized kidneys (11.2 and 11.5 cm) with preserved corticomedullary differentiation and no obstruction — arguing against chronic scarring or obstructive uropathy.",
+  "microbiology": "Healed skin lesion; no active source. Blood cultures negative. Throat swab not indicated (no pharyngitis). Streptococcal/staphylococcal serology consistent with recent infection.",
+  "differentialDiagnoses": [
+    "Acute (post-infectious) glomerulonephritis",
+    "Acute kidney injury (pre-renal/ATN)",
+    "ANCA-associated / pauci-immune rapidly progressive GN",
+    "Nephrotic syndrome",
+    "Undiagnosed chronic kidney disease"
+  ],
+  "finalDiagnosis": "Acute post-infectious glomerulonephritis (nephritic syndrome) presenting atypically in an older adult",
+  "citations": [
+    "KDIGO — Glomerular Diseases Clinical Practice Guideline, 2021",
+    "Harrison's Principles of Internal Medicine, 22e — Glomerular Diseases / Acute Glomerulonephritis"
+  ],
+  "stewardship": "Not applicable — non-infective active diagnosis; the antecedent skin infection has resolved and no ongoing antimicrobial therapy is indicated. Management is supportive: BP and volume control, sodium restriction, monitoring of renal function.",
+  "contraindications": [
+    "Avoid nephrotoxins (NSAIDs, iodinated contrast unless essential)",
+    "Cautious dosing of renally cleared drugs given eGFR 29",
+    "Avoid empirical antibiotics for a resolved, culture-negative source"
+  ],
+  "edgeCases": [
+    "Low C3 with normal C4 supports a post-infectious/immune-complex process rather than lupus nephritis (which typically consumes both)",
+    "If creatinine rises rapidly over days with worsening casts, escalate to urgent biopsy to exclude crescentic/RPGN",
+    "Elderly diabetic patients can be mislabelled as diabetic nephropathy — active urinary sediment (RBC casts) points to glomerulonephritis instead"
+  ],
+  "expectedMaiK": "Recognise nephritic syndrome (haematuria with dysmorphic RBCs/RBC casts, subnephrotic proteinuria, hypertension, oedema, acute renal impairment with low C3) after a recent skin infection, and manage with volume/BP control while arranging complement, ANCA/anti-GBM serology and nephrology referral for possible biopsy.",
+  "expectedNextQuestions": [
+    "Recent throat or skin infection and its timing relative to symptoms?",
+    "Any gross haematuria, frothy urine or change in urine volume?",
+    "Rash, joint pains, haemoptysis or sinus symptoms suggesting vasculitis?",
+    "NSAID, herbal or nephrotoxic drug exposure?",
+    "Prior kidney function and known kidney disease?"
+  ],
+  "expectedInvestigations": [
+    "Urine microscopy for dysmorphic RBCs and red-cell casts",
+    "Urine protein:creatinine ratio / 24h protein",
+    "Serum complement C3 and C4",
+    "ASO titre / anti-DNase B and anti-nuclear antibodies",
+    "ANCA and anti-GBM antibodies",
+    "Renal ultrasound",
+    "Consider renal biopsy if RPGN features or diagnosis unclear"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "hematuria": true,
+    "proteinuria": true,
+    "legSwellingBilateral": true,
+    "renalImpairment": true,
+    "oliguria": true,
+    "hypertensionHx": true,
+    "creatinine": true,
+    "urea": true,
+    "diabetesHx": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "glomerulonephritis",
+    "acceptableIds": [
+      "glomerulonephritis"
+    ],
+    "differentialIds": [
+      "aki",
+      "vasculitis",
+      "nephrotic",
+      "ckd"
+    ],
+    "investigations": [
+      "Urine microscopy for dysmorphic RBCs and red-cell casts",
+      "Serum complement C3/C4",
+      "ANCA and anti-GBM antibodies",
+      "Urine protein:creatinine ratio",
+      "Renal ultrasound"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank glomerulonephritis as the top diagnosis despite absence of gross ('cola-coloured') haematuria",
+    "RBC casts with dysmorphic haematuria plus low C3 must drive a nephritic/GN classification over diabetic nephropathy or simple AKI",
+    "Must not recommend empirical antibiotics for the resolved, culture-negative skin source",
+    "Should flag complement, ANCA/anti-GBM serology and nephrology referral / possible biopsy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

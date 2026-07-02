@@ -1,0 +1,113 @@
+{
+  "id": "gc_270",
+  "specialty": "Tropical Fever",
+  "condition": "Leptospirosis",
+  "age": 34,
+  "sex": "M",
+  "presentingComplaint": "Fever, severe body aches and red eyes for 4 days",
+  "history": "Previously well municipal sanitation worker from coastal Kerala presenting on day 4 of illness with abrupt-onset high fever, rigors, intense generalised myalgia (worst in both calves), frontal headache and mild nausea. He specifically waded through stagnant floodwater and cleared blocked drains during the recent monsoon 8 days ago, with minor abrasions on his shins. He remains fully ambulant, is eating and drinking, has passed normal-coloured urine in good volume, and has NO jaundice, breathlessness, bleeding, confusion or oliguria. No rash, no joint swelling, no travel outside his district, no sick contacts, no prior similar illness. This is a deliberately EARLY/MILD anicteric (septicaemic-phase) presentation caught before any Weil-syndrome organ failure.",
+  "examination": "Alert, oriented, well-perfused and comfortable at rest. Striking bilateral conjunctival suffusion (redness without purulent discharge). Marked tenderness on squeezing both gastrocnemius muscles. No jaundice, no rash, no eschar, no lymphadenopathy, no meningism. Chest clear; abdomen soft with no organomegaly; no peripheral oedema. Healing superficial abrasions over both shins.",
+  "vitals": {
+    "hr": 98,
+    "bp": "118/74",
+    "rr": 18,
+    "temp": 38.7,
+    "spo2": 98
+  },
+  "labs": {
+    "hemoglobin": "13.9 g/dL",
+    "wbc": "11.8 x10^3/uL (neutrophil predominant)",
+    "platelets": "128 x10^3/uL",
+    "creatinine": "1.1 mg/dL",
+    "urea": "6.4 mmol/L",
+    "bilirubin": "0.9 mg/dL",
+    "ALT": "78 U/L",
+    "AST": "71 U/L",
+    "CPK": "640 U/L (elevated)",
+    "CRP": "96 mg/L",
+    "sodium": "135 mmol/L",
+    "urinalysis": "trace protein, few WBCs, no casts"
+  },
+  "imaging": "Chest radiograph normal. Abdominal ultrasound: no hepatosplenomegaly, normal kidneys, no ascites.",
+  "microbiology": "Malaria rapid antigen and peripheral smear negative x2. Dengue NS1 and IgM negative. Scrub typhus IgM (rapid) negative. Blood cultures sterile at 48h. Leptospira IgM ELISA positive; paired MAT sent (acute titre 1:200, convalescent sample pending). Urine and blood retained for leptospiral PCR.",
+  "differentialDiagnoses": [
+    "Leptospirosis (anicteric, early septicaemic phase)",
+    "Dengue fever",
+    "Scrub typhus",
+    "Malaria"
+  ],
+  "finalDiagnosis": "Early anicteric leptospirosis (mild, non-severe) — Leptospira IgM positive with classic floodwater exposure, conjunctival suffusion and calf myalgia",
+  "citations": [
+    "WHO — Human Leptospirosis: Guidance for Diagnosis, Surveillance and Control — 2003",
+    "ICMR — Guidelines / Recommendations on Leptospirosis Diagnosis and Management — 2015",
+    "Harrison's Principles of Internal Medicine, 22e — Leptospirosis"
+  ],
+  "stewardship": "Mild/early anicteric leptospirosis is treated with oral doxycycline 100 mg twice daily for 7 days (WHO/ICMR first-line for outpatient/non-severe disease). Reserve IV penicillin G or ceftriaxone for severe (icteric/Weil) disease. Notify public health; counsel on occupational water-exposure prophylaxis and warn to return immediately if jaundice, reduced urine output, breathlessness or bleeding develops (transition to immune/severe phase).",
+  "contraindications": [
+    "Doxycycline in pregnancy or young children — use azithromycin or amoxicillin instead",
+    "Watch for a Jarisch-Herxheimer reaction within hours of the first antibiotic dose"
+  ],
+  "edgeCases": [
+    "Anicteric leptospirosis (~90% of cases) is easily dismissed as a viral syndrome — conjunctival suffusion plus calf myalgia and water exposure are the key early clues",
+    "Can biphasically relapse into severe immune-phase disease (Weil syndrome) even after initial defervescence",
+    "Co-endemic and clinically overlapping with dengue and scrub typhus during monsoon — serology cross-reactivity and co-infection are recognised"
+  ],
+  "expectedMaiK": "Early, non-severe anicteric leptospirosis in a floodwater-exposed worker: treat empirically with oral doxycycline without waiting for confirmatory MAT.",
+  "expectedNextQuestions": [
+    "Any jaundice, reduced urine output, breathlessness or bleeding to suggest severe/Weil disease?",
+    "Detailed occupational and recreational freshwater/floodwater exposure and rodent contact?",
+    "Pregnancy status or contraindication to doxycycline?"
+  ],
+  "expectedInvestigations": [
+    "Leptospira IgM ELISA and paired MAT (acute + convalescent)",
+    "Leptospiral blood/urine PCR in the first week",
+    "Malaria smear/RDT, dengue NS1/IgM and scrub typhus IgM to exclude co-endemic mimics",
+    "Renal function, LFTs, CPK and platelet count to grade severity"
+  ],
+  "expectedConfidence": 0.8,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "myalgiaArthralgia": true,
+    "conjunctivalSuffusion": true,
+    "waterExposure": true,
+    "headache": true,
+    "calfTenderness": true,
+    "nauseaVomiting": true,
+    "tachycardia": true,
+    "thrombocytopenia": true
+  },
+  "expected": {
+    "diagnosis": "LEPTOSPIROSIS",
+    "acceptableIds": [
+      "LEPTOSPIROSIS"
+    ],
+    "differentialIds": [
+      "DENGUE",
+      "SCRUB_TYPHUS",
+      "MALARIA"
+    ],
+    "investigations": [
+      "Leptospira IgM ELISA and paired MAT",
+      "Leptospiral blood/urine PCR",
+      "Malaria RDT/smear, dengue NS1/IgM, scrub typhus IgM",
+      "Renal function, LFTs, CPK, platelets"
+    ],
+    "stewardship": {
+      "tier": "first-line / narrow-spectrum",
+      "antibiotics": [
+        "doxycycline"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Engine must rank LEPTOSPIROSIS as the top diagnosis",
+    "Conjunctival suffusion + calf myalgia + floodwater exposure must drive the leptospirosis inference",
+    "Must recommend oral doxycycline for mild/non-severe disease and NOT default to IV therapy",
+    "Dengue, scrub typhus and malaria must appear as considered differentials and be actively excluded"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

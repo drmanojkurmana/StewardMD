@@ -1,0 +1,108 @@
+{
+  "id": "gc_348",
+  "specialty": "Toxicology",
+  "condition": "Opioid overdose",
+  "age": 74,
+  "sex": "F",
+  "presentingComplaint": "Increasing drowsiness over the afternoon, found nodding off mid-sentence by her daughter",
+  "history": "74-year-old woman with osteoarthritis and chronic mechanical low back pain, recently transitioned from tramadol to a transdermal fentanyl 25 mcg/h patch three days ago, with as-needed oral oxycodone for breakthrough pain. She took two extra oxycodone doses today for a flare. No alcohol, no recreational drug use, no antidepressants. Also on amlodipine and atorvastatin. Over the afternoon she became progressively drowsy, slurring words and dozing off during conversation, but rouses to voice and answers simple questions before drifting off again. No headache, no chest pain, no witnessed seizure, no fall or head injury. Bowels and bladder normal. This is an early, still-compensating presentation rather than deep coma.",
+  "examination": "Frail elderly woman, drowsy but rousable to voice (GCS 13: E3 V4 M6), no focal neurological deficit, symmetrical reflexes. Pupils 2 mm and sluggishly reactive bilaterally (miosis). Chest clear with quiet, shallow, slow respiratory effort; no added sounds and no excess oral or bronchial secretions. Abdomen soft with reduced bowel sounds. Skin warm and dry; fentanyl patch confirmed in situ on upper chest. Capillary refill <2 s. A cautious titrated dose of IV naloxone 0.1 mg produced improved alertness and a rise in respiratory rate, supporting the diagnosis.",
+  "vitals": {
+    "hr": 52,
+    "bp": "116/70",
+    "rr": 10,
+    "temp": 36.3,
+    "spo2": 93
+  },
+  "labs": {
+    "capillaryGlucose_mmolL": 6.4,
+    "sodium_mmolL": 139,
+    "potassium_mmolL": 4.2,
+    "creatinine_mgdl": 1.1,
+    "vbg_pH": 7.31,
+    "vbg_pCO2_kPa": 6.9,
+    "lactate_mmolL": 1.4,
+    "paracetamol_level": "not detected",
+    "salicylate_level": "not detected",
+    "ethanol": "not detected"
+  },
+  "imaging": "No acute imaging required at presentation; CT head deferred as sensorium improved promptly with naloxone and no focal signs or head-injury history. Chest radiograph clear (no aspiration).",
+  "microbiology": "Not applicable (non-infective presentation).",
+  "differentialDiagnoses": [
+    "Other sedative-hypnotic / drug intoxication",
+    "Hypoglycaemia",
+    "Metabolic encephalopathy",
+    "Organophosphate / cholinergic toxicity"
+  ],
+  "finalDiagnosis": "Opioid overdose (early / mild toxicity from combined transdermal fentanyl and oral oxycodone in a frail elderly patient), confirmed by opioid toxidrome and response to titrated naloxone",
+  "citations": [
+    "ACMT — Guidance on the Use of Naloxone in Opioid Toxicity — 2015",
+    "WHO — Community Management of Opioid Overdose — 2014"
+  ],
+  "stewardship": "Not applicable — non-infective toxicological presentation; no antimicrobial therapy indicated.",
+  "contraindications": [
+    "Avoid large single naloxone boluses in an opioid-tolerant chronic-pain patient (risk of acute withdrawal, agitation, pain crisis and sympathetic surge) — titrate in 0.04–0.1 mg increments",
+    "Do not discharge early: transdermal fentanyl and oral oxycodone outlast a single naloxone dose, so re-sedation is expected once naloxone wears off"
+  ],
+  "edgeCases": [
+    "Fentanyl patch remains a depot even after removal, so monitored observation (often with a naloxone infusion) is required well beyond the duration of an IV bolus",
+    "Miosis may be absent if a co-ingestant or hypoxia is present; a partial naloxone response is still diagnostically supportive",
+    "In the frail elderly, opioid toxicity can present as subtle progressive drowsiness and bradypnea rather than the classic coma–apnoea–pinpoint-pupil triad"
+  ],
+  "expectedMaiK": "Recognise the opioid toxidrome (reduced consciousness + bradypnea + miosis) and treat with airway/ventilatory support and cautious titrated naloxone; remove the fentanyl patch and observe for re-sedation because the long-acting opioids outlast naloxone.",
+  "expectedNextQuestions": [
+    "What opioids is she taking and at what doses, including any new patch or recent dose increase?",
+    "Could she have taken extra tablets or any co-ingestants (benzodiazepines, alcohol, antidepressants)?",
+    "When was the fentanyl patch applied and has it been double-patched or exposed to heat?",
+    "Any renal impairment or dehydration that could reduce opioid clearance?"
+  ],
+  "expectedInvestigations": [
+    "Capillary blood glucose",
+    "Venous/arterial blood gas (for hypercapnia)",
+    "ECG",
+    "Paracetamol and salicylate levels",
+    "Urine toxicology screen"
+  ],
+  "expectedConfidence": 0.85,
+  "findings": {
+    "drugOverdose": true,
+    "alteredSensorium": true,
+    "bradypnea": true,
+    "bradycardia": true,
+    "hypoxia": true,
+    "age": true
+  },
+  "expected": {
+    "diagnosis": "opioid_od",
+    "acceptableIds": [
+      "opioid_od"
+    ],
+    "differentialIds": [
+      "drug_intox",
+      "hypoglycemia",
+      "metabolic_enceph",
+      "organophosphate"
+    ],
+    "investigations": [
+      "Capillary blood glucose",
+      "Venous blood gas",
+      "ECG",
+      "Paracetamol and salicylate levels",
+      "Urine toxicology screen"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Engine should identify opioid_od as the leading diagnosis from the opioid toxidrome (reduced sensorium + bradypnea + miosis) even in this mild, still-rousable presentation.",
+    "Engine must not recommend antibiotics or assign a stewardship tier for this non-infective case.",
+    "Management guidance should include titrated naloxone, ventilatory support, patch removal, and prolonged observation for re-sedation.",
+    "organophosphate should be considered but ranked below opioid_od given absence of excess secretions, lacrimation, and fasciculations."
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

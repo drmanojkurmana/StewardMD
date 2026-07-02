@@ -1,0 +1,112 @@
+{
+  "id": "gc_298",
+  "specialty": "Allergy / Emergency",
+  "condition": "Anaphylaxis",
+  "age": 71,
+  "sex": "M",
+  "presentingComplaint": "Sudden worsening breathlessness, widespread itchy rash and collapse minutes after starting an intravenous antibiotic in the emergency department.",
+  "history": "71-year-old man with a 20-year history of COPD (FEV1 48% predicted) and stable ischaemic heart disease post-PCI, on regular bisoprolol, tiotropium and as-needed salbutamol. He attended with a 3-day 'chest infection' and increased sputum and was started on IV co-amoxiclav for a presumed infective COPD exacerbation. Within roughly 5 minutes of the infusion he became acutely distressed, complained of generalised itch, throat tightness and light-headedness, and felt his lips and tongue swelling. He then had one episode of vomiting and nearly lost consciousness. He has no prior documented drug allergy but recalls a rash with penicillin as a child. No ACE-inhibitor use. The treating team initially attributed the deterioration to his known COPD and gave nebulised salbutamol with little response before the skin and mucosal signs were recognised.",
+  "examination": "Anxious, flushed and diaphoretic with widespread confluent urticaria over trunk and arms and evident lip and tongue angioedema. Audible stridor with bilateral polyphonic wheeze and prolonged expiration. Peripherally cool with feeble pulses and delayed capillary refill; drowsy but rousable. No fever. Chest hyperinflated (chronic) but the acute picture is dominated by the new mucocutaneous and circulatory changes appearing minutes after the drug.",
+  "vitals": {
+    "hr": 124,
+    "bp": "76/42",
+    "rr": 30,
+    "temp": 36.7,
+    "spo2": 87
+  },
+  "labs": {
+    "serumTryptaseAcute": "24 ng/mL (drawn 1h post-onset; markedly elevated)",
+    "serumTryptaseBaseline": "4 ng/mL (convalescent, 48h)",
+    "lactate": "3.4 mmol/L",
+    "creatinine": "1.2 mg/dL",
+    "hemoglobin": "13.8 g/dL",
+    "wbc": "9.1 x10^3/uL",
+    "abg": "pH 7.31, pCO2 38, pO2 58 on 15L O2 (hypoxaemia with mild metabolic acidosis)"
+  },
+  "imaging": "Portable CXR: chronic hyperinflation with no new consolidation or pneumothorax; no acute infiltrate to explain the collapse.",
+  "microbiology": "Blood cultures drawn and negative at 48h; no source of sepsis identified.",
+  "differentialDiagnoses": [
+    "Anaphylaxis to IV beta-lactam (co-amoxiclav)",
+    "Acute infective COPD exacerbation with bronchospasm",
+    "Cardiogenic shock / acute coronary event given known IHD",
+    "ACE-inhibitor / non-allergic angioedema",
+    "Vasovagal syncope"
+  ],
+  "finalDiagnosis": "Drug-induced anaphylaxis (IV co-amoxiclav) with beta-blocker-associated resistance to adrenaline, in a patient whose COPD and IHD confounded early recognition.",
+  "citations": [
+    "World Allergy Organization — Anaphylaxis Guidance — 2020",
+    "Resuscitation Council UK — Emergency Treatment of Anaphylactic Reactions — 2021",
+    "Harrison's Principles of Internal Medicine 22e — Anaphylaxis and Systemic Mastocytosis"
+  ],
+  "stewardship": "Not applicable — non-infective emergency. Stop the culprit beta-lactam immediately and document a penicillin allergy; the presumed COPD 'infection' does not warrant continued antibiotics on current evidence.",
+  "contraindications": [
+    "Do not delay intramuscular adrenaline while treating presumed bronchospasm",
+    "Avoid IV bolus adrenaline in a spontaneously circulating patient given ischaemic heart disease (arrhythmia/ischaemia risk) — use IM route, titrated IV infusion only under monitoring",
+    "Re-exposure to penicillins/co-amoxiclav is contraindicated"
+  ],
+  "edgeCases": [
+    "Beta-blocker (bisoprolol) can blunt the adrenaline response — consider IV glucagon for refractory hypotension",
+    "Wheeze and dyspnoea wrongly attributed to the patient's COPD, delaying recognition",
+    "Risk of biphasic reaction mandates a period of observation after recovery",
+    "Absence of prior documented allergy and hypotension without a florid rash early on can mask the diagnosis"
+  ],
+  "expectedMaiK": "Recognise anaphylaxis (acute mucocutaneous + respiratory + circulatory compromise minutes after IV drug) and give IM adrenaline 0.5 mg (0.5 mL 1:1000) to the anterolateral thigh immediately, repeat every 5 minutes as needed, with high-flow oxygen, supine leg elevation and rapid IV crystalloid; escalate to IV glucagon given beta-blockade if refractory.",
+  "expectedNextQuestions": [
+    "Exact timing of symptom onset relative to starting the IV drug?",
+    "Any prior reactions to penicillins or other drugs/foods/stings?",
+    "Is the patient on a beta-blocker or ACE inhibitor?",
+    "Response to the first dose of IM adrenaline?"
+  ],
+  "expectedInvestigations": [
+    "Serial serum mast cell tryptase (acute within 1-2h and baseline at >24h)",
+    "12-lead ECG and troponin to exclude ischaemic event in a patient with IHD",
+    "ABG / lactate for perfusion and oxygenation",
+    "Later allergy referral for specific IgE / drug testing"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "rash": true,
+    "facialSwelling": true,
+    "wheeze": true,
+    "dyspnea": true,
+    "hypotension": true,
+    "tachycardia": true,
+    "hypoxia": true,
+    "nauseaVomiting": true,
+    "knownCOPD": true,
+    "knownCAD": true
+  },
+  "expected": {
+    "diagnosis": "anaphylaxis",
+    "acceptableIds": [
+      "anaphylaxis"
+    ],
+    "differentialIds": [
+      "angioedema_acei",
+      "copd_exac_ni",
+      "cardiogenic_shock",
+      "vasovagal_syncope"
+    ],
+    "investigations": [
+      "serum tryptase (acute and baseline)",
+      "12-lead ECG",
+      "troponin",
+      "ABG / lactate"
+    ],
+    "stewardship": {
+      "tier": null,
+      "antibiotics": []
+    }
+  },
+  "regressionAssertions": [
+    "Must diagnose anaphylaxis despite the confounding COPD/wheeze and IHD comorbidity",
+    "Must recommend IM adrenaline as first-line, not nebulised bronchodilators alone",
+    "Must not downgrade the presentation to a simple COPD exacerbation or cardiogenic shock",
+    "Should flag beta-blocker-related adrenaline resistance and consider IV glucagon",
+    "Should stop the culprit antibiotic and document penicillin allergy"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

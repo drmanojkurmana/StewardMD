@@ -1,0 +1,112 @@
+{
+  "id": "gc_249",
+  "specialty": "Skin & Soft Tissue",
+  "condition": "Cellulitis",
+  "age": 86,
+  "sex": "F",
+  "presentingComplaint": "Nursing-home resident brought in with 2 days of increasing confusion and reduced mobility; staff noticed a warm, red left lower leg.",
+  "history": "86-year-old frail woman resident in a care home, baseline mobilises with a frame, mild vascular dementia. Over 48 hours she has become more drowsy and confused than usual (acute-on-chronic delirium), eating poorly and refusing to weight-bear on the left leg. She has not complained of pain and there is no documented rigor. Background of type 2 diabetes, chronic venous insufficiency with longstanding bilateral leg oedema, and previous tinea pedis. Carers report the left leg looked pink yesterday and is now redder and more swollen than the right, with some skin fissuring between the toes. No trauma, no recent hospital admission or antibiotics. This is a NON-CLASSIC presentation: the frail patient is near-afebrile and pain-free, and delirium — not the rash — is the dominant complaint.",
+  "examination": "Frail, mildly drowsy but rousable, disoriented to time (delirium on background dementia). Left lower leg (mid-shin to ankle) is diffusely erythematous, warm and oedematous with ILL-DEFINED, non-raised margins (not the sharply demarcated border of erysipelas). Mild tenderness only — pain is NOT out of proportion. Interdigital fissuring/maceration of the left foot (likely portal of entry). No crepitus, no haemorrhagic bullae, no skin necrosis. Right leg has chronic stasis change but is cooler and non-tender (asymmetry favours infection over bilateral stasis dermatitis). Calf soft, no cord. No inguinal lymphangitic streak. Chest clear, abdomen soft.",
+  "vitals": {
+    "hr": 102,
+    "bp": "124/70",
+    "rr": 18,
+    "temp": 37.4,
+    "spo2": 96
+  },
+  "labs": {
+    "wbc": "13.8 x10^9/L",
+    "neutrophils": "11.2 x10^9/L",
+    "crp": "96 mg/L",
+    "creatinine": "1.5 mg/dL (baseline 1.0, mild AKI)",
+    "sodium": "133 mmol/L",
+    "glucose": "228 mg/dL",
+    "lactate": "1.6 mmol/L",
+    "hba1c": "8.1%"
+  },
+  "imaging": "Venous Doppler of left leg: no deep vein thrombosis; soft-tissue oedema only. No gas in soft tissues on plain film.",
+  "microbiology": "Blood cultures sent (low yield in cellulitis, often negative in the elderly). No abscess to aspirate. Interdigital swab pending. Skin surface swabs of intact cellulitic skin not recommended.",
+  "differentialDiagnoses": [
+    "Erysipelas (but border is ill-defined, not sharply raised)",
+    "Deep vein thrombosis (excluded on Doppler)",
+    "Necrotizing fasciitis (no disproportionate pain, crepitus, bullae or rapid spread)",
+    "Bilateral stasis dermatitis / lipodermatosclerosis (excluded by unilateral warmth, tenderness and rising CRP)"
+  ],
+  "finalDiagnosis": "Non-purulent cellulitis of the left lower limb in a frail elderly diabetic, presenting atypically as delirium with minimal fever/pain",
+  "citations": [
+    "IDSA — Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections — 2014",
+    "Harrison's Principles of Internal Medicine, 22e — Cellulitis and Soft-Tissue Infections"
+  ],
+  "stewardship": "Non-purulent cellulitis is predominantly caused by beta-haemolytic streptococci (and MSSA); empiric therapy should target these without routine broad-spectrum or anti-MRSA cover. In a frail elderly patient with delirium, systemic signs and mild AKI, admit for IV therapy: IV cefazolin (or flucloxacillin), stepping down to oral cephalexin/flucloxacillin once systemically improving. Treat the tinea pedis portal of entry and manage delirium/hydration. No anaerobic or Gram-negative cover indicated unless purulence, diabetic foot ulcer or systemic deterioration.",
+  "contraindications": [
+    "Severe penicillin/cephalosporin anaphylaxis — use clindamycin or a glycopeptide instead",
+    "Renal dose adjustment needed given AKI if a renally-cleared agent is chosen"
+  ],
+  "edgeCases": [
+    "Blunted fever and absent pain in the elderly can mask progression to necrotizing infection — re-examine for spreading margin, disproportionate pain, crepitus or bullae",
+    "Bilateral erythema is rarely infective (usually stasis dermatitis); unilateral warmth and rising inflammatory markers here support true cellulitis",
+    "Delirium may be the only presenting sign of infection in frail elders"
+  ],
+  "expectedMaiK": "Left lower-limb non-purulent cellulitis; admit frail elderly patient for IV anti-streptococcal/anti-MSSA therapy and delirium care",
+  "expectedNextQuestions": [
+    "Is the erythematous margin spreading, and is pain disproportionate to examination (necrotizing infection screen)?",
+    "Is there any break in the skin, ulcer, or interdigital tinea acting as portal of entry?",
+    "What is the patient's baseline cognition and functional status, and is this an acute change (delirium)?",
+    "Any penicillin/cephalosporin allergy, and current renal function for dosing?"
+  ],
+  "expectedInvestigations": [
+    "CBC with differential and CRP",
+    "Blood cultures before antibiotics",
+    "Serum creatinine/electrolytes and glucose",
+    "Venous Doppler to exclude DVT",
+    "Mark the erythema border and review for progression"
+  ],
+  "expectedConfidence": 0.82,
+  "findings": {
+    "fever": true,
+    "tachycardia": true,
+    "alteredSensorium": true,
+    "nursingHomeResident": true,
+    "diabetesHx": true,
+    "skinErythema": true,
+    "skinWarmth": true,
+    "legSwellingUnilateral": true,
+    "age": true,
+    "peripheralVascularDisease": true
+  },
+  "expected": {
+    "diagnosis": "CELLULITIS",
+    "acceptableIds": [
+      "CELLULITIS"
+    ],
+    "differentialIds": [
+      "ERYSIPELAS",
+      "dvt",
+      "NECROTIZING_FASCIITIS",
+      "crystal_arthritis"
+    ],
+    "investigations": [
+      "CBC and CRP",
+      "Blood cultures",
+      "Venous Doppler leg",
+      "Serum creatinine and glucose"
+    ],
+    "stewardship": {
+      "tier": "Access",
+      "antibiotics": [
+        "IV cefazolin",
+        "flucloxacillin"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "Top diagnosis must be CELLULITIS",
+    "Differential should not rank NECROTIZING_FASCIITIS first given absence of disproportionate pain, crepitus and bullae",
+    "Must not recommend routine anti-MRSA or Gram-negative/anaerobic cover for non-purulent cellulitis",
+    "Stewardship tier must be Access (narrow anti-streptococcal/anti-MSSA), not Watch/Reserve"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "id": "gc_281",
+  "specialty": "Genitourinary",
+  "condition": "Acute Pyelonephritis",
+  "age": 68,
+  "sex": "F",
+  "presentingComplaint": "One day of high fever with rigors, right flank pain and increasing confusion; found drowsy and cold-peripheried by family.",
+  "history": "Type 2 diabetic (HbA1c 8.9%) on metformin. Two days of dysuria and urinary frequency initially dismissed as her 'usual bladder trouble', then abrupt onset of shaking chills, right loin pain and one episode of vomiting. Over the last few hours became progressively drowsy with reduced urine output. No prior instrumentation, no indwelling catheter, no recent antibiotics or hospitalisation. This is a severe/critical (urosepsis with septic shock) presentation rather than the classic well-appearing young woman with uncomplicated pyelonephritis.",
+  "examination": "Toxic, peripherally shut down with prolonged capillary refill and cool mottled knees. Drowsy but rousable (GCS 13). Marked right costovertebral-angle tenderness with guarding; suprapubic tenderness. Chest clear, abdomen soft with no peritonism, no jaundice, no rash. No calf swelling.",
+  "vitals": {
+    "hr": 124,
+    "bp": "82/46",
+    "rr": 28,
+    "temp": 39.5,
+    "spo2": 93
+  },
+  "labs": {
+    "wbc": "19.8 x10^9/L (88% neutrophils)",
+    "creatinine": "2.1 mg/dL (baseline 0.9)",
+    "urea": "14.6 mmol/L",
+    "lactate": "3.9 mmol/L",
+    "platelets": "118 x10^3/µL",
+    "crp": "268 mg/L",
+    "procalcitonin": "14.2 ng/mL",
+    "glucose": "18.4 mmol/L",
+    "urinalysis": "leucocytes 3+, nitrites positive, blood 2+, >100 WBC/hpf with WBC casts"
+  },
+  "imaging": "Bedside/CT-KUB: enlarged right kidney with striated nephrogram and perinephric fat stranding, no obstructing calculus or hydronephrosis, no abscess.",
+  "microbiology": "Urine Gram stain: Gram-negative bacilli, pyuria. Urine and blood cultures sent; subsequently grew Escherichia coli (>10^5 CFU/mL, same organism in blood) sensitive to piperacillin-tazobactam and meropenem, resistant to ciprofloxacin and co-trimoxazole.",
+  "differentialDiagnoses": [
+    "Complicated UTI without upper-tract involvement",
+    "Septic shock from another source",
+    "Undifferentiated sepsis",
+    "Acute cholangitis"
+  ],
+  "finalDiagnosis": "Severe acute pyelonephritis (right) complicated by Gram-negative urosepsis and septic shock with acute kidney injury",
+  "citations": [
+    "IDSA — Acute Uncomplicated and Complicated UTI / Pyelonephritis — 2011",
+    "Surviving Sepsis Campaign — Management of Sepsis and Septic Shock — 2021",
+    "ICMR — Treatment Guidelines for Antimicrobial Use in Common Syndromes (UTI) — 2019"
+  ],
+  "stewardship": "Severe pyelonephritis with septic shock: after two sets of blood cultures and urine culture, start empiric broad-spectrum IV beta-lactam within the first hour alongside balanced-crystalloid resuscitation (30 mL/kg) and early vasopressor (noradrenaline) to maintain MAP >=65 mmHg. Empiric piperacillin-tazobactam IV given local high ESBL prevalence and critical illness; escalate to a carbapenem if prior ESBL, no early response, or resistant Gram-negatives suspected. De-escalate to a culture-directed narrow agent (and oral switch once afebrile and haemodynamically stable) for a 7-day total course.",
+  "contraindications": [
+    "Avoid nephrotoxic agents (aminoglycoside monotherapy, NSAIDs) given AKI",
+    "Avoid empiric fluoroquinolone/co-trimoxazole due to local resistance and demonstrated in-vitro resistance",
+    "Hold metformin during AKI/sepsis (lactic acidosis risk)"
+  ],
+  "edgeCases": [
+    "Rule out obstructing stone or emphysematous pyelonephritis in a diabetic — would mandate urgent urological drainage",
+    "Persistent fever/bacteraemia beyond 48-72h should prompt CT to exclude renal or perinephric abscess",
+    "Relative bradycardia or new jaundice would shift suspicion toward cholangitis or other source"
+  ],
+  "expectedMaiK": "Recognise Gram-negative urosepsis/septic shock from pyelonephritis: obtain blood and urine cultures then give empiric broad-spectrum IV antibiotics within 1 hour with fluid resuscitation and vasopressor support, and image the urinary tract to exclude obstruction/abscess.",
+  "expectedNextQuestions": [
+    "Any renal stones, prior urological procedures, or structural tract abnormality?",
+    "Recent antibiotic use, hospitalisation, or prior ESBL/resistant urinary isolate?",
+    "Urine output over the last few hours and any flank/loin swelling?",
+    "Diabetes control and any features suggesting emphysematous pyelonephritis?"
+  ],
+  "expectedInvestigations": [
+    "Urinalysis with microscopy and urine culture/sensitivity",
+    "Two sets of blood cultures before antibiotics",
+    "Serum lactate, creatinine/urea and electrolytes",
+    "CBC, CRP/procalcitonin, blood glucose",
+    "CT-KUB / renal ultrasound to exclude obstruction or abscess"
+  ],
+  "expectedConfidence": 0.9,
+  "findings": {
+    "fever": true,
+    "rigors": true,
+    "flankPain": true,
+    "costovertebralTenderness": true,
+    "feverGU": true,
+    "dysuria": true,
+    "tachycardia": true,
+    "hypotension": true,
+    "lactateElevated": true,
+    "toxicAppearing": true,
+    "organDysfunction": true,
+    "complicatedUTIRisk": true
+  },
+  "expected": {
+    "diagnosis": "PYELONEPHRITIS",
+    "acceptableIds": [
+      "PYELONEPHRITIS"
+    ],
+    "differentialIds": [
+      "COMPLICATED_UTI",
+      "SEPTIC_SHOCK",
+      "SEPSIS",
+      "CHOLANGITIS"
+    ],
+    "investigations": [
+      "urine_culture",
+      "blood_cultures",
+      "serum_lactate",
+      "renal_function",
+      "ct_kub"
+    ],
+    "stewardship": {
+      "tier": "Watch",
+      "antibiotics": [
+        "Piperacillin-tazobactam IV"
+      ]
+    }
+  },
+  "regressionAssertions": [
+    "diagnosis == PYELONEPHRITIS",
+    "flankPain && costovertebralTenderness present",
+    "empiric antibiotic beta-lactam active against Gram-negative uropathogens (piperacillin-tazobactam) started within 1 hour",
+    "fluoroquinolone monotherapy NOT selected as empiric therapy",
+    "urinary tract imaging performed to exclude obstruction/abscess"
+  ],
+  "review": {
+    "status": "ai_drafted",
+    "clinicianApproved": false
+  }
+}
