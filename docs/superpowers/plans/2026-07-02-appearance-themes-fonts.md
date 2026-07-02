@@ -11,6 +11,7 @@
 ## Global Constraints
 
 - **Default unchanged:** `theme:"classic"` applies NO `data-theme` attribute; the existing `:root` and `body.dark` blocks remain the sole source of the default look. Never edit those two blocks.
+- **v2 skin precedence (CRITICAL):** the default-on "Advanced UI v2" skin (`home.js`) sets palette vars AND `--sans` directly on `body.ui-v2` / `body.ui-v2.dark` (specificity 0,1,1 / 0,2,1). A var set directly on `body` beats one inherited from `html`, so theme/font CSS MUST set vars on `body`, not `html`, to win: light → `html[data-theme="X"] body{…}` (0,1,2), dark → `html[data-theme="X"] body.dark{…}` (0,2,2), font → `html[data-font="Y"] body{--sans:…}` (0,1,2). This wins in BOTH classic and v2. All verification runs with v2 DEFAULT ON (do not disable it).
 - **Readability (WCAG AA):** every theme × {light,dark}: `--ink` on `--paper` and on `--panel` ≥ 4.5:1; `--slate`/`--slate-soft` on `--paper`/`--panel` ≥ 4.5:1; accent (`--teal`) and status foregrounds ≥ 3:1. High-Contrast theme ≥ 7:1 body text.
 - **Offline-safe fonts:** every `data-font` rule ends with a system fallback; webfonts (`atkinson`, `lexend`, `inter`, script) load only when selected, guarded so they inject once.
 - **Script font = headings only:** never body text, list items, table cells, inputs, or any numeric/dose text.
@@ -34,17 +35,17 @@
 
 ```css
 /* ── Appearance themes (data-theme); classic = no attribute. Override chrome+accent only; status colors inherited. ── */
-html[data-theme="blue"]{--ink:#13202e;--slate:#2c4257;--slate-soft:#556b80;--line:#d5dee7;--paper:#f5f7fa;--panel:#ffffff;--teal:#1560b0;--teal-soft:#e7f0fb;--amber:#8a5a0a}
+html[data-theme="blue"] body{--ink:#13202e;--slate:#2c4257;--slate-soft:#556b80;--line:#d5dee7;--paper:#f5f7fa;--panel:#ffffff;--teal:#1560b0;--teal-soft:#e7f0fb;--amber:#8a5a0a}
 html[data-theme="blue"] body.dark{--ink:#e7edf3;--slate:#9db2c6;--slate-soft:#6a8299;--line:#29394b;--paper:#0b1622;--panel:#12202f;--teal:#5aa9f0;--teal-soft:#0e2233;--amber:#f0c060}
-html[data-theme="ocean"]{--ink:#12242a;--slate:#274550;--slate-soft:#516b74;--line:#d2e0e2;--paper:#f4f8f8;--panel:#ffffff;--teal:#0a7d8c;--teal-soft:#e0f2f4;--amber:#8a5a0a}
+html[data-theme="ocean"] body{--ink:#12242a;--slate:#274550;--slate-soft:#516b74;--line:#d2e0e2;--paper:#f4f8f8;--panel:#ffffff;--teal:#0a7d8c;--teal-soft:#e0f2f4;--amber:#8a5a0a}
 html[data-theme="ocean"] body.dark{--ink:#e6f0f1;--slate:#98b6bc;--slate-soft:#6a8890;--line:#243a3f;--paper:#08191d;--panel:#0f2429;--teal:#3fc9d4;--teal-soft:#06262b;--amber:#f0c060}
-html[data-theme="tiranga"]{--ink:#1e2620;--slate:#2e4437;--slate-soft:#566b5e;--line:#d8e0d9;--paper:#fbf8f2;--panel:#ffffff;--teal:#1a7a41;--teal-soft:#e6f3ea;--amber:#b25e00}
+html[data-theme="tiranga"] body{--ink:#1e2620;--slate:#2e4437;--slate-soft:#566b5e;--line:#d8e0d9;--paper:#fbf8f2;--panel:#ffffff;--teal:#1a7a41;--teal-soft:#e6f3ea;--amber:#b25e00}
 html[data-theme="tiranga"] body.dark{--ink:#e9f0ea;--slate:#a4bcab;--slate-soft:#72897a;--line:#26362b;--paper:#0f140f;--panel:#16201a;--teal:#4fd07f;--teal-soft:#0a2214;--amber:#f0a53c}
-html[data-theme="amber"]{--ink:#241d12;--slate:#443725;--slate-soft:#6b5a3c;--line:#e5ddce;--paper:#faf7f1;--panel:#fffdf8;--teal:#a86412;--teal-soft:#f7edda;--amber:#8a5a0a}
-html[data-theme="amber"] body.dark{--ink:#f0e9db;--slate:#c9b79b;--slate-soft:#9a8straka;--line:#33291a;--paper:#14100a;--panel:#1e1810;--teal:#eab250;--teal-soft:#241a06;--amber:#f0c060}
-html[data-theme="slate"]{--ink:#1a2128;--slate:#2f3c48;--slate-soft:#586675;--line:#d7dbe0;--paper:#f5f6f7;--panel:#ffffff;--teal:#3d5166;--teal-soft:#e9edf1;--amber:#8a5a0a}
+html[data-theme="amber"] body{--ink:#241d12;--slate:#443725;--slate-soft:#6b5a3c;--line:#e5ddce;--paper:#faf7f1;--panel:#fffdf8;--teal:#a86412;--teal-soft:#f7edda;--amber:#8a5a0a}
+html[data-theme="amber"] body.dark{--ink:#f0e9db;--slate:#c9b79b;--slate-soft:#9a8a6c;--line:#33291a;--paper:#14100a;--panel:#1e1810;--teal:#eab250;--teal-soft:#241a06;--amber:#f0c060}
+html[data-theme="slate"] body{--ink:#1a2128;--slate:#2f3c48;--slate-soft:#586675;--line:#d7dbe0;--paper:#f5f6f7;--panel:#ffffff;--teal:#3d5166;--teal-soft:#e9edf1;--amber:#8a5a0a}
 html[data-theme="slate"] body.dark{--ink:#e8ecf0;--slate:#a4b2c0;--slate-soft:#75828f;--line:#2a333c;--paper:#0f1418;--panel:#171d23;--teal:#8fa6bd;--teal-soft:#1a2530;--amber:#f0c060}
-html[data-theme="contrast"]{--ink:#000000;--slate:#1a1a1a;--slate-soft:#333333;--line:#000000;--paper:#ffffff;--panel:#ffffff;--teal:#00463d;--teal-soft:#d9ecea;--amber:#7a4a00}
+html[data-theme="contrast"] body{--ink:#000000;--slate:#1a1a1a;--slate-soft:#333333;--line:#000000;--paper:#ffffff;--panel:#ffffff;--teal:#00463d;--teal-soft:#d9ecea;--amber:#7a4a00}
 html[data-theme="contrast"] body.dark{--ink:#ffffff;--slate:#e6e6e6;--slate-soft:#cccccc;--line:#ffffff;--paper:#000000;--panel:#0a0a0a;--teal:#4fe0cf;--teal-soft:#05302b;--amber:#ffcf5a}
 ```
 
@@ -75,12 +76,12 @@ git commit -m "feat(appearance): add theme palette CSS blocks (data-theme)"
 
 ```css
 /* ── Appearance fonts (data-font); plex = default (no rule). All end with system fallback. ── */
-html[data-font="system"]{--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
-html[data-font="arial"]{--sans:Arial,Helvetica,"Liberation Sans",sans-serif}
-html[data-font="serif"]{--sans:Georgia,"Times New Roman",Times,serif}
-html[data-font="atkinson"]{--sans:"Atkinson Hyperlegible",-apple-system,"Segoe UI",Roboto,sans-serif}
-html[data-font="lexend"]{--sans:"Lexend",-apple-system,"Segoe UI",Roboto,sans-serif}
-html[data-font="inter"]{--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif}
+html[data-font="system"] body{--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
+html[data-font="arial"] body{--sans:Arial,Helvetica,"Liberation Sans",sans-serif}
+html[data-font="serif"] body{--sans:Georgia,"Times New Roman",Times,serif}
+html[data-font="atkinson"] body{--sans:"Atkinson Hyperlegible",-apple-system,"Segoe UI",Roboto,sans-serif}
+html[data-font="lexend"] body{--sans:"Lexend",-apple-system,"Segoe UI",Roboto,sans-serif}
+html[data-font="inter"] body{--sans:"Inter",-apple-system,"Segoe UI",Roboto,sans-serif}
 /* Heading-only decorative script (never body/doses). Fixed safe selector set. */
 html[data-head="script"] .sb-head b,
 html[data-head="script"] .hv-sh-t,
