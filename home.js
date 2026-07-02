@@ -1243,6 +1243,21 @@
     if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
     else if (t.id === "smdSbSignIn") { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }
   }, false);
+  // Keep the sidebar account row in sync when Firebase auth resolves. Google sign-in
+  // via popup can complete asynchronously (onAuthStateChanged), not via the popup
+  // promise, so refresh the row on any auth change once the account state is written.
+  (function watchSbAuth() {
+    var tries = 0;
+    function attach() {
+      try {
+        var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
+        if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { setTimeout(function () { try { injectSbAccount(); } catch (e) {} }, 60); }); return true; }
+      } catch (e) {}
+      return false;
+    }
+    if (attach()) return;
+    var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
+  })();
   function start() {
     injectFont(); build(); applyD(); if (ds.autoFit) autoFitD(); watchReasonBtn(); wrapMyCases(); wrapSidebar(); try { enhanceAbout(); } catch (e) {}
     if (IS_V2) {
