@@ -191,6 +191,7 @@
       // live status grid
       '.icu-vitals{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}' +
       '@media (max-width:480px){.icu-vitals{grid-template-columns:repeat(3,1fr)}}' +
+      '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;box-shadow:var(--sh);min-width:0}' +
       '.icu-vc .vl{font:700 9.5px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       '.icu-vc .vv{font:800 19px/1.1 var(--mono);margin-top:3px}.icu-vc .vu{font:600 10px var(--font);color:var(--muted);margin-left:2px}' +
@@ -705,15 +706,26 @@
       return '<button class="icu-tab ' + (t.id === _active ? "on" : "") + '" data-icu-act="tab:' + t.id + '"><span class="ti">' + t.ic + '</span><span class="tl">' + t.label + "</span></button>";
     }).join("") + "</div>";
   }
+  // one-line vitals summary for the collapsed status on non-overview tabs
+  function liveSummaryLine() {
+    var lv = latestVitals(), L = _raw.labs.recent || {}, mp = curMap();
+    function v(x, u) { return (x == null || x === "") ? "—" : x + (u || ""); }
+    return '❤️ Vitals &amp; status' +
+      '<span class="vs-k">HR</span> ' + v(lv.hr) + '<span class="vs-k">MAP</span> ' + v(mp) +
+      '<span class="vs-k">SpO₂</span> ' + v(lv.spo2, "%") + '<span class="vs-k">K⁺</span> ' + v(L.k);
+  }
   function renderBody() {
-    var tab = "";
+    var tab = "", isOv = _active === "overview";
     try { tab = RENDER[_active] ? RENDER[_active]() : ""; } catch (e) { tab = '<div class="icu-card"><p>Tab error.</p></div>'; }
+    // Overview: full vitals grid. Other tabs: collapse it behind a compact summary
+    // so the tab's own content is immediately visible (was buried below the grid).
+    var status = isOv ? renderLiveStatus()
+      : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>';
     return '<div class="icu-scroll"><div class="icu-wrap">' +
-      renderLiveStatus() +
+      status +
       '<button class="icu-adddata" data-icu-act="adddata">＋ Enter / update patient data</button>' +
-      (_active === "overview" ? renderAIImport() : "") +
-      '<div class="icu-sec-lbl">' + (TABS.filter(function (t) { return t.id === _active; })[0] || {}).ic + " " + (TABS.filter(function (t) { return t.id === _active; })[0] || {}).label + '</div>' +
-      tab +
+      (isOv ? renderAIImport() : "") +
+      tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
   }
   function paint() {
