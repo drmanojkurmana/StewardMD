@@ -277,6 +277,8 @@
       '.icu-elyte-alerts{font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}' +
       '.icu-elyte-pill{font:700 11px var(--font);border:1.5px solid var(--muted);border-radius:999px;padding:2px 9px}' +
       '.icu-src{font:600 11px var(--font);color:var(--muted);margin:8px 2px 0}' +
+      '.icu-src-btns{display:flex;flex-direction:column;gap:8px;margin:0 0 12px}' +
+      '.icu-srcbtn{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink)}.icu-srcbtn.ward{border-color:var(--teal,#0e6e63)}.icu-srcbtn .i{font-size:20px;flex:0 0 auto}.icu-srcbtn .l{font:800 14px var(--font);flex:1}.icu-srcbtn .d{font:600 11px var(--font);color:var(--muted);flex-basis:100%;margin-left:32px}.icu-srcbtn{flex-wrap:wrap}' +
       '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:16px}' +
       '.icu-imp-box{background:var(--panel);border-radius:14px;padding:22px 24px;text-align:center;color:var(--ink);font:600 14px var(--font);max-width:320px}' +
       '.icu-imp-spin{font-size:26px;animation:icuspin 1s linear infinite;margin-bottom:8px}@keyframes icuspin{to{transform:rotate(360deg)}}' +
@@ -383,11 +385,15 @@
       { d: "ventilator", ic: "🫁", t: "Ventilator screen", s: "Mode · FiO₂ · PEEP · TV · Plateau" },
       { d: "monitor", ic: "❤️", t: "Monitor / vitals", s: "HR · BP · SpO₂ · Temp" }
     ];
-    return '<div class="icu-sec-lbl">📷 Import report <span style="font-weight:600;text-transform:none;letter-spacing:0">· photo or PDF → values you confirm</span></div>' +
-      '<button class="icu-adddata" style="background:var(--panel);color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" data-icu-act="import:labs">📷 Import a report (photo / PDF)</button>' +
+    return '<div class="icu-sec-lbl">🔄 Bring in patient data <span style="font-weight:600;text-transform:none;letter-spacing:0">· auto-fills fields you confirm</span></div>' +
+      '<div class="icu-src-btns">' +
+        '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">🏥</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
+        '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
+        '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>' +
+      '</div>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
-        return '<button class="icu-ai" data-icu-act="import:' + c.d + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
-          '<span class="man" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '">✎ Enter manually</span></button>';
+        return '<button class="icu-ai" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
+          '<span class="man">✎ Enter manually</span></button>';
       }).join("") + "</div>";
   }
 
@@ -448,11 +454,28 @@
     hr: "Heart rate", sbp: "Systolic BP", dbp: "Diastolic BP", map: "MAP", rr: "Resp rate", spo2: "SpO₂", temp: "Temp", cvp: "CVP", etco2: "EtCO₂",
     ph: "pH", paco2: "PaCO₂", pao2: "PaO₂", be: "Base excess", fio2: "FiO₂", mode: "Mode", peep: "PEEP", tv: "Tidal volume", peak: "Peak", plateau: "Plateau" };
   var IMPORT_GROUP = { labs: "mapped", monitor: "vitals", abg: "abg", ventilator: "ventilator" };
-  function importFileInput(kind) {
-    var inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*,application/pdf"; inp.setAttribute("capture", "environment"); inp.style.display = "none";
+  function importFileInput(kind, method) {
+    var inp = document.createElement("input"); inp.type = "file";
+    inp.accept = (method === "camera") ? "image/*" : "image/*,application/pdf";
+    if (method === "camera") inp.setAttribute("capture", "environment");   // rear camera on mobile
+    inp.style.display = "none";
     document.body.appendChild(inp);
     inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (f) handleImportFile(kind, f); inp.remove(); });
     inp.click();
+  }
+  // Camera / Upload → first choose WHAT the report is, then open the picker.
+  function importMethod(method) {
+    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    var kinds = [["labs", "🧪 Laboratory report", "CBC · LFT · RFT · Electrolytes"], ["abg", "🩸 ABG report", "pH · PaCO₂ · PaO₂ · HCO₃"], ["ventilator", "🫁 Ventilator screen", "Mode · FiO₂ · PEEP · TV"], ["monitor", "❤️ Monitor / vitals", "HR · BP · SpO₂ · Temp"]];
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">' + (method === "camera" ? "📷 Photograph — what report?" : "📄 Upload — what report?") + '<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+      '<div style="padding:12px 16px">' + kinds.map(function (k) { return '<button class="icu-btn" style="display:block;width:100%;text-align:left;margin:0 0 8px" data-impkind="' + k[0] + '"><b>' + k[1] + '</b><div style="font:600 11px var(--font);color:var(--muted)">' + k[2] + '</div></button>'; }).join("") + '</div></div>';
+    el.querySelector("#icuImpX").addEventListener("click", function () { el.remove(); });
+    el.querySelectorAll("[data-impkind]").forEach(function (b) { b.addEventListener("click", function () { var kind = b.getAttribute("data-impkind"); el.remove(); importFileInput(kind, method); }); });
+  }
+  function wardSyncFetch() {
+    if (typeof window.openGHIS === "function") { try { openGHIS(); } catch (e) {} }
+    else if (window.SMD_setGhis) { try { SMD_setGhis(true); setTimeout(function () { try { window.openGHIS && openGHIS(); } catch (e) {} }, 400); } catch (e) {} }
+    else if (window.toast) toast("Ward Sync is loading — try again in a moment.");
   }
   function importProgress(msg, err) {
     var el = document.getElementById("icuImpOv");
@@ -495,7 +518,9 @@
     SMD_AI.vision(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
       importDone();
       if (!r || r.error) { importProgress(r && r.error === "ai-off" ? "AI reader is off — enable it in Settings." : "Could not read the report. Enter values manually.", true); return; }
-      var fields = {}; Object.keys(r).forEach(function (k) { if (k !== "mode" && r[k] != null && !isNaN(parseFloat(r[k]))) fields[k] = parseFloat(r[k]); else if (k === "mode" && r[k]) fields[k] = r[k]; });
+      // the vision endpoint returns { kind, fields:{...} } — read fields, not the wrapper.
+      var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
+      var fields = {}; Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
       openImportReview(kind, fields, dataUrl);
     }).catch(function () { importDone(); importProgress("Could not reach the AI reader. Enter values manually.", true); });
   }
@@ -1323,6 +1348,8 @@
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
       case "import": startImport(arg); break;
+      case "wardfetch": wardSyncFetch(); break;
+      case "impmethod": importMethod(arg); break;
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
@@ -1340,7 +1367,13 @@
       case "closeform": closeForm(); break;
       case "snapshot": openSnapshot(); break;
       case "launch":
-        if (arg === "elyte") launch(function () { window.ELYTE && ELYTE.open(); }, "eceOverlay");
+        if (arg === "elyte") launch(function () {
+          if (!window.ELYTE) return;
+          var p = _raw.patient || {}, L = _raw.labs.recent || {};
+          var pt = {}; if (p.weightKg != null) pt.weight = p.weightKg; if (p.age != null) pt.age = p.age; if (p.sex) pt.sex = String(p.sex).toLowerCase() === "f" ? "f" : "m"; if (p.diagnosis) pt.dx = p.diagnosis;
+          var labs = {}; ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "alb", "egfr", "urea"].forEach(function (k) { if (L[k] != null && L[k] !== "") labs[k] = L[k]; });
+          ELYTE.open((Object.keys(labs).length || Object.keys(pt).length) ? { labs: labs, pt: pt } : undefined);
+        }, "eceOverlay");
         else if (arg === "inf") launch(function () { window.INF && INF.open(); }, "infOverlay");
         else if (arg === "protocols") launch(function () { window.INF && (INF.openProtocols ? INF.openProtocols() : INF.open()); }, "infOverlay");
         break;
