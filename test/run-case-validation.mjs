@@ -72,7 +72,7 @@ try {
       var c=${JSON.stringify(c)};
       var t=Date.now();
       var aa=window.SMD_REASON.assess(c.findings||{});
-      var top=[].concat(aa.infectious||[],aa.nonInfectious||[]).sort(function(x,y){return (y.confidence||0)-(x.confidence||0);});
+      var top=[].concat(aa.infectious||[],aa.nonInfectious||[]).sort(function(x,y){return ((y.rank!=null?y.rank:y.confidence||0)-(x.rank!=null?x.rank:x.confidence||0))||((y.confidence||0)-(x.confidence||0));});
       var t3=top.slice(0,3);
       var ms=Date.now()-t;
       function idOK(cand){ var acc=(c.expected.acceptableIds||[]).map(function(s){return String(s).toLowerCase();}); return acc.indexOf(String(cand.id).toLowerCase())>=0 || acc.some(function(a){return String(cand.name||'').toLowerCase().indexOf(a)>=0;}); }

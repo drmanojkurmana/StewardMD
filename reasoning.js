@@ -633,6 +633,39 @@
     Object.keys(VALID).forEach(function (k) { IDF[k] = Math.log((NSYN + 1) / ((df[k] || 0) + 1)) + 0.15; });
     return IDF;
   }
+
+  /* ---- GLOBAL specificity (ranking v2, smd_rank_v2) --------------------------
+   * IDF computed across EVERY diagnosable disease (infectious syndromes AND
+   * non-infectious), from each disease's declarative KB finding-map (find) +
+   * associated keys (assoc). A finding present in few diseases is disease-
+   * defining; one present in many (fever, tachycardia) is not. Used ONLY to
+   * ORDER near-tied candidates — never changes a candidate's score, the infection
+   * gate, or the antibiotic decision. Falls back to a flat 0.5 (no effect) when
+   * KB_CORE is absent, so the classic score-order is preserved. ---- */
+  var GIDF = null;
+  function globalIDF() {
+    if (GIDF) return GIDF;
+    GIDF = {};
+    var D = (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases : {};
+    var ids = Object.keys(D), n = ids.length || 1, df = {};
+    ids.forEach(function (id) {
+      var d = D[id], keys = {};
+      if (d && d.find) Object.keys(d.find).forEach(function (k) { keys[k] = 1; });
+      if (d && d.assoc) d.assoc.forEach(function (k) { keys[k] = 1; });
+      Object.keys(keys).forEach(function (k) { df[k] = (df[k] || 0) + 1; });
+    });
+    Object.keys(df).forEach(function (k) { GIDF[k] = Math.log((n + 1) / (df[k] + 1)) + 0.15; });
+    return GIDF;
+  }
+  // rankSpec = the single most disease-defining finding a candidate matched.
+  // (max, not sum — so a generalist matching many generic findings is NOT
+  // rewarded over a specific diagnosis matching one pathognomonic finding.)
+  function rankSpec(supporting) {
+    if (!rankV2() || !supporting || !supporting.length) return 0;
+    var g = globalIDF(), m = 0;
+    for (var i = 0; i < supporting.length; i++) { var v = g[supporting[i]]; if (v == null) v = 0.5; if (v > m) m = v; }
+    return m;
+  }
   function assocKeys(s) {
     var _kbc = (window.KB_CORE && KB_CORE.diseases) ? KB_CORE.diseases[s.id] : null;
     if (_kbc && _kbc.assoc) return _kbc.assoc;   // KB is the runtime source of truth (P3)
@@ -783,7 +816,7 @@
     var red = (s.decision && (s.decision.status === "red")) ? [s.decision.label || "Time-critical infection"] : [];
     var inv = (s.investigations || []).map(function (i) { return i.test ? (i.test) : i; });
     return { id: s.id, name: s.name, system: s.system || "Infectious", inf: true, matched: matched,
-      score: sc, supporting: present, contra: contra, missing: missing, reason: reason, red: red, inv: inv, _syn: s };
+      score: sc, rankScore: sc + rankSpec(present), supporting: present, contra: contra, missing: missing, reason: reason, red: red, inv: inv, _syn: s };
   }
 
   function scoreNI(d) {
@@ -800,7 +833,7 @@
     for (var k2 in find) { if (!S.f[k2] && find[k2] >= 12) missing.push(k2); }
     missing = missing.sort(function (a, b) { return find[b] - find[a]; }).slice(0, 5);
     return { id: d.id, name: d.name, system: d.system, inf: false, matched: false,
-      score: sc, supporting: sup.sort(function (a, b) { return find[b] - find[a]; }),
+      score: sc, rankScore: sc + rankSpec(sup), supporting: sup.sort(function (a, b) { return find[b] - find[a]; }),
       contra: contra.sort(function (a, b) { return find[a] - find[b]; }),
       missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], tools: d.tools || [] };
   }
@@ -816,15 +849,22 @@
     // Phase 4: expanded Harrison diseases (flag-gated; both lists EMPTY when off → no change)
     (typeof _expInf !== "undefined" ? _expInf : []).forEach(function (d) { var r = scoreExpInf(d); if (r) inf.push(r); });
     (typeof _expNi !== "undefined" ? _expNi : []).forEach(function (d) { var r = scoreNI(d); if (r) ni.push(r); });
-    var by = function (a, b) { return b.score - a.score || a.name.localeCompare(b.name); };
+    // Rank by specificity-adjusted score (smd_rank_v2). rankScore === score when
+    // the flag is off (rankSpec returns 0) or KB_CORE is absent, so this reduces
+    // EXACTLY to the classic score-then-name ordering. Score is untouched.
+    var rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+    var by = function (a, b) { return (rk(b) - rk(a)) || (b.score - a.score) || a.name.localeCompare(b.name); };
     inf.sort(by); ni.sort(by);
     return { inf: inf, ni: ni };
   }
 
   /* Infection gate — keyed off whether infection LEADS overall */
   function gate(d) {
-    var topInf = d.inf.length ? d.inf[0].score : 0;
-    var topNi = d.ni.length ? d.ni[0].score : 0;
+    // MAX score across each column — order-independent, so the specificity
+    // re-rank (which can change which candidate sits at [0]) leaves the infection
+    // gate + antibiotic decision byte-identical to the classic ordering.
+    var topInf = d.inf.reduce(function (m, x) { return x.score > m ? x.score : m; }, 0);
+    var topNi = d.ni.reduce(function (m, x) { return x.score > m ? x.score : m; }, 0);
     var matchedInf = d.inf.some(function (x) { return x.matched; });
     var cls;
     if (topInf >= 80 && topInf >= topNi && matchedInf) cls = "very_likely";
@@ -2959,6 +2999,10 @@
    * the classic path instantly — no redeploy.
    * ---------------------------------------------------------------------- */
   function reasonV2() { try { var v = localStorage.getItem("smd_reason_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
+  // smd_rank_v2 — specificity-aware differential ORDERING (default ON). When off,
+  // rankScore collapses to score and the differential reverts to the classic
+  // score-then-name order instantly. Independent of reasonV2 (ordering, not UI).
+  function rankV2() { try { var v = localStorage.getItem("smd_rank_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function mimicsFor(id, inf) {
     var e = window.KB_ENRICHMENT && KB_ENRICHMENT.byId && KB_ENRICHMENT.byId[id];
     if (!e) return [];
@@ -2978,7 +3022,7 @@
       try {
         var d = differential(), g = gate(d), info = GATEINFO[g.cls] || {};
         function mapCand(r) {
-          return { id: r.id, name: r.name, system: r.system, confidence: r.score, matched: !!r.matched,
+          return { id: r.id, name: r.name, system: r.system, confidence: r.score, rank: (r.rankScore != null ? r.rankScore : r.score), matched: !!r.matched,
             supporting: r.supporting || [], contradictory: r.contra || [], missing: r.missing || [],
             reason: r.reason || "", redFlags: r.red || [], investigations: r.inv || [],
             mimics: mimicsFor(r.id, r.inf), treatmentRef: r.id, delta: (S.prev && S.prev[r.id] != null) ? r.score - S.prev[r.id] : null };
@@ -3009,7 +3053,10 @@
     },
     mimicsFor: mimicsFor,
     flag: reasonV2,
-    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} }
+    setFlag: function (on) { try { localStorage.setItem("smd_reason_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { renderPickerOnly(); recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} try { smdProgressiveFindings(); } catch (e) {} },
+    // specificity-aware ranking flag (smd_rank_v2, default ON) — instantly reversible.
+    rankFlag: rankV2,
+    setRankFlag: function (on) { try { localStorage.setItem("smd_rank_v2", on ? "1" : "0"); } catch (e) {} if (root && root.classList.contains("on")) { try { recompute(); } catch (e) {} } try { smdRenderLive(); } catch (e) {} }
   };
 
   /* ====================================================================== *
