@@ -109,16 +109,19 @@
   // When a SIGNED-IN user OPENS a shared case, keep a copy in THEIR cloud account
   // (users/{uid}/cases/{code}) so it persists in My Cases, keyed by the unique code.
   // Stored html is sanitised; merge:true avoids clobbering an existing entry.
-  function autosaveOpened(db, code, rec){
-    var u = null; try { u = window.firebase && firebase.auth && firebase.auth().currentUser; } catch (e) {}
-    if (!u || !db) return;
-    try {
-      var c = { id: code, name: rec.title || "Shared case", syndrome: rec.title || "",
-                notes: "Opened shared case · " + code, savedAt: Date.now(), savedAtStr: new Date().toLocaleString(),
-                shared: true, openedShared: true, sharedCode: code, sharedByName: rec.ownerName || "",
-                text: rec.text || "", html: sanitizeHTML(rec.html || "") };
-      db.collection("users").doc(u.uid).collection("cases").doc(code).set(c, { merge: true });
-    } catch (e) {}
+  function autosaveOpened(dbIgnored, code, rec){
+    // Resolve auth THROUGH ensureReady so a just-loaded Firebase (currentUser
+    // still settling) doesn't cause us to silently skip the My-Cases copy.
+    ensureReady(function (db, u) {
+      if (!u || !db) return;
+      try {
+        var c = { id: code, name: rec.title || "Shared case", syndrome: rec.title || "",
+                  notes: "Opened shared case · " + code, savedAt: Date.now(), savedAtStr: new Date().toLocaleString(),
+                  shared: true, openedShared: true, sharedCode: code, sharedByName: rec.ownerName || "",
+                  text: rec.text || "", html: sanitizeHTML(rec.html || "") };
+        db.collection("users").doc(u.uid).collection("cases").doc(code).set(c, { merge: true });
+      } catch (e) {}
+    });
   }
   function doShare(snap, db, user){
     if (sharesThisMonth() >= MONTHLY_LIMIT) { toast("Monthly share limit reached (" + MONTHLY_LIMIT + "/mo). Higher limits are coming with subscription plans."); return; }
@@ -215,8 +218,10 @@
   function showViewer(rec, code){
     var when = "";
     try { when = rec.createdAt ? new Date(rec.createdAt).toLocaleString() : ""; } catch(e){}
+    // Public shared docs deliberately DO NOT store the owner's email (PII); show
+    // display name only. (Enforces the "no email in public shares" invariant here too.)
     var by = "";
-    if (rec.ownerName || rec.ownerEmail) by = "Shared by " + esc(rec.ownerName || "") + (rec.ownerEmail ? " (" + esc(rec.ownerEmail) + ")" : "");
+    if (rec.ownerName) by = "Shared by " + esc(rec.ownerName);
     show('<div class="cs-head"><h3>'+esc(rec.title||"Shared case")+'</h3><button class="cs-x" data-cs-x>×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">'+esc(code)+(when?" · shared "+esc(when):"")+'</div>'
        + (by?'<div class="cs-by" style="text-align:center;font:600 12.5px var(--f);color:var(--ink);margin:-8px 0 14px">'+by+'</div>':'')

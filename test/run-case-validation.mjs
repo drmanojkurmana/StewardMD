@@ -38,7 +38,7 @@ const cdir = join(ROOT, "kb", "validation", "cases");
 if (existsSync(cdir)) for (const f of readdirSync(cdir).filter((x) => x.endsWith(".json"))) cases.push(JSON.parse(readFileSync(join(cdir, f), "utf8")));
 if (!cases.length) { console.error("no validation cases found"); process.exit(2); }
 
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${OUTDIR}/cases-prof`,
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${OUTDIR}/cases-prof`,
   "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio"], { stdio: "ignore" });
 let msgId = 1; const pending = new Map(); let ws, sessionId;
 const call = (m, p) => { const i = msgId++; return new Promise((r) => { pending.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId })); }); };

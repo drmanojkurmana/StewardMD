@@ -25,7 +25,7 @@ const SHOTS = OUTDIR + "/shots";
 mkdirSync(SHOTS, { recursive: true });
 const userDir = OUTDIR + "/chrome-prof";
 
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${userDir}`,
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${CDP}`, `--user-data-dir=${userDir}`,
   "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio", "--window-size=1280,900"], { stdio: "ignore" });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId;

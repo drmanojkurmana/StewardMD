@@ -21,7 +21,7 @@ import { dirname, join } from "node:path";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const BASE = process.env.BASE || "http://localhost:8799/";
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+const CHROME = process.env.CHROME_BIN || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 const PORT = 9352;
 const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/maineng-chrome-prof";
 const { vignettes } = JSON.parse(readFileSync(join(HERE, "vignettes.json"), "utf8"));
@@ -36,7 +36,7 @@ async function ensureServer() {
 }
 await ensureServer();
 
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
   "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio"], { stdio: "ignore" });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId;

@@ -19,7 +19,7 @@ const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/M
 const PORT = Number(process.env.CDP_PORT || 9361);
 const userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/smoke-chrome-prof";
 
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${userDir}`,
   "--no-first-run", "--no-default-browser-check", "--disable-gpu", "--mute-audio"], { stdio: "ignore" });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId;
