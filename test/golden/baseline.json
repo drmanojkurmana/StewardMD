@@ -10,10 +10,10 @@
     "meningitis": {
       "inf": [
         "MENINGITIS:100",
+        "VIRAL_MENINGITIS:62",
         "BRAIN_ABSCESS:62",
         "CNS_TB:62",
         "ENCEPHALITIS:62",
-        "VIRAL_MENINGITIS:62",
         "CHIKUNGUNYA:41"
       ],
       "ni": [
@@ -92,8 +92,8 @@
         "sarcoidosis:40",
         "copd_exac_ni:30",
         "pleural_effusion:28",
-        "ild:26",
-        "svc_obstruction:26"
+        "svc_obstruction:26",
+        "ild:26"
       ],
       "nInf": 6,
       "nNi": 36,
@@ -209,7 +209,7 @@
         "SBP:52",
         "DENGUE:35",
         "FEBRILE_NEUTROPENIA:35",
-        "MENINGITIS:29"
+        "PROSTATITIS:29"
       ],
       "ni": [
         "thyroid_storm:58",
@@ -269,11 +269,11 @@
     },
     "cholangitis": {
       "inf": [
-        "CHOLANGITIS:62",
         "CHOLECYSTITIS:62",
-        "VIRAL_HEPATITIS:62",
         "AMOEBIC_LIVER_ABSCESS:62",
         "LIVER_ABSCESS:62",
+        "CHOLANGITIS:62",
+        "VIRAL_HEPATITIS:62",
         "CHIKUNGUNYA:48"
       ],
       "ni": [
@@ -286,18 +286,18 @@
       ],
       "nInf": 8,
       "nNi": 29,
-      "leadInf": "CHOLANGITIS",
-      "leadInfReason": "Right upper quadrant pain, fever, and jaundice (Charcot's triad) are consistent with acute cholangitis, a condition that can progress rapidly to septic shock from biliary obstruction. Empiric broad-spectrum antibiotics must be started immediately, with urgent biliary drainage (ERCP or percutaneous) as the definitive source control measure — antibiotics alone are insufficient if obstruction is not relieved.",
+      "leadInf": "CHOLECYSTITIS",
+      "leadInfReason": "Right upper quadrant pain with a positive Murphy's sign and fever, in the absence of jaundice, is consistent with acute cholecystitis (typically calculous). Antibiotics should be started alongside surgical consultation for cholecystectomy (early laparoscopic cholecystectomy is the definitive treatment in most cases) — antibiotics are an adjunct to, not a substitute for, source control.",
       "leadNi": "toxic_hepatitis",
       "leadNiReason": "Jaundice and transaminitis after a hepatotoxic drug/overdose, without sepsis, suggests toxic hepatitis.",
       "leadInfFirstLine": [
         {
-          "drug": "Piperacillin-tazobactam",
-          "dose": "4.5 g",
+          "drug": "Ceftriaxone + Metronidazole",
+          "dose": "Ceftriaxone 2 g IV q24h + Metronidazole 500 mg IV q8h",
           "route": "IV",
-          "frequency": "every 6-8 hours",
-          "duration": "4-7 days after adequate biliary drainage",
-          "why": "Provides reliable coverage of gram-negative enteric organisms and anaerobes, the dominant pathogens in cholangitis, and is appropriate first-line per Tokyo Guidelines for moderate-severe disease."
+          "frequency": "as above",
+          "duration": "Until cholecystectomy, or 4-7 days if surgery delayed/not performed",
+          "why": "Covers the typical gram-negative and anaerobic biliary pathogens; definitive treatment is cholecystectomy, with antibiotics primarily bridging to surgery or covering milder cases managed non-operatively."
         }
       ],
       "leadInfPathogens": {
@@ -307,18 +307,15 @@
         ],
         "likely": [
           "Enterococcus species",
-          "Enterobacter species"
+          "Anaerobes (Bacteroides) — more relevant in severe/gangrenous cholecystitis"
         ],
-        "possible": [
-          "Anaerobes (Bacteroides species) — particularly with prior biliary instrumentation or surgery"
-        ],
-        "why": "Cholangitis pathogens reflect ascending enteric flora from the duodenum into an obstructed biliary tree, dominated by gram-negative Enterobacteriaceae, with anaerobes and enterococci becoming more relevant with prior instrumentation (ERCP, stents) or recurrent disease."
+        "possible": [],
+        "why": "Acute cholecystitis pathogens reflect the same enteric flora seen in other biliary tract infections, dominated by gram-negative Enterobacteriaceae, with anaerobes becoming more relevant in more severe, necrotizing presentations."
       },
       "leadInfStewardship": [
         "fever",
         "hypotension",
-        "alteredSensorium",
-        "jaundice"
+        "nauseaVomiting"
       ]
     },
     "decomp_cirrhosis": {
@@ -386,8 +383,8 @@
         "dka:100",
         "hhs:48",
         "pancreatitis:40",
-        "bowel_obstruction:36",
         "hypercalcemia:36",
+        "bowel_obstruction:36",
         "hypoglycemia:20"
       ],
       "nInf": 5,
@@ -449,8 +446,8 @@
         "pe:100",
         "dvt:74",
         "pneumothorax:62",
-        "tamponade:48",
         "pleural_effusion:48",
+        "tamponade:48",
         "heart_failure:40"
       ],
       "nInf": 2,
