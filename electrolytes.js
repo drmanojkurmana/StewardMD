@@ -234,7 +234,18 @@
 
   function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
 
-  function open(){
+  // open() optionally PREFILLS from a patient context (e.g. ICU dashboard). prefill:
+  // { labs:{na,k,... in SI/mmol-L}, pt:{weight,age,sex,...} } — values are stored in the
+  // engine's canonical units so the SI display matches the source. Deterministic engine
+  // logic is unchanged; this only pre-populates the input fields.
+  function open(prefill){
+    if(prefill && (prefill.labs || prefill.pt)){
+      S.units = "si";
+      if(prefill.labs) Object.keys(prefill.labs).forEach(function(k){ var v=prefill.labs[k]; if(v!=null&&v!==""&&!isNaN(parseFloat(v))) S.labs[k]=toCanonical(k, parseFloat(v), "si"); });
+      if(prefill.pt) Object.keys(prefill.pt).forEach(function(k){ if(prefill.pt[k]!=null&&prefill.pt[k]!=="") S.pt[k]=prefill.pt[k]; });
+      S.analyzed=false; S.results=null;
+      if(root){ root.innerHTML=view(); bind(); }
+    }
     if(root){ root.classList.add("on"); document.body.style.overflow="hidden"; return; }
     injectCSS();
     root=document.createElement("div"); root.className="ece"; root.id="eceOverlay";
