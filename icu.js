@@ -214,7 +214,19 @@
       if (STATE.labs.recent[key] == null || Number(STATE.labs.recent[key]) !== v) hadNew = true;
       labVals[key] = v; applied[key] = { source: source, ts: ts };
     });
+    // pre-keyed labs (e.g. from OCR vision, which already returns ICU keys) — same
+    // conflict-safety as name-mapped labs.
+    if (bundle.mapped) Object.keys(bundle.mapped).forEach(function (key) {
+      var v = parseFloat(bundle.mapped[key]); if (isNaN(v)) return;
+      var prevSrc = STATE.src[key];
+      if (prevSrc && prevSrc.source === "Manual" && STATE.labs.recent[key] != null && Number(STATE.labs.recent[key]) !== v) {
+        conflicts.push({ key: key, label: key, ward: v, manual: STATE.labs.recent[key], wardTs: ts, manualTs: prevSrc.ts, source: source }); return;
+      }
+      if (STATE.labs.recent[key] == null || Number(STATE.labs.recent[key]) !== v) hadNew = true;
+      labVals[key] = v; applied[key] = { source: source, ts: ts };
+    });
     if (Object.keys(labVals).length) ingestLabs(labVals);
+    if (bundle.ventilator && Object.keys(bundle.ventilator).length) { ingestVentilator(bundle.ventilator); STATE.src.ventilator = { source: source, ts: ts }; }
     Object.keys(applied).forEach(function (k) { STATE.src[k] = applied[k]; });
     if (bundle.vitals && Object.keys(bundle.vitals).length) { ingestMonitor(bundle.vitals); ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "uop", "lactate"].forEach(function (k) { if (bundle.vitals[k] != null) STATE.src[k] = { source: source, ts: ts }; }); }
     if (bundle.abg && Object.keys(bundle.abg).length) { Object.keys(bundle.abg).forEach(function (k) { STATE.abg[k] = bundle.abg[k]; }); STATE.abg.ts = ts; STATE.src.abg = { source: source, ts: ts }; }
@@ -265,6 +277,18 @@
       '.icu-elyte-alerts{font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}' +
       '.icu-elyte-pill{font:700 11px var(--font);border:1.5px solid var(--muted);border-radius:999px;padding:2px 9px}' +
       '.icu-src{font:600 11px var(--font);color:var(--muted);margin:8px 2px 0}' +
+      '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:16px}' +
+      '.icu-imp-box{background:var(--panel);border-radius:14px;padding:22px 24px;text-align:center;color:var(--ink);font:600 14px var(--font);max-width:320px}' +
+      '.icu-imp-spin{font-size:26px;animation:icuspin 1s linear infinite;margin-bottom:8px}@keyframes icuspin{to{transform:rotate(360deg)}}' +
+      '.icu-imp-err{color:var(--danger);font:600 13.5px/1.5 var(--font);margin-bottom:12px}' +
+      '.icu-imp-review{background:var(--panel);border-radius:16px;width:100%;max-width:440px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden;color:var(--ink)}' +
+      '.icu-imp-hd{display:flex;align-items:center;font:800 16px var(--font);padding:14px 16px;border-bottom:1px solid var(--line)}.icu-imp-x{margin-left:auto;background:var(--panel2);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;font-size:15px;color:var(--ink)}' +
+      '.icu-imp-note{font:600 12px/1.5 var(--font);color:var(--muted);padding:10px 16px}' +
+      '.icu-imp-thumb{max-height:120px;max-width:calc(100% - 32px);margin:0 16px;border-radius:8px;border:1px solid var(--line);object-fit:contain}' +
+      '.icu-imp-rows{flex:1;overflow-y:auto;padding:8px 16px}' +
+      '.icu-imp-row{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:7px 0;font:600 13.5px var(--font)}.icu-imp-k{flex:0 0 34%}.icu-imp-row input{flex:1;min-width:0;background:var(--panel2);border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:8px 10px;font:600 14px var(--font)}' +
+      '.icu-imp-dup,.icu-imp-diff{flex-basis:100%;margin-left:34%;font:600 10.5px var(--font)}.icu-imp-dup{color:var(--ok)}.icu-imp-diff{color:var(--warn)}' +
+      '.icu-imp-actions{display:flex;gap:10px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}.icu-imp-actions .icu-btn{flex:1}.icu-imp-go{background:var(--teal,#0e6e63)!important;color:#fff!important;border-color:var(--teal,#0e6e63)!important}' +
       '.icu-vitals-c{margin:0 0 2px}.icu-vitals-c>summary{list-style:none;cursor:pointer;font:700 12px var(--font);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 13px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.icu-vitals-c>summary::-webkit-details-marker{display:none}.icu-vitals-c>summary:after{content:"▸";margin-left:auto;color:var(--muted)}.icu-vitals-c[open]>summary:after{content:"▾"}.icu-vitals-c[open]>summary{margin-bottom:8px}.icu-vitals-c .vs-k{color:var(--muted);font-weight:600}' +
       '.icu-vc{background:var(--panel);border:1px solid var(--border);border-radius:var(--r-sm);padding:9px 10px;box-shadow:var(--sh);min-width:0}' +
       '.icu-vc .vl{font:700 9.5px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
@@ -354,17 +378,157 @@
   /* --------------------------------------------------------- AI import panel */
   function renderAIImport() {
     var cards = [
-      { d: "monitor", ic: "📷", t: "ICU Monitor", s: "HR · BP · MAP · RR · SpO₂ · Temp · EtCO₂ · CVP" },
-      { d: "labs", ic: "📷", t: "Laboratory Reports", s: "CBC · LFT · RFT · Electrolytes · ABG · Cultures" },
-      { d: "ventilator", ic: "📷", t: "Ventilator Screen", s: "Mode · FiO₂ · PEEP · TV · Plateau · Compliance" },
-      { d: "flowsheet", ic: "📷", t: "ICU Flow Sheet", s: "Intake · Output · Urine · Drains · Infusions" }
+      { d: "labs", ic: "🧪", t: "Laboratory report", s: "CBC · LFT · RFT · Electrolytes" },
+      { d: "abg", ic: "🩸", t: "ABG report", s: "pH · PaCO₂ · PaO₂ · HCO₃" },
+      { d: "ventilator", ic: "🫁", t: "Ventilator screen", s: "Mode · FiO₂ · PEEP · TV · Plateau" },
+      { d: "monitor", ic: "❤️", t: "Monitor / vitals", s: "HR · BP · SpO₂ · Temp" }
     ];
-    return '<div class="icu-sec-lbl">📷 AI Patient Import <span style="font-weight:600;text-transform:none;letter-spacing:0">· future AI-assisted capture</span></div>' +
+    return '<div class="icu-sec-lbl">📷 Import report <span style="font-weight:600;text-transform:none;letter-spacing:0">· photo or PDF → values you confirm</span></div>' +
+      '<button class="icu-adddata" style="background:var(--panel);color:var(--teal,#0e6e63);border:1.5px solid var(--teal,#0e6e63)" data-icu-act="import:labs">📷 Import a report (photo / PDF)</button>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
-        return '<button class="icu-ai" data-icu-act="ai:' + c.d + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
-          '<span class="icu-badge">🚧 AI Ready · Coming Soon</span><span class="man" data-icu-act="edit:' + c.d + '">✎ Enter manually</span></button>';
+        return '<button class="icu-ai" data-icu-act="import:' + c.d + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
+          '<span class="man" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '">✎ Enter manually</span></button>';
       }).join("") + "</div>";
   }
+
+  /* ================= REPORT IMPORT (photo / PDF) — gold125 ==================
+   * Pipeline: file/camera → CLIENT-SIDE compress (never send raw large files) →
+   * /api/ai/vision OCR (structured fields only) → clinician REVIEW (editable,
+   * abnormal-flagged, duplicate-checked) → confirm → ICU.ingestFromWard(source:
+   * "Imported report") which is conflict-safe. No raw PDF/image or long text ever
+   * goes to MaiK; only the compressed page image reaches the vision OCR, and only
+   * the extracted structured VALUES flow onward. Deterministic engine unchanged. */
+  var MAX_UPLOAD_BYTES = 1.6 * 1024 * 1024;   // target ≤ ~1.6 MB to the OCR
+  var _imgHiQ = false;
+  // Compress an image File/blob to a JPEG data-URL under the byte target. Canvas
+  // re-encode also strips EXIF/metadata. Iterates quality (and downscales) to fit.
+  function compressImage(fileOrDataUrl, cb) {
+    var img = new Image();
+    img.onload = function () {
+      var maxEdge = _imgHiQ ? 2200 : 1600, w = img.width, h = img.height;
+      var scale = Math.min(1, maxEdge / Math.max(w, h));
+      var cw = Math.round(w * scale), ch = Math.round(h * scale);
+      var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
+      var ctx = cv.getContext("2d"); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch);
+      var q = _imgHiQ ? 0.85 : 0.72, out = cv.toDataURL("image/jpeg", q), guard = 0;
+      function bytes(u) { return Math.ceil((u.length - (u.indexOf(",") + 1)) * 3 / 4); }
+      while (bytes(out) > MAX_UPLOAD_BYTES && guard++ < 6) {
+        q -= 0.12; if (q < 0.4) { cw = Math.round(cw * 0.85); ch = Math.round(ch * 0.85); cv.width = cw; cv.height = ch; ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch); q = 0.6; }
+        out = cv.toDataURL("image/jpeg", Math.max(0.35, q));
+      }
+      cb(out, { w: cw, h: ch, kb: Math.round(bytes(out) / 1024) });
+    };
+    img.onerror = function () { cb(null); };
+    img.src = (typeof fileOrDataUrl === "string") ? fileOrDataUrl : URL.createObjectURL(fileOrDataUrl);
+  }
+  // Lazy-load pdf.js (CDN) only when a PDF is imported; render selected pages to
+  // compressed images. Whole PDF is NEVER sent to AI — only rendered page images.
+  var _pdfjs = null;
+  function loadPdfJs() {
+    if (_pdfjs) return Promise.resolve(_pdfjs);
+    return new Promise(function (res, rej) {
+      var s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+      s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(_pdfjs); } catch (e) { rej(e); } };
+      s.onerror = function () { rej(new Error("pdf-load")); };
+      document.head.appendChild(s);
+    });
+  }
+  function renderPdfPageToImage(pdf, pageNum, cb) {
+    pdf.getPage(pageNum).then(function (page) {
+      var vp = page.getViewport({ scale: 2 });
+      var cv = document.createElement("canvas"); cv.width = vp.width; cv.height = vp.height;
+      page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise.then(function () {
+        compressImage(cv.toDataURL("image/jpeg", 0.85), function (out) { cb(out); });
+      });
+    }).catch(function () { cb(null); });
+  }
+
+  var IMPORT_LBL = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "HCO₃", ca: "Calcium", mg: "Magnesium", po4: "Phosphate", glu: "Glucose", creat: "Creatinine", urea: "Urea", alb: "Albumin", wbc: "WBC", hb: "Hb", plt: "Platelets", inr: "INR", crp: "CRP", bili: "Bilirubin", ast: "AST", alt: "ALT", lactate: "Lactate",
+    hr: "Heart rate", sbp: "Systolic BP", dbp: "Diastolic BP", map: "MAP", rr: "Resp rate", spo2: "SpO₂", temp: "Temp", cvp: "CVP", etco2: "EtCO₂",
+    ph: "pH", paco2: "PaCO₂", pao2: "PaO₂", be: "Base excess", fio2: "FiO₂", mode: "Mode", peep: "PEEP", tv: "Tidal volume", peak: "Peak", plateau: "Plateau" };
+  var IMPORT_GROUP = { labs: "mapped", monitor: "vitals", abg: "abg", ventilator: "ventilator" };
+  function importFileInput(kind) {
+    var inp = document.createElement("input"); inp.type = "file"; inp.accept = "image/*,application/pdf"; inp.setAttribute("capture", "environment"); inp.style.display = "none";
+    document.body.appendChild(inp);
+    inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (f) handleImportFile(kind, f); inp.remove(); });
+    inp.click();
+  }
+  function importProgress(msg, err) {
+    var el = document.getElementById("icuImpOv");
+    if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    el.innerHTML = '<div class="icu-imp-box">' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
+    var c = el.querySelector("#icuImpClose"); if (c) c.addEventListener("click", function () { el.remove(); });
+  }
+  function importDone() { var el = document.getElementById("icuImpOv"); if (el) el.remove(); }
+  function handleImportFile(kind, file) {
+    if (file.type === "application/pdf") {
+      importProgress("Reading PDF…");
+      loadPdfJs().then(function (pdfjs) {
+        var fr = new FileReader();
+        fr.onload = function () {
+          pdfjs.getDocument({ data: new Uint8Array(fr.result) }).promise.then(function (pdf) {
+            var pages = Math.min(pdf.numPages, 3);   // cap pages sent to OCR
+            importProgress("Rendering " + pages + " of " + pdf.numPages + " page(s)…");
+            renderPdfPageToImage(pdf, 1, function (img) {   // page 1 (most reports: header + first panel)
+              if (!img) return importProgress("Could not read this PDF. Try a photo instead.", true);
+              doOcr(kind, img, pdf.numPages > 3 ? "First page of " + pdf.numPages + " (large PDF — capped)" : "");
+            });
+          }).catch(function () { importProgress("Could not open this PDF.", true); });
+        };
+        fr.readAsArrayBuffer(file);
+      }).catch(function () { importProgress("PDF support unavailable offline — try a photo.", true); });
+      return;
+    }
+    // image: compress client-side BEFORE any AI call
+    importProgress("Compressing image…");
+    compressImage(file, function (dataUrl, meta) {
+      if (!dataUrl) return importProgress("Could not read this image.", true);
+      doOcr(kind, dataUrl, meta ? meta.kb + " KB" : "");
+    });
+  }
+  function doOcr(kind, dataUrl, note) {
+    importProgress("Reading values from report…" + (note ? " (" + note + ")" : ""));
+    if (!(window.SMD_AI && SMD_AI.vision)) { importProgress("AI reader unavailable. Enable AI in Settings, or enter values manually.", true); return; }
+    try { if (SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
+    // ONLY the compressed image is sent to the OCR endpoint; never the raw file/PDF.
+    SMD_AI.vision(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
+      importDone();
+      if (!r || r.error) { importProgress(r && r.error === "ai-off" ? "AI reader is off — enable it in Settings." : "Could not read the report. Enter values manually.", true); return; }
+      var fields = {}; Object.keys(r).forEach(function (k) { if (k !== "mode" && r[k] != null && !isNaN(parseFloat(r[k]))) fields[k] = parseFloat(r[k]); else if (k === "mode" && r[k]) fields[k] = r[k]; });
+      openImportReview(kind, fields, dataUrl);
+    }).catch(function () { importDone(); importProgress("Could not reach the AI reader. Enter values manually.", true); });
+  }
+  // Clinician review — nothing enters the patient context until confirmed here.
+  function openImportReview(kind, fields, dataUrl) {
+    var keys = Object.keys(fields);
+    if (!keys.length) { importProgress("No values could be read confidently. Keeping the image as reference only — please enter values manually.", true); return; }
+    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    var L = _raw.labs.recent || {}, lastV = latestVitals();
+    var rows = keys.map(function (k) {
+      var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
+      var dup = (cur != null && cur !== "" && String(cur) === String(fields[k])) ? '<span class="icu-imp-dup">≈ already recorded</span>'
+        : (cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
+      return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
+        '<input data-impk="' + k + '" value="' + esc(fields[k]) + '" ' + (typeof fields[k] === "number" ? 'type="number" step="any"' : 'type="text"') + '>' + dup + "</label>";
+    }).join("");
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review extracted values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+      '<div class="icu-imp-note">📷 OCR-extracted — <b>verify every value</b> against the report before applying. Nothing is added until you confirm.</div>' +
+      (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
+      '<div class="icu-imp-rows">' + rows + "</div>" +
+      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
+    function close() { el.remove(); }
+    el.querySelector("#icuImpX").addEventListener("click", close);
+    el.querySelector("#icuImpCancel").addEventListener("click", close);
+    el.querySelector("#icuImpConfirm").addEventListener("click", function () {
+      var vals = {}; el.querySelectorAll("[data-impk]").forEach(function (i) { var k = i.getAttribute("data-impk"), v = i.value; if (v !== "" && v != null) vals[k] = (k === "mode") ? v : parseFloat(v); });
+      var bundle = { source: "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
+      var res = ICU.ingestFromWard(bundle);
+      close(); paint();
+      try { if (window.toast) toast("Imported " + Object.keys(vals).length + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
+    });
+  }
+  function startImport(kind) { importFileInput(IMPORT_GROUP[kind] ? kind : "labs"); }
 
   /* ======================================================= PHASE 2 engines */
   var _trendWin = 24 * 60 * 60 * 1000;   // trends window (ms); default 24h
@@ -1158,6 +1322,7 @@
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
+      case "import": startImport(arg); break;
       case "conflict": { var parts = arg.split("|"); ICU.resolveConflict(parts[0], parts[1]); paint(); break; }
       case "dismissupdate": ICU.clearNewUpdate(); paint(); break;
       case "wardsync": try { if (window.openGHIS) openGHIS(); } catch (x) {} break;
@@ -1205,7 +1370,7 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
-    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab,
+    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
