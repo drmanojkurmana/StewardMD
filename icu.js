@@ -1207,19 +1207,72 @@
   // the clinician across devices, and MIRRORED to localStorage so the dashboard
   // still works offline / before any KV is bound. The live working state stays
   // in `stewardmd_icu_state`.
-  var ROSTER_KEY = "stewardmd_icu_patients";
+  // On-device roster is namespaced PER signed-in Google account so two clinicians
+  // sharing one physical device never see each other's saved patients (the cloud
+  // store is already per-user; this closes the local-mirror gap on a shared device).
+  var ROSTER_BASE = "stewardmd_icu_patients";     // legacy (unscoped) key — migrated once
+  var OWNER_KEY = "stewardmd_icu_owner";          // uid that owns the on-device state right now
   var MAX_CASES = 10;
   var CASES_API = "/api/cases";
   var _cloud = { enabled: null };   // null = not yet probed; true / false after a call
-  function loadRoster() { try { var r = JSON.parse(localStorage.getItem(ROSTER_KEY)); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
-  function saveRoster(r) { try { localStorage.setItem(ROSTER_KEY, JSON.stringify(r)); } catch (e) {} }
+  function ownerNow() {
+    try { var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
+      if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid; } catch (e) {}
+    return "anon";
+  }
+  function rosterKey(owner) { return ROSTER_BASE + ":" + (owner || ownerNow()); }
+  function loadRoster() { try { var r = JSON.parse(localStorage.getItem(rosterKey())); return Array.isArray(r) ? r : []; } catch (e) { return []; } }
+  function saveRoster(r) { try { localStorage.setItem(rosterKey(), JSON.stringify(r)); } catch (e) {} }
+  // React to sign-in / sign-out / account-switch. Only ever called from Firebase's
+  // onAuthStateChanged (a RELIABLE, resolved signal) — never from the transient
+  // "firebase not loaded yet" state — so we don't wipe a user's own work at startup.
+  function reconcileOwner() {
+    var now = ownerNow(), stored = null;
+    try { stored = localStorage.getItem(OWNER_KEY); } catch (e) {}
+    if (stored == null) {
+      // First run under the scoped scheme: migrate the legacy shared bucket into
+      // THIS device's current owner once (data preserved, not destroyed).
+      try {
+        var legacy = localStorage.getItem(ROSTER_BASE);
+        if (legacy && !localStorage.getItem(rosterKey(now))) localStorage.setItem(rosterKey(now), legacy);
+        if (legacy) localStorage.removeItem(ROSTER_BASE);
+      } catch (e) {}
+    } else if (stored !== now) {
+      if (stored === "anon" && now !== "anon") {
+        // Signing in from an anon session → claim the anon buffer/roster (keep work).
+        try { var anon = localStorage.getItem(rosterKey("anon"));
+          if (anon && !localStorage.getItem(rosterKey(now))) localStorage.setItem(rosterKey(now), anon);
+          localStorage.removeItem(rosterKey("anon")); } catch (e) {}
+      } else {
+        // Real account switch or sign-out → wipe the live working buffer so the
+        // previous clinician's open patient is not visible to this account.
+        try { if (typeof ICU !== "undefined" && ICU.reset) ICU.reset(); } catch (e) {}
+      }
+    }
+    try { localStorage.setItem(OWNER_KEY, now); } catch (e) {}
+    try { if (typeof ICU !== "undefined" && ICU.isOpen && ICU.isOpen()) paint(); } catch (e) {}
+  }
   function capTen(r) { if (r.length <= MAX_CASES) return r; return r.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); }).slice(0, MAX_CASES); }
   function rosterCount() { return loadRoster().length; }
   function fmtWhen(ts) { if (!ts) return ""; try { var d = new Date(ts); return d.toLocaleDateString([], { month: "short", day: "numeric" }) + " " + d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); } catch (e) { return ""; } }
 
   // ---- cloud transport (best-effort; every call degrades to localStorage) ----
+  // Cases are PHI and stored PER USER server-side, so every call carries the
+  // signed-in clinician's Firebase ID token. Signed out (or Firebase not yet
+  // loaded) → no token → server reports enabled:false → on-device fallback.
+  function idToken() {
+    try {
+      var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
+      if (a && a.currentUser && a.currentUser.getIdToken) return a.currentUser.getIdToken();
+    } catch (e) {}
+    return Promise.resolve(null);
+  }
   function cloudFetch(path, opts) {
-    return fetch(CASES_API + (path || ""), Object.assign({ headers: { "Content-Type": "application/json" }, credentials: "same-origin" }, opts || {}));
+    return idToken().then(function (t) {
+      var headers = { "Content-Type": "application/json" };
+      if (t) headers["Authorization"] = "Bearer " + t;
+      return fetch(CASES_API + (path || ""), Object.assign({ headers: headers, credentials: "same-origin" }, opts || {}));
+    });
   }
   function cloudList() {
     return cloudFetch("").then(function (r) { return r.json(); }).then(function (j) { _cloud.enabled = !!(j && j.enabled); return j || {}; }).catch(function () { _cloud.enabled = false; return { enabled: false }; });
@@ -1420,4 +1473,26 @@
 
   // re-render the open dashboard whenever the state changes (any source)
   _subs.push(function () { if (ICU.isOpen()) paint(); });
+
+  // Per-account on-device isolation: attach to Firebase auth once it's loaded so
+  // sign-in / sign-out / account-switch re-point the roster and clear a previous
+  // account's working buffer. Firebase is lazy-loaded, so keep trying until ready.
+  (function watchAuth() {
+    var tries = 0;
+    function attach() {
+      try {
+        var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
+        if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { reconcileOwner(); }); return true; }
+      } catch (e) {}
+      return false;
+    }
+    if (attach()) return;
+    var iv = setInterval(function () { if (attach() || ++tries > 60) clearInterval(iv); }, 500);
+  })();
+  // Opening the dashboard nudges Firebase to load so auth (and thus the correct
+  // per-account roster) resolves promptly instead of waiting for idle.
+  (function () {
+    var _open = ICU.open;
+    ICU.open = function () { try { window.SMD_loadFirebase && window.SMD_loadFirebase(); } catch (e) {} return _open.apply(ICU, arguments); };
+  })();
 })();

@@ -24,7 +24,14 @@ Severity is about *impact if left as-is in production*:
 
 ## P0 — Critical (fix before any real clinical use)
 
-### 1. ICU cloud cases have **no per-user isolation** — shared global storage (PHI leak + mutual overwrite)
+> **Status update:** #1, #2 (the `/api/cases` half) and #3 are **FIXED** on this
+> branch — `/api/cases` now verifies a Firebase ID token (or Cf-Access email)
+> server-side and stores every case under a per-user key. Verified end-to-end:
+> tampered/expired/wrong-audience tokens are rejected and users cannot read or
+> delete each other's cases. The `/api/ai` origin `endsWith` bypass is also
+> hardened. See "Fixes applied" at the bottom.
+
+### 1. ICU cloud cases have **no per-user isolation** — shared global storage (PHI leak + mutual overwrite)  — ✅ FIXED
 `functions/api/cases/[[path]].js`
 
 Every ICU case is written to and read from **fixed global KV keys**:
@@ -46,7 +53,7 @@ derives one. Consequences on any deployment with `CASES_KV`/`GHIS_KV` bound:
 (Cf-Access email, or the Firebase ID token you already have on the client),
 not from an unauthenticated header.
 
-### 2. API auth gate is bypassable — empty `Origin` and suffix-match both pass
+### 2. API auth gate is bypassable — empty `Origin` and suffix-match both pass  — ✅ FIXED (cases) / partially hardened (ai)
 `functions/api/cases/[[path]].js`, `functions/api/ai/[[path]].js`
 
 ```js
@@ -74,7 +81,7 @@ check as defense-in-depth, match the exact host set, e.g.
 
 ## P1 — High
 
-### 3. `/api/cases` mutations are not CSRF-safe
+### 3. `/api/cases` mutations are not CSRF-safe  — ✅ FIXED
 Because the gate above accepts a spoofable/absent `Origin` and there is no
 token, `PUT`/`DELETE /api/cases/:id` are state-changing requests with no
 anti-CSRF protection. Fixing #2 (a real credential) resolves this; a per-request
@@ -159,3 +166,43 @@ found to have equivalent issues.
 4. **#4** is already done on this branch (harness portability) — wire the
    suites into CI so this net actually runs on every push.
 5. **#7, #8, #9** as hygiene.
+
+---
+
+## Fixes applied on this branch
+
+- **#1 / #2 (cases) / #3 — per-user, authenticated cloud cases.**
+  `functions/api/cases/[[path]].js` now derives identity from a **verified
+  Firebase ID token** (`Authorization: Bearer …`, RS256-verified against
+  Google's public JWK set, checking `aud`/`iss`/`exp`/signature) or a
+  Cloudflare Access email. Storage is keyed per user
+  (`icu:index:<uid>`, `icu:case:<uid>:<id>`). Signed-out callers get
+  `enabled:false` (on-device fallback) for the index and `401` for everything
+  else — no more unauthenticated PHI reads, cross-user leakage, or mutual
+  eviction. Requiring a token also closes the CSRF hole (#3).
+  `icu.js` attaches the signed-in clinician's ID token to every `/api/cases`
+  call; not signed in → graceful localStorage fallback (unchanged UX).
+  Config: `env.FIREBASE_PROJECT_ID` (defaults to the app's project id).
+  Verified end-to-end (13/13 checks): rejects tampered/expired/wrong-`aud`
+  tokens; user B cannot read or delete user A's cases; no global keys written.
+
+- **#2 (ai) — origin allowlist hardened.** `functions/api/ai/[[path]].js`
+  replaced `o.endsWith("stewardmd.in")` (which matched `evil-stewardmd.in`)
+  with an exact-host allowlist. Empty `Origin` is still accepted there because
+  browsers omit it on same-origin GETs and `/api/ai` is not a PHI store; the
+  remaining abuse surface is Gemini cost, not patient data.
+
+- **#5, #6** — `caseshare.js` auth-settle race and dead `ownerEmail` render
+  path (see earlier commit).
+
+- **#4** — test-harness Chrome path/flags made env-overridable so the
+  regression net runs on Linux/CI (see earlier commit).
+
+- **On-device isolation on a SHARED device** — `icu.js` now namespaces the
+  saved-patient roster per Google account (`stewardmd_icu_patients:<uid>`) and,
+  via Firebase `onAuthStateChanged`, wipes the live working buffer on a real
+  account switch or sign-out (signing in from anon keeps your work; reloads as
+  the same user don't wipe). The legacy shared bucket is migrated once, never
+  destroyed. So two clinicians sharing one phone/tablet never see each other's
+  ICU patients even before the cloud round-trip. Verified with a 9-case
+  state-machine test (migrate / claim / switch / sign-out / reload).
