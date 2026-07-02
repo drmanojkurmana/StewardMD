@@ -635,7 +635,7 @@
         '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div style="min-width:0"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div><div class="v3-brand-sub">Antibiotic Stewardship</div></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" data-act="theme" aria-label="Theme">' + svg("moon") + '</button>' +
-        '<button class="v3-ic v3-dotbadge" data-act="more" aria-label="Notifications">' + svg("bell") + '</button>' +
+        '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
@@ -707,9 +707,13 @@
     refreshFab();
     setInterval(refreshFab, 400);
 
+    // Notifications: probe once for unread medical updates, then hourly.
+    try { setTimeout(refreshBadge, 1500); setInterval(function () { _notifItems = null; refreshBadge(); }, 3600000); } catch (e) {}
+
     root.addEventListener("click", function (e) {
       var b = e.target.closest("[data-act]"); if (!b) return;
       var a = b.getAttribute("data-act");
+      if (a === "notifications") return openNotifications();
       if (a === "more") return openMore();
       if (a === "home") { window.scrollTo(0, 0); var m = root.querySelector(".v3-main"); if (m) m.scrollTo({ top: 0, behavior: "smooth" }); return; }
       if (ACT[a]) ACT[a]();
@@ -1163,6 +1167,99 @@
   // ---- toast ----
   var tEl, tTimer;
   function toast(msg) { if (!tEl) { tEl = document.createElement("div"); tEl.className = "hv-toast"; document.body.appendChild(tEl); } tEl.textContent = msg; tEl.classList.add("on"); clearTimeout(tTimer); tTimer = setTimeout(function () { tEl.classList.remove("on"); }, 1800); }
+
+  /* ================= Notifications (🔔 bell → medical updates) ================= */
+  var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts";
+  var _notifItems = null, _notifRoot = null;
+  function nEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function nSeen() { try { return parseInt(localStorage.getItem(NOTIF_SEEN) || "0", 10) || 0; } catch (e) { return 0; } }
+  function nSetSeen(ts) { try { localStorage.setItem(NOTIF_SEEN, String(ts || Date.now())); } catch (e) {} }
+  function nMaxTs(items) { var m = 0; (items || []).forEach(function (x) { if ((x.ts || 0) > m) m = x.ts; }); return m; }
+  function nWhen(ts) {
+    if (!ts) return ""; var s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago";
+    if (s < 86400) return Math.floor(s / 3600) + "h ago"; if (s < 604800) return Math.floor(s / 86400) + "d ago";
+    try { return new Date(ts).toLocaleDateString([], { month: "short", day: "numeric" }); } catch (e) { return ""; }
+  }
+  var NCAT = { drug: "💊 Drug", approval: "✅ Approval", safety: "⚠️ Safety", recall: "🚫 Recall", guideline: "📋 Guideline", study: "🔬 Study", general: "📣 Update" };
+  function fetchUpdates() {
+    return fetch(NOTIF_API, { headers: { "Accept": "application/json" } }).then(function (r) { return r.json(); })
+      .then(function (j) { _notifItems = (j && j.items) || []; return _notifItems; }).catch(function () { _notifItems = _notifItems || []; return _notifItems; });
+  }
+  function refreshBadge() {
+    var badge = function () { var b = document.getElementById("v3BellBtn"); if (b) b.classList.toggle("has-unread", nMaxTs(_notifItems) > nSeen()); };
+    if (_notifItems) { badge(); return; }
+    fetchUpdates().then(badge);
+  }
+  function nItemHTML(it) {
+    var cat = NCAT[it.category] || NCAT.general;
+    var link = it.url ? '<a class="ntf-link" href="' + nEsc(it.url) + '" target="_blank" rel="noopener noreferrer">Read source ↗</a>' : "";
+    var src = it.source ? '<span class="ntf-src">' + nEsc(it.source) + '</span>' : "";
+    var hi = it.importance === "high" || it.importance === "critical";
+    return '<div class="ntf-card' + (hi ? " hi" : "") + '">' +
+      '<div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + cat + '</span>' +
+        (hi ? '<span class="ntf-hi">Important</span>' : "") + '<span class="ntf-time">' + nEsc(nWhen(it.ts)) + '</span></div>' +
+      '<div class="ntf-title">' + nEsc(it.title) + '</div>' +
+      (it.body ? '<div class="ntf-body">' + nEsc(it.body) + '</div>' : "") +
+      '<div class="ntf-foot">' + src + link + '</div></div>';
+  }
+  function renderNotif() {
+    var body = _notifRoot && _notifRoot.querySelector("#ntfBody"); if (!body) return;
+    var items = _notifItems || [];
+    body.innerHTML = items.length ? items.map(nItemHTML).join("")
+      : '<div class="ntf-empty">🔕 No updates yet.<div>Trusted medical updates — new drug approvals, safety alerts and recalls — will appear here.</div></div>';
+  }
+  function buildNotif() {
+    if (_notifRoot) return _notifRoot;
+    injectNotifCSS();
+    _notifRoot = document.createElement("div"); _notifRoot.id = "ntfOverlay"; _notifRoot.className = "ntf-overlay";
+    _notifRoot.innerHTML =
+      '<div class="ntf-top-bar"><button class="ntf-close" id="ntfClose" aria-label="Close">‹ Close</button>' +
+        '<div class="ntf-h">🔔 Notifications</div><button class="ntf-refresh" id="ntfRefresh" aria-label="Refresh" title="Refresh">↻</button></div>' +
+      '<div class="ntf-scroll"><div class="ntf-note">Trusted medical updates — approvals, safety alerts, recalls — plus notices from StewardMD.</div>' +
+        '<div id="ntfBody" class="ntf-list"><div class="ntf-empty">Loading…</div></div></div>';
+    document.body.appendChild(_notifRoot);
+    _notifRoot.querySelector("#ntfClose").addEventListener("click", closeNotifications);
+    _notifRoot.querySelector("#ntfRefresh").addEventListener("click", function () { fetchUpdates().then(function () { renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge(); }); });
+    return _notifRoot;
+  }
+  function openNotifications() {
+    buildNotif(); _notifRoot.classList.add("on"); document.body.classList.add("ntf-lock");
+    (_notifItems ? Promise.resolve(_notifItems) : fetchUpdates()).then(function () {
+      renderNotif(); nSetSeen(nMaxTs(_notifItems)); refreshBadge();
+    });
+  }
+  function closeNotifications() { if (_notifRoot) { _notifRoot.classList.remove("on"); document.body.classList.remove("ntf-lock"); } }
+  function injectNotifCSS() {
+    if (document.getElementById("ntf-css")) return;
+    var css = [
+      ".v3-dotbadge{position:relative}.v3-dotbadge.has-unread::after{content:'';position:absolute;top:6px;right:6px;width:9px;height:9px;border-radius:50%;background:#ef4444;border:2px solid var(--panel,#fff);box-shadow:0 0 0 1px #ef4444}",
+      ".ntf-overlay{position:fixed;inset:0;z-index:855;background:var(--paper,#f7f7f5);display:none;flex-direction:column;overflow:hidden}",
+      ".ntf-overlay.on{display:flex;animation:ntfIn .22s ease}@keyframes ntfIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
+      "body.ntf-lock{overflow:hidden}",
+      ".ntf-top-bar{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#e5e5e0);z-index:2}",
+      ".ntf-close,.ntf-refresh{background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:9px;height:34px;padding:0 12px;font:600 13px var(--sans,system-ui);color:var(--teal,#0a9396);cursor:pointer}",
+      ".ntf-refresh{margin-left:auto;width:38px;padding:0}",
+      ".ntf-h{flex:1;text-align:center;font:800 16px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
+      ".ntf-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;max-width:720px;margin:0 auto;width:100%;box-sizing:border-box;padding-bottom:calc(40px + env(safe-area-inset-bottom))}",
+      ".ntf-note{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--teal-soft,#e0f2f1);border-radius:10px;padding:10px 12px;margin-bottom:14px;line-height:1.5}",
+      ".ntf-list{display:flex;flex-direction:column;gap:10px}",
+      ".ntf-card{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:13px;padding:12px 14px;border-left:4px solid var(--line,#e5e5e0)}",
+      ".ntf-card.hi{border-left-color:#ef4444}",
+      ".ntf-top{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}",
+      ".ntf-cat{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--teal,#0a9396);background:var(--teal-soft,#e0f2f1);border-radius:6px;padding:2px 8px}",
+      ".ntf-cat.cat-safety,.ntf-cat.cat-recall{color:#b45309;background:#fef3c7}",
+      ".ntf-hi{font:800 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:#fff;background:#ef4444;border-radius:5px;padding:2px 7px}",
+      ".ntf-time{margin-left:auto;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888)}",
+      ".ntf-title{font:800 15px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.3}",
+      ".ntf-body{font:500 13px var(--sans,system-ui);color:var(--slate,#555);line-height:1.55;margin-top:5px}",
+      ".ntf-foot{display:flex;align-items:center;gap:10px;margin-top:9px}",
+      ".ntf-src{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#888)}",
+      ".ntf-link{margin-left:auto;font:700 12px var(--sans,system-ui);color:var(--teal,#0a9396);text-decoration:none}",
+      ".ntf-empty{text-align:center;color:var(--slate-soft,#888);font:600 14px var(--sans,system-ui);padding:40px 16px}.ntf-empty div{font-weight:500;font-size:12.5px;margin-top:8px;line-height:1.5}"
+    ].join("");
+    var st = document.createElement("style"); st.id = "ntf-css"; st.textContent = css; document.head.appendChild(st);
+  }
 
   // ---- show after entry (when the shell becomes visible) ----
   function shellVisible() { var sh = document.querySelector(".shell"); return sh && sh.offsetParent !== null; }
