@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>StewardMD — Publish Update</title>
+<style>
+  :root{--bg:#f4f6f9;--panel:#fff;--ink:#0f172a;--mut:#64748b;--line:#e2e8f0;--tl:#0f766e;--tls:#ccfbf1;--red:#dc2626;--amb:#b45309;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif}
+  @media(prefers-color-scheme:dark){:root{--bg:#0b1220;--panel:#111b2e;--ink:#e7edf5;--mut:#8597ad;--line:#1e2b43;--tl:#2dd4bf;--tls:#0c2e2a}}
+  *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f);padding:0 0 60px}
+  .top{background:var(--panel);border-bottom:1px solid var(--line);padding:16px 18px;position:sticky;top:0;z-index:5}
+  .top h1{margin:0;font:800 18px var(--f)}.top p{margin:4px 0 0;font:500 12.5px var(--f);color:var(--mut)}
+  .wrap{max-width:680px;margin:0 auto;padding:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px}
+  label{display:block;font:700 11.5px var(--f);text-transform:uppercase;letter-spacing:.04em;color:var(--mut);margin:12px 0 5px}
+  input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font:500 14px var(--f);background:var(--bg);color:var(--ink)}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--tl)}
+  textarea{min-height:90px;resize:vertical}
+  .row{display:flex;gap:10px;flex-wrap:wrap}.row>div{flex:1;min-width:140px}
+  .chk{display:flex;align-items:center;gap:8px;margin-top:14px}.chk input{width:auto}.chk label{margin:0;text-transform:none;letter-spacing:0;font-size:13px;color:var(--ink)}
+  button{border:none;border-radius:11px;font:700 14px var(--f);padding:13px 16px;cursor:pointer}
+  .primary{background:var(--tl);color:#fff;width:100%}
+  .ghost{background:var(--panel);color:var(--tl);border:1px solid var(--line)}
+  .msg{font:600 12.5px var(--f);margin-top:10px;min-height:16px}.msg.ok{color:var(--tl)}.msg.err{color:var(--red)}
+  .tokrow{display:flex;gap:8px;align-items:flex-end}.tokrow>div{flex:1}
+  .list-item{border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-bottom:9px;background:var(--bg)}
+  .li-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .cat{font:700 10px var(--f);text-transform:uppercase;color:var(--tl);background:var(--tls);border-radius:6px;padding:2px 8px}
+  .hi{font:800 9.5px var(--f);text-transform:uppercase;color:#fff;background:var(--red);border-radius:5px;padding:2px 7px}
+  .li-time{margin-left:auto;font:600 11px var(--f);color:var(--mut)}
+  .li-title{font:800 14px var(--f);margin-top:5px}.li-body{font:500 12.5px var(--f);color:var(--mut);margin-top:3px;line-height:1.5}
+  .li-foot{display:flex;align-items:center;gap:10px;margin-top:8px}
+  .del{background:none;border:1px solid var(--line);color:var(--red);border-radius:8px;padding:5px 10px;font:700 11.5px var(--f)}
+  .auto{font:600 10.5px var(--f);color:var(--mut)}
+  .hint{font:500 12px var(--f);color:var(--mut);line-height:1.55}
+  a{color:var(--tl)}
+</style>
+</head>
+<body>
+  <div class="top"><h1>🔔 StewardMD — Publish Update</h1><p>Whatever you submit here appears in the app's notifications bell for every user. Non-PHI, public reference info only.</p></div>
+  <div class="wrap">
+
+    <div class="card">
+      <div class="tokrow">
+        <div><label for="tok">Admin token</label><input id="tok" type="password" placeholder="UPDATES_ADMIN_TOKEN" autocomplete="off"></div>
+        <button class="ghost" id="saveTok">Save</button>
+      </div>
+      <div class="hint" style="margin-top:8px">Stored only in this browser. Must match the <code>UPDATES_ADMIN_TOKEN</code> secret set in Cloudflare Pages.</div>
+    </div>
+
+    <div class="card">
+      <label for="title">Title *</label>
+      <input id="title" maxlength="200" placeholder="e.g. FDA approves new β-lactamase inhibitor for MDR infections">
+      <label for="body">Details</label>
+      <textarea id="body" maxlength="4000" placeholder="Short, verified summary. Keep it factual and cite the source below."></textarea>
+      <div class="row">
+        <div><label for="category">Category</label>
+          <select id="category">
+            <option value="approval">✅ Approval (new drug/indication)</option>
+            <option value="safety">⚠️ Safety alert</option>
+            <option value="recall">🚫 Recall</option>
+            <option value="drug">💊 Drug fact</option>
+            <option value="guideline">📋 Guideline</option>
+            <option value="study">🔬 Study / evidence</option>
+            <option value="general" selected>📣 General</option>
+          </select></div>
+        <div><label for="importance">Importance</label>
+          <select id="importance"><option value="normal">Normal</option><option value="high">High (flag as Important)</option></select></div>
+      </div>
+      <div class="row">
+        <div><label for="source">Source label</label><input id="source" maxlength="60" placeholder="e.g. FDA, ICMR, StewardMD"></div>
+        <div><label for="url">Source link (optional)</label><input id="url" maxlength="400" placeholder="https://…"></div>
+      </div>
+      <div class="chk"><input id="pinned" type="checkbox"><label for="pinned">Pin to top</label></div>
+      <div style="margin-top:14px"><button class="primary" id="publish">Publish to notifications</button></div>
+      <div class="msg" id="msg"></div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="align-items:center">
+        <div style="flex:2"><b>Auto-pull trusted FDA updates</b><div class="hint">Fetches new drug approvals, MedWatch safety alerts and recalls, filtered to important items. (Also runs automatically on a schedule.)</div></div>
+        <div style="flex:0 0 auto"><button class="ghost" id="sync">↻ Pull FDA now</button></div>
+      </div>
+      <div class="msg" id="syncMsg"></div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;align-items:center"><b style="flex:1">Live updates</b><button class="ghost" id="reload" style="padding:8px 12px">Reload</button></div>
+      <div id="list" style="margin-top:12px"><div class="hint">Enter your token and Reload.</div></div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var API="/api/updates", TK="smd_admin_token";
+  var $=function(id){return document.getElementById(id);};
+  try{ $("tok").value=localStorage.getItem(TK)||""; }catch(e){}
+  $("saveTok").onclick=function(){ try{localStorage.setItem(TK,$("tok").value.trim());}catch(e){} load(); };
+  function token(){ return ($("tok").value||"").trim(); }
+  function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+  function when(ts){ if(!ts)return""; var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString(); }
+
+  function publish(){
+    var t=$("title").value.trim();
+    var m=$("msg"); m.className="msg"; m.textContent="";
+    if(!token()){ m.className="msg err"; m.textContent="Enter your admin token first."; return; }
+    if(!t){ m.className="msg err"; m.textContent="Title is required."; return; }
+    m.textContent="Publishing…";
+    fetch(API,{method:"POST",headers:{"Content-Type":"application/json","X-Admin-Token":token()},body:JSON.stringify({
+      title:t, body:$("body").value, category:$("category").value, importance:$("importance").value,
+      source:$("source").value, url:$("url").value, pinned:$("pinned").checked
+    })}).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});}).then(function(x){
+      if(x.s===200&&x.d.ok){ m.className="msg ok"; m.textContent="✅ Published."; $("title").value="";$("body").value="";$("url").value=""; $("pinned").checked=false; load(); }
+      else if(x.s===401){ m.className="msg err"; m.textContent="Wrong admin token."; }
+      else if(x.s===503){ m.className="msg err"; m.textContent="Server has no UPDATES_ADMIN_TOKEN set (Cloudflare Pages secret)."; }
+      else { m.className="msg err"; m.textContent="Failed: "+(x.d.error||x.s); }
+    }).catch(function(){ m.className="msg err"; m.textContent="Network error."; });
+  }
+  $("publish").onclick=publish;
+
+  $("sync").onclick=function(){
+    var m=$("syncMsg"); if(!token()){ m.className="msg err"; m.textContent="Enter your admin token first."; return; }
+    m.className="msg"; m.textContent="Pulling FDA feeds…";
+    fetch(API+"/sync",{method:"POST",headers:{"X-Admin-Token":token()}}).then(function(r){return r.json().then(function(d){return{s:r.status,d:d};});}).then(function(x){
+      if(x.s===200&&x.d.ok){ m.className="msg ok"; m.textContent="✅ Added "+x.d.added+" new · "+x.d.total+" total."; load(); }
+      else { m.className="msg err"; m.textContent="Failed: "+(x.d.error||x.s); }
+    }).catch(function(){ m.className="msg err"; m.textContent="Network error."; });
+  };
+
+  function del(id){
+    if(!confirm("Delete this update?"))return;
+    fetch(API+"/"+encodeURIComponent(id),{method:"DELETE",headers:{"X-Admin-Token":token()}}).then(function(r){return r.json();}).then(function(){ load(); });
+  }
+  function load(){
+    var el=$("list"); el.innerHTML='<div class="hint">Loading…</div>';
+    fetch(API).then(function(r){return r.json();}).then(function(j){
+      var items=(j&&j.items)||[];
+      if(!items.length){ el.innerHTML='<div class="hint">No updates yet.</div>'; return; }
+      el.innerHTML=items.map(function(it){
+        return '<div class="list-item"><div class="li-top">'+
+          '<span class="cat">'+esc(it.category||"general")+'</span>'+
+          (it.importance==="high"||it.importance==="critical"?'<span class="hi">Important</span>':'')+
+          (it.auto?'<span class="auto">auto</span>':'')+
+          '<span class="li-time">'+esc(when(it.ts))+'</span></div>'+
+          '<div class="li-title">'+esc(it.title)+'</div>'+
+          (it.body?'<div class="li-body">'+esc(it.body)+'</div>':'')+
+          '<div class="li-foot">'+(it.source?'<span class="auto">'+esc(it.source)+'</span>':'')+
+          (it.url?'<a href="'+esc(it.url)+'" target="_blank" rel="noopener">source ↗</a>':'')+
+          '<button class="del" data-del="'+esc(it.id)+'" style="margin-left:auto">Delete</button></div></div>';
+      }).join("");
+      Array.prototype.forEach.call(el.querySelectorAll("[data-del]"),function(b){ b.onclick=function(){ del(b.getAttribute("data-del")); }; });
+    }).catch(function(){ el.innerHTML='<div class="hint">Could not load.</div>'; });
+  }
+  $("reload").onclick=load;
+  if(token()) load();
+})();
+</script>
+</body>
+</html>
