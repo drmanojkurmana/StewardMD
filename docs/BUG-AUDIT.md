@@ -197,3 +197,12 @@ found to have equivalent issues.
 
 - **#4** — test-harness Chrome path/flags made env-overridable so the
   regression net runs on Linux/CI (see earlier commit).
+
+- **On-device isolation on a SHARED device** — `icu.js` now namespaces the
+  saved-patient roster per Google account (`stewardmd_icu_patients:<uid>`) and,
+  via Firebase `onAuthStateChanged`, wipes the live working buffer on a real
+  account switch or sign-out (signing in from anon keeps your work; reloads as
+  the same user don't wipe). The legacy shared bucket is migrated once, never
+  destroyed. So two clinicians sharing one phone/tablet never see each other's
+  ICU patients even before the cloud round-trip. Verified with a 9-case
+  state-machine test (migrate / claim / switch / sign-out / reload).
