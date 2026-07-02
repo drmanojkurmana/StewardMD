@@ -1057,14 +1057,61 @@
   }
 
   // ---- Display & Accessibility engine ----
-  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: false };
+  var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: false, theme: "classic", font: "plex", headingStyle: "default" };
+  var THEMES = [
+    { id: "classic", name: "Classic", accent: "#0e6e63", paper: "#f6f7f5" },
+    { id: "blue", name: "Clinical Blue", accent: "#1560b0", paper: "#f5f7fa" },
+    { id: "ocean", name: "Ocean", accent: "#0a7d8c", paper: "#f4f8f8" },
+    { id: "tiranga", name: "Tiranga", accent: "#1a7a41", paper: "#fbf8f2" },
+    { id: "amber", name: "Warm Amber", accent: "#a86412", paper: "#faf7f1" },
+    { id: "slate", name: "Slate", accent: "#3d5166", paper: "#f5f6f7" },
+    { id: "contrast", name: "High-Contrast", accent: "#00463d", paper: "#ffffff" }
+  ];
+  var FONTS = [
+    { id: "plex", name: "IBM Plex Sans", web: null },
+    { id: "system", name: "System", web: null },
+    { id: "arial", name: "Arial", web: null },
+    { id: "serif", name: "Serif", web: null },
+    { id: "atkinson", name: "Atkinson Hyperlegible", web: "Atkinson+Hyperlegible:wght@400;700" },
+    { id: "lexend", name: "Lexend", web: "Lexend:wght@400;600;700" },
+    { id: "inter", name: "Inter", web: "Inter:wght@400;600;700;800" }
+  ];
+  var SCRIPT_FONT = "Dancing+Script:wght@600;700";
+  function ensureFont(fam) {
+    if (!fam) return; var id = "smd-webfont-" + fam.split(":")[0].replace(/[^a-z0-9]/gi, "");
+    if (document.getElementById(id)) return;
+    var l = document.createElement("link"); l.id = id; l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=" + fam + "&display=swap";
+    (document.head || document.documentElement).appendChild(l);
+  }
   var ds = loadD();
-  function loadD() { try { var o = JSON.parse(localStorage.getItem(DKEY)); if (o && o.density in DENS) return { fontScale: Math.min(1.5, Math.max(.8, +o.fontScale || 1)), density: o.density, autoFit: !!o.autoFit }; } catch (e) {} return Object.assign({}, DDEF); }
+  function loadD() {
+    try {
+      var o = JSON.parse(localStorage.getItem(DKEY));
+      if (o && o.density in DENS) {
+        var okTheme = THEMES.some(function (t) { return t.id === o.theme; });
+        var okFont = FONTS.some(function (f) { return f.id === o.font; });
+        return {
+          fontScale: Math.min(1.5, Math.max(.8, +o.fontScale || 1)),
+          density: o.density, autoFit: !!o.autoFit,
+          theme: okTheme ? o.theme : "classic",
+          font: okFont ? o.font : "plex",
+          headingStyle: o.headingStyle === "script" ? "script" : "default"
+        };
+      }
+    } catch (e) {}
+    return Object.assign({}, DDEF);
+  }
   function saveD() { try { localStorage.setItem(DKEY, JSON.stringify(ds)); } catch (e) {} }
   function applyD() {
     try { document.documentElement.style.zoom = ds.fontScale; } catch (e) {}
     document.body.classList.remove("smd-dens-compact", "smd-dens-comfortable", "smd-dens-large");
     if (ds.density !== "default") document.body.classList.add("smd-dens-" + ds.density);
+    var el = document.documentElement;
+    if (ds.theme && ds.theme !== "classic") el.setAttribute("data-theme", ds.theme); else el.removeAttribute("data-theme");
+    if (ds.font && ds.font !== "plex") el.setAttribute("data-font", ds.font); else el.removeAttribute("data-font");
+    if (ds.headingStyle === "script") { el.setAttribute("data-head", "script"); ensureFont(SCRIPT_FONT); } else el.removeAttribute("data-head");
+    var f = FONTS.filter(function (x) { return x.id === ds.font; })[0]; if (f && f.web) ensureFont(f.web);
     saveD();
   }
   function autoFitD() {
@@ -1081,6 +1128,13 @@
       '<div class="hv-d-sec"><h4>Display density</h4><div class="hv-seg" id="hvDens"><button data-d="compact">Compact</button><button data-d="default">Default</button><button data-d="comfortable">Comfort</button><button data-d="large">Large</button></div></div>' +
       '<div class="hv-d-sec"><h4>Quick presets</h4><div class="hv-pre" id="hvPre"><button data-p="default">Default</button><button data-p="small">Small screen</button><button data-p="large">Large screen</button><button data-p="senior">Senior friendly</button></div></div>' +
       '<div class="hv-d-sec"><h4>Auto fit</h4><div class="hv-sw"><div><div class="lab">Optimise for this device</div><div class="sub" id="hvDet"></div></div><button class="hv-tg" id="hvAuto"></button></div></div>' +
+      '<div class="hv-d-sec"><h4>Theme</h4><div class="hv-theme" id="hvTheme">' +
+        THEMES.map(function (t) { return '<button class="hv-th" data-t="' + t.id + '" style="--sw-paper:' + t.paper + ';--sw-acc:' + t.accent + '"><span class="hv-th-dot"></span><span class="hv-th-nm">' + t.name + '</span></button>'; }).join("") +
+      '</div></div>' +
+      '<div class="hv-d-sec"><h4>Font</h4><div class="hv-fonts" id="hvFont">' +
+        FONTS.map(function (f) { return '<button class="hv-fn" data-f="' + f.id + '" data-font="' + f.id + '">' + f.name + '</button>'; }).join("") +
+      '</div></div>' +
+      '<div class="hv-d-sec"><h4>Headings</h4><div class="hv-seg" id="hvHead"><button data-h="default">Default</button><button data-h="script">Script</button></div><div class="hv-info" style="margin-top:6px">Decorative — titles only; never doses.</div></div>' +
       '<button class="hv-reset" id="hvReset">Reset to defaults</button>' +
       '<div class="hv-info" style="margin-top:12px">Changes readability &amp; spacing only — never medical content. Saved on this device.</div>');
     var s = sheetEl();
@@ -1089,6 +1143,9 @@
     s.querySelectorAll("#hvPre button").forEach(function (b) { b.addEventListener("click", function () { var p = DPRE[b.getAttribute("data-p")]; ds.autoFit = false; ds.fontScale = p.fontScale; ds.density = p.density; applyD(); refreshD(); }); });
     s.querySelector("#hvAuto").addEventListener("click", function () { ds.autoFit = !ds.autoFit; if (ds.autoFit) autoFitD(); else { applyD(); refreshD(); } });
     s.querySelector("#hvReset").addEventListener("click", function () { ds = Object.assign({}, DDEF); applyD(); refreshD(); });
+    s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.addEventListener("click", function () { ds.theme = b.getAttribute("data-t"); applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-f"); var f = FONTS.filter(function (x) { return x.id === id; })[0]; if (f && f.web) ensureFont(f.web); ds.font = id; applyD(); refreshD(); }); });
+    s.querySelectorAll("#hvHead button").forEach(function (b) { b.addEventListener("click", function () { ds.headingStyle = b.getAttribute("data-h"); applyD(); refreshD(); }); });
     refreshD();
   }
   function refreshD() {
@@ -1098,6 +1155,9 @@
     s.querySelectorAll("#hvDens button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-d") === ds.density); });
     var a = s.querySelector("#hvAuto"); if (a) a.classList.toggle("on", ds.autoFit);
     var d = s.querySelector("#hvDet"); if (d) d.textContent = window.innerWidth + "×" + window.innerHeight + " · DPR " + (window.devicePixelRatio || 1).toFixed(2);
+    s.querySelectorAll("#hvTheme .hv-th").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-t") === ds.theme); });
+    s.querySelectorAll("#hvFont .hv-fn").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-f") === ds.font); });
+    s.querySelectorAll("#hvHead button").forEach(function (b) { b.classList.toggle("on", b.getAttribute("data-h") === ds.headingStyle); });
   }
 
   // ---- toast ----
