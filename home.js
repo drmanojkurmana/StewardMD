@@ -69,7 +69,7 @@
       var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
       if (cr && cr.parentNode) {
         var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
-        var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
+        var ws = topBtn("🏥", "Ward Sync (testing mode)", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
         cr.parentNode.insertBefore(dx, cr);            // Dx My Patient first
         cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
       }
@@ -82,10 +82,10 @@
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
-        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", null, flag("smd_ai", false)) +
+        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Powered by Google AI", flag("smd_ai", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
-          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
+          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
         setBody.insertAdjacentHTML("beforeend",
           group("interface", "Interface", interfaceBody, false) +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
@@ -974,7 +974,7 @@
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
     sheet.innerHTML =
-      '<div class="maik-hd"><div class="mk-ti"><div class="mk-t">MaiK</div><div class="mk-s">Clinical knowledge assistant</div></div>' +
+      '<div class="maik-hd"><div class="mk-ti"><div class="mk-t">MaiK</div><div class="mk-s">Medical AI Knowledge · Powered by Google AI</div></div>' +
         '<button class="maik-x" id="maikX" aria-label="Close">✕</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">✓ Advisory — clinician verifies</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
