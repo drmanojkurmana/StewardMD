@@ -23,10 +23,14 @@
   function brandCandidates(name) {
     if (!name) return [];
     var n = name.toLowerCase().trim(), out = [];
+    // BRAND_SEED is checked/listed before formulary hits intentionally — seed precedence
+    // is deliberate (fast, hand-curated matches take priority), not a bug.
     if (BRAND_SEED[n]) out.push({ brand: name, generic: BRAND_SEED[n] });
     // formulary aliases (window.MEDDRUGS: {generic, brands:[...]})
     try {
-      (window.MEDDRUGS || []).forEach(function (d) {
+      // MEDDRUGS is a facade object ({match, findByName, ..., _list}), not an array —
+      // the actual drug array lives at MEDDRUGS._list.
+      ((window.MEDDRUGS && window.MEDDRUGS._list) || []).forEach(function (d) {
         if ((d.brands || []).some(function (b) { return b.toLowerCase() === n; }))
           out.push({ brand: name, generic: d.generic.toLowerCase() });
       });
@@ -36,7 +40,8 @@
   }
   function isKnownGeneric(n) {
     n = (n || "").toLowerCase();
-    try { return (window.MEDDRUGS || []).some(function (d) { return d.generic.toLowerCase() === n; }); } catch (_) { return false; }
+    // MEDDRUGS is a facade object, not an array — the actual drug array lives at MEDDRUGS._list.
+    try { return ((window.MEDDRUGS && window.MEDDRUGS._list) || []).some(function (d) { return d.generic.toLowerCase() === n; }); } catch (_) { return false; }
   }
   function resolveGeneric(out) {
     var n = out.name;

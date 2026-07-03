@@ -55,6 +55,11 @@ try {
   const pz = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parseEntry("Piptaz 4.5 q6h"))`));
   ok(pz.generic === null && pz.candidates.some(c => c.generic.indexOf("piperacillin") === 0), "'Piptaz' stays unmapped w/ candidate (needs confirm)");
 
+  const om = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parseEntry("omez 20 od"))`));
+  ok(om.generic === "omeprazole" && om.confidence === "high", "'omez' (formulary brand alias, not in BRAND_SEED) -> omeprazole");
+  const am = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parseEntry("amlodipine 5 od"))`));
+  ok(am.generic === "amlodipine" && am.confidence === "high", "'amlodipine' (known generic via formulary, not in BRAND_SEED) -> amlodipine");
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
