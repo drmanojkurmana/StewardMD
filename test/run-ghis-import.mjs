@@ -45,7 +45,14 @@ try {
   ws.onmessage = (e) => { const m = JSON.parse(e.data); if (m.id && pending.has(m.id)) { pending.get(m.id)(m); pending.delete(m.id); } };
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId: sid } } = await call("Target.attachToTarget", { targetId, flatten: true }); sessionId = sid;
-  await call("Runtime.enable", {}); await call("Page.navigate", { url: BASE });
+  await call("Runtime.enable", {}); await call("Page.enable", {});
+  // Neutralize the service worker for this test: sw.js's activate handler does
+  // clients.claim()+navigate(), reloading the tab and wiping the (correctly
+  // non-persisted) in-memory GHIS draft mid-test. Stub register before any page
+  // script runs so the SW never registers/activates. Test-only; product behaviour
+  // (draft not persisted, cleared on real reload) is unchanged.
+  await call("Page.addScriptToEvaluateOnNewDocument", { source: "try{Object.defineProperty(navigator,'serviceWorker',{configurable:true,get:function(){return {register:function(){return Promise.reject(new Error('sw-off'))},getRegistrations:function(){return Promise.resolve([])},addEventListener:function(){},ready:new Promise(function(){})}}});}catch(e){try{navigator.serviceWorker.register=function(){return Promise.reject(new Error('sw-off'))}}catch(_){}}" });
+  await call("Page.navigate", { url: BASE });
   let ready = false; for (let i = 0; i < 80; i++) { await sleep(400); if (await ev(`return !!(window.MEDLIST && window.GHISMEDS && GHISMEDS.parseGhisRow && GHISMEDS.parseGhisRows)`) === true) ready = true; if (ready) break; }
   if (!ready) throw new Error("GHISMEDS/MEDLIST not loaded");
 
