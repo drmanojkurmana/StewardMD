@@ -1,0 +1,57 @@
+{
+  "id": "sickle_cell_disease",
+  "name": "Sickle Cell Vaso-occlusive Crisis",
+  "class": "non_infective",
+  "system": "Haematology",
+  "coding": {
+    "icd10": "D57.00",
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "sickleCellHx": 40,
+      "severePain": 18,
+      "dehydration": 12,
+      "jaundice": 8,
+      "abdominalPain": 6
+    },
+    "associatedFindings": [
+      "sickleCellHx",
+      "severePain",
+      "dehydration",
+      "jaundice",
+      "abdominalPain"
+    ],
+    "reasoningTemplate": "A severe, stereotyped pain episode in a patient with known sickle cell disease — often precipitated by dehydration, infection or hypoxia — indicates an acute vaso-occlusive crisis."
+  },
+  "redFlags": [
+    "Acute chest syndrome — chest pain, cough, fever, hypoxia and a new pulmonary infiltrate; can progress rapidly to ARDS and multiorgan failure",
+    "Acute splenic sequestration — rapidly falling haemoglobin with splenic enlargement",
+    "Stroke / acute neurological deficit",
+    "Fever in a functionally asplenic patient — high risk of overwhelming encapsulated-organism sepsis"
+  ],
+  "investigations": [
+    { "test": "FBC with reticulocyte count (baseline vs current Hb)" },
+    { "test": "Assess hydration, oxygenation (SpO2/ABG) and screen for a precipitant (infection, hypoxia)" },
+    { "test": "CXR if chest pain / hypoxia / fever — exclude acute chest syndrome" }
+  ],
+  "treatmentRef": null,
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": ["Harrison 22e (2025)"]
+  },
+  "review": {
+    "status": "ai_drafted",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "version": 1,
+  "contentHash": null,
+  "references": ["Harrison 22e p.769-776"],
+  "provenanceNote": "Recall Tier-4 promotion from kb/reference/sickle_cell_disease.json (reference-only) to a diagnosable entity. AI-drafted matching signature; PENDING clinician sign-off before it should be treated as clinically validated."
+}
