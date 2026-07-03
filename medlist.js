@@ -184,6 +184,9 @@
     var actions = el("div", { cls: "ml-card-actions" });
     var editBtn = el("button", { cls: "ml-icon-btn", text: "Edit", attrs: { "data-ml-edit": med.id } });
     editBtn.addEventListener("click", function () {
+      // Finalize any pending inline-undo first, so editing this med can't
+      // orphan a different med whose Undo row is still showing.
+      clearUndoTimer(); _undoingId = null;
       _openAdd = "manual"; _manualState.value = med.raw || med.generic || "";
       _manualState.parsed = parseEntry(_manualState.value);
       remove(med.id); render();

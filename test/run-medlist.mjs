@@ -164,6 +164,15 @@ try {
   ok(await ev(`return MEDLIST.getList().length`) === 1 && await ev(`return MEDLIST.getList()[0].source`) === "index", "Drug Index result adds a med with source='index'");
   await ev(`MEDLIST.brandSearch = window.__origBrandSearch; return 1;`);
 
+  // Edit while an inline Undo is pending must finalize the pending undo — not orphan
+  // a different med / leave a dangling Undo row (Task 5 review, Important finding).
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  await ev(`var mid=MEDLIST.getList()[0].id; document.querySelector('#ml-test [data-ml-remove="'+mid+'"]').click(); return 1;`);
+  ok(await ev(`return /undo/i.test(document.getElementById("ml-test").innerText)`) === true, "remove shows inline Undo (with a second med present)");
+  await ev(`var bid=MEDLIST.getList()[0].id; document.querySelector('#ml-test [data-ml-edit="'+bid+'"]').click(); return 1;`);
+  ok(await ev(`return !/undo/i.test(document.getElementById("ml-test").innerText)`) === true, "editing another med finalizes the pending Undo (no orphaned Undo row)");
+  ok(await ev(`return MEDLIST.getList().length === 0`) === true, "edited med pulled into editor; no orphaned/dangling meds left");
+
   await ev(`MEDLIST.clearAll(); return 1;`);
 
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
