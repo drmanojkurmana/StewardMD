@@ -214,6 +214,40 @@
     return parsed;
   }
 
+  // explainInteraction(finding): OPTIONAL MaiK "explain this interaction" layer.
+  // Turns an ALREADY-detected deterministic finding into a plain-language
+  // explanation for the clinician. The deterministic engine remains the single
+  // source of truth: this returns DISPLAY-ONLY text and CANNOT change severity,
+  // add/remove findings, or alter counts.
+  //
+  // De-identification: we send ONLY the finding's drug names + mechanism/effect +
+  // severity LABEL — never any patient data. The payload is a compact string the
+  // existing /api/ai/explain endpoint already understands (via window.SMD_AI.explain),
+  // so no raw JSON, ids, provider or model names transit or return to the DOM.
+  // Called via window.MEDLIST.explainInteraction at click time so tests can stub it.
+  function explainInteraction(finding) {
+    if (!(window.SMD_AI && window.SMD_AI.explain)) return Promise.reject(new Error("ai-unavailable"));
+    finding = finding || {};
+    var sevBucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
+    var sevLabel = SEVERITY_LABEL[sevBucket] || "Caution";
+    var drugs = (finding.drugs || []).join(" + ");
+    var mech = [finding.mechanism, finding.effect].filter(Boolean).join(" ");
+    // De-identified finding only — NO patient context of any kind.
+    var summary = "A drug-interaction check flagged this deterministic finding. "
+      + "Explain in plain language, for a clinician, why it matters and what to watch for. "
+      + "Do NOT change or dispute the severity. "
+      + "Drugs: " + (drugs || "medicines") + ". "
+      + "Severity: " + sevLabel + ". "
+      + (mech ? "Mechanism/effect: " + mech + "." : "");
+    try { if (window.SMD_AI.setFlag) window.SMD_AI.setFlag(true); } catch (e) {}
+    return window.SMD_AI.explain(summary).then(function (r) {
+      if (!r || r.error || typeof r.text !== "string" || !r.text.trim()) {
+        throw new Error((r && r.error) || "explain-failed");
+      }
+      return r.text.trim();
+    });
+  }
+
   // --- UI: mount(containerEl) renders the medication-list-builder screen. ---
   var _root = null;             // mounted container element
   var _openAdd = null;          // which add-option panel is open: null|'index'|'manual'|'paste'
@@ -737,7 +771,52 @@
     if (finding.action) card.appendChild(detailRow("Action", finding.action));
     if (finding.monitoring) card.appendChild(detailRow("Monitoring", finding.monitoring));
     if (finding.source) card.appendChild(detailRow("Source", finding.source));
+
+    // Optional MaiK "explain this interaction" layer. The explanation is a
+    // DISPLAY-ONLY secondary block: it can never change the severity/marker
+    // rendered above, add/remove findings, or alter the summary counts — the
+    // deterministic finding object is the single source of truth.
+    var explainWrap = el("div", { cls: "mlr-explain-wrap" });
+    var explainBtn = el("button", { cls: "mlr-explain-btn", text: "Why this matters — explain",
+      attrs: { type: "button", "aria-label": "Explain this interaction" } });
+    var explainOut = el("div", { cls: "mlr-explain-out", attrs: { hidden: "hidden" } });
+    explainBtn.addEventListener("click", function () {
+      if (explainBtn.disabled) return;
+      explainBtn.disabled = true;
+      explainBtn.textContent = "Loading explanation…";
+      // Call via window.MEDLIST.explainInteraction so tests can stub it.
+      var p;
+      try { p = window.MEDLIST.explainInteraction(finding); }
+      catch (e) { p = Promise.reject(e); }
+      Promise.resolve(p).then(function (text) {
+        renderExplanation(explainOut, String(text || ""));
+        explainBtn.textContent = "Explanation shown";
+      }).catch(function () {
+        renderExplanation(explainOut,
+          "Couldn't load explanation — the interaction result stands.", true);
+        explainBtn.disabled = false;
+        explainBtn.textContent = "Why this matters — explain";
+      });
+    });
+    explainWrap.appendChild(explainBtn);
+    explainWrap.appendChild(explainOut);
+    card.appendChild(explainWrap);
     return card;
+  }
+
+  // Render the AI explanation as a clearly-labelled, display-only secondary block.
+  // Text is set via textContent only (never innerHTML) so nothing from the AI can
+  // inject markup, and no raw JSON/ids/provider strings leak into the DOM.
+  function renderExplanation(container, text, isError) {
+    container.textContent = "";
+    container.removeAttribute("hidden");
+    container.classList.toggle("mlr-explain-err", !!isError);
+    if (!isError) {
+      container.appendChild(el("div", { cls: "mlr-explain-label", text: "Explanation" }));
+      container.appendChild(el("div", { cls: "mlr-explain-note",
+        text: "AI explanation of this rule — the interaction finding above is unchanged." }));
+    }
+    container.appendChild(el("div", { cls: "mlr-explain-body", text: text }));
   }
 
   var SEVERITY_BUCKET_CLASS = {
@@ -904,6 +983,14 @@
       + ".mlr-detail-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
       + ".mlr-detail-val{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}"
       + ".mlr-none{padding:26px 10px;text-align:center;color:var(--teal,#0a9396);font:700 14px var(--sans,system-ui);border:1px dashed #a6d9d8;border-radius:12px;background:var(--teal-soft,#e0f2f1)}"
+      + ".mlr-explain-wrap{margin-top:10px}"
+      + ".mlr-explain-btn{background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:6px 11px;font:700 11.5px var(--sans,system-ui);cursor:pointer;color:var(--teal,#0a9396)}"
+      + ".mlr-explain-btn:disabled{opacity:.7;cursor:default}"
+      + ".mlr-explain-out{margin-top:8px;border-left:3px solid #a6d9d8;background:var(--teal-soft,#e0f2f1);border-radius:8px;padding:9px 11px}"
+      + ".mlr-explain-out.mlr-explain-err{border-left-color:#f2c9c5;background:#fbe6e4}"
+      + ".mlr-explain-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
+      + ".mlr-explain-note{font:500 10.5px var(--sans,system-ui);color:var(--slate,#666);margin:1px 0 5px;font-style:italic}"
+      + ".mlr-explain-body{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.45;white-space:pre-wrap}"
       // --- Scan review screen ---
       + ".ml-scan-ov{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.5);padding:16px}"
       + ".ml-scan-box{background:var(--panel,#fff);border-radius:14px;padding:20px 22px;text-align:center;color:var(--ink,#1a1a1a);font:600 13.5px var(--sans,system-ui);max-width:300px}"
@@ -945,5 +1032,6 @@
     mount: mount, brandSearch: brandSearch,
     // Re-render the current list view (used by GHISMEDS to return from its review screen).
     _rerender: function () { _view = "list"; render(); },
-    scanExtract: scanExtract, _compressImage: _compressImage, _openScanReview: _openScanReview };
+    scanExtract: scanExtract, _compressImage: _compressImage, _openScanReview: _openScanReview,
+    explainInteraction: explainInteraction };
 })();
