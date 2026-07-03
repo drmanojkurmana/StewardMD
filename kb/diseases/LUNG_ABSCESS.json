@@ -17,8 +17,19 @@
             "foulSmellingSputum"
           ]
         },
-        "prolongedFever",
-        "cough"
+        {
+          "anyOf": [
+            "prolongedFever",
+            "fever"
+          ]
+        },
+        {
+          "anyOf": [
+            "cough",
+            "coughRadio",
+            "prolongedCough2Weeks"
+          ]
+        }
       ]
     },
     "score": {
