@@ -28,8 +28,11 @@
   var MEDAPI = {
     base: API_BASE,
     searchCompositions: function (q, limit) { return api("/search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 20)).then(function (d) { return d || { results: [] }; }); },
-    composition: function (name, sort, tier, limit, offset) {
-      return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0));
+    // Brand-name search — returns individual brands whose name matches q (e.g.
+    // "pantocid"). Degrades to empty if the API predates the endpoint (404 → null).
+    searchBrands: function (q, limit) { return api("/brand-search?q=" + encodeURIComponent(q || "") + "&limit=" + (limit || 12)).then(function (d) { return d || { results: [] }; }); },
+    composition: function (name, sort, tier, limit, offset, q) {
+      return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0) + (q ? "&q=" + encodeURIComponent(q) : ""));
     },
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
     monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
@@ -85,7 +88,7 @@
    * Drugs Database — full-screen browser overlay (window.MEDDB)
    * ============================================================ */
   var root = null, q2 = "", t2 = null;
-  var st = { name: null, sort: "relevance", tier: "all", info: null, brands: [], total: 0, offset: 0, loading: false };
+  var st = { name: null, sort: "relevance", tier: "all", info: null, brands: [], total: 0, offset: 0, loading: false, bq: "" };
   var TIER_LABEL = { all: "", branded: "top-branded", generic: "top-generic" };
   var monoCache = {};
 
@@ -146,16 +149,32 @@
     if (r) r.innerHTML = '<div class="db-empty">Searching…</div>';
     t2 = setTimeout(function () { if (q === q2) runList(q); }, DEBOUNCE);
   }
+  function compCardHTML(x) {
+    var sub = [x["class"], (x.brands != null ? x.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
+    return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">💊</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">›</span></button>';
+  }
+  // Brand hit: brand name (carries the dose, e.g. "Pantocid 40 Tablet") on top,
+  // composition + manufacturer/form/price underneath. Tapping opens its molecule.
+  function brandHitHTML(bd) {
+    var meta = [bd.manufacturer, bd.form, (bd.mrp != null ? inr(bd.mrp) : "")].filter(Boolean).join(" · ");
+    return '<button class="db-comp db-brandhit' + (bd.discontinued ? " disc" : "") + '" data-comp="' + esc(bd.composition || "") + '">' +
+      '<span class="db-comp-ic">🔖</span><span class="db-comp-main">' +
+        '<span class="db-comp-name">' + esc(bd.brand) + (bd.discontinued ? ' <span class="db-disc">discontinued</span>' : '') + '</span>' +
+        '<span class="db-comp-sub"><b class="db-bh-comp">' + esc(bd.composition || "—") + '</b>' + (meta ? ' · ' + esc(meta) : '') + '</span>' +
+      '</span><span class="db-chev">›</span></button>';
+  }
   function runList(q) {
-    MEDAPI.searchCompositions(q, 30).then(function (d) {
+    // brand-name hits + molecule/composition hits in parallel; brands shown first
+    // so doctors who type a brand (e.g. "pantocid") see the brand itself on top.
+    Promise.all([MEDAPI.searchBrands(q, 12), MEDAPI.searchCompositions(q, 30)]).then(function (arr) {
       if (q !== q2 || st.name) return;
       var r = root.querySelector("#dbResults"); if (!r) return;
-      var list = (d && d.results) || [];
-      if (!list.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
-      r.innerHTML = list.map(function (x) {
-        var sub = [x["class"], (x.brands != null ? x.brands.toLocaleString() + " brands" : "")].filter(Boolean).join(" · ");
-        return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">💊</span><span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + '</span><span class="db-comp-sub">' + esc(sub) + '</span></span><span class="db-chev">›</span></button>';
-      }).join("");
+      var brands = (arr[0] && arr[0].results) || [], comps = (arr[1] && arr[1].results) || [];
+      if (!brands.length && !comps.length) { r.innerHTML = '<div class="db-empty">No drugs match “' + esc(q) + '”.</div>'; return; }
+      var html = "";
+      if (brands.length) html += '<div class="db-sec-l">🔖 Brands matching “' + esc(q) + '”</div>' + brands.map(brandHitHTML).join("");
+      if (comps.length) html += '<div class="db-sec-l">🧪 Molecules &amp; compositions</div>' + comps.map(compCardHTML).join("");
+      r.innerHTML = html;
       r.querySelectorAll(".db-comp").forEach(function (b) { b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); }); });
     });
   }
@@ -164,6 +183,7 @@
   function openComposition(name, sort, tier) {
     ensureRoot();
     if (!root.classList.contains("on")) { root.classList.add("on"); document.body.classList.add("db-lock"); }
+    if (st.name !== name) st.bq = "";   // fresh molecule → clear the brand filter; sort/tier changes keep it
     st.name = name; st.sort = sort || "relevance"; st.tier = tier || "all"; st.info = null; st.brands = []; st.total = 0; st.offset = 0;
     setTitle(name, true);
     root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Loading ' + esc(name) + '…</div>';
@@ -171,7 +191,7 @@
   }
   function loadComposition(first) {
     if (st.loading) return; st.loading = true;
-    MEDAPI.composition(st.name, st.sort, st.tier, PAGE, st.offset).then(function (d) {
+    MEDAPI.composition(st.name, st.sort, st.tier, PAGE, st.offset, st.bq).then(function (d) {
       st.loading = false;
       if (!d || st.name !== d.composition) { if (first) root.querySelector("#dbBody").innerHTML = '<div class="db-empty">Could not load this drug.</div>'; return; }
       if (first) { st.info = d; st.total = d.total || 0; st.brands = d.brands || []; renderDetail(); }
@@ -207,11 +227,21 @@
     // brands (all filters + sorts preserved) -> right-side slide-in drawer
     var dw = root.querySelector("#dbDwBody");
     dw.innerHTML =
+      '<div class="db-dwsearch"><input id="dbBrandQ" class="db-dwsearch-i" type="text" placeholder="🔍 Search brands by name…" autocomplete="off" value="' + esc(st.bq) + '"></div>' +
       '<div class="db-filters"><span class="db-filt-l">Show</span>' + tierBtn("all", "All") + tierBtn("branded", "Top branded") + tierBtn("generic", "Top generic") + '</div>' +
       '<div class="db-brands-h"><span>' + cnt + ' brands</span>' +
         '<span class="db-sorts">' + sortBtn("relevance", "Relevance") + sortBtn("price_asc", "Price: Low→High") + sortBtn("price_desc", "Price: High→Low") + '</span></div>' +
       '<div id="dbBrands" class="db-brand-list">' + brandsBody + '</div>' +
       '<div id="dbMore"></div>';
+    var bqi = dw.querySelector("#dbBrandQ");
+    if (bqi) {
+      bqi.addEventListener("keydown", function (e) { e.stopPropagation(); });
+      bqi.addEventListener("input", function () {
+        var v = bqi.value.trim();
+        if (st._bqt) clearTimeout(st._bqt);
+        st._bqt = setTimeout(function () { if (v !== st.bq) { st.bq = v; reloadBrands(); } }, DEBOUNCE);
+      });
+    }
     dw.querySelectorAll(".db-sort").forEach(function (x) {
       x.addEventListener("click", function () { var s = x.getAttribute("data-sort"); if (s !== st.sort) { dwOpen = true; openComposition(st.name, s, st.tier); } });
     });
@@ -282,6 +312,23 @@
       m.innerHTML = '<button class="db-more" id="dbMoreBtn">Load more (' + (st.total - st.brands.length).toLocaleString() + ' more)</button>';
       m.querySelector("#dbMoreBtn").addEventListener("click", function () { st.offset = st.brands.length; loadComposition(false); m.innerHTML = '<div class="db-empty">Loading…</div>'; });
     } else m.innerHTML = '<div class="db-allshown">All ' + st.brands.length.toLocaleString() + ' brands shown</div>';
+  }
+
+  // Re-query only the brand list for the drawer's "search brands by name" box.
+  // Replaces the list in place (keeps the search input focused); race-safe via a
+  // query token so a slower earlier response can't clobber a newer search.
+  function reloadBrands() {
+    var myq = st.bq; st.offset = 0;
+    var list = root.querySelector("#dbBrands"); if (list) list.innerHTML = '<div class="db-empty">Searching…</div>';
+    MEDAPI.composition(st.name, st.sort, st.tier, PAGE, 0, myq).then(function (d) {
+      if (myq !== st.bq || !d || st.name !== d.composition) return;   // superseded or stale
+      st.total = d.total || 0; st.brands = d.brands || [];
+      var l = root.querySelector("#dbBrands");
+      if (l) l.innerHTML = st.brands.length ? st.brands.map(brandHTML).join("")
+        : '<div class="db-empty">No brands' + (st.bq ? ' match “' + esc(st.bq) + '”' : ' listed') + '.</div>';
+      var h = root.querySelector(".db-brands-h span"); if (h) h.textContent = (st.total ? st.total.toLocaleString() : st.brands.length) + ' brands';
+      renderMore();
+    });
   }
 
   function openList() {
@@ -386,6 +433,14 @@
       ".db-comp-name{display:block;font:700 13.5px var(--sans,system-ui);color:var(--ink,#1a1a1a)}",
       ".db-comp-sub{display:block;font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}",
       ".db-chev{color:var(--slate-soft,#888);font-size:18px}",
+      ".db-sec-l{font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin:12px 2px 8px}",
+      ".db-sec-l:first-child{margin-top:2px}",
+      ".db-brandhit{border-left:3px solid var(--teal,#0a9396)}",
+      ".db-brandhit .db-bh-comp{color:var(--teal,#0a9396);font-weight:700}",
+      ".db-brandhit.disc{opacity:.6}",
+      ".db-dwsearch{margin:2px 2px 10px}",
+      ".db-dwsearch-i{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:9px;padding:9px 11px;font:500 13px var(--sans,system-ui);background:var(--paper,#f7f7f5);color:var(--ink,#1a1a1a)}",
+      ".db-dwsearch-i:focus{outline:none;border-color:var(--teal,#0a9396)}",
       ".db-head{margin-bottom:12px}.db-gen{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.25}",
       ".db-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}",
       ".db-chip{font:700 10.5px var(--sans,system-ui);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:7px;padding:3px 9px;text-transform:capitalize}",

@@ -112,6 +112,44 @@ async function handleSuggest(url, env) {
   }
 }
 
+// /brand-search -> individual BRAND rows whose NAME matches q (for doctors who
+// search by brand, e.g. "pantocid" -> the Pantocid brand + its composition/dose).
+// /search stays the molecule/composition view; this surfaces the brand itself.
+async function handleBrandSearch(url, env) {
+  const q = (url.searchParams.get("q") || "").trim();
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "20", 10) || 20, 40);
+  const match = q.length >= 2 ? ftsQuery(q) : null;
+  if (!match) return json({ query: q, count: 0, results: [] }, { ttl: TTL.search });
+  const ql = q.toLowerCase();
+  try {
+    const { results } = await env.DB.prepare(
+      `SELECT d.id, d.brand, d.composition, d.class, d.manufacturer, d.mrp, d.form, d.pack, d.discontinued
+         FROM drugs_fts f JOIN drugs d ON d.id = f.rowid
+        WHERE drugs_fts MATCH ?1 ORDER BY rank LIMIT 300`
+    ).bind(match).all();
+    // Keep only rows whose BRAND name actually matches (drop molecule-only FTS hits,
+    // where the token matched the composition column). Prefix hits rank above
+    // substring hits, live drugs above discontinued; dedupe by brand id.
+    const seen = new Set(), scored = [];
+    for (const r of results) {
+      const bl = String(r.brand || "").toLowerCase();
+      let s;
+      if (bl.startsWith(ql)) s = 0;
+      else if (bl.indexOf(ql) !== -1) s = 1;
+      else continue;
+      if (seen.has(r.id)) continue; seen.add(r.id);
+      scored.push({ r: r, s: s });
+    }
+    scored.sort((a, b) => (a.s - b.s) || ((a.r.discontinued ? 1 : 0) - (b.r.discontinued ? 1 : 0)) ||
+      String(a.r.brand).localeCompare(String(b.r.brand)));
+    const out = scored.slice(0, limit).map((x) => x.r);
+    return json({ query: q, count: out.length, results: out }, { ttl: TTL.search });
+  } catch (err) {
+    if (tableMissing(err)) return emptyNote({ query: q, count: 0, results: [] });
+    return json({ error: "brand_search_failed" }, { status: 500 });
+  }
+}
+
 const SORTS = {
   relevance: "discontinued ASC, brand COLLATE NOCASE ASC",
   price_asc: "(mrp IS NULL) ASC, mrp ASC, brand COLLATE NOCASE ASC",
@@ -135,6 +173,11 @@ async function handleComposition(url, env) {
   const tier = url.searchParams.get("tier");
   const pats = (tier && TIERS[tier]) ? TIERS[tier].map((p) => p + "%") : null;
   const mfr = pats ? " AND (" + pats.map((_, i) => `lower(manufacturer) LIKE ?${i + 2}`).join(" OR ") + ")" : "";
+  // optional brand-name filter (drawer "search within brands"): AND lower(brand) LIKE %q%
+  const bq = (url.searchParams.get("q") || "").trim();
+  const P = pats ? pats.length : 0;
+  const bqClause = bq ? ` AND lower(brand) LIKE ?${P + 2}` : "";
+  const bqBind = bq ? ["%" + bq.toLowerCase() + "%"] : [];
   const limit = Math.min(parseInt(url.searchParams.get("limit") || "100", 10) || 100, 300);
   const offset = Math.max(parseInt(url.searchParams.get("offset") || "0", 10) || 0, 0);
   try {
@@ -150,12 +193,12 @@ async function handleComposition(url, env) {
     const info = rep || fallback;
     const baseBinds = pats ? [name, ...pats] : [name];
     const total = await env.DB.prepare(
-      `SELECT count(*) AS n FROM drugs WHERE composition = ?1${mfr}`).bind(...baseBinds).first();
-    const li = (pats ? pats.length : 0) + 2, oi = li + 1;
+      `SELECT count(*) AS n FROM drugs WHERE composition = ?1${mfr}${bqClause}`).bind(...baseBinds, ...bqBind).first();
+    const li = P + (bq ? 1 : 0) + 2, oi = li + 1;
     const { results: brands } = await env.DB.prepare(
       `SELECT id, brand, manufacturer, mrp, form, pack, discontinued
-         FROM drugs WHERE composition = ?1${mfr} ORDER BY ${SORTS[sort]} LIMIT ?${li} OFFSET ?${oi}`
-    ).bind(...baseBinds, limit, offset).all();
+         FROM drugs WHERE composition = ?1${mfr}${bqClause} ORDER BY ${SORTS[sort]} LIMIT ?${li} OFFSET ?${oi}`
+    ).bind(...baseBinds, ...bqBind, limit, offset).all();
     if (!info && (!total || !total.n)) return json({ error: "not_found" }, { status: 404 });
     return json({
       composition: name, sort, tier: (tier && TIERS[tier]) ? tier : "all",
@@ -272,7 +315,7 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, "") || "/";
-    const cacheable = path === "/search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
+    const cacheable = path === "/search" || path === "/brand-search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
 
     const cache = caches.default;
     let cacheKey = request;
@@ -285,6 +328,7 @@ export default {
     let res;
     if (path === "/" || path === "/health") res = await handleHealth(env);
     else if (path === "/search") res = await handleSearch(url, env);
+    else if (path === "/brand-search") res = await handleBrandSearch(url, env);
     else if (path === "/suggest") res = await handleSuggest(url, env);
     else if (path === "/composition") res = await handleComposition(url, env);
     else if (path === "/monograph") res = await handleMonograph(url, env);
