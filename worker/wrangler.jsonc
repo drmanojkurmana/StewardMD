@@ -24,6 +24,17 @@
     }
   ],
 
+  // R2 bucket holding the compressed offline DB snapshot + version.json.
+  // Served only to paid, authenticated users via GET /offline-db (see src/auth.js).
+  "r2_buckets": [
+    { "binding": "OFFLINE_BUCKET", "bucket_name": "stewardmd-offline" }
+  ],
+
+  // Firebase project id — used to verify ID tokens (audience/issuer). Public value.
+  "vars": {
+    "FIREBASE_PROJECT_ID": "stewardmd-498ec"
+  },
+
   // account_id intentionally omitted from source control; wrangler uses the
   // authenticated account. Any secrets go via `wrangler secret put`, never here.
   "observability": { "enabled": true },

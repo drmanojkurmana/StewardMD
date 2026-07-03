@@ -20,6 +20,8 @@
  * ----------------------------------------------------------------------------
  */
 
+import { requirePro } from "./auth.js";
+
 const ALLOWED_ORIGINS = [
   "https://stewardmd.in", "https://www.stewardmd.in",
   "capacitor://localhost", "ionic://localhost", "http://localhost",
@@ -35,7 +37,7 @@ function corsHeaders(origin) {
   return {
     "Access-Control-Allow-Origin": allow,
     "Access-Control-Allow-Methods": "GET,OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type,Authorization",
     "Access-Control-Max-Age": "86400",
     "Vary": "Origin",
   };
@@ -287,6 +289,45 @@ async function handleHealth(env) {
   return json({ ok: true, service: "stewardmd-api", db: "stewardmd-prod", dbReady, rows }, { ttl: 0 });
 }
 
+// ---- Paid-only offline database download (served from R2) -------------------
+// Gate: valid Firebase ID token with custom claim pro:true. See src/auth.js.
+async function handleOfflineDbVersion(request, env) {
+  try { await requirePro(request, env); }
+  catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
+  if (!env.OFFLINE_BUCKET) return json({ error: "offline_unavailable" }, { status: 503 });
+  const obj = await env.OFFLINE_BUCKET.get("version.json");
+  if (!obj) return json({ error: "not_found" }, { status: 404 });
+  return new Response(obj.body, {
+    status: 200,
+    headers: { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" },
+  });
+}
+
+async function handleOfflineDb(request, env) {
+  let user;
+  try { user = await requirePro(request, env); }
+  catch (e) { return json({ error: e.message }, { status: e.status || 401 }); }
+  if (!env.OFFLINE_BUCKET) return json({ error: "offline_unavailable" }, { status: 503 });
+
+  const obj = await env.OFFLINE_BUCKET.get("stewardmd-drugs.sqlite.gz");
+  if (!obj) return json({ error: "not_found" }, { status: 404 });
+
+  const etag = obj.httpEtag;
+  if (request.headers.get("If-None-Match") === etag) {
+    return new Response(null, { status: 304, headers: { ETag: etag } });
+  }
+  return new Response(obj.body, {
+    status: 200,
+    headers: {
+      "Content-Type": "application/gzip",
+      "Content-Disposition": 'attachment; filename="stewardmd-drugs.sqlite.gz"',
+      "Content-Length": String(obj.size),
+      "ETag": etag,
+      "Cache-Control": "private, no-store",
+    },
+  });
+}
+
 export default {
   // Scheduled (cron) — pull trusted FDA medical updates into the notifications
   // feed. The ingest logic lives in the Pages Function (/api/updates/sync); this
@@ -334,6 +375,8 @@ export default {
     else if (path === "/monograph") res = await handleMonograph(url, env);
     else if (path === "/structured") res = await handleStructured(url, env);
     else if (path.startsWith("/drug/")) res = await handleDrug(decodeURIComponent(path.slice("/drug/".length)), env);
+    else if (path === "/offline-db/version") res = await handleOfflineDbVersion(request, env);
+    else if (path === "/offline-db") res = await handleOfflineDb(request, env);
     else res = json({ error: "not_found" }, { status: 404 });
 
     const cc = res.headers.get("Cache-Control") || "";
