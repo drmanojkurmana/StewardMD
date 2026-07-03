@@ -1531,16 +1531,39 @@
     plt:   { kw:/platelet/i, ex:/immature|fraction/i },
     mcv:   { kw:/\bmcv\b|mean corpuscular volume|mean cell volume/i, ex:null },
     rbc:   { kw:/\brbc\b|red blood cell count|red cell count|total rbc/i, ex:/width|\brdw\b|nucleated|\bmch\b|distribution/i },
-    iron:  { kw:/serum iron|\biron\b/i, ex:/binding|tibc|saturation|ferritin/i },
-    tibc:  { kw:/\btibc\b|total iron.?binding/i, ex:null },
-    a1c:   { kw:/hba1c|glycated h|glycosylated h|\ba1c\b/i, ex:null },
+    retic: { kw:/reticulocyte/i, ex:/absolute|immature|equivalent|fraction|index|h[ae]moglobin/i },   // Reticulocyte % only
+    iron:  { kw:/serum iron|\biron\b/i, ex:/binding|tibc|\buibc\b|saturation|ferritin/i },
+    tibc:  { kw:/\btibc\b|total iron.?binding/i, ex:/\buibc\b|unsaturated/i },
+    a1c:   { kw:/hba1c|glycated h|glycosylated h|\ba1c\b/i, ex:/estimated|\beag\b/i },
     chol:  { kw:/total cholesterol|cholesterol.*total|\btc\b/i, ex:/hdl|ldl|non.?hdl|ratio|vldl/i },
     hdl:   { kw:/\bhdl\b/i, ex:/non.?hdl|ratio/i },
     tg:    { kw:/triglyceride/i, ex:null }
   };
   function num(x){ var n=parseFloat(x); return isNaN(n)?null:n; }
-  // Rows are newest-first; first hit for each analyte wins. Returns
-  // { <analyte>: {value, units, order, date, derived?} }.
+  // Unit normalisation for count analytes whose calculator field expects ×10⁹/L.
+  // The live GHIS lab reports platelets in "Lakhs/cumm" (e.g. 2.5 → 250 ×10⁹/L)
+  // and WBC as an absolute "/cumm" count (e.g. 8000 → 8 ×10⁹/L), so the raw number
+  // must be scaled or the score would be wildly wrong. Microscopy units ("hpf" —
+  // urine leucocytes/RBCs) have no valid conversion and are rejected.
+  var UNIT_FIX = {
+    plt: [ {rx:/lakh/i, f:100}, {rx:/10\s*\^?\s*9|×?10⁹|10e9|g\/l/i, f:1}, {rx:/cumm|cmm|cell|\/[uµ]l|mm\s*3|mm³/i, f:0.001} ],
+    wbc: [ {rx:/10\s*\^?\s*9|×?10⁹|10e9|g\/l/i, f:1}, {rx:/cumm|cmm|cell|\/[uµ]l|mm\s*3|mm³/i, f:0.001} ]
+  };
+  // Returns {value, unit, note} after unit fix, or null if the unit can't be
+  // reconciled to the calculator's expected scale (→ leave the field for manual entry).
+  function fixUnit(key, value, rawUnit){
+    var rules=UNIT_FIX[key];
+    if(!rules) return { value:value, unit:rawUnit||"", note:"" };
+    var u=String(rawUnit||"");
+    if(/hpf/i.test(u)) return null;                         // urine microscopy — not a blood count
+    for(var i=0;i<rules.length;i++){ if(rules[i].rx.test(u)){
+      if(rules[i].f===1) return { value:value, unit:"×10⁹/L", note:"" };
+      return { value:Math.round(value*rules[i].f*10)/10, unit:"×10⁹/L", note:"converted from "+u };
+    }}
+    return null;                                            // unknown unit for a count analyte — don't guess
+  }
+  // Rows are newest-first; first usable hit for each analyte wins. Returns
+  // { <analyte>: {value, units, order, date, derived?, note?} }.
   function extractAnalytes(rows){
     var out={};
     (rows||[]).forEach(function(r){
@@ -1554,7 +1577,9 @@
         // so it is never confused with the unitless INR row.
         if(m.unit && !(r.units && m.unit.test(String(r.units))) && !m.unit.test(name)) return;
         var v=num(r.result); if(v==null) return;
-        out[key]={ value:v, units:r.units||"", order:r.order||"", date:r.date||"" };
+        var fx=fixUnit(key, v, r.units);
+        if(!fx) return;   // incompatible unit (e.g. urine hpf, unknown count scale) — keep scanning
+        out[key]={ value:fx.value, units:fx.unit||r.units||"", order:r.order||"", date:r.date||"", note:fx.note||"" };
         if(key==="pt"){   // derive Control PT from the PT row's reference-range midpoint
           var lo=num(r.low), hi=num(r.high);
           if(lo!=null && hi!=null && out.ptctrl==null)
@@ -1592,7 +1617,9 @@
       var got=analytes && analytes[f.lab];
       if(got && got.value!=null){
         inp.value=got.value;
-        filled.push({ label:f.label, val:got.value, units:got.units, src:(got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"")) });
+        var src=got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"");
+        if(got.note) src+=" · "+got.note;
+        filled.push({ label:f.label, val:got.value, units:got.units, src:src });
       } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
         inp.value=parseFloat(photoRec[f.lab]);
         filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"📷 Imported report" });
