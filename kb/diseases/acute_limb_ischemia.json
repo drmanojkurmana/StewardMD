@@ -1,0 +1,44 @@
+{
+  "id": "acute_limb_ischemia",
+  "name": "Acute Limb Ischaemia",
+  "class": "non_infective",
+  "system": "Vascular",
+  "coding": { "icd10": "I74.3", "icd11": null, "snomed": null },
+  "matching": {
+    "find": {
+      "peripheralVascularDisease": 22,
+      "atrialFibHx": 20,
+      "severePain": 16,
+      "legSwellingUnilateral": 14,
+      "ageOver50": 6
+    },
+    "associatedFindings": [
+      "peripheralVascularDisease",
+      "atrialFibHx",
+      "severePain",
+      "legSwellingUnilateral"
+    ],
+    "reasoningTemplate": "Sudden severe limb pain in a patient with an embolic source (atrial fibrillation) or peripheral arterial disease indicates acute limb ischaemia — a time-critical vascular emergency (the 6 Ps)."
+  },
+  "redFlags": [
+    "Time-critical — irreversible tissue loss within ~6 h; pain, pallor, pulselessness, paraesthesia, paralysis, poikilothermia",
+    "Paralysis/anaesthesia (Rutherford IIb→III) → immediate revascularisation or the limb is lost",
+    "Systemic anticoagulate immediately unless contraindicated; urgent vascular referral"
+  ],
+  "investigations": [
+    { "test": "Handheld Doppler of distal pulses + ankle pressures" },
+    { "test": "Urgent CT/MR/catheter angiography to localise occlusion" },
+    { "test": "ECG (atrial fibrillation), FBC, coagulation, group-and-save" }
+  ],
+  "treatmentRef": null,
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": { "primaryRef": "Harrison 22e", "editions": ["Harrison 22e (2025)"] },
+  "review": { "status": "ai_drafted", "reviewedBy": null, "reviewedAt": null },
+  "version": 1,
+  "contentHash": null,
+  "references": ["Harrison 22e — Vascular Diseases of the Extremities"],
+  "provenanceNote": "Recall Tier-4 (Group B) new diagnosable entity. AI-drafted; PENDING clinician sign-off. Uses only existing governed finding keys (no vocabulary change)."
+}
