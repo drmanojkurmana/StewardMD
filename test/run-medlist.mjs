@@ -60,6 +60,9 @@ try {
   const am = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parseEntry("amlodipine 5 od"))`));
   ok(am.generic === "amlodipine" && am.confidence === "high", "'amlodipine' (known generic via formulary, not in BRAND_SEED) -> amlodipine");
 
+  const list = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parsePasted("1. Tab Amlodipine 5 mg OD\\n2) Metformin 500 BD\\n- T. Ecosprin 75"))`));
+  ok(list.length === 3 && list[0].generic === "amlodipine" && list[2].generic === "aspirin", "paste 3-line list parses each");
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

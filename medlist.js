@@ -90,5 +90,12 @@
     return out;
   }
 
-  window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates };
+  function parsePasted(text) {
+    return (text || "").split(/\r?\n/)
+      .map(function (l) { return l.replace(/^\s*(\d+[.)]|[-*•])\s*/, "").trim(); })
+      .filter(Boolean)
+      .map(parseEntry);
+  }
+
+  window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted };
 })();
