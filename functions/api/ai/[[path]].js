@@ -194,7 +194,7 @@ const RAG_SYS =
   "Reply as commentary under EXACTLY these markdown headings, in this order, omitting a heading only if you have nothing evidence-based to add:\n" +
   "### Additional differentials\n### Missing investigations\n### Teaching points\n### Alternative interpretations\n" +
   "(Add '### Culture-directed antibiotic considerations' ONLY when culture/sensitivity data is provided.) " +
-  "Keep each section to 1–4 short bullets. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Reference drugs by name/class only — NO specific doses beyond what the provided treatment resolution states. Never use patient identifiers. " +
+  "Keep each section to 1–4 short bullets. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Prefer the treatment resolution's dosing when present; where it names a drug without a dose and a dose is clinically pivotal, you may state the standard adult reference dose labelled '(standard reference — verify locally)'. Do not fabricate figures you are unsure of. Never use patient identifiers. " +
   "End with exactly: 'Decision-support only — the StewardMD rule engine owns the diagnosis; verify clinically.'";
 
 // General-knowledge system prompt (gold122): used when NO deterministic diagnosis
@@ -213,7 +213,7 @@ const KNOWLEDGE_SYS =
   "SAFETY & HONESTY (non-negotiable):\n" +
   "1. Answer ONLY what was asked. NEVER describe what is or is not in your knowledge base, and NEVER say things like 'the retrieved knowledge contains...' or 'no specific question was posed'.\n" +
   "2. Always finish — complete every thought and sentence; never trail off mid-answer.\n" +
-  "3. Give an exact dose/duration ONLY when the retrieved Drug Index / protocol states it; otherwise name the drug or class and the dosing principle and say to verify locally. Never invent doses, durations, guideline numbers, or citations.\n" +
+  "3. DOSING: give the standard adult dose/route/titration when the clinician asks for it. Prefer the retrieved Drug Index / protocol figure when present; otherwise give the widely-accepted textbook/guideline dose from mainstream knowledge and append '(standard reference — verify locally)'. This is expected for well-established therapy — e.g. atropine in organophosphate poisoning, adrenaline in anaphylaxis, benzodiazepines in status. Do NOT deflect a standard dose to 'consult local guidelines'. Only withhold a specific number when it is genuinely non-standard, disputed, or you are unsure — then state the principle and what IS established. Never fabricate a precise figure you are not confident in, and never invent guideline numbers or citations.\n" +
   "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
   "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
