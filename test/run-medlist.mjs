@@ -175,6 +175,34 @@ try {
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 
+  // --- Task 6: mobile safe-area on sticky footer + public mount() for entry points ---
+  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return typeof window.MEDLIST.mount === "function"`) === true, "MEDLIST.mount is public for entry points");
+  ok(await ev(`var f=document.querySelector("#ml-test .ml-footer"); return !!f`) === true, "sticky footer element exists");
+  // env(safe-area-inset-bottom) resolves to 0 in a normal/headless viewport, so the *computed*
+  // padding-bottom is indistinguishable from a bare 12px there — assert against the source rule
+  // text instead (this is what actually protects the iPhone home-indicator overlap).
+  ok(await ev(`var css=""; for (var s of document.styleSheets) { try { for (var r of s.cssRules) if (r.selectorText===".ml-footer") css+=r.style.cssText; } catch(e){} } return css.indexOf("env(safe-area-inset-bottom)")>=0`) === true,
+    "sticky footer padding-bottom rule includes env(safe-area-inset-bottom)");
+  ok(await ev(`var b=document.getElementById("ml-check"); return b.getBoundingClientRect().height >= 44`) === true, "Check-interactions touch target >= 44px");
+
+  // Entry points (Task 6): calculators.js (Tools) and icu.js both trigger the same
+  // MEDLIST overlay (window.MEDDRUGS.openInteractions, the Task 5 drugs.js overlay).
+  ok(await ev(`return typeof window.MEDCALC === "object" && !!window.MEDCALC`) === true, "MEDCALC present (calculators.js loaded)");
+  await ev(`if(document.getElementById("miOverlay")) document.getElementById("miOverlay").remove(); return 1;`);
+  await ev(`window.MEDCALC.openInteractions && window.MEDCALC.openInteractions(); return 1;`);
+  ok(await ev(`var o=document.getElementById("miOverlay"); return !!(o && o.classList.contains("on"))`) === true, "calculators.js Drug Interactions entry point opens MEDLIST overlay");
+  ok(await ev(`var o=document.getElementById("miOverlay"); return !!(o && o.querySelector("#ml-check"))`) === true, "calculators.js entry point mounts MEDLIST (Check-interactions button present)");
+  await ev(`window.MEDDRUGS.close && window.MEDDRUGS.close(); if(document.getElementById("miOverlay")) document.getElementById("miOverlay").classList.remove("on"); return 1;`);
+
+  ok(await ev(`return typeof window.ICU === "object" && !!window.ICU`) === true, "ICU present (icu.js loaded)");
+  await ev(`window.ICU.openInteractions && window.ICU.openInteractions(); return 1;`);
+  ok(await ev(`var o=document.getElementById("miOverlay"); return !!(o && o.classList.contains("on"))`) === true, "icu.js Drug Interactions entry point opens MEDLIST overlay");
+  ok(await ev(`var o=document.getElementById("miOverlay"); return !!(o && o.querySelector("#ml-check"))`) === true, "icu.js entry point mounts MEDLIST (Check-interactions button present)");
+  await ev(`if(document.getElementById("miOverlay")) document.getElementById("miOverlay").classList.remove("on"); document.body.classList.remove("mc-lock"); return 1;`);
+
+  await ev(`MEDLIST.clearAll(); return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
