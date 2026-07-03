@@ -192,9 +192,9 @@
   { id:"ldl", cat:"Cardiovascular", icon:"🧈", title:"LDL (Friedewald)",
     desc:"Estimated LDL cholesterol.",
     inputs:[
-      { id:"tc", label:"Total cholesterol", type:"number", unit:"mg/dL" },
-      { id:"hdl", label:"HDL", type:"number", unit:"mg/dL" },
-      { id:"tg", label:"Triglycerides", type:"number", unit:"mg/dL" }
+      { id:"tc", label:"Total cholesterol", type:"number", unit:"mg/dL", lab:"chol" },
+      { id:"hdl", label:"HDL", type:"number", unit:"mg/dL", lab:"hdl" },
+      { id:"tg", label:"Triglycerides", type:"number", unit:"mg/dL", lab:"tg" }
     ],
     compute:function(v){
       if(!ok(v.tc)||!ok(v.hdl)||!ok(v.tg)) return ERR;
@@ -278,10 +278,10 @@
   { id:"anion_gap", cat:"Critical care", icon:"🧮", title:"Anion gap (corrected)",
     desc:"Serum anion gap with albumin correction.",
     inputs:[
-      { id:"na", label:"Sodium", type:"number", unit:"mmol/L" },
-      { id:"cl", label:"Chloride", type:"number", unit:"mmol/L" },
-      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L" },
-      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", def:"4" }
+      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"cl", label:"Chloride", type:"number", unit:"mmol/L", lab:"cl" },
+      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L", lab:"hco3" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", def:"4", lab:"alb" }
     ],
     compute:function(v){
       if(!ok(v.na)||!ok(v.cl)||!ok(v.hco3)) return ERR;
@@ -293,7 +293,7 @@
   { id:"winters", cat:"Critical care", icon:"🌡️", title:"Winter's formula",
     desc:"Expected PaCO₂ in metabolic acidosis.",
     inputs:[
-      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L" },
+      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L", lab:"hco3" },
       { id:"paco2", label:"Measured PaCO₂ (optional)", type:"number", unit:"mmHg" }
     ],
     compute:function(v){
@@ -307,9 +307,9 @@
   { id:"osm", cat:"Critical care", icon:"💧", title:"Serum osmolality & gap",
     desc:"Calculated osmolality and osmolar gap.",
     inputs:[
-      { id:"na", label:"Sodium", type:"number", unit:"mmol/L" },
-      { id:"glu", label:"Glucose", type:"number", unit:"mg/dL" },
-      { id:"bun", label:"BUN", type:"number", unit:"mg/dL" },
+      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"glu", label:"Glucose", type:"number", unit:"mg/dL", lab:"glu" },
+      { id:"bun", label:"BUN", type:"number", unit:"mg/dL", lab:"bun" },
       { id:"meas", label:"Measured osmolality (optional)", type:"number", unit:"mOsm/kg" }
     ],
     compute:function(v){
@@ -368,10 +368,10 @@
   { id:"crcl", cat:"Renal", icon:"🧮", title:"CrCl (Cockcroft-Gault)",
     desc:"Creatinine clearance for drug dosing.",
     inputs:[
-      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
-      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.age)||!ok(v.wt)||!ok(v.scr)||v.scr<=0) return ERR;
@@ -382,9 +382,9 @@
   { id:"ckdepi", cat:"Renal", icon:"🫘", title:"eGFR (CKD-EPI 2021)",
     desc:"Race-free creatinine eGFR.",
     inputs:[
-      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"age", label:"Age", type:"number", unit:"yrs" },
-      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.scr)||!ok(v.age)||v.scr<=0) return ERR;
@@ -397,9 +397,9 @@
   { id:"mdrd", cat:"Renal", icon:"🫘", title:"eGFR (MDRD, race-free)",
     desc:"4-variable MDRD eGFR.",
     inputs:[
-      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"age", label:"Age", type:"number", unit:"yrs" },
-      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+      { id:"scr", label:"Serum creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.scr)||!ok(v.age)||v.scr<=0) return ERR;
@@ -411,9 +411,9 @@
     desc:"Fractional excretion of sodium — pre-renal vs ATN.",
     inputs:[
       { id:"una", label:"Urine sodium", type:"number", unit:"mmol/L" },
-      { id:"pna", label:"Plasma sodium", type:"number", unit:"mmol/L" },
+      { id:"pna", label:"Plasma sodium", type:"number", unit:"mmol/L", lab:"na" },
       { id:"ucr", label:"Urine creatinine", type:"number", unit:"mg/dL" },
-      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"mg/dL" }
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"mg/dL", lab:"creat" }
     ],
     compute:function(v){
       if(!ok(v.una)||!ok(v.pna)||!ok(v.ucr)||!ok(v.pcr)||v.pna<=0||v.ucr<=0) return ERR;
@@ -425,9 +425,9 @@
     desc:"Fractional excretion of urea (valid on diuretics).",
     inputs:[
       { id:"uurea", label:"Urine urea", type:"number", unit:"mg/dL" },
-      { id:"bun", label:"Serum BUN", type:"number", unit:"mg/dL" },
+      { id:"bun", label:"Serum BUN", type:"number", unit:"mg/dL", lab:"bun" },
       { id:"ucr", label:"Urine creatinine", type:"number", unit:"mg/dL" },
-      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"mg/dL" }
+      { id:"pcr", label:"Plasma creatinine", type:"number", unit:"mg/dL", lab:"creat" }
     ],
     compute:function(v){
       if(!ok(v.uurea)||!ok(v.bun)||!ok(v.ucr)||!ok(v.pcr)||v.bun<=0||v.ucr<=0) return ERR;
@@ -438,8 +438,8 @@
   { id:"corr_na", cat:"Renal", icon:"🧂", title:"Corrected Na (hyperglycaemia)",
     desc:"Sodium corrected for serum glucose.",
     inputs:[
-      { id:"na", label:"Measured sodium", type:"number", unit:"mmol/L" },
-      { id:"glu", label:"Glucose", type:"number", unit:"mg/dL" }
+      { id:"na", label:"Measured sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"glu", label:"Glucose", type:"number", unit:"mg/dL", lab:"glu" }
     ],
     compute:function(v){
       if(!ok(v.na)||!ok(v.glu)) return ERR;
@@ -452,8 +452,8 @@
     desc:"Water deficit in hypernatraemia.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
-      { id:"na", label:"Current sodium", type:"number", unit:"mmol/L" },
-      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+      { id:"na", label:"Current sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.wt)||!ok(v.na)) return ERR;
@@ -466,9 +466,9 @@
     desc:"Na needed to reach a target.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
-      { id:"cur", label:"Current sodium", type:"number", unit:"mmol/L" },
+      { id:"cur", label:"Current sodium", type:"number", unit:"mmol/L", lab:"na" },
       { id:"tgt", label:"Target sodium", type:"number", unit:"mmol/L", def:"130" },
-      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] }
+      { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.wt)||!ok(v.cur)||!ok(v.tgt)) return ERR;
@@ -480,8 +480,8 @@
   { id:"corr_ca", cat:"Renal", icon:"🦴", title:"Corrected calcium",
     desc:"Calcium corrected for albumin.",
     inputs:[
-      { id:"ca", label:"Measured calcium", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", step:"0.1" }
+      { id:"ca", label:"Measured calcium", type:"number", unit:"mg/dL", step:"0.1", lab:"ca" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", step:"0.1", lab:"alb" }
     ],
     compute:function(v){
       if(!ok(v.ca)||!ok(v.alb)) return ERR;
@@ -557,7 +557,7 @@
   { id:"fib4", cat:"Hepatology", icon:"🔬", title:"FIB-4 index",
     desc:"Non-invasive liver fibrosis estimate.",
     inputs:[
-      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
       { id:"ast", label:"AST", type:"number", unit:"U/L", lab:"ast" },
       { id:"alt", label:"ALT", type:"number", unit:"U/L", lab:"alt" },
       { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L", lab:"plt" }
@@ -717,7 +717,7 @@
 
   { id:"hba1c", cat:"General", icon:"🍬", title:"HbA1c → eAG",
     desc:"Estimated average glucose from HbA1c.",
-    inputs:[ { id:"a1c", label:"HbA1c", type:"number", unit:"%", step:"0.1" } ],
+    inputs:[ { id:"a1c", label:"HbA1c", type:"number", unit:"%", step:"0.1", lab:"a1c" } ],
     compute:function(v){
       if(!ok(v.a1c)) return ERR;
       var eag=28.7*v.a1c-46.7;
@@ -739,8 +739,8 @@
   { id:"retic", cat:"General", icon:"🩸", title:"Corrected reticulocyte",
     desc:"Reticulocyte count adjusted for anaemia.",
     inputs:[
-      { id:"retic", label:"Reticulocyte", type:"number", unit:"%", step:"0.1" },
-      { id:"hct", label:"Measured haematocrit", type:"number", unit:"%" }
+      { id:"retic", label:"Reticulocyte", type:"number", unit:"%", step:"0.1", lab:"retic" },
+      { id:"hct", label:"Measured haematocrit", type:"number", unit:"%", lab:"hct" }
     ],
     compute:function(v){
       if(!ok(v.retic)||!ok(v.hct)) return ERR;
@@ -751,8 +751,8 @@
   { id:"tsat", cat:"General", icon:"🧲", title:"Transferrin saturation",
     desc:"Iron status — serum iron / TIBC.",
     inputs:[
-      { id:"iron", label:"Serum iron", type:"number", unit:"µg/dL" },
-      { id:"tibc", label:"TIBC", type:"number", unit:"µg/dL" }
+      { id:"iron", label:"Serum iron", type:"number", unit:"µg/dL", lab:"iron" },
+      { id:"tibc", label:"TIBC", type:"number", unit:"µg/dL", lab:"tibc" }
     ],
     compute:function(v){
       if(!ok(v.iron)||!ok(v.tibc)||v.tibc<=0) return ERR;
@@ -764,7 +764,7 @@
     desc:"Albumin-corrected phenytoin level.",
     inputs:[
       { id:"level", label:"Measured phenytoin", type:"number", unit:"µg/mL", step:"0.1" },
-      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"alb", label:"Albumin", type:"number", unit:"g/dL", step:"0.1", lab:"alb" },
       { id:"renal", label:"CrCl <20 / dialysis", type:"check" }
     ],
     compute:function(v){
@@ -777,8 +777,8 @@
   { id:"mentzer", cat:"General", icon:"🔴", title:"Mentzer index",
     desc:"Microcytosis — thalassaemia trait vs iron deficiency.",
     inputs:[
-      { id:"mcv", label:"MCV", type:"number", unit:"fL" },
-      { id:"rbc", label:"RBC count", type:"number", unit:"×10¹²/L", step:"0.1" }
+      { id:"mcv", label:"MCV", type:"number", unit:"fL", lab:"mcv" },
+      { id:"rbc", label:"RBC count", type:"number", unit:"×10¹²/L", step:"0.1", lab:"rbc" }
     ],
     compute:function(v){
       if(!ok(v.mcv)||!ok(v.rbc)||v.rbc<=0) return ERR;
@@ -795,7 +795,7 @@
       { id:"hr", label:"Heart rate", type:"number", unit:"bpm" },
       { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
       { id:"paco2", label:"PaCO₂ (optional)", type:"number", unit:"mmHg" },
-      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L" },
+      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L", lab:"wbc" },
       { id:"bands", label:">10% immature neutrophils (bands)", type:"check" }
     ],
     compute:function(v){
@@ -969,7 +969,7 @@
       { id:"tend", label:"Tenderness in RLQ (+2)", type:"check" },
       { id:"reb", label:"Rebound tenderness (+1)", type:"check" },
       { id:"temp", label:"Temperature", type:"number", unit:"°C" },
-      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L" },
+      { id:"wbc", label:"WBC", type:"number", unit:"×10⁹/L", lab:"wbc" },
       { id:"shift", label:"Neutrophils (left shift)", type:"number", unit:"%" }
     ],
     compute:function(v){
@@ -1050,7 +1050,7 @@
       { id:"rr", label:"Respiratory rate", type:"number", unit:"/min" },
       { id:"sbp", label:"Systolic BP", type:"number", unit:"mmHg" },
       { id:"dbp", label:"Diastolic BP", type:"number", unit:"mmHg" },
-      { id:"age", label:"Age", type:"number", unit:"yrs" }
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" }
     ],
     compute:function(v){
       if(!ok(v.rr)||!ok(v.sbp)||!ok(v.dbp)||!ok(v.age)) return ERR;
@@ -1067,10 +1067,10 @@
     desc:"Early mortality risk in acute pancreatitis (first 24 h).",
     kw:["pancreatitis","bisap","severity","mortality"],
     inputs:[
-      { id:"bun", label:"BUN", type:"number", unit:"mg/dL" },
+      { id:"bun", label:"BUN", type:"number", unit:"mg/dL", lab:"bun" },
       { id:"ams", label:"Impaired mental status (GCS <15)", type:"check" },
       { id:"sirs", label:"SIRS (≥2 criteria)", type:"check" },
-      { id:"age", label:"Age", type:"number", unit:"yrs" },
+      { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
       { id:"eff", label:"Pleural effusion on imaging", type:"check" }
     ],
     compute:function(v){
@@ -1512,20 +1512,61 @@
    * mirrors the exclusion-guarded map in icu.js to avoid dangerous mis-files. */
   var LAB_RX = {
     bili:  { kw:/bilirubin/i, ex:/direct|indirect|conjugat|neonat/i },   // total only
-    pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated/i, unit:/sec/i },
+    pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated|control/i, unit:/sec/i },
+    ptctrl:{ kw:/\bcontrol\b/i, ex:/internal|quality|\bqc\b|glyc/i, unit:/sec/i },   // explicit "CONTROL." row in the PT/INR panel (seconds)
     inr:   { kw:/\binr\b/i, ex:null },
     creat: { kw:/creatinine/i, ex:/urin|clearance|ratio/i },
-    na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional/i },
+    na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional|excretion/i },
+    k:     { kw:/\bpotassium\b|serum k\b/i, ex:/urin/i },
+    cl:    { kw:/\bchloride\b/i, ex:/urin/i },
+    hco3:  { kw:/bicarbonate|\bhco3\b|\btco2\b|carbon dioxide/i, ex:/partial|pco2|paco2/i },
+    ca:    { kw:/\bcalcium\b/i, ex:/urin|ioni|24/i },                   // total; ionised tracked elsewhere
+    glu:   { kw:/glucose|blood sugar|\brbs\b|\bfbs\b|\bcbg\b/i, ex:/urin|csf|tolerance|dipsi/i },
+    bun:   { kw:/blood urea nitrogen|\bbun\b/i, ex:/urin/i },           // BUN only — NOT plain "Urea" (scale differs ~2.14x)
+    alb:   { kw:/\balbumin\b/i, ex:/globulin|ratio|urin|micro/i },
     ast:   { kw:/\bast\b|sgot|aspartate/i, ex:null },
     alt:   { kw:/\balt\b|sgpt|alanine/i, ex:null },
+    wbc:   { kw:/\bwbc\b|leucocyte|leukocyte|total leu|\btlc\b/i, ex:/differential|urin|csf/i },
+    hb:    { kw:/haemoglobin|hemoglobin/i, ex:/corpuscular|\bmch\b|\bmchc\b|a1c|glycated|glycosylated|equivalent|reticulocyte/i },
+    hct:   { kw:/h[ae]matocrit|\bpcv\b|packed cell/i, ex:null },
     plt:   { kw:/platelet/i, ex:/immature|fraction/i },
-    alb:   { kw:/\balbumin\b/i, ex:/globulin|ratio|urin|micro/i }
+    mcv:   { kw:/\bmcv\b|mean corpuscular volume|mean cell volume/i, ex:null },
+    rbc:   { kw:/\brbc\b|red blood cell count|red cell count|total rbc/i, ex:/width|\brdw\b|nucleated|\bmch\b|distribution/i },
+    retic: { kw:/reticulocyte/i, ex:/absolute|immature|equivalent|fraction|index|h[ae]moglobin/i },   // Reticulocyte % only
+    iron:  { kw:/serum iron|\biron\b/i, ex:/binding|tibc|\buibc\b|saturation|ferritin/i },
+    tibc:  { kw:/\btibc\b|total iron.?binding/i, ex:/\buibc\b|unsaturated/i },
+    a1c:   { kw:/hba1c|glycated h|glycosylated h|\ba1c\b/i, ex:/estimated|\beag\b/i },
+    chol:  { kw:/total cholesterol|cholesterol.*total|\btc\b/i, ex:/hdl|ldl|non.?hdl|ratio|vldl/i },
+    hdl:   { kw:/\bhdl\b/i, ex:/non.?hdl|ratio/i },
+    tg:    { kw:/triglyceride/i, ex:null }
   };
   function num(x){ var n=parseFloat(x); return isNaN(n)?null:n; }
-  // Rows are newest-first; first hit for each analyte wins. Returns
-  // { <analyte>: {value, units, order, date, derived?} }.
+  // Unit normalisation for count analytes whose calculator field expects ×10⁹/L.
+  // The live GHIS lab reports platelets in "Lakhs/cumm" (e.g. 2.5 → 250 ×10⁹/L)
+  // and WBC as an absolute "/cumm" count (e.g. 8000 → 8 ×10⁹/L), so the raw number
+  // must be scaled or the score would be wildly wrong. Microscopy units ("hpf" —
+  // urine leucocytes/RBCs) have no valid conversion and are rejected.
+  var UNIT_FIX = {
+    plt: [ {rx:/lakh/i, f:100}, {rx:/10\s*\^?\s*9|×?10⁹|10e9|g\/l/i, f:1}, {rx:/cumm|cmm|cell|\/[uµ]l|mm\s*3|mm³/i, f:0.001} ],
+    wbc: [ {rx:/10\s*\^?\s*9|×?10⁹|10e9|g\/l/i, f:1}, {rx:/cumm|cmm|cell|\/[uµ]l|mm\s*3|mm³/i, f:0.001} ]
+  };
+  // Returns {value, unit, note} after unit fix, or null if the unit can't be
+  // reconciled to the calculator's expected scale (→ leave the field for manual entry).
+  function fixUnit(key, value, rawUnit){
+    var rules=UNIT_FIX[key];
+    if(!rules) return { value:value, unit:rawUnit||"", note:"" };
+    var u=String(rawUnit||"");
+    if(/hpf/i.test(u)) return null;                         // urine microscopy — not a blood count
+    for(var i=0;i<rules.length;i++){ if(rules[i].rx.test(u)){
+      if(rules[i].f===1) return { value:value, unit:"×10⁹/L", note:"" };
+      return { value:Math.round(value*rules[i].f*10)/10, unit:"×10⁹/L", note:"converted from "+u };
+    }}
+    return null;                                            // unknown unit for a count analyte — don't guess
+  }
+  // Rows are newest-first; first usable hit for each analyte wins. Returns
+  // { <analyte>: {value, units, order, date, derived?, note?} }.
   function extractAnalytes(rows){
-    var out={};
+    var out={}, ptLo=null, ptHi=null, ptRange="", ptUnit="";
     (rows||[]).forEach(function(r){
       var name=String(r.test||"");
       Object.keys(LAB_RX).forEach(function(key){
@@ -1533,33 +1574,53 @@
         var m=LAB_RX[key];
         if(!m.kw.test(name)) return;
         if(m.ex && m.ex.test(name)) return;
-        // PT-in-seconds must carry a "sec" unit (in the units column or the name)
-        // so it is never confused with the unitless INR row.
+        // PT-in-seconds (and its CONTROL) must carry a "sec" unit — in the units
+        // column or the name — so they are never confused with the unitless INR row.
         if(m.unit && !(r.units && m.unit.test(String(r.units))) && !m.unit.test(name)) return;
         var v=num(r.result); if(v==null) return;
-        out[key]={ value:v, units:r.units||"", order:r.order||"", date:r.date||"" };
-        if(key==="pt"){   // derive Control PT from the PT row's reference-range midpoint
-          var lo=num(r.low), hi=num(r.high);
-          if(lo!=null && hi!=null && out.ptctrl==null)
-            out.ptctrl={ value:Math.round(((lo+hi)/2)*10)/10, units:r.units||"sec", order:"ref range "+(r.range||(lo+"–"+hi)), derived:true };
-        }
+        var fx=fixUnit(key, v, r.units);
+        if(!fx) return;   // incompatible unit (e.g. urine hpf, unknown count scale) — keep scanning
+        out[key]={ value:fx.value, units:fx.unit||r.units||"", order:r.order||"", date:r.date||"", note:fx.note||"" };
+        if(key==="pt"){ ptLo=num(r.low); ptHi=num(r.high); ptRange=r.range||""; ptUnit=r.units||"sec"; }
       });
     });
+    // Control PT: prefer the explicit "CONTROL" row captured above; only if the lab
+    // reports no control fall back to the Patient-PT reference-range midpoint.
+    if(out.ptctrl==null && ptLo!=null && ptHi!=null)
+      out.ptctrl={ value:Math.round(((ptLo+ptHi)/2)*10)/10, units:ptUnit, order:"ref-range midpoint "+(ptRange||(ptLo+"–"+ptHi)), derived:true };
     return out;
   }
   function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ if(f.lab && f.type==="number") s[f.lab]=1; }); return Object.keys(s); }
-  function calcHasLab(c){ return c.inputs.some(function(f){ return f.lab && f.type==="number"; }); }
-  // Write analyte values into the calculator's number inputs. Ward Sync values win;
-  // a photo/PDF imported value (ICU dashboard) is used only when Ward has none.
-  function fillFields(c, analytes, photoRec){
+  function calcHasLab(c){ return c.inputs.some(function(f){ return (f.lab && f.type==="number") || f.demo; }); }
+  // Write values into the calculator's inputs. Lab analytes: Ward Sync wins, then a
+  // photo/PDF imported value (ICU dashboard) when Ward has none. Demographics
+  // (demo:"age"|"sex") come from the selected patient / ICU patient. Everything is
+  // attributed and left for the clinician to verify.
+  function fillFields(c, analytes, photoRec, demo){
     var filled=[], missing=[];
+    demo=demo||{};
     c.inputs.forEach(function(f){
-      if(!f.lab || f.type!=="number") return;
       var inp=document.getElementById("mc_"+c.id+"_"+f.id); if(!inp) return;
+      // demographics (age number / sex select) from the patient record
+      if(f.demo==="age" && f.type==="number"){
+        if(demo.age!=null && !isNaN(parseFloat(demo.age))){ inp.value=parseFloat(demo.age); filled.push({ label:f.label, val:parseFloat(demo.age), units:"yrs", src:demo.src||"Patient" }); }
+        else missing.push(f.label);
+        return;
+      }
+      if(f.demo==="sex" && f.type==="select"){
+        var ch=String(demo.sex||"").trim().toLowerCase().charAt(0);   // 'm' / 'f'
+        var opt=ch && Array.prototype.slice.call(inp.options).filter(function(o){ return o.value.toLowerCase()===ch; })[0];
+        if(opt){ inp.value=opt.value; filled.push({ label:f.label, val:opt.textContent, units:"", src:demo.src||"Patient" }); }
+        else missing.push(f.label);
+        return;
+      }
+      if(!f.lab || f.type!=="number") return;
       var got=analytes && analytes[f.lab];
       if(got && got.value!=null){
         inp.value=got.value;
-        filled.push({ label:f.label, val:got.value, units:got.units, src:(got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"")) });
+        var src=got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"");
+        if(got.note) src+=" · "+got.note;
+        filled.push({ label:f.label, val:got.value, units:got.units, src:src });
       } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
         inp.value=parseFloat(photoRec[f.lab]);
         filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"📷 Imported report" });
@@ -1586,7 +1647,8 @@
     function wirePhotoBtn(){
       var b=document.getElementById("mcAFph_"+c.id); if(!b) return;
       b.addEventListener("click", function(){
-        var r=fillFields(c, {}, photo()); run();
+        var pt=(window.ICU_STATE && ICU_STATE.patient)||{};
+        var r=fillFields(c, {}, photo(), { age:pt.age, sex:pt.sex, src:"📷 Imported" }); run();
         body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">📷 From imported report'+(photoName()?' · '+esc(photoName()):'')+'</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Verify against the source report before relying on the result.</div></div>';
       });
     }
@@ -1594,7 +1656,9 @@
       if(!p||!window.GHIS||!GHIS.fetchLabTests) return;
       body.innerHTML='<div class="mc-af-msg">Fetching labs for <b>'+esc(p.patientFirstName||p.patientId)+'</b>…</div>';
       GHIS.fetchLabTests(p.patientId).then(function(rows){
-        var r=fillFields(c, extractAnalytes(rows), photo()); run();
+        var ageP=parseInt(p.dob,10);
+        var demo={ age:(!isNaN(ageP)&&ageP>0&&ageP<130)?ageP:null, sex:p.gender, src:"Ward Sync" };
+        var r=fillFields(c, extractAnalytes(rows), photo(), demo); run();
         body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">☁ '+esc(p.patientFirstName||p.patientId)+' · Ward Sync</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Auto-filled from the hospital record — verify each value before relying on the result.</div></div>';
       }).catch(function(){ body.innerHTML='<div class="mc-af-msg">Couldn’t fetch labs — check the Ward Sync connection and try again.</div>'; });
     }
