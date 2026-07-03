@@ -503,10 +503,10 @@
   { id:"meld", cat:"Hepatology", icon:"🫀", title:"MELD & MELD-Na",
     desc:"End-stage liver disease 90-day mortality.",
     inputs:[
-      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"inr", label:"INR", type:"number", step:"0.1" },
-      { id:"cr", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.1" },
-      { id:"na", label:"Sodium (for MELD-Na)", type:"number", unit:"mmol/L" },
+      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1", lab:"bili" },
+      { id:"inr", label:"INR", type:"number", step:"0.1", lab:"inr" },
+      { id:"cr", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
+      { id:"na", label:"Sodium (for MELD-Na)", type:"number", unit:"mmol/L", lab:"na" },
       { id:"dial", label:"Dialysis ≥2× in past week", type:"check" }
     ],
     compute:function(v){
@@ -544,9 +544,9 @@
   { id:"maddrey", cat:"Hepatology", icon:"🍺", title:"Maddrey's DF",
     desc:"Discriminant function in alcoholic hepatitis.",
     inputs:[
-      { id:"pt", label:"Patient PT", type:"number", unit:"sec" },
-      { id:"ctrl", label:"Control PT", type:"number", unit:"sec" },
-      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1" }
+      { id:"pt", label:"Patient PT", type:"number", unit:"sec", lab:"pt" },
+      { id:"ctrl", label:"Control PT", type:"number", unit:"sec", lab:"ptctrl" },
+      { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1", lab:"bili" }
     ],
     compute:function(v){
       if(!ok(v.pt)||!ok(v.ctrl)||!ok(v.bili)) return ERR;
@@ -558,9 +558,9 @@
     desc:"Non-invasive liver fibrosis estimate.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs" },
-      { id:"ast", label:"AST", type:"number", unit:"U/L" },
-      { id:"alt", label:"ALT", type:"number", unit:"U/L" },
-      { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L" }
+      { id:"ast", label:"AST", type:"number", unit:"U/L", lab:"ast" },
+      { id:"alt", label:"ALT", type:"number", unit:"U/L", lab:"alt" },
+      { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L", lab:"plt" }
     ],
     compute:function(v){
       if(!ok(v.age)||!ok(v.ast)||!ok(v.alt)||!ok(v.plt)||v.plt<=0||v.alt<=0) return ERR;
@@ -571,9 +571,9 @@
   { id:"apri", cat:"Hepatology", icon:"🔬", title:"APRI score",
     desc:"AST-to-platelet ratio index for fibrosis.",
     inputs:[
-      { id:"ast", label:"AST", type:"number", unit:"U/L" },
+      { id:"ast", label:"AST", type:"number", unit:"U/L", lab:"ast" },
       { id:"uln", label:"AST upper limit of normal", type:"number", unit:"U/L", def:"40" },
-      { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L" }
+      { id:"plt", label:"Platelets", type:"number", unit:"×10⁹/L", lab:"plt" }
     ],
     compute:function(v){
       if(!ok(v.ast)||!ok(v.uln)||!ok(v.plt)||v.uln<=0||v.plt<=0) return ERR;
@@ -1503,10 +1503,133 @@
     return v;
   }
 
+  /* ---- Ward Sync / imported-report auto-fill (gold136) --------------------
+   * A calculator input can opt in with a `lab:"<analyte>"` hint. The auto-fill
+   * bar then pulls that value from the selected patient's Ward Sync (GHIS) labs,
+   * or from a photo/PDF report already imported into the ICU dashboard. Every
+   * value is prefilled AND attributed to its source; the clinician verifies
+   * before relying on the result (decision support only). Test-name matching
+   * mirrors the exclusion-guarded map in icu.js to avoid dangerous mis-files. */
+  var LAB_RX = {
+    bili:  { kw:/bilirubin/i, ex:/direct|indirect|conjugat|neonat/i },   // total only
+    pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated/i, unit:/sec/i },
+    inr:   { kw:/\binr\b/i, ex:null },
+    creat: { kw:/creatinine/i, ex:/urin|clearance|ratio/i },
+    na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional/i },
+    ast:   { kw:/\bast\b|sgot|aspartate/i, ex:null },
+    alt:   { kw:/\balt\b|sgpt|alanine/i, ex:null },
+    plt:   { kw:/platelet/i, ex:/immature|fraction/i },
+    alb:   { kw:/\balbumin\b/i, ex:/globulin|ratio|urin|micro/i }
+  };
+  function num(x){ var n=parseFloat(x); return isNaN(n)?null:n; }
+  // Rows are newest-first; first hit for each analyte wins. Returns
+  // { <analyte>: {value, units, order, date, derived?} }.
+  function extractAnalytes(rows){
+    var out={};
+    (rows||[]).forEach(function(r){
+      var name=String(r.test||"");
+      Object.keys(LAB_RX).forEach(function(key){
+        if(out[key]!=null) return;
+        var m=LAB_RX[key];
+        if(!m.kw.test(name)) return;
+        if(m.ex && m.ex.test(name)) return;
+        // PT-in-seconds must carry a "sec" unit (in the units column or the name)
+        // so it is never confused with the unitless INR row.
+        if(m.unit && !(r.units && m.unit.test(String(r.units))) && !m.unit.test(name)) return;
+        var v=num(r.result); if(v==null) return;
+        out[key]={ value:v, units:r.units||"", order:r.order||"", date:r.date||"" };
+        if(key==="pt"){   // derive Control PT from the PT row's reference-range midpoint
+          var lo=num(r.low), hi=num(r.high);
+          if(lo!=null && hi!=null && out.ptctrl==null)
+            out.ptctrl={ value:Math.round(((lo+hi)/2)*10)/10, units:r.units||"sec", order:"ref range "+(r.range||(lo+"–"+hi)), derived:true };
+        }
+      });
+    });
+    return out;
+  }
+  function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ if(f.lab && f.type==="number") s[f.lab]=1; }); return Object.keys(s); }
+  function calcHasLab(c){ return c.inputs.some(function(f){ return f.lab && f.type==="number"; }); }
+  // Write analyte values into the calculator's number inputs. Ward Sync values win;
+  // a photo/PDF imported value (ICU dashboard) is used only when Ward has none.
+  function fillFields(c, analytes, photoRec){
+    var filled=[], missing=[];
+    c.inputs.forEach(function(f){
+      if(!f.lab || f.type!=="number") return;
+      var inp=document.getElementById("mc_"+c.id+"_"+f.id); if(!inp) return;
+      var got=analytes && analytes[f.lab];
+      if(got && got.value!=null){
+        inp.value=got.value;
+        filled.push({ label:f.label, val:got.value, units:got.units, src:(got.derived?"Ward · "+(got.order||"ref-range"):"Ward Sync"+(got.order?" · "+got.order:"")) });
+      } else if(photoRec && photoRec[f.lab]!=null && !isNaN(parseFloat(photoRec[f.lab]))){
+        inp.value=parseFloat(photoRec[f.lab]);
+        filled.push({ label:f.label, val:parseFloat(photoRec[f.lab]), units:"", src:"📷 Imported report" });
+      } else { missing.push(f.label); }
+    });
+    return { filled:filled, missing:missing };
+  }
+  function afNoteRows(r){
+    var h="";
+    if(r.filled.length) h+='<div class="mc-af-ok">'+r.filled.map(function(x){ return '✓ '+esc(x.label)+': <b>'+esc(x.val)+'</b>'+(x.units?" "+esc(x.units):"")+' <span>'+esc(x.src)+'</span>'; }).join("")+'</div>';
+    if(r.missing.length) h+='<div class="mc-af-miss">Not found — enter manually: '+r.missing.map(esc).join(", ")+'</div>';
+    if(!r.filled.length && !r.missing.length) h+='<div class="mc-af-miss">No matching lab values found for this patient.</div>';
+    return h;
+  }
+  // Wire the auto-fill bar for one calculator panel. `run` recomputes the result.
+  function wireAutofill(c, run){
+    var btn=document.getElementById("mcAFbtn_"+c.id), body=document.getElementById("mcAFbody_"+c.id);
+    if(!btn||!body) return;
+    var open=false;
+    function photo(){ return window.ICU_STATE && ICU_STATE.labs && ICU_STATE.labs.recent; }
+    function photoName(){ return (window.ICU_STATE && ICU_STATE.patient && ICU_STATE.patient.name) || ""; }
+    function photoHasNeeds(){ var p=photo(); if(!p) return false; return calcLabKeys(c).some(function(k){ return p[k]!=null && !isNaN(parseFloat(p[k])); }); }
+    function photoBtnHTML(){ return photoHasNeeds()?'<button class="mc-af-photo" id="mcAFph_'+c.id+'">📷 Use last imported report'+(photoName()?' ('+esc(photoName())+')':'')+'</button>':""; }
+    function wirePhotoBtn(){
+      var b=document.getElementById("mcAFph_"+c.id); if(!b) return;
+      b.addEventListener("click", function(){
+        var r=fillFields(c, {}, photo()); run();
+        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">📷 From imported report'+(photoName()?' · '+esc(photoName()):'')+'</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Verify against the source report before relying on the result.</div></div>';
+      });
+    }
+    function pick(p){
+      if(!p||!window.GHIS||!GHIS.fetchLabTests) return;
+      body.innerHTML='<div class="mc-af-msg">Fetching labs for <b>'+esc(p.patientFirstName||p.patientId)+'</b>…</div>';
+      GHIS.fetchLabTests(p.patientId).then(function(rows){
+        var r=fillFields(c, extractAnalytes(rows), photo()); run();
+        body.innerHTML='<div class="mc-af-note"><div class="mc-af-note-h">☁ '+esc(p.patientFirstName||p.patientId)+' · Ward Sync</div>'+afNoteRows(r)+'<div class="mc-af-verify">⚠️ Auto-filled from the hospital record — verify each value before relying on the result.</div></div>';
+      }).catch(function(){ body.innerHTML='<div class="mc-af-msg">Couldn’t fetch labs — check the Ward Sync connection and try again.</div>'; });
+    }
+    function renderPicker(){
+      var connected = window.GHIS && GHIS.isConnected && GHIS.isConnected();
+      if(!connected){
+        body.innerHTML='<div class="mc-af-msg">Ward Sync isn’t connected. Open 🏥 <b>Ward</b> and sign in to fetch a patient’s labs.<button class="mc-af-open" id="mcAFopen_'+c.id+'">Open Ward Sync</button></div>'+photoBtnHTML();
+        var o=document.getElementById("mcAFopen_"+c.id); if(o) o.addEventListener("click", function(){ try{ window.openGHIS && openGHIS(); }catch(e){} });
+        wirePhotoBtn(); return;
+      }
+      var pts = (GHIS.getPatients && GHIS.getPatients()) || [];
+      body.innerHTML='<input class="mc-af-search" id="mcAFq_'+c.id+'" placeholder="🔍 Select patient — name or ID…" autocomplete="off"><div class="mc-af-list" id="mcAFlist_'+c.id+'"></div>'+photoBtnHTML();
+      var q=document.getElementById("mcAFq_"+c.id);
+      q.addEventListener("keydown", function(e){ e.stopPropagation(); });
+      q.addEventListener("input", function(){ list(q.value); });
+      wirePhotoBtn();
+      function list(term){
+        term=(term||"").toLowerCase().trim();
+        var f=pts.filter(function(p){ return !term || String(p.patientFirstName||"").toLowerCase().indexOf(term)>=0 || String(p.patientId||"").toLowerCase().indexOf(term)>=0; }).slice(0,40);
+        var lst=document.getElementById("mcAFlist_"+c.id);
+        if(!f.length){ lst.innerHTML='<div class="mc-af-empty">No patients — refresh Ward Sync.</div>'; return; }
+        lst.innerHTML=f.map(function(p){ return '<button class="mc-af-pt" data-i="'+pts.indexOf(p)+'"><b>'+esc(p.patientFirstName||"—")+'</b><span>· '+esc(p.patientId||"")+(p.deptDescription?" · "+esc(p.deptDescription):"")+'</span></button>'; }).join("");
+        lst.querySelectorAll(".mc-af-pt").forEach(function(b){ b.addEventListener("click", function(){ pick(pts[+b.getAttribute("data-i")]); }); });
+      }
+      list("");
+    }
+    btn.addEventListener("click", function(){ open=!open; btn.classList.toggle("on", open); if(!open){ body.innerHTML=""; } else renderPicker(); });
+  }
+
   function renderPanel(id){
     var c=byId(id); if(!c) return;
     var el=document.getElementById("mcPanel_"+id); if(!el) return;
+    var hasLab=calcHasLab(c);
     el.innerHTML=
+      (hasLab?'<div class="mc-af"><button class="mc-af-btn" id="mcAFbtn_'+id+'">🔬 Auto-fill labs from patient</button><div class="mc-af-body" id="mcAFbody_'+id+'"></div></div>':"")+
       '<div class="mc-inputs">'+inputHTML(c)+'</div>'+
       '<button class="mc-calc-btn" id="mcCalc_'+id+'">Calculate</button>'+
       '<div class="mc-result" id="mcRes_'+id+'"></div>'+
@@ -1527,6 +1650,7 @@
     el.querySelectorAll(".mc-input, .mc-check input").forEach(function(inp){
       inp.addEventListener("change", run);
     });
+    if(hasLab) wireAutofill(c, run);
   }
 
   /* ---- open/close + public API ---- */
@@ -1601,7 +1725,27 @@
       ".mc-empty{font:500 13px var(--sans,system-ui);color:var(--slate-soft,#888);padding:30px;text-align:center}",
       ".mc-disc{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);background:var(--panel,#fff);border:1px dashed var(--line,#e5e5e0);border-radius:10px;padding:10px 12px;margin-top:18px;line-height:1.5}",
       ".mc-ref{font:500 11px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:12px;line-height:1.5;border-top:1px solid var(--line,#e5e5e0);padding-top:10px}",
-      ".mc-ref b{color:var(--slate,#555);font-weight:700}"
+      ".mc-ref b{color:var(--slate,#555);font-weight:700}",
+      /* Ward Sync / imported-report auto-fill */
+      ".mc-af{margin:12px 0 2px;border:1px dashed var(--teal,#0a9396);border-radius:11px;background:var(--teal-soft,#e0f2f1);padding:8px}",
+      ".mc-af-btn{width:100%;border:none;border-radius:8px;padding:9px 11px;font:800 12.5px var(--sans,system-ui);cursor:pointer;color:#fff;background:var(--teal,#0a9396)}",
+      ".mc-af-btn.on{background:var(--slate,#555)}",
+      ".mc-af-body:not(:empty){margin-top:8px}",
+      ".mc-af-search{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:8px;padding:9px 11px;font:500 13px var(--sans,system-ui);background:var(--panel,#fff);color:var(--ink,#1a1a1a)}",
+      ".mc-af-search:focus{outline:none;border-color:var(--teal,#0a9396)}",
+      ".mc-af-list{max-height:240px;overflow-y:auto;-webkit-overflow-scrolling:touch;margin-top:7px;display:flex;flex-direction:column;gap:5px}",
+      ".mc-af-pt{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px;text-align:left;width:100%;border:1px solid var(--line,#e5e5e0);border-radius:8px;padding:9px 11px;background:var(--panel,#fff);color:var(--ink,#1a1a1a);cursor:pointer;font:600 13px var(--sans,system-ui)}",
+      ".mc-af-pt:hover{border-color:var(--teal,#0a9396)}",
+      ".mc-af-pt span{font-weight:500;font-size:11.5px;color:var(--slate-soft,#888)}",
+      ".mc-af-empty,.mc-af-msg{font:500 12.5px var(--sans,system-ui);color:var(--slate,#555);padding:9px 4px;line-height:1.5}",
+      ".mc-af-open,.mc-af-photo{display:block;width:100%;margin-top:8px;border:1px solid var(--teal,#0a9396);border-radius:8px;padding:9px;font:700 12px var(--sans,system-ui);cursor:pointer;color:var(--teal,#0a9396);background:var(--panel,#fff)}",
+      ".mc-af-note{font:500 12px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.55}",
+      ".mc-af-note-h{font-weight:800;color:var(--teal,#0a9396);margin-bottom:5px}",
+      ".mc-af-ok{display:flex;flex-direction:column;gap:3px}",
+      ".mc-af-ok b{color:var(--teal,#0a9396)}",
+      ".mc-af-ok span{color:var(--slate-soft,#888);font-size:10.5px}",
+      ".mc-af-miss{color:#b45309;margin-top:6px}",
+      ".mc-af-verify{margin-top:7px;font-size:10.5px;color:var(--slate-soft,#888)}"
     ].join("");
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
   }
