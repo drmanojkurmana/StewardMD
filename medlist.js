@@ -129,6 +129,9 @@
   var _manualState = { value: "", parsed: null };
   var _indexState = { value: "", results: [], reqSeq: 0 };
   var _pasteState = { value: "", rows: [] }; // rows: [{entry, include}]
+  var _view = "list";                        // "list" | "results"
+  var _results = null;                        // last checkInteractions() result
+  var _hideMinor = true;                      // results filter: hide minor findings by default
 
   function el(tag, opts) {
     var e = document.createElement(tag);
@@ -350,8 +353,13 @@
     return panel;
   }
 
+  function hasResolvedGeneric() {
+    return getList().some(function (m) { return m.generic && typeof m.generic === "string" && m.generic.trim(); });
+  }
+
   function render() {
     if (!_root) return;
+    if (_view === "results") { renderResults(); return; }
     _root.textContent = "";
     _root.classList.add("ml-root");
 
@@ -377,9 +385,155 @@
     _root.appendChild(body);
 
     var footer = el("div", { cls: "ml-footer" });
-    var checkBtn = el("button", { cls: "ml-check-btn", text: "Check interactions", disabled: true, attrs: { id: "ml-check" } });
+    var canCheck = hasResolvedGeneric();
+    var checkBtn = el("button", { cls: "ml-check-btn", text: "Check interactions", attrs: { id: "ml-check" } });
+    if (!canCheck) checkBtn.disabled = true;
+    checkBtn.addEventListener("click", function () {
+      if (checkBtn.disabled) return;
+      runCheck();
+    });
     footer.appendChild(checkBtn);
     _root.appendChild(footer);
+  }
+
+  function runCheck() {
+    if (!window.INTERACTIONS || typeof window.INTERACTIONS.checkInteractions !== "function") return;
+    _results = window.INTERACTIONS.checkInteractions(getList());
+    _view = "results";
+    _hideMinor = true;
+    render();
+  }
+
+  // --- Results screen -------------------------------------------------------
+  var SEVERITY_LABEL = {
+    critical: "Critical",
+    major: "Major",
+    moderate: "Moderate",
+    minor: "Minor",
+    monitor: "Monitor"
+  };
+  // Color-INDEPENDENT text markers so severity never relies on color alone.
+  var SEVERITY_MARK = {
+    critical: "!!!",
+    major: "!!",
+    moderate: "!",
+    minor: "•",
+    monitor: "◆"
+  };
+
+  function findingCard(finding) {
+    var card = el("div", { cls: "mlr-card mlr-card-" + (SEVERITY_BUCKET_CLASS[finding.severity] || "monitor") });
+
+    var head = el("div", { cls: "mlr-card-head" });
+    var pair = el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" });
+    head.appendChild(pair);
+    var sevLabel = SEVERITY_LABEL[finding.severity] || "Caution";
+    var sevMark = SEVERITY_MARK[finding.severity] || "◆";
+    var badge = el("span", { cls: "mlr-sev mlr-sev-" + (SEVERITY_BUCKET_CLASS[finding.severity] || "monitor") });
+    badge.appendChild(el("span", { cls: "mlr-sev-mark", text: sevMark, attrs: { "aria-hidden": "true" } }));
+    badge.appendChild(el("span", { cls: "mlr-sev-text", text: sevLabel }));
+    head.appendChild(badge);
+    card.appendChild(head);
+
+    var whyText = [finding.mechanism, finding.effect].filter(Boolean).join(" ");
+    if (whyText) card.appendChild(detailRow("Why it matters", whyText));
+    if (finding.action) card.appendChild(detailRow("Action", finding.action));
+    if (finding.monitoring) card.appendChild(detailRow("Monitoring", finding.monitoring));
+    if (finding.source) card.appendChild(detailRow("Source", finding.source));
+    return card;
+  }
+
+  var SEVERITY_BUCKET_CLASS = {
+    contraindicated: "critical",
+    major: "major",
+    moderate: "moderate",
+    minor: "minor",
+    monitor: "monitor"
+  };
+
+  function detailRow(label, value) {
+    var row = el("div", { cls: "mlr-detail" });
+    row.appendChild(el("span", { cls: "mlr-detail-label", text: label }));
+    row.appendChild(el("span", { cls: "mlr-detail-val", text: value }));
+    return row;
+  }
+
+  function resultsSection(container, title, findings) {
+    if (!findings || !findings.length) return;
+    var sec = el("div", { cls: "mlr-section" });
+    var h = el("div", { cls: "mlr-section-h" });
+    h.appendChild(el("span", { cls: "mlr-section-title", text: title }));
+    h.appendChild(el("span", { cls: "mlr-section-count", text: String(findings.length) }));
+    sec.appendChild(h);
+    findings.forEach(function (f) { sec.appendChild(findingCard(f)); });
+    container.appendChild(sec);
+  }
+
+  function summaryStat(container, label, count) {
+    var stat = el("div", { cls: "mlr-stat" });
+    stat.appendChild(el("span", { cls: "mlr-stat-num", text: String(count) }));
+    stat.appendChild(el("span", { cls: "mlr-stat-label", text: label }));
+    container.appendChild(stat);
+  }
+
+  function renderResults() {
+    _root.textContent = "";
+    _root.classList.add("ml-root");
+    var res = _results || { critical: [], major: [], moderate: [], minor: [], monitor: [], duplicates: [], combinations: [], reviewedCount: 0 };
+
+    var header = el("div", { cls: "ml-header" });
+    header.appendChild(el("h2", { cls: "ml-title", text: "Interaction Summary" }));
+    header.appendChild(el("p", { cls: "ml-subtitle", text: "Review each finding with current local protocol and pharmacist where needed" }));
+    _root.appendChild(header);
+
+    var body = el("div", { cls: "ml-body" });
+
+    // Summary counts (color-independent, plain text labels).
+    var criticalCount = res.critical.length;
+    var majorCount = res.major.length;
+    var monitorCount = res.monitor.length;
+    var dupCount = (res.duplicates || []).length;
+    var summary = el("div", { cls: "mlr-summary" });
+    summaryStat(summary, "Critical alerts", criticalCount);
+    summaryStat(summary, "Major interactions", majorCount);
+    summaryStat(summary, "Monitoring cautions", monitorCount);
+    summaryStat(summary, "Duplicate therapies", dupCount);
+    summaryStat(summary, "Medicines reviewed", res.reviewedCount);
+    body.appendChild(summary);
+
+    // Advisory / context note.
+    body.appendChild(el("div", { cls: "ml-advisory mlr-advisory",
+      text: "Interaction check is medication-based. Add renal function, electrolytes, QTc, or patient context for more tailored cautions." }));
+
+    // Filters row.
+    var filters = el("div", { cls: "mlr-filters" });
+    var toggle = el("button", { cls: "mlr-filter-btn", attrs: { id: "mlr-toggle-minor" },
+      text: _hideMinor ? "Show all" : "Hide minor" });
+    toggle.addEventListener("click", function () { _hideMinor = !_hideMinor; render(); });
+    filters.appendChild(toggle);
+    var backBtn = el("button", { cls: "mlr-filter-btn mlr-back-btn", text: "Back to medicines", attrs: { id: "mlr-back" } });
+    backBtn.addEventListener("click", function () { _view = "list"; render(); });
+    filters.appendChild(backBtn);
+    body.appendChild(filters);
+
+    // Sections in priority order.
+    var monitorFindings = res.monitor.slice();
+    var moderateFindings = res.moderate.slice();
+    var minorFindings = _hideMinor ? [] : res.minor.slice();
+    var dupFindings = (res.duplicates || []).slice();
+
+    resultsSection(body, "Critical alerts", res.critical);
+    resultsSection(body, "Major interactions", res.major);
+    resultsSection(body, "Monitoring cautions", monitorFindings.concat(moderateFindings, minorFindings));
+    resultsSection(body, "Duplicate therapy", dupFindings);
+
+    var anyShown = res.critical.length || res.major.length || monitorFindings.length ||
+      moderateFindings.length || minorFindings.length || dupFindings.length;
+    if (!anyShown) {
+      body.appendChild(el("div", { cls: "mlr-none", text: "No issues detected" }));
+    }
+
+    _root.appendChild(body);
   }
 
   function injectStyles() {
@@ -421,7 +575,37 @@
       + ".ml-footer{position:sticky;bottom:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:var(--panel,#fff);border-top:1px solid var(--line,#e5e5e0)}"
       + ".ml-check-btn{width:100%;min-height:44px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:11px;padding:12px;font:700 14px var(--sans,system-ui);cursor:pointer;box-sizing:border-box}"
       + ".ml-check-btn:disabled{opacity:.5;cursor:not-allowed}"
-      + ".ml-icon-btn{min-height:44px}";
+      + ".ml-icon-btn{min-height:44px}"
+      // --- Results screen ---
+      + ".mlr-advisory{margin-bottom:12px}"
+      + ".mlr-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:6px 0 12px}"
+      + "@media(min-width:520px){.mlr-summary{grid-template-columns:repeat(3,1fr)}}"
+      + ".mlr-stat{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px 12px;background:var(--panel,#fff);display:flex;flex-direction:column;gap:2px}"
+      + ".mlr-stat-num{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
+      + ".mlr-stat-label{font:600 11px var(--sans,system-ui);color:var(--slate,#666)}"
+      + ".mlr-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}"
+      + ".mlr-filter-btn{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:20px;padding:8px 14px;font:600 12.5px var(--sans,system-ui);cursor:pointer;color:var(--ink,#1a1a1a);min-height:40px}"
+      + ".mlr-back-btn{color:var(--teal,#0a9396);border-color:var(--teal,#0a9396)}"
+      + ".mlr-section{margin-bottom:16px}"
+      + ".mlr-section-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}"
+      + ".mlr-section-title{font:800 13px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate,#666)}"
+      + ".mlr-section-count{font:700 11px var(--sans,system-ui);background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:1px 8px;color:var(--slate,#666)}"
+      + ".mlr-card{border:1px solid var(--line,#e5e5e0);border-left-width:4px;border-radius:12px;padding:12px 13px;background:var(--panel,#fff);margin-bottom:9px}"
+      + ".mlr-card-critical{border-left-color:#b3261e}.mlr-card-major{border-left-color:#c77700}"
+      + ".mlr-card-moderate{border-left-color:#8a5a00}.mlr-card-monitor{border-left-color:#0a9396}.mlr-card-minor{border-left-color:#888}"
+      + ".mlr-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}"
+      + ".mlr-card-pair{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
+      + ".mlr-sev{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 8px;font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}"
+      + ".mlr-sev-critical{background:#fbe6e4;color:#b3261e;border:1px solid #f2c9c5}"
+      + ".mlr-sev-major{background:#fdf0dc;color:#985c00;border:1px solid #f0c675}"
+      + ".mlr-sev-moderate{background:#fdf0dc;color:#8a5a00;border:1px solid #f0c675}"
+      + ".mlr-sev-monitor{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border:1px solid #a6d9d8}"
+      + ".mlr-sev-minor{background:var(--paper,#f7f7f5);color:#666;border:1px solid var(--line,#e5e5e0)}"
+      + ".mlr-sev-mark{font-weight:900}"
+      + ".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:6px}"
+      + ".mlr-detail-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
+      + ".mlr-detail-val{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}"
+      + ".mlr-none{padding:26px 10px;text-align:center;color:var(--teal,#0a9396);font:700 14px var(--sans,system-ui);border:1px dashed #a6d9d8;border-radius:12px;background:var(--teal-soft,#e0f2f1)}";
     var st = document.createElement("style");
     st.id = "ml-styles"; st.textContent = css;
     document.head.appendChild(st);
@@ -431,6 +615,7 @@
     if (!containerEl) return;
     injectStyles();
     _root = containerEl;
+    _view = "list"; _results = null; _hideMinor = true;
     _openAdd = null; _undoingId = null; clearUndoTimer();
     _manualState = { value: "", parsed: null };
     _indexState = { value: "", results: [], reqSeq: 0 };

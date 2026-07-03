@@ -203,6 +203,51 @@ try {
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 
+  // --- Task 7: Check-interactions wiring + severity results screen ---
+  // Wait for the interactions engine + rules to be loaded.
+  for (let i = 0; i < 60; i++) { await sleep(200); if (await ev(`return !!(window.INTERACTIONS && INTERACTIONS.checkInteractions && window.INTERACTION_RULES)`) === true) break; }
+  ok(await ev(`return !!(window.INTERACTIONS && INTERACTIONS.checkInteractions)`) === true, "INTERACTIONS engine loaded for results screen");
+
+  // Button disabled when no resolved-generic med; enabled once one is present.
+  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return document.getElementById("ml-check").disabled === true`) === true, "Check-interactions disabled with empty list");
+  await ev(`MEDLIST.add(MEDLIST.parseEntry("piptaz 4.5 q6h"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return document.getElementById("ml-check").disabled === true`) === true, "Check-interactions stays disabled with only unresolved-generic meds");
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return document.getElementById("ml-check").disabled === false`) === true, "Check-interactions enabled once a med has a resolved generic");
+
+  // warfarin + aspirin + ibuprofen -> results screen with a critical/major bleeding alert.
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("warfarin 5 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("ibuprofen 400 tds"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return document.getElementById("ml-check").disabled === false`) === true, "Check-interactions enabled for warfarin+aspirin+ibuprofen");
+  await ev(`document.getElementById("ml-check").click(); return 1;`);
+  const rtext = await ev(`return document.getElementById("ml-test").innerText`);
+  ok(/Interaction Summary/i.test(rtext), "results screen shows 'Interaction Summary'");
+  ok(/Critical alerts/i.test(rtext) && /Major interactions/i.test(rtext), "summary shows critical/major count labels (color-independent text)");
+  ok(/Medicines reviewed/i.test(rtext), "summary shows total medicines reviewed");
+  ok(/bleed|haemorrh|hemorrh/i.test(rtext), "results surface a bleeding-related finding");
+  ok(await ev(`var t=document.getElementById("ml-test").innerText; return /Critical|Major/.test(t)`) === true, "a severity label (Critical/Major) is shown");
+  ok(/Why it matters/i.test(rtext) && /Action/i.test(rtext) && /Monitoring/i.test(rtext), "finding card shows Why it matters / Action / Monitoring");
+  // Context/advisory note present when no context supplied.
+  ok(/Interaction check is medication-based\. Add renal function, electrolytes, QTc, or patient context/i.test(rtext), "advisory/context note shown when no context");
+  // SECURITY: no leaked JSON braces / rule ids / sourceId / provider strings.
+  ok(await ev(`var t=document.getElementById("ml-test").innerText; return !/[{}\\[\\]]|sourceId|ruleType|onc-nlm-hpddi|openfda-labeling|crediblemeds/i.test(t)`) === true, "results screen leaks no raw JSON / rule ids / sourceId / provider strings");
+  // Back to medicines returns to the list view.
+  ok(await ev(`return !!document.getElementById("mlr-back")`) === true, "'Back to medicines' button present");
+  await ev(`document.getElementById("mlr-back").click(); return 1;`);
+  ok(await ev(`return !!document.getElementById("ml-check")`) === true && await ev(`return /Add medicine|warfarin/i.test(document.getElementById("ml-test").innerText)`) === true, "Back to medicines returns to the list view");
+  // Hide minor / Show all toggle present on results screen.
+  await ev(`document.getElementById("ml-check").click(); return 1;`);
+  ok(await ev(`return !!document.getElementById("mlr-toggle-minor")`) === true, "results screen has a Hide-minor / Show-all toggle");
+
+  // Empty-ish list (single amlodipine) -> "No issues detected" (0 critical/major).
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
+  const amText = await ev(`return document.getElementById("ml-test").innerText`);
+  ok(/Interaction Summary/i.test(amText), "single-amlodipine results screen renders summary");
+  ok(/No issues detected/i.test(amText), "single amlodipine shows 'No issues detected'");
+  ok(await ev(`var r=INTERACTIONS.checkInteractions(MEDLIST.getList()); return r.critical.length===0 && r.major.length===0`) === true, "single amlodipine yields 0 critical/major");
+
+  await ev(`MEDLIST.clearAll(); return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
