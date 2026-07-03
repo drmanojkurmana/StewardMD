@@ -121,6 +121,99 @@
       .catch(function () { return []; });
   }
 
+  /* ================= PRESCRIPTION / CASE-SHEET SCAN (photo / PDF) ============
+   * Pipeline (MIRRORS icu.js report-import): file/camera image or PDF →
+   * CLIENT-SIDE compress/resize to a JPEG under a byte cap (never send a raw
+   * multi-MB file; canvas re-encode also strips EXIF) → scanExtract() POSTs the
+   * compressed image to /api/ai/vision {kind:"medication_list"} → candidate rows
+   * → clinician REVIEW (editable, confidence-flagged, include/exclude) → confirm
+   * → add to MEDLIST with source "scan". OCR is CANDIDATE extraction only; the
+   * clinician confirms each row. Nothing is auto-added; the raw image is dropped
+   * once the review closes. The live vision call is PROD-ONLY (tests stub it). */
+  var MAX_UPLOAD_BYTES = 1.6 * 1024 * 1024;   // target ≤ ~1.6 MB to the OCR
+
+  // Compress an image File/blob/data-URL to a JPEG data-URL under the byte cap.
+  // Canvas re-encode also strips EXIF/metadata. Iterates quality (then downscales)
+  // to fit, so a raw multi-MB photo is never what reaches the vision endpoint.
+  function _compressImage(fileOrDataUrl, cb) {
+    var img = new Image();
+    img.onload = function () {
+      var maxEdge = 1600, w = img.width, h = img.height;
+      var scale = Math.min(1, maxEdge / Math.max(w, h));
+      var cw = Math.round(w * scale), ch = Math.round(h * scale);
+      var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
+      var ctx = cv.getContext("2d"); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch);
+      var q = 0.72, out = cv.toDataURL("image/jpeg", q), guard = 0;
+      function bytes(u) { return Math.ceil((u.length - (u.indexOf(",") + 1)) * 3 / 4); }
+      while (bytes(out) > MAX_UPLOAD_BYTES && guard++ < 6) {
+        q -= 0.12; if (q < 0.4) { cw = Math.round(cw * 0.85); ch = Math.round(ch * 0.85); cv.width = cw; cv.height = ch; ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch); q = 0.6; }
+        out = cv.toDataURL("image/jpeg", Math.max(0.35, q));
+      }
+      cb(out, { w: cw, h: ch, kb: Math.round(bytes(out) / 1024) });
+    };
+    img.onerror = function () { cb(null); };
+    img.src = (typeof fileOrDataUrl === "string") ? fileOrDataUrl : URL.createObjectURL(fileOrDataUrl);
+  }
+
+  // Lazy-load pdf.js (CDN) only when a PDF is scanned; render capped pages to
+  // compressed images. The whole PDF is NEVER sent — only rendered page images.
+  var _pdfjs = null;
+  function loadPdfJs() {
+    if (_pdfjs) return Promise.resolve(_pdfjs);
+    if (window.pdfjsLib) { _pdfjs = window.pdfjsLib; return Promise.resolve(_pdfjs); }
+    return new Promise(function (res, rej) {
+      var s = document.createElement("script");
+      s.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+      s.onload = function () { try { _pdfjs = window.pdfjsLib; _pdfjs.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; res(_pdfjs); } catch (e) { rej(e); } };
+      s.onerror = function () { rej(new Error("pdf-load")); };
+      document.head.appendChild(s);
+    });
+  }
+  function renderPdfPageToImage(pdf, pageNum, cb) {
+    pdf.getPage(pageNum).then(function (page) {
+      var vp = page.getViewport({ scale: 2 });
+      var cv = document.createElement("canvas"); cv.width = vp.width; cv.height = vp.height;
+      page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise.then(function () {
+        _compressImage(cv.toDataURL("image/jpeg", 0.85), function (out) { cb(out); });
+      });
+    }).catch(function () { cb(null); });
+  }
+
+  // scanExtract(imageDataUrl): POST the COMPRESSED image to the vision OCR with
+  // kind:"medication_list" → normalised candidate rows. Only structured VALUES
+  // flow onward; the raw image never persists. Called via window.MEDLIST at call
+  // time so tests can stub it. The live vision call is PROD-ONLY.
+  function scanExtract(imageDataUrl) {
+    if (!(window.SMD_AI && window.SMD_AI.vision)) return Promise.reject(new Error("ai-unavailable"));
+    try { if (window.SMD_AI.setFlag) window.SMD_AI.setFlag(true); } catch (e) {}
+    return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
+      if (!r || r.error) throw new Error((r && r.error) || "ocr-failed");
+      var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
+      var meds = (src && Array.isArray(src.medications)) ? src.medications : (Array.isArray(src) ? src : []);
+      return meds.map(normalizeScanRow).filter(Boolean);
+    });
+  }
+  // Normalise a raw OCR med row into a candidate the review screen understands.
+  // Runs the detected text through parseEntry/resolveGeneric to map + get
+  // candidates. NEVER trusts an OCR-supplied generic that isn't a known generic.
+  function normalizeScanRow(m) {
+    m = m || {};
+    var text = String(m.detected_text || m.text || "").trim();
+    if (!text && !m.drug) return null;
+    var parsed = parseEntry(text || String(m.drug || ""));
+    // OCR may fill strength/route/frequency separately — prefer parsed, else OCR text.
+    if (parsed.strength == null && m.strength) { var pm = parseEntry(String(m.strength)); if (pm.strength != null) { parsed.strength = pm.strength; parsed.unit = parsed.unit || pm.unit; } }
+    if (!parsed.route && m.route) { var rt = String(m.route).toLowerCase(); if (ROUTES[rt]) parsed.route = ROUTES[rt]; }
+    if (!parsed.freq && m.frequency) { var fr = String(m.frequency).toLowerCase(); if (FREQ[fr]) { parsed.freq = FREQ[fr]; parsed.freqText = fr; } }
+    // Confidence: honour OCR's low/medium/high but never upgrade an unmapped row to high.
+    var conf = String(m.confidence || "").toLowerCase();
+    if (conf !== "high" && conf !== "medium" && conf !== "low") conf = parsed.confidence || "low";
+    if (!parsed.generic && conf === "high") conf = "medium";  // no silent high on an unmapped drug
+    parsed.confidence = conf;
+    parsed.detected_text = text;
+    return parsed;
+  }
+
   // --- UI: mount(containerEl) renders the medication-list-builder screen. ---
   var _root = null;             // mounted container element
   var _openAdd = null;          // which add-option panel is open: null|'index'|'manual'|'paste'
@@ -129,7 +222,8 @@
   var _manualState = { value: "", parsed: null };
   var _indexState = { value: "", results: [], reqSeq: 0 };
   var _pasteState = { value: "", rows: [] }; // rows: [{entry, include}]
-  var _view = "list";                        // "list" | "results"
+  var _scanState = { rows: [] };             // rows: [{entry, include, editText}] — candidate scan review
+  var _view = "list";                        // "list" | "results" | "scan"
   var _results = null;                        // last checkInteractions() result
   var _hideMinor = true;                      // results filter: hide minor findings by default
 
@@ -223,7 +317,7 @@
     var btnIndex = el("button", { cls: "ml-add-btn", text: "Search Drug Index", attrs: { "data-ml-open": "index" } });
     var btnManual = el("button", { cls: "ml-add-btn", text: "Type manually", attrs: { "data-ml-open": "manual" } });
     var btnPaste = el("button", { cls: "ml-add-btn", text: "Paste list", attrs: { "data-ml-open": "paste" } });
-    var btnScan = el("button", { cls: "ml-add-btn ml-add-btn-disabled", text: "Scan (Coming soon)", disabled: true, attrs: { "data-ml-scan": "1" } });
+    var btnScan = el("button", { cls: "ml-add-btn", text: "Scan prescription / case sheet", attrs: { "data-ml-scan": "1" } });
     var btnWard = el("button", { cls: "ml-add-btn ml-add-btn-disabled", text: "Fetch from Ward Sync (Coming soon)", disabled: true, attrs: { "data-ml-wardsync": "1" } });
     [btnIndex, btnManual, btnPaste].forEach(function (b) {
       b.addEventListener("click", function () {
@@ -232,6 +326,7 @@
         render();
       });
     });
+    btnScan.addEventListener("click", function () { startScan(); });
     row.appendChild(btnIndex); row.appendChild(btnManual); row.appendChild(btnPaste);
     row.appendChild(btnScan); row.appendChild(btnWard);
     container.appendChild(row);
@@ -353,6 +448,176 @@
     return panel;
   }
 
+  // --- Scan pipeline: file/camera/PDF → compress → scanExtract → review -----
+  function scanProgress(msg, err) {
+    if (!_root) return;
+    var ov = _root.querySelector(".ml-scan-ov");
+    if (!ov) { ov = el("div", { cls: "ml-scan-ov" }); _root.appendChild(ov); }
+    ov.textContent = "";
+    var box = el("div", { cls: "ml-scan-box" });
+    if (err) {
+      box.appendChild(el("div", { cls: "ml-scan-err", text: msg }));
+      var close = el("button", { cls: "ml-panel-add-btn", text: "Close" });
+      close.addEventListener("click", function () { ov.remove(); });
+      box.appendChild(close);
+    } else {
+      box.appendChild(el("div", { cls: "ml-scan-spin", text: "◐" }));
+      box.appendChild(el("div", { text: msg }));
+    }
+    ov.appendChild(box);
+  }
+  function scanProgressDone() { if (_root) { var ov = _root.querySelector(".ml-scan-ov"); if (ov) ov.remove(); } }
+
+  // Open the OS file/camera picker (image or PDF). Camera capture on mobile.
+  function startScan() {
+    var inp = document.createElement("input"); inp.type = "file";
+    inp.accept = "image/*,application/pdf";
+    inp.setAttribute("capture", "environment");   // rear camera on mobile; ignored on desktop
+    inp.style.display = "none";
+    document.body.appendChild(inp);
+    inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (f) handleScanFile(f); inp.remove(); });
+    inp.click();
+  }
+  function handleScanFile(file) {
+    if (file.type === "application/pdf") {
+      scanProgress("Reading PDF…");
+      loadPdfJs().then(function (pdfjs) {
+        var fr = new FileReader();
+        fr.onload = function () {
+          pdfjs.getDocument({ data: new Uint8Array(fr.result) }).promise.then(function (pdf) {
+            var pages = Math.min(pdf.numPages, 3);   // cap pages sent to OCR
+            scanProgress("Rendering " + pages + " of " + pdf.numPages + " page(s)…");
+            renderPdfPageToImage(pdf, 1, function (img) {
+              if (!img) return scanProgress("Could not read this PDF. Try a photo instead.", true);
+              runScanOcr(img);
+            });
+          }).catch(function () { scanProgress("Could not open this PDF.", true); });
+        };
+        fr.readAsArrayBuffer(file);
+      }).catch(function () { scanProgress("PDF support unavailable offline — try a photo.", true); });
+      return;
+    }
+    // image: compress client-side BEFORE any AI call (raw file never sent)
+    scanProgress("Compressing image…");
+    _compressImage(file, function (dataUrl) {
+      if (!dataUrl) return scanProgress("Could not read this image.", true);
+      runScanOcr(dataUrl);
+    });
+  }
+  function runScanOcr(dataUrl) {
+    scanProgress("Reading medicines from image…");
+    // Call via window.MEDLIST so tests can stub scanExtract.
+    var fn = (window.MEDLIST && window.MEDLIST.scanExtract) || scanExtract;
+    Promise.resolve().then(function () { return fn(dataUrl); }).then(function (rows) {
+      scanProgressDone();
+      if (!rows || !rows.length) { scanProgress("No medicines could be read confidently. Please enter them manually.", true); return; }
+      _openScanReview(rows, dataUrl);
+    }).catch(function () { scanProgressDone(); scanProgress("Could not read the image. Enter medicines manually.", true); });
+  }
+  // Clinician REVIEW — nothing is added until "Add selected". rows are candidate
+  // parse results (or raw OCR rows, which are normalised here).
+  function _openScanReview(rows, dataUrl) {
+    scanProgressDone();
+    var norm = (rows || []).map(function (r) {
+      // A parseEntry() result carries a `raw` string + `candidates` array. A raw OCR
+      // row does not — normalise it (maps generic, sets confidence, never silently maps).
+      var entry = (r && typeof r.raw === "string" && Array.isArray(r.candidates)) ? r : normalizeScanRow(r);
+      if (!entry) return null;
+      return { entry: entry, include: true, editText: entry.detected_text || entry.raw || "" };
+    }).filter(Boolean);
+    _scanState = { rows: norm };
+    _view = "scan";
+    dataUrl = null;   // drop the raw image reference immediately after extraction
+    render();
+  }
+
+  function renderScan() {
+    _root.textContent = "";
+    _root.classList.add("ml-root");
+
+    var header = el("div", { cls: "ml-header" });
+    header.appendChild(el("h2", { cls: "ml-title", text: "Review scanned medicines" }));
+    header.appendChild(el("p", { cls: "ml-subtitle", text: "Verify each row against the source. Nothing is added until you confirm." }));
+    header.appendChild(el("div", { cls: "ml-advisory",
+      text: "Extracted for review only — confirm every medicine, strength, route, and frequency. Illegible or unmapped rows need manual review." }));
+    _root.appendChild(header);
+
+    var body = el("div", { cls: "ml-body" });
+    var listWrap = el("div", { cls: "ml-scan-rows" });
+
+    _scanState.rows.forEach(function (row, idx) {
+      var entry = row.entry;
+      var flagged = !entry.generic || entry.confidence === "low";
+      var card = el("div", { cls: "ml-scan-row" + (flagged ? " ml-scan-flagged" : ""),
+        attrs: Object.assign({ "data-ml-scan-row": String(idx) }, flagged ? { "data-ml-flagged": "1" } : {}) });
+
+      var top = el("div", { cls: "ml-scan-top" });
+      var cb = el("input", { type: "checkbox" });
+      cb.checked = row.include;
+      cb.addEventListener("change", function () { row.include = cb.checked; });
+      top.appendChild(cb);
+
+      var titleWrap = el("div", { cls: "ml-scan-titlewrap" });
+      titleWrap.appendChild(el("div", { cls: "ml-scan-mapped", text: entry.generic || "Not mapped" }));
+      // detected_text preserved verbatim (textContent — never innerHTML)
+      titleWrap.appendChild(el("div", { cls: "ml-scan-detected", text: entry.detected_text || entry.raw || "" }));
+      top.appendChild(titleWrap);
+
+      var confBadge = el("span", { cls: "ml-conf-badge ml-conf-" + (entry.confidence || "low"), text: (entry.confidence || "low") });
+      top.appendChild(confBadge);
+      card.appendChild(top);
+
+      var line = fieldLine(entry);
+      if (line) card.appendChild(el("div", { cls: "ml-scan-line", text: line }));
+
+      // editable field — clinician can correct the detected text before adding
+      var edit = el("input", { cls: "ml-input ml-scan-edit", type: "text",
+        attrs: { "data-ml-scan-edit": String(idx), placeholder: "Correct or complete this medicine…" } });
+      edit.value = row.editText;
+      edit.addEventListener("input", function () {
+        row.editText = edit.value;
+        row.entry = normalizeScanRow({ detected_text: edit.value, confidence: entry.confidence });
+        // re-render only this card's mapped label + flag lazily on next full render
+      });
+      card.appendChild(edit);
+
+      if (flagged) {
+        var flag = el("div", { cls: "ml-scan-flag", text: "⚠ Review manually — not confidently mapped" });
+        card.appendChild(flag);
+        if (entry.candidates && entry.candidates.length) {
+          renderCandidateChips(card, entry.candidates, function (c) {
+            row.entry = Object.assign({}, row.entry, { generic: c.generic, confidence: "high" });
+            render();
+          });
+        }
+      }
+      listWrap.appendChild(card);
+    });
+
+    body.appendChild(listWrap);
+    _root.appendChild(body);
+
+    var footer = el("div", { cls: "ml-footer ml-scan-footer" });
+    var cancel = el("button", { cls: "mlr-filter-btn", text: "Cancel", attrs: { "data-ml-scan-cancel": "1" } });
+    cancel.addEventListener("click", function () { _scanState = { rows: [] }; _view = "list"; render(); });
+    var addBtn = el("button", { cls: "ml-check-btn", text: "Add selected", attrs: { "data-ml-scan-add": "1" } });
+    addBtn.addEventListener("click", function () {
+      _scanState.rows.forEach(function (row) {
+        if (!row.include) return;
+        // Re-normalise from the (possibly edited) text so a corrected row maps fresh;
+        // an unconfirmed row stays unmapped (generic:null) — never silently mapped.
+        var entry = row.entry;
+        add(Object.assign({}, entry, { confidence: entry.confidence }), "scan");
+      });
+      _scanState = { rows: [] };
+      _view = "list";
+      render();
+    });
+    footer.appendChild(cancel);
+    footer.appendChild(addBtn);
+    _root.appendChild(footer);
+  }
+
   function hasResolvedGeneric() {
     return getList().some(function (m) { return m.generic && typeof m.generic === "string" && m.generic.trim(); });
   }
@@ -360,6 +625,7 @@
   function render() {
     if (!_root) return;
     if (_view === "results") { renderResults(); return; }
+    if (_view === "scan") { renderScan(); return; }
     _root.textContent = "";
     _root.classList.add("ml-root");
 
@@ -609,7 +875,25 @@
       + ".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:6px}"
       + ".mlr-detail-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
       + ".mlr-detail-val{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}"
-      + ".mlr-none{padding:26px 10px;text-align:center;color:var(--teal,#0a9396);font:700 14px var(--sans,system-ui);border:1px dashed #a6d9d8;border-radius:12px;background:var(--teal-soft,#e0f2f1)}";
+      + ".mlr-none{padding:26px 10px;text-align:center;color:var(--teal,#0a9396);font:700 14px var(--sans,system-ui);border:1px dashed #a6d9d8;border-radius:12px;background:var(--teal-soft,#e0f2f1)}"
+      // --- Scan review screen ---
+      + ".ml-scan-ov{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.5);padding:16px}"
+      + ".ml-scan-box{background:var(--panel,#fff);border-radius:14px;padding:20px 22px;text-align:center;color:var(--ink,#1a1a1a);font:600 13.5px var(--sans,system-ui);max-width:300px}"
+      + ".ml-scan-spin{font-size:26px;animation:mlspin 1s linear infinite;margin-bottom:8px}@keyframes mlspin{to{transform:rotate(360deg)}}"
+      + ".ml-scan-err{color:#b3261e;font:600 13.5px/1.5 var(--sans,system-ui);margin-bottom:12px}"
+      + ".ml-scan-rows{display:flex;flex-direction:column;gap:10px;padding-top:8px}"
+      + ".ml-scan-row{border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}"
+      + ".ml-scan-row.ml-scan-flagged{border-left:4px solid #c77700;background:#fffaf2}"
+      + ".ml-scan-top{display:flex;align-items:flex-start;gap:9px}"
+      + ".ml-scan-titlewrap{flex:1;min-width:0}"
+      + ".ml-scan-mapped{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
+      + ".ml-scan-detected{font:500 12px var(--sans,system-ui);color:var(--slate,#666);margin-top:1px;word-break:break-word}"
+      + ".ml-scan-line{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);margin:6px 0 0 27px}"
+      + ".ml-scan-edit{margin-top:8px}"
+      + ".ml-scan-flag{font:700 11.5px var(--sans,system-ui);color:#985c00;margin-top:7px}"
+      + ".ml-scan-footer{display:flex;gap:10px}.ml-scan-footer .mlr-filter-btn{flex:0 0 auto}.ml-scan-footer .ml-check-btn{flex:1}"
+      + ".ml-conf-badge.ml-conf-high{background:#e0f2f1;border-color:#a6d9d8;color:#0a7d76}"
+      + ".ml-conf-badge.ml-conf-low{background:#fbe6e4;border-color:#f2c9c5;color:#b3261e}";
     var st = document.createElement("style");
     st.id = "ml-styles"; st.textContent = css;
     document.head.appendChild(st);
@@ -624,10 +908,12 @@
     _manualState = { value: "", parsed: null };
     _indexState = { value: "", results: [], reqSeq: 0 };
     _pasteState = { value: "", rows: [] };
+    _scanState = { rows: [] };
     render();
   }
 
   window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted,
     add: add, remove: remove, undoRemove: undoRemove, clearAll: clearAll, getList: getList,
-    mount: mount, brandSearch: brandSearch };
+    mount: mount, brandSearch: brandSearch,
+    scanExtract: scanExtract, _compressImage: _compressImage, _openScanReview: _openScanReview };
 })();
