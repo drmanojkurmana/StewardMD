@@ -60,7 +60,7 @@ function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
 // so disabling also cuts latency + cost.
-function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; }
+function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; }
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
@@ -71,9 +71,9 @@ function parseCandidates(data, status) {
 const developerProvider = {
   name: "developer",
   available: function (env) { return !!env.GEMINI_API_KEY; },
-  generate: async function (env, parts, maxTokens) {
+  generate: async function (env, parts, maxTokens, opts) {
     const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -130,11 +130,11 @@ async function vertexAccessToken(env) {
 const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
-  generate: async function (env, parts, maxTokens) {
+  generate: async function (env, parts, maxTokens, opts) {
     const loc = env.GCP_LOCATION || "us-central1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
     const token = await vertexAccessToken(env);
-    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -157,7 +157,7 @@ function failReason(e) {
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
-async function callGemini(env, parts, maxTokens) {
+async function callGemini(env, parts, maxTokens, opts) {
   const order = providerOrder(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
@@ -165,7 +165,7 @@ async function callGemini(env, parts, maxTokens) {
     if (!p || !p.available(env)) { lastErr = new Error(name + " provider unavailable"); continue; }
     const attempts = name === "vertex" ? 2 : 1;   // retry Vertex ONCE before switching
     for (let a = 0; a < attempts; a++) {
-      try { return await p.generate(env, parts, maxTokens); }
+      try { return await p.generate(env, parts, maxTokens, opts); }
       catch (e) {
         lastErr = e;
         const nextProvider = order[i + 1];
@@ -203,18 +203,20 @@ const RAG_SYS =
 // grounded in the retrieved KB, with a clean clinical structure. No provider/model
 // names; no long trailing disclaimer (the UI shows a persistent advisory badge).
 const KNOWLEDGE_SYS =
-  "You are MaiK, StewardMD's clinician-facing medical knowledge assistant. Answer the CLINICIAN'S QUESTION (shown under 'CLINICIAN QUESTION') as a complete, well-organised EDUCATIONAL reference for a qualified doctor. " +
-  "Ground your answer in the RETRIEVED STEWARDMD KNOWLEDGE below and standard, widely-accepted clinical principles. If the retrieved evidence is thin, still give the best-supported standard-of-care overview a senior physician would state, but do NOT invent specific drug doses, durations, guideline numbers, or citations that are not supported. " +
-  "ABSOLUTE RULES:\n" +
-  "1. Answer ONLY the question asked. NEVER describe, list, or mention which conditions/protocols happen to be in the retrieved knowledge, and NEVER say things like 'the retrieved knowledge contains protocols for X, Y, Z' or 'no specific question was posed'. If the question names a condition (e.g. acute cholangitis), answer about THAT condition.\n" +
-  "2. Produce a COMPLETE answer — never stop mid-sentence, never trail off. Finish every section you start.\n" +
-  "3. This is general education, NOT individualized patient advice. If the question is about a specific patient, briefly suggest StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
-  "4. Give exact doses ONLY when the retrieved StewardMD Drug Index / protocol states them; otherwise refer to drugs by name/class and standard dosing principles and say to verify locally.\n" +
-  "5. Do NOT mention the AI provider, model, retrieval, chunks, or any internal implementation detail. Do NOT append a long disclaimer (the UI already shows one).\n" +
-  "FORMAT — concise Markdown under these headings (omit a heading only if you truly have nothing evidence-based for it; keep bullets tight):\n" +
-  "### Clinical take\n### Immediate priorities\n### Key investigations & severity\n### Definitive management / source control\n### Antimicrobial / pharmacologic considerations\n### Monitoring & reassessment\n### Escalation & red flags\n### Practical next steps\n" +
-  "For a non-management/explanatory question, instead use: ### Clinical take · ### Key features · ### Diagnosis · ### Differential · ### Management · ### Red flags. " +
-  "If verified source support is genuinely inadequate for the specific point asked, say exactly: 'I don't have enough verified StewardMD source material to answer this reliably,' name what's missing in one line, and suggest a next action (search the guideline library, open the Drug Index, or start Clinical Reasoning) — do NOT pad with unrelated content.";
+  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors, built into StewardMD. Talk like a sharp, warm senior colleague — natural, direct, and genuinely useful, the way a modern medical AI would. Answer the clinician's question (shown under 'CLINICIAN QUESTION'), and use the RECENT CONVERSATION for continuity. " +
+  "Draw on solid, widely-accepted medical knowledge and use the RETRIEVED STEWARDMD KNOWLEDGE below to ground specifics (regimens, protocols, doses), preferring it where it applies. You MAY answer confidently from mainstream clinical knowledge — do NOT refuse or hedge just because the retrieved text looks thin. " +
+  "HOW TO ANSWER — match the response to the question (this is what makes you feel helpful, not robotic):\n" +
+  "- Lead with the direct answer in the first sentence, then add just enough detail.\n" +
+  "- ADAPT the format. A simple or factual question -> 1-3 sentences or a few tight bullets, NO headings. A broad 'manage X' / 'in detail' question -> organise with a few short markdown headings or bullets where they genuinely help. Never pour a short answer into a fixed template of empty headings.\n" +
+  "- Write in clean, conversational prose; bullets for lists (drugs, steps, differentials), short paragraphs otherwise; bold key terms sparingly.\n" +
+  "- When it helps, end with ONE natural follow-up offer (e.g. 'Want the pregnancy-safe options or the paediatric dose?') — a single line, not a menu.\n" +
+  "SAFETY & HONESTY (non-negotiable):\n" +
+  "1. Answer ONLY what was asked. NEVER describe what is or is not in your knowledge base, and NEVER say things like 'the retrieved knowledge contains...' or 'no specific question was posed'.\n" +
+  "2. Always finish — complete every thought and sentence; never trail off mid-answer.\n" +
+  "3. Give an exact dose/duration ONLY when the retrieved Drug Index / protocol states it; otherwise name the drug or class and the dosing principle and say to verify locally. Never invent doses, durations, guideline numbers, or citations.\n" +
+  "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
+  "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
+  "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
@@ -223,6 +225,11 @@ function renderGroundedPrompt(pkg) {
   // The clinician's actual question MUST lead the prompt — otherwise the model answers from
   // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
   if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
+  if (pkg.history && pkg.history.length) {
+    L.push("=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
+    pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
+    L.push("");
+  }
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
   (r.differential || []).forEach((d, i) => {
@@ -350,7 +357,7 @@ export async function onRequest(context) {
         if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
         const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
         let text;
-        try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT); }
+        try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         const cites = [];

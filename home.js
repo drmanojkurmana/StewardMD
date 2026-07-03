@@ -944,6 +944,7 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function maikCSS() {
@@ -1115,6 +1116,7 @@
         think.insertBefore(mb, think.querySelector(".maik-src") || null);
       } else { think.innerHTML = full; }
       if (!active) _maikCache[cacheKey] = think.innerHTML;
+      _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
       scroll();
     }
@@ -1126,7 +1128,7 @@
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
-        .then(function (pkg) { if (pkg && question) pkg.question = question; return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
+        .then(function (pkg) { if (pkg && question) pkg.question = question; if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4); return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
