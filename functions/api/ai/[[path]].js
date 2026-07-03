@@ -297,6 +297,13 @@ export async function onRequest(context) {
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
 
+  // Cost controls (server-side, env-configurable). Output is hard-capped; oversized
+  // inputs are rejected before any provider call. Per-user quota metering + circuit
+  // breaker are layered in a follow-up (functions/_usage.js + KV) — these caps are the
+  // no-auth floor that bounds per-request cost immediately.
+  const MAX_OUT = Math.max(128, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 800));
+  const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
+
   try {
     if (seg === "explain") {
       // Preferred: grounded RAG package (KB primary). The client assembles it from
@@ -308,16 +315,16 @@ export async function onRequest(context) {
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
-        const grounded = renderGroundedPrompt(pkg).slice(0, 24000);
-        const text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], 1536);
+        const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        const text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT);
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });
       }
       // Legacy fallback: plain engine summary string (backward compatible).
-      const summary = String(body.summary || "").slice(0, 6000);
+      const summary = String(body.summary || "").slice(0, MAX_IN_CHARS);
       if (!summary) return json({ error: "no summary" }, 400);
-      const text = await callGemini(env, [{ text: EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "") }]);
+      const text = await callGemini(env, [{ text: EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "") }], MAX_OUT);
       return json({ text: text, mode: "summary" });
     }
     if (seg === "vision") {
