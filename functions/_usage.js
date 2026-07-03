@@ -187,3 +187,4 @@ export async function adminReport(env) {
 }
 
 // Deploy marker: force a fresh Pages build so the MAIK_KV binding attaches to the runtime (2026-07-03).
+// Re-trigger: build with the confirmed KV bindings (GHIS_KV, MAIK_KV, UPDATES_KV) present (2026-07-03 #2).
