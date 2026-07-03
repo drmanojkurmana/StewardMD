@@ -465,7 +465,7 @@
   }
   // Camera / Upload → first choose WHAT the report is, then open the picker.
   function importMethod(method) {
-    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
     var kinds = [["labs", "🧪 Laboratory report", "CBC · LFT · RFT · Electrolytes"], ["abg", "🩸 ABG report", "pH · PaCO₂ · PaO₂ · HCO₃"], ["ventilator", "🫁 Ventilator screen", "Mode · FiO₂ · PEEP · TV"], ["monitor", "❤️ Monitor / vitals", "HR · BP · SpO₂ · Temp"]];
     el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">' + (method === "camera" ? "📷 Photograph — what report?" : "📄 Upload — what report?") + '<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
       '<div style="padding:12px 16px">' + kinds.map(function (k) { return '<button class="icu-btn" style="display:block;width:100%;text-align:left;margin:0 0 8px" data-impkind="' + k[0] + '"><b>' + k[1] + '</b><div style="font:600 11px var(--font);color:var(--muted)">' + k[2] + '</div></button>'; }).join("") + '</div></div>';
@@ -479,7 +479,7 @@
   }
   function importProgress(msg, err) {
     var el = document.getElementById("icuImpOv");
-    if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
     el.innerHTML = '<div class="icu-imp-box">' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
     var c = el.querySelector("#icuImpClose"); if (c) c.addEventListener("click", function () { el.remove(); });
   }
@@ -528,7 +528,7 @@
   function openImportReview(kind, fields, dataUrl) {
     var keys = Object.keys(fields);
     if (!keys.length) { importProgress("No values could be read confidently. Keeping the image as reference only — please enter values manually.", true); return; }
-    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov"; document.body.appendChild(el); }
+    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
     var L = _raw.labs.recent || {}, lastV = latestVitals();
     var rows = keys.map(function (k) {
       var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
