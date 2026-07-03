@@ -97,5 +97,21 @@
       .map(parseEntry);
   }
 
-  window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted };
+  // --- Medication list state (add/remove/undo/clear), session-scoped. ---
+  var _list = [], _lastRemoved = null, _seq = 1;
+  function _persist() { try { sessionStorage.setItem("smd_medlist", JSON.stringify(_list)); } catch (_) {} }
+  function _load() { try { _list = JSON.parse(sessionStorage.getItem("smd_medlist") || "[]") || []; } catch (_) { _list = []; } }
+  function add(entry, source) {
+    var id = "m" + (_seq++) + "_" + Date.now();
+    var med = Object.assign({ id: id, brand: null, indication: null, startDate: null, source: source || "manual" }, entry);
+    _list.push(med); _persist(); return id;
+  }
+  function remove(id) { var i = _list.findIndex(function (m) { return m.id === id; }); if (i >= 0) { _lastRemoved = { med: _list[i], i: i }; _list.splice(i, 1); _persist(); } }
+  function undoRemove() { if (_lastRemoved) { _list.splice(_lastRemoved.i, 0, _lastRemoved.med); _lastRemoved = null; _persist(); } }
+  function clearAll() { _list = []; _lastRemoved = null; _persist(); }
+  function getList() { return _list.slice(); }
+  _load();
+
+  window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted,
+    add: add, remove: remove, undoRemove: undoRemove, clearAll: clearAll, getList: getList };
 })();

@@ -63,6 +63,44 @@ try {
   const list = JSON.parse(await ev(`return JSON.stringify(MEDLIST.parsePasted("1. Tab Amlodipine 5 mg OD\\n2) Metformin 500 BD\\n- T. Ecosprin 75"))`));
   ok(list.length === 3 && list[0].generic === "amlodipine" && list[2].generic === "aspirin", "paste 3-line list parses each");
 
+  // --- Task 4: list state (add/remove/undo/clear, session-scoped) ---
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 1, "add -> 1 med");
+  const rid = await ev(`return MEDLIST.getList()[0].id`);
+  await ev(`MEDLIST.remove(${JSON.stringify(rid)}); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 0, "remove -> 0");
+  await ev(`MEDLIST.undoRemove(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 1, "undoRemove -> 1");
+
+  // Edge case: undoRemove with nothing to undo is a no-op (does not throw, does not duplicate)
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.undoRemove(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 1, "undoRemove with nothing to undo is a no-op");
+
+  // Edge case: clearAll empties the list and clears any pending undo
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 2, "clearAll setup -> 2 meds");
+  await ev(`MEDLIST.clearAll(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 0, "clearAll -> 0 meds");
+  await ev(`MEDLIST.undoRemove(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 0, "undoRemove after clearAll does not resurrect meds");
+
+  // Each med extends parseEntry() result with id/brand/indication/startDate/source
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("Tab amlodipine 5 mg OD"),"index"); return 1;`);
+  const shaped = JSON.parse(await ev(`return JSON.stringify(MEDLIST.getList()[0])`));
+  ok(typeof shaped.id === "string" && shaped.id.length > 0, "med has generated id");
+  ok(shaped.brand === null && shaped.indication === null && shaped.startDate === null, "med has brand/indication/startDate defaulted to null");
+  ok(shaped.source === "index", "med carries the given source");
+  ok(shaped.generic === "amlodipine" && shaped.strength === 5 && shaped.unit === "mg" && shaped.form === "tablet" && shaped.freq === "OD", "med retains parseEntry() fields");
+
+  // Persistence: list survives reload via sessionStorage['smd_medlist']
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"paste"); return 1;`);
+  const stored = JSON.parse(await ev(`return sessionStorage.getItem("smd_medlist")`));
+  ok(Array.isArray(stored) && stored.length === 1 && stored[0].source === "paste", "list persisted to sessionStorage['smd_medlist']");
+  await call("Page.navigate", { url: BASE });
+  for (let i = 0; i < 60; i++) { await sleep(200); if (await ev(`return !!(window.MEDLIST && MEDLIST.getList)`) === true) break; }
+  ok(await ev(`return MEDLIST.getList().length`) === 1, "list reloaded from sessionStorage after navigation");
+  await ev(`MEDLIST.clearAll(); return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
