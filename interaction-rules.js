@@ -92,7 +92,7 @@
     "linezolid":      ["mao_inhibitor", "serotonergic", "antibiotic"],
 
     // --- Opioids / CNS depressants ---
-    "tramadol":       ["opioid", "serotonergic"],
+    "tramadol":       ["opioid", "serotonergic", "qt_prolonging"],
     "morphine":       ["opioid"],
     "fentanyl":       ["opioid"],
     "oxycodone":      ["opioid"],
@@ -109,11 +109,11 @@
     "pravastatin":    ["statin"],
 
     // --- Macrolides / azoles (CYP3A4 inhibitors) ---
-    "clarithromycin": ["macrolide", "cyp3a4_inhibitor"],
-    "azithromycin":   ["macrolide"],
+    "clarithromycin": ["macrolide", "cyp3a4_inhibitor", "qt_prolonging"],
+    "azithromycin":   ["macrolide", "qt_prolonging"],
     "ketoconazole":   ["azole_antifungal", "cyp3a4_inhibitor"],
     "itraconazole":   ["azole_antifungal", "cyp3a4_inhibitor"],
-    "fluconazole":    ["azole_antifungal", "cyp3a4_inhibitor"],
+    "fluconazole":    ["azole_antifungal", "cyp3a4_inhibitor", "qt_prolonging"],
     "voriconazole":   ["azole_antifungal", "cyp3a4_inhibitor"],
 
     // --- Others referenced by pair rules ---
@@ -239,6 +239,22 @@
       reviewDate: "2026-07-04",
       doseTimingSeparation: false,
       specialistReview: false
+    },
+
+    {
+      id: "pair-maoi-serotonergic",
+      type: "pair",
+      subjects: [{ kind: "class", value: "mao_inhibitor" }, { kind: "class", value: "serotonergic" }],
+      severity: "contraindicated",
+      mechanism: "Monoamine oxidase inhibitors (including the antibiotic linezolid) block the breakdown of serotonin; combined with an SSRI/SNRI or other serotonergic agent this causes a rapid, dangerous accumulation of synaptic serotonin.",
+      effect: "High risk of severe, potentially fatal serotonin syndrome (hyperthermia, rigidity, clonus, autonomic instability, seizures).",
+      action: "Do not co-administer. Serotonergic agents and MAO inhibitors must be separated by a washout (typically 2 weeks, or ~5 weeks after fluoxetine). If linezolid is essential and no alternative exists, stop the serotonergic drug first and seek specialist advice.",
+      monitoring: "If inadvertent overlap occurs, stop the serotonergic agent, monitor closely for clonus/hyperthermia/autonomic instability, and treat serotonin syndrome urgently.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-04",
+      doseTimingSeparation: false,
+      specialistReview: true
     },
 
     /* ==================== DUPLICATE-CLASS RULES ==================== */
