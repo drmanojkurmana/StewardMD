@@ -85,6 +85,17 @@ try {
   const r8 = await check([{ generic: "ibuprofen" }], { renalImpairment: true });
   ok(r8.major.some(f => f.ruleType === "context"), "NSAID + renalImpairment context flag fires a major context finding");
 
+  // Home landing tile: home.js source declares the additive Drug Interactions tile,
+  // MEDDRUGS.openInteractions is a function, and the delegate opens the overlay.
+  const { readFileSync } = await import("node:fs");
+  const homeSrc = readFileSync(join(HERE, "..", "home.js"), "utf8");
+  ok(/data-act="interactions"/.test(homeSrc), "home.js source contains the data-act=\"interactions\" tile");
+  ok(/Drug Interactions/.test(homeSrc), "home.js Drug Interactions tile has its label");
+  ok(await ev(`return typeof (window.MEDDRUGS && MEDDRUGS.openInteractions)`) === "function", "MEDDRUGS.openInteractions is a function");
+  // Simulate the home action delegate: invoke openInteractions and confirm the overlay is present.
+  const opened = await ev(`if(!(window.MEDDRUGS&&MEDDRUGS.openInteractions))return false;MEDDRUGS.openInteractions();var o=document.getElementById("miOverlay");return !!(o&&o.classList.contains("on"));`);
+  ok(opened === true, "invoking MEDDRUGS.openInteractions opens the interactions overlay (#miOverlay.on)");
+
   console.log(fails === 0 ? "\nALL GREEN — interactions engine test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
