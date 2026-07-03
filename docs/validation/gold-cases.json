@@ -1,16 +1,16 @@
 {
-  "base": "http://localhost:8902/",
-  "generatedAt": "2026-07-02T10:12:37.748Z",
+  "base": "http://localhost:8903/",
+  "generatedAt": "2026-07-03T16:06:40.209Z",
   "metrics": {
     "casesTested": 500,
-    "primaryDxCorrect": "336/500 (67%)",
-    "top3Accuracy": "427/500 (85%)",
+    "primaryDxCorrect": "372/500 (74%)",
+    "top3Accuracy": "471/500 (94%)",
     "stewardshipResolved": "470/500",
-    "antibioticCorrect": "126/175 (72%)",
+    "antibioticCorrect": "139/175 (79%)",
     "investigationQualityAvg": "3%",
-    "avgReasoningConfidence": "87/100",
+    "avgReasoningConfidence": "89/100",
     "maikAgreement": "mock: 500/500 pipeline-ok (agreement needs live key)",
-    "avgResponseMs": 50,
+    "avgResponseMs": 46,
     "kbIntegrity": {
       "enrichment": 484,
       "expanded": 231,
@@ -19,9 +19,510 @@
     }
   },
   "regression": {
-    "status": "baseline-written",
+    "status": "OK",
     "improved": [],
-    "unchanged": [],
+    "unchanged": [
+      "meningitis_bacterial_01",
+      "cap_01",
+      "pyelonephritis_01",
+      "acs_stemi_01",
+      "cellulitis_01",
+      "pulmonary_embolism_01",
+      "pulmonary_tb_01",
+      "hlh_01",
+      "gc_001",
+      "gc_002",
+      "gc_003",
+      "gc_004",
+      "gc_005",
+      "gc_006",
+      "gc_007",
+      "gc_008",
+      "gc_009",
+      "gc_010",
+      "gc_011",
+      "gc_012",
+      "gc_013",
+      "gc_014",
+      "gc_015",
+      "gc_016",
+      "gc_017",
+      "gc_018",
+      "gc_019",
+      "gc_020",
+      "gc_021",
+      "gc_022",
+      "gc_023",
+      "gc_024",
+      "gc_025",
+      "gc_026",
+      "gc_027",
+      "gc_028",
+      "gc_029",
+      "gc_030",
+      "gc_031",
+      "gc_032",
+      "gc_033",
+      "gc_034",
+      "gc_035",
+      "gc_036",
+      "gc_037",
+      "gc_038",
+      "gc_039",
+      "gc_040",
+      "gc_041",
+      "gc_042",
+      "gc_043",
+      "gc_044",
+      "gc_045",
+      "gc_046",
+      "gc_047",
+      "gc_048",
+      "gc_049",
+      "gc_050",
+      "gc_051",
+      "gc_052",
+      "gc_053",
+      "gc_054",
+      "gc_055",
+      "gc_056",
+      "gc_057",
+      "gc_058",
+      "gc_059",
+      "gc_060",
+      "gc_061",
+      "gc_062",
+      "gc_063",
+      "gc_064",
+      "gc_065",
+      "gc_066",
+      "gc_067",
+      "gc_068",
+      "gc_069",
+      "gc_070",
+      "gc_071",
+      "gc_072",
+      "gc_073",
+      "gc_074",
+      "gc_075",
+      "gc_076",
+      "gc_077",
+      "gc_078",
+      "gc_079",
+      "gc_080",
+      "gc_081",
+      "gc_082",
+      "gc_083",
+      "gc_084",
+      "gc_085",
+      "gc_086",
+      "gc_087",
+      "gc_088",
+      "gc_089",
+      "gc_090",
+      "gc_091",
+      "gc_092",
+      "gc_093",
+      "gc_094",
+      "gc_095",
+      "gc_096",
+      "gc_097",
+      "gc_098",
+      "gc_099",
+      "gc_100",
+      "gc_101",
+      "gc_102",
+      "gc_103",
+      "gc_104",
+      "gc_105",
+      "gc_106",
+      "gc_107",
+      "gc_108",
+      "gc_109",
+      "gc_110",
+      "gc_111",
+      "gc_112",
+      "gc_113",
+      "gc_114",
+      "gc_115",
+      "gc_116",
+      "gc_117",
+      "gc_118",
+      "gc_119",
+      "gc_120",
+      "gc_121",
+      "gc_122",
+      "gc_123",
+      "gc_124",
+      "gc_125",
+      "gc_126",
+      "gc_127",
+      "gc_128",
+      "gc_129",
+      "gc_130",
+      "gc_131",
+      "gc_132",
+      "gc_133",
+      "gc_134",
+      "gc_135",
+      "gc_136",
+      "gc_137",
+      "gc_138",
+      "gc_139",
+      "gc_140",
+      "gc_141",
+      "gc_142",
+      "gc_143",
+      "gc_144",
+      "gc_145",
+      "gc_146",
+      "gc_147",
+      "gc_148",
+      "gc_149",
+      "gc_150",
+      "gc_151",
+      "gc_152",
+      "gc_153",
+      "gc_154",
+      "gc_155",
+      "gc_156",
+      "gc_157",
+      "gc_158",
+      "gc_159",
+      "gc_160",
+      "gc_161",
+      "gc_162",
+      "gc_163",
+      "gc_164",
+      "gc_165",
+      "gc_166",
+      "gc_167",
+      "gc_168",
+      "gc_169",
+      "gc_170",
+      "gc_171",
+      "gc_172",
+      "gc_173",
+      "gc_174",
+      "gc_175",
+      "gc_176",
+      "gc_177",
+      "gc_178",
+      "gc_179",
+      "gc_180",
+      "gc_181",
+      "gc_182",
+      "gc_183",
+      "gc_184",
+      "gc_185",
+      "gc_186",
+      "gc_187",
+      "gc_188",
+      "gc_189",
+      "gc_190",
+      "gc_191",
+      "gc_192",
+      "gc_193",
+      "gc_194",
+      "gc_195",
+      "gc_196",
+      "gc_197",
+      "gc_198",
+      "gc_199",
+      "gc_200",
+      "gc_201",
+      "gc_202",
+      "gc_203",
+      "gc_204",
+      "gc_205",
+      "gc_206",
+      "gc_207",
+      "gc_208",
+      "gc_209",
+      "gc_210",
+      "gc_211",
+      "gc_212",
+      "gc_213",
+      "gc_214",
+      "gc_215",
+      "gc_216",
+      "gc_217",
+      "gc_218",
+      "gc_219",
+      "gc_220",
+      "gc_221",
+      "gc_222",
+      "gc_223",
+      "gc_224",
+      "gc_225",
+      "gc_226",
+      "gc_227",
+      "gc_228",
+      "gc_229",
+      "gc_230",
+      "gc_231",
+      "gc_232",
+      "gc_233",
+      "gc_234",
+      "gc_235",
+      "gc_236",
+      "gc_237",
+      "gc_238",
+      "gc_239",
+      "gc_240",
+      "gc_241",
+      "gc_242",
+      "gc_243",
+      "gc_244",
+      "gc_245",
+      "gc_246",
+      "gc_247",
+      "gc_248",
+      "gc_249",
+      "gc_250",
+      "gc_251",
+      "gc_252",
+      "gc_253",
+      "gc_254",
+      "gc_255",
+      "gc_256",
+      "gc_257",
+      "gc_258",
+      "gc_259",
+      "gc_260",
+      "gc_261",
+      "gc_262",
+      "gc_263",
+      "gc_264",
+      "gc_265",
+      "gc_266",
+      "gc_267",
+      "gc_268",
+      "gc_269",
+      "gc_270",
+      "gc_271",
+      "gc_272",
+      "gc_273",
+      "gc_274",
+      "gc_275",
+      "gc_276",
+      "gc_277",
+      "gc_278",
+      "gc_279",
+      "gc_280",
+      "gc_281",
+      "gc_282",
+      "gc_283",
+      "gc_284",
+      "gc_285",
+      "gc_286",
+      "gc_287",
+      "gc_288",
+      "gc_289",
+      "gc_290",
+      "gc_291",
+      "gc_292",
+      "gc_293",
+      "gc_294",
+      "gc_295",
+      "gc_296",
+      "gc_297",
+      "gc_298",
+      "gc_299",
+      "gc_300",
+      "gc_301",
+      "gc_302",
+      "gc_303",
+      "gc_304",
+      "gc_305",
+      "gc_306",
+      "gc_307",
+      "gc_308",
+      "gc_309",
+      "gc_310",
+      "gc_311",
+      "gc_312",
+      "gc_313",
+      "gc_314",
+      "gc_315",
+      "gc_316",
+      "gc_317",
+      "gc_318",
+      "gc_319",
+      "gc_320",
+      "gc_321",
+      "gc_322",
+      "gc_323",
+      "gc_324",
+      "gc_325",
+      "gc_326",
+      "gc_327",
+      "gc_328",
+      "gc_329",
+      "gc_330",
+      "gc_331",
+      "gc_332",
+      "gc_333",
+      "gc_334",
+      "gc_335",
+      "gc_336",
+      "gc_337",
+      "gc_338",
+      "gc_339",
+      "gc_340",
+      "gc_341",
+      "gc_342",
+      "gc_343",
+      "gc_344",
+      "gc_345",
+      "gc_346",
+      "gc_347",
+      "gc_348",
+      "gc_349",
+      "gc_350",
+      "gc_351",
+      "gc_352",
+      "gc_353",
+      "gc_354",
+      "gc_355",
+      "gc_356",
+      "gc_357",
+      "gc_358",
+      "gc_359",
+      "gc_360",
+      "gc_361",
+      "gc_362",
+      "gc_363",
+      "gc_364",
+      "gc_365",
+      "gc_366",
+      "gc_367",
+      "gc_368",
+      "gc_369",
+      "gc_370",
+      "gc_371",
+      "gc_372",
+      "gc_373",
+      "gc_374",
+      "gc_375",
+      "gc_376",
+      "gc_377",
+      "gc_378",
+      "gc_379",
+      "gc_380",
+      "gc_381",
+      "gc_382",
+      "gc_383",
+      "gc_384",
+      "gc_385",
+      "gc_386",
+      "gc_387",
+      "gc_388",
+      "gc_389",
+      "gc_390",
+      "gc_391",
+      "gc_392",
+      "gc_393",
+      "gc_394",
+      "gc_395",
+      "gc_396",
+      "gc_397",
+      "gc_398",
+      "gc_399",
+      "gc_400",
+      "gc_401",
+      "gc_402",
+      "gc_403",
+      "gc_404",
+      "gc_405",
+      "gc_406",
+      "gc_407",
+      "gc_408",
+      "gc_409",
+      "gc_410",
+      "gc_411",
+      "gc_412",
+      "gc_413",
+      "gc_414",
+      "gc_415",
+      "gc_416",
+      "gc_417",
+      "gc_418",
+      "gc_419",
+      "gc_420",
+      "gc_421",
+      "gc_422",
+      "gc_423",
+      "gc_424",
+      "gc_425",
+      "gc_426",
+      "gc_427",
+      "gc_428",
+      "gc_429",
+      "gc_430",
+      "gc_431",
+      "gc_432",
+      "gc_433",
+      "gc_434",
+      "gc_435",
+      "gc_436",
+      "gc_437",
+      "gc_438",
+      "gc_439",
+      "gc_440",
+      "gc_441",
+      "gc_442",
+      "gc_443",
+      "gc_444",
+      "gc_445",
+      "gc_446",
+      "gc_447",
+      "gc_448",
+      "gc_449",
+      "gc_450",
+      "gc_451",
+      "gc_452",
+      "gc_453",
+      "gc_454",
+      "gc_455",
+      "gc_456",
+      "gc_457",
+      "gc_458",
+      "gc_459",
+      "gc_460",
+      "gc_461",
+      "gc_462",
+      "gc_463",
+      "gc_464",
+      "gc_465",
+      "gc_466",
+      "gc_467",
+      "gc_468",
+      "gc_469",
+      "gc_470",
+      "gc_471",
+      "gc_472",
+      "gc_473",
+      "gc_474",
+      "gc_475",
+      "gc_476",
+      "gc_477",
+      "gc_478",
+      "gc_479",
+      "gc_480",
+      "gc_481",
+      "gc_482",
+      "gc_483",
+      "gc_484",
+      "gc_485",
+      "gc_486",
+      "gc_487",
+      "gc_488",
+      "gc_489",
+      "gc_490",
+      "gc_491",
+      "gc_492"
+    ],
     "regressed": []
   },
   "cases": [
@@ -35,8 +536,8 @@
       "top3ok": true,
       "top3": [
         "Acute Bacterial Meningitis(100)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "Viral (Aseptic) Meningitis(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -51,7 +552,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 6,
-      "wallMs": 164
+      "wallMs": 158
     },
     {
       "id": "cap_01",
@@ -78,7 +579,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 126
+      "wallMs": 136
     },
     {
       "id": "pyelonephritis_01",
@@ -104,7 +605,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 137
+      "wallMs": 139
     },
     {
       "id": "acs_stemi_01",
@@ -117,7 +618,7 @@
       "top3": [
         "Acute coronary syndrome(100)",
         "Atrial fibrillation / arrhythmia(52)",
-        "Aortic dissection(36)"
+        "Cardiogenic shock(36)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -152,7 +653,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 99
+      "wallMs": 107
     },
     {
       "id": "pulmonary_embolism_01",
@@ -174,7 +675,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 101
+      "wallMs": 112
     },
     {
       "id": "pulmonary_tb_01",
@@ -199,7 +700,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 106
+      "wallMs": 108
     },
     {
       "id": "hlh_01",
@@ -211,8 +712,8 @@
       "top3ok": false,
       "top3": [
         "Malaria(75)",
-        "Dengue Fever(56)",
-        "Disseminated (Miliary) Tuberculosis(56)"
+        "Disseminated (Miliary) Tuberculosis(56)",
+        "Dengue Fever(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -225,7 +726,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 103
+      "wallMs": 104
     },
     {
       "id": "gc_001",
@@ -250,8 +751,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 90
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_002",
@@ -277,7 +778,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 95
     },
     {
       "id": "gc_003",
@@ -289,8 +790,8 @@
       "top3ok": true,
       "top3": [
         "Acute Pyelonephritis(100)",
-        "Acute Bacterial Prostatitis(62)",
-        "Acute Uncomplicated Cystitis(62)"
+        "Acute Uncomplicated Cystitis(62)",
+        "Complicated Urinary Tract Infection(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -302,7 +803,7 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 96
     },
     {
@@ -329,8 +830,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 122
+      "ms": 1,
+      "wallMs": 118
     },
     {
       "id": "gc_005",
@@ -342,8 +843,8 @@
       "top3ok": true,
       "top3": [
         "Severe Community Acquired Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Acute COPD Exacerbation(62)"
+        "Community Acquired Pneumonia (non-severe)(62)",
+        "Acute Bronchitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -357,7 +858,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 110
+      "wallMs": 120
     },
     {
       "id": "gc_006",
@@ -366,11 +867,11 @@
       "top1id": "SEVERE_CAP",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Severe Community Acquired Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)"
+        "Community Acquired Pneumonia (non-severe)(62)",
+        "Upper Respiratory Tract Infection (common cold)(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -383,35 +884,35 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 99
+      "ms": 0,
+      "wallMs": 103
     },
     {
       "id": "gc_007",
       "dx": "Hospital-acquired pneumonia (HAP), day 6, with risk factors for multidrug-resistant organisms",
-      "top1": "Community Acquired Pneumonia (non-severe)",
-      "top1id": "CAP",
+      "top1": "Hospital Acquired Pneumonia",
+      "top1id": "HAP",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Community Acquired Pneumonia (non-severe)(100)",
         "Hospital Acquired Pneumonia(100)",
-        "Acute Bronchitis(62)"
+        "Community Acquired Pneumonia (non-severe)(100)",
+        "Ventilator Associated Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
+      "abxOK": true,
       "drugRefs": [
-        "amoxicillin",
-        "azithromycin",
-        "doxycycline",
-        "levofloxacin"
+        "piperacillin-tazobactam",
+        "vancomycin",
+        "cefepime",
+        "meropenem"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 95
     },
     {
       "id": "gc_008",
@@ -423,8 +924,8 @@
       "top3ok": true,
       "top3": [
         "Ventilator Associated Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)"
+        "Hospital Acquired Pneumonia(62)",
+        "Acute Bronchitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -437,8 +938,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_009",
@@ -450,7 +951,7 @@
       "top3ok": true,
       "top3": [
         "Acute Pyelonephritis(100)",
-        "Acute Bacterial Prostatitis(62)",
+        "Complicated Urinary Tract Infection(62)",
         "Acute Uncomplicated Cystitis(62)"
       ],
       "stewOK": true,
@@ -464,7 +965,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 97
     },
     {
       "id": "gc_010",
@@ -489,8 +990,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 97
     },
     {
       "id": "gc_011",
@@ -502,8 +1003,8 @@
       "top3ok": true,
       "top3": [
         "Acute Pyelonephritis(100)",
-        "Acute Bacterial Prostatitis(62)",
-        "Acute Uncomplicated Cystitis(62)"
+        "Acute Uncomplicated Cystitis(62)",
+        "Catheter-Associated Urinary Tract Infection(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -515,7 +1016,7 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 97
     },
     {
@@ -525,20 +1026,20 @@
       "top1id": "GASTROENTERITIS",
       "conf": 76,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Acute Gastroenteritis(76)",
-        "Hypovolemic / haemorrhagic shock(60)",
-        "Acute Cholecystitis(50)"
+        "Acute kidney injury(62)",
+        "Hypovolemic / haemorrhagic shock(60)"
       ],
       "stewOK": false,
       "stewTier": null,
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 17,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 89
     },
     {
       "id": "gc_013",
@@ -547,11 +1048,11 @@
       "top1id": "SEPTIC_SHOCK",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Septic Shock(100)",
         "Sepsis(90)",
-        "Necrotizing Fasciitis(56)"
+        "Acute kidney injury(66)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -564,7 +1065,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 97
     },
     {
       "id": "gc_014",
@@ -589,21 +1090,21 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 102
     },
     {
       "id": "gc_015",
       "dx": "Diabetic nephropathy (diabetic kidney disease) causing CKD stage 4",
-      "top1": "Nephrotic syndrome",
-      "top1id": "nephrotic",
-      "conf": 64,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
+      "conf": 74,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
-        "Nephrotic syndrome(64)",
-        "Acute heart failure / pulmonary edema(52)",
-        "Acute kidney injury(48)"
+        "Chronic kidney disease(74)",
+        "Acute kidney injury(70)",
+        "Nephrotic syndrome(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -611,8 +1112,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 148
     },
     {
       "id": "gc_016",
@@ -634,7 +1135,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 97
+      "wallMs": 95
     },
     {
       "id": "gc_017",
@@ -647,7 +1148,7 @@
       "top3": [
         "Diabetic ketoacidosis(80)",
         "Hypovolemic / haemorrhagic shock(60)",
-        "Hypoglycemia(54)"
+        "Acute Cholangitis(52)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -656,7 +1157,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 99
     },
     {
       "id": "gc_018",
@@ -678,7 +1179,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 99
     },
     {
       "id": "gc_019",
@@ -699,8 +1200,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_020",
@@ -722,7 +1223,7 @@
       "invQuality": 25,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 129
+      "wallMs": 93
     },
     {
       "id": "gc_021",
@@ -743,8 +1244,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 110
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_022",
@@ -765,8 +1266,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 98
     },
     {
       "id": "gc_023",
@@ -787,7 +1288,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 95
     },
     {
@@ -810,7 +1311,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 96
+      "wallMs": 127
     },
     {
       "id": "gc_025",
@@ -831,8 +1332,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 118
     },
     {
       "id": "gc_026",
@@ -853,8 +1354,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_027",
@@ -875,21 +1376,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 100
     },
     {
       "id": "gc_028",
       "dx": "Acute submassive pulmonary embolism with right ventricular strain",
-      "top1": "Cardiac tamponade",
-      "top1id": "tamponade",
+      "top1": "Pulmonary embolism",
+      "top1id": "pe",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Pulmonary embolism(100)",
         "Cardiac tamponade(100)",
-        "Cardiogenic shock(100)",
-        "Pulmonary embolism(100)"
+        "Cardiogenic shock(100)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -898,19 +1399,19 @@
       "invQuality": 14,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 97
+      "wallMs": 89
     },
     {
       "id": "gc_029",
       "dx": "Massive (high-risk) pulmonary embolism with obstructive shock",
-      "top1": "Cardiac tamponade",
-      "top1id": "tamponade",
+      "top1": "Pulmonary embolism",
+      "top1id": "pe",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Cardiac tamponade(100)",
         "Pulmonary embolism(100)",
+        "Cardiac tamponade(100)",
         "Cardiogenic shock(82)"
       ],
       "stewOK": true,
@@ -919,8 +1420,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 101
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_030",
@@ -945,8 +1446,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 130
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_031",
@@ -972,7 +1473,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 92
     },
     {
       "id": "gc_032",
@@ -993,8 +1494,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_033",
@@ -1016,7 +1517,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 92
     },
     {
       "id": "gc_034",
@@ -1028,8 +1529,8 @@
       "top3ok": true,
       "top3": [
         "Hepatic encephalopathy(100)",
-        "Decompensated cirrhosis(96)",
-        "Hypovolemic / haemorrhagic shock(96)"
+        "Variceal bleeding(96)",
+        "Decompensated cirrhosis(96)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1038,7 +1539,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 92
     },
     {
       "id": "gc_035",
@@ -1060,7 +1561,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_036",
@@ -1081,8 +1582,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 92
     },
     {
       "id": "gc_037",
@@ -1104,7 +1605,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 87
     },
     {
       "id": "gc_038",
@@ -1125,8 +1626,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 101
+      "ms": 1,
+      "wallMs": 103
     },
     {
       "id": "gc_039",
@@ -1147,8 +1648,8 @@
       "drugRefs": [],
       "invQuality": 20,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_040",
@@ -1170,7 +1671,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 92
     },
     {
       "id": "gc_041",
@@ -1182,8 +1683,8 @@
       "top3ok": true,
       "top3": [
         "Acute Bacterial Meningitis(100)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "Viral (Aseptic) Meningitis(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1198,7 +1699,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 123
+      "wallMs": 108
     },
     {
       "id": "gc_042",
@@ -1225,8 +1726,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 107
+      "ms": 2,
+      "wallMs": 126
     },
     {
       "id": "gc_043",
@@ -1250,8 +1751,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_044",
@@ -1276,7 +1777,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 81
+      "wallMs": 88
     },
     {
       "id": "gc_045",
@@ -1285,11 +1786,11 @@
       "top1id": "cardiogenic_shock",
       "conf": 76,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Cardiogenic shock(76)",
-        "Acute Cholangitis(52)",
-        "Severe Community Acquired Pneumonia(52)"
+        "Acute kidney injury(60)",
+        "Hyperkalaemia(58)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1297,7 +1798,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 92
     },
     {
@@ -1319,8 +1820,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_047",
@@ -1342,7 +1843,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 96
     },
     {
       "id": "gc_048",
@@ -1364,7 +1865,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 87
+      "wallMs": 90
     },
     {
       "id": "gc_049",
@@ -1386,7 +1887,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 94
     },
     {
       "id": "gc_050",
@@ -1409,8 +1910,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 88
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_051",
@@ -1432,7 +1933,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_052",
@@ -1445,7 +1946,7 @@
       "top3": [
         "Severe Community Acquired Pneumonia(100)",
         "Ventilator Associated Pneumonia(100)",
-        "Acute Bronchitis(62)"
+        "Hospital Acquired Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1458,8 +1959,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 87
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_053",
@@ -1481,7 +1982,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 93
     },
     {
       "id": "gc_054",
@@ -1502,8 +2003,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 88
+      "ms": 0,
+      "wallMs": 92
     },
     {
       "id": "gc_055",
@@ -1525,7 +2026,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 94
     },
     {
       "id": "gc_056",
@@ -1547,7 +2048,7 @@
       "invQuality": 50,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 99
     },
     {
       "id": "gc_057",
@@ -1556,11 +2057,11 @@
       "top1id": "CELLULITIS",
       "conf": 91,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Cellulitis(91)",
         "Necrotizing Fasciitis(62)",
-        "Erysipelas(47)"
+        "Crystal arthritis (gout / pseudogout)(54)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1573,7 +2074,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 144
     },
     {
       "id": "gc_058",
@@ -1586,7 +2087,7 @@
       "top3": [
         "Cellulitis(91)",
         "Necrotizing Fasciitis(86)",
-        "Erysipelas(47)"
+        "Crystal arthritis (gout / pseudogout)(54)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1599,7 +2100,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 89
     },
     {
       "id": "gc_059",
@@ -1607,8 +2108,8 @@
       "top1": "Systemic vasculitis",
       "top1id": "vasculitis",
       "conf": 84,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
         "Systemic vasculitis(84)",
         "SLE / autoimmune flare(78)",
@@ -1621,29 +2122,29 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 130
+      "wallMs": 88
     },
     {
       "id": "gc_060",
       "dx": "Thrombotic thrombocytopenic purpura (TTP)",
-      "top1": "Intracerebral hemorrhage",
-      "top1id": "ich",
+      "top1": "Thrombotic microangiopathy (TTP/HUS)",
+      "top1id": "ttp_hus",
       "conf": 90,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Intracerebral hemorrhage(90)",
         "Thrombotic microangiopathy (TTP/HUS)(90)",
+        "Intracerebral hemorrhage(90)",
         "Acute ischemic stroke(72)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 14,
+      "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 94
+      "ms": 0,
+      "wallMs": 98
     },
     {
       "id": "gc_061",
@@ -1652,11 +2153,11 @@
       "top1id": "SEPTIC_SHOCK",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Septic Shock(100)",
-        "Sepsis(90)",
-        "Thrombotic microangiopathy (TTP/HUS)(82)"
+        "Disseminated intravascular coagulation(92)",
+        "Sepsis(90)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1668,21 +2169,21 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 138
     },
     {
       "id": "gc_062",
       "dx": "Sickle cell vaso-occlusive crisis (severe pain crisis), uncomplicated by acute chest syndrome or sepsis",
-      "top1": "Acute Gastroenteritis",
-      "top1id": "GASTROENTERITIS",
-      "conf": 50,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Sickle Cell Vaso-occlusive Crisis",
+      "top1id": "sickle_cell_disease",
+      "conf": 84,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Sickle Cell Vaso-occlusive Crisis(84)",
         "Acute Gastroenteritis(50)",
-        "Acute Cholangitis(48)",
-        "Acute Cholecystitis(48)"
+        "Acute Cholangitis(48)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -1691,7 +2192,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 131
     },
     {
       "id": "gc_063",
@@ -1717,7 +2218,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 95
+      "wallMs": 99
     },
     {
       "id": "gc_064",
@@ -1738,34 +2239,33 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 129
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_065",
       "dx": "Malignant spinal cord compression secondary to metastatic prostate cancer (T8-T9 epidural disease)",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
+      "top1": "CNS Tuberculosis (TB Meningitis)",
+      "top1id": "CNS_TB",
       "conf": 62,
       "top1ok": false,
       "top3ok": false,
       "top3": [
-        "Brain Abscess(62)",
         "CNS Tuberculosis (TB Meningitis)(62)",
+        "Brain Abscess(62)",
         "Encephalitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
+        "isoniazid + rifampicin + pyrazinamide + ethambutol + corticosteroids",
+        "modified regimens per drug-susceptibility/resistance testing"
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 154
+      "ms": 0,
+      "wallMs": 98
     },
     {
       "id": "gc_066",
@@ -1787,7 +2287,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 108
+      "wallMs": 95
     },
     {
       "id": "gc_067",
@@ -1808,8 +2308,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_068",
@@ -1831,19 +2331,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 93
     },
     {
       "id": "gc_069",
       "dx": "Myasthenic crisis (antibiotic-precipitated), impending respiratory failure",
-      "top1": "Asthma exacerbation",
-      "top1id": "asthma_exac",
+      "top1": "Guillain-Barré syndrome",
+      "top1id": "gbs",
       "conf": 60,
       "top1ok": false,
       "top3ok": false,
       "top3": [
-        "Asthma exacerbation(60)",
         "Guillain-Barré syndrome(60)",
+        "Asthma exacerbation(60)",
         "Pulmonary embolism(60)"
       ],
       "stewOK": true,
@@ -1852,8 +2352,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 120
     },
     {
       "id": "gc_070",
@@ -1878,8 +2378,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_071",
@@ -1901,7 +2401,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 144
+      "wallMs": 149
     },
     {
       "id": "gc_072",
@@ -1914,7 +2414,7 @@
       "top3": [
         "Pulmonary Tuberculosis(100)",
         "Lung cancer(78)",
-        "Bronchiectasis Exacerbation(62)"
+        "Lung Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -1925,8 +2425,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 88
     },
     {
       "id": "gc_073",
@@ -1952,7 +2452,7 @@
       "invQuality": 22,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_074",
@@ -1978,7 +2478,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 97
     },
     {
       "id": "gc_075",
@@ -2003,8 +2503,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 130
+      "ms": 1,
+      "wallMs": 136
     },
     {
       "id": "gc_076",
@@ -2029,8 +2529,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 86
     },
     {
       "id": "gc_077",
@@ -2043,7 +2543,7 @@
       "top3": [
         "Community Acquired Pneumonia (non-severe)(100)",
         "Asthma exacerbation(74)",
-        "Acute Bronchitis(62)"
+        "Severe Community Acquired Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2056,8 +2556,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 87
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_078",
@@ -2083,7 +2583,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 101
     },
     {
       "id": "gc_079",
@@ -2105,7 +2605,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 98
+      "wallMs": 99
     },
     {
       "id": "gc_080",
@@ -2140,7 +2640,7 @@
       "top3": [
         "Salicylate toxicity(88)",
         "Drug intoxication / poisoning(74)",
-        "Acute pancreatitis(64)"
+        "Thyroid storm(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2148,8 +2648,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_082",
@@ -2161,8 +2661,8 @@
       "top3ok": true,
       "top3": [
         "Opioid overdose(98)",
-        "Drug intoxication / poisoning(84)",
-        "Myxoedema coma(84)"
+        "Myxoedema coma(84)",
+        "Organophosphate / cholinergic poisoning(84)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2170,8 +2670,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_083",
@@ -2179,8 +2679,8 @@
       "top1": "Drug intoxication / poisoning",
       "top1id": "drug_intox",
       "conf": 92,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
         "Drug intoxication / poisoning(92)",
         "Serotonin syndrome / NMS(76)",
@@ -2192,30 +2692,34 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_084",
       "dx": "Acute ascending cholangitis with septic shock (Charcot triad plus Reynolds pentad features), secondary to choledocholithiasis",
-      "top1": "Drug-induced / toxic hepatitis",
-      "top1id": "toxic_hepatitis",
-      "conf": 66,
-      "top1ok": false,
+      "top1": "Acute Cholangitis",
+      "top1id": "CHOLANGITIS",
+      "conf": 100,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Acute Cholangitis(100)",
         "Drug-induced / toxic hepatitis(66)",
-        "Acute Cholangitis(62)",
         "Acute Cholecystitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
-      "drugRefs": [],
-      "invQuality": 0,
+      "abxOK": true,
+      "drugRefs": [
+        "piperacillin-tazobactam",
+        "ceftriaxone + metronidazole",
+        "meropenem"
+      ],
+      "invQuality": 43,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 132
+      "wallMs": 133
     },
     {
       "id": "gc_085",
@@ -2237,7 +2741,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 92
     },
     {
       "id": "gc_086",
@@ -2258,8 +2762,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_087",
@@ -2285,7 +2789,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 100
     },
     {
       "id": "gc_088",
@@ -2297,8 +2801,8 @@
       "top3ok": true,
       "top3": [
         "Nephrotic syndrome(86)",
-        "ACE-inhibitor / hereditary angioedema(34)",
-        "Superior vena cava obstruction(34)"
+        "Chronic kidney disease(40)",
+        "ACE-inhibitor / hereditary angioedema(34)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2306,30 +2810,30 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 98
+      "ms": 1,
+      "wallMs": 99
     },
     {
       "id": "gc_089",
       "dx": "Rapidly progressive glomerulonephritis (ANCA-associated, pauci-immune crescentic glomerulonephritis) with acute kidney injury",
-      "top1": "Acute glomerulonephritis",
-      "top1id": "glomerulonephritis",
+      "top1": "Acute kidney injury",
+      "top1id": "aki",
       "conf": 70,
-      "top1ok": true,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Acute kidney injury(70)",
         "Acute glomerulonephritis(70)",
-        "Leptospirosis(60)",
-        "Nephrotic syndrome(58)"
+        "Chronic kidney disease(66)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_090",
@@ -2351,7 +2855,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 92
     },
     {
       "id": "gc_091",
@@ -2376,7 +2880,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 85
+      "wallMs": 91
     },
     {
       "id": "gc_092",
@@ -2397,8 +2901,8 @@
       "drugRefs": [],
       "invQuality": 25,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_093",
@@ -2420,7 +2924,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 134
+      "wallMs": 135
     },
     {
       "id": "gc_094",
@@ -2441,8 +2945,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_095",
@@ -2464,29 +2968,29 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 96
     },
     {
       "id": "gc_096",
       "dx": "Acute limb ischaemia (Rutherford class IIb) due to cardioembolic arterial occlusion from atrial fibrillation",
-      "top1": "Acute mesenteric ischemia",
-      "top1id": "mesenteric_ischemia",
-      "conf": 54,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Acute Limb Ischaemia",
+      "top1id": "acute_limb_ischemia",
+      "conf": 84,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Acute Limb Ischaemia(84)",
         "Acute mesenteric ischemia(54)",
-        "Diabetic Foot Infection(50)",
-        "Cellulitis(45)"
+        "Diabetic Foot Infection(50)"
       ],
-      "stewOK": true,
-      "stewTier": "guideline",
+      "stewOK": false,
+      "stewTier": null,
       "abxOK": null,
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 94
     },
     {
       "id": "gc_097",
@@ -2498,8 +3002,8 @@
       "top3ok": false,
       "top3": [
         "Seizure / epilepsy(68)",
-        "Acute Bacterial Meningitis(62)",
-        "Brain Abscess(62)"
+        "Viral (Aseptic) Meningitis(62)",
+        "Acute Bacterial Meningitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2517,11 +3021,11 @@
       "top1id": "ENCEPHALITIS",
       "conf": 96,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Encephalitis(96)",
-        "Acute Bacterial Meningitis(91)",
-        "Brain Abscess(91)"
+        "Delirium Tremens (Alcohol Withdrawal)(94)",
+        "Acute Bacterial Meningitis(91)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2533,8 +3037,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 100
     },
     {
       "id": "gc_099",
@@ -2556,7 +3060,7 @@
       "invQuality": 20,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 95
     },
     {
       "id": "gc_100",
@@ -2578,33 +3082,29 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 96
     },
     {
       "id": "gc_101",
       "dx": "Vitamin B12 (cobalamin) deficiency due to pernicious anemia, presenting with macrocytic anemia and subacute combined degeneration of the spinal cord",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
-      "conf": 62,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Vitamin B12 Deficiency (incl. SACD)",
+      "top1id": "b12_deficiency",
+      "conf": 82,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)",
-        "Encephalitis(62)"
+        "Vitamin B12 Deficiency (incl. SACD)(82)",
+        "Encephalitis(62)",
+        "CNS Tuberculosis (TB Meningitis)(62)"
       ],
-      "stewOK": true,
-      "stewTier": "guideline",
+      "stewOK": false,
+      "stewTier": null,
       "abxOK": null,
-      "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
-      ],
+      "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 87
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_102",
@@ -2625,34 +3125,34 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 133
+      "ms": 1,
+      "wallMs": 137
     },
     {
       "id": "gc_103",
       "dx": "AMOEBIC_LIVER_ABSCESS",
-      "top1": "Enteric Fever (Typhoid)",
-      "top1id": "ENTERIC_FEVER",
+      "top1": "Amoebic Liver Abscess",
+      "top1id": "AMOEBIC_LIVER_ABSCESS",
       "conf": 86,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Amoebic Liver Abscess(86)",
         "Enteric Fever (Typhoid)(86)",
-        "Malaria(65)",
-        "Acute Viral Hepatitis(62)"
+        "Malaria(65)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
+      "abxOK": true,
       "drugRefs": [
-        "ceftriaxone",
-        "azithromycin",
-        "ciprofloxacin"
+        "metronidazole",
+        "followed by a luminal agent",
+        "tinidazole"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 95
+      "wallMs": 97
     },
     {
       "id": "gc_104",
@@ -2665,7 +3165,7 @@
       "top3": [
         "Aspiration Pneumonia(100)",
         "Community Acquired Pneumonia (non-severe)(100)",
-        "Acute Bronchitis(62)"
+        "Lung Abscess(81)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2678,33 +3178,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 87
     },
     {
       "id": "gc_105",
       "dx": "BRAIN_ABSCESS",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
+      "top1": "Encephalitis",
+      "top1id": "ENCEPHALITIS",
       "conf": 100,
-      "top1ok": true,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
-        "Brain Abscess(100)",
         "Encephalitis(100)",
+        "Brain Abscess(100)",
         "Acute Bacterial Meningitis(91)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
+        "acyclovir",
+        "ceftriaxone + vancomycin",
+        "doxycycline"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_106",
@@ -2717,7 +3217,7 @@
       "top3": [
         "Bronchiectasis Exacerbation(100)",
         "Community Acquired Pneumonia (non-severe)(99)",
-        "Acute Bronchitis(62)"
+        "Acute COPD Exacerbation(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2729,7 +3229,7 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 90
     },
     {
@@ -2757,7 +3257,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 87
     },
     {
       "id": "gc_108",
@@ -2782,7 +3282,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 104
     },
     {
       "id": "gc_109",
@@ -2807,8 +3307,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 85
+      "ms": 0,
+      "wallMs": 87
     },
     {
       "id": "gc_110",
@@ -2821,7 +3321,7 @@
       "top3": [
         "Dengue Fever(100)",
         "Chikungunya(95)",
-        "Malaria(75)"
+        "Rickettsial Fever (Spotted Fever Group)(75)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -2829,21 +3329,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 86
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_111",
       "dx": "CHOLANGITIS",
       "top1": "Acute Cholangitis",
       "top1id": "CHOLANGITIS",
-      "conf": 62,
+      "conf": 86,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Acute Cholangitis(86)",
+        "Acute Viral Hepatitis(62)",
+        "Acute Cholecystitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2856,7 +3356,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 135
     },
     {
       "id": "gc_112",
@@ -2868,8 +3368,8 @@
       "top3ok": true,
       "top3": [
         "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)",
-        "Amoebic Liver Abscess(62)"
+        "Amoebic Liver Abscess(62)",
+        "Liver Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -2881,35 +3381,32 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 133
+      "wallMs": 94
     },
     {
       "id": "gc_113",
       "dx": "CNS_TB",
-      "top1": "Acute Bacterial Meningitis",
-      "top1id": "MENINGITIS",
+      "top1": "CNS Tuberculosis (TB Meningitis)",
+      "top1id": "CNS_TB",
       "conf": 100,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Bacterial Meningitis(100)",
         "CNS Tuberculosis (TB Meningitis)(100)",
+        "Acute Bacterial Meningitis(100)",
         "Intracerebral hemorrhage(80)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
+      "abxOK": true,
       "drugRefs": [
-        "ceftriaxone",
-        "vancomycin",
-        "dexamethasone",
-        "ampicillin",
-        "meropenem"
+        "isoniazid + rifampicin + pyrazinamide + ethambutol + corticosteroids",
+        "modified regimens per drug-susceptibility/resistance testing"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 97
+      "wallMs": 99
     },
     {
       "id": "gc_114",
@@ -2935,7 +3432,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 95
     },
     {
       "id": "gc_115",
@@ -2961,7 +3458,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 89
+      "wallMs": 85
     },
     {
       "id": "gc_116",
@@ -2987,29 +3484,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 145
     },
     {
       "id": "gc_117",
       "dx": "C_DIFF",
-      "top1": "Bowel obstruction",
-      "top1id": "bowel_obstruction",
-      "conf": 78,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Clostridioides difficile Infection",
+      "top1id": "C_DIFF",
+      "conf": 91,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Clostridioides difficile Infection(91)",
         "Bowel obstruction(78)",
-        "Acute Gastroenteritis(76)",
-        "Acute pancreatitis(64)"
+        "Acute Gastroenteritis(76)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
-      "drugRefs": [],
+      "abxOK": true,
+      "drugRefs": [
+        "oral vancomycin",
+        "fidaxomicin",
+        "metronidazole"
+      ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 137
+      "wallMs": 91
     },
     {
       "id": "gc_118",
@@ -3022,7 +3523,7 @@
       "top3": [
         "Dengue Fever(100)",
         "Malaria(75)",
-        "Mixed Malaria (P. falciparum + P. vivax)(56)"
+        "Rickettsial Fever (Spotted Fever Group)(56)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -3030,7 +3531,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 91
     },
     {
@@ -3055,8 +3556,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_120",
@@ -3083,29 +3584,32 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 143
     },
     {
       "id": "gc_121",
       "dx": "DISSEMINATED_TB",
-      "top1": "Malignancy (B-symptoms)",
-      "top1id": "malignancy_b",
-      "conf": 80,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Disseminated (Miliary) Tuberculosis",
+      "top1id": "DISSEMINATED_TB",
+      "conf": 93,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Disseminated (Miliary) Tuberculosis(93)",
         "Malignancy (B-symptoms)(80)",
-        "Enteric Fever (Typhoid)(68)",
-        "Community Acquired Pneumonia (non-severe)(66)"
+        "Enteric Fever (Typhoid)(68)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
-      "drugRefs": [],
+      "abxOK": true,
+      "drugRefs": [
+        "isoniazid + rifampicin + pyrazinamide + ethambutol",
+        "modified regimens per drug-susceptibility testing"
+      ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 93
+      "ms": 0,
+      "wallMs": 99
     },
     {
       "id": "gc_122",
@@ -3158,8 +3662,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 94
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_124",
@@ -3185,7 +3689,7 @@
       "invQuality": 33,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 133
     },
     {
       "id": "gc_125",
@@ -3236,7 +3740,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 136
+      "wallMs": 94
     },
     {
       "id": "gc_127",
@@ -3258,7 +3762,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 94
     },
     {
       "id": "gc_128",
@@ -3271,7 +3775,7 @@
       "top3": [
         "Community Acquired Pneumonia (non-severe)(100)",
         "Hospital Acquired Pneumonia(100)",
-        "Acute Bronchitis(62)"
+        "Ventilator Associated Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3284,8 +3788,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 86
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_129",
@@ -3309,8 +3813,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 88
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_130",
@@ -3335,60 +3839,58 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_131",
       "dx": "LIVER_ABSCESS",
-      "top1": "Enteric Fever (Typhoid)",
-      "top1id": "ENTERIC_FEVER",
-      "conf": 68,
-      "top1ok": false,
-      "top3ok": false,
-      "top3": [
-        "Enteric Fever (Typhoid)(68)",
-        "Malaria(65)",
-        "Acute Cholangitis(62)"
-      ],
-      "stewOK": true,
-      "stewTier": "guideline",
-      "abxOK": true,
-      "drugRefs": [
-        "ceftriaxone",
-        "azithromycin",
-        "ciprofloxacin"
-      ],
-      "invQuality": 0,
-      "maikOK": true,
-      "ms": 1,
-      "wallMs": 88
-    },
-    {
-      "id": "gc_132",
-      "dx": "LUNG_ABSCESS",
-      "top1": "Aspiration Pneumonia",
-      "top1id": "ASPIRATION_PNEUMONIA",
+      "top1": "Liver Abscess",
+      "top1id": "LIVER_ABSCESS",
       "conf": 100,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Aspiration Pneumonia(100)",
-        "Community Acquired Pneumonia (non-severe)(100)",
-        "Acute Bronchitis(62)"
+        "Liver Abscess(100)",
+        "Enteric Fever (Typhoid)(68)",
+        "Malaria(65)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "amoxicillin-clavulanate",
-        "clindamycin",
+        "ceftriaxone + metronidazole",
         "piperacillin-tazobactam"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 92
+    },
+    {
+      "id": "gc_132",
+      "dx": "LUNG_ABSCESS",
+      "top1": "Lung Abscess",
+      "top1id": "LUNG_ABSCESS",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
+      "top3": [
+        "Lung Abscess(100)",
+        "Aspiration Pneumonia(100)",
+        "Community Acquired Pneumonia (non-severe)(100)"
+      ],
+      "stewOK": true,
+      "stewTier": "guideline",
+      "abxOK": true,
+      "drugRefs": [
+        "ampicillin-sulbactam",
+        "clindamycin"
+      ],
+      "invQuality": 0,
+      "maikOK": true,
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_133",
@@ -3400,8 +3902,8 @@
       "top3ok": true,
       "top3": [
         "Malaria(100)",
-        "Acute Viral Hepatitis(76)",
-        "Dengue Fever(75)"
+        "Dengue Fever(75)",
+        "Acute Viral Hepatitis(76)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3413,8 +3915,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 89
+      "ms": 0,
+      "wallMs": 144
     },
     {
       "id": "gc_134",
@@ -3426,8 +3928,8 @@
       "top3ok": true,
       "top3": [
         "Acute Bacterial Meningitis(100)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "Viral (Aseptic) Meningitis(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3441,8 +3943,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 86
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_135",
@@ -3455,7 +3957,7 @@
       "top3": [
         "Malaria(100)",
         "Mixed Malaria (P. falciparum + P. vivax)(85)",
-        "Acute Viral Hepatitis(76)"
+        "Dengue Fever(75)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3468,7 +3970,7 @@
       "invQuality": 33,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 140
+      "wallMs": 92
     },
     {
       "id": "gc_136",
@@ -3494,7 +3996,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 85
     },
     {
       "id": "gc_137",
@@ -3520,7 +4022,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 97
+      "wallMs": 151
     },
     {
       "id": "gc_138",
@@ -3545,7 +4047,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 95
     },
     {
       "id": "gc_139",
@@ -3569,8 +4071,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_140",
@@ -3592,7 +4094,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 91
     },
     {
       "id": "gc_141",
@@ -3617,8 +4119,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 135
     },
     {
       "id": "gc_142",
@@ -3644,7 +4146,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 93
     },
     {
       "id": "gc_143",
@@ -3657,7 +4159,7 @@
       "top3": [
         "Hepatic encephalopathy(100)",
         "Spontaneous Bacterial Peritonitis(86)",
-        "Acute Viral Hepatitis(76)"
+        "Decompensated cirrhosis(76)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3666,7 +4168,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_144",
@@ -3691,8 +4193,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 130
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_145",
@@ -3718,7 +4220,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 97
     },
     {
       "id": "gc_146",
@@ -3744,7 +4246,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 97
+      "wallMs": 91
     },
     {
       "id": "gc_147",
@@ -3756,8 +4258,8 @@
       "top3ok": true,
       "top3": [
         "Severe Community Acquired Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Acute COPD Exacerbation(62)"
+        "Community Acquired Pneumonia (non-severe)(62)",
+        "Acute Bronchitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3771,7 +4273,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 92
     },
     {
       "id": "gc_148",
@@ -3796,7 +4298,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 96
+      "wallMs": 99
     },
     {
       "id": "gc_149",
@@ -3818,7 +4320,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 100
+      "wallMs": 102
     },
     {
       "id": "gc_150",
@@ -3830,8 +4332,8 @@
       "top3ok": true,
       "top3": [
         "Ventilator Associated Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)"
+        "Hospital Acquired Pneumonia(62)",
+        "Acute Bronchitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3844,34 +4346,30 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 92
+      "ms": 1,
+      "wallMs": 136
     },
     {
       "id": "gc_151",
       "dx": "VIRAL_HEPATITIS",
-      "top1": "Acute Cholangitis",
-      "top1id": "CHOLANGITIS",
+      "top1": "Acute Viral Hepatitis",
+      "top1id": "VIRAL_HEPATITIS",
       "conf": 62,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Acute Viral Hepatitis(62)",
         "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Acute Cholecystitis(62)"
       ],
-      "stewOK": true,
-      "stewTier": "guideline",
+      "stewOK": false,
+      "stewTier": null,
       "abxOK": null,
-      "drugRefs": [
-        "piperacillin-tazobactam",
-        "ceftriaxone + metronidazole",
-        "meropenem"
-      ],
+      "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 86
     },
     {
       "id": "gc_152",
@@ -3920,8 +4418,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 135
+      "ms": 0,
+      "wallMs": 98
     },
     {
       "id": "gc_154",
@@ -3942,8 +4440,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_155",
@@ -3956,7 +4454,7 @@
       "top3": [
         "Acute leukaemia(98)",
         "Malaria(75)",
-        "Pulmonary Tuberculosis(62)"
+        "Disseminated intravascular coagulation(74)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -3965,7 +4463,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 100
     },
     {
       "id": "gc_156",
@@ -3986,8 +4484,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 99
     },
     {
       "id": "gc_157",
@@ -3999,17 +4497,17 @@
       "top3ok": true,
       "top3": [
         "Acute Gastroenteritis(76)",
-        "Leptospirosis(44)",
-        "Acute kidney injury(40)"
+        "Acute kidney injury(62)",
+        "Chronic kidney disease(46)"
       ],
       "stewOK": false,
       "stewTier": null,
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 33,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 96
     },
     {
       "id": "gc_158",
@@ -4031,18 +4529,18 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 90
     },
     {
       "id": "gc_159",
       "dx": "anemia_sympt",
       "top1": "Symptomatic anaemia",
       "top1id": "anemia_sympt",
-      "conf": 86,
+      "conf": 88,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Symptomatic anaemia(86)",
+        "Symptomatic anaemia(88)",
         "Hypovolemic / haemorrhagic shock(72)",
         "Thyrotoxicosis (uncomplicated)(72)"
       ],
@@ -4052,8 +4550,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 141
     },
     {
       "id": "gc_160",
@@ -4075,7 +4573,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 106
+      "wallMs": 103
     },
     {
       "id": "gc_161",
@@ -4097,7 +4595,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 89
     },
     {
       "id": "gc_162",
@@ -4116,10 +4614,10 @@
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 33,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 136
+      "wallMs": 91
     },
     {
       "id": "gc_163",
@@ -4141,7 +4639,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 102
+      "wallMs": 101
     },
     {
       "id": "gc_164",
@@ -4163,7 +4661,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 95
     },
     {
       "id": "gc_165",
@@ -4184,8 +4682,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 103
+      "ms": 0,
+      "wallMs": 100
     },
     {
       "id": "gc_166",
@@ -4207,7 +4705,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 99
+      "wallMs": 91
     },
     {
       "id": "gc_167",
@@ -4229,7 +4727,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 95
+      "wallMs": 90
     },
     {
       "id": "gc_168",
@@ -4250,30 +4748,30 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 98
+      "ms": 0,
+      "wallMs": 137
     },
     {
       "id": "gc_169",
       "dx": "ckd",
-      "top1": "Nephrotic syndrome",
-      "top1id": "nephrotic",
-      "conf": 64,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
+      "conf": 90,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Chronic kidney disease(90)",
         "Nephrotic syndrome(64)",
-        "Leptospirosis(44)",
-        "Acute glomerulonephritis(44)"
+        "Acute kidney injury(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 98
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_170",
@@ -4295,7 +4793,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 87
+      "wallMs": 88
     },
     {
       "id": "gc_171",
@@ -4307,8 +4805,8 @@
       "top3ok": true,
       "top3": [
         "Spinal cord compression(78)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)",
+        "Acute ischemic stroke(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4316,8 +4814,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 133
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_172",
@@ -4329,7 +4827,7 @@
       "top3ok": true,
       "top3": [
         "Cellulitis(91)",
-        "Crystal arthritis (gout / pseudogout)(68)",
+        "Crystal arthritis (gout / pseudogout)(88)",
         "Necrotizing Fasciitis(62)"
       ],
       "stewOK": true,
@@ -4343,7 +4841,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 88
     },
     {
       "id": "gc_173",
@@ -4356,7 +4854,7 @@
       "top3": [
         "Decompensated cirrhosis(88)",
         "Hepatic encephalopathy(78)",
-        "Dengue Fever(56)"
+        "Malaria(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4365,19 +4863,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 88
     },
     {
       "id": "gc_174",
       "dx": "dic",
-      "top1": "Septic Shock",
-      "top1id": "SEPTIC_SHOCK",
+      "top1": "Disseminated intravascular coagulation",
+      "top1id": "dic",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Disseminated intravascular coagulation(100)",
         "Septic Shock(100)",
-        "Disseminated intravascular coagulation(96)",
         "Immune thrombocytopenia (ITP)(68)"
       ],
       "stewOK": true,
@@ -4391,7 +4889,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 92
+      "wallMs": 96
     },
     {
       "id": "gc_175",
@@ -4435,7 +4933,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 91
     },
     {
       "id": "gc_177",
@@ -4456,8 +4954,8 @@
       "drugRefs": [],
       "invQuality": 50,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 130
     },
     {
       "id": "gc_178",
@@ -4470,7 +4968,7 @@
       "top3": [
         "Guillain-Barré syndrome(72)",
         "Acute Gastroenteritis(63)",
-        "Brain Abscess(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4479,7 +4977,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 90
     },
     {
       "id": "gc_179",
@@ -4501,29 +4999,29 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 95
+      "wallMs": 98
     },
     {
       "id": "gc_180",
       "dx": "glomerulonephritis",
-      "top1": "Acute glomerulonephritis",
-      "top1id": "glomerulonephritis",
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
       "conf": 74,
-      "top1ok": true,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Chronic kidney disease(74)",
         "Acute glomerulonephritis(74)",
-        "Nephrotic syndrome(64)",
-        "Acute kidney injury(48)"
+        "Acute kidney injury(70)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 67,
+      "invQuality": 33,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 126
+      "ms": 0,
+      "wallMs": 92
     },
     {
       "id": "gc_181",
@@ -4545,7 +5043,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 96
+      "wallMs": 94
     },
     {
       "id": "gc_182",
@@ -4567,7 +5065,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 92
     },
     {
       "id": "gc_183",
@@ -4580,7 +5078,7 @@
       "top3": [
         "Hyperosmolar hyperglycaemic state(84)",
         "Diabetic ketoacidosis(68)",
-        "Hypoglycemia(54)"
+        "Adrenal crisis(48)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4589,7 +5087,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 89
+      "wallMs": 93
     },
     {
       "id": "gc_184",
@@ -4611,7 +5109,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 90
     },
     {
       "id": "gc_185",
@@ -4632,21 +5130,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 86
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_186",
       "dx": "hyperkalemia",
       "top1": "Hyperkalaemia",
       "top1id": "hyperkalemia",
-      "conf": 64,
+      "conf": 76,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Hyperkalaemia(64)",
-        "Leptospirosis(44)",
-        "Atrial fibrillation / arrhythmia(44)"
+        "Hyperkalaemia(76)",
+        "Acute kidney injury(52)",
+        "Chronic kidney disease(46)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4655,7 +5153,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 89
+      "wallMs": 136
     },
     {
       "id": "gc_187",
@@ -4676,8 +5174,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 96
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_188",
@@ -4699,7 +5197,7 @@
       "invQuality": 67,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_189",
@@ -4720,8 +5218,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 134
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_190",
@@ -4742,8 +5240,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_191",
@@ -4764,8 +5262,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 104
     },
     {
       "id": "gc_192",
@@ -4787,7 +5285,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 95
+      "wallMs": 104
     },
     {
       "id": "gc_193",
@@ -4808,8 +5306,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_194",
@@ -4830,8 +5328,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 92
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_195",
@@ -4852,8 +5350,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 138
     },
     {
       "id": "gc_196",
@@ -4874,21 +5372,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 96
     },
     {
       "id": "gc_197",
       "dx": "itp",
-      "top1": "Immune thrombocytopenia (ITP)",
-      "top1id": "itp",
-      "conf": 68,
-      "top1ok": true,
+      "top1": "Disseminated intravascular coagulation",
+      "top1id": "dic",
+      "conf": 74,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Disseminated intravascular coagulation(74)",
         "Immune thrombocytopenia (ITP)(68)",
-        "Acute leukaemia(64)",
-        "Disseminated intravascular coagulation(62)"
+        "Acute leukaemia(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4896,8 +5394,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_198",
@@ -4918,8 +5416,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 135
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_199",
@@ -4931,8 +5429,8 @@
       "top3ok": true,
       "top3": [
         "Malignancy (B-symptoms)(100)",
-        "Malaria(70)",
-        "Enteric Fever (Typhoid)(68)"
+        "Disseminated (Miliary) Tuberculosis(83)",
+        "Malaria(70)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -4940,8 +5438,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_200",
@@ -4963,7 +5461,7 @@
       "invQuality": 67,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 88
     },
     {
       "id": "gc_201",
@@ -4985,7 +5483,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 87
+      "wallMs": 90
     },
     {
       "id": "gc_202",
@@ -5007,7 +5505,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 97
     },
     {
       "id": "gc_203",
@@ -5019,8 +5517,8 @@
       "top3ok": true,
       "top3": [
         "Multiple sclerosis (relapse)(80)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5029,20 +5527,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 92
     },
     {
       "id": "gc_204",
       "dx": "myasthenic_crisis",
-      "top1": "Asthma exacerbation",
-      "top1id": "asthma_exac",
-      "conf": 60,
-      "top1ok": false,
+      "top1": "Myasthenic crisis",
+      "top1id": "myasthenic_crisis",
+      "conf": 62,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Myasthenic crisis(62)",
         "Asthma exacerbation(60)",
-        "Pulmonary embolism(60)",
-        "Myasthenic crisis(56)"
+        "Pulmonary embolism(60)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5051,7 +5549,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 137
+      "wallMs": 149
     },
     {
       "id": "gc_205",
@@ -5063,8 +5561,8 @@
       "top3ok": true,
       "top3": [
         "Multiple myeloma(64)",
-        "Severe Community Acquired Pneumonia(62)",
-        "Hyperosmolar hyperglycaemic state(62)"
+        "Hyperosmolar hyperglycaemic state(62)",
+        "Severe Community Acquired Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5073,7 +5571,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 96
     },
     {
       "id": "gc_206",
@@ -5094,8 +5592,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 94
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_207",
@@ -5117,7 +5615,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 103
     },
     {
       "id": "gc_208",
@@ -5129,8 +5627,8 @@
       "top3ok": true,
       "top3": [
         "Opioid overdose(98)",
-        "Drug intoxication / poisoning(84)",
-        "Organophosphate / cholinergic poisoning(84)"
+        "Organophosphate / cholinergic poisoning(84)",
+        "Drug intoxication / poisoning(84)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5139,7 +5637,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 135
     },
     {
       "id": "gc_209",
@@ -5160,8 +5658,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 88
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_210",
@@ -5182,8 +5680,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_211",
@@ -5205,7 +5703,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 95
     },
     {
       "id": "gc_212",
@@ -5226,8 +5724,8 @@
       "drugRefs": [],
       "invQuality": 25,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_213",
@@ -5239,8 +5737,8 @@
       "top3ok": true,
       "top3": [
         "Peptic ulcer disease / upper GI bleed(90)",
-        "Acute pancreatitis(58)",
-        "Hypovolemic / haemorrhagic shock(58)"
+        "Hypovolemic / haemorrhagic shock(58)",
+        "Acute pancreatitis(58)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5249,7 +5747,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 138
+      "wallMs": 95
     },
     {
       "id": "gc_214",
@@ -5261,8 +5759,8 @@
       "top3ok": true,
       "top3": [
         "Acute pericarditis(94)",
-        "Community Acquired Pneumonia (non-severe)(56)",
-        "Upper Respiratory Tract Infection (common cold)(56)"
+        "Upper Respiratory Tract Infection (common cold)(56)",
+        "Community Acquired Pneumonia (non-severe)(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5270,7 +5768,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 100
     },
     {
@@ -5293,7 +5791,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 94
     },
     {
       "id": "gc_216",
@@ -5315,7 +5813,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 89
     },
     {
       "id": "gc_217",
@@ -5328,7 +5826,7 @@
       "top3": [
         "Polymyalgia rheumatica(68)",
         "Giant cell (temporal) arteritis(44)",
-        "Lung cancer(44)"
+        "Rheumatoid arthritis(44)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5336,8 +5834,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 135
     },
     {
       "id": "gc_218",
@@ -5358,8 +5856,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_219",
@@ -5381,20 +5879,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 90
     },
     {
       "id": "gc_220",
       "dx": "rhabdo",
-      "top1": "Rhabdomyolysis",
-      "top1id": "rhabdo",
+      "top1": "Acute kidney injury",
+      "top1id": "aki",
       "conf": 68,
-      "top1ok": true,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Acute kidney injury(68)",
         "Rhabdomyolysis(68)",
-        "Leptospirosis(56)",
-        "Acute Gastroenteritis(50)"
+        "Leptospirosis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5402,8 +5900,8 @@
       "drugRefs": [],
       "invQuality": 25,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 88
     },
     {
       "id": "gc_221",
@@ -5424,8 +5922,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 88
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_222",
@@ -5447,7 +5945,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 144
+      "wallMs": 96
     },
     {
       "id": "gc_223",
@@ -5469,7 +5967,7 @@
       "invQuality": 67,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 94
     },
     {
       "id": "gc_224",
@@ -5490,8 +5988,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_225",
@@ -5503,8 +6001,8 @@
       "top3ok": true,
       "top3": [
         "Seizure / epilepsy(68)",
-        "Acute Bacterial Meningitis(62)",
-        "Brain Abscess(62)"
+        "Delirium Tremens (Alcohol Withdrawal)(66)",
+        "Encephalitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5512,8 +6010,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_226",
@@ -5535,7 +6033,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 136
+      "wallMs": 144
     },
     {
       "id": "gc_227",
@@ -5548,7 +6046,7 @@
       "top3": [
         "Stevens-Johnson syndrome / TEN(78)",
         "Necrotizing Fasciitis(62)",
-        "Cellulitis(51)"
+        "Rickettsial Fever (Spotted Fever Group)(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5557,7 +6055,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 95
     },
     {
       "id": "gc_228",
@@ -5579,19 +6077,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 89
+      "wallMs": 96
     },
     {
       "id": "gc_229",
       "dx": "subdural",
-      "top1": "Intracerebral hemorrhage",
-      "top1id": "ich",
+      "top1": "Subdural haematoma",
+      "top1id": "subdural",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Intracerebral hemorrhage(100)",
         "Subdural haematoma(100)",
+        "Intracerebral hemorrhage(100)",
         "Acute ischemic stroke(90)"
       ],
       "stewOK": true,
@@ -5601,7 +6099,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 98
     },
     {
       "id": "gc_230",
@@ -5622,8 +6120,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 104
+      "ms": 1,
+      "wallMs": 141
     },
     {
       "id": "gc_231",
@@ -5645,7 +6143,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 97
     },
     {
       "id": "gc_232",
@@ -5667,7 +6165,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 96
     },
     {
       "id": "gc_233",
@@ -5688,8 +6186,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_234",
@@ -5710,8 +6208,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 100
     },
     {
       "id": "gc_235",
@@ -5732,8 +6230,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 137
+      "ms": 0,
+      "wallMs": 96
     },
     {
       "id": "gc_236",
@@ -5745,8 +6243,8 @@
       "top3ok": true,
       "top3": [
         "Drug-induced / toxic hepatitis(82)",
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)"
+        "Acute Viral Hepatitis(62)",
+        "Acute Cholangitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5754,8 +6252,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_237",
@@ -5776,7 +6274,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 94
     },
     {
@@ -5790,7 +6288,7 @@
       "top3": [
         "Variceal bleeding(96)",
         "Hypovolemic / haemorrhagic shock(92)",
-        "Acute Cholangitis(62)"
+        "Spontaneous Bacterial Peritonitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5800,8 +6298,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 134
     },
     {
       "id": "gc_239",
@@ -5813,8 +6311,8 @@
       "top3ok": true,
       "top3": [
         "Systemic vasculitis(64)",
-        "Bronchiectasis Exacerbation(62)",
-        "Lung Abscess(62)"
+        "Lung Abscess(62)",
+        "Bronchiectasis Exacerbation(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5844,8 +6342,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 140
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_241",
@@ -5857,7 +6355,7 @@
       "top3ok": true,
       "top3": [
         "Wernicke encephalopathy(100)",
-        "CNS Tuberculosis (TB Meningitis)(62)",
+        "Delirium Tremens (Alcohol Withdrawal)(66)",
         "Encephalitis(62)"
       ],
       "stewOK": true,
@@ -5867,7 +6365,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 92
     },
     {
       "id": "gc_242",
@@ -5880,7 +6378,7 @@
       "top3": [
         "Upper Respiratory Tract Infection (common cold)(81)",
         "Acute Bronchitis(76)",
-        "Acute COPD Exacerbation(41)"
+        "Acute Sinusitis (Rhinosinusitis)(41)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -5889,29 +6387,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 94
     },
     {
       "id": "gc_243",
       "dx": "AMOEBIC_LIVER_ABSCESS",
-      "top1": "Inflammatory bowel disease flare",
-      "top1id": "ibd_flare",
-      "conf": 62,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Amoebic Liver Abscess",
+      "top1id": "AMOEBIC_LIVER_ABSCESS",
+      "conf": 68,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Amoebic Liver Abscess(68)",
         "Inflammatory bowel disease flare(62)",
-        "Malaria(60)",
-        "Thyroid storm(60)"
+        "Malaria(60)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
-      "drugRefs": [],
+      "abxOK": true,
+      "drugRefs": [
+        "metronidazole",
+        "followed by a luminal agent",
+        "tinidazole"
+      ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 0,
+      "wallMs": 99
     },
     {
       "id": "gc_244",
@@ -5924,7 +6426,7 @@
       "top3": [
         "Aspiration Pneumonia(100)",
         "Community Acquired Pneumonia (non-severe)(100)",
-        "Acute Bronchitis(62)"
+        "Lung Abscess(81)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -5936,8 +6438,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 139
+      "ms": 0,
+      "wallMs": 93
     },
     {
       "id": "gc_245",
@@ -5962,8 +6464,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 92
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_246",
@@ -6016,7 +6518,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 133
     },
     {
       "id": "gc_248",
@@ -6025,11 +6527,11 @@
       "top1id": "COMPLICATED_UTI",
       "conf": 62,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Complicated Urinary Tract Infection(62)",
-        "Thyroid storm(46)",
-        "Acute Uncomplicated Cystitis(45)"
+        "Acute Uncomplicated Cystitis(45)",
+        "Catheter-Associated Urinary Tract Infection(45)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6041,7 +6543,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 137
+      "wallMs": 99
     },
     {
       "id": "gc_249",
@@ -6066,8 +6568,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 87
     },
     {
       "id": "gc_250",
@@ -6088,19 +6590,19 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_251",
       "dx": "CHOLANGITIS",
       "top1": "Acute Cholangitis",
       "top1id": "CHOLANGITIS",
-      "conf": 62,
+      "conf": 100,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Cholangitis(62)",
+        "Acute Cholangitis(100)",
         "Acute Cholecystitis(62)",
         "Acute Viral Hepatitis(62)"
       ],
@@ -6127,8 +6629,8 @@
       "top3ok": true,
       "top3": [
         "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)",
-        "Amoebic Liver Abscess(62)"
+        "Amoebic Liver Abscess(62)",
+        "Liver Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6139,36 +6641,33 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_253",
       "dx": "CNS_TB",
-      "top1": "Acute Bacterial Meningitis",
-      "top1id": "MENINGITIS",
+      "top1": "CNS Tuberculosis (TB Meningitis)",
+      "top1id": "CNS_TB",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Bacterial Meningitis(100)",
         "CNS Tuberculosis (TB Meningitis)(100)",
+        "Acute Bacterial Meningitis(100)",
         "Intracerebral hemorrhage(80)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "ceftriaxone",
-        "vancomycin",
-        "dexamethasone",
-        "ampicillin",
-        "meropenem"
+        "isoniazid + rifampicin + pyrazinamide + ethambutol + corticosteroids",
+        "modified regimens per drug-susceptibility/resistance testing"
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_254",
@@ -6193,7 +6692,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 93
     },
     {
       "id": "gc_255",
@@ -6219,7 +6718,7 @@
       "invQuality": 20,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 86
+      "wallMs": 87
     },
     {
       "id": "gc_256",
@@ -6245,29 +6744,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 137
     },
     {
       "id": "gc_257",
       "dx": "C_DIFF",
-      "top1": "Acute Gastroenteritis",
-      "top1id": "GASTROENTERITIS",
-      "conf": 81,
-      "top1ok": false,
+      "top1": "Clostridioides difficile Infection",
+      "top1id": "C_DIFF",
+      "conf": 91,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Clostridioides difficile Infection(91)",
         "Acute Gastroenteritis(81)",
-        "Clostridioides difficile Infection(62)",
         "Thyroid storm(62)"
       ],
-      "stewOK": false,
-      "stewTier": null,
-      "abxOK": false,
-      "drugRefs": [],
+      "stewOK": true,
+      "stewTier": "guideline",
+      "abxOK": true,
+      "drugRefs": [
+        "oral vancomycin",
+        "fidaxomicin",
+        "metronidazole"
+      ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 134
+      "wallMs": 89
     },
     {
       "id": "gc_258",
@@ -6280,7 +6783,7 @@
       "top3": [
         "Dengue Fever(100)",
         "Malaria(75)",
-        "Mixed Malaria (P. falciparum + P. vivax)(56)"
+        "Rickettsial Fever (Spotted Fever Group)(56)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -6288,8 +6791,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 85
     },
     {
       "id": "gc_259",
@@ -6313,8 +6816,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_260",
@@ -6341,29 +6844,32 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 85
     },
     {
       "id": "gc_261",
       "dx": "DISSEMINATED_TB",
-      "top1": "Malignancy (B-symptoms)",
-      "top1id": "malignancy_b",
-      "conf": 80,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Disseminated (Miliary) Tuberculosis",
+      "top1id": "DISSEMINATED_TB",
+      "conf": 83,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Disseminated (Miliary) Tuberculosis(83)",
         "Malignancy (B-symptoms)(80)",
-        "Malaria(75)",
-        "Enteric Fever (Typhoid)(68)"
+        "Malaria(75)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
-      "drugRefs": [],
+      "abxOK": true,
+      "drugRefs": [
+        "isoniazid + rifampicin + pyrazinamide + ethambutol",
+        "modified regimens per drug-susceptibility testing"
+      ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_262",
@@ -6388,34 +6894,34 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 97
+      "ms": 0,
+      "wallMs": 103
     },
     {
       "id": "gc_263",
       "dx": "ENCEPHALITIS",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
+      "top1": "Encephalitis",
+      "top1id": "ENCEPHALITIS",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Brain Abscess(100)",
         "Encephalitis(100)",
+        "Brain Abscess(100)",
         "Acute Bacterial Meningitis(91)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": false,
       "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
+        "acyclovir",
+        "ceftriaxone + vancomycin",
+        "doxycycline"
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 90
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_264",
@@ -6440,7 +6946,7 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 93
     },
     {
@@ -6454,7 +6960,7 @@
       "top3": [
         "Erysipelas(100)",
         "Cellulitis(96)",
-        "Necrotizing Fasciitis(62)"
+        "Deep vein thrombosis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6465,8 +6971,8 @@
       ],
       "invQuality": 25,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 84
+      "ms": 0,
+      "wallMs": 130
     },
     {
       "id": "gc_266",
@@ -6491,8 +6997,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 136
+      "ms": 0,
+      "wallMs": 96
     },
     {
       "id": "gc_267",
@@ -6513,8 +7019,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_268",
@@ -6527,7 +7033,7 @@
       "top3": [
         "Community Acquired Pneumonia (non-severe)(100)",
         "Hospital Acquired Pneumonia(91)",
-        "Acute Bronchitis(62)"
+        "Ventilator Associated Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6540,8 +7046,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 90
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_269",
@@ -6553,8 +7059,8 @@
       "top3ok": true,
       "top3": [
         "Infective Endocarditis(62)",
-        "Necrotizing Fasciitis(56)",
-        "Pyrexia of Unknown Origin(56)"
+        "Septic Shock(56)",
+        "Sepsis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6566,7 +7072,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 89
     },
     {
       "id": "gc_270",
@@ -6592,59 +7098,57 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_271",
       "dx": "LIVER_ABSCESS",
-      "top1": "Acute Cholangitis",
-      "top1id": "CHOLANGITIS",
-      "conf": 62,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Liver Abscess",
+      "top1id": "LIVER_ABSCESS",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Liver Abscess(100)",
+        "Amoebic Liver Abscess(62)",
+        "Acute Cholangitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "piperacillin-tazobactam",
         "ceftriaxone + metronidazole",
-        "meropenem"
+        "piperacillin-tazobactam"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 86
+      "wallMs": 89
     },
     {
       "id": "gc_272",
       "dx": "LUNG_ABSCESS",
-      "top1": "Aspiration Pneumonia",
-      "top1id": "ASPIRATION_PNEUMONIA",
+      "top1": "Lung Abscess",
+      "top1id": "LUNG_ABSCESS",
       "conf": 100,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Lung Abscess(100)",
         "Aspiration Pneumonia(100)",
-        "Community Acquired Pneumonia (non-severe)(81)",
         "Pulmonary Tuberculosis(81)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "amoxicillin-clavulanate",
-        "clindamycin",
-        "piperacillin-tazobactam"
+        "ampicillin-sulbactam",
+        "clindamycin"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 97
     },
     {
       "id": "gc_273",
@@ -6669,8 +7173,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 93
+      "ms": 0,
+      "wallMs": 92
     },
     {
       "id": "gc_274",
@@ -6683,7 +7187,7 @@
       "top3": [
         "Acute Bacterial Meningitis(100)",
         "Subarachnoid hemorrhage(66)",
-        "Brain Abscess(62)"
+        "Viral (Aseptic) Meningitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6698,7 +7202,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 141
     },
     {
       "id": "gc_275",
@@ -6723,8 +7227,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 94
+      "ms": 0,
+      "wallMs": 99
     },
     {
       "id": "gc_276",
@@ -6749,8 +7253,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 128
+      "ms": 0,
+      "wallMs": 84
     },
     {
       "id": "gc_277",
@@ -6800,8 +7304,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 97
+      "ms": 1,
+      "wallMs": 137
     },
     {
       "id": "gc_279",
@@ -6825,8 +7329,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_280",
@@ -6848,7 +7352,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 86
+      "wallMs": 87
     },
     {
       "id": "gc_281",
@@ -6860,8 +7364,8 @@
       "top3ok": true,
       "top3": [
         "Acute Pyelonephritis(100)",
-        "Acute Bacterial Prostatitis(62)",
-        "Acute Uncomplicated Cystitis(62)"
+        "Acute Uncomplicated Cystitis(62)",
+        "Complicated Urinary Tract Infection(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -6874,7 +7378,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 136
+      "wallMs": 98
     },
     {
       "id": "gc_282",
@@ -6882,8 +7386,8 @@
       "top1": "Scrub Typhus",
       "top1id": "SCRUB_TYPHUS",
       "conf": 100,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
         "Scrub Typhus(100)",
         "Dengue Fever(85)",
@@ -6900,7 +7404,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 100
     },
     {
       "id": "gc_283",
@@ -6912,7 +7416,7 @@
       "top3ok": true,
       "top3": [
         "Hepatic encephalopathy(100)",
-        "Acute Viral Hepatitis(76)",
+        "Decompensated cirrhosis(76)",
         "Spontaneous Bacterial Peritonitis(76)"
       ],
       "stewOK": true,
@@ -6921,8 +7425,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_284",
@@ -6948,7 +7452,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 90
     },
     {
       "id": "gc_285",
@@ -6974,7 +7478,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 95
+      "wallMs": 94
     },
     {
       "id": "gc_286",
@@ -7000,55 +7504,59 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 93
     },
     {
       "id": "gc_287",
       "dx": "SEVERE_CAP",
-      "top1": "Acute Bronchitis",
-      "top1id": "ACUTE_BRONCHITIS",
+      "top1": "Community Acquired Pneumonia (non-severe)",
+      "top1id": "CAP",
       "conf": 62,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)",
-        "Community Acquired Pneumonia (non-severe)(62)"
+        "Community Acquired Pneumonia (non-severe)(62)",
+        "Severe Community Acquired Pneumonia(62)",
+        "Acute Bronchitis(62)"
       ],
-      "stewOK": false,
-      "stewTier": null,
-      "abxOK": false,
-      "drugRefs": [],
+      "stewOK": true,
+      "stewTier": "guideline",
+      "abxOK": true,
+      "drugRefs": [
+        "amoxicillin",
+        "azithromycin",
+        "doxycycline",
+        "levofloxacin"
+      ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 135
     },
     {
       "id": "gc_288",
       "dx": "SINUSITIS",
-      "top1": "Acute Pharyngitis",
-      "top1id": "PHARYNGITIS",
+      "top1": "Acute Sinusitis (Rhinosinusitis)",
+      "top1id": "SINUSITIS",
       "conf": 66,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Pharyngitis(66)",
         "Acute Sinusitis (Rhinosinusitis)(66)",
+        "Acute Pharyngitis(66)",
         "Upper Respiratory Tract Infection (common cold)(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "penicillin v",
-        "amoxicillin",
-        "azithromycin"
+        "amoxicillin-clavulanate",
+        "doxycycline"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 103
+      "wallMs": 99
     },
     {
       "id": "gc_289",
@@ -7069,8 +7577,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 106
+      "ms": 0,
+      "wallMs": 105
     },
     {
       "id": "gc_290",
@@ -7082,8 +7590,8 @@
       "top3ok": true,
       "top3": [
         "Ventilator Associated Pneumonia(100)",
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)"
+        "Hospital Acquired Pneumonia(62)",
+        "Acute Bronchitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7097,33 +7605,29 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 132
+      "wallMs": 93
     },
     {
       "id": "gc_291",
       "dx": "VIRAL_HEPATITIS",
-      "top1": "Acute Cholangitis",
-      "top1id": "CHOLANGITIS",
+      "top1": "Acute Viral Hepatitis",
+      "top1id": "VIRAL_HEPATITIS",
       "conf": 62,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Acute Viral Hepatitis(62)",
         "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Acute Cholecystitis(62)"
       ],
-      "stewOK": true,
-      "stewTier": "guideline",
+      "stewOK": false,
+      "stewTier": null,
       "abxOK": null,
-      "drugRefs": [
-        "piperacillin-tazobactam",
-        "ceftriaxone + metronidazole",
-        "meropenem"
-      ],
+      "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 90
     },
     {
       "id": "gc_292",
@@ -7151,7 +7655,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 94
     },
     {
       "id": "gc_293",
@@ -7173,7 +7677,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 95
     },
     {
       "id": "gc_294",
@@ -7194,8 +7698,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 100
+      "ms": 1,
+      "wallMs": 98
     },
     {
       "id": "gc_295",
@@ -7207,8 +7711,8 @@
       "top3ok": true,
       "top3": [
         "Acute leukaemia(100)",
-        "Malaria(75)",
-        "Malignancy (B-symptoms)(72)"
+        "Disseminated intravascular coagulation(80)",
+        "Malaria(75)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7217,7 +7721,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 98
+      "wallMs": 90
     },
     {
       "id": "gc_296",
@@ -7239,7 +7743,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 102
+      "wallMs": 140
     },
     {
       "id": "gc_297",
@@ -7251,17 +7755,17 @@
       "top3ok": true,
       "top3": [
         "Acute Gastroenteritis(76)",
-        "Acute kidney injury(48)",
-        "Leptospirosis(44)"
+        "Chronic kidney disease(52)",
+        "Acute kidney injury(48)"
       ],
       "stewOK": false,
       "stewTier": null,
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 17,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 92
     },
     {
       "id": "gc_298",
@@ -7283,20 +7787,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 88
     },
     {
       "id": "gc_299",
       "dx": "anemia_sympt",
-      "top1": "Acute coronary syndrome",
-      "top1id": "acs",
-      "conf": 98,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Symptomatic anaemia",
+      "top1id": "anemia_sympt",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Symptomatic anaemia(100)",
         "Acute coronary syndrome(98)",
-        "Aortic stenosis (syncope)(92)",
-        "Acute heart failure / pulmonary edema(76)"
+        "Aortic stenosis (syncope)(92)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7305,7 +7809,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 139
+      "wallMs": 99
     },
     {
       "id": "gc_300",
@@ -7326,8 +7830,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 98
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_301",
@@ -7348,8 +7852,8 @@
       "drugRefs": [],
       "invQuality": 17,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 89
+      "ms": 0,
+      "wallMs": 98
     },
     {
       "id": "gc_302",
@@ -7370,8 +7874,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 99
     },
     {
       "id": "gc_303",
@@ -7393,7 +7897,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 92
     },
     {
       "id": "gc_304",
@@ -7414,8 +7918,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_305",
@@ -7437,7 +7941,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 100
+      "wallMs": 136
     },
     {
       "id": "gc_306",
@@ -7458,8 +7962,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_307",
@@ -7472,7 +7976,7 @@
       "top3": [
         "Brain tumour / mass lesion(100)",
         "Intracerebral hemorrhage(72)",
-        "Acute ischemic stroke(66)"
+        "Idiopathic intracranial hypertension(66)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7480,8 +7984,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_308",
@@ -7502,21 +8006,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 136
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_309",
       "dx": "ckd",
-      "top1": "Nephrotic syndrome",
-      "top1id": "nephrotic",
-      "conf": 64,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
+      "conf": 84,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Chronic kidney disease(84)",
         "Nephrotic syndrome(64)",
-        "Acute glomerulonephritis(44)",
-        "Malignancy (B-symptoms)(34)"
+        "Acute kidney injury(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7525,7 +8029,7 @@
       "invQuality": 25,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 89
     },
     {
       "id": "gc_310",
@@ -7534,11 +8038,11 @@
       "top1id": "asthma_exac",
       "conf": 82,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Asthma exacerbation(82)",
         "Acute COPD Exacerbation(61)",
-        "Acute heart failure / pulmonary edema(60)"
+        "COPD exacerbation (non-infective)(60)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7559,8 +8063,8 @@
       "top3ok": true,
       "top3": [
         "Spinal cord compression(78)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "Acute ischemic stroke(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7569,7 +8073,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 99
     },
     {
       "id": "gc_312",
@@ -7595,7 +8099,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 92
     },
     {
       "id": "gc_313",
@@ -7617,18 +8121,18 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 92
     },
     {
       "id": "gc_314",
       "dx": "dic",
       "top1": "Disseminated intravascular coagulation",
       "top1id": "dic",
-      "conf": 84,
+      "conf": 96,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Disseminated intravascular coagulation(84)",
+        "Disseminated intravascular coagulation(96)",
         "Acute leukaemia(78)",
         "Immune thrombocytopenia (ITP)(68)"
       ],
@@ -7638,8 +8142,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 147
     },
     {
       "id": "gc_315",
@@ -7661,7 +8165,7 @@
       "invQuality": 25,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 89
     },
     {
       "id": "gc_316",
@@ -7683,7 +8187,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 89
     },
     {
       "id": "gc_317",
@@ -7705,7 +8209,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 136
+      "wallMs": 96
     },
     {
       "id": "gc_318",
@@ -7727,7 +8231,7 @@
       "invQuality": 50,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 101
+      "wallMs": 143
     },
     {
       "id": "gc_319",
@@ -7749,20 +8253,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 95
     },
     {
       "id": "gc_320",
       "dx": "glomerulonephritis",
-      "top1": "Acute glomerulonephritis",
-      "top1id": "glomerulonephritis",
-      "conf": 74,
-      "top1ok": true,
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
+      "conf": 86,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Chronic kidney disease(86)",
         "Acute glomerulonephritis(74)",
-        "Nephrotic syndrome(64)",
-        "Acute kidney injury(48)"
+        "Acute kidney injury(70)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7770,8 +8274,8 @@
       "drugRefs": [],
       "invQuality": 20,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 89
+      "ms": 0,
+      "wallMs": 88
     },
     {
       "id": "gc_321",
@@ -7792,8 +8296,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_322",
@@ -7815,19 +8319,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 131
+      "wallMs": 96
     },
     {
       "id": "gc_323",
       "dx": "hhs",
-      "top1": "Acute ischemic stroke",
-      "top1id": "ischemic_stroke",
+      "top1": "Seizure / epilepsy",
+      "top1id": "seizure_epilepsy",
       "conf": 68,
       "top1ok": false,
       "top3ok": true,
       "top3": [
-        "Acute ischemic stroke(68)",
         "Seizure / epilepsy(68)",
+        "Acute ischemic stroke(68)",
         "Hyperosmolar hyperglycaemic state(66)"
       ],
       "stewOK": true,
@@ -7837,7 +8341,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 92
     },
     {
       "id": "gc_324",
@@ -7859,7 +8363,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 94
     },
     {
       "id": "gc_325",
@@ -7881,20 +8385,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 93
     },
     {
       "id": "gc_326",
       "dx": "hyperkalemia",
-      "top1": "Vasovagal / orthostatic syncope",
-      "top1id": "vasovagal_syncope",
-      "conf": 64,
-      "top1ok": false,
+      "top1": "Hyperkalaemia",
+      "top1id": "hyperkalemia",
+      "conf": 74,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Vasovagal / orthostatic syncope(64)",
-        "Hyperkalaemia(62)",
-        "Aortic stenosis (syncope)(50)"
+        "Hyperkalaemia(74)",
+        "Acute kidney injury(68)",
+        "Vasovagal / orthostatic syncope(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7902,8 +8406,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_327",
@@ -7924,8 +8428,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 137
     },
     {
       "id": "gc_328",
@@ -7934,11 +8438,11 @@
       "top1id": "ich",
       "conf": 88,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Intracerebral hemorrhage(88)",
         "Acute ischemic stroke(86)",
-        "Seizure / epilepsy(68)"
+        "Hypoglycemia(72)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7946,8 +8450,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_329",
@@ -7968,8 +8472,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 97
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_330",
@@ -7981,8 +8485,8 @@
       "top3ok": true,
       "top3": [
         "Hypovolemic / haemorrhagic shock(62)",
-        "Enteric Fever (Typhoid)(50)",
-        "Peptic ulcer disease / upper GI bleed(46)"
+        "Symptomatic anaemia(50)",
+        "Enteric Fever (Typhoid)(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -7990,8 +8494,8 @@
       "drugRefs": [],
       "invQuality": 20,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 100
     },
     {
       "id": "gc_331",
@@ -8012,8 +8516,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 137
+      "ms": 0,
+      "wallMs": 100
     },
     {
       "id": "gc_332",
@@ -8056,8 +8560,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 98
     },
     {
       "id": "gc_334",
@@ -8078,8 +8582,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_335",
@@ -8101,7 +8605,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 99
+      "wallMs": 97
     },
     {
       "id": "gc_336",
@@ -8123,20 +8627,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 96
+      "wallMs": 136
     },
     {
       "id": "gc_337",
       "dx": "itp",
-      "top1": "Immune thrombocytopenia (ITP)",
-      "top1id": "itp",
-      "conf": 68,
-      "top1ok": true,
+      "top1": "Disseminated intravascular coagulation",
+      "top1id": "dic",
+      "conf": 74,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Disseminated intravascular coagulation(74)",
         "Immune thrombocytopenia (ITP)(68)",
-        "Acute leukaemia(64)",
-        "Disseminated intravascular coagulation(62)"
+        "Acute leukaemia(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8145,7 +8649,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 95
     },
     {
       "id": "gc_338",
@@ -8179,8 +8683,8 @@
       "top3ok": true,
       "top3": [
         "Malignancy (B-symptoms)(100)",
-        "Malaria(70)",
-        "Enteric Fever (Typhoid)(68)"
+        "Disseminated (Miliary) Tuberculosis(83)",
+        "Malaria(70)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8189,7 +8693,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 91
     },
     {
       "id": "gc_340",
@@ -8211,7 +8715,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 146
+      "wallMs": 96
     },
     {
       "id": "gc_341",
@@ -8255,7 +8759,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 97
     },
     {
       "id": "gc_343",
@@ -8267,8 +8771,8 @@
       "top3ok": true,
       "top3": [
         "Multiple sclerosis (relapse)(80)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8286,11 +8790,11 @@
       "top1id": "ASPIRATION_PNEUMONIA",
       "conf": 62,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Aspiration Pneumonia(62)",
-        "Asthma exacerbation(60)",
-        "Pulmonary embolism(60)"
+        "Myasthenic crisis(60)",
+        "Asthma exacerbation(60)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8302,8 +8806,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 134
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_345",
@@ -8327,8 +8831,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 148
     },
     {
       "id": "gc_346",
@@ -8341,7 +8845,7 @@
       "top3": [
         "Myxoedema coma(84)",
         "Severe Community Acquired Pneumonia(58)",
-        "Acute Cholangitis(52)"
+        "Acute COPD Exacerbation(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8349,8 +8853,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_347",
@@ -8371,7 +8875,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 85
     },
     {
@@ -8415,8 +8919,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 96
     },
     {
       "id": "gc_350",
@@ -8437,8 +8941,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 88
+      "ms": 1,
+      "wallMs": 138
     },
     {
       "id": "gc_351",
@@ -8460,7 +8964,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 92
+      "wallMs": 93
     },
     {
       "id": "gc_352",
@@ -8482,7 +8986,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 93
     },
     {
       "id": "gc_353",
@@ -8504,7 +9008,7 @@
       "invQuality": 25,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 137
+      "wallMs": 94
     },
     {
       "id": "gc_354",
@@ -8516,8 +9020,8 @@
       "top3ok": true,
       "top3": [
         "Acute pericarditis(88)",
-        "Community Acquired Pneumonia (non-severe)(56)",
-        "Upper Respiratory Tract Infection (common cold)(56)"
+        "Upper Respiratory Tract Infection (common cold)(56)",
+        "Community Acquired Pneumonia (non-severe)(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -8525,8 +9029,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 97
+      "ms": 0,
+      "wallMs": 101
     },
     {
       "id": "gc_355",
@@ -8548,7 +9052,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 97
+      "wallMs": 99
     },
     {
       "id": "gc_356",
@@ -8570,7 +9074,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 92
     },
     {
       "id": "gc_357",
@@ -8591,8 +9095,8 @@
       "drugRefs": [],
       "invQuality": 13,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_358",
@@ -8613,8 +9117,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 86
     },
     {
       "id": "gc_359",
@@ -8635,8 +9139,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 92
+      "ms": 1,
+      "wallMs": 138
     },
     {
       "id": "gc_360",
@@ -8662,7 +9166,7 @@
       "invQuality": 25,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 100
     },
     {
       "id": "gc_361",
@@ -8684,7 +9188,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 89
     },
     {
       "id": "gc_362",
@@ -8706,7 +9210,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 144
+      "wallMs": 94
     },
     {
       "id": "gc_363",
@@ -8727,8 +9231,8 @@
       "drugRefs": [],
       "invQuality": 40,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_364",
@@ -8750,19 +9254,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 87
     },
     {
       "id": "gc_365",
       "dx": "seizure_epilepsy",
-      "top1": "Acute ischemic stroke",
-      "top1id": "ischemic_stroke",
+      "top1": "Seizure / epilepsy",
+      "top1id": "seizure_epilepsy",
       "conf": 68,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute ischemic stroke(68)",
         "Seizure / epilepsy(68)",
+        "Acute ischemic stroke(68)",
         "Intracerebral hemorrhage(66)"
       ],
       "stewOK": true,
@@ -8771,8 +9275,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 96
     },
     {
       "id": "gc_366",
@@ -8793,8 +9297,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 136
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_367",
@@ -8815,8 +9319,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 93
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_368",
@@ -8837,20 +9341,20 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 141
     },
     {
       "id": "gc_369",
       "dx": "subdural",
-      "top1": "Intracerebral hemorrhage",
-      "top1id": "ich",
+      "top1": "Subdural haematoma",
+      "top1id": "subdural",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Intracerebral hemorrhage(100)",
         "Subdural haematoma(100)",
+        "Intracerebral hemorrhage(100)",
         "Acute ischemic stroke(82)"
       ],
       "stewOK": true,
@@ -8859,8 +9363,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_370",
@@ -8881,8 +9385,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 100
+      "ms": 0,
+      "wallMs": 97
     },
     {
       "id": "gc_371",
@@ -8903,8 +9407,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_372",
@@ -8925,8 +9429,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 96
+      "ms": 0,
+      "wallMs": 145
     },
     {
       "id": "gc_373",
@@ -8947,8 +9451,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_374",
@@ -8969,7 +9473,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 90
     },
     {
@@ -8992,7 +9496,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 135
+      "wallMs": 96
     },
     {
       "id": "gc_376",
@@ -9004,8 +9508,8 @@
       "top3ok": true,
       "top3": [
         "Drug-induced / toxic hepatitis(64)",
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)"
+        "Acute Viral Hepatitis(62)",
+        "Acute Cholangitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9014,19 +9518,19 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 92
+      "wallMs": 97
     },
     {
       "id": "gc_377",
       "dx": "ttp_hus",
-      "top1": "Encephalitis",
-      "top1id": "ENCEPHALITIS",
+      "top1": "Thrombotic microangiopathy (TTP/HUS)",
+      "top1id": "ttp_hus",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Encephalitis(100)",
         "Thrombotic microangiopathy (TTP/HUS)(100)",
+        "Encephalitis(100)",
         "Acute Viral Hepatitis(80)"
       ],
       "stewOK": true,
@@ -9040,7 +9544,7 @@
       "invQuality": 20,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_378",
@@ -9049,10 +9553,10 @@
       "top1id": "peptic_ulcer",
       "conf": 66,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Peptic ulcer disease / upper GI bleed(66)",
-        "Dengue Fever(56)",
+        "Variceal bleeding(56)",
         "Malaria(56)"
       ],
       "stewOK": true,
@@ -9061,8 +9565,8 @@
       "drugRefs": [],
       "invQuality": 33,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_379",
@@ -9083,8 +9587,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 93
     },
     {
       "id": "gc_380",
@@ -9096,8 +9600,8 @@
       "top3ok": false,
       "top3": [
         "Hypovolemic / haemorrhagic shock(52)",
-        "Acute Cholecystitis(50)",
-        "Acute Gastroenteritis(50)"
+        "Acute Gastroenteritis(50)",
+        "Acute Cholecystitis(50)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9106,7 +9610,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 92
+      "wallMs": 134
     },
     {
       "id": "gc_381",
@@ -9128,7 +9632,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_382",
@@ -9141,7 +9645,7 @@
       "top3": [
         "Community Acquired Pneumonia (non-severe)(81)",
         "Acute Bronchitis(62)",
-        "Sepsis(56)"
+        "Septic Shock(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9155,32 +9659,31 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 99
+      "wallMs": 101
     },
     {
       "id": "gc_383",
       "dx": "AMOEBIC_LIVER_ABSCESS",
-      "top1": "Malaria",
-      "top1id": "MALARIA",
-      "conf": 65,
+      "top1": "Liver Abscess",
+      "top1id": "LIVER_ABSCESS",
+      "conf": 96,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
+        "Liver Abscess(96)",
         "Malaria(65)",
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)"
+        "Amoebic Liver Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
-      "abxOK": false,
+      "abxOK": true,
       "drugRefs": [
-        "artemether-lumefantrine",
-        "primaquine",
-        "artesunate"
+        "ceftriaxone + metronidazole",
+        "piperacillin-tazobactam"
       ],
-      "invQuality": 20,
+      "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 86
     },
     {
@@ -9194,7 +9697,7 @@
       "top3": [
         "Aspiration Pneumonia(100)",
         "Community Acquired Pneumonia (non-severe)(100)",
-        "Febrile Neutropenia(75)"
+        "Lung Abscess(81)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9207,33 +9710,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 133
+      "wallMs": 94
     },
     {
       "id": "gc_385",
       "dx": "BRAIN_ABSCESS",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
+      "top1": "Septic Shock",
+      "top1id": "SEPTIC_SHOCK",
       "conf": 100,
-      "top1ok": true,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Septic Shock(100)",
         "Brain Abscess(100)",
-        "Encephalitis(100)",
-        "Septic Shock(100)"
+        "Encephalitis(100)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
+        "piperacillin-tazobactam or meropenem",
+        "vancomycin or linezolid",
+        "add antifungal"
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 90
+      "ms": 0,
+      "wallMs": 94
     },
     {
       "id": "gc_386",
@@ -9245,8 +9748,8 @@
       "top3ok": true,
       "top3": [
         "Bronchiectasis Exacerbation(100)",
-        "Acute Bronchitis(62)",
-        "Acute COPD Exacerbation(62)"
+        "Acute COPD Exacerbation(62)",
+        "Aspiration Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9258,8 +9761,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 84
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_387",
@@ -9286,7 +9789,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 90
     },
     {
       "id": "gc_388",
@@ -9311,8 +9814,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 93
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_389",
@@ -9338,7 +9841,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 87
+      "wallMs": 88
     },
     {
       "id": "gc_390",
@@ -9350,8 +9853,8 @@
       "top3ok": true,
       "top3": [
         "Chikungunya(85)",
-        "Dengue Fever(75)",
-        "Febrile Neutropenia(75)"
+        "Febrile Neutropenia(75)",
+        "Rickettsial Fever (Spotted Fever Group)(75)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -9359,19 +9862,19 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 132
     },
     {
       "id": "gc_391",
       "dx": "CHOLANGITIS",
       "top1": "Acute Cholangitis",
       "top1id": "CHOLANGITIS",
-      "conf": 62,
+      "conf": 100,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Cholangitis(62)",
+        "Acute Cholangitis(100)",
         "Acute Cholecystitis(62)",
         "Acute Viral Hepatitis(62)"
       ],
@@ -9386,7 +9889,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 90
     },
     {
       "id": "gc_392",
@@ -9398,8 +9901,8 @@
       "top3ok": true,
       "top3": [
         "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)",
-        "Amoebic Liver Abscess(62)"
+        "Amoebic Liver Abscess(62)",
+        "Liver Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9411,7 +9914,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 90
     },
     {
       "id": "gc_393",
@@ -9424,7 +9927,7 @@
       "top3": [
         "Acute Bacterial Meningitis(100)",
         "CNS Tuberculosis (TB Meningitis)(100)",
-        "Malignancy (B-symptoms)(68)"
+        "Disseminated (Miliary) Tuberculosis(85)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9438,8 +9941,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 131
+      "ms": 1,
+      "wallMs": 95
     },
     {
       "id": "gc_394",
@@ -9448,11 +9951,11 @@
       "top1id": "PYELONEPHRITIS",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Acute Pyelonephritis(100)",
-        "Acute Bacterial Prostatitis(62)",
-        "Acute Uncomplicated Cystitis(62)"
+        "Acute Uncomplicated Cystitis(62)",
+        "Complicated Urinary Tract Infection(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9465,7 +9968,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 95
+      "wallMs": 93
     },
     {
       "id": "gc_395",
@@ -9491,7 +9994,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 93
     },
     {
       "id": "gc_396",
@@ -9517,29 +10020,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 98
     },
     {
       "id": "gc_397",
       "dx": "C_DIFF",
-      "top1": "Acute Gastroenteritis",
-      "top1id": "GASTROENTERITIS",
-      "conf": 81,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Clostridioides difficile Infection",
+      "top1id": "C_DIFF",
+      "conf": 86,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Clostridioides difficile Infection(86)",
         "Acute Gastroenteritis(81)",
-        "Necrotizing Fasciitis(56)",
-        "Pyrexia of Unknown Origin(56)"
+        "Septic Shock(56)"
       ],
-      "stewOK": false,
-      "stewTier": null,
-      "abxOK": false,
-      "drugRefs": [],
+      "stewOK": true,
+      "stewTier": "guideline",
+      "abxOK": true,
+      "drugRefs": [
+        "oral vancomycin",
+        "fidaxomicin",
+        "metronidazole"
+      ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 90
     },
     {
       "id": "gc_398",
@@ -9561,7 +10068,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 95
+      "wallMs": 96
     },
     {
       "id": "gc_399",
@@ -9585,8 +10092,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 100
+      "ms": 1,
+      "wallMs": 140
     },
     {
       "id": "gc_400",
@@ -9613,28 +10120,31 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 92
+      "wallMs": 85
     },
     {
       "id": "gc_401",
       "dx": "DISSEMINATED_TB",
-      "top1": "Malignancy (B-symptoms)",
-      "top1id": "malignancy_b",
-      "conf": 80,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Disseminated (Miliary) Tuberculosis",
+      "top1id": "DISSEMINATED_TB",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Disseminated (Miliary) Tuberculosis(100)",
         "Malignancy (B-symptoms)(80)",
-        "Malaria(75)",
-        "Enteric Fever (Typhoid)(68)"
+        "Malaria(75)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": false,
-      "drugRefs": [],
+      "drugRefs": [
+        "isoniazid + rifampicin + pyrazinamide + ethambutol",
+        "modified regimens per drug-susceptibility testing"
+      ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 89
     },
     {
@@ -9661,33 +10171,33 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 145
+      "wallMs": 99
     },
     {
       "id": "gc_403",
       "dx": "ENCEPHALITIS",
-      "top1": "Brain Abscess",
-      "top1id": "BRAIN_ABSCESS",
+      "top1": "Encephalitis",
+      "top1id": "ENCEPHALITIS",
       "conf": 100,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Brain Abscess(100)",
         "Encephalitis(100)",
+        "Brain Abscess(100)",
         "Acute Bacterial Meningitis(91)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "ceftriaxone + metronidazole",
-        "add vancomycin",
-        "meropenem"
+        "acyclovir",
+        "ceftriaxone + vancomycin",
+        "doxycycline"
       ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 94
     },
     {
       "id": "gc_404",
@@ -9699,8 +10209,8 @@
       "top3ok": true,
       "top3": [
         "Enteric Fever (Typhoid)(100)",
-        "Clostridioides difficile Infection(62)",
-        "Hospital Acquired Pneumonia(62)"
+        "Hospital Acquired Pneumonia(62)",
+        "Clostridioides difficile Infection(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9713,7 +10223,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 91
     },
     {
       "id": "gc_405",
@@ -9738,7 +10248,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 86
+      "wallMs": 90
     },
     {
       "id": "gc_406",
@@ -9751,7 +10261,7 @@
       "top3": [
         "Febrile Neutropenia(100)",
         "Device-Related Infection (CIED / Vascular Catheter)(65)",
-        "Sepsis(56)"
+        "Septic Shock(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9763,8 +10273,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 97
     },
     {
       "id": "gc_407",
@@ -9790,7 +10300,7 @@
       "invQuality": 50,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 134
+      "wallMs": 91
     },
     {
       "id": "gc_408",
@@ -9799,11 +10309,11 @@
       "top1id": "FEBRILE_NEUTROPENIA",
       "conf": 75,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Febrile Neutropenia(75)",
-        "Acute Bronchitis(62)",
-        "Aspiration Pneumonia(62)"
+        "Hospital Acquired Pneumonia(62)",
+        "Ventilator Associated Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9816,7 +10326,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 91
+      "wallMs": 131
     },
     {
       "id": "gc_409",
@@ -9828,8 +10338,8 @@
       "top3ok": true,
       "top3": [
         "Infective Endocarditis(62)",
-        "Necrotizing Fasciitis(56)",
-        "Pyrexia of Unknown Origin(56)"
+        "Septic Shock(56)",
+        "Sepsis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9841,7 +10351,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 88
+      "wallMs": 89
     },
     {
       "id": "gc_410",
@@ -9866,34 +10376,33 @@
       ],
       "invQuality": 25,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 92
     },
     {
       "id": "gc_411",
       "dx": "LIVER_ABSCESS",
-      "top1": "Acute Cholangitis",
-      "top1id": "CHOLANGITIS",
-      "conf": 62,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Liver Abscess",
+      "top1id": "LIVER_ABSCESS",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Liver Abscess(100)",
+        "Amoebic Liver Abscess(62)",
+        "Acute Cholangitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": true,
       "drugRefs": [
-        "piperacillin-tazobactam",
         "ceftriaxone + metronidazole",
-        "meropenem"
+        "piperacillin-tazobactam"
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 89
+      "ms": 0,
+      "wallMs": 87
     },
     {
       "id": "gc_412",
@@ -9919,7 +10428,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 91
     },
     {
       "id": "gc_413",
@@ -9957,8 +10466,8 @@
       "top3ok": true,
       "top3": [
         "Acute Bacterial Meningitis(100)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "Viral (Aseptic) Meningitis(62)",
+        "Brain Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -9973,7 +10482,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 91
     },
     {
       "id": "gc_415",
@@ -9994,8 +10503,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 101
     },
     {
       "id": "gc_416",
@@ -10008,7 +10517,7 @@
       "top3": [
         "Cellulitis(62)",
         "Necrotizing Fasciitis(62)",
-        "Pyrexia of Unknown Origin(56)"
+        "Sepsis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10020,8 +10529,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 128
+      "ms": 0,
+      "wallMs": 86
     },
     {
       "id": "gc_417",
@@ -10046,8 +10555,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 98
+      "ms": 1,
+      "wallMs": 139
     },
     {
       "id": "gc_418",
@@ -10060,7 +10569,7 @@
       "top3": [
         "Complicated Urinary Tract Infection(86)",
         "Acute Bacterial Prostatitis(62)",
-        "Acute Pyelonephritis(62)"
+        "Acute Uncomplicated Cystitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10072,7 +10581,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 94
     },
     {
       "id": "gc_419",
@@ -10085,7 +10594,7 @@
       "top3": [
         "Pulmonary Tuberculosis(100)",
         "Lung cancer(78)",
-        "Bronchiectasis Exacerbation(62)"
+        "Lung Abscess(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10096,8 +10605,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 88
     },
     {
       "id": "gc_420",
@@ -10118,7 +10627,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 89
     },
     {
@@ -10145,7 +10654,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 96
+      "wallMs": 91
     },
     {
       "id": "gc_422",
@@ -10153,8 +10662,8 @@
       "top1": "Scrub Typhus",
       "top1id": "SCRUB_TYPHUS",
       "conf": 85,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
         "Scrub Typhus(85)",
         "Dengue Fever(75)",
@@ -10171,7 +10680,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 88
+      "wallMs": 87
     },
     {
       "id": "gc_423",
@@ -10197,7 +10706,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 96
     },
     {
       "id": "gc_424",
@@ -10220,10 +10729,10 @@
         "azithromycin",
         "chloramphenicol"
       ],
-      "invQuality": 25,
+      "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 98
     },
     {
       "id": "gc_425",
@@ -10249,7 +10758,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 133
+      "wallMs": 93
     },
     {
       "id": "gc_426",
@@ -10258,11 +10767,11 @@
       "top1id": "FEBRILE_NEUTROPENIA",
       "conf": 90,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Febrile Neutropenia(90)",
-        "Necrotizing Fasciitis(56)",
-        "Pyrexia of Unknown Origin(56)"
+        "Septic Shock(56)",
+        "Sepsis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10274,30 +10783,35 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 90
+      "ms": 1,
+      "wallMs": 131
     },
     {
       "id": "gc_427",
       "dx": "SEVERE_CAP",
-      "top1": "Acute Bronchitis",
-      "top1id": "ACUTE_BRONCHITIS",
+      "top1": "Severe Community Acquired Pneumonia",
+      "top1id": "SEVERE_CAP",
       "conf": 62,
-      "top1ok": false,
-      "top3ok": false,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Severe Community Acquired Pneumonia(62)",
         "Acute Bronchitis(62)",
-        "Acute COPD Exacerbation(62)",
-        "Aspiration Pneumonia(62)"
+        "Acute COPD Exacerbation(62)"
       ],
-      "stewOK": false,
-      "stewTier": null,
-      "abxOK": false,
-      "drugRefs": [],
+      "stewOK": true,
+      "stewTier": "guideline",
+      "abxOK": true,
+      "drugRefs": [
+        "ceftriaxone",
+        "azithromycin",
+        "levofloxacin",
+        "piperacillin-tazobactam + azithromycin"
+      ],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 87
+      "wallMs": 93
     },
     {
       "id": "gc_428",
@@ -10322,7 +10836,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 104
+      "wallMs": 102
     },
     {
       "id": "gc_429",
@@ -10348,7 +10862,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 102
+      "wallMs": 105
     },
     {
       "id": "gc_430",
@@ -10360,8 +10874,8 @@
       "top3ok": true,
       "top3": [
         "Ventilator Associated Pneumonia(100)",
-        "Hospital Acquired Pneumonia(62)",
-        "Severe Community Acquired Pneumonia(62)"
+        "Severe Community Acquired Pneumonia(62)",
+        "Hospital Acquired Pneumonia(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10374,34 +10888,30 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 85
+      "ms": 1,
+      "wallMs": 89
     },
     {
       "id": "gc_431",
       "dx": "VIRAL_HEPATITIS",
-      "top1": "Acute Cholangitis",
-      "top1id": "CHOLANGITIS",
+      "top1": "Acute Viral Hepatitis",
+      "top1id": "VIRAL_HEPATITIS",
       "conf": 62,
-      "top1ok": false,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
+        "Acute Viral Hepatitis(62)",
         "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)",
-        "Acute Viral Hepatitis(62)"
+        "Acute Cholecystitis(62)"
       ],
-      "stewOK": true,
-      "stewTier": "guideline",
+      "stewOK": false,
+      "stewTier": null,
       "abxOK": null,
-      "drugRefs": [
-        "piperacillin-tazobactam",
-        "ceftriaxone + metronidazole",
-        "meropenem"
-      ],
+      "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 92
+      "wallMs": 89
     },
     {
       "id": "gc_432",
@@ -10428,8 +10938,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 98
+      "ms": 0,
+      "wallMs": 91
     },
     {
       "id": "gc_433",
@@ -10450,8 +10960,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 97
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_434",
@@ -10472,8 +10982,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 134
+      "ms": 0,
+      "wallMs": 97
     },
     {
       "id": "gc_435",
@@ -10485,8 +10995,8 @@
       "top3ok": true,
       "top3": [
         "Acute leukaemia(92)",
-        "Immune thrombocytopenia (ITP)(68)",
-        "Pulmonary Tuberculosis(62)"
+        "Disseminated intravascular coagulation(74)",
+        "Immune thrombocytopenia (ITP)(68)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10495,7 +11005,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 135
     },
     {
       "id": "gc_436",
@@ -10517,28 +11027,28 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 94
     },
     {
       "id": "gc_437",
       "dx": "aki",
-      "top1": "Acute Gastroenteritis",
-      "top1id": "GASTROENTERITIS",
-      "conf": 50,
-      "top1ok": false,
+      "top1": "Acute kidney injury",
+      "top1id": "aki",
+      "conf": 68,
+      "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Acute Gastroenteritis(50)",
-        "Acute kidney injury(46)",
-        "Leptospirosis(44)"
+        "Acute kidney injury(68)",
+        "Chronic kidney disease(52)",
+        "Acute Gastroenteritis(50)"
       ],
-      "stewOK": false,
-      "stewTier": null,
+      "stewOK": true,
+      "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
       "invQuality": 20,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 86
     },
     {
@@ -10561,20 +11071,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 95
     },
     {
       "id": "gc_439",
       "dx": "anemia_sympt",
-      "top1": "Aortic stenosis (syncope)",
-      "top1id": "aortic_stenosis",
-      "conf": 92,
-      "top1ok": false,
-      "top3ok": false,
+      "top1": "Symptomatic anaemia",
+      "top1id": "anemia_sympt",
+      "conf": 100,
+      "top1ok": true,
+      "top3ok": true,
       "top3": [
+        "Symptomatic anaemia(100)",
         "Aortic stenosis (syncope)(92)",
-        "Hypovolemic / haemorrhagic shock(80)",
-        "Atrial fibrillation / arrhythmia(70)"
+        "Hypovolemic / haemorrhagic shock(80)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10583,7 +11093,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 95
     },
     {
       "id": "gc_440",
@@ -10605,7 +11115,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 100
+      "wallMs": 96
     },
     {
       "id": "gc_441",
@@ -10627,7 +11137,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 92
     },
     {
       "id": "gc_442",
@@ -10648,8 +11158,8 @@
       "drugRefs": [],
       "invQuality": 20,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 95
+      "ms": 1,
+      "wallMs": 96
     },
     {
       "id": "gc_443",
@@ -10670,8 +11180,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 136
+      "ms": 1,
+      "wallMs": 92
     },
     {
       "id": "gc_444",
@@ -10693,7 +11203,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 145
     },
     {
       "id": "gc_445",
@@ -10715,7 +11225,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 91
     },
     {
       "id": "gc_446",
@@ -10759,7 +11269,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 97
     },
     {
       "id": "gc_448",
@@ -10781,7 +11291,7 @@
       "invQuality": 20,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 137
+      "wallMs": 94
     },
     {
       "id": "gc_449",
@@ -10790,11 +11300,11 @@
       "top1id": "heart_failure",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Acute heart failure / pulmonary edema(100)",
-        "Nephrotic syndrome(64)",
-        "Cardiogenic shock(62)"
+        "Chronic kidney disease(86)",
+        "Nephrotic syndrome(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10802,8 +11312,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 96
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_450",
@@ -10824,8 +11334,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 85
+      "ms": 0,
+      "wallMs": 89
     },
     {
       "id": "gc_451",
@@ -10837,8 +11347,8 @@
       "top3ok": true,
       "top3": [
         "Spinal cord compression(78)",
-        "Brain Abscess(62)",
-        "CNS Tuberculosis (TB Meningitis)(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)",
+        "Acute ischemic stroke(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10846,8 +11356,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_452",
@@ -10856,11 +11366,11 @@
       "top1id": "CELLULITIS",
       "conf": 91,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Cellulitis(91)",
-        "Necrotizing Fasciitis(62)",
-        "Leptospirosis(50)"
+        "Crystal arthritis (gout / pseudogout)(78)",
+        "Necrotizing Fasciitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10872,7 +11382,7 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
+      "ms": 1,
       "wallMs": 90
     },
     {
@@ -10886,7 +11396,7 @@
       "top3": [
         "Decompensated cirrhosis(88)",
         "Hepatic encephalopathy(78)",
-        "Dengue Fever(56)"
+        "Leptospirosis(56)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10894,21 +11404,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 88
+      "ms": 1,
+      "wallMs": 130
     },
     {
       "id": "gc_454",
       "dx": "dic",
       "top1": "Disseminated intravascular coagulation",
       "top1id": "dic",
-      "conf": 68,
+      "conf": 80,
       "top1ok": true,
       "top3ok": true,
       "top3": [
-        "Disseminated intravascular coagulation(68)",
-        "Acute Cholangitis(62)",
-        "Acute Cholecystitis(62)"
+        "Disseminated intravascular coagulation(80)",
+        "Spontaneous Bacterial Peritonitis(62)",
+        "Immune thrombocytopenia (ITP)(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -10916,8 +11426,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_455",
@@ -10938,8 +11448,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_456",
@@ -10961,7 +11471,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 95
     },
     {
       "id": "gc_457",
@@ -10974,16 +11484,16 @@
       "top3": [
         "Deep vein thrombosis(84)",
         "Leptospirosis(44)",
-        "Pulmonary embolism(36)"
+        "Chronic kidney disease(42)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
       "abxOK": null,
       "drugRefs": [],
-      "invQuality": 0,
+      "invQuality": 25,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 130
+      "wallMs": 89
     },
     {
       "id": "gc_458",
@@ -11004,8 +11514,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 92
+      "ms": 1,
+      "wallMs": 97
     },
     {
       "id": "gc_459",
@@ -11036,11 +11546,11 @@
       "top1id": "migraine",
       "conf": 74,
       "top1ok": false,
-      "top3ok": true,
+      "top3ok": false,
       "top3": [
         "Migraine(74)",
         "Brain tumour / mass lesion(66)",
-        "Acute glomerulonephritis(64)"
+        "Nephrotic syndrome(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11049,7 +11559,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 93
+      "wallMs": 88
     },
     {
       "id": "gc_461",
@@ -11062,7 +11572,7 @@
       "top3": [
         "Acute heart failure / pulmonary edema(100)",
         "Interstitial lung disease(72)",
-        "Cardiogenic shock(62)"
+        "Chronic kidney disease(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11071,7 +11581,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 94
+      "wallMs": 101
     },
     {
       "id": "gc_462",
@@ -11093,7 +11603,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 91
     },
     {
       "id": "gc_463",
@@ -11106,7 +11616,7 @@
       "top3": [
         "Hyperosmolar hyperglycaemic state(84)",
         "Diabetic ketoacidosis(68)",
-        "Hypoglycemia(54)"
+        "Chronic kidney disease(52)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11115,7 +11625,7 @@
       "invQuality": 20,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 90
+      "wallMs": 135
     },
     {
       "id": "gc_464",
@@ -11137,7 +11647,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 96
+      "wallMs": 98
     },
     {
       "id": "gc_465",
@@ -11159,7 +11669,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 87
+      "wallMs": 94
     },
     {
       "id": "gc_466",
@@ -11181,7 +11691,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 132
+      "wallMs": 90
     },
     {
       "id": "gc_467",
@@ -11203,7 +11713,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 89
+      "wallMs": 93
     },
     {
       "id": "gc_468",
@@ -11212,11 +11722,11 @@
       "top1id": "ich",
       "conf": 88,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Intracerebral hemorrhage(88)",
         "Acute ischemic stroke(86)",
-        "Transient ischaemic attack(80)"
+        "Hypoglycemia(80)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11224,8 +11734,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 94
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_469",
@@ -11246,7 +11756,7 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
+      "ms": 0,
       "wallMs": 94
     },
     {
@@ -11260,7 +11770,7 @@
       "top3": [
         "Variceal bleeding(96)",
         "Hypovolemic / haemorrhagic shock(92)",
-        "Acute Cholangitis(62)"
+        "Spontaneous Bacterial Peritonitis(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11296,8 +11806,8 @@
       ],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 95
+      "ms": 4,
+      "wallMs": 104
     },
     {
       "id": "gc_472",
@@ -11319,7 +11829,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 100
+      "wallMs": 138
     },
     {
       "id": "gc_473",
@@ -11332,7 +11842,7 @@
       "top3": [
         "Intracerebral hemorrhage(82)",
         "Acute ischemic stroke(76)",
-        "Acute Bacterial Meningitis(62)"
+        "Hypoglycemia(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11340,8 +11850,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 93
+      "ms": 1,
+      "wallMs": 94
     },
     {
       "id": "gc_474",
@@ -11363,7 +11873,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 89
+      "wallMs": 96
     },
     {
       "id": "gc_475",
@@ -11384,8 +11894,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 139
+      "ms": 0,
+      "wallMs": 97
     },
     {
       "id": "gc_476",
@@ -11407,20 +11917,20 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 93
+      "wallMs": 96
     },
     {
       "id": "gc_477",
       "dx": "itp",
-      "top1": "Thrombotic microangiopathy (TTP/HUS)",
-      "top1id": "ttp_hus",
-      "conf": 72,
+      "top1": "Disseminated intravascular coagulation",
+      "top1id": "dic",
+      "conf": 74,
       "top1ok": false,
       "top3ok": true,
       "top3": [
+        "Disseminated intravascular coagulation(74)",
         "Thrombotic microangiopathy (TTP/HUS)(72)",
-        "Immune thrombocytopenia (ITP)(68)",
-        "Acute leukaemia(64)"
+        "Immune thrombocytopenia (ITP)(68)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11428,8 +11938,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 93
+      "ms": 0,
+      "wallMs": 140
     },
     {
       "id": "gc_478",
@@ -11451,7 +11961,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 90
+      "wallMs": 93
     },
     {
       "id": "gc_479",
@@ -11463,8 +11973,8 @@
       "top3ok": true,
       "top3": [
         "Malignancy (B-symptoms)(100)",
-        "Malaria(70)",
-        "Enteric Fever (Typhoid)(68)"
+        "Disseminated (Miliary) Tuberculosis(83)",
+        "Malaria(70)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11472,8 +11982,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 92
+      "ms": 0,
+      "wallMs": 87
     },
     {
       "id": "gc_480",
@@ -11494,8 +12004,8 @@
       "drugRefs": [],
       "invQuality": 50,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 91
     },
     {
       "id": "gc_481",
@@ -11516,8 +12026,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 94
+      "ms": 0,
+      "wallMs": 95
     },
     {
       "id": "gc_482",
@@ -11539,7 +12049,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 90
     },
     {
       "id": "gc_483",
@@ -11552,7 +12062,7 @@
       "top3": [
         "Multiple sclerosis (relapse)(80)",
         "Acute Uncomplicated Cystitis(63)",
-        "Brain Abscess(62)"
+        "CNS Tuberculosis (TB Meningitis)(62)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11561,7 +12071,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 95
     },
     {
       "id": "gc_484",
@@ -11582,8 +12092,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 135
+      "ms": 0,
+      "wallMs": 96
     },
     {
       "id": "gc_485",
@@ -11604,8 +12114,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 91
+      "ms": 1,
+      "wallMs": 90
     },
     {
       "id": "gc_486",
@@ -11614,11 +12124,11 @@
       "top1id": "hepatic_enceph",
       "conf": 100,
       "top1ok": false,
-      "top3ok": false,
+      "top3ok": true,
       "top3": [
         "Hepatic encephalopathy(100)",
         "Decompensated cirrhosis(96)",
-        "Metabolic encephalopathy(84)"
+        "Myxoedema coma(84)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11626,21 +12136,21 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 0,
-      "wallMs": 89
+      "ms": 1,
+      "wallMs": 132
     },
     {
       "id": "gc_487",
       "dx": "nephrotic",
-      "top1": "Nephrotic syndrome",
-      "top1id": "nephrotic",
-      "conf": 64,
-      "top1ok": true,
+      "top1": "Chronic kidney disease",
+      "top1id": "ckd",
+      "conf": 74,
+      "top1ok": false,
       "top3ok": true,
       "top3": [
-        "Nephrotic syndrome(64)",
-        "Acute kidney injury(48)",
-        "Acute glomerulonephritis(44)"
+        "Chronic kidney disease(74)",
+        "Acute kidney injury(70)",
+        "Nephrotic syndrome(64)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11649,7 +12159,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 94
+      "wallMs": 100
     },
     {
       "id": "gc_488",
@@ -11661,8 +12171,8 @@
       "top3ok": true,
       "top3": [
         "Opioid overdose(98)",
-        "Drug intoxication / poisoning(84)",
-        "Myxoedema coma(84)"
+        "Myxoedema coma(84)",
+        "Drug intoxication / poisoning(84)"
       ],
       "stewOK": true,
       "stewTier": "guideline",
@@ -11671,7 +12181,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 1,
-      "wallMs": 91
+      "wallMs": 92
     },
     {
       "id": "gc_489",
@@ -11692,8 +12202,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 91
+      "ms": 0,
+      "wallMs": 92
     },
     {
       "id": "gc_490",
@@ -11706,7 +12216,7 @@
       "top3": [
         "Acute Viral Hepatitis(75)",
         "Acute pancreatitis(62)",
-        "Acute Cholecystitis(56)"
+        "Bowel obstruction(56)"
       ],
       "stewOK": false,
       "stewTier": null,
@@ -11715,7 +12225,7 @@
       "invQuality": 0,
       "maikOK": true,
       "ms": 0,
-      "wallMs": 141
+      "wallMs": 89
     },
     {
       "id": "gc_491",
@@ -11758,8 +12268,8 @@
       "drugRefs": [],
       "invQuality": 0,
       "maikOK": true,
-      "ms": 1,
-      "wallMs": 87
+      "ms": 0,
+      "wallMs": 92
     }
   ]
 }
