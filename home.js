@@ -946,6 +946,7 @@
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
   // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function maikCSS() {
@@ -1021,7 +1022,7 @@
       ]);
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
-    function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q); }
+    function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q) || /\b(mrn|uhid)\b/i.test(q) || /\bpatient\s+[a-z]+\s+(has|with|is|presenting|aged)/i.test(q) || /\bgive (him|her|them|the patient)\b/i.test(q) || /\b\d{1,3}\s*(yo|y\/o|year[- ]?old|yrs?)\b.*\b(patient|give|start|prescribe|dose)\b/i.test(q); }
     // ---- Intent router (Part A/B): natural-language routing BEFORE any KB retrieval
     // or provider call. Casual + app-help are answered locally (₹0 provider cost);
     // only genuine clinical questions reach the one grounded Gemini/Vertex call.
@@ -1042,6 +1043,9 @@
     function maikRoute(q, active) {
       var n = maikNorm(q), toks = n.split(" ").filter(Boolean), first = toks[0] || "";
       var isShort = toks.length <= 4;
+      if (!n || /^[?.\s]+$/.test(n)) return { kind: "clarify" };                       // empty / punctuation-only
+      if (/^(dose|doses|dosage|what dose|which dose|drug|drugs|which drug|what drug)\??$/.test(n)) return { kind: "clarify" };  // bare dose/drug with no drug named
+      if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK \u2014 I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
       // A/B casual conversation — fuzzy (typo-tolerant) match on the FIRST token / short phrase
       var casualHit = MAIK_CASUAL.some(function (w) { return first === w || maikLev(first, w) <= 1; })
         || /^(hello|hey|hi)\b/.test(n) || /^good (morning|afternoon|evening|night)\b/.test(n) || /^how (are|r) (you|u)\b/.test(n) || /^how'?s it going\b/.test(n) || /^whats up\b|^what'?s up\b/.test(n);
@@ -1117,6 +1121,7 @@
         think.insertBefore(mb, think.querySelector(".maik-src") || null);
       } else { think.innerHTML = full; }
       if (!active) _maikCache[cacheKey] = think.innerHTML;
+      _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
       if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
       scroll();
     }
@@ -1128,7 +1133,7 @@
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
         .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
-        .then(function (pkg) { if (pkg && question) pkg.question = question; return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
+        .then(function (pkg) { if (pkg && question) pkg.question = question; if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4); return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
