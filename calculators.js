@@ -1512,7 +1512,8 @@
    * mirrors the exclusion-guarded map in icu.js to avoid dangerous mis-files. */
   var LAB_RX = {
     bili:  { kw:/bilirubin/i, ex:/direct|indirect|conjugat|neonat/i },   // total only
-    pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated/i, unit:/sec/i },
+    pt:    { kw:/prothrombin|(^|[^a-z])pt([^a-z]|$|\/)/i, ex:/aptt|partial|activated|control/i, unit:/sec/i },
+    ptctrl:{ kw:/\bcontrol\b/i, ex:/internal|quality|\bqc\b|glyc/i, unit:/sec/i },   // explicit "CONTROL." row in the PT/INR panel (seconds)
     inr:   { kw:/\binr\b/i, ex:null },
     creat: { kw:/creatinine/i, ex:/urin|clearance|ratio/i },
     na:    { kw:/\bsodium\b|serum na\b/i, ex:/urin|spot|fractional|excretion/i },
@@ -1565,7 +1566,7 @@
   // Rows are newest-first; first usable hit for each analyte wins. Returns
   // { <analyte>: {value, units, order, date, derived?, note?} }.
   function extractAnalytes(rows){
-    var out={};
+    var out={}, ptLo=null, ptHi=null, ptRange="", ptUnit="";
     (rows||[]).forEach(function(r){
       var name=String(r.test||"");
       Object.keys(LAB_RX).forEach(function(key){
@@ -1573,20 +1574,20 @@
         var m=LAB_RX[key];
         if(!m.kw.test(name)) return;
         if(m.ex && m.ex.test(name)) return;
-        // PT-in-seconds must carry a "sec" unit (in the units column or the name)
-        // so it is never confused with the unitless INR row.
+        // PT-in-seconds (and its CONTROL) must carry a "sec" unit — in the units
+        // column or the name — so they are never confused with the unitless INR row.
         if(m.unit && !(r.units && m.unit.test(String(r.units))) && !m.unit.test(name)) return;
         var v=num(r.result); if(v==null) return;
         var fx=fixUnit(key, v, r.units);
         if(!fx) return;   // incompatible unit (e.g. urine hpf, unknown count scale) — keep scanning
         out[key]={ value:fx.value, units:fx.unit||r.units||"", order:r.order||"", date:r.date||"", note:fx.note||"" };
-        if(key==="pt"){   // derive Control PT from the PT row's reference-range midpoint
-          var lo=num(r.low), hi=num(r.high);
-          if(lo!=null && hi!=null && out.ptctrl==null)
-            out.ptctrl={ value:Math.round(((lo+hi)/2)*10)/10, units:r.units||"sec", order:"ref range "+(r.range||(lo+"–"+hi)), derived:true };
-        }
+        if(key==="pt"){ ptLo=num(r.low); ptHi=num(r.high); ptRange=r.range||""; ptUnit=r.units||"sec"; }
       });
     });
+    // Control PT: prefer the explicit "CONTROL" row captured above; only if the lab
+    // reports no control fall back to the Patient-PT reference-range midpoint.
+    if(out.ptctrl==null && ptLo!=null && ptHi!=null)
+      out.ptctrl={ value:Math.round(((ptLo+ptHi)/2)*10)/10, units:ptUnit, order:"ref-range midpoint "+(ptRange||(ptLo+"–"+ptHi)), derived:true };
     return out;
   }
   function calcLabKeys(c){ var s={}; c.inputs.forEach(function(f){ if(f.lab && f.type==="number") s[f.lab]=1; }); return Object.keys(s); }
