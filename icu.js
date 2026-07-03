@@ -480,7 +480,8 @@
   function importProgress(msg, err) {
     var el = document.getElementById("icuImpOv");
     if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    el.innerHTML = '<div class="icu-imp-box">' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
+    el.innerHTML = '<div class="icu-imp-box">' + '<button class="icu-imp-x" id="icuImpX" aria-label="Close">✕</button>' + (err ? '<div class="icu-imp-err">' + esc(msg) + '</div><button class="icu-btn" id="icuImpClose">Close</button>' : '<div class="icu-imp-spin">◐</div><div>' + esc(msg) + "</div>") + "</div>";
+    var x = el.querySelector("#icuImpX"); if (x) x.addEventListener("click", function () { el.remove(); });   // always-present dismiss, even while the spinner is shown
     var c = el.querySelector("#icuImpClose"); if (c) c.addEventListener("click", function () { el.remove(); });
   }
   function importDone() { var el = document.getElementById("icuImpOv"); if (el) el.remove(); }

@@ -429,6 +429,10 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
       <div class="mode-card-title">Advanced</div>
       <div class="mode-card-desc">Full clinical form — all findings, vitals, labs, and risk factors visible at once. Best for complex cases and experienced users.</div>
     </div>
+
+    <button type="button" id="modeSkip" aria-label="Skip and continue"
+            style="margin-top:16px;background:none;border:none;color:var(--teal,#0a9396);font:600 13px system-ui,sans-serif;cursor:pointer;text-decoration:underline;padding:6px"
+            onclick="var c=document.getElementById('modeAdvancedCard'); if(c) c.click();">Skip for now → (you can switch anytime from the header)</button>
   </div>
 </div>
 
@@ -1081,7 +1085,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script src="/app.js?v=gold135" defer></script>
 <script src="/policy.js?v=gold88" defer></script>
 <script src="/features.js?v=gold88" defer></script>
-<script src="/calculators.js?v=gold138" defer></script>
+<script src="/calculators.js?v=gold139" defer></script>
 <script src="/drugs.js?v=gold88" defer></script>
 <script src="/api.js?v=gold88" defer></script>
 <script src="/kb/dist/kb.core.js?v=gold128" defer></script>
@@ -1094,7 +1098,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 <script src="/electrolytes.js?v=gold126" defer></script>
 <script src="/caseshare.js?v=gold88" defer></script>
 <script src="/home.js?v=gold133" defer></script>
-<script src="/icu.js?v=gold135" defer></script>
+<script src="/icu.js?v=gold139" defer></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as
@@ -1121,7 +1125,7 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold136"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold139"; document.body.appendChild(s); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
