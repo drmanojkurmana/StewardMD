@@ -121,7 +121,7 @@
     _initP = (function () {
       var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       return needRag.then(function () {
-        return import("/kb/ai/interface.mjs?v=gold122");
+        return import("/kb/ai/interface.mjs?v=gold149");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });

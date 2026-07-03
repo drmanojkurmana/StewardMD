@@ -1469,7 +1469,7 @@
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
-    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine";
+    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
     var pages = evPages(e);
     return {
       _id: id, srcKey: "harrison", icon: "📖",
@@ -3092,10 +3092,10 @@
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
-    explainGrounded: function (pkg) {
+    explainGrounded: function (pkg, opts) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
-      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
@@ -3253,7 +3253,7 @@
     var out = [], seen = {};
     (chunks || []).forEach(function (c) {
       var ref = String((c && c.source && c.source.ref) || ""), sec = String((c && c.section) || ""), title;
-      if (/harrison/i.test(ref)) title = "Harrison's Principles of Internal Medicine";
+      if (/harrison/i.test(ref)) title = "Standard internal-medicine reference";
       else if (/icmr/i.test(ref)) title = "ICMR guidelines";
       else if (/drug index/i.test(ref)) title = "StewardMD Drug Index";
       else if (/idsa|ats|kdigo|\bada\b|aha|acc|esc|surviving sepsis|gold|gina|who|baveno|aasld|\bncs\b|acr|eular/i.test(ref)) title = ref.replace(/\s*·.*$/, "").trim();
