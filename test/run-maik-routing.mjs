@@ -27,6 +27,12 @@ try {
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
   await call("Page.navigate", { url: BASE + "?cb=" + Date.now() });
+  await sleep(1500);
+  // bust any service worker + caches, then re-navigate — otherwise a first-load SW reload wipes
+  // the stubs we install below (and the real provider runs, so call counters read 0).
+  await ev(`if(navigator.serviceWorker){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});} if(window.caches){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});});} return 1;`);
+  await sleep(500);
+  await call("Page.navigate", { url: BASE + "?cb=" + Date.now() + "r" });
   for (let i = 0; i < 80; i++) { await sleep(400); if (await ev(`return !!(window.SMD_AI && window.StewardRAG)`) === true) break; }
   await ev(`["introPoster","splash","accountGate"].forEach(function(k){var e=document.getElementById(k);if(e)e.remove();});return 1;`);
   // Stub provider + retrieval with counters (no real network)
