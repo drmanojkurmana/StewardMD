@@ -24,6 +24,8 @@ const PORT = Number(process.env.CDP_PORT || 9467);
 const RECOVER = [
   { id: "gc_062", accept: ["sickle_cell_disease"] },
   { id: "gc_098", accept: ["delirium_tremens"] },
+  { id: "gc_096", accept: ["acute_limb_ischemia"] },
+  { id: "gc_101", accept: ["b12_deficiency"] },
 ];
 
 function loadCase(id) {
