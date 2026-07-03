@@ -427,8 +427,12 @@
     var head = el("div", { cls: "mlr-card-head" });
     var pair = el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" });
     head.appendChild(pair);
-    var sevLabel = SEVERITY_LABEL[finding.severity] || "Caution";
-    var sevMark = SEVERITY_MARK[finding.severity] || "◆";
+    // finding.severity is the RAW rule severity (e.g. "contraindicated"); map it to the
+    // display bucket first so the highest-severity findings show the correct text/marker
+    // (severity conveyed by text, never by color alone).
+    var sevBucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
+    var sevLabel = SEVERITY_LABEL[sevBucket] || "Caution";
+    var sevMark = SEVERITY_MARK[sevBucket] || "◆";
     var badge = el("span", { cls: "mlr-sev mlr-sev-" + (SEVERITY_BUCKET_CLASS[finding.severity] || "monitor") });
     badge.appendChild(el("span", { cls: "mlr-sev-mark", text: sevMark, attrs: { "aria-hidden": "true" } }));
     badge.appendChild(el("span", { cls: "mlr-sev-text", text: sevLabel }));

@@ -239,6 +239,14 @@ try {
   await ev(`document.getElementById("ml-check").click(); return 1;`);
   ok(await ev(`return !!document.getElementById("mlr-toggle-minor")`) === true, "results screen has a Hide-minor / Show-all toggle");
 
+  // A 'contraindicated' finding (warfarin + aspirin + ibuprofen = bleeding triad) must carry
+  // the highest-severity TEXT ("Critical" + "!!!") — severity conveyed by text, not color alone.
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("warfarin 5 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("ibuprofen 400 tds"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
+  ok(await ev(`var r=INTERACTIONS.checkInteractions(MEDLIST.getList()); return r.critical.some(function(f){return f.severity==="contraindicated";})`) === true, "bleeding-triad yields a 'contraindicated' finding in the critical bucket");
+  ok(await ev(`var b=document.querySelector("#ml-test .mlr-card-critical .mlr-sev-text"); return !!b && /Critical/i.test(b.textContent)`) === true, "contraindicated finding badge text reads 'Critical' (not the 'Caution' fallback)");
+  ok(await ev(`var b=document.querySelector("#ml-test .mlr-card-critical .mlr-sev-mark"); return !!b && b.textContent.indexOf("!!!")===0`) === true, "contraindicated finding shows the highest-severity mark '!!!'");
+  ok(await ev(`var cards=document.querySelectorAll("#ml-test .mlr-card-critical"); for(var i=0;i<cards.length;i++){var t=cards[i].querySelector(".mlr-sev-text");if(t&&/Caution/i.test(t.textContent))return false;}return cards.length>0`) === true, "no critical card falls back to the 'Caution' label");
+
   // Empty-ish list (single amlodipine) -> "No issues detected" (0 critical/major).
   await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
   const amText = await ev(`return document.getElementById("ml-test").innerText`);
