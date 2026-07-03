@@ -64,6 +64,20 @@ try {
   const r5 = await check([{ generic: "aspirin" }, { generic: "aspirin" }]);
   ok(r5.duplicates.some(f => f.ruleType === "duplicate_generic"), "aspirin+aspirin yields a duplicate_generic finding");
 
+  // 5b. Spec §11: SAME generic reached via a BRAND entry + a GENERIC entry must be
+  //     detected as a duplicate. Exercise the real MEDLIST parse path (brand
+  //     "Ecosprin" resolves to aspirin) so brand+generic collapses to one generic
+  //     and fires duplicate_generic — not just when the caller passes generics directly.
+  const brandGen = JSON.parse(await ev(`
+    if(!(window.MEDLIST && MEDLIST.parseEntry)) return JSON.stringify({__noMedlist:true});
+    var brand=MEDLIST.parseEntry("T. Ecosprin 75");
+    var gen=MEDLIST.parseEntry("aspirin 75 od");
+    var res=INTERACTIONS.checkInteractions([brand, gen]);
+    return JSON.stringify({ brandGeneric:brand.generic, genGeneric:gen.generic,
+      dupGeneric:res.duplicates.some(function(f){return f.ruleType==="duplicate_generic";}) });`));
+  ok(brandGen.brandGeneric === "aspirin", "brand 'Ecosprin' parses to the aspirin generic");
+  ok(brandGen.dupGeneric === true, "Ecosprin (brand) + aspirin (generic) is detected as a duplicate_generic (same generic via brand + generic entries)");
+
   // 6. amlodipine alone -> no critical/major, reviewedCount 1
   const r6 = await check([{ generic: "amlodipine" }]);
   ok(r6.critical.length === 0 && r6.major.length === 0, "amlodipine alone yields NO critical/major");

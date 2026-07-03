@@ -190,6 +190,50 @@ try {
     "sticky footer padding-bottom rule includes env(safe-area-inset-bottom)");
   ok(await ev(`var b=document.getElementById("ml-check"); return b.getBoundingClientRect().height >= 44`) === true, "Check-interactions touch target >= 44px");
 
+  // --- Spec test 19: mobile safe-area regression (CDP Emulation.setSafeAreaInsetsOverride) ---
+  // Emulate an iPhone with a 34px home-indicator inset and assert the sticky footer's
+  // env(safe-area-inset-bottom) padding actually lifts the Check-interactions button OUT of
+  // the home-indicator zone — i.e. the button's bottom edge clears the inset, no overlap.
+  await call("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
+  await call("Emulation.setSafeAreaInsetsOverride", { insets: { top: 47, left: 0, bottom: 34, right: 0 } });
+  await sleep(200);
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual");
+    var d=document.getElementById("ml-test"); if(!d){d=document.createElement("div");d.id="ml-test";document.body.appendChild(d);}
+    d.style.cssText="position:fixed;inset:0"; MEDLIST.mount(d); return 1;`);
+  await sleep(150);
+  const sa = JSON.parse(await ev(`
+    var f=document.querySelector("#ml-test .ml-footer");
+    var probe=document.createElement("div"); probe.style.cssText="position:fixed;bottom:0;left:0;height:env(safe-area-inset-bottom);width:1px"; document.body.appendChild(probe);
+    var envH=probe.getBoundingClientRect().height; probe.remove();
+    var fr=f.getBoundingClientRect();
+    var btn=document.getElementById("ml-check"); var br=btn.getBoundingClientRect();
+    var pb=parseFloat(getComputedStyle(f).paddingBottom);
+    return JSON.stringify({ envH:envH, footerPB:pb, footerBottom:fr.bottom, btnBottom:br.bottom, btnH:br.height, insetGap:(fr.bottom-br.bottom) });`));
+  ok(sa.envH === 34, "CDP safe-area override applies: env(safe-area-inset-bottom) resolves to the 34px home-indicator inset");
+  ok(sa.footerPB >= 34 + 12 - 0.5, "sticky footer padding-bottom expands by the safe-area inset (>= base 12px + 34px inset)");
+  ok(sa.btnH >= 44, "Check-interactions touch target stays >= 44px under mobile emulation");
+  ok(sa.insetGap >= 34 - 0.5, "Check-interactions button clears the home-indicator zone (its bottom sits >= the 34px inset above the footer edge — no safe-area overlap)");
+
+  // Results screen (spec test 19): the interaction RESULTS view must also stay within the
+  // safe area — its Back/filter controls are >= 40px touch targets and do not overflow the
+  // emulated viewport width.
+  await ev(`MEDLIST.clearAll();
+    MEDLIST.add(MEDLIST.parseEntry("warfarin 5 od"),"manual");
+    MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual");
+    MEDLIST.add(MEDLIST.parseEntry("ibuprofen 400 tds"),"manual");
+    MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
+  await sleep(150);
+  const resSa = JSON.parse(await ev(`
+    var back=document.getElementById("mlr-back");
+    var toggle=document.getElementById("mlr-toggle-minor");
+    var br=back.getBoundingClientRect(), tr=toggle.getBoundingClientRect();
+    return JSON.stringify({ backH:br.height, toggleH:tr.height, backRight:br.right, toggleRight:tr.right, vw:window.innerWidth });`));
+  ok(resSa.backH >= 40 && resSa.toggleH >= 40, "results-screen Back/Show-all controls are >= 40px touch targets");
+  ok(resSa.backRight <= resSa.vw + 0.5 && resSa.toggleRight <= resSa.vw + 0.5, "results-screen controls do not overflow the emulated viewport width (no horizontal safe-area overlap)");
+  await call("Emulation.clearDeviceMetricsOverride", {});
+  try { await call("Emulation.setSafeAreaInsetsOverride", { insets: { top: 0, left: 0, bottom: 0, right: 0 } }); } catch (e) {}
+  await ev(`var d=document.getElementById("ml-test"); if(d) d.style.cssText=""; MEDLIST.clearAll(); return 1;`);
+
   // Entry points (Task 6): calculators.js (Tools) and icu.js both trigger the same
   // MEDLIST overlay (window.MEDDRUGS.openInteractions, the Task 5 drugs.js overlay).
   ok(await ev(`return typeof window.MEDCALC === "object" && !!window.MEDCALC`) === true, "MEDCALC present (calculators.js loaded)");

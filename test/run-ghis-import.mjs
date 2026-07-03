@@ -133,6 +133,7 @@ try {
   ok(!/P1001|P1002|P1003|C9001|X7777/.test(dom), "no raw GHIS product codes appear in the review DOM");
   ok(await ev(`var t=document.getElementById("gi-test").innerText; return !/[{}\\[\\]]|productCode|patientId|MRN|UHID/i.test(t)`) === true, "review DOM leaks no raw JSON / productCode / patient identifiers");
   ok(await ev(`return /PT42/.test(document.getElementById("gi-test").innerText) === false`) === true, "raw patient id (PT42) not rendered in the review DOM");
+  ok(await ev(`var t=document.getElementById("gi-test").innerText; return !/\\bgemini\\b|\\bopenai\\b|\\bgpt\\b|provider|model|api\\/ai|sourceId|onc-nlm-hpddi|openfda-labeling|crediblemeds/i.test(t)`) === true, "review DOM leaks no provider / model / internal rule-id strings");
 
   // --- (6) merge detection vs a manually-entered med (manual NOT deleted) ----
   await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.mount(document.getElementById("gi-test")); return 1;`);
