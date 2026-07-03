@@ -1,0 +1,38 @@
+name: Deploy Drug API Worker
+
+# Publishes the Cloudflare Worker (api.stewardmd.in) whenever its code changes on
+# main — so the drug database (brand search, /composition filter, etc.) can be
+# deployed entirely from a phone: merge the PR and approve, no terminal needed.
+# Path-filtered so ordinary app changes never trigger a Worker deploy.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "worker/**"
+      - ".github/workflows/deploy-worker.yml"
+  workflow_dispatch: {}   # also run on demand from the GitHub app → Actions → Run workflow
+
+permissions:
+  contents: read
+
+# Never run two Worker deploys at once.
+concurrency:
+  group: deploy-worker
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Gated by the "production" Environment (same as the Terraform apply). Add a
+    # required reviewer there and each deploy waits for a one-tap approval.
+    environment: production
+    defaults:
+      run:
+        working-directory: worker
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: worker
+          command: deploy
