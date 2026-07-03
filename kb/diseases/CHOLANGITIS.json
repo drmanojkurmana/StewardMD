@@ -12,8 +12,9 @@
     "rule": {
       "allOf": [
         "rightUpperQuadrantPain",
-        "feverGU",
-        "jaundice"
+        { "anyOf": ["feverGU", "rigors"] },
+        "jaundice",
+        { "not": "singleLesion" }
       ]
     },
     "score": {
@@ -23,7 +24,7 @@
           "when": {
             "allOf": [
               "rightUpperQuadrantPain",
-              "feverGU",
+              { "anyOf": ["feverGU", "rigors"] },
               "jaundice"
             ]
           },

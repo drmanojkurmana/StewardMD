@@ -42,6 +42,7 @@ INFECTIVE_IDS.sort();
 // benchmark (test/run-case-validation.mjs). Every other syndrome must still match
 // its closure exactly. Document each addition with the reason.
 const DIVERGENCE_ALLOWLIST = {
+  CHOLANGITIS: "Recall (pending decision, user-approved): rule/triad-bonus accept fever (not only feverGU) so Charcot-triad cases coded with generic fever match and cholangitis correctly leads + triggers urgent antibiotics + biliary drainage.",
   BRONCHIECTASIS_EXACERBATION: "M3.3: +knownBronchiectasis pathognomonic score modifier so a known-bronchiectasis exacerbation outranks generic CAP.",
   DISSEMINATED_TB: "Recall Tier-3(infective): rule accepts prolongedFever (not only prolongedFeverUnexplained) so miliary-TB cases whose fever is coded as prolongedFever match; +eveningFever score modifier. Guarded by run-golden + gold-case benchmark.",
   C_DIFF: "Recall Tier-3(infective): rule/score accept antibioticsLast90Days & hospitalizationLast90Days as synonyms for priorAntibiotics/hospitalDay48 so C.diff cases coded with the *Last90Days keys match.",
