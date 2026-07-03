@@ -12,7 +12,12 @@
     "rule": {
       "allOf": [
         "diarrhea",
-        "priorAntibiotics",
+        {
+          "anyOf": [
+            "priorAntibiotics",
+            "antibioticsLast90Days"
+          ]
+        },
         {
           "not": "bloodyStool"
         }
@@ -22,11 +27,21 @@
       "base": 50,
       "modifiers": [
         {
-          "when": "priorAntibiotics",
+          "when": {
+            "anyOf": [
+              "priorAntibiotics",
+              "antibioticsLast90Days"
+            ]
+          },
           "add": 15
         },
         {
-          "when": "hospitalDay48",
+          "when": {
+            "anyOf": [
+              "hospitalDay48",
+              "hospitalizationLast90Days"
+            ]
+          },
           "add": 10
         },
         {

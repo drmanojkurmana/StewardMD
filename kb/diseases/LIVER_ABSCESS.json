@@ -12,12 +12,20 @@
     "rule": {
       "allOf": [
         "rightUpperQuadrantPain",
-        "feverGU",
         {
-          "not": "jaundice"
+          "anyOf": [
+            "feverGU",
+            "fever"
+          ]
         },
+        "singleLesion",
         {
-          "not": "murphySign"
+          "not": {
+            "anyOf": [
+              "travelEndemicArea",
+              "contaminatedFoodWaterExposure"
+            ]
+          }
         }
       ]
     },
@@ -30,6 +38,14 @@
         },
         {
           "when": "rightUpperQuadrantPain",
+          "add": 10
+        },
+        {
+          "when": "singleLesion",
+          "add": 15
+        },
+        {
+          "when": "diabetesHx",
           "add": 10
         },
         {
