@@ -940,6 +940,11 @@
   var _maikHist = [];
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
+  // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
+  // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
+  // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
+  var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function maikCSS() {
     if (document.getElementById("maik-sheet-css")) return;
@@ -1054,11 +1059,87 @@
       if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug)/.test(n)) return { kind: "clarify" };
       return { kind: "clinical" };
     }
+    // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
+    function maikCanonTopic(q) {
+      var t = String(q || "").trim().replace(/\?+$/, "").trim();
+      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell me about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
+      t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
+      t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
+      return t || String(q || "").trim();
+    }
+    function maikResolveFollowup(q) {
+      var t = _maikTopic; if (!t || !t.topic) return null;
+      if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
+      var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
+      if (/(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/.test(n) || /^(more|detail|details|elaborate|expand|continue)\b/.test(n)) {
+        return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
+      }
+      if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
+        return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
+      }
+      if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 4)) {
+        if (t.lastDrug) return { question: "Adult dosing of " + t.lastDrug + ", with renal-adjustment principles (verify locally).", depth: "concise", topic: "dose of " + t.lastDrug, retrieval: t.lastDrug + " dose dosing renal adjustment" };
+        return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
+      }
+      if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
+        return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
+      }
+      if (/\b(in pregnancy|pregnan)/.test(n) && wc <= 5) {
+        return { question: t.topic + " — management considerations in pregnancy.", depth: "concise", topic: t.topic + " in pregnancy", retrieval: t.topic + " pregnancy management" };
+      }
+      if (/\b(renal (failure|impairment)|ckd|dialysis|kidney)\b/.test(n) && wc <= 6) {
+        return { question: t.topic + " — management considerations with renal impairment.", depth: "concise", topic: t.topic + " with renal impairment", retrieval: t.topic + " renal impairment dose adjustment" };
+      }
+      var m = q.match(/^(what about|how about|and)\s+(.+)/i);
+      if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
+      return null;
+    }
+    function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth) {
+      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.</div>'; return; }
+      if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      var md = (r && r.text) ? String(r.text).trim() : "";
+      if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
+        think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
+        var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); scroll(); return;
+      }
+      var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
+      var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
+      var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
+      var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
+      var full = eduHTML + rendered + srcHTML;
+      if (md.length > 700) {
+        think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
+        var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
+        var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
+        mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
+        think.insertBefore(mb, think.querySelector(".maik-src") || null);
+      } else { think.innerHTML = full; }
+      if (!active) _maikCache[cacheKey] = think.innerHTML;
+      if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
+      scroll();
+    }
+    function runClinical(question, retrieval, depth, active, topicLabel) {
+      var cacheKey = maikNorm(question) + (active ? "|case" : "");
+      if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
+      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      var think = bubble("ai", "✨ Searching StewardMD knowledge…");
+      Promise.resolve()
+        .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
+        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
+        .then(function (pkg) { if (pkg && question) pkg.question = question; return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
+        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
+        .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+    }
     function send() {
-      if (_maikBusy) return;                                   // idempotency: ignore repeat Send while in-flight
+      if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
       var active = maikActiveCase();
+      if (maikV2()) {
+        var fu = maikResolveFollowup(q);
+        if (fu && fu.clarify) { bubble("ai", '<div class="maik-welcome">' + maikEscH(fu.clarify) + '</div>'); return; }
+        if (fu) { runClinical(fu.question, fu.retrieval, fu.depth, active, fu.topic); return; }
+      }
       var route = maikRoute(q, active);
       if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
       if (route.kind === "help") {
@@ -1071,43 +1152,9 @@
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
       if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
-      // clinical → one grounded provider call (session-cached, idempotent)
-      var cacheKey = maikNorm(q) + (active ? "|case" : "");
-      if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); return; }
-      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
-      var think = bubble("ai", "✨ Searching StewardMD knowledge…");
-      Promise.resolve()
-        .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
-        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: q }); })
-        .then(function (pkg) {
-          return window.SMD_AI.explainGrounded(pkg).then(function (r) {
-            if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.</div>'; return; }
-            if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
-            var md = (r && r.text) ? String(r.text).trim() : "";
-            // Part C: never surface "no information / does not cover"; offer a useful next step instead.
-            if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
-              think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
-              var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); scroll(); return;
-            }
-            var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
-            var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
-            var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
-            var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
-            var full = eduHTML + rendered + srcHTML;
-            // long answers: collapse behind "Show more"
-            if (md.length > 700) {
-              think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
-              var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "220px"; cd.style.overflow = "hidden";
-              var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
-              mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "220px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
-              think.insertBefore(mb, think.querySelector(".maik-src") || null);
-            } else { think.innerHTML = full; }
-            if (!active) _maikCache[cacheKey] = think.innerHTML;   // session cache (Part D#5) — general-knowledge only
-            scroll();
-          });
-        })
-        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
-        .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+      var topic = maikV2() ? maikCanonTopic(q) : q;
+      var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+      runClinical(q, q, depth, active, topic);
     }
     // restore prior session history, else empty state
     if (_maikHist.length) { _maikHist.forEach(function (m) { bubble("you", maikEscH(m.q)); }); } else { emptyState(); }

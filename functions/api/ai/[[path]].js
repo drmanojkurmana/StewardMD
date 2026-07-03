@@ -56,7 +56,11 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, 
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
-function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 } }; }
+// thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
+// consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
+// These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
+// so disabling also cuts latency + cost.
+function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; }
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
@@ -199,17 +203,26 @@ const RAG_SYS =
 // grounded in the retrieved KB, with a clean clinical structure. No provider/model
 // names; no long trailing disclaimer (the UI shows a persistent advisory badge).
 const KNOWLEDGE_SYS =
-  "You are MaiK (Medical AI Knowledge), StewardMD's clinician knowledge assistant. Answer the clinician's GENERAL CLINICAL KNOWLEDGE question as a concise EDUCATIONAL reference for a qualified doctor. " +
-  "Reason PRIMARILY from the RETRIEVED STEWARDMD KNOWLEDGE below (Harrison-derived + StewardMD management protocols, source-cited); your own medical knowledge is SECONDARY and used only to connect the provided material. If the retrieved knowledge does not cover the question, say so briefly rather than inventing specifics. " +
-  "This is NOT individualized patient advice — do not tailor to a specific patient. If the question is clearly about a specific patient, briefly advise using StewardMD's Clinical Reasoning / Dx My Patient so the engine computes the assessment first. " +
-  "Reply as short Markdown under EXACTLY these headings, omitting any with nothing evidence-based to add:\n" +
-  "### Clinical take\n### Key supporting points\n### What to check next\n### Management considerations\n### Red flags\n" +
-  "Keep each section to 1–4 short bullets. Reference drugs by name/class and standard principles only — no specific doses beyond what the retrieved knowledge states; never use patient identifiers. Do NOT mention the AI provider, model, or any internal implementation detail. Do NOT append a long disclaimer — the interface already shows a persistent advisory note.";
+  "You are MaiK, StewardMD's clinician-facing medical knowledge assistant. Answer the CLINICIAN'S QUESTION (shown under 'CLINICIAN QUESTION') as a complete, well-organised EDUCATIONAL reference for a qualified doctor. " +
+  "Ground your answer in the RETRIEVED STEWARDMD KNOWLEDGE below and standard, widely-accepted clinical principles. If the retrieved evidence is thin, still give the best-supported standard-of-care overview a senior physician would state, but do NOT invent specific drug doses, durations, guideline numbers, or citations that are not supported. " +
+  "ABSOLUTE RULES:\n" +
+  "1. Answer ONLY the question asked. NEVER describe, list, or mention which conditions/protocols happen to be in the retrieved knowledge, and NEVER say things like 'the retrieved knowledge contains protocols for X, Y, Z' or 'no specific question was posed'. If the question names a condition (e.g. acute cholangitis), answer about THAT condition.\n" +
+  "2. Produce a COMPLETE answer — never stop mid-sentence, never trail off. Finish every section you start.\n" +
+  "3. This is general education, NOT individualized patient advice. If the question is about a specific patient, briefly suggest StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
+  "4. Give exact doses ONLY when the retrieved StewardMD Drug Index / protocol states them; otherwise refer to drugs by name/class and standard dosing principles and say to verify locally.\n" +
+  "5. Do NOT mention the AI provider, model, retrieval, chunks, or any internal implementation detail. Do NOT append a long disclaimer (the UI already shows one).\n" +
+  "FORMAT — concise Markdown under these headings (omit a heading only if you truly have nothing evidence-based for it; keep bullets tight):\n" +
+  "### Clinical take\n### Immediate priorities\n### Key investigations & severity\n### Definitive management / source control\n### Antimicrobial / pharmacologic considerations\n### Monitoring & reassessment\n### Escalation & red flags\n### Practical next steps\n" +
+  "For a non-management/explanatory question, instead use: ### Clinical take · ### Key features · ### Diagnosis · ### Differential · ### Management · ### Red flags. " +
+  "If verified source support is genuinely inadequate for the specific point asked, say exactly: 'I don't have enough verified StewardMD source material to answer this reliably,' name what's missing in one line, and suggest a next action (search the guideline library, open the Drug Index, or start Clinical Reasoning) — do NOT pad with unrelated content.";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
   const L = [];
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
+  // The clinician's actual question MUST lead the prompt — otherwise the model answers from
+  // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
+  if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
   (r.differential || []).forEach((d, i) => {
@@ -316,7 +329,10 @@ export async function onRequest(context) {
   // inputs are rejected before any provider call. Per-user quota metering + circuit
   // breaker are layered in a follow-up (functions/_usage.js + KV) — these caps are the
   // no-auth floor that bounds per-request cost immediately.
-  const MAX_OUT = Math.max(128, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 800));
+  // Output cap: default 1400 (a complete 250–500-word clinical answer; thinking is disabled so
+  // the whole budget is the visible answer). "detailed" depth allows a fuller 700–1200-word answer.
+  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1400));
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 1.6)) : OUT_BASE;
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
