@@ -278,7 +278,9 @@ const VISION_SYS = {
   labs: "Read this laboratory report photo. Return ONLY JSON with any of: {\"na\",\"k\",\"cl\",\"hco3\",\"ca\",\"mg\",\"po4\",\"glu\",\"creat\",\"urea\",\"alb\",\"wbc\",\"hb\",\"plt\",\"inr\",\"ferritin\",\"crp\",\"bili\",\"ast\",\"alt\"} as numbers. Omit unreadable fields. No prose.",
   ventilator: "Read this ventilator screen photo. Return ONLY JSON: {\"mode\":str,\"fio2\":num,\"peep\":num,\"tv\":num,\"rr\":num,\"peak\":num,\"plateau\":num}. Omit unreadable fields. No prose.",
   flowsheet: "Read this ICU flow-sheet photo. Return ONLY JSON: {\"intake24h\":num,\"output24h\":num,\"urine24h\":num,\"drains\":num}. Omit unreadable fields. No prose.",
-  abg: "Read this arterial blood gas (ABG) report photo. Return ONLY JSON with any of: {\"ph\":num,\"paco2\":num,\"pao2\":num,\"hco3\":num,\"be\":num,\"lactate\":num,\"fio2\":num}. Omit fields you cannot read with confidence. No prose."
+  abg: "Read this arterial blood gas (ABG) report photo. Return ONLY JSON with any of: {\"ph\":num,\"paco2\":num,\"pao2\":num,\"hco3\":num,\"be\":num,\"lactate\":num,\"fio2\":num}. Omit fields you cannot read with confidence. No prose.",
+  // medication_list: live /api/ai/vision call is PROD-ONLY (tests mock the vision call).
+  medication_list: "Read this medication image (prescription / OPD ticket / case sheet / discharge summary / medication chart / handwritten Rx). Extract ONLY prescribed medicine rows. Return ONLY JSON: {\"medications\":[{\"detected_text\":str,\"drug\":str|null,\"strength\":str,\"route\":str,\"frequency\":str,\"form\":str,\"confidence\":\"high\"|\"medium\"|\"low\"}]}. Rules: detected_text is the raw text you read for that row, preserved verbatim; set drug to the generic name ONLY if you are confident, else null. Ignore patient identifiers, demographics, vitals, diagnoses, and billing. NEVER invent drug names, doses, or frequencies — omit a field (empty string) if it is not written. Mark unclear or illegible handwriting as \"low\" confidence but still preserve its detected_text. Return only the medication list, no prose."
 };
 
 function parseJsonLoose(t) {

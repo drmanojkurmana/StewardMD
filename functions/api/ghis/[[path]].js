@@ -14,7 +14,7 @@
  * Endpoints:
  *   POST /api/ghis/login    {userId,password,remember}     -> {token, userId}
  *   POST /api/ghis/logout   (Authorization: Bearer <token>)-> {ok:true}
- *   GET  /api/ghis/status | patients | lab | lab-detail | radiology | radiology-report
+ *   GET  /api/ghis/status | patients | lab | lab-detail | radiology | radiology-report | medications
  *        (all require  Authorization: Bearer <token>)
  * ---------------------------------------------------------------------------
  */
@@ -118,6 +118,50 @@ async function getLabOrders(env, token, patientId) {
   if (r.unauth) return r;
   return { orders: parseGhis(r.body).map(o => ({ serviceName:o.parameter_long_desc, orderDate:o.OrderDate, department:o.Department_desc, status:o.pstatus, renderId:o.ServiceRenderId, episodeId:o.episode_id, orderId:o.order_id, valueType:o.ValueType })) };
 }
+// ── medication history (authorized session) ──────────────────────────────────
+// TODO(GHIS): verify exact medication-history endpoint/params against a live GHIS
+// session — best-guess modelled on the Lab endpoint. The real path/params are
+// UNKNOWN without a live GHIS session; the values below are a placeholder shaped
+// after /Lab/Home/GetSearchPatientId and MUST be confirmed before production use.
+const GHIS_MED_HISTORY = {
+  method: 'POST',
+  path: '/Doctor/Home/GetMedicationHistory',
+  // form body builder — csrf + patient id, mirroring the Lab search form
+  form: (csrf, patientId) =>
+    `__RequestVerificationToken=${encodeURIComponent(csrf)}&patient_id=${encodeURIComponent(patientId)}&DeptID=&FDate=&EDate=`,
+};
+async function getMedications(env, token, patientId) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const r = await ghisReq(env, token, GHIS_MED_HISTORY.method, GHIS_MED_HISTORY.path,
+    GHIS_MED_HISTORY.form(s.csrf, patientId), { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  // Response may be JSON (array of objects) or HTML rows — parse defensively.
+  let recs = parseGhis(r.body);
+  if ((!Array.isArray(recs) || !recs.length) && r.body && /<tr/i.test(r.body)) {
+    recs = [];
+    for (const tr of (r.body.match(/<tr[\s\S]*?<\/tr>/gi) || [])) {
+      const tds = (tr.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || []).map(td => htmlToText(td));
+      if (!tds.length) continue; // skip header/empty rows
+      // Positional best-guess mapping (see TODO above): must be verified live.
+      recs.push({ ProductCode: tds[0], DrugName: tds[1], Route: tds[2], Dosage: tds[3],
+        Frequency: tds[4], Duration: tds[5], Department: tds[6], OrderDate: tds[7] });
+    }
+  }
+  if (!Array.isArray(recs)) recs = [];
+  // PHI-strip: return ONLY medication row fields — NEVER patient name/MRN/UHID/
+  // bed/clinician/billing/totals.
+  const rows = recs.map(m => ({
+    productCode: m.ProductCode ?? m.product_code ?? m.ItemCode ?? m.item_code ?? '',
+    drugText:    m.DrugName ?? m.drug_name ?? m.ProductName ?? m.product_name ?? m.MedicineName ?? m.medicine_name ?? m.parameter_long_desc ?? '',
+    route:       m.Route ?? m.route ?? m.RouteName ?? m.route_name ?? '',
+    dosage:      m.Dosage ?? m.dosage ?? m.Dose ?? m.dose ?? m.Strength ?? m.strength ?? '',
+    frequency:   m.Frequency ?? m.frequency ?? m.Freq ?? m.freq ?? '',
+    duration:    m.Duration ?? m.duration ?? m.Days ?? m.days ?? '',
+    dept:        m.Department ?? m.Department_desc ?? m.department ?? m.DeptName ?? m.dept_name ?? '',
+    dateTime:    m.OrderDate ?? m.order_date ?? m.OrderDateTime ?? m.order_datetime ?? m.DateTime ?? m.date_time ?? '',
+  }));
+  return { rows };
+}
 async function getLabDetail(env, token, renderId, episodeId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetPrintLabResultDetailsAuth', `__RequestVerificationToken=${encodeURIComponent(s.csrf)}&Render_ID=${encodeURIComponent(renderId)}&Episode_Id=${encodeURIComponent(episodeId)}&Result_Type=a`, { 'X-Requested-With': 'XMLHttpRequest' });
@@ -187,6 +231,7 @@ export async function onRequest(context) {
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology-report'){ const r = await getRadiologyReport(env, token, q.get('resultid') || '', q.get('type') || 'manual'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'medications')     { const r = await getMedications(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);
