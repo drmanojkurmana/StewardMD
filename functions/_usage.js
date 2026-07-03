@@ -185,3 +185,5 @@ export async function adminReport(env) {
     note: "Costs are ESTIMATED from token counts; no prompts, patient data, or PHI are stored.",
   };
 }
+
+// Deploy marker: force a fresh Pages build so the MAIK_KV binding attaches to the runtime (2026-07-03).
