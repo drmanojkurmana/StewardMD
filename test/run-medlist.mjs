@@ -129,10 +129,13 @@ try {
   ok(await ev(`return /Search Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "'Search Drug Index' option present");
   ok(await ev(`return /Type manually/.test(document.getElementById("ml-test").innerText)`) === true, "'Type manually' option present");
   ok(await ev(`return /Paste list/.test(document.getElementById("ml-test").innerText)`) === true, "'Paste list' option present");
-  ok(await ev(`return /Coming soon/.test(document.getElementById("ml-test").innerText)`) === true, "Ward Sync still labelled 'Coming soon'");
+  // PR4: "Fetch from Ward Sync" is enabled (not "Coming soon") once a Ward-Sync patient is
+  // selected; here no GHIS patient is selected, so it stays disabled WITH a hint — never "Coming soon".
+  ok(await ev(`return /Coming soon/.test(document.getElementById("ml-test").innerText)`) === false, "Ward Sync no longer labelled 'Coming soon'");
   ok(await ev(`return document.getElementById("ml-test").querySelectorAll("[data-ml-scan],[data-ml-wardsync]").length`) === 2, "Scan + Ward Sync buttons present");
   ok(await ev(`return document.querySelector("#ml-test [data-ml-scan]").disabled === false`) === true, "Scan button ENABLED (PR3 — scan prescription / case sheet)");
-  ok(await ev(`return document.querySelector("#ml-test [data-ml-wardsync]").disabled === true`) === true, "Ward Sync button still disabled");
+  ok(await ev(`return document.querySelector("#ml-test [data-ml-wardsync]").disabled === true`) === true, "Ward Sync button disabled when no Ward-Sync patient is selected");
+  ok(await ev(`return /Select a Ward Sync patient first/i.test(document.getElementById("ml-test").innerText)`) === true, "Ward Sync shows 'Select a Ward Sync patient first.' hint when disabled");
 
   // sticky footer with disabled Check-interactions button
   ok(await ev(`return document.getElementById("ml-check") && document.getElementById("ml-check").disabled`) === true, "footer 'Check interactions' button present + disabled");

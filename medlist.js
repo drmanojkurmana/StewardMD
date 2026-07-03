@@ -318,7 +318,13 @@
     var btnManual = el("button", { cls: "ml-add-btn", text: "Type manually", attrs: { "data-ml-open": "manual" } });
     var btnPaste = el("button", { cls: "ml-add-btn", text: "Paste list", attrs: { "data-ml-open": "paste" } });
     var btnScan = el("button", { cls: "ml-add-btn", text: "Scan prescription / case sheet", attrs: { "data-ml-scan": "1" } });
-    var btnWard = el("button", { cls: "ml-add-btn ml-add-btn-disabled", text: "Fetch from Ward Sync (Coming soon)", disabled: true, attrs: { "data-ml-wardsync": "1" } });
+    // "Fetch from Ward Sync" — enabled only when a GHIS/Ward-Sync patient is selected
+    // (window.GHISMEDS.canFetch()). Disabled otherwise with a hint; never "Coming soon".
+    var wardReady = false;
+    try { wardReady = !!(window.GHISMEDS && window.GHISMEDS.canFetch && window.GHISMEDS.canFetch()); } catch (e) {}
+    var btnWard = el("button", { cls: "ml-add-btn" + (wardReady ? "" : " ml-add-btn-disabled"),
+      text: "Fetch from Ward Sync", attrs: { "data-ml-wardsync": "1" } });
+    if (!wardReady) btnWard.disabled = true;
     [btnIndex, btnManual, btnPaste].forEach(function (b) {
       b.addEventListener("click", function () {
         var which = b.getAttribute("data-ml-open");
@@ -327,9 +333,21 @@
       });
     });
     btnScan.addEventListener("click", function () { startScan(); });
+    btnWard.addEventListener("click", function () {
+      if (btnWard.disabled) return;
+      if (window.GHISMEDS && window.GHISMEDS.fetchAndReview) {
+        window.GHISMEDS.fetchAndReview(_root).then(function (r) {
+          if (r && !r.ok) wardHint(r.message || "Could not fetch medication history.");
+        });
+      }
+    });
     row.appendChild(btnIndex); row.appendChild(btnManual); row.appendChild(btnPaste);
     row.appendChild(btnScan); row.appendChild(btnWard);
     container.appendChild(row);
+    // Hint when the Ward-Sync fetch is unavailable (no patient selected).
+    if (!wardReady) {
+      container.appendChild(el("div", { cls: "ml-ward-hint", text: "Select a Ward Sync patient first." }));
+    }
 
     if (_openAdd === "index") container.appendChild(renderIndexPanel());
     else if (_openAdd === "manual") container.appendChild(renderManualPanel());
@@ -618,6 +636,15 @@
     _root.appendChild(footer);
   }
 
+  // Transient hint shown when the Ward-Sync fetch is unavailable / errored.
+  function wardHint(msg) {
+    if (!_root) return;
+    var existing = _root.querySelector(".ml-ward-hint");
+    if (existing) { existing.textContent = msg; return; }
+    var body = _root.querySelector(".ml-body") || _root;
+    body.appendChild(el("div", { cls: "ml-ward-hint", text: msg }));
+  }
+
   function hasResolvedGeneric() {
     return getList().some(function (m) { return m.generic && typeof m.generic === "string" && m.generic.trim(); });
   }
@@ -830,6 +857,7 @@
       + ".ml-add-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}"
       + ".ml-add-btn{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 13px;font:600 12.5px var(--sans,system-ui);cursor:pointer;color:var(--ink,#1a1a1a)}"
       + ".ml-add-btn-disabled{opacity:.55;cursor:not-allowed}"
+      + ".ml-ward-hint{margin-top:7px;font:600 11.5px var(--sans,system-ui);color:var(--slate,#666)}"
       + ".ml-panel{margin-top:10px;border:1px dashed var(--line,#e5e5e0);border-radius:11px;padding:12px}"
       + ".ml-input,.ml-textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:9px;padding:9px 11px;font:500 13px var(--sans,system-ui)}"
       + ".ml-textarea{min-height:80px;resize:vertical}"
@@ -915,5 +943,7 @@
   window.MEDLIST = { parseEntry: parseEntry, brandCandidates: brandCandidates, parsePasted: parsePasted,
     add: add, remove: remove, undoRemove: undoRemove, clearAll: clearAll, getList: getList,
     mount: mount, brandSearch: brandSearch,
+    // Re-render the current list view (used by GHISMEDS to return from its review screen).
+    _rerender: function () { _view = "list"; render(); },
     scanExtract: scanExtract, _compressImage: _compressImage, _openScanReview: _openScanReview };
 })();
