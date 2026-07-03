@@ -152,10 +152,12 @@
         '<input id="mdSearch" class="mc-search" type="text" placeholder="🔍 Search drug or brand (e.g. pantop, lasix, statin, ppi)…" autocomplete="off">'+
         '<div id="mdCats" class="mc-cats"></div>'+
         '<div id="mdList" class="mc-list"></div>'+
+        '<button id="mdInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">💊⚠️ Check Drug Interactions</button>'+
         '<div class="mc-disc">⚠️ Adult dosing only — verify against the patient, renal/hepatic function and local protocol. Antibiotics are in the syndrome pages / global search.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mdClose").addEventListener("click", close);
+    root.querySelector("#mdInteractionsBtn").addEventListener("click", openInteractions);
     var si=root.querySelector("#mdSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); render(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
@@ -195,6 +197,28 @@
   function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&root&&root.classList.contains("on")) close(); });
 
+  /* ---- Drug Interactions entry point (mounts window.MEDLIST's med-list builder) ----
+     Reuses the same mc-overlay chrome as the browse overlay above; the body is fully
+     owned/rendered by MEDLIST.mount (medlist.js), not by this file. */
+  var interactionsRoot = null;
+  function ensureInteractionsRoot(){
+    if(interactionsRoot) return interactionsRoot;
+    injectFallbackCSS();
+    interactionsRoot=document.createElement("div");
+    interactionsRoot.id="miOverlay"; interactionsRoot.className="mc-overlay";
+    interactionsRoot.innerHTML='<div class="mc-top"><button class="mc-back" id="miClose">‹ Close</button><div class="mc-title">Drug Interactions</div><span style="width:64px"></span></div><div class="mc-body" id="miBody" style="padding:0;max-width:720px"></div>';
+    document.body.appendChild(interactionsRoot);
+    interactionsRoot.querySelector("#miClose").addEventListener("click", closeInteractions);
+    return interactionsRoot;
+  }
+  function openInteractions(){
+    ensureInteractionsRoot();
+    interactionsRoot.classList.add("on"); document.body.classList.add("mc-lock");
+    if(window.MEDLIST && window.MEDLIST.mount) window.MEDLIST.mount(interactionsRoot.querySelector("#miBody"));
+  }
+  function closeInteractions(){ if(interactionsRoot){ interactionsRoot.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&interactionsRoot&&interactionsRoot.classList.contains("on")) closeInteractions(); });
+
   // minimal fallback styles in case calculators.js (mc-*) didn't load
   function injectFallbackCSS(){
     if(document.getElementById("mc-styles")||document.getElementById("md-fallback-styles")) return;
@@ -202,5 +226,6 @@
     var st=document.createElement("style"); st.id="md-fallback-styles"; st.textContent=css; document.head.appendChild(st);
   }
 
-  window.MEDDRUGS = { match: match, findByName: findByName, detailHTML: detailHTML, openList: openList, close: close, _list: DRUGS };
+  window.MEDDRUGS = { match: match, findByName: findByName, detailHTML: detailHTML, openList: openList, close: close, _list: DRUGS,
+    openInteractions: openInteractions, closeInteractions: closeInteractions };
 })();

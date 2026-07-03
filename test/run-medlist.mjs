@@ -101,6 +101,71 @@ try {
   ok(await ev(`return MEDLIST.getList().length`) === 1, "list reloaded from sessionStorage after navigation");
   await ev(`MEDLIST.clearAll(); return 1;`);
 
+  // --- Task 5: UI — mount/render, med cards, no-leak ---
+  await ev(`MEDLIST.clearAll(); var d=document.createElement("div"); d.id="ml-test"; document.body.appendChild(d); MEDLIST.mount(d); return 1;`);
+  ok(await ev(`return /Add medicines to check interactions/.test(document.getElementById("ml-test").innerText)`) === true, "empty state renders");
+  ok(await ev(`return /Drug Interactions/.test(document.getElementById("ml-test").innerText)`) === true, "title renders");
+  ok(await ev(`return /Check medicines, duplicates, and high-risk combinations/.test(document.getElementById("ml-test").innerText)`) === true, "subtitle renders");
+  ok(await ev(`return /Clinical decision support — verify with current local protocol and pharmacist where needed/.test(document.getElementById("ml-test").innerText)`) === true, "advisory badge renders");
+  await ev(`MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return /metformin/i.test(document.getElementById("ml-test").innerText)`) === true, "med card renders");
+  ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-remove]").length`) === 1, "remove control present");
+  ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-edit]").length`) === 1, "edit control present");
+  ok(await ev(`return !/\\{|\\}|source_id|provider/i.test(document.getElementById("ml-test").innerText)`) === true, "no raw JSON / source-id / provider text leaks");
+
+  // confidence shown only when source === 'scan'
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(Object.assign(MEDLIST.parseEntry("metformin 500 bd"),{confidence:"medium"}),"scan"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return /medium/i.test(document.getElementById("ml-test").innerText)`) === true, "confidence shown for source==='scan'");
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(Object.assign(MEDLIST.parseEntry("metformin 500 bd"),{confidence:"medium"}),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return !/medium/i.test(document.getElementById("ml-test").innerText)`) === true, "confidence hidden for source!=='scan'");
+
+  // remove shows an inline Undo affordance
+  await ev(`document.getElementById("ml-test").querySelector("[data-ml-remove]").click(); return 1;`);
+  ok(await ev(`return /undo/i.test(document.getElementById("ml-test").innerText)`) === true, "remove shows inline Undo");
+  ok(await ev(`return MEDLIST.getList().length`) === 0, "remove actually removes from list");
+
+  // add-option buttons present, Scan/Ward Sync disabled with "Coming soon"
+  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return /Search Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "'Search Drug Index' option present");
+  ok(await ev(`return /Type manually/.test(document.getElementById("ml-test").innerText)`) === true, "'Type manually' option present");
+  ok(await ev(`return /Paste list/.test(document.getElementById("ml-test").innerText)`) === true, "'Paste list' option present");
+  ok(await ev(`return /Coming soon/.test(document.getElementById("ml-test").innerText)`) === true, "Scan / Ward Sync labelled 'Coming soon'");
+  ok(await ev(`return document.getElementById("ml-test").querySelectorAll("[data-ml-scan],[data-ml-wardsync]").length`) === 2, "Scan + Ward Sync buttons present");
+  ok(await ev(`return Array.prototype.every.call(document.getElementById("ml-test").querySelectorAll("[data-ml-scan],[data-ml-wardsync]"), function(b){return b.disabled===true})`) === true, "Scan + Ward Sync buttons disabled");
+
+  // sticky footer with disabled Check-interactions button
+  ok(await ev(`return document.getElementById("ml-check") && document.getElementById("ml-check").disabled`) === true, "footer 'Check interactions' button present + disabled");
+
+  // Type manually add-option: input -> add(parseEntry(v),'manual')
+  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); document.querySelector("#ml-test [data-ml-open='manual']").click(); return 1;`);
+  await ev(`var inp=document.querySelector("#ml-test [data-ml-manual-input]"); inp.value="aspirin 75 od"; inp.dispatchEvent(new Event("input")); return 1;`);
+  await ev(`document.querySelector("#ml-test [data-ml-manual-add]").click(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 1 && await ev(`return MEDLIST.getList()[0].source`) === "manual", "'Type manually' adds a med with source='manual'");
+
+  // Did-you-mean chips shown for medium-confidence combo brand with candidates
+  await ev(`MEDLIST.clearAll(); document.querySelector("#ml-test [data-ml-open='manual']").click(); var inp=document.querySelector("#ml-test [data-ml-manual-input]"); inp.value="piptaz 4.5 q6h"; inp.dispatchEvent(new Event("input")); return 1;`);
+  ok(await ev(`return /Did you mean/i.test(document.getElementById("ml-test").innerText)`) === true, "'Did you mean?' chips shown for medium-confidence candidates");
+
+  // Paste-list add-option: textarea -> parsePasted -> review sublist w/ include checkboxes -> add selected
+  await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); document.querySelector("#ml-test [data-ml-open='paste']").click(); return 1;`);
+  await ev(`var ta=document.querySelector("#ml-test [data-ml-paste-input]"); ta.value="Tab Amlodipine 5 mg OD\\nMetformin 500 BD"; ta.dispatchEvent(new Event("input")); return 1;`);
+  ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-paste-item]").length`) === 2, "paste review shows a sublist row per parsed line");
+  ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-paste-item] input[type=checkbox]:checked").length`) === 2, "paste review rows default to included");
+  await ev(`document.querySelector("#ml-test [data-ml-paste-add]").click(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length === 2 && MEDLIST.getList().every(function(m){return m.source==="paste"})`) === true, "'Paste list' adds selected meds with source='paste'");
+
+  // Search Drug Index add-option: input -> brandSearch(q) -> results -> add via add(parsed,'index')
+  ok(await ev(`return typeof MEDLIST.brandSearch === "function"`) === true, "MEDLIST.brandSearch exposed");
+  await ev(`MEDLIST.clearAll(); window.__brandSearchStub = function(){ return Promise.resolve([{brand:"Ecosprin",generic:"aspirin",form:"tablet"}]); }; window.__origBrandSearch = MEDLIST.brandSearch; MEDLIST.brandSearch = window.__brandSearchStub; MEDLIST.mount(document.getElementById("ml-test")); document.querySelector("#ml-test [data-ml-open='index']").click(); return 1;`);
+  await ev(`var inp=document.querySelector("#ml-test [data-ml-index-input]"); inp.value="ecos"; inp.dispatchEvent(new Event("input")); return 1;`);
+  await sleep(150);
+  ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-index-result]").length`) === 1, "Drug Index search shows a result");
+  await ev(`document.querySelector("#ml-test [data-ml-index-result]").click(); return 1;`);
+  ok(await ev(`return MEDLIST.getList().length`) === 1 && await ev(`return MEDLIST.getList()[0].source`) === "index", "Drug Index result adds a med with source='index'");
+  await ev(`MEDLIST.brandSearch = window.__origBrandSearch; return 1;`);
+
+  await ev(`MEDLIST.clearAll(); return 1;`);
+
   console.log(fails === 0 ? "\nALL GREEN — medlist parser test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
