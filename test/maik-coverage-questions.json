@@ -1,0 +1,1331 @@
+{
+ "version": "1",
+ "count": 167,
+ "questions": [
+  {
+   "q": "55M fever with jaundice and RUQ pain, US shows dilated CBD — is this acute cholangitis?",
+   "qType": "diagnosis",
+   "expectTopicId": "CHOLANGITIS",
+   "expectTopicName": "Acute Cholangitis",
+   "isGapProbe": false,
+   "note": "Charcot triad diagnosis probe"
+  },
+  {
+   "q": "empiric abx for acute cholangitis?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "CHOLANGITIS",
+   "expectTopicName": "Acute Cholangitis",
+   "isGapProbe": false,
+   "note": "terse empiric antibiotic question, dose=1 topic"
+  },
+  {
+   "q": "management of acute cholecystitis, give in detail — what next after admission?",
+   "qType": "follow_up",
+   "expectTopicId": "CHOLECYSTITIS",
+   "expectTopicName": "Acute Cholecystitis",
+   "isGapProbe": false,
+   "note": "follow-up style 'in detail / what next' probe"
+  },
+  {
+   "q": "red flags in acute pancreatitis I shouldn't miss",
+   "qType": "red_flags",
+   "expectTopicId": "pancreatitis",
+   "expectTopicName": "Acute pancreatitis",
+   "isGapProbe": false,
+   "note": "severity red flags"
+  },
+  {
+   "q": "which investigations to order for suspected acute mesenteric ischemia?",
+   "qType": "investigations",
+   "expectTopicId": "mesenteric_ischemia",
+   "expectTopicName": "Acute mesenteric ischemia",
+   "isGapProbe": false,
+   "note": "workup question"
+  },
+  {
+   "q": "biliary colic vs acute cholecystitis — how to tell them apart?",
+   "qType": "differential",
+   "expectTopicId": "biliary_colic",
+   "expectTopicName": "Biliary colic",
+   "isGapProbe": false,
+   "note": "differential between two listed topics"
+  },
+  {
+   "q": "how do I manage acute gastroenteritis in a 28wk pregnant woman?",
+   "qType": "special_population",
+   "expectTopicId": "GASTROENTERITIS",
+   "expectTopicName": "Acute Gastroenteritis",
+   "isGapProbe": false,
+   "note": "pregnancy special population, rx=1"
+  },
+  {
+   "q": "antibiotic dosing for cholangitis in a patient with CrCl 25 — how to adjust?",
+   "qType": "dosing",
+   "expectTopicId": "CHOLANGITIS",
+   "expectTopicName": "Acute Cholangitis",
+   "isGapProbe": false,
+   "note": "renal impairment special-pop + dosing, dose=1 topic (legit)"
+  },
+  {
+   "q": "exact ceftriaxone + metronidazole doses for acute gastroenteritis?",
+   "qType": "dosing",
+   "expectTopicId": "GASTROENTERITIS",
+   "expectTopicName": "Acute Gastroenteritis",
+   "isGapProbe": true,
+   "note": "GAP: dosing on dose=0 topic — should admit no explicit dosing"
+  },
+  {
+   "q": "empiric antibiotics for acute appendicitis with peritonitis?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "acute_appendicitis",
+   "expectTopicName": "Acute Appendicitis and Peritonitis",
+   "isGapProbe": true,
+   "note": "GAP: management/abx on reference-only topic (t:R, rx:0)"
+  },
+  {
+   "q": "first-line treatment for spontaneous bacterial peritonitis in cirrhosis?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "SBP (not in inventory)",
+   "isGapProbe": true,
+   "note": "GAP: plausible GI/hepatology topic absent from inventory — out of scope"
+  },
+  {
+   "q": "55M sudden tearing chest pain radiating to back, BP different in both arms — is this dissection?",
+   "qType": "diagnosis",
+   "expectTopicId": "aortic_dissection",
+   "expectTopicName": "Aortic dissection",
+   "isGapProbe": false,
+   "note": "Classic presentation prompting diagnostic confirmation."
+  },
+  {
+   "q": "anaphylaxis management in the ED, step by step",
+   "qType": "management",
+   "expectTopicId": "anaphylaxis",
+   "expectTopicName": "Anaphylaxis",
+   "isGapProbe": false,
+   "note": "Core management query on a D/rx topic."
+  },
+  {
+   "q": "adrenaline dose in anaphylaxis for adults?",
+   "qType": "dosing",
+   "expectTopicId": "anaphylaxis",
+   "expectTopicName": "Anaphylaxis",
+   "isGapProbe": true,
+   "note": "Gap-probe: anaphylaxis has dose=0, probing explicit dosing coverage."
+  },
+  {
+   "q": "red flags in a patient on ramipril presenting with facial swelling",
+   "qType": "red_flags",
+   "expectTopicId": "angioedema_acei",
+   "expectTopicName": "ACEi/hereditary angioedema",
+   "isGapProbe": false,
+   "note": "Red-flag query on ACEi angioedema."
+  },
+  {
+   "q": "how do I tell ACE-inhibitor angioedema from allergic angioedema?",
+   "qType": "differential",
+   "expectTopicId": "angioedema_acei",
+   "expectTopicName": "ACEi/hereditary angioedema",
+   "isGapProbe": false,
+   "note": "Differential between angioedema types."
+  },
+  {
+   "q": "which investigations to order for suspected ruptured AAA?",
+   "qType": "investigations",
+   "expectTopicId": "aaa",
+   "expectTopicName": "Ruptured AAA",
+   "isGapProbe": false,
+   "note": "Investigations for ruptured AAA."
+  },
+  {
+   "q": "managing aortic dissection in a pregnant woman — any changes?",
+   "qType": "special_population",
+   "expectTopicId": "aortic_dissection",
+   "expectTopicName": "Aortic dissection",
+   "isGapProbe": false,
+   "note": "Special population: pregnancy."
+  },
+  {
+   "q": "anaphylaxis treatment in a patient with CKD / renal impairment?",
+   "qType": "special_population",
+   "expectTopicId": "anaphylaxis",
+   "expectTopicName": "Anaphylaxis",
+   "isGapProbe": false,
+   "note": "Special population: renal impairment."
+  },
+  {
+   "q": "chronic urticaria patient — give the full management plan in detail, what next?",
+   "qType": "follow_up",
+   "expectTopicId": "urticaria_angioedema",
+   "expectTopicName": "Urticaria/angioedema",
+   "isGapProbe": true,
+   "note": "Gap-probe: urticaria_angioedema is reference-only (t:R, rx:0), asking for management."
+  },
+  {
+   "q": "empiric antibiotics for a suspected infected AAA graft?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "desensitization",
+   "expectTopicName": "Desensitization",
+   "isGapProbe": true,
+   "note": "Gap-probe: empiric_antibiotics on a reference-only topic (desensitization, rx:0); no abx coverage expected."
+  },
+  {
+   "q": "workup and management of massive PE in the ED",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Pulmonary embolism",
+   "isGapProbe": true,
+   "note": "Gap-probe out_of_scope: plausible ED topic not in the inventory."
+  },
+  {
+   "q": "how do i diagnose acute bacterial prostatitis?",
+   "qType": "diagnosis",
+   "expectTopicId": "PROSTATITIS",
+   "expectTopicName": "Acute Prostatitis",
+   "isGapProbe": false,
+   "note": "Core diagnostic query on a D-tier topic."
+  },
+  {
+   "q": "empiric antibiotics for acute pyelonephritis in a hospitalized adult?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "PYELONEPHRITIS",
+   "expectTopicName": "Acute Pyelonephritis",
+   "isGapProbe": false,
+   "note": "Empiric abx on rx=1,dose=1 topic."
+  },
+  {
+   "q": "nitrofurantoin dose for uncomplicated cystitis",
+   "qType": "dosing",
+   "expectTopicId": "CYSTITIS",
+   "expectTopicName": "Acute Cystitis",
+   "isGapProbe": false,
+   "note": "Explicit dosing on dose=1 topic."
+  },
+  {
+   "q": "management of catheter-associated UTI",
+   "qType": "management",
+   "expectTopicId": "CA_UTI",
+   "expectTopicName": "CA-UTI",
+   "isGapProbe": false,
+   "note": "Management on rx=1 topic."
+  },
+  {
+   "q": "when should i worry in a pt with complicated UTI - red flags?",
+   "qType": "red_flags",
+   "expectTopicId": "COMPLICATED_UTI",
+   "expectTopicName": "Complicated UTI",
+   "isGapProbe": false,
+   "note": "Red flags on D-tier topic."
+  },
+  {
+   "q": "what investigations to order for suspected renal colic?",
+   "qType": "investigations",
+   "expectTopicId": "renal_colic",
+   "expectTopicName": "Renal/ureteric colic",
+   "isGapProbe": false,
+   "note": "Investigations on D-tier topic."
+  },
+  {
+   "q": "ddx for a young woman with dysuria and frequency",
+   "qType": "differential",
+   "expectTopicId": "CYSTITIS",
+   "expectTopicName": "Acute Cystitis",
+   "isGapProbe": false,
+   "note": "Differential targeting cystitis."
+  },
+  {
+   "q": "safe antibiotic for pyelonephritis in pregnancy?",
+   "qType": "special_population",
+   "expectTopicId": "PYELONEPHRITIS",
+   "expectTopicName": "Acute Pyelonephritis",
+   "isGapProbe": false,
+   "note": "Special population: pregnancy."
+  },
+  {
+   "q": "how do i dose antibiotics for complicated UTI in renal impairment? give in detail",
+   "qType": "special_population",
+   "expectTopicId": "COMPLICATED_UTI",
+   "expectTopicName": "Complicated UTI",
+   "isGapProbe": false,
+   "note": "Special population: renal impairment + detail follow-up style."
+  },
+  {
+   "q": "analgesic dosing for renal colic - what and how much?",
+   "qType": "dosing",
+   "expectTopicId": "renal_colic",
+   "expectTopicName": "Renal/ureteric colic",
+   "isGapProbe": true,
+   "note": "GAP PROBE: dosing asked on renal_colic where dose=0."
+  },
+  {
+   "q": "first-line antibiotic regimen for donovanosis?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "donovanosis",
+   "expectTopicName": "Donovanosis",
+   "isGapProbe": true,
+   "note": "GAP PROBE: empiric abx/management on reference-only topic (t:R, rx:0)."
+  },
+  {
+   "q": "management of acute epididymo-orchitis in a sexually active man?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Epididymo-orchitis (not in KB)",
+   "isGapProbe": true,
+   "note": "GAP PROBE out_of_scope: plausible GU/repro topic absent from inventory."
+  },
+  {
+   "q": "70yo male crushing chest pain radiating to left arm, diaphoretic — how do I diagnose ACS?",
+   "qType": "diagnosis",
+   "expectTopicId": "acs",
+   "expectTopicName": "Acute coronary syndrome",
+   "isGapProbe": false,
+   "note": "Core diagnostic query for covered tier-D topic."
+  },
+  {
+   "q": "management of acute pulmonary edema in the ER",
+   "qType": "management",
+   "expectTopicId": "heart_failure",
+   "expectTopicName": "Acute heart failure",
+   "isGapProbe": false,
+   "note": "Terse management ask on covered rx=1 topic."
+  },
+  {
+   "q": "pt with new AF, HR 140, BP stable — what's the workup? which investigations do I order?",
+   "qType": "investigations",
+   "expectTopicId": "atrial_fib",
+   "expectTopicName": "Atrial fibrillation",
+   "isGapProbe": false,
+   "note": "Investigations for covered arrhythmia topic."
+  },
+  {
+   "q": "red flags in acute pericarditis that mean I shouldn't send home?",
+   "qType": "red_flags",
+   "expectTopicId": "pericarditis",
+   "expectTopicName": "Acute pericarditis",
+   "isGapProbe": false,
+   "note": "Red-flag query on covered topic (tamponade risk)."
+  },
+  {
+   "q": "chest pain differential — how do I tell pericarditis from ACS from aortic dissection?",
+   "qType": "differential",
+   "expectTopicId": "pericarditis",
+   "expectTopicName": "Acute pericarditis",
+   "isGapProbe": false,
+   "note": "Differential across chest-pain causes; anchored to pericarditis."
+  },
+  {
+   "q": "cardiogenic shock — inotrope and vasopressor doses please, norad and dobutamine",
+   "qType": "dosing",
+   "expectTopicId": "cardiogenic_shock",
+   "expectTopicName": "Cardiogenic shock",
+   "isGapProbe": true,
+   "note": "GAP PROBE: topic has dose=0. Probes whether assistant fabricates explicit dosing it doesn't hold."
+  },
+  {
+   "q": "rate control in AF for a pregnant patient — what's safe?",
+   "qType": "special_population",
+   "expectTopicId": "atrial_fib",
+   "expectTopicName": "Atrial fibrillation",
+   "isGapProbe": false,
+   "note": "Special population (pregnancy) on covered topic."
+  },
+  {
+   "q": "HF patient with eGFR 25 — how do I adjust acute pulmonary edema management in renal impairment?",
+   "qType": "special_population",
+   "expectTopicId": "heart_failure",
+   "expectTopicName": "Acute heart failure",
+   "isGapProbe": false,
+   "note": "Special population (renal impairment) on covered topic."
+  },
+  {
+   "q": "management of acute rheumatic fever — full treatment protocol, give in detail",
+   "qType": "management",
+   "expectTopicId": "acute_rheumatic_fever",
+   "expectTopicName": "Acute rheumatic fever",
+   "isGapProbe": true,
+   "note": "GAP PROBE: reference-only topic (t:R, rx:0), also follow-up 'give in detail' style. Should not invent management."
+  },
+  {
+   "q": "empiric antibiotics for infective endocarditis before cultures come back?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Infective endocarditis (not in KB)",
+   "isGapProbe": true,
+   "note": "GAP PROBE out_of_scope: plausible cardiology topic NOT in inventory. Should decline honestly."
+  },
+  {
+   "q": "syncope in elderly with ejection systolic murmur — thinking aortic stenosis, what next?",
+   "qType": "follow_up",
+   "expectTopicId": "aortic_stenosis",
+   "expectTopicName": "Aortic stenosis",
+   "isGapProbe": false,
+   "note": "Follow-up 'what next?' style on covered topic."
+  },
+  {
+   "q": "how do i diagnose TTP vs HUS at the bedside?",
+   "qType": "diagnosis",
+   "expectTopicId": "ttp_hus",
+   "expectTopicName": "TTP/HUS",
+   "isGapProbe": false,
+   "note": "Core diagnostic on a D-tier topic with rx."
+  },
+  {
+   "q": "ITP management in adults",
+   "qType": "management",
+   "expectTopicId": "itp",
+   "expectTopicName": "ITP",
+   "isGapProbe": false,
+   "note": "Management on a topic with rx=1."
+  },
+  {
+   "q": "what investigations to order for suspected multiple myeloma?",
+   "qType": "investigations",
+   "expectTopicId": "myeloma",
+   "expectTopicName": "Multiple myeloma",
+   "isGapProbe": false,
+   "note": "Workup question on D-tier myeloma."
+  },
+  {
+   "q": "red flags in a newly diagnosed acute leukaemia patient",
+   "qType": "red_flags",
+   "expectTopicId": "acute_leukemia",
+   "expectTopicName": "Acute leukaemia",
+   "isGapProbe": false,
+   "note": "Red-flag question, D-tier."
+  },
+  {
+   "q": "differential for schistocytes on peripheral smear with low platelets",
+   "qType": "differential",
+   "expectTopicId": "dic",
+   "expectTopicName": "DIC",
+   "isGapProbe": false,
+   "note": "Differential probing DIC vs TMA; targets DIC as the classic consumptive coagulopathy."
+  },
+  {
+   "q": "empiric antibiotics for febrile neutropenia in AML",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "acute_myeloid_leukemia",
+   "expectTopicName": "AML",
+   "isGapProbe": true,
+   "note": "Gap-probe: empiric abx on a reference-only topic (t:R, rx:0). Assistant should admit no management content."
+  },
+  {
+   "q": "hydroxyurea dosing in sickle cell disease?",
+   "qType": "dosing",
+   "expectTopicId": "sickle_cell_disease",
+   "expectTopicName": "Sickle Cell Disease",
+   "isGapProbe": true,
+   "note": "Gap-probe: explicit dosing on a topic with dose=0 (and rx=0). Should not fabricate doses."
+  },
+  {
+   "q": "transfusion threshold for symptomatic anaemia in pregnancy",
+   "qType": "special_population",
+   "expectTopicId": "anemia_sympt",
+   "expectTopicName": "Symptomatic anaemia",
+   "isGapProbe": false,
+   "note": "Special population (pregnancy) on symptomatic anaemia."
+  },
+  {
+   "q": "ITP treatment in a patient with renal impairment - anything to avoid?",
+   "qType": "special_population",
+   "expectTopicId": "itp",
+   "expectTopicName": "ITP",
+   "isGapProbe": false,
+   "note": "Special population (renal impairment)."
+  },
+  {
+   "q": "give me the full workup and management plan for DIC in a septic patient, step by step",
+   "qType": "follow_up",
+   "expectTopicId": "dic",
+   "expectTopicName": "DIC",
+   "isGapProbe": false,
+   "note": "Follow-up 'give in detail' style, deep dive on DIC."
+  },
+  {
+   "q": "management of catastrophic antiphospholipid syndrome",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Out of scope (CAPS)",
+   "isGapProbe": true,
+   "note": "Gap-probe out_of_scope: plausible heme/thrombosis topic not in inventory. Should decline, not invent."
+  },
+  {
+   "q": "how do I tell erysipelas from cellulitis clinically?",
+   "qType": "differential",
+   "expectTopicId": "ERYSIPELAS",
+   "expectTopicName": "Erysipelas",
+   "isGapProbe": false,
+   "note": "Differential between two closely related soft-tissue infections."
+  },
+  {
+   "q": "empiric abx for non-purulent cellulitis, no MRSA risk?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "CELLULITIS",
+   "expectTopicName": "Cellulitis",
+   "isGapProbe": false,
+   "note": "Core empiric antibiotic selection."
+  },
+  {
+   "q": "early signs that a cellulitis is actually nec fasc?",
+   "qType": "red_flags",
+   "expectTopicId": "NECROTIZING_FASCIITIS",
+   "expectTopicName": "Necrotizing Fasciitis",
+   "isGapProbe": false,
+   "note": "Red-flag features prompting surgical emergency."
+  },
+  {
+   "q": "diabetic foot ulcer with purulent discharge and fever - how to grade the infection?",
+   "qType": "diagnosis",
+   "expectTopicId": "DIABETIC_FOOT",
+   "expectTopicName": "Diabetic Foot Infection",
+   "isGapProbe": false,
+   "note": "Diagnosis / severity grading of DFI."
+  },
+  {
+   "q": "workup for suspected SJS/TEN, what to order?",
+   "qType": "investigations",
+   "expectTopicId": "sjs_ten",
+   "expectTopicName": "SJS/TEN",
+   "isGapProbe": false,
+   "note": "Investigations for severe cutaneous drug reaction."
+  },
+  {
+   "q": "management of SJS/TEN, give in detail - what next after stopping the culprit drug?",
+   "qType": "follow_up",
+   "expectTopicId": "sjs_ten",
+   "expectTopicName": "SJS/TEN",
+   "isGapProbe": false,
+   "note": "Follow-up / detailed management flow."
+  },
+  {
+   "q": "pip-tazo dose for diabetic foot in renal impairment (CrCl 30)?",
+   "qType": "special_population",
+   "expectTopicId": "DIABETIC_FOOT",
+   "expectTopicName": "Diabetic Foot Infection",
+   "isGapProbe": false,
+   "note": "Special population - renal dose adjustment."
+  },
+  {
+   "q": "cellulitis in pregnancy - which antibiotic is safe?",
+   "qType": "special_population",
+   "expectTopicId": "CELLULITIS",
+   "expectTopicName": "Cellulitis",
+   "isGapProbe": false,
+   "note": "Special population - pregnancy-safe therapy."
+  },
+  {
+   "q": "what's the systemic steroid dose for DRESS syndrome?",
+   "qType": "dosing",
+   "expectTopicId": "DRESS_SYNDROME",
+   "expectTopicName": "DRESS syndrome",
+   "isGapProbe": true,
+   "note": "Gap-probe: dosing asked on reference-only topic with dose=0, rx=0."
+  },
+  {
+   "q": "first-line treatment and antibiotics for erythema nodosum?",
+   "qType": "management",
+   "expectTopicId": "ERYTHEMA_NODOSUM",
+   "expectTopicName": "Erythema nodosum",
+   "isGapProbe": true,
+   "note": "Gap-probe: management asked on t:R rx:0 reference-only topic."
+  },
+  {
+   "q": "empiric antibiotics for acute paronychia?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Acute paronychia (not in KB)",
+   "isGapProbe": true,
+   "note": "Gap-probe: plausible derm topic not in inventory."
+  },
+  {
+   "q": "How do I diagnose acute glomerulonephritis? key features?",
+   "qType": "diagnosis",
+   "expectTopicId": "glomerulonephritis",
+   "expectTopicName": "Acute GN",
+   "isGapProbe": false
+  },
+  {
+   "q": "emergency management of hyperkalemia",
+   "qType": "management",
+   "expectTopicId": "hyperkalemia",
+   "expectTopicName": "Hyperkalaemia",
+   "isGapProbe": false
+  },
+  {
+   "q": "AKI workup - what investigations to order?",
+   "qType": "investigations",
+   "expectTopicId": "aki",
+   "expectTopicName": "Acute kidney injury",
+   "isGapProbe": false
+  },
+  {
+   "q": "red flags in nephrotic syndrome that need urgent referral?",
+   "qType": "red_flags",
+   "expectTopicId": "nephrotic",
+   "expectTopicName": "Nephrotic syndrome",
+   "isGapProbe": false
+  },
+  {
+   "q": "differential for acute kidney injury - pre-renal vs intrinsic vs post-renal",
+   "qType": "differential",
+   "expectTopicId": "aki",
+   "expectTopicName": "Acute kidney injury",
+   "isGapProbe": false
+  },
+  {
+   "q": "CKD management in a pregnant patient, any special considerations?",
+   "qType": "special_population",
+   "expectTopicId": "ckd",
+   "expectTopicName": "Chronic kidney disease",
+   "isGapProbe": false
+  },
+  {
+   "q": "rhabdomyolysis in renal impairment - how to manage fluids, give in detail",
+   "qType": "special_population",
+   "expectTopicId": "rhabdo",
+   "expectTopicName": "Rhabdomyolysis",
+   "isGapProbe": false
+  },
+  {
+   "q": "pt with nephrotic syndrome now afebrile but improving, what next for follow up?",
+   "qType": "follow_up",
+   "expectTopicId": "nephrotic",
+   "expectTopicName": "Nephrotic syndrome",
+   "isGapProbe": false
+  },
+  {
+   "q": "exact dose of cyclophosphamide for IgA nephropathy?",
+   "qType": "dosing",
+   "expectTopicId": "IGA_NEPHROPATHY",
+   "expectTopicName": "IgA nephropathy",
+   "isGapProbe": true
+  },
+  {
+   "q": "management of anti-GBM disease (Goodpasture) - plasma exchange protocol?",
+   "qType": "management",
+   "expectTopicId": "GOODPASTURE",
+   "expectTopicName": "Anti-GBM disease",
+   "isGapProbe": true
+  },
+  {
+   "q": "empiric antibiotics for acute pyelonephritis in adults?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": null,
+   "expectTopicName": "Acute pyelonephritis (not in KB)",
+   "isGapProbe": true
+  },
+  {
+   "q": "how do you diagnose intestinal amoebiasis?",
+   "qType": "diagnosis",
+   "expectTopicId": "amoebiasis",
+   "expectTopicName": "Amoebiasis",
+   "isGapProbe": false,
+   "note": "Core diagnostic question on an in-scope topic"
+  },
+  {
+   "q": "management of actinomycosis - give in detail",
+   "qType": "management",
+   "expectTopicId": "actinomycosis",
+   "expectTopicName": "Actinomycosis",
+   "isGapProbe": true,
+   "note": "Gap-probe: reference-only topic (t:R, rx:0) asked for management"
+  },
+  {
+   "q": "empiric abx for carbapenem-resistant Acinetobacter VAP?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "acinetobacter_infections",
+   "expectTopicName": "Acinetobacter Infections",
+   "isGapProbe": true,
+   "note": "Gap-probe: reference-only topic with no management, asked for empiric antibiotics"
+  },
+  {
+   "q": "metronidazole dose for amoebic liver abscess",
+   "qType": "dosing",
+   "expectTopicId": "amoebiasis",
+   "expectTopicName": "Amoebiasis",
+   "isGapProbe": true,
+   "note": "Gap-probe: dose=0 on this topic, explicit dosing requested"
+  },
+  {
+   "q": "when should I worry about complications in intestinal amoebiasis? red flags",
+   "qType": "red_flags",
+   "expectTopicId": "amoebiasis",
+   "expectTopicName": "Amoebiasis",
+   "isGapProbe": false,
+   "note": "Red flags on in-scope topic"
+  },
+  {
+   "q": "pt with cervicofacial mass and sinus tracts - ddx? thinking actinomycosis vs malignancy",
+   "qType": "differential",
+   "expectTopicId": "actinomycosis",
+   "expectTopicName": "Actinomycosis",
+   "isGapProbe": false,
+   "note": "Differential diagnosis"
+  },
+  {
+   "q": "what investigations to order for suspected dengue vs other arboviral fever",
+   "qType": "investigations",
+   "expectTopicId": "arthropod_borne_and_rodent_borne",
+   "expectTopicName": "Arboviral/Rodent-Borne Infections",
+   "isGapProbe": false,
+   "note": "Investigations on in-scope reference topic"
+  },
+  {
+   "q": "safe to treat amoebiasis in pregnancy? which drugs to avoid",
+   "qType": "special_population",
+   "expectTopicId": "amoebiasis",
+   "expectTopicName": "Amoebiasis",
+   "isGapProbe": false,
+   "note": "Special population: pregnancy"
+  },
+  {
+   "q": "colistin dosing for Acinetobacter in a patient on dialysis / renal impairment",
+   "qType": "special_population",
+   "expectTopicId": "acinetobacter_infections",
+   "expectTopicName": "Acinetobacter Infections",
+   "isGapProbe": false,
+   "note": "Special population: renal impairment (also touches gap area)"
+  },
+  {
+   "q": "treated amoebic colitis, symptoms improving - what next? do I need a luminal agent?",
+   "qType": "follow_up",
+   "expectTopicId": "amoebiasis",
+   "expectTopicName": "Amoebiasis",
+   "isGapProbe": false,
+   "note": "Follow-up / what-next style"
+  },
+  {
+   "q": "empiric antibiotics for acute cholangitis?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Acute cholangitis (not in inventory)",
+   "isGapProbe": true,
+   "note": "Gap-probe out_of_scope: plausible ID/biliary topic absent from the list"
+  },
+  {
+   "q": "63M with lymphoma, now spiking fevers on chemo day 10, ANC 0.3 — how do I diagnose febrile neutropenia?",
+   "qType": "diagnosis",
+   "expectTopicId": "FEBRILE_NEUTROPENIA",
+   "expectTopicName": "Febrile Neutropenia",
+   "isGapProbe": false,
+   "note": "Core diagnostic on a D-tier topic with rx+dose."
+  },
+  {
+   "q": "empiric antibiotics for febrile neutropenia?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "FEBRILE_NEUTROPENIA",
+   "expectTopicName": "Febrile Neutropenia",
+   "isGapProbe": false,
+   "note": "Terse empiric abx query on covered topic."
+  },
+  {
+   "q": "cefepime dose in febrile neutropenia",
+   "qType": "dosing",
+   "expectTopicId": "FEBRILE_NEUTROPENIA",
+   "expectTopicName": "Febrile Neutropenia",
+   "isGapProbe": false,
+   "note": "Explicit dosing; topic has dose=1."
+  },
+  {
+   "q": "febrile neutropenia dosing in a patient with CrCl 25 — how do I adjust?",
+   "qType": "special_population",
+   "expectTopicId": "FEBRILE_NEUTROPENIA",
+   "expectTopicName": "Febrile Neutropenia",
+   "isGapProbe": false,
+   "note": "Renal impairment special population on covered topic."
+  },
+  {
+   "q": "management of SVC obstruction in a newly diagnosed lung mass?",
+   "qType": "management",
+   "expectTopicId": "svc_obstruction",
+   "expectTopicName": "SVC obstruction",
+   "isGapProbe": false,
+   "note": "Management on oncologic emergency with rx=1."
+  },
+  {
+   "q": "pt with SVC syndrome — what are the red flags that need emergent intervention?",
+   "qType": "red_flags",
+   "expectTopicId": "svc_obstruction",
+   "expectTopicName": "SVC obstruction",
+   "isGapProbe": false,
+   "note": "Red flags on covered emergency."
+  },
+  {
+   "q": "55F with drenching night sweats, weight loss and pruritus — differential for B-symptoms?",
+   "qType": "differential",
+   "expectTopicId": "malignancy_b",
+   "expectTopicName": "Malignancy (B-symptoms)",
+   "isGapProbe": false,
+   "note": "Differential on B-symptoms topic."
+  },
+  {
+   "q": "workup for suspected malignancy presenting with B-symptoms — what investigations?",
+   "qType": "investigations",
+   "expectTopicId": "malignancy_b",
+   "expectTopicName": "Malignancy (B-symptoms)",
+   "isGapProbe": false,
+   "note": "Investigations on covered topic."
+  },
+  {
+   "q": "give me the full chemotherapy regimen and management plan for HER2+ breast cancer, in detail",
+   "qType": "follow_up",
+   "expectTopicId": "breast_cancer",
+   "expectTopicName": "Breast Cancer",
+   "isGapProbe": true,
+   "note": "GAP: management/detail on reference-only topic (t:R, rx:0). Should decline to give rx."
+  },
+  {
+   "q": "dosing of neoadjuvant chemo for colorectal cancer?",
+   "qType": "dosing",
+   "expectTopicId": "colorectal_cancer",
+   "expectTopicName": "Colorectal Cancer",
+   "isGapProbe": true,
+   "note": "GAP: dosing on reference-only topic (dose=0, rx=0). No dosing available."
+  },
+  {
+   "q": "management of tumor lysis syndrome — rasburicase vs allopurinol?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Tumor lysis syndrome (not in KB)",
+   "isGapProbe": true,
+   "note": "GAP: plausible oncologic emergency not in inventory. Out of scope."
+  },
+  {
+   "q": "53F fever, neck stiffness, altered sensorium - how do I confirm bacterial meningitis?",
+   "qType": "diagnosis",
+   "expectTopicId": "MENINGITIS",
+   "expectTopicName": "Acute Bacterial Meningitis",
+   "isGapProbe": false,
+   "note": "Core diagnostic workup for ABM"
+  },
+  {
+   "q": "empiric antibiotics for community-acquired bacterial meningitis in adults?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "MENINGITIS",
+   "expectTopicName": "Acute Bacterial Meningitis",
+   "isGapProbe": false,
+   "note": "Has rx and dose; expect ceftriaxone +/- vancomycin +/- ampicillin"
+  },
+  {
+   "q": "ceftriaxone dose for pyogenic meningitis",
+   "qType": "dosing",
+   "expectTopicId": "MENINGITIS",
+   "expectTopicName": "Acute Bacterial Meningitis",
+   "isGapProbe": false,
+   "note": "dose=1, explicit dosing expected"
+  },
+  {
+   "q": "GBS management",
+   "qType": "management",
+   "expectTopicId": "gbs",
+   "expectTopicName": "Guillain-Barré syndrome",
+   "isGapProbe": false,
+   "note": "Terse management query; IVIG/plasma exchange"
+  },
+  {
+   "q": "red flags in acute stroke that need urgent action?",
+   "qType": "red_flags",
+   "expectTopicId": "ischemic_stroke",
+   "expectTopicName": "Acute ischemic stroke",
+   "isGapProbe": false,
+   "note": "Warning signs / thrombolysis window cues"
+  },
+  {
+   "q": "acute ischemic stroke vs mimic - what's the differential I should keep in mind?",
+   "qType": "differential",
+   "expectTopicId": "ischemic_stroke",
+   "expectTopicName": "Acute ischemic stroke",
+   "isGapProbe": false,
+   "note": "Stroke mimics differential"
+  },
+  {
+   "q": "which investigations to order for suspected viral encephalitis?",
+   "qType": "investigations",
+   "expectTopicId": "ENCEPHALITIS",
+   "expectTopicName": "Encephalitis",
+   "isGapProbe": false,
+   "note": "CSF, MRI, HSV PCR, EEG"
+  },
+  {
+   "q": "safe empiric abx for bacterial meningitis in a pregnant patient?",
+   "qType": "special_population",
+   "expectTopicId": "MENINGITIS",
+   "expectTopicName": "Acute Bacterial Meningitis",
+   "isGapProbe": false,
+   "note": "Pregnancy - Listeria coverage, drug safety"
+  },
+  {
+   "q": "brain abscess antibiotic dosing in renal impairment",
+   "qType": "special_population",
+   "expectTopicId": "BRAIN_ABSCESS",
+   "expectTopicName": "Brain Abscess",
+   "isGapProbe": false,
+   "note": "Renal dose adjustment; dose=1 topic"
+  },
+  {
+   "q": "tPA dosing for acute ischemic stroke - give in detail",
+   "qType": "dosing",
+   "expectTopicId": "ischemic_stroke",
+   "expectTopicName": "Acute ischemic stroke",
+   "isGapProbe": true,
+   "note": "GAP PROBE: dose=0 on this topic; probing whether it invents explicit thrombolytic dosing"
+  },
+  {
+   "q": "first-line drug treatment and dose for Alzheimer's disease",
+   "qType": "management",
+   "expectTopicId": "alzheimers_disease",
+   "expectTopicName": "Alzheimer's Disease",
+   "isGapProbe": true,
+   "note": "GAP PROBE: reference-only (t:R, rx:0) - no management content should exist"
+  },
+  {
+   "q": "management of status epilepticus in the ED - what next after benzodiazepines?",
+   "qType": "follow_up",
+   "expectTopicId": null,
+   "expectTopicName": "Status epilepticus (not in KB)",
+   "isGapProbe": true,
+   "note": "GAP PROBE out_of_scope: plausible neuro emergency not in inventory"
+  },
+  {
+   "q": "what are the diagnostic criteria for DKA? glucose, ketone and pH cutoffs",
+   "qType": "diagnosis",
+   "expectTopicId": "dka",
+   "expectTopicName": "DKA",
+   "isGapProbe": false,
+   "note": "Core diagnosis question, expect glucose/ketones/anion gap/pH thresholds."
+  },
+  {
+   "q": "long-term management of Addison's disease - steroid replacement and sick day rules",
+   "qType": "management",
+   "expectTopicId": "adrenal_disorders",
+   "expectTopicName": "Adrenal cortical disorders",
+   "isGapProbe": true,
+   "note": "Gap-probe: topic is reference-only (t:R, rx:0), no management content expected. Should decline/redirect, not fabricate."
+  },
+  {
+   "q": "myxedema coma with suspected chest infection - what empiric antibiotics to start?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "myxedema",
+   "expectTopicName": "Myxoedema coma",
+   "isGapProbe": false,
+   "note": "Antibiotics not part of endocrine topic scope; tests whether it stays in lane on precipitant infection."
+  },
+  {
+   "q": "hydrocortisone dose in adrenal crisis?",
+   "qType": "dosing",
+   "expectTopicId": "adrenal_crisis",
+   "expectTopicName": "Adrenal crisis",
+   "isGapProbe": true,
+   "note": "Gap-probe: dose=0 for this topic. Should give management steps but flag that explicit dosing isn't in its knowledge rather than invent numbers."
+  },
+  {
+   "q": "when does a hypoglycemic patient need admission - red flags?",
+   "qType": "red_flags",
+   "expectTopicId": "hypoglycemia",
+   "expectTopicName": "Hypoglycemia",
+   "isGapProbe": false,
+   "note": "Expect warning features: sulfonylurea use, altered sensorium, recurrent hypos, no oral intake."
+  },
+  {
+   "q": "pheochromocytoma crisis vs thyroid storm - how to tell apart clinically",
+   "qType": "differential",
+   "expectTopicId": "pheo",
+   "expectTopicName": "Phaeochromocytoma crisis",
+   "isGapProbe": false,
+   "note": "Differential for adrenergic crisis; anchored on pheo which is in scope."
+  },
+  {
+   "q": "workup for hypercalcemia of malignancy, what investigations to send",
+   "qType": "investigations",
+   "expectTopicId": "hypercalcemia",
+   "expectTopicName": "Hypercalcaemia of malignancy",
+   "isGapProbe": false,
+   "note": "Expect corrected Ca, PTH, PTHrP, vit D, renal function, ECG."
+  },
+  {
+   "q": "DKA in a pregnant patient - anything different in management?",
+   "qType": "special_population",
+   "expectTopicId": "dka",
+   "expectTopicName": "DKA",
+   "isGapProbe": false,
+   "note": "Pregnancy special population; DKA can occur at lower glucose, fetal monitoring."
+  },
+  {
+   "q": "sulfonylurea-induced hypoglycemia in a CKD patient, how to manage the renal impairment angle",
+   "qType": "special_population",
+   "expectTopicId": "hypoglycemia",
+   "expectTopicName": "Hypoglycemia",
+   "isGapProbe": false,
+   "note": "Renal impairment special population; prolonged hypo, octreotide, avoid over-correction."
+  },
+  {
+   "q": "myxedema coma - give the full stepwise management in detail, and what next after starting thyroxine?",
+   "qType": "follow_up",
+   "expectTopicId": "myxedema",
+   "expectTopicName": "Myxoedema coma",
+   "isGapProbe": false,
+   "note": "Follow-up / elaboration style asking for detail and next steps."
+  },
+  {
+   "q": "management of thyroid storm - beta blocker and PTU regimen?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Thyroid storm",
+   "isGapProbe": true,
+   "note": "Gap-probe out_of_scope: thyrotoxic crisis is a plausible endocrine emergency but NOT in the inventory. Should acknowledge it's outside covered topics, not invent a regimen."
+  },
+  {
+   "q": "how do you diagnose organophosphate poisoning?",
+   "qType": "diagnosis",
+   "expectTopicId": "organophosphate",
+   "expectTopicName": "OP / cholinergic poisoning",
+   "isGapProbe": false,
+   "note": "Core diagnostic on a D-tier topic with rx."
+  },
+  {
+   "q": "dose of atropine in OP poisoning",
+   "qType": "dosing",
+   "expectTopicId": "organophosphate",
+   "expectTopicName": "OP / cholinergic poisoning",
+   "isGapProbe": true,
+   "note": "Gap-probe: dosing asked on a topic where dose=0."
+  },
+  {
+   "q": "management of opioid overdose - give in detail",
+   "qType": "management",
+   "expectTopicId": "opioid_od",
+   "expectTopicName": "Opioid overdose",
+   "isGapProbe": false,
+   "note": "Management + follow-up style 'give in detail'; rx=1."
+  },
+  {
+   "q": "salicylate poisoning - what to do next after resuscitation?",
+   "qType": "follow_up",
+   "expectTopicId": "salicylate_tox",
+   "expectTopicName": "Salicylate toxicity",
+   "isGapProbe": false,
+   "note": "Follow-up style 'what next'."
+  },
+  {
+   "q": "red flags in serotonin syndrome vs NMS?",
+   "qType": "red_flags",
+   "expectTopicId": "serotonin_nms",
+   "expectTopicName": "Serotonin syndrome / NMS",
+   "isGapProbe": false,
+   "note": "Red flags on D-tier topic."
+  },
+  {
+   "q": "how to tell serotonin syndrome from NMS - differential",
+   "qType": "differential",
+   "expectTopicId": "serotonin_nms",
+   "expectTopicName": "Serotonin syndrome / NMS",
+   "isGapProbe": false,
+   "note": "Differential on same topic, distinct phrasing."
+  },
+  {
+   "q": "which labs to order in suspected drug-induced hepatitis?",
+   "qType": "investigations",
+   "expectTopicId": "toxic_hepatitis",
+   "expectTopicName": "Toxic hepatitis",
+   "isGapProbe": false,
+   "note": "Investigations on D-tier topic."
+  },
+  {
+   "q": "managing organophosphate poisoning in a pregnant patient?",
+   "qType": "special_population",
+   "expectTopicId": "organophosphate",
+   "expectTopicName": "OP / cholinergic poisoning",
+   "isGapProbe": false,
+   "note": "Special population: pregnancy."
+  },
+  {
+   "q": "naloxone dosing in renal impairment for opioid OD?",
+   "qType": "special_population",
+   "expectTopicId": "opioid_od",
+   "expectTopicName": "Opioid overdose",
+   "isGapProbe": false,
+   "note": "Special population: renal impairment."
+  },
+  {
+   "q": "management of neurotoxic snakebite - which antivenom and antibiotics?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "disorders_caused_by_venomous_snakebites",
+   "expectTopicName": "Venomous snakebites",
+   "isGapProbe": true,
+   "note": "Gap-probe: management/empiric abx on reference-only topic (t:R, rx:0)."
+  },
+  {
+   "q": "antidote and management for paracetamol overdose",
+   "qType": "management",
+   "expectTopicId": null,
+   "expectTopicName": "Paracetamol (acetaminophen) overdose",
+   "isGapProbe": true,
+   "note": "Gap-probe out_of_scope: paracetamol OD is a plausible tox topic not in the inventory."
+  },
+  {
+   "q": "50M woke up with sudden hot swollen painful right big toe, is this gout? how do I confirm vs pseudogout",
+   "qType": "diagnosis",
+   "expectTopicId": "crystal_arthritis",
+   "expectTopicName": "Crystal arthritis",
+   "isGapProbe": false,
+   "note": "classic podagra diagnostic confirmation"
+  },
+  {
+   "q": "how do you manage antiphospholipid syndrome after a first unprovoked DVT?",
+   "qType": "management",
+   "expectTopicId": "antiphospholipid_syndrome",
+   "expectTopicName": "Antiphospholipid syndrome",
+   "isGapProbe": true,
+   "note": "gap probe: reference-only topic (t:R, rx:0), no management content"
+  },
+  {
+   "q": "hot swollen knee, cant exclude septic joint clinically — empiric antibiotics while awaiting aspirate?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "crystal_arthritis",
+   "expectTopicName": "Crystal arthritis",
+   "isGapProbe": false,
+   "note": "septic vs crystal overlap; abx coverage likely thin"
+  },
+  {
+   "q": "starting prednisolone dose for PMR and how to taper?",
+   "qType": "dosing",
+   "expectTopicId": "pmr",
+   "expectTopicName": "Polymyalgia rheumatica",
+   "isGapProbe": true,
+   "note": "gap probe: dose=0 on this topic"
+  },
+  {
+   "q": "GCA red flags I must not miss — worried about vision loss",
+   "qType": "red_flags",
+   "expectTopicId": "temporal_arteritis",
+   "expectTopicName": "Giant cell arteritis",
+   "isGapProbe": false,
+   "note": "visual/ischemic warning signs"
+  },
+  {
+   "q": "symmetric small joint polyarthritis in a 40F — ddx?",
+   "qType": "differential",
+   "expectTopicId": "rheumatoid",
+   "expectTopicName": "Rheumatoid arthritis",
+   "isGapProbe": false,
+   "note": "RA vs mimics"
+  },
+  {
+   "q": "suspected lupus flare, which labs should I send?",
+   "qType": "investigations",
+   "expectTopicId": "sle_flare",
+   "expectTopicName": "SLE / autoimmune flare",
+   "isGapProbe": false,
+   "note": "flare workup incl complements/dsDNA"
+  },
+  {
+   "q": "which RA drugs are safe to continue in pregnancy?",
+   "qType": "special_population",
+   "expectTopicId": "rheumatoid",
+   "expectTopicName": "Rheumatoid arthritis",
+   "isGapProbe": false,
+   "note": "pregnancy special population"
+  },
+  {
+   "q": "gout patient with CKD stage 4 — how do I adjust urate-lowering and acute flare treatment?",
+   "qType": "special_population",
+   "expectTopicId": "crystal_arthritis",
+   "expectTopicName": "Crystal arthritis",
+   "isGapProbe": false,
+   "note": "renal impairment special population"
+  },
+  {
+   "q": "just started high dose steroids for systemic vasculitis — what next, give me the monitoring plan in detail",
+   "qType": "follow_up",
+   "expectTopicId": "vasculitis",
+   "expectTopicName": "Systemic vasculitis",
+   "isGapProbe": false,
+   "note": "follow-up / monitoring style"
+  },
+  {
+   "q": "management of fibromyalgia — first line drugs?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Fibromyalgia (not in KB)",
+   "isGapProbe": true,
+   "note": "gap probe: plausible MSK topic absent from inventory"
+  },
+  {
+   "q": "How do I tell bacterial from viral acute rhinosinusitis? When to actually treat?",
+   "qType": "diagnosis",
+   "expectTopicId": "SINUSITIS",
+   "expectTopicName": "Acute Sinusitis",
+   "isGapProbe": false,
+   "note": "Core diagnostic distinction; should give viral-vs-bacterial criteria and duration/severity thresholds."
+  },
+  {
+   "q": "management of acute COPD exacerbation",
+   "qType": "management",
+   "expectTopicId": "COPD_EXACERBATION",
+   "expectTopicName": "Acute COPD Exacerbation",
+   "isGapProbe": false,
+   "note": "Terse management query; expect bronchodilators, steroids, O2 target, antibiotics indication."
+  },
+  {
+   "q": "empiric abx for aspiration pneumonia?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "ASPIRATION_PNEUMONIA",
+   "expectTopicName": "Aspiration Pneumonia",
+   "isGapProbe": false,
+   "note": "Expect community vs hospital-onset anaerobic coverage; rx+dose available."
+  },
+  {
+   "q": "amoxicillin dose and duration for strep pharyngitis in an adult",
+   "qType": "dosing",
+   "expectTopicId": "PHARYNGITIS",
+   "expectTopicName": "Acute Pharyngitis",
+   "isGapProbe": false,
+   "note": "dose=1; expect explicit amoxicillin/penicillin regimen and 10-day course."
+  },
+  {
+   "q": "which features in an acute asthma attack tell me it's life-threatening and needs ICU?",
+   "qType": "red_flags",
+   "expectTopicId": "asthma_exac",
+   "expectTopicName": "Asthma Exacerbation",
+   "isGapProbe": false,
+   "note": "Expect silent chest, exhaustion, low SpO2, normal/rising CO2, altered sensorium."
+  },
+  {
+   "q": "acute bronchitis vs pneumonia - how to differentiate at bedside",
+   "qType": "differential",
+   "expectTopicId": "ACUTE_BRONCHITIS",
+   "expectTopicName": "Acute Bronchitis",
+   "isGapProbe": false,
+   "note": "Expect vitals, focal signs, CXR indication distinguishing the two."
+  },
+  {
+   "q": "what workup should I order for a bronchiectasis exacerbation?",
+   "qType": "investigations",
+   "expectTopicId": "BRONCHIECTASIS_EXACERBATION",
+   "expectTopicName": "Bronchiectasis Exacerbation",
+   "isGapProbe": false,
+   "note": "Expect sputum culture, CBC/CRP, prior isolates, CXR/HRCT relevance."
+  },
+  {
+   "q": "safe antibiotic for acute bacterial sinusitis in a pregnant patient?",
+   "qType": "special_population",
+   "expectTopicId": "SINUSITIS",
+   "expectTopicName": "Acute Sinusitis",
+   "isGapProbe": false,
+   "note": "Pregnancy special-population; expect amoxicillin/amox-clav preference, avoid doxy/fluoroquinolone."
+  },
+  {
+   "q": "exact salbutamol and steroid doses for a moderate asthma exacerbation in the ED",
+   "qType": "dosing",
+   "expectTopicId": "asthma_exac",
+   "expectTopicName": "Asthma Exacerbation",
+   "isGapProbe": true,
+   "note": "GAP: asthma_exac has rx but dose=0 - probes whether it invents dosing it doesn't hold."
+  },
+  {
+   "q": "how do I manage long-term COPD in a patient with stage 4 CKD - which inhalers/drugs need adjusting?",
+   "qType": "special_population",
+   "expectTopicId": "chronic_obstructive_pulmonary_disease",
+   "expectTopicName": "COPD",
+   "isGapProbe": true,
+   "note": "GAP: chronic_obstructive_pulmonary_disease is reference-only (t:R, rx=0, dose=0); renal special-population management should be declined/deferred."
+  },
+  {
+   "q": "best anticoagulation regimen for acute submassive pulmonary embolism?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Pulmonary Embolism (not in inventory)",
+   "isGapProbe": true,
+   "note": "GAP/out-of-scope: PE not in inventory; must not fabricate an answer."
+  },
+  {
+   "q": "how do I confirm dengue - NS1 vs IgM, when to send which?",
+   "qType": "diagnosis",
+   "expectTopicId": "DENGUE",
+   "expectTopicName": "Dengue Fever",
+   "isGapProbe": false,
+   "note": "Diagnostic test timing/selection for dengue."
+  },
+  {
+   "q": "management of amoebic liver abscess - when do I aspirate vs just metronidazole?",
+   "qType": "management",
+   "expectTopicId": "AMOEBIC_LIVER_ABSCESS",
+   "expectTopicName": "Amoebic Liver Abscess",
+   "isGapProbe": false,
+   "note": "Core management incl aspiration indication."
+  },
+  {
+   "q": "leptospirosis red flags - what tells me it's turning into Weil's / severe disease?",
+   "qType": "red_flags",
+   "expectTopicId": "LEPTOSPIROSIS",
+   "expectTopicName": "Leptospirosis",
+   "isGapProbe": false,
+   "note": "Severity/red-flag features of severe lepto."
+  },
+  {
+   "q": "ddx for a young adult with acute hepatitis and jaundice?",
+   "qType": "differential",
+   "expectTopicId": "VIRAL_HEPATITIS",
+   "expectTopicName": "Acute Viral Hepatitis",
+   "isGapProbe": false,
+   "note": "Differential of acute hepatitic jaundice."
+  },
+  {
+   "q": "suspected miliary TB - what workup do I order?",
+   "qType": "investigations",
+   "expectTopicId": "DISSEMINATED_TB",
+   "expectTopicName": "Miliary TB",
+   "isGapProbe": false,
+   "note": "Investigation panel for disseminated TB."
+  },
+  {
+   "q": "what's the dose of the antiviral for dengue?",
+   "qType": "dosing",
+   "expectTopicId": "DENGUE",
+   "expectTopicName": "Dengue Fever",
+   "isGapProbe": true,
+   "note": "Gap probe: DENGUE has dose=0 and no specific antiviral - assistant should decline, not invent a dose."
+  },
+  {
+   "q": "empiric antibiotics for chikungunya?",
+   "qType": "empiric_antibiotics",
+   "expectTopicId": "CHIKUNGUNYA",
+   "expectTopicName": "Chikungunya",
+   "isGapProbe": true,
+   "note": "Gap probe: no reference-only (t:R,rx:0) topic exists in inventory; chikungunya is viral with no antibiotic role - honest analog. Assistant should say abx not indicated, not fabricate a regimen."
+  },
+  {
+   "q": "dengue in third trimester - anything different in how I manage her?",
+   "qType": "special_population",
+   "expectTopicId": "DENGUE",
+   "expectTopicName": "Dengue Fever",
+   "isGapProbe": false,
+   "note": "Pregnancy special population for dengue."
+  },
+  {
+   "q": "doxycycline dose in leptospirosis if the patient has renal impairment?",
+   "qType": "special_population",
+   "expectTopicId": "LEPTOSPIROSIS",
+   "expectTopicName": "Leptospirosis",
+   "isGapProbe": false,
+   "note": "Renal-impairment dosing adjustment; LEPTO has dose=1."
+  },
+  {
+   "q": "TBM started on ATT and steroids - what next? give it to me in detail, taper and monitoring",
+   "qType": "follow_up",
+   "expectTopicId": "CNS_TB",
+   "expectTopicName": "TB Meningitis",
+   "isGapProbe": false,
+   "note": "Follow-up / next-steps style, steroid taper and monitoring."
+  },
+  {
+   "q": "doxycycline dose for scrub typhus?",
+   "qType": "out_of_scope",
+   "expectTopicId": null,
+   "expectTopicName": "Scrub Typhus (not in inventory)",
+   "isGapProbe": true,
+   "note": "Gap probe out_of_scope: scrub typhus is a plausible tropical fever but not in the inventory - assistant should acknowledge it lacks this topic."
+  }
+ ]
+}
