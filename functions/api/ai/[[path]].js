@@ -54,6 +54,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, 
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
+import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 } }; }
 function parseCandidates(data, status) {
@@ -275,6 +276,20 @@ export async function onRequest(context) {
 
   if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
 
+  // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
+  if (seg === "admin") {
+    const want = env.UPDATES_ADMIN_TOKEN || "";
+    const url = new URL(request.url);
+    const got = (request.headers.get("X-Admin-Token") || url.searchParams.get("token") || "");
+    if (!want || got !== want) return json({ error: "forbidden" }, 403);
+    const rep = await adminReport(env);
+    if (url.searchParams.get("format") === "csv") {
+      const rows = [["account", "tokens", "general", "case", "ocr"]].concat((rep.accounts || []).map((a) => [a.acct, a.tokens, a.general, a.case, a.ocr]));
+      return new Response(rows.map((r) => r.join(",")).join("\n"), { headers: { "Content-Type": "text/csv", "Cache-Control": "no-store" } });
+    }
+    return json(rep);
+  }
+
   if (seg === "health") {
     const order = providerOrder(env);
     const vAvail = PROVIDERS.vertex.available(env), dAvail = PROVIDERS.developer.available(env);
@@ -315,8 +330,13 @@ export async function onRequest(context) {
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
+        const gate = await checkQuota(env, request, hasDx ? "case" : "general");
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
         const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
-        const text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT);
+        let text;
+        try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });
@@ -324,7 +344,11 @@ export async function onRequest(context) {
       // Legacy fallback: plain engine summary string (backward compatible).
       const summary = String(body.summary || "").slice(0, MAX_IN_CHARS);
       if (!summary) return json({ error: "no summary" }, 400);
-      const text = await callGemini(env, [{ text: EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "") }], MAX_OUT);
+      const gate = await checkQuota(env, request, "case");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
+      const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
     }
     if (seg === "vision") {
@@ -333,7 +357,13 @@ export async function onRequest(context) {
       const mime = (b64.match(/^data:([^;]+);base64,/) || [])[1] || "image/jpeg";
       b64 = b64.replace(/^data:[^;]+;base64,/, "");
       if (!b64) return json({ error: "no image" }, 400);
-      const text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }]);
+      const gate = await checkQuota(env, request, "ocr");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      let text;
+      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
+      // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
+      await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
       const fields = parseJsonLoose(text) || {};
       return json({ kind: kind, fields: fields });
     }
