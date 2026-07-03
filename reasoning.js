@@ -3069,6 +3069,17 @@
    * image, to Google — only when explicitly enabled.
    * ---------------------------------------------------------------------- */
   function aiBase() { var h = location.hostname; return window.AI_PROXY || ((h === "localhost" || h === "127.0.0.1") ? "" : "/api/ai"); }
+  // Attach the Firebase ID token so the server can derive the user's identity for
+  // usage metering / quotas (server verifies it; browser userId is never trusted).
+  // No signed-in user → plain headers (server applies a small guest quota by IP).
+  function aiHeaders() {
+    var base = { "Content-Type": "application/json" };
+    try {
+      var u = window.firebase && firebase.auth && firebase.auth().currentUser;
+      if (u && u.getIdToken) return u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; });
+    } catch (e) {}
+    return Promise.resolve(base);
+  }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
   window.SMD_AI = {
     on: aiOn,
@@ -3076,7 +3087,7 @@
     status: function () { var b = aiBase(); if (!b) return Promise.resolve({ enabled: false }); return fetch(b + "/status").then(function (r) { return r.json(); }).catch(function () { return { enabled: false }; }); },
     explain: function (summary, question) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ summary: summary, question: question || "" }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ summary: summary, question: question || "" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
@@ -3084,11 +3095,11 @@
     explainGrounded: function (pkg) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
-      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ package: pkg }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     }
   };
   /* ====================================================================== *
