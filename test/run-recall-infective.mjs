@@ -28,12 +28,14 @@ const RECOVER = [
   { id: "gc_272", accept: ["LUNG_ABSCESS"] },
   { id: "gc_131", accept: ["LIVER_ABSCESS"] }, { id: "gc_271", accept: ["LIVER_ABSCESS"] }, { id: "gc_411", accept: ["LIVER_ABSCESS"] },
   { id: "gc_103", accept: ["AMOEBIC_LIVER_ABSCESS"] }, { id: "gc_243", accept: ["AMOEBIC_LIVER_ABSCESS"] },
+  { id: "gc_084", accept: ["CHOLANGITIS"] }, { id: "gc_111", accept: ["CHOLANGITIS"] },
 ];
 // Correct-therapy checks: leading treatment must contain the expected drug token.
 const THERAPY = [
   { id: "gc_121", drug: "isoniazid" },     // disseminated TB -> RIPE
   { id: "gc_117", drug: "vancomycin" },    // C. diff -> oral vancomycin
   { id: "gc_103", drug: "metronidazole" }, // amoebic liver abscess -> metronidazole
+  { id: "gc_084", drug: "piperacillin" },  // ascending cholangitis -> pip-tazo / ceftriaxone+metronidazole
 ];
 
 function loadCase(id) {
