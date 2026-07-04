@@ -1245,12 +1245,14 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
     if (window.__smdSpyWired) return;
     window.__smdSpyWired = true;
 
-    var OFFSET = 20;     // gap from the (sticky) header down to the focus line
+    var ACTIVATE_FRAC = 0.42; // a section opens once its header reaches ~42% down the viewport
     var HYST = 2;        // px hysteresis so a header resting on the line doesn't flip-flop
     var PAUSE_MS = 3500; // after a manual toggle, leave the accordion alone this long
     var pausedUntil = 0;
     var raf = false;
     var mutating = false;
+    var current = 0;     // index of the section we consider active (stepped ±1 as you scroll)
+    var lastFirst = null;// first card seen last time — detects a fresh results render
 
     function oa() { return document.getElementById("outputArea"); }
     function cards() {
@@ -1265,8 +1267,10 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
     }
     function focusLine() {
       var head = document.querySelector(".app-head");
-      var b = head ? head.getBoundingClientRect().bottom : 0;
-      return Math.max(b, 0) + OFFSET;
+      var b = head ? Math.max(head.getBoundingClientRect().bottom, 0) : 0;
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      // ~42% down the screen, but never tucked up under the sticky header
+      return Math.max(b + 12, Math.round(vh * ACTIVATE_FRAC));
     }
     // With only one section open the page can get short — so a later section's
     // header may never be able to scroll up to the focus line. A trailing
@@ -1298,13 +1302,25 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
       var h = Math.round(shortfall) + "px";
       if (spacer.style.height !== h) spacer.style.height = h;
     }
-    function activeIndex(list) {
-      var fl = focusLine(), idx = 0;
-      for (var i = 0; i < list.length; i++) {
-        var h = hdr(list[i]); if (!h) continue;
-        if (h.getBoundingClientRect().top - HYST <= fl) idx = i; else break;
-      }
-      return idx;
+    function stateMatches(list, idx) {
+      for (var i = 0; i < list.length; i++) if ((i === idx) !== isOpen(list[i])) return false;
+      return true;
+    }
+    // Open `idx`, collapse the rest — instantly — and keep the anchor header
+    // pinned in place so the page never jumps.
+    function applyOpen(list, idx, o) {
+      var anchor = hdr(list[idx]);
+      var before = anchor ? anchor.getBoundingClientRect().top : 0;
+      mutating = true;
+      o.classList.add("smd-spy-instant");
+      for (var j = 0; j < list.length; j++) setOpen(list[j], j === idx);
+      sizeSpacer(true);
+      var after = anchor ? anchor.getBoundingClientRect().top : 0; // read forces reflow
+      var delta = Math.round(after - before);
+      if (delta) window.scrollBy(0, delta);
+      requestAnimationFrame(function () {
+        o.classList.remove("smd-spy-instant"); mutating = false; sizeSpacer(false);
+      });
     }
 
     function run() {
@@ -1319,27 +1335,24 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
       }
       o.classList.add("smd-spy-on");            // enables overflow-anchor:none
 
-      var active = activeIndex(list);
-      var changed = false;
-      for (var i = 0; i < list.length; i++) {
-        if ((i === active) !== isOpen(list[i])) { changed = true; break; }
-      }
-      if (!changed) { sizeSpacer(false); return; }
+      // a fresh set of results → start from the top again
+      if (list[0] !== lastFirst) { lastFirst = list[0]; current = 0; }
+      var idx = Math.min(Math.max(current, 0), list.length - 1);
 
-      var anchor = hdr(list[active]);
-      var before = anchor ? anchor.getBoundingClientRect().top : 0;
+      // make sure exactly `idx` is open, so the measurements below are meaningful
+      if (!stateMatches(list, idx)) { applyOpen(list, idx, o); current = idx; return; }
 
-      mutating = true;
-      o.classList.add("smd-spy-instant");        // collapse/expand with no animation → exact heights
-      for (var j = 0; j < list.length; j++) setOpen(list[j], j === active);
-      sizeSpacer(true);                          // keep scroll room ready before we re-anchor
-      var after = anchor ? anchor.getBoundingClientRect().top : 0; // read forces reflow
-      var delta = Math.round(after - before);
-      if (delta) window.scrollBy(0, delta);      // keep the section you're reading fixed
-      // re-enable the animation for subsequent manual taps, and release the mutation guard
-      requestAnimationFrame(function () {
-        o.classList.remove("smd-spy-instant"); mutating = false; sizeSpacer(false);
-      });
+      // step toward the section sitting on the focus line — at most one step per
+      // frame; we re-schedule so a fast scroll still converges over a few frames.
+      var fl = focusLine();
+      var self = hdr(list[idx]).getBoundingClientRect().top;
+      var next = idx < list.length - 1 ? hdr(list[idx + 1]).getBoundingClientRect().top : Infinity;
+      var target = idx;
+      if (idx < list.length - 1 && next - HYST <= fl) target = idx + 1;      // next section reached the line → open it
+      else if (idx > 0 && self > fl + HYST) target = idx - 1;                // this section dropped below the line → go back
+
+      if (target !== idx) { applyOpen(list, target, o); current = target; schedule(); }
+      else sizeSpacer(false);
     }
     function schedule() { if (!raf) { raf = true; requestAnimationFrame(run); } }
 
