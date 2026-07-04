@@ -608,12 +608,34 @@
            .map(function (g) { return { id: g.group, label: g.group, icon: "•", groups: [g.group] }; });
     return ONT;
   }
+  // Cardinal / most-common presenting symptoms, floated to the top of their system's
+  // finding list so they are never buried under "Show more". Needed because a system
+  // tab concatenates its infective group first and its non-infective group after
+  // (augmentFindingInputs), which pushed common signs like oliguria (renal failure) or
+  // dyspnea (cardiac) below infective-specific findings. Higher weight = more common.
+  // DISPLAY-ONLY: fieldsForSystem feeds the picker + topFindings, never scoring, the
+  // infection gate, or the differential. Systems already led by their cardinal symptom
+  // (Respiratory→cough, Neuro→headache, GI→abdominal pain) are intentionally NOT listed,
+  // so their existing order is preserved unchanged.
+  var COMMON_FIRST = {
+    // Renal / Urinary — oliguria is the cardinal acute-renal sign; UTI symptoms next.
+    oliguria: 96, dysuria: 94, flankPain: 90, hematuria: 86, urinaryFrequency: 84,
+    feverGU: 70, costovertebralTenderness: 66, proteinuria: 62, urinaryRetention: 58,
+    // Cardiac / Vascular — common cardiac presentations above endocarditis-specific findings.
+    chestPain: 96, dyspnea: 92, palpitations: 86, exertionalChestPain: 84, orthopnea: 74, raisedJVP: 66
+  };
+  // stable ordering: by commonness weight (desc), original position for ties/unlisted.
+  function orderByCommonness(fields) {
+    return fields.map(function (f, i) { return { f: f, i: i, w: COMMON_FIRST[f.key] || 0 }; })
+      .sort(function (a, b) { return (b.w - a.w) || (a.i - b.i); })
+      .map(function (x) { return x.f; });
+  }
   function fieldsForSystem(sysId) {
     var sp = null; SYSPICK.forEach(function (x) { if (x.id === sysId) sp = x; });
     if (!sp) return { sp: null, fields: [] };
     var out = [];
     (sp.groups || []).forEach(function (gn) { ONT.forEach(function (g) { if (g.group === gn) out = out.concat(g.fields); }); });
-    return { sp: sp, fields: out };
+    return { sp: sp, fields: orderByCommonness(out) };
   }
   function lbl(k) { return LABEL[k] || k; }
 
