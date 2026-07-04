@@ -678,7 +678,7 @@
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
-          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"></a>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name">MaiKnowledge</span></a>' +
           '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
@@ -1409,7 +1409,7 @@
     var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
     // v4 home adds an editorial serif (Newsreader) for the wordmark + greeting.
     var fam = "Inter:wght@400;500;600;700;800";
-    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600";
+    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Dancing+Script:wght@500;600;700";
     l.href = "https://fonts.googleapis.com/css2?family=" + fam + "&display=swap";
     document.head.appendChild(l);
   }
