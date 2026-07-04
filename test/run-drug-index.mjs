@@ -104,6 +104,19 @@ try {
   ok(oc.reviewed === 2 && oc.major === 1, "omeprazole + clopidogrel -> a major CYP2C19 finding");
   ok(await ev(`var r=INTERACTIONS.checkInteractions([MEDLIST.parseEntry("ondansetron 4 tds"),MEDLIST.parseEntry("levofloxacin 500 od")]); return r.major.some(function(f){return /qt|torsade|repolaris/i.test((f.effect||"")+(f.mechanism||""));});`) === true, "the ondansetron+levofloxacin finding is QT-related");
 
+  // ---- 10. Results "What now?" — remove an implicated drug and re-check ---------
+  await ev(`MEDLIST.clearAll(); ["warfarin 5 od","aspirin 75 od","ibuprofen 400 tds"].forEach(function(s){MEDLIST.add(MEDLIST.parseEntry(s),"manual");}); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
+  await sleep(120);
+  ok(await ev(`return !!document.querySelector("#ml-test .mlr-whatnow-btn")`) === true, "results finding has a 'What now?' control");
+  await ev(`document.querySelector("#ml-test .mlr-whatnow-btn").click(); return 1;`);
+  await sleep(80);
+  ok(await ev(`return document.querySelectorAll("#ml-test .mlr-remove-drug").length >= 1`) === true, "'What now?' offers Remove-medicine actions");
+  const beforeN = await ev(`return MEDLIST.getList().length`);
+  await ev(`document.querySelector("#ml-test .mlr-remove-drug").click(); return 1;`);
+  await sleep(150);
+  ok(await ev(`return MEDLIST.getList().length`) === beforeN - 1, "'What now? → Remove' drops the medicine from the list");
+  ok(await ev(`return !!document.querySelector("#ml-test .mlr-summary-panel") || /Add at least 2/i.test(document.getElementById("ml-test").innerText)`) === true, "removing re-runs the check (or returns to the list if <2 remain)");
+
   console.log(fails === 0 ? "\nALL GREEN — drug-index / redesign test passed" : `\n${fails} FAILED`);
 } catch (e) {
   console.error("FATAL", e && e.message || e); fails++;
