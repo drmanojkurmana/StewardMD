@@ -63,7 +63,7 @@
           if (anyOf(sel, ["spreading", "systemic", "immuno"])) return { emergency: false, ladder: 2, catg: "Dental abscess with spreading cellulitis / systemic or host risk",
             sc: "Still drain + treat the tooth (extraction / endodontics) — source control remains definitive.", ref: "Dentist / OMFS promptly; lower threshold to admit if not settling.", mgmt: ["Add an oral antibiotic per local guidance — indicated here because of spreading cellulitis, systemic features or immunocompromise.", "Antibiotics are an adjunct to drainage, never a replacement; review at 48–72 h and escalate if worsening."] };
           return { emergency: false, ladder: 1, catg: "Suspected early / localised dental infection",
-            sc: "Local measures + arrange definitive dental assessment (drainage / extraction / endodontics) as the source control.", ref: "Dentist for definitive care; safety-net for spreading swelling, trismus or airway symptoms.", mgmt: ["Analgesia + local measures; antibiotics usually NOT needed if localised and drainable.", "Antibiotics only if spreading, systemic or immunocompromised."] };
+            sc: "Local measures + arrange definitive dental assessment (drainage / extraction / endodontics) as the source control.", ref: "Dentist for definitive care; safety-net for spreading swelling, trismus or airway symptoms.", mgmt: ["Analgesia + local measures; antibiotics usually NOT needed if localised and drainable.", "Antibiotics do not fix a tooth — arrange the dental procedure; antibiotics only if spreading, systemic or immunocompromised.", "Floor-of-mouth swelling or trismus = escalate, not another antibiotic course."] };
         }
       },
       /* ───────────── Spreading odontogenic infection (fascial-space) ───────────── */
@@ -168,6 +168,79 @@
             sc: "Professional debridement (ultrasonic / gentle mechanical) + oral-hygiene instruction is the mainstay.", ref: "Dentist / OMFS; investigate for underlying immunocompromise if severe or recurrent.", mgmt: ["Add an oral antibiotic (metronidazole-class / anaerobic cover) per local guidance — indicated here for systemic features or immunocompromise.", "Debridement + chlorhexidine rinses + analgesia + smoking cessation remain central; antibiotics are an adjunct."] };
           return { emergency: false, ladder: 1, catg: "Localised ANUG",
             sc: "Professional debridement (remove plaque / calculus) + meticulous oral hygiene; antiseptic (e.g. chlorhexidine) mouthrinse.", ref: "Dentist for debridement and follow-up.", mgmt: ["Antibiotics usually NOT needed for localised ANUG without systemic features — debridement + oral hygiene are first-line.", "Add a metronidazole-class antibiotic per local guidance only if systemic upset or immunocompromise; analgesia + smoking cessation."] };
+        }
+      },
+      /* ───────────── Dental trauma / avulsed tooth (TIME-CRITICAL) ───────────── */
+      {
+        id: "dental_trauma", name: "Dental trauma / avulsed tooth",
+        q: [
+          { id: "avulsed_perm", label: "PERMANENT tooth knocked completely out (avulsed)" },
+          { id: "avulsed_primary", label: "It is a baby / deciduous tooth (child)" },
+          { id: "luxation", label: "Tooth loosened / displaced / pushed in (luxation)" },
+          { id: "fracture", label: "Crown fracture ± exposed pink pulp / bleeding from tooth" },
+          { id: "softtissue", label: "Lip / gingival laceration; dirty wound (tetanus risk)" }
+        ],
+        danger: [
+          { id: "aspiration", label: "Tooth / fragment not found — could be inhaled (cough, wheeze, ↓air entry)" },
+          { id: "headinjury", label: "LOC / vomiting / amnesia — head injury features" },
+          { id: "mandible", label: "Malocclusion / mandibular step / can't close teeth (facial #)" }
+        ],
+        assess: function (sel) {
+          if (has(sel, "aspiration")) return { emergency: true, ladder: 5, catg: "Missing tooth / fragment — exclude aspiration into the airway",
+            sc: "Account for every fragment. If not found and not swallowed, assume inhaled — CXR (chest ± soft-tissue neck) to locate it; bronchoscopy if in the airway.", ref: "Emergency — resuscitation/airway team; ENT/respiratory for retrieval.", mgmt: ["An unaccounted tooth is inhaled until proven otherwise — image before assuming it was swallowed.", "Reimplantation is irrelevant until the airway is cleared."] };
+          if (anyOf(sel, ["headinjury", "mandible"])) return { emergency: true, ladder: 4, catg: "Dental trauma with head injury / facial fracture",
+            sc: "Treat as trauma: assess ABC / C-spine / GCS first. Image facial skeleton (OPG ± CT) before definitive dental care.", ref: "Emergency / maxillofacial — dental injury is secondary to the head/facial injury.", mgmt: ["Do not focus on the tooth while a head injury or airway is unaddressed.", "Reimplant an avulsed permanent tooth in parallel if feasible (still time-critical), but ABC comes first."] };
+          if (has(sel, "avulsed_primary")) return { emergency: false, ladder: 1, catg: "Avulsed PRIMARY (deciduous) tooth — do NOT reimplant",
+            sc: "Do NOT reimplant a baby tooth — it risks damaging the developing permanent successor. Local measures for the socket; find the tooth (exclude aspiration).", ref: "Dentist / paediatric dental review.", mgmt: ["Reimplantation applies to PERMANENT teeth only — never reimplant a deciduous tooth.", "Reassure; soft diet; safety-net for aspiration and infection."] };
+          if (has(sel, "avulsed_perm")) return { emergency: true, ladder: 4, catg: "Avulsed PERMANENT tooth — REIMPLANT ASAP (time-critical)",
+            sc: "REIMPLANT IMMEDIATELY — success falls sharply after ~30–60 min dry. Hold by the CROWN, do NOT touch/scrub the root, rinse gently in saline/milk if dirty, reseat into the socket and have the patient bite on gauze. If you can't reimplant, STORE in milk (or the patient's own saliva / cheek, or HBSS) — never dry, never water. Then splint at the dentist.", ref: "Immediate dentist / OMFS for splinting; time is the outcome.", mgmt: ["Store in MILK or saliva, never dry or in water — dry time is what kills the tooth.", "Update tetanus; add antibiotics per local guidance as an adjunct after reimplantation (contaminated wound), not instead of the procedure.", "Reimplantation is the emergency; splinting and endodontics follow."] };
+          return { emergency: false, ladder: 1, catg: "Dental fracture / luxation / soft-tissue injury",
+            sc: "Reposition a luxated tooth and splint; cover an exposed pulp / dentine; clean and close soft-tissue lacerations; account for all fragments.", ref: "Prompt dentist / OMFS for splinting and pulp management.", mgmt: ["Pulp exposure (bleeding from the tooth) needs urgent dental care to save the tooth.", "Update tetanus for dirty wounds; antibiotics only for contaminated soft-tissue wounds per local guidance.", "Analgesia; soft diet; avoid biting on the injured tooth."] };
+        }
+      },
+      /* ───────────── Post-extraction bleeding ───────────── */
+      {
+        id: "post_extraction_bleeding", name: "Post-extraction bleeding",
+        q: [
+          { id: "oozing", label: "Bleeding / oozing from socket after extraction" },
+          { id: "anticoag", label: "On anticoagulant / antiplatelet" },
+          { id: "bleeddis", label: "Known bleeding disorder / liver disease" },
+          { id: "persistent", label: "Continues despite biting on gauze ≥ 20 min" }
+        ],
+        danger: [
+          { id: "unstable", label: "Large-volume bleed / haemodynamic instability / pallor" },
+          { id: "airway", label: "Aspiration / can't manage blood in mouth / airway concern" }
+        ],
+        assess: function (sel) {
+          if (anyOf(sel, ["unstable", "airway"])) return { emergency: true, ladder: 5, catg: "Uncontrolled post-extraction bleeding — resuscitate",
+            sc: "Resuscitate (ABC, IV access, group & save); firm local pressure; correct/reverse coagulopathy per protocol while arranging definitive local haemostasis.", ref: "Emergency + maxillofacial / OMFS now.", mgmt: ["This is bleeding control, not an infection — antibiotics are NOT the treatment.", "Reverse anticoagulation per protocol; check FBC / clotting; do not stop lifelong anticoagulants without advice."] };
+          if (anyOf(sel, ["persistent", "anticoag", "bleeddis"])) return { emergency: false, ladder: 1, catg: "Post-extraction bleeding needing local haemostasis",
+            sc: "Local measures: sustained firm bite on a gauze (or tea-bag) pack ~20 min; if it continues — LA with vasoconstrictor, pack the socket with a haemostatic dressing, and SUTURE; tranexamic acid mouthwash helps. Review anticoagulation with the prescriber, don't just stop it.", ref: "Dentist / OMFS if bleeding persists after local measures.", mgmt: ["Firm pressure is first-line and usually enough — reassure and re-pack rather than reach for antibiotics.", "Assess anticoagulant/antiplatelet drugs and bleeding history; check clotting if a disorder is suspected.", "Antibiotics NOT indicated for bleeding itself."] };
+          return { emergency: false, ladder: 0, catg: "Expected minor post-extraction ooze",
+            sc: "Sustained firm bite on a rolled gauze pack over the socket for ~20 min; sit up, avoid rinsing, spitting, smoking or hot fluids for 24 h.", ref: "Safety-net; return if bleeding is heavy or persistent.", mgmt: ["Minor oozing settles with pressure and clot-protection advice — antibiotics NOT indicated.", "Avoid disturbing the clot (no vigorous rinsing/spitting) for 24 h."] };
+        }
+      },
+      /* ───────────── TMJ (jaw) dislocation ───────────── */
+      {
+        id: "tmj_dislocation", name: "TMJ (jaw) dislocation",
+        q: [
+          { id: "openlock", label: "Jaw locked OPEN / can't close the mouth" },
+          { id: "difficulty", label: "Difficulty speaking / swallowing / drooling" },
+          { id: "bilateral", label: "Bilateral (jaw deviated forward) vs unilateral (chin to opposite side)" },
+          { id: "recurrent", label: "Recurrent / prior dislocations" },
+          { id: "spontaneous", label: "After yawning / laughing / dental work (non-traumatic)" }
+        ],
+        danger: [
+          { id: "trauma", label: "Significant trauma / suspected mandibular fracture (malocclusion, step, numbness)" },
+          { id: "chronic", label: "Dislocated > 24–48 h / repeated failed reductions" }
+        ],
+        assess: function (sel) {
+          if (has(sel, "trauma")) return { emergency: true, ladder: 4, catg: "Jaw dislocation with suspected fracture — do NOT blindly reduce",
+            sc: "IMAGE FIRST (OPG / facial CT) — do not attempt reduction if a fracture is possible. Fracture-dislocation needs surgical management.", ref: "Urgent maxillofacial / OMFS.", mgmt: ["A traumatic 'locked jaw' may be a fracture, not a simple dislocation — image before manipulating.", "Antibiotics NOT relevant unless there is an open fracture / wound."] };
+          if (has(sel, "chronic")) return { emergency: false, ladder: 0, catg: "Chronic / recurrent TMJ dislocation — specialist reduction",
+            sc: "May need reduction under sedation/GA; recurrent cases may need definitive OMFS management. Simple bedside reduction often fails.", ref: "Maxillofacial / OMFS.", mgmt: ["Antibiotics NOT indicated.", "Recurrent dislocation warrants specialist assessment for definitive treatment."] };
+          return { emergency: false, ladder: 0, catg: "Acute non-traumatic TMJ dislocation — reduce",
+            sc: "MANUAL REDUCTION: thumbs (gauze-wrapped) on the lower molars, press DOWN and BACK to relocate the condyles; analgesia ± muscle relaxation aids relaxation. Support the jaw after; soft diet; avoid wide mouth opening (support the chin when yawning) for a few weeks.", ref: "Dentist / OMFS if reduction fails or it recurs.", mgmt: ["This is a mechanical problem — reduction is the treatment; antibiotics NOT indicated.", "After reduction advise against wide opening; refer for recurrent dislocations.", "If bedside reduction fails, do not persist — refer for reduction under sedation."] };
         }
       }
     ]

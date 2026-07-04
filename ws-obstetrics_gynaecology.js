@@ -12,10 +12,15 @@
 
    The recurring OBGYN theme is separating mild, self-limiting disease
    (uncomplicated vaginitis, outpatient PID) from the true obstetric / gynae
-   EMERGENCIES: ruptured ectopic (a surgical / bleeding problem, NOT infective),
-   chorioamnionitis, septic abortion and tubo-ovarian abscess. When sepsis needs
-   critical-care or medical co-management the notes flag IM/ICU involvement —
-   OBGYN remains the primary owner of all conditions here.
+   EMERGENCIES. Several of the killers are NOT infective and antibiotics are NOT
+   the answer — ruptured ectopic and postpartum haemorrhage are BLEEDING, eclampsia
+   is SEIZURE + severe HYPERTENSION (magnesium + BP control + delivery), ovarian
+   torsion is a SURGICAL emergency. Others are infective and need source control
+   as much as antibiotics: chorioamnionitis, septic abortion, endometritis and
+   tubo-ovarian abscess. For every woman of reproductive age with abdominal pain,
+   DO A PREGNANCY TEST. When sepsis needs critical-care or medical co-management
+   the notes flag IM/ICU involvement — OBGYN remains the primary owner of all
+   conditions here.
 
    Advisory only. Verify against local protocol, imaging, and the individual patient. */
 (function () {
@@ -118,6 +123,45 @@
             mgmt: ["Antibiotics are not relevant here — the concern is early-pregnancy bleeding.", "Confirm pregnancy status before proceeding."] };
         }
       },
+      /* ───────────────────── Miscarriage (threatened / incomplete) ───────────────────── */
+      {
+        id: "miscarriage", name: "Miscarriage (early-pregnancy bleeding)",
+        q: [
+          { id: "positive", label: "Positive pregnancy test / known early pregnancy" }, { id: "bleeding", label: "PV bleeding / spotting" },
+          { id: "cramping", label: "Cramping / lower abdominal pain" }, { id: "tissue", label: "Passed products / tissue" },
+          { id: "os_open", label: "Cervical os open / products in os" }, { id: "rh_neg", label: "Rh-negative mother" }
+        ],
+        danger: [
+          { id: "shock", label: "Heavy bleeding / shock / haemodynamic instability" },
+          { id: "sepsis", label: "Fever / offensive discharge (septic abortion)" }, { id: "severe_pain", label: "Severe / unilateral pain (exclude ectopic)" }
+        ],
+        assess: function (sel) {
+          if (has(sel, "shock")) return { emergency: true, ladder: 4, catg: "Incomplete miscarriage with heavy bleeding — BLEEDING emergency",
+            sc: "Resuscitate (IV access, group & crossmatch); remove products from the os; urgent surgical / medical uterine evacuation stops the bleeding — antibiotics are NOT the treatment.",
+            ref: "Emergency OBGYN NOW.",
+            mgmt: ["Bleeding is from retained products — evacuate; transfuse per protocol.", "Give anti-D if Rh-negative per local policy."] };
+          if (has(sel, "sepsis")) return { emergency: true, ladder: 4, catg: "Septic miscarriage — open the septic abortion pathway",
+            sc: "Do NOT delay uterine evacuation of retained products; resuscitate + IV antibiotics.",
+            ref: "Urgent OBGYN; admit.",
+            mgmt: ["Fever + bleeding after/during miscarriage = septic abortion until proven otherwise.", "Open the septic abortion pathway for detail."] };
+          if (has(sel, "severe_pain")) return { emergency: false, ladder: 0, catg: "Early-pregnancy pain + bleeding — EXCLUDE ectopic first",
+            sc: "Urgent transvaginal USS + serial β-hCG before calling it a miscarriage — see the ectopic pathway.",
+            ref: "Urgent OBGYN / early-pregnancy unit.",
+            mgmt: ["Never diagnose miscarriage on symptoms alone — a ruptured ectopic can look identical and kills.", "Give anti-D if Rh-negative per local policy where indicated."] };
+          if (anyOf(sel, ["tissue", "os_open"])) return { emergency: false, ladder: 4, catg: "Incomplete miscarriage — needs evacuation",
+            sc: "USS to confirm retained products; expectant / medical / surgical evacuation per OBGYN — no antibiotics unless infected.",
+            ref: "OBGYN / early-pregnancy unit.",
+            mgmt: ["Antibiotics not routine — only if signs of infection.", "Give anti-D if Rh-negative per local policy."] };
+          if (has(sel, "positive")) return { emergency: false, ladder: 0, catg: "Threatened miscarriage (os closed) — supportive",
+            sc: "USS to confirm viability + location (exclude ectopic); no procedure if os closed.",
+            ref: "Early-pregnancy unit; safety-net.",
+            mgmt: ["Reassure but confirm intrauterine pregnancy on USS.", "Safety-net firmly for heavy bleeding, severe pain, dizziness or fever; anti-D if Rh-negative per local policy."] };
+          return { emergency: false, ladder: 0, catg: "Confirm pregnancy first",
+            sc: "Do a pregnancy test; if positive, image to locate and assess viability.",
+            ref: "Early-pregnancy unit if pregnancy confirmed.",
+            mgmt: ["A pregnancy test is mandatory in any reproductive-age woman with bleeding or pelvic pain."] };
+        }
+      },
       /* ───────────────────── Chorioamnionitis ───────────────────── */
       {
         id: "chorioamnionitis", name: "Chorioamnionitis",
@@ -138,6 +182,72 @@
             sc: "Delivery is the source control — expedite delivery once maternal condition allows; continuous fetal monitoring; involve neonatology.",
             ref: "Urgent OBGYN; admit to labour ward.",
             mgmt: ["Start IV broad-spectrum antibiotics per local guidance / ICMR promptly — do not delay for delivery.", "Monitor mother and fetus closely; antipyretics; escalate if sepsis develops."] };
+        }
+      },
+      /* ───────────────────── Pre-eclampsia / eclampsia ───────────────────── */
+      {
+        id: "pre_eclampsia", name: "Pre-eclampsia / eclampsia",
+        q: [
+          { id: "high_bp", label: "Raised BP (≥ 20 wk or postpartum)" }, { id: "proteinuria", label: "Proteinuria / new oedema" },
+          { id: "headache", label: "Severe headache" }, { id: "visual", label: "Visual disturbance / flashing lights" },
+          { id: "epigastric", label: "Epigastric / RUQ pain" }, { id: "brisk", label: "Brisk reflexes / clonus" }
+        ],
+        danger: [
+          { id: "seizure", label: "Seizure / loss of consciousness (eclampsia)" }, { id: "severe_htn", label: "Severe hypertension (crisis)" },
+          { id: "hellp", label: "Signs of HELLP / pulmonary oedema / oliguria" }, { id: "fetal_distress", label: "Non-reassuring fetal status" }
+        ],
+        assess: function (sel) {
+          if (has(sel, "seizure")) return { emergency: true, ladder: 5, catg: "ECLAMPSIA — magnesium + BP control + delivery (NOT an infection)",
+            sc: "Protect airway, left lateral, high-flow O₂; magnesium sulphate (per protocol, no dose here) to stop/prevent seizures; control severe BP (labetalol / nifedipine / hydralazine class); DELIVER once mother is stabilised — delivery is the definitive treatment.",
+            ref: "Emergency OBGYN + anaesthesia + neonatology NOW. IM/ICU for organ support.",
+            mgmt: ["Antibiotics are irrelevant — this is seizure + BP control, then delivery.", "Magnesium is standard for eclampsia (and severe pre-eclampsia prophylaxis); continue postpartum per protocol.", "Do not give too much fluid — risk of pulmonary oedema; monitor for HELLP."] };
+          if (anyOf(sel, ["severe_htn", "hellp", "fetal_distress"])) return { emergency: true, ladder: 5, catg: "Severe pre-eclampsia — urgent BP control + magnesium + plan delivery",
+            sc: "Urgent control of severe hypertension (labetalol / nifedipine / hydralazine class, per protocol); magnesium sulphate for seizure prophylaxis; expedite delivery per OBGYN; continuous fetal monitoring.",
+            ref: "Emergency OBGYN + anaesthesia; admit to labour ward. IM/ICU if HELLP / pulmonary oedema.",
+            mgmt: ["This is a hypertensive / obstetric emergency, not infective — no antibiotics.", "Magnesium prevents eclampsia; give steroids for fetal lung maturity if preterm, per protocol.", "Bloods for HELLP (platelets, LFTs, LDH, haemolysis); careful fluid balance."] };
+          if (anyOf(sel, ["headache", "visual", "epigastric", "brisk"])) return { emergency: true, ladder: 3, catg: "Pre-eclampsia with warning symptoms — admit",
+            sc: "Admit; monitor BP, urine protein, reflexes, bloods (HELLP screen) and fetus; low threshold for magnesium and delivery if it progresses.",
+            ref: "Urgent OBGYN; admit.",
+            mgmt: ["Symptomatic pre-eclampsia can progress to eclampsia fast — do not send home.", "Antibiotics not indicated; BP control and monitoring are the priority."] };
+          if (anyOf(sel, ["high_bp", "proteinuria"])) return { emergency: false, ladder: 0, catg: "Suspected pre-eclampsia — investigate",
+            sc: "Confirm BP, check urine protein and bloods; assess fetus; arrange close follow-up.",
+            ref: "OBGYN / antenatal review promptly.",
+            mgmt: ["Not infective — no antibiotics.", "Safety-net firmly for headache, visual symptoms, epigastric pain, reduced fetal movements or seizure."] };
+          return { emergency: false, ladder: 0, catg: "Check BP and urine in any pregnant woman",
+            sc: "Measure BP and dip urine — pre-eclampsia is often silent.",
+            ref: "Antenatal review.",
+            mgmt: ["Always check BP and urine in pregnancy ≥ 20 wk or postpartum."] };
+        }
+      },
+      /* ───────────────────── Postpartum haemorrhage ───────────────────── */
+      {
+        id: "postpartum_haemorrhage", name: "Postpartum haemorrhage",
+        q: [
+          { id: "heavy_bleed", label: "Heavy PV bleeding after delivery" }, { id: "atony", label: "Soft / poorly contracted uterus (atony)" },
+          { id: "retained", label: "Retained placenta / products" }, { id: "trauma", label: "Genital tract tear / trauma" },
+          { id: "risk", label: "Risk factors (prolonged / augmented labour, multiple pregnancy, previous PPH)" }
+        ],
+        danger: [
+          { id: "shock", label: "Shock / collapse / ongoing massive bleeding" },
+          { id: "coag", label: "Coagulopathy / oozing from puncture sites (DIC)" }
+        ],
+        assess: function (sel) {
+          if (anyOf(sel, ["shock", "coag"])) return { emergency: true, ladder: 5, catg: "Massive postpartum haemorrhage — BLEEDING emergency (NOT infective)",
+            sc: "Activate massive-haemorrhage protocol: ABC, two large-bore cannulae, group & crossmatch, transfuse + tranexamic acid; uterine massage + uterotonics; find & treat the cause (atony, retained tissue, trauma, thrombin); escalate to bimanual compression, balloon tamponade, EUA/evacuation, surgical control (B-Lynch, ligation, hysterectomy).",
+            ref: "Emergency OBGYN + anaesthesia + haematology NOW. IM/ICU for resuscitation.",
+            mgmt: ["Antibiotics are NOT the treatment — this is bleeding control (4 T's: Tone, Tissue, Trauma, Thrombin).", "Uterotonics + uterine massage first-line for atony; give tranexamic acid early.", "Correct coagulopathy; transfuse per protocol."] };
+          if (anyOf(sel, ["retained", "trauma"])) return { emergency: true, ladder: 4, catg: "PPH with retained tissue / genital tract trauma — source control",
+            sc: "Retained products → uterine evacuation; genital tract tear → suture/repair; examine under anaesthesia if needed — this is the definitive treatment.",
+            ref: "Urgent OBGYN; theatre.",
+            mgmt: ["Find the cause among the 4 T's; uterotonics + massage while arranging source control.", "Give prophylactic antibiotics around manual removal / evacuation per local policy — antibiotics are adjunct, not the treatment."] };
+          if (anyOf(sel, ["heavy_bleed", "atony", "risk"])) return { emergency: true, ladder: 3, catg: "Postpartum haemorrhage — atony likely",
+            sc: "Uterine massage + uterotonics; empty the bladder; ensure the placenta is complete; IV access, fluids, monitor; escalate if not controlled.",
+            ref: "Urgent OBGYN; admit.",
+            mgmt: ["Atony causes most PPH — massage + uterotonics are first-line; give tranexamic acid.", "Not infective — do not wait on antibiotics; reassess for retained tissue / trauma if bleeding continues."] };
+          return { emergency: false, ladder: 0, catg: "Assess blood loss and uterine tone",
+            sc: "Quantify loss; check tone, tissue, trauma; monitor observations.",
+            ref: "OBGYN if bleeding is more than expected.",
+            mgmt: ["Anticipate PPH in women with risk factors; active management of the third stage prevents it."] };
         }
       },
       /* ───────────────────── Postpartum endometritis ───────────────────── */
@@ -192,6 +302,33 @@
             sc: "Urgent surgical evacuation of retained products of conception is the source control; USS to confirm; send tissue/pus for culture.",
             ref: "Urgent OBGYN; admit.",
             mgmt: ["Resuscitate (IV access, fluids); start IV broad-spectrum antibiotics per local guidance / ICMR before / around evacuation.", "Do not delay evacuation of retained products; give anti-D if Rh-negative per local policy."] };
+        }
+      },
+      /* ───────────────────── Ovarian torsion ───────────────────── */
+      {
+        id: "ovarian_torsion", name: "Ovarian torsion",
+        q: [
+          { id: "sudden_pain", label: "Sudden severe unilateral pelvic pain" }, { id: "vomiting", label: "Nausea / vomiting" },
+          { id: "mass", label: "Known ovarian cyst / mass / enlarged ovary" }, { id: "intermittent", label: "Intermittent colicky pain (torsion/detorsion)" },
+          { id: "risk", label: "Risk (ovulation induction / ART, pregnancy, prior torsion)" }
+        ],
+        danger: [
+          { id: "peritonism", label: "Peritonism / guarding" }, { id: "shock", label: "Haemodynamic instability" },
+          { id: "fever", label: "Fever (necrosis / late)" }
+        ],
+        assess: function (sel) {
+          if (anyOf(sel, ["peritonism", "shock", "fever"])) return { emergency: true, ladder: 5, catg: "Ovarian torsion with peritonism / instability — SURGICAL emergency (not infective)",
+            sc: "Resuscitate; EMERGENCY laparoscopy — detorsion (± cystectomy) to save the ovary; do NOT wait — the ovary is time-critical.",
+            ref: "Emergency OBGYN + anaesthesia NOW.",
+            mgmt: ["This is ischaemia, not infection — antibiotics are not the treatment; theatre saves the ovary.", "Do a pregnancy test; USS with Doppler helps but normal flow does NOT exclude torsion — clinical suspicion wins."] };
+          if (anyOf(sel, ["sudden_pain", "mass", "intermittent"])) return { emergency: true, ladder: 4, catg: "Suspected ovarian torsion — urgent surgery",
+            sc: "Urgent transvaginal/pelvic USS with Doppler; EMERGENCY laparoscopy for detorsion is the definitive treatment — early surgery preserves the ovary.",
+            ref: "Urgent OBGYN; admit.",
+            mgmt: ["Sudden severe unilateral pain + adnexal mass = torsion until excluded — do not delay for imaging if suspicion is high.", "Always do a pregnancy test; not an infective problem — antibiotics not indicated."] };
+          return { emergency: false, ladder: 0, catg: "Acute pelvic pain — keep torsion in mind",
+            sc: "Pregnancy test + pelvic USS with Doppler; low threshold to escalate to surgery if pain is severe or a mass is present.",
+            ref: "OBGYN if pain persists or a mass is found.",
+            mgmt: ["Torsion is a clinical diagnosis — imaging supports but does not exclude it.", "Exclude ectopic (β-hCG) and appendicitis."] };
         }
       },
       /* ───────────────────── Bartholin abscess ───────────────────── */

@@ -106,14 +106,18 @@
   // Weighted keyword sets — the suggestion scores each specialty by how many of its
   // terms the complaint matches (deterministic, no AI). Order breaks ties.
   var KW = {
-    ophthalmology: ["red eye", "eye pain", "painful eye", "photophobi", "blurred vision", "loss of vision", "vision", "conjunctiv", "corneal", "keratit", "ocular", "orbital", "watering eye", "discharge from eye", "stye", "floaters"],
-    ent: ["ear", "otitis", "otalgia", "hearing", "ear discharge", "otorrhoea", "otorrhea", "sinus", "rhinosinus", "nasal", "nose block", "throat", "sore throat", "tonsil", "quinsy", "neck swelling", "hoarse", "epistaxis", "vertigo", "mastoid"],
-    obstetrics_gynaecology: ["vaginal", "per vagina", "pv discharge", "pelvic pain", "pregnan", "gravida", "postpartum", "puerperal", "obstetr", "gynae", "menstru", "cervic", "pv bleed", "dysmenorrh", "adnexal", "ectopic", "miscarriage", "abortion", "tubo-ovarian"],
-    urology: ["dysuria", "urinary", "urine", "burning micturition", "frequency", "urgency", "flank pain", "loin pain", "renal colic", "ureteric", "hydronephro", "catheter", "cauti", "prostat", "urosepsis", "haematuria", "retention", "scrotal", "testic"],
-    dentistry_omfs: ["tooth", "teeth", "dental", "gum", "gingiv", "facial swelling", "jaw", "odontogenic", "pericoronitis", "mandible", "molar", "ludwig"],
-    surgery: ["acute abdomen", "abdominal pain", "wound", "post-op", "post operative", "surgical site", "abscess", "cellulitis", "soft tissue", "diabetic foot", "source control", "hernia", "appendic", "cholecyst", "obstruction", "perforation", "peritonitis", "trauma", "gangrene", "necrotis", "debride", "acute pain abdomen"]
+    ophthalmology: ["red eye", "eye pain", "painful eye", "photophobi", "blurred vision", "loss of vision", "vision loss", "sudden vision", "vision", "conjunctiv", "corneal", "cornea", "keratit", "dendritic", "herpes eye", "ocular", "orbital", "watering eye", "discharge from eye", "stye", "chalazion", "floaters", "flashes", "curtain", "retinal", "retina", "glaucoma", "angle closure", "haloes", "halos", "uveitis", "iritis", "endophthalmitis", "chemical in eye", "eye injury", "foreign body eye", "corneal abrasion", "hyphaema", "hyphema", "proptosis"],
+    ent: ["ear", "otitis", "otalgia", "hearing", "hearing loss", "sudden hearing", "ear discharge", "otorrhoea", "otorrhea", "sinus", "rhinosinus", "nasal", "nose block", "throat", "sore throat", "tonsil", "tonsillectomy", "quinsy", "neck swelling", "hoarse", "epistaxis", "nose bleed", "nosebleed", "vertigo", "dizziness", "mastoid", "stridor", "drooling", "foreign body ear", "foreign body nose", "swallowed", "epiglottitis", "ludwig"],
+    obstetrics_gynaecology: ["vaginal", "per vagina", "pv discharge", "pelvic pain", "pregnan", "gravida", "trimester", "postpartum", "post partum", "puerperal", "obstetr", "gynae", "menstru", "amenorrh", "cervic", "pv bleed", "bleeding in pregnancy", "bleeding after delivery", "dysmenorrh", "adnexal", "ovarian torsion", "ectopic", "miscarriage", "abortion", "tubo-ovarian", "bartholin", "eclampsia", "pre-eclampsia", "preeclampsia", "postpartum haemorrhage", "postpartum hemorrhage", "pph", "labour", "in labor", "chorioamnionitis", "endometritis"],
+    urology: ["dysuria", "urinary", "urine", "burning micturition", "frequency", "urgency", "flank pain", "loin pain", "renal colic", "ureteric colic", "kidney stone", "ureteric", "calcul", "hydronephro", "catheter", "cauti", "prostat", "urosepsis", "haematuria", "hematuria", "clot retention", "retention", "scrotal", "scrotum", "testic", "testis pain", "torsion of testis", "priapism", "paraphimosis", "fournier", "epididymo", "orchitis", "nephrostomy"],
+    dentistry_omfs: ["tooth", "teeth", "toothache", "dental", "dental abscess", "gum", "gingiv", "facial swelling", "jaw", "odontogenic", "pericoronitis", "mandible", "molar", "wisdom tooth", "ludwig", "avulsed", "knocked out tooth", "tooth knocked", "post extraction", "dry socket", "tmj", "jaw dislocation", "trismus"],
+    surgery: ["acute abdomen", "abdominal pain", "pain abdomen", "wound", "post-op", "post operative", "surgical site", "abscess", "cellulitis", "soft tissue", "diabetic foot", "source control", "hernia", "incarcerated", "strangulated", "appendic", "cholecyst", "gallbladder", "biliary colic", "obstruction", "bowel obstruction", "perforation", "free air", "peritonitis", "trauma", "gangrene", "necrotis", "necrotiz", "debride", "pilonidal", "perianal", "fistula-in-ano", "mesenteric"],
+    paediatrics: ["child", "children", "infant", "baby", "toddler", "neonate", "newborn", "paediatric", "pediatric", "months old", "month old", "weeks old", "days old", "year old", "yr old", "bronchiolitis", "croup", "febrile child", "febrile seizure", "febrile convulsion", "not feeding", "poor feeding", "the kid"]
   };
-  // Shared-condition detectors → Internal Medicine stays primary, with a consult overlay.
+  // Terms that are highly specific to one specialty count double (a single strong signal
+  // shouldn't be out-voted by several vague ones). Kept small + deterministic.
+  var KW_STRONG = { ophthalmology: ["endophthalmitis", "angle closure", "dendritic", "hyphaema", "hyphema"], ent: ["epiglottitis", "quinsy", "mastoid", "tonsillectomy"], obstetrics_gynaecology: ["eclampsia", "preeclampsia", "pre-eclampsia", "ovarian torsion", "tubo-ovarian", "ectopic", "chorioamnionitis", "postpartum haemorrhage", "postpartum hemorrhage"], urology: ["torsion of testis", "priapism", "paraphimosis", "fournier", "urosepsis"], dentistry_omfs: ["ludwig", "avulsed", "odontogenic", "pericoronitis"], surgery: ["appendic", "cholecyst", "peritonitis", "pilonidal", "strangulated"], paediatrics: ["bronchiolitis", "croup", "neonate", "newborn", "febrile seizure", "febrile convulsion"] };
+  // Shared-condition detectors → the named primary stays in charge, with a consult overlay.
   var SHARED = [
     { test: function (t) { return /cholangitis/.test(t) || (/fever/.test(t) && /(jaundice|icterus|yellow)/.test(t) && /(ruq|right upper|hypochond)/.test(t)); },
       primary: IM, consult: "surgery", label: "Internal Medicine — with Surgery / GI hepatobiliary consult (biliary drainage)" },
@@ -121,17 +125,24 @@
     { test: function (t) { return /colitis/.test(t) && /(toxic|megacolon|perforat|rigid|periton)/.test(t); }, primary: IM, consult: "surgery", label: "Internal Medicine — with Surgery escalation (complications)" },
     { test: function (t) { return /(flank|loin)/.test(t) && /fever/.test(t) && /(hydronephro|obstruct|stone|calcul)/.test(t); }, primary: "urology", consult: IM, label: "Urology — with Internal Medicine sepsis escalation (obstructed infected system)" },
     { test: function (t) { return /orbital/.test(t); }, primary: "ophthalmology", consult: "ent", label: "Ophthalmology — with ENT consult (orbital cellulitis)" },
-    { test: function (t) { return /(pelvic|adnexal)/.test(t) && /(abscess|tubo-ovarian)/.test(t); }, primary: "obstetrics_gynaecology", consult: "surgery", label: "Obstetrics & Gynaecology — with Surgery consult (tubo-ovarian abscess)" }
+    { test: function (t) { return /(pelvic|adnexal)/.test(t) && /(abscess|tubo-ovarian)/.test(t); }, primary: "obstetrics_gynaecology", consult: "surgery", label: "Obstetrics & Gynaecology — with Surgery consult (tubo-ovarian abscess)" },
+    { test: function (t) { return /fournier/.test(t) || (/(perineal|scrotal|scrotum)/.test(t) && /(necroti|gangrene|crepitus)/.test(t)); }, primary: "urology", consult: "surgery", label: "Urology — with Surgery consult (Fournier's gangrene — emergency debridement)" }
   ];
+  // A clearly neonatal / infant complaint should favour Paediatrics even when an organ term also matches.
+  var PAEDS_AGE = /\b(neonate|newborn|infant|toddler|\d+[- ]?(day|days|week|weeks|month|months)[- ]?old|baby)\b/;
   function suggestWorkspace(text) {
     var t = String(text || "").toLowerCase();
     if (t.trim().length < 3) return { id: IM, shared: null, score: 0 };
     for (var s = 0; s < SHARED.length; s++) if (SHARED[s].test(t)) return { id: SHARED[s].primary, shared: SHARED[s], score: 2 };
-    var best = IM, bestScore = 0;
+    var scores = {};
     Object.keys(KW).forEach(function (id) {
-      var n = 0; KW[id].forEach(function (k) { if (t.indexOf(k) !== -1) n++; });
-      if (n > bestScore) { bestScore = n; best = id; }
+      var n = 0, strong = KW_STRONG[id] || [];
+      KW[id].forEach(function (k) { if (t.indexOf(k) !== -1) n += (strong.indexOf(k) !== -1 ? 2 : 1); });
+      scores[id] = n;
     });
+    if (PAEDS_AGE.test(t)) scores.paediatrics = (scores.paediatrics || 0) + 2;
+    var best = IM, bestScore = 0;
+    Object.keys(KW).forEach(function (id) { if (scores[id] > bestScore) { bestScore = scores[id]; best = id; } });
     return { id: bestScore ? best : IM, shared: null, score: bestScore };
   }
 
