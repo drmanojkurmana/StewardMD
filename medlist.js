@@ -538,10 +538,14 @@
 
   function buildIndexSheet() {
     var s = buildSheet({ title: "Search Drug Index", sub: "On-device formulary — instant, works offline" });
+    s.sheet.classList.add("ml-sheet-tall");                 // tall surface: scrollable typeahead
+    // Fixed search bar (stays put); the suggestion list below it scrolls.
+    var bar = el("div", { cls: "ml-searchbar" });
     var input = el("input", { cls: "ml-search-input", type: "text",
       placeholder: "Search generic, brand, or class…", attrs: { "data-ml-index-input": "1", autocomplete: "off", autocapitalize: "none", spellcheck: "false" } });
     input.value = _indexState.value || "";
-    s.body.appendChild(input);
+    bar.appendChild(input);
+    s.wrap.insertBefore(bar, s.body);
     var out = el("div"); s.body.appendChild(out);
 
     function drawState(node, kind) {
@@ -1195,7 +1199,7 @@
   function injectStyles() {
     if (document.getElementById("ml-styles")) return;
     var css = [
-".ml-root{display:flex;flex-direction:column;min-height:100%;font-family:var(--sans,system-ui);color:var(--ink,#14202b)}",
+".ml-root{display:flex;flex-direction:column;height:100%;min-height:0;overflow:hidden;font-family:var(--sans,system-ui);color:var(--ink,#14202b)}",
 /* ---- shell header (markup in drugs.js) ---- */
 ".ddi-overlay{background:var(--paper,#f6f7f5)}",
 ".ddi-head{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#d7dee3)}",
@@ -1208,9 +1212,9 @@
 ".ddi-patient-on{color:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
 "@media(max-width:560px){.ddi-head-title{font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ddi-patient{max-width:40%;font-size:11px;padding:5px 9px}}",
 ".ddi-advisory{padding:7px 16px;font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border-bottom:1px solid var(--line,#d7dee3)}",
-".ddi-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}",
+".ddi-body{flex:1;min-height:0}",
 /* ---- workspace layout ---- */
-".ml-work{flex:1 0 auto;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:1fr;gap:14px;align-content:start}",
+".ml-work{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:1fr;gap:14px;align-content:start}",
 "@media(min-width:900px){.ml-work{grid-template-columns:63fr 37fr;gap:20px;padding:18px 22px 0}}",
 ".ml-main{min-width:0}.ml-aside{min-width:0}",
 "@media(max-width:899px){.ml-aside{order:2}}",
@@ -1272,7 +1276,7 @@
 ".ml-review-chip{font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:5px 10px}",
 ".ml-aside-note{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:10px;line-height:1.45}",
 /* ---- sticky footer CTA ---- */
-".ml-footer{position:sticky;bottom:0;z-index:6;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3)}",
+".ml-footer{flex:0 0 auto;z-index:6;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3);box-shadow:0 -4px 16px rgba(8,18,26,.06)}",
 ".ml-footer-inner{max-width:1240px;margin:0 auto}",
 ".ml-check-btn{width:100%;min-height:52px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:13px;padding:14px;font:800 15px var(--sans);cursor:pointer;box-sizing:border-box;letter-spacing:.01em}",
 ".ml-check-btn:active{transform:scale(.995)}",
@@ -1291,7 +1295,13 @@
 ".ml-sheet-title{font:800 16px var(--sans);color:var(--ink,#14202b)}",
 ".ml-sheet-sub{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:1px}",
 ".ml-sheet-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);font-size:16px;color:var(--slate,#2d4356);cursor:pointer;flex:0 0 auto}",
-".ml-sheet-body{flex:1;overflow-y:auto;padding:6px 16px 14px;min-height:0}",
+".ml-sheet-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:6px 16px 14px;min-height:0}",
+// tall search surface so suggestions read as a full, scrollable typeahead list
+".ml-sheet-tall{height:88vh;max-height:88vh}",
+"@media(min-width:900px){.ml-sheet-tall{height:78vh;max-height:78vh}}",
+// fixed search bar (input stays put while the suggestion list below it scrolls)
+".ml-searchbar{flex:0 0 auto;padding:2px 16px 12px;border-bottom:1px solid var(--line,#d7dee3)}",
+".ml-search-hint{font:600 11px var(--sans);color:var(--slate-soft,#5a7184);margin:9px 2px 2px}",
 ".ml-sheet-foot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#d7dee3);display:flex;gap:10px}",
 ".ml-sheet-foot .ml-check-btn{min-height:48px;font-size:14px}",
 ".ml-sheet-cancel{flex:0 0 auto;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:13px;padding:0 18px;font:700 14px var(--sans);color:var(--slate,#2d4356);cursor:pointer}",
@@ -1397,8 +1407,8 @@
 ".ml-scan-flag{font:800 11.5px var(--sans);color:var(--amber,#92620a);margin-top:7px}",
 ".ml-scan-footer{display:flex;gap:10px}.ml-scan-footer .ml-sheet-cancel{min-height:48px}.ml-scan-footer .ml-check-btn{flex:1;min-height:48px}",
 /* headings kept for scan/list titles */
-".ml-header{padding:0 0 6px}.ml-title{margin:0;font:800 17px var(--sans)}.ml-subtitle{margin:2px 0 0;font:500 12.5px var(--sans);color:var(--slate,#2d4356)}.ml-advisory{font:600 11.5px var(--sans);color:var(--slate,#2d4356);margin-top:8px}",
-".ml-body{padding:0}"
+".ml-header{flex:0 0 auto;padding:14px 16px 6px}.ml-title{margin:0;font:800 17px var(--sans)}.ml-subtitle{margin:2px 0 0;font:500 12.5px var(--sans);color:var(--slate,#2d4356)}.ml-advisory{font:600 11.5px var(--sans);color:var(--slate,#2d4356);margin-top:8px}",
+".ml-body{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 16px}"
 ].join("");
     var st = document.createElement("style");
     st.id = "ml-styles"; st.textContent = css;
