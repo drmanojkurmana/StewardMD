@@ -4036,12 +4036,27 @@
     } catch (e) { return null; }
   }
 
+  function hepaticCheck(e, drugs) {
+    try {
+      var bili = smdSafetyNum(e.bilirubin);
+      var trig = !!e.liverDisease || (bili !== null && bili > 2) || !!e.encephalopathyGrade || !!e.ascitesGrade;
+      if (!trig) return null;
+      var ref = window.ASP_DRUGS || {}, perDrug = [];
+      (drugs || []).forEach(function (k) {
+        var d = ref[k];
+        if (d && d.hepatic && !/^\s*no adjustment/i.test(d.hepatic)) perDrug.push({ label: d.label || k, text: d.hepatic });
+      });
+      return { text: "Hepatic impairment flagged — review hepatic dosing for the recommended agents.", perDrug: perDrug };
+    } catch (e) { return null; }
+  }
+
   window.SMD_SAFETY = {
     flag: smdSafetyFlagOn,
     setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} },
     QT_PROLONGERS: QT_PROLONGERS,
     detectRecommendedDrugs: detectRecommendedDrugs,
-    renalCheck: renalCheck
+    renalCheck: renalCheck,
+    hepaticCheck: hepaticCheck
   };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }

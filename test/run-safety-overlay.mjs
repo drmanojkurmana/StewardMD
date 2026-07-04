@@ -50,6 +50,13 @@ try {
   chk("renalCheck null when CrCl normal", await ev(`return String(SMD_SAFETY.renalCheck({age:30,weight:70,sex:"m",creatinine:0.8})===null)`) === "true");
   chk("renalCheck null when inputs missing", await ev(`return String(SMD_SAFETY.renalCheck({age:80})===null)`) === "true");
 
+  // ---- Task 5: hepaticCheck ----
+  const hc = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.hepaticCheck({liverDisease:true}, ["azithromycin","amoxiclav"]))`));
+  chk("hepaticCheck fires on liverDisease", hc && /Hepatic impairment/.test(hc.text), JSON.stringify(hc));
+  chk("hepaticCheck surfaces azithromycin hepatic text (Caution)", hc && hc.perDrug.some(function(d){return /azithromycin/i.test(d.label);}), JSON.stringify(hc.perDrug));
+  chk("hepaticCheck fires on bilirubin>2", await ev(`return String(SMD_SAFETY.hepaticCheck({bilirubin:3},[])!==null)`) === "true");
+  chk("hepaticCheck null when no hepatic trigger", await ev(`return String(SMD_SAFETY.hepaticCheck({bilirubin:0.9},["azithromycin"])===null)`) === "true");
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
