@@ -198,11 +198,13 @@ body.v3-dark, body.dark {
 /* F — footer: hairline rule, quiet credit */
 #homeV2.hv4 .v4-foot{max-width:var(--v3-maxw);margin:var(--v3-s4) auto 0;padding-top:var(--v3-s4);border-top:1px solid var(--hv4-line);text-align:center}
 #homeV2.hv4 .v4-foot .disc{font:400 11.5px/1.5 var(--v3-font);color:var(--v3-muted)}
-#homeV2.hv4 .v4-maik{display:inline-flex;align-items:center;gap:8px;margin-top:14px;text-decoration:none}
-#homeV2.hv4 .v4-maik .lbl{font:600 10px/1 var(--v3-font);letter-spacing:.12em;text-transform:uppercase;color:var(--v3-muted)}
-#homeV2.hv4 .v4-maik-logo{height:22px;width:auto;object-fit:contain}
-/* the MaiK mark is dark; render it as a clean white silhouette on dark grounds */
-body.dark #homeV2.hv4 .v4-maik-logo,body.v3-dark #homeV2.hv4 .v4-maik-logo{filter:brightness(0) invert(1);opacity:.92}
+#homeV2.hv4 .v4-maik{display:flex;flex-direction:column;align-items:center;gap:9px;margin-top:16px;text-decoration:none}
+#homeV2.hv4 .v4-maik .lbl{font:600 10px/1 var(--v3-font);letter-spacing:.14em;text-transform:uppercase;color:var(--v3-muted)}
+#homeV2.hv4 .v4-maik-logo{height:42px;width:auto;max-width:200px;object-fit:contain}
+/* the colour version reads on light grounds; the white version on dark */
+#homeV2.hv4 .v4-maik-dark{display:none}
+body.dark #homeV2.hv4 .v4-maik-light,body.v3-dark #homeV2.hv4 .v4-maik-light{display:none}
+body.dark #homeV2.hv4 .v4-maik-dark,body.v3-dark #homeV2.hv4 .v4-maik-dark{display:block}
 #homeV2.hv4 .v4-foot .cred{font:400 10.5px/1.5 var(--v3-font);color:var(--v3-muted);opacity:.7;margin-top:10px}
 /* bottom nav: flat, hairline, active gets a small top indicator */
 #homeV2.hv4 .v3-tabbar{background:var(--v3-panel);-webkit-backdrop-filter:none;backdrop-filter:none;border-top:1px solid var(--hv4-line)}
