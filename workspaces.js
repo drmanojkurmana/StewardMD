@@ -14,21 +14,26 @@
        clearly labelled — no diagnoses, no dosing). Internal Medicine keeps its full
        existing engine, untouched.
 
-   FLAG: off by default. Enable with ?workspaces=1 or localStorage.smd_workspaces="1".
-   When off this file is a no-op. Privacy: preferences are account-scoped
-   (stewardmd_ws_<uid|guest>), never shared across users; no PHI stored. */
+   FLAG: LIVE — on by default. Kill-switch: ?workspaces=0 or localStorage.smd_workspaces="0"
+   instantly disables it (a full, reversible off-switch); ?workspaces=1 forces on.
+   When off this file is a no-op. Internal Medicine stays the DEFAULT clinical
+   workspace regardless — enabling this only makes the specialty switcher available
+   (opt-in; every specialty is clearly labelled "Early access — advisory").
+   Privacy: preferences are account-scoped (stewardmd_ws_<uid|guest>), never
+   shared across users; no PHI stored. */
 (function () {
   "use strict";
 
   function wsOn() {
     try {
       var q = location.search || "";
-      if (/[?&]workspaces=1\b/.test(q)) return true;
-      if (/[?&]workspaces=0\b/.test(q)) return false;
-      return localStorage.getItem("smd_workspaces") === "1";
-    } catch (e) { return false; }
+      if (/[?&]workspaces=1\b/.test(q)) return true;   // explicit on
+      if (/[?&]workspaces=0\b/.test(q)) return false;  // URL kill-switch
+      var ls = localStorage.getItem("smd_workspaces");
+      return ls === null ? true : ls !== "0";          // default ON; opt out with localStorage "0"
+    } catch (e) { return true; }
   }
-  if (!wsOn()) return; // flag off → do nothing at all
+  if (!wsOn()) return; // disabled → do nothing at all
 
   var IM = "internal_medicine";
 
@@ -211,6 +216,13 @@
       ".sw-openim{display:block;width:100%;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans);padding:12px;cursor:pointer;margin-top:10px}",
       ".sw-ladder{display:flex;flex-direction:column;gap:6px}.sw-ladder .r{display:flex;align-items:center;gap:9px;font:600 13px var(--sans);color:var(--ink)}.sw-ladder .r .d{width:9px;height:9px;border-radius:50%;flex:0 0 auto}",
       ".sw-imbtn{display:block;width:100%;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);padding:14px;cursor:pointer;margin-top:6px}",
+      // early-access feedback control
+      ".sw-fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line,#d7dee3)}.sw-fb .q{font:600 12.5px var(--sans);color:var(--slate,#2d4356)}.sw-fb .btns{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}",
+      ".sw-fbbtn{border:1px solid var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-radius:999px;font-size:15px;line-height:1;padding:7px 11px;cursor:pointer}.sw-fbbtn:active{transform:scale(.94)}",
+      ".sw-fbflag{border:1px solid var(--red-line,#efa9b1);background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c);border-radius:999px;font:700 12px var(--sans);padding:7px 11px;cursor:pointer}",
+      ".sw-fbflagbox{width:100%}.sw-fbflagbox textarea{width:100%;box-sizing:border-box;border:1px solid var(--line,#d7dee3);border-radius:10px;padding:9px;font:500 13px var(--sans);color:var(--ink);resize:vertical}.sw-fbflagbox .row{display:flex;align-items:center;gap:10px;margin-top:7px}.sw-fbflagbox .warn{font:600 11px var(--sans);color:var(--slate-soft,#5a7184)}",
+      ".sw-fbsend{margin-left:auto;border:none;border-radius:10px;background:var(--teal,#0e6e63);color:#fff;font:700 13px var(--sans);padding:8px 16px;cursor:pointer}",
+      ".sw-fbthanks{font:700 12.5px var(--sans);color:var(--teal,#0e6e63)}",
       // confirm dialog
       ".sw-confirm{position:fixed;inset:0;z-index:16050;background:rgba(8,16,22,.5);display:flex;align-items:center;justify-content:center;padding:20px}",
       ".sw-confirm .box{background:var(--panel,#fff);border-radius:18px;max-width:340px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.3)}",
@@ -286,9 +298,10 @@
   }
 
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
-  var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null;
+  var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
   function openSpecialtyShell(id) {
     injectCSS();
+    _shellWs = id;
     var r = meta(id), eng = (window.SMD_WS_ENGINES || {})[id];
     if (!_shell) { _shell = document.createElement("div"); _shell.className = "sw-shell"; _shell.id = "swShell"; document.body.appendChild(_shell); }
     _es = null;
@@ -355,9 +368,33 @@
       h += '<div class="sw-shared"><b>Shared condition.</b> Internal Medicine is <b>primary</b>' + (sh.role ? ' — this workspace is the ' + sh.role.toLowerCase() : '') + '. It does not overwrite the IM assessment. Antibiotic choice + ICMR precedence stay in the IM pathway.</div>';
       h += '<button class="sw-openim" id="swOutIM">Open Internal Medicine pathway (primary)</button>';
     }
+    h += '<div class="sw-fb" id="swFb"><span class="q">Early access — was this helpful?</span>' +
+      '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">👍</button>' +
+      '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">👎</button>' +
+      '<button class="sw-fbflag" data-v="flag">⚑ Flag an error</button></span></div>';
     h += '</div>';
     box.innerHTML = h;
     var oi = box.querySelector("#swOutIM"); if (oi) oi.addEventListener("click", openIM);
+    var fb = box.querySelector("#swFb");
+    if (fb) {
+      fb.querySelectorAll(".sw-fbbtn").forEach(function (b) { b.addEventListener("click", function () { submitFeedback({ kind: "rating", helpful: b.getAttribute("data-v") }); }); });
+      var flag = fb.querySelector(".sw-fbflag");
+      if (flag) flag.addEventListener("click", function () {
+        fb.innerHTML = '<div class="sw-fbflagbox"><textarea id="swFbNote" maxlength="500" rows="2" placeholder="What is wrong or unclear? Do NOT include any patient details."></textarea>' +
+          '<div class="row"><span class="warn">No patient identifiers, please.</span><button class="sw-fbsend" id="swFbSend">Send</button></div></div>';
+        var ta = fb.querySelector("#swFbNote"); if (ta) ta.focus();
+        fb.querySelector("#swFbSend").addEventListener("click", function () { submitFeedback({ kind: "flag", helpful: null, note: (ta && ta.value) || "" }); });
+      });
+    }
+  }
+  /* ── Early-access feedback: anonymous, no PHI. Mirrors locally + best-effort POST. ── */
+  function submitFeedback(o) {
+    var payload = { ws: _shellWs || "", syn: (_es && _es.syn && _es.syn.id) || "", kind: o.kind, helpful: o.helpful || null,
+      findings: (function () { var a = []; if (_es) for (var k in _es.sel) if (_es.sel[k]) a.push(k); return a; })(),
+      note: (o.note || "").slice(0, 500) };
+    try { var K = "stewardmd_ws_fb_" + uid(), log = JSON.parse(localStorage.getItem(K) || "[]"); log.push(payload); if (log.length > 200) log = log.slice(-200); localStorage.setItem(K, JSON.stringify(log)); } catch (e) {}
+    try { fetch("/api/ws-feedback", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), keepalive: true, cache: "no-store" }).catch(function () {}); } catch (e) {}
+    var fb = document.getElementById("swFb"); if (fb) fb.innerHTML = '<span class="sw-fbthanks">✓ Thanks — your feedback helps improve this.</span>';
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */
