@@ -630,6 +630,7 @@
   // data-act wiring 1:1 so no routes change; styled by the scoped .hv4 layer in ui-v3.css.
   function homeV4On() { try { return localStorage.getItem("smd_home_v4") === "1" || /[?&]home=v4\b/.test(location.search); } catch (e) { return false; } }
   function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
+  function dateV4() { try { return (new Date()).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
   }
@@ -643,14 +644,14 @@
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<div class="v4-greet"><div class="hi">' + greetV4() + '</div><div class="q">What would you like to do?</div></div>' +
+        '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetV4() + '</div><div class="q">What would you like to do?</div></div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
         '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
         '<div class="v4-sec">Clinical tools</div>' +
         '<div class="v4-grid">' +
           tileV4("cases", "folder", "My Cases", "Saved assessments") +
           tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
-          tileV4("drugs", "pills", "Drug Index", "Brands · doses · price") +
+          tileV4("drugs", "pills", "Drug Index", "Interactions · doses · brands") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("icu", "icu", "ICU", "Patient dashboard") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
@@ -1377,7 +1378,10 @@
   function injectFont() {
     if (document.getElementById("smd-inter")) return;
     var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
-    l.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap";
+    // v4 home adds an editorial serif (Newsreader) for the wordmark + greeting.
+    var fam = "Inter:wght@400;500;600;700;800";
+    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600";
+    l.href = "https://fonts.googleapis.com/css2?family=" + fam + "&display=swap";
     document.head.appendChild(l);
   }
   function injectV3CSS() {
