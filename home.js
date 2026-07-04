@@ -166,7 +166,8 @@
     settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 9 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1Z"/>',
     x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
     award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>',
-    antibiogram: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>'
+    antibiogram: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>',
+    interact: '<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
@@ -390,6 +391,17 @@
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
+    drugmenu: function () {
+      openSheet('<div class="hv-sh-t">Drugs &amp; Interactions</div>' +
+        mi("pills", "Drug Database", "Brands · doses · spectrum · cautions", "db") +
+        mi("interact", "Interaction Checker", "Check drug–drug interactions", "ix"));
+      sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var a = b.getAttribute("data-mi"); closeSheet();
+          setTimeout(function () { if (a === "ix") ACT.interactions(); else ACT.drugs(); }, 70);
+        });
+      });
+    },
     electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
@@ -677,7 +689,7 @@
         '<div class="v4-sec">Clinical tools</div>' +
         '<div class="v4-grid">' +
           tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
-          tileV4("drugs", "pills", "Drug Index", "Interactions · doses · brands") +
+          tileV4("drugmenu", "pills", "Drugs &amp; Interactions", "Database · interaction checker") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
