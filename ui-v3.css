@@ -209,3 +209,6 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v3-hero,#homeV2.hv4 .v3-qrow,#homeV2.hv4 .v3-devfoot{display:none}
 /* desktop: larger gutter, same 520 grid */
 @media(min-width:560px){#homeV2.hv4 .v3-main{padding-left:var(--v3-s5);padding-right:var(--v3-s5)}}
+/* very narrow (≤380px): tighten header so wordmark + Search/Bell/Avatar fit with
+   no truncation and no overflow (touch targets stay ≥44px) */
+@media(max-width:380px){#homeV2.hv4 .v3-header{gap:4px;padding-left:12px;padding-right:8px}#homeV2.hv4 .v3-brand-tt{font-size:18px}}

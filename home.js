@@ -145,6 +145,7 @@
     search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     framework: '<path d="M4 6h16M4 12h16M4 18h10"/>',
     icu: '<rect x="2" y="4" width="20" height="14" rx="2"/><path d="M6 11h2.5l1.5-3 2.5 6 1.5-3H18"/><path d="M9 22h6"/>',
+    ward: '<path d="M4 21V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v15"/><path d="M2 21h20"/><path d="M10 21v-4h4v4"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="9.5" y1="10.5" x2="14.5" y2="10.5"/>',
     ai: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
     reasoning: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
@@ -389,6 +390,7 @@
     electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
+    ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
     askai: function () { openAskAi(); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
@@ -651,6 +653,7 @@
         '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
         '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
         '<div class="v3-spacer"></div>' +
+        '<button class="v3-ic" data-act="search" aria-label="Search">' + svg("search") + '</button>' +
         '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
@@ -659,19 +662,17 @@
         '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Antibiotic Decision Engine</span><p class="v4-hero-p">Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
           '<button class="v4-qc" data-act="more" aria-label="Account">' + svg("user") + '<span>Account</span></button>' +
-          '<button class="v4-qc" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
+          '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
           '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
-          '<button class="v4-qc" data-act="theme" aria-label="Theme">' + svg("sun") + '<span>Theme</span></button>' +
+          '<button class="v4-qc" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
         '</div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
         '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
         '<div class="v4-sec">Clinical tools</div>' +
         '<div class="v4-grid">' +
-          tileV4("cases", "folder", "My Cases", "Saved assessments") +
           tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
           tileV4("drugs", "pills", "Drug Index", "Interactions · doses · brands") +
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
-          tileV4("icu", "icu", "ICU", "Patient dashboard") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div class="v4-foot"><div class="disc">For qualified clinicians · AI-summarised — verify doses</div><div class="cred">© 2026 StewardMD · MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div></div>' +
