@@ -12,14 +12,19 @@
     "rule": {
       "allOf": [
         "rightUpperQuadrantPain",
-        "feverGU",
         {
-          "not": "jaundice"
+          "anyOf": [
+            "feverGU",
+            "fever"
+          ]
         },
-        "travelEndemicArea",
         {
-          "not": "murphySign"
-        }
+          "anyOf": [
+            "travelEndemicArea",
+            "contaminatedFoodWaterExposure"
+          ]
+        },
+        "singleLesion"
       ]
     },
     "score": {
@@ -27,6 +32,10 @@
       "modifiers": [
         {
           "when": "travelEndemicArea",
+          "add": 15
+        },
+        {
+          "when": "contaminatedFoodWaterExposure",
           "add": 15
         },
         {

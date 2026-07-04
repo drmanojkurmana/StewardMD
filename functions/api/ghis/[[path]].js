@@ -14,7 +14,7 @@
  * Endpoints:
  *   POST /api/ghis/login    {userId,password,remember}     -> {token, userId}
  *   POST /api/ghis/logout   (Authorization: Bearer <token>)-> {ok:true}
- *   GET  /api/ghis/status | patients | lab | lab-detail | radiology | radiology-report
+ *   GET  /api/ghis/status | patients | lab | lab-detail | radiology | radiology-report | medications
  *        (all require  Authorization: Bearer <token>)
  * ---------------------------------------------------------------------------
  */
@@ -118,6 +118,42 @@ async function getLabOrders(env, token, patientId) {
   if (r.unauth) return r;
   return { orders: parseGhis(r.body).map(o => ({ serviceName:o.parameter_long_desc, orderDate:o.OrderDate, department:o.Department_desc, status:o.pstatus, renderId:o.ServiceRenderId, episodeId:o.episode_id, orderId:o.order_id, valueType:o.ValueType })) };
 }
+// ── medication list (authorized session) ────────────────────────────────────
+// Verified against a live GHIS session (2026-07): the Doctor-module "Medications"
+// view (left-menu loadView('4')) fires GET /Doctor/Home/GetMedicines/?id={MR}
+// where {MR} is the patient MR number (the same id the Lab endpoints use — NOT the
+// IPMR episode id). No form body / CSRF token is needed for this read call. It
+// returns an HTML table, 12 <td> per data row, in this column order:
+//   0 Prod.Code | 1 Drug Name | 2 Route | 3 Dosage | 4 Qty | 5 Freq |
+//   6 Duration  | 7 Total qty | 8 Admin Instr | 9 Remarks | 10 Date & Time | 11 gen by
+async function getMedications(env, token, patientId) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const r = await ghisReq(env, token, 'GET',
+    '/Doctor/Home/GetMedicines/?id=' + encodeURIComponent(patientId || ''),
+    null, { 'X-Requested-With': 'XMLHttpRequest' });
+  if (r.unauth) return r;
+  const body = r.body || '';
+  const rows = [];
+  for (const tr of (body.match(/<tr[\s\S]*?<\/tr>/gi) || [])) {
+    const tds = (tr.match(/<td[^>]*>([\s\S]*?)<\/td>/gi) || []).map(td => htmlToText(td));
+    if (tds.length < 7) continue;                                 // header (<th>) / non-data rows
+    const drugText = (tds[1] || '').trim();
+    if (!drugText || /^drug\s*name$/i.test(drugText)) continue;   // skip a stray header-in-<td>
+    // PHI-strip: keep ONLY medication fields — never the "gen by" staff name (tds[11]),
+    // patient identity, or billing/balance figures elsewhere on the page.
+    rows.push({
+      productCode: (tds[0] || '').trim(),
+      drugText:    drugText,
+      route:       (tds[2] || '').trim(),
+      dosage:      (tds[3] || '').trim(),
+      frequency:   (tds[5] || '').trim(),
+      duration:    (tds[6] || '').trim(),
+      dept:        '',
+      dateTime:    (tds[10] || '').trim(),
+    });
+  }
+  return { rows };
+}
 async function getLabDetail(env, token, renderId, episodeId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const r = await ghisReq(env, token, 'POST', '/Lab/Home/GetPrintLabResultDetailsAuth', `__RequestVerificationToken=${encodeURIComponent(s.csrf)}&Render_ID=${encodeURIComponent(renderId)}&Episode_Id=${encodeURIComponent(episodeId)}&Result_Type=a`, { 'X-Requested-With': 'XMLHttpRequest' });
@@ -187,6 +223,7 @@ export async function onRequest(context) {
     if (seg === 'lab-detail')      { const r = await getLabDetail(env, token, q.get('renderId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology')       { const r = await getRadiologyOrders(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'radiology-report'){ const r = await getRadiologyReport(env, token, q.get('resultid') || '', q.get('type') || 'manual'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'medications')     { const r = await getMedications(env, token, q.get('patientId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);

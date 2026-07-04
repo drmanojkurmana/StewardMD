@@ -1,0 +1,119 @@
+{
+  "version": "1.0",
+  "updated": "2026-07-04",
+  "policy": {
+    "paraphraseOnly": true,
+    "noVerbatim": true,
+    "noPaywalledIngestion": true,
+    "citationRequired": true,
+    "engineAuthority": "The deterministic StewardMD reasoning engine owns diagnosis, confidence, ICMR precedence, hospital policy, and culture-directed recommendations. MaiK (the LLM) is advisory only and never overrides engine output; retrieved knowledge grounds explanation, not decision-making."
+  },
+  "treatmentPrecedence": ["icmr", "guideline", "harrison"],
+  "notes": [
+    "This manifest records PROVENANCE only — no copyrighted source text is stored in it or in the KB. Disease and treatment content is paraphrased into structured fields (pearls, red flags, investigations, regimens) with a source ref + page/section anchor.",
+    "Clinician-facing source labels never surface a proprietary textbook title as the answer's authority; the disease reference is shown as 'Standard internal-medicine reference' while guideline/formulary sources are named.",
+    "Exact drug doses are shown only where the StewardMD Drug Index / a cited protocol states them; otherwise MaiK refers to drugs by name/class and says to verify locally."
+  ],
+  "sources": [
+    {
+      "id": "harrison_22e",
+      "name": "Harrison's Principles of Internal Medicine, 22e (2025)",
+      "type": "textbook",
+      "publisher": "McGraw Hill",
+      "usage": "paraphrased_reference",
+      "role": "Primary DISEASE reference — paraphrased into structured pearls, pathophysiology, differentials/mimics, investigations, red flags, severity, prognosis. Not a treatment authority (lowest treatment tier).",
+      "precedenceTier": "harrison",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "Harrison 22e p.<page> (page-anchored, paraphrased)",
+      "clinicianFacingLabel": "Standard internal-medicine reference",
+      "coverageNote": "Grounds all 484 searchable diseases (141 diagnostic + 343 reference-only). ~23k paraphrased chunks."
+    },
+    {
+      "id": "icmr_india",
+      "name": "ICMR / NCDC / National programme guidelines (India)",
+      "type": "national_guideline",
+      "publisher": "Indian Council of Medical Research; National Centre for Disease Control; NTEP",
+      "usage": "paraphrased_protocol",
+      "role": "HIGHEST-precedence treatment source for the Indian context — empiric regimens, national AMR guidance, TB/typhoid/rickettsial/malaria protocols.",
+      "precedenceTier": "icmr",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "Guideline name (paraphrased protocol)",
+      "clinicianFacingLabel": "ICMR / national guidelines",
+      "coverageNote": "Concentrated in infective syndromes.",
+      "examples": ["NCDC India Guidelines", "National TB Elimination Programme", "Indian National Treatment Guidelines for Antimicrobial Use", "NCDC India Guidelines for Rickettsial Diseases"]
+    },
+    {
+      "id": "society_guidelines",
+      "name": "International society / specialty guidelines",
+      "type": "society_guideline",
+      "publisher": "IDSA, IDSA/ATS, AASLD, ACC/AHA/ESC, KDIGO, GOLD, GINA, NCCN, IWGDF, BTS, AUA, SHEA, Baveno, ACR/EULAR and similar",
+      "usage": "paraphrased_protocol",
+      "role": "Middle-tier treatment source — condition-specific management protocols and severity/eligibility criteria, paraphrased.",
+      "precedenceTier": "guideline",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "Guideline name (paraphrased protocol)",
+      "clinicianFacingLabel": "<Named society> guidelines",
+      "coverageNote": "Cited across 42/51 infective syndromes and select non-infective conditions.",
+      "examples": ["IDSA/ATS CAP & HAP/VAP Guidelines", "IDSA Bacterial Meningitis Guidelines", "IDSA Skin and Soft Tissue Infection Guidelines", "IDSA Diabetic Foot Infection Guidelines", "IDSA/SHEA C. difficile Guidelines", "IDSA Febrile Neutropenia Guidelines", "Tokyo Guidelines for Acute Cholangitis/Cholecystitis", "AASLD Practice Guidance on SBP", "British Thoracic Society Bronchiectasis Guidelines", "IWGDF Guidelines", "NCCN Cancer-Related Infections"]
+    },
+    {
+      "id": "who_guidelines",
+      "name": "World Health Organization guidelines",
+      "type": "who_guideline",
+      "publisher": "WHO",
+      "usage": "paraphrased_protocol",
+      "role": "Global treatment guidance for tropical/communicable disease, paraphrased.",
+      "precedenceTier": "guideline",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "WHO guideline name (paraphrased protocol)",
+      "clinicianFacingLabel": "WHO guidelines",
+      "examples": ["WHO TB Guidelines", "WHO Guidelines for Malaria", "WHO Typhoid Fever Guidelines", "WHO Guidelines on Amoebiasis", "WHO Guidelines on Dysentery"]
+    },
+    {
+      "id": "clinical_criteria",
+      "name": "Validated clinical criteria / severity scores",
+      "type": "clinical_criteria",
+      "publisher": "Various (public criteria)",
+      "usage": "criteria_paraphrase",
+      "role": "Severity stratification and decision criteria, paraphrased/computed.",
+      "precedenceTier": "guideline",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "Criterion name",
+      "clinicianFacingLabel": "Clinical criteria",
+      "examples": ["Sepsis-3 Definitions", "Surviving Sepsis Campaign", "Centor Criteria", "Anthonisen Criteria", "CURB-65 / qSOFA (via calculators)"]
+    },
+    {
+      "id": "stewardmd_drug_index",
+      "name": "StewardMD Drug Index",
+      "type": "internal_formulary",
+      "publisher": "StewardMD",
+      "usage": "internal_data",
+      "role": "Drug compositions, dose / route / frequency / duration, and coverage — the source of dosing shown in regimens.",
+      "precedenceTier": "formulary",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "StewardMD Drug Index",
+      "clinicianFacingLabel": "StewardMD Drug Index",
+      "coverageNote": "Backs the drug regimens on 43 diseases (42 infective syndromes + 1 non-infective)."
+    },
+    {
+      "id": "hospital_overlay",
+      "name": "Local hospital / ICU antibiogram overlay",
+      "type": "hospital_overlay",
+      "publisher": "Site-configured",
+      "usage": "site_configured_overlay",
+      "role": "Optional site-specific antibiogram / policy overlay. Surfaced SEPARATELY and never silently replaces the default recommendation.",
+      "precedenceTier": "overlay",
+      "verbatimStored": false,
+      "paraphrased": true,
+      "citationAnchor": "Local hospital antibiogram",
+      "clinicianFacingLabel": "Local hospital policy",
+      "coverageNote": "Present only where a site has configured a policy overlay."
+    }
+  ]
+}

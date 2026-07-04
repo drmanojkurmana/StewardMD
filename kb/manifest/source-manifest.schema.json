@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stewardmd.in/kb/manifest/source-manifest.schema.json",
+  "title": "StewardMD MaiK Knowledge Source Manifest",
+  "description": "Declares every knowledge source the MaiK assistant is grounded on, its lawful-use status, and how it participates. Governance artifact: enforces paraphrase-only use (no verbatim reproduction of copyrighted text) and the ICMR ▸ international-guideline ▸ Harrison treatment precedence. No source TEXT is stored here — only provenance metadata.",
+  "type": "object",
+  "required": ["version", "policy", "sources"],
+  "properties": {
+    "version": { "type": "string" },
+    "updated": { "type": "string", "description": "ISO date of last manifest review" },
+    "policy": {
+      "type": "object",
+      "required": ["paraphraseOnly", "noVerbatim", "noPaywalledIngestion", "citationRequired"],
+      "properties": {
+        "paraphraseOnly": { "type": "boolean", "description": "All derived content is paraphrased/structured, never copied verbatim." },
+        "noVerbatim": { "type": "boolean" },
+        "noPaywalledIngestion": { "type": "boolean", "description": "No bulk ingestion of copyrighted/paywalled full text into the KB." },
+        "citationRequired": { "type": "boolean", "description": "Every clinical claim carries a source ref + page/section anchor." },
+        "engineAuthority": { "type": "string", "description": "The deterministic StewardMD engine — not any source or the LLM — owns diagnosis, confidence, and stewardship recommendations." }
+      }
+    },
+    "treatmentPrecedence": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Order in which treatment sources win when they conflict (highest first)."
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "type", "usage", "role", "verbatimStored", "paraphrased"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+          "name": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": ["textbook", "national_guideline", "society_guideline", "who_guideline", "clinical_criteria", "internal_formulary", "hospital_overlay"]
+          },
+          "publisher": { "type": "string" },
+          "usage": {
+            "type": "string",
+            "enum": ["paraphrased_reference", "paraphrased_protocol", "criteria_paraphrase", "internal_data", "site_configured_overlay"],
+            "description": "How the source is used. Nothing is stored verbatim."
+          },
+          "role": { "type": "string", "description": "What this source grounds in the assistant (disease reference / treatment protocol / dosing / stewardship / severity criteria)." },
+          "precedenceTier": {
+            "type": ["string", "null"],
+            "enum": ["icmr", "guideline", "harrison", "formulary", "overlay", null],
+            "description": "Which tier of treatmentPrecedence this source maps to (null for non-treatment sources)."
+          },
+          "verbatimStored": { "type": "boolean", "description": "MUST be false — no verbatim copyrighted text is stored." },
+          "paraphrased": { "type": "boolean" },
+          "citationAnchor": { "type": "string", "description": "Form of the citation shown/kept (e.g. page range, guideline name)." },
+          "clinicianFacingLabel": { "type": "string", "description": "How this source is labelled to clinicians in the UI (never a proprietary title where inappropriate)." },
+          "coverageNote": { "type": "string" },
+          "examples": { "type": "array", "items": { "type": "string" }, "description": "Representative guideline names grouped under this source (metadata only)." }
+        }
+      }
+    }
+  }
+}

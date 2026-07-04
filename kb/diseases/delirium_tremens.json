@@ -1,0 +1,59 @@
+{
+  "id": "delirium_tremens",
+  "name": "Delirium Tremens (Alcohol Withdrawal)",
+  "class": "non_infective",
+  "system": "Neurology / Toxicology",
+  "coding": {
+    "icd10": "F10.231",
+    "icd11": null,
+    "snomed": null
+  },
+  "matching": {
+    "find": {
+      "alcoholExcess": 32,
+      "behavioralChange": 18,
+      "tachycardia": 8,
+      "rigidity": 10,
+      "ataxia": 10,
+      "seizure": 10,
+      "neckStiffness": -14
+    },
+    "associatedFindings": [
+      "alcoholExcess",
+      "behavioralChange",
+      "rigidity",
+      "ataxia",
+      "seizure",
+      "tachycardia"
+    ],
+    "reasoningTemplate": "Agitation, autonomic hyperactivity, tremor and altered sensorium 48-96 h after the last drink in a heavy drinker suggest delirium tremens — but CNS infection and Wernicke's must be excluded in parallel in any febrile or altered patient."
+  },
+  "redFlags": [
+    "Do NOT anchor on withdrawal in a febrile/altered patient — exclude meningitis/encephalitis (LP) and give thiamine before glucose (Wernicke)",
+    "Autonomic storm — hyperthermia, arrhythmia; DT carries appreciable mortality if untreated",
+    "Withdrawal seizures may herald DT"
+  ],
+  "investigations": [
+    { "test": "Bedside glucose + IV thiamine before glucose (Wernicke prophylaxis)" },
+    { "test": "Exclude CNS infection / structural cause (LP, imaging) when febrile, focal or atypical" },
+    { "test": "Electrolytes incl. Mg/PO4, LFTs; assess CIWA-Ar" }
+  ],
+  "treatmentRef": null,
+  "policyRef": null,
+  "calculatorRefs": [],
+  "icuModuleRefs": [],
+  "drugRefs": [],
+  "provenance": {
+    "primaryRef": "Harrison 22e",
+    "editions": ["Harrison 22e (2025)"]
+  },
+  "review": {
+    "status": "approved",
+    "reviewedBy": "Dr. Manoj Kurmana",
+    "reviewedAt": "2026-07-03"
+  },
+  "version": 1,
+  "contentHash": null,
+  "references": ["Harrison 22e — Alcohol and Alcohol Use Disorders"],
+  "provenanceNote": "Recall Tier-4 new diagnosable entity (alcohol withdrawal). AI-drafted matching signature; PENDING clinician sign-off. Intentionally does NOT dominate CNS-infection candidates in a febrile/altered patient — designed to enter the top-3 as a co-consideration."
+}

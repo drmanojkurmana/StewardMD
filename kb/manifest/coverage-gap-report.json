@@ -1,0 +1,3418 @@
+{
+  "generated": "run-maik-coverage.mjs",
+  "base": "http://localhost:8903/",
+  "totals": {
+    "questions": 167,
+    "inScope": 152,
+    "strongPct": 63.8,
+    "partialPct": 21.7
+  },
+  "byVerdict": {
+    "STRONG": 97,
+    "PARTIAL": 33,
+    "INKB_MISLABELED": 9,
+    "TOPIC_MISS": 22,
+    "OOS_FALSEHIT": 4,
+    "OOS_OK": 2
+  },
+  "byType": {
+    "diagnosis": {
+      "STRONG": 12,
+      "TOPIC_MISS": 2,
+      "PARTIAL": 1
+    },
+    "empiric_antibiotics": {
+      "STRONG": 8,
+      "PARTIAL": 3,
+      "TOPIC_MISS": 4,
+      "INKB_MISLABELED": 1
+    },
+    "follow_up": {
+      "STRONG": 10,
+      "TOPIC_MISS": 2,
+      "INKB_MISLABELED": 1
+    },
+    "red_flags": {
+      "PARTIAL": 6,
+      "TOPIC_MISS": 4,
+      "STRONG": 5
+    },
+    "investigations": {
+      "STRONG": 7,
+      "TOPIC_MISS": 2,
+      "PARTIAL": 6
+    },
+    "differential": {
+      "PARTIAL": 4,
+      "STRONG": 7,
+      "TOPIC_MISS": 4
+    },
+    "special_population": {
+      "STRONG": 23,
+      "PARTIAL": 3,
+      "TOPIC_MISS": 2
+    },
+    "dosing": {
+      "STRONG": 15,
+      "PARTIAL": 4,
+      "TOPIC_MISS": 1
+    },
+    "out_of_scope": {
+      "INKB_MISLABELED": 6,
+      "OOS_FALSEHIT": 4,
+      "OOS_OK": 2
+    },
+    "management": {
+      "STRONG": 10,
+      "PARTIAL": 6,
+      "TOPIC_MISS": 1,
+      "INKB_MISLABELED": 1
+    }
+  },
+  "bySpecialty": {
+    "undefined": {
+      "STRONG": 97,
+      "PARTIAL": 33,
+      "INKB_MISLABELED": 9,
+      "TOPIC_MISS": 22,
+      "OOS_FALSEHIT": 4,
+      "OOS_OK": 2
+    }
+  },
+  "proprietaryLabelLeaks": 0,
+  "gapProbesBehavingAsExpected": "21/47",
+  "results": [
+    {
+      "q": "55M fever with jaundice and RUQ pain, US shows dilated CBD — is this acute cholangitis?",
+      "qType": "diagnosis",
+      "expectTopicId": "CHOLANGITIS",
+      "expectTopicName": "Acute Cholangitis",
+      "isGapProbe": false,
+      "note": "Charcot triad diagnosis probe",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CHOLANGITIS",
+        "s": "harrison.pearl",
+        "sc": 19.054
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric abx for acute cholangitis?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "CHOLANGITIS",
+      "expectTopicName": "Acute Cholangitis",
+      "isGapProbe": false,
+      "note": "terse empiric antibiotic question, dose=1 topic",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CHOLANGITIS",
+        "s": "management.treatment",
+        "sc": 45.954
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of acute cholecystitis, give in detail — what next after admission?",
+      "qType": "follow_up",
+      "expectTopicId": "CHOLECYSTITIS",
+      "expectTopicName": "Acute Cholecystitis",
+      "isGapProbe": false,
+      "note": "follow-up style 'in detail / what next' probe",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CHOLECYSTITIS",
+        "s": "management.stewardship",
+        "sc": 39.862
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in acute pancreatitis I shouldn't miss",
+      "qType": "red_flags",
+      "expectTopicId": "pancreatitis",
+      "expectTopicName": "Acute pancreatitis",
+      "isGapProbe": false,
+      "note": "severity red flags",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "pancreatitis",
+        "s": "harrison.pathophysiology",
+        "sc": 14.182
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which investigations to order for suspected acute mesenteric ischemia?",
+      "qType": "investigations",
+      "expectTopicId": "mesenteric_ischemia",
+      "expectTopicName": "Acute mesenteric ischemia",
+      "isGapProbe": false,
+      "note": "workup question",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "mesenteric_ischemia",
+        "s": "harrison.pearl",
+        "sc": 21.066
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "biliary colic vs acute cholecystitis — how to tell them apart?",
+      "qType": "differential",
+      "expectTopicId": "biliary_colic",
+      "expectTopicName": "Biliary colic",
+      "isGapProbe": false,
+      "note": "differential between two listed topics",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "biliary_colic",
+        "s": "management",
+        "sc": 79.191
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do I manage acute gastroenteritis in a 28wk pregnant woman?",
+      "qType": "special_population",
+      "expectTopicId": "GASTROENTERITIS",
+      "expectTopicName": "Acute Gastroenteritis",
+      "isGapProbe": false,
+      "note": "pregnancy special population, rx=1",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "GASTROENTERITIS",
+        "s": "management.stewardship",
+        "sc": 29.973
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "antibiotic dosing for cholangitis in a patient with CrCl 25 — how to adjust?",
+      "qType": "dosing",
+      "expectTopicId": "CHOLANGITIS",
+      "expectTopicName": "Acute Cholangitis",
+      "isGapProbe": false,
+      "note": "renal impairment special-pop + dosing, dose=1 topic (legit)",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CHOLANGITIS",
+        "s": "management.stewardship",
+        "sc": 46.459
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "exact ceftriaxone + metronidazole doses for acute gastroenteritis?",
+      "qType": "dosing",
+      "expectTopicId": "GASTROENTERITIS",
+      "expectTopicName": "Acute Gastroenteritis",
+      "isGapProbe": true,
+      "note": "GAP: dosing on dose=0 topic — should admit no explicit dosing",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "GASTROENTERITIS",
+        "s": "management.stewardship",
+        "sc": 12.489
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for acute appendicitis with peritonitis?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "acute_appendicitis",
+      "expectTopicName": "Acute Appendicitis and Peritonitis",
+      "isGapProbe": true,
+      "note": "GAP: management/abx on reference-only topic (t:R, rx:0)",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "acute_appendicitis",
+        "s": "harrison.investigation",
+        "sc": 23.606
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "first-line treatment for spontaneous bacterial peritonitis in cirrhosis?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "SBP (not in inventory)",
+      "isGapProbe": true,
+      "note": "GAP: plausible GI/hepatology topic absent from inventory — out of scope",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "SBP",
+        "s": "management.treatment",
+        "sc": 92.631
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "55M sudden tearing chest pain radiating to back, BP different in both arms — is this dissection?",
+      "qType": "diagnosis",
+      "expectTopicId": "aortic_dissection",
+      "expectTopicName": "Aortic dissection",
+      "isGapProbe": false,
+      "note": "Classic presentation prompting diagnostic confirmation.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "gerd_chest",
+        "s": "harrison.pearl",
+        "sc": 32.495
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "anaphylaxis management in the ED, step by step",
+      "qType": "management",
+      "expectTopicId": "anaphylaxis",
+      "expectTopicName": "Anaphylaxis",
+      "isGapProbe": false,
+      "note": "Core management query on a D/rx topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "anaphylaxis",
+        "s": "management",
+        "sc": 69.512
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "adrenaline dose in anaphylaxis for adults?",
+      "qType": "dosing",
+      "expectTopicId": "anaphylaxis",
+      "expectTopicName": "Anaphylaxis",
+      "isGapProbe": true,
+      "note": "Gap-probe: anaphylaxis has dose=0, probing explicit dosing coverage.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "anaphylaxis",
+        "s": "management",
+        "sc": 63.364
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in a patient on ramipril presenting with facial swelling",
+      "qType": "red_flags",
+      "expectTopicId": "angioedema_acei",
+      "expectTopicName": "ACEi/hereditary angioedema",
+      "isGapProbe": false,
+      "note": "Red-flag query on ACEi angioedema.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "oncologic_emergencies",
+        "s": "harrison.pearl",
+        "sc": 15.108
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do I tell ACE-inhibitor angioedema from allergic angioedema?",
+      "qType": "differential",
+      "expectTopicId": "angioedema_acei",
+      "expectTopicName": "ACEi/hereditary angioedema",
+      "isGapProbe": false,
+      "note": "Differential between angioedema types.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "angioedema_acei",
+        "s": "management",
+        "sc": 55.18
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which investigations to order for suspected ruptured AAA?",
+      "qType": "investigations",
+      "expectTopicId": "aaa",
+      "expectTopicName": "Ruptured AAA",
+      "isGapProbe": false,
+      "note": "Investigations for ruptured AAA.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "aaa",
+        "s": "harrison.nonInfectiousMimic",
+        "sc": 13.26
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "managing aortic dissection in a pregnant woman — any changes?",
+      "qType": "special_population",
+      "expectTopicId": "aortic_dissection",
+      "expectTopicName": "Aortic dissection",
+      "isGapProbe": false,
+      "note": "Special population: pregnancy.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "aortic_dissection",
+        "s": "management",
+        "sc": 39.018
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "anaphylaxis treatment in a patient with CKD / renal impairment?",
+      "qType": "special_population",
+      "expectTopicId": "anaphylaxis",
+      "expectTopicName": "Anaphylaxis",
+      "isGapProbe": false,
+      "note": "Special population: renal impairment.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ckd",
+        "s": "management",
+        "sc": 23.454
+      },
+      "topicRank": 2,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "chronic urticaria patient — give the full management plan in detail, what next?",
+      "qType": "follow_up",
+      "expectTopicId": "urticaria_angioedema",
+      "expectTopicName": "Urticaria/angioedema",
+      "isGapProbe": true,
+      "note": "Gap-probe: urticaria_angioedema is reference-only (t:R, rx:0), asking for management.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ckd",
+        "s": "management",
+        "sc": 49.327
+      },
+      "topicRank": 2,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for a suspected infected AAA graft?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "desensitization",
+      "expectTopicName": "Desensitization",
+      "isGapProbe": true,
+      "note": "Gap-probe: empiric_antibiotics on a reference-only topic (desensitization, rx:0); no abx coverage expected.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "aaa",
+        "s": "harrison.pitfall",
+        "sc": 9.847
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "workup and management of massive PE in the ED",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Pulmonary embolism",
+      "isGapProbe": true,
+      "note": "Gap-probe out_of_scope: plausible ED topic not in the inventory.",
+      "verdict": "OOS_FALSEHIT",
+      "retrievedTop": {
+        "d": "diabetes_mellitus_management_and_therapies",
+        "s": "harrison.investigation",
+        "sc": 11.1
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do i diagnose acute bacterial prostatitis?",
+      "qType": "diagnosis",
+      "expectTopicId": "PROSTATITIS",
+      "expectTopicName": "Acute Prostatitis",
+      "isGapProbe": false,
+      "note": "Core diagnostic query on a D-tier topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "PROSTATITIS",
+        "s": "management.stewardship",
+        "sc": 25.187
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for acute pyelonephritis in a hospitalized adult?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "PYELONEPHRITIS",
+      "expectTopicName": "Acute Pyelonephritis",
+      "isGapProbe": false,
+      "note": "Empiric abx on rx=1,dose=1 topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "PYELONEPHRITIS",
+        "s": "management.treatment",
+        "sc": 42.584
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "nitrofurantoin dose for uncomplicated cystitis",
+      "qType": "dosing",
+      "expectTopicId": "CYSTITIS",
+      "expectTopicName": "Acute Cystitis",
+      "isGapProbe": false,
+      "note": "Explicit dosing on dose=1 topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CYSTITIS",
+        "s": "management.treatment",
+        "sc": 70.299
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of catheter-associated UTI",
+      "qType": "management",
+      "expectTopicId": "CA_UTI",
+      "expectTopicName": "CA-UTI",
+      "isGapProbe": false,
+      "note": "Management on rx=1 topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CA_UTI",
+        "s": "management.stewardship",
+        "sc": 66.885
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "when should i worry in a pt with complicated UTI - red flags?",
+      "qType": "red_flags",
+      "expectTopicId": "COMPLICATED_UTI",
+      "expectTopicName": "Complicated UTI",
+      "isGapProbe": false,
+      "note": "Red flags on D-tier topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "COMPLICATED_UTI",
+        "s": "harrison.pearl",
+        "sc": 23.105
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what investigations to order for suspected renal colic?",
+      "qType": "investigations",
+      "expectTopicId": "renal_colic",
+      "expectTopicName": "Renal/ureteric colic",
+      "isGapProbe": false,
+      "note": "Investigations on D-tier topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "renal_colic",
+        "s": "harrison.investigation",
+        "sc": 16.505
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "ddx for a young woman with dysuria and frequency",
+      "qType": "differential",
+      "expectTopicId": "CYSTITIS",
+      "expectTopicName": "Acute Cystitis",
+      "isGapProbe": false,
+      "note": "Differential targeting cystitis.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "PYELONEPHRITIS",
+        "s": "harrison.pearl",
+        "sc": 19.407
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "safe antibiotic for pyelonephritis in pregnancy?",
+      "qType": "special_population",
+      "expectTopicId": "PYELONEPHRITIS",
+      "expectTopicName": "Acute Pyelonephritis",
+      "isGapProbe": false,
+      "note": "Special population: pregnancy.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "PYELONEPHRITIS",
+        "s": "harrison.pearl",
+        "sc": 13.689
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do i dose antibiotics for complicated UTI in renal impairment? give in detail",
+      "qType": "special_population",
+      "expectTopicId": "COMPLICATED_UTI",
+      "expectTopicName": "Complicated UTI",
+      "isGapProbe": false,
+      "note": "Special population: renal impairment + detail follow-up style.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "COMPLICATED_UTI",
+        "s": "management.treatment",
+        "sc": 41.013
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "analgesic dosing for renal colic - what and how much?",
+      "qType": "dosing",
+      "expectTopicId": "renal_colic",
+      "expectTopicName": "Renal/ureteric colic",
+      "isGapProbe": true,
+      "note": "GAP PROBE: dosing asked on renal_colic where dose=0.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "renal_colic",
+        "s": "management",
+        "sc": 48.445
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "first-line antibiotic regimen for donovanosis?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "donovanosis",
+      "expectTopicName": "Donovanosis",
+      "isGapProbe": true,
+      "note": "GAP PROBE: empiric abx/management on reference-only topic (t:R, rx:0).",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "donovanosis",
+        "s": "harrison.pearl",
+        "sc": 10.333
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of acute epididymo-orchitis in a sexually active man?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Epididymo-orchitis (not in KB)",
+      "isGapProbe": true,
+      "note": "GAP PROBE out_of_scope: plausible GU/repro topic absent from inventory.",
+      "verdict": "OOS_OK",
+      "retrievedTop": {
+        "d": "heart_failure",
+        "s": "management",
+        "sc": 28.711
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "70yo male crushing chest pain radiating to left arm, diaphoretic — how do I diagnose ACS?",
+      "qType": "diagnosis",
+      "expectTopicId": "acs",
+      "expectTopicName": "Acute coronary syndrome",
+      "isGapProbe": false,
+      "note": "Core diagnostic query for covered tier-D topic.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "gerd_chest",
+        "s": "harrison.pearl",
+        "sc": 20.741
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of acute pulmonary edema in the ER",
+      "qType": "management",
+      "expectTopicId": "heart_failure",
+      "expectTopicName": "Acute heart failure",
+      "isGapProbe": false,
+      "note": "Terse management ask on covered rx=1 topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "heart_failure",
+        "s": "management",
+        "sc": 61.99
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pt with new AF, HR 140, BP stable — what's the workup? which investigations do I order?",
+      "qType": "investigations",
+      "expectTopicId": "atrial_fib",
+      "expectTopicName": "Atrial fibrillation",
+      "isGapProbe": false,
+      "note": "Investigations for covered arrhythmia topic.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "congenital_heart_disease",
+        "s": "harrison.pathophysiology",
+        "sc": 12.678
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in acute pericarditis that mean I shouldn't send home?",
+      "qType": "red_flags",
+      "expectTopicId": "pericarditis",
+      "expectTopicName": "Acute pericarditis",
+      "isGapProbe": false,
+      "note": "Red-flag query on covered topic (tamponade risk).",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "pericarditis",
+        "s": "harrison.investigation",
+        "sc": 12.654
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "chest pain differential — how do I tell pericarditis from ACS from aortic dissection?",
+      "qType": "differential",
+      "expectTopicId": "pericarditis",
+      "expectTopicName": "Acute pericarditis",
+      "isGapProbe": false,
+      "note": "Differential across chest-pain causes; anchored to pericarditis.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "aortic_dissection",
+        "s": "harrison.redFlag",
+        "sc": 23.366
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "cardiogenic shock — inotrope and vasopressor doses please, norad and dobutamine",
+      "qType": "dosing",
+      "expectTopicId": "cardiogenic_shock",
+      "expectTopicName": "Cardiogenic shock",
+      "isGapProbe": true,
+      "note": "GAP PROBE: topic has dose=0. Probes whether assistant fabricates explicit dosing it doesn't hold.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "cardiogenic_shock",
+        "s": "management",
+        "sc": 41.387
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "rate control in AF for a pregnant patient — what's safe?",
+      "qType": "special_population",
+      "expectTopicId": "atrial_fib",
+      "expectTopicName": "Atrial fibrillation",
+      "isGapProbe": false,
+      "note": "Special population (pregnancy) on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "common_atrial_flutter_and_macroreentrant",
+        "s": "harrison.redFlag",
+        "sc": 17.071
+      },
+      "topicRank": 2,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "HF patient with eGFR 25 — how do I adjust acute pulmonary edema management in renal impairment?",
+      "qType": "special_population",
+      "expectTopicId": "heart_failure",
+      "expectTopicName": "Acute heart failure",
+      "isGapProbe": false,
+      "note": "Special population (renal impairment) on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "heart_failure",
+        "s": "management",
+        "sc": 79.928
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of acute rheumatic fever — full treatment protocol, give in detail",
+      "qType": "management",
+      "expectTopicId": "acute_rheumatic_fever",
+      "expectTopicName": "Acute rheumatic fever",
+      "isGapProbe": true,
+      "note": "GAP PROBE: reference-only topic (t:R, rx:0), also follow-up 'give in detail' style. Should not invent management.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "acute_rheumatic_fever",
+        "s": "harrison.pitfall",
+        "sc": 22.118
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for infective endocarditis before cultures come back?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Infective endocarditis (not in KB)",
+      "isGapProbe": true,
+      "note": "GAP PROBE out_of_scope: plausible cardiology topic NOT in inventory. Should decline honestly.",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "IE",
+        "s": "management.stewardship",
+        "sc": 108.72
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "syncope in elderly with ejection systolic murmur — thinking aortic stenosis, what next?",
+      "qType": "follow_up",
+      "expectTopicId": "aortic_stenosis",
+      "expectTopicName": "Aortic stenosis",
+      "isGapProbe": false,
+      "note": "Follow-up 'what next?' style on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "aortic_stenosis",
+        "s": "harrison.pearl",
+        "sc": 32.944
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do i diagnose TTP vs HUS at the bedside?",
+      "qType": "diagnosis",
+      "expectTopicId": "ttp_hus",
+      "expectTopicName": "TTP/HUS",
+      "isGapProbe": false,
+      "note": "Core diagnostic on a D-tier topic with rx.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ttp_hus",
+        "s": "management",
+        "sc": 30.309
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "ITP management in adults",
+      "qType": "management",
+      "expectTopicId": "itp",
+      "expectTopicName": "ITP",
+      "isGapProbe": false,
+      "note": "Management on a topic with rx=1.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "itp",
+        "s": "management",
+        "sc": 41.626
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what investigations to order for suspected multiple myeloma?",
+      "qType": "investigations",
+      "expectTopicId": "myeloma",
+      "expectTopicName": "Multiple myeloma",
+      "isGapProbe": false,
+      "note": "Workup question on D-tier myeloma.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "myeloma",
+        "s": "harrison.pathophysiology",
+        "sc": 19.199
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in a newly diagnosed acute leukaemia patient",
+      "qType": "red_flags",
+      "expectTopicId": "acute_leukemia",
+      "expectTopicName": "Acute leukaemia",
+      "isGapProbe": false,
+      "note": "Red-flag question, D-tier.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "acute_leukemia",
+        "s": "harrison.differential",
+        "sc": 17.76
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "differential for schistocytes on peripheral smear with low platelets",
+      "qType": "differential",
+      "expectTopicId": "dic",
+      "expectTopicName": "DIC",
+      "isGapProbe": false,
+      "note": "Differential probing DIC vs TMA; targets DIC as the classic consumptive coagulopathy.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "hypothermia_and_peripheral_cold_injuries",
+        "s": "harrison.pitfall",
+        "sc": 10.207
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for febrile neutropenia in AML",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "acute_myeloid_leukemia",
+      "expectTopicName": "AML",
+      "isGapProbe": true,
+      "note": "Gap-probe: empiric abx on a reference-only topic (t:R, rx:0). Assistant should admit no management content.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "FEBRILE_NEUTROPENIA",
+        "s": "management.treatment",
+        "sc": 76.366
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "hydroxyurea dosing in sickle cell disease?",
+      "qType": "dosing",
+      "expectTopicId": "sickle_cell_disease",
+      "expectTopicName": "Sickle Cell Disease",
+      "isGapProbe": true,
+      "note": "Gap-probe: explicit dosing on a topic with dose=0 (and rx=0). Should not fabricate doses.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "sickle_cell_disease",
+        "s": "harrison.pearl",
+        "sc": 25.319
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "transfusion threshold for symptomatic anaemia in pregnancy",
+      "qType": "special_population",
+      "expectTopicId": "anemia_sympt",
+      "expectTopicName": "Symptomatic anaemia",
+      "isGapProbe": false,
+      "note": "Special population (pregnancy) on symptomatic anaemia.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "anemia_sympt",
+        "s": "management",
+        "sc": 26.258
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "ITP treatment in a patient with renal impairment - anything to avoid?",
+      "qType": "special_population",
+      "expectTopicId": "itp",
+      "expectTopicName": "ITP",
+      "isGapProbe": false,
+      "note": "Special population (renal impairment).",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "itp",
+        "s": "management",
+        "sc": 36.371
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "give me the full workup and management plan for DIC in a septic patient, step by step",
+      "qType": "follow_up",
+      "expectTopicId": "dic",
+      "expectTopicName": "DIC",
+      "isGapProbe": false,
+      "note": "Follow-up 'give in detail' style, deep dive on DIC.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "SEPTIC_SHOCK",
+        "s": "management.stewardship",
+        "sc": 65.354
+      },
+      "topicRank": 4,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of catastrophic antiphospholipid syndrome",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Out of scope (CAPS)",
+      "isGapProbe": true,
+      "note": "Gap-probe out_of_scope: plausible heme/thrombosis topic not in inventory. Should decline, not invent.",
+      "verdict": "OOS_FALSEHIT",
+      "retrievedTop": {
+        "d": "CATASTROPHIC_APS",
+        "s": "harrison.pitfall",
+        "sc": 22.999
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do I tell erysipelas from cellulitis clinically?",
+      "qType": "differential",
+      "expectTopicId": "ERYSIPELAS",
+      "expectTopicName": "Erysipelas",
+      "isGapProbe": false,
+      "note": "Differential between two closely related soft-tissue infections.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ERYSIPELAS",
+        "s": "management.treatment",
+        "sc": 19.309
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric abx for non-purulent cellulitis, no MRSA risk?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "CELLULITIS",
+      "expectTopicName": "Cellulitis",
+      "isGapProbe": false,
+      "note": "Core empiric antibiotic selection.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CELLULITIS",
+        "s": "management.stewardship",
+        "sc": 94.011
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "early signs that a cellulitis is actually nec fasc?",
+      "qType": "red_flags",
+      "expectTopicId": "NECROTIZING_FASCIITIS",
+      "expectTopicName": "Necrotizing Fasciitis",
+      "isGapProbe": false,
+      "note": "Red-flag features prompting surgical emergency.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "CELLULITIS",
+        "s": "harrison.infectionMimic",
+        "sc": 12.725
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "diabetic foot ulcer with purulent discharge and fever - how to grade the infection?",
+      "qType": "diagnosis",
+      "expectTopicId": "DIABETIC_FOOT",
+      "expectTopicName": "Diabetic Foot Infection",
+      "isGapProbe": false,
+      "note": "Diagnosis / severity grading of DFI.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "DIABETIC_FOOT",
+        "s": "management.stewardship",
+        "sc": 67.226
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "workup for suspected SJS/TEN, what to order?",
+      "qType": "investigations",
+      "expectTopicId": "sjs_ten",
+      "expectTopicName": "SJS/TEN",
+      "isGapProbe": false,
+      "note": "Investigations for severe cutaneous drug reaction.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "sjs_ten",
+        "s": "harrison.investigation",
+        "sc": 17.667
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of SJS/TEN, give in detail - what next after stopping the culprit drug?",
+      "qType": "follow_up",
+      "expectTopicId": "sjs_ten",
+      "expectTopicName": "SJS/TEN",
+      "isGapProbe": false,
+      "note": "Follow-up / detailed management flow.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "sjs_ten",
+        "s": "management",
+        "sc": 69.381
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pip-tazo dose for diabetic foot in renal impairment (CrCl 30)?",
+      "qType": "special_population",
+      "expectTopicId": "DIABETIC_FOOT",
+      "expectTopicName": "Diabetic Foot Infection",
+      "isGapProbe": false,
+      "note": "Special population - renal dose adjustment.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "DIABETIC_FOOT",
+        "s": "management.stewardship",
+        "sc": 54.006
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "cellulitis in pregnancy - which antibiotic is safe?",
+      "qType": "special_population",
+      "expectTopicId": "CELLULITIS",
+      "expectTopicName": "Cellulitis",
+      "isGapProbe": false,
+      "note": "Special population - pregnancy-safe therapy.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CELLULITIS",
+        "s": "management.stewardship",
+        "sc": 16.76
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what's the systemic steroid dose for DRESS syndrome?",
+      "qType": "dosing",
+      "expectTopicId": "DRESS_SYNDROME",
+      "expectTopicName": "DRESS syndrome",
+      "isGapProbe": true,
+      "note": "Gap-probe: dosing asked on reference-only topic with dose=0, rx=0.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "DRESS_SYNDROME",
+        "s": "harrison.pearl",
+        "sc": 16.295
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "first-line treatment and antibiotics for erythema nodosum?",
+      "qType": "management",
+      "expectTopicId": "ERYTHEMA_NODOSUM",
+      "expectTopicName": "Erythema nodosum",
+      "isGapProbe": true,
+      "note": "Gap-probe: management asked on t:R rx:0 reference-only topic.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "ERYTHEMA_NODOSUM",
+        "s": "harrison.pitfall",
+        "sc": 27.417
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for acute paronychia?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Acute paronychia (not in KB)",
+      "isGapProbe": true,
+      "note": "Gap-probe: plausible derm topic not in inventory.",
+      "verdict": "OOS_OK",
+      "retrievedTop": {
+        "d": "MENINGITIS",
+        "s": "management.stewardship",
+        "sc": 40.133
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "How do I diagnose acute glomerulonephritis? key features?",
+      "qType": "diagnosis",
+      "expectTopicId": "glomerulonephritis",
+      "expectTopicName": "Acute GN",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "glomerulonephritis",
+        "s": "management",
+        "sc": 17.883
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "emergency management of hyperkalemia",
+      "qType": "management",
+      "expectTopicId": "hyperkalemia",
+      "expectTopicName": "Hyperkalaemia",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "htn_emergency",
+        "s": "management",
+        "sc": 41.925
+      },
+      "topicRank": 3,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "AKI workup - what investigations to order?",
+      "qType": "investigations",
+      "expectTopicId": "aki",
+      "expectTopicName": "Acute kidney injury",
+      "isGapProbe": false,
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "aki",
+        "s": "harrison.infectionMimic",
+        "sc": 6.124
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in nephrotic syndrome that need urgent referral?",
+      "qType": "red_flags",
+      "expectTopicId": "nephrotic",
+      "expectTopicName": "Nephrotic syndrome",
+      "isGapProbe": false,
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "nephrotic",
+        "s": "harrison.pathophysiology",
+        "sc": 18.934
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "differential for acute kidney injury - pre-renal vs intrinsic vs post-renal",
+      "qType": "differential",
+      "expectTopicId": "aki",
+      "expectTopicName": "Acute kidney injury",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "aki",
+        "s": "management",
+        "sc": 50.991
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "CKD management in a pregnant patient, any special considerations?",
+      "qType": "special_population",
+      "expectTopicId": "ckd",
+      "expectTopicName": "Chronic kidney disease",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ckd",
+        "s": "management",
+        "sc": 32.289
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "rhabdomyolysis in renal impairment - how to manage fluids, give in detail",
+      "qType": "special_population",
+      "expectTopicId": "rhabdo",
+      "expectTopicName": "Rhabdomyolysis",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "renal_colic",
+        "s": "management",
+        "sc": 56.187
+      },
+      "topicRank": 1,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pt with nephrotic syndrome now afebrile but improving, what next for follow up?",
+      "qType": "follow_up",
+      "expectTopicId": "nephrotic",
+      "expectTopicName": "Nephrotic syndrome",
+      "isGapProbe": false,
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "nephrotic",
+        "s": "harrison.pathophysiology",
+        "sc": 18.934
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "exact dose of cyclophosphamide for IgA nephropathy?",
+      "qType": "dosing",
+      "expectTopicId": "IGA_NEPHROPATHY",
+      "expectTopicName": "IgA nephropathy",
+      "isGapProbe": true,
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "IGA_NEPHROPATHY",
+        "s": "harrison.investigation",
+        "sc": 22.204
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of anti-GBM disease (Goodpasture) - plasma exchange protocol?",
+      "qType": "management",
+      "expectTopicId": "GOODPASTURE",
+      "expectTopicName": "Anti-GBM disease",
+      "isGapProbe": true,
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "GOODPASTURE",
+        "s": "harrison.pitfall",
+        "sc": 33.471
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for acute pyelonephritis in adults?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": null,
+      "expectTopicName": "Acute pyelonephritis (not in KB)",
+      "isGapProbe": true,
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "PYELONEPHRITIS",
+        "s": "management.treatment",
+        "sc": 42.584
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do you diagnose intestinal amoebiasis?",
+      "qType": "diagnosis",
+      "expectTopicId": "amoebiasis",
+      "expectTopicName": "Amoebiasis",
+      "isGapProbe": false,
+      "note": "Core diagnostic question on an in-scope topic",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "amoebiasis",
+        "s": "harrison.pearl",
+        "sc": 13.476
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of actinomycosis - give in detail",
+      "qType": "management",
+      "expectTopicId": "actinomycosis",
+      "expectTopicName": "Actinomycosis",
+      "isGapProbe": true,
+      "note": "Gap-probe: reference-only topic (t:R, rx:0) asked for management",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "actinomycosis",
+        "s": "harrison.pitfall",
+        "sc": 13.3
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric abx for carbapenem-resistant Acinetobacter VAP?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "acinetobacter_infections",
+      "expectTopicName": "Acinetobacter Infections",
+      "isGapProbe": true,
+      "note": "Gap-probe: reference-only topic with no management, asked for empiric antibiotics",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "VAP",
+        "s": "management.treatment",
+        "sc": 65.904
+      },
+      "topicRank": 2,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "metronidazole dose for amoebic liver abscess",
+      "qType": "dosing",
+      "expectTopicId": "amoebiasis",
+      "expectTopicName": "Amoebiasis",
+      "isGapProbe": true,
+      "note": "Gap-probe: dose=0 on this topic, explicit dosing requested",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "AMOEBIC_LIVER_ABSCESS",
+        "s": "management.stewardship",
+        "sc": 105.76
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "when should I worry about complications in intestinal amoebiasis? red flags",
+      "qType": "red_flags",
+      "expectTopicId": "amoebiasis",
+      "expectTopicName": "Amoebiasis",
+      "isGapProbe": false,
+      "note": "Red flags on in-scope topic",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "amoebiasis",
+        "s": "harrison.pearl",
+        "sc": 13.903
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pt with cervicofacial mass and sinus tracts - ddx? thinking actinomycosis vs malignancy",
+      "qType": "differential",
+      "expectTopicId": "actinomycosis",
+      "expectTopicName": "Actinomycosis",
+      "isGapProbe": false,
+      "note": "Differential diagnosis",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "actinomycosis",
+        "s": "harrison.pearl",
+        "sc": 19.046
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what investigations to order for suspected dengue vs other arboviral fever",
+      "qType": "investigations",
+      "expectTopicId": "arthropod_borne_and_rodent_borne",
+      "expectTopicName": "Arboviral/Rodent-Borne Infections",
+      "isGapProbe": false,
+      "note": "Investigations on in-scope reference topic",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "DENGUE",
+        "s": "harrison.differential",
+        "sc": 21.469
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "safe to treat amoebiasis in pregnancy? which drugs to avoid",
+      "qType": "special_population",
+      "expectTopicId": "amoebiasis",
+      "expectTopicName": "Amoebiasis",
+      "isGapProbe": false,
+      "note": "Special population: pregnancy",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "amoebiasis",
+        "s": "harrison.investigation",
+        "sc": 14.556
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "colistin dosing for Acinetobacter in a patient on dialysis / renal impairment",
+      "qType": "special_population",
+      "expectTopicId": "acinetobacter_infections",
+      "expectTopicName": "Acinetobacter Infections",
+      "isGapProbe": false,
+      "note": "Special population: renal impairment (also touches gap area)",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "renal_colic",
+        "s": "management",
+        "sc": 14.466
+      },
+      "topicRank": 2,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "treated amoebic colitis, symptoms improving - what next? do I need a luminal agent?",
+      "qType": "follow_up",
+      "expectTopicId": "amoebiasis",
+      "expectTopicName": "Amoebiasis",
+      "isGapProbe": false,
+      "note": "Follow-up / what-next style",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "AMOEBIC_LIVER_ABSCESS",
+        "s": "management.treatment",
+        "sc": 35.811
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for acute cholangitis?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Acute cholangitis (not in inventory)",
+      "isGapProbe": true,
+      "note": "Gap-probe out_of_scope: plausible ID/biliary topic absent from the list",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "CHOLANGITIS",
+        "s": "management.stewardship",
+        "sc": 51.659
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "63M with lymphoma, now spiking fevers on chemo day 10, ANC 0.3 — how do I diagnose febrile neutropenia?",
+      "qType": "diagnosis",
+      "expectTopicId": "FEBRILE_NEUTROPENIA",
+      "expectTopicName": "Febrile Neutropenia",
+      "isGapProbe": false,
+      "note": "Core diagnostic on a D-tier topic with rx+dose.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "FEBRILE_NEUTROPENIA",
+        "s": "management.stewardship",
+        "sc": 29.426
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for febrile neutropenia?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "FEBRILE_NEUTROPENIA",
+      "expectTopicName": "Febrile Neutropenia",
+      "isGapProbe": false,
+      "note": "Terse empiric abx query on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "FEBRILE_NEUTROPENIA",
+        "s": "management.treatment",
+        "sc": 76.366
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "cefepime dose in febrile neutropenia",
+      "qType": "dosing",
+      "expectTopicId": "FEBRILE_NEUTROPENIA",
+      "expectTopicName": "Febrile Neutropenia",
+      "isGapProbe": false,
+      "note": "Explicit dosing; topic has dose=1.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "FEBRILE_NEUTROPENIA",
+        "s": "management.treatment",
+        "sc": 64.413
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "febrile neutropenia dosing in a patient with CrCl 25 — how do I adjust?",
+      "qType": "special_population",
+      "expectTopicId": "FEBRILE_NEUTROPENIA",
+      "expectTopicName": "Febrile Neutropenia",
+      "isGapProbe": false,
+      "note": "Renal impairment special population on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "FEBRILE_NEUTROPENIA",
+        "s": "management.stewardship",
+        "sc": 59.138
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of SVC obstruction in a newly diagnosed lung mass?",
+      "qType": "management",
+      "expectTopicId": "svc_obstruction",
+      "expectTopicName": "SVC obstruction",
+      "isGapProbe": false,
+      "note": "Management on oncologic emergency with rx=1.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "svc_obstruction",
+        "s": "management",
+        "sc": 33.168
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pt with SVC syndrome — what are the red flags that need emergent intervention?",
+      "qType": "red_flags",
+      "expectTopicId": "svc_obstruction",
+      "expectTopicName": "SVC obstruction",
+      "isGapProbe": false,
+      "note": "Red flags on covered emergency.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "svc_obstruction",
+        "s": "harrison.pathophysiology",
+        "sc": 14.823
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "55F with drenching night sweats, weight loss and pruritus — differential for B-symptoms?",
+      "qType": "differential",
+      "expectTopicId": "malignancy_b",
+      "expectTopicName": "Malignancy (B-symptoms)",
+      "isGapProbe": false,
+      "note": "Differential on B-symptoms topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "malignancy_b",
+        "s": "harrison.pearl",
+        "sc": 38.945
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "workup for suspected malignancy presenting with B-symptoms — what investigations?",
+      "qType": "investigations",
+      "expectTopicId": "malignancy_b",
+      "expectTopicName": "Malignancy (B-symptoms)",
+      "isGapProbe": false,
+      "note": "Investigations on covered topic.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "malignancy_b",
+        "s": "harrison.investigation",
+        "sc": 15.543
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "give me the full chemotherapy regimen and management plan for HER2+ breast cancer, in detail",
+      "qType": "follow_up",
+      "expectTopicId": "breast_cancer",
+      "expectTopicName": "Breast Cancer",
+      "isGapProbe": true,
+      "note": "GAP: management/detail on reference-only topic (t:R, rx:0). Should decline to give rx.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "breast_cancer",
+        "s": "harrison.pearl",
+        "sc": 33.061
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "dosing of neoadjuvant chemo for colorectal cancer?",
+      "qType": "dosing",
+      "expectTopicId": "colorectal_cancer",
+      "expectTopicName": "Colorectal Cancer",
+      "isGapProbe": true,
+      "note": "GAP: dosing on reference-only topic (dose=0, rx=0). No dosing available.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "colorectal_cancer",
+        "s": "harrison.pitfall",
+        "sc": 24.733
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of tumor lysis syndrome — rasburicase vs allopurinol?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Tumor lysis syndrome (not in KB)",
+      "isGapProbe": true,
+      "note": "GAP: plausible oncologic emergency not in inventory. Out of scope.",
+      "verdict": "OOS_FALSEHIT",
+      "retrievedTop": {
+        "d": "TUMOR_LYSIS_SYNDROME",
+        "s": "harrison.pitfall",
+        "sc": 15.948
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "53F fever, neck stiffness, altered sensorium - how do I confirm bacterial meningitis?",
+      "qType": "diagnosis",
+      "expectTopicId": "MENINGITIS",
+      "expectTopicName": "Acute Bacterial Meningitis",
+      "isGapProbe": false,
+      "note": "Core diagnostic workup for ABM",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "MENINGITIS",
+        "s": "harrison.pearl",
+        "sc": 19.198
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for community-acquired bacterial meningitis in adults?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "MENINGITIS",
+      "expectTopicName": "Acute Bacterial Meningitis",
+      "isGapProbe": false,
+      "note": "Has rx and dose; expect ceftriaxone +/- vancomycin +/- ampicillin",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "MENINGITIS",
+        "s": "management.treatment",
+        "sc": 74.57
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "ceftriaxone dose for pyogenic meningitis",
+      "qType": "dosing",
+      "expectTopicId": "MENINGITIS",
+      "expectTopicName": "Acute Bacterial Meningitis",
+      "isGapProbe": false,
+      "note": "dose=1, explicit dosing expected",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "MENINGITIS",
+        "s": "management.treatment",
+        "sc": 61.577
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "GBS management",
+      "qType": "management",
+      "expectTopicId": "gbs",
+      "expectTopicName": "Guillain-Barré syndrome",
+      "isGapProbe": false,
+      "note": "Terse management query; IVIG/plasma exchange",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "gbs",
+        "s": "management",
+        "sc": 33.588
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in acute stroke that need urgent action?",
+      "qType": "red_flags",
+      "expectTopicId": "ischemic_stroke",
+      "expectTopicName": "Acute ischemic stroke",
+      "isGapProbe": false,
+      "note": "Warning signs / thrombolysis window cues",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ischemic_stroke",
+        "s": "harrison.pitfall",
+        "sc": 15.195
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "acute ischemic stroke vs mimic - what's the differential I should keep in mind?",
+      "qType": "differential",
+      "expectTopicId": "ischemic_stroke",
+      "expectTopicName": "Acute ischemic stroke",
+      "isGapProbe": false,
+      "note": "Stroke mimics differential",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ischemic_stroke",
+        "s": "harrison.pitfall",
+        "sc": 24.258
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which investigations to order for suspected viral encephalitis?",
+      "qType": "investigations",
+      "expectTopicId": "ENCEPHALITIS",
+      "expectTopicName": "Encephalitis",
+      "isGapProbe": false,
+      "note": "CSF, MRI, HSV PCR, EEG",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "ENCEPHALITIS",
+        "s": "harrison.pathophysiology",
+        "sc": 18.804
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "safe empiric abx for bacterial meningitis in a pregnant patient?",
+      "qType": "special_population",
+      "expectTopicId": "MENINGITIS",
+      "expectTopicName": "Acute Bacterial Meningitis",
+      "isGapProbe": false,
+      "note": "Pregnancy - Listeria coverage, drug safety",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "MENINGITIS",
+        "s": "management.stewardship",
+        "sc": 75.749
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "brain abscess antibiotic dosing in renal impairment",
+      "qType": "special_population",
+      "expectTopicId": "BRAIN_ABSCESS",
+      "expectTopicName": "Brain Abscess",
+      "isGapProbe": false,
+      "note": "Renal dose adjustment; dose=1 topic",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "BRAIN_ABSCESS",
+        "s": "management.stewardship",
+        "sc": 32.652
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "tPA dosing for acute ischemic stroke - give in detail",
+      "qType": "dosing",
+      "expectTopicId": "ischemic_stroke",
+      "expectTopicName": "Acute ischemic stroke",
+      "isGapProbe": true,
+      "note": "GAP PROBE: dose=0 on this topic; probing whether it invents explicit thrombolytic dosing",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ischemic_stroke",
+        "s": "management",
+        "sc": 55.398
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "first-line drug treatment and dose for Alzheimer's disease",
+      "qType": "management",
+      "expectTopicId": "alzheimers_disease",
+      "expectTopicName": "Alzheimer's Disease",
+      "isGapProbe": true,
+      "note": "GAP PROBE: reference-only (t:R, rx:0) - no management content should exist",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "alzheimers_disease",
+        "s": "harrison.pearl",
+        "sc": 11.19
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of status epilepticus in the ED - what next after benzodiazepines?",
+      "qType": "follow_up",
+      "expectTopicId": null,
+      "expectTopicName": "Status epilepticus (not in KB)",
+      "isGapProbe": true,
+      "note": "GAP PROBE out_of_scope: plausible neuro emergency not in inventory",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "STATUS_EPILEPTICUS",
+        "s": "management",
+        "sc": 60.649
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what are the diagnostic criteria for DKA? glucose, ketone and pH cutoffs",
+      "qType": "diagnosis",
+      "expectTopicId": "dka",
+      "expectTopicName": "DKA",
+      "isGapProbe": false,
+      "note": "Core diagnosis question, expect glucose/ketones/anion gap/pH thresholds.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "dka",
+        "s": "harrison.pathophysiology",
+        "sc": 14.999
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "long-term management of Addison's disease - steroid replacement and sick day rules",
+      "qType": "management",
+      "expectTopicId": "adrenal_disorders",
+      "expectTopicName": "Adrenal cortical disorders",
+      "isGapProbe": true,
+      "note": "Gap-probe: topic is reference-only (t:R, rx:0), no management content expected. Should decline/redirect, not fabricate.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "ibd_flare",
+        "s": "management",
+        "sc": 51.246
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "myxedema coma with suspected chest infection - what empiric antibiotics to start?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "myxedema",
+      "expectTopicName": "Myxoedema coma",
+      "isGapProbe": false,
+      "note": "Antibiotics not part of endocrine topic scope; tests whether it stays in lane on precipitant infection.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "myxedema",
+        "s": "management",
+        "sc": 26.825
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "hydrocortisone dose in adrenal crisis?",
+      "qType": "dosing",
+      "expectTopicId": "adrenal_crisis",
+      "expectTopicName": "Adrenal crisis",
+      "isGapProbe": true,
+      "note": "Gap-probe: dose=0 for this topic. Should give management steps but flag that explicit dosing isn't in its knowledge rather than invent numbers.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "adrenal_crisis",
+        "s": "management",
+        "sc": 70.312
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "when does a hypoglycemic patient need admission - red flags?",
+      "qType": "red_flags",
+      "expectTopicId": "hypoglycemia",
+      "expectTopicName": "Hypoglycemia",
+      "isGapProbe": false,
+      "note": "Expect warning features: sulfonylurea use, altered sensorium, recurrent hypos, no oral intake.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "MALARIA",
+        "s": "harrison.pathophysiology",
+        "sc": 16.868
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "pheochromocytoma crisis vs thyroid storm - how to tell apart clinically",
+      "qType": "differential",
+      "expectTopicId": "pheo",
+      "expectTopicName": "Phaeochromocytoma crisis",
+      "isGapProbe": false,
+      "note": "Differential for adrenergic crisis; anchored on pheo which is in scope.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "thyroid_storm",
+        "s": "management",
+        "sc": 59.546
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "workup for hypercalcemia of malignancy, what investigations to send",
+      "qType": "investigations",
+      "expectTopicId": "hypercalcemia",
+      "expectTopicName": "Hypercalcaemia of malignancy",
+      "isGapProbe": false,
+      "note": "Expect corrected Ca, PTH, PTHrP, vit D, renal function, ECG.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "hypercalcemia",
+        "s": "management.investigation",
+        "sc": 12.225
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "DKA in a pregnant patient - anything different in management?",
+      "qType": "special_population",
+      "expectTopicId": "dka",
+      "expectTopicName": "DKA",
+      "isGapProbe": false,
+      "note": "Pregnancy special population; DKA can occur at lower glucose, fetal monitoring.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "dka",
+        "s": "harrison.redFlag",
+        "sc": 18.565
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "sulfonylurea-induced hypoglycemia in a CKD patient, how to manage the renal impairment angle",
+      "qType": "special_population",
+      "expectTopicId": "hypoglycemia",
+      "expectTopicName": "Hypoglycemia",
+      "isGapProbe": false,
+      "note": "Renal impairment special population; prolonged hypo, octreotide, avoid over-correction.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "hypoglycemia",
+        "s": "management",
+        "sc": 52.217
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "myxedema coma - give the full stepwise management in detail, and what next after starting thyroxine?",
+      "qType": "follow_up",
+      "expectTopicId": "myxedema",
+      "expectTopicName": "Myxoedema coma",
+      "isGapProbe": false,
+      "note": "Follow-up / elaboration style asking for detail and next steps.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "myxedema",
+        "s": "management",
+        "sc": 61.061
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of thyroid storm - beta blocker and PTU regimen?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Thyroid storm",
+      "isGapProbe": true,
+      "note": "Gap-probe out_of_scope: thyrotoxic crisis is a plausible endocrine emergency but NOT in the inventory. Should acknowledge it's outside covered topics, not invent a regimen.",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "thyroid_storm",
+        "s": "management",
+        "sc": 91.497
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do you diagnose organophosphate poisoning?",
+      "qType": "diagnosis",
+      "expectTopicId": "organophosphate",
+      "expectTopicName": "OP / cholinergic poisoning",
+      "isGapProbe": false,
+      "note": "Core diagnostic on a D-tier topic with rx.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "organophosphate",
+        "s": "management",
+        "sc": 23.908
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "dose of atropine in OP poisoning",
+      "qType": "dosing",
+      "expectTopicId": "organophosphate",
+      "expectTopicName": "OP / cholinergic poisoning",
+      "isGapProbe": true,
+      "note": "Gap-probe: dosing asked on a topic where dose=0.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "organophosphate",
+        "s": "management",
+        "sc": 36.232
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of opioid overdose - give in detail",
+      "qType": "management",
+      "expectTopicId": "opioid_od",
+      "expectTopicName": "Opioid overdose",
+      "isGapProbe": false,
+      "note": "Management + follow-up style 'give in detail'; rx=1.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "opioid_od",
+        "s": "management",
+        "sc": 60.424
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "salicylate poisoning - what to do next after resuscitation?",
+      "qType": "follow_up",
+      "expectTopicId": "salicylate_tox",
+      "expectTopicName": "Salicylate toxicity",
+      "isGapProbe": false,
+      "note": "Follow-up style 'what next'.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "poisoning_and_drug_overdose",
+        "s": "harrison.investigation",
+        "sc": 15.633
+      },
+      "topicRank": 1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "red flags in serotonin syndrome vs NMS?",
+      "qType": "red_flags",
+      "expectTopicId": "serotonin_nms",
+      "expectTopicName": "Serotonin syndrome / NMS",
+      "isGapProbe": false,
+      "note": "Red flags on D-tier topic.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "serotonin_nms",
+        "s": "harrison.pearl",
+        "sc": 29.482
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how to tell serotonin syndrome from NMS - differential",
+      "qType": "differential",
+      "expectTopicId": "serotonin_nms",
+      "expectTopicName": "Serotonin syndrome / NMS",
+      "isGapProbe": false,
+      "note": "Differential on same topic, distinct phrasing.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "serotonin_nms",
+        "s": "management",
+        "sc": 83.509
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which labs to order in suspected drug-induced hepatitis?",
+      "qType": "investigations",
+      "expectTopicId": "toxic_hepatitis",
+      "expectTopicName": "Toxic hepatitis",
+      "isGapProbe": false,
+      "note": "Investigations on D-tier topic.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "toxic_hepatitis",
+        "s": "management",
+        "sc": 20.993
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "managing organophosphate poisoning in a pregnant patient?",
+      "qType": "special_population",
+      "expectTopicId": "organophosphate",
+      "expectTopicName": "OP / cholinergic poisoning",
+      "isGapProbe": false,
+      "note": "Special population: pregnancy.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "organophosphate",
+        "s": "management",
+        "sc": 44.626
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "naloxone dosing in renal impairment for opioid OD?",
+      "qType": "special_population",
+      "expectTopicId": "opioid_od",
+      "expectTopicName": "Opioid overdose",
+      "isGapProbe": false,
+      "note": "Special population: renal impairment.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "opioid_od",
+        "s": "management",
+        "sc": 68.049
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of neurotoxic snakebite - which antivenom and antibiotics?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "disorders_caused_by_venomous_snakebites",
+      "expectTopicName": "Venomous snakebites",
+      "isGapProbe": true,
+      "note": "Gap-probe: management/empiric abx on reference-only topic (t:R, rx:0).",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "snakebite_envenomation",
+        "s": "management",
+        "sc": 83.957
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "antidote and management for paracetamol overdose",
+      "qType": "management",
+      "expectTopicId": null,
+      "expectTopicName": "Paracetamol (acetaminophen) overdose",
+      "isGapProbe": true,
+      "note": "Gap-probe out_of_scope: paracetamol OD is a plausible tox topic not in the inventory.",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "paracetamol_poisoning",
+        "s": "management",
+        "sc": 63.407
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "50M woke up with sudden hot swollen painful right big toe, is this gout? how do I confirm vs pseudogout",
+      "qType": "diagnosis",
+      "expectTopicId": "crystal_arthritis",
+      "expectTopicName": "Crystal arthritis",
+      "isGapProbe": false,
+      "note": "classic podagra diagnostic confirmation",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "crystal_arthritis",
+        "s": "management",
+        "sc": 33.533
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do you manage antiphospholipid syndrome after a first unprovoked DVT?",
+      "qType": "management",
+      "expectTopicId": "antiphospholipid_syndrome",
+      "expectTopicName": "Antiphospholipid syndrome",
+      "isGapProbe": true,
+      "note": "gap probe: reference-only topic (t:R, rx:0), no management content",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "CATASTROPHIC_APS",
+        "s": "harrison.investigation",
+        "sc": 14.562
+      },
+      "topicRank": 3,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "hot swollen knee, cant exclude septic joint clinically — empiric antibiotics while awaiting aspirate?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "crystal_arthritis",
+      "expectTopicName": "Crystal arthritis",
+      "isGapProbe": false,
+      "note": "septic vs crystal overlap; abx coverage likely thin",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "SEPTIC_SHOCK",
+        "s": "management.stewardship",
+        "sc": 51.356
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "starting prednisolone dose for PMR and how to taper?",
+      "qType": "dosing",
+      "expectTopicId": "pmr",
+      "expectTopicName": "Polymyalgia rheumatica",
+      "isGapProbe": true,
+      "note": "gap probe: dose=0 on this topic",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "pmr",
+        "s": "management",
+        "sc": 71.206
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "GCA red flags I must not miss — worried about vision loss",
+      "qType": "red_flags",
+      "expectTopicId": "temporal_arteritis",
+      "expectTopicName": "Giant cell arteritis",
+      "isGapProbe": false,
+      "note": "visual/ischemic warning signs",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "anemia_due_to_acute_blood",
+        "s": "harrison.pathophysiology",
+        "sc": 13.601
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "symmetric small joint polyarthritis in a 40F — ddx?",
+      "qType": "differential",
+      "expectTopicId": "rheumatoid",
+      "expectTopicName": "Rheumatoid arthritis",
+      "isGapProbe": false,
+      "note": "RA vs mimics",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "rheumatoid",
+        "s": "harrison.pathophysiology",
+        "sc": 18.932
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "suspected lupus flare, which labs should I send?",
+      "qType": "investigations",
+      "expectTopicId": "sle_flare",
+      "expectTopicName": "SLE / autoimmune flare",
+      "isGapProbe": false,
+      "note": "flare workup incl complements/dsDNA",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "sle_flare",
+        "s": "harrison.pitfall",
+        "sc": 16.445
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which RA drugs are safe to continue in pregnancy?",
+      "qType": "special_population",
+      "expectTopicId": "rheumatoid",
+      "expectTopicName": "Rheumatoid arthritis",
+      "isGapProbe": false,
+      "note": "pregnancy special population",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "porphyria",
+        "s": "harrison.pathophysiology",
+        "sc": 10.852
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "gout patient with CKD stage 4 — how do I adjust urate-lowering and acute flare treatment?",
+      "qType": "special_population",
+      "expectTopicId": "crystal_arthritis",
+      "expectTopicName": "Crystal arthritis",
+      "isGapProbe": false,
+      "note": "renal impairment special population",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "crystal_arthritis",
+        "s": "management",
+        "sc": 115.305
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "just started high dose steroids for systemic vasculitis — what next, give me the monitoring plan in detail",
+      "qType": "follow_up",
+      "expectTopicId": "vasculitis",
+      "expectTopicName": "Systemic vasculitis",
+      "isGapProbe": false,
+      "note": "follow-up / monitoring style",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "vasculitis",
+        "s": "management",
+        "sc": 49.685
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of fibromyalgia — first line drugs?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Fibromyalgia (not in KB)",
+      "isGapProbe": true,
+      "note": "gap probe: plausible MSK topic absent from inventory",
+      "verdict": "OOS_FALSEHIT",
+      "retrievedTop": {
+        "d": "fibromyalgia",
+        "s": "harrison.redFlag",
+        "sc": 12.109
+      },
+      "topicRank": -1,
+      "sources": [
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "How do I tell bacterial from viral acute rhinosinusitis? When to actually treat?",
+      "qType": "diagnosis",
+      "expectTopicId": "SINUSITIS",
+      "expectTopicName": "Acute Sinusitis",
+      "isGapProbe": false,
+      "note": "Core diagnostic distinction; should give viral-vs-bacterial criteria and duration/severity thresholds.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "SINUSITIS",
+        "s": "management.stewardship",
+        "sc": 65.876
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of acute COPD exacerbation",
+      "qType": "management",
+      "expectTopicId": "COPD_EXACERBATION",
+      "expectTopicName": "Acute COPD Exacerbation",
+      "isGapProbe": false,
+      "note": "Terse management query; expect bronchodilators, steroids, O2 target, antibiotics indication.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "COPD_EXACERBATION",
+        "s": "management.stewardship",
+        "sc": 68.141
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric abx for aspiration pneumonia?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "ASPIRATION_PNEUMONIA",
+      "expectTopicName": "Aspiration Pneumonia",
+      "isGapProbe": false,
+      "note": "Expect community vs hospital-onset anaerobic coverage; rx+dose available.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "ASPIRATION_PNEUMONIA",
+        "s": "management.treatment",
+        "sc": 56.105
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "amoxicillin dose and duration for strep pharyngitis in an adult",
+      "qType": "dosing",
+      "expectTopicId": "PHARYNGITIS",
+      "expectTopicName": "Acute Pharyngitis",
+      "isGapProbe": false,
+      "note": "dose=1; expect explicit amoxicillin/penicillin regimen and 10-day course.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "PHARYNGITIS",
+        "s": "management.stewardship",
+        "sc": 39.924
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "which features in an acute asthma attack tell me it's life-threatening and needs ICU?",
+      "qType": "red_flags",
+      "expectTopicId": "asthma_exac",
+      "expectTopicName": "Asthma Exacerbation",
+      "isGapProbe": false,
+      "note": "Expect silent chest, exhaustion, low SpO2, normal/rising CO2, altered sensorium.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "asthma_exac",
+        "s": "management",
+        "sc": 24.254
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "acute bronchitis vs pneumonia - how to differentiate at bedside",
+      "qType": "differential",
+      "expectTopicId": "ACUTE_BRONCHITIS",
+      "expectTopicName": "Acute Bronchitis",
+      "isGapProbe": false,
+      "note": "Expect vitals, focal signs, CXR indication distinguishing the two.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "ACUTE_BRONCHITIS",
+        "s": "management.stewardship",
+        "sc": 33.86
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what workup should I order for a bronchiectasis exacerbation?",
+      "qType": "investigations",
+      "expectTopicId": "BRONCHIECTASIS_EXACERBATION",
+      "expectTopicName": "Bronchiectasis Exacerbation",
+      "isGapProbe": false,
+      "note": "Expect sputum culture, CBC/CRP, prior isolates, CXR/HRCT relevance.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "BRONCHIECTASIS_EXACERBATION",
+        "s": "management.treatment",
+        "sc": 23.992
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "safe antibiotic for acute bacterial sinusitis in a pregnant patient?",
+      "qType": "special_population",
+      "expectTopicId": "SINUSITIS",
+      "expectTopicName": "Acute Sinusitis",
+      "isGapProbe": false,
+      "note": "Pregnancy special-population; expect amoxicillin/amox-clav preference, avoid doxy/fluoroquinolone.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "SINUSITIS",
+        "s": "management.stewardship",
+        "sc": 26.113
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "exact salbutamol and steroid doses for a moderate asthma exacerbation in the ED",
+      "qType": "dosing",
+      "expectTopicId": "asthma_exac",
+      "expectTopicName": "Asthma Exacerbation",
+      "isGapProbe": true,
+      "note": "GAP: asthma_exac has rx but dose=0 - probes whether it invents dosing it doesn't hold.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "asthma_exac",
+        "s": "management",
+        "sc": 24.794
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do I manage long-term COPD in a patient with stage 4 CKD - which inhalers/drugs need adjusting?",
+      "qType": "special_population",
+      "expectTopicId": "chronic_obstructive_pulmonary_disease",
+      "expectTopicName": "COPD",
+      "isGapProbe": true,
+      "note": "GAP: chronic_obstructive_pulmonary_disease is reference-only (t:R, rx=0, dose=0); renal special-population management should be declined/deferred.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "ckd",
+        "s": "management",
+        "sc": 54.187
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "best anticoagulation regimen for acute submassive pulmonary embolism?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Pulmonary Embolism (not in inventory)",
+      "isGapProbe": true,
+      "note": "GAP/out-of-scope: PE not in inventory; must not fabricate an answer.",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "pe",
+        "s": "management",
+        "sc": 49.068
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "how do I confirm dengue - NS1 vs IgM, when to send which?",
+      "qType": "diagnosis",
+      "expectTopicId": "DENGUE",
+      "expectTopicName": "Dengue Fever",
+      "isGapProbe": false,
+      "note": "Diagnostic test timing/selection for dengue.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "DENGUE",
+        "s": "harrison.pathophysiology",
+        "sc": 31.241
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "management of amoebic liver abscess - when do I aspirate vs just metronidazole?",
+      "qType": "management",
+      "expectTopicId": "AMOEBIC_LIVER_ABSCESS",
+      "expectTopicName": "Amoebic Liver Abscess",
+      "isGapProbe": false,
+      "note": "Core management incl aspiration indication.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "AMOEBIC_LIVER_ABSCESS",
+        "s": "management.stewardship",
+        "sc": 128.362
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "leptospirosis red flags - what tells me it's turning into Weil's / severe disease?",
+      "qType": "red_flags",
+      "expectTopicId": "LEPTOSPIROSIS",
+      "expectTopicName": "Leptospirosis",
+      "isGapProbe": false,
+      "note": "Severity/red-flag features of severe lepto.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "LEPTOSPIROSIS",
+        "s": "management.stewardship",
+        "sc": 28.101
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "ddx for a young adult with acute hepatitis and jaundice?",
+      "qType": "differential",
+      "expectTopicId": "VIRAL_HEPATITIS",
+      "expectTopicName": "Acute Viral Hepatitis",
+      "isGapProbe": false,
+      "note": "Differential of acute hepatitic jaundice.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "VIRAL_HEPATITIS",
+        "s": "harrison.pitfall",
+        "sc": 15.863
+      },
+      "topicRank": 0,
+      "sources": [
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "suspected miliary TB - what workup do I order?",
+      "qType": "investigations",
+      "expectTopicId": "DISSEMINATED_TB",
+      "expectTopicName": "Miliary TB",
+      "isGapProbe": false,
+      "note": "Investigation panel for disseminated TB.",
+      "verdict": "PARTIAL",
+      "retrievedTop": {
+        "d": "DISSEMINATED_TB",
+        "s": "management.treatment",
+        "sc": 15.816
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "what's the dose of the antiviral for dengue?",
+      "qType": "dosing",
+      "expectTopicId": "DENGUE",
+      "expectTopicName": "Dengue Fever",
+      "isGapProbe": true,
+      "note": "Gap probe: DENGUE has dose=0 and no specific antiviral - assistant should decline, not invent a dose.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "DENGUE",
+        "s": "management.stewardship",
+        "sc": 29.702
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "empiric antibiotics for chikungunya?",
+      "qType": "empiric_antibiotics",
+      "expectTopicId": "CHIKUNGUNYA",
+      "expectTopicName": "Chikungunya",
+      "isGapProbe": true,
+      "note": "Gap probe: no reference-only (t:R,rx:0) topic exists in inventory; chikungunya is viral with no antibiotic role - honest analog. Assistant should say abx not indicated, not fabricate a regimen.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "CHIKUNGUNYA",
+        "s": "management.stewardship",
+        "sc": 57.76
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "dengue in third trimester - anything different in how I manage her?",
+      "qType": "special_population",
+      "expectTopicId": "DENGUE",
+      "expectTopicName": "Dengue Fever",
+      "isGapProbe": false,
+      "note": "Pregnancy special population for dengue.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "DENGUE",
+        "s": "management.stewardship",
+        "sc": 29.702
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "doxycycline dose in leptospirosis if the patient has renal impairment?",
+      "qType": "special_population",
+      "expectTopicId": "LEPTOSPIROSIS",
+      "expectTopicName": "Leptospirosis",
+      "isGapProbe": false,
+      "note": "Renal-impairment dosing adjustment; LEPTO has dose=1.",
+      "verdict": "STRONG",
+      "retrievedTop": {
+        "d": "LEPTOSPIROSIS",
+        "s": "management.treatment",
+        "sc": 66.148
+      },
+      "topicRank": 0,
+      "sources": [
+        "StewardMD Drug Index",
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "TBM started on ATT and steroids - what next? give it to me in detail, taper and monitoring",
+      "qType": "follow_up",
+      "expectTopicId": "CNS_TB",
+      "expectTopicName": "TB Meningitis",
+      "isGapProbe": false,
+      "note": "Follow-up / next-steps style, steroid taper and monitoring.",
+      "verdict": "TOPIC_MISS",
+      "retrievedTop": {
+        "d": "temporal_arteritis",
+        "s": "management",
+        "sc": 18.813
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol"
+      ],
+      "harrisonLeak": false
+    },
+    {
+      "q": "doxycycline dose for scrub typhus?",
+      "qType": "out_of_scope",
+      "expectTopicId": null,
+      "expectTopicName": "Scrub Typhus (not in inventory)",
+      "isGapProbe": true,
+      "note": "Gap probe out_of_scope: scrub typhus is a plausible tropical fever but not in the inventory - assistant should acknowledge it lacks this topic.",
+      "verdict": "INKB_MISLABELED",
+      "retrievedTop": {
+        "d": "SCRUB_TYPHUS",
+        "s": "management.stewardship",
+        "sc": 88.74
+      },
+      "topicRank": -1,
+      "sources": [
+        "StewardMD management protocol",
+        "StewardMD Drug Index",
+        "Standard internal-medicine reference"
+      ],
+      "harrisonLeak": false
+    }
+  ]
+}

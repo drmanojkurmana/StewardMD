@@ -1,0 +1,163 @@
+{
+  "generated": "run-live-eval.mjs",
+  "base": "https://stewardmd.in/",
+  "note": "Element-coverage + safety heuristics on REAL provider answers; NOT clinician-certified.",
+  "counts": {
+    "total": 6,
+    "answered": 4,
+    "blocked": 2
+  },
+  "answered": {
+    "passed": 0,
+    "of": 4,
+    "avgElementCoveragePct": 92
+  },
+  "blocked": [
+    {
+      "id": "L-05",
+      "status": "quota_blocked"
+    },
+    {
+      "id": "L-06",
+      "status": "quota_blocked"
+    }
+  ],
+  "results": [
+    {
+      "id": "L-01",
+      "topic": "acute cholangitis",
+      "status": "answered",
+      "answerLen": 1179,
+      "elements": [
+        {
+          "name": "biliary drainage",
+          "present": true
+        },
+        {
+          "name": "antibiotics",
+          "present": true
+        },
+        {
+          "name": "resuscitation/sepsis",
+          "present": false
+        }
+      ],
+      "flags": {
+        "elementCoverage": 67,
+        "allElements": false,
+        "truncated": true,
+        "no_narration_leak": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true,
+        "sources_shown": true
+      },
+      "pass": false,
+      "answerPreview": "Educational clinical reference — verify with local protocol.\n\nTreating acute cholangitis involves both urgent source control and appropriate antibiotic therapy.\n\nInitial Management:\n\nSource Control: This is critical and "
+    },
+    {
+      "id": "L-02",
+      "topic": "DKA",
+      "status": "answered",
+      "answerLen": 1301,
+      "elements": [
+        {
+          "name": "fluids",
+          "present": true
+        },
+        {
+          "name": "insulin",
+          "present": true
+        },
+        {
+          "name": "potassium",
+          "present": true
+        }
+      ],
+      "flags": {
+        "elementCoverage": 100,
+        "allElements": true,
+        "truncated": true,
+        "no_narration_leak": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true,
+        "sources_shown": true
+      },
+      "pass": false,
+      "answerPreview": "Educational clinical reference — verify with local protocol.\n\nManaging diabetic ketoacidosis (DKA) primarily involves aggressive fluid resuscitation, insulin therapy, and electrolyte replacement.\n\nHere's a breakdown of t"
+    },
+    {
+      "id": "L-03",
+      "topic": "bacterial meningitis",
+      "status": "answered",
+      "answerLen": 1140,
+      "elements": [
+        {
+          "name": "empiric antibiotic",
+          "present": true
+        },
+        {
+          "name": "steroid",
+          "present": true
+        },
+        {
+          "name": "LP/CSF",
+          "present": true
+        }
+      ],
+      "flags": {
+        "elementCoverage": 100,
+        "allElements": true,
+        "truncated": true,
+        "no_narration_leak": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true,
+        "sources_shown": true
+      },
+      "pass": false,
+      "answerPreview": "Educational clinical reference — verify with local protocol.\n\nTreating acute bacterial meningitis requires immediate empiric antibiotic therapy, even before confirmatory tests.\n\nHere's the approach:\n\nEmpiric Antibiotics:"
+    },
+    {
+      "id": "L-04",
+      "topic": "hyperkalemia",
+      "status": "answered",
+      "answerLen": 1252,
+      "elements": [
+        {
+          "name": "membrane stabilisation",
+          "present": true
+        },
+        {
+          "name": "intracellular shift",
+          "present": true
+        },
+        {
+          "name": "removal",
+          "present": true
+        }
+      ],
+      "flags": {
+        "elementCoverage": 100,
+        "allElements": true,
+        "truncated": true,
+        "no_narration_leak": true,
+        "no_raw_id": true,
+        "no_markdown_leak": true,
+        "sources_shown": true
+      },
+      "pass": false,
+      "answerPreview": "Educational clinical reference — verify with local protocol.\n\nManaging hyperkalemia, especially with ECG changes or a potassium level of 6.5 mmol/L or higher, requires a multi-pronged approach focusing on cardiac stabili"
+    },
+    {
+      "id": "L-05",
+      "topic": "organophosphate poisoning",
+      "status": "quota_blocked",
+      "answerLen": 104
+    },
+    {
+      "id": "L-06",
+      "topic": "acute cholangitis (follow-up)",
+      "status": "quota_blocked",
+      "answerLen": 104
+    }
+  ]
+}

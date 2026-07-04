@@ -1417,10 +1417,12 @@
         '<input id="mcSearch" class="mc-search" type="text" placeholder="🔍 Search calculators (e.g. MELD, sepsis, sodium, stroke)…" autocomplete="off">'+
         '<div id="mcCats" class="mc-cats"></div>'+
         '<div id="mcList" class="mc-list"></div>'+
+        '<button id="mcInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">💊⚠️ Check Drug Interactions</button>'+
         '<div class="mc-disc">⚠️ Decision support only — verify formulas and thresholds against the individual patient and local protocol.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mcClose").addEventListener("click", close);
+    root.querySelector("#mcInteractionsBtn").addEventListener("click", openInteractions);
     var si=root.querySelector("#mcSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); renderList(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
@@ -1735,6 +1737,12 @@
   }
   function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
 
+  /* ---- Drug Interactions entry point (Tools) — delegates to drugs.js's
+     window.MEDDRUGS.openInteractions, the single shared MEDLIST overlay (Task 5/6). ---- */
+  function openInteractions(){
+    if(window.MEDDRUGS && window.MEDDRUGS.openInteractions) window.MEDDRUGS.openInteractions();
+  }
+
   document.addEventListener("keydown", function(e){
     if(e.key==="Escape" && root && root.classList.contains("on")) close();
   });
@@ -1814,5 +1822,5 @@
     var st=document.createElement("style"); st.id="mc-styles"; st.textContent=css; document.head.appendChild(st);
   }
 
-  window.MEDCALC = { openList: openList, open: open, close: close, _calcs: CALCS };
+  window.MEDCALC = { openList: openList, open: open, close: close, openInteractions: openInteractions, _calcs: CALCS };
 })();

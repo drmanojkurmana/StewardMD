@@ -899,7 +899,8 @@
     protocols: function () {
       return '<div class="icu-sec-lbl">🚨 Critical Care Protocols</div>' +
         PROTOCOLS.map(function (p, i) { return protocolCard(p, i); }).join("") +
-        '<button class="icu-btn" data-icu-act="launch:protocols">Open full protocol / drug library</button>';
+        '<button class="icu-btn" data-icu-act="launch:protocols">Open full protocol / drug library</button>' +
+        '<button class="icu-btn ghost" data-icu-act="launch:interactions">💊⚠️ Check Drug Interactions</button>';
     },
     vent: function () {
       var v = _raw.ventilator || {}, iv = interpretVent(v, _raw.patient, _raw.abg);
@@ -1430,6 +1431,7 @@
         }, "eceOverlay");
         else if (arg === "inf") launch(function () { window.INF && INF.open(); }, "infOverlay");
         else if (arg === "protocols") launch(function () { window.INF && (INF.openProtocols ? INF.openProtocols() : INF.open()); }, "infOverlay");
+        else if (arg === "interactions") launch(function () { window.MEDDRUGS && window.MEDDRUGS.openInteractions && window.MEDDRUGS.openInteractions(); }, "miOverlay");
         break;
       case "calc": launch(function () { window.MEDCALC && (MEDCALC.open ? MEDCALC.open(arg) : MEDCALC.openList && MEDCALC.openList()); }, "mcOverlay"); break;
     }
@@ -1480,6 +1482,9 @@
     },
     close: function () { if (rootEl) rootEl.classList.remove("on"); document.body.style.overflow = ""; },
     isOpen: function () { return !!(rootEl && rootEl.classList.contains("on")); },
+    // Drug Interactions entry point — delegates to drugs.js's window.MEDDRUGS.openInteractions,
+    // the single shared MEDLIST overlay (Task 5/6), same as the "launch:interactions" action.
+    openInteractions: function () { if (window.MEDDRUGS && window.MEDDRUGS.openInteractions) window.MEDDRUGS.openInteractions(); },
     // public data API (manual entry + future Vision share these)
     state: function () { return STATE; },
     update: function (patch) { if (patch && typeof patch === "object") Object.keys(patch).forEach(function (k) { STATE[k] = patch[k]; }); },

@@ -54,8 +54,13 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, 
  * Selection via env.AI_PROVIDER; Vertex is primary and fails over to the
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
+import { checkQuota, recordUsage, adminReport, estTokens } from "../../_usage.js";
 function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
-function genBody(parts, maxTokens) { return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: 0.2, maxOutputTokens: maxTokens || 1024 } }; }
+// thinkingBudget:0 disables gemini-2.5-flash's dynamic "thinking" — otherwise it silently
+// consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
+// These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
+// so disabling also cuts latency + cost.
+function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; }
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
@@ -66,9 +71,9 @@ function parseCandidates(data, status) {
 const developerProvider = {
   name: "developer",
   available: function (env) { return !!env.GEMINI_API_KEY; },
-  generate: async function (env, parts, maxTokens) {
+  generate: async function (env, parts, maxTokens, opts) {
     const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -125,11 +130,11 @@ async function vertexAccessToken(env) {
 const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
-  generate: async function (env, parts, maxTokens) {
+  generate: async function (env, parts, maxTokens, opts) {
     const loc = env.GCP_LOCATION || "us-central1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
     const token = await vertexAccessToken(env);
-    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens)) });
+    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -152,7 +157,7 @@ function failReason(e) {
 // Facade — callers (RAG explain / legacy explain / vision) are unchanged. Provider priority:
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
-async function callGemini(env, parts, maxTokens) {
+async function callGemini(env, parts, maxTokens, opts) {
   const order = providerOrder(env);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
@@ -160,7 +165,7 @@ async function callGemini(env, parts, maxTokens) {
     if (!p || !p.available(env)) { lastErr = new Error(name + " provider unavailable"); continue; }
     const attempts = name === "vertex" ? 2 : 1;   // retry Vertex ONCE before switching
     for (let a = 0; a < attempts; a++) {
-      try { return await p.generate(env, parts, maxTokens); }
+      try { return await p.generate(env, parts, maxTokens, opts); }
       catch (e) {
         lastErr = e;
         const nextProvider = order[i + 1];
@@ -189,7 +194,7 @@ const RAG_SYS =
   "Reply as commentary under EXACTLY these markdown headings, in this order, omitting a heading only if you have nothing evidence-based to add:\n" +
   "### Additional differentials\n### Missing investigations\n### Teaching points\n### Alternative interpretations\n" +
   "(Add '### Culture-directed antibiotic considerations' ONLY when culture/sensitivity data is provided.) " +
-  "Keep each section to 1–4 short bullets. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Reference drugs by name/class only — NO specific doses beyond what the provided treatment resolution states. Never use patient identifiers. " +
+  "Keep each section to 1–4 short bullets. Cite the provided sources inline (e.g. 'Harrison 22e' or the treatment tier). Prefer the treatment resolution's dosing when present; where it names a drug without a dose and a dose is clinically pivotal, you may state the standard adult reference dose labelled '(standard reference — verify locally)'. Do not fabricate figures you are unsure of. Never use patient identifiers. " +
   "End with exactly: 'Decision-support only — the StewardMD rule engine owns the diagnosis; verify clinically.'";
 
 // General-knowledge system prompt (gold122): used when NO deterministic diagnosis
@@ -198,17 +203,33 @@ const RAG_SYS =
 // grounded in the retrieved KB, with a clean clinical structure. No provider/model
 // names; no long trailing disclaimer (the UI shows a persistent advisory badge).
 const KNOWLEDGE_SYS =
-  "You are MaiK (Medical AI Knowledge), StewardMD's clinician knowledge assistant. Answer the clinician's GENERAL CLINICAL KNOWLEDGE question as a concise EDUCATIONAL reference for a qualified doctor. " +
-  "Reason PRIMARILY from the RETRIEVED STEWARDMD KNOWLEDGE below (Harrison-derived + StewardMD management protocols, source-cited); your own medical knowledge is SECONDARY and used only to connect the provided material. If the retrieved knowledge does not cover the question, say so briefly rather than inventing specifics. " +
-  "This is NOT individualized patient advice — do not tailor to a specific patient. If the question is clearly about a specific patient, briefly advise using StewardMD's Clinical Reasoning / Dx My Patient so the engine computes the assessment first. " +
-  "Reply as short Markdown under EXACTLY these headings, omitting any with nothing evidence-based to add:\n" +
-  "### Clinical take\n### Key supporting points\n### What to check next\n### Management considerations\n### Red flags\n" +
-  "Keep each section to 1–4 short bullets. Reference drugs by name/class and standard principles only — no specific doses beyond what the retrieved knowledge states; never use patient identifiers. Do NOT mention the AI provider, model, or any internal implementation detail. Do NOT append a long disclaimer — the interface already shows a persistent advisory note.";
+  "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors, built into StewardMD. Talk like a sharp, warm senior colleague — natural, direct, and genuinely useful, the way a modern medical AI would. Answer the clinician's question (shown under 'CLINICIAN QUESTION'), and use the RECENT CONVERSATION for continuity. " +
+  "Draw on solid, widely-accepted medical knowledge and use the RETRIEVED STEWARDMD KNOWLEDGE below to ground specifics (regimens, protocols, doses), preferring it where it applies. You MAY answer confidently from mainstream clinical knowledge — do NOT refuse or hedge just because the retrieved text looks thin. " +
+  "HOW TO ANSWER — match the response to the question (this is what makes you feel helpful, not robotic):\n" +
+  "- Lead with the direct answer in the first sentence, then add just enough detail.\n" +
+  "- ADAPT the format. A simple or factual question -> 1-3 sentences or a few tight bullets, NO headings. A broad 'manage X' / 'in detail' question -> organise with a few short markdown headings or bullets where they genuinely help. Never pour a short answer into a fixed template of empty headings.\n" +
+  "- Write in clean, conversational prose; bullets for lists (drugs, steps, differentials), short paragraphs otherwise; bold key terms sparingly.\n" +
+  "- When it helps, end with ONE natural follow-up offer (e.g. 'Want the pregnancy-safe options or the paediatric dose?') — a single line, not a menu.\n" +
+  "SAFETY & HONESTY (non-negotiable):\n" +
+  "1. Answer ONLY what was asked. NEVER describe what is or is not in your knowledge base, and NEVER say things like 'the retrieved knowledge contains...' or 'no specific question was posed'.\n" +
+  "2. Always finish — complete every thought and sentence; never trail off mid-answer.\n" +
+  "3. DOSING: give the standard adult dose/route/titration when the clinician asks for it. Prefer the retrieved Drug Index / protocol figure when present; otherwise give the widely-accepted textbook/guideline dose from mainstream knowledge and append '(standard reference — verify locally)'. This is expected for well-established therapy — e.g. atropine in organophosphate poisoning, adrenaline in anaphylaxis, benzodiazepines in status. Do NOT deflect a standard dose to 'consult local guidelines'. Only withhold a specific number when it is genuinely non-standard, disputed, or you are unsure — then state the principle and what IS established. Never fabricate a precise figure you are not confident in, and never invent guideline numbers or citations.\n" +
+  "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
+  "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
+  "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
   const L = [];
   const r = pkg.reasoning || {}, pc = pkg.patientCase || {};
+  // The clinician's actual question MUST lead the prompt — otherwise the model answers from
+  // whatever was retrieved and (with a vague follow-up) narrates unrelated retrieved diseases.
+  if (pkg.question) L.push("=== CLINICIAN QUESTION (answer THIS specifically and completely) ===\n" + clip(pkg.question, 500) + "\n");
+  if (pkg.history && pkg.history.length) {
+    L.push("=== RECENT CONVERSATION (for context/continuity; do not repeat it back) ===");
+    pkg.history.slice(-4).forEach(function (h) { if (h && h.q) L.push("Clinician: " + clip(h.q, 300)); if (h && h.a) L.push("MaiK: " + clip(h.a, 300)); });
+    L.push("");
+  }
   L.push("=== DETERMINISTIC ENGINE OUTPUT (AUTHORITATIVE — do not change the diagnosis) ===");
   if (r.gate) L.push("Gate: " + clip(JSON.stringify(r.gate), 300));
   (r.differential || []).forEach((d, i) => {
@@ -257,7 +278,9 @@ const VISION_SYS = {
   labs: "Read this laboratory report photo. Return ONLY JSON with any of: {\"na\",\"k\",\"cl\",\"hco3\",\"ca\",\"mg\",\"po4\",\"glu\",\"creat\",\"urea\",\"alb\",\"wbc\",\"hb\",\"plt\",\"inr\",\"ferritin\",\"crp\",\"bili\",\"ast\",\"alt\"} as numbers. Omit unreadable fields. No prose.",
   ventilator: "Read this ventilator screen photo. Return ONLY JSON: {\"mode\":str,\"fio2\":num,\"peep\":num,\"tv\":num,\"rr\":num,\"peak\":num,\"plateau\":num}. Omit unreadable fields. No prose.",
   flowsheet: "Read this ICU flow-sheet photo. Return ONLY JSON: {\"intake24h\":num,\"output24h\":num,\"urine24h\":num,\"drains\":num}. Omit unreadable fields. No prose.",
-  abg: "Read this arterial blood gas (ABG) report photo. Return ONLY JSON with any of: {\"ph\":num,\"paco2\":num,\"pao2\":num,\"hco3\":num,\"be\":num,\"lactate\":num,\"fio2\":num}. Omit fields you cannot read with confidence. No prose."
+  abg: "Read this arterial blood gas (ABG) report photo. Return ONLY JSON with any of: {\"ph\":num,\"paco2\":num,\"pao2\":num,\"hco3\":num,\"be\":num,\"lactate\":num,\"fio2\":num}. Omit fields you cannot read with confidence. No prose.",
+  // medication_list: live /api/ai/vision call is PROD-ONLY (tests mock the vision call).
+  medication_list: "Read this medication image (prescription / OPD ticket / case sheet / discharge summary / medication chart / handwritten Rx). Extract ONLY prescribed medicine rows. Return ONLY JSON: {\"medications\":[{\"detected_text\":str,\"drug\":str|null,\"strength\":str,\"route\":str,\"frequency\":str,\"form\":str,\"confidence\":\"high\"|\"medium\"|\"low\"}]}. Rules: detected_text is the raw text you read for that row, preserved verbatim; set drug to the generic name ONLY if you are confident, else null. Ignore patient identifiers, demographics, vitals, diagnoses, and billing. NEVER invent drug names, doses, or frequencies — omit a field (empty string) if it is not written. Mark unclear or illegible handwriting as \"low\" confidence but still preserve its detected_text. Return only the medication list, no prose."
 };
 
 function parseJsonLoose(t) {
@@ -274,6 +297,20 @@ export async function onRequest(context) {
   const enabled = aiEnabled(env);
 
   if (seg === "status") return json({ enabled: enabled, provider: providerOrder(env)[0], vertex: PROVIDERS.vertex.available(env), developer: PROVIDERS.developer.available(env), model: modelId(env) });
+
+  // Admin diagnostics (aggregate usage; no PHI). Gated by UPDATES_ADMIN_TOKEN.
+  if (seg === "admin") {
+    const want = env.UPDATES_ADMIN_TOKEN || "";
+    const url = new URL(request.url);
+    const got = (request.headers.get("X-Admin-Token") || url.searchParams.get("token") || "");
+    if (!want || got !== want) return json({ error: "forbidden" }, 403);
+    const rep = await adminReport(env);
+    if (url.searchParams.get("format") === "csv") {
+      const rows = [["account", "tokens", "general", "case", "ocr"]].concat((rep.accounts || []).map((a) => [a.acct, a.tokens, a.general, a.case, a.ocr]));
+      return new Response(rows.map((r) => r.join(",")).join("\n"), { headers: { "Content-Type": "text/csv", "Cache-Control": "no-store" } });
+    }
+    return json(rep);
+  }
 
   if (seg === "health") {
     const order = providerOrder(env);
@@ -297,6 +334,16 @@ export async function onRequest(context) {
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
 
+  // Cost controls (server-side, env-configurable). Output is hard-capped; oversized
+  // inputs are rejected before any provider call. Per-user quota metering + circuit
+  // breaker are layered in a follow-up (functions/_usage.js + KV) — these caps are the
+  // no-auth floor that bounds per-request cost immediately.
+  // Output cap: default 1400 (a complete 250–500-word clinical answer; thinking is disabled so
+  // the whole budget is the visible answer). "detailed" depth allows a fuller 700–1200-word answer.
+  const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1400));
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 1.6)) : OUT_BASE;
+  const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
+
   try {
     if (seg === "explain") {
       // Preferred: grounded RAG package (KB primary). The client assembles it from
@@ -308,16 +355,25 @@ export async function onRequest(context) {
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
         const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
-        const grounded = renderGroundedPrompt(pkg).slice(0, 24000);
-        const text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], 1536);
+        const gate = await checkQuota(env, request, hasDx ? "case" : "general");
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+        const grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        let text;
+        try { text = await callGemini(env, [{ text: sys + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45 }); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         return json({ text: text, mode: "grounded", citations: cites });
       }
       // Legacy fallback: plain engine summary string (backward compatible).
-      const summary = String(body.summary || "").slice(0, 6000);
+      const summary = String(body.summary || "").slice(0, MAX_IN_CHARS);
       if (!summary) return json({ error: "no summary" }, 400);
-      const text = await callGemini(env, [{ text: EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "") }]);
+      const gate = await checkQuota(env, request, "case");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
+      const text = await callGemini(env, [{ text: prompt }], MAX_OUT);
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
     }
     if (seg === "vision") {
@@ -326,7 +382,13 @@ export async function onRequest(context) {
       const mime = (b64.match(/^data:([^;]+);base64,/) || [])[1] || "image/jpeg";
       b64 = b64.replace(/^data:[^;]+;base64,/, "");
       if (!b64) return json({ error: "no image" }, 400);
-      const text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }]);
+      const gate = await checkQuota(env, request, "ocr");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      let text;
+      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
+      // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
+      await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
       const fields = parseJsonLoose(text) || {};
       return json({ kind: kind, fields: fields });
     }

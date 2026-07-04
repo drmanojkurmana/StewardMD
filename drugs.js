@@ -125,6 +125,44 @@
   }
   function findByName(name){ name=(name||"").toLowerCase(); for(var i=0;i<DRUGS.length;i++) if(DRUGS[i].generic.toLowerCase()===name) return DRUGS[i]; return null; }
 
+  /* ---- structured on-device index search (powers the Drug Index sheet) ----
+     Returns ranked rows shaped for the medication-list UI:
+       { generic, cls, brands:[realBrandsOnly], form, dose }
+     Pure, synchronous, offline. Real curated data — never fabricated. */
+  var CLASS_ABBR = { ppi:1,h2:1,"h2 blocker":1,nsaid:1,doac:1,lmwh:1,ufh:1,statin:1,ccb:1,acei:1,
+    arb:1,bb:1,"beta blocker":1,saba:1,ics:1,steroid:1,antiemetic:1,laxative:1,insulin:1,asa:1,
+    ntg:1,gtn:1,txa:1,mgso4:1,kcl:1,nahco3:1,pcm:1,cpm:1 };
+  function realBrands(d){ return (d.brands||[]).filter(function(b){ return !CLASS_ABBR[String(b).toLowerCase()]; }); }
+  // Coarse formulation hint parsed from the adult-dose string (display only).
+  function formHint(dose){
+    var s=(dose||"").toLowerCase(), f=[];
+    if(/\biv\b|infusion|bolus|\bim\b/.test(s)) f.push("Injection");
+    if(/\bpo\b|oral|tablet|before food|before breakfast|once daily|twice daily|\bod\b|\bbd\b|\btds\b/.test(s)) f.push("Tablet");
+    if(/neb/.test(s)) f.push("Nebule");
+    if(/\bsc\b/.test(s)) f.push("SC");
+    if(/\bsl\b|sublingual/.test(s)) f.push("SL");
+    if(!f.length) f.push("—");
+    return f.slice(0,2).join(" / ");
+  }
+  // q==="" returns the whole formulary (caller shows it as "common medicines").
+  function searchIndex(q){
+    q=(q||"").toLowerCase().trim();
+    var out=[];
+    DRUGS.forEach(function(d){
+      var gen=d.generic.toLowerCase(), cls=(d.cls||"").toLowerCase();
+      var brs=realBrands(d), brsL=brs.map(function(b){return b.toLowerCase();});
+      var rank=-1;
+      if(!q) rank=5;
+      else if(gen===q||brsL.indexOf(q)>=0) rank=0;
+      else if(gen.indexOf(q)===0||brsL.some(function(b){return b.indexOf(q)===0;})) rank=1;
+      else if(gen.indexOf(q)>=0||cls.indexOf(q)>=0||brsL.some(function(b){return b.indexOf(q)>=0;})) rank=2;
+      else if(q.length>=4&&fuzzy(q,gen)) rank=3;
+      if(rank>=0) out.push({ rank:rank, generic:d.generic, cls:d.cls, brands:brs, form:formHint(d.dose), dose:d.dose });
+    });
+    out.sort(function(a,b){ return a.rank-b.rank || a.generic.localeCompare(b.generic); });
+    return out;
+  }
+
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function detailHTML(d){
     var realBrands=(d.brands||[]).filter(function(b){return ["ppi","h2","h2 blocker","nsaid","doac","lmwh","ufh","statin","ccb","acei","arb","bb","beta blocker","saba","ics","steroid","antiemetic","laxative","insulin","asa","ntg","gtn","txa","mgso4","kcl","nahco3","pcm","cpm"].indexOf(b.toLowerCase())<0;});
@@ -152,10 +190,12 @@
         '<input id="mdSearch" class="mc-search" type="text" placeholder="🔍 Search drug or brand (e.g. pantop, lasix, statin, ppi)…" autocomplete="off">'+
         '<div id="mdCats" class="mc-cats"></div>'+
         '<div id="mdList" class="mc-list"></div>'+
+        '<button id="mdInteractionsBtn" class="mc-cat" style="margin-top:14px;width:100%;box-sizing:border-box;text-align:center">💊⚠️ Check Drug Interactions</button>'+
         '<div class="mc-disc">⚠️ Adult dosing only — verify against the patient, renal/hepatic function and local protocol. Antibiotics are in the syndrome pages / global search.</div>'+
       '</div>';
     document.body.appendChild(root);
     root.querySelector("#mdClose").addEventListener("click", close);
+    root.querySelector("#mdInteractionsBtn").addEventListener("click", openInteractions);
     var si=root.querySelector("#mdSearch");
     si.addEventListener("input", function(){ q=si.value.trim().toLowerCase(); render(); });
     si.addEventListener("keydown", function(e){ e.stopPropagation(); });
@@ -195,6 +235,51 @@
   function close(){ if(root){ root.classList.remove("on"); document.body.classList.remove("mc-lock"); } }
   document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&root&&root.classList.contains("on")) close(); });
 
+  /* ---- Drug Interactions entry point (mounts window.MEDLIST's med-list builder) ----
+     Reuses the same mc-overlay chrome as the browse overlay above; the body is fully
+     owned/rendered by MEDLIST.mount (medlist.js), not by this file. */
+  var interactionsRoot = null;
+  function ensureInteractionsRoot(){
+    if(interactionsRoot) return interactionsRoot;
+    injectFallbackCSS();
+    interactionsRoot=document.createElement("div");
+    interactionsRoot.id="miOverlay"; interactionsRoot.className="mc-overlay ddi-overlay";
+    // One clean sticky header (no duplicated title): back · title/subtitle · patient pill,
+    // then a thin advisory line, then the workspace body owned by MEDLIST.mount.
+    interactionsRoot.innerHTML=
+      '<header class="ddi-head">'+
+        '<button class="ddi-back" id="miClose" aria-label="Back" title="Back">‹</button>'+
+        '<div class="ddi-head-titles"><div class="ddi-head-title">Drug Interactions</div>'+
+        '<div class="ddi-head-sub">Medication safety check</div></div>'+
+        '<div class="ddi-patient" id="ddiPatientPill">No patient selected</div>'+
+      '</header>'+
+      '<div class="ddi-advisory">Clinical decision support — verify important decisions with local protocol.</div>'+
+      '<div class="ddi-body" id="miBody"></div>';
+    document.body.appendChild(interactionsRoot);
+    interactionsRoot.querySelector("#miClose").addEventListener("click", closeInteractions);
+    return interactionsRoot;
+  }
+  function ptInitials(name){
+    name=String(name||"").trim(); if(!name) return "PT";
+    return name.split(/\s+/).map(function(p){return p.charAt(0).toUpperCase();}).join("").slice(0,3) || "PT";
+  }
+  // Patient pill = initials only (never full identifiers), reflecting Ward-Sync selection.
+  function updatePatientPill(){
+    var pill=interactionsRoot&&interactionsRoot.querySelector("#ddiPatientPill"); if(!pill) return;
+    var pt=null; try{ pt=window.GHISMEDS&&window.GHISMEDS.getSelectedPatient&&window.GHISMEDS.getSelectedPatient(); }catch(e){}
+    if(pt&&pt.patientId){ pill.textContent="● "+ptInitials(pt.name); pill.className="ddi-patient ddi-patient-on"; pill.title="Ward Sync patient selected"; }
+    else { pill.textContent="No patient selected"; pill.className="ddi-patient"; pill.title=""; }
+  }
+  function openInteractions(){
+    ensureInteractionsRoot();
+    interactionsRoot.classList.add("on");
+    document.body.classList.add("mc-lock","smd-ddi-open");   // smd-ddi-open hides the floating Home/ICU FABs
+    updatePatientPill();
+    if(window.MEDLIST && window.MEDLIST.mount) window.MEDLIST.mount(interactionsRoot.querySelector("#miBody"));
+  }
+  function closeInteractions(){ if(interactionsRoot){ interactionsRoot.classList.remove("on"); document.body.classList.remove("mc-lock","smd-ddi-open"); } }
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape"&&interactionsRoot&&interactionsRoot.classList.contains("on")) closeInteractions(); });
+
   // minimal fallback styles in case calculators.js (mc-*) didn't load
   function injectFallbackCSS(){
     if(document.getElementById("mc-styles")||document.getElementById("md-fallback-styles")) return;
@@ -202,5 +287,6 @@
     var st=document.createElement("style"); st.id="md-fallback-styles"; st.textContent=css; document.head.appendChild(st);
   }
 
-  window.MEDDRUGS = { match: match, findByName: findByName, detailHTML: detailHTML, openList: openList, close: close, _list: DRUGS };
+  window.MEDDRUGS = { match: match, findByName: findByName, searchIndex: searchIndex, detailHTML: detailHTML, openList: openList, close: close, _list: DRUGS,
+    openInteractions: openInteractions, closeInteractions: closeInteractions, updatePatientPill: updatePatientPill };
 })();

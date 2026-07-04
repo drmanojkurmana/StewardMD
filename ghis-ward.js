@@ -172,11 +172,32 @@
     
       window.GHIS = {
         _patientId: null,
+        // The patient currently opened in the ward drawer, used by the Drug-Interactions
+        // "Fetch from Ward Sync" import to know whose medication history to pull. Kept
+        // deliberately minimal (id + first name only) — never MRN/UHID/bed/clinician.
+        _selectedPatient: null,
+        // Public getter for the currently-selected Ward-Sync patient. Returns null when
+        // none is selected (import stays disabled). name is display-only, id is required.
+        getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
+        // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
+        getToken: function() { return getToken(); },
+        // Proxy base so GHISMEDS uses the SAME endpoint origin as the ward panel.
+        getProxyBase: function() { return PROXY; },
+        // Clear the selection + any GHIS import draft (called on disconnect / patient-switch).
+        clearSelectedPatient: function() {
+          GHIS._selectedPatient = null; GHIS._patientId = null;
+          try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
+        },
         openLab: function(episodeId, patientId, name) {
           var drawer = document.getElementById('ghisLabDrawer');
           var title  = document.getElementById('ghisLabTitle');
           var body   = document.getElementById('ghisLabBody');
           if (!drawer) return;
+          // Patient switch: if a different patient was selected before, clear the old import draft.
+          if (GHIS._selectedPatient && String(GHIS._selectedPatient.patientId) !== String(patientId)) {
+            try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
+          }
+          GHIS._selectedPatient = { patientId: patientId, name: name };
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
           body.innerHTML =
@@ -415,6 +436,15 @@
     
       window.closeGHIS = function() {
         document.getElementById('ghisPanel').classList.remove('open');
+        // If the Drug Interactions overlay is open behind us, refresh it so the
+        // Ward Sync card + patient pill reflect the patient just selected here.
+        try {
+          var mi = document.getElementById('miOverlay');
+          if (mi && mi.classList.contains('on')) {
+            if (window.MEDDRUGS && window.MEDDRUGS.updatePatientPill) window.MEDDRUGS.updatePatientPill();
+            if (window.MEDLIST && window.MEDLIST._rerender) window.MEDLIST._rerender();
+          }
+        } catch (e) {}
       };
     
       window.closeLabDrawer = function() {
@@ -467,6 +497,8 @@
         _connected = false;
         dot(false);
         _patients = [];
+        // Patient-scoped privacy: drop the selected patient + any GHIS medication-import draft.
+        try { GHIS.clearSelectedPatient(); } catch (e) {}
         showScreen('setup');
       };
     

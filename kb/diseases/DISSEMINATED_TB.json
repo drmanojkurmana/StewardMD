@@ -11,7 +11,12 @@
   "matching": {
     "rule": {
       "allOf": [
-        "prolongedFeverUnexplained",
+        {
+          "anyOf": [
+            "prolongedFeverUnexplained",
+            "prolongedFever"
+          ]
+        },
         "weightLoss",
         {
           "anyOf": [
@@ -40,6 +45,10 @@
         {
           "when": "tbContactHistory",
           "add": 10
+        },
+        {
+          "when": "eveningFever",
+          "add": 8
         }
       ]
     },

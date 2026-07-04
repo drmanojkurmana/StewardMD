@@ -1469,7 +1469,7 @@
     if (e.severityClassification) full += '<div class="ev-subh">Severity</div><p>' + medFormat(e.severityClassification) + '</p>';
     if (e.prognosis) full += '<div class="ev-subh">Prognosis</div><p>' + medFormat(e.prognosis) + '</p>';
     if (!pearls.length && !sections.length) return null;
-    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Harrison's Principles of Internal Medicine";
+    var srcName = e.source ? String(e.source).replace(/,?\s*22e.*$/, "") : "Standard internal-medicine reference";
     var pages = evPages(e);
     return {
       _id: id, srcKey: "harrison", icon: "📖",
@@ -3069,6 +3069,17 @@
    * image, to Google — only when explicitly enabled.
    * ---------------------------------------------------------------------- */
   function aiBase() { var h = location.hostname; return window.AI_PROXY || ((h === "localhost" || h === "127.0.0.1") ? "" : "/api/ai"); }
+  // Attach the Firebase ID token so the server can derive the user's identity for
+  // usage metering / quotas (server verifies it; browser userId is never trusted).
+  // No signed-in user → plain headers (server applies a small guest quota by IP).
+  function aiHeaders() {
+    var base = { "Content-Type": "application/json" };
+    try {
+      var u = window.firebase && firebase.auth && firebase.auth().currentUser;
+      if (u && u.getIdToken) return u.getIdToken().then(function (t) { if (t) base["Authorization"] = "Bearer " + t; return base; }).catch(function () { return base; });
+    } catch (e) {}
+    return Promise.resolve(base);
+  }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
   window.SMD_AI = {
     on: aiOn,
@@ -3076,19 +3087,19 @@
     status: function () { var b = aiBase(); if (!b) return Promise.resolve({ enabled: false }); return fetch(b + "/status").then(function (r) { return r.json(); }).catch(function () { return { enabled: false }; }); },
     explain: function (summary, question) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ summary: summary, question: question || "" }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ summary: summary, question: question || "" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
-    explainGrounded: function (pkg) {
+    explainGrounded: function (pkg, opts) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
-      return fetch(b + "/explain", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ package: pkg }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return fetch(b + "/vision", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     }
   };
   /* ====================================================================== *
@@ -3242,7 +3253,7 @@
     var out = [], seen = {};
     (chunks || []).forEach(function (c) {
       var ref = String((c && c.source && c.source.ref) || ""), sec = String((c && c.section) || ""), title;
-      if (/harrison/i.test(ref)) title = "Harrison's Principles of Internal Medicine";
+      if (/harrison/i.test(ref)) title = "Standard internal-medicine reference";
       else if (/icmr/i.test(ref)) title = "ICMR guidelines";
       else if (/drug index/i.test(ref)) title = "StewardMD Drug Index";
       else if (/idsa|ats|kdigo|\bada\b|aha|acc|esc|surviving sepsis|gold|gina|who|baveno|aasld|\bncs\b|acr|eular/i.test(ref)) title = ref.replace(/\s*·.*$/, "").trim();

@@ -82,7 +82,7 @@
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
-        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Powered by Google AI", flag("smd_ai", false)) +
+        var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
@@ -390,6 +390,7 @@
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     electrolytes: function () { if (window.ELYTE && ELYTE.open) ELYTE.open(); else toast("Electrolyte engine loading…"); },
+    interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
@@ -706,7 +707,7 @@
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">Steward<span class="v3-md">MD</span></h1><span class="v3-tag">Antibiotic Decision Engine</span><p>Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:62px;height:62px;object-fit:contain"></div></section>' +
+        '<section class="v3-card v3-hero"><div style="flex:1;min-width:0"><h1 class="v3-h-hero">Steward<span class="v3-md">MD</span></h1><span class="v3-tag">Clinical decision support for doctors</span><p>StewardMD is a clinical decision-support platform for doctors — structured case review, clinical workflow and decision support.</p></div><div class="v3-shield" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD logo" style="width:62px;height:62px;object-fit:contain"></div></section>' +
         '<div class="v3-qrow">' +
           '<button class="v3-qc" data-act="more">' + svg("user") + '<span>Account</span></button>' +
           '<button class="v3-qc" data-act="search">' + svg("search") + '<span>Search</span></button>' +
@@ -721,6 +722,7 @@
           '<button class="v3-tile" data-act="calculators"><div class="ic">' + svg("calc") + '</div><div style="min-width:0"><div class="tt">Calculators</div><div class="sub">70+ clinical tools</div></div></button>' +
           '<button class="v3-tile" data-act="drugs"><div class="ic">' + svg("pills") + '</div><div style="min-width:0"><div class="tt">Drugs DB</div><div class="sub">Brands · doses · price</div></div></button>' +
           '<button class="v3-tile" data-act="electrolytes"><div class="ic">' + svg("flask") + '</div><div style="min-width:0"><div class="tt">Electrolyte Engine</div><div class="sub">ICU correction · doses · rates</div></div></button>' +
+          '<button class="v3-tile" data-act="interactions"><div class="ic">' + svg("shieldPlus") + '</div><div style="min-width:0"><div class="tt">Drug Interactions</div><div class="sub">Check medicines · duplicates · high-risk</div></div></button>' +
         '</div>' +
         '<div class="v3-foot">For qualified clinicians · <b>AI-summarised, verify doses</b></div>' +
         '<div class="v3-devfoot">' +
@@ -1017,6 +1019,14 @@
   // model names anywhere; a single persistent advisory badge replaces per-message
   // disclaimers; answers render as safe Markdown with human-readable Sources ▸.
   var _maikHist = [];
+  var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
+  var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
+  // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
+  // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
+  // instead of being treated as new questions. Never persisted; not PHI; cleared on close.
+  var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
+  var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
+  function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function maikCSS() {
     if (document.getElementById("maik-sheet-css")) return;
@@ -1058,7 +1068,7 @@
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
     sheet.innerHTML =
-      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.webp" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Powered by Google AI</div></div>' +
+      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.webp" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
         '<button class="maik-x" id="maikX" aria-label="Close">✕</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">✓ Advisory — clinician verifies</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
@@ -1091,43 +1101,146 @@
       ]);
     }
     // patient-specific (individualized) request with NO active case → redirect, don't answer
-    function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q); }
-    function isGreeting(q) { return q.length <= 24 && /^(hi|hey|hello|yo|thanks|thank you|thx|ok|okay|cool|good (morning|afternoon|evening)|namaste)\b/i.test(q); }
-    function send() {
-      var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
-      _maikHist.push({ q: q }); bubble("you", maikEscH(q));
-      var active = maikActiveCase();
-      if (isGreeting(q) && !active) { bubble("ai", '<div class="maik-welcome">Hi! Ask me a clinical knowledge question (e.g. “how to treat DKA?”), or start a patient assessment.</div>'); return; }
-      if (isPatientSpecific(q) && !active) {
-        var d = bubble("ai", 'For advice about a specific patient, use <b>Dx My Patient</b> / <b>Clinical Reasoning</b> so StewardMD’s engine computes the assessment first — MaiK then adds commentary on it.');
-        var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
-        b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
+    function isPatientSpecific(q) { return /\b(my patient|this patient|the patient|my case|this case|should i (give|start|prescribe|treat)|what.?s wrong with|dose for (my|this)|diagnos(e|is) (my|this))\b/i.test(q) || /\b(mrn|uhid)\b/i.test(q) || /\bpatient\s+[a-z]+\s+(has|with|is|presenting|aged)/i.test(q) || /\bgive (him|her|them|the patient)\b/i.test(q) || /\b\d{1,3}\s*(yo|y\/o|year[- ]?old|yrs?)\b.*\b(patient|give|start|prescribe|dose)\b/i.test(q); }
+    // ---- Intent router (Part A/B): natural-language routing BEFORE any KB retrieval
+    // or provider call. Casual + app-help are answered locally (₹0 provider cost);
+    // only genuine clinical questions reach the one grounded Gemini/Vertex call.
+    function maikLev(a, b) { // small Levenshtein for typo/fuzzy casual matching
+      a = a || ""; b = b || ""; var m = a.length, n = b.length; if (Math.abs(m - n) > 2) return 3;
+      var d = []; for (var i = 0; i <= m; i++) d[i] = [i]; for (var j = 0; j <= n; j++) d[0][j] = j;
+      for (i = 1; i <= m; i++) for (j = 1; j <= n; j++) d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      return d[m][n];
+    }
+    function maikNorm(q) {
+      return String(q || "").toLowerCase().trim()
+        .replace(/[^a-z0-9\s'?]/g, " ")            // strip punctuation (keep ? for question detection)
+        .replace(/([a-z])\1{2,}/g, "$1$1")          // collapse 3+ repeats: heyyy→heyy, hellooo→helloo
+        .replace(/\s+/g, " ").trim();
+    }
+    var MAIK_CASUAL = ["hi", "hii", "hey", "helo", "hello", "yo", "hiya", "sup", "namaste", "hai"];
+    var MAIK_ACK = ["thanks", "thank", "thankyou", "thx", "ty", "ok", "okay", "k", "kk", "cool", "great", "nice", "got", "gotit", "fine", "alright", "sure", "yep", "yes", "no"];
+    function maikRoute(q, active) {
+      var n = maikNorm(q), toks = n.split(" ").filter(Boolean), first = toks[0] || "";
+      var isShort = toks.length <= 4;
+      if (!n || /^[?.\s]+$/.test(n)) return { kind: "clarify" };                       // empty / punctuation-only
+      if (/^(dose|doses|dosage|what dose|which dose|drug|drugs|which drug|what drug)\??$/.test(n)) return { kind: "clarify" };  // bare dose/drug with no drug named
+      if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK \u2014 I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
+      // A/B casual conversation — fuzzy (typo-tolerant) match on the FIRST token / short phrase
+      var casualHit = MAIK_CASUAL.some(function (w) { return first === w || maikLev(first, w) <= 1; })
+        || /^(hello|hey|hi)\b/.test(n) || /^good (morning|afternoon|evening|night)\b/.test(n) || /^how (are|r) (you|u)\b/.test(n) || /^how'?s it going\b/.test(n) || /^whats up\b|^what'?s up\b/.test(n);
+      var ackHit = isShort && MAIK_ACK.some(function (w) { return toks.indexOf(w) >= 0 || maikLev(first, w) <= 1; });
+      var byeHit = isShort && /^(bye|goodbye|see ya|cya|good night)\b/.test(n);
+      if (isShort && /how (are|r) (you|u)/.test(n)) return { kind: "casual", reply: "I’m well, thank you. I’m here to support clinical questions, drug information, calculations, or patient assessment. What would you like to discuss?" };
+      if (byeHit) return { kind: "casual", reply: "Goodbye — StewardMD is here whenever you need clinical support." };
+      if (isShort && /(thanks|thank you|thankyou|thx|^ty\b)/.test(n)) return { kind: "casual", reply: "You’re welcome. Let me know if you want to review a clinical topic or assess a patient." };
+      if (casualHit && isShort && !/(treat|manage|dose|sign|symptom|approach|explain|what is|whats|difference|poison|fever|pain|shock|dka|patient)/.test(n)) return { kind: "casual", reply: "Hello. I can help with clinical knowledge, drug information, calculators, or a patient assessment. What would you like to discuss?" };
+      if (ackHit && !/(treat|manage|dose|sign|approach|explain|patient|what|how|why|which)/.test(n)) return { kind: "casual", reply: "Sure — let me know if you’d like to review a clinical topic, look up a drug, or assess a patient." };
+      // B product/help
+      if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
+      // E patient-specific (existing detector) with no active case → guided assessment
+      if (isPatientSpecific(q) && !active) return { kind: "patient" };
+      // C/D anything else with clinical substance → one grounded provider call.
+      // Very short, non-clinical, unmatched → ask a clarifying question (no call).
+      if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug)/.test(n)) return { kind: "clarify" };
+      return { kind: "clinical" };
+    }
+    // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
+    function maikCanonTopic(q) {
+      var t = String(q || "").trim().replace(/\?+$/, "").trim();
+      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell me about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
+      t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
+      t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
+      return t || String(q || "").trim();
+    }
+    function maikResolveFollowup(q) {
+      var t = _maikTopic; if (!t || !t.topic) return null;
+      if (t.ts && (Date.now() - t.ts) > 30 * 60 * 1000) { _maikTopic = null; return null; }   // session continuity only
+      var n = maikNorm(q), wc = n.split(" ").filter(Boolean).length;
+      if (/(in (more )?detail|more detail|detailed answer|full(er)? answer|elaborate|explain (more|further)|go on|tell me more|in depth)/.test(n) || /^(more|detail|details|elaborate|expand|continue)\b/.test(n)) {
+        return { question: "Provide a detailed, complete clinical answer on the management of " + t.topic + ".", depth: "detailed", topic: t.topic, retrieval: t.topic + " detailed management" };
       }
+      if (/(antibiotic|antibiotics|abx|antimicrobial|drug of choice|which agent)/.test(n) && wc <= 7) {
+        return { question: "Empiric antimicrobial therapy for " + t.topic + " — agent/class choice, severity and host adjustment, and culture-directed de-escalation principles.", depth: "concise", topic: "antibiotics for " + t.topic, retrieval: t.topic + " empiric antibiotics antimicrobial therapy de-escalation" };
+      }
+      if (/^(dose|dosage|doses|how much)\b/.test(n) || (/\bdose\b/.test(n) && wc <= 4)) {
+        if (t.lastDrug) return { question: "Adult dosing of " + t.lastDrug + ", with renal-adjustment principles (verify locally).", depth: "concise", topic: "dose of " + t.lastDrug, retrieval: t.lastDrug + " dose dosing renal adjustment" };
+        return { clarify: "Which drug’s dose would you like — e.g. “ceftriaxone dose” or “atropine dose in OP poisoning”?" };
+      }
+      if (/^(what next|whats next|next|next steps?|then( what)?|and then|what to do next)\b/.test(n) || (/\bnext\b/.test(n) && wc <= 4)) {
+        return { question: "Next steps, ongoing management and monitoring for " + t.topic + ".", depth: "concise", topic: "next steps for " + t.topic, retrieval: t.topic + " monitoring ongoing management next steps escalation" };
+      }
+      if (/\b(in pregnancy|pregnan)/.test(n) && wc <= 5) {
+        return { question: t.topic + " — management considerations in pregnancy.", depth: "concise", topic: t.topic + " in pregnancy", retrieval: t.topic + " pregnancy management" };
+      }
+      if (/\b(renal (failure|impairment)|ckd|dialysis|kidney)\b/.test(n) && wc <= 6) {
+        return { question: t.topic + " — management considerations with renal impairment.", depth: "concise", topic: t.topic + " with renal impairment", retrieval: t.topic + " renal impairment dose adjustment" };
+      }
+      var m = q.match(/^(what about|how about|and)\s+(.+)/i);
+      if (m && m[2]) { var rest = m[2].replace(/\?+$/, "").trim(); if (rest) return { question: t.topic + " — " + rest + ".", depth: "concise", topic: t.topic + " · " + rest, retrieval: t.topic + " " + rest }; }
+      return null;
+    }
+    function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth) {
+      if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.</div>'; return; }
+      if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      var md = (r && r.text) ? String(r.text).trim() : "";
+      if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
+        think.innerHTML = '<div class="maik-welcome">I found limited StewardMD material on this. Would you like a general overview, or to start a patient assessment?</div>';
+        var ab = document.createElement("button"); ab.className = "maik-chip"; ab.style.marginTop = "8px"; ab.textContent = "Start Dx My Patient"; ab.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); think.appendChild(ab); scroll(); return;
+      }
+      var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
+      var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
+      var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
+      var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
+      var full = eduHTML + rendered + srcHTML;
+      if (md.length > 700) {
+        think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
+        var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "260px"; cd.style.overflow = "hidden";
+        var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
+        mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "260px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
+        think.insertBefore(mb, think.querySelector(".maik-src") || null);
+      } else { think.innerHTML = full; }
+      if (!active) _maikCache[cacheKey] = think.innerHTML;
+      _maikTurns.push({ q: question, a: md.slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift();
+      if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() };
+      scroll();
+    }
+    function runClinical(question, retrieval, depth, active, topicLabel) {
+      var cacheKey = maikNorm(question) + (active ? "|case" : "");
+      if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
+      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
       var think = bubble("ai", "✨ Searching StewardMD knowledge…");
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
-        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: q }); })
-        .then(function (pkg) {
-          return window.SMD_AI.explainGrounded(pkg).then(function (r) {
-            if (r && r.error) { think.innerHTML = r.error === "ai-off" ? "MaiK is currently off — enable it in Settings › AI Assistant." : maikEscH("MaiK is unavailable right now. " + (r.error || "")); return; }
-            var md = (r && r.text) ? String(r.text) : "No response.";
-            var rendered = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(md) : maikEscH(md);
-            var titles = (window.SMD_MaiK && SMD_MaiK.sourceTitles) ? SMD_MaiK.sourceTitles(pkg.retrieved || []) : [];
-            var srcHTML = titles.length ? '<details class="maik-src"><summary>Sources ▸</summary><ul>' + titles.map(function (t) { return "<li>" + maikEscH(t) + "</li>"; }).join("") + '</ul></details>' : "";
-            var eduHTML = active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>';
-            var full = eduHTML + rendered + srcHTML;
-            // long answers: collapse behind "Show more"
-            if (md.length > 700) {
-              think.innerHTML = eduHTML + '<div class="maik-collapsed">' + rendered + '</div>' + srcHTML;
-              var cd = think.querySelector(".maik-collapsed"); cd.style.maxHeight = "220px"; cd.style.overflow = "hidden";
-              var mb = document.createElement("button"); mb.className = "maik-more"; mb.textContent = "Show more ▾";
-              mb.addEventListener("click", function () { var open = cd.style.maxHeight === "none"; cd.style.maxHeight = open ? "220px" : "none"; mb.textContent = open ? "Show more ▾" : "Show less ▴"; });
-              think.insertBefore(mb, think.querySelector(".maik-src") || null);
-            } else { think.innerHTML = full; }
-            scroll();
-          });
-        })
-        .catch(function (e) { think.innerHTML = maikEscH("MaiK unavailable: " + (e && e.message || e)); });
+        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
+        .then(function (pkg) { if (pkg && question) pkg.question = question; if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4); return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
+        .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
+        .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+    }
+    function send() {
+      if (_maikBusy) return;
+      var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      _maikHist.push({ q: q }); bubble("you", maikEscH(q));
+      var active = maikActiveCase();
+      if (maikV2()) {
+        var fu = maikResolveFollowup(q);
+        if (fu && fu.clarify) { bubble("ai", '<div class="maik-welcome">' + maikEscH(fu.clarify) + '</div>'); return; }
+        if (fu) { runClinical(fu.question, fu.retrieval, fu.depth, active, fu.topic); return; }
+      }
+      var route = maikRoute(q, active);
+      if (route.kind === "casual") { bubble("ai", '<div class="maik-welcome">' + maikEscH(route.reply) + '</div>'); return; }
+      if (route.kind === "help") {
+        var h = bubble("ai", '<div class="maik-welcome"><b>MaiK</b> is StewardMD’s clinical knowledge assistant. I can:<br>• answer general clinical & drug questions (grounded in StewardMD’s knowledge base)<br>• point you to the calculators and drug reference<br>• add commentary once you’ve run a patient assessment.<br><br>To assess a patient, start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings.</div>');
+        [["Ask a clinical question", function () { qEl.value = "How do we treat DKA?"; try { qEl.focus(); } catch (e) {} }], ["Start Dx My Patient", function () { close(); try { openDxChooser(); } catch (e) {} }]].forEach(function (c) { var b = document.createElement("button"); b.className = "maik-chip"; b.style.margin = "8px 6px 0 0"; b.textContent = c[0]; b.addEventListener("click", c[1]); h.appendChild(b); }); scroll(); return;
+      }
+      if (route.kind === "patient") {
+        var d = bubble("ai", 'I can help you assess this. Start <b>Dx My Patient</b> or <b>Clinical Reasoning</b> and enter the findings, vitals and labs — StewardMD’s engine computes the assessment, then MaiK adds commentary on it.');
+        var b = document.createElement("button"); b.className = "maik-chip"; b.style.marginTop = "8px"; b.textContent = "Open Dx My Patient";
+        b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
+      }
+      if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
+      var topic = maikV2() ? maikCanonTopic(q) : q;
+      var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
+      runClinical(q, q, depth, active, topic);
     }
     // restore prior session history, else empty state
     if (_maikHist.length) { _maikHist.forEach(function (m) { bubble("you", maikEscH(m.q)); }); } else { emptyState(); }

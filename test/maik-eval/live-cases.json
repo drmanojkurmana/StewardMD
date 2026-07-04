@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "note": "Bounded LIVE-provider eval set (owner-approved). Runs against the deployed site with the REAL provider. Scored on clinical-ELEMENT coverage (are the key management pillars present?) + safety/structure heuristics — NOT a clinician's certification of correctness. Human clinical review still required for true accuracy. requiredElements are concept regexes (generous on wording); prohibited flags fabrication/leak/truncation.",
+  "cases": [
+    {"id":"L-01","topic":"acute cholangitis","message":"how do we treat acute cholangitis?",
+      "requiredElements":[{"name":"biliary drainage","re":"drain|ercp|decompress|biliary"},{"name":"antibiotics","re":"antibiotic|antimicrobial|empiric"},{"name":"resuscitation/sepsis","re":"resuscitat|fluid|sepsis|septic"}]},
+    {"id":"L-02","topic":"DKA","message":"management of diabetic ketoacidosis",
+      "requiredElements":[{"name":"fluids","re":"fluid|saline|crystalloid"},{"name":"insulin","re":"insulin"},{"name":"potassium","re":"potassium|\\bk\\+|kcl|electrolyte"}]},
+    {"id":"L-03","topic":"bacterial meningitis","message":"how to treat acute bacterial meningitis",
+      "requiredElements":[{"name":"empiric antibiotic","re":"ceftriaxone|cefotaxime|cephalosporin|vancomycin|antibiotic"},{"name":"steroid","re":"dexamethasone|steroid|corticosteroid"},{"name":"LP/CSF","re":"lumbar puncture|\\bcsf\\b|\\blp\\b|spinal"}]},
+    {"id":"L-04","topic":"hyperkalemia","message":"hyperkalemia management",
+      "requiredElements":[{"name":"membrane stabilisation","re":"calcium"},{"name":"intracellular shift","re":"insulin|dextrose|glucose|salbutamol|beta"},{"name":"removal","re":"dialysis|resin|diuretic|excret|potassium binder"}]},
+    {"id":"L-05","topic":"organophosphate poisoning","message":"organophosphate poisoning treatment",
+      "requiredElements":[{"name":"atropine","re":"atropine"},{"name":"oxime","re":"pralidoxime|oxime|2-?pam"},{"name":"airway/support","re":"airway|secretion|ventilat|intubat|oxygen"}]},
+    {"id":"L-06","topic":"acute cholangitis (follow-up)","priorTurns":[{"q":"how do we treat acute cholangitis?"}],"message":"what antibiotics?",
+      "requiredElements":[{"name":"stays on cholangitis","re":"cholangitis|biliary|gram-negative|enteric|cover"},{"name":"antibiotic class","re":"antibiotic|antimicrobial|beta-lactam|cephalosporin|piperacillin|carbapenem|metronidazole"}]}
+  ]
+}
