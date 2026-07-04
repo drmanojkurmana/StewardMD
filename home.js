@@ -782,10 +782,27 @@
     fab.addEventListener("click", goHome);
     // Only show the home button once the user is on the landing page / inside the app —
     // never on the intro splash, disclaimer, or login gates.
+    // Is any full-screen overlay / dialog / sheet currently open on top of the home?
+    function anyOverlayOpen() {
+      var ids = ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay",
+        "dbOverlay", "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "sbDrawer", "abgOverlay",
+        "hvSheet", "maikSheet", "ghisPanel", "aboutModal", "disclaimerModal", "privacyModal", "termsModal",
+        "contactModal", "spCalcPopup", "storageChoiceModal"];
+      var vw = window.innerWidth, vh = window.innerHeight;
+      for (var i = 0; i < ids.length; i++) {
+        var el = document.getElementById(ids[i]); if (!el) continue;
+        if (el.classList.contains("hidden")) continue;
+        var cs = window.getComputedStyle(el);
+        if (cs.display === "none" || cs.visibility === "hidden" || parseFloat(cs.opacity || "1") < 0.05) continue;
+        // getBoundingClientRect() reflects transforms, so a sheet/drawer hidden via
+        // translate() reads as off-screen — only count overlays actually in the viewport.
+        var r = el.getBoundingClientRect();
+        if (r.width > 120 && r.height > 120 && r.right > vw * 0.15 && r.left < vw * 0.85 && r.bottom > vh * 0.15 && r.top < vh * 0.85) return true;
+      }
+      return false;
+    }
     function refreshFab() {
       if (!fab) return;
-      // Persistent Home button: available on the landing page AND over every inner
-      // screen/overlay (which sit below its z-index) so the user can always return home.
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
         var el = document.getElementById(id); if (!el) return false;
         // A gate counts as "up" only if genuinely visible — these gates fade out via
@@ -794,7 +811,11 @@
         var cs = window.getComputedStyle(el);
         return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
       });
-      var want = gateUp ? "none" : "flex";
+      var show;
+      if (gateUp) show = false;
+      else if (homeV4On()) show = anyOverlayOpen(); // v4: Home button only over an open dialog/overlay — the bare home already IS home
+      else show = true;                             // classic UI: keep the persistent behaviour
+      var want = show ? "flex" : "none";
       if (fab.style.display !== want) fab.style.display = want;
     }
     refreshFab();
