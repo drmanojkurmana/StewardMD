@@ -59,28 +59,29 @@
   ];
 
   /* ─────────────────────────  RESISTANCE DATA  ─────────────────────────
-     INDICATIVE sample values, structured after the ICMR AMRSN national report layout.
-     Numbers are placeholders pending the verified ICMR 2024 dataset / your local
-     antibiogram — the UI is source-driven so a real dataset drops straight in.
-     Value = % of isolates RESISTANT (higher = worse). null = not routinely reported. */
-  var RES_DRUGS = ["Amoxi-clav", "Pip-tazo", "Ceftriaxone", "Cefepime", "Meropenem", "Ciprofloxacin", "Gentamicin", "Amikacin", "TMP/SMX", "Colistin"];
-  var SOURCES = {
-    icmr: {
-      name: "ICMR 2024 · National (AMRSN)",
-      note: "Indicative figures modelled on the ICMR Antimicrobial Resistance Surveillance Network layout. Verify against the current ICMR AMRSN report before clinical use.",
-      rows: [
-        { org: "E. coli", r: [72, 22, 68, 55, 12, 78, 55, 18, 65, 2] },
-        { org: "Klebsiella pneumoniae", r: [80, 42, 74, 60, 45, 70, 58, 30, 62, 5] },
-        { org: "Pseudomonas aeruginosa", r: [null, 30, null, 28, 32, 35, 30, 22, null, 3] },
-        { org: "Acinetobacter baumannii", r: [null, 80, null, 82, 78, 85, 80, 70, null, 6] },
-        { org: "Staphylococcus aureus (MRSA %)", r: [null, null, null, null, null, 40, 25, null, 12, 0] },
-        { org: "Enterococcus faecium", r: [null, null, null, null, null, null, null, null, null, null] }
-      ]
-    }
+     Uses the app's existing, sourced antibiogram (window.ASP_ABG) — the same
+     ICMR AMRSN 2024 national + GIMSR hospital dataset shown in the references
+     panel. Values are % SUSCEPTIBLE (higher = better); some cells are qualitative
+     only. No numbers are invented here — this view just reads that data. */
+  function abgData() { return (typeof window !== "undefined" && window.ASP_ABG) ? window.ASP_ABG : null; }
+
+  // Pretty labels for the terse drug keys used in ASP_ABG.
+  var DRUG_LABEL = {
+    piptazo: "Piperacillin-tazobactam", cefotaxime: "Cefotaxime", ceftazidime: "Ceftazidime",
+    ceftriaxone: "Ceftriaxone", cefepime: "Cefepime", cefuroxime: "Cefuroxime", cefoperazone: "Cefoperazone",
+    cefixime: "Cefixime", cefazolin: "Cefazolin", ciprofloxacin: "Ciprofloxacin", levofloxacin: "Levofloxacin",
+    norfloxacin: "Norfloxacin", imipenem: "Imipenem", meropenem: "Meropenem", ertapenem: "Ertapenem",
+    doripenem: "Doripenem", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin",
+    nitrofurantoin: "Nitrofurantoin", fosfomycin: "Fosfomycin", minocycline: "Minocycline",
+    cotrimoxazole: "Co-trimoxazole", doxycycline: "Doxycycline", cloxacillin: "Cloxacillin",
+    clindamycin: "Clindamycin", vancomycin: "Vancomycin", teicoplanin: "Teicoplanin", linezolid: "Linezolid",
+    daptomycin: "Daptomycin", amoxicillin: "Amoxicillin", amoxiclav: "Amoxicillin-clavulanate",
+    ampicillin: "Ampicillin", azithromycin: "Azithromycin"
   };
+  function drugLabel(k) { return DRUG_LABEL[k] || (k.charAt(0).toUpperCase() + k.slice(1)); }
 
   /* ───────────────────────────  STATE / DOM  ─────────────────────────── */
-  var root = null, tab = "coverage", covSel = null, covSelType = null, srcKey = "icmr", tEl, tTimer;
+  var root = null, tab = "coverage", covSel = null, covSelType = null, srcKey = "national", tEl, tTimer;
 
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
 
@@ -172,39 +173,58 @@
   }
   function colLabel(id) { for (var i = 0; i < COLS.length; i++) if (COLS[i].id === id) return COLS[i].label; return id; }
 
-  /* Resistance heatmap */
+  /* Resistance — % susceptible from window.ASP_ABG (organism cards) */
   function resistanceView() {
-    var src = SOURCES[srcKey];
-    var h = '<div class="abg-srcbar">' +
-      '<label class="abg-srclab">Source</label>' +
-      '<select class="abg-srcsel" id="abgSrc">' +
-        '<option value="icmr"' + (srcKey === "icmr" ? " selected" : "") + '>' + esc(SOURCES.icmr.name) + '</option>' +
-        '<option value="__hosp">＋ Add a hospital antibiogram…</option>' +
-      '</select></div>';
+    var data = abgData();
+    if (!data || (!data.national && !data.hospital))
+      return '<div class="abg-empty"><div class="abg-empty-ic">📊</div><b>Antibiogram unavailable</b><p>The susceptibility dataset has not loaded yet. Reopen this screen in a moment.</p></div>';
 
-    if (srcKey === "__hosp" || !src) {
-      return h + '<div class="abg-empty"><div class="abg-empty-ic">🏥</div><b>Add your hospital antibiogram</b>' +
-        '<p>Load a local antibiogram (organism × antibiotic %R) to compare against the ICMR national figures. Hospital datasets are configured by your admin — reach out to enable this for your unit.</p></div>';
-    }
+    if (!data[srcKey]) srcKey = data.national ? "national" : "hospital";
+    var src = data[srcKey];
 
-    h += '<div class="abg-warn"><b>Indicative data.</b> ' + esc(src.note) + '</div>';
-    h += '<div class="abg-scroll"><table class="abg-grid abg-heat"><thead><tr>' +
-      '<th class="abg-rowh abg-corner">Organism</th>';
-    RES_DRUGS.forEach(function (d) { h += '<th class="abg-ch"><span>' + esc(d) + '</span></th>'; });
-    h += '</tr></thead><tbody>';
-    src.rows.forEach(function (r) {
-      h += '<tr><td class="abg-rowh"><span class="abg-agent org">' + esc(r.org) + '</span></td>';
-      r.r.forEach(function (v, i) {
-        if (v == null) { h += '<td class="abg-hcell na">–</td>'; return; }
-        h += '<td class="abg-hcell ' + heatClass(v) + '" data-org="' + esc(r.org) + '" data-drug="' + esc(RES_DRUGS[i]) + '" data-v="' + v + '">' + v + '</td>';
+    var h = '<div class="abg-srcbar"><label class="abg-srclab">Source</label>' +
+      '<select class="abg-srcsel" id="abgSrc">';
+    if (data.national) h += '<option value="national"' + (srcKey === "national" ? " selected" : "") + '>ICMR AMRSN 2024 · National</option>';
+    if (data.hospital) h += '<option value="hospital"' + (srcKey === "hospital" ? " selected" : "") + '>Hospital antibiogram</option>';
+    h += '</select></div>';
+
+    h += '<div class="abg-warn"><b>' + (src.dated ? "Dated source." : "Reference data.") + '</b> ' + esc(src.source || "") +
+      (src.note ? ' — ' + esc(src.note) : '') + '</div>';
+
+    var orgs = src.org || {};
+    Object.keys(orgs).forEach(function (name) {
+      var o = orgs[name], drugs = o.d || {};
+      var meta = [];
+      if (o.n != null) meta.push(o.n + " isolates");
+      if (o.specimen) meta.push(esc(o.specimen));
+      h += '<div class="abg-oc"><div class="abg-oc-h"><span class="abg-oc-n">' + esc(name) + '</span>' +
+        (meta.length ? '<span class="abg-oc-m">' + meta.join(" · ") + '</span>' : '') + '</div><div class="abg-oc-rows">';
+      Object.keys(drugs).forEach(function (k) {
+        var v = drugs[k], s = v.s;
+        h += '<div class="abg-dr"><span class="abg-dr-n">' + esc(drugLabel(k)) + '</span>';
+        if (s == null) {
+          h += '<span class="abg-dr-q">' + esc(v.q || "—") + '</span>';
+        } else {
+          var pct = (v.approx ? "~" : "") + s + "%";
+          h += '<span class="abg-dr-v"><span class="abg-pill ' + suscClass(s) + '">' + pct + ' S' + '</span>' + trendArrow(v.trend) + '</span>';
+        }
+        h += '</div>';
+        if (s != null && v.q) h += '<div class="abg-dr-note">' + esc(v.q) + '</div>';
       });
-      h += '</tr>';
+      h += '</div></div>';
     });
-    h += '</tbody></table></div>';
-    h += '<div class="abg-legend heat"><span><i class="hs s0"></i>&lt;10%</span><span><i class="hs s1"></i>10–29%</span><span><i class="hs s2"></i>30–49%</span><span><i class="hs s3"></i>50–74%</span><span><i class="hs s4"></i>≥75%</span><span>% resistant</span></div>';
+
+    h += '<div class="abg-legend heat"><span><i class="hs su4"></i>≥90%</span><span><i class="hs su3"></i>75–89%</span><span><i class="hs su2"></i>50–74%</span><span><i class="hs su1"></i>30–49%</span><span><i class="hs su0"></i>&lt;30%</span><span>% susceptible</span></div>';
     return h;
   }
-  function heatClass(v) { return v < 10 ? "s0" : v < 30 ? "s1" : v < 50 ? "s2" : v < 75 ? "s3" : "s4"; }
+  function suscClass(s) { return s >= 90 ? "su4" : s >= 75 ? "su3" : s >= 50 ? "su2" : s >= 30 ? "su1" : "su0"; }
+  function trendArrow(t) {
+    if (!t || t.length < 2) return "";
+    var d = t[t.length - 1][1] - t[t.length - 2][1];
+    if (Math.abs(d) < 0.1) return "";
+    var up = d > 0; // susceptibility rising = improving
+    return '<span class="abg-trend ' + (up ? "up" : "down") + '" title="' + (up ? "improving" : "worsening") + '">' + (up ? "▲" : "▼") + Math.abs(Math.round(d)) + '</span>';
+  }
 
   /* ───────────────────────────  EVENTS  ─────────────────────────── */
   function bind() {
@@ -230,9 +250,6 @@
           else { covSel = di; covSelType = "drug"; }
           return render();
         }
-      } else {
-        if (b.classList.contains("abg-hcell") && b.hasAttribute("data-v"))
-          toast(b.getAttribute("data-org") + " · " + b.getAttribute("data-drug") + ": " + b.getAttribute("data-v") + "% resistant");
       }
     });
     root.addEventListener("change", function (e) {
@@ -303,10 +320,20 @@
       ".abg-warn{font:500 12px/1.5 var(--f);color:var(--ink);background:#FEF3C7;border:1px solid #F59E0B;border-radius:12px;padding:10px 12px;margin-bottom:12px}",
       "body.dark .abg-warn{background:#3a2e0a;border-color:#a3791d;color:#f5e6bd}",
       ".abg-warn b{color:#B45309}body.dark .abg-warn b{color:#fbbf24}",
-      ".abg-heat{font:700 12px var(--f)}",
-      ".abg-hcell{width:62px;min-width:62px;text-align:center;padding:9px 4px;color:#fff;cursor:pointer}",
-      ".abg-hcell.na{background:var(--panel);color:var(--mut);font-weight:600;cursor:default}",
-      ".s0{background:#059669}.s1{background:#65a30d}.s2{background:#D97706}.s3{background:#DC2626}.s4{background:#7F1D1D}",
+      ".abg-oc{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:12px}",
+      ".abg-oc-h{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding-bottom:8px;margin-bottom:6px;border-bottom:1px solid var(--line)}",
+      ".abg-oc-n{font:800 15px var(--f);font-style:italic;color:var(--ink)}",
+      ".abg-oc-m{font:600 10.5px var(--f);color:var(--mut);white-space:nowrap}",
+      ".abg-dr{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:5px 0}",
+      ".abg-dr-n{font:600 13px var(--f);color:var(--ink)}",
+      ".abg-dr-v{display:inline-flex;align-items:center;gap:7px;flex-shrink:0}",
+      ".abg-dr-q{font:600 11.5px var(--f);color:var(--mut);text-align:right;max-width:58%}",
+      ".abg-pill{font:800 12px var(--f);color:#fff;padding:3px 9px;border-radius:999px;min-width:52px;text-align:center}",
+      ".su4{background:#047857}.su3{background:#65a30d}.su2{background:#D97706}.su1{background:#EA580C}.su0{background:#B91C1C}",
+      ".abg-trend{font:800 10px var(--f);padding:1px 4px;border-radius:5px}",
+      ".abg-trend.up{color:#047857;background:rgba(4,120,87,.12)}",
+      ".abg-trend.down{color:#B91C1C;background:rgba(185,28,28,.12)}",
+      ".abg-dr-note{font:500 11px/1.4 var(--f);color:var(--mut);padding:0 0 4px 2px}",
       ".abg-legend.heat .hs{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:5px}",
       ".abg-empty{text-align:center;padding:40px 20px;color:var(--mut)}",
       ".abg-empty-ic{font-size:38px;margin-bottom:8px}",
@@ -318,5 +345,5 @@
     (document.head || document.documentElement).appendChild(s);
   }
 
-  window.ABG = { open: open, close: close, _data: { COVERAGE: COVERAGE, COLS: COLS, SOURCES: SOURCES } };
+  window.ABG = { open: open, close: close, _data: { COVERAGE: COVERAGE, COLS: COLS } };
 })();
