@@ -631,6 +631,17 @@
   function homeV4On() { try { return localStorage.getItem("smd_home_v4") === "1" || /[?&]home=v4\b/.test(location.search); } catch (e) { return false; } }
   function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
   function dateV4() { try { return (new Date()).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
+  // First name of the signed-in Google account → "Dr <name>"; empty for guests.
+  function acctFirstV4() {
+    try {
+      var a = JSON.parse(localStorage.getItem("stewardmd_account") || "{}");
+      var n = String((a && a.name) || "").trim();
+      if (!n || (a && a.type === "guest" && !a.name)) return "";
+      return n.split(/\s+/)[0];
+    } catch (e) { return ""; }
+  }
+  function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function greetLineV4() { var f = acctFirstV4(); return greetV4() + (f ? ", Dr " + escV4(f) : ""); }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
   }
@@ -644,7 +655,14 @@
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
-        '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetV4() + '</div><div class="q">What would you like to do?</div></div>' +
+        '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
+        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Antibiotic Decision Engine</span><p class="v4-hero-p">Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
+        '<div class="v4-qrow">' +
+          '<button class="v4-qc" data-act="more" aria-label="Account">' + svg("user") + '<span>Account</span></button>' +
+          '<button class="v4-qc" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
+          '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
+          '<button class="v4-qc" data-act="theme" aria-label="Theme">' + svg("sun") + '<span>Theme</span></button>' +
+        '</div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
         '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
         '<div class="v4-sec">Clinical tools</div>' +

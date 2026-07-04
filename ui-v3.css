@@ -150,6 +150,20 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v4-greet .ey{font:600 11px/1.4 var(--v3-font);text-transform:uppercase;letter-spacing:.16em;color:var(--v3-muted)}
 #homeV2.hv4 .v4-greet .hi{font:500 28px/1.12 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink);margin-top:6px}
 #homeV2.hv4 .v4-greet .q{font:400 14px/1.5 var(--v3-font);color:var(--v3-muted);margin-top:4px}
+/* brand banner (restored) — flat hairline card, serif wordmark, outline tag + logo */
+#homeV2.hv4 .v4-hero{display:flex;align-items:center;gap:var(--v3-s4);padding:18px;border:1px solid var(--hv4-line);border-radius:var(--hv4-r);background:var(--v3-panel);box-shadow:none}
+#homeV2.hv4 .v4-hero-bd{flex:1;min-width:0}
+#homeV2.hv4 .v4-hero-tt{font:500 24px/1 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink)}
+#homeV2.hv4 .v4-hero-tag{display:inline-block;margin-top:9px;font:600 10px/1 var(--v3-font);text-transform:uppercase;letter-spacing:.12em;color:var(--v3-primary);border:1px solid var(--v3-primary);border-radius:var(--v3-r-pill);padding:5px 10px}
+#homeV2.hv4 .v4-hero-p{font:400 13px/1.5 var(--v3-font);color:var(--v3-muted);margin:11px 0 0}
+#homeV2.hv4 .v4-hero-logo{flex:0 0 auto;width:60px;height:60px;display:flex;align-items:center;justify-content:center}
+#homeV2.hv4 .v4-hero-logo img{width:56px;height:56px;object-fit:contain}
+/* quick shortcuts (restored) — hairline wells, line icons; min-width:0 prevents 320px clipping */
+#homeV2.hv4 .v4-qrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+#homeV2.hv4 .v4-qc{min-width:0;height:66px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;border:1px solid var(--hv4-line);border-radius:12px;background:var(--v3-panel);color:var(--v3-ink);transition:transform var(--v3-ease),border-color var(--v3-ease)}
+#homeV2.hv4 .v4-qc:active{transform:scale(.96)}#homeV2.hv4 .v4-qc:hover{border-color:var(--v3-primary)}
+#homeV2.hv4 .v4-qc svg{width:20px;height:20px;stroke:var(--v3-primary)}
+#homeV2.hv4 .v4-qc span{font:500 11px var(--v3-font);color:var(--v3-muted);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 /* C — paired actions: identical geometry, flat surfaces */
 #homeV2.hv4 .v4-action{display:flex;align-items:center;gap:var(--v3-s3);width:100%;text-align:left;min-height:74px;padding:18px;border-radius:var(--hv4-r);border:1px solid var(--hv4-line);background:var(--v3-panel);color:var(--v3-ink);box-shadow:none;transition:transform var(--v3-ease),border-color var(--v3-ease),background var(--v3-ease)}
 #homeV2.hv4 .v4-action:active{transform:scale(.99)}
