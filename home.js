@@ -183,7 +183,8 @@
       window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
       window.MEDCALC && window.MEDCALC.close, window.INF && window.INF.close,
       window.MEDDB && window.MEDDB.close, window.SB && window.SB.closeRef,
-      window.SB && window.SB.close, window.closeCalc, window.closeMyCases, window.closeSearch
+      window.SB && window.SB.close, window.ABG && window.ABG.close,
+      window.closeCalc, window.closeMyCases, window.closeSearch
     ];
     apis.forEach(function (fn) { try { if (typeof fn === "function") fn(); } catch (e) {} });
     try { closeSheet(); } catch (e) {}
@@ -192,7 +193,7 @@
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
     ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
-      "hvSheet", "hvScrim"].forEach(function (id) {
+      "abgOverlay", "hvSheet", "hvScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
     });
     //    hidden-class modals: add .hidden (global .hidden{display:none}); reopening removes it.
@@ -655,9 +656,9 @@
   function homeV4Markup() {
     return '' +
       '<header class="v3-header">' +
+        '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
         '<div class="v3-brand"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
         '<div class="v3-spacer"></div>' +
-        '<button class="v3-ic" data-act="search" aria-label="Search">' + svg("search") + '</button>' +
         '<button class="v3-ic" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
@@ -771,9 +772,8 @@
     // never on the intro splash, disclaimer, or login gates.
     function refreshFab() {
       if (!fab) return;
-      // v4 home has a Home tab in the bottom nav, so the floating Home button is
-      // redundant everywhere (inner screens have their own close/back) — hide it.
-      if (homeV4On()) { if (fab.style.display !== "none") fab.style.display = "none"; return; }
+      // Persistent Home button: available on the landing page AND over every inner
+      // screen/overlay (which sit below its z-index) so the user can always return home.
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
         var el = document.getElementById(id); if (!el) return false;
         // A gate counts as "up" only if genuinely visible — these gates fade out via
