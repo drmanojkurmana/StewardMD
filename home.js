@@ -73,6 +73,7 @@
       if (setBody && !setBody.querySelector("[data-smd-adv]")) {
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
+          swRow("safety", "Organ-safety overlay", "Renal / hepatic / QT flags on antibiotic advice", flag("smd_safety_overlay", true)) +
           '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
@@ -96,6 +97,7 @@
             var k = sw.getAttribute("data-tgl"), on = sw.classList.contains("on"), nv = !on;
             try {
               if (k === "reason" && window.SMD_REASON) SMD_REASON.setFlag(nv);
+              else if (k === "safety" && window.SMD_SAFETY) SMD_SAFETY.setFlag(nv);
               else if (k === "expanded" && window.SMD_setKbExpanded) SMD_setKbExpanded(nv);
               else if (k === "ai" && window.SMD_AI) SMD_AI.setFlag(nv);
               else if (k === "ghis" && window.SMD_setGhis) SMD_setGhis(nv);

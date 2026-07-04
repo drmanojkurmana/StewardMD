@@ -3665,15 +3665,16 @@
       } catch (_) { return base; }
     };
     window.renderOutput = function (e, i, a) {
-      var ret;
+      var ret, isNI = false;
       try {
-        if (i && NI.byId[i]) { renderNIPage(e, NI.byId[i]); }
+        if (i && NI.byId[i]) { isNI = true; renderNIPage(e, NI.byId[i]); }
         else { ret = origRender(e, i, a); }
       } catch (_) { try { ret = origRender(e, i, a); } catch (__) {} }
       // gold88: turn the long results page into collapsible accordions + move the
       // Save-case box to the top. Runs AFTER the render, so a failure here can
       // never corrupt the clinical output (it's purely progressive enhancement).
       try { smdEnhanceOutput(); } catch (_) {}
+      try { if (!isNI) smdSafetyOverlay(e); } catch (_) {}   // antibiotic path only; never blocks output
       return ret;
     };
     window.__smdEngineExpanded = true;
@@ -3985,6 +3986,133 @@
     smdAccordionize(oa);
     smdRelocateSaveBox(oa);
   }
+
+  /* ---------------------------------------------------------------------- *
+   * PATIENT-SPECIFIC SAFETY OVERLAY (renal / hepatic / cardio-QT).
+   * Display-only annotation injected AFTER the antibiotic page renders.
+   * Never mutates findings, SYNDROMES, or the ranked decision. Flag-gated,
+   * default ON, instantly reversible. See docs/superpowers/specs/2026-07-05-*.
+   * ---------------------------------------------------------------------- */
+  function smdSafetyFlagOn() { try { var v = localStorage.getItem("smd_safety_overlay"); return v === null ? true : v === "1"; } catch (e) { return true; } }
+  function smdSafetyNum(x) { var n = parseFloat(x); return isFinite(n) ? n : null; }
+
+  var QT_PROLONGERS = {
+    azithromycin: "Azithromycin", clarithromycin: "Clarithromycin", erythromycin: "Erythromycin",
+    ciprofloxacin: "Ciprofloxacin", levofloxacin: "Levofloxacin", moxifloxacin: "Moxifloxacin",
+    ofloxacin: "Ofloxacin", norfloxacin: "Norfloxacin"
+  };
+  function smdRegimenText() {
+    try {
+      var oa = document.getElementById("outputArea"); if (!oa) return "";
+      var rows = oa.querySelectorAll(".qa-regimen, .qa-regimen-row, .qa-regimen-meta");
+      var t = "";
+      if (rows.length) { Array.prototype.forEach.call(rows, function (n) { t += " " + (n.innerText || n.textContent || ""); }); }
+      else t = oa.innerText || oa.textContent || "";
+      return t.toLowerCase();
+    } catch (e) { return ""; }
+  }
+  function smdWordHit(hay, needle) {
+    if (!needle || needle.length < 4) return false;
+    var re = new RegExp("(^|[^a-z])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z]|$)");
+    return re.test(hay);
+  }
+  function detectRecommendedDrugs() {
+    try {
+      var t = smdRegimenText(); if (!t) return [];
+      var found = {}, ref = window.ASP_DRUGS || {};
+      Object.keys(ref).forEach(function (k) {
+        var lab = String(ref[k].label || "").toLowerCase();
+        var gen = lab.split(/[ (\/\-]/)[0];              // first token of the label = generic name
+        if (smdWordHit(t, k) || smdWordHit(t, gen)) found[k] = 1;
+      });
+      Object.keys(QT_PROLONGERS).forEach(function (k) { if (smdWordHit(t, k)) found[k] = 1; });
+      return Object.keys(found);
+    } catch (e) { return []; }
+  }
+
+  function renalCheck(e) {
+    try {
+      var age = smdSafetyNum(e.age), wt = smdSafetyNum(e.weight), scr = smdSafetyNum(e.creatinine);
+      if (age === null || wt === null || scr === null || scr <= 0) return null;
+      var crcl = (140 - age) * wt * ((String(e.sex || "").toLowerCase()[0] === "f") ? 0.85 : 1) / (72 * scr);
+      crcl = Math.max(0, Math.round(crcl));
+      if (crcl >= 50) return null;
+      var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : "moderate impairment";
+      return { crcl: crcl, tier: tier, text: "CrCl ≈ " + crcl + " mL/min (" + tier + ") — renal dose adjustment applies; see the per-drug renal-adjust notes below." };
+    } catch (e) { return null; }
+  }
+
+  function hepaticCheck(e, drugs) {
+    try {
+      var bili = smdSafetyNum(e.bilirubin);
+      var trig = !!e.liverDisease || (bili !== null && bili > 2) || !!e.encephalopathyGrade || !!e.ascitesGrade;
+      if (!trig) return null;
+      var ref = window.ASP_DRUGS || {}, perDrug = [];
+      (drugs || []).forEach(function (k) {
+        var d = ref[k];
+        if (d && d.hepatic && !/^\s*no adjustment/i.test(d.hepatic)) perDrug.push({ label: d.label || k, text: d.hepatic });
+      });
+      return { text: "Hepatic impairment flagged — review hepatic dosing for the recommended agents.", perDrug: perDrug };
+    } catch (e) { return null; }
+  }
+
+  function cardioCheck(e, drugs) {
+    try {
+      var age = smdSafetyNum(e.age);
+      var elderly = age !== null && age >= 65;
+      var cardiac = !!e.knownCAD || !!e.knownHeartFailure || !!e.atrialFibHx;
+      if (!(elderly || cardiac)) return null;
+      var hit = null;
+      (drugs || []).forEach(function (k) { if (!hit && QT_PROLONGERS[k]) hit = k; });
+      if (!hit) return null;
+      var label = QT_PROLONGERS[hit];
+      return { drug: hit, label: label,
+        text: label + " prolongs the QT interval. In an elderly/cardiac patient: obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication — e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory — does not override the recommendation." };
+    } catch (e) { return null; }
+  }
+
+  function smdInjectSafetyCSS() {
+    if (document.getElementById("smd-safety-css")) return;
+    var st = document.createElement("style"); st.id = "smd-safety-css";
+    st.textContent =
+      ".smd-safety-card{margin:0 0 14px;padding:13px 15px;border:1px solid var(--line,#e2e8f0);border-left:4px solid #d97706;border-radius:11px;background:var(--panel,#fff)}" +
+      ".smd-safety-h{font:800 13px var(--sans,system-ui);color:#b45309;letter-spacing:.02em;margin:0 0 8px}" +
+      ".smd-safety-row{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--ink,#14202b)}" +
+      ".smd-safety-row b{color:var(--ink,#14202b)}.smd-safety-ic{flex:0 0 auto}" +
+      ".smd-safety-ul{margin:5px 0 0;padding-left:18px}.smd-safety-ul li{margin:2px 0}";
+    document.head.appendChild(st);
+  }
+  function smdSafetyOverlay(e) {
+    var oa = document.getElementById("outputArea"); if (!oa) return false;
+    var old = document.getElementById("smdSafetyCard"); if (old) old.parentNode.removeChild(old);   // idempotent
+    if (!smdSafetyFlagOn() || !e) return false;
+    var drugs = detectRecommendedDrugs();
+    var renal = renalCheck(e), hep = hepaticCheck(e, drugs), card = cardioCheck(e, drugs);
+    if (!renal && !hep && !card) return false;
+    smdInjectSafetyCSS();
+    var html = '<div id="smdSafetyCard" class="smd-safety-card"><div class="smd-safety-h">⚠️ Patient-specific safety</div>';
+    if (renal) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(renal.text) + '</div></div>';
+    if (hep) {
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(hep.text);
+      if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
+      html += '</div></div>';
+    }
+    if (card) html += '<div class="smd-safety-row"><span class="smd-safety-ic">❤️</span><div><b>Cardiac</b> ' + esc(card.text) + '</div></div>';
+    html += '</div>';
+    oa.insertAdjacentHTML("afterbegin", html);
+    return true;
+  }
+
+  window.SMD_SAFETY = {
+    flag: smdSafetyFlagOn,
+    setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} },
+    QT_PROLONGERS: QT_PROLONGERS,
+    detectRecommendedDrugs: detectRecommendedDrugs,
+    renalCheck: renalCheck,
+    hepaticCheck: hepaticCheck,
+    cardioCheck: cardioCheck,
+    render: smdSafetyOverlay
+  };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
   smdInitGlobalUI();
