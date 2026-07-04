@@ -4087,19 +4087,30 @@
     var old = document.getElementById("smdSafetyCard"); if (old) old.parentNode.removeChild(old);   // idempotent
     if (!smdSafetyFlagOn() || !e) return false;
     var drugs = detectRecommendedDrugs();
+    var hasDrugs = drugs.length > 0;
     var renal = renalCheck(e), hep = hepaticCheck(e, drugs), card = cardioCheck(e, drugs);
     if (!renal && !hep && !card) return false;
     smdInjectSafetyCSS();
     var html = '<div id="smdSafetyCard" class="smd-safety-card"><div class="smd-safety-h">⚠️ Patient-specific safety</div>';
-    if (renal) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(renal.text) + '</div></div>';
+    if (renal) {
+      // On an "antibiotics not indicated" page there are no per-drug notes below, so the
+      // pointer would dangle — reword it when nothing was recommended.
+      var renalText = hasDrugs ? renal.text : renal.text.replace("; see the per-drug renal-adjust notes below.", " — review renal dosing for any antimicrobial started.");
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(renalText) + '</div></div>';
+    }
     if (hep) {
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(hep.text);
+      var hepText = hasDrugs ? hep.text : hep.text.replace("for the recommended agents.", "for any antimicrobial started.");
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(hepText);
       if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
       html += '</div></div>';
     }
     if (card) html += '<div class="smd-safety-row"><span class="smd-safety-ic">❤️</span><div><b>Cardiac</b> ' + esc(card.text) + '</div></div>';
     html += '</div>';
-    oa.insertAdjacentHTML("afterbegin", html);
+    // Sit the card with the recommendation: directly under the (relocated) Save-case box when
+    // present, otherwise at the top of the output.
+    var scp = oa.querySelector("#saveCasePrompt");
+    if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html);
+    else oa.insertAdjacentHTML("afterbegin", html);
     return true;
   }
 
