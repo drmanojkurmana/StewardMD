@@ -41,11 +41,11 @@
 
   function genCode(){
     var s = "", n = ALPHABET.length, buf = null;
-    try { var c = window.crypto || window.msCrypto; if (c && c.getRandomValues) { buf = new Uint32Array(5); c.getRandomValues(buf); } } catch (e) { buf = null; }
-    for (var i=0;i<5;i++){ var r = buf ? buf[i] : Math.floor(Math.random()*n); s += ALPHABET.charAt(r % n); }
+    try { var c = window.crypto || window.msCrypto; if (c && c.getRandomValues) { buf = new Uint32Array(7); c.getRandomValues(buf); } } catch (e) { buf = null; }
+    for (var i=0;i<7;i++){ var r = buf ? buf[i] : Math.floor(Math.random()*n); s += ALPHABET.charAt(r % n); }
     return "SMD-"+s;
   }
-  function normCode(c){ c=String(c||"").trim().toUpperCase().replace(/\s+/g,""); if(c && c.indexOf("SMD-")!==0 && /^[A-Z0-9]{5}$/.test(c)) c="SMD-"+c; return c; }
+  function normCode(c){ c=String(c||"").trim().toUpperCase().replace(/\s+/g,""); if(c && c.indexOf("SMD-")!==0 && /^[A-Z0-9]{5,8}$/.test(c)) c="SMD-"+c; return c; }
 
   // Ensure Firebase/Firestore is loaded (it is lazy-loaded), then run cb(db) or cb(null) on failure.
   // Load Firebase (lazy) AND wait for auth state to settle, then cb(db, user).
@@ -80,11 +80,28 @@
     return { html: clone.innerHTML, text: (clone.innerText||clone.textContent||"").trim().slice(0,4000), title: title || "Clinical decision" };
   }
 
+  // PHI guard: shared docs are PUBLIC by code, so block a share that contains a high-precision
+  // patient identifier. Deliberately narrow (MRN/UHID/phone/Aadhaar/email/labelled name) to avoid
+  // false-positives on clinical text (eponyms, drug names). Advisory-only; no medical-logic change.
+  function phiScan(str){
+    var s = String(str || "");
+    var checks = [
+      [/\b(?:mrn|uhid|uid|(?:ip|op|reg|regn|registration|hosp|hospital)\s*\.?\s*(?:no|number))[:#.\s-]*[a-z0-9]*\d/i, "hospital/MRN number"],
+      [/(?:\+?91[\s-]?)?[6-9]\d{4}[\s-]?\d{5}\b/, "phone number"],
+      [/\b\d{4}\s?\d{4}\s?\d{4}\b/, "12-digit ID (Aadhaar)"],
+      [/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i, "email address"]
+    ];
+    for (var i = 0; i < checks.length; i++) if (checks[i][0].test(s)) return checks[i][1];
+    return null;
+  }
+
   // ---- create a share ----
   function shareCurrent(){
     try { console.log("[CASESHARE] shareCurrent: DB=", !!window.SMD_DB, "AUTH=", !!window.SMD_AUTH, "user=", !!(window.SMD_AUTH && window.SMD_AUTH.currentUser)); } catch (e) {}
     var snap = currentSnapshot();
     if (!snap) { toast("Generate a clinical decision first."); return; }
+    var _phi = phiScan((snap.text || "") + " " + (snap.title || ""));
+    if (_phi) { toast("Can\u2019t share \u2014 remove the " + _phi + " first. Shared links are PUBLIC; never include names, MRN/UHID, phone, email or ID numbers."); return; }
     toast("Preparing share…");
     ensureReady(function(db, user){
       if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
@@ -195,7 +212,7 @@
        + '<div class="cs-body"><div class="cs-code">'+esc(code)+'</div>'
        + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days. <b>Do not include patient identifiers (name, MRN, contact).</b></div>'
        + '<div class="cs-row"><button class="cs-btn" id="csCopyCode">Copy code</button><button class="cs-btn sec" id="csCopyLink">Copy link</button><button class="cs-btn sec" id="csShareLink">Share…</button></div>'
-       + '<div class="cs-note">Saved to your account. Shares the clinical findings &amp; decision only — do not enter patient identifiers. Decision support only.</div></div>');
+       + '<div class="cs-note">Saved to your account. This link is <b>public to anyone with the code</b> and shares the clinical decision only — never include patient names, MRN/UHID, phone, email or ID numbers. Decision support only.</div></div>');
     var o=overlay();
     o.querySelector("#csCopyCode").addEventListener("click", function(){ copy(code, "Code copied"); });
     o.querySelector("#csCopyLink").addEventListener("click", function(){ copy(link, "Link copied"); });
