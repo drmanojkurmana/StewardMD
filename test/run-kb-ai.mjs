@@ -48,7 +48,7 @@ const ai = createStewardAI(store);
 ok(ai.flags.ai === false && ai.flags.gemini === false, "flags: ai & gemini default OFF");
 ok(DEFAULT_FLAGS.ai === false, "DEFAULT_FLAGS.ai is OFF");
 ok(ai.isAIEnabled() === false, "isAIEnabled() === false with no provider");
-ok(ai.stats.diseases === 140 && ai.stats.treatments === 140, `store loaded (dz=${ai.stats.diseases} tx=${ai.stats.treatments} pol=${ai.stats.policies})`);
+ok(ai.stats.diseases === 144 && ai.stats.treatments === 140, `store loaded (dz=${ai.stats.diseases} tx=${ai.stats.treatments} pol=${ai.stats.policies})`);
 
 // ---- 3. RAG retrieval — deterministic + relevant ----
 const r1 = ai.retrieve("meningitis neck stiffness photophobia", 5);

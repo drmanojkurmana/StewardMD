@@ -44,7 +44,7 @@ export function createStewardAI(store, opts) {
   // nameToks are tracked separately so a query that NAMES a disease ranks that
   // disease's own chunks above chunks that merely mention it (e.g. a differential).
   const bags = chunks.map((c) => ({ c, toks: tokenize(c.text + " " + c.diseaseName + " " + c.section),
-    nameToks: new Set(tokenize(c.diseaseName + " " + c.diseaseId)) }));
+    nameToks: new Set(tokenize(c.diseaseName + " " + c.diseaseId + " " + (c.aliases || ""))) }));
   const df = {};
   bags.forEach((b) => { const seen = new Set(); b.toks.forEach((t) => { if (!seen.has(t)) { seen.add(t); df[t] = (df[t] || 0) + 1; } }); });
   const N = bags.length || 1;
@@ -61,6 +61,12 @@ export function createStewardAI(store, opts) {
     // float management/treatment chunks above pathophysiology WITHIN the named disease.
     // Name-match stays the dominant sort key, so the correct disease still leads.
     const treatIntent = /\b(treat|treatment|treating|manage|management|managing|therapy|therapeutic|antidote|regimen|empiric|initial|approach|protocol|first[\s-]?line|dose|dosing|administer)\b/i.test(query) || /how\s+to/i.test(query);
+    // Capability-intent detection (gold153): float the section the clinician actually asked for
+    // (red flags / investigations / differential) WITHIN the named disease — mirrors treatIntent.
+    // Name-match stays the dominant sort key, so the correct disease still leads.
+    const redFlagIntent = /\b(red[\s-]?flags?|danger signs?|warning signs?|when to (escalate|refer|admit|worry)|do ?n[o']?t miss|not to miss|alarm|life[\s-]?threat)\b/i.test(query);
+    const ixIntent = /\b(investigat\w*|work[\s-]?up|what tests?|which tests?|what to order|labs?|imaging|\bix\b|bloods?|diagnostic (test|work))\b/i.test(query);
+    const ddxIntent = /\b(differential\w*|\bddx\b|d\/dx|versus|\bvs\b|distinguish|tell (them )?apart|differentiate|mimics?)\b/i.test(query);
     const qset = {}; q.forEach((t) => (qset[t] = (qset[t] || 0) + 1));
     const scored = bags.map((b) => {
       const tf = {}; b.toks.forEach((t) => (tf[t] = (tf[t] || 0) + 1));
@@ -69,11 +75,16 @@ export function createStewardAI(store, opts) {
         if (tf[t]) s += qset[t] * (1 + Math.log(tf[t])) * idf(t);
         if (b.nameToks.has(t)) nameHits++;           // query token naming this disease
       }
-      if (treatIntent && s > 0) {
+      if (s > 0) {
         const sec = String(b.c.section || "");
-        if (/^management/.test(sec)) s *= 2.4;                          // treatment/how-to chunks
-        else if (/(redflag|investigation|pitfall)/i.test(sec)) s *= 1.3; // safety-relevant
-        else if (/(pathophysiolog|overview|reasoning|differential|mimic)/i.test(sec)) s *= 0.6; // demote non-management
+        if (treatIntent) {
+          if (/^management/.test(sec)) s *= 2.4;                          // treatment/how-to chunks
+          else if (/(redflag|investigation|pitfall)/i.test(sec)) s *= 1.3; // safety-relevant
+          else if (/(pathophysiolog|overview|reasoning|differential|mimic)/i.test(sec)) s *= 0.6; // demote non-management
+        }
+        if (redFlagIntent && /redflag/i.test(sec)) s *= 2.4;               // "red flags in X"
+        if (ixIntent && /investigation/i.test(sec)) s *= 2.4;             // "what to order for X"
+        if (ddxIntent && /(differential|mimic)/i.test(sec)) s *= 2.4;     // "X vs Y" / "ddx"
       }
       return { b, s, nameHits };
     }).filter((x) => x.s > 0);

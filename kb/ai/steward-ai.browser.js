@@ -39,6 +39,42 @@
     });
   }
 
+  // Curated disease ALIASES (gold154): discriminative synonyms + abbreviations + classic-presentation
+  // tokens folded into the retrieval name-match, so a symptom/abbreviation query locks the right
+  // disease instead of a lexically-adjacent one. Kept SPECIFIC (no bare 'pain'/'fever'/'chest') to
+  // avoid new mis-routes. Retrieval-only; the deterministic engine is unaffected.
+  var SMD_ALIASES = {
+    acs: "mi stemi nstemi angina acs coronary infarction",
+    aortic_dissection: "tearing ripping interscapular dissection",
+    atrial_fib: "af afib rvr palpitations arrhythmia fibrillation",
+    hypoglycemia: "hypo hypoglycaemia neuroglycopenia",
+    temporal_arteritis: "gca claudication amaurosis arteritis",
+    angioedema_acei: "angioedema acei ramipril enalapril",
+    crystal_arthritis: "gout pseudogout podagra urate tophi monoarthritis",
+    dka: "dka ketoacidosis ketones ketone",
+    hhs: "hhs hyperosmolar honk nonketotic",
+    hyperkalemia: "hyperkalemia hyperkalaemia potassium",
+    MENINGITIS: "meningitis meningococcal kernig nuchal photophobia",
+    CNS_TB: "tbm tuberculous",
+    organophosphate: "op organophosphate cholinergic insecticide carbamate miosis sludge",
+    ischemic_stroke: "stroke cva hemiparesis thrombolysis",
+    STATUS_EPILEPTICUS: "epilepticus convulsive fitting",
+    seizure_epilepsy: "seizure epilepsy convulsion",
+    gbs: "gbs areflexia ascending",
+    FEBRILE_NEUTROPENIA: "neutropenia neutropenic",
+    rheumatoid: "ra rheumatoid",
+    sle_flare: "sle lupus",
+    dic: "dic schistocytes coagulopathy",
+    pheo: "pheochromocytoma phaeochromocytoma catecholamine",
+    adrenal_crisis: "addisonian addison",
+    opioid_od: "opioid naloxone",
+    anaphylaxis: "anaphylaxis anaphylactic",
+    SEPSIS: "sepsis qsofa sirs",
+    SEPTIC_SHOCK: "vasopressor septic",
+    CAP: "cap pneumonia",
+    COPD_EXACERBATION: "copd aecopd",
+    asthma_exac: "asthma wheeze bronchospasm"
+  };
   // Derive citable chunks from loaded globals, mirroring kb/tools/build-kb-index.mjs
   // (Harrison enrichment sections + a disease overview). Offline; no 12 MB download.
   function deriveChunks() {
@@ -52,7 +88,7 @@
       if (!text) return;
       var n = 0; for (var i = out.length - 1; i >= 0 && out[i].diseaseId === id; i--) if (out[i].section === section) n++;
       out.push({ chunkId: id + "#" + section + "#" + (n + 1), diseaseId: id, diseaseName: name, class: cls, system: system,
-        section: section, text: String(text).trim(), source: src, crossLinks: [], drugRefs: [] });
+        section: section, text: String(text).trim(), source: src, aliases: (SMD_ALIASES[id] || ""), crossLinks: [], drugRefs: [] });
     }
     Object.keys(EN).forEach(function (id) {
       // dist KB_ENRICHMENT.byId stores harrison fields FLAT on the entry; raw KB files
@@ -121,7 +157,7 @@
     _initP = (function () {
       var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
       return needRag.then(function () {
-        return import("/kb/ai/interface.mjs?v=gold149");
+        return import("/kb/ai/interface.mjs?v=gold154");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
         var diseases = {}; (Array.isArray(CORE) ? CORE : Object.values(CORE)).forEach(function (d) { if (d && d.id) diseases[d.id] = d; });
