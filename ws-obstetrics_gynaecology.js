@@ -62,11 +62,11 @@
           if (anyOf(sel, ["pelvic_pain", "discharge", "cmt"])) return { emergency: false, ladder: 2, catg: "Mild PID — outpatient oral therapy",
             sc: "No procedure.",
             ref: "Gynae / sexual-health follow-up; review at 48–72 h.",
-            mgmt: ["Oral regimen per local PID guidance (empirical cover for gonorrhoea, chlamydia + anaerobes) — low threshold to treat on clinical suspicion.", "Test for STIs incl. HIV; partner notification and treatment; safety-net to re-attend if worsening."] };
+            mgmt: ["Do a pregnancy test FIRST in any reproductive-age woman with pelvic pain — a positive test means EXCLUDE ectopic (a bleeding/surgical emergency) before labelling this PID.", "Oral regimen per local PID guidance (empirical cover for gonorrhoea, chlamydia + anaerobes) — low threshold to treat on clinical suspicion.", "Test for STIs incl. HIV; partner notification and treatment; safety-net to re-attend if worsening."] };
           return { emergency: false, ladder: 0, catg: "PID unlikely on current findings",
             sc: "No procedure.",
             ref: "Safety-net; reassess if pelvic pain, discharge or fever develop.",
-            mgmt: ["Insufficient features for empirical PID treatment now — reassess and test for STIs.", "Have a low threshold to treat if minimal criteria appear."] };
+            mgmt: ["Do a pregnancy test before reassuring — a positive test with pelvic pain/bleeding means EXCLUDE ectopic, not PID.", "Insufficient features for empirical PID treatment now — reassess and test for STIs.", "Have a low threshold to treat if minimal criteria appear."] };
         }
       },
       /* ───────────────────── Tubo-ovarian abscess ───────────────────── */
