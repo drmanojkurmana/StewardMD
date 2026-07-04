@@ -635,7 +635,7 @@
   // ---- v4 home redesign (opt-in flag: localStorage smd_home_v4="1" or ?home=v4) ----
   // Renders a coherent, de-duplicated authenticated home. Reuses the ACT dispatch and
   // data-act wiring 1:1 so no routes change; styled by the scoped .hv4 layer in ui-v3.css.
-  function homeV4On() { try { return localStorage.getItem("smd_home_v4") === "1" || /[?&]home=v4\b/.test(location.search); } catch (e) { return false; } }
+  function homeV4On() { try { var q = location.search || ""; if (/[?&]home=v3\b/.test(q)) return false; if (/[?&]home=v4\b/.test(q)) return true; if (localStorage.getItem("smd_home_v4") === "0") return false; return true; } catch (e) { return true; } }
   function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
   function dateV4() { try { return (new Date()).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
   // First name of the signed-in Google account → "Dr <name>"; empty for guests.
