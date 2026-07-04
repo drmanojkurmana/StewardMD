@@ -268,7 +268,7 @@
     if (document.getElementById("abg-css")) return;
     var s = document.createElement("style"); s.id = "abg-css";
     s.textContent = [
-      ".abg{--bg:#F4F6F9;--panel:#fff;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--tl:#0F766E;--tls:#CCFBF1;--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:950;background:var(--bg);color:var(--ink);font-family:var(--f);display:flex;flex-direction:column;opacity:0;transform:translateY(8px);transition:opacity .22s,transform .22s;pointer-events:none}",
+      ".abg{--bg:#F4F6F9;--panel:#fff;--ink:#0F172A;--mut:#64748B;--line:#E2E8F0;--tl:var(--teal,#0F766E);--tls:var(--teal-soft,#CCFBF1);--f:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;inset:0;z-index:950;background:var(--bg);color:var(--ink);font-family:var(--f);display:flex;flex-direction:column;opacity:0;transform:translateY(8px);transition:opacity .22s,transform .22s;pointer-events:none}",
       ".abg.on{opacity:1;transform:none;pointer-events:auto}",
       "body.dark .abg{--bg:#0A0F1A;--panel:#101827;--ink:#E6EAF2;--mut:#8A94A6;--line:#1E2B43;--tls:#0d3b36}",
       ".abg-top{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:0;z-index:2}",

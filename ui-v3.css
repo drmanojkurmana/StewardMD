@@ -7,8 +7,10 @@
 
 :root {
   /* color tokens */
-  --v3-primary:#0F766E; --v3-primary-2:#115E59; --v3-primary-3:#14B8A6;
-  --v3-primary-soft:#CCFBF1;
+  /* accent follows the app-wide appearance theme (--teal, swapped by [data-theme]) so
+     the v4 home tracks the chosen colour theme instead of being locked to green. */
+  --v3-primary:var(--teal,#0F766E); --v3-primary-2:#115E59; --v3-primary-3:#14B8A6;
+  --v3-primary-soft:var(--teal-soft,#CCFBF1);
   --v3-bg:#F8FAFC; --v3-panel:#FFFFFF; --v3-panel-2:#F1F5F9;
   --v3-border:#E2E8F0; --v3-ink:#0F172A; --v3-muted:#64748B;
   --v3-danger:#B91C1C; --v3-danger-soft:#FEE2E2; --v3-danger-line:#FCA5A5;
@@ -26,8 +28,12 @@
   --v3-ease:.2s cubic-bezier(.2,.7,.2,1);
   --v3-maxw:520px;
 }
+/* The appearance-theme picker sets --teal on <body> (html[data-theme=x] body{…}),
+   so the accent alias must live on body — a var(--teal) on :root would only see
+   root's base teal and never the themed value. */
+body { --v3-primary:var(--teal,#0F766E); --v3-primary-soft:var(--teal-soft,#CCFBF1); }
 body.v3-dark, body.dark {
-  --v3-primary:#2DD4BF; --v3-primary-2:#14B8A6; --v3-primary-3:#5EEAD4; --v3-primary-soft:#0C2E2A;
+  --v3-primary:var(--teal,#2DD4BF); --v3-primary-2:#14B8A6; --v3-primary-3:#5EEAD4; --v3-primary-soft:var(--teal-soft,#0C2E2A);
   --v3-bg:#0B1220; --v3-panel:#111B2E; --v3-panel-2:#0F1A2B;
   --v3-border:#1E2B43; --v3-ink:#E7EDF5; --v3-muted:#8597AD;
   --v3-danger:#F87171; --v3-danger-soft:#2A0E12; --v3-danger-line:#5B1A1F;
@@ -175,8 +181,8 @@ body.v3-dark, body.dark {
 #homeV2.hv4 .v4-action .arr{margin-left:auto;flex:0 0 auto;color:var(--v3-muted)}
 #homeV2.hv4 .v4-action .arr svg{width:20px;height:20px}
 /* L1 — the single emphasised action: deep solid teal (fixed in both themes) */
-#homeV2.hv4 .v4-action.primary{border:none;color:#fff;background:#0F766E;box-shadow:0 10px 24px -14px rgba(15,118,110,.65),0 1px 0 rgba(255,255,255,.06) inset}
-#homeV2.hv4 .v4-action.primary:hover{background:#115E59}
+#homeV2.hv4 .v4-action.primary{border:none;color:#fff;background:var(--v3-primary);box-shadow:0 10px 24px -14px rgba(15,118,110,.65),0 1px 0 rgba(255,255,255,.06) inset}
+#homeV2.hv4 .v4-action.primary:hover{background:var(--v3-primary-2)}
 #homeV2.hv4 .v4-action.primary .ic{background:rgba(255,255,255,.14)}#homeV2.hv4 .v4-action.primary .ic svg{stroke:#fff}
 #homeV2.hv4 .v4-action.primary .sub{color:rgba(255,255,255,.82)}
 #homeV2.hv4 .v4-action.primary .arr{color:#fff}
