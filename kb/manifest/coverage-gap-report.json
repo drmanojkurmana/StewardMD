@@ -4,22 +4,22 @@
   "totals": {
     "questions": 167,
     "inScope": 152,
-    "strongPct": 63.8,
-    "partialPct": 21.7
+    "strongPct": 72.4,
+    "partialPct": 13.8
   },
   "byVerdict": {
-    "STRONG": 97,
-    "PARTIAL": 33,
+    "STRONG": 110,
+    "PARTIAL": 21,
     "INKB_MISLABELED": 9,
-    "TOPIC_MISS": 22,
+    "TOPIC_MISS": 21,
     "OOS_FALSEHIT": 4,
     "OOS_OK": 2
   },
   "byType": {
     "diagnosis": {
-      "STRONG": 12,
+      "STRONG": 10,
       "TOPIC_MISS": 2,
-      "PARTIAL": 1
+      "PARTIAL": 3
     },
     "empiric_antibiotics": {
       "STRONG": 8,
@@ -33,19 +33,18 @@
       "INKB_MISLABELED": 1
     },
     "red_flags": {
-      "PARTIAL": 6,
+      "STRONG": 10,
       "TOPIC_MISS": 4,
-      "STRONG": 5
+      "PARTIAL": 1
     },
     "investigations": {
-      "STRONG": 7,
+      "STRONG": 12,
       "TOPIC_MISS": 2,
-      "PARTIAL": 6
+      "PARTIAL": 1
     },
     "differential": {
-      "PARTIAL": 4,
-      "STRONG": 7,
-      "TOPIC_MISS": 4
+      "STRONG": 12,
+      "TOPIC_MISS": 3
     },
     "special_population": {
       "STRONG": 23,
@@ -71,10 +70,10 @@
   },
   "bySpecialty": {
     "undefined": {
-      "STRONG": 97,
-      "PARTIAL": 33,
+      "STRONG": 110,
+      "PARTIAL": 21,
       "INKB_MISLABELED": 9,
-      "TOPIC_MISS": 22,
+      "TOPIC_MISS": 21,
       "OOS_FALSEHIT": 4,
       "OOS_OK": 2
     }
@@ -152,16 +151,15 @@
       "expectTopicName": "Acute pancreatitis",
       "isGapProbe": false,
       "note": "severity red flags",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "pancreatitis",
-        "s": "harrison.pathophysiology",
-        "sc": 14.182
+        "s": "harrison.redFlag",
+        "sc": 25.483
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -175,8 +173,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "mesenteric_ischemia",
-        "s": "harrison.pearl",
-        "sc": 21.066
+        "s": "harrison.investigation",
+        "sc": 46.815
       },
       "topicRank": 0,
       "sources": [
@@ -192,7 +190,7 @@
       "expectTopicName": "Biliary colic",
       "isGapProbe": false,
       "note": "differential between two listed topics",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "biliary_colic",
         "s": "management",
@@ -375,14 +373,13 @@
       "note": "Red-flag query on ACEi angioedema.",
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
-        "d": "oncologic_emergencies",
-        "s": "harrison.pearl",
-        "sc": 15.108
+        "d": "aspergillosis",
+        "s": "harrison.redFlag",
+        "sc": 26.733
       },
       "topicRank": -1,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -416,13 +413,13 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "aaa",
-        "s": "harrison.nonInfectiousMimic",
-        "sc": 13.26
+        "s": "management.investigation",
+        "sc": 26.559
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -518,7 +515,7 @@
       "retrievedTop": {
         "d": "diabetes_mellitus_management_and_therapies",
         "s": "harrison.investigation",
-        "sc": 11.1
+        "sc": 26.639
       },
       "topicRank": -1,
       "sources": [
@@ -620,8 +617,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "COMPLICATED_UTI",
-        "s": "harrison.pearl",
-        "sc": 23.105
+        "s": "harrison.redFlag",
+        "sc": 35.533
       },
       "topicRank": 0,
       "sources": [
@@ -641,7 +638,7 @@
       "retrievedTop": {
         "d": "renal_colic",
         "s": "harrison.investigation",
-        "sc": 16.505
+        "sc": 39.612
       },
       "topicRank": 0,
       "sources": [
@@ -657,13 +654,13 @@
       "expectTopicName": "Acute Cystitis",
       "isGapProbe": false,
       "note": "Differential targeting cystitis.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "PYELONEPHRITIS",
-        "s": "harrison.pearl",
-        "sc": 19.407
+        "d": "bladder_cancer",
+        "s": "harrison.nonInfectiousMimic",
+        "sc": 31.37
       },
-      "topicRank": -1,
+      "topicRank": 3,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -816,14 +813,14 @@
       "note": "Investigations for covered arrhythmia topic.",
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
-        "d": "congenital_heart_disease",
-        "s": "harrison.pathophysiology",
-        "sc": 12.678
+        "d": "aaa",
+        "s": "management.investigation",
+        "sc": 27.613
       },
       "topicRank": -1,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -834,16 +831,15 @@
       "expectTopicName": "Acute pericarditis",
       "isGapProbe": false,
       "note": "Red-flag query on covered topic (tamponade risk).",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "pericarditis",
-        "s": "harrison.investigation",
-        "sc": 12.654
+        "s": "harrison.redFlag",
+        "sc": 26.628
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -857,13 +853,12 @@
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
         "d": "aortic_dissection",
-        "s": "harrison.redFlag",
-        "sc": 23.366
+        "s": "harrison.differential",
+        "sc": 53.825
       },
       "topicRank": -1,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -994,16 +989,16 @@
       "expectTopicName": "TTP/HUS",
       "isGapProbe": false,
       "note": "Core diagnostic on a D-tier topic with rx.",
-      "verdict": "STRONG",
+      "verdict": "PARTIAL",
       "retrievedTop": {
         "d": "ttp_hus",
-        "s": "management",
-        "sc": 30.309
+        "s": "harrison.differential",
+        "sc": 45.323
       },
       "topicRank": 0,
       "sources": [
-        "StewardMD management protocol",
-        "Standard internal-medicine reference"
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
       ],
       "harrisonLeak": false
     },
@@ -1034,16 +1029,16 @@
       "expectTopicName": "Multiple myeloma",
       "isGapProbe": false,
       "note": "Workup question on D-tier myeloma.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "myeloma",
-        "s": "harrison.pathophysiology",
-        "sc": 19.199
+        "s": "management.investigation",
+        "sc": 35.062
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -1054,11 +1049,11 @@
       "expectTopicName": "Acute leukaemia",
       "isGapProbe": false,
       "note": "Red-flag question, D-tier.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "acute_leukemia",
-        "s": "harrison.differential",
-        "sc": 17.76
+        "s": "harrison.redFlag",
+        "sc": 30.646
       },
       "topicRank": 0,
       "sources": [
@@ -1075,9 +1070,9 @@
       "note": "Differential probing DIC vs TMA; targets DIC as the classic consumptive coagulopathy.",
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
-        "d": "hypothermia_and_peripheral_cold_injuries",
-        "s": "harrison.pitfall",
-        "sc": 10.207
+        "d": "peripheral_neuropathy",
+        "s": "harrison.infectionMimic",
+        "sc": 16.761
       },
       "topicRank": -1,
       "sources": [
@@ -1178,7 +1173,7 @@
         "s": "management.stewardship",
         "sc": 65.354
       },
-      "topicRank": 4,
+      "topicRank": 7,
       "sources": [
         "StewardMD management protocol",
         "StewardMD Drug Index",
@@ -1300,7 +1295,7 @@
       "retrievedTop": {
         "d": "sjs_ten",
         "s": "harrison.investigation",
-        "sc": 17.667
+        "sc": 42.401
       },
       "topicRank": 0,
       "sources": [
@@ -1472,14 +1467,15 @@
       "expectTopicId": "aki",
       "expectTopicName": "Acute kidney injury",
       "isGapProbe": false,
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "aki",
-        "s": "harrison.infectionMimic",
-        "sc": 6.124
+        "s": "management.investigation",
+        "sc": 12.916
       },
       "topicRank": 0,
       "sources": [
+        "StewardMD management protocol",
         "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
@@ -1490,16 +1486,15 @@
       "expectTopicId": "nephrotic",
       "expectTopicName": "Nephrotic syndrome",
       "isGapProbe": false,
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "nephrotic",
-        "s": "harrison.pathophysiology",
-        "sc": 18.934
+        "s": "harrison.redFlag",
+        "sc": 19.043
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -1725,8 +1720,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "amoebiasis",
-        "s": "harrison.pearl",
-        "sc": 13.903
+        "s": "harrison.redFlag",
+        "sc": 32.341
       },
       "topicRank": 0,
       "sources": [
@@ -1744,8 +1739,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "actinomycosis",
-        "s": "harrison.pearl",
-        "sc": 19.046
+        "s": "harrison.differential",
+        "sc": 42.175
       },
       "topicRank": 0,
       "sources": [
@@ -1764,12 +1759,11 @@
       "retrievedTop": {
         "d": "DENGUE",
         "s": "harrison.differential",
-        "sc": 21.469
+        "sc": 51.525
       },
       "topicRank": -1,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -1965,13 +1959,13 @@
       "expectTopicName": "SVC obstruction",
       "isGapProbe": false,
       "note": "Red flags on covered emergency.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "svc_obstruction",
-        "s": "harrison.pathophysiology",
-        "sc": 14.823
+        "d": "CARCINOID_SYNDROME",
+        "s": "harrison.redFlag",
+        "sc": 22.682
       },
-      "topicRank": 0,
+      "topicRank": 6,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -1987,8 +1981,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "malignancy_b",
-        "s": "harrison.pearl",
-        "sc": 38.945
+        "s": "harrison.differential",
+        "sc": 64.528
       },
       "topicRank": 0,
       "sources": [
@@ -2007,7 +2001,7 @@
       "retrievedTop": {
         "d": "malignancy_b",
         "s": "harrison.investigation",
-        "sc": 15.543
+        "sc": 37.304
       },
       "topicRank": 0,
       "sources": [
@@ -2163,8 +2157,8 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "ischemic_stroke",
-        "s": "harrison.pitfall",
-        "sc": 15.195
+        "s": "harrison.redFlag",
+        "sc": 29.89
       },
       "topicRank": 0,
       "sources": [
@@ -2183,13 +2177,12 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "ischemic_stroke",
-        "s": "harrison.pitfall",
-        "sc": 24.258
+        "s": "harrison.nonInfectiousMimic",
+        "sc": 46.539
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -2202,14 +2195,13 @@
       "note": "CSF, MRI, HSV PCR, EEG",
       "verdict": "PARTIAL",
       "retrievedTop": {
-        "d": "ENCEPHALITIS",
-        "s": "harrison.pathophysiology",
-        "sc": 18.804
+        "d": "VIRAL_HEPATITIS",
+        "s": "harrison.investigation",
+        "sc": 23.824
       },
-      "topicRank": 0,
+      "topicRank": 2,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -2401,14 +2393,13 @@
       "note": "Expect warning features: sulfonylurea use, altered sensorium, recurrent hypos, no oral intake.",
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
-        "d": "MALARIA",
-        "s": "harrison.pathophysiology",
-        "sc": 16.868
+        "d": "gbs",
+        "s": "harrison.redFlag",
+        "sc": 27.789
       },
       "topicRank": -1,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -2443,7 +2434,7 @@
       "retrievedTop": {
         "d": "hypercalcemia",
         "s": "management.investigation",
-        "sc": 12.225
+        "sc": 29.339
       },
       "topicRank": 0,
       "sources": [
@@ -2622,13 +2613,12 @@
       "verdict": "PARTIAL",
       "retrievedTop": {
         "d": "serotonin_nms",
-        "s": "harrison.pearl",
-        "sc": 29.482
+        "s": "harrison.differential",
+        "sc": 49.552
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -2639,7 +2629,7 @@
       "expectTopicName": "Serotonin syndrome / NMS",
       "isGapProbe": false,
       "note": "Differential on same topic, distinct phrasing.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "serotonin_nms",
         "s": "management",
@@ -2659,15 +2649,14 @@
       "expectTopicName": "Toxic hepatitis",
       "isGapProbe": false,
       "note": "Investigations on D-tier topic.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "toxic_hepatitis",
-        "s": "management",
-        "sc": 20.993
+        "d": "toxic_and_drug_induced_hepatitis",
+        "s": "harrison.investigation",
+        "sc": 36.795
       },
-      "topicRank": 0,
+      "topicRank": 1,
       "sources": [
-        "StewardMD management protocol",
         "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
@@ -2761,13 +2750,13 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "crystal_arthritis",
-        "s": "management",
-        "sc": 33.533
+        "s": "harrison.infectionMimic",
+        "sc": 53.635
       },
       "topicRank": 0,
       "sources": [
-        "StewardMD management protocol",
-        "Standard internal-medicine reference"
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
       ],
       "harrisonLeak": false
     },
@@ -2841,8 +2830,8 @@
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
         "d": "anemia_due_to_acute_blood",
-        "s": "harrison.pathophysiology",
-        "sc": 13.601
+        "s": "harrison.redFlag",
+        "sc": 14.767
       },
       "topicRank": -1,
       "sources": [
@@ -2857,13 +2846,13 @@
       "expectTopicName": "Rheumatoid arthritis",
       "isGapProbe": false,
       "note": "RA vs mimics",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "rheumatoid",
-        "s": "harrison.pathophysiology",
-        "sc": 18.932
+        "d": "infectious_arthritis",
+        "s": "harrison.infectionMimic",
+        "sc": 30.353
       },
-      "topicRank": 0,
+      "topicRank": 3,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -2876,13 +2865,13 @@
       "expectTopicName": "SLE / autoimmune flare",
       "isGapProbe": false,
       "note": "flare workup incl complements/dsDNA",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "sle_flare",
-        "s": "harrison.pitfall",
-        "sc": 16.445
+        "d": "systemic_lupus_erythematosus",
+        "s": "harrison.investigation",
+        "sc": 29.28
       },
-      "topicRank": 0,
+      "topicRank": 1,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -3076,7 +3065,7 @@
       "expectTopicName": "Acute Bronchitis",
       "isGapProbe": false,
       "note": "Expect vitals, focal signs, CXR indication distinguishing the two.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "ACUTE_BRONCHITIS",
         "s": "management.stewardship",
@@ -3099,13 +3088,13 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "BRONCHIECTASIS_EXACERBATION",
-        "s": "management.treatment",
-        "sc": 23.992
+        "s": "harrison.investigation",
+        "sc": 46.414
       },
       "topicRank": 0,
       "sources": [
-        "StewardMD Drug Index",
         "Standard internal-medicine reference",
+        "StewardMD Drug Index",
         "StewardMD management protocol"
       ],
       "harrisonLeak": false
@@ -3198,7 +3187,7 @@
       "expectTopicName": "Dengue Fever",
       "isGapProbe": false,
       "note": "Diagnostic test timing/selection for dengue.",
-      "verdict": "STRONG",
+      "verdict": "PARTIAL",
       "retrievedTop": {
         "d": "DENGUE",
         "s": "harrison.pathophysiology",
@@ -3206,8 +3195,7 @@
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -3242,13 +3230,13 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "LEPTOSPIROSIS",
-        "s": "management.stewardship",
-        "sc": 28.101
+        "s": "harrison.redFlag",
+        "sc": 33.241
       },
       "topicRank": 0,
       "sources": [
-        "StewardMD management protocol",
         "Standard internal-medicine reference",
+        "StewardMD management protocol",
         "StewardMD Drug Index"
       ],
       "harrisonLeak": false
@@ -3263,13 +3251,12 @@
       "verdict": "STRONG",
       "retrievedTop": {
         "d": "VIRAL_HEPATITIS",
-        "s": "harrison.pitfall",
-        "sc": 15.863
+        "s": "harrison.differential",
+        "sc": 34.328
       },
       "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference",
-        "StewardMD management protocol"
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },
@@ -3280,16 +3267,16 @@
       "expectTopicName": "Miliary TB",
       "isGapProbe": false,
       "note": "Investigation panel for disseminated TB.",
-      "verdict": "PARTIAL",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "DISSEMINATED_TB",
-        "s": "management.treatment",
-        "sc": 15.816
+        "s": "harrison.investigation",
+        "sc": 24.351
       },
       "topicRank": 0,
       "sources": [
-        "StewardMD Drug Index",
-        "Standard internal-medicine reference"
+        "Standard internal-medicine reference",
+        "StewardMD Drug Index"
       ],
       "harrisonLeak": false
     },
