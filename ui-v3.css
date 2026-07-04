@@ -122,3 +122,72 @@ body.v3-dark, body.dark {
 
 .v3-sec-label{font:700 12px var(--v3-font);text-transform:uppercase;letter-spacing:.06em;color:var(--v3-muted);margin:2px 2px -4px}
 .v3-foot{max-width:var(--v3-maxw);margin:8px auto 0;color:var(--v3-muted);font:500 11.5px/1.55 var(--v3-font);text-align:center}
+
+/* ===========================================================================
+   v4 authenticated-home redesign — OPT-IN, fully scoped to #homeV2.hv4
+   (flag: localStorage smd_home_v4="1" or ?home=v4). Reuses the v3 tokens;
+   when the flag is off none of these rules apply, so the current home is
+   byte-for-byte unchanged. One deliberate 4-level hierarchy, 8-pt rhythm,
+   two card treatments (gradient primary + bordered surface), strict type.
+   =========================================================================== */
+/* wordmark: drop the truncating subtitle, unify to sans, calmer weight */
+#homeV2.hv4 .v3-brand-tt{font:700 17px/1.1 var(--v3-font);letter-spacing:-.01em}
+#homeV2.hv4 .v3-mark{width:30px;height:30px}
+#homeV2.hv4 .v3-main{padding-top:var(--v3-s4)}
+/* header controls meet the 44×44 minimum touch target and never shrink;
+   the brand may shrink (with ellipsis) as a last resort so narrow (320px)
+   screens never overflow horizontally. */
+#homeV2.hv4 .v3-header{gap:var(--v3-s2);padding-left:var(--v3-s3);padding-right:var(--v3-s3)}
+#homeV2.hv4 .v3-ic,#homeV2.hv4 .v3-avatar{flex:0 0 auto}
+#homeV2.hv4 .v3-ic{width:44px;height:44px}
+#homeV2.hv4 .v3-avatar{width:44px;height:44px;font-size:14px}
+#homeV2.hv4 .v3-brand{flex:0 1 auto;min-width:0;overflow:hidden}
+#homeV2.hv4 .v3-brand-tt{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* B — compact greeting / workspace */
+#homeV2.hv4 .v4-greet{margin:0 2px}
+#homeV2.hv4 .v4-greet .hi{font:600 20px/1.25 var(--v3-font);letter-spacing:-.01em;color:var(--v3-ink)}
+#homeV2.hv4 .v4-greet .q{font:500 14px/1.4 var(--v3-font);color:var(--v3-muted);margin-top:2px}
+/* C — paired primary/secondary actions: identical geometry, restrained color */
+#homeV2.hv4 .v4-action{display:flex;align-items:center;gap:var(--v3-s3);width:100%;text-align:left;min-height:76px;padding:var(--v3-s4);border-radius:var(--v3-r);border:1px solid var(--v3-border);background:var(--v3-panel);color:var(--v3-ink);box-shadow:var(--v3-shadow);transition:transform var(--v3-ease),box-shadow var(--v3-ease),filter var(--v3-ease)}
+#homeV2.hv4 .v4-action:active{transform:scale(.99)}
+#homeV2.hv4 .v4-action .ic{width:44px;height:44px;border-radius:var(--v3-r-sm);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+#homeV2.hv4 .v4-action .ic svg{width:24px;height:24px}
+#homeV2.hv4 .v4-action .bd{flex:1;min-width:0;display:block}
+#homeV2.hv4 .v4-action .tt{font:600 16px/1.2 var(--v3-font);display:flex;align-items:center;gap:8px;min-width:0}
+#homeV2.hv4 .v4-action .sub{display:block;font:500 12.5px/1.4 var(--v3-font);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#homeV2.hv4 .v4-action .arr{margin-left:auto;flex:0 0 auto}
+#homeV2.hv4 .v4-action .arr svg{width:20px;height:20px}
+/* Level 1 — the single gradient action */
+#homeV2.hv4 .v4-action.primary{border:none;color:#fff;background:linear-gradient(135deg,var(--v3-primary-3),var(--v3-primary) 55%,var(--v3-primary-2));box-shadow:var(--v3-shadow-primary)}
+#homeV2.hv4 .v4-action.primary:active{filter:brightness(1.04)}
+#homeV2.hv4 .v4-action.primary .ic{background:rgba(255,255,255,.18)}#homeV2.hv4 .v4-action.primary .ic svg{stroke:#fff}
+#homeV2.hv4 .v4-action.primary .sub{color:rgba(255,255,255,.9)}
+#homeV2.hv4 .v4-action.primary .arr svg{stroke:#fff}
+/* Level 2 — same geometry, differentiated by a restrained left accent + tint */
+#homeV2.hv4 .v4-action.secondary{border-left:3px solid var(--v3-primary)}
+#homeV2.hv4 .v4-action.secondary:hover{box-shadow:var(--v3-shadow-md)}
+#homeV2.hv4 .v4-action.secondary .ic{background:var(--v3-primary-soft)}#homeV2.hv4 .v4-action.secondary .ic svg{stroke:var(--v3-primary)}
+#homeV2.hv4 .v4-action.secondary .sub{color:var(--v3-muted)}
+#homeV2.hv4 .v4-action.secondary .arr svg{stroke:var(--v3-muted)}
+#homeV2.hv4 .v4-badge{font:700 10px/1 var(--v3-font);letter-spacing:.04em;text-transform:uppercase;color:var(--v3-primary);background:var(--v3-primary-soft);border-radius:var(--v3-r-pill);padding:3px 7px}
+/* section label */
+#homeV2.hv4 .v4-sec{font:700 11px/1.4 var(--v3-font);text-transform:uppercase;letter-spacing:.08em;color:var(--v3-muted);margin:var(--v3-s2) 2px 0}
+/* E — clinical tools: ONE tile treatment, column layout (never clips horizontally) */
+#homeV2.hv4 .v4-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--v3-s3)}
+#homeV2.hv4 .v4-tile{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-width:0;min-height:104px;background:var(--v3-panel);border:1px solid var(--v3-border);border-radius:var(--v3-r);box-shadow:var(--v3-shadow);padding:var(--v3-s4);text-align:left;color:var(--v3-ink);transition:transform var(--v3-ease),box-shadow var(--v3-ease)}
+#homeV2.hv4 .v4-tile:active{transform:scale(.97)}#homeV2.hv4 .v4-tile:hover{box-shadow:var(--v3-shadow-md)}
+#homeV2.hv4 .v4-tile .ic{width:40px;height:40px;border-radius:var(--v3-r-sm);background:var(--v3-primary-soft);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+#homeV2.hv4 .v4-tile .ic svg{width:22px;height:22px;stroke:var(--v3-primary)}
+#homeV2.hv4 .v4-tile .tt{font:600 14px/1.25 var(--v3-font);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
+#homeV2.hv4 .v4-tile .sub{font:500 11.5px/1.35 var(--v3-font);color:var(--v3-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+/* F — footer (compact, medico-legal + credit) */
+#homeV2.hv4 .v4-foot{max-width:var(--v3-maxw);margin:var(--v3-s2) auto 0;text-align:center}
+#homeV2.hv4 .v4-foot .disc{font:500 11.5px/1.5 var(--v3-font);color:var(--v3-muted)}
+#homeV2.hv4 .v4-foot .cred{font:500 10.5px/1.5 var(--v3-font);color:var(--v3-muted);opacity:.75;margin-top:6px}
+/* defensive: never show the retired hero / shortcut row / big dev block in v4 */
+#homeV2.hv4 .v3-hero,#homeV2.hv4 .v3-qrow,#homeV2.hv4 .v3-devfoot{display:none}
+/* slightly larger desktop gutter, aligned to the same 520 grid */
+@media(min-width:560px){#homeV2.hv4 .v3-main{padding-left:var(--v3-s5);padding-right:var(--v3-s5)}}
+/* very narrow (≤360px, e.g. iPhone SE): drop the small logo mark so the full
+   "StewardMD" wordmark always fits without truncation */
+@media(max-width:360px){#homeV2.hv4 .v3-brand .v3-mark{display:none}}

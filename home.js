@@ -625,6 +625,47 @@
     document.head.appendChild(st);
   }
 
+  // ---- v4 home redesign (opt-in flag: localStorage smd_home_v4="1" or ?home=v4) ----
+  // Renders a coherent, de-duplicated authenticated home. Reuses the ACT dispatch and
+  // data-act wiring 1:1 so no routes change; styled by the scoped .hv4 layer in ui-v3.css.
+  function homeV4On() { try { return localStorage.getItem("smd_home_v4") === "1" || /[?&]home=v4\b/.test(location.search); } catch (e) { return false; } }
+  function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
+  function tileV4(act, icon, tt, sub) {
+    return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
+  }
+  function homeV4Markup() {
+    return '' +
+      '<header class="v3-header">' +
+        '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
+        '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
+        '<div class="v3-spacer"></div>' +
+        '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
+        '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
+      '</header>' +
+      '<main class="v3-main"><div class="v3-stack">' +
+        '<div class="v4-greet"><div class="hi">' + greetV4() + '</div><div class="q">What would you like to do?</div></div>' +
+        '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
+        '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
+        '<div class="v4-sec">Clinical tools</div>' +
+        '<div class="v4-grid">' +
+          tileV4("cases", "folder", "My Cases", "Saved assessments") +
+          tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
+          tileV4("drugs", "pills", "Drug Index", "Brands · doses · price") +
+          tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
+          tileV4("icu", "icu", "ICU", "Patient dashboard") +
+          tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
+        '</div>' +
+        '<div class="v4-foot"><div class="disc">For qualified clinicians · AI-summarised — verify doses</div><div class="cred">© 2026 StewardMD · MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div></div>' +
+      '</div></main>' +
+      '<nav class="v3-tabbar">' +
+        '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
+        '<button class="v3-tab" data-act="cases" aria-label="Cases">' + svg("folder") + '<span>Cases</span></button>' +
+        '<button class="v3-tab" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
+        '<button class="v3-tab" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
+        '<button class="v3-tab" data-act="more" aria-label="More">' + svg("more") + '<span>More</span></button>' +
+      '</nav>';
+  }
+
   function build() {
     if (root) return;
     injectCSS(); injectV3CSS();
@@ -673,6 +714,9 @@
       '</nav>';
     document.body.appendChild(root);
 
+    // v4 redesign: swap in the coherent home layout (same data-act wiring).
+    if (homeV4On()) { root.classList.add("hv4"); root.innerHTML = homeV4Markup(); }
+
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
       var _fl = root.querySelector("#v3DevLogo");
@@ -693,6 +737,9 @@
     // never on the intro splash, disclaimer, or login gates.
     function refreshFab() {
       if (!fab) return;
+      // v4 home has a Home tab in the bottom nav, so the floating Home button is
+      // redundant everywhere (inner screens have their own close/back) — hide it.
+      if (homeV4On()) { if (fab.style.display !== "none") fab.style.display = "none"; return; }
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
         var el = document.getElementById(id); if (!el) return false;
         // A gate counts as "up" only if genuinely visible — these gates fade out via
@@ -1335,7 +1382,7 @@
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s3";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s4";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
