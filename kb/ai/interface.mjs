@@ -44,7 +44,7 @@ export function createStewardAI(store, opts) {
   // nameToks are tracked separately so a query that NAMES a disease ranks that
   // disease's own chunks above chunks that merely mention it (e.g. a differential).
   const bags = chunks.map((c) => ({ c, toks: tokenize(c.text + " " + c.diseaseName + " " + c.section),
-    nameToks: new Set(tokenize(c.diseaseName + " " + c.diseaseId)) }));
+    nameToks: new Set(tokenize(c.diseaseName + " " + c.diseaseId + " " + (c.aliases || ""))) }));
   const df = {};
   bags.forEach((b) => { const seen = new Set(); b.toks.forEach((t) => { if (!seen.has(t)) { seen.add(t); df[t] = (df[t] || 0) + 1; } }); });
   const N = bags.length || 1;
