@@ -103,18 +103,36 @@
   function toast(m) { try { if (window.SB && SB.toast) return SB.toast(m); } catch (e) {} var t = document.getElementById("swToast"); if (!t) { t = document.createElement("div"); t.id = "swToast"; t.className = "sw-toast"; document.body.appendChild(t); } t.textContent = m; t.classList.add("on"); clearTimeout(t._t); t._t = setTimeout(function () { t.classList.remove("on"); }, 2400); }
 
   /* ───────────────────────────── auto-select (deterministic) ───────────────────────────── */
-  var ROUTE = [
-    { id: "ophthalmology", re: /\b(red eye|eye pain|photophobi|vision|conjunctiv|corneal|keratit|ocular|orbital)\b/i },
-    { id: "ent", re: /\b(ear|otitis|otalgia|hearing|sinus|nasal|throat|tonsil|sore throat|neck swelling|otorrhoea|otorrhea)\b/i },
-    { id: "obstetrics_gynaecology", re: /\b(vaginal|pelvic|pregnan|postpartum|obstetr|gynae|menstru|cervic|discharge per vagin|pv bleed)\b/i },
-    { id: "urology", re: /\b(dysuria|urinary|urine|flank pain|renal colic|hydronephro|catheter|prostat|urosepsis|frequency and urgency)\b/i },
-    { id: "dentistry_omfs", re: /\b(tooth|dental|gum|facial swelling|jaw|odontogenic|abscess.*tooth)\b/i },
-    { id: "surgery", re: /\b(acute abdomen|wound|post-?op|abscess|cellulitis|diabetic foot|source control|surgical)\b/i }
+  // Weighted keyword sets — the suggestion scores each specialty by how many of its
+  // terms the complaint matches (deterministic, no AI). Order breaks ties.
+  var KW = {
+    ophthalmology: ["red eye", "eye pain", "painful eye", "photophobi", "blurred vision", "loss of vision", "vision", "conjunctiv", "corneal", "keratit", "ocular", "orbital", "watering eye", "discharge from eye", "stye", "floaters"],
+    ent: ["ear", "otitis", "otalgia", "hearing", "ear discharge", "otorrhoea", "otorrhea", "sinus", "rhinosinus", "nasal", "nose block", "throat", "sore throat", "tonsil", "quinsy", "neck swelling", "hoarse", "epistaxis", "vertigo", "mastoid"],
+    obstetrics_gynaecology: ["vaginal", "per vagina", "pv discharge", "pelvic pain", "pregnan", "gravida", "postpartum", "puerperal", "obstetr", "gynae", "menstru", "cervic", "pv bleed", "dysmenorrh", "adnexal", "ectopic", "miscarriage", "abortion", "tubo-ovarian"],
+    urology: ["dysuria", "urinary", "urine", "burning micturition", "frequency", "urgency", "flank pain", "loin pain", "renal colic", "ureteric", "hydronephro", "catheter", "cauti", "prostat", "urosepsis", "haematuria", "retention", "scrotal", "testic"],
+    dentistry_omfs: ["tooth", "teeth", "dental", "gum", "gingiv", "facial swelling", "jaw", "odontogenic", "pericoronitis", "mandible", "molar", "ludwig"],
+    surgery: ["acute abdomen", "abdominal pain", "wound", "post-op", "post operative", "surgical site", "abscess", "cellulitis", "soft tissue", "diabetic foot", "source control", "hernia", "appendic", "cholecyst", "obstruction", "perforation", "peritonitis", "trauma", "gangrene", "necrotis", "debride", "acute pain abdomen"]
+  };
+  // Shared-condition detectors → Internal Medicine stays primary, with a consult overlay.
+  var SHARED = [
+    { test: function (t) { return /cholangitis/.test(t) || (/fever/.test(t) && /(jaundice|icterus|yellow)/.test(t) && /(ruq|right upper|hypochond)/.test(t)); },
+      primary: IM, consult: "surgery", label: "Internal Medicine — with Surgery / GI hepatobiliary consult (biliary drainage)" },
+    { test: function (t) { return /liver abscess/.test(t); }, primary: IM, consult: "surgery", label: "Internal Medicine — with Surgery / IR consult (drainage)" },
+    { test: function (t) { return /colitis/.test(t) && /(toxic|megacolon|perforat|rigid|periton)/.test(t); }, primary: IM, consult: "surgery", label: "Internal Medicine — with Surgery escalation (complications)" },
+    { test: function (t) { return /(flank|loin)/.test(t) && /fever/.test(t) && /(hydronephro|obstruct|stone|calcul)/.test(t); }, primary: "urology", consult: IM, label: "Urology — with Internal Medicine sepsis escalation (obstructed infected system)" },
+    { test: function (t) { return /orbital/.test(t); }, primary: "ophthalmology", consult: "ent", label: "Ophthalmology — with ENT consult (orbital cellulitis)" },
+    { test: function (t) { return /(pelvic|adnexal)/.test(t) && /(abscess|tubo-ovarian)/.test(t); }, primary: "obstetrics_gynaecology", consult: "surgery", label: "Obstetrics & Gynaecology — with Surgery consult (tubo-ovarian abscess)" }
   ];
   function suggestWorkspace(text) {
-    var t = String(text || "");
-    for (var i = 0; i < ROUTE.length; i++) if (ROUTE[i].re.test(t)) return ROUTE[i].id;
-    return IM; // default → Internal Medicine
+    var t = String(text || "").toLowerCase();
+    if (t.trim().length < 3) return { id: IM, shared: null, score: 0 };
+    for (var s = 0; s < SHARED.length; s++) if (SHARED[s].test(t)) return { id: SHARED[s].primary, shared: SHARED[s], score: 2 };
+    var best = IM, bestScore = 0;
+    Object.keys(KW).forEach(function (id) {
+      var n = 0; KW[id].forEach(function (k) { if (t.indexOf(k) !== -1) n++; });
+      if (n > bestScore) { bestScore = n; best = id; }
+    });
+    return { id: bestScore ? best : IM, shared: null, score: bestScore };
   }
 
   /* ───────────────────────────── CSS ───────────────────────────── */
@@ -165,6 +183,21 @@
       ".sw-step{display:flex;gap:11px;padding:7px 0;border-top:1px solid var(--line,#eef1f4)}.sw-step:first-of-type{border-top:none}.sw-step .n{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);font:800 12px var(--sans);display:flex;align-items:center;justify-content:center}.sw-step .lb{font:600 13.5px/1.4 var(--sans);color:var(--ink)}",
       ".sw-chips{display:flex;flex-wrap:wrap;gap:7px}.sw-chip{font:600 12.5px var(--sans);border:1px solid var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-radius:999px;padding:6px 11px;color:var(--ink)}",
       ".sw-danger .sw-chip{border-color:var(--red-line,#efa9b1);background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c)}",
+      // interactive engine: selectable toggle chips + live output
+      ".sw-tog{font:600 12.5px var(--sans);border:1px solid var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-radius:999px;padding:7px 12px;color:var(--ink);cursor:pointer;user-select:none}",
+      ".sw-tog.on{background:var(--teal,#0e6e63);border-color:var(--teal);color:#fff}",
+      ".sw-danger .sw-tog{border-color:var(--red-line,#efa9b1);color:var(--red,#ab1c2c);background:var(--red-bg,#fbe7e9)}.sw-danger .sw-tog.on{background:var(--red,#ab1c2c);border-color:var(--red);color:#fff}",
+      ".sw-synbtn{font:700 13px var(--sans);border:1px solid var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-radius:11px;padding:9px 12px;color:var(--ink);cursor:pointer}.sw-synbtn.on{background:var(--teal,#0e6e63);border-color:var(--teal);color:#fff}",
+      ".sw-out{border-left:4px solid var(--teal,#0e6e63)}",
+      ".sw-out.emerg{border-left-color:var(--red,#ab1c2c)}",
+      ".sw-emerg{font:800 13px var(--sans);color:#fff;background:var(--red,#ab1c2c);border-radius:10px;padding:9px 12px;margin-bottom:10px}",
+      ".sw-catg{font:800 15px/1.3 var(--sans);color:var(--ink);margin-bottom:8px}",
+      ".sw-out .lab{font:800 10px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--slate-soft);margin:10px 0 4px}",
+      ".sw-out p{font:600 13px/1.5 var(--sans);color:var(--ink);margin:2px 0}",
+      ".sw-out ul{margin:2px 0;padding-left:18px}.sw-out li{font:500 12.5px/1.5 var(--sans);color:var(--slate,#2d4356);margin:3px 0}",
+      ".sw-ladder .r.on{font-weight:800}.sw-ladder .r.on .d{box-shadow:0 0 0 3px rgba(14,110,99,.18)}.sw-ladder .r.dim{opacity:.4}",
+      ".sw-shared{font:600 12.5px/1.55 var(--sans);background:var(--teal-soft,#e3f1ee);border:1px solid var(--teal,#0e6e63);border-radius:11px;padding:10px 12px;margin-top:10px;color:var(--ink)}.sw-shared b{color:var(--teal,#0e6e63)}",
+      ".sw-openim{display:block;width:100%;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans);padding:12px;cursor:pointer;margin-top:10px}",
       ".sw-ladder{display:flex;flex-direction:column;gap:6px}.sw-ladder .r{display:flex;align-items:center;gap:9px;font:600 13px var(--sans);color:var(--ink)}.sw-ladder .r .d{width:9px;height:9px;border-radius:50%;flex:0 0 auto}",
       ".sw-imbtn{display:block;width:100%;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);padding:14px;cursor:pointer;margin-top:6px}",
       // confirm dialog
@@ -221,7 +254,11 @@
     var ai = _sheet.querySelector("#swAuto"), sg = _sheet.querySelector("#swSg");
     if (ai) ai.addEventListener("input", function () {
       var v = ai.value.trim(); if (v.length < 3) { sg.classList.remove("on"); return; }
-      var id = suggestWorkspace(v); sg.innerHTML = 'Suggested workspace: <b>' + meta(id).name + '</b> — tap it above to use. <span style="color:var(--slate-soft)">(you can override)</span>'; sg.classList.add("on");
+      var r = suggestWorkspace(v);
+      var txt = r.shared ? 'Suggested: <b>' + r.shared.label + '</b>' : 'Suggested workspace: <b>' + meta(r.id).name + '</b>';
+      if (!r.score && !r.shared) txt = 'No clear specialty match — defaulting to <b>Internal Medicine</b>';
+      sg.innerHTML = txt + ' — tap it above to use. <span style="color:var(--slate-soft)">(you can override)</span>';
+      sg.classList.add("on");
     });
     requestAnimationFrame(function () { _scrim.classList.add("on"); _sheet.classList.add("on"); });
   }
@@ -237,34 +274,79 @@
     refreshSidebarLabel();
   }
 
-  /* ───────────────────────────── early-access specialty shell ───────────────────────────── */
-  var _shell;
+  /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
+  var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null;
   function openSpecialtyShell(id) {
     injectCSS();
-    var r = meta(id);
+    var r = meta(id), eng = (window.SMD_WS_ENGINES || {})[id];
     if (!_shell) { _shell = document.createElement("div"); _shell.className = "sw-shell"; _shell.id = "swShell"; document.body.appendChild(_shell); }
-    var steps = [
-      "Presenting complaint / syndrome", "Focused specialty questions", "Severity / danger signs",
-      "Differential & likely category", "Management: antibiotic need, referral, source-control / procedure"
-    ];
+    _es = null;
     var h = '<div class="sw-shead"><button class="bk" id="swShBack" aria-label="Back">‹</button>' +
       '<div class="ti">' + r.name + '<span class="ea">Early access</span></div>' +
       '<button class="sw-pill" id="swShPill"><span class="ic">' + ic(ICONS[id]) + '</span><span class="nm">' + r.name + '</span><span class="chev">▾</span></button></div>';
-    h += '<div class="sw-sbody">';
-    h += '<div class="sw-wm">' + wm(WMARKS[id]) + '</div>';
-    h += '<div class="sw-note">This specialty pathway is in <b>early access</b> — the framework and safe entry points are shown, but the focused questions and differential are still being validated. It does <b>not</b> produce a diagnosis or drug dosing. Internal Medicine remains the fully-validated engine.</div>';
-    h += '<div class="sw-card"><h4>5-step specialty pathway</h4>' + steps.map(function (s, i) { return '<div class="sw-step"><div class="n">' + (i + 1) + '</div><div class="lb">' + s + '</div></div>'; }).join("") + '</div>';
-    if (r.syndromes) h += '<div class="sw-card"><h4>Syndrome entry points</h4><div class="sw-chips">' + r.syndromes.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
-    if (r.danger) h += '<div class="sw-card sw-danger"><h4>Danger signs — escalate</h4><div class="sw-chips">' + r.danger.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
-    var cols = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" };
-    h += '<div class="sw-card"><h4>Antibiotic / management ladder</h4><div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r"><span class="d" style="background:' + cols[i] + '"></span>' + x + '</div>'; }).join("") + '</div></div>';
-    h += '<button class="sw-imbtn" id="swToIM">Switch to Internal Medicine (full engine)</button>';
-    h += '</div>';
+    h += '<div class="sw-sbody"><div class="sw-wm">' + wm(WMARKS[id]) + '</div>';
+    h += '<div class="sw-note">Early access — advisory decision support, not a diagnosis or drug dose. It flags danger signs, whether antibiotics/source-control are needed, and referral. Verify against local protocol, imaging &amp; the individual patient. Internal Medicine remains the fully-validated engine.</div>';
+    if (eng && eng.syndromes) {
+      h += '<div class="sw-card"><h4>Step 1 · Choose the presentation</h4><div class="sw-chips" id="swSyn">' +
+        eng.syndromes.map(function (s) { return '<button class="sw-synbtn" data-syn="' + s.id + '">' + s.name + '</button>'; }).join("") + '</div></div>';
+      h += '<div id="swEngOut"></div>';
+    } else {
+      var steps = ["Presenting complaint / syndrome", "Focused specialty questions", "Severity / danger signs", "Differential & likely category", "Management: antibiotic need, referral, source-control / procedure"];
+      h += '<div class="sw-card"><h4>5-step specialty pathway</h4>' + steps.map(function (s, i) { return '<div class="sw-step"><div class="n">' + (i + 1) + '</div><div class="lb">' + s + '</div></div>'; }).join("") + '</div>';
+      if (r.syndromes) h += '<div class="sw-card"><h4>Syndrome entry points</h4><div class="sw-chips">' + r.syndromes.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
+      if (r.danger) h += '<div class="sw-card sw-danger"><h4>Danger signs — escalate</h4><div class="sw-chips">' + r.danger.map(function (x) { return '<span class="sw-chip">' + x + '</span>'; }).join("") + '</div></div>';
+      h += '<div class="sw-card"><h4>Antibiotic / management ladder</h4><div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div></div>';
+    }
+    h += '<button class="sw-imbtn" id="swToIM">Switch to Internal Medicine (full engine)</button></div>';
     _shell.innerHTML = h;
     _shell.classList.add("on");
     _shell.querySelector("#swShBack").addEventListener("click", function () { _shell.classList.remove("on"); });
     _shell.querySelector("#swShPill").addEventListener("click", function () { openSheet({ inCase: true }); });
-    _shell.querySelector("#swToIM").addEventListener("click", function () { _shell.classList.remove("on"); caseWorkspace = null; try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} });
+    _shell.querySelector("#swToIM").addEventListener("click", openIM);
+    if (eng && eng.syndromes) {
+      _shell.querySelectorAll("#swSyn .sw-synbtn").forEach(function (b) {
+        b.addEventListener("click", function () {
+          _shell.querySelectorAll("#swSyn .sw-synbtn").forEach(function (x) { x.classList.remove("on"); }); b.classList.add("on");
+          var syn = null, sid = b.getAttribute("data-syn"); eng.syndromes.forEach(function (s) { if (s.id === sid) syn = s; });
+          _es = { syn: syn, sel: {}, has: function (k) { return !!this.sel[k]; }, size: function () { var n = 0; for (var k in this.sel) if (this.sel[k]) n++; return n; } };
+          renderSyndrome();
+        });
+      });
+    }
+  }
+  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
+
+  function selSet() { var s = new Set(); for (var k in _es.sel) if (_es.sel[k]) s.add(k); return s; }
+  function renderSyndrome() {
+    var out = document.getElementById("swEngOut"); if (!out || !_es) return;
+    var syn = _es.syn, h = "";
+    if (syn.q && syn.q.length) h += '<div class="sw-card"><h4>Step 2 · Focused findings</h4><div class="sw-chips">' + syn.q.map(function (q) { return '<button class="sw-tog' + (_es.has(q.id) ? " on" : "") + '" data-f="' + q.id + '">' + q.label + '</button>'; }).join("") + '</div></div>';
+    if (syn.danger && syn.danger.length) h += '<div class="sw-card sw-danger"><h4>Step 3 · Danger signs</h4><div class="sw-chips">' + syn.danger.map(function (d) { return '<button class="sw-tog' + (_es.has(d.id) ? " on" : "") + '" data-f="' + d.id + '">' + d.label + '</button>'; }).join("") + '</div></div>';
+    h += '<div id="swOut"></div>';
+    out.innerHTML = h;
+    out.querySelectorAll(".sw-tog").forEach(function (b) { b.addEventListener("click", function () { var f = b.getAttribute("data-f"); _es.sel[f] = !_es.sel[f]; b.classList.toggle("on"); renderOut(); }); });
+    renderOut();
+  }
+  function renderOut() {
+    var box = document.getElementById("swOut"); if (!box || !_es) return;
+    var res = {}; try { res = _es.syn.assess(selSet()) || {}; } catch (e) { res = {}; }
+    var lad = (typeof res.ladder === "number") ? res.ladder : -1;
+    var h = '<div class="sw-card sw-out' + (res.emergency ? " emerg" : "") + '">';
+    if (res.emergency) h += '<div class="sw-emerg">⚠ Time-critical — escalate now</div>';
+    h += '<div class="sw-catg">Step 4 · ' + (res.catg || "Select findings above") + '</div>';
+    h += '<div class="lab">Step 5 · Management</div>';
+    h += '<div class="sw-ladder">' + ABX_LADDER.map(function (x, i) { return '<div class="r ' + (i === lad ? "on" : (lad >= 0 ? "dim" : "")) + '"><span class="d" style="background:' + LADCOL[i] + '"></span>' + x + '</div>'; }).join("") + '</div>';
+    if (res.sc) { h += '<div class="lab">Source control / procedure</div><p>' + res.sc + '</p>'; }
+    if (res.ref) { h += '<div class="lab">Referral / escalation</div><p>' + res.ref + '</p>'; }
+    if (res.mgmt && res.mgmt.length) { h += '<div class="lab">Notes</div><ul>' + res.mgmt.map(function (m) { return '<li>' + m + '</li>'; }).join("") + '</ul>'; }
+    if (res.shared || _es.syn.shared) {
+      var sh = _es.syn.shared || {};
+      h += '<div class="sw-shared"><b>Shared condition.</b> Internal Medicine is <b>primary</b>' + (sh.role ? ' — this workspace is the ' + sh.role.toLowerCase() : '') + '. It does not overwrite the IM assessment. Antibiotic choice + ICMR precedence stay in the IM pathway.</div>';
+      h += '<button class="sw-openim" id="swOutIM">Open Internal Medicine pathway (primary)</button>';
+    }
+    h += '</div>';
+    box.innerHTML = h;
+    var oi = box.querySelector("#swOutIM"); if (oi) oi.addEventListener("click", openIM);
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */
