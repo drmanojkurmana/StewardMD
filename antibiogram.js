@@ -147,14 +147,14 @@
       COLS.forEach(function (c) {
         var covered = d.cov.indexOf(c.id) !== -1;
         var hl = "";
-        if (covSelType === "org" && covSel === c.id) hl = covered ? " hit" : " miss";
-        if (covSelType === "drug" && covSel === i && covered) hl = " hit";
-        h += '<td class="abg-cell g-' + c.group + (covered ? " on" : "") + hl + '"></td>';
+        if (covSelType === "org" && covSel === c.id) hl = " col";
+        if ((covSelType === "org" && covSel === c.id) || (covSelType === "drug" && covSel === i)) hl += " hit";
+        h += '<td class="abg-cell ' + (covered ? "on" : "off") + hl + '"><i>' + (covered ? "✓" : "✕") + '</i></td>';
       });
       h += '</tr>';
     });
     h += '</tbody></table></div>';
-    h += '<div class="abg-legend"><span><i class="sw on"></i>Covered</span><span><i class="sw"></i>Gap / unreliable</span><span class="abg-src">Ref: aetherist/antibiogram · educational</span></div>';
+    h += '<div class="abg-legend"><span><i class="sw on"></i>Covered</span><span><i class="sw off"></i>Not covered / unreliable</span><span class="abg-src">Ref: aetherist/antibiogram · educational</span></div>';
     return h;
   }
 
@@ -305,14 +305,17 @@
       ".abg-drow{cursor:pointer}",
       ".abg-drow.sel .abg-rowh{background:var(--tls)}",
       ".abg-drow.dim{opacity:.4}",
-      ".abg-cell{width:56px;min-width:56px;height:30px;background:var(--panel)}",
-      ".abg-cell.on{background:var(--tl)}",
-      ".abg-cell.g-gpc.on{background:#3b82f6}.abg-cell.g-gnb.on{background:#dc2626}.abg-cell.g-gnc.on{background:#9333ea}.abg-cell.g-ana.on{background:#a17c2f}.abg-cell.g-aty.on{background:#64748b}",
-      ".abg-cell.hit{outline:2px solid #0F766E;outline-offset:-2px}",
-      ".abg-cell.miss{background:var(--panel);opacity:.5}",
+      ".abg-cell{width:56px;min-width:56px;height:32px;text-align:center;background:var(--panel)}",
+      ".abg-cell i{font-style:normal;font:800 12px var(--f);color:#fff;opacity:.92}",
+      ".abg-cell.on{background:#059669}",
+      ".abg-cell.off{background:#E15B64}",
+      "body.dark .abg-cell.on{background:#0e7a5f}body.dark .abg-cell.off{background:#a83b43}",
+      ".abg-cell.hit{outline:2px solid var(--ink);outline-offset:-2px}",
+      ".abg-cell.hit i{opacity:1}",
       ".abg-legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:10px;font:600 11px var(--f);color:var(--mut)}",
       ".abg-legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:5px;background:var(--panel)}",
-      ".abg-legend .sw.on{background:var(--tl);border-color:var(--tl)}",
+      ".abg-legend .sw.on{background:#059669;border-color:#059669}",
+      ".abg-legend .sw.off{background:#E15B64;border-color:#E15B64}",
       ".abg-src{margin-left:auto;font-weight:500;font-size:10px}",
       ".abg-srcbar{display:flex;align-items:center;gap:10px;margin-bottom:12px}",
       ".abg-srclab{font:800 11px var(--f);text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}",
