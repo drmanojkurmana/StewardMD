@@ -436,6 +436,15 @@
     
       window.closeGHIS = function() {
         document.getElementById('ghisPanel').classList.remove('open');
+        // If the Drug Interactions overlay is open behind us, refresh it so the
+        // Ward Sync card + patient pill reflect the patient just selected here.
+        try {
+          var mi = document.getElementById('miOverlay');
+          if (mi && mi.classList.contains('on')) {
+            if (window.MEDDRUGS && window.MEDDRUGS.updatePatientPill) window.MEDDRUGS.updatePatientPill();
+            if (window.MEDLIST && window.MEDLIST._rerender) window.MEDLIST._rerender();
+          }
+        } catch (e) {}
       };
     
       window.closeLabDrawer = function() {

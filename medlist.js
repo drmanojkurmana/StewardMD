@@ -1009,6 +1009,25 @@
     render();
   }
 
+  // After an in-results edit (e.g. "What now? → Remove X"), re-run the check if 2+
+  // medicines remain, else drop back to the list.
+  function recheckAfterEdit() {
+    var resolved = getList().filter(function (m) { return m.generic && String(m.generic).trim(); });
+    if (resolved.length >= 2 && window.INTERACTIONS && window.INTERACTIONS.checkInteractions) {
+      _results = window.INTERACTIONS.checkInteractions(getList());
+      _view = "results"; render();
+    } else {
+      _view = "list"; render();
+      toast("Fewer than 2 medicines left — add more to re-check.");
+    }
+  }
+  function removeGenericAndRecheck(generic) {
+    generic = (generic || "").toLowerCase();
+    getList().forEach(function (m) { if ((m.generic || "").toLowerCase() === generic) remove(m.id); });
+    toast("Removed " + cap(generic));
+    recheckAfterEdit();
+  }
+
   // --- Results screen -------------------------------------------------------
   var SEVERITY_LABEL = {
     critical: "Critical",
@@ -1084,7 +1103,37 @@
       if (closed) { whyBody.removeAttribute("hidden"); whyBtn.setAttribute("aria-expanded", "true"); whyBtn.textContent = "Hide details"; }
       else { whyBody.setAttribute("hidden", "hidden"); whyBtn.setAttribute("aria-expanded", "false"); whyBtn.textContent = "Why? · details"; }
     });
-    why.appendChild(whyBtn); why.appendChild(whyBody);
+    why.appendChild(whyBody);
+
+    // "What now?" — the concrete next step: remove (or plan to replace) an implicated
+    // drug, then re-check. Turns the finding into a decision, not just a warning.
+    var whatBtn = el("button", { cls: "mlr-whatnow-btn", text: "What now?", attrs: { type: "button", "aria-expanded": "false" } });
+    var whatBody = el("div", { cls: "mlr-whatnow", attrs: { hidden: "hidden" } });
+    whatBody.appendChild(el("div", { cls: "mlr-whatnow-lead",
+      text: finding.action || "Review whether all these medicines are needed; stop or replace the least essential, or apply the monitoring above." }));
+    var inList = (finding.drugs || []).filter(function (g) { return hasGeneric(g); });
+    if (inList.length) {
+      whatBody.appendChild(el("div", { cls: "mlr-whatnow-label", text: "Remove a medicine and re-check:" }));
+      var acts = el("div", { cls: "mlr-whatnow-actions" });
+      inList.forEach(function (g) {
+        var b = el("button", { cls: "mlr-remove-drug", text: "✕ Remove " + cap(g), attrs: { type: "button" } });
+        b.addEventListener("click", function () { removeGenericAndRecheck(g); });
+        acts.appendChild(b);
+      });
+      whatBody.appendChild(acts);
+    }
+    whatBody.appendChild(el("div", { cls: "mlr-whatnow-note",
+      text: "Or keep them with a clear indication and add the monitoring above. To swap a drug, remove it here then add the alternative. Always confirm against local protocol." }));
+    whatBtn.addEventListener("click", function () {
+      var closed = whatBody.hasAttribute("hidden");
+      if (closed) { whatBody.removeAttribute("hidden"); whatBtn.setAttribute("aria-expanded", "true"); }
+      else { whatBody.setAttribute("hidden", "hidden"); whatBtn.setAttribute("aria-expanded", "false"); }
+    });
+
+    var controls = el("div", { cls: "mlr-controls" });
+    controls.appendChild(whatBtn); controls.appendChild(whyBtn);
+    card.appendChild(controls);
+    card.appendChild(whatBody);
     card.appendChild(why);
     return card;
   }
@@ -1381,6 +1430,16 @@
 ".mlr-detail-val{font:500 12.5px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
 ".mlr-none{padding:22px 14px;text-align:center;color:var(--green,#1c7a4a);font:800 14px var(--sans);border:1px solid var(--green-line,#aedcc1);border-radius:12px;background:var(--green-bg,#e7f5ec)}",
 ".mlr-why{margin-top:9px}",
+".mlr-controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}",
+".mlr-whatnow-btn{background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:9px;padding:8px 14px;font:800 12.5px var(--sans);cursor:pointer;min-height:40px}",
+".mlr-whatnow-btn:active{transform:scale(.97)}",
+".mlr-whatnow{margin-top:10px;border:1px solid var(--teal,#0e6e63);border-radius:11px;padding:12px 13px;background:var(--teal-soft,#e3f1ee)}",
+".mlr-whatnow-lead{font:700 13px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
+".mlr-whatnow-label{font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin:11px 0 7px}",
+".mlr-whatnow-actions{display:flex;flex-wrap:wrap;gap:8px}",
+".mlr-remove-drug{background:var(--panel,#fff);color:var(--red,#ab1c2c);border:1px solid var(--red-line,#efa9b1);border-radius:9px;padding:8px 13px;font:800 12.5px var(--sans);cursor:pointer;min-height:40px}",
+".mlr-remove-drug:active{transform:scale(.97)}",
+".mlr-whatnow-note{font:500 11.5px var(--sans);color:var(--slate,#2d4356);line-height:1.45;margin-top:10px}",
 ".mlr-explain-wrap{margin-top:9px}",
 ".mlr-explain-btn{background:transparent;border:1px solid var(--line,#d7dee3);border-radius:9px;padding:7px 12px;font:800 11.5px var(--sans);cursor:pointer;color:var(--teal,#0e6e63);min-height:38px}",
 ".mlr-explain-btn:disabled{opacity:.7;cursor:default}",
