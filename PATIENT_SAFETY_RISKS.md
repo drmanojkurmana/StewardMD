@@ -1,13 +1,16 @@
 # StewardMD — Patient-Safety & Workflow Risks (P0 / P1)
 
-_Senior-IM-physician QA pass, 2026-07-04. Tested via: local static serve (`:5173`) for UI/engine/console/storage/gate; **code inspection** for share/privacy/cases-API/AI-prompt safety; this session's earlier **bounded live-AI eval** for real answer wording. Not fully testable locally (backend absent, production data off-limits): real AI/vision responses, cloud save/share round-trip, Firestore rules._
+_Senior-IM-physician QA pass, 2026-07-04. Tested via: local static serve (`:5173`) for UI/engine/console/storage/gate; **code inspection** for share/privacy/cases-API/AI-prompt safety; this session's earlier **bounded live-AI eval** for real answer wording. Not fully testable locally (backend absent, production data off-limits): real AI/vision responses, cloud save/share round-trip. **Update 2026-07-04:** the Firestore `sharedCases` rules were subsequently emulator-verified (see P1-2)._
 
 ## Summary
-**No confirmed P0** (no PHI in URLs/localStorage/console; cases API is auth-gated + per-user; public share doc stores no email and no patient identifiers by design; AI answers hedge and carry an advisory). The risks below are **P1** — they must be resolved or explicitly accepted before a real clinical pilot. Several are *verify-then-classify*: I could not confirm them locally and they hinge on server config I can't see.
+**No confirmed P0** (no PHI in URLs/localStorage/console; cases API is auth-gated + per-user; public share doc stores no email and no patient identifiers by design; AI answers hedge and carry an advisory). The risks below are **P1** — they must be resolved or explicitly accepted before a real clinical pilot.
+
+**Status update (2026-07-04):** of the four P1s, **P1-1 is mitigated** (PHI guard + 7-char code shipped, `gold157`) and **P1-2 is verified secure** (Firestore rules emulator-tested — the enumeration concern did not reproduce). Remaining open: **P1-3** (full clinician-validated AI/vision eval) and **P1-4** (skip-first intro).
 
 ---
 
-## P1-1 — Free-text PHI can be published to a publicly-readable share store
+## P1-1 — Free-text PHI can be published to a publicly-readable share store — ✅ MITIGATED (gold157)
+**Update (2026-07-04, shipped & live in `gold157`):** the recommended fixes are implemented in `caseshare.js` — a client-side PHI guard now **hard-blocks** a share whose content contains an MRN/UHID/IP-OP/registration number, Indian phone, 12-digit Aadhaar, or email (tested precise: `test/run-share-phi.mjs`); the share code is now **7 chars (~22 billion)**; and the note explicitly warns the link is public. Residual (unfixable in code): a clinician could still type a *bare name* into free-text — the guard deliberately doesn't fuzzy-match names to avoid false-positives, so the UI warning + reviewer discipline remain the control for names.
 **Where:** `caseshare.js` → Firestore `sharedCases/{code}` (public read by code, 30-day TTL).
 **Repro:**
 1. Start a case; in any free-text finding type a synthetic identifier, e.g. `Ramesh Kumar, MRN 12345`.
@@ -19,10 +22,15 @@ _Senior-IM-physician QA pass, 2026-07-04. Tested via: local static serve (`:5173
 - Lengthen the code to 7–8 chars (30⁷ ≈ 22 billion) to defeat enumeration.
 - Reword the note from passive advice to an explicit gate: **"Shared links are public to anyone with the code. Never include patient names, MRN/UHID, or contact details."**
 
-## P1-2 — Share security depends on Firestore rules I cannot verify
-**Where:** `caseshare.js` header: _"Requires Firestore security rules … author cannot configure those from here."_ `sharedCases` is "publicly readable, writable by any signed-in user."
-**Why it can harm:** if the deployed rules allow **listing** the collection, broad reads, or writes to *others'* codes, an attacker could harvest every shared clinical case or tamper with shared content (a signed-in user overwriting `sharedCases/{code}`). Client-side expiry (line 150) is backed by a server-side check (line 154) **only if the rules enforce it**.
-**Recommended:** Owner must confirm the live rules: read allowed **only by exact document id (code)**, **no `list`**, `create` allowed for signed-in users, **`update`/`delete` denied** (immutable shares) or owner-only, and TTL/`expiresAt` enforced. Until confirmed, treat Share as **unverified**.
+## ~~P1-2 — Share security depends on Firestore rules~~ — ✅ VERIFIED SECURE (2026-07-04)
+**Status: RESOLVED / not a risk.** The `firestore.rules` were located (`firestore.rules`) and tested against the Firebase emulator (`test/firestore-rules/rules.test.mjs`, JDK 21). **All 11 guarantee checks pass on the current production rules** — including the enumeration test.
+**Correction to the original finding:** this was initially flagged as a possible enumeration hole. The emulator **disproved it** — Firestore denies a `list`/query such as `where('expiresAt','>', now)` because the read condition references `resource.data` + the dynamic `request.time`, which the rule engine cannot satisfy for a query. So the current rules already:
+- allow public read **only by exact code**, and only while unexpired (`resource.data.expiresAt > request.time`);
+- **deny enumeration/listing** of the collection;
+- allow `create` only for the signed-in owner (`ownerUid == auth.uid`), with TTL capped ≤ 32 days and payload ≤ 100 KB;
+- allow `update`/`delete` **owner-only** (revocation supported);
+- keep `users/{uid}/cases` private per user.
+**Optional hardening (PR #223, not urgent):** make the no-enumeration guarantee explicit (`allow list: if false`) + ownership-immutability on `update`. Current rules are secure without it.
 
 ## P1-3 — AI / image-interpretation clinical accuracy is not validated at scale
 **Where:** MaiK (`/api/ai/explain`), Vision (`/api/ai/vision`).

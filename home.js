@@ -661,7 +661,12 @@
     } catch (e) { return ""; }
   }
   function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
-  function greetLineV4() { var f = acctFirstV4(); return greetV4() + (f ? ", Dr " + escV4(f) : ""); }
+  function greetLineV4() {
+    var f = acctFirstV4(), nm = f ? ", Dr " + escV4(f) : "";
+    var d = new Date(), mins = d.getHours() * 60 + d.getMinutes();      // minutes since midnight
+    if (mins <= 270) return "Hi night owl" + nm + " \u2014 it\u2019s too early to say good morning";  // 00:00\u201304:30
+    return greetV4() + nm;
+  }
   function tileV4(act, icon, tt, sub) {
     return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
   }
