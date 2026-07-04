@@ -1524,13 +1524,13 @@
     var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
     // v4 home adds an editorial serif (Newsreader) for the wordmark + greeting.
     var fam = "Inter:wght@400;500;600;700;800";
-    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Sacramento";
+    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Nunito:wght@700;800;900&family=Sacramento";
     l.href = "https://fonts.googleapis.com/css2?family=" + fam + "&display=swap";
     document.head.appendChild(l);
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s7";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s8";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
