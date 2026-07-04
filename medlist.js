@@ -234,6 +234,24 @@
     // Confidence: honour OCR's low/medium/high but never upgrade an unmapped row to high.
     var conf = String(m.confidence || "").toLowerCase();
     if (conf !== "high" && conf !== "medium" && conf !== "low") conf = parsed.confidence || "low";
+    // AI-assisted mapping: when the deterministic parse didn't resolve a generic, adopt the
+    // model's standardised generic (brand->generic, Latin->INN, OCR-typo corrected). Prefer a
+    // formulary/brand match; otherwise accept the model's generic at MEDIUM (the clinician
+    // still reviews and confirms every row before anything is added). Combinations stay for
+    // explicit review.
+    if (!parsed.generic) {
+      var aiG = String(m.drug || m.generic || "").toLowerCase().trim().replace(/\s+/g, " ");
+      var isCombo = aiG.indexOf(" + ") !== -1 || aiG.indexOf("+") !== -1;
+      if (aiG && !isCombo && /^[a-z][a-z0-9'.\- ]+$/.test(aiG)) {
+        if (isKnownGeneric(aiG)) { parsed.generic = aiG; parsed.name = parsed.name || aiG; }
+        else {
+          var bc = brandCandidates(aiG);
+          if (bc.length === 1 && bc[0].generic.indexOf(" + ") === -1) { parsed.generic = bc[0].generic; parsed.name = parsed.name || aiG; }
+          else if (conf === "high" || conf === "medium") { parsed.generic = aiG; parsed.name = parsed.name || aiG; parsed.aiMapped = true; conf = "medium"; }
+        }
+      }
+    }
+    if (parsed.generic && conf === "low") conf = "medium";    // AI/parse mapped it -> not auto-flagged
     if (!parsed.generic && conf === "high") conf = "medium";  // no silent high on an unmapped drug
     parsed.confidence = conf;
     parsed.detected_text = text;
