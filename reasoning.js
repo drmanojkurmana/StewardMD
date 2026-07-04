@@ -3674,7 +3674,7 @@
       // Save-case box to the top. Runs AFTER the render, so a failure here can
       // never corrupt the clinical output (it's purely progressive enhancement).
       try { smdEnhanceOutput(); } catch (_) {}
-      try { if (!isNI) smdSafetyOverlay(e); } catch (_) {}   // antibiotic path only; never blocks output
+      try { if (!isNI) smdSafetyOverlay(e, i); } catch (_) {}   // antibiotic path only; never blocks output
       return ret;
     };
     window.__smdEngineExpanded = true;
@@ -4089,8 +4089,8 @@
       ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}";
     document.head.appendChild(st);
   }
-  // render-time findings; the read-only base the card's own inputs are overlaid onto.
-  var _safetyE = null;
+  // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
+  var _safetyE = null, _safetyId = null;
   // Effective patient = render-time findings overlaid with whatever the clinician typed into
   // the card's inputs. NEVER written back to the case or the engine — this is a local check.
   function smdSafetyEffective() {
@@ -4110,24 +4110,69 @@
     });
     return eff;
   }
-  // recompute + re-render ONLY the risk lines (inputs keep focus) from the effective patient.
+  // CrCl (Cockcroft-Gault) — returns the number regardless of band (null only if inputs missing),
+  // so the card can show "normal" as well as impaired. renalCheck stays the <50 escalation flag.
+  function smdCrclValue(e) {
+    var age = smdSafetyNum(e.age), wt = smdSafetyNum(e.weight), scr = smdSafetyNum(e.creatinine);
+    if (age === null || wt === null || scr === null || scr <= 0) return null;
+    return Math.max(0, Math.round((140 - age) * wt * ((String(e.sex || "").toLowerCase().charAt(0) === "f") ? 0.85 : 1) / (72 * scr)));
+  }
+  // recommended drugs → their authored renal/hepatic dosing guidance (from ASP_DRUGS; no
+  // fabricated doses — this is the "corrected-dose" guidance the app already ships per drug).
+  function smdRxDosing(drugs) {
+    var ref = window.ASP_DRUGS || {};
+    return (drugs || []).map(function (k) { var d = ref[k] || {}; return { label: d.label || k, renal: d.renal || "", hepatic: d.hepatic || "" }; })
+      .filter(function (d) { return d.renal || d.hepatic; });
+  }
+  // the syndrome's alternative regimens (engine data — real authored doses).
+  function smdAlternatives() {
+    try {
+      var syn = _safetyId && window.SYNDROMES && window.SYNDROMES[_safetyId]; if (!syn) return [];
+      var alts = syn.alternatives || (syn.decision && syn.decision.alternatives) || [];
+      return alts.slice(0, 4).map(function (a) {
+        return { drug: a.drug || "", dose: [a.dose, a.route, a.frequency].filter(Boolean).join(" · ") };
+      }).filter(function (a) { return a.drug; });
+    } catch (e) { return []; }
+  }
+  // always-on cardio/QT line: warn (with safer alternatives) when a QT-prolonging agent is
+  // recommended; otherwise reassure. Escalates when the patient is elderly/cardiac.
+  function smdCardioLine(eff, drugs) {
+    var qt = (drugs || []).filter(function (k) { return QT_PROLONGERS[k]; });
+    if (!qt.length) return { ok: true, text: "No QT-prolonging agent in this regimen — no additional QT precaution needed." };
+    var age = smdSafetyNum(eff.age), risk = (age !== null && age >= 65) || !!eff.knownCAD || !!eff.knownHeartFailure || !!eff.atrialFibHx;
+    var name = QT_PROLONGERS[qt[0]];
+    var head = risk ? (name + " prolongs the QT interval — HIGHER RISK in this elderly/cardiac patient.")
+                    : (name + " prolongs the QT interval — caution if the patient is elderly or has cardiac disease/low K⁺/Mg²⁺.");
+    return { ok: false, text: head + " Obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication — e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory — does not override the recommendation." };
+  }
+  // recompute + re-render the sections (inputs keep focus) from the effective patient.
   function smdSafetyRecalc() {
     var lines = document.getElementById("smdSafetyLines"); if (!lines) return;
     try {
-      var eff = smdSafetyEffective(), drugs = detectRecommendedDrugs(), hasDrugs = drugs.length > 0;
-      var renal = renalCheck(eff), hep = hepaticCheck(eff, drugs), card = cardioCheck(eff, drugs), html = "";
-      if (renal) {
-        var rt = hasDrugs ? renal.text : renal.text.replace("; see the per-drug renal-adjust notes below.", " — review renal dosing for any antimicrobial started.");
-        html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(rt) + '</div></div>';
+      var eff = smdSafetyEffective(), drugs = detectRecommendedDrugs();
+      var hep = hepaticCheck(eff, drugs), rx = smdRxDosing(drugs);
+      var card = smdCardioLine(eff, drugs), alts = smdAlternatives(), html = "";
+      // Renal: patient CrCl (when computable) + per-drug corrected-dose guidance (always).
+      var crcl = smdCrclValue(eff), renalHead;
+      if (crcl === null) renalHead = "enter age, weight & creatinine above for the patient's CrCl. Per-drug adjustment:";
+      else {
+        var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : crcl < 50 ? "moderate impairment" : "normal / mild";
+        renalHead = esc("CrCl ≈ " + crcl + " mL/min (" + tier + ") — " + (crcl < 50 ? "renal dose reduction applies." : "no renal dose reduction needed.") + " Per-drug:");
       }
-      if (hep) {
-        var ht = hasDrugs ? hep.text : hep.text.replace("for the recommended agents.", "for any antimicrobial started.");
-        html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(ht);
-        if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
-        html += '</div></div>';
-      }
-      if (card) html += '<div class="smd-safety-row"><span class="smd-safety-ic">❤️</span><div><b>Cardiac</b> ' + esc(card.text) + '</div></div>';
-      lines.innerHTML = html || '<div class="smd-safety-empty">Enter the values above to check renal (CrCl), hepatic and QT-cardiac safety for the recommended antibiotic.</div>';
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + renalHead;
+      if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.renal || "see product label") + '</li>'; }).join("") + '</ul>';
+      html += '</div></div>';
+      // Hepatic: per-drug guidance (always); flag impairment when entered.
+      var hepHead = hep ? esc(hep.text) : "Hepatic dosing — review if hepatic impairment; per-drug guidance:";
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + hepHead;
+      if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.hepatic || "see product label") + '</li>'; }).join("") + '</ul>';
+      html += '</div></div>';
+      // Cardiac: always shown.
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">' + (card.ok ? "✅" : "❤️") + '</span><div><b>Cardiac (QT)</b> ' + esc(card.text) + '</div></div>';
+      // Alternatives: the syndrome's other regimens.
+      if (alts.length) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🔁</span><div><b>Alternatives</b><ul class="smd-safety-ul">' +
+        alts.map(function (a) { return '<li><b>' + esc(a.drug) + '</b>' + (a.dose ? " — " + esc(a.dose) : "") + '</li>'; }).join("") + '</ul></div></div>';
+      lines.innerHTML = html;
     } catch (e) { /* never break the page */ }
   }
   function smdSafetyInputsHTML(e) {
@@ -4144,11 +4189,11 @@
       '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '>Cardiac (CAD/HF/AF)</label>' +
       '</div>';
   }
-  function smdSafetyOverlay(e) {
+  function smdSafetyOverlay(e, synId) {
     var oa = document.getElementById("outputArea"); if (!oa) return false;
     var old = document.getElementById("smdSafetyCard"); if (old) old.parentNode.removeChild(old);   // idempotent
     if (!smdSafetyFlagOn() || !e) return false;
-    _safetyE = e;
+    _safetyE = e; _safetyId = synId || null;
     var drugs = detectRecommendedDrugs();
     // Show the card on any real antibiotic recommendation (so the inputs are discoverable at the
     // point of care) OR whenever a trigger already fires from the entered findings.
