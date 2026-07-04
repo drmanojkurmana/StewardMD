@@ -164,12 +164,15 @@
   function _compressImage(fileOrDataUrl, cb) {
     var img = new Image();
     img.onload = function () {
-      var maxEdge = 1600, w = img.width, h = img.height;
+      // Downscale hard: OCR of prescriptions/reports stays reliable at ~1024px long edge
+      // (verified against the live vision model down to ~860px), and a smaller image means
+      // far fewer vision tiles -> fewer AI tokens. Dense reports can still use hi-quality.
+      var maxEdge = 1024, w = img.width, h = img.height;
       var scale = Math.min(1, maxEdge / Math.max(w, h));
       var cw = Math.round(w * scale), ch = Math.round(h * scale);
       var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
       var ctx = cv.getContext("2d"); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch);
-      var q = 0.72, out = cv.toDataURL("image/jpeg", q), guard = 0;
+      var q = 0.6, out = cv.toDataURL("image/jpeg", q), guard = 0;
       function bytes(u) { return Math.ceil((u.length - (u.indexOf(",") + 1)) * 3 / 4); }
       while (bytes(out) > MAX_UPLOAD_BYTES && guard++ < 6) {
         q -= 0.12; if (q < 0.4) { cw = Math.round(cw * 0.85); ch = Math.round(ch * 0.85); cv.width = cw; cv.height = ch; ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch); q = 0.6; }

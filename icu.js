@@ -411,12 +411,14 @@
   function compressImage(fileOrDataUrl, cb) {
     var img = new Image();
     img.onload = function () {
-      var maxEdge = _imgHiQ ? 2200 : 1600, w = img.width, h = img.height;
+      // Downscale hard by default to cut vision-token cost (monitor/vent/lab screens read
+      // reliably at ~1024px). Hi-quality (1500px) stays available for dense reports.
+      var maxEdge = _imgHiQ ? 1500 : 1024, w = img.width, h = img.height;
       var scale = Math.min(1, maxEdge / Math.max(w, h));
       var cw = Math.round(w * scale), ch = Math.round(h * scale);
       var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
       var ctx = cv.getContext("2d"); ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch);
-      var q = _imgHiQ ? 0.85 : 0.72, out = cv.toDataURL("image/jpeg", q), guard = 0;
+      var q = _imgHiQ ? 0.72 : 0.6, out = cv.toDataURL("image/jpeg", q), guard = 0;
       function bytes(u) { return Math.ceil((u.length - (u.indexOf(",") + 1)) * 3 / 4); }
       while (bytes(out) > MAX_UPLOAD_BYTES && guard++ < 6) {
         q -= 0.12; if (q < 0.4) { cw = Math.round(cw * 0.85); ch = Math.round(ch * 0.85); cv.width = cw; cv.height = ch; ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, cw, ch); ctx.drawImage(img, 0, 0, cw, ch); q = 0.6; }
@@ -1135,16 +1137,17 @@
         inp.addEventListener("change", function () {
           var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
           var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
-          var rd = new FileReader();
-          rd.onload = function () {
-            window.SMD_AI.vision(rd.result, kind).then(function (r) {
+          // Compress before sending to vision (was sending the raw full-res image → wasted
+          // AI tokens). compressImage downscales to ~1024px / q0.6.
+          compressImage(f, function (dataUrl) {
+            if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
+            window.SMD_AI.vision(dataUrl, kind).then(function (r) {
               if (r && r.fields && Object.keys(r.fields).length) {
                 try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
                 if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
               } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
             });
-          };
-          rd.readAsDataURL(f);
+          });
         });
       });
     }
