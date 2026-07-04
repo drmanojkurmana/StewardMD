@@ -96,6 +96,27 @@ try {
   chk("flag OFF → no card, returns false", await ev(`return String(window.__off)`) === "false" && await ev(`return !document.getElementById("smdSafetyCard")`) === true);
   chk("no triggers → no card", await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Amoxicillin 500 mg</div></div>'; var r=SMD_SAFETY.render({age:30,weight:70,sex:"m",creatinine:0.8}); return String(r)+"|"+!!document.getElementById("smdSafetyCard");`) === "false|false");
 
+  // ---- Fast-follow: real-render E2E — drives the ACTUAL renderOutput seam (not a stubbed #outputArea) ----
+  await ev(`SMD_SAFETY.setFlag(true); return 1;`);
+  // wait for the engine + the reasoning.js renderOutput wrapper to be installed
+  for (let i = 0; i < 50; i++) { if (await ev(`return !!(window.renderOutput && window.__smdEngineExpanded && window.SYNDROMES && window.SYNDROMES.COMPLICATED_UTI)`) === true) break; await sleep(200); }
+  // (a) antibiotic path: COMPLICATED_UTI's real regimen contains ciprofloxacin (a QT-prolonger);
+  //     elderly + cardiac + low CrCl patient → renal + cardio lines should fire against REAL markup.
+  await ev(`window.renderOutput({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",fever:true,cough:true,hypotension:true,severeCriteria:true}, "COMPLICATED_UTI"); return 1;`);
+  chk("E2E: card injected on a real antibiotic render", await ev(`return !!document.getElementById("smdSafetyCard")`) === true);
+  const e2eTxt = await ev(`var c=document.getElementById("smdSafetyCard");return c?c.innerText:""`);
+  chk("E2E: cardio QT line fired from REAL regimen (ciprofloxacin)", /Cardiac/.test(e2eTxt) && /QT/.test(e2eTxt) && /Ciprofloxacin/i.test(e2eTxt), (e2eTxt||"").slice(0, 90));
+  chk("E2E: renal line fired (low CrCl)", /Renal/.test(e2eTxt) && /CrCl/.test(e2eTxt));
+  const posv = await ev(`
+    var oa=document.getElementById("outputArea"); var scp=oa.querySelector("#saveCasePrompt"); var card=document.getElementById("smdSafetyCard");
+    if(!card) return "nocard";
+    if(!scp) return "nosavebox";
+    return String(!!(scp.compareDocumentPosition(card) & Node.DOCUMENT_POSITION_FOLLOWING));`);
+  chk("E2E: card sits AFTER the Save-case box (not above it)", posv === "true" || posv === "nosavebox", "pos=" + posv);
+  // (b) isNI gate: rendering a NON-infective diagnosis must NOT inject the safety card
+  await ev(`window.renderOutput({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m"}, "acs"); return 1;`);
+  chk("E2E: NO safety card on the non-infective (isNI) page", await ev(`return !document.getElementById("smdSafetyCard")`) === true);
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
