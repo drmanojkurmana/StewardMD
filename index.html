@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<!-- Show the intro/disclaimer interstitials on a cadence, not every load: intro (#introPoster)
-     at most once per 3h; disclaimer/brand splash (#splash) once per calendar day. Runs before the
-     deferred app.js so the overlays are hidden from first paint (elements stay in the DOM so
-     app.js's controllers never hit a null). Fails open (shows them) on any error. -->
-<script>(function(){try{var n=Date.now(),c="";
-  var it=+(localStorage.getItem("smd_intro_ts")||0);
-  if(n-it>=3*3600*1000){localStorage.setItem("smd_intro_ts",String(n));}else{c+="#introPoster{display:none!important}";}
-  var today=new Date().toISOString().slice(0,10), d=localStorage.getItem("smd_disclaimer_day")||"";
-  if(d!==today){localStorage.setItem("smd_disclaimer_day",today);}else{c+="#splash{display:none!important}";}
-  if(c){var e=document.createElement("style");e.setAttribute("data-smd","interstitial-cadence");e.textContent=c;(document.head||document.documentElement).appendChild(e);}
+<!-- Onboarding vs quick-load, decided by auth: a NEW/first user (no saved account AND no prior
+     guest use) sees the FULL onboarding — intro splash, disclaimer, and the login gate. A RETURNING
+     user (signed in, or previously continued as guest) skips those interstitials and goes straight
+     to the app after the boot splash. Runs before the deferred app.js; fails open (shows the full
+     onboarding) on any error. -->
+<script>(function(){try{
+  var returning = !!(localStorage.getItem("stewardmd_account") || localStorage.getItem("stewardmd_guest_used"));
+  if (returning) { var e=document.createElement("style"); e.setAttribute("data-smd","interstitial-gate"); e.textContent="#introPoster,#splash{display:none!important}"; (document.head||document.documentElement).appendChild(e); }
 }catch(e){}})();</script>
 <!-- Conservative CSP: blocks <object>/<embed> and <base> hijacking, forces HTTPS subresources.
      (script-src is intentionally not locked down here because the app uses inline handlers;
@@ -165,10 +163,16 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
 </style>
-<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=1200,CAP=15000;
-function landingReady(){try{var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;}catch(e){return true;}return false;}
+<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
+var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
+function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
+function ready(){try{
+  var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;
+  if(!returning){ if(vis("introPoster")||vis("splash")||vis("accountGate"))return true; }
+  var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
+}catch(e){return true;}return false;}
 function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
-function tick(){if(done)return;var el=Date.now()-t0;if((landingReady()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
+function tick(){if(done)return;var el=Date.now()-t0;if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>(function(){try{var s=localStorage.getItem("stewardmd_theme");if(s==="dark"||(!s&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();</script>
 <h1 class="sr-only">StewardMD</h1>
