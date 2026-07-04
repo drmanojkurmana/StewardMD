@@ -247,11 +247,16 @@
         else {
           var bc = brandCandidates(aiG);
           if (bc.length === 1 && bc[0].generic.indexOf(" + ") === -1) { parsed.generic = bc[0].generic; parsed.name = parsed.name || aiG; }
-          else if (conf === "high" || conf === "medium") { parsed.generic = aiG; parsed.name = parsed.name || aiG; parsed.aiMapped = true; conf = "medium"; }
+          // AI-only mapping (drug not in local formulary): always adopt the model's generic so
+          // nothing it identified shows as "Not mapped". Cap at MEDIUM; if the row's OCR was
+          // low-confidence (garbled dose/freq) keep it low so it still flags for dose review.
+          else { parsed.generic = aiG; parsed.name = parsed.name || aiG; parsed.aiMapped = true; if (conf === "high") conf = "medium"; }
         }
       }
     }
-    if (parsed.generic && conf === "low") conf = "medium";    // AI/parse mapped it -> not auto-flagged
+    // A deterministic/formulary map on a low-confidence OCR line is safe to un-flag; an AI-only
+    // low-confidence map keeps the review flag (the drug name still shows, dose needs checking).
+    if (parsed.generic && !parsed.aiMapped && conf === "low") conf = "medium";
     if (!parsed.generic && conf === "high") conf = "medium";  // no silent high on an unmapped drug
     parsed.confidence = conf;
     parsed.detected_text = text;
