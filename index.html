@@ -139,33 +139,37 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
      (min 1.6s, hard-cap 3.6s) then self-removes. Sits above every app overlay. -->
 <div id="smdBootSplash" role="status" aria-label="Loading StewardMD">
   <div class="sbs-center">
-    <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="88" height="88">
+    <img class="sbs-logo" src="/logo.png" alt="StewardMD logo" width="97" height="97">
     <div class="sbs-word">Steward<span>MD</span></div>
     <div class="sbs-bar"><span></span></div>
   </div>
   <div class="sbs-foot">
     <span class="sbs-by">developed by</span>
-    <img class="sbs-maik" src="/maik-logo.webp" alt="MaiK" height="40">
+    <img class="sbs-maik" src="/maik-logo.webp" alt="MaiK" height="44">
   </div>
 </div>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
   #smdBootSplash .sbs-center{display:flex;flex-direction:column;align-items:center;gap:16px;transform:translateY(-3%)}
-  #smdBootSplash .sbs-logo{width:88px;height:88px;object-fit:contain;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
+  #smdBootSplash .sbs-logo{width:97px;height:97px;object-fit:contain;animation:sbsPop .6s cubic-bezier(.2,.7,.2,1) both}
   #smdBootSplash .sbs-word{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#0f172a;animation:sbsFade .7s .12s ease both}
   #smdBootSplash .sbs-word span{color:#0e6e63}
   #smdBootSplash .sbs-bar{width:132px;height:3px;border-radius:999px;background:#e6efee;overflow:hidden;margin-top:4px}
   #smdBootSplash .sbs-bar>span{display:block;width:42%;height:100%;border-radius:999px;background:#0e6e63;animation:sbsBar 1.15s ease-in-out infinite}
   #smdBootSplash .sbs-foot{position:absolute;left:0;right:0;bottom:34px;display:flex;flex-direction:column;align-items:center;gap:6px}
   #smdBootSplash .sbs-by{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:#94a3b8}
-  #smdBootSplash .sbs-maik{height:40px;width:auto;object-fit:contain}
+  #smdBootSplash .sbs-maik{height:44px;width:auto;object-fit:contain}
   @keyframes sbsPop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
   @keyframes sbsFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
 </style>
-<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false;function hide(){if(done)return;done=true;var w=Math.max(0,1600-(Date.now()-t0));setTimeout(function(){s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);},w);}if(document.readyState==="complete")hide();else window.addEventListener("load",hide,{once:true});setTimeout(hide,3600);})();</script>
+<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=1200,CAP=15000;
+function landingReady(){try{var h=document.getElementById("homeV2");if(h&&h.classList.contains("on")&&getComputedStyle(h).display!=="none")return true;var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;}catch(e){return true;}return false;}
+function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
+function tick(){if(done)return;var el=Date.now()-t0;if((landingReady()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
+tick();})();</script>
 <script>(function(){try{var s=localStorage.getItem("stewardmd_theme");if(s==="dark"||(!s&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches))document.body.classList.add("dark");}catch(e){}})();</script>
 <h1 class="sr-only">StewardMD</h1>
 <!-- ===== INTRO POSTER: shows first, auto-dismisses after 4s or on tap ===== -->
