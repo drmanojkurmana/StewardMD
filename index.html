@@ -92,6 +92,17 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   else{window.addEventListener("load",function(){setTimeout(kick,300);});}
 })();
 </script>
+<style>
+/* ── Apple-style auto-hide header: hides on scroll-down, reappears on scroll-up ── */
+.app-head{position:sticky;top:0;z-index:40;background:var(--paper);
+  transition:transform .32s cubic-bezier(.4,0,.2,1),box-shadow .32s ease;
+  will-change:transform}
+.app-head.head-hidden{transform:translateY(-100%)}
+/* subtle shadow once the page is scrolled so the sticky bar reads as elevated */
+.app-head.head-scrolled{box-shadow:0 2px 10px rgba(0,0,0,.06)}
+body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
+@media (prefers-reduced-motion:reduce){.app-head{transition:none}}
+</style>
 </head>
 
 
@@ -1165,6 +1176,46 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
   // reversible toggle — flip the flag and add/remove the whole feature live (no redeploy)
   window.SMD_setGhis = function (on) { try { localStorage.setItem("smd_ghis_ward", on ? "1" : "0"); } catch (e) {} if (on) loadGhis(); else killGhis(); };
   if (ghisOn()) { if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadGhis); else loadGhis(); }
+})();
+</script>
+
+<script>
+/* ── Apple-style auto-hide header ──────────────────────────────────────────
+   Hides the sticky header when scrolling down, reveals it on scroll-up.
+   Uses rAF-throttled scroll sampling and small thresholds to avoid jitter. */
+(function () {
+  var head = document.querySelector(".app-head");
+  if (!head) return;
+  var lastY = window.pageYOffset || 0;
+  var ticking = false;
+  var REVEAL_AT_TOP = 8;   // always show when near the very top
+  var DELTA = 6;           // ignore tiny scrolls (trackpad noise)
+
+  function update() {
+    ticking = false;
+    var y = window.pageYOffset || 0;
+    // Elevate with a shadow once the page has scrolled a little.
+    head.classList.toggle("head-scrolled", y > REVEAL_AT_TOP);
+
+    // Near the top: force the header visible.
+    if (y <= head.offsetHeight) {
+      head.classList.remove("head-hidden");
+      lastY = y;
+      return;
+    }
+    var diff = y - lastY;
+    if (Math.abs(diff) < DELTA) return;   // too small to act on
+    if (diff > 0) {
+      head.classList.add("head-hidden");   // scrolling down → hide
+    } else {
+      head.classList.remove("head-hidden"); // scrolling up → show
+    }
+    lastY = y;
+  }
+
+  window.addEventListener("scroll", function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
 })();
 </script>
 </body>
