@@ -4024,11 +4024,24 @@
     } catch (e) { return []; }
   }
 
+  function renalCheck(e) {
+    try {
+      var age = smdSafetyNum(e.age), wt = smdSafetyNum(e.weight), scr = smdSafetyNum(e.creatinine);
+      if (age === null || wt === null || scr === null || scr <= 0) return null;
+      var crcl = (140 - age) * wt * ((String(e.sex || "").toLowerCase()[0] === "f") ? 0.85 : 1) / (72 * scr);
+      crcl = Math.max(0, Math.round(crcl));
+      if (crcl >= 50) return null;
+      var tier = crcl < 15 ? "kidney failure / ESRD" : crcl < 30 ? "severe impairment" : "moderate impairment";
+      return { crcl: crcl, tier: tier, text: "CrCl ≈ " + crcl + " mL/min (" + tier + ") — renal dose adjustment applies; see the per-drug renal-adjust notes below." };
+    } catch (e) { return null; }
+  }
+
   window.SMD_SAFETY = {
     flag: smdSafetyFlagOn,
     setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} },
     QT_PROLONGERS: QT_PROLONGERS,
-    detectRecommendedDrugs: detectRecommendedDrugs
+    detectRecommendedDrugs: detectRecommendedDrugs,
+    renalCheck: renalCheck
   };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }

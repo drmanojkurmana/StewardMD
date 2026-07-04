@@ -42,6 +42,14 @@ try {
   chk("detect finds amoxiclav (generic-name match)", det.indexOf("amoxiclav") >= 0 || det.indexOf("amoxicillin") >= 0, JSON.stringify(det));
   chk("detect does NOT find levofloxacin (absent)", det.indexOf("levofloxacin") < 0);
 
+  // ---- Task 4: renalCheck ----
+  const rc = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.renalCheck({age:80,weight:60,sex:"m",creatinine:2.5}))`));
+  chk("renalCheck computes low CrCl", rc && rc.crcl > 0 && rc.crcl < 30, JSON.stringify(rc));
+  chk("renalCheck tier is severe (~20)", rc && /severe/.test(rc.tier), rc && rc.tier);
+  chk("renalCheck text mentions CrCl", rc && /CrCl/.test(rc.text));
+  chk("renalCheck null when CrCl normal", await ev(`return String(SMD_SAFETY.renalCheck({age:30,weight:70,sex:"m",creatinine:0.8})===null)`) === "true");
+  chk("renalCheck null when inputs missing", await ev(`return String(SMD_SAFETY.renalCheck({age:80})===null)`) === "true");
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
