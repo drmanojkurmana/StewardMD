@@ -89,28 +89,32 @@ try {
   chk("card has inline inputs", await ev(`return !!(document.getElementById("smdSafetyInputs") && document.querySelector('#smdSafetyInputs [data-sfx="creatinine"]'))`) === true);
   const lineTxt = () => ev(`var l=document.getElementById("smdSafetyLines");return l?l.innerText:""`);
   const cardTxt = await lineTxt();
-  chk("lines show Renal (prefilled from findings)", /Renal/.test(cardTxt));
-  chk("lines show Hepatic", /Hepatic/.test(cardTxt));
-  chk("lines show Cardiac + QT", /Cardiac/.test(cardTxt) && /QT/.test(cardTxt));
+  chk("box shows Renal + per-drug corrected-dose guidance", /Renal/.test(cardTxt) && /CrCl/.test(cardTxt) && /Azithromycin/i.test(cardTxt));
+  chk("box shows Hepatic (impairment flagged)", /Hepatic/.test(cardTxt) && /impairment flagged/i.test(cardTxt));
+  chk("box shows Cardiac QT warning (azithro) escalated for elderly/cardiac", /Cardiac/.test(cardTxt) && /QT/.test(cardTxt) && /HIGHER RISK/.test(cardTxt));
   await ev(`SMD_SAFETY.render({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",liverDisease:true}); return 1;`);
   chk("idempotent — single card", await ev(`return document.querySelectorAll("#smdSafetyCard").length`) === 1);
   await ev(`SMD_SAFETY.setFlag(false); var r=SMD_SAFETY.render({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",liverDisease:true}); SMD_SAFETY.setFlag(true); window.__off=r; return 1;`);
   chk("flag OFF → no card, returns false", await ev(`return String(window.__off)`) === "false" && await ev(`return !document.getElementById("smdSafetyCard")`) === true);
-  // a recommendation with no risk yet → card + inputs SHOW (discoverable), but no risk lines
+  // a non-QT regimen, normal-renal patient → card shows, cardio reassures, renal says no reduction
   await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Amoxicillin 500 mg</div></div>'; window.__r=SMD_SAFETY.render({age:30,weight:70,sex:"m",creatinine:0.8}); return 1;`);
-  chk("recommendation + no triggers → card shown with inputs, no risk lines", await ev(`return String(window.__r)`) === "true" && await ev(`return !!document.getElementById("smdSafetyInputs")`) === true && !/Renal|Hepatic|Cardiac/.test(await lineTxt()));
+  const amoxTxt = await lineTxt();
+  chk("non-QT regimen → cardio reassurance '✓ no QT-prolonging agent'", await ev(`return String(window.__r)`) === "true" && /No QT-prolonging agent/i.test(amoxTxt));
+  chk("normal CrCl → 'no renal dose reduction needed'", /no renal dose reduction needed/i.test(amoxTxt));
   chk("no recommendation + no labs → no card", await ev(`document.getElementById("outputArea").innerHTML='<div>Antibiotics not indicated.</div>'; var r=SMD_SAFETY.render({age:30}); return String(r)+"|"+!!document.getElementById("smdSafetyCard");`) === "false|false");
 
   // ---- Inline inputs drive the checks LIVE (the discoverability fix) ----
   await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Azithromycin 500 mg</div></div>'; SMD_SAFETY.setFlag(true); window.__ir=SMD_SAFETY.render({sex:"m"}); return 1;`);
   chk("inline: card + inputs appear with no patient data entered", await ev(`return String(window.__ir)`) === "true" && await ev(`return !!document.getElementById("smdSafetyInputs")`) === true);
-  chk("inline: no risk lines before any value entered", !/Renal|Hepatic|Cardiac/.test(await lineTxt()));
+  const preTxt = await lineTxt();
+  chk("inline: QT line present but NOT escalated before any data", /QT/.test(preTxt) && !/HIGHER RISK/.test(preTxt));
+  chk("inline: renal prompts for values before CrCl known", /enter age, weight/i.test(preTxt) && !/CrCl ≈/.test(preTxt));
   await ev(`function setv(k,v){var el=document.querySelector('#smdSafetyInputs [data-sfx="'+k+'"]');el.value=v;el.dispatchEvent(new Event("input",{bubbles:true}));} setv("age","80");setv("weight","60");setv("creatinine","3"); return 1;`);
-  chk("inline: renal line appears LIVE after typing age/weight/creatinine", /Renal/.test(await lineTxt()) && /CrCl/.test(await lineTxt()));
+  chk("inline: CrCl computed LIVE after typing age/weight/creatinine", /CrCl ≈/.test(await lineTxt()));
   await ev(`var c=document.querySelector('#smdSafetyInputs [data-sfx="cardiac"]');c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
-  chk("inline: cardiac QT line appears LIVE after ticking Cardiac", /Cardiac/.test(await lineTxt()) && /QT/.test(await lineTxt()));
+  chk("inline: cardiac escalates to HIGHER RISK after ticking Cardiac", /HIGHER RISK/.test(await lineTxt()));
   await ev(`var c=document.querySelector('#smdSafetyInputs [data-sfx="liverDisease"]');c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
-  chk("inline: hepatic line appears LIVE after ticking Liver disease", /Hepatic/.test(await lineTxt()));
+  chk("inline: hepatic flags impairment after ticking Liver disease", /impairment flagged/i.test(await lineTxt()));
 
   // ---- Fast-follow: real-render E2E — drives the ACTUAL renderOutput seam (not a stubbed #outputArea) ----
   await ev(`SMD_SAFETY.setFlag(true); return 1;`);
@@ -123,6 +127,8 @@ try {
   const e2eTxt = await ev(`var l=document.getElementById("smdSafetyLines");return l?l.innerText:""`);
   chk("E2E: cardio QT line fired from REAL regimen (ciprofloxacin)", /Cardiac/.test(e2eTxt) && /QT/.test(e2eTxt) && /Ciprofloxacin/i.test(e2eTxt), (e2eTxt||"").slice(0, 90));
   chk("E2E: renal line fired (low CrCl)", /Renal/.test(e2eTxt) && /CrCl/.test(e2eTxt));
+  chk("E2E: per-drug corrected-dose guidance shown (Ciprofloxacin: …)", /Ciprofloxacin:/i.test(e2eTxt));
+  chk("E2E: alternatives listed from the syndrome", /Alternatives/i.test(e2eTxt) && await ev(`var l=document.getElementById("smdSafetyLines");return l?/[A-Za-z]{5,}/.test((l.innerText.split(/Alternatives/)[1]||"")):false`) === true);
   const posv = await ev(`
     var oa=document.getElementById("outputArea"); var scp=oa.querySelector("#saveCasePrompt"); var card=document.getElementById("smdSafetyCard");
     if(!card) return "nocard";
