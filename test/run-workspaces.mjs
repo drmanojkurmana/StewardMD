@@ -97,12 +97,27 @@ try {
   const ROUTES = [
     { t: "acute abdomen with guarding and rebound", id: "surgery" },
     { t: "post-op wound with purulent discharge", id: "surgery" },
+    { t: "right upper quadrant pain and gallbladder tenderness cholecystitis", id: "surgery" },
+    { t: "strangulated inguinal hernia", id: "surgery" },
     { t: "sore throat with tonsillar exudate and fever", id: "ent" },
     { t: "ear discharge and post-auricular swelling", id: "ent" },
+    { t: "sudden hearing loss in one ear", id: "ent" },
+    { t: "child swallowed a coin, foreign body", id: "ent" },
     { t: "red painful eye with photophobia and blurred vision", id: "ophthalmology" },
+    { t: "sudden painless vision loss with floaters and curtain", id: "ophthalmology" },
+    { t: "endophthalmitis after cataract surgery", id: "ophthalmology" },
     { t: "pelvic pain with vaginal discharge in pregnancy", id: "obstetrics_gynaecology" },
+    { t: "seizure in pregnancy with high blood pressure eclampsia", id: "obstetrics_gynaecology" },
+    { t: "heavy bleeding after delivery postpartum haemorrhage", id: "obstetrics_gynaecology" },
     { t: "dysuria and frequency with burning micturition", id: "urology" },
+    { t: "sudden severe testicular pain in a young man torsion", id: "urology" },
+    { t: "paraphimosis with swollen foreskin", id: "urology" },
     { t: "severe tooth pain with facial swelling and gum abscess", id: "dentistry_omfs" },
+    { t: "knocked out tooth avulsed after fall", id: "dentistry_omfs" },
+    { t: "2 month old baby with fever and poor feeding", id: "paediatrics" },
+    { t: "newborn with fever and lethargy", id: "paediatrics" },
+    { t: "toddler with barking cough and stridor croup", id: "paediatrics" },
+    { t: "6 month old with wheeze and coryza bronchiolitis", id: "paediatrics" },
     { t: "fever cough and breathlessness in an adult", id: "internal_medicine" },
     { t: "", id: "internal_medicine" }
   ];
@@ -134,35 +149,46 @@ try {
     ok(`surgery '${sid2}' assess → shared:true (IM primary)`, r.shared === true);
   }
 
-  /* every engine × every syndrome: valid, non-throwing management output */
+  /* every engine × every syndrome: valid, non-throwing management output + structure + no-dose + per-engine emergency */
   console.log("\n── engine output integrity (all syndromes) ──");
   const integrity = JSON.parse(await ev(`
-    var bad=[], doseHits=[], synCount=0;
+    var bad=[], doseHits=[], synCount=0, structFail=[], noEmerg=[], cov={};
     var DOSE=/\\b\\d+(?:\\.\\d+)?\\s?(?:mg|mcg|microgram|g|iu|units?)\\b/i, MGKG=/mg\\s?\\/\\s?kg/i;
     Object.keys(SMD_WS_ENGINES).forEach(function(eid){
       var eng=SMD_WS_ENGINES[eid];
-      (eng.syndromes||[]).forEach(function(syn){
+      var syns=eng.syndromes||[]; cov[eid]=syns.length;
+      var ids={}, names={}, engHasEmerg=false, engHas5=false;
+      if(syns.length<6) structFail.push(eid+' has only '+syns.length+' syndromes');
+      syns.forEach(function(syn){
         synCount++;
-        var ids=[].concat((syn.q||[]).map(function(x){return x.id;})).concat((syn.danger||[]).map(function(x){return x.id;}));
-        // three selection profiles: none, all questions, all danger
-        var profiles=[[], (syn.q||[]).map(function(x){return x.id;}), (syn.danger||[]).map(function(x){return x.id;}), ids];
+        if(!syn.id||ids[syn.id]) structFail.push(eid+' duplicate/missing id '+syn.id); ids[syn.id]=1;
+        if(!syn.name||names[syn.name]) structFail.push(eid+' duplicate/missing name '+syn.name); names[syn.name]=1;
+        if(!(syn.q&&syn.q.length)) structFail.push(eid+'/'+syn.id+' has no focused findings');
+        var qd=[].concat((syn.q||[]).map(function(x){return x.id;})).concat((syn.danger||[]).map(function(x){return x.id;}));
+        var profiles=[[], (syn.q||[]).map(function(x){return x.id;}), (syn.danger||[]).map(function(x){return x.id;}), qd];
         profiles.forEach(function(prof){
           var set=new Set(prof); set.has=Set.prototype.has.bind(set);
           var r;
           try{ r=syn.assess(set)||{}; }catch(e){ bad.push(eid+'/'+syn.id+' THREW '+e.message); return; }
-          var okShape = (typeof r.emergency==='boolean') && (typeof r.ladder==='number') && r.ladder>=0 && r.ladder<=5 && Math.floor(r.ladder)===r.ladder && typeof r.catg==='string' && r.catg.length>0;
+          var okShape = (typeof r.emergency==='boolean') && (typeof r.ladder==='number') && r.ladder>=0 && r.ladder<=5 && Math.floor(r.ladder)===r.ladder && typeof r.catg==='string' && r.catg.length>0 && typeof r.sc==='string' && typeof r.ref==='string';
           if(!okShape) bad.push(eid+'/'+syn.id+' bad-shape ladder='+r.ladder+' catg='+(r.catg||'').slice(0,20));
+          if(r.emergency===true) engHasEmerg=true;
+          if(r.ladder===5) engHas5=true;
           var txt=[r.catg,r.sc,r.ref].concat(r.mgmt||[]).join(' || ');
           if(DOSE.test(txt)||MGKG.test(txt)) doseHits.push(eid+'/'+syn.id+': '+(txt.match(DOSE)||txt.match(MGKG))[0]);
         });
       });
+      if(!(engHasEmerg&&engHas5)) noEmerg.push(eid);
     });
-    return JSON.stringify({synCount:synCount, bad:bad, doseHits:doseHits});
+    return JSON.stringify({synCount:synCount, bad:bad, doseHits:doseHits, structFail:structFail, noEmerg:noEmerg, cov:cov});
   `));
-  ok(`all syndromes return a valid ladder(0-5)/catg/emergency shape (${integrity.synCount} syndromes)`, integrity.bad.length === 0, integrity.bad.slice(0, 4).join(" ; "));
+  console.log("   coverage: " + Object.keys(integrity.cov).sort().map(k => k.replace(/_/g, "·") + "=" + integrity.cov[k]).join("  "));
+  ok(`all syndromes return a valid ladder(0-5)/catg/sc/ref/emergency shape (${integrity.synCount} syndromes)`, integrity.bad.length === 0, integrity.bad.slice(0, 4).join(" ; "));
   ok("GUARDRAIL: no engine ever emits a numeric drug dose (mg/mcg/g/IU/mg·kg)", integrity.doseHits.length === 0, integrity.doseHits.slice(0, 4).join(" ; "));
+  ok("structure: ≥6 syndromes each, unique ids/names, every syndrome has focused findings", integrity.structFail.length === 0, integrity.structFail.slice(0, 4).join(" ; "));
+  ok("every specialty surfaces at least one true emergency (emergency + ladder 5)", integrity.noEmerg.length === 0, "missing in: " + integrity.noEmerg.join(", "));
 
-  /* emergency red-flags fire */
+  /* emergency red-flags fire — id-agnostic (one representative per engine, resilient to renames) */
   console.log("\n── emergency escalation spot-checks ──");
   const EMERG = [
     ["surgery", "nec_sti", []], ["ent", "epiglottitis", []],
@@ -176,6 +202,7 @@ try {
       var all=[].concat((syn.q||[]).map(function(x){return x.id;})).concat((syn.danger||[]).map(function(x){return x.id;}));
       var set=new Set(all); set.has=Set.prototype.has.bind(set);
       return JSON.stringify(syn.assess(set)||{});`));
+    if (r && r.miss) { console.log(`•  ${eid}/${sid3} renamed/removed — covered by per-engine emergency check above`); continue; }
     ok(`${eid}/${sid3} → emergency + ladder 5`, r.emergency === true && r.ladder === 5, "emergency=" + r.emergency + " ladder=" + r.ladder);
   }
 

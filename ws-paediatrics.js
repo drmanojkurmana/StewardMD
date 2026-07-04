@@ -47,6 +47,30 @@
     id: "paediatrics",
     name: "Paediatrics",
     syndromes: [
+      /* ───────────────────── Neonatal fever / sepsis (< 28 days) ───────────────────── */
+      {
+        id: "neonatal_fever_sepsis", name: "Neonate unwell / fever (< 28 days)",
+        q: [
+          { id: "fever", label: "Fever ≥ 38 °C" },
+          { id: "hypothermia", label: "Hypothermia / temperature instability" },
+          { id: "poorfeed", label: "Poor feeding / vomiting" },
+          { id: "riskfactor", label: "Maternal fever / prolonged rupture / GBS risk / prematurity" }
+        ],
+        danger: [
+          { id: "lethargy", label: "Lethargic / floppy / weak or high-pitched cry" },
+          { id: "apnoea", label: "Apnoea / grunting / respiratory distress" },
+          { id: "perfusion", label: "Mottled / cold / prolonged cap refill" },
+          { id: "seizure", label: "Seizure / bulging fontanelle" },
+          { id: "jaundice", label: "Early / deep jaundice / not passing urine" }
+        ],
+        assess: function () {
+          // ANY unwell neonate (< 28 days) is a sepsis emergency — no observation, no oral-only route.
+          return sepsisEmergency("⚠ Neonate (< 28 days) unwell / febrile — treat as neonatal sepsis until proven otherwise",
+            ["ANY fever OR hypothermia in a neonate is an emergency — full septic screen (blood, urine AND LP) and empirical IV/IO antibiotics WITHOUT delay; NEVER observe at home or treat orally.",
+             "Neonates decompensate fast and often lack classic signs — poor feeding, lethargy or temperature instability may be the only clue.",
+             "Add empirical cover for herpes (HSV) and consider meningitis per local neonatal protocol; check glucose. Escalate to paediatric team / neonatal unit NOW."]);
+        }
+      },
       /* ───────────────────── Febrile child (fever without source) ───────────────────── */
       {
         id: "febrile_child", name: "Febrile child (fever without obvious source)",
@@ -95,6 +119,98 @@
         assess: function () {
           return sepsisEmergency("⚠ Suspected meningitis / meningococcal sepsis — medical emergency",
             ["Do NOT delay antibiotics for LP, CT or any imaging — give empirical antibiotics IMMEDIATELY (choice per local guidance / ICMR, weight-based dosing per paediatric formulary).", "Consider steroid and, in meningococcal disease, isolation + public-health notification + contact prophylaxis per local protocol.", "PICU escalation; watch for raised ICP and shock."]);
+        }
+      },
+      /* ───────────────────── Febrile seizure ───────────────────── */
+      {
+        id: "febrile_seizure", name: "Febrile seizure (6 mo – 6 yr)",
+        q: [
+          { id: "generalised", label: "Generalised, < 15 min, single in 24 h (simple)" },
+          { id: "recovered", label: "Fully recovered / back to baseline" },
+          { id: "source", label: "Obvious fever source (viral URTI etc.)" },
+          { id: "family", label: "Family history of febrile seizures" }
+        ],
+        danger: [
+          { id: "ongoing", label: "Still fitting / > 5 min / repeated seizures" },
+          { id: "complex", label: "Focal / prolonged > 15 min / recurrent in 24 h (complex)" },
+          { id: "cns", label: "Meningism / non-blanching rash / bulging fontanelle" },
+          { id: "notback", label: "Reduced consciousness / not returning to baseline" },
+          { id: "ageband", label: "Age < 6 months or > 6 years / first seizure" }
+        ],
+        assess: function (sel) {
+          if (has(sel, "ongoing"))
+            return { emergency: true, ladder: 5, catg: "⚠ Prolonged / ongoing seizure — status epilepticus pathway",
+              sc: "Airway + high-flow oxygen; check glucose; IV/IO access; benzodiazepine per the paediatric status epilepticus protocol (weight-based dosing per formulary).", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Treat the seizure per status protocol; do a septic screen and exclude CNS infection / hypoglycaemia.", "Antibiotics only if sepsis / meningitis is suspected — the seizure itself is not treated with antibiotics."] };
+          if (anyOf(sel, ["cns", "notback"]))
+            return sepsisEmergency("⚠ Seizure with features suggesting CNS infection — treat as meningitis / encephalitis",
+              ["A seizure with meningism, altered consciousness or a non-blanching rash is NOT a simple febrile seizure — full septic screen (incl. LP) + empirical antibiotics ± antivirals without delay.", "Have a very low threshold for CNS infection in a child under 18 months, who often lacks classic meningism."]);
+          if (anyOf(sel, ["complex", "ageband"]))
+            return { emergency: false, ladder: 3, catg: "Complex / atypical febrile seizure — needs paediatric assessment",
+              sc: "Assess for a source; investigate per age and picture; consider observation / admission.", ref: "Paediatric review; admit if complex, first seizure, age outside 6 mo–6 yr, or diagnostic doubt.", mgmt: ["Complex features (focal, prolonged, or recurrent within 24 h) warrant fuller assessment and a lower threshold to exclude CNS infection.", "Identify and treat the fever source; antibiotics only if a bacterial source or CNS infection is found (choice per local guidance / ICMR)."] };
+          return { emergency: false, ladder: 0, catg: "Simple febrile seizure — benign, self-limiting",
+            sc: "No procedure — recovery position during any seizure; identify the fever source.", ref: "Safety-net (return if a seizure lasts > 5 min, recurs, focal features, drowsiness, or non-blanching rash); routine review.", mgmt: ["Reassure: simple febrile seizures are benign, do NOT cause epilepsy or brain damage, and do NOT need antiepileptics.", "Manage the underlying fever; most sources are viral — antibiotics are NOT indicated for the seizure itself.", "Antipyretics ease distress but do NOT prevent recurrence."] };
+        }
+      },
+      /* ───────────────────── Gastroenteritis / dehydration ───────────────────── */
+      {
+        id: "gastroenteritis_dehydration", name: "Gastroenteritis / dehydration",
+        q: [
+          { id: "diarrhoea_vomit", label: "Acute watery diarrhoea ± vomiting" },
+          { id: "somededehyd", label: "Some dehydration (thirsty, restless, reduced urine, sunken eyes)" },
+          { id: "orsfail", label: "Persistent vomiting / not tolerating ORS" },
+          { id: "blood", label: "Blood / mucus in stool (dysentery)" },
+          { id: "young", label: "Age < 6 months / malnourished / comorbidity" }
+        ],
+        danger: [
+          { id: "shock", label: "Shock — lethargic/floppy, cold, prolonged cap refill, weak pulse" },
+          { id: "severe", label: "Severe dehydration — sunken eyes, very slow skin pinch, unable to drink" },
+          { id: "bilious", label: "Bilious/green vomiting / abdominal distension (?surgical)" },
+          { id: "altered", label: "Reduced consciousness / seizures / anuria" }
+        ],
+        assess: function (sel) {
+          if (anyOf(sel, ["shock", "severe", "altered"]))
+            return { emergency: true, ladder: 5, catg: "⚠ Severe dehydration / hypovolaemic shock — resuscitate NOW (WHO Plan C)",
+              sc: "Immediate IV/IO access and rapid fluid resuscitation per the paediatric fluid protocol; if no access, escalate for IO. Check glucose; oxygen if shocked.", ref: "Emergency paediatric team + PICU escalation NOW.", mgmt: ["Rapid rehydration by IV/IO (volumes weight-based per protocol) — do NOT rely on oral route in the shocked or obtunded child.", "Antibiotics are NOT indicated for routine acute watery diarrhoea; add only for dysentery, suspected cholera or sepsis (choice per local guidance / ICMR).", "Continue feeding/breastfeeding as able; give zinc supplementation per ICMR / local protocol; reassess perfusion and urine output frequently."] };
+          if (anyOf(sel, ["orsfail", "bilious"]))
+            return { emergency: false, ladder: 3, catg: "Dehydration with failed oral rehydration / possible surgical abdomen",
+              sc: "Admit; rehydrate via NG or IV per protocol; surgical review if bilious vomiting / distension / suspected obstruction or intussusception.", ref: "Paediatric review; surgical opinion if any surgical red flag.", mgmt: ["Trial ORS little-and-often; escalate to NG/IV if vomiting persists or intake inadequate.", "Bilious vomiting is a surgical emergency until proven otherwise — do not label as simple gastroenteritis.", "Antibiotics NOT routine; give zinc per protocol; assess for hypoglycaemia."] };
+          if (has(sel, "blood"))
+            return { emergency: false, ladder: 2, catg: "Bloody diarrhoea (dysentery) — may need antibiotics",
+              sc: "No procedure; send stool per local protocol; assess hydration.", ref: "Paediatric review; escalate if dehydrated or systemically unwell.", mgmt: ["Dysentery (bloody stool) may warrant antibiotics — choice per local guidance / ICMR; ALL dosing weight-based per paediatric formulary.", "Continue ORS + feeding + zinc per protocol; AVOID anti-motility agents in children.", "Reassess for HUS (pallor, reduced urine, bruising) if E. coli / bloody diarrhoea."] };
+          if (anyOf(sel, ["somededehyd", "young"]))
+            return { emergency: false, ladder: 0, catg: "Some dehydration — supervised oral rehydration (WHO Plan B)",
+              sc: "No procedure — give ORS little-and-often over 4 h; observe ability to tolerate.", ref: "Review / admit if unable to tolerate ORS, high-output, or age < 6 months; escalate on any shock sign.", mgmt: ["ORS is the mainstay — replace losses with frequent small volumes; continue breastfeeding/feeding.", "Give zinc supplementation per ICMR / local protocol; antibiotics NOT indicated for watery diarrhoea.", "Teach carers the red flags: floppy/drowsy, sunken eyes, no urine, blood in stool, green vomit."] };
+          return { emergency: false, ladder: 0, catg: "Gastroenteritis, no dehydration — manage at home (WHO Plan A)",
+            sc: "No procedure.", ref: "Safety-net (return for reduced urine output, drowsiness, sunken eyes, blood in stool, bilious vomiting, or inability to drink).", mgmt: ["Home ORS after each loose stool + continue normal feeding/breastfeeding; zinc supplementation per ICMR / local protocol.", "Antibiotics and anti-emetics/anti-motility drugs are NOT indicated in routine viral gastroenteritis.", "Advise hand hygiene / safe water; give clear carer red-flag advice."] };
+        }
+      },
+      /* ───────────────────── Wheeze / acute asthma exacerbation ───────────────────── */
+      {
+        id: "wheeze_asthma", name: "Wheeze / acute asthma (> 1 yr)",
+        q: [
+          { id: "wheeze", label: "Widespread wheeze / cough / increased work of breathing" },
+          { id: "known", label: "Known asthma / recurrent viral wheeze" },
+          { id: "trigger", label: "Viral URTI / allergen trigger" },
+          { id: "responds", label: "Good response to inhaled bronchodilator" }
+        ],
+        danger: [
+          { id: "silent", label: "Silent chest / poor respiratory effort" },
+          { id: "cyanosis", label: "Cyanosis / SpO₂ < 92% / exhaustion" },
+          { id: "altered", label: "Agitation / drowsiness / altered consciousness" },
+          { id: "severe", label: "Unable to talk / feed / marked recession / very tachypnoeic" }
+        ],
+        assess: function (sel) {
+          if (anyOf(sel, ["silent", "cyanosis", "altered"]))
+            return { emergency: true, ladder: 5, catg: "⚠ Life-threatening asthma / acute severe wheeze",
+              sc: "High-flow oxygen to keep SpO₂ ≥ 94%; back-to-back inhaled bronchodilators ± ipratropium; early systemic steroid; IV bronchodilators / magnesium per protocol (all dosing weight-based per formulary).", ref: "Emergency paediatric team + PICU escalation NOW; prepare for respiratory support.", mgmt: ["A silent chest, cyanosis, poor effort or drowsiness signals impending arrest — treat and escalate immediately.", "Antibiotics are NOT part of acute asthma management — most exacerbations are viral-triggered."] };
+          if (has(sel, "severe"))
+            return { emergency: false, ladder: 3, catg: "Acute severe wheeze — admit for treatment",
+              sc: "Oxygen if SpO₂ < 92%; inhaled bronchodilator via spacer/nebuliser + oral/IV steroid per protocol; reassess response.", ref: "Paediatric admission; escalate if life-threatening features or poor response.", mgmt: ["Assess severity by SpO₂, work of breathing and ability to talk/feed; reassess after each bronchodilator.", "Give a steroid course per local protocol (weight-based dosing per formulary); antibiotics NOT indicated unless a bacterial infection is proven."] };
+          if (anyOf(sel, ["wheeze", "known", "trigger"]))
+            return { emergency: false, ladder: 0, catg: "Mild–moderate wheeze — treat and review",
+              sc: "No procedure — inhaled bronchodilator via a spacer is first-line; observe response.", ref: "Safety-net (return for fast/hard breathing, unable to talk/feed, blue lips, or bronchodilator wearing off quickly); GP/paediatric review.", mgmt: ["Inhaled bronchodilator via spacer is first-line; a short steroid course per protocol if significant exacerbation (dosing weight-based per formulary).", "Antibiotics are NOT indicated — triggers are usually viral; check inhaler technique and review the asthma plan.", "Recurrent wheeze in an infant < 1 yr is more often bronchiolitis / viral — reconsider the diagnosis."] };
+          return { emergency: false, ladder: 0, catg: "No active wheeze / not asthma — supportive",
+            sc: "No procedure.", ref: "Safety-net; review if wheeze, breathlessness or poor feeding develop.", mgmt: ["Supportive care; antibiotics NOT indicated.", "Reassess the diagnosis if breathing difficulty or focal chest signs appear."] };
         }
       },
       /* ───────────────────── Acute otitis media (paediatric) ───────────────────── */
