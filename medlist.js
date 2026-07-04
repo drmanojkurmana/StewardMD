@@ -167,7 +167,7 @@
       // Downscale hard: OCR of prescriptions/reports stays reliable at ~1024px long edge
       // (verified against the live vision model down to ~860px), and a smaller image means
       // far fewer vision tiles -> fewer AI tokens. Dense reports can still use hi-quality.
-      var maxEdge = 1024, w = img.width, h = img.height;
+      var maxEdge = 900, w = img.width, h = img.height;
       var scale = Math.min(1, maxEdge / Math.max(w, h));
       var cw = Math.round(w * scale), ch = Math.round(h * scale);
       var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;

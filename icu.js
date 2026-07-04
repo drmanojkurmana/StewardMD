@@ -413,7 +413,7 @@
     img.onload = function () {
       // Downscale hard by default to cut vision-token cost (monitor/vent/lab screens read
       // reliably at ~1024px). Hi-quality (1500px) stays available for dense reports.
-      var maxEdge = _imgHiQ ? 1500 : 1024, w = img.width, h = img.height;
+      var maxEdge = _imgHiQ ? 1500 : 900, w = img.width, h = img.height;
       var scale = Math.min(1, maxEdge / Math.max(w, h));
       var cw = Math.round(w * scale), ch = Math.round(h * scale);
       var cv = document.createElement("canvas"); cv.width = cw; cv.height = ch;
