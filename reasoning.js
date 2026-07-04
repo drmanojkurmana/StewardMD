@@ -3985,6 +3985,20 @@
     smdAccordionize(oa);
     smdRelocateSaveBox(oa);
   }
+
+  /* ---------------------------------------------------------------------- *
+   * PATIENT-SPECIFIC SAFETY OVERLAY (renal / hepatic / cardio-QT).
+   * Display-only annotation injected AFTER the antibiotic page renders.
+   * Never mutates findings, SYNDROMES, or the ranked decision. Flag-gated,
+   * default ON, instantly reversible. See docs/superpowers/specs/2026-07-05-*.
+   * ---------------------------------------------------------------------- */
+  function smdSafetyFlagOn() { try { var v = localStorage.getItem("smd_safety_overlay"); return v === null ? true : v === "1"; } catch (e) { return true; } }
+  function smdSafetyNum(x) { var n = parseFloat(x); return isFinite(n) ? n : null; }
+
+  window.SMD_SAFETY = {
+    flag: smdSafetyFlagOn,
+    setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} }
+  };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
   smdInitGlobalUI();
