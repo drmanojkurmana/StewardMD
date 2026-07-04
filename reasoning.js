@@ -4050,13 +4050,29 @@
     } catch (e) { return null; }
   }
 
+  function cardioCheck(e, drugs) {
+    try {
+      var age = smdSafetyNum(e.age);
+      var elderly = age !== null && age >= 65;
+      var cardiac = !!e.knownCAD || !!e.knownHeartFailure || !!e.atrialFibHx;
+      if (!(elderly || cardiac)) return null;
+      var hit = null;
+      (drugs || []).forEach(function (k) { if (!hit && QT_PROLONGERS[k]) hit = k; });
+      if (!hit) return null;
+      var label = QT_PROLONGERS[hit];
+      return { drug: hit, label: label,
+        text: label + " prolongs the QT interval. In an elderly/cardiac patient: obtain a baseline ECG (QTc), check and replete K⁺/Mg²⁺, and prefer a non-QT-prolonging agent appropriate to the indication — e.g. doxycycline (atypical/CAP cover), amoxicillin-clavulanate, or a beta-lactam. Advisory — does not override the recommendation." };
+    } catch (e) { return null; }
+  }
+
   window.SMD_SAFETY = {
     flag: smdSafetyFlagOn,
     setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} },
     QT_PROLONGERS: QT_PROLONGERS,
     detectRecommendedDrugs: detectRecommendedDrugs,
     renalCheck: renalCheck,
-    hepaticCheck: hepaticCheck
+    hepaticCheck: hepaticCheck,
+    cardioCheck: cardioCheck
   };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }

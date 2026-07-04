@@ -57,6 +57,14 @@ try {
   chk("hepaticCheck fires on bilirubin>2", await ev(`return String(SMD_SAFETY.hepaticCheck({bilirubin:3},[])!==null)`) === "true");
   chk("hepaticCheck null when no hepatic trigger", await ev(`return String(SMD_SAFETY.hepaticCheck({bilirubin:0.9},["azithromycin"])===null)`) === "true");
 
+  // ---- Task 6: cardioCheck ----
+  const cc = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.cardioCheck({age:78,knownCAD:true}, ["azithromycin"]))`));
+  chk("cardioCheck fires (elderly+cardiac+azithro)", cc && cc.drug === "azithromycin", JSON.stringify(cc));
+  chk("cardioCheck text names QT + alternatives", cc && /QT/.test(cc.text) && /doxycycline/.test(cc.text));
+  chk("cardioCheck null when young non-cardiac", await ev(`return String(SMD_SAFETY.cardioCheck({age:30}, ["azithromycin"])===null)`) === "true");
+  chk("cardioCheck null when no QT drug", await ev(`return String(SMD_SAFETY.cardioCheck({age:80,knownCAD:true}, ["amoxiclav"])===null)`) === "true");
+  chk("cardioCheck fires on age>=65 alone", await ev(`return String(SMD_SAFETY.cardioCheck({age:70}, ["levofloxacin"])!==null)`) === "true");
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
