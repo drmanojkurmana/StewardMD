@@ -42,6 +42,14 @@ try {
   chk("detect finds amoxiclav (generic-name match)", det.indexOf("amoxiclav") >= 0 || det.indexOf("amoxicillin") >= 0, JSON.stringify(det));
   chk("detect does NOT find levofloxacin (absent)", det.indexOf("levofloxacin") < 0);
 
+  await ev(`
+    var oa = document.getElementById("outputArea");
+    oa.innerHTML = '<div class="qa-regimen"><div class="qa-regimen-row">Levofloxacin 750 mg PO once daily</div></div>';
+    return 1;`);
+  const detLevo = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.detectRecommendedDrugs())`));
+  chk("word-boundary: levofloxacin-only regimen detects levofloxacin", detLevo.indexOf("levofloxacin") >= 0, JSON.stringify(detLevo));
+  chk("word-boundary: levofloxacin-only regimen does NOT spuriously flag ofloxacin", detLevo.indexOf("ofloxacin") < 0, JSON.stringify(detLevo));
+
   // ---- Task 4: renalCheck ----
   const rc = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.renalCheck({age:80,weight:60,sex:"m",creatinine:2.5}))`));
   chk("renalCheck computes low CrCl", rc && rc.crcl > 0 && rc.crcl < 30, JSON.stringify(rc));
@@ -49,6 +57,11 @@ try {
   chk("renalCheck text mentions CrCl", rc && /CrCl/.test(rc.text));
   chk("renalCheck null when CrCl normal", await ev(`return String(SMD_SAFETY.renalCheck({age:30,weight:70,sex:"m",creatinine:0.8})===null)`) === "true");
   chk("renalCheck null when inputs missing", await ev(`return String(SMD_SAFETY.renalCheck({age:80})===null)`) === "true");
+  const rcF = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.renalCheck({age:70,weight:60,sex:"f",creatinine:2.0}))`));
+  const rcM = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.renalCheck({age:70,weight:60,sex:"m",creatinine:2.0}))`));
+  chk("renalCheck applies female factor (0.85x lower CrCl than male)", rcF && rcM && rcF.crcl < rcM.crcl, JSON.stringify({ f: rcF, m: rcM }));
+  chk("renalCheck null exactly at CrCl=50 boundary", await ev(`return String(SMD_SAFETY.renalCheck({age:40,weight:36,sex:"m",creatinine:1})===null)`) === "true");
+  chk("renalCheck non-null just below CrCl=50 (~49)", await ev(`var r=SMD_SAFETY.renalCheck({age:40,weight:35,sex:"m",creatinine:1});return String(r!==null && r.crcl===49);`) === "true");
 
   // ---- Task 5: hepaticCheck ----
   const hc = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.hepaticCheck({liverDisease:true}, ["azithromycin","amoxiclav"]))`));

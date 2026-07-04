@@ -4011,6 +4011,11 @@
       return t.toLowerCase();
     } catch (e) { return ""; }
   }
+  function smdWordHit(hay, needle) {
+    if (!needle || needle.length < 4) return false;
+    var re = new RegExp("(^|[^a-z])" + needle.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "([^a-z]|$)");
+    return re.test(hay);
+  }
   function detectRecommendedDrugs() {
     try {
       var t = smdRegimenText(); if (!t) return [];
@@ -4018,9 +4023,9 @@
       Object.keys(ref).forEach(function (k) {
         var lab = String(ref[k].label || "").toLowerCase();
         var gen = lab.split(/[ (\/\-]/)[0];              // first token of the label = generic name
-        if ((k.length > 3 && t.indexOf(k) >= 0) || (gen.length > 3 && t.indexOf(gen) >= 0)) found[k] = 1;
+        if (smdWordHit(t, k) || smdWordHit(t, gen)) found[k] = 1;
       });
-      Object.keys(QT_PROLONGERS).forEach(function (k) { if (t.indexOf(k) >= 0) found[k] = 1; });
+      Object.keys(QT_PROLONGERS).forEach(function (k) { if (smdWordHit(t, k)) found[k] = 1; });
       return Object.keys(found);
     } catch (e) { return []; }
   }
@@ -4086,9 +4091,9 @@
     if (!renal && !hep && !card) return false;
     smdInjectSafetyCSS();
     var html = '<div id="smdSafetyCard" class="smd-safety-card"><div class="smd-safety-h">⚠️ Patient-specific safety</div>';
-    if (renal) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫀</span><div><b>Renal</b> ' + esc(renal.text) + '</div></div>';
+    if (renal) html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(renal.text) + '</div></div>';
     if (hep) {
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫇</span><div><b>Hepatic</b> ' + esc(hep.text);
+      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(hep.text);
       if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
       html += '</div></div>';
     }
