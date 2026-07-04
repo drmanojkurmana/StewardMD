@@ -407,7 +407,7 @@
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
-    syndromes: function () { if (window.ASP && ASP.open) ASP.open(); else if (window.SB && SB.openSyn) SB.openSyn(); else toast("Syndromes loading…"); },
+    syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
     antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
