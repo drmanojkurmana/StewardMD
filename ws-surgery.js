@@ -246,7 +246,7 @@
             sc: "Cover the bowel with saline-soaked gauze, do NOT push it back; NBM, urgent theatre for closure.",
             ref: "Emergency surgical referral.",
             mgmt: ["Resuscitate; IV antibiotics per local protocol as an adjunct — the treatment is operative re-closure."] };
-          if (anyOf(sel, ["deep", "sepsis"])) return { emergency: false, ladder: 4, catg: "Deep / organ-space surgical site infection",
+          if (anyOf(sel, ["deep", "sepsis"])) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Deep / organ-space surgical site infection",
             sc: "Source control — drain the collection (image-guided or open); send pus for culture. Retained infected mesh may need removal.",
             ref: "Surgical review; imaging for a collection.",
             mgmt: [
@@ -280,11 +280,11 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["oop", "crepitus", "rapid"])) return necFashResult();
-          if (has(sel, "purulent")) return { emergency: false, ladder: 4, catg: "Purulent SSTI — likely abscess",
+          if (has(sel, "purulent")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Purulent SSTI — likely abscess",
             sc: "Incision & drainage is the primary treatment; culture the pus.",
             ref: "Surgical / minor-ops.",
             mgmt: ["Antibiotics are the adjunct — add for surrounding cellulitis, systemic features, immunocompromise or diabetes; cover S. aureus (MRSA per local rates)."] };
-          if (has(sel, "sepsis")) return { emergency: false, ladder: 3, catg: "Cellulitis with systemic features",
+          if (has(sel, "sepsis")) return { emergency: true, ladder: 3, catg: "Cellulitis with systemic features",
             sc: "Rule out a drainable collection (USS if in doubt); mark the margin.",
             ref: "Admit; surgical review if a collection is found.",
             mgmt: ["IV anti-streptococcal / anti-staphylococcal cover per local antibiogram; reassess the marked margin."] };
@@ -316,7 +316,7 @@
         ],
         assess: function (sel) {
           if (has(sel, "fournier")) return necFashResult();
-          if (has(sel, "perianal")) return { emergency: false, ladder: 4, catg: "Perianal abscess — needs drainage",
+          if (has(sel, "perianal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Perianal abscess — needs drainage",
             sc: "Incision & drainage (theatre / EUA) is the definitive treatment; do NOT wait for it to 'point'. Send pus for culture.",
             ref: "Surgical drainage; image (MRI) for suspected ischiorectal / supralevator / horseshoe extension.",
             mgmt: [
@@ -324,11 +324,11 @@
               "Diabetics have a high risk of Fournier's gangrene — reassess for spreading necrosis.",
               "Do not chase a fistula acutely; add antibiotics only for cellulitis, systemic sepsis or immunocompromise, per local antibiogram."
             ] };
-          if (has(sel, "pilonidal")) return { emergency: false, ladder: 4, catg: "Pilonidal abscess — needs drainage",
+          if (has(sel, "pilonidal")) return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Pilonidal abscess — needs drainage",
             sc: "Incision & drainage off the midline for the acute abscess; definitive excision is a planned later procedure.",
             ref: "Surgical drainage; elective follow-up for definitive surgery.",
             mgmt: ["Drainage is the treatment; antibiotics are adjunct only if surrounding cellulitis or systemic features — per local guidance."] };
-          return { emergency: false, ladder: 4, catg: "Abscess — needs drainage",
+          return { emergency: has(sel, "sepsis"), ladder: 4, catg: "Abscess — needs drainage",
             sc: "Incision & drainage / image-guided drainage is definitive; send pus for culture.",
             ref: "Surgical drainage (theatre if deep / large).",
             mgmt: ["Antibiotics are adjunct to drainage — add for surrounding cellulitis, systemic features or immunocompromise; choose per local antibiogram and de-escalate on culture."] };
