@@ -7,13 +7,7 @@
    gate); the classic-ui-stable backup is independent and untouched. */
 (function () {
   "use strict";
-  function flagged() {
-    try {
-      if (/[?&]home=v2\b/.test(location.search)) { localStorage.setItem("smd_home_v2", "1"); return true; }
-      if (/[?&]home=classic\b/.test(location.search)) { localStorage.setItem("smd_home_v2", "0"); return false; }
-      return localStorage.getItem("smd_home_v2") !== "0"; // default ON; only an explicit Classic choice ("0") disables
-    } catch (e) { return !/[?&]home=classic\b/.test(location.search); }
-  }
+  function flagged() { return true; }  // Classic UI removed — Advanced (by MaiK) is the only UI.
   var IS_V2 = flagged();
 
   // Add an "Interface: Advanced UI (by MaiK) / Classic UI" switch into the existing
@@ -77,8 +71,6 @@
       // 2) Advanced controls INTO Settings (#sbsub_set) as collapsible subgroups
       var setBody = document.getElementById("sbsub_set");
       if (setBody && !setBody.querySelector("[data-smd-adv]")) {
-        var interfaceBody = '<button class="smd-nav-btn' + (isV2 ? ' on' : '') + '" data-ui="v2">Advanced UI' + (isV2 ? ' ✓' : '') + '</button>' +
-          '<button class="smd-nav-btn' + (!isV2 ? ' on' : '') + '" data-ui="classic">Classic UI' + (!isV2 ? ' ✓' : '') + '</button>';
         var engineBody = swRow("reason", "Reasoning v2", "Live differential in the workflow", flag("smd_reason_v2", true)) +
           swRow("expanded", "Expanded Harrison KB", "+268 reference diseases as candidates", flag("smd_kb_expanded", false)) +
           '<div class="smd-nav-note">⚗️ Experimental — for clinician review.</div>';
@@ -87,7 +79,6 @@
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
         setBody.insertAdjacentHTML("beforeend",
-          group("interface", "Interface", interfaceBody, false) +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           group("ai", "AI Assistant", aiBody, false) +
           group("ward", "Ward Integration", wardBody, false));
@@ -851,10 +842,6 @@
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
-      '<div class="hv-d-sec"><h4>Interface</h4><div class="hv-seg" id="hvUi" style="grid-template-columns:1fr 1fr">' +
-        '<button data-ui="v2" class="on">Advanced UI<br><span style="font-weight:600;opacity:.85;font-size:10px">by MaiK</span></button>' +
-        '<button data-ui="classic">Classic UI<br><span style="font-weight:600;opacity:.85;font-size:10px">previous</span></button>' +
-      '</div></div>' +
       mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
