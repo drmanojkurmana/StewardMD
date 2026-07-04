@@ -30,7 +30,12 @@
     "three\\s*way", "3\\s*way", "stopcock", "extension\\s*line", "iv\\s*line",
     "spinal\\s*needle", "scalp\\s*vein", "ryles\\s*tube", "rt\\s*tube", "ng\\s*tube",
     "suction\\s*catheter", "et\\s*tube", "tracheostomy", "drape", "disposable",
-    "disposables", "lancet", "test\\s*strip", "glucose\\s*strip", "thermometer"
+    "disposables", "lancet", "test\\s*strip", "glucose\\s*strip", "thermometer",
+    "el[ie]ctrodes?", "el[ie]trodes?", "ecg\\s*electrode", "electrode", "gel\\s*pad",
+    "leucoplast", "elastoplast", "band\\s*aid", "cotton\\s*roll", "surgical\\s*blade",
+    "blade", "sterile\\s*water", "water\\s*for\\s*injection", "wfi", "diaper", "underpad",
+    "under\\s*pad", "face\\s*mask", "n95", "oxygen\\s*mask", "nasal\\s*prong", "nebuliser\\s*kit",
+    "urometer", "cap\\s*(?:mount|adapter)", "connector", "tubing", "iv\\s*fluid\\s*set"
   ].join("|") + ")\\b", "i");
 
   // ── formulation recognition ────────────────────────────────────────────────

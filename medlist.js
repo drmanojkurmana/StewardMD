@@ -6,6 +6,19 @@
   var FORM_PREFIX = { t: "tablet", tab: "tablet", tabs: "tablet", cap: "capsule", caps: "capsule",
     inj: "injection", syp: "syrup", syr: "syrup", susp: "suspension", drop: "drops", oint: "ointment",
     neb: "nebulisation", inh: "inhaler" };
+  // Full formulation words that hospital feeds (e.g. GHIS) append/prepend — stripped
+  // from the drug name wherever they appear so "PARACETAMOL-650MG TABLET" resolves to
+  // "paracetamol". (inh/neb are also routes and handled there first.)
+  var FORM_WORD = { tablet: "tablet", tablets: "tablet", tab: "tablet", tabs: "tablet",
+    capsule: "capsule", capsules: "capsule", cap: "capsule", caps: "capsule",
+    injection: "injection", injections: "injection", inj: "injection", vial: "injection",
+    vials: "injection", ampoule: "injection", ampule: "injection", amp: "injection", infusion: "injection",
+    syrup: "syrup", syp: "syrup", syr: "syrup", suspension: "suspension", susp: "suspension",
+    solution: "solution", soln: "solution", elixir: "syrup", drop: "drops", drops: "drops",
+    ointment: "ointment", oint: "ointment", cream: "cream", gel: "gel", lotion: "lotion",
+    nebulisation: "nebulisation", nebuliser: "nebulisation", respule: "nebulisation",
+    inhaler: "inhaler", rotacap: "inhaler", rotacaps: "inhaler", mdi: "inhaler",
+    sachet: "sachet", powder: "powder", granules: "powder", suppository: "suppository", pessary: "pessary" };
   var ROUTES = { iv: "IV", po: "PO", oral: "PO", im: "IM", sc: "SC", sl: "SL", pr: "PR",
     inh: "INH", neb: "NEB", top: "TOP", topical: "TOP", ng: "NG" };
   var FREQ = { od: "OD", bd: "BD", bid: "BD", tds: "TDS", tid: "TDS", qid: "QID", qds: "QID",
@@ -47,6 +60,9 @@
     try { if (((window.MEDDRUGS && window.MEDDRUGS._list) || []).some(function (d) { return d.generic.toLowerCase() === n; })) return true; } catch (_) {}
     try { var dc = window.INTERACTION_RULES && window.INTERACTION_RULES.drugClasses;
       if (dc && Object.prototype.hasOwnProperty.call(dc, n)) return true; } catch (_) {}
+    // Antibiotic stewardship formulary (amoxicillin, ceftriaxone, meropenem, …) lives in
+    // ASP_DRUGS, keyed by generic — include it so ward antibiotics are recognised too.
+    try { if (window.ASP_DRUGS && Object.prototype.hasOwnProperty.call(window.ASP_DRUGS, n)) return true; } catch (_) {}
     return false;
   }
   function resolveGeneric(out) {
@@ -74,18 +90,22 @@
     var out = { raw: raw, name: null, generic: null, strength: null, unit: null, form: null,
       route: null, freq: null, freqText: null, confidence: "low", candidates: [] };
     if (!raw) return out;
-    var toks = tokens(raw), rest = [];
+    // Un-glue hospital-feed formats: "PARACETAMOL-650MG" / "AMOXICILLIN-500" -> separate
+    // the name from its strength (leave name-name hyphens like "co-trimoxazole" intact).
+    var norm = raw.replace(/([a-z])-(?=\d)/gi, "$1 ");
+    var toks = tokens(norm), rest = [];
     // form prefix (first token)
     if (toks.length && FORM_PREFIX[toks[0]]) { out.form = FORM_PREFIX[toks[0]]; toks = toks.slice(1); }
     // strength (with unit if present; falls back to a bare number, e.g. "metformin 500 bd")
-    var m = raw.match(UNIT_RE);
+    var m = norm.match(UNIT_RE);
     if (m) { out.strength = parseFloat(m[1]); out.unit = m[2].toLowerCase().replace(/s$/, ""); }
-    else { var bm = raw.match(BARE_NUM_RE); if (bm) out.strength = parseFloat(bm[1]); }
-    // route + freq + strip numerics/units; remaining tokens = drug name
+    else { var bm = norm.match(BARE_NUM_RE); if (bm) out.strength = parseFloat(bm[1]); }
+    // route + freq + form words + strip numerics/units; remaining tokens = drug name
     for (var i = 0; i < toks.length; i++) {
       var tk = toks[i];
       if (ROUTES[tk]) { out.route = ROUTES[tk]; continue; }
       if (FREQ[tk]) { out.freq = FREQ[tk]; out.freqText = tk; continue; }
+      if (FORM_WORD[tk]) { out.form = out.form || FORM_WORD[tk]; continue; }
       if (/^\d/.test(tk) || /^(mg|mcg|g|ml|iu|units?|%)$/.test(tk)) continue;
       rest.push(tk);
     }
