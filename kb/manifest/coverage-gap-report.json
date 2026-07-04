@@ -4,21 +4,21 @@
   "totals": {
     "questions": 167,
     "inScope": 152,
-    "strongPct": 72.4,
-    "partialPct": 13.8
+    "strongPct": 75,
+    "partialPct": 15.1
   },
   "byVerdict": {
-    "STRONG": 110,
-    "PARTIAL": 21,
+    "STRONG": 114,
+    "PARTIAL": 23,
     "INKB_MISLABELED": 9,
-    "TOPIC_MISS": 21,
+    "TOPIC_MISS": 15,
     "OOS_FALSEHIT": 4,
     "OOS_OK": 2
   },
   "byType": {
     "diagnosis": {
-      "STRONG": 10,
-      "TOPIC_MISS": 2,
+      "STRONG": 11,
+      "TOPIC_MISS": 1,
       "PARTIAL": 3
     },
     "empiric_antibiotics": {
@@ -28,13 +28,13 @@
       "INKB_MISLABELED": 1
     },
     "follow_up": {
-      "STRONG": 10,
-      "TOPIC_MISS": 2,
+      "STRONG": 11,
+      "TOPIC_MISS": 1,
       "INKB_MISLABELED": 1
     },
     "red_flags": {
-      "STRONG": 10,
-      "TOPIC_MISS": 4,
+      "STRONG": 12,
+      "TOPIC_MISS": 2,
       "PARTIAL": 1
     },
     "investigations": {
@@ -44,7 +44,8 @@
     },
     "differential": {
       "STRONG": 12,
-      "TOPIC_MISS": 3
+      "TOPIC_MISS": 1,
+      "PARTIAL": 2
     },
     "special_population": {
       "STRONG": 23,
@@ -70,10 +71,10 @@
   },
   "bySpecialty": {
     "undefined": {
-      "STRONG": 110,
-      "PARTIAL": 21,
+      "STRONG": 114,
+      "PARTIAL": 23,
       "INKB_MISLABELED": 9,
-      "TOPIC_MISS": 21,
+      "TOPIC_MISS": 15,
       "OOS_FALSEHIT": 4,
       "OOS_OK": 2
     }
@@ -312,13 +313,13 @@
       "expectTopicName": "Aortic dissection",
       "isGapProbe": false,
       "note": "Classic presentation prompting diagnostic confirmation.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "STRONG",
       "retrievedTop": {
         "d": "gerd_chest",
         "s": "harrison.pearl",
         "sc": 32.495
       },
-      "topicRank": -1,
+      "topicRank": 1,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -371,15 +372,16 @@
       "expectTopicName": "ACEi/hereditary angioedema",
       "isGapProbe": false,
       "note": "Red-flag query on ACEi angioedema.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "aspergillosis",
+        "d": "angioedema_acei",
         "s": "harrison.redFlag",
-        "sc": 26.733
+        "sc": 12.989
       },
-      "topicRank": -1,
+      "topicRank": 0,
       "sources": [
-        "Standard internal-medicine reference"
+        "Standard internal-medicine reference",
+        "StewardMD management protocol"
       ],
       "harrisonLeak": false
     },
@@ -1068,13 +1070,13 @@
       "expectTopicName": "DIC",
       "isGapProbe": false,
       "note": "Differential probing DIC vs TMA; targets DIC as the classic consumptive coagulopathy.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "PARTIAL",
       "retrievedTop": {
         "d": "peripheral_neuropathy",
         "s": "harrison.infectionMimic",
         "sc": 16.761
       },
-      "topicRank": -1,
+      "topicRank": 1,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -2334,9 +2336,9 @@
       "note": "Gap-probe: topic is reference-only (t:R, rx:0), no management content expected. Should decline/redirect, not fabricate.",
       "verdict": "TOPIC_MISS",
       "retrievedTop": {
-        "d": "ibd_flare",
+        "d": "adrenal_crisis",
         "s": "management",
-        "sc": 51.246
+        "sc": 79.757
       },
       "topicRank": -1,
       "sources": [
@@ -2410,13 +2412,13 @@
       "expectTopicName": "Phaeochromocytoma crisis",
       "isGapProbe": false,
       "note": "Differential for adrenergic crisis; anchored on pheo which is in scope.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "PARTIAL",
       "retrievedTop": {
         "d": "thyroid_storm",
         "s": "management",
         "sc": 59.546
       },
-      "topicRank": -1,
+      "topicRank": 2,
       "sources": [
         "StewardMD management protocol",
         "Standard internal-medicine reference"
@@ -2827,13 +2829,13 @@
       "expectTopicName": "Giant cell arteritis",
       "isGapProbe": false,
       "note": "visual/ischemic warning signs",
-      "verdict": "TOPIC_MISS",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "anemia_due_to_acute_blood",
+        "d": "temporal_arteritis",
         "s": "harrison.redFlag",
-        "sc": 14.767
+        "sc": 24.195
       },
-      "topicRank": -1,
+      "topicRank": 0,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -2867,11 +2869,11 @@
       "note": "flare workup incl complements/dsDNA",
       "verdict": "STRONG",
       "retrievedTop": {
-        "d": "systemic_lupus_erythematosus",
+        "d": "sle_flare",
         "s": "harrison.investigation",
-        "sc": 29.28
+        "sc": 23.848
       },
-      "topicRank": 1,
+      "topicRank": 0,
       "sources": [
         "Standard internal-medicine reference"
       ],
@@ -3368,15 +3370,16 @@
       "expectTopicName": "TB Meningitis",
       "isGapProbe": false,
       "note": "Follow-up / next-steps style, steroid taper and monitoring.",
-      "verdict": "TOPIC_MISS",
+      "verdict": "STRONG",
       "retrievedTop": {
-        "d": "temporal_arteritis",
-        "s": "management",
-        "sc": 18.813
+        "d": "CNS_TB",
+        "s": "management.stewardship",
+        "sc": 8.586
       },
-      "topicRank": -1,
+      "topicRank": 0,
       "sources": [
-        "StewardMD management protocol"
+        "StewardMD management protocol",
+        "Standard internal-medicine reference"
       ],
       "harrisonLeak": false
     },

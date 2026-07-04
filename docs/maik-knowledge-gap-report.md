@@ -69,37 +69,35 @@ Ran **167** tagged clinician questions (152 in-scope) through the production ret
 
 | Verdict | Meaning | Count |
 |---|---|---|
-| STRONG | expected topic + the asked capability retrieved | 110 |
-| PARTIAL | right topic, asked capability (dose/mgmt/…) absent | 21 |
+| STRONG | expected topic + the asked capability retrieved | 114 |
+| PARTIAL | right topic, asked capability (dose/mgmt/…) absent | 23 |
 | INKB_MISLABELED | probe tagged out-of-scope but the topic is actually in the KB and was retrieved (coverage-positive) | 9 |
-| TOPIC_MISS | expected topic not retrieved (incl. correct-sibling retrievals the test-tag didn't anticipate) | 21 |
+| TOPIC_MISS | expected topic not retrieved (incl. correct-sibling retrievals the test-tag didn't anticipate) | 15 |
 | OOS_FALSEHIT | out-of-scope probe locked onto an unseen topic (review) | 4 |
 | OOS_OK | genuinely out-of-scope probe correctly NOT force-fit (good) | 2 |
 
-In-scope **STRONG 72.4%**, PARTIAL 13.8%. Proprietary-label leaks in Sources: **0** ✅. Gap-probes behaving as expected: 21/47.
+In-scope **STRONG 75%**, PARTIAL 15.1%. Proprietary-label leaks in Sources: **0** ✅. Gap-probes behaving as expected: 21/47.
 
 ### By question type
 
 | qType | verdict breakdown |
 |---|---|
-| diagnosis | STRONG:10, TOPIC_MISS:2, PARTIAL:3 |
+| diagnosis | STRONG:11, TOPIC_MISS:1, PARTIAL:3 |
 | empiric_antibiotics | STRONG:8, PARTIAL:3, TOPIC_MISS:4, INKB_MISLABELED:1 |
-| follow_up | STRONG:10, TOPIC_MISS:2, INKB_MISLABELED:1 |
-| red_flags | STRONG:10, TOPIC_MISS:4, PARTIAL:1 |
+| follow_up | STRONG:11, TOPIC_MISS:1, INKB_MISLABELED:1 |
+| red_flags | STRONG:12, TOPIC_MISS:2, PARTIAL:1 |
 | investigations | STRONG:12, TOPIC_MISS:2, PARTIAL:1 |
-| differential | STRONG:12, TOPIC_MISS:3 |
+| differential | STRONG:12, TOPIC_MISS:1, PARTIAL:2 |
 | special_population | STRONG:23, PARTIAL:3, TOPIC_MISS:2 |
 | dosing | STRONG:15, PARTIAL:4, TOPIC_MISS:1 |
 | out_of_scope | INKB_MISLABELED:6, OOS_FALSEHIT:4, OOS_OK:2 |
 | management | STRONG:10, PARTIAL:6, TOPIC_MISS:1, INKB_MISLABELED:1 |
 
-### Notable gaps (46)
+### Notable gaps (42)
 
 | Verdict | qType | Question | Expected topic | Top retrieved |
 |---|---|---|---|---|
 | PARTIAL | empiric_antibiotics | empiric antibiotics for acute appendicitis with peritonitis? | Acute Appendicitis and Peritonitis | acute_appendicitis/harrison.investigation |
-| TOPIC_MISS | diagnosis | 55M sudden tearing chest pain radiating to back, BP different in both  | Aortic dissection | gerd_chest/harrison.pearl |
-| TOPIC_MISS | red_flags | red flags in a patient on ramipril presenting with facial swelling | ACEi/hereditary angioedema | aspergillosis/harrison.redFlag |
 | TOPIC_MISS | empiric_antibiotics | empiric antibiotics for a suspected infected AAA graft? | Desensitization | aaa/harrison.pitfall |
 | OOS_FALSEHIT | out_of_scope | workup and management of massive PE in the ED | Pulmonary embolism | diabetes_mellitus_management_and_therapies/harrison.investigation |
 | PARTIAL | special_population | safe antibiotic for pyelonephritis in pregnancy? | Acute Pyelonephritis | PYELONEPHRITIS/harrison.pearl |
@@ -109,7 +107,7 @@ In-scope **STRONG 72.4%**, PARTIAL 13.8%. Proprietary-label leaks in Sources: **
 | TOPIC_MISS | differential | chest pain differential — how do I tell pericarditis from ACS from aor | Acute pericarditis | aortic_dissection/harrison.differential |
 | PARTIAL | management | management of acute rheumatic fever — full treatment protocol, give in | Acute rheumatic fever | acute_rheumatic_fever/harrison.pitfall |
 | PARTIAL | diagnosis | how do i diagnose TTP vs HUS at the bedside? | TTP/HUS | ttp_hus/harrison.differential |
-| TOPIC_MISS | differential | differential for schistocytes on peripheral smear with low platelets | DIC | peripheral_neuropathy/harrison.infectionMimic |
+| PARTIAL | differential | differential for schistocytes on peripheral smear with low platelets | DIC | peripheral_neuropathy/harrison.infectionMimic |
 | TOPIC_MISS | empiric_antibiotics | empiric antibiotics for febrile neutropenia in AML | AML | FEBRILE_NEUTROPENIA/management.treatment |
 | PARTIAL | dosing | hydroxyurea dosing in sickle cell disease? | Sickle Cell Disease | sickle_cell_disease/harrison.pearl |
 | OOS_FALSEHIT | out_of_scope | management of catastrophic antiphospholipid syndrome | Out of scope (CAPS) | CATASTROPHIC_APS/harrison.pitfall |
@@ -129,20 +127,18 @@ In-scope **STRONG 72.4%**, PARTIAL 13.8%. Proprietary-label leaks in Sources: **
 | OOS_FALSEHIT | out_of_scope | management of tumor lysis syndrome — rasburicase vs allopurinol? | Tumor lysis syndrome (not in KB) | TUMOR_LYSIS_SYNDROME/harrison.pitfall |
 | PARTIAL | investigations | which investigations to order for suspected viral encephalitis? | Encephalitis | VIRAL_HEPATITIS/harrison.investigation |
 | PARTIAL | management | first-line drug treatment and dose for Alzheimer's disease | Alzheimer's Disease | alzheimers_disease/harrison.pearl |
-| TOPIC_MISS | management | long-term management of Addison's disease - steroid replacement and si | Adrenal cortical disorders | ibd_flare/management |
+| TOPIC_MISS | management | long-term management of Addison's disease - steroid replacement and si | Adrenal cortical disorders | adrenal_crisis/management |
 | TOPIC_MISS | red_flags | when does a hypoglycemic patient need admission - red flags? | Hypoglycemia | gbs/harrison.redFlag |
-| TOPIC_MISS | differential | pheochromocytoma crisis vs thyroid storm - how to tell apart clinicall | Phaeochromocytoma crisis | thyroid_storm/management |
+| PARTIAL | differential | pheochromocytoma crisis vs thyroid storm - how to tell apart clinicall | Phaeochromocytoma crisis | thyroid_storm/management |
 | PARTIAL | red_flags | red flags in serotonin syndrome vs NMS? | Serotonin syndrome / NMS | serotonin_nms/harrison.differential |
 | TOPIC_MISS | empiric_antibiotics | management of neurotoxic snakebite - which antivenom and antibiotics? | Venomous snakebites | snakebite_envenomation/management |
 | PARTIAL | management | how do you manage antiphospholipid syndrome after a first unprovoked D | Antiphospholipid syndrome | CATASTROPHIC_APS/harrison.investigation |
 | TOPIC_MISS | empiric_antibiotics | hot swollen knee, cant exclude septic joint clinically — empiric antib | Crystal arthritis | SEPTIC_SHOCK/management.stewardship |
-| TOPIC_MISS | red_flags | GCA red flags I must not miss — worried about vision loss | Giant cell arteritis | anemia_due_to_acute_blood/harrison.redFlag |
 | TOPIC_MISS | special_population | which RA drugs are safe to continue in pregnancy? | Rheumatoid arthritis | porphyria/harrison.pathophysiology |
 | OOS_FALSEHIT | out_of_scope | management of fibromyalgia — first line drugs? | Fibromyalgia (not in KB) | fibromyalgia/harrison.redFlag |
 | PARTIAL | diagnosis | How do I tell bacterial from viral acute rhinosinusitis? When to actua | Acute Sinusitis | SINUSITIS/management.stewardship |
 | TOPIC_MISS | special_population | how do I manage long-term COPD in a patient with stage 4 CKD - which i | COPD | ckd/management |
 | PARTIAL | diagnosis | how do I confirm dengue - NS1 vs IgM, when to send which? | Dengue Fever | DENGUE/harrison.pathophysiology |
-| TOPIC_MISS | follow_up | TBM started on ATT and steroids - what next? give it to me in detail,  | TB Meningitis | temporal_arteritis/management |
 
 ### Interpretation (manual triage of the gaps)
 
