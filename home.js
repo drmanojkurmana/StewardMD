@@ -165,7 +165,8 @@
     spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
     settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 9 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1Z"/>',
     x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
-    award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>'
+    award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>',
+    antibiogram: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
@@ -394,6 +395,7 @@
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
     syndromes: function () { if (window.ASP && ASP.open) ASP.open(); else if (window.SB && SB.openSyn) SB.openSyn(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
+    antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
@@ -666,7 +668,7 @@
           '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
           '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
           '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
-          '<button class="v4-qc" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
+          '<button class="v4-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("antibiogram") + '<span>Antibiogram</span></button>' +
         '</div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
         '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
@@ -678,7 +680,7 @@
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
-          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name">MaiKnowledge</span></a>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
           '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
@@ -1415,7 +1417,7 @@
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s5";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s6";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
