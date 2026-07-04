@@ -108,6 +108,13 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
 #outputArea.smd-spy-instant .smd-acc-wrap{transition:none!important}
 /* keep native scroll-anchoring out of the way of our off-screen toggles */
 #outputArea.smd-spy-on{overflow-anchor:none}
+
+/* ── Drug Interactions overlay: hide floating FABs so they never overlap the CTA ── */
+body.smd-ddi-open .hv-fab,
+body.smd-ddi-open .inf-fab,
+body.smd-ddi-open #infFab,
+body.smd-ddi-open .ghis-ward-fab,
+body.smd-ddi-open #smdBackToTop{display:none!important}
 </style>
 </head>
 

@@ -103,10 +103,12 @@ try {
 
   // --- Task 5: UI — mount/render, med cards, no-leak ---
   await ev(`MEDLIST.clearAll(); var d=document.createElement("div"); d.id="ml-test"; document.body.appendChild(d); MEDLIST.mount(d); return 1;`);
-  ok(await ev(`return /Add medicines to check interactions/.test(document.getElementById("ml-test").innerText)`) === true, "empty state renders");
-  ok(await ev(`return /Drug Interactions/.test(document.getElementById("ml-test").innerText)`) === true, "title renders");
-  ok(await ev(`return /Check medicines, duplicates, and high-risk combinations/.test(document.getElementById("ml-test").innerText)`) === true, "subtitle renders");
-  ok(await ev(`return /Clinical decision support — verify with current local protocol and pharmacist where needed/.test(document.getElementById("ml-test").innerText)`) === true, "advisory badge renders");
+  // Redesign: the "Drug Interactions" title + advisory now live in the sticky shell header
+  // (drugs.js). The mounted body shows the medication-list empty state + a review summary.
+  ok(await ev(`return /Medication list/.test(document.getElementById("ml-test").innerText)`) === true, "empty-state heading renders");
+  ok(await ev(`return /Add medicines from Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "empty-state helper renders");
+  ok(await ev(`return /type a prescription, scan a case sheet, or import from Ward Sync/i.test(document.getElementById("ml-test").innerText)`) === true, "empty-state sub renders");
+  ok(await ev(`return /Interaction check reviews/i.test(document.getElementById("ml-test").innerText)`) === true, "pre-run review summary renders");
   await ev(`MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
   ok(await ev(`return /metformin/i.test(document.getElementById("ml-test").innerText)`) === true, "med card renders");
   ok(await ev(`return document.querySelectorAll("#ml-test [data-ml-remove]").length`) === 1, "remove control present");
@@ -127,15 +129,15 @@ try {
   // add-option buttons present; Scan is now ENABLED (PR3), Ward Sync still "Coming soon"
   await ev(`MEDLIST.clearAll(); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
   ok(await ev(`return /Search Drug Index/.test(document.getElementById("ml-test").innerText)`) === true, "'Search Drug Index' option present");
-  ok(await ev(`return /Type manually/.test(document.getElementById("ml-test").innerText)`) === true, "'Type manually' option present");
+  // Redesign: entry points are action cards; a manual-entry opener carries data-ml-open='manual'.
+  ok(await ev(`return !!document.querySelector("#ml-test [data-ml-open='manual']")`) === true, "manual-entry opener present");
   ok(await ev(`return /Paste list/.test(document.getElementById("ml-test").innerText)`) === true, "'Paste list' option present");
-  // PR4: "Fetch from Ward Sync" is enabled (not "Coming soon") once a Ward-Sync patient is
-  // selected; here no GHIS patient is selected, so it stays disabled WITH a hint — never "Coming soon".
   ok(await ev(`return /Coming soon/.test(document.getElementById("ml-test").innerText)`) === false, "Ward Sync no longer labelled 'Coming soon'");
   ok(await ev(`return document.getElementById("ml-test").querySelectorAll("[data-ml-scan],[data-ml-wardsync]").length`) === 2, "Scan + Ward Sync buttons present");
   ok(await ev(`return document.querySelector("#ml-test [data-ml-scan]").disabled === false`) === true, "Scan button ENABLED (PR3 — scan prescription / case sheet)");
-  ok(await ev(`return document.querySelector("#ml-test [data-ml-wardsync]").disabled === true`) === true, "Ward Sync button disabled when no Ward-Sync patient is selected");
-  ok(await ev(`return /Select a Ward Sync patient first/i.test(document.getElementById("ml-test").innerText)`) === true, "Ward Sync shows 'Select a Ward Sync patient first.' hint when disabled");
+  // Redesign: with no Ward-Sync patient the card is an ACTIVE guide ("Select patient"), not a dead disabled button.
+  ok(await ev(`var b=document.querySelector("#ml-test [data-ml-wardsync]"); return !!b && b.disabled===false && /Select patient/i.test(b.textContent)`) === true, "Ward Sync card guides patient selection (active 'Select patient') when none selected");
+  ok(await ev(`return /Select a patient to import current medicines/i.test(document.getElementById("ml-test").innerText)`) === true, "Ward Sync card explains it imports the current medication chart");
 
   // sticky footer with disabled Check-interactions button
   ok(await ev(`return document.getElementById("ml-check") && document.getElementById("ml-check").disabled`) === true, "footer 'Check interactions' button present + disabled");
@@ -261,20 +263,24 @@ try {
   ok(await ev(`return document.getElementById("ml-check").disabled === true`) === true, "Check-interactions disabled with empty list");
   await ev(`MEDLIST.add(MEDLIST.parseEntry("piptaz 4.5 q6h"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
   ok(await ev(`return document.getElementById("ml-check").disabled === true`) === true, "Check-interactions stays disabled with only unresolved-generic meds");
+  // Redesign: an interaction check needs >= 2 resolved medicines (a single med can't interact).
   await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
-  ok(await ev(`return document.getElementById("ml-check").disabled === false`) === true, "Check-interactions enabled once a med has a resolved generic");
+  ok(await ev(`return document.getElementById("ml-check").disabled === true`) === true, "Check-interactions stays disabled with a single resolved medicine");
+  ok(await ev(`return /Add at least 2 medicines/i.test(document.getElementById("ml-test").innerText)`) === true, "explains the >=2 medicines requirement");
+  await ev(`MEDLIST.add(MEDLIST.parseEntry("metformin 500 bd"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
+  ok(await ev(`return document.getElementById("ml-check").disabled === false`) === true, "Check-interactions enabled with two resolved medicines");
 
   // warfarin + aspirin + ibuprofen -> results screen with a critical/major bleeding alert.
   await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("warfarin 5 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("aspirin 75 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("ibuprofen 400 tds"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); return 1;`);
   ok(await ev(`return document.getElementById("ml-check").disabled === false`) === true, "Check-interactions enabled for warfarin+aspirin+ibuprofen");
   await ev(`document.getElementById("ml-check").click(); return 1;`);
   const rtext = await ev(`return document.getElementById("ml-test").innerText`);
-  ok(/Interaction Summary/i.test(rtext), "results screen shows 'Interaction Summary'");
-  ok(/Critical alerts/i.test(rtext) && /Major interactions/i.test(rtext), "summary shows critical/major count labels (color-independent text)");
-  ok(/Medicines reviewed/i.test(rtext), "summary shows total medicines reviewed");
+  ok(/Medication Safety Summary/i.test(rtext), "results screen shows 'Medication Safety Summary'");
+  ok(/Critical/i.test(rtext) && /Major/i.test(rtext) && /Monitoring/i.test(rtext), "summary shows critical/major/monitoring count chips (color-independent text)");
+  ok(/reviewed/i.test(rtext), "summary shows total medicines reviewed");
   ok(/bleed|haemorrh|hemorrh/i.test(rtext), "results surface a bleeding-related finding");
   ok(await ev(`var t=document.getElementById("ml-test").innerText; return /Critical|Major/.test(t)`) === true, "a severity label (Critical/Major) is shown");
-  ok(/Why it matters/i.test(rtext) && /Action/i.test(rtext) && /Monitoring/i.test(rtext), "finding card shows Why it matters / Action / Monitoring");
+  ok(/Action/i.test(rtext) && await ev(`return !!document.querySelector("#ml-test .mlr-why button")`) === true, "finding card shows an Action line and a 'Why?' expand control");
   // Context/advisory note present when no context supplied.
   ok(/Interaction check is medication-based\. Add renal function, electrolytes, QTc, or patient context/i.test(rtext), "advisory/context note shown when no context");
   // SECURITY: no leaked JSON braces / rule ids / sourceId / provider strings.
@@ -295,12 +301,12 @@ try {
   ok(await ev(`var b=document.querySelector("#ml-test .mlr-card-critical .mlr-sev-mark"); return !!b && b.textContent.indexOf("!!!")===0`) === true, "contraindicated finding shows the highest-severity mark '!!!'");
   ok(await ev(`var cards=document.querySelectorAll("#ml-test .mlr-card-critical"); for(var i=0;i<cards.length;i++){var t=cards[i].querySelector(".mlr-sev-text");if(t&&/Caution/i.test(t.textContent))return false;}return cards.length>0`) === true, "no critical card falls back to the 'Caution' label");
 
-  // Empty-ish list (single amlodipine) -> "No issues detected" (0 critical/major).
-  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
+  // Two non-interacting meds (amlodipine + paracetamol) -> "No major issue detected".
+  await ev(`MEDLIST.clearAll(); MEDLIST.add(MEDLIST.parseEntry("amlodipine 5 od"),"manual"); MEDLIST.add(MEDLIST.parseEntry("paracetamol 650 tds"),"manual"); MEDLIST.mount(document.getElementById("ml-test")); document.getElementById("ml-check").click(); return 1;`);
   const amText = await ev(`return document.getElementById("ml-test").innerText`);
-  ok(/Interaction Summary/i.test(amText), "single-amlodipine results screen renders summary");
-  ok(/No issues detected/i.test(amText), "single amlodipine shows 'No issues detected'");
-  ok(await ev(`var r=INTERACTIONS.checkInteractions(MEDLIST.getList()); return r.critical.length===0 && r.major.length===0`) === true, "single amlodipine yields 0 critical/major");
+  ok(/Medication Safety Summary/i.test(amText), "non-interacting pair results screen renders summary");
+  ok(/No major issue detected/i.test(amText), "non-interacting pair shows 'No major issue detected'");
+  ok(await ev(`var r=INTERACTIONS.checkInteractions(MEDLIST.getList()); return r.critical.length===0 && r.major.length===0`) === true, "amlodipine + paracetamol yields 0 critical/major");
 
   await ev(`MEDLIST.clearAll(); return 1;`);
 

@@ -44,7 +44,18 @@
     "diclofenac":     ["nsaid"],
     "naproxen":       ["nsaid"],
     "ketorolac":      ["nsaid"],
-    "clopidogrel":    ["antiplatelet"],
+    "clopidogrel":    ["antiplatelet", "p2y12_inhibitor"],
+    "ticagrelor":     ["antiplatelet", "p2y12_inhibitor"],
+    "prasugrel":      ["antiplatelet", "p2y12_inhibitor"],
+
+    // --- Proton pump inhibitors (CYP2C19; clopidogrel bioactivation) ---
+    // omeprazole/esomeprazole strongly inhibit CYP2C19 (FDA warning with clopidogrel);
+    // pantoprazole/rabeprazole interact least and are the preferred PPIs with clopidogrel.
+    "omeprazole":     ["ppi", "cyp2c19_inhibitor"],
+    "esomeprazole":   ["ppi", "cyp2c19_inhibitor"],
+    "pantoprazole":   ["ppi", "ppi_low_cyp2c19"],
+    "rabeprazole":    ["ppi", "ppi_low_cyp2c19"],
+    "lansoprazole":   ["ppi", "ppi_low_cyp2c19"],
 
     // --- Anticoagulants ---
     "warfarin":       ["anticoagulant", "vitamin_k_antagonist"],
@@ -78,8 +89,13 @@
     "haloperidol":    ["qt_prolonging", "antipsychotic"],
     "amiodarone":     ["qt_prolonging", "antiarrhythmic"],
     "sotalol":        ["qt_prolonging", "antiarrhythmic"],
-    "moxifloxacin":   ["qt_prolonging", "fluoroquinolone"],
-    "erythromycin":   ["qt_prolonging", "macrolide", "cyp3a4_inhibitor"],
+    "moxifloxacin":   ["qt_prolonging", "fluoroquinolone", "antibiotic"],
+    // Levofloxacin, ciprofloxacin and ofloxacin carry QT-prolongation risk
+    // (CredibleMeds conditional-risk category) — additive with other QT drugs.
+    "levofloxacin":   ["qt_prolonging", "fluoroquinolone", "antibiotic"],
+    "ciprofloxacin":  ["qt_prolonging", "fluoroquinolone", "antibiotic"],
+    "ofloxacin":      ["qt_prolonging", "fluoroquinolone", "antibiotic"],
+    "erythromycin":   ["qt_prolonging", "macrolide", "cyp3a4_inhibitor", "antibiotic"],
 
     // --- SSRIs / serotonergic ---
     "citalopram":     ["ssri", "serotonergic", "qt_prolonging"],
@@ -255,6 +271,37 @@
       reviewDate: "2026-07-04",
       doseTimingSeparation: false,
       specialistReview: true
+    },
+
+    {
+      id: "pair-clopidogrel-cyp2c19-ppi",
+      type: "pair",
+      subjects: [{ kind: "generic", value: "clopidogrel" }, { kind: "class", value: "cyp2c19_inhibitor" }],
+      severity: "major",
+      mechanism: "Clopidogrel is a prodrug that requires CYP2C19 to form its active antiplatelet metabolite. Omeprazole and esomeprazole are strong CYP2C19 inhibitors and markedly reduce that activation.",
+      effect: "Reduced clopidogrel antiplatelet effect — higher risk of stent thrombosis and cardiovascular events.",
+      action: "Avoid omeprazole/esomeprazole with clopidogrel. Use pantoprazole or rabeprazole instead, or an H2-blocker (famotidine) if acid suppression is needed.",
+      monitoring: "Reassess the ongoing need for a PPI; switch to a low-CYP2C19 PPI where gastroprotection is still indicated.",
+      sourceId: "openfda-labeling",
+      evidence: "established",
+      reviewDate: "2026-07-04",
+      doseTimingSeparation: false,
+      specialistReview: false
+    },
+    {
+      id: "pair-clopidogrel-ppi",
+      type: "pair",
+      subjects: [{ kind: "generic", value: "clopidogrel" }, { kind: "class", value: "ppi_low_cyp2c19" }],
+      severity: "moderate",
+      mechanism: "Clopidogrel needs CYP2C19 to form its active metabolite. Pantoprazole and rabeprazole inhibit CYP2C19 far less than omeprazole/esomeprazole, but a small reduction in antiplatelet effect is still possible.",
+      effect: "Possible modest reduction in clopidogrel antiplatelet effect (much less than with omeprazole/esomeprazole).",
+      action: "Pantoprazole/rabeprazole are the PREFERRED PPIs with clopidogrel. Confirm the PPI is still indicated; consider an H2-blocker (famotidine) if only mild acid suppression is needed.",
+      monitoring: "No routine platelet-function monitoring is required; review the ongoing need for acid suppression.",
+      sourceId: "openfda-labeling",
+      evidence: "theoretical",
+      reviewDate: "2026-07-04",
+      doseTimingSeparation: false,
+      specialistReview: false
     },
 
     /* ==================== DUPLICATE-CLASS RULES ==================== */
@@ -457,12 +504,15 @@
     {
       id: "combo-qt-multi",
       type: "combination",
+      // Three+ QT-prolonging drugs together — the two-drug case is already covered by
+      // the dup-qt duplicate-class rule, so this fires only for the higher-risk stack.
       subjects: [
+        { kind: "class", value: "qt_prolonging" },
         { kind: "class", value: "qt_prolonging" },
         { kind: "class", value: "qt_prolonging" }
       ],
       severity: "major",
-      mechanism: "Two or more QT-prolonging drugs additively delay ventricular repolarisation; risk rises further with hypokalaemia, hypomagnesaemia and bradycardia.",
+      mechanism: "Three or more QT-prolonging drugs additively delay ventricular repolarisation; risk rises further with hypokalaemia, hypomagnesaemia and bradycardia.",
       effect: "Marked QTc prolongation with risk of torsades de pointes and sudden cardiac death.",
       action: "Reduce the number of QT-prolonging drugs; correct electrolytes and avoid combining known high-risk agents.",
       monitoring: "Baseline and follow-up ECG (QTc); maintain potassium >4.0 mmol/L and magnesium in range.",

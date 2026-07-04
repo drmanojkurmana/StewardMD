@@ -40,8 +40,14 @@
   }
   function isKnownGeneric(n) {
     n = (n || "").toLowerCase();
-    // MEDDRUGS is a facade object, not an array — the actual drug array lives at MEDDRUGS._list.
-    try { return ((window.MEDDRUGS && window.MEDDRUGS._list) || []).some(function (d) { return d.generic.toLowerCase() === n; }); } catch (_) { return false; }
+    // Known = the non-antibiotic formulary (MEDDRUGS._list) UNION every generic the
+    // interaction engine understands (INTERACTION_RULES.drugClasses). The union matters:
+    // antibiotics such as levofloxacin live only in the ruleset, so without this they'd
+    // stay unresolved and be silently skipped by the interaction checker.
+    try { if (((window.MEDDRUGS && window.MEDDRUGS._list) || []).some(function (d) { return d.generic.toLowerCase() === n; })) return true; } catch (_) {}
+    try { var dc = window.INTERACTION_RULES && window.INTERACTION_RULES.drugClasses;
+      if (dc && Object.prototype.hasOwnProperty.call(dc, n)) return true; } catch (_) {}
+    return false;
   }
   function resolveGeneric(out) {
     var n = out.name;
@@ -284,53 +290,97 @@
 
   function clearUndoTimer() { if (_undoTimer) { clearTimeout(_undoTimer); _undoTimer = null; } }
 
+  /* ---- small helpers for the rebuilt workspace ---- */
+  function cap(s){ s=String(s||""); return s.charAt(0).toUpperCase()+s.slice(1); }
+  function ptInitials(name){ name=String(name||"").trim(); if(!name) return "PT";
+    return name.split(/\s+/).map(function(p){return p.charAt(0).toUpperCase();}).join("").slice(0,3) || "PT"; }
+  function escHtml(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+  // Escape then wrap the first case-insensitive match of q in <mark>. Data is our own
+  // curated formulary, but we escape anyway so nothing can inject markup.
+  function highlight(text, q){
+    text=String(text||""); var e=escHtml(text);
+    q=String(q||"").trim(); if(!q) return e;
+    var i=text.toLowerCase().indexOf(q.toLowerCase());
+    if(i<0) return e;
+    return escHtml(text.slice(0,i))+"<mark>"+escHtml(text.slice(i,i+q.length))+"</mark>"+escHtml(text.slice(i+q.length));
+  }
+  function hasGeneric(g){ g=(g||"").toLowerCase().trim(); if(!g) return false;
+    return getList().some(function(m){ return (m.generic||"").toLowerCase()===g; }); }
+  function toast(msg){ if(!_root) return; var t=el("div",{cls:"ml-toast",text:msg}); _root.appendChild(t);
+    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 2600); }
+  function getRecents(){ try{ return JSON.parse(sessionStorage.getItem("smd_ml_recents")||"[]")||[]; }catch(_){ return []; } }
+  function pushRecent(gen){ gen=String(gen||"").trim(); if(!gen) return;
+    try{ var r=getRecents().filter(function(x){return x.toLowerCase()!==gen.toLowerCase();}); r.unshift(gen);
+      sessionStorage.setItem("smd_ml_recents", JSON.stringify(r.slice(0,8))); }catch(_){} }
+  var COMMON_MEDS = ["Pantoprazole","Metformin","Atorvastatin","Aspirin","Amlodipine",
+    "Furosemide","Metoprolol","Clopidogrel","Ondansetron","Enoxaparin"];
+  // Build a search-row object for a known generic (via the on-device formulary).
+  function genToRow(gen){
+    var d=(window.MEDDRUGS&&window.MEDDRUGS.findByName)?window.MEDDRUGS.findByName(gen):null;
+    if(d){ var rows=(window.MEDDRUGS.searchIndex?window.MEDDRUGS.searchIndex(d.generic.toLowerCase()):[]);
+      for(var i=0;i<rows.length;i++) if(rows[i].generic===d.generic) return rows[i];
+      return { generic:d.generic, cls:d.cls, brands:(d.brands||[]).slice(0,4), form:"" }; }
+    return { generic:gen, cls:"", brands:[], form:"" };
+  }
+  // Central add path for interactive single-add: prevents exact-generic duplicates
+  // (a warning, per spec) and records a recent. Bulk imports (paste/scan/ward) use add() directly.
+  function uiAdd(entry, source){
+    var g=(entry&&entry.generic||"").toLowerCase().trim();
+    if(g && hasGeneric(g)){ toast(cap(g)+" is already in the list"); return false; }
+    add(entry, source);
+    if(entry && entry.generic) pushRecent(entry.generic);
+    return true;
+  }
+
+  function fieldSummary(med){ return fieldLine(med); }
+
   function renderMedCard(med) {
-    var card = el("div", { cls: "ml-card", attrs: { "data-ml-card": med.id } });
+    // compact ROW (not a large card): title · dose/route/freq · source badge · edit/remove
+    var row = el("div", { cls: "ml-row", attrs: { "data-ml-card": med.id } });
 
     if (_undoingId === med.id) {
-      card.classList.add("ml-card-removed");
-      var row = el("div", { cls: "ml-undo-row" });
-      row.appendChild(el("span", { text: (med.generic || med.raw || "Medicine") + " removed" }));
-      var undoBtn = el("button", { cls: "ml-undo-btn", text: "Undo", attrs: { "data-ml-undo": med.id } });
-      undoBtn.addEventListener("click", function () {
-        clearUndoTimer(); _undoingId = null; undoRemove(); render();
-      });
-      row.appendChild(undoBtn);
-      card.appendChild(row);
-      return card;
+      row.className = "ml-card-removed";
+      var urow = el("div", { cls: "ml-undo-row" });
+      urow.appendChild(el("span", { text: (med.generic || med.raw || "Medicine") + " removed" }));
+      var undoBtn = el("button", { cls: "ml-undo-btn", text: "Undo", attrs: { "data-ml-undo": med.id, type: "button" } });
+      undoBtn.addEventListener("click", function () { clearUndoTimer(); _undoingId = null; undoRemove(); render(); });
+      urow.appendChild(undoBtn);
+      row.appendChild(urow);
+      return row;
     }
 
-    var main = el("div", { cls: "ml-card-main" });
-    var title = el("div", { cls: "ml-card-title", text: med.generic || med.raw || "Unnamed" });
+    var main = el("div", { cls: "ml-row-main" });
+    var title = el("div", { cls: "ml-row-title" + (med.generic ? "" : " ml-row-unmapped"),
+      text: med.generic ? cap(med.generic) : (med.raw || "Needs review") });
     main.appendChild(title);
-    if (med.brand) main.appendChild(el("div", { cls: "ml-card-brand", text: med.brand }));
-    var line = fieldLine(med);
-    if (line) main.appendChild(el("div", { cls: "ml-card-line", text: line }));
-    var meta = el("div", { cls: "ml-card-meta" });
-    meta.appendChild(el("span", { cls: "ml-source-badge", text: (med.source || "manual") }));
-    if (med.source === "scan" && med.confidence) meta.appendChild(el("span", { cls: "ml-conf-badge", text: med.confidence }));
-    main.appendChild(meta);
-    card.appendChild(main);
+    var line = fieldSummary(med);
+    if (line) main.appendChild(el("div", { cls: "ml-row-line", text: line }));
+    var badges = el("div", { cls: "ml-row-badges" });
+    var src = med.source || "manual";
+    var srcLabel = { index: "Drug Index", ghis: "Ward Sync", wardsync: "Ward Sync", scan: "Scan", paste: "Manual", manual: "Manual" }[src] || cap(src);
+    badges.appendChild(el("span", { cls: "ml-source-badge ml-source-" + src, text: srcLabel }));
+    if (med.source === "scan" && med.confidence) badges.appendChild(el("span", { cls: "ml-conf-badge ml-conf-" + med.confidence, text: med.confidence }));
+    if (!med.generic) badges.appendChild(el("span", { cls: "ml-conf-badge ml-conf-low", text: "unmapped" }));
+    main.appendChild(badges);
+    row.appendChild(main);
 
-    var actions = el("div", { cls: "ml-card-actions" });
-    var editBtn = el("button", { cls: "ml-icon-btn", text: "Edit", attrs: { "data-ml-edit": med.id } });
+    var acts = el("div", { cls: "ml-row-acts" });
+    var editBtn = el("button", { cls: "ml-icon-btn", text: "✎", attrs: { "data-ml-edit": med.id, "aria-label": "Edit", title: "Edit", type: "button" } });
     editBtn.addEventListener("click", function () {
-      // Finalize any pending inline-undo first, so editing this med can't
-      // orphan a different med whose Undo row is still showing.
       clearUndoTimer(); _undoingId = null;
-      _openAdd = "manual"; _manualState.value = med.raw || med.generic || "";
+      _manualState.value = med.raw || med.generic || "";
       _manualState.parsed = parseEntry(_manualState.value);
-      remove(med.id); render();
+      remove(med.id); _openAdd = "manual"; render();
     });
-    var removeBtn = el("button", { cls: "ml-icon-btn ml-remove-btn", text: "Remove", attrs: { "data-ml-remove": med.id } });
+    var removeBtn = el("button", { cls: "ml-icon-btn ml-remove-btn", text: "🗑", attrs: { "data-ml-remove": med.id, "aria-label": "Remove", title: "Remove", type: "button" } });
     removeBtn.addEventListener("click", function () {
       remove(med.id); _undoingId = med.id; render();
       clearUndoTimer();
       _undoTimer = setTimeout(function () { if (_undoingId === med.id) _undoingId = null; _undoTimer = null; render(); }, 5000);
     });
-    actions.appendChild(editBtn); actions.appendChild(removeBtn);
-    card.appendChild(actions);
-    return card;
+    acts.appendChild(editBtn); acts.appendChild(removeBtn);
+    row.appendChild(acts);
+    return row;
   }
 
   function renderCandidateChips(container, candidates, onPick) {
@@ -338,7 +388,7 @@
     wrap.appendChild(el("div", { cls: "ml-dym-label", text: "Did you mean?" }));
     var chips = el("div", { cls: "ml-dym-chips" });
     candidates.forEach(function (c) {
-      var chip = el("button", { cls: "ml-chip", text: c.generic });
+      var chip = el("button", { cls: "ml-chip", text: cap(c.generic), attrs: { type: "button" } });
       chip.addEventListener("click", function () { onPick(c); });
       chips.appendChild(chip);
     });
@@ -346,158 +396,336 @@
     container.appendChild(wrap);
   }
 
-  function renderAddOptions(container) {
-    var row = el("div", { cls: "ml-add-row" });
-    var btnIndex = el("button", { cls: "ml-add-btn", text: "Search Drug Index", attrs: { "data-ml-open": "index" } });
-    var btnManual = el("button", { cls: "ml-add-btn", text: "Type manually", attrs: { "data-ml-open": "manual" } });
-    var btnPaste = el("button", { cls: "ml-add-btn", text: "Paste list", attrs: { "data-ml-open": "paste" } });
-    var btnScan = el("button", { cls: "ml-add-btn", text: "Scan prescription / case sheet", attrs: { "data-ml-scan": "1" } });
-    // "Fetch from Ward Sync" — enabled only when a GHIS/Ward-Sync patient is selected
-    // (window.GHISMEDS.canFetch()). Disabled otherwise with a hint; never "Coming soon".
-    var wardReady = false;
-    try { wardReady = !!(window.GHISMEDS && window.GHISMEDS.canFetch && window.GHISMEDS.canFetch()); } catch (e) {}
-    var btnWard = el("button", { cls: "ml-add-btn" + (wardReady ? "" : " ml-add-btn-disabled"),
-      text: "Fetch from Ward Sync", attrs: { "data-ml-wardsync": "1" } });
-    if (!wardReady) btnWard.disabled = true;
-    [btnIndex, btnManual, btnPaste].forEach(function (b) {
-      b.addEventListener("click", function () {
-        var which = b.getAttribute("data-ml-open");
-        _openAdd = (_openAdd === which) ? null : which;
-        render();
-      });
-    });
-    btnScan.addEventListener("click", function () { startScan(); });
-    btnWard.addEventListener("click", function () {
-      if (btnWard.disabled) return;
+  // Empty-state action grid: Search Drug Index / Type · Paste / Scan / Ward Sync.
+  // No raw input is shown until an action is tapped.
+  function renderActionGrid(container) {
+    var grid = el("div", { cls: "ml-action-grid" });
+    function card(cls, ic, t, d, attrs, onClick) {
+      var c = el("button", { cls: "ml-action-card " + cls, attrs: Object.assign({ type: "button" }, attrs || {}) });
+      c.appendChild(el("span", { cls: "ml-action-ic", text: ic }));
+      c.appendChild(el("span", { cls: "ml-action-t", text: t }));
+      c.appendChild(el("span", { cls: "ml-action-d", text: d }));
+      c.addEventListener("click", onClick);
+      grid.appendChild(c);
+      return c;
+    }
+    card("ml-action-primary", "🔍", "Search Drug Index", "Find generic or brand medicines",
+      { "data-ml-open": "index" }, function () { _openAdd = "index"; render(); });
+    card("", "✍️", "Type / Paste list", "e.g. metformin 500 mg BD",
+      { "data-ml-open": "paste" }, function () { _openAdd = "paste"; render(); });
+    card("", "📷", "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
+      { "data-ml-scan": "1" }, function () { startScan(); });
+    card("", "🏥", "Ward Sync", "Import current medication chart",
+      { "data-ml-wardsync-card": "1" }, function () { wardPrimaryAction(); });
+    container.appendChild(grid);
+
+    // quick single-medicine typing entry (keeps a data-ml-open='manual' hook)
+    var typeLink = el("button", { cls: "ml-mini-btn", text: "＋ Type one medicine",
+      attrs: { "data-ml-open": "manual", type: "button" }, });
+    typeLink.style.marginTop = "10px";
+    typeLink.addEventListener("click", function () { _openAdd = "manual"; render(); });
+    container.appendChild(typeLink);
+
+    renderWardCard(container);
+  }
+
+  function wardReadyState() {
+    var ready = false, pt = null;
+    try { ready = !!(window.GHISMEDS && window.GHISMEDS.canFetch && window.GHISMEDS.canFetch()); } catch (e) {}
+    try { pt = window.GHISMEDS && window.GHISMEDS.getSelectedPatient && window.GHISMEDS.getSelectedPatient(); } catch (e) {}
+    return { ready: ready && !!pt, pt: pt };
+  }
+  function wardPrimaryAction() {
+    var w = wardReadyState();
+    if (w.ready) {
       if (window.GHISMEDS && window.GHISMEDS.fetchAndReview) {
-        window.GHISMEDS.fetchAndReview(_root).then(function (r) {
-          if (r && !r.ok) wardHint(r.message || "Could not fetch medication history.");
+        window.GHISMEDS.fetchAndReview(_root).then(function (r) { if (r && !r.ok) toast(r.message || "Could not fetch medication history."); });
+      }
+    } else {
+      try { if (window.openGHIS) { window.openGHIS(); return; } } catch (e) {}
+      toast("Open Ward Sync from the menu to pick a patient.");
+    }
+  }
+  function renderWardCard(container) {
+    var w = wardReadyState();
+    var card = el("div", { cls: "ml-ward-card" });
+    card.appendChild(el("div", { cls: "ml-ward-ic", text: "🏥" }));
+    var body = el("div", { cls: "ml-ward-body" });
+    if (w.ready) {
+      body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync — " + ptInitials(w.pt.name) }));
+      body.appendChild(el("div", { cls: "ml-ward-d", text: "Last sync: not fetched" }));
+    } else {
+      body.appendChild(el("div", { cls: "ml-ward-t", text: "Ward Sync" }));
+      body.appendChild(el("div", { cls: "ml-ward-d", text: "Select a patient to import current medicines" }));
+    }
+    card.appendChild(body);
+    var btn = el("button", { cls: "ml-ward-btn", attrs: { "data-ml-wardsync": "1", type: "button" },
+      text: w.ready ? "Fetch medication history" : "Select patient" });
+    btn.addEventListener("click", wardPrimaryAction);
+    card.appendChild(btn);
+    container.appendChild(card);
+  }
+
+  /* ---- bottom-sheet primitive (rendered inside _root so it sits over the workspace) ---- */
+  function buildSheet(opts) {
+    opts = opts || {};
+    var scrim = el("div", { cls: "ml-scrim" });
+    var sheet = el("div", { cls: "ml-sheet" });
+    var wrap = el("div", { cls: "ml-sheet-wrap" });
+    wrap.appendChild(el("div", { cls: "ml-sheet-grip" }));
+    var head = el("div", { cls: "ml-sheet-head" });
+    var titles = el("div");
+    titles.appendChild(el("div", { cls: "ml-sheet-title", text: opts.title || "" }));
+    if (opts.sub) titles.appendChild(el("div", { cls: "ml-sheet-sub", text: opts.sub }));
+    head.appendChild(titles);
+    var closeBtn = el("button", { cls: "ml-sheet-close", text: "✕", attrs: { "aria-label": "Close", type: "button" } });
+    head.appendChild(closeBtn);
+    wrap.appendChild(head);
+    var body = el("div", { cls: "ml-sheet-body" });
+    wrap.appendChild(body);
+    var foot = el("div", { cls: "ml-sheet-foot" });
+    sheet.appendChild(wrap);
+    function close() { _openAdd = null; _indexState = { value: "", results: [], reqSeq: _indexState.reqSeq }; render(); }
+    closeBtn.addEventListener("click", close);
+    scrim.addEventListener("click", close);
+    return { scrim: scrim, sheet: sheet, wrap: wrap, head: head, body: body, foot: foot, close: close };
+  }
+  function mountSheet(s) { if (!_root) return; _root.appendChild(s.scrim); _root.appendChild(s.sheet); }
+
+  // Append the open add-sheet (index / manual / paste) to _root.
+  function mountOpenSheet() {
+    if (_openAdd === "index") mountSheet(buildIndexSheet());
+    else if (_openAdd === "manual") mountSheet(buildManualSheet());
+    else if (_openAdd === "paste") mountSheet(buildPasteSheet());
+  }
+
+  function resultRow(r, q) {
+    var row = el("div", { cls: "ml-index-result" });
+    var info = el("button", { cls: "ml-index-info", attrs: { type: "button" } });
+    var gen = el("div", { cls: "ml-index-generic" }); gen.innerHTML = highlight(cap(r.generic), q); info.appendChild(gen);
+    var meta = [r.cls, r.form].filter(function (x) { return x && x !== "—"; }).join(" · ");
+    if (meta) info.appendChild(el("div", { cls: "ml-index-meta", text: meta }));
+    if (r.brands && r.brands.length) {
+      var b = el("div", { cls: "ml-index-brands" });
+      b.innerHTML = "Brands: " + r.brands.slice(0, 4).map(function (x) { return highlight(cap(x), q); }).join(", ");
+      info.appendChild(b);
+    }
+    info.addEventListener("click", function () { openDoseSheet(r); });
+    row.appendChild(info);
+    var addBtn = el("button", { cls: "ml-index-add", text: "＋ Add", attrs: { type: "button", "data-ml-index-result": "1" } });
+    addBtn.addEventListener("click", function () { addFromResult(r); });
+    row.appendChild(addBtn);
+    return row;
+  }
+  function addFromResult(r) {
+    var parsed = parseEntry(r.generic || r.brand || "");
+    if (r.generic) { parsed.generic = String(r.generic).toLowerCase(); parsed.confidence = "high"; }
+    if (r.brand) parsed.brand = r.brand;
+    if (uiAdd(parsed, "index")) toast("Added " + cap(r.generic || r.brand || "medicine"));
+  }
+  // Merge worker brand hits into the local list, deduped by resolved generic.
+  function mergeWorker(local, workerRows) {
+    var out = local.slice();
+    var seen = {}; out.forEach(function (r) { seen[(r.generic || "").toLowerCase()] = 1; });
+    (workerRows || []).forEach(function (w) {
+      var gen = (w.generic || "").toLowerCase();
+      if (!gen || seen[gen]) return;
+      seen[gen] = 1;
+      out.push({ generic: gen, cls: "", brands: w.brand ? [w.brand] : [], form: w.form || "" });
+    });
+    return out;
+  }
+
+  function buildIndexSheet() {
+    var s = buildSheet({ title: "Search Drug Index", sub: "On-device formulary — instant, works offline" });
+    var input = el("input", { cls: "ml-search-input", type: "text",
+      placeholder: "Search generic, brand, or class…", attrs: { "data-ml-index-input": "1", autocomplete: "off", autocapitalize: "none", spellcheck: "false" } });
+    input.value = _indexState.value || "";
+    s.body.appendChild(input);
+    var out = el("div"); s.body.appendChild(out);
+
+    function drawState(node, kind) {
+      var box = el("div", { cls: "ml-state" + (kind === "offline" ? " ml-state-offline" : "") });
+      if (kind === "loading") { box.innerHTML = '<span class="ml-spin">◐</span>'; box.appendChild(el("span", { text: " Searching…" })); }
+      else if (kind === "offline") { box.appendChild(el("span", { text: "Search unavailable — showing offline formulary." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Type the medicine name manually if it isn't listed." })); }
+      else { box.appendChild(el("span", { text: "No medicines found." })); box.appendChild(el("span", { cls: "ml-state-sub", text: "Check spelling, or add it via Type / Paste." })); }
+      node.appendChild(box);
+    }
+    function drawRows(rows, q, offline) {
+      out.textContent = "";
+      if (!q) {
+        var rec = getRecents();
+        if (rec.length) { out.appendChild(el("div", { cls: "ml-search-label", text: "Recent" }));
+          var rw = el("div", { cls: "ml-index-results" }); rec.forEach(function (g) { rw.appendChild(resultRow(genToRow(g), "")); }); out.appendChild(rw); }
+        out.appendChild(el("div", { cls: "ml-search-label", text: "Common medicines" }));
+        var cw = el("div", { cls: "ml-index-results" }); COMMON_MEDS.forEach(function (g) { cw.appendChild(resultRow(genToRow(g), "")); }); out.appendChild(cw);
+        return;
+      }
+      if (!rows.length) {
+        drawState(out, offline ? "offline" : "empty");
+        // typo suggestion via the parser's candidate resolver
+        var cand = parseEntry(q).candidates || [];
+        if (cand.length) renderCandidateChips(out, cand.slice(0, 4), function (c) { addFromResult({ generic: c.generic, brands: [] }); });
+        return;
+      }
+      var wrap = el("div", { cls: "ml-index-results" });
+      rows.forEach(function (r) { wrap.appendChild(resultRow(r, q)); });
+      out.appendChild(wrap);
+      if (offline) { var note = el("div", { cls: "ml-state ml-state-offline" }); note.appendChild(el("span", { cls: "ml-state-sub", text: "Online brand search unavailable — showing on-device matches." })); out.appendChild(note); }
+    }
+    function run() {
+      var q = input.value.trim();
+      _indexState.value = input.value;
+      if (!q) { drawRows([], ""); return; }
+      var local = (window.MEDDRUGS && window.MEDDRUGS.searchIndex) ? window.MEDDRUGS.searchIndex(q) : [];
+      drawRows(local, q, false);                       // instant local
+      var seq = ++_indexState.reqSeq;
+      var p; try { p = window.MEDLIST.brandSearch(q); } catch (e) { p = Promise.reject(e); }
+      Promise.resolve(p).then(function (res) {
+        if (seq !== _indexState.reqSeq) return;
+        drawRows(mergeWorker(local, res || []), q, false);
+      }).catch(function () {
+        if (seq !== _indexState.reqSeq) return;
+        drawRows(local, q, true);                       // honest offline fallback
+      });
+    }
+    input.addEventListener("input", run);
+    run();
+    setTimeout(function () { try { input.focus(); } catch (_) {} }, 60);
+    return s;
+  }
+
+  // Compact dose sheet — refine formulation/strength/route/frequency before adding.
+  // No field is required (spec): tapping Add uses whatever is set.
+  var ROUTE_OPTS = ["PO", "IV", "IM", "SC", "SL", "Neb", "PR", "Topical"];
+  var FREQ_OPTS = ["OD", "BD", "TDS", "QID", "HS", "STAT", "PRN"];
+  function openDoseSheet(r) {
+    if (!_root) return;
+    var seed = parseEntry(r.generic || r.brand || "");
+    if (r.generic) { seed.generic = String(r.generic).toLowerCase(); seed.confidence = "high"; }
+    if (r.brand) seed.brand = r.brand;
+    var draft = { strength: seed.strength || "", unit: seed.unit || "mg", route: seed.route || "", freq: seed.freq || "", indication: "" };
+    var s = buildSheet({ title: cap(r.generic || r.brand || "Medicine"), sub: [r.cls, (r.brands || []).slice(0, 3).map(cap).join(", ")].filter(Boolean).join(" · ") });
+    var grid = el("div", { cls: "ml-dose-grid" });
+    function field(label, node, full) { var f = el("div", { cls: "ml-field" + (full ? " ml-field-full" : "") }); f.appendChild(el("div", { cls: "ml-field-label", text: label })); f.appendChild(node); return f; }
+    var strengthInp = el("input", { cls: "ml-input", type: "text", placeholder: "e.g. 40", attrs: { inputmode: "decimal" } });
+    strengthInp.value = draft.strength; strengthInp.addEventListener("input", function () { draft.strength = strengthInp.value; });
+    grid.appendChild(field("Strength", strengthInp));
+    var unitInp = el("input", { cls: "ml-input", type: "text", placeholder: "mg / g / mL" });
+    unitInp.value = draft.unit; unitInp.addEventListener("input", function () { draft.unit = unitInp.value; });
+    grid.appendChild(field("Unit", unitInp));
+    var routeRow = el("div", { cls: "ml-chip-row" });
+    ROUTE_OPTS.forEach(function (rt) { var c = el("button", { cls: "ml-chip" + (draft.route === rt ? " on" : ""), text: rt, attrs: { type: "button" } });
+      c.addEventListener("click", function () { draft.route = draft.route === rt ? "" : rt; routeRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.route); }); }); routeRow.appendChild(c); });
+    grid.appendChild(field("Route", routeRow, true));
+    var freqRow = el("div", { cls: "ml-chip-row" });
+    FREQ_OPTS.forEach(function (fq) { var c = el("button", { cls: "ml-chip" + (draft.freq === fq ? " on" : ""), text: fq, attrs: { type: "button" } });
+      c.addEventListener("click", function () { draft.freq = draft.freq === fq ? "" : fq; freqRow.querySelectorAll(".ml-chip").forEach(function (x) { x.classList.toggle("on", x.textContent === draft.freq); }); }); freqRow.appendChild(c); });
+    grid.appendChild(field("Frequency", freqRow, true));
+    var indInp = el("input", { cls: "ml-input", type: "text", placeholder: "Optional — why it's prescribed" });
+    indInp.addEventListener("input", function () { draft.indication = indInp.value; });
+    grid.appendChild(field("Indication (optional)", indInp, true));
+    s.body.appendChild(grid);
+    var addBtn = el("button", { cls: "ml-check-btn", text: "Add medicine", attrs: { type: "button" } });
+    addBtn.addEventListener("click", function () {
+      var entry = Object.assign({}, seed);
+      if (draft.strength !== "") { var n = parseFloat(draft.strength); if (!isNaN(n)) { entry.strength = n; entry.unit = draft.unit || entry.unit; } }
+      if (draft.route) entry.route = draft.route;
+      if (draft.freq) entry.freq = draft.freq;
+      if (draft.indication) entry.indication = draft.indication;
+      if (uiAdd(entry, "index")) { toast("Added " + cap(r.generic || r.brand || "medicine")); s.scrim.remove(); s.sheet.remove(); }
+    });
+    s.foot.appendChild(el("button", { cls: "ml-sheet-cancel", text: "Cancel", attrs: { type: "button" } })).addEventListener("click", function () { s.scrim.remove(); s.sheet.remove(); });
+    s.foot.appendChild(addBtn);
+    s.wrap.appendChild(s.foot);
+    // dose sheet layers over the search sheet; closing it just removes it (keeps search open)
+    s.close = function () { s.scrim.remove(); s.sheet.remove(); };
+    s.scrim.addEventListener("click", s.close);
+    mountSheet(s);
+  }
+
+  function buildManualSheet() {
+    var s = buildSheet({ title: "Type a medicine", sub: "One medicine — we parse dose, route and frequency" });
+    var input = el("input", { cls: "ml-input", type: "text", placeholder: "e.g. metformin 500 mg BD",
+      attrs: { "data-ml-manual-input": "1", autocomplete: "off" } });
+    input.value = _manualState.value || "";
+    s.body.appendChild(input);
+    var preview = el("div"); s.body.appendChild(preview);
+    function drawPreview() {
+      preview.textContent = "";
+      var parsed = _manualState.parsed;
+      if (!parsed) return;
+      var pv = el("div", { cls: "ml-paste-item" });
+      pv.appendChild(el("span", { text: parsed.generic ? cap(parsed.generic) : (parsed.raw || "…") }));
+      var line = fieldSummary(parsed); if (line) { var sub = el("span", { cls: "ml-paste-item-sub", text: line }); pv.appendChild(sub); }
+      preview.appendChild(pv);
+      if (!parsed.generic && parsed.candidates && parsed.candidates.length) {
+        renderCandidateChips(preview, parsed.candidates, function (c) {
+          var p = Object.assign({}, parsed, { generic: c.generic, confidence: "high" });
+          if (uiAdd(p, "manual")) s.close();
         });
       }
-    });
-    row.appendChild(btnIndex); row.appendChild(btnManual); row.appendChild(btnPaste);
-    row.appendChild(btnScan); row.appendChild(btnWard);
-    container.appendChild(row);
-    // Hint when the Ward-Sync fetch is unavailable (no patient selected).
-    if (!wardReady) {
-      container.appendChild(el("div", { cls: "ml-ward-hint", text: "Select a Ward Sync patient first." }));
     }
-
-    if (_openAdd === "index") container.appendChild(renderIndexPanel());
-    else if (_openAdd === "manual") container.appendChild(renderManualPanel());
-    else if (_openAdd === "paste") container.appendChild(renderPastePanel());
-  }
-
-  function renderIndexPanel() {
-    var panel = el("div", { cls: "ml-panel" });
-    var input = el("input", { cls: "ml-input", type: "text", placeholder: "Search brand or generic…",
-      attrs: { "data-ml-index-input": "1" } });
-    input.value = _indexState.value;
-    input.addEventListener("input", function () {
-      _indexState.value = input.value;
-      var q = input.value.trim();
-      var seq = ++_indexState.reqSeq;
-      if (!q) { _indexState.results = []; render(); return; }
-      window.MEDLIST.brandSearch(q).then(function (res) {
-        if (seq !== _indexState.reqSeq) return; // stale response
-        _indexState.results = res || [];
-        render();
-      });
-    });
-    panel.appendChild(input);
-    var results = el("div", { cls: "ml-index-results" });
-    _indexState.results.forEach(function (r) {
-      var item = el("button", { cls: "ml-index-result", attrs: { "data-ml-index-result": "1" } });
-      item.appendChild(el("span", { cls: "ml-index-result-brand", text: r.brand || "" }));
-      if (r.generic) item.appendChild(el("span", { cls: "ml-index-result-generic", text: r.generic }));
-      item.addEventListener("click", function () {
-        var parsed = parseEntry(r.generic || r.brand || "");
-        parsed.brand = r.brand || null;
-        if (r.form) parsed.form = r.form;
-        if (r.generic) { parsed.generic = r.generic; parsed.confidence = "high"; }
-        add(parsed, "index");
-        _indexState = { value: "", results: [], reqSeq: _indexState.reqSeq };
-        _openAdd = null;
-        render();
-      });
-      results.appendChild(item);
-    });
-    panel.appendChild(results);
-    return panel;
-  }
-
-  function renderManualPanel() {
-    var panel = el("div", { cls: "ml-panel" });
-    var input = el("input", { cls: "ml-input", type: "text", placeholder: "e.g. metformin 500 bd",
-      attrs: { "data-ml-manual-input": "1" } });
-    input.value = _manualState.value;
-    input.addEventListener("input", function () {
-      _manualState.value = input.value;
-      _manualState.parsed = input.value.trim() ? parseEntry(input.value) : null;
-      render();
-    });
-    panel.appendChild(input);
-
-    var addBtn = el("button", { cls: "ml-panel-add-btn", text: "Add", attrs: { "data-ml-manual-add": "1" } });
+    input.addEventListener("input", function () { _manualState.value = input.value; _manualState.parsed = input.value.trim() ? parseEntry(input.value) : null; drawPreview(); });
+    drawPreview();
+    var addBtn = el("button", { cls: "ml-check-btn", text: "Add medicine", attrs: { "data-ml-manual-add": "1", type: "button" } });
     addBtn.addEventListener("click", function () {
-      var v = _manualState.value.trim();
-      if (!v) return;
-      add(parseEntry(v), "manual");
-      _manualState = { value: "", parsed: null };
-      _openAdd = null;
-      render();
+      var v = _manualState.value.trim(); if (!v) return;
+      if (uiAdd(parseEntry(v), "manual")) { _manualState = { value: "", parsed: null }; s.close(); }
     });
-    panel.appendChild(addBtn);
-
-    var parsed = _manualState.parsed;
-    if (parsed && parsed.confidence !== "high" && parsed.candidates && parsed.candidates.length) {
-      renderCandidateChips(panel, parsed.candidates, function (c) {
-        var p = Object.assign({}, parsed, { generic: c.generic, confidence: "high" });
-        add(p, "manual");
-        _manualState = { value: "", parsed: null };
-        _openAdd = null;
-        render();
-      });
-    }
-    return panel;
+    s.foot.appendChild(el("button", { cls: "ml-sheet-cancel", text: "Cancel", attrs: { type: "button" } })).addEventListener("click", s.close);
+    s.foot.appendChild(addBtn);
+    s.wrap.appendChild(s.foot);
+    setTimeout(function () { try { input.focus(); } catch (_) {} }, 60);
+    return s;
   }
 
-  function renderPastePanel() {
-    var panel = el("div", { cls: "ml-panel" });
-    var textarea = el("textarea", { cls: "ml-textarea", placeholder: "Paste a medication list, one per line…",
-      attrs: { "data-ml-paste-input": "1" } });
-    textarea.value = _pasteState.value;
-    textarea.addEventListener("input", function () {
-      _pasteState.value = textarea.value;
-      var parsedList = _pasteState.value.trim() ? parsePasted(_pasteState.value) : [];
-      _pasteState.rows = parsedList.map(function (entry) { return { entry: entry, include: true }; });
-      render();
-    });
-    panel.appendChild(textarea);
-
-    if (_pasteState.rows.length) {
+  function buildPasteSheet() {
+    var s = buildSheet({ title: "Add medicines", sub: "Paste or type one medicine per line" });
+    var ta = el("textarea", { cls: "ml-textarea", attrs: { "data-ml-paste-input": "1", spellcheck: "false" },
+      placeholder: "metformin 500 mg BD\ntelmisartan 40 mg OD\ninj ceftriaxone 1 g IV BD" });
+    ta.value = _pasteState.value || "";
+    s.body.appendChild(ta);
+    var reviewWrap = el("div"); s.body.appendChild(reviewWrap);
+    function drawReview() {
+      reviewWrap.textContent = "";
+      if (!_pasteState.rows.length) return;
+      reviewWrap.appendChild(el("div", { cls: "ml-search-label", text: _pasteState.rows.length + " detected" }));
       var list = el("div", { cls: "ml-paste-list" });
       _pasteState.rows.forEach(function (row, idx) {
         var item = el("label", { cls: "ml-paste-item", attrs: { "data-ml-paste-item": String(idx) } });
-        var cb = el("input", { type: "checkbox" });
-        cb.checked = row.include;
+        var cb = el("input", { type: "checkbox" }); cb.checked = row.include;
         cb.addEventListener("change", function () { row.include = cb.checked; });
         item.appendChild(cb);
-        item.appendChild(el("span", { text: row.entry.generic || row.entry.raw || "Unnamed" }));
+        var txt = el("div");
+        txt.appendChild(el("span", { text: row.entry.generic ? cap(row.entry.generic) : (row.entry.raw || "Unnamed") }));
+        var line = fieldSummary(row.entry); if (line) txt.appendChild(el("div", { cls: "ml-paste-item-sub", text: line }));
+        if (!row.entry.generic) txt.appendChild(el("div", { cls: "ml-paste-item-sub", text: "needs review" }));
+        item.appendChild(txt);
         list.appendChild(item);
       });
-      panel.appendChild(list);
-
-      var addBtn = el("button", { cls: "ml-panel-add-btn", text: "Add selected", attrs: { "data-ml-paste-add": "1" } });
-      addBtn.addEventListener("click", function () {
-        _pasteState.rows.forEach(function (row) { if (row.include) add(row.entry, "paste"); });
-        _pasteState = { value: "", rows: [] };
-        _openAdd = null;
-        render();
-      });
-      panel.appendChild(addBtn);
+      reviewWrap.appendChild(list);
     }
-    return panel;
+    ta.addEventListener("input", function () {
+      _pasteState.value = ta.value;
+      var parsedList = _pasteState.value.trim() ? parsePasted(_pasteState.value) : [];
+      _pasteState.rows = parsedList.map(function (entry) { return { entry: entry, include: true }; });
+      drawReview();
+    });
+    drawReview();
+    var addBtn = el("button", { cls: "ml-check-btn", text: "Add medicines", attrs: { "data-ml-paste-add": "1", type: "button" } });
+    addBtn.addEventListener("click", function () {
+      var added = 0;
+      _pasteState.rows.forEach(function (row) { if (row.include) { add(row.entry, "paste"); if (row.entry.generic) pushRecent(row.entry.generic); added++; } });
+      _pasteState = { value: "", rows: [] };
+      s.close();
+      if (added) toast("Added " + added + " medicine" + (added > 1 ? "s" : ""));
+    });
+    s.foot.appendChild(el("button", { cls: "ml-sheet-cancel", text: "Cancel", attrs: { type: "button" } })).addEventListener("click", s.close);
+    s.foot.appendChild(addBtn);
+    s.wrap.appendChild(s.foot);
+    setTimeout(function () { try { ta.focus(); } catch (_) {} }, 60);
+    return s;
   }
 
   // --- Scan pipeline: file/camera/PDF → compress → scanExtract → review -----
@@ -683,6 +911,20 @@
     return getList().some(function (m) { return m.generic && typeof m.generic === "string" && m.generic.trim(); });
   }
 
+  var REVIEW_DIMENSIONS = ["Drug–drug interactions", "Duplicate therapy", "Bleeding risk",
+    "QT prolongation", "Renal risk", "Hyperkalaemia", "CNS depression"];
+
+  function renderReviewAside(container) {
+    var card = el("div", { cls: "ml-aside-card" });
+    card.appendChild(el("div", { cls: "ml-aside-title", text: "Interaction check reviews" }));
+    var list = el("div", { cls: "ml-review-list" });
+    REVIEW_DIMENSIONS.forEach(function (d) { list.appendChild(el("div", { cls: "ml-review-chip", text: d })); });
+    card.appendChild(list);
+    card.appendChild(el("div", { cls: "ml-aside-note",
+      text: "Medication-based. Add renal function, QTc or electrolytes in the case for more tailored cautions." }));
+    container.appendChild(card);
+  }
+
   function render() {
     if (!_root) return;
     if (_view === "results") { renderResults(); return; }
@@ -690,37 +932,69 @@
     _root.textContent = "";
     _root.classList.add("ml-root");
 
-    var header = el("div", { cls: "ml-header" });
-    header.appendChild(el("h2", { cls: "ml-title", text: "Drug Interactions" }));
-    header.appendChild(el("p", { cls: "ml-subtitle", text: "Check medicines, duplicates, and high-risk combinations" }));
-    header.appendChild(el("div", { cls: "ml-advisory",
-      text: "Clinical decision support — verify with current local protocol and pharmacist where needed" }));
-    _root.appendChild(header);
-
-    var body = el("div", { cls: "ml-body" });
-    var cards = el("div", { cls: "ml-cards", attrs: { id: "ml-cards" } });
     var list = getList();
     var showUndoRow = _undoingId && _lastRemoved && _lastRemoved.med && _lastRemoved.med.id === _undoingId;
-    if (!list.length && !showUndoRow) {
-      cards.appendChild(el("div", { cls: "ml-empty", text: "Add medicines to check interactions" }));
-    } else {
-      if (showUndoRow) cards.appendChild(renderMedCard(_lastRemoved.med));
-      list.forEach(function (med) { cards.appendChild(renderMedCard(med)); });
-    }
-    body.appendChild(cards);
-    renderAddOptions(body);
-    _root.appendChild(body);
+    var resolved = list.filter(function (m) { return m.generic && String(m.generic).trim(); }).length;
 
+    var work = el("div", { cls: "ml-work" });
+    var main = el("div", { cls: "ml-main" });
+    var aside = el("div", { cls: "ml-aside" });
+
+    if (!list.length && !showUndoRow) {
+      // ---- empty state: heading + action grid (no raw input shown yet) ----
+      var head = el("div", { cls: "ml-empty-head" });
+      head.appendChild(el("div", { cls: "ml-empty-title", text: "Medication list" }));
+      head.appendChild(el("div", { cls: "ml-empty-sub",
+        text: "Add medicines from Drug Index, type a prescription, scan a case sheet, or import from Ward Sync." }));
+      main.appendChild(head);
+      renderActionGrid(main);
+    } else {
+      // ---- populated list ----
+      var lh = el("div", { cls: "ml-list-head" });
+      lh.appendChild(el("div", { cls: "ml-list-count", text: resolved || list.length ? (list.length + " medicine" + (list.length > 1 ? "s" : "") + " selected") : "Medication list" }));
+      lh.appendChild(el("div", { cls: "ml-list-updated", text: "Last updated just now" }));
+      main.appendChild(lh);
+
+      var actions = el("div", { cls: "ml-list-actions" });
+      var addMore = el("button", { cls: "ml-mini-btn ml-mini-btn-primary", text: "＋ Add medicine", attrs: { type: "button", "data-ml-add-more": "1" } });
+      addMore.addEventListener("click", function () { _openAdd = "index"; render(); });
+      var clearBtn = el("button", { cls: "ml-mini-btn", text: "Clear all", attrs: { type: "button" } });
+      clearBtn.addEventListener("click", function () { clearAll(); _openAdd = null; render(); });
+      var saveBtn = el("button", { cls: "ml-mini-btn", text: "Save draft", attrs: { type: "button" } });
+      saveBtn.addEventListener("click", function () { try { localStorage.setItem("smd_medlist_draft", JSON.stringify(getList())); } catch (_) {} toast("Draft saved"); });
+      actions.appendChild(addMore); actions.appendChild(clearBtn); actions.appendChild(saveBtn);
+      main.appendChild(actions);
+
+      var rows = el("div", { cls: "ml-rows", attrs: { id: "ml-cards" } });
+      if (showUndoRow) rows.appendChild(renderMedCard(_lastRemoved.med));
+      list.forEach(function (med) { rows.appendChild(renderMedCard(med)); });
+      main.appendChild(rows);
+
+      // "Import more" surfaces the action grid again beneath the list.
+      var moreLabel = el("div", { cls: "ml-search-label", text: "Add more" });
+      main.appendChild(moreLabel);
+      renderActionGrid(main);
+    }
+
+    renderReviewAside(aside);
+    work.appendChild(main); work.appendChild(aside);
+    _root.appendChild(work);
+
+    // ---- sticky CTA (always visible, count-aware) ----
     var footer = el("div", { cls: "ml-footer" });
-    var canCheck = hasResolvedGeneric();
-    var checkBtn = el("button", { cls: "ml-check-btn", text: "Check interactions", attrs: { id: "ml-check" } });
+    var inner = el("div", { cls: "ml-footer-inner" });
+    var canCheck = resolved >= 2;
+    var checkBtn = el("button", { cls: "ml-check-btn",
+      text: canCheck ? ("Check " + resolved + " medicine" + (resolved > 1 ? "s" : "")) : "Check interactions",
+      attrs: { id: "ml-check", type: "button" } });
     if (!canCheck) checkBtn.disabled = true;
-    checkBtn.addEventListener("click", function () {
-      if (checkBtn.disabled) return;
-      runCheck();
-    });
-    footer.appendChild(checkBtn);
+    checkBtn.addEventListener("click", function () { if (!checkBtn.disabled) runCheck(); });
+    inner.appendChild(checkBtn);
+    if (!canCheck) inner.appendChild(el("div", { cls: "ml-footer-hint", text: "Add at least 2 medicines to check interactions." }));
+    footer.appendChild(inner);
     _root.appendChild(footer);
+
+    mountOpenSheet();
   }
 
   function runCheck() {
@@ -749,42 +1023,43 @@
   };
 
   function findingCard(finding) {
-    var card = el("div", { cls: "mlr-card mlr-card-" + (SEVERITY_BUCKET_CLASS[finding.severity] || "monitor") });
+    // severity conveyed by TEXT (label + mark), never color alone.
+    var bucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
+    var card = el("div", { cls: "mlr-card mlr-card-" + bucket });
 
     var head = el("div", { cls: "mlr-card-head" });
-    var pair = el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" });
-    head.appendChild(pair);
-    // finding.severity is the RAW rule severity (e.g. "contraindicated"); map it to the
-    // display bucket first so the highest-severity findings show the correct text/marker
-    // (severity conveyed by text, never by color alone).
-    var sevBucket = SEVERITY_BUCKET_CLASS[finding.severity] || "monitor";
-    var sevLabel = SEVERITY_LABEL[sevBucket] || "Caution";
-    var sevMark = SEVERITY_MARK[sevBucket] || "◆";
-    var badge = el("span", { cls: "mlr-sev mlr-sev-" + (SEVERITY_BUCKET_CLASS[finding.severity] || "monitor") });
+    head.appendChild(el("div", { cls: "mlr-card-pair", text: (finding.drugs || []).join(" + ") || "Medicine" }));
+    var sevLabel = SEVERITY_LABEL[bucket] || "Caution";
+    var sevMark = SEVERITY_MARK[bucket] || "◆";
+    var badge = el("span", { cls: "mlr-sev mlr-sev-" + bucket });
     badge.appendChild(el("span", { cls: "mlr-sev-mark", text: sevMark, attrs: { "aria-hidden": "true" } }));
     badge.appendChild(el("span", { cls: "mlr-sev-text", text: sevLabel }));
     head.appendChild(badge);
     card.appendChild(head);
 
-    var whyText = [finding.mechanism, finding.effect].filter(Boolean).join(" ");
-    if (whyText) card.appendChild(detailRow("Why it matters", whyText));
+    // one-line consequence, then the action line
+    var consequence = finding.effect || finding.mechanism || "";
+    if (consequence) card.appendChild(el("div", { cls: "mlr-consequence", text: consequence }));
     if (finding.action) card.appendChild(detailRow("Action", finding.action));
-    if (finding.monitoring) card.appendChild(detailRow("Monitoring", finding.monitoring));
-    if (finding.source) card.appendChild(detailRow("Source", finding.source));
 
-    // Optional MaiK "explain this interaction" layer. The explanation is a
-    // DISPLAY-ONLY secondary block: it can never change the severity/marker
-    // rendered above, add/remove findings, or alter the summary counts — the
-    // deterministic finding object is the single source of truth.
+    // "Why?" expand — mechanism / monitoring / source disclosure + optional MaiK explain.
+    var why = el("div", { cls: "mlr-why" });
+    var whyBtn = el("button", { cls: "mlr-explain-btn", text: "Why? · details", attrs: { type: "button", "aria-expanded": "false" } });
+    var whyBody = el("div", { attrs: { hidden: "hidden" } });
+    if (finding.mechanism && finding.mechanism !== consequence) whyBody.appendChild(detailRow("Mechanism", finding.mechanism));
+    if (finding.monitoring) whyBody.appendChild(detailRow("Monitoring", finding.monitoring));
+    if (finding.source) whyBody.appendChild(detailRow("Source", finding.source));
+
+    // Optional MaiK "explain this interaction" — DISPLAY-ONLY; can never change the
+    // severity/marker above, add/remove findings, or alter the summary counts.
     var explainWrap = el("div", { cls: "mlr-explain-wrap" });
-    var explainBtn = el("button", { cls: "mlr-explain-btn", text: "Why this matters — explain",
+    var explainBtn = el("button", { cls: "mlr-explain-btn", text: "Explain in plain language",
       attrs: { type: "button", "aria-label": "Explain this interaction" } });
     var explainOut = el("div", { cls: "mlr-explain-out", attrs: { hidden: "hidden" } });
     explainBtn.addEventListener("click", function () {
       if (explainBtn.disabled) return;
       explainBtn.disabled = true;
       explainBtn.textContent = "Loading explanation…";
-      // Call via window.MEDLIST.explainInteraction so tests can stub it.
       var p;
       try { p = window.MEDLIST.explainInteraction(finding); }
       catch (e) { p = Promise.reject(e); }
@@ -792,15 +1067,21 @@
         renderExplanation(explainOut, String(text || ""));
         explainBtn.textContent = "Explanation shown";
       }).catch(function () {
-        renderExplanation(explainOut,
-          "Couldn't load explanation — the interaction result stands.", true);
+        renderExplanation(explainOut, "Couldn't load explanation — the interaction result stands.", true);
         explainBtn.disabled = false;
-        explainBtn.textContent = "Why this matters — explain";
+        explainBtn.textContent = "Explain in plain language";
       });
     });
-    explainWrap.appendChild(explainBtn);
-    explainWrap.appendChild(explainOut);
-    card.appendChild(explainWrap);
+    explainWrap.appendChild(explainBtn); explainWrap.appendChild(explainOut);
+    whyBody.appendChild(explainWrap);
+
+    whyBtn.addEventListener("click", function () {
+      var closed = whyBody.hasAttribute("hidden");
+      if (closed) { whyBody.removeAttribute("hidden"); whyBtn.setAttribute("aria-expanded", "true"); whyBtn.textContent = "Hide details"; }
+      else { whyBody.setAttribute("hidden", "hidden"); whyBtn.setAttribute("aria-expanded", "false"); whyBtn.textContent = "Why? · details"; }
+    });
+    why.appendChild(whyBtn); why.appendChild(whyBody);
+    card.appendChild(why);
     return card;
   }
 
@@ -845,170 +1126,280 @@
     container.appendChild(sec);
   }
 
-  function summaryStat(container, label, count) {
-    var stat = el("div", { cls: "mlr-stat" });
-    stat.appendChild(el("span", { cls: "mlr-stat-num", text: String(count) }));
-    stat.appendChild(el("span", { cls: "mlr-stat-label", text: label }));
-    container.appendChild(stat);
+  function summaryChip(container, cls, label, count) {
+    var c = el("div", { cls: "mlr-chip mlr-chip-" + cls + (count ? "" : " mlr-chip-zero") });
+    c.appendChild(el("span", { cls: "mlr-chip-num", text: String(count) }));
+    c.appendChild(el("span", { text: label }));
+    container.appendChild(c);
   }
+  function notDuplicate(f) { return !/duplicate/.test(f.ruleType || ""); }
 
   function renderResults() {
     _root.textContent = "";
     _root.classList.add("ml-root");
     var res = _results || { critical: [], major: [], moderate: [], minor: [], monitor: [], duplicates: [], combinations: [], reviewedCount: 0 };
 
-    var header = el("div", { cls: "ml-header" });
-    header.appendChild(el("h2", { cls: "ml-title", text: "Interaction Summary" }));
-    header.appendChild(el("p", { cls: "ml-subtitle", text: "Review each finding with current local protocol and pharmacist where needed" }));
-    _root.appendChild(header);
+    var work = el("div", { cls: "ml-work" });
+    work.style.gridTemplateColumns = "1fr";              // results are single-column
+    var main = el("div", { cls: "ml-main" });
 
-    var body = el("div", { cls: "ml-body" });
-
-    // Summary counts (color-independent, plain text labels).
-    var criticalCount = res.critical.length;
-    var majorCount = res.major.length;
-    var monitorCount = res.monitor.length;
-    var dupCount = (res.duplicates || []).length;
-    var summary = el("div", { cls: "mlr-summary" });
-    summaryStat(summary, "Critical alerts", criticalCount);
-    summaryStat(summary, "Major interactions", majorCount);
-    summaryStat(summary, "Monitoring cautions", monitorCount);
-    summaryStat(summary, "Duplicate therapies", dupCount);
-    summaryStat(summary, "Medicines reviewed", res.reviewedCount);
-    body.appendChild(summary);
-
-    // Advisory / context note.
-    body.appendChild(el("div", { cls: "ml-advisory mlr-advisory",
+    // ---- strong summary panel: title + reviewed count + severity count chips ----
+    var panel = el("div", { cls: "mlr-summary-panel" });
+    panel.appendChild(el("div", { cls: "mlr-summary-title", text: "Medication Safety Summary" }));
+    panel.appendChild(el("div", { cls: "mlr-summary-sub",
+      text: res.reviewedCount + " medicine" + (res.reviewedCount !== 1 ? "s" : "") + " reviewed" }));
+    var monitorCount = res.monitor.filter(notDuplicate).length + res.moderate.filter(notDuplicate).length;
+    var chips = el("div", { cls: "mlr-chips" });
+    summaryChip(chips, "critical", "Critical", res.critical.length);
+    summaryChip(chips, "major", "Major", res.major.length);
+    summaryChip(chips, "monitor", "Monitoring", monitorCount);
+    summaryChip(chips, "duplicate", "Duplicate", (res.duplicates || []).length);
+    panel.appendChild(chips);
+    panel.appendChild(el("div", { cls: "ml-aside-note",
       text: "Interaction check is medication-based. Add renal function, electrolytes, QTc, or patient context for more tailored cautions." }));
+    main.appendChild(panel);
 
-    // Filters row.
+    // ---- controls ----
     var filters = el("div", { cls: "mlr-filters" });
-    var toggle = el("button", { cls: "mlr-filter-btn", attrs: { id: "mlr-toggle-minor" },
+    var backBtn = el("button", { cls: "mlr-filter-btn mlr-back-btn", text: "‹ Back to medicines", attrs: { id: "mlr-back", type: "button" } });
+    backBtn.addEventListener("click", function () { _view = "list"; render(); });
+    var toggle = el("button", { cls: "mlr-filter-btn", attrs: { id: "mlr-toggle-minor", type: "button" },
       text: _hideMinor ? "Show all" : "Hide minor" });
     toggle.addEventListener("click", function () { _hideMinor = !_hideMinor; render(); });
-    filters.appendChild(toggle);
-    var backBtn = el("button", { cls: "mlr-filter-btn mlr-back-btn", text: "Back to medicines", attrs: { id: "mlr-back" } });
-    backBtn.addEventListener("click", function () { _view = "list"; render(); });
-    filters.appendChild(backBtn);
-    body.appendChild(filters);
+    filters.appendChild(backBtn); filters.appendChild(toggle);
+    main.appendChild(filters);
 
-    // Sections in priority order.
-    var monitorFindings = res.monitor.slice();
-    var moderateFindings = res.moderate.slice();
-    var minorFindings = _hideMinor ? [] : res.minor.slice();
-    var dupFindings = (res.duplicates || []).slice();
+    // ---- grouped sections (duplicates shown once, in their own section) ----
+    var minorFindings = _hideMinor ? [] : res.minor.filter(notDuplicate);
+    var monitoring = res.monitor.filter(notDuplicate).concat(res.moderate.filter(notDuplicate), minorFindings);
+    resultsSection(main, "Critical — act now", res.critical);
+    resultsSection(main, "Major — review before prescribing", res.major);
+    resultsSection(main, "Monitoring required", monitoring);
+    resultsSection(main, "Duplicate therapy", (res.duplicates || []).slice());
 
-    resultsSection(body, "Critical alerts", res.critical);
-    resultsSection(body, "Major interactions", res.major);
-    resultsSection(body, "Monitoring cautions", monitorFindings.concat(moderateFindings, minorFindings));
-    resultsSection(body, "Duplicate therapy", dupFindings);
+    var anyShown = res.critical.length || res.major.length || monitoring.length || (res.duplicates || []).length;
+    if (!anyShown) main.appendChild(el("div", { cls: "mlr-none", text: "No major issue detected" }));
 
-    var anyShown = res.critical.length || res.major.length || monitorFindings.length ||
-      moderateFindings.length || minorFindings.length || dupFindings.length;
-    if (!anyShown) {
-      body.appendChild(el("div", { cls: "mlr-none", text: "No issues detected" }));
-    }
+    work.appendChild(main);
+    _root.appendChild(work);
 
-    _root.appendChild(body);
+    // ---- sticky footer: return to the list ----
+    var footer = el("div", { cls: "ml-footer" });
+    var inner = el("div", { cls: "ml-footer-inner" });
+    var back = el("button", { cls: "ml-check-btn", text: "Back to medication list", attrs: { type: "button" } });
+    back.addEventListener("click", function () { _view = "list"; render(); });
+    inner.appendChild(back); footer.appendChild(inner);
+    _root.appendChild(footer);
   }
 
   function injectStyles() {
     if (document.getElementById("ml-styles")) return;
-    var css = ".ml-root{display:flex;flex-direction:column;height:100%;font-family:var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
-      + ".ml-header{padding:16px 18px 10px}.ml-title{margin:0 0 2px;font:800 19px var(--sans,system-ui)}"
-      + ".ml-subtitle{margin:0 0 10px;font:500 13px var(--sans,system-ui);color:var(--slate,#666)}"
-      + ".ml-advisory{font:600 11.5px var(--sans,system-ui);background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border-radius:9px;padding:8px 11px;line-height:1.4}"
-      + ".ml-body{flex:1;overflow-y:auto;padding:0 18px 18px}"
-      + ".ml-empty{padding:26px 10px;text-align:center;color:var(--slate-soft,#888);font:500 13px var(--sans,system-ui)}"
-      + ".ml-cards{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}"
-      + ".ml-card{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 13px;background:var(--panel,#fff)}"
-      + ".ml-card-removed{align-items:center}"
-      + ".ml-undo-row{display:flex;justify-content:space-between;align-items:center;width:100%;font:500 13px var(--sans,system-ui);color:var(--slate,#666)}"
-      + ".ml-undo-btn{background:transparent;border:none;color:var(--teal,#0a9396);font:700 13px var(--sans,system-ui);cursor:pointer}"
-      + ".ml-card-title{font:700 14px var(--sans,system-ui)}.ml-card-brand{font:500 12px var(--sans,system-ui);color:var(--slate,#666)}"
-      + ".ml-card-line{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}"
-      + ".ml-card-meta{display:flex;gap:6px;margin-top:6px}"
-      + ".ml-source-badge{font:600 10px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:7px;padding:2px 7px;color:var(--slate,#666)}"
-      + ".ml-conf-badge{font:600 10px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;background:#fff4e0;border:1px solid #f0c675;border-radius:7px;padding:2px 7px;color:#8a5a00}"
-      + ".ml-card-actions{display:flex;flex-direction:column;gap:6px}"
-      + ".ml-icon-btn{background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:8px;padding:5px 10px;font:600 11.5px var(--sans,system-ui);cursor:pointer;color:var(--slate,#666)}"
-      + ".ml-remove-btn{color:#b3261e;border-color:#f2c9c5}"
-      + ".ml-add-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}"
-      + ".ml-add-btn{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:9px 13px;font:600 12.5px var(--sans,system-ui);cursor:pointer;color:var(--ink,#1a1a1a)}"
-      + ".ml-add-btn-disabled{opacity:.55;cursor:not-allowed}"
-      + ".ml-ward-hint{margin-top:7px;font:600 11.5px var(--sans,system-ui);color:var(--slate,#666)}"
-      + ".ml-panel{margin-top:10px;border:1px dashed var(--line,#e5e5e0);border-radius:11px;padding:12px}"
-      + ".ml-input,.ml-textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#e5e5e0);border-radius:9px;padding:9px 11px;font:500 13px var(--sans,system-ui)}"
-      + ".ml-textarea{min-height:80px;resize:vertical}"
-      + ".ml-panel-add-btn{margin-top:9px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:9px;padding:8px 14px;font:700 12.5px var(--sans,system-ui);cursor:pointer}"
-      + ".ml-index-results{display:flex;flex-direction:column;gap:6px;margin-top:8px}"
-      + ".ml-index-result{display:flex;justify-content:space-between;gap:8px;background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:8px;padding:8px 10px;font:500 12.5px var(--sans,system-ui);cursor:pointer;text-align:left}"
-      + ".ml-index-result-generic{color:var(--slate-soft,#888)}"
-      + ".ml-dym{margin-top:9px}.ml-dym-label{font:600 11.5px var(--sans,system-ui);color:var(--slate,#666);margin-bottom:5px}"
-      + ".ml-dym-chips{display:flex;flex-wrap:wrap;gap:6px}"
-      + ".ml-chip{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border:1px solid var(--teal,#0a9396);border-radius:20px;padding:5px 11px;font:600 12px var(--sans,system-ui);cursor:pointer}"
-      + ".ml-paste-list{display:flex;flex-direction:column;gap:5px;margin-top:9px;max-height:180px;overflow-y:auto}"
-      + ".ml-paste-item{display:flex;align-items:center;gap:8px;font:500 12.5px var(--sans,system-ui)}"
-      + ".ml-footer{position:sticky;bottom:0;padding:12px 18px calc(12px + env(safe-area-inset-bottom));background:var(--panel,#fff);border-top:1px solid var(--line,#e5e5e0)}"
-      + ".ml-check-btn{width:100%;min-height:44px;background:var(--teal,#0a9396);color:#fff;border:none;border-radius:11px;padding:12px;font:700 14px var(--sans,system-ui);cursor:pointer;box-sizing:border-box}"
-      + ".ml-check-btn:disabled{opacity:.5;cursor:not-allowed}"
-      + ".ml-icon-btn{min-height:44px}"
-      // --- Results screen ---
-      + ".mlr-advisory{margin-bottom:12px}"
-      + ".mlr-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:6px 0 12px}"
-      + "@media(min-width:520px){.mlr-summary{grid-template-columns:repeat(3,1fr)}}"
-      + ".mlr-stat{border:1px solid var(--line,#e5e5e0);border-radius:11px;padding:10px 12px;background:var(--panel,#fff);display:flex;flex-direction:column;gap:2px}"
-      + ".mlr-stat-num{font:800 20px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
-      + ".mlr-stat-label{font:600 11px var(--sans,system-ui);color:var(--slate,#666)}"
-      + ".mlr-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}"
-      + ".mlr-filter-btn{background:var(--panel,#fff);border:1px solid var(--line,#e5e5e0);border-radius:20px;padding:8px 14px;font:600 12.5px var(--sans,system-ui);cursor:pointer;color:var(--ink,#1a1a1a);min-height:40px}"
-      + ".mlr-back-btn{color:var(--teal,#0a9396);border-color:var(--teal,#0a9396)}"
-      + ".mlr-section{margin-bottom:16px}"
-      + ".mlr-section-h{display:flex;align-items:center;gap:8px;margin-bottom:8px}"
-      + ".mlr-section-title{font:800 13px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate,#666)}"
-      + ".mlr-section-count{font:700 11px var(--sans,system-ui);background:var(--paper,#f7f7f5);border:1px solid var(--line,#e5e5e0);border-radius:10px;padding:1px 8px;color:var(--slate,#666)}"
-      + ".mlr-card{border:1px solid var(--line,#e5e5e0);border-left-width:4px;border-radius:12px;padding:12px 13px;background:var(--panel,#fff);margin-bottom:9px}"
-      + ".mlr-card-critical{border-left-color:#b3261e}.mlr-card-major{border-left-color:#c77700}"
-      + ".mlr-card-moderate{border-left-color:#8a5a00}.mlr-card-monitor{border-left-color:#0a9396}.mlr-card-minor{border-left-color:#888}"
-      + ".mlr-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}"
-      + ".mlr-card-pair{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
-      + ".mlr-sev{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 8px;font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}"
-      + ".mlr-sev-critical{background:#fbe6e4;color:#b3261e;border:1px solid #f2c9c5}"
-      + ".mlr-sev-major{background:#fdf0dc;color:#985c00;border:1px solid #f0c675}"
-      + ".mlr-sev-moderate{background:#fdf0dc;color:#8a5a00;border:1px solid #f0c675}"
-      + ".mlr-sev-monitor{background:var(--teal-soft,#e0f2f1);color:var(--teal,#0a9396);border:1px solid #a6d9d8}"
-      + ".mlr-sev-minor{background:var(--paper,#f7f7f5);color:#666;border:1px solid var(--line,#e5e5e0)}"
-      + ".mlr-sev-mark{font-weight:900}"
-      + ".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:6px}"
-      + ".mlr-detail-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
-      + ".mlr-detail-val{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.4}"
-      + ".mlr-none{padding:26px 10px;text-align:center;color:var(--teal,#0a9396);font:700 14px var(--sans,system-ui);border:1px dashed #a6d9d8;border-radius:12px;background:var(--teal-soft,#e0f2f1)}"
-      + ".mlr-explain-wrap{margin-top:10px}"
-      + ".mlr-explain-btn{background:transparent;border:1px solid var(--line,#e5e5e0);border-radius:9px;padding:6px 11px;font:700 11.5px var(--sans,system-ui);cursor:pointer;color:var(--teal,#0a9396)}"
-      + ".mlr-explain-btn:disabled{opacity:.7;cursor:default}"
-      + ".mlr-explain-out{margin-top:8px;border-left:3px solid #a6d9d8;background:var(--teal-soft,#e0f2f1);border-radius:8px;padding:9px 11px}"
-      + ".mlr-explain-out.mlr-explain-err{border-left-color:#f2c9c5;background:#fbe6e4}"
-      + ".mlr-explain-label{font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#888)}"
-      + ".mlr-explain-note{font:500 10.5px var(--sans,system-ui);color:var(--slate,#666);margin:1px 0 5px;font-style:italic}"
-      + ".mlr-explain-body{font:500 12.5px var(--sans,system-ui);color:var(--ink,#1a1a1a);line-height:1.45;white-space:pre-wrap}"
-      // --- Scan review screen ---
-      + ".ml-scan-ov{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;background:rgba(15,23,42,.5);padding:16px}"
-      + ".ml-scan-box{background:var(--panel,#fff);border-radius:14px;padding:20px 22px;text-align:center;color:var(--ink,#1a1a1a);font:600 13.5px var(--sans,system-ui);max-width:300px}"
-      + ".ml-scan-spin{font-size:26px;animation:mlspin 1s linear infinite;margin-bottom:8px}@keyframes mlspin{to{transform:rotate(360deg)}}"
-      + ".ml-scan-err{color:#b3261e;font:600 13.5px/1.5 var(--sans,system-ui);margin-bottom:12px}"
-      + ".ml-scan-rows{display:flex;flex-direction:column;gap:10px;padding-top:8px}"
-      + ".ml-scan-row{border:1px solid var(--line,#e5e5e0);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}"
-      + ".ml-scan-row.ml-scan-flagged{border-left:4px solid #c77700;background:#fffaf2}"
-      + ".ml-scan-top{display:flex;align-items:flex-start;gap:9px}"
-      + ".ml-scan-titlewrap{flex:1;min-width:0}"
-      + ".ml-scan-mapped{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a)}"
-      + ".ml-scan-detected{font:500 12px var(--sans,system-ui);color:var(--slate,#666);margin-top:1px;word-break:break-word}"
-      + ".ml-scan-line{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);margin:6px 0 0 27px}"
-      + ".ml-scan-edit{margin-top:8px}"
-      + ".ml-scan-flag{font:700 11.5px var(--sans,system-ui);color:#985c00;margin-top:7px}"
-      + ".ml-scan-footer{display:flex;gap:10px}.ml-scan-footer .mlr-filter-btn{flex:0 0 auto}.ml-scan-footer .ml-check-btn{flex:1}"
-      + ".ml-conf-badge.ml-conf-high{background:#e0f2f1;border-color:#a6d9d8;color:#0a7d76}"
-      + ".ml-conf-badge.ml-conf-low{background:#fbe6e4;border-color:#f2c9c5;color:#b3261e}";
+    var css = [
+".ml-root{display:flex;flex-direction:column;min-height:100%;font-family:var(--sans,system-ui);color:var(--ink,#14202b)}",
+/* ---- shell header (markup in drugs.js) ---- */
+".ddi-overlay{background:var(--paper,#f6f7f5)}",
+".ddi-head{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:12px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:var(--panel,#fff);border-bottom:1px solid var(--line,#d7dee3)}",
+".ddi-back{flex:0 0 auto;width:38px;height:38px;border-radius:11px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);color:var(--teal,#0e6e63);font:700 22px/1 var(--sans);cursor:pointer;display:flex;align-items:center;justify-content:center}",
+".ddi-back:active{transform:scale(.94)}",
+".ddi-head-titles{flex:1;min-width:0}",
+".ddi-head-title{font:800 17px var(--sans);color:var(--ink,#14202b);letter-spacing:-.01em}",
+".ddi-head-sub{font:600 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:1px}",
+".ddi-patient{flex:0 0 auto;max-width:42%;font:700 12px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:6px 11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+".ddi-patient-on{color:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
+"@media(max-width:560px){.ddi-head-title{font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ddi-patient{max-width:40%;font-size:11px;padding:5px 9px}}",
+".ddi-advisory{padding:7px 16px;font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border-bottom:1px solid var(--line,#d7dee3)}",
+".ddi-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}",
+/* ---- workspace layout ---- */
+".ml-work{flex:1 0 auto;max-width:1240px;margin:0 auto;width:100%;box-sizing:border-box;padding:14px 16px 18px;display:grid;grid-template-columns:1fr;gap:14px;align-content:start}",
+"@media(min-width:900px){.ml-work{grid-template-columns:63fr 37fr;gap:20px;padding:18px 22px 0}}",
+".ml-main{min-width:0}.ml-aside{min-width:0}",
+"@media(max-width:899px){.ml-aside{order:2}}",
+/* ---- empty state ---- */
+".ml-empty-head{margin:2px 0 12px}",
+".ml-empty-title{font:800 18px var(--sans);color:var(--ink,#14202b)}",
+".ml-empty-sub{font:500 13px var(--sans);color:var(--slate,#2d4356);margin-top:3px;line-height:1.45}",
+".ml-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}",
+".ml-action-card{display:flex;flex-direction:column;gap:4px;align-items:flex-start;text-align:left;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .12s,box-shadow .12s;min-height:88px}",
+".ml-action-card:hover{border-color:var(--teal,#0e6e63);box-shadow:0 2px 10px rgba(14,110,99,.08)}",
+".ml-action-card:active{transform:scale(.99)}",
+".ml-action-ic{font-size:22px;line-height:1}",
+".ml-action-t{font:700 14px var(--sans);color:var(--ink,#14202b)}",
+".ml-action-d{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184);line-height:1.35}",
+".ml-action-primary{border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
+".ml-action-card-disabled{opacity:1}",
+/* ward sync active card */
+".ml-ward-card{margin-top:10px;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px;display:flex;align-items:center;gap:12px}",
+".ml-ward-ic{font-size:22px}",
+".ml-ward-body{flex:1;min-width:0}",
+".ml-ward-t{font:700 14px var(--sans);color:var(--ink,#14202b)}",
+".ml-ward-d{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px}",
+".ml-ward-btn{flex:0 0 auto;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:10px;padding:9px 14px;font:700 12.5px var(--sans);cursor:pointer;min-height:40px}",
+".ml-ward-btn:active{transform:scale(.97)}",
+".ml-ward-hint{margin-top:8px;font:600 11.5px var(--sans);color:var(--amber,#92620a)}",
+/* ---- med list ---- */
+".ml-list-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:2px 0 10px}",
+".ml-list-count{font:800 16px var(--sans);color:var(--ink,#14202b)}",
+".ml-list-updated{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184)}",
+".ml-list-actions{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 12px}",
+".ml-mini-btn{background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:9px;padding:7px 11px;font:600 12px var(--sans);color:var(--slate,#2d4356);cursor:pointer;min-height:36px}",
+".ml-mini-btn:hover{border-color:var(--teal,#0e6e63);color:var(--teal,#0e6e63)}",
+".ml-mini-btn-primary{color:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
+".ml-rows{display:flex;flex-direction:column;gap:8px}",
+".ml-row{display:flex;align-items:center;gap:10px;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:10px 12px}",
+".ml-row-main{flex:1;min-width:0}",
+".ml-row-title{font:700 14.5px var(--sans);color:var(--ink,#14202b);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
+".ml-row-unmapped{color:var(--amber,#92620a)}",
+".ml-row-line{font:500 12px var(--mono,monospace);color:var(--slate,#2d4356);margin-top:2px}",
+".ml-row-badges{display:flex;align-items:center;gap:6px;margin-top:5px}",
+".ml-source-badge{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;border-radius:6px;padding:2px 7px;border:1px solid var(--line,#d7dee3);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5)}",
+".ml-source-index{color:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee)}",
+".ml-source-ghis,.ml-source-wardsync{color:#3457b2;border-color:#b9c8ee;background:#eef2fc}",
+".ml-source-scan{color:var(--amber,#92620a);border-color:#f0d49b;background:#fdf2de}",
+".ml-conf-badge{font:700 9.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;border-radius:6px;padding:2px 7px;border:1px solid #f0d49b;background:#fdf2de;color:var(--amber,#92620a)}",
+".ml-conf-badge.ml-conf-high{background:var(--green-bg,#e7f5ec);border-color:var(--green-line,#aedcc1);color:var(--green,#1c7a4a)}",
+".ml-conf-badge.ml-conf-low{background:var(--red-bg,#fbe7e9);border-color:var(--red-line,#efa9b1);color:var(--red,#ab1c2c)}",
+".ml-row-acts{display:flex;gap:4px;flex:0 0 auto}",
+".ml-icon-btn{min-width:40px;min-height:40px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid var(--line,#d7dee3);border-radius:9px;font-size:15px;cursor:pointer;color:var(--slate,#2d4356)}",
+".ml-icon-btn:hover{border-color:var(--teal,#0e6e63)}",
+".ml-remove-btn{color:var(--red,#ab1c2c)}.ml-remove-btn:hover{border-color:var(--red-line,#efa9b1)}",
+".ml-card-removed{display:flex}",
+".ml-undo-row{display:flex;justify-content:space-between;align-items:center;width:100%;font:600 13px var(--sans);color:var(--slate,#2d4356);background:var(--panel,#fff);border:1px dashed var(--line,#d7dee3);border-radius:11px;padding:11px 13px}",
+".ml-undo-btn{background:transparent;border:none;color:var(--teal,#0e6e63);font:800 13px var(--sans);cursor:pointer}",
+/* ---- right aside (summary / pre-run) ---- */
+".ml-aside-card{background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:14px;padding:14px 15px}",
+".ml-aside-title{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356);margin-bottom:9px}",
+".ml-review-list{display:flex;flex-wrap:wrap;gap:6px}",
+".ml-review-chip{font:600 11.5px var(--sans);color:var(--slate,#2d4356);background:var(--paper,#f6f7f5);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:5px 10px}",
+".ml-aside-note{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:10px;line-height:1.45}",
+/* ---- sticky footer CTA ---- */
+".ml-footer{position:sticky;bottom:0;z-index:6;padding:12px 16px calc(14px + env(safe-area-inset-bottom));background:var(--panel,#fff);border-top:1px solid var(--line,#d7dee3)}",
+".ml-footer-inner{max-width:1240px;margin:0 auto}",
+".ml-check-btn{width:100%;min-height:52px;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:13px;padding:14px;font:800 15px var(--sans);cursor:pointer;box-sizing:border-box;letter-spacing:.01em}",
+".ml-check-btn:active{transform:scale(.995)}",
+".ml-check-btn:disabled{background:#c3d3ce;color:#eef4f2;cursor:not-allowed}",
+".ml-footer-hint{text-align:center;font:600 11.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:7px}",
+/* ---- bottom sheets ---- */
+".ml-scrim{position:fixed;inset:0;z-index:40;background:rgba(8,18,26,.42);opacity:0;animation:mlfade .18s ease forwards}",
+"@keyframes mlfade{to{opacity:1}}",
+".ml-sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;background:var(--panel,#fff);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);max-height:90vh;display:flex;flex-direction:column;transform:translateY(100%);animation:mlup .26s cubic-bezier(.2,.7,.2,1) forwards}",
+"@keyframes mlup{to{transform:none}}",
+"@media(min-width:900px){.ml-sheet{left:50%;right:auto;bottom:auto;top:8vh;transform:translate(-50%,20px);width:min(560px,92vw);border-radius:18px;max-height:84vh;animation:mlpop .2s ease forwards}@keyframes mlpop{to{transform:translate(-50%,0)}}}",
+".ml-sheet-wrap{display:flex;flex-direction:column;min-height:0;flex:1}",
+".ml-sheet-grip{width:38px;height:4px;border-radius:2px;background:var(--line,#d7dee3);margin:8px auto 2px}",
+"@media(min-width:900px){.ml-sheet-grip{display:none}}",
+".ml-sheet-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 16px 8px}",
+".ml-sheet-title{font:800 16px var(--sans);color:var(--ink,#14202b)}",
+".ml-sheet-sub{font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:1px}",
+".ml-sheet-close{width:34px;height:34px;border-radius:9px;border:1px solid var(--line,#d7dee3);background:var(--panel,#fff);font-size:16px;color:var(--slate,#2d4356);cursor:pointer;flex:0 0 auto}",
+".ml-sheet-body{flex:1;overflow-y:auto;padding:6px 16px 14px;min-height:0}",
+".ml-sheet-foot{padding:12px 16px calc(12px + env(safe-area-inset-bottom));border-top:1px solid var(--line,#d7dee3);display:flex;gap:10px}",
+".ml-sheet-foot .ml-check-btn{min-height:48px;font-size:14px}",
+".ml-sheet-cancel{flex:0 0 auto;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:13px;padding:0 18px;font:700 14px var(--sans);color:var(--slate,#2d4356);cursor:pointer}",
+/* search sheet */
+".ml-search-input,.ml-input,.ml-textarea{width:100%;box-sizing:border-box;border:1.5px solid var(--line,#d7dee3);border-radius:11px;padding:12px 13px;font:500 14.5px var(--sans);color:var(--ink,#14202b);background:var(--panel,#fff)}",
+".ml-search-input:focus,.ml-input:focus,.ml-textarea:focus{outline:none;border-color:var(--teal,#0e6e63)}",
+".ml-textarea{min-height:120px;resize:vertical;font-family:var(--mono,monospace);font-size:13px;line-height:1.6}",
+".ml-search-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184);margin:14px 2px 7px}",
+".ml-index-results{display:flex;flex-direction:column;gap:7px}",
+".ml-index-result{display:flex;align-items:center;gap:10px;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:11px;padding:9px 11px;text-align:left;width:100%;cursor:pointer}",
+".ml-index-result:hover{border-color:var(--teal,#0e6e63)}",
+".ml-index-info{flex:1;min-width:0;background:transparent;border:none;text-align:left;cursor:pointer;padding:0;font:inherit}",
+".ml-index-generic{font:700 14px var(--sans);color:var(--ink,#14202b)}",
+".ml-index-generic mark{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:3px;padding:0 1px}",
+".ml-index-meta{font:500 11.5px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px}",
+".ml-index-brands{font:500 11.5px var(--sans);color:var(--slate,#2d4356);margin-top:1px}",
+".ml-index-brands mark{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:3px;padding:0 1px}",
+".ml-index-add{flex:0 0 auto;background:var(--teal,#0e6e63);color:#fff;border:none;border-radius:9px;padding:8px 12px;font:800 12.5px var(--sans);cursor:pointer;min-height:38px}",
+".ml-index-add:active{transform:scale(.96)}",
+".ml-state{padding:22px 12px;text-align:center;font:600 13px var(--sans);color:var(--slate,#2d4356)}",
+".ml-state-sub{display:block;font:500 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:5px}",
+".ml-state-offline{color:var(--amber,#92620a)}",
+".ml-spin{display:inline-block;animation:mlspin 1s linear infinite;font-size:18px}@keyframes mlspin{to{transform:rotate(360deg)}}",
+/* dose sheet */
+".ml-dose-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}",
+".ml-field{display:flex;flex-direction:column;gap:5px}",
+".ml-field-full{grid-column:1/-1}",
+".ml-field-label{font:700 10.5px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
+".ml-chip-row{display:flex;flex-wrap:wrap;gap:6px}",
+".ml-chip{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:7px 12px;font:600 12.5px var(--sans);cursor:pointer;min-height:34px}",
+".ml-chip.on{background:var(--teal,#0e6e63);color:#fff;border-color:var(--teal,#0e6e63)}",
+/* did-you-mean / paste */
+".ml-dym{margin-top:12px}.ml-dym-label{font:700 11.5px var(--sans);color:var(--slate,#2d4356);margin-bottom:6px}",
+".ml-dym-chips{display:flex;flex-wrap:wrap;gap:7px}",
+".ml-paste-ex{font:500 12px var(--mono,monospace);color:var(--slate-soft,#5a7184);background:var(--paper,#f6f7f5);border:1px dashed var(--line,#d7dee3);border-radius:9px;padding:9px 11px;margin-top:9px;line-height:1.6;white-space:pre-wrap}",
+".ml-paste-list{display:flex;flex-direction:column;gap:7px;margin-top:12px}",
+".ml-paste-item{display:flex;align-items:center;gap:10px;background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:10px;padding:9px 11px;font:600 13px var(--sans);color:var(--ink,#14202b)}",
+".ml-paste-item input{width:18px;height:18px;flex:0 0 auto}",
+".ml-paste-item-sub{font:500 11.5px var(--mono,monospace);color:var(--slate-soft,#5a7184);margin-top:1px}",
+/* toast */
+".ml-toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;background:var(--ink,#14202b);color:#fff;font:700 12.5px var(--sans);padding:10px 16px;border-radius:11px;box-shadow:0 8px 24px rgba(0,0,0,.25);opacity:0;animation:mltoast 2.6s ease forwards}",
+"@keyframes mltoast{8%{opacity:.97}84%{opacity:.97}100%{opacity:0}}",
+/* ---- results screen ---- */
+".mlr-summary-panel{background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:16px;padding:15px 16px;margin-bottom:14px}",
+".mlr-summary-title{font:800 16px var(--sans);color:var(--ink,#14202b)}",
+".mlr-summary-sub{font:600 12px var(--sans);color:var(--slate-soft,#5a7184);margin-top:2px}",
+".mlr-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}",
+".mlr-chip{display:inline-flex;align-items:baseline;gap:6px;border-radius:10px;padding:7px 11px;font:700 12px var(--sans);border:1px solid}",
+".mlr-chip-num{font:800 15px var(--sans)}",
+".mlr-chip-critical{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c);border-color:var(--red-line,#efa9b1)}",
+".mlr-chip-major{background:var(--orange-bg,#fdebe1);color:var(--orange,#b5460f);border-color:var(--orange-line,#f3b88e)}",
+".mlr-chip-monitor{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-color:#a6d9d8}",
+".mlr-chip-duplicate{background:var(--yellow-bg,#fdf2de);color:var(--yellow,#92620a);border-color:var(--yellow-line,#f0d49b)}",
+".mlr-chip-zero{opacity:.5}",
+".mlr-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}",
+".mlr-filter-btn{background:var(--panel,#fff);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:8px 15px;font:700 12.5px var(--sans);cursor:pointer;color:var(--slate,#2d4356);min-height:42px}",
+".mlr-back-btn{color:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63)}",
+".mlr-section{margin-bottom:16px}",
+".mlr-section-h{display:flex;align-items:center;gap:8px;margin-bottom:9px}",
+".mlr-section-title{font:800 12px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate,#2d4356)}",
+".mlr-section-count{font:800 11px var(--sans);background:var(--paper,#f6f7f5);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:1px 8px;color:var(--slate,#2d4356)}",
+".mlr-card{border:1px solid var(--line,#d7dee3);border-left-width:4px;border-radius:12px;padding:12px 14px;background:var(--panel,#fff);margin-bottom:9px}",
+".mlr-card-critical{border-left-color:var(--red,#ab1c2c)}.mlr-card-major{border-left-color:var(--orange,#b5460f)}",
+".mlr-card-moderate{border-left-color:var(--yellow,#92620a)}.mlr-card-monitor{border-left-color:var(--teal,#0e6e63)}.mlr-card-minor{border-left-color:var(--slate-soft,#5a7184)}",
+".mlr-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:7px}",
+".mlr-card-pair{font:800 14.5px var(--sans);color:var(--ink,#14202b)}",
+".mlr-sev{display:inline-flex;align-items:center;gap:5px;border-radius:8px;padding:3px 9px;font:800 10.5px var(--sans);text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}",
+".mlr-sev-critical{background:var(--red-bg,#fbe7e9);color:var(--red,#ab1c2c);border:1px solid var(--red-line,#efa9b1)}",
+".mlr-sev-major{background:var(--orange-bg,#fdebe1);color:var(--orange,#b5460f);border:1px solid var(--orange-line,#f3b88e)}",
+".mlr-sev-moderate{background:var(--yellow-bg,#fdf2de);color:var(--yellow,#92620a);border:1px solid var(--yellow-line,#f0d49b)}",
+".mlr-sev-monitor{background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border:1px solid #a6d9d8}",
+".mlr-sev-minor{background:var(--paper,#f6f7f5);color:var(--slate,#2d4356);border:1px solid var(--line,#d7dee3)}",
+".mlr-sev-mark{font-weight:900}",
+".mlr-consequence{font:600 13px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
+".mlr-detail{display:flex;flex-direction:column;gap:1px;margin-top:7px}",
+".mlr-detail-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
+".mlr-detail-val{font:500 12.5px var(--sans);color:var(--ink,#14202b);line-height:1.45}",
+".mlr-none{padding:22px 14px;text-align:center;color:var(--green,#1c7a4a);font:800 14px var(--sans);border:1px solid var(--green-line,#aedcc1);border-radius:12px;background:var(--green-bg,#e7f5ec)}",
+".mlr-why{margin-top:9px}",
+".mlr-explain-wrap{margin-top:9px}",
+".mlr-explain-btn{background:transparent;border:1px solid var(--line,#d7dee3);border-radius:9px;padding:7px 12px;font:800 11.5px var(--sans);cursor:pointer;color:var(--teal,#0e6e63);min-height:38px}",
+".mlr-explain-btn:disabled{opacity:.7;cursor:default}",
+".mlr-explain-out{margin-top:8px;border-left:3px solid #a6d9d8;background:var(--teal-soft,#e3f1ee);border-radius:8px;padding:9px 11px}",
+".mlr-explain-out.mlr-explain-err{border-left-color:var(--red-line,#efa9b1);background:var(--red-bg,#fbe7e9)}",
+".mlr-explain-label{font:800 10px var(--sans);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#5a7184)}",
+".mlr-explain-note{font:500 10.5px var(--sans);color:var(--slate,#2d4356);margin:1px 0 5px;font-style:italic}",
+".mlr-explain-body{font:500 12.5px var(--sans);color:var(--ink,#14202b);line-height:1.5;white-space:pre-wrap}",
+/* ---- scan review ---- */
+".ml-scan-ov{position:fixed;inset:0;z-index:45;display:flex;align-items:center;justify-content:center;background:rgba(8,18,26,.5);padding:16px}",
+".ml-scan-box{background:var(--panel,#fff);border-radius:16px;padding:22px;text-align:center;color:var(--ink,#14202b);font:600 13.5px var(--sans);max-width:320px}",
+".ml-scan-spin{font-size:26px;animation:mlspin 1s linear infinite;margin-bottom:8px}",
+".ml-scan-err{color:var(--red,#ab1c2c);font:600 13.5px/1.5 var(--sans);margin-bottom:12px}",
+".ml-scan-rows{display:flex;flex-direction:column;gap:10px}",
+".ml-scan-row{border:1px solid var(--line,#d7dee3);border-radius:12px;padding:11px 12px;background:var(--panel,#fff)}",
+".ml-scan-row.ml-scan-flagged{border-left:4px solid var(--amber,#92620a);background:#fdf9f0}",
+".ml-scan-top{display:flex;align-items:flex-start;gap:9px}",
+".ml-scan-top input{width:18px;height:18px;margin-top:2px;flex:0 0 auto}",
+".ml-scan-titlewrap{flex:1;min-width:0}",
+".ml-scan-mapped{font:700 14px var(--sans);color:var(--ink,#14202b)}",
+".ml-scan-detected{font:500 12px var(--sans);color:var(--slate,#2d4356);margin-top:1px;word-break:break-word}",
+".ml-scan-line{font:500 12px var(--mono,monospace);color:var(--slate-soft,#5a7184);margin:6px 0 0 27px}",
+".ml-scan-edit{margin-top:8px}",
+".ml-scan-flag{font:800 11.5px var(--sans);color:var(--amber,#92620a);margin-top:7px}",
+".ml-scan-footer{display:flex;gap:10px}.ml-scan-footer .ml-sheet-cancel{min-height:48px}.ml-scan-footer .ml-check-btn{flex:1;min-height:48px}",
+/* headings kept for scan/list titles */
+".ml-header{padding:0 0 6px}.ml-title{margin:0;font:800 17px var(--sans)}.ml-subtitle{margin:2px 0 0;font:500 12.5px var(--sans);color:var(--slate,#2d4356)}.ml-advisory{font:600 11.5px var(--sans);color:var(--slate,#2d4356);margin-top:8px}",
+".ml-body{padding:0}"
+].join("");
     var st = document.createElement("style");
     st.id = "ml-styles"; st.textContent = css;
     document.head.appendChild(st);
