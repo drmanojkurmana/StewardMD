@@ -677,7 +677,7 @@
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
-        '<div class="v4-foot"><div class="disc">For qualified clinicians · AI-summarised — verify doses</div>' +
+        '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"></a>' +
           '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
       '</div></main>' +
