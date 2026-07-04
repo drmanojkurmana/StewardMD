@@ -3995,9 +3995,36 @@
   function smdSafetyFlagOn() { try { var v = localStorage.getItem("smd_safety_overlay"); return v === null ? true : v === "1"; } catch (e) { return true; } }
   function smdSafetyNum(x) { var n = parseFloat(x); return isFinite(n) ? n : null; }
 
+  var QT_PROLONGERS = {
+    azithromycin: "Azithromycin", clarithromycin: "Clarithromycin", erythromycin: "Erythromycin",
+    ciprofloxacin: "Ciprofloxacin", levofloxacin: "Levofloxacin", moxifloxacin: "Moxifloxacin",
+    ofloxacin: "Ofloxacin", norfloxacin: "Norfloxacin"
+  };
+  function smdRegimenText() {
+    var oa = document.getElementById("outputArea"); if (!oa) return "";
+    var rows = oa.querySelectorAll(".qa-regimen, .qa-regimen-row, .qa-regimen-meta");
+    var t = "";
+    if (rows.length) { Array.prototype.forEach.call(rows, function (n) { t += " " + (n.innerText || n.textContent || ""); }); }
+    else t = oa.innerText || oa.textContent || "";
+    return t.toLowerCase();
+  }
+  function detectRecommendedDrugs() {
+    var t = smdRegimenText(); if (!t) return [];
+    var found = {}, ref = window.ASP_DRUGS || {};
+    Object.keys(ref).forEach(function (k) {
+      var lab = String(ref[k].label || "").toLowerCase();
+      var gen = lab.split(/[ (\/\-]/)[0];              // first token of the label = generic name
+      if ((k.length > 3 && t.indexOf(k) >= 0) || (gen.length > 3 && t.indexOf(gen) >= 0)) found[k] = 1;
+    });
+    Object.keys(QT_PROLONGERS).forEach(function (k) { if (t.indexOf(k) >= 0) found[k] = 1; });
+    return Object.keys(found);
+  }
+
   window.SMD_SAFETY = {
     flag: smdSafetyFlagOn,
-    setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} }
+    setFlag: function (on) { try { localStorage.setItem("smd_safety_overlay", on ? "1" : "0"); } catch (e) {} },
+    QT_PROLONGERS: QT_PROLONGERS,
+    detectRecommendedDrugs: detectRecommendedDrugs
   };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }

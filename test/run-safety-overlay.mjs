@@ -32,6 +32,16 @@ try {
   await ev(`SMD_SAFETY.setFlag(true); return 1;`);
   chk("setFlag(true) turns it on", await ev(`return String(SMD_SAFETY.flag())`) === "true");
 
+  // ---- Task 3: detectRecommendedDrugs ----
+  await ev(`
+    var oa = document.getElementById("outputArea") || (function(){var d=document.createElement("div");d.id="outputArea";document.body.appendChild(d);return d;})();
+    oa.innerHTML = '<div class="qa-regimen"><div class="qa-regimen-row">Azithromycin 500 mg PO once daily</div><div class="qa-regimen-row">Amoxicillin-clavulanate 625 mg PO q8h</div></div>';
+    return 1;`);
+  const det = JSON.parse(await ev(`return JSON.stringify(SMD_SAFETY.detectRecommendedDrugs())`));
+  chk("detect finds azithromycin", det.indexOf("azithromycin") >= 0, JSON.stringify(det));
+  chk("detect finds amoxiclav (generic-name match)", det.indexOf("amoxiclav") >= 0 || det.indexOf("amoxicillin") >= 0, JSON.stringify(det));
+  chk("detect does NOT find levofloxacin (absent)", det.indexOf("levofloxacin") < 0);
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
