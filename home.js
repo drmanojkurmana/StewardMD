@@ -145,6 +145,8 @@
     search: '<circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
     framework: '<path d="M4 6h16M4 12h16M4 18h10"/>',
     icu: '<rect x="2" y="4" width="20" height="14" rx="2"/><path d="M6 11h2.5l1.5-3 2.5 6 1.5-3H18"/><path d="M9 22h6"/>',
+    ward: '<path d="M4 21V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v15"/><path d="M2 21h20"/><path d="M10 21v-4h4v4"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="9.5" y1="10.5" x2="14.5" y2="10.5"/>',
+    syndromes: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3.2A1.2 1.2 0 0 1 10.2 2h3.6A1.2 1.2 0 0 1 15 3.2V4"/><line x1="8.5" y1="9" x2="15.5" y2="9"/><line x1="8.5" y1="12.5" x2="15.5" y2="12.5"/><line x1="8.5" y1="16" x2="12.5" y2="16"/>',
     ai: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
     reasoning: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
@@ -163,7 +165,8 @@
     spark: '<path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/>',
     settings: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 2.6 7a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.6 1.6 0 0 0 7 2.6h.1A1.6 1.6 0 0 0 9 1.1V1a2 2 0 1 1 4 0v.1A1.6 1.6 0 0 0 17 2.6a1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0 1.1 2.7H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1.1Z"/>',
     x: '<line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/>',
-    award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>'
+    award: '<circle cx="12" cy="8" r="6"/><path d="M8.2 13 7 22l5-3 5 3-1.2-9"/>',
+    antibiogram: '<rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/>'
   };
   function svg(name, cls) { return '<svg viewBox="0 0 24 24" class="' + (cls || "") + '">' + (ICON[name] || "") + '</svg>'; }
   function call(fn) { try { fn(); } catch (e) { console.warn("home action failed", e); } }
@@ -390,7 +393,10 @@
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
+    ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    syndromes: function () { if (window.ASP && ASP.open) ASP.open(); else if (window.SB && SB.openSyn) SB.openSyn(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
+    antibiogram: function () { if (window.ABG && ABG.open) ABG.open(); else toast("Antibiogram loading…"); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
     about: function () { if (window.SB && SB.modal) SB.modal("aboutModal"); else if (typeof openModal === "function") openModal("aboutModal"); },
@@ -626,6 +632,67 @@
     document.head.appendChild(st);
   }
 
+  // ---- v4 home redesign (opt-in flag: localStorage smd_home_v4="1" or ?home=v4) ----
+  // Renders a coherent, de-duplicated authenticated home. Reuses the ACT dispatch and
+  // data-act wiring 1:1 so no routes change; styled by the scoped .hv4 layer in ui-v3.css.
+  function homeV4On() { try { return localStorage.getItem("smd_home_v4") === "1" || /[?&]home=v4\b/.test(location.search); } catch (e) { return false; } }
+  function greetV4() { try { var h = (new Date()).getHours(); return h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening"); } catch (e) { return "Welcome"; } }
+  function dateV4() { try { return (new Date()).toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" }); } catch (e) { return ""; } }
+  // First name of the signed-in Google account → "Dr <name>"; empty for guests.
+  function acctFirstV4() {
+    try {
+      var a = JSON.parse(localStorage.getItem("stewardmd_account") || "{}");
+      var n = String((a && a.name) || "").trim();
+      if (!n || (a && a.type === "guest" && !a.name)) return "";
+      return n.split(/\s+/)[0];
+    } catch (e) { return ""; }
+  }
+  function escV4(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  function greetLineV4() { var f = acctFirstV4(); return greetV4() + (f ? ", Dr " + escV4(f) : ""); }
+  function tileV4(act, icon, tt, sub) {
+    return '<button class="v4-tile" data-act="' + act + '" aria-label="' + tt + '"><span class="ic">' + svg(icon) + '</span><span class="tt">' + tt + '</span><span class="sub">' + sub + '</span></button>';
+  }
+  function homeV4Markup() {
+    return '' +
+      '<header class="v3-header">' +
+        '<div class="v3-brand"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
+        '<div class="v3-spacer"></div>' +
+        '<button class="v3-ic" data-act="search" aria-label="Search">' + svg("search") + '</button>' +
+        '<button class="v3-ic" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + svg("moon") + '</button>' +
+        '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
+        '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
+      '</header>' +
+      '<main class="v3-main"><div class="v3-stack">' +
+        '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
+        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Antibiotic Decision Engine</span><p class="v4-hero-p">Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
+        '<div class="v4-qrow">' +
+          '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
+          '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
+          '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
+          '<button class="v4-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("antibiogram") + '<span>Antibiogram</span></button>' +
+        '</div>' +
+        '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
+        '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
+        '<div class="v4-sec">Clinical tools</div>' +
+        '<div class="v4-grid">' +
+          tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
+          tileV4("drugs", "pills", "Drug Index", "Interactions · doses · brands") +
+          tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
+          tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
+        '</div>' +
+        '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
+          '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
+      '</div></main>' +
+      '<nav class="v3-tabbar">' +
+        '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
+        '<button class="v3-tab" data-act="cases" aria-label="Cases">' + svg("folder") + '<span>Cases</span></button>' +
+        '<button class="v3-tab" data-act="search" aria-label="Search">' + svg("search") + '<span>Search</span></button>' +
+        '<button class="v3-tab" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
+        '<button class="v3-tab" data-act="more" aria-label="More">' + svg("more") + '<span>More</span></button>' +
+      '</nav>';
+  }
+
   function build() {
     if (root) return;
     injectCSS(); injectV3CSS();
@@ -675,6 +742,15 @@
       '</nav>';
     document.body.appendChild(root);
 
+    // v4 redesign: swap in the coherent home layout (same data-act wiring).
+    if (homeV4On()) {
+      root.classList.add("hv4"); root.innerHTML = homeV4Markup();
+      // header theme toggle reflects current theme (moon in light, sun in dark)
+      var _tb = root.querySelector("#v4ThemeBtn");
+      if (_tb) { var _sync = function () { _tb.innerHTML = document.body.classList.contains("dark") ? svg("sun") : svg("moon"); };
+        _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
+    }
+
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
       var _fl = root.querySelector("#v3DevLogo");
@@ -695,6 +771,9 @@
     // never on the intro splash, disclaimer, or login gates.
     function refreshFab() {
       if (!fab) return;
+      // v4 home has a Home tab in the bottom nav, so the floating Home button is
+      // redundant everywhere (inner screens have their own close/back) — hide it.
+      if (homeV4On()) { if (fab.style.display !== "none") fab.style.display = "none"; return; }
       var gateUp = ["introPoster", "splash", "accountGate", "disclaimerModal"].some(function (id) {
         var el = document.getElementById(id); if (!el) return false;
         // A gate counts as "up" only if genuinely visible — these gates fade out via
@@ -1443,12 +1522,15 @@
   function injectFont() {
     if (document.getElementById("smd-inter")) return;
     var l = document.createElement("link"); l.id = "smd-inter"; l.rel = "stylesheet";
-    l.href = "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap";
+    // v4 home adds an editorial serif (Newsreader) for the wordmark + greeting.
+    var fam = "Inter:wght@400;500;600;700;800";
+    if (homeV4On()) fam += "&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Sacramento";
+    l.href = "https://fonts.googleapis.com/css2?family=" + fam + "&display=swap";
     document.head.appendChild(l);
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s3";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s6";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
