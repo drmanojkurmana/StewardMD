@@ -2,6 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Show the intro/disclaimer interstitials on a cadence, not every load: intro (#introPoster)
+     at most once per 3h; disclaimer/brand splash (#splash) once per calendar day. Runs before the
+     deferred app.js so the overlays are hidden from first paint (elements stay in the DOM so
+     app.js's controllers never hit a null). Fails open (shows them) on any error. -->
+<script>(function(){try{var n=Date.now(),c="";
+  var it=+(localStorage.getItem("smd_intro_ts")||0);
+  if(n-it>=3*3600*1000){localStorage.setItem("smd_intro_ts",String(n));}else{c+="#introPoster{display:none!important}";}
+  var today=new Date().toISOString().slice(0,10), d=localStorage.getItem("smd_disclaimer_day")||"";
+  if(d!==today){localStorage.setItem("smd_disclaimer_day",today);}else{c+="#splash{display:none!important}";}
+  if(c){var e=document.createElement("style");e.setAttribute("data-smd","interstitial-cadence");e.textContent=c;(document.head||document.documentElement).appendChild(e);}
+}catch(e){}})();</script>
 <!-- Conservative CSP: blocks <object>/<embed> and <base> hijacking, forces HTTPS subresources.
      (script-src is intentionally not locked down here because the app uses inline handlers;
      full script-src/frame-ancestors/HSTS should be set as Cloudflare response headers.) -->
