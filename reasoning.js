@@ -4079,38 +4079,96 @@
       ".smd-safety-h{font:800 13px var(--sans,system-ui);color:#b45309;letter-spacing:.02em;margin:0 0 8px}" +
       ".smd-safety-row{display:flex;gap:9px;align-items:flex-start;padding:5px 0;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--ink,#14202b)}" +
       ".smd-safety-row b{color:var(--ink,#14202b)}.smd-safety-ic{flex:0 0 auto}" +
-      ".smd-safety-ul{margin:5px 0 0;padding-left:18px}.smd-safety-ul li{margin:2px 0}";
+      ".smd-safety-ul{margin:5px 0 0;padding-left:18px}.smd-safety-ul li{margin:2px 0}" +
+      ".smd-safety-sub{font:600 11px var(--sans,system-ui);color:var(--slate-soft,#64748b);letter-spacing:0}" +
+      ".smd-safety-inputs{display:flex;flex-wrap:wrap;gap:9px 12px;margin:2px 0 10px;padding:0 0 11px;border-bottom:1px dashed var(--line,#e2e8f0)}" +
+      ".smd-safety-inputs label{display:flex;flex-direction:column;gap:3px;font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.02em}" +
+      ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:78px;padding:5px 7px;border:1px solid var(--line,#d7dee3);border-radius:7px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui)}" +
+      ".smd-safety-inputs label.chk{flex-direction:row;align-items:center;gap:6px;text-transform:none;font:600 12px var(--sans,system-ui);color:var(--ink,#14202b);align-self:flex-end;padding-bottom:5px}" +
+      ".smd-safety-inputs label.chk input{width:16px;height:16px}" +
+      ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}";
     document.head.appendChild(st);
+  }
+  // render-time findings; the read-only base the card's own inputs are overlaid onto.
+  var _safetyE = null;
+  // Effective patient = render-time findings overlaid with whatever the clinician typed into
+  // the card's inputs. NEVER written back to the case or the engine — this is a local check.
+  function smdSafetyEffective() {
+    var e = _safetyE || {}, eff = {}; for (var k in e) eff[k] = e[k];
+    var box = document.getElementById("smdSafetyInputs");
+    if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-sfx]"), function (el) {
+      var key = el.getAttribute("data-sfx");
+      if (el.type === "checkbox") {
+        if (key === "cardiac") {                       // proxy for CAD / HF / AF
+          if (el.checked) eff.knownCAD = true;
+          else { eff.knownCAD = false; eff.knownHeartFailure = false; eff.atrialFibHx = false; }
+        } else eff[key] = el.checked;
+      } else {
+        var v = (el.value || "").trim();
+        if (v !== "") eff[key] = v; else delete eff[key];  // cleared → treat as not entered
+      }
+    });
+    return eff;
+  }
+  // recompute + re-render ONLY the risk lines (inputs keep focus) from the effective patient.
+  function smdSafetyRecalc() {
+    var lines = document.getElementById("smdSafetyLines"); if (!lines) return;
+    try {
+      var eff = smdSafetyEffective(), drugs = detectRecommendedDrugs(), hasDrugs = drugs.length > 0;
+      var renal = renalCheck(eff), hep = hepaticCheck(eff, drugs), card = cardioCheck(eff, drugs), html = "";
+      if (renal) {
+        var rt = hasDrugs ? renal.text : renal.text.replace("; see the per-drug renal-adjust notes below.", " — review renal dosing for any antimicrobial started.");
+        html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(rt) + '</div></div>';
+      }
+      if (hep) {
+        var ht = hasDrugs ? hep.text : hep.text.replace("for the recommended agents.", "for any antimicrobial started.");
+        html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(ht);
+        if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
+        html += '</div></div>';
+      }
+      if (card) html += '<div class="smd-safety-row"><span class="smd-safety-ic">❤️</span><div><b>Cardiac</b> ' + esc(card.text) + '</div></div>';
+      lines.innerHTML = html || '<div class="smd-safety-empty">Enter the values above to check renal (CrCl), hepatic and QT-cardiac safety for the recommended antibiotic.</div>';
+    } catch (e) { /* never break the page */ }
+  }
+  function smdSafetyInputsHTML(e) {
+    function val(k) { var v = e && e[k]; return v == null ? "" : String(v); }
+    var sexF = String((e && e.sex) || "").toLowerCase().charAt(0) === "f";
+    var cardiacOn = !!(e && (e.knownCAD || e.knownHeartFailure || e.atrialFibHx));
+    return '<div class="smd-safety-inputs" id="smdSafetyInputs">' +
+      '<label>Age<input type="number" inputmode="numeric" data-sfx="age" value="' + esc(val("age")) + '"></label>' +
+      '<label>Sex<select data-sfx="sex"><option value="m"' + (sexF ? "" : " selected") + '>M</option><option value="f"' + (sexF ? " selected" : "") + '>F</option></select></label>' +
+      '<label>Weight kg<input type="number" inputmode="decimal" data-sfx="weight" value="' + esc(val("weight")) + '"></label>' +
+      '<label>Creatinine<input type="number" inputmode="decimal" step="0.1" data-sfx="creatinine" value="' + esc(val("creatinine")) + '"></label>' +
+      '<label>Bilirubin<input type="number" inputmode="decimal" step="0.1" data-sfx="bilirubin" value="' + esc(val("bilirubin")) + '"></label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="liverDisease"' + (e && e.liverDisease ? " checked" : "") + '>Liver disease</label>' +
+      '<label class="chk"><input type="checkbox" data-sfx="cardiac"' + (cardiacOn ? " checked" : "") + '>Cardiac (CAD/HF/AF)</label>' +
+      '</div>';
   }
   function smdSafetyOverlay(e) {
     var oa = document.getElementById("outputArea"); if (!oa) return false;
     var old = document.getElementById("smdSafetyCard"); if (old) old.parentNode.removeChild(old);   // idempotent
     if (!smdSafetyFlagOn() || !e) return false;
+    _safetyE = e;
     var drugs = detectRecommendedDrugs();
-    var hasDrugs = drugs.length > 0;
-    var renal = renalCheck(e), hep = hepaticCheck(e, drugs), card = cardioCheck(e, drugs);
-    if (!renal && !hep && !card) return false;
+    // Show the card on any real antibiotic recommendation (so the inputs are discoverable at the
+    // point of care) OR whenever a trigger already fires from the entered findings.
+    var fires = !!renalCheck(e) || !!hepaticCheck(e, drugs) || !!cardioCheck(e, drugs);
+    if (!drugs.length && !fires) return false;
     smdInjectSafetyCSS();
-    var html = '<div id="smdSafetyCard" class="smd-safety-card"><div class="smd-safety-h">⚠️ Patient-specific safety</div>';
-    if (renal) {
-      // On an "antibiotics not indicated" page there are no per-drug notes below, so the
-      // pointer would dangle — reword it when nothing was recommended.
-      var renalText = hasDrugs ? renal.text : renal.text.replace("; see the per-drug renal-adjust notes below.", " — review renal dosing for any antimicrobial started.");
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + esc(renalText) + '</div></div>';
-    }
-    if (hep) {
-      var hepText = hasDrugs ? hep.text : hep.text.replace("for the recommended agents.", "for any antimicrobial started.");
-      html += '<div class="smd-safety-row"><span class="smd-safety-ic">🟠</span><div><b>Hepatic</b> ' + esc(hepText);
-      if (hep.perDrug.length) html += '<ul class="smd-safety-ul">' + hep.perDrug.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.text) + '</li>'; }).join("") + '</ul>';
-      html += '</div></div>';
-    }
-    if (card) html += '<div class="smd-safety-row"><span class="smd-safety-ic">❤️</span><div><b>Cardiac</b> ' + esc(card.text) + '</div></div>';
-    html += '</div>';
+    var html = '<div id="smdSafetyCard" class="smd-safety-card">' +
+      '<div class="smd-safety-h">⚠️ Patient-specific safety <span class="smd-safety-sub">— enter values to check; does not change the recommendation</span></div>' +
+      smdSafetyInputsHTML(e) +
+      '<div class="smd-safety-lines" id="smdSafetyLines"></div></div>';
     // Sit the card with the recommendation: directly under the (relocated) Save-case box when
     // present, otherwise at the top of the output.
     var scp = oa.querySelector("#saveCasePrompt");
     if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html);
     else oa.insertAdjacentHTML("afterbegin", html);
+    var box = document.getElementById("smdSafetyInputs");
+    if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-sfx]"), function (el) {
+      el.addEventListener("input", smdSafetyRecalc); el.addEventListener("change", smdSafetyRecalc);
+    });
+    smdSafetyRecalc();
     return true;
   }
 
@@ -4122,7 +4180,8 @@
     renalCheck: renalCheck,
     hepaticCheck: hepaticCheck,
     cardioCheck: cardioCheck,
-    render: smdSafetyOverlay
+    render: smdSafetyOverlay,
+    recalc: smdSafetyRecalc
   };
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
