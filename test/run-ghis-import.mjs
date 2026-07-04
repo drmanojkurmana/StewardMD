@@ -109,10 +109,11 @@ try {
   // --- UI: enable/disable of the "Fetch from Ward Sync" add-option ----------
   await ev(`MEDLIST.clearAll(); var d=document.getElementById("gi-test")||document.createElement("div"); d.id="gi-test"; if(!d.parentNode) document.body.appendChild(d); MEDLIST.mount(d); return 1;`);
   await ev(`window.GHIS._selectedPatient = null; MEDLIST.mount(document.getElementById("gi-test")); return 1;`);
-  ok(await ev(`var b=document.querySelector("#gi-test [data-ml-wardsync]"); return !!b && b.disabled === true`) === true, "Ward Sync button DISABLED when no patient selected");
-  ok(await ev(`return /Select a Ward Sync patient first/i.test(document.getElementById("gi-test").innerText)`) === true, "disabled Ward Sync shows the 'Select a Ward Sync patient first.' hint");
+  // Redesign: with no patient the Ward Sync card is an ACTIVE "Select patient" guide.
+  ok(await ev(`var b=document.querySelector("#gi-test [data-ml-wardsync]"); return !!b && b.disabled === false && /Select patient/i.test(b.textContent)`) === true, "Ward Sync card offers an active 'Select patient' action when no patient selected");
+  ok(await ev(`return /Select a patient to import current medicines/i.test(document.getElementById("gi-test").innerText)`) === true, "Ward Sync card explains it imports the current medication chart");
   await ev(`window.GHIS._selectedPatient = { patientId: "PT42", name: "Ward Patient" }; MEDLIST.mount(document.getElementById("gi-test")); return 1;`);
-  ok(await ev(`var b=document.querySelector("#gi-test [data-ml-wardsync]"); return !!b && b.disabled === false`) === true, "Ward Sync button ENABLED once a patient is selected");
+  ok(await ev(`var b=document.querySelector("#gi-test [data-ml-wardsync]"); return !!b && b.disabled === false && /Fetch medication history/i.test(b.textContent)`) === true, "with a patient selected the card action becomes 'Fetch medication history'");
   ok(await ev(`return !/Coming soon/i.test(document.querySelector("#gi-test [data-ml-wardsync]").textContent)`) === true, "Ward Sync button no longer labelled 'Coming soon'");
 
   // --- (5) import adds selected meds w/ source 'ghis' ONLY AFTER confirm -----
