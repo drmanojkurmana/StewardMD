@@ -67,13 +67,19 @@ try {
   await call("Runtime.enable", {}); await call("Page.enable", {});
   await call("Network.enable", {}); await call("Network.setCacheDisabled", { cacheDisabled: true });
 
-  /* ───────────── FLAG OFF ───────────── */
-  console.log("\n── flag OFF (?workspaces=0) — must be a total no-op ──");
-  if (!await navigate(BASE + "?workspaces=0")) throw new Error("app did not boot (flag off)");
+  /* ───────────── LIVE: default ON (no param) ───────────── */
+  console.log("\n── LIVE default (no ?workspaces param) — feature must be ON ──");
+  if (!await navigate(BASE)) throw new Error("app did not boot (default)");
+  await sleep(400);
+  ok("LIVE: feature is ON by default (no URL param) — window.SMD_WS present", (await ev(`return !!(window.SMD_WS && SMD_WS.suggest);`)) === true);
+
+  /* ───────────── kill-switch: ?workspaces=0 fully disables ───────────── */
+  console.log("\n── kill-switch (?workspaces=0) — must be a total no-op ──");
+  if (!await navigate(BASE + "?workspaces=0")) throw new Error("app did not boot (kill-switch)");
   await sleep(300);
-  ok("flag off: window.SMD_WS is undefined (IIFE bailed, zero footprint)", (await ev(`return typeof window.SMD_WS==='undefined';`)) === true);
-  ok("flag off: no .sw-* DOM injected", (await ev(`return document.querySelectorAll('.sw-sbsw,.sw-sheet,.sw-shell,.sw-scrim,#sw-css').length;`)) === 0);
-  ok("flag off: Internal Medicine engine intact (DX.openWorkspace + _differential)", (await ev(`return !!(window.DX && typeof DX.openWorkspace==='function' && DX._differential);`)) === true);
+  ok("kill-switch: window.SMD_WS is undefined (IIFE bailed, zero footprint)", (await ev(`return typeof window.SMD_WS==='undefined';`)) === true);
+  ok("kill-switch: no .sw-* DOM injected", (await ev(`return document.querySelectorAll('.sw-sbsw,.sw-sheet,.sw-shell,.sw-scrim,#sw-css').length;`)) === 0);
+  ok("kill-switch: Internal Medicine engine intact (DX.openWorkspace + _differential)", (await ev(`return !!(window.DX && typeof DX.openWorkspace==='function' && DX._differential);`)) === true);
 
   /* ───────────── FLAG ON ───────────── */
   console.log("\n── flag ON (?workspaces=1) ──");
@@ -215,6 +221,11 @@ try {
   ok("watermark is aria-hidden (screen-reader safe)", (await ev(`var w=document.querySelector('#swShell .sw-wm'); if(!w) return false; return w.getAttribute('aria-hidden')==='true' || !!w.querySelector('[aria-hidden="true"]');`)) === true);
   ok("watermark is non-interactive (pointer-events:none)", (await ev(`var w=document.querySelector('#swShell .sw-wm'); return w? getComputedStyle(w).pointerEvents==='none' : false;`)) === true);
   ok("shell shows the Internal-Medicine escape hatch", (await ev(`return !!document.querySelector('#swShell #swToIM');`)) === true);
+
+  /* Early-access feedback control renders on a specialty assessment */
+  console.log("\n── feedback control (Early-access signal) ──");
+  await ev(`var b=[].slice.call(document.querySelectorAll('#swSyn .sw-synbtn'))[0]; if(b) b.click(); return 1;`); await sleep(400);
+  ok("feedback control present on the assessment (#swFb with 👍/👎/flag)", (await ev(`var f=document.querySelector('#swOut #swFb'); return !!(f && f.querySelectorAll('.sw-fbbtn').length===2 && f.querySelector('.sw-fbflag'));`)) === true);
 
   /* Internal Medicine path still opens the real reasoning engine */
   console.log("\n── Internal Medicine reachability (protected default) ──");
