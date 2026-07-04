@@ -146,6 +146,7 @@
     framework: '<path d="M4 6h16M4 12h16M4 18h10"/>',
     icu: '<rect x="2" y="4" width="20" height="14" rx="2"/><path d="M6 11h2.5l1.5-3 2.5 6 1.5-3H18"/><path d="M9 22h6"/>',
     ward: '<path d="M4 21V6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v15"/><path d="M2 21h20"/><path d="M10 21v-4h4v4"/><line x1="12" y1="8" x2="12" y2="13"/><line x1="9.5" y1="10.5" x2="14.5" y2="10.5"/>',
+    syndromes: '<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3.2A1.2 1.2 0 0 1 10.2 2h3.6A1.2 1.2 0 0 1 15 3.2V4"/><line x1="8.5" y1="9" x2="15.5" y2="9"/><line x1="8.5" y1="12.5" x2="15.5" y2="12.5"/><line x1="8.5" y1="16" x2="12.5" y2="16"/>',
     ai: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19"/>',
     reasoning: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
@@ -391,6 +392,7 @@
     framework: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Framework"); },
     icu: function () { if (window.ICU && ICU.open) ICU.open(); else if (window.INF && INF.openDashboard) INF.openDashboard(); else if (window.INF && INF.open) INF.open(); else toast("ICU loading…"); },
     ward: function () { if (window.openGHIS) window.openGHIS(); else if (window.GHIS && GHIS.open) GHIS.open(); else toast("Ward Sync loading…"); },
+    syndromes: function () { if (window.ASP && ASP.open) ASP.open(); else if (window.SB && SB.openSyn) SB.openSyn(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
     theme: function () { if (window.SB && SB.toggleTheme) SB.toggleTheme(); else document.body.classList.toggle("dark"); },
     menu: function () { if (window.SB && SB.open) SB.open(); },
@@ -650,10 +652,10 @@
   function homeV4Markup() {
     return '' +
       '<header class="v3-header">' +
-        '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="v3-brand"><div class="v3-mark" style="background:none;box-shadow:none"><img src="/logo.png" alt="StewardMD" style="width:100%;height:100%;object-fit:contain"></div><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
+        '<div class="v3-brand"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" data-act="search" aria-label="Search">' + svg("search") + '</button>' +
+        '<button class="v3-ic" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
         '<button class="v3-avatar" data-act="more" aria-label="Account">G</button>' +
       '</header>' +
@@ -661,7 +663,7 @@
         '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
         '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Antibiotic Decision Engine</span><p class="v4-hero-p">Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
-          '<button class="v4-qc" data-act="more" aria-label="Account">' + svg("user") + '<span>Account</span></button>' +
+          '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
           '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
           '<button class="v4-qc" data-act="icu" aria-label="ICU">' + svg("icu") + '<span>ICU</span></button>' +
           '<button class="v4-qc" data-act="askai" aria-label="Ask MaiK">' + svg("ai") + '<span>Ask MaiK</span></button>' +
@@ -675,7 +677,9 @@
           tileV4("electrolytes", "flask", "Electrolytes", "ICU correction") +
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
-        '<div class="v4-foot"><div class="disc">For qualified clinicians · AI-summarised — verify doses</div><div class="cred">© 2026 StewardMD · MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div></div>' +
+        '<div class="v4-foot"><div class="disc">For qualified clinicians · AI-summarised — verify doses</div>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo" src="/maik-logo.webp" alt="MaiK"></a>' +
+          '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
         '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
@@ -735,7 +739,13 @@
     document.body.appendChild(root);
 
     // v4 redesign: swap in the coherent home layout (same data-act wiring).
-    if (homeV4On()) { root.classList.add("hv4"); root.innerHTML = homeV4Markup(); }
+    if (homeV4On()) {
+      root.classList.add("hv4"); root.innerHTML = homeV4Markup();
+      // header theme toggle reflects current theme (moon in light, sun in dark)
+      var _tb = root.querySelector("#v4ThemeBtn");
+      if (_tb) { var _sync = function () { _tb.innerHTML = document.body.classList.contains("dark") ? svg("sun") : svg("moon"); };
+        _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
+    }
 
     try {
       var _dl = document.querySelector(".dev-studio-logo,.about-dev-logo");
