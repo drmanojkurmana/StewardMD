@@ -137,12 +137,12 @@ body.v3-dark, body.dark {
    line icons in hairline wells (no pastel fills); ONE deep-teal accent used
    sparingly for the primary action + active state; 8-pt rhythm; strict type.
    =========================================================================== */
-#homeV2.hv4{--hv4-serif:'Newsreader',Georgia,'Times New Roman',serif;--hv4-r:14px;--hv4-line:var(--v3-border)}
+#homeV2.hv4{--hv4-serif:'Newsreader',Georgia,'Times New Roman',serif;--hv4-word:'Nunito',var(--v3-font);--hv4-r:14px;--hv4-line:var(--v3-border)}
 /* --- masthead: serif wordmark, hairline base, calm muted controls --- */
 #homeV2.hv4 .v3-header{gap:var(--v3-s2);height:64px;padding-left:var(--v3-s4);padding-right:var(--v3-s3);background:var(--v3-panel);border-bottom:1px solid var(--hv4-line)}
 #homeV2.hv4 .v3-mark{display:none}
 #homeV2.hv4 .v3-brand{flex:0 1 auto;min-width:0;overflow:hidden;gap:0}
-#homeV2.hv4 .v3-brand-tt{font:500 21px/1 var(--hv4-serif);letter-spacing:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#homeV2.hv4 .v3-brand-tt{font:800 20px/1 var(--hv4-word);letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #homeV2.hv4 .v3-md{color:var(--v3-primary);font-weight:600}
 #homeV2.hv4 .v3-ic,#homeV2.hv4 .v3-avatar{flex:0 0 auto}
 #homeV2.hv4 .v3-ic{width:44px;height:44px;border-radius:10px;color:var(--v3-muted)}
@@ -159,7 +159,7 @@ body.v3-dark, body.dark {
 /* brand banner (restored) — flat hairline card, serif wordmark, outline tag + logo */
 #homeV2.hv4 .v4-hero{display:flex;align-items:center;gap:var(--v3-s4);padding:18px;border:1px solid var(--hv4-line);border-radius:var(--hv4-r);background:var(--v3-panel);box-shadow:none}
 #homeV2.hv4 .v4-hero-bd{flex:1;min-width:0}
-#homeV2.hv4 .v4-hero-tt{font:500 24px/1 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink)}
+#homeV2.hv4 .v4-hero-tt{font:800 26px/1 var(--hv4-word);letter-spacing:-.02em;color:var(--v3-ink)}
 #homeV2.hv4 .v4-hero-tag{display:inline-block;margin-top:9px;font:600 10px/1 var(--v3-font);text-transform:uppercase;letter-spacing:.12em;color:var(--v3-primary);border:1px solid var(--v3-primary);border-radius:var(--v3-r-pill);padding:5px 10px}
 #homeV2.hv4 .v4-hero-p{font:400 13px/1.5 var(--v3-font);color:var(--v3-muted);margin:11px 0 0}
 #homeV2.hv4 .v4-hero-logo{flex:0 0 auto;width:60px;height:60px;display:flex;align-items:center;justify-content:center}
