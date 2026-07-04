@@ -914,12 +914,19 @@
         '<li><b>v5.3</b> — Universal home button; electrolyte overlay click-block fixed; mobile header cleaned up.</li>' +
         '<li><b>v5.4</b> — Automated headless-browser regression testing introduced.</li>' +
       '</ul></div>' +
-      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v6 · Medical Knowledge Base (current)</span></div><ul>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver">v6 · Medical Knowledge Base</div><ul>' +
         '<li><b>v6.0</b> — Every disease migrated into a single declarative Medical Knowledge Base; the reasoning engine now runs entirely from the KB — regression-locked and byte-identical to the trusted engine.</li>' +
         '<li><b>v6.1</b> — Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls — paraphrased and page-cited.</li>' +
         '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
         '<li><b>v6.3</b> — Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
         '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and Gemini-ready (decision-first, explanation second).</li>' +
+      '</ul></div>' +
+      '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v7 · Redesigned workspace (current)</span></div><ul>' +
+        '<li><b>v7.0</b> — Ground-up redesign of the mobile home — editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
+        '<li><b>v7.1</b> — New <b>Antibiogram</b> explorer: an interactive antibiotic-coverage grid (green/red spectrum of activity) plus resistance rates from the ICMR AMRSN 2024 national antibiogram and the GIMSR hospital antibiogram.</li>' +
+        '<li><b>v7.2</b> — Ward Sync fetches live reports (labs / medications) directly from the GHIS hospital system for point-of-care calculators.</li>' +
+        '<li><b>v7.3</b> — Whole-app appearance themes now recolour the home too; restored the sidebar menu and a universal Home button on every screen.</li>' +
+        '<li><b>v7.4</b> — Brand polish: rounded StewardMD wordmark, refreshed footer with the MaiKnowledge signature.</li>' +
       '</ul></div>' +
     '</div>' +
     '<p style="font-size:11.5px;color:var(--slate-soft);margin-top:6px">The development journey of StewardMD — built and refined case by case at the bedside.</p>';
@@ -933,6 +940,7 @@
       '<li><span class="fn">1,465</span> drug monographs in structured &quot;gold&quot; format.</li>' +
       '<li><span class="fn">74</span> bedside clinical calculators.</li>' +
       '<li><span class="fn">13</span> dedicated electrolyte analysis engines.</li>' +
+      '<li><span class="fn">24</span> antibiotics × 12 organism groups in the interactive coverage grid, plus <span class="fn">2</span> antibiogram sources — ICMR AMRSN 2024 national + GIMSR hospital resistance rates.</li>' +
       '<li><span class="fn">~1.4&nbsp;MB</span> of hand-written clinical logic — no frameworks, no build step.</li>' +
       '<li><span class="fn">100%</span> offline-capable PWA — works with no signal at the bedside.</li>' +
       '<li><span class="fn">8</span> stewardship questions answered for <i>every</i> recommendation.</li>' +
