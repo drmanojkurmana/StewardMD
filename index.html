@@ -103,13 +103,11 @@ if("serviceWorker" in navigator){window.addEventListener("load",function(){navig
 body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
 @media (prefers-reduced-motion:reduce){.app-head{transition:none}}
 
-/* ── Scroll-linked accordion (one result section open at a time) ── */
-/* during scroll-driven open/close we snap instantly so heights measure exact */
+/* ── Fluid scroll-reveal accordion ── */
+/* toggles happen in one off-screen pass, so snap instantly (no mid-pass animation) */
 #outputArea.smd-spy-instant .smd-acc-wrap{transition:none!important}
-/* we do our own scroll compensation, so disable native scroll anchoring here */
+/* keep native scroll-anchoring out of the way of our off-screen toggles */
 #outputArea.smd-spy-on{overflow-anchor:none}
-/* trailing scroll room so every section header can reach the focus line */
-#smdSpyScrollRoom{width:100%;flex:0 0 auto;pointer-events:none}
 </style>
 </head>
 
@@ -1228,31 +1226,27 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
 </script>
 
 <script>
-/* ── (SPY) Apple-style scroll-linked accordion ──────────────────────────────
-   Keeps exactly ONE numbered result section open at a time: the section you
-   have scrolled to auto-expands; all the others collapse. It follows the
-   scroll position. Manual taps (a section header, or Expand/Collapse all)
-   pause the spy briefly so the user's explicit choice wins.
+/* ── (SPY) Fluid scroll-reveal accordion ────────────────────────────────────
+   Sections unfold as you scroll DOWN to them and fold back as you scroll UP
+   past them — the "expand on down-scroll, collapse on up-scroll" behaviour.
 
-   Smoothness: when the open section changes we toggle the collapse instantly
-   (animation off, so measured heights are exact) and then scrollBy() the
-   difference in the target header's position — this "anchor & restore" keeps
-   the section you are reading fixed in place, so collapsing a section that is
-   above the fold never makes the page jump. (iOS Safari has no native
-   scroll-anchoring, so we do it by hand.) */
+   Why this feels fluid (unlike a strict one-open-at-a-time accordion): every
+   open/close happens near the BOTTOM edge of the screen — a section opens just
+   as its header reaches the bottom (its body expands below the fold, off
+   screen) and closes only once its header drops back past the bottom. Nothing
+   in the part of the page you are reading ever changes height, so there is no
+   jump and no need to fight the scroll with programmatic scrolling. */
 (function () {
   function init() {
     if (window.__smdSpyWired) return;
     window.__smdSpyWired = true;
 
-    var ACTIVATE_FRAC = 0.42; // a section opens once its header reaches ~42% down the viewport
-    var HYST = 2;        // px hysteresis so a header resting on the line doesn't flip-flop
-    var PAUSE_MS = 3500; // after a manual toggle, leave the accordion alone this long
+    var OPEN_FRAC = 0.85;  // open once the header rises into the top 85% of the screen
+    var CLOSE_FRAC = 1.0;  // close again only when the header drops to the very bottom edge
+    var PAUSE_MS = 3500;   // after a manual tap, leave the accordion alone this long
     var pausedUntil = 0;
     var raf = false;
     var mutating = false;
-    var current = 0;     // index of the section we consider active (stepped ±1 as you scroll)
-    var lastFirst = null;// first card seen last time — detects a fresh results render
 
     function oa() { return document.getElementById("outputArea"); }
     function cards() {
@@ -1265,101 +1259,46 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
       if (open) c.classList.remove("smd-collapsed"); else c.classList.add("smd-collapsed");
       var h = hdr(c); if (h) h.setAttribute("aria-expanded", open ? "true" : "false");
     }
-    function focusLine() {
-      var head = document.querySelector(".app-head");
-      var b = head ? Math.max(head.getBoundingClientRect().bottom, 0) : 0;
-      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
-      // ~42% down the screen, but never tucked up under the sticky header
-      return Math.max(b + 12, Math.round(vh * ACTIVATE_FRAC));
-    }
-    // With only one section open the page can get short — so a later section's
-    // header may never be able to scroll up to the focus line. A trailing
-    // spacer guarantees every header is reachable. It lives in .shell (not in
-    // #outputArea) so it never disturbs the results' mutation observer.
-    var spacer = null;
-    function sizeSpacer(active) {
-      var shell = document.querySelector(".shell"); if (!shell) return;
-      if (!spacer) {
-        spacer = document.createElement("div");
-        spacer.id = "smdSpyScrollRoom";
-        spacer.setAttribute("aria-hidden", "true");
-        shell.appendChild(spacer);
-      } else if (spacer.parentNode !== shell || shell.lastElementChild !== spacer) {
-        shell.appendChild(spacer);           // keep it last even if results re-render
-      }
-      // room needed below a header for it to sit at the focus line == viewport
-      // height below that line — but only add what the page is actually short by.
-      var need = Math.max(0, (window.innerHeight || 0) - focusLine());
-      var list = cards();
-      var last = list.length ? hdr(list[list.length - 1]) : null;
-      var shortfall = need;
-      if (last && !active) {   // measured only when layout is settled (no pending change)
-        var belowLast = document.documentElement.scrollHeight
-          - (last.getBoundingClientRect().top + window.pageYOffset)
-          - spacer.offsetHeight;                 // content that already sits below the last header
-        shortfall = Math.max(0, need - Math.max(0, belowLast));
-      }
-      var h = Math.round(shortfall) + "px";
-      if (spacer.style.height !== h) spacer.style.height = h;
-    }
-    function stateMatches(list, idx) {
-      for (var i = 0; i < list.length; i++) if ((i === idx) !== isOpen(list[i])) return false;
-      return true;
-    }
-    // Open `idx`, collapse the rest — instantly — and keep the anchor header
-    // pinned in place so the page never jumps.
-    function applyOpen(list, idx, o) {
-      var anchor = hdr(list[idx]);
-      var before = anchor ? anchor.getBoundingClientRect().top : 0;
-      mutating = true;
-      o.classList.add("smd-spy-instant");
-      for (var j = 0; j < list.length; j++) setOpen(list[j], j === idx);
-      sizeSpacer(true);
-      var after = anchor ? anchor.getBoundingClientRect().top : 0; // read forces reflow
-      var delta = Math.round(after - before);
-      if (delta) window.scrollBy(0, delta);
-      requestAnimationFrame(function () {
-        o.classList.remove("smd-spy-instant"); mutating = false; sizeSpacer(false);
-      });
-    }
 
     function run() {
       raf = false;
       if (Date.now() < pausedUntil) return;
-      var list = cards();
       var o = oa();
-      if (!o || list.length < 2) {
-        if (o) o.classList.remove("smd-spy-on");
-        if (spacer) spacer.style.height = "0px";
-        return;
+      var list = cards();
+      if (!o || !list.length) { if (o) o.classList.remove("smd-spy-on"); return; }
+      o.classList.add("smd-spy-on");
+
+      var vh = window.innerHeight || document.documentElement.clientHeight || 0;
+      var openLine = vh * OPEN_FRAC;
+      var closeLine = vh * CLOSE_FRAC;
+
+      // One top-to-bottom pass. Animation is off during the pass so each toggle's
+      // height change is applied before we measure the next header — that keeps
+      // the pass self-consistent (and the changes are off-screen anyway).
+      o.classList.add("smd-spy-instant");
+      var changed = false;
+      for (var i = 0; i < list.length; i++) {
+        var h = hdr(list[i]); if (!h) continue;
+        var top = h.getBoundingClientRect().top;
+        var open = isOpen(list[i]);
+        // open when the header reaches the bottom band; keep open until it drops
+        // all the way back to the bottom edge (hysteresis between the two lines).
+        var want = open ? (top < closeLine) : (top <= openLine);
+        if (want !== open) { setOpen(list[i], want); changed = true; }
       }
-      o.classList.add("smd-spy-on");            // enables overflow-anchor:none
-
-      // a fresh set of results → start from the top again
-      if (list[0] !== lastFirst) { lastFirst = list[0]; current = 0; }
-      var idx = Math.min(Math.max(current, 0), list.length - 1);
-
-      // make sure exactly `idx` is open, so the measurements below are meaningful
-      if (!stateMatches(list, idx)) { applyOpen(list, idx, o); current = idx; return; }
-
-      // step toward the section sitting on the focus line — at most one step per
-      // frame; we re-schedule so a fast scroll still converges over a few frames.
-      var fl = focusLine();
-      var self = hdr(list[idx]).getBoundingClientRect().top;
-      var next = idx < list.length - 1 ? hdr(list[idx + 1]).getBoundingClientRect().top : Infinity;
-      var target = idx;
-      if (idx < list.length - 1 && next - HYST <= fl) target = idx + 1;      // next section reached the line → open it
-      else if (idx > 0 && self > fl + HYST) target = idx - 1;                // this section dropped below the line → go back
-
-      if (target !== idx) { applyOpen(list, target, o); current = target; schedule(); }
-      else sizeSpacer(false);
+      if (changed) {
+        mutating = true;
+        requestAnimationFrame(function () { o.classList.remove("smd-spy-instant"); mutating = false; });
+      } else {
+        o.classList.remove("smd-spy-instant");
+      }
     }
     function schedule() { if (!raf) { raf = true; requestAnimationFrame(run); } }
 
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
 
-    // manual interaction wins for a short window
+    // a manual tap (header, or Expand/Collapse all) wins for a short window
     function markManual(e) {
       if (e.target && e.target.closest &&
           e.target.closest(".card.smd-acc > h2, [data-smd-acc-all]")) {
@@ -1371,13 +1310,12 @@ body.dark .app-head.head-scrolled{box-shadow:0 2px 12px rgba(0,0,0,.4)}
       if (e.key === "Enter" || e.key === " " || e.key === "Spacebar") markManual(e);
     }, true);
 
-    // results are rendered/replaced dynamically → re-sync when #outputArea changes
     var o0 = oa();
     if (o0 && window.MutationObserver) {
       new MutationObserver(function () { if (!mutating) schedule(); })
         .observe(o0, { childList: true, subtree: true });
     }
-    schedule(); // initial state
+    schedule();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
