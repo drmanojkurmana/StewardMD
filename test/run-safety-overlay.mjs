@@ -65,6 +65,24 @@ try {
   chk("cardioCheck null when no QT drug", await ev(`return String(SMD_SAFETY.cardioCheck({age:80,knownCAD:true}, ["amoxiclav"])===null)`) === "true");
   chk("cardioCheck fires on age>=65 alone", await ev(`return String(SMD_SAFETY.cardioCheck({age:70}, ["levofloxacin"])!==null)`) === "true");
 
+  // ---- Task 7: injector ----
+  await ev(`
+    var oa = document.getElementById("outputArea");
+    oa.innerHTML = '<div class="qa-regimen"><div class="qa-regimen-row">Azithromycin 500 mg PO once daily</div></div>';
+    window.__sret = SMD_SAFETY.render({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",liverDisease:true});
+    return 1;`);
+  chk("render returns true when triggers fire", await ev(`return String(window.__sret)`) === "true");
+  chk("safety card injected", await ev(`return !!document.getElementById("smdSafetyCard")`) === true);
+  const cardTxt = await ev(`var c=document.getElementById("smdSafetyCard");return c?c.innerText:""`);
+  chk("card shows Renal", /Renal/.test(cardTxt));
+  chk("card shows Hepatic", /Hepatic/.test(cardTxt));
+  chk("card shows Cardiac + QT", /Cardiac/.test(cardTxt) && /QT/.test(cardTxt));
+  await ev(`SMD_SAFETY.render({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",liverDisease:true}); return 1;`);
+  chk("idempotent — single card", await ev(`return document.querySelectorAll("#smdSafetyCard").length`) === 1);
+  await ev(`SMD_SAFETY.setFlag(false); var r=SMD_SAFETY.render({age:80,knownCAD:true,creatinine:2.5,weight:60,sex:"m",liverDisease:true}); SMD_SAFETY.setFlag(true); window.__off=r; return 1;`);
+  chk("flag OFF → no card, returns false", await ev(`return String(window.__off)`) === "false" && await ev(`return !document.getElementById("smdSafetyCard")`) === true);
+  chk("no triggers → no card", await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Amoxicillin 500 mg</div></div>'; var r=SMD_SAFETY.render({age:30,weight:70,sex:"m",creatinine:0.8}); return String(r)+"|"+!!document.getElementById("smdSafetyCard");`) === "false|false");
+
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }
 process.exitCode = fails ? 1 : 0;
