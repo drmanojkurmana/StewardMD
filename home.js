@@ -701,7 +701,8 @@
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
-          '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div></div>' +
+          '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div>' +
+          '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a href="/privacy" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline">Terms of Use</a></div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
         '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
