@@ -254,8 +254,8 @@
   function openSheet(opts) {
     injectCSS();
     opts = opts || {};
-    if (!_scrim) { _scrim = document.createElement("div"); _scrim.className = "sw-scrim"; document.body.appendChild(_scrim); _scrim.addEventListener("click", closeSheet); }
-    if (!_sheet) { _sheet = document.createElement("div"); _sheet.className = "sw-sheet"; document.body.appendChild(_sheet); }
+    if (!_scrim) { _scrim = document.createElement("div"); _scrim.className = "sw-scrim"; _scrim.id = "swScrim"; document.body.appendChild(_scrim); _scrim.addEventListener("click", closeSheet); }
+    if (!_sheet) { _sheet = document.createElement("div"); _sheet.className = "sw-sheet"; _sheet.id = "swSheet"; document.body.appendChild(_sheet); }
     var cur = opts.inCase ? activeWorkspace() : prefs.defaultClinicalWorkspace;
     var h = '<div class="sw-grab"></div><h3>Choose clinical workspace</h3>';
     if (opts.inCase) {
@@ -314,13 +314,15 @@
       toast(meta(id).name + (id === IM ? " selected — tap Start a new case." : (o.asDefault ? " is now your default — tap Start a new case." : " ready — tap Start a new case.")));
       return;
     }
-    // In-case switch (mid-case, from the workspace pill): open immediately.
+    // In-case switch (mid-case, from the workspace pill): open immediately, then consume the
+    // one-shot override so the NEXT case reverts to the default workspace shown in the sidebar.
     if (id === IM) { caseWorkspace = null; if (_shell) _shell.classList.remove("on"); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
-    else { openSpecialtyShell(id); }
+    else { openSpecialtyShell(id); caseWorkspace = null; refreshSidebarLabel(); }
   }
-  // Called by Home's "Start a new case" (Dx My Patient): if a specialty workspace is active,
-  // open its engine and return true; if Internal Medicine, return false so Home runs its own IM flow.
-  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); return true; }
+  // Called by Home's "Start a new case" (Dx My Patient / Start a Case): if a specialty workspace is
+  // active, open its engine and return true; if Internal Medicine, return false so Home runs its own
+  // IM flow. The "this case" override is ONE-SHOT — consumed here so the next case reverts to default.
+  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); caseWorkspace = null; refreshSidebarLabel(); return true; }
 
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
   var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
@@ -363,7 +365,7 @@
       });
     }
   }
-  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
+  function openIM() { if (_shell) _shell.classList.remove("on"); caseWorkspace = null; refreshSidebarLabel(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
 
   function selSet() { var s = new Set(); for (var k in _es.sel) if (_es.sel[k]) s.add(k); return s; }
   function renderSyndrome() {
@@ -464,7 +466,7 @@
   }
 
   /* ───────────────────────────── sidebar switcher (wrap SB.open) ───────────────────────────── */
-  function refreshSidebarLabel() { var b = document.querySelector("#sbMenu .sw-sbsw .nm"); if (b) b.textContent = meta(prefs.defaultClinicalWorkspace).name; var i2 = document.querySelector("#sbMenu .sw-sbsw .ic"); if (i2) i2.innerHTML = ic(ICONS[prefs.defaultClinicalWorkspace]); }
+  function refreshSidebarLabel() { var w = activeWorkspace(); var b = document.querySelector("#sbMenu .sw-sbsw .nm"); if (b) b.textContent = meta(w).name; var i2 = document.querySelector("#sbMenu .sw-sbsw .ic"); if (i2) i2.innerHTML = ic(ICONS[w]); }
   function injectSidebarSwitcher() {
     var menu = document.getElementById("sbMenu"); if (!menu || menu.querySelector(".sw-sbsw")) return;
     // find the "Clinical Reasoning" leaf button
@@ -472,7 +474,7 @@
     for (var i = 0; i < btns.length; i++) { if (/clinical reasoning/i.test(btns[i].textContent || "")) { target = btns[i]; break; } }
     var lab = document.createElement("div"); lab.className = "sw-sblab"; lab.textContent = "Clinical workspace";
     var sw = document.createElement("button"); sw.className = "sw-sbsw";
-    sw.innerHTML = '<span class="ic">' + ic(ICONS[prefs.defaultClinicalWorkspace]) + '</span><span class="nm">' + meta(prefs.defaultClinicalWorkspace).name + '</span><span class="chev">▾</span>';
+    sw.innerHTML = '<span class="ic">' + ic(ICONS[activeWorkspace()]) + '</span><span class="nm">' + meta(activeWorkspace()).name + '</span><span class="chev">▾</span>';
     sw.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openSheet({ inCase: false }); });
     if (target && target.parentNode) { target.parentNode.insertBefore(sw, target); target.parentNode.insertBefore(lab, sw); }
     else { menu.insertBefore(sw, menu.firstChild); menu.insertBefore(lab, sw); }

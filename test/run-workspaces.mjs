@@ -224,12 +224,14 @@ try {
 
   /* branch selector routing: pick a branch → set it + return home (NOT open engine);
      then "Start a new case" opens THAT branch's engine (not IM). */
-  console.log("\n── branch selector routing (set → home → start case) ──");
+  console.log("\n── branch selector routing (set → home → start case → one-shot) ──");
+  await ev(`window.SMD_WS.setDefault('internal_medicine'); return 1;`);   // deterministic default (test profile can carry a stale default)
   await ev(`window.SMD_WS.open(); return 1;`); await sleep(350);
-  await ev(`document.querySelector('.sw-opt[data-ws="surgery"]').click(); return 1;`); await sleep(450);
+  await ev(`document.querySelector('.sw-opt[data-ws="surgery"]').click(); return 1;`); await sleep(450);   // "use for my next case" (default radio)
   ok("selector: picking a branch does NOT open the engine (returns home)", (await ev(`return !document.querySelector('#swShell.on');`)) === true);
   ok("selector: the picked branch becomes the active workspace", (await ev(`return window.SMD_WS.active();`)) === "surgery");
   ok("Start-a-new-case routes into the active specialty (startActiveCase opens its shell)", (await ev(`var r=window.SMD_WS.startActiveCase(); return r===true && !!document.querySelector('#swShell.on');`)) === true);
+  ok("one-shot: after starting, the 'this case' override is consumed → active reverts to the default (IM)", (await ev(`return window.SMD_WS.active();`)) === "internal_medicine");
 
   /* watermark accessibility + specialty shell (shell now open on Surgery) */
   console.log("\n── branch watermark (decorative, non-interactive) ──");
