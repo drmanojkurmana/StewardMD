@@ -216,6 +216,12 @@
       ".sw-openim{display:block;width:100%;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans);padding:12px;cursor:pointer;margin-top:10px}",
       ".sw-ladder{display:flex;flex-direction:column;gap:6px}.sw-ladder .r{display:flex;align-items:center;gap:9px;font:600 13px var(--sans);color:var(--ink)}.sw-ladder .r .d{width:9px;height:9px;border-radius:50%;flex:0 0 auto}",
       ".sw-imbtn{display:block;width:100%;border:none;border-radius:13px;background:var(--teal,#0e6e63);color:#fff;font:800 15px var(--sans);padding:14px;cursor:pointer;margin-top:6px}",
+      // point-of-care hand-off action bar
+      ".sw-poc{margin-top:13px;padding-top:12px;border-top:1px solid var(--line,#d7dee3)}.sw-poc .lab{font:700 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft,#5a7184);margin-bottom:8px}",
+      ".sw-pocrow{display:flex;flex-wrap:wrap;gap:8px}",
+      ".sw-pocbtn{border:1px solid var(--teal,#0e6e63);background:var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63);border-radius:999px;font:700 12.5px var(--sans);padding:9px 13px;cursor:pointer}.sw-pocbtn:active{transform:scale(.96)}",
+      ".sw-pocbtn.abx{background:var(--teal,#0e6e63);color:#fff}",
+      ".sw-pocnote{font:500 11px/1.5 var(--sans);color:var(--slate-soft,#5a7184);margin-top:8px}",
       // early-access feedback control
       ".sw-fb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:12px;padding-top:11px;border-top:1px dashed var(--line,#d7dee3)}.sw-fb .q{font:600 12.5px var(--sans);color:var(--slate,#2d4356)}.sw-fb .btns{display:flex;gap:7px;margin-left:auto;flex-wrap:wrap}",
       ".sw-fbbtn{border:1px solid var(--line,#d7dee3);background:var(--paper,#f6f7f5);border-radius:999px;font-size:15px;line-height:1;padding:7px 11px;cursor:pointer}.sw-fbbtn:active{transform:scale(.94)}",
@@ -368,6 +374,16 @@
       h += '<div class="sw-shared"><b>Shared condition.</b> Internal Medicine is <b>primary</b>' + (sh.role ? ' — this workspace is the ' + sh.role.toLowerCase() : '') + '. It does not overwrite the IM assessment. Antibiotic choice + ICMR precedence stay in the IM pathway.</div>';
       h += '<button class="sw-openim" id="swOutIM">Open Internal Medicine pathway (primary)</button>';
     }
+    // Point-of-care hand-off: jump into the stewardship / knowledge tools without leaving the flow.
+    var poc = '<div class="sw-poc"><div class="lab">Take it further</div><div class="sw-pocrow">';
+    if (lad >= 2) {
+      poc += '<button class="sw-pocbtn abx" data-poc="abx">💊 Antibiotic choice</button>';
+      poc += '<button class="sw-pocbtn" data-poc="ix">⚠ Interactions</button>';
+    }
+    poc += '<button class="sw-pocbtn" data-poc="maik">✦ Ask MaiK</button>';
+    poc += '<button class="sw-pocbtn" data-poc="learn">📖 Learn more</button>';
+    poc += '</div><div class="sw-pocnote">Antibiotic choice + dose per local antibiogram / ICMR &amp; the individual patient — these tools help you decide.</div></div>';
+    h += poc;
     h += '<div class="sw-fb" id="swFb"><span class="q">Early access — was this helpful?</span>' +
       '<span class="btns"><button class="sw-fbbtn" data-v="up" aria-label="Helpful">👍</button>' +
       '<button class="sw-fbbtn" data-v="down" aria-label="Not helpful">👎</button>' +
@@ -375,6 +391,7 @@
     h += '</div>';
     box.innerHTML = h;
     var oi = box.querySelector("#swOutIM"); if (oi) oi.addEventListener("click", openIM);
+    box.querySelectorAll(".sw-pocbtn").forEach(function (b) { b.addEventListener("click", function () { pocAction(b.getAttribute("data-poc")); }); });
     var fb = box.querySelector("#swFb");
     if (fb) {
       fb.querySelectorAll(".sw-fbbtn").forEach(function (b) { b.addEventListener("click", function () { submitFeedback({ kind: "rating", helpful: b.getAttribute("data-v") }); }); });
@@ -387,6 +404,28 @@
       });
     }
   }
+  /* ── Point-of-care hand-off: open the app's existing stewardship / knowledge tools,
+       carrying the context. Hides the shell first (like openIM) so the tool is on top
+       regardless of its z-index; the MaiK question preserves the clinical context. ── */
+  function pocAction(kind) {
+    var synName = (_es && _es.syn && _es.syn.name) || "", wsName = meta(_shellWs).name;
+    if (_shell) _shell.classList.remove("on");
+    try {
+      if (kind === "abx") {
+        if (window.ABG && ABG.open) return ABG.open();
+        if (window.MEDDB && MEDDB.openList) return MEDDB.openList();
+        return toast("Antibiogram loading…");
+      }
+      if (kind === "ix") { if (window.MEDDRUGS && MEDDRUGS.openInteractions) return MEDDRUGS.openInteractions(); return toast("Interaction checker loading…"); }
+      if (kind === "learn") { if (window.SB && SB.openRef) return SB.openRef("syndromes"); return toast("Knowledge library loading…"); }
+      if (kind === "maik") {
+        var q = "In the " + wsName + " workspace" + (synName ? ", for " + synName : "") + ": summarise the key management — danger signs, whether antibiotics/source control are needed, referral, and the antibiotic choice if indicated (per ICMR / local antibiogram). Advisory.";
+        if (window.SMD_askMaik) return SMD_askMaik(q);
+        return toast("Assistant loading…");
+      }
+    } catch (e) { toast("Could not open — try from the home screen."); }
+  }
+
   /* ── Early-access feedback: anonymous, no PHI. Mirrors locally + best-effort POST. ── */
   function submitFeedback(o) {
     var payload = { ws: _shellWs || "", syn: (_es && _es.syn && _es.syn.id) || "", kind: o.kind, helpful: o.helpful || null,
