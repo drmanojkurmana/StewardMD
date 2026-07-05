@@ -351,6 +351,9 @@
 
   // Start a Case -> new-design Simple/Advanced chooser (rendered inside the v2 home), wired to the real cards.
   function openCaseChooser() {
+    // If a specialty workspace (e.g. Surgery) is active, start the case in THAT engine
+    // instead of the Simple/Advanced Internal-Medicine chooser. IM → falls through below.
+    try { if (window.SMD_WS && SMD_WS.startActiveCase && SMD_WS.startActiveCase()) return; } catch (e) {}
     if (!root) build();
     root.classList.add("on"); if (fab) fab.classList.remove("on");
     var p = root.querySelector("#hvCase");
