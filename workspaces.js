@@ -163,7 +163,7 @@
       ".sw-sbsw .nm{flex:1;min-width:0;font:700 14px var(--sans,system-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
       ".sw-sbsw .chev{color:var(--slate-soft,#5a7184);font-size:13px}",
       // bottom sheet / popover
-      ".sw-scrim{position:fixed;inset:0;background:rgba(8,16,22,.5);z-index:16040;opacity:0;transition:opacity .2s}.sw-scrim.on{opacity:1}",
+      ".sw-scrim{position:fixed;inset:0;background:rgba(8,16,22,.5);z-index:16040;opacity:0;pointer-events:none;transition:opacity .2s}.sw-scrim.on{opacity:1;pointer-events:auto}",
       ".sw-sheet{position:fixed;left:0;right:0;bottom:0;z-index:16041;background:var(--panel,#fff);color:var(--ink,#14202b);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.24);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:88vh;overflow-y:auto;font-family:var(--sans,system-ui);padding-bottom:calc(14px + env(safe-area-inset-bottom))}.sw-sheet.on{transform:none}",
       ".sw-grab{width:40px;height:5px;border-radius:3px;background:var(--line,#d7dee3);margin:9px auto 2px}",
       ".sw-sheet h3{font:800 17px var(--sans);margin:6px 18px 4px;color:var(--ink)}",
@@ -298,7 +298,7 @@
     if (o.inCase) { caseWorkspace = id; }
     closeSheet();
     // open the workspace
-    if (id === IM) { caseWorkspace = null; try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
+    if (id === IM) { caseWorkspace = null; if (_shell) _shell.classList.remove("on"); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
     else { openSpecialtyShell(id); }
     refreshSidebarLabel();
   }
