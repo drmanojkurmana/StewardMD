@@ -4823,10 +4823,23 @@
     if (!smdTbIsRender(synId, oa)) return false;
     _tbSynId = synId || null;
     smdTbInjectCSS();
-    // hide the vague native "Modified regimens per drug-susceptibility testing" alternative card
+    // hide the vague native "Modified regimens per drug-susceptibility testing" alternative card.
+    // GUARD: our own injected cards (#smdSafetyCard / #smdTbCard) echo that phrase in their
+    // "Alternatives" list, and their class matches [class*=card] — so an unqualified closest()
+    // would hide the safety card / this workspace. Skip them, and also retire the now-empty
+    // "ALTERNATIVE REGIMENS" section label so it isn't left dangling.
     try {
+      var skip = function (b) { return !b || b === oa || b.id === "smdSafetyCard" || b.id === "smdTbCard" ||
+        (b.classList && (b.classList.contains("smd-safety-card") || b.classList.contains("smd-tb-card"))); };
       Array.prototype.forEach.call(oa.querySelectorAll("*"), function (n) {
-        if (n.children && n.children.length <= 6 && /modified regimens per drug-susceptibility/i.test(n.textContent || "") && n.textContent.length < 400) { var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n; if (box && box !== oa) box.style.display = "none"; }
+        if (n.children && n.children.length <= 6 && /modified regimens per drug-susceptibility/i.test(n.textContent || "") && n.textContent.length < 400) {
+          var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n;
+          if (skip(box)) return;
+          box.style.display = "none";
+          // retire a dangling "ALTERNATIVE REGIMENS" heading that only wrapped this card
+          var prev = box.previousElementSibling;
+          if (prev && /^\s*alternative regimens\s*$/i.test((prev.textContent || "").trim()) && prev.children.length <= 1) prev.style.display = "none";
+        }
       });
     } catch (_) {}
     var html = '<div id="smdTbCard" class="smd-tb-card">' +

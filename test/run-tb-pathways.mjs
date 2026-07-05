@@ -109,6 +109,24 @@ try {
   chk("PR4: enrichment is reversible (localStorage smd_asp_tb kill-switch honoured)",
     await ev(`return typeof SMD_TB.enrichAspConsole === "function"`) === true);
 
+  // PR5: TB hide-loop must NOT hide the safety card (regression) + must retire the empty heading.
+  // The vague phrase also appears in the safety card's "Alternatives" list, and .smd-safety-card
+  // matches [class*=card] — an unqualified closest() previously hid the whole safety card.
+  await ev(`await SMD_TB.ready();
+    var oa=document.getElementById("outputArea");
+    oa.innerHTML =
+      '<div id="smdSafetyCard" class="smd-safety-card"><div class="smd-safety-row">Alternatives<ul><li><b>Modified regimens per drug-susceptibility testing</b></li></ul></div></div>' +
+      '<div class="alt-head">Alternative regimens</div>' +
+      '<div class="drug-card"><div class="drug-name">Modified regimens per drug-susceptibility testing</div></div>';
+    SMD_TB.renderWorkspace({age:35, site:"pulmonary"}, "PULMONARY_TB");
+    return 1;`);
+  chk("PR5: TB hide-loop does NOT hide the safety card (its Alternatives echo the vague phrase)",
+    await ev(`var c=document.getElementById("smdSafetyCard");return !!(c && getComputedStyle(c).display!=="none");`) === true);
+  chk("PR5: native vague 'Modified regimens' drug-card still hidden",
+    await ev(`var c=[].slice.call(document.querySelectorAll("#outputArea .drug-card")).filter(function(n){return !n.closest("#smdSafetyCard");})[0];return c? getComputedStyle(c).display==="none":false;`) === true);
+  chk("PR5: dangling 'Alternative regimens' heading retired",
+    await ev(`var h=[].slice.call(document.querySelectorAll("#outputArea .alt-head"))[0];return h? getComputedStyle(h).display==="none":false;`) === true);
+
   // ---- coverage matrix ----
   const cov = J(await ev(`var d=SMD_TB.data(); return JSON.stringify((d.reg.regimens||[]).map(function(r){return {id:r.id, states:(r.forStates||[]).join("/"), source:(r.source||"").split(";")[0]};}));`));
   console.log("\n  Coverage matrix (regimen × states × source):");
