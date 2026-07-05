@@ -271,6 +271,18 @@ try {
   await ev(`var b=document.querySelector('[data-act="reasoning"]'); if(b) b.click(); return 1;`); await sleep(600);
   ok("Home 'Dx My Patient' opens the active specialty shell too", (await ev(`return !!document.querySelector('#swShell.on');`)) === true);
 
+  /* MaiK assistant: conversation (question AND answer) persists across close/reopen within the session */
+  console.log("\n── MaiK history persistence ──");
+  if ((await ev(`return typeof window.SMD_askMaik==='function';`)) === true) {
+    await ev(`try{if(window.SMD_goHome)SMD_goHome();}catch(e){} window.SMD_askMaik(''); return 1;`); await sleep(400);
+    await ev(`var q=document.getElementById('maikQ'); if(q){q.value='hello';document.getElementById('maikSend').click();} return 1;`); await sleep(500);
+    const before = JSON.parse(await ev(`return JSON.stringify({you:document.querySelectorAll('#maikBody .maik-b.you').length, ai:document.querySelectorAll('#maikBody .maik-b.ai').length});`));
+    await ev(`document.getElementById('maikX').click(); return 1;`); await sleep(500);
+    await ev(`window.SMD_askMaik(''); return 1;`); await sleep(400);
+    const after = JSON.parse(await ev(`return JSON.stringify({you:document.querySelectorAll('#maikBody .maik-b.you').length, ai:document.querySelectorAll('#maikBody .maik-b.ai').length});`));
+    ok("MaiK keeps BOTH the question and the answer after close→reopen", after.you >= 1 && after.ai >= 1 && after.you === before.you && after.ai === before.ai, "before=" + JSON.stringify(before) + " after=" + JSON.stringify(after));
+  } else console.log("•  SMD_askMaik unavailable — skipped");
+
   console.log(`\n${FAIL === 0 ? "ALL GREEN — Specialty Workspaces invariants hold (" + PASS + " checks)" : FAIL + " FAILED, " + PASS + " passed"}`);
   if (FAIL > 0) process.exitCode = 1;
   ws.close();
