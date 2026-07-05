@@ -94,6 +94,21 @@ try {
   chk("PR3: guideline reference exposes NTEP + WHO + Harrison", await ev(`var g=SMD_TB.guidelines();return g.length>=3 && g.some(function(x){return /NTEP|Drug-Resistant TB/i.test(x.title+" "+x.body);}) && g.some(function(x){return /WHO|World Health/i.test(x.title+" "+x.body);}) && g.some(function(x){return /Harrison|internal-medicine/i.test(x.title+" "+x.body);});`) === true);
   chk("PR3 UI: 'Special populations' + '📖 Guideline reference' rendered in workspace", /Special populations/i.test(await lines()) && /Guideline reference/i.test(await lines()));
 
+  // PR4: ASP console (window.ASP_DATA) names the real second-line drugs
+  chk("PR4: ASP TB enrichment ran", await ev(`return !!window.__smdAspTbEnriched`) === true);
+  chk("PR4: ASP_DRUGS gains pretomanid/moxifloxacin/clofazimine/cycloserine/delamanid/ethionamide",
+    await ev(`return window.ASP_DRUGS && ['pretomanid','moxifloxacin','clofazimine','cycloserine','delamanid','ethionamide'].every(function(k){return !!ASP_DRUGS[k];})`) === true);
+  chk("PR4: PULMONARY_TB alternatives name BPaLM component drugs (no vague 'refer to DR-TB services')",
+    await ev(`var a=(ASP_DATA.PULMONARY_TB.empiric.alternatives||[]); return a.some(function(r){return /Bedaquiline \\+ Pretomanid \\+ Linezolid \\+ Moxifloxacin/.test(r.regimen);}) && !a.some(function(r){return /Refer to DR-TB services/i.test(r.note||"");});`) === true);
+  chk("PR4: PULMONARY_TB offers BPaLM + shorter + longer + H-mono (4 named regimens)",
+    await ev(`return (ASP_DATA.PULMONARY_TB.empiric.alternatives||[]).length === 4`) === true);
+  chk("PR4: DISSEMINATED_TB routes to longer oral + states BPaLM/shorter NOT used (severe EP)",
+    await ev(`var a=(ASP_DATA.DISSEMINATED_TB.empiric.alternatives||[]); return a.some(function(r){return /longer oral/i.test(r.regimen) && /NOT used/i.test(r.note||"");}) && !a.some(function(r){return /first choice/i.test(r.rankLabel||"");});`) === true);
+  chk("PR4: CNS_TB routes to longer oral + states BPaLM/shorter NOT used in CNS",
+    await ev(`var a=(ASP_DATA.CNS_TB.empiric.alternatives||[]); return a.some(function(r){return /longer oral/i.test(r.regimen) && /NOT used in CNS/i.test(r.note||"");});`) === true);
+  chk("PR4: enrichment is reversible (localStorage smd_asp_tb kill-switch honoured)",
+    await ev(`return typeof SMD_TB.enrichAspConsole === "function"`) === true);
+
   // ---- coverage matrix ----
   const cov = J(await ev(`var d=SMD_TB.data(); return JSON.stringify((d.reg.regimens||[]).map(function(r){return {id:r.id, states:(r.forStates||[]).join("/"), source:(r.source||"").split(";")[0]};}));`));
   console.log("\n  Coverage matrix (regimen × states × source):");
