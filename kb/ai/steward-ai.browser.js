@@ -250,6 +250,33 @@
         })
       };
 
+      // ---- knowledge-question relevance (gold197) ----------------------------------------
+      // When there is NO case-derived candidate (a standalone knowledge question), the grounding
+      // must come from the QUESTION's own topic, not from an empty/ambient differential. And if
+      // the question's distinctive term isn't actually in the KB (e.g. "paraquat" → the nearest
+      // lexical hit is paracetamol/methanol poisoning), we must NOT ground on that different
+      // disease — surface topicMatch.matched=false so the caller caveats instead of confidently
+      // describing the wrong condition.
+      var topicMatch = null;
+      if (!top.length && (opts.question || "").trim()) {
+        var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1 };
+        var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
+        var candId = (retrieved[0] && retrieved[0].diseaseId) || null;
+        var candGc = candId ? trimGrounding(_ai.getGroundingContext(candId)) : null;
+        var hay = candGc ? (String(candId) + " " + (candGc.name || "") + " " + JSON.stringify(candGc)).toLowerCase() : "";
+        var matched = distinctive.length === 0 ? !!candGc : (!!candGc && distinctive.every(function (t) { return hay.indexOf(t) >= 0; }));
+        if (matched && candGc) {
+          grounding = [candGc];
+          if (!lead) lead = { id: candId, name: candGc.name || candId };
+          if (!treatment && _ai.resolveTreatment) { try { treatment = _ai.resolveTreatment(candId, hospitalId); } catch (e) {} }
+          topicMatch = { matched: true, topic: distinctive.join(" "), grounded: candGc.name || candId };
+        } else {
+          // topic not confidently in the KB → drop the near-miss grounding so nothing wrong is described
+          grounding = []; lead = null; treatment = null; retrieved = [];
+          topicMatch = { matched: false, topic: distinctive.join(" ") || String(opts.question).trim(), nearest: (candGc && candGc.name) || candId || null };
+        }
+      }
+
       return {
         schema: "steward-rag-1",
         hospitalId: hospitalId,
@@ -259,6 +286,7 @@
         retrieved: retrieved,            // lexical top-K chunks for the query (cited)
         treatment: treatment,            // ICMR ▸ guideline ▸ Harrison + hospital overlay
         refs: refs,                      // drug/calculator/ICU/stewardship — by reference only
+        topicMatch: topicMatch,          // knowledge-Q relevance: null=case/NA, {matched:false}=topic not in KB
         question: opts.question || ""
       };
     });

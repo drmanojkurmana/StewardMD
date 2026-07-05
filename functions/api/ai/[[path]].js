@@ -60,7 +60,7 @@ function modelId(env) { return env.GEMINI_MODEL || MODEL_DEFAULT; }
 // consumes the maxOutputTokens budget and the visible clinician answer truncates mid-sentence.
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
 // so disabling also cuts latency + cost.
-function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; return { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; }
+function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.tools) b.tools = opts.tools; return b; }
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
@@ -72,8 +72,10 @@ const developerProvider = {
   name: "developer",
   available: function (env) { return !!env.GEMINI_API_KEY; },
   generate: async function (env, parts, maxTokens, opts) {
+    let o = opts || {};
+    if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
     const r = await fetch(`${DEV_HOST}/${modelId(env)}:generateContent?key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -134,7 +136,9 @@ const vertexProvider = {
     const loc = env.GCP_LOCATION || "us-central1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelId(env)}:generateContent`;
     const token = await vertexAccessToken(env);
-    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, opts)) });
+    let o = opts || {};
+    if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
+    const r = await fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
     return parseCandidates(await r.json(), r.status);
   }
 };
@@ -217,6 +221,12 @@ const KNOWLEDGE_SYS =
   "4. This is general clinical education, not individualised patient advice. If it is clearly about one specific patient, answer the general question and add a short line suggesting StewardMD's Clinical Reasoning / Dx My Patient. Never use patient identifiers.\n" +
   "5. Do not mention the AI provider, model, retrieval, chunks, or any internal detail, and do not tack on a long disclaimer (the UI already shows one).\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
+
+// Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
+// and the clinician explicitly taps "Research on the web". Gemini does the Google search +
+// synthesis in one grounded call; we keep the answer short to conserve tokens.
+const RESEARCH_SYS =
+  "You are MaiK researching a clinical question that StewardMD's own knowledge base does not cover. Use web search to find current, authoritative medical/toxicology sources. Answer CONCISELY — 4-6 short bullet points covering the key management/answer only, no preamble, no headings. Be specific and bedside-useful (agents, doses, antidotes, monitoring). If evidence is weak or sources disagree, say so in one line. End with exactly: 'Web-sourced — not StewardMD-verified; confirm against local protocol.'";
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 function renderGroundedPrompt(pkg) {
@@ -391,6 +401,20 @@ export async function onRequest(context) {
       await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
       const fields = parseJsonLoose(text) || {};
       return json({ kind: kind, fields: fields });
+    }
+    if (seg === "research") {
+      // Opt-in web research for topics NOT in StewardMD's KB. Token-frugal: single Google-
+      // grounded Gemini call, short output cap, only reached on an explicit user tap.
+      const q = String(body.question || body.q || "").slice(0, 500);
+      if (!q) return json({ error: "no question" }, 400);
+      const gate = await checkQuota(env, request, "general");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const RES_MAX = Math.max(256, Math.min(900, Number(env.MAIK_RESEARCH_MAX_OUTPUT) || 600));
+      let text;
+      try { text = await callGemini(env, [{ text: RESEARCH_SYS + "\n\nQuestion: " + q }], RES_MAX, { webSearch: true, temperature: 0.3 }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: 0, status: "failed" }); return json({ error: "research-failed", detail: String(e && e.message || e) }, 502); }
+      await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: estTokens((text || "").length), status: "success" });
+      return json({ text: text, mode: "web" });
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);
   } catch (e) {
