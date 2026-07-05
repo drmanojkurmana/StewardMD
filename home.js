@@ -199,6 +199,8 @@
     if (document.body.classList.contains("ui-v2")) { try { showV2(); } catch (e) {} }
     try { window.scrollTo(0, 0); } catch (e) {}
   }
+  // Exposed so the Specialty Workspaces branch selector can return the user Home after picking a branch.
+  window.SMD_goHome = goHome;
   // logo (and brand text) anywhere → go home
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest ? e.target.closest('.brand, .v3-mark, .v3-shield, img[alt="StewardMD"]') : null;
@@ -1026,6 +1028,9 @@
     if (subClose) subClose.addEventListener("click", closeSheet);
   }
   function openDxChooser() {
+    // If a specialty workspace (e.g. Surgery) is the active clinical workspace, start a new
+    // case in THAT engine instead of the Internal Medicine chooser. IM → falls through below.
+    try { if (window.SMD_WS && SMD_WS.startActiveCase && SMD_WS.startActiveCase()) return; } catch (e) {}
     openSheet('<div class="hv-sh-t">Dx My Patient</div>' +
       '<p style="font:500 13px/1.5 var(--hfont);color:var(--hmut);text-align:center;margin:0 0 16px">Reason through a patient — live differential, confidence &amp; next steps.</p>' +
       '<button id="dxAddNew" style="width:100%;background:var(--hp);color:#fff;border:none;border-radius:12px;padding:14px;font:800 15px var(--hfont);cursor:pointer;margin-bottom:10px;text-align:center">➕ Add New Patient<div style="font:500 11.5px var(--hfont);opacity:.9;margin-top:2px">Enter symptoms &amp; findings manually</div></button>' +
