@@ -465,7 +465,7 @@ tick();})();</script>
         var cta=document.getElementById("demoCTABtn");if(cta)cta.addEventListener("click",show);
         var x=document.getElementById("consentClose");if(x)x.addEventListener("click",hide);
         var o=document.getElementById("consentOverlay");if(o)o.addEventListener("click",function(e){if(e.target===o)hide();});
-        var cont=document.getElementById("splashContinueBtn");if(cont)cont.addEventListener("click",hide);
+        var cont=document.getElementById("splashContinueBtn");if(cont)cont.addEventListener("click",function(){try{localStorage.setItem("smd_consent",JSON.stringify({v:1,ts:Date.now(),attest:"qualified_hcp"}));}catch(e){}hide();});
         document.addEventListener("keydown",function(e){if(e.key==="Escape")hide();});
       }
       wire(); // wire splash/consent NOW during parse — elements are above this script. Do NOT wait for DOMContentLoaded: deferred scripts (~1.3MB JS) delay it ~5-6s and froze the splash.
