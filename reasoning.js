@@ -4452,6 +4452,98 @@
     render: smdSafetyOverlay,
     recalc: smdSafetyRecalc
   };
+
+  /* ---------------------------------------------------------------------- *
+   * SMD_TB — decision-aware TB treatment-pathway engine (PR1 data+logic).
+   * Loads the NTEP-sourced regimen/drug data (kb/treatments/tb_dr_regimens.json +
+   * tb_drugs.json) and exposes pure selection logic: classify DST → eligible vs
+   * excluded regimens (with reasons) → mandatory safety gates. UI (PR2) and tests
+   * consume this; it never touches the deterministic Dx engine or scoring.
+   * ---------------------------------------------------------------------- */
+  var _tbData = null, _tbLoad = null;
+  function smdTbLoad() {
+    if (_tbData) return Promise.resolve(_tbData);
+    if (_tbLoad) return _tbLoad;
+    _tbLoad = Promise.all([
+      fetch("/kb/treatments/tb_dr_regimens.json").then(function (r) { return r.json(); }),
+      fetch("/kb/treatments/tb_drugs.json").then(function (r) { return r.json(); })
+    ]).then(function (a) { _tbData = { reg: a[0], drugs: a[1] }; return _tbData; }).catch(function () { _tbLoad = null; return null; });
+    return _tbLoad;
+  }
+  // DST inputs → NTEP classification state.
+  function smdTbClassify(dst) {
+    dst = dst || {};
+    var rif = dst.xpertRif;
+    if (!rif || rif === "not done") return "dst_pending";
+    if (rif === "indeterminate") return "indeterminate";
+    if (rif === "RIF sensitive") {
+      var h = dst.hSusceptibility;
+      if (h === "resistant" || h === "InhA" || h === "KatG" || h === "InhA+KatG") return "h_resistant";
+      return "susceptible";
+    }
+    // RIF resistant
+    var fqR = dst.fqSusceptibility === "resistant";
+    var groupA = dst.bdqConcern === "yes" || dst.lzdConcern === "yes"; // Group-A resistance/exposure
+    if (fqR && groupA) return "xdr";
+    if (fqR) return "pre_xdr";
+    return (dst.hSusceptibility === "resistant" || dst.hSusceptibility === "InhA+KatG") ? "mdr" : "rr";
+  }
+  function smdTbNum(x) { var n = parseFloat(x); return isFinite(n) ? n : null; }
+  // exclusion rules per regimen (encoded from NTEP §3.3–3.6). Returns null if eligible, else reason.
+  function smdTbExclusion(reg, p) {
+    p = p || {};
+    var age = smdTbNum(p.age), qtc = smdTbNum(p.qtcF), hb = smdTbNum(p.hb), plt = smdTbNum(p.platelets), anc = smdTbNum(p.anc), crX = smdTbNum(p.creatinineXULN), neu = smdTbNum(p.neuropathyGrade);
+    var severeEP = /cns|spinal|skeletal|bone|disseminat|miliary/i.test(String(p.site || ""));
+    if (reg.id === "bpalm") {
+      if (age !== null && age < 14) return "Age < 14 years — BPaLM not indicated";
+      if (p.bdqResistance || p.lzdResistance || p.paResistance) return "Documented resistance to bedaquiline / linezolid / pretomanid";
+      if (p.liverDysfunction) return "Significant liver dysfunction (AST/ALT > 3×ULN or bilirubin > 2×ULN)";
+      if (severeEP) return "Severe extrapulmonary TB (CNS / spinal-skeletal / disseminated / miliary)";
+      if (p.cardiacDisease) return "Significant cardiac conduction abnormality / arrhythmia / Torsade risk";
+      var f = (String(p.sex || "").toLowerCase().charAt(0) === "f");
+      if (qtc !== null && ((!f && qtc > 450) || (f && qtc > 470))) return "QTcF above threshold (>450 ms M / >470 ms F) after electrolyte correction";
+      return null; // relative CIs (Hb/plt/ANC/SCr/neuropathy) surface as safety gates, not hard exclusion
+    }
+    if (reg.id === "shorter_oral") {
+      if (p.fqResistance || p.fqSusceptibility === "resistant") return "Fluoroquinolone resistance detected";
+      if (severeEP) return "Severe extrapulmonary MDR-TB";
+      if (p.extensiveDisease) return "Extensive disease";
+      if (p.priorSecondLineExposure) return "Prior >1-month second-line exposure without documented susceptibility";
+      return null;
+    }
+    return null; // longer_oral / individualized / DS / H-mono / pathway regimens: no hard exclusion here
+  }
+  function smdTbEligible(dst, patient) {
+    if (!_tbData) return null;
+    var state = smdTbClassify(dst), regs = _tbData.reg.regimens || [];
+    var cand = regs.filter(function (r) { return (r.forStates || []).indexOf(state) >= 0; });
+    var eligible = [], excluded = [];
+    cand.forEach(function (r) {
+      var why = smdTbExclusion(r, patient);
+      if (why) excluded.push({ id: r.id, name: r.name, why: why });
+      else eligible.push({ id: r.id, name: r.name, source: r.source });
+    });
+    // NTEP preference order for MDR/RR: BPaLM → shorter → longer
+    var order = { bpalm: 0, shorter_oral: 1, longer_oral: 2, ds_hrze: 0, h_mono_poly: 0, cns_tb: 1, hepatotoxicity_pathway: 1, renal_pathway: 1, individualized: 3 };
+    eligible.sort(function (a, b) { return (order[a.id] == null ? 9 : order[a.id]) - (order[b.id] == null ? 9 : order[b.id]); });
+    return { state: state, eligible: eligible, excluded: excluded };
+  }
+  function smdTbSafetyGates(regimenId, patient) {
+    if (!_tbData) return [];
+    patient = patient || {};
+    var have = { qt_ecg: patient.qtcF != null, cbc_neuropathy: (patient.hb != null || patient.platelets != null || patient.anc != null), lft: (patient.liverDysfunction != null || patient.lftKnown), renal: (patient.creatinineXULN != null || patient.renalKnown), pregnancy: (patient.pregnant != null || patient.pregnancyKnown), cardiac_interactions: (patient.cardiacReviewed != null) };
+    return (_tbData.reg.safetyGates || []).filter(function (g) { return (g.requiredFor || []).indexOf(regimenId) >= 0; })
+      .map(function (g) { return { id: g.id, label: g.label, satisfied: !!have[g.id], missingMessage: g.missingMessage, source: g.source }; });
+  }
+  window.SMD_TB = {
+    ready: smdTbLoad,
+    data: function () { return _tbData; },
+    classifyDst: smdTbClassify,
+    eligibleRegimens: smdTbEligible,
+    safetyGates: smdTbSafetyGates,
+    drug: function (k) { return _tbData ? (_tbData.drugs.drugs || []).filter(function (d) { return d.key === k; })[0] || null : null; }
+  };
+
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
   smdInitGlobalUI();

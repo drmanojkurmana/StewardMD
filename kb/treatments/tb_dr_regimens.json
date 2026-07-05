@@ -1,0 +1,187 @@
+{
+  "id": "tb_dr_regimens",
+  "title": "Tuberculosis treatment pathways — first-line, drug-resistant, and alternative regimens",
+  "primarySource": { "docId": "ntep_drtb_2024", "label": "National Guidelines for Management of Drug-Resistant TB (NTEP, Nov 2024)", "jurisdiction": "India", "priority": 1 },
+  "referenceSources": [
+    { "docId": "who_tb_consolidated", "label": "WHO consolidated guidelines on tuberculosis", "priority": 3 },
+    { "docId": "harrison_22e", "label": "Standard internal-medicine reference", "priority": 5 }
+  ],
+  "policyNote": "India-facing: NTEP is highest precedence; WHO is comparative/reference. Paraphrased from cited sources; verify weight-band dosing against the current NTEP release before prescribing. DST context is required before any drug-resistant regimen — never select a DR-TB regimen because 'TB' alone was chosen.",
+
+  "dstModel": {
+    "fields": [
+      { "key": "xpertRif", "label": "Xpert / molecular rifampicin result", "options": ["not done", "RIF sensitive", "RIF resistant", "indeterminate"] },
+      { "key": "culture", "label": "Culture result", "options": ["pending", "negative", "positive"] },
+      { "key": "lpa", "label": "Line probe assay (FL/SL)", "options": ["not done", "done"] },
+      { "key": "fqSusceptibility", "label": "Fluoroquinolone susceptibility", "options": ["unknown", "susceptible", "resistant"] },
+      { "key": "hSusceptibility", "label": "Isoniazid susceptibility", "options": ["unknown", "susceptible", "resistant", "InhA", "KatG", "InhA+KatG"] },
+      { "key": "bdqConcern", "label": "Bedaquiline resistance / prior exposure >1 month", "options": ["no", "yes"] },
+      { "key": "lzdConcern", "label": "Linezolid resistance / prior exposure >1 month", "options": ["no", "yes"] },
+      { "key": "priorTb", "label": "Previous TB treatment", "options": ["no", "yes"] },
+      { "key": "priorSecondLine", "label": "Prior second-line drug exposure", "options": ["no", "yes"] },
+      { "key": "failureConcern", "label": "Treatment failure concern", "options": ["no", "yes"] }
+    ],
+    "states": [
+      { "id": "dst_pending", "label": "DST pending", "note": "Molecular/culture result awaited. Do NOT recommend a definitive DR-TB regimen; manage per NTEP diagnostic algorithm while awaiting Xpert/DST.", "source": "ntep_drtb_2024 §3.2" },
+      { "id": "susceptible", "label": "Drug-susceptible", "note": "No rifampicin resistance detected → first-line HRZE pathway.", "source": "ntep_drtb_2024 §2" },
+      { "id": "rr", "label": "Rifampicin-resistant (RR-TB)", "note": "RIF resistance is the marker for RR/MDR-TB → DR-TB pathway; classify FQ status next.", "source": "ntep_drtb_2024 §3" },
+      { "id": "mdr", "label": "MDR-TB (H+R resistant)", "note": "Resistant to at least isoniazid + rifampicin → DR-TB pathway.", "source": "ntep_drtb_2024" },
+      { "id": "pre_xdr", "label": "Pre-XDR (MDR + FQ resistant)", "note": "MDR/RR-TB with additional fluoroquinolone resistance.", "source": "ntep_drtb_2024" },
+      { "id": "xdr", "label": "XDR-TB", "note": "MDR + FQ resistance + resistance to a Group A drug (bedaquiline or linezolid) → 20-month longer oral regimen with specialist input.", "source": "ntep_drtb_2024 §3.5" },
+      { "id": "h_resistant", "label": "Isoniazid mono/poly-resistant (rifampicin susceptible)", "note": "→ (6) Lfx-R-E-Z regimen.", "source": "ntep_drtb_2024 §3.6" },
+      { "id": "indeterminate", "label": "Indeterminate / incomplete DST", "note": "Repeat testing; manage per algorithm; do not default to a DR-TB regimen.", "source": "ntep_drtb_2024 §3.2" }
+    ]
+  },
+
+  "safetyGates": [
+    { "id": "qt_ecg", "label": "Baseline ECG / QTcF", "requiredFor": ["bpalm", "longer_oral"], "rule": "QTcF ≤450 ms (male) / ≤470 ms (female); correct hypokalaemia/hypomagnesaemia/hypocalcaemia before any QT-prolonging drug; recheck if abnormal.", "missingMessage": "Baseline ECG / QTcF required — verify before selecting regimen.", "source": "ntep_drtb_2024 §3.3.1, Annex 4" },
+    { "id": "cbc_neuropathy", "label": "CBC + peripheral-neuropathy screen (linezolid)", "requiredFor": ["bpalm", "shorter_oral", "longer_oral"], "rule": "Hb ≥8 g/dL, platelets ≥75,000/mm³, ANC ≥750/mm³; grade 3/4 neuropathy is a relative contraindication; add pyridoxine; monitor CBC (baseline, wk2/4/8) and neuropathy.", "missingMessage": "CBC and neuropathy screen required for linezolid-containing regimens — verify before selecting.", "source": "ntep_drtb_2024 §3.3, Table 3.2, Annex 3" },
+    { "id": "lft", "label": "Liver function", "requiredFor": ["ds_hrze", "bpalm", "shorter_oral", "longer_oral", "h_mono_poly", "hepatotoxicity_pathway"], "rule": "Significant liver dysfunction (AST/ALT >3×ULN or total bilirubin >2×ULN) excludes BPaLM; hepatotoxic first-line drugs need LFT monitoring.", "missingMessage": "Liver function required — verify before selecting regimen.", "source": "ntep_drtb_2024 §3.3.1, Annex 4" },
+    { "id": "renal", "label": "Renal function", "requiredFor": ["bpalm", "longer_oral", "renal_pathway"], "rule": "Serum creatinine >3×ULN is a relative contraindication to BPaLM; injectables (amikacin/streptomycin) and several drugs need renal dose review.", "missingMessage": "Renal function required — verify before selecting regimen.", "source": "ntep_drtb_2024 §3.3, Table 3.2, §3.9.5" },
+    { "id": "pregnancy", "label": "Pregnancy / contraception", "requiredFor": ["bpalm", "shorter_oral", "longer_oral"], "rule": "BPaLM: pregnancy restrictions apply (per current MTP notification). The Lzd-containing 9–11-mo shorter oral regimen may be used in pregnancy with monitoring. Counsel on family planning; rifampicin reduces hormonal-contraceptive efficacy.", "missingMessage": "Pregnancy status required — verify before selecting regimen.", "source": "ntep_drtb_2024 §3.3.1, §3.4.1, §3.9.1" },
+    { "id": "cardiac_interactions", "label": "Cardiac / drug-interaction review", "requiredFor": ["bpalm", "longer_oral"], "rule": "Exclude significant cardiac conduction disease, uncontrolled arrhythmia, Torsade risk. Review CYP450 inducers/inhibitors, other QT-prolonging drugs, serotonergic/MAOI, myelosuppressive drugs; separate Mg-containing products from fluoroquinolone by 2h.", "missingMessage": "Cardiac and interaction review required — verify before selecting regimen.", "source": "ntep_drtb_2024 Table 3.2" }
+  ],
+
+  "regimens": [
+    {
+      "id": "ds_hrze", "name": "Standard drug-susceptible TB (HRZE)", "forStates": ["susceptible", "dst_pending"],
+      "eligibility": "Microbiologically-confirmed (or programmatically-diagnosed) drug-susceptible TB; no rifampicin resistance.",
+      "notForUse": "Rifampicin resistance detected; documented first-line drug intolerance (use DILI/intolerance pathway).",
+      "coreMeds": ["isoniazid", "rifampicin", "pyrazinamide", "ethambutol"],
+      "duration": "2 months intensive (HRZE) + 4 months continuation (HR); total 6 months (extend for CNS/skeletal/disseminated disease).",
+      "doseRef": "Weight-band dosing per NTEP (FDC by weight band).",
+      "dstRequirements": "Universal DST for rifampicin (Xpert) at diagnosis; escalate if RIF resistance found.",
+      "baselineIx": ["weight/BMI", "HIV test", "LFT", "renal function", "CXR"],
+      "monitoring": ["symptom + weight review", "LFT if hepatotoxicity risk", "sputum conversion at month 2"],
+      "interactions": ["rifampicin ↔ hormonal contraceptives (failure)", "rifampicin ↔ warfarin/DOAC (reduced effect)", "rifampicin ↔ ART (dose/regimen implications)"],
+      "aeWatchlist": ["hepatotoxicity (H/R/Z)", "peripheral neuropathy (H — give pyridoxine)", "optic neuritis (E)", "hyperuricaemia (Z)"],
+      "escalation": "RIF resistance, treatment failure, or hepatotoxicity → reassess; move to DR-TB or DILI pathway.",
+      "source": "harrison_22e; ntep_drtb_2024 §2"
+    },
+    {
+      "id": "bpalm", "name": "BPaLM (bedaquiline + pretomanid + linezolid + moxifloxacin)", "forStates": ["rr", "mdr", "pre_xdr"],
+      "eligibility": "First choice in eligible persons ≥14 years with MDR/RR-TB, regardless of fluoroquinolone-resistance or HIV status. New microbiologically-confirmed MDR/RR-TB (or probable MDR-TB failing H mono/poly). Bdq/Lzd/Pa exposure <1 month, OR >1 month with documented susceptibility. Baseline QTcF ≤450 ms (M)/≤470 ms (F).",
+      "notForUse": "Age <14 years; documented resistance to bedaquiline, linezolid or pretomanid; significant liver dysfunction (AST/ALT >3×ULN or total bilirubin >2×ULN); severe extrapulmonary MDR-TB (CNS, spinal/skeletal, disseminated/miliary); significant cardiac conduction abnormality / uncontrolled arrhythmia / Torsade risk / uncorrectable QTcF prolongation.",
+      "relativeContraindications": "Hb <8 g/dL, platelets <75,000/mm³, ANC <750/mm³, serum creatinine >3×ULN, grade 3/4 peripheral neuropathy; interacting drugs (CYP450 inducers/inhibitors, QT-prolonging, serotonergic/MAOI, myelosuppressive).",
+      "coreMeds": ["bedaquiline", "pretomanid", "linezolid", "moxifloxacin"],
+      "duration": "26 weeks (extendable to 39 weeks per criteria, e.g. Lzd dose reduction).",
+      "doseRef": "Bedaquiline 400 mg OD weeks 1–2, then 200 mg thrice weekly to week 26/39; pretomanid 200 mg OD; linezolid 600 mg OD; moxifloxacin 400 mg OD; pyridoxine 50 mg (16–29 kg) / 100 mg (>30 kg). No weight-band dosing for the four core drugs (≥14 y). Take orally with food; separate magnesium-containing products by 2 h.",
+      "dstRequirements": "May start while awaiting baseline Bdq/Lzd/Pa DST (resistance rates low in India). If baseline DST shows resistance to Bdq/Pa/Lzd → declare 'treatment regimen changed' and switch to 18–20-month longer oral regimen. Moxifloxacin continues full course regardless of FQ resistance.",
+      "baselineIx": ["ECG/QTcF", "CBC", "LFT", "renal function", "serum electrolytes (Na/K/Mg/Ca)", "HIV", "urine pregnancy (repro-age women)", "ophthalmic (visual acuity + colour vision)", "CXR", "peripheral-neuropathy screen"],
+      "monitoring": ["ECG/QTcF periodically (Bdq/Mfx)", "CBC for linezolid myelosuppression", "neuropathy + visual acuity/colour vision (linezolid)", "LFT", "monthly clinical + culture conversion"],
+      "interactions": ["QT-prolonging drugs", "CYP450 inducers/inhibitors", "serotonergic/MAOI (linezolid)", "myelosuppressive drugs", "magnesium-containing products ↔ fluoroquinolone (space 2 h)"],
+      "aeWatchlist": ["QT prolongation (Bdq/Mfx)", "myelosuppression + peripheral/optic neuropathy (Lzd)", "hepatotoxicity", "GI intolerance"],
+      "escalation": "Grade 3/4 Lzd toxicity <9 weeks → treatment failed; Bdq/Pa/Lzd resistance on DST → longer oral regimen; ineligible → 9–11-month shorter oral regimen (then longer oral).",
+      "source": "ntep_drtb_2024 §3.3"
+    },
+    {
+      "id": "shorter_oral", "name": "9–11-month shorter oral MDR/RR-TB regimen", "forStates": ["rr", "mdr"],
+      "eligibility": "Rifampicin resistance detected; fluoroquinolone resistance NOT detected; no >1-month exposure to second-line drugs in the regimen (Bdq/Lfx/Cfz/Lzd) unless susceptibility confirmed; no extensive disease; no severe extrapulmonary MDR-TB. Preferred over the 18–20-month longer regimen. In ≥14 y, BPaLM is first preference. The Lzd-containing version may be used in pregnancy with monitoring.",
+      "notForUse": "Fluoroquinolone resistance; severe extrapulmonary TB (CNS/spinal/skeletal/miliary/disseminated); extensive disease; additional resistance to Z (switch to longer oral).",
+      "coreMeds": ["bedaquiline", "levofloxacin", "clofazimine", "linezolid", "pyrazinamide", "ethambutol", "high-dose isoniazid", "ethionamide (alternative to Lzd)"],
+      "duration": "9–11 months. Structure (Lzd version): (2) Lzd + (4–6) Lfx-Cfz-Z-E-Hh + (6–9) Bdq intensive → (5) Lfx-Cfz-Z-E continuation. IP extendable to max 6 months if smear-positive at month 4.",
+      "doseRef": "Adult weight-band (16–29 / 30–45 / 46–70 / >70 kg): high-dose H 300/600/900/900 mg; E 400/800/1200/1600 mg; Z 750/1250/1750/2000 mg; Lfx 250/750/1000/1000 mg; Bdq 400 mg daily wk0–2 then 200 mg 3×/wk wk3–24; Cfz 50/100/100/200 mg; Eto 375/500/750/1000 mg; pyridoxine 50/100/100/100 mg. Linezolid 600 mg (≥14 y). Paediatric Lzd by weight band (Table 3.5).",
+      "dstRequirements": "Rapid DST to rule out FQ resistance required BEFORE starting. Repeat NAAT/LPA + culture DST if smear-positive at end of IP or culture-positive at month 3+.",
+      "baselineIx": ["ophthalmic (visual acuity + colour vision) at baseline, wk9/13/26", "CBC (Hb + platelets) at baseline, wk2/4/8", "LFT", "renal function", "HIV", "pregnancy", "ECG", "CXR"],
+      "monitoring": ["CBC for early Lzd toxicity (>10% drop in Hb/neutrophils/platelets)", "ophthalmic per schedule", "sputum smear/culture conversion", "no TSH needed if Eto not used"],
+      "interactions": ["QT-prolonging (Bdq)", "myelosuppressive (Lzd)", "magnesium ↔ fluoroquinolone (space 2 h)"],
+      "aeWatchlist": ["Lzd myelosuppression/neuropathy/optic neuritis", "QT prolongation (Bdq)", "clofazimine skin pigmentation/QT", "ethionamide GI/hypothyroidism"],
+      "escalation": "Z resistance at baseline, or FQ/InhA+KatG on month-4 sample, or ≥2 core drugs stopped → declare treatment failed → switch to 18–20-month longer oral regimen after N/DDR-TBC reassessment.",
+      "source": "ntep_drtb_2024 §3.4 (Tables 3.5, 3.6)"
+    },
+    {
+      "id": "longer_oral", "name": "18–20-month longer oral M/XDR-TB regimen", "forStates": ["mdr", "pre_xdr", "xdr"],
+      "eligibility": "Persons ineligible for BPaLM or the 9–11-month shorter regimen (ineligibility, additional resistance, intolerance, drug non-availability), or pre-XDR/XDR-TB. Individualised per DST from Groups A/B/C. Specialist / N-DDR-TBC decision.",
+      "notForUse": "Where a shorter all-oral regimen is eligible (prefer shorter).",
+      "coreMeds": ["bedaquiline", "levofloxacin_or_moxifloxacin", "linezolid", "clofazimine", "cycloserine", "delamanid", "amikacin", "pyrazinamide", "ethionamide", "para-aminosalicylic acid", "ethambutol", "imipenem-cilastatin_or_meropenem + clavulanate"],
+      "duration": "18–20 months (bedaquiline limited to 6 months, extension only if an effective regimen cannot otherwise be built). XDR-TB: 20 months. Backbone: (6+) Bdq + (18–20) Lfx-Lzd-Cfz-Cs.",
+      "doseRef": "Adult weight-band Table 3.7: Lfx 250/750/1000/1000; Mfx 200/400/400/400 (high-dose Mfx 400/600/800/800); Bdq as above; Cfz 50/100/100/200; Cs 250/500/750/1000; Lzd 300–600; Dlm 100 mg BD (≥12 y); Am 500/750/750/1000 (≤10 mg/kg, max 750 mg if >60 y); Z 750/1250/1750/2000; Eto 375/500/750/1000; Na-PAS 10/14/16/22 g; E 400/800/1200/1600; imipenem-cilastatin 1 g+1 g BD or meropenem 1 g TID / 2 g BD, each WITH clavulanate (amox-clav 875/125 BD, only with carbapenem); pyridoxine 50/100/100/100.",
+      "dstRequirements": "Full DST-driven drug selection (FQ, SLI, Eto, Bdq/Lzd/Pa/Dlm where available). Repeat NAAT/LPA + LC-DST if culture-positive at month 6+.",
+      "baselineIx": ["ECG/QTcF", "CBC", "LFT", "renal function", "electrolytes", "audiometry if injectable used", "ophthalmic", "HIV", "pregnancy", "TSH if Eto used", "CXR"],
+      "monitoring": ["ECG (Bdq/Mfx/Cfz/Dlm)", "CBC (Lzd)", "audiometry + renal (amikacin)", "vision (Lzd/E)", "TSH (Eto/PAS)", "culture conversion"],
+      "interactions": ["multiple QT-prolonging agents (Bdq/Mfx/Cfz/Dlm) — cumulative QT risk", "myelosuppressive (Lzd)", "nephro/ototoxic (amikacin)"],
+      "aeWatchlist": ["cumulative QT prolongation", "Lzd myelo/neuropathy/optic", "amikacin oto/nephrotoxicity", "cycloserine psychiatric/seizure", "PAS/Eto GI + hypothyroidism"],
+      "escalation": "Cycloserine psychiatric symptoms, injectable ototoxicity, or non-response → specialist DR-TB centre (DT3C) review.",
+      "source": "ntep_drtb_2024 §3.5 (Table 3.7)"
+    },
+    {
+      "id": "h_mono_poly", "name": "Isoniazid mono/poly-resistant TB regimen (6 Lfx-R-E-Z)", "forStates": ["h_resistant"],
+      "eligibility": "Isoniazid mono/poly-resistance with rifampicin SUSCEPTIBLE. Regimen (6) Lfx-R-E-Z; no separate IP/CP.",
+      "notForUse": "Rifampicin resistance (switch to RR/MDR pathway).",
+      "coreMeds": ["levofloxacin", "rifampicin", "ethambutol", "pyrazinamide"],
+      "duration": "6 months; extend directly to 9 months for extensive disease, uncontrolled comorbidity, extrapulmonary TB, month-4 smear-positive, or when the regimen is modified.",
+      "doseRef": "Adult weight-band Table 3.8: R 300/450/600/750 mg; E 400/800/1200/1600 mg; Z 750/1250/1750/2000 mg; Lfx 250/750/1000/1000 mg. Replacement (Table 3.9): if Lfx or Z can't be used → Lzd (then Cfz+Cs); if both → 2 of Lzd/Cfz/Cs.",
+      "dstRequirements": "Confirm rifampicin susceptibility; FQ susceptibility informs Lfx use.",
+      "baselineIx": ["LFT", "renal function", "HIV", "CXR"],
+      "monitoring": ["LFT", "smear/culture at month 4", "optic (E)"],
+      "interactions": ["rifampicin ↔ contraceptives/warfarin/DOAC/ART", "magnesium ↔ fluoroquinolone"],
+      "aeWatchlist": ["hepatotoxicity (R/Z)", "optic neuritis (E)"],
+      "escalation": "Non-response/failure without additional R resistance → 'probable MDR' → BPaLM/shorter/longer per eligibility.",
+      "source": "ntep_drtb_2024 §3.6 (Tables 3.8, 3.9)"
+    },
+    {
+      "id": "individualized", "name": "Individualized DR-TB regimen", "forStates": ["pre_xdr", "xdr", "mdr"],
+      "eligibility": "Use when standardized regimen eligibility is not met (additional resistance, intolerance, drug non-availability). Built from Groups A/B/C by DST.",
+      "notForUse": "When a standardized (BPaLM/shorter/longer) regimen is eligible.",
+      "coreMeds": ["per DST from WHO/NTEP Groups A/B/C"],
+      "duration": "Individualised (typically 18–20 months).",
+      "doseRef": "Per Table 3.7 weight bands for the selected drugs.",
+      "dstRequirements": "Complete DST review is mandatory.",
+      "baselineIx": ["full DR-TB baseline panel (ECG, CBC, LFT, renal, electrolytes, audiometry/ophthalmic as indicated)"],
+      "monitoring": ["per constituent drugs"],
+      "interactions": ["per constituent drugs (cumulative QT, myelosuppression, oto/nephrotoxicity)"],
+      "aeWatchlist": ["per constituent drugs"],
+      "escalation": "Requires specialist / N-DDR-TBC / DT3C consultation.",
+      "source": "ntep_drtb_2024 §3.3.8, §3.5"
+    },
+    {
+      "id": "cns_tb", "name": "CNS / TB meningitis pathway", "forStates": ["susceptible", "mdr", "rr"],
+      "eligibility": "TB meningitis / CNS TB. Drug-susceptible: extended-duration HRZE-based therapy with adjunctive corticosteroids; drug-resistant CNS-TB excludes BPaLM (severe EP-TB) → individualized longer regimen with CNS-penetrating drugs.",
+      "notForUse": "BPaLM is NOT used for CNS/severe EP-TB.",
+      "coreMeds": ["isoniazid", "rifampicin", "pyrazinamide", "ethambutol", "adjunctive corticosteroid"],
+      "duration": "Extended total duration (longer continuation phase) per source; corticosteroid taper.",
+      "doseRef": "Weight-band first-line dosing; verify CNS-specific duration against source.",
+      "dstRequirements": "DST; if RR/MDR → individualized regimen with CNS-penetrating agents (specialist).",
+      "baselineIx": ["LFT", "renal function", "HIV", "CSF studies", "neuroimaging"],
+      "monitoring": ["neurological status", "LFT", "steroid-related monitoring"],
+      "interactions": ["rifampicin ↔ steroids/ART/anticoagulants"],
+      "aeWatchlist": ["hepatotoxicity", "drug-induced neuropathy"],
+      "escalation": "Specialist/neurology + DR-TB centre if resistant.",
+      "source": "harrison_22e; ntep_drtb_2024 §3.9"
+    },
+    {
+      "id": "hepatotoxicity_pathway", "name": "Drug-induced liver injury (DILI) on anti-TB therapy", "forStates": ["susceptible", "mdr", "rr", "h_resistant"],
+      "eligibility": "Hepatotoxicity during ATT (rising transaminases/bilirubin, symptoms). Stop hepatotoxic drugs, support, reintroduce sequentially once LFTs recover per protocol.",
+      "notForUse": "Continuing unchanged hepatotoxic therapy through significant DILI.",
+      "coreMeds": ["hold H/R/Z", "non-hepatotoxic holding regimen while LFTs recover (per protocol)"],
+      "duration": "Per DILI protocol + reintroduction.",
+      "doseRef": "Sequential reintroduction per NTEP/Annexure guidance.",
+      "dstRequirements": "N/A for DILI decision; maintain DST context for the underlying TB.",
+      "baselineIx": ["LFT trend", "viral hepatitis markers (HBsAg, Hep A/C/E) if jaundiced", "coagulation if severe"],
+      "monitoring": ["serial LFTs", "clinical hepatic status"],
+      "interactions": ["other hepatotoxins/alcohol"],
+      "aeWatchlist": ["acute liver failure"],
+      "escalation": "Severe/fulminant DILI → hepatology/specialist; do NOT generically continue therapy.",
+      "source": "ntep_drtb_2024 Annex 4"
+    },
+    {
+      "id": "renal_pathway", "name": "TB with renal impairment / dialysis", "forStates": ["susceptible", "mdr", "rr"],
+      "eligibility": "Renal impairment or dialysis. Renally-cleared anti-TB drugs (E, Z, and injectables, some second-line) need interval/dose adjustment; R and H largely unchanged.",
+      "notForUse": "Unadjusted dosing of renally-cleared drugs in significant impairment.",
+      "coreMeds": ["isoniazid", "rifampicin", "pyrazinamide (interval-adjusted)", "ethambutol (interval-adjusted)"],
+      "duration": "Standard, with dose-interval adjustment.",
+      "doseRef": "Adjust E/Z (and injectables/second-line) by CrCl; give post-dialysis where applicable; verify against NTEP §3.9.5.",
+      "dstRequirements": "Standard DST context.",
+      "baselineIx": ["renal function/CrCl", "LFT", "electrolytes"],
+      "monitoring": ["renal function", "drug levels where relevant (aminoglycoside)"],
+      "interactions": ["nephrotoxins", "amikacin oto/nephrotoxicity"],
+      "aeWatchlist": ["accumulation toxicity of renally-cleared drugs"],
+      "escalation": "Nephrology + DR-TB specialist if resistant/dialysis.",
+      "source": "ntep_drtb_2024 §3.9.5"
+    }
+  ],
+
+  "outOfScope": [
+    { "topic": "Latent TB infection (LTBI) / TB preventive treatment", "note": "Not covered by this treatment-pathway module unless already within product scope; marked out of scope.", "source": "n/a" }
+  ]
+}
