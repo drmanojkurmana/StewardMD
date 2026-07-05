@@ -37,23 +37,25 @@
       "line": "alternative",
       "drugRefs": [
         {
-          "composition": "modified regimens per drug-susceptibility testing",
-          "regimenLabel": "Modified regimens per drug-susceptibility testing",
+          "composition": "DST-driven DR-TB regimens (BPaLM · 9–11-mo shorter oral · 18–20-mo longer oral M/XDR · isoniazid mono/poly-resistant)",
+          "regimenLabel": "Drug-resistant TB regimens — see the Tuberculosis treatment pathway workspace",
           "dose": "Per DR-TB program protocol",
           "route": "Per regimen",
           "freq": "Per regimen",
           "duration": "Extended per resistance pattern",
-          "coverage": "Used when resistance is identified or the patient fails to respond to first-line therapy.",
-          "why": null
+          "coverage": "Drug-resistant TB — regimen selected per DST under the National Guidelines for Management of DR-TB (NTEP).",
+          "why": "For rifampicin-resistant / MDR / pre-XDR / XDR TB, the specific regimen is selected by drug-susceptibility testing and eligibility — see the structured, NTEP-sourced regimen cards (with eligibility, dosing, monitoring and safety gates) rather than a generic 'modified regimen'.",
+          "pathwaysRef": "tb_dr_regimens"
         }
       ],
       "evidence": {
-        "source": "StewardMD",
+        "source": "National Guidelines for Management of Drug-Resistant TB (NTEP, Nov 2024)",
         "refs": [
           "WHO TB Guidelines",
           "National TB Elimination Programme (NTEP) India Guidelines",
           "Harrison's Principles of Internal Medicine"
-        ]
+        ],
+        "docId": "ntep_drtb_2024"
       }
     }
   ],
