@@ -72,6 +72,9 @@ const DEFAULT_FEEDS = [
 // NB: no trailing \b — these are word STEMS (approv → approves/approved/approval),
 // so anchoring the end would reject the inflected forms we most want.
 const IMPORTANT_RE = /\b(approv|clearance|authoriz|granted|safety|warning|boxed|black[-\s]?box|recall|withdraw|alert|contraindicat|shortage|label|guidance|adverse|indication|black box)/i;
+// Drop the non-medicine noise that the general FDA recall feed carries (pet food,
+// cosmetics, and undeclared-allergen food alerts) — irrelevant to a clinical app.
+const NON_MEDICAL_RE = /\b(pet food|dog food|cat food|pet treats?|dogs?|cats?|puppy|kitten|veterinary|animal (health|feed)|shampoo|conditioner|lotion|cosmetic|makeup|mascara|eyeliner|fragrance|perfume|undeclared|allergy alert|ice cream|cheese|yogurt|frozen (food|meal)|snack|beverage|seafood|salad|sausage|poultry)\b/i;
 
 function feedsFromEnv(env) {
   if (!env.UPDATES_FEEDS) return DEFAULT_FEEDS;
@@ -121,6 +124,7 @@ async function ingestFeeds(env, store) {
       const key = it.url || it.title;
       if (seen.has(key)) continue;
       if (!IMPORTANT_RE.test(it.title + " " + it.body)) continue;         // only important items
+      if (NON_MEDICAL_RE.test(it.title + " " + it.body)) continue;        // skip pet-food / cosmetic / food-allergen noise
       seen.add(key);
       list.push({ id: newId(), title: it.title.slice(0, 200), body: it.body,
         category: f.category, source: f.source, url: it.url,
