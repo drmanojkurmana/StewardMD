@@ -4823,11 +4823,13 @@
     if (!smdTbIsRender(synId, oa)) return false;
     _tbSynId = synId || null;
     smdTbInjectCSS();
-    // hide the vague native "Modified regimens per drug-susceptibility testing" alternative card.
+    // Hide the vague native "Modified regimens per drug-susceptibility testing" alternative card
+    // and remember it as the anchor so we can slot the rich workspace into the ALTERNATIVE
+    // REGIMENS section (where clinicians look for alternatives), keeping that heading as the label.
     // GUARD: our own injected cards (#smdSafetyCard / #smdTbCard) echo that phrase in their
     // "Alternatives" list, and their class matches [class*=card] — so an unqualified closest()
-    // would hide the safety card / this workspace. Skip them, and also retire the now-empty
-    // "ALTERNATIVE REGIMENS" section label so it isn't left dangling.
+    // would hide the safety card / this workspace. Skip them.
+    var _tbAnchor = null;
     try {
       var skip = function (b) { return !b || b === oa || b.id === "smdSafetyCard" || b.id === "smdTbCard" ||
         (b.classList && (b.classList.contains("smd-safety-card") || b.classList.contains("smd-tb-card"))); };
@@ -4836,9 +4838,7 @@
           var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n;
           if (skip(box)) return;
           box.style.display = "none";
-          // retire a dangling "ALTERNATIVE REGIMENS" heading that only wrapped this card
-          var prev = box.previousElementSibling;
-          if (prev && /^\s*alternative regimens\s*$/i.test((prev.textContent || "").trim()) && prev.children.length <= 1) prev.style.display = "none";
+          if (!_tbAnchor) _tbAnchor = box;   // first hidden native card = where the ALTERNATIVE REGIMENS are
         }
       });
     } catch (_) {}
@@ -4847,8 +4847,11 @@
       '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory — clinician verifies</div>' +
       smdTbInputsHTML(e) +
       '<div id="smdTbLines"></div></div>';
-    var scp = oa.querySelector("#saveCasePrompt");
-    if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html); else oa.insertAdjacentHTML("afterbegin", html);
+    // Prefer slotting the workspace into the alternative-regimens location (right before the hidden
+    // vague card, so it sits under the "ALTERNATIVE REGIMENS" heading). Fall back to the top of the
+    // output (under the Save-case box) when there is no such card on the page.
+    if (_tbAnchor && _tbAnchor.parentNode) { _tbAnchor.insertAdjacentHTML("beforebegin", html); }
+    else { var scp = oa.querySelector("#saveCasePrompt"); if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html); else oa.insertAdjacentHTML("afterbegin", html); }
     var box = document.getElementById("smdTbInputs");
     if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-tb]"), function (el) { el.addEventListener("input", smdTbRecalc); el.addEventListener("change", smdTbRecalc); });
     if (window.SMD_TB) SMD_TB.ready().then(function () { smdTbRecalc(); });

@@ -124,8 +124,10 @@ try {
     await ev(`var c=document.getElementById("smdSafetyCard");return !!(c && getComputedStyle(c).display!=="none");`) === true);
   chk("PR5: native vague 'Modified regimens' drug-card still hidden",
     await ev(`var c=[].slice.call(document.querySelectorAll("#outputArea .drug-card")).filter(function(n){return !n.closest("#smdSafetyCard");})[0];return c? getComputedStyle(c).display==="none":false;`) === true);
-  chk("PR5: dangling 'Alternative regimens' heading retired",
-    await ev(`var h=[].slice.call(document.querySelectorAll("#outputArea .alt-head"))[0];return h? getComputedStyle(h).display==="none":false;`) === true);
+  chk("PR5: workspace slotted into the ALTERNATIVE REGIMENS section (right before the hidden card)",
+    await ev(`var tb=document.getElementById("smdTbCard");var vc=[].slice.call(document.querySelectorAll("#outputArea .drug-card")).filter(function(n){return !n.closest("#smdSafetyCard");})[0];return !!(tb && vc && tb.nextElementSibling===vc);`) === true);
+  chk("PR5: 'Alternative regimens' heading KEPT as the workspace's section label",
+    await ev(`var h=[].slice.call(document.querySelectorAll("#outputArea .alt-head"))[0];return h? getComputedStyle(h).display!=="none":false;`) === true);
 
   // ---- coverage matrix ----
   const cov = J(await ev(`var d=SMD_TB.data(); return JSON.stringify((d.reg.regimens||[]).map(function(r){return {id:r.id, states:(r.forStates||[]).join("/"), source:(r.source||"").split(";")[0]};}));`));
