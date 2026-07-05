@@ -1012,7 +1012,10 @@
     var el = root.querySelector("#dxSel");
     var keys = Object.keys(S.f);
     if (!keys.length) { el.innerHTML = '<span class="dx-sel-empty">No findings yet — tap below to add.</span>'; return; }
-    el.innerHTML = keys.map(function (k) {
+    // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
+    var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
+    var banner = rf.length ? '<div class="dx-redflag">⚠ Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
+    el.innerHTML = banner + keys.map(function (k) {
       return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
     }).join("");
     el.querySelectorAll(".dx-sel-chip").forEach(function (b) {
@@ -1181,8 +1184,40 @@
     headInjury:["head injury","fall","fell","trauma to head"], alcoholExcess:["alcohol","alcoholic","drinks heavily","etoh"],
     ataxia:["ataxia","unsteady","unsteady gait","incoordination"], proteinuria:["frothy urine","proteinuria","heavy protein"]
   };
+  // Broaden coverage of real doctor phrasing (merged into FT_SYN — does not overwrite the above).
+  var FT_SYN_MORE = {
+    diabetesHx:["diabet","known diabetic","dm","t2dm","t1dm","niddm","iddm","on insulin","on metformin","raised sugars","high sugars"],
+    hypertensionHx:["hypertens","raised bp","high blood pressure","high bp","elevated bp","known hypertensive","on antihypertensive"],
+    alteredSensorium:["altered sensorium","altered mental","altered mentation","reduced consciousness","decreased consciousness","not responding","unresponsive","stupor","stuporous","obtunded","comatose","in coma","disoriented","disorientation","poor gcs","low gcs","e1","drowsiness","encephalopathy"],
+    focalNeuroDeficit:["quadriparesis","quadriplegia","paraparesis","paraplegia","hemiplegia","hemiparesis","monoparesis","monoplegia","limb weakness","weakness of limbs","reduced power","power reduced","decreased power","extensor plantar","plantar extensor","plantars extensor","upgoing plantar","babinski","brisk reflexes","exaggerated reflexes","umn signs","upper motor neuron","dysarthria","aphasia","dysphasia","facial deviation","deviation of mouth","tongue deviation","gaze deviation"],
+    seizure:["frothing","froth at mouth","frothing at mouth","foaming","foaming at mouth","tongue bite","tongue biting","tonic clonic","tonic-clonic","gtcs","generalised tonic","status epilepticus","convulsing","up-rolling of eyes","uprolling"],
+    miosisSecretions:["hypersalivation","excess secretion","excessive secretion","excess secretions","drooling","salivating","salivation","lacrimation","sweating profusely","diaphoresis","pinpoint pupils","organophosphate","op poisoning","op compound","insecticide","pesticide","poisoning compound","cholinergic"],
+    nauseaVomiting:["vomiting","vomited","emesis","throwing up"],
+    hypoxia:["desaturating","desaturation","low saturation","low sats","cyanosis","cyanosed"],
+    tachypnea:["tachypnea","tachypnoea","fast breathing","rapid breathing","increased respiratory rate"],
+    dyspnea:["breathlessness","difficulty breathing","respiratory distress","gasping"]
+  };
+  // Merge unconditionally — parseFreeText only applies keys that are in VALID, so extras are harmless.
+  Object.keys(FT_SYN_MORE).forEach(function (k) { FT_SYN[k] = (FT_SYN[k] || []).concat(FT_SYN_MORE[k]); });
   function parseFreeText(text) {
     if (!text) return;
+    // Preferred path: the deterministic clinical-narrative NLP layer (clinical-nlp.js).
+    // It handles synonyms, abbreviations, typos, negation, uncertainty, temporality and
+    // vitals, and returns structured findings. Only PRESENT, engine-valid keys are ticked;
+    // negated / purely-historical findings are kept for review but not fed to the engine.
+    if (window.SMD_NLP && SMD_NLP.extract) {
+      var nr = SMD_NLP.extract(text, { valid: VALID, labels: LABEL, syn: FT_SYN }), nadded = 0;
+      (nr.present || []).forEach(function (k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; nadded++; } });
+      S._lastExtract = nr;
+      S.started = true;
+      S.timeline.push({ f: "free-text (" + nadded + " finding" + (nadded === 1 ? "" : "s") + " extracted — review)", topName: null, topScore: null });
+      recompute();
+      var rf = (nr.redFlags || []).length;
+      var msg = nadded ? (nadded + " finding" + (nadded > 1 ? "s" : "") + " extracted — review below" + (rf ? " · ⚠ " + rf + " red flag" + (rf > 1 ? "s" : "") : "")) : "No findings recognised — rephrase or add them manually below";
+      if (nadded <= 1 && nr.incomplete) msg = "Extraction may be incomplete — review the note or add findings below.";
+      toast(msg);
+      return;
+    }
     var t = " " + text.toLowerCase().replace(/[^a-z0-9 ]/g, " ").replace(/\s+/g, " ") + " ", added = 0;
     function present(phrase) {
       phrase = (phrase || "").trim();
@@ -1200,6 +1235,17 @@
       }
       if (hit) { S.f[k] = true; added++; }
     });
+    // ---- numeric VITALS → findings (e.g. "vitals 180/100", "spo2 88", "gcs 9", "hr 120").
+    //      NOTE: run against the RAW lowercased text — `t` has had "/" and ":" stripped. ----
+    var raw = " " + String(text).toLowerCase() + " ";
+    function addF(k) { if (VALID[k] && !S.f[k]) { S.f[k] = true; added++; } }
+    var m;
+    if ((m = raw.match(/(\d{2,3})\s*\/\s*(\d{2,3})/))) { var sys = +m[1], dia = +m[2]; if (sys >= 60 && sys <= 300 && dia >= 30 && dia <= 200) { if (sys >= 140 || dia >= 90) addF("hypertensionHx"); else if (sys < 90 || dia < 60) addF("hypotension"); } }
+    if ((m = raw.match(/\b(?:spo2|sao2|sats?|saturation|saturating)\s*(?:at|of|is|=|:)?\s*(\d{2,3})\s*%?/))) { if (+m[1] <= 100 && +m[1] < 92) addF("hypoxia"); }
+    if ((m = raw.match(/\b(?:hr|heart rate|pulse|pr)\s*(?:of|is|=|:)?\s*(\d{2,3})\b/))) { if (+m[1] > 100) addF("tachycardia"); else if (+m[1] < 60 && +m[1] > 20) addF("bradycardia"); }
+    if ((m = raw.match(/\b(?:rr|resp(?:iratory)? rate)\s*(?:of|is|=|:)?\s*(\d{1,2})\b/))) { if (+m[1] > 22) addF("tachypnea"); else if (+m[1] < 10) addF("bradypnea"); }
+    if ((m = raw.match(/\bgcs\s*(?:of|is|=|:)?\s*(\d{1,2})(?:\s*\/\s*15)?/))) { if (+m[1] < 15 && +m[1] >= 3) addF("alteredSensorium"); }
+    if ((m = raw.match(/\b(?:temp(?:erature)?|febrile at)\s*(?:of|is|=|:)?\s*(\d{2,3}(?:\.\d)?)\s*(?:c|celsius|f|fahrenheit|°|deg)/))) { var tv = +m[1]; if ((tv >= 38 && tv <= 44) || (tv >= 100 && tv <= 110)) addF("fever"); else if (tv > 0 && tv < 35) addF("hypothermia"); }
     S.started = true;
     S.timeline.push({ f: "free-text (" + added + " findings extracted)", topName: null, topScore: null });
     recompute();
@@ -2559,6 +2605,7 @@
       ".dx-search-drop .dx-cat-h{padding:8px 10px 5px;font:800 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft)}",
       ".dx-sr-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:800;font-size:15px;flex:0 0 auto}",
       ".dx-sr-lbl{flex:1}",
+      ".dx-redflag{width:100%;box-sizing:border-box;font:800 12.5px var(--sans);color:var(--red,#ab1c2c);background:var(--red-bg,#fbe7e9);border:1px solid var(--red-line,#efa9b1);border-radius:10px;padding:9px 12px;margin-bottom:8px}",
       ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
       ".dx-mgmt.on{display:flex;animation:dxIn .22s ease}",
       ".dx-mgmt-top{padding:13px 16px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}",
