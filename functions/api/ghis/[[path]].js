@@ -3,13 +3,14 @@
  * DEPLOY PATH:   functions/api/ghis/[[path]].js   ->  https://stewardmd.in/api/ghis/*
  *
  * Each doctor logs in with their OWN GHIS id + password (proper audit trail).
- * "Keep me logged in" stores their credentials ENCRYPTED so the server can
- * silently re-login when GHIS times out — logged in forever until they Logout.
+ * Passwords are NEVER stored: the password is used only to open a GHIS session
+ * for this request. The token maps to a short-lived session (cookie jar) in KV;
+ * when GHIS times out the doctor logs in again. No silent re-login, no stored creds.
  *
  * REQUIRED Cloudflare Pages settings:
- *   KV namespace binding:  GHIS_KV        (stores sessions + encrypted creds)
- *   Secret:                GHIS_ENC_KEY   (base64 of 32 random bytes; AES-GCM key)
- *   (GHIS_USER / GHIS_PASS are NO LONGER needed — remove them.)
+ *   KV namespace binding:  GHIS_KV        (stores short-lived sessions only)
+ *   (GHIS_ENC_KEY is no longer used for credential storage; GHIS_USER/GHIS_PASS
+ *    are not needed. Purge any legacy "cred:" keys from GHIS_KV after deploy.)
  *
  * Endpoints:
  *   POST /api/ghis/login    {userId,password,remember}     -> {token, userId}
@@ -76,21 +77,14 @@ async function loginGhis(userId, password) {
   return { cookie, csrf };
 }
 
-// ── per-token session (with auto re-login from stored creds) ─────────────────
+// ── per-token session (token-only; passwords are NEVER stored) ───────────────
+// The token maps to a short-lived GHIS session (cookie jar) in KV. When the GHIS
+// session expires, the doctor simply logs in again — we do not persist credentials
+// and cannot silently re-login. This removes stored-password risk entirely.
 async function getSession(env, token) {
   if (!token || !env.GHIS_KV) return null;
   const sess = await env.GHIS_KV.get('sess:' + token, 'json');
-  if (sess && (Date.now() - sess.ts) < SESSION_TTL_MS) return { token, ...sess };
-  return refreshFromCreds(env, token) || (sess ? { token, ...sess } : null);
-}
-async function refreshFromCreds(env, token) {
-  const credEnc = env.GHIS_KV && await env.GHIS_KV.get('cred:' + token);
-  if (!credEnc) return null;
-  const creds = await decryptJson(env, credEnc);
-  const fresh = await loginGhis(creds.userId, creds.password);
-  const rec = { ...fresh, userId: creds.userId, ts: Date.now() };
-  await env.GHIS_KV.put('sess:' + token, JSON.stringify(rec), { expirationTtl: SESS_KV_TTL });
-  return { token, ...rec };
+  return sess ? { token, ...sess } : null;   // GHIS validates freshness; a stale cookie → unauth → re-login
 }
 async function ghisReq(env, token, method, path, body, extra = {}) {
   let s = await getSession(env, token);
@@ -205,7 +199,9 @@ export async function onRequest(context) {
       catch (e) { return json({ error: e.code === 'bad_credentials' ? 'bad_credentials' : 'login_failed' }, 401); }
       const t = randToken();
       await env.GHIS_KV.put('sess:' + t, JSON.stringify({ ...sess, userId: String(body.userId), ts: Date.now() }), { expirationTtl: SESS_KV_TTL });
-      if (body.remember) await env.GHIS_KV.put('cred:' + t, await encryptJson(env, { userId: String(body.userId), password: String(body.password) }));
+      // NOTE: we intentionally do NOT persist credentials (no "remember" store) — the
+      // password never leaves this request. Sessions are token-only; on GHIS timeout the
+      // doctor logs in again. `body.remember` is accepted but ignored for compatibility.
       return json({ token: t, userId: String(body.userId) });
     }
 

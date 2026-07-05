@@ -1200,7 +1200,7 @@ tick();})();</script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold198" defer></script>
 <script src="/electrolytes.js?v=gold126" defer></script>
 <script src="/caseshare.js?v=gold157" defer></script>
-<script src="/home.js?v=gold205" defer></script>
+<script src="/home.js?v=gold206" defer></script>
 <script src="/antibiogram.js?v=gold159" defer></script>
 <script src="/workspaces.js?v=gold197" defer></script>
 <script src="/ws-surgery.js?v=gold190" defer></script>
@@ -1238,7 +1238,7 @@ tick();})();</script>
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold139"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold207"; document.body.appendChild(s); }
     ghisHideFab(); ghisWrapSB(); ghisSidebarItem();
     [400, 1200, 2500].forEach(function (ms) { setTimeout(function () { ghisWrapSB(); ghisSidebarItem(); }, ms); });
   }
