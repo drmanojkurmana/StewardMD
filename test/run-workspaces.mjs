@@ -221,6 +221,10 @@ try {
   ok("watermark is aria-hidden (screen-reader safe)", (await ev(`var w=document.querySelector('#swShell .sw-wm'); if(!w) return false; return w.getAttribute('aria-hidden')==='true' || !!w.querySelector('[aria-hidden="true"]');`)) === true);
   ok("watermark is non-interactive (pointer-events:none)", (await ev(`var w=document.querySelector('#swShell .sw-wm'); return w? getComputedStyle(w).pointerEvents==='none' : false;`)) === true);
   ok("shell shows the Internal-Medicine escape hatch", (await ev(`return !!document.querySelector('#swShell #swToIM');`)) === true);
+  // regression guard: a CLOSED switcher scrim must NOT capture taps (real fingers hit-test
+  // through it — programmatic clicks don't, which is why this needs an explicit check).
+  ok("closed switcher scrim does not block taps (pointer-events:none)", (await ev(`var s=document.querySelector('.sw-scrim'); return s ? (getComputedStyle(s).pointerEvents==='none' && !s.classList.contains('on')) : true;`)) === true);
+  ok("nothing invisible covers screen centre after the sheet closes", (await ev(`var e=document.elementFromPoint(Math.round(innerWidth/2),Math.round(innerHeight/2)); return !(e && /sw-scrim/.test(e.className||''));`)) === true);
 
   /* Early-access feedback control renders on a specialty assessment */
   console.log("\n── feedback control (Early-access signal) ──");
