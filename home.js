@@ -1095,7 +1095,7 @@
     (document.head || document.documentElement).appendChild(st);
   }
   function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
-  function openAskAi() {
+  function openAskAi(prefill) {
     maikCSS();
     var old = document.getElementById("maikSheet"); if (old) old.remove();
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
@@ -1285,8 +1285,12 @@
     sendBtn.addEventListener("click", send);
     qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
+    if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
     setTimeout(function () { try { qEl.focus(); } catch (e) {} }, 300);
   }
+  // Open the MaiK assistant with an optional pre-filled question (used by Specialty
+  // Workspaces' point-of-care "Ask MaiK" hand-off). The clinician reviews and sends.
+  window.SMD_askMaik = function (q) { try { openAskAi(q); } catch (e) {} };
 
   // ---- Display & Accessibility engine ----
   var DKEY = "smd_display_v1", DENS = { compact: 0.86, default: 1, comfortable: 1.18, large: 1.4 }, DDEF = { fontScale: 1, density: "default", autoFit: false, theme: "classic", font: "plex", headingStyle: "default" };

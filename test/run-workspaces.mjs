@@ -227,6 +227,12 @@ try {
   await ev(`var b=[].slice.call(document.querySelectorAll('#swSyn .sw-synbtn'))[0]; if(b) b.click(); return 1;`); await sleep(400);
   ok("feedback control present on the assessment (#swFb with 👍/👎/flag)", (await ev(`var f=document.querySelector('#swOut #swFb'); return !!(f && f.querySelectorAll('.sw-fbbtn').length===2 && f.querySelector('.sw-fbflag'));`)) === true);
 
+  /* point-of-care hand-off */
+  console.log("\n── point-of-care hand-off ──");
+  ok("hand-off bar present (Ask MaiK + Learn more)", (await ev(`var p=document.querySelector('#swOut .sw-poc'); return !!(p && p.querySelector('[data-poc="maik"]') && p.querySelector('[data-poc="learn"]'));`)) === true);
+  ok("antibiotic hand-off shown when antibiotics relevant (ladder ≥ 2)", (await ev(`return !!(document.querySelector('#swOut [data-poc="abx"]') && document.querySelector('#swOut [data-poc="ix"]'));`)) === true);
+  ok("Ask MaiK hand-off is wired (window.SMD_askMaik available)", (await ev(`return typeof window.SMD_askMaik==='function';`)) === true);
+
   /* Internal Medicine path still opens the real reasoning engine */
   console.log("\n── Internal Medicine reachability (protected default) ──");
   await ev(`try{document.querySelector('#swShell #swToIM').click();}catch(e){} return 1;`); await sleep(600);
