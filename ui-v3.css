@@ -67,6 +67,9 @@ body.v3-dark, body.dark {
 .v3-brand{display:flex;align-items:center;gap:10px;min-width:0}
 .v3-mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--v3-primary),var(--v3-primary-2));display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .v3-mark svg{width:19px;height:19px;stroke:#fff}
+/* Brand logo mark — the StewardMD glyph as a CSS mask so it takes the accent
+   colour (var(--v3-primary) → --teal) and thus changes with the theme/font. */
+.v3-logo{display:inline-block;width:30px;height:30px;flex:0 0 auto;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background-color:var(--v3-primary)}
 .v3-brand-tt{font:800 16px/1.1 var(--v3-mono);letter-spacing:-.01em}.v3-md{color:var(--v3-primary)}
 .v3-brand-sub{font:500 11.5px/1.2 var(--v3-font);color:var(--v3-muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .v3-spacer{flex:1}
@@ -141,6 +144,7 @@ body.v3-dark, body.dark {
 /* --- masthead: serif wordmark, hairline base, calm muted controls --- */
 #homeV2.hv4 .v3-header{gap:var(--v3-s2);height:64px;padding-left:var(--v3-s4);padding-right:var(--v3-s3);background:var(--v3-panel);border-bottom:1px solid var(--hv4-line)}
 #homeV2.hv4 .v3-mark{display:none}
+#homeV2.hv4 .v3-logo{width:26px;height:26px;margin-right:9px}
 #homeV2.hv4 .v3-brand{flex:0 1 auto;min-width:0;overflow:hidden;gap:0}
 #homeV2.hv4 .v3-brand-tt{font:800 20px/1 var(--hv4-word);letter-spacing:-.02em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #homeV2.hv4 .v3-md{color:var(--v3-primary);font-weight:600}
