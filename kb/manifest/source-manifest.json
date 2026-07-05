@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updated": "2026-07-04",
+  "updated": "2026-07-05",
   "policy": {
     "paraphraseOnly": true,
     "noVerbatim": true,
@@ -8,7 +8,11 @@
     "citationRequired": true,
     "engineAuthority": "The deterministic StewardMD reasoning engine owns diagnosis, confidence, ICMR precedence, hospital policy, and culture-directed recommendations. MaiK (the LLM) is advisory only and never overrides engine output; retrieved knowledge grounds explanation, not decision-making."
   },
-  "treatmentPrecedence": ["icmr", "guideline", "harrison"],
+  "treatmentPrecedence": [
+    "icmr",
+    "guideline",
+    "harrison"
+  ],
   "notes": [
     "This manifest records PROVENANCE only — no copyrighted source text is stored in it or in the KB. Disease and treatment content is paraphrased into structured fields (pearls, red flags, investigations, regimens) with a source ref + page/section anchor.",
     "Clinician-facing source labels never surface a proprietary textbook title as the answer's authority; the disease reference is shown as 'Standard internal-medicine reference' while guideline/formulary sources are named.",
@@ -42,7 +46,12 @@
       "citationAnchor": "Guideline name (paraphrased protocol)",
       "clinicianFacingLabel": "ICMR / national guidelines",
       "coverageNote": "Concentrated in infective syndromes.",
-      "examples": ["NCDC India Guidelines", "National TB Elimination Programme", "Indian National Treatment Guidelines for Antimicrobial Use", "NCDC India Guidelines for Rickettsial Diseases"]
+      "examples": [
+        "NCDC India Guidelines",
+        "National TB Elimination Programme",
+        "Indian National Treatment Guidelines for Antimicrobial Use",
+        "NCDC India Guidelines for Rickettsial Diseases"
+      ]
     },
     {
       "id": "society_guidelines",
@@ -57,7 +66,19 @@
       "citationAnchor": "Guideline name (paraphrased protocol)",
       "clinicianFacingLabel": "<Named society> guidelines",
       "coverageNote": "Cited across 42/51 infective syndromes and select non-infective conditions.",
-      "examples": ["IDSA/ATS CAP & HAP/VAP Guidelines", "IDSA Bacterial Meningitis Guidelines", "IDSA Skin and Soft Tissue Infection Guidelines", "IDSA Diabetic Foot Infection Guidelines", "IDSA/SHEA C. difficile Guidelines", "IDSA Febrile Neutropenia Guidelines", "Tokyo Guidelines for Acute Cholangitis/Cholecystitis", "AASLD Practice Guidance on SBP", "British Thoracic Society Bronchiectasis Guidelines", "IWGDF Guidelines", "NCCN Cancer-Related Infections"]
+      "examples": [
+        "IDSA/ATS CAP & HAP/VAP Guidelines",
+        "IDSA Bacterial Meningitis Guidelines",
+        "IDSA Skin and Soft Tissue Infection Guidelines",
+        "IDSA Diabetic Foot Infection Guidelines",
+        "IDSA/SHEA C. difficile Guidelines",
+        "IDSA Febrile Neutropenia Guidelines",
+        "Tokyo Guidelines for Acute Cholangitis/Cholecystitis",
+        "AASLD Practice Guidance on SBP",
+        "British Thoracic Society Bronchiectasis Guidelines",
+        "IWGDF Guidelines",
+        "NCCN Cancer-Related Infections"
+      ]
     },
     {
       "id": "who_guidelines",
@@ -71,7 +92,13 @@
       "paraphrased": true,
       "citationAnchor": "WHO guideline name (paraphrased protocol)",
       "clinicianFacingLabel": "WHO guidelines",
-      "examples": ["WHO TB Guidelines", "WHO Guidelines for Malaria", "WHO Typhoid Fever Guidelines", "WHO Guidelines on Amoebiasis", "WHO Guidelines on Dysentery"]
+      "examples": [
+        "WHO TB Guidelines",
+        "WHO Guidelines for Malaria",
+        "WHO Typhoid Fever Guidelines",
+        "WHO Guidelines on Amoebiasis",
+        "WHO Guidelines on Dysentery"
+      ]
     },
     {
       "id": "clinical_criteria",
@@ -85,7 +112,13 @@
       "paraphrased": true,
       "citationAnchor": "Criterion name",
       "clinicianFacingLabel": "Clinical criteria",
-      "examples": ["Sepsis-3 Definitions", "Surviving Sepsis Campaign", "Centor Criteria", "Anthonisen Criteria", "CURB-65 / qSOFA (via calculators)"]
+      "examples": [
+        "Sepsis-3 Definitions",
+        "Surviving Sepsis Campaign",
+        "Centor Criteria",
+        "Anthonisen Criteria",
+        "CURB-65 / qSOFA (via calculators)"
+      ]
     },
     {
       "id": "stewardmd_drug_index",
@@ -114,6 +147,56 @@
       "citationAnchor": "Local hospital antibiogram",
       "clinicianFacingLabel": "Local hospital policy",
       "coverageNote": "Present only where a site has configured a policy overlay."
+    }
+  ],
+  "guidelineDocuments": [
+    {
+      "docId": "ntep_drtb_2024",
+      "sourceTitle": "National Guidelines for Management of Drug-Resistant TB",
+      "issuingBody": "Central TB Division, MoHFW / NTEP (India)",
+      "publicationVersionOrYear": "November 2024 (released 27-03-2025)",
+      "jurisdiction": "India",
+      "sourcePriority": 1,
+      "lastReviewedDate": "2026-07-05",
+      "applicability": "DR-TB regimen selection, DST-driven logic, eligibility, dosing, monitoring, special situations, QT/hepatotoxicity/neuropathy management (India-facing, highest precedence).",
+      "urlOrInternalReference": "guidelines/National-Guidelines-for-Management-of-DR-TB_27-3-2025.pdf",
+      "evidenceNotes": "Paraphrased only; no verbatim text stored. Covers BPaLM, 9-11mo shorter oral, 18-20mo longer oral, H mono/poly-resistant, special populations, adverse-event annexures.",
+      "clinicianFacingLabel": "National Guidelines for Management of Drug-Resistant TB (NTEP, Nov 2024)",
+      "precedenceTier": "icmr",
+      "verbatimStored": false,
+      "paraphrased": true
+    },
+    {
+      "docId": "who_tb_consolidated",
+      "sourceTitle": "WHO consolidated guidelines / operational handbook on tuberculosis",
+      "issuingBody": "World Health Organization",
+      "publicationVersionOrYear": "ISBN 9789240107243",
+      "jurisdiction": "International",
+      "sourcePriority": 3,
+      "lastReviewedDate": "2026-07-05",
+      "applicability": "International comparative/reference guidance on TB treatment and DR-TB regimens; used as reference where NTEP is silent, never as the default over NTEP for India.",
+      "urlOrInternalReference": "guidelines/9789240107243-eng.pdf",
+      "evidenceNotes": "Paraphrased only. Comparative/reference tier below NTEP for India-facing recommendations.",
+      "clinicianFacingLabel": "WHO consolidated guidelines on tuberculosis",
+      "precedenceTier": "guideline",
+      "verbatimStored": false,
+      "paraphrased": true
+    },
+    {
+      "docId": "national_aic_2026",
+      "sourceTitle": "National Guidelines on Airborne Infection Control",
+      "issuingBody": "MoHFW (India)",
+      "publicationVersionOrYear": "2026",
+      "jurisdiction": "India",
+      "sourcePriority": 2,
+      "lastReviewedDate": "2026-07-05",
+      "applicability": "Airborne infection control (out of scope for treatment-regimen selection; referenced for isolation/AIC context only).",
+      "urlOrInternalReference": "guidelines/National-AIC-Guidelines-2026.pdf",
+      "evidenceNotes": "Referenced for infection-control context; not a treatment-regimen source.",
+      "clinicianFacingLabel": "National Guidelines on Airborne Infection Control (2026)",
+      "precedenceTier": "icmr",
+      "verbatimStored": false,
+      "paraphrased": true
     }
   ]
 }
