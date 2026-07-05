@@ -550,7 +550,10 @@
    * StewardMD calculators/protocols. Keyed by diagnosis id (works for both
    * infectious syndrome ids and non-infectious ids).
    * ---------------------------------------------------------------------- */
-  function inf(fn) { return function () { try { close(); } catch (e) {} try { if (window.INF) fn(window.INF); } catch (e) {} }; }
+  // Open the bedside tool as an overlay ON TOP of the reasoning workspace (INF is z-index 10000).
+  // Do NOT close() the workspace first — otherwise dismissing the tool strands the user on the
+  // home/blank layer instead of returning to the diagnosis they came from.
+  function inf(fn) { return function () { try { if (window.INF) fn(window.INF); } catch (e) {} }; }
   var TOOLREG = {
     vaso:       { icon: "💉", label: "Vasopressor / infusion calculator", run: inf(function (I) { I.openDrug("noradrenaline"); }) },
     dashboard:  { icon: "🩺", label: "ICU dashboard — MAP · lactate · urine output", run: inf(function (I) { I.openDashboard(); }) },
@@ -560,7 +563,7 @@
     gtn:        { icon: "💊", label: "Nitroglycerin infusion", run: inf(function (I) { I.openDrug("nitroglycerin"); }) },
     heparin:    { icon: "🩸", label: "Heparin infusion", run: inf(function (I) { I.openDrug("heparin"); }) },
     amiodarone: { icon: "❤️", label: "Amiodarone infusion", run: inf(function (I) { I.openDrug("amiodarone"); }) },
-    stroke:     { icon: "🧠", label: "Stroke score (A2DS2)", run: function () { try { close(); } catch (e) {} try { if (window.SB) SB.calc("a2ds2"); } catch (e) {} } }
+    stroke:     { icon: "🧠", label: "Stroke score (A2DS2)", run: function () { try { if (window.SB) SB.calc("a2ds2"); } catch (e) {} } }
   };
   var TOOLMAP = {
     // infectious (syndrome ids)
