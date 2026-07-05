@@ -472,6 +472,16 @@
       // and the rotating quote popup so they never cover the sheet's content (e.g. the contributor card).
       "body.hv-sheet-open .hv-fab,body.hv-sheet-open #harrisonQuotePopup,body.hv-sheet-open .ghis-ward-fab{display:none!important}",
       ".hv-sheet{z-index:calc(var(--z-cases, 600) + 40)}.hv-scrim{z-index:calc(var(--z-cases, 600) + 39)}",
+      // Acknowledgements sheet: render the names' hover tooltips (roles, bios, publications)
+      // INLINE as readable cards — visible on touch, no overlap. Names stack; each description
+      // sits under its name.
+      ".hv-ack .ack-names{display:block!important}",
+      ".hv-ack .ack-role{font:700 11px var(--hfont,var(--sans))!important;text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#5a7184)!important;margin:18px 0 2px!important}",
+      ".hv-ack .ack-contrib-name,.hv-ack .creator-name{display:block!important;position:relative!important;font:800 15px var(--hfont,var(--sans))!important;color:var(--hink,#14202b)!important;margin:14px 0 0!important;padding:0!important;cursor:default!important;border:none!important}",
+      ".hv-ack .ack-tip,.hv-ack .creator-tip{display:block!important;position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;z-index:auto!important;transform:none!important;margin:6px 0 2px!important;border:1px solid var(--hbd,#dde4e8)!important;border-radius:12px!important;background:var(--hbg,#f6f8f8)!important;color:var(--hink,#14202b)!important;padding:11px 13px!important;font:500 12.5px/1.55 var(--hfont,var(--sans))!important;white-space:normal!important}",
+      ".hv-ack .creator-tip{display:flex!important;flex-direction:column!important;padding:0 0 12px!important;background:var(--hpanel,#fff)!important}",
+      ".hv-ack .ack-tip strong{display:block;color:var(--hp,var(--teal))!important;font-weight:800;margin-bottom:3px}",
+      ".hv-ack .ack-tip::before,.hv-ack .ack-tip::after,.hv-ack .creator-tip::before,.hv-ack .creator-tip::after{display:none!important}",
       ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
       // account/profile block injected into the sidebar (settings)
       ".smd-sba{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(127,127,127,.18);background:linear-gradient(180deg,rgba(20,184,166,.10),transparent)}",
@@ -1099,10 +1109,12 @@
       var c = src.cloneNode(true);
       c.removeAttribute("id");
       var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
-      // The creator name carries a rich hover tooltip (.ack-tip). When cloned into this sheet it
-      // renders as a broken floating card overlapping the contributor list — strip it here.
-      Array.prototype.forEach.call(c.querySelectorAll(".ack-tip"), function (t) { if (t.parentNode) t.parentNode.removeChild(t); });
-      inner = '<div class="hv-ack">' + c.innerHTML + '</div>';
+      // The names carry rich hover tooltips (.ack-tip / .creator-tip: roles, bios, publications).
+      // Hover doesn't exist on touch and, cloned here, they'd overlap. Mark this clone so the
+      // sheet CSS renders every tooltip INLINE as a readable card (see .hv-ack .ack-tip below) —
+      // so all contributor descriptions and the creator profile are fully visible, not hidden.
+      c.classList.add("hv-ack-inline");
+      inner = '<div class="hv-ack">' + c.outerHTML + '</div>';
     } else {
       inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
         '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
