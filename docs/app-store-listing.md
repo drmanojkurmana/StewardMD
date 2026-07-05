@@ -53,4 +53,4 @@ Privacy-first: no ads, no tracking, and your saved work can be deleted anytime i
 - StewardMD is intended for qualified, registered healthcare professionals; a first-run gate requires the user to attest to this and accept the disclaimer/terms.
 - It is decision-support/educational; it does not diagnose or prescribe autonomously.
 - If asked about the institutional "Ward Sync" feature: it is access-gated to a partner institution's own clinicians using their own credentials; that institution is the controller of any patient data shown.
-- Demo credentials (if requested): provide a reviewer test account here → [ADD REVIEWER TEST LOGIN].
+- Reviewer access: **use Guest mode** — tap "Try guest access" on the sign-in screen; no login is required to review the core features (decision support, reasoning, drug lookup, tools). Only cloud sync / saved-cases require a Google login; if the reviewer wants to test that, a throwaway Google account can be supplied on request.
