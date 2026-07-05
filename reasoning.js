@@ -4823,10 +4823,23 @@
     if (!smdTbIsRender(synId, oa)) return false;
     _tbSynId = synId || null;
     smdTbInjectCSS();
-    // hide the vague native "Modified regimens per drug-susceptibility testing" alternative card
+    // Hide the vague native "Modified regimens per drug-susceptibility testing" alternative card
+    // and remember it as the anchor so we can slot the rich workspace into the ALTERNATIVE
+    // REGIMENS section (where clinicians look for alternatives), keeping that heading as the label.
+    // GUARD: our own injected cards (#smdSafetyCard / #smdTbCard) echo that phrase in their
+    // "Alternatives" list, and their class matches [class*=card] — so an unqualified closest()
+    // would hide the safety card / this workspace. Skip them.
+    var _tbAnchor = null;
     try {
+      var skip = function (b) { return !b || b === oa || b.id === "smdSafetyCard" || b.id === "smdTbCard" ||
+        (b.classList && (b.classList.contains("smd-safety-card") || b.classList.contains("smd-tb-card"))); };
       Array.prototype.forEach.call(oa.querySelectorAll("*"), function (n) {
-        if (n.children && n.children.length <= 6 && /modified regimens per drug-susceptibility/i.test(n.textContent || "") && n.textContent.length < 400) { var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n; if (box && box !== oa) box.style.display = "none"; }
+        if (n.children && n.children.length <= 6 && /modified regimens per drug-susceptibility/i.test(n.textContent || "") && n.textContent.length < 400) {
+          var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n;
+          if (skip(box)) return;
+          box.style.display = "none";
+          if (!_tbAnchor) _tbAnchor = box;   // first hidden native card = where the ALTERNATIVE REGIMENS are
+        }
       });
     } catch (_) {}
     var html = '<div id="smdTbCard" class="smd-tb-card">' +
@@ -4834,14 +4847,68 @@
       '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory — clinician verifies</div>' +
       smdTbInputsHTML(e) +
       '<div id="smdTbLines"></div></div>';
-    var scp = oa.querySelector("#saveCasePrompt");
-    if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html); else oa.insertAdjacentHTML("afterbegin", html);
+    // Prefer slotting the workspace into the alternative-regimens location (right before the hidden
+    // vague card, so it sits under the "ALTERNATIVE REGIMENS" heading). Fall back to the top of the
+    // output (under the Save-case box) when there is no such card on the page.
+    if (_tbAnchor && _tbAnchor.parentNode) { _tbAnchor.insertAdjacentHTML("beforebegin", html); }
+    else { var scp = oa.querySelector("#saveCasePrompt"); if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html); else oa.insertAdjacentHTML("afterbegin", html); }
     var box = document.getElementById("smdTbInputs");
     if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-tb]"), function (el) { el.addEventListener("input", smdTbRecalc); el.addEventListener("change", smdTbRecalc); });
     if (window.SMD_TB) SMD_TB.ready().then(function () { smdTbRecalc(); });
     return true;
   }
   try { window.SMD_TB.renderWorkspace = smdTbWorkspace; window.SMD_TB.recalc = smdTbRecalc; window.SMD_TB.isRender = smdTbIsRender; } catch (e) {}
+
+  // --- ASP console: name the real second-line DR-TB drugs -------------------
+  // The app.js Antimicrobial Stewardship Console (window.ASP_DATA) shipped a
+  // single vague TB alternative ("DR-TB regimen (if RR/MDR) — refer to DR-TB
+  // services") that named NO second-line drugs, and ASP_DRUGS lacked
+  // pretomanid/moxifloxacin/clofazimine/cycloserine/delamanid/ethionamide. We
+  // augment both after app.js loads (same window seam used elsewhere) with the
+  // NTEP-sourced regimens (BPaLM · 9–11-mo shorter · 18–20-mo longer · H
+  // mono/poly), respecting that BPaLM and the shorter regimen are NOT used in
+  // severe extrapulmonary TB (CNS / disseminated / miliary) — those route to
+  // the longer oral regimen. Content mirrors kb/treatments/tb_dr_regimens.json
+  // + tb_drugs.json (NTEP Nov-2024). Reversible: localStorage smd_asp_tb=0.
+  function smdAspTbOn() { try { var v = localStorage.getItem("smd_asp_tb"); return v === null ? true : v === "1"; } catch (e) { return true; } }
+  var SMD_ASP_TB_DRUGS = {
+    pretomanid: { label: "Pretomanid (Pa)", aware: "Reserve", cls: "Anti-TB (nitroimidazole)", spectrum: "Drug-resistant M. tuberculosis — component of BPaLM/BPaL.", mech: ["Documented pretomanid resistance (uncommon)"], adverse: ["hepatotoxicity", "peripheral neuropathy", "myelosuppression (with linezolid)"], monitoring: "Baseline + periodic LFT, CBC; neuropathy check.", renal: "Limited data — caution.", hepatic: "Discontinue for significant hepatotoxicity.", preg: "Per NTEP eligibility.", lact: "Caution (not in lactation unless formula-feeding).", contra: ["Documented Pa resistance", "Age/paediatric restrictions per NTEP"], cost: "₹₹₹", india: "NTEP (programmatic, free)", note: "Only as part of BPaLM/BPaL (≥14 y) per WHO/NTEP §3.3." },
+    moxifloxacin: { label: "Moxifloxacin (Mfx)", aware: "Watch", cls: "Fluoroquinolone (DR-TB Group A)", spectrum: "TB — Group A fluoroquinolone; retained in BPaLM even if FQ-resistant.", mech: ["gyrA / gyrB mutations (fluoroquinolone resistance)"], adverse: ["QT prolongation", "tendinopathy", "dysglycaemia", "CNS effects"], monitoring: "Baseline + periodic ECG (QTcF); electrolytes.", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per DR-TB regimen risk/benefit.", lact: "Caution.", contra: ["QT-prolongation risk"], cost: "₹", india: "NTEP (programmatic)", note: "BPaLM (full course) & longer regimen; additive QT with Bdq/Cfz — monitor QTcF. Space cation/Mg products by 2 h." },
+    clofazimine: { label: "Clofazimine (Cfz)", aware: "Watch", cls: "Riminophenazine (DR-TB Group B)", spectrum: "DR-TB — shorter & longer oral regimens.", mech: [], adverse: ["skin/conjunctival pigmentation", "QT prolongation", "GI upset / ichthyosis"], monitoring: "Baseline + periodic ECG (QTcF).", renal: "No major adjustment.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation"], cost: "₹₹", india: "NTEP (programmatic)", note: "Component of the 9–11-mo shorter & 18–20-mo longer oral regimens; additive QT." },
+    cycloserine: { label: "Cycloserine / Terizidone (Cs)", aware: "Watch", cls: "DR-TB Group B", spectrum: "DR-TB — longer oral M/XDR regimen.", mech: [], adverse: ["psychiatric effects (depression, psychosis, suicidality)", "seizures"], monitoring: "Baseline + ongoing psychiatric/neurological assessment; give with pyridoxine.", renal: "Reduce in renal impairment (renally cleared).", hepatic: "No major adjustment.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Active psychosis / seizure disorder (relative)", "Heavy alcohol use"], cost: "₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; monitor mental state; additive CNS toxicity with isoniazid/alcohol." },
+    delamanid: { label: "Delamanid (Dlm)", aware: "Reserve", cls: "Anti-TB (nitro-dihydro-imidazooxazole)", spectrum: "DR-TB — longer oral; paediatric alternative where Bdq restricted.", mech: [], adverse: ["QT prolongation"], monitoring: "Baseline + periodic ECG (QTcF); albumin, electrolytes.", renal: "Caution.", hepatic: "Caution.", preg: "Per regimen risk/benefit.", lact: "Caution.", contra: ["Significant QT prolongation", "Albumin < 2.8 g/dL (caution)"], cost: "₹₹₹", india: "NTEP (programmatic)", note: "Longer oral regimen; 100 mg BD (≥12 y), 50 mg BD (6–11 y); additive QT." },
+    ethionamide: { label: "Ethionamide / Prothionamide (Eto)", aware: "Watch", cls: "DR-TB Group C", spectrum: "DR-TB — alternative to linezolid in the shorter regimen; longer regimen.", mech: [], adverse: ["GI intolerance", "hypothyroidism", "hepatotoxicity"], monitoring: "Baseline + periodic LFT, TSH.", renal: "Caution.", hepatic: "Hepatotoxic — caution.", preg: "Avoid (teratogenic) — prefer the Lzd-containing shorter regimen in pregnancy.", lact: "Caution.", contra: ["Significant hepatic dysfunction"], cost: "₹", india: "NTEP (programmatic)", note: "Alternative to linezolid in the shorter regimen; monitor TSH (hypothyroidism)." }
+  };
+  var _aspTbRow = {
+    bpalm: { drugKey: "bedaquiline", regimen: "BPaLM — Bedaquiline + Pretomanid + Linezolid + Moxifloxacin", dose: "Bdq 400 mg OD ×2 wk → 200 mg 3×/wk; Pa 200 mg OD; Lzd 600 mg OD; Mfx 400 mg OD (+ pyridoxine)", route: "Oral (with food)", freq: "once daily (Bdq per schedule)", duration: "26 weeks (extendable to 39)", soR: "Strong — first choice (MDR/RR, ≥14 y)", evi: "NTEP §3.3 / WHO", src: "NTEP §3.3", rankLabel: "MDR/RR-TB · first choice", note: "First choice for MDR/RR-TB in persons ≥14 y, regardless of fluoroquinolone resistance or HIV. Baseline QTcF ≤450 ms (M)/≤470 ms (F). Not for age <14, Bdq/Lzd/Pa resistance, AST/ALT >3×ULN, or severe extrapulmonary TB (CNS/skeletal/disseminated). Full DST-driven selection in the Tuberculosis treatment pathway workspace." },
+    shorter: { drugKey: "levofloxacin", regimen: "9–11-mo shorter oral — Bedaquiline + Levofloxacin + Clofazimine + Linezolid + Pyrazinamide + Ethambutol + high-dose Isoniazid (± Ethionamide)", dose: "Weight-band per NTEP Tables 3.5–3.6", route: "Oral", freq: "daily (Bdq per schedule)", duration: "9–11 months", soR: "Strong (FQ-sensitive RR-TB)", evi: "NTEP §3.4 / WHO", src: "NTEP §3.4", rankLabel: "MDR/RR-TB · FQ-sensitive", note: "For RR-TB with fluoroquinolone susceptibility and no severe extrapulmonary / extensive disease. In ≥14 y BPaLM is preferred; the linezolid-containing version may be used in pregnancy with monitoring." },
+    longer: { drugKey: "bedaquiline", regimen: "18–20-mo longer oral (M/XDR) — Bedaquiline + Levofloxacin/Moxifloxacin + Linezolid + Clofazimine + Cycloserine (± Delamanid / Amikacin / Ethionamide / PAS / carbapenem + clavulanate per DST)", dose: "Individualised weight-band per NTEP Table 3.7 (Groups A/B/C)", route: "Oral (± injectable / carbapenem)", freq: "daily", duration: "18–20 months (Bdq ≥6 mo)", soR: "Strong (pre-XDR / XDR / severe)", evi: "NTEP §3.5 / WHO", src: "NTEP §3.5", rankLabel: "pre-XDR / XDR / severe TB", note: "For patients ineligible for BPaLM or the shorter regimen, pre-XDR/XDR, or severe extrapulmonary disease (CNS, disseminated/miliary, skeletal). Individualised per DST from Groups A/B/C — specialist / N-DR-TBC decision." },
+    hmono: { drugKey: "levofloxacin", regimen: "Isoniazid mono/poly-resistant (6 Lfx-R-E-Z) — Levofloxacin + Rifampicin + Ethambutol + Pyrazinamide", dose: "Weight-band per NTEP Table 3.8", route: "Oral", freq: "once daily", duration: "6 months (extend to 9 for extensive / extrapulmonary disease)", soR: "Strong (H-resistant, R-susceptible)", evi: "NTEP §3.6", src: "NTEP §3.6", rankLabel: "H-resistant · R-susceptible", note: "For isoniazid mono/poly-resistance with rifampicin SUSCEPTIBLE. If Lfx or Z cannot be used, substitute per NTEP Table 3.9." }
+  };
+  function _aspCnsLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "CNS / severe extrapulmonary DR-TB uses the longer oral regimen — BPaLM and the 9–11-mo shorter regimen are NOT used in CNS TB. Prefer CNS-penetrating agents (linezolid, high-dose fluoroquinolone, cycloserine); avoid poorly-penetrating drugs. Continue adjunctive corticosteroids. Specialist / N-DR-TBC decision, individualised per DST."; r.rankLabel = "CNS DR-TB (longer oral)"; return r; }
+  function _aspDissLonger() { var r = {}; for (var k in _aspTbRow.longer) r[k] = _aspTbRow.longer[k]; r.note = "Disseminated / miliary DR-TB is severe extrapulmonary disease — BPaLM and the 9–11-mo shorter regimen are NOT used; use the longer oral regimen, individualised per DST (Groups A/B/C). Extend duration for CNS/skeletal involvement. Specialist / N-DR-TBC decision."; r.rankLabel = "severe/disseminated DR-TB (longer oral)"; return r; }
+  var SMD_ASP_TB_ALTS = {
+    PULMONARY_TB: ["bpalm", "shorter", "longer", "hmono"],
+    CNS_TB: ["_cns", "hmono"],
+    DISSEMINATED_TB: ["_diss", "hmono"]
+  };
+  function smdAspTbEnrich() {
+    try {
+      if (window.__smdAspTbEnriched || !smdAspTbOn()) return true;
+      if (!window.ASP_DATA) return false;               // app.js not ready yet
+      if (window.ASP_DRUGS) { for (var dk in SMD_ASP_TB_DRUGS) if (!window.ASP_DRUGS[dk]) window.ASP_DRUGS[dk] = SMD_ASP_TB_DRUGS[dk]; }
+      var pick = function (id) { return id === "_cns" ? _aspCnsLonger() : id === "_diss" ? _aspDissLonger() : _aspTbRow[id]; };
+      Object.keys(SMD_ASP_TB_ALTS).forEach(function (syn) {
+        var entry = window.ASP_DATA[syn]; if (!entry || !entry.empiric) return;
+        entry.empiric.alternatives = SMD_ASP_TB_ALTS[syn].map(pick).filter(Boolean);
+      });
+      window.__smdAspTbEnriched = true;
+      return true;
+    } catch (e) { return false; }
+  }
+  smdAspTbEnrich();
+  if (!window.__smdAspTbEnriched) { var _aspTbTries = 0, _aspTbTimer = setInterval(function () { if (smdAspTbEnrich() || ++_aspTbTries > 40) clearInterval(_aspTbTimer); }, 200); }
+  try { window.SMD_TB.enrichAspConsole = smdAspTbEnrich; } catch (e) {}
 
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
