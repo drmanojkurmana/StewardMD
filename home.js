@@ -1099,6 +1099,9 @@
       var c = src.cloneNode(true);
       c.removeAttribute("id");
       var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
+      // The creator name carries a rich hover tooltip (.ack-tip). When cloned into this sheet it
+      // renders as a broken floating card overlapping the contributor list — strip it here.
+      Array.prototype.forEach.call(c.querySelectorAll(".ack-tip"), function (t) { if (t.parentNode) t.parentNode.removeChild(t); });
       inner = '<div class="hv-ack">' + c.innerHTML + '</div>';
     } else {
       inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
