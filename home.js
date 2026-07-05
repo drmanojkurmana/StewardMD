@@ -702,7 +702,7 @@
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
           '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div>' +
-          '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a href="/privacy" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline">Terms of Use</a> · <a href="/support" style="color:inherit;text-decoration:underline">Support</a></div></div>' +
+          '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a href="/privacy" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline">Terms of Use</a> · <a href="/support" style="color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
         '<button class="v3-tab active" data-act="home" aria-label="Home">' + svg("home") + '<span>Home</span></button>' +
@@ -939,11 +939,25 @@
       try {
         var u = window.SMD_AUTH && SMD_AUTH.currentUser;
         if (u && u.delete) {
+          var signOutFallback = function () {
+            try { var b = document.getElementById("sessionSignOut"); if (b) b.click(); } catch (e) {}
+            finish("Your data was deleted and you've been signed out.");
+          };
           u.delete()
             .then(function () { finish("Your account and all data were deleted."); })
-            .catch(function () {                                   // requires-recent-login / offline
-              try { var b = document.getElementById("sessionSignOut"); if (b) b.click(); } catch (e) {}
-              finish("Your data was deleted and you've been signed out.");
+            .catch(function (err) {
+              // Firebase needs a recent login to delete the auth record — reauthenticate
+              // with Google, then retry the delete so the account is fully removed.
+              if (err && err.code === "auth/requires-recent-login" && u.reauthenticateWithPopup && window.firebase) {
+                try {
+                  u.reauthenticateWithPopup(new firebase.auth.GoogleAuthProvider())
+                    .then(function () { return u.delete(); })
+                    .then(function () { finish("Your account and all data were deleted."); })
+                    .catch(signOutFallback);
+                  return;
+                } catch (e) {}
+              }
+              signOutFallback();
             });
           return;
         }
