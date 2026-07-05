@@ -261,6 +261,16 @@ try {
   // with IM as the active workspace, Start-a-new-case defers to Home's own IM chooser
   ok("Internal Medicine active → startActiveCase returns false (Home runs its own IM flow)", (await ev(`window.SMD_WS.setDefault('internal_medicine'); return window.SMD_WS.active()==='internal_medicine' && window.SMD_WS.startActiveCase()===false;`)) === true);
 
+  /* regression: BOTH Home "start" buttons route into the active specialty.
+     ("Start a Case" → openCaseChooser and "Dx My Patient" → openDxChooser must each honour it.) */
+  console.log("\n── Home start-buttons route to the active workspace ──");
+  await ev(`try{if(window.SMD_goHome)SMD_goHome();}catch(e){} window.SMD_WS.setDefault('surgery'); return 1;`); await sleep(350);
+  await ev(`var b=document.querySelector('[data-act="startcase"]'); if(b) b.click(); return 1;`); await sleep(600);
+  ok("Home 'Start a Case' opens the active specialty shell (not the IM Simple/Advanced chooser)", (await ev(`return !!document.querySelector('#swShell.on') && !document.querySelector('#v3case.on');`)) === true);
+  await ev(`try{if(window.SMD_goHome)SMD_goHome();}catch(e){} return 1;`); await sleep(350);
+  await ev(`var b=document.querySelector('[data-act="reasoning"]'); if(b) b.click(); return 1;`); await sleep(600);
+  ok("Home 'Dx My Patient' opens the active specialty shell too", (await ev(`return !!document.querySelector('#swShell.on');`)) === true);
+
   console.log(`\n${FAIL === 0 ? "ALL GREEN — Specialty Workspaces invariants hold (" + PASS + " checks)" : FAIL + " FAILED, " + PASS + " passed"}`);
   if (FAIL > 0) process.exitCode = 1;
   ws.close();
