@@ -4542,7 +4542,9 @@
     classifyDst: smdTbClassify,
     eligibleRegimens: smdTbEligible,
     safetyGates: smdTbSafetyGates,
-    drug: function (k) { return _tbData ? (_tbData.drugs.drugs || []).filter(function (d) { return d.key === k; })[0] || null : null; }
+    drug: function (k) { return _tbData ? (_tbData.drugs.drugs || []).filter(function (d) { return d.key === k; })[0] || null : null; },
+    specialSituations: function () { return _tbData ? (_tbData.reg.specialSituations || []) : []; },
+    guidelines: function () { return _tbData ? ((_tbData.reg.guidelineReference && _tbData.reg.guidelineReference.documents) || []) : []; }
   };
 
   /* ---------------------------------------------------------------------- *
@@ -4647,6 +4649,18 @@
         var r = byId[xr.id]; if (!r) return;
         html += '<div class="smd-tb-reg excl"><h4>' + esc(r.name) + '</h4><div class="smd-tb-why"><b>Why not eligible:</b> <span class="smd-tb-excl-why">' + esc(xr.why) + '</span></div></div>';
       });
+      // special populations (NTEP §3.9)
+      var sp = SMD_TB.specialSituations();
+      if (sp.length) {
+        html += '<div class="smd-tb-sec"><b>Special populations</b><details class="smd-tb-det"><summary>Pregnancy · children · HIV · renal · liver · diabetes · older</summary><ul>' +
+          sp.map(function (s) { return '<li><b>' + esc(s.label) + ':</b> ' + esc(s.guidance) + (s.monitoring ? ' <i>Monitoring: ' + esc(s.monitoring) + '</i>' : '') + '</li>'; }).join("") + '</ul></details></div>';
+      }
+      // guideline reference (accessible directly from the syndrome)
+      var gd = SMD_TB.guidelines();
+      if (gd.length) {
+        html += '<div class="smd-tb-sec"><b>📖 Guideline reference</b><ul class="smd-tb-det" style="margin:5px 0 0;padding-left:18px">' +
+          gd.map(function (g) { return '<li class="smd-tb-src"><b>' + esc(g.title) + '</b> — ' + esc(g.body) + ' (' + esc(g.version) + (g.jurisdiction && g.jurisdiction !== "—" ? ", " + esc(g.jurisdiction) : "") + ')<br>' + esc(g.keySections || "") + '</li>'; }).join("") + '</ul></div>';
+      }
       // sources
       var srcs = SMD_TB.data().reg;
       html += '<div class="smd-tb-sec"><b>Sources</b><div class="smd-tb-src">' + esc(srcs.primarySource.label) + (srcs.referenceSources ? " · " + srcs.referenceSources.map(function (s) { return s.label; }).join(" · ") : "") + '</div></div>';

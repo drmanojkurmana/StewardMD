@@ -84,6 +84,12 @@ try {
   await ev(`var c=document.querySelector('#smdTbInputs [data-tb="liverDysfunction"]');c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true}));return 1;`);
   chk("UI: liver dysfunction → BPaLM shown as excluded with reason", /Why not eligible/i.test(await lines()) && /liver/i.test(await lines()));
   chk("UI: sources shown (NTEP)", /NTEP|Drug-Resistant TB/i.test(await lines()));
+  // PR3: special populations + guideline reference
+  chk("PR3: special situations cover 8 populations (NTEP §3.9)", await ev(`return SMD_TB.specialSituations().length`) === 8);
+  chk("PR3: HIV special situation flags efavirenz ↓ bedaquiline/pretomanid", await ev(`return SMD_TB.specialSituations().some(function(s){return s.id==="hiv" && /efavirenz/i.test(s.guidance);})`) === true);
+  chk("PR3: pregnancy guidance present (BPaLM restriction + Lzd shorter regimen)", await ev(`return SMD_TB.specialSituations().some(function(s){return s.id==="pregnancy" && /BPaLM/i.test(s.guidance) && /shorter oral/i.test(s.guidance);})`) === true);
+  chk("PR3: guideline reference exposes NTEP + WHO + Harrison", await ev(`var g=SMD_TB.guidelines();return g.length>=3 && g.some(function(x){return /NTEP|Drug-Resistant TB/i.test(x.title+" "+x.body);}) && g.some(function(x){return /WHO|World Health/i.test(x.title+" "+x.body);}) && g.some(function(x){return /Harrison|internal-medicine/i.test(x.title+" "+x.body);});`) === true);
+  chk("PR3 UI: 'Special populations' + '📖 Guideline reference' rendered in workspace", /Special populations/i.test(await lines()) && /Guideline reference/i.test(await lines()));
 
   // ---- coverage matrix ----
   const cov = J(await ev(`var d=SMD_TB.data(); return JSON.stringify((d.reg.regimens||[]).map(function(r){return {id:r.id, states:(r.forStates||[]).join("/"), source:(r.source||"").split(";")[0]};}));`));
