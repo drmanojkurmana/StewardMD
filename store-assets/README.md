@@ -33,9 +33,16 @@ case you want to re-frame or crop differently.
 
 - **Apple**: one 6.7″ set is the minimum required; these auto-scale. 3–10 images.
 - **Google Play**: 2–8 phone screenshots. A separate 1024 × 500 feature graphic is
-  also required by Play — not included here (best exported from a design tool).
+  also required by Play — included (see below).
 - Screenshots intentionally omit the OS status bar; both stores accept this
   (Apple prefers it).
 
 All clinical output shown is decision-support only and carries the app's in-product
 "verify locally / not a substitute for clinical judgment" disclaimers.
+
+## Store graphics (icon + feature graphic)
+
+- `app-icon-1024-teal.png` / `app-icon-1024-white.png` — 1024×1024 marketing icon,
+  two background options. App Store: use one, no transparency, square (Apple rounds it).
+  Play uses the existing `android-chrome-512x512.png` for the app icon.
+- `google-play/feature-graphic-1024x500.png` — required Play Store feature graphic.
