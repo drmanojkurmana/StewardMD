@@ -3115,19 +3115,69 @@
     // No per-element addEventListener here: search/filter/card events are handled by ONE
     // delegated listener (kbWireLibrary) so they survive the modal re-rendering .sbref-sec.
   }
+  // Common clinical abbreviations → the full term, so "TB" finds "Tuberculosis",
+  // "COPD" finds the full name, etc. (query-side expansion; the KB text is unchanged).
+  var KB_ABBR = {
+    tb: "tuberculosis", "t.b": "tuberculosis", copd: "chronic obstructive pulmonary",
+    uti: "urinary tract infection", cap: "community acquired pneumonia", hap: "hospital acquired pneumonia",
+    mi: "myocardial infarction", acs: "acute coronary syndrome", chf: "heart failure", hf: "heart failure",
+    dm: "diabetes", dka: "diabetic ketoacidosis", hhs: "hyperosmolar hyperglycaemic", htn: "hypertension",
+    ckd: "chronic kidney disease", aki: "acute kidney injury", pe: "pulmonary embolism", dvt: "deep vein thrombosis",
+    sah: "subarachnoid haemorrhage", ich: "intracerebral haemorrhage", gbs: "guillain", hlh: "hemophagocytic",
+    ttp: "thrombotic thrombocytopenic", nms: "neuroleptic malignant", ards: "acute respiratory distress",
+    sle: "lupus", ibd: "inflammatory bowel", uc: "ulcerative colitis", gi: "gastro", cns: "central nervous"
+  };
+  function kbTokens(s) { return String(s || "").split(/\s+/).filter(function (t) { return t.length; }); }
+  // whole-word match for short tokens (so "tb"/"pe" don't match inside "peptic"), substring otherwise
+  function kbHasTok(text, tok) {
+    if (tok.length > 3) return text.indexOf(tok) >= 0;
+    var e = tok.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return new RegExp("(^|[^a-z0-9])" + e + "([^a-z0-9]|$)").test(text);
+  }
+  // Build the set of query variants to try (raw + abbreviation-expanded, whole and per-token).
+  function kbQueryVariants(q) {
+    var v = [q]; if (KB_ABBR[q]) v.push(KB_ABBR[q]);
+    var toks = kbTokens(q), changed = false;
+    var exp = toks.map(function (t) { if (KB_ABBR[t]) { changed = true; return KB_ABBR[t]; } return t; });
+    if (changed) v.push(exp.join(" "));
+    return v;
+  }
+  // Relevance of an entry for one query variant: negative = no match; higher = more relevant.
+  function kbScoreOne(d, v) {
+    var toks = kbTokens(v); if (!toks.length) return 0;
+    for (var i = 0; i < toks.length; i++) { if (!kbHasTok(d.text, toks[i])) return -1; }  // gate: every token present
+    var name = d.name.toLowerCase();
+    if (name.indexOf(v) === 0) return 100;                                    // name starts with the query
+    if (name.indexOf(v) >= 0) return 85;                                      // name contains the whole phrase
+    if (toks.every(function (t) { return kbHasTok(name, t); })) return 65;    // all query tokens in the name
+    if (toks.some(function (t) { return kbHasTok(name, t); })) return 40;     // some query tokens in the name
+    return 12;                                                                // matched only in the clinical detail
+  }
+  function kbRelevance(d, variants) {
+    var best = -1; for (var i = 0; i < variants.length; i++) { var s = kbScoreOne(d, variants[i]); if (s > best) best = s; }
+    return best;
+  }
   // repaint only the results grid from the current _libState (search + filters)
   function kbPaintLibrary() {
     var grid = document.getElementById("kblibGrid"); if (!grid) return;
-    var q = _libState.q.toLowerCase();
+    var q = _libState.q.toLowerCase().trim();
+    var searching = q.length >= 2;
+    var variants = searching ? kbQueryVariants(q) : null;
     var all = kbBuildIndex();
-    var res = all.filter(function (d) {
-      if (_libState.cls !== "all" && d.cls !== _libState.cls) return false;
-      if (_libState.src === "ref" && !d.ref) return false;
-      if (_libState.src === "dx" && d.ref) return false;
-      if (_libState.branch !== "all" && d.branch !== _libState.branch) return false;
-      if (q.length >= 2 && d.text.indexOf(q) < 0) return false;
-      return true;
+    var scored = [];
+    all.forEach(function (d) {
+      if (_libState.cls !== "all" && d.cls !== _libState.cls) return;
+      if (_libState.src === "ref" && !d.ref) return;
+      if (_libState.src === "dx" && d.ref) return;
+      if (_libState.branch !== "all" && d.branch !== _libState.branch) return;
+      var s = 0;
+      if (searching) { s = kbRelevance(d, variants); if (s < 0) return; }
+      scored.push({ d: d, s: s });
     });
+    // Relevance-rank when searching (title matches first, clinical-detail matches last),
+    // tie-broken alphabetically; with no query keep the alphabetical index order.
+    if (searching) scored.sort(function (a, b) { return b.s - a.s || (a.d.name < b.d.name ? -1 : a.d.name > b.d.name ? 1 : 0); });
+    var res = scored.map(function (x) { return x.d; });
     var cnt = document.getElementById("kblibCount"); if (cnt) cnt.textContent = res.length + " of " + all.length + " entries";
     grid.innerHTML = res.slice(0, 400).map(function (d) {
       return '<button class="kblib-card ' + d.cls + '" data-kb="' + d.id + '"><div class="kblib-name">' + esc(d.name) + '</div>' +
