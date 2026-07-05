@@ -61,6 +61,30 @@ try {
   const s10 = J(await ev(`return JSON.stringify(SMD_TB.eligibleRegimens({}, {age:40, site:"pulmonary"}))`));
   chk("10. Missing DST → 'DST pending'; no DR-TB regimen by default", s10 && s10.state === "dst_pending" && !s10.eligible.some(r=>["bpalm","shorter_oral","longer_oral"].includes(r.id)), s10 && s10.state);
 
+  // ---- PR2: decision-aware TB workspace UI ----
+  await ev(`await SMD_TB.ready();
+    var oa=document.getElementById("outputArea")||(function(){var d=document.createElement("div");d.id="outputArea";document.body.appendChild(d);return d;})();
+    oa.innerHTML='<div class="card"><h2>Alternative regimens</h2>Modified regimens per drug-susceptibility testing</div><div class="qa-regimen">Isoniazid + Rifampicin + Pyrazinamide + Ethambutol (HRZE)</div>';
+    window.__tbr = SMD_TB.renderWorkspace({age:35, site:"pulmonary"}, "PULMONARY_TB");
+    return 1;`);
+  const lines = () => ev(`var l=document.getElementById("smdTbLines");return l?l.innerText:""`);
+  chk("UI: TB workspace injected on a TB render", await ev(`return String(window.__tbr)`) === "true" && await ev(`return !!(document.getElementById("smdTbCard")&&document.getElementById("smdTbInputs"))`) === true);
+  chk("UI: vague 'Modified regimens per DST' card hidden", await ev(`var els=[].slice.call(document.querySelectorAll("#outputArea .card"));var v=els.filter(function(n){return /modified regimens per drug-susceptibility/i.test(n.textContent);})[0];return v? v.style.display==="none":true`) === true);
+  chk("UI: DST-pending state shown by default (no DR regimen)", /pending/i.test(await ev(`var l=document.getElementById("smdTbLines");return l?l.innerText:""`)));
+  // set RIF resistant → BPaLM eligible card with "Why this regimen"
+  await ev(`function setSel(k,v){var el=document.querySelector('#smdTbInputs [data-tb="'+k+'"]');el.value=v;el.dispatchEvent(new Event("change",{bubbles:true}));} setSel("xpertRif","RIF resistant"); return 1;`);
+  const t1 = await lines();
+  chk("UI: RIF resistant → BPaLM eligible card + 'Why this regimen'", /Rifampicin-resistant|RR-TB/i.test(t1) && /BPaLM/i.test(t1) && /Why this regimen/i.test(t1), t1.replace(/\n/g," ").slice(0,90));
+  // set FQ resistant → pre-XDR; shorter not offered
+  await ev(`var el=document.querySelector('#smdTbInputs [data-tb="fqSusceptibility"]');el.value="resistant";el.dispatchEvent(new Event("change",{bubbles:true}));return 1;`);
+  const t2 = await lines();
+  const eligTitles = await ev(`return [].slice.call(document.querySelectorAll("#smdTbLines .smd-tb-reg.elig h4")).map(function(h){return h.textContent;}).join(" | ")`);
+  chk("UI: FQ resistant → pre-XDR; shorter-oral not an eligible card", /pre-XDR/i.test(t2) && /BPaLM/i.test(String(eligTitles)) && !/shorter oral/i.test(String(eligTitles)), "eligible: " + String(eligTitles).slice(0, 90));
+  // liver dysfunction → BPaLM excluded (why not)
+  await ev(`var c=document.querySelector('#smdTbInputs [data-tb="liverDysfunction"]');c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true}));return 1;`);
+  chk("UI: liver dysfunction → BPaLM shown as excluded with reason", /Why not eligible/i.test(await lines()) && /liver/i.test(await lines()));
+  chk("UI: sources shown (NTEP)", /NTEP|Drug-Resistant TB/i.test(await lines()));
+
   // ---- coverage matrix ----
   const cov = J(await ev(`var d=SMD_TB.data(); return JSON.stringify((d.reg.regimens||[]).map(function(r){return {id:r.id, states:(r.forStates||[]).join("/"), source:(r.source||"").split(";")[0]};}));`));
   console.log("\n  Coverage matrix (regimen × states × source):");
