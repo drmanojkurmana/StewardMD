@@ -8,7 +8,7 @@ StewardMD brand.
 
 | Store | Folder | Dimensions | Notes |
 |-------|--------|-----------|-------|
-| Apple App Store | `apple/` | **1290 × 2796** | 6.7″ iPhone (largest required set; App Store Connect down-scales to smaller devices) |
+| Apple App Store | `apple/` | **1290 × 2796** | 6.7″ iPhone, realistic iPhone-Pro frame (Dynamic Island + 9:41 status bar); largest required set — App Store Connect down-scales to smaller devices |
 | Google Play | `google-play/` | **1080 × 2160** | Phone (2:1 max ratio — needs its own size; Apple's cannot be reused) |
 
 `raw-app-screens/` holds the unframed source captures (device viewport only), in
@@ -34,8 +34,10 @@ case you want to re-frame or crop differently.
 - **Apple**: one 6.7″ set is the minimum required; these auto-scale. 3–10 images.
 - **Google Play**: 2–8 phone screenshots. A separate 1024 × 500 feature graphic is
   also required by Play — included (see below).
-- Screenshots intentionally omit the OS status bar; both stores accept this
-  (Apple prefers it).
+- The Apple set uses a realistic iPhone-Pro device frame (Dynamic Island +
+  9:41 status bar). The Play set uses a clean frameless-style device. Device
+  frames are optional for both stores — only the exact pixel dimensions are
+  enforced.
 
 All clinical output shown is decision-support only and carries the app's in-product
 "verify locally / not a substitute for clinical judgment" disclaimers.
