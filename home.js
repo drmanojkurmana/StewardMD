@@ -1276,8 +1276,24 @@
           // lexically-near but different condition. Say so plainly and skip the AI call.
           if (pkg && pkg.topicMatch && pkg.topicMatch.matched === false) {
             var tp = maikEscH(pkg.topicMatch.topic || question);
-            var near = pkg.topicMatch.nearest ? (' The closest entry I found was <b>' + maikEscH(pkg.topicMatch.nearest) + '</b>, which is a different condition.') : '';
-            think.innerHTML = '<div class="maik-welcome">StewardMD’s knowledge base doesn’t have a specific entry for <b>' + tp + '</b>, so I can’t give grounded guidance on it without risking describing a different condition.' + near + ' Please verify against a dedicated toxicology / reference source, or ask about a topic StewardMD covers.</div>';
+            var near = pkg.topicMatch.nearest ? (' The closest StewardMD entry was <b>' + maikEscH(pkg.topicMatch.nearest) + '</b>, which is a different condition.') : '';
+            think.innerHTML = '<div class="maik-welcome">StewardMD’s knowledge base doesn’t have a specific entry for <b>' + tp + '</b>, so I can’t answer from it without risking describing a different condition.' + near + '</div>';
+            // Offer opt-in web research (Google-grounded, concise) — one tap, one call.
+            var rb = document.createElement("button"); rb.className = "maik-chip"; rb.style.marginTop = "8px"; rb.textContent = "🔎 Research on the web";
+            rb.addEventListener("click", function () {
+              rb.disabled = true; var wrap = think.querySelector(".maik-welcome"); if (wrap) wrap.insertAdjacentHTML("beforeend", '<div id="maikResBusy" style="margin-top:8px;color:var(--slate-soft,#64748b)">🌐 Researching the web…</div>');
+              window.SMD_AI.research(question).then(function (r) {
+                var busy = document.getElementById("maikResBusy"); if (busy) busy.remove();
+                if (r && r.text) {
+                  var body = (window.SMD_MaiK && SMD_MaiK.renderMarkdown) ? SMD_MaiK.renderMarkdown(String(r.text)) : maikEscH(String(r.text));
+                  think.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div style="font:700 10.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;margin-bottom:5px">🌐 Web-sourced (Google) · not StewardMD-verified</div>' + body + '</div>');
+                } else {
+                  think.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now' + ((r && r.reason === "quota") ? ' (usage limit reached)' : '') + '. Please verify against a reference source.</div>');
+                }
+                try { scroll(); } catch (e) {}
+              });
+            });
+            think.appendChild(rb); try { scroll(); } catch (e) {}
             return;
           }
           if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);

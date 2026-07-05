@@ -24,7 +24,7 @@ try {
   const { result: { targetId } } = await call("Target.createTarget", { url: "about:blank" });
   const { result: { sessionId } } = await call("Target.attachToTarget", { targetId, flatten: true }); sid = sessionId;
   await call("Runtime.enable", {}); await call("Page.enable", {});
-  await ev(`if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});});return 1;`);
+  await ev(`if(navigator.serviceWorker)navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}); if(window.caches)caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});}); return 1;`);
   await call("Page.navigate", { url: BASE + "?cb=" + Date.now() });
   for (let i = 0; i < 90; i++) { await sleep(400); if (await ev(`return !!(window.SMD_REASON && window.StewardRAG && window.SMD_AI)`) === true) break; }
   await ev(`return StewardRAG.ready()`);
@@ -39,15 +39,27 @@ try {
   // ---- Part B: knowledge question is NOT hijacked by a stale/ambient case ----
   // seed a stale cholangitis-ish case, then ask an OP-poisoning knowledge question
   await ev(`try{window.DX._state.f={jaundice:true, rightUpperQuadrantPain:true, fever:true, murphySign:true};}catch(e){} return 1;`);
-  const staleTop = await ev(`var a=SMD_REASON.assess(window.DX._state.f);return ((a.infectious||[]).concat(a.nonInfectious||[])[0]||{}).name||"none"`);
+  const staleTop = await ev(`if(!window.SMD_REASON)return "none";var a=SMD_REASON.assess(window.DX._state.f);return ((a.infectious||[]).concat(a.nonInfectious||[])[0]||{}).name||"none"`);
   // simulate runClinical's fixed findings-selection: topic question → findings={}, NOT the case
-  const opWithCase = JSON.parse(await ev(`
+  const opWithCase = JSON.parse((await ev(`
+    await StewardRAG.ready();
     var caseRef=/\\b(this|that|the|my|our|current)\\s+(patient|case|pt|dx|diagnosis|condition|scenario)\\b/.test("treatment of organophosphate poisoning");
     var findings = (true && caseRef) ? window.DX._state.f : {};
     var p=await StewardRAG.buildPackage(SMD_REASON.assess(findings),{question:"treatment of organophosphate poisoning"});
-    return JSON.stringify({g:(p.grounding[0]&&(p.grounding[0].name||p.grounding[0].id))||null, matched:p.topicMatch&&p.topicMatch.matched});`));
+    return JSON.stringify({g:(p&&p.grounding[0]&&(p.grounding[0].name||p.grounding[0].id))||null, matched:p&&p.topicMatch&&p.topicMatch.matched});`)) || "{}");
   chk("stale case set (would top as cholangitis-ish)", /cholangitis|cholecystitis|biliary|peritonitis/i.test(String(staleTop)), staleTop);
   chk("knowledge Q grounds on its OWN topic, not the stale case", /organophosph|cholinerg|\bop\b/i.test(String(opWithCase.g)) && !/cholangitis|cholecystitis|biliary/i.test(String(opWithCase.g)), JSON.stringify(opWithCase));
+
+  // ---- Part C: not-in-KB caveat offers opt-in web research (UI) ----
+  await ev(`["introPoster","splash","accountGate","smdBootSplash","consentOverlay"].forEach(function(k){var e=document.getElementById(k);if(e)e.remove();}); return 1;`);
+  // stub the web-research call (no live Vertex here) to verify the client wiring end-to-end
+  await ev(`window.__researchQ=null; window.SMD_AI.research=function(q){window.__researchQ=q; return Promise.resolve({text:"- Supportive care and early decontamination.\\n- No specific antidote.\\nWeb-sourced — not StewardMD-verified; confirm against local protocol."});}; window.SMD_AI.on=function(){return true;}; return 1;`);
+  await ev(`window.DX._state.f={}; if(window.SMD_askMaik)window.SMD_askMaik(); return 1;`); await sleep(500);
+  await ev(`var q=document.getElementById("maikQ"); q.value="Paraquat Poisoning"; document.getElementById("maikSend").click(); return 1;`); await sleep(900);
+  chk("caveat offers a 'Research on the web' button", await ev(`var b=[].slice.call(document.querySelectorAll("#maikBody button.maik-chip")).filter(function(x){return /research on the web/i.test(x.textContent);}); return b.length>0`) === true);
+  await ev(`var b=[].slice.call(document.querySelectorAll("#maikBody button.maik-chip")).filter(function(x){return /research on the web/i.test(x.textContent);})[0]; if(b)b.click(); return 1;`); await sleep(500);
+  chk("clicking Research calls SMD_AI.research with the question", await ev(`return window.__researchQ`) === "Paraquat Poisoning");
+  chk("web-sourced answer renders with a 'Web-sourced' label", await ev(`return /Web-sourced/i.test(document.getElementById("maikBody").innerText) && /decontamination/i.test(document.getElementById("maikBody").innerText)`) === true);
 
   console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN — MaiK relevance"}`);
 } finally { try { ws && ws.close(); } catch {} chrome.kill(); }

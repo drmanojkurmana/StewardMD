@@ -3230,6 +3230,13 @@
       if (!pkg) return Promise.resolve({ error: "no-package" });
       return aiHeaders().then(function (h) { return fetch(b + "/explain", { method: "POST", headers: h, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise" }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
+    // Opt-in web research (Google-grounded) for topics not in StewardMD's KB. Token-frugal:
+    // one grounded call, short answer; only invoked on an explicit user tap.
+    research: function (question) {
+      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
+      return aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify({ question: q }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
     vision: function (imageDataUrl, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
