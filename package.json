@@ -1,0 +1,27 @@
+{
+  "name": "stewardmd-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "StewardMD — native iOS + Android app wrapper (Capacitor) around the StewardMD PWA. The web app itself is buildless static files at the repo root; scripts/build-www.sh assembles the runtime bundle into www/.",
+  "scripts": {
+    "build:www": "bash scripts/build-www.sh",
+    "sync": "npm run build:www && npx cap sync",
+    "ios": "npm run sync && npx cap open ios",
+    "android": "npm run sync && npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor-community/apple-sign-in": "^7.1.0",
+    "@capacitor/android": "^8.4.1",
+    "@capacitor/app": "^8.1.0",
+    "@capacitor/camera": "^8.2.0",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
+    "@capacitor/haptics": "^8.0.2",
+    "@capacitor/ios": "^8.4.1",
+    "@capacitor/preferences": "^8.0.1",
+    "@capacitor/push-notifications": "^8.1.1",
+    "@capacitor/share": "^8.0.1",
+    "@capacitor/splash-screen": "^8.0.1",
+    "@capacitor/status-bar": "^8.0.2"
+  }
+}

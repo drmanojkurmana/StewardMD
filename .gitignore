@@ -13,3 +13,36 @@ stewardmd_drug_database.*
 
 # OS noise
 .DS_Store
+
+# ── Capacitor (native app wrapper) ───────────────────────────────────────────
+# Generated web bundle (rebuild with `npm run build:www`) and the copies Capacitor
+# syncs into the native projects.
+/www/
+/ios/App/App/public/
+/android/app/src/main/assets/public/
+# Generated per-sync config copies
+/ios/App/App/capacitor.config.json
+/android/app/src/main/assets/capacitor.config.json
+# iOS build artifacts (project scaffold IS committed; build output is not)
+/ios/App/Pods/
+/ios/App/build/
+/ios/DerivedData/
+*.xcuserstate
+xcuserdata/
+# Android build artifacts (project scaffold IS committed; build output is not)
+/android/.gradle/
+/android/build/
+/android/app/build/
+/android/app/release/
+/android/capacitor-cordova-android-plugins/build/
+/android/local.properties
+.idea/
+*.iml
+# Signing material + per-project service config — NEVER commit (add locally)
+*.keystore
+*.jks
+google-services.json
+GoogleService-Info.plist
+
+# Local Claude Code session/agent state
+.claude/
