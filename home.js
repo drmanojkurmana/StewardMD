@@ -187,7 +187,7 @@
     //    open-class overlays: just remove their show-class (do NOT add .hidden, or they can't reopen).
     ["aspOverlay", "csOverlay", "eceOverlay", "infOverlay", "mcOverlay", "mdOverlay", "dxOverlay", "dbOverlay",
       "myCasesPanel", "smdSearchPanel", "sbrefOverlay", "dbDrawer", "dbScrim", "sbDrawer", "sbBackdrop",
-      "abgOverlay", "hvSheet", "hvScrim"].forEach(function (id) {
+      "abgOverlay", "hvSheet", "hvScrim", "swShell", "swSheet", "swScrim"].forEach(function (id) {
       var el = document.getElementById(id); if (el) el.classList.remove("open", "on", "active", "visible", "show");
     });
     //    hidden-class modals: add .hidden (global .hidden{display:none}); reopening removes it.
