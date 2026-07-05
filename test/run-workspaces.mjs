@@ -158,8 +158,8 @@ try {
   /* every engine × every syndrome: valid, non-throwing management output + structure + no-dose + per-engine emergency */
   console.log("\n── engine output integrity (all syndromes) ──");
   const integrity = JSON.parse(await ev(`
-    var bad=[], doseHits=[], synCount=0, structFail=[], noEmerg=[], cov={};
-    var DOSE=/\\b\\d+(?:\\.\\d+)?\\s?(?:mg|mcg|microgram|g|iu|units?)\\b/i, MGKG=/mg\\s?\\/\\s?kg/i;
+    var bad=[], synCount=0, structFail=[], noEmerg=[], cov={}, abxBad=[], abxEngines={}, abxCount=0, paedsDoseBad=[];
+    var FIXED=/\\b\\d+(?:\\.\\d+)?\\s?(?:mg|mcg|microgram|g|iu|units?)\\b/i, KGOK=/kg|formular|per paediatric|per local/i;
     Object.keys(SMD_WS_ENGINES).forEach(function(eid){
       var eng=SMD_WS_ENGINES[eid];
       var syns=eng.syndromes||[]; cov[eid]=syns.length;
@@ -180,19 +180,29 @@ try {
           if(!okShape) bad.push(eid+'/'+syn.id+' bad-shape ladder='+r.ladder+' catg='+(r.catg||'').slice(0,20));
           if(r.emergency===true) engHasEmerg=true;
           if(r.ladder===5) engHas5=true;
-          var txt=[r.catg,r.sc,r.ref].concat(r.mgmt||[]).join(' || ');
-          if(DOSE.test(txt)||MGKG.test(txt)) doseHits.push(eid+'/'+syn.id+': '+(txt.match(DOSE)||txt.match(MGKG))[0]);
+          if(r.abx){
+            var ab=r.abx; abxCount++; abxEngines[eid]=true;
+            if(!(ab.firstLine && ab.firstLine.length)) abxBad.push(eid+'/'+syn.id+' abx.firstLine empty');
+            else ab.firstLine.forEach(function(x){ if(!x || !x.drug || !(''+x.drug).trim()) abxBad.push(eid+'/'+syn.id+' firstLine entry missing drug'); });
+            if(ab.alt) ab.alt.forEach(function(x){ if(!x || !x.drug) abxBad.push(eid+'/'+syn.id+' alt entry missing drug'); });
+            if(!ab.ref || !(''+ab.ref).trim()) abxBad.push(eid+'/'+syn.id+' abx missing guideline ref');
+            // PAEDIATRIC SAFETY: every child dose must be weight-based (mg/kg) or explicitly deferred — never a fixed mg.
+            if(eid==='paediatrics'){ [].concat(ab.firstLine||[], ab.alt||[]).forEach(function(x){ var d=(x&&x.dose)||''; if(FIXED.test(d) && !KGOK.test(d)) paedsDoseBad.push(syn.id+': "'+d+'"'); }); }
+          }
         });
       });
       if(!(engHasEmerg&&engHas5)) noEmerg.push(eid);
     });
-    return JSON.stringify({synCount:synCount, bad:bad, doseHits:doseHits, structFail:structFail, noEmerg:noEmerg, cov:cov});
+    return JSON.stringify({synCount:synCount, bad:bad, structFail:structFail, noEmerg:noEmerg, cov:cov, abxBad:abxBad, abxCount:abxCount, abxEngines:Object.keys(abxEngines), paedsDoseBad:paedsDoseBad});
   `));
   console.log("   coverage: " + Object.keys(integrity.cov).sort().map(k => k.replace(/_/g, "·") + "=" + integrity.cov[k]).join("  "));
+  console.log("   empiric-antibiotic branches: " + integrity.abxCount + " across engines [" + integrity.abxEngines.sort().join(", ") + "]");
   ok(`all syndromes return a valid ladder(0-5)/catg/sc/ref/emergency shape (${integrity.synCount} syndromes)`, integrity.bad.length === 0, integrity.bad.slice(0, 4).join(" ; "));
-  ok("GUARDRAIL: no engine ever emits a numeric drug dose (mg/mcg/g/IU/mg·kg)", integrity.doseHits.length === 0, integrity.doseHits.slice(0, 4).join(" ; "));
   ok("structure: ≥6 syndromes each, unique ids/names, every syndrome has focused findings", integrity.structFail.length === 0, integrity.structFail.slice(0, 4).join(" ; "));
   ok("every specialty surfaces at least one true emergency (emergency + ladder 5)", integrity.noEmerg.length === 0, "missing in: " + integrity.noEmerg.join(", "));
+  ok("empiric-antibiotic regimens are well-formed (named drugs + guideline ref)", integrity.abxBad.length === 0, integrity.abxBad.slice(0, 5).join(" ; "));
+  ok("specialties now give named empiric antibiotics (≥ 6 engines carry regimens)", integrity.abxEngines.length >= 6, "only: " + integrity.abxEngines.join(", "));
+  ok("PAEDIATRIC SAFETY: every child antibiotic dose is weight-based (mg/kg) or deferred — never a fixed mg", integrity.paedsDoseBad.length === 0, integrity.paedsDoseBad.slice(0, 5).join(" ; "));
 
   /* emergency red-flags fire — id-agnostic (one representative per engine, resilient to renames) */
   console.log("\n── emergency escalation spot-checks ──");
