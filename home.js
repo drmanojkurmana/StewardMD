@@ -890,14 +890,16 @@
         '<div class="hv-acct-name">' + smdEsc(a.name || "Signed in") + '</div>' +
         '<div class="hv-acct-email">' + smdEsc(a.email) + '</div>' +
         '<div class="hv-acct-badge">' + (a.type === "google" ? "Google · cloud sync on" : "Signed in") + '</div>' +
-        '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button></div>';
+        '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
+        '<button data-acct="delete" type="button" style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Delete account &amp; data</button></div>';
     } else {
       body = '<div class="hv-acct">' +
         '<div class="hv-acct-pic hv-acct-ph">?</div>' +
         '<div class="hv-acct-name">Not signed in</div>' +
         '<div class="hv-acct-email">Guest mode — cases stay on this device only</div>' +
         '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in with Google</button>' +
-        '<div class="hv-acct-note">Sign in to sync your cases across devices and share them by code.</div></div>';
+        '<div class="hv-acct-note">Sign in to sync your cases across devices and share them by code.</div>' +
+        '<button data-acct="erase" type="button" style="width:100%;margin-top:12px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Erase all data on this device</button></div>';
     }
     openSheet('<div class="hv-sh-t">Account &amp; sign-in</div>' + body);
     var s = sheetEl();
@@ -905,6 +907,70 @@
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
     var si = s.querySelector('[data-acct="signin"]');
     if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
+    var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
+    if (del) del.addEventListener("click", confirmDeleteAccount);
+  }
+  // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
+  // Wipes the user's cloud cases (Firestore users/{key}/cases), every local app key,
+  // and the Firebase auth account. Works for a signed-in account and for guest (local-only).
+  function smdWipeLocalData() {
+    try {
+      var kill = [];
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && (/^stewardmd_/.test(k) || /^smd_/.test(k) || /^ghis_/.test(k))) kill.push(k);
+      }
+      kill.forEach(function (k) { try { localStorage.removeItem(k); } catch (e) {} });
+    } catch (e) {}
+    try { if (window.SMD_RECENT && SMD_RECENT.clear) SMD_RECENT.clear(); } catch (e) {}
+  }
+  function doDeleteAccount() {
+    var a = readAccount();
+    var email = a && a.email;
+    var uk = email ? ("u_" + email.replace(/[^a-z0-9]/gi, "_")) : "guest";
+    var finish = function (msg) {
+      smdWipeLocalData();
+      try { closeSheet(); } catch (e) {}
+      try { toast(msg); } catch (e) {}
+      setTimeout(function () { try { location.reload(); } catch (e) {} }, 1000);
+    };
+    var afterCases = function () {
+      try {
+        var u = window.SMD_AUTH && SMD_AUTH.currentUser;
+        if (u && u.delete) {
+          u.delete()
+            .then(function () { finish("Your account and all data were deleted."); })
+            .catch(function () {                                   // requires-recent-login / offline
+              try { var b = document.getElementById("sessionSignOut"); if (b) b.click(); } catch (e) {}
+              finish("Your data was deleted and you've been signed out.");
+            });
+          return;
+        }
+      } catch (e) {}
+      finish(email ? "Your data was deleted." : "All data on this device was erased.");
+    };
+    // NB: SMD_CASES.clear only invokes its callback on the Firestore (signed-in) path;
+    // for guest (useFirestore=false) it clears synchronously and never calls back, so we
+    // drive afterCases ourselves there.
+    try {
+      if (email && window.SMD_CASES && SMD_CASES.clear) { SMD_CASES.clear(uk, true, afterCases); }
+      else { try { if (window.SMD_CASES && SMD_CASES.clear) SMD_CASES.clear(uk, false); } catch (e) {} afterCases(); }
+    } catch (e) { afterCases(); }
+  }
+  function confirmDeleteAccount() {
+    var guest = !(readAccount() && readAccount().email);
+    openSheet('<div class="hv-sh-t">' + (guest ? "Erase all data?" : "Delete account &amp; data?") + '</div>' +
+      '<p style="font:500 13px/1.6 var(--hfont,sans-serif);color:var(--hmut,#667);text-align:center;margin:0 0 16px">' +
+      (guest
+        ? "This permanently erases all saved cases and settings stored on this device. This cannot be undone."
+        : "This permanently deletes your StewardMD account and all saved cases — from this device and the cloud. This cannot be undone.") + '</p>' +
+      '<button id="smdDelYes" type="button" style="width:100%;background:var(--hdanger,#c0392b);color:#fff;border:none;border-radius:12px;padding:14px;font:800 15px var(--hfont,sans-serif);cursor:pointer;margin-bottom:10px">Yes, delete everything</button>' +
+      '<button class="hv-back" data-close="1" type="button">Cancel</button>');
+    var s = sheetEl();
+    var yes = s.querySelector("#smdDelYes");
+    if (yes) yes.addEventListener("click", function () { yes.disabled = true; yes.textContent = "Deleting…"; doDeleteAccount(); });
+    var c = s.querySelector("[data-close]");
+    if (c) c.addEventListener("click", openAccount);
   }
   // ---- About modal: add Version History + Facts tabs (run once) ----
   function aboutVersionHTML() {
