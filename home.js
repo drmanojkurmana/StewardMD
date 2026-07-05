@@ -468,6 +468,10 @@
       ".hv-back{display:block;width:100%;text-align:center;color:var(--hmut);background:transparent;border:none;font:600 12px var(--hfont);padding:10px;cursor:pointer;margin-top:4px}",
       ".hv-toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:#0F172A;color:#fff;font:600 13px var(--hfont);padding:10px 16px;border-radius:11px;z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}.hv-toast.on{opacity:.96}",
       ".hv-fab{position:fixed;right:16px;bottom:calc(86px + env(safe-area-inset-bottom));z-index:9999;width:54px;height:54px;border-radius:50%;border:none;background:var(--teal,#0F766E);color:#fff;box-shadow:0 8px 24px rgba(15,118,110,.42);align-items:center;justify-content:center;cursor:pointer;display:flex}.hv-fab svg{width:34px;height:34px}.hv-fab svg image{opacity:.96}.hv-fab:active{transform:scale(.92)}",
+      // While any bottom sheet (More / Acknowledgements / etc.) is open, hide the floating Home FAB
+      // and the rotating quote popup so they never cover the sheet's content (e.g. the contributor card).
+      "body.hv-sheet-open .hv-fab,body.hv-sheet-open #harrisonQuotePopup,body.hv-sheet-open .ghis-ward-fab{display:none!important}",
+      ".hv-sheet{z-index:calc(var(--z-cases, 600) + 40)}.hv-scrim{z-index:calc(var(--z-cases, 600) + 39)}",
       ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
       // account/profile block injected into the sidebar (settings)
       ".smd-sba{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(127,127,127,.18);background:linear-gradient(180deg,rgba(20,184,166,.10),transparent)}",
@@ -847,8 +851,8 @@
     }
     return s;
   }
-  function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); }
-  function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); }
+  function openSheet(html) { var s = sheetEl(); s.innerHTML = '<div class="hv-sheet-wrap"><div class="hv-grab"></div>' + html + '</div>'; document.getElementById("hvScrim").classList.add("on"); s.classList.add("on"); document.body.classList.add("hv-sheet-open"); }
+  function closeSheet() { var s = sheetEl(); s.classList.remove("on"); document.getElementById("hvScrim").classList.remove("on"); document.body.classList.remove("hv-sheet-open"); }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
@@ -860,7 +864,11 @@
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
-      mi("calc", "Calculators", "50+ clinical tools", "calculators")
+      mi("calc", "Calculators", "50+ clinical tools", "calculators") +
+      '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
+      mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
+      mi("lock", "Privacy policy", "How your data is handled", "privacy") +
+      mi("book", "Terms of use", "Terms &amp; conditions", "terms")
     );
     var s = sheetEl();
     s.querySelectorAll("[data-ui]").forEach(function (b) {
@@ -874,6 +882,9 @@
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
+        if (a === "disclaimer") { closeSheet(); window.location.href = "/disclaimer"; return; }
+        if (a === "privacy") { closeSheet(); window.location.href = "/privacy"; return; }
+        if (a === "terms") { closeSheet(); window.location.href = "/terms"; return; }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
@@ -1030,7 +1041,7 @@
         '<li><b>v6.1</b> — Harrison&#39;s Principles of Internal Medicine (22e) knowledge integrated into all 140 diagnostic diseases: clinical pearls, pathophysiology, mimics, red flags, prognosis, pitfalls — paraphrased and page-cited.</li>' +
         '<li><b>v6.2</b> — Knowledge base expanded to the full Harrison disease universe — <b>444 searchable entries</b> (140 diagnostic + 304 reference, including clinically-useful diagnostic &amp; procedural chapters), each with a page-cited Harrison reference panel.</li>' +
         '<li><b>v6.3</b> — Reasoning upgrades: the stewardship engine now covers all 140 diagnoses, smart next-question suggestions, and broader non-infective finding inputs.</li>' +
-        '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and Gemini-ready (decision-first, explanation second).</li>' +
+        '<li><b>v6.4</b> — AI-ready infrastructure (RAG-ready knowledge index, evidence engine, AI interface) — fully functional with no AI today, and AI-ready (decision-first, explanation second).</li>' +
       '</ul></div>' +
       '<div class="smd-vh-item"><div class="smd-vh-ver"><span class="smd-vh-now">v7 · Redesigned workspace (current)</span></div><ul>' +
         '<li><b>v7.0</b> — Ground-up redesign of the mobile home — editorial layout, personalised time-based greeting, and the StewardMD banner as an antibiotic decision engine.</li>' +
