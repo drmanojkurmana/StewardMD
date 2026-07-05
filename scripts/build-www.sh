@@ -26,6 +26,14 @@ for f in *.js; do
   esac
 done
 
+# ── 2b. Stylesheets (buildless CSS referenced by index.html / home.js) ────────
+# index.html + home.js load /ui-v3.css at runtime (the whole .v3/.v4 home layout
+# + base font-family live here). On web these are served from the repo root; the
+# native bundle must include them or the home renders unstyled (serif + broken).
+for f in *.css; do
+  cp "$f" "$WWW/"
+done
+
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
 [ -f sw.js ] && cp sw.js "$WWW/"

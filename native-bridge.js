@@ -25,6 +25,17 @@
   window.SMD_IS_NATIVE = native;
   if (!native) return;                       // web: leave everything alone
 
+  // Splash: launchAutoHide is false (see capacitor.config.json), so dismiss the
+  // native splash once the web layer is up. 'load' fires even if home.js later
+  // throws, so the splash can never get stuck; hiding before the timeout also
+  // removes the "automatically hidden after default timeout" advisory.
+  window.addEventListener("load", function () {
+    try {
+      var P = window.Capacitor && window.Capacitor.Plugins;
+      if (P && P.SplashScreen) P.SplashScreen.hide();
+    } catch (e) { /* no-op */ }
+  });
+
   function absolutize(u) {
     // Only rewrite root-relative API paths; leave everything else (assets, absolute URLs) as-is.
     return (typeof u === "string" && u.charAt(0) === "/" && u.lastIndexOf("/api/", 0) === 0)
