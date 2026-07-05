@@ -1189,7 +1189,9 @@
       if (isPatientSpecific(q) && !active) return { kind: "patient" };
       // C/D anything else with clinical substance → one grounded provider call.
       // Very short, non-clinical, unmatched → ask a clarifying question (no call).
-      if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug)/.test(n)) return { kind: "clarify" };
+      // Only clarify a 1-2 word query when it does NOT look like a clinical topic. Disease/topic
+      // names (e.g. "paraquat poisoning", "kawasaki disease", "-itis/-osis") must route to clinical.
+      if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug|poison|toxic|overdose|antidote|envenom|snakebite|syndrome|disease|disorder|infection|itis|osis|aemia|emia|pathy|opathy|crisis|failure|bleed|haemorrhage|hemorrhage|stroke|embolism|infarct|arrest|malaria|meningitis|pneumonia|tetanus|rabies|dengue|typhoid|cholera)/.test(n)) return { kind: "clarify" };
       return { kind: "clinical" };
     }
     // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
@@ -1259,8 +1261,28 @@
       var think = bubble("ai", "✨ Searching StewardMD knowledge…");
       Promise.resolve()
         .then(function () { try { if (window.SMD_AI && SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {} return window.StewardRAG ? StewardRAG.ready() : Promise.reject(new Error("knowledge base loading")); })
-        .then(function () { var findings = active ? DX._state.f : {}; return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question }); })
-        .then(function (pkg) { if (pkg && question) pkg.question = question; if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4); return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); }); })
+        .then(function () {
+          // Ground on the active case ONLY when the question is about that patient ("this/my
+          // patient", "the case/diagnosis"). A standalone knowledge question (e.g. "treatment of
+          // paraquat poisoning") must be grounded on its OWN topic, never on the ambient case —
+          // otherwise a stale case's differential (e.g. cholangitis) hijacks the answer.
+          var caseRef = /\b(this|that|the|my|our|current)\s+(patient|case|pt|dx|diagnosis|condition|scenario)\b|\bthis (patient|case|dx)\b|\b(above|current) (case|patient)\b/.test(maikNorm(question));
+          var findings = (active && caseRef) ? DX._state.f : {};
+          return StewardRAG.buildPackage(window.SMD_REASON.assess(findings), { question: retrieval || question });
+        })
+        .then(function (pkg) {
+          if (pkg && question) pkg.question = question;
+          // Topic isn't in StewardMD's knowledge base → do NOT let the model describe a
+          // lexically-near but different condition. Say so plainly and skip the AI call.
+          if (pkg && pkg.topicMatch && pkg.topicMatch.matched === false) {
+            var tp = maikEscH(pkg.topicMatch.topic || question);
+            var near = pkg.topicMatch.nearest ? (' The closest entry I found was <b>' + maikEscH(pkg.topicMatch.nearest) + '</b>, which is a different condition.') : '';
+            think.innerHTML = '<div class="maik-welcome">StewardMD’s knowledge base doesn’t have a specific entry for <b>' + tp + '</b>, so I can’t give grounded guidance on it without risking describing a different condition.' + near + ' Please verify against a dedicated toxicology / reference source, or ask about a topic StewardMD covers.</div>';
+            return;
+          }
+          if (pkg && maikV2() && _maikTurns.length) pkg.history = _maikTurns.slice(-4);
+          return window.SMD_AI.explainGrounded(pkg, { depth: depth }).then(function (r) { maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth); });
+        })
         .catch(function (e) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; })
         .then(function () { _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
     }
