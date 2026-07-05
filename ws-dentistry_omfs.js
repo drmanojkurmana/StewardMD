@@ -31,6 +31,17 @@
     return { emergency: true, ladder: 5, catg: catg,
       sc: "SECURE THE AIRWAY FIRST — controlled setting (theatre/ICU) with senior anaesthesia + ENT/maxillofacial. Do NOT lie the patient flat and do NOT sedate; keep sitting up. Urgent surgical drainage of the deep-space collection follows airway control.",
       ref: "Emergency ENT / maxillofacial + anaesthesia / critical care NOW — co-managed airway.",
+      abx: {
+        firstLine: [
+          { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "only AFTER the airway is secured" },
+          { drug: "or Ceftriaxone", dose: "2 g", route: "IV daily", note: "+ Metronidazole 500 mg IV q8h (anaerobic cover)" }
+        ],
+        alt: [
+          { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy (covers streptococci + oral anaerobes)" }
+        ],
+        ref: "ICMR/Sanford — Ludwig's / deep-space odontogenic infection; airway first, then urgent drainage.",
+        note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+      },
       mgmt: (["IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR — only AFTER the airway is secured; antibiotics do NOT replace drainage.", "Keep the patient calm, sitting up, humidified O₂; nil by mouth; treat the causative tooth once stable."]).concat(extra || []) };
   }
 
@@ -57,11 +68,36 @@
         assess: function (sel) {
           if (has(sel, "airway")) return airwayEmergency("Dental abscess with airway compromise — exclude Ludwig's / deep-space spread", ["Do not lie flat; this is no longer a simple dental abscess."]);
           if (anyOf(sel, ["planes", "trismus"])) return { emergency: true, ladder: 4, catg: "Dental abscess with spreading fascial-space involvement",
-            sc: "Drainage of the collection + treat the source tooth (extraction / endodontic drainage) is the definitive treatment; image (OPG ± CT) and watch the airway.", ref: "Urgent maxillofacial / OMFS; admit — co-manage ENT + anaesthesia if airway concern.", mgmt: ["IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR as ADJUNCT to drainage — not a substitute.", "Escalate immediately if floor-of-mouth swelling, trismus worsening or airway symptoms appear."] };
+            sc: "Drainage of the collection + treat the source tooth (extraction / endodontic drainage) is the definitive treatment; image (OPG ± CT) and watch the airway.", ref: "Urgent maxillofacial / OMFS; admit — co-manage ENT + anaesthesia if airway concern.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" },
+                { drug: "or Ceftriaxone", dose: "1–2 g", route: "IV daily", note: "+ Metronidazole 500 mg IV q8h (anaerobic cover)" }
+              ],
+              alt: [
+                { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — spreading fascial-space odontogenic infection; de-escalate on culture, 5–7 d.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR as ADJUNCT to drainage — not a substitute.", "Escalate immediately if floor-of-mouth swelling, trismus worsening or airway symptoms appear."] };
           if (anyOf(sel, ["localised", "drainable"]) && !anyOf(sel, ["spreading", "systemic", "immuno"])) return { emergency: false, ladder: 4, catg: "Localised dental abscess with a drainable source",
             sc: "DRAINAGE + definitive dental treatment (incision/drainage, extraction or endodontics) is the treatment. This is the key dental principle — source control, not antibiotics.", ref: "Dentist / OMFS for drainage and definitive care.", mgmt: ["Antibiotics usually NOT needed for a localised abscess with a drainable source — drain the tooth and manage pain.", "Add antibiotics only if spreading cellulitis, systemic features or immunocompromise develop.", "Analgesia is the mainstay for pain."] };
           if (anyOf(sel, ["spreading", "systemic", "immuno"])) return { emergency: false, ladder: 2, catg: "Dental abscess with spreading cellulitis / systemic or host risk",
-            sc: "Still drain + treat the tooth (extraction / endodontics) — source control remains definitive.", ref: "Dentist / OMFS promptly; lower threshold to admit if not settling.", mgmt: ["Add an oral antibiotic per local guidance — indicated here because of spreading cellulitis, systemic features or immunocompromise.", "Antibiotics are an adjunct to drainage, never a replacement; review at 48–72 h and escalate if worsening."] };
+            sc: "Still drain + treat the tooth (extraction / endodontics) — source control remains definitive.", ref: "Dentist / OMFS promptly; lower threshold to admit if not settling.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin", dose: "500 mg", route: "PO TID", note: "oral streptococci" },
+                { drug: "+ Metronidazole", dose: "400 mg", route: "PO TID", note: "anaerobic cover" }
+              ],
+              alt: [
+                { drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "single-agent alternative" },
+                { drug: "Clindamycin", dose: "300 mg", route: "PO QID", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — odontogenic infection (oral streptococci + anaerobes); 5 d, review at 48–72 h.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Add an oral antibiotic per local guidance — indicated here because of spreading cellulitis, systemic features or immunocompromise.", "Antibiotics are an adjunct to drainage, never a replacement; review at 48–72 h and escalate if worsening."] };
           return { emergency: false, ladder: 1, catg: "Suspected early / localised dental infection",
             sc: "Local measures + arrange definitive dental assessment (drainage / extraction / endodontics) as the source control.", ref: "Dentist for definitive care; safety-net for spreading swelling, trismus or airway symptoms.", mgmt: ["Analgesia + local measures; antibiotics usually NOT needed if localised and drainable.", "Antibiotics do not fix a tooth — arrange the dental procedure; antibiotics only if spreading, systemic or immunocompromised.", "Floor-of-mouth swelling or trismus = escalate, not another antibiotic course."] };
         }
@@ -85,9 +121,33 @@
         assess: function (sel) {
           if (has(sel, "airway")) return airwayEmergency("Spreading odontogenic infection with airway compromise — Ludwig's / deep-space spread", ["Deep-space spread — secure airway before any manipulation."]);
           if (anyOf(sel, ["sepsis", "eye"])) return { emergency: true, ladder: 4, catg: "Spreading odontogenic infection with sepsis / orbital-cavernous spread",
-            sc: "Urgent surgical drainage of the collection + treat the source tooth; contrast CT to map spaces; watch the airway.", ref: "Emergency maxillofacial / OMFS + critical care; involve ENT + ophthalmology if orbital / cavernous spread.", mgmt: ["Resuscitate; IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR as adjunct to urgent drainage.", "Antibiotics do NOT replace drainage and source-tooth treatment."] };
+            sc: "Urgent surgical drainage of the collection + treat the source tooth; contrast CT to map spaces; watch the airway.", ref: "Emergency maxillofacial / OMFS + critical care; involve ENT + ophthalmology if orbital / cavernous spread.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" },
+                { drug: "or Ceftriaxone", dose: "2 g", route: "IV daily", note: "+ Metronidazole 500 mg IV q8h (anaerobic cover)" }
+              ],
+              alt: [
+                { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — severe / orbital-cavernous odontogenic spread; broaden per unit antibiogram, de-escalate on culture.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Resuscitate; IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR as adjunct to urgent drainage.", "Antibiotics do NOT replace drainage and source-tooth treatment."] };
           return { emergency: true, ladder: 4, catg: "Spreading odontogenic infection — needs drainage + admission",
-            sc: "Surgical drainage of the collection + definitive treatment of the source tooth (extraction / endodontics) is the definitive management; image (OPG ± contrast CT) to map fascial spaces.", ref: "Urgent maxillofacial / OMFS; admit. Co-manage ENT + anaesthesia if any airway concern.", mgmt: ["Admit for IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR — ADJUNCT to drainage, not a substitute.", "Monitor closely for airway / deep-space spread (Ludwig's) and escalate at once if it develops."] };
+            sc: "Surgical drainage of the collection + definitive treatment of the source tooth (extraction / endodontics) is the definitive management; image (OPG ± contrast CT) to map fascial spaces.", ref: "Urgent maxillofacial / OMFS; admit. Co-manage ENT + anaesthesia if any airway concern.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" },
+                { drug: "or Ceftriaxone", dose: "1–2 g", route: "IV daily", note: "+ Metronidazole 500 mg IV q8h (anaerobic cover)" }
+              ],
+              alt: [
+                { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — spreading odontogenic infection needing admission; de-escalate on culture, 5–7 d.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Admit for IV broad-spectrum antibiotics (aerobic + anaerobic) per local antibiogram/ICMR — ADJUNCT to drainage, not a substitute.", "Monitor closely for airway / deep-space spread (Ludwig's) and escalate at once if it develops."] };
         }
       },
       /* ───────────── Ludwig's angina (airway red-flag) ───────────── */
@@ -122,9 +182,34 @@
         assess: function (sel) {
           if (has(sel, "airway")) return airwayEmergency("Pericoronitis with airway compromise — exclude spreading deep-space infection", ["Progression beyond simple pericoronitis — secure airway first."]);
           if (has(sel, "dysphagia")) return { emergency: true, ladder: 4, catg: "Pericoronitis with marked dysphagia — exclude spreading deep-space infection",
-            sc: "Inability to swallow saliva suggests spread beyond simple pericoronitis — assess for deep-space infection; image and watch the airway; drain any collection and treat the tooth.", ref: "Urgent maxillofacial / OMFS; co-manage ENT + anaesthesia if any airway concern.", mgmt: ["Marked dysphagia / drooling is a red flag — do NOT manage as simple pericoronitis with oral antibiotics at home.", "IV antibiotics per local antibiogram/ICMR as an ADJUNCT to source control if admitted; escalate at once if floor-of-mouth swelling or airway symptoms appear."] };
+            sc: "Inability to swallow saliva suggests spread beyond simple pericoronitis — assess for deep-space infection; image and watch the airway; drain any collection and treat the tooth.", ref: "Urgent maxillofacial / OMFS; co-manage ENT + anaesthesia if any airway concern.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h" },
+                { drug: "or Ceftriaxone", dose: "1–2 g", route: "IV daily", note: "+ Metronidazole 500 mg IV q8h (anaerobic cover)" }
+              ],
+              alt: [
+                { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — pericoronitis with deep-space spread; de-escalate on culture.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Marked dysphagia / drooling is a red flag — do NOT manage as simple pericoronitis with oral antibiotics at home.", "IV antibiotics per local antibiogram/ICMR as an ADJUNCT to source control if admitted; escalate at once if floor-of-mouth swelling or airway symptoms appear."] };
           if (anyOf(sel, ["spreading", "systemic", "trismus"])) return { emergency: false, ladder: 2, catg: "Pericoronitis with spreading / systemic features",
-            sc: "Irrigation under the operculum + local debridement; definitive care = treat the tooth (operculectomy / extraction) once acute phase settles.", ref: "Dentist / OMFS promptly; escalate if swelling spreads or airway symptoms appear.", mgmt: ["Add an oral antibiotic per local guidance — indicated here because of spreading swelling, trismus or systemic features.", "Local measures + analgesia remain the mainstay; antibiotics are an adjunct."] };
+            sc: "Irrigation under the operculum + local debridement; definitive care = treat the tooth (operculectomy / extraction) once acute phase settles.", ref: "Dentist / OMFS promptly; escalate if swelling spreads or airway symptoms appear.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin", dose: "500 mg", route: "PO TID", note: "oral streptococci" },
+                { drug: "+ Metronidazole", dose: "400 mg", route: "PO TID", note: "anaerobic cover" }
+              ],
+              alt: [
+                { drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "single-agent alternative" },
+                { drug: "Clindamycin", dose: "300 mg", route: "PO QID", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — pericoronitis with spreading / systemic features; 5 d, review at 48–72 h.",
+              note: "Adjunct to drainage/tooth treatment — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Add an oral antibiotic per local guidance — indicated here because of spreading swelling, trismus or systemic features.", "Local measures + analgesia remain the mainstay; antibiotics are an adjunct."] };
           return { emergency: false, ladder: 1, catg: "Localised pericoronitis",
             sc: "Local measures — irrigation under the operculum, gentle debridement, warm saline rinses; definitive care = dental treatment of the tooth (operculectomy / extraction).", ref: "Dentist for definitive management; safety-net for spreading swelling, trismus or airway symptoms.", mgmt: ["Antibiotics usually NOT needed for localised pericoronitis — local measures + analgesia are first-line.", "Antibiotics only if spreading infection, systemic features or marked trismus."] };
         }
@@ -144,7 +229,20 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["swelling", "systemic"])) return { emergency: false, ladder: 2, catg: "Post-extraction socket with signs of spreading infection",
-            sc: "Irrigate / debride the socket; drain any collection and treat the source — reassess: this is beyond simple dry socket.", ref: "Dentist / OMFS promptly.", mgmt: ["Add an oral antibiotic per local guidance ONLY because of spreading infection / systemic features.", "Simple dry socket does NOT need antibiotics — escalate here because of infective signs."] };
+            sc: "Irrigate / debride the socket; drain any collection and treat the source — reassess: this is beyond simple dry socket.", ref: "Dentist / OMFS promptly.",
+            abx: {
+              firstLine: [
+                { drug: "Amoxicillin", dose: "500 mg", route: "PO TID", note: "oral streptococci" },
+                { drug: "+ Metronidazole", dose: "400 mg", route: "PO TID", note: "anaerobic cover" }
+              ],
+              alt: [
+                { drug: "Amoxicillin–clavulanate", dose: "625 mg", route: "PO TID", note: "single-agent alternative" },
+                { drug: "Clindamycin", dose: "300 mg", route: "PO QID", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — post-extraction spreading odontogenic infection (NOT simple dry socket); 5 d.",
+              note: "Adjunct to drainage/source control — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Add an oral antibiotic per local guidance ONLY because of spreading infection / systemic features.", "Simple dry socket does NOT need antibiotics — escalate here because of infective signs."] };
           return { emergency: false, ladder: 1, catg: "Dry socket (alveolar osteitis) — local treatment",
             sc: "LOCAL treatment — gentle irrigation of the socket + medicated (obtundent) dressing; repeat as needed. This is the definitive management.", ref: "Dentist for dressing and review.", mgmt: ["Antibiotics are NOT indicated for dry socket — it is inflammatory, not infective.", "Manage with socket irrigation, medicated dressing and analgesia."] };
         }
@@ -165,9 +263,32 @@
         ],
         assess: function (sel) {
           if (anyOf(sel, ["noma", "systemic_sepsis"])) return { emergency: true, ladder: 4, catg: "Necrotising infection spreading beyond gingiva (noma / systemic sepsis)",
-            sc: "Debridement of necrotic tissue + source control; assess extent; nutritional support.", ref: "Urgent maxillofacial / OMFS + medical team; admit — particularly if immunocompromised.", mgmt: ["IV antibiotics (with anaerobic cover) per local antibiogram/ICMR as adjunct to debridement.", "Investigate and treat the underlying immunocompromise / malnutrition."] };
+            sc: "Debridement of necrotic tissue + source control; assess extent; nutritional support.", ref: "Urgent maxillofacial / OMFS + medical team; admit — particularly if immunocompromised.",
+            abx: {
+              firstLine: [
+                { drug: "Metronidazole", dose: "500 mg", route: "IV q8h", note: "anaerobic / fusospirochaetal cover" },
+                { drug: "+ Amoxicillin–clavulanate", dose: "1.2 g", route: "IV q8h", note: "or Ceftriaxone 2 g IV daily" }
+              ],
+              alt: [
+                { drug: "Clindamycin", dose: "600 mg", route: "IV q8h", note: "penicillin allergy" }
+              ],
+              ref: "ICMR/Sanford — necrotising infection (noma) / systemic sepsis; debridement + nutrition are central.",
+              note: "Adjunct to debridement/source control — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["IV antibiotics (with anaerobic cover) per local antibiogram/ICMR as adjunct to debridement.", "Investigate and treat the underlying immunocompromise / malnutrition."] };
           if (anyOf(sel, ["systemic", "immuno"])) return { emergency: false, ladder: 2, catg: "ANUG with systemic features / immunocompromise",
-            sc: "Professional debridement (ultrasonic / gentle mechanical) + oral-hygiene instruction is the mainstay.", ref: "Dentist / OMFS; investigate for underlying immunocompromise if severe or recurrent.", mgmt: ["Add an oral antibiotic (metronidazole-class / anaerobic cover) per local guidance — indicated here for systemic features or immunocompromise.", "Debridement + chlorhexidine rinses + analgesia + smoking cessation remain central; antibiotics are an adjunct."] };
+            sc: "Professional debridement (ultrasonic / gentle mechanical) + oral-hygiene instruction is the mainstay.", ref: "Dentist / OMFS; investigate for underlying immunocompromise if severe or recurrent.",
+            abx: {
+              firstLine: [
+                { drug: "Metronidazole", dose: "400 mg", route: "PO TID", dur: "3 d", note: "anaerobic / fusospirochaetal cover — the agent of choice in ANUG" }
+              ],
+              alt: [
+                { drug: "Amoxicillin", dose: "500 mg", route: "PO TID", note: "± add to metronidazole if marked systemic upset" }
+              ],
+              ref: "ICMR/Sanford — ANUG with systemic features / immunocompromise; debridement + oral hygiene are central.",
+              note: "Adjunct to debridement/oral hygiene — adjust to local antibiogram/ICMR & allergy."
+            },
+            mgmt: ["Add an oral antibiotic (metronidazole-class / anaerobic cover) per local guidance — indicated here for systemic features or immunocompromise.", "Debridement + chlorhexidine rinses + analgesia + smoking cessation remain central; antibiotics are an adjunct."] };
           return { emergency: false, ladder: 1, catg: "Localised ANUG",
             sc: "Professional debridement (remove plaque / calculus) + meticulous oral hygiene; antiseptic (e.g. chlorhexidine) mouthrinse.", ref: "Dentist for debridement and follow-up.", mgmt: ["Antibiotics usually NOT needed for localised ANUG without systemic features — debridement + oral hygiene are first-line.", "Add a metronidazole-class antibiotic per local guidance only if systemic upset or immunocompromise; analgesia + smoking cessation."] };
         }
