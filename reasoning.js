@@ -3840,6 +3840,7 @@
       // never corrupt the clinical output (it's purely progressive enhancement).
       try { smdEnhanceOutput(); } catch (_) {}
       try { if (!isNI) smdSafetyOverlay(e, i); } catch (_) {}   // antibiotic path only; never blocks output
+      try { if (!isNI) smdTbWorkspace(e, i); } catch (_) {}      // TB pathways workspace (PR2) — TB renders only
       return ret;
     };
     window.__smdEngineExpanded = true;
@@ -4543,6 +4544,140 @@
     safetyGates: smdTbSafetyGates,
     drug: function (k) { return _tbData ? (_tbData.drugs.drugs || []).filter(function (d) { return d.key === k; })[0] || null : null; }
   };
+
+  /* ---------------------------------------------------------------------- *
+   * TB TREATMENT WORKSPACE (PR2) — decision-aware UI that renders SMD_TB into
+   * the TB output. Replaces the vague "Modified regimens per DST" card with
+   * DST-driven regimen cards + why-eligible/why-not + safety gates + sources.
+   * Injected post-render via the renderOutput seam; no minified app.js edit.
+   * ---------------------------------------------------------------------- */
+  var _tbSynId = null;
+  function smdTbIsRender(synId, oa) {
+    if (synId && /(^|_)TB$|tubercul/i.test(String(synId))) return true;
+    try { var t = (oa || document.getElementById("outputArea")); if (!t) return false; var s = (t.innerText || "").toLowerCase(); return /\bhrze\b/.test(s) || (/isoniazid/.test(s) && /rifampic/.test(s) && /pyrazinamide/.test(s)); } catch (e) { return false; }
+  }
+  function smdTbInjectCSS() {
+    if (document.getElementById("smd-tb-css")) return;
+    var st = document.createElement("style"); st.id = "smd-tb-css";
+    st.textContent =
+      ".smd-tb-card{margin:0 0 14px;padding:14px 16px;border:1px solid var(--line,#e2e8f0);border-left:4px solid var(--teal,#0e6e63);border-radius:12px;background:var(--panel,#fff)}" +
+      ".smd-tb-h{font:800 14px var(--sans,system-ui);color:var(--teal,#0e6e63);margin:0 0 3px}" +
+      ".smd-tb-policy{font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.03em;margin:0 0 10px}" +
+      ".smd-tb-inputs{display:flex;flex-wrap:wrap;gap:9px 12px;margin:0 0 10px;padding:0 0 11px;border-bottom:1px dashed var(--line,#e2e8f0)}" +
+      ".smd-tb-inputs label{display:flex;flex-direction:column;gap:3px;font:700 10px var(--sans,system-ui);color:var(--slate-soft,#64748b);text-transform:uppercase;letter-spacing:.02em}" +
+      ".smd-tb-inputs input,.smd-tb-inputs select{padding:5px 7px;border:1px solid var(--line,#d7dee3);border-radius:7px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 12.5px var(--sans,system-ui)}" +
+      ".smd-tb-inputs input[type=number]{width:66px}.smd-tb-inputs label.chk{flex-direction:row;align-items:center;gap:6px;text-transform:none;font:600 11.5px var(--sans,system-ui);color:var(--ink,#14202b);align-self:flex-end;padding-bottom:4px}.smd-tb-inputs label.chk input{width:15px;height:15px}" +
+      ".smd-tb-state{display:inline-block;font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;padding:3px 9px;border-radius:999px;margin:0 0 9px}" +
+      ".smd-tb-state.ok{background:#e3f1ee;color:#0e6e63}.smd-tb-state.dr{background:#fef3c7;color:#b45309}.smd-tb-state.pend{background:#e2e8f0;color:#475569}" +
+      ".smd-tb-reg{border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px 12px;margin:0 0 8px}" +
+      ".smd-tb-reg.elig{border-left:3px solid #0e6e63}.smd-tb-reg.excl{border-left:3px solid #cbd5e1;opacity:.9}" +
+      ".smd-tb-reg h4{font:800 13px var(--sans,system-ui);color:var(--ink,#14202b);margin:0 0 4px}" +
+      ".smd-tb-why{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}.smd-tb-why b{color:var(--ink,#14202b)}" +
+      ".smd-tb-excl-why{color:#b45309}" +
+      ".smd-tb-det{margin-top:6px}.smd-tb-det summary{cursor:pointer;font:700 11.5px var(--sans,system-ui);color:var(--teal,#0e6e63)}.smd-tb-det ul{margin:6px 0 0;padding-left:18px}.smd-tb-det li{font:500 12px/1.5 var(--sans,system-ui);color:var(--ink,#14202b);margin:2px 0}" +
+      ".smd-tb-gate{font:600 12px var(--sans,system-ui);padding:3px 0}.smd-tb-gate.miss{color:#b45309}.smd-tb-gate.ok{color:#0e6e63}" +
+      ".smd-tb-sec{margin-top:10px;border-top:1px dashed var(--line,#e2e8f0);padding-top:8px}.smd-tb-sec>b{font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:var(--slate-soft,#64748b)}" +
+      ".smd-tb-src{font:500 11px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}";
+    document.head.appendChild(st);
+  }
+  function smdTbInputsHTML(e) {
+    function sel(k, label, opts, cur) { return '<label>' + label + '<select data-tb="' + k + '">' + opts.map(function (o) { return '<option value="' + esc(o) + '"' + (o === cur ? " selected" : "") + '>' + esc(o) + '</option>'; }).join("") + '</select></label>'; }
+    var site = /cns|mening/i.test(String(e && e.site)) ? "CNS" : "pulmonary";
+    return '<div class="smd-tb-inputs" id="smdTbInputs">' +
+      sel("xpertRif", "Xpert RIF", ["not done", "RIF sensitive", "RIF resistant", "indeterminate"], "not done") +
+      sel("fqSusceptibility", "FQ", ["unknown", "susceptible", "resistant"], "unknown") +
+      sel("hSusceptibility", "INH", ["unknown", "susceptible", "resistant", "InhA+KatG"], "unknown") +
+      '<label>Age<input type="number" data-tb="age" value="' + esc(e && e.age != null ? String(e.age) : "") + '"></label>' +
+      sel("site", "Site", ["pulmonary", "CNS", "skeletal", "disseminated", "miliary"], site) +
+      '<label>QTcF ms<input type="number" data-tb="qtcF" value=""></label>' +
+      '<label class="chk"><input type="checkbox" data-tb="liverDysfunction">Liver dysfx</label>' +
+      '<label class="chk"><input type="checkbox" data-tb="cardiacDisease">Cardiac risk</label>' +
+      '<label class="chk"><input type="checkbox" data-tb="pregnant">Pregnant</label>' +
+      '<label class="chk"><input type="checkbox" data-tb="priorSecondLineExposure">Prior 2nd-line</label>' +
+      '</div>';
+  }
+  function smdTbReadInputs() {
+    var box = document.getElementById("smdTbInputs"), dst = {}, p = {};
+    if (!box) return { dst: dst, p: p };
+    Array.prototype.forEach.call(box.querySelectorAll("[data-tb]"), function (el) {
+      var k = el.getAttribute("data-tb"), v = el.type === "checkbox" ? el.checked : (el.value || "").trim();
+      if (["xpertRif", "fqSusceptibility", "hSusceptibility"].indexOf(k) >= 0) { if (v) dst[k] = v; }
+      else if (k === "priorSecondLineExposure") { p[k] = v; }
+      else if (v !== "" && v !== false) p[k] = v;
+    });
+    if (dst.fqSusceptibility === "resistant") p.fqResistance = true;
+    if (dst.bdqConcern === "yes") p.bdqResistance = true;
+    return { dst: dst, p: p };
+  }
+  function smdTbRegDetails(reg) {
+    var rows = [];
+    if (reg.coreMeds) rows.push(["Core medicines", Array.isArray(reg.coreMeds) ? reg.coreMeds.join(", ") : reg.coreMeds]);
+    if (reg.duration) rows.push(["Duration", reg.duration]);
+    if (reg.doseRef) rows.push(["Dose reference", reg.doseRef]);
+    if (reg.dstRequirements) rows.push(["DST requirements", reg.dstRequirements]);
+    if (reg.baselineIx) rows.push(["Baseline investigations", reg.baselineIx.join(", ")]);
+    if (reg.monitoring) rows.push(["Monitoring", reg.monitoring.join("; ")]);
+    if (reg.interactions) rows.push(["Interactions", reg.interactions.join("; ")]);
+    if (reg.aeWatchlist) rows.push(["Adverse-effect watchlist", reg.aeWatchlist.join("; ")]);
+    if (reg.escalation) rows.push(["Escalation", reg.escalation]);
+    if (reg.source) rows.push(["Source", reg.source]);
+    return '<details class="smd-tb-det"><summary>Show details</summary><ul>' + rows.map(function (r) { return '<li><b>' + esc(r[0]) + ':</b> ' + esc(r[1]) + '</li>'; }).join("") + '</ul></details>';
+  }
+  function smdTbRecalc() {
+    var lines = document.getElementById("smdTbLines"); if (!lines || !window.SMD_TB || !SMD_TB.data()) return;
+    try {
+      var inp = smdTbReadInputs(), res = SMD_TB.eligibleRegimens(inp.dst, inp.p);
+      if (!res) { lines.innerHTML = ""; return; }
+      var reg = (SMD_TB.data().reg.regimens || []); var byId = {}; reg.forEach(function (r) { byId[r.id] = r; });
+      var stateLabel = ((SMD_TB.data().reg.dstModel.states || []).filter(function (s) { return s.id === res.state; })[0] || { label: res.state }).label;
+      var cls = res.state === "susceptible" ? "ok" : (res.state === "dst_pending" || res.state === "indeterminate") ? "pend" : "dr";
+      var html = '<div class="smd-tb-state ' + cls + '">' + esc(stateLabel) + '</div>';
+      if (res.state === "dst_pending" || res.state === "indeterminate") html += '<div class="smd-tb-why">Enter the Xpert / molecular rifampicin result above. A drug-resistant regimen is not recommended while DST is pending.</div>';
+      // eligible regimens
+      res.eligible.forEach(function (er) {
+        var r = byId[er.id]; if (!r) return;
+        var gates = SMD_TB.safetyGates(er.id, inp.p).filter(function (g) { return !g.satisfied; });
+        html += '<div class="smd-tb-reg elig"><h4>' + esc(r.name) + '</h4>' +
+          '<div class="smd-tb-why"><b>Why this regimen?</b> ' + esc(r.eligibility || "") + '</div>' +
+          (gates.length ? '<div class="smd-tb-gate miss">⚠ Required before selecting: ' + gates.map(function (g) { return esc(g.label); }).join(", ") + '</div>' : '<div class="smd-tb-gate ok">✓ Mandatory safety inputs entered</div>') +
+          smdTbRegDetails(r) + '</div>';
+      });
+      // excluded regimens
+      res.excluded.forEach(function (xr) {
+        var r = byId[xr.id]; if (!r) return;
+        html += '<div class="smd-tb-reg excl"><h4>' + esc(r.name) + '</h4><div class="smd-tb-why"><b>Why not eligible:</b> <span class="smd-tb-excl-why">' + esc(xr.why) + '</span></div></div>';
+      });
+      // sources
+      var srcs = SMD_TB.data().reg;
+      html += '<div class="smd-tb-sec"><b>Sources</b><div class="smd-tb-src">' + esc(srcs.primarySource.label) + (srcs.referenceSources ? " · " + srcs.referenceSources.map(function (s) { return s.label; }).join(" · ") : "") + '</div></div>';
+      lines.innerHTML = html;
+    } catch (e) { /* never break the page */ }
+  }
+  function smdTbWorkspace(e, synId) {
+    var oa = document.getElementById("outputArea"); if (!oa) return false;
+    var old = document.getElementById("smdTbCard"); if (old) old.parentNode.removeChild(old);
+    if (!smdTbIsRender(synId, oa)) return false;
+    _tbSynId = synId || null;
+    smdTbInjectCSS();
+    // hide the vague native "Modified regimens per drug-susceptibility testing" alternative card
+    try {
+      Array.prototype.forEach.call(oa.querySelectorAll("*"), function (n) {
+        if (n.children && n.children.length <= 6 && /modified regimens per drug-susceptibility/i.test(n.textContent || "") && n.textContent.length < 400) { var box = n.closest ? (n.closest(".card, .qa-card, [class*=card]") || n) : n; if (box && box !== oa) box.style.display = "none"; }
+      });
+    } catch (_) {}
+    var html = '<div id="smdTbCard" class="smd-tb-card">' +
+      '<div class="smd-tb-h">🫁 Tuberculosis treatment pathway</div>' +
+      '<div class="smd-tb-policy">NTEP India (primary) · WHO reference · advisory — clinician verifies</div>' +
+      smdTbInputsHTML(e) +
+      '<div id="smdTbLines"></div></div>';
+    var scp = oa.querySelector("#saveCasePrompt");
+    if (scp && scp.parentNode === oa) scp.insertAdjacentHTML("afterend", html); else oa.insertAdjacentHTML("afterbegin", html);
+    var box = document.getElementById("smdTbInputs");
+    if (box) Array.prototype.forEach.call(box.querySelectorAll("[data-tb]"), function (el) { el.addEventListener("input", smdTbRecalc); el.addEventListener("change", smdTbRecalc); });
+    if (window.SMD_TB) SMD_TB.ready().then(function () { smdTbRecalc(); });
+    return true;
+  }
+  try { window.SMD_TB.renderWorkspace = smdTbWorkspace; window.SMD_TB.recalc = smdTbRecalc; window.SMD_TB.isRender = smdTbIsRender; } catch (e) {}
 
   // make the FAB + styles available app-wide, not only after a decision renders
   function smdInitGlobalUI() { try { smdInjectUIStyles(); smdEnsureBackToTop(); smdWireAccordion(); } catch (e) {} }
