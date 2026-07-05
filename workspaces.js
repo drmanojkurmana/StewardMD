@@ -495,15 +495,12 @@
     var w = ov.querySelector(".sw-wm");
     if (!w) { w = document.createElement("div"); w.className = "sw-wm"; ov.insertBefore(w, ov.firstChild); }
     w.innerHTML = wm(WMARKS[IM]);
-    // in-case pill in .dx-top
+    // NOTE: Clinical Reasoning is Internal-Medicine-only, so we do NOT inject a workspace
+    // switcher pill here (it would wrongly imply you can run CR as another specialty).
+    // Remove any pill left by an older build.
     var top = ov.querySelector(".dx-top");
-    if (top && !top.querySelector(".sw-pill")) {
-      var pill = document.createElement("button"); pill.className = "sw-pill"; pill.style.marginLeft = "8px";
-      pill.innerHTML = '<span class="ic">' + ic(ICONS[IM]) + '</span><span class="nm">' + meta(IM).name + '</span><span class="chev">▾</span>';
-      pill.addEventListener("click", function (e) { e.stopPropagation(); openSheet({ inCase: true }); });
-      var title = top.querySelector(".dx-title");
-      if (title && title.nextSibling) top.insertBefore(pill, title.nextSibling); else top.appendChild(pill);
-    }
+    var oldPill = top && top.querySelector(".sw-pill");
+    if (oldPill) oldPill.remove();
   }
   function watchDx() {
     // Observe #dxOverlay class toggles to (re)inject the pill + watermark when it opens.

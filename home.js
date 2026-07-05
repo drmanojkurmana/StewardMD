@@ -168,6 +168,9 @@
 
   var root, fab;
   function hideV2() { if (root) root.classList.remove("on"); if (fab) fab.classList.add("on"); try { if (window.SB && SB.closeRef) SB.closeRef(); } catch (e) {} }
+  // Exposed so the Clinical Reasoning "Select this diagnosis" flow can reveal the classic
+  // stewardship output (#outputArea) instead of leaving it hidden behind the v4 Home.
+  window.SMD_hideHome = hideV2;
   function showV2() { if (root) root.classList.add("on"); if (fab) fab.classList.remove("on"); var m = root && root.querySelector(".v3-main"); if (m) m.scrollTop = 0; }
   // Universal "go home" — closes any open overlay/sheet and returns to the v3 home. Wired to the
   // logo (anywhere) and the home FAB, so the user can get home from any area.

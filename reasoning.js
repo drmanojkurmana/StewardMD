@@ -2374,6 +2374,11 @@
         if (typeof window.SMD_restoreCase === "function") {
           close();
           window.SMD_restoreCase(S.f, id, vitals);
+          // reveal the classic stewardship output so the rendered #outputArea isn't left hidden
+          // → the "white screen" on select. Hide the v4 Home AND show the classic .shell
+          // (which is display:none until a classic case is started).
+          try { if (window.SMD_hideHome) SMD_hideHome(); } catch (e) {}
+          try { var _sh = document.querySelector(".shell"); if (_sh) _sh.style.display = "block"; } catch (e) {}
           // bring the freshly-rendered stewardship page into view — without this the
           // overlay closes but the output stays off-screen (the "click does nothing"
           // bug). Mirrors the My-Cases restore path, which scrolls #outputArea.
