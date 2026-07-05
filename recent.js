@@ -197,7 +197,7 @@
   function build() {
     if (_root) return _root;
     injectCSS();
-    _root = document.createElement("div"); _root.className = "rc-ov"; _root.id = "smdRecentOv";
+    _root = document.createElement("div"); _root.className = "rc-ov"; _root.id = "smdRecentOv"; _root.setAttribute("role", "dialog"); _root.setAttribute("aria-modal", "true"); _root.setAttribute("aria-label", "Recent Cases");
     _root.innerHTML =
       '<div class="rc-bar"><button class="rc-x" id="rcClose">‹ Back</button>' +
       '<div class="rc-h">🕐 Recent Cases</div>' +
