@@ -4086,7 +4086,8 @@
       ".smd-safety-inputs input[type=number],.smd-safety-inputs select{width:78px;padding:5px 7px;border:1px solid var(--line,#d7dee3);border-radius:7px;background:var(--panel,#fff);color:var(--ink,#14202b);font:600 13px var(--sans,system-ui)}" +
       ".smd-safety-inputs label.chk{flex-direction:row;align-items:center;gap:6px;text-transform:none;font:600 12px var(--sans,system-ui);color:var(--ink,#14202b);align-self:flex-end;padding-bottom:5px}" +
       ".smd-safety-inputs label.chk input{width:16px;height:16px}" +
-      ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}";
+      ".smd-safety-empty{font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#64748b)}" +
+      ".smd-safety-draft{display:inline-block;font:700 9.5px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;color:#b45309;background:#fef3c7;border-radius:5px;padding:1px 5px;margin-left:4px;vertical-align:middle}";
     document.head.appendChild(st);
   }
   // render-time findings + syndrome id; the read-only base the card's own inputs are overlaid onto.
@@ -4117,11 +4118,62 @@
     if (age === null || wt === null || scr === null || scr <= 0) return null;
     return Math.max(0, Math.round((140 - age) * wt * ((String(e.sex || "").toLowerCase().charAt(0) === "f") ? 0.85 : 1) / (72 * scr)));
   }
+  // Phase-B DRAFT renal dose-band table for renally-cleared antibiotics NOT in app.js's
+  // (clinician-reviewed) RENAL_DOSING. Bands: Moderate 30-59 · Severe 15-29 · ESRD <15
+  // (Cockcroft-Gault). Doses are standard adjustments drafted from reference renal-dosing
+  // (Sanford / Renal Drug Handbook / product labels); every entry is DRAFT → the card labels
+  // them "verify locally". Keyed by ASP_DRUGS drug id. null/absent band = no change at that band.
+  var SMD_RENAL_DOSING = {
+    ceftazidime:  { standard: "2 g IV q8h",       bands: { "Moderate impairment": "1-2 g IV q12h", "Severe impairment": "1 g IV q24h", "Kidney failure / ESRD": "0.5-1 g IV q24h (dose after HD)" } },
+    cefotaxime:   { standard: "1-2 g IV q8h",     bands: { "Severe impairment": "1-2 g IV q12h", "Kidney failure / ESRD": "1 g IV q12-24h" } },
+    cefuroxime:   { standard: "1.5 g IV q8h",     bands: { "Severe impairment": "750 mg-1.5 g IV q12h", "Kidney failure / ESRD": "750 mg IV q24h" } },
+    cefazolin:    { standard: "1-2 g IV q8h",     bands: { "Severe impairment": "1 g IV q12h", "Kidney failure / ESRD": "1 g IV q24h (dose after HD)" } },
+    cephalexin:   { standard: "500 mg PO q6h",    bands: { "Severe impairment": "500 mg PO q8-12h", "Kidney failure / ESRD": "250-500 mg PO q12-24h" } },
+    cefixime:     { standard: "200 mg PO q12h",   bands: { "Moderate impairment": "300 mg PO once daily", "Severe impairment": "300 mg PO once daily", "Kidney failure / ESRD": "200 mg PO once daily" } },
+    cefta_avi:    { standard: "2.5 g IV q8h",     bands: { "Moderate impairment": "1.25 g IV q8h", "Severe impairment": "0.94 g IV q12h", "Kidney failure / ESRD": "0.94 g IV q48h (dose after HD)" } },
+    cefiderocol:  { standard: "2 g IV q8h",       bands: { "Moderate impairment": "1.5 g IV q8h", "Severe impairment": "1 g IV q8h", "Kidney failure / ESRD": "0.75 g IV q12h (dose after HD)" } },
+    aztreonam:    { standard: "1-2 g IV q8h",     bands: { "Severe impairment": "50% of usual dose", "Kidney failure / ESRD": "25% of usual dose" } },
+    doripenem:    { standard: "500 mg IV q8h",    bands: { "Moderate impairment": "250 mg IV q8h", "Severe impairment": "250 mg IV q12h", "Kidney failure / ESRD": "limited data — 250 mg IV q12h" } },
+    imipenem:     { standard: "500 mg IV q6h",    bands: { "Moderate impairment": "500 mg IV q8h", "Severe impairment": "250-500 mg IV q12h", "Kidney failure / ESRD": "250 mg IV q12h + HD (seizure risk)" } },
+    ertapenem:    { standard: "1 g IV once daily", bands: { "Severe impairment": "500 mg IV once daily", "Kidney failure / ESRD": "500 mg IV once daily (supplement after HD)" } },
+    ampicillin:   { standard: "1-2 g IV q6h",     bands: { "Severe impairment": "1-2 g IV q8-12h", "Kidney failure / ESRD": "1-2 g IV q12h" } },
+    amoxicillin:  { standard: "500 mg-1 g PO q8h", bands: { "Severe impairment": "250-500 mg PO q12h", "Kidney failure / ESRD": "250-500 mg PO q24h" } },
+    amoxiclav:    { standard: "625 mg PO q8h / 1.2 g IV q8h", bands: { "Severe impairment": "q12h (avoid 875 mg tab)", "Kidney failure / ESRD": "q24h (avoid 875 mg tab)" } },
+    cotrimoxazole:{ standard: "per weight/indication", bands: { "Severe impairment": "50% of usual dose", "Kidney failure / ESRD": "not recommended (avoid)" } },
+    acyclovir:    { standard: "10 mg/kg IV q8h",  bands: { "Moderate impairment": "10 mg/kg IV q12h", "Severe impairment": "10 mg/kg IV q24h", "Kidney failure / ESRD": "5 mg/kg IV q24h (dose after HD)" } },
+    norfloxacin:  { standard: "400 mg PO q12h",   bands: { "Severe impairment": "400 mg PO once daily", "Kidney failure / ESRD": "400 mg PO once daily" } },
+    daptomycin:   { standard: "per weight q24h",  bands: { "Severe impairment": "same mg dose q48h", "Kidney failure / ESRD": "same mg dose q48h (dose after HD)" } },
+    pyrazinamide: { standard: "25 mg/kg once daily", bands: { "Severe impairment": "25-35 mg/kg 3×/week", "Kidney failure / ESRD": "25-35 mg/kg 3×/week (after HD)" } },
+    ethambutol:   { standard: "15 mg/kg once daily", bands: { "Severe impairment": "15-25 mg/kg 3×/week", "Kidney failure / ESRD": "15-25 mg/kg 3×/week (after HD)" } }
+  };
+  // CrCl → band name (aligned to app.js renalFunctionBand cutoffs: ≥90/60-89/30-59/15-29/<15).
+  function smdRenalBand(crcl) {
+    if (crcl == null) return null;
+    return crcl >= 90 ? "Normal" : crcl >= 60 ? "Mild impairment" : crcl >= 30 ? "Moderate impairment" : crcl >= 15 ? "Severe impairment" : "Kidney failure / ESRD";
+  }
+  // corrected dose for a drug at the patient's CrCl. Prefers app.js's clinician-reviewed
+  // RENAL_DOSING (via the global getRenalAdjustment, keyed on the drug label); falls back to the
+  // DRAFT SMD_RENAL_DOSING. Returns {dose, note, draft, noChange} or null (drug not dose-banded).
+  function smdRenalDoseFor(key, label, crcl) {
+    var band = smdRenalBand(crcl); if (!band) return null;
+    // 1) verified engine table (10 drugs) — matched by label substring
+    try {
+      if (typeof window.getRenalAdjustment === "function") {
+        var a = window.getRenalAdjustment(String(label || key), band);
+        if (a && a.needed) return { dose: a.adjusted, note: a.note || "", draft: false };
+        if (a && !a.needed) return { noChange: true, draft: false };
+      }
+    } catch (e) {}
+    // 2) draft table (Phase B)
+    var d = SMD_RENAL_DOSING[key];
+    if (d) { var bd = d.bands && d.bands[band]; return bd ? { dose: bd, note: "", draft: true } : { noChange: true, draft: true }; }
+    return null;
+  }
   // recommended drugs → their authored renal/hepatic dosing guidance (from ASP_DRUGS; no
   // fabricated doses — this is the "corrected-dose" guidance the app already ships per drug).
   function smdRxDosing(drugs) {
     var ref = window.ASP_DRUGS || {};
-    return (drugs || []).map(function (k) { var d = ref[k] || {}; return { label: d.label || k, renal: d.renal || "", hepatic: d.hepatic || "" }; })
+    return (drugs || []).map(function (k) { var d = ref[k] || {}; return { key: k, label: d.label || k, renal: d.renal || "", hepatic: d.hepatic || "" }; })
       .filter(function (d) { return d.renal || d.hepatic; });
   }
   // the syndrome's alternative regimens (engine data — real authored doses).
@@ -4160,7 +4212,14 @@
         renalHead = esc("CrCl ≈ " + crcl + " mL/min (" + tier + ") — " + (crcl < 50 ? "renal dose reduction applies." : "no renal dose reduction needed.") + " Per-drug:");
       }
       html += '<div class="smd-safety-row"><span class="smd-safety-ic">🫘</span><div><b>Renal</b> ' + renalHead;
-      if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) { return '<li><b>' + esc(d.label) + ':</b> ' + esc(d.renal || "see product label") + '</li>'; }).join("") + '</ul>';
+      if (rx.length) html += '<ul class="smd-safety-ul">' + rx.map(function (d) {
+        var dose = (crcl !== null) ? smdRenalDoseFor(d.key, d.label, crcl) : null;
+        var body;
+        if (dose && dose.dose) body = '<b>' + esc(dose.dose) + '</b>' + (dose.note ? " — " + esc(dose.note) : "") + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
+        else if (dose && dose.noChange) body = "usual dose — no reduction at this CrCl" + (dose.draft ? ' <span class="smd-safety-draft">draft · verify locally</span>' : "");
+        else body = esc(d.renal || "see product label");
+        return '<li><b>' + esc(d.label) + ':</b> ' + body + '</li>';
+      }).join("") + '</ul>';
       html += '</div></div>';
       // Hepatic: per-drug guidance (always); flag impairment when entered.
       var hepHead = hep ? esc(hep.text) : "Hepatic dosing — review if hepatic impairment; per-drug guidance:";

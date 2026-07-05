@@ -116,6 +116,19 @@ try {
   await ev(`var c=document.querySelector('#smdSafetyInputs [data-sfx="liverDisease"]');c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true})); return 1;`);
   chk("inline: hepatic flags impairment after ticking Liver disease", /impairment flagged/i.test(await lineTxt()));
 
+  // ---- Renal dose-band table: numeric corrected dose (verified engine table vs draft) ----
+  // verified: ciprofloxacin is in app.js RENAL_DOSING → numeric dose, NO draft tag
+  await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Ciprofloxacin 400 mg IV q12h</div></div>'; SMD_SAFETY.setFlag(true); SMD_SAFETY.render({age:80,weight:60,sex:"m",creatinine:2.6}); return 1;`);
+  const cipHtml = await ev(`var l=document.getElementById("smdSafetyLines");return l?l.innerHTML:""`);
+  chk("band: verified drug (cipro) shows a numeric corrected dose", /Ciprofloxacin:<\/b>\s*<b>[^<]*mg[^<]*<\/b>/i.test(cipHtml) || /Ciprofloxacin:[^<]*<b>[^<]*mg/i.test(cipHtml), (await ev(`var l=document.getElementById("smdSafetyLines");return l.innerText.split("Per-drug:")[1]||l.innerText`)||"").slice(0,80));
+  chk("band: verified drug has NO 'draft' tag", await ev(`var l=document.getElementById("smdSafetyLines");var li=Array.prototype.slice.call(l.querySelectorAll("li")).filter(function(x){return /Ciprofloxacin/i.test(x.textContent);})[0];return li? !/draft/i.test(li.innerHTML):false;`) === true);
+  // draft: ceftazidime is only in the Phase-B draft table → numeric dose + 'draft' tag
+  await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Ceftazidime 2 g IV q8h</div></div>'; SMD_SAFETY.render({age:80,weight:60,sex:"m",creatinine:2.6}); return 1;`);
+  chk("band: draft drug (ceftazidime) shows numeric dose + 'draft · verify' tag", await ev(`var l=document.getElementById("smdSafetyLines");var li=Array.prototype.slice.call(l.querySelectorAll("li")).filter(function(x){return /Ceftazidime/i.test(x.textContent);})[0];return li?(/q24h|q12h|mg|g /i.test(li.textContent) && /draft/i.test(li.innerHTML)):false;`) === true);
+  // no-adjustment drug (ceftriaxone) at low CrCl → 'no reduction' / usual dose
+  await ev(`document.getElementById("outputArea").innerHTML='<div class="qa-regimen"><div class="qa-regimen-row">Ceftriaxone 2 g IV once daily</div></div>'; SMD_SAFETY.render({age:80,weight:60,sex:"m",creatinine:2.6}); return 1;`);
+  chk("band: no-adjustment drug (ceftriaxone) does not invent a reduced dose", await ev(`var l=document.getElementById("smdSafetyLines");var li=Array.prototype.slice.call(l.querySelectorAll("li")).filter(function(x){return /Ceftriaxone/i.test(x.textContent);})[0];return li?/no adjustment|biliary|no reduction|usual dose/i.test(li.textContent):false;`) === true);
+
   // ---- Fast-follow: real-render E2E — drives the ACTUAL renderOutput seam (not a stubbed #outputArea) ----
   await ev(`SMD_SAFETY.setFlag(true); return 1;`);
   // wait for the engine + the reasoning.js renderOutput wrapper to be installed
