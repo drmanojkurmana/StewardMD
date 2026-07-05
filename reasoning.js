@@ -249,6 +249,65 @@
       find:{ seizure:44, alteredSensorium:18, fever:-8 },
       inv:["Glucose, electrolytes, calcium","EEG","Neuroimaging if first seizure/focal"], red:["Status epilepticus → emergency"],
       reason:"Witnessed convulsion with post-ictal state; exclude metabolic and structural causes." },
+    /* ---- Acute neurology & toxidrome differential expansion (evidence-governed, additive) ----
+       Each adds a candidate-specific find:{} rule only; the global scorer is unchanged.
+       src = source metadata for governance (title / edition / internal ref / last reviewed). */
+    { id:"hypertensive_enceph", name:"Hypertensive encephalopathy / PRES", system:"Neurology / Vascular",
+      find:{ alteredSensorium:34, hypertensionHx:30, headache:22, visualDisturbance:20, seizure:14, nauseaVomiting:8, focalNeuroDeficit:-6, fever:-14, neckStiffness:-12 },
+      inv:["Urgent BP + fundoscopy (grade III–IV retinopathy)","CT/MRI brain to exclude haemorrhage / stroke (PRES: posterior white-matter oedema)","Renal function + urinalysis"],
+      red:["Diagnosis of exclusion — image FIRST to exclude ICH/stroke; lower BP in a controlled, gradual manner"],
+      disc:["GCS","pupils/reactivity","focal deficit vs diffuse","CT/MRI result","fundoscopy"],
+      reason:"Severe hypertension with a diffuse encephalopathy (± seizures, visual disturbance) and no clear focal deficit suggests hypertensive encephalopathy / PRES — exclude haemorrhage first.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Hypertensive emergencies; PRES", rev:"2026-07", note:"Diagnosis of exclusion; neuroimaging mandatory." } },
+    { id:"post_ictal", name:"Post-ictal state", system:"Neurology",
+      find:{ seizure:34, alteredSensorium:26, clinicallyImproving:20, focalNeuroDeficit:8, fever:-10, neckStiffness:-12 },
+      inv:["Capillary + lab glucose","Electrolytes, calcium, magnesium","Neuroimaging if first seizure / focal / head injury"],
+      red:["If consciousness does NOT recover between or after seizures → exclude non-convulsive status; always check glucose"],
+      disc:["seizure duration & recurrence","time since seizure","glucose","recovery trajectory (GCS trend)"],
+      reason:"Transient reduced consciousness that is recovering after a witnessed seizure suggests a post-ictal state — exclude metabolic and structural triggers.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Seizures & status epilepticus", rev:"2026-07", note:"Post-ictal recovery distinguishes from ongoing/non-convulsive status." } },
+    { id:"status_epilepticus", name:"Convulsive status epilepticus", system:"Neurology / Emergency",
+      find:{ seizure:46, alteredSensorium:24, focalNeuroDeficit:6, fever:-6 },
+      inv:["ABC + capillary glucose immediately","Timed benzodiazepine per protocol","Electrolytes, calcium, magnesium, toxicology","EEG + neuroimaging once stabilised"],
+      red:["≥5 min of continuous seizures, or no recovery between seizures, is status epilepticus — a time-critical emergency"],
+      disc:["seizure duration","recovery between seizures","glucose","precipitant (drug/withdrawal/structural)"],
+      reason:"Continuous or repeated seizures without recovery of consciousness is convulsive status epilepticus — treat immediately.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Status epilepticus", rev:"2026-07", note:"Time-critical; benzodiazepine-first per protocol." } },
+    { id:"ncse", name:"Non-convulsive status epilepticus", system:"Neurology",
+      find:{ alteredSensorium:34, seizure:20, focalNeuroDeficit:6, fever:-8, neckStiffness:-10 },
+      inv:["Urgent EEG (diagnostic)","Glucose, electrolytes","Neuroimaging"],
+      red:["Prolonged unexplained altered sensorium (± subtle motor signs) — consider NCSE; needs urgent EEG"],
+      disc:["EEG","subtle motor signs (eyelid/limb twitching)","glucose","known epilepsy"],
+      reason:"Persistent unexplained altered consciousness with subtle motor signs may be non-convulsive status epilepticus — confirm on EEG.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Status epilepticus (NCSE)", rev:"2026-07", note:"EEG-dependent diagnosis." } },
+    { id:"cvt", name:"Cerebral venous sinus thrombosis", system:"Neurology / Vascular",
+      find:{ headache:30, seizure:22, focalNeuroDeficit:20, alteredSensorium:16, papilledema:16, visualDisturbance:10, fever:-4 },
+      inv:["MR venography or CT venography (diagnostic)","Thrombophilia / pregnancy / OCP history","D-dimer (supportive, not exclusionary)"],
+      red:["Headache + seizures + focal signs, especially young / peripartum / prothrombotic — image the venous sinuses"],
+      disc:["pregnancy/postpartum/OCP","prothrombotic history","CT/MR venography","fundoscopy"],
+      reason:"Headache with seizures and focal deficits, especially in a prothrombotic or peripartum patient, raises cerebral venous sinus thrombosis.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Cerebral venous thrombosis", rev:"2026-07", note:"Consider in atypical stroke/seizure with headache." } },
+    { id:"uraemic_enceph", name:"Uraemic encephalopathy", system:"Neuro / Renal",
+      find:{ alteredSensorium:34, renalImpairment:34, asterixis:20, seizure:8, oliguria:10, fever:-12, neckStiffness:-12 },
+      inv:["Renal function + electrolytes","Consider dialysis","Exclude other metabolic causes"],
+      red:["Encephalopathy with severe renal failure — reversible with dialysis"],
+      disc:["urea/creatinine","urine output","other metabolic contributors","dialysis status"],
+      reason:"Diffuse encephalopathy with severe renal impairment (± asterixis) suggests uraemic encephalopathy.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Uraemic encephalopathy", rev:"2026-07", note:"Reversible; dialysis-responsive." } },
+    { id:"alcohol_withdrawal", name:"Alcohol withdrawal (seizure / encephalopathy)", system:"Neuro / Toxicology",
+      find:{ alcoholExcess:40, seizure:22, alteredSensorium:16, tachycardia:12, hypertensionHx:6, fever:-8 },
+      inv:["Assess with CIWA-Ar","Glucose, Mg/K/PO4","Thiamine BEFORE glucose","Exclude head injury, infection, metabolic cause"],
+      red:["Give thiamine before glucose; benzodiazepine-based protocol; watch for delirium tremens"],
+      disc:["alcohol history & last drink","autonomic signs (HR/BP/tremor)","glucose","thiamine given?"],
+      reason:"Seizure with autonomic hyperactivity in alcohol dependence suggests alcohol withdrawal — give thiamine and treat per protocol.",
+      src:{ t:"Harrison's Principles of Internal Medicine", ed:"21e", ref:"Alcohol withdrawal", rev:"2026-07", note:"Thiamine before glucose to prevent Wernicke." } },
+    { id:"carbamate", name:"Carbamate / cholinergic poisoning", system:"Toxicology",
+      find:{ miosisSecretions:36, drugOverdose:16, alteredSensorium:12, bradycardia:10, diarrhea:14, nauseaVomiting:6 },
+      inv:["Clinical cholinergic toxidrome","Cholinesterase (recovers faster than organophosphate)"],
+      red:["Atropine titrated to secretions; pralidoxime usually not required (self-limiting carbamylation)"],
+      disc:["exposure/agent","pupils/secretions","heart rate","fasciculations"],
+      reason:"A cholinergic toxidrome after carbamate exposure resembles organophosphate poisoning but is usually shorter-lived.",
+      src:{ t:"WHO / national poisoning guidance", ed:"—", ref:"Cholinergic (anticholinesterase) toxidrome", rev:"2026-07", note:"Distinguished from OP by shorter course; pralidoxime often unnecessary." } },
     { id:"vasovagal_syncope", name:"Vasovagal / orthostatic syncope", system:"Neurology / Cardiology",
       find:{ syncope:52, palpitations:-6, exertionalChestPain:-10, fever:-10, nauseaVomiting:6 },
       inv:["Lying/standing BP","ECG (exclude arrhythmia)"], red:["Exertional or cardiac syncope needs cardiac workup"],
@@ -857,7 +916,7 @@
     return { id: d.id, name: d.name, system: d.system, inf: false, matched: false,
       score: sc, rankScore: sc + rankSpec(sup), supporting: sup.sort(function (a, b) { return find[b] - find[a]; }),
       contra: contra.sort(function (a, b) { return find[a] - find[b]; }),
-      missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], tools: d.tools || [] };
+      missing: missing, reason: d.reason || "", red: d.red || [], inv: d.inv || [], disc: d.disc || [], tools: d.tools || [] };
   }
 
   function differential() {
@@ -1015,6 +1074,10 @@
     // red-flag review alert for extracted emergency findings (from the NLP layer), still selected
     var rf = ((S._lastExtract && S._lastExtract.redFlags) || []).filter(function (k) { return S.f[k]; });
     var banner = rf.length ? '<div class="dx-redflag">⚠ Urgent red flags for review: ' + rf.map(function (k) { return esc(lbl(k)); }).join(" · ") + '</div>' : "";
+    // Acute-neuro safety cue: altered sensorium with a focal/seizure/pupil sign → image before committing.
+    if (S.f.alteredSensorium && (S.f.focalNeuroDeficit || S.f.seizure || S.f.anisocoria || S.f.papilledema)) {
+      banner += '<div class="dx-redflag">🧠 Altered sensorium with a focal / seizure / pupillary sign — check glucose now and obtain urgent neuroimaging (CT/MRI) to exclude a structural or vascular emergency before diagnosing a primary infection.</div>';
+    }
     el.innerHTML = banner + keys.map(function (k) {
       return '<button class="dx-sel-chip" data-f="' + k + '">' + esc(lbl(k)) + ' ✕</button>';
     }).join("");
@@ -2175,6 +2238,7 @@
       whyNot +
       (r.red && r.red.length ? '<div class="dx-d-row red"><b>Red flags</b><ul>' + r.red.map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
       (r.inv && r.inv.length ? '<div class="dx-d-row"><b>Suggested investigations</b><ul>' + r.inv.slice(0,5).map(function (x){return '<li>'+esc(x)+'</li>';}).join("") + '</ul></div>' : '') +
+      (r.disc && r.disc.length ? '<div class="dx-d-row"><b>Required next information — discriminators</b><div class="dx-disc">' + r.disc.slice(0,6).map(function (x){return '<span class="dx-disc-pill">'+esc(x)+'</span>';}).join("") + '</div></div>' : '') +
       (function () {
         if (!reasonV2()) return "";
         var mm = mimicsFor(r.id, r.inf); if (!mm.length) return "";
@@ -2387,8 +2451,28 @@
       b.addEventListener("click", function (e) { e.stopPropagation(); toggleCompare(b.getAttribute("data-cmp")); });
     });
     renderCompare(d);
+    recordRecentCase(d);
     // NB: S.prev is the PRE-change snapshot taken in addFinding — do not
     // overwrite it here, or confidence deltas would vanish on the next render.
+  }
+  // Log the working case into the rolling Recent-Cases trail (last 5). Upserts one
+  // entry per case (S._caseId) so it stays current as findings evolve; a snapshot of
+  // the findings lets a tap reopen this workspace and restore the case.
+  function recordRecentCase(d) {
+    try {
+      if (!window.SMD_RECENT) return;
+      var keys = Object.keys(S.f); if (!keys.length) return;
+      if (!S._caseId) S._caseId = SMD_RECENT.newId("reasoning");
+      var lead = null;
+      var rk = function (x) { return x.rankScore != null ? x.rankScore : x.score; };
+      (d.inf || []).concat(d.ni || []).forEach(function (r) { if (!lead || rk(r) > rk(lead)) lead = r; });
+      window.SMD_RECENT.record({
+        caseId: S._caseId, feature: "reasoning",
+        title: lead ? lead.name : "Clinical reasoning",
+        summary: keys.length + " finding" + (keys.length === 1 ? "" : "s") + (lead ? " · leading: " + lead.name : ""),
+        snapshot: { caseId: S._caseId, findings: (function () { var o = {}; keys.forEach(function (k) { o[k] = true; }); return o; })(), workspace: true }
+      });
+    } catch (e) {}
   }
   // re-render only the columns (used on expand so we don't reset prev/delta)
   function renderColsOnly() {
@@ -2526,7 +2610,7 @@
     });
   }
 
-  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
+  function resetAll() { S.f = {}; S.prev = {}; S.expanded = {}; S.started = false; S.system = null; S.showRare = false; S.compare = []; S.timeline = []; if (!S._restoring) S._caseId = null; filter = ""; closeMgmt(); var si = root && root.querySelector("#dxSearch"); if (si) si.value = ""; recompute(); }
   function open(opts) {
     ensureRoot();
     if (opts && opts.workspace) { S.workspace = true; S.advOpen = true; }
@@ -2538,7 +2622,21 @@
     // focus the findings search so the clinician can start typing immediately
     try { var sif = root.querySelector("#dxSearch"); if (sif) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
   }
-  function openWorkspace() { open({ workspace: true }); }
+  function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
+  // Reopen the workspace and restore a Recent-Cases snapshot (findings + case id) so
+  // the clinician continues exactly where they left off.
+  function restore(snap) {
+    snap = snap || {};
+    S._restoring = true;
+    try {
+      resetAll();
+      var f = snap.findings || {};
+      for (var k in f) { if (f[k] && VALID[k]) S.f[k] = true; }
+      S.started = Object.keys(S.f).length > 0;
+      S._caseId = snap.caseId || SMD_RECENT && SMD_RECENT.newId("reasoning") || null;
+      openWorkspace();
+    } catch (e) {} finally { S._restoring = false; }
+  }
   function close() {
     // sync findings back to the legacy wizard (one source of truth)
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
@@ -2606,6 +2704,8 @@
       ".dx-sr-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:800;font-size:15px;flex:0 0 auto}",
       ".dx-sr-lbl{flex:1}",
       ".dx-redflag{width:100%;box-sizing:border-box;font:800 12.5px var(--sans);color:var(--red,#ab1c2c);background:var(--red-bg,#fbe7e9);border:1px solid var(--red-line,#efa9b1);border-radius:10px;padding:9px 12px;margin-bottom:8px}",
+      ".dx-disc{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}",
+      ".dx-disc-pill{font:600 11.5px var(--sans);color:var(--ink,#243b53);background:var(--panel,#f2f6fb);border:1px solid var(--line,#d6e0ea);border-radius:999px;padding:4px 10px}",
       ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
       ".dx-mgmt.on{display:flex;animation:dxIn .22s ease}",
       ".dx-mgmt-top{padding:13px 16px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}",
@@ -3152,7 +3252,7 @@
     setTimeout(renderImported, 60);
   }
 
-  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, _state: S, _ni: DDX_NI, _differential: differential,
+  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.

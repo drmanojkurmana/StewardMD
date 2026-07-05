@@ -5,10 +5,13 @@
  */
 import { spawn } from "node:child_process";
 import { setTimeout as sleep } from "node:timers/promises";
+import { existsSync } from "node:fs";
 const BASE = (process.env.BASE || "http://localhost:5173/").replace(/\/?$/, "/");
 const PORT = Number(process.env.CDP_PORT || 9537);
-const CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR||"/tmp")}/tmp/tb-chrome`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
+const CHROME = process.env.CHROME_BIN
+  || ["/opt/pw-browsers/chromium-1194/chrome-linux/chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"].find((p) => existsSync(p))
+  || "google-chrome";
+const chrome = spawn(CHROME, [...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean), "--headless=new", `--remote-debugging-port=${PORT}`, `--user-data-dir=${(process.env.CLAUDE_JOB_DIR||"/tmp")}/tmp/tb-chrome`, "--no-first-run", "--disable-gpu"], { stdio: "ignore" });
 let id = 1; const pend = new Map(); let ws, sid;
 const call = (m, p) => { const i = id++; return new Promise((r) => { pend.set(i, r); ws.send(JSON.stringify({ id: i, method: m, params: p || {}, sessionId: sid })); }); };
 const ev = async (e) => { const r = await call("Runtime.evaluate", { expression: `(async function(){try{${e}}catch(x){return '__ERR__'+x.message}})()`, returnByValue: true, awaitPromise: true }); return r.result && r.result.result ? r.result.result.value : null; };

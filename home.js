@@ -675,7 +675,7 @@
     return '' +
       '<header class="v3-header">' +
         '<button class="v3-ic" data-act="menu" aria-label="Menu">' + svg("menu") + '</button>' +
-        '<div class="v3-brand"><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
+        '<div class="v3-brand"><span class="v3-logo" aria-hidden="true"></span><div class="v3-brand-tt">Steward<span class="v3-md">MD</span></div></div>' +
         '<div class="v3-spacer"></div>' +
         '<button class="v3-ic" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + svg("moon") + '</button>' +
         '<button class="v3-ic v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + svg("bell") + '</button>' +
@@ -1621,7 +1621,7 @@
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s8";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s9";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
@@ -1644,10 +1644,22 @@
     var bar = body.querySelector(".mcp-storage-bar");
     if (bar && bar.nextSibling) body.insertBefore(b, bar.nextSibling); else body.insertBefore(b, body.firstChild);
   }
+  // Inject a "Recent Cases" button into My Cases → opens the rolling last-5 trail.
+  function injectRecentCasesBtn() {
+    var body = document.getElementById("mcpBody"); if (!body) return;
+    if (body.querySelector("#smdRecentCasesBtn")) return;
+    var b = document.createElement("button");
+    b.id = "smdRecentCasesBtn"; b.type = "button";
+    b.innerHTML = "🕐 Recent Cases <span style=\"font-weight:600;opacity:.7\">— last 5 you worked on</span>";
+    b.style.cssText = "display:block;width:100%;margin:0 0 12px;padding:12px 14px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff);color:var(--teal,#0F766E);font:700 13px var(--sans,'Inter',system-ui,sans-serif);cursor:pointer;text-align:left";
+    b.addEventListener("click", function () { if (window.SMD_openRecentCases) window.SMD_openRecentCases(); else toast("Recent cases loading…"); });
+    var bar = body.querySelector(".mcp-storage-bar");
+    if (bar && bar.nextSibling) body.insertBefore(b, bar.nextSibling); else body.insertBefore(b, body.firstChild);
+  }
   function wrapMyCases() {
     if (typeof window.openMyCases === "function" && !window.openMyCases._smdWrapped) {
       var orig = window.openMyCases;
-      window.openMyCases = function () { var r = orig.apply(this, arguments); try { injectMyCasesSearch(); } catch (e) {} return r; };
+      window.openMyCases = function () { var r = orig.apply(this, arguments); try { injectRecentCasesBtn(); } catch (e) {} try { injectMyCasesSearch(); } catch (e) {} return r; };
       window.openMyCases._smdWrapped = true;
     }
   }
