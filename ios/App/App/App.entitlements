@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Sign in with Apple (Apple Guideline 4.8, required because Google sign-in is offered).
+	     Enable the matching capability in Xcode ▸ Signing & Capabilities and in your Apple
+	     Developer App ID; Xcode will keep this file in sync with the provisioning profile. -->
+	<key>com.apple.developer.applesignin</key>
+	<array>
+		<string>Default</string>
+	</array>
+	<!-- Remote notifications (medical-update push). Xcode flips this to "production" on Archive. -->
+	<key>aps-environment</key>
+	<string>development</string>
+</dict>
+</plist>

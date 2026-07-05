@@ -39,9 +39,14 @@ function authorise(request, env) {
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && request.headers.get("X-App-Token") === env.AI_APP_TOKEN) return true;
   // Exact host allowlist (NOT endsWith — that matched attacker domains like
   // "evil-stewardmd.in"). Empty Origin is still allowed for same-origin GETs,
-  // which browsers send without an Origin header.
+  // which browsers send without an Origin header. The Capacitor native app is
+  // bundled locally, so its requests carry the localhost/capacitor origin (or,
+  // via CapacitorHttp, no Origin) — allow those so the iOS/Android apps reach AI.
+  // (Cost is bounded server-side by per-IP/per-user quota + the circuit breaker in
+  // _usage.js, which is the real abuse control — the Origin check is not auth.)
   const o = request.headers.get("Origin") || "";
-  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in" || o === "";
+  return o === "https://stewardmd.in" || o === "https://www.stewardmd.in"
+    || o === "https://localhost" || o === "capacitor://localhost" || o === "";
 }
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 
