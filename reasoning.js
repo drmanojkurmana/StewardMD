@@ -2793,12 +2793,77 @@
     // to open the full antibiotic-stewardship console, so nothing is lost.
     if (window.DX && DX.openRef) DX.openRef(id);
   }
+  // ---- recent search history (replaces the hardcoded #spChips example chips) --------------
+  var SMD_RECENT_KEY = "smd_recent_searches", SMD_RECENT_MAX = 8;
+  function smdRecentGet() { try { var a = JSON.parse(localStorage.getItem(SMD_RECENT_KEY) || "[]"); return Array.isArray(a) ? a.filter(function (x) { return typeof x === "string"; }) : []; } catch (e) { return []; } }
+  function smdRecentPush(q) {
+    q = String(q || "").trim(); if (q.length < 2 || q.length > 60) return;
+    try {
+      var a = smdRecentGet().filter(function (x) { return x.toLowerCase() !== q.toLowerCase(); });
+      a.unshift(q);
+      localStorage.setItem(SMD_RECENT_KEY, JSON.stringify(a.slice(0, SMD_RECENT_MAX)));
+    } catch (e) {}
+  }
+  function smdRecentClear() { try { localStorage.removeItem(SMD_RECENT_KEY); } catch (e) {} smdRenderRecentChips(); }
+  function smdRecentInjectCSS() {
+    if (document.getElementById("smd-recent-css")) return;
+    var st = document.createElement("style"); st.id = "smd-recent-css";
+    st.textContent =
+      "#spChips{display:none!important}" +   // kill the native example chips (race-proof vs app.js re-writes)
+      ".smd-recent-box{margin:0 0 6px}" +
+      ".smd-recent-h{display:flex;align-items:center;justify-content:space-between;font:700 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#64748b);margin:2px 2px 8px}" +
+      ".smd-recent-clear{background:none;border:none;color:var(--teal,#0e6e63);font:700 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.03em;cursor:pointer;padding:2px 4px}" +
+      ".smd-recent-row{display:flex;flex-wrap:wrap;gap:8px}";
+    document.head.appendChild(st);
+  }
+  // Render the user's recent searches into our OWN box above #spResults (the native #spChips is
+  // CSS-hidden). Shown only when the query is empty and history exists.
+  function smdRenderRecentChips() {
+    smdRecentInjectCSS();
+    var results = document.getElementById("spResults"); if (!results || !results.parentNode) return;
+    var inp = document.getElementById("smdSearchInput"), typing = !!(inp && inp.value.trim());
+    var recent = smdRecentGet(), box = document.getElementById("smdRecentBox");
+    if (!recent.length || typing) { if (box) box.style.display = "none"; return; }
+    if (!box) { box = document.createElement("div"); box.id = "smdRecentBox"; box.className = "smd-recent-box"; results.parentNode.insertBefore(box, results); }
+    box.style.display = "";
+    box.innerHTML = '<div class="smd-recent-h"><span>Recent searches</span><button type="button" id="smdRecentClear" class="smd-recent-clear">Clear</button></div>' +
+      '<div class="smd-recent-row">' + recent.map(function (q) { return '<button type="button" class="sp-chip smd-recent-chip" data-rq="' + esc(q) + '">🕘 ' + esc(q) + '</button>'; }).join("") + '</div>';
+    Array.prototype.forEach.call(box.querySelectorAll(".smd-recent-chip"), function (b) {
+      b.addEventListener("click", function () {
+        var q = b.getAttribute("data-rq"), i2 = document.getElementById("smdSearchInput");
+        smdRecentPush(q);
+        if (i2) { i2.value = q; i2.dispatchEvent(new Event("input", { bubbles: true })); i2.focus(); }
+        else if (window.doSearch) window.doSearch(q);
+      });
+    });
+    var cl = document.getElementById("smdRecentClear"); if (cl) cl.addEventListener("click", function (e) { e.stopPropagation(); smdRecentClear(); });
+  }
   // ---- global search: inject a KB section into #spResults after native render ----
   function wireGlobalSearch() {
     var inp = document.getElementById("smdSearchInput");
     if (!inp || inp.__smdKbWired) return;
     inp.__smdKbWired = true;
-    inp.addEventListener("input", function () { var q = inp.value; setTimeout(function () { kbInjectSearch(q); }, 0); });
+    try { inp.placeholder = "Search a disease, antibiotic or calculator…"; } catch (e) {}   // drop the example list from the placeholder
+    inp.addEventListener("input", function () { var q = inp.value; setTimeout(function () { kbInjectSearch(q); smdRenderRecentChips(); }, 0); });
+    // record recent searches only on a COMMITTED search (Enter, or opening a result) — not per keystroke
+    inp.addEventListener("keydown", function (e) { if ((e.key === "Enter" || e.keyCode === 13) && inp.value.trim().length >= 2) smdRecentPush(inp.value); });
+    var res = document.getElementById("spResults");
+    if (res && !res.__smdRecentWired) {
+      res.__smdRecentWired = true;
+      res.addEventListener("click", function (ev) {
+        var t = ev.target; if (t && t.closest && t.closest("a,button,[data-id],[onclick],.sp-result,.sp-item,li")) { if (inp.value.trim().length >= 2) smdRecentPush(inp.value); }
+      });
+    }
+    smdRenderRecentChips();
+  }
+  // Wire recent-search history each time the search panel opens (openSearch is a global in
+  // app.js; wrap it once — never edits app.js).
+  function smdWireRecentSearch() {
+    if (window.__smdRecentSearchWrapped || typeof window.openSearch !== "function") { smdRecentInjectCSS(); return; }
+    window.__smdRecentSearchWrapped = true;
+    var orig = window.openSearch;
+    window.openSearch = function () { var r = orig.apply(this, arguments); try { setTimeout(function () { wireGlobalSearch(); smdRenderRecentChips(); }, 30); } catch (e) {} return r; };
+    smdRecentInjectCSS();
   }
   function kbInjectSearch(q) {
     var box = document.getElementById("spResults"); if (!box) return;
@@ -2918,7 +2983,7 @@
       ".kblib-sys{font-size:10.5px;color:#94a3b8}";
     document.head.appendChild(st);
   }
-  function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
+  function smdWireKBSurfaces() { try { kbInjectCSS(); } catch (e) {} try { wireGlobalSearch(); } catch (e) {} try { smdWireRecentSearch(); } catch (e) {} try { wireSyndromeLibrary(); } catch (e) {} }
 
   /* ---------------------------------------------------------------------- *
    * IMPORT PATIENT — pull a Ward Sync patient's labs/imaging/culture into the
