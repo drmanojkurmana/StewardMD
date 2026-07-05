@@ -28,6 +28,7 @@ case you want to re-frame or crop differently.
 10. **10-home-dark** — dark mode (home)
 11. **11-meningitis-dark** — dark mode (decision screen)
 12. **12-antibiogram-dark** — dark mode (coverage grid)
+13. **13-infusion-pump** — weight-based vasopressor/infusion pump rates + nurse-mode prep (ICU)
 
 ## Upload guidance
 
