@@ -960,7 +960,10 @@
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
-          '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off">' +
+          '<div class="dx-search-box">' +
+            '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
+            '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
+          '</div>' +
           '<div id="dxSel" class="dx-selected"></div>' +
           '<div id="dxSuggest" class="dx-suggest"></div>' +
           '<div id="dxPicker" class="dx-picker"></div>' +
@@ -980,7 +983,27 @@
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
     // Desktop-Chrome fix: stop any document/global key handler from swallowing
     // the keystrokes typed into the findings search box.
-    si.addEventListener("keydown", function (e) { e.stopPropagation(); });
+    si.addEventListener("keydown", function (e) {
+      e.stopPropagation();
+      var drop = root.querySelector("#dxSearchDrop");
+      var open = drop && drop.style.display !== "none";
+      var rows = (open && drop._rows) ? drop._rows : [];
+      if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+        if (!rows.length) return;
+        e.preventDefault();
+        var hi = (typeof drop._hi === "number") ? drop._hi : -1;
+        hi = (e.key === "ArrowDown") ? (hi + 1) % rows.length : (hi - 1 + rows.length) % rows.length;
+        drop._hi = hi;
+        for (var i = 0; i < rows.length; i++) rows[i].classList.toggle("hi", i === hi);
+        if (rows[hi]) rows[hi].scrollIntoView({ block: "nearest" });
+      } else if (e.key === "Enter") {
+        if (!rows.length) return;
+        var t = (drop._hi >= 0 && rows[drop._hi]) ? rows[drop._hi] : rows[0];
+        if (t) { e.preventDefault(); t.click(); }
+      } else if (e.key === "Escape") {
+        if (open) { e.preventDefault(); filter = ""; si.value = ""; renderPicker(); }
+      }
+    });
     si.addEventListener("keypress", function (e) { e.stopPropagation(); });
     return root;
   }
@@ -1008,9 +1031,14 @@
 
   function renderPicker() {
     var el = root.querySelector("#dxPicker");
+    var drop = root.querySelector("#dxSearchDrop");
+    var si0 = root.querySelector("#dxSearch");
 
-    // --- search mode: flat filtered results across the whole ontology ---
+    // --- search mode: filtered results in a DROPDOWN anchored under the search box
+    //     (so they're visible right under the cursor, above the keyboard) ---
     if (filter) {
+      el.innerHTML = "";                       // don't also render results far down the page
+      if (si0) si0.setAttribute("aria-expanded", "true");
       // match the label OR any clinical synonym (FT_SYN) so colloquial terms
       // ("sob"→dyspnea, "creps"→crackles, "loose stool"→diarrhea) are findable.
       var matches = [], seen = {};
@@ -1027,25 +1055,27 @@
       var dzMatches = diseaseDirectory().filter(function (z) {
         return z.name.toLowerCase().indexOf(filter) >= 0 || (z.system || "").toLowerCase().indexOf(filter) >= 0;
       });
-      el.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Findings' + (matches.length ? ' <span class="dx-sr-count">' + matches.length + '</span>' : '') + '</div><div class="dx-search-list">' +
+      drop.style.display = "block";
+      drop.innerHTML = '<div class="dx-cat"><div class="dx-cat-h">Findings' + (matches.length ? ' <span class="dx-sr-count">' + matches.length + '</span>' : '') + '</div><div class="dx-search-list">' +
         (matches.length ? matches.map(function (fl) { return '<button class="dx-search-row" data-f="' + fl.key + '"><span class="dx-sr-plus">+</span><span class="dx-sr-lbl">' + esc(fl.label) + '</span></button>'; }).join("") : '<div class="dx-sel-empty" style="padding:14px">No matching findings.</div>') +
         '</div></div>' +
         (dzMatches.length ? '<div class="dx-cat"><div class="dx-cat-h">Diseases <span class="dx-sr-count">' + dzMatches.length + '</span></div><div class="dx-search-list">' +
           dzMatches.slice(0, 50).map(function (z) { return '<button class="dx-search-row" data-dz="' + z.id + '"><span class="dx-sr-plus">📖</span><span class="dx-sr-lbl">' + esc(z.name) + (z.system ? '<span class="dx-sr-sys">' + esc(z.system) + (z.inf ? " · infective" : "") + '</span>' : '') + '</span></button>'; }).join("") +
           '</div></div>' : '');
-      el.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
-      el.querySelectorAll(".dx-search-row[data-dz]").forEach(function (b) { b.addEventListener("click", function () { openDiseaseRef(b.getAttribute("data-dz")); }); });
+      drop.querySelectorAll(".dx-search-row[data-f]").forEach(function (b) { b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
+      drop.querySelectorAll(".dx-search-row[data-dz]").forEach(function (b) { b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { openDiseaseRef(b.getAttribute("data-dz")); }); });
+      drop._rows = drop.querySelectorAll(".dx-search-row"); drop._hi = -1;   // for keyboard ↑/↓/Enter navigation
       // suggested findings as chips BELOW the search list — contextual to the
       // current differential (same source as the always-on suggest strip).
       if (Object.keys(S.f).length) {
         try {
           var sg = suggestionKeys();
           if (sg.length) {
-            el.insertAdjacentHTML("beforeend",
+            drop.insertAdjacentHTML("beforeend",
               '<div class="dx-cat" style="margin-top:12px"><div class="dx-cat-h">💡 Suggested findings</div><div class="dx-chips">' +
               sg.map(function (k) { return '<button class="dx-chip sug" data-f="' + k + '">+ ' + esc(LABEL[k]) + '</button>'; }).join("") +
               '</div></div>');
-            el.querySelectorAll(".dx-chip.sug[data-f]").forEach(function (b) { b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
+            drop.querySelectorAll(".dx-chip.sug[data-f]").forEach(function (b) { b.addEventListener("mousedown", function (e) { e.preventDefault(); }); b.addEventListener("click", function () { addFinding(b.getAttribute("data-f")); }); });
           }
         } catch (e) {}
       }
@@ -1056,6 +1086,10 @@
         '</div></div>';
       wireAddChips(el); return; */
     }
+
+    // not searching → hide the dropdown, restore the normal workflow
+    if (drop) { drop.style.display = "none"; drop.innerHTML = ""; }
+    if (si0) si0.setAttribute("aria-expanded", "false");
 
     // --- progressive consultant workflow ---
     var html = "";
@@ -2511,6 +2545,13 @@
       ".dx-search-row{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid var(--line);padding:13px 14px;cursor:pointer;font:600 14.5px var(--sans);color:var(--ink)}",
       ".dx-search-row:last-child{border-bottom:none}",
       ".dx-search-row:active{background:var(--teal-soft)}",
+      ".dx-search-row.hi{background:var(--teal-soft)}",
+      ".dx-search-box{position:relative;margin-bottom:9px}",
+      ".dx-search-box .dx-search{margin-bottom:0}",
+      ".dx-search-drop{position:absolute;top:calc(100% + 4px);left:0;right:0;z-index:60;background:var(--panel);border:1.5px solid var(--teal);border-radius:13px;box-shadow:0 16px 44px rgba(0,0,0,.28);max-height:min(52vh,440px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:6px}",
+      ".dx-search-drop .dx-search-list{max-height:none;overflow:visible;border:none;margin-top:0}",
+      ".dx-search-drop .dx-cat{padding:2px}",
+      ".dx-search-drop .dx-cat-h{padding:8px 10px 5px;font:800 11px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--slate-soft)}",
       ".dx-sr-plus{display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--teal-soft);color:var(--teal);font-weight:800;font-size:15px;flex:0 0 auto}",
       ".dx-sr-lbl{flex:1}",
       ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
