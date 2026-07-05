@@ -222,10 +222,17 @@ try {
     ok(`${eid}/${sid3} → emergency + ladder 5`, r.emergency === true && r.ladder === 5, "emergency=" + r.emergency + " ladder=" + r.ladder);
   }
 
-  /* watermark accessibility + specialty shell */
+  /* branch selector routing: pick a branch → set it + return home (NOT open engine);
+     then "Start a new case" opens THAT branch's engine (not IM). */
+  console.log("\n── branch selector routing (set → home → start case) ──");
+  await ev(`window.SMD_WS.open(); return 1;`); await sleep(350);
+  await ev(`document.querySelector('.sw-opt[data-ws="surgery"]').click(); return 1;`); await sleep(450);
+  ok("selector: picking a branch does NOT open the engine (returns home)", (await ev(`return !document.querySelector('#swShell.on');`)) === true);
+  ok("selector: the picked branch becomes the active workspace", (await ev(`return window.SMD_WS.active();`)) === "surgery");
+  ok("Start-a-new-case routes into the active specialty (startActiveCase opens its shell)", (await ev(`var r=window.SMD_WS.startActiveCase(); return r===true && !!document.querySelector('#swShell.on');`)) === true);
+
+  /* watermark accessibility + specialty shell (shell now open on Surgery) */
   console.log("\n── branch watermark (decorative, non-interactive) ──");
-  await ev(`window.SMD_WS.open(); return 1;`); await sleep(400);
-  await ev(`var b=document.querySelector('.sw-opt[data-ws="surgery"]'); if(b) b.click(); return 1;`); await sleep(500);
   ok("specialty shell opened (#swShell.on)", (await ev(`return !!document.querySelector('#swShell.on');`)) === true);
   ok("watermark present (.sw-wm)", (await ev(`return !!document.querySelector('#swShell .sw-wm');`)) === true);
   ok("watermark is aria-hidden (screen-reader safe)", (await ev(`var w=document.querySelector('#swShell .sw-wm'); if(!w) return false; return w.getAttribute('aria-hidden')==='true' || !!w.querySelector('[aria-hidden="true"]');`)) === true);
@@ -251,6 +258,8 @@ try {
   console.log("\n── Internal Medicine reachability (protected default) ──");
   await ev(`try{document.querySelector('#swShell #swToIM').click();}catch(e){} return 1;`); await sleep(600);
   ok("switching to Internal Medicine opens the real reasoning overlay (#dxOverlay.on)", (await ev(`return !!document.querySelector('#dxOverlay.on');`)) === true);
+  // with IM as the active workspace, Start-a-new-case defers to Home's own IM chooser
+  ok("Internal Medicine active → startActiveCase returns false (Home runs its own IM flow)", (await ev(`window.SMD_WS.setDefault('internal_medicine'); return window.SMD_WS.active()==='internal_medicine' && window.SMD_WS.startActiveCase()===false;`)) === true);
 
   console.log(`\n${FAIL === 0 ? "ALL GREEN — Specialty Workspaces invariants hold (" + PASS + " checks)" : FAIL + " FAILED, " + PASS + " passed"}`);
   if (FAIL > 0) process.exitCode = 1;

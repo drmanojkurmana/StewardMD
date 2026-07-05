@@ -261,10 +261,11 @@
     if (opts.inCase) {
       h += '<div class="sw-modeseg" id="swMode">' +
         '<button data-mode="quick"' + (prefs.lastUsedAssessmentMode !== "advanced" ? ' class="on"' : '') + '>Quick assessment</button>' +
-        '<button data-mode="advanced"' + (prefs.lastUsedAssessmentMode === "advanced" ? ' class="on"' : '') + '>Advanced assessment</button></div>' +
-        '<div class="sw-usefor"><label><input type="radio" name="swUse" value="case" checked> Use for this case only</label>' +
-        '<label><input type="radio" name="swUse" value="default"> Make my default workspace</label></div>';
+        '<button data-mode="advanced"' + (prefs.lastUsedAssessmentMode === "advanced" ? ' class="on"' : '') + '>Advanced assessment</button></div>';
     }
+    // "this case / make default" choice — shown for the selector too, so picking a branch asks first.
+    h += '<div class="sw-usefor"><label><input type="radio" name="swUse" value="case" checked> ' + (opts.inCase ? "Use for this case only" : "Use for my next case") + '</label>' +
+      '<label><input type="radio" name="swUse" value="default"> Make my default workspace</label></div>';
     REG.forEach(function (r) {
       h += '<button class="sw-opt" data-ws="' + r.id + '"><span class="ic">' + ic(ICONS[r.id]) + '</span>' +
         '<span class="tx"><span class="nm">' + r.name + '</span><span class="sb">' + r.subtitle + '</span></span>' +
@@ -281,9 +282,9 @@
     _sheet.querySelectorAll(".sw-opt").forEach(function (b) {
       b.addEventListener("click", function () {
         var id = b.getAttribute("data-ws");
-        var asDefault = !opts.inCase;
-        if (opts.inCase) { var r = _sheet.querySelector('input[name="swUse"]:checked'); asDefault = r && r.value === "default"; }
-        chooseWorkspace(id, { asDefault: asDefault, inCase: opts.inCase });
+        var r = _sheet.querySelector('input[name="swUse"]:checked');
+        var asDefault = !!(r && r.value === "default");
+        chooseWorkspace(id, { asDefault: asDefault, inCase: opts.inCase, selector: !opts.inCase });
       });
     });
     // wire auto-select (suggestion only)
@@ -301,14 +302,25 @@
 
   function chooseWorkspace(id, o) {
     o = o || {};
-    if (o.asDefault) { setDefault(id); }
-    if (o.inCase) { caseWorkspace = id; }
+    if (o.asDefault) { setDefault(id); caseWorkspace = (id === IM ? null : id); }
+    else { caseWorkspace = id; }              // "this case / my next case" override (IM ok too)
     closeSheet();
-    // open the workspace
+    refreshSidebarLabel();
+    if (o.selector) {
+      // Branch selector (home / sidebar): SET the workspace and RETURN HOME — do NOT open the engine.
+      // "Start a new case" (Dx My Patient) then routes into this workspace's engine.
+      if (_shell) _shell.classList.remove("on");
+      try { if (window.SMD_goHome) SMD_goHome(); } catch (e) {}
+      toast(meta(id).name + (id === IM ? " selected — tap Start a new case." : (o.asDefault ? " is now your default — tap Start a new case." : " ready — tap Start a new case.")));
+      return;
+    }
+    // In-case switch (mid-case, from the workspace pill): open immediately.
     if (id === IM) { caseWorkspace = null; if (_shell) _shell.classList.remove("on"); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); } catch (e) {} }
     else { openSpecialtyShell(id); }
-    refreshSidebarLabel();
   }
+  // Called by Home's "Start a new case" (Dx My Patient): if a specialty workspace is active,
+  // open its engine and return true; if Internal Medicine, return false so Home runs its own IM flow.
+  function startActiveCase() { var a = activeWorkspace(); if (a === IM) return false; openSpecialtyShell(a); return true; }
 
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
   var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
@@ -509,6 +521,7 @@
     open: function () { openSheet({ inCase: false }); },
     openInCase: function () { openSheet({ inCase: true }); },
     active: activeWorkspace,
+    startActiveCase: startActiveCase,
     setDefault: setDefault,
     suggest: suggestWorkspace,
     registry: REG,
