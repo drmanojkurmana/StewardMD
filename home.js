@@ -1057,6 +1057,7 @@
   // model names anywhere; a single persistent advisory badge replaces per-message
   // disclaimers; answers render as safe Markdown with human-readable Sources ▸.
   var _maikHist = [];
+  var _maikBodyHTML = "";   // full rendered conversation (questions + answers), kept for the session so it survives closing/reopening the sheet (resets when the app/tab is closed)
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
@@ -1105,7 +1106,8 @@
   function maikActiveCase() { try { return !!(window.DX && DX._state && Object.keys(DX._state.f || {}).length >= 1); } catch (e) { return false; } }
   function openAskAi(prefill) {
     maikCSS();
-    var old = document.getElementById("maikSheet"); if (old) old.remove();
+    var old = document.getElementById("maikSheet");
+    if (old) { var ob = old.querySelector("#maikBody"); if (ob && ob.innerHTML.trim()) _maikBodyHTML = ob.innerHTML; old.remove(); }
     var oldS = document.getElementById("maikScrim"); if (oldS) oldS.remove();
     var scrim = document.createElement("div"); scrim.id = "maikScrim"; document.body.appendChild(scrim);
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
@@ -1120,7 +1122,7 @@
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
-    function close() { sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
+    function close() { try { if (body && body.innerHTML.trim()) _maikBodyHTML = body.innerHTML; } catch (e) {} sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260); }
     function scroll() { body.scrollTop = body.scrollHeight; }
     function bubble(who, html) { var d = document.createElement("div"); d.className = "maik-b " + (who === "you" ? "you" : "ai"); d.innerHTML = html; body.appendChild(d); scroll(); return d; }
     function chips(list) {
@@ -1285,8 +1287,8 @@
       var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
       runClinical(q, q, depth, active, topic);
     }
-    // restore prior session history, else empty state
-    if (_maikHist.length) { _maikHist.forEach(function (m) { bubble("you", maikEscH(m.q)); }); } else { emptyState(); }
+    // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
+    if (_maikBodyHTML) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     sheet.querySelector("#maikX").addEventListener("click", close);
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
