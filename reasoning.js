@@ -550,7 +550,10 @@
    * StewardMD calculators/protocols. Keyed by diagnosis id (works for both
    * infectious syndrome ids and non-infectious ids).
    * ---------------------------------------------------------------------- */
-  function inf(fn) { return function () { try { close(); } catch (e) {} try { if (window.INF) fn(window.INF); } catch (e) {} }; }
+  // Open the bedside tool as an overlay ON TOP of the reasoning workspace (INF is z-index 10000).
+  // Do NOT close() the workspace first — otherwise dismissing the tool strands the user on the
+  // home/blank layer instead of returning to the diagnosis they came from.
+  function inf(fn) { return function () { try { if (window.INF) fn(window.INF); } catch (e) {} }; }
   var TOOLREG = {
     vaso:       { icon: "💉", label: "Vasopressor / infusion calculator", run: inf(function (I) { I.openDrug("noradrenaline"); }) },
     dashboard:  { icon: "🩺", label: "ICU dashboard — MAP · lactate · urine output", run: inf(function (I) { I.openDashboard(); }) },
@@ -560,7 +563,7 @@
     gtn:        { icon: "💊", label: "Nitroglycerin infusion", run: inf(function (I) { I.openDrug("nitroglycerin"); }) },
     heparin:    { icon: "🩸", label: "Heparin infusion", run: inf(function (I) { I.openDrug("heparin"); }) },
     amiodarone: { icon: "❤️", label: "Amiodarone infusion", run: inf(function (I) { I.openDrug("amiodarone"); }) },
-    stroke:     { icon: "🧠", label: "Stroke score (A2DS2)", run: function () { try { close(); } catch (e) {} try { if (window.SB) SB.calc("a2ds2"); } catch (e) {} } }
+    stroke:     { icon: "🧠", label: "Stroke score (A2DS2)", run: function () { try { if (window.SB) SB.calc("a2ds2"); } catch (e) {} } }
   };
   var TOOLMAP = {
     // infectious (syndrome ids)
@@ -3510,7 +3513,7 @@
   function maikHeaderHTML() {
     return '<div class="maik-ai">' +
       '<div class="maik-sec-h maik-ai-h">✨ MaiK <span class="maik-tag maik-tag-ai">Medical AI Knowledge</span></div>' +
-      '<div class="maik-sub">Powered by Google Vertex AI · Independent Clinical Commentary</div>';
+      '<div class="maik-sub">Independent clinical commentary · AI-assisted</div>';
   }
   function maikDivider() { return '<div class="maik-divider"></div>'; }
   function maikDisclaimerHTML() { return '<div class="maik-warn">⚠ AI-generated commentary. Clinician confirmation required.</div></div>'; }
@@ -3557,7 +3560,7 @@
   // ▸ disclaimer). Used by the panel handler AND exposed for tests.
   function maikCompose(pkg, r) {
     var body = (r && r.text) ? maikCommentaryHTML(r.text, r.citations)
-      : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings (SMD_AI.setFlag(true))." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
+      : '<div class="maik-note">' + ((r && r.error === "ai-off") ? "MaiK is off — enable AI in Settings." : "MaiK unavailable — the StewardMD assessment above stands. (" + maikEsc((r && r.error) || "no response") + ")") + "</div>";
     return maikAssessmentHTML(pkg) + maikDivider() + maikHeaderHTML() + body + maikDisclaimerHTML();
   }
   // Safe Markdown → HTML for MaiK answers (headings, bold/italic, bullet + numbered
@@ -4007,16 +4010,16 @@
     function g(k, def) { try { var v = localStorage.getItem(k); return v === null ? def : v === "1"; } catch (e) { return def; } }
     return { reason: g("smd_reason_v2", true), expanded: g("smd_kb_expanded", false), ai: g("smd_ai", false), ghis: g("smd_ghis_ward", true) };
   }
-  // MaiK branding + provider/auth summary + About section for AI Settings (presentation only).
+  // MaiK branding + About section for AI Settings (presentation only). No provider/model names.
   function maikSettingsInfoHTML() {
-    var kv = [["Current provider", "Vertex AI"], ["Fallback provider", "Gemini Developer API"], ["Model", "gemini-2.5-flash"], ["Authentication", "Google Workload Identity Federation"]];
+    var kv = [["Role", "Clinician-assistive AI"], ["Primary authority", "StewardMD reasoning engine"], ["Output", "Advisory · verify independently"], ["Privacy", "Inputs not used to train models"]];
     return '<div style="margin-top:14px;padding:12px 13px;border:1px solid rgba(124,58,237,0.3);border-radius:12px;background:rgba(124,58,237,0.05)">' +
       '<div style="font:800 13px var(--sans,system-ui);color:#7c3aed">✨ MaiK</div>' +
       '<div style="font:700 11.5px var(--sans,system-ui);color:var(--ink,#14202b);margin-top:1px">Medical AI Knowledge</div>' +
-      '<div style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-bottom:8px">Powered by Google Vertex AI</div>' +
+      '<div style="font:600 10.5px var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-bottom:8px">AI-assisted clinical commentary</div>' +
       kv.map(function (r) { return '<div style="display:flex;justify-content:space-between;gap:10px;font:500 11.5px/1.6 var(--sans,system-ui);border-top:1px solid rgba(100,116,139,0.14);padding:3px 0"><span style="color:var(--slate-soft,#5a7184)">' + r[0] + '</span><b style="color:var(--ink,#14202b)">' + r[1] + '</b></div>'; }).join("") +
       '<div style="font:500 11px/1.55 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:8px;border-top:1px solid rgba(100,116,139,0.14);padding-top:8px">' +
-        '<b style="color:var(--ink,#14202b)">About MaiK</b> — MaiK (Medical AI Knowledge) is StewardMD’s clinician-assistive AI, powered by Google Vertex AI using Google’s Gemini models. It provides evidence-supported clinical explanations and educational insights while StewardMD’s deterministic clinical reasoning engine remains the primary diagnostic authority. AI output is advisory and always requires clinician verification.' +
+        '<b style="color:var(--ink,#14202b)">About MaiK</b> — MaiK (Medical AI Knowledge) is StewardMD’s clinician-assistive AI. It provides evidence-supported clinical explanations and educational insights while StewardMD’s deterministic clinical reasoning engine remains the primary diagnostic authority. AI output is advisory and always requires clinician verification.' +
       '</div></div>';
   }
   function smdSettingsInject() {
@@ -4027,7 +4030,7 @@
     var rows = [
       ["reason", "🧠 Reasoning v2", "Live differential + progressive findings in the workflow"],
       ["expanded", "📚 Expanded Harrison KB", "+268 reference diseases as candidates (auto-derived — review)"],
-      ["ai", "✨ MaiK — Medical AI Knowledge", "Powered by Google Vertex AI · advisory commentary + ICU Vision"],
+      ["ai", "✨ MaiK — Medical AI Knowledge", "Advisory commentary + ICU Vision"],
       ["ghis", "🏥 GHIS Ward Sync", "Live inpatient labs + radiology"]
     ];
     var w = document.createElement("div"); w.setAttribute("data-smd-labs", "1");

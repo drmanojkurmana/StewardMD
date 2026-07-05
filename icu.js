@@ -787,7 +787,7 @@
   var _active = "overview";
 
   function row(label, val, unit) { return '<div class="icu-row"><span>' + esc(label) + '</span><b>' + (val == null || val === "" ? "—" : esc(val) + (unit ? " " + esc(unit) : "")) + "</b></div>"; }
-  function phaseNote(p, what) { return '<div class="icu-card"><h3>' + esc(what) + '<span class="icu-phase">' + esc(p) + "</span></h3><p>Reads live from ICU_STATE. Full decision-support engine arrives in this phase.</p></div>"; }
+  function phaseNote(p, what) { return '<div class="icu-card"><h3>' + esc(what) + '<span class="icu-phase">' + esc(p) + "</span></h3><p>Reads live from the current ICU data. Full decision-support arrives in this phase.</p></div>"; }
 
   var RENDER = {
     overview: function () {
@@ -1127,8 +1127,8 @@
           "</div></div>";
       }).join("") + "</div>" +
       (ai
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">✨ AI Vision ON</span><p style="margin-top:8px">Capture each screen — Gemini reads it and fills the ICU tabs via ICU_STATE. <b>Verify every value.</b></p></div>'
-        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision Integration · Coming Soon</span><p style="margin-top:8px">Enable AI (<code>SMD_AI.setFlag(true)</code>) and set the GEMINI_API_KEY secret to auto-read these images into ICU_STATE.</p></div>') +
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">✨ AI Vision ON</span><p style="margin-top:8px">Capture each screen — it\'s read automatically and the ICU tabs are filled in for you. <b>Verify every value.</b></p></div>'
+        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision · Coming soon</span><p style="margin-top:8px">Capture ICU screens and have them read automatically into the tabs. Turn on AI features in settings to use this.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
     if (ai) {
