@@ -332,10 +332,18 @@
     try {
       var out = document.getElementById("outputArea");
       if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
-      // Native: window.print() is a no-op in WKWebView — route the case text to the iOS
-      // share sheet, which offers Save to Files / Print / Markup for a PDF. Web keeps print.
-      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
-        window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); });
+      // Native: window.print() is a no-op in WKWebView — export the FULL expanded
+      // decision (cloned output + full differential) as a styled page FILE, then open
+      // the iOS share sheet, which offers Print → Save as PDF / Save to Files. Web keeps
+      // real window.print() below.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.saveHtmlFile) {
+        try {
+          var nclone = out.cloneNode(true);
+          var nbar = nclone.querySelector("#smdCaseShare"); if (nbar) nbar.remove();
+          var nfrag = nclone.innerHTML;
+          try { var ndh = caseDifferentialHTML(); if (ndh) nfrag += ndh; } catch (e) {}
+          window.SMD_NATIVE.saveHtmlFile(nfrag, "StewardMD — Clinical decision", "StewardMD-clinical-decision").catch(function () { toast("Save unavailable"); });
+        } catch (e) { window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); }); }
         return;
       }
       var old = document.getElementById("smdPrintArea"); if (old) old.remove();

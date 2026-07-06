@@ -29,6 +29,33 @@
   // early-returns above). Callers gate on window.SMD_IS_NATIVE / window.SMD_NATIVE
   // so the web build is byte-for-byte unchanged. ----
   function plugins() { return (window.Capacitor && window.Capacitor.Plugins) || null; }
+
+  // Dump every same-origin stylesheet rule so an exported page looks like the app.
+  function collectCss() {
+    var css = "";
+    try {
+      for (var i = 0; i < document.styleSheets.length; i++) {
+        var s = document.styleSheets[i];
+        try { var r = s.cssRules; for (var j = 0; j < r.length; j++) css += r[j].cssText + "\n"; } catch (e) {}
+      }
+    } catch (e) {}
+    return css;
+  }
+  // Wrap an HTML fragment into a standalone, print/PDF-friendly light-theme document.
+  function buildHtmlDoc(fragment, title) {
+    var t = String(title || "StewardMD — Clinical decision");
+    return '<!doctype html><html lang="en"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<title>' + t.replace(/[&<>]/g, function (c) { return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;"; }) + '</title>' +
+      '<style>' + collectCss() +
+      // force a clean printable light page regardless of the app's dark theme
+      ':root{color-scheme:light}html,body{background:#fff!important;color:#111!important}' +
+      'body{margin:0;padding:20px;max-width:820px;margin-left:auto;margin-right:auto;font:15px/1.6 -apple-system,system-ui,sans-serif}' +
+      '#smdCaseShare,.cs-row,.smd-caseprint-hide{display:none!important}' +
+      '@page{margin:12mm}' +
+      '</style></head><body>' + String(fragment == null ? "" : fragment) + '</body></html>';
+  }
+
   window.SMD_NATIVE = {
     // Route to the iOS share sheet (offers Save to Files / Print / Markup / Mail).
     share: function (opts) {
@@ -40,6 +67,24 @@
     // can Save as PDF / Print / Markup. (Plain text; rich HTML export not available.)
     exportPdf: function (text, title) {
       return this.share({ title: title || "StewardMD", text: String(text == null ? "" : text), dialogTitle: title || "Save or share" });
+    },
+    // Export an HTML fragment as a fully-styled, self-contained page FILE and open the
+    // iOS share sheet ON THE FILE — which offers "Print" (→ pinch → Save as PDF),
+    // "Save to Files", Books, Markup, Mail. This gives the whole expanded decision as a
+    // real document (not plain text). Uses @capacitor/filesystem + @capacitor/share
+    // (both first-party). Falls back to a stripped-text share if either is missing.
+    saveHtmlFile: function (fragmentHtml, title, filename) {
+      var self = this;
+      var P = plugins();
+      var frag = String(fragmentHtml == null ? "" : fragmentHtml);
+      if (!(P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share)) {
+        return self.share({ title: title || "StewardMD", text: frag.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim(), dialogTitle: title || "Save or share" });
+      }
+      var name = (filename || "StewardMD-clinical-decision").replace(/[^\w.-]+/g, "-") + ".html";
+      var doc = buildHtmlDoc(frag, title);
+      return P.Filesystem.writeFile({ path: name, data: doc, directory: "CACHE", encoding: "utf8" })
+        .then(function () { return P.Filesystem.getUri({ path: name, directory: "CACHE" }); })
+        .then(function (r) { return P.Share.share({ title: title || "StewardMD", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); });
     },
     // Native camera / photo picker → resolves to a data: URL string (rejects on cancel/error).
     // opts.camera → CAMERA; opts.prompt → PROMPT action sheet; else PHOTOS.
