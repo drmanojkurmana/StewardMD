@@ -305,6 +305,17 @@ function parseJsonLoose(t) {
   try { return JSON.parse(m[0]); } catch (e) { return null; }
 }
 
+// TEXT mode for AI Vision (privacy path D→B): the app runs OCR ON-DEVICE and sends only
+// the extracted text — the image never reaches the server. Reuse each kind's JSON
+// schema/rules but feed OCR text instead of an image.
+const VISION_LABEL = { monitor: "ICU monitor", labs: "laboratory report", ventilator: "ventilator screen", flowsheet: "ICU flow-sheet", abg: "arterial blood gas (ABG) report", medication_list: "medication list / prescription" };
+function visionTextPrompt(kind, ocr) {
+  var schema = String(VISION_SYS[kind] || VISION_SYS.monitor).replace(/^Read this [^.]*\.\s*/i, "");
+  return "The following is text extracted ON-DEVICE by OCR from a " + (VISION_LABEL[kind] || "clinical source") +
+    " (no image is sent to the server). Extract the structured values from THIS TEXT ONLY; never invent values not present. " +
+    schema + "\n\n=== OCR TEXT ===\n" + ocr;
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   if (!authorise(request, env)) return json({ error: "unauthorised" }, 403);
@@ -393,21 +404,31 @@ export async function onRequest(context) {
     }
     if (seg === "vision") {
       const kind = VISION_SYS[body.kind] ? body.kind : "monitor";
-      // On-device-first (privacy): the app performs OCR on-device and sends ONLY the
-      // scrubbed TEXT here — never the image. Extract structured fields from that text.
-      const ocrText = String(body.text || "").slice(0, 8000);
-      if (!ocrText) return json({ error: "no text" }, 400);
+      // TEXT mode (privacy path D→B): on-device OCR text, no image ever sent. Preferred.
+      const ocr = (typeof body.text === "string" ? body.text : "").slice(0, MAX_IN_CHARS).trim();
+      if (ocr) {
+        const gate = await checkQuota(env, request, "ocr");
+        if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+        const prompt = visionTextPrompt(kind, ocr);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "text" });
+      }
+      // IMAGE mode (legacy / web): unchanged.
+      let b64 = String(body.image || "");
+      const mime = (b64.match(/^data:([^;]+);base64,/) || [])[1] || "image/jpeg";
+      b64 = b64.replace(/^data:[^;]+;base64,/, "");
+      if (!b64) return json({ error: "no image or text" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
-      const prompt = "You are given OCR TEXT extracted ON-DEVICE from a " + kind +
-        " (there is NO image — work ONLY from the text below; never invent values that are not present). " +
-        VISION_SYS[kind] + "\n\n=== OCR TEXT ===\n" + ocrText;
       let text;
-      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
-      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
-      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
-      const fields = parseJsonLoose(text) || {};
-      return json({ kind: kind, fields: fields });
+      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
+      // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
+      await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
+      return json({ kind: kind, fields: parseJsonLoose(text) || {}, mode: "image" });
     }
     if (seg === "research") {
       // Opt-in web research for topics NOT in StewardMD's KB. Token-frugal: single Google-
