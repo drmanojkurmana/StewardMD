@@ -3439,6 +3439,34 @@
     return Promise.resolve(base);
   }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
+  // Live differential on/off (default ON) — a per-device switch in the differential header.
+  function liveDiffOn() { try { return localStorage.getItem("smd_live_diff") !== "0"; } catch (e) { return true; } }
+  function liveToggleHTML() {
+    var on = liveDiffOn();
+    return '<button class="sl-toggle" data-livetoggle="1" type="button" role="switch" aria-checked="' + on + '" title="Turn the live differential on or off" ' +
+      'style="margin-left:auto;flex:none;border:1px solid ' + (on ? "#0e6e63" : "#cbd5e1") + ';background:' + (on ? "#0e6e63" : "#fff") + ';color:' + (on ? "#fff" : "#64748b") + ';border-radius:999px;padding:4px 12px;font:700 11px var(--sans,-apple-system,system-ui,sans-serif);cursor:pointer">' + (on ? "● On" : "○ Off") + "</button>";
+  }
+  function bindLiveToggle(panel) {
+    var t = panel && panel.querySelector('[data-livetoggle="1"]');
+    if (t) t.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); try { localStorage.setItem("smd_live_diff", liveDiffOn() ? "0" : "1"); } catch (x) {} try { smdRenderLive(); } catch (x) {} });
+  }
+  // The app.js "Clear all findings" link (.reset-link) resets the WHOLE workflow to step 1.
+  // Intercept it so it only clears the selected findings and keeps the clinician in place.
+  function smdClearFindingsInPlace() {
+    var f = (typeof window.SMD_getFindings === "function") ? (window.SMD_getFindings() || {}) : {};
+    Object.keys(f).forEach(function (k) { if (f[k]) { var cb = document.getElementById("f-" + k); if (cb) { cb.checked = false; try { cb.dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {} } } });
+    try { if (window.SMD_setFindings) { var clr = {}; Object.keys(f).forEach(function (k) { clr[k] = false; }); window.SMD_setFindings(clr); } } catch (e) {}
+    try { smdRenderLive(); } catch (e) {}
+    try { (window.toast || function () {})("Findings cleared"); } catch (e) {}
+  }
+  document.addEventListener("click", function (e) {
+    try {
+      var b = e.target && e.target.closest && e.target.closest(".reset-link");
+      if (!b || !/clear all findings/i.test(b.textContent || "")) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      smdClearFindingsInPlace();
+    } catch (x) {}
+  }, true);
   // AI Vision (native OCR→cloud text-structuring) is its OWN gate, default ON. It is
   // privacy-safe independent of the chat toggle: the PHOTO never leaves the device
   // (Apple Vision OCR is on-device) and only PHI-redacted TEXT is sent to Vertex. Opt out
@@ -3804,6 +3832,11 @@
     var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
     var keys = Object.keys(findings).filter(function (k) { return findings[k] && VALID[k]; });
     if (!keys.length) { panel.innerHTML = ""; return; }
+    // Off switch: show only the header + toggle, no computed differential.
+    if (!liveDiffOn()) {
+      panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">turned off</span>' + liveToggleHTML() + '</div><div class="sl-th">Live differential is off.<span>Tap the switch to see ranked diagnoses update as you add findings.</span></div></div>';
+      bindLiveToggle(panel); return;
+    }
     // track what was just added (for confidence deltas / "after adding X")
     _liveLastKey = null;
     for (var nk = 0; nk < keys.length; nk++) { if (!_livePrevKeys[keys[nk]]) { _liveLastKey = keys[nk]; break; } }
@@ -3814,7 +3847,7 @@
     var a = window.SMD_REASON.assess(findings), gi = a.gate || {};
     var dom = (a.dominantSystem || []).map(function (t) { return (typeof TAG_LABEL !== "undefined" && TAG_LABEL[t]) || t; }).filter(Boolean);
     var sug = (a.suggestions || []).filter(function (k) { return LABEL[k]; }).slice(0, 6);
-    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h">🧠 Live differential <span class="sl-hint">updates as you add findings</span></div>' +
+    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">updates as you add findings</span>' + liveToggleHTML() + '</div>' +
       (gi.label ? '<div class="sl-gate ' + (gi.ab ? "ab" : "") + '">' + esc(gi.label) + "</div>" : "") +
       (dom.length ? '<div class="sl-dom">🧭 Dominant system: <b>' + dom.map(esc).join(" · ") + "</b></div>" : "") +
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
@@ -3822,6 +3855,7 @@
       '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
       (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask MaiK (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
       "</div>";
+    bindLiveToggle(panel);
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
     panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
     panel.querySelectorAll(".sl-sug").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); var k = b.getAttribute("data-sug"), cb = document.getElementById("f-" + k); if (cb) { cb.checked = true; cb.dispatchEvent(new Event("change", { bubbles: true })); } else if (window.SMD_setFindings) { var o = {}; o[k] = true; window.SMD_setFindings(o); smdRenderLive(); } }); });

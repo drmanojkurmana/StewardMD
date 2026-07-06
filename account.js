@@ -160,6 +160,44 @@
     } catch (e) {}
   }
 
+  /* -------- Guest trial policy: 2 × 5-minute sessions per day, then force sign-in --------
+   * app.js's gate gives each guest a 5-min trial (expiresAt) and permanently blocks once
+   * stewardmd_guest_used is set. We steer it: clear that flag to grant a session while under
+   * the daily cap; leave it set (→ app.js shows "trial used") and hide the guest button once
+   * the cap is reached, so the clinician must sign in with Google/Apple. */
+  var GUEST_MAX_PER_DAY = 2;
+  function guestDay() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return "0"; } }
+  function guestUsesToday() {
+    try { if (localStorage.getItem("smd_guest_day") !== guestDay()) return 0; return parseInt(localStorage.getItem("smd_guest_uses") || "0", 10) || 0; } catch (e) { return 0; }
+  }
+  function bumpGuestUse() { try { localStorage.setItem("smd_guest_day", guestDay()); localStorage.setItem("smd_guest_uses", String(guestUsesToday() + 1)); } catch (e) {} }
+  function guestCapped() { return guestUsesToday() >= GUEST_MAX_PER_DAY; }
+  // Capture-phase → runs before app.js's guest handler, so we set the gate state it reads.
+  document.addEventListener("click", function (e) {
+    try {
+      var b = e.target && e.target.closest && e.target.closest("#guestBtn");
+      if (!b) return;
+      if (guestCapped()) {
+        // over cap → keep the block so app.js shows the trial-used / sign-in state
+        if (!localStorage.getItem("stewardmd_guest_used")) localStorage.setItem("stewardmd_guest_used", String(Date.now()));
+        enforceGuestGate();
+      } else {
+        localStorage.removeItem("stewardmd_guest_used");   // grant a fresh 5-min trial
+        bumpGuestUse();
+      }
+    } catch (x) {}
+  }, true);
+  // Hide the guest option entirely once the daily cap is reached (force sign-in).
+  function enforceGuestGate() {
+    if (!guestCapped()) return;
+    var el = document.getElementById("guestBlock") || document.getElementById("guestBtn");
+    if (el) el.style.display = "none";
+    var gate = document.getElementById("accountGate");
+    if (gate) { var note = gate.querySelector(".ag-guest-note, #guestNote"); if (note) note.style.display = "none"; }
+  }
+  try { new MutationObserver(enforceGuestGate).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", enforceGuestGate); else enforceGuestGate();
+
   // Boot: wrap the seams as soon as app.js has defined them; set persistence + migrate on sign-in.
   (function boot(n) {
     var ok = wrapApply() & wrapCases();
