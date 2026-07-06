@@ -165,10 +165,14 @@
     }, true);
   })();
 
-  // Splash: launchAutoHide is false (see capacitor.config.json), so dismiss the
-  // native splash once the web layer is up. 'load' fires even if home.js later
-  // throws, so the splash can never get stuck; hiding before the timeout also
-  // removes the "automatically hidden after default timeout" advisory.
+  // Splash: launchAutoHide is false (see capacitor.config.json). The 35 app scripts
+  // are `defer`, so the WebView does not paint the app's own boot splash until they
+  // all execute — hiding the native splash before that shows a BLACK unpainted WebView.
+  // So keep the native splash (navy #0d1b26) up until 'load' (fires after first paint),
+  // which is graceful (no black flash). NOTE: the real startup delay is the ~9.7MB of
+  // synchronous JS/KB parsed at boot; the durable fix is lazy-loading the KB after the
+  // shell paints (tracked separately). 'load' fires even if home.js later throws, so
+  // the splash can never get stuck.
   window.addEventListener("load", function () {
     try {
       var P = window.Capacitor && window.Capacitor.Plugins;
