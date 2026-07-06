@@ -102,9 +102,9 @@
     var L = (s.labs && s.labs.recent) || {}, lv = (s.vitals && s.vitals.length) ? s.vitals[s.vitals.length - 1] : {}, g = s.abg || {};
 
     // Potassium
-    if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mmol/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mmol/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mmol/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mmol/L", "Electrolytes"); }
+    if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mEq/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mEq/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mEq/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mEq/L", "Electrolytes"); }
     // Sodium
-    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na " + L.na + " mmol/L — correct at safe rate", "Electrolytes"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na " + L.na + " mmol/L", "Electrolytes"); }
+    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na " + L.na + " mEq/L — correct at safe rate", "Electrolytes"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na " + L.na + " mEq/L", "Electrolytes"); }
     // Ferritin (HLH / hyperinflammation tie-in)
     if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Labs");
     // Hemodynamics
@@ -195,6 +195,28 @@
     }
     return null;
   }
+  // GHIS/HIS reports Ca/Mg/PO₄/glucose/creatinine/albumin in CONVENTIONAL units (mg/dL, g/dL)
+  // but the ICU/ELYTE analysers store + interpret them in SI (mmol/L, µmol/L, g/L). Without
+  // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
+  // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
+  // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
+  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1 };
+  // Above these an SI value is implausible → the number must be conventional (used only when
+  // the units string is missing; creat/alb are the inverse — a small value is conventional).
+  var SI_IMPLAUSIBLE = { ca: 4, mg: 3, po4: 4, glu: 35, creat: 20, alb: 12 };
+  function wardToSI(key, val, units) {
+    var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/etc: mEq==mmol, no conversion
+    var u = String(units || "").toLowerCase().replace(/\s+/g, "");
+    if (/mmol|meq|µmol|umol|micromol|g\/l/.test(u)) return val;       // already SI (incl albumin g/L)
+    var conventional = /mg\/dl/.test(u) || (key === "alb" && /g\/dl/.test(u));
+    if (conventional) return val / f;                                // GHIS conventional → SI
+    if (!u) {                                                        // no unit string → plausibility heuristic
+      if (key === "creat" || key === "alb") return (val > 0 && val < SI_IMPLAUSIBLE[key]) ? val / f : val;
+      return (val > SI_IMPLAUSIBLE[key]) ? val / f : val;
+    }
+    return val;
+  }
+  window.SMD_wardToSI = wardToSI;   // exposed for verification
   // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
   // overwrites a clinician's Manual value — records a conflict for the clinician to resolve.
   // bundle: { patient?, source?, ts?, labs:[{test,result,units,low,high}], vitals?, abg? }
@@ -206,6 +228,7 @@
     (bundle.labs || []).forEach(function (t) {
       var key = mapWardLab(t.test); if (!key) return;
       var v = parseFloat(t.result); if (isNaN(v)) return;
+      v = wardToSI(key, v, t.units);   // conventional (mg/dL, g/dL) → app SI so Ca/Mg/PO₄/glu/creat/alb aren't mis-scaled
       var prevSrc = STATE.src[key];
       if (prevSrc && prevSrc.source === "Manual" && STATE.labs.recent[key] != null && Number(STATE.labs.recent[key]) !== v) {
         conflicts.push({ key: key, label: t.test, ward: v, manual: STATE.labs.recent[key], wardTs: ts, manualTs: prevSrc.ts, source: source });
@@ -372,7 +395,7 @@
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mmol/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0))
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0))
     ];
     return '<div class="icu-sec-lbl">❤️ Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -706,13 +729,13 @@
       rows.push(["Expected PaCO₂", expA.toFixed(0) + " ± 2 mmHg (actual " + pco2 + ")"]);
       comp = pco2 < expA - 2 ? "Added respiratory alkalosis" : pco2 > expA + 2 ? "Added respiratory acidosis" : "Appropriate respiratory compensation";
     } else if (/Respiratory/.test(primary)) {
-      comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mmol/L per 10 mmHg PaCO₂).";
+      comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mEq/L per 10 mmHg PaCO₂).";
     }
     if (L.na != null && L.cl != null) {
       var ag = L.na - (L.cl + hco3), agc = ag;
       if (L.alb != null) agc = ag + 0.25 * (40 - L.alb);     // albumin in g/L (normal ~40)
       var agShown = L.alb != null ? agc : ag;
-      rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mmol/L"]);
+      rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mEq/L"]);
       if (agShown > 12) {
         flags.push("High anion gap — consider lactate, ketones, renal failure, toxins (MUDPILES)");
         var dr = (ag - 12) / (24 - hco3);
@@ -955,7 +978,7 @@
       var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
       var head = '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
         row("pH", g.ph) + row("PaCO₂", g.paco2, "mmHg") + row("PaO₂", g.pao2, "mmHg") +
-        row("HCO₃⁻", g.hco3, "mmol/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
+        row("HCO₃⁻", g.hco3, "mEq/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
         '<button class="icu-btn ghost" data-icu-act="edit:abg">✎ Update ABG</button></div>';
       if (!r) return head + '<div class="icu-card"><div class="icu-empty">Enter pH, PaCO₂ and HCO₃ to interpret. (Anion gap also uses Na/Cl/albumin from Labs.)</div></div>';
       var sev = /Mixed|acidosis/.test(r.primary) ? "warn" : "";
@@ -1004,8 +1027,8 @@
         ["Urine output", vitalSeries("uop", w), { unit: "mL/h" }],
         ["Lactate", vitalSeries("lactate", w), { unit: "mmol/L" }],
         ["Creatinine", labSeries("creat", w), { unit: "" }],
-        ["Potassium", labSeries("k", w), { unit: "mmol/L" }],
-        ["Sodium", labSeries("na", w), { unit: "mmol/L" }]
+        ["Potassium", labSeries("k", w), { unit: "mEq/L" }],
+        ["Sodium", labSeries("na", w), { unit: "mEq/L" }]
       ];
       return winSelector() + metrics.map(function (m) { return trendCard(m[0], m[1], m[2]); }).join("");
     },
@@ -1140,12 +1163,12 @@
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
-      { k: "na", l: "Na mmol/L", t: "number" }, { k: "k", l: "K mmol/L", t: "number" }, { k: "cl", l: "Cl mmol/L", t: "number" }, { k: "hco3", l: "HCO₃ mmol/L", t: "number" },
+      { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
       { k: "ca", l: "Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mmol/L", t: "number" }, { k: "po4", l: "PO₄ mmol/L", t: "number" }, { k: "creat", l: "Creatinine", t: "number" },
       { k: "alb", l: "Albumin g/L", t: "number" }, { k: "glu", l: "Glucose", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
-      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mmol/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
+      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
     ventilator: { title: "Ventilator settings", ingest: ingestVentilator, fields: [
       { k: "mode", l: "Mode", t: "text" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "peep", l: "PEEP cmH₂O", t: "number" }, { k: "tv", l: "Tidal volume mL", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "plateau", l: "Plateau cmH₂O", t: "number" }, { k: "drivingP", l: "Driving pressure", t: "number" }, { k: "compliance", l: "Compliance", t: "number" } ] },

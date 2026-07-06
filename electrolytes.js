@@ -32,12 +32,12 @@
       sev=na<120?"Critical hyponatraemia":na<125?"Severe hyponatraemia":na<130?"Moderate hyponatraemia":"Mild hyponatraemia";
       level=na<125?(na<120?"crit":"red"):"amber";
       var mr=highOdsRisk(pt,L)?6:8, tgt=Math.min(130,na+mr), def=r0(tbw*(tgt-na));
-      lines.push(["Corrected Na (glucose)", (glu!=null&&glu>100)? cNa+" mmol/L (measured "+na+")":"n/a"]);
-      lines.push(["Max correction / 24 h","≤ "+mr+" mmol/L"+(highOdsRisk(pt,L)?" (high ODS risk → conservative)":"")]);
-      lines.push(["24 h target","≈ "+tgt+" mmol/L — do not exceed"]);
-      lines.push(["Na deficit to target",def+" mmol (TBW "+r1(tbw)+" L)"]);
+      lines.push(["Corrected Na (glucose)", (glu!=null&&glu>100)? cNa+" mEq/L (measured "+na+")":"n/a"]);
+      lines.push(["Max correction / 24 h","≤ "+mr+" mEq/L"+(highOdsRisk(pt,L)?" (high ODS risk → conservative)":"")]);
+      lines.push(["24 h target","≈ "+tgt+" mEq/L — do not exceed"]);
+      lines.push(["Na deficit to target",def+" mEq (TBW "+r1(tbw)+" L)"]);
       lines.push(["First-line fluid","Assess volume: hypovolaemic → 0.9% saline; euvolaemic/SIADH → fluid restriction ± hypertonic; hypervolaemic → restrict + treat cause."]);
-      lines.push(["Severe / symptomatic","3% saline 100–150 mL IV over 10 min; may repeat ×1–2 to raise Na 4–6 mmol/L, then STOP & reassess."]);
+      lines.push(["Severe / symptomatic","3% saline 100–150 mL IV over 10 min; may repeat ×1–2 to raise Na 4–6 mEq/L, then STOP & reassess."]);
       lines.push(["Monitoring","Serum Na q2–4 h during active correction."]);
       lines.push(["ODS risk", highOdsRisk(pt,L)?"HIGH — overcorrection risk; consider DDAVP-clamp, re-lower with D5W if overcorrected.":"Standard — still avoid overcorrection."]);
       lines.push(["Likely cause (assess)","Volume status + urine Na/osm: SIADH, hypovolaemia, diuretics, heart/liver failure, adrenal/thyroid."]);
@@ -45,11 +45,11 @@
       sev=na>160?"Critical hypernatraemia":na>155?"Severe hypernatraemia":"Hypernatraemia";
       level=na>160?"crit":na>155?"red":"amber";
       lines.push(["Free water deficit", r1(tbw*((na/140)-1))+" L (replace over 48 h)"]);
-      lines.push(["Max correction / 24 h","≤ 10 mmol/L (≤0.5/h) to avoid cerebral oedema."]);
+      lines.push(["Max correction / 24 h","≤ 10 mEq/L (≤0.5/h) to avoid cerebral oedema."]);
       lines.push(["Fluid","Oral/enteral water if able; else IV D5W or 0.45% saline; treat losses & cause (DI, osmotic, GI)."]);
       lines.push(["Monitoring","Serum Na q4–6 h."]);
     }
-    return {name:"Sodium",value:na,unit:"mmol/L",severity:sev,level:level,lines:lines,ev:ev};
+    return {name:"Sodium",value:na,unit:"mEq/L",severity:sev,level:level,lines:lines,ev:ev};
   }
 
   function analyzeK(L,pt){
@@ -59,11 +59,11 @@
     else if(k<3.5){
       sev=k<2.5?"Severe hypokalaemia":k<3.0?"Moderate hypokalaemia":"Mild hypokalaemia"; level=k<2.5?"red":"amber";
       lines.push(["ECG risk", k<2.5?"HIGH — U waves, ST depression, arrhythmia; continuous cardiac monitoring.":"Monitor ECG if symptomatic."]);
-      lines.push(["Estimated total deficit", (k<3.0?"200–400 mmol":"100–200 mmol")+" (approx; non-linear below 3.0)"]);
+      lines.push(["Estimated total deficit", (k<3.0?"200–400 mEq":"100–200 mEq")+" (approx; non-linear below 3.0)"]);
       lines.push(["Route", k<2.5?"IV (severe).":"Oral KCl if tolerating & asymptomatic; IV if severe / NPO / cardiac."]);
-      lines.push(["Max IV rate","Peripheral ≤10 mmol/h (≤40 mmol/L). Central ≤20 mmol/h with continuous cardiac monitoring."]);
-      lines.push(["Line", k<2.5?"Central preferred for higher rate/concentration.":"Peripheral acceptable at ≤10 mmol/h."]);
-      lines.push(["Expected rise","≈0.1 mmol/L per 10 mmol IV (transient; recheck)."]);
+      lines.push(["Max IV rate","Peripheral ≤10 mEq/h (≤40 mEq/L). Central ≤20 mEq/h with continuous cardiac monitoring."]);
+      lines.push(["Line", k<2.5?"Central preferred for higher rate/concentration.":"Peripheral acceptable at ≤10 mEq/h."]);
+      lines.push(["Expected rise","≈0.1 mEq/L per 10 mEq IV (transient; recheck)."]);
       lines.push(["Recheck","Serum K q2–4 h during IV repletion."]);
       lines.push(["Replace magnesium","Check & correct Mg — hypomagnesaemia causes refractory hypokalaemia."]);
       lines.push(["Caution", renal?"RENAL IMPAIRMENT / dialysis — reduce dose, recheck early.":"Ensure adequate urine output before aggressive IV K."]);
@@ -76,7 +76,7 @@
       lines.push(["Remove K","Loop diuretic if making urine; K-binder (patiromer/SZC); dialysis if refractory/anuric."]);
       lines.push(["Recheck","K + glucose q1 h after insulin."]);
     }
-    return {name:"Potassium",value:k,unit:"mmol/L",severity:sev,level:level,lines:lines,ev:ev};
+    return {name:"Potassium",value:k,unit:"mEq/L",severity:sev,level:level,lines:lines,ev:ev};
   }
 
   function analyzeMg(L,pt){
@@ -145,7 +145,7 @@
       lines.push(["Significance", (hco3!=null&&hco3>28)?"With high HCO₃ → metabolic alkalosis (vomiting, NG loss, diuretics).":"May accompany hyponatraemia or alkalosis."]);
       lines.push(["Fluid suggestion","Chloride-responsive alkalosis: 0.9% saline + KCl; treat cause."]);
     }
-    return {name:"Chloride",value:cl,unit:"mmol/L",severity:sev,level:level,lines:lines,ev:ev};
+    return {name:"Chloride",value:cl,unit:"mEq/L",severity:sev,level:level,lines:lines,ev:ev};
   }
 
   function analyzeHCO3(L,pt){
@@ -158,23 +158,23 @@
       sev=hco3<10?"Severe metabolic acidosis":"Metabolic acidosis"; level=hco3<10?"red":"amber";
       lines.push(["Type", (ag!=null&&ag>12)?"High-anion-gap (AG "+ag+") — lactate, ketones, toxins, uraemia.":"Normal-anion-gap"+(ag!=null?" (AG "+ag+")":"")+" — GI/renal HCO₃ loss, RTA, saline."]);
       lines.push(["Bicarbonate therapy","Generally treat the CAUSE. Consider IV NaHCO₃ if pH <7.1 (or severe NAGMA / hyperkalaemia / specific toxins). Avoid routine use in lactic acidosis/DKA."]);
-      lines.push(["Dose if indicated","HCO₃ deficit ≈ 0.5 × wt × (target − measured) = "+(ph!=null&&ph<7.1?(r0(0.5*wt*(Math.max(0,15-hco3)))+" mmol toward HCO₃ 15; give ~½, recheck"):"calculate vs target HCO₃ ~15; give ½, recheck")+"."]);
+      lines.push(["Dose if indicated","HCO₃ deficit ≈ 0.5 × wt × (target − measured) = "+(ph!=null&&ph<7.1?(r0(0.5*wt*(Math.max(0,15-hco3)))+" mEq toward HCO₃ 15; give ~½, recheck"):"calculate vs target HCO₃ ~15; give ½, recheck")+"."]);
     } else {
       sev="Metabolic alkalosis"; level="amber";
       lines.push(["Type","↑HCO₃ — vomiting/NG loss, diuretics, hypokalaemia, hypovolaemia (chloride-responsive) vs mineralocorticoid excess."]);
       lines.push(["Management","Correct volume/Cl/K (0.9% saline + KCl) if chloride-responsive; treat cause."]);
     }
-    return {name:"Bicarbonate",value:hco3,unit:"mmol/L",severity:sev,level:level,lines:lines,ev:ev};
+    return {name:"Bicarbonate",value:hco3,unit:"mEq/L",severity:sev,level:level,lines:lines,ev:ev};
   }
 
   function detectWarnings(L,pt){
     var W=[], na=N(L.na),k=N(L.k),mg=N(L.mg),po4=N(L.po4),ca=correctedCa(N(L.ca),N(L.alb)),hco3=N(L.hco3);
-    if(na!=null&&na<125) W.push({t:"Severe hyponatraemia",d:"If symptomatic (seizure/coma): 3% saline now; cap rise ≤6–8 mmol/L/24 h."});
+    if(na!=null&&na<125) W.push({t:"Severe hyponatraemia",d:"If symptomatic (seizure/coma): 3% saline now; cap rise ≤6–8 mEq/L/24 h."});
     if(k!=null&&k>6.0) W.push({t:"Hyperkalaemia — ECG risk",d:"Obtain ECG NOW. If changes: IV calcium → insulin/dextrose + salbutamol → remove K."});
     if(ca!=null&&ca<7) W.push({t:"Severe hypocalcaemia",d:"Risk of tetany/seizure/arrhythmia. IV calcium gluconate; correct Mg."});
     if(k!=null&&po4!=null&&ca!=null&&k>5.5&&po4>4.5&&ca<8.5) W.push({t:"Tumour lysis pattern",d:"↑K + ↑PO₄ + ↓Ca. Aggressive hydration, rasburicase/allopurinol, treat hyperK; nephrology."});
     if(po4!=null&&po4<2.5&&((k!=null&&k<3.5)||(mg!=null&&mg<1.7))) W.push({t:"Refeeding syndrome pattern",d:"↓PO₄ ± ↓K ± ↓Mg. Replace electrolytes, give thiamine, escalate calories slowly."});
-    if(na!=null&&na<130&&highOdsRisk(pt,L)) W.push({t:"High osmotic-demyelination risk",d:"Strict ≤6 mmol/L/24 h; consider DDAVP clamp; re-lower if overcorrected."});
+    if(na!=null&&na<130&&highOdsRisk(pt,L)) W.push({t:"High osmotic-demyelination risk",d:"Strict ≤6 mEq/L/24 h; consider DDAVP clamp; re-lower if overcorrected."});
     if((k!=null&&k>=6.5&&renalImp(pt,L))||(hco3!=null&&hco3<10&&renalImp(pt,L))||(mg!=null&&mg>4&&renalImp(pt,L))) W.push({t:"Dialysis may be required",d:"Refractory/severe derangement with renal failure — discuss urgent dialysis with nephrology."});
     return W;
   }
@@ -201,7 +201,7 @@
     plan.push(["Repeat labs in", labs]);
     plan.push(["Repeat ECG", ecg]);
     plan.push(["Urine output target","≥ "+r1(0.5*wt)+" mL/h (0.5 mL/kg/h)"]);
-    if(na!=null&&na<135) plan.push(["Daily Na correction goal","≤ "+(highOdsRisk(pt,L)?6:8)+" mmol/L per 24 h (hard ceiling)"]);
+    if(na!=null&&na<135) plan.push(["Daily Na correction goal","≤ "+(highOdsRisk(pt,L)?6:8)+" mEq/L per 24 h (hard ceiling)"]);
     plan.push(["ICU checklist","Cardiac monitor • hourly fluid balance • neuro obs (hyponatraemia) • deep-tendon reflexes (Mg) • recheck per schedule • reassess after each intervention"]);
     return plan;
   }
@@ -226,7 +226,7 @@
     {k:"malnutrition",l:"Malnutrition / starvation"},{k:"alcohol",l:"Alcohol use"}
   ];
   var LAB_FIELDS = [
-    {k:"na",l:"Na",u:"mmol/L"},{k:"k",l:"K",u:"mmol/L"},{k:"cl",l:"Cl",u:"mmol/L"},{k:"hco3",l:"HCO₃",u:"mmol/L"},
+    {k:"na",l:"Na",u:"mEq/L"},{k:"k",l:"K",u:"mEq/L"},{k:"cl",l:"Cl",u:"mEq/L"},{k:"hco3",l:"HCO₃",u:"mEq/L"},
     {k:"ca",l:"Ca",u:"mg/dL"},{k:"alb",l:"Albumin",u:"g/dL"},{k:"mg",l:"Mg",u:"mg/dL"},{k:"po4",l:"PO₄",u:"mg/dL"},
     {k:"creat",l:"Creatinine",u:"mg/dL"},{k:"egfr",l:"eGFR",u:"mL/min"},{k:"glu",l:"Glucose",u:"mg/dL"},
     {k:"ph",l:"pH (ABG)",u:""},{k:"osm",l:"Osmolality",u:"mOsm/kg"}
