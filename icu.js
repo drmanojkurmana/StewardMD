@@ -279,7 +279,7 @@
       '.icu-src{font:600 11px var(--font);color:var(--muted);margin:8px 2px 0}' +
       '.icu-src-btns{display:flex;flex-direction:column;gap:8px;margin:0 0 12px}' +
       '.icu-srcbtn{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink)}.icu-srcbtn.ward{border-color:var(--teal,#0e6e63)}.icu-srcbtn .i{font-size:20px;flex:0 0 auto}.icu-srcbtn .l{font:800 14px var(--font);flex:1}.icu-srcbtn .d{font:600 11px var(--font);color:var(--muted);flex-basis:100%;margin-left:32px}.icu-srcbtn{flex-wrap:wrap}' +
-      '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:16px}' +
+      '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex!important;align-items:center;justify-content:center;padding:16px}' +
       '.icu-imp-box{background:var(--panel);border-radius:14px;padding:22px 24px;text-align:center;color:var(--ink);font:600 14px var(--font);max-width:320px}' +
       '.icu-imp-spin{font-size:26px;animation:icuspin 1s linear infinite;margin-bottom:8px}@keyframes icuspin{to{transform:rotate(360deg)}}' +
       '.icu-imp-err{color:var(--danger);font:600 13.5px/1.5 var(--font);margin-bottom:12px}' +
@@ -462,6 +462,16 @@
     // OCR pipeline (compressImage → doOcr → SMD_AI.vision). Web keeps the file input.
     // NOTE: Camera returns IMAGES only (no PDF) — PDF import stays web-only.
     if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      // Upload PDF/file → native document picker (PDF or image) → reuse the web
+      // handleImportFile pipeline (pdf.js renders a PDF page; images go to OCR).
+      if (method !== "camera" && window.SMD_NATIVE.pickFile) {
+        importProgress("Opening files…");
+        window.SMD_NATIVE.pickFile({ types: ["application/pdf", "image/*"] })
+          .then(function (blob) { if (blob) handleImportFile(kind, blob); else importDone(); })
+          .catch(function () { importDone(); });
+        return;
+      }
+      // Camera (and fallback) → Capacitor Camera plugin → OCR pipeline.
       importProgress(method === "camera" ? "Opening camera…" : "Opening photos…");
       window.SMD_NATIVE.pickImage({ camera: method === "camera" }).then(function (dataUrl) {
         importProgress("Compressing image…");

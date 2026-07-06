@@ -98,6 +98,25 @@
         if (img && img.base64String) return "data:image/jpeg;base64," + img.base64String;
         throw new Error("no-image");
       });
+    },
+    // Native document/file picker (PDF OR image) for "Upload PDF/file". @capacitor/camera
+    // is images-only, so this uses @capawesome/capacitor-file-picker. Returns a Blob with
+    // .type set so the existing handleImportFile() PDF(pdf.js)/image pipeline consumes it.
+    pickFile: function (opts) {
+      var P = plugins();
+      var FP = P && P.FilePicker;
+      if (!(FP && FP.pickFiles)) return Promise.reject(new Error("filepicker-unavailable"));
+      var types = (opts && opts.types) || ["application/pdf", "image/*"];
+      return FP.pickFiles({ types: types, readData: true, limit: 1 }).then(function (res) {
+        var f = res && res.files && res.files[0];
+        if (!f || !f.data) throw new Error("no-file");
+        var mime = f.mimeType || (/\.pdf$/i.test(f.name || "") ? "application/pdf" : "application/octet-stream");
+        var bin = atob(f.data), n = bin.length, bytes = new Uint8Array(n);
+        for (var i = 0; i < n; i++) bytes[i] = bin.charCodeAt(i);
+        var blob = new Blob([bytes], { type: mime });
+        try { blob.name = f.name || "upload"; } catch (e) {}
+        return blob;
+      });
     }
   };
 
