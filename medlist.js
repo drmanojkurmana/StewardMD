@@ -213,13 +213,18 @@
   // flow onward; the raw image never persists. Called via window.MEDLIST at call
   // time so tests can stub it. The live vision call is PROD-ONLY.
   function scanExtract(imageDataUrl) {
-    if (!(window.SMD_AI && window.SMD_AI.vision)) return Promise.reject(new Error("ai-unavailable"));
-    try { if (window.SMD_AI.setFlag) window.SMD_AI.setFlag(true); } catch (e) {}
-    return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
-      if (!r || r.error) throw new Error((r && r.error) || "ocr-failed");
-      var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
-      var meds = (src && Array.isArray(src.medications)) ? src.medications : (Array.isArray(src) ? src : []);
-      return meds.map(normalizeScanRow).filter(Boolean);
+    // On-device-first: OCR on device (image never leaves); AI structures the scrubbed text
+    // when on+online, else each recognized line becomes an editable candidate row.
+    if (!(window.SMD_AI && window.SMD_AI.readImage)) return Promise.reject(new Error("ai-unavailable"));
+    return window.SMD_AI.readImage(imageDataUrl, "medication_list").then(function (r) {
+      if (!r) throw new Error("ocr-failed");
+      if (r.mode === "fields") {
+        var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
+        var meds = (src && Array.isArray(src.medications)) ? src.medications : (Array.isArray(src) ? src : []);
+        return meds.map(normalizeScanRow).filter(Boolean);
+      }
+      // fallback (quota/offline/AI-off): recognized lines → editable candidate rows.
+      return (r.lines || []).map(function (ln) { return normalizeScanRow({ detected_text: ln }); }).filter(Boolean);
     });
   }
   // Normalise a raw OCR med row into a candidate the review screen understands.
@@ -459,7 +464,8 @@
       { "data-ml-open": "index" }, function () { _openAdd = "index"; render(); });
     card("", "✍️", "Type / Paste list", "e.g. metformin 500 mg BD",
       { "data-ml-open": "paste" }, function () { _openAdd = "paste"; render(); });
-    card("", "📷", "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
+    // Scan = on-device-first AI Vision (native ML Kit OCR) — hide on web.
+    if (window.SMD_IS_NATIVE) card("", "📷", "Scan prescription", "Prescription, OPD ticket, case sheet, PDF",
       { "data-ml-scan": "1" }, function () { startScan(); });
     card("", "🏥", "Ward Sync", "Import current medication chart",
       { "data-ml-wardsync-card": "1" }, function () { wardPrimaryAction(); });

@@ -3439,6 +3439,21 @@
     return Promise.resolve(base);
   }
   function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
+  // On-device PHI redaction: strip obvious identifiers from OCR text BEFORE anything is
+  // sent to the cloud. Targets email, long phone/ID digit-runs, and labelled
+  // MRN/UHID/IP/Name/DOB/dates. Deliberately conservative so short clinical VALUES
+  // (e.g. "Na 138", "pH 7.32") are never removed.
+  function redactPHI(text) {
+    var t = String(text == null ? "" : text);
+    t = t.replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, "[redacted]");                                  // email
+    t = t.replace(/\b(MRN|UHID|UID|IP\s?N?o|OP\s?N?o|Reg\.?\s?No|Hosp\.?\s?No|ABHA|Aadhaar)\b\s*[:#.]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/\b(Name|Patient|Pt\.?\s?Name|Father|Mother|Guardian|Husband|Wife)\b\s*[:]\s*.+/gi, "$1: [redacted]");
+    t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
+    t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    return t;
+  }
+  window.SMD_redactPHI = redactPHI;
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -3462,9 +3477,35 @@
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
       return aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify({ question: q }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    vision: function (imageDataUrl, kind) {
+    // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
+    // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
+    visionText: function (text, kind) {
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+      var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // On-device-first AI Vision (NATIVE only). 1) OCR on-device (image never leaves the
+    // device); 2) redact identifiers; 3) if AI is ON and online, send ONLY scrubbed TEXT
+    // to the cloud for structured fields; 4) on ANY cloud failure (quota/timeout/offline/
+    // AI-off) resolve with the recognized lines for on-device tap-to-fill. Never dead-ends.
+    // Resolves: { mode:"fields", fields, lines } | { mode:"lines", lines, reason? }.
+    readImage: function (dataUrl, kind) {
+      if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.reject(new Error("ocr-unavailable"));
+      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+        var lines = (o && o.lines) || [];
+        var online = (typeof navigator === "undefined") || navigator.onLine !== false;
+        if (!aiOn() || !online) return { mode: "lines", lines: lines, reason: aiOn() ? "offline" : "ai-off" };
+        var scrubbed = redactPHI((o && o.text) || lines.join("\n"));
+        return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {
+          if (r && !r.error) {
+            var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
+            if (f && (Object.keys(f).length || f.medications)) return { mode: "fields", fields: f, lines: lines };
+          }
+          return { mode: "lines", lines: lines, reason: (r && r.error) || "no-fields" };
+        }).catch(function () { return { mode: "lines", lines: lines, reason: "error" }; });
+      });
     }
   };
   /* ====================================================================== *
