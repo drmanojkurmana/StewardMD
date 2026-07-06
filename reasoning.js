@@ -3422,7 +3422,11 @@
    * the rule-based output. PHI note: explain sends findings, vision sends an
    * image, to Google — only when explicitly enabled.
    * ---------------------------------------------------------------------- */
-  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((h === "localhost" || h === "127.0.0.1") ? "" : "/api/ai"); }
+  // NOTE: in the native app the WebView origin is https://localhost, so hostname is
+  // "localhost" — that must NOT take the dev branch (returns "" → every AI method
+  // short-circuits to {error:"ai-off"} and the calls would hit https://localhost anyway).
+  // Native uses /api/ai (native-bridge rewrites → stewardmd.in via CapacitorHttp → Vertex).
+  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai"); }
   // Attach the Firebase ID token so the server can derive the user's identity for
   // usage metering / quotas (server verifies it; browser userId is never trusted).
   // No signed-in user → plain headers (server applies a small guest quota by IP).

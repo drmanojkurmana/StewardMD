@@ -148,6 +148,7 @@
     book: '<path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>',
     calc: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     flask: '<path d="M9 3h6M10 3v6l-5.5 9.5A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2.5L14 9V3"/><path d="M7.5 15h9"/>',
     home: '<path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/>',
@@ -331,10 +332,18 @@
     try {
       var out = document.getElementById("outputArea");
       if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
-      // Native: window.print() is a no-op in WKWebView — route the case text to the iOS
-      // share sheet, which offers Save to Files / Print / Markup for a PDF. Web keeps print.
-      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
-        window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); });
+      // Native: window.print() is a no-op in WKWebView — export the FULL expanded
+      // decision (cloned output + full differential) as a styled page FILE, then open
+      // the iOS share sheet, which offers Print → Save as PDF / Save to Files. Web keeps
+      // real window.print() below.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.saveHtmlFile) {
+        try {
+          var nclone = out.cloneNode(true);
+          var nbar = nclone.querySelector("#smdCaseShare"); if (nbar) nbar.remove();
+          var nfrag = nclone.innerHTML;
+          try { var ndh = caseDifferentialHTML(); if (ndh) nfrag += ndh; } catch (e) {}
+          window.SMD_NATIVE.saveHtmlFile(nfrag, "StewardMD — Clinical decision", "StewardMD-clinical-decision").catch(function () { toast("Save unavailable"); });
+        } catch (e) { window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); }); }
         return;
       }
       var old = document.getElementById("smdPrintArea"); if (old) old.remove();
@@ -1314,7 +1323,10 @@
     // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
     function maikCanonTopic(q) {
       var t = String(q || "").trim().replace(/\?+$/, "").trim();
-      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell me about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
+      // Strip leading filler/greeting/lead-in prefixes REPEATEDLY (e.g. "Hello tell dka
+      // treatment" → "dka treatment") so the KB matcher sees the real topic, not "hello tell".
+      var _px = /^((hello|hi|hey|please|kindly|ok|okay|so|and|the)( there)?[,.:!\s]+|how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell( me| us)? about\s+|tell( me| us)?\s+|(give me |show me )?(info|information|details?)( on| about)\s+|about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i;
+      var _prev; do { _prev = t; t = t.replace(_px, "").trim(); } while (t && t !== _prev);
       t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
       t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
       return t || String(q || "").trim();

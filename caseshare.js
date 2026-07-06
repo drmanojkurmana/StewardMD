@@ -96,6 +96,12 @@
   }
 
   // ---- create a share ----
+  // Native fallback: share the case as plain text via the iOS share sheet.
+  function nativeShareText(snap){
+    if (window.SMD_NATIVE && window.SMD_NATIVE.share) {
+      window.SMD_NATIVE.share({ title: (snap && snap.title) || "StewardMD — Clinical decision", text: (snap && snap.text) || "", dialogTitle: "Share case" }).catch(function () { toast("Share unavailable"); });
+    } else { toast("Share unavailable"); }
+  }
   function shareCurrent(){
     try { console.log("[CASESHARE] shareCurrent: DB=", !!window.SMD_DB, "AUTH=", !!window.SMD_AUTH, "user=", !!(window.SMD_AUTH && window.SMD_AUTH.currentUser)); } catch (e) {}
     var snap = currentSnapshot();
@@ -106,11 +112,21 @@
     ensureReady(function(db, user){
       if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
       if (!user) {
-        // Native guest: no Firebase user → share the case text directly via the iOS
-        // share sheet (no Firestore). PHI already scanned above. Web keeps sign-in gate.
-        if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
-          window.SMD_NATIVE.share({ title: snap.title || "StewardMD — Clinical decision", text: snap.text || "", dialogTitle: "Share case" }).catch(function () { toast("Share unavailable"); });
-          return;
+        // Native guest: try an anonymous Firebase identity so we can create a REAL cloud
+        // share LINK (identical to signed-in sharing). If anonymous auth is not enabled
+        // in the Firebase console (or is blocked), fall back to sharing the case TEXT via
+        // the iOS share sheet. Web keeps the sign-in gate. PHI already scanned above.
+        if (window.SMD_IS_NATIVE) {
+          var auth = getAuth();
+          if (auth && auth.signInAnonymously) {
+            toast("Creating share link…");
+            auth.signInAnonymously().then(function (cred) {
+              var u = (cred && cred.user) || auth.currentUser;
+              if (u) doShare(snap, db, u); else nativeShareText(snap);
+            }).catch(function () { nativeShareText(snap); });
+            return;
+          }
+          nativeShareText(snap); return;
         }
         toast("Please sign in with Google first (More ▸ Account & sign-in) to share."); return;
       }
@@ -166,7 +182,7 @@
   // ---- retrieve a share ----
   function open(code){
     code = normCode(code);
-    if (!/^SMD-[A-Z0-9]{5}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
+    if (!/^SMD-[A-Z0-9]{5,8}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
     ensureReady(function(db){
       if (!db) { toast("Cloud unavailable — check your connection."); return; }
       db.collection(COLL).doc(code).get().then(function(d){

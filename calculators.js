@@ -565,7 +565,7 @@
     compute:function(v){
       if(!ok(v.age)||!ok(v.ast)||!ok(v.alt)||!ok(v.plt)||v.plt<=0||v.alt<=0) return ERR;
       var f=(v.age*v.ast)/(v.plt*Math.sqrt(v.alt));
-      return { v:r1(f? f : NaN), u:"", i:(f<1.3?"<1.3 — advanced fibrosis unlikely (use 2.0 if age >65).":f<=2.67?"1.3–2.67 — indeterminate; consider elastography.":">2.67 — advanced fibrosis likely.") };
+      return { v:r1(f), u:"", i:(f<1.3?"<1.3 — advanced fibrosis unlikely (use 2.0 if age >65).":f<=2.67?"1.3–2.67 — indeterminate; consider elastography.":">2.67 — advanced fibrosis likely.") };
     } },
 
   { id:"apri", cat:"Hepatology", icon:"🔬", title:"APRI score",
@@ -712,7 +712,7 @@
       if(!ok(v.ht)||!ok(v.wt)) return ERR;
       var mos=Math.sqrt(v.ht*v.wt/3600);
       var du=0.007184*Math.pow(v.ht,0.725)*Math.pow(v.wt,0.425);
-      return { v:r1(mos*100)/100, u:"m² (Mosteller)", i:"DuBois = <b>"+(r1(du*100)/100)+" m²</b>. Used for chemotherapy and cardiac-index dosing." };
+      return { v:Math.round(mos*100)/100, u:"m² (Mosteller)", i:"DuBois = <b>"+(Math.round(du*100)/100)+" m²</b>. Used for chemotherapy and cardiac-index dosing." };
     } },
 
   { id:"hba1c", cat:"General", icon:"🍬", title:"HbA1c → eAG",

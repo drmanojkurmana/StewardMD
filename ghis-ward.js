@@ -47,7 +47,11 @@
       // Backend: local Node proxy during dev (localhost), same-origin Cloudflare
       // Function in production. Override with window.GHIS_PROXY if needed.
       var _host = location.hostname;
-      var PROXY = window.GHIS_PROXY || ((_host === 'localhost' || _host === '127.0.0.1')
+      // NOTE: in the native app the WebView origin is https://localhost, so _host is
+      // "localhost" — that must NOT trigger the dev proxy (localhost:3456 isn't running
+      // on the phone → "Server not reachable"). Native uses /api/ghis (native-bridge
+      // rewrites it to stewardmd.in via CapacitorHttp).
+      var PROXY = window.GHIS_PROXY || ((!window.SMD_IS_NATIVE && (_host === 'localhost' || _host === '127.0.0.1'))
         ? 'http://localhost:3456'
         : '/api/ghis');
       var _patients = [];
@@ -114,6 +118,16 @@
       function esc(s) {
         return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
       }
+      // Safe for a value embedded in a single-quoted JS string inside an HTML
+      // attribute (e.g. onclick="fn('<here>')"). Backslash-escape \ and ' so they
+      // survive HTML-decoding of the attribute, then HTML-escape & < > " for the
+      // attribute context. Prevents names like O'Brien / D'Souza from breaking the
+      // inline handler.
+      function jsq(s) {
+        return String(s == null ? '' : s)
+          .replace(/\\/g, '\\\\').replace(/'/g, "\\'")
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
     
       function renderPatients(list) {
         var el = document.getElementById('ghisPatientList');
@@ -124,7 +138,7 @@
         }
         el.innerHTML = list.map(function(p, i) {
           var age = p.dob ? p.dob : '';
-          return '<div class="ghis-pt-card" onclick="GHIS.onPatient(\'' + esc(p.episodeId) + '\',\'' + esc(p.patientId) + '\',\'' + esc(p.patientFirstName) + '\')">' +
+          return '<div class="ghis-pt-card" onclick="GHIS.onPatient(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')">' +
             '<div class="ghis-pt-top">' +
               '<div>' +
                 '<div class="ghis-pt-name">' + esc(p.patientFirstName) + ' <span style="font-weight:400;font-size:12px;color:var(--slate)">· ' + esc(p.patientId) + '</span></div>' +
@@ -201,7 +215,7 @@
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
           body.innerHTML =
-            (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + esc(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
+            (window.ICU ? '<button class="ghis-connect-btn" style="margin:0 0 12px;background:#0F766E" onclick="GHIS.loadIntoICU(\'' + jsq(patientId) + '\')">🏥 Load patient into ICU dashboard</button>' : '') +
             '<div id="ghisRadSection"></div><div id="ghisLabSection"><div class="ghis-loading">Loading lab orders…</div></div>';
           drawer.style.display = '';
           GHIS.loadRadiology(patientId);
@@ -316,7 +330,7 @@
               dateOrder.forEach(function(day) {
                 html += '<div class="ghis-lab-group"><div class="ghis-lab-group-name">' + esc(day) + '</div>';
                 byDate[day].forEach(function(o) {
-                  html += '<div class="ghis-lab-order" onclick="GHIS.toggleOrder(this,\'' + esc(o.renderId) + '\',\'' + esc(o.episodeId) + '\')">' +
+                  html += '<div class="ghis-lab-order" onclick="GHIS.toggleOrder(this,\'' + jsq(o.renderId) + '\',\'' + jsq(o.episodeId) + '\')">' +
                     '<div class="ghis-lab-order-head">' +
                       '<div class="ghis-lab-order-name">' + esc(o.serviceName || '—') + '</div>' +
                       '<div class="ghis-lab-order-dept">' + esc(o.department || '') + '</div>' +
@@ -341,7 +355,7 @@
               if (orders.length === 0) { sec.innerHTML = ''; return; }
               var html = '<div class="ghis-lab-section-title">🩻 Imaging · ' + orders.length + ' stud' + (orders.length === 1 ? 'y' : 'ies') + '</div>';
               orders.forEach(function(o) {
-                html += '<div class="ghis-lab-order ghis-rad-order" onclick="GHIS.toggleRad(this,\'' + esc(o.resultid) + '\',\'' + esc(o.printType) + '\')">' +
+                html += '<div class="ghis-lab-order ghis-rad-order" onclick="GHIS.toggleRad(this,\'' + jsq(o.resultid) + '\',\'' + jsq(o.printType) + '\')">' +
                   '<div class="ghis-lab-order-head">' +
                     '<div class="ghis-lab-order-name">' + esc(o.description || 'Study') + '</div>' +
                     '<div class="ghis-lab-order-dept">' + esc(o.date || '') + '</div>' +
