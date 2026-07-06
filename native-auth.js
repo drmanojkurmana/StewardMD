@@ -25,22 +25,42 @@
 
   function plugin() { return (C.Plugins && C.Plugins.FirebaseAuthentication) || null; }
   function fb() { return (window.firebase && window.firebase.auth) ? window.firebase : null; }
-  function ensureFb() {
-    var F = fb();
-    if (!F) { try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {} F = fb(); }
-    return F;
+  // Ensure the app's lazy Firebase web SDK is loaded AND booted (SMD_bootFirebase sets
+  // SMD_AUTH + registers onAuthStateChanged). window.SMD_loadFirebase (index.html) loads the
+  // compat SDKs then calls SMD_bootFirebase; it's a no-op if already loaded.
+  function ensureFbAsync() {
+    return new Promise(function (resolve) {
+      if (fb()) { try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {} return resolve(fb()); }
+      if (window.SMD_loadFirebase) {
+        window.SMD_loadFirebase(function () { try { if (window.SMD_bootFirebase) window.SMD_bootFirebase(); } catch (e) {} resolve(fb()); });
+      } else { resolve(null); }
+    });
   }
-  function toast(m) { try { (window.toast || function (x) { alert(x); })(m); } catch (e) {} }
+  // Apply the signed-in user to the app UI (dismisses the gate, migrates guest cases, etc.)
+  // — the same path the web popup uses. We call it explicitly rather than trusting only the
+  // async onAuthStateChanged, so the gate reliably closes right after sign-in.
+  function applyUser(u) {
+    try { if (u && window.SMD_applyGoogleUser) window.SMD_applyGoogleUser(u); } catch (e) {}
+    try { if (u && window.SMD_migrateGuestCasesOnSignIn) window.SMD_migrateGuestCasesOnSignIn(u); } catch (e) {}
+  }
+  function fail(where, e) {
+    var msg = (e && (e.message || e.code)) ? (e.message || e.code) : String(e);
+    try { alert("Sign-in failed (" + where + "): " + msg); } catch (x) {}
+  }
 
   // ---- Native Google → app's Firebase web session -------------------------
   async function signInWithGoogle() {
     var P = plugin(); if (!P) throw new Error("Google sign-in is unavailable on this device.");
-    var F = ensureFb(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
+    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
     var res = await P.signInWithGoogle();
     var cred = (res && res.credential) || {};
-    if (!cred.idToken && !cred.accessToken) throw new Error("Google did not return a token.");
-    var gcred = F.auth.GoogleAuthProvider.credential(cred.idToken || null, cred.accessToken || null);
-    return await F.auth().signInWithCredential(gcred);   // onAuthStateChanged applies the account
+    var idToken = cred.idToken || (res && res.idToken);
+    var accessToken = cred.accessToken || (res && res.accessToken);
+    if (!idToken && !accessToken) throw new Error("Google returned no token: " + JSON.stringify(res || {}).slice(0, 180));
+    var gcred = F.auth.GoogleAuthProvider.credential(idToken || null, accessToken || null);
+    var out = await F.auth().signInWithCredential(gcred);
+    applyUser(out && out.user);
+    return out;
   }
 
   // ---- Native Apple → app's Firebase web session --------------------------
@@ -48,10 +68,10 @@
   // nonce in credential.nonce, which Firebase needs to verify the identity token.
   async function signInWithApple() {
     var P = plugin(); if (!P) throw new Error("Sign in with Apple is unavailable on this device.");
-    var F = ensureFb(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
+    var F = await ensureFbAsync(); if (!F) throw new Error("Authentication is not ready yet — please try again.");
     var res = await P.signInWithApple();
     var cred = (res && res.credential) || {};
-    if (!cred.idToken) throw new Error("Apple did not return an identity token.");
+    if (!cred.idToken) throw new Error("Apple returned no identity token: " + JSON.stringify(res || {}).slice(0, 180));
     var provider = new F.auth.OAuthProvider("apple.com");
     var ocred = provider.credential({ idToken: cred.idToken, rawNonce: cred.nonce });
     var out = await F.auth().signInWithCredential(ocred);
@@ -60,6 +80,7 @@
       var dn = res.user && res.user.displayName;
       if (dn && out && out.user && out.user.updateProfile && !out.user.displayName) await out.user.updateProfile({ displayName: dn });
     } catch (e) {}
+    applyUser(out && out.user);
     return out;
   }
 
@@ -70,7 +91,7 @@
   // 'load' in case app.js (re)assigns SMD_signInWithGoogle during its own init.
   function installGoogleOverride() {
     window.SMD_signInWithGoogle = function () {
-      return signInWithGoogle().catch(function (e) { toast(String(e && e.message || e)); });
+      return signInWithGoogle().catch(function (e) { fail("google", e); });
     };
   }
   installGoogleOverride();
@@ -92,7 +113,7 @@
       var t = e.target && e.target.closest && e.target.closest("#googleFallbackBtn");
       if (!t) return;
       e.preventDefault(); e.stopImmediatePropagation();
-      signInWithGoogle().catch(function (err) { toast(String(err && err.message || err)); });
+      signInWithGoogle().catch(function (err) { fail("google", err); });
     } catch (x) {}
   }, true);
 
@@ -112,7 +133,7 @@
         b.addEventListener("click", function () {
           b.disabled = true;
           Promise.resolve(signInWithApple()).catch(function (e) {
-            toast(String(e && e.message || e));
+            fail("apple", e);
           }).then(function () { b.disabled = false; });
         });
         if (g.parentNode) g.parentNode.insertBefore(b, g.nextSibling);
