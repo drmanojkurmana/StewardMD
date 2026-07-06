@@ -10,6 +10,7 @@
     "android": "npm run sync && npx cap open android"
   },
   "dependencies": {
+    "@capacitor-community/sqlite": "^8.1.0",
     "@capacitor-firebase/authentication": "^8.3.0",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
@@ -25,6 +26,7 @@
     "@capacitor/splash-screen": "^8.0.1",
     "@capacitor/status-bar": "^8.0.2",
     "@capawesome/capacitor-file-picker": "^8.0.3",
-    "@stewardmd/capacitor-vision-ocr": "file:local-plugins/capacitor-vision-ocr"
+    "@stewardmd/capacitor-vision-ocr": "file:local-plugins/capacitor-vision-ocr",
+    "fflate": "^0.8.3"
   }
 }

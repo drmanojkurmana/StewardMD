@@ -36,7 +36,15 @@
     },
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
     monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
-    structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); }
+    structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); },
+    // Live total drug/brand count — /health returns {rows}. Memoized so the label never
+    // goes stale again (falls back to the constant if the API is unreachable).
+    _count: null,
+    count: function () {
+      var self = this;
+      if (self._count != null) return Promise.resolve(self._count);
+      return api("/health").then(function (d) { var n = d && typeof d.rows === "number" ? d.rows : null; if (n) self._count = n; return n; });
+    }
   };
 
   /* ============================================================
@@ -125,6 +133,17 @@
     root.querySelector("#dbBack").style.visibility = showBack ? "visible" : "hidden";
   }
 
+  /* ---- dynamic drug-count label (never goes stale) ---- */
+  function updateCount() {
+    var el = root && root.querySelector("#dbCount"); if (!el) return;
+    // When an offline copy is installed, show ITS row count (authoritative for offline).
+    try {
+      var off = window.SMD_OFFLINEDB;
+      if (off && off.installed && off.installed()) { var info = off.info && off.info(); if (info && info.rowCount) { el.textContent = info.rowCount.toLocaleString(); return; } }
+    } catch (e) {}
+    MEDAPI.count().then(function (n) { var e2 = root && root.querySelector("#dbCount"); if (e2 && n) e2.textContent = n.toLocaleString(); }).catch(function () {});
+  }
+
   /* ---- list/search view ---- */
   function renderList() {
     st.name = null; setTitle("Drugs Database", false);
@@ -132,8 +151,9 @@
     var b = root.querySelector("#dbBody");
     b.innerHTML =
       '<input id="dbSearch" class="db-search" type="text" placeholder="🔍 Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '">' +
-      '<div class="db-note">253,975 Indian brands · search a molecule or brand name, then open it for all brands &amp; prices.</div>' +
+      '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, then open it for all brands &amp; prices.</div>' +
       '<div id="dbResults" class="db-results"></div>';
+    updateCount();
     var si = b.querySelector("#dbSearch");
     si.addEventListener("input", function () { onListInput(si.value); });
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
