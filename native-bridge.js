@@ -101,6 +101,40 @@
     }
   };
 
+  // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library
+  // list (SB.openSyn) and the user then closes the stewardship console, return STRAIGHT
+  // to the home shell — never strand them on a lurking Clinical Reasoning overlay.
+  // Only the LIST-opened path is forced home; the reasoning→stewardship path is left
+  // untouched so "Select diagnosis → back" still returns to the differential. ----
+  (function hardenSyndromeNav() {
+    var tries = 0;
+    var iv = setInterval(function () {
+      tries++;
+      try {
+        if (window.SB && typeof SB.openSyn === "function" && !SB.__smdListWrap) {
+          SB.__smdListWrap = true;
+          var _os = SB.openSyn.bind(SB);
+          SB.openSyn = function () { try { window.__smdAspFromList = true; } catch (e) {} return _os.apply(SB, arguments); };
+        }
+        if (window.ASP && typeof ASP.close === "function" && !ASP.__smdCloseWrap) {
+          ASP.__smdCloseWrap = true;
+          var _ac = ASP.close.bind(ASP);
+          ASP.close = function () {
+            var r; try { r = _ac.apply(ASP, arguments); } catch (e) {}
+            if (window.__smdAspFromList) {
+              window.__smdAspFromList = false;
+              try { var dx = document.querySelector(".dx-overlay.on"); if (dx && window.DX && DX.close) DX.close(); } catch (e) {}
+              try { if (window.SMD_setUI) SMD_setUI(true); } catch (e) {}
+            }
+            return r;
+          };
+        }
+      } catch (e) {}
+      if (window.SB && SB.__smdListWrap && window.ASP && ASP.__smdCloseWrap) clearInterval(iv);
+      if (tries > 80) clearInterval(iv);
+    }, 200);
+  })();
+
   // ---- Keyboard guard (native-only safety net): WKWebView pops the iOS keyboard
   // whenever code calls .focus() on a text field with no user intent (e.g. a search
   // box focused right after a screen opens). Blur any text input/textarea that gains
