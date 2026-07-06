@@ -59,10 +59,12 @@
     if (!raw) return [];
     // Strip a leading form prefix so it doesn't get glued to the first ingredient.
     // Split on ingredient separators: "&", "+", "plus", " with ", or a "/" that is a
-    // real separator — NOT a "/" inside a strength ratio like "80/12.5". A ratio "/" sits
-    // between two digits; an ingredient "/" has a non-digit (space or letter) on at least
-    // one side. The negative look-around excludes the digit/digit case.
-    var parts = raw.split(/\s*(?:&|\+|\bplus\b|\swith\s)\s*|\s*\/(?![0-9])\s*|(?<![0-9])\s*\/\s*/i)
+    // real separator — NOT a "/" inside a strength ratio like "80/12.5". A ratio "/" is
+    // followed by a digit; an ingredient "/" (e.g. "amoxicillin/clavulanate") is not.
+    // NB: no regex look-behind here — it throws a SyntaxError on iOS < 16.4 WebViews
+    // (deployment target is iOS 15), which would abort this module entirely. The
+    // negative look-AHEAD alone keeps ratios intact and is universally supported.
+    var parts = raw.split(/\s*(?:&|\+|\bplus\b|\swith\s)\s*|\s*\/(?![0-9])\s*/i)
       .map(function (p) { return p.trim(); })
       .filter(Boolean);
     // A single fragment means it was not a combination.

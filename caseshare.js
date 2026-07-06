@@ -166,7 +166,7 @@
   // ---- retrieve a share ----
   function open(code){
     code = normCode(code);
-    if (!/^SMD-[A-Z0-9]{5}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
+    if (!/^SMD-[A-Z0-9]{5,8}$/.test(code)) { toast("Enter a valid code like SMD-7K2Q9."); return; }
     ensureReady(function(db){
       if (!db) { toast("Cloud unavailable — check your connection."); return; }
       db.collection(COLL).doc(code).get().then(function(d){
