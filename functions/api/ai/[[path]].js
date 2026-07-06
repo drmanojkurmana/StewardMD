@@ -393,17 +393,19 @@ export async function onRequest(context) {
     }
     if (seg === "vision") {
       const kind = VISION_SYS[body.kind] ? body.kind : "monitor";
-      let b64 = String(body.image || "");
-      const mime = (b64.match(/^data:([^;]+);base64,/) || [])[1] || "image/jpeg";
-      b64 = b64.replace(/^data:[^;]+;base64,/, "");
-      if (!b64) return json({ error: "no image" }, 400);
+      // On-device-first (privacy): the app performs OCR on-device and sends ONLY the
+      // scrubbed TEXT here — never the image. Extract structured fields from that text.
+      const ocrText = String(body.text || "").slice(0, 8000);
+      if (!ocrText) return json({ error: "no text" }, 400);
       const gate = await checkQuota(env, request, "ocr");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const prompt = "You are given OCR TEXT extracted ON-DEVICE from a " + kind +
+        " (there is NO image — work ONLY from the text below; never invent values that are not present). " +
+        VISION_SYS[kind] + "\n\n=== OCR TEXT ===\n" + ocrText;
       let text;
-      try { text = await callGemini(env, [{ text: VISION_SYS[kind] }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
-      catch (e) { await recordUsage(gate, { inTok: 1000, outTok: 0, status: "failed" }); throw e; }
-      // image input ≈ a fixed token block (~1.3k) + the prompt; approximate for cost metering.
-      await recordUsage(gate, { inTok: 1000 + estTokens(VISION_SYS[kind].length), outTok: estTokens((text || "").length), status: "success" });
+      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       const fields = parseJsonLoose(text) || {};
       return json({ kind: kind, fields: fields });
     }

@@ -388,8 +388,11 @@
     return '<div class="icu-sec-lbl">🔄 Bring in patient data <span style="font-weight:600;text-transform:none;letter-spacing:0">· auto-fills fields you confirm</span></div>' +
       '<div class="icu-src-btns">' +
         '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">🏥</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
-        '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
-        '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>' +
+        // AI Vision (Camera / Upload) is on-device-first (native ML Kit OCR) — native only.
+        (window.SMD_IS_NATIVE
+          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
+            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>'
+          : '') +
       '</div>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
         return '<button class="icu-ai" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
@@ -539,42 +542,79 @@
     });
   }
   function doOcr(kind, dataUrl, note) {
-    importProgress("Reading values from report…" + (note ? " (" + note + ")" : ""));
-    if (!(window.SMD_AI && SMD_AI.vision)) { importProgress("AI reader unavailable. Enable AI in Settings, or enter values manually.", true); return; }
-    try { if (SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
-    // ONLY the compressed image is sent to the OCR endpoint; never the raw file/PDF.
-    SMD_AI.vision(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
+    importProgress("Reading on-device…" + (note ? " (" + note + ")" : ""));
+    if (!(window.SMD_AI && SMD_AI.readImage)) { importProgress("On-device reader unavailable — enter values manually.", true); return; }
+    // On-device-first: OCR runs on the device (image never leaves). If AI is on + online,
+    // ONLY the scrubbed text is sent for structured fields; otherwise we tap-to-fill locally.
+    SMD_AI.readImage(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
       importDone();
-      if (!r || r.error) { importProgress(r && r.error === "ai-off" ? "AI reader is off — enable it in Settings." : "Could not read the report. Enter values manually.", true); return; }
-      // the vision endpoint returns { kind, fields:{...} } — read fields, not the wrapper.
-      var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
-      var fields = {}; Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
-      openImportReview(kind, fields, dataUrl);
-    }).catch(function () { importDone(); importProgress("Could not reach the AI reader. Enter values manually.", true); });
+      var fields = {};
+      if (r && r.mode === "fields") {
+        var src = (r.fields && typeof r.fields === "object") ? r.fields : {};
+        Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
+      }
+      // Always open the review; pass recognized lines so the clinician can tap-to-fill
+      // (this is the graceful fallback on quota/offline/AI-off, and a helper otherwise).
+      openImportReview(kind, fields, dataUrl, (r && r.lines) || []);
+    }).catch(function () { importDone(); importProgress("Could not read this on-device — enter values manually.", true); });
   }
   // Clinician review — nothing enters the patient context until confirmed here.
-  function openImportReview(kind, fields, dataUrl) {
-    var keys = Object.keys(fields);
-    if (!keys.length) { importProgress("No values could be read confidently. Keeping the image as reference only — please enter values manually.", true); return; }
+  // Fields shown per report kind when we fall back to manual/tap-to-fill (no AI fields).
+  var IMPORT_FIELDS = {
+    labs: ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "urea", "alb", "wbc", "hb", "plt", "inr", "crp", "bili", "ast", "alt", "lactate"],
+    monitor: ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "cvp", "etco2"],
+    abg: ["ph", "paco2", "pao2", "hco3", "be", "lactate", "fio2"],
+    ventilator: ["mode", "fio2", "peep", "tv", "rr", "peak", "plateau"]
+  };
+  // Review + tap-to-fill. `fields` = AI-structured values (may be empty on fallback);
+  // `lines` = on-device OCR lines. When AI gave nothing, show the full field set and let
+  // the clinician TAP a recognized value to drop it into the focused box. Nothing is
+  // ingested until confirmed. Fully works offline / with AI off.
+  function openImportReview(kind, fields, dataUrl, lines) {
+    fields = fields || {}; lines = lines || [];
+    var extracted = Object.keys(fields), aiMode = extracted.length > 0;
+    var showKeys = aiMode ? extracted : (IMPORT_FIELDS[kind] || IMPORT_FIELDS.labs);
+    if (!showKeys.length && !lines.length) { importProgress("No values could be read — please enter values manually.", true); return; }
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
     var L = _raw.labs.recent || {}, lastV = latestVitals();
-    var rows = keys.map(function (k) {
+    var rows = showKeys.map(function (k) {
+      var val = fields[k] != null ? fields[k] : "";
       var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
-      var dup = (cur != null && cur !== "" && String(cur) === String(fields[k])) ? '<span class="icu-imp-dup">≈ already recorded</span>'
-        : (cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
+      var dup = (val !== "" && cur != null && cur !== "" && String(cur) === String(val)) ? '<span class="icu-imp-dup">≈ already recorded</span>'
+        : (val !== "" && cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
       return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
-        '<input data-impk="' + k + '" value="' + esc(fields[k]) + '" ' + (typeof fields[k] === "number" ? 'type="number" step="any"' : 'type="text"') + '>' + dup + "</label>";
+        '<input data-impk="' + k + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
     }).join("");
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review extracted values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
-      '<div class="icu-imp-note">📷 OCR-extracted — <b>verify every value</b> against the report before applying. Nothing is added until you confirm.</div>' +
+    var linesPanel = lines.length ? (
+      '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:170px;overflow:auto">' +
+      lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") +
+      '</div>'
+    ) : "";
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+      '<div class="icu-imp-note">' + (aiMode
+        ? '📷 Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
+        : '📷 Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
-      '<div class="icu-imp-rows">' + rows + "</div>" +
+      '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
     function close() { el.remove(); }
+    var focused = el.querySelector("[data-impk]");
+    el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
+    el.querySelectorAll(".icu-imp-line").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var f = focused || el.querySelector("[data-impk]"); if (!f) return;
+        var raw = b.getAttribute("data-line") || "";
+        if (f.type === "number") { var num = (raw.match(/-?\d+(\.\d+)?/) || [])[0]; if (num != null) f.value = num; }
+        else f.value = raw.trim();
+        b.style.opacity = ".5"; try { f.focus(); } catch (e) {}
+      });
+    });
     el.querySelector("#icuImpX").addEventListener("click", close);
     el.querySelector("#icuImpCancel").addEventListener("click", close);
     el.querySelector("#icuImpConfirm").addEventListener("click", function () {
       var vals = {}; el.querySelectorAll("[data-impk]").forEach(function (i) { var k = i.getAttribute("data-impk"), v = i.value; if (v !== "" && v != null) vals[k] = (k === "mode") ? v : parseFloat(v); });
+      if (!Object.keys(vals).length) { close(); return; }
       var bundle = { source: "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
       var res = ICU.ingestFromWard(bundle);
       close(); paint();
@@ -1141,7 +1181,8 @@
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
     ensureModal();
-    var ai = !!(window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on());
+    // AI Vision is on-device-first and requires the native ML Kit OCR — hide it on web.
+    var ai = !!(window.SMD_IS_NATIVE && window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on());
     var steps = [["📷", "ICU Monitor", "monitor"], ["🫁", "Ventilator", "ventilator"], ["🩸", "Laboratory Report", "labs"], ["📋", "ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
