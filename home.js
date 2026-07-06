@@ -1323,7 +1323,7 @@
     // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
     function maikCanonTopic(q) {
       var t = String(q || "").trim().replace(/\?+$/, "").trim();
-      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell me about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
+      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell( me| us)? about\s+|tell( me| us)\s+|(give me |show me )?(info|information|details?)( on| about)\s+|about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
       t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
       t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
       return t || String(q || "").trim();

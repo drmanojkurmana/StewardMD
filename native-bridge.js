@@ -186,19 +186,60 @@
       ? API_ORIGIN + u : u;
   }
 
-  // Wrap whatever fetch is current (CapacitorHttp may have already patched it),
-  // rewriting the URL BEFORE it is dispatched natively.
+  // ---- Native /api transport. CapacitorHttp's fetch AUTO-patch proved unreliable here
+  // (patch-ordering vs. our wrapper) — relative "/api/*" calls leaked out as browser
+  // CROSS-ORIGIN requests to stewardmd.in and died on the CORS preflight (the server
+  // sends no CORS headers) → "Server not reachable" for GHIS login, MaiK AI/web-research,
+  // and ICU vision. Fix: for /api/* on native, call the CapacitorHttp plugin EXPLICITLY
+  // (a real native request, no CORS) and adapt the result into a fetch Response. Works
+  // regardless of the `enabled` flag or patch order. Everything else passes through. ----
+  function capHttp() {
+    return (window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.CapacitorHttp) || window.CapacitorHttp || null;
+  }
+  function headersToObj(h) {
+    var o = {};
+    try {
+      if (!h) return o;
+      if (typeof h.forEach === "function" && !Array.isArray(h)) h.forEach(function (v, k) { o[k] = v; });
+      else if (Array.isArray(h)) h.forEach(function (p) { o[p[0]] = p[1]; });
+      else for (var k in h) if (Object.prototype.hasOwnProperty.call(h, k)) o[k] = h[k];
+    } catch (e) {}
+    return o;
+  }
+  function nativeApiFetch(url, init) {
+    var Http = capHttp();
+    if (!Http || !Http.request) return null;          // signal caller to fall back
+    init = init || {};
+    var headers = headersToObj(init.headers);
+    var ct = ""; for (var k in headers) if (k.toLowerCase() === "content-type") ct = String(headers[k]);
+    var data = init.body;
+    // CapacitorHttp wants string or JSON object on iOS; hand JSON bodies as objects so it encodes them.
+    if (typeof data === "string" && /json/i.test(ct)) { try { data = JSON.parse(data); } catch (e) {} }
+    return Http.request({
+      url: url, method: (init.method || "GET").toUpperCase(),
+      headers: headers, data: data, connectTimeout: 30000, readTimeout: 30000
+    }).then(function (res) {
+      var body = res && res.data;
+      if (body != null && typeof body !== "string") { try { body = JSON.stringify(body); } catch (e) { body = String(body); } }
+      var rh = headersToObj(res && res.headers), hasCT = false;
+      for (var kk in rh) if (kk.toLowerCase() === "content-type") hasCT = true;
+      if (!hasCT) rh["Content-Type"] = (res && typeof res.data === "object") ? "application/json" : "text/plain";
+      return new Response(body == null ? "" : body, { status: (res && res.status) || 0, headers: rh });
+    });
+  }
   if (typeof window.fetch === "function") {
     var origFetch = window.fetch.bind(window);
     window.fetch = function (input, init) {
       try {
-        if (typeof input === "string") {
-          input = absolutize(input);
-        } else if (input && typeof input === "object" && typeof input.url === "string") {
-          var nu = absolutize(input.url);
-          if (nu !== input.url) input = new Request(nu, input);
+        var url = (typeof input === "string") ? input : (input && typeof input === "object" ? input.url : null);
+        if (typeof url === "string" && url.charAt(0) === "/" && url.lastIndexOf("/api/", 0) === 0) {
+          var abs = API_ORIGIN + url;
+          var merged = init || (input && typeof input === "object" ? { method: input.method, headers: input.headers } : {});
+          var r = nativeApiFetch(abs, merged);
+          if (r) return r;                              // native request in flight
+          return origFetch(abs, init);                  // fallback: at least absolutized
         }
-      } catch (e) { /* fall through with original input */ }
+      } catch (e) { /* fall through */ }
       return origFetch(input, init);
     };
   }
