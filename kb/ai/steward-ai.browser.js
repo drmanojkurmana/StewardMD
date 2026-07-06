@@ -259,7 +259,10 @@
       // describing the wrong condition.
       var topicMatch = null;
       if (!top.length && (opts.question || "").trim()) {
-        var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1 };
+        var GENERIC_TOPIC = { treatment:1,treat:1,treating:1,management:1,manage:1,managing:1,therapy:1,approach:1,protocol:1,regimen:1,empiric:1,initial:1,signs:1,sign:1,symptoms:1,symptom:1,diagnosis:1,diagnose:1,poisoning:1,poison:1,toxicity:1,toxic:1,overdose:1,syndrome:1,disease:1,disorder:1,infection:1,fever:1,dose:1,dosing:1,drug:1,drugs:1,acute:1,chronic:1,severe:1,about:1,information:1,info:1,what:1,which:1,when:1,how:1,why:1,does:1,with:1,from:1,the:1,and:1,for:1,of:1,
+          // conversational fillers/lead-ins (4+ chars) — must NOT count as the topic, else
+          // "tell"/"hello"/"please" break the exact-match gate ("no entry for tell diabetic ketoacidosis").
+          tell:1,tells:1,told:1,telling:1,hello:1,hey:1,hi:1,please:1,kindly:1,could:1,would:1,should:1,shall:1,can:1,you:1,your:1,give:1,gives:1,giving:1,want:1,wants:1,need:1,needs:1,know:1,knows:1,explain:1,explaining:1,describe:1,help:1,helps:1,share:1,provide:1,list:1,discuss:1,okay:1,sure:1,here:1,there:1,also:1,some:1,more:1,this:1,that:1,these:1,those:1,understand:1,regarding:1,concerning:1,briefly:1,quickly:1,detail:1,details:1 };
         var distinctive = String(opts.question).toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(function (t) { return t.length >= 4 && !GENERIC_TOPIC[t]; });
         var candId = (retrieved[0] && retrieved[0].diseaseId) || null;
         var candGc = candId ? trimGrounding(_ai.getGroundingContext(candId)) : null;
