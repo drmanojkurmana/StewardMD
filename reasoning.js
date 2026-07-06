@@ -3454,6 +3454,56 @@
     return t;
   }
   window.SMD_redactPHI = redactPHI;
+  // On-device structuring: parse common labelled values from OCR text so AI Vision fills
+  // fields even when the cloud is unavailable (offline / quota / endpoint not deployed).
+  // Conservative — only clearly-matched values; the clinician verifies + taps the rest.
+  function parseFieldsOnDevice(text, kind) {
+    var t = " " + String(text == null ? "" : text).replace(/[\n\r]+/g, " ") + " ";
+    var out = {};
+    function grab(re) { var m = t.match(re); return m ? parseFloat(m[1]) : null; }
+    function set(k, v) { if (v != null && !isNaN(v)) out[k] = v; }
+    if (kind === "monitor" || kind === "vitals") {
+      var bp = t.match(/\b(\d{2,3})\s*\/\s*(\d{2,3})\b/);
+      if (bp) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
+      set("map", grab(/\b(?:MAP|MAD|mean)\D{0,4}(\d{2,3})\b/i));
+      set("hr", grab(/\b(?:HR|PR|pulse|heart\s*rate)\D{0,4}(\d{2,3})\b/i));
+      set("spo2", grab(/\b(?:SpO2|SpO₂|SPO2|SaO2|sat)\D{0,4}(\d{2,3})\b/i));
+      set("rr", grab(/\b(?:RR|resp\w*)\D{0,4}(\d{1,2})\b/i));
+      set("temp", grab(/\b(?:T|temp\w*)\D{0,4}(3[5-9](?:\.\d)?|4[0-2](?:\.\d)?)\b/i));
+      set("cvp", grab(/\bCVP\D{0,4}(\d{1,2})\b/i));
+      set("etco2", grab(/\b(?:EtCO2|ETCO2)\D{0,4}(\d{1,2})\b/i));
+    } else if (kind === "abg") {
+      set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,2})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2})\b/));
+      set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+      set("pao2", grab(/\b(?:PaO2|pO2|PO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+      set("hco3", grab(/\b(?:HCO3|HCO₃|bicarb\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("be", grab(/\b(?:BE|base\s*excess)\D{0,4}(-?\d{1,2}(?:\.\d)?)\b/i));
+      set("lactate", grab(/\b(?:lac\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("fio2", grab(/\b(?:FiO2|FIO2|FiO₂)\D{0,4}(\d{2,3})\b/i));
+    } else if (kind === "labs" || kind === "mapped") {
+      set("na", grab(/\bNa\+?\D{0,4}(\d{2,3})\b/i));
+      set("k", grab(/\bK\+?\D{0,4}(\d(?:\.\d)?)\b/i));
+      set("cl", grab(/\bCl\-?\D{0,4}(\d{2,3})\b/i));
+      set("hco3", grab(/\b(?:HCO3|HCO₃)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("creat", grab(/\b(?:creat\w*|Cr)\D{0,4}(\d(?:\.\d{1,2})?)\b/i));
+      set("urea", grab(/\b(?:urea|BUN)\D{0,4}(\d{1,3})\b/i));
+      set("glu", grab(/\b(?:glu\w*|RBS|FBS)\D{0,4}(\d{2,3})\b/i));
+      set("hb", grab(/\b(?:Hb|Hgb)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("wbc", grab(/\b(?:WBC|TLC)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("plt", grab(/\b(?:plt|platelet\w*)\D{0,4}(\d{2,3})\b/i));
+      set("crp", grab(/\bCRP\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+    } else if (kind === "ventilator") {
+      var mode = t.match(/\b(SIMV|A\/C|AC|PSV|PCV|VCV|CPAP|BiPAP|PC|VC|PS)\b/i); if (mode) out.mode = mode[1].toUpperCase();
+      set("fio2", grab(/\b(?:FiO2|FIO2)\D{0,4}(\d{2,3})\b/i));
+      set("peep", grab(/\bPEEP\D{0,4}(\d{1,2})\b/i));
+      set("tv", grab(/\b(?:TV|Vt|tidal)\D{0,4}(\d{2,4})\b/i));
+      set("rr", grab(/\b(?:RR|rate)\D{0,4}(\d{1,2})\b/i));
+      set("peak", grab(/\b(?:Ppeak|peak|PIP)\D{0,4}(\d{1,2})\b/i));
+      set("plateau", grab(/\b(?:Pplat|plat\w*)\D{0,4}(\d{1,2})\b/i));
+    }
+    return out;
+  }
+  window.SMD_parseFields = parseFieldsOnDevice;
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -3495,16 +3545,23 @@
       if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.reject(new Error("ocr-unavailable"));
       return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
         var lines = (o && o.lines) || [];
+        var text = (o && o.text) || lines.join("\n");
         var online = (typeof navigator === "undefined") || navigator.onLine !== false;
-        if (!aiOn() || !online) return { mode: "lines", lines: lines, reason: aiOn() ? "offline" : "ai-off" };
-        var scrubbed = redactPHI((o && o.text) || lines.join("\n"));
+        // Structure on-device when the cloud can't (offline / quota / endpoint not deployed).
+        function onDevice(reason) {
+          var pf = parseFieldsOnDevice(text, kind);
+          if (pf && Object.keys(pf).length) return { mode: "fields", fields: pf, lines: lines, source: "on-device", reason: reason };
+          return { mode: "lines", lines: lines, reason: reason };
+        }
+        if (!aiOn() || !online) return onDevice(aiOn() ? "offline" : "ai-off");
+        var scrubbed = redactPHI(text);
         return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {
           if (r && !r.error) {
             var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
-            if (f && (Object.keys(f).length || f.medications)) return { mode: "fields", fields: f, lines: lines };
+            if (f && (Object.keys(f).length || f.medications)) return { mode: "fields", fields: f, lines: lines, source: "cloud" };
           }
-          return { mode: "lines", lines: lines, reason: (r && r.error) || "no-fields" };
-        }).catch(function () { return { mode: "lines", lines: lines, reason: "error" }; });
+          return onDevice((r && r.error) || "no-fields");   // cloud unavailable → parse locally
+        }).catch(function () { return onDevice("error"); });
       });
     }
   };
