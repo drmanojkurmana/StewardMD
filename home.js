@@ -930,7 +930,7 @@
       body = '<div class="hv-acct">' + pic +
         '<div class="hv-acct-name">' + smdEsc(a.name || "Signed in") + '</div>' +
         '<div class="hv-acct-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="hv-acct-badge">' + (a.type === "google" ? "Google · cloud sync on" : "Signed in") + '</div>' +
+        '<div class="hv-acct-badge">' + acctProviderLabel(a, true) + '</div>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
         '<button data-acct="delete" type="button" style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Delete account &amp; data</button></div>';
     } else {
@@ -1869,6 +1869,24 @@
   // ---- Account / profile block in the sidebar (settings) ----
   function smdEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function readAccount() { try { return JSON.parse(localStorage.getItem("stewardmd_account") || "null"); } catch (e) { return null; } }
+  // Provider is the SOURCE OF TRUTH from Firebase (app.js stores type:"google" for every
+  // provider, so account.type alone mislabels Apple). Falls back to the stored type.
+  function acctProvider(a) {
+    try {
+      var u = (window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth()) || {}).currentUser;
+      var pid = u && u.providerData && u.providerData[0] && u.providerData[0].providerId;
+      if (pid === "apple.com") return "apple";
+      if (pid === "google.com") return "google";
+      if (pid === "password") return "email";
+    } catch (e) {}
+    return (a && a.type) || "";
+  }
+  function acctProviderLabel(a, withSync) {
+    var p = acctProvider(a);
+    var name = p === "apple" ? "Apple" : p === "google" ? "Google" : p === "email" ? "Email" : "";
+    if (!name) return "Signed in";
+    return name + (withSync ? " · cloud sync on" : " account");
+  }
   function injectSbAccount() {
     var drawer = document.getElementById("sbDrawer"); if (!drawer) return;
     var head = drawer.querySelector(".sb-head"); if (!head) return;
@@ -1883,7 +1901,7 @@
       box.innerHTML = pic +
         '<div class="smd-sba-info"><div class="smd-sba-name">' + smdEsc(a.name || "Signed in") + '</div>' +
         '<div class="smd-sba-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="smd-sba-prov">' + (a.type === "google" ? "Google account" : "Account") + '</div></div>' +
+        '<div class="smd-sba-prov">' + acctProviderLabel(a, false) + '</div></div>' +
         '<button class="smd-sba-btn" id="smdSbSignOut" type="button">Sign out</button>';
     } else {
       box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +
