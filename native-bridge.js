@@ -202,17 +202,31 @@
   // Splash: launchAutoHide is false (see capacitor.config.json). The 35 app scripts
   // are `defer`, so the WebView does not paint the app's own boot splash until they
   // all execute — hiding the native splash before that shows a BLACK unpainted WebView.
-  // So keep the native splash (navy #0d1b26) up until 'load' (fires after first paint),
-  // which is graceful (no black flash). NOTE: the real startup delay is the ~9.7MB of
-  // synchronous JS/KB parsed at boot; the durable fix is lazy-loading the KB after the
-  // shell paints (tracked separately). 'load' fires even if home.js later throws, so
-  // the splash can never get stuck.
-  window.addEventListener("load", function () {
+  // The KB (~4.8MB) is now lazy-loaded AFTER first paint (see index.html), so the app's
+  // own white branded loading splash (#smdBootSplash — logo + wordmark + progress + MaiK)
+  // paints quickly. We hand off to it by hiding the native splash as soon as that white
+  // splash has painted (DOMContentLoaded + double rAF), so the user sees the branded white
+  // splash — not a lingering navy native splash. Backgrounds are white (capacitor.config)
+  // so any sub-frame gap is white, not black/navy. 'load' + a timeout are backstops so the
+  // native splash can never get stuck even if the app scripts throw.
+  var _splashHidden = false;
+  function hideNativeSplash() {
+    if (_splashHidden) return;
+    _splashHidden = true;
     try {
       var P = window.Capacitor && window.Capacitor.Plugins;
       if (P && P.SplashScreen) P.SplashScreen.hide();
     } catch (e) { /* no-op */ }
-  });
+  }
+  // Hide the native splash on window 'load' — the only reliable signal that the WebView's
+  // content is actually COMPOSITED to screen. (rAF/DOMContentLoaded fire while the WebView
+  // still paints behind the native splash, so hiding then reveals an un-composited black
+  // frame.) The native splash is now a WHITE branded splash (white bg + StewardMD logo — see
+  // Splash.imageset + LaunchScreen.storyboard), so the user sees white-branded → the white
+  // #smdBootSplash (logo + progress + MaiK) → home, with no black/navy flash. The KB is
+  // lazy-loaded after first paint, so 'load' now fires quickly. Timeout is a hard backstop.
+  window.addEventListener("load", hideNativeSplash);
+  setTimeout(hideNativeSplash, 8000);
 
   function absolutize(u) {
     // Only rewrite root-relative API paths; leave everything else (assets, absolute URLs) as-is.

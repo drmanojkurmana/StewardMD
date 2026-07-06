@@ -155,8 +155,11 @@
   function init() {
     if (_initP) return _initP;
     _initP = (function () {
-      var needRag = !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
-      return needRag.then(function () {
+      // KB_CORE/KB_ENRICHMENT are lazy-loaded after first paint (see index.html); wait for them.
+      var kbReady = window.SMD_KB_READY || Promise.resolve();
+      return kbReady.then(function () {
+        return !window.KB_RAG ? loadScript("/kb/dist/kb.rag.js?v=gold117") : Promise.resolve();
+      }).then(function () {
         return import("/kb/ai/interface.mjs?v=gold154");
       }).then(function (mod) {
         var CORE = (window.KB_CORE && (window.KB_CORE.diseases || window.KB_CORE.byId)) || [];
