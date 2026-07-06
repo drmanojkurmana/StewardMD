@@ -892,9 +892,13 @@
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
-        if (a === "disclaimer") { closeSheet(); window.location.href = "/disclaimer"; return; }
-        if (a === "privacy") { closeSheet(); window.location.href = "/privacy"; return; }
-        if (a === "terms") { closeSheet(); window.location.href = "/terms"; return; }
+        // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
+        // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
+        // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
+        // fell back to index.html and the whole app "restarted". Modals work on web + native.
+        if (a === "disclaimer") { closeSheet(); if (typeof openModal === "function") openModal("disclaimerModal"); return; }
+        if (a === "privacy") { closeSheet(); if (typeof openModal === "function") openModal("privacyModal"); return; }
+        if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
