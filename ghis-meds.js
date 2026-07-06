@@ -16,7 +16,7 @@
   "use strict";
 
   var PROXY = (window.GHIS_PROXY) ||
-    ((location.hostname === "localhost" || location.hostname === "127.0.0.1")
+    ((!window.SMD_IS_NATIVE && (location.hostname === "localhost" || location.hostname === "127.0.0.1"))
       ? "http://localhost:8788/api/ghis" : "/api/ghis");
 
   // ── consumables (excluded by default into a "needs review" bucket) ──────────

@@ -47,7 +47,11 @@
       // Backend: local Node proxy during dev (localhost), same-origin Cloudflare
       // Function in production. Override with window.GHIS_PROXY if needed.
       var _host = location.hostname;
-      var PROXY = window.GHIS_PROXY || ((_host === 'localhost' || _host === '127.0.0.1')
+      // NOTE: in the native app the WebView origin is https://localhost, so _host is
+      // "localhost" — that must NOT trigger the dev proxy (localhost:3456 isn't running
+      // on the phone → "Server not reachable"). Native uses /api/ghis (native-bridge
+      // rewrites it to stewardmd.in via CapacitorHttp).
+      var PROXY = window.GHIS_PROXY || ((!window.SMD_IS_NATIVE && (_host === 'localhost' || _host === '127.0.0.1'))
         ? 'http://localhost:3456'
         : '/api/ghis');
       var _patients = [];
