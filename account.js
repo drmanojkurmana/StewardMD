@@ -73,15 +73,36 @@
   // in, force it to the stable uid so every consumer (incl. code we can't edit) agrees on
   // one bucket: local stewardmd_cases_<uid> + Firestore users/<uid>/cases.
   function normKey(key) { var u = uid(); return (u && u !== "anon") ? u : (key || "guest"); }
+  function localBucket(u) { try { var a = JSON.parse(localStorage.getItem("stewardmd_cases_" + u) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function mergeCases(a, b) {
+    var seen = {}, out = [];
+    (a || []).concat(b || []).forEach(function (c) { var id = c && (c.id || c.caseId); if (id != null && !seen[id]) { seen[id] = 1; out.push(c); } });
+    out.sort(function (x, y) { return (y.savedAt || y.ts || y.updatedAt || 0) - (x.savedAt || x.ts || x.updatedAt || 0); });
+    return out.slice(0, 10);
+  }
   var _realSave = null;
+  // Local-FIRST with cloud mirror. Firestore is unreliable inside the WKWebView (and the
+  // app's getAll doesn't fall back to local on an empty/no-db cloud read), so saved cases
+  // could vanish. We (a) always mirror saves to local, (b) merge local into every getAll,
+  // and (c) apply delete/clear to both — so cases reliably save + show, while cloud still
+  // syncs opportunistically when it works. arg[0] is always the ownership key → normalize to uid.
   function wrapCases() {
     var real = window.SMD_CASES;
     if (!real || real._smdWrapped) return !!(real && real._smdWrapped);
-    _realSave = real.save;                                     // unwrapped save (signature: key, useFirestore, caseObj, cb)
-    ["save", "getAll", "delete", "clear"].forEach(function (name) {
-      var orig = real[name]; if (typeof orig !== "function") return;
-      real[name] = function () { var args = [].slice.call(arguments); if (args.length) args[0] = normKey(args[0]); ensureCasesMigrated(); return orig.apply(real, args); };
-    });
+    var origSave = real.save, origGetAll = real.getAll, origDelete = real.delete, origClear = real.clear;
+    _realSave = origSave;
+    real.save = function (key, useFs, caseObj, cb) {
+      var u = normKey(key); ensureCasesMigrated();
+      try { origSave.call(real, u, false, caseObj, function () {}); } catch (e) {}   // reliable local copy
+      try { return origSave.call(real, u, useFs, caseObj, cb); } catch (e) { if (cb) cb(null); }
+    };
+    real.getAll = function (key, useFs, cb) {
+      var u = normKey(key); ensureCasesMigrated();
+      var done = function (list) { try { cb && cb(mergeCases(Array.isArray(list) ? list : [], localBucket(u))); } catch (e) { cb && cb(localBucket(u)); } };
+      try { return origGetAll.call(real, u, useFs, done); } catch (e) { done([]); }
+    };
+    real.delete = function () { var a = [].slice.call(arguments); a[0] = normKey(a[0]); try { var la = a.slice(); la[1] = false; origDelete.apply(real, la); } catch (e) {} return origDelete.apply(real, a); };
+    real.clear = function () { var a = [].slice.call(arguments); a[0] = normKey(a[0]); try { var la = a.slice(); la[1] = false; origClear.apply(real, la); } catch (e) {} return origClear.apply(real, a); };
     real._smdWrapped = true;                                   // mutate IN PLACE so held refs see it
     return true;
   }
