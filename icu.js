@@ -1202,12 +1202,17 @@
       // Shared body: compress a dataUrl/File then run vision and fill the tabs.
       function runSnap(kind, out, dataUrl) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
-        window.SMD_AI.vision(dataUrl, kind).then(function (r) {
-          if (r && r.fields && Object.keys(r.fields).length) {
+        if (!(window.SMD_AI && SMD_AI.readImage)) { if (out) out.textContent = "On-device reader unavailable — enter manually."; return; }
+        // On-device-first: OCR on device (image never leaves); AI structures the text when
+        // on+online, else we surface the recognized text so the clinician can enter it.
+        SMD_AI.readImage(dataUrl, kind).then(function (r) {
+          if (r && r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
             try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
             if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
-          } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
-        });
+          } else if (r && r.lines && r.lines.length) {
+            if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually.";
+          } else if (out) out.textContent = "Couldn't read that image — try again or enter manually.";
+        }).catch(function () { if (out) out.textContent = "Couldn't read this on-device — enter manually."; });
       }
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
         // Native: the hidden <input type=file> never opens a picker in WKWebView.
