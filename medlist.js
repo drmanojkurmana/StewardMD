@@ -800,6 +800,19 @@
 
   // Open the OS file/camera picker (image or PDF). Camera capture on mobile.
   function startScan() {
+    // Native: <input type=file>.click() opens no picker in WKWebView — use the Camera
+    // plugin (Camera/Photos action sheet) and feed the dataUrl into the SAME OCR path.
+    // NOTE: Camera returns IMAGES only — PDF scan stays web-only.
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
+        scanProgress("Compressing image…");
+        _compressImage(dataUrl, function (d) {
+          if (!d) return scanProgress("Could not read this image.", true);
+          runScanOcr(d);
+        });
+      }).catch(function () {});
+      return;
+    }
     var inp = document.createElement("input"); inp.type = "file";
     inp.accept = "image/*,application/pdf";
     inp.setAttribute("capture", "environment");   // rear camera on mobile; ignored on desktop

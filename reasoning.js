@@ -1375,6 +1375,12 @@
     // Print the rendered clinical-reasoning OUTPUT in-page via a print stylesheet: the OS
     // print/share sheet opens OVER the app and Cancel returns here (no blank new tab).
     try {
+      // Native: window.print() no-ops in WKWebView — share the summary text so the iOS
+      // sheet can Save as PDF / Print. Web keeps the in-page print stylesheet path.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        window.SMD_NATIVE.exportPdf(buildSummary(), "StewardMD — Clinical Reasoning").catch(function () { toast("Save unavailable"); });
+        return;
+      }
       var old = document.getElementById("dxPrintArea"); if (old) old.remove();
       if (!document.getElementById("dx-print-style")) {
         var st = document.createElement("style"); st.id = "dx-print-style";
@@ -1418,6 +1424,11 @@
   }
   function shareSummary() {
     var txt = buildSummary();
+    // Native: navigator.share is unreliable in WKWebView — use the Capacitor share sheet.
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      window.SMD_NATIVE.share({ title: "StewardMD — Clinical Reasoning", text: txt, dialogTitle: "Share summary" }).catch(function () {});
+      return;
+    }
     try {
       if (navigator.share) { navigator.share({ title: "StewardMD — Clinical Reasoning", text: txt }).catch(function () {}); return; }
     } catch (e) {}
@@ -2306,6 +2317,12 @@
       if (!go) return;
       var subject = "StewardMD — Local antibiogram upload (" + name + ")";
       var body = "Hi StewardMD Support Team,\n\nI would like StewardMD to support my hospital's local antimicrobial policy / antibiogram.\n\nHospital: " + name + "\nCity / location: \nDepartment / unit: \n\nI have attached our latest local antibiogram / antibiotic policy PDF.\n(Please attach the PDF before sending.)\n\nThank you!";
+      // Native: mailto: is not reliably handled by WKWebView — route via the share
+      // sheet so the user can pick Mail. Web keeps the direct mailto navigation.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        window.SMD_NATIVE.share({ title: subject, text: body, dialogTitle: "Email antibiogram" }).catch(function () {});
+        return;
+      }
       window.location.href = "mailto:Support@StewardMD.in?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     } catch (e) {}
   }
@@ -2623,7 +2640,8 @@
     }
     root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
     // focus the findings search so the clinician can start typing immediately
-    try { var sif = root.querySelector("#dxSearch"); if (sif) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
+    // Native: skip programmatic focus — it pops the iOS keyboard with no user intent.
+    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
   // Reopen the workspace and restore a Recent-Cases snapshot (findings + case id) so
@@ -2645,6 +2663,9 @@
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
     closeMgmt();
     if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
+    // Reasoning was opened from the home (which hideV2()'d it) — restore the home shell,
+    // otherwise closing falls through to the empty classic view (blank screen on native).
+    try { if (window.SMD_setUI) window.SMD_setUI(true); } catch (e) {}
   }
 
   /* ---------------------------------------------------------------------- *
@@ -2658,7 +2679,7 @@
       ".dx-imp-tbl{width:100%;border-collapse:collapse;font:500 12px var(--sans);margin-top:4px}.dx-imp-tbl td{padding:4px 6px;border-bottom:1px solid var(--line);vertical-align:top}.dx-imp-ab td{background:var(--red-bg,#fbe7e9)}",
       ".dx-imp-rad{font:500 12.5px var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0;white-space:pre-wrap}",
       ".dx-imp-note{font:500 11px var(--sans);color:var(--slate);margin-top:8px;font-style:italic}",
-      ".dx-overlay{position:fixed;inset:0;z-index:850;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
+      ".dx-overlay{position:fixed;inset:0;z-index:850;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
       ".dx-overlay.on{display:flex;animation:dxIn .25s ease}",
       "@keyframes dxIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}",
       "body.dx-lock{overflow:hidden}",
@@ -3028,7 +3049,7 @@
       b.addEventListener("click", function () {
         var q = b.getAttribute("data-rq"), i2 = document.getElementById("smdSearchInput");
         smdRecentPush(q);
-        if (i2) { i2.value = q; i2.dispatchEvent(new Event("input", { bubbles: true })); i2.focus(); }
+        if (i2) { i2.value = q; i2.dispatchEvent(new Event("input", { bubbles: true })); if (!window.SMD_IS_NATIVE) i2.focus(); }
         else if (window.doSearch) window.doSearch(q);
       });
     });

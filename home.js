@@ -331,6 +331,12 @@
     try {
       var out = document.getElementById("outputArea");
       if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
+      // Native: window.print() is a no-op in WKWebView — route the case text to the iOS
+      // share sheet, which offers Save to Files / Print / Markup for a PDF. Web keeps print.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); });
+        return;
+      }
       var old = document.getElementById("smdPrintArea"); if (old) old.remove();
       if (!document.getElementById("smd-caseprint-style")) {
         var st = document.createElement("style"); st.id = "smd-caseprint-style";

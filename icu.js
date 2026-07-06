@@ -457,6 +457,21 @@
     ph: "pH", paco2: "PaCO₂", pao2: "PaO₂", be: "Base excess", fio2: "FiO₂", mode: "Mode", peep: "PEEP", tv: "Tidal volume", peak: "Peak", plateau: "Plateau" };
   var IMPORT_GROUP = { labs: "mapped", monitor: "vitals", abg: "abg", ventilator: "ventilator" };
   function importFileInput(kind, method) {
+    // Native: a programmatic <input type=file>.click() does NOT open a picker in
+    // WKWebView — use the Capacitor Camera plugin and feed its dataUrl into the SAME
+    // OCR pipeline (compressImage → doOcr → SMD_AI.vision). Web keeps the file input.
+    // NOTE: Camera returns IMAGES only (no PDF) — PDF import stays web-only.
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      importProgress(method === "camera" ? "Opening camera…" : "Opening photos…");
+      window.SMD_NATIVE.pickImage({ camera: method === "camera" }).then(function (dataUrl) {
+        importProgress("Compressing image…");
+        compressImage(dataUrl, function (d, meta) {
+          if (!d) return importProgress("Could not read this image.", true);
+          doOcr(kind, d, meta ? meta.kb + " KB" : "");
+        });
+      }).catch(function () { importDone(); });
+      return;
+    }
     var inp = document.createElement("input"); inp.type = "file";
     inp.accept = (method === "camera") ? "image/*" : "image/*,application/pdf";
     if (method === "camera") inp.setAttribute("capture", "environment");   // rear camera on mobile
@@ -1133,23 +1148,41 @@
     modalEl.classList.add("on");
     if (ai) {
       var ING = { monitor: "ingestMonitor", labs: "ingestLabs", ventilator: "ingestVentilator", flowsheet: "ingestFlowsheet" };
-      modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
-        inp.addEventListener("change", function () {
-          var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
-          var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
-          // Compress before sending to vision (was sending the raw full-res image → wasted
-          // AI tokens). compressImage downscales to ~1024px / q0.6.
-          compressImage(f, function (dataUrl) {
-            if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
-            window.SMD_AI.vision(dataUrl, kind).then(function (r) {
-              if (r && r.fields && Object.keys(r.fields).length) {
-                try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
-                if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
-              } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
-            });
+      // Shared body: compress a dataUrl/File then run vision and fill the tabs.
+      function runSnap(kind, out, dataUrl) {
+        if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
+        window.SMD_AI.vision(dataUrl, kind).then(function (r) {
+          if (r && r.fields && Object.keys(r.fields).length) {
+            try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
+            if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
+          } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
+        });
+      }
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        // Native: the hidden <input type=file> never opens a picker in WKWebView.
+        // Intercept the label tap and use the Camera plugin instead (same pipeline).
+        modalEl.querySelectorAll("label input[data-snap]").forEach(function (inp) {
+          var label = inp.parentNode, kind = inp.getAttribute("data-snap");
+          label.addEventListener("click", function (e) {
+            e.preventDefault();
+            var out = modalEl.querySelector('[data-out="' + kind + '"]');
+            if (out) out.textContent = "✨ Reading…";
+            window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
+              compressImage(dataUrl, function (d) { runSnap(kind, out, d); });
+            }).catch(function () { if (out) out.textContent = ""; });
           });
         });
-      });
+      } else {
+        modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
+          inp.addEventListener("change", function () {
+            var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
+            var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
+            // Compress before sending to vision (was sending the raw full-res image → wasted
+            // AI tokens). compressImage downscales to ~1024px / q0.6.
+            compressImage(f, function (dataUrl) { runSnap(kind, out, dataUrl); });
+          });
+        });
+      }
     }
   }
 
@@ -1177,6 +1210,11 @@
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
   // (system share sheet) with a clipboard-copy fallback where it isn't supported.
   function shareText(title, txt) {
+    // Native: navigator.share is unreliable in WKWebView — use the Capacitor share
+    // sheet (guest-safe: buildSummary is plain text, no Firebase/Firestore needed).
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      try { window.SMD_NATIVE.share({ title: title, text: txt, dialogTitle: title }).catch(function () {}); return true; } catch (e) {}
+    }
     try { if (navigator.share) { navigator.share({ title: title, text: txt }).catch(function () {}); return true; } } catch (e) {}
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); if (window.toast) toast("Case summary copied — sharing not supported here"); return true; } } catch (e) {}
     return false;

@@ -105,7 +105,15 @@
     toast("Preparing share…");
     ensureReady(function(db, user){
       if (!db) { try { console.error("[CASESHARE] no DB. firebase=", !!window.firebase, "firebase.firestore=", !!(window.firebase && window.firebase.firestore), "SMD_DB=", !!window.SMD_DB); } catch (e) {} toast("Cloud unavailable — reload once & try again."); return; }
-      if (!user) { toast("Please sign in with Google first (More ▸ Account & sign-in) to share."); return; }
+      if (!user) {
+        // Native guest: no Firebase user → share the case text directly via the iOS
+        // share sheet (no Firestore). PHI already scanned above. Web keeps sign-in gate.
+        if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+          window.SMD_NATIVE.share({ title: snap.title || "StewardMD — Clinical decision", text: snap.text || "", dialogTitle: "Share case" }).catch(function () { toast("Share unavailable"); });
+          return;
+        }
+        toast("Please sign in with Google first (More ▸ Account & sign-in) to share."); return;
+      }
       doShare(snap, db, user);
     });
   }
@@ -207,7 +215,8 @@
   function show(html){ var o=overlay(); o.innerHTML='<div class="cs-card">'+html+'</div>'; o.classList.add("on"); var x=o.querySelector("[data-cs-x]"); if(x)x.addEventListener("click",close); }
 
   function showResult(code){
-    var link = location.origin + "/?case=" + code;
+    // On native the origin is https://localhost (no backend) → build a real web link.
+    var link = (window.SMD_IS_NATIVE ? "https://stewardmd.in" : location.origin) + "/?case=" + code;
     show('<div class="cs-head"><h3>📤 Case shared</h3><button class="cs-x" data-cs-x>×</button></div>'
        + '<div class="cs-body"><div class="cs-code">'+esc(code)+'</div>'
        + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days. <b>Do not include patient identifiers (name, MRN, contact).</b></div>'
@@ -216,7 +225,7 @@
     var o=overlay();
     o.querySelector("#csCopyCode").addEventListener("click", function(){ copy(code, "Code copied"); });
     o.querySelector("#csCopyLink").addEventListener("click", function(){ copy(link, "Link copied"); });
-    o.querySelector("#csShareLink").addEventListener("click", function(){ try { if(navigator.share){ navigator.share({title:"StewardMD case "+code, text:"Open StewardMD case "+code, url:link}).catch(function(){}); } else copy(link,"Link copied"); } catch(e){ copy(link,"Link copied"); } });
+    o.querySelector("#csShareLink").addEventListener("click", function(){ if(window.SMD_IS_NATIVE && window.SMD_NATIVE){ window.SMD_NATIVE.share({title:"StewardMD case "+code, text:"Open StewardMD case "+code+"\n"+link, url:link}).catch(function(){ copy(link,"Link copied"); }); return; } try { if(navigator.share){ navigator.share({title:"StewardMD case "+code, text:"Open StewardMD case "+code, url:link}).catch(function(){}); } else copy(link,"Link copied"); } catch(e){ copy(link,"Link copied"); } });
   }
   function copy(t,msg){ try { if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t); toast(msg); return; } } catch(e){} toast(t); }
 
