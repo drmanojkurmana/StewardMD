@@ -40,8 +40,12 @@
   // — the same path the web popup uses. We call it explicitly rather than trusting only the
   // async onAuthStateChanged, so the gate reliably closes right after sign-in.
   function applyUser(u) {
+    // SMD_applyGoogleUser writes the account (type "google", a name) even when the provider
+    // returns no email; home.js's "signed in" check is what must tolerate an empty email.
     try { if (u && window.SMD_applyGoogleUser) window.SMD_applyGoogleUser(u); } catch (e) {}
     try { if (u && window.SMD_migrateGuestCasesOnSignIn) window.SMD_migrateGuestCasesOnSignIn(u); } catch (e) {}
+    // One-build diagnostic (set window.SMD_AUTH_DEBUG=1 to see what the provider returned).
+    try { if (window.SMD_AUTH_DEBUG) alert("post sign-in\nemail: " + (u && u.email) + "\nuid: " + (u && u.uid) + "\nname: " + (u && u.displayName) + "\nstored: " + (localStorage.getItem("stewardmd_account") || "NONE")); } catch (e) {}
   }
   function fail(where, e) {
     var msg = (e && (e.message || e.code)) ? (e.message || e.code) : String(e);
