@@ -50,6 +50,24 @@
   window.SMD_ACCOUNT = { uid: uid, provider: provider, profile: profile, onChange: onChange, _emit: emit };
   window.SMD_OWNER_KEY = function () { return uid(); };
 
+  /* -------- Pro entitlement (single source of truth) --------
+   * Real entitlement = Firebase custom claim pro===true (set server-side). Until billing
+   * exists we ALSO grant Pro via:
+   *   • BETA_PRO_ALL — every signed-in user is Pro (so the team can test Pro features), and
+   *   • TEST_PRO_EMAILS — a named allowlist that stays Pro even after BETA_PRO_ALL is off.
+   * ⚠️ TESTING ONLY: set BETA_PRO_ALL = false before launch and rely on the claim/allowlist. */
+  var BETA_PRO_ALL = true;
+  var TEST_PRO_EMAILS = ["drmanojkurmana@gmail.com", "northstar201b@gmail.com", "mkkmanojkumar0@gmail.com"];
+  function proEmail() { var u = fbUser(), a = legacy(); return String((u && u.email) || (a && a.email) || "").toLowerCase(); }
+  function isProSync() { if (BETA_PRO_ALL) return true; return TEST_PRO_EMAILS.indexOf(proEmail()) > -1; }
+  function isPro() {
+    if (BETA_PRO_ALL) return Promise.resolve(true);
+    if (TEST_PRO_EMAILS.indexOf(proEmail()) > -1) return Promise.resolve(true);
+    var u = fbUser(); if (!u) return Promise.resolve(false);
+    return u.getIdTokenResult().then(function (r) { return !!(r && r.claims && r.claims.pro === true); }).catch(function () { return false; });
+  }
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, TEST_PRO_EMAILS: TEST_PRO_EMAILS };
+
   // Enrich the legacy account object with the real provider + uid (keeps app.js as writer).
   function wrapApply() {
     if (window.SMD_applyGoogleUser && window.SMD_applyGoogleUser._smdWrapped) return true;

@@ -35,6 +35,9 @@
   function currentUser() { try { return fb() && fb().auth().currentUser; } catch (e) { return null; } }
   function idToken() { var u = currentUser(); return u ? u.getIdToken() : Promise.resolve(null); }
   function isPro() {
+    // Single source of truth (allowlist + BETA_PRO_ALL + real claim). Still needs sign-in,
+    // since the download itself requires a Firebase ID token.
+    if (window.SMD_PRO && window.SMD_PRO.isPro) return window.SMD_PRO.isPro();
     var u = currentUser(); if (!u) return Promise.resolve(false);
     return u.getIdTokenResult().then(function (r) { return !!(r && r.claims && r.claims.pro === true); }).catch(function () { return false; });
   }

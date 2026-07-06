@@ -32,13 +32,11 @@
   // AI Vision availability (matches reasoning.js visionAiOn; default on = current beta behavior).
   function aiAvailable() { try { return lget("smd_ai_vision") !== "0"; } catch (e) { return true; } }
   function deviceOcrAvailable() { return !!(window.SMD_NATIVE && window.SMD_NATIVE.ocr); }
-  // Pro entitlement — best-effort, for LABELLING only (never blocks; beta/test allowed).
+  // Pro entitlement — delegates to the app's single source of truth (SMD_PRO). For LABELLING
+  // only here (AI Vision never hard-blocks; consent is the real gate). Beta/test allowed.
   function isPro() {
-    try {
-      var u = window.firebase && window.firebase.auth && window.firebase.auth().currentUser;
-      if (!u) return Promise.resolve(false);
-      return u.getIdTokenResult().then(function (r) { return !!(r && r.claims && r.claims.pro === true); }).catch(function () { return false; });
-    } catch (e) { return Promise.resolve(false); }
+    try { if (window.SMD_PRO && window.SMD_PRO.isPro) return window.SMD_PRO.isPro(); } catch (e) {}
+    return Promise.resolve(true);   // no entitlement system present → allow (per spec)
   }
 
   var SCREEN_KINDS = { monitor: 1, ventilator: 1 };                 // layout-dependent → AI recommended
