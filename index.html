@@ -163,7 +163,7 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
 </style>
-<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
+<script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())?0:900,CAP=15000;
 var returning=false;try{returning=!!(localStorage.getItem("stewardmd_account")||localStorage.getItem("stewardmd_guest_used"));}catch(e){}
 function vis(id){var el=document.getElementById(id);if(!el)return false;var cs=getComputedStyle(el);return cs.display!=="none"&&cs.visibility!=="hidden"&&el.offsetHeight>1&&parseFloat(cs.opacity||"1")>0.01;}
 function ready(){try{

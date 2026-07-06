@@ -1653,6 +1653,7 @@
   function pushIsOn() { try { return localStorage.getItem("smd_push_on") === "1" && ("Notification" in window) && Notification.permission === "granted"; } catch (e) { return false; } }
   function renderPushRow() {
     var el = _notifRoot && _notifRoot.querySelector("#ntfPush"); if (!el) return;
+    if (nativePush()) { renderPushRowNative(el); return; }   // native app: use @capacitor/push-notifications
     if (!pushSupported()) {
       // iOS only exposes Push inside the installed (home-screen) PWA.
       el.innerHTML = (isIOS() && !isStandalone())
@@ -1699,6 +1700,79 @@
       try { localStorage.removeItem("smd_push_on"); } catch (e) {}
       toast("Phone alerts turned off."); renderPushRow();
     });
+  }
+  /* ---- Native push (Capacitor @capacitor/push-notifications) — the native app has no
+     service-worker/web-push, so the panel uses a real "Turn on notifications" button and
+     the OS permission dialog instead of the web "Add to Home Screen" hint. ---- */
+  function nativePush() { return (window.SMD_IS_NATIVE && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) || null; }
+  function renderPushRowNative(el) {
+    var P = nativePush(); if (!P) { el.innerHTML = ""; return; }
+    P.checkPermissions().then(function (res) {
+      var st = res && res.receive;
+      if (st === "granted") {
+        el.innerHTML = '<div class="ntf-push-on"><span>🔔 Phone alerts are <b>on</b> for this device</span></div>';
+      } else if (st === "denied") {
+        el.innerHTML = '<div class="ntf-push-hint">🔕 Notifications are blocked. Turn them on in <b>iOS Settings › StewardMD › Notifications</b>.</div>';
+      } else {
+        el.innerHTML = '<div class="ntf-push-off"><span>Get a phone alert when new medical updates arrive</span><button class="ntf-push-btn" data-pushnative="on">Turn on notifications</button></div>';
+        var b = el.querySelector("[data-pushnative]"); if (b) b.addEventListener("click", function () { enablePushNative(); });
+      }
+    }).catch(function () { el.innerHTML = ""; });
+  }
+  function enablePushNative() {
+    var P = nativePush(); if (!P) return;
+    initNativePushListeners();
+    P.requestPermissions().then(function (res) {
+      if (res && res.receive === "granted") {
+        try { P.register(); } catch (e) {}
+        try { localStorage.setItem("smd_push_on", "1"); } catch (e) {}
+        try { toast("Notifications enabled ✅"); } catch (e) {}
+      } else { try { toast("Notifications not enabled."); } catch (e) {} }
+      try { renderPushRow(); } catch (e) {}
+    }).catch(function () { try { toast("Couldn't enable notifications."); } catch (e) {} });
+  }
+  // Forward the APNs device token to the server (best-effort; server-side delivery is
+  // provisioned separately — the client flow works regardless).
+  function initNativePushListeners() {
+    var P = nativePush(); if (!P || P.__smdListen) return; P.__smdListen = true;
+    try {
+      P.addListener("registration", function (t) {
+        var token = t && t.value; if (!token) return;
+        try { fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ native: true, platform: "ios", token: token }) }).catch(function () {}); } catch (e) {}
+      });
+      P.addListener("registrationError", function () {});
+    } catch (e) {}
+  }
+  // On native app open: if notifications aren't decided yet, offer a one-tap enable popup.
+  // Already-granted → silently re-register; denied → respect it (no popup).
+  function maybeOfferPushOnOpen() {
+    var P = nativePush(); if (!P || window.__smdPushOffered) return; window.__smdPushOffered = true;
+    initNativePushListeners();
+    P.checkPermissions().then(function (res) {
+      var st = res && res.receive;
+      if (st === "granted") { try { P.register(); } catch (e) {} return; }
+      if (st !== "prompt") return;   // denied → don't nag
+      showPushPopup();
+    }).catch(function () {});
+  }
+  function showPushPopup() {
+    if (document.getElementById("smdPushPop")) return;
+    var d = document.createElement("div"); d.id = "smdPushPop";
+    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
+    d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
+      '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
+      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
+      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
+    document.body.appendChild(d);
+    function close() { if (d.parentNode) d.parentNode.removeChild(d); }
+    d.querySelector("#smdPushLater").addEventListener("click", close);
+    d.addEventListener("click", function (e) { if (e.target === d) close(); });
+    d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
+  }
+  // Offer the notification popup shortly after the app is up (native only).
+  if (window.SMD_IS_NATIVE) {
+    try { window.addEventListener("load", function () { setTimeout(function () { try { maybeOfferPushOnOpen(); } catch (e) {} }, 1800); }); } catch (e) {}
   }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;
