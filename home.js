@@ -922,25 +922,34 @@
   function openAccount() {
     var a = readAccount();
     var body;
-    if (a && (a.email || a.type === "google" || a.type === "apple")) {
-      var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
-      var pic = a.picture
-        ? '<img class="hv-acct-pic" src="' + smdEsc(a.picture) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
+    // Profile is driven by the unified account layer (real provider, photo, name) with the
+    // legacy stored object as fallback.
+    var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
+    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
+    var dot = '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
+    var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
+    if (signedIn) {
+      var nm = (P && P.name) || (a && a.name) || "Signed in";
+      var em = (P && P.email) || (a && a.email) || "";
+      var pc = (P && P.picture) || (a && a.picture) || "";
+      var initial = (((nm || em || "U").trim()[0]) || "U").toUpperCase();
+      var pic = pc
+        ? '<img class="hv-acct-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
         : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
       body = '<div class="hv-acct">' + pic +
-        '<div class="hv-acct-name">' + smdEsc(a.name || "Signed in") + '</div>' +
-        '<div class="hv-acct-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="hv-acct-badge">' + acctProviderLabel(a, true) + '</div>' +
+        '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
+        (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
+        '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
-        '<button data-acct="delete" type="button" style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Delete account &amp; data</button></div>';
+        '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
     } else {
       body = '<div class="hv-acct">' +
         '<div class="hv-acct-pic hv-acct-ph">?</div>' +
-        '<div class="hv-acct-name">Not signed in</div>' +
-        '<div class="hv-acct-email">Guest mode — cases stay on this device only</div>' +
-        '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in with Google</button>' +
-        '<div class="hv-acct-note">Sign in to sync your cases across devices and share them by code.</div>' +
-        '<button data-acct="erase" type="button" style="width:100%;margin-top:12px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Erase all data on this device</button></div>';
+        '<div class="hv-acct-name">Guest mode</div>' +
+        '<div class="hv-acct-email">Cases stay on this device only</div>' +
+        '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in to save your cases</button>' +
+        '<div class="hv-acct-note">Sign in with Google or Apple to sync your cases across devices, keep them safe, and share by code. Your current cases move with you.</div>' +
+        '<button data-acct="erase" type="button" ' + dangerBtn.replace("margin-top:10px", "margin-top:12px") + '>Erase all data on this device</button></div>';
     }
     openSheet('<div class="hv-sh-t">Account &amp; sign-in</div>' + body);
     var s = sheetEl();
@@ -950,6 +959,11 @@
     if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
+    // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
+    if (!openAccount._smdSub && window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) {
+      openAccount._smdSub = true;
+      window.SMD_ACCOUNT.onChange(function () { try { var sh = sheetEl(); if (sh && sh.querySelector(".hv-acct")) openAccount(); } catch (e) {} });
+    }
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
   // Wipes the user's cloud cases (Firestore users/{key}/cases), every local app key,

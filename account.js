@@ -95,21 +95,23 @@
       if (_migrated[u]) return;
       var flag = "stewardmd_cases_uidmigrated:" + u;
       if (localStorage.getItem(flag)) { _migrated[u] = 1; return; }
-      var target = "stewardmd_cases_" + u, merged = [], seen = {};
-      function take(k) {
+      var target = "stewardmd_cases_" + u, merged = [], seen = {}, _movedIn = 0;
+      function take(k, isLegacy) {
         if (!k) return;
         var arr; try { arr = JSON.parse(localStorage.getItem(k) || "[]") || []; } catch (e) { return; }
         if (!Array.isArray(arr)) return;
-        arr.forEach(function (c) { var id = c && (c.id || c.caseId); if (id != null && !seen[id]) { seen[id] = 1; merged.push(c); } });
+        arr.forEach(function (c) { var id = c && (c.id || c.caseId); if (id != null && !seen[id]) { seen[id] = 1; merged.push(c); if (isLegacy) _movedIn++; } });
       }
-      take(target);
+      take(target, false);
       for (var i = 0; i < localStorage.length; i++) {
         var k = localStorage.key(i);
-        if (k && k.indexOf("stewardmd_cases_") === 0 && k !== target && k.indexOf("migrated") < 0) take(k);
+        if (k && k.indexOf("stewardmd_cases_") === 0 && k !== target && k.indexOf("migrated") < 0) take(k, true);
       }
       merged.sort(function (a, b) { return (b.savedAt || b.ts || b.updatedAt || 0) - (a.savedAt || a.ts || a.updatedAt || 0); });
       var keep = merged.slice(0, 10);
       if (keep.length) localStorage.setItem(target, JSON.stringify(keep));
+      // Guest→account upgrade feedback: how many were carried in from other buckets.
+      if (_movedIn > 0) { try { (window.toast || function () {})(_movedIn + (_movedIn === 1 ? " case" : " cases") + " moved to your account"); } catch (e) {} }
       // Signed-in users read from Firestore (users/<uid>/cases), so also PUSH the merged
       // cases to the cloud bucket (best-effort) — else the cloud read returns empty and the
       // migrated local cases wouldn't surface. Idempotent: runs once per uid (flag below).
@@ -121,11 +123,28 @@
     } catch (e) {}
   }
 
-  // Boot: wrap the seams as soon as app.js has defined them; migrate on sign-in.
+  window.SMD_migrateCasesToUid = ensureCasesMigrated;          // callable on guest→account upgrade
+
+  // Stay signed in across launches. Firebase web compat defaults to LOCAL persistence, but we
+  // set it explicitly (before any signInWithCredential) so it's guaranteed in the native WebView.
+  var _persisted = false;
+  function ensurePersistence() {
+    if (_persisted) return;
+    try {
+      var a = auth(), F = window.firebase;
+      if (a && a.setPersistence && F && F.auth && F.auth.Auth && F.auth.Auth.Persistence) {
+        a.setPersistence(F.auth.Auth.Persistence.LOCAL).catch(function () {});
+        _persisted = true;
+      }
+    } catch (e) {}
+  }
+
+  // Boot: wrap the seams as soon as app.js has defined them; set persistence + migrate on sign-in.
   (function boot(n) {
     var ok = wrapApply() & wrapCases();
+    ensurePersistence();
     if (!ok && n < 80) { setTimeout(function () { boot(n + 1); }, 250); return; }
     try { ensureCasesMigrated(); } catch (e) {}
   })(0);
-  onChange(function () { try { ensureCasesMigrated(); } catch (e) {} });
+  onChange(function () { ensurePersistence(); try { ensureCasesMigrated(); } catch (e) {} });
 })();
