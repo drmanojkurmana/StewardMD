@@ -3438,7 +3438,12 @@
     } catch (e) {}
     return Promise.resolve(base);
   }
-  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
+  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
+  // AI Vision (native OCR→cloud text-structuring) is its OWN gate, default ON. It is
+  // privacy-safe independent of the chat toggle: the PHOTO never leaves the device
+  // (Apple Vision OCR is on-device) and only PHI-redacted TEXT is sent to Vertex. Opt out
+  // with localStorage smd_ai_vision="0".
+  function visionAiOn() { try { return localStorage.getItem("smd_ai_vision") !== "0"; } catch (e) { return true; } }
   // On-device PHI redaction: strip obvious identifiers from OCR text BEFORE anything is
   // sent to the cloud. Targets email, long phone/ID digit-runs, and labelled
   // MRN/UHID/IP/Name/DOB/dates. Deliberately conservative so short clinical VALUES
@@ -3462,16 +3467,31 @@
     var out = {};
     function grab(re) { var m = t.match(re); return m ? parseFloat(m[1]) : null; }
     function set(k, v) { if (v != null && !isNaN(v)) out[k] = v; }
+    // On monitors the value sits below/beside its label with units in between (e.g. M70:
+    // "HR bpm 60", "TEMP °C 30 T1 36.5"). Scan the ~44 chars after the label and return the
+    // first number within the physiologic range — skipping waveform sweep speeds ("25 mm/s")
+    // and BP-style "120/80" fragments, and stepping past out-of-range distractors.
+    function near(labels, lo, hi, dec) {
+      var lm = t.match(new RegExp("\\b(?:" + labels + ")\\b", "i")); if (!lm) return null;
+      var start = lm.index + lm[0].length, tail = t.slice(start, start + 44);
+      var numRe = /(\d{1,3}(?:\.\d)?)\s*(mm\/s|\/\s*\d)?/g, m;
+      while ((m = numRe.exec(tail))) {
+        if (m[2]) continue;                        // skip "12.5 mm/s" and "120/80"
+        var v = parseFloat(m[1]);
+        if (v >= lo && v <= hi) return dec ? v : Math.round(v);
+      }
+      return null;
+    }
     if (kind === "monitor" || kind === "vitals") {
       var bp = t.match(/\b(\d{2,3})\s*\/\s*(\d{2,3})\b/);
       if (bp) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
-      set("map", grab(/\b(?:MAP|MAD|mean)\D{0,4}(\d{2,3})\b/i));
-      set("hr", grab(/\b(?:HR|PR|pulse|heart\s*rate)\D{0,4}(\d{2,3})\b/i));
-      set("spo2", grab(/\b(?:SpO2|SpO₂|SPO2|SaO2|sat)\D{0,4}(\d{2,3})\b/i));
-      set("rr", grab(/\b(?:RR|resp\w*)\D{0,4}(\d{1,2})\b/i));
-      set("temp", grab(/\b(?:T|temp\w*)\D{0,4}(3[5-9](?:\.\d)?|4[0-2](?:\.\d)?)\b/i));
-      set("cvp", grab(/\bCVP\D{0,4}(\d{1,2})\b/i));
-      set("etco2", grab(/\b(?:EtCO2|ETCO2)\D{0,4}(\d{1,2})\b/i));
+      set("map", near("MAP|MAD|mean", 30, 180));
+      set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
+      set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
+      set("rr", near("RR|RESP|resp\\w*", 4, 70));
+      set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
+      set("cvp", near("CVP", 0, 30));
+      set("etco2", near("EtCO2|ETCO2", 5, 80));
     } else if (kind === "abg") {
       set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,2})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2})\b/));
       set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
@@ -3530,7 +3550,7 @@
     // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
     // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
     visionText: function (text, kind) {
-      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
+      var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
         .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
@@ -3547,20 +3567,28 @@
         var lines = (o && o.lines) || [];
         var text = (o && o.text) || lines.join("\n");
         var online = (typeof navigator === "undefined") || navigator.onLine !== false;
-        // Structure on-device when the cloud can't (offline / quota / endpoint not deployed).
+        // Apple Vision OCR is always done on-device (above). We ALSO parse fields on-device
+        // for free/instantly — this is both the offline path and a safety net that fills any
+        // field the cloud misses. Cloud (Vertex, from redacted text) is more accurate, so it
+        // wins on overlap; on-device fills the gaps → "use both engines".
+        var localFields = parseFieldsOnDevice(text, kind) || {};
         function onDevice(reason) {
-          var pf = parseFieldsOnDevice(text, kind);
-          if (pf && Object.keys(pf).length) return { mode: "fields", fields: pf, lines: lines, source: "on-device", reason: reason };
+          if (Object.keys(localFields).length) return { mode: "fields", fields: localFields, lines: lines, source: "on-device", reason: reason };
           return { mode: "lines", lines: lines, reason: reason };
         }
-        if (!aiOn() || !online) return onDevice(aiOn() ? "offline" : "ai-off");
+        if (!visionAiOn() || !online) return onDevice(visionAiOn() ? "offline" : "ai-off");
         var scrubbed = redactPHI(text);
         return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {
           if (r && !r.error) {
             var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
-            if (f && (Object.keys(f).length || f.medications)) return { mode: "fields", fields: f, lines: lines, source: "cloud" };
+            if (f && (Object.keys(f).length || f.medications)) {
+              var merged = {}; var k;                       // cloud wins, on-device fills gaps
+              for (k in localFields) if (localFields.hasOwnProperty(k)) merged[k] = localFields[k];
+              for (k in f) if (f.hasOwnProperty(k) && f[k] != null) merged[k] = f[k];
+              return { mode: "fields", fields: merged, lines: lines, source: "cloud+on-device" };
+            }
           }
-          return onDevice((r && r.error) || "no-fields");   // cloud unavailable → parse locally
+          return onDevice((r && r.error) || "no-fields");   // cloud unavailable → on-device only
         }).catch(function () { return onDevice("error"); });
       });
     }
