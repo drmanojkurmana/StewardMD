@@ -3584,10 +3584,38 @@
         .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    // On-device-first AI Vision (NATIVE only). 1) OCR on-device (image never leaves the
-    // device); 2) redact identifiers; 3) if AI is ON and online, send ONLY scrubbed TEXT
-    // to the cloud for structured fields; 4) on ANY cloud failure (quota/timeout/offline/
-    // AI-off) resolve with the recognized lines for on-device tap-to-fill. Never dead-ends.
+    // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read
+    // spatial layout (critical for monitor/ventilator, where a number's position decides if it
+    // is HR/SBP/SpO2/RR). No pre-OCR, redaction, or flattening. 429/entitlement/offline are
+    // surfaced as { error }. Consent + engine choice are enforced upstream (SMD_IMAGE_ENGINE).
+    vision: function (dataUrl, kind) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var img = String(dataUrl == null ? "" : dataUrl); if (!img) return Promise.resolve({ error: "no-image" });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
+        .then(function (r) {
+          if (r.status === 429) return { error: "quota" };
+          if (r.status === 401 || r.status === 403) return { error: "entitlement" };
+          if (!r.ok) return { error: "server" };
+          return r.json();
+        }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
+    // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
+    // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
+    readImageLocal: function (dataUrl, kind) {
+      if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.resolve({ error: "ocr-unavailable" });
+      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+        var lines = (o && o.lines) || [];
+        var text = (o && o.text) || lines.join("\n");
+        var fields = parseFieldsOnDevice(text, kind) || {};
+        return Object.keys(fields).length
+          ? { mode: "fields", fields: fields, lines: lines, source: "on-device" }
+          : { mode: "lines", lines: lines, source: "on-device" };
+      }).catch(function () { return { error: "ocr-failed" }; });
+    },
+    // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional
+    // scrubbed-TEXT cloud call). Retained for backward compatibility; the ICU flow now routes
+    // through SMD_IMAGE_ENGINE.process(), which picks device (readImageLocal) or AI (vision).
     // Resolves: { mode:"fields", fields, lines } | { mode:"lines", lines, reason? }.
     readImage: function (dataUrl, kind) {
       if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.reject(new Error("ocr-unavailable"));

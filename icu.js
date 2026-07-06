@@ -541,21 +541,35 @@
       doOcr(kind, dataUrl, meta ? meta.kb + " KB" : "");
     });
   }
+  // Map an engine result (fields keyed strictly) → the numeric field map the review uses.
+  // Ingest mapping is UNCHANGED — values map by key exactly as before.
+  function extractOcrFields(r) {
+    var fields = {};
+    if (r && r.mode === "fields") {
+      var src = (r.fields && typeof r.fields === "object") ? r.fields : {};
+      Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
+    }
+    return fields;
+  }
   function doOcr(kind, dataUrl, note) {
+    var mapKind = IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs";
+    // Route through the clinician-controlled Image Engine chooser (Private Device OCR vs
+    // AI Vision). It handles engine choice, PHI consent, and graceful fallback, then resolves
+    // the same { mode, fields, lines } shape the review already consumes. Falls back to the
+    // legacy readImage path only if the module is somehow absent.
+    if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
+      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind }).then(function (r) {
+        importDone();
+        if (!r || r.cancelled) return;   // user cancelled — no dead end, just closes cleanly
+        openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
+      }).catch(function () { importDone(); openImportReview(kind, {}, dataUrl, []); });
+      return;
+    }
     importProgress("Reading on-device…" + (note ? " (" + note + ")" : ""));
     if (!(window.SMD_AI && SMD_AI.readImage)) { importProgress("On-device reader unavailable — enter values manually.", true); return; }
-    // On-device-first: OCR runs on the device (image never leaves). If AI is on + online,
-    // ONLY the scrubbed text is sent for structured fields; otherwise we tap-to-fill locally.
-    SMD_AI.readImage(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
+    SMD_AI.readImage(dataUrl, mapKind).then(function (r) {
       importDone();
-      var fields = {};
-      if (r && r.mode === "fields") {
-        var src = (r.fields && typeof r.fields === "object") ? r.fields : {};
-        Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
-      }
-      // Always open the review; pass recognized lines so the clinician can tap-to-fill
-      // (this is the graceful fallback on quota/offline/AI-off, and a helper otherwise).
-      openImportReview(kind, fields, dataUrl, (r && r.lines) || []);
+      openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
     }).catch(function () { importDone(); importProgress("Could not read this on-device — enter values manually.", true); });
   }
   // Clinician review — nothing enters the patient context until confirmed here.
@@ -1181,38 +1195,44 @@
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
     ensureModal();
-    // AI Vision is on-device-first and requires the native ML Kit OCR — hide it on web.
-    var ai = !!(window.SMD_IS_NATIVE && window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on());
+    // Snapshot capture is available whenever an image engine can run on this device —
+    // native device OCR (Apple Vision) OR AI Vision. The clinician chooses the engine per
+    // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
+    var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
+      (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
     var steps = [["📷", "ICU Monitor", "monitor"], ["🫁", "Ventilator", "ventilator"], ["🩸", "Laboratory Report", "labs"], ["📋", "ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " Capture " + s[1] + "</div>" +
-          (ai
+          (canSnap
             ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">📷 Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ✎ enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
             : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span>') +
           "</div></div>";
       }).join("") + "</div>" +
-      (ai
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">✨ AI Vision ON</span><p style="margin-top:8px">Capture each screen — it\'s read automatically and the ICU tabs are filled in for you. <b>Verify every value.</b></p></div>'
-        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision · Coming soon</span><p style="margin-top:8px">Capture ICU screens and have them read automatically into the tabs. Turn on AI features in settings to use this.</p></div>') +
+      (canSnap
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">📷 Image Engine ready</span><p style="margin-top:8px">Capture each screen — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro), then the ICU tabs are filled in. <b>Verify every value.</b></p></div>'
+        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
-    if (ai) {
+    if (canSnap) {
       var ING = { monitor: "ingestMonitor", labs: "ingestLabs", ventilator: "ingestVentilator", flowsheet: "ingestFlowsheet" };
       // Shared body: compress a dataUrl/File then run vision and fill the tabs.
       function runSnap(kind, out, dataUrl) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
-        if (!(window.SMD_AI && SMD_AI.readImage)) { if (out) out.textContent = "On-device reader unavailable — enter manually."; return; }
-        // On-device-first: OCR on device (image never leaves); AI structures the text when
-        // on+online, else we surface the recognized text so the clinician can enter it.
-        SMD_AI.readImage(dataUrl, kind).then(function (r) {
-          if (r && r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
+        // Route through the clinician-controlled Image Engine (device OCR vs AI Vision), with
+        // the legacy readImage as a fallback if the module is absent.
+        var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
+          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: kind })
+          : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, kind) : Promise.reject(new Error("no-reader")));
+        run.then(function (r) {
+          if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
+          if (r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
             try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
             if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
-          } else if (r && r.lines && r.lines.length) {
+          } else if (r.lines && r.lines.length) {
             if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually.";
           } else if (out) out.textContent = "Couldn't read that image — try again or enter manually.";
-        }).catch(function () { if (out) out.textContent = "Couldn't read this on-device — enter manually."; });
+        }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
       }
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
         // Native: the hidden <input type=file> never opens a picker in WKWebView.

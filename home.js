@@ -79,10 +79,15 @@
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
+        var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
+          ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
+          : "";
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
+          (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
           group("ward", "Ward Integration", wardBody, false));
+        try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(setBody); } catch (e) {}
         // wire subgroup collapse
         setBody.querySelectorAll("[data-grp]").forEach(function (h) {
           h.addEventListener("click", function () {
