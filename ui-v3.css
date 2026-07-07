@@ -75,7 +75,7 @@ body.v3-dark, body.dark {
 .v3-spacer{flex:1}
 .v3-avatar{width:34px;height:34px;border-radius:50%;background:var(--v3-primary-soft);color:var(--v3-primary);display:flex;align-items:center;justify-content:center;font:700 13px var(--v3-font);border:1px solid var(--v3-border)}
 .v3-dotbadge{position:relative}.v3-dotbadge::after{content:"";position:absolute;top:9px;right:10px;width:7px;height:7px;border-radius:50%;background:#ef4444;border:2px solid var(--v3-panel)}
-.v3-main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:var(--v3-s4);padding-bottom:calc(96px + env(safe-area-inset-bottom))}
+.v3-main{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding:var(--v3-s4);padding-bottom:calc(96px + env(safe-area-inset-bottom))}
 .v3-stack{max-width:var(--v3-maxw);margin:0 auto;display:flex;flex-direction:column;gap:var(--v3-s4)}
 
 /* ---- bottom nav ---- */
@@ -158,7 +158,7 @@ body.v3-dark, body.dark {
 /* B — greeting: date eyebrow (tracked caps) + serif headline */
 #homeV2.hv4 .v4-greet{margin:var(--v3-s1) 2px 2px}
 #homeV2.hv4 .v4-greet .ey{font:600 11px/1.4 var(--v3-font);text-transform:uppercase;letter-spacing:.16em;color:var(--v3-muted)}
-#homeV2.hv4 .v4-greet .hi{font:500 28px/1.12 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink);margin-top:6px}
+#homeV2.hv4 .v4-greet .hi{font:500 28px/1.12 var(--hv4-serif);letter-spacing:-.01em;color:var(--v3-ink);margin-top:6px;overflow-wrap:anywhere;word-break:break-word}
 #homeV2.hv4 .v4-greet .q{font:400 14px/1.5 var(--v3-font);color:var(--v3-muted);margin-top:4px}
 /* brand banner (restored) — flat hairline card, serif wordmark, outline tag + logo */
 #homeV2.hv4 .v4-hero{display:flex;align-items:center;gap:var(--v3-s4);padding:18px;border:1px solid var(--hv4-line);border-radius:var(--hv4-r);background:var(--v3-panel);box-shadow:none}

@@ -692,6 +692,7 @@
       var a = JSON.parse(localStorage.getItem("stewardmd_account") || "{}");
       var n = String((a && a.name) || "").trim();
       if (!n || (a && a.type === "guest" && !a.name)) return "";
+      if (n.indexOf("@") > -1) return "";                 // Apple private-relay etc. store an email as "name" — don't greet with it
       return n.split(/\s+/)[0];
     } catch (e) { return ""; }
   }
@@ -1843,7 +1844,7 @@
   }
   function injectV3CSS() {
     if (document.getElementById("smd-uiv3")) return;
-    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s9";
+    var l = document.createElement("link"); l.id = "smd-uiv3"; l.rel = "stylesheet"; l.href = "/ui-v3.css?v=s10";
     document.head.appendChild(l);
   }
   // Live, in-place UI switch — NO page reload, NO re-splash / re-consent / re-login.
