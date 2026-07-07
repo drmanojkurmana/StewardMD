@@ -63,7 +63,7 @@
       var cr = links.filter(function (b) { return /Clinical Reasoning/i.test(b.textContent); })[0];
       if (cr && cr.parentNode) {
         var dx = topBtn("🩺", "Dx My Patient", false, function () { try { openDxChooser(); } catch (e) {} });
-        var ws = topBtn("🏥", "Ward Sync (testing mode)", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
+        var ws = topBtn("🏥", "Ward Sync", false, function () { try { if (window.openGHIS) openGHIS(); else toast("Ward Sync loading…"); } catch (e) {} });
         cr.parentNode.insertBefore(dx, cr);            // Dx My Patient first
         cr.parentNode.insertBefore(ws, cr.nextSibling); // Ward Sync after Clinical Reasoning
       }
@@ -78,7 +78,7 @@
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", false)) +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
-          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
+          '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync</button>';
         var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
           ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
           : "";
@@ -718,7 +718,7 @@
       '</header>' +
       '<main class="v3-main"><div class="v3-stack">' +
         '<div class="v4-greet"><div class="ey">' + dateV4() + '</div><div class="hi">' + greetLineV4() + '</div><div class="q">What would you like to do?</div></div>' +
-        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Antibiotic Decision Engine</span><p class="v4-hero-p">Evidence-based antimicrobial recommendations at the point of care.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
+        '<section class="v4-hero"><div class="v4-hero-bd"><div class="v4-hero-tt">Steward<span class="v3-md">MD</span></div><span class="v4-hero-tag">Clinical decision support</span><p class="v4-hero-p">Evidence-based decisions at the point of care — antimicrobials, differentials, ICU &amp; more.</p></div><div class="v4-hero-logo"><img src="/logo.png" alt="StewardMD"></div></section>' +
         '<div class="v4-qrow">' +
           '<button class="v4-qc" data-act="syndromes" aria-label="Syndromes">' + svg("syndromes") + '<span>Syndromes</span></button>' +
           '<button class="v4-qc" data-act="ward" aria-label="Ward Sync">' + svg("ward") + '<span>Ward Sync</span></button>' +
@@ -726,7 +726,7 @@
           '<button class="v4-qc" data-act="antibiogram" aria-label="Antibiogram">' + svg("antibiogram") + '<span>Antibiogram</span></button>' +
         '</div>' +
         '<button class="v4-action primary" data-act="startcase" aria-label="Start a Case"><span class="ic">' + svg("stcase") + '</span><span class="bd"><span class="tt">Start a Case</span><span class="sub">Structured clinical assessment</span></span><span class="arr">' + svg("arrow") + '</span></button>' +
-        '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient (Beta)"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient <span class="v4-badge">Beta</span></span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
+        '<button class="v4-action secondary" data-act="reasoning" aria-label="Dx My Patient"><span class="ic">' + svg("reasoning") + '</span><span class="bd"><span class="tt">Dx My Patient</span><span class="sub">Live differential reasoning &amp; next steps</span></span><span class="arr">' + svg("chev") + '</span></button>' +
         '<div class="v4-sec">Clinical tools</div>' +
         '<div class="v4-grid">' +
           tileV4("calculators", "calc", "Calculators", "70+ clinical tools") +
@@ -736,7 +736,7 @@
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
           '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
-          '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div>' +
+          '<div class="cred">© 2026 StewardMD · All rights reserved · Dr. Manoj Kumar Kurmana, MD</div>' +
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a href="/privacy" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline">Terms of Use</a> · <a href="/support" style="color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
       '<nav class="v3-tabbar">' +
@@ -770,7 +770,7 @@
           '<button class="v3-qc" data-act="theme">' + svg("sun") + '<span>Theme</span></button>' +
         '</div>' +
         '<button class="v3-primary" data-act="startcase"><div class="ic">' + svg("stcase") + '</div><div style="flex:1;min-width:0"><div class="tt">Start a Case</div><div class="sub">New clinical decision — choose Simple or Advanced</div></div><div class="arr">' + svg("arrow") + '</div></button>' +
-        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Dx My Patient <span style="color:var(--v3-primary);font-size:12px;font-weight:700">(Beta)</span></div><div class="sub">Reason through your patient — live differential, confidence &amp; next steps</div></div><div class="arr">' + svg("chev") + '</div></button>' +
+        '<button class="v3-secondary" data-act="reasoning"><div class="ic">' + svg("reasoning") + '</div><div style="flex:1;min-width:0"><div class="tt">Dx My Patient</div><div class="sub">Reason through your patient — live differential, confidence &amp; next steps</div></div><div class="arr">' + svg("chev") + '</div></button>' +
         '<div class="v3-sec-label">Quick access</div>' +
         '<div class="v3-grid">' +
           '<button class="v3-tile" data-act="cases"><div class="ic">' + svg("folder") + '</div><div style="min-width:0"><div class="tt">My Cases</div><div class="sub">Saved assessments</div></div></button>' +
@@ -784,7 +784,7 @@
           '<div class="v3-devlabel">DEVELOPED BY</div>' +
           '<img id="v3DevLogo" class="v3-devlogo" alt="MaiKnowledge" />' +
           '<div class="v3-devname">MaiKnowledge</div>' +
-          '<div class="v3-devmeta">© 2026 StewardMD · Developed by MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div>' +
+          '<div class="v3-devmeta">© 2026 StewardMD · All rights reserved · Developed by MaiKnowledge · Dr. Manoj Kumar Kurmana, MD</div>' +
           '<div class="v3-devmeta">An educational clinical reasoning aid · Not a substitute for clinical judgment</div>' +
         '</div>' +
       '</div></main>' +
