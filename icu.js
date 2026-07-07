@@ -72,7 +72,7 @@
     try {
       recompute(_raw);                       // writes _raw.alerts on the RAW object (no re-trigger)
       _raw.meta.updated = nowTs();
-      try { localStorage.setItem(LS_KEY, JSON.stringify(_raw)); } catch (e) {}
+      try { localStorage.setItem(LS_KEY, JSON.stringify(_raw)); } catch (e) { if (!_persistWarned) { _persistWarned = true; try { (window.toast || function () {})("Couldn't save ICU data on this device (storage full / private mode) — kept for this session only."); } catch (x) {} } }
       for (var i = 0; i < _subs.length; i++) { try { _subs[i](_raw); } catch (e) {} }
     } finally { _busy = false; }
   }
@@ -87,7 +87,13 @@
 
   /* ----------------------------------------------------- derived helpers */
   function mapCalc(sbp, dbp) { return (sbp != null && dbp != null) ? Math.round((+sbp + 2 * +dbp) / 3) : null; }
-  function latestVitals() { var v = _raw.vitals; return (v && v.length) ? v[v.length - 1] : {}; }
+  var MAX_SERIES = 500;      // cap vitals[]/labs.trends[] so long ICU stays don't grow storage unbounded
+  var _persistWarned = false;
+  // Latest reading = the one with the newest TIMESTAMP (not merely the last-pushed element).
+  function latestByTs(arr) { if (!arr || !arr.length) return {}; var b = arr[0]; for (var i = 1; i < arr.length; i++) { if (((arr[i] && arr[i].ts) || 0) >= ((b && b.ts) || 0)) b = arr[i]; } return b || {}; }
+  function latestVitals() { return latestByTs(_raw.vitals); }
+  // One pressor/vasoactive detector (was duplicated in renderLiveStatus + interpretHemo).
+  function isPressor(drug) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine|pressor/i.test(drug || ""); }
   function curMap() { var lv = latestVitals(); return lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp); }
   function shockIndex() { var lv = latestVitals(); return (lv.hr && lv.sbp) ? +(lv.hr / lv.sbp).toFixed(2) : null; }
 
@@ -99,7 +105,7 @@
   function recompute(s) {
     var a = [];
     function add(sev, title, msg, source) { a.push({ severity: sev, title: title, msg: msg, source: source }); }
-    var L = (s.labs && s.labs.recent) || {}, lv = (s.vitals && s.vitals.length) ? s.vitals[s.vitals.length - 1] : {}, g = s.abg || {};
+    var L = (s.labs && s.labs.recent) || {}, lv = latestByTs(s.vitals), g = s.abg || {};
 
     // Potassium
     if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mEq/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mEq/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mEq/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mEq/L", "Electrolytes"); }
@@ -118,7 +124,12 @@
     if (g.ph != null) { if (g.ph < 7.2 || g.ph > 7.55) add("crit", "Severe acid–base disturbance", "pH " + g.ph, "ABG"); else if (g.ph < 7.30 || g.ph > 7.50) add("warn", "Acid–base disturbance", "pH " + g.ph, "ABG"); }
     // Ventilation / ARDS (cross-tab: ABG PaO2 + ventilator FiO2 → P/F)
     var vt = s.ventilator || {}, pf = vt.pf != null ? vt.pf : ((g.pao2 != null && vt.fio2) ? Math.round(g.pao2 / (vt.fio2 / 100)) : null);
-    if (pf != null && pf < 300) add(pf < 100 ? "crit" : "warn", "ARDS (P/F " + pf + ")", (pf < 100 ? "Severe" : pf < 200 ? "Moderate" : "Mild") + " ARDS" + (pf < 150 ? " — consider prone positioning" : ""), "Ventilator");
+    if (pf != null && pf < 300) {
+      var sev = pf < 100 ? "crit" : "warn", grade = pf < 100 ? "Severe" : pf < 200 ? "Moderate" : "Mild";
+      var onVent = vt.peep != null && vt.peep >= 5;   // ARDS (Berlin) needs PEEP ≥5 on ventilation — don't call it from P/F alone
+      if (onVent) add(sev, grade + " ARDS (P/F " + pf + ")", grade + " ARDS" + (pf < 150 ? " — consider prone positioning" : ""), "Ventilator");
+      else add(sev, grade + " hypoxaemia (P/F " + pf + ")", "Meets the ARDS oxygenation criterion — confirm PEEP ≥5 + bilateral infiltrates before calling ARDS", "Ventilator");
+    }
 
     var order = { crit: 0, warn: 1, info: 2 };
     a.sort(function (x, y) { return (order[x.severity] || 9) - (order[y.severity] || 9); });
@@ -135,6 +146,7 @@
     if (v.map == null && v.sbp != null && v.dbp != null) v.map = mapCalc(v.sbp, v.dbp);
     v.ts = o.ts || nowTs();
     STATE.vitals.push(v);
+    if (STATE.vitals.length > MAX_SERIES) STATE.vitals.splice(0, STATE.vitals.length - MAX_SERIES);
     return v;
   }
   function ingestLabs(o) {
@@ -142,6 +154,7 @@
     var rec = pick(o, keys); var ts = o.ts || nowTs();
     Object.keys(rec).forEach(function (k) { STATE.labs.recent[k] = rec[k]; });
     STATE.labs.trends.push(Object.assign({ ts: ts }, rec));
+    if (STATE.labs.trends.length > MAX_SERIES) STATE.labs.trends.splice(0, STATE.labs.trends.length - MAX_SERIES);
     return rec;
   }
   function ingestVentilator(o) {
@@ -203,7 +216,9 @@
   var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1 };
   // Above these an SI value is implausible → the number must be conventional (used only when
   // the units string is missing; creat/alb are the inverse — a small value is conventional).
-  var SI_IMPLAUSIBLE = { ca: 4, mg: 3, po4: 4, glu: 35, creat: 20, alb: 12 };
+  // Unit-less plausibility ceilings. Raised glu 35→50 & ca 4→4.5 so a TRUE severe hyperglycaemia
+  // (e.g. 40 mmol/L HHS) / hypercalcaemia isn't mis-divided into a normal value by wardToSI.
+  var SI_IMPLAUSIBLE = { ca: 4.5, mg: 3, po4: 4, glu: 50, creat: 20, alb: 12 };
   function wardToSI(key, val, units) {
     var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/etc: mEq==mmol, no conversion
     var u = String(units || "").toLowerCase().replace(/\s+/g, "");
@@ -420,20 +435,20 @@
   function renderLiveStatus() {
     var lv = latestVitals(), L = _raw.labs.recent || {}, f = _raw.fluids || {};
     var mp = curMap();
-    var pressors = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine|pressor/i.test(i.drug || ""); });
+    var pressors = (_raw.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var cards = [
       vitalCard("Heart Rate", lv.hr, "bpm", vstat(lv.hr, 50, 110, 40, 140), vitalSeries("hr", _trendWin)),
       vitalCard("BP", (lv.sbp != null && lv.dbp != null) ? lv.sbp + "/" + lv.dbp : null, "", ""),
       vitalCard("MAP", mp, "mmHg", vstat(mp, 65, 110, 60, null), mapSeries(_trendWin)),
       vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin)),
       vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin)),
-      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, null, 39), vitalSeries("temp", _trendWin)),
+      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, 35, 39), vitalSeries("temp", _trendWin)),
       vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin)),
       vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin)),
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0), labSeries("k", _trendWin))
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.5), labSeries("k", _trendWin))
     ];
     return '<div class="icu-sec-lbl">❤️ Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -913,8 +928,8 @@
       comp = pco2 > exp + 2 ? "Inadequate respiratory compensation → added respiratory acidosis" : pco2 < exp - 2 ? "Over-compensation → added respiratory alkalosis" : "Appropriate respiratory compensation";
     } else if (/Metabolic alkalosis/.test(primary)) {
       var expA = 0.7 * hco3 + 20;
-      rows.push(["Expected PaCO₂", expA.toFixed(0) + " ± 2 mmHg (actual " + pco2 + ")"]);
-      comp = pco2 < expA - 2 ? "Added respiratory alkalosis" : pco2 > expA + 2 ? "Added respiratory acidosis" : "Appropriate respiratory compensation";
+      rows.push(["Expected PaCO₂", expA.toFixed(0) + " ± 5 mmHg (actual " + pco2 + ")"]);
+      comp = pco2 < expA - 5 ? "Added respiratory alkalosis" : pco2 > expA + 5 ? "Added respiratory acidosis" : "Appropriate respiratory compensation";
     } else if (/Respiratory/.test(primary)) {
       comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mEq/L per 10 mmHg PaCO₂).";
     }
@@ -933,7 +948,7 @@
         }
       }
     }
-    if (g.pao2 != null && g.fio2) { var pf = Math.round(g.pao2 / (g.fio2 / 100)); rows.push(["P/F ratio", pf + (pf < 100 ? " (severe ARDS)" : pf < 200 ? " (moderate ARDS)" : pf < 300 ? " (mild ARDS)" : "")]); }
+    if (g.pao2 != null && g.fio2) { var pf = Math.round(g.pao2 / (g.fio2 / 100)); rows.push(["P/F ratio", pf + (pf < 100 ? " (severe hypoxaemia)" : pf < 200 ? " (moderate hypoxaemia)" : pf < 300 ? " (mild hypoxaemia)" : "")]); }
     return { primary: primary, comp: comp, rows: rows, flags: flags };
   }
 
@@ -961,7 +976,7 @@
     var recs = [], flags = [];
     var map = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     var si = (lv.hr && lv.sbp) ? lv.hr / lv.sbp : null;
-    var pressors = (inf || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
+    var pressors = (inf || []).filter(function (i) { return isPressor(i.drug); });
     if (map != null && map < 65) { recs.push(pressors.length ? "MAP <65 despite vasopressors — reassess volume, consider adding vasopressin or escalating noradrenaline, and exclude an untreated cause (sepsis source, tamponade, PE)." : "MAP <65 — after appropriate fluids, start a vasopressor (noradrenaline first-line) targeting MAP ≥65."); flags.push("MAP " + map + " mmHg below target (≥65)"); }
     if (si != null && si > 0.9) flags.push("Shock index " + si.toFixed(2) + " (>0.9) — occult hypoperfusion");
     if (lv.lactate != null && lv.lactate > 2) recs.push("Lactate " + lv.lactate + " mmol/L — target clearance; recheck in 2–4 h as a resuscitation marker.");
