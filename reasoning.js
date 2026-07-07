@@ -2291,14 +2291,74 @@
     return '<div class="dx-col ' + cls + '"><div class="dx-col-h">' + title + ' <span class="dx-col-n">' + rows.length + '</span></div>' + body + '</div>';
   }
 
+  // Grouped profile options for #dxHospSel: National (ICMR + national studies), each region's
+  // composite + its studies, then Hospitals — mirrors the Antibiogram source dropdown so both
+  // views share one profile system (data-driven from HOSPITAL.list).
+  function hospOptions(cur) {
+    var list = (window.HOSPITAL && window.HOSPITAL.list) || [];
+    function opt(id, label, extra) { return '<option value="' + id + '"' + (id === cur ? " selected" : "") + '>' + esc(label) + (extra || "") + '</option>'; }
+    function studiesOf(rg) { return list.filter(function (x) { return x.type === "study" && x.region === rg; }).sort(function (a, b) { return (a.credibility || 9) - (b.credibility || 9); }); }
+    var comp = {}; list.forEach(function (x) { if (x.type === "region") comp[x.region] = x; });
+    var icmr = list.filter(function (x) { return x.id === "ICMR"; })[0];
+    var h = '<optgroup label="National">';
+    if (icmr) h += opt("ICMR", icmr.name, " ⭐");
+    studiesOf("national").forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+    h += '</optgroup>';
+    [["south", "South India"], ["north", "North India"], ["east", "East & NE India"], ["west", "West & Central India"]].forEach(function (rr) {
+      var c = comp[rr[0]], sts = studiesOf(rr[0]);
+      if (!c && !sts.length) return;
+      h += '<optgroup label="' + rr[1] + '">';
+      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite");
+      sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+      h += '</optgroup>';
+    });
+    var hosps = list.filter(function (x) { return x.id !== "ICMR" && x.type !== "region" && x.type !== "study"; });
+    if (hosps.length) { h += '<optgroup label="Hospitals">'; hosps.forEach(function (x) { h += opt(x.id, x.name, x.hasPolicy ? " ✓ policy" : ""); }); h += '</optgroup>'; }
+    return h;
+  }
+
+  // Additive, data-driven regional resistance snapshot for the lead syndrome's likely
+  // organisms — shown ALONGSIDE (never replacing) ICMR national guidance. Only genuine local
+  // cells from the active profile are shown (national fallbacks omitted; the national baseline
+  // is already present). Every value carries its source. % resistant = 100 − %susceptible.
+  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin(MR)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin" };
+  var RPANEL = ["piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid"];
+  function rColor(R) { return R >= 70 ? "#B91C1C" : R >= 50 ? "#EA580C" : R >= 25 ? "#D97706" : R >= 10 ? "#65a30d" : "#047857"; }
+  function regionSuscHTML(lead) {
+    try {
+      if (!(window.HOSPITAL && window.HOSPITAL.getSusceptibility)) return "";
+      var hp = window.HOSPITAL.current();
+      if (!hp || !(hp.abg || hp.type === "region" || hp.type === "study")) return "";   // only profiles with a real antibiogram
+      var syn = lead && lead._syn, pth = syn && syn.pathogens;
+      var orgs = pth ? [].concat(pth.veryLikely || [], pth.likely || []) : [];
+      if (!orgs.length) return "";
+      var seen = {}, rows = [];
+      orgs.forEach(function (orgName) {
+        if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
+        var cells = [];
+        RPANEL.forEach(function (dk) {
+          var r = window.HOSPITAL.getSusceptibility(orgName, dk);
+          if (!r || r.national || r.s == null) return;   // genuine local values only
+          var R = Math.round(100 - r.s);
+          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' ' + R + '%R</span>');
+        });
+        if (cells.length) rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span> ' + cells.join("") + '</div>');
+      });
+      if (!rows.length) return "";
+      var nm = hp.name || hp.short || "regional";
+      return '<div class="dx-region-abg" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
+        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">📊 Local resistance — ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant · decision support)</span></div>' +
+        rows.join("") +
+        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Regional susceptibility for the active profile; ICMR national guidance remains the baseline. Verify against your own local antibiogram before prescribing.</div></div>';
+    } catch (e) { return ""; }
+  }
+
   function renderHosp() {
     var el = root.querySelector("#dxHosp");
     if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
     var h = window.HOSPITAL.current();
-    var opts = window.HOSPITAL.list.map(function (x) {
-      return '<option value="' + x.id + '"' + (x.id === h.id ? " selected" : "") + '>' + esc(x.name) + (x.recommended ? " ⭐ Recommended" : (x.hasPolicy ? "" : " — national guidance")) + '</option>';
-    }).join("");
-    el.innerHTML = '<span class="dx-hosp-l">Hospital policy</span>' +
+    var opts = hospOptions(h.id);
+    el.innerHTML = '<span class="dx-hosp-l">Region / policy</span>' +
       (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
       '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
     var sel = el.querySelector("#dxHospSel");
@@ -2311,7 +2371,7 @@
   function requestAntibiogram(id) {
     try {
       var h = null; ((window.HOSPITAL && window.HOSPITAL.list) || []).forEach(function (x) { if (x.id === id) h = x; });
-      if (!h || h.hasPolicy || h.id === "ICMR") return;
+      if (!h || h.hasPolicy || h.abg || h.type === "region" || h.type === "study" || h.id === "ICMR") return;
       var name = h.name || h.short || "my hospital";
       var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in — attach your latest antibiogram PDF before sending.");
       if (!go) return;
@@ -2366,6 +2426,7 @@
         orgHTML(lead._syn) + deescHTML(lead._syn) +
         '<div class="dx-policy-refs">Secondary references: ICMR AMRSN 2024 · IDSA · Surviving Sepsis Campaign</div>' +
         (e.table ? '<div class="dx-policy-cite">Source: GIMSR Antibiotic Policy ' + esc(e.table) + ', p.' + e.page + '</div>' : "") +
+        regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
     } else {
@@ -2373,6 +2434,7 @@
         '<div class="dx-policy-src">' + src + '</div>' +
         '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
         (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
+        regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
     }
