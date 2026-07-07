@@ -132,7 +132,42 @@
         if (!lines.length && res && res.text) lines = String(res.text).split(/\r?\n/).map(function (s) { return s.trim(); }).filter(Boolean);
         return { text: (res && res.text) || lines.join("\n"), lines: lines };
       });
-    }
+    },
+    // MaiK Scribe — native device speech-to-text (@capacitor-community/speech-recognition:
+    // iOS SFSpeechRecognizer / Android SpeechRecognizer). Audio stays on the device — only
+    // text returns. Streams interim results via opts.onPartial; opts.onFinal on stop.
+    // Throws SYNCHRONOUSLY if the plugin is absent so SMD_VOICE falls back to Web Speech / AI STT.
+    transcribe: function (opts) {
+      opts = opts || {};
+      var P = plugins();
+      var SP = P && P.SpeechRecognition;
+      if (!(SP && SP.start)) throw new Error("speech-unavailable");
+      var self = this, last = "";
+      (SP.requestPermissions ? SP.requestPermissions() : Promise.resolve()).then(function () {
+        if (SP.addListener) {
+          self._speechSub = SP.addListener("partialResults", function (data) {
+            var m = data && data.matches && data.matches[0];
+            if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
+          });
+        }
+        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 1 });
+      }).then(function (res) {
+        var fin = (res && res.matches && res.matches[0]) || last;
+        self._removeSpeechSub();
+        if (opts.onFinal) opts.onFinal(String(fin || ""));
+      }).catch(function (e) {
+        self._removeSpeechSub();
+        if (opts.onError) opts.onError(String((e && e.message) || e));
+      });
+      return function () { self.stopTranscribe(); };
+    },
+    stopTranscribe: function () {
+      var P = plugins(); var SP = P && P.SpeechRecognition;
+      try { if (SP && SP.stop) SP.stop(); } catch (e) {}
+      this._removeSpeechSub();
+    },
+    _speechSub: null,
+    _removeSpeechSub: function () { try { if (this._speechSub && this._speechSub.remove) this._speechSub.remove(); } catch (e) {} this._speechSub = null; }
   };
 
   // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library

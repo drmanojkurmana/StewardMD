@@ -321,6 +321,8 @@
       '.icu-vc.crit{border-color:var(--danger);background:var(--danger-soft)}.icu-vc.crit .vv{color:var(--danger)}' +
       '.icu-vc.warn{border-color:var(--warn);background:var(--warn-soft)}.icu-vc.warn .vv{color:var(--warn)}' +
       '.icu-vc.ok .vv{color:var(--ok)}' +
+      '.icu-spark{width:100%;height:18px;display:block;margin-top:5px;color:var(--muted);opacity:.8}' +
+      '.icu-vc.crit .icu-spark{color:var(--danger);opacity:1}.icu-vc.warn .icu-spark{color:var(--warn);opacity:1}.icu-vc.ok .icu-spark{color:var(--primary)}' +
       // generic card
       '.icu-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--r);padding:15px;box-shadow:var(--sh)}' +
       '.icu-card h3{font:800 16px var(--font);margin:0 0 4px}.icu-card p{font:500 13.5px/1.5 var(--font);color:var(--muted);margin:0}' +
@@ -342,13 +344,38 @@
       '.icu-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--primary3),var(--primary) 60%,var(--primary2));color:#fff;font:800 14px var(--font);padding:13px;cursor:pointer;box-shadow:var(--sh);margin-top:12px;transition:filter var(--ease),transform var(--ease)}.icu-btn:active{transform:scale(.985)}.icu-btn:hover{filter:brightness(1.05)}' +
       '.icu-btn.ghost{background:none;border:1px solid var(--border);color:var(--primary);box-shadow:none}' +
       '.icu-empty{font:500 13px var(--font);color:var(--muted);text-align:center;padding:8px 0}' +
+      '.icu-coach{background:var(--primary-soft,#0d2e2a);border:1px solid var(--primary,#0f766e);border-radius:14px;padding:13px 14px;margin-bottom:12px}' +
+      '.icu-coach-h{display:flex;align-items:center;justify-content:space-between;font:800 14px var(--font);color:var(--ink)}' +
+      '.icu-coach-x{border:none;background:none;color:var(--muted);font:600 15px var(--font);cursor:pointer;padding:2px 6px}' +
+      '.icu-coach-p{margin:7px 0;font:500 13px/1.55 var(--font);color:var(--ink)}' +
+      '.icu-coach-steps{margin:6px 0 10px;padding-left:20px;font:500 12.5px/1.7 var(--font);color:var(--muted)}' +
+      '.icu-coach-steps b{color:var(--ink)}' +
+      '.icu-empty-state{text-align:center;padding:26px 16px;background:var(--panel);border:1px dashed var(--border);border-radius:16px;margin-bottom:12px}' +
+      '.icu-empty-ic{font-size:40px;margin-bottom:6px}' +
+      '.icu-empty-t{font:800 17px var(--font);color:var(--ink);margin-bottom:6px}' +
+      '.icu-empty-p{font:500 13px/1.6 var(--font);color:var(--muted);max-width:340px;margin:0 auto}' +
+      '.icu-empty-cta{width:auto!important;display:inline-block;margin-top:12px;padding:12px 22px}' +
+      // persistent patient banner + severity key (A6)
+      '.icu-banner{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font:600 12px var(--font);color:var(--muted);background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:8px 11px;margin-bottom:10px}' +
+      '.icu-banner b{color:var(--ink);font-weight:800}.icu-banner .bad{color:var(--danger);font-weight:800}.icu-banner .sep{opacity:.4;margin:0 3px}' +
+      '.icu-sevkey{display:flex;gap:14px;justify-content:center;font:600 10.5px var(--font);color:var(--muted);margin-bottom:10px}' +
+      '.icu-sevkey span{display:inline-flex;align-items:center;gap:5px}.icu-sevkey i{width:9px;height:9px;border-radius:50%;display:inline-block}' +
+      '.icu-sevkey i.ok{background:var(--ok)}.icu-sevkey i.warn{background:var(--warn)}.icu-sevkey i.bad{background:var(--danger)}' +
       '.icu-phase{display:inline-block;font:800 9px var(--font);letter-spacing:.05em;text-transform:uppercase;color:var(--primary);background:var(--primary-soft);border-radius:var(--r-pill);padding:3px 9px;margin-left:7px}' +
+      // plain-language jargon tooltips (A5) — tap ⓘ to open an explanation
+      '.icu-tip{border:none;background:none;color:var(--primary);cursor:pointer;font:600 11px var(--font);padding:0 2px;vertical-align:baseline;-webkit-appearance:none}' +
+      '.icu-tip-pop{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom));transform:translate(-50%,14px);width:min(360px,calc(100vw - 28px));background:var(--panel,#0b1620);border:1px solid var(--primary,#0f766e);border-radius:14px;box-shadow:0 14px 40px rgba(0,0,0,.4);padding:13px 15px;z-index:10040;opacity:0;transition:opacity .2s,transform .2s;pointer-events:auto}' +
+      '.icu-tip-pop.on{opacity:1;transform:translate(-50%,0)}' +
+      '.icu-tip-h{display:flex;align-items:center;justify-content:space-between;font:800 14px var(--font);color:var(--primary)}' +
+      '.icu-tip-x{border:none;background:none;color:var(--muted);font:600 16px var(--font);cursor:pointer;padding:0 4px;line-height:1}' +
+      '.icu-tip-b{margin-top:6px;font:500 13px/1.55 var(--font);color:var(--ink)}' +
       // tab bar (frosted, fixed bottom, scrollable)
       '.icu-tabs{position:absolute;left:0;right:0;bottom:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;background:color-mix(in srgb,var(--panel) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(12px);backdrop-filter:saturate(1.4) blur(12px);border-top:1px solid var(--border);padding:5px 6px calc(5px + env(safe-area-inset-bottom));z-index:5}' +
       '.icu-tabs::-webkit-scrollbar{display:none}' +
       '.icu-tab{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;border:none;background:none;color:var(--muted);cursor:pointer;padding:6px 9px;border-radius:10px;min-width:58px}' +
       '.icu-tab .ti{font-size:18px;line-height:1}.icu-tab .tl{font:700 9.5px var(--font);white-space:nowrap}' +
-      '.icu-tab.on{color:var(--primary);background:var(--primary-soft)}' +
+      '.icu-tab.on{color:var(--primary);background:var(--primary-soft);box-shadow:inset 0 2px 0 var(--primary)}' +
+      '.icu-tab.on .tl{font-weight:800}' +
       // snapshot FAB
       '#icuSnap{position:absolute;right:14px;bottom:calc(74px + env(safe-area-inset-bottom));z-index:6;width:54px;height:54px;border-radius:50%;border:none;background:linear-gradient(135deg,var(--primary3),var(--primary2));color:#fff;font-size:24px;box-shadow:0 8px 24px rgba(15,118,110,.42);cursor:pointer;display:flex;align-items:center;justify-content:center}#icuSnap:active{transform:scale(.92)}' +
       // modal
@@ -366,9 +393,20 @@
 
   /* ----------------------------------------------------------- components */
   function evidenceBadges(list) { return list && list.length ? '<div class="icu-ev">' + list.map(function (e) { return "<span>" + esc(e) + "</span>"; }).join("") + "</div>" : ""; }
-  function vitalCard(label, value, unit, status) {
+  // Tile-sized sparkline (A6) from a [{ts,v}] series — no axes/labels; reuses vitalSeries/mapSeries/labSeries data.
+  function miniSpark(series) {
+    var pts = (series || []).filter(function (p) { return p && p.v != null && isFinite(p.v); }).sort(function (a, b) { return a.ts - b.ts; });
+    if (pts.length < 2) return "";
+    var W = 100, H = 22, pad = 2;
+    var xs = pts.map(function (p) { return p.ts; }), ys = pts.map(function (p) { return p.v; });
+    var minX = Math.min.apply(null, xs), maxX = Math.max.apply(null, xs), minY = Math.min.apply(null, ys), maxY = Math.max.apply(null, ys);
+    var spanX = (maxX - minX) || 1, spanY = (maxY - minY) || 1;
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + (pad + (W - 2 * pad) * (p.ts - minX) / spanX).toFixed(1) + " " + (H - pad - (H - 2 * pad) * (p.v - minY) / spanY).toFixed(1); }).join(" ");
+    return '<svg class="icu-spark" viewBox="0 0 ' + W + " " + H + '" preserveAspectRatio="none"><path d="' + d + '" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+  }
+  function vitalCard(label, value, unit, status, series) {
     return '<div class="icu-vc ' + (status || "") + '"><div class="vl">' + esc(label) + '</div><div class="vv">' +
-      (value == null || value === "" ? "—" : esc(value)) + (value != null && value !== "" && unit ? '<span class="vu">' + esc(unit) + "</span>" : "") + "</div></div>";
+      (value == null || value === "" ? "—" : esc(value)) + (value != null && value !== "" && unit ? '<span class="vu">' + esc(unit) + "</span>" : "") + "</div>" + (series ? miniSpark(series) : "") + "</div>";
   }
   function alertCard(a) { return '<div class="icu-alert ' + esc(a.severity) + '"><div><div class="at">' + esc(a.title) + '</div><div class="am">' + esc(a.msg) + '</div></div><div class="ax">' + esc(a.source || "") + "</div></div>"; }
 
@@ -384,18 +422,18 @@
     var mp = curMap();
     var pressors = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine|pressor/i.test(i.drug || ""); });
     var cards = [
-      vitalCard("Heart Rate", lv.hr, "bpm", vstat(lv.hr, 50, 110, 40, 140)),
+      vitalCard("Heart Rate", lv.hr, "bpm", vstat(lv.hr, 50, 110, 40, 140), vitalSeries("hr", _trendWin)),
       vitalCard("BP", (lv.sbp != null && lv.dbp != null) ? lv.sbp + "/" + lv.dbp : null, "", ""),
-      vitalCard("MAP", mp, "mmHg", vstat(mp, 65, 110, 60, null)),
-      vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null)),
-      vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30)),
-      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, null, 39)),
-      vitalCard("Urine", lv.uop, "mL/h", ""),
-      vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4)),
+      vitalCard("MAP", mp, "mmHg", vstat(mp, 65, 110, 60, null), mapSeries(_trendWin)),
+      vitalCard("SpO₂", lv.spo2, "%", vstat(lv.spo2, 92, null, 88, null), vitalSeries("spo2", _trendWin)),
+      vitalCard("Resp Rate", lv.rr, "/min", vstat(lv.rr, 8, 24, null, 30), vitalSeries("rr", _trendWin)),
+      vitalCard("Temp", lv.temp, "°C", vstat(lv.temp, 36, 38, null, 39), vitalSeries("temp", _trendWin)),
+      vitalCard("Urine", lv.uop, "mL/h", "", vitalSeries("uop", _trendWin)),
+      vitalCard("Lactate", lv.lactate, "mmol/L", vstat(lv.lactate, null, 2, null, 4), vitalSeries("lactate", _trendWin)),
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0))
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0), labSeries("k", _trendWin))
     ];
     return '<div class="icu-sec-lbl">❤️ Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -607,7 +645,7 @@
   // `lines` = on-device OCR lines. When AI gave nothing, show the full field set and let
   // the clinician TAP a recognized value to drop it into the focused box. Nothing is
   // ingested until confirmed. Fully works offline / with AI off.
-  function openImportReview(kind, fields, dataUrl, lines) {
+  function openImportReview(kind, fields, dataUrl, lines, source) {
     fields = fields || {}; lines = lines || [];
     var extracted = Object.keys(fields), aiMode = extracted.length > 0;
     var showKeys = aiMode ? extracted : (IMPORT_FIELDS[kind] || IMPORT_FIELDS.labs);
@@ -652,13 +690,19 @@
     el.querySelector("#icuImpConfirm").addEventListener("click", function () {
       var vals = {}; el.querySelectorAll("[data-impk]").forEach(function (i) { var k = i.getAttribute("data-impk"), v = i.value; if (v !== "" && v != null) vals[k] = (k === "mode") ? v : parseFloat(v); });
       if (!Object.keys(vals).length) { close(); return; }
-      var bundle = { source: "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
+      var bundle = { source: source || "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
       var res = ICU.ingestFromWard(bundle);
       close(); paint();
       try { if (window.toast) toast("Imported " + Object.keys(vals).length + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
     });
   }
   function startImport(kind) { importFileInput(IMPORT_GROUP[kind] ? kind : "labs"); }
+  // MaiK Scribe → ICU: open the editable import-review sheet prefilled with voice-extracted
+  // fields (tagged source:"Voice"; conflict-safe via ingestFromWard on confirm).
+  function reviewVoice(fields, kind) {
+    var k = IMPORT_GROUP[kind] ? kind : "labs";
+    openImportReview(k, fields || {}, null, [], "Voice");
+  }
 
   /* ======================================================= PHASE 2 engines */
   var _trendWin = 24 * 60 * 60 * 1000;   // trends window (ms); default 24h
@@ -888,7 +932,38 @@
   ];
   var _active = "overview";
 
-  function row(label, val, unit) { return '<div class="icu-row"><span>' + esc(label) + '</span><b>' + (val == null || val === "" ? "—" : esc(val) + (unit ? " " + esc(unit) : "")) + "</b></div>"; }
+  // Plain-language explanations for ICU jargon (A5) — content only, no logic change.
+  var JARGON = {
+    pf: ["P/F ratio", "How well the lungs oxygenate — arterial oxygen (PaO₂) divided by inspired oxygen fraction (FiO₂). Below 300 suggests ARDS; below 100 is severe."],
+    rsbi: ["RSBI", "Rapid Shallow Breathing Index — breaths per minute ÷ tidal volume (in litres). Below 105 predicts a patient is likely to pass a breathing trial and be ready to wean off the ventilator."],
+    dp: ["Driving pressure", "Plateau pressure minus PEEP — the pressure swing that actually inflates the lungs with each breath. Above 15 cmH₂O is linked to higher mortality in ARDS."],
+    si: ["Shock index", "Heart rate ÷ systolic blood pressure. Above 0.9 can flag early (occult) shock before the blood pressure visibly falls."],
+    delta: ["Δ-ratio", "Change in anion gap ÷ change in bicarbonate (ΔAG/ΔHCO₃). Detects a second acid–base disorder hidden behind a high-anion-gap acidosis: below 0.4 or above 2 suggests a mixed picture."],
+    ag: ["Anion gap", "Sodium − (chloride + bicarbonate) — estimates unmeasured acids in the blood. Above 12 (corrected for albumin) points to acids such as lactate, ketones, or toxins."]
+  };
+  function jargonKey(label) {
+    var l = String(label || "").toLowerCase();
+    if (/p\/f/.test(l)) return "pf";
+    if (/rsbi/.test(l)) return "rsbi";
+    if (/driving pressure/.test(l)) return "dp";
+    if (/shock index/.test(l)) return "si";
+    if (/delta ratio|Δ-?ratio/.test(l)) return "delta";
+    if (/anion gap/.test(l)) return "ag";
+    return null;
+  }
+  function infoDot(key) { return ' <button class="icu-tip" data-icu-act="tip:' + key + '" aria-label="What does this mean?" title="What does this mean?">ⓘ</button>'; }
+  function row(label, val, unit) { var jk = jargonKey(label); return '<div class="icu-row"><span>' + esc(label) + (jk ? infoDot(jk) : "") + '</span><b>' + (val == null || val === "" ? "—" : esc(val) + (unit ? " " + esc(unit) : "")) + "</b></div>"; }
+  function showTip(key) {
+    var j = JARGON[key]; if (!j) return;
+    var old = document.getElementById("icuTipPop"); if (old) { try { old.remove(); } catch (e) {} }
+    var pop = document.createElement("div"); pop.id = "icuTipPop"; pop.className = "icu-tip-pop";
+    pop.innerHTML = '<div class="icu-tip-h"><span>' + esc(j[0]) + '</span><button class="icu-tip-x" type="button" aria-label="Close">✕</button></div><div class="icu-tip-b">' + esc(j[1]) + '</div>';
+    document.body.appendChild(pop);
+    requestAnimationFrame(function () { pop.classList.add("on"); });
+    function close() { pop.classList.remove("on"); setTimeout(function () { try { pop.remove(); } catch (e) {} }, 220); }
+    pop.querySelector(".icu-tip-x").addEventListener("click", close);
+    clearTimeout(showTip._t); showTip._t = setTimeout(close, 9000);
+  }
   function phaseNote(p, what) { return '<div class="icu-card"><h3>' + esc(what) + '<span class="icu-phase">' + esc(p) + "</span></h3><p>Reads live from the current ICU data. Full decision-support arrives in this phase.</p></div>"; }
 
   var RENDER = {
@@ -1063,6 +1138,7 @@
     var n = rosterCount();
     return '<div class="icu-hd"><div class="icu-hd-top">' +
       '<div class="icu-hd-name">' + (p.name ? esc(p.name) : "ICU Patient") + (p.status ? ' · <span style="font-weight:600;color:var(--muted)">' + esc(p.status) + "</span>" : "") + "</div>" +
+      '<button class="icu-x" data-icu-act="coach" aria-label="How this works" title="How this works">ⓘ</button>' +
       '<button class="icu-x" data-icu-act="close" aria-label="Close ICU">✕</button>' +
       '</div><div class="icu-hd-meta">' + (meta.length ? meta.join("<span>·</span>") : "Tap ✎ Patient, then ＋ Enter data below") + "</div>" +
       '<div class="icu-hd-actions">' +
@@ -1129,6 +1205,49 @@
       return '<span class="icu-elyte-pill" style="border-color:' + (COLOR[r.level] || "var(--muted)") + ';color:' + (COLOR[r.level] || "var(--ink)") + '">' + esc(r.name) + (r.severity ? " · " + esc(r.severity) : "") + "</span>";
     }).join("") + '</div>';
   }
+  // First-run orientation (one-time) + empty state. No demo patient is ever auto-loaded.
+  var _coachForce = false;
+  function icuSeen() { try { return localStorage.getItem("stewardmd_icu_seen") === "1"; } catch (e) { return false; } }
+  function setIcuSeen() { try { localStorage.setItem("stewardmd_icu_seen", "1"); } catch (e) {} }
+  function hasData() {
+    try {
+      if (Object.keys(_raw.labs.recent || {}).length) return true;
+      if ((_raw.vitals || []).length) return true;
+      if (_raw.abg && Object.keys(_raw.abg).filter(function (k) { return k !== "ts"; }).length) return true;
+      if (_raw.ventilator && Object.keys(_raw.ventilator).length) return true;
+      if (_raw.patient && (_raw.patient.name || _raw.patient.diagnosis)) return true;
+    } catch (e) {}
+    return false;
+  }
+  function coachCard() {
+    return '<div class="icu-coach"><div class="icu-coach-h"><span>👋 How the ICU workstation works</span><button class="icu-coach-x" data-icu-act="coachdone" aria-label="Dismiss">✕</button></div>' +
+      '<p class="icu-coach-p">Track one ICU patient — <b>enter, speak, or snap</b> their vitals &amp; labs to get instant interpretation, alerts, and a round-ready summary.</p>' +
+      '<ol class="icu-coach-steps"><li>Tap <b>＋ Add my patient</b> — type it, <b>🎤 speak it</b>, or <b>📷 snap a photo</b>.</li>' +
+      '<li>Review the values — nothing is applied until you confirm.</li>' +
+      '<li>Read the alerts, trends &amp; round-ready summary across the tabs.</li></ol>' +
+      '<button class="icu-btn" data-icu-act="coachdone">Got it</button></div>';
+  }
+  function emptyStateCard() {
+    return '<div class="icu-empty-state"><div class="icu-empty-ic">🫀</div>' +
+      '<div class="icu-empty-t">No patient data yet</div>' +
+      '<p class="icu-empty-p">Track one ICU patient — enter, speak, or snap their vitals &amp; labs to get instant interpretation, alerts, and a round-ready summary.</p>' +
+      '<button class="icu-btn icu-empty-cta" data-icu-act="adddata">＋ Add my patient</button></div>';
+  }
+  // Persistent one-line patient banner (A6): name · ICU day · MAP · lactate · pressors.
+  function patientBanner() {
+    if (!hasData()) return "";
+    var p = _raw.patient || {}, lv = latestVitals(), mp = curMap();
+    var press = (_raw.infusions || []).filter(function (i) { return /nor|adrenaline|epinephrine|vasopressin|dopamine|dobutamine|phenylephrine/i.test(i.drug || ""); });
+    var parts = ['<b>' + esc(p.name || "ICU patient") + "</b>"];
+    if (p.icuDay != null) parts.push("ICU day " + esc(p.icuDay));
+    if (mp != null) parts.push('<span class="' + (mp < 65 ? "bad" : "") + '">MAP ' + esc(mp) + "</span>");
+    if (lv.lactate != null) parts.push('<span class="' + (lv.lactate > 2 ? "bad" : "") + '">Lactate ' + esc(lv.lactate) + "</span>");
+    parts.push(press.length ? '<span class="bad">' + press.length + " pressor" + (press.length > 1 ? "s" : "") + "</span>" : "No pressors");
+    return '<div class="icu-banner">' + parts.join('<span class="sep">·</span>') + "</div>";
+  }
+  function severityKey() {
+    return '<div class="icu-sevkey"><span><i class="ok"></i>Normal</span><span><i class="warn"></i>Caution</span><span><i class="bad"></i>Critical</span></div>';
+  }
   function renderBody() {
     var tab = "", isOv = _active === "overview";
     try { tab = RENDER[_active] ? RENDER[_active]() : ""; } catch (e) { tab = '<div class="icu-card"><p>Tab error.</p></div>'; }
@@ -1137,13 +1256,19 @@
     var status = isOv ? renderLiveStatus()
       : '<details class="icu-vitals-c"><summary>' + liveSummaryLine() + '</summary>' + renderLiveStatus() + '</details>';
     var elyteAlerts = (isOv || _active === "lytes") ? renderElyteAlerts() : "";
+    var hd = hasData();
+    var addBtn = '<button class="icu-adddata" data-icu-act="adddata">' + (hd ? "＋ Add / update data" : "＋ Add my patient") + '</button>';
+    // Empty overview → one inviting empty state (its own CTA); otherwise grid/summary + add button.
+    // AI-import cards are gone from here — the ＋ Add data sheet now consolidates Speak/Snap/Ward/Type.
+    var mid = (isOv && !hd) ? emptyStateCard() : (status + addBtn);
     return '<div class="icu-scroll"><div class="icu-wrap">' +
+      patientBanner() +
+      ((isOv && (!icuSeen() || _coachForce)) ? coachCard() : "") +
+      ((isOv && hd) ? severityKey() : "") +
       renderWardBanner() +
       renderConflicts() +
       elyteAlerts +
-      status +
-      '<button class="icu-adddata" data-icu-act="adddata">＋ Enter / update patient data</button>' +
-      (isOv ? renderAIImport() : "") +
+      mid +
       tab +   // each tab renders its own descriptive header — no redundant generic label
       '</div></div>';
   }
@@ -1511,14 +1636,22 @@
     ["🫁", "ABG", "abg"], ["🌬", "Ventilator", "ventilator"], ["💧", "Fluid balance", "flowsheet"],
     ["💉", "Infusion", "infusion"], ["🎯", "Today's goals", "goals"]
   ];
+  // ONE consolidated "Add / import data" sheet — Speak (MaiK Scribe) · Snap · Ward · Type.
   function openDataMenu() {
     ensureModal();
-    modalEl.innerHTML = '<div class="icu-sheet"><h3>＋ Enter / update data</h3>' +
-      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Pick what to record — or use 📷 Snapshot to auto-read a photo.</p>' +
+    var A = ' style="justify-content:flex-start;text-align:left"';
+    modalEl.innerHTML = '<div class="icu-sheet"><h3>Add / import data</h3>' +
+      '<p style="margin:0 0 12px;color:var(--muted);font:600 13px var(--font)">Enter, speak, or snap this patient’s vitals, labs, ABG or ventilator settings. Nothing is applied until you review it.</p>' +
+      '<div class="icu-grid2">' +
+        '<button class="icu-btn" data-icu-act="voice"' + A + '>🎤 Speak <span style="opacity:.8;font-weight:700">· MaiK Scribe</span></button>' +
+        '<button class="icu-btn ghost" data-icu-act="snapshot"' + A + '>📷 Snap a photo</button>' +
+        '<button class="icu-btn ghost" data-icu-act="wardfetch"' + A + '>🏥 Import from ward</button>' +
+      '</div>' +
+      '<div style="font:800 11px var(--font);text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:14px 0 8px">⌨️ Type it in</div>' +
       '<div class="icu-grid2">' + DATA_MENU.map(function (m) {
-        return '<button class="icu-btn ghost" data-icu-act="edit:' + m[2] + '" style="justify-content:flex-start;text-align:left">' + m[0] + " " + m[1] + "</button>";
+        return '<button class="icu-btn ghost" data-icu-act="edit:' + m[2] + '"' + A + '>' + m[0] + " " + m[1] + "</button>";
       }).join("") + "</div>" +
-      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:10px">Close</button></div>';
     modalEl.classList.add("on");
   }
 
@@ -1542,6 +1675,10 @@
       case "edit": openForm(arg); break;
       case "ai": openForm(arg); break;            // "Coming soon" → manual entry fallback for now
       case "adddata": openDataMenu(); break;
+      case "coach": _coachForce = true; paint(); break;
+      case "coachdone": setIcuSeen(); _coachForce = false; paint(); break;
+      case "tip": showTip(arg); break;
+      case "voice": if (modalEl) modalEl.classList.remove("on"); if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "icu" }); else alert("Voice intake is loading — try again in a moment."); break;
       case "import": startImport(arg); break;
       case "wardfetch": wardSyncFetch(); break;
       case "impmethod": importMethod(arg); break;
@@ -1632,7 +1769,7 @@
     recompute: function () { onChange(); },
     reset: function () { var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; }); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
-    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview,
+    ingestFromWard: ingestFromWard, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"

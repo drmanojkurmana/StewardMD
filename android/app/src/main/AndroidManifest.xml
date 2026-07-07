@@ -34,6 +34,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Camera for the ICU Snapshot → AI-vision feature (optional: don't exclude camera-less devices) -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Microphone for MaiK Scribe voice intake (on-device speech-to-text; audio stays on device) -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-feature android:name="android.hardware.camera" android:required="false" />
     <!-- Post notifications (Android 13+) for medical-update push -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />

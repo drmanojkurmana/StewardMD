@@ -781,6 +781,31 @@
     } catch (e) {}
     recompute();
   }
+  // Batch add (voice / MaiK Scribe): add several confirmed finding keys, then recompute ONCE.
+  function addFindings(keys) {
+    if (!keys || !keys.length) return 0;
+    try { var dp = differential(); var snap = {}; dp.inf.concat(dp.ni).forEach(function (r) { snap[r.id] = r.score; }); S.prev = snap; } catch (e) {}
+    var added = 0, lastK = null;
+    keys.forEach(function (k) {
+      if (!k || S.f[k]) return;
+      if (!(VALID[k] || LABEL[k])) return;                       // only real finding keys — never invent
+      S.f[k] = true; added++; lastK = k;
+      try { S.timeline.push({ f: LABEL[k] || k }); } catch (e) {}
+    });
+    if (added) { S.started = true; if (lastK) { S.lastAdded = LABEL[lastK] || lastK; S.lastAddedKey = lastK; } recompute(); }
+    return added;
+  }
+  // Flatten every system's findings into a deduped [{key,label}] catalog (voice extraction ontology).
+  function findingCatalog() {
+    var seen = {}, out = [];
+    (typeof SYSPICK !== "undefined" ? SYSPICK : []).forEach(function (sp) {
+      (fieldsForSystem(sp.id).fields || []).forEach(function (fl) {
+        if (fl && fl.key && !seen[fl.key]) { seen[fl.key] = 1; out.push({ key: fl.key, label: fl.label || LABEL[fl.key] || fl.key }); }
+      });
+    });
+    try { (GENERAL || []).forEach(function (k) { if (!seen[k] && LABEL[k]) { seen[k] = 1; out.push({ key: k, label: LABEL[k] }); } }); } catch (e) {}
+    return out;
+  }
   function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
   /* ---- KB declarative evaluator (P3 runtime source of truth; mirrors kb/engine/evaluator.mjs).
@@ -1022,6 +1047,7 @@
         '<button id="dxAdvToggle" class="dx-adv-toggle" type="button">🔬 Advanced workspace ▾</button>' +
         '<div id="dxAdv" class="dx-adv" style="display:none"></div>' +
         '<div class="dx-find-wrap">' +
+          '<button id="dxSpeak" class="dx-speak" type="button" aria-label="Speak about your patient — MaiK Scribe">🎤 Speak about your patient <span class="dx-speak-tag">MaiK Scribe</span></button>' +
           '<div class="dx-search-box">' +
             '<input id="dxSearch" class="dx-search" type="text" placeholder="🔍 Search findings (e.g. pap → Papilledema, dys → Dysuria/Dysphagia)…" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list">' +
             '<div id="dxSearchDrop" class="dx-search-drop" role="listbox" style="display:none"></div>' +
@@ -1041,6 +1067,11 @@
     root.querySelector("#dxClose").addEventListener("click", close);
     root.querySelector("#dxReset").addEventListener("click", resetAll);
     root.querySelector("#dxAdvToggle").addEventListener("click", function () { S.advOpen = !S.advOpen; renderAdv(); });
+    var dxSp = root.querySelector("#dxSpeak");
+    if (dxSp) dxSp.addEventListener("click", function () {
+      if (window.SMD_VOICE && SMD_VOICE.openDialog) SMD_VOICE.openDialog({ target: "reasoning" });
+      else if (window.SMD_VOICE === undefined) alert("Voice intake is loading — try again in a moment.");
+    });
     var si = root.querySelector("#dxSearch");
     si.addEventListener("input", function () { filter = si.value.trim().toLowerCase(); renderPicker(); });
     // Desktop-Chrome fix: stop any document/global key handler from swallowing
@@ -2888,6 +2919,9 @@
       ".dx-more{font:600 11.5px var(--sans);color:var(--slate-soft);text-align:center;padding:8px;border:1px dashed var(--line);border-radius:9px}",
       ".dx-launch{flex:0 0 auto;height:38px;border-radius:10px;border:1px solid var(--teal);background:var(--teal);color:#fff;font:700 12.5px var(--sans);padding:0 13px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}",
       ".dx-adv-toggle{width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font:700 12.5px var(--sans);color:var(--ink);cursor:pointer;margin-bottom:10px}",
+      ".dx-speak{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--teal);color:#fff;border:none;border-radius:12px;padding:13px 14px;font:800 14.5px var(--sans);cursor:pointer;margin-bottom:11px;box-shadow:0 4px 14px rgba(15,118,110,.28)}",
+      ".dx-speak:active{transform:translateY(1px)}",
+      ".dx-speak-tag{font:700 10px var(--sans);background:rgba(255,255,255,.22);padding:2px 7px;border-radius:999px;letter-spacing:.02em}",
       ".dx-adv{border:1px solid var(--teal);border-radius:12px;background:var(--panel);padding:12px;margin-bottom:12px}",
       ".dx-free{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;font:500 13px var(--sans);background:var(--paper);color:var(--ink);resize:vertical}",
       ".dx-adv-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}",
@@ -3388,7 +3422,7 @@
     setTimeout(renderImported, 60);
   }
 
-  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, _state: S, _ni: DDX_NI, _differential: differential,
+  window.DX = { open: open, openWorkspace: openWorkspace, close: close, reset: resetAll, importPatient: importPatient, restore: restore, addFindings: addFindings, findingCatalog: findingCatalog, _state: S, _ni: DDX_NI, _differential: differential,
     _nextQuestions: nextQuestions,
     // open ANY disease's reference panel from outside the reasoning workspace
     // (global search, knowledge library): open the panel, then show the ref.
@@ -3644,6 +3678,24 @@
       var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
       return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
         .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // MaiK Scribe — extract structured data from a spoken transcript. kind ∈ ICU kinds → { fields };
+    // "reasoning" (with catalog=[{key,label}]) → { findings, patient?, unmatched }. Never invents.
+    extract: function (transcript, kind, catalog) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var t = String(transcript == null ? "" : transcript).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      var body = { transcript: t, kind: kind }; if (catalog) body.catalog = catalog;
+      return aiHeaders().then(function (h) { return fetch(b + "/extract", { method: "POST", headers: h, body: JSON.stringify(body) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // AI STT fallback — audio dataURL → { transcript }. Used only where native/Web-Speech STT is absent.
+    transcribe: function (audioDataUrl) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var a = String(audioDataUrl == null ? "" : audioDataUrl); if (!a) return Promise.resolve({ error: "no-audio" });
+      return aiHeaders().then(function (h) { return fetch(b + "/transcribe", { method: "POST", headers: h, body: JSON.stringify({ audio: a }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; if (!r.ok) return { error: "server" }; return r.json(); })
         .catch(function (e) { return { error: String(e && e.message || e) }; });
     },
     // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read

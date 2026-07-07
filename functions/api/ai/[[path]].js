@@ -316,6 +316,26 @@ function visionTextPrompt(kind, ocr) {
     schema + "\n\n=== OCR TEXT ===\n" + ocr;
 }
 
+// Voice extract (MaiK Scribe): a spoken clinician dictation → structured ICU fields.
+// Reuses each kind's exact JSON schema; extract ONLY values explicitly stated.
+function transcriptExtractPrompt(kind, transcript) {
+  var schema = String(VISION_SYS[kind] || VISION_SYS.monitor).replace(/^Read this [^.]*\.\s*/i, "");
+  return "The following is a spoken clinical dictation (speech-to-text transcript) describing a " + (VISION_LABEL[kind] || "clinical") +
+    " context. Extract only the structured values the clinician EXPLICITLY stated in THIS TRANSCRIPT; never infer or invent a value that was not spoken; omit anything not clearly stated. " +
+    schema + "\n\n=== TRANSCRIPT ===\n" + transcript;
+}
+
+// Voice extract (reasoning): a free-text case description → EXACT finding keys from the
+// supplied catalog ONLY (the client sends its finding ontology). Never invents keys.
+function reasoningExtractPrompt(transcript, catalog) {
+  var cat = (catalog || []).map(function (c) { return c.key + " = " + (c.label || c.key); }).join("\n");
+  return "You are extracting structured clinical findings from a doctor's spoken description of ONE patient. " +
+    "Below is a CONTROLLED FINDING CATALOG (key = human label). Map the transcript to findings using ONLY keys that appear in this catalog — NEVER invent, guess, or modify a key. " +
+    "Return ONLY JSON: {\"findings\":[\"<exact catalog key>\", ...], \"patient\":{\"age\":<number|null>,\"sex\":\"male\"|\"female\"|null}, \"unmatched\":[\"<short phrase you heard but could not map>\", ...]}. " +
+    "Include a finding ONLY if the transcript clearly asserts it is PRESENT — never include a finding the clinician explicitly denies or negates. Put clinically-relevant things you heard but cannot map to a catalog key into `unmatched` as short phrases. No prose outside the JSON.\n\n" +
+    "=== FINDING CATALOG (key = label) ===\n" + cat + "\n\n=== TRANSCRIPT ===\n" + transcript;
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   if (!authorise(request, env)) return json({ error: "unauthorised" }, 403);
@@ -443,6 +463,59 @@ export async function onRequest(context) {
       catch (e) { await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: 0, status: "failed" }); return json({ error: "research-failed", detail: String(e && e.message || e) }, 502); }
       await recordUsage(gate, { inTok: estTokens(RESEARCH_SYS.length + q.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "web" });
+    }
+    if (seg === "extract") {
+      // Voice intake (MaiK Scribe): a transcript → structured ICU fields, OR (kind:"reasoning")
+      // → finding keys mapped to the client-supplied catalog. Same PHI posture as /vision text.
+      const transcript = String(body.transcript || "").slice(0, MAX_IN_CHARS).trim();
+      if (!transcript) return json({ error: "no transcript" }, 400);
+      const gate = await checkQuota(env, request, "ocr");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      if (body.kind === "reasoning") {
+        const catalog = Array.isArray(body.catalog) ? body.catalog.slice(0, 500) : [];
+        const prompt = reasoningExtractPrompt(transcript, catalog).slice(0, MAX_IN_CHARS + 12000);
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        const parsed = parseJsonLoose(text) || {};
+        // SAFETY: only keys that actually exist in the catalog survive (no invented findings).
+        const valid = {}; catalog.forEach((c) => { if (c && c.key) valid[c.key] = 1; });
+        const seen = {}, findings = [];
+        (Array.isArray(parsed.findings) ? parsed.findings : []).forEach((k) => { if (valid[k] && !seen[k]) { seen[k] = 1; findings.push(k); } });
+        const unmatched = (Array.isArray(parsed.unmatched) ? parsed.unmatched : []).map((s) => String(s).slice(0, 80)).filter(Boolean).slice(0, 20);
+        let patient;
+        if (parsed.patient && typeof parsed.patient === "object") {
+          const age = Number(parsed.patient.age); const sex = String(parsed.patient.sex || "").toLowerCase();
+          patient = {}; if (!isNaN(age) && age > 0 && age < 130) patient.age = age; if (sex === "male" || sex === "female") patient.sex = sex;
+          if (!Object.keys(patient).length) patient = undefined;
+        }
+        return json({ findings: findings, patient: patient, unmatched: unmatched, mode: "reasoning" });
+      }
+      const k = VISION_SYS[body.kind] ? body.kind : "monitor";
+      const prompt = transcriptExtractPrompt(k, transcript);
+      let text;
+      try { text = await callGemini(env, [{ text: prompt }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+      await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+      return json({ kind: k, fields: parseJsonLoose(text) || {}, mode: "extract" });
+    }
+    if (seg === "transcribe") {
+      // AI STT fallback (used only where neither native device STT nor Web Speech is available).
+      // Audio → transcript via the same Gemini transport (audio inline_data). PHI: audio leaves the
+      // device only on this path — the same posture as /vision image mode.
+      let b64 = String(body.audio || "");
+      const mime = (b64.match(/^data:([^;]+);base64,/) || [])[1] || "audio/webm";
+      b64 = b64.replace(/^data:[^;]+;base64,/, "");
+      if (!b64) return json({ error: "no audio" }, 400);
+      const gate = await checkQuota(env, request, "ocr");
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason }, 429);
+      const sys = "Transcribe this clinical dictation audio to plain text, VERBATIM. Return ONLY the transcript text — no preamble, labels, quotes, or commentary. If the audio is empty or inaudible, return an empty string.";
+      let text;
+      try { text = await callGemini(env, [{ text: sys }, { inline_data: { mime_type: mime, data: b64 } }], MAX_OUT); }
+      catch (e) { await recordUsage(gate, { inTok: 1200, outTok: 0, status: "failed" }); throw e; }
+      await recordUsage(gate, { inTok: 1200, outTok: estTokens((text || "").length), status: "success" });
+      return json({ transcript: String(text || "").trim(), mode: "ai" });
     }
     return json({ error: "unknown endpoint", seg: seg }, 404);
   } catch (e) {
