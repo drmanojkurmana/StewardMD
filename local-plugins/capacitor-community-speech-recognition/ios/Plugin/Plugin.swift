@@ -75,7 +75,13 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
             }
 
             self.audioEngine = AVAudioEngine.init()
-            self.speechRecognizer = SFSpeechRecognizer.init(locale: Locale(identifier: language))
+            // Fall back to the device-default recognizer when the requested locale (e.g. en-IN)
+            // has no on-device model — otherwise the recognizer is nil and later unwraps crash.
+            self.speechRecognizer = SFSpeechRecognizer(locale: Locale(identifier: language)) ?? SFSpeechRecognizer()
+            guard let recognizer = self.speechRecognizer, recognizer.isAvailable else {
+                call.reject("Speech recognition is not available for \"\(language)\" on this device.")
+                return
+            }
 
             let audioSession: AVAudioSession = AVAudioSession.sharedInstance()
             do {
@@ -93,11 +99,19 @@ public class SpeechRecognition: CAPPlugin, CAPBridgedPlugin {
 
             self.recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
             self.recognitionRequest?.shouldReportPartialResults = partialResults
+            guard let recognitionRequest = self.recognitionRequest else {
+                call.reject(self.messageUnknown)
+                return
+            }
 
             let inputNode: AVAudioInputNode = self.audioEngine!.inputNode
             let format: AVAudioFormat = inputNode.outputFormat(forBus: 0)
+            guard format.sampleRate > 0 && format.channelCount > 0 else {
+                call.reject("Microphone input is unavailable — close other apps using the mic and try again.")
+                return
+            }
 
-            self.recognitionTask = self.speechRecognizer?.recognitionTask(with: self.recognitionRequest!, resultHandler: { (result, error) in
+            self.recognitionTask = recognizer.recognitionTask(with: recognitionRequest, resultHandler: { (result, error) in
                 if result != nil {
                     let resultArray: NSMutableArray = NSMutableArray()
                     var counter: Int = 0
