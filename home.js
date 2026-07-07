@@ -1235,9 +1235,15 @@
       ".maik-x:hover{border-color:var(--hp,#0f766e);color:var(--hp,#0f766e)}",
       ".maik-x:active{transform:scale(.94)}",
       ".maik-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px;display:flex;flex-direction:column;gap:10px}",
-      ".maik-cmp{flex:0 0 auto;display:flex;gap:8px;align-items:flex-end;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
+      ".maik-cmp{flex:0 0 auto;display:flex;flex-direction:column;gap:8px;align-items:stretch;padding:10px 12px calc(10px + env(safe-area-inset-bottom));border-top:1px solid var(--hbd,#e2e8f0);background:var(--hpanel,#fff)}",
+      ".maik-cmp-row{display:flex;gap:8px;align-items:flex-end}",
       ".maik-cmp textarea{flex:1 1 auto;min-width:0;resize:none;max-height:120px;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);border-radius:12px;color:var(--hink);font:500 15px var(--hfont);padding:10px 12px;box-sizing:border-box}",
       ".maik-cmp button{flex:0 0 auto;background:var(--hp,#0f766e);color:#fff;border:none;border-radius:12px;padding:0 16px;height:44px;font:800 14px var(--hfont);cursor:pointer}",
+      ".maik-cmp button.maik-mic{background:var(--hbg,#f8fafc);color:var(--hp,#0f766e);border:1px solid var(--hbd,#e2e8f0);width:44px;padding:0;font-size:19px;line-height:1}",
+      ".maik-cmp button.maik-mic.live{background:#dc2626;color:#fff;border-color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}",
+      "@keyframes maikPulse{0%,100%{box-shadow:0 0 0 0 rgba(220,38,38,.5)}50%{box-shadow:0 0 0 6px rgba(220,38,38,0)}}",
+      ".maik-cmp button.maik-extract{background:transparent;color:var(--hp,#0f766e);border:1px dashed var(--hp,#0f766e);height:auto;min-height:38px;padding:8px 12px;font:700 13px var(--hfont);width:100%;text-align:center}",
+      ".maik-cmp button.maik-extract[hidden]{display:none}",
       ".maik-b{max-width:90%;padding:10px 13px;border-radius:14px;font:500 14px/1.55 var(--hfont);word-break:break-word}",
       ".maik-b.you{align-self:flex-end;background:var(--hp,#0f766e);color:#fff}",
       ".maik-b.ai{align-self:flex-start;background:var(--hbg,#f8fafc);border:1px solid var(--hbd,#e2e8f0);color:var(--hink)}",
@@ -1266,7 +1272,8 @@
         '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
-      '<div class="maik-cmp"><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div>';
+      '<div class="maik-cmp"><button id="maikExtract" class="maik-extract" type="button" hidden>🩺 Extract findings for Clinical Reasoning →</button>' +
+      '<div class="maik-cmp-row"><button id="maikMic" class="maik-mic" type="button" aria-label="Dictate to MaiK">🎤</button><textarea id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea><button id="maikSend">Send</button></div></div>';
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
     requestAnimationFrame(function () { scrim.classList.add("on"); sheet.classList.add("on"); });
@@ -1454,6 +1461,7 @@
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
+      try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.hidden = true; } catch (e) {}
       _maikHist.push({ q: q }); bubble("you", maikEscH(q));
       var active = maikActiveCase();
       if (maikV2()) {
@@ -1483,7 +1491,45 @@
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
-    qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; });
+    // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
+    var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract"), _voiceSess = null;
+    function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
+    function autosizeQ() { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; }
+    function refreshExtract() { if (extractBtn) extractBtn.hidden = !((qEl.value || "").trim() && reasoningReady()); }
+    function micStop() { if (_voiceSess && _voiceSess.stop) { try { _voiceSess.stop(); } catch (e) {} } _voiceSess = null; if (micBtn) { micBtn.textContent = "🎤"; micBtn.classList.remove("live"); micBtn.setAttribute("aria-label", "Dictate to MaiK"); } }
+    if (micBtn) micBtn.addEventListener("click", function () {
+      if (!window.SMD_VOICE || !SMD_VOICE.listen) { toast("Voice intake is still loading…"); return; }
+      if (_voiceSess) { micStop(); return; }
+      var base = (qEl.value || "").trim();
+      micBtn.textContent = "⏹"; micBtn.classList.add("live"); micBtn.setAttribute("aria-label", "Stop dictation");
+      _voiceSess = SMD_VOICE.listen({
+        onPartial: function (t) { qEl.value = (base ? base + " " : "") + t; autosizeQ(); },
+        onFinal: function (t) { if (t) { qEl.value = ((base ? base + " " : "") + t).trim(); autosizeQ(); } micStop(); refreshExtract(); try { qEl.focus(); } catch (e) {} },
+        onError: function () { micStop(); toast("Couldn’t capture audio — you can type instead."); },
+        onState: function (s) { if (s === "idle") micStop(); }
+      }) || null;
+    });
+    if (extractBtn) extractBtn.addEventListener("click", function () {
+      var q = (qEl.value || "").trim();
+      if (!q) { extractBtn.hidden = true; return; }
+      if (!reasoningReady()) { toast("Clinical Reasoning isn’t ready yet."); return; }
+      var catalog = []; try { catalog = DX.findingCatalog() || []; } catch (e) {}
+      extractBtn.disabled = true; extractBtn.textContent = "Extracting findings…";
+      SMD_AI.extract(q, "reasoning", catalog).then(function (r) {
+        extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →";
+        var raw = (r && r.findings) || [];
+        var keys = raw.map(function (f) { return typeof f === "string" ? f : (f && f.key); }).filter(Boolean);
+        if (!keys.length) { bubble("ai", '<div class="maik-welcome">I couldn’t map that to any findings in StewardMD’s catalog. Try naming the symptoms, signs, or labs explicitly — e.g. “fever, neck stiffness, photophobia”.</div>'); return; }
+        try { DX.addFindings(keys); } catch (e) {}
+        var labelOf = {}; catalog.forEach(function (c) { labelOf[c.key] = c.label || c.key; });
+        var names = keys.map(function (k) { return labelOf[k] || k; });
+        var d = bubble("ai", '<div class="maik-welcome">Added <b>' + names.length + '</b> finding' + (names.length === 1 ? "" : "s") + ' to Clinical Reasoning — <i>' + maikEscH(names.join(", ")) + '</i>. Nothing is diagnosed automatically; open the workspace to review the differential.</div>');
+        var ob = document.createElement("button"); ob.className = "maik-chip"; ob.style.marginTop = "8px"; ob.textContent = "Open Clinical Reasoning →";
+        ob.addEventListener("click", function () { close(); try { if (window.DX && DX.openWorkspace) DX.openWorkspace(); else if (window.DX && DX.open) DX.open({ workspace: true }); } catch (e) {} });
+        d.appendChild(ob); scroll(); extractBtn.hidden = true;
+      }).catch(function () { extractBtn.disabled = false; extractBtn.textContent = "🩺 Extract findings for Clinical Reasoning →"; toast("Couldn’t extract findings right now — please try again."); });
+    });
+    qEl.addEventListener("input", function () { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; refreshExtract(); });
     qEl.addEventListener("keydown", function (ev) { if (ev.key === "Enter" && !ev.shiftKey) { ev.preventDefault(); send(); } });
     if (prefill && typeof prefill === "string") { try { qEl.value = prefill; qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; } catch (e) {} }
     setTimeout(function () { try { qEl.focus(); } catch (e) {} }, 300);
