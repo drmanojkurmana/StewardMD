@@ -24,14 +24,44 @@
   var KEY_BASE = "smd_recent_cases";
   var listeners = [];
 
-  function userKey() {
+  // Ownership is keyed by the STABLE Firebase UID (like ghis-ward.js), not the email — email
+  // is empty for Apple Hide-My-Email and changes across providers, which orphaned the list.
+  // Signed out → "guest". A one-time migration (below) re-homes legacy email/guest lists.
+  function uid() {
     try {
-      var acc = JSON.parse(localStorage.getItem("stewardmd_account") || "null");
-      if (acc && acc.email) return acc.email;
-      return localStorage.getItem("stewardmd_last_user") || "guest";
-    } catch (e) { return "guest"; }
+      var a = window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth());
+      if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid;
+    } catch (e) {}
+    return null;
   }
+  function userKey() { return uid() || "guest"; }
   function storeKey() { return KEY_BASE + "_" + userKey(); }
+  // Fold any legacy list (guest + old email-keyed) into the current uid key exactly once per
+  // uid, newest-first, capped — so cases worked before signing in (or under an email key) are
+  // preserved and never duplicated. Runs on boot and on every auth change.
+  function migrateLegacy() {
+    try {
+      var u = uid(); if (!u) return;                       // only migrate once signed in
+      var flag = "smd_recent_migrated_" + u;
+      if (localStorage.getItem(flag)) return;
+      var target = KEY_BASE + "_" + u;
+      var merged = []; var seen = {};
+      function take(k) {
+        if (!k || k === target) return;
+        var arr; try { arr = JSON.parse(localStorage.getItem(k) || "[]") || []; } catch (e) { arr = []; }
+        arr.forEach(function (x) { if (x && x.caseId && !seen[x.caseId]) { seen[x.caseId] = 1; merged.push(x); } });
+      }
+      take(target);                                        // keep anything already there first
+      for (var i = 0; i < localStorage.length; i++) {
+        var k = localStorage.key(i);
+        if (k && k.indexOf(KEY_BASE + "_") === 0 && k !== target) take(k);
+      }
+      merged.sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+      if (merged.length) localStorage.setItem(target, JSON.stringify(merged.slice(0, MAX)));
+      localStorage.setItem(flag, String(Date.now()));
+      broadcast();
+    } catch (e) {}
+  }
   function read() { try { return JSON.parse(localStorage.getItem(storeKey()) || "[]") || []; } catch (e) { return []; } }
   function write(list) { try { localStorage.setItem(storeKey(), JSON.stringify(list.slice(0, MAX))); } catch (e) {} broadcast(); }
   function broadcast() { listeners.forEach(function (f) { try { f(); } catch (e) {} }); }
@@ -234,7 +264,17 @@
   window.SMD_openRecentCases = openOverlay;
 
   /* ---------------- boot ---------------- */
-  function boot() { try { watchDecision(); } catch (e) {} try { wrapIcu(); } catch (e) {} }
+  // Re-home legacy lists into the uid key when auth resolves / the account switches, so
+  // signing in surfaces cases worked as guest, and switching accounts shows the right list.
+  function watchAuth(tries) {
+    tries = tries || 0;
+    try {
+      var a = window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth());
+      if (a && a.onAuthStateChanged) { a.onAuthStateChanged(function () { try { migrateLegacy(); } catch (e) {} broadcast(); }); return; }
+    } catch (e) {}
+    if (tries < 60) setTimeout(function () { watchAuth(tries + 1); }, 500);
+  }
+  function boot() { try { migrateLegacy(); } catch (e) {} try { watchAuth(); } catch (e) {} try { watchDecision(); } catch (e) {} try { wrapIcu(); } catch (e) {} }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();

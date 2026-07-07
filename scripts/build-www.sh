@@ -26,6 +26,14 @@ for f in *.js; do
   esac
 done
 
+# ── 2b. Stylesheets (buildless CSS referenced by index.html / home.js) ────────
+# index.html + home.js load /ui-v3.css at runtime (the whole .v3/.v4 home layout
+# + base font-family live here). On web these are served from the repo root; the
+# native bundle must include them or the home renders unstyled (serif + broken).
+for f in *.css; do
+  cp "$f" "$WWW/"
+done
+
 # ── 3. Manifest + service worker ──────────────────────────────────────────────
 [ -f site.webmanifest ] && cp site.webmanifest "$WWW/"
 [ -f sw.js ] && cp sw.js "$WWW/"
@@ -34,6 +42,10 @@ done
 for f in *.png *.webp *.ico *.svg *.gif *.jpg *.jpeg; do
   cp "$f" "$WWW/"
 done
+
+# ── 4b. Offline clinical bundle (native drug monographs, lazy-loaded by
+# offline-clinical.js). Built by scripts/build-offline-clinical.mjs. ────────────
+[ -f data/offline-clinical.json.gz ] && cp data/offline-clinical.json.gz "$WWW/"
 
 # ── 5. Knowledge base — RUNTIME pieces only ───────────────────────────────────
 # Loaded by index.html + steward-ai.browser.js; the 13 MB kb.index.json and all

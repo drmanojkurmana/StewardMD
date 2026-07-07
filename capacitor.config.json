@@ -7,11 +7,11 @@
     "iosScheme": "https"
   },
   "ios": {
-    "contentInset": "always",
-    "backgroundColor": "#0d1b26"
+    "contentInset": "never",
+    "backgroundColor": "#FFFFFF"
   },
   "android": {
-    "backgroundColor": "#0d1b26"
+    "backgroundColor": "#FFFFFF"
   },
   "plugins": {
     "CapacitorHttp": {
@@ -19,12 +19,17 @@
     },
     "SplashScreen": {
       "launchShowDuration": 800,
-      "backgroundColor": "#0d1b26",
+      "launchAutoHide": false,
+      "backgroundColor": "#FFFFFF",
       "showSpinner": false,
       "androidScaleType": "CENTER_CROP"
     },
     "PushNotifications": {
       "presentationOptions": ["badge", "sound", "alert"]
+    },
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": ["google.com", "apple.com"]
     }
   }
 }

@@ -102,9 +102,9 @@
     var L = (s.labs && s.labs.recent) || {}, lv = (s.vitals && s.vitals.length) ? s.vitals[s.vitals.length - 1] : {}, g = s.abg || {};
 
     // Potassium
-    if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mmol/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mmol/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mmol/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mmol/L", "Electrolytes"); }
+    if (L.k != null) { if (L.k > 6.5) add("crit", "Critical hyperkalemia", "K " + L.k + " mEq/L — ECG + urgent treatment", "Electrolytes"); else if (L.k > 5.5) add("warn", "Hyperkalemia", "K " + L.k + " mEq/L", "Electrolytes"); else if (L.k < 2.5) add("crit", "Critical hypokalemia", "K " + L.k + " mEq/L — replace + monitor ECG", "Electrolytes"); else if (L.k < 3.0) add("warn", "Hypokalemia", "K " + L.k + " mEq/L", "Electrolytes"); }
     // Sodium
-    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na " + L.na + " mmol/L — correct at safe rate", "Electrolytes"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na " + L.na + " mmol/L", "Electrolytes"); }
+    if (L.na != null) { if (L.na > 160 || L.na < 120) add("crit", "Critical sodium", "Na " + L.na + " mEq/L — correct at safe rate", "Electrolytes"); else if (L.na > 150 || L.na < 130) add("warn", "Sodium derangement", "Na " + L.na + " mEq/L", "Electrolytes"); }
     // Ferritin (HLH / hyperinflammation tie-in)
     if (L.ferritin != null && L.ferritin > 10000) add("warn", "Markedly elevated ferritin", "Ferritin " + L.ferritin + " — consider HLH / hyperinflammation", "Labs");
     // Hemodynamics
@@ -195,6 +195,28 @@
     }
     return null;
   }
+  // GHIS/HIS reports Ca/Mg/PO₄/glucose/creatinine/albumin in CONVENTIONAL units (mg/dL, g/dL)
+  // but the ICU/ELYTE analysers store + interpret them in SI (mmol/L, µmol/L, g/L). Without
+  // conversion, e.g. Ca 9.4 mg/dL was read as 9.4 mmol/L → ELYTE ×4 → "40.4 mg/dL, severe
+  // hypercalcaemia". Convert conventional→SI on ingest. Na/K/Cl/HCO₃ are mEq/L == mmol/L, so
+  // they're never converted. Factors mirror electrolytes.js CONV (conventional = SI × f).
+  var WARD_CONV = { ca: 4.0, mg: 2.43, po4: 3.1, glu: 18, creat: 1 / 88.4, alb: 0.1 };
+  // Above these an SI value is implausible → the number must be conventional (used only when
+  // the units string is missing; creat/alb are the inverse — a small value is conventional).
+  var SI_IMPLAUSIBLE = { ca: 4, mg: 3, po4: 4, glu: 35, creat: 20, alb: 12 };
+  function wardToSI(key, val, units) {
+    var f = WARD_CONV[key]; if (!f) return val;                       // Na/K/Cl/HCO₃/etc: mEq==mmol, no conversion
+    var u = String(units || "").toLowerCase().replace(/\s+/g, "");
+    if (/mmol|meq|µmol|umol|micromol|g\/l/.test(u)) return val;       // already SI (incl albumin g/L)
+    var conventional = /mg\/dl/.test(u) || (key === "alb" && /g\/dl/.test(u));
+    if (conventional) return val / f;                                // GHIS conventional → SI
+    if (!u) {                                                        // no unit string → plausibility heuristic
+      if (key === "creat" || key === "alb") return (val > 0 && val < SI_IMPLAUSIBLE[key]) ? val / f : val;
+      return (val > SI_IMPLAUSIBLE[key]) ? val / f : val;
+    }
+    return val;
+  }
+  window.SMD_wardToSI = wardToSI;   // exposed for verification
   // Ingest a normalised Ward-Sync / imported bundle. Conflict-SAFE: never silently
   // overwrites a clinician's Manual value — records a conflict for the clinician to resolve.
   // bundle: { patient?, source?, ts?, labs:[{test,result,units,low,high}], vitals?, abg? }
@@ -206,6 +228,7 @@
     (bundle.labs || []).forEach(function (t) {
       var key = mapWardLab(t.test); if (!key) return;
       var v = parseFloat(t.result); if (isNaN(v)) return;
+      v = wardToSI(key, v, t.units);   // conventional (mg/dL, g/dL) → app SI so Ca/Mg/PO₄/glu/creat/alb aren't mis-scaled
       var prevSrc = STATE.src[key];
       if (prevSrc && prevSrc.source === "Manual" && STATE.labs.recent[key] != null && Number(STATE.labs.recent[key]) !== v) {
         conflicts.push({ key: key, label: t.test, ward: v, manual: STATE.labs.recent[key], wardTs: ts, manualTs: prevSrc.ts, source: source });
@@ -279,7 +302,7 @@
       '.icu-src{font:600 11px var(--font);color:var(--muted);margin:8px 2px 0}' +
       '.icu-src-btns{display:flex;flex-direction:column;gap:8px;margin:0 0 12px}' +
       '.icu-srcbtn{display:flex;align-items:center;gap:12px;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;cursor:pointer;color:var(--ink)}.icu-srcbtn.ward{border-color:var(--teal,#0e6e63)}.icu-srcbtn .i{font-size:20px;flex:0 0 auto}.icu-srcbtn .l{font:800 14px var(--font);flex:1}.icu-srcbtn .d{font:600 11px var(--font);color:var(--muted);flex-basis:100%;margin-left:32px}.icu-srcbtn{flex-wrap:wrap}' +
-      '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;padding:16px}' +
+      '.icu-imp-ov{position:fixed;inset:0;z-index:19000;background:rgba(15,23,42,.55);display:flex!important;align-items:center;justify-content:center;padding:16px}' +
       '.icu-imp-box{background:var(--panel);border-radius:14px;padding:22px 24px;text-align:center;color:var(--ink);font:600 14px var(--font);max-width:320px}' +
       '.icu-imp-spin{font-size:26px;animation:icuspin 1s linear infinite;margin-bottom:8px}@keyframes icuspin{to{transform:rotate(360deg)}}' +
       '.icu-imp-err{color:var(--danger);font:600 13.5px/1.5 var(--font);margin-bottom:12px}' +
@@ -372,7 +395,7 @@
       vitalCard("Pressors", pressors.length ? pressors.map(function (p) { return p.drug; }).join(", ") : "None", "", pressors.length ? "warn" : "ok"),
       vitalCard("Infusions", (_raw.infusions || []).length || "0", "", ""),
       vitalCard("Net Fluid", f.net24h, "mL", ""),
-      vitalCard("K⁺", L.k, "mmol/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0))
+      vitalCard("K⁺", L.k, "mEq/L", vstat(L.k, 3.5, 5.0, 2.5, 6.0))
     ];
     return '<div class="icu-sec-lbl">❤️ Live Patient Status</div><div class="icu-vitals">' + cards.join("") + "</div>";
   }
@@ -388,8 +411,11 @@
     return '<div class="icu-sec-lbl">🔄 Bring in patient data <span style="font-weight:600;text-transform:none;letter-spacing:0">· auto-fills fields you confirm</span></div>' +
       '<div class="icu-src-btns">' +
         '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">🏥</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
-        '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
-        '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>' +
+        // AI Vision (Camera / Upload) is on-device-first (native ML Kit OCR) — native only.
+        (window.SMD_IS_NATIVE
+          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
+            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>'
+          : '') +
       '</div>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
         return '<button class="icu-ai" data-icu-act="edit:' + (c.d === "abg" ? "abg" : c.d) + '"><div class="ic">' + c.ic + '</div><div class="t">' + c.t + '</div><div class="s">' + c.s + '</div>' +
@@ -457,6 +483,31 @@
     ph: "pH", paco2: "PaCO₂", pao2: "PaO₂", be: "Base excess", fio2: "FiO₂", mode: "Mode", peep: "PEEP", tv: "Tidal volume", peak: "Peak", plateau: "Plateau" };
   var IMPORT_GROUP = { labs: "mapped", monitor: "vitals", abg: "abg", ventilator: "ventilator" };
   function importFileInput(kind, method) {
+    // Native: a programmatic <input type=file>.click() does NOT open a picker in
+    // WKWebView — use the Capacitor Camera plugin and feed its dataUrl into the SAME
+    // OCR pipeline (compressImage → doOcr → SMD_AI.vision). Web keeps the file input.
+    // NOTE: Camera returns IMAGES only (no PDF) — PDF import stays web-only.
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      // Upload PDF/file → native document picker (PDF or image) → reuse the web
+      // handleImportFile pipeline (pdf.js renders a PDF page; images go to OCR).
+      if (method !== "camera" && window.SMD_NATIVE.pickFile) {
+        importProgress("Opening files…");
+        window.SMD_NATIVE.pickFile({ types: ["application/pdf", "image/*"] })
+          .then(function (blob) { if (blob) handleImportFile(kind, blob); else importDone(); })
+          .catch(function () { importDone(); });
+        return;
+      }
+      // Camera (and fallback) → Capacitor Camera plugin → OCR pipeline.
+      importProgress(method === "camera" ? "Opening camera…" : "Opening photos…");
+      window.SMD_NATIVE.pickImage({ camera: method === "camera" }).then(function (dataUrl) {
+        importProgress("Compressing image…");
+        compressImage(dataUrl, function (d, meta) {
+          if (!d) return importProgress("Could not read this image.", true);
+          doOcr(kind, d, meta ? meta.kb + " KB" : "");
+        });
+      }).catch(function () { importDone(); });
+      return;
+    }
     var inp = document.createElement("input"); inp.type = "file";
     inp.accept = (method === "camera") ? "image/*" : "image/*,application/pdf";
     if (method === "camera") inp.setAttribute("capture", "environment");   // rear camera on mobile
@@ -513,43 +564,94 @@
       doOcr(kind, dataUrl, meta ? meta.kb + " KB" : "");
     });
   }
+  // Map an engine result (fields keyed strictly) → the numeric field map the review uses.
+  // Ingest mapping is UNCHANGED — values map by key exactly as before.
+  function extractOcrFields(r) {
+    var fields = {};
+    if (r && r.mode === "fields") {
+      var src = (r.fields && typeof r.fields === "object") ? r.fields : {};
+      Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
+    }
+    return fields;
+  }
   function doOcr(kind, dataUrl, note) {
-    importProgress("Reading values from report…" + (note ? " (" + note + ")" : ""));
-    if (!(window.SMD_AI && SMD_AI.vision)) { importProgress("AI reader unavailable. Enable AI in Settings, or enter values manually.", true); return; }
-    try { if (SMD_AI.setFlag) SMD_AI.setFlag(true); } catch (e) {}
-    // ONLY the compressed image is sent to the OCR endpoint; never the raw file/PDF.
-    SMD_AI.vision(dataUrl, IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs").then(function (r) {
+    var mapKind = IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs";
+    // Route through the clinician-controlled Image Engine chooser (Private Device OCR vs
+    // AI Vision). It handles engine choice, PHI consent, and graceful fallback, then resolves
+    // the same { mode, fields, lines } shape the review already consumes. Falls back to the
+    // legacy readImage path only if the module is somehow absent.
+    if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
+      SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: mapKind }).then(function (r) {
+        importDone();
+        if (!r || r.cancelled) return;   // user cancelled — no dead end, just closes cleanly
+        openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
+      }).catch(function () { importDone(); openImportReview(kind, {}, dataUrl, []); });
+      return;
+    }
+    importProgress("Reading on-device…" + (note ? " (" + note + ")" : ""));
+    if (!(window.SMD_AI && SMD_AI.readImage)) { importProgress("On-device reader unavailable — enter values manually.", true); return; }
+    SMD_AI.readImage(dataUrl, mapKind).then(function (r) {
       importDone();
-      if (!r || r.error) { importProgress(r && r.error === "ai-off" ? "AI reader is off — enable it in Settings." : "Could not read the report. Enter values manually.", true); return; }
-      // the vision endpoint returns { kind, fields:{...} } — read fields, not the wrapper.
-      var src = (r.fields && typeof r.fields === "object") ? r.fields : r;
-      var fields = {}; Object.keys(src).forEach(function (k) { if (k === "kind" || k === "fields") return; if (k === "mode") { if (src[k]) fields[k] = src[k]; } else if (src[k] != null && !isNaN(parseFloat(src[k]))) fields[k] = parseFloat(src[k]); });
-      openImportReview(kind, fields, dataUrl);
-    }).catch(function () { importDone(); importProgress("Could not reach the AI reader. Enter values manually.", true); });
+      openImportReview(kind, extractOcrFields(r), dataUrl, (r && r.lines) || []);
+    }).catch(function () { importDone(); importProgress("Could not read this on-device — enter values manually.", true); });
   }
   // Clinician review — nothing enters the patient context until confirmed here.
-  function openImportReview(kind, fields, dataUrl) {
-    var keys = Object.keys(fields);
-    if (!keys.length) { importProgress("No values could be read confidently. Keeping the image as reference only — please enter values manually.", true); return; }
+  // Fields shown per report kind when we fall back to manual/tap-to-fill (no AI fields).
+  var IMPORT_FIELDS = {
+    labs: ["na", "k", "cl", "hco3", "ca", "mg", "po4", "glu", "creat", "urea", "alb", "wbc", "hb", "plt", "inr", "crp", "bili", "ast", "alt", "lactate"],
+    monitor: ["hr", "sbp", "dbp", "map", "rr", "spo2", "temp", "cvp", "etco2"],
+    abg: ["ph", "paco2", "pao2", "hco3", "be", "lactate", "fio2"],
+    ventilator: ["mode", "fio2", "peep", "tv", "rr", "peak", "plateau"]
+  };
+  // Review + tap-to-fill. `fields` = AI-structured values (may be empty on fallback);
+  // `lines` = on-device OCR lines. When AI gave nothing, show the full field set and let
+  // the clinician TAP a recognized value to drop it into the focused box. Nothing is
+  // ingested until confirmed. Fully works offline / with AI off.
+  function openImportReview(kind, fields, dataUrl, lines) {
+    fields = fields || {}; lines = lines || [];
+    var extracted = Object.keys(fields), aiMode = extracted.length > 0;
+    var showKeys = aiMode ? extracted : (IMPORT_FIELDS[kind] || IMPORT_FIELDS.labs);
+    if (!showKeys.length && !lines.length) { importProgress("No values could be read — please enter values manually.", true); return; }
     var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
     var L = _raw.labs.recent || {}, lastV = latestVitals();
-    var rows = keys.map(function (k) {
+    var rows = showKeys.map(function (k) {
+      var val = fields[k] != null ? fields[k] : "";
       var cur = (kind === "labs") ? L[k] : (kind === "monitor") ? lastV[k] : (kind === "abg") ? (_raw.abg || {})[k] : (_raw.ventilator || {})[k];
-      var dup = (cur != null && cur !== "" && String(cur) === String(fields[k])) ? '<span class="icu-imp-dup">≈ already recorded</span>'
-        : (cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
+      var dup = (val !== "" && cur != null && cur !== "" && String(cur) === String(val)) ? '<span class="icu-imp-dup">≈ already recorded</span>'
+        : (val !== "" && cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
       return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
-        '<input data-impk="' + k + '" value="' + esc(fields[k]) + '" ' + (typeof fields[k] === "number" ? 'type="number" step="any"' : 'type="text"') + '>' + dup + "</label>";
+        '<input data-impk="' + k + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
     }).join("");
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review extracted values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
-      '<div class="icu-imp-note">📷 OCR-extracted — <b>verify every value</b> against the report before applying. Nothing is added until you confirm.</div>' +
+    var linesPanel = lines.length ? (
+      '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:170px;overflow:auto">' +
+      lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") +
+      '</div>'
+    ) : "";
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+      '<div class="icu-imp-note">' + (aiMode
+        ? '📷 Read on-device, structured by AI — <b>verify every value</b> against the report before applying.'
+        : '📷 Read on-device — tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
       (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
-      '<div class="icu-imp-rows">' + rows + "</div>" +
+      '<div class="icu-imp-rows">' + rows + "</div>" + linesPanel +
       '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
     function close() { el.remove(); }
+    var focused = el.querySelector("[data-impk]");
+    el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
+    el.querySelectorAll(".icu-imp-line").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var f = focused || el.querySelector("[data-impk]"); if (!f) return;
+        var raw = b.getAttribute("data-line") || "";
+        if (f.type === "number") { var num = (raw.match(/-?\d+(\.\d+)?/) || [])[0]; if (num != null) f.value = num; }
+        else f.value = raw.trim();
+        b.style.opacity = ".5"; try { f.focus(); } catch (e) {}
+      });
+    });
     el.querySelector("#icuImpX").addEventListener("click", close);
     el.querySelector("#icuImpCancel").addEventListener("click", close);
     el.querySelector("#icuImpConfirm").addEventListener("click", function () {
       var vals = {}; el.querySelectorAll("[data-impk]").forEach(function (i) { var k = i.getAttribute("data-impk"), v = i.value; if (v !== "" && v != null) vals[k] = (k === "mode") ? v : parseFloat(v); });
+      if (!Object.keys(vals).length) { close(); return; }
       var bundle = { source: "Imported report" }; bundle[IMPORT_GROUP[kind] || "mapped"] = vals;
       var res = ICU.ingestFromWard(bundle);
       close(); paint();
@@ -627,13 +729,13 @@
       rows.push(["Expected PaCO₂", expA.toFixed(0) + " ± 2 mmHg (actual " + pco2 + ")"]);
       comp = pco2 < expA - 2 ? "Added respiratory alkalosis" : pco2 > expA + 2 ? "Added respiratory acidosis" : "Appropriate respiratory compensation";
     } else if (/Respiratory/.test(primary)) {
-      comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mmol/L per 10 mmHg PaCO₂).";
+      comp = "Assess acute vs chronic by the HCO₃ shift (acute ≈1, chronic ≈3.5 mEq/L per 10 mmHg PaCO₂).";
     }
     if (L.na != null && L.cl != null) {
       var ag = L.na - (L.cl + hco3), agc = ag;
       if (L.alb != null) agc = ag + 0.25 * (40 - L.alb);     // albumin in g/L (normal ~40)
       var agShown = L.alb != null ? agc : ag;
-      rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mmol/L"]);
+      rows.push(["Anion gap" + (L.alb != null ? " (albumin-corrected)" : ""), agShown.toFixed(0) + " mEq/L"]);
       if (agShown > 12) {
         flags.push("High anion gap — consider lactate, ketones, renal failure, toxins (MUDPILES)");
         var dr = (ag - 12) / (24 - hco3);
@@ -876,7 +978,7 @@
       var g = _raw.abg || {}, L = _raw.labs.recent || {}, r = analyzeABG(g, L);
       var head = '<div class="icu-card"><h3>ABG &amp; Acid–Base</h3>' +
         row("pH", g.ph) + row("PaCO₂", g.paco2, "mmHg") + row("PaO₂", g.pao2, "mmHg") +
-        row("HCO₃⁻", g.hco3, "mmol/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
+        row("HCO₃⁻", g.hco3, "mEq/L") + row("FiO₂", g.fio2, "%") + row("Base excess", g.be) +
         '<button class="icu-btn ghost" data-icu-act="edit:abg">✎ Update ABG</button></div>';
       if (!r) return head + '<div class="icu-card"><div class="icu-empty">Enter pH, PaCO₂ and HCO₃ to interpret. (Anion gap also uses Na/Cl/albumin from Labs.)</div></div>';
       var sev = /Mixed|acidosis/.test(r.primary) ? "warn" : "";
@@ -925,8 +1027,8 @@
         ["Urine output", vitalSeries("uop", w), { unit: "mL/h" }],
         ["Lactate", vitalSeries("lactate", w), { unit: "mmol/L" }],
         ["Creatinine", labSeries("creat", w), { unit: "" }],
-        ["Potassium", labSeries("k", w), { unit: "mmol/L" }],
-        ["Sodium", labSeries("na", w), { unit: "mmol/L" }]
+        ["Potassium", labSeries("k", w), { unit: "mEq/L" }],
+        ["Sodium", labSeries("na", w), { unit: "mEq/L" }]
       ];
       return winSelector() + metrics.map(function (m) { return trendCard(m[0], m[1], m[2]); }).join("");
     },
@@ -1061,12 +1163,12 @@
       { k: "rr", l: "Resp rate", t: "number" }, { k: "spo2", l: "SpO₂ %", t: "number" }, { k: "temp", l: "Temp °C", t: "number" }, { k: "uop", l: "Urine mL/h", t: "number" },
       { k: "lactate", l: "Lactate mmol/L", t: "number" }, { k: "cvp", l: "CVP mmHg", t: "number" }, { k: "etco2", l: "EtCO₂ mmHg", t: "number" } ] },
     labs: { title: "Laboratory values", ingest: ingestLabs, fields: [
-      { k: "na", l: "Na mmol/L", t: "number" }, { k: "k", l: "K mmol/L", t: "number" }, { k: "cl", l: "Cl mmol/L", t: "number" }, { k: "hco3", l: "HCO₃ mmol/L", t: "number" },
+      { k: "na", l: "Na mEq/L", t: "number" }, { k: "k", l: "K mEq/L", t: "number" }, { k: "cl", l: "Cl mEq/L", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" },
       { k: "ca", l: "Ca mmol/L", t: "number" }, { k: "mg", l: "Mg mmol/L", t: "number" }, { k: "po4", l: "PO₄ mmol/L", t: "number" }, { k: "creat", l: "Creatinine", t: "number" },
       { k: "alb", l: "Albumin g/L", t: "number" }, { k: "glu", l: "Glucose", t: "number" }, { k: "wbc", l: "WBC", t: "number" }, { k: "hb", l: "Hb g/dL", t: "number" },
       { k: "plt", l: "Platelets", t: "number" }, { k: "ferritin", l: "Ferritin", t: "number" }, { k: "crp", l: "CRP", t: "number" }, { k: "inr", l: "INR", t: "number" } ] },
     abg: { title: "Arterial blood gas", ingest: function (o) { Object.keys(o).forEach(function (k) { STATE.abg[k] = o[k]; }); STATE.abg.ts = nowTs(); }, fields: [
-      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mmol/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
+      { k: "ph", l: "pH", t: "number" }, { k: "paco2", l: "PaCO₂ mmHg", t: "number" }, { k: "pao2", l: "PaO₂ mmHg", t: "number" }, { k: "hco3", l: "HCO₃ mEq/L", t: "number" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "be", l: "Base excess", t: "number" } ] },
     ventilator: { title: "Ventilator settings", ingest: ingestVentilator, fields: [
       { k: "mode", l: "Mode", t: "text" }, { k: "fio2", l: "FiO₂ %", t: "number" }, { k: "peep", l: "PEEP cmH₂O", t: "number" }, { k: "tv", l: "Tidal volume mL", t: "number" },
       { k: "rr", l: "Resp rate", t: "number" }, { k: "plateau", l: "Plateau cmH₂O", t: "number" }, { k: "drivingP", l: "Driving pressure", t: "number" }, { k: "compliance", l: "Compliance", t: "number" } ] },
@@ -1116,40 +1218,70 @@
   /* ----------------------------------------------------------- snapshot */
   function openSnapshot() {
     ensureModal();
-    var ai = !!(window.SMD_AI && window.SMD_AI.on && window.SMD_AI.on());
+    // Snapshot capture is available whenever an image engine can run on this device —
+    // native device OCR (Apple Vision) OR AI Vision. The clinician chooses the engine per
+    // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
+    var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
+      (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
     var steps = [["📷", "ICU Monitor", "monitor"], ["🫁", "Ventilator", "ventilator"], ["🩸", "Laboratory Report", "labs"], ["📋", "ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " Capture " + s[1] + "</div>" +
-          (ai
+          (canSnap
             ? '<label class="icu-btn" style="display:inline-flex;width:auto;margin:6px 8px 0 0;padding:7px 12px;font-size:12px;cursor:pointer">📷 Capture / upload<input type="file" accept="image/*" capture="environment" data-snap="' + s[2] + '" style="display:none"></label><span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">or ✎ enter manually</span><div class="snap-out" data-out="' + s[2] + '" style="font:600 11px var(--font);color:var(--muted);margin-top:4px"></div>'
             : '<span class="man" data-icu-act="edit:' + s[2] + '" style="color:var(--primary);font:700 12px var(--font)">✎ Enter manually for now</span>') +
           "</div></div>";
       }).join("") + "</div>" +
-      (ai
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">✨ AI Vision ON</span><p style="margin-top:8px">Capture each screen — it\'s read automatically and the ICU tabs are filled in for you. <b>Verify every value.</b></p></div>'
-        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 AI Vision · Coming soon</span><p style="margin-top:8px">Capture ICU screens and have them read automatically into the tabs. Turn on AI features in settings to use this.</p></div>') +
+      (canSnap
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">📷 Image Engine ready</span><p style="margin-top:8px">Capture each screen — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro), then the ICU tabs are filled in. <b>Verify every value.</b></p></div>'
+        : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
-    if (ai) {
+    if (canSnap) {
       var ING = { monitor: "ingestMonitor", labs: "ingestLabs", ventilator: "ingestVentilator", flowsheet: "ingestFlowsheet" };
-      modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
-        inp.addEventListener("change", function () {
-          var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
-          var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
-          // Compress before sending to vision (was sending the raw full-res image → wasted
-          // AI tokens). compressImage downscales to ~1024px / q0.6.
-          compressImage(f, function (dataUrl) {
-            if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
-            window.SMD_AI.vision(dataUrl, kind).then(function (r) {
-              if (r && r.fields && Object.keys(r.fields).length) {
-                try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
-                if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
-              } else if (out) out.textContent = "Couldn't read that image" + (r && r.error ? " (" + r.error + ")" : "") + " — try again or enter manually.";
-            });
+      // Shared body: compress a dataUrl/File then run vision and fill the tabs.
+      function runSnap(kind, out, dataUrl) {
+        if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
+        // Route through the clinician-controlled Image Engine (device OCR vs AI Vision), with
+        // the legacy readImage as a fallback if the module is absent.
+        var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
+          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: kind })
+          : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, kind) : Promise.reject(new Error("no-reader")));
+        run.then(function (r) {
+          if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
+          if (r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
+            try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
+            if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
+          } else if (r.lines && r.lines.length) {
+            if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually.";
+          } else if (out) out.textContent = "Couldn't read that image — try again or enter manually.";
+        }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
+      }
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        // Native: the hidden <input type=file> never opens a picker in WKWebView.
+        // Intercept the label tap and use the Camera plugin instead (same pipeline).
+        modalEl.querySelectorAll("label input[data-snap]").forEach(function (inp) {
+          var label = inp.parentNode, kind = inp.getAttribute("data-snap");
+          label.addEventListener("click", function (e) {
+            e.preventDefault();
+            var out = modalEl.querySelector('[data-out="' + kind + '"]');
+            if (out) out.textContent = "✨ Reading…";
+            window.SMD_NATIVE.pickImage({ prompt: true }).then(function (dataUrl) {
+              compressImage(dataUrl, function (d) { runSnap(kind, out, d); });
+            }).catch(function () { if (out) out.textContent = ""; });
           });
         });
-      });
+      } else {
+        modalEl.querySelectorAll("input[data-snap]").forEach(function (inp) {
+          inp.addEventListener("change", function () {
+            var kind = inp.getAttribute("data-snap"), out = modalEl.querySelector('[data-out="' + kind + '"]');
+            var f = inp.files && inp.files[0]; if (!f) return; if (out) out.textContent = "✨ Reading…";
+            // Compress before sending to vision (was sending the raw full-res image → wasted
+            // AI tokens). compressImage downscales to ~1024px / q0.6.
+            compressImage(f, function (dataUrl) { runSnap(kind, out, dataUrl); });
+          });
+        });
+      }
     }
   }
 
@@ -1177,6 +1309,11 @@
   // Share a case exactly like the Clinical Reasoning dashboard: Web Share API
   // (system share sheet) with a clipboard-copy fallback where it isn't supported.
   function shareText(title, txt) {
+    // Native: navigator.share is unreliable in WKWebView — use the Capacitor share
+    // sheet (guest-safe: buildSummary is plain text, no Firebase/Firestore needed).
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      try { window.SMD_NATIVE.share({ title: title, text: txt, dialogTitle: title }).catch(function () {}); return true; } catch (e) {}
+    }
     try { if (navigator.share) { navigator.share({ title: title, text: txt }).catch(function () {}); return true; } } catch (e) {}
     try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(txt); if (window.toast) toast("Case summary copied — sharing not supported here"); return true; } } catch (e) {}
     return false;

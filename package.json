@@ -10,18 +10,23 @@
     "android": "npm run sync && npx cap open android"
   },
   "dependencies": {
-    "@capacitor-community/apple-sign-in": "^7.1.0",
+    "@capacitor-community/sqlite": "^8.1.0",
+    "@capacitor-firebase/authentication": "^8.3.0",
     "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
     "@capacitor/camera": "^8.2.0",
     "@capacitor/cli": "^8.4.1",
     "@capacitor/core": "^8.4.1",
+    "@capacitor/filesystem": "^8.1.2",
     "@capacitor/haptics": "^8.0.2",
     "@capacitor/ios": "^8.4.1",
     "@capacitor/preferences": "^8.0.1",
     "@capacitor/push-notifications": "^8.1.1",
     "@capacitor/share": "^8.0.1",
     "@capacitor/splash-screen": "^8.0.1",
-    "@capacitor/status-bar": "^8.0.2"
+    "@capacitor/status-bar": "^8.0.2",
+    "@capawesome/capacitor-file-picker": "^8.0.3",
+    "@stewardmd/capacitor-vision-ocr": "file:local-plugins/capacitor-vision-ocr",
+    "fflate": "^0.8.3"
   }
 }

@@ -79,10 +79,15 @@
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           '<button class="smd-nav-btn" data-open-ghis="1">🏥 Open Ward Sync (testing mode)</button>';
+        var toolsBody = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.settingsHTML)
+          ? '<div class="smd-nav-row" style="display:block"><div class="smd-nav-lbl" style="margin-bottom:6px">Image Engine</div>' + SMD_IMAGE_ENGINE.settingsHTML() + '</div>'
+          : "";
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
+          (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
           group("ward", "Ward Integration", wardBody, false));
+        try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(setBody); } catch (e) {}
         // wire subgroup collapse
         setBody.querySelectorAll("[data-grp]").forEach(function (h) {
           h.addEventListener("click", function () {
@@ -148,6 +153,7 @@
     book: '<path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/>',
     calc: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     flask: '<path d="M9 3h6M10 3v6l-5.5 9.5A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2.5L14 9V3"/><path d="M7.5 15h9"/>',
     home: '<path d="M3 10 12 3l9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/>',
@@ -331,6 +337,20 @@
     try {
       var out = document.getElementById("outputArea");
       if (!out || !out.children.length) { toast("Generate a clinical decision first."); return; }
+      // Native: window.print() is a no-op in WKWebView — export the FULL expanded
+      // decision (cloned output + full differential) as a styled page FILE, then open
+      // the iOS share sheet, which offers Print → Save as PDF / Save to Files. Web keeps
+      // real window.print() below.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && window.SMD_NATIVE.saveHtmlFile) {
+        try {
+          var nclone = out.cloneNode(true);
+          var nbar = nclone.querySelector("#smdCaseShare"); if (nbar) nbar.remove();
+          var nfrag = nclone.innerHTML;
+          try { var ndh = caseDifferentialHTML(); if (ndh) nfrag += ndh; } catch (e) {}
+          window.SMD_NATIVE.saveHtmlFile(nfrag, "StewardMD — Clinical decision", "StewardMD-clinical-decision").catch(function () { toast("Save unavailable"); });
+        } catch (e) { window.SMD_NATIVE.exportPdf(caseText(), "StewardMD — Clinical decision").catch(function () { toast("Save unavailable"); }); }
+        return;
+      }
       var old = document.getElementById("smdPrintArea"); if (old) old.remove();
       if (!document.getElementById("smd-caseprint-style")) {
         var st = document.createElement("style"); st.id = "smd-caseprint-style";
@@ -714,7 +734,7 @@
           tileV4("guidelines", "book", "Guides", "Protocols &amp; references") +
         '</div>' +
         '<div class="v4-foot"><div class="disc">Only for qualified clinicians</div>' +
-          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.webp" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.webp" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
+          '<a class="v4-maik" href="https://maiknowledge.in" target="_blank" rel="noopener" aria-label="Created by MaiK"><span class="lbl">Created by</span><img class="v4-maik-logo v4-maik-light" src="/maik-logo.png" alt="MaiK"><img class="v4-maik-logo v4-maik-dark" src="/maik-logo-white.png" alt="MaiK"><span class="v4-maik-name"><span class="mk-b">MaiK</span><span class="mk-s">nowledge</span></span></a>' +
           '<div class="cred">© 2026 StewardMD · Dr. Manoj Kumar Kurmana, MD</div>' +
           '<div class="v4-legal" style="margin-top:6px;font:500 11.5px/1.6 var(--v3-font,sans-serif);color:var(--v3-muted,#889)"><a href="/privacy" style="color:inherit;text-decoration:underline">Privacy Policy</a> · <a href="/terms" style="color:inherit;text-decoration:underline">Terms of Use</a> · <a href="/support" style="color:inherit;text-decoration:underline">Support</a></div><div class="v4-rev" style="margin-top:4px;font:500 11px/1.5 var(--v3-font,sans-serif);color:var(--v3-muted,#889)">Clinical content last reviewed · 5 Jul 2026</div></div>' +
       '</div></main>' +
@@ -892,9 +912,13 @@
         if (a === "subscription") return openSubscription();
         if (a === "ack") { closeSheet(); return openAck(); }
         if (a === "opencase") { closeSheet(); if (window.CASESHARE && CASESHARE.openPrompt) return CASESHARE.openPrompt(); return toast("Loading…"); }
-        if (a === "disclaimer") { closeSheet(); window.location.href = "/disclaimer"; return; }
-        if (a === "privacy") { closeSheet(); window.location.href = "/privacy"; return; }
-        if (a === "terms") { closeSheet(); window.location.href = "/terms"; return; }
+        // Legal & Safety: open the in-app modals (z-index 700, above the home shell) — same as
+        // the footer links. The old window.location.href="/disclaimer" navigated the WebView to a
+        // path that doesn't exist in the bundled native app (only disclaimer.html does), so Capacitor
+        // fell back to index.html and the whole app "restarted". Modals work on web + native.
+        if (a === "disclaimer") { closeSheet(); if (typeof openModal === "function") openModal("disclaimerModal"); return; }
+        if (a === "privacy") { closeSheet(); if (typeof openModal === "function") openModal("privacyModal"); return; }
+        if (a === "terms") { closeSheet(); if (typeof openModal === "function") openModal("termsModal"); return; }
         closeSheet();
         if (ACT[a]) ACT[a]();
       });
@@ -903,25 +927,34 @@
   function openAccount() {
     var a = readAccount();
     var body;
-    if (a && a.email) {
-      var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
-      var pic = a.picture
-        ? '<img class="hv-acct-pic" src="' + smdEsc(a.picture) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
+    // Profile is driven by the unified account layer (real provider, photo, name) with the
+    // legacy stored object as fallback.
+    var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
+    var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
+    var dot = '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
+    var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
+    if (signedIn) {
+      var nm = (P && P.name) || (a && a.name) || "Signed in";
+      var em = (P && P.email) || (a && a.email) || "";
+      var pc = (P && P.picture) || (a && a.picture) || "";
+      var initial = (((nm || em || "U").trim()[0]) || "U").toUpperCase();
+      var pic = pc
+        ? '<img class="hv-acct-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
         : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
       body = '<div class="hv-acct">' + pic +
-        '<div class="hv-acct-name">' + smdEsc(a.name || "Signed in") + '</div>' +
-        '<div class="hv-acct-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="hv-acct-badge">' + (a.type === "google" ? "Google · cloud sync on" : "Signed in") + '</div>' +
+        '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
+        (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
+        '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
         '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
-        '<button data-acct="delete" type="button" style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Delete account &amp; data</button></div>';
+        '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
     } else {
       body = '<div class="hv-acct">' +
         '<div class="hv-acct-pic hv-acct-ph">?</div>' +
-        '<div class="hv-acct-name">Not signed in</div>' +
-        '<div class="hv-acct-email">Guest mode — cases stay on this device only</div>' +
-        '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in with Google</button>' +
-        '<div class="hv-acct-note">Sign in to sync your cases across devices and share them by code.</div>' +
-        '<button data-acct="erase" type="button" style="width:100%;margin-top:12px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer">Erase all data on this device</button></div>';
+        '<div class="hv-acct-name">Guest mode</div>' +
+        '<div class="hv-acct-email">Cases stay on this device only</div>' +
+        '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in to save your cases</button>' +
+        '<div class="hv-acct-note">Sign in with Google or Apple to sync your cases across devices, keep them safe, and share by code. Your current cases move with you.</div>' +
+        '<button data-acct="erase" type="button" ' + dangerBtn.replace("margin-top:10px", "margin-top:12px") + '>Erase all data on this device</button></div>';
     }
     openSheet('<div class="hv-sh-t">Account &amp; sign-in</div>' + body);
     var s = sheetEl();
@@ -931,6 +964,11 @@
     if (si) si.addEventListener("click", function () { try { if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} setTimeout(openAccount, 900); });
     var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
+    // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
+    if (!openAccount._smdSub && window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) {
+      openAccount._smdSub = true;
+      window.SMD_ACCOUNT.onChange(function () { try { var sh = sheetEl(); if (sh && sh.querySelector(".hv-acct")) openAccount(); } catch (e) {} });
+    }
   }
   // ---- Account + data deletion (store requirement: Apple 5.1.1(v) / Google Play) ----
   // Wipes the user's cloud cases (Firestore users/{key}/cases), every local app key,
@@ -1223,7 +1261,7 @@
     var sheet = document.createElement("div"); sheet.id = "maikSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-label", "Ask MaiK");
     sheet.innerHTML =
       '<div class="maik-grab" id="maikGrab" aria-hidden="true"></div>' +
-      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.webp" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
+      '<div class="maik-hd"><img class="mk-logo" src="/maik-logo.png" alt="MaiK" /><div class="mk-ti"><div class="mk-s">Medical AI Knowledge · Clinical assistant</div></div>' +
         '<button class="maik-x" id="maikX" aria-label="Close assistant"><span class="xg">✕</span>Close</button></div>' +
       '<div class="maik-adv"><span class="maik-badge">⚠ AI-generated · not medical advice — verify independently</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
@@ -1304,7 +1342,10 @@
     // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
     function maikCanonTopic(q) {
       var t = String(q || "").trim().replace(/\?+$/, "").trim();
-      t = t.replace(/^(how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell me about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i, "");
+      // Strip leading filler/greeting/lead-in prefixes REPEATEDLY (e.g. "Hello tell dka
+      // treatment" → "dka treatment") so the KB matcher sees the real topic, not "hello tell".
+      var _px = /^((hello|hi|hey|please|kindly|ok|okay|so|and|the)( there)?[,.:!\s]+|how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell( me| us)? about\s+|tell( me| us)?\s+|(give me |show me )?(info|information|details?)( on| about)\s+|about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i;
+      var _prev; do { _prev = t; t = t.replace(_px, "").trim(); } while (t && t !== _prev);
       t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
       t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
       return t || String(q || "").trim();
@@ -1631,6 +1672,7 @@
   function pushIsOn() { try { return localStorage.getItem("smd_push_on") === "1" && ("Notification" in window) && Notification.permission === "granted"; } catch (e) { return false; } }
   function renderPushRow() {
     var el = _notifRoot && _notifRoot.querySelector("#ntfPush"); if (!el) return;
+    if (nativePush()) { renderPushRowNative(el); return; }   // native app: use @capacitor/push-notifications
     if (!pushSupported()) {
       // iOS only exposes Push inside the installed (home-screen) PWA.
       el.innerHTML = (isIOS() && !isStandalone())
@@ -1677,6 +1719,79 @@
       try { localStorage.removeItem("smd_push_on"); } catch (e) {}
       toast("Phone alerts turned off."); renderPushRow();
     });
+  }
+  /* ---- Native push (Capacitor @capacitor/push-notifications) — the native app has no
+     service-worker/web-push, so the panel uses a real "Turn on notifications" button and
+     the OS permission dialog instead of the web "Add to Home Screen" hint. ---- */
+  function nativePush() { return (window.SMD_IS_NATIVE && window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.PushNotifications) || null; }
+  function renderPushRowNative(el) {
+    var P = nativePush(); if (!P) { el.innerHTML = ""; return; }
+    P.checkPermissions().then(function (res) {
+      var st = res && res.receive;
+      if (st === "granted") {
+        el.innerHTML = '<div class="ntf-push-on"><span>🔔 Phone alerts are <b>on</b> for this device</span></div>';
+      } else if (st === "denied") {
+        el.innerHTML = '<div class="ntf-push-hint">🔕 Notifications are blocked. Turn them on in <b>iOS Settings › StewardMD › Notifications</b>.</div>';
+      } else {
+        el.innerHTML = '<div class="ntf-push-off"><span>Get a phone alert when new medical updates arrive</span><button class="ntf-push-btn" data-pushnative="on">Turn on notifications</button></div>';
+        var b = el.querySelector("[data-pushnative]"); if (b) b.addEventListener("click", function () { enablePushNative(); });
+      }
+    }).catch(function () { el.innerHTML = ""; });
+  }
+  function enablePushNative() {
+    var P = nativePush(); if (!P) return;
+    initNativePushListeners();
+    P.requestPermissions().then(function (res) {
+      if (res && res.receive === "granted") {
+        try { P.register(); } catch (e) {}
+        try { localStorage.setItem("smd_push_on", "1"); } catch (e) {}
+        try { toast("Notifications enabled ✅"); } catch (e) {}
+      } else { try { toast("Notifications not enabled."); } catch (e) {} }
+      try { renderPushRow(); } catch (e) {}
+    }).catch(function () { try { toast("Couldn't enable notifications."); } catch (e) {} });
+  }
+  // Forward the APNs device token to the server (best-effort; server-side delivery is
+  // provisioned separately — the client flow works regardless).
+  function initNativePushListeners() {
+    var P = nativePush(); if (!P || P.__smdListen) return; P.__smdListen = true;
+    try {
+      P.addListener("registration", function (t) {
+        var token = t && t.value; if (!token) return;
+        try { fetch("/api/push/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ native: true, platform: "ios", token: token }) }).catch(function () {}); } catch (e) {}
+      });
+      P.addListener("registrationError", function () {});
+    } catch (e) {}
+  }
+  // On native app open: if notifications aren't decided yet, offer a one-tap enable popup.
+  // Already-granted → silently re-register; denied → respect it (no popup).
+  function maybeOfferPushOnOpen() {
+    var P = nativePush(); if (!P || window.__smdPushOffered) return; window.__smdPushOffered = true;
+    initNativePushListeners();
+    P.checkPermissions().then(function (res) {
+      var st = res && res.receive;
+      if (st === "granted") { try { P.register(); } catch (e) {} return; }
+      if (st !== "prompt") return;   // denied → don't nag
+      showPushPopup();
+    }).catch(function () {});
+  }
+  function showPushPopup() {
+    if (document.getElementById("smdPushPop")) return;
+    var d = document.createElement("div"); d.id = "smdPushPop";
+    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
+    d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
+      '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
+      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
+      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
+    document.body.appendChild(d);
+    function close() { if (d.parentNode) d.parentNode.removeChild(d); }
+    d.querySelector("#smdPushLater").addEventListener("click", close);
+    d.addEventListener("click", function (e) { if (e.target === d) close(); });
+    d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
+  }
+  // Offer the notification popup shortly after the app is up (native only).
+  if (window.SMD_IS_NATIVE) {
+    try { window.addEventListener("load", function () { setTimeout(function () { try { maybeOfferPushOnOpen(); } catch (e) {} }, 1800); }); } catch (e) {}
   }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;
@@ -1773,13 +1888,31 @@
   // ---- Account / profile block in the sidebar (settings) ----
   function smdEsc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function readAccount() { try { return JSON.parse(localStorage.getItem("stewardmd_account") || "null"); } catch (e) { return null; } }
+  // Provider is the SOURCE OF TRUTH from Firebase (app.js stores type:"google" for every
+  // provider, so account.type alone mislabels Apple). Falls back to the stored type.
+  function acctProvider(a) {
+    try {
+      var u = (window.SMD_AUTH || (window.firebase && window.firebase.auth && window.firebase.auth()) || {}).currentUser;
+      var pid = u && u.providerData && u.providerData[0] && u.providerData[0].providerId;
+      if (pid === "apple.com") return "apple";
+      if (pid === "google.com") return "google";
+      if (pid === "password") return "email";
+    } catch (e) {}
+    return (a && a.type) || "";
+  }
+  function acctProviderLabel(a, withSync) {
+    var p = acctProvider(a);
+    var name = p === "apple" ? "Apple" : p === "google" ? "Google" : p === "email" ? "Email" : "";
+    if (!name) return "Signed in";
+    return name + (withSync ? " · cloud sync on" : " account");
+  }
   function injectSbAccount() {
     var drawer = document.getElementById("sbDrawer"); if (!drawer) return;
     var head = drawer.querySelector(".sb-head"); if (!head) return;
     var box = document.getElementById("smdSbAccount");
     if (!box) { box = document.createElement("div"); box.id = "smdSbAccount"; box.className = "smd-sba"; head.insertAdjacentElement("afterend", box); }
     var a = readAccount();
-    if (a && a.email) {
+    if (a && (a.email || a.type === "google" || a.type === "apple")) {
       var initial = (((a.name || a.email).trim()[0]) || "U").toUpperCase();
       var pic = a.picture
         ? '<img class="smd-sba-pic" src="' + smdEsc(a.picture) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=&quot;smd-sba-pic smd-sba-ph&quot;>' + smdEsc(initial) + '</div>\'">'
@@ -1787,7 +1920,7 @@
       box.innerHTML = pic +
         '<div class="smd-sba-info"><div class="smd-sba-name">' + smdEsc(a.name || "Signed in") + '</div>' +
         '<div class="smd-sba-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="smd-sba-prov">' + (a.type === "google" ? "Google account" : "Account") + '</div></div>' +
+        '<div class="smd-sba-prov">' + acctProviderLabel(a, false) + '</div></div>' +
         '<button class="smd-sba-btn" id="smdSbSignOut" type="button">Sign out</button>';
     } else {
       box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +

@@ -9,8 +9,8 @@
 	<array>
 		<string>Default</string>
 	</array>
-	<!-- Remote notifications (medical-update push). Xcode flips this to "production" on Archive. -->
-	<key>aps-environment</key>
-	<string>development</string>
+	<!-- NOTE: aps-environment (push) was removed for now so automatic signing succeeds with
+	     only the Sign in with Apple capability. Re-add it (and enable Push Notifications on the
+	     App ID + Xcode capability) when APNs is configured, or signing will fail to provision. -->
 </dict>
 </plist>

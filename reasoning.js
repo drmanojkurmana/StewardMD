@@ -1375,6 +1375,12 @@
     // Print the rendered clinical-reasoning OUTPUT in-page via a print stylesheet: the OS
     // print/share sheet opens OVER the app and Cancel returns here (no blank new tab).
     try {
+      // Native: window.print() no-ops in WKWebView — share the summary text so the iOS
+      // sheet can Save as PDF / Print. Web keeps the in-page print stylesheet path.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        window.SMD_NATIVE.exportPdf(buildSummary(), "StewardMD — Clinical Reasoning").catch(function () { toast("Save unavailable"); });
+        return;
+      }
       var old = document.getElementById("dxPrintArea"); if (old) old.remove();
       if (!document.getElementById("dx-print-style")) {
         var st = document.createElement("style"); st.id = "dx-print-style";
@@ -1418,6 +1424,11 @@
   }
   function shareSummary() {
     var txt = buildSummary();
+    // Native: navigator.share is unreliable in WKWebView — use the Capacitor share sheet.
+    if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+      window.SMD_NATIVE.share({ title: "StewardMD — Clinical Reasoning", text: txt, dialogTitle: "Share summary" }).catch(function () {});
+      return;
+    }
     try {
       if (navigator.share) { navigator.share({ title: "StewardMD — Clinical Reasoning", text: txt }).catch(function () {}); return; }
     } catch (e) {}
@@ -2280,14 +2291,74 @@
     return '<div class="dx-col ' + cls + '"><div class="dx-col-h">' + title + ' <span class="dx-col-n">' + rows.length + '</span></div>' + body + '</div>';
   }
 
+  // Grouped profile options for #dxHospSel: National (ICMR + national studies), each region's
+  // composite + its studies, then Hospitals — mirrors the Antibiogram source dropdown so both
+  // views share one profile system (data-driven from HOSPITAL.list).
+  function hospOptions(cur) {
+    var list = (window.HOSPITAL && window.HOSPITAL.list) || [];
+    function opt(id, label, extra) { return '<option value="' + id + '"' + (id === cur ? " selected" : "") + '>' + esc(label) + (extra || "") + '</option>'; }
+    function studiesOf(rg) { return list.filter(function (x) { return x.type === "study" && x.region === rg; }).sort(function (a, b) { return (a.credibility || 9) - (b.credibility || 9); }); }
+    var comp = {}; list.forEach(function (x) { if (x.type === "region") comp[x.region] = x; });
+    var icmr = list.filter(function (x) { return x.id === "ICMR"; })[0];
+    var h = '<optgroup label="National">';
+    if (icmr) h += opt("ICMR", icmr.name, " ⭐");
+    studiesOf("national").forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+    h += '</optgroup>';
+    [["south", "South India"], ["north", "North India"], ["east", "East & NE India"], ["west", "West & Central India"]].forEach(function (rr) {
+      var c = comp[rr[0]], sts = studiesOf(rr[0]);
+      if (!c && !sts.length) return;
+      h += '<optgroup label="' + rr[1] + '">';
+      if (c) h += opt(c.id, (c.short || rr[1]) + " — regional composite");
+      sts.forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
+      h += '</optgroup>';
+    });
+    var hosps = list.filter(function (x) { return x.id !== "ICMR" && x.type !== "region" && x.type !== "study"; });
+    if (hosps.length) { h += '<optgroup label="Hospitals">'; hosps.forEach(function (x) { h += opt(x.id, x.name, x.hasPolicy ? " ✓ policy" : ""); }); h += '</optgroup>'; }
+    return h;
+  }
+
+  // Additive, data-driven regional resistance snapshot for the lead syndrome's likely
+  // organisms — shown ALONGSIDE (never replacing) ICMR national guidance. Only genuine local
+  // cells from the active profile are shown (national fallbacks omitted; the national baseline
+  // is already present). Every value carries its source. % resistant = 100 − %susceptible.
+  var RSHORT = { piptazo: "Pip-tazo", cefotaxime: "Cefotaxime", ceftriaxone: "Ceftriaxone", ceftazidime: "Ceftazidime", cefepime: "Cefepime", meropenem: "Meropenem", imipenem: "Imipenem", ertapenem: "Ertapenem", ciprofloxacin: "Cipro", levofloxacin: "Levo", amikacin: "Amikacin", gentamicin: "Gentamicin", colistin: "Colistin", cotrimoxazole: "Co-trimox", nitrofurantoin: "Nitrofur", fosfomycin: "Fosfomycin", cefoxitin: "Cefoxitin(MR)", vancomycin: "Vancomycin", linezolid: "Linezolid", teicoplanin: "Teicoplanin" };
+  var RPANEL = ["piptazo", "cefotaxime", "ceftriaxone", "cefepime", "meropenem", "imipenem", "ciprofloxacin", "amikacin", "colistin", "cotrimoxazole", "nitrofurantoin", "cefoxitin", "vancomycin", "linezolid"];
+  function rColor(R) { return R >= 70 ? "#B91C1C" : R >= 50 ? "#EA580C" : R >= 25 ? "#D97706" : R >= 10 ? "#65a30d" : "#047857"; }
+  function regionSuscHTML(lead) {
+    try {
+      if (!(window.HOSPITAL && window.HOSPITAL.getSusceptibility)) return "";
+      var hp = window.HOSPITAL.current();
+      if (!hp || !(hp.abg || hp.type === "region" || hp.type === "study")) return "";   // only profiles with a real antibiogram
+      var syn = lead && lead._syn, pth = syn && syn.pathogens;
+      var orgs = pth ? [].concat(pth.veryLikely || [], pth.likely || []) : [];
+      if (!orgs.length) return "";
+      var seen = {}, rows = [];
+      orgs.forEach(function (orgName) {
+        if (rows.length >= 5 || seen[orgName]) return; seen[orgName] = 1;
+        var cells = [];
+        RPANEL.forEach(function (dk) {
+          var r = window.HOSPITAL.getSusceptibility(orgName, dk);
+          if (!r || r.national || r.s == null) return;   // genuine local values only
+          var R = Math.round(100 - r.s);
+          cells.push('<span style="display:inline-block;font:700 10.5px var(--sans,system-ui);color:#fff;background:' + rColor(R) + ';padding:2px 7px;border-radius:999px;margin:3px 4px 0 0">' + esc(RSHORT[dk] || dk) + ' ' + R + '%R</span>');
+        });
+        if (cells.length) rows.push('<div style="margin-top:6px"><span style="font:700 12px var(--sans,system-ui);font-style:italic">' + esc(orgName) + '</span> ' + cells.join("") + '</div>');
+      });
+      if (!rows.length) return "";
+      var nm = hp.name || hp.short || "regional";
+      return '<div class="dx-region-abg" style="margin-top:10px;padding:10px 12px;border:1px solid var(--line,#E2E8F0);border-radius:12px;background:var(--panel,#fff)">' +
+        '<div style="font:800 12px var(--sans,system-ui);color:var(--ink,#0F172A)">📊 Local resistance — ' + esc(nm) + ' <span style="font-weight:600;color:var(--slate-soft,#64748B)">(% resistant · decision support)</span></div>' +
+        rows.join("") +
+        '<div style="margin-top:8px;font:500 10.5px/1.4 var(--sans,system-ui);color:var(--slate-soft,#64748B)">Regional susceptibility for the active profile; ICMR national guidance remains the baseline. Verify against your own local antibiogram before prescribing.</div></div>';
+    } catch (e) { return ""; }
+  }
+
   function renderHosp() {
     var el = root.querySelector("#dxHosp");
     if (!el || !window.HOSPITAL) { if (el) el.innerHTML = ""; return; }
     var h = window.HOSPITAL.current();
-    var opts = window.HOSPITAL.list.map(function (x) {
-      return '<option value="' + x.id + '"' + (x.id === h.id ? " selected" : "") + '>' + esc(x.name) + (x.recommended ? " ⭐ Recommended" : (x.hasPolicy ? "" : " — national guidance")) + '</option>';
-    }).join("");
-    el.innerHTML = '<span class="dx-hosp-l">Hospital policy</span>' +
+    var opts = hospOptions(h.id);
+    el.innerHTML = '<span class="dx-hosp-l">Region / policy</span>' +
       (h.logo ? '<img class="dx-hosp-logo" src="' + h.logo + '" alt="' + esc(h.short) + ' logo">' : "") +
       '<select id="dxHospSel" class="dx-hosp-sel" aria-label="Select hospital policy">' + opts + '</select>';
     var sel = el.querySelector("#dxHospSel");
@@ -2300,12 +2371,18 @@
   function requestAntibiogram(id) {
     try {
       var h = null; ((window.HOSPITAL && window.HOSPITAL.list) || []).forEach(function (x) { if (x.id === id) h = x; });
-      if (!h || h.hasPolicy || h.id === "ICMR") return;
+      if (!h || h.hasPolicy || h.abg || h.type === "region" || h.type === "study" || h.id === "ICMR") return;
       var name = h.name || h.short || "my hospital";
       var go = window.confirm("StewardMD doesn't yet hold the local antimicrobial policy / antibiogram for " + name + ".\n\nWould you like to email it so we can add your hospital? This opens your mail app addressed to Support@StewardMD.in — attach your latest antibiogram PDF before sending.");
       if (!go) return;
       var subject = "StewardMD — Local antibiogram upload (" + name + ")";
       var body = "Hi StewardMD Support Team,\n\nI would like StewardMD to support my hospital's local antimicrobial policy / antibiogram.\n\nHospital: " + name + "\nCity / location: \nDepartment / unit: \n\nI have attached our latest local antibiogram / antibiotic policy PDF.\n(Please attach the PDF before sending.)\n\nThank you!";
+      // Native: mailto: is not reliably handled by WKWebView — route via the share
+      // sheet so the user can pick Mail. Web keeps the direct mailto navigation.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
+        window.SMD_NATIVE.share({ title: subject, text: body, dialogTitle: "Email antibiogram" }).catch(function () {});
+        return;
+      }
       window.location.href = "mailto:Support@StewardMD.in?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
     } catch (e) {}
   }
@@ -2349,6 +2426,7 @@
         orgHTML(lead._syn) + deescHTML(lead._syn) +
         '<div class="dx-policy-refs">Secondary references: ICMR AMRSN 2024 · IDSA · Surviving Sepsis Campaign</div>' +
         (e.table ? '<div class="dx-policy-cite">Source: GIMSR Antibiotic Policy ' + esc(e.table) + ', p.' + e.page + '</div>' : "") +
+        regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
     } else {
@@ -2356,6 +2434,7 @@
         '<div class="dx-policy-src">' + src + '</div>' +
         '<div class="dx-policy-note"><b>ICMR national guidance (AMRSN 2024)</b> is applied as the default standard for <b>' + esc(lead.name) + '</b>' + (h.id === "ICMR" ? "" : " — no " + esc(h.short || h.name) + "-specific local entry") + '. ' +
         (h.note ? esc(h.note) + " " : "") + 'StewardMD incorporates ICMR / IDSA evidence on the full disease page; institutional policies (e.g. GIMSR) are offered last as local options.</div>' +
+        regionSuscHTML(lead) +
         '<button class="dx-select inf" data-sel="' + lead.id + '">Open full stewardship page →</button>' +
       '</div>';
     }
@@ -2623,7 +2702,8 @@
     }
     root.classList.add("on"); document.body.classList.add("dx-lock"); recompute();
     // focus the findings search so the clinician can start typing immediately
-    try { var sif = root.querySelector("#dxSearch"); if (sif) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
+    // Native: skip programmatic focus — it pops the iOS keyboard with no user intent.
+    try { var sif = root.querySelector("#dxSearch"); if (sif && !window.SMD_IS_NATIVE) setTimeout(function () { try { sif.focus(); } catch (e) {} }, 60); } catch (e) {}
   }
   function openWorkspace() { if (!S._restoring) S._caseId = null; open({ workspace: true }); }
   // Reopen the workspace and restore a Recent-Cases snapshot (findings + case id) so
@@ -2645,6 +2725,9 @@
     try { if (typeof window.SMD_setFindings === "function") window.SMD_setFindings(S.f); } catch (e) {}
     closeMgmt();
     if (root) { root.classList.remove("on"); document.body.classList.remove("dx-lock"); }
+    // Reasoning was opened from the home (which hideV2()'d it) — restore the home shell,
+    // otherwise closing falls through to the empty classic view (blank screen on native).
+    try { if (window.SMD_setUI) window.SMD_setUI(true); } catch (e) {}
   }
 
   /* ---------------------------------------------------------------------- *
@@ -2709,7 +2792,7 @@
       ".dx-redflag{width:100%;box-sizing:border-box;font:800 12.5px var(--sans);color:var(--red,#ab1c2c);background:var(--red-bg,#fbe7e9);border:1px solid var(--red-line,#efa9b1);border-radius:10px;padding:9px 12px;margin-bottom:8px}",
       ".dx-disc{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}",
       ".dx-disc-pill{font:600 11.5px var(--sans);color:var(--ink,#243b53);background:var(--panel,#f2f6fb);border:1px solid var(--line,#d6e0ea);border-radius:999px;padding:4px 10px}",
-      ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
+      ".dx-mgmt{position:fixed;inset:0;z-index:860;background:var(--paper);display:none;flex-direction:column;overflow:hidden;padding-top:env(safe-area-inset-top);padding-left:env(safe-area-inset-left);padding-right:env(safe-area-inset-right)}",
       ".dx-mgmt.on{display:flex;animation:dxIn .22s ease}",
       ".dx-mgmt-top{padding:13px 16px;border-bottom:1px solid var(--line);background:var(--panel);flex:0 0 auto}",
       ".dx-mgmt-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:18px 16px 48px;max-width:760px;margin:0 auto;width:100%}",
@@ -3028,7 +3111,7 @@
       b.addEventListener("click", function () {
         var q = b.getAttribute("data-rq"), i2 = document.getElementById("smdSearchInput");
         smdRecentPush(q);
-        if (i2) { i2.value = q; i2.dispatchEvent(new Event("input", { bubbles: true })); i2.focus(); }
+        if (i2) { i2.value = q; i2.dispatchEvent(new Event("input", { bubbles: true })); if (!window.SMD_IS_NATIVE) i2.focus(); }
         else if (window.doSearch) window.doSearch(q);
       });
     });
@@ -3401,7 +3484,11 @@
    * the rule-based output. PHI note: explain sends findings, vision sends an
    * image, to Google — only when explicitly enabled.
    * ---------------------------------------------------------------------- */
-  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((h === "localhost" || h === "127.0.0.1") ? "" : "/api/ai"); }
+  // NOTE: in the native app the WebView origin is https://localhost, so hostname is
+  // "localhost" — that must NOT take the dev branch (returns "" → every AI method
+  // short-circuits to {error:"ai-off"} and the calls would hit https://localhost anyway).
+  // Native uses /api/ai (native-bridge rewrites → stewardmd.in via CapacitorHttp → Vertex).
+  function aiBase() { var h = location.hostname; return window.AI_PROXY || ((!window.SMD_IS_NATIVE && (h === "localhost" || h === "127.0.0.1")) ? "" : "/api/ai"); }
   // Attach the Firebase ID token so the server can derive the user's identity for
   // usage metering / quotas (server verifies it; browser userId is never trusted).
   // No signed-in user → plain headers (server applies a small guest quota by IP).
@@ -3413,7 +3500,120 @@
     } catch (e) {}
     return Promise.resolve(base);
   }
-  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF
+  function aiOn() { try { var v = localStorage.getItem("smd_ai"); return v === "1"; } catch (e) { return false; } }   // default OFF (MaiK chat / AI commentary)
+  // Live differential on/off (default ON) — a per-device switch in the differential header.
+  function liveDiffOn() { try { return localStorage.getItem("smd_live_diff") !== "0"; } catch (e) { return true; } }
+  function liveToggleHTML() {
+    var on = liveDiffOn();
+    return '<button class="sl-toggle" data-livetoggle="1" type="button" role="switch" aria-checked="' + on + '" title="Turn the live differential on or off" ' +
+      'style="margin-left:auto;flex:none;border:1px solid ' + (on ? "#0e6e63" : "#cbd5e1") + ';background:' + (on ? "#0e6e63" : "#fff") + ';color:' + (on ? "#fff" : "#64748b") + ';border-radius:999px;padding:4px 12px;font:700 11px var(--sans,-apple-system,system-ui,sans-serif);cursor:pointer">' + (on ? "● On" : "○ Off") + "</button>";
+  }
+  function bindLiveToggle(panel) {
+    var t = panel && panel.querySelector('[data-livetoggle="1"]');
+    if (t) t.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); try { localStorage.setItem("smd_live_diff", liveDiffOn() ? "0" : "1"); } catch (x) {} try { smdRenderLive(); } catch (x) {} });
+  }
+  // The app.js "Clear all findings" link (.reset-link) resets the WHOLE workflow to step 1.
+  // Intercept it so it only clears the selected findings and keeps the clinician in place.
+  function smdClearFindingsInPlace() {
+    var f = (typeof window.SMD_getFindings === "function") ? (window.SMD_getFindings() || {}) : {};
+    Object.keys(f).forEach(function (k) { if (f[k]) { var cb = document.getElementById("f-" + k); if (cb) { cb.checked = false; try { cb.dispatchEvent(new Event("change", { bubbles: true })); } catch (e) {} } } });
+    try { if (window.SMD_setFindings) { var clr = {}; Object.keys(f).forEach(function (k) { clr[k] = false; }); window.SMD_setFindings(clr); } } catch (e) {}
+    try { smdRenderLive(); } catch (e) {}
+    try { (window.toast || function () {})("Findings cleared"); } catch (e) {}
+  }
+  document.addEventListener("click", function (e) {
+    try {
+      var b = e.target && e.target.closest && e.target.closest(".reset-link");
+      if (!b || !/clear all findings/i.test(b.textContent || "")) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      smdClearFindingsInPlace();
+    } catch (x) {}
+  }, true);
+  // AI Vision (native OCR→cloud text-structuring) is its OWN gate, default ON. It is
+  // privacy-safe independent of the chat toggle: the PHOTO never leaves the device
+  // (Apple Vision OCR is on-device) and only PHI-redacted TEXT is sent to Vertex. Opt out
+  // with localStorage smd_ai_vision="0".
+  function visionAiOn() { try { return localStorage.getItem("smd_ai_vision") !== "0"; } catch (e) { return true; } }
+  // On-device PHI redaction: strip obvious identifiers from OCR text BEFORE anything is
+  // sent to the cloud. Targets email, long phone/ID digit-runs, and labelled
+  // MRN/UHID/IP/Name/DOB/dates. Deliberately conservative so short clinical VALUES
+  // (e.g. "Na 138", "pH 7.32") are never removed.
+  function redactPHI(text) {
+    var t = String(text == null ? "" : text);
+    t = t.replace(/\b[\w.+-]+@[\w.-]+\.\w{2,}\b/g, "[redacted]");                                  // email
+    t = t.replace(/\b(MRN|UHID|UID|IP\s?N?o|OP\s?N?o|Reg\.?\s?No|Hosp\.?\s?No|ABHA|Aadhaar)\b\s*[:#.]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/\b(Name|Patient|Pt\.?\s?Name|Father|Mother|Guardian|Husband|Wife)\b\s*[:]\s*.+/gi, "$1: [redacted]");
+    t = t.replace(/\b(DOB|D\.?O\.?B|Date of Birth|Age\/Sex)\b\s*[:]?\s*\S+/gi, "$1: [redacted]");
+    t = t.replace(/(\+?\d[\d\s-]{8,}\d)/g, "[redacted]");                                          // phone / 10+ digit id runs
+    t = t.replace(/\b\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4}\b/g, "[date]");                            // dd/mm/yyyy
+    return t;
+  }
+  window.SMD_redactPHI = redactPHI;
+  // On-device structuring: parse common labelled values from OCR text so AI Vision fills
+  // fields even when the cloud is unavailable (offline / quota / endpoint not deployed).
+  // Conservative — only clearly-matched values; the clinician verifies + taps the rest.
+  function parseFieldsOnDevice(text, kind) {
+    var t = " " + String(text == null ? "" : text).replace(/[\n\r]+/g, " ") + " ";
+    var out = {};
+    function grab(re) { var m = t.match(re); return m ? parseFloat(m[1]) : null; }
+    function set(k, v) { if (v != null && !isNaN(v)) out[k] = v; }
+    // On monitors the value sits below/beside its label with units in between (e.g. M70:
+    // "HR bpm 60", "TEMP °C 30 T1 36.5"). Scan the ~44 chars after the label and return the
+    // first number within the physiologic range — skipping waveform sweep speeds ("25 mm/s")
+    // and BP-style "120/80" fragments, and stepping past out-of-range distractors.
+    function near(labels, lo, hi, dec) {
+      var lm = t.match(new RegExp("\\b(?:" + labels + ")\\b", "i")); if (!lm) return null;
+      var start = lm.index + lm[0].length, tail = t.slice(start, start + 44);
+      var numRe = /(\d{1,3}(?:\.\d)?)\s*(mm\/s|\/\s*\d)?/g, m;
+      while ((m = numRe.exec(tail))) {
+        if (m[2]) continue;                        // skip "12.5 mm/s" and "120/80"
+        var v = parseFloat(m[1]);
+        if (v >= lo && v <= hi) return dec ? v : Math.round(v);
+      }
+      return null;
+    }
+    if (kind === "monitor" || kind === "vitals") {
+      var bp = t.match(/\b(\d{2,3})\s*\/\s*(\d{2,3})\b/);
+      if (bp) { set("sbp", parseFloat(bp[1])); set("dbp", parseFloat(bp[2])); }
+      set("map", near("MAP|MAD|mean", 30, 180));
+      set("hr", near("HR|PR|pulse|heart\\s*rate", 25, 240));
+      set("spo2", near("SpO2|SpO₂|SPO2|SaO2|sat", 50, 100));
+      set("rr", near("RR|RESP|resp\\w*", 4, 70));
+      set("temp", near("TEMP|temp\\w*|T1|T", 34, 42.5, true));
+      set("cvp", near("CVP", 0, 30));
+      set("etco2", near("EtCO2|ETCO2", 5, 80));
+    } else if (kind === "abg") {
+      set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,2})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2})\b/));
+      set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+      set("pao2", grab(/\b(?:PaO2|pO2|PO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+      set("hco3", grab(/\b(?:HCO3|HCO₃|bicarb\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("be", grab(/\b(?:BE|base\s*excess)\D{0,4}(-?\d{1,2}(?:\.\d)?)\b/i));
+      set("lactate", grab(/\b(?:lac\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("fio2", grab(/\b(?:FiO2|FIO2|FiO₂)\D{0,4}(\d{2,3})\b/i));
+    } else if (kind === "labs" || kind === "mapped") {
+      set("na", grab(/\bNa\+?\D{0,4}(\d{2,3})\b/i));
+      set("k", grab(/\bK\+?\D{0,4}(\d(?:\.\d)?)\b/i));
+      set("cl", grab(/\bCl\-?\D{0,4}(\d{2,3})\b/i));
+      set("hco3", grab(/\b(?:HCO3|HCO₃)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("creat", grab(/\b(?:creat\w*|Cr)\D{0,4}(\d(?:\.\d{1,2})?)\b/i));
+      set("urea", grab(/\b(?:urea|BUN)\D{0,4}(\d{1,3})\b/i));
+      set("glu", grab(/\b(?:glu\w*|RBS|FBS)\D{0,4}(\d{2,3})\b/i));
+      set("hb", grab(/\b(?:Hb|Hgb)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("wbc", grab(/\b(?:WBC|TLC)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("plt", grab(/\b(?:plt|platelet\w*)\D{0,4}(\d{2,3})\b/i));
+      set("crp", grab(/\bCRP\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
+    } else if (kind === "ventilator") {
+      var mode = t.match(/\b(SIMV|A\/C|AC|PSV|PCV|VCV|CPAP|BiPAP|PC|VC|PS)\b/i); if (mode) out.mode = mode[1].toUpperCase();
+      set("fio2", grab(/\b(?:FiO2|FIO2)\D{0,4}(\d{2,3})\b/i));
+      set("peep", grab(/\bPEEP\D{0,4}(\d{1,2})\b/i));
+      set("tv", grab(/\b(?:TV|Vt|tidal)\D{0,4}(\d{2,4})\b/i));
+      set("rr", grab(/\b(?:RR|rate)\D{0,4}(\d{1,2})\b/i));
+      set("peak", grab(/\b(?:Ppeak|peak|PIP)\D{0,4}(\d{1,2})\b/i));
+      set("plateau", grab(/\b(?:Pplat|plat\w*)\D{0,4}(\d{1,2})\b/i));
+    }
+    return out;
+  }
+  window.SMD_parseFields = parseFieldsOnDevice;
   window.SMD_AI = {
     on: aiOn,
     setFlag: function (on) { try { localStorage.setItem("smd_ai", on ? "1" : "0"); } catch (e) {} try { smdRenderLive(); } catch (e) {} },
@@ -3437,9 +3637,78 @@
       var q = String(question || "").slice(0, 500); if (!q) return Promise.resolve({ error: "no-question" });
       return aiHeaders().then(function (h) { return fetch(b + "/research", { method: "POST", headers: h, body: JSON.stringify({ question: q }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
     },
-    vision: function (imageDataUrl, kind) {
-      var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
-      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: imageDataUrl, kind: kind }) }); }).then(function (r) { return r.json(); }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    // Cloud extraction from OCR TEXT ONLY (never an image). POSTs the scrubbed text to
+    // /api/ai/vision → { kind, fields }. 429/offline/off are surfaced as { error }.
+    visionText: function (text, kind) {
+      var b = aiBase(); if (!b || !visionAiOn()) return Promise.resolve({ error: "ai-off" });
+      var t = String(text == null ? "" : text).slice(0, 8000); if (!t) return Promise.resolve({ error: "no-text" });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ text: t, kind: kind }) }); })
+        .then(function (r) { if (r.status === 429) return { error: "quota" }; return r.json(); })
+        .catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // AI Vision — IMAGE mode. Sends the ORIGINAL image { image, kind } so the server can read
+    // spatial layout (critical for monitor/ventilator, where a number's position decides if it
+    // is HR/SBP/SpO2/RR). No pre-OCR, redaction, or flattening. 429/entitlement/offline are
+    // surfaced as { error }. Consent + engine choice are enforced upstream (SMD_IMAGE_ENGINE).
+    vision: function (dataUrl, kind) {
+      var b = aiBase(); if (!b) return Promise.resolve({ error: "ai-off" });
+      var img = String(dataUrl == null ? "" : dataUrl); if (!img) return Promise.resolve({ error: "no-image" });
+      return aiHeaders().then(function (h) { return fetch(b + "/vision", { method: "POST", headers: h, body: JSON.stringify({ image: img, kind: kind }) }); })
+        .then(function (r) {
+          if (r.status === 429) return { error: "quota" };
+          if (r.status === 401 || r.status === 403) return { error: "entitlement" };
+          if (!r.ok) return { error: "server" };
+          return r.json();
+        }).catch(function (e) { return { error: String(e && e.message || e) }; });
+    },
+    // Private Device OCR — device only, NEVER uploads. Native OCR (Apple Vision / ML Kit
+    // bridge) → on-device field parse (labels + reading order preserved) + recognized lines
+    // for tap-to-fill. Resolves { mode, fields, lines, source } | { error }.
+    readImageLocal: function (dataUrl, kind) {
+      if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.resolve({ error: "ocr-unavailable" });
+      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+        var lines = (o && o.lines) || [];
+        var text = (o && o.text) || lines.join("\n");
+        var fields = parseFieldsOnDevice(text, kind) || {};
+        return Object.keys(fields).length
+          ? { mode: "fields", fields: fields, lines: lines, source: "on-device" }
+          : { mode: "lines", lines: lines, source: "on-device" };
+      }).catch(function () { return { error: "ocr-failed" }; });
+    },
+    // On-device-first AI Vision (NATIVE only) — LEGACY combined path (on-device OCR + optional
+    // scrubbed-TEXT cloud call). Retained for backward compatibility; the ICU flow now routes
+    // through SMD_IMAGE_ENGINE.process(), which picks device (readImageLocal) or AI (vision).
+    // Resolves: { mode:"fields", fields, lines } | { mode:"lines", lines, reason? }.
+    readImage: function (dataUrl, kind) {
+      if (!(window.SMD_NATIVE && window.SMD_NATIVE.ocr)) return Promise.reject(new Error("ocr-unavailable"));
+      return window.SMD_NATIVE.ocr(dataUrl).then(function (o) {
+        var lines = (o && o.lines) || [];
+        var text = (o && o.text) || lines.join("\n");
+        var online = (typeof navigator === "undefined") || navigator.onLine !== false;
+        // Apple Vision OCR is always done on-device (above). We ALSO parse fields on-device
+        // for free/instantly — this is both the offline path and a safety net that fills any
+        // field the cloud misses. Cloud (Vertex, from redacted text) is more accurate, so it
+        // wins on overlap; on-device fills the gaps → "use both engines".
+        var localFields = parseFieldsOnDevice(text, kind) || {};
+        function onDevice(reason) {
+          if (Object.keys(localFields).length) return { mode: "fields", fields: localFields, lines: lines, source: "on-device", reason: reason };
+          return { mode: "lines", lines: lines, reason: reason };
+        }
+        if (!visionAiOn() || !online) return onDevice(visionAiOn() ? "offline" : "ai-off");
+        var scrubbed = redactPHI(text);
+        return window.SMD_AI.visionText(scrubbed, kind).then(function (r) {
+          if (r && !r.error) {
+            var f = (r.fields && typeof r.fields === "object") ? r.fields : r;
+            if (f && (Object.keys(f).length || f.medications)) {
+              var merged = {}; var k;                       // cloud wins, on-device fills gaps
+              for (k in localFields) if (localFields.hasOwnProperty(k)) merged[k] = localFields[k];
+              for (k in f) if (f.hasOwnProperty(k) && f[k] != null) merged[k] = f[k];
+              return { mode: "fields", fields: merged, lines: lines, source: "cloud+on-device" };
+            }
+          }
+          return onDevice((r && r.error) || "no-fields");   // cloud unavailable → on-device only
+        }).catch(function () { return onDevice("error"); });
+      });
     }
   };
   /* ====================================================================== *
@@ -3653,6 +3922,11 @@
     var findings = (typeof window.SMD_getFindings === "function") ? window.SMD_getFindings() : {};
     var keys = Object.keys(findings).filter(function (k) { return findings[k] && VALID[k]; });
     if (!keys.length) { panel.innerHTML = ""; return; }
+    // Off switch: show only the header + toggle, no computed differential.
+    if (!liveDiffOn()) {
+      panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">turned off</span>' + liveToggleHTML() + '</div><div class="sl-th">Live differential is off.<span>Tap the switch to see ranked diagnoses update as you add findings.</span></div></div>';
+      bindLiveToggle(panel); return;
+    }
     // track what was just added (for confidence deltas / "after adding X")
     _liveLastKey = null;
     for (var nk = 0; nk < keys.length; nk++) { if (!_livePrevKeys[keys[nk]]) { _liveLastKey = keys[nk]; break; } }
@@ -3663,7 +3937,7 @@
     var a = window.SMD_REASON.assess(findings), gi = a.gate || {};
     var dom = (a.dominantSystem || []).map(function (t) { return (typeof TAG_LABEL !== "undefined" && TAG_LABEL[t]) || t; }).filter(Boolean);
     var sug = (a.suggestions || []).filter(function (k) { return LABEL[k]; }).slice(0, 6);
-    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h">🧠 Live differential <span class="sl-hint">updates as you add findings</span></div>' +
+    panel.innerHTML = '<div class="sl-wrap"><div class="sl-h" style="display:flex;align-items:center;gap:8px">🧠 Live differential <span class="sl-hint" style="flex:1">updates as you add findings</span>' + liveToggleHTML() + '</div>' +
       (gi.label ? '<div class="sl-gate ' + (gi.ab ? "ab" : "") + '">' + esc(gi.label) + "</div>" : "") +
       (dom.length ? '<div class="sl-dom">🧭 Dominant system: <b>' + dom.map(esc).join(" · ") + "</b></div>" : "") +
       (sug.length ? '<div class="sl-sugwrap"><div class="sl-suglbl">💡 Suggested next findings</div><div class="sl-sugrow">' + sug.map(function (k) { return '<button class="sl-sug" data-sug="' + esc(k) + '">+ ' + esc(LABEL[k]) + "</button>"; }).join("") + "</div></div>" : "") +
@@ -3671,6 +3945,7 @@
       '<button class="sl-openws" data-openws="1">🧠 Open full Clinical Reasoning workspace →</button>' +
       (aiOn() ? '<button class="sl-openws" data-aiexplain="1" style="border-style:solid;border-color:#7c3aed;color:#7c3aed;margin-top:8px">✨ Ask MaiK (AI commentary)</button><div class="sl-aiout" id="slAiOut" style="margin-top:6px"></div>' : "") +
       "</div>";
+    bindLiveToggle(panel);
     panel.querySelectorAll(".sl-head").forEach(function (b) { b.addEventListener("click", function () { var id = b.getAttribute("data-exp"); _liveExp[id] = !_liveExp[id]; smdRenderLive(); }); });
     panel.querySelectorAll(".sl-select").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); smdLiveSelect(b.getAttribute("data-sel")); }); });
     panel.querySelectorAll(".sl-sug").forEach(function (b) { b.addEventListener("click", function (e) { e.preventDefault(); var k = b.getAttribute("data-sug"), cb = document.getElementById("f-" + k); if (cb) { cb.checked = true; cb.dispatchEvent(new Event("change", { bubbles: true })); } else if (window.SMD_setFindings) { var o = {}; o[k] = true; window.SMD_setFindings(o); smdRenderLive(); } }); });

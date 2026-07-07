@@ -278,22 +278,22 @@
   { id:"anion_gap", cat:"Critical care", icon:"🧮", title:"Anion gap (corrected)",
     desc:"Serum anion gap with albumin correction.",
     inputs:[
-      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
-      { id:"cl", label:"Chloride", type:"number", unit:"mmol/L", lab:"cl" },
-      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L", lab:"hco3" },
+      { id:"na", label:"Sodium", type:"number", unit:"mEq/L", lab:"na" },
+      { id:"cl", label:"Chloride", type:"number", unit:"mEq/L", lab:"cl" },
+      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mEq/L", lab:"hco3" },
       { id:"alb", label:"Albumin", type:"number", unit:"g/dL", def:"4", lab:"alb" }
     ],
     compute:function(v){
       if(!ok(v.na)||!ok(v.cl)||!ok(v.hco3)) return ERR;
       var ag=v.na-(v.cl+v.hco3);
       var cag=ok(v.alb)?ag+2.5*(4-v.alb):ag;
-      return { v:r1(ag), u:"mmol/L", i:"Albumin-corrected AG = <b>"+r1(cag)+" mmol/L</b> (normal 8–12). High AG → MUDPILES; correct for low albumin to avoid masking." };
+      return { v:r1(ag), u:"mEq/L", i:"Albumin-corrected AG = <b>"+r1(cag)+" mEq/L</b> (normal 8–12). High AG → MUDPILES; correct for low albumin to avoid masking." };
     } },
 
   { id:"winters", cat:"Critical care", icon:"🌡️", title:"Winter's formula",
     desc:"Expected PaCO₂ in metabolic acidosis.",
     inputs:[
-      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mmol/L", lab:"hco3" },
+      { id:"hco3", label:"Bicarbonate", type:"number", unit:"mEq/L", lab:"hco3" },
       { id:"paco2", label:"Measured PaCO₂ (optional)", type:"number", unit:"mmHg" }
     ],
     compute:function(v){
@@ -307,7 +307,7 @@
   { id:"osm", cat:"Critical care", icon:"💧", title:"Serum osmolality & gap",
     desc:"Calculated osmolality and osmolar gap.",
     inputs:[
-      { id:"na", label:"Sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"na", label:"Sodium", type:"number", unit:"mEq/L", lab:"na" },
       { id:"glu", label:"Glucose", type:"number", unit:"mg/dL", lab:"glu" },
       { id:"bun", label:"BUN", type:"number", unit:"mg/dL", lab:"bun" },
       { id:"meas", label:"Measured osmolality (optional)", type:"number", unit:"mOsm/kg" }
@@ -410,8 +410,8 @@
   { id:"fena", cat:"Renal", icon:"💧", title:"FENa",
     desc:"Fractional excretion of sodium — pre-renal vs ATN.",
     inputs:[
-      { id:"una", label:"Urine sodium", type:"number", unit:"mmol/L" },
-      { id:"pna", label:"Plasma sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"una", label:"Urine sodium", type:"number", unit:"mEq/L" },
+      { id:"pna", label:"Plasma sodium", type:"number", unit:"mEq/L", lab:"na" },
       { id:"ucr", label:"Urine creatinine", type:"number", unit:"mg/dL" },
       { id:"pcr", label:"Plasma creatinine", type:"number", unit:"mg/dL", lab:"creat" }
     ],
@@ -438,43 +438,43 @@
   { id:"corr_na", cat:"Renal", icon:"🧂", title:"Corrected Na (hyperglycaemia)",
     desc:"Sodium corrected for serum glucose.",
     inputs:[
-      { id:"na", label:"Measured sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"na", label:"Measured sodium", type:"number", unit:"mEq/L", lab:"na" },
       { id:"glu", label:"Glucose", type:"number", unit:"mg/dL", lab:"glu" }
     ],
     compute:function(v){
       if(!ok(v.na)||!ok(v.glu)) return ERR;
       var corr=v.na+1.6*((v.glu-100)/100);
       var katz=v.na+2.4*((v.glu-100)/100);
-      return { v:r1(corr), u:"mmol/L", i:"Katz (×1.6). Hillier/Adrogué (×2.4) = <b>"+r1(katz)+" mmol/L</b>. Corrected value reflects true sodium once glucose is normalised." };
+      return { v:r1(corr), u:"mEq/L", i:"Katz (×1.6). Hillier/Adrogué (×2.4) = <b>"+r1(katz)+" mEq/L</b>. Corrected value reflects true sodium once glucose is normalised." };
     } },
 
   { id:"fw_deficit", cat:"Renal", icon:"🚰", title:"Free water deficit",
     desc:"Water deficit in hypernatraemia.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
-      { id:"na", label:"Current sodium", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"na", label:"Current sodium", type:"number", unit:"mEq/L", lab:"na" },
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.wt)||!ok(v.na)) return ERR;
       var tbw=(v.sex==="f"?0.5:0.6)*v.wt;
       var def=tbw*((v.na/140)-1);
-      return { v:r1(def), u:"L", i:"Replace slowly — lower serum Na by ≤10 mmol/L/24 h (cerebral oedema risk). Add ongoing losses." };
+      return { v:r1(def), u:"L", i:"Replace slowly — lower serum Na by ≤10 mEq/L/24 h (cerebral oedema risk). Add ongoing losses." };
     } },
 
   { id:"na_deficit", cat:"Renal", icon:"🧂", title:"Sodium deficit (hyponatraemia)",
     desc:"Na needed to reach a target.",
     inputs:[
       { id:"wt", label:"Weight", type:"number", unit:"kg" },
-      { id:"cur", label:"Current sodium", type:"number", unit:"mmol/L", lab:"na" },
-      { id:"tgt", label:"Target sodium", type:"number", unit:"mmol/L", def:"130" },
+      { id:"cur", label:"Current sodium", type:"number", unit:"mEq/L", lab:"na" },
+      { id:"tgt", label:"Target sodium", type:"number", unit:"mEq/L", def:"130" },
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}], demo:"sex" }
     ],
     compute:function(v){
       if(!ok(v.wt)||!ok(v.cur)||!ok(v.tgt)) return ERR;
       var tbw=(v.sex==="f"?0.5:0.6)*v.wt;
       var def=tbw*(v.tgt-v.cur);
-      return { v:r0(def), u:"mmol Na", i:"Correct ≤8 mmol/L per 24 h (osmotic demyelination risk). Use Adrogué-Madias to predict the rise per litre of infusate." };
+      return { v:r0(def), u:"mEq Na", i:"Correct ≤8 mEq/L per 24 h (osmotic demyelination risk). Use Adrogué-Madias to predict the rise per litre of infusate." };
     } },
 
   { id:"corr_ca", cat:"Renal", icon:"🦴", title:"Corrected calcium",
@@ -506,7 +506,7 @@
       { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1", lab:"bili" },
       { id:"inr", label:"INR", type:"number", step:"0.1", lab:"inr" },
       { id:"cr", label:"Creatinine", type:"number", unit:"mg/dL", step:"0.1", lab:"creat" },
-      { id:"na", label:"Sodium (for MELD-Na)", type:"number", unit:"mmol/L", lab:"na" },
+      { id:"na", label:"Sodium (for MELD-Na)", type:"number", unit:"mEq/L", lab:"na" },
       { id:"dial", label:"Dialysis ≥2× in past week", type:"check" }
     ],
     compute:function(v){
@@ -565,7 +565,7 @@
     compute:function(v){
       if(!ok(v.age)||!ok(v.ast)||!ok(v.alt)||!ok(v.plt)||v.plt<=0||v.alt<=0) return ERR;
       var f=(v.age*v.ast)/(v.plt*Math.sqrt(v.alt));
-      return { v:r1(f? f : NaN), u:"", i:(f<1.3?"<1.3 — advanced fibrosis unlikely (use 2.0 if age >65).":f<=2.67?"1.3–2.67 — indeterminate; consider elastography.":">2.67 — advanced fibrosis likely.") };
+      return { v:r1(f), u:"", i:(f<1.3?"<1.3 — advanced fibrosis unlikely (use 2.0 if age >65).":f<=2.67?"1.3–2.67 — indeterminate; consider elastography.":">2.67 — advanced fibrosis likely.") };
     } },
 
   { id:"apri", cat:"Hepatology", icon:"🔬", title:"APRI score",
@@ -712,7 +712,7 @@
       if(!ok(v.ht)||!ok(v.wt)) return ERR;
       var mos=Math.sqrt(v.ht*v.wt/3600);
       var du=0.007184*Math.pow(v.ht,0.725)*Math.pow(v.wt,0.425);
-      return { v:r1(mos*100)/100, u:"m² (Mosteller)", i:"DuBois = <b>"+(r1(du*100)/100)+" m²</b>. Used for chemotherapy and cardiac-index dosing." };
+      return { v:Math.round(mos*100)/100, u:"m² (Mosteller)", i:"DuBois = <b>"+(Math.round(du*100)/100)+" m²</b>. Used for chemotherapy and cardiac-index dosing." };
     } },
 
   { id:"hba1c", cat:"General", icon:"🍬", title:"HbA1c → eAG",
@@ -1217,15 +1217,15 @@
     desc:"Assesses urinary NH₄⁺ excretion in normal-anion-gap metabolic acidosis.",
     kw:["urine anion gap","rta","nagma","ammonium","acidosis"],
     inputs:[
-      { id:"una", label:"Urine Na", type:"number", unit:"mmol/L" },
-      { id:"uk", label:"Urine K", type:"number", unit:"mmol/L" },
-      { id:"ucl", label:"Urine Cl", type:"number", unit:"mmol/L" }
+      { id:"una", label:"Urine Na", type:"number", unit:"mEq/L" },
+      { id:"uk", label:"Urine K", type:"number", unit:"mEq/L" },
+      { id:"ucl", label:"Urine Cl", type:"number", unit:"mEq/L" }
     ],
     compute:function(v){
       if(!ok(v.una)||!ok(v.uk)||!ok(v.ucl)) return ERR;
       var uag=r1(v.una+v.uk-v.ucl);
       var i = uag<0 ? "<b>Negative</b> — appropriate ↑NH₄⁺ excretion; suggests GI bicarbonate loss (e.g. diarrhoea)." : "<b>Positive / zero</b> — impaired NH₄⁺ excretion; suggests renal tubular acidosis (distal RTA).";
-      return { v:uag, u:"mmol/L", i:i+" Interpret only in hyperchloraemic (normal-AG) metabolic acidosis. Ref: Goldstein, Am J Nephrol 1986." };
+      return { v:uag, u:"mEq/L", i:i+" Interpret only in hyperchloraemic (normal-AG) metabolic acidosis. Ref: Goldstein, Am J Nephrol 1986." };
     } },
 
   { id:"timistemi", cat:"Cardiovascular", icon:"🫀", title:"TIMI risk (STEMI)",
