@@ -142,32 +142,67 @@
       var P = plugins();
       var SP = P && P.SpeechRecognition;
       if (!(SP && SP.start)) throw new Error("speech-unavailable");
-      var self = this, last = "";
+      var self = this, last = "", done = false;
+      function finish(txt) {
+        if (done) return; done = true;
+        clearTimeout(self._finTimer); self._finish = null;
+        self._removeSpeechSub();
+        if (opts.onFinal) opts.onFinal(String(txt != null ? txt : last));
+      }
+      self._finish = finish;
+      // IMPORTANT (Android): SpeechRecognizer auto-endpoints — text streams via the
+      // `partialResults` listener and the session ends via `listeningState:"stopped"`.
+      // start() resolves IMMEDIATELY with nothing, so it must NOT be treated as the final
+      // (doing so tore the listener down before any result arrived). iOS resolves start()
+      // with the final matches, handled in the .then below.
       (SP.requestPermissions ? SP.requestPermissions() : Promise.resolve()).then(function () {
         if (SP.addListener) {
           self._speechSub = SP.addListener("partialResults", function (data) {
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
           });
+          self._stateSub = SP.addListener("listeningState", function (data) {
+            var s = data && data.status;
+            if (s === "stopped") {
+              // Give the trailing final `partialResults` (emitted just after "stopped") a
+              // moment to update `last`, then finalize.
+              clearTimeout(self._finTimer);
+              self._finTimer = setTimeout(function () { finish(last); }, 450);
+            }
+          });
         }
-        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 1 });
+        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 });
       }).then(function (res) {
-        var fin = (res && res.matches && res.matches[0]) || last;
-        self._removeSpeechSub();
-        if (opts.onFinal) opts.onFinal(String(fin || ""));
+        var m = res && res.matches && res.matches[0];
+        if (m != null) { last = String(m); finish(last); }   // iOS: start() carried the final result
+        // Android: res is empty — keep listening; finalize via listeningState / stop().
       }).catch(function (e) {
+        var msg = String((e && e.message) || e || "");
+        if (last) { finish(last); return; }   // "no match" after real speech isn't a hard error
+        clearTimeout(self._finTimer); self._finish = null;
         self._removeSpeechSub();
-        if (opts.onError) opts.onError(String((e && e.message) || e));
+        if (opts.onError) opts.onError(msg);
       });
       return function () { self.stopTranscribe(); };
     },
     stopTranscribe: function () {
       var P = plugins(); var SP = P && P.SpeechRecognition;
       try { if (SP && SP.stop) SP.stop(); } catch (e) {}
-      this._removeSpeechSub();
+      // stop() triggers listeningState:"stopped" → finish() runs there. Fallback in case no
+      // state event arrives: finalize with whatever we have, else just clean up.
+      var self = this;
+      clearTimeout(this._finTimer);
+      this._finTimer = setTimeout(function () { if (self._finish) self._finish(); else self._removeSpeechSub(); }, 800);
     },
     _speechSub: null,
-    _removeSpeechSub: function () { try { if (this._speechSub && this._speechSub.remove) this._speechSub.remove(); } catch (e) {} this._speechSub = null; }
+    _stateSub: null,
+    _finTimer: null,
+    _finish: null,
+    _removeSpeechSub: function () {
+      var rm = function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} };
+      rm(this._speechSub); rm(this._stateSub);
+      this._speechSub = null; this._stateSub = null;
+    }
   };
 
   // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library
