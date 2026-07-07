@@ -1352,7 +1352,7 @@
       var t = String(q || "").trim().replace(/\?+$/, "").trim();
       // Strip leading filler/greeting/lead-in prefixes REPEATEDLY (e.g. "Hello tell dka
       // treatment" → "dka treatment") so the KB matcher sees the real topic, not "hello tell".
-      var _px = /^((hello|hi|hey|please|kindly|ok|okay|so|and|the)( there)?[,.:!\s]+|how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell( me| us)? about\s+|tell( me| us)?\s+|(give me |show me )?(info|information|details?)( on| about)\s+|about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i;
+      var _px = /^((hello|hi|hey|please|kindly|ok|okay|so|and|the)( there)?[,.:!\s]+|how\s+(do\s+(we|i|you)|to)\s+|what('?s| is| are)(\s+the)?\s+|whats\s+|explain\s+|describe\s+|tell( me| us)? about\s+|tell( me| us)?\s+|speak( to me)?( about| on)?\s+|talk( to me)?( about| on)?\s+|read( out)?( about| on)?\s+|discuss\s+|go (over|through)\s+|walk me through\s+|(give me |show me )?(info|information|details?)( on| about)\s+|about\s+|approach to\s+|management of\s+|treat(ment of|ing)?\s+|signs?\s+of\s+|symptoms?\s+of\s+|diagnosis of\s+|work\s?up (of|for)\s+|drug of choice (for|in)\s+|rx (of|for)?\s*|mx (of|for)?\s*)/i;
       var _prev; do { _prev = t; t = t.replace(_px, "").trim(); } while (t && t !== _prev);
       t = t.replace(/^(treat(ment of|ing)?|manage(ment of)?|management of|rx( of)?|mx( of)?|do we treat|to treat|assess(ment of)?|evaluate)\s+/i, "").trim();
       t = t.replace(/\b(management|treatment)\b/gi, "").replace(/\s+/g, " ").trim();
@@ -1492,22 +1492,24 @@
     scrim.addEventListener("click", close);
     sendBtn.addEventListener("click", send);
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
-    var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract"), _voiceSess = null;
+    var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }
     function autosizeQ() { qEl.style.height = "auto"; qEl.style.height = Math.min(120, qEl.scrollHeight) + "px"; }
     function refreshExtract() { if (extractBtn) extractBtn.hidden = !((qEl.value || "").trim() && reasoningReady()); }
-    function micStop() { if (_voiceSess && _voiceSess.stop) { try { _voiceSess.stop(); } catch (e) {} } _voiceSess = null; if (micBtn) { micBtn.textContent = "🎤"; micBtn.classList.remove("live"); micBtn.setAttribute("aria-label", "Dictate to MaiK"); } }
+    // MaiK Scribe mic → the shared voice dialog (the same one that works in Clinical
+    // Reasoning), in text mode: dictate into the chat box, then send to MaiK or tap
+    // "Extract findings →". (Inline capture in the composer was unreliable while the
+    // keyboard held focus, and the dialog sits above the sheet at z-index 17000.)
     if (micBtn) micBtn.addEventListener("click", function () {
-      if (!window.SMD_VOICE || !SMD_VOICE.listen) { toast("Voice intake is still loading…"); return; }
-      if (_voiceSess) { micStop(); return; }
-      var base = (qEl.value || "").trim();
-      micBtn.textContent = "⏹"; micBtn.classList.add("live"); micBtn.setAttribute("aria-label", "Stop dictation");
-      _voiceSess = SMD_VOICE.listen({
-        onPartial: function (t) { qEl.value = (base ? base + " " : "") + t; autosizeQ(); },
-        onFinal: function (t) { if (t) { qEl.value = ((base ? base + " " : "") + t).trim(); autosizeQ(); } micStop(); refreshExtract(); try { qEl.focus(); } catch (e) {} },
-        onError: function () { micStop(); toast("Couldn’t capture audio — you can type instead."); },
-        onState: function (s) { if (s === "idle") micStop(); }
-      }) || null;
+      if (!(window.SMD_VOICE && SMD_VOICE.openDialog)) { toast("Voice intake is still loading…"); return; }
+      try { qEl.blur(); } catch (e) {}
+      SMD_VOICE.openDialog({ target: "text", onText: function (t) {
+        if (!t) return;
+        var base = (qEl.value || "").trim();
+        qEl.value = (base ? base + " " : "") + t;
+        autosizeQ(); refreshExtract();
+        try { qEl.focus(); } catch (e) {}
+      } });
     });
     if (extractBtn) extractBtn.addEventListener("click", function () {
       var q = (qEl.value || "").trim();

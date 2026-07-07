@@ -3617,18 +3617,19 @@
       set("cvp", near("CVP", 0, 30));
       set("etco2", near("EtCO2|ETCO2", 5, 80));
     } else if (kind === "abg") {
-      set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,2})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2})\b/));
+      set("ph", grab(/\b(?:pH)\D{0,3}(7\.\d{1,3})\b/i)); if (out.ph == null) set("ph", grab(/\b(7\.\d{2,3})\b/));   // analyzers report 3 decimals (7.250)
       set("paco2", grab(/\b(?:PaCO2|pCO2|PCO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
       set("pao2", grab(/\b(?:PaO2|pO2|PO₂)\D{0,4}(\d{1,3}(?:\.\d)?)\b/i));
-      set("hco3", grab(/\b(?:HCO3|HCO₃|bicarb\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
-      set("be", grab(/\b(?:BE|base\s*excess)\D{0,4}(-?\d{1,2}(?:\.\d)?)\b/i));
-      set("lactate", grab(/\b(?:lac\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      // c?-prefix tolerates concentration labels on blood-gas analyzers (Radiometer: cHCO₃, cLac, cBase).
+      set("hco3", grab(/\bc?(?:HCO3|HCO₃|bicarb\w*)\D{0,8}(\d{1,2}(?:\.\d)?)\b/i));   // wider gap spans analyzer suffixes: cHCO3-(P)c
+      set("be", grab(/\b(?:cBase|BE|base\s*excess)[^0-9-]{0,8}(-?\d{1,2}(?:\.\d)?)\b/i));   // "cBase(B) -11.1"; keep the sign
+      set("lactate", grab(/\bc?(?:lac\w*)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
       set("fio2", grab(/\b(?:FiO2|FIO2|FiO₂)\D{0,4}(\d{2,3})\b/i));
     } else if (kind === "labs" || kind === "mapped") {
-      set("na", grab(/\bNa\+?\D{0,4}(\d{2,3})\b/i));
-      set("k", grab(/\bK\+?\D{0,4}(\d(?:\.\d)?)\b/i));
-      set("cl", grab(/\bCl\-?\D{0,4}(\d{2,3})\b/i));
-      set("hco3", grab(/\b(?:HCO3|HCO₃)\D{0,4}(\d{1,2}(?:\.\d)?)\b/i));
+      set("na", grab(/\bc?Na\+?\D{0,4}(\d{2,3})\b/i));
+      set("k", grab(/\bc?K\+?\D{0,4}(\d(?:\.\d)?)\b/i));
+      set("cl", grab(/\bc?Cl\-?\D{0,4}(\d{2,3})\b/i));
+      set("hco3", grab(/\bc?(?:HCO3|HCO₃)\D{0,8}(\d{1,2}(?:\.\d)?)\b/i));
       set("creat", grab(/\b(?:creat\w*|Cr)\D{0,4}(\d(?:\.\d{1,2})?)\b/i));
       set("urea", grab(/\b(?:urea|BUN)\D{0,4}(\d{1,3})\b/i));
       set("glu", grab(/\b(?:glu\w*|RBS|FBS)\D{0,4}(\d{2,3})\b/i));
@@ -3644,6 +3645,26 @@
       set("rr", grab(/\b(?:RR|rate)\D{0,4}(\d{1,2})\b/i));
       set("peak", grab(/\b(?:Ppeak|peak|PIP)\D{0,4}(\d{1,2})\b/i));
       set("plateau", grab(/\b(?:Pplat|plat\w*)\D{0,4}(\d{1,2})\b/i));
+    } else if (kind === "all") {
+      // Combined extractor (gold249): parse EVERY category from one blob (a photo with a monitor
+      // + ABG together, or multi-page PDF text) and return SECTIONS. Overlapping keys (hco3,
+      // lactate, fio2, be, rr) are only kept in the ABG/ventilator section when that panel is
+      // actually present — otherwise they belong to labs/vitals, so we don't invent a bogus section.
+      var _v = parseFieldsOnDevice(text, "vitals");
+      var _g = parseFieldsOnDevice(text, "abg");
+      var _l = parseFieldsOnDevice(text, "labs");
+      var _vt = parseFieldsOnDevice(text, "ventilator");
+      var abgCtx = (_g.ph != null || _g.paco2 != null || _g.pao2 != null);
+      var ventCtx = (_vt.peep != null || _vt.tv != null || _vt.mode != null || _vt.peak != null || _vt.plateau != null);
+      if (!abgCtx) { delete _g.hco3; delete _g.lactate; delete _g.fio2; delete _g.be; }   // no gas panel → HCO3/lactate stay in labs
+      if (!ventCtx) { delete _vt.rr; delete _vt.fio2; }                                    // no vent screen → rr stays a vital
+      if (ventCtx && _vt.fio2 != null) delete _g.fio2;                                     // one FiO2 → ventilator wins when a vent screen exists
+      var _sec = {};
+      if (Object.keys(_l).length) _sec.labs = _l;
+      if (Object.keys(_g).length) _sec.abg = _g;
+      if (Object.keys(_v).length) _sec.vitals = _v;
+      if (Object.keys(_vt).length) _sec.ventilator = _vt;
+      return _sec;
     }
     return out;
   }

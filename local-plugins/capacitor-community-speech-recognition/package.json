@@ -1,0 +1,40 @@
+{
+  "name": "@capacitor-community/speech-recognition",
+  "version": "7.0.1",
+  "description": "A native plugin for speech recognition",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "Package.swift",
+    "CapacitorCommunitySpeechRecognition.podspec"
+  ],
+  "author": "Priyank Patel <priyank.patel@stackspace.ca>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/capacitor-community/speech-recognition.git"
+  },
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native"
+  ],
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "_vendored": "Trimmed for StewardMD: devDependencies + build/lint scripts removed (they pulled ~520 dev packages via the file: dependency). Runtime dist/ is pre-built upstream; iOS registration converted to pure-Swift CAPBridgedPlugin in ios/Plugin/Plugin.swift + Package.swift for SPM. See stewardmd-voice-icu-ux memory."
+}

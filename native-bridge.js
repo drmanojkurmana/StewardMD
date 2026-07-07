@@ -25,6 +25,12 @@
   window.SMD_IS_NATIVE = native;
   if (!native) return;                       // web: leave everything alone
 
+  // Native device STT is iOS-only (see transcribe below). On iOS, SFSpeechRecognizer is the
+  // ONLY speech option (WKWebView has no Web Speech API). On Android the OS SpeechRecognizer
+  // thrashes under our streaming use (cancels/restarts mid-utterance → "Didn't understand"),
+  // so we let SMD_VOICE fall through to its Web Speech engine (Chrome-in-WebView) instead.
+  var isIOS = (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) === "ios";
+
   // ---- Native helpers (native-only; stay UNDEFINED on web because this file
   // early-returns above). Callers gate on window.SMD_IS_NATIVE / window.SMD_NATIVE
   // so the web build is byte-for-byte unchanged. ----
@@ -142,33 +148,109 @@
       var P = plugins();
       var SP = P && P.SpeechRecognition;
       if (!(SP && SP.start)) throw new Error("speech-unavailable");
-      var self = this, last = "";
+      var self = this, last = "", done = false;
+      // Session token: every transcribe() bumps it. Callbacks/timers left over from a PRIOR
+      // session (the 450ms "stopped" finish, the 800ms stop fallback) check `current()` and
+      // no-op — otherwise a stale timer fires mid-way through the NEXT session and tears it
+      // down (button dies after ~1s, native listeners orphaned). Repro: speak → stop → speak
+      // again quickly. See git history for the singleton-state bug this guards against.
+      var token = (self._token = (self._token || 0) + 1);
+      function current() { return self._token === token; }
+      // Kill any leftover subs/timers from a previous session right now.
+      clearTimeout(self._finTimer);
+      self._removeSpeechSub();
+      function finish(txt) {
+        if (done || !current()) return; done = true;
+        clearTimeout(self._finTimer); self._finish = null;
+        self._removeSpeechSub();
+        try { if (SP.stop) SP.stop(); } catch (e) {}   // ensure native stops (no orphan mic / restart loop)
+        if (opts.onFinal) opts.onFinal(String(txt != null ? txt : last));
+      }
+      self._finish = finish;
+      // IMPORTANT (Android): SpeechRecognizer auto-endpoints — text streams via the
+      // `partialResults` listener and the session ends via `listeningState:"stopped"`.
+      // start() resolves IMMEDIATELY with nothing, so it must NOT be treated as the final
+      // (doing so tore the listener down before any result arrived). iOS resolves start()
+      // with the final matches, handled in the .then below.
       (SP.requestPermissions ? SP.requestPermissions() : Promise.resolve()).then(function () {
+        if (!current()) return;   // superseded before we got going
         if (SP.addListener) {
           self._speechSub = SP.addListener("partialResults", function (data) {
+            if (!current()) return;
             var m = data && data.matches && data.matches[0];
             if (m != null) { last = String(m); if (opts.onPartial) opts.onPartial(last); }
           });
+          self._stateSub = SP.addListener("listeningState", function (data) {
+            if (!current()) return;
+            var s = data && data.status;
+            if (s === "stopped") {
+              // Give the trailing final `partialResults` (emitted just after "stopped") a
+              // moment to update `last`, then finalize.
+              clearTimeout(self._finTimer);
+              self._finTimer = setTimeout(function () { finish(last); }, 450);
+            }
+          });
         }
-        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 1 });
+        return SP.start({ language: navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 });
       }).then(function (res) {
-        var fin = (res && res.matches && res.matches[0]) || last;
-        self._removeSpeechSub();
-        if (opts.onFinal) opts.onFinal(String(fin || ""));
+        if (!current()) return;
+        var m = res && res.matches && res.matches[0];
+        if (m != null) { last = String(m); finish(last); }   // iOS: start() carried the final result
+        // Android: res is empty — keep listening; finalize via listeningState / stop().
       }).catch(function (e) {
+        if (!current()) return;
+        var msg = String((e && e.message) || e || "");
+        if (last) { finish(last); return; }   // "no match" after real speech isn't a hard error
+        clearTimeout(self._finTimer); self._finish = null;
         self._removeSpeechSub();
-        if (opts.onError) opts.onError(String((e && e.message) || e));
+        if (opts.onError) opts.onError(msg);
       });
       return function () { self.stopTranscribe(); };
     },
     stopTranscribe: function () {
       var P = plugins(); var SP = P && P.SpeechRecognition;
       try { if (SP && SP.stop) SP.stop(); } catch (e) {}
-      this._removeSpeechSub();
+      // stop() triggers listeningState:"stopped" → finish() runs there. Fallback in case no
+      // state event arrives: finalize with whatever we have, else just clean up. Capture the
+      // session token so a NEW session started before this fires isn't torn down.
+      var self = this;
+      var token = self._token;
+      clearTimeout(this._finTimer);
+      this._finTimer = setTimeout(function () {
+        if (self._token !== token) return;   // a newer session owns SMD_NATIVE now — leave it alone
+        if (self._finish) self._finish(); else self._removeSpeechSub();
+      }, 800);
     },
+    _token: 0,
     _speechSub: null,
-    _removeSpeechSub: function () { try { if (this._speechSub && this._speechSub.remove) this._speechSub.remove(); } catch (e) {} this._speechSub = null; }
+    _stateSub: null,
+    _finTimer: null,
+    _finish: null,
+    _removeSpeechSub: function () {
+      var rm = function (s) { try { if (!s) return; if (typeof s.remove === "function") s.remove(); else if (typeof s.then === "function") s.then(function (h) { try { if (h && h.remove) h.remove(); } catch (e) {} }); } catch (e) {} };
+      rm(this._speechSub); rm(this._stateSub);
+      this._speechSub = null; this._stateSub = null;
+    },
+
+    // ---- Screen orientation. The app is portrait-locked everywhere (native default is
+    // set in MainActivity/AppDelegate); the antibiogram grid unlocks rotation so it can be
+    // read in landscape, then re-locks on close. Uses the native AppOrientation plugin when
+    // present, with a best-effort Web Screen Orientation fallback for plain browsers. ----
+    lockPortrait: function () {
+      var P = plugins();
+      try { if (P && P.AppOrientation && P.AppOrientation.lockPortrait) { P.AppOrientation.lockPortrait(); return; } } catch (e) {}
+      try { if (screen.orientation && screen.orientation.lock) { var r = screen.orientation.lock("portrait"); if (r && r.catch) r.catch(function () {}); } } catch (e) {}
+    },
+    unlockRotation: function () {
+      var P = plugins();
+      try { if (P && P.AppOrientation && P.AppOrientation.unlock) { P.AppOrientation.unlock(); return; } } catch (e) {}
+      try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch (e) {}
+    }
   };
+
+  // Portrait by default across the app (belt-and-suspenders for web; native platforms also
+  // default to portrait at the Activity/AppDelegate level).
+  try { window.SMD_NATIVE.lockPortrait(); } catch (e) {}
 
   // ---- Native nav hardening: when a syndrome is opened from the Knowledge-Library
   // list (SB.openSyn) and the user then closes the stewardship console, return STRAIGHT

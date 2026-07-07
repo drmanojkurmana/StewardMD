@@ -451,8 +451,8 @@
         '<button class="icu-srcbtn ward" data-icu-act="wardfetch"><span class="i">🏥</span><span class="l">Fetch from Ward Sync</span><span class="d">Pick patient → CBC · electrolytes · RFT · LFT</span></button>' +
         // AI Vision (Camera / Upload) is on-device-first (native ML Kit OCR) — native only.
         (window.SMD_IS_NATIVE
-          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Photograph a report / screen</span></button>' +
-            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / file</span><span class="d">Lab / ABG PDF or image</span></button>'
+          ? '<button class="icu-srcbtn" data-icu-act="impmethod:camera"><span class="i">📷</span><span class="l">Camera</span><span class="d">Snap any report/screen — labs, ABG, vitals &amp; vent read together</span></button>' +
+            '<button class="icu-srcbtn" data-icu-act="impmethod:file"><span class="i">📄</span><span class="l">Upload PDF / image</span><span class="d">Every page read — e.g. electrolytes p1 + ABG p2</span></button>'
           : '') +
       '</div>' +
       '<div class="icu-ai-grid">' + cards.map(function (c) {
@@ -515,6 +515,34 @@
       });
     }).catch(function () { cb(null); });
   }
+  // Run a set of page images through the SAME engine chooser the single-image path uses — so the
+  // clinician keeps the AI Vision ↔ Apple/Device OCR choice for PDFs too. The engine (+ PHI consent)
+  // is chosen ONCE on page 1; pages 2..N reuse it via engineOverride (no re-prompt). Each page is
+  // parsed to SECTIONS independently and merged (first page to supply a field wins) so a chemistry
+  // HCO₃ on page 1 never bleeds into the ABG section of page 2. gold249.
+  function processImagesCombined(imgs, done) {
+    var sections = {}, lines = [], engineChosen = null, idx = 0;
+    function mergeInto(sec) {
+      if (!sec) return;
+      ["labs", "abg", "vitals", "ventilator"].forEach(function (g) {
+        if (!sec[g]) return; sections[g] = sections[g] || {};
+        Object.keys(sec[g]).forEach(function (k) { if (sections[g][k] == null) sections[g][k] = sec[g][k]; });
+      });
+    }
+    (function next() {
+      if (idx >= imgs.length) { done(sections, lines); return; }
+      var opts = { image: imgs[idx], kind: "all" };
+      if (engineChosen) opts.engineOverride = engineChosen;   // page 2+ : reuse page-1's choice
+      SMD_IMAGE_ENGINE.process(opts).then(function (r) {
+        if (!r || r.cancelled) { if (idx === 0) { done(null, null); return; } idx++; return next(); }
+        if (r.engine && r.engine !== "manual") engineChosen = r.engine;
+        if (r.fields) mergeInto(coerceSections(r.fields));
+        if (r.lines) r.lines.forEach(function (l) { if (l) lines.push(String(l)); });
+        if (r.engine === "manual") { done(sections, lines); return; }   // chose to type → open review to fill
+        idx++; next();
+      }).catch(function () { idx++; next(); });
+    })();
+  }
 
   var IMPORT_LBL = { na: "Sodium", k: "Potassium", cl: "Chloride", hco3: "HCO₃", ca: "Calcium", mg: "Magnesium", po4: "Phosphate", glu: "Glucose", creat: "Creatinine", urea: "Urea", alb: "Albumin", wbc: "WBC", hb: "Hb", plt: "Platelets", inr: "INR", crp: "CRP", bili: "Bilirubin", ast: "AST", alt: "ALT", lactate: "Lactate",
     hr: "Heart rate", sbp: "Systolic BP", dbp: "Diastolic BP", map: "MAP", rr: "Resp rate", spo2: "SpO₂", temp: "Temp", cvp: "CVP", etco2: "EtCO₂",
@@ -554,15 +582,11 @@
     inp.addEventListener("change", function () { var f = inp.files && inp.files[0]; if (f) handleImportFile(kind, f); inp.remove(); });
     inp.click();
   }
-  // Camera / Upload → first choose WHAT the report is, then open the picker.
-  function importMethod(method) {
-    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
-    var kinds = [["labs", "🧪 Laboratory report", "CBC · LFT · RFT · Electrolytes"], ["abg", "🩸 ABG report", "pH · PaCO₂ · PaO₂ · HCO₃"], ["ventilator", "🫁 Ventilator screen", "Mode · FiO₂ · PEEP · TV"], ["monitor", "❤️ Monitor / vitals", "HR · BP · SpO₂ · Temp"]];
-    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">' + (method === "camera" ? "📷 Photograph — what report?" : "📄 Upload — what report?") + '<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
-      '<div style="padding:12px 16px">' + kinds.map(function (k) { return '<button class="icu-btn" style="display:block;width:100%;text-align:left;margin:0 0 8px" data-impkind="' + k[0] + '"><b>' + k[1] + '</b><div style="font:600 11px var(--font);color:var(--muted)">' + k[2] + '</div></button>'; }).join("") + '</div></div>';
-    el.querySelector("#icuImpX").addEventListener("click", function () { el.remove(); });
-    el.querySelectorAll("[data-impkind]").forEach(function (b) { b.addEventListener("click", function () { var kind = b.getAttribute("data-impkind"); el.remove(); importFileInput(kind, method); }); });
-  }
+  // Camera / Upload → extract EVERYTHING in the report(s) at once (labs + ABG + vitals + vent),
+  // across all pages. No "which report?" gate — the combined extractor sorts each value into its
+  // own section, so a photo showing the monitor AND an ABG slip, or a PDF with electrolytes on
+  // page 1 and an ABG on page 2, is fully captured (gold249).
+  function importMethod(method) { importFileInput("all", method); }
   function wardSyncFetch() {
     if (typeof window.openGHIS === "function") { try { openGHIS(); } catch (e) {} }
     else if (window.SMD_setGhis) { try { SMD_setGhis(true); setTimeout(function () { try { window.openGHIS && openGHIS(); } catch (e) {} }, 400); } catch (e) {} }
@@ -583,9 +607,30 @@
         var fr = new FileReader();
         fr.onload = function () {
           pdfjs.getDocument({ data: new Uint8Array(fr.result) }).promise.then(function (pdf) {
-            var pages = Math.min(pdf.numPages, 3);   // cap pages sent to OCR
-            importProgress("Rendering " + pages + " of " + pdf.numPages + " page(s)…");
-            renderPdfPageToImage(pdf, 1, function (img) {   // page 1 (most reports: header + first panel)
+            var pages = Math.min(pdf.numPages, 6);   // read up to 6 pages (was: page 1 only)
+            var capNote = pdf.numPages > 6 ? "First 6 of " + pdf.numPages + " pages" : "";
+            // Combined "all": render EVERY page → run them through the engine chooser (AI Vision vs
+            // Apple/Device OCR — clinician's choice, asked once) → merged grouped review, so page-1
+            // electrolytes + page-2 ABG are both captured. Legacy per-category kinds keep page 1.
+            if (kind === "all") {
+              var imgs = [], p = 1;
+              (function renderNext() {
+                if (p > pages) {
+                  if (!imgs.length) return importProgress("Could not read this PDF. Try a photo instead.", true);
+                  importDone();   // process() shows its own engine chooser / busy indicator
+                  processImagesCombined(imgs, function (sections, lines) {
+                    if (sections === null) return;   // cancelled at the engine chooser
+                    openImportReviewAll(sections || {}, imgs[0], lines || [], capNote, "Imported report");
+                  });
+                  return;
+                }
+                importProgress("Rendering page " + p + " of " + pages + "…");
+                renderPdfPageToImage(pdf, p, function (img) { if (img) imgs.push(img); p++; renderNext(); });
+              })();
+              return;
+            }
+            importProgress("Rendering page 1 of " + pdf.numPages + "…");
+            renderPdfPageToImage(pdf, 1, function (img) {
               if (!img) return importProgress("Could not read this PDF. Try a photo instead.", true);
               doOcr(kind, img, pdf.numPages > 3 ? "First page of " + pdf.numPages + " (large PDF — capped)" : "");
             });
@@ -613,6 +658,19 @@
     return fields;
   }
   function doOcr(kind, dataUrl, note) {
+    // Combined "all" → the engine returns SECTIONS ({labs,abg,vitals,ventilator}); route to the
+    // grouped review so every category present in one image is captured at once (gold249).
+    if (kind === "all") {
+      if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process) {
+        SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: "all" }).then(function (r) {
+          importDone();
+          if (!r || r.cancelled) return;
+          openImportReviewAll(coerceSections(r && r.fields), dataUrl, (r && r.lines) || [], note, "Imported report");
+        }).catch(function () { importDone(); openImportReviewAll({}, dataUrl, [], note, "Imported report"); });
+        return;
+      }
+      importProgress("On-device reader unavailable — enter values manually.", true); return;
+    }
     var mapKind = IMPORT_GROUP[kind] ? (kind === "abg" ? "abg" : kind) : "labs";
     // Route through the clinician-controlled Image Engine chooser (Private Device OCR vs
     // AI Vision). It handles engine choice, PHI consent, and graceful fallback, then resolves
@@ -694,6 +752,91 @@
       var res = ICU.ingestFromWard(bundle);
       close(); paint();
       try { if (window.toast) toast("Imported " + Object.keys(vals).length + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
+    });
+  }
+  /* ---- Combined "all" review (gold249): one report/photo/PDF → sections grouped by category,
+   * each value routed to its own field group, ingested in ONE conflict-safe ingestFromWard.
+   * Fixes: (1) capture no longer fetches only electrolytes; (2) ABG from a PDF (any page) is
+   * read; (3) a photo containing BOTH a monitor and an ABG populates both. ---- */
+  var SEC_META = [["labs", "🧪 Labs", "monitor→n/a"], ["abg", "🩸 ABG", ""], ["vitals", "❤️ Vitals", ""], ["ventilator", "🫁 Ventilator", ""]];
+  // Coerce an engine result into clean numeric sections. Accepts the sectioned shape
+  // {labs:{…},abg:{…},…}; ventilator.mode stays a string. Drops empty sections.
+  function coerceSections(f) {
+    var out = {}; if (!f || typeof f !== "object") return out;
+    ["labs", "abg", "vitals", "ventilator"].forEach(function (sec) {
+      var src = f[sec]; if (!src || typeof src !== "object") return;
+      var g = {};
+      Object.keys(src).forEach(function (k) {
+        var v = src[k];
+        if (sec === "ventilator" && k === "mode") { if (v != null && String(v).trim()) g[k] = String(v).trim(); }
+        else if (v != null && !isNaN(parseFloat(v))) g[k] = parseFloat(v);
+      });
+      if (Object.keys(g).length) out[sec] = g;
+    });
+    return out;
+  }
+  function openImportReviewAll(sections, dataUrl, lines, note, source) {
+    sections = sections || {}; lines = lines || [];
+    var hasVals = ["labs", "abg", "vitals", "ventilator"].some(function (s) { return sections[s] && Object.keys(sections[s]).length; });
+    if (!hasVals && !lines.length) { importProgress("No values could be read — try a clearer photo, or enter values manually.", true); return; }
+    var aiMode = hasVals;
+    var el = document.getElementById("icuImpOv"); if (!el) { el = document.createElement("div"); el.id = "icuImpOv"; el.className = "icu-imp-ov icu-modal"; document.body.appendChild(el); }
+    var L = _raw.labs.recent || {}, lastV = latestVitals(), curAbg = _raw.abg || {}, curVent = _raw.ventilator || {};
+    function curOf(sec, k) { return sec === "labs" ? L[k] : sec === "vitals" ? lastV[k] : sec === "abg" ? curAbg[k] : curVent[k]; }
+    var groupsHTML = SEC_META.map(function (m) {
+      var sec = m[0], vals = sections[sec] || {}, keys = Object.keys(vals);
+      // AI gave values → show only those; nothing found (tap-to-fill mode) → show the full field set.
+      if (!keys.length) { if (aiMode) return ""; keys = IMPORT_FIELDS[sec === "vitals" ? "monitor" : sec] || []; }
+      if (!keys.length) return "";
+      var rows = keys.map(function (k) {
+        var val = vals[k] != null ? vals[k] : "";
+        var cur = curOf(sec, k);
+        var dup = (val !== "" && cur != null && cur !== "" && String(cur) === String(val)) ? '<span class="icu-imp-dup">≈ already recorded</span>'
+          : (val !== "" && cur != null && cur !== "") ? '<span class="icu-imp-diff">differs from current ' + esc(cur) + '</span>' : "";
+        return '<label class="icu-imp-row"><span class="icu-imp-k">' + esc(IMPORT_LBL[k] || k) + '</span>' +
+          '<input data-impk="' + k + '" data-impsec="' + sec + '" value="' + esc(val) + '" ' + (k === "mode" ? 'type="text"' : 'type="number" step="any" inputmode="decimal"') + '>' + dup + "</label>";
+      }).join("");
+      return '<div style="font:800 12px var(--font);color:var(--primary,#0f766e);margin:12px 0 6px;text-transform:uppercase;letter-spacing:.04em">' + m[1] + '</div>' + rows;
+    }).join("");
+    var linesPanel = lines.length ? (
+      '<div class="icu-imp-note" style="margin-top:8px">📝 <b>Recognized on-device</b> — tap a value to drop it into the focused box.</div>' +
+      '<div style="display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;max-height:150px;overflow:auto">' +
+      lines.map(function (ln) { return '<button type="button" class="icu-imp-line" data-line="' + esc(ln) + '" style="font:600 12px var(--font);background:var(--panel2,#0F1A2B);border:1px solid var(--border,#1E2B43);color:var(--ink,#E7EDF5);border-radius:8px;padding:6px 9px;cursor:pointer;text-align:left">' + esc(ln) + '</button>'; }).join("") + '</div>'
+    ) : "";
+    el.innerHTML = '<div class="icu-imp-review"><div class="icu-imp-hd">Review values' + (note ? ' <span style="font:600 11px var(--font);color:var(--muted)">· ' + esc(note) + '</span>' : '') + '<button class="icu-imp-x" id="icuImpX">✕</button></div>' +
+      '<div class="icu-imp-note">' + (aiMode ? '📷 Read from your report(s) — <b>verify every value</b> before applying.' : '📷 Tap the recognized values below or type them. <b>Verify every value.</b>') + ' Nothing is added until you confirm.</div>' +
+      (dataUrl ? '<img class="icu-imp-thumb" src="' + dataUrl + '">' : "") +
+      '<div class="icu-imp-rows">' + groupsHTML + "</div>" + linesPanel +
+      '<div class="icu-imp-actions"><button class="icu-btn" id="icuImpCancel">Cancel</button><button class="icu-btn icu-imp-go" id="icuImpConfirm">✓ Add to patient context</button></div></div>';
+    function close() { el.remove(); }
+    var focused = el.querySelector("[data-impk]");
+    el.querySelectorAll("[data-impk]").forEach(function (i) { i.addEventListener("focus", function () { focused = i; }); });
+    el.querySelectorAll(".icu-imp-line").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var f = focused || el.querySelector("[data-impk]"); if (!f) return;
+        var raw = b.getAttribute("data-line") || "";
+        if (f.type === "number") { var num = (raw.match(/-?\d+(\.\d+)?/) || [])[0]; if (num != null) f.value = num; }
+        else f.value = raw.trim();
+        b.style.opacity = ".5"; try { f.focus(); } catch (e) {}
+      });
+    });
+    el.querySelector("#icuImpX").addEventListener("click", close);
+    el.querySelector("#icuImpCancel").addEventListener("click", close);
+    el.querySelector("#icuImpConfirm").addEventListener("click", function () {
+      var bundle = { source: source || "Imported report" }, groups = { labs: {}, abg: {}, vitals: {}, ventilator: {} }, n = 0;
+      el.querySelectorAll("[data-impk]").forEach(function (i) {
+        var k = i.getAttribute("data-impk"), sec = i.getAttribute("data-impsec"), v = i.value;
+        if (v === "" || v == null) return;
+        groups[sec][k] = (k === "mode") ? v : parseFloat(v); n++;
+      });
+      if (!n) { close(); return; }
+      if (Object.keys(groups.labs).length) bundle.mapped = groups.labs;         // pre-keyed labs → labs.recent
+      if (Object.keys(groups.vitals).length) bundle.vitals = groups.vitals;
+      if (Object.keys(groups.abg).length) bundle.abg = groups.abg;
+      if (Object.keys(groups.ventilator).length) bundle.ventilator = groups.ventilator;
+      var res = ICU.ingestFromWard(bundle);
+      close(); paint();
+      try { if (window.toast) toast("Imported " + n + " value(s)" + (res && res.conflicts ? " · " + res.conflicts + " conflict(s) to review" : "")); } catch (e) {}
     });
   }
   function startImport(kind) { importFileInput(IMPORT_GROUP[kind] ? kind : "labs"); }
@@ -1348,7 +1491,7 @@
     // image via SMD_IMAGE_ENGINE. Hidden on web (no native capture/OCR).
     var canSnap = !!(window.SMD_IS_NATIVE && ((window.SMD_NATIVE && window.SMD_NATIVE.ocr) ||
       (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.aiAvailable && SMD_IMAGE_ENGINE.aiAvailable())));
-    var steps = [["📷", "ICU Monitor", "monitor"], ["🫁", "Ventilator", "ventilator"], ["🩸", "Laboratory Report", "labs"], ["📋", "ICU Flow Sheet", "flowsheet"]];
+    var steps = [["📷", "ICU Monitor", "monitor"], ["🩸", "ABG report", "abg"], ["🧪", "Laboratory Report", "labs"], ["🫁", "Ventilator", "ventilator"], ["📋", "ICU Flow Sheet", "flowsheet"]];
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📷 ICU Snapshot</h3>' +
       '<div class="icu-steps">' + steps.map(function (s, i) {
         return '<div class="icu-step"><div class="n">' + (i + 1) + '</div><div style="flex:1"><div style="font:700 14px var(--font)">' + s[0] + " Capture " + s[1] + "</div>" +
@@ -1358,28 +1501,50 @@
           "</div></div>";
       }).join("") + "</div>" +
       (canSnap
-        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">📷 Image Engine ready</span><p style="margin-top:8px">Capture each screen — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro), then the ICU tabs are filled in. <b>Verify every value.</b></p></div>'
+        ? '<div class="icu-card" style="margin-top:12px"><span class="icu-badge" style="background:var(--ok-soft);color:var(--ok)">📷 Image Engine ready</span><p style="margin-top:8px">Capture any screen or report — you\'ll choose <b>Private Device OCR</b> (free, on-device) or <b>AI Vision</b> (Pro). Each capture reads the <b>whole report</b> and fills <b>every</b> relevant tab (an ABG slip fills both ABG <i>and</i> electrolytes). <b>Verify every value.</b></p></div>'
         : '<div class="icu-card" style="margin-top:12px;text-align:center"><span class="icu-badge">🚧 Snapshot · mobile app only</span><p style="margin-top:8px">Capture ICU screens and have them read into the tabs. Available in the StewardMD iOS/Android app.</p></div>') +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
     if (canSnap) {
       var ING = { monitor: "ingestMonitor", labs: "ingestLabs", ventilator: "ingestVentilator", flowsheet: "ingestFlowsheet" };
       // Shared body: compress a dataUrl/File then run vision and fill the tabs.
+      function linesMsg(out, r) {
+        if (r && r.lines && r.lines.length) { if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually."; return true; }
+        return false;
+      }
       function runSnap(kind, out, dataUrl) {
         if (!dataUrl) { if (out) out.textContent = "Couldn't read that image — try again or enter manually."; return; }
-        // Route through the clinician-controlled Image Engine (device OCR vs AI Vision), with
-        // the legacy readImage as a fallback if the module is absent.
+        // COMBINED extraction (gold250): whichever report the clinician taps (Monitor/ABG/Labs/
+        // Ventilator), read the WHOLE image/report and route EVERY value to its own tab — so an
+        // ABG slip fills the ABG tab (pH, PaCO₂, PaO₂, HCO₃, base excess, lactate) AND the
+        // electrolytes into Labs, not just electrolytes. Flow Sheet keeps its own schema (its
+        // intake/output fields aren't in the combined set). Route via the clinician-controlled
+        // Image Engine (device OCR vs AI Vision — choice preserved).
+        var combined = (kind !== "flowsheet");
+        var useKind = combined ? "all" : "flowsheet";
         var run = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.process)
-          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: kind })
-          : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, kind) : Promise.reject(new Error("no-reader")));
+          ? SMD_IMAGE_ENGINE.process({ image: dataUrl, kind: useKind })
+          : ((window.SMD_AI && SMD_AI.readImage) ? SMD_AI.readImage(dataUrl, useKind) : Promise.reject(new Error("no-reader")));
         run.then(function (r) {
           if (!r || r.cancelled) { if (out) out.textContent = ""; return; }
+          if (combined) {
+            var sec = coerceSections(r && r.fields), keys = [];
+            ["labs", "abg", "vitals", "ventilator"].forEach(function (sc) { if (sec[sc]) keys = keys.concat(Object.keys(sec[sc])); });
+            if (keys.length) {
+              var bundle = { source: "ICU Snapshot" };
+              if (sec.labs) bundle.mapped = sec.labs;
+              if (sec.vitals) bundle.vitals = sec.vitals;
+              if (sec.abg) bundle.abg = sec.abg;
+              if (sec.ventilator) bundle.ventilator = sec.ventilator;
+              try { ingestFromWard(bundle); paint(); } catch (e) {}
+              if (out) out.textContent = "✓ Imported " + keys.length + " value(s): " + keys.join(", ") + " — verify in the tabs.";
+            } else if (!linesMsg(out, r) && out) out.textContent = "Couldn't read that image — try again or enter manually.";
+            return;
+          }
           if (r.mode === "fields" && r.fields && Object.keys(r.fields).length) {
             try { if (ICU[ING[kind]]) ICU[ING[kind]](r.fields); } catch (e) {}
             if (out) out.textContent = "✓ Imported: " + Object.keys(r.fields).join(", ") + " — verify in the tabs.";
-          } else if (r.lines && r.lines.length) {
-            if (out) out.innerHTML = "Read on-device — couldn't auto-structure. Recognized: <span style=\"color:var(--muted)\">" + r.lines.slice(0, 8).map(function (s) { return String(s).replace(/[<>&]/g, ""); }).join(" · ") + "</span>. Tap ✎ to enter manually.";
-          } else if (out) out.textContent = "Couldn't read that image — try again or enter manually.";
+          } else if (!linesMsg(out, r) && out) out.textContent = "Couldn't read that image — try again or enter manually.";
         }).catch(function () { if (out) out.textContent = "Couldn't read this — enter manually."; });
       }
       if (window.SMD_IS_NATIVE && window.SMD_NATIVE) {
