@@ -232,3 +232,7 @@ body.dark #homeV2.hv4 .v4-maik-dark,body.v3-dark #homeV2.hv4 .v4-maik-dark{displ
 /* very narrow (≤380px): tighten header so wordmark + Search/Bell/Avatar fit with
    no truncation and no overflow (touch targets stay ≥44px) */
 @media(max-width:380px){#homeV2.hv4 .v3-header{gap:4px;padding-left:12px;padding-right:8px}#homeV2.hv4 .v3-brand-tt{font-size:18px}}
+
+/* Shared line-icon accessor (window.ICONS.get / window.icon) — sized in em, currentColor.
+   Consistent with the home svg() catalog; used by icu.js / antibiogram.js / sheets. */
+.smd-ico{width:1.15em;height:1.15em;flex:0 0 auto;stroke:currentColor;stroke-width:1.75;fill:none;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.16em}
